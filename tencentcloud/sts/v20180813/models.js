@@ -113,24 +113,24 @@ class ApiKey extends  AbstractModel {
 }
 
 /**
- * AssumeRoleWithSAML请求参数结构体
+ * AssumeRoleWithWebIdentity请求参数结构体
  * @class
  */
-class AssumeRoleWithSAMLRequest extends  AbstractModel {
+class AssumeRoleWithWebIdentityRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * base64 编码的 SAML 断言信息
+         * 身份提供商名称
          * @type {string || null}
          */
-        this.SAMLAssertion = null;
+        this.ProviderId = null;
 
         /**
-         * 扮演者访问描述名
+         * IdP签发的OIDC令牌
          * @type {string || null}
          */
-        this.PrincipalArn = null;
+        this.WebIdentityToken = null;
 
         /**
          * 角色访问描述名
@@ -159,11 +159,65 @@ class AssumeRoleWithSAMLRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SAMLAssertion = 'SAMLAssertion' in params ? params.SAMLAssertion : null;
-        this.PrincipalArn = 'PrincipalArn' in params ? params.PrincipalArn : null;
+        this.ProviderId = 'ProviderId' in params ? params.ProviderId : null;
+        this.WebIdentityToken = 'WebIdentityToken' in params ? params.WebIdentityToken : null;
         this.RoleArn = 'RoleArn' in params ? params.RoleArn : null;
         this.RoleSessionName = 'RoleSessionName' in params ? params.RoleSessionName : null;
         this.DurationSeconds = 'DurationSeconds' in params ? params.DurationSeconds : null;
+
+    }
+}
+
+/**
+ * AssumeRoleWithWebIdentity返回参数结构体
+ * @class
+ */
+class AssumeRoleWithWebIdentityResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 临时秘钥过期时间(时间戳)
+         * @type {number || null}
+         */
+        this.ExpiredTime = null;
+
+        /**
+         * 临时秘钥过期时间
+         * @type {string || null}
+         */
+        this.Expiration = null;
+
+        /**
+         * 临时秘钥
+         * @type {Credentials || null}
+         */
+        this.Credentials = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ExpiredTime = 'ExpiredTime' in params ? params.ExpiredTime : null;
+        this.Expiration = 'Expiration' in params ? params.Expiration : null;
+
+        if (params.Credentials) {
+            let obj = new Credentials();
+            obj.deserialize(params.Credentials)
+            this.Credentials = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -395,6 +449,109 @@ class GetFederationTokenRequest extends  AbstractModel {
 }
 
 /**
+ * 标签
+ * @class
+ */
+class Tag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 标签键，最长128个字符，区分大小写。
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * 标签值，最长256个字符，区分大小写。
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
+ * GetCallerIdentity返回参数结构体
+ * @class
+ */
+class GetCallerIdentityResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 当前调用者ARN。
+         * @type {string || null}
+         */
+        this.Arn = null;
+
+        /**
+         * 当前调用者所属主账号Uin。
+         * @type {string || null}
+         */
+        this.AccountId = null;
+
+        /**
+         * 身份标识。
+1. 调用者是云账号时，返回的是当前账号Uin
+2. 调用者是角色时，返回的是roleId:roleSessionName
+3. 调用者是联合身份时，返回的是uin:federatedUserName
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+        /**
+         * 密钥所属账号Uin。
+1. 调用者是云账号，返回的当前账号Uin
+2, 调用者是角色，返回的申请角色密钥的账号Uin
+         * @type {string || null}
+         */
+        this.PrincipalId = null;
+
+        /**
+         * 身份类型。
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Arn = 'Arn' in params ? params.Arn : null;
+        this.AccountId = 'AccountId' in params ? params.AccountId : null;
+        this.UserId = 'UserId' in params ? params.UserId : null;
+        this.PrincipalId = 'PrincipalId' in params ? params.PrincipalId : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 临时证书
  * @class
  */
@@ -484,6 +641,12 @@ qcs::cam::uin/12345678:role/tencentcloudServiceRole/4611686018427397920、qcs::c
          */
         this.ExternalId = null;
 
+        /**
+         * 会话标签列表。最多可以传递 50 个会话标签，不支持包含相同标签键。
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -499,19 +662,110 @@ qcs::cam::uin/12345678:role/tencentcloudServiceRole/4611686018427397920、qcs::c
         this.Policy = 'Policy' in params ? params.Policy : null;
         this.ExternalId = 'ExternalId' in params ? params.ExternalId : null;
 
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * GetCallerIdentity请求参数结构体
+ * @class
+ */
+class GetCallerIdentityRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
+ * AssumeRoleWithSAML请求参数结构体
+ * @class
+ */
+class AssumeRoleWithSAMLRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * base64 编码的 SAML 断言信息
+         * @type {string || null}
+         */
+        this.SAMLAssertion = null;
+
+        /**
+         * 扮演者访问描述名
+         * @type {string || null}
+         */
+        this.PrincipalArn = null;
+
+        /**
+         * 角色访问描述名
+         * @type {string || null}
+         */
+        this.RoleArn = null;
+
+        /**
+         * 会话名称
+         * @type {string || null}
+         */
+        this.RoleSessionName = null;
+
+        /**
+         * 指定临时证书的有效期，单位：秒，默认 7200 秒，最长可设定有效期为 43200 秒
+         * @type {number || null}
+         */
+        this.DurationSeconds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SAMLAssertion = 'SAMLAssertion' in params ? params.SAMLAssertion : null;
+        this.PrincipalArn = 'PrincipalArn' in params ? params.PrincipalArn : null;
+        this.RoleArn = 'RoleArn' in params ? params.RoleArn : null;
+        this.RoleSessionName = 'RoleSessionName' in params ? params.RoleSessionName : null;
+        this.DurationSeconds = 'DurationSeconds' in params ? params.DurationSeconds : null;
+
     }
 }
 
 module.exports = {
     AssumeRoleWithSAMLResponse: AssumeRoleWithSAMLResponse,
     ApiKey: ApiKey,
-    AssumeRoleWithSAMLRequest: AssumeRoleWithSAMLRequest,
+    AssumeRoleWithWebIdentityRequest: AssumeRoleWithWebIdentityRequest,
+    AssumeRoleWithWebIdentityResponse: AssumeRoleWithWebIdentityResponse,
     GetFederationTokenResponse: GetFederationTokenResponse,
     QueryApiKeyResponse: QueryApiKeyResponse,
     AssumeRoleResponse: AssumeRoleResponse,
     QueryApiKeyRequest: QueryApiKeyRequest,
     GetFederationTokenRequest: GetFederationTokenRequest,
+    Tag: Tag,
+    GetCallerIdentityResponse: GetCallerIdentityResponse,
     Credentials: Credentials,
     AssumeRoleRequest: AssumeRoleRequest,
+    GetCallerIdentityRequest: GetCallerIdentityRequest,
+    AssumeRoleWithSAMLRequest: AssumeRoleWithSAMLRequest,
 
 }

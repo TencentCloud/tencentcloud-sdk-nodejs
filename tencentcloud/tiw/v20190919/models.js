@@ -317,6 +317,48 @@ class StopOnlineRecordResponse extends  AbstractModel {
 }
 
 /**
+ * 鉴权参数
+ * @class
+ */
+class AuthParam extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 应用SdkAppId
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * 用户ID
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+        /**
+         * 用户ID对应的签名
+         * @type {string || null}
+         */
+        this.UserSig = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.UserId = 'UserId' in params ? params.UserId : null;
+        this.UserSig = 'UserSig' in params ? params.UserSig : null;
+
+    }
+}
+
+/**
  * SetVideoGenerationTaskCallbackKey请求参数结构体
  * @class
  */
@@ -366,13 +408,16 @@ class StartWhiteboardPushRequest extends  AbstractModel {
         this.SdkAppId = null;
 
         /**
-         * 需要推流白板的房间号，取值范围: (1, 4294967295)
+         * 需要推流的白板房间号，取值范围: (1, 4294967295)。
+
+在没有指定TRTCRoomId和TRTCRoomIdStr的情况下，默认会以RoomId作为白板流进行推流的TRTC房间号。
          * @type {number || null}
          */
         this.RoomId = null;
 
         /**
-         * 用于白板推流服务进房进行推流的用户ID，最大长度不能大于60个字节，该ID必须是一个单独的未在SDK中使用的ID，白板推流服务使用这个用户ID进入房间进行白板音视频推流，若该ID和SDK中使用的ID重复，会导致SDK和白板推流服务互踢，影响正常推流。
+         * 用于白板推流服务进入白板房间的用户ID。在没有进行额外指定的情况下，这个用户ID同时会用于IM登录、IM加群、TRTC进房推流等操作。
+用户ID最大长度不能大于60个字节，该ID必须是一个单独的未在SDK中使用的ID，白板推流服务使用这个用户ID进入房间进行白板音视频推流，若该ID和SDK中使用的ID重复，会导致SDK和白板推流服务互踢，影响正常推流。
          * @type {string || null}
          */
         this.PushUserId = null;
@@ -491,6 +536,46 @@ SdkAppID = 12345678，RoomID = 12345，PushUserID = push_user_1
          */
         this.ExtraData = null;
 
+        /**
+         * TRTC数字类型房间号，取值范围: (1, 4294967295)。
+
+在同时指定了RoomId与TRTCRoomId的情况下，优先使用TRTCRoomId作为白板流进行推流的TRTC房间号。
+
+当指定了TRTCRoomIdStr的情况下，此字段将被忽略。
+         * @type {number || null}
+         */
+        this.TRTCRoomId = null;
+
+        /**
+         * TRTC字符串类型房间号。
+
+在指定了TRTCRoomIdStr的情况下，会优先使用TRTCRoomIdStr作为白板流进行推流的TRTC房间号。
+         * @type {string || null}
+         */
+        this.TRTCRoomIdStr = null;
+
+        /**
+         * 内测参数，需开通白名单进行体验。
+
+IM鉴权信息参数，用于IM鉴权。
+当白板信令所使用的IM应用与白板应用的SdkAppId不一致时，可以通过此参数提供对应IM应用鉴权信息。
+
+如果提供了此参数，白板推流服务会优先使用此参数指定的SdkAppId作为白板信令的传输通道，否则使用公共参数中的SdkAppId作为白板信令的传输通道。
+         * @type {AuthParam || null}
+         */
+        this.IMAuthParam = null;
+
+        /**
+         * 内测参数，需开通白名单进行体验。
+
+TRTC鉴权信息参数，用于TRTC进房推流鉴权。
+当需要推流到的TRTC房间所对应的TRTC应用与白板应用的SdkAppId不一致时，可以通过此参数提供对应的TRTC应用鉴权信息。
+
+如果提供了此参数，白板推流服务会优先使用此参数指定的SdkAppId作为白板推流的目标TRTC应用，否则使用公共参数中的SdkAppId作为白板推流的目标TRTC应用。
+         * @type {AuthParam || null}
+         */
+        this.TRTCAuthParam = null;
+
     }
 
     /**
@@ -526,6 +611,20 @@ SdkAppID = 12345678，RoomID = 12345，PushUserID = push_user_1
         this.AutoPublish = 'AutoPublish' in params ? params.AutoPublish : null;
         this.UserDefinedStreamId = 'UserDefinedStreamId' in params ? params.UserDefinedStreamId : null;
         this.ExtraData = 'ExtraData' in params ? params.ExtraData : null;
+        this.TRTCRoomId = 'TRTCRoomId' in params ? params.TRTCRoomId : null;
+        this.TRTCRoomIdStr = 'TRTCRoomIdStr' in params ? params.TRTCRoomIdStr : null;
+
+        if (params.IMAuthParam) {
+            let obj = new AuthParam();
+            obj.deserialize(params.IMAuthParam)
+            this.IMAuthParam = obj;
+        }
+
+        if (params.TRTCAuthParam) {
+            let obj = new AuthParam();
+            obj.deserialize(params.TRTCAuthParam)
+            this.TRTCAuthParam = obj;
+        }
 
     }
 }
@@ -778,6 +877,41 @@ class WhiteboardPushBackupParam extends  AbstractModel {
 }
 
 /**
+ * DescribeSnapshotTask请求参数结构体
+ * @class
+ */
+class DescribeSnapshotTaskRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 查询任务ID
+         * @type {string || null}
+         */
+        this.TaskID = null;
+
+        /**
+         * 任务SdkAppId
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskID = 'TaskID' in params ? params.TaskID : null;
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+
+    }
+}
+
+/**
  * StartOnlineRecord请求参数结构体
  * @class
  */
@@ -979,6 +1113,81 @@ class DescribeVideoGenerationTaskCallbackResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeSnapshotTask返回参数结构体
+ * @class
+ */
+class DescribeSnapshotTaskResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TaskID = null;
+
+        /**
+         * 任务状态
+Running - 任务执行中
+Finished - 任务已结束
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 任务创建时间，单位s
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 任务完成时间，单位s
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.FinishTime = null;
+
+        /**
+         * 任务结果信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {SnapshotResult || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskID = 'TaskID' in params ? params.TaskID : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.FinishTime = 'FinishTime' in params ? params.FinishTime : null;
+
+        if (params.Result) {
+            let obj = new SnapshotResult();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * StartWhiteboardPush返回参数结构体
  * @class
  */
@@ -1022,6 +1231,41 @@ class StartWhiteboardPushResponse extends  AbstractModel {
 }
 
 /**
+ * ResumeOnlineRecord请求参数结构体
+ * @class
+ */
+class ResumeOnlineRecordRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 客户的SdkAppId
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * 恢复录制的实时录制任务 Id
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+
+    }
+}
+
+/**
  * DescribeOnlineRecordCallback请求参数结构体
  * @class
  */
@@ -1045,6 +1289,62 @@ class DescribeOnlineRecordCallbackRequest extends  AbstractModel {
             return;
         }
         this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+
+    }
+}
+
+/**
+ * 板书文件存储cos参数
+ * @class
+ */
+class SnapshotCOS extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * cos所在腾讯云帐号uin
+         * @type {number || null}
+         */
+        this.Uin = null;
+
+        /**
+         * cos所在地区
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * cos存储桶名称
+         * @type {string || null}
+         */
+        this.Bucket = null;
+
+        /**
+         * 板书文件存储根目录
+         * @type {string || null}
+         */
+        this.TargetDir = null;
+
+        /**
+         * CDN加速域名
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Uin = 'Uin' in params ? params.Uin : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.Bucket = 'Bucket' in params ? params.Bucket : null;
+        this.TargetDir = 'TargetDir' in params ? params.TargetDir : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
 
     }
 }
@@ -1190,6 +1490,103 @@ class StopOnlineRecordRequest extends  AbstractModel {
 }
 
 /**
+ * 生成白板板书时的白板参数，例如白板宽高等
+ * @class
+ */
+class SnapshotWhiteboard extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 白板宽度大小，默认为1280，有效取值范围[0，2560]
+         * @type {number || null}
+         */
+        this.Width = null;
+
+        /**
+         * 白板高度大小，默认为720，有效取值范围[0，2560]
+         * @type {number || null}
+         */
+        this.Height = null;
+
+        /**
+         * 白板初始化参数的JSON转义字符串，透传到白板 SDK
+         * @type {string || null}
+         */
+        this.InitParams = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Height = 'Height' in params ? params.Height : null;
+        this.InitParams = 'InitParams' in params ? params.InitParams : null;
+
+    }
+}
+
+/**
+ * 互动白板用量信息
+ * @class
+ */
+class UsageDataItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 日期，格式为YYYY-MM-DD
+         * @type {string || null}
+         */
+        this.Time = null;
+
+        /**
+         * 白板应用SDKAppID
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * 互动白板子产品，请求参数传入的一致
+- sp_tiw_board: 互动白板时长
+- sp_tiw_dt: 动态转码页数
+- sp_tiw_st: 静态转码页数
+- sp_tiw_ric: 实时录制时长
+         * @type {string || null}
+         */
+        this.SubProduct = null;
+
+        /**
+         * 用量值
+- 静态转码、动态转码单位为页
+- 白板时长、实时录制时长单位为分钟
+         * @type {number || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Time = 'Time' in params ? params.Time : null;
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.SubProduct = 'SubProduct' in params ? params.SubProduct : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
  * SetVideoGenerationTaskCallbackKey返回参数结构体
  * @class
  */
@@ -1247,6 +1644,41 @@ class CreateTranscodeResponse extends  AbstractModel {
             return;
         }
         this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateSnapshotTask返回参数结构体
+ * @class
+ */
+class CreateSnapshotTaskResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 白板板书生成任务ID，只有任务创建成功的时候才会返回此字段
+         * @type {string || null}
+         */
+        this.TaskID = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskID = 'TaskID' in params ? params.TaskID : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1443,6 +1875,43 @@ class CustomLayout extends  AbstractModel {
 }
 
 /**
+ * 实时录制中出现的用户视频流断流次数统计
+ * @class
+ */
+class Interrupt extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 用户ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+        /**
+         * 视频流断流次数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Count = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UserId = 'UserId' in params ? params.UserId : null;
+        this.Count = 'Count' in params ? params.Count : null;
+
+    }
+}
+
+/**
  * 视频信息
  * @class
  */
@@ -1560,6 +2029,49 @@ class SetTranscodeCallbackKeyResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeTIWDailyUsage返回参数结构体
+ * @class
+ */
+class DescribeTIWDailyUsageResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 指定区间指定产品的用量汇总
+         * @type {Array.<UsageDataItem> || null}
+         */
+        this.Usages = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Usages) {
+            this.Usages = new Array();
+            for (let z in params.Usages) {
+                let obj = new UsageDataItem();
+                obj.deserialize(params.Usages[z]);
+                this.Usages.push(obj);
+            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -1848,6 +2360,59 @@ class DescribeVideoGenerationTaskRequest extends  AbstractModel {
 }
 
 /**
+ * 白板板书结果
+ * @class
+ */
+class SnapshotResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务执行错误码
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ErrorCode = null;
+
+        /**
+         * 任务执行错误信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ErrorMessage = null;
+
+        /**
+         * 快照生成图片总数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * 快照图片链接列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.Snapshots = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ErrorCode = 'ErrorCode' in params ? params.ErrorCode : null;
+        this.ErrorMessage = 'ErrorMessage' in params ? params.ErrorMessage : null;
+        this.Total = 'Total' in params ? params.Total : null;
+        this.Snapshots = 'Snapshots' in params ? params.Snapshots : null;
+
+    }
+}
+
+/**
  * CreateVideoGenerationTask返回参数结构体
  * @class
  */
@@ -1938,9 +2503,11 @@ class CreateTranscodeRequest extends  AbstractModel {
         this.IsStaticPPT = null;
 
         /**
-         * 转码后文档的最小分辨率，不传、传空字符串或分辨率格式错误则使用文档原分辨率
+         * 注意: 该参数已废弃, 请使用最新的 [云API SDK](https://cloud.tencent.com/document/api/1137/40060#SDK) ，使用 MinScaleResolution字段传递分辨率
 
-注意分辨率宽高中间为英文字母"xyz"的"x"
+转码后文档的最小分辨率，不传、传空字符串或分辨率格式错误则使用文档原分辨率
+
+示例：1280x720，注意分辨率宽高中间为英文字母"xyz"的"x"
          * @type {string || null}
          */
         this.MinResolution = null;
@@ -1966,6 +2533,25 @@ tar.gz： 生成`.tar.gz`压缩包
          */
         this.ExtraData = null;
 
+        /**
+         * 文档转码优先级， 只有对于PPT动态转码生效，支持填入以下值：<br/>
+- low: 低优先级转码，对于动态转码，能支持500MB（下载超时时间10分钟）以及2000页文档，但资源有限可能会有比较长时间的排队，请酌情使用该功能。<br/>
+- 不填表示正常优先级转码，支持200MB文件（下载超时时间2分钟），500页以内的文档进行转码
+<br/>
+注意：对于PDF等静态文件转码，无论是正常优先级或者低优先级，最大只能支持200MB
+         * @type {string || null}
+         */
+        this.Priority = null;
+
+        /**
+         * 转码后文档的最小分辨率，不传、传空字符串或分辨率格式错误则使用文档原分辨率。
+分辨率越高，效果越清晰，转出来的图片资源体积会越大，课件加载耗时会变长，请根据实际使用场景配置此参数。
+
+示例：1280x720，注意分辨率宽高中间为英文字母"xyz"的"x"
+         * @type {string || null}
+         */
+        this.MinScaleResolution = null;
+
     }
 
     /**
@@ -1982,6 +2568,8 @@ tar.gz： 生成`.tar.gz`压缩包
         this.ThumbnailResolution = 'ThumbnailResolution' in params ? params.ThumbnailResolution : null;
         this.CompressFileType = 'CompressFileType' in params ? params.CompressFileType : null;
         this.ExtraData = 'ExtraData' in params ? params.ExtraData : null;
+        this.Priority = 'Priority' in params ? params.Priority : null;
+        this.MinScaleResolution = 'MinScaleResolution' in params ? params.MinScaleResolution : null;
 
     }
 }
@@ -2027,6 +2615,7 @@ class DescribeOnlineRecordResponse extends  AbstractModel {
 - AUTO: 房间内长时间没有音视频上行及白板操作导致自动停止录制
 - USER_CALL: 主动调用了停止录制接口
 - EXCEPTION: 录制异常结束
+- FORCE_STOP: 强制停止录制，一般是因为暂停超过90分钟或者录制总时长超过24小时。
          * @type {string || null}
          */
         this.FinishReason = null;
@@ -2110,6 +2699,13 @@ class DescribeOnlineRecordResponse extends  AbstractModel {
         this.ReplayUrl = null;
 
         /**
+         * 视频流在录制过程中断流次数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Interrupt> || null}
+         */
+        this.Interrupts = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -2153,6 +2749,15 @@ class DescribeOnlineRecordResponse extends  AbstractModel {
             }
         }
         this.ReplayUrl = 'ReplayUrl' in params ? params.ReplayUrl : null;
+
+        if (params.Interrupts) {
+            this.Interrupts = new Array();
+            for (let z in params.Interrupts) {
+                let obj = new Interrupt();
+                obj.deserialize(params.Interrupts[z]);
+                this.Interrupts.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2194,24 +2799,54 @@ class SetTranscodeCallbackKeyRequest extends  AbstractModel {
 }
 
 /**
- * DescribeTranscode请求参数结构体
+ * CreateSnapshotTask请求参数结构体
  * @class
  */
-class DescribeTranscodeRequest extends  AbstractModel {
+class CreateSnapshotTaskRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 客户的SdkAppId
+         * 白板相关参数
+         * @type {SnapshotWhiteboard || null}
+         */
+        this.Whiteboard = null;
+
+        /**
+         * 白板房间 `SdkAppId`
          * @type {number || null}
          */
         this.SdkAppId = null;
 
         /**
-         * 文档转码任务的唯一标识Id
+         * 白板房间号
+         * @type {number || null}
+         */
+        this.RoomId = null;
+
+        /**
+         * 白板板书生成结果通知回调地址
          * @type {string || null}
          */
-        this.TaskId = null;
+        this.CallbackURL = null;
+
+        /**
+         * 白板板书文件 `COS` 存储参数， 不填默认存储在公共存储桶，公共存储桶的数据仅保存3天
+         * @type {SnapshotCOS || null}
+         */
+        this.COS = null;
+
+        /**
+         * 白板板书生成模式，默认为 `AllMarks`。取值说明如下：
+
+`AllMarks` - 全量模式，即对于客户端每一次调用 `addSnapshotMark` 接口打上的白板板书生成标志全部都会生成对应的白板板书图片。
+
+`LatestMarksOnly` - 单页去重模式，即对于客户端在同一页白板上多次调用 `addSnapshotMark` 打上的白板板书生成标志仅保留最新一次标志来生成对应白板页的白板板书图片。
+
+（**注意：`LatestMarksOnly` 模式只有客户端使用v2.6.8及以上版本的白板SDK调用 `addSnapshotMark` 时才生效，否则即使在调用本API是指定了 `LatestMarksOnly` 模式，服务后台会使用默认的 `AllMarks` 模式生成白板板书**）
+         * @type {string || null}
+         */
+        this.SnapshotMode = null;
 
     }
 
@@ -2222,8 +2857,22 @@ class DescribeTranscodeRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+
+        if (params.Whiteboard) {
+            let obj = new SnapshotWhiteboard();
+            obj.deserialize(params.Whiteboard)
+            this.Whiteboard = obj;
+        }
         this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RoomId = 'RoomId' in params ? params.RoomId : null;
+        this.CallbackURL = 'CallbackURL' in params ? params.CallbackURL : null;
+
+        if (params.COS) {
+            let obj = new SnapshotCOS();
+            obj.deserialize(params.COS)
+            this.COS = obj;
+        }
+        this.SnapshotMode = 'SnapshotMode' in params ? params.SnapshotMode : null;
 
     }
 }
@@ -2626,10 +3275,10 @@ class DescribeTranscodeCallbackRequest extends  AbstractModel {
 }
 
 /**
- * ResumeOnlineRecord请求参数结构体
+ * DescribeTranscode请求参数结构体
  * @class
  */
-class ResumeOnlineRecordRequest extends  AbstractModel {
+class DescribeTranscodeRequest extends  AbstractModel {
     constructor(){
         super();
 
@@ -2640,7 +3289,7 @@ class ResumeOnlineRecordRequest extends  AbstractModel {
         this.SdkAppId = null;
 
         /**
-         * 恢复录制的实时录制任务 Id
+         * 文档转码任务的唯一标识Id
          * @type {string || null}
          */
         this.TaskId = null;
@@ -2881,24 +3530,42 @@ false - 所有流都录制大画面，默认为false。
 }
 
 /**
- * SetOnlineRecordCallback请求参数结构体
+ * DescribeTIWDailyUsage请求参数结构体
  * @class
  */
-class SetOnlineRecordCallbackRequest extends  AbstractModel {
+class DescribeTIWDailyUsageRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 客户的SdkAppId
+         * 互动白板应用SdkAppId
          * @type {number || null}
          */
         this.SdkAppId = null;
 
         /**
-         * 实时录制任务结果回调地址，如果传空字符串会删除原来的回调地址配置，回调地址仅支持 http或https协议，即回调地址以http://或https://开头。回调数据格式请参考文档：https://cloud.tencent.com/document/product/1137/40258
+         * 需要查询的子产品用量，支持传入以下值
+- sp_tiw_board: 互动白板时长，单位为分钟
+- sp_tiw_dt: 动态转码页数，单位页
+- sp_tiw_st: 静态转码页数，单位页
+- sp_tiw_ric: 实时录制时长，单位分钟
+
+注意：动态转码以1:8的比例计算文档转码页数，静态转码以1:1的比例计算文档转码页数
          * @type {string || null}
          */
-        this.Callback = null;
+        this.SubProduct = null;
+
+        /**
+         * 开始时间，格式YYYY-MM-DD，查询结果里包括该天数据
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 结束时间，格式YYYY-MM-DD，查询结果里包括该天数据，单次查询统计区间最多不能超过31天。
+         * @type {string || null}
+         */
+        this.EndTime = null;
 
     }
 
@@ -2910,7 +3577,9 @@ class SetOnlineRecordCallbackRequest extends  AbstractModel {
             return;
         }
         this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
-        this.Callback = 'Callback' in params ? params.Callback : null;
+        this.SubProduct = 'SubProduct' in params ? params.SubProduct : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
 
     }
 }
@@ -2924,13 +3593,13 @@ class Whiteboard extends  AbstractModel {
         super();
 
         /**
-         * 实时录制结果里白板视频宽，默认为1280
+         * 实时录制结果里白板视频宽，取值必须大于等于2，默认为1280
          * @type {number || null}
          */
         this.Width = null;
 
         /**
-         * 实时录制结果里白板视频高，默认为960
+         * 实时录制结果里白板视频高，取值必须大于等于2，默认为960
          * @type {number || null}
          */
         this.Height = null;
@@ -3051,6 +3720,41 @@ class DescribeVideoGenerationTaskCallbackRequest extends  AbstractModel {
 }
 
 /**
+ * SetOnlineRecordCallback请求参数结构体
+ * @class
+ */
+class SetOnlineRecordCallbackRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 客户的SdkAppId
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * 实时录制任务结果回调地址，如果传空字符串会删除原来的回调地址配置，回调地址仅支持 http或https协议，即回调地址以http://或https://开头。回调数据格式请参考文档：https://cloud.tencent.com/document/product/1137/40258
+         * @type {string || null}
+         */
+        this.Callback = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.Callback = 'Callback' in params ? params.Callback : null;
+
+    }
+}
+
+/**
  * PauseOnlineRecord请求参数结构体
  * @class
  */
@@ -3157,6 +3861,7 @@ module.exports = {
     SetVideoGenerationTaskCallbackRequest: SetVideoGenerationTaskCallbackRequest,
     StreamControl: StreamControl,
     StopOnlineRecordResponse: StopOnlineRecordResponse,
+    AuthParam: AuthParam,
     SetVideoGenerationTaskCallbackKeyRequest: SetVideoGenerationTaskCallbackKeyRequest,
     StartWhiteboardPushRequest: StartWhiteboardPushRequest,
     OmittedDuration: OmittedDuration,
@@ -3166,50 +3871,61 @@ module.exports = {
     SetVideoGenerationTaskCallbackResponse: SetVideoGenerationTaskCallbackResponse,
     SetWhiteboardPushCallbackKeyResponse: SetWhiteboardPushCallbackKeyResponse,
     WhiteboardPushBackupParam: WhiteboardPushBackupParam,
+    DescribeSnapshotTaskRequest: DescribeSnapshotTaskRequest,
     StartOnlineRecordRequest: StartOnlineRecordRequest,
     DescribeVideoGenerationTaskCallbackResponse: DescribeVideoGenerationTaskCallbackResponse,
+    DescribeSnapshotTaskResponse: DescribeSnapshotTaskResponse,
     StartWhiteboardPushResponse: StartWhiteboardPushResponse,
+    ResumeOnlineRecordRequest: ResumeOnlineRecordRequest,
     DescribeOnlineRecordCallbackRequest: DescribeOnlineRecordCallbackRequest,
+    SnapshotCOS: SnapshotCOS,
     DescribeOnlineRecordCallbackResponse: DescribeOnlineRecordCallbackResponse,
     StopWhiteboardPushRequest: StopWhiteboardPushRequest,
     SetTranscodeCallbackResponse: SetTranscodeCallbackResponse,
     StopOnlineRecordRequest: StopOnlineRecordRequest,
+    SnapshotWhiteboard: SnapshotWhiteboard,
+    UsageDataItem: UsageDataItem,
     SetVideoGenerationTaskCallbackKeyResponse: SetVideoGenerationTaskCallbackKeyResponse,
     CreateTranscodeResponse: CreateTranscodeResponse,
+    CreateSnapshotTaskResponse: CreateSnapshotTaskResponse,
     DescribeVideoGenerationTaskResponse: DescribeVideoGenerationTaskResponse,
     DescribeWhiteboardPushCallbackResponse: DescribeWhiteboardPushCallbackResponse,
     CustomLayout: CustomLayout,
+    Interrupt: Interrupt,
     VideoInfo: VideoInfo,
     SetTranscodeCallbackKeyResponse: SetTranscodeCallbackKeyResponse,
+    DescribeTIWDailyUsageResponse: DescribeTIWDailyUsageResponse,
     Concat: Concat,
     DescribeOnlineRecordRequest: DescribeOnlineRecordRequest,
     DescribeWhiteboardPushResponse: DescribeWhiteboardPushResponse,
     StartOnlineRecordResponse: StartOnlineRecordResponse,
     SetOnlineRecordCallbackKeyResponse: SetOnlineRecordCallbackKeyResponse,
     DescribeVideoGenerationTaskRequest: DescribeVideoGenerationTaskRequest,
+    SnapshotResult: SnapshotResult,
     CreateVideoGenerationTaskResponse: CreateVideoGenerationTaskResponse,
     PauseOnlineRecordResponse: PauseOnlineRecordResponse,
     CreateTranscodeRequest: CreateTranscodeRequest,
     DescribeWhiteboardPushCallbackRequest: DescribeWhiteboardPushCallbackRequest,
     DescribeOnlineRecordResponse: DescribeOnlineRecordResponse,
     SetTranscodeCallbackKeyRequest: SetTranscodeCallbackKeyRequest,
-    DescribeTranscodeRequest: DescribeTranscodeRequest,
+    CreateSnapshotTaskRequest: CreateSnapshotTaskRequest,
     DescribeTranscodeResponse: DescribeTranscodeResponse,
     StreamLayout: StreamLayout,
     DescribeQualityMetricsRequest: DescribeQualityMetricsRequest,
     SetOnlineRecordCallbackKeyRequest: SetOnlineRecordCallbackKeyRequest,
     CreateVideoGenerationTaskRequest: CreateVideoGenerationTaskRequest,
     DescribeTranscodeCallbackRequest: DescribeTranscodeCallbackRequest,
-    ResumeOnlineRecordRequest: ResumeOnlineRecordRequest,
+    DescribeTranscodeRequest: DescribeTranscodeRequest,
     DescribeTranscodeCallbackResponse: DescribeTranscodeCallbackResponse,
     SetTranscodeCallbackRequest: SetTranscodeCallbackRequest,
     SetWhiteboardPushCallbackRequest: SetWhiteboardPushCallbackRequest,
     SetWhiteboardPushCallbackResponse: SetWhiteboardPushCallbackResponse,
     RecordControl: RecordControl,
-    SetOnlineRecordCallbackRequest: SetOnlineRecordCallbackRequest,
+    DescribeTIWDailyUsageRequest: DescribeTIWDailyUsageRequest,
     Whiteboard: Whiteboard,
     MixStream: MixStream,
     DescribeVideoGenerationTaskCallbackRequest: DescribeVideoGenerationTaskCallbackRequest,
+    SetOnlineRecordCallbackRequest: SetOnlineRecordCallbackRequest,
     PauseOnlineRecordRequest: PauseOnlineRecordRequest,
     StopWhiteboardPushResponse: StopWhiteboardPushResponse,
     SetOnlineRecordCallbackResponse: SetOnlineRecordCallbackResponse,

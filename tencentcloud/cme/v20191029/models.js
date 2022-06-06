@@ -59,6 +59,46 @@ class AudioStreamInfo extends  AbstractModel {
 }
 
 /**
+ * 分类删除事件。
+ * @class
+ */
+class ClassDeletedEvent extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 删除的分类归属。
+         * @type {Entity || null}
+         */
+        this.Owner = null;
+
+        /**
+         * 删除的分类路径列表。
+         * @type {Array.<string> || null}
+         */
+        this.ClassPathSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Owner) {
+            let obj = new Entity();
+            obj.deserialize(params.Owner)
+            this.Owner = obj;
+        }
+        this.ClassPathSet = 'ClassPathSet' in params ? params.ClassPathSet : null;
+
+    }
+}
+
+/**
  * ModifyMaterial返回参数结构体
  * @class
  */
@@ -95,19 +135,19 @@ class DeleteProjectRequest extends  AbstractModel {
         super();
 
         /**
-         * 平台名称，指定访问的平台。
+         * 平台 Id，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
          * @type {string || null}
          */
         this.Platform = null;
 
         /**
-         * 项目 Id。
+         * 要删除的项目 Id。
          * @type {string || null}
          */
         this.ProjectId = null;
 
         /**
-         * 操作者。填写用户的 Id，用于标识调用者及校验对项目删除操作权限。
+         * 操作者。如不填，默认为 `cmeid_system`，表示平台管理员操作，可以删除一切项目。如果指定操作者，则操作者必须为项目所有者。
          * @type {string || null}
          */
         this.Operator = null;
@@ -159,6 +199,34 @@ class ExportVideoByVideoSegmentationDataResponse extends  AbstractModel {
         }
         this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 媒体删除事件。
+ * @class
+ */
+class MaterialDeletedEvent extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 删除的媒体 Id 列表。
+         * @type {Array.<string> || null}
+         */
+        this.MaterialIdSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MaterialIdSet = 'MaterialIdSet' in params ? params.MaterialIdSet : null;
 
     }
 }
@@ -274,13 +342,13 @@ class DescribeAccountsRequest extends  AbstractModel {
         super();
 
         /**
-         * 平台唯一标识。
+         * 平台 Id，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
          * @type {string || null}
          */
         this.Platform = null;
 
         /**
-         * 手机号码。
+         * 手机号码。指定手机号获取账号信息，目前仅支持国内手机号，且号码不加地区码 `+86` 等。
          * @type {string || null}
          */
         this.Phone = null;
@@ -323,7 +391,7 @@ class ExportVideoByVideoSegmentationDataRequest extends  AbstractModel {
         super();
 
         /**
-         * 平台名称，指定访问的平台。
+         * 平台 Id，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
          * @type {string || null}
          */
         this.Platform = null;
@@ -356,27 +424,27 @@ class ExportVideoByVideoSegmentationDataRequest extends  AbstractModel {
         this.Definition = null;
 
         /**
-         * 导出目标。
-<li>CME：云剪，即导出为云剪素材；</li>
-<li>VOD：云点播，即导出为云点播媒资。</li>
+         * 导出目标，指定导出视频的目标媒资库，可取值有：
+<li>CME：多媒体创作引擎，即导出为多媒体创作引擎媒资库，此导出目标在云点播媒资库依然可见；</li>
+<li>VOD：云点播，即导出为云点播媒资库，此导出目标在多媒体创作引擎媒资库将不可见。</li>
          * @type {string || null}
          */
         this.ExportDestination = null;
 
         /**
-         * 导出的云剪素材信息。指定 ExportDestination = CME 时有效。
+         * 导出的多媒体创作引擎媒体信息。当导出目标为 CME 时必填。
          * @type {CMEExportInfo || null}
          */
         this.CMEExportInfo = null;
 
         /**
-         * 导出的云点播媒资信息。指定 ExportDestination = VOD 时有效。
+         * 导出的云点播媒资信息。当导出目标为 VOD 时必填。
          * @type {VODExportInfo || null}
          */
         this.VODExportInfo = null;
 
         /**
-         * 操作者。填写用户的 Id，用于标识调用者及校验操作权限。
+         * 操作者。如不填，默认为 `cmeid_system`，表示平台管理员操作，可以操作任意智能拆条项目。如果指定操作者，则操作者必须为项目所有。
          * @type {string || null}
          */
         this.Operator = null;
@@ -608,7 +676,7 @@ class ExportVideoEditProjectRequest extends  AbstractModel {
         this.ProjectId = null;
 
         /**
-         * 导出模板 Id，目前不支持自定义创建，只支持下面的预置模板 Id。
+         * 视频编码配置 ID，支持自定义创建，推荐优先使用系统预置的导出配置。
 <li>10：分辨率为 480P，输出视频格式为 MP4；</li>
 <li>11：分辨率为 720P，输出视频格式为 MP4；</li>
 <li>12：分辨率为 1080P，输出视频格式为 MP4。</li>
@@ -617,9 +685,9 @@ class ExportVideoEditProjectRequest extends  AbstractModel {
         this.Definition = null;
 
         /**
-         * 导出目标。
-<li>CME：云剪，即导出为云剪媒体；</li>
-<li>VOD：云点播，即导出为云点播媒资。</li>
+         * 导出目标，指定导出视频的目标媒资库，可取值有：
+<li>CME：多媒体创作引擎，即导出为多媒体创作引擎媒资库，此导出目标在云点播媒资库依然可见；</li>
+<li>VOD：云点播，即导出为云点播媒资库，此导出目标在多媒体创作引擎媒资库将不可见。</li>
          * @type {string || null}
          */
         this.ExportDestination = null;
@@ -631,16 +699,22 @@ class ExportVideoEditProjectRequest extends  AbstractModel {
         this.CoverData = null;
 
         /**
-         * 导出的云剪媒体信息。指定 ExportDestination = CME 时有效。
+         * 导出的多媒体创作引擎媒体信息。当导出目标为 CME 时必填。
          * @type {CMEExportInfo || null}
          */
         this.CMEExportInfo = null;
 
         /**
-         * 导出的云点播媒资信息。指定 ExportDestination = VOD 时有效。
+         * 导出的云点播媒资信息。当导出目标为 VOD 时必填。
          * @type {VODExportInfo || null}
          */
         this.VODExportInfo = null;
+
+        /**
+         * 视频导出扩展参数。可以覆盖导出模板中的参数，灵活的指定导出规格及参数。
+         * @type {VideoExportExtensionArgs || null}
+         */
+        this.ExportExtensionArgs = null;
 
         /**
          * 操作者。填写用户的 Id，用于标识调用者及校验项目导出权限。
@@ -673,6 +747,12 @@ class ExportVideoEditProjectRequest extends  AbstractModel {
             let obj = new VODExportInfo();
             obj.deserialize(params.VODExportInfo)
             this.VODExportInfo = obj;
+        }
+
+        if (params.ExportExtensionArgs) {
+            let obj = new VideoExportExtensionArgs();
+            obj.deserialize(params.ExportExtensionArgs)
+            this.ExportExtensionArgs = obj;
         }
         this.Operator = 'Operator' in params ? params.Operator : null;
 
@@ -760,19 +840,23 @@ class AudioTrackItem extends  AbstractModel {
 <ul>
 <li>VOD ：素材来源于云点播文件 ；</li>
 <li>CME ：视频来源于制作云媒体文件 ；</li>
-<li>EXTERNAL ：视频来源于媒资绑定。</li>
+<li>EXTERNAL ：视频来源于媒资绑定，如果媒体不是存储在腾讯云点播中或者云创中，都需要使用媒资绑定。</li>
 </ul>
          * @type {string || null}
          */
         this.SourceType = null;
 
         /**
-         * 音频片段的媒体来源，可以是：
+         * 音频媒体，可取值为：
 <ul>
-<li>当 SourceType 为 VOD 时，为云点播的媒体文件 FileId ，会默认将该 FileId 导入到项目中 ；</li>
-<li>当 SourceType 为 CME 时，为制作云的媒体 ID，项目归属者必须对该云媒资有访问权限；</li>
-<li>当 SourceType 为 EXTERNAL 时，为媒资绑定的 Definition 与 MediaKey 中间用冒号分隔合并后的字符串，格式为 Definition:MediaKey 。</li>
+<li>当 SourceType 为 VOD 时，参数填云点播 FileId ；</li>
+<li>当 SourceType 为 CME 时，参数填多媒体创作引擎媒体 Id；</li>
+<li>当 SourceType 为 EXTERNAL 时，目前仅支持外部媒体 URL(如`https://www.example.com/a.mp3`)，参数填写规则请参见注意事项。</li>
 </ul>
+
+注意：
+<li>当 SourceType 为 EXTERNAL 并且媒体 URL Scheme 为 `https` 时(如：`https://www.example.com/a.mp3`)，参数为：`1000000:www.example.com/a.mp3`。</li>
+<li>当 SourceType 为 EXTERNAL 并且媒体 URL Scheme 为 `http` 时(如：`http://www.example.com/b.mp3`)，参数为：`1000001:www.example.com/b.mp3`。</li>
          * @type {string || null}
          */
         this.SourceMedia = null;
@@ -908,6 +992,110 @@ class StreamConnectProjectInfo extends  AbstractModel {
 }
 
 /**
+ * 视频编码配置中的音频设置更新信息
+ * @class
+ */
+class VideoEncodingPresetAudioSettingForUpdate extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 音频码率，单位：bps。
+不填则不修改。
+         * @type {string || null}
+         */
+        this.Bitrate = null;
+
+        /**
+         * 音频声道数，可选值： 
+<li>1：单声道；</li>
+<li>2：双声道。</li> 
+不填则不修改。
+         * @type {number || null}
+         */
+        this.Channels = null;
+
+        /**
+         * 音频流的采样率，目前仅支持： 16000； 32000； 44100； 48000。单位：Hz。
+不填则不修改。
+         * @type {number || null}
+         */
+        this.SampleRate = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Bitrate = 'Bitrate' in params ? params.Bitrate : null;
+        this.Channels = 'Channels' in params ? params.Channels : null;
+        this.SampleRate = 'SampleRate' in params ? params.SampleRate : null;
+
+    }
+}
+
+/**
+ * 视频编码配置中的音频设置
+ * @class
+ */
+class VideoEncodingPresetAudioSetting extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 音频流的编码格式，可选值：
+AAC：AAC 编码。
+
+默认值：AAC。
+         * @type {string || null}
+         */
+        this.Codec = null;
+
+        /**
+         * 音频码率，单位：bps。
+默认值：64K。
+         * @type {number || null}
+         */
+        this.Bitrate = null;
+
+        /**
+         * 音频声道数，可选值： 
+<li>1：单声道；</li>
+<li>2：双声道。</li> 
+默认值：2。
+         * @type {number || null}
+         */
+        this.Channels = null;
+
+        /**
+         * 音频流的采样率，仅支持 16000； 32000； 44100； 48000。单位：Hz。 
+默认值：16000。
+         * @type {number || null}
+         */
+        this.SampleRate = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Codec = 'Codec' in params ? params.Codec : null;
+        this.Bitrate = 'Bitrate' in params ? params.Bitrate : null;
+        this.Channels = 'Channels' in params ? params.Channels : null;
+        this.SampleRate = 'SampleRate' in params ? params.SampleRate : null;
+
+    }
+}
+
+/**
  * 整型范围
  * @class
  */
@@ -951,7 +1139,7 @@ class SearchMaterialRequest extends  AbstractModel {
         super();
 
         /**
-         * 平台名称，指定访问的平台。
+         * 平台 Id，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
          * @type {string || null}
          */
         this.Platform = null;
@@ -963,10 +1151,11 @@ class SearchMaterialRequest extends  AbstractModel {
         this.SearchScopes = null;
 
         /**
-         * 媒体类型，取值：
+         * 媒体类型，可取值有：
 <li>AUDIO：音频；</li>
 <li>VIDEO：视频 ；</li>
-<li>IMAGE：图片。</li>
+<li>IMAGE：图片；</li>
+<li>VIDEO_EDIT_TEMPLATE：剪辑模板。</li>
          * @type {Array.<string> || null}
          */
         this.MaterialTypes = null;
@@ -1020,7 +1209,7 @@ class SearchMaterialRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * 操作者。填写用户的 Id，用于标识调用者及校验媒体访问权限。
+         * 操作者。如不填，默认为 `cmeid_system`，表示平台管理员操作，可以搜索任意媒体的信息。如果指定操作者，则操作者必须对媒体有读权限。
          * @type {string || null}
          */
         this.Operator = null;
@@ -1153,34 +1342,42 @@ class StreamConnectOutput extends  AbstractModel {
 }
 
 /**
- * 视频拆条项目的输入信息。
+ * CopyProject请求参数结构体
  * @class
  */
-class VideoSegmentationProjectInput extends  AbstractModel {
+class CopyProjectRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 画布宽高比，取值有：
-<li>16:9；</li>
-<li>9:16；</li>
-<li>2:1。</li>
-默认值 16:9 。
+         * 平台名称，指定访问的平台。
          * @type {string || null}
          */
-        this.AspectRatio = null;
+        this.Platform = null;
 
         /**
-         * 视频拆条处理模型，不填则默认为手工分割视频。取值 ：
-<li>AI.GameHighlights.PUBG：和平精英集锦 ;</li>
-<li>AI.GameHighlights.Honor OfKings：王者荣耀集锦 ;</li>
-<li>AI.SportHighlights.Football：足球集锦 </li>
-<li>AI.SportHighlights.Basketball：篮球集锦 ；</li>
-<li>AI.PersonSegmentation：人物集锦  ;</li>
-<li>AI.NewsSegmentation：新闻拆条。</li>
+         * 被复制的项目 ID。
          * @type {string || null}
          */
-        this.ProcessModel = null;
+        this.ProjectId = null;
+
+        /**
+         * 复制后的项目名称，不填为原项目名称+"(副本)"。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 复制后的项目归属者，不填为原项目归属者。
+         * @type {Entity || null}
+         */
+        this.Owner = null;
+
+        /**
+         * 操作者。填写用户的 Id，用于标识调用者及校验操作权限。
+         * @type {string || null}
+         */
+        this.Operator = null;
 
     }
 
@@ -1191,8 +1388,16 @@ class VideoSegmentationProjectInput extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AspectRatio = 'AspectRatio' in params ? params.AspectRatio : null;
-        this.ProcessModel = 'ProcessModel' in params ? params.ProcessModel : null;
+        this.Platform = 'Platform' in params ? params.Platform : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+
+        if (params.Owner) {
+            let obj = new Entity();
+            obj.deserialize(params.Owner)
+            this.Owner = obj;
+        }
+        this.Operator = 'Operator' in params ? params.Operator : null;
 
     }
 }
@@ -1266,56 +1471,30 @@ class RevokeResourceAuthorizationResponse extends  AbstractModel {
 }
 
 /**
- * HandleStreamConnectProject请求参数结构体
+ * DescribeTasks返回参数结构体
  * @class
  */
-class HandleStreamConnectProjectRequest extends  AbstractModel {
+class DescribeTasksResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 平台名称，指定访问的平台。
+         * 符合搜索条件的记录总数。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 任务基础信息列表。
+         * @type {Array.<TaskBaseInfo> || null}
+         */
+        this.TaskBaseInfoSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.Platform = null;
-
-        /**
-         * 云转推项目Id 。
-         * @type {string || null}
-         */
-        this.ProjectId = null;
-
-        /**
-         * 请参考 [操作类型](#Operation)
-         * @type {string || null}
-         */
-        this.Operation = null;
-
-        /**
-         * 转推输入源操作参数。具体操作方式详见 [操作类型](#Operation) 及下文示例。
-         * @type {StreamInputInfo || null}
-         */
-        this.InputInfo = null;
-
-        /**
-         * 主备输入源标识，取值有：
-<li> Main ：主源；</li>
-<li> Backup ：备源。</li>
-         * @type {string || null}
-         */
-        this.InputEndpoint = null;
-
-        /**
-         * 转推输出源操作参数。具体操作方式详见 [操作类型](#Operation) 及下文示例。
-         * @type {StreamConnectOutput || null}
-         */
-        this.OutputInfo = null;
-
-        /**
-         * 云转推当前预计结束时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。具体操作方式详见 [操作类型](#Operation) 及下文示例。
-         * @type {string || null}
-         */
-        this.CurrentStopTime = null;
+        this.RequestId = null;
 
     }
 
@@ -1326,23 +1505,17 @@ class HandleStreamConnectProjectRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Platform = 'Platform' in params ? params.Platform : null;
-        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
-        this.Operation = 'Operation' in params ? params.Operation : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
-        if (params.InputInfo) {
-            let obj = new StreamInputInfo();
-            obj.deserialize(params.InputInfo)
-            this.InputInfo = obj;
+        if (params.TaskBaseInfoSet) {
+            this.TaskBaseInfoSet = new Array();
+            for (let z in params.TaskBaseInfoSet) {
+                let obj = new TaskBaseInfo();
+                obj.deserialize(params.TaskBaseInfoSet[z]);
+                this.TaskBaseInfoSet.push(obj);
+            }
         }
-        this.InputEndpoint = 'InputEndpoint' in params ? params.InputEndpoint : null;
-
-        if (params.OutputInfo) {
-            let obj = new StreamConnectOutput();
-            obj.deserialize(params.OutputInfo)
-            this.OutputInfo = obj;
-        }
-        this.CurrentStopTime = 'CurrentStopTime' in params ? params.CurrentStopTime : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1460,19 +1633,23 @@ class VideoTrackItem extends  AbstractModel {
 <ul>
 <li>VOD ：媒体来源于云点播文件 。</li>
 <li>CME ：视频来源制作云媒体文件。</li>
-<li>EXTERNAL ：视频来源于媒资绑定。</li>
+<li>EXTERNAL ：视频来源于媒资绑定，如果媒体不是存储在腾讯云点播中或者云创中，都需要使用媒资绑定。</li>
 </ul>
          * @type {string || null}
          */
         this.SourceType = null;
 
         /**
-         * 视频片段的媒体文件来源，取值为：
+         * 视频媒体，可取值为：
 <ul>
-<li>当 SourceType 为 VOD 时，为云点播的媒体文件 FileId ，会默认将该 FileId 导入到项目中；</li>
-<li>当 SourceType 为 CME 时，为制作云的媒体 ID，项目归属者必须对该云媒资有访问权限；</li>
-<li>当 SourceType 为 EXTERNAL 时，为媒资绑定的 Definition 与 MediaKey 中间用冒号分隔合并后的字符串，格式为 Definition:MediaKey 。</li>
+<li>当 SourceType 为 VOD 时，参数填云点播 FileId ；</li>
+<li>当 SourceType 为 CME 时，参数填多媒体创作引擎媒体 Id；</li>
+<li>当 SourceType 为 EXTERNAL 时，目前仅支持外部媒体 URL(如`https://www.example.com/a.mp4`)，参数填写规则请参见注意事项。</li>
 </ul>
+
+注意：
+<li>当 SourceType 为 EXTERNAL 并且媒体 URL Scheme 为 `https` 时(如：`https://www.example.com/a.mp4`)，参数为：`1000000:www.example.com/a.mp4`。</li>
+<li>当 SourceType 为 EXTERNAL 并且媒体 URL Scheme 为 `http` 时(如：`http://www.example.com/b.mp4`)，参数为：`1000001:www.example.com/b.mp4`。</li>
          * @type {string || null}
          */
         this.SourceMedia = null;
@@ -1568,7 +1745,7 @@ class DeleteTeamRequest extends  AbstractModel {
         super();
 
         /**
-         * 平台名称，指定访问平台。
+         * 平台 Id，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
          * @type {string || null}
          */
         this.Platform = null;
@@ -1580,7 +1757,7 @@ class DeleteTeamRequest extends  AbstractModel {
         this.TeamId = null;
 
         /**
-         * 操作者。填写用户的 Id，用于标识调用者及校验操作权限。
+         * 操作者。如不填，默认为 `cmeid_system`，表示平台管理员操作，可以删除所有团队。如果指定操作者，则操作者必须为团队所有者。
          * @type {string || null}
          */
         this.Operator = null;
@@ -1610,7 +1787,7 @@ class DescribeTeamsRequest extends  AbstractModel {
         super();
 
         /**
-         * 平台名称，指定访问的平台。
+         * 平台 Id，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
          * @type {string || null}
          */
         this.Platform = null;
@@ -1646,6 +1823,79 @@ class DescribeTeamsRequest extends  AbstractModel {
         this.TeamIds = 'TeamIds' in params ? params.TeamIds : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * 平台信息。
+ * @class
+ */
+class PlatformInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 平台标识。
+         * @type {string || null}
+         */
+        this.Platform = null;
+
+        /**
+         * 平台描述。
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 云点播子应用 Id。
+         * @type {number || null}
+         */
+        this.VodSubAppId = null;
+
+        /**
+         * 平台绑定的 license Id。
+         * @type {string || null}
+         */
+        this.LicenseId = null;
+
+        /**
+         * 平台状态，可取值为：
+<li>Normal：正常，可使用。；</li>
+<li>Stopped：已停用，暂无法使用；</li>
+<li>Expired：已过期，需要重新购买会员包。</li>
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 创建时间，格式按照 ISO 8601 标准表示。
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 更新时间，格式按照 ISO 8601 标准表示。
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Platform = 'Platform' in params ? params.Platform : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.VodSubAppId = 'VodSubAppId' in params ? params.VodSubAppId : null;
+        this.LicenseId = 'LicenseId' in params ? params.LicenseId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
 
     }
 }
@@ -1764,7 +2014,7 @@ class FlattenListMediaRequest extends  AbstractModel {
         super();
 
         /**
-         * 平台名称，指定访问的平台。
+         * 平台 Id，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
          * @type {string || null}
          */
         this.Platform = null;
@@ -1794,7 +2044,7 @@ class FlattenListMediaRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * 操作者。填写用户的 Id，用于标识调用者及校验媒体访问权限。
+         * 操作者。如不填，默认为 `cmeid_system`，表示平台管理员操作，可以平铺查询任意分类下的媒体信息。如果指定操作者，则操作者必须对当前分类有读权限。
          * @type {string || null}
          */
         this.Operator = null;
@@ -1824,7 +2074,7 @@ class FlattenListMediaRequest extends  AbstractModel {
 }
 
 /**
- * 直播推流信息，包括推流地址有效时长，云剪后端生成直播推流地址。
+ * 直播推流信息，包括推流地址有效时长，多媒体创作引擎后端生成直播推流地址。
  * @class
  */
 class RtmpPushInputInfo extends  AbstractModel {
@@ -1838,7 +2088,7 @@ class RtmpPushInputInfo extends  AbstractModel {
         this.ExpiredSecond = null;
 
         /**
-         * 直播推流地址，入参不填默认由云剪生成。
+         * 直播推流地址，入参不填默认由多媒体创作引擎生成。
          * @type {string || null}
          */
         this.PushUrl = null;
@@ -2078,13 +2328,13 @@ class ExportVideoByEditorTrackDataRequest extends  AbstractModel {
         super();
 
         /**
-         * 平台名称，指定访问的平台。
+         * 平台 Id，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
          * @type {string || null}
          */
         this.Platform = null;
 
         /**
-         * 导出模板 Id，目前不支持自定义创建，只支持下面的预置模板 Id。
+         * 导出视频预设配置 Id，推荐优先使用下面的默认预设配置 Id，有其他需求可通过接口定制预设配置。
 <li>10：分辨率为 480P，输出视频格式为 MP4；</li>
 <li>11：分辨率为 720P，输出视频格式为 MP4；</li>
 <li>12：分辨率为 1080P，输出视频格式为 MP4。</li>
@@ -2093,9 +2343,9 @@ class ExportVideoByEditorTrackDataRequest extends  AbstractModel {
         this.Definition = null;
 
         /**
-         * 导出目标。
-<li>CME：云剪，即导出为云剪素材；</li>
-<li>VOD：云点播，即导出为云点播媒资。</li>
+         * 导出目标，指定导出视频的目标媒资库，可取值有：
+<li>CME：多媒体创建引擎，即导出到多媒体创作引擎媒资库，此导出目标在云点播媒资库依然可见；</li>
+<li>VOD：云点播，即导出为云点播媒资库，此导出目标在多媒体创作引擎媒资库将不可见。</li>
          * @type {string || null}
          */
         this.ExportDestination = null;
@@ -2107,19 +2357,33 @@ class ExportVideoByEditorTrackDataRequest extends  AbstractModel {
         this.TrackData = null;
 
         /**
-         * 导出的云剪素材信息。指定 ExportDestination = CME 时有效。
+         * 轨道数据对应的画布宽高比，配合预设配置中的视频短边尺寸，可决定导出画面的尺寸。例：
+<li>如果 AspectRatio 取值 16:9，预设配置选为12（短边1080），则导出尺寸为 1920 * 1080；</li>
+<li>如果 AspectRatio 取值 9:16，预设配置选为11（短边720），则导出尺寸为 720 *1280。</li>
+         * @type {string || null}
+         */
+        this.AspectRatio = null;
+
+        /**
+         * 视频封面图片文件（如 jpeg, png 等）进行 Base64 编码后的字符串，仅支持 gif、jpeg、png 三种图片格式，原图片文件不能超过2 M大 小。
+         * @type {string || null}
+         */
+        this.CoverData = null;
+
+        /**
+         * 导出的多媒体创作引擎媒体信息。当导出目标为 CME 时必填。
          * @type {CMEExportInfo || null}
          */
         this.CMEExportInfo = null;
 
         /**
-         * 导出的云点播媒资信息。指定 ExportDestination = VOD 时有效。
+         * 导出的云点播媒资信息。当导出目标为 VOD 时必填。
          * @type {VODExportInfo || null}
          */
         this.VODExportInfo = null;
 
         /**
-         * 操作者。填写用户的 Id，用于标识调用者及校验导出操作权限。
+         * 操作者。如不填，默认为 `cmeid_system`，表示平台管理员操作，无权限限制。如果指定操作者，轨道数据中使的媒资该操作者需要拥有使用权限。
          * @type {string || null}
          */
         this.Operator = null;
@@ -2137,6 +2401,8 @@ class ExportVideoByEditorTrackDataRequest extends  AbstractModel {
         this.Definition = 'Definition' in params ? params.Definition : null;
         this.ExportDestination = 'ExportDestination' in params ? params.ExportDestination : null;
         this.TrackData = 'TrackData' in params ? params.TrackData : null;
+        this.AspectRatio = 'AspectRatio' in params ? params.AspectRatio : null;
+        this.CoverData = 'CoverData' in params ? params.CoverData : null;
 
         if (params.CMEExportInfo) {
             let obj = new CMEExportInfo();
@@ -2206,7 +2472,7 @@ class VideoEditProjectOutput extends  AbstractModel {
         super();
 
         /**
-         * 导出的云剪素材 MaterialId，仅当导出为云剪素材时有效。
+         * 导出的多媒体创作引擎媒体 Id，仅当导出目标为多媒体创作引擎媒体时有效。
          * @type {string || null}
          */
         this.MaterialId = null;
@@ -2261,7 +2527,7 @@ class CreateProjectRequest extends  AbstractModel {
         super();
 
         /**
-         * 平台名称，指定访问的平台。
+         * 平台 Id，指定访问的平台。平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
          * @type {string || null}
          */
         this.Platform = null;
@@ -2273,7 +2539,9 @@ class CreateProjectRequest extends  AbstractModel {
         this.Name = null;
 
         /**
-         * 项目归属者。
+         * 项目归属者，即项目的所有者，后续操作只有该所有者有权限操作。
+
+注：目前所有项目只能设置归属个人，暂不支持团队项目。
          * @type {Entity || null}
          */
         this.Owner = null;
@@ -2292,8 +2560,10 @@ class CreateProjectRequest extends  AbstractModel {
         /**
          * 项目模式，一个项目可以有多种模式并相互切换。
 当 Category 为 VIDEO_EDIT 时，可选模式有：
-<li>Default：默认模式。</li>
-<li>VideoEditTemplate：视频编辑模板制作模式。</li>
+<li>Default：默认模式，即普通视频编辑项目。</li>
+<li>VideoEditTemplate：剪辑模板制作模式，用于制作剪辑模板。</li>
+
+注：不填则为默认模式。
          * @type {string || null}
          */
         this.Mode = null;
@@ -2312,37 +2582,37 @@ class CreateProjectRequest extends  AbstractModel {
         this.Description = null;
 
         /**
-         * 导播台信息，仅当项目类型为 SWITCHER 时必填。
+         * 导播台项目输入信息，仅当项目类型为 SWITCHER 时必填。
          * @type {SwitcherProjectInput || null}
          */
         this.SwitcherProjectInput = null;
 
         /**
-         * 直播剪辑信息，暂未开放，请勿使用。
+         * 直播剪辑项目输入信息，暂未开放，请勿使用。
          * @type {LiveStreamClipProjectInput || null}
          */
         this.LiveStreamClipProjectInput = null;
 
         /**
-         * 视频编辑信息，仅当项目类型为 VIDEO_EDIT 时必填。
+         * 视频编辑项目输入信息，仅当项目类型为 VIDEO_EDIT 时必填。
          * @type {VideoEditProjectInput || null}
          */
         this.VideoEditProjectInput = null;
 
         /**
-         * 视频拆条信息，仅当项目类型为 VIDEO_SEGMENTATION  时必填。
+         * 视频拆条项目输入信息，仅当项目类型为 VIDEO_SEGMENTATION  时必填。
          * @type {VideoSegmentationProjectInput || null}
          */
         this.VideoSegmentationProjectInput = null;
 
         /**
-         * 云转推项目信息，仅当项目类型为 STREAM_CONNECT 时必填。
+         * 云转推项目输入信息，仅当项目类型为 STREAM_CONNECT 时必填。
          * @type {StreamConnectProjectInput || null}
          */
         this.StreamConnectProjectInput = null;
 
         /**
-         * 录制回放项目信息，仅当项目类型为 RECORD_REPLAY 时必填。
+         * 录制回放项目输入信息，仅当项目类型为 RECORD_REPLAY 时必填。
          * @type {RecordReplayProjectInput || null}
          */
         this.RecordReplayProjectInput = null;
@@ -2417,25 +2687,25 @@ class ModifyMaterialRequest extends  AbstractModel {
         super();
 
         /**
-         * 平台名称，指定访问的平台。
+         * 平台 Id，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
          * @type {string || null}
          */
         this.Platform = null;
 
         /**
-         * 媒体 Id。
+         * 要修改的媒体 Id。
          * @type {string || null}
          */
         this.MaterialId = null;
 
         /**
-         * 媒体或分类路径归属。
+         * 媒体归属者。
          * @type {Entity || null}
          */
         this.Owner = null;
 
         /**
-         * 媒体名称，不能超过30个字符。
+         * 媒体名称，不能超过30个字符，不填则不修改。
          * @type {string || null}
          */
         this.Name = null;
@@ -2447,7 +2717,7 @@ class ModifyMaterialRequest extends  AbstractModel {
         this.ClassPath = null;
 
         /**
-         * 操作者。填写用户的 Id，用于标识调用者及校验操作权限。
+         * 操作者。如不填，默认为 `cmeid_system`，表示平台管理员操作，可以修改任意媒体的信息。如果指定操作者，则操作者必须对媒体有写权限。
          * @type {string || null}
          */
         this.Operator = null;
@@ -2522,7 +2792,7 @@ class DescribePlatformsResponse extends  AbstractModel {
         super();
 
         /**
-         * 符合搜索条件的记录总数。
+         * 符合查询条件的记录总数。
          * @type {number || null}
          */
         this.TotalCount = null;
@@ -2572,13 +2842,13 @@ class DescribeTasksRequest extends  AbstractModel {
         super();
 
         /**
-         * 平台名称，指定访问的平台。
+         * 平台 Id，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
          * @type {string || null}
          */
         this.Platform = null;
 
         /**
-         * 项目 Id。
+         * 项目 Id，使用项目 Id 进行过滤。
          * @type {string || null}
          */
         this.ProjectId = null;
@@ -2586,6 +2856,8 @@ class DescribeTasksRequest extends  AbstractModel {
         /**
          * 任务类型集合，取值有：
 <li>VIDEO_EDIT_PROJECT_EXPORT：视频编辑项目导出。</li>
+
+注：不填不使用任务类型进行过滤。
          * @type {Array.<string> || null}
          */
         this.TaskTypeSet = null;
@@ -2595,6 +2867,8 @@ class DescribeTasksRequest extends  AbstractModel {
 <li>PROCESSING：处理中；</li>
 <li>SUCCESS：成功；</li>
 <li>FAIL：失败。</li>
+
+注：不填则不使用任务状态进行过滤。
          * @type {Array.<string> || null}
          */
         this.StatusSet = null;
@@ -2606,13 +2880,13 @@ class DescribeTasksRequest extends  AbstractModel {
         this.Offset = null;
 
         /**
-         * 分页返回的记录条数，默认值：10。
+         * 分页返回的记录条数，默认值：10。最大值：20。
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * 操作者。填写用户的 Id，用于标识调用者及校验对任务的访问权限。
+         * 操作者。如不填，默认为 `cmeid_system`，表示平台管理员操作，可以获取所有任务信息。如果指定操作者，则操作者需要是任务发起者。
          * @type {string || null}
          */
         this.Operator = null;
@@ -2739,16 +3013,18 @@ class StorageNewFileCreatedEvent extends  AbstractModel {
         this.MaterialId = null;
 
         /**
-         * 操作者 Id。
+         * 操作者 Id。（废弃，请勿使用）
          * @type {string || null}
          */
         this.Operator = null;
 
         /**
-         * 操作类型，可取值为：
-<li>Upload：上传；</li>
+         * 操作类型，可取值有：
+<li>Upload：本地上传；</li>
 <li>PullUpload：拉取上传；</li>
-<li>Record：直播录制。</li>
+<li>VideoEdit：视频剪辑；</li>
+<li>LiveStreamClip：直播流剪辑；</li>
+<li>LiveStreamRecord：直播流录制。</li>
          * @type {string || null}
          */
         this.OperationType = null;
@@ -2764,6 +3040,18 @@ class StorageNewFileCreatedEvent extends  AbstractModel {
          * @type {string || null}
          */
         this.ClassPath = null;
+
+        /**
+         * 生成文件的任务 Id。当生成新文件是拉取上传、视频剪辑、直播流剪辑时为任务 Id。
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 来源上下文信息。视频剪辑生成新文件时此字段为项目 Id；直播流剪辑或者直播流录制生成新文件则为原始流地址。
+         * @type {string || null}
+         */
+        this.SourceContext = null;
 
     }
 
@@ -2785,6 +3073,8 @@ class StorageNewFileCreatedEvent extends  AbstractModel {
             this.Owner = obj;
         }
         this.ClassPath = 'ClassPath' in params ? params.ClassPath : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.SourceContext = 'SourceContext' in params ? params.SourceContext : null;
 
     }
 }
@@ -2798,13 +3088,13 @@ class DescribeLoginStatusRequest extends  AbstractModel {
         super();
 
         /**
-         * 平台名称，指定访问的平台。
+         * 平台 Id，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
          * @type {string || null}
          */
         this.Platform = null;
 
         /**
-         * 用户 Id 列表，N 从 0 开始取值，最大 19。
+         * 用户 Id 列表，N 从0开始取值，最大19。
          * @type {Array.<string> || null}
          */
         this.UserIds = null;
@@ -3344,48 +3634,83 @@ class EmptyTrackItem extends  AbstractModel {
 }
 
 /**
- * 平台信息。
+ * 分类移动事件。
  * @class
  */
-class PlatformInfo extends  AbstractModel {
+class ClassMovedEvent extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 平台名称。
+         * 源分类归属。
+         * @type {Entity || null}
+         */
+        this.SourceOwner = null;
+
+        /**
+         * 源分类路径列表。
+         * @type {Array.<string> || null}
+         */
+        this.SourceClassPathSet = null;
+
+        /**
+         * 目标分类归属。
+         * @type {Entity || null}
+         */
+        this.DestinationOwner = null;
+
+        /**
+         * 目标分类归属。
+         * @type {string || null}
+         */
+        this.DestinationClassPath = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.SourceOwner) {
+            let obj = new Entity();
+            obj.deserialize(params.SourceOwner)
+            this.SourceOwner = obj;
+        }
+        this.SourceClassPathSet = 'SourceClassPathSet' in params ? params.SourceClassPathSet : null;
+
+        if (params.DestinationOwner) {
+            let obj = new Entity();
+            obj.deserialize(params.DestinationOwner)
+            this.DestinationOwner = obj;
+        }
+        this.DestinationClassPath = 'DestinationClassPath' in params ? params.DestinationClassPath : null;
+
+    }
+}
+
+/**
+ * DeleteVideoEncodingPreset请求参数结构体
+ * @class
+ */
+class DeleteVideoEncodingPresetRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 平台名称，指定访问的平台。
          * @type {string || null}
          */
         this.Platform = null;
 
         /**
-         * 平台描述。
-         * @type {string || null}
-         */
-        this.Description = null;
-
-        /**
-         * 云点播子应用 Id。
+         * 要删除的视频编码配置 ID。
          * @type {number || null}
          */
-        this.VodSubAppId = null;
-
-        /**
-         * 平台绑定的 license Id。
-         * @type {string || null}
-         */
-        this.LicenseId = null;
-
-        /**
-         * 创建时间，格式按照 ISO 8601 标准表示。
-         * @type {string || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * 更新时间，格式按照 ISO 8601 标准表示。
-         * @type {string || null}
-         */
-        this.UpdateTime = null;
+        this.Id = null;
 
     }
 
@@ -3397,11 +3722,90 @@ class PlatformInfo extends  AbstractModel {
             return;
         }
         this.Platform = 'Platform' in params ? params.Platform : null;
-        this.Description = 'Description' in params ? params.Description : null;
-        this.VodSubAppId = 'VodSubAppId' in params ? params.VodSubAppId : null;
-        this.LicenseId = 'LicenseId' in params ? params.LicenseId : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.Id = 'Id' in params ? params.Id : null;
+
+    }
+}
+
+/**
+ * 媒体导入事件
+ * @class
+ */
+class MaterialImportedEvent extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 导入的媒体信息列表。
+         * @type {Array.<ImportMediaInfo> || null}
+         */
+        this.MediaInfoSet = null;
+
+        /**
+         * 媒体归属。
+         * @type {Entity || null}
+         */
+        this.Owner = null;
+
+        /**
+         * 媒体分类路径。
+         * @type {string || null}
+         */
+        this.ClassPath = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.MediaInfoSet) {
+            this.MediaInfoSet = new Array();
+            for (let z in params.MediaInfoSet) {
+                let obj = new ImportMediaInfo();
+                obj.deserialize(params.MediaInfoSet[z]);
+                this.MediaInfoSet.push(obj);
+            }
+        }
+
+        if (params.Owner) {
+            let obj = new Entity();
+            obj.deserialize(params.Owner)
+            this.Owner = obj;
+        }
+        this.ClassPath = 'ClassPath' in params ? params.ClassPath : null;
+
+    }
+}
+
+/**
+ * ModifyVideoEncodingPreset返回参数结构体
+ * @class
+ */
+class ModifyVideoEncodingPresetResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3415,7 +3819,7 @@ class DescribeJoinTeamsRequest extends  AbstractModel {
         super();
 
         /**
-         * 平台名称，指定访问的平台。
+         * 平台 Id，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
          * @type {string || null}
          */
         this.Platform = null;
@@ -3427,7 +3831,7 @@ class DescribeJoinTeamsRequest extends  AbstractModel {
         this.MemberId = null;
 
         /**
-         * 分页偏移量，默认值：0
+         * 分页偏移量，默认值：0。
          * @type {number || null}
          */
         this.Offset = null;
@@ -3451,6 +3855,51 @@ class DescribeJoinTeamsRequest extends  AbstractModel {
         this.MemberId = 'MemberId' in params ? params.MemberId : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * 视频拆条项目的输入信息。
+ * @class
+ */
+class VideoSegmentationProjectInput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 画布宽高比，取值有：
+<li>16:9；</li>
+<li>9:16；</li>
+<li>2:1。</li>
+默认值 16:9 。
+         * @type {string || null}
+         */
+        this.AspectRatio = null;
+
+        /**
+         * 视频拆条处理模型，不填则默认为手工分割视频。取值 ：
+<li>AI.GameHighlights.PUBG：和平精英集锦 ;</li>
+<li>AI.GameHighlights.Honor OfKings：王者荣耀集锦 ;</li>
+<li>AI.SportHighlights.Football：足球集锦 </li>
+<li>AI.SportHighlights.Basketball：篮球集锦 ；</li>
+<li>AI.PersonSegmentation：人物集锦  ;</li>
+<li>AI.NewsSegmentation：新闻拆条。</li>
+         * @type {string || null}
+         */
+        this.ProcessModel = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AspectRatio = 'AspectRatio' in params ? params.AspectRatio : null;
+        this.ProcessModel = 'ProcessModel' in params ? params.ProcessModel : null;
 
     }
 }
@@ -3512,8 +3961,7 @@ class CreateProjectResponse extends  AbstractModel {
         this.ProjectId = null;
 
         /**
-         * 输入源推流信息。
- <li> 当 Catagory 为 STREAM_CONNECT 时，数组返回长度为 2 ，第 0 个代表主输入源，第 1 个代表备输入源。只有当各自输入源类型为推流时才有有效内容。</li>
+         * <li> 当 Catagory 为 STREAM_CONNECT 时，数组返回长度为2 ，第0个代表主输入源推流信息，第1个代表备输入源推流信息。只有当各自输入源类型为推流时才有有效内容。</li>
          * @type {Array.<RtmpPushInputInfo> || null}
          */
         this.RtmpPushInputInfoSet = null;
@@ -3632,6 +4080,114 @@ class DeleteProjectResponse extends  AbstractModel {
 }
 
 /**
+ * 视频编码配置中的视频设置信息
+ * @class
+ */
+class VideoEncodingPresetVideoSetting extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 视频流的编码格式，可选值：
+<li>H264：H.264 编码。</li>
+         * @type {string || null}
+         */
+        this.Codec = null;
+
+        /**
+         * 视频短边尺寸，取值范围： [128, 4096]，单位：px。
+视频最后的分辨率，根据短边尺寸和宽高比进行计算。
+例：如果项目的宽高比是 16：9 ：
+<li>短边尺寸为 1080，则导出视频的分辨率为 1920 * 1080。</li>
+<li>短边尺寸为 720，则导出视频的分辨率为 1280 * 720。</li>
+如果项目的宽高比是 9：16 ：
+<li>短边尺寸为 1080，则导出视频的分辨率为 1080 * 1920。</li>
+<li>短边尺寸为 720，则导出视频的分辨率为 720 * 1280。</li>
+默认值：1080。
+         * @type {number || null}
+         */
+        this.ShortEdge = null;
+
+        /**
+         * 指定码率，单位 bps。当该参数为'0'时则不强制限定码率。
+默认值：0。
+         * @type {number || null}
+         */
+        this.Bitrate = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Codec = 'Codec' in params ? params.Codec : null;
+        this.ShortEdge = 'ShortEdge' in params ? params.ShortEdge : null;
+        this.Bitrate = 'Bitrate' in params ? params.Bitrate : null;
+
+    }
+}
+
+/**
+ * 雪碧图
+ * @class
+ */
+class MediaImageSpriteInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 雪碧图小图的高度。
+         * @type {number || null}
+         */
+        this.Height = null;
+
+        /**
+         * 雪碧图小图的宽度。
+         * @type {number || null}
+         */
+        this.Width = null;
+
+        /**
+         * 雪碧图小图的总数量。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 截取雪碧图输出的地址。
+         * @type {Array.<string> || null}
+         */
+        this.ImageUrlSet = null;
+
+        /**
+         * 雪碧图子图位置与时间关系的 WebVtt 文件地址。WebVtt 文件表明了各个雪碧图小图对应的时间点，以及在雪碧大图里的坐标位置，一般被播放器用于实现预览。
+         * @type {string || null}
+         */
+        this.WebVttUrl = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Height = 'Height' in params ? params.Height : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.ImageUrlSet = 'ImageUrlSet' in params ? params.ImageUrlSet : null;
+        this.WebVttUrl = 'WebVttUrl' in params ? params.WebVttUrl : null;
+
+    }
+}
+
+/**
  * DeleteClass请求参数结构体
  * @class
  */
@@ -3694,13 +4250,13 @@ class CreateLinkRequest extends  AbstractModel {
         super();
 
         /**
-         * 平台名称，指定访问的平台。
+         * 平台 Id，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
          * @type {string || null}
          */
         this.Platform = null;
 
         /**
-         * 链接类型，取值有:
+         * 链接类型，可取值有:
 <li>CLASS: 分类链接；</li>
 <li> MATERIAL：媒体文件链接。</li>
          * @type {string || null}
@@ -3720,7 +4276,7 @@ class CreateLinkRequest extends  AbstractModel {
         this.Owner = null;
 
         /**
-         * 目标资源Id。取值：
+         * 目标资源Id。可取值有：
 <li>当 Type 为 MATERIAL 时填媒体 ID；</li>
 <li>当 Type 为 CLASS 时填写分类路径。</li>
          * @type {string || null}
@@ -3740,7 +4296,7 @@ class CreateLinkRequest extends  AbstractModel {
         this.ClassPath = null;
 
         /**
-         * 操作者。填写用户的 Id，用于标识调用者及校验操作权限。
+         * 操作者。如不填，默认为 `cmeid_system`，表示平台管理员操作，可以创建任意源及目标资源的链接。如果指定操作者，则操作者必须对源资源有读权限，对目标媒体有写权限。
          * @type {string || null}
          */
         this.Operator = null;
@@ -3874,18 +4430,18 @@ class DescribeMaterialsResponse extends  AbstractModel {
 }
 
 /**
- * HandleStreamConnectProject返回参数结构体
+ * CreateVideoEncodingPreset返回参数结构体
  * @class
  */
-class HandleStreamConnectProjectResponse extends  AbstractModel {
+class CreateVideoEncodingPresetResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 输入源推流地址，当 Operation 取值 AddInput 且 InputType 为 RtmpPush 类型时有效。
-         * @type {string || null}
+         * 模板 ID。
+         * @type {number || null}
          */
-        this.StreamInputRtmpPushUrl = null;
+        this.Id = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3902,8 +4458,60 @@ class HandleStreamConnectProjectResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.StreamInputRtmpPushUrl = 'StreamInputRtmpPushUrl' in params ? params.StreamInputRtmpPushUrl : null;
+        this.Id = 'Id' in params ? params.Id : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 视频编码配置的视频设置更新信息
+ * @class
+ */
+class VideoEncodingPresetVideoSettingForUpdate extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 视频短边尺寸，取值范围： [128, 4096]，单位：px。
+视频最后的分辨率，根据短边尺寸和宽高比进行计算。
+例：如果项目的宽高比是 16：9 ：
+<li>短边尺寸为 1080，则导出视频的分辨率为 1920 * 1080。</li>
+<li>短边尺寸为 720，则导出视频的分辨率为 1280 * 720。</li>
+如果项目的宽高比是 9：16 ：
+<li>短边尺寸为 1080，则导出视频的分辨率为 1080 * 1920。</li>
+<li>短边尺寸为 720，则导出视频的分辨率为 720 * 1280。</li>
+不填则不修改。
+         * @type {number || null}
+         */
+        this.ShortEdge = null;
+
+        /**
+         * 指定码率，单位 bps。当该参数为'0' 时则不强制限定码率。
+不填则不修改。
+         * @type {number || null}
+         */
+        this.Bitrate = null;
+
+        /**
+         * 指定帧率。单位 Hz。
+不填则不修改。
+         * @type {number || null}
+         */
+        this.FrameRate = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ShortEdge = 'ShortEdge' in params ? params.ShortEdge : null;
+        this.Bitrate = 'Bitrate' in params ? params.Bitrate : null;
+        this.FrameRate = 'FrameRate' in params ? params.FrameRate : null;
 
     }
 }
@@ -3996,7 +4604,7 @@ class SwitcherPgmOutputConfig extends  AbstractModel {
 }
 
 /**
- * 云剪导出信息。
+ * 多媒体创作引擎导出信息。
  * @class
  */
 class CMEExportInfo extends  AbstractModel {
@@ -4022,7 +4630,7 @@ class CMEExportInfo extends  AbstractModel {
         this.Description = null;
 
         /**
-         * 导出的媒体分类路径，长度不能超过15字符。
+         * 导出的媒体分类路径，长度不能超过15字符。不存在默认创建。
          * @type {string || null}
          */
         this.ClassPath = null;
@@ -4080,7 +4688,7 @@ class MoveResourceRequest extends  AbstractModel {
         super();
 
         /**
-         * 平台名称，指定访问的平台。
+         * 平台 Id，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
          * @type {string || null}
          */
         this.Platform = null;
@@ -4098,7 +4706,7 @@ class MoveResourceRequest extends  AbstractModel {
         this.DestinationResource = null;
 
         /**
-         * 操作者。填写用户的 Id，用于标识调用者及校验资源访问以及写权限。
+         * 操作者。如不填，默认为 `cmeid_system`，表示平台管理员操作，可以移动任务资源。如果指定操作者，则操作者必须对源及目标资源有写权限。
          * @type {string || null}
          */
         this.Operator = null;
@@ -4167,7 +4775,7 @@ class ImportMediaToProjectRequest extends  AbstractModel {
         super();
 
         /**
-         * 平台名称，指定访问的平台。
+         * 平台 Id，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
          * @type {string || null}
          */
         this.Platform = null;
@@ -4182,7 +4790,8 @@ class ImportMediaToProjectRequest extends  AbstractModel {
          * 导入媒资类型，取值：
 <li>VOD：云点播文件；</li>
 <li>EXTERNAL：媒资绑定。</li>
-注意：如果不填默认为云点播文件。
+
+注意：如果不填默认为云点播文件，如果媒体存储在非腾讯云点播中，都需要使用媒资绑定。
          * @type {string || null}
          */
         this.SourceType = null;
@@ -4200,21 +4809,22 @@ class ImportMediaToProjectRequest extends  AbstractModel {
         this.ExternalMediaInfo = null;
 
         /**
-         * 媒体名称，不能超过30个字符。
+         * 媒体名称，不能超过30个字符。如果不填，则媒体名称为点播媒资文件名称。
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * 媒体预处理任务模板 ID，取值：
-<li>10：进行编辑预处理。</li>
-注意：如果填0则不进行处理。
+         * 媒体预处理配置 ID，取值：
+<li>10：进行视频编辑预处理。</li>
+
+注意：如果填0或者不填则不进行处理，如果原始视频不可在浏览器直接播放将无法在编辑页面编辑。
          * @type {number || null}
          */
         this.PreProcessDefinition = null;
 
         /**
-         * 操作者。填写用户的 Id，用于标识调用者及校验项目和媒体文件访问权限。
+         * 操作者。如不填，默认为 `cmeid_system`，表示平台管理员操作，可以向所有视频编辑项目导入媒体；如果指定操作者，则操作者必须为项目所有者。
          * @type {string || null}
          */
         this.Operator = null;
@@ -4505,7 +5115,6 @@ class DescribeSharedSpaceResponse extends  AbstractModel {
 
         /**
          * 各个共享空间对应的授权者信息。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<Authorizer> || null}
          */
         this.AuthorizerSet = null;
@@ -4680,24 +5289,18 @@ class MoveClassRequest extends  AbstractModel {
 }
 
 /**
- * 时间范围
+ * 文本类型卡槽信息。
  * @class
  */
-class TimeRange extends  AbstractModel {
+class TextSlotInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 开始时间，使用 ISO 日期格式。
+         * 文本内容。
          * @type {string || null}
          */
-        this.StartTime = null;
-
-        /**
-         * 结束时间，使用 ISO 日期格式。
-         * @type {string || null}
-         */
-        this.EndTime = null;
+        this.Text = null;
 
     }
 
@@ -4708,8 +5311,7 @@ class TimeRange extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Text = 'Text' in params ? params.Text : null;
 
     }
 }
@@ -4962,7 +5564,7 @@ class ModifyTeamRequest extends  AbstractModel {
         super();
 
         /**
-         * 平台名称，指定访问的平台。
+         * 平台 Id，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
          * @type {string || null}
          */
         this.Platform = null;
@@ -4974,13 +5576,13 @@ class ModifyTeamRequest extends  AbstractModel {
         this.TeamId = null;
 
         /**
-         * 团队名称，不能超过 30 个字符。
+         * 团队名称。团队名称不能置空，并且不能超过30个字符。
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * 操作者。填写用户的 Id，用于标识调用者及校验操作权限。
+         * 操作者。如不填，默认为 `cmeid_system`，表示平台管理员操作，可以修改所有团队的信息。如果指定操作者，则操作者必须为团队管理员或者所有者。
          * @type {string || null}
          */
         this.Operator = null;
@@ -5011,7 +5613,7 @@ class ModifyTeamMemberRequest extends  AbstractModel {
         super();
 
         /**
-         * 平台名称，指定访问的平台。
+         * 平台 Id，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
          * @type {string || null}
          */
         this.Platform = null;
@@ -5029,13 +5631,13 @@ class ModifyTeamMemberRequest extends  AbstractModel {
         this.MemberId = null;
 
         /**
-         * 成员备注，允许设置备注为空，不为空时长度不能超过15个字符。
+         * 成员备注，长度不能超过15个字符。
          * @type {string || null}
          */
         this.Remark = null;
 
         /**
-         * 成员角色，取值：
+         * 成员角色，可取值有：
 <li>Admin：团队管理员；</li>
 <li>Member：普通成员。</li>
          * @type {string || null}
@@ -5043,7 +5645,7 @@ class ModifyTeamMemberRequest extends  AbstractModel {
         this.Role = null;
 
         /**
-         * 操作者。填写用户的 Id，用于标识调用者及校验操作权限。
+         * 操作者。如不填，默认为 `cmeid_system`，表示平台管理员操作，可以个改任意团队成员的信息。如果指定操作者，则操作者必须为团队的管理员或者所有者。
          * @type {string || null}
          */
         this.Operator = null;
@@ -5063,6 +5665,72 @@ class ModifyTeamMemberRequest extends  AbstractModel {
         this.Remark = 'Remark' in params ? params.Remark : null;
         this.Role = 'Role' in params ? params.Role : null;
         this.Operator = 'Operator' in params ? params.Operator : null;
+
+    }
+}
+
+/**
+ * 媒体移动事件
+ * @class
+ */
+class MaterialMovedEvent extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 要移动的媒体 Id 列表。
+         * @type {Array.<string> || null}
+         */
+        this.MaterialIdSet = null;
+
+        /**
+         * 源媒体归属。
+         * @type {Entity || null}
+         */
+        this.SourceOwner = null;
+
+        /**
+         * 源媒体分类路径。
+         * @type {string || null}
+         */
+        this.SourceClassPath = null;
+
+        /**
+         * 目标媒体分类归属。
+         * @type {Entity || null}
+         */
+        this.DestinationOwner = null;
+
+        /**
+         * 目标媒体分类路径。
+         * @type {string || null}
+         */
+        this.DestinationClassPath = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MaterialIdSet = 'MaterialIdSet' in params ? params.MaterialIdSet : null;
+
+        if (params.SourceOwner) {
+            let obj = new Entity();
+            obj.deserialize(params.SourceOwner)
+            this.SourceOwner = obj;
+        }
+        this.SourceClassPath = 'SourceClassPath' in params ? params.SourceClassPath : null;
+
+        if (params.DestinationOwner) {
+            let obj = new Entity();
+            obj.deserialize(params.DestinationOwner)
+            this.DestinationOwner = obj;
+        }
+        this.DestinationClassPath = 'DestinationClassPath' in params ? params.DestinationClassPath : null;
 
     }
 }
@@ -5250,6 +5918,72 @@ class MaterialBasicInfo extends  AbstractModel {
 }
 
 /**
+ * 视频导出完成事件。
+ * @class
+ */
+class VideoExportCompletedEvent extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务 Id。
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 任务状态，取值有：
+<li>SUCCESS：成功；</li>
+<li>FAIL：失败。</li>
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 错误码，取值有：
+<li>0：成功；</li>
+<li>其他值：失败。</li>
+         * @type {number || null}
+         */
+        this.ErrCode = null;
+
+        /**
+         * 错误信息。
+         * @type {string || null}
+         */
+        this.ErrMsg = null;
+
+        /**
+         * 任务输出。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {VideoEditProjectOutput || null}
+         */
+        this.Output = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
+        this.ErrMsg = 'ErrMsg' in params ? params.ErrMsg : null;
+
+        if (params.Output) {
+            let obj = new VideoEditProjectOutput();
+            obj.deserialize(params.Output)
+            this.Output = obj;
+        }
+
+    }
+}
+
+/**
  * 资源信息，包含资源以及归属信息
  * @class
  */
@@ -5296,6 +6030,43 @@ class ResourceInfo extends  AbstractModel {
 }
 
 /**
+ * 媒体处理视频合成任务的预处理操作。
+ * @class
+ */
+class MediaPreprocessOperation extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 预处理操作的类型，取值范围：
+<li>ImageTextMask：图片文字遮罩。</li>
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 预处理操作参数。
+当 Type 取值 ImageTextMask 时，参数为要保留的文字。
+         * @type {Array.<string> || null}
+         */
+        this.Args = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Args = 'Args' in params ? params.Args : null;
+
+    }
+}
+
+/**
  * 加入的团队信息
  * @class
  */
@@ -5316,7 +6087,7 @@ class JoinTeamInfo extends  AbstractModel {
         this.Name = null;
 
         /**
-         * 团队成员个数
+         * 团队成员个数。
          * @type {number || null}
          */
         this.MemberCount = null;
@@ -5356,7 +6127,7 @@ class DescribeResourceAuthorizationRequest extends  AbstractModel {
         super();
 
         /**
-         * 平台名称，指定访问的平台。
+         * 平台 Id，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
          * @type {string || null}
          */
         this.Platform = null;
@@ -5374,7 +6145,7 @@ class DescribeResourceAuthorizationRequest extends  AbstractModel {
         this.Resource = null;
 
         /**
-         * 操作者。填写用户的 Id，用于标识调用者及校验操作权限。
+         * 操作者。如不填，默认为 `cmeid_system`，表示平台管理员操作，可以查询任意资源的被授权情况。如果指定操作者，则操作者必须对被授权资源有读权限。
          * @type {string || null}
          */
         this.Operator = null;
@@ -5449,19 +6220,27 @@ class SlotInfo extends  AbstractModel {
         this.Id = null;
 
         /**
-         * 素材类型，同素材素材，可取值有：
-<li> AUDIO :音频;</li>
-<li> VIDEO :视频;</li>
-<li> IMAGE :图片。</li>
+         * 卡槽类型，可取值有：
+<li> AUDIO：音频卡槽，可替换素材类型为 AUDIO 的音频素材;</li>
+<li> VIDEO：视频卡槽，可替换素材类型为 VIDEO 的视频素材;</li>
+<li> IMAGE：图片卡槽，可替换素材类型为 IMAGE 的图片素材;</li>
+<li> TEXT：文本卡槽，可替换文本内容。</li>
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * 默认素材 Id。
+         * 默认素材ID。当卡槽类型为 AUDIO，VIDEO，或 IMAGE 中的一种时有效。
          * @type {string || null}
          */
         this.DefaultMaterialId = null;
+
+        /**
+         * 默认文本卡槽信息。当卡槽类型为 TEXT 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {TextSlotInfo || null}
+         */
+        this.DefaultTextSlotInfo = null;
 
         /**
          * 素材时长，单位秒。
@@ -5481,6 +6260,12 @@ class SlotInfo extends  AbstractModel {
         this.Id = 'Id' in params ? params.Id : null;
         this.Type = 'Type' in params ? params.Type : null;
         this.DefaultMaterialId = 'DefaultMaterialId' in params ? params.DefaultMaterialId : null;
+
+        if (params.DefaultTextSlotInfo) {
+            let obj = new TextSlotInfo();
+            obj.deserialize(params.DefaultTextSlotInfo)
+            this.DefaultTextSlotInfo = obj;
+        }
         this.Duration = 'Duration' in params ? params.Duration : null;
 
     }
@@ -5495,16 +6280,42 @@ class MediaReplacementInfo extends  AbstractModel {
         super();
 
         /**
-         * 素材 ID。
+         * 替换的媒体类型，取值有：
+<li>CMEMaterialId：替换的媒体类型为媒体 ID；</li>
+<li>ImageUrl：替换的媒体类型为图片 URL；</li>
+
+注：默认为 CMEMaterialId 。
+         * @type {string || null}
+         */
+        this.MediaType = null;
+
+        /**
+         * 媒体 ID。
+当媒体类型取值为 CMEMaterialId 时有效。
          * @type {string || null}
          */
         this.MaterialId = null;
+
+        /**
+         * 媒体 URL。
+当媒体类型取值为 ImageUrl 时有效，
+图片仅支持 jpg、png 格式，且大小不超过 2M 。
+         * @type {string || null}
+         */
+        this.MediaUrl = null;
 
         /**
          * 替换媒体选取的开始时间，单位为秒，默认为 0。
          * @type {number || null}
          */
         this.StartTimeOffset = null;
+
+        /**
+         * 预处理操作。
+注：目前该功能暂不支持，请勿使用。
+         * @type {MediaPreprocessOperation || null}
+         */
+        this.PreprocessOperation = null;
 
     }
 
@@ -5515,8 +6326,92 @@ class MediaReplacementInfo extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.MediaType = 'MediaType' in params ? params.MediaType : null;
         this.MaterialId = 'MaterialId' in params ? params.MaterialId : null;
+        this.MediaUrl = 'MediaUrl' in params ? params.MediaUrl : null;
         this.StartTimeOffset = 'StartTimeOffset' in params ? params.StartTimeOffset : null;
+
+        if (params.PreprocessOperation) {
+            let obj = new MediaPreprocessOperation();
+            obj.deserialize(params.PreprocessOperation)
+            this.PreprocessOperation = obj;
+        }
+
+    }
+}
+
+/**
+ * 任务基础信息。
+ * @class
+ */
+class TaskBaseInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务 Id。
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 任务类型，取值有：
+<li>VIDEO_EDIT_PROJECT_EXPORT：项目导出。</li>
+         * @type {string || null}
+         */
+        this.TaskType = null;
+
+        /**
+         * 任务状态，取值有：
+<li>PROCESSING：处理中：</li>
+<li>SUCCESS：成功；</li>
+<li>FAIL：失败。</li>
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 任务进度，取值为：0~100。
+         * @type {number || null}
+         */
+        this.Progress = null;
+
+        /**
+         * 错误码。
+<li>0：成功；</li>
+<li>其他值：失败。</li>
+         * @type {number || null}
+         */
+        this.ErrCode = null;
+
+        /**
+         * 错误信息。
+         * @type {string || null}
+         */
+        this.ErrMsg = null;
+
+        /**
+         * 创建时间，格式按照 ISO 8601 标准表示。
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.TaskType = 'TaskType' in params ? params.TaskType : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Progress = 'Progress' in params ? params.Progress : null;
+        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
+        this.ErrMsg = 'ErrMsg' in params ? params.ErrMsg : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
 
     }
 }
@@ -5640,7 +6535,7 @@ class AddTeamMemberRequest extends  AbstractModel {
         super();
 
         /**
-         * 平台名称，指定访问的平台。
+         * 平台 Id，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
          * @type {string || null}
          */
         this.Platform = null;
@@ -5658,7 +6553,7 @@ class AddTeamMemberRequest extends  AbstractModel {
         this.TeamMembers = null;
 
         /**
-         * 操作者。填写用户的 Id，用于标识调用者及校验操作权限。
+         * 操作者。如不填，默认为 `cmeid_system`，表示平台管理员操作，可以向任意团队中添加成员。如果指定操作者，则操作者必须为管理员或者团队所有者。
          * @type {string || null}
          */
         this.Operator = null;
@@ -5689,24 +6584,52 @@ class AddTeamMemberRequest extends  AbstractModel {
 }
 
 /**
- * ExportVideoEditProject返回参数结构体
+ * GrantResourceAuthorization请求参数结构体
  * @class
  */
-class ExportVideoEditProjectResponse extends  AbstractModel {
+class GrantResourceAuthorizationRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 任务 Id。
+         * 平台 Id，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
          * @type {string || null}
          */
-        this.TaskId = null;
+        this.Platform = null;
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 资源归属者，个人或者团队。
+         * @type {Entity || null}
+         */
+        this.Owner = null;
+
+        /**
+         * 被授权资源。
+         * @type {Array.<Resource> || null}
+         */
+        this.Resources = null;
+
+        /**
+         * 被授权目标，个人或者团队。
+         * @type {Array.<Entity> || null}
+         */
+        this.Authorizees = null;
+
+        /**
+         * 详细授权值。 取值有：
+<li>R：可读，可以浏览媒体，但不能使用该媒体文件（将其添加到 Project），或复制到自己的媒资库中</li>
+<li>X：可用，可以使用该素材（将其添加到 Project），但不能将其复制到自己的媒资库中，意味着被授权者无法将该资源进一步扩散给其他个人或团队。</li>
+<li>C：可复制，既可以使用该素材（将其添加到 Project），也可以将其复制到自己的媒资库中。</li>
+<li>W：可修改、删除媒资。</li>
+         * @type {Array.<string> || null}
+         */
+        this.Permissions = null;
+
+        /**
+         * 操作者。如不填，默认为 `cmeid_system`，表示平台管理员操作，可以授权任意归属者的资源。如果指定操作者，则操作者必须对资源拥有写权限。
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Operator = null;
 
     }
 
@@ -5717,8 +6640,68 @@ class ExportVideoEditProjectResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Platform = 'Platform' in params ? params.Platform : null;
+
+        if (params.Owner) {
+            let obj = new Entity();
+            obj.deserialize(params.Owner)
+            this.Owner = obj;
+        }
+
+        if (params.Resources) {
+            this.Resources = new Array();
+            for (let z in params.Resources) {
+                let obj = new Resource();
+                obj.deserialize(params.Resources[z]);
+                this.Resources.push(obj);
+            }
+        }
+
+        if (params.Authorizees) {
+            this.Authorizees = new Array();
+            for (let z in params.Authorizees) {
+                let obj = new Entity();
+                obj.deserialize(params.Authorizees[z]);
+                this.Authorizees.push(obj);
+            }
+        }
+        this.Permissions = 'Permissions' in params ? params.Permissions : null;
+        this.Operator = 'Operator' in params ? params.Operator : null;
+
+    }
+}
+
+/**
+ * 时间范围
+ * @class
+ */
+class TimeRange extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 开始时间，使用 ISO 日期格式。
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 结束时间，使用 ISO 日期格式。
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
 
     }
 }
@@ -5808,7 +6791,7 @@ class ListMediaRequest extends  AbstractModel {
         super();
 
         /**
-         * 平台名称，指定访问的平台。
+         * 平台 Id，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
          * @type {string || null}
          */
         this.Platform = null;
@@ -5838,7 +6821,7 @@ class ListMediaRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * 操作者。填写用户的 Id，用于标识调用者及校验对媒体的访问权限。
+         * 操作者。如不填，默认为 `cmeid_system`，表示平台管理员操作，可以浏览任意分类的信息。如果指定操作者，则操作者必须对分类有读权限。
          * @type {string || null}
          */
         this.Operator = null;
@@ -5863,6 +6846,34 @@ class ListMediaRequest extends  AbstractModel {
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Operator = 'Operator' in params ? params.Operator : null;
+
+    }
+}
+
+/**
+ * DeleteVideoEncodingPreset返回参数结构体
+ * @class
+ */
+class DeleteVideoEncodingPresetResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5978,7 +6989,7 @@ class GenerateVideoSegmentationSchemeByAiRequest extends  AbstractModel {
         super();
 
         /**
-         * 平台名称，指定访问的平台。
+         * 平台 Id，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
          * @type {string || null}
          */
         this.Platform = null;
@@ -5990,7 +7001,7 @@ class GenerateVideoSegmentationSchemeByAiRequest extends  AbstractModel {
         this.ProjectId = null;
 
         /**
-         * 操作者。填写用户的 Id，用于标识调用者及校验操作权限。
+         * 操作者。如不填，默认为 `cmeid_system`，表示平台管理员操作，可以对任务视频拆条项目发起拆条任务。如果指定操作者，则操作者必须为项目所有者。
          * @type {string || null}
          */
         this.Operator = null;
@@ -6047,6 +7058,90 @@ class LiveStreamClipProjectInput extends  AbstractModel {
 }
 
 /**
+ * 媒体更新事件。
+ * @class
+ */
+class MaterialModifiedEvent extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 媒体 Id。
+         * @type {string || null}
+         */
+        this.MaterialId = null;
+
+        /**
+         * 更新后的媒体名称。如未更新则为空。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 更新后的媒体预置标签列表。如未更新媒体预置标签，则该字段为空数组。
+         * @type {Array.<string> || null}
+         */
+        this.PresetTagIdSet = null;
+
+        /**
+         * 更新后的媒体自定义标签列表。如未更新媒体自定义标签，则该字段为空数组。
+         * @type {Array.<string> || null}
+         */
+        this.TagSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MaterialId = 'MaterialId' in params ? params.MaterialId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.PresetTagIdSet = 'PresetTagIdSet' in params ? params.PresetTagIdSet : null;
+        this.TagSet = 'TagSet' in params ? params.TagSet : null;
+
+    }
+}
+
+/**
+ * HandleStreamConnectProject返回参数结构体
+ * @class
+ */
+class HandleStreamConnectProjectResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 输入源推流地址，当 Operation 取值 AddInput 且 InputType 为 RtmpPush 类型时有效。
+         * @type {string || null}
+         */
+        this.StreamInputRtmpPushUrl = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StreamInputRtmpPushUrl = 'StreamInputRtmpPushUrl' in params ? params.StreamInputRtmpPushUrl : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DeleteTeamMembers请求参数结构体
  * @class
  */
@@ -6055,7 +7150,7 @@ class DeleteTeamMembersRequest extends  AbstractModel {
         super();
 
         /**
-         * 平台名称，指定访问的平台。
+         * 平台 Id，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
          * @type {string || null}
          */
         this.Platform = null;
@@ -6073,7 +7168,7 @@ class DeleteTeamMembersRequest extends  AbstractModel {
         this.MemberIds = null;
 
         /**
-         * 操作者。填写用户的 Id，用于标识调用者及校验操作权限。
+         * 操作者。如不填，默认为 `cmeid_system`，表示平台管理员操作，可以删除所有团队的成员。如果指定操作者，则操作者必须为团队管理员或者所有者。
          * @type {string || null}
          */
         this.Operator = null;
@@ -6104,7 +7199,7 @@ class ExportVideoByTemplateRequest extends  AbstractModel {
         super();
 
         /**
-         * 平台名称，指定访问的平台。
+         * 平台 Id，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
          * @type {string || null}
          */
         this.Platform = null;
@@ -6116,7 +7211,7 @@ class ExportVideoByTemplateRequest extends  AbstractModel {
         this.TemplateId = null;
 
         /**
-         * 导出模板 Id，目前不支持自定义创建，只支持下面的预置模板 Id。
+         * 导出视频预设配置 Id，推荐优先使用下面的默认预设配置 Id，有其他需求可通过接口定制预设配置。
 <li>10：分辨率为 480P，输出视频格式为 MP4；</li>
 <li>11：分辨率为 720P，输出视频格式为 MP4；</li>
 <li>12：分辨率为 1080P，输出视频格式为 MP4。</li>
@@ -6125,9 +7220,9 @@ class ExportVideoByTemplateRequest extends  AbstractModel {
         this.Definition = null;
 
         /**
-         * 导出目标，可取值为：
-<li>CME：云剪，即导出为云剪媒体；</li>
-<li>VOD：云点播，即导出为云点播媒资。</li>
+         * 导出目标，指定导出视频的目标媒资库，可取值有：
+<li>CME：多媒体创作引擎，即导出为多媒体创作引擎媒资库，此导出目标在云点播媒资库依然可见；</li>
+<li>VOD：云点播，即导出为云点播媒资库，此导出目标在多媒体创作引擎媒资库将不可见。</li>
          * @type {string || null}
          */
         this.ExportDestination = null;
@@ -6139,19 +7234,19 @@ class ExportVideoByTemplateRequest extends  AbstractModel {
         this.SlotReplacements = null;
 
         /**
-         * 导出的云剪媒体信息。指定 ExportDestination = CME 时有效。
+         * 导出的多媒体创作引擎媒资信息。当导出目标为 CME 时必填。
          * @type {CMEExportInfo || null}
          */
         this.CMEExportInfo = null;
 
         /**
-         * 导出的云点播媒资信息。指定 ExportDestination = VOD 时有效。
+         * 导出的云点播媒资信息。当导出目标为 VOD 时必填。
          * @type {VODExportInfo || null}
          */
         this.VODExportInfo = null;
 
         /**
-         * 操作者。填写用户的 Id，用于标识调用者及校验项目导出权限。
+         * 操作者。如不填，默认为 `cmeid_system`，表示平台管理员操作，无权限限制。如果指定操作者，则操作者需要有替换媒体及剪辑模板的权限。
          * @type {string || null}
          */
         this.Operator = null;
@@ -6204,13 +7299,13 @@ class DescribePlatformsRequest extends  AbstractModel {
         super();
 
         /**
-         * 平台集合。
+         * 平台 Id 列表。如果不填，则不按平台 Id 进行过滤。
          * @type {Array.<string> || null}
          */
         this.Platforms = null;
 
         /**
-         * 平台绑定的 license Id 集合。
+         * 平台绑定的 License Id 列表。如果不填，则不按平台绑定的 License Id 进行过滤。
          * @type {Array.<string> || null}
          */
         this.LicenseIds = null;
@@ -6222,7 +7317,7 @@ class DescribePlatformsRequest extends  AbstractModel {
         this.Offset = null;
 
         /**
-         * 分页返回的记录条数，默认值：10。
+         * 分页返回的记录条数，默认值：10，最大值：20。
          * @type {number || null}
          */
         this.Limit = null;
@@ -6288,17 +7383,110 @@ class EventContent extends  AbstractModel {
         super();
 
         /**
-         * 事件类型，可取值为：
-<li>Storage.NewFileCreated：新文件产生。</li>
+         * 事件类型，可取值有：
+<li>Storage.NewFileCreated：新文件产生事件；</li>
+<li>Project.StreamConnect.StatusChanged：云转推项目状态变更事件；</li>
+<li>Project.Switcher.StatusChanged：导播台项目状态变更事件；</li>
+<li>Material.Imported：媒体导入事件；</li>
+<li>Material.Added：媒体添加事件；</li>
+<li>Material.Moved：媒体移动事件；</li>
+<li>Material.Modified：媒体变更事件；</li>
+<li>Material.Deleted：媒体删除事件；</li>
+<li>Class.Created：分类新增事件；</li>
+<li>Class.Moved：分类移动事件；</li>
+<li>Class.Deleted：分类删除事件；</li>
+<li>Task.VideoExportCompleted：视频导出完成事件。 </li>
          * @type {string || null}
          */
         this.EventType = null;
 
         /**
-         * 新文件产生事件信息。仅当 EventType 为 Storage.NewFileCreated 时有效。
+         * 操作者，表示触发事件的操作者。如果是 `cmeid_system` 表示平台管理员操作。
+         * @type {string || null}
+         */
+        this.Operator = null;
+
+        /**
+         * 新文件产生事件。仅当 EventType 为 Storage.NewFileCreated 时有效。
          * @type {StorageNewFileCreatedEvent || null}
          */
         this.StorageNewFileCreatedEvent = null;
+
+        /**
+         * 云转推项目状态变更事件。仅当 EventType 为 Project.StreamConnect.StatusChanged 时有效。
+         * @type {ProjectStreamConnectStatusChangedEvent || null}
+         */
+        this.ProjectStreamConnectStatusChangedEvent = null;
+
+        /**
+         * 导播台项目状态变更事件。仅当 EventType 为 Project.Switcher.StatusChanged 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {ProjectSwitcherStatusChangedEvent || null}
+         */
+        this.ProjectSwitcherStatusChangedEvent = null;
+
+        /**
+         * 媒体导入事件。仅当 EventType 为 Material.Imported 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {MaterialImportedEvent || null}
+         */
+        this.MaterialImportedEvent = null;
+
+        /**
+         * 媒体添加事件。仅当 EventType 为 Material.Added 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {MaterialAddedEvent || null}
+         */
+        this.MaterialAddedEvent = null;
+
+        /**
+         * 媒体移动事件。仅当 EventType 为 Material.Moved 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {MaterialMovedEvent || null}
+         */
+        this.MaterialMovedEvent = null;
+
+        /**
+         * 媒体更新事件。仅当 EventType 为 Material.Modified 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {MaterialModifiedEvent || null}
+         */
+        this.MaterialModifiedEvent = null;
+
+        /**
+         * 媒体删除事件。仅当 EventType 为 Material.Deleted 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {MaterialDeletedEvent || null}
+         */
+        this.MaterialDeletedEvent = null;
+
+        /**
+         * 分类创建事件。仅当 EventType 为 Class.Created 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {ClassCreatedEvent || null}
+         */
+        this.ClassCreatedEvent = null;
+
+        /**
+         * 分类移动事件。仅当 EventType 为 Class.Moved 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {ClassMovedEvent || null}
+         */
+        this.ClassMovedEvent = null;
+
+        /**
+         * 分类删除事件。仅当 EventType 为 Class.Deleted 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {ClassDeletedEvent || null}
+         */
+        this.ClassDeletedEvent = null;
+
+        /**
+         * 视频导出完成事件。仅当 EventType 为 Task.VideoExportCompleted 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {VideoExportCompletedEvent || null}
+         */
+        this.VideoExportCompletedEvent = null;
 
     }
 
@@ -6310,11 +7498,78 @@ class EventContent extends  AbstractModel {
             return;
         }
         this.EventType = 'EventType' in params ? params.EventType : null;
+        this.Operator = 'Operator' in params ? params.Operator : null;
 
         if (params.StorageNewFileCreatedEvent) {
             let obj = new StorageNewFileCreatedEvent();
             obj.deserialize(params.StorageNewFileCreatedEvent)
             this.StorageNewFileCreatedEvent = obj;
+        }
+
+        if (params.ProjectStreamConnectStatusChangedEvent) {
+            let obj = new ProjectStreamConnectStatusChangedEvent();
+            obj.deserialize(params.ProjectStreamConnectStatusChangedEvent)
+            this.ProjectStreamConnectStatusChangedEvent = obj;
+        }
+
+        if (params.ProjectSwitcherStatusChangedEvent) {
+            let obj = new ProjectSwitcherStatusChangedEvent();
+            obj.deserialize(params.ProjectSwitcherStatusChangedEvent)
+            this.ProjectSwitcherStatusChangedEvent = obj;
+        }
+
+        if (params.MaterialImportedEvent) {
+            let obj = new MaterialImportedEvent();
+            obj.deserialize(params.MaterialImportedEvent)
+            this.MaterialImportedEvent = obj;
+        }
+
+        if (params.MaterialAddedEvent) {
+            let obj = new MaterialAddedEvent();
+            obj.deserialize(params.MaterialAddedEvent)
+            this.MaterialAddedEvent = obj;
+        }
+
+        if (params.MaterialMovedEvent) {
+            let obj = new MaterialMovedEvent();
+            obj.deserialize(params.MaterialMovedEvent)
+            this.MaterialMovedEvent = obj;
+        }
+
+        if (params.MaterialModifiedEvent) {
+            let obj = new MaterialModifiedEvent();
+            obj.deserialize(params.MaterialModifiedEvent)
+            this.MaterialModifiedEvent = obj;
+        }
+
+        if (params.MaterialDeletedEvent) {
+            let obj = new MaterialDeletedEvent();
+            obj.deserialize(params.MaterialDeletedEvent)
+            this.MaterialDeletedEvent = obj;
+        }
+
+        if (params.ClassCreatedEvent) {
+            let obj = new ClassCreatedEvent();
+            obj.deserialize(params.ClassCreatedEvent)
+            this.ClassCreatedEvent = obj;
+        }
+
+        if (params.ClassMovedEvent) {
+            let obj = new ClassMovedEvent();
+            obj.deserialize(params.ClassMovedEvent)
+            this.ClassMovedEvent = obj;
+        }
+
+        if (params.ClassDeletedEvent) {
+            let obj = new ClassDeletedEvent();
+            obj.deserialize(params.ClassDeletedEvent)
+            this.ClassDeletedEvent = obj;
+        }
+
+        if (params.VideoExportCompletedEvent) {
+            let obj = new VideoExportCompletedEvent();
+            obj.deserialize(params.VideoExportCompletedEvent)
+            this.VideoExportCompletedEvent = obj;
         }
 
     }
@@ -6409,6 +7664,56 @@ class VideoMaterial extends  AbstractModel {
         }
         this.OriginalUrl = 'OriginalUrl' in params ? params.OriginalUrl : null;
         this.VodFileId = 'VodFileId' in params ? params.VodFileId : null;
+
+    }
+}
+
+/**
+ * DescribeVideoEncodingPresets返回参数结构体
+ * @class
+ */
+class DescribeVideoEncodingPresetsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 符合条件的编码配置总个数。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 视频编码配置信息。
+         * @type {Array.<VideoEncodingPreset> || null}
+         */
+        this.VideoEncodingPresetSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.VideoEncodingPresetSet) {
+            this.VideoEncodingPresetSet = new Array();
+            for (let z in params.VideoEncodingPresetSet) {
+                let obj = new VideoEncodingPreset();
+                obj.deserialize(params.VideoEncodingPresetSet[z]);
+                this.VideoEncodingPresetSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6574,53 +7879,59 @@ class DescribeProjectsRequest extends  AbstractModel {
         super();
 
         /**
-         * 平台名称，指定访问的平台。
+         * 平台 Id，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
          * @type {string || null}
          */
         this.Platform = null;
 
         /**
-         * 项目 Id 列表，N 从 0 开始取值，最大 19。
+         * 项目 Id 过滤参数列表，最大支持20个项目 Id 过滤。如果不填不需要项目 Id 进行过滤。
          * @type {Array.<string> || null}
          */
         this.ProjectIds = null;
 
         /**
-         * 画布宽高比集合。
+         * 画布宽高比过滤参数列表。如果不填则不用画布宽高比进行过滤。
          * @type {Array.<string> || null}
          */
         this.AspectRatioSet = null;
 
         /**
-         * 项目类别，取值有：
+         * 项目类型过滤参数列表，取值有：
 <li>VIDEO_EDIT：视频编辑。</li>
 <li>SWITCHER：导播台。</li>
 <li>VIDEO_SEGMENTATION：视频拆条。</li>
 <li>STREAM_CONNECT：云转推。</li>
 <li>RECORD_REPLAY：录制回放。</li>
+
+注：如果不填则不使用项目类型进行过滤。
          * @type {Array.<string> || null}
          */
         this.CategorySet = null;
 
         /**
-         * 项目模式，一个项目可以有多种模式并相互切换。
+         * 项目模式过滤参数列表，一个项目可以有多种模式并相互切换。
 当 Category 为 VIDEO_EDIT 时，可选模式有：
 <li>Default：默认模式。</li>
 <li>VideoEditTemplate：视频编辑模板制作模式。</li>
+
+注：不填不使用项目模式进行过滤。
          * @type {Array.<string> || null}
          */
         this.Modes = null;
 
         /**
-         * 列表排序，支持下列排序字段：
+         * 结果排序方式，支持下列排序字段：
 <li>CreateTime：创建时间；</li>
 <li>UpdateTime：更新时间。</li>
+
+注：如不填，则使用项目创建时间倒序排列。
          * @type {SortBy || null}
          */
         this.Sort = null;
 
         /**
-         * 项目归属者。
+         * 项目所有者，目前仅支持个人项目过滤。
          * @type {Entity || null}
          */
         this.Owner = null;
@@ -6638,7 +7949,7 @@ class DescribeProjectsRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * 操作者。填写用户的 Id，用于标识调用者及校验项目访问权限。
+         * 操作者。如不填，默认为 `cmeid_system`，表示平台管理员操作，可以查询一切用户项目信息。如果指定操作者，则操作者必须为项目所有者。
          * @type {string || null}
          */
         this.Operator = null;
@@ -6720,33 +8031,30 @@ class DescribeLoginStatusResponse extends  AbstractModel {
 }
 
 /**
- * 团队成员信息
+ * 媒体添加事件。
  * @class
  */
-class TeamMemberInfo extends  AbstractModel {
+class MaterialAddedEvent extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 团队成员 ID。
-         * @type {string || null}
+         * 添加的媒体 Id 列表。
+         * @type {Array.<string> || null}
          */
-        this.MemberId = null;
+        this.MaterialIdSet = null;
 
         /**
-         * 团队成员备注。
-         * @type {string || null}
+         * 添加的媒体归属。
+         * @type {Entity || null}
          */
-        this.Remark = null;
+        this.Owner = null;
 
         /**
-         * 团队成员角色，取值：
-<li>Owner：团队所有者，添加团队成员及修改团队成员解决时不能填此角色；</li>
-<li>Admin：团队管理员；</li>
-<li>Member：普通成员。</li>
+         * 添加的媒体分类路径。
          * @type {string || null}
          */
-        this.Role = null;
+        this.ClassPath = null;
 
     }
 
@@ -6757,9 +8065,140 @@ class TeamMemberInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.MemberId = 'MemberId' in params ? params.MemberId : null;
-        this.Remark = 'Remark' in params ? params.Remark : null;
-        this.Role = 'Role' in params ? params.Role : null;
+        this.MaterialIdSet = 'MaterialIdSet' in params ? params.MaterialIdSet : null;
+
+        if (params.Owner) {
+            let obj = new Entity();
+            obj.deserialize(params.Owner)
+            this.Owner = obj;
+        }
+        this.ClassPath = 'ClassPath' in params ? params.ClassPath : null;
+
+    }
+}
+
+/**
+ * CreateVideoEncodingPreset请求参数结构体
+ * @class
+ */
+class CreateVideoEncodingPresetRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 平台名称，指定访问的平台。
+         * @type {string || null}
+         */
+        this.Platform = null;
+
+        /**
+         * 配置名，可用来简单描述该配置的作用。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 封装格式，可选值：
+<li>mp4 ；</li>
+<li>mov 。</li>
+默认值：mp4。
+         * @type {string || null}
+         */
+        this.Container = null;
+
+        /**
+         * 是否去除视频数据，可选值：
+<li>0：保留；</li>
+<li>1：去除。</li>
+默认值：0。
+         * @type {number || null}
+         */
+        this.RemoveVideo = null;
+
+        /**
+         * 是否去除音频数据，可选值：
+<li>0：保留；</li>
+<li>1：去除。</li>
+默认值：0。
+         * @type {number || null}
+         */
+        this.RemoveAudio = null;
+
+        /**
+         * 编码配置的视频设置。默认值参考VideoEncodingPresetVideoSetting 定义。
+         * @type {VideoEncodingPresetVideoSetting || null}
+         */
+        this.VideoSetting = null;
+
+        /**
+         * 编码配置的音频设置。默认值参考VideoEncodingPresetAudioSetting 定义。
+         * @type {VideoEncodingPresetAudioSetting || null}
+         */
+        this.AudioSetting = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Platform = 'Platform' in params ? params.Platform : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Container = 'Container' in params ? params.Container : null;
+        this.RemoveVideo = 'RemoveVideo' in params ? params.RemoveVideo : null;
+        this.RemoveAudio = 'RemoveAudio' in params ? params.RemoveAudio : null;
+
+        if (params.VideoSetting) {
+            let obj = new VideoEncodingPresetVideoSetting();
+            obj.deserialize(params.VideoSetting)
+            this.VideoSetting = obj;
+        }
+
+        if (params.AudioSetting) {
+            let obj = new VideoEncodingPresetAudioSetting();
+            obj.deserialize(params.AudioSetting)
+            this.AudioSetting = obj;
+        }
+
+    }
+}
+
+/**
+ * 云转推项目状态变更事件。
+ * @class
+ */
+class ProjectStreamConnectStatusChangedEvent extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 项目 Id。
+         * @type {string || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * 项目状态，取值有：
+<li>Working：云转推推流开始；</li>
+<li>Stopped：云转推推流结束。</li>
+         * @type {string || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -6779,7 +8218,7 @@ class DescribeJoinTeamsResponse extends  AbstractModel {
         this.TotalCount = null;
 
         /**
-         * 团队列表
+         * 团队列表。
          * @type {Array.<JoinTeamInfo> || null}
          */
         this.TeamSet = null;
@@ -6823,7 +8262,7 @@ class DescribeTeamMembersRequest extends  AbstractModel {
         super();
 
         /**
-         * 平台名称，指定访问的平台。
+         * 平台 Id，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
          * @type {string || null}
          */
         this.Platform = null;
@@ -6853,7 +8292,7 @@ class DescribeTeamMembersRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * 操作者。填写用户的 Id，用于标识调用者及校验操作权限。
+         * 操作者。如不填，默认为 `cmeid_system`，表示平台管理员操作，可以拉取任意团队成员的信息。如果指定操作者，则操作者必须为团队成员。
          * @type {string || null}
          */
         this.Operator = null;
@@ -7022,6 +8461,12 @@ class VideoEditTemplateMaterial extends  AbstractModel {
          */
         this.SlotSet = null;
 
+        /**
+         * 模板预览视频 URL 地址 。
+         * @type {string || null}
+         */
+        this.PreviewVideoUrl = null;
+
     }
 
     /**
@@ -7041,6 +8486,99 @@ class VideoEditTemplateMaterial extends  AbstractModel {
                 this.SlotSet.push(obj);
             }
         }
+        this.PreviewVideoUrl = 'PreviewVideoUrl' in params ? params.PreviewVideoUrl : null;
+
+    }
+}
+
+/**
+ * 视频导出扩展参数
+ * @class
+ */
+class VideoExportExtensionArgs extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 封装格式，可选值：
+<li>mp4 </li>
+<li>mov </li>
+不填则使用视频导出编码配置。
+         * @type {string || null}
+         */
+        this.Container = null;
+
+        /**
+         * 视频短边尺寸，取值范围： [128, 4096]，单位：px。
+视频最后的分辨率，根据短边尺寸和宽高比进行计算。
+例如：项目的宽高比是 16：9 ：
+<li>短边尺寸为 1080，则导出视频的分辨率为 1920 * 1080。</li>
+<li>短边尺寸为 720，则导出视频的分辨率为 1280 * 720</li>
+不填则使用视频导出编码配置。
+         * @type {number || null}
+         */
+        this.ShortEdge = null;
+
+        /**
+         * 指定码率，单位 bps。当该参数为 0 时则不强制限定码率。
+不填则使用视频导出编码配置。
+         * @type {number || null}
+         */
+        this.VideoBitrate = null;
+
+        /**
+         * 帧率。取值范围：[15, 60]，不填默认值为 25。
+         * @type {number || null}
+         */
+        this.FrameRate = null;
+
+        /**
+         * 是否去除视频数据，可选值：
+<li>0：保留；</li>
+<li>1：去除。</li>
+不填则使用视频导出编码配置。
+         * @type {number || null}
+         */
+        this.RemoveVideo = null;
+
+        /**
+         * 是否去除音频数据，可选值：
+<li>0：保留；</li>
+<li>1：去除。</li>
+不填则使用视频导出编码配置。
+         * @type {number || null}
+         */
+        this.RemoveAudio = null;
+
+        /**
+         * 片段起始时间，单位：毫秒。
+         * @type {number || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 片段结束时间，单位：毫秒。
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Container = 'Container' in params ? params.Container : null;
+        this.ShortEdge = 'ShortEdge' in params ? params.ShortEdge : null;
+        this.VideoBitrate = 'VideoBitrate' in params ? params.VideoBitrate : null;
+        this.FrameRate = 'FrameRate' in params ? params.FrameRate : null;
+        this.RemoveVideo = 'RemoveVideo' in params ? params.RemoveVideo : null;
+        this.RemoveAudio = 'RemoveAudio' in params ? params.RemoveAudio : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
 
     }
 }
@@ -7061,10 +8599,11 @@ class SlotReplacementInfo extends  AbstractModel {
 
         /**
          * 替换类型，可取值有：
-<li> AUDIO :音频;</li>
-<li> VIDEO :视频;</li>
-<li> IMAGE :图片。</li>
-注意：这里必须保证替换的素材类型与模板轨道数据的素材类型一致。
+<li> AUDIO ：音频；</li>
+<li> VIDEO ：视频；</li>
+<li> IMAGE ：图片；</li>
+<li> TEXT ：文本。</li>
+注意：这里必须保证替换的素材类型与模板轨道数据的素材类型一致。如果替换的类型为Text,，则必须保证模板轨道数据中相应卡槽的位置标记的是文本。
          * @type {string || null}
          */
         this.ReplacementType = null;
@@ -7074,6 +8613,12 @@ class SlotReplacementInfo extends  AbstractModel {
          * @type {MediaReplacementInfo || null}
          */
         this.MediaReplacementInfo = null;
+
+        /**
+         * 文本替换信息，仅当要替换的卡槽类型为文本时有效。
+         * @type {TextReplacementInfo || null}
+         */
+        this.TextReplacementInfo = null;
 
     }
 
@@ -7091,6 +8636,12 @@ class SlotReplacementInfo extends  AbstractModel {
             let obj = new MediaReplacementInfo();
             obj.deserialize(params.MediaReplacementInfo)
             this.MediaReplacementInfo = obj;
+        }
+
+        if (params.TextReplacementInfo) {
+            let obj = new TextReplacementInfo();
+            obj.deserialize(params.TextReplacementInfo)
+            this.TextReplacementInfo = obj;
         }
 
     }
@@ -7173,7 +8724,7 @@ class RevokeResourceAuthorizationRequest extends  AbstractModel {
         super();
 
         /**
-         * 平台名称，指定访问的平台。
+         * 平台 Id，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
          * @type {string || null}
          */
         this.Platform = null;
@@ -7207,7 +8758,7 @@ class RevokeResourceAuthorizationRequest extends  AbstractModel {
         this.Permissions = null;
 
         /**
-         * 操作者。填写用户的 Id，用于标识调用者及校验操作权限。
+         * 操作者。如不填，默认为 `cmeid_system`，表示平台管理员操作，撤销任意资源的授权权限。如果指定操作者，则操作者必须对被授权资源有写权限。
          * @type {string || null}
          */
         this.Operator = null;
@@ -7261,7 +8812,7 @@ class DescribeTaskDetailRequest extends  AbstractModel {
         super();
 
         /**
-         * 平台名称，指定访问的平台。
+         * 平台 Id，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
          * @type {string || null}
          */
         this.Platform = null;
@@ -7273,7 +8824,7 @@ class DescribeTaskDetailRequest extends  AbstractModel {
         this.TaskId = null;
 
         /**
-         * 操作者。填写用户的 Id，用于标识调用者及校验对任务的访问权限。
+         * 操作者。如不填，默认为 `cmeid_system`，表示平台管理员操作，可以获取任意任务信息。如果指定操作者，则操作者需要是任务发起者。
          * @type {string || null}
          */
         this.Operator = null;
@@ -7290,6 +8841,137 @@ class DescribeTaskDetailRequest extends  AbstractModel {
         this.Platform = 'Platform' in params ? params.Platform : null;
         this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.Operator = 'Operator' in params ? params.Operator : null;
+
+    }
+}
+
+/**
+ * ModifyVideoEncodingPreset请求参数结构体
+ * @class
+ */
+class ModifyVideoEncodingPresetRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 平台名称，指定访问的平台。
+         * @type {string || null}
+         */
+        this.Platform = null;
+
+        /**
+         * 配置 ID。
+         * @type {number || null}
+         */
+        this.Id = null;
+
+        /**
+         * 更改后的视频编码配置名，不填则不修改。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 是否去除视频数据，可选值：
+<li>0：保留；</li>
+<li>1：去除。</li>
+默认值：0。
+         * @type {number || null}
+         */
+        this.RemoveVideo = null;
+
+        /**
+         * 是否去除音频数据，可选值：
+<li>0：保留；</li>
+<li>1：去除。</li>
+默认值：0。
+         * @type {number || null}
+         */
+        this.RemoveAudio = null;
+
+        /**
+         * 更改后的编码配置的视频设置。
+         * @type {VideoEncodingPresetVideoSettingForUpdate || null}
+         */
+        this.VideoSetting = null;
+
+        /**
+         * 更改后的编码配置的音频设置。
+         * @type {VideoEncodingPresetAudioSettingForUpdate || null}
+         */
+        this.AudioSetting = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Platform = 'Platform' in params ? params.Platform : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.RemoveVideo = 'RemoveVideo' in params ? params.RemoveVideo : null;
+        this.RemoveAudio = 'RemoveAudio' in params ? params.RemoveAudio : null;
+
+        if (params.VideoSetting) {
+            let obj = new VideoEncodingPresetVideoSettingForUpdate();
+            obj.deserialize(params.VideoSetting)
+            this.VideoSetting = obj;
+        }
+
+        if (params.AudioSetting) {
+            let obj = new VideoEncodingPresetAudioSettingForUpdate();
+            obj.deserialize(params.AudioSetting)
+            this.AudioSetting = obj;
+        }
+
+    }
+}
+
+/**
+ * 团队成员信息
+ * @class
+ */
+class TeamMemberInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 团队成员 ID。
+         * @type {string || null}
+         */
+        this.MemberId = null;
+
+        /**
+         * 团队成员备注。
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * 团队成员角色，取值：
+<li>Owner：团队所有者，添加团队成员及修改团队成员解决时不能填此角色；</li>
+<li>Admin：团队管理员；</li>
+<li>Member：普通成员。</li>
+         * @type {string || null}
+         */
+        this.Role = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MemberId = 'MemberId' in params ? params.MemberId : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.Role = 'Role' in params ? params.Role : null;
 
     }
 }
@@ -7344,30 +9026,62 @@ class CosPublishInputInfo extends  AbstractModel {
 }
 
 /**
- * DescribeTasks返回参数结构体
+ * HandleStreamConnectProject请求参数结构体
  * @class
  */
-class DescribeTasksResponse extends  AbstractModel {
+class HandleStreamConnectProjectRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 符合搜索条件的记录总数。
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * 任务基础信息列表。
-         * @type {Array.<TaskBaseInfo> || null}
-         */
-        this.TaskBaseInfoSet = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 平台 Id，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Platform = null;
+
+        /**
+         * 云转推项目 Id 。
+         * @type {string || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * 请参考 [操作类型](#Operation)
+         * @type {string || null}
+         */
+        this.Operation = null;
+
+        /**
+         * 转推输入源操作参数。具体操作方式详见 [操作类型](#Operation) 及下文示例。
+         * @type {StreamInputInfo || null}
+         */
+        this.InputInfo = null;
+
+        /**
+         * 主备输入源标识，取值有：
+<li> Main ：主源；</li>
+<li> Backup ：备源。</li>
+         * @type {string || null}
+         */
+        this.InputEndpoint = null;
+
+        /**
+         * 转推输出源操作参数。具体操作方式详见 [操作类型](#Operation) 及下文示例。
+         * @type {StreamConnectOutput || null}
+         */
+        this.OutputInfo = null;
+
+        /**
+         * 云转推当前预计结束时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。具体操作方式详见 [操作类型](#Operation) 及下文示例。
+         * @type {string || null}
+         */
+        this.CurrentStopTime = null;
+
+        /**
+         * 操作者。如不填，默认为 `cmeid_system`，表示平台管理员操作，可以操作所有云转推项目。如果指定操作者，则操作者必须为项目所有者。
+         * @type {string || null}
+         */
+        this.Operator = null;
 
     }
 
@@ -7378,17 +9092,24 @@ class DescribeTasksResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.Platform = 'Platform' in params ? params.Platform : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.Operation = 'Operation' in params ? params.Operation : null;
 
-        if (params.TaskBaseInfoSet) {
-            this.TaskBaseInfoSet = new Array();
-            for (let z in params.TaskBaseInfoSet) {
-                let obj = new TaskBaseInfo();
-                obj.deserialize(params.TaskBaseInfoSet[z]);
-                this.TaskBaseInfoSet.push(obj);
-            }
+        if (params.InputInfo) {
+            let obj = new StreamInputInfo();
+            obj.deserialize(params.InputInfo)
+            this.InputInfo = obj;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.InputEndpoint = 'InputEndpoint' in params ? params.InputEndpoint : null;
+
+        if (params.OutputInfo) {
+            let obj = new StreamConnectOutput();
+            obj.deserialize(params.OutputInfo)
+            this.OutputInfo = obj;
+        }
+        this.CurrentStopTime = 'CurrentStopTime' in params ? params.CurrentStopTime : null;
+        this.Operator = 'Operator' in params ? params.Operator : null;
 
     }
 }
@@ -7402,7 +9123,7 @@ class ModifyProjectRequest extends  AbstractModel {
         super();
 
         /**
-         * 平台名称，指定访问的平台。
+         * 平台 Id，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
          * @type {string || null}
          */
         this.Platform = null;
@@ -7420,15 +9141,13 @@ class ModifyProjectRequest extends  AbstractModel {
         this.Name = null;
 
         /**
-         * 画布宽高比，取值有：
-<li>16:9；</li>
-<li>9:16。</li>
+         * 画布宽高比，值为视频编辑项目画布宽与高的像素值的比值，如 16:9、9:16 等。
          * @type {string || null}
          */
         this.AspectRatio = null;
 
         /**
-         * 项目归属者。
+         * 项目所有者。目前仅支持个人项目，不支持团队项目。
          * @type {Entity || null}
          */
         this.Owner = null;
@@ -7436,8 +9155,8 @@ class ModifyProjectRequest extends  AbstractModel {
         /**
          * 项目模式，一个项目可以有多种模式并相互切换。
 当 Category 为 VIDEO_EDIT 时，可选模式有：
-<li>Defualt：默认模式。</li>
-<li>VideoEditTemplate：视频编辑模板制作模式。</li>
+<li>Default：默认模式，即普通视频编辑项目。</li>
+<li>VideoEditTemplate：剪辑模板制作模式，用于制作剪辑模板。</li>
          * @type {string || null}
          */
         this.Mode = null;
@@ -7573,6 +9292,55 @@ class MaterialInfo extends  AbstractModel {
             obj.deserialize(params.OtherMaterial)
             this.OtherMaterial = obj;
         }
+
+    }
+}
+
+/**
+ * DescribeVideoEncodingPresets请求参数结构体
+ * @class
+ */
+class DescribeVideoEncodingPresetsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 平台名称，指定访问的平台。
+         * @type {string || null}
+         */
+        this.Platform = null;
+
+        /**
+         * 要查询的配置 ID 列表。填写该参数则按照配置 ID 进行查询。
+         * @type {Array.<number> || null}
+         */
+        this.Ids = null;
+
+        /**
+         * 分页大小，默认20。最大值50。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 分页起始，默认0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Platform = 'Platform' in params ? params.Platform : null;
+        this.Ids = 'Ids' in params ? params.Ids : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
     }
 }
@@ -7743,19 +9511,19 @@ class DescribeSharedSpaceRequest extends  AbstractModel {
         super();
 
         /**
-         * 平台名称，指定访问的平台。
+         * 平台 Id，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
          * @type {string || null}
          */
         this.Platform = null;
 
         /**
-         * 被授权目标,，个人或团队。
+         * 被授权目标，个人或团队。
          * @type {Entity || null}
          */
         this.Authorizee = null;
 
         /**
-         * 操作者。填写用户的 Id，用于标识调用者及校验操作权限。
+         * 操作者。如不填，默认为 `cmeid_system`，表示平台管理员操作，可以查询任意个人或者团队的共享空间。如果指定操作者，则操作者必须本人或者团队成员。
          * @type {string || null}
          */
         this.Operator = null;
@@ -7810,60 +9578,24 @@ class KuaishouPublishInfo extends  AbstractModel {
 }
 
 /**
- * 任务基础信息。
+ * CopyProject返回参数结构体
  * @class
  */
-class TaskBaseInfo extends  AbstractModel {
+class CopyProjectResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 任务 Id。
+         * 复制后的项目 ID。
          * @type {string || null}
          */
-        this.TaskId = null;
+        this.ProjectId = null;
 
         /**
-         * 任务类型，取值有：
-<li>VIDEO_EDIT_PROJECT_EXPORT：项目导出。</li>
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.TaskType = null;
-
-        /**
-         * 任务状态，取值有：
-<li>PROCESSING：处理中：</li>
-<li>SUCCESS：成功；</li>
-<li>FAIL：失败。</li>
-         * @type {string || null}
-         */
-        this.Status = null;
-
-        /**
-         * 任务进度，取值为：0~100。
-         * @type {number || null}
-         */
-        this.Progress = null;
-
-        /**
-         * 错误码。
-<li>0：成功；</li>
-<li>其他值：失败。</li>
-         * @type {number || null}
-         */
-        this.ErrCode = null;
-
-        /**
-         * 错误信息。
-         * @type {string || null}
-         */
-        this.ErrMsg = null;
-
-        /**
-         * 创建时间，格式按照 ISO 8601 标准表示。
-         * @type {string || null}
-         */
-        this.CreateTime = null;
+        this.RequestId = null;
 
     }
 
@@ -7874,13 +9606,8 @@ class TaskBaseInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
-        this.TaskType = 'TaskType' in params ? params.TaskType : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.Progress = 'Progress' in params ? params.Progress : null;
-        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
-        this.ErrMsg = 'ErrMsg' in params ? params.ErrMsg : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7914,52 +9641,24 @@ class DeleteClassResponse extends  AbstractModel {
 }
 
 /**
- * GrantResourceAuthorization请求参数结构体
+ * ExportVideoEditProject返回参数结构体
  * @class
  */
-class GrantResourceAuthorizationRequest extends  AbstractModel {
+class ExportVideoEditProjectResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 平台名称，指定访问的平台。
+         * 任务 Id。
          * @type {string || null}
          */
-        this.Platform = null;
+        this.TaskId = null;
 
         /**
-         * 资源归属者，个人或者团队。
-         * @type {Entity || null}
-         */
-        this.Owner = null;
-
-        /**
-         * 被授权资源。
-         * @type {Array.<Resource> || null}
-         */
-        this.Resources = null;
-
-        /**
-         * 被授权目标，个人或者团队。
-         * @type {Array.<Entity> || null}
-         */
-        this.Authorizees = null;
-
-        /**
-         * 详细授权值。 取值有：
-<li>R：可读，可以浏览媒体，但不能使用该媒体文件（将其添加到 Project），或复制到自己的媒资库中</li>
-<li>X：可用，可以使用该素材（将其添加到 Project），但不能将其复制到自己的媒资库中，意味着被授权者无法将该资源进一步扩散给其他个人或团队。</li>
-<li>C：可复制，既可以使用该素材（将其添加到 Project），也可以将其复制到自己的媒资库中。</li>
-<li>W：可修改、删除媒资。</li>
-         * @type {Array.<string> || null}
-         */
-        this.Permissions = null;
-
-        /**
-         * 操作者。填写用户的 Id，用于标识调用者及校验操作权限。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.Operator = null;
+        this.RequestId = null;
 
     }
 
@@ -7970,33 +9669,8 @@ class GrantResourceAuthorizationRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Platform = 'Platform' in params ? params.Platform : null;
-
-        if (params.Owner) {
-            let obj = new Entity();
-            obj.deserialize(params.Owner)
-            this.Owner = obj;
-        }
-
-        if (params.Resources) {
-            this.Resources = new Array();
-            for (let z in params.Resources) {
-                let obj = new Resource();
-                obj.deserialize(params.Resources[z]);
-                this.Resources.push(obj);
-            }
-        }
-
-        if (params.Authorizees) {
-            this.Authorizees = new Array();
-            for (let z in params.Authorizees) {
-                let obj = new Entity();
-                obj.deserialize(params.Authorizees[z]);
-                this.Authorizees.push(obj);
-            }
-        }
-        this.Permissions = 'Permissions' in params ? params.Permissions : null;
-        this.Operator = 'Operator' in params ? params.Operator : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8102,24 +9776,30 @@ class MediaMetaData extends  AbstractModel {
 }
 
 /**
- * 媒资绑定资源信息，包含媒资绑定模板 ID 和文件信息。
+ * 导播台项目状态变更事件
  * @class
  */
-class ExternalMediaInfo extends  AbstractModel {
+class ProjectSwitcherStatusChangedEvent extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 媒资绑定模板 ID。
-         * @type {number || null}
-         */
-        this.Definition = null;
-
-        /**
-         * 媒资绑定媒体路径或文件 ID。
+         * 导播台项目 Id。
          * @type {string || null}
          */
-        this.MediaKey = null;
+        this.ProjectId = null;
+
+        /**
+         * 导播台项目状态，可取值有：
+<li>Started：导播台启动；</li>
+<li>Stopped：导播台停止；</li>
+<li>PvwStarted：导播台 PVW 开启；</li>
+<li>PgmStarted：导播台 PGM 开启，输出推流开始；</li>
+<li>PvwStopped：导播台 PVW 停止；</li>
+<li>PgmStopped：导播台 PGM 停止，输出推流结束。</li>
+         * @type {string || null}
+         */
+        this.Status = null;
 
     }
 
@@ -8130,8 +9810,50 @@ class ExternalMediaInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
+ * 媒资绑定资源信息，包含媒资绑定模板 ID 和文件信息。
+ * @class
+ */
+class ExternalMediaInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 目前仅支持绑定 COS 桶的媒体，请填写存储对象 Key 值，例如：`example-folder/example.mp4`。
+         * @type {string || null}
+         */
+        this.MediaKey = null;
+
+        /**
+         * 该字段废弃，请勿使用。
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * 媒资挂载的存储 Id。
+         * @type {string || null}
+         */
+        this.StorageId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
         this.MediaKey = 'MediaKey' in params ? params.MediaKey : null;
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.StorageId = 'StorageId' in params ? params.StorageId : null;
 
     }
 }
@@ -8244,42 +9966,24 @@ class ExportVideoByEditorTrackDataResponse extends  AbstractModel {
 }
 
 /**
- * 雪碧图
+ * 分类创建事件。
  * @class
  */
-class MediaImageSpriteInfo extends  AbstractModel {
+class ClassCreatedEvent extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 雪碧图小图的高度。
-         * @type {number || null}
+         * 分类归属。
+         * @type {Entity || null}
          */
-        this.Height = null;
+        this.Owner = null;
 
         /**
-         * 雪碧图小图的宽度。
-         * @type {number || null}
-         */
-        this.Width = null;
-
-        /**
-         * 雪碧图小图的总数量。
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * 截取雪碧图输出的地址。
-         * @type {Array.<string> || null}
-         */
-        this.ImageUrlSet = null;
-
-        /**
-         * 雪碧图子图位置与时间关系的 WebVtt 文件地址。WebVtt 文件表明了各个雪碧图小图对应的时间点，以及在雪碧大图里的坐标位置，一般被播放器用于实现预览。
+         * 分类路径。
          * @type {string || null}
          */
-        this.WebVttUrl = null;
+        this.ClassPath = null;
 
     }
 
@@ -8290,11 +9994,101 @@ class MediaImageSpriteInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Height = 'Height' in params ? params.Height : null;
-        this.Width = 'Width' in params ? params.Width : null;
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-        this.ImageUrlSet = 'ImageUrlSet' in params ? params.ImageUrlSet : null;
-        this.WebVttUrl = 'WebVttUrl' in params ? params.WebVttUrl : null;
+
+        if (params.Owner) {
+            let obj = new Entity();
+            obj.deserialize(params.Owner)
+            this.Owner = obj;
+        }
+        this.ClassPath = 'ClassPath' in params ? params.ClassPath : null;
+
+    }
+}
+
+/**
+ * 视频编码配置
+ * @class
+ */
+class VideoEncodingPreset extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 配置 ID。
+         * @type {number || null}
+         */
+        this.Id = null;
+
+        /**
+         * 配置名。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 封装格式，可选值：
+<li>mp4 ；</li>
+<li>mov 。</li>
+         * @type {string || null}
+         */
+        this.Container = null;
+
+        /**
+         * 是否去除视频数据，可选值：
+<li>0：保留；</li>
+<li>1：去除。</li>
+默认值：0。
+         * @type {number || null}
+         */
+        this.RemoveVideo = null;
+
+        /**
+         * 是否去除音频数据，可选值：
+<li>0：保留；</li>
+<li>1：去除。</li>
+默认值：0。
+         * @type {number || null}
+         */
+        this.RemoveAudio = null;
+
+        /**
+         * 视频编码配置中的视频设置。
+         * @type {VideoEncodingPresetVideoSetting || null}
+         */
+        this.VideoSetting = null;
+
+        /**
+         * 视频编码配置中的音频设置。
+         * @type {VideoEncodingPresetAudioSetting || null}
+         */
+        this.AudioSetting = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Container = 'Container' in params ? params.Container : null;
+        this.RemoveVideo = 'RemoveVideo' in params ? params.RemoveVideo : null;
+        this.RemoveAudio = 'RemoveAudio' in params ? params.RemoveAudio : null;
+
+        if (params.VideoSetting) {
+            let obj = new VideoEncodingPresetVideoSetting();
+            obj.deserialize(params.VideoSetting)
+            this.VideoSetting = obj;
+        }
+
+        if (params.AudioSetting) {
+            let obj = new VideoEncodingPresetAudioSetting();
+            obj.deserialize(params.AudioSetting)
+            this.AudioSetting = obj;
+        }
 
     }
 }
@@ -8308,13 +10102,13 @@ class ImportMaterialRequest extends  AbstractModel {
         super();
 
         /**
-         * 平台名称，指定访问的平台。
+         * 平台 Id，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
          * @type {string || null}
          */
         this.Platform = null;
 
         /**
-         * 媒体归属者，团队或个人。
+         * 媒体归属者，可支持归属团队或个人。
          * @type {Entity || null}
          */
         this.Owner = null;
@@ -8329,7 +10123,8 @@ class ImportMaterialRequest extends  AbstractModel {
          * 导入媒资类型，取值：
 <li>VOD：云点播文件；</li>
 <li>EXTERNAL：媒资绑定。</li>
-注意：如果不填默认为云点播文件。
+
+注意：如果不填默认为云点播文件，如果媒体存储在非腾讯云点播中，都需要使用媒资绑定。另外，导入云点播的文件，使用云点播的子应用 Id 必须与创建多媒体创作引擎平台时使用的云点播子应用一致。
          * @type {string || null}
          */
         this.SourceType = null;
@@ -8353,14 +10148,14 @@ class ImportMaterialRequest extends  AbstractModel {
         this.ClassPath = null;
 
         /**
-         * 媒体预处理任务模板 ID。取值：
+         * 媒体预处理任务参数 ID。可取值有：
 <li>10：进行编辑预处理。</li>
          * @type {number || null}
          */
         this.PreProcessDefinition = null;
 
         /**
-         * 操作者。填写用户的 Id，用于标识调用者及校验操作权限。
+         * 操作者。如不填，默认为 `cmeid_system`，表示平台管理员操作，可以向任意团队或者个人导入媒体。如果指定操作者，如果媒体归属为个人，则操作者必须与归属者一致；如果媒体归属为团队，则必须为团队可导入媒体的团队成员(如果没有特殊设置，所有团队成员可导入媒体)。
          * @type {string || null}
          */
         this.Operator = null;
@@ -8398,6 +10193,69 @@ class ImportMaterialRequest extends  AbstractModel {
 }
 
 /**
+ * 模板插槽文本替换信息。
+ * @class
+ */
+class TextReplacementInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 替换的文本信息。
+         * @type {string || null}
+         */
+        this.Text = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Text = 'Text' in params ? params.Text : null;
+
+    }
+}
+
+/**
+ * 导入媒资信息
+ * @class
+ */
+class ImportMediaInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 云点播文件 FileId。
+         * @type {string || null}
+         */
+        this.FileId = null;
+
+        /**
+         * 媒体 Id。
+         * @type {string || null}
+         */
+        this.MaterialId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FileId = 'FileId' in params ? params.FileId : null;
+        this.MaterialId = 'MaterialId' in params ? params.MaterialId : null;
+
+    }
+}
+
+/**
  * DescribeMaterials请求参数结构体
  * @class
  */
@@ -8406,13 +10264,13 @@ class DescribeMaterialsRequest extends  AbstractModel {
         super();
 
         /**
-         * 平台名称，指定访问的平台。
+         * 平台 Id，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
          * @type {string || null}
          */
         this.Platform = null;
 
         /**
-         * 媒体 ID 列表，N 从 0 开始取值，最大 19。
+         * 媒体 ID 列表，一次最多可拉取20个媒体的信息。
          * @type {Array.<string> || null}
          */
         this.MaterialIds = null;
@@ -8426,7 +10284,7 @@ class DescribeMaterialsRequest extends  AbstractModel {
         this.Sort = null;
 
         /**
-         * 操作者。填写用户的 Id，用于标识调用者及校验媒体的访问权限。
+         * 操作者。如不填，默认为 `cmeid_system`，表示平台管理员操作，可以获取任意媒体的信息。如果指定操作者，则操作者必须对媒体有读权限。
          * @type {string || null}
          */
         this.Operator = null;
@@ -8455,9 +10313,11 @@ class DescribeMaterialsRequest extends  AbstractModel {
 
 module.exports = {
     AudioStreamInfo: AudioStreamInfo,
+    ClassDeletedEvent: ClassDeletedEvent,
     ModifyMaterialResponse: ModifyMaterialResponse,
     DeleteProjectRequest: DeleteProjectRequest,
     ExportVideoByVideoSegmentationDataResponse: ExportVideoByVideoSegmentationDataResponse,
+    MaterialDeletedEvent: MaterialDeletedEvent,
     ImportMaterialResponse: ImportMaterialResponse,
     StreamConnectProjectInput: StreamConnectProjectInput,
     DescribeAccountsRequest: DescribeAccountsRequest,
@@ -8470,18 +10330,21 @@ module.exports = {
     ModifyProjectResponse: ModifyProjectResponse,
     AudioTrackItem: AudioTrackItem,
     StreamConnectProjectInfo: StreamConnectProjectInfo,
+    VideoEncodingPresetAudioSettingForUpdate: VideoEncodingPresetAudioSettingForUpdate,
+    VideoEncodingPresetAudioSetting: VideoEncodingPresetAudioSetting,
     IntegerRange: IntegerRange,
     SearchMaterialRequest: SearchMaterialRequest,
     DeleteTeamResponse: DeleteTeamResponse,
     StreamConnectOutput: StreamConnectOutput,
-    VideoSegmentationProjectInput: VideoSegmentationProjectInput,
+    CopyProjectRequest: CopyProjectRequest,
     SearchScope: SearchScope,
     RevokeResourceAuthorizationResponse: RevokeResourceAuthorizationResponse,
-    HandleStreamConnectProjectRequest: HandleStreamConnectProjectRequest,
+    DescribeTasksResponse: DescribeTasksResponse,
     ProjectInfo: ProjectInfo,
     VideoTrackItem: VideoTrackItem,
     DeleteTeamRequest: DeleteTeamRequest,
     DescribeTeamsRequest: DescribeTeamsRequest,
+    PlatformInfo: PlatformInfo,
     LinkMaterial: LinkMaterial,
     SwitcherProjectInput: SwitcherProjectInput,
     FlattenListMediaRequest: FlattenListMediaRequest,
@@ -8513,17 +10376,24 @@ module.exports = {
     StreamConnectOutputInfo: StreamConnectOutputInfo,
     ParseEventRequest: ParseEventRequest,
     EmptyTrackItem: EmptyTrackItem,
-    PlatformInfo: PlatformInfo,
+    ClassMovedEvent: ClassMovedEvent,
+    DeleteVideoEncodingPresetRequest: DeleteVideoEncodingPresetRequest,
+    MaterialImportedEvent: MaterialImportedEvent,
+    ModifyVideoEncodingPresetResponse: ModifyVideoEncodingPresetResponse,
     DescribeJoinTeamsRequest: DescribeJoinTeamsRequest,
+    VideoSegmentationProjectInput: VideoSegmentationProjectInput,
     DeleteMaterialRequest: DeleteMaterialRequest,
     CreateProjectResponse: CreateProjectResponse,
     VideoEditProjectInput: VideoEditProjectInput,
     DeleteProjectResponse: DeleteProjectResponse,
+    VideoEncodingPresetVideoSetting: VideoEncodingPresetVideoSetting,
+    MediaImageSpriteInfo: MediaImageSpriteInfo,
     DeleteClassRequest: DeleteClassRequest,
     CreateLinkRequest: CreateLinkRequest,
     CreateClassRequest: CreateClassRequest,
     DescribeMaterialsResponse: DescribeMaterialsResponse,
-    HandleStreamConnectProjectResponse: HandleStreamConnectProjectResponse,
+    CreateVideoEncodingPresetResponse: CreateVideoEncodingPresetResponse,
+    VideoEncodingPresetVideoSettingForUpdate: VideoEncodingPresetVideoSettingForUpdate,
     GrantResourceAuthorizationResponse: GrantResourceAuthorizationResponse,
     SwitcherPgmOutputConfig: SwitcherPgmOutputConfig,
     CMEExportInfo: CMEExportInfo,
@@ -8539,7 +10409,7 @@ module.exports = {
     DescribeAccountsResponse: DescribeAccountsResponse,
     MoveResourceResponse: MoveResourceResponse,
     MoveClassRequest: MoveClassRequest,
-    TimeRange: TimeRange,
+    TextSlotInfo: TextSlotInfo,
     DeleteTeamMembersResponse: DeleteTeamMembersResponse,
     MoveClassResponse: MoveClassResponse,
     ImportMediaToProjectResponse: ImportMediaToProjectResponse,
@@ -8549,67 +10419,86 @@ module.exports = {
     CreateTeamResponse: CreateTeamResponse,
     ModifyTeamRequest: ModifyTeamRequest,
     ModifyTeamMemberRequest: ModifyTeamMemberRequest,
+    MaterialMovedEvent: MaterialMovedEvent,
     CreateTeamRequest: CreateTeamRequest,
     MaterialBasicInfo: MaterialBasicInfo,
+    VideoExportCompletedEvent: VideoExportCompletedEvent,
     ResourceInfo: ResourceInfo,
+    MediaPreprocessOperation: MediaPreprocessOperation,
     JoinTeamInfo: JoinTeamInfo,
     DescribeResourceAuthorizationRequest: DescribeResourceAuthorizationRequest,
     CreateClassResponse: CreateClassResponse,
     SlotInfo: SlotInfo,
     MediaReplacementInfo: MediaReplacementInfo,
+    TaskBaseInfo: TaskBaseInfo,
     RecordReplayProjectInput: RecordReplayProjectInput,
     VideoStreamInfo: VideoStreamInfo,
     AddTeamMemberRequest: AddTeamMemberRequest,
-    ExportVideoEditProjectResponse: ExportVideoEditProjectResponse,
+    GrantResourceAuthorizationRequest: GrantResourceAuthorizationRequest,
+    TimeRange: TimeRange,
     ThirdPartyPublishInfo: ThirdPartyPublishInfo,
     ListMediaRequest: ListMediaRequest,
+    DeleteVideoEncodingPresetResponse: DeleteVideoEncodingPresetResponse,
     VodPullInputInfo: VodPullInputInfo,
     ModifyTeamResponse: ModifyTeamResponse,
     DeleteLoginStatusRequest: DeleteLoginStatusRequest,
     GenerateVideoSegmentationSchemeByAiRequest: GenerateVideoSegmentationSchemeByAiRequest,
     LiveStreamClipProjectInput: LiveStreamClipProjectInput,
+    MaterialModifiedEvent: MaterialModifiedEvent,
+    HandleStreamConnectProjectResponse: HandleStreamConnectProjectResponse,
     DeleteTeamMembersRequest: DeleteTeamMembersRequest,
     ExportVideoByTemplateRequest: ExportVideoByTemplateRequest,
     DescribePlatformsRequest: DescribePlatformsRequest,
     OtherMaterial: OtherMaterial,
     EventContent: EventContent,
     VideoMaterial: VideoMaterial,
+    DescribeVideoEncodingPresetsResponse: DescribeVideoEncodingPresetsResponse,
     DescribeResourceAuthorizationResponse: DescribeResourceAuthorizationResponse,
     FlattenListMediaResponse: FlattenListMediaResponse,
     AccountInfo: AccountInfo,
     DescribeProjectsRequest: DescribeProjectsRequest,
     DescribeLoginStatusResponse: DescribeLoginStatusResponse,
-    TeamMemberInfo: TeamMemberInfo,
+    MaterialAddedEvent: MaterialAddedEvent,
+    CreateVideoEncodingPresetRequest: CreateVideoEncodingPresetRequest,
+    ProjectStreamConnectStatusChangedEvent: ProjectStreamConnectStatusChangedEvent,
     DescribeJoinTeamsResponse: DescribeJoinTeamsResponse,
     DescribeTeamMembersRequest: DescribeTeamMembersRequest,
     MaterialStatus: MaterialStatus,
     DescribeProjectsResponse: DescribeProjectsResponse,
     AuthorizationInfo: AuthorizationInfo,
     VideoEditTemplateMaterial: VideoEditTemplateMaterial,
+    VideoExportExtensionArgs: VideoExportExtensionArgs,
     SlotReplacementInfo: SlotReplacementInfo,
     ParseEventResponse: ParseEventResponse,
     DeleteMaterialResponse: DeleteMaterialResponse,
     RevokeResourceAuthorizationRequest: RevokeResourceAuthorizationRequest,
     DescribeTaskDetailRequest: DescribeTaskDetailRequest,
+    ModifyVideoEncodingPresetRequest: ModifyVideoEncodingPresetRequest,
+    TeamMemberInfo: TeamMemberInfo,
     CosPublishInputInfo: CosPublishInputInfo,
-    DescribeTasksResponse: DescribeTasksResponse,
+    HandleStreamConnectProjectRequest: HandleStreamConnectProjectRequest,
     ModifyProjectRequest: ModifyProjectRequest,
     MaterialInfo: MaterialInfo,
+    DescribeVideoEncodingPresetsRequest: DescribeVideoEncodingPresetsRequest,
     LoginStatusInfo: LoginStatusInfo,
     DescribeClassResponse: DescribeClassResponse,
     GenerateVideoSegmentationSchemeByAiResponse: GenerateVideoSegmentationSchemeByAiResponse,
     PresetTagInfo: PresetTagInfo,
     DescribeSharedSpaceRequest: DescribeSharedSpaceRequest,
     KuaishouPublishInfo: KuaishouPublishInfo,
-    TaskBaseInfo: TaskBaseInfo,
+    CopyProjectResponse: CopyProjectResponse,
     DeleteClassResponse: DeleteClassResponse,
-    GrantResourceAuthorizationRequest: GrantResourceAuthorizationRequest,
+    ExportVideoEditProjectResponse: ExportVideoEditProjectResponse,
     MediaMetaData: MediaMetaData,
+    ProjectSwitcherStatusChangedEvent: ProjectSwitcherStatusChangedEvent,
     ExternalMediaInfo: ExternalMediaInfo,
     LinkMaterialInfo: LinkMaterialInfo,
     ExportVideoByEditorTrackDataResponse: ExportVideoByEditorTrackDataResponse,
-    MediaImageSpriteInfo: MediaImageSpriteInfo,
+    ClassCreatedEvent: ClassCreatedEvent,
+    VideoEncodingPreset: VideoEncodingPreset,
     ImportMaterialRequest: ImportMaterialRequest,
+    TextReplacementInfo: TextReplacementInfo,
+    ImportMediaInfo: ImportMediaInfo,
     DescribeMaterialsRequest: DescribeMaterialsRequest,
 
 }

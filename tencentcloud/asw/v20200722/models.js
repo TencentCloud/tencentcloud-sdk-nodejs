@@ -640,7 +640,7 @@ class StartExecutionRequest extends  AbstractModel {
         this.StateMachineResourceName = null;
 
         /**
-         * 输入参数
+         * 输入参数，内容为JsonObject，长度不大于524288字符。
          * @type {string || null}
          */
         this.Input = null;

@@ -534,6 +534,13 @@ class CardInfo extends  AbstractModel {
          */
         this.CertificationState = null;
 
+        /**
+         * 其他流量信息,流量分离统计其他流量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.OtherData = null;
+
     }
 
     /**
@@ -570,6 +577,7 @@ class CardInfo extends  AbstractModel {
         this.NeedSms = 'NeedSms' in params ? params.NeedSms : null;
         this.Provider = 'Provider' in params ? params.Provider : null;
         this.CertificationState = 'CertificationState' in params ? params.CertificationState : null;
+        this.OtherData = 'OtherData' in params ? params.OtherData : null;
 
     }
 }

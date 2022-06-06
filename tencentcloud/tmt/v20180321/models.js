@@ -17,123 +17,30 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
- * TextTranslateBatch请求参数结构体
+ * TextTranslate返回参数结构体
  * @class
  */
-class TextTranslateBatchRequest extends  AbstractModel {
+class TextTranslateResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 源语言，支持： 
-auto：自动识别（识别为一种语言）
-zh：简体中文
-zh-TW：繁体中文
-en：英语
-ja：日语
-ko：韩语
-fr：法语
-es：西班牙语
-it：意大利语
-de：德语
-tr：土耳其语
-ru：俄语
-pt：葡萄牙语
-vi：越南语
-id：印尼语
-th：泰语
-ms：马来西亚语
-ar：阿拉伯语
-hi：印地语
+         * 翻译后的文本
+         * @type {string || null}
+         */
+        this.TargetText = null;
+
+        /**
+         * 源语言，详见入参Target
          * @type {string || null}
          */
         this.Source = null;
 
         /**
-         * 目标语言，各源语言的目标语言支持列表如下
-
-<li> zh（简体中文）：en（英语）、ja（日语）、ko（韩语）、fr（法语）、es（西班牙语）、it（意大利语）、de（德语）、tr（土耳其语）、ru（俄语）、pt（葡萄牙语）、vi（越南语）、id（印尼语）、th（泰语）、ms（马来语）</li>
-<li>zh-TW（繁体中文）：en（英语）、ja（日语）、ko（韩语）、fr（法语）、es（西班牙语）、it（意大利语）、de（德语）、tr（土耳其语）、ru（俄语）、pt（葡萄牙语）、vi（越南语）、id（印尼语）、th（泰语）、ms（马来语）</li>
-<li>en（英语）：zh（中文）、ja（日语）、ko（韩语）、fr（法语）、es（西班牙语）、it（意大利语）、de（德语）、tr（土耳其语）、ru（俄语）、pt（葡萄牙语）、vi（越南语）、id（印尼语）、th（泰语）、ms（马来语）、ar（阿拉伯语）、hi（印地语）</li>
-<li>ja（日语）：zh（中文）、en（英语）、ko（韩语）</li>
-<li>ko（韩语）：zh（中文）、en（英语）、ja（日语）</li>
-<li>fr（法语）：zh（中文）、en（英语）、es（西班牙语）、it（意大利语）、de（德语）、tr（土耳其语）、ru（俄语）、pt（葡萄牙语）</li>
-<li>es（西班牙语）：zh（中文）、en（英语）、fr（法语）、it（意大利语）、de（德语）、tr（土耳其语）、ru（俄语）、pt（葡萄牙语）</li>
-<li>it（意大利语）：zh（中文）、en（英语）、fr（法语）、es（西班牙语）、de（德语）、tr（土耳其语）、ru（俄语）、pt（葡萄牙语）</li>
-<li>de（德语）：zh（中文）、en（英语）、fr（法语）、es（西班牙语）、it（意大利语）、tr（土耳其语）、ru（俄语）、pt（葡萄牙语）</li>
-<li>tr（土耳其语）：zh（中文）、en（英语）、fr（法语）、es（西班牙语）、it（意大利语）、de（德语）、ru（俄语）、pt（葡萄牙语）</li>
-<li>ru（俄语）：zh（中文）、en（英语）、fr（法语）、es（西班牙语）、it（意大利语）、de（德语）、tr（土耳其语）、pt（葡萄牙语）</li>
-<li>pt（葡萄牙语）：zh（中文）、en（英语）、fr（法语）、es（西班牙语）、it（意大利语）、de（德语）、tr（土耳其语）、ru（俄语）</li>
-<li>vi（越南语）：zh（中文）、en（英语）</li>
-<li>id（印尼语）：zh（中文）、en（英语）</li>
-<li>th（泰语）：zh（中文）、en（英语）</li>
-<li>ms（马来语）：zh（中文）、en（英语）</li>
-<li>ar（阿拉伯语）：en（英语）</li>
-<li>hi（印地语）：en（英语）</li>
+         * 目标语言，详见入参Target
          * @type {string || null}
          */
         this.Target = null;
-
-        /**
-         * 项目ID，可以根据控制台-账号中心-项目管理中的配置填写，如无配置请填写默认项目ID:0
-         * @type {number || null}
-         */
-        this.ProjectId = null;
-
-        /**
-         * 待翻译的文本列表，批量接口可以以数组方式在一次请求中填写多个待翻译文本。文本统一使用utf-8格式编码，非utf-8格式编码字符会翻译失败，请传入有效文本，html标记等非常规翻译文本可能会翻译失败。单次请求的文本长度总和需要低于2000。
-         * @type {Array.<string> || null}
-         */
-        this.SourceTextList = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Source = 'Source' in params ? params.Source : null;
-        this.Target = 'Target' in params ? params.Target : null;
-        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
-        this.SourceTextList = 'SourceTextList' in params ? params.SourceTextList : null;
-
-    }
-}
-
-/**
- * ImageTranslate返回参数结构体
- * @class
- */
-class ImageTranslateResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 请求的SessionUuid返回
-         * @type {string || null}
-         */
-        this.SessionUuid = null;
-
-        /**
-         * 源语言
-         * @type {string || null}
-         */
-        this.Source = null;
-
-        /**
-         * 目标语言
-         * @type {string || null}
-         */
-        this.Target = null;
-
-        /**
-         * 图片翻译结果，翻译结果按识别的文本每一行独立翻译，后续会推出按段落划分并翻译的版本
-         * @type {ImageRecord || null}
-         */
-        this.ImageRecord = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -150,16 +57,138 @@ class ImageTranslateResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SessionUuid = 'SessionUuid' in params ? params.SessionUuid : null;
+        this.TargetText = 'TargetText' in params ? params.TargetText : null;
         this.Source = 'Source' in params ? params.Source : null;
         this.Target = 'Target' in params ? params.Target : null;
-
-        if (params.ImageRecord) {
-            let obj = new ImageRecord();
-            obj.deserialize(params.ImageRecord)
-            this.ImageRecord = obj;
-        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ImageTranslate请求参数结构体
+ * @class
+ */
+class ImageTranslateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一id，返回时原样返回
+         * @type {string || null}
+         */
+        this.SessionUuid = null;
+
+        /**
+         * doc:文档扫描
+         * @type {string || null}
+         */
+        this.Scene = null;
+
+        /**
+         * 图片数据的Base64字符串，图片大小上限为4M，建议对源图片进行一定程度压缩
+         * @type {string || null}
+         */
+        this.Data = null;
+
+        /**
+         * 源语言，支持语言列表：<li> auto：自动识别（识别为一种语言）</li> <li>zh：简体中文</li> <li>zh-TW：繁体中文</li> <li>en：英语</li> <li>ja：日语</li> <li>ko：韩语</li> <li>ru：俄语</li> <li>fr：法语</li> <li>de：德语</li> <li>it：意大利语</li> <li>es：西班牙语</li> <li>pt：葡萄牙语</li> <li>ms：马来西亚语</li> <li>th：泰语</li><li>vi：越南语</li>
+         * @type {string || null}
+         */
+        this.Source = null;
+
+        /**
+         * 目标语言，各源语言的目标语言支持列表如下：
+<li>zh（简体中文）：en（英语）、ja（日语）、ko（韩语）、ru（俄语）、fr（法语）、de（德语）、it（意大利语）、es（西班牙语）、pt（葡萄牙语）、ms（马来语）、th（泰语）、vi（越南语）</li>
+<li>zh-TW（繁体中文）：en（英语）、ja（日语）、ko（韩语）、ru（俄语）、fr（法语）、de（德语）、it（意大利语）、es（西班牙语）、pt（葡萄牙语）、ms（马来语）、th（泰语）、vi（越南语）</li>
+<li>en（英语）：zh（中文）、ja（日语）、ko（韩语）、ru（俄语）、fr（法语）、de（德语）、it（意大利语）、es（西班牙语）、pt（葡萄牙语）、ms（马来语）、th（泰语）、vi（越南语）</li>
+<li>ja（日语）：zh（中文）、en（英语）、ko（韩语）</li>
+<li>ko（韩语）：zh（中文）、en（英语）、ja（日语）</li>
+<li>ru：俄语：zh（中文）、en（英语）</li>
+<li>fr：法语：zh（中文）、en（英语）</li>
+<li>de：德语：zh（中文）、en（英语）</li>
+<li>it：意大利语：zh（中文）、en（英语）</li>
+<li>es：西班牙语：zh（中文）、en（英语）</li>
+<li>pt：葡萄牙语：zh（中文）、en（英语）</li>
+<li>ms：马来西亚语：zh（中文）、en（英语）</li>
+<li>th：泰语：zh（中文）、en（英语）</li>
+<li>vi：越南语：zh（中文）、en（英语）</li>
+         * @type {string || null}
+         */
+        this.Target = null;
+
+        /**
+         * 项目ID，可以根据控制台-账号中心-项目管理中的配置填写，如无配置请填写默认项目ID:0
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SessionUuid = 'SessionUuid' in params ? params.SessionUuid : null;
+        this.Scene = 'Scene' in params ? params.Scene : null;
+        this.Data = 'Data' in params ? params.Data : null;
+        this.Source = 'Source' in params ? params.Source : null;
+        this.Target = 'Target' in params ? params.Target : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+
+    }
+}
+
+/**
+ * 查询文件翻译任务
+ * @class
+ */
+class GetFileTranslateData extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务ID
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 状态
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 文件数据
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.FileData = null;
+
+        /**
+         * 错误提示
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Message = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.FileData = 'FileData' in params ? params.FileData : null;
+        this.Message = 'Message' in params ? params.Message : null;
 
     }
 }
@@ -285,6 +314,67 @@ class ImageRecord extends  AbstractModel {
 }
 
 /**
+ * ImageTranslate返回参数结构体
+ * @class
+ */
+class ImageTranslateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 请求的SessionUuid返回
+         * @type {string || null}
+         */
+        this.SessionUuid = null;
+
+        /**
+         * 源语言
+         * @type {string || null}
+         */
+        this.Source = null;
+
+        /**
+         * 目标语言
+         * @type {string || null}
+         */
+        this.Target = null;
+
+        /**
+         * 图片翻译结果，翻译结果按识别的文本每一行独立翻译，后续会推出按段落划分并翻译的版本
+         * @type {ImageRecord || null}
+         */
+        this.ImageRecord = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SessionUuid = 'SessionUuid' in params ? params.SessionUuid : null;
+        this.Source = 'Source' in params ? params.Source : null;
+        this.Target = 'Target' in params ? params.Target : null;
+
+        if (params.ImageRecord) {
+            let obj = new ImageRecord();
+            obj.deserialize(params.ImageRecord)
+            this.ImageRecord = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * LanguageDetect请求参数结构体
  * @class
  */
@@ -369,6 +459,121 @@ class TextTranslateBatchResponse extends  AbstractModel {
 }
 
 /**
+ * TextTranslateBatch请求参数结构体
+ * @class
+ */
+class TextTranslateBatchRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 源语言，支持： 
+auto：自动识别（识别为一种语言）
+zh：简体中文
+zh-TW：繁体中文
+en：英语
+ja：日语
+ko：韩语
+fr：法语
+es：西班牙语
+it：意大利语
+de：德语
+tr：土耳其语
+ru：俄语
+pt：葡萄牙语
+vi：越南语
+id：印尼语
+th：泰语
+ms：马来西亚语
+ar：阿拉伯语
+hi：印地语
+         * @type {string || null}
+         */
+        this.Source = null;
+
+        /**
+         * 目标语言，各源语言的目标语言支持列表如下
+
+<li> zh（简体中文）：en（英语）、ja（日语）、ko（韩语）、fr（法语）、es（西班牙语）、it（意大利语）、de（德语）、tr（土耳其语）、ru（俄语）、pt（葡萄牙语）、vi（越南语）、id（印尼语）、th（泰语）、ms（马来语）</li>
+<li>zh-TW（繁体中文）：en（英语）、ja（日语）、ko（韩语）、fr（法语）、es（西班牙语）、it（意大利语）、de（德语）、tr（土耳其语）、ru（俄语）、pt（葡萄牙语）、vi（越南语）、id（印尼语）、th（泰语）、ms（马来语）</li>
+<li>en（英语）：zh（中文）、ja（日语）、ko（韩语）、fr（法语）、es（西班牙语）、it（意大利语）、de（德语）、tr（土耳其语）、ru（俄语）、pt（葡萄牙语）、vi（越南语）、id（印尼语）、th（泰语）、ms（马来语）、ar（阿拉伯语）、hi（印地语）</li>
+<li>ja（日语）：zh（中文）、en（英语）、ko（韩语）</li>
+<li>ko（韩语）：zh（中文）、en（英语）、ja（日语）</li>
+<li>fr（法语）：zh（中文）、en（英语）、es（西班牙语）、it（意大利语）、de（德语）、tr（土耳其语）、ru（俄语）、pt（葡萄牙语）</li>
+<li>es（西班牙语）：zh（中文）、en（英语）、fr（法语）、it（意大利语）、de（德语）、tr（土耳其语）、ru（俄语）、pt（葡萄牙语）</li>
+<li>it（意大利语）：zh（中文）、en（英语）、fr（法语）、es（西班牙语）、de（德语）、tr（土耳其语）、ru（俄语）、pt（葡萄牙语）</li>
+<li>de（德语）：zh（中文）、en（英语）、fr（法语）、es（西班牙语）、it（意大利语）、tr（土耳其语）、ru（俄语）、pt（葡萄牙语）</li>
+<li>tr（土耳其语）：zh（中文）、en（英语）、fr（法语）、es（西班牙语）、it（意大利语）、de（德语）、ru（俄语）、pt（葡萄牙语）</li>
+<li>ru（俄语）：zh（中文）、en（英语）、fr（法语）、es（西班牙语）、it（意大利语）、de（德语）、tr（土耳其语）、pt（葡萄牙语）</li>
+<li>pt（葡萄牙语）：zh（中文）、en（英语）、fr（法语）、es（西班牙语）、it（意大利语）、de（德语）、tr（土耳其语）、ru（俄语）</li>
+<li>vi（越南语）：zh（中文）、en（英语）</li>
+<li>id（印尼语）：zh（中文）、en（英语）</li>
+<li>th（泰语）：zh（中文）、en（英语）</li>
+<li>ms（马来语）：zh（中文）、en（英语）</li>
+<li>ar（阿拉伯语）：en（英语）</li>
+<li>hi（印地语）：en（英语）</li>
+         * @type {string || null}
+         */
+        this.Target = null;
+
+        /**
+         * 项目ID，可以根据控制台-账号中心-项目管理中的配置填写，如无配置请填写默认项目ID:0
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * 待翻译的文本列表，批量接口可以以数组方式在一次请求中填写多个待翻译文本。文本统一使用utf-8格式编码，非utf-8格式编码字符会翻译失败，请传入有效文本，html标记等非常规翻译文本可能会翻译失败。单次请求的文本长度总和需要低于2000。
+         * @type {Array.<string> || null}
+         */
+        this.SourceTextList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Source = 'Source' in params ? params.Source : null;
+        this.Target = 'Target' in params ? params.Target : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.SourceTextList = 'SourceTextList' in params ? params.SourceTextList : null;
+
+    }
+}
+
+/**
+ * 文件翻译请求的返回数据
+ * @class
+ */
+class Task extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务ID，可通过此ID在轮询接口获取识别状态与结果。注意：TaskId数据类型为字符串类型
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+
+    }
+}
+
+/**
  * LanguageDetect返回参数结构体
  * @class
  */
@@ -405,93 +610,18 @@ class LanguageDetectResponse extends  AbstractModel {
 }
 
 /**
- * 翻译结果
+ * GetFileTranslate返回参数结构体
  * @class
  */
-class ItemValue extends  AbstractModel {
+class GetFileTranslateResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 识别出的源文
-         * @type {string || null}
+         * 任务id
+         * @type {GetFileTranslateData || null}
          */
-        this.SourceText = null;
-
-        /**
-         * 翻译后的译文
-         * @type {string || null}
-         */
-        this.TargetText = null;
-
-        /**
-         * X坐标
-         * @type {number || null}
-         */
-        this.X = null;
-
-        /**
-         * Y坐标
-         * @type {number || null}
-         */
-        this.Y = null;
-
-        /**
-         * 宽度
-         * @type {number || null}
-         */
-        this.W = null;
-
-        /**
-         * 高度
-         * @type {number || null}
-         */
-        this.H = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.SourceText = 'SourceText' in params ? params.SourceText : null;
-        this.TargetText = 'TargetText' in params ? params.TargetText : null;
-        this.X = 'X' in params ? params.X : null;
-        this.Y = 'Y' in params ? params.Y : null;
-        this.W = 'W' in params ? params.W : null;
-        this.H = 'H' in params ? params.H : null;
-
-    }
-}
-
-/**
- * TextTranslate返回参数结构体
- * @class
- */
-class TextTranslateResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 翻译后的文本
-         * @type {string || null}
-         */
-        this.TargetText = null;
-
-        /**
-         * 源语言，详见入参Target
-         * @type {string || null}
-         */
-        this.Source = null;
-
-        /**
-         * 目标语言，详见入参Target
-         * @type {string || null}
-         */
-        this.Target = null;
+        this.Data = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -508,9 +638,12 @@ class TextTranslateResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TargetText = 'TargetText' in params ? params.TargetText : null;
-        this.Source = 'Source' in params ? params.Source : null;
-        this.Target = 'Target' in params ? params.Target : null;
+
+        if (params.Data) {
+            let obj = new GetFileTranslateData();
+            obj.deserialize(params.Data)
+            this.Data = obj;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -608,62 +741,24 @@ class SpeechTranslateRequest extends  AbstractModel {
 }
 
 /**
- * ImageTranslate请求参数结构体
+ * FileTranslate返回参数结构体
  * @class
  */
-class ImageTranslateRequest extends  AbstractModel {
+class FileTranslateResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 唯一id，返回时原样返回
-         * @type {string || null}
-         */
-        this.SessionUuid = null;
-
-        /**
-         * doc:文档扫描
-         * @type {string || null}
-         */
-        this.Scene = null;
-
-        /**
-         * 图片数据的Base64字符串，图片大小上限为4M，建议对源图片进行一定程度压缩
-         * @type {string || null}
+         * 文件翻译的请求返回结果，包含结果查询需要的TaskId
+         * @type {Task || null}
          */
         this.Data = null;
 
         /**
-         * 源语言，支持语言列表：<li> auto：自动识别（识别为一种语言）</li> <li>zh：简体中文</li> <li>zh-TW：繁体中文</li> <li>en：英语</li> <li>ja：日语</li> <li>ko：韩语</li> <li>ru：俄语</li> <li>fr：法语</li> <li>de：德语</li> <li>it：意大利语</li> <li>es：西班牙语</li> <li>pt：葡萄牙语</li> <li>ms：马来西亚语</li> <li>th：泰语</li><li>vi：越南语</li>
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.Source = null;
-
-        /**
-         * 目标语言，各源语言的目标语言支持列表如下：
-<li>zh（简体中文）：en（英语）、ja（日语）、ko（韩语）、ru（俄语）、fr（法语）、de（德语）、it（意大利语）、es（西班牙语）、pt（葡萄牙语）、ms（马来语）、th（泰语）、vi（越南语）</li>
-<li>zh-TW（繁体中文）：en（英语）、ja（日语）、ko（韩语）、ru（俄语）、fr（法语）、de（德语）、it（意大利语）、es（西班牙语）、pt（葡萄牙语）、ms（马来语）、th（泰语）、vi（越南语）</li>
-<li>en（英语）：zh（中文）、ja（日语）、ko（韩语）、ru（俄语）、fr（法语）、de（德语）、it（意大利语）、es（西班牙语）、pt（葡萄牙语）、ms（马来语）、th（泰语）、vi（越南语）</li>
-<li>ja（日语）：zh（中文）、en（英语）、ko（韩语）</li>
-<li>ko（韩语）：zh（中文）、en（英语）、ja（日语）</li>
-<li>ru：俄语：zh（中文）、en（英语）</li>
-<li>fr：法语：zh（中文）、en（英语）</li>
-<li>de：德语：zh（中文）、en（英语）</li>
-<li>it：意大利语：zh（中文）、en（英语）</li>
-<li>es：西班牙语：zh（中文）、en（英语）</li>
-<li>pt：葡萄牙语：zh（中文）、en（英语）</li>
-<li>ms：马来西亚语：zh（中文）、en（英语）</li>
-<li>th：泰语：zh（中文）、en（英语）</li>
-<li>vi：越南语：zh（中文）、en（英语）</li>
-         * @type {string || null}
-         */
-        this.Target = null;
-
-        /**
-         * 项目ID，可以根据控制台-账号中心-项目管理中的配置填写，如无配置请填写默认项目ID:0
-         * @type {number || null}
-         */
-        this.ProjectId = null;
+        this.RequestId = null;
 
     }
 
@@ -674,12 +769,122 @@ class ImageTranslateRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SessionUuid = 'SessionUuid' in params ? params.SessionUuid : null;
-        this.Scene = 'Scene' in params ? params.Scene : null;
-        this.Data = 'Data' in params ? params.Data : null;
+
+        if (params.Data) {
+            let obj = new Task();
+            obj.deserialize(params.Data)
+            this.Data = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * FileTranslate请求参数结构体
+ * @class
+ */
+class FileTranslateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 源语言，支持
+zh:简体中文
+zh-HK：繁体中文
+zh-TW : 繁体中文
+zh-TR:  繁体中文
+en ：英语
+ar：阿拉伯语
+de：德语
+es：西班牙语
+fr：法语
+it：意大利语
+ja：日语
+pt：葡萄牙语
+ru：俄语
+ko：韩语
+km：高棉语
+lo：老挝语
+         * @type {string || null}
+         */
+        this.Source = null;
+
+        /**
+         * 目标语言，各源语言的目标语言支持列表如下
+zh（简体中文）： en （英语）、 ar (阿拉伯语）、 de （德语）、  es（西班牙语） 、fr（法语）、  it（意大利语） 、 ja （日语）、 pt （葡萄牙语）、 ru（俄语）、  ko（韩语）、 km（高棉语）、   lo（老挝语）
+zh-HK（繁体中文） ：en （英语）、 ar (阿拉伯语）、 de （德语）、  es（西班牙语） 、fr（法语）、  it（意大利语） 、 ja （日语）、 pt （葡萄牙语）、 ru（俄语）、  ko（韩语）、 km（高棉语）、   lo（老挝语）
+zh-TW（繁体中文）：en （英语）、 ar (阿拉伯语）、 de （德语）、  es（西班牙语） 、fr（法语）、  it（意大利语） 、 ja （日语）、 pt （葡萄牙语）、 ru（俄语）、  ko（韩语）、 km（高棉语）、   lo（老挝语）
+zh-TR 繁体中文 : en （英语）、 ar (阿拉伯语）、 de （德语）、  es（西班牙语） 、fr（法语）、  it（意大利语） 、 ja （日语）、 pt （葡萄牙语）、 ru（俄语）、  ko（韩语）、 km（高棉语）、   lo（老挝语）
+en （英语） ：zh（简体中文）、zh-HK（繁体中文）、 zh-TW（繁体中文)、 zh-TR(繁体中文）、 ar (阿拉伯语）、 de （德语）、  es（西班牙语） 、fr（法语）、  it（意大利语） 、 ja （日语）、 pt （葡萄牙语）、 ru（俄语）、  ko（韩语）、 km（高棉语）、   lo（老挝语）
+ar（阿拉伯语） ：zh（简体中文）、zh-HK（繁体中文）、 zh-TW（繁体中文)、zh-TR(繁体中文）
+de（德语 ）：zh（简体中文）、zh-HK（繁体中文）、 zh-TW（繁体中文)、zh-TR(繁体中文）
+es（西班牙语）：zh（简体中文）、zh-HK（繁体中文）、 zh-TW（繁体中文)、zh-TR(繁体中文）
+fr（法语）：zh（简体中文）、zh-HK（繁体中文）、 zh-TW（繁体中文)、zh-TR(繁体中文）
+it（意大利语）：zh（简体中文）、zh-HK（繁体中文）、 zh-TW（繁体中文)、zh-TR(繁体中文）
+ja（日语）：zh（简体中文）、zh-HK（繁体中文）、 zh-TW（繁体中文)、zh-TR(繁体中文）
+pt（葡萄牙语）：zh（简体中文）、zh-HK（繁体中文）、 zh-TW（繁体中文)、zh-TR(繁体中文）
+ru（俄语）：zh（简体中文）、zh-HK（繁体中文）、 zh-TW（繁体中文)、zh-TR(繁体中文）
+ko（韩语）：zh（简体中文）、zh-HK（繁体中文）、 zh-TW（繁体中文)、zh-TR(繁体中文）
+km（高棉语）：zh（简体中文）、zh-HK（繁体中文）、 zh-TW（繁体中文)、zh-TR(繁体中文）
+lo（老挝语）：zh（简体中文）、zh-HK（繁体中文）、 zh-TW（繁体中文)、zh-TR(繁体中文）
+         * @type {string || null}
+         */
+        this.Target = null;
+
+        /**
+         * 文档类型：可支持以下几种(pdf,docx,pptx,xlsx,txt,xml,html,markdown,properties)
+         * @type {string || null}
+         */
+        this.DocumentType = null;
+
+        /**
+         * 数据来源，0：url，1：直接传文件编码后数据
+         * @type {number || null}
+         */
+        this.SourceType = null;
+
+        /**
+         * 需要翻译文件url
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * 原始文档类型
+         * @type {string || null}
+         */
+        this.BasicDocumentType = null;
+
+        /**
+         * 回调url
+         * @type {string || null}
+         */
+        this.CallbackUrl = null;
+
+        /**
+         * 文件数据，当SourceType 值为1时必须填写，为0可不写。要base64编码(采用python语言时注意读取文件应该为string而不是byte，以byte格式读取后要decode()。编码后的数据不可带有回车换行符)。数据要小于5MB。
+         * @type {string || null}
+         */
+        this.Data = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
         this.Source = 'Source' in params ? params.Source : null;
         this.Target = 'Target' in params ? params.Target : null;
-        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.DocumentType = 'DocumentType' in params ? params.DocumentType : null;
+        this.SourceType = 'SourceType' in params ? params.SourceType : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.BasicDocumentType = 'BasicDocumentType' in params ? params.BasicDocumentType : null;
+        this.CallbackUrl = 'CallbackUrl' in params ? params.CallbackUrl : null;
+        this.Data = 'Data' in params ? params.Data : null;
 
     }
 }
@@ -778,18 +983,115 @@ hi：印地语
     }
 }
 
+/**
+ * GetFileTranslate请求参数结构体
+ * @class
+ */
+class GetFileTranslateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务ID
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+
+    }
+}
+
+/**
+ * 翻译结果
+ * @class
+ */
+class ItemValue extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 识别出的源文
+         * @type {string || null}
+         */
+        this.SourceText = null;
+
+        /**
+         * 翻译后的译文
+         * @type {string || null}
+         */
+        this.TargetText = null;
+
+        /**
+         * X坐标
+         * @type {number || null}
+         */
+        this.X = null;
+
+        /**
+         * Y坐标
+         * @type {number || null}
+         */
+        this.Y = null;
+
+        /**
+         * 宽度
+         * @type {number || null}
+         */
+        this.W = null;
+
+        /**
+         * 高度
+         * @type {number || null}
+         */
+        this.H = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SourceText = 'SourceText' in params ? params.SourceText : null;
+        this.TargetText = 'TargetText' in params ? params.TargetText : null;
+        this.X = 'X' in params ? params.X : null;
+        this.Y = 'Y' in params ? params.Y : null;
+        this.W = 'W' in params ? params.W : null;
+        this.H = 'H' in params ? params.H : null;
+
+    }
+}
+
 module.exports = {
-    TextTranslateBatchRequest: TextTranslateBatchRequest,
-    ImageTranslateResponse: ImageTranslateResponse,
+    TextTranslateResponse: TextTranslateResponse,
+    ImageTranslateRequest: ImageTranslateRequest,
+    GetFileTranslateData: GetFileTranslateData,
     SpeechTranslateResponse: SpeechTranslateResponse,
     ImageRecord: ImageRecord,
+    ImageTranslateResponse: ImageTranslateResponse,
     LanguageDetectRequest: LanguageDetectRequest,
     TextTranslateBatchResponse: TextTranslateBatchResponse,
+    TextTranslateBatchRequest: TextTranslateBatchRequest,
+    Task: Task,
     LanguageDetectResponse: LanguageDetectResponse,
-    ItemValue: ItemValue,
-    TextTranslateResponse: TextTranslateResponse,
+    GetFileTranslateResponse: GetFileTranslateResponse,
     SpeechTranslateRequest: SpeechTranslateRequest,
-    ImageTranslateRequest: ImageTranslateRequest,
+    FileTranslateResponse: FileTranslateResponse,
+    FileTranslateRequest: FileTranslateRequest,
     TextTranslateRequest: TextTranslateRequest,
+    GetFileTranslateRequest: GetFileTranslateRequest,
+    ItemValue: ItemValue,
 
 }

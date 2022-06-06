@@ -143,6 +143,34 @@ class GetAttributeKeyRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeAuditTracks返回参数结构体
+ * @class
+ */
+class DescribeAuditTracksResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DeleteAudit返回参数结构体
  * @class
  */
@@ -178,90 +206,18 @@ class DeleteAuditResponse extends  AbstractModel {
 }
 
 /**
- * UpdateAudit请求参数结构体
+ * ModifyAuditTrack返回参数结构体
  * @class
  */
-class UpdateAuditRequest extends  AbstractModel {
+class ModifyAuditTrackResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 跟踪集名称
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.AuditName = null;
-
-        /**
-         * 是否开启cmq消息通知。1：是，0：否。目前仅支持cmq的队列服务。如果开启cmq消息通知服务，云审计会将您的日志内容实时投递到您指定地域的指定队列中。
-         * @type {number || null}
-         */
-        this.IsEnableCmqNotify = null;
-
-        /**
-         * 管理事件的读写属性。1：只读，2：只写，3：全部。
-         * @type {number || null}
-         */
-        this.ReadWriteAttribute = null;
-
-        /**
-         * CMK的全局唯一标识符，如果不是新创建的kms，该值是必填值。可以通过ListKeyAliasByRegion来获取。云审计不会校验KeyId的合法性，请您谨慎填写，避免给您的数据造成损失。
-         * @type {string || null}
-         */
-        this.KeyId = null;
-
-        /**
-         * cos地域。目前支持的地域可以使用ListCosEnableRegion来获取。
-         * @type {string || null}
-         */
-        this.CosRegion = null;
-
-        /**
-         * 队列名称。队列名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。如果IsEnableCmqNotify值是1的话，此值属于必填字段。如果不是新创建的队列，云审计不会去校验该队列是否真的存在，请谨慎填写，避免日志通知不成功，导致您的数据丢失。
-         * @type {string || null}
-         */
-        this.CmqQueueName = null;
-
-        /**
-         * 是否创建新的cos存储桶。1：是，0：否。
-         * @type {number || null}
-         */
-        this.IsCreateNewBucket = null;
-
-        /**
-         * kms地域。目前支持的地域可以使用ListKmsEnableRegion来获取。必须要和cos的地域保持一致。
-         * @type {string || null}
-         */
-        this.KmsRegion = null;
-
-        /**
-         * 是否开启kms加密。1：是，0：否。如果开启KMS加密，数据在投递到cos时，会将数据加密。
-         * @type {number || null}
-         */
-        this.IsEnableKmsEncry = null;
-
-        /**
-         * cos的存储桶名称。仅支持小写英文字母和数字即[a-z，0-9]、中划线“-”及其组合。用户自定义的字符串支持1 - 40个字符。存储桶命名不能以“-”开头或结尾。如果不是新创建的存储桶，云审计不会去校验该存储桶是否真的存在，请谨慎填写，避免日志投递不成功，导致您的数据丢失。
-         * @type {string || null}
-         */
-        this.CosBucketName = null;
-
-        /**
-         * 队列所在的地域。可以通过ListCmqEnableRegion获取支持的cmq地域。如果IsEnableCmqNotify值是1的话，此值属于必填字段。
-         * @type {string || null}
-         */
-        this.CmqRegion = null;
-
-        /**
-         * 日志文件前缀。3-40个字符，只能包含 ASCII 编码字母 a-z，A-Z，数字 0-9。
-         * @type {string || null}
-         */
-        this.LogFilePrefix = null;
-
-        /**
-         * 是否创建新的队列。1：是，0：否。如果IsEnableCmqNotify值是1的话，此值属于必填字段。
-         * @type {number || null}
-         */
-        this.IsCreateNewQueue = null;
+        this.RequestId = null;
 
     }
 
@@ -272,19 +228,7 @@ class UpdateAuditRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AuditName = 'AuditName' in params ? params.AuditName : null;
-        this.IsEnableCmqNotify = 'IsEnableCmqNotify' in params ? params.IsEnableCmqNotify : null;
-        this.ReadWriteAttribute = 'ReadWriteAttribute' in params ? params.ReadWriteAttribute : null;
-        this.KeyId = 'KeyId' in params ? params.KeyId : null;
-        this.CosRegion = 'CosRegion' in params ? params.CosRegion : null;
-        this.CmqQueueName = 'CmqQueueName' in params ? params.CmqQueueName : null;
-        this.IsCreateNewBucket = 'IsCreateNewBucket' in params ? params.IsCreateNewBucket : null;
-        this.KmsRegion = 'KmsRegion' in params ? params.KmsRegion : null;
-        this.IsEnableKmsEncry = 'IsEnableKmsEncry' in params ? params.IsEnableKmsEncry : null;
-        this.CosBucketName = 'CosBucketName' in params ? params.CosBucketName : null;
-        this.CmqRegion = 'CmqRegion' in params ? params.CmqRegion : null;
-        this.LogFilePrefix = 'LogFilePrefix' in params ? params.LogFilePrefix : null;
-        this.IsCreateNewQueue = 'IsCreateNewQueue' in params ? params.IsCreateNewQueue : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -338,6 +282,13 @@ class DescribeEventsResponse extends  AbstractModel {
         this.Events = null;
 
         /**
+         * 总数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -363,6 +314,7 @@ class DescribeEventsResponse extends  AbstractModel {
                 this.Events.push(obj);
             }
         }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -511,6 +463,139 @@ class StartLoggingRequest extends  AbstractModel {
 }
 
 /**
+ * UpdateAudit请求参数结构体
+ * @class
+ */
+class UpdateAuditRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 跟踪集名称
+         * @type {string || null}
+         */
+        this.AuditName = null;
+
+        /**
+         * 是否开启cmq消息通知。1：是，0：否。目前仅支持cmq的队列服务。如果开启cmq消息通知服务，云审计会将您的日志内容实时投递到您指定地域的指定队列中。
+         * @type {number || null}
+         */
+        this.IsEnableCmqNotify = null;
+
+        /**
+         * 管理事件的读写属性。1：只读，2：只写，3：全部。
+         * @type {number || null}
+         */
+        this.ReadWriteAttribute = null;
+
+        /**
+         * CMK的全局唯一标识符，如果不是新创建的kms，该值是必填值。可以通过ListKeyAliasByRegion来获取。云审计不会校验KeyId的合法性，请您谨慎填写，避免给您的数据造成损失。
+         * @type {string || null}
+         */
+        this.KeyId = null;
+
+        /**
+         * cos地域。目前支持的地域可以使用ListCosEnableRegion来获取。
+         * @type {string || null}
+         */
+        this.CosRegion = null;
+
+        /**
+         * 队列名称。队列名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。如果IsEnableCmqNotify值是1的话，此值属于必填字段。如果不是新创建的队列，云审计不会去校验该队列是否真的存在，请谨慎填写，避免日志通知不成功，导致您的数据丢失。
+         * @type {string || null}
+         */
+        this.CmqQueueName = null;
+
+        /**
+         * 是否创建新的cos存储桶。1：是，0：否。
+         * @type {number || null}
+         */
+        this.IsCreateNewBucket = null;
+
+        /**
+         * kms地域。目前支持的地域可以使用ListKmsEnableRegion来获取。必须要和cos的地域保持一致。
+         * @type {string || null}
+         */
+        this.KmsRegion = null;
+
+        /**
+         * 是否开启kms加密。1：是，0：否。如果开启KMS加密，数据在投递到cos时，会将数据加密。
+         * @type {number || null}
+         */
+        this.IsEnableKmsEncry = null;
+
+        /**
+         * cos的存储桶名称。仅支持小写英文字母和数字即[a-z，0-9]、中划线“-”及其组合。用户自定义的字符串支持1 - 40个字符。存储桶命名不能以“-”开头或结尾。如果不是新创建的存储桶，云审计不会去校验该存储桶是否真的存在，请谨慎填写，避免日志投递不成功，导致您的数据丢失。
+         * @type {string || null}
+         */
+        this.CosBucketName = null;
+
+        /**
+         * 队列所在的地域。可以通过ListCmqEnableRegion获取支持的cmq地域。如果IsEnableCmqNotify值是1的话，此值属于必填字段。
+         * @type {string || null}
+         */
+        this.CmqRegion = null;
+
+        /**
+         * 日志文件前缀。3-40个字符，只能包含 ASCII 编码字母 a-z，A-Z，数字 0-9。
+         * @type {string || null}
+         */
+        this.LogFilePrefix = null;
+
+        /**
+         * 是否创建新的队列。1：是，0：否。如果IsEnableCmqNotify值是1的话，此值属于必填字段。
+         * @type {number || null}
+         */
+        this.IsCreateNewQueue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AuditName = 'AuditName' in params ? params.AuditName : null;
+        this.IsEnableCmqNotify = 'IsEnableCmqNotify' in params ? params.IsEnableCmqNotify : null;
+        this.ReadWriteAttribute = 'ReadWriteAttribute' in params ? params.ReadWriteAttribute : null;
+        this.KeyId = 'KeyId' in params ? params.KeyId : null;
+        this.CosRegion = 'CosRegion' in params ? params.CosRegion : null;
+        this.CmqQueueName = 'CmqQueueName' in params ? params.CmqQueueName : null;
+        this.IsCreateNewBucket = 'IsCreateNewBucket' in params ? params.IsCreateNewBucket : null;
+        this.KmsRegion = 'KmsRegion' in params ? params.KmsRegion : null;
+        this.IsEnableKmsEncry = 'IsEnableKmsEncry' in params ? params.IsEnableKmsEncry : null;
+        this.CosBucketName = 'CosBucketName' in params ? params.CosBucketName : null;
+        this.CmqRegion = 'CmqRegion' in params ? params.CmqRegion : null;
+        this.LogFilePrefix = 'LogFilePrefix' in params ? params.LogFilePrefix : null;
+        this.IsCreateNewQueue = 'IsCreateNewQueue' in params ? params.IsCreateNewQueue : null;
+
+    }
+}
+
+/**
+ * DescribeAuditTracks请求参数结构体
+ * @class
+ */
+class DescribeAuditTracksRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
  * CreateAudit返回参数结构体
  * @class
  */
@@ -541,6 +626,27 @@ class CreateAuditResponse extends  AbstractModel {
         }
         this.IsSuccess = 'IsSuccess' in params ? params.IsSuccess : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteAuditTrack请求参数结构体
+ * @class
+ */
+class DeleteAuditTrackRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
 
     }
 }
@@ -715,6 +821,34 @@ class ListKeyAliasByRegionResponse extends  AbstractModel {
 }
 
 /**
+ * CreateAuditTrack返回参数结构体
+ * @class
+ */
+class CreateAuditTrackResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 资源类型
  * @class
  */
@@ -772,6 +906,27 @@ class ListAuditsRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyAuditTrack请求参数结构体
+ * @class
+ */
+class ModifyAuditTrackRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
  * StopLogging返回参数结构体
  * @class
  */
@@ -802,6 +957,27 @@ class StopLoggingResponse extends  AbstractModel {
         }
         this.IsSuccess = 'IsSuccess' in params ? params.IsSuccess : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateAuditTrack请求参数结构体
+ * @class
+ */
+class CreateAuditTrackRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
 
     }
 }
@@ -955,10 +1131,16 @@ class DescribeEventsRequest extends  AbstractModel {
         this.MaxResults = null;
 
         /**
-         * 检索条件（目前支持 RequestId：请求 ID、EventName：事件名称、ActionType：操作类型（Write：写；Read：读）、PrincipalId：子账号、ResourceType：资源类型、ResourceName：资源名称、AccessKeyId：密钥 ID、SensitiveAction：是否敏感操作、ApiErrorCode：API 错误码、CamErrorCode：CAM 错误码）
+         * 检索条件（目前支持 RequestId：请求 ID、EventName：事件名称、ActionType：操作类型（Write：写；Read：读）、PrincipalId：子账号、ResourceType：资源类型、ResourceName：资源名称、AccessKeyId：密钥 ID、SensitiveAction：是否敏感操作、ApiErrorCode：API 错误码、CamErrorCode：CAM 错误码、Tags：标签（AttributeValue格式：[{"key":"*","value":"*"}]））
          * @type {Array.<LookupAttribute> || null}
          */
         this.LookupAttributes = null;
+
+        /**
+         * 是否返回 IP 归属地（1 返回，0 不返回）
+         * @type {number || null}
+         */
+        this.IsReturnLocation = null;
 
     }
 
@@ -982,6 +1164,7 @@ class DescribeEventsRequest extends  AbstractModel {
                 this.LookupAttributes.push(obj);
             }
         }
+        this.IsReturnLocation = 'IsReturnLocation' in params ? params.IsReturnLocation : null;
 
     }
 }
@@ -1406,6 +1589,34 @@ class LookUpEventsResponse extends  AbstractModel {
 }
 
 /**
+ * DeleteAuditTrack返回参数结构体
+ * @class
+ */
+class DeleteAuditTrackResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * cos地域信息
  * @class
  */
@@ -1760,21 +1971,28 @@ module.exports = {
     StopLoggingRequest: StopLoggingRequest,
     CmqRegionInfo: CmqRegionInfo,
     GetAttributeKeyRequest: GetAttributeKeyRequest,
+    DescribeAuditTracksResponse: DescribeAuditTracksResponse,
     DeleteAuditResponse: DeleteAuditResponse,
-    UpdateAuditRequest: UpdateAuditRequest,
+    ModifyAuditTrackResponse: ModifyAuditTrackResponse,
     InquireAuditCreditRequest: InquireAuditCreditRequest,
     DescribeEventsResponse: DescribeEventsResponse,
     ListCosEnableRegionResponse: ListCosEnableRegionResponse,
     LookUpEventsRequest: LookUpEventsRequest,
     StartLoggingRequest: StartLoggingRequest,
+    UpdateAuditRequest: UpdateAuditRequest,
+    DescribeAuditTracksRequest: DescribeAuditTracksRequest,
     CreateAuditResponse: CreateAuditResponse,
+    DeleteAuditTrackRequest: DeleteAuditTrackRequest,
     StartLoggingResponse: StartLoggingResponse,
     AttributeKeyDetail: AttributeKeyDetail,
     ListCosEnableRegionRequest: ListCosEnableRegionRequest,
     ListKeyAliasByRegionResponse: ListKeyAliasByRegionResponse,
+    CreateAuditTrackResponse: CreateAuditTrackResponse,
     Resource: Resource,
     ListAuditsRequest: ListAuditsRequest,
+    ModifyAuditTrackRequest: ModifyAuditTrackRequest,
     StopLoggingResponse: StopLoggingResponse,
+    CreateAuditTrackRequest: CreateAuditTrackRequest,
     LookupAttribute: LookupAttribute,
     ListAuditsResponse: ListAuditsResponse,
     KeyMetadata: KeyMetadata,
@@ -1788,6 +2006,7 @@ module.exports = {
     GetAttributeKeyResponse: GetAttributeKeyResponse,
     ListCmqEnableRegionResponse: ListCmqEnableRegionResponse,
     LookUpEventsResponse: LookUpEventsResponse,
+    DeleteAuditTrackResponse: DeleteAuditTrackResponse,
     CosRegionInfo: CosRegionInfo,
     DescribeAuditResponse: DescribeAuditResponse,
     Event: Event,

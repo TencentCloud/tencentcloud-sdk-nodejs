@@ -17,37 +17,54 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const SubAccountUser = models.SubAccountUser;
-const GetUserResponse = models.GetUserResponse;
+const ListAttachedRolePoliciesResponse = models.ListAttachedRolePoliciesResponse;
+const LoginActionFlagIntl = models.LoginActionFlagIntl;
+const UpdateUserOIDCConfigResponse = models.UpdateUserOIDCConfigResponse;
 const ListAccessKeysRequest = models.ListAccessKeysRequest;
 const SetMfaFlagResponse = models.SetMfaFlagResponse;
+const UpdateSAMLProviderRequest = models.UpdateSAMLProviderRequest;
 const DeleteUserRequest = models.DeleteUserRequest;
 const DetachGroupPolicyRequest = models.DetachGroupPolicyRequest;
 const DescribeRoleListResponse = models.DescribeRoleListResponse;
-const CreatePolicyResponse = models.CreatePolicyResponse;
+const UpdatePolicyResponse = models.UpdatePolicyResponse;
+const DeleteUserResponse = models.DeleteUserResponse;
 const GetRoleRequest = models.GetRoleRequest;
 const CreateServiceLinkedRoleRequest = models.CreateServiceLinkedRoleRequest;
 const ListAttachedGroupPoliciesRequest = models.ListAttachedGroupPoliciesRequest;
 const ListGroupsForUserRequest = models.ListGroupsForUserRequest;
 const AttachRolePolicyResponse = models.AttachRolePolicyResponse;
+const GetUserPermissionBoundaryRequest = models.GetUserPermissionBoundaryRequest;
+const DescribeOIDCConfigRequest = models.DescribeOIDCConfigRequest;
+const GetRolePermissionBoundaryRequest = models.GetRolePermissionBoundaryRequest;
 const GetServiceLinkedRoleDeletionStatusResponse = models.GetServiceLinkedRoleDeletionStatusResponse;
+const GetSecurityLastUsedRequest = models.GetSecurityLastUsedRequest;
+const DescribeUserSAMLConfigResponse = models.DescribeUserSAMLConfigResponse;
 const DeleteUserPermissionsBoundaryResponse = models.DeleteUserPermissionsBoundaryResponse;
 const ListUsersResponse = models.ListUsersResponse;
 const UpdateRoleDescriptionResponse = models.UpdateRoleDescriptionResponse;
-const DetachUserPolicyRequest = models.DetachUserPolicyRequest;
-const ListGroupsResponse = models.ListGroupsResponse;
+const GetAccountSummaryRequest = models.GetAccountSummaryRequest;
+const DeletePolicyResponse = models.DeletePolicyResponse;
+const GetUserAppIdResponse = models.GetUserAppIdResponse;
+const GetUserAppIdRequest = models.GetUserAppIdRequest;
+const DescribeOIDCConfigResponse = models.DescribeOIDCConfigResponse;
 const ListPolicyVersionsRequest = models.ListPolicyVersionsRequest;
 const GetCustomMFATokenInfoRequest = models.GetCustomMFATokenInfoRequest;
 const DescribeRoleListRequest = models.DescribeRoleListRequest;
+const DescribeUserSAMLConfigRequest = models.DescribeUserSAMLConfigRequest;
+const TagRoleResponse = models.TagRoleResponse;
+const PutRolePermissionsBoundaryRequest = models.PutRolePermissionsBoundaryRequest;
 const GetGroupRequest = models.GetGroupRequest;
+const StrategyInfo = models.StrategyInfo;
 const DeleteRoleResponse = models.DeleteRoleResponse;
 const PolicyVersionItem = models.PolicyVersionItem;
+const DetachUserPolicyRequest = models.DetachUserPolicyRequest;
 const DescribeSubAccountsRequest = models.DescribeSubAccountsRequest;
 const DeleteUserPermissionsBoundaryRequest = models.DeleteUserPermissionsBoundaryRequest;
 const ListSAMLProvidersRequest = models.ListSAMLProvidersRequest;
 const ListGroupsRequest = models.ListGroupsRequest;
 const DeletePolicyVersionResponse = models.DeletePolicyVersionResponse;
-const UpdateSAMLProviderRequest = models.UpdateSAMLProviderRequest;
-const UpdateAssumeRolePolicyRequest = models.UpdateAssumeRolePolicyRequest;
+const GetRolePermissionBoundaryResponse = models.GetRolePermissionBoundaryResponse;
+const AttachedUserPolicyGroupInfo = models.AttachedUserPolicyGroupInfo;
 const ListGroupsForUserResponse = models.ListGroupsForUserResponse;
 const ListUsersForGroupRequest = models.ListUsersForGroupRequest;
 const RemoveUserFromGroupRequest = models.RemoveUserFromGroupRequest;
@@ -57,24 +74,33 @@ const WeChatWorkSubAccount = models.WeChatWorkSubAccount;
 const OffsiteFlag = models.OffsiteFlag;
 const GroupIdOfUidInfo = models.GroupIdOfUidInfo;
 const UpdateRoleDescriptionRequest = models.UpdateRoleDescriptionRequest;
+const UpdateUserSAMLConfigRequest = models.UpdateUserSAMLConfigRequest;
 const DeleteGroupResponse = models.DeleteGroupResponse;
 const RoleInfo = models.RoleInfo;
 const DescribeSafeAuthFlagResponse = models.DescribeSafeAuthFlagResponse;
 const CreatePolicyVersionRequest = models.CreatePolicyVersionRequest;
+const SecretIdLastUsed = models.SecretIdLastUsed;
+const CreateUserOIDCConfigResponse = models.CreateUserOIDCConfigResponse;
+const ListAttachedUserAllPoliciesResponse = models.ListAttachedUserAllPoliciesResponse;
 const DeleteGroupRequest = models.DeleteGroupRequest;
-const ListAttachedRolePoliciesResponse = models.ListAttachedRolePoliciesResponse;
-const DeleteUserResponse = models.DeleteUserResponse;
+const GetUserResponse = models.GetUserResponse;
+const GetUserPermissionBoundaryResponse = models.GetUserPermissionBoundaryResponse;
+const CreatePolicyResponse = models.CreatePolicyResponse;
 const DetachRolePolicyRequest = models.DetachRolePolicyRequest;
+const UntagRoleResponse = models.UntagRoleResponse;
+const ListPoliciesGrantingServiceAccessResponse = models.ListPoliciesGrantingServiceAccessResponse;
 const DeleteRolePermissionsBoundaryRequest = models.DeleteRolePermissionsBoundaryRequest;
-const StrategyInfo = models.StrategyInfo;
+const RoleTags = models.RoleTags;
+const DescribeUserOIDCConfigResponse = models.DescribeUserOIDCConfigResponse;
 const DeletePolicyRequest = models.DeletePolicyRequest;
 const GroupInfo = models.GroupInfo;
 const AddUserRequest = models.AddUserRequest;
+const UpdateAssumeRolePolicyRequest = models.UpdateAssumeRolePolicyRequest;
 const LoginActionFlag = models.LoginActionFlag;
 const DeleteRoleRequest = models.DeleteRoleRequest;
 const ListWeChatWorkSubAccountsRequest = models.ListWeChatWorkSubAccountsRequest;
 const UpdateRoleConsoleLoginRequest = models.UpdateRoleConsoleLoginRequest;
-const GetCustomMFATokenInfoResponse = models.GetCustomMFATokenInfoResponse;
+const UpdateUserResponse = models.UpdateUserResponse;
 const UpdateAssumeRolePolicyResponse = models.UpdateAssumeRolePolicyResponse;
 const GetPolicyVersionRequest = models.GetPolicyVersionRequest;
 const CreateSAMLProviderResponse = models.CreateSAMLProviderResponse;
@@ -84,48 +110,67 @@ const LoginActionMfaFlag = models.LoginActionMfaFlag;
 const SubAccountInfo = models.SubAccountInfo;
 const CreateGroupRequest = models.CreateGroupRequest;
 const SAMLProviderInfo = models.SAMLProviderInfo;
+const ListGrantServiceAccessPolicy = models.ListGrantServiceAccessPolicy;
+const DisableUserSSORequest = models.DisableUserSSORequest;
+const ListPoliciesGrantingServiceAccessRequest = models.ListPoliciesGrantingServiceAccessRequest;
 const UpdateSAMLProviderResponse = models.UpdateSAMLProviderResponse;
 const UpdateUserRequest = models.UpdateUserRequest;
 const ListWeChatWorkSubAccountsResponse = models.ListWeChatWorkSubAccountsResponse;
 const CreateSAMLProviderRequest = models.CreateSAMLProviderRequest;
 const AttachPolicyInfo = models.AttachPolicyInfo;
-const PutRolePermissionsBoundaryRequest = models.PutRolePermissionsBoundaryRequest;
+const DisableUserSSOResponse = models.DisableUserSSOResponse;
 const UpdateRoleConsoleLoginResponse = models.UpdateRoleConsoleLoginResponse;
 const AttachRolePolicyRequest = models.AttachRolePolicyRequest;
 const ConsumeCustomMFATokenResponse = models.ConsumeCustomMFATokenResponse;
 const AttachUserPolicyRequest = models.AttachUserPolicyRequest;
 const ListAttachedGroupPoliciesResponse = models.ListAttachedGroupPoliciesResponse;
 const ListAttachedUserPoliciesResponse = models.ListAttachedUserPoliciesResponse;
+const ListGroupsResponse = models.ListGroupsResponse;
 const PutUserPermissionsBoundaryResponse = models.PutUserPermissionsBoundaryResponse;
-const DeletePolicyResponse = models.DeletePolicyResponse;
+const GetPolicyVersionResponse = models.GetPolicyVersionResponse;
+const GetCustomMFATokenInfoResponse = models.GetCustomMFATokenInfoResponse;
 const ConsumeCustomMFATokenRequest = models.ConsumeCustomMFATokenRequest;
+const CreateOIDCConfigRequest = models.CreateOIDCConfigRequest;
 const AccessKey = models.AccessKey;
 const GetGroupResponse = models.GetGroupResponse;
+const UpdateOIDCConfigResponse = models.UpdateOIDCConfigResponse;
 const DeleteSAMLProviderRequest = models.DeleteSAMLProviderRequest;
 const DeleteSAMLProviderResponse = models.DeleteSAMLProviderResponse;
-const UpdateUserResponse = models.UpdateUserResponse;
+const GetAccountSummaryResponse = models.GetAccountSummaryResponse;
 const CreateServiceLinkedRoleResponse = models.CreateServiceLinkedRoleResponse;
 const ListUsersRequest = models.ListUsersRequest;
 const ListCollaboratorsRequest = models.ListCollaboratorsRequest;
-const UpdatePolicyResponse = models.UpdatePolicyResponse;
+const CreateUserOIDCConfigRequest = models.CreateUserOIDCConfigRequest;
 const AttachGroupPolicyResponse = models.AttachGroupPolicyResponse;
 const UpdateGroupResponse = models.UpdateGroupResponse;
 const ListEntitiesForPolicyRequest = models.ListEntitiesForPolicyRequest;
+const TagRoleRequest = models.TagRoleRequest;
 const ListPoliciesRequest = models.ListPoliciesRequest;
 const GetServiceLinkedRoleDeletionStatusRequest = models.GetServiceLinkedRoleDeletionStatusRequest;
+const ListGrantServiceAccessActionNode = models.ListGrantServiceAccessActionNode;
 const DetachGroupPolicyResponse = models.DetachGroupPolicyResponse;
+const GroupMemberInfo = models.GroupMemberInfo;
 const CreatePolicyRequest = models.CreatePolicyRequest;
+const ListAttachedUserAllPoliciesRequest = models.ListAttachedUserAllPoliciesRequest;
 const DeletePolicyVersionRequest = models.DeletePolicyVersionRequest;
+const CreateUserSAMLConfigRequest = models.CreateUserSAMLConfigRequest;
 const UpdateGroupRequest = models.UpdateGroupRequest;
-const GetPolicyVersionResponse = models.GetPolicyVersionResponse;
+const ListGrantServiceAccessNode = models.ListGrantServiceAccessNode;
+const AttachGroupPolicyRequest = models.AttachGroupPolicyRequest;
+const UpdateOIDCConfigRequest = models.UpdateOIDCConfigRequest;
 const CreateRoleResponse = models.CreateRoleResponse;
 const GetSAMLProviderResponse = models.GetSAMLProviderResponse;
+const DescribeSafeAuthFlagIntlResponse = models.DescribeSafeAuthFlagIntlResponse;
 const ListPolicyVersionsResponse = models.ListPolicyVersionsResponse;
 const GetPolicyRequest = models.GetPolicyRequest;
+const DescribeSafeAuthFlagIntlRequest = models.DescribeSafeAuthFlagIntlRequest;
 const SetDefaultPolicyVersionRequest = models.SetDefaultPolicyVersionRequest;
+const UpdateUserOIDCConfigRequest = models.UpdateUserOIDCConfigRequest;
 const AddUserToGroupRequest = models.AddUserToGroupRequest;
 const RemoveUserFromGroupResponse = models.RemoveUserFromGroupResponse;
 const DetachRolePolicyResponse = models.DetachRolePolicyResponse;
+const DescribeUserOIDCConfigRequest = models.DescribeUserOIDCConfigRequest;
+const CreateOIDCConfigResponse = models.CreateOIDCConfigResponse;
 const AttachedPolicyOfRole = models.AttachedPolicyOfRole;
 const PutUserPermissionsBoundaryRequest = models.PutUserPermissionsBoundaryRequest;
 const ListSAMLProvidersResponse = models.ListSAMLProvidersResponse;
@@ -135,18 +180,22 @@ const GetSAMLProviderRequest = models.GetSAMLProviderRequest;
 const DetachUserPolicyResponse = models.DetachUserPolicyResponse;
 const GetRoleResponse = models.GetRoleResponse;
 const CreateRoleRequest = models.CreateRoleRequest;
+const AttachedUserPolicy = models.AttachedUserPolicy;
 const DeleteServiceLinkedRoleResponse = models.DeleteServiceLinkedRoleResponse;
+const ListUsersForGroupResponse = models.ListUsersForGroupResponse;
 const GetPolicyResponse = models.GetPolicyResponse;
 const DescribeSafeAuthFlagRequest = models.DescribeSafeAuthFlagRequest;
-const AttachGroupPolicyRequest = models.AttachGroupPolicyRequest;
 const DeleteServiceLinkedRoleRequest = models.DeleteServiceLinkedRoleRequest;
 const AttachEntityOfPolicy = models.AttachEntityOfPolicy;
-const ListUsersForGroupResponse = models.ListUsersForGroupResponse;
+const DeleteOIDCConfigResponse = models.DeleteOIDCConfigResponse;
 const PolicyVersionDetail = models.PolicyVersionDetail;
 const AddUserResponse = models.AddUserResponse;
+const ListGrantServiceAccessService = models.ListGrantServiceAccessService;
+const CreateUserSAMLConfigResponse = models.CreateUserSAMLConfigResponse;
 const DescribeSubAccountsResponse = models.DescribeSubAccountsResponse;
 const ListEntitiesForPolicyResponse = models.ListEntitiesForPolicyResponse;
 const AddUserToGroupResponse = models.AddUserToGroupResponse;
+const UpdateUserSAMLConfigResponse = models.UpdateUserSAMLConfigResponse;
 const AttachUserPolicyResponse = models.AttachUserPolicyResponse;
 const DescribeSafeAuthFlagCollResponse = models.DescribeSafeAuthFlagCollResponse;
 const DescribeSafeAuthFlagCollRequest = models.DescribeSafeAuthFlagCollRequest;
@@ -154,9 +203,11 @@ const PutRolePermissionsBoundaryResponse = models.PutRolePermissionsBoundaryResp
 const SetMfaFlagRequest = models.SetMfaFlagRequest;
 const ListCollaboratorsResponse = models.ListCollaboratorsResponse;
 const ListAccessKeysResponse = models.ListAccessKeysResponse;
+const GetSecurityLastUsedResponse = models.GetSecurityLastUsedResponse;
 const ListAttachedUserPoliciesRequest = models.ListAttachedUserPoliciesRequest;
 const UpdatePolicyRequest = models.UpdatePolicyRequest;
-const GroupMemberInfo = models.GroupMemberInfo;
+const DeleteOIDCConfigRequest = models.DeleteOIDCConfigRequest;
+const UntagRoleRequest = models.UntagRoleRequest;
 const CreateGroupResponse = models.CreateGroupResponse;
 
 
@@ -170,6 +221,17 @@ class CamClient extends AbstractClient {
         super("cam.tencentcloudapi.com", "2019-01-16", credential, region, profile);
     }
     
+    /**
+     * 获取用户AppId
+     * @param {GetUserAppIdRequest} req
+     * @param {function(string, GetUserAppIdResponse):void} cb
+     * @public
+     */
+    GetUserAppId(req, cb) {
+        let resp = new GetUserAppIdResponse();
+        this.request("GetUserAppId", req, resp, cb);
+    }
+
     /**
      * 设置子用户的登录保护和敏感操作校验方式
      * @param {SetMfaFlagRequest} req
@@ -270,6 +332,17 @@ class CamClient extends AbstractClient {
     }
 
     /**
+     * 修改用户OIDC配置
+     * @param {UpdateUserOIDCConfigRequest} req
+     * @param {function(string, UpdateUserOIDCConfigResponse):void} cb
+     * @public
+     */
+    UpdateUserOIDCConfig(req, cb) {
+        let resp = new UpdateUserOIDCConfigResponse();
+        this.request("UpdateUserOIDCConfig", req, resp, cb);
+    }
+
+    /**
      * 设置角色权限边界
      * @param {PutRolePermissionsBoundaryRequest} req
      * @param {function(string, PutRolePermissionsBoundaryResponse):void} cb
@@ -325,6 +398,17 @@ class CamClient extends AbstractClient {
     }
 
     /**
+     * 查询用户SAML配置
+     * @param {DescribeUserSAMLConfigRequest} req
+     * @param {function(string, DescribeUserSAMLConfigResponse):void} cb
+     * @public
+     */
+    DescribeUserSAMLConfig(req, cb) {
+        let resp = new DescribeUserSAMLConfigResponse();
+        this.request("DescribeUserSAMLConfig", req, resp, cb);
+    }
+
+    /**
      * 本接口（DeletePolicyVersion）可用于删除一个策略的策略版本。
      * @param {DeletePolicyVersionRequest} req
      * @param {function(string, DeletePolicyVersionResponse):void} cb
@@ -344,6 +428,28 @@ class CamClient extends AbstractClient {
     DetachRolePolicy(req, cb) {
         let resp = new DetachRolePolicyResponse();
         this.request("DetachRolePolicy", req, resp, cb);
+    }
+
+    /**
+     * 角色绑定标签
+     * @param {TagRoleRequest} req
+     * @param {function(string, TagRoleResponse):void} cb
+     * @public
+     */
+    TagRole(req, cb) {
+        let resp = new TagRoleResponse();
+        this.request("TagRole", req, resp, cb);
+    }
+
+    /**
+     * 本接口（SetDefaultPolicyVersion）可用于设置生效的策略版本。
+     * @param {SetDefaultPolicyVersionRequest} req
+     * @param {function(string, SetDefaultPolicyVersionResponse):void} cb
+     * @public
+     */
+    SetDefaultPolicyVersion(req, cb) {
+        let resp = new SetDefaultPolicyVersionResponse();
+        this.request("SetDefaultPolicyVersion", req, resp, cb);
     }
 
     /**
@@ -391,6 +497,17 @@ class CamClient extends AbstractClient {
     }
 
     /**
+     * 创建用户OIDC配置。只能创建一个用户OIDC身份提供商，并且创建用户OIDC配置之后会自动关闭用户SAML SSO身份提供商。
+     * @param {CreateUserOIDCConfigRequest} req
+     * @param {function(string, CreateUserOIDCConfigResponse):void} cb
+     * @public
+     */
+    CreateUserOIDCConfig(req, cb) {
+        let resp = new CreateUserOIDCConfigResponse();
+        this.request("CreateUserOIDCConfig", req, resp, cb);
+    }
+
+    /**
      * 本接口（GetPolicy）可用于查询查看策略详情。
      * @param {GetPolicyRequest} req
      * @param {function(string, GetPolicyResponse):void} cb
@@ -402,14 +519,14 @@ class CamClient extends AbstractClient {
     }
 
     /**
-     * 更新SAML身份提供商信息
-     * @param {UpdateSAMLProviderRequest} req
-     * @param {function(string, UpdateSAMLProviderResponse):void} cb
+     * 获取角色权限边界
+     * @param {GetRolePermissionBoundaryRequest} req
+     * @param {function(string, GetRolePermissionBoundaryResponse):void} cb
      * @public
      */
-    UpdateSAMLProvider(req, cb) {
-        let resp = new UpdateSAMLProviderResponse();
-        this.request("UpdateSAMLProvider", req, resp, cb);
+    GetRolePermissionBoundary(req, cb) {
+        let resp = new GetRolePermissionBoundaryResponse();
+        this.request("GetRolePermissionBoundary", req, resp, cb);
     }
 
     /**
@@ -446,6 +563,17 @@ class CamClient extends AbstractClient {
     }
 
     /**
+     * 修改角色OIDC配置
+     * @param {UpdateOIDCConfigRequest} req
+     * @param {function(string, UpdateOIDCConfigResponse):void} cb
+     * @public
+     */
+    UpdateOIDCConfig(req, cb) {
+        let resp = new UpdateOIDCConfigResponse();
+        this.request("UpdateOIDCConfig", req, resp, cb);
+    }
+
+    /**
      * 本接口（DeleteRole）用于删除指定角色。
      * @param {DeleteRoleRequest} req
      * @param {function(string, DeleteRoleResponse):void} cb
@@ -479,6 +607,17 @@ class CamClient extends AbstractClient {
     }
 
     /**
+     * 查询角色OIDC配置
+     * @param {DescribeOIDCConfigRequest} req
+     * @param {function(string, DescribeOIDCConfigResponse):void} cb
+     * @public
+     */
+    DescribeOIDCConfig(req, cb) {
+        let resp = new DescribeOIDCConfigResponse();
+        this.request("DescribeOIDCConfig", req, resp, cb);
+    }
+
+    /**
      * 本接口（ListAttachedGroupPolicies）可用于查询用户组关联的策略列表。
      * @param {ListAttachedGroupPoliciesRequest} req
      * @param {function(string, ListAttachedGroupPoliciesResponse):void} cb
@@ -501,6 +640,28 @@ class CamClient extends AbstractClient {
     }
 
     /**
+     * 查询用户OIDC配置
+     * @param {DescribeUserOIDCConfigRequest} req
+     * @param {function(string, DescribeUserOIDCConfigResponse):void} cb
+     * @public
+     */
+    DescribeUserOIDCConfig(req, cb) {
+        let resp = new DescribeUserOIDCConfigResponse();
+        this.request("DescribeUserOIDCConfig", req, resp, cb);
+    }
+
+    /**
+     * 获取所有已授权服务
+     * @param {ListPoliciesGrantingServiceAccessRequest} req
+     * @param {function(string, ListPoliciesGrantingServiceAccessResponse):void} cb
+     * @public
+     */
+    ListPoliciesGrantingServiceAccess(req, cb) {
+        let resp = new ListPoliciesGrantingServiceAccessResponse();
+        this.request("ListPoliciesGrantingServiceAccess", req, resp, cb);
+    }
+
+    /**
      * 验证自定义多因子Token
      * @param {ConsumeCustomMFATokenRequest} req
      * @param {function(string, ConsumeCustomMFATokenResponse):void} cb
@@ -512,14 +673,14 @@ class CamClient extends AbstractClient {
     }
 
     /**
-     * 查询用户组详情
-     * @param {GetGroupRequest} req
-     * @param {function(string, GetGroupResponse):void} cb
+     * 创建角色OIDC配置
+     * @param {CreateOIDCConfigRequest} req
+     * @param {function(string, CreateOIDCConfigResponse):void} cb
      * @public
      */
-    GetGroup(req, cb) {
-        let resp = new GetGroupResponse();
-        this.request("GetGroup", req, resp, cb);
+    CreateOIDCConfig(req, cb) {
+        let resp = new CreateOIDCConfigResponse();
+        this.request("CreateOIDCConfig", req, resp, cb);
     }
 
     /**
@@ -534,25 +695,47 @@ class CamClient extends AbstractClient {
     }
 
     /**
-     * 本接口（UpdateAssumeRolePolicy）用于修改角色信任策略的策略文档。
-     * @param {UpdateAssumeRolePolicyRequest} req
-     * @param {function(string, UpdateAssumeRolePolicyResponse):void} cb
+     * 列出用户关联的策略（包括随组关联）
+     * @param {ListAttachedUserAllPoliciesRequest} req
+     * @param {function(string, ListAttachedUserAllPoliciesResponse):void} cb
      * @public
      */
-    UpdateAssumeRolePolicy(req, cb) {
-        let resp = new UpdateAssumeRolePolicyResponse();
-        this.request("UpdateAssumeRolePolicy", req, resp, cb);
+    ListAttachedUserAllPolicies(req, cb) {
+        let resp = new ListAttachedUserAllPoliciesResponse();
+        this.request("ListAttachedUserAllPolicies", req, resp, cb);
     }
 
     /**
-     * 本接口（SetDefaultPolicyVersion）可用于设置生效的策略版本。
-     * @param {SetDefaultPolicyVersionRequest} req
-     * @param {function(string, SetDefaultPolicyVersionResponse):void} cb
+     * 获取用户权限边界
+     * @param {GetUserPermissionBoundaryRequest} req
+     * @param {function(string, GetUserPermissionBoundaryResponse):void} cb
      * @public
      */
-    SetDefaultPolicyVersion(req, cb) {
-        let resp = new SetDefaultPolicyVersionResponse();
-        this.request("SetDefaultPolicyVersion", req, resp, cb);
+    GetUserPermissionBoundary(req, cb) {
+        let resp = new GetUserPermissionBoundaryResponse();
+        this.request("GetUserPermissionBoundary", req, resp, cb);
+    }
+
+    /**
+     * 创建用户SAML配置
+     * @param {CreateUserSAMLConfigRequest} req
+     * @param {function(string, CreateUserSAMLConfigResponse):void} cb
+     * @public
+     */
+    CreateUserSAMLConfig(req, cb) {
+        let resp = new CreateUserSAMLConfigResponse();
+        this.request("CreateUserSAMLConfig", req, resp, cb);
+    }
+
+    /**
+     * 更新SAML身份提供商信息
+     * @param {UpdateSAMLProviderRequest} req
+     * @param {function(string, UpdateSAMLProviderResponse):void} cb
+     * @public
+     */
+    UpdateSAMLProvider(req, cb) {
+        let resp = new UpdateSAMLProviderResponse();
+        this.request("UpdateSAMLProvider", req, resp, cb);
     }
 
     /**
@@ -600,15 +783,25 @@ class CamClient extends AbstractClient {
     }
 
     /**
-     * 本接口（UpdatePolicy ）可用于更新策略。
-如果已存在策略版本，本接口会直接更新策略的默认版本，不会创建新版本，如果不存在任何策略版本，则直接创建一个默认版本。
-     * @param {UpdatePolicyRequest} req
-     * @param {function(string, UpdatePolicyResponse):void} cb
+     * 查询账户摘要 
+     * @param {GetAccountSummaryRequest} req
+     * @param {function(string, GetAccountSummaryResponse):void} cb
      * @public
      */
-    UpdatePolicy(req, cb) {
-        let resp = new UpdatePolicyResponse();
-        this.request("UpdatePolicy", req, resp, cb);
+    GetAccountSummary(req, cb) {
+        let resp = new GetAccountSummaryResponse();
+        this.request("GetAccountSummary", req, resp, cb);
+    }
+
+    /**
+     * 角色解绑标签。
+     * @param {UntagRoleRequest} req
+     * @param {function(string, UntagRoleResponse):void} cb
+     * @public
+     */
+    UntagRole(req, cb) {
+        let resp = new UntagRoleResponse();
+        this.request("UntagRole", req, resp, cb);
     }
 
     /**
@@ -623,7 +816,7 @@ class CamClient extends AbstractClient {
     }
 
     /**
-     * 查询安全设置
+     * 查询用户安全设置
      * @param {DescribeSafeAuthFlagRequest} req
      * @param {function(string, DescribeSafeAuthFlagResponse):void} cb
      * @public
@@ -631,6 +824,28 @@ class CamClient extends AbstractClient {
     DescribeSafeAuthFlag(req, cb) {
         let resp = new DescribeSafeAuthFlagResponse();
         this.request("DescribeSafeAuthFlag", req, resp, cb);
+    }
+
+    /**
+     * 查询安全设置(国际站)
+     * @param {DescribeSafeAuthFlagIntlRequest} req
+     * @param {function(string, DescribeSafeAuthFlagIntlResponse):void} cb
+     * @public
+     */
+    DescribeSafeAuthFlagIntl(req, cb) {
+        let resp = new DescribeSafeAuthFlagIntlResponse();
+        this.request("DescribeSafeAuthFlagIntl", req, resp, cb);
+    }
+
+    /**
+     * 更新用户组
+     * @param {UpdateGroupRequest} req
+     * @param {function(string, UpdateGroupResponse):void} cb
+     * @public
+     */
+    UpdateGroup(req, cb) {
+        let resp = new UpdateGroupResponse();
+        this.request("UpdateGroup", req, resp, cb);
     }
 
     /**
@@ -656,6 +871,17 @@ class CamClient extends AbstractClient {
     }
 
     /**
+     * 本接口（ListEntitiesForPolicy）可用于查询策略关联的实体列表。
+     * @param {ListEntitiesForPolicyRequest} req
+     * @param {function(string, ListEntitiesForPolicyResponse):void} cb
+     * @public
+     */
+    ListEntitiesForPolicy(req, cb) {
+        let resp = new ListEntitiesForPolicyResponse();
+        this.request("ListEntitiesForPolicy", req, resp, cb);
+    }
+
+    /**
      * 本接口（ListAttachedUserPolicies）可用于查询子账号关联的策略列表。
      * @param {ListAttachedUserPoliciesRequest} req
      * @param {function(string, ListAttachedUserPoliciesResponse):void} cb
@@ -675,6 +901,17 @@ class CamClient extends AbstractClient {
     DeleteUser(req, cb) {
         let resp = new DeleteUserResponse();
         this.request("DeleteUser", req, resp, cb);
+    }
+
+    /**
+     * 修改用户SAML配置
+     * @param {UpdateUserSAMLConfigRequest} req
+     * @param {function(string, UpdateUserSAMLConfigResponse):void} cb
+     * @public
+     */
+    UpdateUserSAMLConfig(req, cb) {
+        let resp = new UpdateUserSAMLConfigResponse();
+        this.request("UpdateUserSAMLConfig", req, resp, cb);
     }
 
     /**
@@ -766,14 +1003,25 @@ class CamClient extends AbstractClient {
     }
 
     /**
-     * 本接口（ListEntitiesForPolicy）可用于查询策略关联的实体列表。
-     * @param {ListEntitiesForPolicyRequest} req
-     * @param {function(string, ListEntitiesForPolicyResponse):void} cb
+     * 查询用户组详情
+     * @param {GetGroupRequest} req
+     * @param {function(string, GetGroupResponse):void} cb
      * @public
      */
-    ListEntitiesForPolicy(req, cb) {
-        let resp = new ListEntitiesForPolicyResponse();
-        this.request("ListEntitiesForPolicy", req, resp, cb);
+    GetGroup(req, cb) {
+        let resp = new GetGroupResponse();
+        this.request("GetGroup", req, resp, cb);
+    }
+
+    /**
+     * 删除OIDC身份提供商
+     * @param {DeleteOIDCConfigRequest} req
+     * @param {function(string, DeleteOIDCConfigResponse):void} cb
+     * @public
+     */
+    DeleteOIDCConfig(req, cb) {
+        let resp = new DeleteOIDCConfigResponse();
+        this.request("DeleteOIDCConfig", req, resp, cb);
     }
 
     /**
@@ -788,6 +1036,17 @@ class CamClient extends AbstractClient {
     }
 
     /**
+     * 获取密钥最近使用情况
+     * @param {GetSecurityLastUsedRequest} req
+     * @param {function(string, GetSecurityLastUsedResponse):void} cb
+     * @public
+     */
+    GetSecurityLastUsed(req, cb) {
+        let resp = new GetSecurityLastUsedResponse();
+        this.request("GetSecurityLastUsed", req, resp, cb);
+    }
+
+    /**
      * 本接口（AttachGroupPolicy）可用于绑定策略到用户组。
      * @param {AttachGroupPolicyRequest} req
      * @param {function(string, AttachGroupPolicyResponse):void} cb
@@ -799,14 +1058,14 @@ class CamClient extends AbstractClient {
     }
 
     /**
-     * 更新用户组
-     * @param {UpdateGroupRequest} req
-     * @param {function(string, UpdateGroupResponse):void} cb
+     * 禁用用户SSO
+     * @param {DisableUserSSORequest} req
+     * @param {function(string, DisableUserSSOResponse):void} cb
      * @public
      */
-    UpdateGroup(req, cb) {
-        let resp = new UpdateGroupResponse();
-        this.request("UpdateGroup", req, resp, cb);
+    DisableUserSSO(req, cb) {
+        let resp = new DisableUserSSOResponse();
+        this.request("DisableUserSSO", req, resp, cb);
     }
 
     /**
@@ -832,6 +1091,17 @@ class CamClient extends AbstractClient {
     }
 
     /**
+     * 本接口（UpdateAssumeRolePolicy）用于修改角色信任策略的策略文档。
+     * @param {UpdateAssumeRolePolicyRequest} req
+     * @param {function(string, UpdateAssumeRolePolicyResponse):void} cb
+     * @public
+     */
+    UpdateAssumeRolePolicy(req, cb) {
+        let resp = new UpdateAssumeRolePolicyResponse();
+        this.request("UpdateAssumeRolePolicy", req, resp, cb);
+    }
+
+    /**
      * 本接口（DetachUserPolicy）可用于解除绑定到用户的策略。
      * @param {DetachUserPolicyRequest} req
      * @param {function(string, DetachUserPolicyResponse):void} cb
@@ -851,6 +1121,18 @@ class CamClient extends AbstractClient {
     ListGroupsForUser(req, cb) {
         let resp = new ListGroupsForUserResponse();
         this.request("ListGroupsForUser", req, resp, cb);
+    }
+
+    /**
+     * 本接口（UpdatePolicy ）可用于更新策略。
+如果已存在策略版本，本接口会直接更新策略的默认版本，不会创建新版本，如果不存在任何策略版本，则直接创建一个默认版本。
+     * @param {UpdatePolicyRequest} req
+     * @param {function(string, UpdatePolicyResponse):void} cb
+     * @public
+     */
+    UpdatePolicy(req, cb) {
+        let resp = new UpdatePolicyResponse();
+        this.request("UpdatePolicy", req, resp, cb);
     }
 
 

@@ -17,6 +17,34 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * StopPublishStream返回参数结构体
+ * @class
+ */
+class StopPublishStreamResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * StopGame请求参数结构体
  * @class
  */
@@ -25,7 +53,7 @@ class StopGameRequest extends  AbstractModel {
         super();
 
         /**
-         * 游戏用户ID
+         * 唯一用户身份标识，由业务方自定义，平台不予理解。（可根据业务需要决定使用用户的唯一身份标识或是使用时间戳随机生成；在用户重连时应保持UserId不变）
          * @type {string || null}
          */
         this.UserId = null;
@@ -75,6 +103,34 @@ class SaveGameArchiveResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * StopPublishStream请求参数结构体
+ * @class
+ */
+class StopPublishStreamRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一用户身份标识，由业务方自定义，平台不予理解。（可根据业务需要决定使用用户的唯一身份标识或是使用时间戳随机生成；在用户重连时应保持UserId不变）
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UserId = 'UserId' in params ? params.UserId : null;
 
     }
 }
@@ -199,6 +255,34 @@ class DescribeInstancesCountResponse extends  AbstractModel {
 }
 
 /**
+ * StartPublishStream返回参数结构体
+ * @class
+ */
+class StartPublishStreamResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateSession请求参数结构体
  * @class
  */
@@ -213,7 +297,7 @@ class CreateSessionRequest extends  AbstractModel {
         this.ClientSession = null;
 
         /**
-         * 游戏用户ID
+         * 唯一用户身份标识，由业务方自定义，平台不予理解。（可根据业务需要决定使用用户的唯一身份标识或是使用时间戳随机生成；在用户重连时应保持UserId不变）
          * @type {string || null}
          */
         this.UserId = null;
@@ -255,19 +339,19 @@ class CreateSessionRequest extends  AbstractModel {
         this.SetNo = null;
 
         /**
-         * 单位Mbps，固定码率，有一定浮动范围，后端不动态调整(MaxBitrate和MinBitrate将无效)
+         * 单位Mbps，固定码率建议值，有一定浮动范围，后端不动态调整(MaxBitrate和MinBitrate将无效)
          * @type {number || null}
          */
         this.Bitrate = null;
 
         /**
-         * 单位Mbps，动态调整最大码率，有一定浮动范围
+         * 单位Mbps，动态调整最大码率建议值，会按实际情况调整
          * @type {number || null}
          */
         this.MaxBitrate = null;
 
         /**
-         * 单位Mbps，动态调整最小码率，有一定浮动范围
+         * 单位Mbps，动态调整最小码率建议值，会按实际情况调整
          * @type {number || null}
          */
         this.MinBitrate = null;
@@ -308,6 +392,14 @@ class CreateSessionRequest extends  AbstractModel {
          */
         this.GameContext = null;
 
+        /**
+         * 云端运行模式。
+RunWithoutClient：允许无客户端连接的情况下仍保持云端 App 运行
+默认值（空）：要求必须有客户端连接才会保持云端 App 运行。
+         * @type {string || null}
+         */
+        this.RunMode = null;
+
     }
 
     /**
@@ -334,6 +426,7 @@ class CreateSessionRequest extends  AbstractModel {
         this.HostUserId = 'HostUserId' in params ? params.HostUserId : null;
         this.Role = 'Role' in params ? params.Role : null;
         this.GameContext = 'GameContext' in params ? params.GameContext : null;
+        this.RunMode = 'RunMode' in params ? params.RunMode : null;
 
     }
 }
@@ -466,7 +559,7 @@ class TrylockWorkerRequest extends  AbstractModel {
         super();
 
         /**
-         * 游戏用户ID
+         * 唯一用户身份标识，由业务方自定义，平台不予理解。（可根据业务需要决定使用用户的唯一身份标识或是使用时间戳随机生成；在用户重连时应保持UserId不变）
          * @type {string || null}
          */
         this.UserId = null;
@@ -490,7 +583,7 @@ class TrylockWorkerRequest extends  AbstractModel {
         this.SetNo = null;
 
         /**
-         * 游戏用户IP，用于就近调度，例如125.127.178.228
+         * 【必选】用户IP，用于就近调度，不填将严重影响用户体验
          * @type {string || null}
          */
         this.UserIp = null;
@@ -549,6 +642,41 @@ class SwitchGameArchiveResponse extends  AbstractModel {
 }
 
 /**
+ * StartPublishStream请求参数结构体
+ * @class
+ */
+class StartPublishStreamRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一用户身份标识，由业务方自定义，平台不予理解。（可根据业务需要决定使用用户的唯一身份标识或是使用时间戳随机生成；在用户重连时应保持UserId不变）
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+        /**
+         * 推流地址，仅支持rtmp协议
+         * @type {string || null}
+         */
+        this.PublishUrl = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UserId = 'UserId' in params ? params.UserId : null;
+        this.PublishUrl = 'PublishUrl' in params ? params.PublishUrl : null;
+
+    }
+}
+
+/**
  * StopGame返回参数结构体
  * @class
  */
@@ -577,17 +705,21 @@ class StopGameResponse extends  AbstractModel {
 }
 
 module.exports = {
+    StopPublishStreamResponse: StopPublishStreamResponse,
     StopGameRequest: StopGameRequest,
     SaveGameArchiveResponse: SaveGameArchiveResponse,
+    StopPublishStreamRequest: StopPublishStreamRequest,
     SwitchGameArchiveRequest: SwitchGameArchiveRequest,
     TrylockWorkerResponse: TrylockWorkerResponse,
     DescribeInstancesCountResponse: DescribeInstancesCountResponse,
+    StartPublishStreamResponse: StartPublishStreamResponse,
     CreateSessionRequest: CreateSessionRequest,
     CreateSessionResponse: CreateSessionResponse,
     DescribeInstancesCountRequest: DescribeInstancesCountRequest,
     SaveGameArchiveRequest: SaveGameArchiveRequest,
     TrylockWorkerRequest: TrylockWorkerRequest,
     SwitchGameArchiveResponse: SwitchGameArchiveResponse,
+    StartPublishStreamRequest: StartPublishStreamRequest,
     StopGameResponse: StopGameResponse,
 
 }

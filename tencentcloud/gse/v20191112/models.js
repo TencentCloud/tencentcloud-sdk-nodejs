@@ -7635,6 +7635,48 @@ class UpdateRuntimeConfigurationRequest extends  AbstractModel {
 }
 
 /**
+ * EndGameServerSessionAndProcess请求参数结构体
+ * @class
+ */
+class EndGameServerSessionAndProcessRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 游戏服务器会话ID，如果传入游戏服务器会话ID，结束对应进程以及游戏服务器会话和玩家会话。
+         * @type {string || null}
+         */
+        this.GameServerSessionId = null;
+
+        /**
+         * CVM的公网IP地址，需同时传入IpAddress和Port，结束IpAddress和Port对应的进程以及游戏服务器会话（如果存在）和玩家会话（如果存在），单独传入IpAddress不生效。
+         * @type {string || null}
+         */
+        this.IpAddress = null;
+
+        /**
+         * 端口号，取值范围1025-60000，需同时传入IpAddress和Port，结束IpAddress和Port对应的进程以及游戏服务器会话（如果存在）和玩家会话（如果存在），单独传入Port不生效。
+         * @type {number || null}
+         */
+        this.Port = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.GameServerSessionId = 'GameServerSessionId' in params ? params.GameServerSessionId : null;
+        this.IpAddress = 'IpAddress' in params ? params.IpAddress : null;
+        this.Port = 'Port' in params ? params.Port : null;
+
+    }
+}
+
+/**
  * 游戏属性详情
  * @class
  */
@@ -8389,6 +8431,34 @@ class CopyFleetRequest extends  AbstractModel {
             }
         }
         this.InternetMaxBandwidthOut = 'InternetMaxBandwidthOut' in params ? params.InternetMaxBandwidthOut : null;
+
+    }
+}
+
+/**
+ * EndGameServerSessionAndProcess返回参数结构体
+ * @class
+ */
+class EndGameServerSessionAndProcessResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -10229,6 +10299,7 @@ module.exports = {
     PlayerLatencyPolicy: PlayerLatencyPolicy,
     FleetRelatedResource: FleetRelatedResource,
     UpdateRuntimeConfigurationRequest: UpdateRuntimeConfigurationRequest,
+    EndGameServerSessionAndProcessRequest: EndGameServerSessionAndProcessRequest,
     GameProperty: GameProperty,
     CreateAssetWithImageResponse: CreateAssetWithImageResponse,
     FleetStatisticTimes: FleetStatisticTimes,
@@ -10243,6 +10314,7 @@ module.exports = {
     GetUploadFederationTokenRequest: GetUploadFederationTokenRequest,
     DescribeTimerScalingPoliciesResponse: DescribeTimerScalingPoliciesResponse,
     CopyFleetRequest: CopyFleetRequest,
+    EndGameServerSessionAndProcessResponse: EndGameServerSessionAndProcessResponse,
     SearchGameServerSessionsResponse: SearchGameServerSessionsResponse,
     PutTimerScalingPolicyResponse: PutTimerScalingPolicyResponse,
     DescribeFleetEventsResponse: DescribeFleetEventsResponse,

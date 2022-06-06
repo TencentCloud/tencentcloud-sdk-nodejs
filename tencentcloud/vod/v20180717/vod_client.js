@@ -19,6 +19,7 @@ const AbstractClient = require('../../common/abstract_client')
 const Canvas = models.Canvas;
 const ModifySampleSnapshotTemplateResponse = models.ModifySampleSnapshotTemplateResponse;
 const ModifyWatermarkTemplateRequest = models.ModifyWatermarkTemplateRequest;
+const CreateStorageRegionRequest = models.CreateStorageRegionRequest;
 const AiRecognitionTaskAsrFullTextSegmentItem = models.AiRecognitionTaskAsrFullTextSegmentItem;
 const UserDefineOcrTextReviewTemplateInfoForUpdate = models.UserDefineOcrTextReviewTemplateInfoForUpdate;
 const DescribeAllClassRequest = models.DescribeAllClassRequest;
@@ -40,6 +41,7 @@ const AiReviewProhibitedOcrTaskOutput = models.AiReviewProhibitedOcrTaskOutput;
 const MediaMiniProgramReviewElem = models.MediaMiniProgramReviewElem;
 const ManageTaskResponse = models.ManageTaskResponse;
 const CreateImageProcessingTemplateRequest = models.CreateImageProcessingTemplateRequest;
+const ModifyDefaultStorageRegionRequest = models.ModifyDefaultStorageRegionRequest;
 const ModifyEventConfigResponse = models.ModifyEventConfigResponse;
 const AiAnalysisTaskCoverOutput = models.AiAnalysisTaskCoverOutput;
 const MediaSnapshotByTimeOffsetItem = models.MediaSnapshotByTimeOffsetItem;
@@ -48,9 +50,10 @@ const AiReviewPoliticalOcrTaskInput = models.AiReviewPoliticalOcrTaskInput;
 const DescribePrepaidProductsRequest = models.DescribePrepaidProductsRequest;
 const MediaInputInfo = models.MediaInputInfo;
 const CreateImageSpriteTask2017 = models.CreateImageSpriteTask2017;
+const ClipFileInfo2017 = models.ClipFileInfo2017;
 const TempCertificate = models.TempCertificate;
 const AiReviewTaskPoliticalOcrResult = models.AiReviewTaskPoliticalOcrResult;
-const ManageTaskRequest = models.ManageTaskRequest;
+const AiSampleWord = models.AiSampleWord;
 const CreateImageSpriteTemplateRequest = models.CreateImageSpriteTemplateRequest;
 const MediaSnapshotByTimePicInfoItem = models.MediaSnapshotByTimePicInfoItem;
 const DescribeDailyMostPlayedStatRequest = models.DescribeDailyMostPlayedStatRequest;
@@ -61,7 +64,9 @@ const DeleteContentReviewTemplateRequest = models.DeleteContentReviewTemplateReq
 const AiReviewPoliticalTaskInput = models.AiReviewPoliticalTaskInput;
 const AudioTransform = models.AudioTransform;
 const ResetProcedureTemplateRequest = models.ResetProcedureTemplateRequest;
+const ContentReviewOcrResult = models.ContentReviewOcrResult;
 const ComposeMediaResponse = models.ComposeMediaResponse;
+const DescribeLicenseUsageDataResponse = models.DescribeLicenseUsageDataResponse;
 const UrlSignatureAuthPolicy = models.UrlSignatureAuthPolicy;
 const DeleteSampleSnapshotTemplateRequest = models.DeleteSampleSnapshotTemplateRequest;
 const DescribeStorageDataResponse = models.DescribeStorageDataResponse;
@@ -94,10 +99,12 @@ const TextWatermarkTemplateInputForUpdate = models.TextWatermarkTemplateInputFor
 const DeleteSuperPlayerConfigRequest = models.DeleteSuperPlayerConfigRequest;
 const AiReviewTerrorismOcrTaskInput = models.AiReviewTerrorismOcrTaskInput;
 const AiRecognitionTaskOcrWordsResultInput = models.AiRecognitionTaskOcrWordsResultInput;
+const ModifyMediaStorageClassResponse = models.ModifyMediaStorageClassResponse;
 const AiReviewPornTaskInput = models.AiReviewPornTaskInput;
 const CreateProcedureTemplateRequest = models.CreateProcedureTemplateRequest;
 const DescribeMediaProcessUsageDataRequest = models.DescribeMediaProcessUsageDataRequest;
 const CreatePersonSampleRequest = models.CreatePersonSampleRequest;
+const StorageRegionInfo = models.StorageRegionInfo;
 const MediaTransitionItem = models.MediaTransitionItem;
 const MediaAiAnalysisCoverItem = models.MediaAiAnalysisCoverItem;
 const TagConfigureInfo = models.TagConfigureInfo;
@@ -119,6 +126,7 @@ const UserDefineAsrTextReviewTemplateInfo = models.UserDefineAsrTextReviewTempla
 const DescribeWordSamplesResponse = models.DescribeWordSamplesResponse;
 const AiSampleFaceInfo = models.AiSampleFaceInfo;
 const MediaImageSpriteItem = models.MediaImageSpriteItem;
+const ModifyVodDomainAccelerateConfigRequest = models.ModifyVodDomainAccelerateConfigRequest;
 const MediaProcessTaskAdaptiveDynamicStreamingResult = models.MediaProcessTaskAdaptiveDynamicStreamingResult;
 const OcrWordsConfigureInfoForUpdate = models.OcrWordsConfigureInfoForUpdate;
 const WatermarkTemplate = models.WatermarkTemplate;
@@ -131,6 +139,7 @@ const PoliticalOcrReviewTemplateInfoForUpdate = models.PoliticalOcrReviewTemplat
 const TaskOutputMediaInfo = models.TaskOutputMediaInfo;
 const ProcessMediaByUrlRequest = models.ProcessMediaByUrlRequest;
 const DescribeDailyMostPlayedStatResponse = models.DescribeDailyMostPlayedStatResponse;
+const ModifyAIRecognitionTemplateResponse = models.ModifyAIRecognitionTemplateResponse;
 const SplitMediaTaskConfig = models.SplitMediaTaskConfig;
 const PlayStatFileInfo = models.PlayStatFileInfo;
 const ModifyMediaInfoRequest = models.ModifyMediaInfoRequest;
@@ -146,6 +155,7 @@ const MediaSubtitleInfo = models.MediaSubtitleInfo;
 const AiRecognitionTaskAsrFullTextResultInput = models.AiRecognitionTaskAsrFullTextResultInput;
 const MediaMiniProgramReviewInfoItem = models.MediaMiniProgramReviewInfoItem;
 const TaskStatData = models.TaskStatData;
+const CreateVodDomainRequest = models.CreateVodDomainRequest;
 const OcrFullTextConfigureInfoForUpdate = models.OcrFullTextConfigureInfoForUpdate;
 const ProcessMediaByProcedureRequest = models.ProcessMediaByProcedureRequest;
 const MediaImageSpriteInfo = models.MediaImageSpriteInfo;
@@ -177,7 +187,9 @@ const AiReviewPornAsrTaskOutput = models.AiReviewPornAsrTaskOutput;
 const SimpleHlsClipResponse = models.SimpleHlsClipResponse;
 const DeleteAIAnalysisTemplateRequest = models.DeleteAIAnalysisTemplateRequest;
 const EditMediaRequest = models.EditMediaRequest;
+const LicenseUsageDataItem = models.LicenseUsageDataItem;
 const ConcatFileInfo2017 = models.ConcatFileInfo2017;
+const ContentReviewResult = models.ContentReviewResult;
 const MediaProcessTaskImageSpriteResult = models.MediaProcessTaskImageSpriteResult;
 const DescribeMediaInfosResponse = models.DescribeMediaInfosResponse;
 const DeleteProcedureTemplateResponse = models.DeleteProcedureTemplateResponse;
@@ -202,6 +214,7 @@ const DeleteWordSamplesRequest = models.DeleteWordSamplesRequest;
 const EmptyTrackItem = models.EmptyTrackItem;
 const StickerTrackItem = models.StickerTrackItem;
 const DescribeDrmDataKeyResponse = models.DescribeDrmDataKeyResponse;
+const DescribeMediaPlayStatDetailsResponse = models.DescribeMediaPlayStatDetailsResponse;
 const VideoTemplateInfo = models.VideoTemplateInfo;
 const PoliticalOcrReviewTemplateInfo = models.PoliticalOcrReviewTemplateInfo;
 const PornOcrReviewTemplateInfoForUpdate = models.PornOcrReviewTemplateInfoForUpdate;
@@ -212,6 +225,7 @@ const CoverBySnapshotTaskInput = models.CoverBySnapshotTaskInput;
 const SegmentConfigureInfoForUpdate = models.SegmentConfigureInfoForUpdate;
 const UserDefineConfigureInfo = models.UserDefineConfigureInfo;
 const AiRecognitionTaskSegmentSegmentItem = models.AiRecognitionTaskSegmentSegmentItem;
+const RestoreMediaTask = models.RestoreMediaTask;
 const AiReviewPornOcrTaskInput = models.AiReviewPornOcrTaskInput;
 const OcrWordsConfigureInfo = models.OcrWordsConfigureInfo;
 const CreateSuperPlayerConfigResponse = models.CreateSuperPlayerConfigResponse;
@@ -226,21 +240,26 @@ const ModifySnapshotByTimeOffsetTemplateResponse = models.ModifySnapshotByTimeOf
 const DeleteHeadTailTemplateRequest = models.DeleteHeadTailTemplateRequest;
 const AiAnalysisTaskTagResult = models.AiAnalysisTaskTagResult;
 const SearchMediaResponse = models.SearchMediaResponse;
+const ModifyMediaStorageClassRequest = models.ModifyMediaStorageClassRequest;
 const AiAnalysisTaskTagOutput = models.AiAnalysisTaskTagOutput;
 const AiAnalysisTaskHighlightOutput = models.AiAnalysisTaskHighlightOutput;
 const MediaSubtitleInput = models.MediaSubtitleInput;
 const ProcessMediaRequest = models.ProcessMediaRequest;
+const PornImageResult = models.PornImageResult;
+const ProcessImageResponse = models.ProcessImageResponse;
+const ProcessImageRequest = models.ProcessImageRequest;
 const ModifyMediaInfoResponse = models.ModifyMediaInfoResponse;
 const AiRecognitionTaskOcrFullTextResult = models.AiRecognitionTaskOcrFullTextResult;
 const MediaTrackItem = models.MediaTrackItem;
 const MediaProcessTaskSnapshotByTimeOffsetResult = models.MediaProcessTaskSnapshotByTimeOffsetResult;
-const AiSampleWord = models.AiSampleWord;
+const ManageTaskRequest = models.ManageTaskRequest;
 const ModifyEventConfigRequest = models.ModifyEventConfigRequest;
 const AiRecognitionTaskAsrWordsResultOutput = models.AiRecognitionTaskAsrWordsResultOutput;
 const DescribeHeadTailTemplatesRequest = models.DescribeHeadTailTemplatesRequest;
 const ModifyAdaptiveDynamicStreamingTemplateResponse = models.ModifyAdaptiveDynamicStreamingTemplateResponse;
 const MediaProcessTaskTranscodeResult = models.MediaProcessTaskTranscodeResult;
 const DomainDetailInfo = models.DomainDetailInfo;
+const EditMediaVideoStream = models.EditMediaVideoStream;
 const ImageProcessingTemplate = models.ImageProcessingTemplate;
 const ImageSpriteTaskInput = models.ImageSpriteTaskInput;
 const ObjectConfigureInfoForUpdate = models.ObjectConfigureInfoForUpdate;
@@ -252,6 +271,7 @@ const AsrWordsConfigureInfo = models.AsrWordsConfigureInfo;
 const ModifySubAppIdStatusResponse = models.ModifySubAppIdStatusResponse;
 const SimpleHlsClipRequest = models.SimpleHlsClipRequest;
 const MediaDeleteItem = models.MediaDeleteItem;
+const PoliticalImageResult = models.PoliticalImageResult;
 const AiSamplePerson = models.AiSamplePerson;
 const MediaAdaptiveDynamicStreamingInfo = models.MediaAdaptiveDynamicStreamingInfo;
 const DescribeDailyPlayStatFileListRequest = models.DescribeDailyPlayStatFileListRequest;
@@ -262,6 +282,7 @@ const LiveRealTimeClipMediaSegmentInfo = models.LiveRealTimeClipMediaSegmentInfo
 const DeleteImageSpriteTemplateResponse = models.DeleteImageSpriteTemplateResponse;
 const DescribeContentReviewTemplatesResponse = models.DescribeContentReviewTemplatesResponse;
 const TEHDConfig = models.TEHDConfig;
+const ImageReviewUsageDataItem = models.ImageReviewUsageDataItem;
 const AnimatedGraphicsTemplate = models.AnimatedGraphicsTemplate;
 const DailyPlayStatInfo = models.DailyPlayStatInfo;
 const TerrorismOcrReviewTemplateInfoForUpdate = models.TerrorismOcrReviewTemplateInfoForUpdate;
@@ -274,6 +295,7 @@ const CreateWatermarkTemplateRequest = models.CreateWatermarkTemplateRequest;
 const TerrorismConfigureInfoForUpdate = models.TerrorismConfigureInfoForUpdate;
 const DescribeEventsStateRequest = models.DescribeEventsStateRequest;
 const WechatMiniProgramPublishTask = models.WechatMiniProgramPublishTask;
+const ModifyDefaultStorageRegionResponse = models.ModifyDefaultStorageRegionResponse;
 const CreateImageProcessingTemplateResponse = models.CreateImageProcessingTemplateResponse;
 const ComposeMediaTask = models.ComposeMediaTask;
 const HeadTailConfigureInfoForUpdate = models.HeadTailConfigureInfoForUpdate;
@@ -285,9 +307,11 @@ const AnimatedGraphicTaskInput = models.AnimatedGraphicTaskInput;
 const MosaicInput = models.MosaicInput;
 const AIAnalysisTemplateItem = models.AIAnalysisTemplateItem;
 const AiRecognitionTaskObjectResultItem = models.AiRecognitionTaskObjectResultItem;
+const ModifyVodDomainConfigResponse = models.ModifyVodDomainConfigResponse;
 const MediaSnapshotByTimeOffsetInfo = models.MediaSnapshotByTimeOffsetInfo;
 const DescribeImageSpriteTemplatesRequest = models.DescribeImageSpriteTemplatesRequest;
 const MediaKeyFrameDescItem = models.MediaKeyFrameDescItem;
+const ModifyVodDomainConfigRequest = models.ModifyVodDomainConfigRequest;
 const AiSampleTagOperation = models.AiSampleTagOperation;
 const PlayerConfig = models.PlayerConfig;
 const ConfirmEventsRequest = models.ConfirmEventsRequest;
@@ -321,6 +345,7 @@ const OutputVideoStream = models.OutputVideoStream;
 const ProcedureTemplate = models.ProcedureTemplate;
 const AiReviewTaskTerrorismResult = models.AiReviewTaskTerrorismResult;
 const ProcessMediaByUrlResponse = models.ProcessMediaByUrlResponse;
+const DescribeImageReviewUsageDataRequest = models.DescribeImageReviewUsageDataRequest;
 const MediaContentReviewAsrTextSegmentItem = models.MediaContentReviewAsrTextSegmentItem;
 const DescribeEventConfigResponse = models.DescribeEventConfigResponse;
 const DescribeCdnLogsResponse = models.DescribeCdnLogsResponse;
@@ -337,6 +362,7 @@ const ImageSpriteTemplate = models.ImageSpriteTemplate;
 const AiRecognitionTaskOcrFullTextSegmentTextItem = models.AiRecognitionTaskOcrFullTextSegmentTextItem;
 const AiRecognitionTaskSegmentResultOutput = models.AiRecognitionTaskSegmentResultOutput;
 const SegmentConfigureInfo = models.SegmentConfigureInfo;
+const FileDeleteResultItem = models.FileDeleteResultItem;
 const SnapshotByTimeOffsetTaskInput = models.SnapshotByTimeOffsetTaskInput;
 const RefererAuthPolicy = models.RefererAuthPolicy;
 const TaskStatDataItem = models.TaskStatDataItem;
@@ -362,6 +388,7 @@ const MediaContentReviewSegmentItem = models.MediaContentReviewSegmentItem;
 const TerrorismOcrReviewTemplateInfo = models.TerrorismOcrReviewTemplateInfo;
 const AiReviewTaskPornResult = models.AiReviewTaskPornResult;
 const AiRecognitionTaskObjectResultOutput = models.AiRecognitionTaskObjectResultOutput;
+const DescribeMediaPlayStatDetailsRequest = models.DescribeMediaPlayStatDetailsRequest;
 const AiReviewProhibitedAsrTaskOutput = models.AiReviewProhibitedAsrTaskOutput;
 const CreateClassResponse = models.CreateClassResponse;
 const DeleteSuperPlayerConfigResponse = models.DeleteSuperPlayerConfigResponse;
@@ -374,11 +401,13 @@ const DescribeVodDomainsResponse = models.DescribeVodDomainsResponse;
 const AdaptiveStreamTemplate = models.AdaptiveStreamTemplate;
 const TranscodeTaskInput = models.TranscodeTaskInput;
 const ModifyAIRecognitionTemplateRequest = models.ModifyAIRecognitionTemplateRequest;
+const DescribeStorageRegionsRequest = models.DescribeStorageRegionsRequest;
 const WechatPublishTask = models.WechatPublishTask;
 const DescribeCDNStatDetailsRequest = models.DescribeCDNStatDetailsRequest;
 const AiRecognitionTaskOcrFullTextResultInput = models.AiRecognitionTaskOcrFullTextResultInput;
-const ClipFileInfo2017 = models.ClipFileInfo2017;
+const DescribeImageReviewUsageDataResponse = models.DescribeImageReviewUsageDataResponse;
 const StatDataItem = models.StatDataItem;
+const CreateStorageRegionResponse = models.CreateStorageRegionResponse;
 const AccelerateAreaInfo = models.AccelerateAreaInfo;
 const MediaSourceData = models.MediaSourceData;
 const DescribePrepaidProductsResponse = models.DescribePrepaidProductsResponse;
@@ -400,13 +429,16 @@ const DescribeMediaInfosRequest = models.DescribeMediaInfosRequest;
 const ModifyPersonSampleRequest = models.ModifyPersonSampleRequest;
 const DescribeDrmDataKeyRequest = models.DescribeDrmDataKeyRequest;
 const AsrFullTextConfigureInfo = models.AsrFullTextConfigureInfo;
+const TerrorismImageResult = models.TerrorismImageResult;
+const DeleteVodDomainRequest = models.DeleteVodDomainRequest;
 const CreateAIRecognitionTemplateRequest = models.CreateAIRecognitionTemplateRequest;
 const DescribeTaskDetailRequest = models.DescribeTaskDetailRequest;
 const MediaAiAnalysisClassificationItem = models.MediaAiAnalysisClassificationItem;
 const AiAnalysisTaskFrameTagResult = models.AiAnalysisTaskFrameTagResult;
 const AiReviewPornTaskOutput = models.AiReviewPornTaskOutput;
 const AiRecognitionTaskAsrFullTextResult = models.AiRecognitionTaskAsrFullTextResult;
-const ModifyAIRecognitionTemplateResponse = models.ModifyAIRecognitionTemplateResponse;
+const ImageContentReviewInput = models.ImageContentReviewInput;
+const PlayStatInfo = models.PlayStatInfo;
 const PoliticalImgReviewTemplateInfo = models.PoliticalImgReviewTemplateInfo;
 const PoliticalConfigureInfo = models.PoliticalConfigureInfo;
 const HighlightsConfigureInfo = models.HighlightsConfigureInfo;
@@ -446,6 +478,8 @@ const DescribeMediaProcessUsageDataResponse = models.DescribeMediaProcessUsageDa
 const DescribeSuperPlayerConfigsRequest = models.DescribeSuperPlayerConfigsRequest;
 const HeadTailTaskInput = models.HeadTailTaskInput;
 const SplitMediaOutputConfig = models.SplitMediaOutputConfig;
+const CreateVodDomainResponse = models.CreateVodDomainResponse;
+const ModifyVodDomainAccelerateConfigResponse = models.ModifyVodDomainAccelerateConfigResponse;
 const AiRecognitionTaskSegmentResultInput = models.AiRecognitionTaskSegmentResultInput;
 const ModifyHeadTailTemplateRequest = models.ModifyHeadTailTemplateRequest;
 const DescribeTasksResponse = models.DescribeTasksResponse;
@@ -453,6 +487,8 @@ const DescribeSubAppIdsRequest = models.DescribeSubAppIdsRequest;
 const AiRecognitionTaskFaceResultInput = models.AiRecognitionTaskFaceResultInput;
 const AiReviewPoliticalTaskOutput = models.AiReviewPoliticalTaskOutput;
 const AiReviewTaskPoliticalResult = models.AiReviewTaskPoliticalResult;
+const ReviewImageResponse = models.ReviewImageResponse;
+const DescribeStorageRegionsResponse = models.DescribeStorageRegionsResponse;
 const ModifySnapshotByTimeOffsetTemplateRequest = models.ModifySnapshotByTimeOffsetTemplateRequest;
 const ProcedureTask = models.ProcedureTask;
 const ModifySuperPlayerConfigRequest = models.ModifySuperPlayerConfigRequest;
@@ -476,6 +512,7 @@ const DescribeAllClassResponse = models.DescribeAllClassResponse;
 const ModifyImageSpriteTemplateRequest = models.ModifyImageSpriteTemplateRequest;
 const AiReviewProhibitedOcrTaskInput = models.AiReviewProhibitedOcrTaskInput;
 const DeleteWatermarkTemplateRequest = models.DeleteWatermarkTemplateRequest;
+const DeleteVodDomainResponse = models.DeleteVodDomainResponse;
 const EditMediaStreamInfo = models.EditMediaStreamInfo;
 const DescribeWordSamplesRequest = models.DescribeWordSamplesRequest;
 const ImageCenterCut = models.ImageCenterCut;
@@ -499,6 +536,7 @@ const ExecuteFunctionRequest = models.ExecuteFunctionRequest;
 const ConfirmEventsResponse = models.ConfirmEventsResponse;
 const ModifyPersonSampleResponse = models.ModifyPersonSampleResponse;
 const VideoTrackItem = models.VideoTrackItem;
+const DescribeLicenseUsageDataRequest = models.DescribeLicenseUsageDataRequest;
 const DeleteTranscodeTemplateResponse = models.DeleteTranscodeTemplateResponse;
 const MediaTranscodeItem = models.MediaTranscodeItem;
 const DescribePersonSamplesResponse = models.DescribePersonSamplesResponse;
@@ -541,6 +579,7 @@ const DescribeAnimatedGraphicsTemplatesResponse = models.DescribeAnimatedGraphic
 const MediaAiAnalysisFrameTagItem = models.MediaAiAnalysisFrameTagItem;
 const DescribeImageProcessingTemplatesResponse = models.DescribeImageProcessingTemplatesResponse;
 const SampleSnapshotTaskInput = models.SampleSnapshotTaskInput;
+const ReviewImageRequest = models.ReviewImageRequest;
 const DescribeHeadTailTemplatesResponse = models.DescribeHeadTailTemplatesResponse;
 const TerrorismConfigureInfo = models.TerrorismConfigureInfo;
 const PoliticalAsrReviewTemplateInfo = models.PoliticalAsrReviewTemplateInfo;
@@ -558,12 +597,13 @@ const EditMediaTaskOutput = models.EditMediaTaskOutput;
 const HighlightSegmentItem = models.HighlightSegmentItem;
 const DeleteWatermarkTemplateResponse = models.DeleteWatermarkTemplateResponse;
 const ComposeMediaOutput = models.ComposeMediaOutput;
+const ModifyWatermarkTemplateResponse = models.ModifyWatermarkTemplateResponse;
 const PullUploadTask = models.PullUploadTask;
 const ProhibitedConfigureInfoForUpdate = models.ProhibitedConfigureInfoForUpdate;
 const FrameTagConfigureInfoForUpdate = models.FrameTagConfigureInfoForUpdate;
 const CreateImageSpriteTemplateResponse = models.CreateImageSpriteTemplateResponse;
 const DescribeAIRecognitionTemplatesRequest = models.DescribeAIRecognitionTemplatesRequest;
-const ModifyWatermarkTemplateResponse = models.ModifyWatermarkTemplateResponse;
+const EditMediaTEHDConfig = models.EditMediaTEHDConfig;
 const AiRecognitionResult = models.AiRecognitionResult;
 
 
@@ -597,6 +637,17 @@ class VodClient extends AbstractClient {
     CreateSnapshotByTimeOffsetTemplate(req, cb) {
         let resp = new CreateSnapshotByTimeOffsetTemplateResponse();
         this.request("CreateSnapshotByTimeOffsetTemplate", req, resp, cb);
+    }
+
+    /**
+     * 该接口用于设置默认的存储地域。上传文件时如果没有指定地域，将上传到默认地域。
+     * @param {ModifyDefaultStorageRegionRequest} req
+     * @param {function(string, ModifyDefaultStorageRegionResponse):void} cb
+     * @public
+     */
+    ModifyDefaultStorageRegion(req, cb) {
+        let resp = new ModifyDefaultStorageRegionResponse();
+        this.request("ModifyDefaultStorageRegion", req, resp, cb);
     }
 
     /**
@@ -657,17 +708,6 @@ class VodClient extends AbstractClient {
     DeleteAnimatedGraphicsTemplate(req, cb) {
         let resp = new DeleteAnimatedGraphicsTemplateResponse();
         this.request("DeleteAnimatedGraphicsTemplate", req, resp, cb);
-    }
-
-    /**
-     * 查询指定时间点截图模板，支持根据条件，分页查询。
-     * @param {DescribeSnapshotByTimeOffsetTemplatesRequest} req
-     * @param {function(string, DescribeSnapshotByTimeOffsetTemplatesResponse):void} cb
-     * @public
-     */
-    DescribeSnapshotByTimeOffsetTemplates(req, cb) {
-        let resp = new DescribeSnapshotByTimeOffsetTemplatesResponse();
-        this.request("DescribeSnapshotByTimeOffsetTemplates", req, resp, cb);
     }
 
     /**
@@ -785,16 +825,14 @@ class VodClient extends AbstractClient {
     }
 
     /**
-     * 修改用户自定义视频内容分析模板。
-
-注意：模板 ID 10000 以下的为系统预置模板，不允许修改。
-     * @param {ModifyAIAnalysisTemplateRequest} req
-     * @param {function(string, ModifyAIAnalysisTemplateResponse):void} cb
+     * 获取图片处理模板列表，支持根据条件，分页查询。
+     * @param {DescribeImageProcessingTemplatesRequest} req
+     * @param {function(string, DescribeImageProcessingTemplatesResponse):void} cb
      * @public
      */
-    ModifyAIAnalysisTemplate(req, cb) {
-        let resp = new ModifyAIAnalysisTemplateResponse();
-        this.request("ModifyAIAnalysisTemplate", req, resp, cb);
+    DescribeImageProcessingTemplates(req, cb) {
+        let resp = new DescribeImageProcessingTemplatesResponse();
+        this.request("DescribeImageProcessingTemplates", req, resp, cb);
     }
 
     /**
@@ -892,6 +930,19 @@ class VodClient extends AbstractClient {
     }
 
     /**
+     * 该接口用于开通某地域的存储。
+  1. 用户开通点播业务时，系统默认为用户开通了部分地域的存储，用户如果需要开通其它地域的存储，可以通过该接口进行开通。
+  2. 通过 DescribeStorageRegions 接口可以查询到所有存储地域及已经开通的地域。
+     * @param {CreateStorageRegionRequest} req
+     * @param {function(string, CreateStorageRegionResponse):void} cb
+     * @public
+     */
+    CreateStorageRegion(req, cb) {
+        let resp = new CreateStorageRegionResponse();
+        this.request("CreateStorageRegion", req, resp, cb);
+    }
+
+    /**
      * 重新设置用户自定义任务流模板的内容。  
      * @param {ResetProcedureTemplateRequest} req
      * @param {function(string, ResetProcedureTemplateResponse):void} cb
@@ -943,6 +994,35 @@ class VodClient extends AbstractClient {
     }
 
     /**
+     * 该接口用于查询媒体文件按指定时间粒度统计的播放数据
+* 可以查询最近一年的播放统计数据。
+* 时间粒度为小时，结束时间和起始时间的跨度最大为7天。
+* 时间粒度为天，结束时间和起始时间的跨度最大为90天。
+     * @param {DescribeMediaPlayStatDetailsRequest} req
+     * @param {function(string, DescribeMediaPlayStatDetailsResponse):void} cb
+     * @public
+     */
+    DescribeMediaPlayStatDetails(req, cb) {
+        let resp = new DescribeMediaPlayStatDetailsResponse();
+        this.request("DescribeMediaPlayStatDetails", req, resp, cb);
+    }
+
+    /**
+     * 该接口返回查询时间范围内每天 License 请求次数信息。
+   1. 可以查询最近365天内的 License 请求次数统计数据。
+   2. 查询时间跨度不超过90天。
+   3. 查询时间跨度超过1天的，返回以天为粒度的数据，否则，返回以5分钟为粒度的数据。
+
+     * @param {DescribeLicenseUsageDataRequest} req
+     * @param {function(string, DescribeLicenseUsageDataResponse):void} cb
+     * @public
+     */
+    DescribeLicenseUsageData(req, cb) {
+        let resp = new DescribeLicenseUsageDataResponse();
+        this.request("DescribeLicenseUsageData", req, resp, cb);
+    }
+
+    /**
      * 修改用户自定义雪碧图模板。
      * @param {ModifyImageSpriteTemplateRequest} req
      * @param {function(string, ModifyImageSpriteTemplateResponse):void} cb
@@ -977,6 +1057,17 @@ class VodClient extends AbstractClient {
     }
 
     /**
+     * 根据转码模板唯一标识，获取转码模板详情列表。返回结果包含符合条件的所有用户自定义模板及[系统预置转码模板](https://cloud.tencent.com/document/product/266/33476#.E9.A2.84.E7.BD.AE.E8.BD.AC.E7.A0.81.E6.A8.A1.E6.9D.BF)。
+     * @param {DescribeTranscodeTemplatesRequest} req
+     * @param {function(string, DescribeTranscodeTemplatesResponse):void} cb
+     * @public
+     */
+    DescribeTranscodeTemplates(req, cb) {
+        let resp = new DescribeTranscodeTemplatesResponse();
+        this.request("DescribeTranscodeTemplates", req, resp, cb);
+    }
+
+    /**
      * 该接口返回查询时间范围内每天使用的视频处理用量信息。
    1. 可以查询最近365天内的视频处理统计数据。
    2. 查询时间跨度不超过90天。
@@ -1003,14 +1094,14 @@ class VodClient extends AbstractClient {
     }
 
     /**
-     * 修改用户自定义转动图模板。
-     * @param {ModifyAnimatedGraphicsTemplateRequest} req
-     * @param {function(string, ModifyAnimatedGraphicsTemplateResponse):void} cb
+     * 查询指定时间点截图模板，支持根据条件，分页查询。
+     * @param {DescribeSnapshotByTimeOffsetTemplatesRequest} req
+     * @param {function(string, DescribeSnapshotByTimeOffsetTemplatesResponse):void} cb
      * @public
      */
-    ModifyAnimatedGraphicsTemplate(req, cb) {
-        let resp = new ModifyAnimatedGraphicsTemplateResponse();
-        this.request("ModifyAnimatedGraphicsTemplate", req, resp, cb);
+    DescribeSnapshotByTimeOffsetTemplates(req, cb) {
+        let resp = new DescribeSnapshotByTimeOffsetTemplatesResponse();
+        this.request("DescribeSnapshotByTimeOffsetTemplates", req, resp, cb);
     }
 
     /**
@@ -1122,6 +1213,29 @@ class VodClient extends AbstractClient {
     }
 
     /**
+     * 修改媒体文件的存储类型。
+当媒体文件的存储类型为标准存储时，可以修改为以下类型：
+<li>低频存储</li>
+<li>归档存储</li>
+<li>深度归档存储</li>
+当媒体文件的当前存储类型为低频存储时，可以修改为以下类型：
+<li>标准存储</li>
+<li>归档存储</li>
+<li>深度归档存储</li>
+当媒体文件的当前存储类型为归档存储时，可以修改为以下类型：
+<li>标准存储</li>
+当媒体文件的当前存储类型为深度归档存储时，可以修改为以下类型：
+<li>标准存储</li>
+     * @param {ModifyMediaStorageClassRequest} req
+     * @param {function(string, ModifyMediaStorageClassResponse):void} cb
+     * @public
+     */
+    ModifyMediaStorageClass(req, cb) {
+        let resp = new ModifyMediaStorageClassResponse();
+        this.request("ModifyMediaStorageClass", req, resp, cb);
+    }
+
+    /**
      * 该接口用于将一个网络上的视频拉取到云点播平台。
      * @param {PullUploadRequest} req
      * @param {function(string, PullUploadResponse):void} cb
@@ -1141,6 +1255,18 @@ class VodClient extends AbstractClient {
     ModifySampleSnapshotTemplate(req, cb) {
         let resp = new ModifySampleSnapshotTemplateResponse();
         this.request("ModifySampleSnapshotTemplate", req, resp, cb);
+    }
+
+    /**
+     * 该接口用于修改点播域名的加速区域。
+1、域名部署状态为 Online 状态时才允许修改加速区域。
+     * @param {ModifyVodDomainAccelerateConfigRequest} req
+     * @param {function(string, ModifyVodDomainAccelerateConfigResponse):void} cb
+     * @public
+     */
+    ModifyVodDomainAccelerateConfig(req, cb) {
+        let resp = new ModifyVodDomainAccelerateConfigResponse();
+        this.request("ModifyVodDomainAccelerateConfig", req, resp, cb);
     }
 
     /**
@@ -1167,14 +1293,15 @@ class VodClient extends AbstractClient {
     }
 
     /**
-     * 根据转码模板唯一标识，获取转码模板详情列表。返回结果包含符合条件的所有用户自定义模板及[系统预置转码模板](https://cloud.tencent.com/document/product/266/33476#.E9.A2.84.E7.BD.AE.E8.BD.AC.E7.A0.81.E6.A8.A1.E6.9D.BF)。
-     * @param {DescribeTranscodeTemplatesRequest} req
-     * @param {function(string, DescribeTranscodeTemplatesResponse):void} cb
+     * 该接口用于删除点播加速域名。
+1、域名删除前需要先关闭所有区域的加速。
+     * @param {DeleteVodDomainRequest} req
+     * @param {function(string, DeleteVodDomainResponse):void} cb
      * @public
      */
-    DescribeTranscodeTemplates(req, cb) {
-        let resp = new DescribeTranscodeTemplatesResponse();
-        this.request("DescribeTranscodeTemplates", req, resp, cb);
+    DeleteVodDomain(req, cb) {
+        let resp = new DeleteVodDomainResponse();
+        this.request("DeleteVodDomain", req, resp, cb);
     }
 
     /**
@@ -1186,6 +1313,26 @@ class VodClient extends AbstractClient {
     ParseStreamingManifest(req, cb) {
         let resp = new ParseStreamingManifestResponse();
         this.request("ParseStreamingManifest", req, resp, cb);
+    }
+
+    /**
+     * 该 API 已经<font color='red'>不再维护</font>，智能识别任务请使用图片智能识别 [ReviewImage](https://cloud.tencent.com/document/api/266/73217) 接口。
+
+对点播中的图片文件发起处理任务，功能包括：
+
+1. 智能识别（令人反感的信息、不安全的信息、不适宜的信息）;
+
+><li>图片文件大小支持：文件 < 5M；</li>
+><li>图片文件分辨率支持：建议分辨率大于256x256，否则可能会影响识别效果；</li>
+><li>图片文件支持格式：PNG、JPG、JPEG、BMP、GIF、WEBP格式。</li>
+
+     * @param {ProcessImageRequest} req
+     * @param {function(string, ProcessImageResponse):void} cb
+     * @public
+     */
+    ProcessImage(req, cb) {
+        let resp = new ProcessImageResponse();
+        this.request("ProcessImage", req, resp, cb);
     }
 
     /**
@@ -1213,8 +1360,9 @@ class VodClient extends AbstractClient {
     }
 
     /**
-     * * 删除媒体及其对应的视频处理文件（如转码视频、雪碧图、截图、微信发布视频等）；
-* 可单独删除指定 ID 的视频文件下的转码，或者微信发布文件；
+     * * 删除媒体及其对应的视频处理文件（原始文件、如转码视频、雪碧图、截图、微信发布视频等）；
+* 可单独删除指定 ID 的视频文件下的原文件、转码视频、微信发布视频等；
+* 注意：原文件删除后，无法发起转码、微信发布等任何视频处理操作。
      * @param {DeleteMediaRequest} req
      * @param {function(string, DeleteMediaResponse):void} cb
      * @public
@@ -1225,14 +1373,18 @@ class VodClient extends AbstractClient {
     }
 
     /**
-     * 创建超级播放器配置，数量上限：100。
-     * @param {CreateSuperPlayerConfigRequest} req
-     * @param {function(string, CreateSuperPlayerConfigResponse):void} cb
+     * 该接口返回查询时间范围内每天使用的图片智能识别用量信息。
+   1. 可以查询最近365天内的图片智能识别统计数据。
+   2. 查询时间跨度不超过90天。
+   3. 查询时间跨度超过1天的，返回以天为粒度的数据，否则，返回以5分钟为粒度的数据。
+
+     * @param {DescribeImageReviewUsageDataRequest} req
+     * @param {function(string, DescribeImageReviewUsageDataResponse):void} cb
      * @public
      */
-    CreateSuperPlayerConfig(req, cb) {
-        let resp = new CreateSuperPlayerConfigResponse();
-        this.request("CreateSuperPlayerConfig", req, resp, cb);
+    DescribeImageReviewUsageData(req, cb) {
+        let resp = new DescribeImageReviewUsageDataResponse();
+        this.request("DescribeImageReviewUsageData", req, resp, cb);
     }
 
     /**
@@ -1248,7 +1400,8 @@ class VodClient extends AbstractClient {
 
     /**
      * 该接口用于查询指定日期范围内每天的播放统计数据。
-* 可以查询最近30天的播放统计数据。
+* 可以查询最近一年的播放统计数据。
+* 结束日期和起始日期的时间跨度最大为90天。
      * @param {DescribeDailyMediaPlayStatRequest} req
      * @param {function(string, DescribeDailyMediaPlayStatResponse):void} cb
      * @public
@@ -1282,7 +1435,7 @@ class VodClient extends AbstractClient {
 
     /**
      * 该接口用于查询每日播放Top100 的媒体文件的播放统计数据。
-* 可以查询最近30天的播放统计数据。
+* 可以查询最近一年的播放统计数据。
 * 可以按播放次数或者播放流量查询。
 * 播放次数统计说明：
     1. HLS 文件：访问 M3U8 文件时统计播放次数；访问 TS 文件不统计播放次数。
@@ -1297,6 +1450,20 @@ class VodClient extends AbstractClient {
     }
 
     /**
+     * 该接口用于：
+  1. 查询点播可开通的所有存储园区列表。
+  2. 查询已经开通的园区列表。
+  3. 查询默认使用的存储园区。
+     * @param {DescribeStorageRegionsRequest} req
+     * @param {function(string, DescribeStorageRegionsResponse):void} cb
+     * @public
+     */
+    DescribeStorageRegions(req, cb) {
+        let resp = new DescribeStorageRegionsResponse();
+        this.request("DescribeStorageRegions", req, resp, cb);
+    }
+
+    /**
      * * 该接口用于业务服务器获取 [可靠回调](https://cloud.tencent.com/document/product/266/33779#.E5.8F.AF.E9.9D.A0.E5.9B.9E.E8.B0.83) 事件通知的状态。
 
      * @param {DescribeEventsStateRequest} req
@@ -1306,6 +1473,29 @@ class VodClient extends AbstractClient {
     DescribeEventsState(req, cb) {
         let resp = new DescribeEventsStateResponse();
         this.request("DescribeEventsState", req, resp, cb);
+    }
+
+    /**
+     * 创建超级播放器配置，数量上限：100。
+     * @param {CreateSuperPlayerConfigRequest} req
+     * @param {function(string, CreateSuperPlayerConfigResponse):void} cb
+     * @public
+     */
+    CreateSuperPlayerConfig(req, cb) {
+        let resp = new CreateSuperPlayerConfigResponse();
+        this.request("CreateSuperPlayerConfig", req, resp, cb);
+    }
+
+    /**
+     * 该接口用于修改域名配置，可以修改域名的防盗链配置。
+1、域名部署状态为 Online 状态时才允许修改域名的配置。
+     * @param {ModifyVodDomainConfigRequest} req
+     * @param {function(string, ModifyVodDomainConfigResponse):void} cb
+     * @public
+     */
+    ModifyVodDomainConfig(req, cb) {
+        let resp = new ModifyVodDomainConfigResponse();
+        this.request("ModifyVodDomainConfig", req, resp, cb);
     }
 
     /**
@@ -1424,14 +1614,15 @@ class VodClient extends AbstractClient {
     }
 
     /**
-     * 该接口用于修改子应用信息，但不允许修改主应用信息。
-     * @param {ModifySubAppIdInfoRequest} req
-     * @param {function(string, ModifySubAppIdInfoResponse):void} cb
+     * 该接口用于将加速域名添加到点播，一个用户最多添加20个加速域名。
+1.域名添加成功后点播会进行域名的部署，域名由部署状态变为在线状态大概需要2分钟的时间。
+     * @param {CreateVodDomainRequest} req
+     * @param {function(string, CreateVodDomainResponse):void} cb
      * @public
      */
-    ModifySubAppIdInfo(req, cb) {
-        let resp = new ModifySubAppIdInfoResponse();
-        this.request("ModifySubAppIdInfo", req, resp, cb);
+    CreateVodDomain(req, cb) {
+        let resp = new CreateVodDomainResponse();
+        this.request("CreateVodDomain", req, resp, cb);
     }
 
     /**
@@ -1513,14 +1704,16 @@ class VodClient extends AbstractClient {
     }
 
     /**
-     * 获取图片处理模板列表，支持根据条件，分页查询。
-     * @param {DescribeImageProcessingTemplatesRequest} req
-     * @param {function(string, DescribeImageProcessingTemplatesResponse):void} cb
+     * 修改用户自定义视频内容分析模板。
+
+注意：模板 ID 10000 以下的为系统预置模板，不允许修改。
+     * @param {ModifyAIAnalysisTemplateRequest} req
+     * @param {function(string, ModifyAIAnalysisTemplateResponse):void} cb
      * @public
      */
-    DescribeImageProcessingTemplates(req, cb) {
-        let resp = new DescribeImageProcessingTemplatesResponse();
-        this.request("DescribeImageProcessingTemplates", req, resp, cb);
+    ModifyAIAnalysisTemplate(req, cb) {
+        let resp = new ModifyAIAnalysisTemplateResponse();
+        this.request("ModifyAIAnalysisTemplate", req, resp, cb);
     }
 
     /**
@@ -1583,6 +1776,17 @@ class VodClient extends AbstractClient {
     DescribeEventConfig(req, cb) {
         let resp = new DescribeEventConfigResponse();
         this.request("DescribeEventConfig", req, resp, cb);
+    }
+
+    /**
+     * 该接口用于修改子应用信息，但不允许修改主应用信息。
+     * @param {ModifySubAppIdInfoRequest} req
+     * @param {function(string, ModifySubAppIdInfoResponse):void} cb
+     * @public
+     */
+    ModifySubAppIdInfo(req, cb) {
+        let resp = new ModifySubAppIdInfoResponse();
+        this.request("ModifySubAppIdInfo", req, resp, cb);
     }
 
     /**
@@ -1685,8 +1889,7 @@ class VodClient extends AbstractClient {
     }
 
     /**
-     * 该接口用于获取当前账号有权限的子应用列表，包含主应用。若尚未开通子应用功能，接口将返回 
- FailedOperation。
+     * 该接口用于获取当前账号的子应用列表，包含主应用。
      * @param {DescribeSubAppIdsRequest} req
      * @param {function(string, DescribeSubAppIdsResponse):void} cb
      * @public
@@ -1818,6 +2021,17 @@ class VodClient extends AbstractClient {
     }
 
     /**
+     * 修改用户自定义转动图模板。
+     * @param {ModifyAnimatedGraphicsTemplateRequest} req
+     * @param {function(string, ModifyAnimatedGraphicsTemplateResponse):void} cb
+     * @public
+     */
+    ModifyAnimatedGraphicsTemplate(req, cb) {
+        let resp = new ModifyAnimatedGraphicsTemplateResponse();
+        this.request("ModifyAnimatedGraphicsTemplate", req, resp, cb);
+    }
+
+    /**
      * 关联媒资字幕，将指定的字幕关联到转自适应码流模板号对应的媒体输出文件中（或解除关联）。
      * @param {AttachMediaSubtitlesRequest} req
      * @param {function(string, AttachMediaSubtitlesResponse):void} cb
@@ -1856,6 +2070,22 @@ class VodClient extends AbstractClient {
     }
 
     /**
+     * 对点播中的图片文件发起智能识别（令人反感的信息、不安全的信息、不适宜的信息）任务。
+
+><li>图片文件大小支持：文件 < 5M；</li>
+><li>图片文件分辨率支持：建议分辨率大于256x256，否则可能会影响智能识别效果；</li>
+><li>图片文件支持格式：PNG、JPG、JPEG、BMP、GIF、WEBP格式。</li>
+
+     * @param {ReviewImageRequest} req
+     * @param {function(string, ReviewImageResponse):void} cb
+     * @public
+     */
+    ReviewImage(req, cb) {
+        let resp = new ReviewImageResponse();
+        this.request("ReviewImage", req, resp, cb);
+    }
+
+    /**
      * 删除用户自定义采样截图模板。
      * @param {DeleteSampleSnapshotTemplateRequest} req
      * @param {function(string, DeleteSampleSnapshotTemplateResponse):void} cb
@@ -1868,6 +2098,7 @@ class VodClient extends AbstractClient {
 
     /**
      * 将点播视频发布到微信小程序，供微信小程序播放器播放。
+本接口支持发布原始视频和转码后视频，暂不支持发布自适应码流。
      * @param {WeChatMiniProgramPublishRequest} req
      * @param {function(string, WeChatMiniProgramPublishResponse):void} cb
      * @public
@@ -1963,9 +2194,9 @@ class VodClient extends AbstractClient {
 5. 对视频截图雪碧图；
 6. 对视频截取一张图做封面；
 7. 对视频转自适应码流（并加密）；
-8. 智能内容审核（鉴黄、鉴恐、鉴政）；
+8. 智能识别（令人反感的信息、不安全的信息、不适宜的信息）；
 9. 智能内容分析（标签、分类、封面、按帧标签）；
-10. 智能内容识别（视频片头片尾、人脸、文本全文、文本关键词、语音全文、语音关键词、物体）。
+10. 内容识别（视频片头片尾、人脸、文本全文、文本关键词、语音全文、语音关键词、物体）。
 
 如使用事件通知，事件通知的类型为 [任务流状态变更](https://cloud.tencent.com/document/product/266/9636)。
      * @param {ProcessMediaRequest} req
@@ -1990,7 +2221,7 @@ class VodClient extends AbstractClient {
 
     /**
      * 该接口用于查询播放统计文件的下载地址。
-* 可以查询最近30天的播放统计文件下载地址。
+* 可以查询最近一年的播放统计文件下载地址，查询的起始日期和结束日期的时间跨度不超过90天。
 * 云点播每天对前一天的 CDN 请求日志进行分析处理，生成播放统计文件。
 * 播放统计文件内容包含媒体文件的播放次数、播放流量等统计信息。
 * 播放次数统计说明：

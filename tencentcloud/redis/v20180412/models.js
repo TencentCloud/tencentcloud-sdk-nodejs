@@ -17,6 +17,55 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * UpgradeSmallVersion请求参数结构体
+ * @class
+ */
+class UpgradeSmallVersionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 当前redis版本
+         * @type {string || null}
+         */
+        this.CurrentRedisVersion = null;
+
+        /**
+         * 可升级的redis版本
+         * @type {string || null}
+         */
+        this.UpgradeRedisVersion = null;
+
+        /**
+         * 1-立即升级   0-维护时间窗口升级
+         * @type {number || null}
+         */
+        this.InstanceTypeUpgradeNow = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.CurrentRedisVersion = 'CurrentRedisVersion' in params ? params.CurrentRedisVersion : null;
+        this.UpgradeRedisVersion = 'UpgradeRedisVersion' in params ? params.UpgradeRedisVersion : null;
+        this.InstanceTypeUpgradeNow = 'InstanceTypeUpgradeNow' in params ? params.InstanceTypeUpgradeNow : null;
+
+    }
+}
+
+/**
  * ModifyInstanceParams返回参数结构体
  * @class
  */
@@ -114,7 +163,7 @@ class RedisBackupSet extends  AbstractModel {
         this.BackupId = null;
 
         /**
-         * 备份类型。 manualBackupInstance：用户发起的手动备份； systemBackupInstance：凌晨系统发起的备份
+         * 备份类型。1：用户发起的手动备份； 0：凌晨系统发起的备份
          * @type {string || null}
          */
         this.BackupType = null;
@@ -137,6 +186,27 @@ class RedisBackupSet extends  AbstractModel {
          */
         this.Locked = null;
 
+        /**
+         * 内部字段，用户可忽略
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.BackupSize = null;
+
+        /**
+         * 内部字段，用户可忽略
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.FullBackup = null;
+
+        /**
+         * 内部字段，用户可忽略
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.InstanceType = null;
+
     }
 
     /**
@@ -152,6 +222,9 @@ class RedisBackupSet extends  AbstractModel {
         this.Status = 'Status' in params ? params.Status : null;
         this.Remark = 'Remark' in params ? params.Remark : null;
         this.Locked = 'Locked' in params ? params.Locked : null;
+        this.BackupSize = 'BackupSize' in params ? params.BackupSize : null;
+        this.FullBackup = 'FullBackup' in params ? params.FullBackup : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
 
     }
 }
@@ -226,6 +299,12 @@ class ModifyAutoBackupConfigResponse extends  AbstractModel {
         this.TimePeriod = null;
 
         /**
+         * 全量备份文件保存天数,单位：天
+         * @type {number || null}
+         */
+        this.BackupStorageDays = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -243,6 +322,7 @@ class ModifyAutoBackupConfigResponse extends  AbstractModel {
         this.AutoBackupType = 'AutoBackupType' in params ? params.AutoBackupType : null;
         this.WeekDays = 'WeekDays' in params ? params.WeekDays : null;
         this.TimePeriod = 'TimePeriod' in params ? params.TimePeriod : null;
+        this.BackupStorageDays = 'BackupStorageDays' in params ? params.BackupStorageDays : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -257,7 +337,7 @@ class RestoreInstanceRequest extends  AbstractModel {
         super();
 
         /**
-         * 待操作的实例ID，可通过 DescribeRedis 接口返回值中的 redisId 获取。
+         * 待操作的实例ID，可通过 DescribeInstances 接口返回值中的 InstanceId 获取。
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -291,75 +371,18 @@ class RestoreInstanceRequest extends  AbstractModel {
 }
 
 /**
- * 任务信息详情
+ * AllocateWanAddress请求参数结构体
  * @class
  */
-class TaskInfoDetail extends  AbstractModel {
+class AllocateWanAddressRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 任务Id
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.TaskId = null;
-
-        /**
-         * 开始时间
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * 任务类型
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.TaskType = null;
-
-        /**
-         * 实例名称
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.InstanceName = null;
-
-        /**
-         * 实例Id
-注意：此字段可能返回 null，表示取不到有效值。
+         * 实例ID
          * @type {string || null}
          */
         this.InstanceId = null;
-
-        /**
-         * 项目Id
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.ProjectId = null;
-
-        /**
-         * 任务进度
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.Progress = null;
-
-        /**
-         * 结束时间
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.EndTime = null;
-
-        /**
-         * 任务状态
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.Result = null;
 
     }
 
@@ -370,56 +393,30 @@ class TaskInfoDetail extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.TaskType = 'TaskType' in params ? params.TaskType : null;
-        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
-        this.Progress = 'Progress' in params ? params.Progress : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.Result = 'Result' in params ? params.Result : null;
 
     }
 }
 
 /**
- * SwitchInstanceVip请求参数结构体
+ * ApplyParamsTemplate请求参数结构体
  * @class
  */
-class SwitchInstanceVipRequest extends  AbstractModel {
+class ApplyParamsTemplateRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 源实例ID
+         * 实例ID列表
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+        /**
+         * 应用的参数模板ID
          * @type {string || null}
          */
-        this.SrcInstanceId = null;
-
-        /**
-         * 目标实例ID
-         * @type {string || null}
-         */
-        this.DstInstanceId = null;
-
-        /**
-         * 单位为秒。源实例与目标实例间DTS已断开时间，如果DTS断开时间大于TimeDelay，则不切换VIP，建议尽量根据业务设置一个可接受的值。
-         * @type {number || null}
-         */
-        this.TimeDelay = null;
-
-        /**
-         * 在DTS断开的情况下是否强制切换。1：强制切换，0：不强制切换
-         * @type {number || null}
-         */
-        this.ForceSwitch = null;
-
-        /**
-         * now: 立即切换，syncComplete：等待同步完成后切换
-         * @type {string || null}
-         */
-        this.SwitchTime = null;
+        this.TemplateId = null;
 
     }
 
@@ -430,11 +427,8 @@ class SwitchInstanceVipRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SrcInstanceId = 'SrcInstanceId' in params ? params.SrcInstanceId : null;
-        this.DstInstanceId = 'DstInstanceId' in params ? params.DstInstanceId : null;
-        this.TimeDelay = 'TimeDelay' in params ? params.TimeDelay : null;
-        this.ForceSwitch = 'ForceSwitch' in params ? params.ForceSwitch : null;
-        this.SwitchTime = 'SwitchTime' in params ? params.SwitchTime : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
 
     }
 }
@@ -483,12 +477,6 @@ class CreateInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * 实例所属的可用区ID，可参考[地域和可用区](https://cloud.tencent.com/document/product/239/4106)  。
-         * @type {number || null}
-         */
-        this.ZoneId = null;
-
-        /**
          * 实例类型：2 – Redis2.8内存版(标准架构)，3 – CKV 3.2内存版(标准架构)，4 – CKV 3.2内存版(集群架构)，6 – Redis4.0内存版(标准架构)，7 – Redis4.0内存版(集群架构)，8 – Redis5.0内存版(标准架构)，9 – Redis5.0内存版(集群架构)。
          * @type {number || null}
          */
@@ -518,6 +506,12 @@ TypeId为标准架构时，MemSize是实例总内存容量；TypeId为集群架�
          * @type {number || null}
          */
         this.BillingMode = null;
+
+        /**
+         * 实例所属的可用区ID，可参考[地域和可用区](https://cloud.tencent.com/document/product/239/4106)  。
+         * @type {number || null}
+         */
+        this.ZoneId = null;
 
         /**
          * 实例密码，当输入参数NoAuth为true且使用私有网络VPC时，Password为非必填，否则Password为必填参数。
@@ -605,6 +599,24 @@ TypeId为标准架构时，MemSize是实例总内存容量；TypeId为集群架�
          */
         this.ResourceTags = null;
 
+        /**
+         * 实例所属的可用区名称，可参考[地域和可用区](https://cloud.tencent.com/document/product/239/4106)  。
+         * @type {string || null}
+         */
+        this.ZoneName = null;
+
+        /**
+         * 创建实例需要应用的参数模板ID，不传则应用默认的参数模板
+         * @type {string || null}
+         */
+        this.TemplateId = null;
+
+        /**
+         * false ：默认值,发送正常请求，通过检查后直接创建实例 true：发送检查请求，不会创建实例。
+         * @type {boolean || null}
+         */
+        this.DryRun = null;
+
     }
 
     /**
@@ -614,12 +626,12 @@ TypeId为标准架构时，MemSize是实例总内存容量；TypeId为集群架�
         if (!params) {
             return;
         }
-        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
         this.TypeId = 'TypeId' in params ? params.TypeId : null;
         this.MemSize = 'MemSize' in params ? params.MemSize : null;
         this.GoodsNum = 'GoodsNum' in params ? params.GoodsNum : null;
         this.Period = 'Period' in params ? params.Period : null;
         this.BillingMode = 'BillingMode' in params ? params.BillingMode : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
         this.Password = 'Password' in params ? params.Password : null;
         this.VpcId = 'VpcId' in params ? params.VpcId : null;
         this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
@@ -650,6 +662,86 @@ TypeId为标准架构时，MemSize是实例总内存容量；TypeId为集群架�
                 this.ResourceTags.push(obj);
             }
         }
+        this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+        this.DryRun = 'DryRun' in params ? params.DryRun : null;
+
+    }
+}
+
+/**
+ * CreateReplicationGroup请求参数结构体
+ * @class
+ */
+class CreateReplicationGroupRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 复制组名称
+         * @type {string || null}
+         */
+        this.GroupName = null;
+
+        /**
+         * 备注信息
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.GroupName = 'GroupName' in params ? params.GroupName : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+
+    }
+}
+
+/**
+ * ModifyInstanceReadOnly返回参数结构体
+ * @class
+ */
+class ModifyInstanceReadOnlyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务ID
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1063,24 +1155,24 @@ class ModifyInstanceRequest extends  AbstractModel {
 }
 
 /**
- * tendis节点信息
+ * KillMasterGroup返回参数结构体
  * @class
  */
-class TendisNodes extends  AbstractModel {
+class KillMasterGroupResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 节点ID
-         * @type {string || null}
+         * 异步任务ID
+         * @type {number || null}
          */
-        this.NodeId = null;
+        this.TaskId = null;
 
         /**
-         * 节点角色
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.NodeRole = null;
+        this.RequestId = null;
 
     }
 
@@ -1091,8 +1183,8 @@ class TendisNodes extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.NodeId = 'NodeId' in params ? params.NodeId : null;
-        this.NodeRole = 'NodeRole' in params ? params.NodeRole : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1191,13 +1283,13 @@ class DescribeCommonDBInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * 实例Vip信息列表
+         * vpc网络ID信息列表
          * @type {Array.<number> || null}
          */
         this.VpcIds = null;
 
         /**
-         * 子网id信息列表
+         * 子网ID信息列表
          * @type {Array.<number> || null}
          */
         this.SubnetIds = null;
@@ -1209,7 +1301,7 @@ class DescribeCommonDBInstancesRequest extends  AbstractModel {
         this.PayMode = null;
 
         /**
-         * 实例id过滤信息列表
+         * 实例ID过滤信息列表
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -1245,13 +1337,13 @@ class DescribeCommonDBInstancesRequest extends  AbstractModel {
         this.Vips = null;
 
         /**
-         * vpc网络统一Id列表
+         * vpc网络ID信息列表
          * @type {Array.<string> || null}
          */
         this.UniqVpcIds = null;
 
         /**
-         * 子网统一id列表
+         * 子网统一ID列表
          * @type {Array.<string> || null}
          */
         this.UniqSubnetIds = null;
@@ -1309,6 +1401,18 @@ class DescribeDBSecurityGroupsResponse extends  AbstractModel {
         this.Groups = null;
 
         /**
+         * 安全组生效内网地址
+         * @type {string || null}
+         */
+        this.VIP = null;
+
+        /**
+         * 安全组生效内网端口
+         * @type {string || null}
+         */
+        this.VPort = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -1332,6 +1436,43 @@ class DescribeDBSecurityGroupsResponse extends  AbstractModel {
                 this.Groups.push(obj);
             }
         }
+        this.VIP = 'VIP' in params ? params.VIP : null;
+        this.VPort = 'VPort' in params ? params.VPort : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * RestoreInstance返回参数结构体
+ * @class
+ */
+class RestoreInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务ID，可通过 DescribeTaskInfo 接口查询任务执行状态
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1352,16 +1493,22 @@ class RedisNodeInfo extends  AbstractModel {
         this.NodeType = null;
 
         /**
+         * 主节点或者副本节点的ID，创建时不需要传递此参数。
+         * @type {number || null}
+         */
+        this.NodeId = null;
+
+        /**
          * 主节点或者副本节点的可用区ID
          * @type {number || null}
          */
         this.ZoneId = null;
 
         /**
-         * 主节点或者副本节点的ID，创建时不需要传递此参数。
-         * @type {number || null}
+         * 主节点或者副本节点的可用区名称
+         * @type {string || null}
          */
-        this.NodeId = null;
+        this.ZoneName = null;
 
     }
 
@@ -1373,8 +1520,9 @@ class RedisNodeInfo extends  AbstractModel {
             return;
         }
         this.NodeType = 'NodeType' in params ? params.NodeType : null;
-        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
         this.NodeId = 'NodeId' in params ? params.NodeId : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
 
     }
 }
@@ -1410,6 +1558,34 @@ class DescribeBackupUrlRequest extends  AbstractModel {
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.BackupId = 'BackupId' in params ? params.BackupId : null;
+
+    }
+}
+
+/**
+ * DeleteParamTemplate返回参数结构体
+ * @class
+ */
+class DeleteParamTemplateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1759,6 +1935,48 @@ class ClearInstanceRequest extends  AbstractModel {
 }
 
 /**
+ * UpgradeInstanceVersion请求参数结构体
+ * @class
+ */
+class UpgradeInstanceVersionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 目标实例类型，同 [CreateInstances](https://cloud.tencent.com/document/api/239/20026) 的Type，即实例要变更的目标类型
+         * @type {string || null}
+         */
+        this.TargetInstanceType = null;
+
+        /**
+         * 切换模式：1-维护时间窗切换，2-立即切换
+         * @type {number || null}
+         */
+        this.SwitchOption = null;
+
+        /**
+         * 实例ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TargetInstanceType = 'TargetInstanceType' in params ? params.TargetInstanceType : null;
+        this.SwitchOption = 'SwitchOption' in params ? params.SwitchOption : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
  * 地域信息
  * @class
  */
@@ -1874,6 +2092,48 @@ class BigKeyInfo extends  AbstractModel {
         this.Type = 'Type' in params ? params.Type : null;
         this.Size = 'Size' in params ? params.Size : null;
         this.Updatetime = 'Updatetime' in params ? params.Updatetime : null;
+
+    }
+}
+
+/**
+ * DescribeParamTemplates请求参数结构体
+ * @class
+ */
+class DescribeParamTemplatesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品类型数组。产品类型：1 – Redis2.8内存版（集群架构），2 – Redis2.8内存版（标准架构），3 – CKV 3.2内存版(标准架构)，4 – CKV 3.2内存版(集群架构)，5 – Redis2.8内存版（单机），6 – Redis4.0内存版（标准架构），7 – Redis4.0内存版（集群架构），8 – Redis5.0内存版（标准架构），9 – Redis5.0内存版（集群架构）
+         * @type {Array.<number> || null}
+         */
+        this.ProductTypes = null;
+
+        /**
+         * 模板名称数组。
+         * @type {Array.<string> || null}
+         */
+        this.TemplateNames = null;
+
+        /**
+         * 模板ID数组。
+         * @type {Array.<string> || null}
+         */
+        this.TemplateIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductTypes = 'ProductTypes' in params ? params.ProductTypes : null;
+        this.TemplateNames = 'TemplateNames' in params ? params.TemplateNames : null;
+        this.TemplateIds = 'TemplateIds' in params ? params.TemplateIds : null;
 
     }
 }
@@ -2013,7 +2273,7 @@ class ModifyAutoBackupConfigRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * 日期 Monday，Tuesday，Wednesday，Thursday，Friday，Saturday，Sunday
+         * 日期 Monday，Tuesday，Wednesday，Thursday，Friday，Saturday，Sunday，该参数暂不支持修改。
          * @type {Array.<string> || null}
          */
         this.WeekDays = null;
@@ -2184,6 +2444,12 @@ class RedisNode extends  AbstractModel {
          */
         this.Status = null;
 
+        /**
+         * 节点角色
+         * @type {string || null}
+         */
+        this.Role = null;
+
     }
 
     /**
@@ -2197,6 +2463,7 @@ class RedisNode extends  AbstractModel {
         this.Slot = 'Slot' in params ? params.Slot : null;
         this.NodeId = 'NodeId' in params ? params.NodeId : null;
         this.Status = 'Status' in params ? params.Status : null;
+        this.Role = 'Role' in params ? params.Role : null;
 
     }
 }
@@ -2237,24 +2504,69 @@ class DescribeProjectSecurityGroupRequest extends  AbstractModel {
 }
 
 /**
- * RestoreInstance返回参数结构体
+ * Redis参数模板参数详情
  * @class
  */
-class RestoreInstanceResponse extends  AbstractModel {
+class ParameterDetail extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 任务ID，可通过 DescribeTaskInfo 接口查询任务执行状态
-         * @type {number || null}
-         */
-        this.TaskId = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 参数名称
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Name = null;
+
+        /**
+         * 参数类型
+         * @type {string || null}
+         */
+        this.ParamType = null;
+
+        /**
+         * 参数默认值
+         * @type {string || null}
+         */
+        this.Default = null;
+
+        /**
+         * 参数描述
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 参数当前值
+         * @type {string || null}
+         */
+        this.CurrentValue = null;
+
+        /**
+         * 修改参数后，是否需要重启数据库以使参数生效。可能的值包括：0-不需要重启；1-需要重启
+         * @type {number || null}
+         */
+        this.NeedReboot = null;
+
+        /**
+         * 参数允许的最大值
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Max = null;
+
+        /**
+         * 参数允许的最小值
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Min = null;
+
+        /**
+         * 参数的可选枚举值。如果为非枚举参数，则为空
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.EnumValue = null;
 
     }
 
@@ -2265,8 +2577,15 @@ class RestoreInstanceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.ParamType = 'ParamType' in params ? params.ParamType : null;
+        this.Default = 'Default' in params ? params.Default : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.CurrentValue = 'CurrentValue' in params ? params.CurrentValue : null;
+        this.NeedReboot = 'NeedReboot' in params ? params.NeedReboot : null;
+        this.Max = 'Max' in params ? params.Max : null;
+        this.Min = 'Min' in params ? params.Min : null;
+        this.EnumValue = 'EnumValue' in params ? params.EnumValue : null;
 
     }
 }
@@ -2379,6 +2698,170 @@ class ManualBackupInstanceResponse extends  AbstractModel {
             return;
         }
         this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 任务信息详情
+ * @class
+ */
+class TaskInfoDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务Id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 任务类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TaskType = null;
+
+        /**
+         * 实例名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * 实例Id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 项目Id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * 任务进度
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Progress = null;
+
+        /**
+         * 结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 任务状态
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Result = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.TaskType = 'TaskType' in params ? params.TaskType : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.Progress = 'Progress' in params ? params.Progress : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Result = 'Result' in params ? params.Result : null;
+
+    }
+}
+
+/**
+ * DisableReplicaReadonly返回参数结构体
+ * @class
+ */
+class DisableReplicaReadonlyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateParamTemplate返回参数结构体
+ * @class
+ */
+class CreateParamTemplateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 参数模板 ID。
+         * @type {string || null}
+         */
+        this.TemplateId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2522,6 +3005,41 @@ class DescribeInstanceDTSInfoResponse extends  AbstractModel {
 }
 
 /**
+ * AddReplicationInstance返回参数结构体
+ * @class
+ */
+class AddReplicationInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 异步流程ID
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DestroyPostpaidInstance返回参数结构体
  * @class
  */
@@ -2557,18 +3075,42 @@ class DestroyPostpaidInstanceResponse extends  AbstractModel {
 }
 
 /**
- * ModifyInstance返回参数结构体
+ * SwitchInstanceVip请求参数结构体
  * @class
  */
-class ModifyInstanceResponse extends  AbstractModel {
+class SwitchInstanceVipRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 源实例ID
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.SrcInstanceId = null;
+
+        /**
+         * 目标实例ID
+         * @type {string || null}
+         */
+        this.DstInstanceId = null;
+
+        /**
+         * 单位为秒。源实例与目标实例间DTS已断开时间，如果DTS断开时间大于TimeDelay，则不切换VIP，建议尽量根据业务设置一个可接受的值。
+         * @type {number || null}
+         */
+        this.TimeDelay = null;
+
+        /**
+         * 在DTS断开的情况下是否强制切换。1：强制切换，0：不强制切换
+         * @type {number || null}
+         */
+        this.ForceSwitch = null;
+
+        /**
+         * now: 立即切换，syncComplete：等待同步完成后切换
+         * @type {string || null}
+         */
+        this.SwitchTime = null;
 
     }
 
@@ -2579,7 +3121,46 @@ class ModifyInstanceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.SrcInstanceId = 'SrcInstanceId' in params ? params.SrcInstanceId : null;
+        this.DstInstanceId = 'DstInstanceId' in params ? params.DstInstanceId : null;
+        this.TimeDelay = 'TimeDelay' in params ? params.TimeDelay : null;
+        this.ForceSwitch = 'ForceSwitch' in params ? params.ForceSwitch : null;
+        this.SwitchTime = 'SwitchTime' in params ? params.SwitchTime : null;
+
+    }
+}
+
+/**
+ * ChangeReplicaToMaster请求参数结构体
+ * @class
+ */
+class ChangeReplicaToMasterRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例Id
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 副本组Id，多AZ实例必填
+         * @type {number || null}
+         */
+        this.GroupId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
 
     }
 }
@@ -2614,84 +3195,18 @@ class ProxyNodes extends  AbstractModel {
 }
 
 /**
- * 订单交易信息
+ * ModifyInstance返回参数结构体
  * @class
  */
-class TradeDealDetail extends  AbstractModel {
+class ModifyInstanceResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 订单号ID，调用云API时使用此ID
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.DealId = null;
-
-        /**
-         * 长订单ID，反馈订单问题给官方客服使用此ID
-         * @type {string || null}
-         */
-        this.DealName = null;
-
-        /**
-         * 可用区id
-         * @type {number || null}
-         */
-        this.ZoneId = null;
-
-        /**
-         * 订单关联的实例数
-         * @type {number || null}
-         */
-        this.GoodsNum = null;
-
-        /**
-         * 创建用户uin
-         * @type {string || null}
-         */
-        this.Creater = null;
-
-        /**
-         * 订单创建时间
-         * @type {string || null}
-         */
-        this.CreatTime = null;
-
-        /**
-         * 订单超时时间
-         * @type {string || null}
-         */
-        this.OverdueTime = null;
-
-        /**
-         * 订单完成时间
-         * @type {string || null}
-         */
-        this.EndTime = null;
-
-        /**
-         * 订单状态 1：未支付 2:已支付，未发货 3:发货中 4:发货成功 5:发货失败 6:已退款 7:已关闭订单 8:订单过期 9:订单已失效 10:产品已失效 11:代付拒绝 12:支付中
-         * @type {number || null}
-         */
-        this.Status = null;
-
-        /**
-         * 订单状态描述
-         * @type {string || null}
-         */
-        this.Description = null;
-
-        /**
-         * 订单实际总价，单位：分
-         * @type {number || null}
-         */
-        this.Price = null;
-
-        /**
-         * 实例ID
-         * @type {Array.<string> || null}
-         */
-        this.InstanceIds = null;
+        this.RequestId = null;
 
     }
 
@@ -2702,18 +3217,7 @@ class TradeDealDetail extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DealId = 'DealId' in params ? params.DealId : null;
-        this.DealName = 'DealName' in params ? params.DealName : null;
-        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
-        this.GoodsNum = 'GoodsNum' in params ? params.GoodsNum : null;
-        this.Creater = 'Creater' in params ? params.Creater : null;
-        this.CreatTime = 'CreatTime' in params ? params.CreatTime : null;
-        this.OverdueTime = 'OverdueTime' in params ? params.OverdueTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.Description = 'Description' in params ? params.Description : null;
-        this.Price = 'Price' in params ? params.Price : null;
-        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2775,7 +3279,7 @@ class RedisCommonInstanceList extends  AbstractModel {
         this.SubnetId = null;
 
         /**
-         * 实例状态信息，0-创建中，1-运行中
+         * 实例状态信息，1-流程中 ,2-运行中, -2-实例已隔离 ,-3-实例待回收, -4-实例已删除
          * @type {string || null}
          */
         this.Status = null;
@@ -2971,6 +3475,70 @@ class DescribeInstanceDTSInfoRequest extends  AbstractModel {
 }
 
 /**
+ * CreateParamTemplate请求参数结构体
+ * @class
+ */
+class CreateParamTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 参数模板名称。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 参数模板描述。
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 产品类型：1 – Redis2.8内存版（集群架构），2 – Redis2.8内存版（标准架构），3 – CKV 3.2内存版(标准架构)，4 – CKV 3.2内存版(集群架构)，5 – Redis2.8内存版（单机），6 – Redis4.0内存版（标准架构），7 – Redis4.0内存版（集群架构），8 – Redis5.0内存版（标准架构），9 – Redis5.0内存版（集群架构）。创建模板时必填，从源模板复制则不需要传入该参数。
+         * @type {number || null}
+         */
+        this.ProductType = null;
+
+        /**
+         * 源参数模板 ID。
+         * @type {string || null}
+         */
+        this.TemplateId = null;
+
+        /**
+         * 参数列表。
+         * @type {Array.<InstanceParam> || null}
+         */
+        this.ParamList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.ProductType = 'ProductType' in params ? params.ProductType : null;
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+
+        if (params.ParamList) {
+            this.ParamList = new Array();
+            for (let z in params.ParamList) {
+                let obj = new InstanceParam();
+                obj.deserialize(params.ParamList[z]);
+                this.ParamList.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DescribeTendisSlowLog返回参数结构体
  * @class
  */
@@ -3096,7 +3664,7 @@ class ModifyInstanceAccountRequest extends  AbstractModel {
         this.Remark = null;
 
         /**
-         * 子账号路由策略：填写master或者slave，表示路由主节点，从节点
+         * 路由策略：填写master或者replication，表示主节点或者从节点
          * @type {Array.<string> || null}
          */
         this.ReadonlyPolicy = null;
@@ -3134,6 +3702,76 @@ class ModifyInstanceAccountRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyMaintenanceWindow请求参数结构体
+ * @class
+ */
+class ModifyMaintenanceWindowRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 维护时间窗起始时间，如：17:00
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 维护时间窗结束时间，如：19:00
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+
+    }
+}
+
+/**
+ * DescribeParamTemplateInfo请求参数结构体
+ * @class
+ */
+class DescribeParamTemplateInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 参数模板 ID。
+         * @type {string || null}
+         */
+        this.TemplateId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+
+    }
+}
+
+/**
  * DescribeBackupUrl返回参数结构体
  * @class
  */
@@ -3142,16 +3780,30 @@ class DescribeBackupUrlResponse extends  AbstractModel {
         super();
 
         /**
-         * 外网下载地址（6小时）
+         * 外网下载地址（6小时内链接有效），该字段正在逐步废弃中。
          * @type {Array.<string> || null}
          */
         this.DownloadUrl = null;
 
         /**
-         * 内网下载地址（6小时）
+         * 内网下载地址（6小时内链接有效），该字段正在逐步废弃中。
          * @type {Array.<string> || null}
          */
         this.InnerDownloadUrl = null;
+
+        /**
+         * 文件名称，该字段正在逐步废弃中。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.Filenames = null;
+
+        /**
+         * 备份文件信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<BackupDownloadInfo> || null}
+         */
+        this.BackupInfos = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3170,6 +3822,16 @@ class DescribeBackupUrlResponse extends  AbstractModel {
         }
         this.DownloadUrl = 'DownloadUrl' in params ? params.DownloadUrl : null;
         this.InnerDownloadUrl = 'InnerDownloadUrl' in params ? params.InnerDownloadUrl : null;
+        this.Filenames = 'Filenames' in params ? params.Filenames : null;
+
+        if (params.BackupInfos) {
+            this.BackupInfos = new Array();
+            for (let z in params.BackupInfos) {
+                let obj = new BackupDownloadInfo();
+                obj.deserialize(params.BackupInfos[z]);
+                this.BackupInfos.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -3321,6 +3983,41 @@ class InstanceSecurityGroupDetail extends  AbstractModel {
                 this.SecurityGroupDetails.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * UpgradeProxyVersion返回参数结构体
+ * @class
+ */
+class UpgradeProxyVersionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 异步流程ID
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3699,6 +4396,12 @@ class UpgradeVersionToMultiAvailabilityZonesRequest extends  AbstractModel {
          */
         this.InstanceId = null;
 
+        /**
+         * 是否升级proxy和redis内核版本，升级后可支持就近接入
+         * @type {boolean || null}
+         */
+        this.UpgradeProxyAndRedisServer = null;
+
     }
 
     /**
@@ -3709,6 +4412,49 @@ class UpgradeVersionToMultiAvailabilityZonesRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.UpgradeProxyAndRedisServer = 'UpgradeProxyAndRedisServer' in params ? params.UpgradeProxyAndRedisServer : null;
+
+    }
+}
+
+/**
+ * AllocateWanAddress返回参数结构体
+ * @class
+ */
+class AllocateWanAddressResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 异步流程ID
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * 开通外网的状态
+         * @type {string || null}
+         */
+        this.WanStatus = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.WanStatus = 'WanStatus' in params ? params.WanStatus : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3756,10 +4502,52 @@ class DescribeInstanceMonitorTookDistRequest extends  AbstractModel {
 }
 
 /**
- * ModifyMaintenanceWindow请求参数结构体
+ * DeleteReplicationInstance请求参数结构体
  * @class
  */
-class ModifyMaintenanceWindowRequest extends  AbstractModel {
+class DeleteReplicationInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 复制组ID
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
+        /**
+         * 实例ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 数据同步类型，true:需要数据强同步,false:不需要强同步，仅限删除主实例
+         * @type {boolean || null}
+         */
+        this.SyncType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.SyncType = 'SyncType' in params ? params.SyncType : null;
+
+    }
+}
+
+/**
+ * KillMasterGroup请求参数结构体
+ * @class
+ */
+class KillMasterGroupRequest extends  AbstractModel {
     constructor(){
         super();
 
@@ -3770,16 +4558,22 @@ class ModifyMaintenanceWindowRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * 维护时间窗起始时间，如：17:00
+         * 1.长度8-30位,推荐使用12位以上的密码
+2.不能以"/"开头
+3.至少包含两项
+    a.小写字母a-z
+    b.大写字母A-Z
+    c.数字0-9
+    d.()`~!@#$%^&*-+=_|{}[]:;<>,.?/
          * @type {string || null}
          */
-        this.StartTime = null;
+        this.Password = null;
 
         /**
-         * 维护时间窗结束时间，如：19:00
-         * @type {string || null}
+         * 单AZ实例节点信息
+         * @type {Array.<number> || null}
          */
-        this.EndTime = null;
+        this.ShardIds = null;
 
     }
 
@@ -3791,8 +4585,8 @@ class ModifyMaintenanceWindowRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Password = 'Password' in params ? params.Password : null;
+        this.ShardIds = 'ShardIds' in params ? params.ShardIds : null;
 
     }
 }
@@ -3870,6 +4664,55 @@ class InstanceTextParam extends  AbstractModel {
         this.Tips = 'Tips' in params ? params.Tips : null;
         this.TextValue = 'TextValue' in params ? params.TextValue : null;
         this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
+ * 参数模板信息
+ * @class
+ */
+class ParamTemplateInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 参数模板ID
+         * @type {string || null}
+         */
+        this.TemplateId = null;
+
+        /**
+         * 参数模板名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 参数模板描述
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 产品类型：1 – Redis2.8内存版（集群架构），2 – Redis2.8内存版（标准架构），3 – CKV 3.2内存版(标准架构)，4 – CKV 3.2内存版(集群架构)，5 – Redis2.8内存版（单机），6 – Redis4.0内存版（标准架构），7 – Redis4.0内存版（集群架构），8 – Redis5.0内存版（标准架构），9 – Redis5.0内存版（集群架构）
+         * @type {number || null}
+         */
+        this.ProductType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.ProductType = 'ProductType' in params ? params.ProductType : null;
 
     }
 }
@@ -4057,7 +4900,7 @@ class DescribeTaskListRequest extends  AbstractModel {
         this.InstanceName = null;
 
         /**
-         * 分页大小
+         * 分页大小,默认20，上限不大于100
          * @type {number || null}
          */
         this.Limit = null;
@@ -4121,18 +4964,18 @@ class DescribeTaskListRequest extends  AbstractModel {
 }
 
 /**
- * DisableReplicaReadonly返回参数结构体
+ * ChangeReplicaToMaster返回参数结构体
  * @class
  */
-class DisableReplicaReadonlyResponse extends  AbstractModel {
+class ChangeReplicaToMasterResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 失败:ERROR，成功:OK
-         * @type {string || null}
+         * 异步任务ID
+         * @type {number || null}
          */
-        this.Status = null;
+        this.TaskId = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4149,7 +4992,7 @@ class DisableReplicaReadonlyResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Status = 'Status' in params ? params.Status : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -4226,6 +5069,90 @@ class DescribeTaskInfoRequest extends  AbstractModel {
 }
 
 /**
+ * ApplyParamsTemplate返回参数结构体
+ * @class
+ */
+class ApplyParamsTemplateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务ID
+         * @type {Array.<number> || null}
+         */
+        this.TaskIds = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskIds = 'TaskIds' in params ? params.TaskIds : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeReplicationGroup请求参数结构体
+ * @class
+ */
+class DescribeReplicationGroupRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例列表的大小，参数默认值20
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量，取Limit整数倍
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 复制组ID
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
+        /**
+         * 实例ID和实例名称，支持模糊查询
+         * @type {string || null}
+         */
+        this.SearchKey = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.SearchKey = 'SearchKey' in params ? params.SearchKey : null;
+
+    }
+}
+
+/**
  * Redis节点信息
  * @class
  */
@@ -4251,6 +5178,12 @@ class RedisNodes extends  AbstractModel {
          */
         this.ClusterId = null;
 
+        /**
+         * 可用区ID
+         * @type {number || null}
+         */
+        this.ZoneId = null;
+
     }
 
     /**
@@ -4263,6 +5196,7 @@ class RedisNodes extends  AbstractModel {
         this.NodeId = 'NodeId' in params ? params.NodeId : null;
         this.NodeRole = 'NodeRole' in params ? params.NodeRole : null;
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
 
     }
 }
@@ -4340,6 +5274,12 @@ class ModifyNetworkConfigRequest extends  AbstractModel {
          */
         this.SubnetId = null;
 
+        /**
+         * 原VIP保留时间，单位：天，注：需要最新版SDK，否则原VIP立即释放，查看SDK版本，详见 [SDK中心](https://cloud.tencent.com/document/sdk)
+         * @type {number || null}
+         */
+        this.Recycle = null;
+
     }
 
     /**
@@ -4354,6 +5294,7 @@ class ModifyNetworkConfigRequest extends  AbstractModel {
         this.Vip = 'Vip' in params ? params.Vip : null;
         this.VpcId = 'VpcId' in params ? params.VpcId : null;
         this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.Recycle = 'Recycle' in params ? params.Recycle : null;
 
     }
 }
@@ -4548,6 +5489,56 @@ class ModifyDBInstanceSecurityGroupsRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeParamTemplates返回参数结构体
+ * @class
+ */
+class DescribeParamTemplatesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 该用户的参数模板数量。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 参数模板详情。
+         * @type {Array.<ParamTemplateInfo> || null}
+         */
+        this.Items = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Items) {
+            this.Items = new Array();
+            for (let z in params.Items) {
+                let obj = new ParamTemplateInfo();
+                obj.deserialize(params.Items[z]);
+                this.Items.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeInstanceShards请求参数结构体
  * @class
  */
@@ -4556,7 +5547,7 @@ class DescribeInstanceShardsRequest extends  AbstractModel {
         super();
 
         /**
-         * 实例id
+         * 实例ID
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -4686,6 +5677,18 @@ class DescribeAutoBackupConfigResponse extends  AbstractModel {
         this.TimePeriod = null;
 
         /**
+         * 全量备份文件保存天数
+         * @type {number || null}
+         */
+        this.BackupStorageDays = null;
+
+        /**
+         * tendis binlog备份文件保存天数
+         * @type {number || null}
+         */
+        this.BinlogStorageDays = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -4703,6 +5706,8 @@ class DescribeAutoBackupConfigResponse extends  AbstractModel {
         this.AutoBackupType = 'AutoBackupType' in params ? params.AutoBackupType : null;
         this.WeekDays = 'WeekDays' in params ? params.WeekDays : null;
         this.TimePeriod = 'TimePeriod' in params ? params.TimePeriod : null;
+        this.BackupStorageDays = 'BackupStorageDays' in params ? params.BackupStorageDays : null;
+        this.BinlogStorageDays = 'BinlogStorageDays' in params ? params.BinlogStorageDays : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -4758,6 +5763,34 @@ class InquiryPriceUpgradeInstanceRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyParamTemplate返回参数结构体
+ * @class
+ */
+class ModifyParamTemplateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeProjectSecurityGroups请求参数结构体
  * @class
  */
@@ -4784,7 +5817,7 @@ class DescribeProjectSecurityGroupsRequest extends  AbstractModel {
         this.Offset = null;
 
         /**
-         * 拉取数量限制。
+         * 拉取数量限制，默认20
          * @type {number || null}
          */
         this.Limit = null;
@@ -4963,7 +5996,13 @@ class CreateInstanceAccountRequest extends  AbstractModel {
         this.AccountName = null;
 
         /**
-         * 子账号密码
+         * 1.长度8-30位,推荐使用12位以上的密码
+2.不能以"/"开头
+3.至少包含两项
+    a.小写字母a-z
+    b.大写字母A-Z
+    c.数字0-9
+    d.()`~!@#$%^&*-+=_|{}[]:;<>,.?/
          * @type {string || null}
          */
         this.AccountPassword = null;
@@ -5014,10 +6053,18 @@ class EnableReplicaReadonlyResponse extends  AbstractModel {
         super();
 
         /**
-         * 错误：ERROR，正确OK。
+         * 错误：ERROR，正确OK（已废弃）
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Status = null;
+
+        /**
+         * 任务ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TaskId = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -5035,6 +6082,7 @@ class EnableReplicaReadonlyResponse extends  AbstractModel {
             return;
         }
         this.Status = 'Status' in params ? params.Status : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -5120,6 +6168,48 @@ class DescribeInstanceSecurityGroupResponse extends  AbstractModel {
                 this.InstanceSecurityGroupsDetail.push(obj);
             }
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ReleaseWanAddress返回参数结构体
+ * @class
+ */
+class ReleaseWanAddressResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 异步流程ID
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * 关闭外网的状态
+         * @type {string || null}
+         */
+        this.WanStatus = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.WanStatus = 'WanStatus' in params ? params.WanStatus : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -5325,6 +6415,41 @@ class InstanceNode extends  AbstractModel {
 }
 
 /**
+ * tendis节点信息
+ * @class
+ */
+class TendisNodes extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 节点ID
+         * @type {string || null}
+         */
+        this.NodeId = null;
+
+        /**
+         * 节点角色
+         * @type {string || null}
+         */
+        this.NodeRole = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NodeId = 'NodeId' in params ? params.NodeId : null;
+        this.NodeRole = 'NodeRole' in params ? params.NodeRole : null;
+
+    }
+}
+
+/**
  * StartupInstance返回参数结构体
  * @class
  */
@@ -5440,6 +6565,111 @@ class DescribeInstanceDTSInstanceInfo extends  AbstractModel {
         this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
         this.Vip = 'Vip' in params ? params.Vip : null;
         this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
+ * 订单交易信息
+ * @class
+ */
+class TradeDealDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 订单号ID，调用云API时使用此ID
+         * @type {string || null}
+         */
+        this.DealId = null;
+
+        /**
+         * 长订单ID，反馈订单问题给官方客服使用此ID
+         * @type {string || null}
+         */
+        this.DealName = null;
+
+        /**
+         * 可用区id
+         * @type {number || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * 订单关联的实例数
+         * @type {number || null}
+         */
+        this.GoodsNum = null;
+
+        /**
+         * 创建用户uin
+         * @type {string || null}
+         */
+        this.Creater = null;
+
+        /**
+         * 订单创建时间
+         * @type {string || null}
+         */
+        this.CreatTime = null;
+
+        /**
+         * 订单超时时间
+         * @type {string || null}
+         */
+        this.OverdueTime = null;
+
+        /**
+         * 订单完成时间
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 订单状态 1：未支付 2:已支付，未发货 3:发货中 4:发货成功 5:发货失败 6:已退款 7:已关闭订单 8:订单过期 9:订单已失效 10:产品已失效 11:代付拒绝 12:支付中
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 订单状态描述
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 订单实际总价，单位：分
+         * @type {number || null}
+         */
+        this.Price = null;
+
+        /**
+         * 实例ID
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DealId = 'DealId' in params ? params.DealId : null;
+        this.DealName = 'DealName' in params ? params.DealName : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.GoodsNum = 'GoodsNum' in params ? params.GoodsNum : null;
+        this.Creater = 'Creater' in params ? params.Creater : null;
+        this.CreatTime = 'CreatTime' in params ? params.CreatTime : null;
+        this.OverdueTime = 'OverdueTime' in params ? params.OverdueTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.Price = 'Price' in params ? params.Price : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
 
     }
 }
@@ -5678,6 +6908,41 @@ class DescribeInstanceMonitorBigKeyTypeDistResponse extends  AbstractModel {
 }
 
 /**
+ * DeleteReplicationInstance返回参数结构体
+ * @class
+ */
+class DeleteReplicationInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 异步任务ID
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CleanUpInstance请求参数结构体
  * @class
  */
@@ -5749,6 +7014,94 @@ class DescribeInstanceDealDetailResponse extends  AbstractModel {
 }
 
 /**
+ * 复制组信息
+ * @class
+ */
+class Groups extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 用户AppID
+         * @type {number || null}
+         */
+        this.AppId = null;
+
+        /**
+         * 地域ID 1--广州 4--上海 5-- 中国香港 6--多伦多 7--上海金融 8--北京 9-- 新加坡 11--深圳金融 15--美西（硅谷）16--成都 17--德国 18--韩国 19--重庆 21--印度 22--美东（弗吉尼亚）23--泰国 24--俄罗斯 25--日本
+         * @type {number || null}
+         */
+        this.RegionId = null;
+
+        /**
+         * 复制组信息
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
+        /**
+         * 复制组名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.GroupName = null;
+
+        /**
+         * 复制组状态，37："绑定复制组中"，38："复制组重连中"，51："解绑复制组中"，52："复制组实例切主中"，53："角色变更中"
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 复制组数量
+         * @type {number || null}
+         */
+        this.InstanceCount = null;
+
+        /**
+         * 复制组实例
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Instances> || null}
+         */
+        this.Instances = null;
+
+        /**
+         * 备注信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.RegionId = 'RegionId' in params ? params.RegionId : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.GroupName = 'GroupName' in params ? params.GroupName : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.InstanceCount = 'InstanceCount' in params ? params.InstanceCount : null;
+
+        if (params.Instances) {
+            this.Instances = new Array();
+            for (let z in params.Instances) {
+                let obj = new Instances();
+                obj.deserialize(params.Instances[z]);
+                this.Instances.push(obj);
+            }
+        }
+        this.Remark = 'Remark' in params ? params.Remark : null;
+
+    }
+}
+
+/**
  * DescribeInstances请求参数结构体
  * @class
  */
@@ -5757,7 +7110,7 @@ class DescribeInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * 实例列表的大小，参数默认值20
+         * 实例列表的大小，参数默认值20，传值则以传参为准，如果传参大于具体配置etc/conf/component.properties中的DescribeInstancesPageLimit配置项 （读不到配置默认配置项为1000），则以配置项为准
          * @type {number || null}
          */
         this.Limit = null;
@@ -5888,6 +7241,18 @@ class DescribeInstancesRequest extends  AbstractModel {
          */
         this.MonitorVersion = null;
 
+        /**
+         * 根据标签的Key和Value筛选资源，不传或者传空数组则不进行过滤
+         * @type {Array.<InstanceTagInfo> || null}
+         */
+        this.InstanceTags = null;
+
+        /**
+         * 根据标签的Key筛选资源，不传或者传空数组则不进行过滤
+         * @type {Array.<string> || null}
+         */
+        this.TagKeys = null;
+
     }
 
     /**
@@ -5919,6 +7284,16 @@ class DescribeInstancesRequest extends  AbstractModel {
         this.SearchKeys = 'SearchKeys' in params ? params.SearchKeys : null;
         this.TypeList = 'TypeList' in params ? params.TypeList : null;
         this.MonitorVersion = 'MonitorVersion' in params ? params.MonitorVersion : null;
+
+        if (params.InstanceTags) {
+            this.InstanceTags = new Array();
+            for (let z in params.InstanceTags) {
+                let obj = new InstanceTagInfo();
+                obj.deserialize(params.InstanceTags[z]);
+                this.InstanceTags.push(obj);
+            }
+        }
+        this.TagKeys = 'TagKeys' in params ? params.TagKeys : null;
 
     }
 }
@@ -6059,6 +7434,34 @@ class DescribeSlowLogRequest extends  AbstractModel {
         this.MinQueryTime = 'MinQueryTime' in params ? params.MinQueryTime : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
+ * DeleteParamTemplate请求参数结构体
+ * @class
+ */
+class DeleteParamTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 参数模板 ID。
+         * @type {string || null}
+         */
+        this.TemplateId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
 
     }
 }
@@ -6252,6 +7655,12 @@ class ManualBackupInstanceRequest extends  AbstractModel {
          */
         this.Remark = null;
 
+        /**
+         * 保存天数。0代表指定默认保留时间
+         * @type {number || null}
+         */
+        this.StorageDays = null;
+
     }
 
     /**
@@ -6263,6 +7672,114 @@ class ManualBackupInstanceRequest extends  AbstractModel {
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.Remark = 'Remark' in params ? params.Remark : null;
+        this.StorageDays = 'StorageDays' in params ? params.StorageDays : null;
+
+    }
+}
+
+/**
+ * DescribeReplicationGroup返回参数结构体
+ * @class
+ */
+class DescribeReplicationGroupResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 复制组数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 复制组信息
+         * @type {Array.<Groups> || null}
+         */
+        this.Groups = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Groups) {
+            this.Groups = new Array();
+            for (let z in params.Groups) {
+                let obj = new Groups();
+                obj.deserialize(params.Groups[z]);
+                this.Groups.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyParamTemplate请求参数结构体
+ * @class
+ */
+class ModifyParamTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 源参数模板 ID。
+         * @type {string || null}
+         */
+        this.TemplateId = null;
+
+        /**
+         * 参数模板修改后的新名称。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 参数模板修改后的新描述。
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 修改后的新参数列表。
+         * @type {Array.<InstanceParam> || null}
+         */
+        this.ParamList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Description = 'Description' in params ? params.Description : null;
+
+        if (params.ParamList) {
+            this.ParamList = new Array();
+            for (let z in params.ParamList) {
+                let obj = new InstanceParam();
+                obj.deserialize(params.ParamList[z]);
+                this.ParamList.push(obj);
+            }
+        }
 
     }
 }
@@ -6707,6 +8224,34 @@ class InstanceSet extends  AbstractModel {
 }
 
 /**
+ * ReleaseWanAddress请求参数结构体
+ * @class
+ */
+class ReleaseWanAddressRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
  * InquiryPriceRenewInstance请求参数结构体
  * @class
  */
@@ -6812,24 +8357,18 @@ class ModifyMaintenanceWindowResponse extends  AbstractModel {
 }
 
 /**
- * DescribeCommonDBInstances返回参数结构体
+ * CreateReplicationGroup返回参数结构体
  * @class
  */
-class DescribeCommonDBInstancesResponse extends  AbstractModel {
+class CreateReplicationGroupResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 实例数
+         * 异步流程ID
          * @type {number || null}
          */
-        this.TotalCount = null;
-
-        /**
-         * 实例信息
-         * @type {Array.<RedisCommonInstanceList> || null}
-         */
-        this.InstanceDetails = null;
+        this.TaskId = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -6846,17 +8385,43 @@ class DescribeCommonDBInstancesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.InstanceDetails) {
-            this.InstanceDetails = new Array();
-            for (let z in params.InstanceDetails) {
-                let obj = new RedisCommonInstanceList();
-                obj.deserialize(params.InstanceDetails[z]);
-                this.InstanceDetails.push(obj);
-            }
-        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeInstanceMonitorBigKeyTypeDist请求参数结构体
+ * @class
+ */
+class DescribeInstanceMonitorBigKeyTypeDistRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例Id
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 时间；例如："20190219"
+         * @type {string || null}
+         */
+        this.Date = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Date = 'Date' in params ? params.Date : null;
 
     }
 }
@@ -6870,7 +8435,7 @@ class DescribeInstanceMonitorTopNCmdTookRequest extends  AbstractModel {
         super();
 
         /**
-         * 实例Id
+         * 实例ID
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -6932,24 +8497,30 @@ class DestroyPrepaidInstanceResponse extends  AbstractModel {
 }
 
 /**
- * DescribeInstanceMonitorBigKeyTypeDist请求参数结构体
+ * DescribeCommonDBInstances返回参数结构体
  * @class
  */
-class DescribeInstanceMonitorBigKeyTypeDistRequest extends  AbstractModel {
+class DescribeCommonDBInstancesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 实例Id
-         * @type {string || null}
+         * 实例数
+         * @type {number || null}
          */
-        this.InstanceId = null;
+        this.TotalCount = null;
 
         /**
-         * 时间；例如："20190219"
+         * 实例信息
+         * @type {Array.<RedisCommonInstanceList> || null}
+         */
+        this.InstanceDetails = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.Date = null;
+        this.RequestId = null;
 
     }
 
@@ -6960,8 +8531,17 @@ class DescribeInstanceMonitorBigKeyTypeDistRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.Date = 'Date' in params ? params.Date : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.InstanceDetails) {
+            this.InstanceDetails = new Array();
+            for (let z in params.InstanceDetails) {
+                let obj = new RedisCommonInstanceList();
+                obj.deserialize(params.InstanceDetails[z]);
+                this.InstanceDetails.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6973,12 +8553,6 @@ class DescribeInstanceMonitorBigKeyTypeDistRequest extends  AbstractModel {
 class InquiryPriceCreateInstanceRequest extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * 实例所属的可用区ID，可参考[地域和可用区](https://cloud.tencent.com/document/product/239/4106)  。
-         * @type {number || null}
-         */
-        this.ZoneId = null;
 
         /**
          * 实例类型：2 – Redis2.8内存版(标准架构)，3 – CKV 3.2内存版(标准架构)，4 – CKV 3.2内存版(集群架构)，6 – Redis4.0内存版(标准架构)，7 – Redis4.0内存版(集群架构)，8 – Redis5.0内存版(标准架构)，9 – Redis5.0内存版(集群架构)。
@@ -7012,22 +8586,34 @@ TypeId为标准架构时，MemSize是实例总内存容量；TypeId为集群架�
         this.BillingMode = null;
 
         /**
-         * 实例分片数量，Redis2.8主从版、CKV主从版和Redis2.8单机版、Redis4.0主从版不需要填写。
+         * 实例所属的可用区ID，可参考[地域和可用区](https://cloud.tencent.com/document/product/239/4106)  。
+         * @type {number || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * 实例分片数量，Redis2.8标准架构、CKV标准架构和Redis2.8单机版、Redis4.0标准架构不需要填写。
          * @type {number || null}
          */
         this.RedisShardNum = null;
 
         /**
-         * 实例副本数量，Redis2.8主从版、CKV主从版和Redis2.8单机版不需要填写。
+         * 实例副本数量，Redis2.8标准架构、CKV标准架构和Redis2.8单机版不需要填写。
          * @type {number || null}
          */
         this.RedisReplicasNum = null;
 
         /**
-         * 是否支持副本只读，Redis2.8主从版、CKV主从版和Redis2.8单机版不需要填写。
+         * 是否支持副本只读，Redis2.8标准架构、CKV标准架构和Redis2.8单机版不需要填写。
          * @type {boolean || null}
          */
         this.ReplicasReadonly = null;
+
+        /**
+         * 实例所属的可用区名称，可参考[地域和可用区](https://cloud.tencent.com/document/product/239/4106)  。
+         * @type {string || null}
+         */
+        this.ZoneName = null;
 
     }
 
@@ -7038,15 +8624,51 @@ TypeId为标准架构时，MemSize是实例总内存容量；TypeId为集群架�
         if (!params) {
             return;
         }
-        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
         this.TypeId = 'TypeId' in params ? params.TypeId : null;
         this.MemSize = 'MemSize' in params ? params.MemSize : null;
         this.GoodsNum = 'GoodsNum' in params ? params.GoodsNum : null;
         this.Period = 'Period' in params ? params.Period : null;
         this.BillingMode = 'BillingMode' in params ? params.BillingMode : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
         this.RedisShardNum = 'RedisShardNum' in params ? params.RedisShardNum : null;
         this.RedisReplicasNum = 'RedisReplicasNum' in params ? params.RedisReplicasNum : null;
         this.ReplicasReadonly = 'ReplicasReadonly' in params ? params.ReplicasReadonly : null;
+        this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
+
+    }
+}
+
+/**
+ * UpgradeSmallVersion返回参数结构体
+ * @class
+ */
+class UpgradeSmallVersionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 异步流程ID
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7090,6 +8712,55 @@ class ModifyInstanceParamsRequest extends  AbstractModel {
                 this.InstanceParams.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * 备份文件下载信息
+ * @class
+ */
+class BackupDownloadInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 备份文件名称
+         * @type {string || null}
+         */
+        this.FileName = null;
+
+        /**
+         * 备份文件大小，单位B，如果为0，表示无效
+         * @type {number || null}
+         */
+        this.FileSize = null;
+
+        /**
+         * 备份文件外网下载地址（6小时）
+         * @type {string || null}
+         */
+        this.DownloadUrl = null;
+
+        /**
+         * 备份文件内网下载地址（6小时）
+         * @type {string || null}
+         */
+        this.InnerDownloadUrl = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FileName = 'FileName' in params ? params.FileName : null;
+        this.FileSize = 'FileSize' in params ? params.FileSize : null;
+        this.DownloadUrl = 'DownloadUrl' in params ? params.DownloadUrl : null;
+        this.InnerDownloadUrl = 'InnerDownloadUrl' in params ? params.InnerDownloadUrl : null;
 
     }
 }
@@ -7209,6 +8880,48 @@ class DescribeMaintenanceWindowRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
+ * AddReplicationInstance请求参数结构体
+ * @class
+ */
+class AddReplicationInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 复制组ID
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
+        /**
+         * 实例ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 实例角色，rw可读写，r只读
+         * @type {string || null}
+         */
+        this.InstanceRole = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InstanceRole = 'InstanceRole' in params ? params.InstanceRole : null;
 
     }
 }
@@ -7358,7 +9071,7 @@ class DescribeTendisSlowLogRequest extends  AbstractModel {
         this.MinQueryTime = null;
 
         /**
-         * 页面大小：20
+         * 页面大小：默认20
          * @type {number || null}
          */
         this.Limit = null;
@@ -7502,30 +9215,24 @@ class DescribeProxySlowLogResponse extends  AbstractModel {
 }
 
 /**
- * UpgradeInstanceVersion请求参数结构体
+ * ModifyInstanceReadOnly请求参数结构体
  * @class
  */
-class UpgradeInstanceVersionRequest extends  AbstractModel {
+class ModifyInstanceReadOnlyRequest extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * 目标实例类型，同 [CreateInstances](https://cloud.tencent.com/document/api/239/20026) 的Type，即实例要变更的目标类型
-         * @type {string || null}
-         */
-        this.TargetInstanceType = null;
-
-        /**
-         * 切换模式：1-维护时间窗切换，2-立即切换
-         * @type {number || null}
-         */
-        this.SwitchOption = null;
 
         /**
          * 实例ID
          * @type {string || null}
          */
         this.InstanceId = null;
+
+        /**
+         * 实例输入模式，0：读写 1：只读
+         * @type {string || null}
+         */
+        this.InputMode = null;
 
     }
 
@@ -7536,9 +9243,8 @@ class UpgradeInstanceVersionRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TargetInstanceType = 'TargetInstanceType' in params ? params.TargetInstanceType : null;
-        this.SwitchOption = 'SwitchOption' in params ? params.SwitchOption : null;
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InputMode = 'InputMode' in params ? params.InputMode : null;
 
     }
 }
@@ -7661,6 +9367,84 @@ class DisableReplicaReadonlyRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
+ * DescribeParamTemplateInfo返回参数结构体
+ * @class
+ */
+class DescribeParamTemplateInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例参数个数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 参数模板 ID。
+         * @type {string || null}
+         */
+        this.TemplateId = null;
+
+        /**
+         * 参数模板名称。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 产品类型：1 – Redis2.8内存版（集群架构），2 – Redis2.8内存版（标准架构），3 – CKV 3.2内存版(标准架构)，4 – CKV 3.2内存版(集群架构)，5 – Redis2.8内存版（单机），6 – Redis4.0内存版（标准架构），7 – Redis4.0内存版（集群架构），8 – Redis5.0内存版（标准架构），9 – Redis5.0内存版（集群架构）
+         * @type {number || null}
+         */
+        this.ProductType = null;
+
+        /**
+         * 参数模板描述
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 参数详情
+         * @type {Array.<ParameterDetail> || null}
+         */
+        this.Items = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.ProductType = 'ProductType' in params ? params.ProductType : null;
+        this.Description = 'Description' in params ? params.Description : null;
+
+        if (params.Items) {
+            this.Items = new Array();
+            for (let z in params.Items) {
+                let obj = new ParameterDetail();
+                obj.deserialize(params.Items[z]);
+                this.Items.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8429,6 +10213,55 @@ class TendisSlowLogDetail extends  AbstractModel {
 }
 
 /**
+ * UpgradeProxyVersion请求参数结构体
+ * @class
+ */
+class UpgradeProxyVersionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 当前proxy版本
+         * @type {string || null}
+         */
+        this.CurrentProxyVersion = null;
+
+        /**
+         * 可升级的redis版本
+         * @type {string || null}
+         */
+        this.UpgradeProxyVersion = null;
+
+        /**
+         * 1-立即升级   0-维护时间窗口升级
+         * @type {number || null}
+         */
+        this.InstanceTypeUpgradeNow = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.CurrentProxyVersion = 'CurrentProxyVersion' in params ? params.CurrentProxyVersion : null;
+        this.UpgradeProxyVersion = 'UpgradeProxyVersion' in params ? params.UpgradeProxyVersion : null;
+        this.InstanceTypeUpgradeNow = 'InstanceTypeUpgradeNow' in params ? params.InstanceTypeUpgradeNow : null;
+
+    }
+}
+
+/**
  * 可用区内产品信息
  * @class
  */
@@ -8521,19 +10354,19 @@ class UpgradeInstanceRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * 分片大小 单位 MB
+         * 分片大小 单位 MB。该参数不支持与RedisShardNum或RedisReplicasNum同时输入。
          * @type {number || null}
          */
         this.MemSize = null;
 
         /**
-         * 分片数量，Redis2.8主从版、CKV主从版和Redis2.8单机版不需要填写
+         * 分片数量，标准架构不需要填写。该参数不支持与RedisReplicasNum或MemSize同时输入。
          * @type {number || null}
          */
         this.RedisShardNum = null;
 
         /**
-         * 副本数量，Redis2.8主从版、CKV主从版和Redis2.8单机版不需要填写
+         * 副本数量，多AZ实例修改副本时必须要传入NodeSet。该参数不支持与RedisShardNum或MemSize同时输入。
          * @type {number || null}
          */
         this.RedisReplicasNum = null;
@@ -8706,6 +10539,169 @@ class DescribeProjectSecurityGroupResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 复制组实例
+ * @class
+ */
+class Instances extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 用户AppID
+         * @type {number || null}
+         */
+        this.AppId = null;
+
+        /**
+         * 实例ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 实例名称
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * 地域ID 1--广州 4--上海 5-- 香港 6--多伦多 7--上海金融 8--北京 9-- 新加坡 11--深圳金融 15--美西（硅谷）
+         * @type {number || null}
+         */
+        this.RegionId = null;
+
+        /**
+         * 区域ID
+         * @type {number || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * 副本数量
+         * @type {number || null}
+         */
+        this.RedisReplicasNum = null;
+
+        /**
+         * 分片数量
+         * @type {number || null}
+         */
+        this.RedisShardNum = null;
+
+        /**
+         * 分片大小
+         * @type {number || null}
+         */
+        this.RedisShardSize = null;
+
+        /**
+         * 实例的磁盘大小
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.DiskSize = null;
+
+        /**
+         * 引擎：社区版Redis、腾讯云CKV
+         * @type {string || null}
+         */
+        this.Engine = null;
+
+        /**
+         * 实例角色，rw可读写，r只读
+         * @type {string || null}
+         */
+        this.Role = null;
+
+        /**
+         * 实例VIP
+         * @type {string || null}
+         */
+        this.Vip = null;
+
+        /**
+         * 内部参数，用户可忽略
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Vip6 = null;
+
+        /**
+         * vpc网络ID 如：75101
+         * @type {number || null}
+         */
+        this.VpcID = null;
+
+        /**
+         * 实例端口
+         * @type {number || null}
+         */
+        this.VPort = null;
+
+        /**
+         * 实例状态：0-待初始化，1-流程中，2-运行中，-2-已隔离，-3-待删除
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 仓库ID
+         * @type {number || null}
+         */
+        this.GrocerySysId = null;
+
+        /**
+         * 实例类型：1 – Redis2.8内存版（集群架构），2 – Redis2.8内存版（标准架构），3 – CKV 3.2内存版(标准架构)，4 – CKV 3.2内存版(集群架构)，5 – Redis2.8内存版（单机），6 – Redis4.0内存版（标准架构），7 – Redis4.0内存版（集群架构），8 – Redis5.0内存版（标准架构），9 – Redis5.0内存版（集群架构）
+         * @type {number || null}
+         */
+        this.ProductType = null;
+
+        /**
+         * 创建时间
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 更新实例
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.RegionId = 'RegionId' in params ? params.RegionId : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.RedisReplicasNum = 'RedisReplicasNum' in params ? params.RedisReplicasNum : null;
+        this.RedisShardNum = 'RedisShardNum' in params ? params.RedisShardNum : null;
+        this.RedisShardSize = 'RedisShardSize' in params ? params.RedisShardSize : null;
+        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
+        this.Engine = 'Engine' in params ? params.Engine : null;
+        this.Role = 'Role' in params ? params.Role : null;
+        this.Vip = 'Vip' in params ? params.Vip : null;
+        this.Vip6 = 'Vip6' in params ? params.Vip6 : null;
+        this.VpcID = 'VpcID' in params ? params.VpcID : null;
+        this.VPort = 'VPort' in params ? params.VPort : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.GrocerySysId = 'GrocerySysId' in params ? params.GrocerySysId : null;
+        this.ProductType = 'ProductType' in params ? params.ProductType : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
 
     }
 }
@@ -8915,16 +10911,19 @@ class InstanceSlowlogDetail extends  AbstractModel {
 }
 
 module.exports = {
+    UpgradeSmallVersionRequest: UpgradeSmallVersionRequest,
     ModifyInstanceParamsResponse: ModifyInstanceParamsResponse,
     EnableReplicaReadonlyRequest: EnableReplicaReadonlyRequest,
     RedisBackupSet: RedisBackupSet,
     DescribeInstanceMonitorTopNCmdResponse: DescribeInstanceMonitorTopNCmdResponse,
     ModifyAutoBackupConfigResponse: ModifyAutoBackupConfigResponse,
     RestoreInstanceRequest: RestoreInstanceRequest,
-    TaskInfoDetail: TaskInfoDetail,
-    SwitchInstanceVipRequest: SwitchInstanceVipRequest,
+    AllocateWanAddressRequest: AllocateWanAddressRequest,
+    ApplyParamsTemplateRequest: ApplyParamsTemplateRequest,
     UpgradeInstanceVersionResponse: UpgradeInstanceVersionResponse,
     CreateInstancesRequest: CreateInstancesRequest,
+    CreateReplicationGroupRequest: CreateReplicationGroupRequest,
+    ModifyInstanceReadOnlyResponse: ModifyInstanceReadOnlyResponse,
     DescribeInstanceZoneInfoRequest: DescribeInstanceZoneInfoRequest,
     ModifyNetworkConfigResponse: ModifyNetworkConfigResponse,
     CommandTake: CommandTake,
@@ -8933,13 +10932,15 @@ module.exports = {
     AssociateSecurityGroupsRequest: AssociateSecurityGroupsRequest,
     DescribeTaskListResponse: DescribeTaskListResponse,
     ModifyInstanceRequest: ModifyInstanceRequest,
-    TendisNodes: TendisNodes,
+    KillMasterGroupResponse: KillMasterGroupResponse,
     RenewInstanceResponse: RenewInstanceResponse,
     DescribeSlowLogResponse: DescribeSlowLogResponse,
     DescribeCommonDBInstancesRequest: DescribeCommonDBInstancesRequest,
     DescribeDBSecurityGroupsResponse: DescribeDBSecurityGroupsResponse,
+    RestoreInstanceResponse: RestoreInstanceResponse,
     RedisNodeInfo: RedisNodeInfo,
     DescribeBackupUrlRequest: DescribeBackupUrlRequest,
+    DeleteParamTemplateResponse: DeleteParamTemplateResponse,
     DescribeInstancesResponse: DescribeInstancesResponse,
     DescribeInstanceZoneInfoResponse: DescribeInstanceZoneInfoResponse,
     Account: Account,
@@ -8947,8 +10948,10 @@ module.exports = {
     SecurityGroupsInboundAndOutbound: SecurityGroupsInboundAndOutbound,
     ResetPasswordResponse: ResetPasswordResponse,
     ClearInstanceRequest: ClearInstanceRequest,
+    UpgradeInstanceVersionRequest: UpgradeInstanceVersionRequest,
     RegionConf: RegionConf,
     BigKeyInfo: BigKeyInfo,
+    DescribeParamTemplatesRequest: DescribeParamTemplatesRequest,
     RenewInstanceRequest: RenewInstanceRequest,
     UpgradeVersionToMultiAvailabilityZonesResponse: UpgradeVersionToMultiAvailabilityZonesResponse,
     DescribeInstanceParamRecordsResponse: DescribeInstanceParamRecordsResponse,
@@ -8957,29 +10960,38 @@ module.exports = {
     DescribeInstanceDealDetailRequest: DescribeInstanceDealDetailRequest,
     RedisNode: RedisNode,
     DescribeProjectSecurityGroupRequest: DescribeProjectSecurityGroupRequest,
-    RestoreInstanceResponse: RestoreInstanceResponse,
+    ParameterDetail: ParameterDetail,
     DescribeInstanceShardsResponse: DescribeInstanceShardsResponse,
     DestroyPrepaidInstanceRequest: DestroyPrepaidInstanceRequest,
     ManualBackupInstanceResponse: ManualBackupInstanceResponse,
+    TaskInfoDetail: TaskInfoDetail,
+    DisableReplicaReadonlyResponse: DisableReplicaReadonlyResponse,
+    CreateParamTemplateResponse: CreateParamTemplateResponse,
     InstanceTagInfo: InstanceTagInfo,
     DescribeInstanceDTSInfoResponse: DescribeInstanceDTSInfoResponse,
+    AddReplicationInstanceResponse: AddReplicationInstanceResponse,
     DestroyPostpaidInstanceResponse: DestroyPostpaidInstanceResponse,
-    ModifyInstanceResponse: ModifyInstanceResponse,
+    SwitchInstanceVipRequest: SwitchInstanceVipRequest,
+    ChangeReplicaToMasterRequest: ChangeReplicaToMasterRequest,
     ProxyNodes: ProxyNodes,
-    TradeDealDetail: TradeDealDetail,
+    ModifyInstanceResponse: ModifyInstanceResponse,
     RedisCommonInstanceList: RedisCommonInstanceList,
     SourceInfo: SourceInfo,
     ModifyDBInstanceSecurityGroupsResponse: ModifyDBInstanceSecurityGroupsResponse,
     DescribeInstanceMonitorHotKeyRequest: DescribeInstanceMonitorHotKeyRequest,
     DescribeInstanceDTSInfoRequest: DescribeInstanceDTSInfoRequest,
+    CreateParamTemplateRequest: CreateParamTemplateRequest,
     DescribeTendisSlowLogResponse: DescribeTendisSlowLogResponse,
     DescribeProductInfoResponse: DescribeProductInfoResponse,
     ModifyInstanceAccountRequest: ModifyInstanceAccountRequest,
+    ModifyMaintenanceWindowRequest: ModifyMaintenanceWindowRequest,
+    DescribeParamTemplateInfoRequest: DescribeParamTemplateInfoRequest,
     DescribeBackupUrlResponse: DescribeBackupUrlResponse,
     InquiryPriceRenewInstanceResponse: InquiryPriceRenewInstanceResponse,
     DescribeDBSecurityGroupsRequest: DescribeDBSecurityGroupsRequest,
     InquiryPriceCreateInstanceResponse: InquiryPriceCreateInstanceResponse,
     InstanceSecurityGroupDetail: InstanceSecurityGroupDetail,
+    UpgradeProxyVersionResponse: UpgradeProxyVersionResponse,
     ResetPasswordRequest: ResetPasswordRequest,
     ModifyInstanceAccountResponse: ModifyInstanceAccountResponse,
     DelayDistribution: DelayDistribution,
@@ -8988,17 +11000,22 @@ module.exports = {
     DescribeInstanceBackupsResponse: DescribeInstanceBackupsResponse,
     InstanceIntegerParam: InstanceIntegerParam,
     UpgradeVersionToMultiAvailabilityZonesRequest: UpgradeVersionToMultiAvailabilityZonesRequest,
+    AllocateWanAddressResponse: AllocateWanAddressResponse,
     DescribeInstanceMonitorTookDistRequest: DescribeInstanceMonitorTookDistRequest,
-    ModifyMaintenanceWindowRequest: ModifyMaintenanceWindowRequest,
+    DeleteReplicationInstanceRequest: DeleteReplicationInstanceRequest,
+    KillMasterGroupRequest: KillMasterGroupRequest,
     InstanceTextParam: InstanceTextParam,
+    ParamTemplateInfo: ParamTemplateInfo,
     DescribeInstanceMonitorTopNCmdTookResponse: DescribeInstanceMonitorTopNCmdTookResponse,
     DescribeInstanceMonitorBigKeySizeDistRequest: DescribeInstanceMonitorBigKeySizeDistRequest,
     DescribeInstanceAccountRequest: DescribeInstanceAccountRequest,
     DescribeInstanceParamRecordsRequest: DescribeInstanceParamRecordsRequest,
     DescribeTaskListRequest: DescribeTaskListRequest,
-    DisableReplicaReadonlyResponse: DisableReplicaReadonlyResponse,
+    ChangeReplicaToMasterResponse: ChangeReplicaToMasterResponse,
     CreateInstancesResponse: CreateInstancesResponse,
     DescribeTaskInfoRequest: DescribeTaskInfoRequest,
+    ApplyParamsTemplateResponse: ApplyParamsTemplateResponse,
+    DescribeReplicationGroupRequest: DescribeReplicationGroupRequest,
     RedisNodes: RedisNodes,
     DescribeInstanceMonitorTopNCmdRequest: DescribeInstanceMonitorTopNCmdRequest,
     ModifyNetworkConfigRequest: ModifyNetworkConfigRequest,
@@ -9007,10 +11024,12 @@ module.exports = {
     DescribeInstanceParamsRequest: DescribeInstanceParamsRequest,
     CleanUpInstanceResponse: CleanUpInstanceResponse,
     ModifyDBInstanceSecurityGroupsRequest: ModifyDBInstanceSecurityGroupsRequest,
+    DescribeParamTemplatesResponse: DescribeParamTemplatesResponse,
     DescribeInstanceShardsRequest: DescribeInstanceShardsRequest,
     Outbound: Outbound,
     DescribeAutoBackupConfigResponse: DescribeAutoBackupConfigResponse,
     InquiryPriceUpgradeInstanceRequest: InquiryPriceUpgradeInstanceRequest,
+    ModifyParamTemplateResponse: ModifyParamTemplateResponse,
     DescribeProjectSecurityGroupsRequest: DescribeProjectSecurityGroupsRequest,
     DescribeInstanceMonitorBigKeySizeDistResponse: DescribeInstanceMonitorBigKeySizeDistResponse,
     SecurityGroup: SecurityGroup,
@@ -9018,50 +11037,64 @@ module.exports = {
     EnableReplicaReadonlyResponse: EnableReplicaReadonlyResponse,
     DescribeMaintenanceWindowResponse: DescribeMaintenanceWindowResponse,
     DescribeInstanceSecurityGroupResponse: DescribeInstanceSecurityGroupResponse,
+    ReleaseWanAddressResponse: ReleaseWanAddressResponse,
     ProductConf: ProductConf,
     ModifyConnectionConfigRequest: ModifyConnectionConfigRequest,
     InstanceNode: InstanceNode,
+    TendisNodes: TendisNodes,
     StartupInstanceResponse: StartupInstanceResponse,
     DescribeInstanceDTSInstanceInfo: DescribeInstanceDTSInstanceInfo,
+    TradeDealDetail: TradeDealDetail,
     ResourceTag: ResourceTag,
     AssociateSecurityGroupsResponse: AssociateSecurityGroupsResponse,
     ReplicaGroup: ReplicaGroup,
     DescribeTaskInfoResponse: DescribeTaskInfoResponse,
     DescribeInstanceMonitorBigKeyTypeDistResponse: DescribeInstanceMonitorBigKeyTypeDistResponse,
+    DeleteReplicationInstanceResponse: DeleteReplicationInstanceResponse,
     CleanUpInstanceRequest: CleanUpInstanceRequest,
     DescribeInstanceDealDetailResponse: DescribeInstanceDealDetailResponse,
+    Groups: Groups,
     DescribeInstancesRequest: DescribeInstancesRequest,
     SourceCommand: SourceCommand,
     ModfiyInstancePasswordRequest: ModfiyInstancePasswordRequest,
     DescribeSlowLogRequest: DescribeSlowLogRequest,
+    DeleteParamTemplateRequest: DeleteParamTemplateRequest,
     DescribeAutoBackupConfigRequest: DescribeAutoBackupConfigRequest,
     DescribeInstanceMonitorSIPResponse: DescribeInstanceMonitorSIPResponse,
     DestroyPostpaidInstanceRequest: DestroyPostpaidInstanceRequest,
     DeleteInstanceAccountRequest: DeleteInstanceAccountRequest,
     UpgradeInstanceResponse: UpgradeInstanceResponse,
     ManualBackupInstanceRequest: ManualBackupInstanceRequest,
+    DescribeReplicationGroupResponse: DescribeReplicationGroupResponse,
+    ModifyParamTemplateRequest: ModifyParamTemplateRequest,
     ModfiyInstancePasswordResponse: ModfiyInstancePasswordResponse,
     InstanceSet: InstanceSet,
+    ReleaseWanAddressRequest: ReleaseWanAddressRequest,
     InquiryPriceRenewInstanceRequest: InquiryPriceRenewInstanceRequest,
     ModifyConnectionConfigResponse: ModifyConnectionConfigResponse,
     ModifyMaintenanceWindowResponse: ModifyMaintenanceWindowResponse,
-    DescribeCommonDBInstancesResponse: DescribeCommonDBInstancesResponse,
+    CreateReplicationGroupResponse: CreateReplicationGroupResponse,
+    DescribeInstanceMonitorBigKeyTypeDistRequest: DescribeInstanceMonitorBigKeyTypeDistRequest,
     DescribeInstanceMonitorTopNCmdTookRequest: DescribeInstanceMonitorTopNCmdTookRequest,
     DestroyPrepaidInstanceResponse: DestroyPrepaidInstanceResponse,
-    DescribeInstanceMonitorBigKeyTypeDistRequest: DescribeInstanceMonitorBigKeyTypeDistRequest,
+    DescribeCommonDBInstancesResponse: DescribeCommonDBInstancesResponse,
     InquiryPriceCreateInstanceRequest: InquiryPriceCreateInstanceRequest,
+    UpgradeSmallVersionResponse: UpgradeSmallVersionResponse,
     ModifyInstanceParamsRequest: ModifyInstanceParamsRequest,
+    BackupDownloadInfo: BackupDownloadInfo,
     BigKeyTypeInfo: BigKeyTypeInfo,
     DescribeInstanceNodeInfoRequest: DescribeInstanceNodeInfoRequest,
     DescribeMaintenanceWindowRequest: DescribeMaintenanceWindowRequest,
+    AddReplicationInstanceRequest: AddReplicationInstanceRequest,
     InstanceClusterNode: InstanceClusterNode,
     DescribeTendisSlowLogRequest: DescribeTendisSlowLogRequest,
     DescribeProxySlowLogRequest: DescribeProxySlowLogRequest,
     DescribeProxySlowLogResponse: DescribeProxySlowLogResponse,
-    UpgradeInstanceVersionRequest: UpgradeInstanceVersionRequest,
+    ModifyInstanceReadOnlyRequest: ModifyInstanceReadOnlyRequest,
     DescribeInstanceAccountResponse: DescribeInstanceAccountResponse,
     DescribeInstanceMonitorBigKeyRequest: DescribeInstanceMonitorBigKeyRequest,
     DisableReplicaReadonlyRequest: DisableReplicaReadonlyRequest,
+    DescribeParamTemplateInfoResponse: DescribeParamTemplateInfoResponse,
     DescribeProductInfoRequest: DescribeProductInfoRequest,
     SwitchInstanceVipResponse: SwitchInstanceVipResponse,
     DescribeInstanceParamsResponse: DescribeInstanceParamsResponse,
@@ -9077,10 +11110,12 @@ module.exports = {
     DescribeInstanceMonitorSIPRequest: DescribeInstanceMonitorSIPRequest,
     InstanceClusterShard: InstanceClusterShard,
     TendisSlowLogDetail: TendisSlowLogDetail,
+    UpgradeProxyVersionRequest: UpgradeProxyVersionRequest,
     ZoneCapacityConf: ZoneCapacityConf,
     UpgradeInstanceRequest: UpgradeInstanceRequest,
     DescribeInstanceNodeInfoResponse: DescribeInstanceNodeInfoResponse,
     DescribeProjectSecurityGroupResponse: DescribeProjectSecurityGroupResponse,
+    Instances: Instances,
     DescribeInstanceMonitorHotKeyResponse: DescribeInstanceMonitorHotKeyResponse,
     InstanceParam: InstanceParam,
     DisassociateSecurityGroupsResponse: DisassociateSecurityGroupsResponse,

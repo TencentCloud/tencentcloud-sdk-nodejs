@@ -66,7 +66,7 @@ class ModifyLaunchConfigurationAttributesRequest extends  AbstractModel {
 
         /**
          * 实例类型列表，不同实例机型指定了不同的资源规格，最多支持10种实例机型。
-启动配置，通过 InstanceType 表示单一实例类型，通过 InstanceTypes 表示多实例类型。指定 InstanceTypes 成功启动配置后，原有的 InstanceType 自动失效。
+InstanceType 指定单一实例类型，通过设置 InstanceTypes可以指定多实例类型，并使原有的InstanceType失效。
          * @type {Array.<string> || null}
          */
         this.InstanceTypes = null;
@@ -89,7 +89,7 @@ class ModifyLaunchConfigurationAttributesRequest extends  AbstractModel {
         this.LaunchConfigurationName = null;
 
         /**
-         * 经过 Base64 编码后的自定义数据，最大长度不超过16KB。如果要清空UserData，则指定其为空字符串
+         * 经过 Base64 编码后的自定义数据，最大长度不超过16KB。如果要清空UserData，则指定其为空字符串。
          * @type {string || null}
          */
         this.UserData = null;
@@ -103,7 +103,7 @@ class ModifyLaunchConfigurationAttributesRequest extends  AbstractModel {
 
         /**
          * 公网带宽相关信息设置。
-本字段属复杂类型，修改时采取整字段全覆盖模式。即只修改复杂类型内部一个子字段时，也请提供全部所需子字段。
+当公网出带宽上限为0Mbps时，不支持修改为开通分配公网IP；相应的，当前为开通分配公网IP时，修改的公网出带宽上限值必须大于0Mbps。
          * @type {InternetAccessible || null}
          */
         this.InternetAccessible = null;
@@ -120,7 +120,8 @@ class ModifyLaunchConfigurationAttributesRequest extends  AbstractModel {
         /**
          * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。
 若修改实例的付费模式为预付费，则该参数必传；从预付费修改为其他付费模式时，本字段原信息会自动丢弃。
-本字段属复杂类型，修改时采取整字段全覆盖模式。即只修改复杂类型内部一个子字段时，也请提供全部所需子字段。
+当新增该字段时，必须传递购买实例的时长，其它未传递字段会设置为默认值。
+当修改本字段时，当前付费模式必须为预付费。
          * @type {InstanceChargePrepaid || null}
          */
         this.InstanceChargePrepaid = null;
@@ -128,7 +129,8 @@ class ModifyLaunchConfigurationAttributesRequest extends  AbstractModel {
         /**
          * 实例的市场相关选项，如竞价实例相关参数。
 若修改实例的付费模式为竞价付费，则该参数必传；从竞价付费修改为其他付费模式时，本字段原信息会自动丢弃。
-本字段属复杂类型，修改时采取整字段全覆盖模式。即只修改复杂类型内部一个子字段时，也请提供全部所需子字段。
+当新增该字段时，必须传递竞价相关选项下的竞价出价，其它未传递字段会设置为默认值。
+当修改本字段时，当前付费模式必须为竞价付费。
          * @type {InstanceMarketOptionsRequest || null}
          */
         this.InstanceMarketOptions = null;
@@ -148,10 +150,40 @@ class ModifyLaunchConfigurationAttributesRequest extends  AbstractModel {
         this.SystemDisk = null;
 
         /**
-         * 实例数据盘配置信息。最多支持指定11块数据盘。采取整体修改，因此请提供修改后的全部值。
+         * 实例数据盘配置信息。
+最多支持指定11块数据盘。采取整体修改，因此请提供修改后的全部值。
+数据盘类型默认与系统盘类型保持一致。
          * @type {Array.<DataDisk> || null}
          */
         this.DataDisks = null;
+
+        /**
+         * 云服务器主机名（HostName）的相关设置。
+不支持windows实例设置主机名。
+新增该属性时，必须传递云服务器的主机名，其它未传递字段会设置为默认值。
+         * @type {HostNameSettings || null}
+         */
+        this.HostNameSettings = null;
+
+        /**
+         * 云服务器（InstanceName）实例名的相关设置。 
+如果用户在启动配置中设置此字段，则伸缩组创建出的实例 InstanceName 参照此字段进行设置，并传递给 CVM；如果用户未在启动配置中设置此字段，则伸缩组创建出的实例 InstanceName 按照“as-{{ 伸缩组AutoScalingGroupName }}”进行设置，并传递给 CVM。
+新增该属性时，必须传递云服务器的实例名称，其它未传递字段会设置为默认值。
+         * @type {InstanceNameSettings || null}
+         */
+        this.InstanceNameSettings = null;
+
+        /**
+         * 增强服务。通过该参数可以指定是否开启云安全、云监控等服务。
+         * @type {EnhancedService || null}
+         */
+        this.EnhancedService = null;
+
+        /**
+         * CAM角色名称。可通过DescribeRoleList接口返回值中的roleName获取。
+         * @type {string || null}
+         */
+        this.CamRoleName = null;
 
     }
 
@@ -204,6 +236,25 @@ class ModifyLaunchConfigurationAttributesRequest extends  AbstractModel {
                 this.DataDisks.push(obj);
             }
         }
+
+        if (params.HostNameSettings) {
+            let obj = new HostNameSettings();
+            obj.deserialize(params.HostNameSettings)
+            this.HostNameSettings = obj;
+        }
+
+        if (params.InstanceNameSettings) {
+            let obj = new InstanceNameSettings();
+            obj.deserialize(params.InstanceNameSettings)
+            this.InstanceNameSettings = obj;
+        }
+
+        if (params.EnhancedService) {
+            let obj = new EnhancedService();
+            obj.deserialize(params.EnhancedService)
+            this.EnhancedService = obj;
+        }
+        this.CamRoleName = 'CamRoleName' in params ? params.CamRoleName : null;
 
     }
 }
@@ -351,18 +402,52 @@ class ModifyAutoScalingGroupRequest extends  AbstractModel {
         this.Ipv6AddressCount = null;
 
         /**
-         * 多可用区/子网策略，取值包括 PRIORITY 和 EQUALITY。
+         * 多可用区/子网策略，取值包括 PRIORITY 和 EQUALITY，默认为 PRIORITY。
 <br><li> PRIORITY，按照可用区/子网列表的顺序，作为优先级来尝试创建实例，如果优先级最高的可用区/子网可以创建成功，则总在该可用区/子网创建。
-<br><li> EQUALITY：每次选择当前实例数最少的可用区/子网进行扩容，使得每个可用区/子网都有机会发生扩容，多次扩容出的实例会打散到多个可用区/子网。
+<br><li> EQUALITY：扩容出的实例会打散到多个可用区/子网，保证扩容后的各个可用区/子网实例数相对均衡。
 
 与本策略相关的注意点：
 <br><li> 当伸缩组为基础网络时，本策略适用于多可用区；当伸缩组为VPC网络时，本策略适用于多子网，此时不再考虑可用区因素，例如四个子网ABCD，其中ABC处于可用区1，D处于可用区2，此时考虑子网ABCD进行排序，而不考虑可用区1、2。
 <br><li> 本策略适用于多可用区/子网，不适用于启动配置的多机型。多机型按照优先级策略进行选择。
-<br><li> 创建实例时，先保证多机型的策略，后保证多可用区/子网的策略。例如多机型A、B，多子网1、2、3（按照PRIORITY策略），会按照A1、A2、A3、B1、B2、B3 进行尝试，如果A1售罄，会尝试A2（而非B1）。
-<br><li> 无论使用哪种策略，单次伸缩活动总是优先保持使用一种具体配置（机型 * 可用区/子网）。
+<br><li> 按照 PRIORITY 策略创建实例时，先保证多机型的策略，后保证多可用区/子网的策略。例如多机型A、B，多子网1、2、3，会按照A1、A2、A3、B1、B2、B3 进行尝试，如果A1售罄，会尝试A2（而非B1）。
          * @type {string || null}
          */
         this.MultiZoneSubnetPolicy = null;
+
+        /**
+         * 伸缩组实例健康检查类型，取值如下：<br><li>CVM：根据实例网络状态判断实例是否处于不健康状态，不健康的网络状态即发生实例 PING 不可达事件，详细判断标准可参考[实例健康检查](https://cloud.tencent.com/document/product/377/8553)<br><li>CLB：根据 CLB 的健康检查状态判断实例是否处于不健康状态，CLB健康检查原理可参考[健康检查](https://cloud.tencent.com/document/product/214/6097)
+         * @type {string || null}
+         */
+        this.HealthCheckType = null;
+
+        /**
+         * CLB健康检查宽限期。
+         * @type {number || null}
+         */
+        this.LoadBalancerHealthCheckGracePeriod = null;
+
+        /**
+         * 实例分配策略，取值包括 LAUNCH_CONFIGURATION 和 SPOT_MIXED。
+<br><li> LAUNCH_CONFIGURATION，代表传统的按照启动配置模式。
+<br><li> SPOT_MIXED，代表竞价混合模式。目前仅支持启动配置为按量计费模式时使用混合模式，混合模式下，伸缩组将根据设定扩容按量或竞价机型。使用混合模式时，关联的启动配置的计费类型不可被修改。
+         * @type {string || null}
+         */
+        this.InstanceAllocationPolicy = null;
+
+        /**
+         * 竞价混合模式下，各计费类型实例的分配策略。
+仅当 InstanceAllocationPolicy 取 SPOT_MIXED 时可用。
+         * @type {SpotMixedAllocationPolicy || null}
+         */
+        this.SpotMixedAllocationPolicy = null;
+
+        /**
+         * 容量重平衡功能，仅对伸缩组内的竞价实例有效。取值范围：
+<br><li> TRUE，开启该功能，当伸缩组内的竞价实例即将被竞价实例服务自动回收前，AS 主动发起竞价实例销毁流程，如果有配置过缩容 hook，则销毁前 hook 会生效。销毁流程启动后，AS 会异步开启一个扩容活动，用于补齐期望实例数。
+<br><li> FALSE，不开启该功能，则 AS 等待竞价实例被销毁后才会去扩容补齐伸缩组期望实例数。
+         * @type {boolean || null}
+         */
+        this.CapacityRebalance = null;
 
     }
 
@@ -395,6 +480,16 @@ class ModifyAutoScalingGroupRequest extends  AbstractModel {
         }
         this.Ipv6AddressCount = 'Ipv6AddressCount' in params ? params.Ipv6AddressCount : null;
         this.MultiZoneSubnetPolicy = 'MultiZoneSubnetPolicy' in params ? params.MultiZoneSubnetPolicy : null;
+        this.HealthCheckType = 'HealthCheckType' in params ? params.HealthCheckType : null;
+        this.LoadBalancerHealthCheckGracePeriod = 'LoadBalancerHealthCheckGracePeriod' in params ? params.LoadBalancerHealthCheckGracePeriod : null;
+        this.InstanceAllocationPolicy = 'InstanceAllocationPolicy' in params ? params.InstanceAllocationPolicy : null;
+
+        if (params.SpotMixedAllocationPolicy) {
+            let obj = new SpotMixedAllocationPolicy();
+            obj.deserialize(params.SpotMixedAllocationPolicy)
+            this.SpotMixedAllocationPolicy = obj;
+        }
+        this.CapacityRebalance = 'CapacityRebalance' in params ? params.CapacityRebalance : null;
 
     }
 }
@@ -466,6 +561,24 @@ class AutoScalingNotification extends  AbstractModel {
          */
         this.AutoScalingNotificationId = null;
 
+        /**
+         * 通知接收端类型。
+         * @type {string || null}
+         */
+        this.TargetType = null;
+
+        /**
+         * CMQ 队列名。
+         * @type {string || null}
+         */
+        this.QueueName = null;
+
+        /**
+         * CMQ 主题名。
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
     }
 
     /**
@@ -479,6 +592,9 @@ class AutoScalingNotification extends  AbstractModel {
         this.NotificationUserGroupIds = 'NotificationUserGroupIds' in params ? params.NotificationUserGroupIds : null;
         this.NotificationTypes = 'NotificationTypes' in params ? params.NotificationTypes : null;
         this.AutoScalingNotificationId = 'AutoScalingNotificationId' in params ? params.AutoScalingNotificationId : null;
+        this.TargetType = 'TargetType' in params ? params.TargetType : null;
+        this.QueueName = 'QueueName' in params ? params.QueueName : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
 
     }
 }
@@ -626,24 +742,180 @@ class DescribeAutoScalingGroupsRequest extends  AbstractModel {
 }
 
 /**
- * CreateAutoScalingGroup返回参数结构体
+ * 符合条件的启动配置信息的集合。
  * @class
  */
-class CreateAutoScalingGroupResponse extends  AbstractModel {
+class LaunchConfiguration extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 伸缩组ID
-         * @type {string || null}
+         * 实例所属项目ID。
+         * @type {number || null}
          */
-        this.AutoScalingGroupId = null;
+        this.ProjectId = null;
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 启动配置ID。
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.LaunchConfigurationId = null;
+
+        /**
+         * 启动配置名称。
+         * @type {string || null}
+         */
+        this.LaunchConfigurationName = null;
+
+        /**
+         * 实例机型。
+         * @type {string || null}
+         */
+        this.InstanceType = null;
+
+        /**
+         * 实例系统盘配置信息。
+         * @type {SystemDisk || null}
+         */
+        this.SystemDisk = null;
+
+        /**
+         * 实例数据盘配置信息。
+         * @type {Array.<DataDisk> || null}
+         */
+        this.DataDisks = null;
+
+        /**
+         * 实例登录设置。
+         * @type {LimitedLoginSettings || null}
+         */
+        this.LoginSettings = null;
+
+        /**
+         * 公网带宽相关信息设置。
+         * @type {InternetAccessible || null}
+         */
+        this.InternetAccessible = null;
+
+        /**
+         * 实例所属安全组。
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroupIds = null;
+
+        /**
+         * 启动配置关联的伸缩组。
+         * @type {Array.<AutoScalingGroupAbstract> || null}
+         */
+        this.AutoScalingGroupAbstractSet = null;
+
+        /**
+         * 自定义数据。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UserData = null;
+
+        /**
+         * 启动配置创建时间。
+         * @type {string || null}
+         */
+        this.CreatedTime = null;
+
+        /**
+         * 实例的增强服务启用情况与其设置。
+         * @type {EnhancedService || null}
+         */
+        this.EnhancedService = null;
+
+        /**
+         * 镜像ID。
+         * @type {string || null}
+         */
+        this.ImageId = null;
+
+        /**
+         * 启动配置当前状态。取值范围：<br><li>NORMAL：正常<br><li>IMAGE_ABNORMAL：启动配置镜像异常<br><li>CBS_SNAP_ABNORMAL：启动配置数据盘快照异常<br><li>SECURITY_GROUP_ABNORMAL：启动配置安全组异常<br>
+         * @type {string || null}
+         */
+        this.LaunchConfigurationStatus = null;
+
+        /**
+         * 实例计费类型，CVM默认值按照POSTPAID_BY_HOUR处理。
+<br><li>POSTPAID_BY_HOUR：按小时后付费
+<br><li>SPOTPAID：竞价付费
+         * @type {string || null}
+         */
+        this.InstanceChargeType = null;
+
+        /**
+         * 实例的市场相关选项，如竞价实例相关参数，若指定实例的付费模式为竞价付费则该参数必传。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {InstanceMarketOptionsRequest || null}
+         */
+        this.InstanceMarketOptions = null;
+
+        /**
+         * 实例机型列表。
+         * @type {Array.<string> || null}
+         */
+        this.InstanceTypes = null;
+
+        /**
+         * 标签列表。
+         * @type {Array.<InstanceTag> || null}
+         */
+        this.InstanceTags = null;
+
+        /**
+         * 版本号。
+         * @type {number || null}
+         */
+        this.VersionNumber = null;
+
+        /**
+         * 更新时间。
+         * @type {string || null}
+         */
+        this.UpdatedTime = null;
+
+        /**
+         * CAM角色名称。可通过DescribeRoleList接口返回值中的roleName获取。
+         * @type {string || null}
+         */
+        this.CamRoleName = null;
+
+        /**
+         * 上次操作时，InstanceTypesCheckPolicy 取值。
+         * @type {string || null}
+         */
+        this.LastOperationInstanceTypesCheckPolicy = null;
+
+        /**
+         * 云服务器主机名（HostName）的相关设置。
+         * @type {HostNameSettings || null}
+         */
+        this.HostNameSettings = null;
+
+        /**
+         * 云服务器实例名（InstanceName）的相关设置。
+         * @type {InstanceNameSettings || null}
+         */
+        this.InstanceNameSettings = null;
+
+        /**
+         * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。若指定实例的付费模式为预付费则该参数必传。
+         * @type {InstanceChargePrepaid || null}
+         */
+        this.InstanceChargePrepaid = null;
+
+        /**
+         * 云盘类型选择策略。取值范围：
+<br><li>ORIGINAL：使用设置的云盘类型
+<br><li>AUTOMATIC：自动选择当前可用区下可用的云盘类型
+         * @type {string || null}
+         */
+        this.DiskTypePolicy = null;
 
     }
 
@@ -654,8 +926,97 @@ class CreateAutoScalingGroupResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AutoScalingGroupId = 'AutoScalingGroupId' in params ? params.AutoScalingGroupId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.LaunchConfigurationId = 'LaunchConfigurationId' in params ? params.LaunchConfigurationId : null;
+        this.LaunchConfigurationName = 'LaunchConfigurationName' in params ? params.LaunchConfigurationName : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+
+        if (params.SystemDisk) {
+            let obj = new SystemDisk();
+            obj.deserialize(params.SystemDisk)
+            this.SystemDisk = obj;
+        }
+
+        if (params.DataDisks) {
+            this.DataDisks = new Array();
+            for (let z in params.DataDisks) {
+                let obj = new DataDisk();
+                obj.deserialize(params.DataDisks[z]);
+                this.DataDisks.push(obj);
+            }
+        }
+
+        if (params.LoginSettings) {
+            let obj = new LimitedLoginSettings();
+            obj.deserialize(params.LoginSettings)
+            this.LoginSettings = obj;
+        }
+
+        if (params.InternetAccessible) {
+            let obj = new InternetAccessible();
+            obj.deserialize(params.InternetAccessible)
+            this.InternetAccessible = obj;
+        }
+        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
+
+        if (params.AutoScalingGroupAbstractSet) {
+            this.AutoScalingGroupAbstractSet = new Array();
+            for (let z in params.AutoScalingGroupAbstractSet) {
+                let obj = new AutoScalingGroupAbstract();
+                obj.deserialize(params.AutoScalingGroupAbstractSet[z]);
+                this.AutoScalingGroupAbstractSet.push(obj);
+            }
+        }
+        this.UserData = 'UserData' in params ? params.UserData : null;
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
+
+        if (params.EnhancedService) {
+            let obj = new EnhancedService();
+            obj.deserialize(params.EnhancedService)
+            this.EnhancedService = obj;
+        }
+        this.ImageId = 'ImageId' in params ? params.ImageId : null;
+        this.LaunchConfigurationStatus = 'LaunchConfigurationStatus' in params ? params.LaunchConfigurationStatus : null;
+        this.InstanceChargeType = 'InstanceChargeType' in params ? params.InstanceChargeType : null;
+
+        if (params.InstanceMarketOptions) {
+            let obj = new InstanceMarketOptionsRequest();
+            obj.deserialize(params.InstanceMarketOptions)
+            this.InstanceMarketOptions = obj;
+        }
+        this.InstanceTypes = 'InstanceTypes' in params ? params.InstanceTypes : null;
+
+        if (params.InstanceTags) {
+            this.InstanceTags = new Array();
+            for (let z in params.InstanceTags) {
+                let obj = new InstanceTag();
+                obj.deserialize(params.InstanceTags[z]);
+                this.InstanceTags.push(obj);
+            }
+        }
+        this.VersionNumber = 'VersionNumber' in params ? params.VersionNumber : null;
+        this.UpdatedTime = 'UpdatedTime' in params ? params.UpdatedTime : null;
+        this.CamRoleName = 'CamRoleName' in params ? params.CamRoleName : null;
+        this.LastOperationInstanceTypesCheckPolicy = 'LastOperationInstanceTypesCheckPolicy' in params ? params.LastOperationInstanceTypesCheckPolicy : null;
+
+        if (params.HostNameSettings) {
+            let obj = new HostNameSettings();
+            obj.deserialize(params.HostNameSettings)
+            this.HostNameSettings = obj;
+        }
+
+        if (params.InstanceNameSettings) {
+            let obj = new InstanceNameSettings();
+            obj.deserialize(params.InstanceNameSettings)
+            this.InstanceNameSettings = obj;
+        }
+
+        if (params.InstanceChargePrepaid) {
+            let obj = new InstanceChargePrepaid();
+            obj.deserialize(params.InstanceChargePrepaid)
+            this.InstanceChargePrepaid = obj;
+        }
+        this.DiskTypePolicy = 'DiskTypePolicy' in params ? params.DiskTypePolicy : null;
 
     }
 }
@@ -717,41 +1078,6 @@ class DescribeAccountLimitsResponse extends  AbstractModel {
 }
 
 /**
- * CreatePaiInstance返回参数结构体
- * @class
- */
-class CreatePaiInstanceResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 当通过本接口来创建实例时会返回该参数，表示一个或多个实例`ID`。返回实例`ID`列表并不代表实例创建成功，可根据 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) 接口查询返回的InstancesSet中对应实例的`ID`的状态来判断创建是否完成；如果实例状态由“准备中”变为“正在运行”，则为创建成功。
-         * @type {Array.<string> || null}
-         */
-        this.InstanceIdSet = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceIdSet = 'InstanceIdSet' in params ? params.InstanceIdSet : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * CreateLaunchConfiguration返回参数结构体
  * @class
  */
@@ -782,6 +1108,48 @@ class CreateLaunchConfigurationResponse extends  AbstractModel {
         }
         this.LaunchConfigurationId = 'LaunchConfigurationId' in params ? params.LaunchConfigurationId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 伸缩配置建议。
+ * @class
+ */
+class Advice extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 问题描述。
+         * @type {string || null}
+         */
+        this.Problem = null;
+
+        /**
+         * 问题详情。
+         * @type {string || null}
+         */
+        this.Detail = null;
+
+        /**
+         * 建议解决方案。
+         * @type {string || null}
+         */
+        this.Solution = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Problem = 'Problem' in params ? params.Problem : null;
+        this.Detail = 'Detail' in params ? params.Detail : null;
+        this.Solution = 'Solution' in params ? params.Solution : null;
 
     }
 }
@@ -900,78 +1268,60 @@ class DescribeAutoScalingGroupsResponse extends  AbstractModel {
 }
 
 /**
- * CreatePaiInstance请求参数结构体
+ * CreateScheduledAction请求参数结构体
  * @class
  */
-class CreatePaiInstanceRequest extends  AbstractModel {
+class CreateScheduledActionRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * PAI实例的域名。
+         * 伸缩组ID
          * @type {string || null}
          */
-        this.DomainName = null;
+        this.AutoScalingGroupId = null;
 
         /**
-         * 公网带宽相关信息设置。
-         * @type {InternetAccessible || null}
-         */
-        this.InternetAccessible = null;
-
-        /**
-         * 启动脚本的base64编码字符串。
+         * 定时任务名称。名称仅支持中文、英文、数字、下划线、分隔符"-"、小数点，最大长度不能超60个字节。同一伸缩组下必须唯一。
          * @type {string || null}
          */
-        this.InitScript = null;
+        this.ScheduledActionName = null;
 
         /**
-         * 可用区列表。
-         * @type {Array.<string> || null}
+         * 当定时任务触发时，设置的伸缩组最大实例数。
+         * @type {number || null}
          */
-        this.Zones = null;
+        this.MaxSize = null;
 
         /**
-         * VPC ID。
+         * 当定时任务触发时，设置的伸缩组最小实例数。
+         * @type {number || null}
+         */
+        this.MinSize = null;
+
+        /**
+         * 当定时任务触发时，设置的伸缩组期望实例数。
+         * @type {number || null}
+         */
+        this.DesiredCapacity = null;
+
+        /**
+         * 定时任务的首次触发时间，取值为`北京时间`（UTC+8），按照`ISO8601`标准，格式：`YYYY-MM-DDThh:mm:ss+08:00`。
          * @type {string || null}
          */
-        this.VpcId = null;
+        this.StartTime = null;
 
         /**
-         * 子网列表。
-         * @type {Array.<string> || null}
-         */
-        this.SubnetIds = null;
-
-        /**
-         * 实例显示名称。
+         * 定时任务的结束时间，取值为`北京时间`（UTC+8），按照`ISO8601`标准，格式：`YYYY-MM-DDThh:mm:ss+08:00`。<br><br>此参数与`Recurrence`需要同时指定，到达结束时间之后，定时任务将不再生效。
          * @type {string || null}
          */
-        this.InstanceName = null;
+        this.EndTime = null;
 
         /**
-         * 实例机型列表。
-         * @type {Array.<string> || null}
-         */
-        this.InstanceTypes = null;
-
-        /**
-         * 实例登录设置。
-         * @type {LoginSettings || null}
-         */
-        this.LoginSettings = null;
-
-        /**
-         * 实例计费类型。
+         * 定时任务的重复方式。为标准 Cron 格式<br><br>此参数与`EndTime`需要同时指定。
          * @type {string || null}
          */
-        this.InstanceChargeType = null;
-
-        /**
-         * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。若指定实例的付费模式为预付费则该参数必传。
-         * @type {InstanceChargePrepaid || null}
-         */
-        this.InstanceChargePrepaid = null;
+        this.Recurrence = null;
 
     }
 
@@ -982,32 +1332,14 @@ class CreatePaiInstanceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DomainName = 'DomainName' in params ? params.DomainName : null;
-
-        if (params.InternetAccessible) {
-            let obj = new InternetAccessible();
-            obj.deserialize(params.InternetAccessible)
-            this.InternetAccessible = obj;
-        }
-        this.InitScript = 'InitScript' in params ? params.InitScript : null;
-        this.Zones = 'Zones' in params ? params.Zones : null;
-        this.VpcId = 'VpcId' in params ? params.VpcId : null;
-        this.SubnetIds = 'SubnetIds' in params ? params.SubnetIds : null;
-        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
-        this.InstanceTypes = 'InstanceTypes' in params ? params.InstanceTypes : null;
-
-        if (params.LoginSettings) {
-            let obj = new LoginSettings();
-            obj.deserialize(params.LoginSettings)
-            this.LoginSettings = obj;
-        }
-        this.InstanceChargeType = 'InstanceChargeType' in params ? params.InstanceChargeType : null;
-
-        if (params.InstanceChargePrepaid) {
-            let obj = new InstanceChargePrepaid();
-            obj.deserialize(params.InstanceChargePrepaid)
-            this.InstanceChargePrepaid = obj;
-        }
+        this.AutoScalingGroupId = 'AutoScalingGroupId' in params ? params.AutoScalingGroupId : null;
+        this.ScheduledActionName = 'ScheduledActionName' in params ? params.ScheduledActionName : null;
+        this.MaxSize = 'MaxSize' in params ? params.MaxSize : null;
+        this.MinSize = 'MinSize' in params ? params.MinSize : null;
+        this.DesiredCapacity = 'DesiredCapacity' in params ? params.DesiredCapacity : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Recurrence = 'Recurrence' in params ? params.Recurrence : null;
 
     }
 }
@@ -1021,7 +1353,7 @@ class SystemDisk extends  AbstractModel {
         super();
 
         /**
-         * 系统盘类型。系统盘类型限制详见[CVM实例配置](https://cloud.tencent.com/document/product/213/2177)。取值范围：<br><li>LOCAL_BASIC：本地硬盘<br><li>LOCAL_SSD：本地SSD硬盘<br><li>CLOUD_BASIC：普通云硬盘<br><li>CLOUD_PREMIUM：高性能云硬盘<br><li>CLOUD_SSD：SSD云硬盘<br><br>默认取值：LOCAL_BASIC。
+         * 系统盘类型。系统盘类型限制详见[云硬盘类型](https://cloud.tencent.com/document/product/362/2353)。取值范围：<br><li>LOCAL_BASIC：本地硬盘<br><li>LOCAL_SSD：本地SSD硬盘<br><li>CLOUD_BASIC：普通云硬盘<br><li>CLOUD_PREMIUM：高性能云硬盘<br><li>CLOUD_SSD：SSD云硬盘<br><br>默认取值：CLOUD_PREMIUM。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -1193,9 +1525,7 @@ class InstanceNameSettings extends  AbstractModel {
          * 云服务器的实例名。
 
 点号（.）和短横线（-）不能作为 InstanceName 的首尾字符，不能连续使用。
-
-其他类型（Linux 等）实例：字符长度为[2, 40]，允许支持多个点号，点之间为一段，每段允许字母（不限制大小写）、数字和短横线（-）组成。不允许为纯数字。
-注意：此字段可能返回 null，表示取不到有效值。
+字符长度为[2, 40]，允许支持多个点号，点之间为一段，每段允许字母（不限制大小写）、数字和短横线（-）组成。不允许为纯数字。
          * @type {string || null}
          */
         this.InstanceName = null;
@@ -1206,7 +1536,6 @@ class InstanceNameSettings extends  AbstractModel {
 ORIGINAL，AS 直接将入参中所填的 InstanceName 传递给 CVM，CVM 可能会对 InstanceName 追加序列号，伸缩组中实例的 InstanceName 会出现冲突的情况。
 
 UNIQUE，入参所填的 InstanceName 相当于实例名前缀，AS 和 CVM 会对其进行拓展，伸缩组中实例的 InstanceName 可以保证唯一。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.InstanceNameStyle = null;
@@ -1222,6 +1551,76 @@ UNIQUE，入参所填的 InstanceName 相当于实例名前缀，AS 和 CVM 会�
         }
         this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
         this.InstanceNameStyle = 'InstanceNameStyle' in params ? params.InstanceNameStyle : null;
+
+    }
+}
+
+/**
+ * 伸缩活动状态详细描述。
+ * @class
+ */
+class DetailedStatusMessage extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 错误类型。
+         * @type {string || null}
+         */
+        this.Code = null;
+
+        /**
+         * 可用区信息。
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * 实例ID。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 实例计费类型。
+         * @type {string || null}
+         */
+        this.InstanceChargeType = null;
+
+        /**
+         * 子网ID。
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * 错误描述。
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * 实例类型。
+         * @type {string || null}
+         */
+        this.InstanceType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Code = 'Code' in params ? params.Code : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InstanceChargeType = 'InstanceChargeType' in params ? params.InstanceChargeType : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.Message = 'Message' in params ? params.Message : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
 
     }
 }
@@ -1255,48 +1654,24 @@ class ModifyScheduledActionResponse extends  AbstractModel {
 }
 
 /**
- * CreateAutoScalingGroupFromInstance请求参数结构体
+ * AttachLoadBalancers返回参数结构体
  * @class
  */
-class CreateAutoScalingGroupFromInstanceRequest extends  AbstractModel {
+class AttachLoadBalancersResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 伸缩组名称，在您账号中必须唯一。名称仅支持中文、英文、数字、下划线、分隔符"-"、小数点，最大长度不能超55个字节。
+         * 伸缩活动ID
          * @type {string || null}
          */
-        this.AutoScalingGroupName = null;
+        this.ActivityId = null;
 
         /**
-         * 实例ID
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.InstanceId = null;
-
-        /**
-         * 最小实例数，取值范围为0-2000。
-         * @type {number || null}
-         */
-        this.MinSize = null;
-
-        /**
-         * 最大实例数，取值范围为0-2000。
-         * @type {number || null}
-         */
-        this.MaxSize = null;
-
-        /**
-         * 期望实例数，大小介于最小实例数和最大实例数之间。
-         * @type {number || null}
-         */
-        this.DesiredCapacity = null;
-
-        /**
-         * 是否继承实例标签，默认值为False
-         * @type {boolean || null}
-         */
-        this.InheritInstanceTag = null;
+        this.RequestId = null;
 
     }
 
@@ -1307,12 +1682,8 @@ class CreateAutoScalingGroupFromInstanceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AutoScalingGroupName = 'AutoScalingGroupName' in params ? params.AutoScalingGroupName : null;
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.MinSize = 'MinSize' in params ? params.MinSize : null;
-        this.MaxSize = 'MaxSize' in params ? params.MaxSize : null;
-        this.DesiredCapacity = 'DesiredCapacity' in params ? params.DesiredCapacity : null;
-        this.InheritInstanceTag = 'InheritInstanceTag' in params ? params.InheritInstanceTag : null;
+        this.ActivityId = 'ActivityId' in params ? params.ActivityId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1353,18 +1724,18 @@ class ExecuteScalingPolicyResponse extends  AbstractModel {
 }
 
 /**
- * ModifyLaunchConfigurationAttributes返回参数结构体
+ * DeleteAutoScalingGroup请求参数结构体
  * @class
  */
-class ModifyLaunchConfigurationAttributesResponse extends  AbstractModel {
+class DeleteAutoScalingGroupRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 伸缩组ID
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.AutoScalingGroupId = null;
 
     }
 
@@ -1375,7 +1746,7 @@ class ModifyLaunchConfigurationAttributesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.AutoScalingGroupId = 'AutoScalingGroupId' in params ? params.AutoScalingGroupId : null;
 
     }
 }
@@ -1613,6 +1984,41 @@ class DescribeLaunchConfigurationsResponse extends  AbstractModel {
 }
 
 /**
+ * RemoveInstances请求参数结构体
+ * @class
+ */
+class RemoveInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 伸缩组ID
+         * @type {string || null}
+         */
+        this.AutoScalingGroupId = null;
+
+        /**
+         * CVM实例ID列表
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AutoScalingGroupId = 'AutoScalingGroupId' in params ? params.AutoScalingGroupId : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+
+    }
+}
+
+/**
  * DeleteScalingPolicy返回参数结构体
  * @class
  */
@@ -1684,6 +2090,56 @@ class Tag extends  AbstractModel {
 }
 
 /**
+ * DetachLoadBalancers请求参数结构体
+ * @class
+ */
+class DetachLoadBalancersRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 伸缩组ID
+         * @type {string || null}
+         */
+        this.AutoScalingGroupId = null;
+
+        /**
+         * 传统负载均衡器ID列表，列表长度上限为20，LoadBalancerIds 和 ForwardLoadBalancerIdentifications 二者同时最多只能指定一个
+         * @type {Array.<string> || null}
+         */
+        this.LoadBalancerIds = null;
+
+        /**
+         * 应用型负载均衡器标识信息列表，列表长度上限为50，LoadBalancerIds 和 ForwardLoadBalancerIdentifications二者同时最多只能指定一个
+         * @type {Array.<ForwardLoadBalancerIdentification> || null}
+         */
+        this.ForwardLoadBalancerIdentifications = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AutoScalingGroupId = 'AutoScalingGroupId' in params ? params.AutoScalingGroupId : null;
+        this.LoadBalancerIds = 'LoadBalancerIds' in params ? params.LoadBalancerIds : null;
+
+        if (params.ForwardLoadBalancerIdentifications) {
+            this.ForwardLoadBalancerIdentifications = new Array();
+            for (let z in params.ForwardLoadBalancerIdentifications) {
+                let obj = new ForwardLoadBalancerIdentification();
+                obj.deserialize(params.ForwardLoadBalancerIdentifications[z]);
+                this.ForwardLoadBalancerIdentifications.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DescribeAutoScalingInstances请求参数结构体
  * @class
  */
@@ -1692,7 +2148,7 @@ class DescribeAutoScalingInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * 待查询云服务器（CVM）的实例ID。参数不支持同时指定InstanceIds和Filters。
+         * 待查询云服务器（CVM）的实例ID。每次请求的上限为100。参数不支持同时指定InstanceIds和Filters。
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -1744,34 +2200,6 @@ class DescribeAutoScalingInstancesRequest extends  AbstractModel {
 }
 
 /**
- * 描述了实例登录相关配置与信息，出于安全性考虑，不会描述敏感信息。
- * @class
- */
-class LimitedLoginSettings extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 密钥ID列表。
-         * @type {Array.<string> || null}
-         */
-        this.KeyIds = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.KeyIds = 'KeyIds' in params ? params.KeyIds : null;
-
-    }
-}
-
-/**
  * ModifyLoadBalancers请求参数结构体
  * @class
  */
@@ -1792,7 +2220,7 @@ class ModifyLoadBalancersRequest extends  AbstractModel {
         this.LoadBalancerIds = null;
 
         /**
-         * 应用型负载均衡器列表，目前长度上限为20，LoadBalancerIds 和 ForwardLoadBalancers 二者同时最多只能指定一个
+         * 应用型负载均衡器列表，目前长度上限为50，LoadBalancerIds 和 ForwardLoadBalancers 二者同时最多只能指定一个
          * @type {Array.<ForwardLoadBalancer> || null}
          */
         this.ForwardLoadBalancers = null;
@@ -1914,7 +2342,7 @@ class SetInstancesProtectionRequest extends  AbstractModel {
         this.InstanceIds = null;
 
         /**
-         * 实例是否需要移出保护。
+         * 实例是否需要设置保护。
          * @type {boolean || null}
          */
         this.ProtectedFromScaleIn = null;
@@ -1999,6 +2427,34 @@ class DetachInstancesResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyLaunchConfigurationAttributes返回参数结构体
+ * @class
+ */
+class ModifyLaunchConfigurationAttributesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateLaunchConfiguration请求参数结构体
  * @class
  */
@@ -2019,7 +2475,7 @@ class CreateLaunchConfigurationRequest extends  AbstractModel {
         this.ImageId = null;
 
         /**
-         * 启动配置所属项目ID。该参数可以通过调用 [DescribeProject](https://cloud.tencent.com/document/api/378/4400) 的返回值中的`projectId`字段来获取。不填为默认项目。
+         * 启动配置所属项目ID。不填为默认项目。
 注意：伸缩组内实例所属项目ID取伸缩组项目ID，与这里取值无关。
          * @type {number || null}
          */
@@ -2257,7 +2713,17 @@ class AutoScalingGroup extends  AbstractModel {
         this.AutoScalingGroupName = null;
 
         /**
-         * 伸缩组当前状态。取值范围：<br><li>NORMAL：正常<br><li>CVM_ABNORMAL：启动配置异常<br><li>LB_ABNORMAL：负载均衡器异常<br><li>VPC_ABNORMAL：VPC网络异常<br><li>INSUFFICIENT_BALANCE：余额不足<br><li>LB_BACKEND_REGION_NOT_MATCH：CLB实例后端地域与AS服务所在地域不匹配<br>
+         * 伸缩组当前状态。取值范围：<br>
+<li>NORMAL：正常<br>
+<li>CVM_ABNORMAL：启动配置异常<br>
+<li>LB_ABNORMAL：负载均衡器异常<br>
+<li>LB_LISTENER_ABNORMAL：负载均衡器监听器异常<br>
+<li>LB_LOCATION_ABNORMAL：负载均衡器监听器转发配置异常<br>
+<li>VPC_ABNORMAL：VPC网络异常<br>
+<li>SUBNET_ABNORMAL：VPC子网异常<br>
+<li>INSUFFICIENT_BALANCE：余额不足<br>
+<li>LB_BACKEND_REGION_NOT_MATCH：CLB实例后端地域与AS服务所在地域不匹配<br>
+<li>LB_BACKEND_VPC_NOT_MATCH：CLB实例VPC与伸缩组VPC不匹配
          * @type {string || null}
          */
         this.AutoScalingGroupStatus = null;
@@ -2402,6 +2868,41 @@ class AutoScalingGroup extends  AbstractModel {
          */
         this.MultiZoneSubnetPolicy = null;
 
+        /**
+         * 伸缩组实例健康检查类型，取值如下：<br><li>CVM：根据实例网络状态判断实例是否处于不健康状态，不健康的网络状态即发生实例 PING 不可达事件，详细判断标准可参考[实例健康检查](https://cloud.tencent.com/document/product/377/8553)<br><li>CLB：根据 CLB 的健康检查状态判断实例是否处于不健康状态，CLB健康检查原理可参考[健康检查](https://cloud.tencent.com/document/product/214/6097)
+         * @type {string || null}
+         */
+        this.HealthCheckType = null;
+
+        /**
+         * CLB健康检查宽限期
+         * @type {number || null}
+         */
+        this.LoadBalancerHealthCheckGracePeriod = null;
+
+        /**
+         * 实例分配策略，取值包括 LAUNCH_CONFIGURATION 和 SPOT_MIXED。
+<br><li> LAUNCH_CONFIGURATION，代表传统的按照启动配置模式。
+<br><li> SPOT_MIXED，代表竞价混合模式。目前仅支持启动配置为按量计费模式时使用混合模式，混合模式下，伸缩组将根据设定扩容按量或竞价机型。使用混合模式时，关联的启动配置的计费类型不可被修改。
+         * @type {string || null}
+         */
+        this.InstanceAllocationPolicy = null;
+
+        /**
+         * 竞价混合模式下，各计费类型实例的分配策略。
+仅当 InstanceAllocationPolicy 取 SPOT_MIXED 时才会返回有效值。
+         * @type {SpotMixedAllocationPolicy || null}
+         */
+        this.SpotMixedAllocationPolicy = null;
+
+        /**
+         * 容量重平衡功能，仅对伸缩组内的竞价实例有效。取值范围：
+<br><li> TRUE，开启该功能，当伸缩组内的竞价实例即将被竞价实例服务自动回收前，AS 主动发起竞价实例销毁流程，如果有配置过缩容 hook，则销毁前 hook 会生效。销毁流程启动后，AS 会异步开启一个扩容活动，用于补齐期望实例数。
+<br><li> FALSE，不开启该功能，则 AS 等待竞价实例被销毁后才会去扩容补齐伸缩组期望实例数。
+         * @type {boolean || null}
+         */
+        this.CapacityRebalance = null;
+
     }
 
     /**
@@ -2458,6 +2959,16 @@ class AutoScalingGroup extends  AbstractModel {
         }
         this.Ipv6AddressCount = 'Ipv6AddressCount' in params ? params.Ipv6AddressCount : null;
         this.MultiZoneSubnetPolicy = 'MultiZoneSubnetPolicy' in params ? params.MultiZoneSubnetPolicy : null;
+        this.HealthCheckType = 'HealthCheckType' in params ? params.HealthCheckType : null;
+        this.LoadBalancerHealthCheckGracePeriod = 'LoadBalancerHealthCheckGracePeriod' in params ? params.LoadBalancerHealthCheckGracePeriod : null;
+        this.InstanceAllocationPolicy = 'InstanceAllocationPolicy' in params ? params.InstanceAllocationPolicy : null;
+
+        if (params.SpotMixedAllocationPolicy) {
+            let obj = new SpotMixedAllocationPolicy();
+            obj.deserialize(params.SpotMixedAllocationPolicy)
+            this.SpotMixedAllocationPolicy = obj;
+        }
+        this.CapacityRebalance = 'CapacityRebalance' in params ? params.CapacityRebalance : null;
 
     }
 }
@@ -2639,6 +3150,41 @@ class UpgradeLifecycleHookRequest extends  AbstractModel {
             this.NotificationTarget = obj;
         }
         this.LifecycleTransitionType = 'LifecycleTransitionType' in params ? params.LifecycleTransitionType : null;
+
+    }
+}
+
+/**
+ * DetachLoadBalancers返回参数结构体
+ * @class
+ */
+class DetachLoadBalancersResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 伸缩活动ID
+         * @type {string || null}
+         */
+        this.ActivityId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ActivityId = 'ActivityId' in params ? params.ActivityId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2831,63 +3377,6 @@ class ModifyLoadBalancersResponse extends  AbstractModel {
 }
 
 /**
- * DescribePaiInstances请求参数结构体
- * @class
- */
-class DescribePaiInstancesRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 依据PAI实例的实例ID进行查询。
-         * @type {Array.<string> || null}
-         */
-        this.InstanceIds = null;
-
-        /**
-         * 过滤条件。
-         * @type {Array.<Filter> || null}
-         */
-        this.Filters = null;
-
-        /**
-         * 返回数量，默认为20，最大值为100。
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * 偏移量，默认为0。
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
-
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
-            }
-        }
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-
-    }
-}
-
-/**
  * CreateNotificationConfiguration请求参数结构体
  * @class
  */
@@ -2919,6 +3408,31 @@ class CreateNotificationConfigurationRequest extends  AbstractModel {
          */
         this.NotificationUserGroupIds = null;
 
+        /**
+         * 通知接收端类型，取值如下
+<br><li>USER_GROUP：用户组
+<br><li>CMQ_QUEUE：CMQ 队列
+<br><li>CMQ_TOPIC：CMQ 主题
+<br><li>TDMQ_CMQ_TOPIC：TDMQ CMQ 主题
+<br><li>TDMQ_CMQ_QUEUE：TDMQ CMQ 队列
+
+默认值为：`USER_GROUP`。
+         * @type {string || null}
+         */
+        this.TargetType = null;
+
+        /**
+         * CMQ 队列名称，如 TargetType 取值为 `CMQ_QUEUE` 或 `TDMQ_CMQ_QUEUE` 时，该字段必填。
+         * @type {string || null}
+         */
+        this.QueueName = null;
+
+        /**
+         * CMQ 主题名称，如 TargetType 取值为 `CMQ_TOPIC` 或 `TDMQ_CMQ_TOPIC` 时，该字段必填。
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
     }
 
     /**
@@ -2931,6 +3445,9 @@ class CreateNotificationConfigurationRequest extends  AbstractModel {
         this.AutoScalingGroupId = 'AutoScalingGroupId' in params ? params.AutoScalingGroupId : null;
         this.NotificationTypes = 'NotificationTypes' in params ? params.NotificationTypes : null;
         this.NotificationUserGroupIds = 'NotificationUserGroupIds' in params ? params.NotificationUserGroupIds : null;
+        this.TargetType = 'TargetType' in params ? params.TargetType : null;
+        this.QueueName = 'QueueName' in params ? params.QueueName : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
 
     }
 }
@@ -2986,54 +3503,6 @@ class DescribeScheduledActionsResponse extends  AbstractModel {
 }
 
 /**
- * ModifyNotificationConfiguration请求参数结构体
- * @class
- */
-class ModifyNotificationConfigurationRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 待修改的通知ID。
-         * @type {string || null}
-         */
-        this.AutoScalingNotificationId = null;
-
-        /**
-         * 通知类型，即为需要订阅的通知类型集合，取值范围如下：
-<li>SCALE_OUT_SUCCESSFUL：扩容成功</li>
-<li>SCALE_OUT_FAILED：扩容失败</li>
-<li>SCALE_IN_SUCCESSFUL：缩容成功</li>
-<li>SCALE_IN_FAILED：缩容失败</li>
-<li>REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL：替换不健康子机成功</li>
-<li>REPLACE_UNHEALTHY_INSTANCE_FAILED：替换不健康子机失败</li>
-         * @type {Array.<string> || null}
-         */
-        this.NotificationTypes = null;
-
-        /**
-         * 通知组ID，即为用户组ID集合，用户组ID可以通过[ListGroups](https://cloud.tencent.com/document/product/598/34589)查询。
-         * @type {Array.<string> || null}
-         */
-        this.NotificationUserGroupIds = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.AutoScalingNotificationId = 'AutoScalingNotificationId' in params ? params.AutoScalingNotificationId : null;
-        this.NotificationTypes = 'NotificationTypes' in params ? params.NotificationTypes : null;
-        this.NotificationUserGroupIds = 'NotificationUserGroupIds' in params ? params.NotificationUserGroupIds : null;
-
-    }
-}
-
-/**
  * DeleteLifecycleHook请求参数结构体
  * @class
  */
@@ -3057,6 +3526,41 @@ class DeleteLifecycleHookRequest extends  AbstractModel {
             return;
         }
         this.LifecycleHookId = 'LifecycleHookId' in params ? params.LifecycleHookId : null;
+
+    }
+}
+
+/**
+ * ModifyLoadBalancerTargetAttributes返回参数结构体
+ * @class
+ */
+class ModifyLoadBalancerTargetAttributesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 伸缩活动ID
+         * @type {string || null}
+         */
+        this.ActivityId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ActivityId = 'ActivityId' in params ? params.ActivityId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3298,30 +3802,18 @@ class InstanceTag extends  AbstractModel {
 }
 
 /**
- * PAI实例
+ * ModifyLifecycleHook返回参数结构体
  * @class
  */
-class PaiInstance extends  AbstractModel {
+class ModifyLifecycleHookResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 实例ID
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.InstanceId = null;
-
-        /**
-         * 实例域名
-         * @type {string || null}
-         */
-        this.DomainName = null;
-
-        /**
-         * PAI管理页面URL
-         * @type {string || null}
-         */
-        this.PaiMateUrl = null;
+        this.RequestId = null;
 
     }
 
@@ -3332,9 +3824,50 @@ class PaiInstance extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.DomainName = 'DomainName' in params ? params.DomainName : null;
-        this.PaiMateUrl = 'PaiMateUrl' in params ? params.PaiMateUrl : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeAutoScalingAdvices返回参数结构体
+ * @class
+ */
+class DescribeAutoScalingAdvicesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 伸缩组配置建议集合。
+         * @type {Array.<AutoScalingAdvice> || null}
+         */
+        this.AutoScalingAdviceSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.AutoScalingAdviceSet) {
+            this.AutoScalingAdviceSet = new Array();
+            for (let z in params.AutoScalingAdviceSet) {
+                let obj = new AutoScalingAdvice();
+                obj.deserialize(params.AutoScalingAdviceSet[z]);
+                this.AutoScalingAdviceSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3396,13 +3929,13 @@ class CreateAutoScalingGroupRequest extends  AbstractModel {
         this.LoadBalancerIds = null;
 
         /**
-         * 伸缩组内实例所属项目ID。该参数可以通过调用 [DescribeProject](https://cloud.tencent.com/document/api/378/4400) 的返回值中的`projectId`字段来获取。不填为默认项目。
+         * 伸缩组内实例所属项目ID。不填为默认项目。
          * @type {number || null}
          */
         this.ProjectId = null;
 
         /**
-         * 应用型负载均衡器列表，目前长度上限为20，LoadBalancerIds 和 ForwardLoadBalancers 二者同时最多只能指定一个
+         * 应用型负载均衡器列表，目前长度上限为50，LoadBalancerIds 和 ForwardLoadBalancers 二者同时最多只能指定一个
          * @type {Array.<ForwardLoadBalancer> || null}
          */
         this.ForwardLoadBalancers = null;
@@ -3468,16 +4001,52 @@ class CreateAutoScalingGroupRequest extends  AbstractModel {
         /**
          * 多可用区/子网策略，取值包括 PRIORITY 和 EQUALITY，默认为 PRIORITY。
 <br><li> PRIORITY，按照可用区/子网列表的顺序，作为优先级来尝试创建实例，如果优先级最高的可用区/子网可以创建成功，则总在该可用区/子网创建。
-<br><li> EQUALITY：每次选择当前实例数最少的可用区/子网进行扩容，使得每个可用区/子网都有机会发生扩容，多次扩容出的实例会打散到多个可用区/子网。
+<br><li> EQUALITY：扩容出的实例会打散到多个可用区/子网，保证扩容后的各个可用区/子网实例数相对均衡。
 
 与本策略相关的注意点：
 <br><li> 当伸缩组为基础网络时，本策略适用于多可用区；当伸缩组为VPC网络时，本策略适用于多子网，此时不再考虑可用区因素，例如四个子网ABCD，其中ABC处于可用区1，D处于可用区2，此时考虑子网ABCD进行排序，而不考虑可用区1、2。
 <br><li> 本策略适用于多可用区/子网，不适用于启动配置的多机型。多机型按照优先级策略进行选择。
-<br><li> 创建实例时，先保证多机型的策略，后保证多可用区/子网的策略。例如多机型A、B，多子网1、2、3（按照PRIORITY策略），会按照A1、A2、A3、B1、B2、B3 进行尝试，如果A1售罄，会尝试A2（而非B1）。
-<br><li> 无论使用哪种策略，单次伸缩活动总是优先保持使用一种具体配置（机型 * 可用区/子网）。
+<br><li> 按照 PRIORITY 策略创建实例时，先保证多机型的策略，后保证多可用区/子网的策略。例如多机型A、B，多子网1、2、3，会按照A1、A2、A3、B1、B2、B3 进行尝试，如果A1售罄，会尝试A2（而非B1）。
          * @type {string || null}
          */
         this.MultiZoneSubnetPolicy = null;
+
+        /**
+         * 伸缩组实例健康检查类型，取值如下：<br><li>CVM：根据实例网络状态判断实例是否处于不健康状态，不健康的网络状态即发生实例 PING 不可达事件，详细判断标准可参考[实例健康检查](https://cloud.tencent.com/document/product/377/8553)<br><li>CLB：根据 CLB 的健康检查状态判断实例是否处于不健康状态，CLB健康检查原理可参考[健康检查](https://cloud.tencent.com/document/product/214/6097) <br>如果选择了`CLB`类型，伸缩组将同时检查实例网络状态与CLB健康检查状态，如果出现实例网络状态不健康，实例将被标记为 UNHEALTHY 状态；如果出现 CLB 健康检查状态异常，实例将被标记为CLB_UNHEALTHY 状态，如果两个异常状态同时出现，实例`HealthStatus`字段将返回 UNHEALTHY|CLB_UNHEALTHY。默认值：CLB
+         * @type {string || null}
+         */
+        this.HealthCheckType = null;
+
+        /**
+         * CLB健康检查宽限期，当扩容的实例进入`IN_SERVICE`后，在宽限期时间范围内将不会被标记为不健康`CLB_UNHEALTHY`。<br>默认值：0。取值范围[0, 7200]，单位：秒。
+         * @type {number || null}
+         */
+        this.LoadBalancerHealthCheckGracePeriod = null;
+
+        /**
+         * 实例分配策略，取值包括 LAUNCH_CONFIGURATION 和 SPOT_MIXED，默认取 LAUNCH_CONFIGURATION。
+<br><li> LAUNCH_CONFIGURATION，代表传统的按照启动配置模式。
+<br><li> SPOT_MIXED，代表竞价混合模式。目前仅支持启动配置为按量计费模式时使用混合模式，混合模式下，伸缩组将根据设定扩容按量或竞价机型。使用混合模式时，关联的启动配置的计费类型不可被修改。
+         * @type {string || null}
+         */
+        this.InstanceAllocationPolicy = null;
+
+        /**
+         * 竞价混合模式下，各计费类型实例的分配策略。
+仅当 InstanceAllocationPolicy 取 SPOT_MIXED 时可用。
+         * @type {SpotMixedAllocationPolicy || null}
+         */
+        this.SpotMixedAllocationPolicy = null;
+
+        /**
+         * 容量重平衡功能，仅对伸缩组内的竞价实例有效。取值范围：
+<br><li> TRUE，开启该功能，当伸缩组内的竞价实例即将被竞价实例服务自动回收前，AS 主动发起竞价实例销毁流程，如果有配置过缩容 hook，则销毁前 hook 会生效。销毁流程启动后，AS 会异步开启一个扩容活动，用于补齐期望实例数。
+<br><li> FALSE，不开启该功能，则 AS 等待竞价实例被销毁后才会去扩容补齐伸缩组期望实例数。
+
+默认取 FALSE。
+         * @type {boolean || null}
+         */
+        this.CapacityRebalance = null;
 
     }
 
@@ -3528,6 +4097,16 @@ class CreateAutoScalingGroupRequest extends  AbstractModel {
         }
         this.Ipv6AddressCount = 'Ipv6AddressCount' in params ? params.Ipv6AddressCount : null;
         this.MultiZoneSubnetPolicy = 'MultiZoneSubnetPolicy' in params ? params.MultiZoneSubnetPolicy : null;
+        this.HealthCheckType = 'HealthCheckType' in params ? params.HealthCheckType : null;
+        this.LoadBalancerHealthCheckGracePeriod = 'LoadBalancerHealthCheckGracePeriod' in params ? params.LoadBalancerHealthCheckGracePeriod : null;
+        this.InstanceAllocationPolicy = 'InstanceAllocationPolicy' in params ? params.InstanceAllocationPolicy : null;
+
+        if (params.SpotMixedAllocationPolicy) {
+            let obj = new SpotMixedAllocationPolicy();
+            obj.deserialize(params.SpotMixedAllocationPolicy)
+            this.SpotMixedAllocationPolicy = obj;
+        }
+        this.CapacityRebalance = 'CapacityRebalance' in params ? params.CapacityRebalance : null;
 
     }
 }
@@ -3643,7 +4222,7 @@ class UpgradeLaunchConfigurationRequest extends  AbstractModel {
         this.LoginSettings = null;
 
         /**
-         * 实例所属项目ID。该参数可以通过调用 [DescribeProject](https://cloud.tencent.com/document/api/378/4400) 的返回值中的`projectId`字段来获取。不填为默认项目。
+         * 实例所属项目ID。不填为默认项目。
          * @type {number || null}
          */
         this.ProjectId = null;
@@ -3903,7 +4482,7 @@ class DataDisk extends  AbstractModel {
         super();
 
         /**
-         * 数据盘类型。数据盘类型限制详见[CVM实例配置](https://cloud.tencent.com/document/product/213/2177)。取值范围：<br><li>LOCAL_BASIC：本地硬盘<br><li>LOCAL_SSD：本地SSD硬盘<br><li>CLOUD_BASIC：普通云硬盘<br><li>CLOUD_PREMIUM：高性能云硬盘<br><li>CLOUD_SSD：SSD云硬盘<br><br>默认取值：LOCAL_BASIC。
+         * 数据盘类型。数据盘类型限制详见[云硬盘类型](https://cloud.tencent.com/document/product/362/2353)。取值范围：<br><li>LOCAL_BASIC：本地硬盘<br><li>LOCAL_SSD：本地SSD硬盘<br><li>CLOUD_BASIC：普通云硬盘<br><li>CLOUD_PREMIUM：高性能云硬盘<br><li>CLOUD_SSD：SSD云硬盘<br><li>CLOUD_HSSD：增强型SSD云硬盘<br><li>CLOUD_TSSD：极速型SSD云硬盘<br><br>默认取值与系统盘类型（SystemDisk.DiskType）保持一致。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -3923,6 +4502,28 @@ class DataDisk extends  AbstractModel {
          */
         this.SnapshotId = null;
 
+        /**
+         * 数据盘是否随子机销毁。取值范围：<br><li>TRUE：子机销毁时，销毁数据盘，只支持按小时后付费云盘<br><li>FALSE：子机销毁时，保留数据盘
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.DeleteWithInstance = null;
+
+        /**
+         * 数据盘是否加密。取值范围：<br><li>TRUE：加密<br><li>FALSE：不加密
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.Encrypt = null;
+
+        /**
+         * 云硬盘性能，单位：MB/s。使用此参数可给云硬盘购买额外的性能，功能介绍和类型限制详见：[增强型 SSD 云硬盘额外性能说明](https://cloud.tencent.com/document/product/362/51896#.E5.A2.9E.E5.BC.BA.E5.9E.8B-ssd-.E4.BA.91.E7.A1.AC.E7.9B.98.E9.A2.9D.E5.A4.96.E6.80.A7.E8.83.BD)。
+当前仅支持极速型云盘（CLOUD_TSSD）和增强型SSD云硬盘（CLOUD_HSSD）且 需容量 > 460GB。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ThroughputPerformance = null;
+
     }
 
     /**
@@ -3935,34 +4536,9 @@ class DataDisk extends  AbstractModel {
         this.DiskType = 'DiskType' in params ? params.DiskType : null;
         this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
         this.SnapshotId = 'SnapshotId' in params ? params.SnapshotId : null;
-
-    }
-}
-
-/**
- * PreviewPaiDomainName请求参数结构体
- * @class
- */
-class PreviewPaiDomainNameRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 域名类型
-         * @type {string || null}
-         */
-        this.DomainNameType = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.DomainNameType = 'DomainNameType' in params ? params.DomainNameType : null;
+        this.DeleteWithInstance = 'DeleteWithInstance' in params ? params.DeleteWithInstance : null;
+        this.Encrypt = 'Encrypt' in params ? params.Encrypt : null;
+        this.ThroughputPerformance = 'ThroughputPerformance' in params ? params.ThroughputPerformance : null;
 
     }
 }
@@ -4235,60 +4811,30 @@ class Instance extends  AbstractModel {
 }
 
 /**
- * CreateScheduledAction请求参数结构体
+ * DescribeAutoScalingInstances返回参数结构体
  * @class
  */
-class CreateScheduledActionRequest extends  AbstractModel {
+class DescribeAutoScalingInstancesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 伸缩组ID
-         * @type {string || null}
+         * 实例详细信息列表。
+         * @type {Array.<Instance> || null}
          */
-        this.AutoScalingGroupId = null;
+        this.AutoScalingInstanceSet = null;
 
         /**
-         * 定时任务名称。名称仅支持中文、英文、数字、下划线、分隔符"-"、小数点，最大长度不能超60个字节。同一伸缩组下必须唯一。
-         * @type {string || null}
-         */
-        this.ScheduledActionName = null;
-
-        /**
-         * 当定时任务触发时，设置的伸缩组最大实例数。
+         * 符合条件的实例数量。
          * @type {number || null}
          */
-        this.MaxSize = null;
+        this.TotalCount = null;
 
         /**
-         * 当定时任务触发时，设置的伸缩组最小实例数。
-         * @type {number || null}
-         */
-        this.MinSize = null;
-
-        /**
-         * 当定时任务触发时，设置的伸缩组期望实例数。
-         * @type {number || null}
-         */
-        this.DesiredCapacity = null;
-
-        /**
-         * 定时任务的首次触发时间，取值为`北京时间`（UTC+8），按照`ISO8601`标准，格式：`YYYY-MM-DDThh:mm:ss+08:00`。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.StartTime = null;
-
-        /**
-         * 定时任务的结束时间，取值为`北京时间`（UTC+8），按照`ISO8601`标准，格式：`YYYY-MM-DDThh:mm:ss+08:00`。<br><br>此参数与`Recurrence`需要同时指定，到达结束时间之后，定时任务将不再生效。
-         * @type {string || null}
-         */
-        this.EndTime = null;
-
-        /**
-         * 定时任务的重复方式。为标准 Cron 格式<br><br>此参数与`EndTime`需要同时指定。
-         * @type {string || null}
-         */
-        this.Recurrence = null;
+        this.RequestId = null;
 
     }
 
@@ -4299,14 +4845,17 @@ class CreateScheduledActionRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AutoScalingGroupId = 'AutoScalingGroupId' in params ? params.AutoScalingGroupId : null;
-        this.ScheduledActionName = 'ScheduledActionName' in params ? params.ScheduledActionName : null;
-        this.MaxSize = 'MaxSize' in params ? params.MaxSize : null;
-        this.MinSize = 'MinSize' in params ? params.MinSize : null;
-        this.DesiredCapacity = 'DesiredCapacity' in params ? params.DesiredCapacity : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.Recurrence = 'Recurrence' in params ? params.Recurrence : null;
+
+        if (params.AutoScalingInstanceSet) {
+            this.AutoScalingInstanceSet = new Array();
+            for (let z in params.AutoScalingInstanceSet) {
+                let obj = new Instance();
+                obj.deserialize(params.AutoScalingInstanceSet[z]);
+                this.AutoScalingInstanceSet.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4597,6 +5146,18 @@ class ModifyDesiredCapacityRequest extends  AbstractModel {
          */
         this.DesiredCapacity = null;
 
+        /**
+         * 最小实例数，取值范围为0-2000。
+         * @type {number || null}
+         */
+        this.MinSize = null;
+
+        /**
+         * 最大实例数，取值范围为0-2000。
+         * @type {number || null}
+         */
+        this.MaxSize = null;
+
     }
 
     /**
@@ -4608,6 +5169,8 @@ class ModifyDesiredCapacityRequest extends  AbstractModel {
         }
         this.AutoScalingGroupId = 'AutoScalingGroupId' in params ? params.AutoScalingGroupId : null;
         this.DesiredCapacity = 'DesiredCapacity' in params ? params.DesiredCapacity : null;
+        this.MinSize = 'MinSize' in params ? params.MinSize : null;
+        this.MaxSize = 'MaxSize' in params ? params.MaxSize : null;
 
     }
 }
@@ -4797,6 +5360,12 @@ class ScheduledAction extends  AbstractModel {
          */
         this.CreatedTime = null;
 
+        /**
+         * 定时任务的执行类型。取值范围：<br><li>CRONTAB：代表定时任务为重复执行。<br><li>ONCE：代表定时任务为单次执行。
+         * @type {string || null}
+         */
+        this.ScheduledType = null;
+
     }
 
     /**
@@ -4816,6 +5385,93 @@ class ScheduledAction extends  AbstractModel {
         this.DesiredCapacity = 'DesiredCapacity' in params ? params.DesiredCapacity : null;
         this.MinSize = 'MinSize' in params ? params.MinSize : null;
         this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
+        this.ScheduledType = 'ScheduledType' in params ? params.ScheduledType : null;
+
+    }
+}
+
+/**
+ * ModifyLifecycleHook请求参数结构体
+ * @class
+ */
+class ModifyLifecycleHookRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 生命周期挂钩ID。
+         * @type {string || null}
+         */
+        this.LifecycleHookId = null;
+
+        /**
+         * 生命周期挂钩名称。
+         * @type {string || null}
+         */
+        this.LifecycleHookName = null;
+
+        /**
+         * 进入生命周期挂钩场景，取值包括：
+<li> INSTANCE_LAUNCHING：实例启动后
+<li> INSTANCE_TERMINATING：实例销毁前
+         * @type {string || null}
+         */
+        this.LifecycleTransition = null;
+
+        /**
+         * 定义伸缩组在生命周期挂钩超时的情况下应采取的操作，取值包括：
+<li> CONTINUE： 超时后继续伸缩活动
+<li> ABANDON：超时后终止伸缩活动
+         * @type {string || null}
+         */
+        this.DefaultResult = null;
+
+        /**
+         * 生命周期挂钩超时之前可以经过的最长时间（以秒为单位），范围从 30 到 7200 秒。
+         * @type {number || null}
+         */
+        this.HeartbeatTimeout = null;
+
+        /**
+         * 弹性伸缩向通知目标发送的附加信息。
+         * @type {string || null}
+         */
+        this.NotificationMetadata = null;
+
+        /**
+         * 进行生命周期挂钩的场景类型，取值范围包括`NORMAL`和 `EXTENSION`。说明：设置为`EXTENSION`值，在AttachInstances、DetachInstances、RemoveInstances 接口时会触发生命周期挂钩操作，值为`NORMAL`则不会在这些接口中触发生命周期挂钩。
+         * @type {string || null}
+         */
+        this.LifecycleTransitionType = null;
+
+        /**
+         * 通知目标信息。
+         * @type {NotificationTarget || null}
+         */
+        this.NotificationTarget = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LifecycleHookId = 'LifecycleHookId' in params ? params.LifecycleHookId : null;
+        this.LifecycleHookName = 'LifecycleHookName' in params ? params.LifecycleHookName : null;
+        this.LifecycleTransition = 'LifecycleTransition' in params ? params.LifecycleTransition : null;
+        this.DefaultResult = 'DefaultResult' in params ? params.DefaultResult : null;
+        this.HeartbeatTimeout = 'HeartbeatTimeout' in params ? params.HeartbeatTimeout : null;
+        this.NotificationMetadata = 'NotificationMetadata' in params ? params.NotificationMetadata : null;
+        this.LifecycleTransitionType = 'LifecycleTransitionType' in params ? params.LifecycleTransitionType : null;
+
+        if (params.NotificationTarget) {
+            let obj = new NotificationTarget();
+            obj.deserialize(params.NotificationTarget)
+            this.NotificationTarget = obj;
+        }
 
     }
 }
@@ -4948,10 +5604,6 @@ class DescribeLifecycleHooksRequest extends  AbstractModel {
 <li> lifecycle-hook-id - String - 是否必填：否 -（过滤条件）按照生命周期挂钩ID过滤。</li>
 <li> lifecycle-hook-name - String - 是否必填：否 -（过滤条件）按照生命周期挂钩名称过滤。</li>
 <li> auto-scaling-group-id - String - 是否必填：否 -（过滤条件）按照伸缩组ID过滤。</li>
-过滤条件。
-<li> lifecycle-hook-id - String - 是否必填：否 -（过滤条件）按照生命周期挂钩ID过滤。</li>
-<li> lifecycle-hook-name - String - 是否必填：否 -（过滤条件）按照生命周期挂钩名称过滤。</li>
-<li> auto-scaling-group-id - String - 是否必填：否 -（过滤条件）按照伸缩组ID过滤。</li>
 每次请求的`Filters`的上限为10，`Filter.Values`的上限为5。参数不支持同时指定`LifecycleHookIds `和`Filters`。
          * @type {Array.<Filter> || null}
          */
@@ -5017,6 +5669,12 @@ WAKE_UP_STOPPED_SCALING：扩容优先开机。扩容时优先对已关机的实
          */
         this.ScalingMode = null;
 
+        /**
+         * 开启负载均衡不健康替换服务。若开启则对于负载均衡健康检查判断不健康的实例，弹性伸缩服务会进行替换。若不指定该参数，则默认为 False。
+         * @type {boolean || null}
+         */
+        this.ReplaceLoadBalancerUnhealthy = null;
+
     }
 
     /**
@@ -5028,185 +5686,30 @@ WAKE_UP_STOPPED_SCALING：扩容优先开机。扩容时优先对已关机的实
         }
         this.ReplaceMonitorUnhealthy = 'ReplaceMonitorUnhealthy' in params ? params.ReplaceMonitorUnhealthy : null;
         this.ScalingMode = 'ScalingMode' in params ? params.ScalingMode : null;
+        this.ReplaceLoadBalancerUnhealthy = 'ReplaceLoadBalancerUnhealthy' in params ? params.ReplaceLoadBalancerUnhealthy : null;
 
     }
 }
 
 /**
- * 符合条件的启动配置信息的集合。
+ * CreateAutoScalingGroup返回参数结构体
  * @class
  */
-class LaunchConfiguration extends  AbstractModel {
+class CreateAutoScalingGroupResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 实例所属项目ID。
-         * @type {number || null}
-         */
-        this.ProjectId = null;
-
-        /**
-         * 启动配置ID。
+         * 伸缩组ID
          * @type {string || null}
          */
-        this.LaunchConfigurationId = null;
+        this.AutoScalingGroupId = null;
 
         /**
-         * 启动配置名称。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.LaunchConfigurationName = null;
-
-        /**
-         * 实例机型。
-         * @type {string || null}
-         */
-        this.InstanceType = null;
-
-        /**
-         * 实例系统盘配置信息。
-         * @type {SystemDisk || null}
-         */
-        this.SystemDisk = null;
-
-        /**
-         * 实例数据盘配置信息。
-         * @type {Array.<DataDisk> || null}
-         */
-        this.DataDisks = null;
-
-        /**
-         * 实例登录设置。
-         * @type {LimitedLoginSettings || null}
-         */
-        this.LoginSettings = null;
-
-        /**
-         * 公网带宽相关信息设置。
-         * @type {InternetAccessible || null}
-         */
-        this.InternetAccessible = null;
-
-        /**
-         * 实例所属安全组。
-         * @type {Array.<string> || null}
-         */
-        this.SecurityGroupIds = null;
-
-        /**
-         * 启动配置关联的伸缩组。
-         * @type {Array.<AutoScalingGroupAbstract> || null}
-         */
-        this.AutoScalingGroupAbstractSet = null;
-
-        /**
-         * 自定义数据。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.UserData = null;
-
-        /**
-         * 启动配置创建时间。
-         * @type {string || null}
-         */
-        this.CreatedTime = null;
-
-        /**
-         * 实例的增强服务启用情况与其设置。
-         * @type {EnhancedService || null}
-         */
-        this.EnhancedService = null;
-
-        /**
-         * 镜像ID。
-         * @type {string || null}
-         */
-        this.ImageId = null;
-
-        /**
-         * 启动配置当前状态。取值范围：<br><li>NORMAL：正常<br><li>IMAGE_ABNORMAL：启动配置镜像异常<br><li>CBS_SNAP_ABNORMAL：启动配置数据盘快照异常<br><li>SECURITY_GROUP_ABNORMAL：启动配置安全组异常<br>
-         * @type {string || null}
-         */
-        this.LaunchConfigurationStatus = null;
-
-        /**
-         * 实例计费类型，CVM默认值按照POSTPAID_BY_HOUR处理。
-<br><li>POSTPAID_BY_HOUR：按小时后付费
-<br><li>SPOTPAID：竞价付费
-         * @type {string || null}
-         */
-        this.InstanceChargeType = null;
-
-        /**
-         * 实例的市场相关选项，如竞价实例相关参数，若指定实例的付费模式为竞价付费则该参数必传。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {InstanceMarketOptionsRequest || null}
-         */
-        this.InstanceMarketOptions = null;
-
-        /**
-         * 实例机型列表。
-         * @type {Array.<string> || null}
-         */
-        this.InstanceTypes = null;
-
-        /**
-         * 标签列表。
-         * @type {Array.<InstanceTag> || null}
-         */
-        this.InstanceTags = null;
-
-        /**
-         * 版本号。
-         * @type {number || null}
-         */
-        this.VersionNumber = null;
-
-        /**
-         * 更新时间。
-         * @type {string || null}
-         */
-        this.UpdatedTime = null;
-
-        /**
-         * CAM角色名称。可通过DescribeRoleList接口返回值中的roleName获取。
-         * @type {string || null}
-         */
-        this.CamRoleName = null;
-
-        /**
-         * 上次操作时，InstanceTypesCheckPolicy 取值。
-         * @type {string || null}
-         */
-        this.LastOperationInstanceTypesCheckPolicy = null;
-
-        /**
-         * 云服务器主机名（HostName）的相关设置。
-         * @type {HostNameSettings || null}
-         */
-        this.HostNameSettings = null;
-
-        /**
-         * 云服务器实例名（InstanceName）的相关设置。
-         * @type {InstanceNameSettings || null}
-         */
-        this.InstanceNameSettings = null;
-
-        /**
-         * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。若指定实例的付费模式为预付费则该参数必传。
-         * @type {InstanceChargePrepaid || null}
-         */
-        this.InstanceChargePrepaid = null;
-
-        /**
-         * 云盘类型选择策略。取值范围：
-<br><li>ORIGINAL：使用设置的云盘类型
-<br><li>AUTOMATIC：自动选择当前可用区下可用的云盘类型
-         * @type {string || null}
-         */
-        this.DiskTypePolicy = null;
+        this.RequestId = null;
 
     }
 
@@ -5217,97 +5720,8 @@ class LaunchConfiguration extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
-        this.LaunchConfigurationId = 'LaunchConfigurationId' in params ? params.LaunchConfigurationId : null;
-        this.LaunchConfigurationName = 'LaunchConfigurationName' in params ? params.LaunchConfigurationName : null;
-        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
-
-        if (params.SystemDisk) {
-            let obj = new SystemDisk();
-            obj.deserialize(params.SystemDisk)
-            this.SystemDisk = obj;
-        }
-
-        if (params.DataDisks) {
-            this.DataDisks = new Array();
-            for (let z in params.DataDisks) {
-                let obj = new DataDisk();
-                obj.deserialize(params.DataDisks[z]);
-                this.DataDisks.push(obj);
-            }
-        }
-
-        if (params.LoginSettings) {
-            let obj = new LimitedLoginSettings();
-            obj.deserialize(params.LoginSettings)
-            this.LoginSettings = obj;
-        }
-
-        if (params.InternetAccessible) {
-            let obj = new InternetAccessible();
-            obj.deserialize(params.InternetAccessible)
-            this.InternetAccessible = obj;
-        }
-        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
-
-        if (params.AutoScalingGroupAbstractSet) {
-            this.AutoScalingGroupAbstractSet = new Array();
-            for (let z in params.AutoScalingGroupAbstractSet) {
-                let obj = new AutoScalingGroupAbstract();
-                obj.deserialize(params.AutoScalingGroupAbstractSet[z]);
-                this.AutoScalingGroupAbstractSet.push(obj);
-            }
-        }
-        this.UserData = 'UserData' in params ? params.UserData : null;
-        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
-
-        if (params.EnhancedService) {
-            let obj = new EnhancedService();
-            obj.deserialize(params.EnhancedService)
-            this.EnhancedService = obj;
-        }
-        this.ImageId = 'ImageId' in params ? params.ImageId : null;
-        this.LaunchConfigurationStatus = 'LaunchConfigurationStatus' in params ? params.LaunchConfigurationStatus : null;
-        this.InstanceChargeType = 'InstanceChargeType' in params ? params.InstanceChargeType : null;
-
-        if (params.InstanceMarketOptions) {
-            let obj = new InstanceMarketOptionsRequest();
-            obj.deserialize(params.InstanceMarketOptions)
-            this.InstanceMarketOptions = obj;
-        }
-        this.InstanceTypes = 'InstanceTypes' in params ? params.InstanceTypes : null;
-
-        if (params.InstanceTags) {
-            this.InstanceTags = new Array();
-            for (let z in params.InstanceTags) {
-                let obj = new InstanceTag();
-                obj.deserialize(params.InstanceTags[z]);
-                this.InstanceTags.push(obj);
-            }
-        }
-        this.VersionNumber = 'VersionNumber' in params ? params.VersionNumber : null;
-        this.UpdatedTime = 'UpdatedTime' in params ? params.UpdatedTime : null;
-        this.CamRoleName = 'CamRoleName' in params ? params.CamRoleName : null;
-        this.LastOperationInstanceTypesCheckPolicy = 'LastOperationInstanceTypesCheckPolicy' in params ? params.LastOperationInstanceTypesCheckPolicy : null;
-
-        if (params.HostNameSettings) {
-            let obj = new HostNameSettings();
-            obj.deserialize(params.HostNameSettings)
-            this.HostNameSettings = obj;
-        }
-
-        if (params.InstanceNameSettings) {
-            let obj = new InstanceNameSettings();
-            obj.deserialize(params.InstanceNameSettings)
-            this.InstanceNameSettings = obj;
-        }
-
-        if (params.InstanceChargePrepaid) {
-            let obj = new InstanceChargePrepaid();
-            obj.deserialize(params.InstanceChargePrepaid)
-            this.InstanceChargePrepaid = obj;
-        }
-        this.DiskTypePolicy = 'DiskTypePolicy' in params ? params.DiskTypePolicy : null;
+        this.AutoScalingGroupId = 'AutoScalingGroupId' in params ? params.AutoScalingGroupId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5376,30 +5790,18 @@ class ModifyNotificationConfigurationResponse extends  AbstractModel {
 }
 
 /**
- * DescribeAutoScalingInstances返回参数结构体
+ * 描述了实例登录相关配置与信息，出于安全性考虑，不会描述敏感信息。
  * @class
  */
-class DescribeAutoScalingInstancesResponse extends  AbstractModel {
+class LimitedLoginSettings extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 实例详细信息列表。
-         * @type {Array.<Instance> || null}
+         * 密钥ID列表。
+         * @type {Array.<string> || null}
          */
-        this.AutoScalingInstanceSet = null;
-
-        /**
-         * 符合条件的实例数量。
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.KeyIds = null;
 
     }
 
@@ -5410,17 +5812,7 @@ class DescribeAutoScalingInstancesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.AutoScalingInstanceSet) {
-            this.AutoScalingInstanceSet = new Array();
-            for (let z in params.AutoScalingInstanceSet) {
-                let obj = new Instance();
-                obj.deserialize(params.AutoScalingInstanceSet[z]);
-                this.AutoScalingInstanceSet.push(obj);
-            }
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.KeyIds = 'KeyIds' in params ? params.KeyIds : null;
 
     }
 }
@@ -5586,6 +5978,34 @@ class ScaleInInstancesResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeAutoScalingAdvices请求参数结构体
+ * @class
+ */
+class DescribeAutoScalingAdvicesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 待查询的伸缩组列表，上限100。
+         * @type {Array.<string> || null}
+         */
+        this.AutoScalingGroupIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AutoScalingGroupIds = 'AutoScalingGroupIds' in params ? params.AutoScalingGroupIds : null;
+
+    }
+}
+
+/**
  * DeleteNotificationConfiguration请求参数结构体
  * @class
  */
@@ -5683,21 +6103,23 @@ class NotificationTarget extends  AbstractModel {
         super();
 
         /**
-         * 目标类型，取值范围包括`CMQ_QUEUE`、`CMQ_TOPIC`。
+         * 目标类型，取值范围包括`CMQ_QUEUE`、`CMQ_TOPIC`、`TDMQ_CMQ_QUEUE`、`TDMQ_CMQ_TOPIC`。
 <li> CMQ_QUEUE，指腾讯云消息队列-队列模型。</li>
 <li> CMQ_TOPIC，指腾讯云消息队列-主题模型。</li>
+<li> TDMQ_CMQ_QUEUE，指腾讯云 TDMQ 消息队列-队列模型。</li>
+<li> TDMQ_CMQ_TOPIC，指腾讯云 TDMQ 消息队列-主题模型。</li>
          * @type {string || null}
          */
         this.TargetType = null;
 
         /**
-         * 队列名称，如果`TargetType`取值为`CMQ_QUEUE`，则本字段必填。
+         * 队列名称，如果`TargetType`取值为`CMQ_QUEUE` 或 `TDMQ_CMQ_QUEUE`，则本字段必填。
          * @type {string || null}
          */
         this.QueueName = null;
 
         /**
-         * 主题名称，如果`TargetType`取值为`CMQ_TOPIC`，则本字段必填。
+         * 主题名称，如果`TargetType`取值为`CMQ_TOPIC` 或 `TDMQ_CMQ_TOPIC`，则本字段必填。
          * @type {string || null}
          */
         this.TopicName = null;
@@ -5714,6 +6136,49 @@ class NotificationTarget extends  AbstractModel {
         this.TargetType = 'TargetType' in params ? params.TargetType : null;
         this.QueueName = 'QueueName' in params ? params.QueueName : null;
         this.TopicName = 'TopicName' in params ? params.TopicName : null;
+
+    }
+}
+
+/**
+ * ModifyLoadBalancerTargetAttributes请求参数结构体
+ * @class
+ */
+class ModifyLoadBalancerTargetAttributesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 伸缩组ID
+         * @type {string || null}
+         */
+        this.AutoScalingGroupId = null;
+
+        /**
+         * 需修改目标规则属性的应用型负载均衡器列表，列表长度上限为50
+         * @type {Array.<ForwardLoadBalancer> || null}
+         */
+        this.ForwardLoadBalancers = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AutoScalingGroupId = 'AutoScalingGroupId' in params ? params.AutoScalingGroupId : null;
+
+        if (params.ForwardLoadBalancers) {
+            this.ForwardLoadBalancers = new Array();
+            for (let z in params.ForwardLoadBalancers) {
+                let obj = new ForwardLoadBalancer();
+                obj.deserialize(params.ForwardLoadBalancers[z]);
+                this.ForwardLoadBalancers.push(obj);
+            }
+        }
 
     }
 }
@@ -6204,6 +6669,20 @@ class ClearLaunchConfigurationAttributesRequest extends  AbstractModel {
          */
         this.ClearDataDisks = null;
 
+        /**
+         * 是否清空云服务器主机名相关设置信息，非必填，默认为 false。
+填 true 代表清空主机名设置信息，清空后基于此新创建的云主机将不设置主机名。
+         * @type {boolean || null}
+         */
+        this.ClearHostNameSettings = null;
+
+        /**
+         * 是否清空云服务器实例名相关设置信息，非必填，默认为 false。
+填 true 代表清空主机名设置信息，清空后基于此新创建的云主机将按照“as-{{ 伸缩组AutoScalingGroupName }}”进行设置。
+         * @type {boolean || null}
+         */
+        this.ClearInstanceNameSettings = null;
+
     }
 
     /**
@@ -6215,29 +6694,37 @@ class ClearLaunchConfigurationAttributesRequest extends  AbstractModel {
         }
         this.LaunchConfigurationId = 'LaunchConfigurationId' in params ? params.LaunchConfigurationId : null;
         this.ClearDataDisks = 'ClearDataDisks' in params ? params.ClearDataDisks : null;
+        this.ClearHostNameSettings = 'ClearHostNameSettings' in params ? params.ClearHostNameSettings : null;
+        this.ClearInstanceNameSettings = 'ClearInstanceNameSettings' in params ? params.ClearInstanceNameSettings : null;
 
     }
 }
 
 /**
- * PreviewPaiDomainName返回参数结构体
+ * 应用型负载均衡器标识信息
  * @class
  */
-class PreviewPaiDomainNameResponse extends  AbstractModel {
+class ForwardLoadBalancerIdentification extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 可用的PAI域名
+         * 负载均衡器ID
          * @type {string || null}
          */
-        this.DomainName = null;
+        this.LoadBalancerId = null;
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 应用型负载均衡监听器 ID
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.ListenerId = null;
+
+        /**
+         * 转发规则ID，注意：针对七层监听器此参数必填
+         * @type {string || null}
+         */
+        this.LocationId = null;
 
     }
 
@@ -6248,25 +6735,41 @@ class PreviewPaiDomainNameResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DomainName = 'DomainName' in params ? params.DomainName : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
+        this.ListenerId = 'ListenerId' in params ? params.ListenerId : null;
+        this.LocationId = 'LocationId' in params ? params.LocationId : null;
 
     }
 }
 
 /**
- * DeleteAutoScalingGroup请求参数结构体
+ * 伸缩组配置建议。
  * @class
  */
-class DeleteAutoScalingGroupRequest extends  AbstractModel {
+class AutoScalingAdvice extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 伸缩组ID
+         * 伸缩组ID。
          * @type {string || null}
          */
         this.AutoScalingGroupId = null;
+
+        /**
+         * 伸缩组警告级别。取值范围：<br>
+<li>NORMAL：正常<br>
+<li>WARNING：警告级别<br>
+<li>CRITICAL：严重级别<br>
+         * @type {string || null}
+         */
+        this.Level = null;
+
+        /**
+         * 伸缩组配置建议集合。
+         * @type {Array.<Advice> || null}
+         */
+        this.Advices = null;
 
     }
 
@@ -6278,41 +6781,16 @@ class DeleteAutoScalingGroupRequest extends  AbstractModel {
             return;
         }
         this.AutoScalingGroupId = 'AutoScalingGroupId' in params ? params.AutoScalingGroupId : null;
+        this.Level = 'Level' in params ? params.Level : null;
 
-    }
-}
-
-/**
- * RemoveInstances请求参数结构体
- * @class
- */
-class RemoveInstancesRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 伸缩组ID
-         * @type {string || null}
-         */
-        this.AutoScalingGroupId = null;
-
-        /**
-         * CVM实例ID列表
-         * @type {Array.<string> || null}
-         */
-        this.InstanceIds = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
+        if (params.Advices) {
+            this.Advices = new Array();
+            for (let z in params.Advices) {
+                let obj = new Advice();
+                obj.deserialize(params.Advices[z]);
+                this.Advices.push(obj);
+            }
         }
-        this.AutoScalingGroupId = 'AutoScalingGroupId' in params ? params.AutoScalingGroupId : null;
-        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
 
     }
 }
@@ -6383,6 +6861,116 @@ class AttachInstancesRequest extends  AbstractModel {
         }
         this.AutoScalingGroupId = 'AutoScalingGroupId' in params ? params.AutoScalingGroupId : null;
         this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+
+    }
+}
+
+/**
+ * AttachLoadBalancers请求参数结构体
+ * @class
+ */
+class AttachLoadBalancersRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 伸缩组ID
+         * @type {string || null}
+         */
+        this.AutoScalingGroupId = null;
+
+        /**
+         * 传统型负载均衡器ID列表，每个伸缩组绑定传统型负载均衡器数量上限为20，LoadBalancerIds 和 ForwardLoadBalancers 二者同时最多只能指定一个
+         * @type {Array.<string> || null}
+         */
+        this.LoadBalancerIds = null;
+
+        /**
+         * 应用型负载均衡器列表，每个伸缩组绑定应用型负载均衡器数量上限为50，LoadBalancerIds 和 ForwardLoadBalancers 二者同时最多只能指定一个
+         * @type {Array.<ForwardLoadBalancer> || null}
+         */
+        this.ForwardLoadBalancers = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AutoScalingGroupId = 'AutoScalingGroupId' in params ? params.AutoScalingGroupId : null;
+        this.LoadBalancerIds = 'LoadBalancerIds' in params ? params.LoadBalancerIds : null;
+
+        if (params.ForwardLoadBalancers) {
+            this.ForwardLoadBalancers = new Array();
+            for (let z in params.ForwardLoadBalancers) {
+                let obj = new ForwardLoadBalancer();
+                obj.deserialize(params.ForwardLoadBalancers[z]);
+                this.ForwardLoadBalancers.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * 竞价混合模式下，各计费类型实例的分配策略。包括按量计费实例和竞价计费实例。
+ * @class
+ */
+class SpotMixedAllocationPolicy extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 混合模式下，基础容量的大小，基础容量部分固定为按量计费实例。默认值 0，最大不可超过伸缩组的最大实例数。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.BaseCapacity = null;
+
+        /**
+         * 超出基础容量部分，按量计费实例所占的比例。取值范围 [0, 100]，0 代表超出基础容量的部分仅生产竞价实例，100 代表仅生产按量实例，默认值为 70。按百分比计算按量实例数时，向上取整。
+比如，总期望实例数取 3，基础容量取 1，超基础部分按量百分比取 1，则最终按量 2 台（1 台来自基础容量，1 台按百分比向上取整得到），竞价 1台。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.OnDemandPercentageAboveBaseCapacity = null;
+
+        /**
+         * 混合模式下，竞价实例的分配策略。取值包括 COST_OPTIMIZED 和 CAPACITY_OPTIMIZED，默认取 COST_OPTIMIZED。
+<br><li> COST_OPTIMIZED，成本优化策略。对于启动配置内的所有机型，按照各机型在各可用区的每核单价由小到大依次尝试。优先尝试购买每核单价最便宜的，如果购买失败则尝试购买次便宜的，以此类推。
+<br><li> CAPACITY_OPTIMIZED，容量优化策略。对于启动配置内的所有机型，按照各机型在各可用区的库存情况由大到小依次尝试。优先尝试购买剩余库存最大的机型，这样可尽量降低竞价实例被动回收的发生概率。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SpotAllocationStrategy = null;
+
+        /**
+         * 按量实例替补功能。取值范围：
+<br><li> TRUE，开启该功能，当所有竞价机型因库存不足等原因全部购买失败后，尝试购买按量实例。
+<br><li> FALSE，不开启该功能，伸缩组在需要扩容竞价实例时仅尝试所配置的竞价机型。
+
+默认取值： TRUE。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.CompensateWithBaseInstance = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BaseCapacity = 'BaseCapacity' in params ? params.BaseCapacity : null;
+        this.OnDemandPercentageAboveBaseCapacity = 'OnDemandPercentageAboveBaseCapacity' in params ? params.OnDemandPercentageAboveBaseCapacity : null;
+        this.SpotAllocationStrategy = 'SpotAllocationStrategy' in params ? params.SpotAllocationStrategy : null;
+        this.CompensateWithBaseInstance = 'CompensateWithBaseInstance' in params ? params.CompensateWithBaseInstance : null;
 
     }
 }
@@ -6532,6 +7120,12 @@ class Activity extends  AbstractModel {
          */
         this.LifecycleActionResultSet = null;
 
+        /**
+         * 伸缩活动状态详细描述。
+         * @type {Array.<DetailedStatusMessage> || null}
+         */
+        this.DetailedStatusMessageSet = null;
+
     }
 
     /**
@@ -6568,6 +7162,15 @@ class Activity extends  AbstractModel {
                 let obj = new LifecycleActionResultInfo();
                 obj.deserialize(params.LifecycleActionResultSet[z]);
                 this.LifecycleActionResultSet.push(obj);
+            }
+        }
+
+        if (params.DetailedStatusMessageSet) {
+            this.DetailedStatusMessageSet = new Array();
+            for (let z in params.DetailedStatusMessageSet) {
+                let obj = new DetailedStatusMessage();
+                obj.deserialize(params.DetailedStatusMessageSet[z]);
+                this.DetailedStatusMessageSet.push(obj);
             }
         }
 
@@ -6677,18 +7280,48 @@ class RunMonitorServiceEnabled extends  AbstractModel {
 }
 
 /**
- * DeleteLifecycleHook返回参数结构体
+ * ModifyNotificationConfiguration请求参数结构体
  * @class
  */
-class DeleteLifecycleHookResponse extends  AbstractModel {
+class ModifyNotificationConfigurationRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 待修改的通知ID。
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.AutoScalingNotificationId = null;
+
+        /**
+         * 通知类型，即为需要订阅的通知类型集合，取值范围如下：
+<li>SCALE_OUT_SUCCESSFUL：扩容成功</li>
+<li>SCALE_OUT_FAILED：扩容失败</li>
+<li>SCALE_IN_SUCCESSFUL：缩容成功</li>
+<li>SCALE_IN_FAILED：缩容失败</li>
+<li>REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL：替换不健康子机成功</li>
+<li>REPLACE_UNHEALTHY_INSTANCE_FAILED：替换不健康子机失败</li>
+         * @type {Array.<string> || null}
+         */
+        this.NotificationTypes = null;
+
+        /**
+         * 通知组ID，即为用户组ID集合，用户组ID可以通过[ListGroups](https://cloud.tencent.com/document/product/598/34589)查询。
+         * @type {Array.<string> || null}
+         */
+        this.NotificationUserGroupIds = null;
+
+        /**
+         * CMQ 队列或 TDMQ CMQ 队列名。
+         * @type {string || null}
+         */
+        this.QueueName = null;
+
+        /**
+         * CMQ 主题或 TDMQ CMQ 主题名。
+         * @type {string || null}
+         */
+        this.TopicName = null;
 
     }
 
@@ -6699,7 +7332,11 @@ class DeleteLifecycleHookResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.AutoScalingNotificationId = 'AutoScalingNotificationId' in params ? params.AutoScalingNotificationId : null;
+        this.NotificationTypes = 'NotificationTypes' in params ? params.NotificationTypes : null;
+        this.NotificationUserGroupIds = 'NotificationUserGroupIds' in params ? params.NotificationUserGroupIds : null;
+        this.QueueName = 'QueueName' in params ? params.QueueName : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
 
     }
 }
@@ -6739,6 +7376,69 @@ class ActivtyRelatedInstance extends  AbstractModel {
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.InstanceStatus = 'InstanceStatus' in params ? params.InstanceStatus : null;
+
+    }
+}
+
+/**
+ * CreateAutoScalingGroupFromInstance请求参数结构体
+ * @class
+ */
+class CreateAutoScalingGroupFromInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 伸缩组名称，在您账号中必须唯一。名称仅支持中文、英文、数字、下划线、分隔符"-"、小数点，最大长度不能超55个字节。
+         * @type {string || null}
+         */
+        this.AutoScalingGroupName = null;
+
+        /**
+         * 实例ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 最小实例数，取值范围为0-2000。
+         * @type {number || null}
+         */
+        this.MinSize = null;
+
+        /**
+         * 最大实例数，取值范围为0-2000。
+         * @type {number || null}
+         */
+        this.MaxSize = null;
+
+        /**
+         * 期望实例数，大小介于最小实例数和最大实例数之间。
+         * @type {number || null}
+         */
+        this.DesiredCapacity = null;
+
+        /**
+         * 是否继承实例标签，默认值为False
+         * @type {boolean || null}
+         */
+        this.InheritInstanceTag = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AutoScalingGroupName = 'AutoScalingGroupName' in params ? params.AutoScalingGroupName : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.MinSize = 'MinSize' in params ? params.MinSize : null;
+        this.MaxSize = 'MaxSize' in params ? params.MaxSize : null;
+        this.DesiredCapacity = 'DesiredCapacity' in params ? params.DesiredCapacity : null;
+        this.InheritInstanceTag = 'InheritInstanceTag' in params ? params.InheritInstanceTag : null;
 
     }
 }
@@ -6888,24 +7588,12 @@ class InstanceChargePrepaid extends  AbstractModel {
 }
 
 /**
- * DescribePaiInstances返回参数结构体
+ * DeleteLifecycleHook返回参数结构体
  * @class
  */
-class DescribePaiInstancesResponse extends  AbstractModel {
+class DeleteLifecycleHookResponse extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * 符合条件的PAI实例数量
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * PAI实例详细信息
-         * @type {Array.<PaiInstance> || null}
-         */
-        this.PaiInstanceSet = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -6921,16 +7609,6 @@ class DescribePaiInstancesResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.PaiInstanceSet) {
-            this.PaiInstanceSet = new Array();
-            for (let z in params.PaiInstanceSet) {
-                let obj = new PaiInstance();
-                obj.deserialize(params.PaiInstanceSet[z]);
-                this.PaiInstanceSet.push(obj);
-            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -6988,74 +7666,77 @@ module.exports = {
     AutoScalingNotification: AutoScalingNotification,
     ModifyScheduledActionRequest: ModifyScheduledActionRequest,
     DescribeAutoScalingGroupsRequest: DescribeAutoScalingGroupsRequest,
-    CreateAutoScalingGroupResponse: CreateAutoScalingGroupResponse,
+    LaunchConfiguration: LaunchConfiguration,
     DescribeAccountLimitsResponse: DescribeAccountLimitsResponse,
-    CreatePaiInstanceResponse: CreatePaiInstanceResponse,
     CreateLaunchConfigurationResponse: CreateLaunchConfigurationResponse,
+    Advice: Advice,
     CreateLifecycleHookResponse: CreateLifecycleHookResponse,
     ClearLaunchConfigurationAttributesResponse: ClearLaunchConfigurationAttributesResponse,
     DescribeAutoScalingGroupsResponse: DescribeAutoScalingGroupsResponse,
-    CreatePaiInstanceRequest: CreatePaiInstanceRequest,
+    CreateScheduledActionRequest: CreateScheduledActionRequest,
     SystemDisk: SystemDisk,
     SpotMarketOptions: SpotMarketOptions,
     StopAutoScalingInstancesResponse: StopAutoScalingInstancesResponse,
     DescribeScalingPoliciesRequest: DescribeScalingPoliciesRequest,
     InstanceNameSettings: InstanceNameSettings,
+    DetailedStatusMessage: DetailedStatusMessage,
     ModifyScheduledActionResponse: ModifyScheduledActionResponse,
-    CreateAutoScalingGroupFromInstanceRequest: CreateAutoScalingGroupFromInstanceRequest,
+    AttachLoadBalancersResponse: AttachLoadBalancersResponse,
     ExecuteScalingPolicyResponse: ExecuteScalingPolicyResponse,
-    ModifyLaunchConfigurationAttributesResponse: ModifyLaunchConfigurationAttributesResponse,
+    DeleteAutoScalingGroupRequest: DeleteAutoScalingGroupRequest,
     SetInstancesProtectionResponse: SetInstancesProtectionResponse,
     StartAutoScalingInstancesResponse: StartAutoScalingInstancesResponse,
     CompleteLifecycleActionRequest: CompleteLifecycleActionRequest,
     CreateScalingPolicyResponse: CreateScalingPolicyResponse,
     CreateNotificationConfigurationResponse: CreateNotificationConfigurationResponse,
     DescribeLaunchConfigurationsResponse: DescribeLaunchConfigurationsResponse,
+    RemoveInstancesRequest: RemoveInstancesRequest,
     DeleteScalingPolicyResponse: DeleteScalingPolicyResponse,
     Tag: Tag,
+    DetachLoadBalancersRequest: DetachLoadBalancersRequest,
     DescribeAutoScalingInstancesRequest: DescribeAutoScalingInstancesRequest,
-    LimitedLoginSettings: LimitedLoginSettings,
     ModifyLoadBalancersRequest: ModifyLoadBalancersRequest,
     RemoveInstancesResponse: RemoveInstancesResponse,
     ModifyScalingPolicyResponse: ModifyScalingPolicyResponse,
     SetInstancesProtectionRequest: SetInstancesProtectionRequest,
     DeleteNotificationConfigurationResponse: DeleteNotificationConfigurationResponse,
     DetachInstancesResponse: DetachInstancesResponse,
+    ModifyLaunchConfigurationAttributesResponse: ModifyLaunchConfigurationAttributesResponse,
     CreateLaunchConfigurationRequest: CreateLaunchConfigurationRequest,
     AutoScalingGroup: AutoScalingGroup,
     AttachInstancesResponse: AttachInstancesResponse,
     DescribeAutoScalingGroupLastActivitiesResponse: DescribeAutoScalingGroupLastActivitiesResponse,
     DescribeAccountLimitsRequest: DescribeAccountLimitsRequest,
     UpgradeLifecycleHookRequest: UpgradeLifecycleHookRequest,
+    DetachLoadBalancersResponse: DetachLoadBalancersResponse,
     ScalingPolicy: ScalingPolicy,
     DescribeAutoScalingGroupLastActivitiesRequest: DescribeAutoScalingGroupLastActivitiesRequest,
     HostNameSettings: HostNameSettings,
     ModifyLoadBalancersResponse: ModifyLoadBalancersResponse,
-    DescribePaiInstancesRequest: DescribePaiInstancesRequest,
     CreateNotificationConfigurationRequest: CreateNotificationConfigurationRequest,
     DescribeScheduledActionsResponse: DescribeScheduledActionsResponse,
-    ModifyNotificationConfigurationRequest: ModifyNotificationConfigurationRequest,
     DeleteLifecycleHookRequest: DeleteLifecycleHookRequest,
+    ModifyLoadBalancerTargetAttributesResponse: ModifyLoadBalancerTargetAttributesResponse,
     ModifyAutoScalingGroupResponse: ModifyAutoScalingGroupResponse,
     DeleteLaunchConfigurationRequest: DeleteLaunchConfigurationRequest,
     ModifyScalingPolicyRequest: ModifyScalingPolicyRequest,
     InstanceMarketOptionsRequest: InstanceMarketOptionsRequest,
     UpgradeLifecycleHookResponse: UpgradeLifecycleHookResponse,
     InstanceTag: InstanceTag,
-    PaiInstance: PaiInstance,
+    ModifyLifecycleHookResponse: ModifyLifecycleHookResponse,
+    DescribeAutoScalingAdvicesResponse: DescribeAutoScalingAdvicesResponse,
     CreateAutoScalingGroupRequest: CreateAutoScalingGroupRequest,
     DeleteScheduledActionResponse: DeleteScheduledActionResponse,
     UpgradeLaunchConfigurationRequest: UpgradeLaunchConfigurationRequest,
     DescribeAutoScalingActivitiesResponse: DescribeAutoScalingActivitiesResponse,
     DescribeNotificationConfigurationsResponse: DescribeNotificationConfigurationsResponse,
     DataDisk: DataDisk,
-    PreviewPaiDomainNameRequest: PreviewPaiDomainNameRequest,
     DeleteScalingPolicyRequest: DeleteScalingPolicyRequest,
     LoginSettings: LoginSettings,
     CreateAutoScalingGroupFromInstanceResponse: CreateAutoScalingGroupFromInstanceResponse,
     DetachInstancesRequest: DetachInstancesRequest,
     Instance: Instance,
-    CreateScheduledActionRequest: CreateScheduledActionRequest,
+    DescribeAutoScalingInstancesResponse: DescribeAutoScalingInstancesResponse,
     EnhancedService: EnhancedService,
     DeleteLaunchConfigurationResponse: DeleteLaunchConfigurationResponse,
     DescribeScheduledActionsRequest: DescribeScheduledActionsRequest,
@@ -7066,21 +7747,24 @@ module.exports = {
     CreateScheduledActionResponse: CreateScheduledActionResponse,
     CreateLifecycleHookRequest: CreateLifecycleHookRequest,
     ScheduledAction: ScheduledAction,
+    ModifyLifecycleHookRequest: ModifyLifecycleHookRequest,
     CompleteLifecycleActionResponse: CompleteLifecycleActionResponse,
     ScaleOutInstancesResponse: ScaleOutInstancesResponse,
     Filter: Filter,
     DescribeLifecycleHooksRequest: DescribeLifecycleHooksRequest,
     ServiceSettings: ServiceSettings,
-    LaunchConfiguration: LaunchConfiguration,
+    CreateAutoScalingGroupResponse: CreateAutoScalingGroupResponse,
     TargetAttribute: TargetAttribute,
     ModifyNotificationConfigurationResponse: ModifyNotificationConfigurationResponse,
-    DescribeAutoScalingInstancesResponse: DescribeAutoScalingInstancesResponse,
+    LimitedLoginSettings: LimitedLoginSettings,
     DescribeLifecycleHooksResponse: DescribeLifecycleHooksResponse,
     CreateScalingPolicyRequest: CreateScalingPolicyRequest,
     ScaleInInstancesResponse: ScaleInInstancesResponse,
+    DescribeAutoScalingAdvicesRequest: DescribeAutoScalingAdvicesRequest,
     DeleteNotificationConfigurationRequest: DeleteNotificationConfigurationRequest,
     DescribeLaunchConfigurationsRequest: DescribeLaunchConfigurationsRequest,
     NotificationTarget: NotificationTarget,
+    ModifyLoadBalancerTargetAttributesRequest: ModifyLoadBalancerTargetAttributesRequest,
     DeleteAutoScalingGroupResponse: DeleteAutoScalingGroupResponse,
     LifecycleActionResultInfo: LifecycleActionResultInfo,
     AutoScalingGroupAbstract: AutoScalingGroupAbstract,
@@ -7091,23 +7775,25 @@ module.exports = {
     LifecycleHook: LifecycleHook,
     ForwardLoadBalancer: ForwardLoadBalancer,
     ClearLaunchConfigurationAttributesRequest: ClearLaunchConfigurationAttributesRequest,
-    PreviewPaiDomainNameResponse: PreviewPaiDomainNameResponse,
-    DeleteAutoScalingGroupRequest: DeleteAutoScalingGroupRequest,
-    RemoveInstancesRequest: RemoveInstancesRequest,
+    ForwardLoadBalancerIdentification: ForwardLoadBalancerIdentification,
+    AutoScalingAdvice: AutoScalingAdvice,
     StartAutoScalingInstancesRequest: StartAutoScalingInstancesRequest,
     AttachInstancesRequest: AttachInstancesRequest,
+    AttachLoadBalancersRequest: AttachLoadBalancersRequest,
+    SpotMixedAllocationPolicy: SpotMixedAllocationPolicy,
     DescribeScalingPoliciesResponse: DescribeScalingPoliciesResponse,
     Activity: Activity,
     ModifyDesiredCapacityResponse: ModifyDesiredCapacityResponse,
     StopAutoScalingInstancesRequest: StopAutoScalingInstancesRequest,
     RunMonitorServiceEnabled: RunMonitorServiceEnabled,
-    DeleteLifecycleHookResponse: DeleteLifecycleHookResponse,
+    ModifyNotificationConfigurationRequest: ModifyNotificationConfigurationRequest,
     ActivtyRelatedInstance: ActivtyRelatedInstance,
+    CreateAutoScalingGroupFromInstanceRequest: CreateAutoScalingGroupFromInstanceRequest,
     InternetAccessible: InternetAccessible,
     EnableAutoScalingGroupResponse: EnableAutoScalingGroupResponse,
     UpgradeLaunchConfigurationResponse: UpgradeLaunchConfigurationResponse,
     InstanceChargePrepaid: InstanceChargePrepaid,
-    DescribePaiInstancesResponse: DescribePaiInstancesResponse,
+    DeleteLifecycleHookResponse: DeleteLifecycleHookResponse,
     ExecuteScalingPolicyRequest: ExecuteScalingPolicyRequest,
 
 }

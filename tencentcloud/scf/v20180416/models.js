@@ -354,7 +354,7 @@ class GetReservedConcurrencyConfigResponse extends  AbstractModel {
         super();
 
         /**
-         * 该函数的保留并发内存。
+         * 该函数的最大独占配额。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
@@ -377,6 +377,40 @@ class GetReservedConcurrencyConfigResponse extends  AbstractModel {
         }
         this.ReservedMem = 'ReservedMem' in params ? params.ReservedMem : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * HTTP函数支持其他访问协议的参数
+ * @class
+ */
+class ProtocolParams extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * WebSockets协议支持的参数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {WSParams || null}
+         */
+        this.WSParams = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.WSParams) {
+            let obj = new WSParams();
+            obj.deserialize(params.WSParams)
+            this.WSParams = obj;
+        }
 
     }
 }
@@ -1012,6 +1046,13 @@ class VersionProvisionedConcurrencyInfo extends  AbstractModel {
          */
         this.Qualifier = null;
 
+        /**
+         * 预置并发定时任务。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<TriggerAction> || null}
+         */
+        this.TriggerActions = null;
+
     }
 
     /**
@@ -1026,6 +1067,15 @@ class VersionProvisionedConcurrencyInfo extends  AbstractModel {
         this.Status = 'Status' in params ? params.Status : null;
         this.StatusReason = 'StatusReason' in params ? params.StatusReason : null;
         this.Qualifier = 'Qualifier' in params ? params.Qualifier : null;
+
+        if (params.TriggerActions) {
+            this.TriggerActions = new Array();
+            for (let z in params.TriggerActions) {
+                let obj = new TriggerAction();
+                obj.deserialize(params.TriggerActions[z]);
+                this.TriggerActions.push(obj);
+            }
+        }
 
     }
 }
@@ -1218,6 +1268,62 @@ class Tag extends  AbstractModel {
 }
 
 /**
+ * GetRequestStatus请求参数结构体
+ * @class
+ */
+class GetRequestStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 函数名称
+         * @type {string || null}
+         */
+        this.FunctionName = null;
+
+        /**
+         * 需要查询状态的请求 id
+         * @type {string || null}
+         */
+        this.FunctionRequestId = null;
+
+        /**
+         * 函数的所在的命名空间
+         * @type {string || null}
+         */
+        this.Namespace = null;
+
+        /**
+         * 查询的开始时间，例如：2017-05-16 20:00:00，不填默认为当前时间 - 15min
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 查询的结束时间，例如：2017-05-16 20:59:59。StartTime 为空时，EndTime 默认为当前时间；StartTime 有值时，需要同时传 EndTime。EndTime 需要晚于 StartTime。
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FunctionName = 'FunctionName' in params ? params.FunctionName : null;
+        this.FunctionRequestId = 'FunctionRequestId' in params ? params.FunctionRequestId : null;
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+
+    }
+}
+
+/**
  * 日志过滤条件，用于区分正确与错误日志
  * @class
  */
@@ -1343,7 +1449,7 @@ class DeleteFunctionRequest extends  AbstractModel {
         this.Namespace = null;
 
         /**
-         * 函数版本
+         * 填写需要删除的版本号，不填默认删除函数下全部版本。
          * @type {string || null}
          */
         this.Qualifier = null;
@@ -1386,6 +1492,46 @@ class CopyFunctionResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * InvokeFunction返回参数结构体
+ * @class
+ */
+class InvokeFunctionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 函数执行结果
+         * @type {Result || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new Result();
+            obj.deserialize(params.Result)
+            this.Result = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -1529,6 +1675,12 @@ class ListNamespacesRequest extends  AbstractModel {
          */
         this.Order = null;
 
+        /**
+         * 关键字匹配搜索，Key 可选值为 Namespace 和 Description，多个搜索条件之间是与的关系
+         * @type {Array.<SearchKey> || null}
+         */
+        this.SearchKey = null;
+
     }
 
     /**
@@ -1542,6 +1694,15 @@ class ListNamespacesRequest extends  AbstractModel {
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Orderby = 'Orderby' in params ? params.Orderby : null;
         this.Order = 'Order' in params ? params.Order : null;
+
+        if (params.SearchKey) {
+            this.SearchKey = new Array();
+            for (let z in params.SearchKey) {
+                let obj = new SearchKey();
+                obj.deserialize(params.SearchKey[z]);
+                this.SearchKey.push(obj);
+            }
+        }
 
     }
 }
@@ -1690,6 +1851,35 @@ class ListVersionByFunctionResponse extends  AbstractModel {
 }
 
 /**
+ * HTTP函数通过WebSockets协议访问时的参数
+ * @class
+ */
+class WSParams extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 空闲超时时间, 单位秒，默认15s。可配置范围1~1800s。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.IdleTimeOut = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.IdleTimeOut = 'IdleTimeOut' in params ? params.IdleTimeOut : null;
+
+    }
+}
+
+/**
  * GetAlias请求参数结构体
  * @class
  */
@@ -1808,16 +1998,16 @@ class UpdateFunctionCodeRequest extends  AbstractModel {
         super();
 
         /**
-         * 函数处理方法名称。名称格式支持“文件名称.函数名称”形式（java 名称格式 包名.类名::方法名），文件名称和函数名称之间以"."隔开，文件名称和函数名称要求以字母开始和结尾，中间允许插入字母、数字、下划线和连接符，文件名称和函数名字的长度要求 2-60 个字符
-         * @type {string || null}
-         */
-        this.Handler = null;
-
-        /**
          * 要修改的函数名称
          * @type {string || null}
          */
         this.FunctionName = null;
+
+        /**
+         * 函数处理方法名称。名称格式支持“文件名称.函数名称”形式（java 名称格式 包名.类名::方法名），文件名称和函数名称之间以"."隔开，文件名称和函数名称要求以字母开始和结尾，中间允许插入字母、数字、下划线和连接符，文件名称和函数名字的长度要求 2-60 个字符
+         * @type {string || null}
+         */
+        this.Handler = null;
 
         /**
          * 对象存储桶名称
@@ -1848,6 +2038,12 @@ class UpdateFunctionCodeRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.CosBucketRegion = null;
+
+        /**
+         * 是否自动安装依赖
+         * @type {string || null}
+         */
+        this.InstallDependency = null;
 
         /**
          * 函数所属环境
@@ -1882,13 +2078,14 @@ class UpdateFunctionCodeRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Handler = 'Handler' in params ? params.Handler : null;
         this.FunctionName = 'FunctionName' in params ? params.FunctionName : null;
+        this.Handler = 'Handler' in params ? params.Handler : null;
         this.CosBucketName = 'CosBucketName' in params ? params.CosBucketName : null;
         this.CosObjectName = 'CosObjectName' in params ? params.CosObjectName : null;
         this.ZipFile = 'ZipFile' in params ? params.ZipFile : null;
         this.Namespace = 'Namespace' in params ? params.Namespace : null;
         this.CosBucketRegion = 'CosBucketRegion' in params ? params.CosBucketRegion : null;
+        this.InstallDependency = 'InstallDependency' in params ? params.InstallDependency : null;
         this.EnvId = 'EnvId' in params ? params.EnvId : null;
         this.Publish = 'Publish' in params ? params.Publish : null;
 
@@ -1965,6 +2162,12 @@ class UpdateFunctionConfigurationRequest extends  AbstractModel {
         this.Role = null;
 
         /**
+         * [在线依赖安装](https://cloud.tencent.com/document/product/583/37920)，TRUE 表示安装，默认值为 FALSE。仅支持 Node.js 函数。
+         * @type {string || null}
+         */
+        this.InstallDependency = null;
+
+        /**
          * 日志投递到的cls日志集ID
          * @type {string || null}
          */
@@ -2013,10 +2216,16 @@ class UpdateFunctionConfigurationRequest extends  AbstractModel {
         this.CfsConfig = null;
 
         /**
-         * 函数初始化执行超时时间，默认15秒
+         * 函数初始化执行超时时间
          * @type {number || null}
          */
         this.InitTimeout = null;
+
+        /**
+         * HTTP函数配置ProtocolType访问协议，当前协议可配置的参数
+         * @type {ProtocolParams || null}
+         */
+        this.ProtocolParams = null;
 
     }
 
@@ -2046,6 +2255,7 @@ class UpdateFunctionConfigurationRequest extends  AbstractModel {
             this.VpcConfig = obj;
         }
         this.Role = 'Role' in params ? params.Role : null;
+        this.InstallDependency = 'InstallDependency' in params ? params.InstallDependency : null;
         this.ClsLogsetId = 'ClsLogsetId' in params ? params.ClsLogsetId : null;
         this.ClsTopicId = 'ClsTopicId' in params ? params.ClsTopicId : null;
         this.Publish = 'Publish' in params ? params.Publish : null;
@@ -2079,6 +2289,12 @@ class UpdateFunctionConfigurationRequest extends  AbstractModel {
         }
         this.InitTimeout = 'InitTimeout' in params ? params.InitTimeout : null;
 
+        if (params.ProtocolParams) {
+            let obj = new ProtocolParams();
+            obj.deserialize(params.ProtocolParams)
+            this.ProtocolParams = obj;
+        }
+
     }
 }
 
@@ -2091,7 +2307,7 @@ class DeleteReservedConcurrencyConfigRequest extends  AbstractModel {
         super();
 
         /**
-         * 需要删除预置并发的函数的名称
+         * 需要删除最大独占配额的函数的名称
          * @type {string || null}
          */
         this.FunctionName = null;
@@ -2233,6 +2449,12 @@ class TerminateAsyncEventRequest extends  AbstractModel {
          */
         this.Namespace = null;
 
+        /**
+         * true，向指定请求[发送 SIGTERM 终止信号](https://cloud.tencent.com/document/product/583/63969#.E5.8F.91.E9.80.81.E7.BB.88.E6.AD.A2.E4.BF.A1.E5.8F.B7]， ，默认值为 false。
+         * @type {boolean || null}
+         */
+        this.GraceShutdown = null;
+
     }
 
     /**
@@ -2245,6 +2467,7 @@ class TerminateAsyncEventRequest extends  AbstractModel {
         this.FunctionName = 'FunctionName' in params ? params.FunctionName : null;
         this.InvokeRequestId = 'InvokeRequestId' in params ? params.InvokeRequestId : null;
         this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.GraceShutdown = 'GraceShutdown' in params ? params.GraceShutdown : null;
 
     }
 }
@@ -2417,13 +2640,13 @@ class LayerVersionSimple extends  AbstractModel {
         super();
 
         /**
-         * layer名称
+         * 绑定的层名称。解绑层需传递空字符串。
          * @type {string || null}
          */
         this.LayerName = null;
 
         /**
-         * 版本号
+         * 绑定或解绑层的版本号。解绑函数版本关联的最后一个层版本时，LayerVersion 填 0。
          * @type {number || null}
          */
         this.LayerVersion = null;
@@ -2811,7 +3034,7 @@ class CreateTriggerRequest extends  AbstractModel {
         this.TriggerName = null;
 
         /**
-         * 触发器类型，目前支持 cos 、cmq、 timer、 ckafka、apigw类型
+         * 触发器类型，目前支持 cos 、cmq、 timer、 ckafka、apigw类型。创建 cls 触发器请参考[CLS 创建投递 SCF 任务](https://cloud.tencent.com/document/product/614/61096)。
          * @type {string || null}
          */
         this.Type = null;
@@ -2829,7 +3052,7 @@ class CreateTriggerRequest extends  AbstractModel {
         this.Namespace = null;
 
         /**
-         * 函数的版本
+         * 函数的版本，默认为 $LATEST，建议填写 [$DEFAULT](https://cloud.tencent.com/document/product/583/36149#.E9.BB.98.E8.AE.A4.E5.88.AB.E5.90.8D)方便后续进行版本的灰度发布。
          * @type {string || null}
          */
         this.Qualifier = null;
@@ -3351,6 +3574,83 @@ class TriggerInfo extends  AbstractModel {
 }
 
 /**
+ * 函数运行状态
+ * @class
+ */
+class RequestStatus extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 函数的名称
+         * @type {string || null}
+         */
+        this.FunctionName = null;
+
+        /**
+         * 函数执行完成后的返回值
+         * @type {string || null}
+         */
+        this.RetMsg = null;
+
+        /**
+         * 查询的请求 id
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+        /**
+         * 请求开始时间
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 请求执行结果， 0 表示执行成功，1表示运行中，-1 表示执行异常。
+         * @type {number || null}
+         */
+        this.RetCode = null;
+
+        /**
+         * 请求运行耗时，单位：ms
+         * @type {number || null}
+         */
+        this.Duration = null;
+
+        /**
+         * 请求消耗内存，单位为 MB
+         * @type {number || null}
+         */
+        this.MemUsage = null;
+
+        /**
+         * 重试次数
+         * @type {number || null}
+         */
+        this.RetryNum = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FunctionName = 'FunctionName' in params ? params.FunctionName : null;
+        this.RetMsg = 'RetMsg' in params ? params.RetMsg : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.RetCode = 'RetCode' in params ? params.RetCode : null;
+        this.Duration = 'Duration' in params ? params.Duration : null;
+        this.MemUsage = 'MemUsage' in params ? params.MemUsage : null;
+        this.RetryNum = 'RetryNum' in params ? params.RetryNum : null;
+
+    }
+}
+
+/**
  * CreateFunction请求参数结构体
  * @class
  */
@@ -3425,6 +3725,12 @@ class CreateFunctionRequest extends  AbstractModel {
         this.Role = null;
 
         /**
+         * [在线依赖安装](https://cloud.tencent.com/document/product/583/37920)，TRUE 表示安装，默认值为 FALSE。仅支持 Node.js 函数。
+         * @type {string || null}
+         */
+        this.InstallDependency = null;
+
+        /**
          * 函数日志投递到的CLS LogsetID
          * @type {string || null}
          */
@@ -3473,7 +3779,7 @@ class CreateFunctionRequest extends  AbstractModel {
         this.CfsConfig = null;
 
         /**
-         * 函数初始化超时时间
+         * 函数初始化超时时间，默认 65s，镜像部署函数默认 90s。
          * @type {number || null}
          */
         this.InitTimeout = null;
@@ -3495,6 +3801,18 @@ class CreateFunctionRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.TraceEnable = null;
+
+        /**
+         * HTTP函数支持的访问协议。当前支持WebSockets协议，值为WS
+         * @type {string || null}
+         */
+        this.ProtocolType = null;
+
+        /**
+         * HTTP函数配置ProtocolType访问协议，当前协议可配置的参数
+         * @type {ProtocolParams || null}
+         */
+        this.ProtocolParams = null;
 
     }
 
@@ -3531,6 +3849,7 @@ class CreateFunctionRequest extends  AbstractModel {
         }
         this.Namespace = 'Namespace' in params ? params.Namespace : null;
         this.Role = 'Role' in params ? params.Role : null;
+        this.InstallDependency = 'InstallDependency' in params ? params.InstallDependency : null;
         this.ClsLogsetId = 'ClsLogsetId' in params ? params.ClsLogsetId : null;
         this.ClsTopicId = 'ClsTopicId' in params ? params.ClsTopicId : null;
         this.Type = 'Type' in params ? params.Type : null;
@@ -3574,6 +3893,13 @@ class CreateFunctionRequest extends  AbstractModel {
         }
         this.AsyncRunEnable = 'AsyncRunEnable' in params ? params.AsyncRunEnable : null;
         this.TraceEnable = 'TraceEnable' in params ? params.TraceEnable : null;
+        this.ProtocolType = 'ProtocolType' in params ? params.ProtocolType : null;
+
+        if (params.ProtocolParams) {
+            let obj = new ProtocolParams();
+            obj.deserialize(params.ProtocolParams)
+            this.ProtocolParams = obj;
+        }
 
     }
 }
@@ -3623,6 +3949,34 @@ class PutTotalConcurrencyConfigResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * GetAsyncEventStatus请求参数结构体
+ * @class
+ */
+class GetAsyncEventStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 异步执行请求 id
+         * @type {string || null}
+         */
+        this.InvokeRequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InvokeRequestId = 'InvokeRequestId' in params ? params.InvokeRequestId : null;
 
     }
 }
@@ -3766,7 +4120,7 @@ class AsyncEvent extends  AbstractModel {
         this.Qualifier = null;
 
         /**
-         * 事件状态
+         * 事件状态，RUNNING 表示运行中, FINISHED 表示调用成功, ABORTED 表示调用终止, FAILED 表示调用失败
          * @type {string || null}
          */
         this.Status = null;
@@ -3963,25 +4317,25 @@ class InvokeRequest extends  AbstractModel {
         this.FunctionName = null;
 
         /**
-         * RequestResponse(同步) 和 Event(异步)，默认为同步
+         * 同步调用请使用[同步 Invoke 调用接口](https://cloud.tencent.com/document/product/583/58400) 或填写同步调用参数 RequestResponse ，建议使用同步调用接口以获取最佳性能；异步调用填写 Event；默认为同步。接口超时时间为 300s，更长超时时间请使用异步调用。
          * @type {string || null}
          */
         this.InvocationType = null;
 
         /**
-         * 触发函数的版本号或别名
+         * 触发函数的版本号或别名，默认值为 $LATEST
          * @type {string || null}
          */
         this.Qualifier = null;
 
         /**
-         * 运行函数时的参数，以json格式传入，最大支持的参数长度是 1M
+         * 运行函数时的参数，以json格式传入，同步调用最大支持 6MB，异步调用最大支持 128 KB。该字段信息对应函数 [event 入参](https://cloud.tencent.com/document/product/583/9210#.E5.87.BD.E6.95.B0.E5.85.A5.E5.8F.82.3Ca-id.3D.22input.22.3E.3C.2Fa.3E)。
          * @type {string || null}
          */
         this.ClientContext = null;
 
         /**
-         * 同步调用时指定该字段，返回值会包含4K的日志，可选值为None和Tail，默认值为None。当该值为Tail时，返回参数中的Log字段会包含对应的函数执行日志
+         * 异步调用该字段返回为空。
          * @type {string || null}
          */
         this.LogType = null;
@@ -4179,13 +4533,13 @@ class PutReservedConcurrencyConfigRequest extends  AbstractModel {
         super();
 
         /**
-         * 需要设置预置并发的函数的名称
+         * 需要设置最大独占配额的函数的名称
          * @type {string || null}
          */
         this.FunctionName = null;
 
         /**
-         * 函数保留并发内存，注：函数的保留并发内存总和上限：用户总并发内存配额 - 12800
+         * 函数最大独占配额，注：函数的最大独占配额内存总和上限：用户总并发内存配额 - 12800
          * @type {number || null}
          */
         this.ReservedConcurrencyMem = null;
@@ -4476,7 +4830,10 @@ class Filter extends  AbstractModel {
         super();
 
         /**
-         * 需要过滤的字段。
+         * 需要过滤的字段。过滤条件数量限制为10。
+Name可选值：VpcId, SubnetId, ClsTopicId, ClsLogsetId, Role, CfsId, CfsMountInsId, Eip；Values 长度限制为1。
+Name可选值：Status, Runtime, FunctionType, PublicNetStatus, AsyncRunEnable, TraceEnable；Values 长度限制为20。
+当 Name = Runtime 时，CustomImage 表示过滤镜像类型函数。
          * @type {string || null}
          */
         this.Name = null;
@@ -4511,13 +4868,13 @@ class Variable extends  AbstractModel {
         super();
 
         /**
-         * 变量的名称
+         * 变量的名称，不可为空字符
          * @type {string || null}
          */
         this.Key = null;
 
         /**
-         * 变量的值
+         * 变量的值，不可为空字符
          * @type {string || null}
          */
         this.Value = null;
@@ -4792,6 +5149,34 @@ class GetFunctionResponse extends  AbstractModel {
         this.StatusReasons = null;
 
         /**
+         * 是否开启异步属性
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.AsyncRunEnable = null;
+
+        /**
+         * 是否开启事件追踪
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TraceEnable = null;
+
+        /**
+         * HTTP函数支持的访问协议。当前支持WebSockets协议。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ProtocolType = null;
+
+        /**
+         * HTTP函数配置ProtocolType访问协议，当前协议配置的参数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {ProtocolParams || null}
+         */
+        this.ProtocolParams = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -4913,6 +5298,15 @@ class GetFunctionResponse extends  AbstractModel {
                 this.StatusReasons.push(obj);
             }
         }
+        this.AsyncRunEnable = 'AsyncRunEnable' in params ? params.AsyncRunEnable : null;
+        this.TraceEnable = 'TraceEnable' in params ? params.TraceEnable : null;
+        this.ProtocolType = 'ProtocolType' in params ? params.ProtocolType : null;
+
+        if (params.ProtocolParams) {
+            let obj = new ProtocolParams();
+            obj.deserialize(params.ProtocolParams)
+            this.ProtocolParams = obj;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -4975,7 +5369,7 @@ class Code extends  AbstractModel {
         this.CosBucketName = null;
 
         /**
-         * 对象存储对象路径
+         * 对象存储中代码包文件路径，以/开头
          * @type {string || null}
          */
         this.CosObjectName = null;
@@ -5005,52 +5399,58 @@ class Code extends  AbstractModel {
         this.TempCosObjectName = null;
 
         /**
-         * Git地址
+         * Git地址。该功能已下线。
          * @type {string || null}
          */
         this.GitUrl = null;
 
         /**
-         * Git用户名
+         * Git用户名。该功能已下线。
          * @type {string || null}
          */
         this.GitUserName = null;
 
         /**
-         * Git密码
+         * Git密码。该功能已下线。
          * @type {string || null}
          */
         this.GitPassword = null;
 
         /**
-         * 加密后的Git密码，一般无需指定
+         * 加密后的Git密码，一般无需指定。该功能已下线。
          * @type {string || null}
          */
         this.GitPasswordSecret = null;
 
         /**
-         * Git分支
+         * Git分支。该功能已下线。
          * @type {string || null}
          */
         this.GitBranch = null;
 
         /**
-         * 代码在Git仓库中的路径
+         * 代码在Git仓库中的路径。该功能已下线。
          * @type {string || null}
          */
         this.GitDirectory = null;
 
         /**
-         * 指定要拉取的版本
+         * 指定要拉取的版本。该功能已下线。
          * @type {string || null}
          */
         this.GitCommitId = null;
 
         /**
-         * 加密后的Git用户名，一般无需指定
+         * 加密后的Git用户名，一般无需指定。该功能已下线。
          * @type {string || null}
          */
         this.GitUserNameSecret = null;
+
+        /**
+         * 镜像部署时配置TCR镜像信息
+         * @type {ImageConfig || null}
+         */
+        this.ImageConfig = null;
 
     }
 
@@ -5075,6 +5475,12 @@ class Code extends  AbstractModel {
         this.GitDirectory = 'GitDirectory' in params ? params.GitDirectory : null;
         this.GitCommitId = 'GitCommitId' in params ? params.GitCommitId : null;
         this.GitUserNameSecret = 'GitUserNameSecret' in params ? params.GitUserNameSecret : null;
+
+        if (params.ImageConfig) {
+            let obj = new ImageConfig();
+            obj.deserialize(params.ImageConfig)
+            this.ImageConfig = obj;
+        }
 
     }
 }
@@ -5245,6 +5651,100 @@ Deleted 已删除
 }
 
 /**
+ * GetRequestStatus返回参数结构体
+ * @class
+ */
+class GetRequestStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 函数运行状态的总数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 函数运行状态数组
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<RequestStatus> || null}
+         */
+        this.Data = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new RequestStatus();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 异步事件状态
+ * @class
+ */
+class AsyncEventStatus extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 异步事件状态，RUNNING 表示运行中, FINISHED 表示调用成功, ABORTED 表示调用终止, FAILED 表示调用失败。
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 请求状态码
+         * @type {number || null}
+         */
+        this.StatusCode = null;
+
+        /**
+         * 异步执行请求 Id
+         * @type {string || null}
+         */
+        this.InvokeRequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.StatusCode = 'StatusCode' in params ? params.StatusCode : null;
+        this.InvokeRequestId = 'InvokeRequestId' in params ? params.InvokeRequestId : null;
+
+    }
+}
+
+/**
  * PutReservedConcurrencyConfig返回参数结构体
  * @class
  */
@@ -5380,6 +5880,69 @@ class FunctionLog extends  AbstractModel {
         this.Level = 'Level' in params ? params.Level : null;
         this.Source = 'Source' in params ? params.Source : null;
         this.RetryNum = 'RetryNum' in params ? params.RetryNum : null;
+
+    }
+}
+
+/**
+ * InvokeFunction请求参数结构体
+ * @class
+ */
+class InvokeFunctionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 函数名称
+         * @type {string || null}
+         */
+        this.FunctionName = null;
+
+        /**
+         * 触发函数的版本号或别名，默认值为$DEFAULT
+         * @type {string || null}
+         */
+        this.Qualifier = null;
+
+        /**
+         * 运行函数时的参数，以json格式传入，最大支持的参数长度是 6MB。该字段信息对应函数 [event 入参](https://cloud.tencent.com/document/product/583/9210#.E5.87.BD.E6.95.B0.E5.85.A5.E5.8F.82.3Ca-id.3D.22input.22.3E.3C.2Fa.3E)。
+         * @type {string || null}
+         */
+        this.Event = null;
+
+        /**
+         * 返回值会包含4KB的日志，可选值为None和Tail，默认值为None。当该值为Tail时，返回参数中的Log字段会包含对应的函数执行日志
+         * @type {string || null}
+         */
+        this.LogType = null;
+
+        /**
+         * 命名空间，不填默认为 default
+         * @type {string || null}
+         */
+        this.Namespace = null;
+
+        /**
+         * 函数灰度流量控制调用，以json格式传入，例如{"k":"v"}，注意kv都需要是字符串类型，最大支持的参数长度是1024字节
+         * @type {string || null}
+         */
+        this.RoutingKey = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FunctionName = 'FunctionName' in params ? params.FunctionName : null;
+        this.Qualifier = 'Qualifier' in params ? params.Qualifier : null;
+        this.Event = 'Event' in params ? params.Event : null;
+        this.LogType = 'LogType' in params ? params.LogType : null;
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.RoutingKey = 'RoutingKey' in params ? params.RoutingKey : null;
 
     }
 }
@@ -5545,6 +6108,59 @@ class CfsInsInfo extends  AbstractModel {
 }
 
 /**
+ * 预置定时任务动作
+ * @class
+ */
+class TriggerAction extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 定时预置名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TriggerName = null;
+
+        /**
+         * 定时预置并发数量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TriggerProvisionedConcurrencyNum = null;
+
+        /**
+         * 设置定时触发器的时间配置，cron表达式。Cron 表达式有七个必需字段，按空格分隔。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TriggerCronConfig = null;
+
+        /**
+         * 预置类型 Default
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ProvisionedType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TriggerName = 'TriggerName' in params ? params.TriggerName : null;
+        this.TriggerProvisionedConcurrencyNum = 'TriggerProvisionedConcurrencyNum' in params ? params.TriggerProvisionedConcurrencyNum : null;
+        this.TriggerCronConfig = 'TriggerCronConfig' in params ? params.TriggerCronConfig : null;
+        this.ProvisionedType = 'ProvisionedType' in params ? params.ProvisionedType : null;
+
+    }
+}
+
+/**
  * 限制信息
  * @class
  */
@@ -5672,6 +6288,13 @@ class FunctionVersion extends  AbstractModel {
          */
         this.ModTime = null;
 
+        /**
+         * 版本状态
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Status = null;
+
     }
 
     /**
@@ -5685,6 +6308,7 @@ class FunctionVersion extends  AbstractModel {
         this.Description = 'Description' in params ? params.Description : null;
         this.AddTime = 'AddTime' in params ? params.AddTime : null;
         this.ModTime = 'ModTime' in params ? params.ModTime : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -5888,6 +6512,46 @@ class ListFunctionsResponse extends  AbstractModel {
 }
 
 /**
+ * GetAsyncEventStatus返回参数结构体
+ * @class
+ */
+class GetAsyncEventStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 异步事件状态
+         * @type {AsyncEventStatus || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new AsyncEventStatus();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ListTriggers请求参数结构体
  * @class
  */
@@ -6003,7 +6667,7 @@ class GetReservedConcurrencyConfigRequest extends  AbstractModel {
         super();
 
         /**
-         * 需要获取预置并发详情的函数名称。
+         * 需要获取最大独占配额详情的函数名称。
          * @type {string || null}
          */
         this.FunctionName = null;
@@ -6061,6 +6725,41 @@ class PutProvisionedConcurrencyConfigRequest extends  AbstractModel {
          */
         this.Namespace = null;
 
+        /**
+         * 定时预置任务
+         * @type {Array.<TriggerAction> || null}
+         */
+        this.TriggerActions = null;
+
+        /**
+         * 预置类型，
+静态预置：Default
+动态追踪并发利用率指标预置：ConcurrencyUtilizationTracking
+预置类型二选一，设置静态预置时可以设置VersionProvisionedConcurrencyNum。
+
+动态利用率预置可以设置TrackingTarget，MinCapacity，MaxCapacity，保持向后兼容性此时VersionProvisionedConcurrencyNum设置为0.
+         * @type {string || null}
+         */
+        this.ProvisionedType = null;
+
+        /**
+         * 指标追踪的并发利用率。设置范围(0,1)
+         * @type {number || null}
+         */
+        this.TrackingTarget = null;
+
+        /**
+         * 缩容时的最小值, 最小值为1
+         * @type {number || null}
+         */
+        this.MinCapacity = null;
+
+        /**
+         * 扩容时的最大值
+         * @type {number || null}
+         */
+        this.MaxCapacity = null;
+
     }
 
     /**
@@ -6074,6 +6773,19 @@ class PutProvisionedConcurrencyConfigRequest extends  AbstractModel {
         this.Qualifier = 'Qualifier' in params ? params.Qualifier : null;
         this.VersionProvisionedConcurrencyNum = 'VersionProvisionedConcurrencyNum' in params ? params.VersionProvisionedConcurrencyNum : null;
         this.Namespace = 'Namespace' in params ? params.Namespace : null;
+
+        if (params.TriggerActions) {
+            this.TriggerActions = new Array();
+            for (let z in params.TriggerActions) {
+                let obj = new TriggerAction();
+                obj.deserialize(params.TriggerActions[z]);
+                this.TriggerActions.push(obj);
+            }
+        }
+        this.ProvisionedType = 'ProvisionedType' in params ? params.ProvisionedType : null;
+        this.TrackingTarget = 'TrackingTarget' in params ? params.TrackingTarget : null;
+        this.MinCapacity = 'MinCapacity' in params ? params.MinCapacity : null;
+        this.MaxCapacity = 'MaxCapacity' in params ? params.MaxCapacity : null;
 
     }
 }
@@ -6172,6 +6884,18 @@ class Function extends  AbstractModel {
          */
         this.ReservedConcurrencyMem = null;
 
+        /**
+         * 函数异步属性，取值 TRUE 或者 FALSE
+         * @type {string || null}
+         */
+        this.AsyncRunEnable = null;
+
+        /**
+         * 异步函数是否开启调用追踪，取值 TRUE 或者 FALSE
+         * @type {string || null}
+         */
+        this.TraceEnable = null;
+
     }
 
     /**
@@ -6211,6 +6935,8 @@ class Function extends  AbstractModel {
         }
         this.TotalProvisionedConcurrencyMem = 'TotalProvisionedConcurrencyMem' in params ? params.TotalProvisionedConcurrencyMem : null;
         this.ReservedConcurrencyMem = 'ReservedConcurrencyMem' in params ? params.ReservedConcurrencyMem : null;
+        this.AsyncRunEnable = 'AsyncRunEnable' in params ? params.AsyncRunEnable : null;
+        this.TraceEnable = 'TraceEnable' in params ? params.TraceEnable : null;
 
     }
 }
@@ -6241,6 +6967,27 @@ class NamespaceUsage extends  AbstractModel {
          */
         this.FunctionsCount = null;
 
+        /**
+         * 命名空间配额总量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TotalConcurrencyMem = null;
+
+        /**
+         * 命名空间并发使用量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TotalAllocatedConcurrencyMem = null;
+
+        /**
+         * 命名空间预置使用量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TotalAllocatedProvisionedMem = null;
+
     }
 
     /**
@@ -6253,6 +7000,9 @@ class NamespaceUsage extends  AbstractModel {
         this.Functions = 'Functions' in params ? params.Functions : null;
         this.Namespace = 'Namespace' in params ? params.Namespace : null;
         this.FunctionsCount = 'FunctionsCount' in params ? params.FunctionsCount : null;
+        this.TotalConcurrencyMem = 'TotalConcurrencyMem' in params ? params.TotalConcurrencyMem : null;
+        this.TotalAllocatedConcurrencyMem = 'TotalAllocatedConcurrencyMem' in params ? params.TotalAllocatedConcurrencyMem : null;
+        this.TotalAllocatedProvisionedMem = 'TotalAllocatedProvisionedMem' in params ? params.TotalAllocatedProvisionedMem : null;
 
     }
 }
@@ -6518,6 +7268,73 @@ class GetFunctionLogsResponse extends  AbstractModel {
 }
 
 /**
+ * TCR镜像信息描述
+ * @class
+ */
+class ImageConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 镜像仓库类型，个人版或者企业版：personal/enterprise
+         * @type {string || null}
+         */
+        this.ImageType = null;
+
+        /**
+         * {domain}/{namespace}/{imageName}:{tag}@{digest}
+         * @type {string || null}
+         */
+        this.ImageUri = null;
+
+        /**
+         * 用于企业版TCR获取镜像拉取临时凭证，ImageType为"enterprise"时必填
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RegistryId = null;
+
+        /**
+         * 参数已废弃
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.EntryPoint = null;
+
+        /**
+         * 容器的启动命令。该参数为可选参数，如果不填写，则默认使用 Dockerfile 中的 Entrypoint。传入规范，填写可运行的指令，例如 python
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Command = null;
+
+        /**
+         * 容器的启动参数。该参数为可选参数，如果不填写，则默认使用 Dockerfile 中的 CMD。传入规范，以“空格”作为参数的分割标识，例如 -u app.py
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Args = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageType = 'ImageType' in params ? params.ImageType : null;
+        this.ImageUri = 'ImageUri' in params ? params.ImageUri : null;
+        this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
+        this.EntryPoint = 'EntryPoint' in params ? params.EntryPoint : null;
+        this.Command = 'Command' in params ? params.Command : null;
+        this.Args = 'Args' in params ? params.Args : null;
+
+    }
+}
+
+/**
  * DeleteTrigger返回参数结构体
  * @class
  */
@@ -6541,6 +7358,41 @@ class DeleteTriggerResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 包含搜索关键字和对应的内容
+ * @class
+ */
+class SearchKey extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 搜索关键字
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * 搜索内容
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Value = 'Value' in params ? params.Value : null;
 
     }
 }
@@ -6865,6 +7717,7 @@ module.exports = {
     ListAliasesResponse: ListAliasesResponse,
     DeleteLayerVersionResponse: DeleteLayerVersionResponse,
     GetReservedConcurrencyConfigResponse: GetReservedConcurrencyConfigResponse,
+    ProtocolParams: ProtocolParams,
     RoutingConfig: RoutingConfig,
     DeleteProvisionedConcurrencyConfigResponse: DeleteProvisionedConcurrencyConfigResponse,
     VersionWeight: VersionWeight,
@@ -6883,17 +7736,20 @@ module.exports = {
     GetFunctionLogsRequest: GetFunctionLogsRequest,
     StatusReason: StatusReason,
     Tag: Tag,
+    GetRequestStatusRequest: GetRequestStatusRequest,
     LogFilter: LogFilter,
     EipConfigIn: EipConfigIn,
     ListLayerVersionsResponse: ListLayerVersionsResponse,
     DeleteFunctionRequest: DeleteFunctionRequest,
     CopyFunctionResponse: CopyFunctionResponse,
+    InvokeFunctionResponse: InvokeFunctionResponse,
     Namespace: Namespace,
     GetFunctionRequest: GetFunctionRequest,
     ListNamespacesRequest: ListNamespacesRequest,
     PublishVersionRequest: PublishVersionRequest,
     DeleteAliasRequest: DeleteAliasRequest,
     ListVersionByFunctionResponse: ListVersionByFunctionResponse,
+    WSParams: WSParams,
     GetAliasRequest: GetAliasRequest,
     CreateNamespaceResponse: CreateNamespaceResponse,
     PublicNetConfigOut: PublicNetConfigOut,
@@ -6921,9 +7777,11 @@ module.exports = {
     CreateAliasResponse: CreateAliasResponse,
     LogSearchContext: LogSearchContext,
     TriggerInfo: TriggerInfo,
+    RequestStatus: RequestStatus,
     CreateFunctionRequest: CreateFunctionRequest,
     GetAccountRequest: GetAccountRequest,
     PutTotalConcurrencyConfigResponse: PutTotalConcurrencyConfigResponse,
+    GetAsyncEventStatusRequest: GetAsyncEventStatusRequest,
     DeleteAliasResponse: DeleteAliasResponse,
     PublishVersionResponse: PublishVersionResponse,
     AsyncEvent: AsyncEvent,
@@ -6950,11 +7808,15 @@ module.exports = {
     PutTotalConcurrencyConfigRequest: PutTotalConcurrencyConfigRequest,
     UpdateNamespaceRequest: UpdateNamespaceRequest,
     GetLayerVersionResponse: GetLayerVersionResponse,
+    GetRequestStatusResponse: GetRequestStatusResponse,
+    AsyncEventStatus: AsyncEventStatus,
     PutReservedConcurrencyConfigResponse: PutReservedConcurrencyConfigResponse,
     FunctionLog: FunctionLog,
+    InvokeFunctionRequest: InvokeFunctionRequest,
     RetryConfig: RetryConfig,
     GetFunctionAddressResponse: GetFunctionAddressResponse,
     CfsInsInfo: CfsInsInfo,
+    TriggerAction: TriggerAction,
     LimitsInfo: LimitsInfo,
     ListLayersResponse: ListLayersResponse,
     FunctionVersion: FunctionVersion,
@@ -6962,6 +7824,7 @@ module.exports = {
     DeadLetterConfig: DeadLetterConfig,
     ListVersionByFunctionRequest: ListVersionByFunctionRequest,
     ListFunctionsResponse: ListFunctionsResponse,
+    GetAsyncEventStatusResponse: GetAsyncEventStatusResponse,
     ListTriggersRequest: ListTriggersRequest,
     CreateFunctionResponse: CreateFunctionResponse,
     GetReservedConcurrencyConfigRequest: GetReservedConcurrencyConfigRequest,
@@ -6973,7 +7836,9 @@ module.exports = {
     Alias: Alias,
     GetLayerVersionRequest: GetLayerVersionRequest,
     GetFunctionLogsResponse: GetFunctionLogsResponse,
+    ImageConfig: ImageConfig,
     DeleteTriggerResponse: DeleteTriggerResponse,
+    SearchKey: SearchKey,
     DeleteTriggerRequest: DeleteTriggerRequest,
     VpcConfig: VpcConfig,
     GetProvisionedConcurrencyConfigResponse: GetProvisionedConcurrencyConfigResponse,

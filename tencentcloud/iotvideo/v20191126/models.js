@@ -2237,6 +2237,12 @@ class CreateBindingRequest extends  AbstractModel {
          */
         this.Nick = null;
 
+        /**
+         * 绑定过程中的会话token，由设备通过SDK接口确认是否允许绑定的token，用于增加设备被绑定的安全性
+         * @type {string || null}
+         */
+        this.BindToken = null;
+
     }
 
     /**
@@ -2251,6 +2257,7 @@ class CreateBindingRequest extends  AbstractModel {
         this.Role = 'Role' in params ? params.Role : null;
         this.ForceBind = 'ForceBind' in params ? params.ForceBind : null;
         this.Nick = 'Nick' in params ? params.Nick : null;
+        this.BindToken = 'BindToken' in params ? params.BindToken : null;
 
     }
 }

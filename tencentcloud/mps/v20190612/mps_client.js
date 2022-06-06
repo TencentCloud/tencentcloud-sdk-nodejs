@@ -122,6 +122,7 @@ const ProhibitedAsrReviewTemplateInfoForUpdate = models.ProhibitedAsrReviewTempl
 const ModifyAnimatedGraphicsTemplateResponse = models.ModifyAnimatedGraphicsTemplateResponse;
 const DeleteAdaptiveDynamicStreamingTemplateRequest = models.DeleteAdaptiveDynamicStreamingTemplateRequest;
 const AiRecognitionTaskOcrFullTextSegmentItem = models.AiRecognitionTaskOcrFullTextSegmentItem;
+const EditMediaOutputConfig = models.EditMediaOutputConfig;
 const AiReviewPornAsrTaskOutput = models.AiReviewPornAsrTaskOutput;
 const DeleteAIAnalysisTemplateRequest = models.DeleteAIAnalysisTemplateRequest;
 const EditMediaRequest = models.EditMediaRequest;
@@ -189,6 +190,7 @@ const TerrorismConfigureInfoForUpdate = models.TerrorismConfigureInfoForUpdate;
 const AnimatedGraphicTaskInput = models.AnimatedGraphicTaskInput;
 const DeleteContentReviewTemplateRequest = models.DeleteContentReviewTemplateRequest;
 const AIAnalysisTemplateItem = models.AIAnalysisTemplateItem;
+const HeadTailParameter = models.HeadTailParameter;
 const RawImageWatermarkInput = models.RawImageWatermarkInput;
 const DescribeImageSpriteTemplatesRequest = models.DescribeImageSpriteTemplatesRequest;
 const AiSampleTagOperation = models.AiSampleTagOperation;
@@ -412,7 +414,7 @@ class MpsClient extends AbstractClient {
     }
 
     /**
-     * 修改用户自定义内容智能识别模板。
+     * 修改用户自定义内容审核模板。
      * @param {ModifyContentReviewTemplateRequest} req
      * @param {function(string, ModifyContentReviewTemplateResponse):void} cb
      * @public
@@ -423,7 +425,7 @@ class MpsClient extends AbstractClient {
     }
 
     /**
-     * 创建用户自定义内容智能识别模板，数量上限：50。
+     * 创建用户自定义内容审核模板，数量上限：50。
      * @param {CreateContentReviewTemplateRequest} req
      * @param {function(string, CreateContentReviewTemplateResponse):void} cb
      * @public
@@ -907,7 +909,7 @@ class MpsClient extends AbstractClient {
     }
 
     /**
-     * 本接口仅用于定制开发的特殊场景，除非云视频处理客服人员主动告知您需要使用本接口，其它情况请勿调用。
+     * 本接口仅用于定制开发的特殊场景，除非云媒体处理客服人员主动告知您需要使用本接口，其它情况请勿调用。
      * @param {ExecuteFunctionRequest} req
      * @param {function(string, ExecuteFunctionResponse):void} cb
      * @public
@@ -947,7 +949,7 @@ class MpsClient extends AbstractClient {
 4. 对视频采样截图；
 5. 对视频截图雪碧图；
 6. 对视频转自适应码流；
-7. 智能内容审核（鉴黄、鉴恐、鉴政）；
+7. 智能内容审核（鉴黄、敏感信息检测）；
 8. 智能内容分析（标签、分类、封面、按帧标签）；
 9. 智能内容识别（人脸、文本全文、文本关键词、语音全文、语音关键词）。
 
@@ -964,7 +966,7 @@ class MpsClient extends AbstractClient {
     /**
      * 对直播流媒体发起处理任务，功能包括：
 
-* 智能内容审核（画面鉴黄、鉴政、鉴暴、声音鉴黄）；
+* 智能内容审核（画面鉴黄、敏感信息检测、声音鉴黄）；
 * 智能内容识别（人脸、文本全文、文本关键词、语音全文、语音关键词）。
 
 直播流处理事件通知实时写入用户指定的消息队列 CMQ 中，用户需要从消息队列 CMQ 中获取事件通知结果，同时处理过程中存在输出文件的，会写入用户指定的输出文件的目标存储中。
@@ -996,7 +998,7 @@ class MpsClient extends AbstractClient {
 4. 对视频采样截图；
 5. 对视频截图雪碧图；
 6. 对视频转自适应码流；
-7. 智能内容审核（鉴黄、鉴恐、鉴政）；
+7. 智能内容审核（鉴黄、敏感信息检测）；
 8. 智能内容分析（标签、分类、封面、按帧标签）；
 9. 智能内容识别（人脸、文本全文、文本关键词、语音全文、语音关键词）。
      * @param {ProcessMediaRequest} req
@@ -1053,7 +1055,7 @@ class MpsClient extends AbstractClient {
     }
 
     /**
-     * 删除用户自定义内容智能识别模板。
+     * 删除用户自定义内容审核模板。
      * @param {DeleteContentReviewTemplateRequest} req
      * @param {function(string, DeleteContentReviewTemplateResponse):void} cb
      * @public
@@ -1130,7 +1132,7 @@ class MpsClient extends AbstractClient {
     }
 
     /**
-     * 根据内容智能识别模板唯一标识，获取内容智能识别模板详情列表。返回结果包含符合条件的所有用户自定义模板及系统预置内容智能识别模板。
+     * 根据智能审核模板唯一标识，获取智能审核模板详情列表。返回结果包含符合条件的所有用户自定义模板及系统预置智能审核模板。
      * @param {DescribeContentReviewTemplatesRequest} req
      * @param {function(string, DescribeContentReviewTemplatesResponse):void} cb
      * @public

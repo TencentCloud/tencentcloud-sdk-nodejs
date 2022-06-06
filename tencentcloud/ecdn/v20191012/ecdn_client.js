@@ -20,11 +20,13 @@ const PurgePathCacheRequest = models.PurgePathCacheRequest;
 const DescribeEcdnStatisticsRequest = models.DescribeEcdnStatisticsRequest;
 const StartEcdnDomainRequest = models.StartEcdnDomainRequest;
 const DescribeDomainsConfigResponse = models.DescribeDomainsConfigResponse;
-const Https = models.Https;
+const AdvanceHttps = models.AdvanceHttps;
 const CreateVerifyRecordResponse = models.CreateVerifyRecordResponse;
 const ResourceData = models.ResourceData;
+const Https = models.Https;
 const Cache = models.Cache;
 const ForceRedirect = models.ForceRedirect;
+const DescribeIpStatusResponse = models.DescribeIpStatusResponse;
 const DescribePurgeQuotaResponse = models.DescribePurgeQuotaResponse;
 const DescribeEcdnDomainStatisticsResponse = models.DescribeEcdnDomainStatisticsResponse;
 const TimestampData = models.TimestampData;
@@ -33,7 +35,7 @@ const StopEcdnDomainRequest = models.StopEcdnDomainRequest;
 const Sort = models.Sort;
 const IpFreqLimit = models.IpFreqLimit;
 const DescribePurgeTasksRequest = models.DescribePurgeTasksRequest;
-const DescribeEcdnStatisticsResponse = models.DescribeEcdnStatisticsResponse;
+const DomainFilter = models.DomainFilter;
 const DomainLogs = models.DomainLogs;
 const Hsts = models.Hsts;
 const PurgeUrlsCacheRequest = models.PurgeUrlsCacheRequest;
@@ -64,11 +66,10 @@ const AddEcdnDomainResponse = models.AddEcdnDomainResponse;
 const IpStatus = models.IpStatus;
 const PurgeTask = models.PurgeTask;
 const CacheRule = models.CacheRule;
-const DescribeIpStatusResponse = models.DescribeIpStatusResponse;
+const DescribeEcdnStatisticsResponse = models.DescribeEcdnStatisticsResponse;
 const Origin = models.Origin;
 const ServerCert = models.ServerCert;
 const CacheKey = models.CacheKey;
-const DomainFilter = models.DomainFilter;
 const DescribeEcdnDomainStatisticsRequest = models.DescribeEcdnDomainStatisticsRequest;
 const Quota = models.Quota;
 const DescribeEcdnDomainLogsRequest = models.DescribeEcdnDomainLogsRequest;
@@ -90,6 +91,8 @@ class EcdnClient extends AbstractClient {
     
     /**
      * 本接口（AddEcdnDomain）用于创建加速域名。
+
+>?  若您的业务已迁移至 CDN 控制台，请参考<a href="https://cloud.tencent.com/document/api/228/41123"> CDN 接口文档</a>，使用  CDN 相关API 进行操作。
      * @param {AddEcdnDomainRequest} req
      * @param {function(string, AddEcdnDomainResponse):void} cb
      * @public
@@ -114,6 +117,8 @@ class EcdnClient extends AbstractClient {
 
     /**
      * PurgePathCache 用于批量刷新目录缓存，一次提交将返回一个刷新任务id。
+
+>?  若您的业务已迁移至 CDN 控制台，请参考<a href="	https://cloud.tencent.com/document/api/570/42475"> CDN 接口文档</a>，使用  CDN 相关API 进行操作。
      * @param {PurgePathCacheRequest} req
      * @param {function(string, PurgePathCacheResponse):void} cb
      * @public
@@ -125,6 +130,8 @@ class EcdnClient extends AbstractClient {
 
     /**
      * 本接口（StartEcdnDomain）用于启用加速域名，待启用域名必须处于已下线状态。
+
+>?  若您的业务已迁移至 CDN 控制台，请参考<a href="https://cloud.tencent.com/document/product/228/41121"> CDN 接口文档</a>，使用  CDN 相关API 进行操作。
      * @param {StartEcdnDomainRequest} req
      * @param {function(string, StartEcdnDomainResponse):void} cb
      * @public
@@ -137,6 +144,9 @@ class EcdnClient extends AbstractClient {
     /**
      * 本接口（UpdateDomainConfig）用于更新ECDN加速域名配置信息。
 注意：如果需要更新复杂类型的配置项，必须传递整个对象的所有属性，未传递的属性将使用默认值。建议通过查询接口获取配置属性后，直接修改后传递给本接口。Https配置由于证书的特殊性，更新时不用传递证书和密钥字段。
+
+>?  若您的业务已迁移至 CDN 控制台，请参考<a href="https://cloud.tencent.com/document/product/228/41116"> CDN 接口文档</a>，使用  CDN 相关API 进行操作。
+
      * @param {UpdateDomainConfigRequest} req
      * @param {function(string, UpdateDomainConfigResponse):void} cb
      * @public
@@ -148,6 +158,8 @@ class EcdnClient extends AbstractClient {
 
     /**
      * DescribePurgeTasks 用于查询刷新任务提交历史记录及执行进度。
+
+>?  若您的业务已迁移至 CDN 控制台，请参考<a href="https://cloud.tencent.com/document/api/228/37873"> CDN 接口文档</a>，使用  CDN 相关API 进行操作。
      * @param {DescribePurgeTasksRequest} req
      * @param {function(string, DescribePurgeTasksResponse):void} cb
      * @public
@@ -170,6 +182,8 @@ class EcdnClient extends AbstractClient {
 
     /**
      * 本接口（DescribeDomainsConfig）用于查询CDN加速域名详细配置信息。
+
+>?  若您的业务已迁移至 CDN 控制台，请参考<a href="https://cloud.tencent.com/document/api/228/41117"> CDN 接口文档</a>，使用  CDN 相关API 进行操作。
      * @param {DescribeDomainsConfigRequest} req
      * @param {function(string, DescribeDomainsConfigResponse):void} cb
      * @public
@@ -181,6 +195,8 @@ class EcdnClient extends AbstractClient {
 
     /**
      * 查询刷新接口的用量配额。
+
+>?  若您的业务已迁移至 CDN 控制台，请参考<a href="https://cloud.tencent.com/document/api/228/41956"> CDN 接口文档</a>，使用  CDN 相关API 进行操作。
      * @param {DescribePurgeQuotaRequest} req
      * @param {function(string, DescribePurgeQuotaResponse):void} cb
      * @public
@@ -192,6 +208,8 @@ class EcdnClient extends AbstractClient {
 
     /**
      * PurgeUrlsCache 用于批量刷新Url，一次提交将返回一个刷新任务id。
+
+>?  若您的业务已迁移至 CDN 控制台，请参考<a href="https://cloud.tencent.com/document/api/228/37870"> CDN 接口文档</a>，使用  CDN 相关API 进行操作。
      * @param {PurgeUrlsCacheRequest} req
      * @param {function(string, PurgeUrlsCacheResponse):void} cb
      * @public
@@ -203,6 +221,8 @@ class EcdnClient extends AbstractClient {
 
     /**
      * 本接口（StopCdnDomain）用于停止加速域名，待停用加速域名必须处于已上线或部署中状态。
+
+>?  若您的业务已迁移至 CDN 控制台，请参考<a href="https://cloud.tencent.com/document/product/228/41120"> CDN 接口文档</a>，使用  CDN 相关API 进行操作。
      * @param {StopEcdnDomainRequest} req
      * @param {function(string, StopEcdnDomainResponse):void} cb
      * @public
@@ -214,6 +234,8 @@ class EcdnClient extends AbstractClient {
 
     /**
      * 本接口（DeleteEcdnDomain）用于删除指定加速域名。待删除域名必须处于已停用状态。
+
+>?  若您的业务已迁移至 CDN 控制台，请参考<a href="https://cloud.tencent.com/document/api/228/41122"> CDN 接口文档</a>，使用  CDN 相关API 进行操作。
      * @param {DeleteEcdnDomainRequest} req
      * @param {function(string, DeleteEcdnDomainResponse):void} cb
      * @public
@@ -225,6 +247,8 @@ class EcdnClient extends AbstractClient {
 
     /**
      * 本接口（DescribeDomains）用于查询CDN域名基本信息，包括项目id，状态，业务类型，创建时间，更新时间等。
+
+>?  若您的业务已迁移至 CDN 控制台，请参考<a href="https://cloud.tencent.com/document/api/228/41118"> CDN 接口文档</a>，使用  CDN 相关API 进行操作。
      * @param {DescribeDomainsRequest} req
      * @param {function(string, DescribeDomainsResponse):void} cb
      * @public
@@ -235,7 +259,9 @@ class EcdnClient extends AbstractClient {
     }
 
     /**
-     * 生成一条子域名解析，提示客户添加到域名解析上，用于泛域名及域名取回校验归属权
+     * 生成一条子域名解析，提示客户添加到域名解析上，用于泛域名及域名取回校验归属权。
+
+>?  若您的业务已迁移至 CDN 控制台，请参考<a href="	https://cloud.tencent.com/document/api/228/48118"> CDN 接口文档</a>，使用  CDN 相关API 进行操作。
      * @param {CreateVerifyRecordRequest} req
      * @param {function(string, CreateVerifyRecordResponse):void} cb
      * @public
@@ -246,7 +272,9 @@ class EcdnClient extends AbstractClient {
     }
 
     /**
-     * 本接口（DescribeEcdnDomainStatistics）用于查询指定时间段内的域名访问统计指标
+     * 本接口（DescribeEcdnDomainStatistics）用于查询指定时间段内的域名访问统计指标。
+
+>?  若您的业务已迁移至 CDN 控制台，请参考<a href="https://cloud.tencent.com/document/api/228/30986"> CDN 接口文档</a>，使用  CDN 相关API 进行操作。
      * @param {DescribeEcdnDomainStatisticsRequest} req
      * @param {function(string, DescribeEcdnDomainStatisticsResponse):void} cb
      * @public

@@ -23,6 +23,7 @@ const LayoutParams = models.LayoutParams;
 const SetVideoGenerationTaskCallbackRequest = models.SetVideoGenerationTaskCallbackRequest;
 const StreamControl = models.StreamControl;
 const StopOnlineRecordResponse = models.StopOnlineRecordResponse;
+const AuthParam = models.AuthParam;
 const SetVideoGenerationTaskCallbackKeyRequest = models.SetVideoGenerationTaskCallbackKeyRequest;
 const StartWhiteboardPushRequest = models.StartWhiteboardPushRequest;
 const OmittedDuration = models.OmittedDuration;
@@ -32,50 +33,61 @@ const ResumeOnlineRecordResponse = models.ResumeOnlineRecordResponse;
 const SetVideoGenerationTaskCallbackResponse = models.SetVideoGenerationTaskCallbackResponse;
 const SetWhiteboardPushCallbackKeyResponse = models.SetWhiteboardPushCallbackKeyResponse;
 const WhiteboardPushBackupParam = models.WhiteboardPushBackupParam;
+const DescribeSnapshotTaskRequest = models.DescribeSnapshotTaskRequest;
 const StartOnlineRecordRequest = models.StartOnlineRecordRequest;
 const DescribeVideoGenerationTaskCallbackResponse = models.DescribeVideoGenerationTaskCallbackResponse;
+const DescribeSnapshotTaskResponse = models.DescribeSnapshotTaskResponse;
 const StartWhiteboardPushResponse = models.StartWhiteboardPushResponse;
+const ResumeOnlineRecordRequest = models.ResumeOnlineRecordRequest;
 const DescribeOnlineRecordCallbackRequest = models.DescribeOnlineRecordCallbackRequest;
+const SnapshotCOS = models.SnapshotCOS;
 const DescribeOnlineRecordCallbackResponse = models.DescribeOnlineRecordCallbackResponse;
 const StopWhiteboardPushRequest = models.StopWhiteboardPushRequest;
 const SetTranscodeCallbackResponse = models.SetTranscodeCallbackResponse;
 const StopOnlineRecordRequest = models.StopOnlineRecordRequest;
+const SnapshotWhiteboard = models.SnapshotWhiteboard;
+const UsageDataItem = models.UsageDataItem;
 const SetVideoGenerationTaskCallbackKeyResponse = models.SetVideoGenerationTaskCallbackKeyResponse;
 const CreateTranscodeResponse = models.CreateTranscodeResponse;
+const CreateSnapshotTaskResponse = models.CreateSnapshotTaskResponse;
 const DescribeVideoGenerationTaskResponse = models.DescribeVideoGenerationTaskResponse;
 const DescribeWhiteboardPushCallbackResponse = models.DescribeWhiteboardPushCallbackResponse;
 const CustomLayout = models.CustomLayout;
+const Interrupt = models.Interrupt;
 const VideoInfo = models.VideoInfo;
 const SetTranscodeCallbackKeyResponse = models.SetTranscodeCallbackKeyResponse;
+const DescribeTIWDailyUsageResponse = models.DescribeTIWDailyUsageResponse;
 const Concat = models.Concat;
 const DescribeOnlineRecordRequest = models.DescribeOnlineRecordRequest;
 const DescribeWhiteboardPushResponse = models.DescribeWhiteboardPushResponse;
 const StartOnlineRecordResponse = models.StartOnlineRecordResponse;
 const SetOnlineRecordCallbackKeyResponse = models.SetOnlineRecordCallbackKeyResponse;
 const DescribeVideoGenerationTaskRequest = models.DescribeVideoGenerationTaskRequest;
+const SnapshotResult = models.SnapshotResult;
 const CreateVideoGenerationTaskResponse = models.CreateVideoGenerationTaskResponse;
 const PauseOnlineRecordResponse = models.PauseOnlineRecordResponse;
 const CreateTranscodeRequest = models.CreateTranscodeRequest;
 const DescribeWhiteboardPushCallbackRequest = models.DescribeWhiteboardPushCallbackRequest;
 const DescribeOnlineRecordResponse = models.DescribeOnlineRecordResponse;
 const SetTranscodeCallbackKeyRequest = models.SetTranscodeCallbackKeyRequest;
-const DescribeTranscodeRequest = models.DescribeTranscodeRequest;
+const CreateSnapshotTaskRequest = models.CreateSnapshotTaskRequest;
 const DescribeTranscodeResponse = models.DescribeTranscodeResponse;
 const StreamLayout = models.StreamLayout;
 const DescribeQualityMetricsRequest = models.DescribeQualityMetricsRequest;
 const SetOnlineRecordCallbackKeyRequest = models.SetOnlineRecordCallbackKeyRequest;
 const CreateVideoGenerationTaskRequest = models.CreateVideoGenerationTaskRequest;
 const DescribeTranscodeCallbackRequest = models.DescribeTranscodeCallbackRequest;
-const ResumeOnlineRecordRequest = models.ResumeOnlineRecordRequest;
+const DescribeTranscodeRequest = models.DescribeTranscodeRequest;
 const DescribeTranscodeCallbackResponse = models.DescribeTranscodeCallbackResponse;
 const SetTranscodeCallbackRequest = models.SetTranscodeCallbackRequest;
 const SetWhiteboardPushCallbackRequest = models.SetWhiteboardPushCallbackRequest;
 const SetWhiteboardPushCallbackResponse = models.SetWhiteboardPushCallbackResponse;
 const RecordControl = models.RecordControl;
-const SetOnlineRecordCallbackRequest = models.SetOnlineRecordCallbackRequest;
+const DescribeTIWDailyUsageRequest = models.DescribeTIWDailyUsageRequest;
 const Whiteboard = models.Whiteboard;
 const MixStream = models.MixStream;
 const DescribeVideoGenerationTaskCallbackRequest = models.DescribeVideoGenerationTaskCallbackRequest;
+const SetOnlineRecordCallbackRequest = models.SetOnlineRecordCallbackRequest;
 const PauseOnlineRecordRequest = models.PauseOnlineRecordRequest;
 const StopWhiteboardPushResponse = models.StopWhiteboardPushResponse;
 const SetOnlineRecordCallbackResponse = models.SetOnlineRecordCallbackResponse;
@@ -169,14 +181,14 @@ class TiwClient extends AbstractClient {
     }
 
     /**
-     * 查询文档转码任务的执行进度与转码结果
-     * @param {DescribeTranscodeRequest} req
-     * @param {function(string, DescribeTranscodeResponse):void} cb
+     * 创建白板板书生成任务, 在任务结束后，如果提供了回调地址，将通过回调地址通知板书生成结果
+     * @param {CreateSnapshotTaskRequest} req
+     * @param {function(string, CreateSnapshotTaskResponse):void} cb
      * @public
      */
-    DescribeTranscode(req, cb) {
-        let resp = new DescribeTranscodeResponse();
-        this.request("DescribeTranscode", req, resp, cb);
+    CreateSnapshotTask(req, cb) {
+        let resp = new CreateSnapshotTaskResponse();
+        this.request("CreateSnapshotTask", req, resp, cb);
     }
 
     /**
@@ -290,6 +302,31 @@ class TiwClient extends AbstractClient {
     }
 
     /**
+     * 查询文档转码任务的执行进度与转码结果
+     * @param {DescribeTranscodeRequest} req
+     * @param {function(string, DescribeTranscodeResponse):void} cb
+     * @public
+     */
+    DescribeTranscode(req, cb) {
+        let resp = new DescribeTranscodeResponse();
+        this.request("DescribeTranscode", req, resp, cb);
+    }
+
+    /**
+     * 查询互动白板天维度计费用量。
+1. 单次查询统计区间最多不能超过31天。
+2. 由于统计延迟等原因，暂时不支持查询当天数据，建议在次日上午7点以后再来查询前一天的用量，例如在10月27日上午7点后，再来查询到10月26日整天的用量
+
+     * @param {DescribeTIWDailyUsageRequest} req
+     * @param {function(string, DescribeTIWDailyUsageResponse):void} cb
+     * @public
+     */
+    DescribeTIWDailyUsage(req, cb) {
+        let resp = new DescribeTIWDailyUsageResponse();
+        this.request("DescribeTIWDailyUsage", req, resp, cb);
+    }
+
+    /**
      * 停止白板推流任务
      * @param {StopWhiteboardPushRequest} req
      * @param {function(string, StopWhiteboardPushResponse):void} cb
@@ -364,6 +401,17 @@ class TiwClient extends AbstractClient {
     DescribeVideoGenerationTask(req, cb) {
         let resp = new DescribeVideoGenerationTaskResponse();
         this.request("DescribeVideoGenerationTask", req, resp, cb);
+    }
+
+    /**
+     * 获取指定白板板书生成任务信息
+     * @param {DescribeSnapshotTaskRequest} req
+     * @param {function(string, DescribeSnapshotTaskResponse):void} cb
+     * @public
+     */
+    DescribeSnapshotTask(req, cb) {
+        let resp = new DescribeSnapshotTaskResponse();
+        this.request("DescribeSnapshotTask", req, resp, cb);
     }
 
 

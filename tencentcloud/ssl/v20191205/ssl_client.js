@@ -19,8 +19,10 @@ const AbstractClient = require('../../common/abstract_client')
 const ApplyCertificateResponse = models.ApplyCertificateResponse;
 const ManagerInfo = models.ManagerInfo;
 const CompleteCertificateRequest = models.CompleteCertificateRequest;
+const UploadCertificateRequest = models.UploadCertificateRequest;
 const DeleteCertificateRequest = models.DeleteCertificateRequest;
 const DescribeCertificateOperateLogsResponse = models.DescribeCertificateOperateLogsResponse;
+const ModifyCertificateAliasRequest = models.ModifyCertificateAliasRequest;
 const CommitCertificateInformationRequest = models.CommitCertificateInformationRequest;
 const DownloadCertificateResponse = models.DownloadCertificateResponse;
 const ReplaceCertificateResponse = models.ReplaceCertificateResponse;
@@ -32,8 +34,9 @@ const Certificates = models.Certificates;
 const CertificateExtra = models.CertificateExtra;
 const CompanyInfo = models.CompanyInfo;
 const DescribeManagersResponse = models.DescribeManagersResponse;
+const RootCertificates = models.RootCertificates;
 const DescribeCertificateResponse = models.DescribeCertificateResponse;
-const UploadCertificateRequest = models.UploadCertificateRequest;
+const HostCertificateResponse = models.HostCertificateResponse;
 const UploadConfirmLetterRequest = models.UploadConfirmLetterRequest;
 const OperationLog = models.OperationLog;
 const VerifyManagerResponse = models.VerifyManagerResponse;
@@ -44,20 +47,23 @@ const DeleteManagerRequest = models.DeleteManagerRequest;
 const ApplyCertificateRequest = models.ApplyCertificateRequest;
 const ReplaceCertificateRequest = models.ReplaceCertificateRequest;
 const UploadRevokeLetterResponse = models.UploadRevokeLetterResponse;
+const DescribeDeployedResourcesRequest = models.DescribeDeployedResourcesRequest;
 const CreateCertificateResponse = models.CreateCertificateResponse;
 const UploadRevokeLetterRequest = models.UploadRevokeLetterRequest;
 const DeleteCertificateResponse = models.DeleteCertificateResponse;
 const RevokeCertificateResponse = models.RevokeCertificateResponse;
-const RevokeDomainValidateAuths = models.RevokeDomainValidateAuths;
+const DeployedResources = models.DeployedResources;
 const DescribeCertificateDetailResponse = models.DescribeCertificateDetailResponse;
 const CheckCertificateChainResponse = models.CheckCertificateChainResponse;
 const ModifyCertificateProjectRequest = models.ModifyCertificateProjectRequest;
+const CertHostingInfo = models.CertHostingInfo;
 const DvAuths = models.DvAuths;
-const ModifyCertificateAliasRequest = models.ModifyCertificateAliasRequest;
+const HostCertificateRequest = models.HostCertificateRequest;
 const DescribeCertificateRequest = models.DescribeCertificateRequest;
 const DescribeManagerDetailRequest = models.DescribeManagerDetailRequest;
 const DvAuthDetail = models.DvAuthDetail;
 const ProjectInfo = models.ProjectInfo;
+const DescribeDeployedResourcesResponse = models.DescribeDeployedResourcesResponse;
 const DescribeCertificateOperateLogsRequest = models.DescribeCertificateOperateLogsRequest;
 const CancelCertificateOrderResponse = models.CancelCertificateOrderResponse;
 const CreateCertificateRequest = models.CreateCertificateRequest;
@@ -66,17 +72,19 @@ const CommitCertificateInformationResponse = models.CommitCertificateInformation
 const UploadConfirmLetterResponse = models.UploadConfirmLetterResponse;
 const DeleteManagerResponse = models.DeleteManagerResponse;
 const VerifyManagerRequest = models.VerifyManagerRequest;
+const RevokeDomainValidateAuths = models.RevokeDomainValidateAuths;
 const UploadCertificateResponse = models.UploadCertificateResponse;
 const CheckCertificateChainRequest = models.CheckCertificateChainRequest;
 const ModifyCertificateAliasResponse = models.ModifyCertificateAliasResponse;
 const DescribeManagerDetailResponse = models.DescribeManagerDetailResponse;
-const SubmittedData = models.SubmittedData;
+const ManagerStatusInfo = models.ManagerStatusInfo;
 const SubmitCertificateInformationRequest = models.SubmitCertificateInformationRequest;
 const DescribeCertificatesRequest = models.DescribeCertificatesRequest;
 const DescribeManagersRequest = models.DescribeManagersRequest;
 const CompleteCertificateResponse = models.CompleteCertificateResponse;
 const SubmitCertificateInformationResponse = models.SubmitCertificateInformationResponse;
 const RevokeCertificateRequest = models.RevokeCertificateRequest;
+const SubmittedData = models.SubmittedData;
 
 
 /**
@@ -266,6 +274,17 @@ class SslClient extends AbstractClient {
     }
 
     /**
+     * 云资源托管
+     * @param {HostCertificateRequest} req
+     * @param {function(string, HostCertificateResponse):void} cb
+     * @public
+     */
+    HostCertificate(req, cb) {
+        let resp = new HostCertificateResponse();
+        this.request("HostCertificate", req, resp, cb);
+    }
+
+    /**
      * 批量修改证书所属项目。
      * @param {ModifyCertificateProjectRequest} req
      * @param {function(string, ModifyCertificateProjectResponse):void} cb
@@ -285,6 +304,17 @@ class SslClient extends AbstractClient {
     ModifyCertificateAlias(req, cb) {
         let resp = new ModifyCertificateAliasResponse();
         this.request("ModifyCertificateAlias", req, resp, cb);
+    }
+
+    /**
+     * 证书查询关联资源
+     * @param {DescribeDeployedResourcesRequest} req
+     * @param {function(string, DescribeDeployedResourcesResponse):void} cb
+     * @public
+     */
+    DescribeDeployedResources(req, cb) {
+        let resp = new DescribeDeployedResourcesResponse();
+        this.request("DescribeDeployedResources", req, resp, cb);
     }
 
     /**

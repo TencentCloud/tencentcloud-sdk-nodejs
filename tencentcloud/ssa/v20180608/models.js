@@ -17,6 +17,55 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * DescribeMappingResults返回参数结构体
+ * @class
+ */
+class DescribeMappingResultsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总记录数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * 列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Results || null}
+         */
+        this.Data = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+
+        if (params.Data) {
+            let obj = new Results();
+            obj.deserialize(params.Data)
+            this.Data = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeAssetDetail请求参数结构体
  * @class
  */
@@ -40,6 +89,47 @@ class DescribeAssetDetailRequest extends  AbstractModel {
             return;
         }
         this.Params = 'Params' in params ? params.Params : null;
+
+    }
+}
+
+/**
+ * DescribeSocCheckItemList返回参数结构体
+ * @class
+ */
+class DescribeSocCheckItemListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 检查项列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {DescribeSocCheckItemListRspRsp || null}
+         */
+        this.Data = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            let obj = new DescribeSocCheckItemListRspRsp();
+            obj.deserialize(params.Data)
+            this.Data = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -80,6 +170,41 @@ class DescribeVulListResponse extends  AbstractModel {
             this.Data = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeSocAlertDetails请求参数结构体
+ * @class
+ */
+class DescribeSocAlertDetailsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 告警id
+         * @type {string || null}
+         */
+        this.AlertId = null;
+
+        /**
+         * 告警时间，取Timestamp字段
+         * @type {string || null}
+         */
+        this.AlertTimestamp = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AlertId = 'AlertId' in params ? params.AlertId : null;
+        this.AlertTimestamp = 'AlertTimestamp' in params ? params.AlertTimestamp : null;
 
     }
 }
@@ -228,6 +353,265 @@ class DataCheck extends  AbstractModel {
         this.IsChecked = 'IsChecked' in params ? params.IsChecked : null;
         this.AssetTotal = 'AssetTotal' in params ? params.AssetTotal : null;
         this.Remarks = 'Remarks' in params ? params.Remarks : null;
+
+    }
+}
+
+/**
+ * DescribeSocCheckResultList返回参数结构体
+ * @class
+ */
+class DescribeSocCheckResultListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 无
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {DescribeSocCheckResultListRspRsp || null}
+         */
+        this.Data = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            let obj = new DescribeSocCheckResultListRspRsp();
+            obj.deserialize(params.Data)
+            this.Data = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * soc产品购买信息
+ * @class
+ */
+class SocProductionItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 名字
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 标识
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Index = null;
+
+        /**
+         * 状态
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Index = 'Index' in params ? params.Index : null;
+        this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
+ * 测绘记录
+ * @class
+ */
+class MappingResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 资产名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.AssetName = null;
+
+        /**
+         * 公网ip
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.AssetIp = null;
+
+        /**
+         * 内网ip
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.PrivateIp = null;
+
+        /**
+         * 资产id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.AssetId = null;
+
+        /**
+         * 协议
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * 端口
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Port = null;
+
+        /**
+         * 服务
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Service = null;
+
+        /**
+         * 组件
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Component = null;
+
+        /**
+         * 进程
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Process = null;
+
+        /**
+         * 操作系统
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.OS = null;
+
+        /**
+         * 测绘时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.LastMappingTime = null;
+
+        /**
+         * 处置建议
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DisposalRecommendations = null;
+
+        /**
+         * 处置建议详情
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DisposalRecommendationDetails = null;
+
+        /**
+         * 资产类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.AssetType = null;
+
+        /**
+         * 域名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 测绘状态
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.MappingStatus = null;
+
+        /**
+         * 区域
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * 安全防护状态
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<SecurityStatus> || null}
+         */
+        this.SecurityStatus = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AssetName = 'AssetName' in params ? params.AssetName : null;
+        this.AssetIp = 'AssetIp' in params ? params.AssetIp : null;
+        this.PrivateIp = 'PrivateIp' in params ? params.PrivateIp : null;
+        this.AssetId = 'AssetId' in params ? params.AssetId : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.Service = 'Service' in params ? params.Service : null;
+        this.Component = 'Component' in params ? params.Component : null;
+        this.Process = 'Process' in params ? params.Process : null;
+        this.OS = 'OS' in params ? params.OS : null;
+        this.LastMappingTime = 'LastMappingTime' in params ? params.LastMappingTime : null;
+        this.DisposalRecommendations = 'DisposalRecommendations' in params ? params.DisposalRecommendations : null;
+        this.DisposalRecommendationDetails = 'DisposalRecommendationDetails' in params ? params.DisposalRecommendationDetails : null;
+        this.AssetType = 'AssetType' in params ? params.AssetType : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.MappingStatus = 'MappingStatus' in params ? params.MappingStatus : null;
+        this.Region = 'Region' in params ? params.Region : null;
+
+        if (params.SecurityStatus) {
+            this.SecurityStatus = new Array();
+            for (let z in params.SecurityStatus) {
+                let obj = new SecurityStatus();
+                obj.deserialize(params.SecurityStatus[z]);
+                this.SecurityStatus.push(obj);
+            }
+        }
 
     }
 }
@@ -565,6 +949,111 @@ class Asset extends  AbstractModel {
 }
 
 /**
+ * SaDivulgeDataQueryPub请求参数结构体
+ * @class
+ */
+class SaDivulgeDataQueryPubRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 模糊查询字段(针对appid或者uin)
+         * @type {string || null}
+         */
+        this.QueryKey = null;
+
+        /**
+         * 安全事件名称
+         * @type {string || null}
+         */
+        this.EventName = null;
+
+        /**
+         * 监控源  0:全部 1:GitHub 2:暗网 默认值1
+         * @type {string || null}
+         */
+        this.DivulgeSoure = null;
+
+        /**
+         * 受影响资产
+         * @type {string || null}
+         */
+        this.Asset = null;
+
+        /**
+         * 命中主题集下的规则topic名称
+         * @type {string || null}
+         */
+        this.RuleName = null;
+
+        /**
+         * 命中主题集下的规则topic唯一id
+         * @type {string || null}
+         */
+        this.RuleId = null;
+
+        /**
+         * 风险等级 -1:未知 1:低危 2:中危 3:高危 4:严重
+         * @type {string || null}
+         */
+        this.Level = null;
+
+        /**
+         * 安全事件处理状态 -1:未知 1:待处理 2:已处理 3:误报 4:已忽略 5:已知晓 6:已信任
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 起始时间
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 结束时间
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 查询起始地址
+         * @type {string || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 查询个数
+         * @type {string || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.QueryKey = 'QueryKey' in params ? params.QueryKey : null;
+        this.EventName = 'EventName' in params ? params.EventName : null;
+        this.DivulgeSoure = 'DivulgeSoure' in params ? params.DivulgeSoure : null;
+        this.Asset = 'Asset' in params ? params.Asset : null;
+        this.RuleName = 'RuleName' in params ? params.RuleName : null;
+        this.RuleId = 'RuleId' in params ? params.RuleId : null;
+        this.Level = 'Level' in params ? params.Level : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
  * DescribeComplianceList返回参数结构体
  * @class
  */
@@ -812,311 +1301,19 @@ class DescribeAssetListResponse extends  AbstractModel {
 }
 
 /**
- * DescribeCheckConfigAssetList返回参数结构体
+ * DescribeSocAlertDetails返回参数结构体
  * @class
  */
-class DescribeCheckConfigAssetListResponse extends  AbstractModel {
+class DescribeSocAlertDetailsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 资产列表总数
-         * @type {number || null}
-         */
-        this.Total = null;
-
-        /**
-         * 资产列表项
+         * 返回详情数据
 注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<CheckAssetItem> || null}
-         */
-        this.CheckAssetsList = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Total = 'Total' in params ? params.Total : null;
-
-        if (params.CheckAssetsList) {
-            this.CheckAssetsList = new Array();
-            for (let z in params.CheckAssetsList) {
-                let obj = new CheckAssetItem();
-                obj.deserialize(params.CheckAssetsList[z]);
-                this.CheckAssetsList.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeCheckConfigDetail请求参数结构体
- * @class
- */
-class DescribeCheckConfigDetailRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 检查项ID
-         * @type {string || null}
-         */
-        this.Id = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Id = 'Id' in params ? params.Id : null;
-
-    }
-}
-
-/**
- * 查询_通用字段
- * @class
- */
-class SaDivulgeDataQueryPub extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Id
-         * @type {string || null}
-         */
-        this.Id = null;
-
-        /**
-         * Uin
-         * @type {string || null}
-         */
-        this.Uin = null;
-
-        /**
-         * AppId
-         * @type {string || null}
-         */
-        this.AppId = null;
-
-        /**
-         * EventName
-         * @type {string || null}
-         */
-        this.EventName = null;
-
-        /**
-         * DivulgeSoure
-         * @type {string || null}
-         */
-        this.DivulgeSoure = null;
-
-        /**
-         * Asset
-         * @type {string || null}
-         */
-        this.Asset = null;
-
-        /**
-         * RuleName
-         * @type {string || null}
-         */
-        this.RuleName = null;
-
-        /**
-         * RuleId
-         * @type {string || null}
-         */
-        this.RuleId = null;
-
-        /**
-         * RuleWord
-         * @type {string || null}
-         */
-        this.RuleWord = null;
-
-        /**
-         * ScanUrl
-         * @type {string || null}
-         */
-        this.ScanUrl = null;
-
-        /**
-         * ScanCount
-         * @type {string || null}
-         */
-        this.ScanCount = null;
-
-        /**
-         * Level
-         * @type {string || null}
-         */
-        this.Level = null;
-
-        /**
-         * Status
-         * @type {string || null}
-         */
-        this.Status = null;
-
-        /**
-         * EventTime
-         * @type {string || null}
-         */
-        this.EventTime = null;
-
-        /**
-         * InsertTime
-         * @type {string || null}
-         */
-        this.InsertTime = null;
-
-        /**
-         * UpdateTime
-         * @type {string || null}
-         */
-        this.UpdateTime = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Id = 'Id' in params ? params.Id : null;
-        this.Uin = 'Uin' in params ? params.Uin : null;
-        this.AppId = 'AppId' in params ? params.AppId : null;
-        this.EventName = 'EventName' in params ? params.EventName : null;
-        this.DivulgeSoure = 'DivulgeSoure' in params ? params.DivulgeSoure : null;
-        this.Asset = 'Asset' in params ? params.Asset : null;
-        this.RuleName = 'RuleName' in params ? params.RuleName : null;
-        this.RuleId = 'RuleId' in params ? params.RuleId : null;
-        this.RuleWord = 'RuleWord' in params ? params.RuleWord : null;
-        this.ScanUrl = 'ScanUrl' in params ? params.ScanUrl : null;
-        this.ScanCount = 'ScanCount' in params ? params.ScanCount : null;
-        this.Level = 'Level' in params ? params.Level : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.EventTime = 'EventTime' in params ? params.EventTime : null;
-        this.InsertTime = 'InsertTime' in params ? params.InsertTime : null;
-        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
-
-    }
-}
-
-/**
- * DescribeAssetList请求参数结构体
- * @class
- */
-class DescribeAssetListRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 查询过滤参数
-         * @type {string || null}
-         */
-        this.Params = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Params = 'Params' in params ? params.Params : null;
-
-    }
-}
-
-/**
- * DescribeComplianceDetail返回参数结构体
- * @class
- */
-class DescribeComplianceDetailResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 合规管理检查项详情
-         * @type {ComplianceCheckDetail || null}
-         */
-        this.CheckConfigDetail = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.CheckConfigDetail) {
-            let obj = new ComplianceCheckDetail();
-            obj.deserialize(params.CheckConfigDetail)
-            this.CheckConfigDetail = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeAssetsMappingList返回参数结构体
- * @class
- */
-class DescribeAssetsMappingListResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 资产测绘列表
-         * @type {Array.<DataAssetMapping> || null}
+         * @type {AlertDetail || null}
          */
         this.Data = null;
-
-        /**
-         * 资产测绘总数
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * 类型分类统计数量
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.CountByType = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1135,51 +1332,11 @@ class DescribeAssetsMappingListResponse extends  AbstractModel {
         }
 
         if (params.Data) {
-            this.Data = new Array();
-            for (let z in params.Data) {
-                let obj = new DataAssetMapping();
-                obj.deserialize(params.Data[z]);
-                this.Data.push(obj);
-            }
+            let obj = new AlertDetail();
+            obj.deserialize(params.Data)
+            this.Data = obj;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-        this.CountByType = 'CountByType' in params ? params.CountByType : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * 标签
- * @class
- */
-class Tag extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 数据库标识
-         * @type {number || null}
-         */
-        this.Fid = null;
-
-        /**
-         * 标签名称
-         * @type {string || null}
-         */
-        this.Fname = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Fid = 'Fid' in params ? params.Fid : null;
-        this.Fname = 'Fname' in params ? params.Fname : null;
 
     }
 }
@@ -1393,6 +1550,13 @@ class VulItem extends  AbstractModel {
          */
         this.VulRepairPlan = null;
 
+        /**
+         * 漏洞文件路径
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.VulPath = null;
+
     }
 
     /**
@@ -1433,6 +1597,722 @@ class VulItem extends  AbstractModel {
         this.IsOpen = 'IsOpen' in params ? params.IsOpen : null;
         this.YzHostId = 'YzHostId' in params ? params.YzHostId : null;
         this.VulRepairPlan = 'VulRepairPlan' in params ? params.VulRepairPlan : null;
+        this.VulPath = 'VulPath' in params ? params.VulPath : null;
+
+    }
+}
+
+/**
+ * DescribeCheckConfigAssetList返回参数结构体
+ * @class
+ */
+class DescribeCheckConfigAssetListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 资产列表总数
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * 资产列表项
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<CheckAssetItem> || null}
+         */
+        this.CheckAssetsList = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+
+        if (params.CheckAssetsList) {
+            this.CheckAssetsList = new Array();
+            for (let z in params.CheckAssetsList) {
+                let obj = new CheckAssetItem();
+                obj.deserialize(params.CheckAssetsList[z]);
+                this.CheckAssetsList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 标签
+ * @class
+ */
+class Tag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 数据库标识
+         * @type {number || null}
+         */
+        this.Fid = null;
+
+        /**
+         * 标签名称
+         * @type {string || null}
+         */
+        this.Fname = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Fid = 'Fid' in params ? params.Fid : null;
+        this.Fname = 'Fname' in params ? params.Fname : null;
+
+    }
+}
+
+/**
+ * 云安全配置检测结果
+ * @class
+ */
+class SocCheckResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 检查项的uuid
+         * @type {string || null}
+         */
+        this.CheckId = null;
+
+        /**
+         * 配置要求
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 检查项的类型
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 检查对象
+         * @type {string || null}
+         */
+        this.AssetType = null;
+
+        /**
+         * 策略名
+         * @type {string || null}
+         */
+        this.PloyName = null;
+
+        /**
+         * 策略id
+         * @type {number || null}
+         */
+        this.PloyId = null;
+
+        /**
+         * 正常,低危,中危,高危
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * 不符合数
+         * @type {number || null}
+         */
+        this.FailAssetNum = null;
+
+        /**
+         * 总数
+         * @type {number || null}
+         */
+        this.TotalAssetNum = null;
+
+        /**
+         * 处置建议url链接
+         * @type {string || null}
+         */
+        this.DealUrl = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CheckId = 'CheckId' in params ? params.CheckId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.AssetType = 'AssetType' in params ? params.AssetType : null;
+        this.PloyName = 'PloyName' in params ? params.PloyName : null;
+        this.PloyId = 'PloyId' in params ? params.PloyId : null;
+        this.Result = 'Result' in params ? params.Result : null;
+        this.FailAssetNum = 'FailAssetNum' in params ? params.FailAssetNum : null;
+        this.TotalAssetNum = 'TotalAssetNum' in params ? params.TotalAssetNum : null;
+        this.DealUrl = 'DealUrl' in params ? params.DealUrl : null;
+
+    }
+}
+
+/**
+ * 告警列表响应数据
+ * @class
+ */
+class AlertListData extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * 返回列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<AlertType> || null}
+         */
+        this.AlertList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+
+        if (params.AlertList) {
+            this.AlertList = new Array();
+            for (let z in params.AlertList) {
+                let obj = new AlertType();
+                obj.deserialize(params.AlertList[z]);
+                this.AlertList.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * 查询_通用字段
+ * @class
+ */
+class SaDivulgeDataQueryPub extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Id信息
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * 用户Uin
+         * @type {string || null}
+         */
+        this.Uin = null;
+
+        /**
+         * 用户AppId
+         * @type {string || null}
+         */
+        this.AppId = null;
+
+        /**
+         * 事件名称
+         * @type {string || null}
+         */
+        this.EventName = null;
+
+        /**
+         * 监控源 0:全部 1:GitHub 2:暗网 默认值1
+         * @type {string || null}
+         */
+        this.DivulgeSoure = null;
+
+        /**
+         * 受影响资产
+         * @type {string || null}
+         */
+        this.Asset = null;
+
+        /**
+         * 命中主题集下的规则topic名称
+         * @type {string || null}
+         */
+        this.RuleName = null;
+
+        /**
+         * 命中主题集下的规则topic唯一id
+         * @type {string || null}
+         */
+        this.RuleId = null;
+
+        /**
+         * 命中主题集下的自定义规则策略
+         * @type {string || null}
+         */
+        this.RuleWord = null;
+
+        /**
+         * 扫描监测url
+         * @type {string || null}
+         */
+        this.ScanUrl = null;
+
+        /**
+         * 扫描监测命中次数
+         * @type {string || null}
+         */
+        this.ScanCount = null;
+
+        /**
+         * 风险等级 -1:未知 1:低危 2:中危 3:高危 4:严重
+         * @type {string || null}
+         */
+        this.Level = null;
+
+        /**
+         * 安全事件处理状态 -1:未知 1:待处理 2:已处理 3:误报 4:已忽略 5:已知晓 6:已信任
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 安全事件发生时间
+         * @type {string || null}
+         */
+        this.EventTime = null;
+
+        /**
+         * 事件插入时间
+         * @type {string || null}
+         */
+        this.InsertTime = null;
+
+        /**
+         * 事件更新时间
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Uin = 'Uin' in params ? params.Uin : null;
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.EventName = 'EventName' in params ? params.EventName : null;
+        this.DivulgeSoure = 'DivulgeSoure' in params ? params.DivulgeSoure : null;
+        this.Asset = 'Asset' in params ? params.Asset : null;
+        this.RuleName = 'RuleName' in params ? params.RuleName : null;
+        this.RuleId = 'RuleId' in params ? params.RuleId : null;
+        this.RuleWord = 'RuleWord' in params ? params.RuleWord : null;
+        this.ScanUrl = 'ScanUrl' in params ? params.ScanUrl : null;
+        this.ScanCount = 'ScanCount' in params ? params.ScanCount : null;
+        this.Level = 'Level' in params ? params.Level : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.EventTime = 'EventTime' in params ? params.EventTime : null;
+        this.InsertTime = 'InsertTime' in params ? params.InsertTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+
+    }
+}
+
+/**
+ * 返回结构
+ * @class
+ */
+class SocComplianceInfoResp extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 合格项
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<SocComplianceItem> || null}
+         */
+        this.Items = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Items) {
+            this.Items = new Array();
+            for (let z in params.Items) {
+                let obj = new SocComplianceItem();
+                obj.deserialize(params.Items[z]);
+                this.Items.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * DescribeAssetList请求参数结构体
+ * @class
+ */
+class DescribeAssetListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 查询过滤参数
+         * @type {string || null}
+         */
+        this.Params = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Params = 'Params' in params ? params.Params : null;
+
+    }
+}
+
+/**
+ * DescribeComplianceDetail返回参数结构体
+ * @class
+ */
+class DescribeComplianceDetailResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 合规管理检查项详情
+         * @type {ComplianceCheckDetail || null}
+         */
+        this.CheckConfigDetail = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.CheckConfigDetail) {
+            let obj = new ComplianceCheckDetail();
+            obj.deserialize(params.CheckConfigDetail)
+            this.CheckConfigDetail = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeAssetsMappingList返回参数结构体
+ * @class
+ */
+class DescribeAssetsMappingListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 资产测绘列表
+         * @type {Array.<DataAssetMapping> || null}
+         */
+        this.Data = null;
+
+        /**
+         * 资产测绘总数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 类型分类统计数量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CountByType = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new DataAssetMapping();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.CountByType = 'CountByType' in params ? params.CountByType : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeSocAlertList返回参数结构体
+ * @class
+ */
+class DescribeSocAlertListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 业务数据
+         * @type {AlertListData || null}
+         */
+        this.Data = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            let obj = new AlertListData();
+            obj.deserialize(params.Data)
+            this.Data = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * soc合规信息
+ * @class
+ */
+class SocComplianceItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Item = null;
+
+        /**
+         * 描述
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 分类
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.StandardItem = null;
+
+        /**
+         * 结果
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Result = null;
+
+        /**
+         * 建议
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Suggestion = null;
+
+        /**
+         * 产品字符
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ProStr = null;
+
+        /**
+         * 产品数组
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<SocProductionItem> || null}
+         */
+        this.Production = null;
+
+        /**
+         * 配置项数组
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<SocCheckItem> || null}
+         */
+        this.CheckItems = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Item = 'Item' in params ? params.Item : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.StandardItem = 'StandardItem' in params ? params.StandardItem : null;
+        this.Result = 'Result' in params ? params.Result : null;
+        this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
+        this.ProStr = 'ProStr' in params ? params.ProStr : null;
+
+        if (params.Production) {
+            this.Production = new Array();
+            for (let z in params.Production) {
+                let obj = new SocProductionItem();
+                obj.deserialize(params.Production[z]);
+                this.Production.push(obj);
+            }
+        }
+
+        if (params.CheckItems) {
+            this.CheckItems = new Array();
+            for (let z in params.CheckItems) {
+                let obj = new SocCheckItem();
+                obj.deserialize(params.CheckItems[z]);
+                this.CheckItems.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * 安全放回状态
+ * @class
+ */
+class SecurityStatus extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
+ * 排序的字段
+ * @class
+ */
+class QuerySort extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 排序字段
+         * @type {string || null}
+         */
+        this.SortKey = null;
+
+        /**
+         * 顺序，1升序2降序
+         * @type {number || null}
+         */
+        this.SortType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SortKey = 'SortKey' in params ? params.SortKey : null;
+        this.SortType = 'SortType' in params ? params.SortType : null;
 
     }
 }
@@ -1558,6 +2438,83 @@ class DescribeLeakDetectionListRequest extends  AbstractModel {
 }
 
 /**
+ * 检查项相关信息
+ * @class
+ */
+class SocCheckItemV1 extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 检查项id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CheckId = null;
+
+        /**
+         * 配置要求
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 检查项类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 检查对象
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.AssetType = null;
+
+        /**
+         * 默认风险等级 2:低危 3:中危 4:高危
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Level = null;
+
+        /**
+         * 相关规范
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Standard = null;
+
+        /**
+         * 检查项是否付费 1:免费 2:付费
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.IsFree = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CheckId = 'CheckId' in params ? params.CheckId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.AssetType = 'AssetType' in params ? params.AssetType : null;
+        this.Level = 'Level' in params ? params.Level : null;
+        this.Standard = 'Standard' in params ? params.Standard : null;
+        this.IsFree = 'IsFree' in params ? params.IsFree : null;
+
+    }
+}
+
+/**
  * DescribeEventDetail返回参数结构体
  * @class
  */
@@ -1643,7 +2600,7 @@ class DescribeSafetyEventListResponse extends  AbstractModel {
 }
 
 /**
- * 查询_通用字段
+ * 自定义泄露事件列表
  * @class
  */
 class SaDivulgeDataQueryPubList extends  AbstractModel {
@@ -1651,13 +2608,13 @@ class SaDivulgeDataQueryPubList extends  AbstractModel {
         super();
 
         /**
-         * Count
+         * 数据条数
          * @type {number || null}
          */
         this.Count = null;
 
         /**
-         * List
+         * 自定义泄露事件列表
          * @type {Array.<SaDivulgeDataQueryPub> || null}
          */
         this.List = null;
@@ -1681,6 +2638,79 @@ class SaDivulgeDataQueryPubList extends  AbstractModel {
                 this.List.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * DescribeSocCheckResultList请求参数结构体
+ * @class
+ */
+class DescribeSocCheckResultListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 查询参数,可支持的查询参数：
+Name,Type,AssetType,Result,PloyName,PloyId
+         * @type {Array.<QueryFilter> || null}
+         */
+        this.Filter = null;
+
+        /**
+         * 排序参数,可支持的排序参数：CheckStatus,RiskCount
+         * @type {Array.<QuerySort> || null}
+         */
+        this.Sorter = null;
+
+        /**
+         * 当前页码数据，默认值为10
+         * @type {number || null}
+         */
+        this.PageSize = null;
+
+        /**
+         * 当前页面索引，默认值为0
+         * @type {number || null}
+         */
+        this.PageIndex = null;
+
+        /**
+         * 资产id
+         * @type {string || null}
+         */
+        this.AssetId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filter) {
+            this.Filter = new Array();
+            for (let z in params.Filter) {
+                let obj = new QueryFilter();
+                obj.deserialize(params.Filter[z]);
+                this.Filter.push(obj);
+            }
+        }
+
+        if (params.Sorter) {
+            this.Sorter = new Array();
+            for (let z in params.Sorter) {
+                let obj = new QuerySort();
+                obj.deserialize(params.Sorter[z]);
+                this.Sorter.push(obj);
+            }
+        }
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
+        this.PageIndex = 'PageIndex' in params ? params.PageIndex : null;
+        this.AssetId = 'AssetId' in params ? params.AssetId : null;
 
     }
 }
@@ -1758,6 +2788,357 @@ class DescribeSafetyEventListRequest extends  AbstractModel {
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.IsFilterResponseTime = 'IsFilterResponseTime' in params ? params.IsFilterResponseTime : null;
+
+    }
+}
+
+/**
+ * 资产查询过滤参数
+ * @class
+ */
+class AssetQueryFilter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 查询参数
+         * @type {Array.<QueryFilter> || null}
+         */
+        this.Filter = null;
+
+        /**
+         * 查询连接符，1 and  ，2 or
+         * @type {number || null}
+         */
+        this.Logic = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filter) {
+            this.Filter = new Array();
+            for (let z in params.Filter) {
+                let obj = new QueryFilter();
+                obj.deserialize(params.Filter[z]);
+                this.Filter.push(obj);
+            }
+        }
+        this.Logic = 'Logic' in params ? params.Logic : null;
+
+    }
+}
+
+/**
+ * 告警字段
+ * @class
+ */
+class AlertType extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 标准时间格式
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.AlertTime = null;
+
+        /**
+         * 唯一id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.AlertId = null;
+
+        /**
+         * 资产id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.AssetId = null;
+
+        /**
+         * 内网ip
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.AssetPrivateIp = null;
+
+        /**
+         * 名字
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.AlertName = null;
+
+        /**
+         * 告警级别  0:未知 1:低危 2:中危 3:高危 4:严重
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Level = null;
+
+        /**
+         * 类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 来源
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Source = null;
+
+        /**
+         * 攻击字段1
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.AttackChain = null;
+
+        /**
+         * 攻击字段2
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.AttackId = null;
+
+        /**
+         * 关注点
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<ConcernInfo> || null}
+         */
+        this.Concerns = null;
+
+        /**
+         * 1：已防御，0,2：仅检测(0:告警类 1:拦截类 2:放行类 )
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Action = null;
+
+        /**
+         * 0/空：未知，1：未成功，2：成功
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.AttackResult = null;
+
+        /**
+         * //调查状态  0/空：未启用，1：调查中，2：完成调查
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.EventStatus = null;
+
+        /**
+         * //关联事件ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.EventId = null;
+
+        /**
+         * //处置状态  0：未关闭，1：已关闭
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 资产名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.AssetName = null;
+
+        /**
+         * 恶意实体
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ConcernMaliciousCount = null;
+
+        /**
+         * 受害者实体
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ConcernVictimCount = null;
+
+        /**
+         * 资产类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.VictimAssetType = null;
+
+        /**
+         * 告警子类
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SubType = null;
+
+        /**
+         * 攻击技术名字
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.AttackName = null;
+
+        /**
+         * 外网ip
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.AssetPublicIp = null;
+
+        /**
+         * 攻击战术名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.AttackTactic = null;
+
+        /**
+         * 资产子网
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.VictimAssetSub = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AlertTime = 'AlertTime' in params ? params.AlertTime : null;
+        this.AlertId = 'AlertId' in params ? params.AlertId : null;
+        this.AssetId = 'AssetId' in params ? params.AssetId : null;
+        this.AssetPrivateIp = 'AssetPrivateIp' in params ? params.AssetPrivateIp : null;
+        this.AlertName = 'AlertName' in params ? params.AlertName : null;
+        this.Level = 'Level' in params ? params.Level : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Source = 'Source' in params ? params.Source : null;
+        this.AttackChain = 'AttackChain' in params ? params.AttackChain : null;
+        this.AttackId = 'AttackId' in params ? params.AttackId : null;
+
+        if (params.Concerns) {
+            this.Concerns = new Array();
+            for (let z in params.Concerns) {
+                let obj = new ConcernInfo();
+                obj.deserialize(params.Concerns[z]);
+                this.Concerns.push(obj);
+            }
+        }
+        this.Action = 'Action' in params ? params.Action : null;
+        this.AttackResult = 'AttackResult' in params ? params.AttackResult : null;
+        this.EventStatus = 'EventStatus' in params ? params.EventStatus : null;
+        this.EventId = 'EventId' in params ? params.EventId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.AssetName = 'AssetName' in params ? params.AssetName : null;
+        this.ConcernMaliciousCount = 'ConcernMaliciousCount' in params ? params.ConcernMaliciousCount : null;
+        this.ConcernVictimCount = 'ConcernVictimCount' in params ? params.ConcernVictimCount : null;
+        this.VictimAssetType = 'VictimAssetType' in params ? params.VictimAssetType : null;
+        this.SubType = 'SubType' in params ? params.SubType : null;
+        this.AttackName = 'AttackName' in params ? params.AttackName : null;
+        this.AssetPublicIp = 'AssetPublicIp' in params ? params.AssetPublicIp : null;
+        this.AttackTactic = 'AttackTactic' in params ? params.AttackTactic : null;
+        this.VictimAssetSub = 'VictimAssetSub' in params ? params.VictimAssetSub : null;
+
+    }
+}
+
+/**
+ * DescribeSocAlertList请求参数结构体
+ * @class
+ */
+class DescribeSocAlertListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 页大小
+         * @type {number || null}
+         */
+        this.PageSize = null;
+
+        /**
+         * 页码
+         * @type {number || null}
+         */
+        this.PageIndex = null;
+
+        /**
+         * 业务场景 参考ScenesType
+         * @type {number || null}
+         */
+        this.Scenes = null;
+
+        /**
+         * 查询参数
+         * @type {Array.<QueryFilter> || null}
+         */
+        this.Filter = null;
+
+        /**
+         * 排序参数
+         * @type {Array.<QuerySort> || null}
+         */
+        this.Sorter = null;
+
+        /**
+         * 是否导出
+         * @type {boolean || null}
+         */
+        this.ExportFlag = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
+        this.PageIndex = 'PageIndex' in params ? params.PageIndex : null;
+        this.Scenes = 'Scenes' in params ? params.Scenes : null;
+
+        if (params.Filter) {
+            this.Filter = new Array();
+            for (let z in params.Filter) {
+                let obj = new QueryFilter();
+                obj.deserialize(params.Filter[z]);
+                this.Filter.push(obj);
+            }
+        }
+
+        if (params.Sorter) {
+            this.Sorter = new Array();
+            for (let z in params.Sorter) {
+                let obj = new QuerySort();
+                obj.deserialize(params.Sorter[z]);
+                this.Sorter.push(obj);
+            }
+        }
+        this.ExportFlag = 'ExportFlag' in params ? params.ExportFlag : null;
 
     }
 }
@@ -1960,7 +3341,7 @@ class SaDivulgeDataQueryPubResponse extends  AbstractModel {
         super();
 
         /**
-         * 结果
+         * 自定义泄露事件列表
          * @type {SaDivulgeDataQueryPubList || null}
          */
         this.Data = null;
@@ -2050,6 +3431,112 @@ class DescribeConfigListRequest extends  AbstractModel {
             return;
         }
         this.Filter = 'Filter' in params ? params.Filter : null;
+
+    }
+}
+
+/**
+ * DescribeSocCspmCompliance返回参数结构体
+ * @class
+ */
+class DescribeSocCspmComplianceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 数据
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {SocComplianceInfoResp || null}
+         */
+        this.Data = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            let obj = new SocComplianceInfoResp();
+            obj.deserialize(params.Data)
+            this.Data = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeMappingResults请求参数结构体
+ * @class
+ */
+class DescribeMappingResultsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 过滤条件，FilterKey 取值范围：AssetId，AssetIp，PrivateIp，Protocol，Service，OS，Process，Component，AssetType，Domain，Port，LastMappingTime，MappingType，Disposal，Vpc
+         * @type {Array.<AssetQueryFilter> || null}
+         */
+        this.Filter = null;
+
+        /**
+         * 排序条件，SortKey取值范围：CreateTime，LastMappingTime
+         * @type {Array.<QuerySort> || null}
+         */
+        this.Sorter = null;
+
+        /**
+         * 页码
+         * @type {number || null}
+         */
+        this.PageIndex = null;
+
+        /**
+         * 页大小，默认大小20
+         * @type {number || null}
+         */
+        this.PageSize = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filter) {
+            this.Filter = new Array();
+            for (let z in params.Filter) {
+                let obj = new AssetQueryFilter();
+                obj.deserialize(params.Filter[z]);
+                this.Filter.push(obj);
+            }
+        }
+
+        if (params.Sorter) {
+            this.Sorter = new Array();
+            for (let z in params.Sorter) {
+                let obj = new QuerySort();
+                obj.deserialize(params.Sorter[z]);
+                this.Sorter.push(obj);
+            }
+        }
+        this.PageIndex = 'PageIndex' in params ? params.PageIndex : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
 
     }
 }
@@ -2311,6 +3798,34 @@ class DataAssetMapping extends  AbstractModel {
         this.Component = 'Component' in params ? params.Component : null;
         this.AssetInstanceType = 'AssetInstanceType' in params ? params.AssetInstanceType : null;
         this.IsIntranet = 'IsIntranet' in params ? params.IsIntranet : null;
+
+    }
+}
+
+/**
+ * DescribeCheckConfigDetail请求参数结构体
+ * @class
+ */
+class DescribeCheckConfigDetailRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 检查项ID
+         * @type {string || null}
+         */
+        this.Id = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
 
     }
 }
@@ -2637,6 +4152,20 @@ class DataEvent extends  AbstractModel {
          */
         this.SsaEventId = null;
 
+        /**
+         * 是否新接入的云防事件
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.IsNewCfwEvent = null;
+
+        /**
+         * 出入站方向
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Direction = null;
+
     }
 
     /**
@@ -2679,6 +4208,73 @@ class DataEvent extends  AbstractModel {
         this.SoarPlaybookType = 'SoarPlaybookType' in params ? params.SoarPlaybookType : null;
         this.SoarRunId = 'SoarRunId' in params ? params.SoarRunId : null;
         this.SsaEventId = 'SsaEventId' in params ? params.SsaEventId : null;
+        this.IsNewCfwEvent = 'IsNewCfwEvent' in params ? params.IsNewCfwEvent : null;
+        this.Direction = 'Direction' in params ? params.Direction : null;
+
+    }
+}
+
+/**
+ * DescribeSocCheckItemList请求参数结构体
+ * @class
+ */
+class DescribeSocCheckItemListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 查询参数,可支持的排序字段:Name,Type,AssetType,Level,Standard,IsFree
+         * @type {Array.<QueryFilter> || null}
+         */
+        this.Filter = null;
+
+        /**
+         * 排序参数:无
+         * @type {Array.<QuerySort> || null}
+         */
+        this.Sorter = null;
+
+        /**
+         * 当前页码数据，默认值为10
+         * @type {number || null}
+         */
+        this.PageSize = null;
+
+        /**
+         * 当前页面索引，默认值为0
+         * @type {number || null}
+         */
+        this.PageIndex = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filter) {
+            this.Filter = new Array();
+            for (let z in params.Filter) {
+                let obj = new QueryFilter();
+                obj.deserialize(params.Filter[z]);
+                this.Filter.push(obj);
+            }
+        }
+
+        if (params.Sorter) {
+            this.Sorter = new Array();
+            for (let z in params.Sorter) {
+                let obj = new QuerySort();
+                obj.deserialize(params.Sorter[z]);
+                this.Sorter.push(obj);
+            }
+        }
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
+        this.PageIndex = 'PageIndex' in params ? params.PageIndex : null;
 
     }
 }
@@ -2798,6 +4394,104 @@ class CheckConfigDetail extends  AbstractModel {
         this.AssetType = 'AssetType' in params ? params.AssetType : null;
         this.ResCount = 'ResCount' in params ? params.ResCount : null;
         this.IsIgnore = 'IsIgnore' in params ? params.IsIgnore : null;
+
+    }
+}
+
+/**
+ * 云安全配置检查项列表
+ * @class
+ */
+class DescribeSocCheckItemListRspRsp extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 检查项详情列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<SocCheckItemV1> || null}
+         */
+        this.List = null;
+
+        /**
+         * 检查项总数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Total = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new SocCheckItemV1();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+
+    }
+}
+
+/**
+ * SocCheckItem类型
+ * @class
+ */
+class SocCheckItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 名字
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 唯一id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.LevelId = null;
+
+        /**
+         * 成功数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.SuccessCount = null;
+
+        /**
+         * 失败数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.FailCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.LevelId = 'LevelId' in params ? params.LevelId : null;
+        this.SuccessCount = 'SuccessCount' in params ? params.SuccessCount : null;
+        this.FailCount = 'FailCount' in params ? params.FailCount : null;
 
     }
 }
@@ -2972,84 +4666,26 @@ class CheckAssetItem extends  AbstractModel {
 }
 
 /**
- * SaDivulgeDataQueryPub请求参数结构体
+ * 资产测绘结果统计
  * @class
  */
-class SaDivulgeDataQueryPubRequest extends  AbstractModel {
+class AssetTypeStatistic extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 模糊查询字段
+         * 资产类型
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.QueryKey = null;
+        this.AssetType = null;
 
         /**
-         * 安全事件名称
-         * @type {string || null}
+         * 统计计数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
          */
-        this.EventName = null;
-
-        /**
-         * 监控源
-         * @type {string || null}
-         */
-        this.DivulgeSoure = null;
-
-        /**
-         * 受影响资产
-         * @type {string || null}
-         */
-        this.Asset = null;
-
-        /**
-         * 命中主题集下的规则topic名称
-         * @type {string || null}
-         */
-        this.RuleName = null;
-
-        /**
-         * 命中主题集下的规则topic唯一id
-         * @type {string || null}
-         */
-        this.RuleId = null;
-
-        /**
-         * 风险等级
-         * @type {string || null}
-         */
-        this.Level = null;
-
-        /**
-         * 安全事件状态
-         * @type {string || null}
-         */
-        this.Status = null;
-
-        /**
-         * 起始时间
-         * @type {string || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * 结束时间
-         * @type {string || null}
-         */
-        this.EndTime = null;
-
-        /**
-         * 查询起始地址
-         * @type {string || null}
-         */
-        this.Offset = null;
-
-        /**
-         * 查询个数
-         * @type {string || null}
-         */
-        this.Limit = null;
+        this.AssetCount = null;
 
     }
 
@@ -3060,18 +4696,79 @@ class SaDivulgeDataQueryPubRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.QueryKey = 'QueryKey' in params ? params.QueryKey : null;
-        this.EventName = 'EventName' in params ? params.EventName : null;
-        this.DivulgeSoure = 'DivulgeSoure' in params ? params.DivulgeSoure : null;
-        this.Asset = 'Asset' in params ? params.Asset : null;
-        this.RuleName = 'RuleName' in params ? params.RuleName : null;
-        this.RuleId = 'RuleId' in params ? params.RuleId : null;
-        this.Level = 'Level' in params ? params.Level : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.AssetType = 'AssetType' in params ? params.AssetType : null;
+        this.AssetCount = 'AssetCount' in params ? params.AssetCount : null;
+
+    }
+}
+
+/**
+ * 检查项结果详情列表
+ * @class
+ */
+class DescribeSocCheckResultListRspRsp extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 具体检查项详情
+         * @type {Array.<SocCheckResult> || null}
+         */
+        this.List = null;
+
+        /**
+         * 检查结果总数
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * 低危个数
+         * @type {number || null}
+         */
+        this.LowTotal = null;
+
+        /**
+         * 中危个数
+         * @type {number || null}
+         */
+        this.MiddleTotal = null;
+
+        /**
+         * 高危个数
+         * @type {number || null}
+         */
+        this.HighTotal = null;
+
+        /**
+         * 正常个数
+         * @type {number || null}
+         */
+        this.NormalTotal = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new SocCheckResult();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+        this.LowTotal = 'LowTotal' in params ? params.LowTotal : null;
+        this.MiddleTotal = 'MiddleTotal' in params ? params.MiddleTotal : null;
+        this.HighTotal = 'HighTotal' in params ? params.HighTotal : null;
+        this.NormalTotal = 'NormalTotal' in params ? params.NormalTotal : null;
 
     }
 }
@@ -3107,6 +4804,127 @@ class DescribeVulDetailRequest extends  AbstractModel {
         }
         this.UniqId = 'UniqId' in params ? params.UniqId : null;
         this.Source = 'Source' in params ? params.Source : null;
+
+    }
+}
+
+/**
+ * 关注点类型
+ * @class
+ */
+class ConcernInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 关注点类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ConcernType = null;
+
+        /**
+         * 实体类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.EntityType = null;
+
+        /**
+         * 关注点
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Concern = null;
+
+        /**
+         * 最近数量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.StatisticsCount = null;
+
+        /**
+         * 可疑关注点字段
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SearchData = null;
+
+        /**
+         * 可疑关注点字段
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.IpCountryIso = null;
+
+        /**
+         * 可疑关注点字段
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.IpProvinceIso = null;
+
+        /**
+         * 可疑关注点字段
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.IpCity = null;
+
+        /**
+         * 可疑关注点字段
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.EventSubType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ConcernType = 'ConcernType' in params ? params.ConcernType : null;
+        this.EntityType = 'EntityType' in params ? params.EntityType : null;
+        this.Concern = 'Concern' in params ? params.Concern : null;
+        this.StatisticsCount = 'StatisticsCount' in params ? params.StatisticsCount : null;
+        this.SearchData = 'SearchData' in params ? params.SearchData : null;
+        this.IpCountryIso = 'IpCountryIso' in params ? params.IpCountryIso : null;
+        this.IpProvinceIso = 'IpProvinceIso' in params ? params.IpProvinceIso : null;
+        this.IpCity = 'IpCity' in params ? params.IpCity : null;
+        this.EventSubType = 'EventSubType' in params ? params.EventSubType : null;
+
+    }
+}
+
+/**
+ * DescribeAssetsMappingList请求参数结构体
+ * @class
+ */
+class DescribeAssetsMappingListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 请求参数
+         * @type {string || null}
+         */
+        this.Params = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Params = 'Params' in params ? params.Params : null;
 
     }
 }
@@ -3261,18 +5079,40 @@ class DataCompliance extends  AbstractModel {
 }
 
 /**
- * DescribeAssetsMappingList请求参数结构体
+ * 测绘结果
  * @class
  */
-class DescribeAssetsMappingListRequest extends  AbstractModel {
+class Results extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 请求参数
-         * @type {string || null}
+         * 测绘类型统计
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<AssetTypeStatistic> || null}
          */
-        this.Params = null;
+        this.Statistics = null;
+
+        /**
+         * 测绘结果列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<MappingResult> || null}
+         */
+        this.Result = null;
+
+        /**
+         * 测绘任务数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TaskCount = null;
+
+        /**
+         * 最大测绘任务数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TaskMaxCount = null;
 
     }
 
@@ -3283,35 +5123,26 @@ class DescribeAssetsMappingListRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Params = 'Params' in params ? params.Params : null;
 
-    }
-}
-
-/**
- * DescribeComplianceDetail请求参数结构体
- * @class
- */
-class DescribeComplianceDetailRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 检查项uuid
-         * @type {string || null}
-         */
-        this.Id = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
+        if (params.Statistics) {
+            this.Statistics = new Array();
+            for (let z in params.Statistics) {
+                let obj = new AssetTypeStatistic();
+                obj.deserialize(params.Statistics[z]);
+                this.Statistics.push(obj);
+            }
         }
-        this.Id = 'Id' in params ? params.Id : null;
+
+        if (params.Result) {
+            this.Result = new Array();
+            for (let z in params.Result) {
+                let obj = new MappingResult();
+                obj.deserialize(params.Result[z]);
+                this.Result.push(obj);
+            }
+        }
+        this.TaskCount = 'TaskCount' in params ? params.TaskCount : null;
+        this.TaskMaxCount = 'TaskMaxCount' in params ? params.TaskMaxCount : null;
 
     }
 }
@@ -3766,6 +5597,48 @@ class DescribeComplianceAssetListRequest extends  AbstractModel {
 }
 
 /**
+ * 查询参数
+ * @class
+ */
+class QueryFilter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 查询的字段
+         * @type {string || null}
+         */
+        this.FilterKey = null;
+
+        /**
+         * 查询的值
+         * @type {string || null}
+         */
+        this.FilterValue = null;
+
+        /**
+         * 匹配类型，1等于；2大于；3小于；4大于等于；5小于等于；6不等于；7in；8not in；9模糊匹配
+         * @type {number || null}
+         */
+        this.FilterOperatorType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FilterKey = 'FilterKey' in params ? params.FilterKey : null;
+        this.FilterValue = 'FilterValue' in params ? params.FilterValue : null;
+        this.FilterOperatorType = 'FilterOperatorType' in params ? params.FilterOperatorType : null;
+
+    }
+}
+
+/**
  * DescribeAssetDetail返回参数结构体
  * @class
  */
@@ -3962,6 +5835,13 @@ class DescribeVulDetailResponse extends  AbstractModel {
         this.SsaAssetCategory = null;
 
         /**
+         * 资产文件路径
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.VulPath = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -3997,59 +5877,182 @@ class DescribeVulDetailResponse extends  AbstractModel {
         this.Source = 'Source' in params ? params.Source : null;
         this.VulUrl = 'VulUrl' in params ? params.VulUrl : null;
         this.SsaAssetCategory = 'SsaAssetCategory' in params ? params.SsaAssetCategory : null;
+        this.VulPath = 'VulPath' in params ? params.VulPath : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
 
+/**
+ * DescribeSocCspmCompliance请求参数结构体
+ * @class
+ */
+class DescribeSocCspmComplianceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
+ * 告警详情
+ * @class
+ */
+class AlertDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 告警基础信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {AlertType || null}
+         */
+        this.BaseInfo = null;
+
+        /**
+         * 告警详情，json序列化
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Detail = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.BaseInfo) {
+            let obj = new AlertType();
+            obj.deserialize(params.BaseInfo)
+            this.BaseInfo = obj;
+        }
+        this.Detail = 'Detail' in params ? params.Detail : null;
+
+    }
+}
+
+/**
+ * DescribeComplianceDetail请求参数结构体
+ * @class
+ */
+class DescribeComplianceDetailRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 检查项uuid
+         * @type {string || null}
+         */
+        this.Id = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+
+    }
+}
+
 module.exports = {
+    DescribeMappingResultsResponse: DescribeMappingResultsResponse,
     DescribeAssetDetailRequest: DescribeAssetDetailRequest,
+    DescribeSocCheckItemListResponse: DescribeSocCheckItemListResponse,
     DescribeVulListResponse: DescribeVulListResponse,
+    DescribeSocAlertDetailsRequest: DescribeSocAlertDetailsRequest,
     DescribeComplianceAssetListResponse: DescribeComplianceAssetListResponse,
     DataCheck: DataCheck,
+    DescribeSocCheckResultListResponse: DescribeSocCheckResultListResponse,
+    SocProductionItem: SocProductionItem,
+    MappingResult: MappingResult,
     DescribeCheckConfigAssetListRequest: DescribeCheckConfigAssetListRequest,
     Asset: Asset,
+    SaDivulgeDataQueryPubRequest: SaDivulgeDataQueryPubRequest,
     DescribeComplianceListResponse: DescribeComplianceListResponse,
     DescribeConfigListResponse: DescribeConfigListResponse,
     AggregationObj: AggregationObj,
     DescribeCheckConfigDetailResponse: DescribeCheckConfigDetailResponse,
     DescribeAssetListResponse: DescribeAssetListResponse,
+    DescribeSocAlertDetailsResponse: DescribeSocAlertDetailsResponse,
+    VulItem: VulItem,
     DescribeCheckConfigAssetListResponse: DescribeCheckConfigAssetListResponse,
-    DescribeCheckConfigDetailRequest: DescribeCheckConfigDetailRequest,
+    Tag: Tag,
+    SocCheckResult: SocCheckResult,
+    AlertListData: AlertListData,
     SaDivulgeDataQueryPub: SaDivulgeDataQueryPub,
+    SocComplianceInfoResp: SocComplianceInfoResp,
     DescribeAssetListRequest: DescribeAssetListRequest,
     DescribeComplianceDetailResponse: DescribeComplianceDetailResponse,
     DescribeAssetsMappingListResponse: DescribeAssetsMappingListResponse,
-    Tag: Tag,
-    VulItem: VulItem,
+    DescribeSocAlertListResponse: DescribeSocAlertListResponse,
+    SocComplianceItem: SocComplianceItem,
+    SecurityStatus: SecurityStatus,
+    QuerySort: QuerySort,
     DescribeComplianceListRequest: DescribeComplianceListRequest,
     DescribeVulListRequest: DescribeVulListRequest,
     DescribeLeakDetectionListRequest: DescribeLeakDetectionListRequest,
+    SocCheckItemV1: SocCheckItemV1,
     DescribeEventDetailResponse: DescribeEventDetailResponse,
     DescribeSafetyEventListResponse: DescribeSafetyEventListResponse,
     SaDivulgeDataQueryPubList: SaDivulgeDataQueryPubList,
+    DescribeSocCheckResultListRequest: DescribeSocCheckResultListRequest,
     DescribeSafetyEventListRequest: DescribeSafetyEventListRequest,
+    AssetQueryFilter: AssetQueryFilter,
+    AlertType: AlertType,
+    DescribeSocAlertListRequest: DescribeSocAlertListRequest,
     ComplianceCheckDetail: ComplianceCheckDetail,
     SaDivulgeDataQueryPubResponse: SaDivulgeDataQueryPubResponse,
     Bucket: Bucket,
     DescribeConfigListRequest: DescribeConfigListRequest,
+    DescribeSocCspmComplianceResponse: DescribeSocCspmComplianceResponse,
+    DescribeMappingResultsRequest: DescribeMappingResultsRequest,
     Filter: Filter,
     AssetList: AssetList,
     DataAssetMapping: DataAssetMapping,
+    DescribeCheckConfigDetailRequest: DescribeCheckConfigDetailRequest,
     VulList: VulList,
     DescribeLeakDetectionListResponse: DescribeLeakDetectionListResponse,
     DataEvent: DataEvent,
+    DescribeSocCheckItemListRequest: DescribeSocCheckItemListRequest,
     CheckConfigDetail: CheckConfigDetail,
+    DescribeSocCheckItemListRspRsp: DescribeSocCheckItemListRspRsp,
+    SocCheckItem: SocCheckItem,
     DescribeEventDetailRequest: DescribeEventDetailRequest,
     CheckAssetItem: CheckAssetItem,
-    SaDivulgeDataQueryPubRequest: SaDivulgeDataQueryPubRequest,
+    AssetTypeStatistic: AssetTypeStatistic,
+    DescribeSocCheckResultListRspRsp: DescribeSocCheckResultListRspRsp,
     DescribeVulDetailRequest: DescribeVulDetailRequest,
-    DataCompliance: DataCompliance,
+    ConcernInfo: ConcernInfo,
     DescribeAssetsMappingListRequest: DescribeAssetsMappingListRequest,
-    DescribeComplianceDetailRequest: DescribeComplianceDetailRequest,
+    DataCompliance: DataCompliance,
+    Results: Results,
     AssetDetail: AssetDetail,
     DescribeComplianceAssetListRequest: DescribeComplianceAssetListRequest,
+    QueryFilter: QueryFilter,
     DescribeAssetDetailResponse: DescribeAssetDetailResponse,
     DescribeVulDetailResponse: DescribeVulDetailResponse,
+    DescribeSocCspmComplianceRequest: DescribeSocCspmComplianceRequest,
+    AlertDetail: AlertDetail,
+    DescribeComplianceDetailRequest: DescribeComplianceDetailRequest,
 
 }

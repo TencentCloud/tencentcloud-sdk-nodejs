@@ -16,11 +16,14 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const PublishMessageRequest = models.PublishMessageRequest;
+const UpdateDevicesEnableStateResponse = models.UpdateDevicesEnableStateResponse;
 const UnbindDevicesRequest = models.UnbindDevicesRequest;
 const DescribeDeviceResourcesRequest = models.DescribeDeviceResourcesRequest;
 const BindDevicesRequest = models.BindDevicesRequest;
 const DescribeProductsRequest = models.DescribeProductsRequest;
 const TopicRulePayload = models.TopicRulePayload;
+const PayloadLogItem = models.PayloadLogItem;
 const DescribeFirmwareRequest = models.DescribeFirmwareRequest;
 const DescribeDevicesResponse = models.DescribeDevicesResponse;
 const DeleteTopicRuleResponse = models.DeleteTopicRuleResponse;
@@ -32,6 +35,7 @@ const ProductResourceInfo = models.ProductResourceInfo;
 const DescribeMultiDevTaskRequest = models.DescribeMultiDevTaskRequest;
 const DescribeDeviceResourceResponse = models.DescribeDeviceResourceResponse;
 const DescribeProductResourcesRequest = models.DescribeProductResourcesRequest;
+const DescribeProductRequest = models.DescribeProductRequest;
 const DescribeProductsResponse = models.DescribeProductsResponse;
 const DescribeDeviceShadowResponse = models.DescribeDeviceShadowResponse;
 const EnableTopicRuleResponse = models.EnableTopicRuleResponse;
@@ -45,27 +49,33 @@ const TaskInfo = models.TaskInfo;
 const DeleteProductRequest = models.DeleteProductRequest;
 const StatusStatistic = models.StatusStatistic;
 const DescribeTasksRequest = models.DescribeTasksRequest;
+const DownloadDeviceResourceRequest = models.DownloadDeviceResourceRequest;
 const DescribeDeviceResourceRequest = models.DescribeDeviceResourceRequest;
 const EditFirmwareRequest = models.EditFirmwareRequest;
 const MultiDevicesInfo = models.MultiDevicesInfo;
 const ResetDeviceStateRequest = models.ResetDeviceStateRequest;
 const DescribeDeviceClientKeyRequest = models.DescribeDeviceClientKeyRequest;
-const UpdateTopicPolicyRequest = models.UpdateTopicPolicyRequest;
+const CLSLogItem = models.CLSLogItem;
 const BatchUpdateShadow = models.BatchUpdateShadow;
 const DeleteDeviceRequest = models.DeleteDeviceRequest;
 const DescribeFirmwareTaskDevicesRequest = models.DescribeFirmwareTaskDevicesRequest;
 const DescribeFirmwareResponse = models.DescribeFirmwareResponse;
 const DescribeResourceTasksRequest = models.DescribeResourceTasksRequest;
 const CreateMultiDevicesTaskRequest = models.CreateMultiDevicesTaskRequest;
+const DeleteDeviceResourceResponse = models.DeleteDeviceResourceResponse;
 const DescribeFirmwareTaskStatisticsResponse = models.DescribeFirmwareTaskStatisticsResponse;
 const DescribePushResourceTaskStatisticsRequest = models.DescribePushResourceTaskStatisticsRequest;
 const CreateLoraDeviceRequest = models.CreateLoraDeviceRequest;
+const UpdateDevicesEnableStateRequest = models.UpdateDevicesEnableStateRequest;
+const ListSDKLogRequest = models.ListSDKLogRequest;
+const SetProductsForbiddenStatusResponse = models.SetProductsForbiddenStatusResponse;
 const CreateProductResponse = models.CreateProductResponse;
 const CreateMultiDeviceRequest = models.CreateMultiDeviceRequest;
 const DeleteLoraDeviceResponse = models.DeleteLoraDeviceResponse;
 const CreateTaskRequest = models.CreateTaskRequest;
 const DescribeAllDevicesRequest = models.DescribeAllDevicesRequest;
 const DescribeProductResourceResponse = models.DescribeProductResourceResponse;
+const CancelDeviceFirmwareTaskResponse = models.CancelDeviceFirmwareTaskResponse;
 const CreateTopicPolicyResponse = models.CreateTopicPolicyResponse;
 const PublishToDeviceResponse = models.PublishToDeviceResponse;
 const RetryDeviceFirmwareTaskResponse = models.RetryDeviceFirmwareTaskResponse;
@@ -83,7 +93,7 @@ const UpdateTopicPolicyResponse = models.UpdateTopicPolicyResponse;
 const DescribeProductTaskResponse = models.DescribeProductTaskResponse;
 const DescribeDeviceResponse = models.DescribeDeviceResponse;
 const PublishBroadcastMessageRequest = models.PublishBroadcastMessageRequest;
-const PublishMessageRequest = models.PublishMessageRequest;
+const ListLogResponse = models.ListLogResponse;
 const RetryDeviceFirmwareTaskRequest = models.RetryDeviceFirmwareTaskRequest;
 const DescribeFirmwareTaskDevicesResponse = models.DescribeFirmwareTaskDevicesResponse;
 const DescribeFirmwareTasksResponse = models.DescribeFirmwareTasksResponse;
@@ -91,13 +101,17 @@ const DeviceLabel = models.DeviceLabel;
 const GetCOSURLResponse = models.GetCOSURLResponse;
 const UpdateDeviceAvailableStateResponse = models.UpdateDeviceAvailableStateResponse;
 const EditFirmwareResponse = models.EditFirmwareResponse;
+const ListSDKLogResponse = models.ListSDKLogResponse;
 const CancelTaskRequest = models.CancelTaskRequest;
 const DescribeFirmwareTaskDistributionRequest = models.DescribeFirmwareTaskDistributionRequest;
 const UpdateDeviceAvailableStateRequest = models.UpdateDeviceAvailableStateRequest;
 const GetUserResourceInfoResponse = models.GetUserResourceInfoResponse;
+const ListLogPayloadResponse = models.ListLogPayloadResponse;
 const DeleteProductResponse = models.DeleteProductResponse;
 const DeviceProperty = models.DeviceProperty;
 const PublishToDeviceRequest = models.PublishToDeviceRequest;
+const SetProductsForbiddenStatusRequest = models.SetProductsForbiddenStatusRequest;
+const DownloadDeviceResourceResponse = models.DownloadDeviceResourceResponse;
 const UploadFirmwareResponse = models.UploadFirmwareResponse;
 const ProductInfo = models.ProductInfo;
 const DescribeFirmwareTaskDistributionResponse = models.DescribeFirmwareTaskDistributionResponse;
@@ -105,6 +119,7 @@ const PublishBroadcastMessageResponse = models.PublishBroadcastMessageResponse;
 const DescribeDeviceRequest = models.DescribeDeviceRequest;
 const CreateMultiDevicesTaskResponse = models.CreateMultiDevicesTaskResponse;
 const DescribeProductResourcesResponse = models.DescribeProductResourcesResponse;
+const UpdateProductDynamicRegisterRequest = models.UpdateProductDynamicRegisterRequest;
 const CreateTopicPolicyRequest = models.CreateTopicPolicyRequest;
 const DescribeProductResourceRequest = models.DescribeProductResourceRequest;
 const DescribeLoraDeviceResponse = models.DescribeLoraDeviceResponse;
@@ -112,6 +127,7 @@ const ProductTaskInfo = models.ProductTaskInfo;
 const ReplaceTopicRuleRequest = models.ReplaceTopicRuleRequest;
 const PublishRRPCMessageResponse = models.PublishRRPCMessageResponse;
 const CancelTaskResponse = models.CancelTaskResponse;
+const UpdateTopicPolicyRequest = models.UpdateTopicPolicyRequest;
 const Attribute = models.Attribute;
 const DescribeDeviceResourcesResponse = models.DescribeDeviceResourcesResponse;
 const CreateLoraDeviceResponse = models.CreateLoraDeviceResponse;
@@ -119,9 +135,10 @@ const DeleteTopicRuleRequest = models.DeleteTopicRuleRequest;
 const ReplaceTopicRuleResponse = models.ReplaceTopicRuleResponse;
 const PublishAsDeviceRequest = models.PublishAsDeviceRequest;
 const CancelDeviceFirmwareTaskRequest = models.CancelDeviceFirmwareTaskRequest;
-const CancelDeviceFirmwareTaskResponse = models.CancelDeviceFirmwareTaskResponse;
+const DeleteDeviceResourceRequest = models.DeleteDeviceResourceRequest;
 const DescribeMultiDevicesResponse = models.DescribeMultiDevicesResponse;
 const DescribeDeviceShadowRequest = models.DescribeDeviceShadowRequest;
+const UpdateProductDynamicRegisterResponse = models.UpdateProductDynamicRegisterResponse;
 const UnbindDevicesResponse = models.UnbindDevicesResponse;
 const DeviceInfo = models.DeviceInfo;
 const DescribeMultiDevicesRequest = models.DescribeMultiDevicesRequest;
@@ -135,7 +152,10 @@ const DescribeMultiDevTaskResponse = models.DescribeMultiDevTaskResponse;
 const GetUserResourceInfoRequest = models.GetUserResourceInfoRequest;
 const DeviceTag = models.DeviceTag;
 const DescribeAllDevicesResponse = models.DescribeAllDevicesResponse;
+const ListLogRequest = models.ListLogRequest;
 const ProductMetadata = models.ProductMetadata;
+const SDKLogItem = models.SDKLogItem;
+const DescribeProductResponse = models.DescribeProductResponse;
 const DescribeLoraDeviceRequest = models.DescribeLoraDeviceRequest;
 const DescribeTaskRequest = models.DescribeTaskRequest;
 const PublishMessageResponse = models.PublishMessageResponse;
@@ -149,6 +169,7 @@ const DisableTopicRuleRequest = models.DisableTopicRuleRequest;
 const ResetDeviceStateResponse = models.ResetDeviceStateResponse;
 const FirmwareTaskInfo = models.FirmwareTaskInfo;
 const CreateTopicRuleResponse = models.CreateTopicRuleResponse;
+const ListLogPayloadRequest = models.ListLogPayloadRequest;
 const CreateTopicRuleRequest = models.CreateTopicRuleRequest;
 const DescribeResourceTasksResponse = models.DescribeResourceTasksResponse;
 const DescribeFirmwareTaskStatisticsRequest = models.DescribeFirmwareTaskStatisticsRequest;
@@ -238,6 +259,17 @@ class IotcloudClient extends AbstractClient {
     }
 
     /**
+     * 获取日志内容列表
+     * @param {ListLogPayloadRequest} req
+     * @param {function(string, ListLogPayloadResponse):void} cb
+     * @public
+     */
+    ListLogPayload(req, cb) {
+        let resp = new ListLogPayloadResponse();
+        this.request("ListLogPayload", req, resp, cb);
+    }
+
+    /**
      * 查询固件信息
      * @param {DescribeFirmwareRequest} req
      * @param {function(string, DescribeFirmwareResponse):void} cb
@@ -290,6 +322,17 @@ class IotcloudClient extends AbstractClient {
     UpdateDeviceAvailableState(req, cb) {
         let resp = new UpdateDeviceAvailableStateResponse();
         this.request("UpdateDeviceAvailableState", req, resp, cb);
+    }
+
+    /**
+     * 本接口（DescribeProduct）用于查看产品详情
+     * @param {DescribeProductRequest} req
+     * @param {function(string, DescribeProductResponse):void} cb
+     * @public
+     */
+    DescribeProduct(req, cb) {
+        let resp = new DescribeProductResponse();
+        this.request("DescribeProduct", req, resp, cb);
     }
 
     /**
@@ -370,14 +413,14 @@ class IotcloudClient extends AbstractClient {
     }
 
     /**
-     * 本接口（UploadFirmware）用于上传设备固件信息 
-     * @param {UploadFirmwareRequest} req
-     * @param {function(string, UploadFirmwareResponse):void} cb
+     * 批量设置产品禁用状态
+     * @param {SetProductsForbiddenStatusRequest} req
+     * @param {function(string, SetProductsForbiddenStatusResponse):void} cb
      * @public
      */
-    UploadFirmware(req, cb) {
-        let resp = new UploadFirmwareResponse();
-        this.request("UploadFirmware", req, resp, cb);
+    SetProductsForbiddenStatus(req, cb) {
+        let resp = new SetProductsForbiddenStatusResponse();
+        this.request("SetProductsForbiddenStatus", req, resp, cb);
     }
 
     /**
@@ -469,6 +512,17 @@ class IotcloudClient extends AbstractClient {
     }
 
     /**
+     * 批量启用或者禁用设备 
+     * @param {UpdateDevicesEnableStateRequest} req
+     * @param {function(string, UpdateDevicesEnableStateResponse):void} cb
+     * @public
+     */
+    UpdateDevicesEnableState(req, cb) {
+        let resp = new UpdateDevicesEnableStateResponse();
+        this.request("UpdateDevicesEnableState", req, resp, cb);
+    }
+
+    /**
      * 本接口（ReplaceTopicRule）用于修改替换规则 
      * @param {ReplaceTopicRuleRequest} req
      * @param {function(string, ReplaceTopicRuleResponse):void} cb
@@ -477,6 +531,17 @@ class IotcloudClient extends AbstractClient {
     ReplaceTopicRule(req, cb) {
         let resp = new ReplaceTopicRuleResponse();
         this.request("ReplaceTopicRule", req, resp, cb);
+    }
+
+    /**
+     * 获取设备上报的日志
+     * @param {ListSDKLogRequest} req
+     * @param {function(string, ListSDKLogResponse):void} cb
+     * @public
+     */
+    ListSDKLog(req, cb) {
+        let resp = new ListSDKLogResponse();
+        this.request("ListSDKLog", req, resp, cb);
     }
 
     /**
@@ -568,6 +633,17 @@ class IotcloudClient extends AbstractClient {
     }
 
     /**
+     * 本接口（DownloadDeviceResource）用于下载设备资源
+     * @param {DownloadDeviceResourceRequest} req
+     * @param {function(string, DownloadDeviceResourceResponse):void} cb
+     * @public
+     */
+    DownloadDeviceResource(req, cb) {
+        let resp = new DownloadDeviceResourceResponse();
+        this.request("DownloadDeviceResource", req, resp, cb);
+    }
+
+    /**
      * 本接口（CreateTaskFileUrl）用于获取产品级任务文件上传链接
      * @param {CreateTaskFileUrlRequest} req
      * @param {function(string, CreateTaskFileUrlResponse):void} cb
@@ -601,6 +677,17 @@ class IotcloudClient extends AbstractClient {
     }
 
     /**
+     * 本接口（UploadFirmware）用于上传设备固件信息 
+     * @param {UploadFirmwareRequest} req
+     * @param {function(string, UploadFirmwareResponse):void} cb
+     * @public
+     */
+    UploadFirmware(req, cb) {
+        let resp = new UploadFirmwareResponse();
+        this.request("UploadFirmware", req, resp, cb);
+    }
+
+    /**
      * 本接口（DescribeTasks）用于查询已创建的任务列表，任务保留一个月 
      * @param {DescribeTasksRequest} req
      * @param {function(string, DescribeTasksResponse):void} cb
@@ -620,6 +707,28 @@ class IotcloudClient extends AbstractClient {
     DescribeDeviceResources(req, cb) {
         let resp = new DescribeDeviceResourcesResponse();
         this.request("DescribeDeviceResources", req, resp, cb);
+    }
+
+    /**
+     * 更新产品动态注册的配置 
+     * @param {UpdateProductDynamicRegisterRequest} req
+     * @param {function(string, UpdateProductDynamicRegisterResponse):void} cb
+     * @public
+     */
+    UpdateProductDynamicRegister(req, cb) {
+        let resp = new UpdateProductDynamicRegisterResponse();
+        this.request("UpdateProductDynamicRegister", req, resp, cb);
+    }
+
+    /**
+     * 本接口（ListLog）用于查看日志信息 
+     * @param {ListLogRequest} req
+     * @param {function(string, ListLogResponse):void} cb
+     * @public
+     */
+    ListLog(req, cb) {
+        let resp = new ListLogResponse();
+        this.request("ListLog", req, resp, cb);
     }
 
     /**
@@ -807,6 +916,17 @@ class IotcloudClient extends AbstractClient {
     DescribeProductResources(req, cb) {
         let resp = new DescribeProductResourcesResponse();
         this.request("DescribeProductResources", req, resp, cb);
+    }
+
+    /**
+     * 本接口（DeleteDeviceResource）用于删除设备资源
+     * @param {DeleteDeviceResourceRequest} req
+     * @param {function(string, DeleteDeviceResourceResponse):void} cb
+     * @public
+     */
+    DeleteDeviceResource(req, cb) {
+        let resp = new DeleteDeviceResourceResponse();
+        this.request("DeleteDeviceResource", req, resp, cb);
     }
 
     /**

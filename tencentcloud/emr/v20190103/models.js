@@ -17,112 +17,6 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
- * InquirePriceRenewEmr返回参数结构体
- * @class
- */
-class InquirePriceRenewEmrResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 原价，单位为元。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.OriginalCost = null;
-
-        /**
-         * 折扣价，单位为元。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.DiscountCost = null;
-
-        /**
-         * 实例续费的时间单位。取值范围：
-<li>m：表示月份。</li>
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.TimeUnit = null;
-
-        /**
-         * 实例续费的时长。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.TimeSpan = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.OriginalCost = 'OriginalCost' in params ? params.OriginalCost : null;
-        this.DiscountCost = 'DiscountCost' in params ? params.DiscountCost : null;
-        this.TimeUnit = 'TimeUnit' in params ? params.TimeUnit : null;
-        this.TimeSpan = 'TimeSpan' in params ? params.TimeSpan : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * 多云盘参数
- * @class
- */
-class MultiDiskMC extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 该类型云盘个数
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.Count = null;
-
-        /**
-         * 磁盘类型
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.Type = null;
-
-        /**
-         * 云盘大小
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.Volume = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Count = 'Count' in params ? params.Count : null;
-        this.Type = 'Type' in params ? params.Type : null;
-        this.Volume = 'Volume' in params ? params.Volume : null;
-
-    }
-}
-
-/**
  * 集群配置。
  * @class
  */
@@ -274,40 +168,36 @@ POSTPAID_BY_HOUR 按量计费，默认方式。
 }
 
 /**
- * 任务步骤结果描述
+ * Pod资源售卖规格
  * @class
  */
-class JobResult extends  AbstractModel {
+class PodSaleSpec extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 任务步骤名称。
-注意：此字段可能返回 null，表示取不到有效值。
+         * 可售卖的资源规格，仅为以下值:"TASK","CORE","MASTER","ROUTER"。
          * @type {string || null}
          */
-        this.Name = null;
+        this.NodeType = null;
 
         /**
-         * 任务步骤失败时的处理策略，可以为以下值：
-"CONTINUE"，跳过当前失败步骤，继续后续步骤。
-“TERMINATE_CLUSTER”，终止当前及后续步骤，并销毁集群。
-“CANCEL_AND_WAIT”，取消当前步骤并阻塞等待处理。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
+         * Cpu核数。
+         * @type {number || null}
          */
-        this.ActionOnFailure = null;
+        this.Cpu = null;
 
         /**
-         * 当前步骤的状态，可以为以下值：
-“JobFlowStepStatusInit”，初始化状态，等待执行。
-“JobFlowStepStatusRunning”，任务步骤正在执行。
-“JobFlowStepStatusFailed”，任务步骤执行失败。
-“JobFlowStepStatusSucceed”，任务步骤执行成功。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
+         * 内存数量，单位为GB。
+         * @type {number || null}
          */
-        this.JobState = null;
+        this.Memory = null;
+
+        /**
+         * 该规格资源可申请的最大数量。
+         * @type {number || null}
+         */
+        this.Number = null;
 
     }
 
@@ -318,430 +208,10 @@ class JobResult extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = 'Name' in params ? params.Name : null;
-        this.ActionOnFailure = 'ActionOnFailure' in params ? params.ActionOnFailure : null;
-        this.JobState = 'JobState' in params ? params.JobState : null;
-
-    }
-}
-
-/**
- * EMR产品配置
- * @class
- */
-class EmrProductConfigOutter extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 软件信息
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<string> || null}
-         */
-        this.SoftInfo = null;
-
-        /**
-         * Master节点个数
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.MasterNodeSize = null;
-
-        /**
-         * Core节点个数
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.CoreNodeSize = null;
-
-        /**
-         * Task节点个数
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.TaskNodeSize = null;
-
-        /**
-         * Common节点个数
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.ComNodeSize = null;
-
-        /**
-         * Master节点资源
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {OutterResource || null}
-         */
-        this.MasterResource = null;
-
-        /**
-         * Core节点资源
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {OutterResource || null}
-         */
-        this.CoreResource = null;
-
-        /**
-         * Task节点资源
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {OutterResource || null}
-         */
-        this.TaskResource = null;
-
-        /**
-         * Common节点资源
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {OutterResource || null}
-         */
-        this.ComResource = null;
-
-        /**
-         * 是否使用COS
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {boolean || null}
-         */
-        this.OnCos = null;
-
-        /**
-         * 收费类型
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.ChargeType = null;
-
-        /**
-         * Router节点个数
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.RouterNodeSize = null;
-
-        /**
-         * 是否支持HA
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {boolean || null}
-         */
-        this.SupportHA = null;
-
-        /**
-         * 是否支持安全模式
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {boolean || null}
-         */
-        this.SecurityOn = null;
-
-        /**
-         * 安全组名称
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.SecurityGroup = null;
-
-        /**
-         * 是否开启Cbs加密
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.CbsEncrypt = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.SoftInfo = 'SoftInfo' in params ? params.SoftInfo : null;
-        this.MasterNodeSize = 'MasterNodeSize' in params ? params.MasterNodeSize : null;
-        this.CoreNodeSize = 'CoreNodeSize' in params ? params.CoreNodeSize : null;
-        this.TaskNodeSize = 'TaskNodeSize' in params ? params.TaskNodeSize : null;
-        this.ComNodeSize = 'ComNodeSize' in params ? params.ComNodeSize : null;
-
-        if (params.MasterResource) {
-            let obj = new OutterResource();
-            obj.deserialize(params.MasterResource)
-            this.MasterResource = obj;
-        }
-
-        if (params.CoreResource) {
-            let obj = new OutterResource();
-            obj.deserialize(params.CoreResource)
-            this.CoreResource = obj;
-        }
-
-        if (params.TaskResource) {
-            let obj = new OutterResource();
-            obj.deserialize(params.TaskResource)
-            this.TaskResource = obj;
-        }
-
-        if (params.ComResource) {
-            let obj = new OutterResource();
-            obj.deserialize(params.ComResource)
-            this.ComResource = obj;
-        }
-        this.OnCos = 'OnCos' in params ? params.OnCos : null;
-        this.ChargeType = 'ChargeType' in params ? params.ChargeType : null;
-        this.RouterNodeSize = 'RouterNodeSize' in params ? params.RouterNodeSize : null;
-        this.SupportHA = 'SupportHA' in params ? params.SupportHA : null;
-        this.SecurityOn = 'SecurityOn' in params ? params.SecurityOn : null;
-        this.SecurityGroup = 'SecurityGroup' in params ? params.SecurityGroup : null;
-        this.CbsEncrypt = 'CbsEncrypt' in params ? params.CbsEncrypt : null;
-
-    }
-}
-
-/**
- * 登录设置
- * @class
- */
-class LoginSettings extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Password
-         * @type {string || null}
-         */
-        this.Password = null;
-
-        /**
-         * Public Key
-         * @type {string || null}
-         */
-        this.PublicKeyId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Password = 'Password' in params ? params.Password : null;
-        this.PublicKeyId = 'PublicKeyId' in params ? params.PublicKeyId : null;
-
-    }
-}
-
-/**
- * RunJobFlow请求参数结构体
- * @class
- */
-class RunJobFlowRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 作业名称。
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * 是否新创建集群。
-true，新创建集群，则使用Instance中的参数进行集群创建。
-false，使用已有集群，则通过InstanceId传入。
-         * @type {boolean || null}
-         */
-        this.CreateCluster = null;
-
-        /**
-         * 作业流程执行步骤。
-         * @type {Array.<Step> || null}
-         */
-        this.Steps = null;
-
-        /**
-         * 作业流程正常完成时，集群的处理方式，可选择:
-Terminate 销毁集群。
-Reserve 保留集群。
-         * @type {string || null}
-         */
-        this.InstancePolicy = null;
-
-        /**
-         * 只有CreateCluster为true时生效，目前只支持EMR版本，例如EMR-2.2.0，不支持ClickHouse和Druid版本。
-         * @type {string || null}
-         */
-        this.ProductVersion = null;
-
-        /**
-         * 只在CreateCluster为true时生效。
-true 表示安装kerberos，false表示不安装kerberos。
-         * @type {boolean || null}
-         */
-        this.SecurityClusterFlag = null;
-
-        /**
-         * 只在CreateCluster为true时生效。
-新建集群时，要安装的软件列表。
-         * @type {Array.<string> || null}
-         */
-        this.Software = null;
-
-        /**
-         * 引导脚本。
-         * @type {Array.<BootstrapAction> || null}
-         */
-        this.BootstrapActions = null;
-
-        /**
-         * 指定配置创建集群。
-         * @type {Array.<Configuration> || null}
-         */
-        this.Configurations = null;
-
-        /**
-         * 作业日志保存地址。
-         * @type {string || null}
-         */
-        this.LogUri = null;
-
-        /**
-         * 只在CreateCluster为false时生效。
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * 自定义应用角色，大数据应用访问外部服务时使用的角色，默认为"EME_QCSRole"。
-         * @type {string || null}
-         */
-        this.ApplicationRole = null;
-
-        /**
-         * 重入标签，用来可重入检查，防止在一段时间内，创建相同的流程作业。
-         * @type {string || null}
-         */
-        this.ClientToken = null;
-
-        /**
-         * 只在CreateCluster为true时生效，使用该配置创建集群。
-         * @type {ClusterSetting || null}
-         */
-        this.Instance = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Name = 'Name' in params ? params.Name : null;
-        this.CreateCluster = 'CreateCluster' in params ? params.CreateCluster : null;
-
-        if (params.Steps) {
-            this.Steps = new Array();
-            for (let z in params.Steps) {
-                let obj = new Step();
-                obj.deserialize(params.Steps[z]);
-                this.Steps.push(obj);
-            }
-        }
-        this.InstancePolicy = 'InstancePolicy' in params ? params.InstancePolicy : null;
-        this.ProductVersion = 'ProductVersion' in params ? params.ProductVersion : null;
-        this.SecurityClusterFlag = 'SecurityClusterFlag' in params ? params.SecurityClusterFlag : null;
-        this.Software = 'Software' in params ? params.Software : null;
-
-        if (params.BootstrapActions) {
-            this.BootstrapActions = new Array();
-            for (let z in params.BootstrapActions) {
-                let obj = new BootstrapAction();
-                obj.deserialize(params.BootstrapActions[z]);
-                this.BootstrapActions.push(obj);
-            }
-        }
-
-        if (params.Configurations) {
-            this.Configurations = new Array();
-            for (let z in params.Configurations) {
-                let obj = new Configuration();
-                obj.deserialize(params.Configurations[z]);
-                this.Configurations.push(obj);
-            }
-        }
-        this.LogUri = 'LogUri' in params ? params.LogUri : null;
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.ApplicationRole = 'ApplicationRole' in params ? params.ApplicationRole : null;
-        this.ClientToken = 'ClientToken' in params ? params.ClientToken : null;
-
-        if (params.Instance) {
-            let obj = new ClusterSetting();
-            obj.deserialize(params.Instance)
-            this.Instance = obj;
-        }
-
-    }
-}
-
-/**
- * VPC 参数
- * @class
- */
-class VPCSettings extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * VPC ID
-         * @type {string || null}
-         */
-        this.VpcId = null;
-
-        /**
-         * Subnet ID
-         * @type {string || null}
-         */
-        this.SubnetId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.VpcId = 'VpcId' in params ? params.VpcId : null;
-        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
-
-    }
-}
-
-/**
- * DescribeInstanceRenewNodes请求参数结构体
- * @class
- */
-class DescribeInstanceRenewNodesRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 集群实例ID,实例ID形如: emr-xxxxxxxx
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.NodeType = 'NodeType' in params ? params.NodeType : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.Number = 'Number' in params ? params.Number : null;
 
     }
 }
@@ -814,361 +284,6 @@ class ScaleOutInstanceResponse extends  AbstractModel {
 }
 
 /**
- * InquiryPriceCreateInstance请求参数结构体
- * @class
- */
-class InquiryPriceCreateInstanceRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 购买实例的时间单位。取值范围：
-<li>s：表示秒。PayMode取值为0时，TimeUnit只能取值为s。</li>
-<li>m：表示月份。PayMode取值为1时，TimeUnit只能取值为m。</li>
-         * @type {string || null}
-         */
-        this.TimeUnit = null;
-
-        /**
-         * 购买实例的时长。结合TimeUnit一起使用。
-<li>TimeUnit为s时，该参数只能填写3600，表示按量计费实例。</li>
-<li>TimeUnit为m时，该参数填写的数字表示包年包月实例的购买时长，如1表示购买一个月</li>
-         * @type {number || null}
-         */
-        this.TimeSpan = null;
-
-        /**
-         * 询价的节点规格。
-         * @type {NewResourceSpec || null}
-         */
-        this.ResourceSpec = null;
-
-        /**
-         * 货币种类。取值范围：
-<li>CNY：表示人民币。</li>
-         * @type {string || null}
-         */
-        this.Currency = null;
-
-        /**
-         * 实例计费模式。取值范围：
-<li>0：表示按量计费。</li>
-<li>1：表示包年包月。</li>
-         * @type {number || null}
-         */
-        this.PayMode = null;
-
-        /**
-         * 是否开启节点高可用。取值范围：
-<li>0：表示不开启节点高可用。</li>
-<li>1：表示开启节点高可用。</li>
-         * @type {number || null}
-         */
-        this.SupportHA = null;
-
-        /**
-         * 部署的组件列表。不同的EMR产品ID（ProductId：具体含义参考入参ProductId字段）需要选择不同的必选组件：
-<li>ProductId为1的时候，必选组件包括：hadoop-2.7.3、knox-1.2.0、zookeeper-3.4.9</li>
-<li>ProductId为2的时候，必选组件包括：hadoop-2.7.3、knox-1.2.0、zookeeper-3.4.9</li>
-<li>ProductId为4的时候，必选组件包括：hadoop-2.8.4、knox-1.2.0、zookeeper-3.4.9</li>
-<li>ProductId为7的时候，必选组件包括：hadoop-3.1.2、knox-1.2.0、zookeeper-3.4.9</li>
-         * @type {Array.<string> || null}
-         */
-        this.Software = null;
-
-        /**
-         * 实例所在的位置。通过该参数可以指定实例所属可用区，所属项目等属性。
-         * @type {Placement || null}
-         */
-        this.Placement = null;
-
-        /**
-         * 私有网络相关信息配置。通过该参数可以指定私有网络的ID，子网ID等信息。
-         * @type {VPCSettings || null}
-         */
-        this.VPCSettings = null;
-
-        /**
-         * hive共享元数据库类型。取值范围：
-<li>EMR_NEW_META：表示集群默认创建</li>
-<li>EMR_EXIT_METE：表示集群使用指定EMR-MetaDB。</li>
-<li>USER_CUSTOM_META：表示集群使用自定义MetaDB。</li>
-         * @type {string || null}
-         */
-        this.MetaType = null;
-
-        /**
-         * EMR-MetaDB实例
-         * @type {string || null}
-         */
-        this.UnifyMetaInstanceId = null;
-
-        /**
-         * 自定义MetaDB信息
-         * @type {CustomMetaInfo || null}
-         */
-        this.MetaDBInfo = null;
-
-        /**
-         * 产品ID，不同产品ID表示不同的EMR产品版本。取值范围：
-<li>1：表示EMR-V1.3.1。</li>
-<li>2：表示EMR-V2.0.1。</li>
-<li>4：表示EMR-V2.1.0。</li>
-<li>7：表示EMR-V3.0.0。</li>
-         * @type {number || null}
-         */
-        this.ProductId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TimeUnit = 'TimeUnit' in params ? params.TimeUnit : null;
-        this.TimeSpan = 'TimeSpan' in params ? params.TimeSpan : null;
-
-        if (params.ResourceSpec) {
-            let obj = new NewResourceSpec();
-            obj.deserialize(params.ResourceSpec)
-            this.ResourceSpec = obj;
-        }
-        this.Currency = 'Currency' in params ? params.Currency : null;
-        this.PayMode = 'PayMode' in params ? params.PayMode : null;
-        this.SupportHA = 'SupportHA' in params ? params.SupportHA : null;
-        this.Software = 'Software' in params ? params.Software : null;
-
-        if (params.Placement) {
-            let obj = new Placement();
-            obj.deserialize(params.Placement)
-            this.Placement = obj;
-        }
-
-        if (params.VPCSettings) {
-            let obj = new VPCSettings();
-            obj.deserialize(params.VPCSettings)
-            this.VPCSettings = obj;
-        }
-        this.MetaType = 'MetaType' in params ? params.MetaType : null;
-        this.UnifyMetaInstanceId = 'UnifyMetaInstanceId' in params ? params.UnifyMetaInstanceId : null;
-
-        if (params.MetaDBInfo) {
-            let obj = new CustomMetaInfo();
-            obj.deserialize(params.MetaDBInfo)
-            this.MetaDBInfo = obj;
-        }
-        this.ProductId = 'ProductId' in params ? params.ProductId : null;
-
-    }
-}
-
-/**
- * 资源详情
- * @class
- */
-class Resource extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 节点规格描述
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.Spec = null;
-
-        /**
-         * 存储类型
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.StorageType = null;
-
-        /**
-         * 磁盘类型
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.DiskType = null;
-
-        /**
-         * 内存容量,单位为M
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.MemSize = null;
-
-        /**
-         * CPU核数
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.Cpu = null;
-
-        /**
-         * 数据盘容量
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.DiskSize = null;
-
-        /**
-         * 系统盘容量
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.RootSize = null;
-
-        /**
-         * 云盘列表，当数据盘为一块云盘时，直接使用DiskType和DiskSize参数，超出部分使用MultiDisks
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<MultiDisk> || null}
-         */
-        this.MultiDisks = null;
-
-        /**
-         * 需要绑定的标签列表
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<Tag> || null}
-         */
-        this.Tags = null;
-
-        /**
-         * 规格类型
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.InstanceType = null;
-
-        /**
-         * 本地盘数量
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.LocalDiskNum = null;
-
-        /**
-         * 盘数量
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.DiskNum = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Spec = 'Spec' in params ? params.Spec : null;
-        this.StorageType = 'StorageType' in params ? params.StorageType : null;
-        this.DiskType = 'DiskType' in params ? params.DiskType : null;
-        this.MemSize = 'MemSize' in params ? params.MemSize : null;
-        this.Cpu = 'Cpu' in params ? params.Cpu : null;
-        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
-        this.RootSize = 'RootSize' in params ? params.RootSize : null;
-
-        if (params.MultiDisks) {
-            this.MultiDisks = new Array();
-            for (let z in params.MultiDisks) {
-                let obj = new MultiDisk();
-                obj.deserialize(params.MultiDisks[z]);
-                this.MultiDisks.push(obj);
-            }
-        }
-
-        if (params.Tags) {
-            this.Tags = new Array();
-            for (let z in params.Tags) {
-                let obj = new Tag();
-                obj.deserialize(params.Tags[z]);
-                this.Tags.push(obj);
-            }
-        }
-        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
-        this.LocalDiskNum = 'LocalDiskNum' in params ? params.LocalDiskNum : null;
-        this.DiskNum = 'DiskNum' in params ? params.DiskNum : null;
-
-    }
-}
-
-/**
- * TerminateInstance请求参数结构体
- * @class
- */
-class TerminateInstanceRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 实例ID。
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * 销毁节点ID。该参数为预留参数，用户无需配置。
-         * @type {Array.<string> || null}
-         */
-        this.ResourceIds = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.ResourceIds = 'ResourceIds' in params ? params.ResourceIds : null;
-
-    }
-}
-
-/**
- * TerminateTasks请求参数结构体
- * @class
- */
-class TerminateTasksRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 实例ID。
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * 待销毁节点的资源ID列表。资源ID形如：emr-vm-xxxxxxxx。有效的资源ID可通过登录[控制台](https://console.cloud.tencent.com/emr/static/hardware)查询。
-         * @type {Array.<string> || null}
-         */
-        this.ResourceIds = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.ResourceIds = 'ResourceIds' in params ? params.ResourceIds : null;
-
-    }
-}
-
-/**
  * Pod的存储设备描述信息。
  * @class
  */
@@ -1224,10 +339,10 @@ class PodVolume extends  AbstractModel {
 }
 
 /**
- * TerminateInstance返回参数结构体
+ * SyncPodState返回参数结构体
  * @class
  */
-class TerminateInstanceResponse extends  AbstractModel {
+class SyncPodStateResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -1260,106 +375,11 @@ class CreateInstanceResponse extends  AbstractModel {
         super();
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * Pod PVC存储方式描述
- * @class
- */
-class PersistentVolumeContext extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 磁盘大小，单位为GB。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.DiskSize = null;
-
-        /**
-         * 磁盘类型。CLOUD_PREMIUM;CLOUD_SSD
+         * 实例ID
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.DiskType = null;
-
-        /**
-         * 磁盘数量
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.DiskNum = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
-        this.DiskType = 'DiskType' in params ? params.DiskType : null;
-        this.DiskNum = 'DiskNum' in params ? params.DiskNum : null;
-
-    }
-}
-
-/**
- * InquiryPriceRenewInstance返回参数结构体
- * @class
- */
-class InquiryPriceRenewInstanceResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 原价，单位为元。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.OriginalCost = null;
-
-        /**
-         * 折扣价，单位为元。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.DiscountCost = null;
-
-        /**
-         * 实例续费的时间单位。取值范围：
-<li>m：表示月份。</li>
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.TimeUnit = null;
-
-        /**
-         * 实例续费的时长。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.TimeSpan = null;
+        this.InstanceId = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1376,133 +396,31 @@ class InquiryPriceRenewInstanceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.OriginalCost = 'OriginalCost' in params ? params.OriginalCost : null;
-        this.DiscountCost = 'DiscountCost' in params ? params.DiscountCost : null;
-        this.TimeUnit = 'TimeUnit' in params ? params.TimeUnit : null;
-        this.TimeSpan = 'TimeSpan' in params ? params.TimeSpan : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
 
 /**
- * DescribeJobFlow请求参数结构体
+ * TerminateTasks请求参数结构体
  * @class
  */
-class DescribeJobFlowRequest extends  AbstractModel {
+class TerminateTasksRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 流程任务Id，RunJobFlow接口返回的值。
-         * @type {number || null}
-         */
-        this.JobFlowId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.JobFlowId = 'JobFlowId' in params ? params.JobFlowId : null;
-
-    }
-}
-
-/**
- * InquiryPriceCreateInstance返回参数结构体
- * @class
- */
-class InquiryPriceCreateInstanceResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 原价，单位为元。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.OriginalCost = null;
-
-        /**
-         * 折扣价，单位为元。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.DiscountCost = null;
-
-        /**
-         * 购买实例的时间单位。取值范围：
-<li>s：表示秒。</li>
-<li>m：表示月份。</li>
-注意：此字段可能返回 null，表示取不到有效值。
+         * 实例ID。
          * @type {string || null}
          */
-        this.TimeUnit = null;
+        this.InstanceId = null;
 
         /**
-         * 购买实例的时长。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.TimeSpan = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.OriginalCost = 'OriginalCost' in params ? params.OriginalCost : null;
-        this.DiscountCost = 'DiscountCost' in params ? params.DiscountCost : null;
-        this.TimeUnit = 'TimeUnit' in params ? params.TimeUnit : null;
-        this.TimeSpan = 'TimeSpan' in params ? params.TimeSpan : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * 引导脚本
- * @class
- */
-class BootstrapAction extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 脚本位置，支持cos上的文件，且只支持https协议。
-         * @type {string || null}
-         */
-        this.Path = null;
-
-        /**
-         * 执行时间。
-resourceAfter 表示在机器资源申请成功后执行。
-clusterBefore 表示在集群初始化前执行。
-clusterAfter 表示在集群初始化后执行。
-         * @type {string || null}
-         */
-        this.WhenRun = null;
-
-        /**
-         * 脚本参数
+         * 待销毁节点的资源ID列表。资源ID形如：emr-vm-xxxxxxxx。有效的资源ID可通过登录[控制台](https://console.cloud.tencent.com/emr/static/hardware)查询。
          * @type {Array.<string> || null}
          */
-        this.Args = null;
+        this.ResourceIds = null;
 
     }
 
@@ -1513,9 +431,8 @@ clusterAfter 表示在集群初始化后执行。
         if (!params) {
             return;
         }
-        this.Path = 'Path' in params ? params.Path : null;
-        this.WhenRun = 'WhenRun' in params ? params.WhenRun : null;
-        this.Args = 'Args' in params ? params.Args : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.ResourceIds = 'ResourceIds' in params ? params.ResourceIds : null;
 
     }
 }
@@ -1607,26 +524,26 @@ class Step extends  AbstractModel {
 }
 
 /**
- * 实例预付费参数，只有在付费类型为PREPAID时生效。
-
+ * 子网信息
  * @class
  */
-class InstanceChargePrepaid extends  AbstractModel {
+class SubnetInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 包年包月时间，默认为1，单位：月。
-取值范围：1, 2, 3, 4, 5, 6, 7, 8, 9, 10,11, 12, 24, 36, 48, 60。
-         * @type {number || null}
+         * 子网信息（名字）
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
          */
-        this.Period = null;
+        this.SubnetName = null;
 
         /**
-         * 是否自动续费，默认为否。
-         * @type {boolean || null}
+         * 子网信息（ID）
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
          */
-        this.RenewFlag = null;
+        this.SubnetId = null;
 
     }
 
@@ -1637,589 +554,8 @@ class InstanceChargePrepaid extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Period = 'Period' in params ? params.Period : null;
-        this.RenewFlag = 'RenewFlag' in params ? params.RenewFlag : null;
-
-    }
-}
-
-/**
- * DescribeClusterNodes请求参数结构体
- * @class
- */
-class DescribeClusterNodesRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 集群实例ID,实例ID形如: emr-xxxxxxxx
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * 节点标识，取值为：
-<li>all：表示获取全部类型节点，cdb信息除外。</li>
-<li>master：表示获取master节点信息。</li>
-<li>core：表示获取core节点信息。</li>
-<li>task：表示获取task节点信息。</li>
-<li>common：表示获取common节点信息。</li>
-<li>router：表示获取router节点信息。</li>
-<li>db：表示获取正常状态的cdb信息。</li>
-<li>recyle：表示获取回收站隔离中的节点信息，包括cdb信息。</li>
-<li>renew：表示获取所有待续费的节点信息，包括cdb信息，自动续费节点不会返回。</li>
-注意：现在只支持以上取值，输入其他值会导致错误。
-         * @type {string || null}
-         */
-        this.NodeFlag = null;
-
-        /**
-         * 页编号，默认值为0，表示第一页。
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * 每页返回数量，默认值为100，最大值为100。
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * 资源类型:支持all/host/pod，默认为all
-         * @type {string || null}
-         */
-        this.HardwareResourceType = null;
-
-        /**
-         * 支持搜索的字段
-         * @type {Array.<SearchItem> || null}
-         */
-        this.SearchFields = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.NodeFlag = 'NodeFlag' in params ? params.NodeFlag : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.HardwareResourceType = 'HardwareResourceType' in params ? params.HardwareResourceType : null;
-
-        if (params.SearchFields) {
-            this.SearchFields = new Array();
-            for (let z in params.SearchFields) {
-                let obj = new SearchItem();
-                obj.deserialize(params.SearchFields[z]);
-                this.SearchFields.push(obj);
-            }
-        }
-
-    }
-}
-
-/**
- * 预执行脚本配置
- * @class
- */
-class PreExecuteFileSettings extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 脚本在COS上路径，已废弃
-         * @type {string || null}
-         */
-        this.Path = null;
-
-        /**
-         * 执行脚本参数
-         * @type {Array.<string> || null}
-         */
-        this.Args = null;
-
-        /**
-         * COS的Bucket名称，已废弃
-         * @type {string || null}
-         */
-        this.Bucket = null;
-
-        /**
-         * COS的Region名称，已废弃
-         * @type {string || null}
-         */
-        this.Region = null;
-
-        /**
-         * COS的Domain数据，已废弃
-         * @type {string || null}
-         */
-        this.Domain = null;
-
-        /**
-         * 执行顺序
-         * @type {number || null}
-         */
-        this.RunOrder = null;
-
-        /**
-         * resourceAfter 或 clusterAfter
-         * @type {string || null}
-         */
-        this.WhenRun = null;
-
-        /**
-         * 脚本文件名，已废弃
-         * @type {string || null}
-         */
-        this.CosFileName = null;
-
-        /**
-         * 脚本的cos地址
-         * @type {string || null}
-         */
-        this.CosFileURI = null;
-
-        /**
-         * cos的SecretId
-         * @type {string || null}
-         */
-        this.CosSecretId = null;
-
-        /**
-         * Cos的SecretKey
-         * @type {string || null}
-         */
-        this.CosSecretKey = null;
-
-        /**
-         * cos的appid，已废弃
-         * @type {string || null}
-         */
-        this.AppId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Path = 'Path' in params ? params.Path : null;
-        this.Args = 'Args' in params ? params.Args : null;
-        this.Bucket = 'Bucket' in params ? params.Bucket : null;
-        this.Region = 'Region' in params ? params.Region : null;
-        this.Domain = 'Domain' in params ? params.Domain : null;
-        this.RunOrder = 'RunOrder' in params ? params.RunOrder : null;
-        this.WhenRun = 'WhenRun' in params ? params.WhenRun : null;
-        this.CosFileName = 'CosFileName' in params ? params.CosFileName : null;
-        this.CosFileURI = 'CosFileURI' in params ? params.CosFileURI : null;
-        this.CosSecretId = 'CosSecretId' in params ? params.CosSecretId : null;
-        this.CosSecretKey = 'CosSecretKey' in params ? params.CosSecretKey : null;
-        this.AppId = 'AppId' in params ? params.AppId : null;
-
-    }
-}
-
-/**
- * CreateInstance请求参数结构体
- * @class
- */
-class CreateInstanceRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 产品ID，不同产品ID表示不同的EMR产品版本。取值范围：
-<li>1：表示EMR-V1.3.1。</li>
-<li>2：表示EMR-V2.0.1。</li>
-<li>4：表示EMR-V2.1.0。</li>
-<li>7：表示EMR-V3.0.0。</li>
-         * @type {number || null}
-         */
-        this.ProductId = null;
-
-        /**
-         * 私有网络相关信息配置。通过该参数可以指定私有网络的ID，子网ID等信息。
-         * @type {VPCSettings || null}
-         */
-        this.VPCSettings = null;
-
-        /**
-         * 部署的组件列表。不同的EMR产品ID（ProductId：具体含义参考入参ProductId字段）需要选择不同的必选组件：
-<li>ProductId为1的时候，必选组件包括：hadoop-2.7.3、knox-1.2.0、zookeeper-3.4.9</li>
-<li>ProductId为2的时候，必选组件包括：hadoop-2.7.3、knox-1.2.0、zookeeper-3.4.9</li>
-<li>ProductId为4的时候，必选组件包括：hadoop-2.8.4、knox-1.2.0、zookeeper-3.4.9</li>
-<li>ProductId为7的时候，必选组件包括：hadoop-3.1.2、knox-1.2.0、zookeeper-3.4.9</li>
-         * @type {Array.<string> || null}
-         */
-        this.Software = null;
-
-        /**
-         * 节点资源的规格。
-         * @type {NewResourceSpec || null}
-         */
-        this.ResourceSpec = null;
-
-        /**
-         * 是否开启节点高可用。取值范围：
-<li>0：表示不开启节点高可用。</li>
-<li>1：表示开启节点高可用。</li>
-         * @type {number || null}
-         */
-        this.SupportHA = null;
-
-        /**
-         * 实例名称。
-<li>长度限制为6-36个字符。</li>
-<li>只允许包含中文、字母、数字、-、_。</li>
-         * @type {string || null}
-         */
-        this.InstanceName = null;
-
-        /**
-         * 实例计费模式。取值范围：
-<li>0：表示按量计费。</li>
-<li>1：表示包年包月。</li>
-         * @type {number || null}
-         */
-        this.PayMode = null;
-
-        /**
-         * 实例所在的位置。通过该参数可以指定实例所属可用区，所属项目等属性。
-         * @type {Placement || null}
-         */
-        this.Placement = null;
-
-        /**
-         * 购买实例的时长。结合TimeUnit一起使用。
-<li>TimeUnit为s时，该参数只能填写3600，表示按量计费实例。</li>
-<li>TimeUnit为m时，该参数填写的数字表示包年包月实例的购买时长，如1表示购买一个月</li>
-         * @type {number || null}
-         */
-        this.TimeSpan = null;
-
-        /**
-         * 购买实例的时间单位。取值范围：
-<li>s：表示秒。PayMode取值为0时，TimeUnit只能取值为s。</li>
-<li>m：表示月份。PayMode取值为1时，TimeUnit只能取值为m。</li>
-         * @type {string || null}
-         */
-        this.TimeUnit = null;
-
-        /**
-         * 实例登录设置。通过该参数可以设置所购买节点的登录方式密码或者密钥。
-<li>设置密钥时，密码仅用于组件原生WebUI快捷入口登录。</li>
-<li>未设置密钥时，密码用于登录所购节点以及组件原生WebUI快捷入口登录。</li>
-         * @type {LoginSettings || null}
-         */
-        this.LoginSettings = null;
-
-        /**
-         * 开启COS访问需要设置的参数。
-         * @type {COSSettings || null}
-         */
-        this.COSSettings = null;
-
-        /**
-         * 实例所属安全组的ID，形如sg-xxxxxxxx。该参数可以通过调用 [DescribeSecurityGroups](https://cloud.tencent.com/document/api/215/15808) 的返回值中的SecurityGroupId字段来获取。
-         * @type {string || null}
-         */
-        this.SgId = null;
-
-        /**
-         * 引导操作脚本设置。
-         * @type {Array.<PreExecuteFileSettings> || null}
-         */
-        this.PreExecutedFileSettings = null;
-
-        /**
-         * 包年包月实例是否自动续费。取值范围：
-<li>0：表示不自动续费。</li>
-<li>1：表示自动续费。</li>
-         * @type {number || null}
-         */
-        this.AutoRenew = null;
-
-        /**
-         * 客户端Token。
-         * @type {string || null}
-         */
-        this.ClientToken = null;
-
-        /**
-         * 是否开启集群Master节点公网。取值范围：
-<li>NEED_MASTER_WAN：表示开启集群Master节点公网。</li>
-<li>NOT_NEED_MASTER_WAN：表示不开启。</li>默认开启集群Master节点公网。
-         * @type {string || null}
-         */
-        this.NeedMasterWan = null;
-
-        /**
-         * 是否需要开启外网远程登录，即22号端口。在SgId不为空时，该参数无效。
-         * @type {number || null}
-         */
-        this.RemoteLoginAtCreate = null;
-
-        /**
-         * 是否开启安全集群。0表示不开启，非0表示开启。
-         * @type {number || null}
-         */
-        this.CheckSecurity = null;
-
-        /**
-         * 访问外部文件系统。
-         * @type {string || null}
-         */
-        this.ExtendFsField = null;
-
-        /**
-         * 标签描述列表。通过指定该参数可以同时绑定标签到相应的实例。
-         * @type {Array.<Tag> || null}
-         */
-        this.Tags = null;
-
-        /**
-         * 分散置放群组ID列表，当前只支持指定一个。
-         * @type {Array.<string> || null}
-         */
-        this.DisasterRecoverGroupIds = null;
-
-        /**
-         * 集群维度CBS加密盘，默认0表示不加密，1表示加密
-         * @type {number || null}
-         */
-        this.CbsEncrypt = null;
-
-        /**
-         * hive共享元数据库类型。取值范围：
-<li>EMR_NEW_META：表示集群默认创建</li>
-<li>EMR_EXIT_METE：表示集群使用指定EMR-MetaDB。</li>
-<li>USER_CUSTOM_META：表示集群使用自定义MetaDB。</li>
-         * @type {string || null}
-         */
-        this.MetaType = null;
-
-        /**
-         * EMR-MetaDB实例
-         * @type {string || null}
-         */
-        this.UnifyMetaInstanceId = null;
-
-        /**
-         * 自定义MetaDB信息
-         * @type {CustomMetaInfo || null}
-         */
-        this.MetaDBInfo = null;
-
-        /**
-         * 自定义应用角色。
-         * @type {string || null}
-         */
-        this.ApplicationRole = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ProductId = 'ProductId' in params ? params.ProductId : null;
-
-        if (params.VPCSettings) {
-            let obj = new VPCSettings();
-            obj.deserialize(params.VPCSettings)
-            this.VPCSettings = obj;
-        }
-        this.Software = 'Software' in params ? params.Software : null;
-
-        if (params.ResourceSpec) {
-            let obj = new NewResourceSpec();
-            obj.deserialize(params.ResourceSpec)
-            this.ResourceSpec = obj;
-        }
-        this.SupportHA = 'SupportHA' in params ? params.SupportHA : null;
-        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
-        this.PayMode = 'PayMode' in params ? params.PayMode : null;
-
-        if (params.Placement) {
-            let obj = new Placement();
-            obj.deserialize(params.Placement)
-            this.Placement = obj;
-        }
-        this.TimeSpan = 'TimeSpan' in params ? params.TimeSpan : null;
-        this.TimeUnit = 'TimeUnit' in params ? params.TimeUnit : null;
-
-        if (params.LoginSettings) {
-            let obj = new LoginSettings();
-            obj.deserialize(params.LoginSettings)
-            this.LoginSettings = obj;
-        }
-
-        if (params.COSSettings) {
-            let obj = new COSSettings();
-            obj.deserialize(params.COSSettings)
-            this.COSSettings = obj;
-        }
-        this.SgId = 'SgId' in params ? params.SgId : null;
-
-        if (params.PreExecutedFileSettings) {
-            this.PreExecutedFileSettings = new Array();
-            for (let z in params.PreExecutedFileSettings) {
-                let obj = new PreExecuteFileSettings();
-                obj.deserialize(params.PreExecutedFileSettings[z]);
-                this.PreExecutedFileSettings.push(obj);
-            }
-        }
-        this.AutoRenew = 'AutoRenew' in params ? params.AutoRenew : null;
-        this.ClientToken = 'ClientToken' in params ? params.ClientToken : null;
-        this.NeedMasterWan = 'NeedMasterWan' in params ? params.NeedMasterWan : null;
-        this.RemoteLoginAtCreate = 'RemoteLoginAtCreate' in params ? params.RemoteLoginAtCreate : null;
-        this.CheckSecurity = 'CheckSecurity' in params ? params.CheckSecurity : null;
-        this.ExtendFsField = 'ExtendFsField' in params ? params.ExtendFsField : null;
-
-        if (params.Tags) {
-            this.Tags = new Array();
-            for (let z in params.Tags) {
-                let obj = new Tag();
-                obj.deserialize(params.Tags[z]);
-                this.Tags.push(obj);
-            }
-        }
-        this.DisasterRecoverGroupIds = 'DisasterRecoverGroupIds' in params ? params.DisasterRecoverGroupIds : null;
-        this.CbsEncrypt = 'CbsEncrypt' in params ? params.CbsEncrypt : null;
-        this.MetaType = 'MetaType' in params ? params.MetaType : null;
-        this.UnifyMetaInstanceId = 'UnifyMetaInstanceId' in params ? params.UnifyMetaInstanceId : null;
-
-        if (params.MetaDBInfo) {
-            let obj = new CustomMetaInfo();
-            obj.deserialize(params.MetaDBInfo)
-            this.MetaDBInfo = obj;
-        }
-        this.ApplicationRole = 'ApplicationRole' in params ? params.ApplicationRole : null;
-
-    }
-}
-
-/**
- * InquirePriceRenewEmr请求参数结构体
- * @class
- */
-class InquirePriceRenewEmrRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 实例续费的时长。需要结合TimeUnit一起使用。1表示续费1一个月
-         * @type {number || null}
-         */
-        this.TimeSpan = null;
-
-        /**
-         * 待续费集群ID列表。
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * 实例所在的位置。通过该参数可以指定实例所属可用区，所属项目等属性。
-         * @type {Placement || null}
-         */
-        this.Placement = null;
-
-        /**
-         * 实例计费模式。此处只支持取值为1，表示包年包月。
-         * @type {number || null}
-         */
-        this.PayMode = null;
-
-        /**
-         * 实例续费的时间单位。取值范围：
-<li>m：表示月份。</li>
-         * @type {string || null}
-         */
-        this.TimeUnit = null;
-
-        /**
-         * 货币种类。取值范围：
-<li>CNY：表示人民币。</li>
-         * @type {string || null}
-         */
-        this.Currency = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TimeSpan = 'TimeSpan' in params ? params.TimeSpan : null;
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-
-        if (params.Placement) {
-            let obj = new Placement();
-            obj.deserialize(params.Placement)
-            this.Placement = obj;
-        }
-        this.PayMode = 'PayMode' in params ? params.PayMode : null;
-        this.TimeUnit = 'TimeUnit' in params ? params.TimeUnit : null;
-        this.Currency = 'Currency' in params ? params.Currency : null;
-
-    }
-}
-
-/**
- * POD自定义权限和自定义参数
- * @class
- */
-class PodParameter extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * TKE或EKS集群ID
-         * @type {string || null}
-         */
-        this.ClusterId = null;
-
-        /**
-         * 自定义权限
-         * @type {string || null}
-         */
-        this.Config = null;
-
-        /**
-         * 自定义参数
-         * @type {string || null}
-         */
-        this.Parameter = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-        this.Config = 'Config' in params ? params.Config : null;
-        this.Parameter = 'Parameter' in params ? params.Parameter : null;
+        this.SubnetName = 'SubnetName' in params ? params.SubnetName : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
 
     }
 }
@@ -2272,477 +608,6 @@ class MetaDbInfo extends  AbstractModel {
 }
 
 /**
- * 执行动作。
- * @class
- */
-class Execution extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 任务类型，目前支持以下类型。
-1. “MR”，将通过hadoop jar的方式提交。
-2. "HIVE"，将通过hive -f的方式提交。
-3. "SPARK"，将通过spark-submit的方式提交。
-         * @type {string || null}
-         */
-        this.JobType = null;
-
-        /**
-         * 任务参数，提供除提交指令以外的参数。
-         * @type {Array.<string> || null}
-         */
-        this.Args = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.JobType = 'JobType' in params ? params.JobType : null;
-        this.Args = 'Args' in params ? params.Args : null;
-
-    }
-}
-
-/**
- * DescribeInstances返回参数结构体
- * @class
- */
-class DescribeInstancesResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 符合条件的实例总数。
-         * @type {number || null}
-         */
-        this.TotalCnt = null;
-
-        /**
-         * EMR实例详细信息列表。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<ClusterInstancesInfo> || null}
-         */
-        this.ClusterList = null;
-
-        /**
-         * 实例关联的标签键列表。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<string> || null}
-         */
-        this.TagKeys = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TotalCnt = 'TotalCnt' in params ? params.TotalCnt : null;
-
-        if (params.ClusterList) {
-            this.ClusterList = new Array();
-            for (let z in params.ClusterList) {
-                let obj = new ClusterInstancesInfo();
-                obj.deserialize(params.ClusterList[z]);
-                this.ClusterList.push(obj);
-            }
-        }
-        this.TagKeys = 'TagKeys' in params ? params.TagKeys : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * InquiryPriceScaleOutInstance请求参数结构体
- * @class
- */
-class InquiryPriceScaleOutInstanceRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 扩容的时间单位。取值范围：
-<li>s：表示秒。PayMode取值为0时，TimeUnit只能取值为s。</li>
-<li>m：表示月份。PayMode取值为1时，TimeUnit只能取值为m。</li>
-         * @type {string || null}
-         */
-        this.TimeUnit = null;
-
-        /**
-         * 扩容的时长。结合TimeUnit一起使用。
-<li>TimeUnit为s时，该参数只能填写3600，表示按量计费实例。</li>
-<li>TimeUnit为m时，该参数填写的数字表示包年包月实例的购买时长，如1表示购买一个月</li>
-         * @type {number || null}
-         */
-        this.TimeSpan = null;
-
-        /**
-         * 实例所属的可用区ID，例如100003。该参数可以通过调用 [DescribeZones](https://cloud.tencent.com/document/api/213/15707) 的返回值中的ZoneId字段来获取。
-         * @type {number || null}
-         */
-        this.ZoneId = null;
-
-        /**
-         * 实例计费模式。取值范围：
-<li>0：表示按量计费。</li>
-<li>1：表示包年包月。</li>
-         * @type {number || null}
-         */
-        this.PayMode = null;
-
-        /**
-         * 实例ID。
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * 扩容的Core节点数量。
-         * @type {number || null}
-         */
-        this.CoreCount = null;
-
-        /**
-         * 扩容的Task节点数量。
-         * @type {number || null}
-         */
-        this.TaskCount = null;
-
-        /**
-         * 货币种类。取值范围：
-<li>CNY：表示人民币。</li>
-         * @type {string || null}
-         */
-        this.Currency = null;
-
-        /**
-         * 扩容的Router节点数量。
-         * @type {number || null}
-         */
-        this.RouterCount = null;
-
-        /**
-         * 扩容的Master节点数量。
-         * @type {number || null}
-         */
-        this.MasterCount = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TimeUnit = 'TimeUnit' in params ? params.TimeUnit : null;
-        this.TimeSpan = 'TimeSpan' in params ? params.TimeSpan : null;
-        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
-        this.PayMode = 'PayMode' in params ? params.PayMode : null;
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.CoreCount = 'CoreCount' in params ? params.CoreCount : null;
-        this.TaskCount = 'TaskCount' in params ? params.TaskCount : null;
-        this.Currency = 'Currency' in params ? params.Currency : null;
-        this.RouterCount = 'RouterCount' in params ? params.RouterCount : null;
-        this.MasterCount = 'MasterCount' in params ? params.MasterCount : null;
-
-    }
-}
-
-/**
- * 标签
- * @class
- */
-class Tag extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 标签键
-         * @type {string || null}
-         */
-        this.TagKey = null;
-
-        /**
-         * 标签值
-         * @type {string || null}
-         */
-        this.TagValue = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TagKey = 'TagKey' in params ? params.TagKey : null;
-        this.TagValue = 'TagValue' in params ? params.TagValue : null;
-
-    }
-}
-
-/**
- * 描述集群实例位置信息
- * @class
- */
-class Placement extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 实例所属项目ID。该参数可以通过调用 DescribeProject 的返回值中的 projectId 字段来获取。填0为默认项目。
-         * @type {number || null}
-         */
-        this.ProjectId = null;
-
-        /**
-         * 实例所属的可用区，例如ap-guangzhou-1。该参数也可以通过调用 DescribeZones 的返回值中的Zone字段来获取。
-         * @type {string || null}
-         */
-        this.Zone = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
-        this.Zone = 'Zone' in params ? params.Zone : null;
-
-    }
-}
-
-/**
- * 搜索字段
- * @class
- */
-class SearchItem extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 支持搜索的类型
-         * @type {string || null}
-         */
-        this.SearchType = null;
-
-        /**
-         * 支持搜索的值
-         * @type {string || null}
-         */
-        this.SearchValue = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.SearchType = 'SearchType' in params ? params.SearchType : null;
-        this.SearchValue = 'SearchValue' in params ? params.SearchValue : null;
-
-    }
-}
-
-/**
- * POD浮动规格
- * @class
- */
-class DynamicPodSpec extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 需求最小cpu核数
-         * @type {number || null}
-         */
-        this.RequestCpu = null;
-
-        /**
-         * 需求最大cpu核数
-         * @type {number || null}
-         */
-        this.LimitCpu = null;
-
-        /**
-         * 需求最小memory，单位MB
-         * @type {number || null}
-         */
-        this.RequestMemory = null;
-
-        /**
-         * 需求最大memory，单位MB
-         * @type {number || null}
-         */
-        this.LimitMemory = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestCpu = 'RequestCpu' in params ? params.RequestCpu : null;
-        this.LimitCpu = 'LimitCpu' in params ? params.LimitCpu : null;
-        this.RequestMemory = 'RequestMemory' in params ? params.RequestMemory : null;
-        this.LimitMemory = 'LimitMemory' in params ? params.LimitMemory : null;
-
-    }
-}
-
-/**
- * DescribeInstances请求参数结构体
- * @class
- */
-class DescribeInstancesRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 集群筛选策略。取值范围：
-<li>clusterList：表示查询除了已销毁集群之外的集群列表。</li>
-<li>monitorManage：表示查询除了已销毁、创建中以及创建失败的集群之外的集群列表。</li>
-<li>cloudHardwareManage/componentManage：目前这两个取值为预留取值，暂时和monitorManage表示同样的含义。</li>
-         * @type {string || null}
-         */
-        this.DisplayStrategy = null;
-
-        /**
-         * 按照一个或者多个实例ID查询。实例ID形如: emr-xxxxxxxx 。(此参数的具体格式可参考API[简介](https://cloud.tencent.com/document/api/213/15688)的 Ids.N 一节)。如果不填写实例ID，返回该APPID下所有实例列表。
-         * @type {Array.<string> || null}
-         */
-        this.InstanceIds = null;
-
-        /**
-         * 页编号，默认值为0，表示第一页。
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * 每页返回数量，默认值为10，最大值为100。
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * 建议必填-1，表示拉取所有项目下的集群。
-不填默认值为0，表示拉取默认项目下的集群。
-实例所属项目ID。该参数可以通过调用 [DescribeProject](https://cloud.tencent.com/document/api/378/4400) 的返回值中的 projectId 字段来获取。
-         * @type {number || null}
-         */
-        this.ProjectId = null;
-
-        /**
-         * 排序字段。取值范围：
-<li>clusterId：表示按照实例ID排序。</li>
-<li>addTime：表示按照实例创建时间排序。</li>
-<li>status：表示按照实例的状态码排序。</li>
-         * @type {string || null}
-         */
-        this.OrderField = null;
-
-        /**
-         * 按照OrderField升序或者降序进行排序。取值范围：
-<li>0：表示降序。</li>
-<li>1：表示升序。</li>默认值为0。
-         * @type {number || null}
-         */
-        this.Asc = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.DisplayStrategy = 'DisplayStrategy' in params ? params.DisplayStrategy : null;
-        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
-        this.OrderField = 'OrderField' in params ? params.OrderField : null;
-        this.Asc = 'Asc' in params ? params.Asc : null;
-
-    }
-}
-
-/**
- * 用户自建Hive-MetaDB信息
- * @class
- */
-class CustomMetaInfo extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 自定义MetaDB的JDBC连接，请以 jdbc:mysql:// 开头
-         * @type {string || null}
-         */
-        this.MetaDataJdbcUrl = null;
-
-        /**
-         * 自定义MetaDB用户名
-         * @type {string || null}
-         */
-        this.MetaDataUser = null;
-
-        /**
-         * 自定义MetaDB密码
-         * @type {string || null}
-         */
-        this.MetaDataPass = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.MetaDataJdbcUrl = 'MetaDataJdbcUrl' in params ? params.MetaDataJdbcUrl : null;
-        this.MetaDataUser = 'MetaDataUser' in params ? params.MetaDataUser : null;
-        this.MetaDataPass = 'MetaDataPass' in params ? params.MetaDataPass : null;
-
-    }
-}
-
-/**
  * 磁盘描述。
  * @class
  */
@@ -2779,242 +644,6 @@ CLOUD_HSSD 增强型云SSD。
         }
         this.DiskType = 'DiskType' in params ? params.DiskType : null;
         this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
-
-    }
-}
-
-/**
- * 流程作业资源描述
- * @class
- */
-class JobFlowResourceSpec extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 主节点数量。
-         * @type {number || null}
-         */
-        this.MasterCount = null;
-
-        /**
-         * 主节点配置。
-         * @type {JobFlowResource || null}
-         */
-        this.MasterResourceSpec = null;
-
-        /**
-         * Core节点数量
-         * @type {number || null}
-         */
-        this.CoreCount = null;
-
-        /**
-         * Core节点配置。
-         * @type {JobFlowResource || null}
-         */
-        this.CoreResourceSpec = null;
-
-        /**
-         * Task节点数量。
-         * @type {number || null}
-         */
-        this.TaskCount = null;
-
-        /**
-         * Common节点数量。
-         * @type {number || null}
-         */
-        this.CommonCount = null;
-
-        /**
-         * Task节点配置。
-         * @type {JobFlowResource || null}
-         */
-        this.TaskResourceSpec = null;
-
-        /**
-         * Common节点配置。
-         * @type {JobFlowResource || null}
-         */
-        this.CommonResourceSpec = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.MasterCount = 'MasterCount' in params ? params.MasterCount : null;
-
-        if (params.MasterResourceSpec) {
-            let obj = new JobFlowResource();
-            obj.deserialize(params.MasterResourceSpec)
-            this.MasterResourceSpec = obj;
-        }
-        this.CoreCount = 'CoreCount' in params ? params.CoreCount : null;
-
-        if (params.CoreResourceSpec) {
-            let obj = new JobFlowResource();
-            obj.deserialize(params.CoreResourceSpec)
-            this.CoreResourceSpec = obj;
-        }
-        this.TaskCount = 'TaskCount' in params ? params.TaskCount : null;
-        this.CommonCount = 'CommonCount' in params ? params.CommonCount : null;
-
-        if (params.TaskResourceSpec) {
-            let obj = new JobFlowResource();
-            obj.deserialize(params.TaskResourceSpec)
-            this.TaskResourceSpec = obj;
-        }
-
-        if (params.CommonResourceSpec) {
-            let obj = new JobFlowResource();
-            obj.deserialize(params.CommonResourceSpec)
-            this.CommonResourceSpec = obj;
-        }
-
-    }
-}
-
-/**
- * InquiryPriceUpdateInstance请求参数结构体
- * @class
- */
-class InquiryPriceUpdateInstanceRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 变配的时间单位。取值范围：
-<li>s：表示秒。PayMode取值为0时，TimeUnit只能取值为s。</li>
-<li>m：表示月份。PayMode取值为1时，TimeUnit只能取值为m。</li>
-         * @type {string || null}
-         */
-        this.TimeUnit = null;
-
-        /**
-         * 变配的时长。结合TimeUnit一起使用。
-<li>TimeUnit为s时，该参数只能填写3600，表示按量计费实例。</li>
-<li>TimeUnit为m时，该参数填写的数字表示包年包月实例的购买时长，如1表示购买一个月</li>
-         * @type {number || null}
-         */
-        this.TimeSpan = null;
-
-        /**
-         * 节点变配的目标配置。
-         * @type {UpdateInstanceSettings || null}
-         */
-        this.UpdateSpec = null;
-
-        /**
-         * 实例计费模式。取值范围：
-<li>0：表示按量计费。</li>
-<li>1：表示包年包月。</li>
-         * @type {number || null}
-         */
-        this.PayMode = null;
-
-        /**
-         * 实例所在的位置。通过该参数可以指定实例所属可用区，所属项目等属性。
-         * @type {Placement || null}
-         */
-        this.Placement = null;
-
-        /**
-         * 货币种类。取值范围：
-<li>CNY：表示人民币。</li>
-         * @type {string || null}
-         */
-        this.Currency = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TimeUnit = 'TimeUnit' in params ? params.TimeUnit : null;
-        this.TimeSpan = 'TimeSpan' in params ? params.TimeSpan : null;
-
-        if (params.UpdateSpec) {
-            let obj = new UpdateInstanceSettings();
-            obj.deserialize(params.UpdateSpec)
-            this.UpdateSpec = obj;
-        }
-        this.PayMode = 'PayMode' in params ? params.PayMode : null;
-
-        if (params.Placement) {
-            let obj = new Placement();
-            obj.deserialize(params.Placement)
-            this.Placement = obj;
-        }
-        this.Currency = 'Currency' in params ? params.Currency : null;
-
-    }
-}
-
-/**
- * DescribeInstanceRenewNodes返回参数结构体
- * @class
- */
-class DescribeInstanceRenewNodesResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 查询到的节点总数
-         * @type {number || null}
-         */
-        this.TotalCnt = null;
-
-        /**
-         * 节点详细信息列表
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<RenewInstancesInfo> || null}
-         */
-        this.NodeList = null;
-
-        /**
-         * 用户所有的标签键列表
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<string> || null}
-         */
-        this.MetaInfo = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TotalCnt = 'TotalCnt' in params ? params.TotalCnt : null;
-
-        if (params.NodeList) {
-            this.NodeList = new Array();
-            for (let z in params.NodeList) {
-                let obj = new RenewInstancesInfo();
-                obj.deserialize(params.NodeList[z]);
-                this.NodeList.push(obj);
-            }
-        }
-        this.MetaInfo = 'MetaInfo' in params ? params.MetaInfo : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3299,6 +928,90 @@ class ClusterInstancesInfo extends  AbstractModel {
          */
         this.ProductId = null;
 
+        /**
+         * 地区ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * 场景名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SceneName = null;
+
+        /**
+         * 场景化集群类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SceneServiceClass = null;
+
+        /**
+         * 场景化EMR版本
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SceneEmrVersion = null;
+
+        /**
+         * 场景化集群类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DisplayName = null;
+
+        /**
+         * vpc name
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.VpcName = null;
+
+        /**
+         * subnet name
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SubnetName = null;
+
+        /**
+         * 集群依赖关系
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<ClusterExternalServiceInfo> || null}
+         */
+        this.ClusterExternalServiceInfo = null;
+
+        /**
+         * 集群vpcid 字符串类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UniqVpcId = null;
+
+        /**
+         * 子网id 字符串类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UniqSubnetId = null;
+
+        /**
+         * 节点信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<TopologyInfo> || null}
+         */
+        this.TopologyInfoList = null;
+
+        /**
+         * 是否是跨AZ集群
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.IsMultiZoneCluster = null;
+
     }
 
     /**
@@ -3350,6 +1063,1053 @@ class ClusterInstancesInfo extends  AbstractModel {
         this.ServiceClass = 'ServiceClass' in params ? params.ServiceClass : null;
         this.AliasInfo = 'AliasInfo' in params ? params.AliasInfo : null;
         this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.SceneName = 'SceneName' in params ? params.SceneName : null;
+        this.SceneServiceClass = 'SceneServiceClass' in params ? params.SceneServiceClass : null;
+        this.SceneEmrVersion = 'SceneEmrVersion' in params ? params.SceneEmrVersion : null;
+        this.DisplayName = 'DisplayName' in params ? params.DisplayName : null;
+        this.VpcName = 'VpcName' in params ? params.VpcName : null;
+        this.SubnetName = 'SubnetName' in params ? params.SubnetName : null;
+
+        if (params.ClusterExternalServiceInfo) {
+            this.ClusterExternalServiceInfo = new Array();
+            for (let z in params.ClusterExternalServiceInfo) {
+                let obj = new ClusterExternalServiceInfo();
+                obj.deserialize(params.ClusterExternalServiceInfo[z]);
+                this.ClusterExternalServiceInfo.push(obj);
+            }
+        }
+        this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
+        this.UniqSubnetId = 'UniqSubnetId' in params ? params.UniqSubnetId : null;
+
+        if (params.TopologyInfoList) {
+            this.TopologyInfoList = new Array();
+            for (let z in params.TopologyInfoList) {
+                let obj = new TopologyInfo();
+                obj.deserialize(params.TopologyInfoList[z]);
+                this.TopologyInfoList.push(obj);
+            }
+        }
+        this.IsMultiZoneCluster = 'IsMultiZoneCluster' in params ? params.IsMultiZoneCluster : null;
+
+    }
+}
+
+/**
+ * ScaleOutInstance请求参数结构体
+ * @class
+ */
+class ScaleOutInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 扩容的时间单位。取值范围：
+<li>s：表示秒。PayMode取值为0时，TimeUnit只能取值为s。</li>
+<li>m：表示月份。PayMode取值为1时，TimeUnit只能取值为m。</li>
+         * @type {string || null}
+         */
+        this.TimeUnit = null;
+
+        /**
+         * 扩容的时长。结合TimeUnit一起使用。
+<li>TimeUnit为s时，该参数只能填写3600，表示按量计费实例。</li>
+<li>TimeUnit为m时，该参数填写的数字表示包年包月实例的购买时长，如1表示购买一个月</li>
+         * @type {number || null}
+         */
+        this.TimeSpan = null;
+
+        /**
+         * 实例ID。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 实例计费模式。取值范围：
+<li>0：表示按量计费。</li>
+<li>1：表示包年包月。</li>
+         * @type {number || null}
+         */
+        this.PayMode = null;
+
+        /**
+         * 客户端Token。
+         * @type {string || null}
+         */
+        this.ClientToken = null;
+
+        /**
+         * 引导操作脚本设置。
+         * @type {Array.<PreExecuteFileSettings> || null}
+         */
+        this.PreExecutedFileSettings = null;
+
+        /**
+         * 扩容的Task节点数量。
+         * @type {number || null}
+         */
+        this.TaskCount = null;
+
+        /**
+         * 扩容的Core节点数量。
+         * @type {number || null}
+         */
+        this.CoreCount = null;
+
+        /**
+         * 扩容时不需要安装的进程。
+         * @type {Array.<number> || null}
+         */
+        this.UnNecessaryNodeList = null;
+
+        /**
+         * 扩容的Router节点数量。
+         * @type {number || null}
+         */
+        this.RouterCount = null;
+
+        /**
+         * 部署的服务。
+<li>SoftDeployInfo和ServiceNodeInfo是同组参数，和UnNecessaryNodeList参数互斥。</li>
+<li>建议使用SoftDeployInfo和ServiceNodeInfo组合。</li>
+         * @type {Array.<number> || null}
+         */
+        this.SoftDeployInfo = null;
+
+        /**
+         * 启动的进程。
+         * @type {Array.<number> || null}
+         */
+        this.ServiceNodeInfo = null;
+
+        /**
+         * 分散置放群组ID列表，当前仅支持指定一个。
+         * @type {Array.<string> || null}
+         */
+        this.DisasterRecoverGroupIds = null;
+
+        /**
+         * 扩容节点绑定标签列表。
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * 扩容所选资源类型，可选范围为"host","pod"，host为普通的CVM资源，Pod为TKE集群或EKS集群提供的资源
+         * @type {string || null}
+         */
+        this.HardwareResourceType = null;
+
+        /**
+         * 使用Pod资源扩容时，指定的Pod规格以及来源等信息
+         * @type {PodSpec || null}
+         */
+        this.PodSpec = null;
+
+        /**
+         * 使用clickhouse集群扩容时，选择的机器分组名称
+         * @type {string || null}
+         */
+        this.ClickHouseClusterName = null;
+
+        /**
+         * 使用clickhouse集群扩容时，选择的机器分组类型。new为新增，old为选择旧分组
+         * @type {string || null}
+         */
+        this.ClickHouseClusterType = null;
+
+        /**
+         * 规则扩容指定 yarn node label
+         * @type {string || null}
+         */
+        this.YarnNodeLabel = null;
+
+        /**
+         * POD自定义权限和自定义参数
+         * @type {PodParameter || null}
+         */
+        this.PodParameter = null;
+
+        /**
+         * 扩容的Master节点的数量。
+使用clickhouse集群扩容时，该参数不生效。
+使用kafka集群扩容时，该参数不生效。
+当HardwareResourceType=POD时，该参数不生效。
+         * @type {number || null}
+         */
+        this.MasterCount = null;
+
+        /**
+         * 扩容后是否启动服务，true：启动，false：不启动
+         * @type {string || null}
+         */
+        this.StartServiceAfterScaleOut = null;
+
+        /**
+         * 可用区，默认是集群的主可用区
+         * @type {number || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * 子网，默认是集群创建时的子网
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TimeUnit = 'TimeUnit' in params ? params.TimeUnit : null;
+        this.TimeSpan = 'TimeSpan' in params ? params.TimeSpan : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+        this.ClientToken = 'ClientToken' in params ? params.ClientToken : null;
+
+        if (params.PreExecutedFileSettings) {
+            this.PreExecutedFileSettings = new Array();
+            for (let z in params.PreExecutedFileSettings) {
+                let obj = new PreExecuteFileSettings();
+                obj.deserialize(params.PreExecutedFileSettings[z]);
+                this.PreExecutedFileSettings.push(obj);
+            }
+        }
+        this.TaskCount = 'TaskCount' in params ? params.TaskCount : null;
+        this.CoreCount = 'CoreCount' in params ? params.CoreCount : null;
+        this.UnNecessaryNodeList = 'UnNecessaryNodeList' in params ? params.UnNecessaryNodeList : null;
+        this.RouterCount = 'RouterCount' in params ? params.RouterCount : null;
+        this.SoftDeployInfo = 'SoftDeployInfo' in params ? params.SoftDeployInfo : null;
+        this.ServiceNodeInfo = 'ServiceNodeInfo' in params ? params.ServiceNodeInfo : null;
+        this.DisasterRecoverGroupIds = 'DisasterRecoverGroupIds' in params ? params.DisasterRecoverGroupIds : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+        this.HardwareResourceType = 'HardwareResourceType' in params ? params.HardwareResourceType : null;
+
+        if (params.PodSpec) {
+            let obj = new PodSpec();
+            obj.deserialize(params.PodSpec)
+            this.PodSpec = obj;
+        }
+        this.ClickHouseClusterName = 'ClickHouseClusterName' in params ? params.ClickHouseClusterName : null;
+        this.ClickHouseClusterType = 'ClickHouseClusterType' in params ? params.ClickHouseClusterType : null;
+        this.YarnNodeLabel = 'YarnNodeLabel' in params ? params.YarnNodeLabel : null;
+
+        if (params.PodParameter) {
+            let obj = new PodParameter();
+            obj.deserialize(params.PodParameter)
+            this.PodParameter = obj;
+        }
+        this.MasterCount = 'MasterCount' in params ? params.MasterCount : null;
+        this.StartServiceAfterScaleOut = 'StartServiceAfterScaleOut' in params ? params.StartServiceAfterScaleOut : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+
+    }
+}
+
+/**
+ * 获取CVM配额
+ * @class
+ */
+class QuotaEntity extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 已使用配额
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.UsedQuota = null;
+
+        /**
+         * 剩余配额
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.RemainingQuota = null;
+
+        /**
+         * 总配额
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TotalQuota = null;
+
+        /**
+         * 可用区
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UsedQuota = 'UsedQuota' in params ? params.UsedQuota : null;
+        this.RemainingQuota = 'RemainingQuota' in params ? params.RemainingQuota : null;
+        this.TotalQuota = 'TotalQuota' in params ? params.TotalQuota : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+
+    }
+}
+
+/**
+ * 集群节点拓扑信息
+ * @class
+ */
+class TopologyInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 可用区ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * 可用区信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * 子网信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<SubnetInfo> || null}
+         */
+        this.SubnetInfoList = null;
+
+        /**
+         * 节点信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<ShortNodeInfo> || null}
+         */
+        this.NodeInfoList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+
+        if (params.SubnetInfoList) {
+            this.SubnetInfoList = new Array();
+            for (let z in params.SubnetInfoList) {
+                let obj = new SubnetInfo();
+                obj.deserialize(params.SubnetInfoList[z]);
+                this.SubnetInfoList.push(obj);
+            }
+        }
+
+        if (params.NodeInfoList) {
+            this.NodeInfoList = new Array();
+            for (let z in params.NodeInfoList) {
+                let obj = new ShortNodeInfo();
+                obj.deserialize(params.NodeInfoList[z]);
+                this.NodeInfoList.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * 标签
+ * @class
+ */
+class Tag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 标签键
+         * @type {string || null}
+         */
+        this.TagKey = null;
+
+        /**
+         * 标签值
+         * @type {string || null}
+         */
+        this.TagValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TagKey = 'TagKey' in params ? params.TagKey : null;
+        this.TagValue = 'TagValue' in params ? params.TagValue : null;
+
+    }
+}
+
+/**
+ * 集群列表返回示例
+ * @class
+ */
+class EmrListInstance extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 状态描述
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.StatusDesc = null;
+
+        /**
+         * 集群名字
+         * @type {string || null}
+         */
+        this.ClusterName = null;
+
+        /**
+         * 集群地域
+         * @type {number || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * 用户APPID
+         * @type {number || null}
+         */
+        this.AppId = null;
+
+        /**
+         * 创建时间
+         * @type {string || null}
+         */
+        this.AddTime = null;
+
+        /**
+         * 运行时间
+         * @type {string || null}
+         */
+        this.RunTime = null;
+
+        /**
+         * 集群IP
+         * @type {string || null}
+         */
+        this.MasterIp = null;
+
+        /**
+         * 集群版本
+         * @type {string || null}
+         */
+        this.EmrVersion = null;
+
+        /**
+         * 集群计费类型
+         * @type {number || null}
+         */
+        this.ChargeType = null;
+
+        /**
+         * emr ID
+         * @type {number || null}
+         */
+        this.Id = null;
+
+        /**
+         * 产品ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 项目ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * 区域
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.RegionId = null;
+
+        /**
+         * 子网ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * 网络ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * 地区
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * 状态码
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 实例标签
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * 告警信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.AlarmInfo = null;
+
+        /**
+         * 是否是woodpecker集群
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.IsWoodpeckerCluster = null;
+
+        /**
+         * Vpc中文
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.VpcName = null;
+
+        /**
+         * 子网中文
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SubnetName = null;
+
+        /**
+         * 字符串VpcId
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UniqVpcId = null;
+
+        /**
+         * 字符串子网
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UniqSubnetId = null;
+
+        /**
+         * 集群类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ClusterClass = null;
+
+        /**
+         * 是否为跨AZ集群
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.IsMultiZoneCluster = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.StatusDesc = 'StatusDesc' in params ? params.StatusDesc : null;
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.AddTime = 'AddTime' in params ? params.AddTime : null;
+        this.RunTime = 'RunTime' in params ? params.RunTime : null;
+        this.MasterIp = 'MasterIp' in params ? params.MasterIp : null;
+        this.EmrVersion = 'EmrVersion' in params ? params.EmrVersion : null;
+        this.ChargeType = 'ChargeType' in params ? params.ChargeType : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.RegionId = 'RegionId' in params ? params.RegionId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.Status = 'Status' in params ? params.Status : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+        this.AlarmInfo = 'AlarmInfo' in params ? params.AlarmInfo : null;
+        this.IsWoodpeckerCluster = 'IsWoodpeckerCluster' in params ? params.IsWoodpeckerCluster : null;
+        this.VpcName = 'VpcName' in params ? params.VpcName : null;
+        this.SubnetName = 'SubnetName' in params ? params.SubnetName : null;
+        this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
+        this.UniqSubnetId = 'UniqSubnetId' in params ? params.UniqSubnetId : null;
+        this.ClusterClass = 'ClusterClass' in params ? params.ClusterClass : null;
+        this.IsMultiZoneCluster = 'IsMultiZoneCluster' in params ? params.IsMultiZoneCluster : null;
+
+    }
+}
+
+/**
+ * ModifyResourceScheduleConfig返回参数结构体
+ * @class
+ */
+class ModifyResourceScheduleConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * true为草稿，表示还没有刷新资源池
+         * @type {boolean || null}
+         */
+        this.IsDraft = null;
+
+        /**
+         * 校验错误信息，如果不为空，则说明校验失败，配置没有成功
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ErrorMsg = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.IsDraft = 'IsDraft' in params ? params.IsDraft : null;
+        this.ErrorMsg = 'ErrorMsg' in params ? params.ErrorMsg : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * EMR产品配置
+ * @class
+ */
+class EmrProductConfigOutter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 软件信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.SoftInfo = null;
+
+        /**
+         * Master节点个数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.MasterNodeSize = null;
+
+        /**
+         * Core节点个数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.CoreNodeSize = null;
+
+        /**
+         * Task节点个数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TaskNodeSize = null;
+
+        /**
+         * Common节点个数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ComNodeSize = null;
+
+        /**
+         * Master节点资源
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {OutterResource || null}
+         */
+        this.MasterResource = null;
+
+        /**
+         * Core节点资源
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {OutterResource || null}
+         */
+        this.CoreResource = null;
+
+        /**
+         * Task节点资源
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {OutterResource || null}
+         */
+        this.TaskResource = null;
+
+        /**
+         * Common节点资源
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {OutterResource || null}
+         */
+        this.ComResource = null;
+
+        /**
+         * 是否使用COS
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.OnCos = null;
+
+        /**
+         * 收费类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ChargeType = null;
+
+        /**
+         * Router节点个数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.RouterNodeSize = null;
+
+        /**
+         * 是否支持HA
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.SupportHA = null;
+
+        /**
+         * 是否支持安全模式
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.SecurityOn = null;
+
+        /**
+         * 安全组名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SecurityGroup = null;
+
+        /**
+         * 是否开启Cbs加密
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.CbsEncrypt = null;
+
+        /**
+         * 自定义应用角色。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ApplicationRole = null;
+
+        /**
+         * 安全组
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroups = null;
+
+        /**
+         * SSH密钥Id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.PublicKeyId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SoftInfo = 'SoftInfo' in params ? params.SoftInfo : null;
+        this.MasterNodeSize = 'MasterNodeSize' in params ? params.MasterNodeSize : null;
+        this.CoreNodeSize = 'CoreNodeSize' in params ? params.CoreNodeSize : null;
+        this.TaskNodeSize = 'TaskNodeSize' in params ? params.TaskNodeSize : null;
+        this.ComNodeSize = 'ComNodeSize' in params ? params.ComNodeSize : null;
+
+        if (params.MasterResource) {
+            let obj = new OutterResource();
+            obj.deserialize(params.MasterResource)
+            this.MasterResource = obj;
+        }
+
+        if (params.CoreResource) {
+            let obj = new OutterResource();
+            obj.deserialize(params.CoreResource)
+            this.CoreResource = obj;
+        }
+
+        if (params.TaskResource) {
+            let obj = new OutterResource();
+            obj.deserialize(params.TaskResource)
+            this.TaskResource = obj;
+        }
+
+        if (params.ComResource) {
+            let obj = new OutterResource();
+            obj.deserialize(params.ComResource)
+            this.ComResource = obj;
+        }
+        this.OnCos = 'OnCos' in params ? params.OnCos : null;
+        this.ChargeType = 'ChargeType' in params ? params.ChargeType : null;
+        this.RouterNodeSize = 'RouterNodeSize' in params ? params.RouterNodeSize : null;
+        this.SupportHA = 'SupportHA' in params ? params.SupportHA : null;
+        this.SecurityOn = 'SecurityOn' in params ? params.SecurityOn : null;
+        this.SecurityGroup = 'SecurityGroup' in params ? params.SecurityGroup : null;
+        this.CbsEncrypt = 'CbsEncrypt' in params ? params.CbsEncrypt : null;
+        this.ApplicationRole = 'ApplicationRole' in params ? params.ApplicationRole : null;
+        this.SecurityGroups = 'SecurityGroups' in params ? params.SecurityGroups : null;
+        this.PublicKeyId = 'PublicKeyId' in params ? params.PublicKeyId : null;
+
+    }
+}
+
+/**
+ * VPC 参数
+ * @class
+ */
+class VPCSettings extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * VPC ID
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * Subnet ID
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+
+    }
+}
+
+/**
+ * DescribeInstancesList返回参数结构体
+ * @class
+ */
+class DescribeInstancesListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 符合条件的实例总数。
+         * @type {number || null}
+         */
+        this.TotalCnt = null;
+
+        /**
+         * 集群实例列表
+         * @type {Array.<EmrListInstance> || null}
+         */
+        this.InstancesList = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCnt = 'TotalCnt' in params ? params.TotalCnt : null;
+
+        if (params.InstancesList) {
+            this.InstancesList = new Array();
+            for (let z in params.InstancesList) {
+                let obj = new EmrListInstance();
+                obj.deserialize(params.InstancesList[z]);
+                this.InstancesList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeInstanceRenewNodes请求参数结构体
+ * @class
+ */
+class DescribeInstanceRenewNodesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群实例ID,实例ID形如: emr-xxxxxxxx
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
+ * 任务步骤结果描述
+ * @class
+ */
+class JobResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务步骤名称。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 任务步骤失败时的处理策略，可以为以下值：
+"CONTINUE"，跳过当前失败步骤，继续后续步骤。
+“TERMINATE_CLUSTER”，终止当前及后续步骤，并销毁集群。
+“CANCEL_AND_WAIT”，取消当前步骤并阻塞等待处理。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ActionOnFailure = null;
+
+        /**
+         * 当前步骤的状态，可以为以下值：
+“JobFlowStepStatusInit”，初始化状态，等待执行。
+“JobFlowStepStatusRunning”，任务步骤正在执行。
+“JobFlowStepStatusFailed”，任务步骤执行失败。
+“JobFlowStepStatusSucceed”，任务步骤执行成功。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.JobState = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.ActionOnFailure = 'ActionOnFailure' in params ? params.ActionOnFailure : null;
+        this.JobState = 'JobState' in params ? params.JobState : null;
 
     }
 }
@@ -3423,6 +2183,27 @@ class PodSpec extends  AbstractModel {
          */
         this.DynamicPodSpec = null;
 
+        /**
+         * 代表vpc网络唯一id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * 代表vpc子网唯一id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * pod name
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.PodName = null;
+
     }
 
     /**
@@ -3455,65 +2236,49 @@ class PodSpec extends  AbstractModel {
             obj.deserialize(params.DynamicPodSpec)
             this.DynamicPodSpec = obj;
         }
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.PodName = 'PodName' in params ? params.PodName : null;
 
     }
 }
 
 /**
- * 多云盘参数
+ * InquiryPriceRenewInstance返回参数结构体
  * @class
  */
-class MultiDisk extends  AbstractModel {
+class InquiryPriceRenewInstanceResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 云盘类型("CLOUD_PREMIUM","CLOUD_SSD","CLOUD_BASIC")的一种
+         * 原价，单位为元。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.OriginalCost = null;
+
+        /**
+         * 折扣价，单位为元。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.DiscountCost = null;
+
+        /**
+         * 实例续费的时间单位。取值范围：
+<li>m：表示月份。</li>
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.DiskType = null;
+        this.TimeUnit = null;
 
         /**
-         * 云盘大小
+         * 实例续费的时长。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
-        this.Volume = null;
-
-        /**
-         * 该类型云盘个数
-         * @type {number || null}
-         */
-        this.Count = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.DiskType = 'DiskType' in params ? params.DiskType : null;
-        this.Volume = 'Volume' in params ? params.Volume : null;
-        this.Count = 'Count' in params ? params.Count : null;
-
-    }
-}
-
-/**
- * RunJobFlow返回参数结构体
- * @class
- */
-class RunJobFlowResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 作业流程ID。
-         * @type {number || null}
-         */
-        this.JobFlowId = null;
+        this.TimeSpan = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3530,8 +2295,509 @@ class RunJobFlowResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.JobFlowId = 'JobFlowId' in params ? params.JobFlowId : null;
+        this.OriginalCost = 'OriginalCost' in params ? params.OriginalCost : null;
+        this.DiscountCost = 'DiscountCost' in params ? params.DiscountCost : null;
+        this.TimeUnit = 'TimeUnit' in params ? params.TimeUnit : null;
+        this.TimeSpan = 'TimeSpan' in params ? params.TimeSpan : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeJobFlow请求参数结构体
+ * @class
+ */
+class DescribeJobFlowRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 流程任务Id，RunJobFlow接口返回的值。
+         * @type {number || null}
+         */
+        this.JobFlowId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobFlowId = 'JobFlowId' in params ? params.JobFlowId : null;
+
+    }
+}
+
+/**
+ * InquiryPriceCreateInstance返回参数结构体
+ * @class
+ */
+class InquiryPriceCreateInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 原价，单位为元。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.OriginalCost = null;
+
+        /**
+         * 折扣价，单位为元。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.DiscountCost = null;
+
+        /**
+         * 购买实例的时间单位。取值范围：
+<li>s：表示秒。</li>
+<li>m：表示月份。</li>
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TimeUnit = null;
+
+        /**
+         * 购买实例的时长。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TimeSpan = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.OriginalCost = 'OriginalCost' in params ? params.OriginalCost : null;
+        this.DiscountCost = 'DiscountCost' in params ? params.DiscountCost : null;
+        this.TimeUnit = 'TimeUnit' in params ? params.TimeUnit : null;
+        this.TimeSpan = 'TimeSpan' in params ? params.TimeSpan : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * TerminateInstance请求参数结构体
+ * @class
+ */
+class TerminateInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例ID。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 销毁节点ID。该参数为预留参数，用户无需配置。
+         * @type {Array.<string> || null}
+         */
+        this.ResourceIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.ResourceIds = 'ResourceIds' in params ? params.ResourceIds : null;
+
+    }
+}
+
+/**
+ * 流程作业资源描述
+ * @class
+ */
+class JobFlowResourceSpec extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 主节点数量。
+         * @type {number || null}
+         */
+        this.MasterCount = null;
+
+        /**
+         * 主节点配置。
+         * @type {JobFlowResource || null}
+         */
+        this.MasterResourceSpec = null;
+
+        /**
+         * Core节点数量
+         * @type {number || null}
+         */
+        this.CoreCount = null;
+
+        /**
+         * Core节点配置。
+         * @type {JobFlowResource || null}
+         */
+        this.CoreResourceSpec = null;
+
+        /**
+         * Task节点数量。
+         * @type {number || null}
+         */
+        this.TaskCount = null;
+
+        /**
+         * Common节点数量。
+         * @type {number || null}
+         */
+        this.CommonCount = null;
+
+        /**
+         * Task节点配置。
+         * @type {JobFlowResource || null}
+         */
+        this.TaskResourceSpec = null;
+
+        /**
+         * Common节点配置。
+         * @type {JobFlowResource || null}
+         */
+        this.CommonResourceSpec = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MasterCount = 'MasterCount' in params ? params.MasterCount : null;
+
+        if (params.MasterResourceSpec) {
+            let obj = new JobFlowResource();
+            obj.deserialize(params.MasterResourceSpec)
+            this.MasterResourceSpec = obj;
+        }
+        this.CoreCount = 'CoreCount' in params ? params.CoreCount : null;
+
+        if (params.CoreResourceSpec) {
+            let obj = new JobFlowResource();
+            obj.deserialize(params.CoreResourceSpec)
+            this.CoreResourceSpec = obj;
+        }
+        this.TaskCount = 'TaskCount' in params ? params.TaskCount : null;
+        this.CommonCount = 'CommonCount' in params ? params.CommonCount : null;
+
+        if (params.TaskResourceSpec) {
+            let obj = new JobFlowResource();
+            obj.deserialize(params.TaskResourceSpec)
+            this.TaskResourceSpec = obj;
+        }
+
+        if (params.CommonResourceSpec) {
+            let obj = new JobFlowResource();
+            obj.deserialize(params.CommonResourceSpec)
+            this.CommonResourceSpec = obj;
+        }
+
+    }
+}
+
+/**
+ * 自定义配置参数
+ * @class
+ */
+class Configuration extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 配置文件名，支持SPARK、HIVE、HDFS、YARN的部分配置文件自定义。
+         * @type {string || null}
+         */
+        this.Classification = null;
+
+        /**
+         * 配置参数通过KV的形式传入，部分文件支持自定义，可以通过特殊的键"content"传入所有内容。
+         * @type {string || null}
+         */
+        this.Properties = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Classification = 'Classification' in params ? params.Classification : null;
+        this.Properties = 'Properties' in params ? params.Properties : null;
+
+    }
+}
+
+/**
+ * DescribeResourceSchedule请求参数结构体
+ * @class
+ */
+class DescribeResourceScheduleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * emr集群的英文id
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
+ * 描述集群实例位置信息
+ * @class
+ */
+class Placement extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例所属项目ID。该参数可以通过调用 DescribeProject 的返回值中的 projectId 字段来获取。填0为默认项目。
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * 实例所属的可用区，例如ap-guangzhou-1。该参数也可以通过调用 DescribeZones 的返回值中的Zone字段来获取。
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+
+    }
+}
+
+/**
+ * POD自定义权限和自定义参数
+ * @class
+ */
+class PodParameter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * TKE或EKS集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 自定义权限
+如：
+{
+  "apiVersion": "v1",
+  "clusters": [
+    {
+      "cluster": {
+        "certificate-authority-data": "xxxxxx==",
+        "server": "https://xxxxx.com"
+      },
+      "name": "cls-xxxxx"
+    }
+  ],
+  "contexts": [
+    {
+      "context": {
+        "cluster": "cls-xxxxx",
+        "user": "100014xxxxx"
+      },
+      "name": "cls-a44yhcxxxxxxxxxx"
+    }
+  ],
+  "current-context": "cls-a4xxxx-context-default",
+  "kind": "Config",
+  "preferences": {},
+  "users": [
+    {
+      "name": "100014xxxxx",
+      "user": {
+        "client-certificate-data": "xxxxxx",
+        "client-key-data": "xxxxxx"
+      }
+    }
+  ]
+}
+         * @type {string || null}
+         */
+        this.Config = null;
+
+        /**
+         * 自定义参数
+如：
+{
+    "apiVersion": "apps/v1",
+    "kind": "Deployment",
+    "metadata": {
+      "name": "test-deployment",
+      "labels": {
+        "app": "test"
+      }
+    },
+    "spec": {
+      "replicas": 3,
+      "selector": {
+        "matchLabels": {
+          "app": "test-app"
+        }
+      },
+      "template": {
+        "metadata": {
+          "annotations": {
+            "your-organization.com/department-v1": "test-example-v1",
+            "your-organization.com/department-v2": "test-example-v2"
+          },
+          "labels": {
+            "app": "test-app",
+            "environment": "production"
+          }
+        },
+        "spec": {
+          "nodeSelector": {
+            "your-organization/node-test": "test-node"
+          },
+          "containers": [
+            {
+              "name": "nginx",
+              "image": "nginx:1.14.2",
+              "ports": [
+                {
+                  "containerPort": 80
+                }
+              ]
+            }
+          ],
+          "affinity": {
+            "nodeAffinity": {
+              "requiredDuringSchedulingIgnoredDuringExecution": {
+                "nodeSelectorTerms": [
+                  {
+                    "matchExpressions": [
+                      {
+                        "key": "disk-type",
+                        "operator": "In",
+                        "values": [
+                          "ssd",
+                          "sas"
+                        ]
+                      },
+                      {
+                        "key": "cpu-num",
+                        "operator": "Gt",
+                        "values": [
+                          "6"
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+         * @type {string || null}
+         */
+        this.Parameter = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Config = 'Config' in params ? params.Config : null;
+        this.Parameter = 'Parameter' in params ? params.Parameter : null;
+
+    }
+}
+
+/**
+ * DescribeUsersForUserManager请求参数结构体
+ * @class
+ */
+class DescribeUsersForUserManagerRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 是否需要keytab文件的信息，仅对开启kerberos的集群有效，默认为false
+         * @type {boolean || null}
+         */
+        this.NeedKeytabInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NeedKeytabInfo = 'NeedKeytabInfo' in params ? params.NeedKeytabInfo : null;
 
     }
 }
@@ -3622,42 +2888,250 @@ class RenewInstancesInfo extends  AbstractModel {
 }
 
 /**
- * InquiryPriceScaleOutInstance返回参数结构体
+ * RunJobFlow返回参数结构体
  * @class
  */
-class InquiryPriceScaleOutInstanceResponse extends  AbstractModel {
+class RunJobFlowResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 作业流程ID。
+         * @type {number || null}
+         */
+        this.JobFlowId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobFlowId = 'JobFlowId' in params ? params.JobFlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 多云盘参数
+ * @class
+ */
+class MultiDisk extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 云盘类型
+<li>CLOUD_SSD：表示云SSD。</li>
+<li>CLOUD_PREMIUM：表示高效云盘。</li>
+<li>CLOUD_HSSD：表示增强型SSD云硬盘。</li>
+         * @type {string || null}
+         */
+        this.DiskType = null;
+
+        /**
+         * 云盘大小
+         * @type {number || null}
+         */
+        this.Volume = null;
+
+        /**
+         * 该类型云盘个数
+         * @type {number || null}
+         */
+        this.Count = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DiskType = 'DiskType' in params ? params.DiskType : null;
+        this.Volume = 'Volume' in params ? params.Volume : null;
+        this.Count = 'Count' in params ? params.Count : null;
+
+    }
+}
+
+/**
+ * 搜索字段
+ * @class
+ */
+class SearchItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 支持搜索的类型
+         * @type {string || null}
+         */
+        this.SearchType = null;
+
+        /**
+         * 支持搜索的值
+         * @type {string || null}
+         */
+        this.SearchValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SearchType = 'SearchType' in params ? params.SearchType : null;
+        this.SearchValue = 'SearchValue' in params ? params.SearchValue : null;
+
+    }
+}
+
+/**
+ * 各个可用区的参数信息
+ * @class
+ */
+class MultiZoneSetting extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * "master"、"standby"、"third-party"
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ZoneTag = null;
+
+        /**
+         * 无
+         * @type {VPCSettings || null}
+         */
+        this.VPCSettings = null;
+
+        /**
+         * 无
+         * @type {Placement || null}
+         */
+        this.Placement = null;
+
+        /**
+         * 无
+         * @type {NewResourceSpec || null}
+         */
+        this.ResourceSpec = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ZoneTag = 'ZoneTag' in params ? params.ZoneTag : null;
+
+        if (params.VPCSettings) {
+            let obj = new VPCSettings();
+            obj.deserialize(params.VPCSettings)
+            this.VPCSettings = obj;
+        }
+
+        if (params.Placement) {
+            let obj = new Placement();
+            obj.deserialize(params.Placement)
+            this.Placement = obj;
+        }
+
+        if (params.ResourceSpec) {
+            let obj = new NewResourceSpec();
+            obj.deserialize(params.ResourceSpec)
+            this.ResourceSpec = obj;
+        }
+
+    }
+}
+
+/**
+ * TerminateInstance返回参数结构体
+ * @class
+ */
+class TerminateInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * InquiryPriceUpdateInstance返回参数结构体
+ * @class
+ */
+class InquiryPriceUpdateInstanceResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
          * 原价，单位为元。
 注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
+         * @type {number || null}
          */
         this.OriginalCost = null;
 
         /**
          * 折扣价，单位为元。
 注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
+         * @type {number || null}
          */
         this.DiscountCost = null;
 
         /**
-         * 扩容的时间单位。取值范围：
+         * 变配的时间单位。取值范围：
 <li>s：表示秒。</li>
-<li>m：表示月份。</li>
+<li>m：表示月份。</li>
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.Unit = null;
+        this.TimeUnit = null;
 
         /**
-         * 询价的节点规格。
+         * 变配的时长。
 注意：此字段可能返回 null，表示取不到有效值。
-         * @type {PriceResource || null}
+         * @type {number || null}
          */
-        this.PriceSpec = null;
+        this.TimeSpan = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3676,88 +3150,138 @@ class InquiryPriceScaleOutInstanceResponse extends  AbstractModel {
         }
         this.OriginalCost = 'OriginalCost' in params ? params.OriginalCost : null;
         this.DiscountCost = 'DiscountCost' in params ? params.DiscountCost : null;
-        this.Unit = 'Unit' in params ? params.Unit : null;
-
-        if (params.PriceSpec) {
-            let obj = new PriceResource();
-            obj.deserialize(params.PriceSpec)
-            this.PriceSpec = obj;
-        }
+        this.TimeUnit = 'TimeUnit' in params ? params.TimeUnit : null;
+        this.TimeSpan = 'TimeSpan' in params ? params.TimeSpan : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
 
 /**
- * 资源详情
+ * 资源描述
  * @class
  */
-class OutterResource extends  AbstractModel {
+class NewResourceSpec extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 规格
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
+         * 描述Master节点资源
+         * @type {Resource || null}
          */
-        this.Spec = null;
+        this.MasterResourceSpec = null;
 
         /**
-         * 规格名
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
+         * 描述Core节点资源
+         * @type {Resource || null}
          */
-        this.SpecName = null;
+        this.CoreResourceSpec = null;
 
         /**
-         * 硬盘类型
-注意：此字段可能返回 null，表示取不到有效值。
+         * 描述Task节点资源
+         * @type {Resource || null}
+         */
+        this.TaskResourceSpec = null;
+
+        /**
+         * Master节点数量
          * @type {number || null}
          */
-        this.StorageType = null;
+        this.MasterCount = null;
 
         /**
-         * 硬盘类型
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.DiskType = null;
-
-        /**
-         * 系统盘大小
-注意：此字段可能返回 null，表示取不到有效值。
+         * Core节点数量
          * @type {number || null}
          */
-        this.RootSize = null;
+        this.CoreCount = null;
 
         /**
-         * 内存大小
-注意：此字段可能返回 null，表示取不到有效值。
+         * Task节点数量
          * @type {number || null}
          */
-        this.MemSize = null;
+        this.TaskCount = null;
 
         /**
-         * CPU个数
-注意：此字段可能返回 null，表示取不到有效值。
+         * 描述Common节点资源
+         * @type {Resource || null}
+         */
+        this.CommonResourceSpec = null;
+
+        /**
+         * Common节点数量
          * @type {number || null}
          */
-        this.Cpu = null;
+        this.CommonCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.MasterResourceSpec) {
+            let obj = new Resource();
+            obj.deserialize(params.MasterResourceSpec)
+            this.MasterResourceSpec = obj;
+        }
+
+        if (params.CoreResourceSpec) {
+            let obj = new Resource();
+            obj.deserialize(params.CoreResourceSpec)
+            this.CoreResourceSpec = obj;
+        }
+
+        if (params.TaskResourceSpec) {
+            let obj = new Resource();
+            obj.deserialize(params.TaskResourceSpec)
+            this.TaskResourceSpec = obj;
+        }
+        this.MasterCount = 'MasterCount' in params ? params.MasterCount : null;
+        this.CoreCount = 'CoreCount' in params ? params.CoreCount : null;
+        this.TaskCount = 'TaskCount' in params ? params.TaskCount : null;
+
+        if (params.CommonResourceSpec) {
+            let obj = new Resource();
+            obj.deserialize(params.CommonResourceSpec)
+            this.CommonResourceSpec = obj;
+        }
+        this.CommonCount = 'CommonCount' in params ? params.CommonCount : null;
+
+    }
+}
+
+/**
+ * Pod PVC存储方式描述
+ * @class
+ */
+class PersistentVolumeContext extends  AbstractModel {
+    constructor(){
+        super();
 
         /**
-         * 硬盘大小
+         * 磁盘大小，单位为GB。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.DiskSize = null;
 
         /**
-         * 规格
+         * 磁盘类型。CLOUD_PREMIUM;CLOUD_SSD
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.InstanceType = null;
+        this.DiskType = null;
+
+        /**
+         * 磁盘数量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.DiskNum = null;
 
     }
 
@@ -3768,110 +3292,44 @@ class OutterResource extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Spec = 'Spec' in params ? params.Spec : null;
-        this.SpecName = 'SpecName' in params ? params.SpecName : null;
-        this.StorageType = 'StorageType' in params ? params.StorageType : null;
-        this.DiskType = 'DiskType' in params ? params.DiskType : null;
-        this.RootSize = 'RootSize' in params ? params.RootSize : null;
-        this.MemSize = 'MemSize' in params ? params.MemSize : null;
-        this.Cpu = 'Cpu' in params ? params.Cpu : null;
         this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
-        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.DiskType = 'DiskType' in params ? params.DiskType : null;
+        this.DiskNum = 'DiskNum' in params ? params.DiskNum : null;
 
     }
 }
 
 /**
- * 变配资源规格
+ * DescribeResourceSchedule返回参数结构体
  * @class
  */
-class UpdateInstanceSettings extends  AbstractModel {
+class DescribeResourceScheduleResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 内存容量，单位为G
-         * @type {number || null}
+         * 资源调度功能是否开启
+         * @type {boolean || null}
          */
-        this.Memory = null;
+        this.OpenSwitch = null;
 
         /**
-         * CPU核数
-         * @type {number || null}
-         */
-        this.CPUCores = null;
-
-        /**
-         * 机器资源ID（EMR测资源标识）
+         * 正在使用的资源调度器
          * @type {string || null}
          */
-        this.ResourceId = null;
+        this.Scheduler = null;
 
         /**
-         * 变配机器规格
+         * 公平调度器的信息
          * @type {string || null}
          */
-        this.InstanceType = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Memory = 'Memory' in params ? params.Memory : null;
-        this.CPUCores = 'CPUCores' in params ? params.CPUCores : null;
-        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
-        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
-
-    }
-}
-
-/**
- * 自定义配置参数
- * @class
- */
-class Configuration extends  AbstractModel {
-    constructor(){
-        super();
+        this.FSInfo = null;
 
         /**
-         * 配置文件名，支持SPARK、HIVE、HDFS、YARN的部分配置文件自定义。
+         * 容量调度器的信息
          * @type {string || null}
          */
-        this.Classification = null;
-
-        /**
-         * 配置参数通过KV的形式传入，部分文件支持自定义，可以通过特殊的键"content"传入所有内容。
-         * @type {string || null}
-         */
-        this.Properties = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Classification = 'Classification' in params ? params.Classification : null;
-        this.Properties = 'Properties' in params ? params.Properties : null;
-
-    }
-}
-
-/**
- * TerminateTasks返回参数结构体
- * @class
- */
-class TerminateTasksResponse extends  AbstractModel {
-    constructor(){
-        super();
+        this.CSInfo = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3888,7 +3346,242 @@ class TerminateTasksResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.OpenSwitch = 'OpenSwitch' in params ? params.OpenSwitch : null;
+        this.Scheduler = 'Scheduler' in params ? params.Scheduler : null;
+        this.FSInfo = 'FSInfo' in params ? params.FSInfo : null;
+        this.CSInfo = 'CSInfo' in params ? params.CSInfo : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyResourceScheduler请求参数结构体
+ * @class
+ */
+class ModifyResourceSchedulerRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * emr集群的英文id
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 老的调度器:fair
+         * @type {string || null}
+         */
+        this.OldValue = null;
+
+        /**
+         * 新的调度器:capacity
+         * @type {string || null}
+         */
+        this.NewValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.OldValue = 'OldValue' in params ? params.OldValue : null;
+        this.NewValue = 'NewValue' in params ? params.NewValue : null;
+
+    }
+}
+
+/**
+ * 登录设置
+ * @class
+ */
+class LoginSettings extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Password
+         * @type {string || null}
+         */
+        this.Password = null;
+
+        /**
+         * Public Key
+         * @type {string || null}
+         */
+        this.PublicKeyId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Password = 'Password' in params ? params.Password : null;
+        this.PublicKeyId = 'PublicKeyId' in params ? params.PublicKeyId : null;
+
+    }
+}
+
+/**
+ * RunJobFlow请求参数结构体
+ * @class
+ */
+class RunJobFlowRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 作业名称。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 是否新创建集群。
+true，新创建集群，则使用Instance中的参数进行集群创建。
+false，使用已有集群，则通过InstanceId传入。
+         * @type {boolean || null}
+         */
+        this.CreateCluster = null;
+
+        /**
+         * 作业流程执行步骤。
+         * @type {Array.<Step> || null}
+         */
+        this.Steps = null;
+
+        /**
+         * 作业流程正常完成时，集群的处理方式，可选择:
+Terminate 销毁集群。
+Reserve 保留集群。
+         * @type {string || null}
+         */
+        this.InstancePolicy = null;
+
+        /**
+         * 只有CreateCluster为true时生效，目前只支持EMR版本，例如EMR-2.2.0，不支持ClickHouse和Druid版本。
+         * @type {string || null}
+         */
+        this.ProductVersion = null;
+
+        /**
+         * 只在CreateCluster为true时生效。
+true 表示安装kerberos，false表示不安装kerberos。
+         * @type {boolean || null}
+         */
+        this.SecurityClusterFlag = null;
+
+        /**
+         * 只在CreateCluster为true时生效。
+新建集群时，要安装的软件列表。
+         * @type {Array.<string> || null}
+         */
+        this.Software = null;
+
+        /**
+         * 引导脚本。
+         * @type {Array.<BootstrapAction> || null}
+         */
+        this.BootstrapActions = null;
+
+        /**
+         * 指定配置创建集群。
+         * @type {Array.<Configuration> || null}
+         */
+        this.Configurations = null;
+
+        /**
+         * 作业日志保存地址。
+         * @type {string || null}
+         */
+        this.LogUri = null;
+
+        /**
+         * 只在CreateCluster为false时生效。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 自定义应用角色，大数据应用访问外部服务时使用的角色，默认为"EME_QCSRole"。
+         * @type {string || null}
+         */
+        this.ApplicationRole = null;
+
+        /**
+         * 重入标签，用来可重入检查，防止在一段时间内，创建相同的流程作业。
+         * @type {string || null}
+         */
+        this.ClientToken = null;
+
+        /**
+         * 只在CreateCluster为true时生效，使用该配置创建集群。
+         * @type {ClusterSetting || null}
+         */
+        this.Instance = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.CreateCluster = 'CreateCluster' in params ? params.CreateCluster : null;
+
+        if (params.Steps) {
+            this.Steps = new Array();
+            for (let z in params.Steps) {
+                let obj = new Step();
+                obj.deserialize(params.Steps[z]);
+                this.Steps.push(obj);
+            }
+        }
+        this.InstancePolicy = 'InstancePolicy' in params ? params.InstancePolicy : null;
+        this.ProductVersion = 'ProductVersion' in params ? params.ProductVersion : null;
+        this.SecurityClusterFlag = 'SecurityClusterFlag' in params ? params.SecurityClusterFlag : null;
+        this.Software = 'Software' in params ? params.Software : null;
+
+        if (params.BootstrapActions) {
+            this.BootstrapActions = new Array();
+            for (let z in params.BootstrapActions) {
+                let obj = new BootstrapAction();
+                obj.deserialize(params.BootstrapActions[z]);
+                this.BootstrapActions.push(obj);
+            }
+        }
+
+        if (params.Configurations) {
+            this.Configurations = new Array();
+            for (let z in params.Configurations) {
+                let obj = new Configuration();
+                obj.deserialize(params.Configurations[z]);
+                this.Configurations.push(obj);
+            }
+        }
+        this.LogUri = 'LogUri' in params ? params.LogUri : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.ApplicationRole = 'ApplicationRole' in params ? params.ApplicationRole : null;
+        this.ClientToken = 'ClientToken' in params ? params.ClientToken : null;
+
+        if (params.Instance) {
+            let obj = new ClusterSetting();
+            obj.deserialize(params.Instance)
+            this.Instance = obj;
+        }
 
     }
 }
@@ -4035,6 +3728,1834 @@ class PriceResource extends  AbstractModel {
 }
 
 /**
+ * 共用自建组件参数
+ * @class
+ */
+class CustomServiceDefine extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 自定义参数key
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 自定义参数value
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
+ * DescribeCvmQuota返回参数结构体
+ * @class
+ */
+class DescribeCvmQuotaResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 后付费配额列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<QuotaEntity> || null}
+         */
+        this.PostPaidQuotaSet = null;
+
+        /**
+         * 竞价实例配额列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<QuotaEntity> || null}
+         */
+        this.SpotPaidQuotaSet = null;
+
+        /**
+         * eks配额
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<PodSaleSpec> || null}
+         */
+        this.EksQuotaSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.PostPaidQuotaSet) {
+            this.PostPaidQuotaSet = new Array();
+            for (let z in params.PostPaidQuotaSet) {
+                let obj = new QuotaEntity();
+                obj.deserialize(params.PostPaidQuotaSet[z]);
+                this.PostPaidQuotaSet.push(obj);
+            }
+        }
+
+        if (params.SpotPaidQuotaSet) {
+            this.SpotPaidQuotaSet = new Array();
+            for (let z in params.SpotPaidQuotaSet) {
+                let obj = new QuotaEntity();
+                obj.deserialize(params.SpotPaidQuotaSet[z]);
+                this.SpotPaidQuotaSet.push(obj);
+            }
+        }
+
+        if (params.EksQuotaSet) {
+            this.EksQuotaSet = new Array();
+            for (let z in params.EksQuotaSet) {
+                let obj = new PodSaleSpec();
+                obj.deserialize(params.EksQuotaSet[z]);
+                this.EksQuotaSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 引导脚本
+ * @class
+ */
+class BootstrapAction extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 脚本位置，支持cos上的文件，且只支持https协议。
+         * @type {string || null}
+         */
+        this.Path = null;
+
+        /**
+         * 执行时间。
+resourceAfter 表示在机器资源申请成功后执行。
+clusterBefore 表示在集群初始化前执行。
+clusterAfter 表示在集群初始化后执行。
+         * @type {string || null}
+         */
+        this.WhenRun = null;
+
+        /**
+         * 脚本参数
+         * @type {Array.<string> || null}
+         */
+        this.Args = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Path = 'Path' in params ? params.Path : null;
+        this.WhenRun = 'WhenRun' in params ? params.WhenRun : null;
+        this.Args = 'Args' in params ? params.Args : null;
+
+    }
+}
+
+/**
+ * DescribeCvmQuota请求参数结构体
+ * @class
+ */
+class DescribeCvmQuotaRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * EMR集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 区ID
+         * @type {number || null}
+         */
+        this.ZoneId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+
+    }
+}
+
+/**
+ * DescribeClusterNodes请求参数结构体
+ * @class
+ */
+class DescribeClusterNodesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群实例ID,实例ID形如: emr-xxxxxxxx
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 节点标识，取值为：
+<li>all：表示获取全部类型节点，cdb信息除外。</li>
+<li>master：表示获取master节点信息。</li>
+<li>core：表示获取core节点信息。</li>
+<li>task：表示获取task节点信息。</li>
+<li>common：表示获取common节点信息。</li>
+<li>router：表示获取router节点信息。</li>
+<li>db：表示获取正常状态的cdb信息。</li>
+<li>recyle：表示获取回收站隔离中的节点信息，包括cdb信息。</li>
+<li>renew：表示获取所有待续费的节点信息，包括cdb信息，自动续费节点不会返回。</li>
+注意：现在只支持以上取值，输入其他值会导致错误。
+         * @type {string || null}
+         */
+        this.NodeFlag = null;
+
+        /**
+         * 页编号，默认值为0，表示第一页。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 每页返回数量，默认值为100，最大值为100。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 资源类型:支持all/host/pod，默认为all
+         * @type {string || null}
+         */
+        this.HardwareResourceType = null;
+
+        /**
+         * 支持搜索的字段
+         * @type {Array.<SearchItem> || null}
+         */
+        this.SearchFields = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.NodeFlag = 'NodeFlag' in params ? params.NodeFlag : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.HardwareResourceType = 'HardwareResourceType' in params ? params.HardwareResourceType : null;
+
+        if (params.SearchFields) {
+            this.SearchFields = new Array();
+            for (let z in params.SearchFields) {
+                let obj = new SearchItem();
+                obj.deserialize(params.SearchFields[z]);
+                this.SearchFields.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * SyncPodState请求参数结构体
+ * @class
+ */
+class SyncPodStateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * EmrService中pod状态信息
+         * @type {PodState || null}
+         */
+        this.Message = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Message) {
+            let obj = new PodState();
+            obj.deserialize(params.Message)
+            this.Message = obj;
+        }
+
+    }
+}
+
+/**
+ * CreateInstance请求参数结构体
+ * @class
+ */
+class CreateInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品ID，不同产品ID表示不同的EMR产品版本。取值范围：
+<li>1：表示EMR-V1.3.1。</li>
+<li>2：表示EMR-V2.0.1。</li>
+<li>4：表示EMR-V2.1.0。</li>
+<li>7：表示EMR-V3.0.0。</li>
+<li>9：表示EMR-V2.2.0。</li>
+<li>11：表示CLICKHOUSE-V1.0.0。</li>
+<li>13：表示DRUID-V1.0.0。</li>
+<li>15：表示EMR-V2.2.1。</li>
+<li>16：表示EMR-V2.3.0。</li>
+<li>17：表示CLICKHOUSE-V1.1.0。</li>
+<li>19：表示EMR-V2.4.0。</li>
+<li>20：表示EMR-V2.5.0。</li>
+<li>22：表示CLICKHOUSE-V1.2.0。</li>
+<li>24：表示EMR-TianQiong-V1.0.0。</li>
+<li>25：表示EMR-V3.1.0。</li>
+<li>26：表示DORIS-V1.0.0。</li>
+<li>27：表示KAFKA-V1.0.0。</li>
+<li>28：表示EMR-V3.2.0。</li>
+<li>29：表示EMR-V2.5.1。</li>
+<li>30：表示EMR-V2.6.0。</li>
+         * @type {number || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 部署的组件列表。不同的EMR产品ID（ProductId：具体含义参考入参ProductId字段）对应不同可选组件列表，不同产品版本可选组件列表查询：[组件版本](https://cloud.tencent.com/document/product/589/20279) ；
+填写实例值：hive、flink。
+         * @type {Array.<string> || null}
+         */
+        this.Software = null;
+
+        /**
+         * 是否开启节点高可用。取值范围：
+<li>0：表示不开启节点高可用。</li>
+<li>1：表示开启节点高可用。</li>
+         * @type {number || null}
+         */
+        this.SupportHA = null;
+
+        /**
+         * 实例名称。
+<li>长度限制为6-36个字符。</li>
+<li>只允许包含中文、字母、数字、-、_。</li>
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * 实例计费模式。取值范围：
+<li>0：表示按量计费。</li>
+<li>1：表示包年包月。</li>
+         * @type {number || null}
+         */
+        this.PayMode = null;
+
+        /**
+         * 购买实例的时长。结合TimeUnit一起使用。
+<li>TimeUnit为s时，该参数只能填写3600，表示按量计费实例。</li>
+<li>TimeUnit为m时，该参数填写的数字表示包年包月实例的购买时长，如1表示购买一个月</li>
+         * @type {number || null}
+         */
+        this.TimeSpan = null;
+
+        /**
+         * 购买实例的时间单位。取值范围：
+<li>s：表示秒。PayMode取值为0时，TimeUnit只能取值为s。</li>
+<li>m：表示月份。PayMode取值为1时，TimeUnit只能取值为m。</li>
+         * @type {string || null}
+         */
+        this.TimeUnit = null;
+
+        /**
+         * 实例登录设置。通过该参数可以设置所购买节点的登录方式密码或者密钥。
+<li>设置密钥时，密码仅用于组件原生WebUI快捷入口登录。</li>
+<li>未设置密钥时，密码用于登录所购节点以及组件原生WebUI快捷入口登录。</li>
+         * @type {LoginSettings || null}
+         */
+        this.LoginSettings = null;
+
+        /**
+         * 私有网络相关信息配置。通过该参数可以指定私有网络的ID，子网ID等信息。
+         * @type {VPCSettings || null}
+         */
+        this.VPCSettings = null;
+
+        /**
+         * 节点资源的规格。
+         * @type {NewResourceSpec || null}
+         */
+        this.ResourceSpec = null;
+
+        /**
+         * 开启COS访问需要设置的参数。
+         * @type {COSSettings || null}
+         */
+        this.COSSettings = null;
+
+        /**
+         * 实例所在的位置。通过该参数可以指定实例所属可用区，所属项目等属性。
+         * @type {Placement || null}
+         */
+        this.Placement = null;
+
+        /**
+         * 实例所属安全组的ID，形如sg-xxxxxxxx。该参数可以通过调用 [DescribeSecurityGroups](https://cloud.tencent.com/document/api/215/15808) 的返回值中的SecurityGroupId字段来获取。
+         * @type {string || null}
+         */
+        this.SgId = null;
+
+        /**
+         * [引导操作](https://cloud.tencent.com/document/product/589/35656)脚本设置。
+         * @type {Array.<PreExecuteFileSettings> || null}
+         */
+        this.PreExecutedFileSettings = null;
+
+        /**
+         * 包年包月实例是否自动续费。取值范围：
+<li>0：表示不自动续费。</li>
+<li>1：表示自动续费。</li>
+         * @type {number || null}
+         */
+        this.AutoRenew = null;
+
+        /**
+         * 客户端Token。
+         * @type {string || null}
+         */
+        this.ClientToken = null;
+
+        /**
+         * 是否开启集群Master节点公网。取值范围：
+<li>NEED_MASTER_WAN：表示开启集群Master节点公网。</li>
+<li>NOT_NEED_MASTER_WAN：表示不开启。</li>默认开启集群Master节点公网。
+         * @type {string || null}
+         */
+        this.NeedMasterWan = null;
+
+        /**
+         * 是否需要开启外网远程登录，即22号端口。在SgId不为空时，该参数无效。
+         * @type {number || null}
+         */
+        this.RemoteLoginAtCreate = null;
+
+        /**
+         * 是否开启安全集群。0表示不开启，非0表示开启。
+         * @type {number || null}
+         */
+        this.CheckSecurity = null;
+
+        /**
+         * 访问外部文件系统。
+         * @type {string || null}
+         */
+        this.ExtendFsField = null;
+
+        /**
+         * 标签描述列表。通过指定该参数可以同时绑定标签到相应的实例。
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * 分散置放群组ID列表，当前只支持指定一个。
+该参数可以通过调用 [DescribeSecurityGroups](https://cloud.tencent.com/document/product/213/15486 ) 的返回值中的SecurityGroupId字段来获取。
+         * @type {Array.<string> || null}
+         */
+        this.DisasterRecoverGroupIds = null;
+
+        /**
+         * 集群维度CBS加密盘，默认0表示不加密，1表示加密
+         * @type {number || null}
+         */
+        this.CbsEncrypt = null;
+
+        /**
+         * hive共享元数据库类型。取值范围：
+<li>EMR_NEW_META：表示集群默认创建</li>
+<li>EMR_EXIT_META：表示集群使用指定EMR-MetaDB。</li>
+<li>USER_CUSTOM_META：表示集群使用自定义MetaDB。</li>
+         * @type {string || null}
+         */
+        this.MetaType = null;
+
+        /**
+         * EMR-MetaDB实例
+         * @type {string || null}
+         */
+        this.UnifyMetaInstanceId = null;
+
+        /**
+         * 自定义MetaDB信息
+         * @type {CustomMetaInfo || null}
+         */
+        this.MetaDBInfo = null;
+
+        /**
+         * 自定义应用角色。
+         * @type {string || null}
+         */
+        this.ApplicationRole = null;
+
+        /**
+         * 场景化取值：
+Hadoop-Kudu
+Hadoop-Zookeeper
+Hadoop-Presto
+Hadoop-Hbase
+         * @type {string || null}
+         */
+        this.SceneName = null;
+
+        /**
+         * 共享组件信息
+         * @type {Array.<ExternalService> || null}
+         */
+        this.ExternalService = null;
+
+        /**
+         * 如果为0，则MultiZone、MultiDeployStrategy、MultiZoneSettings是disable的状态，如果为1，则废弃ResourceSpec，使用MultiZoneSettings。
+         * @type {number || null}
+         */
+        this.VersionID = null;
+
+        /**
+         * true表示开启跨AZ部署；仅为新建集群时的用户参数，后续不支持调整。
+         * @type {boolean || null}
+         */
+        this.MultiZone = null;
+
+        /**
+         * 节点资源的规格，有几个可用区，就填几个，按顺序第一个为主可用区，第二个为备可用区，第三个为仲裁可用区。如果没有开启跨AZ，则长度为1即可。
+         * @type {Array.<MultiZoneSetting> || null}
+         */
+        this.MultiZoneSettings = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.Software = 'Software' in params ? params.Software : null;
+        this.SupportHA = 'SupportHA' in params ? params.SupportHA : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+        this.TimeSpan = 'TimeSpan' in params ? params.TimeSpan : null;
+        this.TimeUnit = 'TimeUnit' in params ? params.TimeUnit : null;
+
+        if (params.LoginSettings) {
+            let obj = new LoginSettings();
+            obj.deserialize(params.LoginSettings)
+            this.LoginSettings = obj;
+        }
+
+        if (params.VPCSettings) {
+            let obj = new VPCSettings();
+            obj.deserialize(params.VPCSettings)
+            this.VPCSettings = obj;
+        }
+
+        if (params.ResourceSpec) {
+            let obj = new NewResourceSpec();
+            obj.deserialize(params.ResourceSpec)
+            this.ResourceSpec = obj;
+        }
+
+        if (params.COSSettings) {
+            let obj = new COSSettings();
+            obj.deserialize(params.COSSettings)
+            this.COSSettings = obj;
+        }
+
+        if (params.Placement) {
+            let obj = new Placement();
+            obj.deserialize(params.Placement)
+            this.Placement = obj;
+        }
+        this.SgId = 'SgId' in params ? params.SgId : null;
+
+        if (params.PreExecutedFileSettings) {
+            this.PreExecutedFileSettings = new Array();
+            for (let z in params.PreExecutedFileSettings) {
+                let obj = new PreExecuteFileSettings();
+                obj.deserialize(params.PreExecutedFileSettings[z]);
+                this.PreExecutedFileSettings.push(obj);
+            }
+        }
+        this.AutoRenew = 'AutoRenew' in params ? params.AutoRenew : null;
+        this.ClientToken = 'ClientToken' in params ? params.ClientToken : null;
+        this.NeedMasterWan = 'NeedMasterWan' in params ? params.NeedMasterWan : null;
+        this.RemoteLoginAtCreate = 'RemoteLoginAtCreate' in params ? params.RemoteLoginAtCreate : null;
+        this.CheckSecurity = 'CheckSecurity' in params ? params.CheckSecurity : null;
+        this.ExtendFsField = 'ExtendFsField' in params ? params.ExtendFsField : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+        this.DisasterRecoverGroupIds = 'DisasterRecoverGroupIds' in params ? params.DisasterRecoverGroupIds : null;
+        this.CbsEncrypt = 'CbsEncrypt' in params ? params.CbsEncrypt : null;
+        this.MetaType = 'MetaType' in params ? params.MetaType : null;
+        this.UnifyMetaInstanceId = 'UnifyMetaInstanceId' in params ? params.UnifyMetaInstanceId : null;
+
+        if (params.MetaDBInfo) {
+            let obj = new CustomMetaInfo();
+            obj.deserialize(params.MetaDBInfo)
+            this.MetaDBInfo = obj;
+        }
+        this.ApplicationRole = 'ApplicationRole' in params ? params.ApplicationRole : null;
+        this.SceneName = 'SceneName' in params ? params.SceneName : null;
+
+        if (params.ExternalService) {
+            this.ExternalService = new Array();
+            for (let z in params.ExternalService) {
+                let obj = new ExternalService();
+                obj.deserialize(params.ExternalService[z]);
+                this.ExternalService.push(obj);
+            }
+        }
+        this.VersionID = 'VersionID' in params ? params.VersionID : null;
+        this.MultiZone = 'MultiZone' in params ? params.MultiZone : null;
+
+        if (params.MultiZoneSettings) {
+            this.MultiZoneSettings = new Array();
+            for (let z in params.MultiZoneSettings) {
+                let obj = new MultiZoneSetting();
+                obj.deserialize(params.MultiZoneSettings[z]);
+                this.MultiZoneSettings.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * 执行动作。
+ * @class
+ */
+class Execution extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务类型，目前支持以下类型。
+1. “MR”，将通过hadoop jar的方式提交。
+2. "HIVE"，将通过hive -f的方式提交。
+3. "SPARK"，将通过spark-submit的方式提交。
+         * @type {string || null}
+         */
+        this.JobType = null;
+
+        /**
+         * 任务参数，提供除提交指令以外的参数。
+         * @type {Array.<string> || null}
+         */
+        this.Args = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobType = 'JobType' in params ? params.JobType : null;
+        this.Args = 'Args' in params ? params.Args : null;
+
+    }
+}
+
+/**
+ * 变配资源规格
+ * @class
+ */
+class UpdateInstanceSettings extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 内存容量，单位为G
+         * @type {number || null}
+         */
+        this.Memory = null;
+
+        /**
+         * CPU核数
+         * @type {number || null}
+         */
+        this.CPUCores = null;
+
+        /**
+         * 机器资源ID（EMR测资源标识）
+         * @type {string || null}
+         */
+        this.ResourceId = null;
+
+        /**
+         * 变配机器规格
+         * @type {string || null}
+         */
+        this.InstanceType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.CPUCores = 'CPUCores' in params ? params.CPUCores : null;
+        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+
+    }
+}
+
+/**
+ * DescribeInstances请求参数结构体
+ * @class
+ */
+class DescribeInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群筛选策略。取值范围：
+<li>clusterList：表示查询除了已销毁集群之外的集群列表。</li>
+<li>monitorManage：表示查询除了已销毁、创建中以及创建失败的集群之外的集群列表。</li>
+<li>cloudHardwareManage/componentManage：目前这两个取值为预留取值，暂时和monitorManage表示同样的含义。</li>
+         * @type {string || null}
+         */
+        this.DisplayStrategy = null;
+
+        /**
+         * 按照一个或者多个实例ID查询。实例ID形如: emr-xxxxxxxx 。(此参数的具体格式可参考API[简介](https://cloud.tencent.com/document/api/213/15688)的 Ids.N 一节)。如果不填写实例ID，返回该APPID下所有实例列表。
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+        /**
+         * 页编号，默认值为0，表示第一页。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 每页返回数量，默认值为10，最大值为100。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 建议必填-1，表示拉取所有项目下的集群。
+不填默认值为0，表示拉取默认项目下的集群。
+实例所属项目ID。该参数可以通过调用 [DescribeProject](https://cloud.tencent.com/document/api/378/4400) 的返回值中的 projectId 字段来获取。
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * 排序字段。取值范围：
+<li>clusterId：表示按照实例ID排序。</li>
+<li>addTime：表示按照实例创建时间排序。</li>
+<li>status：表示按照实例的状态码排序。</li>
+         * @type {string || null}
+         */
+        this.OrderField = null;
+
+        /**
+         * 按照OrderField升序或者降序进行排序。取值范围：
+<li>0：表示降序。</li>
+<li>1：表示升序。</li>默认值为0。
+         * @type {number || null}
+         */
+        this.Asc = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DisplayStrategy = 'DisplayStrategy' in params ? params.DisplayStrategy : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.OrderField = 'OrderField' in params ? params.OrderField : null;
+        this.Asc = 'Asc' in params ? params.Asc : null;
+
+    }
+}
+
+/**
+ * InquiryPriceUpdateInstance请求参数结构体
+ * @class
+ */
+class InquiryPriceUpdateInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 变配的时间单位。取值范围：
+<li>s：表示秒。PayMode取值为0时，TimeUnit只能取值为s。</li>
+<li>m：表示月份。PayMode取值为1时，TimeUnit只能取值为m。</li>
+         * @type {string || null}
+         */
+        this.TimeUnit = null;
+
+        /**
+         * 变配的时长。结合TimeUnit一起使用。
+<li>TimeUnit为s时，该参数只能填写3600，表示按量计费实例。</li>
+<li>TimeUnit为m时，该参数填写的数字表示包年包月实例的购买时长，如1表示购买一个月</li>
+         * @type {number || null}
+         */
+        this.TimeSpan = null;
+
+        /**
+         * 节点变配的目标配置。
+         * @type {UpdateInstanceSettings || null}
+         */
+        this.UpdateSpec = null;
+
+        /**
+         * 实例计费模式。取值范围：
+<li>0：表示按量计费。</li>
+<li>1：表示包年包月。</li>
+         * @type {number || null}
+         */
+        this.PayMode = null;
+
+        /**
+         * 实例所在的位置。通过该参数可以指定实例所属可用区，所属项目等属性。
+         * @type {Placement || null}
+         */
+        this.Placement = null;
+
+        /**
+         * 货币种类。取值范围：
+<li>CNY：表示人民币。</li>
+         * @type {string || null}
+         */
+        this.Currency = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TimeUnit = 'TimeUnit' in params ? params.TimeUnit : null;
+        this.TimeSpan = 'TimeSpan' in params ? params.TimeSpan : null;
+
+        if (params.UpdateSpec) {
+            let obj = new UpdateInstanceSettings();
+            obj.deserialize(params.UpdateSpec)
+            this.UpdateSpec = obj;
+        }
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+
+        if (params.Placement) {
+            let obj = new Placement();
+            obj.deserialize(params.Placement)
+            this.Placement = obj;
+        }
+        this.Currency = 'Currency' in params ? params.Currency : null;
+
+    }
+}
+
+/**
+ * DescribeInstancesList请求参数结构体
+ * @class
+ */
+class DescribeInstancesListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群筛选策略。取值范围：<li>clusterList：表示查询除了已销毁集群之外的集群列表。</li><li>monitorManage：表示查询除了已销毁、创建中以及创建失败的集群之外的集群列表。</li><li>cloudHardwareManage/componentManage：目前这两个取值为预留取值，暂时和monitorManage表示同样的含义。</li>
+         * @type {string || null}
+         */
+        this.DisplayStrategy = null;
+
+        /**
+         * 页编号，默认值为0，表示第一页。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 每页返回数量，默认值为10，最大值为100。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 排序字段。取值范围：<li>clusterId：表示按照实例ID排序。</li><li>addTime：表示按照实例创建时间排序。</li><li>status：表示按照实例的状态码排序。</li>
+         * @type {string || null}
+         */
+        this.OrderField = null;
+
+        /**
+         * 按照OrderField升序或者降序进行排序。取值范围：<li>0：表示降序。</li><li>1：表示升序。</li>默认值为0。
+         * @type {number || null}
+         */
+        this.Asc = null;
+
+        /**
+         * 自定义查询
+         * @type {Array.<Filters> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DisplayStrategy = 'DisplayStrategy' in params ? params.DisplayStrategy : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.OrderField = 'OrderField' in params ? params.OrderField : null;
+        this.Asc = 'Asc' in params ? params.Asc : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * 资源详情
+ * @class
+ */
+class OutterResource extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 规格
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Spec = null;
+
+        /**
+         * 规格名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SpecName = null;
+
+        /**
+         * 硬盘类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.StorageType = null;
+
+        /**
+         * 硬盘类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DiskType = null;
+
+        /**
+         * 系统盘大小
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.RootSize = null;
+
+        /**
+         * 内存大小
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.MemSize = null;
+
+        /**
+         * CPU个数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
+        /**
+         * 硬盘大小
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.DiskSize = null;
+
+        /**
+         * 规格
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.InstanceType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Spec = 'Spec' in params ? params.Spec : null;
+        this.SpecName = 'SpecName' in params ? params.SpecName : null;
+        this.StorageType = 'StorageType' in params ? params.StorageType : null;
+        this.DiskType = 'DiskType' in params ? params.DiskType : null;
+        this.RootSize = 'RootSize' in params ? params.RootSize : null;
+        this.MemSize = 'MemSize' in params ? params.MemSize : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
+        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+
+    }
+}
+
+/**
+ * ModifyResourcePools返回参数结构体
+ * @class
+ */
+class ModifyResourcePoolsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * false表示不是草稿，提交刷新请求成功
+         * @type {boolean || null}
+         */
+        this.IsDraft = null;
+
+        /**
+         * 扩展字段，暂时没用
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ErrorMsg = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.IsDraft = 'IsDraft' in params ? params.IsDraft : null;
+        this.ErrorMsg = 'ErrorMsg' in params ? params.ErrorMsg : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * TerminateTasks返回参数结构体
+ * @class
+ */
+class TerminateTasksResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeInstances返回参数结构体
+ * @class
+ */
+class DescribeInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 符合条件的实例总数。
+         * @type {number || null}
+         */
+        this.TotalCnt = null;
+
+        /**
+         * EMR实例详细信息列表。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<ClusterInstancesInfo> || null}
+         */
+        this.ClusterList = null;
+
+        /**
+         * 实例关联的标签键列表。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.TagKeys = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCnt = 'TotalCnt' in params ? params.TotalCnt : null;
+
+        if (params.ClusterList) {
+            this.ClusterList = new Array();
+            for (let z in params.ClusterList) {
+                let obj = new ClusterInstancesInfo();
+                obj.deserialize(params.ClusterList[z]);
+                this.ClusterList.push(obj);
+            }
+        }
+        this.TagKeys = 'TagKeys' in params ? params.TagKeys : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeUsersForUserManager返回参数结构体
+ * @class
+ */
+class DescribeUsersForUserManagerResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * InquiryPriceRenewInstance请求参数结构体
+ * @class
+ */
+class InquiryPriceRenewInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例续费的时长。需要结合TimeUnit一起使用。1表示续费1一个月
+         * @type {number || null}
+         */
+        this.TimeSpan = null;
+
+        /**
+         * 待续费节点的资源ID列表。资源ID形如：emr-vm-xxxxxxxx。有效的资源ID可通过登录[控制台](https://console.cloud.tencent.com/emr/static/hardware)查询。
+         * @type {Array.<string> || null}
+         */
+        this.ResourceIds = null;
+
+        /**
+         * 实例所在的位置。通过该参数可以指定实例所属可用区，所属项目等属性。
+         * @type {Placement || null}
+         */
+        this.Placement = null;
+
+        /**
+         * 实例计费模式。此处只支持取值为1，表示包年包月。
+         * @type {number || null}
+         */
+        this.PayMode = null;
+
+        /**
+         * 实例续费的时间单位。取值范围：
+<li>m：表示月份。</li>
+         * @type {string || null}
+         */
+        this.TimeUnit = null;
+
+        /**
+         * 货币种类。取值范围：
+<li>CNY：表示人民币。</li>
+         * @type {string || null}
+         */
+        this.Currency = null;
+
+        /**
+         * 是否按量转包年包月。0：否，1：是。
+         * @type {number || null}
+         */
+        this.ModifyPayMode = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TimeSpan = 'TimeSpan' in params ? params.TimeSpan : null;
+        this.ResourceIds = 'ResourceIds' in params ? params.ResourceIds : null;
+
+        if (params.Placement) {
+            let obj = new Placement();
+            obj.deserialize(params.Placement)
+            this.Placement = obj;
+        }
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+        this.TimeUnit = 'TimeUnit' in params ? params.TimeUnit : null;
+        this.Currency = 'Currency' in params ? params.Currency : null;
+        this.ModifyPayMode = 'ModifyPayMode' in params ? params.ModifyPayMode : null;
+
+    }
+}
+
+/**
+ * 出参
+ * @class
+ */
+class CdbInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 数据库实例
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * 数据库IP
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Ip = null;
+
+        /**
+         * 数据库端口
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Port = null;
+
+        /**
+         * 数据库内存规格
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.MemSize = null;
+
+        /**
+         * 数据库磁盘规格
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Volume = null;
+
+        /**
+         * 服务标识
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Service = null;
+
+        /**
+         * 过期时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ExpireTime = null;
+
+        /**
+         * 申请时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ApplyTime = null;
+
+        /**
+         * 付费类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.PayType = null;
+
+        /**
+         * 过期标识
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.ExpireFlag = null;
+
+        /**
+         * 数据库状态
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 续费标识
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.IsAutoRenew = null;
+
+        /**
+         * 数据库字符串
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SerialNo = null;
+
+        /**
+         * ZoneId
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * RegionId
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.RegionId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.Ip = 'Ip' in params ? params.Ip : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.MemSize = 'MemSize' in params ? params.MemSize : null;
+        this.Volume = 'Volume' in params ? params.Volume : null;
+        this.Service = 'Service' in params ? params.Service : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+        this.ApplyTime = 'ApplyTime' in params ? params.ApplyTime : null;
+        this.PayType = 'PayType' in params ? params.PayType : null;
+        this.ExpireFlag = 'ExpireFlag' in params ? params.ExpireFlag : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.IsAutoRenew = 'IsAutoRenew' in params ? params.IsAutoRenew : null;
+        this.SerialNo = 'SerialNo' in params ? params.SerialNo : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.RegionId = 'RegionId' in params ? params.RegionId : null;
+
+    }
+}
+
+/**
+ * InquirePriceRenewEmr返回参数结构体
+ * @class
+ */
+class InquirePriceRenewEmrResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 原价，单位为元。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.OriginalCost = null;
+
+        /**
+         * 折扣价，单位为元。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.DiscountCost = null;
+
+        /**
+         * 实例续费的时间单位。取值范围：
+<li>m：表示月份。</li>
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TimeUnit = null;
+
+        /**
+         * 实例续费的时长。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TimeSpan = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.OriginalCost = 'OriginalCost' in params ? params.OriginalCost : null;
+        this.DiscountCost = 'DiscountCost' in params ? params.DiscountCost : null;
+        this.TimeUnit = 'TimeUnit' in params ? params.TimeUnit : null;
+        this.TimeSpan = 'TimeSpan' in params ? params.TimeSpan : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 多云盘参数
+ * @class
+ */
+class MultiDiskMC extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 该类型云盘个数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Count = null;
+
+        /**
+         * 磁盘类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Type = null;
+
+        /**
+         * 云盘大小
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Volume = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Count = 'Count' in params ? params.Count : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Volume = 'Volume' in params ? params.Volume : null;
+
+    }
+}
+
+/**
+ * AddUsersForUserManager请求参数结构体
+ * @class
+ */
+class AddUsersForUserManagerRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 用户信息列表
+         * @type {Array.<UserInfoForUserManager> || null}
+         */
+        this.UserManagerUserList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.UserManagerUserList) {
+            this.UserManagerUserList = new Array();
+            for (let z in params.UserManagerUserList) {
+                let obj = new UserInfoForUserManager();
+                obj.deserialize(params.UserManagerUserList[z]);
+                this.UserManagerUserList.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * 用户自建Hive-MetaDB信息
+ * @class
+ */
+class CustomMetaInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 自定义MetaDB的JDBC连接，请以 jdbc:mysql:// 开头
+         * @type {string || null}
+         */
+        this.MetaDataJdbcUrl = null;
+
+        /**
+         * 自定义MetaDB用户名
+         * @type {string || null}
+         */
+        this.MetaDataUser = null;
+
+        /**
+         * 自定义MetaDB密码
+         * @type {string || null}
+         */
+        this.MetaDataPass = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MetaDataJdbcUrl = 'MetaDataJdbcUrl' in params ? params.MetaDataJdbcUrl : null;
+        this.MetaDataUser = 'MetaDataUser' in params ? params.MetaDataUser : null;
+        this.MetaDataPass = 'MetaDataPass' in params ? params.MetaDataPass : null;
+
+    }
+}
+
+/**
+ * InquiryPriceCreateInstance请求参数结构体
+ * @class
+ */
+class InquiryPriceCreateInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 购买实例的时间单位。取值范围：
+<li>s：表示秒。PayMode取值为0时，TimeUnit只能取值为s。</li>
+<li>m：表示月份。PayMode取值为1时，TimeUnit只能取值为m。</li>
+         * @type {string || null}
+         */
+        this.TimeUnit = null;
+
+        /**
+         * 购买实例的时长。结合TimeUnit一起使用。
+<li>TimeUnit为s时，该参数只能填写3600，表示按量计费实例。</li>
+<li>TimeUnit为m时，该参数填写的数字表示包年包月实例的购买时长，如1表示购买一个月</li>
+         * @type {number || null}
+         */
+        this.TimeSpan = null;
+
+        /**
+         * 货币种类。取值范围：
+<li>CNY：表示人民币。</li>
+         * @type {string || null}
+         */
+        this.Currency = null;
+
+        /**
+         * 实例计费模式。取值范围：
+<li>0：表示按量计费。</li>
+<li>1：表示包年包月。</li>
+         * @type {number || null}
+         */
+        this.PayMode = null;
+
+        /**
+         * 是否开启节点高可用。取值范围：
+<li>0：表示不开启节点高可用。</li>
+<li>1：表示开启节点高可用。</li>
+         * @type {number || null}
+         */
+        this.SupportHA = null;
+
+        /**
+         * 部署的组件列表。不同的EMR产品ID（ProductId：具体含义参考入参ProductId字段）需要选择不同的必选组件：
+<li>ProductId为1的时候，必选组件包括：hadoop-2.7.3、knox-1.2.0、zookeeper-3.4.9</li>
+<li>ProductId为2的时候，必选组件包括：hadoop-2.7.3、knox-1.2.0、zookeeper-3.4.9</li>
+<li>ProductId为4的时候，必选组件包括：hadoop-2.8.4、knox-1.2.0、zookeeper-3.4.9</li>
+<li>ProductId为7的时候，必选组件包括：hadoop-3.1.2、knox-1.2.0、zookeeper-3.4.9</li>
+         * @type {Array.<string> || null}
+         */
+        this.Software = null;
+
+        /**
+         * 询价的节点规格。
+         * @type {NewResourceSpec || null}
+         */
+        this.ResourceSpec = null;
+
+        /**
+         * 实例所在的位置。通过该参数可以指定实例所属可用区，所属项目等属性。
+         * @type {Placement || null}
+         */
+        this.Placement = null;
+
+        /**
+         * 私有网络相关信息配置。通过该参数可以指定私有网络的ID，子网ID等信息。
+         * @type {VPCSettings || null}
+         */
+        this.VPCSettings = null;
+
+        /**
+         * hive共享元数据库类型。取值范围：
+<li>EMR_NEW_META：表示集群默认创建</li>
+<li>EMR_EXIT_METE：表示集群使用指定EMR-MetaDB。</li>
+<li>USER_CUSTOM_META：表示集群使用自定义MetaDB。</li>
+         * @type {string || null}
+         */
+        this.MetaType = null;
+
+        /**
+         * EMR-MetaDB实例
+         * @type {string || null}
+         */
+        this.UnifyMetaInstanceId = null;
+
+        /**
+         * 自定义MetaDB信息
+         * @type {CustomMetaInfo || null}
+         */
+        this.MetaDBInfo = null;
+
+        /**
+         * 产品ID，不同产品ID表示不同的EMR产品版本。取值范围：
+<li>1：表示EMR-V1.3.1。</li>
+<li>2：表示EMR-V2.0.1。</li>
+<li>4：表示EMR-V2.1.0。</li>
+<li>7：表示EMR-V3.0.0。</li>
+         * @type {number || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 场景化取值：
+Hadoop-Kudu
+Hadoop-Zookeeper
+Hadoop-Presto
+Hadoop-Hbase
+         * @type {string || null}
+         */
+        this.SceneName = null;
+
+        /**
+         * 共用组件信息
+         * @type {Array.<ExternalService> || null}
+         */
+        this.ExternalService = null;
+
+        /**
+         * 当前默认值为0，跨AZ特性支持后为1
+         * @type {number || null}
+         */
+        this.VersionID = null;
+
+        /**
+         * 可用区的规格信息
+         * @type {Array.<MultiZoneSetting> || null}
+         */
+        this.MultiZoneSettings = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TimeUnit = 'TimeUnit' in params ? params.TimeUnit : null;
+        this.TimeSpan = 'TimeSpan' in params ? params.TimeSpan : null;
+        this.Currency = 'Currency' in params ? params.Currency : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+        this.SupportHA = 'SupportHA' in params ? params.SupportHA : null;
+        this.Software = 'Software' in params ? params.Software : null;
+
+        if (params.ResourceSpec) {
+            let obj = new NewResourceSpec();
+            obj.deserialize(params.ResourceSpec)
+            this.ResourceSpec = obj;
+        }
+
+        if (params.Placement) {
+            let obj = new Placement();
+            obj.deserialize(params.Placement)
+            this.Placement = obj;
+        }
+
+        if (params.VPCSettings) {
+            let obj = new VPCSettings();
+            obj.deserialize(params.VPCSettings)
+            this.VPCSettings = obj;
+        }
+        this.MetaType = 'MetaType' in params ? params.MetaType : null;
+        this.UnifyMetaInstanceId = 'UnifyMetaInstanceId' in params ? params.UnifyMetaInstanceId : null;
+
+        if (params.MetaDBInfo) {
+            let obj = new CustomMetaInfo();
+            obj.deserialize(params.MetaDBInfo)
+            this.MetaDBInfo = obj;
+        }
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.SceneName = 'SceneName' in params ? params.SceneName : null;
+
+        if (params.ExternalService) {
+            this.ExternalService = new Array();
+            for (let z in params.ExternalService) {
+                let obj = new ExternalService();
+                obj.deserialize(params.ExternalService[z]);
+                this.ExternalService.push(obj);
+            }
+        }
+        this.VersionID = 'VersionID' in params ? params.VersionID : null;
+
+        if (params.MultiZoneSettings) {
+            this.MultiZoneSettings = new Array();
+            for (let z in params.MultiZoneSettings) {
+                let obj = new MultiZoneSetting();
+                obj.deserialize(params.MultiZoneSettings[z]);
+                this.MultiZoneSettings.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DescribeClusterNodes返回参数结构体
  * @class
  */
@@ -4096,6 +5617,1029 @@ class DescribeClusterNodesResponse extends  AbstractModel {
         }
         this.TagKeys = 'TagKeys' in params ? params.TagKeys : null;
         this.HardwareResourceTypeList = 'HardwareResourceTypeList' in params ? params.HardwareResourceTypeList : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyResourceScheduleConfig请求参数结构体
+ * @class
+ */
+class ModifyResourceScheduleConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * emr集群的英文id
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 业务标识，fair表示编辑公平的配置项，fairPlan表示编辑执行计划，capacity表示编辑容量的配置项
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * 修改后的模块消息
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
+ * 添加的用户信息列表
+ * @class
+ */
+class UserInfoForUserManager extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 用户名
+         * @type {string || null}
+         */
+        this.UserName = null;
+
+        /**
+         * 用户所属的组
+         * @type {string || null}
+         */
+        this.UserGroup = null;
+
+        /**
+         * 密码
+         * @type {string || null}
+         */
+        this.PassWord = null;
+
+        /**
+         * 备注
+         * @type {string || null}
+         */
+        this.ReMark = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UserName = 'UserName' in params ? params.UserName : null;
+        this.UserGroup = 'UserGroup' in params ? params.UserGroup : null;
+        this.PassWord = 'PassWord' in params ? params.PassWord : null;
+        this.ReMark = 'ReMark' in params ? params.ReMark : null;
+
+    }
+}
+
+/**
+ * POD浮动规格
+ * @class
+ */
+class DynamicPodSpec extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 需求最小cpu核数
+         * @type {number || null}
+         */
+        this.RequestCpu = null;
+
+        /**
+         * 需求最大cpu核数
+         * @type {number || null}
+         */
+        this.LimitCpu = null;
+
+        /**
+         * 需求最小memory，单位MB
+         * @type {number || null}
+         */
+        this.RequestMemory = null;
+
+        /**
+         * 需求最大memory，单位MB
+         * @type {number || null}
+         */
+        this.LimitMemory = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestCpu = 'RequestCpu' in params ? params.RequestCpu : null;
+        this.LimitCpu = 'LimitCpu' in params ? params.LimitCpu : null;
+        this.RequestMemory = 'RequestMemory' in params ? params.RequestMemory : null;
+        this.LimitMemory = 'LimitMemory' in params ? params.LimitMemory : null;
+
+    }
+}
+
+/**
+ * 单个pod状态
+ * @class
+ */
+class PodState extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * pod的名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * pod uuid
+         * @type {string || null}
+         */
+        this.Uuid = null;
+
+        /**
+         * pod的状态
+         * @type {string || null}
+         */
+        this.State = null;
+
+        /**
+         * pod处于该状态原因
+         * @type {string || null}
+         */
+        this.Reason = null;
+
+        /**
+         * pod所属集群
+         * @type {string || null}
+         */
+        this.OwnerCluster = null;
+
+        /**
+         * pod内存大小
+         * @type {number || null}
+         */
+        this.Memory = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
+        this.State = 'State' in params ? params.State : null;
+        this.Reason = 'Reason' in params ? params.Reason : null;
+        this.OwnerCluster = 'OwnerCluster' in params ? params.OwnerCluster : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+
+    }
+}
+
+/**
+ * 共用组件信息
+ * @class
+ */
+class ExternalService extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 共用组件类型，EMR/CUSTOM
+         * @type {string || null}
+         */
+        this.ShareType = null;
+
+        /**
+         * 自定义参数集合
+         * @type {Array.<CustomServiceDefine> || null}
+         */
+        this.CustomServiceDefineList = null;
+
+        /**
+         * 共用组件名
+         * @type {string || null}
+         */
+        this.Service = null;
+
+        /**
+         * 共用组件集群
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ShareType = 'ShareType' in params ? params.ShareType : null;
+
+        if (params.CustomServiceDefineList) {
+            this.CustomServiceDefineList = new Array();
+            for (let z in params.CustomServiceDefineList) {
+                let obj = new CustomServiceDefine();
+                obj.deserialize(params.CustomServiceDefineList[z]);
+                this.CustomServiceDefineList.push(obj);
+            }
+        }
+        this.Service = 'Service' in params ? params.Service : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
+ * 预执行脚本配置
+ * @class
+ */
+class PreExecuteFileSettings extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 脚本在COS上路径，已废弃
+         * @type {string || null}
+         */
+        this.Path = null;
+
+        /**
+         * 执行脚本参数
+         * @type {Array.<string> || null}
+         */
+        this.Args = null;
+
+        /**
+         * COS的Bucket名称，已废弃
+         * @type {string || null}
+         */
+        this.Bucket = null;
+
+        /**
+         * COS的Region名称，已废弃
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * COS的Domain数据，已废弃
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 执行顺序
+         * @type {number || null}
+         */
+        this.RunOrder = null;
+
+        /**
+         * resourceAfter 或 clusterAfter
+         * @type {string || null}
+         */
+        this.WhenRun = null;
+
+        /**
+         * 脚本文件名，已废弃
+         * @type {string || null}
+         */
+        this.CosFileName = null;
+
+        /**
+         * 脚本的cos地址
+         * @type {string || null}
+         */
+        this.CosFileURI = null;
+
+        /**
+         * cos的SecretId
+         * @type {string || null}
+         */
+        this.CosSecretId = null;
+
+        /**
+         * Cos的SecretKey
+         * @type {string || null}
+         */
+        this.CosSecretKey = null;
+
+        /**
+         * cos的appid，已废弃
+         * @type {string || null}
+         */
+        this.AppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Path = 'Path' in params ? params.Path : null;
+        this.Args = 'Args' in params ? params.Args : null;
+        this.Bucket = 'Bucket' in params ? params.Bucket : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.RunOrder = 'RunOrder' in params ? params.RunOrder : null;
+        this.WhenRun = 'WhenRun' in params ? params.WhenRun : null;
+        this.CosFileName = 'CosFileName' in params ? params.CosFileName : null;
+        this.CosFileURI = 'CosFileURI' in params ? params.CosFileURI : null;
+        this.CosSecretId = 'CosSecretId' in params ? params.CosSecretId : null;
+        this.CosSecretKey = 'CosSecretKey' in params ? params.CosSecretKey : null;
+        this.AppId = 'AppId' in params ? params.AppId : null;
+
+    }
+}
+
+/**
+ * 当前集群共用组件与集群对应关系
+ * @class
+ */
+class ClusterExternalServiceInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 依赖关系，0:被其他集群依赖，1:依赖其他集群
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.DependType = null;
+
+        /**
+         * 共用组件
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Service = null;
+
+        /**
+         * 共用集群
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 共用集群状态
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ClusterStatus = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DependType = 'DependType' in params ? params.DependType : null;
+        this.Service = 'Service' in params ? params.Service : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.ClusterStatus = 'ClusterStatus' in params ? params.ClusterStatus : null;
+
+    }
+}
+
+/**
+ * InquiryPriceScaleOutInstance请求参数结构体
+ * @class
+ */
+class InquiryPriceScaleOutInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 扩容的时间单位。取值范围：
+<li>s：表示秒。PayMode取值为0时，TimeUnit只能取值为s。</li>
+<li>m：表示月份。PayMode取值为1时，TimeUnit只能取值为m。</li>
+         * @type {string || null}
+         */
+        this.TimeUnit = null;
+
+        /**
+         * 扩容的时长。结合TimeUnit一起使用。
+<li>TimeUnit为s时，该参数只能填写3600，表示按量计费实例。</li>
+<li>TimeUnit为m时，该参数填写的数字表示包年包月实例的购买时长，如1表示购买一个月</li>
+         * @type {number || null}
+         */
+        this.TimeSpan = null;
+
+        /**
+         * 实例所属的可用区ID，例如100003。该参数可以通过调用 [DescribeZones](https://cloud.tencent.com/document/api/213/15707) 的返回值中的ZoneId字段来获取。
+         * @type {number || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * 实例计费模式。取值范围：
+<li>0：表示按量计费。</li>
+<li>1：表示包年包月。</li>
+         * @type {number || null}
+         */
+        this.PayMode = null;
+
+        /**
+         * 实例ID。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 扩容的Core节点数量。
+         * @type {number || null}
+         */
+        this.CoreCount = null;
+
+        /**
+         * 扩容的Task节点数量。
+         * @type {number || null}
+         */
+        this.TaskCount = null;
+
+        /**
+         * 货币种类。取值范围：
+<li>CNY：表示人民币。</li>
+         * @type {string || null}
+         */
+        this.Currency = null;
+
+        /**
+         * 扩容的Router节点数量。
+         * @type {number || null}
+         */
+        this.RouterCount = null;
+
+        /**
+         * 扩容的Master节点数量。
+         * @type {number || null}
+         */
+        this.MasterCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TimeUnit = 'TimeUnit' in params ? params.TimeUnit : null;
+        this.TimeSpan = 'TimeSpan' in params ? params.TimeSpan : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.CoreCount = 'CoreCount' in params ? params.CoreCount : null;
+        this.TaskCount = 'TaskCount' in params ? params.TaskCount : null;
+        this.Currency = 'Currency' in params ? params.Currency : null;
+        this.RouterCount = 'RouterCount' in params ? params.RouterCount : null;
+        this.MasterCount = 'MasterCount' in params ? params.MasterCount : null;
+
+    }
+}
+
+/**
+ * 资源详情
+ * @class
+ */
+class Resource extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 节点规格描述，如CVM.SA2。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Spec = null;
+
+        /**
+         * 存储类型
+取值范围：
+<li>4：表示云SSD。</li>
+<li>5：表示高效云盘。</li>
+<li>6：表示增强型SSD云硬盘。</li>
+<li>11：表示吞吐型云硬盘。</li>
+<li>12：表示极速型SSD云硬盘。</li>
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.StorageType = null;
+
+        /**
+         * 磁盘类型
+取值范围：
+<li>CLOUD_SSD：表示云SSD。</li>
+<li>CLOUD_PREMIUM：表示高效云盘。</li>
+<li>CLOUD_BASIC：表示云硬盘。</li>
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DiskType = null;
+
+        /**
+         * 内存容量,单位为M
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.MemSize = null;
+
+        /**
+         * CPU核数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
+        /**
+         * 数据盘容量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.DiskSize = null;
+
+        /**
+         * 系统盘容量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.RootSize = null;
+
+        /**
+         * 云盘列表，当数据盘为一块云盘时，直接使用DiskType和DiskSize参数，超出部分使用MultiDisks
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<MultiDisk> || null}
+         */
+        this.MultiDisks = null;
+
+        /**
+         * 需要绑定的标签列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * 规格类型，如S2.MEDIUM8
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.InstanceType = null;
+
+        /**
+         * 本地盘数量，该字段已废弃
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.LocalDiskNum = null;
+
+        /**
+         * 本地盘数量，如2
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.DiskNum = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Spec = 'Spec' in params ? params.Spec : null;
+        this.StorageType = 'StorageType' in params ? params.StorageType : null;
+        this.DiskType = 'DiskType' in params ? params.DiskType : null;
+        this.MemSize = 'MemSize' in params ? params.MemSize : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
+        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
+        this.RootSize = 'RootSize' in params ? params.RootSize : null;
+
+        if (params.MultiDisks) {
+            this.MultiDisks = new Array();
+            for (let z in params.MultiDisks) {
+                let obj = new MultiDisk();
+                obj.deserialize(params.MultiDisks[z]);
+                this.MultiDisks.push(obj);
+            }
+        }
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.LocalDiskNum = 'LocalDiskNum' in params ? params.LocalDiskNum : null;
+        this.DiskNum = 'DiskNum' in params ? params.DiskNum : null;
+
+    }
+}
+
+/**
+ * Emr集群列表实例自定义查询过滤
+ * @class
+ */
+class Filters extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 字段名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 过滤字段值
+         * @type {Array.<string> || null}
+         */
+        this.Values = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Values = 'Values' in params ? params.Values : null;
+
+    }
+}
+
+/**
+ * InquirePriceRenewEmr请求参数结构体
+ * @class
+ */
+class InquirePriceRenewEmrRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例续费的时长。需要结合TimeUnit一起使用。1表示续费1一个月
+         * @type {number || null}
+         */
+        this.TimeSpan = null;
+
+        /**
+         * 待续费集群ID列表。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 实例所在的位置。通过该参数可以指定实例所属可用区，所属项目等属性。
+         * @type {Placement || null}
+         */
+        this.Placement = null;
+
+        /**
+         * 实例计费模式。此处只支持取值为1，表示包年包月。
+         * @type {number || null}
+         */
+        this.PayMode = null;
+
+        /**
+         * 实例续费的时间单位。取值范围：
+<li>m：表示月份。</li>
+         * @type {string || null}
+         */
+        this.TimeUnit = null;
+
+        /**
+         * 货币种类。取值范围：
+<li>CNY：表示人民币。</li>
+         * @type {string || null}
+         */
+        this.Currency = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TimeSpan = 'TimeSpan' in params ? params.TimeSpan : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+        if (params.Placement) {
+            let obj = new Placement();
+            obj.deserialize(params.Placement)
+            this.Placement = obj;
+        }
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+        this.TimeUnit = 'TimeUnit' in params ? params.TimeUnit : null;
+        this.Currency = 'Currency' in params ? params.Currency : null;
+
+    }
+}
+
+/**
+ * DescribeInstanceRenewNodes返回参数结构体
+ * @class
+ */
+class DescribeInstanceRenewNodesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 查询到的节点总数
+         * @type {number || null}
+         */
+        this.TotalCnt = null;
+
+        /**
+         * 节点详细信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<RenewInstancesInfo> || null}
+         */
+        this.NodeList = null;
+
+        /**
+         * 用户所有的标签键列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.MetaInfo = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCnt = 'TotalCnt' in params ? params.TotalCnt : null;
+
+        if (params.NodeList) {
+            this.NodeList = new Array();
+            for (let z in params.NodeList) {
+                let obj = new RenewInstancesInfo();
+                obj.deserialize(params.NodeList[z]);
+                this.NodeList.push(obj);
+            }
+        }
+        this.MetaInfo = 'MetaInfo' in params ? params.MetaInfo : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 磁盘组。
+ * @class
+ */
+class DiskGroup extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 磁盘规格。
+         * @type {DiskSpec || null}
+         */
+        this.Spec = null;
+
+        /**
+         * 同类型磁盘数量。
+         * @type {number || null}
+         */
+        this.Count = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Spec) {
+            let obj = new DiskSpec();
+            obj.deserialize(params.Spec)
+            this.Spec = obj;
+        }
+        this.Count = 'Count' in params ? params.Count : null;
+
+    }
+}
+
+/**
+ * InquiryPriceScaleOutInstance返回参数结构体
+ * @class
+ */
+class InquiryPriceScaleOutInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 原价，单位为元。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.OriginalCost = null;
+
+        /**
+         * 折扣价，单位为元。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DiscountCost = null;
+
+        /**
+         * 扩容的时间单位。取值范围：
+<li>s：表示秒。</li>
+<li>m：表示月份。</li>
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Unit = null;
+
+        /**
+         * 询价的节点规格。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {PriceResource || null}
+         */
+        this.PriceSpec = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.OriginalCost = 'OriginalCost' in params ? params.OriginalCost : null;
+        this.DiscountCost = 'DiscountCost' in params ? params.DiscountCost : null;
+        this.Unit = 'Unit' in params ? params.Unit : null;
+
+        if (params.PriceSpec) {
+            let obj = new PriceResource();
+            obj.deserialize(params.PriceSpec)
+            this.PriceSpec = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyResourceScheduler返回参数结构体
+ * @class
+ */
+class ModifyResourceSchedulerResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 节点信息
+ * @class
+ */
+class ShortNodeInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 节点类型，Master/Core/Task/Router/Common
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.NodeType = null;
+
+        /**
+         * 节点数量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.NodeSize = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NodeType = 'NodeType' in params ? params.NodeType : null;
+        this.NodeSize = 'NodeSize' in params ? params.NodeSize : null;
+
+    }
+}
+
+/**
+ * AddUsersForUserManager返回参数结构体
+ * @class
+ */
+class AddUsersForUserManagerResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -4383,6 +6927,41 @@ class NodeHardwareInfo extends  AbstractModel {
          */
         this.DynamicPodSpec = null;
 
+        /**
+         * 是否支持变更计费类型 1是，0否
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.SupportModifyPayMode = null;
+
+        /**
+         * 系统盘类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.RootStorageType = null;
+
+        /**
+         * 可用区信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * 子网
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {SubnetInfo || null}
+         */
+        this.SubnetInfo = null;
+
+        /**
+         * 客户端
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Clients = null;
+
     }
 
     /**
@@ -4452,205 +7031,16 @@ class NodeHardwareInfo extends  AbstractModel {
         this.HardwareResourceType = 'HardwareResourceType' in params ? params.HardwareResourceType : null;
         this.IsDynamicSpec = 'IsDynamicSpec' in params ? params.IsDynamicSpec : null;
         this.DynamicPodSpec = 'DynamicPodSpec' in params ? params.DynamicPodSpec : null;
+        this.SupportModifyPayMode = 'SupportModifyPayMode' in params ? params.SupportModifyPayMode : null;
+        this.RootStorageType = 'RootStorageType' in params ? params.RootStorageType : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
 
-    }
-}
-
-/**
- * InquiryPriceUpdateInstance返回参数结构体
- * @class
- */
-class InquiryPriceUpdateInstanceResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 原价，单位为元。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.OriginalCost = null;
-
-        /**
-         * 折扣价，单位为元。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.DiscountCost = null;
-
-        /**
-         * 变配的时间单位。取值范围：
-<li>s：表示秒。</li>
-<li>m：表示月份。</li>
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.TimeUnit = null;
-
-        /**
-         * 变配的时长。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.TimeSpan = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
+        if (params.SubnetInfo) {
+            let obj = new SubnetInfo();
+            obj.deserialize(params.SubnetInfo)
+            this.SubnetInfo = obj;
         }
-        this.OriginalCost = 'OriginalCost' in params ? params.OriginalCost : null;
-        this.DiscountCost = 'DiscountCost' in params ? params.DiscountCost : null;
-        this.TimeUnit = 'TimeUnit' in params ? params.TimeUnit : null;
-        this.TimeSpan = 'TimeSpan' in params ? params.TimeSpan : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * 资源描述
- * @class
- */
-class NewResourceSpec extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 描述Master节点资源
-         * @type {Resource || null}
-         */
-        this.MasterResourceSpec = null;
-
-        /**
-         * 描述Core节点资源
-         * @type {Resource || null}
-         */
-        this.CoreResourceSpec = null;
-
-        /**
-         * 描述Task节点资源
-         * @type {Resource || null}
-         */
-        this.TaskResourceSpec = null;
-
-        /**
-         * Master节点数量
-         * @type {number || null}
-         */
-        this.MasterCount = null;
-
-        /**
-         * Core节点数量
-         * @type {number || null}
-         */
-        this.CoreCount = null;
-
-        /**
-         * Task节点数量
-         * @type {number || null}
-         */
-        this.TaskCount = null;
-
-        /**
-         * 描述Common节点资源
-         * @type {Resource || null}
-         */
-        this.CommonResourceSpec = null;
-
-        /**
-         * Common节点数量
-         * @type {number || null}
-         */
-        this.CommonCount = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.MasterResourceSpec) {
-            let obj = new Resource();
-            obj.deserialize(params.MasterResourceSpec)
-            this.MasterResourceSpec = obj;
-        }
-
-        if (params.CoreResourceSpec) {
-            let obj = new Resource();
-            obj.deserialize(params.CoreResourceSpec)
-            this.CoreResourceSpec = obj;
-        }
-
-        if (params.TaskResourceSpec) {
-            let obj = new Resource();
-            obj.deserialize(params.TaskResourceSpec)
-            this.TaskResourceSpec = obj;
-        }
-        this.MasterCount = 'MasterCount' in params ? params.MasterCount : null;
-        this.CoreCount = 'CoreCount' in params ? params.CoreCount : null;
-        this.TaskCount = 'TaskCount' in params ? params.TaskCount : null;
-
-        if (params.CommonResourceSpec) {
-            let obj = new Resource();
-            obj.deserialize(params.CommonResourceSpec)
-            this.CommonResourceSpec = obj;
-        }
-        this.CommonCount = 'CommonCount' in params ? params.CommonCount : null;
-
-    }
-}
-
-/**
- * 磁盘组。
- * @class
- */
-class DiskGroup extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 磁盘规格。
-         * @type {DiskSpec || null}
-         */
-        this.Spec = null;
-
-        /**
-         * 同类型磁盘数量。
-         * @type {number || null}
-         */
-        this.Count = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Spec) {
-            let obj = new DiskSpec();
-            obj.deserialize(params.Spec)
-            this.Spec = obj;
-        }
-        this.Count = 'Count' in params ? params.Count : null;
+        this.Clients = 'Clients' in params ? params.Clients : null;
 
     }
 }
@@ -4721,6 +7111,41 @@ class JobFlowResource extends  AbstractModel {
 }
 
 /**
+ * ModifyResourcePools请求参数结构体
+ * @class
+ */
+class ModifyResourcePoolsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * emr集群id
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 标识是fair还是capacity
+         * @type {string || null}
+         */
+        this.Key = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Key = 'Key' in params ? params.Key : null;
+
+    }
+}
+
+/**
  * DescribeJobFlow返回参数结构体
  * @class
  */
@@ -4778,187 +7203,26 @@ JobFlowFinish，流程任务已完成。
 }
 
 /**
- * InquiryPriceRenewInstance请求参数结构体
+ * 实例预付费参数，只有在付费类型为PREPAID时生效。
+
  * @class
  */
-class InquiryPriceRenewInstanceRequest extends  AbstractModel {
+class InstanceChargePrepaid extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 实例续费的时长。需要结合TimeUnit一起使用。1表示续费1一个月
+         * 包年包月时间，默认为1，单位：月。
+取值范围：1, 2, 3, 4, 5, 6, 7, 8, 9, 10,11, 12, 24, 36, 48, 60。
          * @type {number || null}
          */
-        this.TimeSpan = null;
+        this.Period = null;
 
         /**
-         * 待续费节点的资源ID列表。资源ID形如：emr-vm-xxxxxxxx。有效的资源ID可通过登录[控制台](https://console.cloud.tencent.com/emr/static/hardware)查询。
-         * @type {Array.<string> || null}
-         */
-        this.ResourceIds = null;
-
-        /**
-         * 实例所在的位置。通过该参数可以指定实例所属可用区，所属项目等属性。
-         * @type {Placement || null}
-         */
-        this.Placement = null;
-
-        /**
-         * 实例计费模式。此处只支持取值为1，表示包年包月。
-         * @type {number || null}
-         */
-        this.PayMode = null;
-
-        /**
-         * 实例续费的时间单位。取值范围：
-<li>m：表示月份。</li>
-         * @type {string || null}
-         */
-        this.TimeUnit = null;
-
-        /**
-         * 货币种类。取值范围：
-<li>CNY：表示人民币。</li>
-         * @type {string || null}
-         */
-        this.Currency = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TimeSpan = 'TimeSpan' in params ? params.TimeSpan : null;
-        this.ResourceIds = 'ResourceIds' in params ? params.ResourceIds : null;
-
-        if (params.Placement) {
-            let obj = new Placement();
-            obj.deserialize(params.Placement)
-            this.Placement = obj;
-        }
-        this.PayMode = 'PayMode' in params ? params.PayMode : null;
-        this.TimeUnit = 'TimeUnit' in params ? params.TimeUnit : null;
-        this.Currency = 'Currency' in params ? params.Currency : null;
-
-    }
-}
-
-/**
- * 出参
- * @class
- */
-class CdbInfo extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 数据库实例
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.InstanceName = null;
-
-        /**
-         * 数据库IP
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.Ip = null;
-
-        /**
-         * 数据库端口
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.Port = null;
-
-        /**
-         * 数据库内存规格
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.MemSize = null;
-
-        /**
-         * 数据库磁盘规格
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.Volume = null;
-
-        /**
-         * 服务标识
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.Service = null;
-
-        /**
-         * 过期时间
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ExpireTime = null;
-
-        /**
-         * 申请时间
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ApplyTime = null;
-
-        /**
-         * 付费类型
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.PayType = null;
-
-        /**
-         * 过期标识
-注意：此字段可能返回 null，表示取不到有效值。
+         * 是否自动续费，默认为否。
          * @type {boolean || null}
          */
-        this.ExpireFlag = null;
-
-        /**
-         * 数据库状态
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.Status = null;
-
-        /**
-         * 续费标识
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.IsAutoRenew = null;
-
-        /**
-         * 数据库字符串
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.SerialNo = null;
-
-        /**
-         * ZoneId
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.ZoneId = null;
-
-        /**
-         * RegionId
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.RegionId = null;
+        this.RenewFlag = null;
 
     }
 
@@ -4969,293 +7233,109 @@ class CdbInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
-        this.Ip = 'Ip' in params ? params.Ip : null;
-        this.Port = 'Port' in params ? params.Port : null;
-        this.MemSize = 'MemSize' in params ? params.MemSize : null;
-        this.Volume = 'Volume' in params ? params.Volume : null;
-        this.Service = 'Service' in params ? params.Service : null;
-        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
-        this.ApplyTime = 'ApplyTime' in params ? params.ApplyTime : null;
-        this.PayType = 'PayType' in params ? params.PayType : null;
-        this.ExpireFlag = 'ExpireFlag' in params ? params.ExpireFlag : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.IsAutoRenew = 'IsAutoRenew' in params ? params.IsAutoRenew : null;
-        this.SerialNo = 'SerialNo' in params ? params.SerialNo : null;
-        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
-        this.RegionId = 'RegionId' in params ? params.RegionId : null;
-
-    }
-}
-
-/**
- * ScaleOutInstance请求参数结构体
- * @class
- */
-class ScaleOutInstanceRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 扩容的时间单位。取值范围：
-<li>s：表示秒。PayMode取值为0时，TimeUnit只能取值为s。</li>
-<li>m：表示月份。PayMode取值为1时，TimeUnit只能取值为m。</li>
-         * @type {string || null}
-         */
-        this.TimeUnit = null;
-
-        /**
-         * 扩容的时长。结合TimeUnit一起使用。
-<li>TimeUnit为s时，该参数只能填写3600，表示按量计费实例。</li>
-<li>TimeUnit为m时，该参数填写的数字表示包年包月实例的购买时长，如1表示购买一个月</li>
-         * @type {number || null}
-         */
-        this.TimeSpan = null;
-
-        /**
-         * 实例ID。
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * 实例计费模式。取值范围：
-<li>0：表示按量计费。</li>
-<li>1：表示包年包月。</li>
-         * @type {number || null}
-         */
-        this.PayMode = null;
-
-        /**
-         * 客户端Token。
-         * @type {string || null}
-         */
-        this.ClientToken = null;
-
-        /**
-         * 引导操作脚本设置。
-         * @type {Array.<PreExecuteFileSettings> || null}
-         */
-        this.PreExecutedFileSettings = null;
-
-        /**
-         * 扩容的Task节点数量。
-         * @type {number || null}
-         */
-        this.TaskCount = null;
-
-        /**
-         * 扩容的Core节点数量。
-         * @type {number || null}
-         */
-        this.CoreCount = null;
-
-        /**
-         * 扩容时不需要安装的进程。
-         * @type {Array.<number> || null}
-         */
-        this.UnNecessaryNodeList = null;
-
-        /**
-         * 扩容的Router节点数量。
-         * @type {number || null}
-         */
-        this.RouterCount = null;
-
-        /**
-         * 部署的服务。
-<li>SoftDeployInfo和ServiceNodeInfo是同组参数，和UnNecessaryNodeList参数互斥。</li>
-<li>建议使用SoftDeployInfo和ServiceNodeInfo组合。</li>
-         * @type {Array.<number> || null}
-         */
-        this.SoftDeployInfo = null;
-
-        /**
-         * 启动的进程。
-         * @type {Array.<number> || null}
-         */
-        this.ServiceNodeInfo = null;
-
-        /**
-         * 分散置放群组ID列表，当前仅支持指定一个。
-         * @type {Array.<string> || null}
-         */
-        this.DisasterRecoverGroupIds = null;
-
-        /**
-         * 扩容节点绑定标签列表。
-         * @type {Array.<Tag> || null}
-         */
-        this.Tags = null;
-
-        /**
-         * 扩容所选资源类型，可选范围为"host","pod"，host为普通的CVM资源，Pod为TKE集群提供的资源
-         * @type {string || null}
-         */
-        this.HardwareResourceType = null;
-
-        /**
-         * 使用Pod资源扩容时，指定的Pod规格以及来源等信息
-         * @type {PodSpec || null}
-         */
-        this.PodSpec = null;
-
-        /**
-         * 使用clickhouse集群扩容时，选择的机器分组名称
-         * @type {string || null}
-         */
-        this.ClickHouseClusterName = null;
-
-        /**
-         * 使用clickhouse集群扩容时，选择的机器分组类型。new为新增，old为选择旧分组
-         * @type {string || null}
-         */
-        this.ClickHouseClusterType = null;
-
-        /**
-         * 规则扩容指定 yarn node label
-         * @type {string || null}
-         */
-        this.YarnNodeLabel = null;
-
-        /**
-         * POD自定义权限和自定义参数
-         * @type {PodParameter || null}
-         */
-        this.PodParameter = null;
-
-        /**
-         * 扩容的Master节点的数量。
-         * @type {number || null}
-         */
-        this.MasterCount = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TimeUnit = 'TimeUnit' in params ? params.TimeUnit : null;
-        this.TimeSpan = 'TimeSpan' in params ? params.TimeSpan : null;
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.PayMode = 'PayMode' in params ? params.PayMode : null;
-        this.ClientToken = 'ClientToken' in params ? params.ClientToken : null;
-
-        if (params.PreExecutedFileSettings) {
-            this.PreExecutedFileSettings = new Array();
-            for (let z in params.PreExecutedFileSettings) {
-                let obj = new PreExecuteFileSettings();
-                obj.deserialize(params.PreExecutedFileSettings[z]);
-                this.PreExecutedFileSettings.push(obj);
-            }
-        }
-        this.TaskCount = 'TaskCount' in params ? params.TaskCount : null;
-        this.CoreCount = 'CoreCount' in params ? params.CoreCount : null;
-        this.UnNecessaryNodeList = 'UnNecessaryNodeList' in params ? params.UnNecessaryNodeList : null;
-        this.RouterCount = 'RouterCount' in params ? params.RouterCount : null;
-        this.SoftDeployInfo = 'SoftDeployInfo' in params ? params.SoftDeployInfo : null;
-        this.ServiceNodeInfo = 'ServiceNodeInfo' in params ? params.ServiceNodeInfo : null;
-        this.DisasterRecoverGroupIds = 'DisasterRecoverGroupIds' in params ? params.DisasterRecoverGroupIds : null;
-
-        if (params.Tags) {
-            this.Tags = new Array();
-            for (let z in params.Tags) {
-                let obj = new Tag();
-                obj.deserialize(params.Tags[z]);
-                this.Tags.push(obj);
-            }
-        }
-        this.HardwareResourceType = 'HardwareResourceType' in params ? params.HardwareResourceType : null;
-
-        if (params.PodSpec) {
-            let obj = new PodSpec();
-            obj.deserialize(params.PodSpec)
-            this.PodSpec = obj;
-        }
-        this.ClickHouseClusterName = 'ClickHouseClusterName' in params ? params.ClickHouseClusterName : null;
-        this.ClickHouseClusterType = 'ClickHouseClusterType' in params ? params.ClickHouseClusterType : null;
-        this.YarnNodeLabel = 'YarnNodeLabel' in params ? params.YarnNodeLabel : null;
-
-        if (params.PodParameter) {
-            let obj = new PodParameter();
-            obj.deserialize(params.PodParameter)
-            this.PodParameter = obj;
-        }
-        this.MasterCount = 'MasterCount' in params ? params.MasterCount : null;
+        this.Period = 'Period' in params ? params.Period : null;
+        this.RenewFlag = 'RenewFlag' in params ? params.RenewFlag : null;
 
     }
 }
 
 module.exports = {
-    InquirePriceRenewEmrResponse: InquirePriceRenewEmrResponse,
-    MultiDiskMC: MultiDiskMC,
     ClusterSetting: ClusterSetting,
-    JobResult: JobResult,
-    EmrProductConfigOutter: EmrProductConfigOutter,
-    LoginSettings: LoginSettings,
-    RunJobFlowRequest: RunJobFlowRequest,
-    VPCSettings: VPCSettings,
-    DescribeInstanceRenewNodesRequest: DescribeInstanceRenewNodesRequest,
+    PodSaleSpec: PodSaleSpec,
     ScaleOutInstanceResponse: ScaleOutInstanceResponse,
-    InquiryPriceCreateInstanceRequest: InquiryPriceCreateInstanceRequest,
-    Resource: Resource,
-    TerminateInstanceRequest: TerminateInstanceRequest,
-    TerminateTasksRequest: TerminateTasksRequest,
     PodVolume: PodVolume,
-    TerminateInstanceResponse: TerminateInstanceResponse,
+    SyncPodStateResponse: SyncPodStateResponse,
     CreateInstanceResponse: CreateInstanceResponse,
-    PersistentVolumeContext: PersistentVolumeContext,
+    TerminateTasksRequest: TerminateTasksRequest,
+    HostVolumeContext: HostVolumeContext,
+    Step: Step,
+    SubnetInfo: SubnetInfo,
+    MetaDbInfo: MetaDbInfo,
+    DiskSpec: DiskSpec,
+    COSSettings: COSSettings,
+    ClusterInstancesInfo: ClusterInstancesInfo,
+    ScaleOutInstanceRequest: ScaleOutInstanceRequest,
+    QuotaEntity: QuotaEntity,
+    TopologyInfo: TopologyInfo,
+    Tag: Tag,
+    EmrListInstance: EmrListInstance,
+    ModifyResourceScheduleConfigResponse: ModifyResourceScheduleConfigResponse,
+    EmrProductConfigOutter: EmrProductConfigOutter,
+    VPCSettings: VPCSettings,
+    DescribeInstancesListResponse: DescribeInstancesListResponse,
+    DescribeInstanceRenewNodesRequest: DescribeInstanceRenewNodesRequest,
+    JobResult: JobResult,
+    PodSpec: PodSpec,
     InquiryPriceRenewInstanceResponse: InquiryPriceRenewInstanceResponse,
     DescribeJobFlowRequest: DescribeJobFlowRequest,
     InquiryPriceCreateInstanceResponse: InquiryPriceCreateInstanceResponse,
-    BootstrapAction: BootstrapAction,
-    HostVolumeContext: HostVolumeContext,
-    Step: Step,
-    InstanceChargePrepaid: InstanceChargePrepaid,
-    DescribeClusterNodesRequest: DescribeClusterNodesRequest,
-    PreExecuteFileSettings: PreExecuteFileSettings,
-    CreateInstanceRequest: CreateInstanceRequest,
-    InquirePriceRenewEmrRequest: InquirePriceRenewEmrRequest,
-    PodParameter: PodParameter,
-    MetaDbInfo: MetaDbInfo,
-    Execution: Execution,
-    DescribeInstancesResponse: DescribeInstancesResponse,
-    InquiryPriceScaleOutInstanceRequest: InquiryPriceScaleOutInstanceRequest,
-    Tag: Tag,
-    Placement: Placement,
-    SearchItem: SearchItem,
-    DynamicPodSpec: DynamicPodSpec,
-    DescribeInstancesRequest: DescribeInstancesRequest,
-    CustomMetaInfo: CustomMetaInfo,
-    DiskSpec: DiskSpec,
+    TerminateInstanceRequest: TerminateInstanceRequest,
     JobFlowResourceSpec: JobFlowResourceSpec,
-    InquiryPriceUpdateInstanceRequest: InquiryPriceUpdateInstanceRequest,
-    DescribeInstanceRenewNodesResponse: DescribeInstanceRenewNodesResponse,
-    COSSettings: COSSettings,
-    ClusterInstancesInfo: ClusterInstancesInfo,
-    PodSpec: PodSpec,
-    MultiDisk: MultiDisk,
-    RunJobFlowResponse: RunJobFlowResponse,
-    RenewInstancesInfo: RenewInstancesInfo,
-    InquiryPriceScaleOutInstanceResponse: InquiryPriceScaleOutInstanceResponse,
-    OutterResource: OutterResource,
-    UpdateInstanceSettings: UpdateInstanceSettings,
     Configuration: Configuration,
-    TerminateTasksResponse: TerminateTasksResponse,
-    PriceResource: PriceResource,
-    DescribeClusterNodesResponse: DescribeClusterNodesResponse,
-    NodeHardwareInfo: NodeHardwareInfo,
+    DescribeResourceScheduleRequest: DescribeResourceScheduleRequest,
+    Placement: Placement,
+    PodParameter: PodParameter,
+    DescribeUsersForUserManagerRequest: DescribeUsersForUserManagerRequest,
+    RenewInstancesInfo: RenewInstancesInfo,
+    RunJobFlowResponse: RunJobFlowResponse,
+    MultiDisk: MultiDisk,
+    SearchItem: SearchItem,
+    MultiZoneSetting: MultiZoneSetting,
+    TerminateInstanceResponse: TerminateInstanceResponse,
     InquiryPriceUpdateInstanceResponse: InquiryPriceUpdateInstanceResponse,
     NewResourceSpec: NewResourceSpec,
-    DiskGroup: DiskGroup,
-    JobFlowResource: JobFlowResource,
-    DescribeJobFlowResponse: DescribeJobFlowResponse,
+    PersistentVolumeContext: PersistentVolumeContext,
+    DescribeResourceScheduleResponse: DescribeResourceScheduleResponse,
+    ModifyResourceSchedulerRequest: ModifyResourceSchedulerRequest,
+    LoginSettings: LoginSettings,
+    RunJobFlowRequest: RunJobFlowRequest,
+    PriceResource: PriceResource,
+    CustomServiceDefine: CustomServiceDefine,
+    DescribeCvmQuotaResponse: DescribeCvmQuotaResponse,
+    BootstrapAction: BootstrapAction,
+    DescribeCvmQuotaRequest: DescribeCvmQuotaRequest,
+    DescribeClusterNodesRequest: DescribeClusterNodesRequest,
+    SyncPodStateRequest: SyncPodStateRequest,
+    CreateInstanceRequest: CreateInstanceRequest,
+    Execution: Execution,
+    UpdateInstanceSettings: UpdateInstanceSettings,
+    DescribeInstancesRequest: DescribeInstancesRequest,
+    InquiryPriceUpdateInstanceRequest: InquiryPriceUpdateInstanceRequest,
+    DescribeInstancesListRequest: DescribeInstancesListRequest,
+    OutterResource: OutterResource,
+    ModifyResourcePoolsResponse: ModifyResourcePoolsResponse,
+    TerminateTasksResponse: TerminateTasksResponse,
+    DescribeInstancesResponse: DescribeInstancesResponse,
+    DescribeUsersForUserManagerResponse: DescribeUsersForUserManagerResponse,
     InquiryPriceRenewInstanceRequest: InquiryPriceRenewInstanceRequest,
     CdbInfo: CdbInfo,
-    ScaleOutInstanceRequest: ScaleOutInstanceRequest,
+    InquirePriceRenewEmrResponse: InquirePriceRenewEmrResponse,
+    MultiDiskMC: MultiDiskMC,
+    AddUsersForUserManagerRequest: AddUsersForUserManagerRequest,
+    CustomMetaInfo: CustomMetaInfo,
+    InquiryPriceCreateInstanceRequest: InquiryPriceCreateInstanceRequest,
+    DescribeClusterNodesResponse: DescribeClusterNodesResponse,
+    ModifyResourceScheduleConfigRequest: ModifyResourceScheduleConfigRequest,
+    UserInfoForUserManager: UserInfoForUserManager,
+    DynamicPodSpec: DynamicPodSpec,
+    PodState: PodState,
+    ExternalService: ExternalService,
+    PreExecuteFileSettings: PreExecuteFileSettings,
+    ClusterExternalServiceInfo: ClusterExternalServiceInfo,
+    InquiryPriceScaleOutInstanceRequest: InquiryPriceScaleOutInstanceRequest,
+    Resource: Resource,
+    Filters: Filters,
+    InquirePriceRenewEmrRequest: InquirePriceRenewEmrRequest,
+    DescribeInstanceRenewNodesResponse: DescribeInstanceRenewNodesResponse,
+    DiskGroup: DiskGroup,
+    InquiryPriceScaleOutInstanceResponse: InquiryPriceScaleOutInstanceResponse,
+    ModifyResourceSchedulerResponse: ModifyResourceSchedulerResponse,
+    ShortNodeInfo: ShortNodeInfo,
+    AddUsersForUserManagerResponse: AddUsersForUserManagerResponse,
+    NodeHardwareInfo: NodeHardwareInfo,
+    JobFlowResource: JobFlowResource,
+    ModifyResourcePoolsRequest: ModifyResourcePoolsRequest,
+    DescribeJobFlowResponse: DescribeJobFlowResponse,
+    InstanceChargePrepaid: InstanceChargePrepaid,
 
 }

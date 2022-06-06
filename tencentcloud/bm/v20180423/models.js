@@ -6470,7 +6470,7 @@ class DescribeDevicesRequest extends  AbstractModel {
         this.Offset = null;
 
         /**
-         * 返回数量
+         * 返回数量，默认为20，最大值为100。
          * @type {number || null}
          */
         this.Limit = null;
@@ -6571,6 +6571,12 @@ class DescribeDevicesRequest extends  AbstractModel {
          */
         this.Order = null;
 
+        /**
+         * 按照维保方式过滤。可取值为 Maintain: 在保;  WillExpire: 即将过保; Expire: 已过保
+         * @type {string || null}
+         */
+        this.MaintainStatus = null;
+
     }
 
     /**
@@ -6606,6 +6612,7 @@ class DescribeDevicesRequest extends  AbstractModel {
         this.IsLuckyDevice = 'IsLuckyDevice' in params ? params.IsLuckyDevice : null;
         this.OrderField = 'OrderField' in params ? params.OrderField : null;
         this.Order = 'Order' in params ? params.Order : null;
+        this.MaintainStatus = 'MaintainStatus' in params ? params.MaintainStatus : null;
 
     }
 }
@@ -6851,6 +6858,12 @@ class RepairTaskControlRequest extends  AbstractModel {
          */
         this.Operate = null;
 
+        /**
+         * 需要重新维修操作的备注信息，可提供返场维修原因，以便驻场快速针对问题定位解决。
+         * @type {string || null}
+         */
+        this.OperateRemark = null;
+
     }
 
     /**
@@ -6862,6 +6875,7 @@ class RepairTaskControlRequest extends  AbstractModel {
         }
         this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.Operate = 'Operate' in params ? params.Operate : null;
+        this.OperateRemark = 'OperateRemark' in params ? params.OperateRemark : null;
 
     }
 }
@@ -6998,7 +7012,7 @@ class DeviceInfo extends  AbstractModel {
 
         /**
          * 设备操作状态ID，取值：
-<li>1：运行中</li><li>2：正在关机</li><li>3：已关机</li><li>5：正在开机</li><li>7：重启中</li><li>9：重装中</li><li>12：绑定EIP</li><li>13：解绑EIP</li><li>14：绑定LB</li><li>15：解绑LB</li><li>19：更换IP中</li><li>20：制作镜像中</li><li>21：制作镜像失败</li><li>23：故障待重装</li>
+<li>1：运行中</li><li>2：正在关机</li><li>3：已关机</li><li>5：正在开机</li><li>7：重启中</li><li>9：重装中</li><li>12：绑定EIP</li><li>13：解绑EIP</li><li>14：绑定LB</li><li>15：解绑LB</li><li>19：更换IP中</li><li>20：制作镜像中</li><li>21：制作镜像失败</li><li>23：故障待重装</li><li>24：无备件待退回</li>
          * @type {number || null}
          */
         this.OperateStatus = null;
@@ -7117,6 +7131,20 @@ class DeviceInfo extends  AbstractModel {
          */
         this.IsLuckyDevice = null;
 
+        /**
+         * 标识机器维保状态。Maintain: 在保;  WillExpire: 即将过保; Expire: 已过保
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.MaintainStatus = null;
+
+        /**
+         * 维保信息描述
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.MaintainMessage = null;
+
     }
 
     /**
@@ -7158,6 +7186,8 @@ class DeviceInfo extends  AbstractModel {
         this.VpcCidrBlock = 'VpcCidrBlock' in params ? params.VpcCidrBlock : null;
         this.SubnetCidrBlock = 'SubnetCidrBlock' in params ? params.SubnetCidrBlock : null;
         this.IsLuckyDevice = 'IsLuckyDevice' in params ? params.IsLuckyDevice : null;
+        this.MaintainStatus = 'MaintainStatus' in params ? params.MaintainStatus : null;
+        this.MaintainMessage = 'MaintainMessage' in params ? params.MaintainMessage : null;
 
     }
 }

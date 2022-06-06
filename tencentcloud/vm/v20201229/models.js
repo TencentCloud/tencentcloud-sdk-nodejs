@@ -25,15 +25,13 @@ class ImageSegments extends  AbstractModel {
         super();
 
         /**
-         * 截帧时间。单位为秒。
-点播文件：该值为相对于视频偏移时间，单位为秒，例如：0，5，10
-直播流：该值为时间戳，例如：1594650717
+         * 该字段用于返回视频片段的截帧时间，单位为秒。对于点播文件，该参数代表对应截取图片相对于视频的偏移时间，如0（代表不偏移），5（视频开始后5秒），10（视频开始后10秒）；对于直播文件，该参数则返回对应图片的Unix时间戳，如：1594650717。
          * @type {string || null}
          */
         this.OffsetTime = null;
 
         /**
-         * 画面截帧结果详情
+         * 该字段用于返回视频片段的具体截帧审核结果，详细内容敬请参考ImageResult数据结构的描述。
          * @type {ImageResult || null}
          */
         this.Result = null;
@@ -67,74 +65,64 @@ class ImageResultResult extends  AbstractModel {
         super();
 
         /**
-         * 场景
-Porn 色情
-Sexy 性感
-Illegal 违法
-Abuse 谩骂
-Ad 广告
-以及其他令人反感、不安全或不适宜的内容类型。
+         * 该字段用于返回检测结果所对应的恶意场景。返回值：**Normal**：正常，**Porn**：色情，**Abuse**：谩骂，**AppLogo**：广告台标，**Custom**：自定义违规，以及其他令人反感、不安全或不适宜的内容类型。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Scene = null;
 
         /**
-         * 是否命中
-0 未命中
-1 命中
+         * 该参数用于标识审核内容是否命中恶意标签，取值：0（**未命中**）和1（**命中**）。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.HitFlag = null;
 
         /**
-         * 审核建议，可选值：
-Pass 通过，
-Review 建议人审，
-Block 确认违规
+         * 该字段用于返回后续操作建议。当您获取到判定结果后，返回值表示具体的后续建议操作。<br>
+返回值：**Block**：建议屏蔽，**Review** ：建议人工复审，**Pass**：建议通过
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Suggestion = null;
 
         /**
-         * 识别结果一级标签
+         * 该字段用于返回检测结果所对应的恶意标签。<br>返回值：**Normal**：正常，**Porn**：色情，**Abuse**：谩骂，**Ad**：广告，**Custom**：自定义违规；以及其他令人反感、不安全或不适宜的内容类型。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Label = null;
 
         /**
-         * 识别结果二级标签
+         * 该字段用于返回恶意标签下对应的子标签的检测结果，如：*Porn-SexBehavior*等子标签。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.SubLabel = null;
 
         /**
-         * 分数
+         * 该字段用于返回当前标签下的置信度，取值范围：0（**置信度最低**）-100（**置信度最高** ），越高代表文本越有可能属于当前返回的标签；如：*色情 -性行为 99*，则表明该文本非常有可能属于色情性行为内容。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.Score = null;
 
         /**
-         * 适应特定场景，则该数据为名称列表，否则为null
+         * 该字段用于返回审核图片在敏感场景下命中的特定对象名称列表。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<string> || null}
          */
         this.Names = null;
 
         /**
-         * 图片OCR文本
+         * 该字段用于返回图片OCR文本识别的检测结果，识别**上限在5000字节内**。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Text = null;
 
         /**
-         * 其他详情
+         * 该字段用于返回图像审核子结果的其他详细信息，如文本位置、自定义库等。详细返回内容敬请参考ImageResultsResultDetail数据结构的描述。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<ImageResultsResultDetail> || null}
          */
@@ -179,21 +167,19 @@ class StorageInfo extends  AbstractModel {
         super();
 
         /**
-         * 类型 可选：
-URL 资源链接类型
-COS 腾讯云对象存储类型
+         * 该字段表示文件访问类型，取值为**URL**（资源链接）和**COS** (腾讯云对象存储)；该字段应当与传入的访问类型相对应，可用于强校验并方便系统快速识别访问地址；若不传入此参数，则默认值为URL，此时系统将自动判定访问地址类型。
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * 资源链接
+         * 该字段表示文件访问的链接地址，格式为标准URL格式。<br> 备注：当Type为URL时此字段不为空，该参数与BucketInfo参数须传入其中之一
          * @type {string || null}
          */
         this.Url = null;
 
         /**
-         * 腾讯云存储桶信息
+         * 该字段表示文件访问的腾讯云存储桶信息。<br> 备注：当Type为COS时此字段不为空，该参数与Url参数须传入其中之一。
          * @type {BucketInfo || null}
          */
         this.BucketInfo = null;
@@ -229,19 +215,19 @@ class BucketInfo extends  AbstractModel {
         super();
 
         /**
-         * 腾讯云对象存储，存储桶名称
+         * 该字段用于标识腾讯云对象存储的存储桶名称,关于文件桶的详细信息敬请参考 [腾讯云存储相关说明](https://cloud.tencent.com/document/product/436/44352)。
          * @type {string || null}
          */
         this.Bucket = null;
 
         /**
-         * 地域
+         * 该字段用于标识腾讯云对象存储的托管机房的分布地区，对象存储 COS 的数据存放在这些地域的存储桶中。
          * @type {string || null}
          */
         this.Region = null;
 
         /**
-         * 对象Key
+         * 该字段用于标识腾讯云对象存储的对象Key,对象z作为基本单元被存放在存储桶中；用户可以通过腾讯云控制台、API、SDK 等多种方式管理对象。有关对象的详细描述敬请参阅相应 [产品文档](https://cloud.tencent.com/document/product/436/13324)。
          * @type {string || null}
          */
         this.Object = null;
@@ -271,7 +257,7 @@ class CreateVideoModerationTaskResponse extends  AbstractModel {
         super();
 
         /**
-         * 任务创建结果
+         * 该字段用于返回任务创建的结果，具体输出内容请参见TaskResult数据结构的详细描述。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<TaskResult> || null}
          */
@@ -315,28 +301,28 @@ class TaskResult extends  AbstractModel {
         super();
 
         /**
-         * 请求时传入的DataId
+         * 该字段用于返回创建视频审核任务时在TaskInput结构内传入的DataId，用于标识具体审核任务。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.DataId = null;
 
         /**
-         * TaskId，任务ID
+         * 该字段用于返回视频审核任务所生成的任务ID，用于标识具体审核任务，方便后续查询和管理。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.TaskId = null;
 
         /**
-         * 错误码。如果code为OK，则表示创建成功，其他则参考公共错误码
+         * 该字段用于返回任务创建的状态，如返回OK则代表任务创建成功，其他返回值可参考公共错误码。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Code = null;
 
         /**
-         * 如果错误，该字段表示错误详情
+         * **仅在Code的返回值为错误码时生效**，用于返回错误的详情内容。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -368,7 +354,7 @@ class CancelTaskRequest extends  AbstractModel {
         super();
 
         /**
-         * 任务ID
+         * 该字段表示创建视频审核任务后返回的任务ID（在Results参数中），用于标识需要取消的审核任务。
          * @type {string || null}
          */
         this.TaskId = null;
@@ -396,127 +382,115 @@ class DescribeTaskDetailResponse extends  AbstractModel {
         super();
 
         /**
-         * 任务Id
+         * 该字段用于返回创建视频审核任务后返回的任务ID（在Results参数中），用于标识需要查询任务详情的审核任务。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.TaskId = null;
 
         /**
-         * 审核时传入的数据Id
+         * 该字段用于返回调用视频审核接口时传入的数据ID参数，方便数据的辨别和管理。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.DataId = null;
 
         /**
-         * 业务类型
+         * 该字段用于返回调用视频审核接口时传入的BizType参数，方便数据的辨别和管理。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.BizType = null;
 
         /**
-         * 任务名称
+         * 该字段用于返回调用视频审核接口时传入的TaskInput参数中的任务名称，方便任务的识别与管理。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * 状态，可选值：
-FINISH 已完成
-PENDING 等待中
-RUNNING 进行中
-ERROR 出错
-CANCELLED 已取消
+         * 该字段用于返回所查询内容的任务状态。
+<br>取值：**FINISH**（任务已完成）、**PENDING** （任务等待中）、**RUNNING** （任务进行中）、**ERROR** （任务出错）、**CANCELLED** （任务已取消）。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * 类型
+         * 该字段用于返回调用视频审核接口时输入的视频审核类型，取值为：**VIDEO**（点播视频）和**LIVE_VIDEO**（直播视频），默认值为VIDEO。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * 审核建议
-可选：
-Pass 通过
-Reveiw 建议复审
-Block 确认违规
+         * 该字段用于返回基于恶意标签的后续操作建议。当您获取到判定结果后，返回值表示系统推荐的后续操作；建议您按照业务所需，对不同违规类型与建议值进行处理。<br>返回值：**Block**：建议屏蔽，**Review** ：建议人工复审，**Pass**：建议通过
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Suggestion = null;
 
         /**
-         * 审核结果
+         * 该字段用于返回检测结果所对应的恶意标签。<br>返回值：**Normal**：正常，**Porn**：色情，**Abuse**：谩骂，**Ad**：广告，**Custom**：自定义违规；以及其他令人反感、不安全或不适宜的内容类型。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<TaskLabel> || null}
          */
         this.Labels = null;
 
         /**
-         * 媒体解码信息
+         * 该字段用于返回输入媒体文件的详细信息，包括编解码格式、分片时长等信息。详细内容敬请参考MediaInfo数据结构的描述。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {MediaInfo || null}
          */
         this.MediaInfo = null;
 
         /**
-         * 任务信息
+         * 该字段用于返回审核服务的媒体内容信息，主要包括传入文件类型和访问地址。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {InputInfo || null}
          */
         this.InputInfo = null;
 
         /**
-         * 创建时间，格式为 ISO 8601
+         * 该字段用于返回被查询任务创建的时间，格式采用 ISO 8601标准。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.CreatedAt = null;
 
         /**
-         * 更新时间，格式为 ISO 8601
+         * 该字段用于返回被查询任务最后更新时间，格式采用 ISO 8601标准。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.UpdatedAt = null;
 
         /**
-         * 视频中截帧审核的结果。
-数据有效期为24小时，如需要储存更长时间请在已配置的COS储存桶中设置。
+         * 该字段用于返回视频中截帧审核的结果，详细返回内容敬请参考ImageSegments数据结构的描述。<br>备注：数据有效期为24小时，如需要延长存储时间，请在已配置的COS储存桶中设置。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<ImageSegments> || null}
          */
         this.ImageSegments = null;
 
         /**
-         * 视频中音频审核的结果。
-数据有效期为24小时，如需要储存更长时间请在已配置的COS储存桶中设置。
+         * 该字段用于返回视频中音频审核的结果，详细返回内容敬请参考AudioSegments数据结构的描述。<br>备注：数据有效期为24小时，如需要延长存储时间，请在已配置的COS储存桶中设置。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<AudioSegments> || null}
          */
         this.AudioSegments = null;
 
         /**
-         * 如果返回的状态为ERROR，该字段会标记错误类型。
-可选值：：
-DECODE_ERROR: 解码失败。（输入资源中可能包含无法解码的视频）
-URL_ERROR：下载地址验证失败。
-TIMEOUT_ERROR：处理超时。
+         * 当任务状态为Error时，返回对应错误的类型，取值：**DECODE_ERROR**: 解码失败。（输入资源中可能包含无法解码的视频）
+**URL_ERROR**：下载地址验证失败。
+**TIMEOUT_ERROR**：处理超时。任务状态非Error时默认返回为空。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.ErrorType = null;
 
         /**
-         * 审核任务错误日志。当Error不为空时，会展示该字段
+         * 当任务状态为Error时，该字段用于返回对应错误的详细描述，任务状态非Error时默认返回为空。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -601,31 +575,31 @@ class DescribeTasksRequest extends  AbstractModel {
         super();
 
         /**
-         * 每页展示多少条。（默认展示10条）
+         * 该参数表示任务列表每页展示的任务条数，**默认值为10**（每页展示10条任务）。
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * 过滤参数
+         * 该参数表示任务筛选器的输入参数，可根据业务类型、审核文件类型、处理建议及任务状态筛选想要查看的审核任务，具体参数内容请参见TaskFilter数据结构的详细描述。
          * @type {TaskFilter || null}
          */
         this.Filter = null;
 
         /**
-         * 翻页token，在向前或向后翻页时需要
+         * 该参数表示翻页时使用的Token信息，由系统自动生成，并在翻页时向下一个生成的页面传递此参数，以方便快速翻页功能的实现。当到最后一页时，该字段为空。
          * @type {string || null}
          */
         this.PageToken = null;
 
         /**
-         * 开始时间。默认是最近3天。
+         * 该参数表示任务列表的开始时间，格式为ISO8601标准的时间戳。**默认值为最近3天**，若传入该参数，则在这一时间到EndTime之间的任务将会被筛选出来。<br>备注：该参数与Filter共同起到任务筛选作用，二者作用无先后顺序。
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * 结束时间。默认为空
+         * 该参数表示任务列表的结束时间，格式为ISO8601标准的时间戳。**默认值为空**，若传入该参数，则在这StartTime到这一时间之间的任务将会被筛选出来。<br>备注：该参数与Filter共同起到任务筛选作用，二者作用无先后顺序。
          * @type {string || null}
          */
         this.EndTime = null;
@@ -662,19 +636,19 @@ class TaskInput extends  AbstractModel {
         super();
 
         /**
-         * 数据ID
+         * 选填参数，该字段表示您为待检测对象分配的数据ID，传入后可方便您对文件进行标识和管理。<br>取值：由英文字母（大小写均可）、数字及四个特殊符号（_，-，@，#）组成，**长度不超过64个字符**。
          * @type {string || null}
          */
         this.DataId = null;
 
         /**
-         * 任务名
+         * 选填参数，该字段表示审核任务所对应的任务名称，方便后续查询和管理审核任务。
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * 任务输入
+         * 必填参数，该字段表示审核文件的访问参数，用于获取审核媒体文件，该参数内包括访问类型和访问地址。
          * @type {StorageInfo || null}
          */
         this.Input = null;
@@ -709,13 +683,14 @@ class DescribeTaskDetailRequest extends  AbstractModel {
         super();
 
         /**
-         * 任务ID，创建任务后返回的TaskId字段
+         * 该字段表示创建视频审核任务后返回的任务ID（在Results参数中），用于标识需要查询任务详情的审核任务。
+<br>备注：查询接口单次最大查询量为**20条每次**。
          * @type {string || null}
          */
         this.TaskId = null;
 
         /**
-         * 是否展示所有分片，默认只展示命中规则的分片
+         * 该布尔字段表示是否展示全部的视频片段，取值：True(展示全部的视频分片)、False(只展示命中审核规则的视频分片)；默认值为False。
          * @type {boolean || null}
          */
         this.ShowAllSegments = null;
@@ -744,34 +719,32 @@ class TaskLabel extends  AbstractModel {
         super();
 
         /**
-         * 命中的标签
-Porn 色情
-Sexy 性感
-Illegal 违法
-Abuse 谩骂
-Ad 广告
-以及其他令人反感、不安全或不适宜的内容类型。
+         * 该字段用于返回检测结果所对应的恶意标签。<br>返回值：**Normal**：正常，**Porn**：色情，**Abuse**：谩骂，**Ad**：广告，**Custom**：自定义违规；以及其他令人反感、不安全或不适宜的内容类型。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Label = null;
 
         /**
-         * 审核建议，可选值：
-Pass 通过，
-Review 建议人审，
-Block 确认违规
+         * 该字段用于返回当前标签（Label）下的后续操作建议。当您获取到判定结果后，返回值表示系统推荐的后续操作；建议您按照业务所需，对不同违规类型与建议值进行处理。<br>返回值：**Block**：建议屏蔽，**Review** ：建议人工复审，**Pass**：建议通过
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Suggestion = null;
 
         /**
-         * 得分，分数是 0 ～ 100
+         * 该字段用于返回当前标签（Label）下的置信度，取值范围：0（**置信度最低**）-100（**置信度最高** ），越高代表文本越有可能属于当前返回的标签；如：*色情 99*，则表明该文本非常有可能属于色情内容；*色情 0*，则表明该文本不属于色情内容。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.Score = null;
+
+        /**
+         * 该字段用于返回当前标签（Lable）下的二级标签。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SubLabel = null;
 
     }
 
@@ -785,6 +758,7 @@ Block 确认违规
         this.Label = 'Label' in params ? params.Label : null;
         this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
         this.Score = 'Score' in params ? params.Score : null;
+        this.SubLabel = 'SubLabel' in params ? params.SubLabel : null;
 
     }
 }
@@ -798,70 +772,71 @@ class ImageResultsResultDetail extends  AbstractModel {
         super();
 
         /**
-         * 任务名称
+         * 该字段用于返回调用视频审核接口时传入的TaskInput参数中的任务名称，方便任务的识别与管理。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * OCR识别文本
+         * 该字段用于返回图片OCR文本识别的检测结果，识别**上限在5000字节内**。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Text = null;
 
         /**
-         * 位置信息
+         * 该字段用于返回图像审核子结果的详细位置信息，如坐标、大小、旋转角度等。详细返回内容敬请参考ImageResultsResultDetailLocation数据结构的描述。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {ImageResultsResultDetailLocation || null}
          */
         this.Location = null;
 
         /**
-         * 标签
+         * 该字段用于返回检测结果所对应的恶意标签。<br>返回值：**Normal**：正常，**Porn**：色情，**Abuse**：谩骂，**Ad**：广告，**Custom**：自定义违规；以及其他令人反感、不安全或不适宜的内容类型。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Label = null;
 
         /**
-         * 库ID
+         * 该字段**仅当Label为Custom：自定义关键词时该参数有效**,用于返回自定义库的ID，以方便自定义库管理和配置。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.LibId = null;
 
         /**
-         * 库名称
+         * 该字段**仅当Label为Custom：自定义关键词时该参数有效**,用于返回自定义库的名称,以方便自定义库管理和配置。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.LibName = null;
 
         /**
-         * 命中的关键词
+         * 该字段用于返回检测文本命中的关键词信息，用于标注文本违规的具体原因（如：*加我微信*）。该参数可能会有多个返回值，代表命中的多个关键词；如返回值为空且Score不为空，则代表识别结果所对应的恶意标签（Label）是来自于语义模型判断的返回值。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<string> || null}
          */
         this.Keywords = null;
 
         /**
-         * 建议
+         * 该字段用于返回后续操作建议。当您获取到判定结果后，返回值表示具体的后续建议操作。<br>
+返回值：**Block**：建议屏蔽，**Review** ：建议人工复审，**Pass**：建议通过
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Suggestion = null;
 
         /**
-         * 得分
+         * 该字段用于返回当前标签下的置信度，取值范围：0（**置信度最低**）-100（**置信度最高** ），越高代表文本越有可能属于当前返回的标签；如：*色情 99*，则表明该文本非常有可能属于色情内容。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.Score = null;
 
         /**
-         * 子标签码
+         * 该字段用于返回恶意标签下对应的子标签的检测结果，如：*Porn-SexBehavior*等子标签。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -904,21 +879,21 @@ class InputInfo extends  AbstractModel {
         super();
 
         /**
-         * 传入的类型可选：URL，COS
+         * 该字段表示文件访问类型，取值为**URL**（资源链接）和**COS** (腾讯云对象存储)。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * Url地址
+         * 该字段表示文件访问的链接地址，格式为标准URL格式。<br> 备注：当Type为URL时此字段不为空。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Url = null;
 
         /**
-         * 桶信息。当输入当时COS时，该字段不为空
+         * 该字段表示文件访问的腾讯云存储桶信息。<br> 备注：当Type为COS时此字段不为空。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -949,37 +924,37 @@ class CreateVideoModerationTaskRequest extends  AbstractModel {
         super();
 
         /**
-         * 任务类型：可选VIDEO（点播视频），LIVE_VIDEO（直播视频）
+         * 该参数用于传入审核任务的任务类型，取值：**VIDEO**（点播视频），**LIVE_VIDEO**（直播视频）。
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * 输入的任务信息，最多可以同时创建10个任务
+         * 该字段表示输入的视频审核任务信息，具体输入内容请参见TaskInput数据结构的详细描述。<br> 备注：最多同时可创建**10个任务**。
          * @type {Array.<TaskInput> || null}
          */
         this.Tasks = null;
 
         /**
-         * 业务类型, 定义 模版策略，输出存储配置。默认为default，客户可以在视频审核控制台创建自己的 BizType
+         * 该字段表示策略的具体编号，用于接口调度，在内容安全控制台中可配置。若不传入Biztype参数（留空），则代表采用默认的识别策略；传入则会在审核时根据业务场景采取不同的审核策略。<br>备注：Biztype仅为数字、字母与下划线的组合，长度为3-32个字符；不同Biztype关联不同的业务场景与识别能力策略，调用前请确认正确的Biztype。
          * @type {string || null}
          */
         this.BizType = null;
 
         /**
-         * （可选）回调签名key，具体可以查看回调签名示例
+         * 可选参数，该字段表示回调签名的key信息，用于保证数据的安全性。 签名方法为在返回的HTTP头部添加 X-Signature 的字段，值为： seed + body 的 SHA256 编码和Hex字符串，在收到回调数据后，可以根据返回的body，用 **sha256(seed + body)**, 计算出 `X-Signature` 进行验证。<br>具体使用实例可参考 [回调签名示例](https://cloud.tencent.com/document/product/1265/51885)。
          * @type {string || null}
          */
         this.Seed = null;
 
         /**
-         * 接收审核信息回调地址，如果设置，则审核过程中产生的违规音频片段和画面截帧发送此接口
+         * 可选参数，该字段表示接受审核信息回调的地址，格式为URL链接默认格式。配置成功后，审核过程中产生的违规音视频片段将通过此接口发送。回调返回内容格式请参考 [回调签名示例](https://cloud.tencent.com/document/product/1265/51879#.E7.A4.BA.E4.BE.8B2-.E5.9B.9E.E8.B0.83.E7.AD.BE.E5.90.8D.E7.A4.BA.E4.BE.8B) <br>备注：音频默认截取时长为**15秒**，视频截帧默认为**5秒**截取一张图片；若用户自行配置截取间隔，则按照用户配置返回相应片段。
          * @type {string || null}
          */
         this.CallbackUrl = null;
 
         /**
-         * 审核排队优先级。当您有多个视频审核任务排队时，可以根据这个参数控制排队优先级。用于处理插队等逻辑。默认该参数为0
+         * 可选参数，该参数用于传入审核任务的优先级。当您有多个视频审核任务排队时，可以根据这个参数控制排队优先级，用于处理插队等逻辑；该参数**默认值为0**。
          * @type {number || null}
          */
         this.Priority = null;
@@ -1020,21 +995,21 @@ class DescribeTasksResponse extends  AbstractModel {
         super();
 
         /**
-         * 任务总量，为 int 字符串
+         * 该字段用于返回当前查询的任务总量，格式为int字符串。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Total = null;
 
         /**
-         * 当前页数据
+         * 该字段用于返回当前页的任务详细数据，具体输出内容请参见TaskData数据结构的详细描述。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<TaskData> || null}
          */
         this.Data = null;
 
         /**
-         * 翻页Token，当已经到最后一页时，该字段为空
+         * 该字段用于返回翻页时使用的Token信息，由系统自动生成，并在翻页时向下一个生成的页面传递此参数，以方便快速翻页功能的实现。当到最后一页时，该字段为空。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -1072,7 +1047,7 @@ class DescribeTasksResponse extends  AbstractModel {
 }
 
 /**
- * 音频小语种检测结果
+ * 音频语言种类检测结果
  * @class
  */
 class AudioResultDetailLanguageResult extends  AbstractModel {
@@ -1080,35 +1055,35 @@ class AudioResultDetailLanguageResult extends  AbstractModel {
         super();
 
         /**
-         * 语言分类，如中文、英文等；
+         * 该字段用于返回对应的语言种类信息。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Label = null;
 
         /**
-         * 得分
+         * 该参数用于返回当前标签下的置信度，取值范围：0（**置信度最低**）-100（**置信度最高**），越高代表音频越有可能属于当前返回的语种标签；
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.Score = null;
 
         /**
-         * 开始时间
+         * 该参数用于返回对应语种标签的片段在音频文件内的开始时间，单位为毫秒。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.StartTime = null;
 
         /**
-         * 结束时间
+         * 该参数用于返回对应语种标签的片段在音频文件内的结束时间，单位为毫秒。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.EndTime = null;
 
         /**
-         * 子标签码
+         * *内测中，敬请期待*
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -1141,26 +1116,26 @@ class TaskFilter extends  AbstractModel {
         super();
 
         /**
-         * 任务业务类型
+         * 该字段用于传入任务对应的业务类型供筛选器进行筛选。Biztype为策略的具体的编号，用于接口调度，在内容安全控制台中可配置。不同Biztype关联不同的业务场景与审核策略，调用前请确认正确的Biztype。Biztype仅为**数字、字母与下划线的组合**，长度为3-32个字符。<br>备注：在不传入该参数时筛选器默认不筛选业务类型。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<string> || null}
          */
         this.BizType = null;
 
         /**
-         * 任务类型，可选：VIDEO，AUDIO， LIVE_VIDEO, LIVE_AUDIO
+         * 该字段用于传入视频审核对应的任务类型供筛选器进行筛选，取值为：**VIDEO**（点播视频审核），**AUDIO**（点播音频审核）， **LIVE_VIDEO**（直播视频审核）, **LIVE_AUDIO**（直播音频审核）。<br>备注：在不传入该参数时筛选器默认不筛选任务类型。
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * 建议，可选：Pass, Review,Block
+         * 该字段用于传入视频审核对应的建议操作供筛选器进行筛选，取值为：**Block**：建议屏蔽，**Review**：建议人工复审，**Pass**：建议通过。<br>备注：在不传入该参数时筛选器默认不筛选建议操作。
          * @type {string || null}
          */
         this.Suggestion = null;
 
         /**
-         * 状态，可选：PENDING，RUNNING，ERROR，FINISH，CANCELLED
+         * 该字段用于传入审核任务的任务状态供筛选器进行筛选，取值为：**FINISH**（任务已完成）、**PENDING** （任务等待中）、**RUNNING** （任务进行中）、**ERROR** （任务出错）、**CANCELLED** （任务已取消）。<br>备注：在不传入该参数时筛选器默认不筛选任务状态。
          * @type {string || null}
          */
         this.TaskStatus = null;
@@ -1219,53 +1194,61 @@ class AudioResultDetailTextResult extends  AbstractModel {
         super();
 
         /**
-         * 标签
+         * 该字段用于返回检测结果所对应的恶意标签。<br>返回值：**Normal**：正常，**Porn**：色情，**Abuse**：谩骂，**Ad**：广告，**Custom**：自定义违规；以及其他令人反感、不安全或不适宜的内容类型。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Label = null;
 
         /**
-         * 命中的关键词
+         * 该字段用于返回ASR识别出的文本内容命中的关键词信息，用于标注内容违规的具体原因（如：加我微信）。该参数可能会有多个返回值，代表命中的多个关键词；若返回值为空，Score不为空，则代表识别结果所对应的恶意标签（Label）来自于语义模型判断的返回值。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<string> || null}
          */
         this.Keywords = null;
 
         /**
-         * 命中的LibId
+         * 该字段**仅当Label为Custom：自定义关键词时该参数有效**,用于返回自定义库的ID，以方便自定义库管理和配置。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.LibId = null;
 
         /**
-         * 命中的LibName
+         * 该字段**仅当Label为Custom：自定义关键词时该参数有效**,用于返回自定义库的名称,以方便自定义库管理和配置。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.LibName = null;
 
         /**
-         * 得分
+         * 该字段用于返回当前标签下的置信度，取值范围：0（**置信度最低**）-100（**置信度最高**），越高代表文本越有可能属于当前返回的标签；如：*色情 99*，则表明该文本非常有可能属于色情内容。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.Score = null;
 
         /**
-         * 词库类型 1 黑白库 2 自定义库
+         * 该字段用于返回后续操作建议。当您获取到判定结果后，返回值表示具体的后续建议操作。<br>
+返回值：**Block**：建议屏蔽，**Review** ：建议人工复审，**Pass**：建议通过
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Suggestion = null;
+
+        /**
+         * 该字段用于返回自定义关键词对应的词库类型，取值为**1**（黑白库）和**2**（自定义关键词库），若未配置自定义关键词库,则默认值为1（黑白库匹配）。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.LibType = null;
 
         /**
-         * 审核建议
+         * 该字段用于返回当前标签（Lable）下的二级标签。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.Suggestion = null;
+        this.SubLabel = null;
 
     }
 
@@ -1281,14 +1264,15 @@ class AudioResultDetailTextResult extends  AbstractModel {
         this.LibId = 'LibId' in params ? params.LibId : null;
         this.LibName = 'LibName' in params ? params.LibName : null;
         this.Score = 'Score' in params ? params.Score : null;
-        this.LibType = 'LibType' in params ? params.LibType : null;
         this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
+        this.LibType = 'LibType' in params ? params.LibType : null;
+        this.SubLabel = 'SubLabel' in params ? params.SubLabel : null;
 
     }
 }
 
 /**
- * 音频输出参数
+ * 音频审核输出参数
  * @class
  */
 class AudioResult extends  AbstractModel {
@@ -1296,92 +1280,89 @@ class AudioResult extends  AbstractModel {
         super();
 
         /**
-         * 是否命中
-0 未命中
-1 命中
+         * 该字段用于返回审核内容是否命中审核模型；取值：0（**未命中**）、1（**命中**）。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.HitFlag = null;
 
         /**
-         * 命中的标签
-Porn 色情
-Illegal 违法
-Abuse 谩骂
-Ad 广告
-Moan 呻吟
-以及其他令人反感、不安全或不适宜的内容类型。
+         * 该字段用于返回检测结果所对应的恶意标签。<br>返回值：**Normal**：正常，**Porn**：色情，**Abuse**：谩骂，**Ad**：广告，**Custom**：自定义违规；以及其他令人反感、不安全或不适宜的内容类型。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Label = null;
 
         /**
-         * 审核建议，可选值：
-Pass 通过，
-Review 建议人审，
-Block 确认违规
+         * 该字段用于返回后续操作建议。当您获取到判定结果后，返回值表示具体的后续建议操作。<br>
+返回值：**Block**：建议屏蔽，**Review** ：建议人工复审，**Pass**：建议通过
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Suggestion = null;
 
         /**
-         * 得分，0-100
+         * 该字段用于返回当前标签下的置信度，取值范围：0（**置信度最低**）-100（**置信度最高** ），越高代表文本越有可能属于当前返回的标签；如：*色情 99*，则表明该文本非常有可能属于色情内容。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.Score = null;
 
         /**
-         * 音频ASR文本
+         * 该字段用于返回音频文件经ASR识别后的文本信息。最长可识别**5小时**的音频文件，若超出时长限制，接口将会报错。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Text = null;
 
         /**
-         * 音频片段存储URL，有效期为1天
+         * 该字段用于返回音频片段存储的链接地址，该地址有效期为1天。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Url = null;
 
         /**
-         * 音频时长
+         * 该字段用于返回音频文件的时长，单位为秒。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Duration = null;
 
         /**
-         * 拓展字段
+         * 该字段用于返回输入参数中的额外附加信息（Extra），如未配置则默认返回值为空。<br>备注：不同客户或Biztype下返回信息不同，如需配置该字段请提交工单咨询或联系售后专员处理。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Extra = null;
 
         /**
-         * 文本审核结果
+         * 该字段用于返回音频文件经ASR识别后产生的文本的详细审核结果。具体结果内容请参见AudioResultDetailLanguageResult数据结构的细节描述。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<AudioResultDetailTextResult> || null}
          */
         this.TextResults = null;
 
         /**
-         * 音频呻吟审核结果
+         * 该字段用于返回音频文件呻吟检测的详细审核结果。具体结果内容请参见AudioResultDetailMoanResult数据结构的细节描述。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<AudioResultDetailMoanResult> || null}
          */
         this.MoanResults = null;
 
         /**
-         * 音频语言类别检测结果
+         * 该字段用于返回音频小语种检测的详细审核结果。具体结果内容请参见AudioResultDetailLanguageResult数据结构的细节描述。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<AudioResultDetailLanguageResult> || null}
          */
         this.LanguageResults = null;
+
+        /**
+         * 该字段用于返回当前标签（Lable）下的二级标签。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SubLabel = null;
 
     }
 
@@ -1427,6 +1408,7 @@ Block 确认违规
                 this.LanguageResults.push(obj);
             }
         }
+        this.SubLabel = 'SubLabel' in params ? params.SubLabel : null;
 
     }
 }
@@ -1440,35 +1422,42 @@ class AudioResultDetailMoanResult extends  AbstractModel {
         super();
 
         /**
-         * 固定为Moan
+         * 该字段用于返回检测结果需要检测的内容类型，此处固定为**Moan**（呻吟）以调用呻吟检测功能。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Label = null;
 
         /**
-         * 分数
+         * 该字段用于返回呻吟检测的置信度，取值范围：0（**置信度最低**）-100（**置信度最高**），越高代表音频越有可能属于呻吟内容。
          * @type {number || null}
          */
         this.Score = null;
 
         /**
-         * 开始时间
+         * 该字段用于返回对应呻吟标签的片段在音频文件内的开始时间，单位为毫秒。
          * @type {number || null}
          */
         this.StartTime = null;
 
         /**
-         * 结束时间
+         * 该字段用于返回对应呻吟标签的片段在音频文件内的结束时间，单位为毫秒。
          * @type {number || null}
          */
         this.EndTime = null;
 
         /**
-         * 子标签码
+         * *内测中，敬请期待*
          * @type {string || null}
          */
         this.SubLabelCode = null;
+
+        /**
+         * 该字段用于返回当前标签（Lable）下的二级标签。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SubLabel = null;
 
     }
 
@@ -1484,6 +1473,7 @@ class AudioResultDetailMoanResult extends  AbstractModel {
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.SubLabelCode = 'SubLabelCode' in params ? params.SubLabelCode : null;
+        this.SubLabel = 'SubLabel' in params ? params.SubLabel : null;
 
     }
 }
@@ -1497,73 +1487,75 @@ class TaskData extends  AbstractModel {
         super();
 
         /**
-         * 输入的数据ID
+         * 该字段用于返回视频审核任务数据所对应的数据ID，方便后续查询和管理审核任务。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.DataId = null;
 
         /**
-         * 任务ID
+         * 该字段用于返回视频审核任务所生成的任务ID，用于标识具体审核任务，方便后续查询和管理。
          * @type {string || null}
          */
         this.TaskId = null;
 
         /**
-         * 状态，可选：PENDING，RUNNING，ERROR，FINISH，CANCELLED
+         * 该字段用于返回所查询内容的任务状态。
+<br>取值：**FINISH**（任务已完成）、**PENDING** （任务等待中）、**RUNNING** （任务进行中）、**ERROR** （任务出错）、**CANCELLED** （任务已取消）。
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * 任务名称
+         * 该字段用于返回视频审核任务所对应的任务名称，方便后续查询和管理审核任务。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * 业务类型
+         * 该字段用于返回调用视频审核接口时传入的BizType参数，方便数据的辨别和管理。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.BizType = null;
 
         /**
-         * 任务类型
+         * 该字段用于返回调用音频审核接口时输入的音频审核类型，取值为：**VIDEO**（点播视频）和**LIVE_VIDEO**（直播视频），默认值为VIDEO。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * 建议，可选：Pass， Block 和 Review
+         * 该字段用于返回基于恶意标签的后续操作建议。当您获取到判定结果后，返回值表示具体的后续建议操作。<br>
+返回值：**Block**：建议屏蔽，**Review** ：建议人工复审，**Pass**：建议通过
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Suggestion = null;
 
         /**
-         * 任务违规标签
+         * 该字段用于返回检测结果所对应的恶意标签。<br>返回值：**Normal**：正常，**Porn**：色情，**Abuse**：谩骂，**Ad**：广告，**Custom**：自定义违规；以及其他令人反感、不安全或不适宜的内容类型。
          * @type {Array.<TaskLabel> || null}
          */
         this.Labels = null;
 
         /**
-         * 媒体信息
+         * 该字段用于返回输入媒体文件的详细信息，包括编码格式、分片时长等信息。详细内容敬请参考MediaInfo数据结构的描述。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {MediaInfo || null}
          */
         this.MediaInfo = null;
 
         /**
-         * 创建时间（ iso 8601 格式）
+         * 该字段用于返回被查询任务创建的时间，格式采用 ISO 8601标准。
          * @type {string || null}
          */
         this.CreatedAt = null;
 
         /**
-         * 更新时间（ iso 8601 格式）
+         * 该字段用于返回被查询任务最后更新时间，格式采用 ISO 8601标准。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -1615,8 +1607,7 @@ class MediaInfo extends  AbstractModel {
         super();
 
         /**
-         * 流检测时分片时长
-注意：此字段可能返回 0，表示取不到有效值。
+         * 该字段用于返回对传入的视频流进行分片的片段时长，单位为秒。**默认值为5秒**，支持用户自定义配置。<br>备注：仅在审核文件为流媒体时生效；此字段返回0则代表未取到有效值。
          * @type {number || null}
          */
         this.Duration = null;
@@ -1636,7 +1627,7 @@ class MediaInfo extends  AbstractModel {
 }
 
 /**
- * 声音段信息
+ * 用于返回音频片段的审核结果
  * @class
  */
 class AudioSegments extends  AbstractModel {
@@ -1644,16 +1635,14 @@ class AudioSegments extends  AbstractModel {
         super();
 
         /**
-         * 截帧时间。
-点播文件：该值为相对于视频偏移时间，单位为秒，例如：0，5，10
-直播流：该值为时间戳，例如：1594650717
+         * 该字段用于返回音频片段的开始时间，单位为秒。对于点播文件，该参数代表对应音频相对于完整音轨的偏移时间，如0（代表不偏移），5（音轨开始后5秒），10（音轨开始后10秒）；对于直播文件，该参数则返回对应音频片段开始时的Unix时间戳，如：1594650717。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.OffsetTime = null;
 
         /**
-         * 结果集
+         * 该字段用于返回音频片段的具体审核结果，详细内容敬请参考AudioResult数据结构的描述。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {AudioResult || null}
          */
@@ -1688,35 +1677,35 @@ class ImageResultsResultDetailLocation extends  AbstractModel {
         super();
 
         /**
-         * x坐标
+         * 该参数用于标识OCR检测框左上角位置的**横坐标**（x）所在的像素位置，结合剩余参数可唯一确定检测框的大小和位置。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.X = null;
 
         /**
-         * y坐标
+         * 该参数用于标识OCR检测框左上角位置的**纵坐标**（y）所在的像素位置，结合剩余参数可唯一确定检测框的大小和位置。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.Y = null;
 
         /**
-         * 宽度
+         * 该参数用于标识OCR检测框的宽度（**由左上角出发在x轴向右延伸的长度**）。结合剩余参数可唯一确定检测框的大小和位置。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.Width = null;
 
         /**
-         * 高度
+         * 该参数用于标识OCR检测框的高度（**由左上角出发在y轴向下延伸的长度**）。结合剩余参数可唯一确定检测框的大小和位置。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.Height = null;
 
         /**
-         * 旋转角度
+         * 该参数用于标识OCR检测框的旋转角度，该参数结合X和Y两个坐标参数可唯一确定检测框的具体位置；取值：0-360（**角度制**），方向为**逆时针旋**转。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
@@ -1749,64 +1738,61 @@ class ImageResult extends  AbstractModel {
         super();
 
         /**
-         * 违规标志
-0 未命中
-1 命中
+         * 该参数用于标识审核内容是否命中恶意标签，取值：0（**未命中**）和1（**命中**）。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.HitFlag = null;
 
         /**
-         * 命中的标签
-Porn 色情
-Sexy 性感
-Illegal 违法
-Abuse 谩骂
-Ad 广告
-以及其他令人反感、不安全或不适宜的内容类型。
+         * 该字段用于返回检测结果所对应的恶意标签。<br>返回值：**Normal**：正常，**Porn**：色情，**Abuse**：谩骂，**Ad**：广告，**Custom**：自定义违规；以及其他令人反感、不安全或不适宜的内容类型。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Label = null;
 
         /**
-         * 审核建议，可选值：
-Pass 通过，
-Review 建议人审，
-Block 确认违规
+         * 该字段用于返回后续操作建议。当您获取到判定结果后，返回值表示具体的后续建议操作。<br>
+返回值：**Block**：建议屏蔽，**Review** ：建议人工复审，**Pass**：建议通过
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Suggestion = null;
 
         /**
-         * 得分
+         * 该字段用于返回当前标签下的置信度，取值范围：0（**置信度最低**）-100（**置信度最高** ），越高代表文本越有可能属于当前返回的标签；如：*色情 -性行为 99*，则表明该文本非常有可能属于色情性行为内容。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.Score = null;
 
         /**
-         * 画面截帧图片结果集
+         * 该字段用于返回图像审核结果的子结果，详细内容敬请参考ImageResultResult数据结构的描述。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<ImageResultResult> || null}
          */
         this.Results = null;
 
         /**
-         * 图片URL地址
+         * 该字段用于返回审核结果的访问链接（URL），图片支持PNG、JPG、JPEG、BMP、GIF、WEBP格式。<br>备注：数据**默认有效期为12小时**。如您需要更长时间的保存，请在数据储存的COS桶中配置对应的储存时长。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Url = null;
 
         /**
-         * 附加字段
+         * 该字段用于返回输入参数中的额外附加信息（Extra），如未配置则默认返回值为空。<br>备注：不同客户或Biztype下返回信息不同，如需配置该字段请提交工单咨询或联系售后专员处理。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Extra = null;
+
+        /**
+         * 该字段用于返回当前标签（Lable）下的二级标签。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SubLabel = null;
 
     }
 
@@ -1832,6 +1818,7 @@ Block 确认违规
         }
         this.Url = 'Url' in params ? params.Url : null;
         this.Extra = 'Extra' in params ? params.Extra : null;
+        this.SubLabel = 'SubLabel' in params ? params.SubLabel : null;
 
     }
 }

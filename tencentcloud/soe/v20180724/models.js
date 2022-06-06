@@ -96,37 +96,55 @@ class InitOralProcessRequest extends  AbstractModel {
         super();
 
         /**
-         * 语音段唯一标识，一段语音一个SessionId
+         * 语音段唯一标识，一段完整语音使用一个SessionId，不同语音段的评测需要使用不同的SessionId。一般使用uuid(通用唯一识别码)来作为它的值，要尽量保证SessionId的唯一性。
          * @type {string || null}
          */
         this.SessionId = null;
 
         /**
-         * 被评估语音对应的文本，句子模式下不超过个 20 单词或者中文文字，段落模式不超过 120 单词或者中文文字，中文评估使用 utf-8 编码，自由说模式该值传空。如需要在单词模式和句子模式下使用自定义音素，可以通过设置 TextMode 使用[音素标注](https://cloud.tencent.com/document/product/884/33698)。
+         * 被评估语音对应的文本，仅支持中文和英文。
+句子模式下不超过个 30 单词或者中文文字，段落模式不超过 120 单词或者中文文字，中文评估使用 utf-8 编码，自由说模式RefText可以不填。
+关于RefText的文本键入要求，请参考[评测模式介绍](https://cloud.tencent.com/document/product/884/56131)。
+如需要在评测模式下使用自定义注音（支持中英文），可以通过设置「TextMode」参数实现，设置方式请参考[音素标注](https://cloud.tencent.com/document/product/884/33698)。
          * @type {string || null}
          */
         this.RefText = null;
 
         /**
-         * 语音输入模式，0：流式分片，1：非流式一次性评估
+         * 语音输入模式
+0：流式分片
+1：非流式一次性评估
+推荐使用流式分片传输。
          * @type {number || null}
          */
         this.WorkMode = null;
 
         /**
-         * 评估模式，0：词模式（中文评测模式下为文字模式），1：句子模式，2：段落模式，3：自由说模式，当为词模式评估时，能够提供每个音节的评估信息，当为句子模式时，能够提供完整度和流利度信息。4: 英文单词音素诊断评测模式，针对一个单词音素诊断评测。
+         * 评测模式
+0：单词/单字模式（中文评测模式下为单字模式）
+1：句子模式
+2：段落模式
+3：自由说模式
+4：单词音素纠错模式
+5：情景评测模式
+6：句子多分支评测模式
+7：单词实时评测模式
+8：拼音评测模式
+关于每种评测模式的详细介绍，以及适用场景，请参考[评测模式介绍](https://cloud.tencent.com/document/product/884/56131)。
          * @type {number || null}
          */
         this.EvalMode = null;
 
         /**
-         * 评价苛刻指数，取值为[1.0 - 4.0]范围内的浮点数，用于平滑不同年龄段的分数，1.0为小年龄段，4.0为最高年龄段
+         * 评价苛刻指数。取值为[1.0 - 4.0]范围内的浮点数，用于平滑不同年龄段的分数。
+1.0：适用于最小年龄段用户，一般对应儿童应用场景；
+4.0：适用于最高年龄段用户，一般对应成人严格打分场景。
          * @type {number || null}
          */
         this.ScoreCoeff = null;
 
         /**
-         * 业务应用ID，与账号应用APPID无关，是用来方便客户管理服务的参数，新的 SoeAppId 可以在[控制台](https://console.cloud.tencent.com/soe)【应用管理】下新建。
+         * 业务应用ID，与账号应用APPID无关，是用来方便客户管理服务的参数，新的 SoeAppId 可以在[控制台](https://console.cloud.tencent.com/soe)【应用管理】下新建。如果没有新建SoeAppId，请勿填入该参数，否则会报欠费错误。
          * @type {string || null}
          */
         this.SoeAppId = null;
@@ -138,31 +156,44 @@ class InitOralProcessRequest extends  AbstractModel {
         this.IsLongLifeSession = null;
 
         /**
-         * 音频存储模式，0：不存储，1：存储到公共对象存储，输出结果为该会话最后一个分片TransmitOralProcess 返回结果 AudioUrl 字段，2：永久存储音频，需要提工单申请，会产生一定存储费用，3：自定义存储，将音频存储到自定义的腾讯云[对象存储](https://cloud.tencent.com/product/cos)中，需要提工单登记存储信息。
+         * 音频存储模式，此参数已废弃，无需设置，设置与否都默认为0不存储；
+注：有存储需求的用户建议自行存储至腾讯云COS[对象存储](https://cloud.tencent.com/product/cos)使用。
          * @type {number || null}
          */
         this.StorageMode = null;
 
         /**
-         * 输出断句中间结果标识，0：不输出，1：输出，通过设置该参数，可以在评估过程中的分片传输请求中，返回已经评估断句的中间结果，中间结果可用于客户端 UI 更新，输出结果为TransmitOralProcess请求返回结果 SentenceInfoSet 字段。
+         * 输出断句中间结果标识
+0：不输出
+1：输出，通过设置该参数
+可以在评估过程中的分片传输请求中，返回已经评估断句的中间结果，中间结果可用于客户端 UI 更新，输出结果为TransmitOralProcess请求返回结果 SentenceInfoSet 字段。
          * @type {number || null}
          */
         this.SentenceInfoEnabled = null;
 
         /**
-         * 评估语言，0：英文，1：中文。
+         * 评估语言
+0：英文
+1：中文
+ServerType不填默认为0
          * @type {number || null}
          */
         this.ServerType = null;
 
         /**
-         * 异步模式标识，0：同步模式，1：异步模式，可选值参考[服务模式](https://cloud.tencent.com/document/product/884/33697)。
+         * 异步模式标识
+0：同步模式
+1：异步模式（一般情况不建议使用异步模式）
+可选值参考[服务模式](https://cloud.tencent.com/document/product/884/33697)。
          * @type {number || null}
          */
         this.IsAsync = null;
 
         /**
-         * 输入文本模式，0: 普通文本，1：[音素结构](https://cloud.tencent.com/document/product/884/33698)文本。2：音素注册模式（提工单注册需要使用音素的单词）。
+         * 输入文本模式
+0: 普通文本
+1：[音素结构](https://cloud.tencent.com/document/product/884/33698)文本
+2：音素注册模式（提工单注册需要使用音素的单词）。
          * @type {number || null}
          */
         this.TextMode = null;
@@ -201,7 +232,7 @@ class Keyword extends  AbstractModel {
         super();
 
         /**
-         * 被评估语音对应的文本，句子模式下不超过个 20 单词或者中文文字，段落模式不超过 120 单词或者中文文字，中文评估使用 utf-8 编码，自由说模式该值无效。如需要在单词模式和句子模式下使用自定义音素，可以通过设置 TextMode 使用[音素标注](https://cloud.tencent.com/document/product/884/33698)。
+         * 被评估语音对应的文本，句子模式下不超过个 20 单词或者中文文字，段落模式不超过 120 单词或者中文文字，中文评估使用 utf-8 编码，自由说模式RefText可以不填。如需要在单词模式和句子模式下使用自定义音素，可以通过设置 TextMode 使用[音素标注](https://cloud.tencent.com/document/product/884/33698)。
          * @type {string || null}
          */
         this.RefText = null;
@@ -220,6 +251,7 @@ class Keyword extends  AbstractModel {
 
         /**
          * 评估语言，0：英文，1：中文。
+ServerType不填默认传0
          * @type {number || null}
          */
         this.ServerType = null;
@@ -258,6 +290,7 @@ class KeywordEvaluateRequest extends  AbstractModel {
 
         /**
          * 流式数据包的序号，从1开始，当IsEnd字段为1后后续序号无意义，当IsLongLifeSession不为1且为非流式模式时无意义。
+注意：序号上限为3000，不能超过上限。
          * @type {number || null}
          */
         this.SeqId = null;
@@ -269,25 +302,31 @@ class KeywordEvaluateRequest extends  AbstractModel {
         this.IsEnd = null;
 
         /**
-         * 语音文件类型 	1: raw, 2: wav, 3: mp3, 4: speex (语言文件格式目前仅支持 16k 采样率 16bit 编码单声道，如有不一致可能导致评估不准确或失败)。
+         * 语音文件类型
+1: raw
+2: wav
+3: mp3
+4: speex
+语音文件格式目前仅支持 16k 采样率 16bit 编码单声道，如有不一致可能导致评估不准确或失败。
          * @type {number || null}
          */
         this.VoiceFileType = null;
 
         /**
-         * 语音编码类型	1:pcm。
+         * 语音编码类型
+1:pcm
          * @type {number || null}
          */
         this.VoiceEncodeType = null;
 
         /**
-         * 当前数据包数据, 流式模式下数据包大小可以按需设置，在网络良好的情况下，建议设置为0.5k，且必须保证分片帧完整（16bit的数据必须保证音频长度为偶数），编码格式要求为BASE64。
+         * 当前数据包数据, 流式模式下数据包大小可以按需设置，在网络良好的情况下，建议设置为1k，且必须保证分片帧完整（16bit的数据必须保证音频长度为偶数），编码格式要求为BASE64。
          * @type {string || null}
          */
         this.UserVoiceData = null;
 
         /**
-         * 语音段唯一标识，一个完整语音一个SessionId。
+         * 语音段唯一标识，一段完整语音使用一个SessionId，不同语音段的评测需要使用不同的SessionId。一般使用uuid(通用唯一识别码)来作为它的值，要尽量保证SessionId的唯一性。
          * @type {string || null}
          */
         this.SessionId = null;
@@ -299,7 +338,7 @@ class KeywordEvaluateRequest extends  AbstractModel {
         this.Keywords = null;
 
         /**
-         * 业务应用ID，与账号应用APPID无关，是用来方便客户管理服务的参数，新的 SoeAppId 可以在[控制台](https://console.cloud.tencent.com/soe)【应用管理】下新建。
+         * 业务应用ID，与账号应用APPID无关，是用来方便客户管理服务的参数，新的 SoeAppId 可以在[控制台](https://console.cloud.tencent.com/soe)【应用管理】下新建。如果没有新建SoeAppId，请勿填入该参数，否则会报欠费错误。
          * @type {string || null}
          */
         this.SoeAppId = null;
@@ -350,6 +389,7 @@ class TransmitOralProcessRequest extends  AbstractModel {
 
         /**
          * 流式数据包的序号，从1开始，当IsEnd字段为1后后续序号无意义，当IsLongLifeSession不为1且为非流式模式时无意义。
+注意：序号上限为3000，不能超过上限。
          * @type {number || null}
          */
         this.SeqId = null;
@@ -361,13 +401,19 @@ class TransmitOralProcessRequest extends  AbstractModel {
         this.IsEnd = null;
 
         /**
-         * 语音文件类型 	1:raw, 2:wav, 3:mp3(三种格式目前仅支持16k采样率16bit编码单声道，如有不一致可能导致评估不准确或失败)。
+         * 语音文件类型
+1: raw
+2: wav
+3: mp3
+4: speex
+语音文件格式目前仅支持 16k 采样率 16bit 编码单声道，如有不一致可能导致评估不准确或失败。
          * @type {number || null}
          */
         this.VoiceFileType = null;
 
         /**
-         * 语音编码类型	1:pcm。
+         * 语音编码类型
+1:pcm
          * @type {number || null}
          */
         this.VoiceEncodeType = null;
@@ -379,13 +425,13 @@ class TransmitOralProcessRequest extends  AbstractModel {
         this.UserVoiceData = null;
 
         /**
-         * 语音段唯一标识，一个完整语音一个SessionId。
+         * 语音段唯一标识，一段完整语音使用一个SessionId，不同语音段的评测需要使用不同的SessionId。一般使用uuid(通用唯一识别码)来作为它的值，要尽量保证SessionId的唯一性。
          * @type {string || null}
          */
         this.SessionId = null;
 
         /**
-         * 业务应用ID，与账号应用APPID无关，是用来方便客户管理服务的参数，新的 SoeAppId 可以在[控制台](https://console.cloud.tencent.com/soe)【应用管理】下新建。
+         * 业务应用ID，与账号应用APPID无关，是用来方便客户管理服务的参数，新的 SoeAppId 可以在[控制台](https://console.cloud.tencent.com/soe)【应用管理】下新建。如果没有新建SoeAppId，请勿填入该参数，否则会报欠费错误。
          * @type {string || null}
          */
         this.SoeAppId = null;
@@ -581,7 +627,7 @@ class KeywordEvaluateResponse extends  AbstractModel {
         this.KeywordScores = null;
 
         /**
-         * 语音段唯一标识，一段语音一个SessionId
+         * 语音段唯一标识，一段完整语音使用一个SessionId，不同语音段的评测需要使用不同的SessionId。一般使用uuid(通用唯一识别码)来作为它的值，要尽量保证SessionId的唯一性。
          * @type {string || null}
          */
         this.SessionId = null;
@@ -649,7 +695,7 @@ class PhoneInfo extends  AbstractModel {
         this.DetectedStress = null;
 
         /**
-         * 当前音节
+         * 当前音节，当前评测识别的音素
          * @type {string || null}
          */
         this.Phone = null;
@@ -672,6 +718,12 @@ class PhoneInfo extends  AbstractModel {
          */
         this.MatchTag = null;
 
+        /**
+         * 参考字符，在单词诊断模式下，代表音素对应的原始文本
+         * @type {string || null}
+         */
+        this.ReferenceLetter = null;
+
     }
 
     /**
@@ -689,6 +741,7 @@ class PhoneInfo extends  AbstractModel {
         this.Stress = 'Stress' in params ? params.Stress : null;
         this.ReferencePhone = 'ReferencePhone' in params ? params.ReferencePhone : null;
         this.MatchTag = 'MatchTag' in params ? params.MatchTag : null;
+        this.ReferenceLetter = 'ReferenceLetter' in params ? params.ReferenceLetter : null;
 
     }
 }
@@ -860,6 +913,7 @@ class TransmitOralProcessWithInitRequest extends  AbstractModel {
 
         /**
          * 流式数据包的序号，从1开始，当IsEnd字段为1后后续序号无意义，当IsLongLifeSession不为1且为非流式模式时无意义。
+注意：序号上限为3000，不能超过上限。
          * @type {number || null}
          */
         this.SeqId = null;
@@ -902,7 +956,8 @@ class TransmitOralProcessWithInitRequest extends  AbstractModel {
 
         /**
          * 被评估语音对应的文本，仅支持中文和英文。
-句子模式下不超过个 30 单词或者中文文字，段落模式不超过 120 单词或者中文文字，中文评估使用 utf-8 编码，自由说模式该值无效。
+句子模式下不超过个 30 单词或者中文文字，段落模式不超过 120 单词或者中文文字，中文评估使用 utf-8 编码，自由说模式RefText可以不填。
+关于RefText的文本键入要求，请参考[评测模式介绍](https://cloud.tencent.com/document/product/884/56131)。
 如需要在评测模式下使用自定义注音（支持中英文），可以通过设置「TextMode」参数实现，设置方式请参考[音素标注](https://cloud.tencent.com/document/product/884/33698)。
          * @type {string || null}
          */
@@ -928,6 +983,7 @@ class TransmitOralProcessWithInitRequest extends  AbstractModel {
 6：句子多分支评测模式
 7：单词实时评测模式
 8：拼音评测模式
+关于每种评测模式的详细介绍，以及适用场景，请参考[评测模式介绍](https://cloud.tencent.com/document/product/884/56131)。
          * @type {number || null}
          */
         this.EvalMode = null;
@@ -947,12 +1003,8 @@ class TransmitOralProcessWithInitRequest extends  AbstractModel {
         this.SoeAppId = null;
 
         /**
-         * 音频存储模式
-0：不存储
-1：存储到公共对象存储，不会产生费用，存储时间为一个月。输出结果为该会话最后一个分片TransmitOralProcess 返回结果 AudioUrl 字段；
-2：永久存储音频，需要提工单申请，会产生一定的存储费用；
-3：自定义存储，将音频存储到自定义的腾讯云[对象存储](https://cloud.tencent.com/product/cos)中，需要提工单登记存储信息。关于自定义存储cos基础设置的方式，请查看下文自定义存储cos基础设置流程。
-注：对可用性要求较高的用户建议自行存储至腾讯云COS。
+         * 音频存储模式，此参数已废弃，无需设置，设置与否都默认为0不存储；
+注：有存储需求的用户建议自行存储至腾讯云COS[对象存储](https://cloud.tencent.com/product/cos)使用。
          * @type {number || null}
          */
         this.StorageMode = null;
@@ -970,6 +1022,7 @@ class TransmitOralProcessWithInitRequest extends  AbstractModel {
          * 评估语言
 0：英文
 1：中文
+ServerType不填默认为0
          * @type {number || null}
          */
         this.ServerType = null;
@@ -1085,7 +1138,7 @@ class TransmitOralProcessWithInitResponse extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 建议评分，取值范围[0,100]，评分方式为建议评分 = 准确度（PronAccuracyfloat）× 完整度（PronCompletionfloat）×（2 - 完整度（PronCompletionfloat）），如若评分策略不符合请参考Words数组中的详细分数自定义评分逻辑。
+         * 建议评分，取值范围[0,100]，评分方式为建议评分 = 准确度（PronAccuracy）× 完整度（PronCompletion）×（2 - 完整度（PronCompletion）），如若评分策略不符合请参考Words数组中的详细分数自定义评分逻辑。
          * @type {number || null}
          */
         this.SuggestedScore = null;

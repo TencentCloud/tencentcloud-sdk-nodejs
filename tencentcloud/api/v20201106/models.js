@@ -17,6 +17,119 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * 地域管理系统支持的产品信息
+ * @class
+ */
+class RegionProduct extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品名称，如cvm
+         * @type {string || null}
+         */
+        this.Name = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+
+    }
+}
+
+/**
+ * DescribeProducts请求参数结构体
+ * @class
+ */
+class DescribeProductsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回数量，默认为 20，最大值为 100。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量，默认为 0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
+ * DescribeProducts返回参数结构体
+ * @class
+ */
+class DescribeProductsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品详细信息列表。
+         * @type {Array.<RegionProduct> || null}
+         */
+        this.Products = null;
+
+        /**
+         * 产品总数量。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Products) {
+            this.Products = new Array();
+            for (let z in params.Products) {
+                let obj = new RegionProduct();
+                obj.deserialize(params.Products[z]);
+                this.Products.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 可用区信息
  * @class
  */
@@ -118,7 +231,7 @@ class DescribeZonesRequest extends  AbstractModel {
         super();
 
         /**
-         * 待查询产品的名称，例如cvm、vpc
+         * 待查询产品的名称，例如cvm
          * @type {string || null}
          */
         this.Product = null;
@@ -288,7 +401,7 @@ class DescribeRegionsRequest extends  AbstractModel {
         super();
 
         /**
-         * 待查询产品的名称，例如cvm、vpc
+         * 待查询产品的名称，例如cvm
          * @type {string || null}
          */
         this.Product = null;
@@ -308,6 +421,9 @@ class DescribeRegionsRequest extends  AbstractModel {
 }
 
 module.exports = {
+    RegionProduct: RegionProduct,
+    DescribeProductsRequest: DescribeProductsRequest,
+    DescribeProductsResponse: DescribeProductsResponse,
     ZoneInfo: ZoneInfo,
     DescribeZonesRequest: DescribeZonesRequest,
     DescribeZonesResponse: DescribeZonesResponse,

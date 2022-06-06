@@ -89,7 +89,7 @@ request：请求数，单位为 次
 1 天	 1，5，15，30，60，120，240，1440 
 2 ~ 3 天	15，30，60，120，240，1440
 4 ~ 7 天	30，60，120，240，1440
-8 ~ 90 天	 60，120，240，1440
+8 ~ 31 天	 60，120，240，1440
          * @type {number || null}
          */
         this.Interval = null;
@@ -218,6 +218,181 @@ class DescribeDomainsConfigResponse extends  AbstractModel {
 }
 
 /**
+ * 回源的自定义Https配置
+ * @class
+ */
+class AdvanceHttps extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 自定义Tls数据开关
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CustomTlsStatus = null;
+
+        /**
+         * Tls版本列表，支持设置 TLSv1, TLSV1.1, TLSV1.2, TLSv1.3，修改时必须开启连续的版本
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.TlsVersion = null;
+
+        /**
+         * 自定义加密套件
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Cipher = null;
+
+        /**
+         * 回源双向校验开启状态
+off - 关闭校验
+oneWay - 校验源站
+twoWay - 双向校验
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.VerifyOriginType = null;
+
+        /**
+         * 回源层证书配置信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {ServerCert || null}
+         */
+        this.CertInfo = null;
+
+        /**
+         * 源站证书配置信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {ClientCert || null}
+         */
+        this.OriginCertInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CustomTlsStatus = 'CustomTlsStatus' in params ? params.CustomTlsStatus : null;
+        this.TlsVersion = 'TlsVersion' in params ? params.TlsVersion : null;
+        this.Cipher = 'Cipher' in params ? params.Cipher : null;
+        this.VerifyOriginType = 'VerifyOriginType' in params ? params.VerifyOriginType : null;
+
+        if (params.CertInfo) {
+            let obj = new ServerCert();
+            obj.deserialize(params.CertInfo)
+            this.CertInfo = obj;
+        }
+
+        if (params.OriginCertInfo) {
+            let obj = new ClientCert();
+            obj.deserialize(params.OriginCertInfo)
+            this.OriginCertInfo = obj;
+        }
+
+    }
+}
+
+/**
+ * CreateVerifyRecord返回参数结构体
+ * @class
+ */
+class CreateVerifyRecordResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 子解析
+         * @type {string || null}
+         */
+        this.SubDomain = null;
+
+        /**
+         * 解析值
+         * @type {string || null}
+         */
+        this.Record = null;
+
+        /**
+         * 解析类型
+         * @type {string || null}
+         */
+        this.RecordType = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SubDomain = 'SubDomain' in params ? params.SubDomain : null;
+        this.Record = 'Record' in params ? params.Record : null;
+        this.RecordType = 'RecordType' in params ? params.RecordType : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 查询对象及其对应的访问明细数据
+ * @class
+ */
+class ResourceData extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 资源名称，根据查询条件不同分为以下几类：
+具体域名：表示该域名明细数据
+multiDomains：表示多域名汇总明细数据
+项目 ID：指定项目查询时，显示为项目 ID
+all：账号维度明细数据
+         * @type {string || null}
+         */
+        this.Resource = null;
+
+        /**
+         * 资源对应的数据明细
+         * @type {EcdnData || null}
+         */
+        this.EcdnData = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Resource = 'Resource' in params ? params.Resource : null;
+
+        if (params.EcdnData) {
+            let obj = new EcdnData();
+            obj.deserialize(params.EcdnData)
+            this.EcdnData = obj;
+        }
+
+    }
+}
+
+/**
  * 域名https配置。
  * @class
  */
@@ -326,99 +501,6 @@ class Https extends  AbstractModel {
 }
 
 /**
- * CreateVerifyRecord返回参数结构体
- * @class
- */
-class CreateVerifyRecordResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 子解析
-         * @type {string || null}
-         */
-        this.SubDomain = null;
-
-        /**
-         * 解析值
-         * @type {string || null}
-         */
-        this.Record = null;
-
-        /**
-         * 解析类型
-         * @type {string || null}
-         */
-        this.RecordType = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.SubDomain = 'SubDomain' in params ? params.SubDomain : null;
-        this.Record = 'Record' in params ? params.Record : null;
-        this.RecordType = 'RecordType' in params ? params.RecordType : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * 查询对象及其对应的访问明细数据
- * @class
- */
-class ResourceData extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 资源名称，根据查询条件不同分为以下几类：
-具体域名：表示该域名明细数据
-multiDomains：表示多域名汇总明细数据
-项目 ID：指定项目查询时，显示为项目 ID
-all：账号维度明细数据
-         * @type {string || null}
-         */
-        this.Resource = null;
-
-        /**
-         * 资源对应的数据明细
-         * @type {EcdnData || null}
-         */
-        this.EcdnData = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Resource = 'Resource' in params ? params.Resource : null;
-
-        if (params.EcdnData) {
-            let obj = new EcdnData();
-            obj.deserialize(params.EcdnData)
-            this.EcdnData = obj;
-        }
-
-    }
-}
-
-/**
  * 缓存配置简单版本，该版本不支持设置源站未返回max-age情况下的缓存规则。
  * @class
  */
@@ -506,6 +588,56 @@ class ForceRedirect extends  AbstractModel {
         this.Switch = 'Switch' in params ? params.Switch : null;
         this.RedirectType = 'RedirectType' in params ? params.RedirectType : null;
         this.RedirectStatusCode = 'RedirectStatusCode' in params ? params.RedirectStatusCode : null;
+
+    }
+}
+
+/**
+ * DescribeIpStatus返回参数结构体
+ * @class
+ */
+class DescribeIpStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 节点列表
+         * @type {Array.<IpStatus> || null}
+         */
+        this.Ips = null;
+
+        /**
+         * 节点总个数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Ips) {
+            this.Ips = new Array();
+            for (let z in params.Ips) {
+                let obj = new IpStatus();
+                obj.deserialize(params.Ips[z]);
+                this.Ips.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -870,24 +1002,41 @@ class DescribePurgeTasksRequest extends  AbstractModel {
 }
 
 /**
- * DescribeEcdnStatistics返回参数结构体
+ * 域名查询时过滤条件。
  * @class
  */
-class DescribeEcdnStatisticsResponse extends  AbstractModel {
+class DomainFilter extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 指定条件查询得到的数据明细
-         * @type {Array.<ResourceData> || null}
-         */
-        this.Data = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 过滤字段名，支持的列表如下：
+- origin：主源站。
+- domain：域名。
+- resourceId：域名id。
+- status：域名状态，online，offline，processing。
+- disable：域名封禁状态，normal，unlicensed。
+- projectId：项目ID。
+- fullUrlCache：全路径缓存，on或off。
+- https：是否配置https，on，off或processing。
+- originPullProtocol：回源协议类型，支持http，follow或https。
+- area：加速区域，支持mainland，overseas或global。
+- tagKey：标签键。
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Name = null;
+
+        /**
+         * 过滤字段值。
+         * @type {Array.<string> || null}
+         */
+        this.Value = null;
+
+        /**
+         * 是否启用模糊查询，仅支持过滤字段名为origin，domain。
+         * @type {boolean || null}
+         */
+        this.Fuzzy = null;
 
     }
 
@@ -898,16 +1047,9 @@ class DescribeEcdnStatisticsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Data) {
-            this.Data = new Array();
-            for (let z in params.Data) {
-                let obj = new ResourceData();
-                obj.deserialize(params.Data[z]);
-                this.Data.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Value = 'Value' in params ? params.Value : null;
+        this.Fuzzy = 'Fuzzy' in params ? params.Fuzzy : null;
 
     }
 }
@@ -1611,6 +1753,13 @@ class DomainBriefInfo extends  AbstractModel {
          */
         this.Readonly = null;
 
+        /**
+         * 域名标签。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Tag> || null}
+         */
+        this.Tag = null;
+
     }
 
     /**
@@ -1637,6 +1786,15 @@ class DomainBriefInfo extends  AbstractModel {
         this.Disable = 'Disable' in params ? params.Disable : null;
         this.Area = 'Area' in params ? params.Area : null;
         this.Readonly = 'Readonly' in params ? params.Readonly : null;
+
+        if (params.Tag) {
+            this.Tag = new Array();
+            for (let z in params.Tag) {
+                let obj = new Tag();
+                obj.deserialize(params.Tag[z]);
+                this.Tag.push(obj);
+            }
+        }
 
     }
 }
@@ -1809,7 +1967,7 @@ class PurgePathCacheResponse extends  AbstractModel {
         super();
 
         /**
-         * 刷新任务Id，前十位为提交任务时的UTC时间。
+         * 刷新任务Id。
          * @type {string || null}
          */
         this.TaskId = null;
@@ -1844,7 +2002,7 @@ class PurgeUrlsCacheResponse extends  AbstractModel {
         super();
 
         /**
-         * 刷新任务Id，前十位为提交任务时的UTC时间。
+         * 刷新任务Id。
          * @type {string || null}
          */
         this.TaskId = null;
@@ -2450,24 +2608,18 @@ class CacheRule extends  AbstractModel {
 }
 
 /**
- * DescribeIpStatus返回参数结构体
+ * DescribeEcdnStatistics返回参数结构体
  * @class
  */
-class DescribeIpStatusResponse extends  AbstractModel {
+class DescribeEcdnStatisticsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 节点列表
-         * @type {Array.<IpStatus> || null}
+         * 指定条件查询得到的数据明细
+         * @type {Array.<ResourceData> || null}
          */
-        this.Ips = null;
-
-        /**
-         * 节点总个数
-         * @type {number || null}
-         */
-        this.TotalCount = null;
+        this.Data = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2485,15 +2637,14 @@ class DescribeIpStatusResponse extends  AbstractModel {
             return;
         }
 
-        if (params.Ips) {
-            this.Ips = new Array();
-            for (let z in params.Ips) {
-                let obj = new IpStatus();
-                obj.deserialize(params.Ips[z]);
-                this.Ips.push(obj);
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new ResourceData();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
             }
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2550,6 +2701,13 @@ class Origin extends  AbstractModel {
          */
         this.BackupOriginType = null;
 
+        /**
+         * HTTPS回源高级配置
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {AdvanceHttps || null}
+         */
+        this.AdvanceHttps = null;
+
     }
 
     /**
@@ -2565,6 +2723,12 @@ class Origin extends  AbstractModel {
         this.OriginPullProtocol = 'OriginPullProtocol' in params ? params.OriginPullProtocol : null;
         this.BackupOrigins = 'BackupOrigins' in params ? params.BackupOrigins : null;
         this.BackupOriginType = 'BackupOriginType' in params ? params.BackupOriginType : null;
+
+        if (params.AdvanceHttps) {
+            let obj = new AdvanceHttps();
+            obj.deserialize(params.AdvanceHttps)
+            this.AdvanceHttps = obj;
+        }
 
     }
 }
@@ -2670,58 +2834,6 @@ class CacheKey extends  AbstractModel {
             return;
         }
         this.FullUrlCache = 'FullUrlCache' in params ? params.FullUrlCache : null;
-
-    }
-}
-
-/**
- * 域名查询时过滤条件。
- * @class
- */
-class DomainFilter extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 过滤字段名，支持的列表如下：
-- origin：主源站。
-- domain：域名。
-- resourceId：域名id。
-- status：域名状态，online，offline，processing。
-- disable：域名封禁状态，normal，unlicensed。
-- projectId：项目ID。
-- fullUrlCache：全路径缓存，on或off。
-- https：是否配置https，on，off或processing。
-- originPullProtocol：回源协议类型，支持http，follow或https。
-- area：加速区域，支持mainland，overseas或global。
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * 过滤字段值。
-         * @type {Array.<string> || null}
-         */
-        this.Value = null;
-
-        /**
-         * 是否启用模糊查询，仅支持过滤字段名为origin，domain。
-         * @type {boolean || null}
-         */
-        this.Fuzzy = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Value = 'Value' in params ? params.Value : null;
-        this.Fuzzy = 'Fuzzy' in params ? params.Fuzzy : null;
 
     }
 }
@@ -3266,11 +3378,13 @@ module.exports = {
     DescribeEcdnStatisticsRequest: DescribeEcdnStatisticsRequest,
     StartEcdnDomainRequest: StartEcdnDomainRequest,
     DescribeDomainsConfigResponse: DescribeDomainsConfigResponse,
-    Https: Https,
+    AdvanceHttps: AdvanceHttps,
     CreateVerifyRecordResponse: CreateVerifyRecordResponse,
     ResourceData: ResourceData,
+    Https: Https,
     Cache: Cache,
     ForceRedirect: ForceRedirect,
+    DescribeIpStatusResponse: DescribeIpStatusResponse,
     DescribePurgeQuotaResponse: DescribePurgeQuotaResponse,
     DescribeEcdnDomainStatisticsResponse: DescribeEcdnDomainStatisticsResponse,
     TimestampData: TimestampData,
@@ -3279,7 +3393,7 @@ module.exports = {
     Sort: Sort,
     IpFreqLimit: IpFreqLimit,
     DescribePurgeTasksRequest: DescribePurgeTasksRequest,
-    DescribeEcdnStatisticsResponse: DescribeEcdnStatisticsResponse,
+    DomainFilter: DomainFilter,
     DomainLogs: DomainLogs,
     Hsts: Hsts,
     PurgeUrlsCacheRequest: PurgeUrlsCacheRequest,
@@ -3310,11 +3424,10 @@ module.exports = {
     IpStatus: IpStatus,
     PurgeTask: PurgeTask,
     CacheRule: CacheRule,
-    DescribeIpStatusResponse: DescribeIpStatusResponse,
+    DescribeEcdnStatisticsResponse: DescribeEcdnStatisticsResponse,
     Origin: Origin,
     ServerCert: ServerCert,
     CacheKey: CacheKey,
-    DomainFilter: DomainFilter,
     DescribeEcdnDomainStatisticsRequest: DescribeEcdnDomainStatisticsRequest,
     Quota: Quota,
     DescribeEcdnDomainLogsRequest: DescribeEcdnDomainLogsRequest,

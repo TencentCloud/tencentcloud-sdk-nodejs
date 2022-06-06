@@ -23,33 +23,50 @@ const InOutTimeInfo = models.InOutTimeInfo;
 const DescribeScanResultListResponse = models.DescribeScanResultListResponse;
 const DescribeApplicationDataRequest = models.DescribeApplicationDataRequest;
 const VoiceFilterRequest = models.VoiceFilterRequest;
+const CreateScanUserResponse = models.CreateScanUserResponse;
+const DescribeRealtimeScanConfigResponse = models.DescribeRealtimeScanConfigResponse;
 const VoiceMessageStatisticsItem = models.VoiceMessageStatisticsItem;
 const RoomUser = models.RoomUser;
 const DescribeRoomInfoRequest = models.DescribeRoomInfoRequest;
+const UpdateScanRoomsRequest = models.UpdateScanRoomsRequest;
+const DescribeFilterResultResponse = models.DescribeFilterResultResponse;
+const DescribeRealtimeScanConfigRequest = models.DescribeRealtimeScanConfigRequest;
 const DescribeScanResultListRequest = models.DescribeScanResultListRequest;
+const CreateAgeDetectTaskRequest = models.CreateAgeDetectTaskRequest;
 const RealTimeSpeechStatisticsItem = models.RealTimeSpeechStatisticsItem;
+const CreateScanUserRequest = models.CreateScanUserRequest;
 const VoiceFilterResponse = models.VoiceFilterResponse;
 const Tag = models.Tag;
+const AgeDetectTask = models.AgeDetectTask;
+const DescribeAgeDetectTaskResponse = models.DescribeAgeDetectTaskResponse;
 const VoiceMessageConf = models.VoiceMessageConf;
 const ApplicationDataStatistics = models.ApplicationDataStatistics;
-const DescribeFilterResultListResponse = models.DescribeFilterResultListResponse;
+const DeleteScanUserRequest = models.DeleteScanUserRequest;
+const ModifyAppStatusResp = models.ModifyAppStatusResp;
 const DescribeAppStatisticsResponse = models.DescribeAppStatisticsResponse;
+const UpdateScanRoomsResponse = models.UpdateScanRoomsResponse;
 const DescribeApplicationDataResponse = models.DescribeApplicationDataResponse;
 const Task = models.Task;
+const DeleteScanUserResponse = models.DeleteScanUserResponse;
+const UpdateScanUsersResponse = models.UpdateScanUsersResponse;
 const VoiceFilterStatisticsItem = models.VoiceFilterStatisticsItem;
-const StatisticsItem = models.StatisticsItem;
+const CreateAppResp = models.CreateAppResp;
 const DescribeRoomInfoResponse = models.DescribeRoomInfoResponse;
+const DescribeAgeDetectTaskRequest = models.DescribeAgeDetectTaskRequest;
+const ModifyRoomInfoRequest = models.ModifyRoomInfoRequest;
 const DescribeUserInAndOutTimeResponse = models.DescribeUserInAndOutTimeResponse;
 const VoiceFilterInfo = models.VoiceFilterInfo;
-const DescribeFilterResultResponse = models.DescribeFilterResultResponse;
+const AgeDetectTaskResult = models.AgeDetectTaskResult;
 const ModifyRoomInfoResponse = models.ModifyRoomInfoResponse;
 const DescribeScanResult = models.DescribeScanResult;
 const DescribeFilterResultListRequest = models.DescribeFilterResultListRequest;
 const VoiceFilter = models.VoiceFilter;
 const ScanDetail = models.ScanDetail;
-const ModifyRoomInfoRequest = models.ModifyRoomInfoRequest;
+const DescribeFilterResultListResponse = models.DescribeFilterResultListResponse;
+const CreateAgeDetectTaskResponse = models.CreateAgeDetectTaskResponse;
 const CreateAppRequest = models.CreateAppRequest;
 const RealtimeSpeechConf = models.RealtimeSpeechConf;
+const DescribeAppStatisticsResp = models.DescribeAppStatisticsResp;
 const ScanVoiceResult = models.ScanVoiceResult;
 const CreateAppResponse = models.CreateAppResponse;
 const DescribeAppStatisticsRequest = models.DescribeAppStatisticsRequest;
@@ -57,6 +74,8 @@ const ScanPiece = models.ScanPiece;
 const ModifyAppStatusResponse = models.ModifyAppStatusResponse;
 const ScanVoiceRequest = models.ScanVoiceRequest;
 const VoiceFilterConf = models.VoiceFilterConf;
+const UpdateScanUsersRequest = models.UpdateScanUsersRequest;
+const StatisticsItem = models.StatisticsItem;
 const DescribeFilterResultRequest = models.DescribeFilterResultRequest;
 const DescribeUserInAndOutTimeRequest = models.DescribeUserInAndOutTimeRequest;
 
@@ -72,25 +91,36 @@ class GmeClient extends AbstractClient {
     }
     
     /**
-     * 获取房间内用户信息
-     * @param {DescribeRoomInfoRequest} req
-     * @param {function(string, DescribeRoomInfoResponse):void} cb
+     * 根据应用ID和文件ID查询识别结果
+     * @param {DescribeFilterResultRequest} req
+     * @param {function(string, DescribeFilterResultResponse):void} cb
      * @public
      */
-    DescribeRoomInfo(req, cb) {
-        let resp = new DescribeRoomInfoResponse();
-        this.request("DescribeRoomInfo", req, resp, cb);
+    DescribeFilterResult(req, cb) {
+        let resp = new DescribeFilterResultResponse();
+        this.request("DescribeFilterResult", req, resp, cb);
     }
 
     /**
-     * 本接口(DescribeAppStatistics)用于获取某个GME应用的用量数据。包括实时语音，语音消息及转文本，语音分析等。最长查询周期为最近30天。
-     * @param {DescribeAppStatisticsRequest} req
-     * @param {function(string, DescribeAppStatisticsResponse):void} cb
+     * 更新自定义送检房间号
+     * @param {UpdateScanRoomsRequest} req
+     * @param {function(string, UpdateScanRoomsResponse):void} cb
      * @public
      */
-    DescribeAppStatistics(req, cb) {
-        let resp = new DescribeAppStatisticsResponse();
-        this.request("DescribeAppStatistics", req, resp, cb);
+    UpdateScanRooms(req, cb) {
+        let resp = new UpdateScanRoomsResponse();
+        this.request("UpdateScanRooms", req, resp, cb);
+    }
+
+    /**
+     * 本接口(CreateApp)用于创建一个GME应用。
+     * @param {CreateAppRequest} req
+     * @param {function(string, CreateAppResponse):void} cb
+     * @public
+     */
+    CreateApp(req, cb) {
+        let resp = new CreateAppResponse();
+        this.request("CreateApp", req, resp, cb);
     }
 
     /**
@@ -106,9 +136,9 @@ class GmeClient extends AbstractClient {
     }
 
     /**
-     * 本接口用于识别涉黄、涉政等违规音频，成功会回调配置在应用的回调地址。回调示例如下：
+     * 本接口用于识别涉黄等违规音频，成功会回调配置在应用的回调地址。回调示例如下：
 {"BizId":0,"FileId":"test_file_id","FileName":"test_file_name","FileUrl":"test_file_url","OpenId":"test_open_id","TimeStamp":"0000-00-00 00:00:00","Data":[{"Type":1,"Word":"xx"}]}
-Type表示过滤类型，1：政治，2：色情，3：谩骂
+Type表示过滤类型，1：色情，2：谩骂
      * @param {VoiceFilterRequest} req
      * @param {function(string, VoiceFilterResponse):void} cb
      * @public
@@ -130,17 +160,6 @@ Type表示过滤类型，1：政治，2：色情，3：谩骂
     }
 
     /**
-     * 根据应用ID和文件ID查询识别结果
-     * @param {DescribeFilterResultRequest} req
-     * @param {function(string, DescribeFilterResultResponse):void} cb
-     * @public
-     */
-    DescribeFilterResult(req, cb) {
-        let resp = new DescribeFilterResultResponse();
-        this.request("DescribeFilterResult", req, resp, cb);
-    }
-
-    /**
      * 根据日期查询识别结果列表
      * @param {DescribeFilterResultListRequest} req
      * @param {function(string, DescribeFilterResultListResponse):void} cb
@@ -149,6 +168,39 @@ Type表示过滤类型，1：政治，2：色情，3：谩骂
     DescribeFilterResultList(req, cb) {
         let resp = new DescribeFilterResultListResponse();
         this.request("DescribeFilterResultList", req, resp, cb);
+    }
+
+    /**
+     * 删除自定义送检用户
+     * @param {DeleteScanUserRequest} req
+     * @param {function(string, DeleteScanUserResponse):void} cb
+     * @public
+     */
+    DeleteScanUser(req, cb) {
+        let resp = new DeleteScanUserResponse();
+        this.request("DeleteScanUser", req, resp, cb);
+    }
+
+    /**
+     * 更新自定义送检用户号
+     * @param {UpdateScanUsersRequest} req
+     * @param {function(string, UpdateScanUsersResponse):void} cb
+     * @public
+     */
+    UpdateScanUsers(req, cb) {
+        let resp = new UpdateScanUsersResponse();
+        this.request("UpdateScanUsers", req, resp, cb);
+    }
+
+    /**
+     * 本接口(DescribeAppStatistics)用于获取某个GME应用的用量数据。包括实时语音，语音消息及转文本，语音分析等。最长查询周期为最近30天。
+     * @param {DescribeAppStatisticsRequest} req
+     * @param {function(string, DescribeAppStatisticsResponse):void} cb
+     * @public
+     */
+    DescribeAppStatistics(req, cb) {
+        let resp = new DescribeAppStatisticsResponse();
+        this.request("DescribeAppStatistics", req, resp, cb);
     }
 
     /**
@@ -162,7 +214,7 @@ Type表示过滤类型，1：政治，2：色情，3：谩骂
 <h4><b>接口功能说明：</b></h4>
 <li>支持对语音流或语音文件进行检测，判断其中是否包含违规内容。</li>
 <li>支持设置回调地址 Callback 获取检测结果，同时支持通过接口(查询语音检测结果)主动轮询获取检测结果。</li>
-<li>支持场景输入，包括：谩骂、色情、涉政等场景</li>
+<li>支持场景输入，包括：谩骂、色情等场景</li>
 <li>支持批量提交检测任务。检测任务列表最多支持100个。</li>
 </br>
 <h4><b>音频文件限制说明：</b></h4>
@@ -193,10 +245,8 @@ Type表示过滤类型，1：政治，2：色情，3：谩骂
 <td>
 <p>normal:正常文本</p>
 <p>porn:色情</p>
-<p>politics:涉政</p>
 <p>abuse:谩骂</p>
 <p>ad :广告</p>
-<p>terrorism:暴恐</p>
 <p>contraband :违禁</p>
 <p>customized:自定义词库。目前白名单开放，如有需要请<a href="https://cloud.tencent.com/apply/p/8809fjcik56">联系我们</a>。</p>
 </td>
@@ -310,14 +360,35 @@ Type表示过滤类型，1：政治，2：色情，3：谩骂
     }
 
     /**
-     * 本接口(CreateApp)用于创建一个GME应用。
-     * @param {CreateAppRequest} req
-     * @param {function(string, CreateAppResponse):void} cb
+     * 新增自定义送检用户
+     * @param {CreateScanUserRequest} req
+     * @param {function(string, CreateScanUserResponse):void} cb
      * @public
      */
-    CreateApp(req, cb) {
-        let resp = new CreateAppResponse();
-        this.request("CreateApp", req, resp, cb);
+    CreateScanUser(req, cb) {
+        let resp = new CreateScanUserResponse();
+        this.request("CreateScanUser", req, resp, cb);
+    }
+
+    /**
+     * 用于创建年龄语音识别任务的接口，请求频率10次/秒。该接口目前通过白名单开放试用，如有需求，请提交工单申请。
+</br>
+<h4><b>接口功能说明：</b></h4>
+<li>支持对语音文件进行检测，判断是否为未成年人。</li>
+<li>支持批量提交检测子任务。检测子任务列表最多支持100个。</li>
+</br>
+<h4><b>音频文件限制说明：</b></h4>
+<li>音频文件大小限制：10 M</li>
+<li>音频文件时长限制：3分钟</li>
+<li>音频文件格式支持的类型：.wav、.m4a、.amr、.mp3、.aac、.wma、.ogg</li>
+</br>
+     * @param {CreateAgeDetectTaskRequest} req
+     * @param {function(string, CreateAgeDetectTaskResponse):void} cb
+     * @public
+     */
+    CreateAgeDetectTask(req, cb) {
+        let resp = new CreateAgeDetectTaskResponse();
+        this.request("CreateAgeDetectTask", req, resp, cb);
     }
 
     /**
@@ -332,6 +403,17 @@ Type表示过滤类型，1：政治，2：色情，3：谩骂
     }
 
     /**
+     * 获取用户自定义送检信息
+     * @param {DescribeRealtimeScanConfigRequest} req
+     * @param {function(string, DescribeRealtimeScanConfigResponse):void} cb
+     * @public
+     */
+    DescribeRealtimeScanConfig(req, cb) {
+        let resp = new DescribeRealtimeScanConfigResponse();
+        this.request("DescribeRealtimeScanConfig", req, resp, cb);
+    }
+
+    /**
      * 拉取用户在房间得进出时间
      * @param {DescribeUserInAndOutTimeRequest} req
      * @param {function(string, DescribeUserInAndOutTimeResponse):void} cb
@@ -340,6 +422,28 @@ Type表示过滤类型，1：政治，2：色情，3：谩骂
     DescribeUserInAndOutTime(req, cb) {
         let resp = new DescribeUserInAndOutTimeResponse();
         this.request("DescribeUserInAndOutTime", req, resp, cb);
+    }
+
+    /**
+     * 获取房间内用户信息
+     * @param {DescribeRoomInfoRequest} req
+     * @param {function(string, DescribeRoomInfoResponse):void} cb
+     * @public
+     */
+    DescribeRoomInfo(req, cb) {
+        let resp = new DescribeRoomInfoResponse();
+        this.request("DescribeRoomInfo", req, resp, cb);
+    }
+
+    /**
+     * 查询年龄语音识别任务结果，请求频率10次/秒。该接口目前通过白名单开放试用，如有需求，请提交工单申请。
+     * @param {DescribeAgeDetectTaskRequest} req
+     * @param {function(string, DescribeAgeDetectTaskResponse):void} cb
+     * @public
+     */
+    DescribeAgeDetectTask(req, cb) {
+        let resp = new DescribeAgeDetectTaskResponse();
+        this.request("DescribeAgeDetectTask", req, resp, cb);
     }
 
 

@@ -67,7 +67,7 @@ class AgentClientElem extends  AbstractModel {
         this.HasOverdueBill = null;
 
         /**
-         * 1:待代理商审核;2:待腾讯云审核
+         * 1:待代理商审核;2:待腾讯云审核4:待腾讯云渠道审批
          * @type {number || null}
          */
         this.Status = null;
@@ -85,6 +85,13 @@ class AgentClientElem extends  AbstractModel {
          * @type {string || null}
          */
         this.SalesName = null;
+
+        /**
+         * 客户名称，此字段和控制台返回一致。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ClientName = null;
 
     }
 
@@ -105,6 +112,7 @@ class AgentClientElem extends  AbstractModel {
         this.Status = 'Status' in params ? params.Status : null;
         this.SalesUin = 'SalesUin' in params ? params.SalesUin : null;
         this.SalesName = 'SalesName' in params ? params.SalesName : null;
+        this.ClientName = 'ClientName' in params ? params.ClientName : null;
 
     }
 }
@@ -194,30 +202,42 @@ class DescribeAgentDealsCacheRequest extends  AbstractModel {
 }
 
 /**
- * DescribeClientBaseInfo返回参数结构体
+ * DescribeSalesmans请求参数结构体
  * @class
  */
-class DescribeClientBaseInfoResponse extends  AbstractModel {
+class DescribeSalesmansRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 代客基础信息数组
-         * @type {Array.<ClientBaseElem> || null}
-         */
-        this.ClientBaseSet = null;
-
-        /**
-         * 符合条件的代客数
+         * 偏移量
          * @type {number || null}
          */
-        this.TotalCount = null;
+        this.Offset = null;
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 限制数目
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 业务员姓名(模糊查询)
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.SalesName = null;
+
+        /**
+         * 业务员ID
+         * @type {string || null}
+         */
+        this.SalesUin = null;
+
+        /**
+         * ASC/DESC， 不区分大小写，按创建通过时间排序
+         * @type {string || null}
+         */
+        this.OrderDirection = null;
 
     }
 
@@ -228,17 +248,11 @@ class DescribeClientBaseInfoResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.ClientBaseSet) {
-            this.ClientBaseSet = new Array();
-            for (let z in params.ClientBaseSet) {
-                let obj = new ClientBaseElem();
-                obj.deserialize(params.ClientBaseSet[z]);
-                this.ClientBaseSet.push(obj);
-            }
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.SalesName = 'SalesName' in params ? params.SalesName : null;
+        this.SalesUin = 'SalesUin' in params ? params.SalesUin : null;
+        this.OrderDirection = 'OrderDirection' in params ? params.OrderDirection : null;
 
     }
 }
@@ -306,7 +320,7 @@ class DescribeAgentAuditedClientsRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * 客户类型：可以为new(新拓)/assign(指定)/old(存量)/空
+         * 客户类型：可以为new(新拓)/assign(指定)/old(存量已关联)/old_newchecking(存量-新关联考核中)/old_newnotpass(存量-新关联未达标)/direct(直销)/direct_newopp(直销(新商机))/空
          * @type {string || null}
          */
         this.ClientType = null;
@@ -850,10 +864,16 @@ class DescribeAgentPayDealsV2Request extends  AbstractModel {
         this.OwnerUins = null;
 
         /**
-         * 订单号列表
+         * 子订单号列表
          * @type {Array.<string> || null}
          */
         this.DealNames = null;
+
+        /**
+         * 大订单号列表
+         * @type {Array.<string> || null}
+         */
+        this.BigDealIds = null;
 
     }
 
@@ -872,6 +892,7 @@ class DescribeAgentPayDealsV2Request extends  AbstractModel {
         this.Status = 'Status' in params ? params.Status : null;
         this.OwnerUins = 'OwnerUins' in params ? params.OwnerUins : null;
         this.DealNames = 'DealNames' in params ? params.DealNames : null;
+        this.BigDealIds = 'BigDealIds' in params ? params.BigDealIds : null;
 
     }
 }
@@ -993,90 +1014,6 @@ class RemovePayRelationForClientResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeSalesmans请求参数结构体
- * @class
- */
-class DescribeSalesmansRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 偏移量
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * 限制数目
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * 业务员姓名(模糊查询)
-         * @type {string || null}
-         */
-        this.SalesName = null;
-
-        /**
-         * 业务员ID
-         * @type {string || null}
-         */
-        this.SalesUin = null;
-
-        /**
-         * ASC/DESC， 不区分大小写，按创建通过时间排序
-         * @type {string || null}
-         */
-        this.OrderDirection = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.SalesName = 'SalesName' in params ? params.SalesName : null;
-        this.SalesUin = 'SalesUin' in params ? params.SalesUin : null;
-        this.OrderDirection = 'OrderDirection' in params ? params.OrderDirection : null;
-
-    }
-}
-
-/**
- * DescribeClientBaseInfo请求参数结构体
- * @class
- */
-class DescribeClientBaseInfoRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 代客UIN
-         * @type {string || null}
-         */
-        this.ClientUin = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ClientUin = 'ClientUin' in params ? params.ClientUin : null;
 
     }
 }
@@ -1457,13 +1394,13 @@ class AgentDealNewElem extends  AbstractModel {
         super();
 
         /**
-         * 订单自增 ID
+         * 订单自增 ID【请勿依赖该字段作为唯一标识】
          * @type {string || null}
          */
         this.DealId = null;
 
         /**
-         * 订单号
+         * 订单号【订单唯一键】
          * @type {string || null}
          */
         this.DealName = null;
@@ -1586,7 +1523,7 @@ class AgentDealNewElem extends  AbstractModel {
         this.BigDealId = null;
 
         /**
-         * 客户类型（new：新拓；old：存量；assign：指派）
+         * 客户类型（new：自拓；old：官网；assign：指派；direct：直销；direct_newopp：直销(新商机)）
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -1633,6 +1570,20 @@ class AgentDealNewElem extends  AbstractModel {
          * @type {Array.<ProductInfoElem> || null}
          */
         this.ProductInfo = null;
+
+        /**
+         * 付款方式
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.PaymentMethod = null;
+
+        /**
+         * 订单更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
 
     }
 
@@ -1682,6 +1633,8 @@ class AgentDealNewElem extends  AbstractModel {
                 this.ProductInfo.push(obj);
             }
         }
+        this.PaymentMethod = 'PaymentMethod' in params ? params.PaymentMethod : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
 
     }
 }
@@ -1814,10 +1767,16 @@ class DescribeAgentSelfPayDealsV2Request extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 订单号列表
+         * 子订单号列表
          * @type {Array.<string> || null}
          */
         this.DealNames = null;
+
+        /**
+         * 大订单号列表
+         * @type {Array.<string> || null}
+         */
+        this.BigDealIds = null;
 
     }
 
@@ -1836,6 +1795,7 @@ class DescribeAgentSelfPayDealsV2Request extends  AbstractModel {
         this.Order = 'Order' in params ? params.Order : null;
         this.Status = 'Status' in params ? params.Status : null;
         this.DealNames = 'DealNames' in params ? params.DealNames : null;
+        this.BigDealIds = 'BigDealIds' in params ? params.BigDealIds : null;
 
     }
 }
@@ -1965,7 +1925,7 @@ class AgentAuditedClient extends  AbstractModel {
         this.HasOverdueBill = null;
 
         /**
-         * 客户类型：可以为new(新拓)/assign(指定)/old(存量)/direct(直销)/direct_newopp(直销(新商机))/空
+         * 客户类型：可以为new(自拓)/assign(指派)/old(官网)/direct(直销)/direct_newopp(直销(新商机))/空
          * @type {string || null}
          */
         this.ClientType = null;
@@ -2097,56 +2057,6 @@ class DescribeUnbindClientListRequest extends  AbstractModel {
 }
 
 /**
- * DescribeRebateInfos返回参数结构体
- * @class
- */
-class DescribeRebateInfosResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 返佣信息列表
-         * @type {Array.<RebateInfoElem> || null}
-         */
-        this.RebateInfoSet = null;
-
-        /**
-         * 符合查询条件返佣信息数目
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.RebateInfoSet) {
-            this.RebateInfoSet = new Array();
-            for (let z in params.RebateInfoSet) {
-                let obj = new RebateInfoElem();
-                obj.deserialize(params.RebateInfoSet[z]);
-                this.RebateInfoSet.push(obj);
-            }
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * DescribeAgentPayDeals返回参数结构体
  * @class
  */
@@ -2205,10 +2115,16 @@ class DealGoodsPriceElem extends  AbstractModel {
         super();
 
         /**
-         * 实付金额
+         * 实付金额（单位：分）
          * @type {number || null}
          */
         this.RealTotalCost = null;
+
+        /**
+         * 订单实际金额（不含折扣，单位：分）
+         * @type {number || null}
+         */
+        this.OriginalTotalCost = null;
 
     }
 
@@ -2220,6 +2136,7 @@ class DealGoodsPriceElem extends  AbstractModel {
             return;
         }
         this.RealTotalCost = 'RealTotalCost' in params ? params.RealTotalCost : null;
+        this.OriginalTotalCost = 'OriginalTotalCost' in params ? params.OriginalTotalCost : null;
 
     }
 }
@@ -2275,10 +2192,16 @@ class DescribeAgentDealsByCacheRequest extends  AbstractModel {
         this.OwnerUins = null;
 
         /**
-         * 订单号列表
+         * 子订单号列表
          * @type {Array.<string> || null}
          */
         this.DealNames = null;
+
+        /**
+         * 大订单号列表
+         * @type {Array.<string> || null}
+         */
+        this.BigDealIds = null;
 
         /**
          * 支付方式，0：自付；1：代付
@@ -2303,6 +2226,7 @@ class DescribeAgentDealsByCacheRequest extends  AbstractModel {
         this.Status = 'Status' in params ? params.Status : null;
         this.OwnerUins = 'OwnerUins' in params ? params.OwnerUins : null;
         this.DealNames = 'DealNames' in params ? params.DealNames : null;
+        this.BigDealIds = 'BigDealIds' in params ? params.BigDealIds : null;
         this.PayerMode = 'PayerMode' in params ? params.PayerMode : null;
 
     }
@@ -2645,7 +2569,7 @@ class AgentBillElem extends  AbstractModel {
         this.PayerMode = null;
 
         /**
-         * 客户类型：可以为new(新拓)/assign(指定)/old(存量)/空
+         * 客户类型：可以为new(自拓)/assign(指定)/old(官网)/direct(直销)/direct_newopp(直销(新商机))/空
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -2748,42 +2672,30 @@ class AuditApplyClientResponse extends  AbstractModel {
 }
 
 /**
- * 代客基础信息
+ * DescribeAgentDealsCache返回参数结构体
  * @class
  */
-class ClientBaseElem extends  AbstractModel {
+class DescribeAgentDealsCacheResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 代客关联的代理商UIN
-         * @type {string || null}
+         * 订单数组
+         * @type {Array.<AgentDealElem> || null}
          */
-        this.AgentUin = null;
+        this.AgentDealSet = null;
 
         /**
-         * 代客UIN
-         * @type {string || null}
-         */
-        this.ClientUin = null;
-
-        /**
-         * 代客关联类型 0:代理 1:转售
+         * 符合条件的订单总数量
          * @type {number || null}
          */
-        this.ClientRelateType = null;
+        this.TotalCount = null;
 
         /**
-         * 代理商合作模式 0:代理 1:转售
-         * @type {number || null}
-         */
-        this.AgentCooperationMode = null;
-
-        /**
-         * 代理商国家编码 China:中国  其他:海外，如US等
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.AgentCountry = null;
+        this.RequestId = null;
 
     }
 
@@ -2794,11 +2706,17 @@ class ClientBaseElem extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AgentUin = 'AgentUin' in params ? params.AgentUin : null;
-        this.ClientUin = 'ClientUin' in params ? params.ClientUin : null;
-        this.ClientRelateType = 'ClientRelateType' in params ? params.ClientRelateType : null;
-        this.AgentCooperationMode = 'AgentCooperationMode' in params ? params.AgentCooperationMode : null;
-        this.AgentCountry = 'AgentCountry' in params ? params.AgentCountry : null;
+
+        if (params.AgentDealSet) {
+            this.AgentDealSet = new Array();
+            for (let z in params.AgentDealSet) {
+                let obj = new AgentDealElem();
+                obj.deserialize(params.AgentDealSet[z]);
+                this.AgentDealSet.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2910,13 +2828,13 @@ class AgentDealElem extends  AbstractModel {
         super();
 
         /**
-         * 订单自增 ID
+         * 订单自增 ID【请勿依赖该字段作为唯一标识】
          * @type {string || null}
          */
         this.DealId = null;
 
         /**
-         * 订单号
+         * 订单号【订单唯一键】
          * @type {string || null}
          */
         this.DealName = null;
@@ -3039,7 +2957,7 @@ class AgentDealElem extends  AbstractModel {
         this.BigDealId = null;
 
         /**
-         * 客户类型（new：新拓；old：存量；assign：指派）
+         * 客户类型（new：自拓；old：官网；assign：指派；direct：直销；direct_newopp：直销(新商机)）
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -3086,6 +3004,20 @@ class AgentDealElem extends  AbstractModel {
          * @type {Array.<ProductInfoElem> || null}
          */
         this.ProductInfo = null;
+
+        /**
+         * 付款方式
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.PaymentMethod = null;
+
+        /**
+         * 订单更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
 
     }
 
@@ -3135,6 +3067,8 @@ class AgentDealElem extends  AbstractModel {
                 this.ProductInfo.push(obj);
             }
         }
+        this.PaymentMethod = 'PaymentMethod' in params ? params.PaymentMethod : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
 
     }
 }
@@ -3189,6 +3123,34 @@ class AgentSalesmanElem extends  AbstractModel {
 }
 
 /**
+ * DescribeClientBalanceNew请求参数结构体
+ * @class
+ */
+class DescribeClientBalanceNewRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 客户(代客)账号ID
+         * @type {string || null}
+         */
+        this.ClientUin = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClientUin = 'ClientUin' in params ? params.ClientUin : null;
+
+    }
+}
+
+/**
  * 订单价格详情
  * @class
  */
@@ -3197,10 +3159,16 @@ class DealGoodsPriceNewElem extends  AbstractModel {
         super();
 
         /**
-         * 实付金额
+         * 实付金额（单位：分）
          * @type {number || null}
          */
         this.RealTotalCost = null;
+
+        /**
+         * 原始金额（不含折扣，单位：分）
+         * @type {number || null}
+         */
+        this.OriginalTotalCost = null;
 
     }
 
@@ -3212,26 +3180,27 @@ class DealGoodsPriceNewElem extends  AbstractModel {
             return;
         }
         this.RealTotalCost = 'RealTotalCost' in params ? params.RealTotalCost : null;
+        this.OriginalTotalCost = 'OriginalTotalCost' in params ? params.OriginalTotalCost : null;
 
     }
 }
 
 /**
- * DescribeAgentDealsCache返回参数结构体
+ * DescribeRebateInfos返回参数结构体
  * @class
  */
-class DescribeAgentDealsCacheResponse extends  AbstractModel {
+class DescribeRebateInfosResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 订单数组
-         * @type {Array.<AgentDealElem> || null}
+         * 返佣信息列表
+         * @type {Array.<RebateInfoElem> || null}
          */
-        this.AgentDealSet = null;
+        this.RebateInfoSet = null;
 
         /**
-         * 符合条件的订单总数量
+         * 符合查询条件返佣信息数目
          * @type {number || null}
          */
         this.TotalCount = null;
@@ -3252,12 +3221,12 @@ class DescribeAgentDealsCacheResponse extends  AbstractModel {
             return;
         }
 
-        if (params.AgentDealSet) {
-            this.AgentDealSet = new Array();
-            for (let z in params.AgentDealSet) {
-                let obj = new AgentDealElem();
-                obj.deserialize(params.AgentDealSet[z]);
-                this.AgentDealSet.push(obj);
+        if (params.RebateInfoSet) {
+            this.RebateInfoSet = new Array();
+            for (let z in params.RebateInfoSet) {
+                let obj = new RebateInfoElem();
+                obj.deserialize(params.RebateInfoSet[z]);
+                this.RebateInfoSet.push(obj);
             }
         }
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
@@ -3294,10 +3263,52 @@ class DescribeAgentClientGradeRequest extends  AbstractModel {
     }
 }
 
+/**
+ * DescribeClientBalanceNew返回参数结构体
+ * @class
+ */
+class DescribeClientBalanceNewResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 账户可用余额，单位分 （可用余额 = 现金余额 + 赠送金余额 - 欠费金额 - 冻结金额）
+         * @type {number || null}
+         */
+        this.Balance = null;
+
+        /**
+         * 账户现金余额，单位分
+         * @type {number || null}
+         */
+        this.Cash = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Balance = 'Balance' in params ? params.Balance : null;
+        this.Cash = 'Cash' in params ? params.Cash : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
 module.exports = {
     AgentClientElem: AgentClientElem,
     DescribeAgentDealsCacheRequest: DescribeAgentDealsCacheRequest,
-    DescribeClientBaseInfoResponse: DescribeClientBaseInfoResponse,
+    DescribeSalesmansRequest: DescribeSalesmansRequest,
     DescribeAgentAuditedClientsRequest: DescribeAgentAuditedClientsRequest,
     RemovePayRelationForClientRequest: RemovePayRelationForClientRequest,
     AgentPayDealsRequest: AgentPayDealsRequest,
@@ -3313,8 +3324,6 @@ module.exports = {
     ProductInfoElem: ProductInfoElem,
     UnbindClientElem: UnbindClientElem,
     RemovePayRelationForClientResponse: RemovePayRelationForClientResponse,
-    DescribeSalesmansRequest: DescribeSalesmansRequest,
-    DescribeClientBaseInfoRequest: DescribeClientBaseInfoRequest,
     DescribeRebateInfosRequest: DescribeRebateInfosRequest,
     CreatePayRelationForClientResponse: CreatePayRelationForClientResponse,
     DescribeAgentAuditedClientsResponse: DescribeAgentAuditedClientsResponse,
@@ -3329,7 +3338,6 @@ module.exports = {
     DescribeSalesmansResponse: DescribeSalesmansResponse,
     AgentAuditedClient: AgentAuditedClient,
     DescribeUnbindClientListRequest: DescribeUnbindClientListRequest,
-    DescribeRebateInfosResponse: DescribeRebateInfosResponse,
     DescribeAgentPayDealsResponse: DescribeAgentPayDealsResponse,
     DealGoodsPriceElem: DealGoodsPriceElem,
     DescribeAgentDealsByCacheRequest: DescribeAgentDealsByCacheRequest,
@@ -3341,13 +3349,15 @@ module.exports = {
     DescribeAgentSelfPayDealsV2Response: DescribeAgentSelfPayDealsV2Response,
     AgentBillElem: AgentBillElem,
     AuditApplyClientResponse: AuditApplyClientResponse,
-    ClientBaseElem: ClientBaseElem,
+    DescribeAgentDealsCacheResponse: DescribeAgentDealsCacheResponse,
     DescribeAgentBillsRequest: DescribeAgentBillsRequest,
     AgentPayDealsResponse: AgentPayDealsResponse,
     AgentDealElem: AgentDealElem,
     AgentSalesmanElem: AgentSalesmanElem,
+    DescribeClientBalanceNewRequest: DescribeClientBalanceNewRequest,
     DealGoodsPriceNewElem: DealGoodsPriceNewElem,
-    DescribeAgentDealsCacheResponse: DescribeAgentDealsCacheResponse,
+    DescribeRebateInfosResponse: DescribeRebateInfosResponse,
     DescribeAgentClientGradeRequest: DescribeAgentClientGradeRequest,
+    DescribeClientBalanceNewResponse: DescribeClientBalanceNewResponse,
 
 }

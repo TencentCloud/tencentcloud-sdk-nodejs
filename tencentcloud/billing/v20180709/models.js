@@ -122,6 +122,119 @@ class CostComponentSet extends  AbstractModel {
 }
 
 /**
+ * 代金券相关信息
+ * @class
+ */
+class VoucherInfos extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 代金券拥有者
+         * @type {string || null}
+         */
+        this.OwnerUin = null;
+
+        /**
+         * 券状态：待使用：unUsed，已使用： used，已发货：delivered，已作废： cancel，已过期：overdue
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 代金券面额（微分）
+         * @type {number || null}
+         */
+        this.NominalValue = null;
+
+        /**
+         * 剩余金额（微分）
+         * @type {number || null}
+         */
+        this.Balance = null;
+
+        /**
+         * 代金券id
+         * @type {string || null}
+         */
+        this.VoucherId = null;
+
+        /**
+         * postPay后付费/prePay预付费/riPay预留实例/空字符串或者'*'表示全部模式
+         * @type {string || null}
+         */
+        this.PayMode = null;
+
+        /**
+         * 付费场景PayMode=postPay时：spotpay-竞价实例,"settle account"-普通后付费PayMode=prePay时：purchase-包年包月新购，renew-包年包月续费（自动续费），modify-包年包月配置变更(变配）PayMode=riPay时：oneOffFee-预留实例预付，hourlyFee-预留实例每小时扣费，*-支持全部付费场景
+         * @type {string || null}
+         */
+        this.PayScene = null;
+
+        /**
+         * 有效期生效时间
+         * @type {string || null}
+         */
+        this.BeginTime = null;
+
+        /**
+         * 有效期截止时间
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 适用商品信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {ApplicableProducts || null}
+         */
+        this.ApplicableProducts = null;
+
+        /**
+         * 不适用商品信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<ExcludedProducts> || null}
+         */
+        this.ExcludedProducts = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.OwnerUin = 'OwnerUin' in params ? params.OwnerUin : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.NominalValue = 'NominalValue' in params ? params.NominalValue : null;
+        this.Balance = 'Balance' in params ? params.Balance : null;
+        this.VoucherId = 'VoucherId' in params ? params.VoucherId : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+        this.PayScene = 'PayScene' in params ? params.PayScene : null;
+        this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+
+        if (params.ApplicableProducts) {
+            let obj = new ApplicableProducts();
+            obj.deserialize(params.ApplicableProducts)
+            this.ApplicableProducts = obj;
+        }
+
+        if (params.ExcludedProducts) {
+            this.ExcludedProducts = new Array();
+            for (let z in params.ExcludedProducts) {
+                let obj = new ExcludedProducts();
+                obj.deserialize(params.ExcludedProducts[z]);
+                this.ExcludedProducts.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DescribeCostSummaryByProduct请求参数结构体
  * @class
  */
@@ -328,7 +441,7 @@ cdn业务：
 
         /**
          * 查询域名 例如 www.qq.com
-非CDN业务查询时值为空
+非CDN业务查询时传入空字符串，返回的值为空
          * @type {string || null}
          */
         this.Domain = null;
@@ -414,6 +527,12 @@ class ProjectSummaryOverviewItem extends  AbstractModel {
          */
         this.BillMonth = null;
 
+        /**
+         * 原价，单位为元。TotalCost字段自账单3.0（即2021-05）之后开始生效，账单3.0之前返回"-"。合同价的情况下，TotalCost字段与官网价格存在差异，也返回“-”。
+         * @type {string || null}
+         */
+        this.TotalCost = null;
+
     }
 
     /**
@@ -431,6 +550,7 @@ class ProjectSummaryOverviewItem extends  AbstractModel {
         this.IncentivePayAmount = 'IncentivePayAmount' in params ? params.IncentivePayAmount : null;
         this.VoucherPayAmount = 'VoucherPayAmount' in params ? params.VoucherPayAmount : null;
         this.BillMonth = 'BillMonth' in params ? params.BillMonth : null;
+        this.TotalCost = 'TotalCost' in params ? params.TotalCost : null;
 
     }
 }
@@ -496,6 +616,17 @@ class DescribeBillSummaryByProductRequest extends  AbstractModel {
          */
         this.PayerUin = null;
 
+        /**
+         * 款项类别，与L0账单上的汇总类别对应。
+此参数自账单3.0（即2021-05）之后开始生效。
+枚举值：
+consume-消费
+refund-退款
+adjustment-调账
+         * @type {string || null}
+         */
+        this.PayType = null;
+
     }
 
     /**
@@ -508,6 +639,7 @@ class DescribeBillSummaryByProductRequest extends  AbstractModel {
         this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.PayerUin = 'PayerUin' in params ? params.PayerUin : null;
+        this.PayType = 'PayType' in params ? params.PayType : null;
 
     }
 }
@@ -521,7 +653,7 @@ class ConsumptionBusinessSummaryDataItem extends  AbstractModel {
         super();
 
         /**
-         * 产品码
+         * 产品名称代码
          * @type {string || null}
          */
         this.BusinessCode = null;
@@ -616,13 +748,13 @@ class CostDetail extends  AbstractModel {
         this.PayerUin = null;
 
         /**
-         * 业务名称
+         * 产品名称
          * @type {string || null}
          */
         this.BusinessCodeName = null;
 
         /**
-         * 产品名称
+         * 子产品名称
          * @type {string || null}
          */
         this.ProductCodeName = null;
@@ -701,7 +833,7 @@ class CostDetail extends  AbstractModel {
         this.ComponentSet = null;
 
         /**
-         * 产品代码
+         * 子产品名称代码
          * @type {string || null}
          */
         this.ProductCode = null;
@@ -809,7 +941,7 @@ class BillResourceSummary extends  AbstractModel {
         this.BusinessCodeName = null;
 
         /**
-         * 子产品：云产品子类，如云服务器CVM-标准型S1， 当没有获取到子产品名称时，返回"-"
+         * 子产品名称：云产品子类，如云服务器CVM-标准型S1， 当没有获取到子产品名称时，返回"-"
          * @type {string || null}
          */
         this.ProductCodeName = null;
@@ -906,6 +1038,7 @@ class BillResourceSummary extends  AbstractModel {
 
         /**
          * 折扣率
+当聚合之后折扣不唯一或者合同价的情况下，返回“-”
          * @type {string || null}
          */
         this.Discount = null;
@@ -984,13 +1117,13 @@ class BillResourceSummary extends  AbstractModel {
         this.OperateUin = null;
 
         /**
-         * 商品名称代码
+         * 产品名称代码
          * @type {string || null}
          */
         this.BusinessCode = null;
 
         /**
-         * 子商品名称代码
+         * 子产品名称代码
          * @type {string || null}
          */
         this.ProductCode = null;
@@ -1087,6 +1220,12 @@ class DescribeBillSummaryByTagRequest extends  AbstractModel {
          */
         this.PayerUin = null;
 
+        /**
+         * 分账标签值
+         * @type {string || null}
+         */
+        this.TagValue = null;
+
     }
 
     /**
@@ -1100,6 +1239,7 @@ class DescribeBillSummaryByTagRequest extends  AbstractModel {
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.TagKey = 'TagKey' in params ? params.TagKey : null;
         this.PayerUin = 'PayerUin' in params ? params.PayerUin : null;
+        this.TagValue = 'TagValue' in params ? params.TagValue : null;
 
     }
 }
@@ -1119,7 +1259,7 @@ class Conditions extends  AbstractModel {
         this.TimeRange = null;
 
         /**
-         * 产品编码
+         * 产品名称代码
          * @type {string || null}
          */
         this.BusinessCode = null;
@@ -1149,13 +1289,13 @@ class Conditions extends  AbstractModel {
         this.ResourceKeyword = null;
 
         /**
-         * 产品编码
+         * 产品名称代码
          * @type {Array.<string> || null}
          */
         this.BusinessCodes = null;
 
         /**
-         * 子产品编码
+         * 子产品名称代码
          * @type {Array.<string> || null}
          */
         this.ProductCodes = null;
@@ -1558,61 +1698,37 @@ class BillTransactionInfo extends  AbstractModel {
 }
 
 /**
- * 按地域汇总消费详情
+ * DescribeVoucherInfo返回参数结构体
  * @class
  */
-class RegionSummaryOverviewItem extends  AbstractModel {
+class DescribeVoucherInfoResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 地域ID
+         * 券总数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 总余额（微分）
+         * @type {number || null}
+         */
+        this.TotalBalance = null;
+
+        /**
+         * 代金券相关信息
 注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
+         * @type {Array.<VoucherInfos> || null}
          */
-        this.RegionId = null;
+        this.VoucherInfos = null;
 
         /**
-         * 地域名称
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.RegionName = null;
-
-        /**
-         * 实际花费
-         * @type {string || null}
-         */
-        this.RealTotalCost = null;
-
-        /**
-         * 费用所占百分比，两位小数
-         * @type {string || null}
-         */
-        this.RealTotalCostRatio = null;
-
-        /**
-         * 现金金额
-         * @type {string || null}
-         */
-        this.CashPayAmount = null;
-
-        /**
-         * 赠送金金额
-         * @type {string || null}
-         */
-        this.IncentivePayAmount = null;
-
-        /**
-         * 代金券金额
-         * @type {string || null}
-         */
-        this.VoucherPayAmount = null;
-
-        /**
-         * 账单月份，格式2019-08
-         * @type {string || null}
-         */
-        this.BillMonth = null;
+        this.RequestId = null;
 
     }
 
@@ -1623,14 +1739,18 @@ class RegionSummaryOverviewItem extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RegionId = 'RegionId' in params ? params.RegionId : null;
-        this.RegionName = 'RegionName' in params ? params.RegionName : null;
-        this.RealTotalCost = 'RealTotalCost' in params ? params.RealTotalCost : null;
-        this.RealTotalCostRatio = 'RealTotalCostRatio' in params ? params.RealTotalCostRatio : null;
-        this.CashPayAmount = 'CashPayAmount' in params ? params.CashPayAmount : null;
-        this.IncentivePayAmount = 'IncentivePayAmount' in params ? params.IncentivePayAmount : null;
-        this.VoucherPayAmount = 'VoucherPayAmount' in params ? params.VoucherPayAmount : null;
-        this.BillMonth = 'BillMonth' in params ? params.BillMonth : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.TotalBalance = 'TotalBalance' in params ? params.TotalBalance : null;
+
+        if (params.VoucherInfos) {
+            this.VoucherInfos = new Array();
+            for (let z in params.VoucherInfos) {
+                let obj = new VoucherInfos();
+                obj.deserialize(params.VoucherInfos[z]);
+                this.VoucherInfos.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1704,7 +1824,7 @@ class ConsumptionResourceSummaryDataItem extends  AbstractModel {
         this.PayModeName = null;
 
         /**
-         * 产品码
+         * 产品名称代码
          * @type {string || null}
          */
         this.BusinessCode = null;
@@ -1820,7 +1940,7 @@ class DescribeBillDetailRequest extends  AbstractModel {
         this.NeedRecordNum = null;
 
         /**
-         * 查询指定产品信息（暂时未开放获取）
+         * 已废弃参数，未开放
          * @type {string || null}
          */
         this.ProductCode = null;
@@ -1838,7 +1958,37 @@ class DescribeBillDetailRequest extends  AbstractModel {
         this.ResourceId = null;
 
         /**
-         * 查询交易类型。如 按量计费日结，按量计费小时结 等
+         * 查询交易类型，如下：
+包年包月新购
+包年包月续费
+包年包月配置变更
+包年包月退款
+按量计费扣费
+按量计费小时结
+按量计费日结
+按量计费月结
+线下项目扣费
+线下产品扣费
+调账扣费
+调账补偿
+竞价实例小时结
+线下项目调账补偿
+线下产品调账补偿
+优惠扣费
+优惠补偿
+按量计费迁入资源
+按量计费迁出资源
+包年包月迁入资源
+包年包月迁出资源
+预付费用
+小时费用
+预留实例退款
+按量计费冲正
+按量计费冲正
+按量计费冲正
+按量计费冲正
+按量计费冲正
+包年包月转按量
          * @type {string || null}
          */
         this.ActionType = null;
@@ -1848,6 +1998,13 @@ class DescribeBillDetailRequest extends  AbstractModel {
          * @type {number || null}
          */
         this.ProjectId = null;
+
+        /**
+         * 产品名称代码
+备注：如需获取当月使用过的BusinessCode，请调用API：<a href="https://cloud.tencent.com/document/product/555/35761">获取产品汇总费用分布</a>
+         * @type {string || null}
+         */
+        this.BusinessCode = null;
 
     }
 
@@ -1870,6 +2027,7 @@ class DescribeBillDetailRequest extends  AbstractModel {
         this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
         this.ActionType = 'ActionType' in params ? params.ActionType : null;
         this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.BusinessCode = 'BusinessCode' in params ? params.BusinessCode : null;
 
     }
 }
@@ -1939,6 +2097,91 @@ class ConsumptionProjectSummaryDataItem extends  AbstractModel {
                 this.Business.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * 按地域汇总消费详情
+ * @class
+ */
+class RegionSummaryOverviewItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 地域ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RegionId = null;
+
+        /**
+         * 地域名称
+         * @type {string || null}
+         */
+        this.RegionName = null;
+
+        /**
+         * 实际花费
+         * @type {string || null}
+         */
+        this.RealTotalCost = null;
+
+        /**
+         * 费用所占百分比，两位小数
+         * @type {string || null}
+         */
+        this.RealTotalCostRatio = null;
+
+        /**
+         * 现金金额
+         * @type {string || null}
+         */
+        this.CashPayAmount = null;
+
+        /**
+         * 赠送金金额
+         * @type {string || null}
+         */
+        this.IncentivePayAmount = null;
+
+        /**
+         * 代金券金额
+         * @type {string || null}
+         */
+        this.VoucherPayAmount = null;
+
+        /**
+         * 账单月份，格式2019-08
+         * @type {string || null}
+         */
+        this.BillMonth = null;
+
+        /**
+         * 原价，单位为元。TotalCost字段自账单3.0（即2021-05）之后开始生效，账单3.0之前返回"-"。合同价的情况下，TotalCost字段与官网价格存在差异，也返回“-”。
+         * @type {string || null}
+         */
+        this.TotalCost = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RegionId = 'RegionId' in params ? params.RegionId : null;
+        this.RegionName = 'RegionName' in params ? params.RegionName : null;
+        this.RealTotalCost = 'RealTotalCost' in params ? params.RealTotalCost : null;
+        this.RealTotalCostRatio = 'RealTotalCostRatio' in params ? params.RealTotalCostRatio : null;
+        this.CashPayAmount = 'CashPayAmount' in params ? params.CashPayAmount : null;
+        this.IncentivePayAmount = 'IncentivePayAmount' in params ? params.IncentivePayAmount : null;
+        this.VoucherPayAmount = 'VoucherPayAmount' in params ? params.VoucherPayAmount : null;
+        this.BillMonth = 'BillMonth' in params ? params.BillMonth : null;
+        this.TotalCost = 'TotalCost' in params ? params.TotalCost : null;
 
     }
 }
@@ -2428,7 +2671,7 @@ class BusinessSummaryOverviewItem extends  AbstractModel {
         super();
 
         /**
-         * 产品码
+         * 产品名称代码
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -2476,6 +2719,12 @@ class BusinessSummaryOverviewItem extends  AbstractModel {
          */
         this.BillMonth = null;
 
+        /**
+         * 原价，单位为元。TotalCost字段自账单3.0（即2021-05）之后开始生效，账单3.0之前返回"-"。合同价的情况下，TotalCost字段与官网价格存在差异，也返回“-”。
+         * @type {string || null}
+         */
+        this.TotalCost = null;
+
     }
 
     /**
@@ -2493,6 +2742,7 @@ class BusinessSummaryOverviewItem extends  AbstractModel {
         this.IncentivePayAmount = 'IncentivePayAmount' in params ? params.IncentivePayAmount : null;
         this.VoucherPayAmount = 'VoucherPayAmount' in params ? params.VoucherPayAmount : null;
         this.BillMonth = 'BillMonth' in params ? params.BillMonth : null;
+        this.TotalCost = 'TotalCost' in params ? params.TotalCost : null;
 
     }
 }
@@ -2838,6 +3088,57 @@ class DescribeCostSummaryByProjectRequest extends  AbstractModel {
 }
 
 /**
+ * 使用记录
+ * @class
+ */
+class UsageRecords extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 使用金额（微分）
+         * @type {number || null}
+         */
+        this.UsedAmount = null;
+
+        /**
+         * 使用时间
+         * @type {string || null}
+         */
+        this.UsedTime = null;
+
+        /**
+         * 使用记录细节
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<UsageDetails> || null}
+         */
+        this.UsageDetails = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UsedAmount = 'UsedAmount' in params ? params.UsedAmount : null;
+        this.UsedTime = 'UsedTime' in params ? params.UsedTime : null;
+
+        if (params.UsageDetails) {
+            this.UsageDetails = new Array();
+            for (let z in params.UsageDetails) {
+                let obj = new UsageDetails();
+                obj.deserialize(params.UsageDetails[z]);
+                this.UsageDetails.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * 消耗按地域汇总详情
  * @class
  */
@@ -2950,6 +3251,43 @@ class DescribeDosageCosDetailByDateResponse extends  AbstractModel {
 }
 
 /**
+ * 购买商品信息
+ * @class
+ */
+class UsageDetails extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 商品名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ProductName = null;
+
+        /**
+         * 商品细节
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SubProductName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductName = 'ProductName' in params ? params.ProductName : null;
+        this.SubProductName = 'SubProductName' in params ? params.SubProductName : null;
+
+    }
+}
+
+/**
  * DescribeBillResourceSummary返回参数结构体
  * @class
  */
@@ -3056,6 +3394,12 @@ class ActionSummaryOverviewItem extends  AbstractModel {
          */
         this.BillMonth = null;
 
+        /**
+         * 原价，单位为元。TotalCost字段自账单3.0（即2021-05）之后开始生效，账单3.0之前返回"-"。合同价的情况下，TotalCost字段与官网价格存在差异，也返回“-”。
+         * @type {string || null}
+         */
+        this.TotalCost = null;
+
     }
 
     /**
@@ -3073,6 +3417,168 @@ class ActionSummaryOverviewItem extends  AbstractModel {
         this.IncentivePayAmount = 'IncentivePayAmount' in params ? params.IncentivePayAmount : null;
         this.VoucherPayAmount = 'VoucherPayAmount' in params ? params.VoucherPayAmount : null;
         this.BillMonth = 'BillMonth' in params ? params.BillMonth : null;
+        this.TotalCost = 'TotalCost' in params ? params.TotalCost : null;
+
+    }
+}
+
+/**
+ * DescribeVoucherInfo请求参数结构体
+ * @class
+ */
+class DescribeVoucherInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 一页多少条数据，默认是20条，最大不超过1000
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 第多少页，默认是1
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 券状态：待使用：unUsed，已使用： used，已发货：delivered，已作废： cancel，已过期：overdue
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 代金券id
+         * @type {string || null}
+         */
+        this.VoucherId = null;
+
+        /**
+         * 代金券订单id
+         * @type {string || null}
+         */
+        this.CodeId = null;
+
+        /**
+         * 商品码
+         * @type {string || null}
+         */
+        this.ProductCode = null;
+
+        /**
+         * 活动id
+         * @type {string || null}
+         */
+        this.ActivityId = null;
+
+        /**
+         * 代金券名称
+         * @type {string || null}
+         */
+        this.VoucherName = null;
+
+        /**
+         * 发放开始时间
+         * @type {string || null}
+         */
+        this.TimeFrom = null;
+
+        /**
+         * 发放结束时间
+         * @type {string || null}
+         */
+        this.TimeTo = null;
+
+        /**
+         * 指定排序字段：BeginTime开始时间、EndTime到期时间、CreateTime创建时间
+         * @type {string || null}
+         */
+        this.SortField = null;
+
+        /**
+         * 指定升序降序：desc、asc
+         * @type {string || null}
+         */
+        this.SortOrder = null;
+
+        /**
+         * 付费模式，postPay后付费/prePay预付费/riPay预留实例/""或者"*"表示全部模式，如果payMode为""或"*"，那么productCode与subProductCode必须传空
+         * @type {string || null}
+         */
+        this.PayMode = null;
+
+        /**
+         * 付费场景PayMode=postPay时：spotpay-竞价实例,"settle account"-普通后付费PayMode=prePay时：purchase-包年包月新购，renew-包年包月续费（自动续费），modify-包年包月配置变更(变配）PayMode=riPay时：oneOffFee-预留实例预付，hourlyFee-预留实例每小时扣费，*-支持全部付费场景
+         * @type {string || null}
+         */
+        this.PayScene = null;
+
+        /**
+         * 操作人，默认就是用户uin
+         * @type {string || null}
+         */
+        this.Operator = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.VoucherId = 'VoucherId' in params ? params.VoucherId : null;
+        this.CodeId = 'CodeId' in params ? params.CodeId : null;
+        this.ProductCode = 'ProductCode' in params ? params.ProductCode : null;
+        this.ActivityId = 'ActivityId' in params ? params.ActivityId : null;
+        this.VoucherName = 'VoucherName' in params ? params.VoucherName : null;
+        this.TimeFrom = 'TimeFrom' in params ? params.TimeFrom : null;
+        this.TimeTo = 'TimeTo' in params ? params.TimeTo : null;
+        this.SortField = 'SortField' in params ? params.SortField : null;
+        this.SortOrder = 'SortOrder' in params ? params.SortOrder : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+        this.PayScene = 'PayScene' in params ? params.PayScene : null;
+        this.Operator = 'Operator' in params ? params.Operator : null;
+
+    }
+}
+
+/**
+ * 适用商品信息
+ * @class
+ */
+class ApplicableProducts extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 适用商品名称，值为“全产品通用”或商品名称组成的string，以","分割。
+         * @type {string || null}
+         */
+        this.GoodsName = null;
+
+        /**
+         * postPay后付费/prePay预付费/riPay预留实例/空字符串或者"*"表示全部模式。如GoodsName为多个商品名以","分割组成的string，而PayMode为"*"，表示每一件商品的模式都为"*"。
+         * @type {string || null}
+         */
+        this.PayMode = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.GoodsName = 'GoodsName' in params ? params.GoodsName : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
 
     }
 }
@@ -3108,6 +3614,55 @@ class ConditionPayMode extends  AbstractModel {
         }
         this.PayMode = 'PayMode' in params ? params.PayMode : null;
         this.PayModeName = 'PayModeName' in params ? params.PayModeName : null;
+
+    }
+}
+
+/**
+ * DescribeVoucherUsageDetails请求参数结构体
+ * @class
+ */
+class DescribeVoucherUsageDetailsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 一页多少条数据，默认是20条，最大不超过1000
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 第多少页，默认是1
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 代金券id
+         * @type {string || null}
+         */
+        this.VoucherId = null;
+
+        /**
+         * 操作人，默认就是用户uin
+         * @type {string || null}
+         */
+        this.Operator = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.VoucherId = 'VoucherId' in params ? params.VoucherId : null;
+        this.Operator = 'Operator' in params ? params.Operator : null;
 
     }
 }
@@ -3174,6 +3729,12 @@ class DescribeDealsByCondRequest extends  AbstractModel {
          */
         this.BigDealId = null;
 
+        /**
+         * 资源id
+         * @type {string || null}
+         */
+        this.ResourceId = null;
+
     }
 
     /**
@@ -3190,6 +3751,7 @@ class DescribeDealsByCondRequest extends  AbstractModel {
         this.Status = 'Status' in params ? params.Status : null;
         this.OrderId = 'OrderId' in params ? params.OrderId : null;
         this.BigDealId = 'BigDealId' in params ? params.BigDealId : null;
+        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
 
     }
 }
@@ -3215,16 +3777,16 @@ class DescribeBillResourceSummaryRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * 周期类型，byUsedTime按计费周期/byPayTime按扣费周期。需要与费用中心该月份账单的周期保持一致。您可前往[账单概览](https://console.cloud.tencent.com/expense/bill/overview)页面顶部查看确认您的账单统计周期类型。
-         * @type {string || null}
-         */
-        this.PeriodType = null;
-
-        /**
          * 月份，格式为yyyy-mm。不能早于开通账单2.0的月份，最多可拉取24个月内的数据。
          * @type {string || null}
          */
         this.Month = null;
+
+        /**
+         * 周期类型，byUsedTime按计费周期/byPayTime按扣费周期。需要与费用中心该月份账单的周期保持一致。您可前往[账单概览](https://console.cloud.tencent.com/expense/bill/overview)页面顶部查看确认您的账单统计周期类型。
+         * @type {string || null}
+         */
+        this.PeriodType = null;
 
         /**
          * 是否需要访问列表的总记录数，用于前端分页
@@ -3234,10 +3796,59 @@ class DescribeBillResourceSummaryRequest extends  AbstractModel {
         this.NeedRecordNum = null;
 
         /**
-         * 查询交易类型。如 按量计费日结，按量计费小时结 等
+         * 查询交易类型，如下：
+包年包月新购
+包年包月续费
+包年包月配置变更
+包年包月退款
+按量计费扣费
+按量计费小时结
+按量计费日结
+按量计费月结
+线下项目扣费
+线下产品扣费
+调账扣费
+调账补偿
+竞价实例小时结
+线下项目调账补偿
+线下产品调账补偿
+优惠扣费
+优惠补偿
+按量计费迁入资源
+按量计费迁出资源
+包年包月迁入资源
+包年包月迁出资源
+预付费用
+小时费用
+预留实例退款
+按量计费冲正
+按量计费冲正
+按量计费冲正
+按量计费冲正
+按量计费冲正
+包年包月转按量
          * @type {string || null}
          */
         this.ActionType = null;
+
+        /**
+         * 查询指定资源信息
+         * @type {string || null}
+         */
+        this.ResourceId = null;
+
+        /**
+         * 付费模式 prePay/postPay
+         * @type {string || null}
+         */
+        this.PayMode = null;
+
+        /**
+         * 产品名称代码
+备注：如需获取当月使用过的BusinessCode，请调用API：<a href="https://cloud.tencent.com/document/product/555/35761">获取产品汇总费用分布</a>
+         * @type {string || null}
+         */
+        this.BusinessCode = null;
 
     }
 
@@ -3250,10 +3861,13 @@ class DescribeBillResourceSummaryRequest extends  AbstractModel {
         }
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
-        this.PeriodType = 'PeriodType' in params ? params.PeriodType : null;
         this.Month = 'Month' in params ? params.Month : null;
+        this.PeriodType = 'PeriodType' in params ? params.PeriodType : null;
         this.NeedRecordNum = 'NeedRecordNum' in params ? params.NeedRecordNum : null;
         this.ActionType = 'ActionType' in params ? params.ActionType : null;
+        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+        this.BusinessCode = 'BusinessCode' in params ? params.BusinessCode : null;
 
     }
 }
@@ -3346,7 +3960,30 @@ class DescribeBillListRequest extends  AbstractModel {
         this.PayType = null;
 
         /**
-         * 扣费模式，当所选的交易类型中包含扣费deduct时有意义： all所有扣费类型，trade预付费支付，hour_h按量小时结，hour_d按量日结，hour_m按量月结，decompensate调账扣费，other其他扣费
+         * 扣费模式，
+当所选的交易类型为扣费deduct时： 
+all所有扣费类型;trade预付费支付;hour_h按量小时结;hour_d按量日结;hour_m按量月结;decompensate调账扣费;other第三方扣费;panshi 线下项目扣费;offline 线下产品扣费;
+
+当所选的交易类型为扣费recharge时： 
+online 在线充值;bank-enterprice 银企直连;offline 线下充值;transfer 分成充值
+
+当所选的交易类型为扣费cash时： 
+online 线上提现;offline 线下提现;panshi 赠送金清零
+
+当所选的交易类型为扣费advanced时： 
+advanced 垫付充值
+
+当所选的交易类型为扣费repay时： 
+panshi 垫付回款
+
+当所选的交易类型为扣费block时： 
+other 第三方冻结;hour 按量冻结;month按月冻结
+
+当所选的交易类型为扣费return时： 
+compensate 调账补偿;trade 预付费退款
+
+当所选的交易类型为扣费unblock时：
+other 第三方解冻;hour 按量解冻;month 按月解冻
          * @type {Array.<string> || null}
          */
         this.SubPayType = null;
@@ -3422,6 +4059,43 @@ class PayDealsResponse extends  AbstractModel {
         this.ResourceIds = 'ResourceIds' in params ? params.ResourceIds : null;
         this.BigDealIds = 'BigDealIds' in params ? params.BigDealIds : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 总数
+ * @class
+ */
+class SummaryTotal extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RealTotalCost = null;
+
+        /**
+         * 原价，单位为元。TotalCost字段自账单3.0（即2021-05）之后开始生效，账单3.0之前返回"-"。合同价的情况下，TotalCost字段与官网价格存在差异，也返回“-”。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TotalCost = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RealTotalCost = 'RealTotalCost' in params ? params.RealTotalCost : null;
+        this.TotalCost = 'TotalCost' in params ? params.TotalCost : null;
 
     }
 }
@@ -3550,21 +4224,21 @@ class BillDetail extends  AbstractModel {
         this.Tags = null;
 
         /**
-         * 商品名称代码
+         * 产品名称代码
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.BusinessCode = null;
 
         /**
-         * 子商品名称代码
+         * 子产品名称代码
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.ProductCode = null;
 
         /**
-         * 交易类型代码（未开放的字段）
+         * 交易类型代码
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -3658,6 +4332,13 @@ class DescribeBillSummaryByTagResponse extends  AbstractModel {
         this.SummaryOverview = null;
 
         /**
+         * 总数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {SummaryTotal || null}
+         */
+        this.SummaryTotal = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -3681,6 +4362,12 @@ class DescribeBillSummaryByTagResponse extends  AbstractModel {
                 obj.deserialize(params.SummaryOverview[z]);
                 this.SummaryOverview.push(obj);
             }
+        }
+
+        if (params.SummaryTotal) {
+            let obj = new SummaryTotal();
+            obj.deserialize(params.SummaryTotal)
+            this.SummaryTotal = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -3716,6 +4403,13 @@ class TagSummaryOverviewItem extends  AbstractModel {
          */
         this.RealTotalCostRatio = null;
 
+        /**
+         * 原价，单位为元。TotalCost字段自账单3.0（即2021-05）之后开始生效，账单3.0之前返回"-"。合同价的情况下，TotalCost字段与官网价格存在差异，也返回“-”。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TotalCost = null;
+
     }
 
     /**
@@ -3728,6 +4422,7 @@ class TagSummaryOverviewItem extends  AbstractModel {
         this.TagValue = 'TagValue' in params ? params.TagValue : null;
         this.RealTotalCost = 'RealTotalCost' in params ? params.RealTotalCost : null;
         this.RealTotalCostRatio = 'RealTotalCostRatio' in params ? params.RealTotalCostRatio : null;
+        this.TotalCost = 'TotalCost' in params ? params.TotalCost : null;
 
     }
 }
@@ -4092,6 +4787,46 @@ class Deal extends  AbstractModel {
          */
         this.PayMode = null;
 
+        /**
+         * 交易类型
+modifyNetworkMode 调整带宽模式
+modifyNetworkSize 调整带宽大小
+refund 退款
+downgrade 降配
+upgrade 升配
+renew 续费
+purchase 购买
+preMoveOut 包年包月迁出资源
+preMoveIn 包年包月迁入资源
+preToPost 预付费转后付费
+postMoveOut 按量计费迁出资源
+postMoveIn 按量计费迁入资源
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Action = null;
+
+        /**
+         * 产品编码中文名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ProductName = null;
+
+        /**
+         * 子产品编码中文名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SubProductName = null;
+
+        /**
+         * 订单对应的资源id, 查询参数Limit超过200，将返回null
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.ResourceId = null;
+
     }
 
     /**
@@ -4131,6 +4866,10 @@ class Deal extends  AbstractModel {
         this.Formula = 'Formula' in params ? params.Formula : null;
         this.RefReturnDeals = 'RefReturnDeals' in params ? params.RefReturnDeals : null;
         this.PayMode = 'PayMode' in params ? params.PayMode : null;
+        this.Action = 'Action' in params ? params.Action : null;
+        this.ProductName = 'ProductName' in params ? params.ProductName : null;
+        this.SubProductName = 'SubProductName' in params ? params.SubProductName : null;
+        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
 
     }
 }
@@ -4216,6 +4955,64 @@ class DescribeCostDetailRequest extends  AbstractModel {
         this.ProductCode = 'ProductCode' in params ? params.ProductCode : null;
         this.PayMode = 'PayMode' in params ? params.PayMode : null;
         this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
+
+    }
+}
+
+/**
+ * DescribeVoucherUsageDetails返回参数结构体
+ * @class
+ */
+class DescribeVoucherUsageDetailsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 券总数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 总已用金额（微分）
+         * @type {number || null}
+         */
+        this.TotalUsedAmount = null;
+
+        /**
+         * 代金券使用记录细节
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<UsageRecords> || null}
+         */
+        this.UsageRecords = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.TotalUsedAmount = 'TotalUsedAmount' in params ? params.TotalUsedAmount : null;
+
+        if (params.UsageRecords) {
+            this.UsageRecords = new Array();
+            for (let z in params.UsageRecords) {
+                let obj = new UsageRecords();
+                obj.deserialize(params.UsageRecords[z]);
+                this.UsageRecords.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4477,7 +5274,7 @@ class ConditionBusiness extends  AbstractModel {
         super();
 
         /**
-         * 产品码
+         * 产品名称代码
          * @type {string || null}
          */
         this.BusinessCode = null;
@@ -4658,7 +5455,7 @@ class DescribeDosageCosDetailByDateRequest extends  AbstractModel {
         this.EndDate = null;
 
         /**
-         * COS 存储桶名称，可通过Get Service 接口是用来获取请求者名下的所有存储空间列表（Bucket list）https://tcloud-dev.oa.com/document/product/555/30925?!preview&!document=1
+         * COS 存储桶名称，可通过Get Service 接口是用来获取请求者名下的所有存储空间列表（Bucket list）https://cloud.tencent.com/document/product/436/8291
          * @type {string || null}
          */
         this.BucketName = null;
@@ -4675,6 +5472,41 @@ class DescribeDosageCosDetailByDateRequest extends  AbstractModel {
         this.StartDate = 'StartDate' in params ? params.StartDate : null;
         this.EndDate = 'EndDate' in params ? params.EndDate : null;
         this.BucketName = 'BucketName' in params ? params.BucketName : null;
+
+    }
+}
+
+/**
+ * 不适用商品信息
+ * @class
+ */
+class ExcludedProducts extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 不适用商品名称
+         * @type {string || null}
+         */
+        this.GoodsName = null;
+
+        /**
+         * postPay后付费/prePay预付费/riPay预留实例/空字符串或者"*"表示全部模式。
+         * @type {string || null}
+         */
+        this.PayMode = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.GoodsName = 'GoodsName' in params ? params.GoodsName : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
 
     }
 }
@@ -4735,6 +5567,12 @@ class PayModeSummaryOverviewItem extends  AbstractModel {
          */
         this.VoucherPayAmount = null;
 
+        /**
+         * 原价，单位为元。TotalCost字段自账单3.0（即2021-05）之后开始生效，账单3.0之前返回"-"。合同价的情况下，TotalCost字段与官网价格存在差异，也返回“-”。
+         * @type {string || null}
+         */
+        this.TotalCost = null;
+
     }
 
     /**
@@ -4760,6 +5598,7 @@ class PayModeSummaryOverviewItem extends  AbstractModel {
         this.CashPayAmount = 'CashPayAmount' in params ? params.CashPayAmount : null;
         this.IncentivePayAmount = 'IncentivePayAmount' in params ? params.IncentivePayAmount : null;
         this.VoucherPayAmount = 'VoucherPayAmount' in params ? params.VoucherPayAmount : null;
+        this.TotalCost = 'TotalCost' in params ? params.TotalCost : null;
 
     }
 }
@@ -4796,6 +5635,12 @@ class BusinessSummaryTotal extends  AbstractModel {
          */
         this.CashPayAmount = null;
 
+        /**
+         * 原价，单位为元。TotalCost字段自账单3.0（即2021-05）之后开始生效，账单3.0之前返回"-"。合同价的情况下，TotalCost字段与官网价格存在差异，也返回“-”。
+         * @type {string || null}
+         */
+        this.TotalCost = null;
+
     }
 
     /**
@@ -4809,6 +5654,7 @@ class BusinessSummaryTotal extends  AbstractModel {
         this.VoucherPayAmount = 'VoucherPayAmount' in params ? params.VoucherPayAmount : null;
         this.IncentivePayAmount = 'IncentivePayAmount' in params ? params.IncentivePayAmount : null;
         this.CashPayAmount = 'CashPayAmount' in params ? params.CashPayAmount : null;
+        this.TotalCost = 'TotalCost' in params ? params.TotalCost : null;
 
     }
 }
@@ -4885,6 +5731,7 @@ class DescribeCostSummaryByRegionResponse extends  AbstractModel {
 
 module.exports = {
     CostComponentSet: CostComponentSet,
+    VoucherInfos: VoucherInfos,
     DescribeCostSummaryByProductRequest: DescribeCostSummaryByProductRequest,
     ConsumptionSummaryTotal: ConsumptionSummaryTotal,
     DescribeCostSummaryByProjectResponse: DescribeCostSummaryByProjectResponse,
@@ -4904,11 +5751,12 @@ module.exports = {
     DescribeBillSummaryByRegionResponse: DescribeBillSummaryByRegionResponse,
     DetailSet: DetailSet,
     BillTransactionInfo: BillTransactionInfo,
-    RegionSummaryOverviewItem: RegionSummaryOverviewItem,
+    DescribeVoucherInfoResponse: DescribeVoucherInfoResponse,
     ConsumptionResourceSummaryDataItem: ConsumptionResourceSummaryDataItem,
     DescribeAccountBalanceRequest: DescribeAccountBalanceRequest,
     DescribeBillDetailRequest: DescribeBillDetailRequest,
     ConsumptionProjectSummaryDataItem: ConsumptionProjectSummaryDataItem,
+    RegionSummaryOverviewItem: RegionSummaryOverviewItem,
     DescribeCostSummaryByProductResponse: DescribeCostSummaryByProductResponse,
     ProductInfo: ProductInfo,
     DescribeDosageDetailByDateResponse: DescribeDosageDetailByDateResponse,
@@ -4921,16 +5769,22 @@ module.exports = {
     DescribeBillSummaryByRegionRequest: DescribeBillSummaryByRegionRequest,
     DescribeBillSummaryByPayModeRequest: DescribeBillSummaryByPayModeRequest,
     DescribeCostSummaryByProjectRequest: DescribeCostSummaryByProjectRequest,
+    UsageRecords: UsageRecords,
     ConsumptionRegionSummaryDataItem: ConsumptionRegionSummaryDataItem,
     DescribeDosageCosDetailByDateResponse: DescribeDosageCosDetailByDateResponse,
+    UsageDetails: UsageDetails,
     DescribeBillResourceSummaryResponse: DescribeBillResourceSummaryResponse,
     ActionSummaryOverviewItem: ActionSummaryOverviewItem,
+    DescribeVoucherInfoRequest: DescribeVoucherInfoRequest,
+    ApplicableProducts: ApplicableProducts,
     ConditionPayMode: ConditionPayMode,
+    DescribeVoucherUsageDetailsRequest: DescribeVoucherUsageDetailsRequest,
     DescribeDealsByCondRequest: DescribeDealsByCondRequest,
     DescribeBillResourceSummaryRequest: DescribeBillResourceSummaryRequest,
     PayDealsRequest: PayDealsRequest,
     DescribeBillListRequest: DescribeBillListRequest,
     PayDealsResponse: PayDealsResponse,
+    SummaryTotal: SummaryTotal,
     BillDetail: BillDetail,
     DescribeBillSummaryByTagResponse: DescribeBillSummaryByTagResponse,
     TagSummaryOverviewItem: TagSummaryOverviewItem,
@@ -4939,6 +5793,7 @@ module.exports = {
     ConsumptionResourceSummaryConditionValue: ConsumptionResourceSummaryConditionValue,
     Deal: Deal,
     DescribeCostDetailRequest: DescribeCostDetailRequest,
+    DescribeVoucherUsageDetailsResponse: DescribeVoucherUsageDetailsResponse,
     DescribeDealsByCondResponse: DescribeDealsByCondResponse,
     ConditionProject: ConditionProject,
     CosDetailSets: CosDetailSets,
@@ -4948,6 +5803,7 @@ module.exports = {
     DescribeCostSummaryByResourceRequest: DescribeCostSummaryByResourceRequest,
     DescribeCostDetailResponse: DescribeCostDetailResponse,
     DescribeDosageCosDetailByDateRequest: DescribeDosageCosDetailByDateRequest,
+    ExcludedProducts: ExcludedProducts,
     PayModeSummaryOverviewItem: PayModeSummaryOverviewItem,
     BusinessSummaryTotal: BusinessSummaryTotal,
     DescribeCostSummaryByRegionResponse: DescribeCostSummaryByRegionResponse,

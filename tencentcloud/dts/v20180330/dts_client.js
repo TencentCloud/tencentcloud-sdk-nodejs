@@ -16,24 +16,18 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const DescribeSyncJobsResponse = models.DescribeSyncJobsResponse;
 const DescribeMigrateJobsResponse = models.DescribeMigrateJobsResponse;
-const MigrateDetailInfo = models.MigrateDetailInfo;
+const MigrateStepDetailInfo = models.MigrateStepDetailInfo;
 const DeleteMigrateJobResponse = models.DeleteMigrateJobResponse;
 const CreateMigrateCheckJobRequest = models.CreateMigrateCheckJobRequest;
 const ModifySubscribeVipVportRequest = models.ModifySubscribeVipVportRequest;
-const SyncInstanceInfo = models.SyncInstanceInfo;
 const ModifySubscribeNameResponse = models.ModifySubscribeNameResponse;
-const CreateSyncJobResponse = models.CreateSyncJobResponse;
 const DescribeMigrateCheckJobRequest = models.DescribeMigrateCheckJobRequest;
 const IsolateSubscribeResponse = models.IsolateSubscribeResponse;
 const ModifySubscribeObjectsResponse = models.ModifySubscribeObjectsResponse;
-const SwitchDrToMasterRequest = models.SwitchDrToMasterRequest;
-const StartSyncJobRequest = models.StartSyncJobRequest;
 const CreateMigrateJobRequest = models.CreateMigrateJobRequest;
-const SubscribeInfo = models.SubscribeInfo;
+const SubscribeRegionConf = models.SubscribeRegionConf;
 const ModifySubscribeNameRequest = models.ModifySubscribeNameRequest;
-const SyncJobInfo = models.SyncJobInfo;
 const ModifySubscribeConsumeTimeResponse = models.ModifySubscribeConsumeTimeResponse;
 const DstInfo = models.DstInfo;
 const DescribeSubscribeConfResponse = models.DescribeSubscribeConfResponse;
@@ -43,59 +37,44 @@ const ConsistencyParams = models.ConsistencyParams;
 const ModifyMigrateJobRequest = models.ModifyMigrateJobRequest;
 const CreateSubscribeRequest = models.CreateSubscribeRequest;
 const CreateMigrateCheckJobResponse = models.CreateMigrateCheckJobResponse;
-const MigrateStepDetailInfo = models.MigrateStepDetailInfo;
 const ModifySubscribeObjectsRequest = models.ModifySubscribeObjectsRequest;
 const DescribeMigrateCheckJobResponse = models.DescribeMigrateCheckJobResponse;
-const SubscribeRegionConf = models.SubscribeRegionConf;
 const ActivateSubscribeRequest = models.ActivateSubscribeRequest;
 const OfflineIsolatedSubscribeRequest = models.OfflineIsolatedSubscribeRequest;
 const DescribeSubscribesRequest = models.DescribeSubscribesRequest;
 const ResetSubscribeResponse = models.ResetSubscribeResponse;
-const StartSyncJobResponse = models.StartSyncJobResponse;
 const DescribeSubscribesResponse = models.DescribeSubscribesResponse;
-const SyncCheckStepInfo = models.SyncCheckStepInfo;
-const CreateSyncCheckJobResponse = models.CreateSyncCheckJobResponse;
+const ModifySubscribeConsumeTimeRequest = models.ModifySubscribeConsumeTimeRequest;
 const StopMigrateJobRequest = models.StopMigrateJobRequest;
-const DescribeSyncCheckJobRequest = models.DescribeSyncCheckJobRequest;
+const MigrateDetailInfo = models.MigrateDetailInfo;
 const DescribeRegionConfResponse = models.DescribeRegionConfResponse;
-const ModifySyncJobResponse = models.ModifySyncJobResponse;
 const DescribeAsyncRequestInfoResponse = models.DescribeAsyncRequestInfoResponse;
-const CompleteMigrateJobRequest = models.CompleteMigrateJobRequest;
+const SubscribeInfo = models.SubscribeInfo;
 const ResetSubscribeRequest = models.ResetSubscribeRequest;
 const TagItem = models.TagItem;
 const TagFilter = models.TagFilter;
-const ModifySubscribeConsumeTimeRequest = models.ModifySubscribeConsumeTimeRequest;
-const SwitchDrToMasterResponse = models.SwitchDrToMasterResponse;
 const ModifyMigrateJobResponse = models.ModifyMigrateJobResponse;
-const CreateSyncJobRequest = models.CreateSyncJobRequest;
-const DescribeSyncJobsRequest = models.DescribeSyncJobsRequest;
 const DescribeMigrateJobsRequest = models.DescribeMigrateJobsRequest;
-const SyncDetailInfo = models.SyncDetailInfo;
 const ModifySubscribeAutoRenewFlagResponse = models.ModifySubscribeAutoRenewFlagResponse;
 const StopMigrateJobResponse = models.StopMigrateJobResponse;
-const SyncOption = models.SyncOption;
 const OfflineIsolatedSubscribeResponse = models.OfflineIsolatedSubscribeResponse;
-const SyncStepDetailInfo = models.SyncStepDetailInfo;
 const IsolateSubscribeRequest = models.IsolateSubscribeRequest;
 const ModifySubscribeAutoRenewFlagRequest = models.ModifySubscribeAutoRenewFlagRequest;
-const DeleteSyncJobResponse = models.DeleteSyncJobResponse;
-const CreateSyncCheckJobRequest = models.CreateSyncCheckJobRequest;
-const ModifySyncJobRequest = models.ModifySyncJobRequest;
+const CompleteMigrateJobRequest = models.CompleteMigrateJobRequest;
+const MigrateJobInfo = models.MigrateJobInfo;
 const DescribeRegionConfRequest = models.DescribeRegionConfRequest;
 const CompleteMigrateJobResponse = models.CompleteMigrateJobResponse;
-const StartMigrateJobResponse = models.StartMigrateJobResponse;
 const SubscribeObject = models.SubscribeObject;
 const CreateMigrateJobResponse = models.CreateMigrateJobResponse;
 const DescribeSubscribeConfRequest = models.DescribeSubscribeConfRequest;
 const ModifySubscribeVipVportResponse = models.ModifySubscribeVipVportResponse;
-const MigrateJobInfo = models.MigrateJobInfo;
 const DeleteMigrateJobRequest = models.DeleteMigrateJobRequest;
-const DeleteSyncJobRequest = models.DeleteSyncJobRequest;
 const ActivateSubscribeResponse = models.ActivateSubscribeResponse;
 const CreateSubscribeResponse = models.CreateSubscribeResponse;
 const MigrateOption = models.MigrateOption;
+const SubsErr = models.SubsErr;
 const ErrorInfo = models.ErrorInfo;
-const DescribeSyncCheckJobResponse = models.DescribeSyncCheckJobResponse;
+const StartMigrateJobResponse = models.StartMigrateJobResponse;
 const StartMigrateJobRequest = models.StartMigrateJobRequest;
 
 
@@ -110,28 +89,6 @@ class DtsClient extends AbstractClient {
     }
     
     /**
-     * 删除灾备同步任务 （运行中的同步任务不能删除）。
-     * @param {DeleteSyncJobRequest} req
-     * @param {function(string, DeleteSyncJobResponse):void} cb
-     * @public
-     */
-    DeleteSyncJob(req, cb) {
-        let resp = new DeleteSyncJobResponse();
-        this.request("DeleteSyncJob", req, resp, cb);
-    }
-
-    /**
-     * 查询在迁移平台发起的灾备同步任务
-     * @param {DescribeSyncJobsRequest} req
-     * @param {function(string, DescribeSyncJobsResponse):void} cb
-     * @public
-     */
-    DescribeSyncJobs(req, cb) {
-        let resp = new DescribeSyncJobsResponse();
-        this.request("DescribeSyncJobs", req, resp, cb);
-    }
-
-    /**
      * 本接口用于配置数据订阅，只有在未配置状态的订阅实例才能调用此接口。
      * @param {ActivateSubscribeRequest} req
      * @param {function(string, ActivateSubscribeResponse):void} cb
@@ -143,31 +100,6 @@ class DtsClient extends AbstractClient {
     }
 
     /**
-     * 修改灾备同步任务. 
-当同步任务处于下述状态时, 允许调用本接口: 同步任务创建中, 创建完成, 校验成功, 校验失败. 
-源实例和目标实例信息不允许修改，可以修改任务名、需要同步的库表。
-     * @param {ModifySyncJobRequest} req
-     * @param {function(string, ModifySyncJobResponse):void} cb
-     * @public
-     */
-    ModifySyncJob(req, cb) {
-        let resp = new ModifySyncJobResponse();
-        this.request("ModifySyncJob", req, resp, cb);
-    }
-
-    /**
-     * 本接口(CreateSyncJob)用于创建灾备同步任务。
-创建同步任务后，可以通过 CreateSyncCheckJob 接口发起校验任务。校验成功后才可以通过 StartSyncJob 接口启动同步任务。
-     * @param {CreateSyncJobRequest} req
-     * @param {function(string, CreateSyncJobResponse):void} cb
-     * @public
-     */
-    CreateSyncJob(req, cb) {
-        let resp = new CreateSyncJobResponse();
-        this.request("CreateSyncJob", req, resp, cb);
-    }
-
-    /**
      * 本接口(ModifySubscribeObjects)用于修改数据订阅通道的订阅规则
      * @param {ModifySubscribeObjectsRequest} req
      * @param {function(string, ModifySubscribeObjectsResponse):void} cb
@@ -176,17 +108,6 @@ class DtsClient extends AbstractClient {
     ModifySubscribeObjects(req, cb) {
         let resp = new ModifySubscribeObjectsResponse();
         this.request("ModifySubscribeObjects", req, resp, cb);
-    }
-
-    /**
-     * 创建的灾备同步任务在通过 CreateSyncCheckJob 和 DescribeSyncCheckJob 确定校验成功后，可以调用该接口启动同步
-     * @param {StartSyncJobRequest} req
-     * @param {function(string, StartSyncJobResponse):void} cb
-     * @public
-     */
-    StartSyncJob(req, cb) {
-        let resp = new StartSyncJobResponse();
-        this.request("StartSyncJob", req, resp, cb);
     }
 
     /**
@@ -211,17 +132,6 @@ class DtsClient extends AbstractClient {
     DescribeAsyncRequestInfo(req, cb) {
         let resp = new DescribeAsyncRequestInfoResponse();
         this.request("DescribeAsyncRequestInfo", req, resp, cb);
-    }
-
-    /**
-     * 将灾备升级为主实例，停止从原来所属主实例的同步，断开主备关系。
-     * @param {SwitchDrToMasterRequest} req
-     * @param {function(string, SwitchDrToMasterResponse):void} cb
-     * @public
-     */
-    SwitchDrToMaster(req, cb) {
-        let resp = new SwitchDrToMasterResponse();
-        this.request("SwitchDrToMaster", req, resp, cb);
     }
 
     /**
@@ -282,22 +192,6 @@ class DtsClient extends AbstractClient {
     }
 
     /**
-     * 本接口用于在通过 CreateSyncCheckJob 接口创建灾备同步校验任务后，获取校验的结果。能查询到当前校验的状态和进度。
-若通过校验, 则可调用 StartSyncJob 启动同步任务。
-若未通过校验, 则会返回校验失败的原因。 可通过 ModifySyncJob 修改配置，然后再次发起校验。
-校验任务需要大概约30秒，当返回的 Status 不为 finished 时表示尚未校验完成，需要轮询该接口。
-如果 Status=finished 且 CheckFlag=1 时表示校验成功。
-如果 Status=finished 且 CheckFlag !=1 时表示校验失败。
-     * @param {DescribeSyncCheckJobRequest} req
-     * @param {function(string, DescribeSyncCheckJobResponse):void} cb
-     * @public
-     */
-    DescribeSyncCheckJob(req, cb) {
-        let resp = new DescribeSyncCheckJobResponse();
-        this.request("DescribeSyncCheckJob", req, resp, cb);
-    }
-
-    /**
      * 本接口（CreateMigrateJob）用于创建数据迁移任务。
 
 如果是金融区链路, 请使用域名: dts.ap-shenzhen-fsi.tencentcloudapi.com
@@ -325,6 +219,8 @@ class DtsClient extends AbstractClient {
      * 创建校验迁移任务
 在开始迁移前, 必须调用本接口创建校验, 且校验成功后才能开始迁移. 校验的结果可以通过DescribeMigrateCheckJob查看.
 校验成功后,迁移任务若有修改, 则必须重新创建校验并通过后, 才能开始迁移.
+
+如果是金融区链路, 请使用域名: https://dts.ap-shenzhen-fsi.tencentcloudapi.com
      * @param {CreateMigrateCheckJobRequest} req
      * @param {function(string, CreateMigrateCheckJobResponse):void} cb
      * @public
@@ -354,18 +250,6 @@ class DtsClient extends AbstractClient {
     ModifySubscribeName(req, cb) {
         let resp = new ModifySubscribeNameResponse();
         this.request("ModifySubscribeName", req, resp, cb);
-    }
-
-    /**
-     * 在调用 StartSyncJob 接口启动灾备同步前, 必须调用本接口创建校验, 且校验成功后才能开始同步数据. 校验的结果可以通过 DescribeSyncCheckJob 查看.
-校验成功后才能启动同步.
-     * @param {CreateSyncCheckJobRequest} req
-     * @param {function(string, CreateSyncCheckJobResponse):void} cb
-     * @public
-     */
-    CreateSyncCheckJob(req, cb) {
-        let resp = new CreateSyncCheckJobResponse();
-        this.request("CreateSyncCheckJob", req, resp, cb);
     }
 
     /**

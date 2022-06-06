@@ -116,7 +116,7 @@ class Candidate extends  AbstractModel {
         this.PersonId = null;
 
         /**
-         * 人体轨迹ID。
+         * 人体动作轨迹ID。
          * @type {string || null}
          */
         this.TraceId = null;
@@ -388,6 +388,27 @@ AttributesType 不含 LowerBodyCloth 或检测超过 5 个人体时，此参数�
             let obj = new LowerBodyCloth();
             obj.deserialize(params.LowerBodyCloth)
             this.LowerBodyCloth = obj;
+        }
+
+    }
+}
+
+/**
+ * GetSummaryInfo请求参数结构体
+ * @class
+ */
+class GetSummaryInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
 
     }
@@ -829,7 +850,7 @@ class CreatePersonRequest extends  AbstractModel {
         this.PersonId = null;
 
         /**
-         * 人体轨迹信息。
+         * 人体动作轨迹信息。
          * @type {Trace || null}
          */
         this.Trace = null;
@@ -950,6 +971,55 @@ class DeleteGroupRequest extends  AbstractModel {
             return;
         }
         this.GroupId = 'GroupId' in params ? params.GroupId : null;
+
+    }
+}
+
+/**
+ * GetSummaryInfo返回参数结构体
+ * @class
+ */
+class GetSummaryInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 人体库总数量。
+         * @type {number || null}
+         */
+        this.GroupCount = null;
+
+        /**
+         * 人员总数量
+         * @type {number || null}
+         */
+        this.PersonCount = null;
+
+        /**
+         * 人员轨迹总数量
+         * @type {number || null}
+         */
+        this.TraceCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.GroupCount = 'GroupCount' in params ? params.GroupCount : null;
+        this.PersonCount = 'PersonCount' in params ? params.PersonCount : null;
+        this.TraceCount = 'TraceCount' in params ? params.TraceCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1232,7 +1302,7 @@ class CreateSegmentationTaskRequest extends  AbstractModel {
 }
 
 /**
- * 人体轨迹信息。
+ * 人体动作轨迹信息。
  * @class
  */
 class TraceInfo extends  AbstractModel {
@@ -1240,13 +1310,13 @@ class TraceInfo extends  AbstractModel {
         super();
 
         /**
-         * 人体轨迹ID。
+         * 人体动作轨迹ID。
          * @type {string || null}
          */
         this.TraceId = null;
 
         /**
-         * 包含的人体轨迹图片Id列表。
+         * 包含的人体动作轨迹图片Id列表。
          * @type {Array.<string> || null}
          */
         this.BodyIds = null;
@@ -1537,13 +1607,13 @@ class SearchTraceRequest extends  AbstractModel {
         this.GroupId = null;
 
         /**
-         * 人体轨迹信息。
+         * 人体动作轨迹信息。
          * @type {Trace || null}
          */
         this.Trace = null;
 
         /**
-         * 单张被识别的人体轨迹返回的最相似人员数量。
+         * 单张被识别的人体动作轨迹返回的最相似人员数量。
 默认值为5，最大值为100。
  例，设MaxPersonNum为8，则返回Top8相似的人员信息。 值越大，需要处理的时间越长。建议不要超过10。
          * @type {number || null}
@@ -1692,7 +1762,7 @@ class PersonInfo extends  AbstractModel {
         this.PersonId = null;
 
         /**
-         * 包含的人体轨迹图片信息列表。
+         * 包含的人体动作轨迹图片信息列表。
          * @type {Array.<TraceInfo> || null}
          */
         this.TraceInfos = null;
@@ -1816,7 +1886,7 @@ class SegmentCustomizedPortraitPicResponse extends  AbstractModel {
 }
 
 /**
- * 人体轨迹信息
+ * 人体动作轨迹信息
  * @class
  */
 class Trace extends  AbstractModel {
@@ -1824,7 +1894,7 @@ class Trace extends  AbstractModel {
         super();
 
         /**
-         * 人体轨迹图片 Base64 数组。 
+         * 人体动作轨迹图片 Base64 数组。 
 数组长度最小为1最大为5。 
 单个图片 base64 编码后大小不可超过2M。 
 支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
@@ -1833,7 +1903,7 @@ class Trace extends  AbstractModel {
         this.Images = null;
 
         /**
-         * 人体轨迹图片 Url 数组。 
+         * 人体动作轨迹图片 Url 数组。 
 数组长度最小为1最大为5。 
 单个图片 base64 编码后大小不可超过2M。 
 Urls、Images必须提供一个，如果都提供，只使用 Urls。 
@@ -2372,16 +2442,16 @@ class SearchTraceResponse extends  AbstractModel {
         this.Candidates = null;
 
         /**
-         * 输入的人体轨迹图片中的合法性校验结果。
+         * 输入的人体动作轨迹图片中的合法性校验结果。
 只有为0时结果才有意义。
--1001: 输入图片不合法。-1002: 输入图片不能构成轨迹。
+-1001: 输入图片不合法。-1002: 输入图片不能构成动作轨迹。
          * @type {number || null}
          */
         this.InputRetCode = null;
 
         /**
-         * 输入的人体轨迹图片中的合法性校验结果详情。 
--1101:图片无效，-1102:url不合法。-1103:图片过大。-1104:图片下载失败。-1105:图片解码失败。-1109:图片分辨率过高。-2023:轨迹中有非同人图片。-2024: 轨迹提取失败。-2025: 人体检测失败。
+         * 输入的人体动作轨迹图片中的合法性校验结果详情。 
+-1101:图片无效，-1102:url不合法。-1103:图片过大。-1104:图片下载失败。-1105:图片解码失败。-1109:图片分辨率过高。-2023:动作轨迹中有非同人图片。-2024: 动作轨迹提取失败。-2025: 人体检测失败。
          * @type {Array.<number> || null}
          */
         this.InputRetCodeDetails = null;
@@ -2433,7 +2503,7 @@ class CreateTraceResponse extends  AbstractModel {
         super();
 
         /**
-         * 人员轨迹唯一标识。
+         * 人员动作轨迹唯一标识。
          * @type {string || null}
          */
         this.TraceId = null;
@@ -2445,7 +2515,7 @@ class CreateTraceResponse extends  AbstractModel {
         this.BodyModelVersion = null;
 
         /**
-         * 输入的人体轨迹图片中的合法性校验结果。
+         * 输入的人体动作轨迹图片中的合法性校验结果。
 只有为0时结果才有意义。
 -1001: 输入图片不合法。-1002: 输入图片不能构成轨迹。
          * @type {number || null}
@@ -2453,8 +2523,8 @@ class CreateTraceResponse extends  AbstractModel {
         this.InputRetCode = null;
 
         /**
-         * 输入的人体轨迹图片中的合法性校验结果详情。 
--1101:图片无效，-1102:url不合法。-1103:图片过大。-1104:图片下载失败。-1105:图片解码失败。-1109:图片分辨率过高。-2023:轨迹中有非同人图片。-2024: 轨迹提取失败。-2025: 人体检测失败。
+         * 输入的人体动作轨迹图片中的合法性校验结果详情。 
+-1101:图片无效，-1102:url不合法。-1103:图片过大。-1104:图片下载失败。-1105:图片解码失败。-1109:图片分辨率过高。-2023:动作轨迹中有非同人图片。-2024: 动作轨迹提取失败。-2025: 人体检测失败。
          * @type {Array.<number> || null}
          */
         this.InputRetCodeDetails = null;
@@ -2492,7 +2562,7 @@ class CreatePersonResponse extends  AbstractModel {
         super();
 
         /**
-         * 人员轨迹唯一标识。
+         * 人员动作轨迹唯一标识。
          * @type {string || null}
          */
         this.TraceId = null;
@@ -2504,16 +2574,16 @@ class CreatePersonResponse extends  AbstractModel {
         this.BodyModelVersion = null;
 
         /**
-         * 输入的人体轨迹图片中的合法性校验结果。
+         * 输入的人体动作轨迹图片中的合法性校验结果。
 只有为0时结果才有意义。
--1001: 输入图片不合法。-1002: 输入图片不能构成轨迹。
+-1001: 输入图片不合法。-1002: 输入图片不能构成动作轨迹。
          * @type {number || null}
          */
         this.InputRetCode = null;
 
         /**
-         * 输入的人体轨迹图片中的合法性校验结果详情。 
--1101:图片无效，-1102:url不合法。-1103:图片过大。-1104:图片下载失败。-1105:图片解码失败。-1109:图片分辨率过高。-2023:轨迹中有非同人图片。-2024: 轨迹提取失败。-2025: 人体检测失败。
+         * 输入的人体动作轨迹图片中的合法性校验结果详情。 
+-1101:图片无效，-1102:url不合法。-1103:图片过大。-1104:图片下载失败。-1105:图片解码失败。-1109:图片分辨率过高。-2023:动作轨迹中有非同人图片。-2024: 动作轨迹提取失败。-2025: 人体检测失败。
 RetCode 的顺序和入参中Images 或 Urls 的顺序一致。
          * @type {Array.<number> || null}
          */
@@ -2776,7 +2846,7 @@ class CreateTraceRequest extends  AbstractModel {
         this.PersonId = null;
 
         /**
-         * 人体轨迹信息。
+         * 人体动作轨迹信息。
          * @type {Trace || null}
          */
         this.Trace = null;
@@ -2931,6 +3001,7 @@ module.exports = {
     ModifyGroupResponse: ModifyGroupResponse,
     TerminateSegmentationTaskResponse: TerminateSegmentationTaskResponse,
     BodyAttributeInfo: BodyAttributeInfo,
+    GetSummaryInfoRequest: GetSummaryInfoRequest,
     GetGroupListResponse: GetGroupListResponse,
     GroupInfo: GroupInfo,
     DescribeSegmentationTaskRequest: DescribeSegmentationTaskRequest,
@@ -2942,6 +3013,7 @@ module.exports = {
     ModifyPersonInfoResponse: ModifyPersonInfoResponse,
     CreateSegmentationTaskResponse: CreateSegmentationTaskResponse,
     DeleteGroupRequest: DeleteGroupRequest,
+    GetSummaryInfoResponse: GetSummaryInfoResponse,
     ModifyPersonInfoRequest: ModifyPersonInfoRequest,
     Gender: Gender,
     SegmentCustomizedPortraitPicRequest: SegmentCustomizedPortraitPicRequest,

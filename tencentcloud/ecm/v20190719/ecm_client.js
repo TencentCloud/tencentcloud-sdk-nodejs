@@ -16,333 +16,367 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const RunEIPDirectServiceEnabled = models.RunEIPDirectServiceEnabled;
-const DescribeTaskResultResponse = models.DescribeTaskResultResponse;
-const Ipv6Address = models.Ipv6Address;
-const BatchDeregisterTargetsResponse = models.BatchDeregisterTargetsResponse;
-const DescribePeakBaseOverviewRequest = models.DescribePeakBaseOverviewRequest;
-const SecurityGroupAssociationStatistics = models.SecurityGroupAssociationStatistics;
 const SecurityGroupLimitSet = models.SecurityGroupLimitSet;
-const DisassociateAddressResponse = models.DisassociateAddressResponse;
-const BatchModifyTargetWeightResponse = models.BatchModifyTargetWeightResponse;
-const InstanceStatistic = models.InstanceStatistic;
 const CreateRoutesRequest = models.CreateRoutesRequest;
-const SetSecurityGroupForLoadbalancersRequest = models.SetSecurityGroupForLoadbalancersRequest;
-const CreateLoadBalancerRequest = models.CreateLoadBalancerRequest;
 const DescribeHaVipsResponse = models.DescribeHaVipsResponse;
 const ModifyModuleSecurityGroupsRequest = models.ModifyModuleSecurityGroupsRequest;
-const Internet = models.Internet;
-const DescribeModuleResponse = models.DescribeModuleResponse;
-const ModifyLoadBalancerAttributesRequest = models.ModifyLoadBalancerAttributesRequest;
-const DeleteSecurityGroupPoliciesRequest = models.DeleteSecurityGroupPoliciesRequest;
-const ImageTask = models.ImageTask;
-const Province = models.Province;
+const TerminateInstancesResponse = models.TerminateInstancesResponse;
 const DescribeMonthPeakNetworkResponse = models.DescribeMonthPeakNetworkResponse;
-const ModifyModuleConfigResponse = models.ModifyModuleConfigResponse;
-const NetworkStorageRange = models.NetworkStorageRange;
-const ModifyModuleNameResponse = models.ModifyModuleNameResponse;
 const DescribeNetworkInterfacesRequest = models.DescribeNetworkInterfacesRequest;
-const DescribeSubnetsRequest = models.DescribeSubnetsRequest;
-const AssociateSecurityGroupsRequest = models.AssociateSecurityGroupsRequest;
-const StartInstancesRequest = models.StartInstancesRequest;
-const ImageLimitConfig = models.ImageLimitConfig;
-const HaVip = models.HaVip;
-const RouteConflict = models.RouteConflict;
-const SetLoadBalancerSecurityGroupsResponse = models.SetLoadBalancerSecurityGroupsResponse;
-const EipQuota = models.EipQuota;
-const DeleteSubnetResponse = models.DeleteSubnetResponse;
-const ModifyAddressesBandwidthResponse = models.ModifyAddressesBandwidthResponse;
-const DescribeSubnetsResponse = models.DescribeSubnetsResponse;
-const Tag = models.Tag;
-const RunInstancesRequest = models.RunInstancesRequest;
-const ReleaseAddressesRequest = models.ReleaseAddressesRequest;
-const DescribeLoadBalancersRequest = models.DescribeLoadBalancersRequest;
-const DescribeInstancesResponse = models.DescribeInstancesResponse;
+const CreateSecurityGroupPoliciesResponse = models.CreateSecurityGroupPoliciesResponse;
+const InstancePricesPartDetail = models.InstancePricesPartDetail;
 const DescribeMonthPeakNetworkRequest = models.DescribeMonthPeakNetworkRequest;
-const ImportImageRequest = models.ImportImageRequest;
-const ModifyModuleSecurityGroupsResponse = models.ModifyModuleSecurityGroupsResponse;
-const SrcImage = models.SrcImage;
-const SetSecurityGroupForLoadbalancersResponse = models.SetSecurityGroupForLoadbalancersResponse;
-const InstanceTypeConfig = models.InstanceTypeConfig;
+const SystemDisk = models.SystemDisk;
 const DescribeNodeResponse = models.DescribeNodeResponse;
-const RemovePrivateIpAddressesResponse = models.RemovePrivateIpAddressesResponse;
-const DescribeDefaultSubnetResponse = models.DescribeDefaultSubnetResponse;
-const ReplaceRouteTableAssociationRequest = models.ReplaceRouteTableAssociationRequest;
-const ReplaceSecurityGroupPolicyRequest = models.ReplaceSecurityGroupPolicyRequest;
-const ModifyTargetWeightResponse = models.ModifyTargetWeightResponse;
-const Node = models.Node;
-const DescribeCustomImageTaskResponse = models.DescribeCustomImageTaskResponse;
-const SecurityGroup = models.SecurityGroup;
-const DeleteSubnetRequest = models.DeleteSubnetRequest;
 const DescribeModuleRequest = models.DescribeModuleRequest;
-const DescribeTaskStatusRequest = models.DescribeTaskStatusRequest;
-const CreateNetworkInterfaceRequest = models.CreateNetworkInterfaceRequest;
-const CreateModuleResponse = models.CreateModuleResponse;
 const RebootInstancesRequest = models.RebootInstancesRequest;
-const RuleHealth = models.RuleHealth;
-const AllocateAddressesRequest = models.AllocateAddressesRequest;
-const NetworkInterfaceAttachment = models.NetworkInterfaceAttachment;
-const Instance = models.Instance;
-const DeleteNetworkInterfaceRequest = models.DeleteNetworkInterfaceRequest;
+const CreateDisksRequest = models.CreateDisksRequest;
+const AttachDisksRequest = models.AttachDisksRequest;
+const DescribeSnapshotsRequest = models.DescribeSnapshotsRequest;
 const RemovePrivateIpAddressesRequest = models.RemovePrivateIpAddressesRequest;
-const RouteTable = models.RouteTable;
-const ZoneInstanceCountISP = models.ZoneInstanceCountISP;
-const LoadBalancerHealth = models.LoadBalancerHealth;
-const DescribeTargetsRequest = models.DescribeTargetsRequest;
-const ModifyInstancesAttributeRequest = models.ModifyInstancesAttributeRequest;
 const InstanceFamilyTypeConfig = models.InstanceFamilyTypeConfig;
-const ResetInstancesResponse = models.ResetInstancesResponse;
-const DeleteVpcRequest = models.DeleteVpcRequest;
-const DeleteLoadBalancerListenersRequest = models.DeleteLoadBalancerListenersRequest;
-const MigratePrivateIpAddressRequest = models.MigratePrivateIpAddressRequest;
-const ModifySubnetAttributeResponse = models.ModifySubnetAttributeResponse;
-const ZoneInfo = models.ZoneInfo;
-const DescribeInstancesDeniedActionsRequest = models.DescribeInstancesDeniedActionsRequest;
-const DeleteRouteTableRequest = models.DeleteRouteTableRequest;
-const DescribeNodeRequest = models.DescribeNodeRequest;
-const CreateSubnetResponse = models.CreateSubnetResponse;
-const DescribeSecurityGroupPoliciesResponse = models.DescribeSecurityGroupPoliciesResponse;
+const DescribeImageRequest = models.DescribeImageRequest;
+const OsVersion = models.OsVersion;
 const DescribeListenersResponse = models.DescribeListenersResponse;
-const Area = models.Area;
-const ModifySecurityGroupPoliciesRequest = models.ModifySecurityGroupPoliciesRequest;
-const DescribeConfigRequest = models.DescribeConfigRequest;
-const DescribeInstanceVncUrlRequest = models.DescribeInstanceVncUrlRequest;
-const DescribeInstanceVncUrlResponse = models.DescribeInstanceVncUrlResponse;
 const TargetsWeightRule = models.TargetsWeightRule;
-const StopInstancesResponse = models.StopInstancesResponse;
 const StartInstancesResponse = models.StartInstancesResponse;
 const CreateVpcResponse = models.CreateVpcResponse;
-const ModifyTargetPortResponse = models.ModifyTargetPortResponse;
 const AssistantCidr = models.AssistantCidr;
-const TerminateInstancesRequest = models.TerminateInstancesRequest;
-const DescribeTaskStatusResponse = models.DescribeTaskStatusResponse;
-const BatchRegisterTargetsResponse = models.BatchRegisterTargetsResponse;
-const CreateModuleRequest = models.CreateModuleRequest;
-const ReplaceRouteTableAssociationResponse = models.ReplaceRouteTableAssociationResponse;
+const ModifyModuleIpDirectRequest = models.ModifyModuleIpDirectRequest;
 const InstanceNetworkInfo = models.InstanceNetworkInfo;
-const ModifyInstancesAttributeResponse = models.ModifyInstancesAttributeResponse;
-const ReleaseAddressesResponse = models.ReleaseAddressesResponse;
-const ModifyVpcAttributeRequest = models.ModifyVpcAttributeRequest;
-const DescribeInstancesDeniedActionsResponse = models.DescribeInstancesDeniedActionsResponse;
-const DeleteHaVipResponse = models.DeleteHaVipResponse;
-const ReleaseIpv6AddressesRequest = models.ReleaseIpv6AddressesRequest;
-const TaskOutput = models.TaskOutput;
-const ModuleCounter = models.ModuleCounter;
-const ReplaceSecurityGroupPolicyResponse = models.ReplaceSecurityGroupPolicyResponse;
-const ModifyPrivateIpAddressesAttributeResponse = models.ModifyPrivateIpAddressesAttributeResponse;
-const ReplaceRoutesResponse = models.ReplaceRoutesResponse;
-const PhysicalPosition = models.PhysicalPosition;
-const Listener = models.Listener;
-const ModifyLoadBalancerAttributesResponse = models.ModifyLoadBalancerAttributesResponse;
-const SetLoadBalancerSecurityGroupsRequest = models.SetLoadBalancerSecurityGroupsRequest;
-const DescribeDefaultSubnetRequest = models.DescribeDefaultSubnetRequest;
 const ResetInstancesMaxBandwidthResponse = models.ResetInstancesMaxBandwidthResponse;
-const DeleteSecurityGroupResponse = models.DeleteSecurityGroupResponse;
-const VpcInfo = models.VpcInfo;
-const Route = models.Route;
-const DescribeImageRequest = models.DescribeImageRequest;
-const CreateNetworkInterfaceResponse = models.CreateNetworkInterfaceResponse;
-const ModifyListenerRequest = models.ModifyListenerRequest;
-const RunInstancesResponse = models.RunInstancesResponse;
-const DescribeAddressQuotaRequest = models.DescribeAddressQuotaRequest;
-const ModifyModuleNameRequest = models.ModifyModuleNameRequest;
-const DescribeInstanceTypeConfigResponse = models.DescribeInstanceTypeConfigResponse;
 const NodeInstanceNum = models.NodeInstanceNum;
-const HealthCheck = models.HealthCheck;
-const DescribeSecurityGroupLimitsResponse = models.DescribeSecurityGroupLimitsResponse;
-const DescribeAddressesResponse = models.DescribeAddressesResponse;
-const AssignIpv6AddressesResponse = models.AssignIpv6AddressesResponse;
-const CreateRoutesResponse = models.CreateRoutesResponse;
-const NetworkInterface = models.NetworkInterface;
 const DeleteListenerRequest = models.DeleteListenerRequest;
-const DescribeSecurityGroupsResponse = models.DescribeSecurityGroupsResponse;
-const ImportCustomImageResponse = models.ImportCustomImageResponse;
-const DetachNetworkInterfaceResponse = models.DetachNetworkInterfaceResponse;
-const InstanceFamilyConfig = models.InstanceFamilyConfig;
-const MonthNetwork = models.MonthNetwork;
-const ResetRoutesResponse = models.ResetRoutesResponse;
-const DeleteModuleRequest = models.DeleteModuleRequest;
-const CreateImageResponse = models.CreateImageResponse;
-const ModifySecurityGroupPoliciesResponse = models.ModifySecurityGroupPoliciesResponse;
 const ResetInstancesMaxBandwidthRequest = models.ResetInstancesMaxBandwidthRequest;
 const LoadBalancerInternetAccessible = models.LoadBalancerInternetAccessible;
-const OsVersion = models.OsVersion;
 const ResetRoutesRequest = models.ResetRoutesRequest;
-const DisableRoutesResponse = models.DisableRoutesResponse;
-const PeakBase = models.PeakBase;
-const ResetInstancesPasswordResponse = models.ResetInstancesPasswordResponse;
-const ModifyModuleNetworkRequest = models.ModifyModuleNetworkRequest;
-const Image = models.Image;
-const TagSpecification = models.TagSpecification;
-const DetachNetworkInterfaceRequest = models.DetachNetworkInterfaceRequest;
-const AddressTemplateSpecification = models.AddressTemplateSpecification;
-const DescribeConfigResponse = models.DescribeConfigResponse;
-const AssignIpv6AddressesRequest = models.AssignIpv6AddressesRequest;
-const ModifyModuleNetworkResponse = models.ModifyModuleNetworkResponse;
+const TerminateDisksRequest = models.TerminateDisksRequest;
+const SecurityGroupAssociationStatistics = models.SecurityGroupAssociationStatistics;
 const ModifyDefaultSubnetResponse = models.ModifyDefaultSubnetResponse;
-const ModifyTargetWeightRequest = models.ModifyTargetWeightRequest;
-const CreateSubnetRequest = models.CreateSubnetRequest;
-const DescribeModuleDetailResponse = models.DescribeModuleDetailResponse;
-const TaskInput = models.TaskInput;
-const ModifyModuleDisableWanIpRequest = models.ModifyModuleDisableWanIpRequest;
-const Backend = models.Backend;
-const Subnet = models.Subnet;
-const ModifyVpcAttributeResponse = models.ModifyVpcAttributeResponse;
-const DeleteLoadBalancerRequest = models.DeleteLoadBalancerRequest;
-const ModifyIpv6AddressesAttributeResponse = models.ModifyIpv6AddressesAttributeResponse;
-const DeleteVpcResponse = models.DeleteVpcResponse;
-const Target = models.Target;
-const RouteTableAssociation = models.RouteTableAssociation;
-const SecurityGroupPolicySet = models.SecurityGroupPolicySet;
-const DescribeVpcsResponse = models.DescribeVpcsResponse;
-const ImageUrl = models.ImageUrl;
-const ISP = models.ISP;
-const PrivateIpAddressSpecification = models.PrivateIpAddressSpecification;
-const ModifySecurityGroupAttributeResponse = models.ModifySecurityGroupAttributeResponse;
-const ISPCounter = models.ISPCounter;
-const MigratePrivateIpAddressResponse = models.MigratePrivateIpAddressResponse;
+const DescribeRouteTablesResponse = models.DescribeRouteTablesResponse;
+const StopInstancesRequest = models.StopInstancesRequest;
+const DetachNetworkInterfaceResponse = models.DetachNetworkInterfaceResponse;
+const ImageTask = models.ImageTask;
+const ModifyListenerRequest = models.ModifyListenerRequest;
 const CreateImageRequest = models.CreateImageRequest;
+const Instance = models.Instance;
+const RunSecurityServiceEnabled = models.RunSecurityServiceEnabled;
+const DeleteLoadBalancerRequest = models.DeleteLoadBalancerRequest;
+const DescribeVpcsRequest = models.DescribeVpcsRequest;
+const DescribeRouteConflictsResponse = models.DescribeRouteConflictsResponse;
+const AssociateSecurityGroupsResponse = models.AssociateSecurityGroupsResponse;
+const BatchDeregisterTargetsRequest = models.BatchDeregisterTargetsRequest;
+const ModifyListenerResponse = models.ModifyListenerResponse;
+const DescribeTargetHealthResponse = models.DescribeTargetHealthResponse;
+const ModifyDefaultSubnetRequest = models.ModifyDefaultSubnetRequest;
+const DescribeTaskResultRequest = models.DescribeTaskResultRequest;
+const Snapshot = models.Snapshot;
+const AttachDisksResponse = models.AttachDisksResponse;
+const DescribeLoadBalancersRequest = models.DescribeLoadBalancersRequest;
+const DeleteRoutesResponse = models.DeleteRoutesResponse;
+const DescribeCustomImageTaskRequest = models.DescribeCustomImageTaskRequest;
+const DescribeSecurityGroupAssociationStatisticsResponse = models.DescribeSecurityGroupAssociationStatisticsResponse;
+const AssignPrivateIpAddressesResponse = models.AssignPrivateIpAddressesResponse;
+const PriceDetail = models.PriceDetail;
+const ImportImageResponse = models.ImportImageResponse;
+const DescribeSecurityGroupsRequest = models.DescribeSecurityGroupsRequest;
+const DescribePriceRunInstanceResponse = models.DescribePriceRunInstanceResponse;
+const DeleteImageResponse = models.DeleteImageResponse;
+const ModifySubnetAttributeResponse = models.ModifySubnetAttributeResponse;
+const DisassociateSecurityGroupsRequest = models.DisassociateSecurityGroupsRequest;
+const NetworkInterface = models.NetworkInterface;
+const KeyPair = models.KeyPair;
+const DescribeVpcsResponse = models.DescribeVpcsResponse;
+const ModifySecurityGroupAttributeRequest = models.ModifySecurityGroupAttributeRequest;
+const DescribePackingQuotaGroupResponse = models.DescribePackingQuotaGroupResponse;
+const LoadBalancer = models.LoadBalancer;
+const ModifyModuleNameResponse = models.ModifyModuleNameResponse;
+const DescribePeakBaseOverviewRequest = models.DescribePeakBaseOverviewRequest;
+const BatchModifyTargetWeightResponse = models.BatchModifyTargetWeightResponse;
+const InstanceStatistic = models.InstanceStatistic;
+const DeleteSecurityGroupPoliciesRequest = models.DeleteSecurityGroupPoliciesRequest;
+const ImportCustomImageResponse = models.ImportCustomImageResponse;
+const AssociateSecurityGroupsRequest = models.AssociateSecurityGroupsRequest;
+const RouteConflict = models.RouteConflict;
+const DeleteSubnetResponse = models.DeleteSubnetResponse;
+const ISP = models.ISP;
+const Address = models.Address;
+const PeakBase = models.PeakBase;
+const ReplaceRouteTableAssociationRequest = models.ReplaceRouteTableAssociationRequest;
+const ModifyTargetWeightResponse = models.ModifyTargetWeightResponse;
+const DescribeCustomImageTaskResponse = models.DescribeCustomImageTaskResponse;
+const ISPCounter = models.ISPCounter;
+const CreateModuleResponse = models.CreateModuleResponse;
+const DescribePackingQuotaGroupRequest = models.DescribePackingQuotaGroupRequest;
+const SecurityGroupPolicy = models.SecurityGroupPolicy;
+const TerminateDisksResponse = models.TerminateDisksResponse;
+const LoadBalancerHealth = models.LoadBalancerHealth;
+const CreateListenerResponse = models.CreateListenerResponse;
+const DeleteVpcRequest = models.DeleteVpcRequest;
+const Disk = models.Disk;
+const CreateSubnetResponse = models.CreateSubnetResponse;
+const DescribeSecurityGroupPoliciesResponse = models.DescribeSecurityGroupPoliciesResponse;
+const ModifySecurityGroupPoliciesRequest = models.ModifySecurityGroupPoliciesRequest;
+const NetworkStorageRange = models.NetworkStorageRange;
+const ReplaceRoutesRequest = models.ReplaceRoutesRequest;
+const DescribeTargetHealthRequest = models.DescribeTargetHealthRequest;
+const ModifyInstancesAttributeResponse = models.ModifyInstancesAttributeResponse;
+const ModifySubnetAttributeRequest = models.ModifySubnetAttributeRequest;
+const DisassociateAddressRequest = models.DisassociateAddressRequest;
+const ModuleCounter = models.ModuleCounter;
+const TaskInput = models.TaskInput;
+const ModifyLoadBalancerAttributesResponse = models.ModifyLoadBalancerAttributesResponse;
+const Tag = models.Tag;
+const DescribeDefaultSubnetRequest = models.DescribeDefaultSubnetRequest;
+const RunInstancesResponse = models.RunInstancesResponse;
+const TargetHealth = models.TargetHealth;
+const DescribeSecurityGroupLimitsResponse = models.DescribeSecurityGroupLimitsResponse;
+const DisassociateInstancesKeyPairsRequest = models.DisassociateInstancesKeyPairsRequest;
+const RouteTableAssociation = models.RouteTableAssociation;
+const ModifyTargetPortResponse = models.ModifyTargetPortResponse;
+const MonthNetwork = models.MonthNetwork;
+const ResetRoutesResponse = models.ResetRoutesResponse;
+const AllocateAddressesResponse = models.AllocateAddressesResponse;
+const CreateImageResponse = models.CreateImageResponse;
+const ModifyModuleNetworkRequest = models.ModifyModuleNetworkRequest;
+const AddressTemplateSpecification = models.AddressTemplateSpecification;
+const AssignIpv6AddressesRequest = models.AssignIpv6AddressesRequest;
+const DescribeModuleDetailResponse = models.DescribeModuleDetailResponse;
+const Backend = models.Backend;
+const ModifyIpv6AddressesAttributeResponse = models.ModifyIpv6AddressesAttributeResponse;
+const ImageUrl = models.ImageUrl;
+const ModifyModuleSecurityGroupsResponse = models.ModifyModuleSecurityGroupsResponse;
+const ReplaceSecurityGroupPolicyRequest = models.ReplaceSecurityGroupPolicyRequest;
+const CreateKeyPairResponse = models.CreateKeyPairResponse;
+const DeleteModuleResponse = models.DeleteModuleResponse;
+const DescribeModuleDetailRequest = models.DescribeModuleDetailRequest;
+const ModifyRouteTableAttributeRequest = models.ModifyRouteTableAttributeRequest;
+const ModifyModuleNetworkResponse = models.ModifyModuleNetworkResponse;
+const DescribeImportImageOsRequest = models.DescribeImportImageOsRequest;
+const CreateKeyPairRequest = models.CreateKeyPairRequest;
+const ModifyModuleIpDirectResponse = models.ModifyModuleIpDirectResponse;
+const ResetInstancesPasswordRequest = models.ResetInstancesPasswordRequest;
+const AssociateAddressResponse = models.AssociateAddressResponse;
+const DescribeAddressesRequest = models.DescribeAddressesRequest;
+const DescribeSecurityGroupPoliciesRequest = models.DescribeSecurityGroupPoliciesRequest;
+const CreateSecurityGroupResponse = models.CreateSecurityGroupResponse;
+const DeleteListenerResponse = models.DeleteListenerResponse;
+const ResetInstancesRequest = models.ResetInstancesRequest;
+const DeleteImageRequest = models.DeleteImageRequest;
+const PeakNetworkRegionInfo = models.PeakNetworkRegionInfo;
+const ModifyHaVipAttributeRequest = models.ModifyHaVipAttributeRequest;
+const ModifyAddressesBandwidthRequest = models.ModifyAddressesBandwidthRequest;
+const InstancesPrice = models.InstancesPrice;
+const ModifyImageAttributeResponse = models.ModifyImageAttributeResponse;
+const SimpleModule = models.SimpleModule;
+const TagInfo = models.TagInfo;
+const ModifyImageAttributeRequest = models.ModifyImageAttributeRequest;
+const InstanceNetworkLimitConfig = models.InstanceNetworkLimitConfig;
+const CreateModuleRequest = models.CreateModuleRequest;
+const CreateLoadBalancerResponse = models.CreateLoadBalancerResponse;
+const SetLoadBalancerSecurityGroupsRequest = models.SetLoadBalancerSecurityGroupsRequest;
+const DescribeImportImageOsResponse = models.DescribeImportImageOsResponse;
+const MigrateNetworkInterfaceResponse = models.MigrateNetworkInterfaceResponse;
+const Module = models.Module;
+const ListenerHealth = models.ListenerHealth;
+const DisassociateSecurityGroupsResponse = models.DisassociateSecurityGroupsResponse;
+const RunEIPDirectServiceEnabled = models.RunEIPDirectServiceEnabled;
+const ModifyTargetPortRequest = models.ModifyTargetPortRequest;
+const Ipv6Address = models.Ipv6Address;
+const CreateNetworkInterfaceRequest = models.CreateNetworkInterfaceRequest;
+const SetSecurityGroupForLoadbalancersRequest = models.SetSecurityGroupForLoadbalancersRequest;
+const DescribeInstancesDeniedActionsRequest = models.DescribeInstancesDeniedActionsRequest;
+const ModifyLoadBalancerAttributesRequest = models.ModifyLoadBalancerAttributesRequest;
+const DeleteHaVipResponse = models.DeleteHaVipResponse;
+const Province = models.Province;
+const DescribeSubnetsRequest = models.DescribeSubnetsRequest;
+const CreateSubnetRequest = models.CreateSubnetRequest;
+const HaVip = models.HaVip;
+const ModifyAddressesBandwidthResponse = models.ModifyAddressesBandwidthResponse;
+const RunInstancesRequest = models.RunInstancesRequest;
+const DescribeInstancesResponse = models.DescribeInstancesResponse;
+const InstanceTypeConfig = models.InstanceTypeConfig;
+const AllocateAddressesRequest = models.AllocateAddressesRequest;
+const ZoneInfo = models.ZoneInfo;
+const ModifyInstancesAttributeRequest = models.ModifyInstancesAttributeRequest;
+const ResetInstancesResponse = models.ResetInstancesResponse;
+const DescribeNodeRequest = models.DescribeNodeRequest;
+const ModifySecurityGroupAttributeResponse = models.ModifySecurityGroupAttributeResponse;
+const ModifyModuleConfigRequest = models.ModifyModuleConfigRequest;
+const Area = models.Area;
+const ModifyAddressAttributeResponse = models.ModifyAddressAttributeResponse;
+const DescribeInstanceVncUrlRequest = models.DescribeInstanceVncUrlRequest;
+const DescribeTaskStatusResponse = models.DescribeTaskStatusResponse;
+const ReplaceRouteTableAssociationResponse = models.ReplaceRouteTableAssociationResponse;
+const DescribeInstancesDeniedActionsResponse = models.DescribeInstancesDeniedActionsResponse;
+const ReleaseIpv6AddressesRequest = models.ReleaseIpv6AddressesRequest;
+const TaskOutput = models.TaskOutput;
+const PhysicalPosition = models.PhysicalPosition;
+const Listener = models.Listener;
+const StartInstancesRequest = models.StartInstancesRequest;
+const DeleteSnapshotsRequest = models.DeleteSnapshotsRequest;
+const Placement = models.Placement;
+const Target = models.Target;
+const DeleteSnapshotsResponse = models.DeleteSnapshotsResponse;
+const DescribeAddressesResponse = models.DescribeAddressesResponse;
+const ModifyIpv6AddressesAttributeRequest = models.ModifyIpv6AddressesAttributeRequest;
+const DeleteModuleRequest = models.DeleteModuleRequest;
+const DisableRoutesResponse = models.DisableRoutesResponse;
+const DescribeConfigResponse = models.DescribeConfigResponse;
+const DataDisk = models.DataDisk;
+const ModifyVpcAttributeResponse = models.ModifyVpcAttributeResponse;
+const PrivateIpAddressSpecification = models.PrivateIpAddressSpecification;
+const MigratePrivateIpAddressResponse = models.MigratePrivateIpAddressResponse;
 const DeleteRouteTableResponse = models.DeleteRouteTableResponse;
 const ModifyModuleDisableWanIpResponse = models.ModifyModuleDisableWanIpResponse;
 const EnhancedService = models.EnhancedService;
-const CreateListenerResponse = models.CreateListenerResponse;
-const DeleteModuleResponse = models.DeleteModuleResponse;
-const DescribeInstanceTypeConfigRequest = models.DescribeInstanceTypeConfigRequest;
 const DescribeLoadBalanceTaskStatusRequest = models.DescribeLoadBalanceTaskStatusRequest;
-const ImportCustomImageRequest = models.ImportCustomImageRequest;
 const ModifyHaVipAttributeResponse = models.ModifyHaVipAttributeResponse;
-const ModifyIpv6AddressesAttributeRequest = models.ModifyIpv6AddressesAttributeRequest;
-const DescribeModuleDetailRequest = models.DescribeModuleDetailRequest;
-const DeleteRoutesRequest = models.DeleteRoutesRequest;
-const AssociateAddressRequest = models.AssociateAddressRequest;
-const ModifySecurityGroupAttributeRequest = models.ModifySecurityGroupAttributeRequest;
-const ModifyModuleConfigRequest = models.ModifyModuleConfigRequest;
-const Position = models.Position;
-const DescribePeakNetworkOverviewResponse = models.DescribePeakNetworkOverviewResponse;
+const ModifyVpcAttributeRequest = models.ModifyVpcAttributeRequest;
+const TagSpecification = models.TagSpecification;
 const AttachNetworkInterfaceResponse = models.AttachNetworkInterfaceResponse;
-const SecurityGroupPolicy = models.SecurityGroupPolicy;
-const DescribeVpcsRequest = models.DescribeVpcsRequest;
-const DescribeRouteConflictsResponse = models.DescribeRouteConflictsResponse;
 const DescribeRouteTablesRequest = models.DescribeRouteTablesRequest;
 const DescribeBaseOverviewRequest = models.DescribeBaseOverviewRequest;
 const CreateHaVipResponse = models.CreateHaVipResponse;
-const AssociateSecurityGroupsResponse = models.AssociateSecurityGroupsResponse;
-const DiskInfo = models.DiskInfo;
-const ModifyRouteTableAttributeRequest = models.ModifyRouteTableAttributeRequest;
-const BatchDeregisterTargetsRequest = models.BatchDeregisterTargetsRequest;
-const DescribeImportImageOsRequest = models.DescribeImportImageOsRequest;
+const ImportImageRequest = models.ImportImageRequest;
+const DiskChargePrepaid = models.DiskChargePrepaid;
 const DisableRoutesRequest = models.DisableRoutesRequest;
-const ModifyListenerResponse = models.ModifyListenerResponse;
-const DescribeTargetHealthResponse = models.DescribeTargetHealthResponse;
-const DescribeLoadBalanceTaskStatusResponse = models.DescribeLoadBalanceTaskStatusResponse;
-const EnableRoutesRequest = models.EnableRoutesRequest;
-const ModifyDefaultSubnetRequest = models.ModifyDefaultSubnetRequest;
+const StopInstancesResponse = models.StopInstancesResponse;
+const ModifyModuleNameRequest = models.ModifyModuleNameRequest;
 const DescribeInstancesRequest = models.DescribeInstancesRequest;
 const CreateListenerRequest = models.CreateListenerRequest;
-const DescribeTaskResultRequest = models.DescribeTaskResultRequest;
-const VirtualPrivateCloud = models.VirtualPrivateCloud;
-const AssociateAddressResponse = models.AssociateAddressResponse;
-const Filter = models.Filter;
+const ReleaseAddressesRequest = models.ReleaseAddressesRequest;
 const CreateRouteTableRequest = models.CreateRouteTableRequest;
-const PublicIPAddressInfo = models.PublicIPAddressInfo;
-const TerminateInstancesResponse = models.TerminateInstancesResponse;
-const CreateHaVipRequest = models.CreateHaVipRequest;
-const DescribeAddressesRequest = models.DescribeAddressesRequest;
-const DescribeSecurityGroupPoliciesRequest = models.DescribeSecurityGroupPoliciesRequest;
+const ModifyModuleConfigResponse = models.ModifyModuleConfigResponse;
 const MigrateNetworkInterfaceRequest = models.MigrateNetworkInterfaceRequest;
+const SrcImage = models.SrcImage;
+const DescribeTaskStatusRequest = models.DescribeTaskStatusRequest;
+const ModifyAddressAttributeRequest = models.ModifyAddressAttributeRequest;
+const DescribePriceRunInstanceRequest = models.DescribePriceRunInstanceRequest;
+const DescribeTargetsResponse = models.DescribeTargetsResponse;
+const ImageOsList = models.ImageOsList;
+const BatchModifyTargetWeightRequest = models.BatchModifyTargetWeightRequest;
+const BatchTarget = models.BatchTarget;
+const City = models.City;
+const PeakNetwork = models.PeakNetwork;
+const RebootInstancesResponse = models.RebootInstancesResponse;
+const DeleteSecurityGroupPoliciesResponse = models.DeleteSecurityGroupPoliciesResponse;
+const DescribeHaVipsRequest = models.DescribeHaVipsRequest;
+const BatchRegisterTargetsRequest = models.BatchRegisterTargetsRequest;
+const RemovePrivateIpAddressesResponse = models.RemovePrivateIpAddressesResponse;
+const PublicIPAddressInfo = models.PublicIPAddressInfo;
+const ModifyModuleImageResponse = models.ModifyModuleImageResponse;
+const DeleteLoadBalancerListenersResponse = models.DeleteLoadBalancerListenersResponse;
+const VpcInfo = models.VpcInfo;
+const ModuleItem = models.ModuleItem;
+const CreateSecurityGroupPoliciesRequest = models.CreateSecurityGroupPoliciesRequest;
+const RunMonitorServiceEnabled = models.RunMonitorServiceEnabled;
+const ModifyRouteTableAttributeResponse = models.ModifyRouteTableAttributeResponse;
+const VirtualPrivateCloud = models.VirtualPrivateCloud;
+const ReleaseIpv6AddressesResponse = models.ReleaseIpv6AddressesResponse;
+const DescribeTaskResultResponse = models.DescribeTaskResultResponse;
+const BatchDeregisterTargetsResponse = models.BatchDeregisterTargetsResponse;
+const SetLoadBalancerSecurityGroupsResponse = models.SetLoadBalancerSecurityGroupsResponse;
+const CreateLoadBalancerRequest = models.CreateLoadBalancerRequest;
+const Internet = models.Internet;
+const DescribeModuleResponse = models.DescribeModuleResponse;
+const ImageLimitConfig = models.ImageLimitConfig;
+const EipQuota = models.EipQuota;
+const DescribeSubnetsResponse = models.DescribeSubnetsResponse;
+const SetSecurityGroupForLoadbalancersResponse = models.SetSecurityGroupForLoadbalancersResponse;
+const DescribeDefaultSubnetResponse = models.DescribeDefaultSubnetResponse;
+const DeleteSubnetRequest = models.DeleteSubnetRequest;
+const Position = models.Position;
+const RouteTable = models.RouteTable;
+const DeleteNetworkInterfaceRequest = models.DeleteNetworkInterfaceRequest;
+const DescribeTargetsRequest = models.DescribeTargetsRequest;
+const ReplaceRoutesResponse = models.ReplaceRoutesResponse;
+const DeleteHaVipRequest = models.DeleteHaVipRequest;
+const DeleteLoadBalancerListenersRequest = models.DeleteLoadBalancerListenersRequest;
+const MigratePrivateIpAddressRequest = models.MigratePrivateIpAddressRequest;
+const DeleteRouteTableRequest = models.DeleteRouteTableRequest;
+const DetachDisksRequest = models.DetachDisksRequest;
+const DescribeConfigRequest = models.DescribeConfigRequest;
+const NetworkInterfaceAttachment = models.NetworkInterfaceAttachment;
+const BatchRegisterTargetsResponse = models.BatchRegisterTargetsResponse;
+const ImportCustomImageRequest = models.ImportCustomImageRequest;
+const ReleaseAddressesResponse = models.ReleaseAddressesResponse;
+const ReplaceSecurityGroupPolicyResponse = models.ReplaceSecurityGroupPolicyResponse;
+const ModifyPrivateIpAddressesAttributeResponse = models.ModifyPrivateIpAddressesAttributeResponse;
+const RuleHealth = models.RuleHealth;
+const DeleteSecurityGroupResponse = models.DeleteSecurityGroupResponse;
+const CreateNetworkInterfaceResponse = models.CreateNetworkInterfaceResponse;
+const Node = models.Node;
+const DescribeDisksResponse = models.DescribeDisksResponse;
+const ZoneInstanceCountISP = models.ZoneInstanceCountISP;
+const DescribeAddressQuotaRequest = models.DescribeAddressQuotaRequest;
+const DescribeInstanceTypeConfigResponse = models.DescribeInstanceTypeConfigResponse;
+const HealthCheck = models.HealthCheck;
+const SecurityGroupPolicySet = models.SecurityGroupPolicySet;
+const AssignIpv6AddressesResponse = models.AssignIpv6AddressesResponse;
+const CreateRoutesResponse = models.CreateRoutesResponse;
+const DescribeSecurityGroupsResponse = models.DescribeSecurityGroupsResponse;
+const InstanceFamilyConfig = models.InstanceFamilyConfig;
+const ModifySecurityGroupPoliciesResponse = models.ModifySecurityGroupPoliciesResponse;
+const ServiceTemplateSpecification = models.ServiceTemplateSpecification;
+const PackingQuotaInfo = models.PackingQuotaInfo;
+const Image = models.Image;
+const DetachNetworkInterfaceRequest = models.DetachNetworkInterfaceRequest;
+const ModifyTargetWeightRequest = models.ModifyTargetWeightRequest;
+const DescribeRouteConflictsRequest = models.DescribeRouteConflictsRequest;
+const Subnet = models.Subnet;
+const AttachNetworkInterfaceRequest = models.AttachNetworkInterfaceRequest;
+const ResetInstancesPasswordResponse = models.ResetInstancesPasswordResponse;
+const SecurityGroup = models.SecurityGroup;
+const ModifyModuleDisableWanIpRequest = models.ModifyModuleDisableWanIpRequest;
+const DescribeInstanceVncUrlResponse = models.DescribeInstanceVncUrlResponse;
+const DisassociateAddressResponse = models.DisassociateAddressResponse;
+const DescribeInstanceTypeConfigRequest = models.DescribeInstanceTypeConfigRequest;
+const DeleteRoutesRequest = models.DeleteRoutesRequest;
+const AssociateAddressRequest = models.AssociateAddressRequest;
+const DescribePeakNetworkOverviewResponse = models.DescribePeakNetworkOverviewResponse;
+const DescribeLoadBalanceTaskStatusResponse = models.DescribeLoadBalanceTaskStatusResponse;
+const DiskInfo = models.DiskInfo;
+const Filter = models.Filter;
+const DescribeSnapshotsResponse = models.DescribeSnapshotsResponse;
+const CreateHaVipRequest = models.CreateHaVipRequest;
+const CreateDisksResponse = models.CreateDisksResponse;
 const DescribeAddressQuotaResponse = models.DescribeAddressQuotaResponse;
-const CreateSecurityGroupPoliciesResponse = models.CreateSecurityGroupPoliciesResponse;
-const CreateSecurityGroupResponse = models.CreateSecurityGroupResponse;
 const ZoneInstanceInfo = models.ZoneInstanceInfo;
 const DeleteLoadBalancerResponse = models.DeleteLoadBalancerResponse;
 const DeleteSecurityGroupRequest = models.DeleteSecurityGroupRequest;
-const ReplaceRoutesRequest = models.ReplaceRoutesRequest;
 const CreateRouteTableResponse = models.CreateRouteTableResponse;
-const ModifyModuleImageResponse = models.ModifyModuleImageResponse;
-const DeleteRoutesResponse = models.DeleteRoutesResponse;
-const ResetInstancesRequest = models.ResetInstancesRequest;
-const PeakNetwork = models.PeakNetwork;
-const DescribeCustomImageTaskRequest = models.DescribeCustomImageTaskRequest;
-const DescribeSecurityGroupAssociationStatisticsResponse = models.DescribeSecurityGroupAssociationStatisticsResponse;
+const DescribeDisksRequest = models.DescribeDisksRequest;
 const ModifyPrivateIpAddressesAttributeRequest = models.ModifyPrivateIpAddressesAttributeRequest;
-const DescribeTargetsResponse = models.DescribeTargetsResponse;
-const ImageOsList = models.ImageOsList;
-const InstanceOperator = models.InstanceOperator;
-const ModifyAddressAttributeResponse = models.ModifyAddressAttributeResponse;
-const ImportImageResponse = models.ImportImageResponse;
-const BatchModifyTargetWeightRequest = models.BatchModifyTargetWeightRequest;
+const DetachDisksResponse = models.DetachDisksResponse;
 const CreateSecurityGroupRequest = models.CreateSecurityGroupRequest;
 const DescribeSecurityGroupLimitsRequest = models.DescribeSecurityGroupLimitsRequest;
-const BatchTarget = models.BatchTarget;
-const City = models.City;
 const PrivateIPAddressInfo = models.PrivateIPAddressInfo;
-const DescribeTargetHealthRequest = models.DescribeTargetHealthRequest;
-const EnableRoutesResponse = models.EnableRoutesResponse;
+const DisassociateInstancesKeyPairsResponse = models.DisassociateInstancesKeyPairsResponse;
+const TerminateInstancesRequest = models.TerminateInstancesRequest;
 const DeleteNetworkInterfaceResponse = models.DeleteNetworkInterfaceResponse;
-const SimpleModule = models.SimpleModule;
 const DescribePeakNetworkOverviewRequest = models.DescribePeakNetworkOverviewRequest;
-const ModifyModuleIpDirectResponse = models.ModifyModuleIpDirectResponse;
-const AssignPrivateIpAddressesResponse = models.AssignPrivateIpAddressesResponse;
-const DescribeSecurityGroupsRequest = models.DescribeSecurityGroupsRequest;
-const PeakNetworkRegionInfo = models.PeakNetworkRegionInfo;
-const ModifyHaVipAttributeRequest = models.ModifyHaVipAttributeRequest;
-const RebootInstancesResponse = models.RebootInstancesResponse;
-const ModifyModuleIpDirectRequest = models.ModifyModuleIpDirectRequest;
-const ModifyAddressesBandwidthRequest = models.ModifyAddressesBandwidthRequest;
-const DeleteSecurityGroupPoliciesResponse = models.DeleteSecurityGroupPoliciesResponse;
-const ModifyAddressAttributeRequest = models.ModifyAddressAttributeRequest;
+const EnableRoutesRequest = models.EnableRoutesRequest;
+const OperatorAction = models.OperatorAction;
 const PeakFamilyInfo = models.PeakFamilyInfo;
 const DescribePeakBaseOverviewResponse = models.DescribePeakBaseOverviewResponse;
-const ModifyImageAttributeResponse = models.ModifyImageAttributeResponse;
-const DescribeHaVipsRequest = models.DescribeHaVipsRequest;
-const BatchRegisterTargetsRequest = models.BatchRegisterTargetsRequest;
 const DescribeImageResponse = models.DescribeImageResponse;
 const ListenerBackend = models.ListenerBackend;
 const RegionInfo = models.RegionInfo;
-const TagInfo = models.TagInfo;
-const DeleteImageResponse = models.DeleteImageResponse;
-const Address = models.Address;
+const PackingQuotaGroup = models.PackingQuotaGroup;
 const DescribeNetworkInterfacesResponse = models.DescribeNetworkInterfacesResponse;
-const DeleteHaVipRequest = models.DeleteHaVipRequest;
+const EnableRoutesResponse = models.EnableRoutesResponse;
 const AssignPrivateIpAddressesRequest = models.AssignPrivateIpAddressesRequest;
-const ResetInstancesPasswordRequest = models.ResetInstancesPasswordRequest;
-const ModifyImageAttributeRequest = models.ModifyImageAttributeRequest;
-const InstanceNetworkLimitConfig = models.InstanceNetworkLimitConfig;
-const OperatorAction = models.OperatorAction;
 const CreateVpcRequest = models.CreateVpcRequest;
-const CreateLoadBalancerResponse = models.CreateLoadBalancerResponse;
-const RunSecurityServiceEnabled = models.RunSecurityServiceEnabled;
 const DescribeSecurityGroupAssociationStatisticsRequest = models.DescribeSecurityGroupAssociationStatisticsRequest;
 const Country = models.Country;
-const DisassociateSecurityGroupsRequest = models.DisassociateSecurityGroupsRequest;
-const DescribeRouteTablesResponse = models.DescribeRouteTablesResponse;
-const StopInstancesRequest = models.StopInstancesRequest;
-const ModifySubnetAttributeRequest = models.ModifySubnetAttributeRequest;
-const AllocateAddressesResponse = models.AllocateAddressesResponse;
-const DisassociateAddressRequest = models.DisassociateAddressRequest;
-const DeleteLoadBalancerListenersResponse = models.DeleteLoadBalancerListenersResponse;
+const Route = models.Route;
 const DescribeListenersRequest = models.DescribeListenersRequest;
-const AttachNetworkInterfaceRequest = models.AttachNetworkInterfaceRequest;
-const ModuleItem = models.ModuleItem;
+const DeleteVpcResponse = models.DeleteVpcResponse;
 const ModifyModuleImageRequest = models.ModifyModuleImageRequest;
-const CreateSecurityGroupPoliciesRequest = models.CreateSecurityGroupPoliciesRequest;
-const RunMonitorServiceEnabled = models.RunMonitorServiceEnabled;
-const ModifyTargetPortRequest = models.ModifyTargetPortRequest;
-const DescribeImportImageOsResponse = models.DescribeImportImageOsResponse;
 const DescribeLoadBalancersResponse = models.DescribeLoadBalancersResponse;
-const ModifyRouteTableAttributeResponse = models.ModifyRouteTableAttributeResponse;
-const MigrateNetworkInterfaceResponse = models.MigrateNetworkInterfaceResponse;
-const DeleteListenerResponse = models.DeleteListenerResponse;
-const DeleteImageRequest = models.DeleteImageRequest;
-const Module = models.Module;
+const InstanceOperator = models.InstanceOperator;
 const DescribeBaseOverviewResponse = models.DescribeBaseOverviewResponse;
-const ServiceTemplateSpecification = models.ServiceTemplateSpecification;
-const TargetHealth = models.TargetHealth;
-const ListenerHealth = models.ListenerHealth;
-const DisassociateSecurityGroupsResponse = models.DisassociateSecurityGroupsResponse;
-const DescribeRouteConflictsRequest = models.DescribeRouteConflictsRequest;
-const ReleaseIpv6AddressesResponse = models.ReleaseIpv6AddressesResponse;
-const LoadBalancer = models.LoadBalancer;
 const AddressInfo = models.AddressInfo;
 
 
@@ -478,14 +512,14 @@ class EcmClient extends AbstractClient {
     }
 
     /**
-     * 查询导入镜像任务
-     * @param {DescribeCustomImageTaskRequest} req
-     * @param {function(string, DescribeCustomImageTaskResponse):void} cb
+     * 从CVM产品导入镜像到ECM
+     * @param {ImportImageRequest} req
+     * @param {function(string, ImportImageResponse):void} cb
      * @public
      */
-    DescribeCustomImageTask(req, cb) {
-        let resp = new DescribeCustomImageTaskResponse();
-        this.request("DescribeCustomImageTask", req, resp, cb);
+    ImportImage(req, cb) {
+        let resp = new ImportImageResponse();
+        this.request("ImportImage", req, resp, cb);
     }
 
     /**
@@ -544,14 +578,14 @@ class EcmClient extends AbstractClient {
     }
 
     /**
-     * 从CVM产品导入镜像到ECM
-     * @param {ImportImageRequest} req
-     * @param {function(string, ImportImageResponse):void} cb
+     * 查询导入镜像任务
+     * @param {DescribeCustomImageTaskRequest} req
+     * @param {function(string, DescribeCustomImageTaskResponse):void} cb
      * @public
      */
-    ImportImage(req, cb) {
-        let resp = new ImportImageResponse();
-        this.request("ImportImage", req, resp, cb);
+    DescribeCustomImageTask(req, cb) {
+        let resp = new DescribeCustomImageTaskResponse();
+        this.request("DescribeCustomImageTask", req, resp, cb);
     }
 
     /**
@@ -632,16 +666,14 @@ class EcmClient extends AbstractClient {
     }
 
     /**
-     * 只有当前账号下的安全组允许被删除。
-安全组实例ID如果在其他安全组的规则中被引用，则无法直接删除。这种情况下，需要先进行规则修改，再删除安全组。
-删除的安全组无法再找回，请谨慎调用。
-     * @param {DeleteSecurityGroupRequest} req
-     * @param {function(string, DeleteSecurityGroupResponse):void} cb
+     * 弹性网卡迁移
+     * @param {MigrateNetworkInterfaceRequest} req
+     * @param {function(string, MigrateNetworkInterfaceResponse):void} cb
      * @public
      */
-    DeleteSecurityGroup(req, cb) {
-        let resp = new DeleteSecurityGroupResponse();
-        this.request("DeleteSecurityGroup", req, resp, cb);
+    MigrateNetworkInterface(req, cb) {
+        let resp = new MigrateNetworkInterfaceResponse();
+        this.request("MigrateNetworkInterface", req, resp, cb);
     }
 
     /**
@@ -747,6 +779,20 @@ EIP 如果被封堵，则不能进行解绑定操作。
     }
 
     /**
+     * 本接口（AttachDisks）用于挂载云硬盘。
+ 
+* 支持批量操作，将多块云盘挂载到同一云主机。如果多个云盘中存在不允许挂载的云盘，则操作不执行，返回特定的错误码。
+* 本接口为异步接口，当挂载云盘的请求成功返回时，表示后台已发起挂载云盘的操作，可通过接口[DescribeDisks](/document/product/362/16315)来查询对应云盘的状态，如果云盘的状态由“ATTACHING”变为“ATTACHED”，则为挂载成功。
+     * @param {AttachDisksRequest} req
+     * @param {function(string, AttachDisksResponse):void} cb
+     * @public
+     */
+    AttachDisks(req, cb) {
+        let resp = new AttachDisksResponse();
+        this.request("AttachDisks", req, resp, cb);
+    }
+
+    /**
      * 设置负载均衡实例的安全组。
      * @param {SetLoadBalancerSecurityGroupsRequest} req
      * @param {function(string, SetLoadBalancerSecurityGroupsResponse):void} cb
@@ -791,6 +837,17 @@ EIP 如果被封堵，则不能进行解绑定操作。
     }
 
     /**
+     * 用于解除实例的密钥绑定关系。
+     * @param {DisassociateInstancesKeyPairsRequest} req
+     * @param {function(string, DisassociateInstancesKeyPairsResponse):void} cb
+     * @public
+     */
+    DisassociateInstancesKeyPairs(req, cb) {
+        let resp = new DisassociateInstancesKeyPairsResponse();
+        this.request("DisassociateInstancesKeyPairs", req, resp, cb);
+    }
+
+    /**
      * 将弹性公网IP（简称 EIP）绑定到实例或弹性网卡的指定内网 IP 上。
 将 EIP 绑定到实例（ECM）上，其本质是将 EIP 绑定到实例上主网卡的主内网 IP 上。
 将 EIP 绑定到指定网卡的内网 IP上，内网IP已经绑定了EIP或普通公网IP，则反馈失败。必须先解绑该 EIP，才能再绑定新的。
@@ -802,17 +859,6 @@ EIP 如果被封堵，则不能进行解绑定操作。
     AssociateAddress(req, cb) {
         let resp = new AssociateAddressResponse();
         this.request("AssociateAddress", req, resp, cb);
-    }
-
-    /**
-     * 修改在一个可用区下创建实例时使用的默认子网（创建实例时，未填写VPC参数时使用的sunbetId）
-     * @param {ModifyDefaultSubnetRequest} req
-     * @param {function(string, ModifyDefaultSubnetResponse):void} cb
-     * @public
-     */
-    ModifyDefaultSubnet(req, cb) {
-        let resp = new ModifyDefaultSubnetResponse();
-        this.request("ModifyDefaultSubnet", req, resp, cb);
     }
 
     /**
@@ -917,6 +963,21 @@ EIP 如果被封堵，则不能进行解绑定操作。
     }
 
     /**
+     * 本接口（TerminateDisks）用于退还云硬盘。
+
+* 不再使用的云盘，可通过本接口主动退还。
+* 本接口支持退还预付费云盘和按小时后付费云盘。按小时后付费云盘可直接退还，预付费云盘需符合退还规则。
+* 支持批量操作，每次请求批量云硬盘的上限为50。如果批量云盘存在不允许操作的，请求会以特定错误码返回。
+     * @param {TerminateDisksRequest} req
+     * @param {function(string, TerminateDisksResponse):void} cb
+     * @public
+     */
+    TerminateDisks(req, cb) {
+        let resp = new TerminateDisksResponse();
+        this.request("TerminateDisks", req, resp, cb);
+    }
+
+    /**
      * 修改监听器绑定的后端机器的端口。
      * @param {ModifyTargetPortRequest} req
      * @param {function(string, ModifyTargetPortResponse):void} cb
@@ -994,15 +1055,17 @@ EIP 如果被封堵，则不能进行解绑定操作。
     }
 
     /**
-     * 弹性网卡退还内网 IP。
-退还弹性网卡上的辅助内网IP，接口自动解关联弹性公网 IP。不能退还弹性网卡的主内网IP。
-     * @param {RemovePrivateIpAddressesRequest} req
-     * @param {function(string, RemovePrivateIpAddressesResponse):void} cb
+     * 本接口（DetachDisks）用于卸载云硬盘。
+
+* 支持批量操作，卸载挂载在同一主机上的多块云盘。如果多块云盘中存在不允许卸载的云盘，则操作不执行，返回特定的错误码。
+* 本接口为异步接口，当请求成功返回时，云盘并未立即从主机卸载，可通过接口[DescribeDisks](/document/product/362/16315)来查询对应云盘的状态，如果云盘的状态由“ATTACHED”变为“UNATTACHED”，则为卸载成功。
+     * @param {DetachDisksRequest} req
+     * @param {function(string, DetachDisksResponse):void} cb
      * @public
      */
-    RemovePrivateIpAddresses(req, cb) {
-        let resp = new RemovePrivateIpAddressesResponse();
-        this.request("RemovePrivateIpAddresses", req, resp, cb);
+    DetachDisks(req, cb) {
+        let resp = new DetachDisksResponse();
+        this.request("DetachDisks", req, resp, cb);
     }
 
     /**
@@ -1014,6 +1077,28 @@ EIP 如果被封堵，则不能进行解绑定操作。
     DisableRoutes(req, cb) {
         let resp = new DisableRoutesResponse();
         this.request("DisableRoutes", req, resp, cb);
+    }
+
+    /**
+     * 查询实例价格
+     * @param {DescribePriceRunInstanceRequest} req
+     * @param {function(string, DescribePriceRunInstanceResponse):void} cb
+     * @public
+     */
+    DescribePriceRunInstance(req, cb) {
+        let resp = new DescribePriceRunInstanceResponse();
+        this.request("DescribePriceRunInstance", req, resp, cb);
+    }
+
+    /**
+     * 本接口（ModifyIpv6AddressesAttribute）用于修改弹性网卡IPv6地址属性。
+     * @param {ModifyIpv6AddressesAttributeRequest} req
+     * @param {function(string, ModifyIpv6AddressesAttributeResponse):void} cb
+     * @public
+     */
+    ModifyIpv6AddressesAttribute(req, cb) {
+        let resp = new ModifyIpv6AddressesAttributeResponse();
+        this.request("ModifyIpv6AddressesAttribute", req, resp, cb);
     }
 
     /**
@@ -1047,6 +1132,17 @@ EIP 如果被封堵，则不能进行解绑定操作。
     DeleteSecurityGroupPolicies(req, cb) {
         let resp = new DeleteSecurityGroupPoliciesResponse();
         this.request("DeleteSecurityGroupPolicies", req, resp, cb);
+    }
+
+    /**
+     * 用于创建一个 OpenSSH RSA 密钥对，可以用于登录 Linux 实例。
+     * @param {CreateKeyPairRequest} req
+     * @param {function(string, CreateKeyPairResponse):void} cb
+     * @public
+     */
+    CreateKeyPair(req, cb) {
+        let resp = new CreateKeyPairResponse();
+        this.request("CreateKeyPair", req, resp, cb);
     }
 
     /**
@@ -1138,6 +1234,17 @@ EIP 如果被封堵，则不能进行解绑定操作。
     }
 
     /**
+     * 使用本接口获取某种机型在某些区域的装箱配额（当使用虚拟机型时，返回的是一组相互关联的装箱配额）。
+     * @param {DescribePackingQuotaGroupRequest} req
+     * @param {function(string, DescribePackingQuotaGroupResponse):void} cb
+     * @public
+     */
+    DescribePackingQuotaGroup(req, cb) {
+        let resp = new DescribePackingQuotaGroupResponse();
+        this.request("DescribePackingQuotaGroup", req, resp, cb);
+    }
+
+    /**
      * 查询弹性网卡列表
      * @param {DescribeNetworkInterfacesRequest} req
      * @param {function(string, DescribeNetworkInterfacesResponse):void} cb
@@ -1146,6 +1253,21 @@ EIP 如果被封堵，则不能进行解绑定操作。
     DescribeNetworkInterfaces(req, cb) {
         let resp = new DescribeNetworkInterfacesResponse();
         this.request("DescribeNetworkInterfaces", req, resp, cb);
+    }
+
+    /**
+     * 本接口（CreateDisks）用于创建云硬盘。
+
+* 预付费云盘的购买会预先扣除本次云盘购买所需金额，在调用本接口前请确保账户余额充足。
+* 本接口支持传入数据盘快照来创建云盘，实现将快照数据复制到新购云盘上。
+* 本接口为异步接口，当创建请求下发成功后会返回一个新建的云盘ID列表，此时云盘的创建并未立即完成。可以通过调用[DescribeDisks](/document/product/362/16315)接口根据DiskId查询对应云盘，如果能查到云盘，且状态为'UNATTACHED'或'ATTACHED'，则表示创建成功。
+     * @param {CreateDisksRequest} req
+     * @param {function(string, CreateDisksResponse):void} cb
+     * @public
+     */
+    CreateDisks(req, cb) {
+        let resp = new CreateDisksResponse();
+        this.request("CreateDisks", req, resp, cb);
     }
 
     /**
@@ -1215,6 +1337,20 @@ EIP 如果被封堵，则不能进行解绑定操作。
     }
 
     /**
+     * 本接口（DescribeSnapshots）用于查询快照的详细信息。
+
+* 根据快照ID、创建快照的云硬盘ID、创建快照的云硬盘类型等对结果进行过滤，不同条件之间为与(AND)的关系，过滤信息详细请见过滤器`Filter`。
+*  如果参数为空，返回当前用户一定数量（`Limit`所指定的数量，默认为20）的快照列表。
+     * @param {DescribeSnapshotsRequest} req
+     * @param {function(string, DescribeSnapshotsResponse):void} cb
+     * @public
+     */
+    DescribeSnapshots(req, cb) {
+        let resp = new DescribeSnapshotsResponse();
+        this.request("DescribeSnapshots", req, resp, cb);
+    }
+
+    /**
      * 销毁实例
      * @param {TerminateInstancesRequest} req
      * @param {function(string, TerminateInstancesResponse):void} cb
@@ -1270,14 +1406,14 @@ EIP 如果被封堵，则不能进行解绑定操作。
     }
 
     /**
-     * 本接口（ModifyIpv6AddressesAttribute）用于修改弹性网卡IPv6地址属性。
-     * @param {ModifyIpv6AddressesAttributeRequest} req
-     * @param {function(string, ModifyIpv6AddressesAttributeResponse):void} cb
+     * 修改在一个可用区下创建实例时使用的默认子网（创建实例时，未填写VPC参数时使用的sunbetId）
+     * @param {ModifyDefaultSubnetRequest} req
+     * @param {function(string, ModifyDefaultSubnetResponse):void} cb
      * @public
      */
-    ModifyIpv6AddressesAttribute(req, cb) {
-        let resp = new ModifyIpv6AddressesAttributeResponse();
-        this.request("ModifyIpv6AddressesAttribute", req, resp, cb);
+    ModifyDefaultSubnet(req, cb) {
+        let resp = new ModifyDefaultSubnetResponse();
+        this.request("ModifyDefaultSubnet", req, resp, cb);
     }
 
     /**
@@ -1504,14 +1640,30 @@ EIP 如果被封堵，则不能进行解绑定操作。
     }
 
     /**
-     * 弹性网卡迁移
-     * @param {MigrateNetworkInterfaceRequest} req
-     * @param {function(string, MigrateNetworkInterfaceResponse):void} cb
+     * 本接口（DescribeDisks）用于查询云硬盘列表。
+
+* 可以根据云硬盘ID、云硬盘类型或者云硬盘状态等信息来查询云硬盘的详细信息，不同条件之间为与(AND)的关系，过滤信息详细请见过滤器`Filter`。
+* 如果参数为空，返回当前用户一定数量（`Limit`所指定的数量，默认为20）的云硬盘列表。
+     * @param {DescribeDisksRequest} req
+     * @param {function(string, DescribeDisksResponse):void} cb
      * @public
      */
-    MigrateNetworkInterface(req, cb) {
-        let resp = new MigrateNetworkInterfaceResponse();
-        this.request("MigrateNetworkInterface", req, resp, cb);
+    DescribeDisks(req, cb) {
+        let resp = new DescribeDisksResponse();
+        this.request("DescribeDisks", req, resp, cb);
+    }
+
+    /**
+     * 只有当前账号下的安全组允许被删除。
+安全组实例ID如果在其他安全组的规则中被引用，则无法直接删除。这种情况下，需要先进行规则修改，再删除安全组。
+删除的安全组无法再找回，请谨慎调用。
+     * @param {DeleteSecurityGroupRequest} req
+     * @param {function(string, DeleteSecurityGroupResponse):void} cb
+     * @public
+     */
+    DeleteSecurityGroup(req, cb) {
+        let resp = new DeleteSecurityGroupResponse();
+        this.request("DeleteSecurityGroup", req, resp, cb);
     }
 
     /**
@@ -1523,6 +1675,20 @@ EIP 如果被封堵，则不能进行解绑定操作。
     CreateListener(req, cb) {
         let resp = new CreateListenerResponse();
         this.request("CreateListener", req, resp, cb);
+    }
+
+    /**
+     * 本接口（DeleteSnapshots）用于删除快照。
+
+* 快照必须处于NORMAL状态，快照状态可以通过[DescribeSnapshots](/document/product/362/15647)接口查询，见输出参数中SnapshotState字段解释。
+* 支持批量操作。如果多个快照存在无法删除的快照，则操作不执行，以返回特定的错误码返回。
+     * @param {DeleteSnapshotsRequest} req
+     * @param {function(string, DeleteSnapshotsResponse):void} cb
+     * @public
+     */
+    DeleteSnapshots(req, cb) {
+        let resp = new DeleteSnapshotsResponse();
+        this.request("DeleteSnapshots", req, resp, cb);
     }
 
     /**
@@ -1657,6 +1823,18 @@ EIP 如果被封堵，则不能进行解绑定操作。
     ModifyAddressAttribute(req, cb) {
         let resp = new ModifyAddressAttributeResponse();
         this.request("ModifyAddressAttribute", req, resp, cb);
+    }
+
+    /**
+     * 弹性网卡退还内网 IP。
+退还弹性网卡上的辅助内网IP，接口自动解关联弹性公网 IP。不能退还弹性网卡的主内网IP。
+     * @param {RemovePrivateIpAddressesRequest} req
+     * @param {function(string, RemovePrivateIpAddressesResponse):void} cb
+     * @public
+     */
+    RemovePrivateIpAddresses(req, cb) {
+        let resp = new RemovePrivateIpAddressesResponse();
+        this.request("RemovePrivateIpAddresses", req, resp, cb);
     }
 
     /**

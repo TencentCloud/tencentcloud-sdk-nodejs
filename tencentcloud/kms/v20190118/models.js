@@ -221,7 +221,7 @@ class CreateKeyRequest extends  AbstractModel {
         this.Description = null;
 
         /**
-         * 指定key的用途，默认为  "ENCRYPT_DECRYPT" 表示创建对称加解密密钥，其它支持用途 “ASYMMETRIC_DECRYPT_RSA_2048” 表示创建用于加解密的RSA2048非对称密钥，“ASYMMETRIC_DECRYPT_SM2” 表示创建用于加解密的SM2非对称密钥, “ASYMMETRIC_SIGN_VERIFY_SM2” 表示创建用于签名验签的SM2非对称密钥, “ASYMMETRIC_SIGN_VERIFY_ECC” 表示创建用于签名验签的ECC非对称密钥, “ASYMMETRIC_SIGN_VERIFY_RSA_2048” 表示创建用于签名验签的RSA_2048非对称密钥
+         * 指定key的用途，默认为  "ENCRYPT_DECRYPT" 表示创建对称加解密密钥，其它支持用途 “ASYMMETRIC_DECRYPT_RSA_2048” 表示创建用于加解密的RSA2048非对称密钥，“ASYMMETRIC_DECRYPT_SM2” 表示创建用于加解密的SM2非对称密钥，“ASYMMETRIC_SIGN_VERIFY_SM2” 表示创建用于签名验签的SM2非对称密钥，“ASYMMETRIC_SIGN_VERIFY_ECC” 表示创建用于签名验签的ECC非对称密钥，“ASYMMETRIC_SIGN_VERIFY_RSA_2048” 表示创建用于签名验签的RSA_2048非对称密钥，“ASYMMETRIC_SIGN_VERIFY_ECDSA384”表示创建用于签名验签的 ECDSA384 非对称秘钥。完整的秘钥用途与算法支持列表可通过 ListAlgorithms 接口获取。
          * @type {string || null}
          */
         this.KeyUsage = null;
@@ -237,6 +237,12 @@ class CreateKeyRequest extends  AbstractModel {
          * @type {Array.<Tag> || null}
          */
         this.Tags = null;
+
+        /**
+         * KMS 高级版对应的 HSM 集群 ID（仅对 KMS 独占版/托管版服务实例有效）。
+         * @type {string || null}
+         */
+        this.HsmClusterId = null;
 
     }
 
@@ -260,6 +266,7 @@ class CreateKeyRequest extends  AbstractModel {
                 this.Tags.push(obj);
             }
         }
+        this.HsmClusterId = 'HsmClusterId' in params ? params.HsmClusterId : null;
 
     }
 }
@@ -368,7 +375,7 @@ class VerifyByAsymmetricKeyRequest extends  AbstractModel {
         this.Message = null;
 
         /**
-         * 签名算法，支持的算法：SM2DSA，ECC_P256_R1，RSA_PSS_SHA_256，RSA_PKCS1_SHA_256
+         * 签名算法，支持的算法：SM2DSA，ECC_P256_R1，RSA_PSS_SHA_256，RSA_PKCS1_SHA_256 等。更多支持的算法可通过 ListAlgorithms 接口进行查询。
          * @type {string || null}
          */
         this.Algorithm = null;
@@ -979,6 +986,18 @@ class GenerateDataKeyRequest extends  AbstractModel {
          */
         this.EncryptionContext = null;
 
+        /**
+         * PEM 格式公钥字符串，支持 RSA2048 和 SM2 公钥，用于对返回数据中的 Plaintext 值进行加密。若为空，则不对 Plaintext 值加密。
+         * @type {string || null}
+         */
+        this.EncryptionPublicKey = null;
+
+        /**
+         * 非对称加密算法，配合 EncryptionPublicKey 对返回数据进行加密。目前支持：SM2（以 C1C3C2 格式返回密文），SM2_C1C3C2_ASN1 （以 C1C3C2 ASN1 格式返回密文），RSAES_PKCS1_V1_5，RSAES_OAEP_SHA_1，RSAES_OAEP_SHA_256。若为空，则默认为 SM2。
+         * @type {string || null}
+         */
+        this.EncryptionAlgorithm = null;
+
     }
 
     /**
@@ -992,6 +1011,8 @@ class GenerateDataKeyRequest extends  AbstractModel {
         this.KeySpec = 'KeySpec' in params ? params.KeySpec : null;
         this.NumberOfBytes = 'NumberOfBytes' in params ? params.NumberOfBytes : null;
         this.EncryptionContext = 'EncryptionContext' in params ? params.EncryptionContext : null;
+        this.EncryptionPublicKey = 'EncryptionPublicKey' in params ? params.EncryptionPublicKey : null;
+        this.EncryptionAlgorithm = 'EncryptionAlgorithm' in params ? params.EncryptionAlgorithm : null;
 
     }
 }
@@ -1368,7 +1389,8 @@ class DecryptResponse extends  AbstractModel {
         this.KeyId = null;
 
         /**
-         * 解密后的明文。该字段是base64编码的，为了得到原始明文，调用方需要进行base64解码
+         * 若调用时未提供 EncryptionPublicKey，该字段值为 Base64 编码的明文，需进行 Base64 解码以获取明文。
+若调用时提供了 EncryptionPublicKey，则该字段值为使用 EncryptionPublicKey 公钥进行非对称加密后的 Base64 编码的密文。需在 Base64 解码后，使用用户上传的公钥对应的私钥进行进一步解密，以获取明文。
          * @type {string || null}
          */
         this.Plaintext = null;
@@ -1946,6 +1968,12 @@ class ListKeyDetailRequest extends  AbstractModel {
          */
         this.TagFilters = null;
 
+        /**
+         * KMS 高级版对应的 HSM 集群 ID（仅对 KMS 独占版/托管版服务实例有效）。
+         * @type {string || null}
+         */
+        this.HsmClusterId = null;
+
     }
 
     /**
@@ -1972,6 +2000,7 @@ class ListKeyDetailRequest extends  AbstractModel {
                 this.TagFilters.push(obj);
             }
         }
+        this.HsmClusterId = 'HsmClusterId' in params ? params.HsmClusterId : null;
 
     }
 }
@@ -2090,7 +2119,8 @@ class GenerateDataKeyResponse extends  AbstractModel {
         this.KeyId = null;
 
         /**
-         * 生成的数据密钥DataKey的明文，该明文使用base64进行了编码，需base64解码后作为数据密钥本地使用
+         * 若调用时未提供 EncryptionPublicKey，该字段值为生成的数据密钥 DataKey 的 Base64 编码的明文，需进行 Base64 解码以获取 DataKey 明文。
+若调用时提供了 EncryptionPublicKey，则该字段值为使用 EncryptionPublicKey 公钥进行非对称加密后的 Base64 编码的密文。需在 Base64 解码后，使用用户上传的公钥对应的私钥进行进一步解密，以获取 DataKey 明文。
          * @type {string || null}
          */
         this.Plaintext = null;
@@ -2367,6 +2397,13 @@ class CreateKeyResponse extends  AbstractModel {
         this.TagMsg = null;
 
         /**
+         * HSM 集群 ID（仅对 KMS 独占版/托管版服务实例有效）
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.HsmClusterId = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -2389,6 +2426,7 @@ class CreateKeyResponse extends  AbstractModel {
         this.KeyUsage = 'KeyUsage' in params ? params.KeyUsage : null;
         this.TagCode = 'TagCode' in params ? params.TagCode : null;
         this.TagMsg = 'TagMsg' in params ? params.TagMsg : null;
+        this.HsmClusterId = 'HsmClusterId' in params ? params.HsmClusterId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2625,6 +2663,20 @@ class GetServiceStatusResponse extends  AbstractModel {
         this.ProResourceId = null;
 
         /**
+         * 是否开通 KMS 托管版
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.ExclusiveVSMEnabled = null;
+
+        /**
+         * 是否开通 KMS 独享版
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.ExclusiveHSMEnabled = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -2645,6 +2697,8 @@ class GetServiceStatusResponse extends  AbstractModel {
         this.ProExpireTime = 'ProExpireTime' in params ? params.ProExpireTime : null;
         this.ProRenewFlag = 'ProRenewFlag' in params ? params.ProRenewFlag : null;
         this.ProResourceId = 'ProResourceId' in params ? params.ProResourceId : null;
+        this.ExclusiveVSMEnabled = 'ExclusiveVSMEnabled' in params ? params.ExclusiveVSMEnabled : null;
+        this.ExclusiveHSMEnabled = 'ExclusiveHSMEnabled' in params ? params.ExclusiveHSMEnabled : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2852,6 +2906,12 @@ class ListKeysRequest extends  AbstractModel {
          */
         this.Role = null;
 
+        /**
+         * KMS 高级版对应的 HSM 集群 ID（仅对 KMS 独占版/托管版服务实例有效）。
+         * @type {string || null}
+         */
+        this.HsmClusterId = null;
+
     }
 
     /**
@@ -2864,6 +2924,7 @@ class ListKeysRequest extends  AbstractModel {
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Role = 'Role' in params ? params.Role : null;
+        this.HsmClusterId = 'HsmClusterId' in params ? params.HsmClusterId : null;
 
     }
 }
@@ -2997,6 +3058,13 @@ class KeyMetadata extends  AbstractModel {
          */
         this.ResourceId = null;
 
+        /**
+         * HSM 集群 ID（仅对 KMS 独占版/托管版服务实例有效）
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.HsmClusterId = null;
+
     }
 
     /**
@@ -3021,6 +3089,7 @@ class KeyMetadata extends  AbstractModel {
         this.Origin = 'Origin' in params ? params.Origin : null;
         this.ValidTo = 'ValidTo' in params ? params.ValidTo : null;
         this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
+        this.HsmClusterId = 'HsmClusterId' in params ? params.HsmClusterId : null;
 
     }
 }
@@ -3073,6 +3142,18 @@ class DecryptRequest extends  AbstractModel {
          */
         this.EncryptionContext = null;
 
+        /**
+         * PEM 格式公钥字符串，支持 RSA2048 和 SM2 公钥，用于对返回数据中的 Plaintext 值进行加密。若为空，则不对 Plaintext 值加密。
+         * @type {string || null}
+         */
+        this.EncryptionPublicKey = null;
+
+        /**
+         * 非对称加密算法，配合 EncryptionPublicKey 对返回数据进行加密。目前支持：SM2（以 C1C3C2 格式返回密文），SM2_C1C3C2_ASN1 （以 C1C3C2 ASN1 格式返回密文），RSAES_PKCS1_V1_5，RSAES_OAEP_SHA_1，RSAES_OAEP_SHA_256。若为空，则默认为 SM2。
+         * @type {string || null}
+         */
+        this.EncryptionAlgorithm = null;
+
     }
 
     /**
@@ -3084,6 +3165,8 @@ class DecryptRequest extends  AbstractModel {
         }
         this.CiphertextBlob = 'CiphertextBlob' in params ? params.CiphertextBlob : null;
         this.EncryptionContext = 'EncryptionContext' in params ? params.EncryptionContext : null;
+        this.EncryptionPublicKey = 'EncryptionPublicKey' in params ? params.EncryptionPublicKey : null;
+        this.EncryptionAlgorithm = 'EncryptionAlgorithm' in params ? params.EncryptionAlgorithm : null;
 
     }
 }
@@ -3456,7 +3539,7 @@ class SignByAsymmetricKeyRequest extends  AbstractModel {
         super();
 
         /**
-         * 签名算法，支持的算法：SM2DSA，ECC_P256_R1，RSA_PSS_SHA_256，RSA_PKCS1_SHA_256
+         * 签名算法，支持的算法：SM2DSA，ECC_P256_R1，RSA_PSS_SHA_256，RSA_PKCS1_SHA_256 等。更多支持的算法可通过 ListAlgorithms 接口进行查询。
          * @type {string || null}
          */
         this.Algorithm = null;

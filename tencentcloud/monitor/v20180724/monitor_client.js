@@ -24,8 +24,10 @@ const CreatePolicyGroupEventCondition = models.CreatePolicyGroupEventCondition;
 const DescribeProductEventListRequest = models.DescribeProductEventListRequest;
 const AlarmPolicyTriggerTask = models.AlarmPolicyTriggerTask;
 const DescribeServiceDiscoveryResponse = models.DescribeServiceDiscoveryResponse;
+const PrometheusTag = models.PrometheusTag;
 const DescribePolicyConditionListMetric = models.DescribePolicyConditionListMetric;
 const DescribeAlertRulesRequest = models.DescribeAlertRulesRequest;
+const DescribePrometheusInstancesResponse = models.DescribePrometheusInstancesResponse;
 const DescribePolicyGroupListResponse = models.DescribePolicyGroupListResponse;
 const BindingPolicyObjectRequest = models.BindingPolicyObjectRequest;
 const CreateServiceDiscoveryResponse = models.CreateServiceDiscoveryResponse;
@@ -33,6 +35,7 @@ const PrometheusRuleKV = models.PrometheusRuleKV;
 const PutMonitorDataResponse = models.PutMonitorDataResponse;
 const DescribePolicyGroupInfoRequest = models.DescribePolicyGroupInfoRequest;
 const UpdateAlertRuleStateResponse = models.UpdateAlertRuleStateResponse;
+const BindingPolicyTagResponse = models.BindingPolicyTagResponse;
 const DeleteServiceDiscoveryResponse = models.DeleteServiceDiscoveryResponse;
 const DescribePolicyGroupInfoCallback = models.DescribePolicyGroupInfoCallback;
 const AlarmHistoryMetric = models.AlarmHistoryMetric;
@@ -42,7 +45,10 @@ const DescribeProductEventListDimensions = models.DescribeProductEventListDimens
 const DescribePolicyGroupInfoResponse = models.DescribePolicyGroupInfoResponse;
 const ModifyAlarmPolicyNoticeRequest = models.ModifyAlarmPolicyNoticeRequest;
 const DeleteAlarmPolicyRequest = models.DeleteAlarmPolicyRequest;
-const PutMonitorDataRequest = models.PutMonitorDataRequest;
+const PolicyTag = models.PolicyTag;
+const EventCondition = models.EventCondition;
+const PrometheusInstancesItem = models.PrometheusInstancesItem;
+const DescribeConditionsTemplateListRequest = models.DescribeConditionsTemplateListRequest;
 const CreateAlertRuleResponse = models.CreateAlertRuleResponse;
 const CreatePolicyGroupResponse = models.CreatePolicyGroupResponse;
 const ModifyAlarmPolicyTasksResponse = models.ModifyAlarmPolicyTasksResponse;
@@ -62,6 +68,7 @@ const DescribeServiceDiscoveryRequest = models.DescribeServiceDiscoveryRequest;
 const CommonNamespace = models.CommonNamespace;
 const DescribePolicyConditionListRequest = models.DescribePolicyConditionListRequest;
 const DeletePolicyGroupResponse = models.DeletePolicyGroupResponse;
+const DescribeAccidentEventListResponse = models.DescribeAccidentEventListResponse;
 const DescribeMonitorTypesRequest = models.DescribeMonitorTypesRequest;
 const DescribeAlarmNoticesResponse = models.DescribeAlarmNoticesResponse;
 const ModifyAlarmPolicyTasksRequest = models.ModifyAlarmPolicyTasksRequest;
@@ -87,7 +94,10 @@ const AlarmPolicyRule = models.AlarmPolicyRule;
 const DescribeAlarmNoticeCallbacksRequest = models.DescribeAlarmNoticeCallbacksRequest;
 const DescribeProductEventListEventsDimensions = models.DescribeProductEventListEventsDimensions;
 const ModifyAlarmPolicyConditionResponse = models.ModifyAlarmPolicyConditionResponse;
+const InstanceGroups = models.InstanceGroups;
 const Dimension = models.Dimension;
+const PrometheusInstanceGrantInfo = models.PrometheusInstanceGrantInfo;
+const TemplateGroup = models.TemplateGroup;
 const DescribeBindingPolicyObjectListInstance = models.DescribeBindingPolicyObjectListInstance;
 const Point = models.Point;
 const UpdateAlertRuleStateRequest = models.UpdateAlertRuleStateRequest;
@@ -117,10 +127,12 @@ const MetricObjectMeaning = models.MetricObjectMeaning;
 const DescribeAccidentEventListAlarms = models.DescribeAccidentEventListAlarms;
 const ModifyPolicyGroupResponse = models.ModifyPolicyGroupResponse;
 const DescribePolicyConditionListConfigManualCalcType = models.DescribePolicyConditionListConfigManualCalcType;
+const Condition = models.Condition;
+const PutMonitorDataRequest = models.PutMonitorDataRequest;
 const ModifyAlarmPolicyStatusRequest = models.ModifyAlarmPolicyStatusRequest;
 const MetricData = models.MetricData;
 const AlarmEvent = models.AlarmEvent;
-const DescribePolicyGroupInfoCondition = models.DescribePolicyGroupInfoCondition;
+const BindingPolicyTagRequest = models.BindingPolicyTagRequest;
 const UpdateAlertRuleRequest = models.UpdateAlertRuleRequest;
 const DescribeBindingPolicyObjectListResponse = models.DescribeBindingPolicyObjectListResponse;
 const DescribePolicyGroupInfoConditionTpl = models.DescribePolicyGroupInfoConditionTpl;
@@ -131,15 +143,17 @@ const DescribeProductEventListEvents = models.DescribeProductEventListEvents;
 const DeleteAlarmNoticesRequest = models.DeleteAlarmNoticesRequest;
 const DescribePolicyConditionListConfigManualPeriodNum = models.DescribePolicyConditionListConfigManualPeriodNum;
 const DescribeAllNamespacesRequest = models.DescribeAllNamespacesRequest;
+const PolicyGroup = models.PolicyGroup;
 const UpdateAlertRuleResponse = models.UpdateAlertRuleResponse;
 const DescribeAlarmMetricsResponse = models.DescribeAlarmMetricsResponse;
 const DescribePolicyGroupListGroupInstanceGroup = models.DescribePolicyGroupListGroupInstanceGroup;
 const DescribeAlarmPoliciesRequest = models.DescribeAlarmPoliciesRequest;
-const DescribeAccidentEventListResponse = models.DescribeAccidentEventListResponse;
+const DescribeConditionsTemplateListResponse = models.DescribeConditionsTemplateListResponse;
 const DescribePolicyConditionListConfigManualStatType = models.DescribePolicyConditionListConfigManualStatType;
 const ModifyAlarmPolicyInfoResponse = models.ModifyAlarmPolicyInfoResponse;
 const AlarmNotice = models.AlarmNotice;
 const MetricConfig = models.MetricConfig;
+const PolicyGroupReceiverInfo = models.PolicyGroupReceiverInfo;
 const DescribeAlarmEventsRequest = models.DescribeAlarmEventsRequest;
 const MidQueryCondition = models.MidQueryCondition;
 const ModifyAlarmNoticeResponse = models.ModifyAlarmNoticeResponse;
@@ -170,10 +184,11 @@ const DeleteAlertRulesRequest = models.DeleteAlertRulesRequest;
 const DescribeAlarmNoticeRequest = models.DescribeAlarmNoticeRequest;
 const DescribeBindingPolicyObjectListDimension = models.DescribeBindingPolicyObjectListDimension;
 const CreateAlarmNoticeRequest = models.CreateAlarmNoticeRequest;
-const InstanceGroups = models.InstanceGroups;
+const DescribePolicyGroupInfoCondition = models.DescribePolicyGroupInfoCondition;
 const GetMonitorDataResponse = models.GetMonitorDataResponse;
 const ReceiverInfo = models.ReceiverInfo;
 const UnBindingAllPolicyObjectRequest = models.UnBindingAllPolicyObjectRequest;
+const CLSNotice = models.CLSNotice;
 const DescribePolicyGroupInfoEventCondition = models.DescribePolicyGroupInfoEventCondition;
 const SendCustomAlarmMsgResponse = models.SendCustomAlarmMsgResponse;
 const AlarmPolicyCondition = models.AlarmPolicyCondition;
@@ -181,6 +196,7 @@ const ModifyPolicyGroupCondition = models.ModifyPolicyGroupCondition;
 const DescribePolicyConditionListCondition = models.DescribePolicyConditionListCondition;
 const DeleteServiceDiscoveryRequest = models.DeleteServiceDiscoveryRequest;
 const AlarmPolicyEventCondition = models.AlarmPolicyEventCondition;
+const DescribePrometheusInstancesRequest = models.DescribePrometheusInstancesRequest;
 const DescribeProductEventListOverView = models.DescribeProductEventListOverView;
 const DescribePolicyConditionListConfigManualCalcValue = models.DescribePolicyConditionListConfigManualCalcValue;
 const SetDefaultAlarmPolicyResponse = models.SetDefaultAlarmPolicyResponse;
@@ -237,7 +253,9 @@ class MonitorClient extends AbstractClient {
     }
 
     /**
-     * 创建 Prometheus 告警规则
+     * 创建 Prometheus 告警规则。
+
+请注意，**告警对象和告警消息是 Prometheus Rule Annotations 的特殊字段，需要通过 annotations 来传递，对应的 Key 分别为summary/description**，，请参考 [Prometheus Rule更多配置请参考](https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/)。
      * @param {CreateAlertRuleRequest} req
      * @param {function(string, CreateAlertRuleResponse):void} cb
      * @public
@@ -256,6 +274,17 @@ class MonitorClient extends AbstractClient {
     SendCustomAlarmMsg(req, cb) {
         let resp = new SendCustomAlarmMsgResponse();
         this.request("SendCustomAlarmMsg", req, resp, cb);
+    }
+
+    /**
+     * 获取条件模板列表
+     * @param {DescribeConditionsTemplateListRequest} req
+     * @param {function(string, DescribeConditionsTemplateListResponse):void} cb
+     * @public
+     */
+    DescribeConditionsTemplateList(req, cb) {
+        let resp = new DescribeConditionsTemplateListResponse();
+        this.request("DescribeConditionsTemplateList", req, resp, cb);
     }
 
     /**
@@ -316,7 +345,8 @@ class MonitorClient extends AbstractClient {
     }
 
     /**
-     * 获取云产品的监控数据。传入产品的命名空间、对象维度描述和监控指标即可获得相应的监控数据。
+     * 获取云产品的监控数据。此接口不适用于拉取容器服务监控数据，如需拉取容器服务监控数据，请使用[根据维度条件查询监控数据](https://cloud.tencent.com/document/product/248/51845)接口。
+传入产品的命名空间、对象维度描述和监控指标即可获得相应的监控数据。
 接口调用频率限制为：20次/秒，1200次/分钟。单请求最多可支持批量拉取10个实例的监控数据，单请求的数据点数限制为1440个。
 若您需要调用的指标、对象较多，可能存在因限频出现拉取失败的情况，建议尽量将请求按时间维度均摊。
      * @param {GetMonitorDataRequest} req
@@ -417,7 +447,7 @@ class MonitorClient extends AbstractClient {
     }
 
     /**
-     * 创建告警策略
+     * 创建云监控告警策略
      * @param {CreateAlarmPolicyRequest} req
      * @param {function(string, CreateAlarmPolicyResponse):void} cb
      * @public
@@ -439,7 +469,7 @@ class MonitorClient extends AbstractClient {
     }
 
     /**
-     * 查询云监控产品列表
+     * 查询云监控产品列表，支持云服务器CVM、云数据库、云消息队列、负载均衡、容器服务、专线等云产品。
      * @param {DescribeProductListRequest} req
      * @param {function(string, DescribeProductListResponse):void} cb
      * @public
@@ -493,6 +523,28 @@ class MonitorClient extends AbstractClient {
     DescribeAlarmNotices(req, cb) {
         let resp = new DescribeAlarmNoticesResponse();
         this.request("DescribeAlarmNotices", req, resp, cb);
+    }
+
+    /**
+     * 策略绑定标签
+     * @param {BindingPolicyTagRequest} req
+     * @param {function(string, BindingPolicyTagResponse):void} cb
+     * @public
+     */
+    BindingPolicyTag(req, cb) {
+        let resp = new BindingPolicyTagResponse();
+        this.request("BindingPolicyTag", req, resp, cb);
+    }
+
+    /**
+     * 启停告警策略
+     * @param {ModifyAlarmPolicyStatusRequest} req
+     * @param {function(string, ModifyAlarmPolicyStatusResponse):void} cb
+     * @public
+     */
+    ModifyAlarmPolicyStatus(req, cb) {
+        let resp = new ModifyAlarmPolicyStatusResponse();
+        this.request("ModifyAlarmPolicyStatus", req, resp, cb);
     }
 
     /**
@@ -564,7 +616,9 @@ class MonitorClient extends AbstractClient {
     }
 
     /**
-     * 更新 Prometheus 的报警规则
+     * 更新 Prometheus 的报警规则。
+
+请注意，**告警对象和告警消息是 Prometheus Rule Annotations 的特殊字段，需要通过 annotations 来传递，对应的 Key 分别为summary/description**，，请参考 [Prometheus Rule更多配置请参考](https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/)。
      * @param {UpdateAlertRuleRequest} req
      * @param {function(string, UpdateAlertRuleResponse):void} cb
      * @public
@@ -655,14 +709,18 @@ class MonitorClient extends AbstractClient {
     }
 
     /**
-     * 启停告警策略
-     * @param {ModifyAlarmPolicyStatusRequest} req
-     * @param {function(string, ModifyAlarmPolicyStatusResponse):void} cb
+     * 本接口 (DescribePrometheusInstances) 用于查询一个或多个实例的详细信息。
+<ul>
+<li>可以根据实例ID、实例名称或者实例状态等信息来查询实例的详细信息</li>
+<li>如果参数为空，返回当前用户一定数量（Limit所指定的数量，默认为20）的实例。</li>
+</ul>
+     * @param {DescribePrometheusInstancesRequest} req
+     * @param {function(string, DescribePrometheusInstancesResponse):void} cb
      * @public
      */
-    ModifyAlarmPolicyStatus(req, cb) {
-        let resp = new ModifyAlarmPolicyStatusResponse();
-        this.request("ModifyAlarmPolicyStatus", req, resp, cb);
+    DescribePrometheusInstances(req, cb) {
+        let resp = new DescribePrometheusInstancesResponse();
+        this.request("DescribePrometheusInstances", req, resp, cb);
     }
 
     /**

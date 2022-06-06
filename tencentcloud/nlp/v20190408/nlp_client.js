@@ -18,43 +18,38 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const LexicalAnalysisResponse = models.LexicalAnalysisResponse;
 const SentenceEmbeddingRequest = models.SentenceEmbeddingRequest;
-const DescribeTripleRequest = models.DescribeTripleRequest;
 const WordSimilarityRequest = models.WordSimilarityRequest;
 const SearchWordItemsResponse = models.SearchWordItemsResponse;
 const DpToken = models.DpToken;
 const TextSimilarityResponse = models.TextSimilarityResponse;
 const WordEmbeddingRequest = models.WordEmbeddingRequest;
 const ChatBotResponse = models.ChatBotResponse;
-const KeywordsExtractionResponse = models.KeywordsExtractionResponse;
 const AutoSummarizationRequest = models.AutoSummarizationRequest;
 const ChatBotRequest = models.ChatBotRequest;
-const DescribeRelationRequest = models.DescribeRelationRequest;
+const TextClassificationResponse = models.TextClassificationResponse;
 const KeywordsExtractionRequest = models.KeywordsExtractionRequest;
 const DictInfo = models.DictInfo;
-const DescribeEntityResponse = models.DescribeEntityResponse;
-const WordItem = models.WordItem;
+const TextCorrectionRequest = models.TextCorrectionRequest;
 const ClassificationResult = models.ClassificationResult;
-const DescribeEntityRequest = models.DescribeEntityRequest;
+const TextCorrectionProResponse = models.TextCorrectionProResponse;
 const Keyword = models.Keyword;
+const TextSimilarityProRequest = models.TextSimilarityProRequest;
 const UpdateDictResponse = models.UpdateDictResponse;
 const DescribeDictsRequest = models.DescribeDictsRequest;
-const DescribeRelationResponse = models.DescribeRelationResponse;
+const WordSimilarityResponse = models.WordSimilarityResponse;
 const SearchResult = models.SearchResult;
 const CreateWordItemsRequest = models.CreateWordItemsRequest;
-const TextCorrectionRequest = models.TextCorrectionRequest;
+const WordItem = models.WordItem;
 const DeleteWordItemsResponse = models.DeleteWordItemsResponse;
 const SentenceEmbeddingResponse = models.SentenceEmbeddingResponse;
 const UpdateDictRequest = models.UpdateDictRequest;
-const TextClassificationResponse = models.TextClassificationResponse;
 const DeleteDictResponse = models.DeleteDictResponse;
 const DescribeWordItemsRequest = models.DescribeWordItemsRequest;
-const SearchWordItemsRequest = models.SearchWordItemsRequest;
 const TextClassificationRequest = models.TextClassificationRequest;
 const CreateDictResponse = models.CreateDictResponse;
 const TextSimilarityRequest = models.TextSimilarityRequest;
 const AutoSummarizationResponse = models.AutoSummarizationResponse;
 const WordEmbeddingResponse = models.WordEmbeddingResponse;
-const DescribeTripleResponse = models.DescribeTripleResponse;
 const DescribeWordItemsResponse = models.DescribeWordItemsResponse;
 const SimilarWordsRequest = models.SimilarWordsRequest;
 const DescribeDictRequest = models.DescribeDictRequest;
@@ -62,23 +57,22 @@ const PosToken = models.PosToken;
 const SentimentAnalysisResponse = models.SentimentAnalysisResponse;
 const DeleteWordItemsRequest = models.DeleteWordItemsRequest;
 const DescribeDictResponse = models.DescribeDictResponse;
+const TextCorrectionProRequest = models.TextCorrectionProRequest;
 const TextCorrectionResponse = models.TextCorrectionResponse;
+const TextSimilarityProResponse = models.TextSimilarityProResponse;
 const DescribeDictsResponse = models.DescribeDictsResponse;
 const DependencyParsingRequest = models.DependencyParsingRequest;
 const DeleteDictRequest = models.DeleteDictRequest;
 const NerToken = models.NerToken;
 const SimilarWordsResponse = models.SimilarWordsResponse;
-const EntityRelationObject = models.EntityRelationObject;
 const DependencyParsingResponse = models.DependencyParsingResponse;
 const Similarity = models.Similarity;
 const CCIToken = models.CCIToken;
 const LexicalAnalysisRequest = models.LexicalAnalysisRequest;
 const CreateWordItemsResponse = models.CreateWordItemsResponse;
 const SentimentAnalysisRequest = models.SentimentAnalysisRequest;
-const EntityRelationSubject = models.EntityRelationSubject;
-const EntityRelationContent = models.EntityRelationContent;
-const WordSimilarityResponse = models.WordSimilarityResponse;
-const TripleContent = models.TripleContent;
+const SearchWordItemsRequest = models.SearchWordItemsRequest;
+const KeywordsExtractionResponse = models.KeywordsExtractionResponse;
 const CreateDictRequest = models.CreateDictRequest;
 
 
@@ -101,17 +95,6 @@ class NlpClient extends AbstractClient {
     DescribeDict(req, cb) {
         let resp = new DescribeDictResponse();
         this.request("DescribeDict", req, resp, cb);
-    }
-
-    /**
-     * 输入实体名称，返回实体相关的信息如实体别名、实体英文名、实体详细信息、相关实体等。
-     * @param {DescribeEntityRequest} req
-     * @param {function(string, DescribeEntityResponse):void} cb
-     * @public
-     */
-    DescribeEntity(req, cb) {
-        let resp = new DescribeEntityResponse();
-        this.request("DescribeEntity", req, resp, cb);
     }
 
     /**
@@ -200,27 +183,13 @@ https://ai.tencent.com/ailab/nlp/zh/embedding.html
     }
 
     /**
-     * 输入两个实体，返回两个实体间的关系，例如马化腾与腾讯公司不仅是相关实体，二者还存在隶属关系（马化腾属于腾讯公司）。
-     * @param {DescribeRelationRequest} req
-     * @param {function(string, DescribeRelationResponse):void} cb
-     * @public
-     */
-    DescribeRelation(req, cb) {
-        let resp = new DescribeRelationResponse();
-        this.request("DescribeRelation", req, resp, cb);
-    }
-
-    /**
      * 文本分类接口能够对用户输入的文本进行自动分类，将其映射到具体的类目上，用户只需要提供待分类的文本，而无需关注具体实现。
 
 该功能基于千亿级大规模互联网语料和LSTM、BERT等深度神经网络模型进行训练，并持续迭代更新，以保证效果不断提升。
 
 目前已提供：
 
-- 通用领域分类体系，二级分类，包括15个分类类目，分别是汽车、科技、健康、体育、旅行、教育、职业、文化、军事、房产、娱乐、女性、奥运、财经以及其他，适用于通用的场景。
-
-- 新闻领域分类体系，五级分类，包括35个一级分类类目，228个二级分类，493个三级分类，204个四级分类，40个五级分类（详细请见附录->文本分类映射表），已应用于腾讯新闻的文章分类。
-
+- 通用领域分类体系，二级分类，包括14个分类类目，分别是汽车、科技、健康、体育、旅行、教育、职业、文化、房产、娱乐、女性、奥运、财经以及其他，适用于通用的场景。
      * @param {TextClassificationRequest} req
      * @param {function(string, TextClassificationResponse):void} cb
      * @public
@@ -290,9 +259,26 @@ https://ai.tencent.com/ailab/nlp/zh/embedding.html
     }
 
     /**
+     * 句子相似度接口能够基于深度学习技术来计算一个源句子和多个目标句子的相似度，相似度分值越大的两个句子在语义上越相似。目前仅支持短文本（不超过128字符）的相似度计算，长文本的相似度计算也即将推出。
+
+鉴于句子相似度是一个应用非常广泛的功能，腾讯云自然语言处理团队在Bert等领先的深度神经网络模型的基础上，专门针对文本相似任务进行了优化，并持续迭代更新。基于句子相似度，可以轻松实现诸如文本去重、相似推荐等功能。
+
+接口将以句子数量为单位消耗资源包，而不是调用接口次数为单位。
+     * @param {TextSimilarityProRequest} req
+     * @param {function(string, TextSimilarityProResponse):void} cb
+     * @public
+     */
+    TextSimilarityPro(req, cb) {
+        let resp = new TextSimilarityProResponse();
+        this.request("TextSimilarityPro", req, resp, cb);
+    }
+
+    /**
      * 句子相似度接口能够基于深度学习技术来计算一个源句子和多个目标句子的相似度，相似度分值越大的两个句子在语义上越相似。目前仅支持短文本（不超过500字符）的相似度计算，长文本的相似度计算也即将推出。
 
 鉴于句子相似度是一个应用非常广泛的功能，腾讯云自然语言处理团队在Bert等领先的深度神经网络模型的基础上，专门针对文本相似任务进行了优化，并持续迭代更新。基于句子相似度，可以轻松实现诸如文本去重、相似推荐等功能。
+
+接口将以句子数量为单位消耗资源包，而不是调用接口次数为单位。
      * @param {TextSimilarityRequest} req
      * @param {function(string, TextSimilarityResponse):void} cb
      * @public
@@ -348,17 +334,6 @@ https://ai.tencent.com/ailab/nlp/zh/embedding.html
     }
 
     /**
-     * 三元组查询，主要分为两类，SP查询和PO查询。SP查询表示已知主语和谓语查询宾语，PO查询表示已知宾语和谓语查询主语。每一个SP或PO查询都是一个可独立执行的查询，TQL支持SP查询的嵌套查询，即主语可以是一个嵌套的子查询。其他复杂的三元组查询方法，请参考官网API文档示例。
-     * @param {DescribeTripleRequest} req
-     * @param {function(string, DescribeTripleResponse):void} cb
-     * @public
-     */
-    DescribeTriple(req, cb) {
-        let resp = new DescribeTripleResponse();
-        this.request("DescribeTriple", req, resp, cb);
-    }
-
-    /**
      * 基于关键词提取平台，通过对文本内容进行深度分析，提取出文本内容中的关键信息，为用户实现诸如新闻内容关键词自动提取、评论关键词提取等提供基础服务。
      * @param {KeywordsExtractionRequest} req
      * @param {function(string, KeywordsExtractionResponse):void} cb
@@ -367,6 +342,19 @@ https://ai.tencent.com/ailab/nlp/zh/embedding.html
     KeywordsExtraction(req, cb) {
         let resp = new KeywordsExtractionResponse();
         this.request("KeywordsExtraction", req, resp, cb);
+    }
+
+    /**
+     * 提供对中文文本的自动纠错功能，能够识别输入文本中的错误片段，定位错误并给出正确的文本结果；支持长度不超过128字符（含标点符号）的长文本纠错。
+
+此功能是基于千亿级大规模互联网语料和LSTM、BERT等深度神经网络模型进行训练，并持续迭代更新，以保证效果不断提升，是搜索引擎、语音识别、内容审核等功能更好运行的基础之一。
+     * @param {TextCorrectionProRequest} req
+     * @param {function(string, TextCorrectionProResponse):void} cb
+     * @public
+     */
+    TextCorrectionPro(req, cb) {
+        let resp = new TextCorrectionProResponse();
+        this.request("TextCorrectionPro", req, resp, cb);
     }
 
     /**

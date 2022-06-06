@@ -16,72 +16,83 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const DismissRoomByStrRoomIdRequest = models.DismissRoomByStrRoomIdRequest;
 const DescribeAbnormalEventResponse = models.DescribeAbnormalEventResponse;
-const RealtimeData = models.RealtimeData;
+const CloudStorage = models.CloudStorage;
 const DescribeAbnormalEventRequest = models.DescribeAbnormalEventRequest;
-const DescribeTrtcInteractiveTimeResponse = models.DescribeTrtcInteractiveTimeResponse;
+const SdkAppIdTrtcMcuTranscodeTimeUsage = models.SdkAppIdTrtcMcuTranscodeTimeUsage;
 const ModifyPictureResponse = models.ModifyPictureResponse;
-const StartMCUMixTranscodeByStrRoomIdRequest = models.StartMCUMixTranscodeByStrRoomIdRequest;
-const LayoutParams = models.LayoutParams;
+const RemoveUserRequest = models.RemoveUserRequest;
+const DescribeCloudRecordingResponse = models.DescribeCloudRecordingResponse;
 const TimeValue = models.TimeValue;
+const StartMCUMixTranscodeByStrRoomIdRequest = models.StartMCUMixTranscodeByStrRoomIdRequest;
 const CreatePictureRequest = models.CreatePictureRequest;
 const DescribeTrtcMcuTranscodeTimeRequest = models.DescribeTrtcMcuTranscodeTimeRequest;
-const SdkAppIdTrtcMcuTranscodeTimeUsage = models.SdkAppIdTrtcMcuTranscodeTimeUsage;
+const StopMCUMixTranscodeResponse = models.StopMCUMixTranscodeResponse;
 const RemoveUserByStrRoomIdRequest = models.RemoveUserByStrRoomIdRequest;
-const DescribeRealtimeScaleResponse = models.DescribeRealtimeScaleResponse;
+const SubscribeStreamUserIds = models.SubscribeStreamUserIds;
+const MixLayoutParams = models.MixLayoutParams;
 const DismissRoomResponse = models.DismissRoomResponse;
-const DescribeRealtimeNetworkResponse = models.DescribeRealtimeNetworkResponse;
+const EventMessage = models.EventMessage;
 const DescribeRecordStatisticRequest = models.DescribeRecordStatisticRequest;
 const DescribeUserInformationRequest = models.DescribeUserInformationRequest;
 const DescribeCallDetailRequest = models.DescribeCallDetailRequest;
-const DescribeRealtimeNetworkRequest = models.DescribeRealtimeNetworkRequest;
-const DescribeUserInformationResponse = models.DescribeUserInformationResponse;
+const ScaleInfomation = models.ScaleInfomation;
+const StorageParams = models.StorageParams;
+const CloudVod = models.CloudVod;
 const EncodeParams = models.EncodeParams;
-const RemoveUserByStrRoomIdResponse = models.RemoveUserByStrRoomIdResponse;
+const ModifyPictureRequest = models.ModifyPictureRequest;
 const StartMCUMixTranscodeRequest = models.StartMCUMixTranscodeRequest;
-const DescribeRealtimeQualityResponse = models.DescribeRealtimeQualityResponse;
+const DescribeCloudRecordingRequest = models.DescribeCloudRecordingRequest;
+const TencentVod = models.TencentVod;
+const RecordParams = models.RecordParams;
 const StopMCUMixTranscodeRequest = models.StopMCUMixTranscodeRequest;
 const UserInformation = models.UserInformation;
+const MixLayout = models.MixLayout;
 const DescribeHistoryScaleRequest = models.DescribeHistoryScaleRequest;
 const DeletePictureRequest = models.DeletePictureRequest;
+const LayoutParams = models.LayoutParams;
 const DescribeRoomInformationResponse = models.DescribeRoomInformationResponse;
 const RecordUsage = models.RecordUsage;
-const RemoveUserRequest = models.RemoveUserRequest;
+const CreateCloudRecordingRequest = models.CreateCloudRecordingRequest;
 const OutputParams = models.OutputParams;
-const EventMessage = models.EventMessage;
-const ModifyPictureRequest = models.ModifyPictureRequest;
+const WaterMark = models.WaterMark;
+const DeleteCloudRecordingResponse = models.DeleteCloudRecordingResponse;
+const MixTranscodeParams = models.MixTranscodeParams;
 const CreateTroubleInfoResponse = models.CreateTroubleInfoResponse;
 const StopMCUMixTranscodeByStrRoomIdRequest = models.StopMCUMixTranscodeByStrRoomIdRequest;
 const QualityData = models.QualityData;
 const AbnormalEvent = models.AbnormalEvent;
+const RemoveUserByStrRoomIdResponse = models.RemoveUserByStrRoomIdResponse;
 const StopMCUMixTranscodeByStrRoomIdResponse = models.StopMCUMixTranscodeByStrRoomIdResponse;
-const DescribeRealtimeQualityRequest = models.DescribeRealtimeQualityRequest;
 const DeletePictureResponse = models.DeletePictureResponse;
-const StopMCUMixTranscodeResponse = models.StopMCUMixTranscodeResponse;
+const ModifyCloudRecordingRequest = models.ModifyCloudRecordingRequest;
 const CreateTroubleInfoRequest = models.CreateTroubleInfoRequest;
 const EventList = models.EventList;
-const DismissRoomRequest = models.DismissRoomRequest;
+const StorageFile = models.StorageFile;
+const PictureInfo = models.PictureInfo;
+const DescribeUserInformationResponse = models.DescribeUserInformationResponse;
 const DescribeDetailEventResponse = models.DescribeDetailEventResponse;
-const DismissRoomByStrRoomIdRequest = models.DismissRoomByStrRoomIdRequest;
-const StartMCUMixTranscodeResponse = models.StartMCUMixTranscodeResponse;
+const CreateCloudRecordingResponse = models.CreateCloudRecordingResponse;
+const DescribeCallDetailResponse = models.DescribeCallDetailResponse;
 const OneSdkAppIdTranscodeTimeUsagesInfo = models.OneSdkAppIdTranscodeTimeUsagesInfo;
 const DescribeTrtcMcuTranscodeTimeResponse = models.DescribeTrtcMcuTranscodeTimeResponse;
+const DeleteCloudRecordingRequest = models.DeleteCloudRecordingRequest;
 const DescribePictureRequest = models.DescribePictureRequest;
 const SdkAppIdRecordUsage = models.SdkAppIdRecordUsage;
-const OneSdkAppIdUsagesInfo = models.OneSdkAppIdUsagesInfo;
 const SmallVideoLayoutParams = models.SmallVideoLayoutParams;
 const RemoveUserResponse = models.RemoveUserResponse;
 const PresetLayoutConfig = models.PresetLayoutConfig;
-const DescribeRealtimeScaleRequest = models.DescribeRealtimeScaleRequest;
-const DescribeCallDetailResponse = models.DescribeCallDetailResponse;
+const VideoParams = models.VideoParams;
+const AudioParams = models.AudioParams;
 const DescribePictureResponse = models.DescribePictureResponse;
-const SdkAppIdTrtcUsage = models.SdkAppIdTrtcUsage;
-const DescribeTrtcInteractiveTimeRequest = models.DescribeTrtcInteractiveTimeRequest;
+const WaterMarkImage = models.WaterMarkImage;
+const DismissRoomRequest = models.DismissRoomRequest;
 const PublishCdnParams = models.PublishCdnParams;
 const DescribeRoomInformationRequest = models.DescribeRoomInformationRequest;
-const ScaleInfomation = models.ScaleInfomation;
 const DescribeDetailEventRequest = models.DescribeDetailEventRequest;
 const AbnormalExperience = models.AbnormalExperience;
+const StartMCUMixTranscodeResponse = models.StartMCUMixTranscodeResponse;
 const RoomState = models.RoomState;
 const CreatePictureResponse = models.CreatePictureResponse;
 const WaterMarkParams = models.WaterMarkParams;
@@ -89,7 +100,7 @@ const DescribeRecordStatisticResponse = models.DescribeRecordStatisticResponse;
 const DismissRoomByStrRoomIdResponse = models.DismissRoomByStrRoomIdResponse;
 const DescribeHistoryScaleResponse = models.DescribeHistoryScaleResponse;
 const StartMCUMixTranscodeByStrRoomIdResponse = models.StartMCUMixTranscodeByStrRoomIdResponse;
-const PictureInfo = models.PictureInfo;
+const ModifyCloudRecordingResponse = models.ModifyCloudRecordingResponse;
 
 
 /**
@@ -120,7 +131,10 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
 - 画中画模板：适用于混合大小两路视频画面和其他用户混音，或者混合一路大画面和其他用户混音的场景。小画面悬浮于大画面之上，可以指定大小画面的用户以及小画面的显示位置，最多支持2个画面。
 - 自定义模板：适用于在混流中指定用户的画面位置，或者预设视频画面位置的场景。当预设位置指定用户时，排版引擎会该用户预留位置；当预设位置未指定用户时，排版引擎会根据进房间顺序自动填充。预设位置填满时，不再混合其他用户的画面和声音。自定义模板启用占位图功能时（LayoutParams中的PlaceHolderMode设置成1），在预设位置的用户没有上行视频时可显示对应的占位图（PlaceImageId）。
 
-注意：2020年1月9号及以后创建的应用才能直接调用此接口。2020年1月9日之前创建的应用默认使用云直播的云端混流，如需切换至MCU混流，请[提交工单](https://console.cloud.tencent.com/workorder/category)寻求帮助。
+注意：
+1、**混流转码为收费功能，调用接口将产生云端混流转码费用，详见[云端混流转码计费说明](https://cloud.tencent.com/document/product/647/49446)。**
+2、2020年1月9号及以后创建的应用才能直接调用此接口。2020年1月9日之前创建的应用默认使用云直播的云端混流，如需切换至MCU混流，请[提交工单](https://console.cloud.tencent.com/workorder/category)寻求帮助。
+3、客户端混流和服务端混流不能混用。
      * @param {StartMCUMixTranscodeRequest} req
      * @param {function(string, StartMCUMixTranscodeResponse):void} cb
      * @public
@@ -132,7 +146,7 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
 
     /**
      * 查询sdkappid下的房间列表。默认返回10条通话，一次最多返回100条通话。可查询14天内的数据。
-注意：不建议依赖接口做实时类业务逻辑处理
+**注意**：该接口只用于历史数据统计或核对数据使用，实时类关键业务逻辑不能使用。
      * @param {DescribeRoomInformationRequest} req
      * @param {function(string, DescribeRoomInformationResponse):void} cb
      * @public
@@ -165,7 +179,7 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
     }
 
     /**
-     * 可查询sdkqppid 每天的房间数和用户数，每分钟1次，可查询最近14天的数据。当天未结束，无法查到当天的房间数与用户数。
+     * 可查询sdkqppid 每天的房间数和用户数，每分钟1次，可查询最近14天的数据。当天未结束，无法查到当天的房间数与用户数。 
      * @param {DescribeHistoryScaleRequest} req
      * @param {function(string, DescribeHistoryScaleResponse):void} cb
      * @public
@@ -176,7 +190,7 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
     }
 
     /**
-     * 此接口已废弃，调用将报错。如需使用相关功能请参见 [控制台指南 > 应用管理 > 素材管理](https://cloud.tencent.com/document/product/647/50769)  。
+     * 如果您需要在 [云端混流转码](https://cloud.tencent.com/document/product/647/16827) 时频繁删除自定义背景图或水印，可通过此接口删除已上传的图片。无需频繁删除图片的场景，建议直接在 [控制台 > 应用管理 > 素材管理](https://cloud.tencent.com/document/product/647/50769) 中操作。
      * @param {DeletePictureRequest} req
      * @param {function(string, DeletePictureResponse):void} cb
      * @public
@@ -187,7 +201,7 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
     }
 
     /**
-     * 此接口已废弃，调用将报错。如需使用相关功能请参见 [控制台指南 > 应用管理 > 素材管理](https://cloud.tencent.com/document/product/647/50769)  。
+     * 如果您需要在 [云端混流转码](https://cloud.tencent.com/document/product/647/16827) 时频繁新增自定义背景图或水印，可通过此接口上传新的图片素材。无需频繁新增图片的场景，建议直接在 [控制台 > 应用管理 > 素材管理](https://cloud.tencent.com/document/product/647/50769) 中操作。
      * @param {CreatePictureRequest} req
      * @param {function(string, CreatePictureResponse):void} cb
      * @public
@@ -209,8 +223,19 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
     }
 
     /**
-     * 查询指定时间内的用户列表及用户通话质量数据，可查询14天内数据。DataType 不为null，查询实时数据时，查询起止时间不超过1个小时，每次查询用户不超过6个，支持跨天查询。DataType，UserIds为null时，默认查询6个用户，同时支持每页查询100以内用户个数（PageSize不超过100）。接口用于查询质量问题，不推荐作为计费使用。
-注意：不建议依赖接口做实时类业务逻辑处理
+     * 成功开启录制后，可以使用此接口来更新录制任务。仅在录制任务进行时有效，录制退出后更新将会返回错误。更新操作是全量覆盖，并不是增量更新的模式，也就是说每次更新都需要携带全量的信息。
+     * @param {ModifyCloudRecordingRequest} req
+     * @param {function(string, ModifyCloudRecordingResponse):void} cb
+     * @public
+     */
+    ModifyCloudRecording(req, cb) {
+        let resp = new ModifyCloudRecordingResponse();
+        this.request("ModifyCloudRecording", req, resp, cb);
+    }
+
+    /**
+     * 查询指定时间内的用户列表及用户通话质量数据，可查询14天内数据。DataType 不为null，查询起止时间不超过1个小时，查询用户不超过6个，支持跨天查询。DataType，UserIds为null时，查询起止时间不超过4个小时， 默认查询6个用户，同时支持每页查询100以内用户个数（PageSize不超过100）。接口用于查询质量问题，不推荐作为计费使用。
+**注意**：该接口只用于历史数据统计或核对数据使用，实时类关键业务逻辑不能使用。
      * @param {DescribeCallDetailRequest} req
      * @param {function(string, DescribeCallDetailResponse):void} cb
      * @public
@@ -221,36 +246,25 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
     }
 
     /**
-     * 查询sdkappid维度下每分钟实时质量数据，包括：进房成功率，首帧秒开率，音频卡顿率，视频卡顿率。可查询24小时内数据，查询起止时间不低于1分钟，不超过1个小时。
-     * @param {DescribeRealtimeQualityRequest} req
-     * @param {function(string, DescribeRealtimeQualityResponse):void} cb
-     * @public
-     */
-    DescribeRealtimeQuality(req, cb) {
-        let resp = new DescribeRealtimeQualityResponse();
-        this.request("DescribeRealtimeQuality", req, resp, cb);
-    }
+     * ###接口说明：
+启动云端录制功能，完成房间内的音视频录制，并上传到指定的云存储。您可以通过此 API 接口把TRTC 房间中的每一路音视频流做单独的录制有或者多路视频画面混流一路。
 
-    /**
-     *  查询sdkappid维度下每分钟实时规模，可查询24小时内数据，查询起止时间不低于1分钟，不超过1个小时。
-     * @param {DescribeRealtimeScaleRequest} req
-     * @param {function(string, DescribeRealtimeScaleResponse):void} cb
-     * @public
-     */
-    DescribeRealtimeScale(req, cb) {
-        let resp = new DescribeRealtimeScaleResponse();
-        this.request("DescribeRealtimeScale", req, resp, cb);
-    }
+###您可以通过此接口实现如下目标：
+* 指定订阅流参数（RecordParams）来指定需要录制的主播的黑名单或者白名单。
+* 指定第三方存储的参数（StorageParams）来指定上传到您希望的云存储
+* 指定混流模式下的音视频转码详细参数（MixTranscodeParams），包括视频分辨率、视频码率、视频帧率、以及声音质量等
+* 指定混流模式各路画面的位置和布局或者也可以指定自动模板的方式来配置。
 
-    /**
-     * 查询sdkappid维度下每分钟实时网络状态，包括上行丢包与下行丢包。可查询24小时内数据，查询起止时间不低于1分钟，不超过1个小时。
-     * @param {DescribeRealtimeNetworkRequest} req
-     * @param {function(string, DescribeRealtimeNetworkResponse):void} cb
+###关键名词：
+* 单流录制：分别录制房间的订阅UserId的音频和视频。录制服务会实时将录制文件（M3U8/TS）上传至云存储。
+* 混流录制：将房间内订阅UserId的音视频混录成一个音视频文件，并将录制文件（M3U8/TS）上传至云存储。
+     * @param {CreateCloudRecordingRequest} req
+     * @param {function(string, CreateCloudRecordingResponse):void} cb
      * @public
      */
-    DescribeRealtimeNetwork(req, cb) {
-        let resp = new DescribeRealtimeNetworkResponse();
-        this.request("DescribeRealtimeNetwork", req, resp, cb);
+    CreateCloudRecording(req, cb) {
+        let resp = new CreateCloudRecordingResponse();
+        this.request("CreateCloudRecording", req, resp, cb);
     }
 
     /**
@@ -265,7 +279,7 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
     }
 
     /**
-     * 此接口已废弃，调用将报错。如需使用相关功能请参见 [控制台指南 > 应用管理 > 素材管理](https://cloud.tencent.com/document/product/647/50769)  。
+     * 如果您需要在 [云端混流转码](https://cloud.tencent.com/document/product/647/16827) 时频繁修改自定义背景图或水印素材，可通过此接口修改已上传的图片。无需频繁修改图片素材的场景，建议直接在 [控制台 > 应用管理 > 素材管理](https://cloud.tencent.com/document/product/647/50769) 中操作。
      * @param {ModifyPictureRequest} req
      * @param {function(string, ModifyPictureResponse):void} cb
      * @public
@@ -315,7 +329,10 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
 - 画中画模板：适用于混合大小两路视频画面和其他用户混音，或者混合一路大画面和其他用户混音的场景。小画面悬浮于大画面之上，可以指定大小画面的用户以及小画面的显示位置。
 - 自定义模板：适用于在混流中指定用户的画面位置，或者预设视频画面位置的场景。当预设位置指定用户时，排版引擎会该用户预留位置；当预设位置未指定用户时，排版引擎会根据进房间顺序自动填充。预设位置填满时，不再混合其他用户的画面和声音。自定义模板启用占位图功能时（LayoutParams中的PlaceHolderMode设置成1），在预设位置的用户没有上行视频时可显示对应的占位图（PlaceImageId）。
 
-注意：2020年1月9号及以后创建的应用才能直接调用此接口。2020年1月9日之前创建的应用默认使用云直播的云端混流，如需切换至MCU混流，请[提交工单](https://console.cloud.tencent.com/workorder/category)寻求帮助。
+注意：
+1、**混流转码为收费功能，调用接口将产生云端混流转码费用，详见[云端混流转码计费说明](https://cloud.tencent.com/document/product/647/49446)。**
+2、2020年1月9号及以后创建的应用才能直接调用此接口。2020年1月9日之前创建的应用默认使用云直播的云端混流，如需切换至MCU混流，请[提交工单](https://console.cloud.tencent.com/workorder/category)寻求帮助。
+3、客户端混流和服务端混流不能混用。
      * @param {StartMCUMixTranscodeByStrRoomIdRequest} req
      * @param {function(string, StartMCUMixTranscodeByStrRoomIdResponse):void} cb
      * @public
@@ -379,22 +396,29 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
     }
 
     /**
-     * 查询音视频互动计费时长。
-- 查询时间小于等于1天时，返回每5分钟粒度的数据；查询时间大于1天时，返回按天汇总的数据。
-- 单次查询统计区间最多不能超过31天。
-- 若查询当天用量，由于统计延迟等原因，返回数据可能不够准确。
-- 日结后付费将于次日上午推送账单，建议次日上午9点以后再来查询前一天的用量。
-     * @param {DescribeTrtcInteractiveTimeRequest} req
-     * @param {function(string, DescribeTrtcInteractiveTimeResponse):void} cb
+     * 成功开启录制后，可以使用此接口来查询录制状态。仅在录制任务进行时有效，录制退出后查询将会返回错误。
+     * @param {DescribeCloudRecordingRequest} req
+     * @param {function(string, DescribeCloudRecordingResponse):void} cb
      * @public
      */
-    DescribeTrtcInteractiveTime(req, cb) {
-        let resp = new DescribeTrtcInteractiveTimeResponse();
-        this.request("DescribeTrtcInteractiveTime", req, resp, cb);
+    DescribeCloudRecording(req, cb) {
+        let resp = new DescribeCloudRecordingResponse();
+        this.request("DescribeCloudRecording", req, resp, cb);
     }
 
     /**
-     * 此接口已废弃，调用将报错。如需使用相关功能请参见 [控制台指南 > 应用管理 > 素材管理](https://cloud.tencent.com/document/product/647/50769)  。
+     * 成功开启录制后，可以使用此接口来停止录制任务。仅在录制任务进行时有效，录制退出后更新将会返回错误。停止录制成功后不代表文件全部传输完成，如果未完成后台将会继续上传文件，成功后通过事件回调通知客户文件全部传输完成状态。
+     * @param {DeleteCloudRecordingRequest} req
+     * @param {function(string, DeleteCloudRecordingResponse):void} cb
+     * @public
+     */
+    DeleteCloudRecording(req, cb) {
+        let resp = new DeleteCloudRecordingResponse();
+        this.request("DeleteCloudRecording", req, resp, cb);
+    }
+
+    /**
+     * 如果您需要在 [云端混流转码](https://cloud.tencent.com/document/product/647/16827) 时频繁查找自定义背景图或水印信息，可通过此接口查找已上传的图片信息。无需频繁查找图片信息的场景，建议直接在 [控制台 > 应用管理 > 素材管理](https://cloud.tencent.com/document/product/647/50769) 中查看。
      * @param {DescribePictureRequest} req
      * @param {function(string, DescribePictureResponse):void} cb
      * @public
@@ -417,7 +441,7 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
 
     /**
      * 查询指定时间内的用户列表，可查询14天内数据，查询起止时间不超过4小时。默认每页查询6个用户，支持每页最大查询100个用户PageSize不超过100）。
-注意：不建议依赖接口做实时类业务逻辑处理
+**注意**：该接口只用于历史数据统计或核对数据使用，实时类关键业务逻辑不能使用。
      * @param {DescribeUserInformationRequest} req
      * @param {function(string, DescribeUserInformationResponse):void} cb
      * @public

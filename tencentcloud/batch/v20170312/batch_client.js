@@ -86,6 +86,7 @@ const DetachInstancesRequest = models.DetachInstancesRequest;
 const Instance = models.Instance;
 const OutputMapping = models.OutputMapping;
 const EnhancedService = models.EnhancedService;
+const RunAutomationServiceEnabled = models.RunAutomationServiceEnabled;
 const DescribeJobSubmitInfoResponse = models.DescribeJobSubmitInfoResponse;
 const DescribeComputeEnvCreateInfosResponse = models.DescribeComputeEnvCreateInfosResponse;
 const RunSecurityServiceEnabled = models.RunSecurityServiceEnabled;

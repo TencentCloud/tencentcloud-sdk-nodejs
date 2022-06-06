@@ -24,6 +24,7 @@ const DeletePersonRequest = models.DeletePersonRequest;
 const ModifyGroupResponse = models.ModifyGroupResponse;
 const TerminateSegmentationTaskResponse = models.TerminateSegmentationTaskResponse;
 const BodyAttributeInfo = models.BodyAttributeInfo;
+const GetSummaryInfoRequest = models.GetSummaryInfoRequest;
 const GetGroupListResponse = models.GetGroupListResponse;
 const GroupInfo = models.GroupInfo;
 const DescribeSegmentationTaskRequest = models.DescribeSegmentationTaskRequest;
@@ -35,6 +36,7 @@ const CreatePersonRequest = models.CreatePersonRequest;
 const ModifyPersonInfoResponse = models.ModifyPersonInfoResponse;
 const CreateSegmentationTaskResponse = models.CreateSegmentationTaskResponse;
 const DeleteGroupRequest = models.DeleteGroupRequest;
+const GetSummaryInfoResponse = models.GetSummaryInfoResponse;
 const ModifyPersonInfoRequest = models.ModifyPersonInfoRequest;
 const Gender = models.Gender;
 const SegmentCustomizedPortraitPicRequest = models.SegmentCustomizedPortraitPicRequest;
@@ -90,14 +92,14 @@ class BdaClient extends AbstractClient {
     }
     
     /**
-     * 本接口用于对一组待识别的人体轨迹（Trace）图片，在人体库中识别出最相似的 TopK 人体，按照相似度从大到小排列。
+     * 本接口用于对一组待识别的人体动作轨迹（Trace）图片，在人体库中识别出最相似的 TopK 人体，按照相似度从大到小排列。
 
-人体轨迹（Trace）图片要求：图片中当且仅包含一个人体。人体完整、无遮挡。
+人体动作轨迹（Trace）图片要求：图片中当且仅包含一个人体。人体完整、无遮挡。
 
 > 请注意：
-- 我们希望您的输入为严格符合轨迹图片要求的图片。如果您输入的图片不符合轨迹图片要求，会对最终效果产生较大负面影响；
-- 人体轨迹，是一个包含1-5张图片的图片序列。您可以输入1张图片作为轨迹，也可以输入多张。单个轨迹中包含越多符合质量的图片，搜索效果越好。
-- 构成人体轨迹单张图片大小不得超过2M，分辨率不得超过1920*1080。
+- 我们希望您的输入为严格符合动作轨迹图片要求的图片。如果您输入的图片不符合动作轨迹图片要求，会对最终效果产生较大负面影响；
+- 人体动作轨迹，是一个包含1-5张图片的图片序列。您可以输入1张图片作为动作轨迹，也可以输入多张。单个动作轨迹中包含越多符合质量的图片，搜索效果越好。
+- 构成人体动作轨迹单张图片大小不得超过2M，分辨率不得超过1920*1080。
      * @param {SearchTraceRequest} req
      * @param {function(string, SearchTraceResponse):void} cb
      * @public
@@ -116,6 +118,17 @@ class BdaClient extends AbstractClient {
     TerminateSegmentationTask(req, cb) {
         let resp = new TerminateSegmentationTaskResponse();
         this.request("TerminateSegmentationTask", req, resp, cb);
+    }
+
+    /**
+     * 获取人体库汇总信息。
+     * @param {GetSummaryInfoRequest} req
+     * @param {function(string, GetSummaryInfoResponse):void} cb
+     * @public
+     */
+    GetSummaryInfo(req, cb) {
+        let resp = new GetSummaryInfoResponse();
+        this.request("GetSummaryInfo", req, resp, cb);
     }
 
     /**
@@ -155,14 +168,14 @@ class BdaClient extends AbstractClient {
     }
 
     /**
-     * 将一个人体轨迹添加到一个人员中。一个人员最多允许包含 5 个人体轨迹。同一人的人体轨迹越多，搜索识别效果越好。
+     * 将一个人体动作轨迹添加到一个人员中。一个人员最多允许包含 5 个人体动作轨迹。同一人的人体动作轨迹越多，搜索识别效果越好。
 
 >请注意：
-- 我们希望您的输入为 严格符合轨迹图片 要求的图片。如果您输入的图片不符合轨迹图片要求，会对最终效果产生较大负面影响。请您尽量保证一个Trace中的图片人体清晰、无遮挡、连贯。
-- 一个人体轨迹（Trace）可以包含1-5张人体图片。提供越多质量高的人体图片有助于提升最终识别结果。
-- 无论您在单个Trace中提供了多少张人体图片，我们都将生成一个对应的轨迹（Trace）信息。即，Trace仅和本次输入的图片序列相关，和图片的个数无关。
+- 我们希望您的输入为 严格符合动作轨迹图片 要求的图片。如果您输入的图片不符合动作轨迹图片要求，会对最终效果产生较大负面影响。请您尽量保证一个Trace中的图片人体清晰、无遮挡、连贯。
+- 一个人体动作轨迹（Trace）可以包含1-5张人体图片。提供越多质量高的人体图片有助于提升最终识别结果。
+- 无论您在单个Trace中提供了多少张人体图片，我们都将生成一个对应的动作轨迹（Trace）信息。即，Trace仅和本次输入的图片序列相关，和图片的个数无关。
 - 输入的图片组中，若有部分图片输入不合法（如图片大小过大、分辨率过大、无法解码等），我们将舍弃这部分图片，确保合法图片被正确搜索。即，我们将尽可能保证请求成功，去除不合法的输入；
-- 构成人体轨迹单张图片大小限制为2M，分辨率限制为1920*1080。
+- 构成人体动作轨迹单张图片大小限制为2M，分辨率限制为1920*1080。
      * @param {CreateTraceRequest} req
      * @param {function(string, CreateTraceResponse):void} cb
      * @public
@@ -241,11 +254,11 @@ class BdaClient extends AbstractClient {
     /**
      * 用于创建一个空的人体库，如果人体库已存在返回错误。
 
-1个APPID下最多有2000W个人体轨迹（Trace），最多1W个人体库（Group）。
+1个APPID下最多有2000W个人体动作轨迹（Trace），最多1W个人体库（Group）。
 
-单个人体库（Group）最多10W个人体轨迹（Trace）。
+单个人体库（Group）最多10W个人体动作轨迹（Trace）。
 
-单个人员（Person）最多添加 5 个人体轨迹（Trace）。
+单个人员（Person）最多添加 5 个人体动作轨迹（Trace）。
      * @param {CreateGroupRequest} req
      * @param {function(string, CreateGroupResponse):void} cb
      * @public
@@ -256,14 +269,14 @@ class BdaClient extends AbstractClient {
     }
 
     /**
-     * 创建人员，添加对应人员的人体轨迹信息。
+     * 创建人员，添加对应人员的人体动作轨迹信息。
 
 请注意：
-- 我们希望您的输入为 严格符合轨迹图片 要求的图片。如果您输入的图片不符合轨迹图片要求，会对最终效果产生较大负面影响。请您尽量保证一个Trace中的图片人体清晰、无遮挡、连贯；
-- 一个人体轨迹（Trace）可以包含1-5张人体图片。提供越多质量高的人体图片有助于提升最终识别结果；
-- 无论您在单个Trace中提供了多少张人体图片，我们都将生成一个对应的轨迹（Trace）信息。即，Trace仅和本次输入的图片序列相关，和图片的个数无关；
+- 我们希望您的输入为 严格符合动作轨迹图片 要求的图片。如果您输入的图片不符合动作轨迹图片要求，会对最终效果产生较大负面影响。请您尽量保证一个Trace中的图片人体清晰、无遮挡、连贯；
+- 一个人体动作轨迹（Trace）可以包含1-5张人体图片。提供越多质量高的人体图片有助于提升最终识别结果；
+- 无论您在单个Trace中提供了多少张人体图片，我们都将生成一个对应的动作轨迹（Trace）信息。即，Trace仅和本次输入的图片序列相关，和图片的个数无关；
 - 输入的图片组中，若有部分图片输入不合法（如图片大小过大、分辨率过大、无法解码等），我们将舍弃这部分图片，确保合法图片被正确搜索。即，我们将尽可能保证请求成功，去除不合法的输入；
-- 构成人体轨迹单张图片大小不得超过2M，分辨率不得超过1920*1080。
+- 构成人体动作轨迹单张图片大小不得超过2M，分辨率不得超过1920*1080。
      * @param {CreatePersonRequest} req
      * @param {function(string, CreatePersonResponse):void} cb
      * @public
@@ -296,7 +309,7 @@ class BdaClient extends AbstractClient {
     }
 
     /**
-     * 本接口为离线人像分割处理接口组中的提交任务接口，可以对提交的资源进行处理视频流/图片流识别视频作品中的人像区域，进行一键抠像、背景替换、人像虚化等后期处理。
+     * 本接口为人像分割在线处理接口组中的提交任务接口，可以对提交的资源进行处理视频流/图片流识别视频作品中的人像区域，进行一键抠像、背景替换、人像虚化等后期处理。
      * @param {CreateSegmentationTaskRequest} req
      * @param {function(string, CreateSegmentationTaskResponse):void} cb
      * @public

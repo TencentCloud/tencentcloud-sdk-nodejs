@@ -198,18 +198,32 @@ class DescribeFileSystemResponse extends  AbstractModel {
         this.FileSystem = null;
 
         /**
-         * 已使用容量（byte），包括标准和归档存储
+         * 文件系统已使用容量（byte）
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.CapacityUsed = null;
 
         /**
-         * 已使用归档存储容量（byte）
+         * 已使用COS归档存储容量（byte）
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.ArchiveCapacityUsed = null;
+
+        /**
+         * 已使用COS标准存储容量（byte）
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.StandardCapacityUsed = null;
+
+        /**
+         * 已使用COS低频存储容量（byte）
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.DegradeCapacityUsed = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -234,6 +248,8 @@ class DescribeFileSystemResponse extends  AbstractModel {
         }
         this.CapacityUsed = 'CapacityUsed' in params ? params.CapacityUsed : null;
         this.ArchiveCapacityUsed = 'ArchiveCapacityUsed' in params ? params.ArchiveCapacityUsed : null;
+        this.StandardCapacityUsed = 'StandardCapacityUsed' in params ? params.StandardCapacityUsed : null;
+        this.DegradeCapacityUsed = 'DegradeCapacityUsed' in params ? params.DegradeCapacityUsed : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -357,7 +373,7 @@ class ModifyFileSystemRequest extends  AbstractModel {
         this.Description = null;
 
         /**
-         * 文件系统容量（byte），下限为1G，上限为1P，且必须是1G的整数倍
+         * 文件系统容量（byte），下限为1GB，上限为1PB，且必须是1GB的整数倍
 注意：修改的文件系统容量不能小于当前使用量
          * @type {number || null}
          */
@@ -375,6 +391,18 @@ class ModifyFileSystemRequest extends  AbstractModel {
          */
         this.PosixAcl = null;
 
+        /**
+         * 是否打开Ranger地址校验
+         * @type {boolean || null}
+         */
+        this.EnableRanger = null;
+
+        /**
+         * Ranger地址列表，可以为空数组
+         * @type {Array.<string> || null}
+         */
+        this.RangerServiceAddresses = null;
+
     }
 
     /**
@@ -390,6 +418,8 @@ class ModifyFileSystemRequest extends  AbstractModel {
         this.CapacityQuota = 'CapacityQuota' in params ? params.CapacityQuota : null;
         this.SuperUsers = 'SuperUsers' in params ? params.SuperUsers : null;
         this.PosixAcl = 'PosixAcl' in params ? params.PosixAcl : null;
+        this.EnableRanger = 'EnableRanger' in params ? params.EnableRanger : null;
+        this.RangerServiceAddresses = 'RangerServiceAddresses' in params ? params.RangerServiceAddresses : null;
 
     }
 }
@@ -978,7 +1008,7 @@ class CreateFileSystemRequest extends  AbstractModel {
         this.FileSystemName = null;
 
         /**
-         * 文件系统容量（byte），下限为1G，上限为1P，且必须是1G的整数倍
+         * 文件系统容量（byte），下限为1GB，上限为1PB，且必须是1GB的整数倍
          * @type {number || null}
          */
         this.CapacityQuota = null;
@@ -1013,6 +1043,24 @@ class CreateFileSystemRequest extends  AbstractModel {
          */
         this.RootInodeGroup = null;
 
+        /**
+         * 是否打开Ranger地址校验
+         * @type {boolean || null}
+         */
+        this.EnableRanger = null;
+
+        /**
+         * Ranger地址列表，默认为空数组
+         * @type {Array.<string> || null}
+         */
+        this.RangerServiceAddresses = null;
+
+        /**
+         * 多个资源标签，可以为空数组
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -1029,6 +1077,17 @@ class CreateFileSystemRequest extends  AbstractModel {
         this.SuperUsers = 'SuperUsers' in params ? params.SuperUsers : null;
         this.RootInodeUser = 'RootInodeUser' in params ? params.RootInodeUser : null;
         this.RootInodeGroup = 'RootInodeGroup' in params ? params.RootInodeGroup : null;
+        this.EnableRanger = 'EnableRanger' in params ? params.EnableRanger : null;
+        this.RangerServiceAddresses = 'RangerServiceAddresses' in params ? params.RangerServiceAddresses : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -1383,6 +1442,20 @@ class FileSystem extends  AbstractModel {
          */
         this.PosixAcl = null;
 
+        /**
+         * 是否打开Ranger地址校验
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.EnableRanger = null;
+
+        /**
+         * Ranger地址列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.RangerServiceAddresses = null;
+
     }
 
     /**
@@ -1403,6 +1476,8 @@ class FileSystem extends  AbstractModel {
         this.Status = 'Status' in params ? params.Status : null;
         this.SuperUsers = 'SuperUsers' in params ? params.SuperUsers : null;
         this.PosixAcl = 'PosixAcl' in params ? params.PosixAcl : null;
+        this.EnableRanger = 'EnableRanger' in params ? params.EnableRanger : null;
+        this.RangerServiceAddresses = 'RangerServiceAddresses' in params ? params.RangerServiceAddresses : null;
 
     }
 }
@@ -1428,7 +1503,7 @@ class RestoreTask extends  AbstractModel {
         this.FilePath = null;
 
         /**
-         * 回热任务类型（1：标准；2：极速；3：批量）
+         * 回热任务类型（1：标准；2：极速；3：批量，暂时仅支持极速）
          * @type {number || null}
          */
         this.Type = null;
@@ -1641,7 +1716,7 @@ class Transition extends  AbstractModel {
         this.Days = null;
 
         /**
-         * 转换类型（1：归档；2：删除）
+         * 转换类型（1：归档；2：删除；3：低频）
          * @type {number || null}
          */
         this.Type = null;

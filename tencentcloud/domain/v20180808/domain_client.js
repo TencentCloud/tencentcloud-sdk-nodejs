@@ -17,28 +17,35 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const UploadImageResponse = models.UploadImageResponse;
+const RenewDomainBatchResponse = models.RenewDomainBatchResponse;
 const BatchModifyDomainInfoRequest = models.BatchModifyDomainInfoRequest;
-const TemplateInfo = models.TemplateInfo;
+const DomainSimpleInfo = models.DomainSimpleInfo;
 const UpdateProhibitionBatchRequest = models.UpdateProhibitionBatchRequest;
+const TransferInDomainBatchResponse = models.TransferInDomainBatchResponse;
 const DeleteTemplateResponse = models.DeleteTemplateResponse;
 const TransferInDomainBatchRequest = models.TransferInDomainBatchRequest;
 const CreateDomainBatchResponse = models.CreateDomainBatchResponse;
 const DomainBatchDetailSet = models.DomainBatchDetailSet;
+const SendPhoneEmailCodeResponse = models.SendPhoneEmailCodeResponse;
 const ModifyDomainDNSBatchResponse = models.ModifyDomainDNSBatchResponse;
-const RenewDomainBatchRequest = models.RenewDomainBatchRequest;
+const DeletePhoneEmailRequest = models.DeletePhoneEmailRequest;
 const DescribeTemplateResponse = models.DescribeTemplateResponse;
 const UpdateProhibitionBatchResponse = models.UpdateProhibitionBatchResponse;
 const CheckDomainResponse = models.CheckDomainResponse;
-const RenewDomainBatchResponse = models.RenewDomainBatchResponse;
+const DescribeDomainSimpleInfoRequest = models.DescribeDomainSimpleInfoRequest;
+const CreatePhoneEmailRequest = models.CreatePhoneEmailRequest;
 const PriceInfo = models.PriceInfo;
 const DescribeTemplateRequest = models.DescribeTemplateRequest;
-const TransferInDomainBatchResponse = models.TransferInDomainBatchResponse;
+const RenewDomainBatchRequest = models.RenewDomainBatchRequest;
 const BatchModifyDomainInfoResponse = models.BatchModifyDomainInfoResponse;
+const ModifyDomainOwnerBatchResponse = models.ModifyDomainOwnerBatchResponse;
+const TemplateInfo = models.TemplateInfo;
 const DescribeDomainBaseInfoResponse = models.DescribeDomainBaseInfoResponse;
 const DescribeTemplateListResponse = models.DescribeTemplateListResponse;
 const TransferProhibitionBatchRequest = models.TransferProhibitionBatchRequest;
 const DescribeBatchOperationLogDetailsRequest = models.DescribeBatchOperationLogDetailsRequest;
 const DescribeDomainNameListResponse = models.DescribeDomainNameListResponse;
+const PhoneEmailData = models.PhoneEmailData;
 const ContactInfo = models.ContactInfo;
 const DescribeDomainPriceListResponse = models.DescribeDomainPriceListResponse;
 const CreateTemplateResponse = models.CreateTemplateResponse;
@@ -51,7 +58,9 @@ const BatchStatus = models.BatchStatus;
 const DomainList = models.DomainList;
 const DescribeDomainPriceListRequest = models.DescribeDomainPriceListRequest;
 const CreateDomainBatchRequest = models.CreateDomainBatchRequest;
+const DescribeDomainSimpleInfoResponse = models.DescribeDomainSimpleInfoResponse;
 const DescribeDomainBaseInfoRequest = models.DescribeDomainBaseInfoRequest;
+const DescribePhoneEmailListRequest = models.DescribePhoneEmailListRequest;
 const DomainBaseInfo = models.DomainBaseInfo;
 const DescribeDomainNameListRequest = models.DescribeDomainNameListRequest;
 const DescribeBatchOperationLogsRequest = models.DescribeBatchOperationLogsRequest;
@@ -61,11 +70,14 @@ const DescribeBatchOperationLogsResponse = models.DescribeBatchOperationLogsResp
 const TransferProhibitionBatchResponse = models.TransferProhibitionBatchResponse;
 const ModifyDomainDNSBatchRequest = models.ModifyDomainDNSBatchRequest;
 const DescribeBatchOperationLogDetailsResponse = models.DescribeBatchOperationLogDetailsResponse;
+const DescribePhoneEmailListResponse = models.DescribePhoneEmailListResponse;
 const CheckBatchStatusResponse = models.CheckBatchStatusResponse;
+const DeletePhoneEmailResponse = models.DeletePhoneEmailResponse;
 const DescribeTemplateListRequest = models.DescribeTemplateListRequest;
-const ModifyDomainOwnerBatchResponse = models.ModifyDomainOwnerBatchResponse;
+const CreatePhoneEmailResponse = models.CreatePhoneEmailResponse;
 const SetDomainAutoRenewRequest = models.SetDomainAutoRenewRequest;
 const ModifyDomainOwnerBatchRequest = models.ModifyDomainOwnerBatchRequest;
+const SendPhoneEmailCodeRequest = models.SendPhoneEmailCodeRequest;
 const DomainBatchLogSet = models.DomainBatchLogSet;
 
 
@@ -80,15 +92,36 @@ class DomainClient extends AbstractClient {
     }
     
     /**
-     * 本接口 (  DescribeDomainNameList ) 我的域名列表。
-
-     * @param {DescribeDomainNameListRequest} req
-     * @param {function(string, DescribeDomainNameListResponse):void} cb
+     * 本接口 ( SetDomainAutoRenew ) 用于设置域名自动续费。
+     * @param {SetDomainAutoRenewRequest} req
+     * @param {function(string, SetDomainAutoRenewResponse):void} cb
      * @public
      */
-    DescribeDomainNameList(req, cb) {
-        let resp = new DescribeDomainNameListResponse();
-        this.request("DescribeDomainNameList", req, resp, cb);
+    SetDomainAutoRenew(req, cb) {
+        let resp = new SetDomainAutoRenewResponse();
+        this.request("SetDomainAutoRenew", req, resp, cb);
+    }
+
+    /**
+     * 本接口 ( ModifyDomainDNSBatch) 用于批量域名 DNS 修改 。
+     * @param {ModifyDomainDNSBatchRequest} req
+     * @param {function(string, ModifyDomainDNSBatchResponse):void} cb
+     * @public
+     */
+    ModifyDomainDNSBatch(req, cb) {
+        let resp = new ModifyDomainDNSBatchResponse();
+        this.request("ModifyDomainDNSBatch", req, resp, cb);
+    }
+
+    /**
+     * 本接口 ( CheckBatchStatus ) 用于查询批量操作日志状态 。
+     * @param {CheckBatchStatusRequest} req
+     * @param {function(string, CheckBatchStatusResponse):void} cb
+     * @public
+     */
+    CheckBatchStatus(req, cb) {
+        let resp = new CheckBatchStatusResponse();
+        this.request("CheckBatchStatus", req, resp, cb);
     }
 
     /**
@@ -103,36 +136,26 @@ class DomainClient extends AbstractClient {
     }
 
     /**
-     * 本接口 ( CreateTemplate ) 用于添加域名信息模板 。
-     * @param {CreateTemplateRequest} req
-     * @param {function(string, CreateTemplateResponse):void} cb
+     * 此接口用于删除已验证的手机邮箱
+     * @param {DeletePhoneEmailRequest} req
+     * @param {function(string, DeletePhoneEmailResponse):void} cb
      * @public
      */
-    CreateTemplate(req, cb) {
-        let resp = new CreateTemplateResponse();
-        this.request("CreateTemplate", req, resp, cb);
+    DeletePhoneEmail(req, cb) {
+        let resp = new DeletePhoneEmailResponse();
+        this.request("DeletePhoneEmail", req, resp, cb);
     }
 
     /**
-     * 本接口 (DescribeTemplate) 用于获取模板信息。
-     * @param {DescribeTemplateRequest} req
-     * @param {function(string, DescribeTemplateResponse):void} cb
-     * @public
-     */
-    DescribeTemplate(req, cb) {
-        let resp = new DescribeTemplateResponse();
-        this.request("DescribeTemplate", req, resp, cb);
-    }
+     * 本接口 (  DescribeDomainNameList ) 我的域名列表。
 
-    /**
-     * 本接口 ( ModifyDomainOwnerBatch) 用于域名批量账号间转移 。
-     * @param {ModifyDomainOwnerBatchRequest} req
-     * @param {function(string, ModifyDomainOwnerBatchResponse):void} cb
+     * @param {DescribeDomainNameListRequest} req
+     * @param {function(string, DescribeDomainNameListResponse):void} cb
      * @public
      */
-    ModifyDomainOwnerBatch(req, cb) {
-        let resp = new ModifyDomainOwnerBatchResponse();
-        this.request("ModifyDomainOwnerBatch", req, resp, cb);
+    DescribeDomainNameList(req, cb) {
+        let resp = new DescribeDomainNameListResponse();
+        this.request("DescribeDomainNameList", req, resp, cb);
     }
 
     /**
@@ -159,17 +182,6 @@ class DomainClient extends AbstractClient {
     }
 
     /**
-     * 本接口 ( DescribeBatchOperationLogs ) 用于获取批量操作日志 。
-     * @param {DescribeBatchOperationLogsRequest} req
-     * @param {function(string, DescribeBatchOperationLogsResponse):void} cb
-     * @public
-     */
-    DescribeBatchOperationLogs(req, cb) {
-        let resp = new DescribeBatchOperationLogsResponse();
-        this.request("DescribeBatchOperationLogs", req, resp, cb);
-    }
-
-    /**
      * 本接口 ( DescribeBatchOperationLogDetails ) 用于获取批量操作日志详情。
      * @param {DescribeBatchOperationLogDetailsRequest} req
      * @param {function(string, DescribeBatchOperationLogDetailsResponse):void} cb
@@ -192,15 +204,14 @@ class DomainClient extends AbstractClient {
     }
 
     /**
-     * 本接口 (DescribeTemplateList) 用于获取信息模板列表。
-
-     * @param {DescribeTemplateListRequest} req
-     * @param {function(string, DescribeTemplateListResponse):void} cb
+     * 检查域名是否可以注册。
+     * @param {CheckDomainRequest} req
+     * @param {function(string, CheckDomainResponse):void} cb
      * @public
      */
-    DescribeTemplateList(req, cb) {
-        let resp = new DescribeTemplateListResponse();
-        this.request("DescribeTemplateList", req, resp, cb);
+    CheckDomain(req, cb) {
+        let resp = new CheckDomainResponse();
+        this.request("CheckDomain", req, resp, cb);
     }
 
     /**
@@ -216,14 +227,37 @@ class DomainClient extends AbstractClient {
     }
 
     /**
-     * 本接口 ( TransferProhibitionBatch ) 用于批量禁止域名转移 。
-     * @param {TransferProhibitionBatchRequest} req
-     * @param {function(string, TransferProhibitionBatchResponse):void} cb
+     * 本接口 (DescribeTemplate) 用于获取模板信息。
+     * @param {DescribeTemplateRequest} req
+     * @param {function(string, DescribeTemplateResponse):void} cb
      * @public
      */
-    TransferProhibitionBatch(req, cb) {
-        let resp = new TransferProhibitionBatchResponse();
-        this.request("TransferProhibitionBatch", req, resp, cb);
+    DescribeTemplate(req, cb) {
+        let resp = new DescribeTemplateResponse();
+        this.request("DescribeTemplate", req, resp, cb);
+    }
+
+    /**
+     * 此接口用于创建有效的手机、邮箱
+     * @param {CreatePhoneEmailRequest} req
+     * @param {function(string, CreatePhoneEmailResponse):void} cb
+     * @public
+     */
+    CreatePhoneEmail(req, cb) {
+        let resp = new CreatePhoneEmailResponse();
+        this.request("CreatePhoneEmail", req, resp, cb);
+    }
+
+    /**
+     * 本接口 (DescribeTemplateList) 用于获取信息模板列表。
+
+     * @param {DescribeTemplateListRequest} req
+     * @param {function(string, DescribeTemplateListResponse):void} cb
+     * @public
+     */
+    DescribeTemplateList(req, cb) {
+        let resp = new DescribeTemplateListResponse();
+        this.request("DescribeTemplateList", req, resp, cb);
     }
 
     /**
@@ -238,36 +272,14 @@ class DomainClient extends AbstractClient {
     }
 
     /**
-     * 按照域名后缀获取对应的价格列表
-     * @param {DescribeDomainPriceListRequest} req
-     * @param {function(string, DescribeDomainPriceListResponse):void} cb
+     * 本接口 ( TransferProhibitionBatch ) 用于批量禁止域名转移 。
+     * @param {TransferProhibitionBatchRequest} req
+     * @param {function(string, TransferProhibitionBatchResponse):void} cb
      * @public
      */
-    DescribeDomainPriceList(req, cb) {
-        let resp = new DescribeDomainPriceListResponse();
-        this.request("DescribeDomainPriceList", req, resp, cb);
-    }
-
-    /**
-     * 本接口 ( CheckBatchStatus ) 用于查询批量操作日志状态 。
-     * @param {CheckBatchStatusRequest} req
-     * @param {function(string, CheckBatchStatusResponse):void} cb
-     * @public
-     */
-    CheckBatchStatus(req, cb) {
-        let resp = new CheckBatchStatusResponse();
-        this.request("CheckBatchStatus", req, resp, cb);
-    }
-
-    /**
-     * 检查域名是否可以注册。
-     * @param {CheckDomainRequest} req
-     * @param {function(string, CheckDomainResponse):void} cb
-     * @public
-     */
-    CheckDomain(req, cb) {
-        let resp = new CheckDomainResponse();
-        this.request("CheckDomain", req, resp, cb);
+    TransferProhibitionBatch(req, cb) {
+        let resp = new TransferProhibitionBatchResponse();
+        this.request("TransferProhibitionBatch", req, resp, cb);
     }
 
     /**
@@ -293,25 +305,80 @@ class DomainClient extends AbstractClient {
     }
 
     /**
-     * 本接口 ( ModifyDomainDNSBatch) 用于批量域名 DNS 修改 。
-     * @param {ModifyDomainDNSBatchRequest} req
-     * @param {function(string, ModifyDomainDNSBatchResponse):void} cb
+     * 本接口 ( CreateTemplate ) 用于添加域名信息模板 。
+     * @param {CreateTemplateRequest} req
+     * @param {function(string, CreateTemplateResponse):void} cb
      * @public
      */
-    ModifyDomainDNSBatch(req, cb) {
-        let resp = new ModifyDomainDNSBatchResponse();
-        this.request("ModifyDomainDNSBatch", req, resp, cb);
+    CreateTemplate(req, cb) {
+        let resp = new CreateTemplateResponse();
+        this.request("CreateTemplate", req, resp, cb);
     }
 
     /**
-     * 本接口 ( SetDomainAutoRenew ) 用于设置域名自动续费。
-     * @param {SetDomainAutoRenewRequest} req
-     * @param {function(string, SetDomainAutoRenewResponse):void} cb
+     * 本接口 ( ModifyDomainOwnerBatch) 用于域名批量账号间转移 。
+     * @param {ModifyDomainOwnerBatchRequest} req
+     * @param {function(string, ModifyDomainOwnerBatchResponse):void} cb
      * @public
      */
-    SetDomainAutoRenew(req, cb) {
-        let resp = new SetDomainAutoRenewResponse();
-        this.request("SetDomainAutoRenew", req, resp, cb);
+    ModifyDomainOwnerBatch(req, cb) {
+        let resp = new ModifyDomainOwnerBatchResponse();
+        this.request("ModifyDomainOwnerBatch", req, resp, cb);
+    }
+
+    /**
+     * 本接口用于获取已验证的手机邮箱列表
+     * @param {DescribePhoneEmailListRequest} req
+     * @param {function(string, DescribePhoneEmailListResponse):void} cb
+     * @public
+     */
+    DescribePhoneEmailList(req, cb) {
+        let resp = new DescribePhoneEmailListResponse();
+        this.request("DescribePhoneEmailList", req, resp, cb);
+    }
+
+    /**
+     * 此接口用于发送手机邮箱验证码。
+     * @param {SendPhoneEmailCodeRequest} req
+     * @param {function(string, SendPhoneEmailCodeResponse):void} cb
+     * @public
+     */
+    SendPhoneEmailCode(req, cb) {
+        let resp = new SendPhoneEmailCodeResponse();
+        this.request("SendPhoneEmailCode", req, resp, cb);
+    }
+
+    /**
+     * 获取域名实名信息详情
+     * @param {DescribeDomainSimpleInfoRequest} req
+     * @param {function(string, DescribeDomainSimpleInfoResponse):void} cb
+     * @public
+     */
+    DescribeDomainSimpleInfo(req, cb) {
+        let resp = new DescribeDomainSimpleInfoResponse();
+        this.request("DescribeDomainSimpleInfo", req, resp, cb);
+    }
+
+    /**
+     * 按照域名后缀获取对应的价格列表
+     * @param {DescribeDomainPriceListRequest} req
+     * @param {function(string, DescribeDomainPriceListResponse):void} cb
+     * @public
+     */
+    DescribeDomainPriceList(req, cb) {
+        let resp = new DescribeDomainPriceListResponse();
+        this.request("DescribeDomainPriceList", req, resp, cb);
+    }
+
+    /**
+     * 本接口 ( DescribeBatchOperationLogs ) 用于获取批量操作日志 。
+     * @param {DescribeBatchOperationLogsRequest} req
+     * @param {function(string, DescribeBatchOperationLogsResponse):void} cb
+     * @public
+     */
+    DescribeBatchOperationLogs(req, cb) {
+        let resp = new DescribeBatchOperationLogsResponse();
+        this.request("DescribeBatchOperationLogs", req, resp, cb);
     }
 
 

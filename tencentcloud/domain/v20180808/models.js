@@ -52,6 +52,41 @@ class UploadImageResponse extends  AbstractModel {
 }
 
 /**
+ * RenewDomainBatch返回参数结构体
+ * @class
+ */
+class RenewDomainBatchResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 操作日志ID。
+         * @type {number || null}
+         */
+        this.LogId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LogId = 'LogId' in params ? params.LogId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * BatchModifyDomainInfo请求参数结构体
  * @class
  */
@@ -96,78 +131,168 @@ false：关闭60天内禁止转移注册商锁定
 }
 
 /**
- * Template数据
+ * 获取域名基础模板信息
  * @class
  */
-class TemplateInfo extends  AbstractModel {
+class DomainSimpleInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 模板ID
+         * 域名资源ID。
          * @type {string || null}
          */
-        this.TemplateId = null;
+        this.DomainId = null;
 
         /**
-         * 认证状态：未实名认证:NotUpload, 实名审核中:InAudit，已实名认证:Approved，实名审核失败:Reject
+         * 域名名称。
          * @type {string || null}
          */
-        this.AuditStatus = null;
+        this.DomainName = null;
 
         /**
-         * 创建时间
+         * 域名实名认证状态。
+NotUpload：未实名认证
+InAudit：实名审核中
+Approved：实名审核通过
+Reject：实名审核失败
+NoAudit: 无需实名认证
          * @type {string || null}
          */
-        this.CreatedOn = null;
+        this.RealNameAuditStatus = null;
 
         /**
-         * 更新时间
+         * 域名实名认证不通过原因。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.UpdatedOn = null;
+        this.RealNameAuditUnpassReason = null;
 
         /**
-         * 用户UIN
+         * 域名命名审核状态。
+NotAudit：命名审核未上传
+Pending：命名审核待上传
+Auditing：域名命名审核中
+Approved：域名命名审核通过
+Rejected：域名命名审核拒绝
          * @type {string || null}
          */
-        this.UserUin = null;
+        this.DomainNameAuditStatus = null;
 
         /**
-         * 是否是默认模板: 是:yes，否:no
+         * 域名命名审核不通过原因。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.IsDefault = null;
+        this.DomainNameAuditUnpassReason = null;
 
         /**
-         * 认证失败原因
+         * 注册时间。
          * @type {string || null}
          */
-        this.AuditReason = null;
+        this.CreationDate = null;
 
         /**
-         * 认证信息
-         * @type {CertificateInfo || null}
-         */
-        this.CertificateInfo = null;
-
-        /**
-         * 联系人信息
-         * @type {ContactInfo || null}
-         */
-        this.ContactInfo = null;
-
-        /**
-         * 模板是否符合规范， 1是 0 否
-         * @type {number || null}
-         */
-        this.IsValidTemplate = null;
-
-        /**
-         * 不符合规范原因
+         * 到期时间
          * @type {string || null}
          */
-        this.InvalidReason = null;
+        this.ExpirationDate = null;
+
+        /**
+         * 域名状态。
+ok：正常
+serverHold：注册局暂停解析 
+clientHold：注册商暂停解析
+pendingTransfer：转移中
+renewingPeriod：续费期
+redemptionPeriod：偿还期
+pendingDelete：删除期
+serverTransferProhibited：注册局禁止转移
+serverUpdateProhibited：注册局禁止更新
+serverDeleteProhibited：注册局禁止删除
+clientTransferProhibited：注册商禁止转移
+clientUpdateProhibited：注册商禁止更新
+clientDeleteProhibited：注册商禁止删除
+         * @type {Array.<string> || null}
+         */
+        this.DomainStatus = null;
+
+        /**
+         * 域名购买状态。
+ok：正常
+RegisterPending：待注册
+RegisterDoing：注册中
+RegisterFailed：注册失败
+AboutToExpire: 即将过期
+RenewPending：已进入续费期，需要进行续费
+RenewDoing：续费中
+RedemptionPending：已进入赎回期，需要进行续费
+RedemptionDoing：赎回中
+TransferPending：待转入中
+TransferTransing：转入中
+TransferFailed：转入失败
+         * @type {string || null}
+         */
+        this.BuyStatus = null;
+
+        /**
+         * 注册商类型
+epp: DNSPod, Inc.（烟台帝思普网络科技有限公司）
+qcloud: Tencent Cloud Computing (Beijing) Limited Liability Company（腾讯云计算（北京）有限责任公司）
+yunxun: Guangzhou Yunxun Information Technology Co., Ltd.（广州云讯信息科技有限公司）
+xinnet: Xin Net Technology Corporation（北京新网数码信息技术有限公司）
+         * @type {string || null}
+         */
+        this.RegistrarType = null;
+
+        /**
+         * 域名绑定的ns
+         * @type {Array.<string> || null}
+         */
+        this.NameServer = null;
+
+        /**
+         * true：开启锁定
+false：关闭锁定
+         * @type {boolean || null}
+         */
+        this.LockTransfer = null;
+
+        /**
+         * 锁定结束时间
+         * @type {string || null}
+         */
+        this.LockEndTime = null;
+
+        /**
+         * 认证类型：I=个人，E=企业
+         * @type {string || null}
+         */
+        this.RegistrantType = null;
+
+        /**
+         * 域名所有者，中文
+         * @type {string || null}
+         */
+        this.OrganizationNameCN = null;
+
+        /**
+         * 域名所有者，英文
+         * @type {string || null}
+         */
+        this.OrganizationName = null;
+
+        /**
+         * 域名联系人，中文
+         * @type {string || null}
+         */
+        this.RegistrantNameCN = null;
+
+        /**
+         * 域名联系人，英文
+         * @type {string || null}
+         */
+        this.RegistrantName = null;
 
     }
 
@@ -178,27 +303,25 @@ class TemplateInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
-        this.AuditStatus = 'AuditStatus' in params ? params.AuditStatus : null;
-        this.CreatedOn = 'CreatedOn' in params ? params.CreatedOn : null;
-        this.UpdatedOn = 'UpdatedOn' in params ? params.UpdatedOn : null;
-        this.UserUin = 'UserUin' in params ? params.UserUin : null;
-        this.IsDefault = 'IsDefault' in params ? params.IsDefault : null;
-        this.AuditReason = 'AuditReason' in params ? params.AuditReason : null;
-
-        if (params.CertificateInfo) {
-            let obj = new CertificateInfo();
-            obj.deserialize(params.CertificateInfo)
-            this.CertificateInfo = obj;
-        }
-
-        if (params.ContactInfo) {
-            let obj = new ContactInfo();
-            obj.deserialize(params.ContactInfo)
-            this.ContactInfo = obj;
-        }
-        this.IsValidTemplate = 'IsValidTemplate' in params ? params.IsValidTemplate : null;
-        this.InvalidReason = 'InvalidReason' in params ? params.InvalidReason : null;
+        this.DomainId = 'DomainId' in params ? params.DomainId : null;
+        this.DomainName = 'DomainName' in params ? params.DomainName : null;
+        this.RealNameAuditStatus = 'RealNameAuditStatus' in params ? params.RealNameAuditStatus : null;
+        this.RealNameAuditUnpassReason = 'RealNameAuditUnpassReason' in params ? params.RealNameAuditUnpassReason : null;
+        this.DomainNameAuditStatus = 'DomainNameAuditStatus' in params ? params.DomainNameAuditStatus : null;
+        this.DomainNameAuditUnpassReason = 'DomainNameAuditUnpassReason' in params ? params.DomainNameAuditUnpassReason : null;
+        this.CreationDate = 'CreationDate' in params ? params.CreationDate : null;
+        this.ExpirationDate = 'ExpirationDate' in params ? params.ExpirationDate : null;
+        this.DomainStatus = 'DomainStatus' in params ? params.DomainStatus : null;
+        this.BuyStatus = 'BuyStatus' in params ? params.BuyStatus : null;
+        this.RegistrarType = 'RegistrarType' in params ? params.RegistrarType : null;
+        this.NameServer = 'NameServer' in params ? params.NameServer : null;
+        this.LockTransfer = 'LockTransfer' in params ? params.LockTransfer : null;
+        this.LockEndTime = 'LockEndTime' in params ? params.LockEndTime : null;
+        this.RegistrantType = 'RegistrantType' in params ? params.RegistrantType : null;
+        this.OrganizationNameCN = 'OrganizationNameCN' in params ? params.OrganizationNameCN : null;
+        this.OrganizationName = 'OrganizationName' in params ? params.OrganizationName : null;
+        this.RegistrantNameCN = 'RegistrantNameCN' in params ? params.RegistrantNameCN : null;
+        this.RegistrantName = 'RegistrantName' in params ? params.RegistrantName : null;
 
     }
 }
@@ -236,6 +359,41 @@ False：关闭禁止域名更新状态。
         }
         this.Domains = 'Domains' in params ? params.Domains : null;
         this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
+ * TransferInDomainBatch返回参数结构体
+ * @class
+ */
+class TransferInDomainBatchResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 日志ID
+         * @type {number || null}
+         */
+        this.LogId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LogId = 'LogId' in params ? params.LogId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -316,6 +474,18 @@ false：关闭60天内禁止转移注册商锁定
          */
         this.LockTransfer = null;
 
+        /**
+         * 是否开启更新锁：0=默认不开启，1=开启
+         * @type {number || null}
+         */
+        this.UpdateProhibition = null;
+
+        /**
+         * 是否开启转移锁：0=默认不开启，1=开启
+         * @type {number || null}
+         */
+        this.TransferProhibition = null;
+
     }
 
     /**
@@ -331,6 +501,8 @@ false：关闭60天内禁止转移注册商锁定
         this.PayMode = 'PayMode' in params ? params.PayMode : null;
         this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
         this.LockTransfer = 'LockTransfer' in params ? params.LockTransfer : null;
+        this.UpdateProhibition = 'UpdateProhibition' in params ? params.UpdateProhibition : null;
+        this.TransferProhibition = 'TransferProhibition' in params ? params.TransferProhibition : null;
 
     }
 }
@@ -439,6 +611,34 @@ success  操作成功。
 }
 
 /**
+ * SendPhoneEmailCode返回参数结构体
+ * @class
+ */
+class SendPhoneEmailCodeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyDomainDNSBatch返回参数结构体
  * @class
  */
@@ -474,39 +674,24 @@ class ModifyDomainDNSBatchResponse extends  AbstractModel {
 }
 
 /**
- * RenewDomainBatch请求参数结构体
+ * DeletePhoneEmail请求参数结构体
  * @class
  */
-class RenewDomainBatchRequest extends  AbstractModel {
+class DeletePhoneEmailRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 域名续费的年限。
-         * @type {number || null}
+         * 手机或者邮箱
+         * @type {string || null}
          */
-        this.Period = null;
+        this.Code = null;
 
         /**
-         * 批量续费的域名。
-         * @type {Array.<string> || null}
-         */
-        this.Domains = null;
-
-        /**
-         * 付费模式 0手动在线付费，1使用余额付费。
+         * 1：手机  2：邮箱
          * @type {number || null}
          */
-        this.PayMode = null;
-
-        /**
-         * 自动续费开关。有三个可选值：
-0 表示关闭，不自动续费
-1 表示开启，将自动续费
-2 表示不处理，保留域名原有状态（默认值）
-         * @type {number || null}
-         */
-        this.AutoRenewFlag = null;
+        this.Type = null;
 
     }
 
@@ -517,10 +702,8 @@ class RenewDomainBatchRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Period = 'Period' in params ? params.Period : null;
-        this.Domains = 'Domains' in params ? params.Domains : null;
-        this.PayMode = 'PayMode' in params ? params.PayMode : null;
-        this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
+        this.Code = 'Code' in params ? params.Code : null;
+        this.Type = 'Type' in params ? params.Type : null;
 
     }
 }
@@ -724,24 +907,18 @@ class CheckDomainResponse extends  AbstractModel {
 }
 
 /**
- * RenewDomainBatch返回参数结构体
+ * DescribeDomainSimpleInfo请求参数结构体
  * @class
  */
-class RenewDomainBatchResponse extends  AbstractModel {
+class DescribeDomainSimpleInfoRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 操作日志ID。
-         * @type {number || null}
-         */
-        this.LogId = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 域名
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.DomainName = null;
 
     }
 
@@ -752,8 +929,49 @@ class RenewDomainBatchResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.LogId = 'LogId' in params ? params.LogId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.DomainName = 'DomainName' in params ? params.DomainName : null;
+
+    }
+}
+
+/**
+ * CreatePhoneEmail请求参数结构体
+ * @class
+ */
+class CreatePhoneEmailRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 手机号或者邮箱
+         * @type {string || null}
+         */
+        this.Code = null;
+
+        /**
+         * 1：手机   2：邮箱
+         * @type {number || null}
+         */
+        this.Type = null;
+
+        /**
+         * 验证码
+         * @type {string || null}
+         */
+        this.VerifyCode = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Code = 'Code' in params ? params.Code : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.VerifyCode = 'VerifyCode' in params ? params.VerifyCode : null;
 
     }
 }
@@ -843,24 +1061,39 @@ class DescribeTemplateRequest extends  AbstractModel {
 }
 
 /**
- * TransferInDomainBatch返回参数结构体
+ * RenewDomainBatch请求参数结构体
  * @class
  */
-class TransferInDomainBatchResponse extends  AbstractModel {
+class RenewDomainBatchRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 日志ID
+         * 域名续费的年限。
          * @type {number || null}
          */
-        this.LogId = null;
+        this.Period = null;
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
+         * 批量续费的域名。
+         * @type {Array.<string> || null}
          */
-        this.RequestId = null;
+        this.Domains = null;
+
+        /**
+         * 付费模式 0手动在线付费，1使用余额付费。
+         * @type {number || null}
+         */
+        this.PayMode = null;
+
+        /**
+         * 自动续费开关。有三个可选值：
+0 表示关闭，不自动续费
+1 表示开启，将自动续费
+2 表示不处理，保留域名原有状态（默认值）
+         * @type {number || null}
+         */
+        this.AutoRenewFlag = null;
 
     }
 
@@ -871,8 +1104,10 @@ class TransferInDomainBatchResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.LogId = 'LogId' in params ? params.LogId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Period = 'Period' in params ? params.Period : null;
+        this.Domains = 'Domains' in params ? params.Domains : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+        this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
 
     }
 }
@@ -908,6 +1143,149 @@ class BatchModifyDomainInfoResponse extends  AbstractModel {
         }
         this.LogId = 'LogId' in params ? params.LogId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyDomainOwnerBatch返回参数结构体
+ * @class
+ */
+class ModifyDomainOwnerBatchResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 日志id
+         * @type {number || null}
+         */
+        this.LogId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LogId = 'LogId' in params ? params.LogId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Template数据
+ * @class
+ */
+class TemplateInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 模板ID
+         * @type {string || null}
+         */
+        this.TemplateId = null;
+
+        /**
+         * 认证状态：未实名认证:NotUpload, 实名审核中:InAudit，已实名认证:Approved，实名审核失败:Reject
+         * @type {string || null}
+         */
+        this.AuditStatus = null;
+
+        /**
+         * 创建时间
+         * @type {string || null}
+         */
+        this.CreatedOn = null;
+
+        /**
+         * 更新时间
+         * @type {string || null}
+         */
+        this.UpdatedOn = null;
+
+        /**
+         * 用户UIN
+         * @type {string || null}
+         */
+        this.UserUin = null;
+
+        /**
+         * 是否是默认模板: 是:yes，否:no
+         * @type {string || null}
+         */
+        this.IsDefault = null;
+
+        /**
+         * 认证失败原因
+         * @type {string || null}
+         */
+        this.AuditReason = null;
+
+        /**
+         * 认证信息
+         * @type {CertificateInfo || null}
+         */
+        this.CertificateInfo = null;
+
+        /**
+         * 联系人信息
+         * @type {ContactInfo || null}
+         */
+        this.ContactInfo = null;
+
+        /**
+         * 模板是否符合规范， 1是 0 否
+         * @type {number || null}
+         */
+        this.IsValidTemplate = null;
+
+        /**
+         * 不符合规范原因
+         * @type {string || null}
+         */
+        this.InvalidReason = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+        this.AuditStatus = 'AuditStatus' in params ? params.AuditStatus : null;
+        this.CreatedOn = 'CreatedOn' in params ? params.CreatedOn : null;
+        this.UpdatedOn = 'UpdatedOn' in params ? params.UpdatedOn : null;
+        this.UserUin = 'UserUin' in params ? params.UserUin : null;
+        this.IsDefault = 'IsDefault' in params ? params.IsDefault : null;
+        this.AuditReason = 'AuditReason' in params ? params.AuditReason : null;
+
+        if (params.CertificateInfo) {
+            let obj = new CertificateInfo();
+            obj.deserialize(params.CertificateInfo)
+            this.CertificateInfo = obj;
+        }
+
+        if (params.ContactInfo) {
+            let obj = new ContactInfo();
+            obj.deserialize(params.ContactInfo)
+            this.ContactInfo = obj;
+        }
+        this.IsValidTemplate = 'IsValidTemplate' in params ? params.IsValidTemplate : null;
+        this.InvalidReason = 'InvalidReason' in params ? params.InvalidReason : null;
 
     }
 }
@@ -1136,6 +1514,55 @@ class DescribeDomainNameListResponse extends  AbstractModel {
         }
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 手机号邮箱列表
+ * @class
+ */
+class PhoneEmailData extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 手机号或者邮箱
+         * @type {string || null}
+         */
+        this.Code = null;
+
+        /**
+         * 1：手机  2：邮箱
+         * @type {number || null}
+         */
+        this.Type = null;
+
+        /**
+         * 创建时间
+         * @type {string || null}
+         */
+        this.CreatedOn = null;
+
+        /**
+         * 1=控制台校验，2=第三方校验
+         * @type {number || null}
+         */
+        this.CheckStatus = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Code = 'Code' in params ? params.Code : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.CreatedOn = 'CreatedOn' in params ? params.CreatedOn : null;
+        this.CheckStatus = 'CheckStatus' in params ? params.CheckStatus : null;
 
     }
 }
@@ -1785,6 +2212,18 @@ class CreateDomainBatchRequest extends  AbstractModel {
          */
         this.PackageResourceId = null;
 
+        /**
+         * 是否开启更新锁：0=默认不开启，1=开启
+         * @type {number || null}
+         */
+        this.UpdateProhibition = null;
+
+        /**
+         * 是否开启转移锁：0=默认不开启，1=开启
+         * @type {number || null}
+         */
+        this.TransferProhibition = null;
+
     }
 
     /**
@@ -1800,6 +2239,55 @@ class CreateDomainBatchRequest extends  AbstractModel {
         this.PayMode = 'PayMode' in params ? params.PayMode : null;
         this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
         this.PackageResourceId = 'PackageResourceId' in params ? params.PackageResourceId : null;
+        this.UpdateProhibition = 'UpdateProhibition' in params ? params.UpdateProhibition : null;
+        this.TransferProhibition = 'TransferProhibition' in params ? params.TransferProhibition : null;
+
+    }
+}
+
+/**
+ * DescribeDomainSimpleInfo返回参数结构体
+ * @class
+ */
+class DescribeDomainSimpleInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 域名信息
+         * @type {DomainSimpleInfo || null}
+         */
+        this.DomainInfo = null;
+
+        /**
+         * 账号ID
+         * @type {string || null}
+         */
+        this.Uin = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.DomainInfo) {
+            let obj = new DomainSimpleInfo();
+            obj.deserialize(params.DomainInfo)
+            this.DomainInfo = obj;
+        }
+        this.Uin = 'Uin' in params ? params.Uin : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1833,6 +2321,55 @@ class DescribeDomainBaseInfoRequest extends  AbstractModel {
 }
 
 /**
+ * DescribePhoneEmailList请求参数结构体
+ * @class
+ */
+class DescribePhoneEmailListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 0：所有类型  1：手机  2：邮箱，默认0
+         * @type {number || null}
+         */
+        this.Type = null;
+
+        /**
+         * 偏移量，默认为0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 返回数量，默认为20，取值范围[1,200]
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 手机或者邮箱精确搜索
+         * @type {string || null}
+         */
+        this.Code = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Code = 'Code' in params ? params.Code : null;
+
+    }
+}
+
+/**
  * 获取域名基础信息
  * @class
  */
@@ -1858,6 +2395,7 @@ NotUpload：未实名认证
 InAudit：实名审核中
 Approved：实名审核通过
 Reject：实名审核失败
+NoAudit: 无需实名认证
          * @type {string || null}
          */
         this.RealNameAuditStatus = null;
@@ -2105,7 +2643,7 @@ class CheckDomainRequest extends  AbstractModel {
         this.DomainName = null;
 
         /**
-         * 年限
+         * 年限。该参数为空时无法查询溢价词域名
          * @type {string || null}
          */
         this.Period = null;
@@ -2298,6 +2836,56 @@ class DescribeBatchOperationLogDetailsResponse extends  AbstractModel {
 }
 
 /**
+ * DescribePhoneEmailList返回参数结构体
+ * @class
+ */
+class DescribePhoneEmailListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 手机或者邮箱列表
+         * @type {Array.<PhoneEmailData> || null}
+         */
+        this.PhoneEmailList = null;
+
+        /**
+         * 总数量。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.PhoneEmailList) {
+            this.PhoneEmailList = new Array();
+            for (let z in params.PhoneEmailList) {
+                let obj = new PhoneEmailData();
+                obj.deserialize(params.PhoneEmailList[z]);
+                this.PhoneEmailList.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CheckBatchStatus返回参数结构体
  * @class
  */
@@ -2341,6 +2929,34 @@ class CheckBatchStatusResponse extends  AbstractModel {
 }
 
 /**
+ * DeletePhoneEmail返回参数结构体
+ * @class
+ */
+class DeletePhoneEmailResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeTemplateList请求参数结构体
  * @class
  */
@@ -2367,7 +2983,7 @@ class DescribeTemplateListRequest extends  AbstractModel {
         this.Type = null;
 
         /**
-         * 认证状态：未实名认证:NotUpload, 实名审核中:InAudit，已实名认证:Approved，实名审核失败:Reject
+         * 认证状态：未实名审核:NotUpload, 实名审核中:InAudit，已实名审核:Approved，实名审核失败:Reject，更新手机邮箱:NotVerified。
          * @type {string || null}
          */
         this.Status = null;
@@ -2397,18 +3013,12 @@ class DescribeTemplateListRequest extends  AbstractModel {
 }
 
 /**
- * ModifyDomainOwnerBatch返回参数结构体
+ * CreatePhoneEmail返回参数结构体
  * @class
  */
-class ModifyDomainOwnerBatchResponse extends  AbstractModel {
+class CreatePhoneEmailResponse extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * 日志id
-         * @type {number || null}
-         */
-        this.LogId = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2425,7 +3035,6 @@ class ModifyDomainOwnerBatchResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.LogId = 'LogId' in params ? params.LogId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2489,6 +3098,18 @@ class ModifyDomainOwnerBatchRequest extends  AbstractModel {
          */
         this.NewOwnerUin = null;
 
+        /**
+         * 是否同时转移对应的 DNS 解析域名，默认false
+         * @type {boolean || null}
+         */
+        this.TransferDns = null;
+
+        /**
+         * 转入账户的appid。
+         * @type {string || null}
+         */
+        this.NewOwnerAppId = null;
+
     }
 
     /**
@@ -2500,6 +3121,43 @@ class ModifyDomainOwnerBatchRequest extends  AbstractModel {
         }
         this.Domains = 'Domains' in params ? params.Domains : null;
         this.NewOwnerUin = 'NewOwnerUin' in params ? params.NewOwnerUin : null;
+        this.TransferDns = 'TransferDns' in params ? params.TransferDns : null;
+        this.NewOwnerAppId = 'NewOwnerAppId' in params ? params.NewOwnerAppId : null;
+
+    }
+}
+
+/**
+ * SendPhoneEmailCode请求参数结构体
+ * @class
+ */
+class SendPhoneEmailCodeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 手机或者邮箱号。
+         * @type {string || null}
+         */
+        this.Code = null;
+
+        /**
+         * 1：手机  2：邮箱。
+         * @type {number || null}
+         */
+        this.Type = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Code = 'Code' in params ? params.Code : null;
+        this.Type = 'Type' in params ? params.Type : null;
 
     }
 }
@@ -2557,28 +3215,35 @@ done 执行完成。
 
 module.exports = {
     UploadImageResponse: UploadImageResponse,
+    RenewDomainBatchResponse: RenewDomainBatchResponse,
     BatchModifyDomainInfoRequest: BatchModifyDomainInfoRequest,
-    TemplateInfo: TemplateInfo,
+    DomainSimpleInfo: DomainSimpleInfo,
     UpdateProhibitionBatchRequest: UpdateProhibitionBatchRequest,
+    TransferInDomainBatchResponse: TransferInDomainBatchResponse,
     DeleteTemplateResponse: DeleteTemplateResponse,
     TransferInDomainBatchRequest: TransferInDomainBatchRequest,
     CreateDomainBatchResponse: CreateDomainBatchResponse,
     DomainBatchDetailSet: DomainBatchDetailSet,
+    SendPhoneEmailCodeResponse: SendPhoneEmailCodeResponse,
     ModifyDomainDNSBatchResponse: ModifyDomainDNSBatchResponse,
-    RenewDomainBatchRequest: RenewDomainBatchRequest,
+    DeletePhoneEmailRequest: DeletePhoneEmailRequest,
     DescribeTemplateResponse: DescribeTemplateResponse,
     UpdateProhibitionBatchResponse: UpdateProhibitionBatchResponse,
     CheckDomainResponse: CheckDomainResponse,
-    RenewDomainBatchResponse: RenewDomainBatchResponse,
+    DescribeDomainSimpleInfoRequest: DescribeDomainSimpleInfoRequest,
+    CreatePhoneEmailRequest: CreatePhoneEmailRequest,
     PriceInfo: PriceInfo,
     DescribeTemplateRequest: DescribeTemplateRequest,
-    TransferInDomainBatchResponse: TransferInDomainBatchResponse,
+    RenewDomainBatchRequest: RenewDomainBatchRequest,
     BatchModifyDomainInfoResponse: BatchModifyDomainInfoResponse,
+    ModifyDomainOwnerBatchResponse: ModifyDomainOwnerBatchResponse,
+    TemplateInfo: TemplateInfo,
     DescribeDomainBaseInfoResponse: DescribeDomainBaseInfoResponse,
     DescribeTemplateListResponse: DescribeTemplateListResponse,
     TransferProhibitionBatchRequest: TransferProhibitionBatchRequest,
     DescribeBatchOperationLogDetailsRequest: DescribeBatchOperationLogDetailsRequest,
     DescribeDomainNameListResponse: DescribeDomainNameListResponse,
+    PhoneEmailData: PhoneEmailData,
     ContactInfo: ContactInfo,
     DescribeDomainPriceListResponse: DescribeDomainPriceListResponse,
     CreateTemplateResponse: CreateTemplateResponse,
@@ -2591,7 +3256,9 @@ module.exports = {
     DomainList: DomainList,
     DescribeDomainPriceListRequest: DescribeDomainPriceListRequest,
     CreateDomainBatchRequest: CreateDomainBatchRequest,
+    DescribeDomainSimpleInfoResponse: DescribeDomainSimpleInfoResponse,
     DescribeDomainBaseInfoRequest: DescribeDomainBaseInfoRequest,
+    DescribePhoneEmailListRequest: DescribePhoneEmailListRequest,
     DomainBaseInfo: DomainBaseInfo,
     DescribeDomainNameListRequest: DescribeDomainNameListRequest,
     DescribeBatchOperationLogsRequest: DescribeBatchOperationLogsRequest,
@@ -2601,11 +3268,14 @@ module.exports = {
     TransferProhibitionBatchResponse: TransferProhibitionBatchResponse,
     ModifyDomainDNSBatchRequest: ModifyDomainDNSBatchRequest,
     DescribeBatchOperationLogDetailsResponse: DescribeBatchOperationLogDetailsResponse,
+    DescribePhoneEmailListResponse: DescribePhoneEmailListResponse,
     CheckBatchStatusResponse: CheckBatchStatusResponse,
+    DeletePhoneEmailResponse: DeletePhoneEmailResponse,
     DescribeTemplateListRequest: DescribeTemplateListRequest,
-    ModifyDomainOwnerBatchResponse: ModifyDomainOwnerBatchResponse,
+    CreatePhoneEmailResponse: CreatePhoneEmailResponse,
     SetDomainAutoRenewRequest: SetDomainAutoRenewRequest,
     ModifyDomainOwnerBatchRequest: ModifyDomainOwnerBatchRequest,
+    SendPhoneEmailCodeRequest: SendPhoneEmailCodeRequest,
     DomainBatchLogSet: DomainBatchLogSet,
 
 }

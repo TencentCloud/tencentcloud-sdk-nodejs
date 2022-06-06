@@ -17,24 +17,86 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
- * 邮件发送的内容，可以是纯文本(TEXT)，也可以是纯代码(HTML)，或者纯文本+HTML的组合(建议方式)
+ * BatchSendEmail请求参数结构体
  * @class
  */
-class Simple extends  AbstractModel {
+class BatchSendEmailRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * base64之后的Html代码。需要包含所有的代码信息，不要包含外部css，否则会导致显示格式错乱
+         * 发信邮件地址。请填写发件人邮箱地址，例如：noreply@mail.qcloud.com。如需填写发件人说明，请按照
+发信人 <邮件地址> 的方式填写，例如：
+腾讯云团队 <noreply@mail.qcloud.com>
          * @type {string || null}
          */
-        this.Html = null;
+        this.FromEmailAddress = null;
 
         /**
-         * base64之后的纯文本信息，如果没有Html，邮件中会直接显示纯文本；如果有Html，它代表邮件的纯文本样式
+         * 收件人列表ID
+         * @type {number || null}
+         */
+        this.ReceiverId = null;
+
+        /**
+         * 邮件主题
          * @type {string || null}
          */
-        this.Text = null;
+        this.Subject = null;
+
+        /**
+         * 任务类型 1: 立即发送 2: 定时发送 3: 周期（频率）发送
+         * @type {number || null}
+         */
+        this.TaskType = null;
+
+        /**
+         * 邮件的“回复”电子邮件地址。可以填写您能收到邮件的邮箱地址，可以是个人邮箱。如果不填，收件人将会回复到腾讯云
+         * @type {string || null}
+         */
+        this.ReplyToAddresses = null;
+
+        /**
+         * 使用模板发送时，填写的模板相关参数
+         * @type {Template || null}
+         */
+        this.Template = null;
+
+        /**
+         * 已废弃
+         * @type {Simple || null}
+         */
+        this.Simple = null;
+
+        /**
+         * 需要发送附件时，填写附件相关参数（暂未支持）
+         * @type {Array.<Attachment> || null}
+         */
+        this.Attachments = null;
+
+        /**
+         * 周期发送任务的必要参数
+         * @type {CycleEmailParam || null}
+         */
+        this.CycleParam = null;
+
+        /**
+         * 定时发送任务的必要参数
+         * @type {TimedEmailParam || null}
+         */
+        this.TimedParam = null;
+
+        /**
+         * 退订选项 1: 加入退订链接 0: 不加入退订链接
+         * @type {string || null}
+         */
+        this.Unsubscribe = null;
+
+        /**
+         * 是否添加广告标识 0:不添加 1:添加到subject前面，2:添加到subject后面
+         * @type {number || null}
+         */
+        this.ADLocation = null;
 
     }
 
@@ -45,8 +107,243 @@ class Simple extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Html = 'Html' in params ? params.Html : null;
-        this.Text = 'Text' in params ? params.Text : null;
+        this.FromEmailAddress = 'FromEmailAddress' in params ? params.FromEmailAddress : null;
+        this.ReceiverId = 'ReceiverId' in params ? params.ReceiverId : null;
+        this.Subject = 'Subject' in params ? params.Subject : null;
+        this.TaskType = 'TaskType' in params ? params.TaskType : null;
+        this.ReplyToAddresses = 'ReplyToAddresses' in params ? params.ReplyToAddresses : null;
+
+        if (params.Template) {
+            let obj = new Template();
+            obj.deserialize(params.Template)
+            this.Template = obj;
+        }
+
+        if (params.Simple) {
+            let obj = new Simple();
+            obj.deserialize(params.Simple)
+            this.Simple = obj;
+        }
+
+        if (params.Attachments) {
+            this.Attachments = new Array();
+            for (let z in params.Attachments) {
+                let obj = new Attachment();
+                obj.deserialize(params.Attachments[z]);
+                this.Attachments.push(obj);
+            }
+        }
+
+        if (params.CycleParam) {
+            let obj = new CycleEmailParam();
+            obj.deserialize(params.CycleParam)
+            this.CycleParam = obj;
+        }
+
+        if (params.TimedParam) {
+            let obj = new TimedEmailParam();
+            obj.deserialize(params.TimedParam)
+            this.TimedParam = obj;
+        }
+        this.Unsubscribe = 'Unsubscribe' in params ? params.Unsubscribe : null;
+        this.ADLocation = 'ADLocation' in params ? params.ADLocation : null;
+
+    }
+}
+
+/**
+ * GetEmailTemplate请求参数结构体
+ * @class
+ */
+class GetEmailTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 模板ID
+         * @type {number || null}
+         */
+        this.TemplateID = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TemplateID = 'TemplateID' in params ? params.TemplateID : null;
+
+    }
+}
+
+/**
+ * ListSendTasks返回参数结构体
+ * @class
+ */
+class ListSendTasksResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 数据记录
+         * @type {Array.<SendTaskData> || null}
+         */
+        this.Data = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new SendTaskData();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateReceiver返回参数结构体
+ * @class
+ */
+class CreateReceiverResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 收件人列表id，后续根据收件人列表id上传收件人地址
+         * @type {number || null}
+         */
+        this.ReceiverId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ReceiverId = 'ReceiverId' in params ? params.ReceiverId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateEmailTemplate请求参数结构体
+ * @class
+ */
+class CreateEmailTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 模板名称
+         * @type {string || null}
+         */
+        this.TemplateName = null;
+
+        /**
+         * 模板内容
+         * @type {TemplateContent || null}
+         */
+        this.TemplateContent = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TemplateName = 'TemplateName' in params ? params.TemplateName : null;
+
+        if (params.TemplateContent) {
+            let obj = new TemplateContent();
+            obj.deserialize(params.TemplateContent)
+            this.TemplateContent = obj;
+        }
+
+    }
+}
+
+/**
+ * ListEmailAddress返回参数结构体
+ * @class
+ */
+class ListEmailAddressResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 发信地址列表详情
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<EmailSender> || null}
+         */
+        this.EmailSenders = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.EmailSenders) {
+            this.EmailSenders = new Array();
+            for (let z in params.EmailSenders) {
+                let obj = new EmailSender();
+                obj.deserialize(params.EmailSenders[z]);
+                this.EmailSenders.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -68,6 +365,55 @@ class ListEmailAddressRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+
+    }
+}
+
+/**
+ * ListReceivers请求参数结构体
+ * @class
+ */
+class ListReceiversRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 偏移量，整型，从0开始
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 限制数目，整型，不超过100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 列表状态(1 待上传 2 上传中  3传完成)，若查询所有就不传这个字段
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 列表名称的关键字，模糊查询
+         * @type {string || null}
+         */
+        this.KeyWord = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.KeyWord = 'KeyWord' in params ? params.KeyWord : null;
 
     }
 }
@@ -207,7 +553,7 @@ class Attachment extends  AbstractModel {
         this.FileName = null;
 
         /**
-         * base64之后的附件内容，您可以发送的附件大小上限为5 MB。 注意：腾讯云api目前要求请求包大小不得超过10 MB。如果您要发送多个附件，那么这些附件的总大小不能超过10 MB。
+         * base64之后的附件内容，您可以发送的附件大小上限为4 MB。 注意：腾讯云api目前要求请求包大小不得超过8 MB。如果您要发送多个附件，那么这些附件的总大小不能超过8 MB。
          * @type {string || null}
          */
         this.Content = null;
@@ -243,6 +589,8 @@ class Template extends  AbstractModel {
 
         /**
          * 模板中的变量参数，请使用json.dump将json对象格式化为string类型。该对象是一组键值对，每个Key代表模板中的一个变量，模板中的变量使用{{键}}表示，相应的值在发送时会被替换为{{值}}。
+注意：参数值不能是html等复杂类型的数据。
+示例：{"name":"xxx","age":"xx"}
          * @type {string || null}
          */
         this.TemplateData = null;
@@ -258,6 +606,62 @@ class Template extends  AbstractModel {
         }
         this.TemplateID = 'TemplateID' in params ? params.TemplateID : null;
         this.TemplateData = 'TemplateData' in params ? params.TemplateData : null;
+
+    }
+}
+
+/**
+ * ListSendTasks请求参数结构体
+ * @class
+ */
+class ListSendTasksRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 偏移量，整型，从0开始，0代表跳过0行
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 限制数目，整型,不超过100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 任务状态 1 待开始 5 发送中 6 今日暂停发送  7 发信异常 10 发送完成。查询所有状态，则不传这个字段
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 收件人列表ID
+         * @type {number || null}
+         */
+        this.ReceiverId = null;
+
+        /**
+         * 任务类型 1即时 2定时 3周期，查询所有类型则不传这个字段
+         * @type {number || null}
+         */
+        this.TaskType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ReceiverId = 'ReceiverId' in params ? params.ReceiverId : null;
+        this.TaskType = 'TaskType' in params ? params.TaskType : null;
 
     }
 }
@@ -314,9 +718,9 @@ class SendEmailRequest extends  AbstractModel {
         super();
 
         /**
-         * 发信邮件地址。请填写发件人邮箱地址，例如：noreply@mail.qcloud.com。如需填写发件人说明，请按照 
-发信人 &lt;邮件地址&gt; 的方式填写，例如：
-腾讯云团队 &lt;noreply@mail.qcloud.com&gt;
+         * 发信邮件地址。请填写发件人邮箱地址，例如：noreply@mail.qcloud.com
+如需填写发件人说明，请按照如下方式： 
+别名 <邮箱地址>
          * @type {string || null}
          */
         this.FromEmailAddress = null;
@@ -346,7 +750,7 @@ class SendEmailRequest extends  AbstractModel {
         this.Template = null;
 
         /**
-         * 使用API直接发送内容时，填写的邮件内容
+         * 已废弃
          * @type {Simple || null}
          */
         this.Simple = null;
@@ -356,6 +760,18 @@ class SendEmailRequest extends  AbstractModel {
          * @type {Array.<Attachment> || null}
          */
         this.Attachments = null;
+
+        /**
+         * 退订选项 1: 加入退订链接 0: 不加入退订链接
+         * @type {string || null}
+         */
+        this.Unsubscribe = null;
+
+        /**
+         * 邮件触发类型 0:非触发类，默认类型，营销类邮件、非即时类邮件等选择此类型  1:触发类，验证码等即时发送类邮件，若邮件超过一定大小，系统会自动选择非触发类型通道
+         * @type {number || null}
+         */
+        this.TriggerType = null;
 
     }
 
@@ -391,6 +807,36 @@ class SendEmailRequest extends  AbstractModel {
                 this.Attachments.push(obj);
             }
         }
+        this.Unsubscribe = 'Unsubscribe' in params ? params.Unsubscribe : null;
+        this.TriggerType = 'TriggerType' in params ? params.TriggerType : null;
+
+    }
+}
+
+/**
+ * DeleteBlackList请求参数结构体
+ * @class
+ */
+class DeleteBlackListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 需要清除的黑名单邮箱列表，数组长度至少为1
+         * @type {Array.<string> || null}
+         */
+        this.EmailAddressList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EmailAddressList = 'EmailAddressList' in params ? params.EmailAddressList : null;
 
     }
 }
@@ -435,6 +881,41 @@ class EmailSender extends  AbstractModel {
         this.EmailAddress = 'EmailAddress' in params ? params.EmailAddress : null;
         this.EmailSenderName = 'EmailSenderName' in params ? params.EmailSenderName : null;
         this.CreatedTimestamp = 'CreatedTimestamp' in params ? params.CreatedTimestamp : null;
+
+    }
+}
+
+/**
+ * BatchSendEmail返回参数结构体
+ * @class
+ */
+class BatchSendEmailResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 发送任务ID
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -601,6 +1082,249 @@ class GetStatisticsReportRequest extends  AbstractModel {
 }
 
 /**
+ * CreateReceiver请求参数结构体
+ * @class
+ */
+class CreateReceiverRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 收件人列表名称
+         * @type {string || null}
+         */
+        this.ReceiversName = null;
+
+        /**
+         * 收件人列表描述
+         * @type {string || null}
+         */
+        this.Desc = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ReceiversName = 'ReceiversName' in params ? params.ReceiversName : null;
+        this.Desc = 'Desc' in params ? params.Desc : null;
+
+    }
+}
+
+/**
+ * 发送任务数据
+ * @class
+ */
+class SendTaskData extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务id
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 发信地址
+         * @type {string || null}
+         */
+        this.FromEmailAddress = null;
+
+        /**
+         * 收件人列表Id
+         * @type {number || null}
+         */
+        this.ReceiverId = null;
+
+        /**
+         * 任务状态 1 待开始 5 发送中 6 今日暂停发送  7 发信异常 10 发送完成
+         * @type {number || null}
+         */
+        this.TaskStatus = null;
+
+        /**
+         * 任务类型 1 即时 2 定时 3 周期
+         * @type {number || null}
+         */
+        this.TaskType = null;
+
+        /**
+         * 任务请求发信数量
+         * @type {number || null}
+         */
+        this.RequestCount = null;
+
+        /**
+         * 已经发送数量
+         * @type {number || null}
+         */
+        this.SendCount = null;
+
+        /**
+         * 缓存数量
+         * @type {number || null}
+         */
+        this.CacheCount = null;
+
+        /**
+         * 任务创建时间
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 任务更新时间
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * 邮件主题
+         * @type {string || null}
+         */
+        this.Subject = null;
+
+        /**
+         * 模板和模板数据
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Template || null}
+         */
+        this.Template = null;
+
+        /**
+         * 周期任务参数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {CycleEmailParam || null}
+         */
+        this.CycleParam = null;
+
+        /**
+         * 定时任务参数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {TimedEmailParam || null}
+         */
+        this.TimedParam = null;
+
+        /**
+         * 任务异常信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ErrMsg = null;
+
+        /**
+         * 收件人列表名称
+         * @type {string || null}
+         */
+        this.ReceiversName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.FromEmailAddress = 'FromEmailAddress' in params ? params.FromEmailAddress : null;
+        this.ReceiverId = 'ReceiverId' in params ? params.ReceiverId : null;
+        this.TaskStatus = 'TaskStatus' in params ? params.TaskStatus : null;
+        this.TaskType = 'TaskType' in params ? params.TaskType : null;
+        this.RequestCount = 'RequestCount' in params ? params.RequestCount : null;
+        this.SendCount = 'SendCount' in params ? params.SendCount : null;
+        this.CacheCount = 'CacheCount' in params ? params.CacheCount : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.Subject = 'Subject' in params ? params.Subject : null;
+
+        if (params.Template) {
+            let obj = new Template();
+            obj.deserialize(params.Template)
+            this.Template = obj;
+        }
+
+        if (params.CycleParam) {
+            let obj = new CycleEmailParam();
+            obj.deserialize(params.CycleParam)
+            this.CycleParam = obj;
+        }
+
+        if (params.TimedParam) {
+            let obj = new TimedEmailParam();
+            obj.deserialize(params.TimedParam)
+            this.TimedParam = obj;
+        }
+        this.ErrMsg = 'ErrMsg' in params ? params.ErrMsg : null;
+        this.ReceiversName = 'ReceiversName' in params ? params.ReceiversName : null;
+
+    }
+}
+
+/**
+ * 模板列表结构
+ * @class
+ */
+class TemplatesMetadata extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 创建时间
+         * @type {number || null}
+         */
+        this.CreatedTimestamp = null;
+
+        /**
+         * 模板名称
+         * @type {string || null}
+         */
+        this.TemplateName = null;
+
+        /**
+         * 模板状态。1-审核中|0-已通过|2-拒绝|其它-不可用
+         * @type {number || null}
+         */
+        this.TemplateStatus = null;
+
+        /**
+         * 模板ID
+         * @type {number || null}
+         */
+        this.TemplateID = null;
+
+        /**
+         * 审核原因
+         * @type {string || null}
+         */
+        this.ReviewReason = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CreatedTimestamp = 'CreatedTimestamp' in params ? params.CreatedTimestamp : null;
+        this.TemplateName = 'TemplateName' in params ? params.TemplateName : null;
+        this.TemplateStatus = 'TemplateStatus' in params ? params.TemplateStatus : null;
+        this.TemplateID = 'TemplateID' in params ? params.TemplateID : null;
+        this.ReviewReason = 'ReviewReason' in params ? params.ReviewReason : null;
+
+    }
+}
+
+/**
  * DeleteEmailTemplate返回参数结构体
  * @class
  */
@@ -708,24 +1432,18 @@ class Volume extends  AbstractModel {
 }
 
 /**
- * CreateEmailTemplate请求参数结构体
+ * CreateEmailIdentity请求参数结构体
  * @class
  */
-class CreateEmailTemplateRequest extends  AbstractModel {
+class CreateEmailIdentityRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 模板名称
+         * 您的发信域名，建议使用三级以上域名。例如：mail.qcloud.com。
          * @type {string || null}
          */
-        this.TemplateName = null;
-
-        /**
-         * 模板内容
-         * @type {TemplateContent || null}
-         */
-        this.TemplateContent = null;
+        this.EmailIdentity = null;
 
     }
 
@@ -736,42 +1454,56 @@ class CreateEmailTemplateRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TemplateName = 'TemplateName' in params ? params.TemplateName : null;
-
-        if (params.TemplateContent) {
-            let obj = new TemplateContent();
-            obj.deserialize(params.TemplateContent)
-            this.TemplateContent = obj;
-        }
+        this.EmailIdentity = 'EmailIdentity' in params ? params.EmailIdentity : null;
 
     }
 }
 
 /**
- * UpdateEmailTemplate请求参数结构体
+ * 收件人列表数据类型
  * @class
  */
-class UpdateEmailTemplateRequest extends  AbstractModel {
+class ReceiverData extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 模板内容
-         * @type {TemplateContent || null}
-         */
-        this.TemplateContent = null;
-
-        /**
-         * 模板ID
+         * 收件人列表ID
          * @type {number || null}
          */
-        this.TemplateID = null;
+        this.ReceiverId = null;
 
         /**
-         * 模版名字
+         * 收件人列表名称
          * @type {string || null}
          */
-        this.TemplateName = null;
+        this.ReceiversName = null;
+
+        /**
+         * 收件人地址总数
+         * @type {number || null}
+         */
+        this.Count = null;
+
+        /**
+         * 收件人列表描述
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Desc = null;
+
+        /**
+         * 列表状态(1 待上传 2 上传中 3 上传完成)
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ReceiversStatus = null;
+
+        /**
+         * 创建时间,如:2021-09-28 16:40:35
+         * @type {string || null}
+         */
+        this.CreateTime = null;
 
     }
 
@@ -782,14 +1514,12 @@ class UpdateEmailTemplateRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.TemplateContent) {
-            let obj = new TemplateContent();
-            obj.deserialize(params.TemplateContent)
-            this.TemplateContent = obj;
-        }
-        this.TemplateID = 'TemplateID' in params ? params.TemplateID : null;
-        this.TemplateName = 'TemplateName' in params ? params.TemplateName : null;
+        this.ReceiverId = 'ReceiverId' in params ? params.ReceiverId : null;
+        this.ReceiversName = 'ReceiversName' in params ? params.ReceiversName : null;
+        this.Count = 'Count' in params ? params.Count : null;
+        this.Desc = 'Desc' in params ? params.Desc : null;
+        this.ReceiversStatus = 'ReceiversStatus' in params ? params.ReceiversStatus : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
 
     }
 }
@@ -860,7 +1590,7 @@ class DeleteEmailTemplateRequest extends  AbstractModel {
         super();
 
         /**
-         * 模版ID
+         * 模板ID
          * @type {number || null}
          */
         this.TemplateID = null;
@@ -903,6 +1633,53 @@ class DeleteBlackListResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * UpdateEmailTemplate请求参数结构体
+ * @class
+ */
+class UpdateEmailTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 模板内容
+         * @type {TemplateContent || null}
+         */
+        this.TemplateContent = null;
+
+        /**
+         * 模板ID
+         * @type {number || null}
+         */
+        this.TemplateID = null;
+
+        /**
+         * 模板名字
+         * @type {string || null}
+         */
+        this.TemplateName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.TemplateContent) {
+            let obj = new TemplateContent();
+            obj.deserialize(params.TemplateContent)
+            this.TemplateContent = obj;
+        }
+        this.TemplateID = 'TemplateID' in params ? params.TemplateID : null;
+        this.TemplateName = 'TemplateName' in params ? params.TemplateName : null;
 
     }
 }
@@ -1048,13 +1825,13 @@ class ListEmailTemplatesRequest extends  AbstractModel {
         super();
 
         /**
-         * 获取模版数据量，用于分页
+         * 获取模板数据量，用于分页
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * 获取模版偏移值，用于分页
+         * 获取模板偏移值，用于分页
          * @type {number || null}
          */
         this.Offset = null;
@@ -1075,18 +1852,18 @@ class ListEmailTemplatesRequest extends  AbstractModel {
 }
 
 /**
- * DeleteBlackList请求参数结构体
+ * CreateReceiverDetailWithData返回参数结构体
  * @class
  */
-class DeleteBlackListRequest extends  AbstractModel {
+class CreateReceiverDetailWithDataResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 需要清除的黑名单邮箱列表，数组长度至少为1
-         * @type {Array.<string> || null}
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
          */
-        this.EmailAddressList = null;
+        this.RequestId = null;
 
     }
 
@@ -1097,7 +1874,71 @@ class DeleteBlackListRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.EmailAddressList = 'EmailAddressList' in params ? params.EmailAddressList : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 收件人明细输入参数，包含收件人邮箱，以及模板参数
+ * @class
+ */
+class ReceiverInputData extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 收件人邮箱
+         * @type {string || null}
+         */
+        this.Email = null;
+
+        /**
+         * 模板中的变量参数，请使用json.dump将json对象格式化为string类型。该对象是一组键值对，每个Key代表模板中的一个变量，模板中的变量使用{{键}}表示，相应的值在发送时会被替换为{{值}}。
+注意：参数值不能是html等复杂类型的数据。
+         * @type {string || null}
+         */
+        this.TemplateData = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Email = 'Email' in params ? params.Email : null;
+        this.TemplateData = 'TemplateData' in params ? params.TemplateData : null;
+
+    }
+}
+
+/**
+ * CreateReceiverDetail返回参数结构体
+ * @class
+ */
+class CreateReceiverDetailResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1117,7 +1958,7 @@ class ListEmailTemplatesResponse extends  AbstractModel {
         this.TemplatesMetadata = null;
 
         /**
-         * 模版总数量
+         * 模板总数量
          * @type {number || null}
          */
         this.TotalCount = null;
@@ -1294,42 +2135,24 @@ class GetSendEmailStatusRequest extends  AbstractModel {
 }
 
 /**
- * 模板列表结构
+ * 邮件发送的内容，可以是纯文本(TEXT)，也可以是纯代码(HTML)，或者纯文本+HTML的组合(建议方式)
  * @class
  */
-class TemplatesMetadata extends  AbstractModel {
+class Simple extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 创建时间
-         * @type {number || null}
-         */
-        this.CreatedTimestamp = null;
-
-        /**
-         * 模板名称
+         * base64之后的Html代码。需要包含所有的代码信息，不要包含外部css，否则会导致显示格式错乱
          * @type {string || null}
          */
-        this.TemplateName = null;
+        this.Html = null;
 
         /**
-         * 模板状态。1-审核中|0-已通过|2-拒绝|其它-不可用
-         * @type {number || null}
-         */
-        this.TemplateStatus = null;
-
-        /**
-         * 模板ID
-         * @type {number || null}
-         */
-        this.TemplateID = null;
-
-        /**
-         * 审核原因
+         * base64之后的纯文本信息，如果没有Html，邮件中会直接显示纯文本；如果有Html，它代表邮件的纯文本样式
          * @type {string || null}
          */
-        this.ReviewReason = null;
+        this.Text = null;
 
     }
 
@@ -1340,11 +2163,36 @@ class TemplatesMetadata extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CreatedTimestamp = 'CreatedTimestamp' in params ? params.CreatedTimestamp : null;
-        this.TemplateName = 'TemplateName' in params ? params.TemplateName : null;
-        this.TemplateStatus = 'TemplateStatus' in params ? params.TemplateStatus : null;
-        this.TemplateID = 'TemplateID' in params ? params.TemplateID : null;
-        this.ReviewReason = 'ReviewReason' in params ? params.ReviewReason : null;
+        this.Html = 'Html' in params ? params.Html : null;
+        this.Text = 'Text' in params ? params.Text : null;
+
+    }
+}
+
+/**
+ * DeleteReceiver请求参数结构体
+ * @class
+ */
+class DeleteReceiverRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 收件人列表id，创建收件人列表时会返回
+         * @type {number || null}
+         */
+        this.ReceiverId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ReceiverId = 'ReceiverId' in params ? params.ReceiverId : null;
 
     }
 }
@@ -1393,19 +2241,12 @@ class ListEmailIdentitiesResponse extends  AbstractModel {
 }
 
 /**
- * ListEmailAddress返回参数结构体
+ * DeleteReceiver返回参数结构体
  * @class
  */
-class ListEmailAddressResponse extends  AbstractModel {
+class DeleteReceiverResponse extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * 发信地址列表详情
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<EmailSender> || null}
-         */
-        this.EmailSenders = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1421,15 +2262,6 @@ class ListEmailAddressResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
-        }
-
-        if (params.EmailSenders) {
-            this.EmailSenders = new Array();
-            for (let z in params.EmailSenders) {
-                let obj = new EmailSender();
-                obj.deserialize(params.EmailSenders[z]);
-                this.EmailSenders.push(obj);
-            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -1632,18 +2464,24 @@ class BlackEmailAddress extends  AbstractModel {
 }
 
 /**
- * GetEmailTemplate请求参数结构体
+ * 创建重复周期发送邮件任务的参数
  * @class
  */
-class GetEmailTemplateRequest extends  AbstractModel {
+class CycleEmailParam extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 模板ID
+         * 任务开始时间
+         * @type {string || null}
+         */
+        this.BeginTime = null;
+
+        /**
+         * 任务周期 小时维度
          * @type {number || null}
          */
-        this.TemplateID = null;
+        this.IntervalTime = null;
 
     }
 
@@ -1654,7 +2492,8 @@ class GetEmailTemplateRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TemplateID = 'TemplateID' in params ? params.TemplateID : null;
+        this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
+        this.IntervalTime = 'IntervalTime' in params ? params.IntervalTime : null;
 
     }
 }
@@ -1745,34 +2584,6 @@ class CreateEmailIdentityResponse extends  AbstractModel {
 }
 
 /**
- * CreateEmailIdentity请求参数结构体
- * @class
- */
-class CreateEmailIdentityRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 您的发信域名，建议使用三级以上域名。例如：mail.qcloud.com。
-         * @type {string || null}
-         */
-        this.EmailIdentity = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.EmailIdentity = 'EmailIdentity' in params ? params.EmailIdentity : null;
-
-    }
-}
-
-/**
  * CreateEmailAddress请求参数结构体
  * @class
  */
@@ -1808,12 +2619,53 @@ class CreateEmailAddressRequest extends  AbstractModel {
 }
 
 /**
+ * CreateReceiverDetail请求参数结构体
+ * @class
+ */
+class CreateReceiverDetailRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 收件人列表ID
+         * @type {number || null}
+         */
+        this.ReceiverId = null;
+
+        /**
+         * 邮箱
+         * @type {Array.<string> || null}
+         */
+        this.Emails = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ReceiverId = 'ReceiverId' in params ? params.ReceiverId : null;
+        this.Emails = 'Emails' in params ? params.Emails : null;
+
+    }
+}
+
+/**
  * CreateEmailTemplate返回参数结构体
  * @class
  */
 class CreateEmailTemplateResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * 模板id
+         * @type {number || null}
+         */
+        this.TemplateID = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1829,6 +2681,57 @@ class CreateEmailTemplateResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+        this.TemplateID = 'TemplateID' in params ? params.TemplateID : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ListReceivers返回参数结构体
+ * @class
+ */
+class ListReceiversResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 数据记录
+         * @type {Array.<ReceiverData> || null}
+         */
+        this.Data = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new ReceiverData();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -1887,6 +2790,77 @@ class UpdateEmailTemplateResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateReceiverDetailWithData请求参数结构体
+ * @class
+ */
+class CreateReceiverDetailWithDataRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 收件人列表ID
+         * @type {number || null}
+         */
+        this.ReceiverId = null;
+
+        /**
+         * 收信人邮箱以及模板参数，数组形式
+         * @type {Array.<ReceiverInputData> || null}
+         */
+        this.Datas = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ReceiverId = 'ReceiverId' in params ? params.ReceiverId : null;
+
+        if (params.Datas) {
+            this.Datas = new Array();
+            for (let z in params.Datas) {
+                let obj = new ReceiverInputData();
+                obj.deserialize(params.Datas[z]);
+                this.Datas.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * 创建定时发送邮件任务时，设置的定时参数，比如开始时间之类
+ * @class
+ */
+class TimedEmailParam extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 定时发送邮件的开始时间
+         * @type {string || null}
+         */
+        this.BeginTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
 
     }
 }
@@ -2009,50 +2983,69 @@ class ListEmailIdentitiesRequest extends  AbstractModel {
 }
 
 module.exports = {
-    Simple: Simple,
+    BatchSendEmailRequest: BatchSendEmailRequest,
+    GetEmailTemplateRequest: GetEmailTemplateRequest,
+    ListSendTasksResponse: ListSendTasksResponse,
+    CreateReceiverResponse: CreateReceiverResponse,
+    CreateEmailTemplateRequest: CreateEmailTemplateRequest,
+    ListEmailAddressResponse: ListEmailAddressResponse,
     ListEmailAddressRequest: ListEmailAddressRequest,
+    ListReceiversRequest: ListReceiversRequest,
     GetEmailIdentityResponse: GetEmailIdentityResponse,
     ListBlackEmailAddressRequest: ListBlackEmailAddressRequest,
     Attachment: Attachment,
     Template: Template,
+    ListSendTasksRequest: ListSendTasksRequest,
     GetSendEmailStatusResponse: GetSendEmailStatusResponse,
     SendEmailRequest: SendEmailRequest,
+    DeleteBlackListRequest: DeleteBlackListRequest,
     EmailSender: EmailSender,
+    BatchSendEmailResponse: BatchSendEmailResponse,
     DeleteEmailIdentityRequest: DeleteEmailIdentityRequest,
     UpdateEmailIdentityRequest: UpdateEmailIdentityRequest,
     GetEmailIdentityRequest: GetEmailIdentityRequest,
     DeleteEmailIdentityResponse: DeleteEmailIdentityResponse,
     GetStatisticsReportRequest: GetStatisticsReportRequest,
+    CreateReceiverRequest: CreateReceiverRequest,
+    SendTaskData: SendTaskData,
+    TemplatesMetadata: TemplatesMetadata,
     DeleteEmailTemplateResponse: DeleteEmailTemplateResponse,
     Volume: Volume,
-    CreateEmailTemplateRequest: CreateEmailTemplateRequest,
-    UpdateEmailTemplateRequest: UpdateEmailTemplateRequest,
+    CreateEmailIdentityRequest: CreateEmailIdentityRequest,
+    ReceiverData: ReceiverData,
     UpdateEmailIdentityResponse: UpdateEmailIdentityResponse,
     DeleteEmailTemplateRequest: DeleteEmailTemplateRequest,
     DeleteBlackListResponse: DeleteBlackListResponse,
+    UpdateEmailTemplateRequest: UpdateEmailTemplateRequest,
     SendEmailStatus: SendEmailStatus,
     ListEmailTemplatesRequest: ListEmailTemplatesRequest,
-    DeleteBlackListRequest: DeleteBlackListRequest,
+    CreateReceiverDetailWithDataResponse: CreateReceiverDetailWithDataResponse,
+    ReceiverInputData: ReceiverInputData,
+    CreateReceiverDetailResponse: CreateReceiverDetailResponse,
     ListEmailTemplatesResponse: ListEmailTemplatesResponse,
     SendEmailResponse: SendEmailResponse,
     ListBlackEmailAddressResponse: ListBlackEmailAddressResponse,
     GetSendEmailStatusRequest: GetSendEmailStatusRequest,
-    TemplatesMetadata: TemplatesMetadata,
+    Simple: Simple,
+    DeleteReceiverRequest: DeleteReceiverRequest,
     ListEmailIdentitiesResponse: ListEmailIdentitiesResponse,
-    ListEmailAddressResponse: ListEmailAddressResponse,
+    DeleteReceiverResponse: DeleteReceiverResponse,
     TemplateContent: TemplateContent,
     GetStatisticsReportResponse: GetStatisticsReportResponse,
     DeleteEmailAddressRequest: DeleteEmailAddressRequest,
     EmailIdentity: EmailIdentity,
     BlackEmailAddress: BlackEmailAddress,
-    GetEmailTemplateRequest: GetEmailTemplateRequest,
+    CycleEmailParam: CycleEmailParam,
     DeleteEmailAddressResponse: DeleteEmailAddressResponse,
     CreateEmailIdentityResponse: CreateEmailIdentityResponse,
-    CreateEmailIdentityRequest: CreateEmailIdentityRequest,
     CreateEmailAddressRequest: CreateEmailAddressRequest,
+    CreateReceiverDetailRequest: CreateReceiverDetailRequest,
     CreateEmailTemplateResponse: CreateEmailTemplateResponse,
+    ListReceiversResponse: ListReceiversResponse,
     CreateEmailAddressResponse: CreateEmailAddressResponse,
     UpdateEmailTemplateResponse: UpdateEmailTemplateResponse,
+    CreateReceiverDetailWithDataRequest: CreateReceiverDetailWithDataRequest,
+    TimedEmailParam: TimedEmailParam,
     DNSAttributes: DNSAttributes,
     GetEmailTemplateResponse: GetEmailTemplateResponse,
     ListEmailIdentitiesRequest: ListEmailIdentitiesRequest,

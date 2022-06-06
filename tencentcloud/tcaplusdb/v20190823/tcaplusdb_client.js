@@ -37,9 +37,11 @@ const ProxyMachineInfo = models.ProxyMachineInfo;
 const DescribeTasksResponse = models.DescribeTasksResponse;
 const DeleteTablesRequest = models.DeleteTablesRequest;
 const DescribeRegionsResponse = models.DescribeRegionsResponse;
+const SetTableDataFlowResponse = models.SetTableDataFlowResponse;
 const SelectedTableInfoNew = models.SelectedTableInfoNew;
 const ModifyClusterPasswordRequest = models.ModifyClusterPasswordRequest;
 const DescribeMachineResponse = models.DescribeMachineResponse;
+const DeleteTableDataFlowRequest = models.DeleteTableDataFlowRequest;
 const DeleteTableGroupRequest = models.DeleteTableGroupRequest;
 const DescribeSnapshotsRequest = models.DescribeSnapshotsRequest;
 const TagsInfoOfTableGroup = models.TagsInfoOfTableGroup;
@@ -114,9 +116,12 @@ const VerifyIdlFilesRequest = models.VerifyIdlFilesRequest;
 const EnableRestProxyResponse = models.EnableRestProxyResponse;
 const ModifyClusterNameResponse = models.ModifyClusterNameResponse;
 const ModifyTablesRequest = models.ModifyTablesRequest;
+const SetTableDataFlowRequest = models.SetTableDataFlowRequest;
 const DescribeTableGroupTagsRequest = models.DescribeTableGroupTagsRequest;
 const DescribeTablesInRecycleRequest = models.DescribeTablesInRecycleRequest;
 const DescribeTablesRequest = models.DescribeTablesRequest;
+const KafkaInfo = models.KafkaInfo;
+const DeleteTableDataFlowResponse = models.DeleteTableDataFlowResponse;
 const UpdateApplyRequest = models.UpdateApplyRequest;
 const ModifyTableMemosRequest = models.ModifyTableMemosRequest;
 const DescribeUinInWhitelistResponse = models.DescribeUinInWhitelistResponse;
@@ -289,6 +294,17 @@ class TcaplusdbClient extends AbstractClient {
     ModifyClusterName(req, cb) {
         let resp = new ModifyClusterNameResponse();
         this.request("ModifyClusterName", req, resp, cb);
+    }
+
+    /**
+     * 新增、修改表格数据订阅
+     * @param {SetTableDataFlowRequest} req
+     * @param {function(string, SetTableDataFlowResponse):void} cb
+     * @public
+     */
+    SetTableDataFlow(req, cb) {
+        let resp = new SetTableDataFlowResponse();
+        this.request("SetTableDataFlow", req, resp, cb);
     }
 
     /**
@@ -652,6 +668,17 @@ class TcaplusdbClient extends AbstractClient {
     ClearTables(req, cb) {
         let resp = new ClearTablesResponse();
         this.request("ClearTables", req, resp, cb);
+    }
+
+    /**
+     * 删除表格的数据订阅
+     * @param {DeleteTableDataFlowRequest} req
+     * @param {function(string, DeleteTableDataFlowResponse):void} cb
+     * @public
+     */
+    DeleteTableDataFlow(req, cb) {
+        let resp = new DeleteTableDataFlowResponse();
+        this.request("DeleteTableDataFlow", req, resp, cb);
     }
 
     /**

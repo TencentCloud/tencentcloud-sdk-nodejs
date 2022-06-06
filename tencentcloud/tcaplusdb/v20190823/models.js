@@ -619,13 +619,13 @@ class ModifySnapshotsResponse extends  AbstractModel {
         super();
 
         /**
-         * 批量创建的快照数量
+         * 批量修改的快照数量
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * 批量创建的快照结果列表
+         * 批量修改的快照结果列表
          * @type {Array.<SnapshotResult> || null}
          */
         this.TableResults = null;
@@ -778,7 +778,7 @@ class SelectedTableWithField extends  AbstractModel {
         this.TableType = null;
 
         /**
-         * 待创建索引的字段列表
+         * 待创建索引、缓写、数据订阅的字段列表
          * @type {Array.<FieldInfo> || null}
          */
         this.SelectedFields = null;
@@ -788,6 +788,12 @@ class SelectedTableWithField extends  AbstractModel {
          * @type {number || null}
          */
         this.ShardNum = null;
+
+        /**
+         * ckafka实例信息
+         * @type {KafkaInfo || null}
+         */
+        this.KafkaInfo = null;
 
     }
 
@@ -813,6 +819,12 @@ class SelectedTableWithField extends  AbstractModel {
             }
         }
         this.ShardNum = 'ShardNum' in params ? params.ShardNum : null;
+
+        if (params.KafkaInfo) {
+            let obj = new KafkaInfo();
+            obj.deserialize(params.KafkaInfo)
+            this.KafkaInfo = obj;
+        }
 
     }
 }
@@ -880,6 +892,12 @@ class ProxyMachineInfo extends  AbstractModel {
          */
         this.MachineType = null;
 
+        /**
+         * 可分配proxy资源数
+         * @type {number || null}
+         */
+        this.AvailableCount = null;
+
     }
 
     /**
@@ -891,6 +909,7 @@ class ProxyMachineInfo extends  AbstractModel {
         }
         this.ProxyUid = 'ProxyUid' in params ? params.ProxyUid : null;
         this.MachineType = 'MachineType' in params ? params.MachineType : null;
+        this.AvailableCount = 'AvailableCount' in params ? params.AvailableCount : null;
 
     }
 }
@@ -1031,6 +1050,56 @@ class DescribeRegionsResponse extends  AbstractModel {
                 let obj = new RegionInfo();
                 obj.deserialize(params.RegionInfos[z]);
                 this.RegionInfos.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * SetTableDataFlow返回参数结构体
+ * @class
+ */
+class SetTableDataFlowResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 表格数据订阅创建结果数量
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 表格数据订阅创建结果列表
+         * @type {Array.<TableResultNew> || null}
+         */
+        this.TableResults = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.TableResults) {
+            this.TableResults = new Array();
+            for (let z in params.TableResults) {
+                let obj = new TableResultNew();
+                obj.deserialize(params.TableResults[z]);
+                this.TableResults.push(obj);
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
@@ -1252,6 +1321,49 @@ class DescribeMachineResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteTableDataFlow请求参数结构体
+ * @class
+ */
+class DeleteTableDataFlowRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 表格所属集群实例ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 待删除分布式索引的表格列表
+         * @type {Array.<SelectedTableInfoNew> || null}
+         */
+        this.SelectedTables = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+        if (params.SelectedTables) {
+            this.SelectedTables = new Array();
+            for (let z in params.SelectedTables) {
+                let obj = new SelectedTableInfoNew();
+                obj.deserialize(params.SelectedTables[z]);
+                this.SelectedTables.push(obj);
+            }
+        }
 
     }
 }
@@ -2646,6 +2758,41 @@ class ClusterInfo extends  AbstractModel {
          */
         this.DbaUins = null;
 
+        /**
+         * 是否开启了数据订阅
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.DataFlowStatus = null;
+
+        /**
+         * 数据订阅的kafka信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {KafkaInfo || null}
+         */
+        this.KafkaInfo = null;
+
+        /**
+         * 集群Txh备份文件多少天后过期删除
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TxhBackupExpireDay = null;
+
+        /**
+         * 集群Ulog备份文件多少天后过期删除
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.UlogBackupExpireDay = null;
+
+        /**
+         * 集群Ulog备份文件过期策略是否为只读， 0： UlogBackupExpire是只读，不可修改， 1： UlogBackupExpire可以修改（当前业务存在Svrid第二段等于clusterid的机器）
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.IsReadOnlyUlogBackupExpireDay = null;
+
     }
 
     /**
@@ -2695,6 +2842,16 @@ class ClusterInfo extends  AbstractModel {
         }
         this.Censorship = 'Censorship' in params ? params.Censorship : null;
         this.DbaUins = 'DbaUins' in params ? params.DbaUins : null;
+        this.DataFlowStatus = 'DataFlowStatus' in params ? params.DataFlowStatus : null;
+
+        if (params.KafkaInfo) {
+            let obj = new KafkaInfo();
+            obj.deserialize(params.KafkaInfo)
+            this.KafkaInfo = obj;
+        }
+        this.TxhBackupExpireDay = 'TxhBackupExpireDay' in params ? params.TxhBackupExpireDay : null;
+        this.UlogBackupExpireDay = 'UlogBackupExpireDay' in params ? params.UlogBackupExpireDay : null;
+        this.IsReadOnlyUlogBackupExpireDay = 'IsReadOnlyUlogBackupExpireDay' in params ? params.IsReadOnlyUlogBackupExpireDay : null;
 
     }
 }
@@ -3533,6 +3690,12 @@ class CreateClusterRequest extends  AbstractModel {
          */
         this.ClusterType = null;
 
+        /**
+         * 密码认证类型，0 静态认证， 1 签名认证
+         * @type {number || null}
+         */
+        this.AuthType = null;
+
     }
 
     /**
@@ -3576,6 +3739,7 @@ class CreateClusterRequest extends  AbstractModel {
             }
         }
         this.ClusterType = 'ClusterType' in params ? params.ClusterType : null;
+        this.AuthType = 'AuthType' in params ? params.AuthType : null;
 
     }
 }
@@ -4812,11 +4976,18 @@ class TableInfoNew extends  AbstractModel {
         this.SortRule = null;
 
         /**
-         * 表格分布式索引信息
+         * 表格分布式索引/缓写、kafka数据订阅信息
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.DbClusterInfoStruct = null;
+
+        /**
+         * 表格Txh备份文件多少天后过期删除
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TxhBackupExpireDay = null;
 
     }
 
@@ -4867,6 +5038,7 @@ class TableInfoNew extends  AbstractModel {
         this.SortFieldNum = 'SortFieldNum' in params ? params.SortFieldNum : null;
         this.SortRule = 'SortRule' in params ? params.SortRule : null;
         this.DbClusterInfoStruct = 'DbClusterInfoStruct' in params ? params.DbClusterInfoStruct : null;
+        this.TxhBackupExpireDay = 'TxhBackupExpireDay' in params ? params.TxhBackupExpireDay : null;
 
     }
 }
@@ -5492,6 +5664,49 @@ class ModifyTablesRequest extends  AbstractModel {
 }
 
 /**
+ * SetTableDataFlow请求参数结构体
+ * @class
+ */
+class SetTableDataFlowRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 表所属集群实例ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 待创建分布式索引表格列表
+         * @type {Array.<SelectedTableWithField> || null}
+         */
+        this.SelectedTables = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+        if (params.SelectedTables) {
+            this.SelectedTables = new Array();
+            for (let z in params.SelectedTables) {
+                let obj = new SelectedTableWithField();
+                obj.deserialize(params.SelectedTables[z]);
+                this.SelectedTables.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DescribeTableGroupTags请求参数结构体
  * @class
  */
@@ -5665,6 +5880,119 @@ class DescribeTablesRequest extends  AbstractModel {
         }
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * ckafka地址信息
+ * @class
+ */
+class KafkaInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * kafaka address
+         * @type {string || null}
+         */
+        this.Address = null;
+
+        /**
+         * kafaka topic
+         * @type {string || null}
+         */
+        this.Topic = null;
+
+        /**
+         * kafka username
+         * @type {string || null}
+         */
+        this.User = null;
+
+        /**
+         * kafka password
+         * @type {string || null}
+         */
+        this.Password = null;
+
+        /**
+         * ckafka实例
+         * @type {string || null}
+         */
+        this.Instance = null;
+
+        /**
+         * 是否走VPC
+         * @type {number || null}
+         */
+        this.IsVpc = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Address = 'Address' in params ? params.Address : null;
+        this.Topic = 'Topic' in params ? params.Topic : null;
+        this.User = 'User' in params ? params.User : null;
+        this.Password = 'Password' in params ? params.Password : null;
+        this.Instance = 'Instance' in params ? params.Instance : null;
+        this.IsVpc = 'IsVpc' in params ? params.IsVpc : null;
+
+    }
+}
+
+/**
+ * DeleteTableDataFlow返回参数结构体
+ * @class
+ */
+class DeleteTableDataFlowResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 删除表格分布式索引结果数量
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 删除表格分布式索引结果列表
+         * @type {Array.<TableResultNew> || null}
+         */
+        this.TableResults = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.TableResults) {
+            this.TableResults = new Array();
+            for (let z in params.TableResults) {
+                let obj = new TableResultNew();
+                obj.deserialize(params.TableResults[z]);
+                this.TableResults.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6451,19 +6779,19 @@ class DescribeApplicationsRequest extends  AbstractModel {
         this.ClusterId = null;
 
         /**
-         * 分页
+         * 分页，限制当前返回多少条记录，大于等于10
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * 分页
+         * 分页，从多少条数据开始返回
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * 申请单状态，用于过滤
+         * 申请单状态，用于过滤，0-待审核 1-已经审核并提交任务 2-已驳回
          * @type {number || null}
          */
         this.CensorStatus = null;
@@ -6487,7 +6815,7 @@ class DescribeApplicationsRequest extends  AbstractModel {
         this.Applicant = null;
 
         /**
-         * 申请类型，用于过滤
+         * 申请类型，用于过滤，0加表 1删除表 2清理表 3修改表 4表重建 5存储层扩缩容 6接入层扩缩容 7复制表数据 8key回档
          * @type {number || null}
          */
         this.ApplyType = null;
@@ -7401,9 +7729,11 @@ module.exports = {
     DescribeTasksResponse: DescribeTasksResponse,
     DeleteTablesRequest: DeleteTablesRequest,
     DescribeRegionsResponse: DescribeRegionsResponse,
+    SetTableDataFlowResponse: SetTableDataFlowResponse,
     SelectedTableInfoNew: SelectedTableInfoNew,
     ModifyClusterPasswordRequest: ModifyClusterPasswordRequest,
     DescribeMachineResponse: DescribeMachineResponse,
+    DeleteTableDataFlowRequest: DeleteTableDataFlowRequest,
     DeleteTableGroupRequest: DeleteTableGroupRequest,
     DescribeSnapshotsRequest: DescribeSnapshotsRequest,
     TagsInfoOfTableGroup: TagsInfoOfTableGroup,
@@ -7478,9 +7808,12 @@ module.exports = {
     EnableRestProxyResponse: EnableRestProxyResponse,
     ModifyClusterNameResponse: ModifyClusterNameResponse,
     ModifyTablesRequest: ModifyTablesRequest,
+    SetTableDataFlowRequest: SetTableDataFlowRequest,
     DescribeTableGroupTagsRequest: DescribeTableGroupTagsRequest,
     DescribeTablesInRecycleRequest: DescribeTablesInRecycleRequest,
     DescribeTablesRequest: DescribeTablesRequest,
+    KafkaInfo: KafkaInfo,
+    DeleteTableDataFlowResponse: DeleteTableDataFlowResponse,
     UpdateApplyRequest: UpdateApplyRequest,
     ModifyTableMemosRequest: ModifyTableMemosRequest,
     DescribeUinInWhitelistResponse: DescribeUinInWhitelistResponse,

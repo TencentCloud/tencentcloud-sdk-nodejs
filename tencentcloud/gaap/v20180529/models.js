@@ -36,6 +36,41 @@ class RegionDetail extends  AbstractModel {
          */
         this.RegionName = null;
 
+        /**
+         * 机房所属大区
+         * @type {string || null}
+         */
+        this.RegionArea = null;
+
+        /**
+         * 机房所属大区名
+         * @type {string || null}
+         */
+        this.RegionAreaName = null;
+
+        /**
+         * 机房类型, dc表示DataCenter数据中心, ec表示EdgeComputing边缘节点
+         * @type {string || null}
+         */
+        this.IDCType = null;
+
+        /**
+         * 特性位图，每个bit位代表一种特性，其中：
+0，表示不支持该特性；
+1，表示支持该特性。
+特性位图含义如下（从右往左）：
+第1个bit，支持4层加速；
+第2个bit，支持7层加速；
+第3个bit，支持Http3接入；
+第4个bit，支持IPv6；
+第5个bit，支持精品BGP接入；
+第6个bit，支持三网接入；
+第7个bit，支持接入段Qos加速。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.FeatureBitmap = null;
+
     }
 
     /**
@@ -47,6 +82,38 @@ class RegionDetail extends  AbstractModel {
         }
         this.RegionId = 'RegionId' in params ? params.RegionId : null;
         this.RegionName = 'RegionName' in params ? params.RegionName : null;
+        this.RegionArea = 'RegionArea' in params ? params.RegionArea : null;
+        this.RegionAreaName = 'RegionAreaName' in params ? params.RegionAreaName : null;
+        this.IDCType = 'IDCType' in params ? params.IDCType : null;
+        this.FeatureBitmap = 'FeatureBitmap' in params ? params.FeatureBitmap : null;
+
+    }
+}
+
+/**
+ * 网络加速的目标地址信息
+ * @class
+ */
+class DestAddressInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 加速的目标IP，可多ip一起加速
+         * @type {Array.<string> || null}
+         */
+        this.DestIp = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DestIp = 'DestIp' in params ? params.DestIp : null;
 
     }
 }
@@ -634,6 +701,12 @@ class AccessConfiguration extends  AbstractModel {
          */
         this.Concurrent = null;
 
+        /**
+         * 网络类型，可取值：normal、cn2，默认值为normal
+         * @type {string || null}
+         */
+        this.NetworkType = null;
+
     }
 
     /**
@@ -646,6 +719,7 @@ class AccessConfiguration extends  AbstractModel {
         this.AccessRegion = 'AccessRegion' in params ? params.AccessRegion : null;
         this.Bandwidth = 'Bandwidth' in params ? params.Bandwidth : null;
         this.Concurrent = 'Concurrent' in params ? params.Concurrent : null;
+        this.NetworkType = 'NetworkType' in params ? params.NetworkType : null;
 
     }
 }
@@ -1007,6 +1081,86 @@ class DescribeHTTPListenersRequest extends  AbstractModel {
 }
 
 /**
+ * BindListenerRealServers返回参数结构体
+ * @class
+ */
+class BindListenerRealServersResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeCustomHeader返回参数结构体
+ * @class
+ */
+class DescribeCustomHeaderResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 规则id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RuleId = null;
+
+        /**
+         * 自定义header列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<HttpHeaderParam> || null}
+         */
+        this.Headers = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RuleId = 'RuleId' in params ? params.RuleId : null;
+
+        if (params.Headers) {
+            this.Headers = new Array();
+            for (let z in params.Headers) {
+                let obj = new HttpHeaderParam();
+                obj.deserialize(params.Headers[z]);
+                this.Headers.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyRealServerName返回参数结构体
  * @class
  */
@@ -1332,6 +1486,16 @@ class DescribeHTTPSListenersRequest extends  AbstractModel {
          */
         this.GroupId = null;
 
+        /**
+         * 支持Http3的开关，其中：
+0，表示不需要支持Http3接入；
+1，表示需要支持Http3接入。
+注意：如果支持了Http3的功能，那么该监听器会占用对应的UDP接入端口，不可再创建相同端口的UDP监听器。
+该功能的启停无法在监听器创建完毕后再修改。
+         * @type {number || null}
+         */
+        this.Http3Supported = null;
+
     }
 
     /**
@@ -1349,56 +1513,7 @@ class DescribeHTTPSListenersRequest extends  AbstractModel {
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.SearchValue = 'SearchValue' in params ? params.SearchValue : null;
         this.GroupId = 'GroupId' in params ? params.GroupId : null;
-
-    }
-}
-
-/**
- * DescribeAccessRegionsByDestRegion返回参数结构体
- * @class
- */
-class DescribeAccessRegionsByDestRegionResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 可用加速区域数量
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * 可用加速区域信息列表
-         * @type {Array.<AccessRegionDetial> || null}
-         */
-        this.AccessRegionSet = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.AccessRegionSet) {
-            this.AccessRegionSet = new Array();
-            for (let z in params.AccessRegionSet) {
-                let obj = new AccessRegionDetial();
-                obj.deserialize(params.AccessRegionSet[z]);
-                this.AccessRegionSet.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Http3Supported = 'Http3Supported' in params ? params.Http3Supported : null;
 
     }
 }
@@ -1758,6 +1873,34 @@ class ModifyRealServerNameRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyGroupDomainConfig返回参数结构体
+ * @class
+ */
+class ModifyGroupDomainConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DeleteProxyGroup返回参数结构体
  * @class
  */
@@ -1864,51 +2007,18 @@ class BindListenerRealServersRequest extends  AbstractModel {
 }
 
 /**
- * ModifyProxyConfiguration请求参数结构体
+ * DeleteDomainErrorPageInfo返回参数结构体
  * @class
  */
-class ModifyProxyConfigurationRequest extends  AbstractModel {
+class DeleteDomainErrorPageInfoResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * （旧参数，请切换到ProxyId）通道的实例ID。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.InstanceId = null;
-
-        /**
-         * 需要调整到的目标带宽，单位：Mbps。
-Bandwidth与Concurrent必须至少设置一个。取值范围根据DescribeAccessRegionsByDestRegion接口获取得到
-         * @type {number || null}
-         */
-        this.Bandwidth = null;
-
-        /**
-         * 需要调整到的目标并发值，单位：万。
-Bandwidth与Concurrent必须至少设置一个。取值范围根据DescribeAccessRegionsByDestRegion接口获取得到
-         * @type {number || null}
-         */
-        this.Concurrent = null;
-
-        /**
-         * 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。
-更多详细信息请参阅：如何保证幂等性。
-         * @type {string || null}
-         */
-        this.ClientToken = null;
-
-        /**
-         * （新参数）通道的实例ID。
-         * @type {string || null}
-         */
-        this.ProxyId = null;
-
-        /**
-         * 计费方式 (0:按带宽计费，1:按流量计费 默认按带宽计费）
-         * @type {number || null}
-         */
-        this.BillingType = null;
+        this.RequestId = null;
 
     }
 
@@ -1919,12 +2029,7 @@ Bandwidth与Concurrent必须至少设置一个。取值范围根据DescribeAcces
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.Bandwidth = 'Bandwidth' in params ? params.Bandwidth : null;
-        this.Concurrent = 'Concurrent' in params ? params.Concurrent : null;
-        this.ClientToken = 'ClientToken' in params ? params.ClientToken : null;
-        this.ProxyId = 'ProxyId' in params ? params.ProxyId : null;
-        this.BillingType = 'BillingType' in params ? params.BillingType : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2107,6 +2212,18 @@ class CreateTCPListenersRequest extends  AbstractModel {
          */
         this.FailoverSwitch = null;
 
+        /**
+         * 健康阈值，表示连续检查成功多少次后认定源站健康。范围为1到10
+         * @type {number || null}
+         */
+        this.HealthyThreshold = null;
+
+        /**
+         * 不健康阈值，表示连续检查失败多少次数后认为源站不健康。范围为1到10
+         * @type {number || null}
+         */
+        this.UnhealthyThreshold = null;
+
     }
 
     /**
@@ -2128,6 +2245,8 @@ class CreateTCPListenersRequest extends  AbstractModel {
         this.RealServerPorts = 'RealServerPorts' in params ? params.RealServerPorts : null;
         this.ClientIPMethod = 'ClientIPMethod' in params ? params.ClientIPMethod : null;
         this.FailoverSwitch = 'FailoverSwitch' in params ? params.FailoverSwitch : null;
+        this.HealthyThreshold = 'HealthyThreshold' in params ? params.HealthyThreshold : null;
+        this.UnhealthyThreshold = 'UnhealthyThreshold' in params ? params.UnhealthyThreshold : null;
 
     }
 }
@@ -2445,66 +2564,30 @@ class DescribeProxyDetailRequest extends  AbstractModel {
 }
 
 /**
- * ModifyTCPListenerAttribute请求参数结构体
+ * ip信息详情
  * @class
  */
-class ModifyTCPListenerAttributeRequest extends  AbstractModel {
+class IPDetail extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 监听器ID
+         * IP字符串
          * @type {string || null}
          */
-        this.ListenerId = null;
+        this.IP = null;
 
         /**
-         * 通道组ID，ProxyId和GroupId必须设置一个，但不能同时设置。
+         * 供应商，BGP表示默认，CMCC表示中国移动，CUCC表示中国联通，CTCC表示中国电信
          * @type {string || null}
          */
-        this.GroupId = null;
+        this.Provider = null;
 
         /**
-         * 通道ID，ProxyId和GroupId必须设置一个，但不能同时设置。
-         * @type {string || null}
-         */
-        this.ProxyId = null;
-
-        /**
-         * 监听器名称
-         * @type {string || null}
-         */
-        this.ListenerName = null;
-
-        /**
-         * 监听器源站调度策略，支持轮询（rr），加权轮询（wrr），最小连接数（lc）。
-         * @type {string || null}
-         */
-        this.Scheduler = null;
-
-        /**
-         * 源站健康检查时间间隔，单位：秒。时间间隔取值在[5，300]之间。
+         * 带宽
          * @type {number || null}
          */
-        this.DelayLoop = null;
-
-        /**
-         * 源站健康检查响应超时时间，单位：秒。超时时间取值在[2，60]之间。超时时间应小于健康检查时间间隔DelayLoop。
-         * @type {number || null}
-         */
-        this.ConnectTimeout = null;
-
-        /**
-         * 是否开启健康检查，1开启，0关闭。
-         * @type {number || null}
-         */
-        this.HealthCheck = null;
-
-        /**
-         * 源站是否开启主备模式：1开启，0关闭，DOMAIN类型源站不支持开启
-         * @type {number || null}
-         */
-        this.FailoverSwitch = null;
+        this.Bandwidth = null;
 
     }
 
@@ -2515,15 +2598,55 @@ class ModifyTCPListenerAttributeRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ListenerId = 'ListenerId' in params ? params.ListenerId : null;
-        this.GroupId = 'GroupId' in params ? params.GroupId : null;
-        this.ProxyId = 'ProxyId' in params ? params.ProxyId : null;
-        this.ListenerName = 'ListenerName' in params ? params.ListenerName : null;
-        this.Scheduler = 'Scheduler' in params ? params.Scheduler : null;
-        this.DelayLoop = 'DelayLoop' in params ? params.DelayLoop : null;
-        this.ConnectTimeout = 'ConnectTimeout' in params ? params.ConnectTimeout : null;
-        this.HealthCheck = 'HealthCheck' in params ? params.HealthCheck : null;
-        this.FailoverSwitch = 'FailoverSwitch' in params ? params.FailoverSwitch : null;
+        this.IP = 'IP' in params ? params.IP : null;
+        this.Provider = 'Provider' in params ? params.Provider : null;
+        this.Bandwidth = 'Bandwidth' in params ? params.Bandwidth : null;
+
+    }
+}
+
+/**
+ * 通道状态信息
+ * @class
+ */
+class ProxyStatus extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 通道实例ID。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 通道状态。
+其中：
+RUNNING表示运行中；
+CREATING表示创建中；
+DESTROYING表示销毁中；
+OPENING表示开启中；
+CLOSING表示关闭中；
+CLOSED表示已关闭；
+ADJUSTING表示配置变更中；
+ISOLATING表示隔离中；
+ISOLATED表示已隔离；
+MOVING表示迁移中。
+         * @type {string || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -2572,24 +2695,42 @@ class DeleteDomainRequest extends  AbstractModel {
 }
 
 /**
- * OpenSecurityPolicy返回参数结构体
+ * CreateFirstLinkSession请求参数结构体
  * @class
  */
-class OpenSecurityPolicyResponse extends  AbstractModel {
+class CreateFirstLinkSessionRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 异步流程ID，可以通过DescribeAsyncTaskStatus接口查询流程运行状态
+         * 模版ID
          * @type {string || null}
          */
-        this.TaskId = null;
+        this.TemplateId = null;
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
+         * 终端网络信息
+         * @type {SrcAddressInfo || null}
          */
-        this.RequestId = null;
+        this.SrcAddressInfo = null;
+
+        /**
+         * 加速目标网络信息
+         * @type {DestAddressInfo || null}
+         */
+        this.DestAddressInfo = null;
+
+        /**
+         * 终端设备信息
+         * @type {DeviceInfo || null}
+         */
+        this.DeviceInfo = null;
+
+        /**
+         * 接口扩展参数，如果是电信用户，需要填充CTCC Token字段
+         * @type {Capacity || null}
+         */
+        this.Capacity = null;
 
     }
 
@@ -2600,8 +2741,31 @@ class OpenSecurityPolicyResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+
+        if (params.SrcAddressInfo) {
+            let obj = new SrcAddressInfo();
+            obj.deserialize(params.SrcAddressInfo)
+            this.SrcAddressInfo = obj;
+        }
+
+        if (params.DestAddressInfo) {
+            let obj = new DestAddressInfo();
+            obj.deserialize(params.DestAddressInfo)
+            this.DestAddressInfo = obj;
+        }
+
+        if (params.DeviceInfo) {
+            let obj = new DeviceInfo();
+            obj.deserialize(params.DeviceInfo)
+            this.DeviceInfo = obj;
+        }
+
+        if (params.Capacity) {
+            let obj = new Capacity();
+            obj.deserialize(params.Capacity)
+            this.Capacity = obj;
+        }
 
     }
 }
@@ -2811,6 +2975,28 @@ class CreateProxyGroupRequest extends  AbstractModel {
          */
         this.AccessRegionSet = null;
 
+        /**
+         * IP版本，可取值：IPv4、IPv6，默认值IPv4
+         * @type {string || null}
+         */
+        this.IPAddressVersion = null;
+
+        /**
+         * 通道组套餐类型，可取值：Thunder、Accelerator，默认值Thunder
+         * @type {string || null}
+         */
+        this.PackageType = null;
+
+        /**
+         * 支持Http3的开关，其中：
+0，表示不需要支持Http3接入；
+1，表示需要支持Http3接入。
+注意：如果开启了Http3的功能，那么该通道组就不再支持TCP/UDP接入的功能。
+该功能的启停无法在通道组创建完毕后再修改。
+         * @type {number || null}
+         */
+        this.Http3Supported = null;
+
     }
 
     /**
@@ -2841,6 +3027,9 @@ class CreateProxyGroupRequest extends  AbstractModel {
                 this.AccessRegionSet.push(obj);
             }
         }
+        this.IPAddressVersion = 'IPAddressVersion' in params ? params.IPAddressVersion : null;
+        this.PackageType = 'PackageType' in params ? params.PackageType : null;
+        this.Http3Supported = 'Http3Supported' in params ? params.Http3Supported : null;
 
     }
 }
@@ -2928,6 +3117,22 @@ class RuleInfo extends  AbstractModel {
          */
         this.ForwardHost = null;
 
+        /**
+         * 服务器名称指示（ServerNameIndication，简称SNI）开关。ON表示开启，OFF表示关闭。
+注意：此字段可能返回 null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ServerNameIndicationSwitch = null;
+
+        /**
+         * 服务器名称指示（ServerNameIndication，简称SNI），当SNI开关打开时，该字段必填。
+注意：此字段可能返回 null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ServerNameIndication = null;
+
     }
 
     /**
@@ -2962,6 +3167,8 @@ class RuleInfo extends  AbstractModel {
         }
         this.BindStatus = 'BindStatus' in params ? params.BindStatus : null;
         this.ForwardHost = 'ForwardHost' in params ? params.ForwardHost : null;
+        this.ServerNameIndicationSwitch = 'ServerNameIndicationSwitch' in params ? params.ServerNameIndicationSwitch : null;
+        this.ServerNameIndication = 'ServerNameIndication' in params ? params.ServerNameIndication : null;
 
     }
 }
@@ -2992,6 +3199,13 @@ class RealServerStatus extends  AbstractModel {
          */
         this.ProxyId = null;
 
+        /**
+         * 绑定此源站的通道组ID，没有绑定时为空字符串。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
     }
 
     /**
@@ -3004,6 +3218,7 @@ class RealServerStatus extends  AbstractModel {
         this.RealServerId = 'RealServerId' in params ? params.RealServerId : null;
         this.BindStatus = 'BindStatus' in params ? params.BindStatus : null;
         this.ProxyId = 'ProxyId' in params ? params.ProxyId : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
 
     }
 }
@@ -3273,6 +3488,34 @@ class DescribeRealServerStatisticsRequest extends  AbstractModel {
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.Granularity = 'Granularity' in params ? params.Granularity : null;
+
+    }
+}
+
+/**
+ * DeleteFirstLinkSession请求参数结构体
+ * @class
+ */
+class DeleteFirstLinkSessionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 单次加速唯一会话Id
+         * @type {string || null}
+         */
+        this.SessionId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
 
     }
 }
@@ -3620,10 +3863,12 @@ class DescribeProxiesRequest extends  AbstractModel {
         /**
          * 过滤条件。   
 每次请求的Filters的上限为10，Filter.Values的上限为5。参数不支持同时指定InstanceIds和Filters。 
-ProjectId - String - 是否必填：否 -（过滤条件）按照项目ID过滤。    
+ProjectId - String - 是否必填：否 -（过滤条件）按照项目ID过滤。   
 AccessRegion - String - 是否必填：否 - （过滤条件）按照接入地域过滤。    
 RealServerRegion - String - 是否必填：否 - （过滤条件）按照源站地域过滤。
 GroupId - String - 是否必填：否 - （过滤条件）按照通道组ID过滤。
+IPAddressVersion - String - 是否必填：否 - （过滤条件）按照IP版本过滤。
+PackageType - String - 是否必填：否 - （过滤条件）按照通道套餐类型过滤。
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -3648,6 +3893,26 @@ GroupId - String - 是否必填：否 - （过滤条件）按照通道组ID过�
          * @type {number || null}
          */
         this.Independent = null;
+
+        /**
+         * 输出通道列表的排列顺序。取值范围：
+asc：升序排列；
+desc：降序排列。
+默认为降序。
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * 通道列表排序的依据字段。取值范围：
+create_time：依据通道的创建时间排序；
+proxy_id：依据通道的ID排序；
+bandwidth：依据通道带宽上限排序；
+concurrent_connections：依据通道并发排序；
+默认按通道创建时间排序。
+         * @type {string || null}
+         */
+        this.OrderField = null;
 
     }
 
@@ -3681,17 +3946,31 @@ GroupId - String - 是否必填：否 - （过滤条件）按照通道组ID过�
             }
         }
         this.Independent = 'Independent' in params ? params.Independent : null;
+        this.Order = 'Order' in params ? params.Order : null;
+        this.OrderField = 'OrderField' in params ? params.OrderField : null;
 
     }
 }
 
 /**
- * BindListenerRealServers返回参数结构体
+ * DescribeAccessRegionsByDestRegion返回参数结构体
  * @class
  */
-class BindListenerRealServersResponse extends  AbstractModel {
+class DescribeAccessRegionsByDestRegionResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * 可用加速区域数量
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 可用加速区域信息列表
+         * @type {Array.<AccessRegionDetial> || null}
+         */
+        this.AccessRegionSet = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3707,6 +3986,16 @@ class BindListenerRealServersResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.AccessRegionSet) {
+            this.AccessRegionSet = new Array();
+            for (let z in params.AccessRegionSet) {
+                let obj = new AccessRegionDetial();
+                obj.deserialize(params.AccessRegionSet[z]);
+                this.AccessRegionSet.push(obj);
+            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -3967,11 +4256,23 @@ lc，最小连接数。
         this.ForwardProtocol = null;
 
         /**
-         * 加速通道转发到源站的请求中携带的host。
+         * 回源Host。加速通道转发到源站的请求中携带的host。
 当ForwardHost=default时，使用规则的域名，其他情况为该字段所设置的值。
          * @type {string || null}
          */
         this.ForwardHost = null;
+
+        /**
+         * 服务器名称指示（ServerNameIndication，简称SNI）开关。ON表示开启，OFF表示关闭。
+         * @type {string || null}
+         */
+        this.ServerNameIndicationSwitch = null;
+
+        /**
+         * 服务器名称指示（ServerNameIndication，简称SNI），当SNI开关打开时，该字段必填。
+         * @type {string || null}
+         */
+        this.ServerNameIndication = null;
 
     }
 
@@ -3995,6 +4296,8 @@ lc，最小连接数。
         this.Path = 'Path' in params ? params.Path : null;
         this.ForwardProtocol = 'ForwardProtocol' in params ? params.ForwardProtocol : null;
         this.ForwardHost = 'ForwardHost' in params ? params.ForwardHost : null;
+        this.ServerNameIndicationSwitch = 'ServerNameIndicationSwitch' in params ? params.ServerNameIndicationSwitch : null;
+        this.ServerNameIndication = 'ServerNameIndication' in params ? params.ServerNameIndication : null;
 
     }
 }
@@ -4147,6 +4450,34 @@ lc表示最小连接数。
          */
         this.ClientIPMethod = null;
 
+        /**
+         * 健康阈值，表示连续检查成功多少次后认定源站健康。范围为1到10
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.HealthyThreshold = null;
+
+        /**
+         * 不健康阈值，表示连续检查失败多少次数后认为源站不健康。范围为1到10
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.UnhealthyThreshold = null;
+
+        /**
+         * 源站是否开启主备模式：1开启，0关闭，DOMAIN类型源站不支持开启
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.FailoverSwitch = null;
+
+        /**
+         * 是否开启会话保持选项：0关闭， 非0开启，非0值为会话保持时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.SessionPersist = null;
+
     }
 
     /**
@@ -4179,6 +4510,10 @@ lc表示最小连接数。
         }
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.ClientIPMethod = 'ClientIPMethod' in params ? params.ClientIPMethod : null;
+        this.HealthyThreshold = 'HealthyThreshold' in params ? params.HealthyThreshold : null;
+        this.UnhealthyThreshold = 'UnhealthyThreshold' in params ? params.UnhealthyThreshold : null;
+        this.FailoverSwitch = 'FailoverSwitch' in params ? params.FailoverSwitch : null;
+        this.SessionPersist = 'SessionPersist' in params ? params.SessionPersist : null;
 
     }
 }
@@ -4341,6 +4676,27 @@ class DescribeCertificatesResponse extends  AbstractModel {
         }
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeCustomHeader请求参数结构体
+ * @class
+ */
+class DescribeCustomHeaderRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
 
     }
 }
@@ -4713,24 +5069,51 @@ class ModifyCertificateAttributesRequest extends  AbstractModel {
 }
 
 /**
- * 标签键值对
+ * ModifyProxyConfiguration请求参数结构体
  * @class
  */
-class TagPair extends  AbstractModel {
+class ModifyProxyConfigurationRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 标签键
+         * （旧参数，请切换到ProxyId）通道的实例ID。
          * @type {string || null}
          */
-        this.TagKey = null;
+        this.InstanceId = null;
 
         /**
-         * 标签值
+         * 需要调整到的目标带宽，单位：Mbps。
+Bandwidth与Concurrent必须至少设置一个。取值范围根据DescribeAccessRegionsByDestRegion接口获取得到
+         * @type {number || null}
+         */
+        this.Bandwidth = null;
+
+        /**
+         * 需要调整到的目标并发值，单位：万。
+Bandwidth与Concurrent必须至少设置一个。取值范围根据DescribeAccessRegionsByDestRegion接口获取得到
+         * @type {number || null}
+         */
+        this.Concurrent = null;
+
+        /**
+         * 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。
+更多详细信息请参阅：如何保证幂等性。
          * @type {string || null}
          */
-        this.TagValue = null;
+        this.ClientToken = null;
+
+        /**
+         * （新参数）通道的实例ID。
+         * @type {string || null}
+         */
+        this.ProxyId = null;
+
+        /**
+         * 计费方式 (0:按带宽计费，1:按流量计费 默认按带宽计费）
+         * @type {number || null}
+         */
+        this.BillingType = null;
 
     }
 
@@ -4741,8 +5124,12 @@ class TagPair extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TagKey = 'TagKey' in params ? params.TagKey : null;
-        this.TagValue = 'TagValue' in params ? params.TagValue : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Bandwidth = 'Bandwidth' in params ? params.Bandwidth : null;
+        this.Concurrent = 'Concurrent' in params ? params.Concurrent : null;
+        this.ClientToken = 'ClientToken' in params ? params.ClientToken : null;
+        this.ProxyId = 'ProxyId' in params ? params.ProxyId : null;
+        this.BillingType = 'BillingType' in params ? params.BillingType : null;
 
     }
 }
@@ -4875,35 +5262,78 @@ class DescribeProxiesStatusRequest extends  AbstractModel {
 }
 
 /**
- * 通道状态信息
+ * ModifyTCPListenerAttribute请求参数结构体
  * @class
  */
-class ProxyStatus extends  AbstractModel {
+class ModifyTCPListenerAttributeRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 通道实例ID。
+         * 监听器ID
          * @type {string || null}
          */
-        this.InstanceId = null;
+        this.ListenerId = null;
 
         /**
-         * 通道状态。
-其中：
-RUNNING表示运行中；
-CREATING表示创建中；
-DESTROYING表示销毁中；
-OPENING表示开启中；
-CLOSING表示关闭中；
-CLOSED表示已关闭；
-ADJUSTING表示配置变更中；
-ISOLATING表示隔离中；
-ISOLATED表示已隔离；
-UNKNOWN表示未知状态。
+         * 通道组ID，ProxyId和GroupId必须设置一个，但不能同时设置。
          * @type {string || null}
          */
-        this.Status = null;
+        this.GroupId = null;
+
+        /**
+         * 通道ID，ProxyId和GroupId必须设置一个，但不能同时设置。
+         * @type {string || null}
+         */
+        this.ProxyId = null;
+
+        /**
+         * 监听器名称
+         * @type {string || null}
+         */
+        this.ListenerName = null;
+
+        /**
+         * 监听器源站调度策略，支持轮询（rr），加权轮询（wrr），最小连接数（lc）。
+         * @type {string || null}
+         */
+        this.Scheduler = null;
+
+        /**
+         * 源站健康检查时间间隔，单位：秒。时间间隔取值在[5，300]之间。
+         * @type {number || null}
+         */
+        this.DelayLoop = null;
+
+        /**
+         * 源站健康检查响应超时时间，单位：秒。超时时间取值在[2，60]之间。超时时间应小于健康检查时间间隔DelayLoop。
+         * @type {number || null}
+         */
+        this.ConnectTimeout = null;
+
+        /**
+         * 是否开启健康检查，1开启，0关闭。
+         * @type {number || null}
+         */
+        this.HealthCheck = null;
+
+        /**
+         * 源站是否开启主备模式：1开启，0关闭，DOMAIN类型源站不支持开启
+         * @type {number || null}
+         */
+        this.FailoverSwitch = null;
+
+        /**
+         * 健康阈值，表示连续检查成功多少次数后认定源站健康。范围为1到10
+         * @type {number || null}
+         */
+        this.HealthyThreshold = null;
+
+        /**
+         * 不健康阈值，表示连续检查失败次数后认定源站不健康。范围为1到10
+         * @type {number || null}
+         */
+        this.UnhealthyThreshold = null;
 
     }
 
@@ -4914,31 +5344,28 @@ UNKNOWN表示未知状态。
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.Status = 'Status' in params ? params.Status : null;
+        this.ListenerId = 'ListenerId' in params ? params.ListenerId : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.ProxyId = 'ProxyId' in params ? params.ProxyId : null;
+        this.ListenerName = 'ListenerName' in params ? params.ListenerName : null;
+        this.Scheduler = 'Scheduler' in params ? params.Scheduler : null;
+        this.DelayLoop = 'DelayLoop' in params ? params.DelayLoop : null;
+        this.ConnectTimeout = 'ConnectTimeout' in params ? params.ConnectTimeout : null;
+        this.HealthCheck = 'HealthCheck' in params ? params.HealthCheck : null;
+        this.FailoverSwitch = 'FailoverSwitch' in params ? params.FailoverSwitch : null;
+        this.HealthyThreshold = 'HealthyThreshold' in params ? params.HealthyThreshold : null;
+        this.UnhealthyThreshold = 'UnhealthyThreshold' in params ? params.UnhealthyThreshold : null;
 
     }
 }
 
 /**
- * DescribeGroupAndStatisticsProxy返回参数结构体
+ * DeleteSecurityPolicy返回参数结构体
  * @class
  */
-class DescribeGroupAndStatisticsProxyResponse extends  AbstractModel {
+class DeleteSecurityPolicyResponse extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * 可以统计的通道组信息
-         * @type {Array.<GroupStatisticsInfo> || null}
-         */
-        this.GroupSet = null;
-
-        /**
-         * 通道组数量
-         * @type {number || null}
-         */
-        this.TotalCount = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4955,16 +5382,6 @@ class DescribeGroupAndStatisticsProxyResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.GroupSet) {
-            this.GroupSet = new Array();
-            for (let z in params.GroupSet) {
-                let obj = new GroupStatisticsInfo();
-                obj.deserialize(params.GroupSet[z]);
-                this.GroupSet.push(obj);
-            }
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -5173,24 +5590,18 @@ class ModifySecurityRuleRequest extends  AbstractModel {
 }
 
 /**
- * 就近接入的国家地区详情
+ * CreateCustomHeader返回参数结构体
  * @class
  */
-class NationCountryInnerInfo extends  AbstractModel {
+class CreateCustomHeaderResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 国家名
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.NationCountryName = null;
-
-        /**
-         * 国家内部编码
-         * @type {string || null}
-         */
-        this.NationCountryInnerCode = null;
+        this.RequestId = null;
 
     }
 
@@ -5201,8 +5612,7 @@ class NationCountryInnerInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.NationCountryName = 'NationCountryName' in params ? params.NationCountryName : null;
-        this.NationCountryInnerCode = 'NationCountryInnerCode' in params ? params.NationCountryInnerCode : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5221,6 +5631,18 @@ class DescribeAccessRegionsByDestRegionRequest extends  AbstractModel {
          */
         this.DestRegion = null;
 
+        /**
+         * IP版本，可取值：IPv4、IPv6，默认值IPv4
+         * @type {string || null}
+         */
+        this.IPAddressVersion = null;
+
+        /**
+         * 通道套餐类型，Thunder表示标准通道组，Accelerator表示游戏加速器通道，CrossBorder表示跨境通道。
+         * @type {string || null}
+         */
+        this.PackageType = null;
+
     }
 
     /**
@@ -5231,6 +5653,8 @@ class DescribeAccessRegionsByDestRegionRequest extends  AbstractModel {
             return;
         }
         this.DestRegion = 'DestRegion' in params ? params.DestRegion : null;
+        this.IPAddressVersion = 'IPAddressVersion' in params ? params.IPAddressVersion : null;
+        this.PackageType = 'PackageType' in params ? params.PackageType : null;
 
     }
 }
@@ -5267,6 +5691,12 @@ class RealServer extends  AbstractModel {
          */
         this.ProjectId = null;
 
+        /**
+         * 是否在封禁黑名单中，其中：0表示不在黑名单中，1表示在黑名单中。
+         * @type {number || null}
+         */
+        this.InBanBlacklist = null;
+
     }
 
     /**
@@ -5280,6 +5710,7 @@ class RealServer extends  AbstractModel {
         this.RealServerId = 'RealServerId' in params ? params.RealServerId : null;
         this.RealServerName = 'RealServerName' in params ? params.RealServerName : null;
         this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.InBanBlacklist = 'InBanBlacklist' in params ? params.InBanBlacklist : null;
 
     }
 }
@@ -5401,6 +5832,49 @@ class StatisticsDataInfo extends  AbstractModel {
 }
 
 /**
+ * CreateCustomHeader请求参数结构体
+ * @class
+ */
+class CreateCustomHeaderRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 规则id
+         * @type {string || null}
+         */
+        this.RuleId = null;
+
+        /**
+         * 新增的header名称和内容列表， ‘’$remote_addr‘’会被解析替换成客户端ip，其他值原样透传到源站。
+         * @type {Array.<HttpHeaderParam> || null}
+         */
+        this.Headers = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RuleId = 'RuleId' in params ? params.RuleId : null;
+
+        if (params.Headers) {
+            this.Headers = new Array();
+            for (let z in params.Headers) {
+                let obj = new HttpHeaderParam();
+                obj.deserialize(params.Headers[z]);
+                this.Headers.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * 通道组详情列表
  * @class
  */
@@ -5446,7 +5920,8 @@ class ProxyGroupInfo extends  AbstractModel {
 RUNNING表示运行中；
 CREATING表示创建中；
 DESTROYING表示销毁中；
-MOVING表示通道迁移中。
+MOVING表示通道迁移中；
+CHANGING表示部分部署中。
          * @type {string || null}
          */
         this.Status = null;
@@ -5477,6 +5952,15 @@ MOVING表示通道迁移中。
          * @type {number || null}
          */
         this.ProxyType = null;
+
+        /**
+         * 支持Http3特性的标识，其中：
+0表示关闭；
+1表示启用。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Http3Supported = null;
 
     }
 
@@ -5510,6 +5994,42 @@ MOVING表示通道迁移中。
         this.Version = 'Version' in params ? params.Version : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.ProxyType = 'ProxyType' in params ? params.ProxyType : null;
+        this.Http3Supported = 'Http3Supported' in params ? params.Http3Supported : null;
+
+    }
+}
+
+/**
+ * 接口扩展参数
+ * @class
+ */
+class Capacity extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 电信鉴权的Token
+         * @type {string || null}
+         */
+        this.CTCCToken = null;
+
+        /**
+         * 终端所处在的省份，建议不填写由服务端自动获取，若需填写请填写带有省、市、自治区、特别行政区等后缀的省份中文全称
+         * @type {string || null}
+         */
+        this.Province = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CTCCToken = 'CTCCToken' in params ? params.CTCCToken : null;
+        this.Province = 'Province' in params ? params.Province : null;
 
     }
 }
@@ -5942,6 +6462,30 @@ class CreateProxyRequest extends  AbstractModel {
          */
         this.BillingType = null;
 
+        /**
+         * IP版本，可取值：IPv4、IPv6，默认值IPv4
+         * @type {string || null}
+         */
+        this.IPAddressVersion = null;
+
+        /**
+         * 网络类型，normal表示常规BGP，cn2表示精品BGP，triple表示三网
+         * @type {string || null}
+         */
+        this.NetworkType = null;
+
+        /**
+         * 通道套餐类型，Thunder表示标准通道组，Accelerator表示游戏加速器通道，CrossBorder表示跨境通道。
+         * @type {string || null}
+         */
+        this.PackageType = null;
+
+        /**
+         * 支持Http3的开关，其中：0，表示不需要支持Http3接入；1，表示需要支持Http3接入。注意：如果开启了Http3的功能，那么该通道就不再支持TCP/UDP接入的功能。该功能的启停无法在通道创建完毕后再修改。
+         * @type {number || null}
+         */
+        this.Http3Supported = null;
+
     }
 
     /**
@@ -5970,6 +6514,10 @@ class CreateProxyRequest extends  AbstractModel {
         }
         this.ClonedProxyId = 'ClonedProxyId' in params ? params.ClonedProxyId : null;
         this.BillingType = 'BillingType' in params ? params.BillingType : null;
+        this.IPAddressVersion = 'IPAddressVersion' in params ? params.IPAddressVersion : null;
+        this.NetworkType = 'NetworkType' in params ? params.NetworkType : null;
+        this.PackageType = 'PackageType' in params ? params.PackageType : null;
+        this.Http3Supported = 'Http3Supported' in params ? params.Http3Supported : null;
 
     }
 }
@@ -6141,6 +6689,15 @@ class CreateDomainRequest extends  AbstractModel {
          */
         this.PolyClientCertificateIds = null;
 
+        /**
+         * 是否开启Http3特性的标识，其中：
+0，表示不开启Http3；
+1，表示开启Http3。
+默认不开启Http3。可以通过SetDomainHttp3开启。
+         * @type {number || null}
+         */
+        this.Http3Supported = null;
+
     }
 
     /**
@@ -6155,6 +6712,7 @@ class CreateDomainRequest extends  AbstractModel {
         this.CertificateId = 'CertificateId' in params ? params.CertificateId : null;
         this.ClientCertificateId = 'ClientCertificateId' in params ? params.ClientCertificateId : null;
         this.PolyClientCertificateIds = 'PolyClientCertificateIds' in params ? params.PolyClientCertificateIds : null;
+        this.Http3Supported = 'Http3Supported' in params ? params.Http3Supported : null;
 
     }
 }
@@ -6217,10 +6775,22 @@ class CreateRuleRequest extends  AbstractModel {
         this.ForwardProtocol = null;
 
         /**
-         * 加速通道转发到远照的host，不设置该参数时，使用默认的host设置，即客户端发起的http请求的host。
+         * 回源Host。加速通道转发到源站的host，不设置该参数时，使用默认的host设置，即客户端发起的http请求的host。
          * @type {string || null}
          */
         this.ForwardHost = null;
+
+        /**
+         * 服务器名称指示（ServerNameIndication，简称SNI）开关。ON表示开启，OFF表示关闭。
+         * @type {string || null}
+         */
+        this.ServerNameIndicationSwitch = null;
+
+        /**
+         * 服务器名称指示（ServerNameIndication，简称SNI），当SNI开关打开时，该字段必填。
+         * @type {string || null}
+         */
+        this.ServerNameIndication = null;
 
     }
 
@@ -6245,6 +6815,58 @@ class CreateRuleRequest extends  AbstractModel {
         }
         this.ForwardProtocol = 'ForwardProtocol' in params ? params.ForwardProtocol : null;
         this.ForwardHost = 'ForwardHost' in params ? params.ForwardHost : null;
+        this.ServerNameIndicationSwitch = 'ServerNameIndicationSwitch' in params ? params.ServerNameIndicationSwitch : null;
+        this.ServerNameIndication = 'ServerNameIndication' in params ? params.ServerNameIndication : null;
+
+    }
+}
+
+/**
+ * 内部接口使用，返回可以查询统计数据的通道和对应的监听器信息
+ * @class
+ */
+class ProxySimpleInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 通道ID
+         * @type {string || null}
+         */
+        this.ProxyId = null;
+
+        /**
+         * 通道名称
+         * @type {string || null}
+         */
+        this.ProxyName = null;
+
+        /**
+         * 监听器列表
+         * @type {Array.<ListenerInfo> || null}
+         */
+        this.ListenerList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProxyId = 'ProxyId' in params ? params.ProxyId : null;
+        this.ProxyName = 'ProxyName' in params ? params.ProxyName : null;
+
+        if (params.ListenerList) {
+            this.ListenerList = new Array();
+            for (let z in params.ListenerList) {
+                let obj = new ListenerInfo();
+                obj.deserialize(params.ListenerList[z]);
+                this.ListenerList.push(obj);
+            }
+        }
 
     }
 }
@@ -6377,6 +6999,7 @@ class ProxyGroupDetail extends  AbstractModel {
 1表示创建中；
 4表示销毁中；
 11表示迁移中；
+12表示部分部署中。
          * @type {number || null}
          */
         this.Status = null;
@@ -6458,6 +7081,29 @@ class ProxyGroupDetail extends  AbstractModel {
          */
         this.ClientIPMethod = null;
 
+        /**
+         * IP版本，可取值：IPv4、IPv6，默认值IPv4
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.IPAddressVersion = null;
+
+        /**
+         * 通道组套餐类型：Thunder表示标准通道组，Accelerator表示银牌加速通道组，CrossBorder表示跨境通道组。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.PackageType = null;
+
+        /**
+         * 支持Http3特性的标识，其中：
+0表示关闭；
+1表示启用。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Http3Supported = null;
+
     }
 
     /**
@@ -6496,6 +7142,9 @@ class ProxyGroupDetail extends  AbstractModel {
         this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
         this.Version = 'Version' in params ? params.Version : null;
         this.ClientIPMethod = 'ClientIPMethod' in params ? params.ClientIPMethod : null;
+        this.IPAddressVersion = 'IPAddressVersion' in params ? params.IPAddressVersion : null;
+        this.PackageType = 'PackageType' in params ? params.PackageType : null;
+        this.Http3Supported = 'Http3Supported' in params ? params.Http3Supported : null;
 
     }
 }
@@ -6832,30 +7481,25 @@ class SecurityPolicyRuleIn extends  AbstractModel {
 }
 
 /**
- * 内部接口使用，返回可以查询统计数据的通道和对应的监听器信息
+ * DescribeBlackHeader返回参数结构体
  * @class
  */
-class ProxySimpleInfo extends  AbstractModel {
+class DescribeBlackHeaderResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 通道ID
-         * @type {string || null}
+         * 禁用的自定义header列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
          */
-        this.ProxyId = null;
+        this.BlackHeaders = null;
 
         /**
-         * 通道名称
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.ProxyName = null;
-
-        /**
-         * 监听器列表
-         * @type {Array.<ListenerInfo> || null}
-         */
-        this.ListenerList = null;
+        this.RequestId = null;
 
     }
 
@@ -6866,17 +7510,8 @@ class ProxySimpleInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ProxyId = 'ProxyId' in params ? params.ProxyId : null;
-        this.ProxyName = 'ProxyName' in params ? params.ProxyName : null;
-
-        if (params.ListenerList) {
-            this.ListenerList = new Array();
-            for (let z in params.ListenerList) {
-                let obj = new ListenerInfo();
-                obj.deserialize(params.ListenerList[z]);
-                this.ListenerList.push(obj);
-            }
-        }
+        this.BlackHeaders = 'BlackHeaders' in params ? params.BlackHeaders : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7137,7 +7772,7 @@ class SetAuthenticationRequest extends  AbstractModel {
         this.RealServerCertificateId = null;
 
         /**
-         * 源站证书域名。
+         * 该字段已废弃，请使用创建规则和修改规则中的SNI功能。
          * @type {string || null}
          */
         this.RealServerCertificateDomain = null;
@@ -7219,6 +7854,20 @@ class InquiryPriceCreateProxyResponse extends  AbstractModel {
         this.DiscountFlowUnitPrice = null;
 
         /**
+         * 精品BGP的带宽费用价格，单位: 元/Mbps/天
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Cn2BandwidthPrice = null;
+
+        /**
+         * 精品BGP的折后带宽费用价格，单位: 元/Mbps/天
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Cn2BandwidthPriceWithDiscount = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -7247,6 +7896,8 @@ class InquiryPriceCreateProxyResponse extends  AbstractModel {
         this.Currency = 'Currency' in params ? params.Currency : null;
         this.FlowUnitPrice = 'FlowUnitPrice' in params ? params.FlowUnitPrice : null;
         this.DiscountFlowUnitPrice = 'DiscountFlowUnitPrice' in params ? params.DiscountFlowUnitPrice : null;
+        this.Cn2BandwidthPrice = 'Cn2BandwidthPrice' in params ? params.Cn2BandwidthPrice : null;
+        this.Cn2BandwidthPriceWithDiscount = 'Cn2BandwidthPriceWithDiscount' in params ? params.Cn2BandwidthPriceWithDiscount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -7283,6 +7934,80 @@ class NewRealServer extends  AbstractModel {
         }
         this.RealServerId = 'RealServerId' in params ? params.RealServerId : null;
         this.RealServerIP = 'RealServerIP' in params ? params.RealServerIP : null;
+
+    }
+}
+
+/**
+ * DescribeFirstLinkSession返回参数结构体
+ * @class
+ */
+class DescribeFirstLinkSessionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 会话状态，具体如下：
+1： 加速中；
+0： 非加速中。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 剩余加速时间，单位秒。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Duration = null;
+
+        /**
+         * 加速套餐类型。
+套餐说明如下：
+T100K：上/下行保障100kbps；
+BD4M：下行带宽保障4Mbps；
+BU4M：上行带宽保障4Mbps。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SuiteType = null;
+
+        /**
+         * 加速终端的公网ip
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SrcPublicIpv4 = null;
+
+        /**
+         * 加速目标ip
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.DestIpv4 = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Duration = 'Duration' in params ? params.Duration : null;
+        this.SuiteType = 'SuiteType' in params ? params.SuiteType : null;
+        this.SrcPublicIpv4 = 'SrcPublicIpv4' in params ? params.SrcPublicIpv4 : null;
+        this.DestIpv4 = 'DestIpv4' in params ? params.DestIpv4 : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7701,7 +8426,7 @@ class ModifyHTTPSListenerAttributeResponse extends  AbstractModel {
 }
 
 /**
- * 根据源站查询的可用加速区域信息及对应的可选带宽和并发量
+ * 根据源站查询的可用加速区域信息及对应的可选带宽和并发量。
  * @class
  */
 class AccessRegionDetial extends  AbstractModel {
@@ -7732,6 +8457,41 @@ class AccessRegionDetial extends  AbstractModel {
          */
         this.BandwidthList = null;
 
+        /**
+         * 机房所属大区
+         * @type {string || null}
+         */
+        this.RegionArea = null;
+
+        /**
+         * 机房所属大区名
+         * @type {string || null}
+         */
+        this.RegionAreaName = null;
+
+        /**
+         * 机房类型, dc表示DataCenter数据中心, ec表示EdgeComputing边缘节点
+         * @type {string || null}
+         */
+        this.IDCType = null;
+
+        /**
+         * 特性位图，每个bit位代表一种特性，其中：
+0，表示不支持该特性；
+1，表示支持该特性。
+特性位图含义如下（从右往左）：
+第1个bit，支持4层加速；
+第2个bit，支持7层加速；
+第3个bit，支持Http3接入；
+第4个bit，支持IPv6；
+第5个bit，支持精品BGP接入；
+第6个bit，支持三网接入；
+第7个bit，支持接入段Qos加速。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.FeatureBitmap = null;
+
     }
 
     /**
@@ -7745,6 +8505,10 @@ class AccessRegionDetial extends  AbstractModel {
         this.RegionName = 'RegionName' in params ? params.RegionName : null;
         this.ConcurrentList = 'ConcurrentList' in params ? params.ConcurrentList : null;
         this.BandwidthList = 'BandwidthList' in params ? params.BandwidthList : null;
+        this.RegionArea = 'RegionArea' in params ? params.RegionArea : null;
+        this.RegionAreaName = 'RegionAreaName' in params ? params.RegionAreaName : null;
+        this.IDCType = 'IDCType' in params ? params.IDCType : null;
+        this.FeatureBitmap = 'FeatureBitmap' in params ? params.FeatureBitmap : null;
 
     }
 }
@@ -7779,19 +8543,20 @@ class DescribeProxyGroupListRequest extends  AbstractModel {
         this.ProjectId = null;
 
         /**
+         * 过滤条件。   
+每次请求的Filter.Values的上限为5。
+RealServerRegion - String - 是否必填：否 -（过滤条件）按照源站地域过滤，可参考DescribeDestRegions接口返回结果中的RegionId。
+PackageType - String - 是否必填：否 - （过滤条件）通道组类型，Thunder表示标准通道组，Accelerator表示银牌加速通道组。
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
          * 标签列表，当存在该字段时，拉取对应标签下的资源列表。
 最多支持5个标签，当存在两个或两个以上的标签时，满足其中任意一个标签时，该通道组会被拉取出来。
          * @type {Array.<TagPair> || null}
          */
         this.TagSet = null;
-
-        /**
-         * 过滤条件。   
-每次请求的Filter.Values的上限为5。
-RealServerRegion - String - 是否必填：否 -（过滤条件）按照源站地域过滤，可参考DescribeDestRegions接口返回结果中的RegionId。
-         * @type {Array.<Filter> || null}
-         */
-        this.Filters = null;
 
     }
 
@@ -7806,21 +8571,21 @@ RealServerRegion - String - 是否必填：否 -（过滤条件）按照源站�
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
 
-        if (params.TagSet) {
-            this.TagSet = new Array();
-            for (let z in params.TagSet) {
-                let obj = new TagPair();
-                obj.deserialize(params.TagSet[z]);
-                this.TagSet.push(obj);
-            }
-        }
-
         if (params.Filters) {
             this.Filters = new Array();
             for (let z in params.Filters) {
                 let obj = new Filter();
                 obj.deserialize(params.Filters[z]);
                 this.Filters.push(obj);
+            }
+        }
+
+        if (params.TagSet) {
+            this.TagSet = new Array();
+            for (let z in params.TagSet) {
+                let obj = new TagPair();
+                obj.deserialize(params.TagSet[z]);
+                this.TagSet.push(obj);
             }
         }
 
@@ -7896,6 +8661,50 @@ class SecurityPolicyRuleOut extends  AbstractModel {
         this.RuleId = 'RuleId' in params ? params.RuleId : null;
         this.Protocol = 'Protocol' in params ? params.Protocol : null;
         this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
+
+    }
+}
+
+/**
+ * CreateFirstLinkSession返回参数结构体
+ * @class
+ */
+class CreateFirstLinkSessionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 加速成功时返回，单次加速唯一会话Id。。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SessionId = null;
+
+        /**
+         * 剩余的加速时间，单位秒。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Duration = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
+        this.Duration = 'Duration' in params ? params.Duration : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8019,6 +8828,41 @@ class GroupStatisticsInfo extends  AbstractModel {
 }
 
 /**
+ * 标签键值对
+ * @class
+ */
+class TagPair extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 标签键
+         * @type {string || null}
+         */
+        this.TagKey = null;
+
+        /**
+         * 标签值
+         * @type {string || null}
+         */
+        this.TagValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TagKey = 'TagKey' in params ? params.TagKey : null;
+        this.TagValue = 'TagValue' in params ? params.TagValue : null;
+
+    }
+}
+
+/**
  * CreateProxyGroup返回参数结构体
  * @class
  */
@@ -8117,6 +8961,34 @@ class DeleteRuleResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeFirstLinkSession请求参数结构体
+ * @class
+ */
+class DescribeFirstLinkSessionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 单次加速唯一会话Id
+         * @type {string || null}
+         */
+        this.SessionId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
+
+    }
+}
+
+/**
  * BindRuleRealServers返回参数结构体
  * @class
  */
@@ -8168,6 +9040,41 @@ class DescribeGroupAndStatisticsProxyRequest extends  AbstractModel {
             return;
         }
         this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+
+    }
+}
+
+/**
+ * 网络加速的原地址信息
+ * @class
+ */
+class SrcAddressInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 内网Ip4地址
+         * @type {string || null}
+         */
+        this.SrcIpv4 = null;
+
+        /**
+         * 公网Ip4地址
+         * @type {string || null}
+         */
+        this.SrcPublicIpv4 = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SrcIpv4 = 'SrcIpv4' in params ? params.SrcIpv4 : null;
+        this.SrcPublicIpv4 = 'SrcPublicIpv4' in params ? params.SrcPublicIpv4 : null;
 
     }
 }
@@ -8431,12 +9338,24 @@ class DescribeProxyDetailResponse extends  AbstractModel {
 }
 
 /**
- * DeleteSecurityPolicy返回参数结构体
+ * DescribeGroupAndStatisticsProxy返回参数结构体
  * @class
  */
-class DeleteSecurityPolicyResponse extends  AbstractModel {
+class DescribeGroupAndStatisticsProxyResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * 可以统计的通道组信息
+         * @type {Array.<GroupStatisticsInfo> || null}
+         */
+        this.GroupSet = null;
+
+        /**
+         * 通道组数量
+         * @type {number || null}
+         */
+        this.TotalCount = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -8453,6 +9372,16 @@ class DeleteSecurityPolicyResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+
+        if (params.GroupSet) {
+            this.GroupSet = new Array();
+            for (let z in params.GroupSet) {
+                let obj = new GroupStatisticsInfo();
+                obj.deserialize(params.GroupSet[z]);
+                this.GroupSet.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -8604,6 +9533,12 @@ class DescribeProxyStatisticsRequest extends  AbstractModel {
          */
         this.Granularity = null;
 
+        /**
+         * 运营商（通道为三网通道时有效），支持CMCC，CUCC，CTCC，传空值或不传则合并三个运营商数据
+         * @type {string || null}
+         */
+        this.Isp = null;
+
     }
 
     /**
@@ -8618,6 +9553,7 @@ class DescribeProxyStatisticsRequest extends  AbstractModel {
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.MetricNames = 'MetricNames' in params ? params.MetricNames : null;
         this.Granularity = 'Granularity' in params ? params.Granularity : null;
+        this.Isp = 'Isp' in params ? params.Isp : null;
 
     }
 }
@@ -8770,6 +9706,22 @@ class DomainRuleSet extends  AbstractModel {
          */
         this.DomainStatus = null;
 
+        /**
+         * 封禁解封状态：BANNED表示已封禁，RECOVER表示已解封或未封禁，BANNING表示封禁中，RECOVERING表示解封中，BAN_FAILED表示封禁失败，RECOVER_FAILED表示解封失败。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.BanStatus = null;
+
+        /**
+         * Http3特性标识，其中：
+0表示关闭；
+1表示启用。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Http3Supported = null;
+
     }
 
     /**
@@ -8822,6 +9774,8 @@ class DomainRuleSet extends  AbstractModel {
             }
         }
         this.DomainStatus = 'DomainStatus' in params ? params.DomainStatus : null;
+        this.BanStatus = 'BanStatus' in params ? params.BanStatus : null;
+        this.Http3Supported = 'Http3Supported' in params ? params.Http3Supported : null;
 
     }
 }
@@ -8941,18 +9895,12 @@ class CreateCertificateResponse extends  AbstractModel {
 }
 
 /**
- * ModifyGroupDomainConfig返回参数结构体
+ * DescribeBlackHeader请求参数结构体
  * @class
  */
-class ModifyGroupDomainConfigResponse extends  AbstractModel {
+class DescribeBlackHeaderRequest extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
 
     }
 
@@ -8963,7 +9911,6 @@ class ModifyGroupDomainConfigResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -9146,10 +10093,10 @@ class CloseProxyGroupResponse extends  AbstractModel {
 }
 
 /**
- * DeleteDomainErrorPageInfo返回参数结构体
+ * DeleteFirstLinkSession返回参数结构体
  * @class
  */
-class DeleteDomainErrorPageInfoResponse extends  AbstractModel {
+class DeleteFirstLinkSessionResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -9267,6 +10214,30 @@ class CheckProxyCreateRequest extends  AbstractModel {
          */
         this.GroupId = null;
 
+        /**
+         * IP版本，可取值：IPv4、IPv6，默认值IPv4
+         * @type {string || null}
+         */
+        this.IPAddressVersion = null;
+
+        /**
+         * 网络类型，可取值：normal、cn2，默认值normal
+         * @type {string || null}
+         */
+        this.NetworkType = null;
+
+        /**
+         * 通道套餐类型。Thunder表示标准通道组，Accelerator表示游戏加速器通道，CrossBorder表示跨境通道。
+         * @type {string || null}
+         */
+        this.PackageType = null;
+
+        /**
+         * 支持Http3的开关，其中：0，表示不需要支持Http3接入；1，表示需要支持Http3接入。注意：如果开启了Http3的功能，那么该通道就不再支持TCP/UDP接入的功能。该功能的启停无法在通道创建完毕后再修改。
+         * @type {number || null}
+         */
+        this.Http3Supported = null;
+
     }
 
     /**
@@ -9281,6 +10252,10 @@ class CheckProxyCreateRequest extends  AbstractModel {
         this.Bandwidth = 'Bandwidth' in params ? params.Bandwidth : null;
         this.Concurrent = 'Concurrent' in params ? params.Concurrent : null;
         this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.IPAddressVersion = 'IPAddressVersion' in params ? params.IPAddressVersion : null;
+        this.NetworkType = 'NetworkType' in params ? params.NetworkType : null;
+        this.PackageType = 'PackageType' in params ? params.PackageType : null;
+        this.Http3Supported = 'Http3Supported' in params ? params.Http3Supported : null;
 
     }
 }
@@ -9293,6 +10268,18 @@ class DescribeRegionAndPriceRequest extends  AbstractModel {
     constructor(){
         super();
 
+        /**
+         * IP版本，可取值：IPv4、IPv6，默认值IPv4
+         * @type {string || null}
+         */
+        this.IPAddressVersion = null;
+
+        /**
+         * 通道套餐类型，Thunder表示标准通道组，Accelerator表示游戏加速器通道，CrossBorder表示跨境通道。
+         * @type {string || null}
+         */
+        this.PackageType = null;
+
     }
 
     /**
@@ -9302,6 +10289,8 @@ class DescribeRegionAndPriceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.IPAddressVersion = 'IPAddressVersion' in params ? params.IPAddressVersion : null;
+        this.PackageType = 'PackageType' in params ? params.PackageType : null;
 
     }
 }
@@ -9563,6 +10552,16 @@ class CreateHTTPSListenerRequest extends  AbstractModel {
          */
         this.GroupId = null;
 
+        /**
+         * 支持Http3的开关，其中：
+0，表示不需要支持Http3接入；
+1，表示需要支持Http3接入。
+注意：如果支持了Http3的功能，那么该监听器会占用对应的UDP接入端口，不可再创建相同端口的UDP监听器。
+该功能的启停无法在监听器创建完毕后再修改。
+         * @type {number || null}
+         */
+        this.Http3Supported = null;
+
     }
 
     /**
@@ -9581,6 +10580,7 @@ class CreateHTTPSListenerRequest extends  AbstractModel {
         this.ClientCertificateId = 'ClientCertificateId' in params ? params.ClientCertificateId : null;
         this.PolyClientCertificateIds = 'PolyClientCertificateIds' in params ? params.PolyClientCertificateIds : null;
         this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.Http3Supported = 'Http3Supported' in params ? params.Http3Supported : null;
 
     }
 }
@@ -9698,6 +10698,41 @@ class OpenProxyGroupResponse extends  AbstractModel {
         this.InvalidStatusInstanceSet = 'InvalidStatusInstanceSet' in params ? params.InvalidStatusInstanceSet : null;
         this.OperationFailedInstanceSet = 'OperationFailedInstanceSet' in params ? params.OperationFailedInstanceSet : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 就近接入的国家地区详情
+ * @class
+ */
+class NationCountryInnerInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 国家名
+         * @type {string || null}
+         */
+        this.NationCountryName = null;
+
+        /**
+         * 国家内部编码
+         * @type {string || null}
+         */
+        this.NationCountryInnerCode = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NationCountryName = 'NationCountryName' in params ? params.NationCountryName : null;
+        this.NationCountryInnerCode = 'NationCountryInnerCode' in params ? params.NationCountryInnerCode : null;
 
     }
 }
@@ -9893,6 +10928,30 @@ class InquiryPriceCreateProxyRequest extends  AbstractModel {
          */
         this.BillingType = null;
 
+        /**
+         * IP版本，可取值：IPv4、IPv6，默认值IPv4
+         * @type {string || null}
+         */
+        this.IPAddressVersion = null;
+
+        /**
+         * 网络类型，可取值：normal、cn2，默认值normal
+         * @type {string || null}
+         */
+        this.NetworkType = null;
+
+        /**
+         * 通道套餐类型，Thunder表示标准通道组，Accelerator表示游戏加速器通道，CrossBorder表示跨境通道。
+         * @type {string || null}
+         */
+        this.PackageType = null;
+
+        /**
+         * 支持Http3的开关，其中：0，表示不需要支持Http3接入；1，表示需要支持Http3接入。注意：如果开启了Http3的功能，那么该通道就不再支持TCP/UDP接入的功能。该功能的启停无法在通道创建完毕后再修改。
+         * @type {number || null}
+         */
+        this.Http3Supported = null;
+
     }
 
     /**
@@ -9909,6 +10968,10 @@ class InquiryPriceCreateProxyRequest extends  AbstractModel {
         this.RealServerRegion = 'RealServerRegion' in params ? params.RealServerRegion : null;
         this.Concurrent = 'Concurrent' in params ? params.Concurrent : null;
         this.BillingType = 'BillingType' in params ? params.BillingType : null;
+        this.IPAddressVersion = 'IPAddressVersion' in params ? params.IPAddressVersion : null;
+        this.NetworkType = 'NetworkType' in params ? params.NetworkType : null;
+        this.PackageType = 'PackageType' in params ? params.PackageType : null;
+        this.Http3Supported = 'Http3Supported' in params ? params.Http3Supported : null;
 
     }
 }
@@ -9977,6 +11040,76 @@ class OpenProxyGroupRequest extends  AbstractModel {
             return;
         }
         this.GroupId = 'GroupId' in params ? params.GroupId : null;
+
+    }
+}
+
+/**
+ * 终端设备信息
+ * @class
+ */
+class DeviceInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 设备数据卡所属的运营商
+1：移动
+2：电信
+3：联通
+4：广电
+99：其他
+         * @type {number || null}
+         */
+        this.Vendor = null;
+
+        /**
+         * 设备操作系统
+1：Android
+2： IOS
+99：其他
+         * @type {number || null}
+         */
+        this.OS = null;
+
+        /**
+         * 设备唯一标识
+IOS 填写 IDFV
+Android 填写 IMEI
+         * @type {string || null}
+         */
+        this.DeviceId = null;
+
+        /**
+         * 用户手机号码
+         * @type {string || null}
+         */
+        this.PhoneNum = null;
+
+        /**
+         * 无线信息
+1：4G
+2：5G
+3：WIFI
+99：其他
+         * @type {number || null}
+         */
+        this.Wireless = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Vendor = 'Vendor' in params ? params.Vendor : null;
+        this.OS = 'OS' in params ? params.OS : null;
+        this.DeviceId = 'DeviceId' in params ? params.DeviceId : null;
+        this.PhoneNum = 'PhoneNum' in params ? params.PhoneNum : null;
+        this.Wireless = 'Wireless' in params ? params.Wireless : null;
 
     }
 }
@@ -10061,6 +11194,13 @@ class UDPListener extends  AbstractModel {
          */
         this.CreateTime = null;
 
+        /**
+         * 是否开启会话保持选项：0关闭， 非0开启，非0值为会话保持时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.SessionPersist = null;
+
     }
 
     /**
@@ -10089,6 +11229,7 @@ class UDPListener extends  AbstractModel {
             }
         }
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.SessionPersist = 'SessionPersist' in params ? params.SessionPersist : null;
 
     }
 }
@@ -10162,7 +11303,8 @@ ADJUSTING表示配置变更中；
 ISOLATING表示隔离中；
 ISOLATED表示已隔离；
 CLONING表示复制中；
-UNKNOWN表示未知状态。
+RECOVERING表示通道维护中；
+MOVING表示迁移中。
          * @type {string || null}
          */
         this.Status = null;
@@ -10274,7 +11416,7 @@ UNKNOWN表示未知状态。
         this.ModifyConfigTime = null;
 
         /**
-         * 通道类型，104表示新的银牌质量通道类型
+         * 通道类型，100表示THUNDER通道，103表示微软合作通道
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
@@ -10286,6 +11428,58 @@ UNKNOWN表示未知状态。
          * @type {Array.<number> || null}
          */
         this.ClientIPMethod = null;
+
+        /**
+         * IP版本：IPv4、IPv6
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.IPAddressVersion = null;
+
+        /**
+         * 网络类型：normal表示常规BGP，cn2表示精品BGP，triple表示三网，secure_eip表示定制安全EIP
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.NetworkType = null;
+
+        /**
+         * 通道套餐类型：Thunder表示标准通道，Accelerator表示银牌加速通道，
+CrossBorder表示跨境通道。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.PackageType = null;
+
+        /**
+         * 封禁解封状态：BANNED表示已封禁，RECOVER表示已解封或未封禁，BANNING表示封禁中，RECOVERING表示解封中，BAN_FAILED表示封禁失败，RECOVER_FAILED表示解封失败。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.BanStatus = null;
+
+        /**
+         * IP列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<IPDetail> || null}
+         */
+        this.IPList = null;
+
+        /**
+         * 支持Http3协议的标识，其中：
+0表示关闭；
+1表示启用。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Http3Supported = null;
+
+        /**
+         * 是否在封禁黑名单中，其中：0表示不在黑名单中，1表示在黑名单中。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.InBanBlacklist = null;
 
     }
 
@@ -10341,6 +11535,21 @@ UNKNOWN表示未知状态。
         this.ModifyConfigTime = 'ModifyConfigTime' in params ? params.ModifyConfigTime : null;
         this.ProxyType = 'ProxyType' in params ? params.ProxyType : null;
         this.ClientIPMethod = 'ClientIPMethod' in params ? params.ClientIPMethod : null;
+        this.IPAddressVersion = 'IPAddressVersion' in params ? params.IPAddressVersion : null;
+        this.NetworkType = 'NetworkType' in params ? params.NetworkType : null;
+        this.PackageType = 'PackageType' in params ? params.PackageType : null;
+        this.BanStatus = 'BanStatus' in params ? params.BanStatus : null;
+
+        if (params.IPList) {
+            this.IPList = new Array();
+            for (let z in params.IPList) {
+                let obj = new IPDetail();
+                obj.deserialize(params.IPList[z]);
+                this.IPList.push(obj);
+            }
+        }
+        this.Http3Supported = 'Http3Supported' in params ? params.Http3Supported : null;
+        this.InBanBlacklist = 'InBanBlacklist' in params ? params.InBanBlacklist : null;
 
     }
 }
@@ -10397,6 +11606,41 @@ class DescribeRulesByRuleIdsRequest extends  AbstractModel {
             return;
         }
         this.RuleIds = 'RuleIds' in params ? params.RuleIds : null;
+
+    }
+}
+
+/**
+ * OpenSecurityPolicy返回参数结构体
+ * @class
+ */
+class OpenSecurityPolicyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 异步流程ID，可以通过DescribeAsyncTaskStatus接口查询流程运行状态
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -10635,6 +11879,7 @@ class CreateDomainErrorPageInfoRequest extends  AbstractModel {
 
 module.exports = {
     RegionDetail: RegionDetail,
+    DestAddressInfo: DestAddressInfo,
     DescribeUDPListenersRequest: DescribeUDPListenersRequest,
     DeleteProxyGroupRequest: DeleteProxyGroupRequest,
     DescribeResourcesByTagRequest: DescribeResourcesByTagRequest,
@@ -10654,6 +11899,8 @@ module.exports = {
     ModifyGroupDomainConfigRequest: ModifyGroupDomainConfigRequest,
     BandwidthPriceGradient: BandwidthPriceGradient,
     DescribeHTTPListenersRequest: DescribeHTTPListenersRequest,
+    BindListenerRealServersResponse: BindListenerRealServersResponse,
+    DescribeCustomHeaderResponse: DescribeCustomHeaderResponse,
     ModifyRealServerNameResponse: ModifyRealServerNameResponse,
     DescribeGroupDomainConfigResponse: DescribeGroupDomainConfigResponse,
     ModifyCertificateResponse: ModifyCertificateResponse,
@@ -10662,7 +11909,6 @@ module.exports = {
     DescribeListenerRealServersRequest: DescribeListenerRealServersRequest,
     DescribeProxyGroupStatisticsRequest: DescribeProxyGroupStatisticsRequest,
     DescribeHTTPSListenersRequest: DescribeHTTPSListenersRequest,
-    DescribeAccessRegionsByDestRegionResponse: DescribeAccessRegionsByDestRegionResponse,
     DescribeCountryAreaMappingRequest: DescribeCountryAreaMappingRequest,
     CheckProxyCreateResponse: CheckProxyCreateResponse,
     ModifyCertificateRequest: ModifyCertificateRequest,
@@ -10671,10 +11917,11 @@ module.exports = {
     DescribeProxiesResponse: DescribeProxiesResponse,
     CreateRuleResponse: CreateRuleResponse,
     ModifyRealServerNameRequest: ModifyRealServerNameRequest,
+    ModifyGroupDomainConfigResponse: ModifyGroupDomainConfigResponse,
     DeleteProxyGroupResponse: DeleteProxyGroupResponse,
     CreateDomainErrorPageInfoResponse: CreateDomainErrorPageInfoResponse,
     BindListenerRealServersRequest: BindListenerRealServersRequest,
-    ModifyProxyConfigurationRequest: ModifyProxyConfigurationRequest,
+    DeleteDomainErrorPageInfoResponse: DeleteDomainErrorPageInfoResponse,
     DescribeRuleRealServersRequest: DescribeRuleRealServersRequest,
     DescribeGroupDomainConfigRequest: DescribeGroupDomainConfigRequest,
     CreateProxyGroupDomainRequest: CreateProxyGroupDomainRequest,
@@ -10685,9 +11932,10 @@ module.exports = {
     CloseProxiesRequest: CloseProxiesRequest,
     DescribeListenerRealServersResponse: DescribeListenerRealServersResponse,
     DescribeProxyDetailRequest: DescribeProxyDetailRequest,
-    ModifyTCPListenerAttributeRequest: ModifyTCPListenerAttributeRequest,
+    IPDetail: IPDetail,
+    ProxyStatus: ProxyStatus,
     DeleteDomainRequest: DeleteDomainRequest,
-    OpenSecurityPolicyResponse: OpenSecurityPolicyResponse,
+    CreateFirstLinkSessionRequest: CreateFirstLinkSessionRequest,
     ModifyCertificateAttributesResponse: ModifyCertificateAttributesResponse,
     DescribeSecurityPolicyDetailResponse: DescribeSecurityPolicyDetailResponse,
     CreateHTTPListenerResponse: CreateHTTPListenerResponse,
@@ -10701,6 +11949,7 @@ module.exports = {
     DescribeRealServersResponse: DescribeRealServersResponse,
     ModifyHTTPListenerAttributeResponse: ModifyHTTPListenerAttributeResponse,
     DescribeRealServerStatisticsRequest: DescribeRealServerStatisticsRequest,
+    DeleteFirstLinkSessionRequest: DeleteFirstLinkSessionRequest,
     BindRealServerInfo: BindRealServerInfo,
     DescribeProxyAndStatisticsListenersRequest: DescribeProxyAndStatisticsListenersRequest,
     DescribeAccessRegionsResponse: DescribeAccessRegionsResponse,
@@ -10709,7 +11958,7 @@ module.exports = {
     DescribeDestRegionsResponse: DescribeDestRegionsResponse,
     DescribeDomainErrorPageInfoByIdsResponse: DescribeDomainErrorPageInfoByIdsResponse,
     DescribeProxiesRequest: DescribeProxiesRequest,
-    BindListenerRealServersResponse: BindListenerRealServersResponse,
+    DescribeAccessRegionsByDestRegionResponse: DescribeAccessRegionsByDestRegionResponse,
     ModifyProxyGroupAttributeResponse: ModifyProxyGroupAttributeResponse,
     ListenerInfo: ListenerInfo,
     DescribeUDPListenersResponse: DescribeUDPListenersResponse,
@@ -10721,28 +11970,31 @@ module.exports = {
     DescribeAccessRegionsRequest: DescribeAccessRegionsRequest,
     CreateCertificateRequest: CreateCertificateRequest,
     DescribeCertificatesResponse: DescribeCertificatesResponse,
+    DescribeCustomHeaderRequest: DescribeCustomHeaderRequest,
     DescribeProxyGroupListResponse: DescribeProxyGroupListResponse,
     DescribeDomainErrorPageInfoRequest: DescribeDomainErrorPageInfoRequest,
     HTTPSListener: HTTPSListener,
     DomainAccessRegionDict: DomainAccessRegionDict,
     CloseSecurityPolicyRequest: CloseSecurityPolicyRequest,
     ModifyCertificateAttributesRequest: ModifyCertificateAttributesRequest,
-    TagPair: TagPair,
+    ModifyProxyConfigurationRequest: ModifyProxyConfigurationRequest,
     CreateSecurityRulesRequest: CreateSecurityRulesRequest,
     DescribeCertificatesRequest: DescribeCertificatesRequest,
     DescribeProxiesStatusRequest: DescribeProxiesStatusRequest,
-    ProxyStatus: ProxyStatus,
-    DescribeGroupAndStatisticsProxyResponse: DescribeGroupAndStatisticsProxyResponse,
+    ModifyTCPListenerAttributeRequest: ModifyTCPListenerAttributeRequest,
+    DeleteSecurityPolicyResponse: DeleteSecurityPolicyResponse,
     CreateDomainResponse: CreateDomainResponse,
     ModifyProxiesProjectResponse: ModifyProxiesProjectResponse,
     ModifyDomainRequest: ModifyDomainRequest,
     ModifySecurityRuleRequest: ModifySecurityRuleRequest,
-    NationCountryInnerInfo: NationCountryInnerInfo,
+    CreateCustomHeaderResponse: CreateCustomHeaderResponse,
     DescribeAccessRegionsByDestRegionRequest: DescribeAccessRegionsByDestRegionRequest,
     RealServer: RealServer,
     DescribeRealServersRequest: DescribeRealServersRequest,
     StatisticsDataInfo: StatisticsDataInfo,
+    CreateCustomHeaderRequest: CreateCustomHeaderRequest,
     ProxyGroupInfo: ProxyGroupInfo,
+    Capacity: Capacity,
     CreateProxyGroupDomainResponse: CreateProxyGroupDomainResponse,
     Certificate: Certificate,
     DescribeDomainErrorPageInfoResponse: DescribeDomainErrorPageInfoResponse,
@@ -10757,6 +12009,7 @@ module.exports = {
     RemoveRealServersRequest: RemoveRealServersRequest,
     CreateDomainRequest: CreateDomainRequest,
     CreateRuleRequest: CreateRuleRequest,
+    ProxySimpleInfo: ProxySimpleInfo,
     DeleteSecurityPolicyRequest: DeleteSecurityPolicyRequest,
     HTTPListener: HTTPListener,
     ProxyGroupDetail: ProxyGroupDetail,
@@ -10767,7 +12020,7 @@ module.exports = {
     CloseProxiesResponse: CloseProxiesResponse,
     DeleteCertificateResponse: DeleteCertificateResponse,
     SecurityPolicyRuleIn: SecurityPolicyRuleIn,
-    ProxySimpleInfo: ProxySimpleInfo,
+    DescribeBlackHeaderResponse: DescribeBlackHeaderResponse,
     DescribeDestRegionsRequest: DescribeDestRegionsRequest,
     ModifyRuleAttributeResponse: ModifyRuleAttributeResponse,
     CreateTCPListenersResponse: CreateTCPListenersResponse,
@@ -10777,6 +12030,7 @@ module.exports = {
     SetAuthenticationRequest: SetAuthenticationRequest,
     InquiryPriceCreateProxyResponse: InquiryPriceCreateProxyResponse,
     NewRealServer: NewRealServer,
+    DescribeFirstLinkSessionResponse: DescribeFirstLinkSessionResponse,
     DescribeHTTPListenersResponse: DescribeHTTPListenersResponse,
     HttpHeaderParam: HttpHeaderParam,
     DescribeRealServerStatisticsResponse: DescribeRealServerStatisticsResponse,
@@ -10789,32 +12043,36 @@ module.exports = {
     AccessRegionDetial: AccessRegionDetial,
     DescribeProxyGroupListRequest: DescribeProxyGroupListRequest,
     SecurityPolicyRuleOut: SecurityPolicyRuleOut,
+    CreateFirstLinkSessionResponse: CreateFirstLinkSessionResponse,
     BindRealServer: BindRealServer,
     GroupStatisticsInfo: GroupStatisticsInfo,
+    TagPair: TagPair,
     CreateProxyGroupResponse: CreateProxyGroupResponse,
     CreateHTTPSListenerResponse: CreateHTTPSListenerResponse,
     DeleteRuleResponse: DeleteRuleResponse,
+    DescribeFirstLinkSessionRequest: DescribeFirstLinkSessionRequest,
     BindRuleRealServersResponse: BindRuleRealServersResponse,
     DescribeGroupAndStatisticsProxyRequest: DescribeGroupAndStatisticsProxyRequest,
+    SrcAddressInfo: SrcAddressInfo,
     ModifyUDPListenerAttributeRequest: ModifyUDPListenerAttributeRequest,
     DeleteSecurityRulesResponse: DeleteSecurityRulesResponse,
     ModifyTCPListenerAttributeResponse: ModifyTCPListenerAttributeResponse,
     CountryAreaMap: CountryAreaMap,
     MetricStatisticsInfo: MetricStatisticsInfo,
     DescribeProxyDetailResponse: DescribeProxyDetailResponse,
-    DeleteSecurityPolicyResponse: DeleteSecurityPolicyResponse,
+    DescribeGroupAndStatisticsProxyResponse: DescribeGroupAndStatisticsProxyResponse,
     CreateUDPListenersResponse: CreateUDPListenersResponse,
     ModifyHTTPSListenerAttributeRequest: ModifyHTTPSListenerAttributeRequest,
     DescribeProxyStatisticsRequest: DescribeProxyStatisticsRequest,
     DomainRuleSet: DomainRuleSet,
     DescribeTCPListenersRequest: DescribeTCPListenersRequest,
     CreateCertificateResponse: CreateCertificateResponse,
-    ModifyGroupDomainConfigResponse: ModifyGroupDomainConfigResponse,
+    DescribeBlackHeaderRequest: DescribeBlackHeaderRequest,
     DescribeProxyStatisticsResponse: DescribeProxyStatisticsResponse,
     DescribeRealServersStatusResponse: DescribeRealServersStatusResponse,
     ModifyProxyGroupAttributeRequest: ModifyProxyGroupAttributeRequest,
     CloseProxyGroupResponse: CloseProxyGroupResponse,
-    DeleteDomainErrorPageInfoResponse: DeleteDomainErrorPageInfoResponse,
+    DeleteFirstLinkSessionResponse: DeleteFirstLinkSessionResponse,
     ModifyProxiesAttributeResponse: ModifyProxiesAttributeResponse,
     DescribeDomainErrorPageInfoByIdsRequest: DescribeDomainErrorPageInfoByIdsRequest,
     CheckProxyCreateRequest: CheckProxyCreateRequest,
@@ -10827,6 +12085,7 @@ module.exports = {
     DeleteSecurityRulesRequest: DeleteSecurityRulesRequest,
     DescribeCertificateDetailResponse: DescribeCertificateDetailResponse,
     OpenProxyGroupResponse: OpenProxyGroupResponse,
+    NationCountryInnerInfo: NationCountryInnerInfo,
     ProxyIdDict: ProxyIdDict,
     Filter: Filter,
     CreateProxyResponse: CreateProxyResponse,
@@ -10834,10 +12093,12 @@ module.exports = {
     InquiryPriceCreateProxyRequest: InquiryPriceCreateProxyRequest,
     DescribeProxyGroupDetailsResponse: DescribeProxyGroupDetailsResponse,
     OpenProxyGroupRequest: OpenProxyGroupRequest,
+    DeviceInfo: DeviceInfo,
     UDPListener: UDPListener,
     ProxyInfo: ProxyInfo,
     RemoveRealServersResponse: RemoveRealServersResponse,
     DescribeRulesByRuleIdsRequest: DescribeRulesByRuleIdsRequest,
+    OpenSecurityPolicyResponse: OpenSecurityPolicyResponse,
     RealServerBindSetReq: RealServerBindSetReq,
     CloseProxyGroupRequest: CloseProxyGroupRequest,
     OpenProxiesResponse: OpenProxiesResponse,

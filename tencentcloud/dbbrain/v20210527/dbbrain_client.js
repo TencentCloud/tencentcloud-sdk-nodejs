@@ -17,88 +17,123 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const SchemaSpaceTimeSeries = models.SchemaSpaceTimeSeries;
-const DescribeSlowLogUserHostStatsRequest = models.DescribeSlowLogUserHostStatsRequest;
-const DescribeSlowLogTimeSeriesStatsRequest = models.DescribeSlowLogTimeSeriesStatsRequest;
-const DescribeTopSpaceSchemasResponse = models.DescribeTopSpaceSchemasResponse;
-const TimeSlice = models.TimeSlice;
-const HealthScoreInfo = models.HealthScoreInfo;
-const DescribeTopSpaceTableTimeSeriesResponse = models.DescribeTopSpaceTableTimeSeriesResponse;
-const CreateSchedulerMailProfileRequest = models.CreateSchedulerMailProfileRequest;
-const ContactItem = models.ContactItem;
-const DescribeHealthScoreResponse = models.DescribeHealthScoreResponse;
-const DescribeDBDiagHistoryResponse = models.DescribeDBDiagHistoryResponse;
-const ScoreItem = models.ScoreItem;
-const DescribeDiagDBInstancesRequest = models.DescribeDiagDBInstancesRequest;
-const DescribeDBSpaceStatusRequest = models.DescribeDBSpaceStatusRequest;
-const DescribeAllUserContactResponse = models.DescribeAllUserContactResponse;
-const DescribeUserSqlAdviceResponse = models.DescribeUserSqlAdviceResponse;
-const DescribeTopSpaceSchemasRequest = models.DescribeTopSpaceSchemasRequest;
-const ModifyDiagDBInstanceConfRequest = models.ModifyDiagDBInstanceConfRequest;
-const MonitorMetric = models.MonitorMetric;
+const RedisKeySpaceData = models.RedisKeySpaceData;
+const HealthReportTask = models.HealthReportTask;
 const CreateDBDiagReportTaskRequest = models.CreateDBDiagReportTaskRequest;
-const MonitorFloatMetric = models.MonitorFloatMetric;
-const DescribeSecurityAuditLogDownloadUrlsRequest = models.DescribeSecurityAuditLogDownloadUrlsRequest;
-const DescribeSecurityAuditLogExportTasksRequest = models.DescribeSecurityAuditLogExportTasksRequest;
-const AddUserContactRequest = models.AddUserContactRequest;
-const DescribeAllUserGroupResponse = models.DescribeAllUserGroupResponse;
-const InstanceBasicInfo = models.InstanceBasicInfo;
-const SchemaItem = models.SchemaItem;
-const CreateMailProfileResponse = models.CreateMailProfileResponse;
-const DescribeTopSpaceTablesRequest = models.DescribeTopSpaceTablesRequest;
-const ProfileInfo = models.ProfileInfo;
-const DescribeAllUserContactRequest = models.DescribeAllUserContactRequest;
-const DescribeDBDiagEventRequest = models.DescribeDBDiagEventRequest;
-const CreateSecurityAuditLogExportTaskRequest = models.CreateSecurityAuditLogExportTaskRequest;
-const DescribeDBSpaceStatusResponse = models.DescribeDBSpaceStatusResponse;
-const DiagHistoryEventItem = models.DiagHistoryEventItem;
-const DescribeDBDiagEventResponse = models.DescribeDBDiagEventResponse;
-const DescribeDBDiagHistoryRequest = models.DescribeDBDiagHistoryRequest;
 const TableSpaceTimeSeries = models.TableSpaceTimeSeries;
-const GroupItem = models.GroupItem;
-const InstanceInfo = models.InstanceInfo;
-const DescribeSlowLogUserHostStatsResponse = models.DescribeSlowLogUserHostStatsResponse;
+const DescribeTopSpaceTablesRequest = models.DescribeTopSpaceTablesRequest;
+const ScoreItem = models.ScoreItem;
+const InstanceConfs = models.InstanceConfs;
+const CreateSecurityAuditLogExportTaskRequest = models.CreateSecurityAuditLogExportTaskRequest;
+const DescribeDBDiagEventResponse = models.DescribeDBDiagEventResponse;
+const DescribeDBDiagEventsResponse = models.DescribeDBDiagEventsResponse;
 const DescribeDBDiagReportTasksResponse = models.DescribeDBDiagReportTasksResponse;
 const AddUserContactResponse = models.AddUserContactResponse;
-const HealthReportTask = models.HealthReportTask;
-const DescribeDBDiagReportTasksRequest = models.DescribeDBDiagReportTasksRequest;
-const CreateDBDiagReportTaskResponse = models.CreateDBDiagReportTaskResponse;
-const MonitorMetricSeriesData = models.MonitorMetricSeriesData;
-const ModifyDiagDBInstanceConfResponse = models.ModifyDiagDBInstanceConfResponse;
-const CreateDBDiagReportUrlResponse = models.CreateDBDiagReportUrlResponse;
-const ScoreDetail = models.ScoreDetail;
+const CancelKillTaskResponse = models.CancelKillTaskResponse;
+const DescribeRedisTopBigKeysResponse = models.DescribeRedisTopBigKeysResponse;
+const DescribeSqlTemplateRequest = models.DescribeSqlTemplateRequest;
 const DescribeTopSpaceSchemaTimeSeriesResponse = models.DescribeTopSpaceSchemaTimeSeriesResponse;
-const DeleteSecurityAuditLogExportTasksRequest = models.DeleteSecurityAuditLogExportTasksRequest;
-const CreateSchedulerMailProfileResponse = models.CreateSchedulerMailProfileResponse;
 const SlowLogTopSqlItem = models.SlowLogTopSqlItem;
+const DescribeNoPrimaryKeyTablesResponse = models.DescribeNoPrimaryKeyTablesResponse;
+const DiagHistoryEventItem = models.DiagHistoryEventItem;
+const DescribeProxySessionKillTasksRequest = models.DescribeProxySessionKillTasksRequest;
+const DescribeMySqlProcessListResponse = models.DescribeMySqlProcessListResponse;
+const HealthStatus = models.HealthStatus;
+const DescribeTopSpaceTablesResponse = models.DescribeTopSpaceTablesResponse;
+const TaskInfo = models.TaskInfo;
+const ModifySqlFiltersResponse = models.ModifySqlFiltersResponse;
+const KillMySqlThreadsResponse = models.KillMySqlThreadsResponse;
+const CreateSchedulerMailProfileRequest = models.CreateSchedulerMailProfileRequest;
+const ContactItem = models.ContactItem;
+const DescribeDBSpaceStatusRequest = models.DescribeDBSpaceStatusRequest;
+const TimeSlice = models.TimeSlice;
+const ModifyDiagDBInstanceConfRequest = models.ModifyDiagDBInstanceConfRequest;
+const DescribeSecurityAuditLogDownloadUrlsRequest = models.DescribeSecurityAuditLogDownloadUrlsRequest;
+const CreateDBDiagReportTaskResponse = models.CreateDBDiagReportTaskResponse;
+const CreateMailProfileResponse = models.CreateMailProfileResponse;
+const DescribeSlowLogTimeSeriesStatsRequest = models.DescribeSlowLogTimeSeriesStatsRequest;
+const CancelKillTaskRequest = models.CancelKillTaskRequest;
+const MySqlProcess = models.MySqlProcess;
+const DescribeDBDiagHistoryRequest = models.DescribeDBDiagHistoryRequest;
+const CreateKillTaskResponse = models.CreateKillTaskResponse;
+const DeleteSqlFiltersResponse = models.DeleteSqlFiltersResponse;
+const DescribeDBDiagEventsRequest = models.DescribeDBDiagEventsRequest;
+const CreateDBDiagReportUrlResponse = models.CreateDBDiagReportUrlResponse;
+const CreateKillTaskRequest = models.CreateKillTaskRequest;
 const SlowLogHost = models.SlowLogHost;
-const DescribeSlowLogTopSqlsResponse = models.DescribeSlowLogTopSqlsResponse;
-const SecLogExportTaskInfo = models.SecLogExportTaskInfo;
 const CreateMailProfileRequest = models.CreateMailProfileRequest;
-const DescribeTopSpaceSchemaTimeSeriesRequest = models.DescribeTopSpaceSchemaTimeSeriesRequest;
 const MonitorFloatMetricSeriesData = models.MonitorFloatMetricSeriesData;
 const MailConfiguration = models.MailConfiguration;
-const DescribeTopSpaceTableTimeSeriesRequest = models.DescribeTopSpaceTableTimeSeriesRequest;
-const DescribeSlowLogTopSqlsRequest = models.DescribeSlowLogTopSqlsRequest;
-const DescribeMailProfileResponse = models.DescribeMailProfileResponse;
+const VerifyUserAccountRequest = models.VerifyUserAccountRequest;
+const DescribeSlowLogUserHostStatsResponse = models.DescribeSlowLogUserHostStatsResponse;
 const TableSpaceData = models.TableSpaceData;
-const DescribeSecurityAuditLogDownloadUrlsResponse = models.DescribeSecurityAuditLogDownloadUrlsResponse;
 const EventInfo = models.EventInfo;
 const DescribeMailProfileRequest = models.DescribeMailProfileRequest;
-const DescribeHealthScoreRequest = models.DescribeHealthScoreRequest;
 const DeleteSecurityAuditLogExportTasksResponse = models.DeleteSecurityAuditLogExportTasksResponse;
-const IssueTypeInfo = models.IssueTypeInfo;
-const InstanceConfs = models.InstanceConfs;
-const DescribeDiagDBInstancesResponse = models.DescribeDiagDBInstancesResponse;
-const HealthStatus = models.HealthStatus;
-const DescribeUserSqlAdviceRequest = models.DescribeUserSqlAdviceRequest;
-const DescribeAllUserGroupRequest = models.DescribeAllUserGroupRequest;
+const KillMySqlThreadsRequest = models.KillMySqlThreadsRequest;
+const DescribeSqlFiltersResponse = models.DescribeSqlFiltersResponse;
 const CreateDBDiagReportUrlRequest = models.CreateDBDiagReportUrlRequest;
-const DescribeSlowLogTimeSeriesStatsResponse = models.DescribeSlowLogTimeSeriesStatsResponse;
 const DescribeSecurityAuditLogExportTasksResponse = models.DescribeSecurityAuditLogExportTasksResponse;
-const CreateSecurityAuditLogExportTaskResponse = models.CreateSecurityAuditLogExportTaskResponse;
+const DescribeSqlTemplateResponse = models.DescribeSqlTemplateResponse;
+const HealthScoreInfo = models.HealthScoreInfo;
+const DescribeTopSpaceTableTimeSeriesResponse = models.DescribeTopSpaceTableTimeSeriesResponse;
+const DescribeDBDiagHistoryResponse = models.DescribeDBDiagHistoryResponse;
+const DescribeDBDiagEventRequest = models.DescribeDBDiagEventRequest;
+const ModifySqlFiltersRequest = models.ModifySqlFiltersRequest;
+const DescribeAllUserContactResponse = models.DescribeAllUserContactResponse;
+const MonitorMetric = models.MonitorMetric;
+const ProfileInfo = models.ProfileInfo;
 const UserProfile = models.UserProfile;
+const AddUserContactRequest = models.AddUserContactRequest;
+const CreateSqlFilterRequest = models.CreateSqlFilterRequest;
+const InstanceBasicInfo = models.InstanceBasicInfo;
 const SchemaSpaceData = models.SchemaSpaceData;
-const DescribeTopSpaceTablesResponse = models.DescribeTopSpaceTablesResponse;
+const DescribeAllUserContactRequest = models.DescribeAllUserContactRequest;
+const DescribeDiagDBInstancesRequest = models.DescribeDiagDBInstancesRequest;
+const DescribeNoPrimaryKeyTablesRequest = models.DescribeNoPrimaryKeyTablesRequest;
+const InstanceInfo = models.InstanceInfo;
+const CreateSqlFilterResponse = models.CreateSqlFilterResponse;
+const VerifyUserAccountResponse = models.VerifyUserAccountResponse;
+const DescribeSqlFiltersRequest = models.DescribeSqlFiltersRequest;
+const DescribeSecurityAuditLogExportTasksRequest = models.DescribeSecurityAuditLogExportTasksRequest;
+const DeleteSecurityAuditLogExportTasksRequest = models.DeleteSecurityAuditLogExportTasksRequest;
+const CreateSchedulerMailProfileResponse = models.CreateSchedulerMailProfileResponse;
+const DescribeTopSpaceSchemaTimeSeriesRequest = models.DescribeTopSpaceSchemaTimeSeriesRequest;
+const DescribeSlowLogTopSqlsRequest = models.DescribeSlowLogTopSqlsRequest;
+const DescribeMailProfileResponse = models.DescribeMailProfileResponse;
+const DescribeRedisTopBigKeysRequest = models.DescribeRedisTopBigKeysRequest;
+const DescribeHealthScoreRequest = models.DescribeHealthScoreRequest;
+const IssueTypeInfo = models.IssueTypeInfo;
+const DescribeDiagDBInstancesResponse = models.DescribeDiagDBInstancesResponse;
+const DescribeAllUserGroupRequest = models.DescribeAllUserGroupRequest;
+const CreateProxySessionKillTaskRequest = models.CreateProxySessionKillTaskRequest;
+const CreateSecurityAuditLogExportTaskResponse = models.CreateSecurityAuditLogExportTaskResponse;
+const SchemaItem = models.SchemaItem;
+const DescribeSlowLogUserHostStatsRequest = models.DescribeSlowLogUserHostStatsRequest;
+const DescribeTopSpaceSchemasResponse = models.DescribeTopSpaceSchemasResponse;
+const CreateProxySessionKillTaskResponse = models.CreateProxySessionKillTaskResponse;
+const DescribeSlowLogTimeSeriesStatsResponse = models.DescribeSlowLogTimeSeriesStatsResponse;
+const MonitorFloatMetric = models.MonitorFloatMetric;
+const DescribeAllUserGroupResponse = models.DescribeAllUserGroupResponse;
+const ModifyDiagDBInstanceConfResponse = models.ModifyDiagDBInstanceConfResponse;
+const DescribeUserSqlAdviceResponse = models.DescribeUserSqlAdviceResponse;
+const DescribeDBSpaceStatusResponse = models.DescribeDBSpaceStatusResponse;
+const SQLFilter = models.SQLFilter;
+const GroupItem = models.GroupItem;
+const DescribeTopSpaceTableTimeSeriesRequest = models.DescribeTopSpaceTableTimeSeriesRequest;
+const DescribeDBDiagReportTasksRequest = models.DescribeDBDiagReportTasksRequest;
+const MonitorMetricSeriesData = models.MonitorMetricSeriesData;
+const SecLogExportTaskInfo = models.SecLogExportTaskInfo;
+const DescribeHealthScoreResponse = models.DescribeHealthScoreResponse;
+const ScoreDetail = models.ScoreDetail;
+const DescribeTopSpaceSchemasRequest = models.DescribeTopSpaceSchemasRequest;
+const DescribeSlowLogTopSqlsResponse = models.DescribeSlowLogTopSqlsResponse;
+const DeleteSqlFiltersRequest = models.DeleteSqlFiltersRequest;
+const DescribeUserSqlAdviceRequest = models.DescribeUserSqlAdviceRequest;
+const Table = models.Table;
+const DescribeMySqlProcessListRequest = models.DescribeMySqlProcessListRequest;
+const DescribeSecurityAuditLogDownloadUrlsResponse = models.DescribeSecurityAuditLogDownloadUrlsResponse;
+const DescribeProxySessionKillTasksResponse = models.DescribeProxySessionKillTasksResponse;
 
 
 /**
@@ -123,7 +158,7 @@ class DbbrainClient extends AbstractClient {
     }
 
     /**
-     * 获取发送邮件的配置， 包括数据库巡检的邮件配置以及定期生成健康报告的邮件发送配置。Region统一选择广州。
+     * 获取发送邮件的配置， 包括数据库巡检的邮件配置以及定期生成健康报告的邮件发送配置。
      * @param {DescribeMailProfileRequest} req
      * @param {function(string, DescribeMailProfileResponse):void} cb
      * @public
@@ -145,6 +180,17 @@ class DbbrainClient extends AbstractClient {
     }
 
     /**
+     * 查询SQL模板。
+     * @param {DescribeSqlTemplateRequest} req
+     * @param {function(string, DescribeSqlTemplateResponse):void} cb
+     * @public
+     */
+    DescribeSqlTemplate(req, cb) {
+        let resp = new DescribeSqlTemplateResponse();
+        this.request("DescribeSqlTemplate", req, resp, cb);
+    }
+
+    /**
      * 获取实例Top库的实时空间统计信息，默认返回按大小排序。
      * @param {DescribeTopSpaceSchemasRequest} req
      * @param {function(string, DescribeTopSpaceSchemasResponse):void} cb
@@ -153,6 +199,28 @@ class DbbrainClient extends AbstractClient {
     DescribeTopSpaceSchemas(req, cb) {
         let resp = new DescribeTopSpaceSchemasResponse();
         this.request("DescribeTopSpaceSchemas", req, resp, cb);
+    }
+
+    /**
+     * 查询关系型数据库的实时线程列表。
+     * @param {DescribeMySqlProcessListRequest} req
+     * @param {function(string, DescribeMySqlProcessListResponse):void} cb
+     * @public
+     */
+    DescribeMySqlProcessList(req, cb) {
+        let resp = new DescribeMySqlProcessListResponse();
+        this.request("DescribeMySqlProcessList", req, resp, cb);
+    }
+
+    /**
+     * 创建邮件配置。其中入参ProfileType表示所创建配置的类型，ProfileType 取值包括：dbScan_mail_configuration（数据库巡检邮件配置）、scheduler_mail_configuration（定期生成健康报告的邮件发送配置）。Region统一选择广州，和实例所属地域无关。
+     * @param {CreateMailProfileRequest} req
+     * @param {function(string, CreateMailProfileResponse):void} cb
+     * @public
+     */
+    CreateMailProfile(req, cb) {
+        let resp = new CreateMailProfileResponse();
+        this.request("CreateMailProfile", req, resp, cb);
     }
 
     /**
@@ -178,6 +246,17 @@ class DbbrainClient extends AbstractClient {
     }
 
     /**
+     * 获取指定时间段内的诊断事件列表，支持依据风险等级、实例ID等条件过滤。
+     * @param {DescribeDBDiagEventsRequest} req
+     * @param {function(string, DescribeDBDiagEventsResponse):void} cb
+     * @public
+     */
+    DescribeDBDiagEvents(req, cb) {
+        let resp = new DescribeDBDiagEventsResponse();
+        this.request("DescribeDBDiagEvents", req, resp, cb);
+    }
+
+    /**
      * 获取慢日志统计柱状图。
      * @param {DescribeSlowLogTimeSeriesStatsRequest} req
      * @param {function(string, DescribeSlowLogTimeSeriesStatsResponse):void} cb
@@ -200,14 +279,25 @@ class DbbrainClient extends AbstractClient {
     }
 
     /**
-     * 获取实例Top表的实时空间统计信息，默认返回按大小排序。
-     * @param {DescribeTopSpaceTablesRequest} req
-     * @param {function(string, DescribeTopSpaceTablesResponse):void} cb
+     * 按照Sql模板+schema的聚合方式，统计排序指定时间段内的top慢sql。
+     * @param {DescribeSlowLogTopSqlsRequest} req
+     * @param {function(string, DescribeSlowLogTopSqlsResponse):void} cb
      * @public
      */
-    DescribeTopSpaceTables(req, cb) {
-        let resp = new DescribeTopSpaceTablesResponse();
-        this.request("DescribeTopSpaceTables", req, resp, cb);
+    DescribeSlowLogTopSqls(req, cb) {
+        let resp = new DescribeSlowLogTopSqlsResponse();
+        this.request("DescribeSlowLogTopSqls", req, resp, cb);
+    }
+
+    /**
+     * 创建实例SQL限流任务。
+     * @param {CreateSqlFilterRequest} req
+     * @param {function(string, CreateSqlFilterResponse):void} cb
+     * @public
+     */
+    CreateSqlFilter(req, cb) {
+        let resp = new CreateSqlFilterResponse();
+        this.request("CreateSqlFilter", req, resp, cb);
     }
 
     /**
@@ -222,14 +312,14 @@ class DbbrainClient extends AbstractClient {
     }
 
     /**
-     * 创建邮件配置。其中入参ProfileType表示所创建配置的类型，ProfileType 取值包括：dbScan_mail_configuration（数据库巡检邮件配置）、scheduler_mail_configuration（定期生成健康报告的邮件发送配置）。Region统一选择广州，和实例所属地域无关。
-     * @param {CreateMailProfileRequest} req
-     * @param {function(string, CreateMailProfileResponse):void} cb
+     * 创建中止所有代理节点连接会话的异步任务。当前仅支持 Redis。得到的返回值为异步任务 id，可以作为参数传入接口 DescribeProxySessionKillTasks 查询kill会话任务执行状态。
+     * @param {CreateProxySessionKillTaskRequest} req
+     * @param {function(string, CreateProxySessionKillTaskResponse):void} cb
      * @public
      */
-    CreateMailProfile(req, cb) {
-        let resp = new CreateMailProfileResponse();
-        this.request("CreateMailProfile", req, resp, cb);
+    CreateProxySessionKillTask(req, cb) {
+        let resp = new CreateProxySessionKillTaskResponse();
+        this.request("CreateProxySessionKillTask", req, resp, cb);
     }
 
     /**
@@ -244,6 +334,17 @@ class DbbrainClient extends AbstractClient {
     }
 
     /**
+     * 终止中断会话任务。
+     * @param {CancelKillTaskRequest} req
+     * @param {function(string, CancelKillTaskResponse):void} cb
+     * @public
+     */
+    CancelKillTask(req, cb) {
+        let resp = new CancelKillTaskResponse();
+        this.request("CancelKillTask", req, resp, cb);
+    }
+
+    /**
      * 创建安全审计日志导出任务。
      * @param {CreateSecurityAuditLogExportTaskRequest} req
      * @param {function(string, CreateSecurityAuditLogExportTaskResponse):void} cb
@@ -252,6 +353,17 @@ class DbbrainClient extends AbstractClient {
     CreateSecurityAuditLogExportTask(req, cb) {
         let resp = new CreateSecurityAuditLogExportTaskResponse();
         this.request("CreateSecurityAuditLogExportTask", req, resp, cb);
+    }
+
+    /**
+     * 获取SQL优化建议。【产品用户回馈，此接口限免开放，后续将并入dbbrain专业版】
+     * @param {DescribeUserSqlAdviceRequest} req
+     * @param {function(string, DescribeUserSqlAdviceResponse):void} cb
+     * @public
+     */
+    DescribeUserSqlAdvice(req, cb) {
+        let resp = new DescribeUserSqlAdviceResponse();
+        this.request("DescribeUserSqlAdvice", req, resp, cb);
     }
 
     /**
@@ -266,14 +378,14 @@ class DbbrainClient extends AbstractClient {
     }
 
     /**
-     * 按照Sql模板+schema的聚合方式，统计排序指定时间段内的top慢sql。
-     * @param {DescribeSlowLogTopSqlsRequest} req
-     * @param {function(string, DescribeSlowLogTopSqlsResponse):void} cb
+     * 查询redis实例大key列表。
+     * @param {DescribeRedisTopBigKeysRequest} req
+     * @param {function(string, DescribeRedisTopBigKeysResponse):void} cb
      * @public
      */
-    DescribeSlowLogTopSqls(req, cb) {
-        let resp = new DescribeSlowLogTopSqlsResponse();
-        this.request("DescribeSlowLogTopSqls", req, resp, cb);
+    DescribeRedisTopBigKeys(req, cb) {
+        let resp = new DescribeRedisTopBigKeysResponse();
+        this.request("DescribeRedisTopBigKeys", req, resp, cb);
     }
 
     /**
@@ -321,6 +433,17 @@ class DbbrainClient extends AbstractClient {
     }
 
     /**
+     * 更改实例限流任务状态，目前仅用于终止限流。
+     * @param {ModifySqlFiltersRequest} req
+     * @param {function(string, ModifySqlFiltersResponse):void} cb
+     * @public
+     */
+    ModifySqlFilters(req, cb) {
+        let resp = new ModifySqlFiltersResponse();
+        this.request("ModifySqlFilters", req, resp, cb);
+    }
+
+    /**
      * 创建健康报告，并可以选择是否发送邮件。
      * @param {CreateDBDiagReportTaskRequest} req
      * @param {function(string, CreateDBDiagReportTaskResponse):void} cb
@@ -343,7 +466,18 @@ class DbbrainClient extends AbstractClient {
     }
 
     /**
-     * 添加邮件接收联系人的姓名， 邮件地址，返回值为添加成功的联系人id。Region统一选择广州。
+     * 删除实例SQL限流任务。
+     * @param {DeleteSqlFiltersRequest} req
+     * @param {function(string, DeleteSqlFiltersResponse):void} cb
+     * @public
+     */
+    DeleteSqlFilters(req, cb) {
+        let resp = new DeleteSqlFiltersResponse();
+        this.request("DeleteSqlFilters", req, resp, cb);
+    }
+
+    /**
+     * 添加邮件接收联系人的姓名， 邮件地址，返回值为添加成功的联系人id。
      * @param {AddUserContactRequest} req
      * @param {function(string, AddUserContactResponse):void} cb
      * @public
@@ -365,14 +499,47 @@ class DbbrainClient extends AbstractClient {
     }
 
     /**
-     * 获取SQL优化建议。
-     * @param {DescribeUserSqlAdviceRequest} req
-     * @param {function(string, DescribeUserSqlAdviceResponse):void} cb
+     * 创建中断会话的任务。
+     * @param {CreateKillTaskRequest} req
+     * @param {function(string, CreateKillTaskResponse):void} cb
      * @public
      */
-    DescribeUserSqlAdvice(req, cb) {
-        let resp = new DescribeUserSqlAdviceResponse();
-        this.request("DescribeUserSqlAdvice", req, resp, cb);
+    CreateKillTask(req, cb) {
+        let resp = new CreateKillTaskResponse();
+        this.request("CreateKillTask", req, resp, cb);
+    }
+
+    /**
+     * 查询实例无主键表。
+     * @param {DescribeNoPrimaryKeyTablesRequest} req
+     * @param {function(string, DescribeNoPrimaryKeyTablesResponse):void} cb
+     * @public
+     */
+    DescribeNoPrimaryKeyTables(req, cb) {
+        let resp = new DescribeNoPrimaryKeyTablesResponse();
+        this.request("DescribeNoPrimaryKeyTables", req, resp, cb);
+    }
+
+    /**
+     * 获取实例Top表的实时空间统计信息，默认返回按大小排序。
+     * @param {DescribeTopSpaceTablesRequest} req
+     * @param {function(string, DescribeTopSpaceTablesResponse):void} cb
+     * @public
+     */
+    DescribeTopSpaceTables(req, cb) {
+        let resp = new DescribeTopSpaceTablesResponse();
+        this.request("DescribeTopSpaceTables", req, resp, cb);
+    }
+
+    /**
+     * 查询实例SQL限流任务列表。
+     * @param {DescribeSqlFiltersRequest} req
+     * @param {function(string, DescribeSqlFiltersResponse):void} cb
+     * @public
+     */
+    DescribeSqlFilters(req, cb) {
+        let resp = new DescribeSqlFiltersResponse();
+        this.request("DescribeSqlFilters", req, resp, cb);
     }
 
     /**
@@ -398,6 +565,17 @@ class DbbrainClient extends AbstractClient {
     }
 
     /**
+     * 根据会话ID中断当前会话，该接口分为两次提交：第一次为预提交阶段，Stage为"Prepare"，得到的返回值包含SqlExecId；第二次为确认提交， Stage为"Commit"， 将SqlExecId的值作为参数传入，最终终止会话进程。
+     * @param {KillMySqlThreadsRequest} req
+     * @param {function(string, KillMySqlThreadsResponse):void} cb
+     * @public
+     */
+    KillMySqlThreads(req, cb) {
+        let resp = new KillMySqlThreadsResponse();
+        this.request("KillMySqlThreads", req, resp, cb);
+    }
+
+    /**
      * 创建健康报告的浏览地址。
      * @param {CreateDBDiagReportUrlRequest} req
      * @param {function(string, CreateDBDiagReportUrlResponse):void} cb
@@ -406,6 +584,28 @@ class DbbrainClient extends AbstractClient {
     CreateDBDiagReportUrl(req, cb) {
         let resp = new CreateDBDiagReportUrlResponse();
         this.request("CreateDBDiagReportUrl", req, resp, cb);
+    }
+
+    /**
+     * 验证用户数据库账号权限，获取会话token。
+     * @param {VerifyUserAccountRequest} req
+     * @param {function(string, VerifyUserAccountResponse):void} cb
+     * @public
+     */
+    VerifyUserAccount(req, cb) {
+        let resp = new VerifyUserAccountResponse();
+        this.request("VerifyUserAccount", req, resp, cb);
+    }
+
+    /**
+     * 用于查询 redis 执行 kill 会话任务后代理节点的执行结果，入参异步任务 ID 从接口 CreateProxySessionKillTask 调用成功后取得。当前 product 只支持：redis。
+     * @param {DescribeProxySessionKillTasksRequest} req
+     * @param {function(string, DescribeProxySessionKillTasksResponse):void} cb
+     * @public
+     */
+    DescribeProxySessionKillTasks(req, cb) {
+        let resp = new DescribeProxySessionKillTasksResponse();
+        this.request("DescribeProxySessionKillTasks", req, resp, cb);
     }
 
 

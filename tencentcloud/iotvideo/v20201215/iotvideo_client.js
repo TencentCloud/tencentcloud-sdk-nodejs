@@ -18,29 +18,39 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const DescribeCloudStorageDateRequest = models.DescribeCloudStorageDateRequest;
 const CloudStorageTimeData = models.CloudStorageTimeData;
+const RetryDeviceFirmwareTaskRequest = models.RetryDeviceFirmwareTaskRequest;
 const CreateCloudStorageRequest = models.CreateCloudStorageRequest;
 const VideoBatch = models.VideoBatch;
 const ImportModelDefinitionResponse = models.ImportModelDefinitionResponse;
-const DescribeModelDefinitionResponse = models.DescribeModelDefinitionResponse;
+const ApplyAIModelRequest = models.ApplyAIModelRequest;
 const CreateBatchRequest = models.CreateBatchRequest;
+const ModifyProductDynamicRegisterResponse = models.ModifyProductDynamicRegisterResponse;
+const CancelAIModelApplicationResponse = models.CancelAIModelApplicationResponse;
 const DescribeCloudStorageTimeResponse = models.DescribeCloudStorageTimeResponse;
+const DescribeDeviceStatusLogResponse = models.DescribeDeviceStatusLogResponse;
+const ReportAliveDeviceRequest = models.ReportAliveDeviceRequest;
 const DescribeProductsRequest = models.DescribeProductsRequest;
-const DescribeDeviceEventHistoryResponse = models.DescribeDeviceEventHistoryResponse;
+const DescribeAIModelChannelResponse = models.DescribeAIModelChannelResponse;
 const DescribeDeviceActionHistoryRequest = models.DescribeDeviceActionHistoryRequest;
+const ModifyDataForwardRequest = models.ModifyDataForwardRequest;
 const DescribeDevicesResponse = models.DescribeDevicesResponse;
 const ModifyProductResponse = models.ModifyProductResponse;
 const ModifyProductRequest = models.ModifyProductRequest;
 const ModifyModelDefinitionRequest = models.ModifyModelDefinitionRequest;
 const DescribeBatchsResponse = models.DescribeBatchsResponse;
+const CancelAIModelApplicationRequest = models.CancelAIModelApplicationRequest;
 const TransferCloudStorageResponse = models.TransferCloudStorageResponse;
 const DescribeForwardRuleResponse = models.DescribeForwardRuleResponse;
+const ModifyDeviceLogLevelRequest = models.ModifyDeviceLogLevelRequest;
 const DescribeBatchRequest = models.DescribeBatchRequest;
-const CloudStorageTimeInfo = models.CloudStorageTimeInfo;
+const DescribeForwardRuleRequest = models.DescribeForwardRuleRequest;
 const ModifyDeviceRequest = models.ModifyDeviceRequest;
+const CreateCOSCredentialsResponse = models.CreateCOSCredentialsResponse;
 const ProductModelDefinition = models.ProductModelDefinition;
 const ActionHistory = models.ActionHistory;
-const DescribeFirmwareTaskStatisticsResponse = models.DescribeFirmwareTaskStatisticsResponse;
+const CreateDataForwardResponse = models.CreateDataForwardResponse;
 const DescribeFirmwareRequest = models.DescribeFirmwareRequest;
+const DescribeCloudStorageUsersResponse = models.DescribeCloudStorageUsersResponse;
 const DescribeProductRequest = models.DescribeProductRequest;
 const DescribeProductsResponse = models.DescribeProductsResponse;
 const CheckForwardAuthRequest = models.CheckForwardAuthRequest;
@@ -48,47 +58,66 @@ const DescribeDeviceDataRequest = models.DescribeDeviceDataRequest;
 const CreateBatchResponse = models.CreateBatchResponse;
 const DescribeDeviceActionHistoryResponse = models.DescribeDeviceActionHistoryResponse;
 const GetAllFirmwareVersionRequest = models.GetAllFirmwareVersionRequest;
+const CreateCOSCredentialsRequest = models.CreateCOSCredentialsRequest;
 const DeviceCommLogItem = models.DeviceCommLogItem;
 const DeviceUpdateStatus = models.DeviceUpdateStatus;
+const DescribeDataForwardListResponse = models.DescribeDataForwardListResponse;
 const DeleteFirmwareResponse = models.DeleteFirmwareResponse;
 const CreateForwardRuleResponse = models.CreateForwardRuleResponse;
 const BatchUpdateFirmwareResponse = models.BatchUpdateFirmwareResponse;
+const DescribeModelDefinitionResponse = models.DescribeModelDefinitionResponse;
 const DeleteProductRequest = models.DeleteProductRequest;
 const StatusStatistic = models.StatusStatistic;
+const PublishMessageResponse = models.PublishMessageResponse;
 const SetForwardAuthResponse = models.SetForwardAuthResponse;
 const EditFirmwareRequest = models.EditFirmwareRequest;
 const DeviceDataHistoryItem = models.DeviceDataHistoryItem;
+const ReportAliveDeviceResponse = models.ReportAliveDeviceResponse;
 const DescribeDeviceEventHistoryRequest = models.DescribeDeviceEventHistoryRequest;
 const DescribeCategoryResponse = models.DescribeCategoryResponse;
+const DescribeSDKLogRequest = models.DescribeSDKLogRequest;
 const DescribeBalanceRequest = models.DescribeBalanceRequest;
 const ImportModelDefinitionRequest = models.ImportModelDefinitionRequest;
+const DescribeDataForwardListRequest = models.DescribeDataForwardListRequest;
 const DescribeDeviceCommLogResponse = models.DescribeDeviceCommLogResponse;
 const DeleteDeviceRequest = models.DeleteDeviceRequest;
 const GenerateSignedVideoURLResponse = models.GenerateSignedVideoURLResponse;
-const ListFirmwaresResponse = models.ListFirmwaresResponse;
+const ControlDeviceDataRequest = models.ControlDeviceDataRequest;
+const AIModelUsageInfo = models.AIModelUsageInfo;
 const DescribeFirmwareTaskDevicesRequest = models.DescribeFirmwareTaskDevicesRequest;
 const DescribeFirmwareResponse = models.DescribeFirmwareResponse;
 const DescribeDeviceCommLogRequest = models.DescribeDeviceCommLogRequest;
+const WakeUpDeviceResponse = models.WakeUpDeviceResponse;
 const DeleteForwardRuleRequest = models.DeleteForwardRuleRequest;
+const UpdateAIModelChannelResponse = models.UpdateAIModelChannelResponse;
+const DescribeAIModelUsageResponse = models.DescribeAIModelUsageResponse;
 const DescribeBalanceTransactionsRequest = models.DescribeBalanceTransactionsRequest;
+const BindCloudStorageUserRequest = models.BindCloudStorageUserRequest;
 const CreateProductResponse = models.CreateProductResponse;
 const DescribeFirmwareTaskDevicesResponse = models.DescribeFirmwareTaskDevicesResponse;
+const ModifyDataForwardResponse = models.ModifyDataForwardResponse;
 const DescribeCloudStorageThumbnailResponse = models.DescribeCloudStorageThumbnailResponse;
+const DescribeAIModelsRequest = models.DescribeAIModelsRequest;
 const RetryDeviceFirmwareTaskResponse = models.RetryDeviceFirmwareTaskResponse;
 const GenerateSignedVideoURLRequest = models.GenerateSignedVideoURLRequest;
 const ResetCloudStorageResponse = models.ResetCloudStorageResponse;
+const InheritCloudStorageUserResponse = models.InheritCloudStorageUserResponse;
+const DescribeDeviceEventHistoryResponse = models.DescribeDeviceEventHistoryResponse;
 const DescribeFirmwareTaskResponse = models.DescribeFirmwareTaskResponse;
 const FirmwareInfo = models.FirmwareInfo;
 const CreateProductRequest = models.CreateProductRequest;
 const DescribeFirmwareTasksRequest = models.DescribeFirmwareTasksRequest;
 const GetFirmwareURLResponse = models.GetFirmwareURLResponse;
-const DescribeDeviceResponse = models.DescribeDeviceResponse;
+const DescribeAIModelApplicationsRequest = models.DescribeAIModelApplicationsRequest;
 const DescribeCloudStorageEventsRequest = models.DescribeCloudStorageEventsRequest;
 const ListFirmwaresRequest = models.ListFirmwaresRequest;
-const RetryDeviceFirmwareTaskRequest = models.RetryDeviceFirmwareTaskRequest;
+const PublishMessageRequest = models.PublishMessageRequest;
+const DescribeDeviceStatusLogRequest = models.DescribeDeviceStatusLogRequest;
+const DescribeSDKLogResponse = models.DescribeSDKLogResponse;
 const DescribeBalanceResponse = models.DescribeBalanceResponse;
 const UploadFirmwareRequest = models.UploadFirmwareRequest;
 const DescribeFirmwareTasksResponse = models.DescribeFirmwareTasksResponse;
+const CloudStorageUserInfo = models.CloudStorageUserInfo;
 const EditFirmwareResponse = models.EditFirmwareResponse;
 const DescribeFirmwareTaskDistributionRequest = models.DescribeFirmwareTaskDistributionRequest;
 const ProductTemplate = models.ProductTemplate;
@@ -96,52 +125,80 @@ const DeleteProductResponse = models.DeleteProductResponse;
 const ModifyForwardRuleResponse = models.ModifyForwardRuleResponse;
 const BalanceTransaction = models.BalanceTransaction;
 const FirmwareTaskInfo = models.FirmwareTaskInfo;
+const DescribeProductDynamicRegisterRequest = models.DescribeProductDynamicRegisterRequest;
+const AIModelApplication = models.AIModelApplication;
 const DescribeFirmwareTaskDistributionResponse = models.DescribeFirmwareTaskDistributionResponse;
 const DescribeBatchResponse = models.DescribeBatchResponse;
+const DataForward = models.DataForward;
 const DescribeDeviceRequest = models.DescribeDeviceRequest;
 const ModifyForwardRuleRequest = models.ModifyForwardRuleRequest;
+const CreateAIDetectionResponse = models.CreateAIDetectionResponse;
 const DescribeCloudStorageEventsResponse = models.DescribeCloudStorageEventsResponse;
 const VideoProduct = models.VideoProduct;
 const CloudStorageEvent = models.CloudStorageEvent;
 const DescribeCloudStorageDateResponse = models.DescribeCloudStorageDateResponse;
-const DescribeForwardRuleRequest = models.DescribeForwardRuleRequest;
+const ModifyDataForwardStatusResponse = models.ModifyDataForwardStatusResponse;
+const CloudStorageTimeInfo = models.CloudStorageTimeInfo;
 const UploadFirmwareResponse = models.UploadFirmwareResponse;
+const UpdateAIModelChannelRequest = models.UpdateAIModelChannelRequest;
 const CreateCloudStorageResponse = models.CreateCloudStorageResponse;
+const BindCloudStorageUserResponse = models.BindCloudStorageUserResponse;
 const CancelDeviceFirmwareTaskRequest = models.CancelDeviceFirmwareTaskRequest;
 const CancelDeviceFirmwareTaskResponse = models.CancelDeviceFirmwareTaskResponse;
 const DeleteDeviceResponse = models.DeleteDeviceResponse;
+const WakeUpDeviceRequest = models.WakeUpDeviceRequest;
+const ApplyAIModelResponse = models.ApplyAIModelResponse;
+const ControlDeviceDataResponse = models.ControlDeviceDataResponse;
 const DescribeDeviceDataHistoryRequest = models.DescribeDeviceDataHistoryRequest;
 const EventHistoryItem = models.EventHistoryItem;
 const CreateForwardRuleRequest = models.CreateForwardRuleRequest;
-const CreateTaskFileUrlResponse = models.CreateTaskFileUrlResponse;
+const DeviceInfo = models.DeviceInfo;
 const SetForwardAuthRequest = models.SetForwardAuthRequest;
 const DescribeBalanceTransactionsResponse = models.DescribeBalanceTransactionsResponse;
 const ModifyDeviceResponse = models.ModifyDeviceResponse;
 const CreateTaskFileUrlRequest = models.CreateTaskFileUrlRequest;
+const ModifyDeviceLogLevelResponse = models.ModifyDeviceLogLevelResponse;
+const CreateDataForwardRequest = models.CreateDataForwardRequest;
 const BatchUpdateFirmwareRequest = models.BatchUpdateFirmwareRequest;
+const ModifyProductDynamicRegisterRequest = models.ModifyProductDynamicRegisterRequest;
 const DescribeCloudStorageThumbnailRequest = models.DescribeCloudStorageThumbnailRequest;
 const GetFirmwareURLRequest = models.GetFirmwareURLRequest;
+const CreateAIDetectionRequest = models.CreateAIDetectionRequest;
 const DescribeCloudStorageResponse = models.DescribeCloudStorageResponse;
+const ResetCloudStorageRequest = models.ResetCloudStorageRequest;
 const DescribeProductResponse = models.DescribeProductResponse;
+const SDKLogItem = models.SDKLogItem;
+const DescribeAIModelsResponse = models.DescribeAIModelsResponse;
+const InheritCloudStorageUserRequest = models.InheritCloudStorageUserRequest;
+const DescribeAIModelChannelRequest = models.DescribeAIModelChannelRequest;
+const DescribeAIModelUsageRequest = models.DescribeAIModelUsageRequest;
 const DescribeCategoryRequest = models.DescribeCategoryRequest;
 const DeleteFirmwareRequest = models.DeleteFirmwareRequest;
 const DescribeCloudStorageRequest = models.DescribeCloudStorageRequest;
 const GetAllFirmwareVersionResponse = models.GetAllFirmwareVersionResponse;
+const AIModelInfo = models.AIModelInfo;
 const DescribeDeviceDataHistoryResponse = models.DescribeDeviceDataHistoryResponse;
 const SearchKeyword = models.SearchKeyword;
 const DescribeDevicesRequest = models.DescribeDevicesRequest;
 const DescribeModelDefinitionRequest = models.DescribeModelDefinitionRequest;
+const DescribeProductDynamicRegisterResponse = models.DescribeProductDynamicRegisterResponse;
+const DescribeFirmwareTaskStatisticsResponse = models.DescribeFirmwareTaskStatisticsResponse;
 const CheckForwardAuthResponse = models.CheckForwardAuthResponse;
+const DescribeDeviceResponse = models.DescribeDeviceResponse;
 const DescribeDeviceDataResponse = models.DescribeDeviceDataResponse;
 const DeleteForwardRuleResponse = models.DeleteForwardRuleResponse;
+const DeviceStatusLogItem = models.DeviceStatusLogItem;
+const ListFirmwaresResponse = models.ListFirmwaresResponse;
 const TransferCloudStorageRequest = models.TransferCloudStorageRequest;
 const DescribeFirmwareTaskStatisticsRequest = models.DescribeFirmwareTaskStatisticsRequest;
 const DescribeBatchsRequest = models.DescribeBatchsRequest;
-const DeviceInfo = models.DeviceInfo;
+const CreateTaskFileUrlResponse = models.CreateTaskFileUrlResponse;
 const ModifyModelDefinitionResponse = models.ModifyModelDefinitionResponse;
-const ResetCloudStorageRequest = models.ResetCloudStorageRequest;
-const DescribeFirmwareTaskRequest = models.DescribeFirmwareTaskRequest;
 const DescribeCloudStorageTimeRequest = models.DescribeCloudStorageTimeRequest;
+const ModifyDataForwardStatusRequest = models.ModifyDataForwardStatusRequest;
+const DescribeFirmwareTaskRequest = models.DescribeFirmwareTaskRequest;
+const DescribeCloudStorageUsersRequest = models.DescribeCloudStorageUsersRequest;
+const DescribeAIModelApplicationsResponse = models.DescribeAIModelApplicationsResponse;
 
 
 /**
@@ -199,6 +256,17 @@ class IotvideoClient extends AbstractClient {
     }
 
     /**
+     * 获取设备sdk日志
+     * @param {DescribeSDKLogRequest} req
+     * @param {function(string, DescribeSDKLogResponse):void} cb
+     * @public
+     */
+    DescribeSDKLog(req, cb) {
+        let resp = new DescribeSDKLogResponse();
+        this.request("DescribeSDKLog", req, resp, cb);
+    }
+
+    /**
      * 修改产品信息
      * @param {ModifyProductRequest} req
      * @param {function(string, ModifyProductResponse):void} cb
@@ -218,6 +286,28 @@ class IotvideoClient extends AbstractClient {
     TransferCloudStorage(req, cb) {
         let resp = new TransferCloudStorageResponse();
         this.request("TransferCloudStorage", req, resp, cb);
+    }
+
+    /**
+     * 更新设备日志级别
+     * @param {ModifyDeviceLogLevelRequest} req
+     * @param {function(string, ModifyDeviceLogLevelResponse):void} cb
+     * @public
+     */
+    ModifyDeviceLogLevel(req, cb) {
+        let resp = new ModifyDeviceLogLevelResponse();
+        this.request("ModifyDeviceLogLevel", req, resp, cb);
+    }
+
+    /**
+     * 发起AI推理请求
+     * @param {CreateAIDetectionRequest} req
+     * @param {function(string, CreateAIDetectionResponse):void} cb
+     * @public
+     */
+    CreateAIDetection(req, cb) {
+        let resp = new CreateAIDetectionResponse();
+        this.request("CreateAIDetection", req, resp, cb);
     }
 
     /**
@@ -254,14 +344,36 @@ class IotvideoClient extends AbstractClient {
     }
 
     /**
-     * 查看设备详情
-     * @param {DescribeDeviceRequest} req
-     * @param {function(string, DescribeDeviceResponse):void} cb
+     * 拉取AI模型列表
+     * @param {DescribeAIModelsRequest} req
+     * @param {function(string, DescribeAIModelsResponse):void} cb
      * @public
      */
-    DescribeDevice(req, cb) {
-        let resp = new DescribeDeviceResponse();
-        this.request("DescribeDevice", req, resp, cb);
+    DescribeAIModels(req, cb) {
+        let resp = new DescribeAIModelsResponse();
+        this.request("DescribeAIModels", req, resp, cb);
+    }
+
+    /**
+     * 本接口（UploadFirmware）用于上传设备固件信息 
+     * @param {UploadFirmwareRequest} req
+     * @param {function(string, UploadFirmwareResponse):void} cb
+     * @public
+     */
+    UploadFirmware(req, cb) {
+        let resp = new UploadFirmwareResponse();
+        this.request("UploadFirmware", req, resp, cb);
+    }
+
+    /**
+     * 用户AI模型申请记录
+     * @param {DescribeAIModelApplicationsRequest} req
+     * @param {function(string, DescribeAIModelApplicationsResponse):void} cb
+     * @public
+     */
+    DescribeAIModelApplications(req, cb) {
+        let resp = new DescribeAIModelApplicationsResponse();
+        this.request("DescribeAIModelApplications", req, resp, cb);
     }
 
     /**
@@ -273,6 +385,17 @@ class IotvideoClient extends AbstractClient {
     DescribeProduct(req, cb) {
         let resp = new DescribeProductResponse();
         this.request("DescribeProduct", req, resp, cb);
+    }
+
+    /**
+     * 查看AI模型资源包
+     * @param {DescribeAIModelUsageRequest} req
+     * @param {function(string, DescribeAIModelUsageResponse):void} cb
+     * @public
+     */
+    DescribeAIModelUsage(req, cb) {
+        let resp = new DescribeAIModelUsageResponse();
+        this.request("DescribeAIModelUsage", req, resp, cb);
     }
 
     /**
@@ -298,14 +421,36 @@ class IotvideoClient extends AbstractClient {
     }
 
     /**
-     * 修改转发规则
-     * @param {ModifyForwardRuleRequest} req
-     * @param {function(string, ModifyForwardRuleResponse):void} cb
+     * 拉取云存用户列表
+     * @param {DescribeCloudStorageUsersRequest} req
+     * @param {function(string, DescribeCloudStorageUsersResponse):void} cb
      * @public
      */
-    ModifyForwardRule(req, cb) {
-        let resp = new ModifyForwardRuleResponse();
-        this.request("ModifyForwardRule", req, resp, cb);
+    DescribeCloudStorageUsers(req, cb) {
+        let resp = new DescribeCloudStorageUsersResponse();
+        this.request("DescribeCloudStorageUsers", req, resp, cb);
+    }
+
+    /**
+     * 取消AI模型申请
+     * @param {CancelAIModelApplicationRequest} req
+     * @param {function(string, CancelAIModelApplicationResponse):void} cb
+     * @public
+     */
+    CancelAIModelApplication(req, cb) {
+        let resp = new CancelAIModelApplicationResponse();
+        this.request("CancelAIModelApplication", req, resp, cb);
+    }
+
+    /**
+     * 修改数据转发
+     * @param {ModifyDataForwardRequest} req
+     * @param {function(string, ModifyDataForwardResponse):void} cb
+     * @public
+     */
+    ModifyDataForward(req, cb) {
+        let resp = new ModifyDataForwardResponse();
+        this.request("ModifyDataForward", req, resp, cb);
     }
 
     /**
@@ -364,14 +509,25 @@ class IotvideoClient extends AbstractClient {
     }
 
     /**
-     * 拉取账户流水
-     * @param {DescribeBalanceTransactionsRequest} req
-     * @param {function(string, DescribeBalanceTransactionsResponse):void} cb
+     * 更新AI推理结果推送配置
+     * @param {UpdateAIModelChannelRequest} req
+     * @param {function(string, UpdateAIModelChannelResponse):void} cb
      * @public
      */
-    DescribeBalanceTransactions(req, cb) {
-        let resp = new DescribeBalanceTransactionsResponse();
-        this.request("DescribeBalanceTransactions", req, resp, cb);
+    UpdateAIModelChannel(req, cb) {
+        let resp = new UpdateAIModelChannelResponse();
+        this.request("UpdateAIModelChannel", req, resp, cb);
+    }
+
+    /**
+     * 创建COS上传密钥
+     * @param {CreateCOSCredentialsRequest} req
+     * @param {function(string, CreateCOSCredentialsResponse):void} cb
+     * @public
+     */
+    CreateCOSCredentials(req, cb) {
+        let resp = new CreateCOSCredentialsResponse();
+        this.request("CreateCOSCredentials", req, resp, cb);
     }
 
     /**
@@ -397,6 +553,17 @@ class IotvideoClient extends AbstractClient {
     }
 
     /**
+     * 继承云存用户
+     * @param {InheritCloudStorageUserRequest} req
+     * @param {function(string, InheritCloudStorageUserResponse):void} cb
+     * @public
+     */
+    InheritCloudStorageUser(req, cb) {
+        let resp = new InheritCloudStorageUserResponse();
+        this.request("InheritCloudStorageUser", req, resp, cb);
+    }
+
+    /**
      * 创建批次
      * @param {CreateBatchRequest} req
      * @param {function(string, CreateBatchResponse):void} cb
@@ -419,6 +586,17 @@ class IotvideoClient extends AbstractClient {
     }
 
     /**
+     * 修改产品动态注册
+     * @param {ModifyProductDynamicRegisterRequest} req
+     * @param {function(string, ModifyProductDynamicRegisterResponse):void} cb
+     * @public
+     */
+    ModifyProductDynamicRegister(req, cb) {
+        let resp = new ModifyProductDynamicRegisterResponse();
+        this.request("ModifyProductDynamicRegister", req, resp, cb);
+    }
+
+    /**
      * 获取设备在指定时间范围内上报的历史数据。
      * @param {DescribeDeviceDataHistoryRequest} req
      * @param {function(string, DescribeDeviceDataHistoryResponse):void} cb
@@ -430,14 +608,14 @@ class IotvideoClient extends AbstractClient {
     }
 
     /**
-     * 本接口（UploadFirmware）用于上传设备固件信息 
-     * @param {UploadFirmwareRequest} req
-     * @param {function(string, UploadFirmwareResponse):void} cb
+     * 本接口用于查询固件升级任务列表
+     * @param {DescribeFirmwareTasksRequest} req
+     * @param {function(string, DescribeFirmwareTasksResponse):void} cb
      * @public
      */
-    UploadFirmware(req, cb) {
-        let resp = new UploadFirmwareResponse();
-        this.request("UploadFirmware", req, resp, cb);
+    DescribeFirmwareTasks(req, cb) {
+        let resp = new DescribeFirmwareTasksResponse();
+        this.request("DescribeFirmwareTasks", req, resp, cb);
     }
 
     /**
@@ -449,6 +627,17 @@ class IotvideoClient extends AbstractClient {
     GetFirmwareURL(req, cb) {
         let resp = new GetFirmwareURLResponse();
         this.request("GetFirmwareURL", req, resp, cb);
+    }
+
+    /**
+     * 修改转发规则
+     * @param {ModifyForwardRuleRequest} req
+     * @param {function(string, ModifyForwardRuleResponse):void} cb
+     * @public
+     */
+    ModifyForwardRule(req, cb) {
+        let resp = new ModifyForwardRuleResponse();
+        this.request("ModifyForwardRule", req, resp, cb);
     }
 
     /**
@@ -529,6 +718,17 @@ class IotvideoClient extends AbstractClient {
     }
 
     /**
+     * 本接口（PublishMessage）用于使用自定义透传协议进行设备远控
+     * @param {PublishMessageRequest} req
+     * @param {function(string, PublishMessageResponse):void} cb
+     * @public
+     */
+    PublishMessage(req, cb) {
+        let resp = new PublishMessageResponse();
+        this.request("PublishMessage", req, resp, cb);
+    }
+
+    /**
      * 本接口用于查询固件升级任务状态分布
      * @param {DescribeFirmwareTaskDistributionRequest} req
      * @param {function(string, DescribeFirmwareTaskDistributionResponse):void} cb
@@ -551,6 +751,17 @@ class IotvideoClient extends AbstractClient {
     }
 
     /**
+     * 获取产品动态注册详情
+     * @param {DescribeProductDynamicRegisterRequest} req
+     * @param {function(string, DescribeProductDynamicRegisterResponse):void} cb
+     * @public
+     */
+    DescribeProductDynamicRegister(req, cb) {
+        let resp = new DescribeProductDynamicRegisterResponse();
+        this.request("DescribeProductDynamicRegister", req, resp, cb);
+    }
+
+    /**
      * 获取设备的历史事件
      * @param {DescribeDeviceEventHistoryRequest} req
      * @param {function(string, DescribeDeviceEventHistoryResponse):void} cb
@@ -559,6 +770,17 @@ class IotvideoClient extends AbstractClient {
     DescribeDeviceEventHistory(req, cb) {
         let resp = new DescribeDeviceEventHistoryResponse();
         this.request("DescribeDeviceEventHistory", req, resp, cb);
+    }
+
+    /**
+     * 设置数据转发状态
+     * @param {ModifyDataForwardStatusRequest} req
+     * @param {function(string, ModifyDataForwardStatusResponse):void} cb
+     * @public
+     */
+    ModifyDataForwardStatus(req, cb) {
+        let resp = new ModifyDataForwardStatusResponse();
+        this.request("ModifyDataForwardStatus", req, resp, cb);
     }
 
     /**
@@ -595,6 +817,17 @@ class IotvideoClient extends AbstractClient {
     }
 
     /**
+     * 上报活跃设备
+     * @param {ReportAliveDeviceRequest} req
+     * @param {function(string, ReportAliveDeviceResponse):void} cb
+     * @public
+     */
+    ReportAliveDevice(req, cb) {
+        let resp = new ReportAliveDeviceResponse();
+        this.request("ReportAliveDevice", req, resp, cb);
+    }
+
+    /**
      * 重置云存服务
      * @param {ResetCloudStorageRequest} req
      * @param {function(string, ResetCloudStorageResponse):void} cb
@@ -606,6 +839,17 @@ class IotvideoClient extends AbstractClient {
     }
 
     /**
+     * 获取设备上下线日志
+     * @param {DescribeDeviceStatusLogRequest} req
+     * @param {function(string, DescribeDeviceStatusLogResponse):void} cb
+     * @public
+     */
+    DescribeDeviceStatusLog(req, cb) {
+        let resp = new DescribeDeviceStatusLogResponse();
+        this.request("DescribeDeviceStatusLog", req, resp, cb);
+    }
+
+    /**
      * 拉取云存事件列表
      * @param {DescribeCloudStorageEventsRequest} req
      * @param {function(string, DescribeCloudStorageEventsResponse):void} cb
@@ -614,6 +858,17 @@ class IotvideoClient extends AbstractClient {
     DescribeCloudStorageEvents(req, cb) {
         let resp = new DescribeCloudStorageEventsResponse();
         this.request("DescribeCloudStorageEvents", req, resp, cb);
+    }
+
+    /**
+     * 创建数据转发
+     * @param {CreateDataForwardRequest} req
+     * @param {function(string, CreateDataForwardResponse):void} cb
+     * @public
+     */
+    CreateDataForward(req, cb) {
+        let resp = new CreateDataForwardResponse();
+        this.request("CreateDataForward", req, resp, cb);
     }
 
     /**
@@ -636,6 +891,28 @@ class IotvideoClient extends AbstractClient {
     CancelDeviceFirmwareTask(req, cb) {
         let resp = new CancelDeviceFirmwareTaskResponse();
         this.request("CancelDeviceFirmwareTask", req, resp, cb);
+    }
+
+    /**
+     * 查看AI推理结果推送配置
+     * @param {DescribeAIModelChannelRequest} req
+     * @param {function(string, DescribeAIModelChannelResponse):void} cb
+     * @public
+     */
+    DescribeAIModelChannel(req, cb) {
+        let resp = new DescribeAIModelChannelResponse();
+        this.request("DescribeAIModelChannel", req, resp, cb);
+    }
+
+    /**
+     * 获取数据转发列表
+     * @param {DescribeDataForwardListRequest} req
+     * @param {function(string, DescribeDataForwardListResponse):void} cb
+     * @public
+     */
+    DescribeDataForwardList(req, cb) {
+        let resp = new DescribeDataForwardListResponse();
+        this.request("DescribeDataForwardList", req, resp, cb);
     }
 
     /**
@@ -694,14 +971,25 @@ class IotvideoClient extends AbstractClient {
     }
 
     /**
-     * 查询账户余额
-     * @param {DescribeBalanceRequest} req
-     * @param {function(string, DescribeBalanceResponse):void} cb
+     * 申请AI模型
+     * @param {ApplyAIModelRequest} req
+     * @param {function(string, ApplyAIModelResponse):void} cb
      * @public
      */
-    DescribeBalance(req, cb) {
-        let resp = new DescribeBalanceResponse();
-        this.request("DescribeBalance", req, resp, cb);
+    ApplyAIModel(req, cb) {
+        let resp = new ApplyAIModelResponse();
+        this.request("ApplyAIModel", req, resp, cb);
+    }
+
+    /**
+     * 绑定云存用户
+     * @param {BindCloudStorageUserRequest} req
+     * @param {function(string, BindCloudStorageUserResponse):void} cb
+     * @public
+     */
+    BindCloudStorageUser(req, cb) {
+        let resp = new BindCloudStorageUserResponse();
+        this.request("BindCloudStorageUser", req, resp, cb);
     }
 
     /**
@@ -727,14 +1015,36 @@ class IotvideoClient extends AbstractClient {
     }
 
     /**
-     * 本接口用于查询固件升级任务列表
-     * @param {DescribeFirmwareTasksRequest} req
-     * @param {function(string, DescribeFirmwareTasksResponse):void} cb
+     * 查看设备详情
+     * @param {DescribeDeviceRequest} req
+     * @param {function(string, DescribeDeviceResponse):void} cb
      * @public
      */
-    DescribeFirmwareTasks(req, cb) {
-        let resp = new DescribeFirmwareTasksResponse();
-        this.request("DescribeFirmwareTasks", req, resp, cb);
+    DescribeDevice(req, cb) {
+        let resp = new DescribeDeviceResponse();
+        this.request("DescribeDevice", req, resp, cb);
+    }
+
+    /**
+     * 拉取账户流水
+     * @param {DescribeBalanceTransactionsRequest} req
+     * @param {function(string, DescribeBalanceTransactionsResponse):void} cb
+     * @public
+     */
+    DescribeBalanceTransactions(req, cb) {
+        let resp = new DescribeBalanceTransactionsResponse();
+        this.request("DescribeBalanceTransactions", req, resp, cb);
+    }
+
+    /**
+     * 根据设备产品ID、设备名称，设置控制设备的属性数据。
+     * @param {ControlDeviceDataRequest} req
+     * @param {function(string, ControlDeviceDataResponse):void} cb
+     * @public
+     */
+    ControlDeviceData(req, cb) {
+        let resp = new ControlDeviceDataResponse();
+        this.request("ControlDeviceData", req, resp, cb);
     }
 
     /**
@@ -746,6 +1056,28 @@ class IotvideoClient extends AbstractClient {
     DescribeCloudStorageThumbnail(req, cb) {
         let resp = new DescribeCloudStorageThumbnailResponse();
         this.request("DescribeCloudStorageThumbnail", req, resp, cb);
+    }
+
+    /**
+     * 查询账户余额
+     * @param {DescribeBalanceRequest} req
+     * @param {function(string, DescribeBalanceResponse):void} cb
+     * @public
+     */
+    DescribeBalance(req, cb) {
+        let resp = new DescribeBalanceResponse();
+        this.request("DescribeBalance", req, resp, cb);
+    }
+
+    /**
+     * 设备唤醒
+     * @param {WakeUpDeviceRequest} req
+     * @param {function(string, WakeUpDeviceResponse):void} cb
+     * @public
+     */
+    WakeUpDevice(req, cb) {
+        let resp = new WakeUpDeviceResponse();
+        this.request("WakeUpDevice", req, resp, cb);
     }
 
 

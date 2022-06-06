@@ -189,6 +189,12 @@ class EnhanceTaDegreeRequest extends  AbstractModel {
          */
         this.BspData = null;
 
+        /**
+         * 业务加密数据
+         * @type {InputBusinessEncryptData || null}
+         */
+        this.BusinessEncryptData = null;
+
     }
 
     /**
@@ -203,6 +209,12 @@ class EnhanceTaDegreeRequest extends  AbstractModel {
             let obj = new InputTaBspData();
             obj.deserialize(params.BspData)
             this.BspData = obj;
+        }
+
+        if (params.BusinessEncryptData) {
+            let obj = new InputBusinessEncryptData();
+            obj.deserialize(params.BusinessEncryptData)
+            this.BusinessEncryptData = obj;
         }
 
     }
@@ -501,7 +513,7 @@ class InputTaBspData extends  AbstractModel {
         this.Gender = null;
 
         /**
-         * 用户操作时间
+         * 用户操作时间,uinux时间戳，精确到秒
          * @type {number || null}
          */
         this.UserTime = null;
@@ -620,6 +632,12 @@ class InputTaBspData extends  AbstractModel {
          */
         this.Context = null;
 
+        /**
+         * 是否授权
+         * @type {number || null}
+         */
+        this.IsAuthorized = null;
+
     }
 
     /**
@@ -654,6 +672,42 @@ class InputTaBspData extends  AbstractModel {
         this.Latitude = 'Latitude' in params ? params.Latitude : null;
         this.Longitude = 'Longitude' in params ? params.Longitude : null;
         this.Context = 'Context' in params ? params.Context : null;
+        this.IsAuthorized = 'IsAuthorized' in params ? params.IsAuthorized : null;
+
+    }
+}
+
+/**
+ * 业务入参
+ * @class
+ */
+class Device extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 业务入参id
+         * @type {string || null}
+         */
+        this.DeviceId = null;
+
+        /**
+         * 业务入参类型
+         * @type {number || null}
+         */
+        this.DeviceType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DeviceId = 'DeviceId' in params ? params.DeviceId : null;
+        this.DeviceType = 'DeviceType' in params ? params.DeviceType : null;
 
     }
 }
@@ -797,6 +851,12 @@ class DetectFraudKOLRequest extends  AbstractModel {
          */
         this.BspData = null;
 
+        /**
+         * 业务加密数据
+         * @type {InputBusinessEncryptData || null}
+         */
+        this.BusinessEncryptData = null;
+
     }
 
     /**
@@ -811,6 +871,12 @@ class DetectFraudKOLRequest extends  AbstractModel {
             let obj = new InputKolBspData();
             obj.deserialize(params.BspData)
             this.BspData = obj;
+        }
+
+        if (params.BusinessEncryptData) {
+            let obj = new InputBusinessEncryptData();
+            obj.deserialize(params.BusinessEncryptData)
+            this.BusinessEncryptData = obj;
         }
 
     }
@@ -863,6 +929,12 @@ class RecognizeTargetAudienceRequest extends  AbstractModel {
          */
         this.BspData = null;
 
+        /**
+         * 业务加密数据
+         * @type {InputBusinessEncryptData || null}
+         */
+        this.BusinessEncryptData = null;
+
     }
 
     /**
@@ -877,6 +949,12 @@ class RecognizeTargetAudienceRequest extends  AbstractModel {
             let obj = new InputRecognizeTargetAudience();
             obj.deserialize(params.BspData)
             this.BspData = obj;
+        }
+
+        if (params.BusinessEncryptData) {
+            let obj = new InputBusinessEncryptData();
+            obj.deserialize(params.BusinessEncryptData)
+            this.BusinessEncryptData = obj;
         }
 
     }
@@ -1192,13 +1270,13 @@ class InputRecognizeTargetAudience extends  AbstractModel {
         this.AdType = null;
 
         /**
-         * app name
+         * app名称
          * @type {string || null}
          */
         this.AppName = null;
 
         /**
-         * appVer
+         * app版本描述
          * @type {string || null}
          */
         this.AppVer = null;
@@ -1208,6 +1286,18 @@ class InputRecognizeTargetAudience extends  AbstractModel {
          * @type {number || null}
          */
         this.ReqType = null;
+
+        /**
+         * 用户是否授权,1为授权，0为未授权
+         * @type {number || null}
+         */
+        this.IsAuthorized = null;
+
+        /**
+         * 设备信息
+         * @type {Array.<Device> || null}
+         */
+        this.DeviceList = null;
 
     }
 
@@ -1256,6 +1346,16 @@ class InputRecognizeTargetAudience extends  AbstractModel {
         this.AppName = 'AppName' in params ? params.AppName : null;
         this.AppVer = 'AppVer' in params ? params.AppVer : null;
         this.ReqType = 'ReqType' in params ? params.ReqType : null;
+        this.IsAuthorized = 'IsAuthorized' in params ? params.IsAuthorized : null;
+
+        if (params.DeviceList) {
+            this.DeviceList = new Array();
+            for (let z in params.DeviceList) {
+                let obj = new Device();
+                obj.deserialize(params.DeviceList[z]);
+                this.DeviceList.push(obj);
+            }
+        }
 
     }
 }
@@ -1380,7 +1480,7 @@ class RecognizePreciseTargetAudienceRequest extends  AbstractModel {
 }
 
 /**
- * CheckKol
+ * CheckKOL
  * @class
  */
 class InputKolDataList extends  AbstractModel {
@@ -1417,6 +1517,12 @@ class InputKolDataList extends  AbstractModel {
          */
         this.AgentInfo = null;
 
+        /**
+         * 是否授权
+         * @type {number || null}
+         */
+        this.IsAuthorized = null;
+
     }
 
     /**
@@ -1431,27 +1537,7 @@ class InputKolDataList extends  AbstractModel {
         this.Name = 'Name' in params ? params.Name : null;
         this.Phone = 'Phone' in params ? params.Phone : null;
         this.AgentInfo = 'AgentInfo' in params ? params.AgentInfo : null;
-
-    }
-}
-
-/**
- * 接口入参
- * @class
- */
-class InputRecognizeEffectiveFlow extends  AbstractModel {
-    constructor(){
-        super();
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
+        this.IsAuthorized = 'IsAuthorized' in params ? params.IsAuthorized : null;
 
     }
 }
@@ -1493,6 +1579,48 @@ class RecognizePreciseTargetAudienceResponse extends  AbstractModel {
             this.Data = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 接口入参
+ * @class
+ */
+class InputRecognizeEffectiveFlow extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
+ * 业务入参
+ * @class
+ */
+class InputBusinessEncryptData extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
 
     }
 }
@@ -1569,6 +1697,36 @@ class InputSendTrafficSecuritySmsMsg extends  AbstractModel {
          */
         this.Mobiles = null;
 
+        /**
+         * 是否授权，1：已授权
+         * @type {number || null}
+         */
+        this.IsAuthorized = null;
+
+        /**
+         * 加密方式，0：AES加密；1：DES加密
+         * @type {number || null}
+         */
+        this.EncryptMethod = null;
+
+        /**
+         * 加密算法中的块处理模式，0：ECB模式；1：CBC模式；2：CTR模式；3：CFB模式；4：OFB模式；
+         * @type {number || null}
+         */
+        this.EncryptMode = null;
+
+        /**
+         * 填充模式，0：ZeroPadding；1：PKCS5Padding；2：PKCS7Padding；
+         * @type {number || null}
+         */
+        this.PaddingType = null;
+
+        /**
+         * 加密数据
+         * @type {string || null}
+         */
+        this.EncryptData = null;
+
     }
 
     /**
@@ -1580,6 +1738,11 @@ class InputSendTrafficSecuritySmsMsg extends  AbstractModel {
         }
         this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.Mobiles = 'Mobiles' in params ? params.Mobiles : null;
+        this.IsAuthorized = 'IsAuthorized' in params ? params.IsAuthorized : null;
+        this.EncryptMethod = 'EncryptMethod' in params ? params.EncryptMethod : null;
+        this.EncryptMode = 'EncryptMode' in params ? params.EncryptMode : null;
+        this.PaddingType = 'PaddingType' in params ? params.PaddingType : null;
+        this.EncryptData = 'EncryptData' in params ? params.EncryptData : null;
 
     }
 }
@@ -1597,6 +1760,7 @@ module.exports = {
     OutputKolValue: OutputKolValue,
     EnhanceTaDegreeResponse: EnhanceTaDegreeResponse,
     InputTaBspData: InputTaBspData,
+    Device: Device,
     OutputSendTrafficSecuritySmsMsg: OutputSendTrafficSecuritySmsMsg,
     RecognizeEffectiveFlowResponse: RecognizeEffectiveFlowResponse,
     SendTrafficSecuritySmsMessageResponse: SendTrafficSecuritySmsMessageResponse,
@@ -1610,8 +1774,9 @@ module.exports = {
     OutputTaValue: OutputTaValue,
     RecognizePreciseTargetAudienceRequest: RecognizePreciseTargetAudienceRequest,
     InputKolDataList: InputKolDataList,
-    InputRecognizeEffectiveFlow: InputRecognizeEffectiveFlow,
     RecognizePreciseTargetAudienceResponse: RecognizePreciseTargetAudienceResponse,
+    InputRecognizeEffectiveFlow: InputRecognizeEffectiveFlow,
+    InputBusinessEncryptData: InputBusinessEncryptData,
     OutputRecognizeTargetAudience: OutputRecognizeTargetAudience,
     InputSendTrafficSecuritySmsMsg: InputSendTrafficSecuritySmsMsg,
 

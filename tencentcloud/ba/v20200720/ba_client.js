@@ -16,8 +16,12 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const DescribeGetAuthInfoResponse = models.DescribeGetAuthInfoResponse;
+const SyncIcpOrderWebInfoResponse = models.SyncIcpOrderWebInfoResponse;
+const SyncIcpOrderWebInfoRequest = models.SyncIcpOrderWebInfoRequest;
 const CreateWeappQRUrlRequest = models.CreateWeappQRUrlRequest;
 const CreateWeappQRUrlResponse = models.CreateWeappQRUrlResponse;
+const DescribeGetAuthInfoRequest = models.DescribeGetAuthInfoRequest;
 
 
 /**
@@ -31,6 +35,18 @@ class BaClient extends AbstractClient {
     }
     
     /**
+     * 将备案ICP订单下的一个网站信息 同步给订单下其他网站，需要被同步的网站被检查通过(isCheck:true)；
+只有指定的网站信息字段能被同步
+     * @param {SyncIcpOrderWebInfoRequest} req
+     * @param {function(string, SyncIcpOrderWebInfoResponse):void} cb
+     * @public
+     */
+    SyncIcpOrderWebInfo(req, cb) {
+        let resp = new SyncIcpOrderWebInfoResponse();
+        this.request("SyncIcpOrderWebInfo", req, resp, cb);
+    }
+
+    /**
      * 创建渠道备案小程序二维码
      * @param {CreateWeappQRUrlRequest} req
      * @param {function(string, CreateWeappQRUrlResponse):void} cb
@@ -39,6 +55,17 @@ class BaClient extends AbstractClient {
     CreateWeappQRUrl(req, cb) {
         let resp = new CreateWeappQRUrlResponse();
         this.request("CreateWeappQRUrl", req, resp, cb);
+    }
+
+    /**
+     * 获取实名认证信息
+     * @param {DescribeGetAuthInfoRequest} req
+     * @param {function(string, DescribeGetAuthInfoResponse):void} cb
+     * @public
+     */
+    DescribeGetAuthInfo(req, cb) {
+        let resp = new DescribeGetAuthInfoResponse();
+        this.request("DescribeGetAuthInfo", req, resp, cb);
     }
 
 

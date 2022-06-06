@@ -20,9 +20,11 @@ const PullSmsReplyStatusRequest = models.PullSmsReplyStatusRequest;
 const DeleteSmsTemplateResponse = models.DeleteSmsTemplateResponse;
 const ModifySmsTemplateResponse = models.ModifySmsTemplateResponse;
 const ModifySmsSignRequest = models.ModifySmsSignRequest;
+const SmsPackagesStatisticsRequest = models.SmsPackagesStatisticsRequest;
 const AddSmsSignRequest = models.AddSmsSignRequest;
 const AddTemplateStatus = models.AddTemplateStatus;
 const DescribeSmsTemplateListResponse = models.DescribeSmsTemplateListResponse;
+const DescribePhoneNumberInfoRequest = models.DescribePhoneNumberInfoRequest;
 const PullSmsSendStatusByPhoneNumberRequest = models.PullSmsSendStatusByPhoneNumberRequest;
 const AddSmsTemplateRequest = models.AddSmsTemplateRequest;
 const ModifySmsTemplateRequest = models.ModifySmsTemplateRequest;
@@ -40,13 +42,14 @@ const SendStatusStatistics = models.SendStatusStatistics;
 const CallbackStatusStatisticsRequest = models.CallbackStatusStatisticsRequest;
 const DeleteTemplateStatus = models.DeleteTemplateStatus;
 const DescribeSmsSignListRequest = models.DescribeSmsSignListRequest;
-const SmsPackagesStatisticsRequest = models.SmsPackagesStatisticsRequest;
+const DescribePhoneNumberInfoResponse = models.DescribePhoneNumberInfoResponse;
 const DescribeTemplateListStatus = models.DescribeTemplateListStatus;
 const AddSmsTemplateResponse = models.AddSmsTemplateResponse;
 const PullSmsSendStatus = models.PullSmsSendStatus;
 const DescribeSmsSignListResponse = models.DescribeSmsSignListResponse;
 const DescribeSmsTemplateListRequest = models.DescribeSmsTemplateListRequest;
 const CallbackStatusStatistics = models.CallbackStatusStatistics;
+const PhoneNumberInfo = models.PhoneNumberInfo;
 const SendStatusStatisticsRequest = models.SendStatusStatisticsRequest;
 const DeleteSmsTemplateRequest = models.DeleteSmsTemplateRequest;
 const PullSmsReplyStatusByPhoneNumberResponse = models.PullSmsReplyStatusByPhoneNumberResponse;
@@ -106,7 +109,7 @@ class SmsClient extends AbstractClient {
     /**
      * 拉取短信下发状态。
 目前也支持 [配置回调](https://cloud.tencent.com/document/product/382/37809#.E8.AE.BE.E7.BD.AE.E4.BA.8B.E4.BB.B6.E5.9B.9E.E8.B0.83.E9.85.8D.E7.BD.AE) 的方式来获取下发状态。
->- 注：此接口需要联系 [sms helper](https://cloud.tencent.com/document/product/382/3773#.E6.8A.80.E6.9C.AF.E4.BA.A4.E6.B5.81) 开通。
+>- 注：此接口需要联系 [腾讯云短信小助手](https://cloud.tencent.com/document/product/382/3773#.E6.8A.80.E6.9C.AF.E4.BA.A4.E6.B5.81) 开通。
 >- 注：由于云 **API3.0 安全性**有所提升，所以**接口鉴权**较为复杂，建议使用 SDK 来使用云短信服务。
 >- 您可以在 [API 3.0 Explorer](https://console.cloud.tencent.com/api/explorer?Product=sms&Version=2021-01-11&Action=SendSms) 中直接运行该接口，可以先免去签名计算步骤。运行成功后，API Explorer可以**自动生成**SDK代码示例。
 
@@ -120,10 +123,10 @@ class SmsClient extends AbstractClient {
     }
 
     /**
-     * 短信发送接口，用户给用户发短信验证码、通知类短信或营销短信。
->- 注：由于云 **API3.0 安全性**有所提升，所以**接口鉴权**较为复杂，建议使用 SDK 来使用云短信服务。
->- 您可以在 [API 3.0 Explorer](https://console.cloud.tencent.com/api/explorer?Product=sms&Version=2021-01-11&Action=SendSms) 中直接运行该接口，可以先免去签名计算步骤。运行成功后，API Explorer可以**自动生成**SDK代码示例。
-
+     * 短信发送接口，用于给用户发短信验证码、通知类短信或营销短信。
+>- 注：由于云 **API3.0 安全性**有所提升，所以**接口鉴权**较为复杂，建议使用 [SDK](https://cloud.tencent.com/document/product/382/43193) 来使用云短信服务。
+>- 注：您可以在 [API 3.0 Explorer](https://console.cloud.tencent.com/api/explorer?Product=sms&Version=2021-01-11&Action=SendSms) 中直接运行该接口，可以先免去签名计算步骤。运行成功后，API Explorer可以**自动生成**SDK代码示例。
+>- 注：当前接口属于 2021-01-11 版本，如果您仍在使用 [2019-07-11 版本](https://cloud.tencent.com/document/product/382/38778)，建议您使用当前最新版本的接口，版本差异可参考[版本描述](https://cloud.tencent.com/document/product/382/63195#.E7.89.88.E6.9C.AC.E6.8F.8F.E8.BF.B0)。
      * @param {SendSmsRequest} req
      * @param {function(string, SendSmsResponse):void} cb
      * @public
@@ -204,6 +207,7 @@ class SmsClient extends AbstractClient {
     /**
      * 拉取短信回复状态。
 目前也支持 [配置回复回调](https://cloud.tencent.com/document/product/382/42907) 的方式来获取上行回复。
+>- 注：此接口需要联系 [腾讯云短信小助手](https://cloud.tencent.com/document/product/382/3773#.E6.8A.80.E6.9C.AF.E4.BA.A4.E6.B5.81) 开通。
 >- 注：由于云 **API3.0 安全性**有所提升，所以**接口鉴权**较为复杂，建议使用 SDK 来使用云短信服务。
 >- 您可以在 [API 3.0 Explorer](https://console.cloud.tencent.com/api/explorer?Product=sms&Version=2021-01-11&Action=SendSms) 中直接运行该接口，可以先免去签名计算步骤。运行成功后，API Explorer可以**自动生成**SDK代码示例。
 
@@ -234,8 +238,7 @@ class SmsClient extends AbstractClient {
      * 拉取单个号码短信下发状态。
 目前也支持 [配置回调](https://cloud.tencent.com/document/product/382/37809#.E8.AE.BE.E7.BD.AE.E4.BA.8B.E4.BB.B6.E5.9B.9E.E8.B0.83.E9.85.8D.E7.BD.AE) 的方式来获取下发状态。
 >- 注：由于云 **API3.0 安全性**有所提升，所以**接口鉴权**较为复杂，建议使用 SDK 来使用云短信服务。
->- 您可以在 [API 3.0 Explorer](https://console.cloud.tencent.com/api/explorer?Product=sms&Version=2021-01-11
-&Action=SendSms) 中直接运行该接口，可以先免去签名计算步骤。运行成功后，API Explorer可以**自动生成**SDK代码示例。
+>- 您可以在 [API 3.0 Explorer](https://console.cloud.tencent.com/api/explorer?Product=sms&Version=2021-01-11&Action=SendSms) 中直接运行该接口，可以先免去签名计算步骤。运行成功后，API Explorer可以**自动生成**SDK代码示例。
 
      * @param {PullSmsSendStatusByPhoneNumberRequest} req
      * @param {function(string, PullSmsSendStatusByPhoneNumberResponse):void} cb
@@ -275,6 +278,18 @@ class SmsClient extends AbstractClient {
     PullSmsReplyStatusByPhoneNumber(req, cb) {
         let resp = new PullSmsReplyStatusByPhoneNumberResponse();
         this.request("PullSmsReplyStatusByPhoneNumber", req, resp, cb);
+    }
+
+    /**
+     * 提供电话号码的信息查询，包括国家（或地区）码、规范的 E.164 格式号码等。
+>- 例如：查询号码 +86018845720123，可以得到国家码 86、规范的 E.164 号码 +8618845720123 等信息。
+     * @param {DescribePhoneNumberInfoRequest} req
+     * @param {function(string, DescribePhoneNumberInfoResponse):void} cb
+     * @public
+     */
+    DescribePhoneNumberInfo(req, cb) {
+        let resp = new DescribePhoneNumberInfoResponse();
+        this.request("DescribePhoneNumberInfo", req, resp, cb);
     }
 
     /**

@@ -16,9 +16,23 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const RiskDetailInfo = models.RiskDetailInfo;
+const AntiFraudRecord = models.AntiFraudRecord;
+const AntiFraudFilter = models.AntiFraudFilter;
+const AntiFraudCryptoFilter = models.AntiFraudCryptoFilter;
+const FinanceAntiFraudRecord = models.FinanceAntiFraudRecord;
+const DescribeAntiFraudResponse = models.DescribeAntiFraudResponse;
 const RiskDetail = models.RiskDetail;
-const QueryAntiFraudRequest = models.QueryAntiFraudRequest;
+const FinanceOtherModelScores = models.FinanceOtherModelScores;
+const SimpleKindRiskDetail = models.SimpleKindRiskDetail;
+const OtherModelScoresDetail = models.OtherModelScoresDetail;
+const GetAntiFraudRequest = models.GetAntiFraudRequest;
+const DescribeAntiFraudRequest = models.DescribeAntiFraudRequest;
+const FinanceAntiFraudFilter = models.FinanceAntiFraudFilter;
 const QueryAntiFraudResponse = models.QueryAntiFraudResponse;
+const GetAntiFraudResponse = models.GetAntiFraudResponse;
+const QueryAntiFraudRequest = models.QueryAntiFraudRequest;
+const FinanceAntiFraudCryptoFilter = models.FinanceAntiFraudCryptoFilter;
 
 
 /**
@@ -42,6 +56,30 @@ class AfClient extends AbstractClient {
     QueryAntiFraud(req, cb) {
         let resp = new QueryAntiFraudResponse();
         this.request("QueryAntiFraud", req, resp, cb);
+    }
+
+    /**
+     * 反欺诈评分接口
+     * @param {GetAntiFraudRequest} req
+     * @param {function(string, GetAntiFraudResponse):void} cb
+     * @public
+     */
+    GetAntiFraud(req, cb) {
+        let resp = new GetAntiFraudResponse();
+        this.request("GetAntiFraud", req, resp, cb);
+    }
+
+    /**
+     * 天御反欺诈服务，主要应用于银行、证券、保险、消费金融等金融行业客户，通过腾讯的大数据风控能力，
+可以准确识别恶意用户信息，解决客户在支付、活动、理财，风控等业务环节遇到的欺诈威胁，降低企业
+的损失。
+     * @param {DescribeAntiFraudRequest} req
+     * @param {function(string, DescribeAntiFraudResponse):void} cb
+     * @public
+     */
+    DescribeAntiFraud(req, cb) {
+        let resp = new DescribeAntiFraudResponse();
+        this.request("DescribeAntiFraud", req, resp, cb);
     }
 
 

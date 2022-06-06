@@ -17,15 +17,17 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const DescribeSREInstancesRequest = models.DescribeSREInstancesRequest;
-const ManageConfigRequest = models.ManageConfigRequest;
 const SREInstance = models.SREInstance;
 const DescribeSREInstanceAccessAddressResponse = models.DescribeSREInstanceAccessAddressResponse;
-const DescribeConfigRequest = models.DescribeConfigRequest;
 const DescribeSREInstancesResponse = models.DescribeSREInstancesResponse;
-const DescribeConfigResponse = models.DescribeConfigResponse;
+const KVPair = models.KVPair;
+const EnvInfo = models.EnvInfo;
 const Filter = models.Filter;
+const EnvAddressInfo = models.EnvAddressInfo;
+const VpcInfo = models.VpcInfo;
+const BoundK8SInfo = models.BoundK8SInfo;
 const DescribeSREInstanceAccessAddressRequest = models.DescribeSREInstanceAccessAddressRequest;
-const ManageConfigResponse = models.ManageConfigResponse;
+const ServiceGovernanceInfo = models.ServiceGovernanceInfo;
 
 
 /**
@@ -39,29 +41,7 @@ class TseClient extends AbstractClient {
     }
     
     /**
-     * 用于查询微服务注册中心实例列表
-     * @param {DescribeSREInstancesRequest} req
-     * @param {function(string, DescribeSREInstancesResponse):void} cb
-     * @public
-     */
-    DescribeSREInstances(req, cb) {
-        let resp = new DescribeSREInstancesResponse();
-        this.request("DescribeSREInstances", req, resp, cb);
-    }
-
-    /**
-     * 管理配置
-     * @param {ManageConfigRequest} req
-     * @param {function(string, ManageConfigResponse):void} cb
-     * @public
-     */
-    ManageConfig(req, cb) {
-        let resp = new ManageConfigResponse();
-        this.request("ManageConfig", req, resp, cb);
-    }
-
-    /**
-     * 查询微服务注册引擎实例访问地址
+     * 查询引擎实例访问地址
      * @param {DescribeSREInstanceAccessAddressRequest} req
      * @param {function(string, DescribeSREInstanceAccessAddressResponse):void} cb
      * @public
@@ -72,14 +52,14 @@ class TseClient extends AbstractClient {
     }
 
     /**
-     * 查看配置项
-     * @param {DescribeConfigRequest} req
-     * @param {function(string, DescribeConfigResponse):void} cb
+     * 用于查询引擎实例列表
+     * @param {DescribeSREInstancesRequest} req
+     * @param {function(string, DescribeSREInstancesResponse):void} cb
      * @public
      */
-    DescribeConfig(req, cb) {
-        let resp = new DescribeConfigResponse();
-        this.request("DescribeConfig", req, resp, cb);
+    DescribeSREInstances(req, cb) {
+        let resp = new DescribeSREInstancesResponse();
+        this.request("DescribeSREInstances", req, resp, cb);
     }
 
 

@@ -168,6 +168,7 @@ const GameServerSession = models.GameServerSession;
 const PlayerLatencyPolicy = models.PlayerLatencyPolicy;
 const FleetRelatedResource = models.FleetRelatedResource;
 const UpdateRuntimeConfigurationRequest = models.UpdateRuntimeConfigurationRequest;
+const EndGameServerSessionAndProcessRequest = models.EndGameServerSessionAndProcessRequest;
 const GameProperty = models.GameProperty;
 const CreateAssetWithImageResponse = models.CreateAssetWithImageResponse;
 const FleetStatisticTimes = models.FleetStatisticTimes;
@@ -182,6 +183,7 @@ const DescribeUserQuotasResponse = models.DescribeUserQuotasResponse;
 const GetUploadFederationTokenRequest = models.GetUploadFederationTokenRequest;
 const DescribeTimerScalingPoliciesResponse = models.DescribeTimerScalingPoliciesResponse;
 const CopyFleetRequest = models.CopyFleetRequest;
+const EndGameServerSessionAndProcessResponse = models.EndGameServerSessionAndProcessResponse;
 const SearchGameServerSessionsResponse = models.SearchGameServerSessionsResponse;
 const PutTimerScalingPolicyResponse = models.PutTimerScalingPolicyResponse;
 const DescribeFleetEventsResponse = models.DescribeFleetEventsResponse;
@@ -669,6 +671,17 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
     }
 
     /**
+     * 本接口（ResolveAlias）用于获取别名当前指向的fleetId。
+     * @param {ResolveAliasRequest} req
+     * @param {function(string, ResolveAliasResponse):void} cb
+     * @public
+     */
+    ResolveAlias(req, cb) {
+        let resp = new ResolveAliasResponse();
+        this.request("ResolveAlias", req, resp, cb);
+    }
+
+    /**
      * 本接口（DeleteAlias）用于删除别名。
      * @param {DeleteAliasRequest} req
      * @param {function(string, DeleteAliasResponse):void} cb
@@ -1125,14 +1138,14 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
     }
 
     /**
-     * 本接口（ResolveAlias）用于获取别名当前指向的fleetId。
-     * @param {ResolveAliasRequest} req
-     * @param {function(string, ResolveAliasResponse):void} cb
+     * 本接口（EndGameServerSessionAndProcess）用于终止游戏服务器会话和对应的进程，适用于时限保护和不保护。
+     * @param {EndGameServerSessionAndProcessRequest} req
+     * @param {function(string, EndGameServerSessionAndProcessResponse):void} cb
      * @public
      */
-    ResolveAlias(req, cb) {
-        let resp = new ResolveAliasResponse();
-        this.request("ResolveAlias", req, resp, cb);
+    EndGameServerSessionAndProcess(req, cb) {
+        let resp = new EndGameServerSessionAndProcessResponse();
+        this.request("EndGameServerSessionAndProcess", req, resp, cb);
     }
 
     /**

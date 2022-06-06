@@ -17,12 +17,17 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const Capacity = models.Capacity;
+const DescribeQosRequest = models.DescribeQosRequest;
 const DestAddressInfo = models.DestAddressInfo;
+const NetworkData = models.NetworkData;
+const SrcAddressInfo = models.SrcAddressInfo;
 const DeleteQosRequest = models.DeleteQosRequest;
 const DeviceInfo = models.DeviceInfo;
+const ExpectedThreshold = models.ExpectedThreshold;
 const DeleteQosResponse = models.DeleteQosResponse;
+const Context = models.Context;
 const CreateQosResponse = models.CreateQosResponse;
-const SrcAddressInfo = models.SrcAddressInfo;
+const DescribeQosResponse = models.DescribeQosResponse;
 const CreateQosRequest = models.CreateQosRequest;
 
 
@@ -56,6 +61,17 @@ class MnaClient extends AbstractClient {
     CreateQos(req, cb) {
         let resp = new CreateQosResponse();
         this.request("CreateQos", req, resp, cb);
+    }
+
+    /**
+     * 获取Qos加速状态
+     * @param {DescribeQosRequest} req
+     * @param {function(string, DescribeQosResponse):void} cb
+     * @public
+     */
+    DescribeQos(req, cb) {
+        let resp = new DescribeQosResponse();
+        this.request("DescribeQos", req, resp, cb);
     }
 
 

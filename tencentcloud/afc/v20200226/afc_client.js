@@ -16,9 +16,16 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const QueryAntiFraudVipRequest = models.QueryAntiFraudVipRequest;
-const RiskDetail = models.RiskDetail;
+const OtherModelScores = models.OtherModelScores;
 const QueryAntiFraudVipResponse = models.QueryAntiFraudVipResponse;
+const RiskDetail = models.RiskDetail;
+const SimpleKindRiskDetail = models.SimpleKindRiskDetail;
+const GetAntiFraudVipResponse = models.GetAntiFraudVipResponse;
+const AntiFraudVipCryptoFilter = models.AntiFraudVipCryptoFilter;
+const AntiFraudVipFilter = models.AntiFraudVipFilter;
+const QueryAntiFraudVipRequest = models.QueryAntiFraudVipRequest;
+const GetAntiFraudVipRequest = models.GetAntiFraudVipRequest;
+const AntiFraudVipRecord = models.AntiFraudVipRecord;
 
 
 /**
@@ -42,6 +49,17 @@ class AfcClient extends AbstractClient {
     QueryAntiFraudVip(req, cb) {
         let resp = new QueryAntiFraudVipResponse();
         this.request("QueryAntiFraudVip", req, resp, cb);
+    }
+
+    /**
+     * 反欺诈VIP评分接口
+     * @param {GetAntiFraudVipRequest} req
+     * @param {function(string, GetAntiFraudVipResponse):void} cb
+     * @public
+     */
+    GetAntiFraudVip(req, cb) {
+        let resp = new GetAntiFraudVipResponse();
+        this.request("GetAntiFraudVip", req, resp, cb);
     }
 
 

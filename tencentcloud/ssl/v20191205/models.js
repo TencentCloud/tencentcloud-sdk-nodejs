@@ -147,6 +147,13 @@ class ManagerInfo extends  AbstractModel {
          */
         this.VerifyTime = null;
 
+        /**
+         * 具体审核状态信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<ManagerStatusInfo> || null}
+         */
+        this.StatusInfo = null;
+
     }
 
     /**
@@ -170,6 +177,15 @@ class ManagerInfo extends  AbstractModel {
         this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
         this.SubmitAuditTime = 'SubmitAuditTime' in params ? params.SubmitAuditTime : null;
         this.VerifyTime = 'VerifyTime' in params ? params.VerifyTime : null;
+
+        if (params.StatusInfo) {
+            this.StatusInfo = new Array();
+            for (let z in params.StatusInfo) {
+                let obj = new ManagerStatusInfo();
+                obj.deserialize(params.StatusInfo[z]);
+                this.StatusInfo.push(obj);
+            }
+        }
 
     }
 }
@@ -198,6 +214,69 @@ class CompleteCertificateRequest extends  AbstractModel {
             return;
         }
         this.CertificateId = 'CertificateId' in params ? params.CertificateId : null;
+
+    }
+}
+
+/**
+ * UploadCertificate请求参数结构体
+ * @class
+ */
+class UploadCertificateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 证书内容。
+         * @type {string || null}
+         */
+        this.CertificatePublicKey = null;
+
+        /**
+         * 私钥内容，证书类型为 SVR 时必填，为 CA 时可不填。
+         * @type {string || null}
+         */
+        this.CertificatePrivateKey = null;
+
+        /**
+         * 证书类型，默认 SVR。CA = 客户端证书，SVR = 服务器证书。
+         * @type {string || null}
+         */
+        this.CertificateType = null;
+
+        /**
+         * 备注名称。
+         * @type {string || null}
+         */
+        this.Alias = null;
+
+        /**
+         * 项目 ID。
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * 证书用途/证书来源。“CLB，CDN，WAF，LIVE，DDOS”
+         * @type {string || null}
+         */
+        this.CertificateUse = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CertificatePublicKey = 'CertificatePublicKey' in params ? params.CertificatePublicKey : null;
+        this.CertificatePrivateKey = 'CertificatePrivateKey' in params ? params.CertificatePrivateKey : null;
+        this.CertificateType = 'CertificateType' in params ? params.CertificateType : null;
+        this.Alias = 'Alias' in params ? params.Alias : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.CertificateUse = 'CertificateUse' in params ? params.CertificateUse : null;
 
     }
 }
@@ -284,6 +363,41 @@ class DescribeCertificateOperateLogsResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyCertificateAlias请求参数结构体
+ * @class
+ */
+class ModifyCertificateAliasRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 证书 ID。
+         * @type {string || null}
+         */
+        this.CertificateId = null;
+
+        /**
+         * 备注名称。
+         * @type {string || null}
+         */
+        this.Alias = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CertificateId = 'CertificateId' in params ? params.CertificateId : null;
+        this.Alias = 'Alias' in params ? params.Alias : null;
 
     }
 }
@@ -991,6 +1105,27 @@ class DescribeManagersResponse extends  AbstractModel {
 }
 
 /**
+ * 根证书
+ * @class
+ */
+class RootCertificates extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
  * DescribeCertificate返回参数结构体
  * @class
  */
@@ -1298,48 +1433,24 @@ class DescribeCertificateResponse extends  AbstractModel {
 }
 
 /**
- * UploadCertificate请求参数结构体
+ * HostCertificate返回参数结构体
  * @class
  */
-class UploadCertificateRequest extends  AbstractModel {
+class HostCertificateResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 证书内容。
-         * @type {string || null}
+         * 云资源配置详情
+         * @type {CertHostingInfo || null}
          */
-        this.CertificatePublicKey = null;
+        this.CertHostingInfo = null;
 
         /**
-         * 私钥内容，证书类型为 SVR 时必填，为 CA 时可不填。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.CertificatePrivateKey = null;
-
-        /**
-         * 证书类型，默认 SVR。CA = 客户端证书，SVR = 服务器证书。
-         * @type {string || null}
-         */
-        this.CertificateType = null;
-
-        /**
-         * 备注名称。
-         * @type {string || null}
-         */
-        this.Alias = null;
-
-        /**
-         * 项目 ID。
-         * @type {number || null}
-         */
-        this.ProjectId = null;
-
-        /**
-         * 证书用途/证书来源。“CLB，CDN，WAF，LIVE，DDOS”
-         * @type {string || null}
-         */
-        this.CertificateUse = null;
+        this.RequestId = null;
 
     }
 
@@ -1350,12 +1461,13 @@ class UploadCertificateRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CertificatePublicKey = 'CertificatePublicKey' in params ? params.CertificatePublicKey : null;
-        this.CertificatePrivateKey = 'CertificatePrivateKey' in params ? params.CertificatePrivateKey : null;
-        this.CertificateType = 'CertificateType' in params ? params.CertificateType : null;
-        this.Alias = 'Alias' in params ? params.Alias : null;
-        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
-        this.CertificateUse = 'CertificateUse' in params ? params.CertificateUse : null;
+
+        if (params.CertHostingInfo) {
+            let obj = new CertHostingInfo();
+            obj.deserialize(params.CertHostingInfo)
+            this.CertHostingInfo = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1795,6 +1907,41 @@ class UploadRevokeLetterResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeDeployedResources请求参数结构体
+ * @class
+ */
+class DescribeDeployedResourcesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 证书ID
+         * @type {Array.<string> || null}
+         */
+        this.CertificateIds = null;
+
+        /**
+         * 资源类型:clb,cdn,live,waf,antiddos
+         * @type {string || null}
+         */
+        this.ResourceType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CertificateIds = 'CertificateIds' in params ? params.CertificateIds : null;
+        this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
+
+    }
+}
+
+/**
  * CreateCertificate返回参数结构体
  * @class
  */
@@ -1951,40 +2098,37 @@ class RevokeCertificateResponse extends  AbstractModel {
 }
 
 /**
- * 返回参数键为 RevokeDomainValidateAuths 的内容。
+ * 资源详情
  * @class
  */
-class RevokeDomainValidateAuths extends  AbstractModel {
+class DeployedResources extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * DV 认证值路径。
-注意：此字段可能返回 null，表示取不到有效值。
+         * 证书ID
          * @type {string || null}
          */
-        this.DomainValidateAuthPath = null;
+        this.CertificateId = null;
 
         /**
-         * DV 认证 KEY。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
+         * 数量
+         * @type {number || null}
          */
-        this.DomainValidateAuthKey = null;
+        this.Count = null;
 
         /**
-         * DV 认证值。
-注意：此字段可能返回 null，表示取不到有效值。
+         * 资源标识:clb,cdn,live,waf,antiddos
          * @type {string || null}
          */
-        this.DomainValidateAuthValue = null;
+        this.Type = null;
 
         /**
-         * DV 认证域名。
+         * 关联资源ID或关联域名
 注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
+         * @type {Array.<string> || null}
          */
-        this.DomainValidateAuthDomain = null;
+        this.ResourceIds = null;
 
     }
 
@@ -1995,10 +2139,10 @@ class RevokeDomainValidateAuths extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DomainValidateAuthPath = 'DomainValidateAuthPath' in params ? params.DomainValidateAuthPath : null;
-        this.DomainValidateAuthKey = 'DomainValidateAuthKey' in params ? params.DomainValidateAuthKey : null;
-        this.DomainValidateAuthValue = 'DomainValidateAuthValue' in params ? params.DomainValidateAuthValue : null;
-        this.DomainValidateAuthDomain = 'DomainValidateAuthDomain' in params ? params.DomainValidateAuthDomain : null;
+        this.CertificateId = 'CertificateId' in params ? params.CertificateId : null;
+        this.Count = 'Count' in params ? params.Count : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.ResourceIds = 'ResourceIds' in params ? params.ResourceIds : null;
 
     }
 }
@@ -2187,14 +2331,14 @@ class DescribeCertificateDetailResponse extends  AbstractModel {
         this.StatusName = null;
 
         /**
-         * 证书包含的多个域名（包含主域名）
+         * 证书包含的多个域名（不包含主域名，主域名使用Domain字段）
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<string> || null}
          */
         this.SubjectAltName = null;
 
         /**
-         * 是否为 VIP 客户。
+         * 是否为付费证书。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {boolean || null}
          */
@@ -2229,7 +2373,7 @@ class DescribeCertificateDetailResponse extends  AbstractModel {
         this.SubmittedData = null;
 
         /**
-         * 是否可重颁发证书。
+         * 是否可续费。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {boolean || null}
          */
@@ -2248,6 +2392,27 @@ class DescribeCertificateDetailResponse extends  AbstractModel {
          * @type {Array.<Tags> || null}
          */
         this.Tags = null;
+
+        /**
+         * 根证书。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {RootCertificates || null}
+         */
+        this.RootCert = null;
+
+        /**
+         * 国密加密证书
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.EncryptCert = null;
+
+        /**
+         * 国密加密私钥
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.EncryptPrivateKey = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2321,6 +2486,14 @@ class DescribeCertificateDetailResponse extends  AbstractModel {
                 this.Tags.push(obj);
             }
         }
+
+        if (params.RootCert) {
+            let obj = new RootCertificates();
+            obj.deserialize(params.RootCert)
+            this.RootCert = obj;
+        }
+        this.EncryptCert = 'EncryptCert' in params ? params.EncryptCert : null;
+        this.EncryptPrivateKey = 'EncryptPrivateKey' in params ? params.EncryptPrivateKey : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2411,6 +2584,58 @@ class ModifyCertificateProjectRequest extends  AbstractModel {
 }
 
 /**
+ * 云资源配置详情
+ * @class
+ */
+class CertHostingInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 证书ID
+         * @type {string || null}
+         */
+        this.CertId = null;
+
+        /**
+         * 已替换的新证书ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RenewCertId = null;
+
+        /**
+         * 云资源托管 ，CDN或CLB：部分开启，CDN,CLB：已开启，null：未开启托管
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ResourceType = null;
+
+        /**
+         * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CertId = 'CertId' in params ? params.CertId : null;
+        this.RenewCertId = 'RenewCertId' in params ? params.RenewCertId : null;
+        this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+
+    }
+}
+
+/**
  * 返回参数键为 DvAuths 的内容。
  * @class
  */
@@ -2480,24 +2705,24 @@ class DvAuths extends  AbstractModel {
 }
 
 /**
- * ModifyCertificateAlias请求参数结构体
+ * HostCertificate请求参数结构体
  * @class
  */
-class ModifyCertificateAliasRequest extends  AbstractModel {
+class HostCertificateRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 证书 ID。
+         * 证书ID
          * @type {string || null}
          */
         this.CertificateId = null;
 
         /**
-         * 备注名称。
-         * @type {string || null}
+         * 资源类型：目前仅限于CLB,CDN
+         * @type {Array.<string> || null}
          */
-        this.Alias = null;
+        this.ResourceType = null;
 
     }
 
@@ -2509,7 +2734,7 @@ class ModifyCertificateAliasRequest extends  AbstractModel {
             return;
         }
         this.CertificateId = 'CertificateId' in params ? params.CertificateId : null;
-        this.Alias = 'Alias' in params ? params.Alias : null;
+        this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
 
     }
 }
@@ -2726,6 +2951,49 @@ class ProjectInfo extends  AbstractModel {
         this.ProjectResume = 'ProjectResume' in params ? params.ProjectResume : null;
         this.OwnerUin = 'OwnerUin' in params ? params.OwnerUin : null;
         this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+
+    }
+}
+
+/**
+ * DescribeDeployedResources返回参数结构体
+ * @class
+ */
+class DescribeDeployedResourcesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 资源详情
+         * @type {Array.<DeployedResources> || null}
+         */
+        this.DeployedResources = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.DeployedResources) {
+            this.DeployedResources = new Array();
+            for (let z in params.DeployedResources) {
+                let obj = new DeployedResources();
+                obj.deserialize(params.DeployedResources[z]);
+                this.DeployedResources.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3056,6 +3324,59 @@ class VerifyManagerRequest extends  AbstractModel {
 }
 
 /**
+ * 返回参数键为 RevokeDomainValidateAuths 的内容。
+ * @class
+ */
+class RevokeDomainValidateAuths extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * DV 认证值路径。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DomainValidateAuthPath = null;
+
+        /**
+         * DV 认证 KEY。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DomainValidateAuthKey = null;
+
+        /**
+         * DV 认证值。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DomainValidateAuthValue = null;
+
+        /**
+         * DV 认证域名。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DomainValidateAuthDomain = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DomainValidateAuthPath = 'DomainValidateAuthPath' in params ? params.DomainValidateAuthPath : null;
+        this.DomainValidateAuthKey = 'DomainValidateAuthKey' in params ? params.DomainValidateAuthKey : null;
+        this.DomainValidateAuthValue = 'DomainValidateAuthValue' in params ? params.DomainValidateAuthValue : null;
+        this.DomainValidateAuthDomain = 'DomainValidateAuthDomain' in params ? params.DomainValidateAuthDomain : null;
+
+    }
+}
+
+/**
  * UploadCertificate返回参数结构体
  * @class
  */
@@ -3315,187 +3636,12 @@ class DescribeManagerDetailResponse extends  AbstractModel {
 }
 
 /**
- * 获取证书列表（DescribeCertificate）返回参数键为 SubmittedData 的内容。
+ * 管理人的四种审核状态
  * @class
  */
-class SubmittedData extends  AbstractModel {
+class ManagerStatusInfo extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * CSR 类型，（online = 在线生成CSR，parse = 粘贴 CSR）。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.CsrType = null;
-
-        /**
-         * CSR 内容。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.CsrContent = null;
-
-        /**
-         * 域名信息。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.CertificateDomain = null;
-
-        /**
-         * DNS 信息。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<string> || null}
-         */
-        this.DomainList = null;
-
-        /**
-         * 私钥密码。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.KeyPassword = null;
-
-        /**
-         * 企业或单位名称。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.OrganizationName = null;
-
-        /**
-         * 部门。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.OrganizationDivision = null;
-
-        /**
-         * 地址。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.OrganizationAddress = null;
-
-        /**
-         * 国家。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.OrganizationCountry = null;
-
-        /**
-         * 市。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.OrganizationCity = null;
-
-        /**
-         * 省。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.OrganizationRegion = null;
-
-        /**
-         * 邮政编码。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.PostalCode = null;
-
-        /**
-         * 座机区号。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.PhoneAreaCode = null;
-
-        /**
-         * 座机号码。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.PhoneNumber = null;
-
-        /**
-         * 管理员名。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.AdminFirstName = null;
-
-        /**
-         * 管理员姓。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.AdminLastName = null;
-
-        /**
-         * 管理员电话号码。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.AdminPhoneNum = null;
-
-        /**
-         * 管理员邮箱地址。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.AdminEmail = null;
-
-        /**
-         * 管理员职位。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.AdminPosition = null;
-
-        /**
-         * 联系人名。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ContactFirstName = null;
-
-        /**
-         * 联系人姓。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ContactLastName = null;
-
-        /**
-         * 联系人电话号码。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ContactNumber = null;
-
-        /**
-         * 联系人邮箱地址，
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ContactEmail = null;
-
-        /**
-         * 联系人职位。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ContactPosition = null;
-
-        /**
-         * 验证类型。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.VerifyType = null;
 
     }
 
@@ -3506,31 +3652,6 @@ class SubmittedData extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CsrType = 'CsrType' in params ? params.CsrType : null;
-        this.CsrContent = 'CsrContent' in params ? params.CsrContent : null;
-        this.CertificateDomain = 'CertificateDomain' in params ? params.CertificateDomain : null;
-        this.DomainList = 'DomainList' in params ? params.DomainList : null;
-        this.KeyPassword = 'KeyPassword' in params ? params.KeyPassword : null;
-        this.OrganizationName = 'OrganizationName' in params ? params.OrganizationName : null;
-        this.OrganizationDivision = 'OrganizationDivision' in params ? params.OrganizationDivision : null;
-        this.OrganizationAddress = 'OrganizationAddress' in params ? params.OrganizationAddress : null;
-        this.OrganizationCountry = 'OrganizationCountry' in params ? params.OrganizationCountry : null;
-        this.OrganizationCity = 'OrganizationCity' in params ? params.OrganizationCity : null;
-        this.OrganizationRegion = 'OrganizationRegion' in params ? params.OrganizationRegion : null;
-        this.PostalCode = 'PostalCode' in params ? params.PostalCode : null;
-        this.PhoneAreaCode = 'PhoneAreaCode' in params ? params.PhoneAreaCode : null;
-        this.PhoneNumber = 'PhoneNumber' in params ? params.PhoneNumber : null;
-        this.AdminFirstName = 'AdminFirstName' in params ? params.AdminFirstName : null;
-        this.AdminLastName = 'AdminLastName' in params ? params.AdminLastName : null;
-        this.AdminPhoneNum = 'AdminPhoneNum' in params ? params.AdminPhoneNum : null;
-        this.AdminEmail = 'AdminEmail' in params ? params.AdminEmail : null;
-        this.AdminPosition = 'AdminPosition' in params ? params.AdminPosition : null;
-        this.ContactFirstName = 'ContactFirstName' in params ? params.ContactFirstName : null;
-        this.ContactLastName = 'ContactLastName' in params ? params.ContactLastName : null;
-        this.ContactNumber = 'ContactNumber' in params ? params.ContactNumber : null;
-        this.ContactEmail = 'ContactEmail' in params ? params.ContactEmail : null;
-        this.ContactPosition = 'ContactPosition' in params ? params.ContactPosition : null;
-        this.VerifyType = 'VerifyType' in params ? params.VerifyType : null;
 
     }
 }
@@ -3794,6 +3915,24 @@ class DescribeCertificatesRequest extends  AbstractModel {
          */
         this.Deployable = null;
 
+        /**
+         * 是否筛选上传托管的 1筛选，0不筛选
+         * @type {number || null}
+         */
+        this.Upload = null;
+
+        /**
+         * 是否筛选可续期证书 1筛选 0不筛选
+         * @type {number || null}
+         */
+        this.Renew = null;
+
+        /**
+         * 筛选来源， upload：上传证书， buy：腾讯云证书， 不传默认全部
+         * @type {string || null}
+         */
+        this.FilterSource = null;
+
     }
 
     /**
@@ -3811,6 +3950,9 @@ class DescribeCertificatesRequest extends  AbstractModel {
         this.ExpirationSort = 'ExpirationSort' in params ? params.ExpirationSort : null;
         this.CertificateStatus = 'CertificateStatus' in params ? params.CertificateStatus : null;
         this.Deployable = 'Deployable' in params ? params.Deployable : null;
+        this.Upload = 'Upload' in params ? params.Upload : null;
+        this.Renew = 'Renew' in params ? params.Renew : null;
+        this.FilterSource = 'FilterSource' in params ? params.FilterSource : null;
 
     }
 }
@@ -3866,6 +4008,12 @@ class DescribeManagersRequest extends  AbstractModel {
          */
         this.Status = null;
 
+        /**
+         * 管理人姓名/邮箱/部门精准匹配
+         * @type {string || null}
+         */
+        this.SearchKey = null;
+
     }
 
     /**
@@ -3881,6 +4029,7 @@ class DescribeManagersRequest extends  AbstractModel {
         this.ManagerName = 'ManagerName' in params ? params.ManagerName : null;
         this.ManagerMail = 'ManagerMail' in params ? params.ManagerMail : null;
         this.Status = 'Status' in params ? params.Status : null;
+        this.SearchKey = 'SearchKey' in params ? params.SearchKey : null;
 
     }
 }
@@ -3990,12 +4139,235 @@ class RevokeCertificateRequest extends  AbstractModel {
     }
 }
 
+/**
+ * 获取证书列表（DescribeCertificate）返回参数键为 SubmittedData 的内容。
+ * @class
+ */
+class SubmittedData extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * CSR 类型，（online = 在线生成CSR，parse = 粘贴 CSR）。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CsrType = null;
+
+        /**
+         * CSR 内容。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CsrContent = null;
+
+        /**
+         * 域名信息。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CertificateDomain = null;
+
+        /**
+         * DNS 信息。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.DomainList = null;
+
+        /**
+         * 私钥密码。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.KeyPassword = null;
+
+        /**
+         * 企业或单位名称。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.OrganizationName = null;
+
+        /**
+         * 部门。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.OrganizationDivision = null;
+
+        /**
+         * 地址。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.OrganizationAddress = null;
+
+        /**
+         * 国家。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.OrganizationCountry = null;
+
+        /**
+         * 市。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.OrganizationCity = null;
+
+        /**
+         * 省。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.OrganizationRegion = null;
+
+        /**
+         * 邮政编码。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.PostalCode = null;
+
+        /**
+         * 座机区号。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.PhoneAreaCode = null;
+
+        /**
+         * 座机号码。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.PhoneNumber = null;
+
+        /**
+         * 管理员名。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.AdminFirstName = null;
+
+        /**
+         * 管理员姓。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.AdminLastName = null;
+
+        /**
+         * 管理员电话号码。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.AdminPhoneNum = null;
+
+        /**
+         * 管理员邮箱地址。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.AdminEmail = null;
+
+        /**
+         * 管理员职位。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.AdminPosition = null;
+
+        /**
+         * 联系人名。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ContactFirstName = null;
+
+        /**
+         * 联系人姓。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ContactLastName = null;
+
+        /**
+         * 联系人电话号码。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ContactNumber = null;
+
+        /**
+         * 联系人邮箱地址，
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ContactEmail = null;
+
+        /**
+         * 联系人职位。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ContactPosition = null;
+
+        /**
+         * 验证类型。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.VerifyType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CsrType = 'CsrType' in params ? params.CsrType : null;
+        this.CsrContent = 'CsrContent' in params ? params.CsrContent : null;
+        this.CertificateDomain = 'CertificateDomain' in params ? params.CertificateDomain : null;
+        this.DomainList = 'DomainList' in params ? params.DomainList : null;
+        this.KeyPassword = 'KeyPassword' in params ? params.KeyPassword : null;
+        this.OrganizationName = 'OrganizationName' in params ? params.OrganizationName : null;
+        this.OrganizationDivision = 'OrganizationDivision' in params ? params.OrganizationDivision : null;
+        this.OrganizationAddress = 'OrganizationAddress' in params ? params.OrganizationAddress : null;
+        this.OrganizationCountry = 'OrganizationCountry' in params ? params.OrganizationCountry : null;
+        this.OrganizationCity = 'OrganizationCity' in params ? params.OrganizationCity : null;
+        this.OrganizationRegion = 'OrganizationRegion' in params ? params.OrganizationRegion : null;
+        this.PostalCode = 'PostalCode' in params ? params.PostalCode : null;
+        this.PhoneAreaCode = 'PhoneAreaCode' in params ? params.PhoneAreaCode : null;
+        this.PhoneNumber = 'PhoneNumber' in params ? params.PhoneNumber : null;
+        this.AdminFirstName = 'AdminFirstName' in params ? params.AdminFirstName : null;
+        this.AdminLastName = 'AdminLastName' in params ? params.AdminLastName : null;
+        this.AdminPhoneNum = 'AdminPhoneNum' in params ? params.AdminPhoneNum : null;
+        this.AdminEmail = 'AdminEmail' in params ? params.AdminEmail : null;
+        this.AdminPosition = 'AdminPosition' in params ? params.AdminPosition : null;
+        this.ContactFirstName = 'ContactFirstName' in params ? params.ContactFirstName : null;
+        this.ContactLastName = 'ContactLastName' in params ? params.ContactLastName : null;
+        this.ContactNumber = 'ContactNumber' in params ? params.ContactNumber : null;
+        this.ContactEmail = 'ContactEmail' in params ? params.ContactEmail : null;
+        this.ContactPosition = 'ContactPosition' in params ? params.ContactPosition : null;
+        this.VerifyType = 'VerifyType' in params ? params.VerifyType : null;
+
+    }
+}
+
 module.exports = {
     ApplyCertificateResponse: ApplyCertificateResponse,
     ManagerInfo: ManagerInfo,
     CompleteCertificateRequest: CompleteCertificateRequest,
+    UploadCertificateRequest: UploadCertificateRequest,
     DeleteCertificateRequest: DeleteCertificateRequest,
     DescribeCertificateOperateLogsResponse: DescribeCertificateOperateLogsResponse,
+    ModifyCertificateAliasRequest: ModifyCertificateAliasRequest,
     CommitCertificateInformationRequest: CommitCertificateInformationRequest,
     DownloadCertificateResponse: DownloadCertificateResponse,
     ReplaceCertificateResponse: ReplaceCertificateResponse,
@@ -4007,8 +4379,9 @@ module.exports = {
     CertificateExtra: CertificateExtra,
     CompanyInfo: CompanyInfo,
     DescribeManagersResponse: DescribeManagersResponse,
+    RootCertificates: RootCertificates,
     DescribeCertificateResponse: DescribeCertificateResponse,
-    UploadCertificateRequest: UploadCertificateRequest,
+    HostCertificateResponse: HostCertificateResponse,
     UploadConfirmLetterRequest: UploadConfirmLetterRequest,
     OperationLog: OperationLog,
     VerifyManagerResponse: VerifyManagerResponse,
@@ -4019,20 +4392,23 @@ module.exports = {
     ApplyCertificateRequest: ApplyCertificateRequest,
     ReplaceCertificateRequest: ReplaceCertificateRequest,
     UploadRevokeLetterResponse: UploadRevokeLetterResponse,
+    DescribeDeployedResourcesRequest: DescribeDeployedResourcesRequest,
     CreateCertificateResponse: CreateCertificateResponse,
     UploadRevokeLetterRequest: UploadRevokeLetterRequest,
     DeleteCertificateResponse: DeleteCertificateResponse,
     RevokeCertificateResponse: RevokeCertificateResponse,
-    RevokeDomainValidateAuths: RevokeDomainValidateAuths,
+    DeployedResources: DeployedResources,
     DescribeCertificateDetailResponse: DescribeCertificateDetailResponse,
     CheckCertificateChainResponse: CheckCertificateChainResponse,
     ModifyCertificateProjectRequest: ModifyCertificateProjectRequest,
+    CertHostingInfo: CertHostingInfo,
     DvAuths: DvAuths,
-    ModifyCertificateAliasRequest: ModifyCertificateAliasRequest,
+    HostCertificateRequest: HostCertificateRequest,
     DescribeCertificateRequest: DescribeCertificateRequest,
     DescribeManagerDetailRequest: DescribeManagerDetailRequest,
     DvAuthDetail: DvAuthDetail,
     ProjectInfo: ProjectInfo,
+    DescribeDeployedResourcesResponse: DescribeDeployedResourcesResponse,
     DescribeCertificateOperateLogsRequest: DescribeCertificateOperateLogsRequest,
     CancelCertificateOrderResponse: CancelCertificateOrderResponse,
     CreateCertificateRequest: CreateCertificateRequest,
@@ -4041,16 +4417,18 @@ module.exports = {
     UploadConfirmLetterResponse: UploadConfirmLetterResponse,
     DeleteManagerResponse: DeleteManagerResponse,
     VerifyManagerRequest: VerifyManagerRequest,
+    RevokeDomainValidateAuths: RevokeDomainValidateAuths,
     UploadCertificateResponse: UploadCertificateResponse,
     CheckCertificateChainRequest: CheckCertificateChainRequest,
     ModifyCertificateAliasResponse: ModifyCertificateAliasResponse,
     DescribeManagerDetailResponse: DescribeManagerDetailResponse,
-    SubmittedData: SubmittedData,
+    ManagerStatusInfo: ManagerStatusInfo,
     SubmitCertificateInformationRequest: SubmitCertificateInformationRequest,
     DescribeCertificatesRequest: DescribeCertificatesRequest,
     DescribeManagersRequest: DescribeManagersRequest,
     CompleteCertificateResponse: CompleteCertificateResponse,
     SubmitCertificateInformationResponse: SubmitCertificateInformationResponse,
     RevokeCertificateRequest: RevokeCertificateRequest,
+    SubmittedData: SubmittedData,
 
 }

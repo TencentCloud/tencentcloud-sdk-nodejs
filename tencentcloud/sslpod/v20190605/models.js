@@ -53,7 +53,7 @@ class DeleteDomainRequest extends  AbstractModel {
         super();
 
         /**
-         * 域名ID，可通过搜索域名接口获得
+         * 域名ID，可通过<a href="https://cloud.tencent.com/document/api/1084/49339">搜索域名</a>接口获得
          * @type {number || null}
          */
         this.DomainId = null;
@@ -496,7 +496,7 @@ class CreateDomainRequest extends  AbstractModel {
         this.IP = null;
 
         /**
-         * 是否开启通知告警
+         * 是否开启通知告警；true：开启通知告警，false：关闭通知告警
          * @type {boolean || null}
          */
         this.Notice = null;
@@ -823,7 +823,10 @@ class LimitInfo extends  AbstractModel {
         super();
 
         /**
-         * 通知类型
+         * 通知类型：
+limit_emai：邮件
+limit_wechat：微信
+limit_phone：手机
          * @type {string || null}
          */
         this.Type = null;
@@ -932,7 +935,7 @@ class NoticeInfoResult extends  AbstractModel {
         this.Id = null;
 
         /**
-         * 通知开关信息
+         * 通知开关信息；0：关闭；15开启
          * @type {number || null}
          */
         this.NoticeType = null;
@@ -1019,7 +1022,7 @@ class DomainSiteInfo extends  AbstractModel {
         super();
 
         /**
-         * ID
+         * ID标识
          * @type {number || null}
          */
         this.Id = null;
@@ -1037,16 +1040,25 @@ class DomainSiteInfo extends  AbstractModel {
         this.Ip = null;
 
         /**
-         * 是否自动获取IP
+         * 是否自动获取IP：true：是，false:否
          * @type {boolean || null}
          */
         this.AutoIP = null;
 
         /**
-         * 监控服务类型
-         * @type {number || null}
+         * 评级
+"A+"，
+ "A"，
+"A-"，
+"B"，
+"C"，
+"D"，
+ "E"，
+ "F"，
+"T"，
+         * @type {string || null}
          */
-        this.ServerType = null;
+        this.Grade = null;
 
         /**
          * 证书品牌
@@ -1055,19 +1067,33 @@ class DomainSiteInfo extends  AbstractModel {
         this.Brand = null;
 
         /**
-         * 评级
-         * @type {string || null}
+         * 监控服务类型
+0 :Web
+1: SMTP
+2: IMAP
+3: POP3
+         * @type {number || null}
          */
-        this.Grade = null;
+        this.ServerType = null;
 
         /**
          * 评级Code
+0："unknown"，
+1："A+"，
+2： "A"，
+3："A-"，
+4："B"，
+5："C"，
+6："D"，
+7： "E"，
+8： "F"，
+9："T"，
          * @type {number || null}
          */
         this.GradeCode = null;
 
         /**
-         * 是否监控告警
+         * 是否监控告警；true：是，false:否
          * @type {boolean || null}
          */
         this.Notice = null;
@@ -1086,7 +1112,18 @@ class DomainSiteInfo extends  AbstractModel {
         this.Tags = null;
 
         /**
-         * 域名状态
+         * 域名状态:
+连接异常，
+证书已过期，
+证书已吊销，
+证书黑名单，
+证书域名不匹配，
+证书不可信，
+证书密钥弱，
+证书即将过期，少于7天，
+证书即将过期，少于30天，
+正常，
+部分异常
          * @type {string || null}
          */
         this.Status = null;
@@ -1110,9 +1147,9 @@ class DomainSiteInfo extends  AbstractModel {
         this.Domain = 'Domain' in params ? params.Domain : null;
         this.Ip = 'Ip' in params ? params.Ip : null;
         this.AutoIP = 'AutoIP' in params ? params.AutoIP : null;
-        this.ServerType = 'ServerType' in params ? params.ServerType : null;
-        this.Brand = 'Brand' in params ? params.Brand : null;
         this.Grade = 'Grade' in params ? params.Grade : null;
+        this.Brand = 'Brand' in params ? params.Brand : null;
+        this.ServerType = 'ServerType' in params ? params.ServerType : null;
         this.GradeCode = 'GradeCode' in params ? params.GradeCode : null;
         this.Notice = 'Notice' in params ? params.Notice : null;
         this.AccountDomainId = 'AccountDomainId' in params ? params.AccountDomainId : null;
@@ -1221,7 +1258,14 @@ class DescribeDomainsRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * 搜索的类型 Enums(none,tags,grade,brand,code,hash,limit)
+         * 搜索的类型有：none，tags，grade，brand，code，hash，limit，domain。
+选tags，入参请填Tag，
+选grade，入参请填Grade，
+选brand，入参请填Brand，
+选code，入参请填Code，
+选hash，入参请填Hash
+选limit，标识只返回数量信息
+选domain，入参请填Domain
          * @type {string || null}
          */
         this.SearchType = null;
@@ -1268,6 +1312,12 @@ class DescribeDomainsRequest extends  AbstractModel {
          */
         this.Status = null;
 
+        /**
+         * 搜索域名
+         * @type {string || null}
+         */
+        this.Domain = null;
+
     }
 
     /**
@@ -1287,6 +1337,7 @@ class DescribeDomainsRequest extends  AbstractModel {
         this.Hash = 'Hash' in params ? params.Hash : null;
         this.Item = 'Item' in params ? params.Item : null;
         this.Status = 'Status' in params ? params.Status : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
 
     }
 }

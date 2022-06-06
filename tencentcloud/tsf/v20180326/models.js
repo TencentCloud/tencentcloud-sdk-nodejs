@@ -42,6 +42,36 @@ class DescribePublicConfigSummaryRequest extends  AbstractModel {
          */
         this.Limit = null;
 
+        /**
+         * 按时间排序：creation_time；按名称排序：config_name
+         * @type {string || null}
+         */
+        this.OrderBy = null;
+
+        /**
+         * 升序传 0，降序传 1
+         * @type {number || null}
+         */
+        this.OrderType = null;
+
+        /**
+         * 无
+         * @type {Array.<string> || null}
+         */
+        this.ConfigTagList = null;
+
+        /**
+         * 无
+         * @type {boolean || null}
+         */
+        this.DisableProgramAuthCheck = null;
+
+        /**
+         * 无
+         * @type {Array.<string> || null}
+         */
+        this.ConfigIdList = null;
+
     }
 
     /**
@@ -54,6 +84,56 @@ class DescribePublicConfigSummaryRequest extends  AbstractModel {
         this.SearchWord = 'SearchWord' in params ? params.SearchWord : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
+        this.OrderType = 'OrderType' in params ? params.OrderType : null;
+        this.ConfigTagList = 'ConfigTagList' in params ? params.ConfigTagList : null;
+        this.DisableProgramAuthCheck = 'DisableProgramAuthCheck' in params ? params.DisableProgramAuthCheck : null;
+        this.ConfigIdList = 'ConfigIdList' in params ? params.ConfigIdList : null;
+
+    }
+}
+
+/**
+ * 文件配置项列表
+ * @class
+ */
+class TsfPageFileConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总数目
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 文件配置数组
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<FileConfig> || null}
+         */
+        this.Content = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Content) {
+            this.Content = new Array();
+            for (let z in params.Content) {
+                let obj = new FileConfig();
+                obj.deserialize(params.Content[z]);
+                this.Content.push(obj);
+            }
+        }
 
     }
 }
@@ -252,6 +332,48 @@ class ApiDetailResponse extends  AbstractModel {
         this.CanRun = 'CanRun' in params ? params.CanRun : null;
         this.Status = 'Status' in params ? params.Status : null;
         this.Description = 'Description' in params ? params.Description : null;
+
+    }
+}
+
+/**
+ * UpdateApiRateLimitRule请求参数结构体
+ * @class
+ */
+class UpdateApiRateLimitRuleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 限流规则ID
+         * @type {string || null}
+         */
+        this.RuleId = null;
+
+        /**
+         * 开启/禁用，enabled/disabled
+         * @type {string || null}
+         */
+        this.UsableStatus = null;
+
+        /**
+         * qps值，开启限流规则时，必填
+         * @type {number || null}
+         */
+        this.MaxQps = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RuleId = 'RuleId' in params ? params.RuleId : null;
+        this.UsableStatus = 'UsableStatus' in params ? params.UsableStatus : null;
+        this.MaxQps = 'MaxQps' in params ? params.MaxQps : null;
 
     }
 }
@@ -626,6 +748,34 @@ class DeleteLaneResponse extends  AbstractModel {
         }
         this.Result = 'Result' in params ? params.Result : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeGroupRelease请求参数结构体
+ * @class
+ */
+class DescribeGroupReleaseRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 部署组ID
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
 
     }
 }
@@ -1087,6 +1237,129 @@ class ModifyContainerReplicasRequest extends  AbstractModel {
 }
 
 /**
+ * ReleaseFileConfig请求参数结构体
+ * @class
+ */
+class ReleaseFileConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 配置ID
+         * @type {string || null}
+         */
+        this.ConfigId = null;
+
+        /**
+         * 部署组ID
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
+        /**
+         * 发布描述
+         * @type {string || null}
+         */
+        this.ReleaseDesc = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ConfigId = 'ConfigId' in params ? params.ConfigId : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.ReleaseDesc = 'ReleaseDesc' in params ? params.ReleaseDesc : null;
+
+    }
+}
+
+/**
+ * DescribeInvocationMetricDataDimension返回参数结构体
+ * @class
+ */
+class DescribeInvocationMetricDataDimensionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 维度
+         * @type {TsfPageDimension || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new TsfPageDimension();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * SearchStdoutLog返回参数结构体
+ * @class
+ */
+class SearchStdoutLogResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 标准输出日志列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {TsfPageStdoutLogV2 || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new TsfPageStdoutLogV2();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateGatewayApi返回参数结构体
  * @class
  */
@@ -1116,6 +1389,47 @@ class CreateGatewayApiResponse extends  AbstractModel {
             return;
         }
         this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeFileConfigs返回参数结构体
+ * @class
+ */
+class DescribeFileConfigsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 文件配置项列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {TsfPageFileConfig || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new TsfPageFileConfig();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1244,6 +1558,76 @@ class DescribeGroupBindedGatewaysResponse extends  AbstractModel {
             this.Result = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeJvmMonitor请求参数结构体
+ * @class
+ */
+class DescribeJvmMonitorRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 查询的实例Id
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 实例所属应用Id
+         * @type {string || null}
+         */
+        this.ApplicationId = null;
+
+        /**
+         * 时间粒度,单位:秒
+         * @type {number || null}
+         */
+        this.TimeGranularity = null;
+
+        /**
+         * 查询数据起始时间格式(yyyy-MM-dd HH:mm:ss)
+         * @type {string || null}
+         */
+        this.From = null;
+
+        /**
+         * 查询数据结束时间格式(yyyy-MM-dd HH:mm:ss)
+         * @type {string || null}
+         */
+        this.To = null;
+
+        /**
+         * 查询的监控图列表,以返回值属性名作为入参
+         * @type {Array.<string> || null}
+         */
+        this.RequiredPictures = null;
+
+        /**
+         * 扩展字段
+         * @type {string || null}
+         */
+        this.Tag = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
+        this.TimeGranularity = 'TimeGranularity' in params ? params.TimeGranularity : null;
+        this.From = 'From' in params ? params.From : null;
+        this.To = 'To' in params ? params.To : null;
+        this.RequiredPictures = 'RequiredPictures' in params ? params.RequiredPictures : null;
+        this.Tag = 'Tag' in params ? params.Tag : null;
 
     }
 }
@@ -1730,6 +2114,47 @@ class TaskRecordPage extends  AbstractModel {
 }
 
 /**
+ * DescribeJvmMonitor返回参数结构体
+ * @class
+ */
+class DescribeJvmMonitorResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Java实例jvm监控数据
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {JvmMonitorData || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new JvmMonitorData();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DeleteServerlessGroup请求参数结构体
  * @class
  */
@@ -1793,6 +2218,47 @@ class ChangeApiUsableStatusRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeMicroservices返回参数结构体
+ * @class
+ */
+class DescribeMicroservicesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 微服务分页列表信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {TsfPageMicroservice || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new TsfPageMicroservice();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeApiRateLimitRules请求参数结构体
  * @class
  */
@@ -1830,6 +2296,7 @@ class DescribeApiGroupsResponse extends  AbstractModel {
 
         /**
          * 翻页结构体
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {TsfPageApiGroupInfo || null}
          */
         this.Result = null;
@@ -2057,6 +2524,12 @@ class DeleteImageTagsRequest extends  AbstractModel {
          */
         this.ImageTags = null;
 
+        /**
+         * 企业: tcr ；个人: personal或者不填
+         * @type {string || null}
+         */
+        this.RepoType = null;
+
     }
 
     /**
@@ -2075,6 +2548,7 @@ class DeleteImageTagsRequest extends  AbstractModel {
                 this.ImageTags.push(obj);
             }
         }
+        this.RepoType = 'RepoType' in params ? params.RepoType : null;
 
     }
 }
@@ -2124,6 +2598,64 @@ class DescribeRepositoriesRequest extends  AbstractModel {
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.RepositoryType = 'RepositoryType' in params ? params.RepositoryType : null;
+
+    }
+}
+
+/**
+ * 监控数据散点图
+ * @class
+ */
+class InvocationMetricScatterPlot extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 时间轴截止时间，GMT，精确到毫秒
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 时间粒度
+         * @type {number || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 时间轴开始时间，GMT，精确到毫秒
+         * @type {number || null}
+         */
+        this.Period = null;
+
+        /**
+         * 多值数据点集合
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<MultiValueDataPoints> || null}
+         */
+        this.DataPoints = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.Period = 'Period' in params ? params.Period : null;
+
+        if (params.DataPoints) {
+            this.DataPoints = new Array();
+            for (let z in params.DataPoints) {
+                let obj = new MultiValueDataPoints();
+                obj.deserialize(params.DataPoints[z]);
+                this.DataPoints.push(obj);
+            }
+        }
 
     }
 }
@@ -2183,6 +2715,12 @@ class CreateGatewayApiRequest extends  AbstractModel {
          */
         this.ApiList = null;
 
+        /**
+         * 无
+         * @type {Array.<string> || null}
+         */
+        this.ProgramIdList = null;
+
     }
 
     /**
@@ -2202,6 +2740,7 @@ class CreateGatewayApiRequest extends  AbstractModel {
                 this.ApiList.push(obj);
             }
         }
+        this.ProgramIdList = 'ProgramIdList' in params ? params.ProgramIdList : null;
 
     }
 }
@@ -2773,25 +3312,54 @@ class GatewayPluginBoundParam extends  AbstractModel {
 }
 
 /**
- * DescribeServerlessGroups返回参数结构体
+ * ModifyLaneRule请求参数结构体
  * @class
  */
-class DescribeServerlessGroupsResponse extends  AbstractModel {
+class ModifyLaneRuleRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 数据列表对象
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {ServerlessGroupPage || null}
-         */
-        this.Result = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 泳道规则ID
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.RuleId = null;
+
+        /**
+         * 泳道规则名称
+         * @type {string || null}
+         */
+        this.RuleName = null;
+
+        /**
+         * 泳道规则备注
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * 泳道规则标签列表
+         * @type {Array.<LaneRuleTag> || null}
+         */
+        this.RuleTagList = null;
+
+        /**
+         * 泳道规则标签关系
+         * @type {string || null}
+         */
+        this.RuleTagRelationship = null;
+
+        /**
+         * 泳道ID
+         * @type {string || null}
+         */
+        this.LaneId = null;
+
+        /**
+         * 开启状态
+         * @type {boolean || null}
+         */
+        this.Enable = null;
 
     }
 
@@ -2802,122 +3370,21 @@ class DescribeServerlessGroupsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.RuleId = 'RuleId' in params ? params.RuleId : null;
+        this.RuleName = 'RuleName' in params ? params.RuleName : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
 
-        if (params.Result) {
-            let obj = new ServerlessGroupPage();
-            obj.deserialize(params.Result)
-            this.Result = obj;
+        if (params.RuleTagList) {
+            this.RuleTagList = new Array();
+            for (let z in params.RuleTagList) {
+                let obj = new LaneRuleTag();
+                obj.deserialize(params.RuleTagList[z]);
+                this.RuleTagList.push(obj);
+            }
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * 镜像仓库
- * @class
- */
-class ImageRepository extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 仓库名,含命名空间,如tsf/nginx
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.Reponame = null;
-
-        /**
-         * 仓库类型
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.Repotype = null;
-
-        /**
-         * 镜像版本数
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.TagCount = null;
-
-        /**
-         * 是否公共,1:公有,0:私有
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.IsPublic = null;
-
-        /**
-         * 是否被用户收藏。true：是，false：否
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {boolean || null}
-         */
-        this.IsUserFavor = null;
-
-        /**
-         * 是否是腾讯云官方仓库。 是否是腾讯云官方仓库。true：是，false：否
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {boolean || null}
-         */
-        this.IsQcloudOfficial = null;
-
-        /**
-         * 被所有用户收藏次数
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.FavorCount = null;
-
-        /**
-         * 拉取次数
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.PullCount = null;
-
-        /**
-         * 描述内容
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.Description = null;
-
-        /**
-         * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.CreationTime = null;
-
-        /**
-         * 更新时间
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.UpdateTime = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Reponame = 'Reponame' in params ? params.Reponame : null;
-        this.Repotype = 'Repotype' in params ? params.Repotype : null;
-        this.TagCount = 'TagCount' in params ? params.TagCount : null;
-        this.IsPublic = 'IsPublic' in params ? params.IsPublic : null;
-        this.IsUserFavor = 'IsUserFavor' in params ? params.IsUserFavor : null;
-        this.IsQcloudOfficial = 'IsQcloudOfficial' in params ? params.IsQcloudOfficial : null;
-        this.FavorCount = 'FavorCount' in params ? params.FavorCount : null;
-        this.PullCount = 'PullCount' in params ? params.PullCount : null;
-        this.Description = 'Description' in params ? params.Description : null;
-        this.CreationTime = 'CreationTime' in params ? params.CreationTime : null;
-        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.RuleTagRelationship = 'RuleTagRelationship' in params ? params.RuleTagRelationship : null;
+        this.LaneId = 'LaneId' in params ? params.LaneId : null;
+        this.Enable = 'Enable' in params ? params.Enable : null;
 
     }
 }
@@ -3400,6 +3867,83 @@ class UpdateHealthCheckSettingsRequest extends  AbstractModel {
 }
 
 /**
+ * ScalableRule值
+ * @class
+ */
+class ScalableRule extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * RuleId值
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RuleId = null;
+
+        /**
+         * Name值
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * ExpandVmCountLimit值
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ExpandVmCountLimit = null;
+
+        /**
+         * ShrinkVmCountLimit值
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ShrinkVmCountLimit = null;
+
+        /**
+         * GroupCount值
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.GroupCount = null;
+
+        /**
+         * 备注
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Desc = null;
+
+        /**
+         * 备注
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Description = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RuleId = 'RuleId' in params ? params.RuleId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.ExpandVmCountLimit = 'ExpandVmCountLimit' in params ? params.ExpandVmCountLimit : null;
+        this.ShrinkVmCountLimit = 'ShrinkVmCountLimit' in params ? params.ShrinkVmCountLimit : null;
+        this.GroupCount = 'GroupCount' in params ? params.GroupCount : null;
+        this.Desc = 'Desc' in params ? params.Desc : null;
+        this.Description = 'Description' in params ? params.Description : null;
+
+    }
+}
+
+/**
  * EnableUnitRule请求参数结构体
  * @class
  */
@@ -3730,6 +4274,12 @@ class CreateNamespaceRequest extends  AbstractModel {
          */
         this.ProgramId = null;
 
+        /**
+         * 无
+         * @type {Array.<string> || null}
+         */
+        this.ProgramIdList = null;
+
     }
 
     /**
@@ -3747,6 +4297,7 @@ class CreateNamespaceRequest extends  AbstractModel {
         this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
         this.IsHaEnable = 'IsHaEnable' in params ? params.IsHaEnable : null;
         this.ProgramId = 'ProgramId' in params ? params.ProgramId : null;
+        this.ProgramIdList = 'ProgramIdList' in params ? params.ProgramIdList : null;
 
     }
 }
@@ -4168,6 +4719,67 @@ class CreateLaneResponse extends  AbstractModel {
 }
 
 /**
+ * tcr仓库信息
+ * @class
+ */
+class TcrRepoInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 地域（填数字）
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * 实例id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RegistryId = null;
+
+        /**
+         * 实例名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RegistryName = null;
+
+        /**
+         * 命名空间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Namespace = null;
+
+        /**
+         * 仓库名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RepoName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Region = 'Region' in params ? params.Region : null;
+        this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
+        this.RegistryName = 'RegistryName' in params ? params.RegistryName : null;
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.RepoName = 'RepoName' in params ? params.RepoName : null;
+
+    }
+}
+
+/**
  * UpdateApiTimeouts返回参数结构体
  * @class
  */
@@ -4198,6 +4810,41 @@ class UpdateApiTimeoutsResponse extends  AbstractModel {
         }
         this.Result = 'Result' in params ? params.Result : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 维度分页
+ * @class
+ */
+class TsfPageDimension extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 维度
+         * @type {Array.<string> || null}
+         */
+        this.Content = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.Content = 'Content' in params ? params.Content : null;
 
     }
 }
@@ -4395,17 +5042,16 @@ class DeleteImageTag extends  AbstractModel {
 }
 
 /**
- * DescribeMicroservices返回参数结构体
+ * DescribeContainerGroupDeployInfo返回参数结构体
  * @class
  */
-class DescribeMicroservicesResponse extends  AbstractModel {
+class DescribeContainerGroupDeployInfoResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 微服务分页列表信息
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {TsfPageMicroservice || null}
+         * 获取部署组
+         * @type {ContainerGroupDeploy || null}
          */
         this.Result = null;
 
@@ -4426,11 +5072,67 @@ class DescribeMicroservicesResponse extends  AbstractModel {
         }
 
         if (params.Result) {
-            let obj = new TsfPageMicroservice();
+            let obj = new ContainerGroupDeploy();
             obj.deserialize(params.Result)
             this.Result = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeOverviewInvocation请求参数结构体
+ * @class
+ */
+class DescribeOverviewInvocationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 命名空间ID
+         * @type {string || null}
+         */
+        this.NamespaceId = null;
+
+        /**
+         * 监控统计类型，可选值：SumReqAmount、AvgFailureRate、AvgTimeCost，分别对应请求量、请求错误率、平均响应耗时
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 监控统计数据粒度，可选值：60、3600、86400，分别对应1分钟、1小时、1天
+         * @type {number || null}
+         */
+        this.Period = null;
+
+        /**
+         * 查询开始时间，默认为当天的 00:00:00
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 查询结束时间，默认为当前时间
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Period = 'Period' in params ? params.Period : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
 
     }
 }
@@ -4481,6 +5183,48 @@ class TaskLastExecuteStatus extends  AbstractModel {
 }
 
 /**
+ * DescribePrograms请求参数结构体
+ * @class
+ */
+class DescribeProgramsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 模糊查询数据集ID，数据集名称，不传入时查询全量
+         * @type {string || null}
+         */
+        this.SearchWord = null;
+
+        /**
+         * 每页数量
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 起始偏移量
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SearchWord = 'SearchWord' in params ? params.SearchWord : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
  * DescribePublicConfig请求参数结构体
  * @class
  */
@@ -4509,47 +5253,124 @@ class DescribePublicConfigRequest extends  AbstractModel {
 }
 
 /**
- * TSF基本资源信息概览
+ * 镜像仓库
  * @class
  */
-class OverviewBasicResourceUsage extends  AbstractModel {
+class ImageRepository extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 应用总数
+         * 仓库名,含命名空间,如tsf/nginx
 注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
+         * @type {string || null}
          */
-        this.ApplicationCount = null;
+        this.Reponame = null;
 
         /**
-         * 命名空间总数
+         * 仓库类型
 注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
+         * @type {string || null}
          */
-        this.NamespaceCount = null;
+        this.Repotype = null;
 
         /**
-         * 部署组个数
+         * 镜像版本数
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
-        this.GroupCount = null;
+        this.TagCount = null;
 
         /**
-         * 程序包存储空间用量，单位字节
+         * 是否公共,1:公有,0:私有
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
-        this.PackageSpaceUsed = null;
+        this.IsPublic = null;
 
         /**
-         * 已注册实例数
+         * 是否被用户收藏。true：是，false：否
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.IsUserFavor = null;
+
+        /**
+         * 是否是腾讯云官方仓库。 是否是腾讯云官方仓库。true：是，false：否
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.IsQcloudOfficial = null;
+
+        /**
+         * 被所有用户收藏次数
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
-        this.ConsulInstanceCount = null;
+        this.FavorCount = null;
+
+        /**
+         * 拉取次数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.PullCount = null;
+
+        /**
+         * 描述内容
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CreationTime = null;
+
+        /**
+         * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * TcrRepoInfo值
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {TcrRepoInfo || null}
+         */
+        this.TcrRepoInfo = null;
+
+        /**
+         * TcrBindingId值
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TcrBindingId = null;
+
+        /**
+         * applicationid值
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ApplicationId = null;
+
+        /**
+         * ApplicationName值（废弃）
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {ScalableRule || null}
+         */
+        this.ApplicationName = null;
+
+        /**
+         * ApplicationName值
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ApplicationNameReal = null;
 
     }
 
@@ -4560,11 +5381,137 @@ class OverviewBasicResourceUsage extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ApplicationCount = 'ApplicationCount' in params ? params.ApplicationCount : null;
-        this.NamespaceCount = 'NamespaceCount' in params ? params.NamespaceCount : null;
-        this.GroupCount = 'GroupCount' in params ? params.GroupCount : null;
-        this.PackageSpaceUsed = 'PackageSpaceUsed' in params ? params.PackageSpaceUsed : null;
-        this.ConsulInstanceCount = 'ConsulInstanceCount' in params ? params.ConsulInstanceCount : null;
+        this.Reponame = 'Reponame' in params ? params.Reponame : null;
+        this.Repotype = 'Repotype' in params ? params.Repotype : null;
+        this.TagCount = 'TagCount' in params ? params.TagCount : null;
+        this.IsPublic = 'IsPublic' in params ? params.IsPublic : null;
+        this.IsUserFavor = 'IsUserFavor' in params ? params.IsUserFavor : null;
+        this.IsQcloudOfficial = 'IsQcloudOfficial' in params ? params.IsQcloudOfficial : null;
+        this.FavorCount = 'FavorCount' in params ? params.FavorCount : null;
+        this.PullCount = 'PullCount' in params ? params.PullCount : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.CreationTime = 'CreationTime' in params ? params.CreationTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+
+        if (params.TcrRepoInfo) {
+            let obj = new TcrRepoInfo();
+            obj.deserialize(params.TcrRepoInfo)
+            this.TcrRepoInfo = obj;
+        }
+        this.TcrBindingId = 'TcrBindingId' in params ? params.TcrBindingId : null;
+        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
+
+        if (params.ApplicationName) {
+            let obj = new ScalableRule();
+            obj.deserialize(params.ApplicationName)
+            this.ApplicationName = obj;
+        }
+        this.ApplicationNameReal = 'ApplicationNameReal' in params ? params.ApplicationNameReal : null;
+
+    }
+}
+
+/**
+ * DescribeInovcationIndicators请求参数结构体
+ * @class
+ */
+class DescribeInovcationIndicatorsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 维度
+         * @type {string || null}
+         */
+        this.Dimension = null;
+
+        /**
+         * 开始时间
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 结束时间
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 命名空间ID
+         * @type {string || null}
+         */
+        this.NamespaceId = null;
+
+        /**
+         * 微服务ID
+         * @type {string || null}
+         */
+        this.ServiceId = null;
+
+        /**
+         * 调用方服务名
+         * @type {string || null}
+         */
+        this.CallerServiceName = null;
+
+        /**
+         * 被调方服务名
+         * @type {string || null}
+         */
+        this.CalleeServiceName = null;
+
+        /**
+         * 调用方接口名
+         * @type {string || null}
+         */
+        this.CallerInterfaceName = null;
+
+        /**
+         * 被调方接口名
+         * @type {string || null}
+         */
+        this.CalleeInterfaceName = null;
+
+        /**
+         * 应用ID
+         * @type {string || null}
+         */
+        this.ApplicationId = null;
+
+        /**
+         * 部署组ID
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
+        /**
+         * 实例ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Dimension = 'Dimension' in params ? params.Dimension : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
+        this.ServiceId = 'ServiceId' in params ? params.ServiceId : null;
+        this.CallerServiceName = 'CallerServiceName' in params ? params.CallerServiceName : null;
+        this.CalleeServiceName = 'CalleeServiceName' in params ? params.CalleeServiceName : null;
+        this.CallerInterfaceName = 'CallerInterfaceName' in params ? params.CallerInterfaceName : null;
+        this.CalleeInterfaceName = 'CalleeInterfaceName' in params ? params.CalleeInterfaceName : null;
+        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -4760,6 +5707,42 @@ class DescribeCreateGatewayApiStatusRequest extends  AbstractModel {
         }
         this.GroupId = 'GroupId' in params ? params.GroupId : null;
         this.MicroserviceId = 'MicroserviceId' in params ? params.MicroserviceId : null;
+
+    }
+}
+
+/**
+ * RevocationPublicConfig返回参数结构体
+ * @class
+ */
+class RevocationPublicConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * true：撤销成功；false：撤销失败
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5145,6 +6128,12 @@ class ModifyTaskRequest extends  AbstractModel {
          */
         this.TaskArgument = null;
 
+        /**
+         * 无
+         * @type {Array.<string> || null}
+         */
+        this.ProgramIdList = null;
+
     }
 
     /**
@@ -5188,6 +6177,7 @@ class ModifyTaskRequest extends  AbstractModel {
         this.RetryCount = 'RetryCount' in params ? params.RetryCount : null;
         this.RetryInterval = 'RetryInterval' in params ? params.RetryInterval : null;
         this.TaskArgument = 'TaskArgument' in params ? params.TaskArgument : null;
+        this.ProgramIdList = 'ProgramIdList' in params ? params.ProgramIdList : null;
 
     }
 }
@@ -5257,6 +6247,47 @@ class DisableTaskRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeStatistics返回参数结构体
+ * @class
+ */
+class DescribeStatisticsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 查询服务统计结果
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {ServiceStatisticsResults || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new ServiceStatisticsResults();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeBasicResourceUsage返回参数结构体
  * @class
  */
@@ -5298,26 +6329,24 @@ class DescribeBasicResourceUsageResponse extends  AbstractModel {
 }
 
 /**
- * 描述程序包关联信息
+ * CreateAllGatewayApiAsync返回参数结构体
  * @class
  */
-class PkgBind extends  AbstractModel {
+class CreateAllGatewayApiAsyncResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 应用id
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
+         * 是否成功
+         * @type {boolean || null}
          */
-        this.ApplicationId = null;
+        this.Result = null;
 
         /**
-         * 部署组id
-注意：此字段可能返回 null，表示取不到有效值。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.GroupId = null;
+        this.RequestId = null;
 
     }
 
@@ -5328,8 +6357,8 @@ class PkgBind extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
-        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5550,13 +6579,13 @@ class DeployContainerGroupRequest extends  AbstractModel {
         this.JvmOpts = null;
 
         /**
-         * 业务容器分配的 CPU 核数，对应 K8S 的 request
+         * 业务容器分配的 CPU 核数，对应 K8S 的 request，默认0.25
          * @type {string || null}
          */
         this.CpuRequest = null;
 
         /**
-         * 业务容器分配的内存 MiB 数，对应 K8S 的 request
+         * 业务容器分配的内存 MiB 数，对应 K8S 的 request，默认640 MiB
          * @type {string || null}
          */
         this.MemRequest = null;
@@ -5675,6 +6704,48 @@ class DeployContainerGroupRequest extends  AbstractModel {
          */
         this.SchedulingStrategy = null;
 
+        /**
+         * 是否进行增量部署，默认为false，全量更新
+         * @type {boolean || null}
+         */
+        this.IncrementalDeployment = null;
+
+        /**
+         * tcr或者不填
+         * @type {string || null}
+         */
+        this.RepoType = null;
+
+        /**
+         * 数据卷信息-废弃，请用VolumeInfoList参数
+         * @type {VolumeInfo || null}
+         */
+        this.VolumeInfos = null;
+
+        /**
+         * 数据卷挂载点信息-废弃，请用VolumeMountInfoList参数
+         * @type {VolumeMountInfo || null}
+         */
+        this.VolumeMountInfos = null;
+
+        /**
+         * 数据卷信息，list
+         * @type {Array.<VolumeInfo> || null}
+         */
+        this.VolumeInfoList = null;
+
+        /**
+         * 数据卷挂载点信息，list
+         * @type {Array.<VolumeMountInfo> || null}
+         */
+        this.VolumeMountInfoList = null;
+
+        /**
+         * 是否清除数据卷信息，默认false
+         * @type {boolean || null}
+         */
+        this.VolumeClean = null;
+
     }
 
     /**
@@ -5736,6 +6807,39 @@ class DeployContainerGroupRequest extends  AbstractModel {
             obj.deserialize(params.SchedulingStrategy)
             this.SchedulingStrategy = obj;
         }
+        this.IncrementalDeployment = 'IncrementalDeployment' in params ? params.IncrementalDeployment : null;
+        this.RepoType = 'RepoType' in params ? params.RepoType : null;
+
+        if (params.VolumeInfos) {
+            let obj = new VolumeInfo();
+            obj.deserialize(params.VolumeInfos)
+            this.VolumeInfos = obj;
+        }
+
+        if (params.VolumeMountInfos) {
+            let obj = new VolumeMountInfo();
+            obj.deserialize(params.VolumeMountInfos)
+            this.VolumeMountInfos = obj;
+        }
+
+        if (params.VolumeInfoList) {
+            this.VolumeInfoList = new Array();
+            for (let z in params.VolumeInfoList) {
+                let obj = new VolumeInfo();
+                obj.deserialize(params.VolumeInfoList[z]);
+                this.VolumeInfoList.push(obj);
+            }
+        }
+
+        if (params.VolumeMountInfoList) {
+            this.VolumeMountInfoList = new Array();
+            for (let z in params.VolumeMountInfoList) {
+                let obj = new VolumeMountInfo();
+                obj.deserialize(params.VolumeMountInfoList[z]);
+                this.VolumeMountInfoList.push(obj);
+            }
+        }
+        this.VolumeClean = 'VolumeClean' in params ? params.VolumeClean : null;
 
     }
 }
@@ -5790,6 +6894,12 @@ class DescribeSimpleApplicationsRequest extends  AbstractModel {
          */
         this.SearchWord = null;
 
+        /**
+         * 无
+         * @type {boolean || null}
+         */
+        this.DisableProgramAuthCheck = null;
+
     }
 
     /**
@@ -5806,6 +6916,54 @@ class DescribeSimpleApplicationsRequest extends  AbstractModel {
         this.MicroserviceType = 'MicroserviceType' in params ? params.MicroserviceType : null;
         this.ApplicationResourceTypeList = 'ApplicationResourceTypeList' in params ? params.ApplicationResourceTypeList : null;
         this.SearchWord = 'SearchWord' in params ? params.SearchWord : null;
+        this.DisableProgramAuthCheck = 'DisableProgramAuthCheck' in params ? params.DisableProgramAuthCheck : null;
+
+    }
+}
+
+/**
+ * OperateApplicationTcrBinding请求参数结构体
+ * @class
+ */
+class OperateApplicationTcrBindingRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * bind 或 unbind
+         * @type {string || null}
+         */
+        this.Command = null;
+
+        /**
+         * 应用id
+         * @type {string || null}
+         */
+        this.ApplicationId = null;
+
+        /**
+         * TcrRepoInfo值
+         * @type {TcrRepoInfo || null}
+         */
+        this.TcrRepoInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Command = 'Command' in params ? params.Command : null;
+        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
+
+        if (params.TcrRepoInfo) {
+            let obj = new TcrRepoInfo();
+            obj.deserialize(params.TcrRepoInfo)
+            this.TcrRepoInfo = obj;
+        }
 
     }
 }
@@ -5923,6 +7081,13 @@ class ContainGroup extends  AbstractModel {
          */
         this.Alias = null;
 
+        /**
+         * KubeInjectEnable值
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.KubeInjectEnable = null;
+
     }
 
     /**
@@ -5947,6 +7112,7 @@ class ContainGroup extends  AbstractModel {
         this.MemRequest = 'MemRequest' in params ? params.MemRequest : null;
         this.MemLimit = 'MemLimit' in params ? params.MemLimit : null;
         this.Alias = 'Alias' in params ? params.Alias : null;
+        this.KubeInjectEnable = 'KubeInjectEnable' in params ? params.KubeInjectEnable : null;
 
     }
 }
@@ -6119,6 +7285,104 @@ class ReleaseApiGroupResponse extends  AbstractModel {
         }
         this.Result = 'Result' in params ? params.Result : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateFileConfig请求参数结构体
+ * @class
+ */
+class CreateFileConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 配置项名称
+         * @type {string || null}
+         */
+        this.ConfigName = null;
+
+        /**
+         * 配置项版本
+         * @type {string || null}
+         */
+        this.ConfigVersion = null;
+
+        /**
+         * 配置项文件名
+         * @type {string || null}
+         */
+        this.ConfigFileName = null;
+
+        /**
+         * 配置项文件内容（原始内容编码需要 utf-8 格式，如果 ConfigFileCode 为 gbk，后台会进行转换）
+         * @type {string || null}
+         */
+        this.ConfigFileValue = null;
+
+        /**
+         * 配置项关联应用ID
+         * @type {string || null}
+         */
+        this.ApplicationId = null;
+
+        /**
+         * 发布路径
+         * @type {string || null}
+         */
+        this.ConfigFilePath = null;
+
+        /**
+         * 配置项版本描述
+         * @type {string || null}
+         */
+        this.ConfigVersionDesc = null;
+
+        /**
+         * 配置项文件编码，utf-8 或 gbk。注：如果选择 gbk，需要新版本 tsf-consul-template （公有云虚拟机需要使用 1.32 tsf-agent，容器需要从文档中获取最新的 tsf-consul-template-docker.tar.gz）的支持
+         * @type {string || null}
+         */
+        this.ConfigFileCode = null;
+
+        /**
+         * 后置命令
+         * @type {string || null}
+         */
+        this.ConfigPostCmd = null;
+
+        /**
+         * Base64编码的配置项
+         * @type {boolean || null}
+         */
+        this.EncodeWithBase64 = null;
+
+        /**
+         * 无
+         * @type {Array.<string> || null}
+         */
+        this.ProgramIdList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ConfigName = 'ConfigName' in params ? params.ConfigName : null;
+        this.ConfigVersion = 'ConfigVersion' in params ? params.ConfigVersion : null;
+        this.ConfigFileName = 'ConfigFileName' in params ? params.ConfigFileName : null;
+        this.ConfigFileValue = 'ConfigFileValue' in params ? params.ConfigFileValue : null;
+        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
+        this.ConfigFilePath = 'ConfigFilePath' in params ? params.ConfigFilePath : null;
+        this.ConfigVersionDesc = 'ConfigVersionDesc' in params ? params.ConfigVersionDesc : null;
+        this.ConfigFileCode = 'ConfigFileCode' in params ? params.ConfigFileCode : null;
+        this.ConfigPostCmd = 'ConfigPostCmd' in params ? params.ConfigPostCmd : null;
+        this.EncodeWithBase64 = 'EncodeWithBase64' in params ? params.EncodeWithBase64 : null;
+        this.ProgramIdList = 'ProgramIdList' in params ? params.ProgramIdList : null;
 
     }
 }
@@ -6386,25 +7650,54 @@ class EnableTaskRequest extends  AbstractModel {
 }
 
 /**
- * RevocationPublicConfig返回参数结构体
+ * 业务日志
  * @class
  */
-class RevocationPublicConfigResponse extends  AbstractModel {
+class BusinessLogV2 extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * true：撤销成功；false：撤销失败
+         * 实例ID
 注意：此字段可能返回 null，表示取不到有效值。
-         * @type {boolean || null}
-         */
-        this.Result = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.InstanceId = null;
+
+        /**
+         * 日志内容
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Content = null;
+
+        /**
+         * 日志时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Timestamp = null;
+
+        /**
+         * 实例IP
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.InstanceIp = null;
+
+        /**
+         * 日志ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.LogId = null;
+
+        /**
+         * 部署组ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.GroupId = null;
 
     }
 
@@ -6415,8 +7708,12 @@ class RevocationPublicConfigResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Result = 'Result' in params ? params.Result : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Content = 'Content' in params ? params.Content : null;
+        this.Timestamp = 'Timestamp' in params ? params.Timestamp : null;
+        this.InstanceIp = 'InstanceIp' in params ? params.InstanceIp : null;
+        this.LogId = 'LogId' in params ? params.LogId : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
 
     }
 }
@@ -6506,6 +7803,96 @@ class DescribeMicroserviceRequest extends  AbstractModel {
 }
 
 /**
+ * Tsf分页集群对象
+ * @class
+ */
+class TsfPageCluster extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总条数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 集群列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Cluster> || null}
+         */
+        this.Content = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Content) {
+            this.Content = new Array();
+            for (let z in params.Content) {
+                let obj = new Cluster();
+                obj.deserialize(params.Content[z]);
+                this.Content.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * InstanceEnrichedInfo列表结构
+ * @class
+ */
+class InstanceEnrichedInfoPage extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总数量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<InstanceEnrichedInfo> || null}
+         */
+        this.Content = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Content) {
+            this.Content = new Array();
+            for (let z in params.Content) {
+                let obj = new InstanceEnrichedInfo();
+                obj.deserialize(params.Content[z]);
+                this.Content.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DescribePodInstances返回参数结构体
  * @class
  */
@@ -6541,6 +7928,195 @@ class DescribePodInstancesResponse extends  AbstractModel {
             this.Result = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 文件配置项发布信息
+ * @class
+ */
+class FileConfigRelease extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 配置项发布ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ConfigReleaseId = null;
+
+        /**
+         * 配置项ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ConfigId = null;
+
+        /**
+         * 配置项名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ConfigName = null;
+
+        /**
+         * 配置项版本
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ConfigVersion = null;
+
+        /**
+         * 发布描述
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ReleaseDesc = null;
+
+        /**
+         * 发布时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ReleaseTime = null;
+
+        /**
+         * 部署组ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
+        /**
+         * 部署组名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.GroupName = null;
+
+        /**
+         * 命名空间ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.NamespaceId = null;
+
+        /**
+         * 命名空间名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.NamespaceName = null;
+
+        /**
+         * 集群ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 集群名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ClusterName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ConfigReleaseId = 'ConfigReleaseId' in params ? params.ConfigReleaseId : null;
+        this.ConfigId = 'ConfigId' in params ? params.ConfigId : null;
+        this.ConfigName = 'ConfigName' in params ? params.ConfigName : null;
+        this.ConfigVersion = 'ConfigVersion' in params ? params.ConfigVersion : null;
+        this.ReleaseDesc = 'ReleaseDesc' in params ? params.ReleaseDesc : null;
+        this.ReleaseTime = 'ReleaseTime' in params ? params.ReleaseTime : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.GroupName = 'GroupName' in params ? params.GroupName : null;
+        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
+        this.NamespaceName = 'NamespaceName' in params ? params.NamespaceName : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
+
+    }
+}
+
+/**
+ * DescribeInvocationMetricDataPoint请求参数结构体
+ * @class
+ */
+class DescribeInvocationMetricDataPointRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 开始时间
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 结束时间
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 维度
+         * @type {Array.<MetricDimensionValue> || null}
+         */
+        this.MetricDimensionValues = null;
+
+        /**
+         * 指标
+         * @type {Array.<Metric> || null}
+         */
+        this.Metrics = null;
+
+        /**
+         * 调用视角。可选值：SERVER, CLIENT。默认为SERVER
+         * @type {string || null}
+         */
+        this.Kind = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+
+        if (params.MetricDimensionValues) {
+            this.MetricDimensionValues = new Array();
+            for (let z in params.MetricDimensionValues) {
+                let obj = new MetricDimensionValue();
+                obj.deserialize(params.MetricDimensionValues[z]);
+                this.MetricDimensionValues.push(obj);
+            }
+        }
+
+        if (params.Metrics) {
+            this.Metrics = new Array();
+            for (let z in params.Metrics) {
+                let obj = new Metric();
+                obj.deserialize(params.Metrics[z]);
+                this.Metrics.push(obj);
+            }
+        }
+        this.Kind = 'Kind' in params ? params.Kind : null;
 
     }
 }
@@ -6760,6 +8336,269 @@ class StopTaskBatchResponse extends  AbstractModel {
 }
 
 /**
+ * 服务统计结果
+ * @class
+ */
+class ServiceStatisticsResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 请求模版路径:type为接口时返回，服务时不返回
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Path = null;
+
+        /**
+         * 请求方法:type为接口时返回，服务时不返回
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Method = null;
+
+        /**
+         * 微服务Id
+         * @type {string || null}
+         */
+        this.MicroserviceId = null;
+
+        /**
+         * 微服务名称
+         * @type {string || null}
+         */
+        this.MicroserviceName = null;
+
+        /**
+         * 请求数
+         * @type {number || null}
+         */
+        this.RequestCount = null;
+
+        /**
+         * 请求错误率，不带百分号
+         * @type {number || null}
+         */
+        this.ErrorRate = null;
+
+        /**
+         * 平均响应耗时ms
+         * @type {number || null}
+         */
+        this.AvgTimeConsuming = null;
+
+        /**
+         * 响应耗时曲线
+         * @type {Array.<MetricDataCurve> || null}
+         */
+        this.MetricDataCurves = null;
+
+        /**
+         * 实例id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 实例name
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * 部署组id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
+        /**
+         * 部署组name
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.GroupName = null;
+
+        /**
+         * 部署组类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ClusterType = null;
+
+        /**
+         * 部署组是否存在
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.GroupExist = null;
+
+        /**
+         * 实例是否存在，仅限cvm
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.InstanceExist = null;
+
+        /**
+         * 应用id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ApplicationId = null;
+
+        /**
+         * 微服务类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.MicroserviceType = null;
+
+        /**
+         * cpu使用率
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.CpuPercent = null;
+
+        /**
+         * 已用堆大小,单位KB
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.HeapUsed = null;
+
+        /**
+         * 数据库
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DbName = null;
+
+        /**
+         * Script值
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Script = null;
+
+        /**
+         * 数据库类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DbType = null;
+
+        /**
+         * Apdex值
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Apdex = null;
+
+        /**
+         * Qps值
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Qps = null;
+
+        /**
+         * 实例在线数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.InstanceOnlineCount = null;
+
+        /**
+         * 实例总数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.InstanceTotalCount = null;
+
+        /**
+         * normal/error
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * normal/warn/error
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ErrorRateLevel = null;
+
+        /**
+         * normal/warn/error
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.AvgTimeConsumingLevel = null;
+
+        /**
+         * normal/warn/error
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ApdexLevel = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Path = 'Path' in params ? params.Path : null;
+        this.Method = 'Method' in params ? params.Method : null;
+        this.MicroserviceId = 'MicroserviceId' in params ? params.MicroserviceId : null;
+        this.MicroserviceName = 'MicroserviceName' in params ? params.MicroserviceName : null;
+        this.RequestCount = 'RequestCount' in params ? params.RequestCount : null;
+        this.ErrorRate = 'ErrorRate' in params ? params.ErrorRate : null;
+        this.AvgTimeConsuming = 'AvgTimeConsuming' in params ? params.AvgTimeConsuming : null;
+
+        if (params.MetricDataCurves) {
+            this.MetricDataCurves = new Array();
+            for (let z in params.MetricDataCurves) {
+                let obj = new MetricDataCurve();
+                obj.deserialize(params.MetricDataCurves[z]);
+                this.MetricDataCurves.push(obj);
+            }
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.GroupName = 'GroupName' in params ? params.GroupName : null;
+        this.ClusterType = 'ClusterType' in params ? params.ClusterType : null;
+        this.GroupExist = 'GroupExist' in params ? params.GroupExist : null;
+        this.InstanceExist = 'InstanceExist' in params ? params.InstanceExist : null;
+        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
+        this.MicroserviceType = 'MicroserviceType' in params ? params.MicroserviceType : null;
+        this.CpuPercent = 'CpuPercent' in params ? params.CpuPercent : null;
+        this.HeapUsed = 'HeapUsed' in params ? params.HeapUsed : null;
+        this.DbName = 'DbName' in params ? params.DbName : null;
+        this.Script = 'Script' in params ? params.Script : null;
+        this.DbType = 'DbType' in params ? params.DbType : null;
+        this.Apdex = 'Apdex' in params ? params.Apdex : null;
+        this.Qps = 'Qps' in params ? params.Qps : null;
+        this.InstanceOnlineCount = 'InstanceOnlineCount' in params ? params.InstanceOnlineCount : null;
+        this.InstanceTotalCount = 'InstanceTotalCount' in params ? params.InstanceTotalCount : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrorRateLevel = 'ErrorRateLevel' in params ? params.ErrorRateLevel : null;
+        this.AvgTimeConsumingLevel = 'AvgTimeConsumingLevel' in params ? params.AvgTimeConsumingLevel : null;
+        this.ApdexLevel = 'ApdexLevel' in params ? params.ApdexLevel : null;
+
+    }
+}
+
+/**
  * CreateContainGroup返回参数结构体
  * @class
  */
@@ -6945,24 +8784,26 @@ class RevocationConfigResponse extends  AbstractModel {
 }
 
 /**
- * DeployServerlessGroup返回参数结构体
+ * 描述程序包关联信息
  * @class
  */
-class DeployServerlessGroupResponse extends  AbstractModel {
+class PkgBind extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 结果true：成功；false：失败；
-         * @type {boolean || null}
-         */
-        this.Result = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 应用id
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.ApplicationId = null;
+
+        /**
+         * 部署组id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.GroupId = null;
 
     }
 
@@ -6973,43 +8814,8 @@ class DeployServerlessGroupResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Result = 'Result' in params ? params.Result : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * CreateAllGatewayApiAsync返回参数结构体
- * @class
- */
-class CreateAllGatewayApiAsyncResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 是否成功
-         * @type {boolean || null}
-         */
-        this.Result = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Result = 'Result' in params ? params.Result : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
 
     }
 }
@@ -7348,6 +9154,13 @@ class Namespace extends  AbstractModel {
          */
         this.IsHaEnable = null;
 
+        /**
+         * KubeInjectEnable值
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.KubeInjectEnable = null;
+
     }
 
     /**
@@ -7379,6 +9192,7 @@ class Namespace extends  AbstractModel {
         this.NamespaceResourceType = 'NamespaceResourceType' in params ? params.NamespaceResourceType : null;
         this.NamespaceType = 'NamespaceType' in params ? params.NamespaceType : null;
         this.IsHaEnable = 'IsHaEnable' in params ? params.IsHaEnable : null;
+        this.KubeInjectEnable = 'KubeInjectEnable' in params ? params.KubeInjectEnable : null;
 
     }
 }
@@ -7497,6 +9311,147 @@ class ResourceFieldRef extends  AbstractModel {
             return;
         }
         this.Resource = 'Resource' in params ? params.Resource : null;
+
+    }
+}
+
+/**
+ * tsf-privilege 模块，资源
+ * @class
+ */
+class Resource extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 资源ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ResourceId = null;
+
+        /**
+         * 资源编码
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ResourceCode = null;
+
+        /**
+         * 资源名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ResourceName = null;
+
+        /**
+         * 资源所属产品编码
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ServiceCode = null;
+
+        /**
+         * 选取资源使用的Action
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ResourceAction = null;
+
+        /**
+         * 资源数据查询的ID字段名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.IdField = null;
+
+        /**
+         * 资源数据查询的名称字段名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.NameField = null;
+
+        /**
+         * 资源数据查询的ID过滤字段名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SelectIdsField = null;
+
+        /**
+         * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.CreationTime = null;
+
+        /**
+         * 最后更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.LastUpdateTime = null;
+
+        /**
+         * 删除标识
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.DeleteFlag = null;
+
+        /**
+         * 资源描述
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ResourceDesc = null;
+
+        /**
+         * 是否可以选择全部
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.CanSelectAll = null;
+
+        /**
+         * 资源数据查询的模糊查询字段名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SearchWordField = null;
+
+        /**
+         * 排序
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Index = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
+        this.ResourceCode = 'ResourceCode' in params ? params.ResourceCode : null;
+        this.ResourceName = 'ResourceName' in params ? params.ResourceName : null;
+        this.ServiceCode = 'ServiceCode' in params ? params.ServiceCode : null;
+        this.ResourceAction = 'ResourceAction' in params ? params.ResourceAction : null;
+        this.IdField = 'IdField' in params ? params.IdField : null;
+        this.NameField = 'NameField' in params ? params.NameField : null;
+        this.SelectIdsField = 'SelectIdsField' in params ? params.SelectIdsField : null;
+        this.CreationTime = 'CreationTime' in params ? params.CreationTime : null;
+        this.LastUpdateTime = 'LastUpdateTime' in params ? params.LastUpdateTime : null;
+        this.DeleteFlag = 'DeleteFlag' in params ? params.DeleteFlag : null;
+        this.ResourceDesc = 'ResourceDesc' in params ? params.ResourceDesc : null;
+        this.CanSelectAll = 'CanSelectAll' in params ? params.CanSelectAll : null;
+        this.SearchWordField = 'SearchWordField' in params ? params.SearchWordField : null;
+        this.Index = 'Index' in params ? params.Index : null;
 
     }
 }
@@ -7648,6 +9603,12 @@ class CreateLaneRuleRequest extends  AbstractModel {
          */
         this.LaneId = null;
 
+        /**
+         * 无
+         * @type {Array.<string> || null}
+         */
+        this.ProgramIdList = null;
+
     }
 
     /**
@@ -7670,6 +9631,7 @@ class CreateLaneRuleRequest extends  AbstractModel {
         }
         this.RuleTagRelationship = 'RuleTagRelationship' in params ? params.RuleTagRelationship : null;
         this.LaneId = 'LaneId' in params ? params.LaneId : null;
+        this.ProgramIdList = 'ProgramIdList' in params ? params.ProgramIdList : null;
 
     }
 }
@@ -8019,26 +9981,33 @@ class DescribeFlowLastBatchStateRequest extends  AbstractModel {
 }
 
 /**
- * Tsf分页集群对象
+ * 指标监控数据曲线
  * @class
  */
-class TsfPageCluster extends  AbstractModel {
+class MetricDataCurve extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 总条数
+         * 指标名称
 注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
+         * @type {string || null}
          */
-        this.TotalCount = null;
+        this.MetricName = null;
 
         /**
-         * 集群列表
+         * 指标计算方式
 注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<Cluster> || null}
+         * @type {string || null}
          */
-        this.Content = null;
+        this.MetricFunction = null;
+
+        /**
+         * 指标数据点集合
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<MetricDataPoint> || null}
+         */
+        this.MetricDataPoints = null;
 
     }
 
@@ -8049,14 +10018,15 @@ class TsfPageCluster extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.MetricName = 'MetricName' in params ? params.MetricName : null;
+        this.MetricFunction = 'MetricFunction' in params ? params.MetricFunction : null;
 
-        if (params.Content) {
-            this.Content = new Array();
-            for (let z in params.Content) {
-                let obj = new Cluster();
-                obj.deserialize(params.Content[z]);
-                this.Content.push(obj);
+        if (params.MetricDataPoints) {
+            this.MetricDataPoints = new Array();
+            for (let z in params.MetricDataPoints) {
+                let obj = new MetricDataPoint();
+                obj.deserialize(params.MetricDataPoints[z]);
+                this.MetricDataPoints.push(obj);
             }
         }
 
@@ -8215,6 +10185,42 @@ class ShrinkInstancesResponse extends  AbstractModel {
             obj.deserialize(params.Result)
             this.Result = obj;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteLaneRule返回参数结构体
+ * @class
+ */
+class DeleteLaneRuleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 操作状态
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -8414,6 +10420,357 @@ class DescribeGroupUseDetailResponse extends  AbstractModel {
 }
 
 /**
+ *  获取部署组
+ * @class
+ */
+class ContainerGroupDeploy extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 部署组id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
+        /**
+         * 分组名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.GroupName = null;
+
+        /**
+         * 实例总数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.InstanceNum = null;
+
+        /**
+         * 已启动实例总数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.CurrentNum = null;
+
+        /**
+         * 镜像server
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Server = null;
+
+        /**
+         * 镜像名，如/tsf/nginx
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Reponame = null;
+
+        /**
+         * 镜像版本名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TagName = null;
+
+        /**
+         * 业务容器初始分配的 CPU 核数，对应 K8S request
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CpuRequest = null;
+
+        /**
+         * 业务容器最大分配的 CPU 核数，对应 K8S limit
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CpuLimit = null;
+
+        /**
+         * 业务容器初始分配的内存 MiB 数，对应 K8S request
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.MemRequest = null;
+
+        /**
+         * 业务容器最大分配的内存 MiB 数，对应 K8S limit
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.MemLimit = null;
+
+        /**
+         * 0:公网 1:集群内访问 2：NodePort
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.AccessType = null;
+
+        /**
+         * 端口映射
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<ProtocolPort> || null}
+         */
+        this.ProtocolPorts = null;
+
+        /**
+         * 更新方式：0:快速更新 1:滚动更新
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.UpdateType = null;
+
+        /**
+         * 更新间隔,单位秒
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.UpdateIvl = null;
+
+        /**
+         * jvm参数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.JvmOpts = null;
+
+        /**
+         * 子网id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * agent容器初始分配的 CPU 核数，对应 K8S request
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.AgentCpuRequest = null;
+
+        /**
+         * agent容器最大分配的 CPU 核数，对应 K8S limit
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.AgentCpuLimit = null;
+
+        /**
+         * agent容器初始分配的内存 MiB 数，对应 K8S request
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.AgentMemRequest = null;
+
+        /**
+         * agent容器最大分配的内存 MiB 数，对应 K8S limit
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.AgentMemLimit = null;
+
+        /**
+         * istioproxy容器初始分配的 CPU 核数，对应 K8S request
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.IstioCpuRequest = null;
+
+        /**
+         * istioproxy容器最大分配的 CPU 核数，对应 K8S limit
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.IstioCpuLimit = null;
+
+        /**
+         * istioproxy容器初始分配的内存 MiB 数，对应 K8S request
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.IstioMemRequest = null;
+
+        /**
+         * istioproxy容器最大分配的内存 MiB 数，对应 K8S limit
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.IstioMemLimit = null;
+
+        /**
+         * 部署组的环境变量数组，这里没有展示 tsf 使用的环境变量，只展示了用户设置的环境变量。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Env> || null}
+         */
+        this.Envs = null;
+
+        /**
+         * 健康检查配置信息，若不指定该参数，则默认不设置健康检查。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {HealthCheckSettings || null}
+         */
+        this.HealthCheckSettings = null;
+
+        /**
+         * 是否部署Agent容器
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.DeployAgent = null;
+
+        /**
+         * 部署组备注
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Alias = null;
+
+        /**
+         * 是否创建 k8s service
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.DisableService = null;
+
+        /**
+         * service 是否为 headless 类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.HeadlessService = null;
+
+        /**
+         * TcrRepoInfo值
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {TcrRepoInfo || null}
+         */
+        this.TcrRepoInfo = null;
+
+        /**
+         * 数据卷信息，list
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<VolumeInfo> || null}
+         */
+        this.VolumeInfos = null;
+
+        /**
+         * 数据卷挂载信息，list
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<VolumeMountInfo> || null}
+         */
+        this.VolumeMountInfos = null;
+
+        /**
+         * KubeInjectEnable值
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.KubeInjectEnable = null;
+
+        /**
+         * 仓库类型 (person, tcr)
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RepoType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.GroupName = 'GroupName' in params ? params.GroupName : null;
+        this.InstanceNum = 'InstanceNum' in params ? params.InstanceNum : null;
+        this.CurrentNum = 'CurrentNum' in params ? params.CurrentNum : null;
+        this.Server = 'Server' in params ? params.Server : null;
+        this.Reponame = 'Reponame' in params ? params.Reponame : null;
+        this.TagName = 'TagName' in params ? params.TagName : null;
+        this.CpuRequest = 'CpuRequest' in params ? params.CpuRequest : null;
+        this.CpuLimit = 'CpuLimit' in params ? params.CpuLimit : null;
+        this.MemRequest = 'MemRequest' in params ? params.MemRequest : null;
+        this.MemLimit = 'MemLimit' in params ? params.MemLimit : null;
+        this.AccessType = 'AccessType' in params ? params.AccessType : null;
+
+        if (params.ProtocolPorts) {
+            this.ProtocolPorts = new Array();
+            for (let z in params.ProtocolPorts) {
+                let obj = new ProtocolPort();
+                obj.deserialize(params.ProtocolPorts[z]);
+                this.ProtocolPorts.push(obj);
+            }
+        }
+        this.UpdateType = 'UpdateType' in params ? params.UpdateType : null;
+        this.UpdateIvl = 'UpdateIvl' in params ? params.UpdateIvl : null;
+        this.JvmOpts = 'JvmOpts' in params ? params.JvmOpts : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.AgentCpuRequest = 'AgentCpuRequest' in params ? params.AgentCpuRequest : null;
+        this.AgentCpuLimit = 'AgentCpuLimit' in params ? params.AgentCpuLimit : null;
+        this.AgentMemRequest = 'AgentMemRequest' in params ? params.AgentMemRequest : null;
+        this.AgentMemLimit = 'AgentMemLimit' in params ? params.AgentMemLimit : null;
+        this.IstioCpuRequest = 'IstioCpuRequest' in params ? params.IstioCpuRequest : null;
+        this.IstioCpuLimit = 'IstioCpuLimit' in params ? params.IstioCpuLimit : null;
+        this.IstioMemRequest = 'IstioMemRequest' in params ? params.IstioMemRequest : null;
+        this.IstioMemLimit = 'IstioMemLimit' in params ? params.IstioMemLimit : null;
+
+        if (params.Envs) {
+            this.Envs = new Array();
+            for (let z in params.Envs) {
+                let obj = new Env();
+                obj.deserialize(params.Envs[z]);
+                this.Envs.push(obj);
+            }
+        }
+
+        if (params.HealthCheckSettings) {
+            let obj = new HealthCheckSettings();
+            obj.deserialize(params.HealthCheckSettings)
+            this.HealthCheckSettings = obj;
+        }
+        this.DeployAgent = 'DeployAgent' in params ? params.DeployAgent : null;
+        this.Alias = 'Alias' in params ? params.Alias : null;
+        this.DisableService = 'DisableService' in params ? params.DisableService : null;
+        this.HeadlessService = 'HeadlessService' in params ? params.HeadlessService : null;
+
+        if (params.TcrRepoInfo) {
+            let obj = new TcrRepoInfo();
+            obj.deserialize(params.TcrRepoInfo)
+            this.TcrRepoInfo = obj;
+        }
+
+        if (params.VolumeInfos) {
+            this.VolumeInfos = new Array();
+            for (let z in params.VolumeInfos) {
+                let obj = new VolumeInfo();
+                obj.deserialize(params.VolumeInfos[z]);
+                this.VolumeInfos.push(obj);
+            }
+        }
+
+        if (params.VolumeMountInfos) {
+            this.VolumeMountInfos = new Array();
+            for (let z in params.VolumeMountInfos) {
+                let obj = new VolumeMountInfo();
+                obj.deserialize(params.VolumeMountInfos[z]);
+                this.VolumeMountInfos.push(obj);
+            }
+        }
+        this.KubeInjectEnable = 'KubeInjectEnable' in params ? params.KubeInjectEnable : null;
+        this.RepoType = 'RepoType' in params ? params.RepoType : null;
+
+    }
+}
+
+/**
  * Tsf命名空间分页对象
  * @class
  */
@@ -8459,6 +10816,48 @@ class TsfPageNamespace extends  AbstractModel {
 }
 
 /**
+ * 容器卷挂载信息
+ * @class
+ */
+class VolumeInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 数据卷类型
+         * @type {string || null}
+         */
+        this.VolumeType = null;
+
+        /**
+         * 数据卷名称
+         * @type {string || null}
+         */
+        this.VolumeName = null;
+
+        /**
+         * 数据卷配置
+         * @type {string || null}
+         */
+        this.VolumeConfig = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VolumeType = 'VolumeType' in params ? params.VolumeType : null;
+        this.VolumeName = 'VolumeName' in params ? params.VolumeName : null;
+        this.VolumeConfig = 'VolumeConfig' in params ? params.VolumeConfig : null;
+
+    }
+}
+
+/**
  * UpdateApiTimeouts请求参数结构体
  * @class
  */
@@ -8496,6 +10895,87 @@ class UpdateApiTimeoutsRequest extends  AbstractModel {
         this.ApiIds = 'ApiIds' in params ? params.ApiIds : null;
         this.UsableStatus = 'UsableStatus' in params ? params.UsableStatus : null;
         this.Timeout = 'Timeout' in params ? params.Timeout : null;
+
+    }
+}
+
+/**
+ * 指标
+ * @class
+ */
+class Metric extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 指标名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 指标计算方式
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Function = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Function = 'Function' in params ? params.Function : null;
+
+    }
+}
+
+/**
+ * DescribeOverviewInvocation返回参数结构体
+ * @class
+ */
+class DescribeOverviewInvocationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 监控统计数据列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<MetricDataPoint> || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            this.Result = new Array();
+            for (let z in params.Result) {
+                let obj = new MetricDataPoint();
+                obj.deserialize(params.Result[z]);
+                this.Result.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8568,6 +11048,12 @@ class DescribeSimpleNamespacesRequest extends  AbstractModel {
          */
         this.IsDefault = null;
 
+        /**
+         * 无
+         * @type {boolean || null}
+         */
+        this.DisableProgramAuthCheck = null;
+
     }
 
     /**
@@ -8587,6 +11073,7 @@ class DescribeSimpleNamespacesRequest extends  AbstractModel {
         this.NamespaceTypeList = 'NamespaceTypeList' in params ? params.NamespaceTypeList : null;
         this.NamespaceName = 'NamespaceName' in params ? params.NamespaceName : null;
         this.IsDefault = 'IsDefault' in params ? params.IsDefault : null;
+        this.DisableProgramAuthCheck = 'DisableProgramAuthCheck' in params ? params.DisableProgramAuthCheck : null;
 
     }
 }
@@ -8622,6 +11109,118 @@ class ExecuteTaskFlowResponse extends  AbstractModel {
         }
         this.Result = 'Result' in params ? params.Result : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * SearchBusinessLog请求参数结构体
+ * @class
+ */
+class SearchBusinessLogRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 日志配置项ID
+         * @type {string || null}
+         */
+        this.ConfigId = null;
+
+        /**
+         * 机器实例ID，不传表示全部实例
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+        /**
+         * 开始时间
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 结束时间
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 请求偏移量，取值范围大于等于0，默认值为0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 单页请求配置数量，取值范围[1, 200]，默认值为50
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 排序规则，默认值"time"
+         * @type {string || null}
+         */
+        this.OrderBy = null;
+
+        /**
+         * 排序方式，取值"asc"或"desc"，默认值"desc"
+         * @type {string || null}
+         */
+        this.OrderType = null;
+
+        /**
+         * 检索关键词
+         * @type {Array.<string> || null}
+         */
+        this.SearchWords = null;
+
+        /**
+         * 部署组ID列表，不传表示全部部署组
+         * @type {Array.<string> || null}
+         */
+        this.GroupIds = null;
+
+        /**
+         * 检索类型，取值"LUCENE", "REGEXP", "NORMAL"
+         * @type {string || null}
+         */
+        this.SearchWordType = null;
+
+        /**
+         * 批量请求类型，取值"page"或"scroll"
+         * @type {string || null}
+         */
+        this.BatchType = null;
+
+        /**
+         * 游标ID
+         * @type {string || null}
+         */
+        this.ScrollId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ConfigId = 'ConfigId' in params ? params.ConfigId : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
+        this.OrderType = 'OrderType' in params ? params.OrderType : null;
+        this.SearchWords = 'SearchWords' in params ? params.SearchWords : null;
+        this.GroupIds = 'GroupIds' in params ? params.GroupIds : null;
+        this.SearchWordType = 'SearchWordType' in params ? params.SearchWordType : null;
+        this.BatchType = 'BatchType' in params ? params.BatchType : null;
+        this.ScrollId = 'ScrollId' in params ? params.ScrollId : null;
 
     }
 }
@@ -8822,6 +11421,12 @@ class DescribeSimpleClustersRequest extends  AbstractModel {
          */
         this.SearchWord = null;
 
+        /**
+         * 无
+         * @type {boolean || null}
+         */
+        this.DisableProgramAuthCheck = null;
+
     }
 
     /**
@@ -8836,47 +11441,67 @@ class DescribeSimpleClustersRequest extends  AbstractModel {
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.SearchWord = 'SearchWord' in params ? params.SearchWord : null;
+        this.DisableProgramAuthCheck = 'DisableProgramAuthCheck' in params ? params.DisableProgramAuthCheck : null;
 
     }
 }
 
 /**
- * DeployServerlessGroup请求参数结构体
+ * tsf-privilege模块 Program数据集
  * @class
  */
-class DeployServerlessGroupRequest extends  AbstractModel {
+class Program extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 部署组ID
+         * 数据集ID
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.GroupId = null;
+        this.ProgramId = null;
 
         /**
-         * 程序包ID
+         * 数据集名称
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.PkgId = null;
+        this.ProgramName = null;
 
         /**
-         * 所需实例内存大小，取值为 1Gi 2Gi 4Gi 8Gi 16Gi，缺省为 1Gi，不传表示维持原态
+         * 数据集描述
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.Memory = null;
+        this.ProgramDesc = null;
 
         /**
-         * 要求最小实例数，取值范围 [1, 4]，缺省为 1，不传表示维持原态
+         * 删除标识，true: 可以删除; false: 不可删除
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.DeleteFlag = null;
+
+        /**
+         * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
-        this.InstanceRequest = null;
+        this.CreationTime = null;
 
         /**
-         * 部署组启动参数，不传表示维持原态
-         * @type {string || null}
+         * 最后更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
          */
-        this.StartupParameters = null;
+        this.LastUpdateTime = null;
+
+        /**
+         * 数据项列表，无值时返回空数组
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<ProgramItem> || null}
+         */
+        this.ProgramItemList = null;
 
     }
 
@@ -8887,11 +11512,21 @@ class DeployServerlessGroupRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.GroupId = 'GroupId' in params ? params.GroupId : null;
-        this.PkgId = 'PkgId' in params ? params.PkgId : null;
-        this.Memory = 'Memory' in params ? params.Memory : null;
-        this.InstanceRequest = 'InstanceRequest' in params ? params.InstanceRequest : null;
-        this.StartupParameters = 'StartupParameters' in params ? params.StartupParameters : null;
+        this.ProgramId = 'ProgramId' in params ? params.ProgramId : null;
+        this.ProgramName = 'ProgramName' in params ? params.ProgramName : null;
+        this.ProgramDesc = 'ProgramDesc' in params ? params.ProgramDesc : null;
+        this.DeleteFlag = 'DeleteFlag' in params ? params.DeleteFlag : null;
+        this.CreationTime = 'CreationTime' in params ? params.CreationTime : null;
+        this.LastUpdateTime = 'LastUpdateTime' in params ? params.LastUpdateTime : null;
+
+        if (params.ProgramItemList) {
+            this.ProgramItemList = new Array();
+            for (let z in params.ProgramItemList) {
+                let obj = new ProgramItem();
+                obj.deserialize(params.ProgramItemList[z]);
+                this.ProgramItemList.push(obj);
+            }
+        }
 
     }
 }
@@ -9006,6 +11641,24 @@ class DescribeImageRepositoryRequest extends  AbstractModel {
          */
         this.Limit = null;
 
+        /**
+         * 企业: tcr ；个人: personal或者不填
+         * @type {string || null}
+         */
+        this.RepoType = null;
+
+        /**
+         * 应用id
+         * @type {string || null}
+         */
+        this.ApplicationId = null;
+
+        /**
+         * TcrRepoInfo值
+         * @type {TcrRepoInfo || null}
+         */
+        this.TcrRepoInfo = null;
+
     }
 
     /**
@@ -9018,6 +11671,59 @@ class DescribeImageRepositoryRequest extends  AbstractModel {
         this.SearchWord = 'SearchWord' in params ? params.SearchWord : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+        this.RepoType = 'RepoType' in params ? params.RepoType : null;
+        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
+
+        if (params.TcrRepoInfo) {
+            let obj = new TcrRepoInfo();
+            obj.deserialize(params.TcrRepoInfo)
+            this.TcrRepoInfo = obj;
+        }
+
+    }
+}
+
+/**
+ * 监控指标坐标
+ * @class
+ */
+class IndicatorCoord extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 指标横坐标值
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CoordX = null;
+
+        /**
+         * 指标纵坐标值
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CoordY = null;
+
+        /**
+         * 指标标签，用于标识附加信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CoordTag = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CoordX = 'CoordX' in params ? params.CoordX : null;
+        this.CoordY = 'CoordY' in params ? params.CoordY : null;
+        this.CoordTag = 'CoordTag' in params ? params.CoordTag : null;
 
     }
 }
@@ -9095,24 +11801,42 @@ class DescribeApiGroupRequest extends  AbstractModel {
 }
 
 /**
- * RedoTaskExecute返回参数结构体
+ * DescribeGatewayApis请求参数结构体
  * @class
  */
-class RedoTaskExecuteResponse extends  AbstractModel {
+class DescribeGatewayApisRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 成功失败
+         * 分组ID
          * @type {string || null}
          */
-        this.Result = null;
+        this.GroupId = null;
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 翻页偏移量
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 每页的记录数
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 搜索关键字，支持 API path
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.SearchWord = null;
+
+        /**
+         * 部署组ID
+         * @type {string || null}
+         */
+        this.GatewayDeployGroupId = null;
 
     }
 
@@ -9123,8 +11847,11 @@ class RedoTaskExecuteResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Result = 'Result' in params ? params.Result : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.SearchWord = 'SearchWord' in params ? params.SearchWord : null;
+        this.GatewayDeployGroupId = 'GatewayDeployGroupId' in params ? params.GatewayDeployGroupId : null;
 
     }
 }
@@ -9153,6 +11880,182 @@ class DescribeContainerGroupDetailRequest extends  AbstractModel {
             return;
         }
         this.GroupId = 'GroupId' in params ? params.GroupId : null;
+
+    }
+}
+
+/**
+ * DescribeJvmMonitor查询jvm监控数据接口返回数据封装
+ * @class
+ */
+class JvmMonitorData extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 堆内存监控图,三条线
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {MemoryPicture || null}
+         */
+        this.HeapMemory = null;
+
+        /**
+         * 非堆内存监控图,三条线
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {MemoryPicture || null}
+         */
+        this.NonHeapMemory = null;
+
+        /**
+         * 伊甸园区监控图,三条线
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {MemoryPicture || null}
+         */
+        this.EdenSpace = null;
+
+        /**
+         * 幸存者区监控图,三条线
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {MemoryPicture || null}
+         */
+        this.SurvivorSpace = null;
+
+        /**
+         * 老年代监控图,三条线
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {MemoryPicture || null}
+         */
+        this.OldSpace = null;
+
+        /**
+         * 元空间监控图,三条线
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {MemoryPicture || null}
+         */
+        this.MetaSpace = null;
+
+        /**
+         * 线程监控图,三条线
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {ThreadPicture || null}
+         */
+        this.ThreadPicture = null;
+
+        /**
+         * youngGC增量监控图,一条线
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<CurvePoint> || null}
+         */
+        this.YoungGC = null;
+
+        /**
+         * fullGC增量监控图,一条线
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<CurvePoint> || null}
+         */
+        this.FullGC = null;
+
+        /**
+         * cpu使用率,一条线
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<CurvePoint> || null}
+         */
+        this.CpuUsage = null;
+
+        /**
+         * 加载类数,一条线
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<CurvePoint> || null}
+         */
+        this.ClassCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.HeapMemory) {
+            let obj = new MemoryPicture();
+            obj.deserialize(params.HeapMemory)
+            this.HeapMemory = obj;
+        }
+
+        if (params.NonHeapMemory) {
+            let obj = new MemoryPicture();
+            obj.deserialize(params.NonHeapMemory)
+            this.NonHeapMemory = obj;
+        }
+
+        if (params.EdenSpace) {
+            let obj = new MemoryPicture();
+            obj.deserialize(params.EdenSpace)
+            this.EdenSpace = obj;
+        }
+
+        if (params.SurvivorSpace) {
+            let obj = new MemoryPicture();
+            obj.deserialize(params.SurvivorSpace)
+            this.SurvivorSpace = obj;
+        }
+
+        if (params.OldSpace) {
+            let obj = new MemoryPicture();
+            obj.deserialize(params.OldSpace)
+            this.OldSpace = obj;
+        }
+
+        if (params.MetaSpace) {
+            let obj = new MemoryPicture();
+            obj.deserialize(params.MetaSpace)
+            this.MetaSpace = obj;
+        }
+
+        if (params.ThreadPicture) {
+            let obj = new ThreadPicture();
+            obj.deserialize(params.ThreadPicture)
+            this.ThreadPicture = obj;
+        }
+
+        if (params.YoungGC) {
+            this.YoungGC = new Array();
+            for (let z in params.YoungGC) {
+                let obj = new CurvePoint();
+                obj.deserialize(params.YoungGC[z]);
+                this.YoungGC.push(obj);
+            }
+        }
+
+        if (params.FullGC) {
+            this.FullGC = new Array();
+            for (let z in params.FullGC) {
+                let obj = new CurvePoint();
+                obj.deserialize(params.FullGC[z]);
+                this.FullGC.push(obj);
+            }
+        }
+
+        if (params.CpuUsage) {
+            this.CpuUsage = new Array();
+            for (let z in params.CpuUsage) {
+                let obj = new CurvePoint();
+                obj.deserialize(params.CpuUsage[z]);
+                this.CpuUsage.push(obj);
+            }
+        }
+
+        if (params.ClassCount) {
+            this.ClassCount = new Array();
+            for (let z in params.ClassCount) {
+                let obj = new CurvePoint();
+                obj.deserialize(params.ClassCount[z]);
+                this.ClassCount.push(obj);
+            }
+        }
 
     }
 }
@@ -9283,6 +12186,7 @@ class ModifyTaskResponse extends  AbstractModel {
 
         /**
          * 更新是否成功
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {boolean || null}
          */
         this.Result = null;
@@ -9303,6 +12207,47 @@ class ModifyTaskResponse extends  AbstractModel {
             return;
         }
         this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * SearchBusinessLog返回参数结构体
+ * @class
+ */
+class SearchBusinessLogResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 业务日志列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {TsfPageBusinessLogV2 || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new TsfPageBusinessLogV2();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -9609,6 +12554,71 @@ class HealthCheckSetting extends  AbstractModel {
         this.Path = 'Path' in params ? params.Path : null;
         this.Command = 'Command' in params ? params.Command : null;
         this.Type = 'Type' in params ? params.Type : null;
+
+    }
+}
+
+/**
+ * DeleteLaneRule请求参数结构体
+ * @class
+ */
+class DeleteLaneRuleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 泳道规则Id
+         * @type {string || null}
+         */
+        this.RuleId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RuleId = 'RuleId' in params ? params.RuleId : null;
+
+    }
+}
+
+/**
+ * 指标维度
+ * @class
+ */
+class MetricDimension extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 指标维度名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 指标维度取值
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Value = 'Value' in params ? params.Value : null;
 
     }
 }
@@ -10274,6 +13284,115 @@ class StartGroupResponse extends  AbstractModel {
 }
 
 /**
+ * 部署组配置发布相关信息
+ * @class
+ */
+class GroupRelease extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 程序包ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.PackageId = null;
+
+        /**
+         * 程序包名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.PackageName = null;
+
+        /**
+         * 程序包版本
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.PackageVersion = null;
+
+        /**
+         * 镜像名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RepoName = null;
+
+        /**
+         * 镜像版本
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TagName = null;
+
+        /**
+         * 已发布的全局配置列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<ConfigRelease> || null}
+         */
+        this.PublicConfigReleaseList = null;
+
+        /**
+         * 已发布的应用配置列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<ConfigRelease> || null}
+         */
+        this.ConfigReleaseList = null;
+
+        /**
+         * 已发布的文件配置列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<FileConfigRelease> || null}
+         */
+        this.FileConfigReleaseList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PackageId = 'PackageId' in params ? params.PackageId : null;
+        this.PackageName = 'PackageName' in params ? params.PackageName : null;
+        this.PackageVersion = 'PackageVersion' in params ? params.PackageVersion : null;
+        this.RepoName = 'RepoName' in params ? params.RepoName : null;
+        this.TagName = 'TagName' in params ? params.TagName : null;
+
+        if (params.PublicConfigReleaseList) {
+            this.PublicConfigReleaseList = new Array();
+            for (let z in params.PublicConfigReleaseList) {
+                let obj = new ConfigRelease();
+                obj.deserialize(params.PublicConfigReleaseList[z]);
+                this.PublicConfigReleaseList.push(obj);
+            }
+        }
+
+        if (params.ConfigReleaseList) {
+            this.ConfigReleaseList = new Array();
+            for (let z in params.ConfigReleaseList) {
+                let obj = new ConfigRelease();
+                obj.deserialize(params.ConfigReleaseList[z]);
+                this.ConfigReleaseList.push(obj);
+            }
+        }
+
+        if (params.FileConfigReleaseList) {
+            this.FileConfigReleaseList = new Array();
+            for (let z in params.FileConfigReleaseList) {
+                let obj = new FileConfigRelease();
+                obj.deserialize(params.FileConfigReleaseList[z]);
+                this.FileConfigReleaseList.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DescribePathRewrites请求参数结构体
  * @class
  */
@@ -10346,6 +13465,67 @@ class ShrinkGroupRequest extends  AbstractModel {
             return;
         }
         this.GroupId = 'GroupId' in params ? params.GroupId : null;
+
+    }
+}
+
+/**
+ * 标准输出日志列表
+ * @class
+ */
+class TsfPageStdoutLogV2 extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总条数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 标准输出日志列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<StdoutLogV2> || null}
+         */
+        this.Content = null;
+
+        /**
+         * 游标ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ScrollId = null;
+
+        /**
+         * 查询状态
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Content) {
+            this.Content = new Array();
+            for (let z in params.Content) {
+                let obj = new StdoutLogV2();
+                obj.deserialize(params.Content[z]);
+                this.Content.push(obj);
+            }
+        }
+        this.ScrollId = 'ScrollId' in params ? params.ScrollId : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -10440,6 +13620,7 @@ class CreateTaskResponse extends  AbstractModel {
 
         /**
          * 任务ID
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Result = null;
@@ -10873,6 +14054,18 @@ class CreateApplicationRequest extends  AbstractModel {
          */
         this.ServiceConfigList = null;
 
+        /**
+         * 忽略创建镜像仓库
+         * @type {boolean || null}
+         */
+        this.IgnoreCreateImageRepository = null;
+
+        /**
+         * 无
+         * @type {Array.<string> || null}
+         */
+        this.ProgramIdList = null;
+
     }
 
     /**
@@ -10899,6 +14092,53 @@ class CreateApplicationRequest extends  AbstractModel {
                 this.ServiceConfigList.push(obj);
             }
         }
+        this.IgnoreCreateImageRepository = 'IgnoreCreateImageRepository' in params ? params.IgnoreCreateImageRepository : null;
+        this.ProgramIdList = 'ProgramIdList' in params ? params.ProgramIdList : null;
+
+    }
+}
+
+/**
+ * 服务统计结果集
+ * @class
+ */
+class ServiceStatisticsResults extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回结果
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<ServiceStatisticsResult> || null}
+         */
+        this.Content = null;
+
+        /**
+         * 条数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Content) {
+            this.Content = new Array();
+            for (let z in params.Content) {
+                let obj = new ServiceStatisticsResult();
+                obj.deserialize(params.Content[z]);
+                this.Content.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
     }
 }
@@ -10995,6 +14235,24 @@ class DeployGroupRequest extends  AbstractModel {
          */
         this.StopScript = null;
 
+        /**
+         * 是否进行增量部署，默认为false，全量更新
+         * @type {boolean || null}
+         */
+        this.IncrementalDeployment = null;
+
+        /**
+         * JDK名称: konaJDK或openJDK
+         * @type {string || null}
+         */
+        this.JdkName = null;
+
+        /**
+         * JDK版本: 8或11 (openJDK只支持8)
+         * @type {string || null}
+         */
+        this.JdkVersion = null;
+
     }
 
     /**
@@ -11023,6 +14281,9 @@ class DeployGroupRequest extends  AbstractModel {
         this.DeployWaitTime = 'DeployWaitTime' in params ? params.DeployWaitTime : null;
         this.StartScript = 'StartScript' in params ? params.StartScript : null;
         this.StopScript = 'StopScript' in params ? params.StopScript : null;
+        this.IncrementalDeployment = 'IncrementalDeployment' in params ? params.IncrementalDeployment : null;
+        this.JdkName = 'JdkName' in params ? params.JdkName : null;
+        this.JdkVersion = 'JdkVersion' in params ? params.JdkVersion : null;
 
     }
 }
@@ -11104,6 +14365,12 @@ class CreateTaskFlowRequest extends  AbstractModel {
          */
         this.TimeOut = null;
 
+        /**
+         * 无
+         * @type {Array.<string> || null}
+         */
+        this.ProgramIdList = null;
+
     }
 
     /**
@@ -11130,6 +14397,7 @@ class CreateTaskFlowRequest extends  AbstractModel {
             }
         }
         this.TimeOut = 'TimeOut' in params ? params.TimeOut : null;
+        this.ProgramIdList = 'ProgramIdList' in params ? params.ProgramIdList : null;
 
     }
 }
@@ -11292,6 +14560,47 @@ class UnbindApiGroupResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeGroupRelease返回参数结构体
+ * @class
+ */
+class DescribeGroupReleaseResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 部署组发布的相关信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {GroupRelease || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new GroupRelease();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribePathRewrite请求参数结构体
  * @class
  */
@@ -11391,6 +14700,84 @@ class GatewayGroupIds extends  AbstractModel {
 }
 
 /**
+ * DescribeInvocationMetricDataDimension请求参数结构体
+ * @class
+ */
+class DescribeInvocationMetricDataDimensionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 开始时间
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 结束时间
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 开始index
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 分页大小
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 聚合维度
+         * @type {string || null}
+         */
+        this.DimensionName = null;
+
+        /**
+         * 搜索关键字
+         * @type {string || null}
+         */
+        this.SearchWord = null;
+
+        /**
+         * 维度
+         * @type {Array.<MetricDimensionValue> || null}
+         */
+        this.MetricDimensionValues = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.DimensionName = 'DimensionName' in params ? params.DimensionName : null;
+        this.SearchWord = 'SearchWord' in params ? params.SearchWord : null;
+
+        if (params.MetricDimensionValues) {
+            this.MetricDimensionValues = new Array();
+            for (let z in params.MetricDimensionValues) {
+                let obj = new MetricDimensionValue();
+                obj.deserialize(params.MetricDimensionValues[z]);
+                this.MetricDimensionValues.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DeployGroup返回参数结构体
  * @class
  */
@@ -11423,47 +14810,6 @@ class DeployGroupResponse extends  AbstractModel {
 
         if (params.Result) {
             let obj = new TaskId();
-            obj.deserialize(params.Result)
-            this.Result = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeServerlessGroup返回参数结构体
- * @class
- */
-class DescribeServerlessGroupResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 结果
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {ServerlessGroup || null}
-         */
-        this.Result = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Result) {
-            let obj = new ServerlessGroup();
             obj.deserialize(params.Result)
             this.Result = obj;
         }
@@ -11569,6 +14915,47 @@ class MetricDataPointMap extends  AbstractModel {
                 this.AvgTimeCost.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * DescribeGroupAttribute返回参数结构体
+ * @class
+ */
+class DescribeGroupAttributeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 虚拟机部署组信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {VmGroupOther || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new VmGroupOther();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -11988,6 +15375,13 @@ class ImageTag extends  AbstractModel {
          */
         this.SizeByte = null;
 
+        /**
+         * TcrRepoInfo值
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {TcrRepoInfo || null}
+         */
+        this.TcrRepoInfo = null;
+
     }
 
     /**
@@ -12010,6 +15404,12 @@ class ImageTag extends  AbstractModel {
         this.Os = 'Os' in params ? params.Os : null;
         this.PushTime = 'PushTime' in params ? params.PushTime : null;
         this.SizeByte = 'SizeByte' in params ? params.SizeByte : null;
+
+        if (params.TcrRepoInfo) {
+            let obj = new TcrRepoInfo();
+            obj.deserialize(params.TcrRepoInfo)
+            this.TcrRepoInfo = obj;
+        }
 
     }
 }
@@ -12116,6 +15516,7 @@ class DescribeTaskRecordsResponse extends  AbstractModel {
 
         /**
          * 任务记录列表
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {TaskRecordPage || null}
          */
         this.Result = null;
@@ -12521,6 +15922,41 @@ class ServiceSetting extends  AbstractModel {
          */
         this.SubnetId = null;
 
+        /**
+         * 是否创建 k8s service，默认为 false
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.DisableService = null;
+
+        /**
+         * service 是否为 headless 类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.HeadlessService = null;
+
+        /**
+         * 当为 true 且 DisableService 也为 true 时，会删除之前创建的 service，请小心使用
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.AllowDeleteService = null;
+
+        /**
+         * 开启SessionAffinity，true为开启，false为不开启，默认为false
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.OpenSessionAffinity = null;
+
+        /**
+         * SessionAffinity会话时间，默认10800
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.SessionAffinityTimeoutSeconds = null;
+
     }
 
     /**
@@ -12541,6 +15977,11 @@ class ServiceSetting extends  AbstractModel {
             }
         }
         this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.DisableService = 'DisableService' in params ? params.DisableService : null;
+        this.HeadlessService = 'HeadlessService' in params ? params.HeadlessService : null;
+        this.AllowDeleteService = 'AllowDeleteService' in params ? params.AllowDeleteService : null;
+        this.OpenSessionAffinity = 'OpenSessionAffinity' in params ? params.OpenSessionAffinity : null;
+        this.SessionAffinityTimeoutSeconds = 'SessionAffinityTimeoutSeconds' in params ? params.SessionAffinityTimeoutSeconds : null;
 
     }
 }
@@ -12616,103 +16057,24 @@ class ModifyUploadInfoRequest extends  AbstractModel {
 }
 
 /**
- * 分页的应用描述信息字段
+ * DescribeGatewayApis返回参数结构体
  * @class
  */
-class ApplicationForPage extends  AbstractModel {
+class DescribeGatewayApisResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 应用ID
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
+         * 翻页结构
+         * @type {TsfPageApiDetailInfo || null}
          */
-        this.ApplicationId = null;
+        this.Result = null;
 
         /**
-         * 应用名称
-注意：此字段可能返回 null，表示取不到有效值。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.ApplicationName = null;
-
-        /**
-         * 应用描述
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ApplicationDesc = null;
-
-        /**
-         * 应用类型
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ApplicationType = null;
-
-        /**
-         * 微服务类型
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.MicroserviceType = null;
-
-        /**
-         * 编程语言
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ProgLang = null;
-
-        /**
-         * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * 更新时间
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.UpdateTime = null;
-
-        /**
-         * 应用资源类型
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ApplicationResourceType = null;
-
-        /**
-         * 应用runtime类型
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ApplicationRuntimeType = null;
-
-        /**
-         * Apigateway的serviceId
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ApigatewayServiceId = null;
-
-        /**
-         * 应用备注名
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ApplicationRemarkName = null;
-
-        /**
-         * 服务配置信息列表
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<ServiceConfig> || null}
-         */
-        this.ServiceConfigList = null;
+        this.RequestId = null;
 
     }
 
@@ -12723,27 +16085,13 @@ class ApplicationForPage extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
-        this.ApplicationName = 'ApplicationName' in params ? params.ApplicationName : null;
-        this.ApplicationDesc = 'ApplicationDesc' in params ? params.ApplicationDesc : null;
-        this.ApplicationType = 'ApplicationType' in params ? params.ApplicationType : null;
-        this.MicroserviceType = 'MicroserviceType' in params ? params.MicroserviceType : null;
-        this.ProgLang = 'ProgLang' in params ? params.ProgLang : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
-        this.ApplicationResourceType = 'ApplicationResourceType' in params ? params.ApplicationResourceType : null;
-        this.ApplicationRuntimeType = 'ApplicationRuntimeType' in params ? params.ApplicationRuntimeType : null;
-        this.ApigatewayServiceId = 'ApigatewayServiceId' in params ? params.ApigatewayServiceId : null;
-        this.ApplicationRemarkName = 'ApplicationRemarkName' in params ? params.ApplicationRemarkName : null;
 
-        if (params.ServiceConfigList) {
-            this.ServiceConfigList = new Array();
-            for (let z in params.ServiceConfigList) {
-                let obj = new ServiceConfig();
-                obj.deserialize(params.ServiceConfigList[z]);
-                this.ServiceConfigList.push(obj);
-            }
+        if (params.Result) {
+            let obj = new TsfPageApiDetailInfo();
+            obj.deserialize(params.Result)
+            this.Result = obj;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -12806,6 +16154,47 @@ class UpdateGatewayApiResponse extends  AbstractModel {
             return;
         }
         this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeInstances返回参数结构体
+ * @class
+ */
+class DescribeInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 机器列表信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {InstanceEnrichedInfoPage || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new InstanceEnrichedInfoPage();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -12932,6 +16321,55 @@ class ModifyLaneResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeDownloadInfo请求参数结构体
+ * @class
+ */
+class DescribeDownloadInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 应用ID
+         * @type {string || null}
+         */
+        this.ApplicationId = null;
+
+        /**
+         * 程序包ID
+         * @type {string || null}
+         */
+        this.PkgId = null;
+
+        /**
+         * 程序包仓库ID
+         * @type {string || null}
+         */
+        this.RepositoryId = null;
+
+        /**
+         * 程序包仓库类型
+         * @type {string || null}
+         */
+        this.RepositoryType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
+        this.PkgId = 'PkgId' in params ? params.PkgId : null;
+        this.RepositoryId = 'RepositoryId' in params ? params.RepositoryId : null;
+        this.RepositoryType = 'RepositoryType' in params ? params.RepositoryType : null;
+
+    }
+}
+
+/**
  * DescribePublicConfigSummary返回参数结构体
  * @class
  */
@@ -13015,42 +16453,6 @@ class DescribePublicConfigReleaseLogsRequest extends  AbstractModel {
 }
 
 /**
- * CreateServerlessGroup返回参数结构体
- * @class
- */
-class CreateServerlessGroupResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 创建成功的部署组ID，返回null表示失败
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.Result = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Result = 'Result' in params ? params.Result : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * 分片参数
  * @class
  */
@@ -13082,6 +16484,41 @@ class ShardArgument extends  AbstractModel {
         }
         this.ShardKey = 'ShardKey' in params ? params.ShardKey : null;
         this.ShardValue = 'ShardValue' in params ? params.ShardValue : null;
+
+    }
+}
+
+/**
+ * 指标维度多值匹配
+ * @class
+ */
+class MetricDimensionValue extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 维度名
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 维度值
+         * @type {Array.<string> || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Value = 'Value' in params ? params.Value : null;
 
     }
 }
@@ -13239,6 +16676,18 @@ class DescribeLanesRequest extends  AbstractModel {
          */
         this.SearchWord = null;
 
+        /**
+         * 无
+         * @type {Array.<string> || null}
+         */
+        this.LaneIdList = null;
+
+        /**
+         * 无
+         * @type {boolean || null}
+         */
+        this.DisableProgramAuthCheck = null;
+
     }
 
     /**
@@ -13251,6 +16700,8 @@ class DescribeLanesRequest extends  AbstractModel {
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.SearchWord = 'SearchWord' in params ? params.SearchWord : null;
+        this.LaneIdList = 'LaneIdList' in params ? params.LaneIdList : null;
+        this.DisableProgramAuthCheck = 'DisableProgramAuthCheck' in params ? params.DisableProgramAuthCheck : null;
 
     }
 }
@@ -13339,6 +16790,12 @@ class CreatePublicConfigRequest extends  AbstractModel {
          */
         this.EncodeWithBase64 = null;
 
+        /**
+         * 无
+         * @type {Array.<string> || null}
+         */
+        this.ProgramIdList = null;
+
     }
 
     /**
@@ -13354,6 +16811,7 @@ class CreatePublicConfigRequest extends  AbstractModel {
         this.ConfigVersionDesc = 'ConfigVersionDesc' in params ? params.ConfigVersionDesc : null;
         this.ConfigType = 'ConfigType' in params ? params.ConfigType : null;
         this.EncodeWithBase64 = 'EncodeWithBase64' in params ? params.EncodeWithBase64 : null;
+        this.ProgramIdList = 'ProgramIdList' in params ? params.ProgramIdList : null;
 
     }
 }
@@ -13783,6 +17241,51 @@ class TsfPageUnitNamespace extends  AbstractModel {
 }
 
 /**
+ * 单值指标
+ * @class
+ */
+class MetricDataSingleValue extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 指标
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.MetricName = null;
+
+        /**
+         * 统计方式
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.MetricFunction = null;
+
+        /**
+         * 指标值
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.MetricDataValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MetricName = 'MetricName' in params ? params.MetricName : null;
+        this.MetricFunction = 'MetricFunction' in params ? params.MetricFunction : null;
+        this.MetricDataValue = 'MetricDataValue' in params ? params.MetricDataValue : null;
+
+    }
+}
+
+/**
  * StopTaskExecute请求参数结构体
  * @class
  */
@@ -14124,6 +17627,12 @@ class CreateTaskRequest extends  AbstractModel {
          */
         this.TaskArgument = null;
 
+        /**
+         * 无
+         * @type {Array.<string> || null}
+         */
+        this.ProgramIdList = null;
+
     }
 
     /**
@@ -14166,6 +17675,7 @@ class CreateTaskRequest extends  AbstractModel {
             this.AdvanceSettings = obj;
         }
         this.TaskArgument = 'TaskArgument' in params ? params.TaskArgument : null;
+        this.ProgramIdList = 'ProgramIdList' in params ? params.ProgramIdList : null;
 
     }
 }
@@ -14308,6 +17818,108 @@ class DescribeUsableUnitNamespacesResponse extends  AbstractModel {
             this.Result = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ReleaseFileConfig返回参数结构体
+ * @class
+ */
+class ReleaseFileConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 发布结果
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * jvm监控数据线程数据封装
+ * @class
+ */
+class ThreadPicture extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总线程数
+         * @type {Array.<CurvePoint> || null}
+         */
+        this.ThreadCount = null;
+
+        /**
+         * 活跃线程数
+         * @type {Array.<CurvePoint> || null}
+         */
+        this.ThreadActive = null;
+
+        /**
+         * 守护线程数
+         * @type {Array.<CurvePoint> || null}
+         */
+        this.DeamonThreadCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ThreadCount) {
+            this.ThreadCount = new Array();
+            for (let z in params.ThreadCount) {
+                let obj = new CurvePoint();
+                obj.deserialize(params.ThreadCount[z]);
+                this.ThreadCount.push(obj);
+            }
+        }
+
+        if (params.ThreadActive) {
+            this.ThreadActive = new Array();
+            for (let z in params.ThreadActive) {
+                let obj = new CurvePoint();
+                obj.deserialize(params.ThreadActive[z]);
+                this.ThreadActive.push(obj);
+            }
+        }
+
+        if (params.DeamonThreadCount) {
+            this.DeamonThreadCount = new Array();
+            for (let z in params.DeamonThreadCount) {
+                let obj = new CurvePoint();
+                obj.deserialize(params.DeamonThreadCount[z]);
+                this.DeamonThreadCount.push(obj);
+            }
+        }
 
     }
 }
@@ -14569,6 +18181,12 @@ class DescribeTaskRecordsRequest extends  AbstractModel {
          */
         this.ExecuteType = null;
 
+        /**
+         * 无
+         * @type {Array.<string> || null}
+         */
+        this.Ids = null;
+
     }
 
     /**
@@ -14585,6 +18203,7 @@ class DescribeTaskRecordsRequest extends  AbstractModel {
         this.GroupId = 'GroupId' in params ? params.GroupId : null;
         this.TaskType = 'TaskType' in params ? params.TaskType : null;
         this.ExecuteType = 'ExecuteType' in params ? params.ExecuteType : null;
+        this.Ids = 'Ids' in params ? params.Ids : null;
 
     }
 }
@@ -15169,6 +18788,97 @@ class ApiVersionArray extends  AbstractModel {
 }
 
 /**
+ * DescribeInovcationIndicators返回参数结构体
+ * @class
+ */
+class DescribeInovcationIndicatorsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 服务调用监控指标
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {InvocationIndicator || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new InvocationIndicator();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 多值数据点集合
+ * @class
+ */
+class MultiValueDataPoints extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 多值数据点
+         * @type {Array.<MultiValue> || null}
+         */
+        this.Points = null;
+
+        /**
+         * 指标名称
+         * @type {string || null}
+         */
+        this.MetricName = null;
+
+        /**
+         * 多值数据点key列表，每个值表示当前数据点所在区域的下限
+         * @type {Array.<string> || null}
+         */
+        this.PointKeys = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Points) {
+            this.Points = new Array();
+            for (let z in params.Points) {
+                let obj = new MultiValue();
+                obj.deserialize(params.Points[z]);
+                this.Points.push(obj);
+            }
+        }
+        this.MetricName = 'MetricName' in params ? params.MetricName : null;
+        this.PointKeys = 'PointKeys' in params ? params.PointKeys : null;
+
+    }
+}
+
+/**
  * 配置项发布日志
  * @class
  */
@@ -15326,6 +19036,42 @@ class ConfigReleaseLog extends  AbstractModel {
 }
 
 /**
+ * CreateFileConfig返回参数结构体
+ * @class
+ */
+class CreateFileConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * true：创建成功；false：创建失败
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateConfig请求参数结构体
  * @class
  */
@@ -15375,6 +19121,12 @@ class CreateConfigRequest extends  AbstractModel {
          */
         this.EncodeWithBase64 = null;
 
+        /**
+         * 无
+         * @type {Array.<string> || null}
+         */
+        this.ProgramIdList = null;
+
     }
 
     /**
@@ -15391,6 +19143,7 @@ class CreateConfigRequest extends  AbstractModel {
         this.ConfigVersionDesc = 'ConfigVersionDesc' in params ? params.ConfigVersionDesc : null;
         this.ConfigType = 'ConfigType' in params ? params.ConfigType : null;
         this.EncodeWithBase64 = 'EncodeWithBase64' in params ? params.EncodeWithBase64 : null;
+        this.ProgramIdList = 'ProgramIdList' in params ? params.ProgramIdList : null;
 
     }
 }
@@ -15466,33 +19219,47 @@ class DescribeUploadInfoRequest extends  AbstractModel {
 }
 
 /**
- * 工作流最近批次的状态
+ * TSF基本资源信息概览
  * @class
  */
-class TaskFlowLastBatchState extends  AbstractModel {
+class OverviewBasicResourceUsage extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 批次ID
+         * 应用总数
 注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
+         * @type {number || null}
          */
-        this.FlowBatchId = null;
+        this.ApplicationCount = null;
 
         /**
-         * 批次历史ID
+         * 命名空间总数
 注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
+         * @type {number || null}
          */
-        this.FlowBatchLogId = null;
+        this.NamespaceCount = null;
 
         /**
-         * 状态,WAITING/SUCCESS/FAILED/RUNNING/TERMINATING
+         * 部署组个数
 注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
+         * @type {number || null}
          */
-        this.State = null;
+        this.GroupCount = null;
+
+        /**
+         * 程序包存储空间用量，单位字节
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.PackageSpaceUsed = null;
+
+        /**
+         * 已注册实例数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ConsulInstanceCount = null;
 
     }
 
@@ -15503,9 +19270,11 @@ class TaskFlowLastBatchState extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.FlowBatchId = 'FlowBatchId' in params ? params.FlowBatchId : null;
-        this.FlowBatchLogId = 'FlowBatchLogId' in params ? params.FlowBatchLogId : null;
-        this.State = 'State' in params ? params.State : null;
+        this.ApplicationCount = 'ApplicationCount' in params ? params.ApplicationCount : null;
+        this.NamespaceCount = 'NamespaceCount' in params ? params.NamespaceCount : null;
+        this.GroupCount = 'GroupCount' in params ? params.GroupCount : null;
+        this.PackageSpaceUsed = 'PackageSpaceUsed' in params ? params.PackageSpaceUsed : null;
+        this.ConsulInstanceCount = 'ConsulInstanceCount' in params ? params.ConsulInstanceCount : null;
 
     }
 }
@@ -15618,6 +19387,56 @@ class UpdateGatewayApiRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeInstances请求参数结构体
+ * @class
+ */
+class DescribeInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 过滤条件
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 偏移量，默认为0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 分页个数，默认为20，最大100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
  * 路径重写创建对象
  * @class
  */
@@ -15706,7 +19525,7 @@ class DescribeApiGroupsRequest extends  AbstractModel {
         this.GroupType = null;
 
         /**
-         * 鉴权类型。 secret： 秘钥鉴权； none:无鉴权
+         * 鉴权类型。 secret： 密钥鉴权； none:无鉴权
          * @type {string || null}
          */
         this.AuthType = null;
@@ -15753,34 +19572,6 @@ class DescribeApiGroupsRequest extends  AbstractModel {
         this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
         this.OrderType = 'OrderType' in params ? params.OrderType : null;
         this.GatewayInstanceId = 'GatewayInstanceId' in params ? params.GatewayInstanceId : null;
-
-    }
-}
-
-/**
- * DescribeServerlessGroup请求参数结构体
- * @class
- */
-class DescribeServerlessGroupRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 部署组ID
-         * @type {string || null}
-         */
-        this.GroupId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.GroupId = 'GroupId' in params ? params.GroupId : null;
 
     }
 }
@@ -15859,6 +19650,51 @@ class ApplicationAttribute extends  AbstractModel {
 }
 
 /**
+ * 工作流最近批次的状态
+ * @class
+ */
+class TaskFlowLastBatchState extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 批次ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.FlowBatchId = null;
+
+        /**
+         * 批次历史ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.FlowBatchLogId = null;
+
+        /**
+         * 状态,WAITING/SUCCESS/FAILED/RUNNING/TERMINATING
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.State = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowBatchId = 'FlowBatchId' in params ? params.FlowBatchId : null;
+        this.FlowBatchLogId = 'FlowBatchLogId' in params ? params.FlowBatchLogId : null;
+        this.State = 'State' in params ? params.State : null;
+
+    }
+}
+
+/**
  * DeletePkgs返回参数结构体
  * @class
  */
@@ -15928,54 +19764,103 @@ class DescribeGroupsResponse extends  AbstractModel {
 }
 
 /**
- * ModifyLaneRule请求参数结构体
+ * 分页的应用描述信息字段
  * @class
  */
-class ModifyLaneRuleRequest extends  AbstractModel {
+class ApplicationForPage extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 泳道规则ID
+         * 应用ID
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.RuleId = null;
+        this.ApplicationId = null;
 
         /**
-         * 泳道规则名称
+         * 应用名称
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.RuleName = null;
+        this.ApplicationName = null;
 
         /**
-         * 泳道规则备注
+         * 应用描述
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.Remark = null;
+        this.ApplicationDesc = null;
 
         /**
-         * 泳道规则标签列表
-         * @type {Array.<LaneRuleTag> || null}
-         */
-        this.RuleTagList = null;
-
-        /**
-         * 泳道规则标签关系
+         * 应用类型
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.RuleTagRelationship = null;
+        this.ApplicationType = null;
 
         /**
-         * 泳道ID
+         * 微服务类型
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.LaneId = null;
+        this.MicroserviceType = null;
 
         /**
-         * 开启状态
-         * @type {boolean || null}
+         * 编程语言
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
          */
-        this.Enable = null;
+        this.ProgLang = null;
+
+        /**
+         * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * 应用资源类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ApplicationResourceType = null;
+
+        /**
+         * 应用runtime类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ApplicationRuntimeType = null;
+
+        /**
+         * Apigateway的serviceId
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ApigatewayServiceId = null;
+
+        /**
+         * 应用备注名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ApplicationRemarkName = null;
+
+        /**
+         * 服务配置信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<ServiceConfig> || null}
+         */
+        this.ServiceConfigList = null;
 
     }
 
@@ -15986,21 +19871,106 @@ class ModifyLaneRuleRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RuleId = 'RuleId' in params ? params.RuleId : null;
-        this.RuleName = 'RuleName' in params ? params.RuleName : null;
-        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
+        this.ApplicationName = 'ApplicationName' in params ? params.ApplicationName : null;
+        this.ApplicationDesc = 'ApplicationDesc' in params ? params.ApplicationDesc : null;
+        this.ApplicationType = 'ApplicationType' in params ? params.ApplicationType : null;
+        this.MicroserviceType = 'MicroserviceType' in params ? params.MicroserviceType : null;
+        this.ProgLang = 'ProgLang' in params ? params.ProgLang : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.ApplicationResourceType = 'ApplicationResourceType' in params ? params.ApplicationResourceType : null;
+        this.ApplicationRuntimeType = 'ApplicationRuntimeType' in params ? params.ApplicationRuntimeType : null;
+        this.ApigatewayServiceId = 'ApigatewayServiceId' in params ? params.ApigatewayServiceId : null;
+        this.ApplicationRemarkName = 'ApplicationRemarkName' in params ? params.ApplicationRemarkName : null;
 
-        if (params.RuleTagList) {
-            this.RuleTagList = new Array();
-            for (let z in params.RuleTagList) {
-                let obj = new LaneRuleTag();
-                obj.deserialize(params.RuleTagList[z]);
-                this.RuleTagList.push(obj);
+        if (params.ServiceConfigList) {
+            this.ServiceConfigList = new Array();
+            for (let z in params.ServiceConfigList) {
+                let obj = new ServiceConfig();
+                obj.deserialize(params.ServiceConfigList[z]);
+                this.ServiceConfigList.push(obj);
             }
         }
-        this.RuleTagRelationship = 'RuleTagRelationship' in params ? params.RuleTagRelationship : null;
-        this.LaneId = 'LaneId' in params ? params.LaneId : null;
-        this.Enable = 'Enable' in params ? params.Enable : null;
+
+    }
+}
+
+/**
+ * DescribeInvocationMetricScatterPlot请求参数结构体
+ * @class
+ */
+class DescribeInvocationMetricScatterPlotRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 查询开始时间
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 查询结束时间
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 查询时间粒度，单位秒。可选值：60、3600、86400。
+         * @type {number || null}
+         */
+        this.Period = null;
+
+        /**
+         * 查询指标维度
+         * @type {Array.<MetricDimension> || null}
+         */
+        this.MetricDimensions = null;
+
+        /**
+         * 查询指标名
+         * @type {Array.<Metric> || null}
+         */
+        this.Metrics = null;
+
+        /**
+         * 视图视角。可选值：SERVER, CLIENT。默认为SERVER
+         * @type {string || null}
+         */
+        this.Kind = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Period = 'Period' in params ? params.Period : null;
+
+        if (params.MetricDimensions) {
+            this.MetricDimensions = new Array();
+            for (let z in params.MetricDimensions) {
+                let obj = new MetricDimension();
+                obj.deserialize(params.MetricDimensions[z]);
+                this.MetricDimensions.push(obj);
+            }
+        }
+
+        if (params.Metrics) {
+            this.Metrics = new Array();
+            for (let z in params.Metrics) {
+                let obj = new Metric();
+                obj.deserialize(params.Metrics[z]);
+                this.Metrics.push(obj);
+            }
+        }
+        this.Kind = 'Kind' in params ? params.Kind : null;
 
     }
 }
@@ -16015,6 +19985,7 @@ class CreateTaskFlowResponse extends  AbstractModel {
 
         /**
          * 工作流 ID
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Result = null;
@@ -16096,6 +20067,12 @@ class DescribeMicroservicesRequest extends  AbstractModel {
          */
         this.MicroserviceIdList = null;
 
+        /**
+         * 搜索的服务名列表
+         * @type {Array.<string> || null}
+         */
+        this.MicroserviceNameList = null;
+
     }
 
     /**
@@ -16113,6 +20090,7 @@ class DescribeMicroservicesRequest extends  AbstractModel {
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Status = 'Status' in params ? params.Status : null;
         this.MicroserviceIdList = 'MicroserviceIdList' in params ? params.MicroserviceIdList : null;
+        this.MicroserviceNameList = 'MicroserviceNameList' in params ? params.MicroserviceNameList : null;
 
     }
 }
@@ -16154,6 +20132,185 @@ class AddClusterInstancesResponse extends  AbstractModel {
             this.Result = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeInvocationMetricDataCurve请求参数结构体
+ * @class
+ */
+class DescribeInvocationMetricDataCurveRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 查询开始时间
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 查询结束时间
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 查询时间粒度，单位秒可选值：60、3600、86400
+         * @type {number || null}
+         */
+        this.Period = null;
+
+        /**
+         * 查询指标维度
+         * @type {Array.<MetricDimension> || null}
+         */
+        this.MetricDimensions = null;
+
+        /**
+         * 查询指标名
+         * @type {Array.<Metric> || null}
+         */
+        this.Metrics = null;
+
+        /**
+         * 视图视角。可选值：SERVER, CLIENT。默认为SERVER
+         * @type {string || null}
+         */
+        this.Kind = null;
+
+        /**
+         * 类型。组件监控使用，可选值：SQL 或者 NoSQL
+         * @type {string || null}
+         */
+        this.Type = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Period = 'Period' in params ? params.Period : null;
+
+        if (params.MetricDimensions) {
+            this.MetricDimensions = new Array();
+            for (let z in params.MetricDimensions) {
+                let obj = new MetricDimension();
+                obj.deserialize(params.MetricDimensions[z]);
+                this.MetricDimensions.push(obj);
+            }
+        }
+
+        if (params.Metrics) {
+            this.Metrics = new Array();
+            for (let z in params.Metrics) {
+                let obj = new Metric();
+                obj.deserialize(params.Metrics[z]);
+                this.Metrics.push(obj);
+            }
+        }
+        this.Kind = 'Kind' in params ? params.Kind : null;
+        this.Type = 'Type' in params ? params.Type : null;
+
+    }
+}
+
+/**
+ * 虚拟机部署组其他字段
+ * @class
+ */
+class VmGroupOther extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 部署组ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
+        /**
+         * 程序包ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.PackageId = null;
+
+        /**
+         * 程序包名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.PackageName = null;
+
+        /**
+         * 程序包版本
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.PackageVersion = null;
+
+        /**
+         * 部署组实例数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.InstanceCount = null;
+
+        /**
+         * 部署组运行中实例数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.RunInstanceCount = null;
+
+        /**
+         * 部署组中停止实例数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.OffInstanceCount = null;
+
+        /**
+         * 部署组状态
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.GroupStatus = null;
+
+        /**
+         * 服务配置信息是否匹配
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.IsNotEqualServiceConfig = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.PackageId = 'PackageId' in params ? params.PackageId : null;
+        this.PackageName = 'PackageName' in params ? params.PackageName : null;
+        this.PackageVersion = 'PackageVersion' in params ? params.PackageVersion : null;
+        this.InstanceCount = 'InstanceCount' in params ? params.InstanceCount : null;
+        this.RunInstanceCount = 'RunInstanceCount' in params ? params.RunInstanceCount : null;
+        this.OffInstanceCount = 'OffInstanceCount' in params ? params.OffInstanceCount : null;
+        this.GroupStatus = 'GroupStatus' in params ? params.GroupStatus : null;
+        this.IsNotEqualServiceConfig = 'IsNotEqualServiceConfig' in params ? params.IsNotEqualServiceConfig : null;
 
     }
 }
@@ -16439,6 +20596,35 @@ class DescribeTaskDetailRequest extends  AbstractModel {
 }
 
 /**
+ * 多值数据
+ * @class
+ */
+class MultiValue extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 数据点
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<number> || null}
+         */
+        this.Values = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Values = 'Values' in params ? params.Values : null;
+
+    }
+}
+
+/**
  * DescribePublicConfigReleases请求参数结构体
  * @class
  */
@@ -16526,6 +20712,12 @@ class DescribeLaneRulesRequest extends  AbstractModel {
          */
         this.RuleId = null;
 
+        /**
+         * 无
+         * @type {Array.<string> || null}
+         */
+        this.RuleIdList = null;
+
     }
 
     /**
@@ -16539,55 +20731,7 @@ class DescribeLaneRulesRequest extends  AbstractModel {
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.SearchWord = 'SearchWord' in params ? params.SearchWord : null;
         this.RuleId = 'RuleId' in params ? params.RuleId : null;
-
-    }
-}
-
-/**
- * CreateServerlessGroup请求参数结构体
- * @class
- */
-class CreateServerlessGroupRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 分组所属应用ID
-         * @type {string || null}
-         */
-        this.ApplicationId = null;
-
-        /**
-         * 分组名称字段，长度1~60，字母或下划线开头，可包含字母数字下划线
-         * @type {string || null}
-         */
-        this.GroupName = null;
-
-        /**
-         * 分组所属名字空间ID
-         * @type {string || null}
-         */
-        this.NamespaceId = null;
-
-        /**
-         * 分组所属集群ID
-         * @type {string || null}
-         */
-        this.ClusterId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
-        this.GroupName = 'GroupName' in params ? params.GroupName : null;
-        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.RuleIdList = 'RuleIdList' in params ? params.RuleIdList : null;
 
     }
 }
@@ -16844,60 +20988,30 @@ class GroupUnitApiDailyUseStatistics extends  AbstractModel {
 }
 
 /**
- * DescribeServerlessGroups请求参数结构体
+ * 构成监控数据图的曲线坐标点
  * @class
  */
-class DescribeServerlessGroupsRequest extends  AbstractModel {
+class CurvePoint extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 搜索字段，模糊搜索groupName字段
+         * 当前坐标 X轴的值 当前是日期格式:"yyyy-MM-dd HH:mm:ss"
          * @type {string || null}
          */
-        this.SearchWord = null;
+        this.Label = null;
 
         /**
-         * 分组所属应用ID
+         * 当前坐标 Y轴的值
          * @type {string || null}
          */
-        this.ApplicationId = null;
+        this.Value = null;
 
         /**
-         * 排序字段，默认为 createTime字段，支持id， name， createTime
+         * 该坐标点时间戳
          * @type {string || null}
          */
-        this.OrderBy = null;
-
-        /**
-         * 排序方式，默认为1：倒序排序，0：正序，1：倒序
-         * @type {string || null}
-         */
-        this.OrderType = null;
-
-        /**
-         * 偏移量，取值从0开始
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * 分页个数，默认为20， 取值应为1~50
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * 分组所属名字空间ID
-         * @type {string || null}
-         */
-        this.NamespaceId = null;
-
-        /**
-         * 分组所属集群ID
-         * @type {string || null}
-         */
-        this.ClusterId = null;
+        this.Timestamp = null;
 
     }
 
@@ -16908,14 +21022,9 @@ class DescribeServerlessGroupsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SearchWord = 'SearchWord' in params ? params.SearchWord : null;
-        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
-        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
-        this.OrderType = 'OrderType' in params ? params.OrderType : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Label = 'Label' in params ? params.Label : null;
+        this.Value = 'Value' in params ? params.Value : null;
+        this.Timestamp = 'Timestamp' in params ? params.Timestamp : null;
 
     }
 }
@@ -17023,51 +21132,6 @@ class DeletePkgsRequest extends  AbstractModel {
         this.PkgIds = 'PkgIds' in params ? params.PkgIds : null;
         this.RepositoryType = 'RepositoryType' in params ? params.RepositoryType : null;
         this.RepositoryId = 'RepositoryId' in params ? params.RepositoryId : null;
-
-    }
-}
-
-/**
- * ServerlessGroup 翻页对象
- * @class
- */
-class ServerlessGroupPage extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 总记录数
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * 列表信息
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<ServerlessGroup> || null}
-         */
-        this.Content = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.Content) {
-            this.Content = new Array();
-            for (let z in params.Content) {
-                let obj = new ServerlessGroup();
-                obj.deserialize(params.Content[z]);
-                this.Content.push(obj);
-            }
-        }
 
     }
 }
@@ -17252,24 +21316,36 @@ class EnableTaskResponse extends  AbstractModel {
 }
 
 /**
- * UpdateApiRateLimitRules返回参数结构体
+ * 容器卷挂载点信息
  * @class
  */
-class UpdateApiRateLimitRulesResponse extends  AbstractModel {
+class VolumeMountInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 是否成功
-         * @type {boolean || null}
-         */
-        this.Result = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 挂载数据卷名称
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.VolumeMountName = null;
+
+        /**
+         * 挂载路径
+         * @type {string || null}
+         */
+        this.VolumeMountPath = null;
+
+        /**
+         * 挂载子路径
+         * @type {string || null}
+         */
+        this.VolumeMountSubPath = null;
+
+        /**
+         * 读写，1：读 2：读写
+         * @type {string || null}
+         */
+        this.ReadOrWrite = null;
 
     }
 
@@ -17280,8 +21356,53 @@ class UpdateApiRateLimitRulesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Result = 'Result' in params ? params.Result : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.VolumeMountName = 'VolumeMountName' in params ? params.VolumeMountName : null;
+        this.VolumeMountPath = 'VolumeMountPath' in params ? params.VolumeMountPath : null;
+        this.VolumeMountSubPath = 'VolumeMountSubPath' in params ? params.VolumeMountSubPath : null;
+        this.ReadOrWrite = 'ReadOrWrite' in params ? params.ReadOrWrite : null;
+
+    }
+}
+
+/**
+ * tsf-privilege模块，分页数据集列表
+ * @class
+ */
+class PagedProgram extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总条数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 数据集列表
+         * @type {Array.<Program> || null}
+         */
+        this.Content = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Content) {
+            this.Content = new Array();
+            for (let z in params.Content) {
+                let obj = new Program();
+                obj.deserialize(params.Content[z]);
+                this.Content.push(obj);
+            }
+        }
 
     }
 }
@@ -17371,36 +21492,18 @@ class DescribeGroupInstancesResponse extends  AbstractModel {
 }
 
 /**
- * DescribeDownloadInfo请求参数结构体
+ * DescribeContainerGroupDeployInfo请求参数结构体
  * @class
  */
-class DescribeDownloadInfoRequest extends  AbstractModel {
+class DescribeContainerGroupDeployInfoRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 应用ID
+         * 实例所属 groupId
          * @type {string || null}
          */
-        this.ApplicationId = null;
-
-        /**
-         * 程序包ID
-         * @type {string || null}
-         */
-        this.PkgId = null;
-
-        /**
-         * 程序包仓库ID
-         * @type {string || null}
-         */
-        this.RepositoryId = null;
-
-        /**
-         * 程序包仓库类型
-         * @type {string || null}
-         */
-        this.RepositoryType = null;
+        this.GroupId = null;
 
     }
 
@@ -17411,10 +21514,83 @@ class DescribeDownloadInfoRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
-        this.PkgId = 'PkgId' in params ? params.PkgId : null;
-        this.RepositoryId = 'RepositoryId' in params ? params.RepositoryId : null;
-        this.RepositoryType = 'RepositoryType' in params ? params.RepositoryType : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+
+    }
+}
+
+/**
+ * OperateApplicationTcrBinding返回参数结构体
+ * @class
+ */
+class OperateApplicationTcrBindingResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 是否成功
+         * @type {boolean || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribePublicConfigReleaseLogs返回参数结构体
+ * @class
+ */
+class DescribePublicConfigReleaseLogsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 分页后的公共配置项发布历史列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {TsfPageConfigReleaseLog || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new TsfPageConfigReleaseLog();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -17724,6 +21900,34 @@ class TsfPageSimpleGroup extends  AbstractModel {
                 this.Content.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * DescribeGroupAttribute请求参数结构体
+ * @class
+ */
+class DescribeGroupAttributeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 部署组ID字段
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
 
     }
 }
@@ -18349,6 +22553,59 @@ class DescribeConfigReleasesRequest extends  AbstractModel {
 }
 
 /**
+ * 标准输出日志
+ * @class
+ */
+class StdoutLogV2 extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 日志内容
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Content = null;
+
+        /**
+         * 日志时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Timestamp = null;
+
+        /**
+         * 实例IP
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.InstanceIp = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Content = 'Content' in params ? params.Content : null;
+        this.Timestamp = 'Timestamp' in params ? params.Timestamp : null;
+        this.InstanceIp = 'InstanceIp' in params ? params.InstanceIp : null;
+
+    }
+}
+
+/**
  * 分组日使用统计对象
  * @class
  */
@@ -18483,30 +22740,24 @@ class DescribeApiGroupResponse extends  AbstractModel {
 }
 
 /**
- * UpdateApiRateLimitRule请求参数结构体
+ * RedoTaskExecute返回参数结构体
  * @class
  */
-class UpdateApiRateLimitRuleRequest extends  AbstractModel {
+class RedoTaskExecuteResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 限流规则ID
+         * 成功失败
          * @type {string || null}
          */
-        this.RuleId = null;
+        this.Result = null;
 
         /**
-         * 开启/禁用，enabled/disabled
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.UsableStatus = null;
-
-        /**
-         * qps值，开启限流规则时，必填
-         * @type {number || null}
-         */
-        this.MaxQps = null;
+        this.RequestId = null;
 
     }
 
@@ -18517,9 +22768,8 @@ class UpdateApiRateLimitRuleRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RuleId = 'RuleId' in params ? params.RuleId : null;
-        this.UsableStatus = 'UsableStatus' in params ? params.UsableStatus : null;
-        this.MaxQps = 'MaxQps' in params ? params.MaxQps : null;
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -18550,6 +22800,12 @@ class CreateLaneRequest extends  AbstractModel {
          */
         this.LaneGroupList = null;
 
+        /**
+         * 无
+         * @type {Array.<string> || null}
+         */
+        this.ProgramIdList = null;
+
     }
 
     /**
@@ -18570,6 +22826,7 @@ class CreateLaneRequest extends  AbstractModel {
                 this.LaneGroupList.push(obj);
             }
         }
+        this.ProgramIdList = 'ProgramIdList' in params ? params.ProgramIdList : null;
 
     }
 }
@@ -18745,6 +23002,131 @@ class DescribeApplicationsResponse extends  AbstractModel {
             this.Result = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 服务调用监控指标
+ * @class
+ */
+class InvocationIndicator extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总请求数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.InvocationQuantity = null;
+
+        /**
+         * 请求成功率，百分比
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.InvocationSuccessRate = null;
+
+        /**
+         * 请求平均耗时，单位毫秒
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.InvocationAvgDuration = null;
+
+        /**
+         * 成功请求数时间分布
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<IndicatorCoord> || null}
+         */
+        this.InvocationSuccessDistribution = null;
+
+        /**
+         * 失败请求数时间分布
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<IndicatorCoord> || null}
+         */
+        this.InvocationFailedDistribution = null;
+
+        /**
+         * 状态码分布
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<IndicatorCoord> || null}
+         */
+        this.InvocationStatusDistribution = null;
+
+        /**
+         * 时延分布
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<IndicatorCoord> || null}
+         */
+        this.InvocationDurationDistribution = null;
+
+        /**
+         * 并发请求次数时间分布
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<IndicatorCoord> || null}
+         */
+        this.InvocationQuantityDistribution = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InvocationQuantity = 'InvocationQuantity' in params ? params.InvocationQuantity : null;
+        this.InvocationSuccessRate = 'InvocationSuccessRate' in params ? params.InvocationSuccessRate : null;
+        this.InvocationAvgDuration = 'InvocationAvgDuration' in params ? params.InvocationAvgDuration : null;
+
+        if (params.InvocationSuccessDistribution) {
+            this.InvocationSuccessDistribution = new Array();
+            for (let z in params.InvocationSuccessDistribution) {
+                let obj = new IndicatorCoord();
+                obj.deserialize(params.InvocationSuccessDistribution[z]);
+                this.InvocationSuccessDistribution.push(obj);
+            }
+        }
+
+        if (params.InvocationFailedDistribution) {
+            this.InvocationFailedDistribution = new Array();
+            for (let z in params.InvocationFailedDistribution) {
+                let obj = new IndicatorCoord();
+                obj.deserialize(params.InvocationFailedDistribution[z]);
+                this.InvocationFailedDistribution.push(obj);
+            }
+        }
+
+        if (params.InvocationStatusDistribution) {
+            this.InvocationStatusDistribution = new Array();
+            for (let z in params.InvocationStatusDistribution) {
+                let obj = new IndicatorCoord();
+                obj.deserialize(params.InvocationStatusDistribution[z]);
+                this.InvocationStatusDistribution.push(obj);
+            }
+        }
+
+        if (params.InvocationDurationDistribution) {
+            this.InvocationDurationDistribution = new Array();
+            for (let z in params.InvocationDurationDistribution) {
+                let obj = new IndicatorCoord();
+                obj.deserialize(params.InvocationDurationDistribution[z]);
+                this.InvocationDurationDistribution.push(obj);
+            }
+        }
+
+        if (params.InvocationQuantityDistribution) {
+            this.InvocationQuantityDistribution = new Array();
+            for (let z in params.InvocationQuantityDistribution) {
+                let obj = new IndicatorCoord();
+                obj.deserialize(params.InvocationQuantityDistribution[z]);
+                this.InvocationQuantityDistribution.push(obj);
+            }
+        }
 
     }
 }
@@ -19334,179 +23716,6 @@ class StopTaskBatchRequest extends  AbstractModel {
 }
 
 /**
- * Serverless部署组信息
- * @class
- */
-class ServerlessGroup extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 部署组ID
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.GroupId = null;
-
-        /**
-         * 分组名称
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.GroupName = null;
-
-        /**
-         * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * 服务状态
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.Status = null;
-
-        /**
-         * 程序包ID
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.PkgId = null;
-
-        /**
-         * 程序包名
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.PkgName = null;
-
-        /**
-         * 集群id
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ClusterId = null;
-
-        /**
-         * 集群名称
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ClusterName = null;
-
-        /**
-         * 命名空间id
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.NamespaceId = null;
-
-        /**
-         * 命名空间名称
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.NamespaceName = null;
-
-        /**
-         * vpc ID
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.VpcId = null;
-
-        /**
-         * vpc 子网ID
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.SubnetId = null;
-
-        /**
-         * 程序包版本
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.PkgVersion = null;
-
-        /**
-         * 所需实例内存大小
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.Memory = null;
-
-        /**
-         * 要求最小实例数
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.InstanceRequest = null;
-
-        /**
-         * 部署组启动参数
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.StartupParameters = null;
-
-        /**
-         * 应用ID
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ApplicationId = null;
-
-        /**
-         * 部署组实例数
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.InstanceCount = null;
-
-        /**
-         * 应用名称
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<string> || null}
-         */
-        this.ApplicationName = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.GroupId = 'GroupId' in params ? params.GroupId : null;
-        this.GroupName = 'GroupName' in params ? params.GroupName : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.PkgId = 'PkgId' in params ? params.PkgId : null;
-        this.PkgName = 'PkgName' in params ? params.PkgName : null;
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
-        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
-        this.NamespaceName = 'NamespaceName' in params ? params.NamespaceName : null;
-        this.VpcId = 'VpcId' in params ? params.VpcId : null;
-        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
-        this.PkgVersion = 'PkgVersion' in params ? params.PkgVersion : null;
-        this.Memory = 'Memory' in params ? params.Memory : null;
-        this.InstanceRequest = 'InstanceRequest' in params ? params.InstanceRequest : null;
-        this.StartupParameters = 'StartupParameters' in params ? params.StartupParameters : null;
-        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
-        this.InstanceCount = 'InstanceCount' in params ? params.InstanceCount : null;
-        this.ApplicationName = 'ApplicationName' in params ? params.ApplicationName : null;
-
-    }
-}
-
-/**
  * API 明细
  * @class
  */
@@ -19736,6 +23945,47 @@ class DescribeUnitApiUseDetailResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeInvocationMetricScatterPlot返回参数结构体
+ * @class
+ */
+class DescribeInvocationMetricScatterPlotResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 多值时间抽统计指标
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {InvocationMetricScatterPlot || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new InvocationMetricScatterPlot();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeUsableUnitNamespaces请求参数结构体
  * @class
  */
@@ -19850,6 +24100,136 @@ class DescribeContainerGroupsRequest extends  AbstractModel {
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
         this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
+
+    }
+}
+
+/**
+ * DescribePrograms返回参数结构体
+ * @class
+ */
+class DescribeProgramsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 数据集列表
+         * @type {PagedProgram || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new PagedProgram();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * tsf-privilege模块，数据项
+ * @class
+ */
+class ProgramItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 数据项ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ProgramItemId = null;
+
+        /**
+         * 资源
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Resource || null}
+         */
+        this.Resource = null;
+
+        /**
+         * 数据值列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.ValueList = null;
+
+        /**
+         * 全选标识，true: 全选；false: 非全选
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.IsAll = null;
+
+        /**
+         * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.CreationTime = null;
+
+        /**
+         * 最后更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.LastUpdateTime = null;
+
+        /**
+         * 删除标识，true: 可删除；false: 不可删除
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.DeleteFlag = null;
+
+        /**
+         * 数据集ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ProgramId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProgramItemId = 'ProgramItemId' in params ? params.ProgramItemId : null;
+
+        if (params.Resource) {
+            let obj = new Resource();
+            obj.deserialize(params.Resource)
+            this.Resource = obj;
+        }
+        this.ValueList = 'ValueList' in params ? params.ValueList : null;
+        this.IsAll = 'IsAll' in params ? params.IsAll : null;
+        this.CreationTime = 'CreationTime' in params ? params.CreationTime : null;
+        this.LastUpdateTime = 'LastUpdateTime' in params ? params.LastUpdateTime : null;
+        this.DeleteFlag = 'DeleteFlag' in params ? params.DeleteFlag : null;
+        this.ProgramId = 'ProgramId' in params ? params.ProgramId : null;
 
     }
 }
@@ -20110,6 +24490,207 @@ class TsfPageApplication extends  AbstractModel {
 }
 
 /**
+ * 包含虚拟机所在TSF中的位置信息
+ * @class
+ */
+class InstanceEnrichedInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 机器ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 机器名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * 机器内网IP
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.LanIp = null;
+
+        /**
+         * 机器外网IP
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.WanIp = null;
+
+        /**
+         * 机器所在VPC
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * 机器运行状态 Pending Running Stopped Rebooting Starting Stopping Abnormal Unknown
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.InstanceStatus = null;
+
+        /**
+         * 机器可用状态（表示机器上的Agent在线）
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.InstanceAvailableStatus = null;
+
+        /**
+         * 应用ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ApplicationId = null;
+
+        /**
+         * 应用名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ApplicationName = null;
+
+        /**
+         * 应用类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ApplicationType = null;
+
+        /**
+         * 集群ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 集群名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ClusterName = null;
+
+        /**
+         * 集群类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ClusterType = null;
+
+        /**
+         * 命名空间ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.NamespaceId = null;
+
+        /**
+         * 命名空间名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.NamespaceName = null;
+
+        /**
+         * 机器所在部署组ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
+        /**
+         * 部署组名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.GroupName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.LanIp = 'LanIp' in params ? params.LanIp : null;
+        this.WanIp = 'WanIp' in params ? params.WanIp : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.InstanceStatus = 'InstanceStatus' in params ? params.InstanceStatus : null;
+        this.InstanceAvailableStatus = 'InstanceAvailableStatus' in params ? params.InstanceAvailableStatus : null;
+        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
+        this.ApplicationName = 'ApplicationName' in params ? params.ApplicationName : null;
+        this.ApplicationType = 'ApplicationType' in params ? params.ApplicationType : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
+        this.ClusterType = 'ClusterType' in params ? params.ClusterType : null;
+        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
+        this.NamespaceName = 'NamespaceName' in params ? params.NamespaceName : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.GroupName = 'GroupName' in params ? params.GroupName : null;
+
+    }
+}
+
+/**
+ * DescribeInvocationMetricDataCurve返回参数结构体
+ * @class
+ */
+class DescribeInvocationMetricDataCurveResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 指标监控数据曲线集合
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<MetricDataCurve> || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            this.Result = new Array();
+            for (let z in params.Result) {
+                let obj = new MetricDataCurve();
+                obj.deserialize(params.Result[z]);
+                this.Result.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DeleteConfig请求参数结构体
  * @class
  */
@@ -20138,25 +24719,54 @@ class DeleteConfigRequest extends  AbstractModel {
 }
 
 /**
- * DescribePublicConfigReleaseLogs返回参数结构体
+ * DescribeFileConfigs请求参数结构体
  * @class
  */
-class DescribePublicConfigReleaseLogsResponse extends  AbstractModel {
+class DescribeFileConfigsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 分页后的公共配置项发布历史列表
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {TsfPageConfigReleaseLog || null}
-         */
-        this.Result = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 配置项ID
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.ConfigId = null;
+
+        /**
+         * 配置项ID列表
+         * @type {Array.<string> || null}
+         */
+        this.ConfigIdList = null;
+
+        /**
+         * 配置项名称
+         * @type {string || null}
+         */
+        this.ConfigName = null;
+
+        /**
+         * 应用ID
+         * @type {string || null}
+         */
+        this.ApplicationId = null;
+
+        /**
+         * 偏移量
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 每页条数
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 配置项版本
+         * @type {string || null}
+         */
+        this.ConfigVersion = null;
 
     }
 
@@ -20167,13 +24777,13 @@ class DescribePublicConfigReleaseLogsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Result) {
-            let obj = new TsfPageConfigReleaseLog();
-            obj.deserialize(params.Result)
-            this.Result = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.ConfigId = 'ConfigId' in params ? params.ConfigId : null;
+        this.ConfigIdList = 'ConfigIdList' in params ? params.ConfigIdList : null;
+        this.ConfigName = 'ConfigName' in params ? params.ConfigName : null;
+        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.ConfigVersion = 'ConfigVersion' in params ? params.ConfigVersion : null;
 
     }
 }
@@ -20465,6 +25075,67 @@ class DescribeApiUseDetailRequest extends  AbstractModel {
 }
 
 /**
+ * 业务日志列表
+ * @class
+ */
+class TsfPageBusinessLogV2 extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总条数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 业务日志列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<BusinessLogV2> || null}
+         */
+        this.Content = null;
+
+        /**
+         * 游标ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ScrollId = null;
+
+        /**
+         * 查询状态
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Content) {
+            this.Content = new Array();
+            for (let z in params.Content) {
+                let obj = new BusinessLogV2();
+                obj.deserialize(params.Content[z]);
+                this.Content.push(obj);
+            }
+        }
+        this.ScrollId = 'ScrollId' in params ? params.ScrollId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
  * 容器 env 的 FieldRef
  * @class
  */
@@ -20573,6 +25244,30 @@ class CreateClusterRequest extends  AbstractModel {
          */
         this.ProgramId = null;
 
+        /**
+         * api地址
+         * @type {string || null}
+         */
+        this.KuberneteApiServer = null;
+
+        /**
+         * K : kubeconfig, S : service account
+         * @type {string || null}
+         */
+        this.KuberneteNativeType = null;
+
+        /**
+         * native secret
+         * @type {string || null}
+         */
+        this.KuberneteNativeSecret = null;
+
+        /**
+         * 无
+         * @type {Array.<string> || null}
+         */
+        this.ProgramIdList = null;
+
     }
 
     /**
@@ -20594,6 +25289,10 @@ class CreateClusterRequest extends  AbstractModel {
         this.MaxNodePodNum = 'MaxNodePodNum' in params ? params.MaxNodePodNum : null;
         this.MaxClusterServiceNum = 'MaxClusterServiceNum' in params ? params.MaxClusterServiceNum : null;
         this.ProgramId = 'ProgramId' in params ? params.ProgramId : null;
+        this.KuberneteApiServer = 'KuberneteApiServer' in params ? params.KuberneteApiServer : null;
+        this.KuberneteNativeType = 'KuberneteNativeType' in params ? params.KuberneteNativeType : null;
+        this.KuberneteNativeSecret = 'KuberneteNativeSecret' in params ? params.KuberneteNativeSecret : null;
+        this.ProgramIdList = 'ProgramIdList' in params ? params.ProgramIdList : null;
 
     }
 }
@@ -21141,6 +25840,85 @@ class ApiRateLimitRule extends  AbstractModel {
 }
 
 /**
+ * 用于请求参数中的条件过滤字段
+ * @class
+ */
+class Filter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 过滤条件名
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 过滤条件匹配值，几个条件间是或关系
+         * @type {Array.<string> || null}
+         */
+        this.Values = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Values = 'Values' in params ? params.Values : null;
+
+    }
+}
+
+/**
+ * DescribeInvocationMetricDataPoint返回参数结构体
+ * @class
+ */
+class DescribeInvocationMetricDataPointResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 单值指标列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<MetricDataSingleValue> || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            this.Result = new Array();
+            for (let z in params.Result) {
+                let obj = new MetricDataSingleValue();
+                obj.deserialize(params.Result[z]);
+                this.Result.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * API分组日使用统计对象数据点
  * @class
  */
@@ -21336,6 +26114,41 @@ class StopTaskExecuteResponse extends  AbstractModel {
 
         /**
          * 操作成功 or 失败
+         * @type {boolean || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * UpdateApiRateLimitRules返回参数结构体
+ * @class
+ */
+class UpdateApiRateLimitRulesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 是否成功
          * @type {boolean || null}
          */
         this.Result = null;
@@ -21884,6 +26697,155 @@ class DescribeApplicationRequest extends  AbstractModel {
 }
 
 /**
+ * 文件配置项
+ * @class
+ */
+class FileConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 配置项ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ConfigId = null;
+
+        /**
+         * 配置项名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ConfigName = null;
+
+        /**
+         * 配置项版本
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ConfigVersion = null;
+
+        /**
+         * 配置项版本描述
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ConfigVersionDesc = null;
+
+        /**
+         * 配置项文件名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ConfigFileName = null;
+
+        /**
+         * 配置项文件内容
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ConfigFileValue = null;
+
+        /**
+         * 配置项文件编码
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ConfigFileCode = null;
+
+        /**
+         * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CreationTime = null;
+
+        /**
+         * 配置项归属应用ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ApplicationId = null;
+
+        /**
+         * 应用名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ApplicationName = null;
+
+        /**
+         * 删除标识
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.DeleteFlag = null;
+
+        /**
+         * 配置项版本数量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ConfigVersionCount = null;
+
+        /**
+         * 配置项最后更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.LastUpdateTime = null;
+
+        /**
+         * 发布路径
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ConfigFilePath = null;
+
+        /**
+         * 后置命令
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ConfigPostCmd = null;
+
+        /**
+         * 配置项文件长度
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ConfigFileValueLength = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ConfigId = 'ConfigId' in params ? params.ConfigId : null;
+        this.ConfigName = 'ConfigName' in params ? params.ConfigName : null;
+        this.ConfigVersion = 'ConfigVersion' in params ? params.ConfigVersion : null;
+        this.ConfigVersionDesc = 'ConfigVersionDesc' in params ? params.ConfigVersionDesc : null;
+        this.ConfigFileName = 'ConfigFileName' in params ? params.ConfigFileName : null;
+        this.ConfigFileValue = 'ConfigFileValue' in params ? params.ConfigFileValue : null;
+        this.ConfigFileCode = 'ConfigFileCode' in params ? params.ConfigFileCode : null;
+        this.CreationTime = 'CreationTime' in params ? params.CreationTime : null;
+        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
+        this.ApplicationName = 'ApplicationName' in params ? params.ApplicationName : null;
+        this.DeleteFlag = 'DeleteFlag' in params ? params.DeleteFlag : null;
+        this.ConfigVersionCount = 'ConfigVersionCount' in params ? params.ConfigVersionCount : null;
+        this.LastUpdateTime = 'LastUpdateTime' in params ? params.LastUpdateTime : null;
+        this.ConfigFilePath = 'ConfigFilePath' in params ? params.ConfigFilePath : null;
+        this.ConfigPostCmd = 'ConfigPostCmd' in params ? params.ConfigPostCmd : null;
+        this.ConfigFileValueLength = 'ConfigFileValueLength' in params ? params.ConfigFileValueLength : null;
+
+    }
+}
+
+/**
  * DeployContainerGroup返回参数结构体
  * @class
  */
@@ -21916,6 +26878,49 @@ false：失败。
         }
         this.Result = 'Result' in params ? params.Result : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ApiDetailInfo 翻页对象
+ * @class
+ */
+class TsfPageApiDetailInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总记录数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * API 信息列表
+         * @type {Array.<ApiDetailInfo> || null}
+         */
+        this.Content = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Content) {
+            this.Content = new Array();
+            for (let z in params.Content) {
+                let obj = new ApiDetailInfo();
+                obj.deserialize(params.Content[z]);
+                this.Content.push(obj);
+            }
+        }
 
     }
 }
@@ -22239,6 +27244,12 @@ class DescribeGroupsRequest extends  AbstractModel {
          */
         this.Status = null;
 
+        /**
+         * 无
+         * @type {Array.<string> || null}
+         */
+        this.GroupIdList = null;
+
     }
 
     /**
@@ -22258,6 +27269,7 @@ class DescribeGroupsRequest extends  AbstractModel {
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
         this.GroupResourceTypeList = 'GroupResourceTypeList' in params ? params.GroupResourceTypeList : null;
         this.Status = 'Status' in params ? params.Status : null;
+        this.GroupIdList = 'GroupIdList' in params ? params.GroupIdList : null;
 
     }
 }
@@ -22453,6 +27465,115 @@ class DeleteNamespaceRequest extends  AbstractModel {
 }
 
 /**
+ * SearchStdoutLog请求参数结构体
+ * @class
+ */
+class SearchStdoutLogRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 机器实例ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 单页请求配置数量，取值范围[1, 500]，默认值为100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 检索关键词
+         * @type {Array.<string> || null}
+         */
+        this.SearchWords = null;
+
+        /**
+         * 查询起始时间
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 部署组ID
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
+        /**
+         * 查询结束时间
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 请求偏移量，取值范围大于等于0，默认值为
+0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 排序规则，默认值"time"
+         * @type {string || null}
+         */
+        this.OrderBy = null;
+
+        /**
+         * 排序方式，取值"asc"或"desc"，默认
+值"desc"
+         * @type {string || null}
+         */
+        this.OrderType = null;
+
+        /**
+         * 检索类型，取值"LUCENE", "REGEXP",
+"NORMAL"
+         * @type {string || null}
+         */
+        this.SearchWordType = null;
+
+        /**
+         * 批量请求类型，取值"page"或"scroll"，默认
+值"page"
+         * @type {string || null}
+         */
+        this.BatchType = null;
+
+        /**
+         * 游标ID
+         * @type {string || null}
+         */
+        this.ScrollId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.SearchWords = 'SearchWords' in params ? params.SearchWords : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
+        this.OrderType = 'OrderType' in params ? params.OrderType : null;
+        this.SearchWordType = 'SearchWordType' in params ? params.SearchWordType : null;
+        this.BatchType = 'BatchType' in params ? params.BatchType : null;
+        this.ScrollId = 'ScrollId' in params ? params.ScrollId : null;
+
+    }
+}
+
+/**
  * RedoTaskBatch返回参数结构体
  * @class
  */
@@ -22483,6 +27604,133 @@ class RedoTaskBatchResponse extends  AbstractModel {
         }
         this.Result = 'Result' in params ? params.Result : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeStatistics请求参数结构体
+ * @class
+ */
+class DescribeStatisticsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 类型：Interface、Service、Group、Instance、SQL、NoSQL
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 步长，单位s：60、3600、86400
+         * @type {number || null}
+         */
+        this.TimeStep = null;
+
+        /**
+         * 偏移量，取值范围大于等于0，默认值为0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 单页请求配置数量，取值范围[1, 50]，默认值为10
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 命名空间Id
+         * @type {string || null}
+         */
+        this.NamespaceId = null;
+
+        /**
+         * 排序字段:AvgTimeConsuming[默认]、RequestCount、ErrorRate。实例监控还支持 CpuPercent
+         * @type {string || null}
+         */
+        this.OrderBy = null;
+
+        /**
+         * 排序方式：ASC:0、DESC:1
+         * @type {number || null}
+         */
+        this.OrderType = null;
+
+        /**
+         * 开始时间：年月日 时分秒2020-05-12 14:43:12
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 开始时间：年月日 时分秒2020-05-12 14:43:12
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 服务名称
+         * @type {string || null}
+         */
+        this.ServiceName = null;
+
+        /**
+         * 搜索关键词
+         * @type {string || null}
+         */
+        this.SearchWord = null;
+
+        /**
+         * 维度
+         * @type {Array.<MetricDimensionValue> || null}
+         */
+        this.MetricDimensionValues = null;
+
+        /**
+         * 聚合关键词
+         * @type {string || null}
+         */
+        this.BucketKey = null;
+
+        /**
+         * 数据库
+         * @type {string || null}
+         */
+        this.DbName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.TimeStep = 'TimeStep' in params ? params.TimeStep : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
+        this.OrderType = 'OrderType' in params ? params.OrderType : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.ServiceName = 'ServiceName' in params ? params.ServiceName : null;
+        this.SearchWord = 'SearchWord' in params ? params.SearchWord : null;
+
+        if (params.MetricDimensionValues) {
+            this.MetricDimensionValues = new Array();
+            for (let z in params.MetricDimensionValues) {
+                let obj = new MetricDimensionValue();
+                obj.deserialize(params.MetricDimensionValues[z]);
+                this.MetricDimensionValues.push(obj);
+            }
+        }
+        this.BucketKey = 'BucketKey' in params ? params.BucketKey : null;
+        this.DbName = 'DbName' in params ? params.DbName : null;
 
     }
 }
@@ -22635,6 +27883,18 @@ class DescribeImageTagsRequest extends  AbstractModel {
          */
         this.SearchWord = null;
 
+        /**
+         * 企业: tcr ；个人: personal或者不填
+         * @type {string || null}
+         */
+        this.RepoType = null;
+
+        /**
+         * TcrRepoInfo值
+         * @type {TcrRepoInfo || null}
+         */
+        this.TcrRepoInfo = null;
+
     }
 
     /**
@@ -22649,6 +27909,79 @@ class DescribeImageTagsRequest extends  AbstractModel {
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.QueryImageIdFlag = 'QueryImageIdFlag' in params ? params.QueryImageIdFlag : null;
         this.SearchWord = 'SearchWord' in params ? params.SearchWord : null;
+        this.RepoType = 'RepoType' in params ? params.RepoType : null;
+
+        if (params.TcrRepoInfo) {
+            let obj = new TcrRepoInfo();
+            obj.deserialize(params.TcrRepoInfo)
+            this.TcrRepoInfo = obj;
+        }
+
+    }
+}
+
+/**
+ * Jvm监控内存数据封装
+ * @class
+ */
+class MemoryPicture extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 内存最大值
+         * @type {Array.<CurvePoint> || null}
+         */
+        this.Max = null;
+
+        /**
+         * 已用内存大小
+         * @type {Array.<CurvePoint> || null}
+         */
+        this.Used = null;
+
+        /**
+         * 系统分配内存大小
+         * @type {Array.<CurvePoint> || null}
+         */
+        this.Committed = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Max) {
+            this.Max = new Array();
+            for (let z in params.Max) {
+                let obj = new CurvePoint();
+                obj.deserialize(params.Max[z]);
+                this.Max.push(obj);
+            }
+        }
+
+        if (params.Used) {
+            this.Used = new Array();
+            for (let z in params.Used) {
+                let obj = new CurvePoint();
+                obj.deserialize(params.Used[z]);
+                this.Used.push(obj);
+            }
+        }
+
+        if (params.Committed) {
+            this.Committed = new Array();
+            for (let z in params.Committed) {
+                let obj = new CurvePoint();
+                obj.deserialize(params.Committed[z]);
+                this.Committed.push(obj);
+            }
+        }
 
     }
 }
@@ -23061,6 +28394,36 @@ class DescribeConfigSummaryRequest extends  AbstractModel {
          */
         this.Limit = null;
 
+        /**
+         * 按时间排序：creation_time；按名称排序：config_name
+         * @type {string || null}
+         */
+        this.OrderBy = null;
+
+        /**
+         * 升序传 0，降序传 1
+         * @type {number || null}
+         */
+        this.OrderType = null;
+
+        /**
+         * 无
+         * @type {Array.<string> || null}
+         */
+        this.ConfigTagList = null;
+
+        /**
+         * 无
+         * @type {boolean || null}
+         */
+        this.DisableProgramAuthCheck = null;
+
+        /**
+         * 无
+         * @type {Array.<string> || null}
+         */
+        this.ConfigIdList = null;
+
     }
 
     /**
@@ -23074,6 +28437,11 @@ class DescribeConfigSummaryRequest extends  AbstractModel {
         this.SearchWord = 'SearchWord' in params ? params.SearchWord : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
+        this.OrderType = 'OrderType' in params ? params.OrderType : null;
+        this.ConfigTagList = 'ConfigTagList' in params ? params.ConfigTagList : null;
+        this.DisableProgramAuthCheck = 'DisableProgramAuthCheck' in params ? params.DisableProgramAuthCheck : null;
+        this.ConfigIdList = 'ConfigIdList' in params ? params.ConfigIdList : null;
 
     }
 }
@@ -23496,9 +28864,11 @@ class CreateGroupResponse extends  AbstractModel {
 
 module.exports = {
     DescribePublicConfigSummaryRequest: DescribePublicConfigSummaryRequest,
+    TsfPageFileConfig: TsfPageFileConfig,
     ModifyPathRewriteRequest: ModifyPathRewriteRequest,
     TsfPageContainerEvent: TsfPageContainerEvent,
     ApiDetailResponse: ApiDetailResponse,
+    UpdateApiRateLimitRuleRequest: UpdateApiRateLimitRuleRequest,
     CosCredentials: CosCredentials,
     DeletePathRewritesResponse: DeletePathRewritesResponse,
     PathRewritePage: PathRewritePage,
@@ -23507,6 +28877,7 @@ module.exports = {
     StopContainerGroupResponse: StopContainerGroupResponse,
     DeletePathRewritesRequest: DeletePathRewritesRequest,
     DeleteLaneResponse: DeleteLaneResponse,
+    DescribeGroupReleaseRequest: DescribeGroupReleaseRequest,
     SimpleApplication: SimpleApplication,
     ContinueRunFailedTaskBatchRequest: ContinueRunFailedTaskBatchRequest,
     DescribeSimpleClustersResponse: DescribeSimpleClustersResponse,
@@ -23517,10 +28888,15 @@ module.exports = {
     DescribePathRewriteResponse: DescribePathRewriteResponse,
     DescribeConfigsResponse: DescribeConfigsResponse,
     ModifyContainerReplicasRequest: ModifyContainerReplicasRequest,
+    ReleaseFileConfigRequest: ReleaseFileConfigRequest,
+    DescribeInvocationMetricDataDimensionResponse: DescribeInvocationMetricDataDimensionResponse,
+    SearchStdoutLogResponse: SearchStdoutLogResponse,
     CreateGatewayApiResponse: CreateGatewayApiResponse,
+    DescribeFileConfigsResponse: DescribeFileConfigsResponse,
     DescribeApiVersionsRequest: DescribeApiVersionsRequest,
     TsfPageConfigReleaseLog: TsfPageConfigReleaseLog,
     DescribeGroupBindedGatewaysResponse: DescribeGroupBindedGatewaysResponse,
+    DescribeJvmMonitorRequest: DescribeJvmMonitorRequest,
     UnbindApiGroupRequest: UnbindApiGroupRequest,
     TaskRecord: TaskRecord,
     CreateNamespaceResponse: CreateNamespaceResponse,
@@ -23530,8 +28906,10 @@ module.exports = {
     TsfPageConfig: TsfPageConfig,
     CreateApiRateLimitRuleRequest: CreateApiRateLimitRuleRequest,
     TaskRecordPage: TaskRecordPage,
+    DescribeJvmMonitorResponse: DescribeJvmMonitorResponse,
     DeleteServerlessGroupRequest: DeleteServerlessGroupRequest,
     ChangeApiUsableStatusRequest: ChangeApiUsableStatusRequest,
+    DescribeMicroservicesResponse: DescribeMicroservicesResponse,
     DescribeApiRateLimitRulesRequest: DescribeApiRateLimitRulesRequest,
     DescribeApiGroupsResponse: DescribeApiGroupsResponse,
     DeletePublicConfigRequest: DeletePublicConfigRequest,
@@ -23541,6 +28919,7 @@ module.exports = {
     DescribeUnitRuleResponse: DescribeUnitRuleResponse,
     DeleteImageTagsRequest: DeleteImageTagsRequest,
     DescribeRepositoriesRequest: DescribeRepositoriesRequest,
+    InvocationMetricScatterPlot: InvocationMetricScatterPlot,
     RollbackConfigRequest: RollbackConfigRequest,
     CreateGatewayApiRequest: CreateGatewayApiRequest,
     DescribeCreateGatewayApiStatusResponse: DescribeCreateGatewayApiStatusResponse,
@@ -23551,13 +28930,13 @@ module.exports = {
     LaneRule: LaneRule,
     MsInstance: MsInstance,
     GatewayPluginBoundParam: GatewayPluginBoundParam,
-    DescribeServerlessGroupsResponse: DescribeServerlessGroupsResponse,
-    ImageRepository: ImageRepository,
+    ModifyLaneRuleRequest: ModifyLaneRuleRequest,
     AddInstancesResponse: AddInstancesResponse,
     StartContainerGroupRequest: StartContainerGroupRequest,
     DescribeRepositoryResponse: DescribeRepositoryResponse,
     Instance: Instance,
     UpdateHealthCheckSettingsRequest: UpdateHealthCheckSettingsRequest,
+    ScalableRule: ScalableRule,
     EnableUnitRuleRequest: EnableUnitRuleRequest,
     CreateClusterResponse: CreateClusterResponse,
     CreateMicroserviceResponse: CreateMicroserviceResponse,
@@ -23575,20 +28954,26 @@ module.exports = {
     RepositoryInfo: RepositoryInfo,
     DraftApiGroupRequest: DraftApiGroupRequest,
     CreateLaneResponse: CreateLaneResponse,
+    TcrRepoInfo: TcrRepoInfo,
     UpdateApiTimeoutsResponse: UpdateApiTimeoutsResponse,
+    TsfPageDimension: TsfPageDimension,
     UnitRule: UnitRule,
     DescribePkgsResponse: DescribePkgsResponse,
     DescribeSimpleNamespacesResponse: DescribeSimpleNamespacesResponse,
     DeleteImageTag: DeleteImageTag,
-    DescribeMicroservicesResponse: DescribeMicroservicesResponse,
+    DescribeContainerGroupDeployInfoResponse: DescribeContainerGroupDeployInfoResponse,
+    DescribeOverviewInvocationRequest: DescribeOverviewInvocationRequest,
     TaskLastExecuteStatus: TaskLastExecuteStatus,
+    DescribeProgramsRequest: DescribeProgramsRequest,
     DescribePublicConfigRequest: DescribePublicConfigRequest,
-    OverviewBasicResourceUsage: OverviewBasicResourceUsage,
+    ImageRepository: ImageRepository,
+    DescribeInovcationIndicatorsRequest: DescribeInovcationIndicatorsRequest,
     CreatePublicConfigResponse: CreatePublicConfigResponse,
     LaneRules: LaneRules,
     TsfPageVmGroup: TsfPageVmGroup,
     CreateConfigResponse: CreateConfigResponse,
     DescribeCreateGatewayApiStatusRequest: DescribeCreateGatewayApiStatusRequest,
+    RevocationPublicConfigResponse: RevocationPublicConfigResponse,
     DescribeConfigReleaseLogsRequest: DescribeConfigReleaseLogsRequest,
     ModifyContainerGroupRequest: ModifyContainerGroupRequest,
     UpdateRepositoryResponse: UpdateRepositoryResponse,
@@ -23598,40 +28983,47 @@ module.exports = {
     ModifyTaskRequest: ModifyTaskRequest,
     DeleteUnitNamespacesResponse: DeleteUnitNamespacesResponse,
     DisableTaskRequest: DisableTaskRequest,
+    DescribeStatisticsResponse: DescribeStatisticsResponse,
     DescribeBasicResourceUsageResponse: DescribeBasicResourceUsageResponse,
-    PkgBind: PkgBind,
+    CreateAllGatewayApiAsyncResponse: CreateAllGatewayApiAsyncResponse,
     RemoveInstancesRequest: RemoveInstancesRequest,
     TsfPageInstance: TsfPageInstance,
     DeleteGroupResponse: DeleteGroupResponse,
     DescribeSimpleApplicationsResponse: DescribeSimpleApplicationsResponse,
     DeployContainerGroupRequest: DeployContainerGroupRequest,
     DescribeSimpleApplicationsRequest: DescribeSimpleApplicationsRequest,
+    OperateApplicationTcrBindingRequest: OperateApplicationTcrBindingRequest,
     ContainGroup: ContainGroup,
     ContainGroupResult: ContainGroupResult,
     UpdateUnitRuleRequest: UpdateUnitRuleRequest,
     ReleasePublicConfigResponse: ReleasePublicConfigResponse,
     ReleaseApiGroupResponse: ReleaseApiGroupResponse,
+    CreateFileConfigRequest: CreateFileConfigRequest,
     UpdateApiRateLimitRulesRequest: UpdateApiRateLimitRulesRequest,
     DescribeGroupInstancesRequest: DescribeGroupInstancesRequest,
     DescribeMsApiListRequest: DescribeMsApiListRequest,
     DescribeUploadInfoResponse: DescribeUploadInfoResponse,
     DescribeMsApiListResponse: DescribeMsApiListResponse,
     EnableTaskRequest: EnableTaskRequest,
-    RevocationPublicConfigResponse: RevocationPublicConfigResponse,
+    BusinessLogV2: BusinessLogV2,
     DisableTaskResponse: DisableTaskResponse,
     DescribeMicroserviceRequest: DescribeMicroserviceRequest,
+    TsfPageCluster: TsfPageCluster,
+    InstanceEnrichedInfoPage: InstanceEnrichedInfoPage,
     DescribePodInstancesResponse: DescribePodInstancesResponse,
+    FileConfigRelease: FileConfigRelease,
+    DescribeInvocationMetricDataPointRequest: DescribeInvocationMetricDataPointRequest,
     DescribeRepositoriesResponse: DescribeRepositoriesResponse,
     MonitorOverview: MonitorOverview,
     CreateGroupRequest: CreateGroupRequest,
     StopTaskBatchResponse: StopTaskBatchResponse,
+    ServiceStatisticsResult: ServiceStatisticsResult,
     CreateContainGroupResponse: CreateContainGroupResponse,
     DescribeContainerGroupDetailResponse: DescribeContainerGroupDetailResponse,
     Ports: Ports,
     DescribeGroupGatewaysResponse: DescribeGroupGatewaysResponse,
     RevocationConfigResponse: RevocationConfigResponse,
-    DeployServerlessGroupResponse: DeployServerlessGroupResponse,
-    CreateAllGatewayApiAsyncResponse: CreateAllGatewayApiAsyncResponse,
+    PkgBind: PkgBind,
     DeleteTaskResponse: DeleteTaskResponse,
     TsfPageMsInstance: TsfPageMsInstance,
     DeleteMicroserviceRequest: DeleteMicroserviceRequest,
@@ -23642,6 +29034,7 @@ module.exports = {
     DescribeGroupResponse: DescribeGroupResponse,
     Env: Env,
     ResourceFieldRef: ResourceFieldRef,
+    Resource: Resource,
     DeleteContainerGroupResponse: DeleteContainerGroupResponse,
     DeleteServerlessGroupResponse: DeleteServerlessGroupResponse,
     DeleteImageTagsResponse: DeleteImageTagsResponse,
@@ -23654,39 +29047,50 @@ module.exports = {
     DeletePublicConfigResponse: DeletePublicConfigResponse,
     DescribeSimpleGroupsResponse: DescribeSimpleGroupsResponse,
     DescribeFlowLastBatchStateRequest: DescribeFlowLastBatchStateRequest,
-    TsfPageCluster: TsfPageCluster,
+    MetricDataCurve: MetricDataCurve,
     TerminateTaskFlowBatchResponse: TerminateTaskFlowBatchResponse,
     ShrinkInstancesRequest: ShrinkInstancesRequest,
     ValueFrom: ValueFrom,
     ShrinkInstancesResponse: ShrinkInstancesResponse,
+    DeleteLaneRuleResponse: DeleteLaneRuleResponse,
     DescribeApiRateLimitRulesResponse: DescribeApiRateLimitRulesResponse,
     AddClusterInstancesRequest: AddClusterInstancesRequest,
     DescribeGroupUseDetailResponse: DescribeGroupUseDetailResponse,
+    ContainerGroupDeploy: ContainerGroupDeploy,
     TsfPageNamespace: TsfPageNamespace,
+    VolumeInfo: VolumeInfo,
     UpdateApiTimeoutsRequest: UpdateApiTimeoutsRequest,
+    Metric: Metric,
+    DescribeOverviewInvocationResponse: DescribeOverviewInvocationResponse,
     DescribeSimpleNamespacesRequest: DescribeSimpleNamespacesRequest,
     ExecuteTaskFlowResponse: ExecuteTaskFlowResponse,
+    SearchBusinessLogRequest: SearchBusinessLogRequest,
     ExpandGroupResponse: ExpandGroupResponse,
     DescribePublicConfigsResponse: DescribePublicConfigsResponse,
     DescribeUnitNamespacesResponse: DescribeUnitNamespacesResponse,
     ContinueRunFailedTaskBatchResponse: ContinueRunFailedTaskBatchResponse,
     DescribeSimpleClustersRequest: DescribeSimpleClustersRequest,
-    DeployServerlessGroupRequest: DeployServerlessGroupRequest,
+    Program: Program,
     ApiDefinitionDescr: ApiDefinitionDescr,
     DescribeLaneRulesResponse: DescribeLaneRulesResponse,
     DescribeImageRepositoryRequest: DescribeImageRepositoryRequest,
+    IndicatorCoord: IndicatorCoord,
     TsfPageUnitRule: TsfPageUnitRule,
     DescribeApiGroupRequest: DescribeApiGroupRequest,
-    RedoTaskExecuteResponse: RedoTaskExecuteResponse,
+    DescribeGatewayApisRequest: DescribeGatewayApisRequest,
     DescribeContainerGroupDetailRequest: DescribeContainerGroupDetailRequest,
+    JvmMonitorData: JvmMonitorData,
     DescribeGroupsWithPluginRequest: DescribeGroupsWithPluginRequest,
     ImageRepositoryResult: ImageRepositoryResult,
     ModifyTaskResponse: ModifyTaskResponse,
+    SearchBusinessLogResponse: SearchBusinessLogResponse,
     DeleteUnitNamespacesRequest: DeleteUnitNamespacesRequest,
     DescribeGroupRequest: DescribeGroupRequest,
     UnitRuleItem: UnitRuleItem,
     BindPluginRequest: BindPluginRequest,
     HealthCheckSetting: HealthCheckSetting,
+    DeleteLaneRuleRequest: DeleteLaneRuleRequest,
+    MetricDimension: MetricDimension,
     GatewayDeployGroup: GatewayDeployGroup,
     PkgList: PkgList,
     Cluster: Cluster,
@@ -23695,8 +29099,10 @@ module.exports = {
     UpdateUnitRuleResponse: UpdateUnitRuleResponse,
     HealthCheckSettings: HealthCheckSettings,
     StartGroupResponse: StartGroupResponse,
+    GroupRelease: GroupRelease,
     DescribePathRewritesRequest: DescribePathRewritesRequest,
     ShrinkGroupRequest: ShrinkGroupRequest,
+    TsfPageStdoutLogV2: TsfPageStdoutLogV2,
     RepositoryList: RepositoryList,
     CreateLaneRuleResponse: CreateLaneRuleResponse,
     CreateTaskResponse: CreateTaskResponse,
@@ -23707,6 +29113,7 @@ module.exports = {
     GatewayPlugin: GatewayPlugin,
     GatewayApiGroupVo: GatewayApiGroupVo,
     CreateApplicationRequest: CreateApplicationRequest,
+    ServiceStatisticsResults: ServiceStatisticsResults,
     DeployGroupRequest: DeployGroupRequest,
     LaneInfos: LaneInfos,
     CreateTaskFlowRequest: CreateTaskFlowRequest,
@@ -23714,13 +29121,15 @@ module.exports = {
     TsfPageGatewayPlugin: TsfPageGatewayPlugin,
     ApiUseStatisticsEntity: ApiUseStatisticsEntity,
     UnbindApiGroupResponse: UnbindApiGroupResponse,
+    DescribeGroupReleaseResponse: DescribeGroupReleaseResponse,
     DescribePathRewriteRequest: DescribePathRewriteRequest,
     CreateApplicationResponse: CreateApplicationResponse,
     GatewayGroupIds: GatewayGroupIds,
+    DescribeInvocationMetricDataDimensionRequest: DescribeInvocationMetricDataDimensionRequest,
     DeployGroupResponse: DeployGroupResponse,
-    DescribeServerlessGroupResponse: DescribeServerlessGroupResponse,
     BindApiGroupResponse: BindApiGroupResponse,
     MetricDataPointMap: MetricDataPointMap,
+    DescribeGroupAttributeResponse: DescribeGroupAttributeResponse,
     ModifyPathRewriteResponse: ModifyPathRewriteResponse,
     EnableUnitRuleResponse: EnableUnitRuleResponse,
     DescribeEnabledUnitRuleResponse: DescribeEnabledUnitRuleResponse,
@@ -23738,15 +29147,17 @@ module.exports = {
     DescribeApiUseDetailResponse: DescribeApiUseDetailResponse,
     ServiceSetting: ServiceSetting,
     ModifyUploadInfoRequest: ModifyUploadInfoRequest,
-    ApplicationForPage: ApplicationForPage,
+    DescribeGatewayApisResponse: DescribeGatewayApisResponse,
     DescribeUnitRuleRequest: DescribeUnitRuleRequest,
     UpdateGatewayApiResponse: UpdateGatewayApiResponse,
+    DescribeInstancesResponse: DescribeInstancesResponse,
     ContainerEvent: ContainerEvent,
     ModifyLaneResponse: ModifyLaneResponse,
+    DescribeDownloadInfoRequest: DescribeDownloadInfoRequest,
     DescribePublicConfigSummaryResponse: DescribePublicConfigSummaryResponse,
     DescribePublicConfigReleaseLogsRequest: DescribePublicConfigReleaseLogsRequest,
-    CreateServerlessGroupResponse: CreateServerlessGroupResponse,
     ShardArgument: ShardArgument,
+    MetricDimensionValue: MetricDimensionValue,
     MetricDataPoint: MetricDataPoint,
     DescribeApplicationAttributeResponse: DescribeApplicationAttributeResponse,
     ModifyLaneRequest: ModifyLaneRequest,
@@ -23764,6 +29175,7 @@ module.exports = {
     BindPluginResponse: BindPluginResponse,
     RedoTaskFlowBatchRequest: RedoTaskFlowBatchRequest,
     TsfPageUnitNamespace: TsfPageUnitNamespace,
+    MetricDataSingleValue: MetricDataSingleValue,
     StopTaskExecuteRequest: StopTaskExecuteRequest,
     DescribePkgsRequest: DescribePkgsRequest,
     SchedulingStrategy: SchedulingStrategy,
@@ -23773,6 +29185,8 @@ module.exports = {
     OperationInfo: OperationInfo,
     DescribePublicConfigResponse: DescribePublicConfigResponse,
     DescribeUsableUnitNamespacesResponse: DescribeUsableUnitNamespacesResponse,
+    ReleaseFileConfigResponse: ReleaseFileConfigResponse,
+    ThreadPicture: ThreadPicture,
     DescribeConfigResponse: DescribeConfigResponse,
     SimpleGroup: SimpleGroup,
     DescribeContainerEventsResponse: DescribeContainerEventsResponse,
@@ -23787,47 +29201,56 @@ module.exports = {
     DescribePluginInstancesRequest: DescribePluginInstancesRequest,
     ApiRequestDescr: ApiRequestDescr,
     ApiVersionArray: ApiVersionArray,
+    DescribeInovcationIndicatorsResponse: DescribeInovcationIndicatorsResponse,
+    MultiValueDataPoints: MultiValueDataPoints,
     ConfigReleaseLog: ConfigReleaseLog,
+    CreateFileConfigResponse: CreateFileConfigResponse,
     CreateConfigRequest: CreateConfigRequest,
     DescribeUploadInfoRequest: DescribeUploadInfoRequest,
-    TaskFlowLastBatchState: TaskFlowLastBatchState,
+    OverviewBasicResourceUsage: OverviewBasicResourceUsage,
     DescribeUnitRulesResponse: DescribeUnitRulesResponse,
     UpdateGatewayApiRequest: UpdateGatewayApiRequest,
+    DescribeInstancesRequest: DescribeInstancesRequest,
     PathRewriteCreateObject: PathRewriteCreateObject,
     DescribeApiGroupsRequest: DescribeApiGroupsRequest,
-    DescribeServerlessGroupRequest: DescribeServerlessGroupRequest,
     DeleteUnitRuleRequest: DeleteUnitRuleRequest,
     ApplicationAttribute: ApplicationAttribute,
+    TaskFlowLastBatchState: TaskFlowLastBatchState,
     DeletePkgsResponse: DeletePkgsResponse,
     DescribeGroupsResponse: DescribeGroupsResponse,
-    ModifyLaneRuleRequest: ModifyLaneRuleRequest,
+    ApplicationForPage: ApplicationForPage,
+    DescribeInvocationMetricScatterPlotRequest: DescribeInvocationMetricScatterPlotRequest,
     CreateTaskFlowResponse: CreateTaskFlowResponse,
     DescribeMicroservicesRequest: DescribeMicroservicesRequest,
     AddClusterInstancesResponse: AddClusterInstancesResponse,
+    DescribeInvocationMetricDataCurveRequest: DescribeInvocationMetricDataCurveRequest,
+    VmGroupOther: VmGroupOther,
     DescribeTaskLastStatusResponse: DescribeTaskLastStatusResponse,
     DescribePublicConfigsRequest: DescribePublicConfigsRequest,
     GatewayGroupApiVo: GatewayGroupApiVo,
     DescribeApplicationsRequest: DescribeApplicationsRequest,
     DescribeTaskDetailRequest: DescribeTaskDetailRequest,
+    MultiValue: MultiValue,
     DescribePublicConfigReleasesRequest: DescribePublicConfigReleasesRequest,
     DescribeLaneRulesRequest: DescribeLaneRulesRequest,
-    CreateServerlessGroupRequest: CreateServerlessGroupRequest,
     UnitRuleTag: UnitRuleTag,
     DescribePluginInstancesResponse: DescribePluginInstancesResponse,
     CreateRepositoryResponse: CreateRepositoryResponse,
     GroupUnitApiDailyUseStatistics: GroupUnitApiDailyUseStatistics,
-    DescribeServerlessGroupsRequest: DescribeServerlessGroupsRequest,
+    CurvePoint: CurvePoint,
     CosDownloadInfo: CosDownloadInfo,
     DeletePkgsRequest: DeletePkgsRequest,
-    ServerlessGroupPage: ServerlessGroupPage,
     InstanceAdvancedSettings: InstanceAdvancedSettings,
     GroupApiUseStatistics: GroupApiUseStatistics,
     ChangeApiUsableStatusResponse: ChangeApiUsableStatusResponse,
     EnableTaskResponse: EnableTaskResponse,
-    UpdateApiRateLimitRulesResponse: UpdateApiRateLimitRulesResponse,
+    VolumeMountInfo: VolumeMountInfo,
+    PagedProgram: PagedProgram,
     GroupUnitApiUseStatistics: GroupUnitApiUseStatistics,
     DescribeGroupInstancesResponse: DescribeGroupInstancesResponse,
-    DescribeDownloadInfoRequest: DescribeDownloadInfoRequest,
+    DescribeContainerGroupDeployInfoRequest: DescribeContainerGroupDeployInfoRequest,
+    OperateApplicationTcrBindingResponse: OperateApplicationTcrBindingResponse,
+    DescribePublicConfigReleaseLogsResponse: DescribePublicConfigReleaseLogsResponse,
     DeleteApiGroupRequest: DeleteApiGroupRequest,
     ReleaseApiGroupRequest: ReleaseApiGroupRequest,
     StartGroupRequest: StartGroupRequest,
@@ -23837,6 +29260,7 @@ module.exports = {
     RevocationPublicConfigRequest: RevocationPublicConfigRequest,
     ModifyLaneRuleResponse: ModifyLaneRuleResponse,
     TsfPageSimpleGroup: TsfPageSimpleGroup,
+    DescribeGroupAttributeRequest: DescribeGroupAttributeRequest,
     TaskRule: TaskRule,
     PkgInfo: PkgInfo,
     GroupPod: GroupPod,
@@ -23847,15 +29271,17 @@ module.exports = {
     CreateRepositoryRequest: CreateRepositoryRequest,
     ModifyMicroserviceRequest: ModifyMicroserviceRequest,
     DescribeConfigReleasesRequest: DescribeConfigReleasesRequest,
+    StdoutLogV2: StdoutLogV2,
     GroupDailyUseStatistics: GroupDailyUseStatistics,
     DescribeEnabledUnitRuleRequest: DescribeEnabledUnitRuleRequest,
     DescribeApiGroupResponse: DescribeApiGroupResponse,
-    UpdateApiRateLimitRuleRequest: UpdateApiRateLimitRuleRequest,
+    RedoTaskExecuteResponse: RedoTaskExecuteResponse,
     CreateLaneRequest: CreateLaneRequest,
     CreateApiGroupResponse: CreateApiGroupResponse,
     ServiceConfig: ServiceConfig,
     RedoTaskExecuteRequest: RedoTaskExecuteRequest,
     DescribeApplicationsResponse: DescribeApplicationsResponse,
+    InvocationIndicator: InvocationIndicator,
     DescribeConfigRequest: DescribeConfigRequest,
     DisableUnitRouteRequest: DisableUnitRouteRequest,
     DescribeUnitRulesRequest: DescribeUnitRulesRequest,
@@ -23864,24 +29290,29 @@ module.exports = {
     ContainerGroupDetail: ContainerGroupDetail,
     BindApiGroupRequest: BindApiGroupRequest,
     StopTaskBatchRequest: StopTaskBatchRequest,
-    ServerlessGroup: ServerlessGroup,
     ApiDetailInfo: ApiDetailInfo,
     DescribeUnitApiUseDetailResponse: DescribeUnitApiUseDetailResponse,
+    DescribeInvocationMetricScatterPlotResponse: DescribeInvocationMetricScatterPlotResponse,
     DescribeUsableUnitNamespacesRequest: DescribeUsableUnitNamespacesRequest,
     DescribeContainerGroupsRequest: DescribeContainerGroupsRequest,
+    DescribeProgramsResponse: DescribeProgramsResponse,
+    ProgramItem: ProgramItem,
     DisableTaskFlowRequest: DisableTaskFlowRequest,
     DescribePodInstancesRequest: DescribePodInstancesRequest,
     RedoTaskResponse: RedoTaskResponse,
     DescribeConfigsRequest: DescribeConfigsRequest,
     EnableUnitRouteRequest: EnableUnitRouteRequest,
     TsfPageApplication: TsfPageApplication,
+    InstanceEnrichedInfo: InstanceEnrichedInfo,
+    DescribeInvocationMetricDataCurveResponse: DescribeInvocationMetricDataCurveResponse,
     DeleteConfigRequest: DeleteConfigRequest,
-    DescribePublicConfigReleaseLogsResponse: DescribePublicConfigReleaseLogsResponse,
+    DescribeFileConfigsRequest: DescribeFileConfigsRequest,
     ExecuteTaskResponse: ExecuteTaskResponse,
     CreateApiRateLimitRuleResponse: CreateApiRateLimitRuleResponse,
     Config: Config,
     ProtocolPort: ProtocolPort,
     DescribeApiUseDetailRequest: DescribeApiUseDetailRequest,
+    TsfPageBusinessLogV2: TsfPageBusinessLogV2,
     FieldRef: FieldRef,
     CreateClusterRequest: CreateClusterRequest,
     TsfPageMicroservice: TsfPageMicroservice,
@@ -23894,11 +29325,14 @@ module.exports = {
     StopContainerGroupRequest: StopContainerGroupRequest,
     UpdateHealthCheckSettingsResponse: UpdateHealthCheckSettingsResponse,
     ApiRateLimitRule: ApiRateLimitRule,
+    Filter: Filter,
+    DescribeInvocationMetricDataPointResponse: DescribeInvocationMetricDataPointResponse,
     GroupUseStatisticsEntity: GroupUseStatisticsEntity,
     DescribePathRewritesResponse: DescribePathRewritesResponse,
     AddInstanceResult: AddInstanceResult,
     DescribeFlowLastBatchStateResponse: DescribeFlowLastBatchStateResponse,
     StopTaskExecuteResponse: StopTaskExecuteResponse,
+    UpdateApiRateLimitRulesResponse: UpdateApiRateLimitRulesResponse,
     DescribeSimpleGroupsRequest: DescribeSimpleGroupsRequest,
     DescribeConfigReleasesResponse: DescribeConfigReleasesResponse,
     ApiGroupInfo: ApiGroupInfo,
@@ -23908,7 +29342,9 @@ module.exports = {
     DescribeDownloadInfoResponse: DescribeDownloadInfoResponse,
     GroupPodResult: GroupPodResult,
     DescribeApplicationRequest: DescribeApplicationRequest,
+    FileConfig: FileConfig,
     DeployContainerGroupResponse: DeployContainerGroupResponse,
+    TsfPageApiDetailInfo: TsfPageApiDetailInfo,
     DescribeBasicResourceUsageRequest: DescribeBasicResourceUsageRequest,
     DeleteMicroserviceResponse: DeleteMicroserviceResponse,
     DescribeReleasedConfigResponse: DescribeReleasedConfigResponse,
@@ -23921,11 +29357,14 @@ module.exports = {
     OperationInfoDetail: OperationInfoDetail,
     CreatePathRewritesRequest: CreatePathRewritesRequest,
     DeleteNamespaceRequest: DeleteNamespaceRequest,
+    SearchStdoutLogRequest: SearchStdoutLogRequest,
     RedoTaskBatchResponse: RedoTaskBatchResponse,
+    DescribeStatisticsRequest: DescribeStatisticsRequest,
     DescribeMicroserviceResponse: DescribeMicroserviceResponse,
     DescribeImageRepositoryResponse: DescribeImageRepositoryResponse,
     TaskId: TaskId,
     DescribeImageTagsRequest: DescribeImageTagsRequest,
+    MemoryPicture: MemoryPicture,
     DescribeConfigSummaryResponse: DescribeConfigSummaryResponse,
     CreateContainGroupRequest: CreateContainGroupRequest,
     DescribePublicConfigReleasesResponse: DescribePublicConfigReleasesResponse,

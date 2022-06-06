@@ -21,13 +21,15 @@ const BillDataInfo = models.BillDataInfo;
 const EnableLiveDomainResponse = models.EnableLiveDomainResponse;
 const CreateLiveCertRequest = models.CreateLiveCertRequest;
 const HlsSpecialParam = models.HlsSpecialParam;
+const TranscodeTotalInfo = models.TranscodeTotalInfo;
 const StopRecordTaskResponse = models.StopRecordTaskResponse;
 const DescribeDeliverBandwidthListResponse = models.DescribeDeliverBandwidthListResponse;
 const DeleteLiveRecordRuleRequest = models.DeleteLiveRecordRuleRequest;
 const ResumeLiveStreamRequest = models.ResumeLiveStreamRequest;
 const DeleteLiveTranscodeTemplateResponse = models.DeleteLiveTranscodeTemplateResponse;
+const StopScreenshotTaskRequest = models.StopScreenshotTaskRequest;
 const DescribeBillBandwidthAndFluxListResponse = models.DescribeBillBandwidthAndFluxListResponse;
-const TemplateInfo = models.TemplateInfo;
+const CreateScreenshotTaskResponse = models.CreateScreenshotTaskResponse;
 const DeleteLiveCallbackRuleResponse = models.DeleteLiveCallbackRuleResponse;
 const ResumeDelayLiveStreamRequest = models.ResumeDelayLiveStreamRequest;
 const DescribeLiveWatermarkRulesResponse = models.DescribeLiveWatermarkRulesResponse;
@@ -37,9 +39,10 @@ const DeleteLiveSnapshotTemplateRequest = models.DeleteLiveSnapshotTemplateReque
 const DescribeGroupProIspPlayInfoListResponse = models.DescribeGroupProIspPlayInfoListResponse;
 const PushAuthKeyInfo = models.PushAuthKeyInfo;
 const DescribeUploadStreamNumsResponse = models.DescribeUploadStreamNumsResponse;
+const PlayCodeTotalInfo = models.PlayCodeTotalInfo;
 const DeleteLiveRecordTemplateRequest = models.DeleteLiveRecordTemplateRequest;
 const DeleteLiveCallbackTemplateResponse = models.DeleteLiveCallbackTemplateResponse;
-const DescribeLiveStreamOnlineListResponse = models.DescribeLiveStreamOnlineListResponse;
+const CreateScreenshotTaskRequest = models.CreateScreenshotTaskRequest;
 const PushQualityData = models.PushQualityData;
 const UnBindLiveDomainCertResponse = models.UnBindLiveDomainCertResponse;
 const ModifyLivePlayAuthKeyRequest = models.ModifyLivePlayAuthKeyRequest;
@@ -63,12 +66,14 @@ const DeleteLiveSnapshotRuleRequest = models.DeleteLiveSnapshotRuleRequest;
 const DescribePlayErrorCodeDetailInfoListRequest = models.DescribePlayErrorCodeDetailInfoListRequest;
 const DeleteLivePullStreamTaskRequest = models.DeleteLivePullStreamTaskRequest;
 const CommonMixOutputParams = models.CommonMixOutputParams;
+const DescribePushBandwidthAndFluxListResponse = models.DescribePushBandwidthAndFluxListResponse;
 const DescribeUploadStreamNumsRequest = models.DescribeUploadStreamNumsRequest;
 const DescribeLiveSnapshotRulesResponse = models.DescribeLiveSnapshotRulesResponse;
 const DescribeLiveTranscodeDetailInfoResponse = models.DescribeLiveTranscodeDetailInfoResponse;
 const DescribeLiveDomainRequest = models.DescribeLiveDomainRequest;
 const DescribeLiveStreamPublishedListRequest = models.DescribeLiveStreamPublishedListRequest;
 const DeleteLiveTranscodeRuleRequest = models.DeleteLiveTranscodeRuleRequest;
+const DescribePushBandwidthAndFluxListRequest = models.DescribePushBandwidthAndFluxListRequest;
 const CreateLiveRecordRuleRequest = models.CreateLiveRecordRuleRequest;
 const DescribeLiveSnapshotTemplatesRequest = models.DescribeLiveSnapshotTemplatesRequest;
 const AddLiveWatermarkResponse = models.AddLiveWatermarkResponse;
@@ -79,9 +84,10 @@ const ModifyLiveDomainCertRequest = models.ModifyLiveDomainCertRequest;
 const StreamOnlineInfo = models.StreamOnlineInfo;
 const CreateLiveWatermarkRuleResponse = models.CreateLiveWatermarkRuleResponse;
 const ModifyLiveSnapshotTemplateResponse = models.ModifyLiveSnapshotTemplateResponse;
+const DeleteScreenshotTaskRequest = models.DeleteScreenshotTaskRequest;
 const DescribeProIspPlaySumInfoListRequest = models.DescribeProIspPlaySumInfoListRequest;
 const DescribeDeliverBandwidthListRequest = models.DescribeDeliverBandwidthListRequest;
-const PlayCodeTotalInfo = models.PlayCodeTotalInfo;
+const DescribeScreenshotTaskResponse = models.DescribeScreenshotTaskResponse;
 const AddLiveWatermarkRequest = models.AddLiveWatermarkRequest;
 const ModifyLiveTranscodeTemplateResponse = models.ModifyLiveTranscodeTemplateResponse;
 const BillCountryInfo = models.BillCountryInfo;
@@ -123,6 +129,7 @@ const DescribeLiveCertsResponse = models.DescribeLiveCertsResponse;
 const CommonMixInputParam = models.CommonMixInputParam;
 const DescribeProvinceIspPlayInfoListResponse = models.DescribeProvinceIspPlayInfoListResponse;
 const DescribeLiveRecordTemplatesResponse = models.DescribeLiveRecordTemplatesResponse;
+const DescribeScreenshotTaskRequest = models.DescribeScreenshotTaskRequest;
 const DescribeCallbackRecordsListRequest = models.DescribeCallbackRecordsListRequest;
 const DescribeLiveCallbackTemplatesResponse = models.DescribeLiveCallbackTemplatesResponse;
 const ModifyLivePlayAuthKeyResponse = models.ModifyLivePlayAuthKeyResponse;
@@ -131,7 +138,7 @@ const CallbackEventInfo = models.CallbackEventInfo;
 const DescribeTopClientIpSumInfoListResponse = models.DescribeTopClientIpSumInfoListResponse;
 const DropLiveStreamResponse = models.DropLiveStreamResponse;
 const DescribeLiveStreamStateResponse = models.DescribeLiveStreamStateResponse;
-const StopLiveRecordRequest = models.StopLiveRecordRequest;
+const ScreenshotTask = models.ScreenshotTask;
 const DeletePullStreamConfigResponse = models.DeletePullStreamConfigResponse;
 const DeleteLiveWatermarkRuleRequest = models.DeleteLiveWatermarkRuleRequest;
 const StreamEventInfo = models.StreamEventInfo;
@@ -177,7 +184,7 @@ const ModifyLivePushAuthKeyResponse = models.ModifyLivePushAuthKeyResponse;
 const DomainInfoList = models.DomainInfoList;
 const DescribeLiveWatermarkResponse = models.DescribeLiveWatermarkResponse;
 const ResumeLiveStreamResponse = models.ResumeLiveStreamResponse;
-const ModifyLiveRecordTemplateRequest = models.ModifyLiveRecordTemplateRequest;
+const DescribeLiveStreamOnlineListResponse = models.DescribeLiveStreamOnlineListResponse;
 const DeletePullStreamConfigRequest = models.DeletePullStreamConfigRequest;
 const ModifyPullStreamConfigRequest = models.ModifyPullStreamConfigRequest;
 const DescribeStreamPushInfoListResponse = models.DescribeStreamPushInfoListResponse;
@@ -195,6 +202,7 @@ const DescribeCallbackRecordsListResponse = models.DescribeCallbackRecordsListRe
 const PublishTime = models.PublishTime;
 const ModifyLiveCertResponse = models.ModifyLiveCertResponse;
 const MonitorStreamPlayInfo = models.MonitorStreamPlayInfo;
+const DescribePlayErrorCodeSumInfoListRequest = models.DescribePlayErrorCodeSumInfoListRequest;
 const DescribeLiveTranscodeDetailInfoRequest = models.DescribeLiveTranscodeDetailInfoRequest;
 const ModifyLiveDomainRefererResponse = models.ModifyLiveDomainRefererResponse;
 const DeleteLiveWatermarkRequest = models.DeleteLiveWatermarkRequest;
@@ -217,9 +225,10 @@ const ClientIpPlaySumInfo = models.ClientIpPlaySumInfo;
 const DescribeLiveTranscodeTemplateResponse = models.DescribeLiveTranscodeTemplateResponse;
 const CreateLiveSnapshotTemplateResponse = models.CreateLiveSnapshotTemplateResponse;
 const DescribeConcurrentRecordStreamNumRequest = models.DescribeConcurrentRecordStreamNumRequest;
-const DescribePlayErrorCodeSumInfoListRequest = models.DescribePlayErrorCodeSumInfoListRequest;
+const DeleteScreenshotTaskResponse = models.DeleteScreenshotTaskResponse;
 const ModifyLiveCertRequest = models.ModifyLiveCertRequest;
 const CommonMixControlParams = models.CommonMixControlParams;
+const ModifyLiveRecordTemplateRequest = models.ModifyLiveRecordTemplateRequest;
 const DescribeAreaBillBandwidthAndFluxListResponse = models.DescribeAreaBillBandwidthAndFluxListResponse;
 const ForbidLiveDomainRequest = models.ForbidLiveDomainRequest;
 const DescribeLiveRecordRulesRequest = models.DescribeLiveRecordRulesRequest;
@@ -238,6 +247,7 @@ const DescribeStreamPlayInfoListRequest = models.DescribeStreamPlayInfoListReque
 const CreateLiveTranscodeTemplateRequest = models.CreateLiveTranscodeTemplateRequest;
 const DescribeLiveStreamPublishedListResponse = models.DescribeLiveStreamPublishedListResponse;
 const DeleteLiveDomainRequest = models.DeleteLiveDomainRequest;
+const ForbidLiveDomainResponse = models.ForbidLiveDomainResponse;
 const AddDelayLiveStreamResponse = models.AddDelayLiveStreamResponse;
 const DescribeLiveTranscodeTemplatesResponse = models.DescribeLiveTranscodeTemplatesResponse;
 const DeleteLiveCallbackRuleRequest = models.DeleteLiveCallbackRuleRequest;
@@ -247,7 +257,7 @@ const ModifyLiveDomainCertResponse = models.ModifyLiveDomainCertResponse;
 const ModifyLiveCallbackTemplateResponse = models.ModifyLiveCallbackTemplateResponse;
 const EnableLiveDomainRequest = models.EnableLiveDomainRequest;
 const DescribeAllStreamPlayInfoListResponse = models.DescribeAllStreamPlayInfoListResponse;
-const ForbidLiveDomainResponse = models.ForbidLiveDomainResponse;
+const DescribeLiveTranscodeTotalInfoResponse = models.DescribeLiveTranscodeTotalInfoResponse;
 const DescribeLiveSnapshotRulesRequest = models.DescribeLiveSnapshotRulesRequest;
 const CreateRecordTaskRequest = models.CreateRecordTaskRequest;
 const CreateLiveTranscodeRuleResponse = models.CreateLiveTranscodeRuleResponse;
@@ -287,6 +297,7 @@ const DescribeLiveDomainResponse = models.DescribeLiveDomainResponse;
 const DeleteRecordTaskRequest = models.DeleteRecordTaskRequest;
 const PullStreamTaskInfo = models.PullStreamTaskInfo;
 const DescribeStreamDayPlayInfoListResponse = models.DescribeStreamDayPlayInfoListResponse;
+const StopLiveRecordRequest = models.StopLiveRecordRequest;
 const DescribeVisitTopSumInfoListResponse = models.DescribeVisitTopSumInfoListResponse;
 const ModifyLivePullStreamTaskResponse = models.ModifyLivePullStreamTaskResponse;
 const CreateLiveSnapshotRuleResponse = models.CreateLiveSnapshotRuleResponse;
@@ -294,6 +305,8 @@ const DelayInfo = models.DelayInfo;
 const DescribeLiveStreamEventListResponse = models.DescribeLiveStreamEventListResponse;
 const DescribePullStreamConfigsResponse = models.DescribePullStreamConfigsResponse;
 const DescribeLiveCallbackRulesResponse = models.DescribeLiveCallbackRulesResponse;
+const DescribeLiveTranscodeTotalInfoRequest = models.DescribeLiveTranscodeTotalInfoRequest;
+const StopScreenshotTaskResponse = models.StopScreenshotTaskResponse;
 const CreateRecordTaskResponse = models.CreateRecordTaskResponse;
 const ForbidStreamInfo = models.ForbidStreamInfo;
 const ResumeDelayLiveStreamResponse = models.ResumeDelayLiveStreamResponse;
@@ -301,6 +314,7 @@ const GroupProIspDataInfo = models.GroupProIspDataInfo;
 const DeleteLiveDomainResponse = models.DeleteLiveDomainResponse;
 const CommonMixCropParams = models.CommonMixCropParams;
 const CreateLiveRecordTemplateRequest = models.CreateLiveRecordTemplateRequest;
+const TemplateInfo = models.TemplateInfo;
 const DescribeProIspPlaySumInfoListResponse = models.DescribeProIspPlaySumInfoListResponse;
 const DeleteLiveCertRequest = models.DeleteLiveCertRequest;
 const DescribeHttpStatusInfoListResponse = models.DescribeHttpStatusInfoListResponse;
@@ -319,6 +333,7 @@ class LiveClient extends AbstractClient {
     
     /**
      * 断开推流连接，但可以重新推流。
+注：对已经不活跃的流，调用该断流接口时，接口返回成功。
      * @param {DropLiveStreamRequest} req
      * @param {function(string, DropLiveStreamResponse):void} cb
      * @public
@@ -427,7 +442,9 @@ class LiveClient extends AbstractClient {
     /**
      * 用于查询推断流事件。<br>
 
-注意：该接口可通过使用IsFilter进行过滤，返回推流历史记录。
+注意：
+1. 该接口提供离线推断流记录查询功能，不可作为重要业务场景强依赖接口。
+2. 该接口可通过使用IsFilter进行过滤，返回推流历史记录。
      * @param {DescribeLiveStreamEventListRequest} req
      * @param {function(string, DescribeLiveStreamEventListResponse):void} cb
      * @public
@@ -438,14 +455,16 @@ class LiveClient extends AbstractClient {
     }
 
     /**
-     * 查询直播拉流配置。
-     * @param {DescribePullStreamConfigsRequest} req
-     * @param {function(string, DescribePullStreamConfigsResponse):void} cb
+     * 该接口用来创建通用混流。用法与旧接口 mix_streamv2.start_mix_stream_advanced 基本一致。
+注意：当前最多支持16路混流。
+最佳实践：https://cloud.tencent.com/document/product/267/45566
+     * @param {CreateCommonMixStreamRequest} req
+     * @param {function(string, CreateCommonMixStreamResponse):void} cb
      * @public
      */
-    DescribePullStreamConfigs(req, cb) {
-        let resp = new DescribePullStreamConfigsResponse();
-        this.request("DescribePullStreamConfigs", req, resp, cb);
+    CreateCommonMixStream(req, cb) {
+        let resp = new CreateCommonMixStreamResponse();
+        this.request("CreateCommonMixStream", req, resp, cb);
     }
 
     /**
@@ -517,7 +536,7 @@ class LiveClient extends AbstractClient {
 
     /**
      * 查询直播域名 Referer 黑白名单配置。
-由于 Referer 信息包含在 http 协议中，在开启配置后，播放协议为 rtmp 或 webrtc 不会校验 Referer 配置，仍可正常播放。如需配置 Referer 鉴权建议使用 http-flv 或 http-hls 协议播放。
+由于 Referer 信息包含在 http 协议中，在开启配置后，播放协议为 rtmp 或 WebRTC 不会校验 Referer 配置，仍可正常播放。如需配置 Referer 鉴权建议使用 http-flv 或 http-hls 协议播放。
      * @param {DescribeLiveDomainRefererRequest} req
      * @param {function(string, DescribeLiveDomainRefererResponse):void} cb
      * @public
@@ -547,6 +566,23 @@ class LiveClient extends AbstractClient {
     ModifyPullStreamStatus(req, cb) {
         let resp = new ModifyPullStreamStatusResponse();
         this.request("ModifyPullStreamStatus", req, resp, cb);
+    }
+
+    /**
+     * 创建一个在指定时间启动、结束的截图任务，并使用指定截图模板ID对应的配置进行截图。
+- 注意事项
+1. 断流会结束当前截图。在结束时间到达之前任务仍然有效，期间只要正常推流都会正常截图，与是否多次推、断流无关。
+2. 使用上避免创建时间段相互重叠的截图任务。若同一条流当前存在多个时段重叠的任务，为避免重复系统将启动最多3个截图任务。
+3. 创建的截图任务记录在平台侧只保留3个月。
+4. 当前截图任务管理API（CreateScreenshotTask/StopScreenshotTask/DeleteScreenshotTask）与旧API（CreateLiveInstantSnapshot/StopLiveInstantSnapshot）不兼容，两套接口不能混用。
+5. 避免 创建截图任务 与 推流 操作同时进行，可能导致因截图任务未生效而引起任务延迟启动问题，两者操作间隔建议大于3秒。
+     * @param {CreateScreenshotTaskRequest} req
+     * @param {function(string, CreateScreenshotTaskResponse):void} cb
+     * @public
+     */
+    CreateScreenshotTask(req, cb) {
+        let resp = new CreateScreenshotTaskResponse();
+        this.request("CreateScreenshotTask", req, resp, cb);
     }
 
     /**
@@ -674,7 +710,11 @@ class LiveClient extends AbstractClient {
 
     /**
      * 返回正在直播中的流列表。适用于推流成功后查询在线流信息。
-注意：该接口仅适用于流数少于2万路的情况，对于流数较大用户请联系售后。
+
+注意：
+1. 该接口仅提供辅助查询在线流列表功能，业务重要场景不可强依赖该接口。
+2. 该接口仅适用于流数少于2万路的情况，对于流数较大用户请联系售后。
+
      * @param {DescribeLiveStreamOnlineListRequest} req
      * @param {function(string, DescribeLiveStreamOnlineListResponse):void} cb
      * @public
@@ -729,16 +769,25 @@ class LiveClient extends AbstractClient {
     }
 
     /**
-     * 该接口用来创建通用混流。用法与旧接口 mix_streamv2.start_mix_stream_advanced 基本一致。
-注意：当前最多支持16路混流。
-最佳实践：https://cloud.tencent.com/document/product/267/45566
-     * @param {CreateCommonMixStreamRequest} req
-     * @param {function(string, CreateCommonMixStreamResponse):void} cb
+     * 提前结束截图，中止运行中的截图任务。任务被成功终止后，本次任务将不再启动。
+     * @param {StopScreenshotTaskRequest} req
+     * @param {function(string, StopScreenshotTaskResponse):void} cb
      * @public
      */
-    CreateCommonMixStream(req, cb) {
-        let resp = new CreateCommonMixStreamResponse();
-        this.request("CreateCommonMixStream", req, resp, cb);
+    StopScreenshotTask(req, cb) {
+        let resp = new StopScreenshotTaskResponse();
+        this.request("StopScreenshotTask", req, resp, cb);
+    }
+
+    /**
+     * 查询直播拉流配置。
+     * @param {DescribePullStreamConfigsRequest} req
+     * @param {function(string, DescribePullStreamConfigsResponse):void} cb
+     * @public
+     */
+    DescribePullStreamConfigs(req, cb) {
+        let resp = new DescribePullStreamConfigsResponse();
+        this.request("DescribePullStreamConfigs", req, resp, cb);
     }
 
     /**
@@ -764,11 +813,9 @@ class LiveClient extends AbstractClient {
     }
 
     /**
-     * 对流设置延播时间
-注意：如果在推流前设置延播，需要提前5分钟设置。
-目前该接口只支持流粒度的，域名及应用粒度功能支持当前开发中。
-使用场景：对重要直播，避免出现突发状况，可通过设置延迟播放，提前做好把控。
+     * 针对大型活动直播，通过对直播流设置延时来控制现场与观众播放画面的时间间隔，避免突发状况造成影响。
 
+注意：如果在推流前设置延播，需要提前5分钟设置，目前该接口只支持流粒度。
      * @param {AddDelayLiveStreamRequest} req
      * @param {function(string, AddDelayLiveStreamResponse):void} cb
      * @public
@@ -835,6 +882,20 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
     }
 
     /**
+     * 查询转码总量数据，可查询近30天内数据。
+注意：
+如果是查询某一天内，则返回5分钟粒度数据；
+如果是查询跨天或指定域名， 则返回1小时粒度数据。
+     * @param {DescribeLiveTranscodeTotalInfoRequest} req
+     * @param {function(string, DescribeLiveTranscodeTotalInfoResponse):void} cb
+     * @public
+     */
+    DescribeLiveTranscodeTotalInfo(req, cb) {
+        let resp = new DescribeLiveTranscodeTotalInfoResponse();
+        this.request("DescribeLiveTranscodeTotalInfo", req, resp, cb);
+    }
+
+    /**
      * 删除截图规则。
      * @param {DeleteLiveSnapshotRuleRequest} req
      * @param {function(string, DeleteLiveSnapshotRuleResponse):void} cb
@@ -861,6 +922,8 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
 
     /**
      * 获取禁推流列表。
+
+注意：该接口仅作为直播辅助查询接口，重要业务场景不可强依赖该接口。
      * @param {DescribeLiveForbidStreamListRequest} req
      * @param {function(string, DescribeLiveForbidStreamListResponse):void} cb
      * @public
@@ -873,11 +936,13 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
     /**
      * 创建直播拉流任务。支持将外部已有的点播文件，或者直播源拉取过来转推到直播系统。
 注意：
-1. 源流视频编码目前只支持: H264, H265。其他编码格式建议先进行转码处理。
-2. 源流音频编码目前只支持: AAC。其他编码格式建议先进行转码处理。
-3. 拉流转推功能为计费增值服务，计费规则详情可参见[计费文档](https://cloud.tencent.com/document/product/267/53308)。
-4. 拉流转推功能仅提供内容拉取与推送服务，请确保内容已获得授权并符合内容传播相关的法律法规。若内容有侵权或违规相关问题，云直播会停止相关的功能服务并保留追究法律责任的权利。
-
+1. 默认支持任务数上限20个，如有特殊需求，可通过提单到售后进行评估增加上限。
+2. 目前仅支持推流到腾讯云直播，暂不支持推到第三方。
+3. 源流视频编码目前只支持: H264, H265。其他编码格式建议先进行转码处理。
+4. 源流音频编码目前只支持: AAC。其他编码格式建议先进行转码处理。
+5. 过期不用的任务需自行清理，未清理的过期任务也会占用上限额度，如需要自动清理过期任务，可提单给售后进行配置。
+6. 拉流转推功能为计费增值服务，计费规则详情可参见[计费文档](https://cloud.tencent.com/document/product/267/53308)。
+7. 拉流转推功能仅提供内容拉取与推送服务，请确保内容已获得授权并符合内容传播相关的法律法规。若内容有侵权或违规相关问题，云直播会停止相关的功能服务并保留追究法律责任的权利。
      * @param {CreateLivePullStreamTaskRequest} req
      * @param {function(string, CreateLivePullStreamTaskResponse):void} cb
      * @public
@@ -923,7 +988,7 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
     /**
      * 更新直播拉流任务。 
 1. 不支持修改目标地址，如需推到新地址，请创建新任务。
-2. 不支持修改任务类型，如需更换，请创建新任务。
+2. 不支持修改拉流源类型，如需更换，请创建新任务。
      * @param {ModifyLivePullStreamTaskRequest} req
      * @param {function(string, ModifyLivePullStreamTaskResponse):void} cb
      * @public
@@ -1081,7 +1146,7 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
     }
 
     /**
-     * 提前结束录制，并中止运行中的录制任务。任务被成功终止后，本次任务将不再启动。
+     * 提前结束录制，中止运行中的录制任务并生成录制文件。任务被成功终止后，本次任务将不再启动。
      * @param {StopRecordTaskRequest} req
      * @param {function(string, StopRecordTaskResponse):void} cb
      * @public
@@ -1295,6 +1360,43 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
     }
 
     /**
+     * 查询指定时间段范围内启动和结束的截图任务列表。
+- 使用前提
+1. 仅用于查询由 CreateScreenshotTask接口创建的截图任务。
+2. 不能查询被 DeleteScreenshotTask接口删除以及已过期（平台侧保留3个月）的截图任务。
+     * @param {DescribeScreenshotTaskRequest} req
+     * @param {function(string, DescribeScreenshotTaskResponse):void} cb
+     * @public
+     */
+    DescribeScreenshotTask(req, cb) {
+        let resp = new DescribeScreenshotTaskResponse();
+        this.request("DescribeScreenshotTask", req, resp, cb);
+    }
+
+    /**
+     * 直播推流带宽和流量数据查询。
+推流计费会先取全球推流用量和全球播放用量进行比较，满足计费条件后再按各地区用量出账。详情参见[计费文档](https://cloud.tencent.com/document/product/267/34175)。
+     * @param {DescribePushBandwidthAndFluxListRequest} req
+     * @param {function(string, DescribePushBandwidthAndFluxListResponse):void} cb
+     * @public
+     */
+    DescribePushBandwidthAndFluxList(req, cb) {
+        let resp = new DescribePushBandwidthAndFluxListResponse();
+        this.request("DescribePushBandwidthAndFluxList", req, resp, cb);
+    }
+
+    /**
+     * 删除截图任务配置。删除操作不影响正在运行当中的任务，仅对删除之后新的推流有效。
+     * @param {DeleteScreenshotTaskRequest} req
+     * @param {function(string, DeleteScreenshotTaskResponse):void} cb
+     * @public
+     */
+    DeleteScreenshotTask(req, cb) {
+        let resp = new DeleteScreenshotTaskResponse();
+        this.request("DeleteScreenshotTask", req, resp, cb);
+    }
+
+    /**
      * 禁止某条流的推送，可以预设某个时刻将流恢复。
      * @param {ForbidLiveStreamRequest} req
      * @param {function(string, ForbidLiveStreamResponse):void} cb
@@ -1339,7 +1441,7 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
     }
 
     /**
-     * 回调事件查询
+     * 用于查询回调事件。
      * @param {DescribeCallbackRecordsListRequest} req
      * @param {function(string, DescribeCallbackRecordsListResponse):void} cb
      * @public
@@ -1384,7 +1486,7 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
     }
 
     /**
-     * 创建录制模板，成功返回模板id后，需要调用[CreateLiveRecordRule](/document/product/267/32615)接口，将模板id绑定到流进行使用。
+     * 创建录制模板，数量上限：50，成功返回模板id后，需要调用[CreateLiveRecordRule](/document/product/267/32615)接口，将模板id绑定到流进行使用。
 <br>录制相关文档：[直播录制](/document/product/267/32739)。
      * @param {CreateLiveRecordTemplateRequest} req
      * @param {function(string, CreateLiveRecordTemplateResponse):void} cb
@@ -1396,7 +1498,7 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
     }
 
     /**
-     * 直播计费带宽和流量数据查询。
+     * 直播播放带宽和流量数据查询。
      * @param {DescribeBillBandwidthAndFluxListRequest} req
      * @param {function(string, DescribeBillBandwidthAndFluxListResponse):void} cb
      * @public
@@ -1498,7 +1600,16 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
     }
 
     /**
-     * 返回直播中、无推流或者禁播等状态
+     * 返回直播中、无推流或者禁播等状态。
+
+使用建议：
+该接口提供实时流状态查询功能，鉴于网络抖动等一些不可抗因素，使用该接口作为判断主播是否开播等重要业务场景时，请参考以下使用建议。
+1. 优先使用业务自身的房间开关播逻辑，判断主播是否在线，譬如客户端开播信令和主播在线心跳等。
+2. 对于没有房间管理的直播场景，可以结合以下方案综合判断。
+2.1 根据[推断流事件通知](/document/product/267/20388) 判断主播在线状态。
+2.2 通过定时（间隔>1min）查询[直播中的流接口](/document/api/267/20472)，判断主播是否在线。
+2.3 通过 本接口 查询直播流状态，判断主播是否在线。
+2.4 以上任一方式判断为在线，都认为主播开播中，并且接口查询超时或解析异常时，也默认为在线，减少对业务的影响。
      * @param {DescribeLiveStreamStateRequest} req
      * @param {function(string, DescribeLiveStreamStateResponse):void} cb
      * @public
@@ -1510,7 +1621,7 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
 
     /**
      * 设置直播域名 Referer 黑白名单。
-由于 Referer 信息包含在 http 协议中，在开启配置后，播放协议为 rtmp 或 webrtc 不会校验 Referer 配置，仍可正常播放。如需配置 Referer 鉴权建议使用 http-flv 或 http-hls 协议播放。
+由于 Referer 信息包含在 http 协议中，在开启配置后，播放协议为 rtmp 或 WebRTC 不会校验 Referer 配置，仍可正常播放。如需配置 Referer 鉴权建议使用 http-flv 或 http-hls 协议播放。
      * @param {ModifyLiveDomainRefererRequest} req
      * @param {function(string, ModifyLiveDomainRefererResponse):void} cb
      * @public
@@ -1532,7 +1643,7 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
     }
 
     /**
-     * 恢复延迟播放设置
+     * 取消直播流设置的延时配置，恢复实时直播画面。
      * @param {ResumeDelayLiveStreamRequest} req
      * @param {function(string, ResumeDelayLiveStreamResponse):void} cb
      * @public

@@ -18,34 +18,60 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const DetectProductBetaResponse = models.DetectProductBetaResponse;
 const DetectDisgustRequest = models.DetectDisgustRequest;
-const DetectCelebrityResponse = models.DetectCelebrityResponse;
+const SearchImageResponse = models.SearchImageResponse;
+const RecognizeCarProRequest = models.RecognizeCarProRequest;
+const RecognizeCarProResponse = models.RecognizeCarProResponse;
+const CreateImageRequest = models.CreateImageRequest;
+const DetectLabelBetaRequest = models.DetectLabelBetaRequest;
+const DeleteImagesResponse = models.DeleteImagesResponse;
 const CropImageRequest = models.CropImageRequest;
 const DetectProductRequest = models.DetectProductRequest;
+const ObjectInfo = models.ObjectInfo;
+const RegionDetected = models.RegionDetected;
+const DescribeGroupsRequest = models.DescribeGroupsRequest;
+const DetectMisbehaviorResponse = models.DetectMisbehaviorResponse;
 const AssessQualityResponse = models.AssessQualityResponse;
 const DetectDisgustResponse = models.DetectDisgustResponse;
+const SearchImageRequest = models.SearchImageRequest;
+const RecognizeCarResponse = models.RecognizeCarResponse;
 const DetectLabelRequest = models.DetectLabelRequest;
 const DetectLabelResponse = models.DetectLabelResponse;
 const EnhanceImageResponse = models.EnhanceImageResponse;
 const ProductInfo = models.ProductInfo;
 const AssessQualityRequest = models.AssessQualityRequest;
+const DeleteImagesRequest = models.DeleteImagesRequest;
+const CreateGroupRequest = models.CreateGroupRequest;
+const DescribeImagesRequest = models.DescribeImagesRequest;
+const Rect = models.Rect;
 const DetectProductBetaRequest = models.DetectProductBetaRequest;
-const DetectMisbehaviorResponse = models.DetectMisbehaviorResponse;
+const Box = models.Box;
 const RecognizeCarRequest = models.RecognizeCarRequest;
 const EnhanceImageRequest = models.EnhanceImageRequest;
+const GroupInfo = models.GroupInfo;
 const CropImageResponse = models.CropImageResponse;
 const DetectCelebrityRequest = models.DetectCelebrityRequest;
 const Coord = models.Coord;
 const Face = models.Face;
 const DetectProductResponse = models.DetectProductResponse;
+const ColorInfo = models.ColorInfo;
+const ImageRect = models.ImageRect;
+const CreateImageResponse = models.CreateImageResponse;
 const DetectLabelItem = models.DetectLabelItem;
 const Location = models.Location;
+const CarPlateContent = models.CarPlateContent;
+const DetectLabelBetaResponse = models.DetectLabelBetaResponse;
+const ImageInfo = models.ImageInfo;
+const Attribute = models.Attribute;
 const Labels = models.Labels;
+const DetectCelebrityResponse = models.DetectCelebrityResponse;
 const Product = models.Product;
-const RegionDetected = models.RegionDetected;
+const DescribeGroupsResponse = models.DescribeGroupsResponse;
 const CarTagItem = models.CarTagItem;
 const Threshold = models.Threshold;
-const RecognizeCarResponse = models.RecognizeCarResponse;
+const LemmaInfo = models.LemmaInfo;
+const DescribeImagesResponse = models.DescribeImagesResponse;
 const DetectMisbehaviorRequest = models.DetectMisbehaviorRequest;
+const CreateGroupResponse = models.CreateGroupResponse;
 
 
 /**
@@ -59,15 +85,21 @@ class TiiaClient extends AbstractClient {
     }
     
     /**
+     * 创建图片，并添加对应图片的自定义信息。
+     * @param {CreateImageRequest} req
+     * @param {function(string, CreateImageResponse):void} cb
+     * @public
+     */
+    CreateImage(req, cb) {
+        let resp = new CreateImageResponse();
+        this.request("CreateImage", req, resp, cb);
+    }
+
+    /**
      * 商品识别-微信识物版，基于人工智能技术、海量训练图片、亿级商品库，可以实现全覆盖、细粒度、高准确率的商品识别和商品推荐功能。
 本服务可以识别出图片中的主体位置、主体商品类型，覆盖亿级SKU，输出具体商品的价格、型号等详细信息。
 客户无需自建商品库，即可快速实现商品识别、拍照搜商品等功能。
-
-目前“商品识别-微信识物版”为内测服务，需要申请、开通后方可使用。请在[服务开通申请表](https://cloud.tencent.com/apply/p/y1q2mnf0vdl) 中填写详细信息和需求，如果通过审核，我们将会在2个工作日内与您联系，并开通服务。
-内测期间，本服务免费提供最高2QPS，收费模式和标准会在正式版上线前通过站内信、短信通知客户。如果需要提升并发，请与我们联系洽谈。
-
-注意：本文档为内测版本，仅适用于功能体验和测试，正式业务接入请等待正式版。正式版的输入、输出可能会与内测版存在少量差异。
->     
+>   
 - 公共参数中的签名方式必须指定为V3版本，即配置SignatureMethod参数为TC3-HMAC-SHA256。
      * @param {DetectProductBetaRequest} req
      * @param {function(string, DetectProductBetaResponse):void} cb
@@ -79,7 +111,8 @@ class TiiaClient extends AbstractClient {
     }
 
     /**
-     * 腾讯云车辆属性识别可对汽车车身及车辆属性进行检测与识别，目前支持11种车身颜色、20多种车型、300多种品牌、4000多种车系+年款的识别，同时支持对车辆的位置进行检测。如果图片中存在多辆车，会分别输出每辆车的车型和坐标。
+     * 车辆识别可对图片中车辆的车型进行识别，可识别7000多种车型，输出车辆的品牌（如路虎）、车系（如神行者2）、类型（如中型SUV）、颜色、年份和坐标等信息，覆盖轿车、SUV、大型客车等市面常见车。如果图片中存在多辆车，会分别输出每辆车的车型和坐标。
+
 >     
 - 公共参数中的签名方式必须指定为V3版本，即配置SignatureMethod参数为TC3-HMAC-SHA256。
      * @param {RecognizeCarRequest} req
@@ -92,7 +125,7 @@ class TiiaClient extends AbstractClient {
     }
 
     /**
-     * 图像标签利用深度学习技术、海量训练数据，可以对图片进行智能分类、物体识别等。
+     * 图像标签利用深度学习技术，可以对图片进行智能分类、物体识别等。
 
 目前支持8个大类、六十多个子类、数千个标签。涵盖各种日常场景、动植物、物品、美食、卡证等。具体分类请见[图像分析常见问题功能与限制相关](https://cloud.tencent.com/document/product/865/39164)。
 
@@ -151,6 +184,42 @@ class TiiaClient extends AbstractClient {
     }
 
     /**
+     * 查询所有的图库信息。
+     * @param {DescribeGroupsRequest} req
+     * @param {function(string, DescribeGroupsResponse):void} cb
+     * @public
+     */
+    DescribeGroups(req, cb) {
+        let resp = new DescribeGroupsResponse();
+        this.request("DescribeGroups", req, resp, cb);
+    }
+
+    /**
+     * 删除图片。
+     * @param {DeleteImagesRequest} req
+     * @param {function(string, DeleteImagesResponse):void} cb
+     * @public
+     */
+    DeleteImages(req, cb) {
+        let resp = new DeleteImagesResponse();
+        this.request("DeleteImages", req, resp, cb);
+    }
+
+    /**
+     * 图像标签测试接口
+
+>     
+- 公共参数中的签名方式必须指定为V3版本，即配置SignatureMethod参数为TC3-HMAC-SHA256。
+     * @param {DetectLabelBetaRequest} req
+     * @param {function(string, DetectLabelBetaResponse):void} cb
+     * @public
+     */
+    DetectLabelBeta(req, cb) {
+        let resp = new DetectLabelBetaResponse();
+        this.request("DetectLabelBeta", req, resp, cb);
+    }
+
+    /**
      * 根据输入的裁剪比例，智能判断一张图片的最佳裁剪区域，确保原图的主体区域不受影响。
 
 可以自动裁剪图片，适应不同平台、设备的展示要求，避免简单拉伸带来的变形。
@@ -163,6 +232,28 @@ class TiiaClient extends AbstractClient {
     CropImage(req, cb) {
         let resp = new CropImageResponse();
         this.request("CropImage", req, resp, cb);
+    }
+
+    /**
+     * 本接口用于对一张待识别的商品图片，在指定图片库中检索出最相似的图片列表。
+     * @param {SearchImageRequest} req
+     * @param {function(string, SearchImageResponse):void} cb
+     * @public
+     */
+    SearchImage(req, cb) {
+        let resp = new SearchImageResponse();
+        this.request("SearchImage", req, resp, cb);
+    }
+
+    /**
+     * 获取指定图片库中的图片列表。
+     * @param {DescribeImagesRequest} req
+     * @param {function(string, DescribeImagesResponse):void} cb
+     * @public
+     */
+    DescribeImages(req, cb) {
+        let resp = new DescribeImagesResponse();
+        this.request("DescribeImages", req, resp, cb);
     }
 
     /**
@@ -179,6 +270,24 @@ class TiiaClient extends AbstractClient {
     }
 
     /**
+     * 用于创建一个空的图片库，如果图片库已存在则返回错误。不同类型图库对应不同的图像搜索服务，根据输入参数GroupType区分。
+
+| 服务类型 | GroupType参数值 |功能描述 |
+|  :------  | :----- |:-----------------  |
+| 相同图像搜索<img width=30/>    | 4 |在自建图库中搜索相同原图，可支持裁剪、翻转、调色、加水印后的图片搜索，适用于图片版权保护、原图查询等场景。|
+| 商品图像搜索<img width=30/>   | 5 |在自建图库中搜索相同或相似的商品图片，适用于商品分类、检索、推荐等电商场景。|
+| 相似图像搜索<img width=30/>   | 6 |在自建图片库中搜索与输入图片高度相似的图片，适用于相似图案、logo、纹理等图像元素的搜索。|
+
+     * @param {CreateGroupRequest} req
+     * @param {function(string, CreateGroupResponse):void} cb
+     * @public
+     */
+    CreateGroup(req, cb) {
+        let resp = new CreateGroupResponse();
+        this.request("CreateGroup", req, resp, cb);
+    }
+
+    /**
      * 本接口支持识别图片中包含的商品，能够输出商品的品类名称、类别，还可以输出商品在图片中的位置。支持一张图片多个商品的识别。
 >     
 - 公共参数中的签名方式必须指定为V3版本，即配置SignatureMethod参数为TC3-HMAC-SHA256。
@@ -189,6 +298,20 @@ class TiiaClient extends AbstractClient {
     DetectProduct(req, cb) {
         let resp = new DetectProductResponse();
         this.request("DetectProduct", req, resp, cb);
+    }
+
+    /**
+     * 车辆识别（增强版）可对图片中车辆的车型和车牌进行识别，输出车辆的车牌，以及品牌（如路虎）、车系（如神行者2）、类型（如中型SUV）、颜色和坐标等信息，覆盖轿车、SUV、大型客车等市面常见车。如果图片中存在多辆车，会分别输出每辆车的车型、车牌和坐标。
+
+>     
+- 公共参数中的签名方式必须指定为V3版本，即配置SignatureMethod参数为TC3-HMAC-SHA256。
+     * @param {RecognizeCarProRequest} req
+     * @param {function(string, RecognizeCarProResponse):void} cb
+     * @public
+     */
+    RecognizeCarPro(req, cb) {
+        let resp = new RecognizeCarProResponse();
+        this.request("RecognizeCarPro", req, resp, cb);
     }
 
     /**

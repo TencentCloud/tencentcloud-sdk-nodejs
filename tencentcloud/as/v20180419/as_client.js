@@ -24,74 +24,77 @@ const ScaleOutInstancesRequest = models.ScaleOutInstancesRequest;
 const AutoScalingNotification = models.AutoScalingNotification;
 const ModifyScheduledActionRequest = models.ModifyScheduledActionRequest;
 const DescribeAutoScalingGroupsRequest = models.DescribeAutoScalingGroupsRequest;
-const CreateAutoScalingGroupResponse = models.CreateAutoScalingGroupResponse;
+const LaunchConfiguration = models.LaunchConfiguration;
 const DescribeAccountLimitsResponse = models.DescribeAccountLimitsResponse;
-const CreatePaiInstanceResponse = models.CreatePaiInstanceResponse;
 const CreateLaunchConfigurationResponse = models.CreateLaunchConfigurationResponse;
+const Advice = models.Advice;
 const CreateLifecycleHookResponse = models.CreateLifecycleHookResponse;
 const ClearLaunchConfigurationAttributesResponse = models.ClearLaunchConfigurationAttributesResponse;
 const DescribeAutoScalingGroupsResponse = models.DescribeAutoScalingGroupsResponse;
-const CreatePaiInstanceRequest = models.CreatePaiInstanceRequest;
+const CreateScheduledActionRequest = models.CreateScheduledActionRequest;
 const SystemDisk = models.SystemDisk;
 const SpotMarketOptions = models.SpotMarketOptions;
 const StopAutoScalingInstancesResponse = models.StopAutoScalingInstancesResponse;
 const DescribeScalingPoliciesRequest = models.DescribeScalingPoliciesRequest;
 const InstanceNameSettings = models.InstanceNameSettings;
+const DetailedStatusMessage = models.DetailedStatusMessage;
 const ModifyScheduledActionResponse = models.ModifyScheduledActionResponse;
-const CreateAutoScalingGroupFromInstanceRequest = models.CreateAutoScalingGroupFromInstanceRequest;
+const AttachLoadBalancersResponse = models.AttachLoadBalancersResponse;
 const ExecuteScalingPolicyResponse = models.ExecuteScalingPolicyResponse;
-const ModifyLaunchConfigurationAttributesResponse = models.ModifyLaunchConfigurationAttributesResponse;
+const DeleteAutoScalingGroupRequest = models.DeleteAutoScalingGroupRequest;
 const SetInstancesProtectionResponse = models.SetInstancesProtectionResponse;
 const StartAutoScalingInstancesResponse = models.StartAutoScalingInstancesResponse;
 const CompleteLifecycleActionRequest = models.CompleteLifecycleActionRequest;
 const CreateScalingPolicyResponse = models.CreateScalingPolicyResponse;
 const CreateNotificationConfigurationResponse = models.CreateNotificationConfigurationResponse;
 const DescribeLaunchConfigurationsResponse = models.DescribeLaunchConfigurationsResponse;
+const RemoveInstancesRequest = models.RemoveInstancesRequest;
 const DeleteScalingPolicyResponse = models.DeleteScalingPolicyResponse;
 const Tag = models.Tag;
+const DetachLoadBalancersRequest = models.DetachLoadBalancersRequest;
 const DescribeAutoScalingInstancesRequest = models.DescribeAutoScalingInstancesRequest;
-const LimitedLoginSettings = models.LimitedLoginSettings;
 const ModifyLoadBalancersRequest = models.ModifyLoadBalancersRequest;
 const RemoveInstancesResponse = models.RemoveInstancesResponse;
 const ModifyScalingPolicyResponse = models.ModifyScalingPolicyResponse;
 const SetInstancesProtectionRequest = models.SetInstancesProtectionRequest;
 const DeleteNotificationConfigurationResponse = models.DeleteNotificationConfigurationResponse;
 const DetachInstancesResponse = models.DetachInstancesResponse;
+const ModifyLaunchConfigurationAttributesResponse = models.ModifyLaunchConfigurationAttributesResponse;
 const CreateLaunchConfigurationRequest = models.CreateLaunchConfigurationRequest;
 const AutoScalingGroup = models.AutoScalingGroup;
 const AttachInstancesResponse = models.AttachInstancesResponse;
 const DescribeAutoScalingGroupLastActivitiesResponse = models.DescribeAutoScalingGroupLastActivitiesResponse;
 const DescribeAccountLimitsRequest = models.DescribeAccountLimitsRequest;
 const UpgradeLifecycleHookRequest = models.UpgradeLifecycleHookRequest;
+const DetachLoadBalancersResponse = models.DetachLoadBalancersResponse;
 const ScalingPolicy = models.ScalingPolicy;
 const DescribeAutoScalingGroupLastActivitiesRequest = models.DescribeAutoScalingGroupLastActivitiesRequest;
 const HostNameSettings = models.HostNameSettings;
 const ModifyLoadBalancersResponse = models.ModifyLoadBalancersResponse;
-const DescribePaiInstancesRequest = models.DescribePaiInstancesRequest;
 const CreateNotificationConfigurationRequest = models.CreateNotificationConfigurationRequest;
 const DescribeScheduledActionsResponse = models.DescribeScheduledActionsResponse;
-const ModifyNotificationConfigurationRequest = models.ModifyNotificationConfigurationRequest;
 const DeleteLifecycleHookRequest = models.DeleteLifecycleHookRequest;
+const ModifyLoadBalancerTargetAttributesResponse = models.ModifyLoadBalancerTargetAttributesResponse;
 const ModifyAutoScalingGroupResponse = models.ModifyAutoScalingGroupResponse;
 const DeleteLaunchConfigurationRequest = models.DeleteLaunchConfigurationRequest;
 const ModifyScalingPolicyRequest = models.ModifyScalingPolicyRequest;
 const InstanceMarketOptionsRequest = models.InstanceMarketOptionsRequest;
 const UpgradeLifecycleHookResponse = models.UpgradeLifecycleHookResponse;
 const InstanceTag = models.InstanceTag;
-const PaiInstance = models.PaiInstance;
+const ModifyLifecycleHookResponse = models.ModifyLifecycleHookResponse;
+const DescribeAutoScalingAdvicesResponse = models.DescribeAutoScalingAdvicesResponse;
 const CreateAutoScalingGroupRequest = models.CreateAutoScalingGroupRequest;
 const DeleteScheduledActionResponse = models.DeleteScheduledActionResponse;
 const UpgradeLaunchConfigurationRequest = models.UpgradeLaunchConfigurationRequest;
 const DescribeAutoScalingActivitiesResponse = models.DescribeAutoScalingActivitiesResponse;
 const DescribeNotificationConfigurationsResponse = models.DescribeNotificationConfigurationsResponse;
 const DataDisk = models.DataDisk;
-const PreviewPaiDomainNameRequest = models.PreviewPaiDomainNameRequest;
 const DeleteScalingPolicyRequest = models.DeleteScalingPolicyRequest;
 const LoginSettings = models.LoginSettings;
 const CreateAutoScalingGroupFromInstanceResponse = models.CreateAutoScalingGroupFromInstanceResponse;
 const DetachInstancesRequest = models.DetachInstancesRequest;
 const Instance = models.Instance;
-const CreateScheduledActionRequest = models.CreateScheduledActionRequest;
+const DescribeAutoScalingInstancesResponse = models.DescribeAutoScalingInstancesResponse;
 const EnhancedService = models.EnhancedService;
 const DeleteLaunchConfigurationResponse = models.DeleteLaunchConfigurationResponse;
 const DescribeScheduledActionsRequest = models.DescribeScheduledActionsRequest;
@@ -102,21 +105,24 @@ const ModifyDesiredCapacityRequest = models.ModifyDesiredCapacityRequest;
 const CreateScheduledActionResponse = models.CreateScheduledActionResponse;
 const CreateLifecycleHookRequest = models.CreateLifecycleHookRequest;
 const ScheduledAction = models.ScheduledAction;
+const ModifyLifecycleHookRequest = models.ModifyLifecycleHookRequest;
 const CompleteLifecycleActionResponse = models.CompleteLifecycleActionResponse;
 const ScaleOutInstancesResponse = models.ScaleOutInstancesResponse;
 const Filter = models.Filter;
 const DescribeLifecycleHooksRequest = models.DescribeLifecycleHooksRequest;
 const ServiceSettings = models.ServiceSettings;
-const LaunchConfiguration = models.LaunchConfiguration;
+const CreateAutoScalingGroupResponse = models.CreateAutoScalingGroupResponse;
 const TargetAttribute = models.TargetAttribute;
 const ModifyNotificationConfigurationResponse = models.ModifyNotificationConfigurationResponse;
-const DescribeAutoScalingInstancesResponse = models.DescribeAutoScalingInstancesResponse;
+const LimitedLoginSettings = models.LimitedLoginSettings;
 const DescribeLifecycleHooksResponse = models.DescribeLifecycleHooksResponse;
 const CreateScalingPolicyRequest = models.CreateScalingPolicyRequest;
 const ScaleInInstancesResponse = models.ScaleInInstancesResponse;
+const DescribeAutoScalingAdvicesRequest = models.DescribeAutoScalingAdvicesRequest;
 const DeleteNotificationConfigurationRequest = models.DeleteNotificationConfigurationRequest;
 const DescribeLaunchConfigurationsRequest = models.DescribeLaunchConfigurationsRequest;
 const NotificationTarget = models.NotificationTarget;
+const ModifyLoadBalancerTargetAttributesRequest = models.ModifyLoadBalancerTargetAttributesRequest;
 const DeleteAutoScalingGroupResponse = models.DeleteAutoScalingGroupResponse;
 const LifecycleActionResultInfo = models.LifecycleActionResultInfo;
 const AutoScalingGroupAbstract = models.AutoScalingGroupAbstract;
@@ -127,23 +133,25 @@ const ScaleInInstancesRequest = models.ScaleInInstancesRequest;
 const LifecycleHook = models.LifecycleHook;
 const ForwardLoadBalancer = models.ForwardLoadBalancer;
 const ClearLaunchConfigurationAttributesRequest = models.ClearLaunchConfigurationAttributesRequest;
-const PreviewPaiDomainNameResponse = models.PreviewPaiDomainNameResponse;
-const DeleteAutoScalingGroupRequest = models.DeleteAutoScalingGroupRequest;
-const RemoveInstancesRequest = models.RemoveInstancesRequest;
+const ForwardLoadBalancerIdentification = models.ForwardLoadBalancerIdentification;
+const AutoScalingAdvice = models.AutoScalingAdvice;
 const StartAutoScalingInstancesRequest = models.StartAutoScalingInstancesRequest;
 const AttachInstancesRequest = models.AttachInstancesRequest;
+const AttachLoadBalancersRequest = models.AttachLoadBalancersRequest;
+const SpotMixedAllocationPolicy = models.SpotMixedAllocationPolicy;
 const DescribeScalingPoliciesResponse = models.DescribeScalingPoliciesResponse;
 const Activity = models.Activity;
 const ModifyDesiredCapacityResponse = models.ModifyDesiredCapacityResponse;
 const StopAutoScalingInstancesRequest = models.StopAutoScalingInstancesRequest;
 const RunMonitorServiceEnabled = models.RunMonitorServiceEnabled;
-const DeleteLifecycleHookResponse = models.DeleteLifecycleHookResponse;
+const ModifyNotificationConfigurationRequest = models.ModifyNotificationConfigurationRequest;
 const ActivtyRelatedInstance = models.ActivtyRelatedInstance;
+const CreateAutoScalingGroupFromInstanceRequest = models.CreateAutoScalingGroupFromInstanceRequest;
 const InternetAccessible = models.InternetAccessible;
 const EnableAutoScalingGroupResponse = models.EnableAutoScalingGroupResponse;
 const UpgradeLaunchConfigurationResponse = models.UpgradeLaunchConfigurationResponse;
 const InstanceChargePrepaid = models.InstanceChargePrepaid;
-const DescribePaiInstancesResponse = models.DescribePaiInstancesResponse;
+const DeleteLifecycleHookResponse = models.DeleteLifecycleHookResponse;
 const ExecuteScalingPolicyRequest = models.ExecuteScalingPolicyRequest;
 
 
@@ -183,18 +191,6 @@ class AsClient extends AbstractClient {
     }
 
     /**
-     * 本接口（PreviewPaiDomainName）用于预览PAI实例域名。
-
-     * @param {PreviewPaiDomainNameRequest} req
-     * @param {function(string, PreviewPaiDomainNameResponse):void} cb
-     * @public
-     */
-    PreviewPaiDomainName(req, cb) {
-        let resp = new PreviewPaiDomainNameResponse();
-        this.request("PreviewPaiDomainName", req, resp, cb);
-    }
-
-    /**
      * 本接口（ClearLaunchConfigurationAttributes）用于将启动配置内的特定属性完全清空。
      * @param {ClearLaunchConfigurationAttributesRequest} req
      * @param {function(string, ClearLaunchConfigurationAttributesResponse):void} cb
@@ -214,6 +210,17 @@ class AsClient extends AbstractClient {
     ModifyScalingPolicy(req, cb) {
         let resp = new ModifyScalingPolicyResponse();
         this.request("ModifyScalingPolicy", req, resp, cb);
+    }
+
+    /**
+     * 本接口（ModifyLoadBalancerTargetAttributes）用于修改伸缩组内负载均衡器的目标规则属性。
+     * @param {ModifyLoadBalancerTargetAttributesRequest} req
+     * @param {function(string, ModifyLoadBalancerTargetAttributesResponse):void} cb
+     * @public
+     */
+    ModifyLoadBalancerTargetAttributes(req, cb) {
+        let resp = new ModifyLoadBalancerTargetAttributesResponse();
+        this.request("ModifyLoadBalancerTargetAttributes", req, resp, cb);
     }
 
     /**
@@ -244,6 +251,7 @@ class AsClient extends AbstractClient {
     /**
      * 为伸缩组指定数量扩容实例，返回扩容活动的 ActivityId。
 * 伸缩组需要未处于活动中
+* 伸缩组处于停用状态时，该接口也会生效，可参考[停用伸缩组](https://cloud.tencent.com/document/api/377/20435)文档查看伸缩组停用状态的影响范围
 * 接口会增加期望实例数，新的期望实例数需要小于等于最大实例数
 * 扩容如果失败或者部分成功，最后期望实例数只会增加实际成功的实例数量
      * @param {ScaleOutInstancesRequest} req
@@ -269,17 +277,6 @@ class AsClient extends AbstractClient {
     }
 
     /**
-     * 本接口 (CreatePaiInstance) 用于创建一个指定配置的PAI实例。
-     * @param {CreatePaiInstanceRequest} req
-     * @param {function(string, CreatePaiInstanceResponse):void} cb
-     * @public
-     */
-    CreatePaiInstance(req, cb) {
-        let resp = new CreatePaiInstanceResponse();
-        this.request("CreatePaiInstance", req, resp, cb);
-    }
-
-    /**
      * 本接口（UpgradeLaunchConfiguration）用于升级启动配置。
 
 * 本接口用于升级启动配置，采用“完全覆盖”风格，无论之前参数如何，统一按照接口参数设置为新的配置。对于非必填字段，不填写则按照默认值赋值。
@@ -294,7 +291,31 @@ class AsClient extends AbstractClient {
     }
 
     /**
+     * 此接口用于修改生命周期挂钩。
+     * @param {ModifyLifecycleHookRequest} req
+     * @param {function(string, ModifyLifecycleHookResponse):void} cb
+     * @public
+     */
+    ModifyLifecycleHook(req, cb) {
+        let resp = new ModifyLifecycleHookResponse();
+        this.request("ModifyLifecycleHook", req, resp, cb);
+    }
+
+    /**
+     * 本接口（DetachLoadBalancers）用于从伸缩组移出负载均衡器，本接口不会销毁负载均衡器。
+     * @param {DetachLoadBalancersRequest} req
+     * @param {function(string, DetachLoadBalancersResponse):void} cb
+     * @public
+     */
+    DetachLoadBalancers(req, cb) {
+        let resp = new DetachLoadBalancersResponse();
+        this.request("DetachLoadBalancers", req, resp, cb);
+    }
+
+    /**
      * 本接口（AttachInstances）用于将 CVM 实例添加到伸缩组。
+* 仅支持添加处于`RUNNING`（运行中）或`STOPPED`（已关机）状态的 CVM 实例
+* 添加的 CVM 实例需要和伸缩组 VPC 网络一致
 
      * @param {AttachInstancesRequest} req
      * @param {function(string, AttachInstancesResponse):void} cb
@@ -328,6 +349,17 @@ class AsClient extends AbstractClient {
     }
 
     /**
+     * 此接口（AttachLoadBalancers）用于将负载均衡器添加到伸缩组。
+     * @param {AttachLoadBalancersRequest} req
+     * @param {function(string, AttachLoadBalancersResponse):void} cb
+     * @public
+     */
+    AttachLoadBalancers(req, cb) {
+        let resp = new AttachLoadBalancersResponse();
+        this.request("AttachLoadBalancers", req, resp, cb);
+    }
+
+    /**
      * 本接口（DetachInstances）用于从伸缩组移出 CVM 实例，本接口不会销毁实例。
 * 如果移出指定实例后，伸缩组内处于`IN_SERVICE`状态的实例数量小于伸缩组最小值，接口将报错
 * 如果伸缩组处于`DISABLED`状态，移出操作不校验`IN_SERVICE`实例数量和最小值的关系
@@ -344,6 +376,7 @@ class AsClient extends AbstractClient {
     /**
      * 为伸缩组指定数量缩容实例，返回缩容活动的 ActivityId。
 * 伸缩组需要未处于活动中
+* 伸缩组处于停用状态时，该接口也会生效，可参考[停用伸缩组](https://cloud.tencent.com/document/api/377/20435)文档查看伸缩组停用状态的影响范围
 * 根据伸缩组的`TerminationPolicies`策略，选择被缩容的实例，可参考[缩容处理](https://cloud.tencent.com/document/product/377/8563)
 * 接口只会选择`IN_SERVICE`实例缩容，如果需要缩容其他状态实例，可以使用 [DetachInstances](https://cloud.tencent.com/document/api/377/20436) 或 [RemoveInstances](https://cloud.tencent.com/document/api/377/20431) 接口
 * 接口会减少期望实例数，新的期望实例数需要大于等于最小实例数
@@ -366,6 +399,17 @@ class AsClient extends AbstractClient {
     CreateScheduledAction(req, cb) {
         let resp = new CreateScheduledActionResponse();
         this.request("CreateScheduledAction", req, resp, cb);
+    }
+
+    /**
+     * 此接口用于查询伸缩组配置建议。
+     * @param {DescribeAutoScalingAdvicesRequest} req
+     * @param {function(string, DescribeAutoScalingAdvicesResponse):void} cb
+     * @public
+     */
+    DescribeAutoScalingAdvices(req, cb) {
+        let resp = new DescribeAutoScalingAdvicesResponse();
+        this.request("DescribeAutoScalingAdvices", req, resp, cb);
     }
 
     /**
@@ -410,7 +454,7 @@ class AsClient extends AbstractClient {
     /**
      * 本接口（ModifyLoadBalancers）用于修改伸缩组的负载均衡器。
 
-* 本接口用于为伸缩组指定新的负载均衡器配置，采用“完全覆盖”风格，无论之前配置如何，统一按照接口参数配置为新的负载均衡器。
+* 本接口用于为伸缩组指定新的负载均衡器配置，采用`完全覆盖`风格，无论之前配置如何，`统一按照接口参数配置为新的负载均衡器`。
 * 如果要为伸缩组清空负载均衡器，则在调用本接口时仅指定伸缩组ID，不指定具体负载均衡器。
 * 本接口会立即修改伸缩组的负载均衡器，并生成一个伸缩活动，异步修改存量实例的负载均衡器。
      * @param {ModifyLoadBalancersRequest} req
@@ -434,8 +478,8 @@ class AsClient extends AbstractClient {
     }
 
     /**
-     * 本接口（SetInstancesProtection）用于设置实例移除保护。
-子机设置为移除保护之后，当发生不健康替换、报警策略、期望值变更等触发缩容时，将不对此子机缩容操作。
+     * 本接口（SetInstancesProtection）用于设置实例保护。
+实例设置保护之后，当发生不健康替换、报警策略、期望值变更等触发缩容时，将不对此实例缩容操作。
      * @param {SetInstancesProtectionRequest} req
      * @param {function(string, SetInstancesProtectionResponse):void} cb
      * @public
@@ -447,6 +491,7 @@ class AsClient extends AbstractClient {
 
     /**
      * 本接口（ModifyNotificationConfiguration）用于修改通知。
+* 通知的接收端类型不支持修改。
      * @param {ModifyNotificationConfigurationRequest} req
      * @param {function(string, ModifyNotificationConfigurationResponse):void} cb
      * @public
@@ -500,6 +545,33 @@ class AsClient extends AbstractClient {
 
     /**
      * 本接口（CreateNotificationConfiguration）用于创建通知。
+通知到 CMQ 主题或队列时，消息内容如下：
+```
+{
+    "Service": "Tencent Cloud Auto Scaling",
+    "CreatedTime": "2021-10-11T10:15:11Z", // 活动创建时间
+    "AppId": "100000000",
+    "ActivityId": "asa-fznnvrja", // 伸缩活动ID
+    "AutoScalingGroupId": "asg-pc2oqu2z", // 伸缩组ID
+    "ActivityType": "SCALE_OUT",  // 伸缩活动类型
+    "StatusCode": "SUCCESSFUL",   // 伸缩活动结果
+    "Description": "Activity was launched in response to a difference between desired capacity and actual capacity,
+    scale out 1 instance(s).", // 伸缩活动描述
+    "StartTime": "2021-10-11T10:15:11Z",  // 活动开始时间
+    "EndTime": "2021-10-11T10:15:32Z",    // 活动结束时间
+    "DetailedStatusMessageSet": [ // 活动内部错误集合（非空不代表活动失败）
+        {
+            "Code": "InvalidInstanceType",
+            "Zone": "ap-guangzhou-2",
+            "InstanceId": "",
+            "InstanceChargeType": "POSTPAID_BY_HOUR",
+            "SubnetId": "subnet-4t5mgeuu",
+            "Message": "The specified instance type `S5.LARGE8` is invalid in `subnet-4t5mgeuu`, `ap-guangzhou-2`.",
+            "InstanceType": "S5.LARGE8"
+        }
+    ]
+}
+```
      * @param {CreateNotificationConfigurationRequest} req
      * @param {function(string, CreateNotificationConfigurationResponse):void} cb
      * @public
@@ -581,6 +653,19 @@ class AsClient extends AbstractClient {
 
     /**
      * 本接口（DisableAutoScalingGroup）用于停用指定伸缩组。
+* 停用伸缩组后，自动触发的伸缩活动不再进行，包括：
+    - 告警策略触发的伸缩活动
+    - 匹配期望实例数的伸缩活动
+    - 不健康实例替换活动
+    - 定时任务
+* 停用伸缩组后，手动触发的伸缩活动允许进行，包括：
+    - 指定数量扩容实例（ScaleOutInstances）
+    - 指定数量缩容实例（ScaleInInstances）
+    - 从伸缩组中移出 CVM 实例（DetachInstances）
+    - 从伸缩组中删除 CVM 实例（RemoveInstances）
+    - 添加 CVM 实例到伸缩组（AttachInstances）
+    - 关闭伸缩组内 CVM 实例（StopAutoScalingInstances）
+    - 开启伸缩组内 CVM 实例（StartAutoScalingInstances）
      * @param {DisableAutoScalingGroupRequest} req
      * @param {function(string, DisableAutoScalingGroupResponse):void} cb
      * @public
@@ -602,20 +687,6 @@ class AsClient extends AbstractClient {
     DescribeLaunchConfigurations(req, cb) {
         let resp = new DescribeLaunchConfigurationsResponse();
         this.request("DescribeLaunchConfigurations", req, resp, cb);
-    }
-
-    /**
-     * 本接口（DescribePaiInstances）用于查询PAI实例信息。
-
-* 可以根据实例ID、实例域名等信息来查询PAI实例的详细信息。过滤信息详细请见过滤器`Filter`。
-* 如果参数为空，返回当前用户一定数量（`Limit`所指定的数量，默认为20）的PAI实例。
-     * @param {DescribePaiInstancesRequest} req
-     * @param {function(string, DescribePaiInstancesResponse):void} cb
-     * @public
-     */
-    DescribePaiInstances(req, cb) {
-        let resp = new DescribePaiInstancesResponse();
-        this.request("DescribePaiInstances", req, resp, cb);
     }
 
     /**

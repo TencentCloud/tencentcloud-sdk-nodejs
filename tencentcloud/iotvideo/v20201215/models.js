@@ -36,6 +36,12 @@ class DescribeCloudStorageDateRequest extends  AbstractModel {
          */
         this.DeviceName = null;
 
+        /**
+         * 用户ID
+         * @type {string || null}
+         */
+        this.UserId = null;
+
     }
 
     /**
@@ -47,6 +53,7 @@ class DescribeCloudStorageDateRequest extends  AbstractModel {
         }
         this.ProductId = 'ProductId' in params ? params.ProductId : null;
         this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
+        this.UserId = 'UserId' in params ? params.UserId : null;
 
     }
 }
@@ -95,6 +102,55 @@ class CloudStorageTimeData extends  AbstractModel {
 }
 
 /**
+ * RetryDeviceFirmwareTask请求参数结构体
+ * @class
+ */
+class RetryDeviceFirmwareTaskRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品ID
+         * @type {string || null}
+         */
+        this.ProductID = null;
+
+        /**
+         * 设备名称
+         * @type {string || null}
+         */
+        this.DeviceName = null;
+
+        /**
+         * 固件版本号
+         * @type {string || null}
+         */
+        this.FirmwareVersion = null;
+
+        /**
+         * 固件升级任务ID
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductID = 'ProductID' in params ? params.ProductID : null;
+        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
+        this.FirmwareVersion = 'FirmwareVersion' in params ? params.FirmwareVersion : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+
+    }
+}
+
+/**
  * CreateCloudStorage请求参数结构体
  * @class
  */
@@ -134,6 +190,12 @@ ye1w7d : 事件7天存储周套餐。
          */
         this.PackageId = null;
 
+        /**
+         * 如果当前设备已开启云存套餐，Override=1会使用新套餐覆盖原有套餐。不传此参数则默认为0。
+         * @type {number || null}
+         */
+        this.Override = null;
+
     }
 
     /**
@@ -146,6 +208,7 @@ ye1w7d : 事件7天存储周套餐。
         this.ProductId = 'ProductId' in params ? params.ProductId : null;
         this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
         this.PackageId = 'PackageId' in params ? params.PackageId : null;
+        this.Override = 'Override' in params ? params.Override : null;
 
     }
 }
@@ -270,24 +333,24 @@ class ImportModelDefinitionResponse extends  AbstractModel {
 }
 
 /**
- * DescribeModelDefinition返回参数结构体
+ * ApplyAIModel请求参数结构体
  * @class
  */
-class DescribeModelDefinitionResponse extends  AbstractModel {
+class ApplyAIModelRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 产品数据模板
-         * @type {ProductModelDefinition || null}
-         */
-        this.Model = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * AI模型ID
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.ModelId = null;
+
+        /**
+         * 产品ID
+         * @type {string || null}
+         */
+        this.ProductId = null;
 
     }
 
@@ -298,13 +361,8 @@ class DescribeModelDefinitionResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Model) {
-            let obj = new ProductModelDefinition();
-            obj.deserialize(params.Model)
-            this.Model = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.ModelId = 'ModelId' in params ? params.ModelId : null;
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
 
     }
 }
@@ -352,6 +410,83 @@ class CreateBatchRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyProductDynamicRegister返回参数结构体
+ * @class
+ */
+class ModifyProductDynamicRegisterResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 动态注册类型，0-关闭 1-预创建设备 2-自动创建设备
+         * @type {number || null}
+         */
+        this.RegisterType = null;
+
+        /**
+         * 动态注册产品密钥
+         * @type {string || null}
+         */
+        this.ProductSecret = null;
+
+        /**
+         * 动态注册设备上限
+         * @type {number || null}
+         */
+        this.RegisterLimit = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RegisterType = 'RegisterType' in params ? params.RegisterType : null;
+        this.ProductSecret = 'ProductSecret' in params ? params.ProductSecret : null;
+        this.RegisterLimit = 'RegisterLimit' in params ? params.RegisterLimit : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CancelAIModelApplication返回参数结构体
+ * @class
+ */
+class CancelAIModelApplicationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeCloudStorageTime返回参数结构体
  * @class
  */
@@ -392,6 +527,109 @@ class DescribeCloudStorageTimeResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeDeviceStatusLog返回参数结构体
+ * @class
+ */
+class DescribeDeviceStatusLogResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 数据是否已全部返回，true 表示数据全部返回，false 表示还有数据待返回，可将 Context 作为入参，继续查询返回结果。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.Listover = null;
+
+        /**
+         * 检索上下文，当 ListOver 为false时，可以用此上下文，继续读取后续数据
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Context = null;
+
+        /**
+         * 日志数据结果数组，返回对应时间点及取值。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<DeviceStatusLogItem> || null}
+         */
+        this.Results = null;
+
+        /**
+         * 日志数据结果总条数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Listover = 'Listover' in params ? params.Listover : null;
+        this.Context = 'Context' in params ? params.Context : null;
+
+        if (params.Results) {
+            this.Results = new Array();
+            for (let z in params.Results) {
+                let obj = new DeviceStatusLogItem();
+                obj.deserialize(params.Results[z]);
+                this.Results.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ReportAliveDevice请求参数结构体
+ * @class
+ */
+class ReportAliveDeviceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品ID
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 设备名称
+         * @type {string || null}
+         */
+        this.DeviceName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
+
+    }
+}
+
+/**
  * DescribeProducts请求参数结构体
  * @class
  */
@@ -427,40 +665,53 @@ class DescribeProductsRequest extends  AbstractModel {
 }
 
 /**
- * DescribeDeviceEventHistory返回参数结构体
+ * DescribeAIModelChannel返回参数结构体
  * @class
  */
-class DescribeDeviceEventHistoryResponse extends  AbstractModel {
+class DescribeAIModelChannelResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 搜索上下文, 用作查询游标
+         * 推送类型。ckafka：消息队列；forward：http/https推送
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 第三方推送地址
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.Context = null;
+        this.ForwardAddress = null;
 
         /**
-         * 搜索结果数量
+         * 第三方推送密钥
 注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
+         * @type {string || null}
          */
-        this.Total = null;
+        this.ForwardKey = null;
 
         /**
-         * 搜索结果是否已经结束
+         * ckafka地域
 注意：此字段可能返回 null，表示取不到有效值。
-         * @type {boolean || null}
+         * @type {string || null}
          */
-        this.Listover = null;
+        this.CKafkaRegion = null;
 
         /**
-         * 搜集结果集
+         * ckafka实例
 注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<EventHistoryItem> || null}
+         * @type {string || null}
          */
-        this.EventHistory = null;
+        this.CKafkaInstance = null;
+
+        /**
+         * ckafka订阅主题
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CKafkaTopic = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -477,18 +728,12 @@ class DescribeDeviceEventHistoryResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Context = 'Context' in params ? params.Context : null;
-        this.Total = 'Total' in params ? params.Total : null;
-        this.Listover = 'Listover' in params ? params.Listover : null;
-
-        if (params.EventHistory) {
-            this.EventHistory = new Array();
-            for (let z in params.EventHistory) {
-                let obj = new EventHistoryItem();
-                obj.deserialize(params.EventHistory[z]);
-                this.EventHistory.push(obj);
-            }
-        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.ForwardAddress = 'ForwardAddress' in params ? params.ForwardAddress : null;
+        this.ForwardKey = 'ForwardKey' in params ? params.ForwardKey : null;
+        this.CKafkaRegion = 'CKafkaRegion' in params ? params.CKafkaRegion : null;
+        this.CKafkaInstance = 'CKafkaInstance' in params ? params.CKafkaInstance : null;
+        this.CKafkaTopic = 'CKafkaTopic' in params ? params.CKafkaTopic : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -533,7 +778,7 @@ class DescribeDeviceActionHistoryRequest extends  AbstractModel {
         this.ActionId = null;
 
         /**
-         * 查询条数
+         * 查询条数 默认为0 最大不超过500
          * @type {number || null}
          */
         this.Limit = null;
@@ -560,6 +805,48 @@ class DescribeDeviceActionHistoryRequest extends  AbstractModel {
         this.ActionId = 'ActionId' in params ? params.ActionId : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Context = 'Context' in params ? params.Context : null;
+
+    }
+}
+
+/**
+ * ModifyDataForward请求参数结构体
+ * @class
+ */
+class ModifyDataForwardRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品ID。
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 转发地址。如果有鉴权Token，则需要自行传入，例如 [{\"forward\":{\"api\":\"http://123.207.117.108:1080/sub.php\",\"token\":\"testtoken\"}}]
+         * @type {string || null}
+         */
+        this.ForwardAddr = null;
+
+        /**
+         * 1-数据信息转发 2-设备上下线状态转发 3-数据信息转发&设备上下线状态转发
+         * @type {number || null}
+         */
+        this.DataChose = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.ForwardAddr = 'ForwardAddr' in params ? params.ForwardAddr : null;
+        this.DataChose = 'DataChose' in params ? params.DataChose : null;
 
     }
 }
@@ -657,13 +944,13 @@ class ModifyProductRequest extends  AbstractModel {
         this.ProductId = null;
 
         /**
-         * 修改的产品名称
+         * 修改的产品名称 （支持中文、英文、数字、下划线组合，最多不超过20个字符）
          * @type {string || null}
          */
         this.ProductName = null;
 
         /**
-         * 修改的产品描述
+         * 修改的产品描述 （最多不超过128个字符）
          * @type {string || null}
          */
         this.ProductDescription = null;
@@ -770,6 +1057,41 @@ class DescribeBatchsResponse extends  AbstractModel {
 }
 
 /**
+ * CancelAIModelApplication请求参数结构体
+ * @class
+ */
+class CancelAIModelApplicationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * AI模型ID
+         * @type {string || null}
+         */
+        this.ModelId = null;
+
+        /**
+         * 产品ID
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ModelId = 'ModelId' in params ? params.ModelId : null;
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+
+    }
+}
+
+/**
  * TransferCloudStorage返回参数结构体
  * @class
  */
@@ -824,13 +1146,13 @@ class DescribeForwardRuleResponse extends  AbstractModel {
         this.ProductID = null;
 
         /**
-         * 消息类型
+         * 消息类型 1设备上报信息 2设备状态变化通知 3为全选
          * @type {number || null}
          */
         this.MsgType = null;
 
         /**
-         * 结果
+         * 结果 2表示禁用 其他为成功
          * @type {number || null}
          */
         this.Result = null;
@@ -910,6 +1232,48 @@ class DescribeForwardRuleResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyDeviceLogLevel请求参数结构体
+ * @class
+ */
+class ModifyDeviceLogLevelRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品ID
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 设备名称
+         * @type {string || null}
+         */
+        this.DeviceName = null;
+
+        /**
+         * 日志级别，0：关闭，1：错误，2：告警，3：信息，4：调试
+         * @type {number || null}
+         */
+        this.LogLevel = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
+        this.LogLevel = 'LogLevel' in params ? params.LogLevel : null;
+
+    }
+}
+
+/**
  * DescribeBatch请求参数结构体
  * @class
  */
@@ -938,24 +1302,36 @@ class DescribeBatchRequest extends  AbstractModel {
 }
 
 /**
- * 云存时间轴信息
+ * DescribeForwardRule请求参数结构体
  * @class
  */
-class CloudStorageTimeInfo extends  AbstractModel {
+class DescribeForwardRuleRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 开始时间
-         * @type {number || null}
+         * 产品ID
+         * @type {string || null}
          */
-        this.StartTime = null;
+        this.ProductID = null;
 
         /**
-         * 结束时间
+         * 控制台Skey
+         * @type {string || null}
+         */
+        this.Skey = null;
+
+        /**
+         * 队列类型，0：CMQ，1：Ckafka
          * @type {number || null}
          */
-        this.EndTime = null;
+        this.QueueType = null;
+
+        /**
+         * 临时密钥
+         * @type {string || null}
+         */
+        this.Consecretid = null;
 
     }
 
@@ -966,8 +1342,10 @@ class CloudStorageTimeInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.ProductID = 'ProductID' in params ? params.ProductID : null;
+        this.Skey = 'Skey' in params ? params.Skey : null;
+        this.QueueType = 'QueueType' in params ? params.QueueType : null;
+        this.Consecretid = 'Consecretid' in params ? params.Consecretid : null;
 
     }
 }
@@ -1010,6 +1388,83 @@ class ModifyDeviceRequest extends  AbstractModel {
         this.ProductId = 'ProductId' in params ? params.ProductId : null;
         this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
         this.EnableState = 'EnableState' in params ? params.EnableState : null;
+
+    }
+}
+
+/**
+ * CreateCOSCredentials返回参数结构体
+ * @class
+ */
+class CreateCOSCredentialsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * COS存储桶名称
+         * @type {string || null}
+         */
+        this.StorageBucket = null;
+
+        /**
+         * COS存储桶区域
+         * @type {string || null}
+         */
+        this.StorageRegion = null;
+
+        /**
+         * COS存储桶路径
+         * @type {string || null}
+         */
+        this.StoragePath = null;
+
+        /**
+         * COS上传用的SecretID
+         * @type {string || null}
+         */
+        this.SecretID = null;
+
+        /**
+         * COS上传用的SecretKey
+         * @type {string || null}
+         */
+        this.SecretKey = null;
+
+        /**
+         * COS上传用的Token
+         * @type {string || null}
+         */
+        this.Token = null;
+
+        /**
+         * 密钥信息过期时间
+         * @type {number || null}
+         */
+        this.ExpiredTime = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StorageBucket = 'StorageBucket' in params ? params.StorageBucket : null;
+        this.StorageRegion = 'StorageRegion' in params ? params.StorageRegion : null;
+        this.StoragePath = 'StoragePath' in params ? params.StoragePath : null;
+        this.SecretID = 'SecretID' in params ? params.SecretID : null;
+        this.SecretKey = 'SecretKey' in params ? params.SecretKey : null;
+        this.Token = 'Token' in params ? params.Token : null;
+        this.ExpiredTime = 'ExpiredTime' in params ? params.ExpiredTime : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1173,33 +1628,12 @@ class ActionHistory extends  AbstractModel {
 }
 
 /**
- * DescribeFirmwareTaskStatistics返回参数结构体
+ * CreateDataForward返回参数结构体
  * @class
  */
-class DescribeFirmwareTaskStatisticsResponse extends  AbstractModel {
+class CreateDataForwardResponse extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * 升级成功的设备总数
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.SuccessTotal = null;
-
-        /**
-         * 升级失败的设备总数
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.FailureTotal = null;
-
-        /**
-         * 正在升级的设备总数
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.UpgradingTotal = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1216,9 +1650,6 @@ class DescribeFirmwareTaskStatisticsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SuccessTotal = 'SuccessTotal' in params ? params.SuccessTotal : null;
-        this.FailureTotal = 'FailureTotal' in params ? params.FailureTotal : null;
-        this.UpgradingTotal = 'UpgradingTotal' in params ? params.UpgradingTotal : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1255,6 +1686,56 @@ class DescribeFirmwareRequest extends  AbstractModel {
         }
         this.ProductID = 'ProductID' in params ? params.ProductID : null;
         this.FirmwareVersion = 'FirmwareVersion' in params ? params.FirmwareVersion : null;
+
+    }
+}
+
+/**
+ * DescribeCloudStorageUsers返回参数结构体
+ * @class
+ */
+class DescribeCloudStorageUsersResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 用户总数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 用户信息
+         * @type {Array.<CloudStorageUserInfo> || null}
+         */
+        this.Users = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Users) {
+            this.Users = new Array();
+            for (let z in params.Users) {
+                let obj = new CloudStorageUserInfo();
+                obj.deserialize(params.Users[z]);
+                this.Users.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1352,7 +1833,7 @@ class CheckForwardAuthRequest extends  AbstractModel {
         this.Skey = null;
 
         /**
-         * 队列类型
+         * 队列类型 0.CMQ  1.Ckafka
          * @type {number || null}
          */
         this.QueueType = null;
@@ -1538,6 +2019,41 @@ class GetAllFirmwareVersionRequest extends  AbstractModel {
 }
 
 /**
+ * CreateCOSCredentials请求参数结构体
+ * @class
+ */
+class CreateCOSCredentialsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品ID
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 设备名称
+         * @type {string || null}
+         */
+        this.DeviceName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
+
+    }
+}
+
+/**
  * 设备通讯日志查询返回条目
  * @class
  */
@@ -1662,6 +2178,50 @@ class DeviceUpdateStatus extends  AbstractModel {
         this.Percent = 'Percent' in params ? params.Percent : null;
         this.OriVersion = 'OriVersion' in params ? params.OriVersion : null;
         this.TaskId = 'TaskId' in params ? params.TaskId : null;
+
+    }
+}
+
+/**
+ * DescribeDataForwardList返回参数结构体
+ * @class
+ */
+class DescribeDataForwardListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 数据转发列表。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<DataForward> || null}
+         */
+        this.DataForwardList = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.DataForwardList) {
+            this.DataForwardList = new Array();
+            for (let z in params.DataForwardList) {
+                let obj = new DataForward();
+                obj.deserialize(params.DataForwardList[z]);
+                this.DataForwardList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1842,6 +2402,46 @@ class BatchUpdateFirmwareResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeModelDefinition返回参数结构体
+ * @class
+ */
+class DescribeModelDefinitionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品数据模板
+         * @type {ProductModelDefinition || null}
+         */
+        this.Model = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Model) {
+            let obj = new ProductModelDefinition();
+            obj.deserialize(params.Model)
+            this.Model = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DeleteProduct请求参数结构体
  * @class
  */
@@ -1907,6 +2507,34 @@ class StatusStatistic extends  AbstractModel {
 }
 
 /**
+ * PublishMessage返回参数结构体
+ * @class
+ */
+class PublishMessageResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * SetForwardAuth返回参数结构体
  * @class
  */
@@ -1939,7 +2567,7 @@ class SetForwardAuthResponse extends  AbstractModel {
         this.RoleID = null;
 
         /**
-         * 消息队列类型
+         * 消息队列类型  0.CMQ 1.CKafka
          * @type {number || null}
          */
         this.QueueType = null;
@@ -2056,6 +2684,34 @@ class DeviceDataHistoryItem extends  AbstractModel {
         }
         this.Time = 'Time' in params ? params.Time : null;
         this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
+ * ReportAliveDevice返回参数结构体
+ * @class
+ */
+class ReportAliveDeviceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2178,6 +2834,66 @@ class DescribeCategoryResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeSDKLog请求参数结构体
+ * @class
+ */
+class DescribeSDKLogRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 日志开始时间
+         * @type {number || null}
+         */
+        this.MinTime = null;
+
+        /**
+         * 日志结束时间
+         * @type {number || null}
+         */
+        this.MaxTime = null;
+
+        /**
+         * 查询关键字，可以同时支持键值查询和文本查询，
+例如，查询某key的值为value，并且包含某word的日志，该参数为：key:value word。
+键值或文本可以包含多个，以空格隔开。
+其中可以索引的key包括：productid、devicename、loglevel
+一个典型的查询示例：productid:7JK1G72JNE devicename:name publish loglevel:WARN一个典型的查询示例：productid:ABCDE12345 devicename:test scene:SHADOW publish
+         * @type {string || null}
+         */
+        this.Keywords = null;
+
+        /**
+         * 日志检索上下文
+         * @type {string || null}
+         */
+        this.Context = null;
+
+        /**
+         * 查询条数
+         * @type {number || null}
+         */
+        this.MaxNum = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MinTime = 'MinTime' in params ? params.MinTime : null;
+        this.MaxTime = 'MaxTime' in params ? params.MaxTime : null;
+        this.Keywords = 'Keywords' in params ? params.Keywords : null;
+        this.Context = 'Context' in params ? params.Context : null;
+        this.MaxNum = 'MaxNum' in params ? params.MaxNum : null;
+
+    }
+}
+
+/**
  * DescribeBalance请求参数结构体
  * @class
  */
@@ -2236,6 +2952,34 @@ class ImportModelDefinitionRequest extends  AbstractModel {
         }
         this.ProductId = 'ProductId' in params ? params.ProductId : null;
         this.ModelSchema = 'ModelSchema' in params ? params.ModelSchema : null;
+
+    }
+}
+
+/**
+ * DescribeDataForwardList请求参数结构体
+ * @class
+ */
+class DescribeDataForwardListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品ID列表
+         * @type {string || null}
+         */
+        this.ProductIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductIds = 'ProductIds' in params ? params.ProductIds : null;
 
     }
 }
@@ -2368,30 +3112,42 @@ class GenerateSignedVideoURLResponse extends  AbstractModel {
 }
 
 /**
- * ListFirmwares返回参数结构体
+ * ControlDeviceData请求参数结构体
  * @class
  */
-class ListFirmwaresResponse extends  AbstractModel {
+class ControlDeviceDataRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 固件总数
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * 固件列表
-         * @type {Array.<FirmwareInfo> || null}
-         */
-        this.Firmwares = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 产品ID
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.ProductId = null;
+
+        /**
+         * 设备名称
+         * @type {string || null}
+         */
+        this.DeviceName = null;
+
+        /**
+         * 属性数据, JSON格式字符串, 注意字段需要在物模型属性里定义
+         * @type {string || null}
+         */
+        this.Data = null;
+
+        /**
+         * 请求类型 , 不填该参数或者 desired 表示下发属性给设备,  reported 表示模拟设备上报属性
+         * @type {string || null}
+         */
+        this.Method = null;
+
+        /**
+         * 上报数据UNIX时间戳(毫秒), 仅对Method:reported有效
+         * @type {number || null}
+         */
+        this.DataTimestamp = null;
 
     }
 
@@ -2402,17 +3158,53 @@ class ListFirmwaresResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
+        this.Data = 'Data' in params ? params.Data : null;
+        this.Method = 'Method' in params ? params.Method : null;
+        this.DataTimestamp = 'DataTimestamp' in params ? params.DataTimestamp : null;
 
-        if (params.Firmwares) {
-            this.Firmwares = new Array();
-            for (let z in params.Firmwares) {
-                let obj = new FirmwareInfo();
-                obj.deserialize(params.Firmwares[z]);
-                this.Firmwares.push(obj);
-            }
+    }
+}
+
+/**
+ * AI模型资源使用信息
+ * @class
+ */
+class AIModelUsageInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 开通时间
+         * @type {number || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 资源总量
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * 已使用资源数量
+         * @type {number || null}
+         */
+        this.Used = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.Total = 'Total' in params ? params.Total : null;
+        this.Used = 'Used' in params ? params.Used : null;
 
     }
 }
@@ -2444,13 +3236,13 @@ class DescribeFirmwareTaskDevicesRequest extends  AbstractModel {
         this.Filters = null;
 
         /**
-         * 查询偏移量
+         * 查询偏移量 默认为0
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * 查询的数量
+         * 查询的数量 默认为50
          * @type {number || null}
          */
         this.Limit = null;
@@ -2571,13 +3363,13 @@ class DescribeDeviceCommLogRequest extends  AbstractModel {
         super();
 
         /**
-         * 开始时间
+         * 开始时间 13位时间戳 单位毫秒
          * @type {number || null}
          */
         this.MinTime = null;
 
         /**
-         * 结束时间
+         * 结束时间 13位时间戳 单位毫秒
          * @type {number || null}
          */
         this.MaxTime = null;
@@ -2595,7 +3387,7 @@ class DescribeDeviceCommLogRequest extends  AbstractModel {
         this.DeviceName = null;
 
         /**
-         * 返回条数
+         * 返回条数 默认为50
          * @type {number || null}
          */
         this.Limit = null;
@@ -2607,7 +3399,7 @@ class DescribeDeviceCommLogRequest extends  AbstractModel {
         this.Context = null;
 
         /**
-         * 类型：shadow 下行，device 上行
+         * 类型：shadow 下行，device 上行 默认为空则全部查询
          * @type {string || null}
          */
         this.Type = null;
@@ -2628,6 +3420,34 @@ class DescribeDeviceCommLogRequest extends  AbstractModel {
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Context = 'Context' in params ? params.Context : null;
         this.Type = 'Type' in params ? params.Type : null;
+
+    }
+}
+
+/**
+ * WakeUpDevice返回参数结构体
+ * @class
+ */
+class WakeUpDeviceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2682,6 +3502,92 @@ class DeleteForwardRuleRequest extends  AbstractModel {
 }
 
 /**
+ * UpdateAIModelChannel返回参数结构体
+ * @class
+ */
+class UpdateAIModelChannelResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 第三方推送密钥，如果选择自动生成则会返回此字段
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ForwardKey = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ForwardKey = 'ForwardKey' in params ? params.ForwardKey : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeAIModelUsage返回参数结构体
+ * @class
+ */
+class DescribeAIModelUsageResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * AI模型资源包总量
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * AI模型资源包信息数组
+         * @type {Array.<AIModelUsageInfo> || null}
+         */
+        this.UsageInfo = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.UsageInfo) {
+            this.UsageInfo = new Array();
+            for (let z in params.UsageInfo) {
+                let obj = new AIModelUsageInfo();
+                obj.deserialize(params.UsageInfo[z]);
+                this.UsageInfo.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeBalanceTransactions请求参数结构体
  * @class
  */
@@ -2708,7 +3614,7 @@ class DescribeBalanceTransactionsRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * 流水类型：All-全部类型；Recharge-充值；CreateOrder-新购。
+         * 流水类型：All-全部类型；Recharge-充值；CreateOrder-新购。默认为All
          * @type {string || null}
          */
         this.Operation = null;
@@ -2726,6 +3632,48 @@ class DescribeBalanceTransactionsRequest extends  AbstractModel {
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Operation = 'Operation' in params ? params.Operation : null;
+
+    }
+}
+
+/**
+ * BindCloudStorageUser请求参数结构体
+ * @class
+ */
+class BindCloudStorageUserRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品ID
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 设备名称
+         * @type {string || null}
+         */
+        this.DeviceName = null;
+
+        /**
+         * 用户ID
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
+        this.UserId = 'UserId' in params ? params.UserId : null;
 
     }
 }
@@ -2822,6 +3770,34 @@ class DescribeFirmwareTaskDevicesResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyDataForward返回参数结构体
+ * @class
+ */
+class ModifyDataForwardResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeCloudStorageThumbnail返回参数结构体
  * @class
  */
@@ -2852,6 +3828,55 @@ class DescribeCloudStorageThumbnailResponse extends  AbstractModel {
         }
         this.ThumbnailURL = 'ThumbnailURL' in params ? params.ThumbnailURL : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeAIModels请求参数结构体
+ * @class
+ */
+class DescribeAIModelsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 模型ID
+         * @type {string || null}
+         */
+        this.ModelId = null;
+
+        /**
+         * 申请状态：1-已申请；2-已取消；3-已拒绝；4-已通过
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 偏移量，Offset从0开始
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 分页的大小，最大100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ModelId = 'ModelId' in params ? params.ModelId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -2941,6 +3966,102 @@ class ResetCloudStorageResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * InheritCloudStorageUser返回参数结构体
+ * @class
+ */
+class InheritCloudStorageUserResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeDeviceEventHistory返回参数结构体
+ * @class
+ */
+class DescribeDeviceEventHistoryResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 搜索上下文, 用作查询游标
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Context = null;
+
+        /**
+         * 搜索结果数量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * 搜索结果是否已经结束
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.Listover = null;
+
+        /**
+         * 搜集结果集
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<EventHistoryItem> || null}
+         */
+        this.EventHistory = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Context = 'Context' in params ? params.Context : null;
+        this.Total = 'Total' in params ? params.Total : null;
+        this.Listover = 'Listover' in params ? params.Listover : null;
+
+        if (params.EventHistory) {
+            this.EventHistory = new Array();
+            for (let z in params.EventHistory) {
+                let obj = new EventHistoryItem();
+                obj.deserialize(params.EventHistory[z]);
+                this.EventHistory.push(obj);
+            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -3124,7 +4245,7 @@ class CreateProductRequest extends  AbstractModel {
         this.ProductName = null;
 
         /**
-         * 产品设备类型
+         * 产品设备类型 1.普通设备 2.NVR设备
          * @type {number || null}
          */
         this.DeviceType = null;
@@ -3136,25 +4257,25 @@ class CreateProductRequest extends  AbstractModel {
         this.ProductVaildYears = null;
 
         /**
-         * 设备功能码
+         * 设备功能码 ypsxth音频双向通话 spdxth视频单向通话
          * @type {Array.<string> || null}
          */
         this.Features = null;
 
         /**
-         * 设备操作系统
+         * 设备操作系统，通用设备填default
          * @type {string || null}
          */
         this.ChipOs = null;
 
         /**
-         * 芯片厂商id
+         * 芯片厂商id，通用设备填default
          * @type {string || null}
          */
         this.ChipManufactureId = null;
 
         /**
-         * 芯片id
+         * 芯片id，通用设备填default
          * @type {string || null}
          */
         this.ChipId = null;
@@ -3166,10 +4287,16 @@ class CreateProductRequest extends  AbstractModel {
         this.ProductDescription = null;
 
         /**
-         * 认证方式。2 PSK
+         * 认证方式 只支持取值为2 psk认证
          * @type {number || null}
          */
         this.EncryptionType = null;
+
+        /**
+         * 连接类型，wifi表示WIFI连接，cellular表示4G连接
+         * @type {string || null}
+         */
+        this.NetType = null;
 
     }
 
@@ -3189,6 +4316,7 @@ class CreateProductRequest extends  AbstractModel {
         this.ChipId = 'ChipId' in params ? params.ChipId : null;
         this.ProductDescription = 'ProductDescription' in params ? params.ProductDescription : null;
         this.EncryptionType = 'EncryptionType' in params ? params.EncryptionType : null;
+        this.NetType = 'NetType' in params ? params.NetType : null;
 
     }
 }
@@ -3293,54 +4421,36 @@ class GetFirmwareURLResponse extends  AbstractModel {
 }
 
 /**
- * DescribeDevice返回参数结构体
+ * DescribeAIModelApplications请求参数结构体
  * @class
  */
-class DescribeDeviceResponse extends  AbstractModel {
+class DescribeAIModelApplicationsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 设备名
+         * 模型ID
          * @type {string || null}
          */
-        this.DeviceName = null;
+        this.ModelId = null;
 
         /**
-         * 设备是否在线，0不在线，1在线，2获取失败，3未激活
+         * 分页的大小，最大100
          * @type {number || null}
          */
-        this.Online = null;
+        this.Limit = null;
 
         /**
-         * 设备最后上线时间
+         * 偏移量，Offset从0开始
          * @type {number || null}
          */
-        this.LoginTime = null;
+        this.Offset = null;
 
         /**
-         * 设备密钥
+         * 产品ID
          * @type {string || null}
          */
-        this.DevicePsk = null;
-
-        /**
-         * 设备启用状态
-         * @type {number || null}
-         */
-        this.EnableState = null;
-
-        /**
-         * 设备过期时间
-         * @type {number || null}
-         */
-        this.ExpireTime = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.ProductId = null;
 
     }
 
@@ -3351,13 +4461,10 @@ class DescribeDeviceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
-        this.Online = 'Online' in params ? params.Online : null;
-        this.LoginTime = 'LoginTime' in params ? params.LoginTime : null;
-        this.DevicePsk = 'DevicePsk' in params ? params.DevicePsk : null;
-        this.EnableState = 'EnableState' in params ? params.EnableState : null;
-        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.ModelId = 'ModelId' in params ? params.ModelId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
 
     }
 }
@@ -3412,6 +4519,18 @@ class DescribeCloudStorageEventsRequest extends  AbstractModel {
          */
         this.EventId = null;
 
+        /**
+         * 用户ID
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+        /**
+         * 通道ID 非NVR设备则不填 NVR设备则必填 默认为无
+         * @type {number || null}
+         */
+        this.ChannelId = null;
+
     }
 
     /**
@@ -3428,6 +4547,8 @@ class DescribeCloudStorageEventsRequest extends  AbstractModel {
         this.Context = 'Context' in params ? params.Context : null;
         this.Size = 'Size' in params ? params.Size : null;
         this.EventId = 'EventId' in params ? params.EventId : null;
+        this.UserId = 'UserId' in params ? params.UserId : null;
+        this.ChannelId = 'ChannelId' in params ? params.ChannelId : null;
 
     }
 }
@@ -3490,10 +4611,10 @@ class ListFirmwaresRequest extends  AbstractModel {
 }
 
 /**
- * RetryDeviceFirmwareTask请求参数结构体
+ * PublishMessage请求参数结构体
  * @class
  */
-class RetryDeviceFirmwareTaskRequest extends  AbstractModel {
+class PublishMessageRequest extends  AbstractModel {
     constructor(){
         super();
 
@@ -3501,7 +4622,7 @@ class RetryDeviceFirmwareTaskRequest extends  AbstractModel {
          * 产品ID
          * @type {string || null}
          */
-        this.ProductID = null;
+        this.ProductId = null;
 
         /**
          * 设备名称
@@ -3510,16 +4631,28 @@ class RetryDeviceFirmwareTaskRequest extends  AbstractModel {
         this.DeviceName = null;
 
         /**
-         * 固件版本号
+         * 消息发往的主题
          * @type {string || null}
          */
-        this.FirmwareVersion = null;
+        this.Topic = null;
 
         /**
-         * 固件升级任务ID
+         * 云端下发到设备的控制报文
+         * @type {string || null}
+         */
+        this.Payload = null;
+
+        /**
+         * 消息服务质量等级，取值为0或1
          * @type {number || null}
          */
-        this.TaskId = null;
+        this.Qos = null;
+
+        /**
+         * Payload的内容编码格式，取值为base64或空。base64表示云端将接收到的base64编码后的报文再转换成二进制报文下发至设备，为空表示不作转换，透传下发至设备
+         * @type {string || null}
+         */
+        this.PayloadEncoding = null;
 
     }
 
@@ -3530,10 +4663,132 @@ class RetryDeviceFirmwareTaskRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ProductID = 'ProductID' in params ? params.ProductID : null;
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
         this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
-        this.FirmwareVersion = 'FirmwareVersion' in params ? params.FirmwareVersion : null;
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.Topic = 'Topic' in params ? params.Topic : null;
+        this.Payload = 'Payload' in params ? params.Payload : null;
+        this.Qos = 'Qos' in params ? params.Qos : null;
+        this.PayloadEncoding = 'PayloadEncoding' in params ? params.PayloadEncoding : null;
+
+    }
+}
+
+/**
+ * DescribeDeviceStatusLog请求参数结构体
+ * @class
+ */
+class DescribeDeviceStatusLogRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 开始时间（毫秒）
+         * @type {number || null}
+         */
+        this.MinTime = null;
+
+        /**
+         * 结束时间（毫秒）
+         * @type {number || null}
+         */
+        this.MaxTime = null;
+
+        /**
+         * 产品ID
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 设备名称
+         * @type {string || null}
+         */
+        this.DeviceName = null;
+
+        /**
+         * 返回条数
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 检索上下文
+         * @type {string || null}
+         */
+        this.Context = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MinTime = 'MinTime' in params ? params.MinTime : null;
+        this.MaxTime = 'MaxTime' in params ? params.MaxTime : null;
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Context = 'Context' in params ? params.Context : null;
+
+    }
+}
+
+/**
+ * DescribeSDKLog返回参数结构体
+ * @class
+ */
+class DescribeSDKLogResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 日志检索上下文
+         * @type {string || null}
+         */
+        this.Context = null;
+
+        /**
+         * 是否还有日志，如有仍有日志，下次查询的请求带上当前请求返回的Context
+         * @type {boolean || null}
+         */
+        this.Listover = null;
+
+        /**
+         * 日志列表
+         * @type {Array.<SDKLogItem> || null}
+         */
+        this.Results = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Context = 'Context' in params ? params.Context : null;
+        this.Listover = 'Listover' in params ? params.Listover : null;
+
+        if (params.Results) {
+            this.Results = new Array();
+            for (let z in params.Results) {
+                let obj = new SDKLogItem();
+                obj.deserialize(params.Results[z]);
+                this.Results.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3684,6 +4939,34 @@ class DescribeFirmwareTasksResponse extends  AbstractModel {
         }
         this.Total = 'Total' in params ? params.Total : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 云存用户信息
+ * @class
+ */
+class CloudStorageUserInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 用户ID
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UserId = 'UserId' in params ? params.UserId : null;
 
     }
 }
@@ -3899,7 +5182,7 @@ class ModifyForwardRuleResponse extends  AbstractModel {
         this.ErrMsg = null;
 
         /**
-         * 队列类型
+         * 队列类型 0.CMQ 1.CKafka
          * @type {number || null}
          */
         this.QueueType = null;
@@ -4046,6 +5329,76 @@ class FirmwareTaskInfo extends  AbstractModel {
 }
 
 /**
+ * DescribeProductDynamicRegister请求参数结构体
+ * @class
+ */
+class DescribeProductDynamicRegisterRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品ID
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+
+    }
+}
+
+/**
+ * AI模型申请信息
+ * @class
+ */
+class AIModelApplication extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品ID
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 产品名称
+         * @type {string || null}
+         */
+        this.ProductName = null;
+
+        /**
+         * 申请状态：1-已申请；2-已取消；3-已拒绝；4-已通过
+         * @type {number || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.ProductName = 'ProductName' in params ? params.ProductName : null;
+        this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
  * DescribeFirmwareTaskDistribution返回参数结构体
  * @class
  */
@@ -4129,6 +5482,70 @@ class DescribeBatchResponse extends  AbstractModel {
 }
 
 /**
+ * 数据转发描述
+ * @class
+ */
+class DataForward extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品ID。
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 转发地址。
+         * @type {string || null}
+         */
+        this.ForwardAddr = null;
+
+        /**
+         * 转发状态。
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 创建时间。
+         * @type {number || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 更新时间。
+         * @type {number || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * 1-数据信息转发 2-设备上下线状态转发 3-数据信息转发&设备上下线状态转发
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.DataChose = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.ForwardAddr = 'ForwardAddr' in params ? params.ForwardAddr : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.DataChose = 'DataChose' in params ? params.DataChose : null;
+
+    }
+}
+
+/**
  * DescribeDevice请求参数结构体
  * @class
  */
@@ -4196,7 +5613,7 @@ class ModifyForwardRuleRequest extends  AbstractModel {
         this.QueueRegion = null;
 
         /**
-         * 队列类型
+         * 队列类型 0.CMQ 1.CKafka
          * @type {number || null}
          */
         this.QueueType = null;
@@ -4255,6 +5672,34 @@ class ModifyForwardRuleRequest extends  AbstractModel {
 }
 
 /**
+ * CreateAIDetection返回参数结构体
+ * @class
+ */
+class CreateAIDetectionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeCloudStorageEvents返回参数结构体
  * @class
  */
@@ -4281,7 +5726,7 @@ class DescribeCloudStorageEventsResponse extends  AbstractModel {
         this.Listover = null;
 
         /**
-         * 拉取结果数量
+         * 内部结果数量，并不等同于事件总数。
          * @type {number || null}
          */
         this.Total = null;
@@ -4399,6 +5844,13 @@ class VideoProduct extends  AbstractModel {
          */
         this.UpdateTime = null;
 
+        /**
+         * 连接类型，wifi表示WIFI连接，cellular表示4G连接
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.NetType = null;
+
     }
 
     /**
@@ -4419,6 +5871,7 @@ class VideoProduct extends  AbstractModel {
         this.ProductDescription = 'ProductDescription' in params ? params.ProductDescription : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.NetType = 'NetType' in params ? params.NetType : null;
 
     }
 }
@@ -4508,36 +5961,18 @@ class DescribeCloudStorageDateResponse extends  AbstractModel {
 }
 
 /**
- * DescribeForwardRule请求参数结构体
+ * ModifyDataForwardStatus返回参数结构体
  * @class
  */
-class DescribeForwardRuleRequest extends  AbstractModel {
+class ModifyDataForwardStatusResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 产品ID
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.ProductID = null;
-
-        /**
-         * 控制台Skey
-         * @type {string || null}
-         */
-        this.Skey = null;
-
-        /**
-         * 队列类型，0：CMQ，1：Ckafka
-         * @type {number || null}
-         */
-        this.QueueType = null;
-
-        /**
-         * 临时密钥
-         * @type {string || null}
-         */
-        this.Consecretid = null;
+        this.RequestId = null;
 
     }
 
@@ -4548,10 +5983,42 @@ class DescribeForwardRuleRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ProductID = 'ProductID' in params ? params.ProductID : null;
-        this.Skey = 'Skey' in params ? params.Skey : null;
-        this.QueueType = 'QueueType' in params ? params.QueueType : null;
-        this.Consecretid = 'Consecretid' in params ? params.Consecretid : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 云存时间轴信息
+ * @class
+ */
+class CloudStorageTimeInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 开始时间
+         * @type {number || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 结束时间
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
 
     }
 }
@@ -4585,10 +6052,115 @@ class UploadFirmwareResponse extends  AbstractModel {
 }
 
 /**
+ * UpdateAIModelChannel请求参数结构体
+ * @class
+ */
+class UpdateAIModelChannelRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 模型ID
+         * @type {string || null}
+         */
+        this.ModelId = null;
+
+        /**
+         * 产品ID
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 推送类型。ckafka：消息队列；forward：http/https推送
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 第三方推送地址
+         * @type {string || null}
+         */
+        this.ForwardAddress = null;
+
+        /**
+         * 第三方推送密钥，不填写则腾讯云自动生成。
+         * @type {string || null}
+         */
+        this.ForwardKey = null;
+
+        /**
+         * ckafka地域
+         * @type {string || null}
+         */
+        this.CKafkaRegion = null;
+
+        /**
+         * ckafka实例
+         * @type {string || null}
+         */
+        this.CKafkaInstance = null;
+
+        /**
+         * ckafka订阅主题
+         * @type {string || null}
+         */
+        this.CKafkaTopic = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ModelId = 'ModelId' in params ? params.ModelId : null;
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.ForwardAddress = 'ForwardAddress' in params ? params.ForwardAddress : null;
+        this.ForwardKey = 'ForwardKey' in params ? params.ForwardKey : null;
+        this.CKafkaRegion = 'CKafkaRegion' in params ? params.CKafkaRegion : null;
+        this.CKafkaInstance = 'CKafkaInstance' in params ? params.CKafkaInstance : null;
+        this.CKafkaTopic = 'CKafkaTopic' in params ? params.CKafkaTopic : null;
+
+    }
+}
+
+/**
  * CreateCloudStorage返回参数结构体
  * @class
  */
 class CreateCloudStorageResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * BindCloudStorageUser返回参数结构体
+ * @class
+ */
+class BindCloudStorageUserResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -4712,6 +6284,113 @@ class DeleteDeviceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * WakeUpDevice请求参数结构体
+ * @class
+ */
+class WakeUpDeviceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品ID
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 设备名称
+         * @type {string || null}
+         */
+        this.DeviceName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
+
+    }
+}
+
+/**
+ * ApplyAIModel返回参数结构体
+ * @class
+ */
+class ApplyAIModelResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ControlDeviceData返回参数结构体
+ * @class
+ */
+class ControlDeviceDataResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回信息
+         * @type {string || null}
+         */
+        this.Data = null;
+
+        /**
+         * JSON字符串， 返回下发控制的结果信息, 
+Sent = 1 表示设备已经在线并且订阅了控制下发的mqtt topic
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Data = 'Data' in params ? params.Data : null;
+        this.Result = 'Result' in params ? params.Result : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -4889,7 +6568,7 @@ class CreateForwardRuleRequest extends  AbstractModel {
         this.QueueRegion = null;
 
         /**
-         * 队列类型
+         * 队列类型 0.CMQ  1.Ckafka
          * @type {number || null}
          */
         this.QueueType = null;
@@ -4948,30 +6627,48 @@ class CreateForwardRuleRequest extends  AbstractModel {
 }
 
 /**
- * CreateTaskFileUrl返回参数结构体
+ * 设备详细信息
  * @class
  */
-class CreateTaskFileUrlResponse extends  AbstractModel {
+class DeviceInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 任务文件上传链接
+         * 设备名
          * @type {string || null}
          */
-        this.Url = null;
+        this.DeviceName = null;
 
         /**
-         * 任务文件名
-         * @type {string || null}
+         * 设备是否在线，0不在线，1在线，2获取失败，3未激活
+         * @type {number || null}
          */
-        this.FileName = null;
+        this.Online = null;
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 设备最后上线时间
+         * @type {number || null}
+         */
+        this.LoginTime = null;
+
+        /**
+         * 设备密钥
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.DevicePsk = null;
+
+        /**
+         * 设备启用状态 0为停用 1为可用
+         * @type {number || null}
+         */
+        this.EnableState = null;
+
+        /**
+         * 设备过期时间
+         * @type {number || null}
+         */
+        this.ExpireTime = null;
 
     }
 
@@ -4982,9 +6679,12 @@ class CreateTaskFileUrlResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Url = 'Url' in params ? params.Url : null;
-        this.FileName = 'FileName' in params ? params.FileName : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
+        this.Online = 'Online' in params ? params.Online : null;
+        this.LoginTime = 'LoginTime' in params ? params.LoginTime : null;
+        this.DevicePsk = 'DevicePsk' in params ? params.DevicePsk : null;
+        this.EnableState = 'EnableState' in params ? params.EnableState : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
 
     }
 }
@@ -5004,7 +6704,7 @@ class SetForwardAuthRequest extends  AbstractModel {
         this.Skey = null;
 
         /**
-         * 消息队列类型
+         * 消息队列类型  0.CMQ 1.CKafka
          * @type {number || null}
          */
         this.QueueType = null;
@@ -5131,6 +6831,76 @@ class CreateTaskFileUrlRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyDeviceLogLevel返回参数结构体
+ * @class
+ */
+class ModifyDeviceLogLevelResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateDataForward请求参数结构体
+ * @class
+ */
+class CreateDataForwardRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品ID。
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 转发地址。如果有鉴权Token，则需要自行传入，例如 [{\"forward\":{\"api\":\"http://123.207.117.108:1080/sub.php\",\"token\":\"testtoken\"}}]
+         * @type {string || null}
+         */
+        this.ForwardAddr = null;
+
+        /**
+         * 1-数据信息转发 2-设备上下线状态转发 3-数据信息转发&设备上下线状态转发
+         * @type {number || null}
+         */
+        this.DataChose = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.ForwardAddr = 'ForwardAddr' in params ? params.ForwardAddr : null;
+        this.DataChose = 'DataChose' in params ? params.DataChose : null;
+
+    }
+}
+
+/**
  * BatchUpdateFirmware请求参数结构体
  * @class
  */
@@ -5203,6 +6973,48 @@ class BatchUpdateFirmwareRequest extends  AbstractModel {
         this.FileMd5 = 'FileMd5' in params ? params.FileMd5 : null;
         this.FileSize = 'FileSize' in params ? params.FileSize : null;
         this.DeviceNames = 'DeviceNames' in params ? params.DeviceNames : null;
+
+    }
+}
+
+/**
+ * ModifyProductDynamicRegister请求参数结构体
+ * @class
+ */
+class ModifyProductDynamicRegisterRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品ID
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 动态注册类型，0-关闭 1-预创建设备 2-自动创建设备
+         * @type {number || null}
+         */
+        this.RegisterType = null;
+
+        /**
+         * 动态注册设备上限
+         * @type {number || null}
+         */
+        this.RegisterLimit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.RegisterType = 'RegisterType' in params ? params.RegisterType : null;
+        this.RegisterLimit = 'RegisterLimit' in params ? params.RegisterLimit : null;
 
     }
 }
@@ -5285,6 +7097,62 @@ class GetFirmwareURLRequest extends  AbstractModel {
 }
 
 /**
+ * CreateAIDetection请求参数结构体
+ * @class
+ */
+class CreateAIDetectionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品ID
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 设备名称
+         * @type {string || null}
+         */
+        this.DeviceName = null;
+
+        /**
+         * AI模型ID
+         * @type {string || null}
+         */
+        this.ModelId = null;
+
+        /**
+         * 图片上传的开始时间
+         * @type {number || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 图片上传的结束时间
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
+        this.ModelId = 'ModelId' in params ? params.ModelId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+
+    }
+}
+
+/**
  * DescribeCloudStorage返回参数结构体
  * @class
  */
@@ -5317,6 +7185,13 @@ class DescribeCloudStorageResponse extends  AbstractModel {
         this.ShiftDuration = null;
 
         /**
+         * 云存用户ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -5335,7 +7210,57 @@ class DescribeCloudStorageResponse extends  AbstractModel {
         this.Type = 'Type' in params ? params.Type : null;
         this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
         this.ShiftDuration = 'ShiftDuration' in params ? params.ShiftDuration : null;
+        this.UserId = 'UserId' in params ? params.UserId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ResetCloudStorage请求参数结构体
+ * @class
+ */
+class ResetCloudStorageRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品ID
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 设备名称
+         * @type {string || null}
+         */
+        this.DeviceName = null;
+
+        /**
+         * 通道ID 非NVR设备则不填 NVR设备则必填 默认为无
+         * @type {number || null}
+         */
+        this.ChannelId = null;
+
+        /**
+         * 云存用户Id，为空则为默认云存空间。
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
+        this.ChannelId = 'ChannelId' in params ? params.ChannelId : null;
+        this.UserId = 'UserId' in params ? params.UserId : null;
 
     }
 }
@@ -5376,6 +7301,245 @@ class DescribeProductResponse extends  AbstractModel {
             this.Data = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * SDK日志项
+ * @class
+ */
+class SDKLogItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品ID
+         * @type {string || null}
+         */
+        this.ProductID = null;
+
+        /**
+         * 设备名称
+         * @type {string || null}
+         */
+        this.DeviceName = null;
+
+        /**
+         * 日志等级
+         * @type {string || null}
+         */
+        this.Level = null;
+
+        /**
+         * 日志时间
+         * @type {string || null}
+         */
+        this.DateTime = null;
+
+        /**
+         * 日志内容
+         * @type {string || null}
+         */
+        this.Content = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductID = 'ProductID' in params ? params.ProductID : null;
+        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
+        this.Level = 'Level' in params ? params.Level : null;
+        this.DateTime = 'DateTime' in params ? params.DateTime : null;
+        this.Content = 'Content' in params ? params.Content : null;
+
+    }
+}
+
+/**
+ * DescribeAIModels返回参数结构体
+ * @class
+ */
+class DescribeAIModelsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * AI模型数量
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * AI模型信息数组
+         * @type {Array.<AIModelInfo> || null}
+         */
+        this.Models = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Models) {
+            this.Models = new Array();
+            for (let z in params.Models) {
+                let obj = new AIModelInfo();
+                obj.deserialize(params.Models[z]);
+                this.Models.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * InheritCloudStorageUser请求参数结构体
+ * @class
+ */
+class InheritCloudStorageUserRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品ID
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 设备名称
+         * @type {string || null}
+         */
+        this.DeviceName = null;
+
+        /**
+         * 原始用户ID
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+        /**
+         * 目标用户ID
+         * @type {string || null}
+         */
+        this.ToUserId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
+        this.UserId = 'UserId' in params ? params.UserId : null;
+        this.ToUserId = 'ToUserId' in params ? params.ToUserId : null;
+
+    }
+}
+
+/**
+ * DescribeAIModelChannel请求参数结构体
+ * @class
+ */
+class DescribeAIModelChannelRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 模型ID
+         * @type {string || null}
+         */
+        this.ModelId = null;
+
+        /**
+         * 产品ID
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ModelId = 'ModelId' in params ? params.ModelId : null;
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+
+    }
+}
+
+/**
+ * DescribeAIModelUsage请求参数结构体
+ * @class
+ */
+class DescribeAIModelUsageRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 模型ID
+         * @type {string || null}
+         */
+        this.ModelId = null;
+
+        /**
+         * 产品ID
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 偏移量，从0开始
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 分页的大小，最大100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ModelId = 'ModelId' in params ? params.ModelId : null;
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -5463,6 +7627,12 @@ class DescribeCloudStorageRequest extends  AbstractModel {
          */
         this.DeviceName = null;
 
+        /**
+         * 云存用户ID
+         * @type {string || null}
+         */
+        this.UserId = null;
+
     }
 
     /**
@@ -5474,6 +7644,7 @@ class DescribeCloudStorageRequest extends  AbstractModel {
         }
         this.ProductId = 'ProductId' in params ? params.ProductId : null;
         this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
+        this.UserId = 'UserId' in params ? params.UserId : null;
 
     }
 }
@@ -5487,7 +7658,7 @@ class GetAllFirmwareVersionResponse extends  AbstractModel {
         super();
 
         /**
-         * 无
+         * 固件可用版本列表
          * @type {Array.<string> || null}
          */
         this.Version = null;
@@ -5509,6 +7680,76 @@ class GetAllFirmwareVersionResponse extends  AbstractModel {
         }
         this.Version = 'Version' in params ? params.Version : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * AI模型信息
+ * @class
+ */
+class AIModelInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品ID
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 产品名称
+         * @type {string || null}
+         */
+        this.ProductName = null;
+
+        /**
+         * 申请状态：1-已申请；2-已取消；3-已拒绝；4-已通过
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 可调用数量
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * 已调用数量
+         * @type {number || null}
+         */
+        this.Used = null;
+
+        /**
+         * 申请时间
+         * @type {number || null}
+         */
+        this.ApplyTime = null;
+
+        /**
+         * 审批通过时间
+         * @type {number || null}
+         */
+        this.ApprovalTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.ProductName = 'ProductName' in params ? params.ProductName : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Total = 'Total' in params ? params.Total : null;
+        this.Used = 'Used' in params ? params.Used : null;
+        this.ApplyTime = 'ApplyTime' in params ? params.ApplyTime : null;
+        this.ApprovalTime = 'ApprovalTime' in params ? params.ApprovalTime : null;
 
     }
 }
@@ -5694,6 +7935,107 @@ class DescribeModelDefinitionRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeProductDynamicRegister返回参数结构体
+ * @class
+ */
+class DescribeProductDynamicRegisterResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 动态注册类型，0-关闭 1-预创建设备 2-自动创建设备
+         * @type {number || null}
+         */
+        this.RegisterType = null;
+
+        /**
+         * 动态注册产品密钥
+         * @type {string || null}
+         */
+        this.ProductSecret = null;
+
+        /**
+         * 动态注册设备上限
+         * @type {number || null}
+         */
+        this.RegisterLimit = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RegisterType = 'RegisterType' in params ? params.RegisterType : null;
+        this.ProductSecret = 'ProductSecret' in params ? params.ProductSecret : null;
+        this.RegisterLimit = 'RegisterLimit' in params ? params.RegisterLimit : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeFirmwareTaskStatistics返回参数结构体
+ * @class
+ */
+class DescribeFirmwareTaskStatisticsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 升级成功的设备总数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.SuccessTotal = null;
+
+        /**
+         * 升级失败的设备总数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.FailureTotal = null;
+
+        /**
+         * 正在升级的设备总数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.UpgradingTotal = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SuccessTotal = 'SuccessTotal' in params ? params.SuccessTotal : null;
+        this.FailureTotal = 'FailureTotal' in params ? params.FailureTotal : null;
+        this.UpgradingTotal = 'UpgradingTotal' in params ? params.UpgradingTotal : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CheckForwardAuth返回参数结构体
  * @class
  */
@@ -5726,7 +8068,7 @@ class CheckForwardAuthResponse extends  AbstractModel {
         this.ErrMsg = null;
 
         /**
-         * 队列类型
+         * 队列类型 0.CMQ  1.Ckafka
          * @type {number || null}
          */
         this.QueueType = null;
@@ -5751,6 +8093,84 @@ class CheckForwardAuthResponse extends  AbstractModel {
         this.Productid = 'Productid' in params ? params.Productid : null;
         this.ErrMsg = 'ErrMsg' in params ? params.ErrMsg : null;
         this.QueueType = 'QueueType' in params ? params.QueueType : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeDevice返回参数结构体
+ * @class
+ */
+class DescribeDeviceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 设备名
+         * @type {string || null}
+         */
+        this.DeviceName = null;
+
+        /**
+         * 设备是否在线，0不在线，1在线，2获取失败，3未激活
+         * @type {number || null}
+         */
+        this.Online = null;
+
+        /**
+         * 设备最后上线时间
+         * @type {number || null}
+         */
+        this.LoginTime = null;
+
+        /**
+         * 设备密钥
+         * @type {string || null}
+         */
+        this.DevicePsk = null;
+
+        /**
+         * 设备启用状态
+         * @type {number || null}
+         */
+        this.EnableState = null;
+
+        /**
+         * 设备过期时间
+         * @type {number || null}
+         */
+        this.ExpireTime = null;
+
+        /**
+         * 设备的sdk日志等级，0：关闭，1：错误，2：告警，3：信息，4：调试
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.LogLevel = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
+        this.Online = 'Online' in params ? params.Online : null;
+        this.LoginTime = 'LoginTime' in params ? params.LoginTime : null;
+        this.DevicePsk = 'DevicePsk' in params ? params.DevicePsk : null;
+        this.EnableState = 'EnableState' in params ? params.EnableState : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+        this.LogLevel = 'LogLevel' in params ? params.LogLevel : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -5818,7 +8238,7 @@ class DeleteForwardRuleResponse extends  AbstractModel {
         this.ProductID = null;
 
         /**
-         * 删除结果
+         * 删除结果 0成功 其他不成功
          * @type {number || null}
          */
         this.Result = null;
@@ -5849,6 +8269,98 @@ class DeleteForwardRuleResponse extends  AbstractModel {
         this.ProductID = 'ProductID' in params ? params.ProductID : null;
         this.Result = 'Result' in params ? params.Result : null;
         this.ErrMsg = 'ErrMsg' in params ? params.ErrMsg : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 设备上下线日志记录
+ * @class
+ */
+class DeviceStatusLogItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 时间
+         * @type {string || null}
+         */
+        this.Time = null;
+
+        /**
+         * 状态类型： Online 上线，Offline 下线
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 日志信息
+         * @type {string || null}
+         */
+        this.Data = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Time = 'Time' in params ? params.Time : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Data = 'Data' in params ? params.Data : null;
+
+    }
+}
+
+/**
+ * ListFirmwares返回参数结构体
+ * @class
+ */
+class ListFirmwaresResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 固件总数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 固件列表
+         * @type {Array.<FirmwareInfo> || null}
+         */
+        this.Firmwares = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Firmwares) {
+            this.Firmwares = new Array();
+            for (let z in params.Firmwares) {
+                let obj = new FirmwareInfo();
+                obj.deserialize(params.Firmwares[z]);
+                this.Firmwares.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -5974,48 +8486,30 @@ class DescribeBatchsRequest extends  AbstractModel {
 }
 
 /**
- * 设备详细信息
+ * CreateTaskFileUrl返回参数结构体
  * @class
  */
-class DeviceInfo extends  AbstractModel {
+class CreateTaskFileUrlResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 设备名
+         * 任务文件上传链接
          * @type {string || null}
          */
-        this.DeviceName = null;
+        this.Url = null;
 
         /**
-         * 设备是否在线，0不在线，1在线，2获取失败，3未激活
-         * @type {number || null}
-         */
-        this.Online = null;
-
-        /**
-         * 设备最后上线时间
-         * @type {number || null}
-         */
-        this.LoginTime = null;
-
-        /**
-         * 设备密钥
+         * 任务文件名
          * @type {string || null}
          */
-        this.DevicePsk = null;
+        this.FileName = null;
 
         /**
-         * 设备启用状态
-         * @type {number || null}
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
          */
-        this.EnableState = null;
-
-        /**
-         * 设备过期时间
-         * @type {number || null}
-         */
-        this.ExpireTime = null;
+        this.RequestId = null;
 
     }
 
@@ -6026,12 +8520,9 @@ class DeviceInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
-        this.Online = 'Online' in params ? params.Online : null;
-        this.LoginTime = 'LoginTime' in params ? params.LoginTime : null;
-        this.DevicePsk = 'DevicePsk' in params ? params.DevicePsk : null;
-        this.EnableState = 'EnableState' in params ? params.EnableState : null;
-        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.FileName = 'FileName' in params ? params.FileName : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6065,10 +8556,10 @@ class ModifyModelDefinitionResponse extends  AbstractModel {
 }
 
 /**
- * ResetCloudStorage请求参数结构体
+ * DescribeCloudStorageTime请求参数结构体
  * @class
  */
-class ResetCloudStorageRequest extends  AbstractModel {
+class DescribeCloudStorageTimeRequest extends  AbstractModel {
     constructor(){
         super();
 
@@ -6084,6 +8575,30 @@ class ResetCloudStorageRequest extends  AbstractModel {
          */
         this.DeviceName = null;
 
+        /**
+         * 云存日期，例如"2020-01-05"
+         * @type {string || null}
+         */
+        this.Date = null;
+
+        /**
+         * 开始时间，unix时间
+         * @type {number || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 结束时间，unix时间
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 用户ID
+         * @type {string || null}
+         */
+        this.UserId = null;
+
     }
 
     /**
@@ -6095,6 +8610,45 @@ class ResetCloudStorageRequest extends  AbstractModel {
         }
         this.ProductId = 'ProductId' in params ? params.ProductId : null;
         this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
+        this.Date = 'Date' in params ? params.Date : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.UserId = 'UserId' in params ? params.UserId : null;
+
+    }
+}
+
+/**
+ * ModifyDataForwardStatus请求参数结构体
+ * @class
+ */
+class ModifyDataForwardStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品ID。
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 转发状态，1启用，0禁用。
+         * @type {number || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -6142,10 +8696,10 @@ class DescribeFirmwareTaskRequest extends  AbstractModel {
 }
 
 /**
- * DescribeCloudStorageTime请求参数结构体
+ * DescribeCloudStorageUsers请求参数结构体
  * @class
  */
-class DescribeCloudStorageTimeRequest extends  AbstractModel {
+class DescribeCloudStorageUsersRequest extends  AbstractModel {
     constructor(){
         super();
 
@@ -6162,10 +8716,16 @@ class DescribeCloudStorageTimeRequest extends  AbstractModel {
         this.DeviceName = null;
 
         /**
-         * 云存日期，例如"2020-01-05"
-         * @type {string || null}
+         * 分页拉取数量
+         * @type {number || null}
          */
-        this.Date = null;
+        this.Limit = null;
+
+        /**
+         * 分页拉取偏移
+         * @type {number || null}
+         */
+        this.Offset = null;
 
     }
 
@@ -6178,7 +8738,58 @@ class DescribeCloudStorageTimeRequest extends  AbstractModel {
         }
         this.ProductId = 'ProductId' in params ? params.ProductId : null;
         this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
-        this.Date = 'Date' in params ? params.Date : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
+ * DescribeAIModelApplications返回参数结构体
+ * @class
+ */
+class DescribeAIModelApplicationsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 申请记录数量
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 申请记录数组
+         * @type {Array.<AIModelApplication> || null}
+         */
+        this.Applications = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Applications) {
+            this.Applications = new Array();
+            for (let z in params.Applications) {
+                let obj = new AIModelApplication();
+                obj.deserialize(params.Applications[z]);
+                this.Applications.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6186,29 +8797,39 @@ class DescribeCloudStorageTimeRequest extends  AbstractModel {
 module.exports = {
     DescribeCloudStorageDateRequest: DescribeCloudStorageDateRequest,
     CloudStorageTimeData: CloudStorageTimeData,
+    RetryDeviceFirmwareTaskRequest: RetryDeviceFirmwareTaskRequest,
     CreateCloudStorageRequest: CreateCloudStorageRequest,
     VideoBatch: VideoBatch,
     ImportModelDefinitionResponse: ImportModelDefinitionResponse,
-    DescribeModelDefinitionResponse: DescribeModelDefinitionResponse,
+    ApplyAIModelRequest: ApplyAIModelRequest,
     CreateBatchRequest: CreateBatchRequest,
+    ModifyProductDynamicRegisterResponse: ModifyProductDynamicRegisterResponse,
+    CancelAIModelApplicationResponse: CancelAIModelApplicationResponse,
     DescribeCloudStorageTimeResponse: DescribeCloudStorageTimeResponse,
+    DescribeDeviceStatusLogResponse: DescribeDeviceStatusLogResponse,
+    ReportAliveDeviceRequest: ReportAliveDeviceRequest,
     DescribeProductsRequest: DescribeProductsRequest,
-    DescribeDeviceEventHistoryResponse: DescribeDeviceEventHistoryResponse,
+    DescribeAIModelChannelResponse: DescribeAIModelChannelResponse,
     DescribeDeviceActionHistoryRequest: DescribeDeviceActionHistoryRequest,
+    ModifyDataForwardRequest: ModifyDataForwardRequest,
     DescribeDevicesResponse: DescribeDevicesResponse,
     ModifyProductResponse: ModifyProductResponse,
     ModifyProductRequest: ModifyProductRequest,
     ModifyModelDefinitionRequest: ModifyModelDefinitionRequest,
     DescribeBatchsResponse: DescribeBatchsResponse,
+    CancelAIModelApplicationRequest: CancelAIModelApplicationRequest,
     TransferCloudStorageResponse: TransferCloudStorageResponse,
     DescribeForwardRuleResponse: DescribeForwardRuleResponse,
+    ModifyDeviceLogLevelRequest: ModifyDeviceLogLevelRequest,
     DescribeBatchRequest: DescribeBatchRequest,
-    CloudStorageTimeInfo: CloudStorageTimeInfo,
+    DescribeForwardRuleRequest: DescribeForwardRuleRequest,
     ModifyDeviceRequest: ModifyDeviceRequest,
+    CreateCOSCredentialsResponse: CreateCOSCredentialsResponse,
     ProductModelDefinition: ProductModelDefinition,
     ActionHistory: ActionHistory,
-    DescribeFirmwareTaskStatisticsResponse: DescribeFirmwareTaskStatisticsResponse,
+    CreateDataForwardResponse: CreateDataForwardResponse,
     DescribeFirmwareRequest: DescribeFirmwareRequest,
+    DescribeCloudStorageUsersResponse: DescribeCloudStorageUsersResponse,
     DescribeProductRequest: DescribeProductRequest,
     DescribeProductsResponse: DescribeProductsResponse,
     CheckForwardAuthRequest: CheckForwardAuthRequest,
@@ -6216,47 +8837,66 @@ module.exports = {
     CreateBatchResponse: CreateBatchResponse,
     DescribeDeviceActionHistoryResponse: DescribeDeviceActionHistoryResponse,
     GetAllFirmwareVersionRequest: GetAllFirmwareVersionRequest,
+    CreateCOSCredentialsRequest: CreateCOSCredentialsRequest,
     DeviceCommLogItem: DeviceCommLogItem,
     DeviceUpdateStatus: DeviceUpdateStatus,
+    DescribeDataForwardListResponse: DescribeDataForwardListResponse,
     DeleteFirmwareResponse: DeleteFirmwareResponse,
     CreateForwardRuleResponse: CreateForwardRuleResponse,
     BatchUpdateFirmwareResponse: BatchUpdateFirmwareResponse,
+    DescribeModelDefinitionResponse: DescribeModelDefinitionResponse,
     DeleteProductRequest: DeleteProductRequest,
     StatusStatistic: StatusStatistic,
+    PublishMessageResponse: PublishMessageResponse,
     SetForwardAuthResponse: SetForwardAuthResponse,
     EditFirmwareRequest: EditFirmwareRequest,
     DeviceDataHistoryItem: DeviceDataHistoryItem,
+    ReportAliveDeviceResponse: ReportAliveDeviceResponse,
     DescribeDeviceEventHistoryRequest: DescribeDeviceEventHistoryRequest,
     DescribeCategoryResponse: DescribeCategoryResponse,
+    DescribeSDKLogRequest: DescribeSDKLogRequest,
     DescribeBalanceRequest: DescribeBalanceRequest,
     ImportModelDefinitionRequest: ImportModelDefinitionRequest,
+    DescribeDataForwardListRequest: DescribeDataForwardListRequest,
     DescribeDeviceCommLogResponse: DescribeDeviceCommLogResponse,
     DeleteDeviceRequest: DeleteDeviceRequest,
     GenerateSignedVideoURLResponse: GenerateSignedVideoURLResponse,
-    ListFirmwaresResponse: ListFirmwaresResponse,
+    ControlDeviceDataRequest: ControlDeviceDataRequest,
+    AIModelUsageInfo: AIModelUsageInfo,
     DescribeFirmwareTaskDevicesRequest: DescribeFirmwareTaskDevicesRequest,
     DescribeFirmwareResponse: DescribeFirmwareResponse,
     DescribeDeviceCommLogRequest: DescribeDeviceCommLogRequest,
+    WakeUpDeviceResponse: WakeUpDeviceResponse,
     DeleteForwardRuleRequest: DeleteForwardRuleRequest,
+    UpdateAIModelChannelResponse: UpdateAIModelChannelResponse,
+    DescribeAIModelUsageResponse: DescribeAIModelUsageResponse,
     DescribeBalanceTransactionsRequest: DescribeBalanceTransactionsRequest,
+    BindCloudStorageUserRequest: BindCloudStorageUserRequest,
     CreateProductResponse: CreateProductResponse,
     DescribeFirmwareTaskDevicesResponse: DescribeFirmwareTaskDevicesResponse,
+    ModifyDataForwardResponse: ModifyDataForwardResponse,
     DescribeCloudStorageThumbnailResponse: DescribeCloudStorageThumbnailResponse,
+    DescribeAIModelsRequest: DescribeAIModelsRequest,
     RetryDeviceFirmwareTaskResponse: RetryDeviceFirmwareTaskResponse,
     GenerateSignedVideoURLRequest: GenerateSignedVideoURLRequest,
     ResetCloudStorageResponse: ResetCloudStorageResponse,
+    InheritCloudStorageUserResponse: InheritCloudStorageUserResponse,
+    DescribeDeviceEventHistoryResponse: DescribeDeviceEventHistoryResponse,
     DescribeFirmwareTaskResponse: DescribeFirmwareTaskResponse,
     FirmwareInfo: FirmwareInfo,
     CreateProductRequest: CreateProductRequest,
     DescribeFirmwareTasksRequest: DescribeFirmwareTasksRequest,
     GetFirmwareURLResponse: GetFirmwareURLResponse,
-    DescribeDeviceResponse: DescribeDeviceResponse,
+    DescribeAIModelApplicationsRequest: DescribeAIModelApplicationsRequest,
     DescribeCloudStorageEventsRequest: DescribeCloudStorageEventsRequest,
     ListFirmwaresRequest: ListFirmwaresRequest,
-    RetryDeviceFirmwareTaskRequest: RetryDeviceFirmwareTaskRequest,
+    PublishMessageRequest: PublishMessageRequest,
+    DescribeDeviceStatusLogRequest: DescribeDeviceStatusLogRequest,
+    DescribeSDKLogResponse: DescribeSDKLogResponse,
     DescribeBalanceResponse: DescribeBalanceResponse,
     UploadFirmwareRequest: UploadFirmwareRequest,
     DescribeFirmwareTasksResponse: DescribeFirmwareTasksResponse,
+    CloudStorageUserInfo: CloudStorageUserInfo,
     EditFirmwareResponse: EditFirmwareResponse,
     DescribeFirmwareTaskDistributionRequest: DescribeFirmwareTaskDistributionRequest,
     ProductTemplate: ProductTemplate,
@@ -6264,51 +8904,79 @@ module.exports = {
     ModifyForwardRuleResponse: ModifyForwardRuleResponse,
     BalanceTransaction: BalanceTransaction,
     FirmwareTaskInfo: FirmwareTaskInfo,
+    DescribeProductDynamicRegisterRequest: DescribeProductDynamicRegisterRequest,
+    AIModelApplication: AIModelApplication,
     DescribeFirmwareTaskDistributionResponse: DescribeFirmwareTaskDistributionResponse,
     DescribeBatchResponse: DescribeBatchResponse,
+    DataForward: DataForward,
     DescribeDeviceRequest: DescribeDeviceRequest,
     ModifyForwardRuleRequest: ModifyForwardRuleRequest,
+    CreateAIDetectionResponse: CreateAIDetectionResponse,
     DescribeCloudStorageEventsResponse: DescribeCloudStorageEventsResponse,
     VideoProduct: VideoProduct,
     CloudStorageEvent: CloudStorageEvent,
     DescribeCloudStorageDateResponse: DescribeCloudStorageDateResponse,
-    DescribeForwardRuleRequest: DescribeForwardRuleRequest,
+    ModifyDataForwardStatusResponse: ModifyDataForwardStatusResponse,
+    CloudStorageTimeInfo: CloudStorageTimeInfo,
     UploadFirmwareResponse: UploadFirmwareResponse,
+    UpdateAIModelChannelRequest: UpdateAIModelChannelRequest,
     CreateCloudStorageResponse: CreateCloudStorageResponse,
+    BindCloudStorageUserResponse: BindCloudStorageUserResponse,
     CancelDeviceFirmwareTaskRequest: CancelDeviceFirmwareTaskRequest,
     CancelDeviceFirmwareTaskResponse: CancelDeviceFirmwareTaskResponse,
     DeleteDeviceResponse: DeleteDeviceResponse,
+    WakeUpDeviceRequest: WakeUpDeviceRequest,
+    ApplyAIModelResponse: ApplyAIModelResponse,
+    ControlDeviceDataResponse: ControlDeviceDataResponse,
     DescribeDeviceDataHistoryRequest: DescribeDeviceDataHistoryRequest,
     EventHistoryItem: EventHistoryItem,
     CreateForwardRuleRequest: CreateForwardRuleRequest,
-    CreateTaskFileUrlResponse: CreateTaskFileUrlResponse,
+    DeviceInfo: DeviceInfo,
     SetForwardAuthRequest: SetForwardAuthRequest,
     DescribeBalanceTransactionsResponse: DescribeBalanceTransactionsResponse,
     ModifyDeviceResponse: ModifyDeviceResponse,
     CreateTaskFileUrlRequest: CreateTaskFileUrlRequest,
+    ModifyDeviceLogLevelResponse: ModifyDeviceLogLevelResponse,
+    CreateDataForwardRequest: CreateDataForwardRequest,
     BatchUpdateFirmwareRequest: BatchUpdateFirmwareRequest,
+    ModifyProductDynamicRegisterRequest: ModifyProductDynamicRegisterRequest,
     DescribeCloudStorageThumbnailRequest: DescribeCloudStorageThumbnailRequest,
     GetFirmwareURLRequest: GetFirmwareURLRequest,
+    CreateAIDetectionRequest: CreateAIDetectionRequest,
     DescribeCloudStorageResponse: DescribeCloudStorageResponse,
+    ResetCloudStorageRequest: ResetCloudStorageRequest,
     DescribeProductResponse: DescribeProductResponse,
+    SDKLogItem: SDKLogItem,
+    DescribeAIModelsResponse: DescribeAIModelsResponse,
+    InheritCloudStorageUserRequest: InheritCloudStorageUserRequest,
+    DescribeAIModelChannelRequest: DescribeAIModelChannelRequest,
+    DescribeAIModelUsageRequest: DescribeAIModelUsageRequest,
     DescribeCategoryRequest: DescribeCategoryRequest,
     DeleteFirmwareRequest: DeleteFirmwareRequest,
     DescribeCloudStorageRequest: DescribeCloudStorageRequest,
     GetAllFirmwareVersionResponse: GetAllFirmwareVersionResponse,
+    AIModelInfo: AIModelInfo,
     DescribeDeviceDataHistoryResponse: DescribeDeviceDataHistoryResponse,
     SearchKeyword: SearchKeyword,
     DescribeDevicesRequest: DescribeDevicesRequest,
     DescribeModelDefinitionRequest: DescribeModelDefinitionRequest,
+    DescribeProductDynamicRegisterResponse: DescribeProductDynamicRegisterResponse,
+    DescribeFirmwareTaskStatisticsResponse: DescribeFirmwareTaskStatisticsResponse,
     CheckForwardAuthResponse: CheckForwardAuthResponse,
+    DescribeDeviceResponse: DescribeDeviceResponse,
     DescribeDeviceDataResponse: DescribeDeviceDataResponse,
     DeleteForwardRuleResponse: DeleteForwardRuleResponse,
+    DeviceStatusLogItem: DeviceStatusLogItem,
+    ListFirmwaresResponse: ListFirmwaresResponse,
     TransferCloudStorageRequest: TransferCloudStorageRequest,
     DescribeFirmwareTaskStatisticsRequest: DescribeFirmwareTaskStatisticsRequest,
     DescribeBatchsRequest: DescribeBatchsRequest,
-    DeviceInfo: DeviceInfo,
+    CreateTaskFileUrlResponse: CreateTaskFileUrlResponse,
     ModifyModelDefinitionResponse: ModifyModelDefinitionResponse,
-    ResetCloudStorageRequest: ResetCloudStorageRequest,
-    DescribeFirmwareTaskRequest: DescribeFirmwareTaskRequest,
     DescribeCloudStorageTimeRequest: DescribeCloudStorageTimeRequest,
+    ModifyDataForwardStatusRequest: ModifyDataForwardStatusRequest,
+    DescribeFirmwareTaskRequest: DescribeFirmwareTaskRequest,
+    DescribeCloudStorageUsersRequest: DescribeCloudStorageUsersRequest,
+    DescribeAIModelApplicationsResponse: DescribeAIModelApplicationsResponse,
 
 }

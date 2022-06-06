@@ -17,6 +17,127 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * 挂载配置信息
+ * @class
+ */
+class MountedSettingConf extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 配置名称
+         * @type {string || null}
+         */
+        this.ConfigDataName = null;
+
+        /**
+         * 挂载路径
+         * @type {string || null}
+         */
+        this.MountedPath = null;
+
+        /**
+         * 配置内容
+         * @type {Array.<Pair> || null}
+         */
+        this.Data = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ConfigDataName = 'ConfigDataName' in params ? params.ConfigDataName : null;
+        this.MountedPath = 'MountedPath' in params ? params.MountedPath : null;
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new Pair();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * ModifyServiceInfo返回参数结构体
+ * @class
+ */
+class ModifyServiceInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 成功与否
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 数据卷挂载信息
+ * @class
+ */
+class StorageMountConf extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 数据卷名
+         * @type {string || null}
+         */
+        this.VolumeName = null;
+
+        /**
+         * 数据卷绑定路径
+         * @type {string || null}
+         */
+        this.MountPath = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VolumeName = 'VolumeName' in params ? params.VolumeName : null;
+        this.MountPath = 'MountPath' in params ? params.MountPath : null;
+
+    }
+}
+
+/**
  * CreateResource请求参数结构体
  * @class
  */
@@ -132,6 +253,12 @@ class CreateCosTokenV2Request extends  AbstractModel {
          */
         this.SourceChannel = null;
 
+        /**
+         * 充当deployVersion入参
+         * @type {string || null}
+         */
+        this.TimeVersion = null;
+
     }
 
     /**
@@ -145,6 +272,7 @@ class CreateCosTokenV2Request extends  AbstractModel {
         this.PkgName = 'PkgName' in params ? params.PkgName : null;
         this.OptType = 'OptType' in params ? params.OptType : null;
         this.SourceChannel = 'SourceChannel' in params ? params.SourceChannel : null;
+        this.TimeVersion = 'TimeVersion' in params ? params.TimeVersion : null;
 
     }
 }
@@ -185,24 +313,42 @@ class DeployServiceV2Response extends  AbstractModel {
 }
 
 /**
- * ingress tls 配置
+ * 弹性伸缩配置
  * @class
  */
-class IngressTls extends  AbstractModel {
+class EsInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * host 数组
-         * @type {Array.<string> || null}
+         * 最小实例数
+         * @type {number || null}
          */
-        this.Hosts = null;
+        this.MinAliveInstances = null;
 
         /**
-         * secret name
+         * 最大实例数
+         * @type {number || null}
+         */
+        this.MaxAliveInstances = null;
+
+        /**
+         * 弹性策略,1:cpu，2:内存
+         * @type {number || null}
+         */
+        this.EsStrategy = null;
+
+        /**
+         * 弹性扩缩容条件值
+         * @type {number || null}
+         */
+        this.Threshold = null;
+
+        /**
+         * 版本Id
          * @type {string || null}
          */
-        this.SecretName = null;
+        this.VersionId = null;
 
     }
 
@@ -213,8 +359,11 @@ class IngressTls extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Hosts = 'Hosts' in params ? params.Hosts : null;
-        this.SecretName = 'SecretName' in params ? params.SecretName : null;
+        this.MinAliveInstances = 'MinAliveInstances' in params ? params.MinAliveInstances : null;
+        this.MaxAliveInstances = 'MaxAliveInstances' in params ? params.MaxAliveInstances : null;
+        this.EsStrategy = 'EsStrategy' in params ? params.EsStrategy : null;
+        this.Threshold = 'Threshold' in params ? params.Threshold : null;
+        this.VersionId = 'VersionId' in params ? params.VersionId : null;
 
     }
 }
@@ -255,6 +404,118 @@ class DescribeNamespacesResponse extends  AbstractModel {
             this.Result = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 服务端口映射
+ * @class
+ */
+class PortMapping extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 端口
+         * @type {number || null}
+         */
+        this.Port = null;
+
+        /**
+         * 映射端口
+         * @type {number || null}
+         */
+        this.TargetPort = null;
+
+        /**
+         * 协议栈 TCP/UDP
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Port = 'Port' in params ? params.Port : null;
+        this.TargetPort = 'TargetPort' in params ? params.TargetPort : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+
+    }
+}
+
+/**
+ * RestartServiceRunPod请求参数结构体
+ * @class
+ */
+class RestartServiceRunPodRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 环境id
+         * @type {string || null}
+         */
+        this.NamespaceId = null;
+
+        /**
+         * 服务名id
+         * @type {string || null}
+         */
+        this.ServiceId = null;
+
+        /**
+         * 名字
+         * @type {string || null}
+         */
+        this.PodName = null;
+
+        /**
+         * 单页条数
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 分页下标
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * pod状态
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 来源渠道
+         * @type {number || null}
+         */
+        this.SourceChannel = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
+        this.ServiceId = 'ServiceId' in params ? params.ServiceId : null;
+        this.PodName = 'PodName' in params ? params.PodName : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.SourceChannel = 'SourceChannel' in params ? params.SourceChannel : null;
 
     }
 }
@@ -345,6 +606,48 @@ class DeleteIngressRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyServiceInfo请求参数结构体
+ * @class
+ */
+class ModifyServiceInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 服务ID
+         * @type {string || null}
+         */
+        this.ServiceId = null;
+
+        /**
+         * 描述
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 来源渠道
+         * @type {number || null}
+         */
+        this.SourceChannel = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ServiceId = 'ServiceId' in params ? params.ServiceId : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.SourceChannel = 'SourceChannel' in params ? params.SourceChannel : null;
+
+    }
+}
+
+/**
  * CreateNamespace返回参数结构体
  * @class
  */
@@ -381,24 +684,36 @@ class CreateNamespaceResponse extends  AbstractModel {
 }
 
 /**
- * 数据卷挂载信息
+ * DescribeRelatedIngresses请求参数结构体
  * @class
  */
-class StorageMountConf extends  AbstractModel {
+class DescribeRelatedIngressesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 数据卷名
+         * 环境 id
          * @type {string || null}
          */
-        this.VolumeName = null;
+        this.NamespaceId = null;
 
         /**
-         * 数据卷绑定路径
+         * EKS namespace
          * @type {string || null}
          */
-        this.MountPath = null;
+        this.EksNamespace = null;
+
+        /**
+         * 来源渠道
+         * @type {number || null}
+         */
+        this.SourceChannel = null;
+
+        /**
+         * 服务 ID
+         * @type {string || null}
+         */
+        this.ServiceId = null;
 
     }
 
@@ -409,8 +724,10 @@ class StorageMountConf extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.VolumeName = 'VolumeName' in params ? params.VolumeName : null;
-        this.MountPath = 'MountPath' in params ? params.MountPath : null;
+        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
+        this.EksNamespace = 'EksNamespace' in params ? params.EksNamespace : null;
+        this.SourceChannel = 'SourceChannel' in params ? params.SourceChannel : null;
+        this.ServiceId = 'ServiceId' in params ? params.ServiceId : null;
 
     }
 }
@@ -755,6 +1072,66 @@ class DeployServiceV2Request extends  AbstractModel {
          */
         this.ImageArgs = null;
 
+        /**
+         * 服务端口映射
+         * @type {Array.<PortMapping> || null}
+         */
+        this.PortMappings = null;
+
+        /**
+         * 是否添加默认注册中心配置
+         * @type {boolean || null}
+         */
+        this.UseRegistryDefaultConfig = null;
+
+        /**
+         * 挂载配置信息
+         * @type {Array.<MountedSettingConf> || null}
+         */
+        this.SettingConfs = null;
+
+        /**
+         * eks 访问设置
+         * @type {EksService || null}
+         */
+        this.EksService = null;
+
+        /**
+         * 要回滚到的历史版本id
+         * @type {string || null}
+         */
+        this.VersionId = null;
+
+        /**
+         * 启动后执行的脚本
+         * @type {string || null}
+         */
+        this.PostStart = null;
+
+        /**
+         * 停止前执行的脚本
+         * @type {string || null}
+         */
+        this.PreStop = null;
+
+        /**
+         * 分批发布策略配置
+         * @type {DeployStrategyConf || null}
+         */
+        this.DeployStrategyConf = null;
+
+        /**
+         * 存活探针配置
+         * @type {HealthCheckConfig || null}
+         */
+        this.Liveness = null;
+
+        /**
+         * 就绪探针配置
+         * @type {HealthCheckConfig || null}
+         */
+        this.Readiness = null;
+
     }
 
     /**
@@ -823,6 +1200,52 @@ class DeployServiceV2Request extends  AbstractModel {
         this.ImageCommand = 'ImageCommand' in params ? params.ImageCommand : null;
         this.ImageArgs = 'ImageArgs' in params ? params.ImageArgs : null;
 
+        if (params.PortMappings) {
+            this.PortMappings = new Array();
+            for (let z in params.PortMappings) {
+                let obj = new PortMapping();
+                obj.deserialize(params.PortMappings[z]);
+                this.PortMappings.push(obj);
+            }
+        }
+        this.UseRegistryDefaultConfig = 'UseRegistryDefaultConfig' in params ? params.UseRegistryDefaultConfig : null;
+
+        if (params.SettingConfs) {
+            this.SettingConfs = new Array();
+            for (let z in params.SettingConfs) {
+                let obj = new MountedSettingConf();
+                obj.deserialize(params.SettingConfs[z]);
+                this.SettingConfs.push(obj);
+            }
+        }
+
+        if (params.EksService) {
+            let obj = new EksService();
+            obj.deserialize(params.EksService)
+            this.EksService = obj;
+        }
+        this.VersionId = 'VersionId' in params ? params.VersionId : null;
+        this.PostStart = 'PostStart' in params ? params.PostStart : null;
+        this.PreStop = 'PreStop' in params ? params.PreStop : null;
+
+        if (params.DeployStrategyConf) {
+            let obj = new DeployStrategyConf();
+            obj.deserialize(params.DeployStrategyConf)
+            this.DeployStrategyConf = obj;
+        }
+
+        if (params.Liveness) {
+            let obj = new HealthCheckConfig();
+            obj.deserialize(params.Liveness)
+            this.Liveness = obj;
+        }
+
+        if (params.Readiness) {
+            let obj = new HealthCheckConfig();
+            obj.deserialize(params.Readiness)
+            this.Readiness = obj;
+        }
+
     }
 }
 
@@ -867,24 +1290,25 @@ class ModifyIngressRequest extends  AbstractModel {
 }
 
 /**
- * 键值对
+ * GenerateDownloadUrl返回参数结构体
  * @class
  */
-class Pair extends  AbstractModel {
+class GenerateDownloadUrlResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 建
+         * 包下载临时链接
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.Key = null;
+        this.Result = null;
 
         /**
-         * 值
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.Value = null;
+        this.RequestId = null;
 
     }
 
@@ -895,8 +1319,52 @@ class Pair extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Key = 'Key' in params ? params.Key : null;
-        this.Value = 'Value' in params ? params.Value : null;
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeRelatedIngresses返回参数结构体
+ * @class
+ */
+class DescribeRelatedIngressesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ingress 数组
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<IngressInfo> || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            this.Result = new Array();
+            for (let z in params.Result) {
+                let obj = new IngressInfo();
+                obj.deserialize(params.Result[z]);
+                this.Result.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -945,6 +1413,12 @@ class CreateNamespaceRequest extends  AbstractModel {
          */
         this.SourceChannel = null;
 
+        /**
+         * 是否开启tsw服务
+         * @type {boolean || null}
+         */
+        this.EnableTswTraceService = null;
+
     }
 
     /**
@@ -960,6 +1434,7 @@ class CreateNamespaceRequest extends  AbstractModel {
         this.Description = 'Description' in params ? params.Description : null;
         this.K8sVersion = 'K8sVersion' in params ? params.K8sVersion : null;
         this.SourceChannel = 'SourceChannel' in params ? params.SourceChannel : null;
+        this.EnableTswTraceService = 'EnableTswTraceService' in params ? params.EnableTswTraceService : null;
 
     }
 }
@@ -990,6 +1465,12 @@ class DescribeIngressesRequest extends  AbstractModel {
          */
         this.SourceChannel = null;
 
+        /**
+         * ingress 规则名列表
+         * @type {Array.<string> || null}
+         */
+        this.Names = null;
+
     }
 
     /**
@@ -1002,6 +1483,7 @@ class DescribeIngressesRequest extends  AbstractModel {
         this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
         this.EksNamespace = 'EksNamespace' in params ? params.EksNamespace : null;
         this.SourceChannel = 'SourceChannel' in params ? params.SourceChannel : null;
+        this.Names = 'Names' in params ? params.Names : null;
 
     }
 }
@@ -1310,6 +1792,19 @@ class IngressInfo extends  AbstractModel {
          */
         this.Vip = null;
 
+        /**
+         * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 是否混合 https，默认 false，可选值 true 代表有 https 协议监听
+         * @type {boolean || null}
+         */
+        this.Mixed = null;
+
     }
 
     /**
@@ -1344,6 +1839,8 @@ class IngressInfo extends  AbstractModel {
         }
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
         this.Vip = 'Vip' in params ? params.Vip : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.Mixed = 'Mixed' in params ? params.Mixed : null;
 
     }
 }
@@ -1358,6 +1855,42 @@ class DeleteIngressResponse extends  AbstractModel {
 
         /**
          * 是否删除成功
+         * @type {boolean || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * RestartServiceRunPod返回参数结构体
+ * @class
+ */
+class RestartServiceRunPodResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回结果
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {boolean || null}
          */
         this.Result = null;
@@ -1583,6 +2116,12 @@ class IngressRule extends  AbstractModel {
          */
         this.Host = null;
 
+        /**
+         * 协议，选项为 http， https，默认为 http
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
     }
 
     /**
@@ -1599,6 +2138,7 @@ class IngressRule extends  AbstractModel {
             this.Http = obj;
         }
         this.Host = 'Host' in params ? params.Host : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
 
     }
 }
@@ -1755,10 +2295,31 @@ class RunVersionPod extends  AbstractModel {
         this.CreateTime = null;
 
         /**
-         * pod的ip
+         * 实例的ip
          * @type {string || null}
          */
         this.PodIp = null;
+
+        /**
+         * 可用区
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * 部署版本
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DeployVersion = null;
+
+        /**
+         * 重启次数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.RestartCount = null;
 
     }
 
@@ -1774,6 +2335,9 @@ class RunVersionPod extends  AbstractModel {
         this.Status = 'Status' in params ? params.Status : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.PodIp = 'PodIp' in params ? params.PodIp : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.DeployVersion = 'DeployVersion' in params ? params.DeployVersion : null;
+        this.RestartCount = 'RestartCount' in params ? params.RestartCount : null;
 
     }
 }
@@ -2089,6 +2653,83 @@ class NamespacePage extends  AbstractModel {
 }
 
 /**
+ * 健康检查配置
+ * @class
+ */
+class HealthCheckConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 支持的健康检查类型，如 HttpGet，TcpSocket，Exec
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 仅当健康检查类型为 HttpGet 时有效，表示协议类型，如 HTTP，HTTPS
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * 仅当健康检查类型为 HttpGet 时有效，表示请求路径
+         * @type {string || null}
+         */
+        this.Path = null;
+
+        /**
+         * 仅当健康检查类型为 Exec 时有效，表示执行的脚本内容
+         * @type {string || null}
+         */
+        this.Exec = null;
+
+        /**
+         * 仅当健康检查类型为 HttpGet\TcpSocket 时有效，表示请求路径
+         * @type {number || null}
+         */
+        this.Port = null;
+
+        /**
+         * 检查延迟开始时间，单位为秒，默认为 0
+         * @type {number || null}
+         */
+        this.InitialDelaySeconds = null;
+
+        /**
+         * 超时时间，单位为秒，默认为 1
+         * @type {number || null}
+         */
+        this.TimeoutSeconds = null;
+
+        /**
+         * 间隔时间，单位为秒，默认为 10
+         * @type {number || null}
+         */
+        this.PeriodSeconds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.Path = 'Path' in params ? params.Path : null;
+        this.Exec = 'Exec' in params ? params.Exec : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.InitialDelaySeconds = 'InitialDelaySeconds' in params ? params.InitialDelaySeconds : null;
+        this.TimeoutSeconds = 'TimeoutSeconds' in params ? params.TimeoutSeconds : null;
+        this.PeriodSeconds = 'PeriodSeconds' in params ? params.PeriodSeconds : null;
+
+    }
+}
+
+/**
  * CreateCosTokenV2返回参数结构体
  * @class
  */
@@ -2130,42 +2771,30 @@ class CreateCosTokenV2Response extends  AbstractModel {
 }
 
 /**
- * 弹性伸缩配置
+ * ingress tls 配置
  * @class
  */
-class EsInfo extends  AbstractModel {
+class IngressTls extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 最小实例数
-         * @type {number || null}
+         * host 数组, 空数组表示全部域名的默认证书
+         * @type {Array.<string> || null}
          */
-        this.MinAliveInstances = null;
+        this.Hosts = null;
 
         /**
-         * 最大实例数
-         * @type {number || null}
-         */
-        this.MaxAliveInstances = null;
-
-        /**
-         * 弹性策略,1:cpu，2:内存
-         * @type {number || null}
-         */
-        this.EsStrategy = null;
-
-        /**
-         * 弹性扩缩容条件值
-         * @type {number || null}
-         */
-        this.Threshold = null;
-
-        /**
-         * 版本Id
+         * secret name，如使用证书，则填空字符串
          * @type {string || null}
          */
-        this.VersionId = null;
+        this.SecretName = null;
+
+        /**
+         * SSL Certificate Id
+         * @type {string || null}
+         */
+        this.CertificateId = null;
 
     }
 
@@ -2176,11 +2805,107 @@ class EsInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.MinAliveInstances = 'MinAliveInstances' in params ? params.MinAliveInstances : null;
-        this.MaxAliveInstances = 'MaxAliveInstances' in params ? params.MaxAliveInstances : null;
-        this.EsStrategy = 'EsStrategy' in params ? params.EsStrategy : null;
-        this.Threshold = 'Threshold' in params ? params.Threshold : null;
-        this.VersionId = 'VersionId' in params ? params.VersionId : null;
+        this.Hosts = 'Hosts' in params ? params.Hosts : null;
+        this.SecretName = 'SecretName' in params ? params.SecretName : null;
+        this.CertificateId = 'CertificateId' in params ? params.CertificateId : null;
+
+    }
+}
+
+/**
+ * GenerateDownloadUrl请求参数结构体
+ * @class
+ */
+class GenerateDownloadUrlRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 服务ID
+         * @type {string || null}
+         */
+        this.ServiceId = null;
+
+        /**
+         * 包名
+         * @type {string || null}
+         */
+        this.PkgName = null;
+
+        /**
+         * 需要下载的包版本
+         * @type {string || null}
+         */
+        this.DeployVersion = null;
+
+        /**
+         * 来源 channel
+         * @type {number || null}
+         */
+        this.SourceChannel = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ServiceId = 'ServiceId' in params ? params.ServiceId : null;
+        this.PkgName = 'PkgName' in params ? params.PkgName : null;
+        this.DeployVersion = 'DeployVersion' in params ? params.DeployVersion : null;
+        this.SourceChannel = 'SourceChannel' in params ? params.SourceChannel : null;
+
+    }
+}
+
+/**
+ * 分批发布策略配置
+ * @class
+ */
+class DeployStrategyConf extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总分批数
+         * @type {number || null}
+         */
+        this.TotalBatchCount = null;
+
+        /**
+         * beta分批实例数
+         * @type {number || null}
+         */
+        this.BetaBatchNum = null;
+
+        /**
+         * 分批策略：0-全自动，1-全手动，beta分批一定是手动的，这里的策略指定的是剩余批次
+         * @type {number || null}
+         */
+        this.DeployStrategyType = null;
+
+        /**
+         * 每批暂停间隔
+         * @type {number || null}
+         */
+        this.BatchInterval = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalBatchCount = 'TotalBatchCount' in params ? params.TotalBatchCount : null;
+        this.BetaBatchNum = 'BetaBatchNum' in params ? params.BetaBatchNum : null;
+        this.DeployStrategyType = 'DeployStrategyType' in params ? params.DeployStrategyType : null;
+        this.BatchInterval = 'BatchInterval' in params ? params.BatchInterval : null;
 
     }
 }
@@ -2337,23 +3062,182 @@ class CreateServiceV2Request extends  AbstractModel {
     }
 }
 
+/**
+ * eks service info
+ * @class
+ */
+class EksService extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * service name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 可用端口
+         * @type {Array.<number> || null}
+         */
+        this.Ports = null;
+
+        /**
+         * yaml 内容
+         * @type {string || null}
+         */
+        this.Yaml = null;
+
+        /**
+         * 服务名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ServiceName = null;
+
+        /**
+         * 版本名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.VersionName = null;
+
+        /**
+         * 内网ip
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.ClusterIp = null;
+
+        /**
+         * 外网ip
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ExternalIp = null;
+
+        /**
+         * 访问类型，可选值：
+- EXTERNAL（公网访问）
+- VPC（vpc内访问）
+- CLUSTER（集群内访问）
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 子网ID，只在类型为vpc访问时才有值
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * 负载均衡ID，只在外网访问和vpc内访问才有值，默认自动创建
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.LoadBalanceId = null;
+
+        /**
+         * 端口映射
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<PortMapping> || null}
+         */
+        this.PortMappings = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Ports = 'Ports' in params ? params.Ports : null;
+        this.Yaml = 'Yaml' in params ? params.Yaml : null;
+        this.ServiceName = 'ServiceName' in params ? params.ServiceName : null;
+        this.VersionName = 'VersionName' in params ? params.VersionName : null;
+        this.ClusterIp = 'ClusterIp' in params ? params.ClusterIp : null;
+        this.ExternalIp = 'ExternalIp' in params ? params.ExternalIp : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.LoadBalanceId = 'LoadBalanceId' in params ? params.LoadBalanceId : null;
+
+        if (params.PortMappings) {
+            this.PortMappings = new Array();
+            for (let z in params.PortMappings) {
+                let obj = new PortMapping();
+                obj.deserialize(params.PortMappings[z]);
+                this.PortMappings.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * 键值对
+ * @class
+ */
+class Pair extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 建
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * 值
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
 module.exports = {
+    MountedSettingConf: MountedSettingConf,
+    ModifyServiceInfoResponse: ModifyServiceInfoResponse,
+    StorageMountConf: StorageMountConf,
     CreateResourceRequest: CreateResourceRequest,
     CreateServiceV2Response: CreateServiceV2Response,
     CreateCosTokenV2Request: CreateCosTokenV2Request,
     DeployServiceV2Response: DeployServiceV2Response,
-    IngressTls: IngressTls,
+    EsInfo: EsInfo,
     DescribeNamespacesResponse: DescribeNamespacesResponse,
+    PortMapping: PortMapping,
+    RestartServiceRunPodRequest: RestartServiceRunPodRequest,
     ModifyIngressResponse: ModifyIngressResponse,
     DeleteIngressRequest: DeleteIngressRequest,
+    ModifyServiceInfoRequest: ModifyServiceInfoRequest,
     CreateNamespaceResponse: CreateNamespaceResponse,
-    StorageMountConf: StorageMountConf,
+    DescribeRelatedIngressesRequest: DescribeRelatedIngressesRequest,
     CosToken: CosToken,
     DescribeNamespacesRequest: DescribeNamespacesRequest,
     CreateCosTokenRequest: CreateCosTokenRequest,
     DeployServiceV2Request: DeployServiceV2Request,
     ModifyIngressRequest: ModifyIngressRequest,
-    Pair: Pair,
+    GenerateDownloadUrlResponse: GenerateDownloadUrlResponse,
+    DescribeRelatedIngressesResponse: DescribeRelatedIngressesResponse,
     CreateNamespaceRequest: CreateNamespaceRequest,
     DescribeIngressesRequest: DescribeIngressesRequest,
     DescribeRunPodPage: DescribeRunPodPage,
@@ -2362,6 +3246,7 @@ module.exports = {
     DescribeIngressesResponse: DescribeIngressesResponse,
     IngressInfo: IngressInfo,
     DeleteIngressResponse: DeleteIngressResponse,
+    RestartServiceRunPodResponse: RestartServiceRunPodResponse,
     ModifyNamespaceRequest: ModifyNamespaceRequest,
     IngressRuleBackend: IngressRuleBackend,
     DescribeIngressResponse: DescribeIngressResponse,
@@ -2376,9 +3261,14 @@ module.exports = {
     DescribeServiceRunPodListV2Response: DescribeServiceRunPodListV2Response,
     TemNamespaceInfo: TemNamespaceInfo,
     NamespacePage: NamespacePage,
+    HealthCheckConfig: HealthCheckConfig,
     CreateCosTokenV2Response: CreateCosTokenV2Response,
-    EsInfo: EsInfo,
+    IngressTls: IngressTls,
+    GenerateDownloadUrlRequest: GenerateDownloadUrlRequest,
+    DeployStrategyConf: DeployStrategyConf,
     DescribeIngressRequest: DescribeIngressRequest,
     CreateServiceV2Request: CreateServiceV2Request,
+    EksService: EksService,
+    Pair: Pair,
 
 }

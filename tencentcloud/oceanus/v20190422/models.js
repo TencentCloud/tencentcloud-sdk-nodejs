@@ -81,12 +81,6 @@ class CreateResourceRequest extends  AbstractModel {
         this.ResourceLoc = null;
 
         /**
-         * 资源名称
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
          * 资源类型。目前只支持 JAR，取值为 1
          * @type {number || null}
          */
@@ -99,10 +93,28 @@ class CreateResourceRequest extends  AbstractModel {
         this.Remark = null;
 
         /**
+         * 资源名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
          * 资源版本描述
          * @type {string || null}
          */
         this.ResourceConfigRemark = null;
+
+        /**
+         * 目录ID
+         * @type {string || null}
+         */
+        this.FolderId = null;
+
+        /**
+         * 工作空间 SerialId
+         * @type {string || null}
+         */
+        this.WorkSpaceId = null;
 
     }
 
@@ -119,10 +131,68 @@ class CreateResourceRequest extends  AbstractModel {
             obj.deserialize(params.ResourceLoc)
             this.ResourceLoc = obj;
         }
-        this.Name = 'Name' in params ? params.Name : null;
         this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
         this.Remark = 'Remark' in params ? params.Remark : null;
+        this.Name = 'Name' in params ? params.Name : null;
         this.ResourceConfigRemark = 'ResourceConfigRemark' in params ? params.ResourceConfigRemark : null;
+        this.FolderId = 'FolderId' in params ? params.FolderId : null;
+        this.WorkSpaceId = 'WorkSpaceId' in params ? params.WorkSpaceId : null;
+
+    }
+}
+
+/**
+ * CheckSavepoint请求参数结构体
+ * @class
+ */
+class CheckSavepointRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 作业 id
+         * @type {string || null}
+         */
+        this.JobId = null;
+
+        /**
+         * 快照资源 id
+         * @type {string || null}
+         */
+        this.SerialId = null;
+
+        /**
+         * 快照类型 1: savepoint；2: checkpoint；3: cancelWithSavepoint
+         * @type {number || null}
+         */
+        this.RecordType = null;
+
+        /**
+         * 快照路径，目前只支持 cos 路径
+         * @type {string || null}
+         */
+        this.SavepointPath = null;
+
+        /**
+         * 工作空间 id
+         * @type {string || null}
+         */
+        this.WorkSpaceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobId = 'JobId' in params ? params.JobId : null;
+        this.SerialId = 'SerialId' in params ? params.SerialId : null;
+        this.RecordType = 'RecordType' in params ? params.RecordType : null;
+        this.SavepointPath = 'SavepointPath' in params ? params.SavepointPath : null;
+        this.WorkSpaceId = 'WorkSpaceId' in params ? params.WorkSpaceId : null;
 
     }
 }
@@ -171,6 +241,24 @@ class CreateJobRequest extends  AbstractModel {
          */
         this.Remark = null;
 
+        /**
+         * 作业名所属文件夹ID，根目录为"root"
+         * @type {string || null}
+         */
+        this.FolderId = null;
+
+        /**
+         * 作业运行的Flink版本
+         * @type {string || null}
+         */
+        this.FlinkVersion = null;
+
+        /**
+         * 工作空间 SerialId
+         * @type {string || null}
+         */
+        this.WorkSpaceId = null;
+
     }
 
     /**
@@ -186,6 +274,9 @@ class CreateJobRequest extends  AbstractModel {
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
         this.CuMem = 'CuMem' in params ? params.CuMem : null;
         this.Remark = 'Remark' in params ? params.Remark : null;
+        this.FolderId = 'FolderId' in params ? params.FolderId : null;
+        this.FlinkVersion = 'FlinkVersion' in params ? params.FlinkVersion : null;
+        this.WorkSpaceId = 'WorkSpaceId' in params ? params.WorkSpaceId : null;
 
     }
 }
@@ -260,6 +351,12 @@ class StopJobsRequest extends  AbstractModel {
          */
         this.StopJobDescriptions = null;
 
+        /**
+         * 工作空间 SerialId
+         * @type {string || null}
+         */
+        this.WorkSpaceId = null;
+
     }
 
     /**
@@ -278,6 +375,7 @@ class StopJobsRequest extends  AbstractModel {
                 this.StopJobDescriptions.push(obj);
             }
         }
+        this.WorkSpaceId = 'WorkSpaceId' in params ? params.WorkSpaceId : null;
 
     }
 }
@@ -326,7 +424,7 @@ class ResourceLoc extends  AbstractModel {
         super();
 
         /**
-         * 资源位置的存储类型，目前只支持COS
+         * 资源位置的存储类型，目前只支持1:COS
          * @type {number || null}
          */
         this.StorageType = null;
@@ -371,6 +469,12 @@ class RunJobsRequest extends  AbstractModel {
          */
         this.RunJobDescriptions = null;
 
+        /**
+         * 工作空间 SerialId
+         * @type {string || null}
+         */
+        this.WorkSpaceId = null;
+
     }
 
     /**
@@ -389,6 +493,7 @@ class RunJobsRequest extends  AbstractModel {
                 this.RunJobDescriptions.push(obj);
             }
         }
+        this.WorkSpaceId = 'WorkSpaceId' in params ? params.WorkSpaceId : null;
 
     }
 }
@@ -559,6 +664,48 @@ class CreateJobConfigRequest extends  AbstractModel {
          */
         this.LogCollect = null;
 
+        /**
+         * JobManager规格
+         * @type {number || null}
+         */
+        this.JobManagerSpec = null;
+
+        /**
+         * TaskManager规格
+         * @type {number || null}
+         */
+        this.TaskManagerSpec = null;
+
+        /**
+         * CLS日志集ID
+         * @type {string || null}
+         */
+        this.ClsLogsetId = null;
+
+        /**
+         * CLS日志主题ID
+         * @type {string || null}
+         */
+        this.ClsTopicId = null;
+
+        /**
+         * 日志采集类型 2：CLS；3：COS
+         * @type {number || null}
+         */
+        this.LogCollectType = null;
+
+        /**
+         * pyflink作业运行时使用的python版本
+         * @type {string || null}
+         */
+        this.PythonVersion = null;
+
+        /**
+         * 工作空间 SerialId
+         * @type {string || null}
+         */
+        this.WorkSpaceId = null;
+
     }
 
     /**
@@ -594,6 +741,13 @@ class CreateJobConfigRequest extends  AbstractModel {
         this.AutoDelete = 'AutoDelete' in params ? params.AutoDelete : null;
         this.COSBucket = 'COSBucket' in params ? params.COSBucket : null;
         this.LogCollect = 'LogCollect' in params ? params.LogCollect : null;
+        this.JobManagerSpec = 'JobManagerSpec' in params ? params.JobManagerSpec : null;
+        this.TaskManagerSpec = 'TaskManagerSpec' in params ? params.TaskManagerSpec : null;
+        this.ClsLogsetId = 'ClsLogsetId' in params ? params.ClsLogsetId : null;
+        this.ClsTopicId = 'ClsTopicId' in params ? params.ClsTopicId : null;
+        this.LogCollectType = 'LogCollectType' in params ? params.LogCollectType : null;
+        this.PythonVersion = 'PythonVersion' in params ? params.PythonVersion : null;
+        this.WorkSpaceId = 'WorkSpaceId' in params ? params.WorkSpaceId : null;
 
     }
 }
@@ -630,6 +784,12 @@ class CreateResourceConfigRequest extends  AbstractModel {
          */
         this.AutoDelete = null;
 
+        /**
+         * 工作空间 SerialId
+         * @type {string || null}
+         */
+        this.WorkSpaceId = null;
+
     }
 
     /**
@@ -648,6 +808,7 @@ class CreateResourceConfigRequest extends  AbstractModel {
         }
         this.Remark = 'Remark' in params ? params.Remark : null;
         this.AutoDelete = 'AutoDelete' in params ? params.AutoDelete : null;
+        this.WorkSpaceId = 'WorkSpaceId' in params ? params.WorkSpaceId : null;
 
     }
 }
@@ -713,6 +874,12 @@ class DeleteTableConfigRequest extends  AbstractModel {
          */
         this.TableName = null;
 
+        /**
+         * 工作空间 SerialId
+         * @type {string || null}
+         */
+        this.WorkSpaceId = null;
+
     }
 
     /**
@@ -725,6 +892,124 @@ class DeleteTableConfigRequest extends  AbstractModel {
         this.JobId = 'JobId' in params ? params.JobId : null;
         this.DebugId = 'DebugId' in params ? params.DebugId : null;
         this.TableName = 'TableName' in params ? params.TableName : null;
+        this.WorkSpaceId = 'WorkSpaceId' in params ? params.WorkSpaceId : null;
+
+    }
+}
+
+/**
+ * 描述Savepoint信息
+ * @class
+ */
+class Savepoint extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 主键
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Id = null;
+
+        /**
+         * 版本号
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.VersionId = null;
+
+        /**
+         * 状态 1: Active; 2: Expired; 3: InProgress; 4: Failed; 5: Timeout
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * 路径
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Path = null;
+
+        /**
+         * 大小
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Size = null;
+
+        /**
+         * 快照类型 1: savepoint；2: checkpoint；3: cancelWithSavepoint
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.RecordType = null;
+
+        /**
+         * 运行作业实例的顺序 ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.JobRuntimeId = null;
+
+        /**
+         * 描述
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 固定超时时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Timeout = null;
+
+        /**
+         * 快照 serialId
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SerialId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.VersionId = 'VersionId' in params ? params.VersionId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.Path = 'Path' in params ? params.Path : null;
+        this.Size = 'Size' in params ? params.Size : null;
+        this.RecordType = 'RecordType' in params ? params.RecordType : null;
+        this.JobRuntimeId = 'JobRuntimeId' in params ? params.JobRuntimeId : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.Timeout = 'Timeout' in params ? params.Timeout : null;
+        this.SerialId = 'SerialId' in params ? params.SerialId : null;
 
     }
 }
@@ -824,6 +1109,18 @@ class DescribeResourceRelatedJobsRequest extends  AbstractModel {
          */
         this.Limit = null;
 
+        /**
+         * 资源版本号
+         * @type {number || null}
+         */
+        this.ResourceConfigVersion = null;
+
+        /**
+         * 工作空间 SerialId
+         * @type {string || null}
+         */
+        this.WorkSpaceId = null;
+
     }
 
     /**
@@ -837,6 +1134,8 @@ class DescribeResourceRelatedJobsRequest extends  AbstractModel {
         this.DESCByJobConfigCreateTime = 'DESCByJobConfigCreateTime' in params ? params.DESCByJobConfigCreateTime : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+        this.ResourceConfigVersion = 'ResourceConfigVersion' in params ? params.ResourceConfigVersion : null;
+        this.WorkSpaceId = 'WorkSpaceId' in params ? params.WorkSpaceId : null;
 
     }
 }
@@ -1025,7 +1324,7 @@ class DescribeResourcesRequest extends  AbstractModel {
         super();
 
         /**
-         * 需要查询的资源ID数组
+         * 需要查询的资源ID数组，数量不超过100个。如果填写了该参数则忽略Filters参数。
          * @type {Array.<string> || null}
          */
         this.ResourceIds = null;
@@ -1043,10 +1342,17 @@ class DescribeResourcesRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * 查询资源配置列表， 如果不填写，返回该ResourceId下所有作业配置列表
+         * <li><strong>ResourceName</strong></li>
+<p style="padding-left: 30px;">按照资源名字过滤，支持模糊过滤。传入的过滤名字不超过5个</p><p style="padding-left: 30px;">类型: String</p><p style="padding-left: 30px;">必选: 否</p>
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
+
+        /**
+         * 工作空间 SerialId
+         * @type {string || null}
+         */
+        this.WorkSpaceId = null;
 
     }
 
@@ -1069,6 +1375,7 @@ class DescribeResourcesRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
+        this.WorkSpaceId = 'WorkSpaceId' in params ? params.WorkSpaceId : null;
 
     }
 }
@@ -1117,6 +1424,97 @@ class ResourceLocParam extends  AbstractModel {
 }
 
 /**
+ * DescribeJobSavepoint请求参数结构体
+ * @class
+ */
+class DescribeJobSavepointRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 作业 SerialId
+         * @type {string || null}
+         */
+        this.JobId = null;
+
+        /**
+         * 分页参数，单页总数
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 分页参数，偏移量
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 工作空间 SerialId
+         * @type {string || null}
+         */
+        this.WorkSpaceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobId = 'JobId' in params ? params.JobId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.WorkSpaceId = 'WorkSpaceId' in params ? params.WorkSpaceId : null;
+
+    }
+}
+
+/**
+ * CheckSavepoint返回参数结构体
+ * @class
+ */
+class CheckSavepointResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 资源 id
+         * @type {string || null}
+         */
+        this.SerialId = null;
+
+        /**
+         * 1=可用，2=不可用
+         * @type {number || null}
+         */
+        this.SavepointStatus = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SerialId = 'SerialId' in params ? params.SerialId : null;
+        this.SavepointStatus = 'SavepointStatus' in params ? params.SavepointStatus : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DeleteResourceConfigs请求参数结构体
  * @class
  */
@@ -1136,6 +1534,12 @@ class DeleteResourceConfigsRequest extends  AbstractModel {
          */
         this.ResourceConfigVersions = null;
 
+        /**
+         * 工作空间 SerialId
+         * @type {string || null}
+         */
+        this.WorkSpaceId = null;
+
     }
 
     /**
@@ -1147,6 +1551,83 @@ class DeleteResourceConfigsRequest extends  AbstractModel {
         }
         this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
         this.ResourceConfigVersions = 'ResourceConfigVersions' in params ? params.ResourceConfigVersions : null;
+        this.WorkSpaceId = 'WorkSpaceId' in params ? params.WorkSpaceId : null;
+
+    }
+}
+
+/**
+ * DescribeJobSavepoint返回参数结构体
+ * @class
+ */
+class DescribeJobSavepointResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 快照列表总数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TotalNumber = null;
+
+        /**
+         * 快照列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Savepoint> || null}
+         */
+        this.Savepoint = null;
+
+        /**
+         * 进行中的快照列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Savepoint> || null}
+         */
+        this.RunningSavepoint = null;
+
+        /**
+         * 进行中的快照列表总数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.RunningTotalNumber = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalNumber = 'TotalNumber' in params ? params.TotalNumber : null;
+
+        if (params.Savepoint) {
+            this.Savepoint = new Array();
+            for (let z in params.Savepoint) {
+                let obj = new Savepoint();
+                obj.deserialize(params.Savepoint[z]);
+                this.Savepoint.push(obj);
+            }
+        }
+
+        if (params.RunningSavepoint) {
+            this.RunningSavepoint = new Array();
+            for (let z in params.RunningSavepoint) {
+                let obj = new Savepoint();
+                obj.deserialize(params.RunningSavepoint[z]);
+                this.RunningSavepoint.push(obj);
+            }
+        }
+        this.RunningTotalNumber = 'RunningTotalNumber' in params ? params.RunningTotalNumber : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1228,6 +1709,12 @@ class DeleteResourcesRequest extends  AbstractModel {
          */
         this.ResourceIds = null;
 
+        /**
+         * 工作空间 SerialId
+         * @type {string || null}
+         */
+        this.WorkSpaceId = null;
+
     }
 
     /**
@@ -1238,6 +1725,7 @@ class DeleteResourcesRequest extends  AbstractModel {
             return;
         }
         this.ResourceIds = 'ResourceIds' in params ? params.ResourceIds : null;
+        this.WorkSpaceId = 'WorkSpaceId' in params ? params.WorkSpaceId : null;
 
     }
 }
@@ -1527,6 +2015,12 @@ class DescribeSystemResourcesRequest extends  AbstractModel {
          */
         this.ClusterId = null;
 
+        /**
+         * 查询对应Flink版本的内置connector
+         * @type {string || null}
+         */
+        this.FlinkVersion = null;
+
     }
 
     /**
@@ -1549,6 +2043,7 @@ class DescribeSystemResourcesRequest extends  AbstractModel {
             }
         }
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.FlinkVersion = 'FlinkVersion' in params ? params.FlinkVersion : null;
 
     }
 }
@@ -1597,6 +2092,12 @@ class DescribeJobConfigsRequest extends  AbstractModel {
          */
         this.OnlyDraft = null;
 
+        /**
+         * 工作空间 SerialId
+         * @type {string || null}
+         */
+        this.WorkSpaceId = null;
+
     }
 
     /**
@@ -1620,6 +2121,7 @@ class DescribeJobConfigsRequest extends  AbstractModel {
             }
         }
         this.OnlyDraft = 'OnlyDraft' in params ? params.OnlyDraft : null;
+        this.WorkSpaceId = 'WorkSpaceId' in params ? params.WorkSpaceId : null;
 
     }
 }
@@ -1706,6 +2208,18 @@ class RunJobDescription extends  AbstractModel {
          */
         this.JobConfigVersion = null;
 
+        /**
+         * Savepoint路径
+         * @type {string || null}
+         */
+        this.SavepointPath = null;
+
+        /**
+         * Savepoint的Id
+         * @type {string || null}
+         */
+        this.SavepointId = null;
+
     }
 
     /**
@@ -1719,6 +2233,8 @@ class RunJobDescription extends  AbstractModel {
         this.RunType = 'RunType' in params ? params.RunType : null;
         this.StartMode = 'StartMode' in params ? params.StartMode : null;
         this.JobConfigVersion = 'JobConfigVersion' in params ? params.JobConfigVersion : null;
+        this.SavepointPath = 'SavepointPath' in params ? params.SavepointPath : null;
+        this.SavepointId = 'SavepointId' in params ? params.SavepointId : null;
 
     }
 }
@@ -2000,7 +2516,7 @@ class DescribeJobsRequest extends  AbstractModel {
         this.JobIds = null;
 
         /**
-         * 过滤条件，支持的 Filter.Name 为：作业名 Name、作业状态 Status、所属集群 ClusterId。每次请求的 Filters 个数的上限为 3，Filter.Values 的个数上限为 5。参数不支持同时指定 JobIds 和 Filters。
+         * 过滤条件，支持的 Filter.Name 为：作业名 Name、作业状态 Status、所属集群 ClusterId、作业id JobId、集群名称 ClusterName。 每次请求的 Filters 个数的上限为 5，Filter.Values 的个数上限为 5。参数不支持同时指定 JobIds 和 Filters。
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -2016,6 +2532,12 @@ class DescribeJobsRequest extends  AbstractModel {
          * @type {number || null}
          */
         this.Limit = null;
+
+        /**
+         * 工作空间 SerialId
+         * @type {string || null}
+         */
+        this.WorkSpaceId = null;
 
     }
 
@@ -2038,6 +2560,7 @@ class DescribeJobsRequest extends  AbstractModel {
         }
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+        this.WorkSpaceId = 'WorkSpaceId' in params ? params.WorkSpaceId : null;
 
     }
 }
@@ -2100,7 +2623,7 @@ class JobV1 extends  AbstractModel {
         this.Name = null;
 
         /**
-         * 作业类型
+         * 作业类型，1：sql作业，2：Jar作业
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
@@ -2239,6 +2762,34 @@ class JobV1 extends  AbstractModel {
          */
         this.ClusterStatus = null;
 
+        /**
+         * 细粒度下的运行的CU数量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.RunningCu = null;
+
+        /**
+         * 作业运行的 Flink 版本
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.FlinkVersion = null;
+
+        /**
+         * 工作空间 SerialId
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.WorkSpaceId = null;
+
+        /**
+         * 工作空间名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.WorkSpaceName = null;
+
     }
 
     /**
@@ -2275,6 +2826,10 @@ class JobV1 extends  AbstractModel {
         this.WebUIUrl = 'WebUIUrl' in params ? params.WebUIUrl : null;
         this.SchedulerType = 'SchedulerType' in params ? params.SchedulerType : null;
         this.ClusterStatus = 'ClusterStatus' in params ? params.ClusterStatus : null;
+        this.RunningCu = 'RunningCu' in params ? params.RunningCu : null;
+        this.FlinkVersion = 'FlinkVersion' in params ? params.FlinkVersion : null;
+        this.WorkSpaceId = 'WorkSpaceId' in params ? params.WorkSpaceId : null;
+        this.WorkSpaceName = 'WorkSpaceName' in params ? params.WorkSpaceName : null;
 
     }
 }
@@ -2382,6 +2937,41 @@ class JobConfig extends  AbstractModel {
          */
         this.MaxParallelism = null;
 
+        /**
+         * JobManager规格
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.JobManagerSpec = null;
+
+        /**
+         * TaskManager规格
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TaskManagerSpec = null;
+
+        /**
+         * CLS日志集ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ClsLogsetId = null;
+
+        /**
+         * CLS日志主题ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ClsTopicId = null;
+
+        /**
+         * pyflink作业运行的python版本
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.PythonVersion = null;
+
     }
 
     /**
@@ -2421,6 +3011,11 @@ class JobConfig extends  AbstractModel {
         this.COSBucket = 'COSBucket' in params ? params.COSBucket : null;
         this.LogCollect = 'LogCollect' in params ? params.LogCollect : null;
         this.MaxParallelism = 'MaxParallelism' in params ? params.MaxParallelism : null;
+        this.JobManagerSpec = 'JobManagerSpec' in params ? params.JobManagerSpec : null;
+        this.TaskManagerSpec = 'TaskManagerSpec' in params ? params.TaskManagerSpec : null;
+        this.ClsLogsetId = 'ClsLogsetId' in params ? params.ClsLogsetId : null;
+        this.ClsTopicId = 'ClsTopicId' in params ? params.ClsTopicId : null;
+        this.PythonVersion = 'PythonVersion' in params ? params.PythonVersion : null;
 
     }
 }
@@ -2469,6 +3064,12 @@ class DescribeResourceConfigsRequest extends  AbstractModel {
          */
         this.JobId = null;
 
+        /**
+         * 工作空间 SerialId
+         * @type {string || null}
+         */
+        this.WorkSpaceId = null;
+
     }
 
     /**
@@ -2484,6 +3085,7 @@ class DescribeResourceConfigsRequest extends  AbstractModel {
         this.ResourceConfigVersions = 'ResourceConfigVersions' in params ? params.ResourceConfigVersions : null;
         this.JobConfigVersion = 'JobConfigVersion' in params ? params.JobConfigVersion : null;
         this.JobId = 'JobId' in params ? params.JobId : null;
+        this.WorkSpaceId = 'WorkSpaceId' in params ? params.WorkSpaceId : null;
 
     }
 }
@@ -2491,6 +3093,7 @@ class DescribeResourceConfigsRequest extends  AbstractModel {
 module.exports = {
     DescribeResourceConfigsResponse: DescribeResourceConfigsResponse,
     CreateResourceRequest: CreateResourceRequest,
+    CheckSavepointRequest: CheckSavepointRequest,
     CreateJobRequest: CreateJobRequest,
     ResourceRefDetail: ResourceRefDetail,
     StopJobsRequest: StopJobsRequest,
@@ -2504,6 +3107,7 @@ module.exports = {
     CreateResourceConfigRequest: CreateResourceConfigRequest,
     Property: Property,
     DeleteTableConfigRequest: DeleteTableConfigRequest,
+    Savepoint: Savepoint,
     SystemResourceItem: SystemResourceItem,
     DescribeResourceRelatedJobsRequest: DescribeResourceRelatedJobsRequest,
     DeleteResourcesResponse: DeleteResourcesResponse,
@@ -2511,7 +3115,10 @@ module.exports = {
     ResourceConfigItem: ResourceConfigItem,
     DescribeResourcesRequest: DescribeResourcesRequest,
     ResourceLocParam: ResourceLocParam,
+    DescribeJobSavepointRequest: DescribeJobSavepointRequest,
+    CheckSavepointResponse: CheckSavepointResponse,
     DeleteResourceConfigsRequest: DeleteResourceConfigsRequest,
+    DescribeJobSavepointResponse: DescribeJobSavepointResponse,
     RunJobsResponse: RunJobsResponse,
     Filter: Filter,
     DeleteResourcesRequest: DeleteResourcesRequest,

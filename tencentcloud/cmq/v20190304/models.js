@@ -25,25 +25,18 @@ class TopicSet extends  AbstractModel {
         super();
 
         /**
+         * 当前该主题中消息数目（消息堆积数）。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.MsgCount = null;
+
+        /**
          * 主题的 ID。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.TopicId = null;
-
-        /**
-         * 主题名称。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.TopicName = null;
-
-        /**
-         * 消息在主题中最长存活时间，从发送到该主题开始经过此参数指定的时间后，不论消息是否被成功推送给用户都将被删除，单位为秒。固定为一天（86400秒），该属性不能修改。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.MsgRetentionSeconds = null;
 
         /**
          * 消息最大长度。取值范围1024 - 1048576Byte（即1 - 1024K），默认值为65536。
@@ -53,11 +46,25 @@ class TopicSet extends  AbstractModel {
         this.MaxMsgSize = null;
 
         /**
-         * 每秒钟发布消息的条数。
+         * 消息轨迹。true表示开启，false表示不开启。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.Trace = null;
+
+        /**
+         * 关联的标签。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * 创建者 Uin，CAM 鉴权 resource 由该字段组合而成。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
-        this.Qps = null;
+        this.CreateUin = null;
 
         /**
          * 描述用户创建订阅时选择的过滤策略：
@@ -69,11 +76,11 @@ FilterType = 2表示用户使用 BindingKey 过滤。
         this.FilterType = null;
 
         /**
-         * 主题的创建时间。返回 Unix 时间戳，精确到秒。
+         * 主题名称。
 注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
+         * @type {string || null}
          */
-        this.CreateTime = null;
+        this.TopicName = null;
 
         /**
          * 最后一次修改主题属性的时间。返回 Unix 时间戳，精确到秒。
@@ -83,32 +90,32 @@ FilterType = 2表示用户使用 BindingKey 过滤。
         this.LastModifyTime = null;
 
         /**
-         * 当前该主题中消息数目（消息堆积数）。
+         * 消息在主题中最长存活时间，从发送到该主题开始经过此参数指定的时间后，不论消息是否被成功推送给用户都将被删除，单位为秒。固定为一天（86400秒），该属性不能修改。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
-        this.MsgCount = null;
+        this.MsgRetentionSeconds = null;
 
         /**
-         * 创建者 Uin，CAM 鉴权 resource 由该字段组合而成。
+         * 每秒钟发布消息的条数。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
-        this.CreateUin = null;
+        this.Qps = null;
 
         /**
-         * 关联的标签。
+         * 主题的创建时间。返回 Unix 时间戳，精确到秒。
 注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<Tag> || null}
+         * @type {number || null}
          */
-        this.Tags = null;
+        this.CreateTime = null;
 
         /**
-         * 消息轨迹。true表示开启，false表示不开启。
+         * 是否迁移到新版本。0 表示未迁移，1 表示迁移中，2 表示已经迁移完毕，3 表示回切状态，曾经迁移过，4 未知状态。
 注意：此字段可能返回 null，表示取不到有效值。
-         * @type {boolean || null}
+         * @type {number || null}
          */
-        this.Trace = null;
+        this.Migrate = null;
 
     }
 
@@ -119,16 +126,10 @@ FilterType = 2表示用户使用 BindingKey 过滤。
         if (!params) {
             return;
         }
-        this.TopicId = 'TopicId' in params ? params.TopicId : null;
-        this.TopicName = 'TopicName' in params ? params.TopicName : null;
-        this.MsgRetentionSeconds = 'MsgRetentionSeconds' in params ? params.MsgRetentionSeconds : null;
-        this.MaxMsgSize = 'MaxMsgSize' in params ? params.MaxMsgSize : null;
-        this.Qps = 'Qps' in params ? params.Qps : null;
-        this.FilterType = 'FilterType' in params ? params.FilterType : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.LastModifyTime = 'LastModifyTime' in params ? params.LastModifyTime : null;
         this.MsgCount = 'MsgCount' in params ? params.MsgCount : null;
-        this.CreateUin = 'CreateUin' in params ? params.CreateUin : null;
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+        this.MaxMsgSize = 'MaxMsgSize' in params ? params.MaxMsgSize : null;
+        this.Trace = 'Trace' in params ? params.Trace : null;
 
         if (params.Tags) {
             this.Tags = new Array();
@@ -138,7 +139,14 @@ FilterType = 2表示用户使用 BindingKey 过滤。
                 this.Tags.push(obj);
             }
         }
-        this.Trace = 'Trace' in params ? params.Trace : null;
+        this.CreateUin = 'CreateUin' in params ? params.CreateUin : null;
+        this.FilterType = 'FilterType' in params ? params.FilterType : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.LastModifyTime = 'LastModifyTime' in params ? params.LastModifyTime : null;
+        this.MsgRetentionSeconds = 'MsgRetentionSeconds' in params ? params.MsgRetentionSeconds : null;
+        this.Qps = 'Qps' in params ? params.Qps : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.Migrate = 'Migrate' in params ? params.Migrate : null;
 
     }
 }
@@ -418,19 +426,12 @@ class ModifySubscriptionAttributeResponse extends  AbstractModel {
 }
 
 /**
- * DeadLetterPolicy
+ * 死信队列策略
  * @class
  */
 class DeadLetterPolicy extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * 死信队列名字。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.DeadLetterQueueName = null;
 
         /**
          * 死信队列。
@@ -440,11 +441,11 @@ class DeadLetterPolicy extends  AbstractModel {
         this.DeadLetterQueue = null;
 
         /**
-         * 死信队列策略。
+         * 死信队列名字。
 注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
+         * @type {string || null}
          */
-        this.Policy = null;
+        this.DeadLetterQueueName = null;
 
         /**
          * 最大未消费过期时间。Policy为1时必选。范围300-43200，单位秒，需要小于消息最大保留时间MsgRetentionSeconds。
@@ -452,6 +453,13 @@ class DeadLetterPolicy extends  AbstractModel {
          * @type {number || null}
          */
         this.MaxTimeToLive = null;
+
+        /**
+         * 死信队列策略。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Policy = null;
 
         /**
          * 最大接收次数。
@@ -469,10 +477,10 @@ class DeadLetterPolicy extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DeadLetterQueueName = 'DeadLetterQueueName' in params ? params.DeadLetterQueueName : null;
         this.DeadLetterQueue = 'DeadLetterQueue' in params ? params.DeadLetterQueue : null;
-        this.Policy = 'Policy' in params ? params.Policy : null;
+        this.DeadLetterQueueName = 'DeadLetterQueueName' in params ? params.DeadLetterQueueName : null;
         this.MaxTimeToLive = 'MaxTimeToLive' in params ? params.MaxTimeToLive : null;
+        this.Policy = 'Policy' in params ? params.Policy : null;
         this.MaxReceiveCount = 'MaxReceiveCount' in params ? params.MaxReceiveCount : null;
 
     }
@@ -789,7 +797,7 @@ class UnbindDeadLetterResponse extends  AbstractModel {
 }
 
 /**
- * TransactionPolicy
+ * 事务消息策略
  * @class
  */
 class TransactionPolicy extends  AbstractModel {
@@ -797,18 +805,18 @@ class TransactionPolicy extends  AbstractModel {
         super();
 
         /**
-         * 第一次回查时间。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.FirstQueryInterval = null;
-
-        /**
          * 最大查询次数。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.MaxQueryCount = null;
+
+        /**
+         * 第一次回查时间。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.FirstQueryInterval = null;
 
     }
 
@@ -819,8 +827,8 @@ class TransactionPolicy extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.FirstQueryInterval = 'FirstQueryInterval' in params ? params.FirstQueryInterval : null;
         this.MaxQueryCount = 'MaxQueryCount' in params ? params.MaxQueryCount : null;
+        this.FirstQueryInterval = 'FirstQueryInterval' in params ? params.FirstQueryInterval : null;
 
     }
 }
@@ -1370,24 +1378,59 @@ class QueueSet extends  AbstractModel {
         this.QueueId = null;
 
         /**
+         * 回溯队列的消息回溯时间最大值，取值范围0 - 43200秒，0表示不开启消息回溯。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.RewindSeconds = null;
+
+        /**
+         * 创建者Uin。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.CreateUin = null;
+
+        /**
+         * 最后一次修改队列属性的时间。返回 Unix 时间戳，精确到秒。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.LastModifyTime = null;
+
+        /**
+         * 消息可见性超时。取值范围1 - 43200秒（即12小时内），默认值30。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.VisibilityTimeout = null;
+
+        /**
          * 消息队列名字。
          * @type {string || null}
          */
         this.QueueName = null;
 
         /**
-         * 每秒钟生产消息条数的限制，消费消息的大小是该值的1.1倍。
+         * 消息轨迹。true表示开启，false表示不开启。
 注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
+         * @type {boolean || null}
          */
-        this.Qps = null;
+        this.Trace = null;
 
         /**
-         * 带宽限制。
+         * 关联的标签。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * 已调用 DelMsg 接口删除，但还在回溯保留时间内的消息数量。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
-        this.Bps = null;
+        this.RewindMsgNum = null;
 
         /**
          * 飞行消息最大保留时间。
@@ -1395,6 +1438,27 @@ class QueueSet extends  AbstractModel {
          * @type {number || null}
          */
         this.MaxDelaySeconds = null;
+
+        /**
+         * 事务消息策略。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {TransactionPolicy || null}
+         */
+        this.TransactionPolicy = null;
+
+        /**
+         * 消息保留周期。取值范围60-1296000秒（1min-15天），默认值345600秒（4 天）。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.MsgRetentionSeconds = null;
+
+        /**
+         * 延迟消息数。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.DelayMsgNum = null;
 
         /**
          * 最大堆积消息数。取值范围在公测期间为 1,000,000 - 10,000,000，正式上线后范围可达到 1000,000-1000,000,000。默认取值在公测期间为 10,000,000，正式上线后为 100,000,000。
@@ -1411,53 +1475,11 @@ class QueueSet extends  AbstractModel {
         this.PollingWaitSeconds = null;
 
         /**
-         * 消息保留周期。取值范围60-1296000秒（1min-15天），默认值345600秒（4 天）。
+         * 带宽限制。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
-        this.MsgRetentionSeconds = null;
-
-        /**
-         * 消息可见性超时。取值范围1 - 43200秒（即12小时内），默认值30。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.VisibilityTimeout = null;
-
-        /**
-         * 消息最大长度。取值范围1024 - 1048576 Byte（即1K - 1024K），默认值65536。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.MaxMsgSize = null;
-
-        /**
-         * 回溯队列的消息回溯时间最大值，取值范围0 - 43200秒，0表示不开启消息回溯。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.RewindSeconds = null;
-
-        /**
-         * 队列的创建时间。返回 Unix 时间戳，精确到秒。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * 最后一次修改队列属性的时间。返回 Unix 时间戳，精确到秒。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.LastModifyTime = null;
-
-        /**
-         * 在队列中处于 Active 状态（不处于被消费状态）的消息总数，为近似值。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.ActiveMsgNum = null;
+        this.Bps = null;
 
         /**
          * 在队列中处于 Inactive 状态（正处于被消费状态）的消息总数，为近似值。
@@ -1467,18 +1489,25 @@ class QueueSet extends  AbstractModel {
         this.InactiveMsgNum = null;
 
         /**
-         * 延迟消息数。
+         * 死信队列策略。
 注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
+         * @type {DeadLetterPolicy || null}
          */
-        this.DelayMsgNum = null;
+        this.DeadLetterPolicy = null;
 
         /**
-         * 已调用 DelMsg 接口删除，但还在回溯保留时间内的消息数量。
+         * 在队列中处于 Active 状态（不处于被消费状态）的消息总数，为近似值。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
-        this.RewindMsgNum = null;
+        this.ActiveMsgNum = null;
+
+        /**
+         * 消息最大长度。取值范围1024 - 1048576 Byte（即1K - 1024K），默认值65536。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.MaxMsgSize = null;
 
         /**
          * 消息最小未消费时间，单位为秒。
@@ -1488,13 +1517,6 @@ class QueueSet extends  AbstractModel {
         this.MinMsgTime = null;
 
         /**
-         * 事务消息队列。true表示是事务消息，false表示不是事务消息。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {boolean || null}
-         */
-        this.Transaction = null;
-
-        /**
          * 死信队列。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<DeadLetterSource> || null}
@@ -1502,39 +1524,32 @@ class QueueSet extends  AbstractModel {
         this.DeadLetterSource = null;
 
         /**
-         * 死信队列策略。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {DeadLetterPolicy || null}
-         */
-        this.DeadLetterPolicy = null;
-
-        /**
-         * 事务消息策略。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {TransactionPolicy || null}
-         */
-        this.TransactionPolicy = null;
-
-        /**
-         * 创建者Uin。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.CreateUin = null;
-
-        /**
-         * 关联的标签。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<Tag> || null}
-         */
-        this.Tags = null;
-
-        /**
-         * 消息轨迹。true表示开启，false表示不开启。
+         * 事务消息队列。true表示是事务消息，false表示不是事务消息。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {boolean || null}
          */
-        this.Trace = null;
+        this.Transaction = null;
+
+        /**
+         * 每秒钟生产消息条数的限制，消费消息的大小是该值的1.1倍。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Qps = null;
+
+        /**
+         * 队列的创建时间。返回 Unix 时间戳，精确到秒。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 是否迁移到新版本。0 表示仅同步元数据，1 表示迁移中，2 表示已经迁移完毕，3 表示回切状态，曾经迁移过，4 未迁移。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Migrate = null;
 
     }
 
@@ -1546,46 +1561,12 @@ class QueueSet extends  AbstractModel {
             return;
         }
         this.QueueId = 'QueueId' in params ? params.QueueId : null;
-        this.QueueName = 'QueueName' in params ? params.QueueName : null;
-        this.Qps = 'Qps' in params ? params.Qps : null;
-        this.Bps = 'Bps' in params ? params.Bps : null;
-        this.MaxDelaySeconds = 'MaxDelaySeconds' in params ? params.MaxDelaySeconds : null;
-        this.MaxMsgHeapNum = 'MaxMsgHeapNum' in params ? params.MaxMsgHeapNum : null;
-        this.PollingWaitSeconds = 'PollingWaitSeconds' in params ? params.PollingWaitSeconds : null;
-        this.MsgRetentionSeconds = 'MsgRetentionSeconds' in params ? params.MsgRetentionSeconds : null;
-        this.VisibilityTimeout = 'VisibilityTimeout' in params ? params.VisibilityTimeout : null;
-        this.MaxMsgSize = 'MaxMsgSize' in params ? params.MaxMsgSize : null;
         this.RewindSeconds = 'RewindSeconds' in params ? params.RewindSeconds : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.LastModifyTime = 'LastModifyTime' in params ? params.LastModifyTime : null;
-        this.ActiveMsgNum = 'ActiveMsgNum' in params ? params.ActiveMsgNum : null;
-        this.InactiveMsgNum = 'InactiveMsgNum' in params ? params.InactiveMsgNum : null;
-        this.DelayMsgNum = 'DelayMsgNum' in params ? params.DelayMsgNum : null;
-        this.RewindMsgNum = 'RewindMsgNum' in params ? params.RewindMsgNum : null;
-        this.MinMsgTime = 'MinMsgTime' in params ? params.MinMsgTime : null;
-        this.Transaction = 'Transaction' in params ? params.Transaction : null;
-
-        if (params.DeadLetterSource) {
-            this.DeadLetterSource = new Array();
-            for (let z in params.DeadLetterSource) {
-                let obj = new DeadLetterSource();
-                obj.deserialize(params.DeadLetterSource[z]);
-                this.DeadLetterSource.push(obj);
-            }
-        }
-
-        if (params.DeadLetterPolicy) {
-            let obj = new DeadLetterPolicy();
-            obj.deserialize(params.DeadLetterPolicy)
-            this.DeadLetterPolicy = obj;
-        }
-
-        if (params.TransactionPolicy) {
-            let obj = new TransactionPolicy();
-            obj.deserialize(params.TransactionPolicy)
-            this.TransactionPolicy = obj;
-        }
         this.CreateUin = 'CreateUin' in params ? params.CreateUin : null;
+        this.LastModifyTime = 'LastModifyTime' in params ? params.LastModifyTime : null;
+        this.VisibilityTimeout = 'VisibilityTimeout' in params ? params.VisibilityTimeout : null;
+        this.QueueName = 'QueueName' in params ? params.QueueName : null;
+        this.Trace = 'Trace' in params ? params.Trace : null;
 
         if (params.Tags) {
             this.Tags = new Array();
@@ -1595,7 +1576,42 @@ class QueueSet extends  AbstractModel {
                 this.Tags.push(obj);
             }
         }
-        this.Trace = 'Trace' in params ? params.Trace : null;
+        this.RewindMsgNum = 'RewindMsgNum' in params ? params.RewindMsgNum : null;
+        this.MaxDelaySeconds = 'MaxDelaySeconds' in params ? params.MaxDelaySeconds : null;
+
+        if (params.TransactionPolicy) {
+            let obj = new TransactionPolicy();
+            obj.deserialize(params.TransactionPolicy)
+            this.TransactionPolicy = obj;
+        }
+        this.MsgRetentionSeconds = 'MsgRetentionSeconds' in params ? params.MsgRetentionSeconds : null;
+        this.DelayMsgNum = 'DelayMsgNum' in params ? params.DelayMsgNum : null;
+        this.MaxMsgHeapNum = 'MaxMsgHeapNum' in params ? params.MaxMsgHeapNum : null;
+        this.PollingWaitSeconds = 'PollingWaitSeconds' in params ? params.PollingWaitSeconds : null;
+        this.Bps = 'Bps' in params ? params.Bps : null;
+        this.InactiveMsgNum = 'InactiveMsgNum' in params ? params.InactiveMsgNum : null;
+
+        if (params.DeadLetterPolicy) {
+            let obj = new DeadLetterPolicy();
+            obj.deserialize(params.DeadLetterPolicy)
+            this.DeadLetterPolicy = obj;
+        }
+        this.ActiveMsgNum = 'ActiveMsgNum' in params ? params.ActiveMsgNum : null;
+        this.MaxMsgSize = 'MaxMsgSize' in params ? params.MaxMsgSize : null;
+        this.MinMsgTime = 'MinMsgTime' in params ? params.MinMsgTime : null;
+
+        if (params.DeadLetterSource) {
+            this.DeadLetterSource = new Array();
+            for (let z in params.DeadLetterSource) {
+                let obj = new DeadLetterSource();
+                obj.deserialize(params.DeadLetterSource[z]);
+                this.DeadLetterSource.push(obj);
+            }
+        }
+        this.Transaction = 'Transaction' in params ? params.Transaction : null;
+        this.Qps = 'Qps' in params ? params.Qps : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.Migrate = 'Migrate' in params ? params.Migrate : null;
 
     }
 }
@@ -1821,7 +1837,7 @@ class Tag extends  AbstractModel {
 }
 
 /**
- * DeadLetterSource
+ * 死信源队列信息
  * @class
  */
 class DeadLetterSource extends  AbstractModel {

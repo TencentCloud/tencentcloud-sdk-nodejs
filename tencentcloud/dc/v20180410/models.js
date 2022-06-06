@@ -1275,7 +1275,7 @@ REJECTED:拒绝
         this.CustomerIPv6Address = null;
 
         /**
-         * 专线通道是否支持巨帧。1 支持，0 不支持
+         * 专用通道是否支持巨帧。1 支持，0 不支持
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
@@ -1524,6 +1524,30 @@ STATIC：静态
          */
         this.CloudAttachId = null;
 
+        /**
+         * 是否开启BFD
+         * @type {number || null}
+         */
+        this.BfdEnable = null;
+
+        /**
+         * 是否开启NQA
+         * @type {number || null}
+         */
+        this.NqaEnable = null;
+
+        /**
+         * BFD配置信息
+         * @type {BFDInfo || null}
+         */
+        this.BfdInfo = null;
+
+        /**
+         * NQA配置信息
+         * @type {NQAInfo || null}
+         */
+        this.NqaInfo = null;
+
     }
 
     /**
@@ -1562,6 +1586,20 @@ STATIC：静态
         this.CustomerAddress = 'CustomerAddress' in params ? params.CustomerAddress : null;
         this.TencentBackupAddress = 'TencentBackupAddress' in params ? params.TencentBackupAddress : null;
         this.CloudAttachId = 'CloudAttachId' in params ? params.CloudAttachId : null;
+        this.BfdEnable = 'BfdEnable' in params ? params.BfdEnable : null;
+        this.NqaEnable = 'NqaEnable' in params ? params.NqaEnable : null;
+
+        if (params.BfdInfo) {
+            let obj = new BFDInfo();
+            obj.deserialize(params.BfdInfo)
+            this.BfdInfo = obj;
+        }
+
+        if (params.NqaInfo) {
+            let obj = new NQAInfo();
+            obj.deserialize(params.NqaInfo)
+            this.NqaInfo = obj;
+        }
 
     }
 }
@@ -2955,6 +2993,13 @@ class AccessPoint extends  AbstractModel {
          */
         this.Area = null;
 
+        /**
+         * 接入点类型。VXLAN/QCPL/QCAR
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.AccessPointType = null;
+
     }
 
     /**
@@ -2979,6 +3024,7 @@ class AccessPoint extends  AbstractModel {
         }
         this.City = 'City' in params ? params.City : null;
         this.Area = 'Area' in params ? params.Area : null;
+        this.AccessPointType = 'AccessPointType' in params ? params.AccessPointType : null;
 
     }
 }

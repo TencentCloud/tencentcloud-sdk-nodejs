@@ -18,14 +18,19 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const AssumeRoleWithSAMLResponse = models.AssumeRoleWithSAMLResponse;
 const ApiKey = models.ApiKey;
-const AssumeRoleWithSAMLRequest = models.AssumeRoleWithSAMLRequest;
+const AssumeRoleWithWebIdentityRequest = models.AssumeRoleWithWebIdentityRequest;
+const AssumeRoleWithWebIdentityResponse = models.AssumeRoleWithWebIdentityResponse;
 const GetFederationTokenResponse = models.GetFederationTokenResponse;
 const QueryApiKeyResponse = models.QueryApiKeyResponse;
 const AssumeRoleResponse = models.AssumeRoleResponse;
 const QueryApiKeyRequest = models.QueryApiKeyRequest;
 const GetFederationTokenRequest = models.GetFederationTokenRequest;
+const Tag = models.Tag;
+const GetCallerIdentityResponse = models.GetCallerIdentityResponse;
 const Credentials = models.Credentials;
 const AssumeRoleRequest = models.AssumeRoleRequest;
+const GetCallerIdentityRequest = models.GetCallerIdentityRequest;
+const AssumeRoleWithSAMLRequest = models.AssumeRoleWithSAMLRequest;
 
 
 /**
@@ -61,17 +66,6 @@ class StsClient extends AbstractClient {
     }
 
     /**
-     * 本接口（AssumeRoleWithSAML）用于根据 SAML 断言申请角色临时凭证。
-     * @param {AssumeRoleWithSAMLRequest} req
-     * @param {function(string, AssumeRoleWithSAMLResponse):void} cb
-     * @public
-     */
-    AssumeRoleWithSAML(req, cb) {
-        let resp = new AssumeRoleWithSAMLResponse();
-        this.request("AssumeRoleWithSAML", req, resp, cb);
-    }
-
-    /**
      * 申请扮演角色
      * @param {AssumeRoleRequest} req
      * @param {function(string, AssumeRoleResponse):void} cb
@@ -80,6 +74,40 @@ class StsClient extends AbstractClient {
     AssumeRole(req, cb) {
         let resp = new AssumeRoleResponse();
         this.request("AssumeRole", req, resp, cb);
+    }
+
+    /**
+     * 申请OIDC角色临时密钥
+     * @param {AssumeRoleWithWebIdentityRequest} req
+     * @param {function(string, AssumeRoleWithWebIdentityResponse):void} cb
+     * @public
+     */
+    AssumeRoleWithWebIdentity(req, cb) {
+        let resp = new AssumeRoleWithWebIdentityResponse();
+        this.request("AssumeRoleWithWebIdentity", req, resp, cb);
+    }
+
+    /**
+     * 获取当前调用者的身份信息。
+接口支持主账号，子账号长期密钥以及AssumeRole，GetFederationToken生成的临时凭据的身份获取。
+     * @param {GetCallerIdentityRequest} req
+     * @param {function(string, GetCallerIdentityResponse):void} cb
+     * @public
+     */
+    GetCallerIdentity(req, cb) {
+        let resp = new GetCallerIdentityResponse();
+        this.request("GetCallerIdentity", req, resp, cb);
+    }
+
+    /**
+     * 本接口（AssumeRoleWithSAML）用于根据 SAML 断言申请角色临时凭证。
+     * @param {AssumeRoleWithSAMLRequest} req
+     * @param {function(string, AssumeRoleWithSAMLResponse):void} cb
+     * @public
+     */
+    AssumeRoleWithSAML(req, cb) {
+        let resp = new AssumeRoleWithSAMLResponse();
+        this.request("AssumeRoleWithSAML", req, resp, cb);
     }
 
 

@@ -155,7 +155,7 @@ class CaptchaClient extends AbstractClient {
     }
 
     /**
-     * 核查验证码小程序插件票据结果
+     * 核查验证码票据结果(小程序插件) 
      * @param {DescribeCaptchaMiniResultRequest} req
      * @param {function(string, DescribeCaptchaMiniResultResponse):void} cb
      * @public
@@ -199,7 +199,7 @@ class CaptchaClient extends AbstractClient {
     }
 
     /**
-     * 核查验证码票据结果
+     * 核查验证码票据结果(Web及APP)
      * @param {DescribeCaptchaResultRequest} req
      * @param {function(string, DescribeCaptchaResultResponse):void} cb
      * @public

@@ -17,6 +17,7 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const ChargePrepaid = models.ChargePrepaid;
+const InquiryPriceTerminateInstancesResponse = models.InquiryPriceTerminateInstancesResponse;
 const LocalDiskType = models.LocalDiskType;
 const AssociateInstancesKeyPairsResponse = models.AssociateInstancesKeyPairsResponse;
 const RenewInstancesRequest = models.RenewInstancesRequest;
@@ -30,46 +31,55 @@ const TerminateInstancesResponse = models.TerminateInstancesResponse;
 const ModifyInstancesChargeTypeResponse = models.ModifyInstancesChargeTypeResponse;
 const AccountQuota = models.AccountQuota;
 const InquiryPriceResetInstancesInternetMaxBandwidthResponse = models.InquiryPriceResetInstancesInternetMaxBandwidthResponse;
+const InternetBandwidthConfig = models.InternetBandwidthConfig;
 const ModifyKeyPairAttributeRequest = models.ModifyKeyPairAttributeRequest;
 const AssociateSecurityGroupsRequest = models.AssociateSecurityGroupsRequest;
 const PostPaidQuota = models.PostPaidQuota;
 const ResetInstancesTypeRequest = models.ResetInstancesTypeRequest;
 const InquiryPriceResetInstanceRequest = models.InquiryPriceResetInstanceRequest;
-const ModifyImageSharePermissionResponse = models.ModifyImageSharePermissionResponse;
+const DeleteLaunchTemplateVersionsRequest = models.DeleteLaunchTemplateVersionsRequest;
 const DeleteImagesRequest = models.DeleteImagesRequest;
+const DeleteLaunchTemplateRequest = models.DeleteLaunchTemplateRequest;
 const DescribeInstancesResponse = models.DescribeInstancesResponse;
 const DescribeHostsResponse = models.DescribeHostsResponse;
 const DeleteKeyPairsRequest = models.DeleteKeyPairsRequest;
 const SystemDisk = models.SystemDisk;
 const ResetInstanceRequest = models.ResetInstanceRequest;
+const LaunchTemplate = models.LaunchTemplate;
 const InstanceTypeConfig = models.InstanceTypeConfig;
 const AllocateHostsRequest = models.AllocateHostsRequest;
 const LoginSettings = models.LoginSettings;
 const DescribeRegionsResponse = models.DescribeRegionsResponse;
 const PurchaseReservedInstancesOfferingRequest = models.PurchaseReservedInstancesOfferingRequest;
 const RebootInstancesRequest = models.RebootInstancesRequest;
+const InstanceTypeConfigStatus = models.InstanceTypeConfigStatus;
 const AssociateInstancesKeyPairsRequest = models.AssociateInstancesKeyPairsRequest;
+const DeleteLaunchTemplateResponse = models.DeleteLaunchTemplateResponse;
 const ImportKeyPairResponse = models.ImportKeyPairResponse;
 const DescribeInstancesStatusResponse = models.DescribeInstancesStatusResponse;
 const ZoneInfo = models.ZoneInfo;
-const DescribeInstanceTypeConfigsRequest = models.DescribeInstanceTypeConfigsRequest;
+const ModifyLaunchTemplateDefaultVersionResponse = models.ModifyLaunchTemplateDefaultVersionResponse;
+const LaunchTemplateVersionInfo = models.LaunchTemplateVersionInfo;
+const InquiryPriceModifyInstancesChargeTypeResponse = models.InquiryPriceModifyInstancesChargeTypeResponse;
 const DescribeKeyPairsResponse = models.DescribeKeyPairsResponse;
 const ResetInstancesPasswordRequest = models.ResetInstancesPasswordRequest;
 const InternetChargeTypeConfig = models.InternetChargeTypeConfig;
 const DescribeImagesResponse = models.DescribeImagesResponse;
 const ModifyInstancesVpcAttributeResponse = models.ModifyInstancesVpcAttributeResponse;
-const InquiryPriceResetInstancesTypeRequest = models.InquiryPriceResetInstancesTypeRequest;
+const DescribeLaunchTemplatesResponse = models.DescribeLaunchTemplatesResponse;
 const DescribeInstancesOperationLimitRequest = models.DescribeInstancesOperationLimitRequest;
 const ModifyInstancesChargeTypeRequest = models.ModifyInstancesChargeTypeRequest;
 const DescribeInstanceVncUrlRequest = models.DescribeInstanceVncUrlRequest;
+const StopInstancesResponse = models.StopInstancesResponse;
 const ModifyImageSharePermissionRequest = models.ModifyImageSharePermissionRequest;
 const DisassociateInstancesKeyPairsResponse = models.DisassociateInstancesKeyPairsResponse;
+const DescribeLaunchTemplateVersionsRequest = models.DescribeLaunchTemplateVersionsRequest;
 const InquiryPriceResizeInstanceDisksRequest = models.InquiryPriceResizeInstanceDisksRequest;
 const RunInstancesResponse = models.RunInstancesResponse;
 const ReservedInstancePrice = models.ReservedInstancePrice;
 const DisasterRecoverGroupQuota = models.DisasterRecoverGroupQuota;
 const ModifyInstancesAttributeResponse = models.ModifyInstancesAttributeResponse;
-const InquiryPriceModifyInstancesChargeTypeResponse = models.InquiryPriceModifyInstancesChargeTypeResponse;
+const ModifyImageSharePermissionResponse = models.ModifyImageSharePermissionResponse;
 const DescribeInstancesOperationLimitResponse = models.DescribeInstancesOperationLimitResponse;
 const SyncImagesResponse = models.SyncImagesResponse;
 const DescribeZoneInstanceConfigInfosResponse = models.DescribeZoneInstanceConfigInfosResponse;
@@ -78,7 +88,9 @@ const RenewHostsRequest = models.RenewHostsRequest;
 const DescribeZonesRequest = models.DescribeZonesRequest;
 const StartInstancesRequest = models.StartInstancesRequest;
 const Tag = models.Tag;
+const ProgramFpgaImageResponse = models.ProgramFpgaImageResponse;
 const DescribeInstanceInternetBandwidthConfigsResponse = models.DescribeInstanceInternetBandwidthConfigsResponse;
+const RunSecurityServiceEnabled = models.RunSecurityServiceEnabled;
 const Placement = models.Placement;
 const DescribeDisasterRecoverGroupsRequest = models.DescribeDisasterRecoverGroupsRequest;
 const ModifyKeyPairAttributeResponse = models.ModifyKeyPairAttributeResponse;
@@ -90,9 +102,10 @@ const SpotPaidQuota = models.SpotPaidQuota;
 const ResetInstancesInternetMaxBandwidthResponse = models.ResetInstancesInternetMaxBandwidthResponse;
 const DescribeInstanceFamilyConfigsResponse = models.DescribeInstanceFamilyConfigsResponse;
 const CreateImageResponse = models.CreateImageResponse;
-const StopInstancesResponse = models.StopInstancesResponse;
+const DescribeInstancesModificationRequest = models.DescribeInstancesModificationRequest;
 const InstanceMarketOptionsRequest = models.InstanceMarketOptionsRequest;
 const DescribeImageSharePermissionResponse = models.DescribeImageSharePermissionResponse;
+const DeleteLaunchTemplateVersionsResponse = models.DeleteLaunchTemplateVersionsResponse;
 const ResetInstancesPasswordResponse = models.ResetInstancesPasswordResponse;
 const InquiryPriceRunInstancesRequest = models.InquiryPriceRunInstancesRequest;
 const Image = models.Image;
@@ -104,16 +117,18 @@ const DescribeReservedInstancesResponse = models.DescribeReservedInstancesRespon
 const DescribeImportImageOsResponse = models.DescribeImportImageOsResponse;
 const InquirePricePurchaseReservedInstancesOfferingRequest = models.InquirePricePurchaseReservedInstancesOfferingRequest;
 const PrePaidQuota = models.PrePaidQuota;
-const DataDisk = models.DataDisk;
+const DescribeInstancesModificationResponse = models.DescribeInstancesModificationResponse;
 const DescribeKeyPairsRequest = models.DescribeKeyPairsRequest;
 const OperationCountLimit = models.OperationCountLimit;
 const ReservedInstanceConfigInfoItem = models.ReservedInstanceConfigInfoItem;
+const LaunchTemplateVersionData = models.LaunchTemplateVersionData;
 const DeleteDisasterRecoverGroupsResponse = models.DeleteDisasterRecoverGroupsResponse;
 const HostItem = models.HostItem;
 const Externals = models.Externals;
 const InquiryPriceModifyInstancesChargeTypeRequest = models.InquiryPriceModifyInstancesChargeTypeRequest;
 const CreateImageRequest = models.CreateImageRequest;
 const Instance = models.Instance;
+const CreateLaunchTemplateVersionRequest = models.CreateLaunchTemplateVersionRequest;
 const EnhancedService = models.EnhancedService;
 const CreateKeyPairResponse = models.CreateKeyPairResponse;
 const DescribeInstanceVncUrlResponse = models.DescribeInstanceVncUrlResponse;
@@ -121,25 +136,30 @@ const DescribeReservedInstancesOfferingsRequest = models.DescribeReservedInstanc
 const ReservedInstanceFamilyItem = models.ReservedInstanceFamilyItem;
 const ImageQuota = models.ImageQuota;
 const DescribeDisasterRecoverGroupsResponse = models.DescribeDisasterRecoverGroupsResponse;
-const RunSecurityServiceEnabled = models.RunSecurityServiceEnabled;
+const ExportImagesRequest = models.ExportImagesRequest;
 const ActionTimer = models.ActionTimer;
+const ModifyInstanceDiskTypeResponse = models.ModifyInstanceDiskTypeResponse;
+const CreateLaunchTemplateRequest = models.CreateLaunchTemplateRequest;
 const DescribeReservedInstancesConfigInfosRequest = models.DescribeReservedInstancesConfigInfosRequest;
 const TagSpecification = models.TagSpecification;
+const DescribeLaunchTemplatesRequest = models.DescribeLaunchTemplatesRequest;
 const ResetInstancesInternetMaxBandwidthRequest = models.ResetInstancesInternetMaxBandwidthRequest;
 const InstanceFamilyConfig = models.InstanceFamilyConfig;
 const AssociateSecurityGroupsResponse = models.AssociateSecurityGroupsResponse;
 const ImportImageRequest = models.ImportImageRequest;
 const SpotMarketOptions = models.SpotMarketOptions;
 const DescribeImportImageOsRequest = models.DescribeImportImageOsRequest;
+const CreateLaunchTemplateResponse = models.CreateLaunchTemplateResponse;
 const CreateKeyPairRequest = models.CreateKeyPairRequest;
 const InstanceStatus = models.InstanceStatus;
 const InquiryPriceRenewInstancesResponse = models.InquiryPriceRenewInstancesResponse;
 const AllocateHostsResponse = models.AllocateHostsResponse;
 const DescribeImageSharePermissionRequest = models.DescribeImageSharePermissionRequest;
-const DisasterRecoverGroup = models.DisasterRecoverGroup;
+const DescribeInstancesRequest = models.DescribeInstancesRequest;
 const InquiryPriceResetInstanceResponse = models.InquiryPriceResetInstanceResponse;
 const RunInstancesRequest = models.RunInstancesRequest;
 const Filter = models.Filter;
+const LaunchTemplateInfo = models.LaunchTemplateInfo;
 const InquiryPriceResetInstancesInternetMaxBandwidthRequest = models.InquiryPriceResetInstancesInternetMaxBandwidthRequest;
 const ModifyHostsAttributeResponse = models.ModifyHostsAttributeResponse;
 const DescribeDisasterRecoverGroupQuotaRequest = models.DescribeDisasterRecoverGroupQuotaRequest;
@@ -148,12 +168,15 @@ const ModifyInstancesVpcAttributeRequest = models.ModifyInstancesVpcAttributeReq
 const DescribeReservedInstancesRequest = models.DescribeReservedInstancesRequest;
 const DescribeInternetChargeTypeConfigsResponse = models.DescribeInternetChargeTypeConfigsResponse;
 const AccountQuotaOverview = models.AccountQuotaOverview;
+const RunAutomationServiceEnabled = models.RunAutomationServiceEnabled;
 const DescribeZoneInstanceConfigInfosRequest = models.DescribeZoneInstanceConfigInfosRequest;
 const DescribeZonesResponse = models.DescribeZonesResponse;
 const ItemPrice = models.ItemPrice;
 const InstanceTypeQuotaItem = models.InstanceTypeQuotaItem;
+const InquiryPriceTerminateInstancesRequest = models.InquiryPriceTerminateInstancesRequest;
 const ImageOsList = models.ImageOsList;
 const ReservedInstanceTypeItem = models.ReservedInstanceTypeItem;
+const ExportImagesResponse = models.ExportImagesResponse;
 const InquiryPriceRunInstancesResponse = models.InquiryPriceRunInstancesResponse;
 const DescribeHostsRequest = models.DescribeHostsRequest;
 const DescribeAccountQuotaRequest = models.DescribeAccountQuotaRequest;
@@ -169,13 +192,19 @@ const ModifyDisasterRecoverGroupAttributeRequest = models.ModifyDisasterRecoverG
 const ReservedInstancePriceItem = models.ReservedInstancePriceItem;
 const RebootInstancesResponse = models.RebootInstancesResponse;
 const CreateDisasterRecoverGroupResponse = models.CreateDisasterRecoverGroupResponse;
+const ModifyInstanceDiskTypeRequest = models.ModifyInstanceDiskTypeRequest;
 const InquiryPriceResetInstancesTypeResponse = models.InquiryPriceResetInstancesTypeResponse;
 const ReservedInstancesOffering = models.ReservedInstancesOffering;
+const CreateLaunchTemplateVersionResponse = models.CreateLaunchTemplateVersionResponse;
 const OsVersion = models.OsVersion;
 const ModifyImageAttributeResponse = models.ModifyImageAttributeResponse;
 const InquiryPriceRenewInstancesRequest = models.InquiryPriceRenewInstancesRequest;
-const DescribeInstancesRequest = models.DescribeInstancesRequest;
+const GPUInfo = models.GPUInfo;
+const InstanceRefund = models.InstanceRefund;
+const DescribeInstanceTypeConfigsRequest = models.DescribeInstanceTypeConfigsRequest;
 const RegionInfo = models.RegionInfo;
+const InquiryPriceResetInstancesTypeRequest = models.InquiryPriceResetInstancesTypeRequest;
+const ModifyLaunchTemplateDefaultVersionRequest = models.ModifyLaunchTemplateDefaultVersionRequest;
 const StopInstancesRequest = models.StopInstancesRequest;
 const DescribeInternetChargeTypeConfigsRequest = models.DescribeInternetChargeTypeConfigsRequest;
 const DescribeImagesRequest = models.DescribeImagesRequest;
@@ -188,11 +217,14 @@ const ImportKeyPairRequest = models.ImportKeyPairRequest;
 const KeyPair = models.KeyPair;
 const DescribeReservedInstancesOfferingsResponse = models.DescribeReservedInstancesOfferingsResponse;
 const RenewInstancesResponse = models.RenewInstancesResponse;
+const DescribeLaunchTemplateVersionsResponse = models.DescribeLaunchTemplateVersionsResponse;
 const DescribeAccountQuotaResponse = models.DescribeAccountQuotaResponse;
 const RunMonitorServiceEnabled = models.RunMonitorServiceEnabled;
 const ResetInstanceResponse = models.ResetInstanceResponse;
+const ProgramFpgaImageRequest = models.ProgramFpgaImageRequest;
+const DisasterRecoverGroup = models.DisasterRecoverGroup;
 const VirtualPrivateCloud = models.VirtualPrivateCloud;
-const InternetBandwidthConfig = models.InternetBandwidthConfig;
+const InstanceChargePrepaid = models.InstanceChargePrepaid;
 const ModifyDisasterRecoverGroupAttributeResponse = models.ModifyDisasterRecoverGroupAttributeResponse;
 const DescribeInstanceTypeConfigsResponse = models.DescribeInstanceTypeConfigsResponse;
 const ResizeInstanceDisksRequest = models.ResizeInstanceDisksRequest;
@@ -205,7 +237,7 @@ const RenewHostsResponse = models.RenewHostsResponse;
 const DisassociateSecurityGroupsResponse = models.DisassociateSecurityGroupsResponse;
 const Snapshot = models.Snapshot;
 const ModifyInstancesProjectResponse = models.ModifyInstancesProjectResponse;
-const InstanceChargePrepaid = models.InstanceChargePrepaid;
+const DataDisk = models.DataDisk;
 const Price = models.Price;
 
 
@@ -290,6 +322,17 @@ class CvmClient extends AbstractClient {
     }
 
     /**
+     * 本接口（ModifyLaunchTemplateDefaultVersion）用于修改实例启动模板默认版本。
+     * @param {ModifyLaunchTemplateDefaultVersionRequest} req
+     * @param {function(string, ModifyLaunchTemplateDefaultVersionResponse):void} cb
+     * @public
+     */
+    ModifyLaunchTemplateDefaultVersion(req, cb) {
+        let resp = new ModifyLaunchTemplateDefaultVersionResponse();
+        this.request("ModifyLaunchTemplateDefaultVersion", req, resp, cb);
+    }
+
+    /**
      * 本接口 (InquiryPriceModifyInstancesChargeType) 用于切换实例的计费模式询价。
 
 * 只支持从 `POSTPAID_BY_HOUR` 计费模式切换为`PREPAID`计费模式。
@@ -304,14 +347,14 @@ class CvmClient extends AbstractClient {
     }
 
     /**
-     * 本接口（ModifyHostsAttribute）用于修改CDH实例的属性，如实例名称和续费标记等。参数HostName和RenewFlag必须设置其中一个，但不能同时设置。
-     * @param {ModifyHostsAttributeRequest} req
-     * @param {function(string, ModifyHostsAttributeResponse):void} cb
+     * 本接口 (DescribeInstancesModification) 用于查询指定实例支持调整的机型配置。
+     * @param {DescribeInstancesModificationRequest} req
+     * @param {function(string, DescribeInstancesModificationResponse):void} cb
      * @public
      */
-    ModifyHostsAttribute(req, cb) {
-        let resp = new ModifyHostsAttributeResponse();
-        this.request("ModifyHostsAttribute", req, resp, cb);
+    DescribeInstancesModification(req, cb) {
+        let resp = new DescribeInstancesModificationResponse();
+        this.request("DescribeInstancesModification", req, resp, cb);
     }
 
     /**
@@ -357,7 +400,8 @@ class CvmClient extends AbstractClient {
     /**
      * 本接口 (ModifyInstancesAttribute) 用于修改实例的属性（目前只支持修改实例的名称和关联的安全组）。
 
-* “实例名称”仅为方便用户自己管理之用，腾讯云并不以此名称作为提交工单或是进行实例管理操作的依据。
+* 每次请求必须指定实例的一种属性用于修改。
+* “实例名称”仅为方便用户自己管理之用，腾讯云并不以此名称作为在线支持或是进行实例管理操作的依据。
 * 支持批量操作。每次请求批量实例的上限为100。
 * 修改关联安全组时，子机原来关联的安全组会被解绑。
 * 实例操作结果可以通过调用 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728#.E7.A4.BA.E4.BE.8B3-.E6.9F.A5.E8.AF.A2.E5.AE.9E.E4.BE.8B.E7.9A.84.E6.9C.80.E6.96.B0.E6.93.8D.E4.BD.9C.E6.83.85.E5.86.B5) 接口查询，如果实例的最新操作状态(LatestOperationState)为“SUCCESS”，则代表操作成功。
@@ -371,7 +415,7 @@ class CvmClient extends AbstractClient {
     }
 
     /**
-     * 本接口(DescribeRegions)用于查询地域信息。
+     * 本接口(DescribeRegions)用于查询地域信息。因平台策略原因，该接口暂时停止更新，为确保您正常调用，可切换至新链接：https://cloud.tencent.com/document/product/1278/55255。
      * @param {DescribeRegionsRequest} req
      * @param {function(string, DescribeRegionsResponse):void} cb
      * @public
@@ -397,6 +441,19 @@ class CvmClient extends AbstractClient {
     InquiryPriceResetInstancesInternetMaxBandwidth(req, cb) {
         let resp = new InquiryPriceResetInstancesInternetMaxBandwidthResponse();
         this.request("InquiryPriceResetInstancesInternetMaxBandwidth", req, resp, cb);
+    }
+
+    /**
+     * 本接口(ProgramFpgaImage)用于在线烧录由客户提供的FPGA镜像文件到指定实例的指定FPGA卡上。
+* 只支持对单个实例发起在线烧录FPGA镜像的操作。
+* 支持对单个实例的多块FPGA卡同时烧录FPGA镜像，DBDFs参数为空时，默认对指定实例的所有FPGA卡进行烧录。
+     * @param {ProgramFpgaImageRequest} req
+     * @param {function(string, ProgramFpgaImageResponse):void} cb
+     * @public
+     */
+    ProgramFpgaImage(req, cb) {
+        let resp = new ProgramFpgaImageResponse();
+        this.request("ProgramFpgaImage", req, resp, cb);
     }
 
     /**
@@ -472,18 +529,14 @@ class CvmClient extends AbstractClient {
     }
 
     /**
-     * 本接口 (ImportKeyPair) 用于导入密钥对。
-
-* 本接口的功能是将密钥对导入到用户账户，并不会自动绑定到实例。如需绑定可以使用[AssociasteInstancesKeyPair](https://cloud.tencent.com/document/api/213/9404)接口。
-* 需指定密钥对名称以及该密钥对的公钥文本。
-* 如果用户只有私钥，可以通过 `SSL` 工具将私钥转换成公钥后再导入。
-     * @param {ImportKeyPairRequest} req
-     * @param {function(string, ImportKeyPairResponse):void} cb
+     * 本接口（DescribeLaunchTemplateVersions）用于查询实例模板版本信息。
+     * @param {DescribeLaunchTemplateVersionsRequest} req
+     * @param {function(string, DescribeLaunchTemplateVersionsResponse):void} cb
      * @public
      */
-    ImportKeyPair(req, cb) {
-        let resp = new ImportKeyPairResponse();
-        this.request("ImportKeyPair", req, resp, cb);
+    DescribeLaunchTemplateVersions(req, cb) {
+        let resp = new DescribeLaunchTemplateVersionsResponse();
+        this.request("DescribeLaunchTemplateVersions", req, resp, cb);
     }
 
     /**
@@ -516,6 +569,20 @@ class CvmClient extends AbstractClient {
     }
 
     /**
+     * 本接口 (InquiryPriceTerminateInstances) 用于退还实例询价。
+
+* 查询退还实例可以返还的费用。
+* 支持批量操作，每次请求批量实例的上限为100。如果批量实例存在不允许操作的实例，操作会以特定[错误码](#4.-.E9.94.99.E8.AF.AF.E7.A0.81)返回。
+     * @param {InquiryPriceTerminateInstancesRequest} req
+     * @param {function(string, InquiryPriceTerminateInstancesResponse):void} cb
+     * @public
+     */
+    InquiryPriceTerminateInstances(req, cb) {
+        let resp = new InquiryPriceTerminateInstancesResponse();
+        this.request("InquiryPriceTerminateInstances", req, resp, cb);
+    }
+
+    /**
      * 本接口 (AssociateInstancesKeyPairs) 用于将密钥绑定到实例上。
 
 * 将密钥的公钥写入到实例的`SSH`配置当中，用户就可以通过该密钥的私钥来登录实例。
@@ -532,20 +599,40 @@ class CvmClient extends AbstractClient {
     }
 
     /**
-     * 本接口 (RunInstances) 用于创建一个或多个指定配置的实例。
+     * 本接口 ( DescribeInstanceVncUrl ) 用于查询实例管理终端地址，获取的地址可用于实例的 VNC 登录。
 
-* 实例创建成功后将自动开机启动，[实例状态](https://cloud.tencent.com/document/product/213/15753#InstanceStatus)变为“运行中”。
-* 预付费实例的购买会预先扣除本次实例购买所需金额，按小时后付费实例购买会预先冻结本次实例购买一小时内所需金额，在调用本接口前请确保账户余额充足。
-* 调用本接口创建实例，支持代金券自动抵扣（注意，代金券不可用于抵扣后付费冻结金额），详情请参考[代金券选用规则](https://cloud.tencent.com/document/product/555/7428)。
-* 本接口允许购买的实例数量遵循[CVM实例购买限制](https://cloud.tencent.com/document/product/213/2664)，所创建的实例和官网入口创建的实例共用配额。
-* 本接口为异步接口，当创建实例请求下发成功后会返回一个实例`ID`列表和一个`RequestId`，此时创建实例操作并未立即完成。在此期间实例的状态将会处于“PENDING”，实例创建结果可以通过调用 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728)  接口查询，如果实例状态(InstanceState)由“PENDING”变为“RUNNING”，则代表实例创建成功，“LAUNCH_FAILED”代表实例创建失败。
-     * @param {RunInstancesRequest} req
-     * @param {function(string, RunInstancesResponse):void} cb
+* 处于 `STOPPED` 状态的机器无法使用此功能。
+* 管理终端地址的有效期为 15 秒，调用接口成功后如果 15 秒内不使用该链接进行访问，管理终端地址自动失效，您需要重新查询。
+* 管理终端地址一旦被访问，将自动失效，您需要重新查询。
+* 如果连接断开，每分钟内重新连接的次数不能超过 30 次。
+获取到 `InstanceVncUrl` 后，您需要在链接 `https://img.qcloud.com/qcloud/app/active_vnc/index.html?` 末尾加上参数 `InstanceVncUrl=xxxx`。
+
+  - 参数 `InstanceVncUrl` ：调用接口成功后会返回的 `InstanceVncUrl` 的值。
+
+    最后组成的 URL 格式如下：
+
+```
+https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F%2Fbjvnc.qcloud.com%3A26789%2Fvnc%3Fs%3DaHpjWnRVMFNhYmxKdDM5MjRHNlVTSVQwajNUSW0wb2tBbmFtREFCTmFrcy8vUUNPMG0wSHZNOUUxRm5PMmUzWmFDcWlOdDJIbUJxSTZDL0RXcHZxYnZZMmRkWWZWcEZia2lyb09XMzdKNmM9
+```
+
+     * @param {DescribeInstanceVncUrlRequest} req
+     * @param {function(string, DescribeInstanceVncUrlResponse):void} cb
      * @public
      */
-    RunInstances(req, cb) {
-        let resp = new RunInstancesResponse();
-        this.request("RunInstances", req, resp, cb);
+    DescribeInstanceVncUrl(req, cb) {
+        let resp = new DescribeInstanceVncUrlResponse();
+        this.request("DescribeInstanceVncUrl", req, resp, cb);
+    }
+
+    /**
+     * 本接口（DeleteLaunchTemplate）用于删除一个实例启动模板。
+     * @param {DeleteLaunchTemplateRequest} req
+     * @param {function(string, DeleteLaunchTemplateResponse):void} cb
+     * @public
+     */
+    DeleteLaunchTemplate(req, cb) {
+        let resp = new DeleteLaunchTemplateResponse();
+        this.request("DeleteLaunchTemplate", req, resp, cb);
     }
 
     /**
@@ -665,6 +752,21 @@ class CvmClient extends AbstractClient {
     }
 
     /**
+     * 本接口 (RenewInstances) 用于续费包年包月实例。
+
+* 只支持操作包年包月实例。
+* 续费时请确保账户余额充足。可通过[`DescribeAccountBalance`](https://cloud.tencent.com/document/product/555/20253)接口查询账户余额。
+* 实例操作结果可以通过调用 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728#.E7.A4.BA.E4.BE.8B3-.E6.9F.A5.E8.AF.A2.E5.AE.9E.E4.BE.8B.E7.9A.84.E6.9C.80.E6.96.B0.E6.93.8D.E4.BD.9C.E6.83.85.E5.86.B5) 接口查询，如果实例的最新操作状态(LatestOperationState)为“SUCCESS”，则代表操作成功。
+     * @param {RenewInstancesRequest} req
+     * @param {function(string, RenewInstancesResponse):void} cb
+     * @public
+     */
+    RenewInstances(req, cb) {
+        let resp = new RenewInstancesResponse();
+        this.request("RenewInstances", req, resp, cb);
+    }
+
+    /**
      * 本接口(PurchaseReservedInstancesOffering)用于用户购买一个或者多个指定配置的预留实例
      * @param {PurchaseReservedInstancesOfferingRequest} req
      * @param {function(string, PurchaseReservedInstancesOfferingResponse):void} cb
@@ -678,10 +780,11 @@ class CvmClient extends AbstractClient {
     /**
      * 本接口 (ResizeInstanceDisks) 用于扩容实例的数据盘。
 
-* 目前只支持扩容非弹性数据盘（[`DescribeDisks`](https://cloud.tencent.com/document/api/362/16315)接口返回值中的`Portable`为`false`表示非弹性），且[数据盘类型](https://cloud.tencent.com/document/api/213/15753#DataDisk)为：`CLOUD_BASIC`、`CLOUD_PREMIUM`、`CLOUD_SSD`和[CDH](https://cloud.tencent.com/document/product/416)实例的`LOCAL_BASIC`、`LOCAL_SSD`类型数据盘。
+* 目前只支持扩容非弹性盘（[`DescribeDisks`](https://cloud.tencent.com/document/api/362/16315)接口返回值中的`Portable`为`false`表示非弹性），且[数据盘类型](https://cloud.tencent.com/document/api/213/15753#DataDisk)为：`CLOUD_BASIC`、`CLOUD_PREMIUM`、`CLOUD_SSD`和[CDH](https://cloud.tencent.com/document/product/416)实例的`LOCAL_BASIC`、`LOCAL_SSD`类型数据盘。
 * 对于包年包月实例，使用该接口会涉及扣费，请确保账户余额充足。可通过[`DescribeAccountBalance`](https://cloud.tencent.com/document/product/555/20253)接口查询账户余额。
 * 目前只支持扩容一块数据盘。
 * 实例操作结果可以通过调用 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728#.E7.A4.BA.E4.BE.8B3-.E6.9F.A5.E8.AF.A2.E5.AE.9E.E4.BE.8B.E7.9A.84.E6.9C.80.E6.96.B0.E6.93.8D.E4.BD.9C.E6.83.85.E5.86.B5) 接口查询，如果实例的最新操作状态(LatestOperationState)为“SUCCESS”，则代表操作成功。
+* 如果是系统盘，目前只支持扩容，不支持缩容。
      * @param {ResizeInstanceDisksRequest} req
      * @param {function(string, ResizeInstanceDisksResponse):void} cb
      * @public
@@ -689,6 +792,21 @@ class CvmClient extends AbstractClient {
     ResizeInstanceDisks(req, cb) {
         let resp = new ResizeInstanceDisksResponse();
         this.request("ResizeInstanceDisks", req, resp, cb);
+    }
+
+    /**
+     * 本接口（CreateLaunchTemplate）用于创建实例启动模板。
+
+实例启动模板是一种配置数据并可用于创建实例，其内容包含创建实例所需的配置，比如实例类型，数据盘和系统盘的类型和大小，以及安全组等信息。
+
+初次创建实例模板后，其模板版本为默认版本1，新版本的创建可使用CreateLaunchTemplateVersion创建，版本号递增。默认情况下，在RunInstances中指定实例启动模板，若不指定模板版本号，则使用默认版本。
+     * @param {CreateLaunchTemplateRequest} req
+     * @param {function(string, CreateLaunchTemplateResponse):void} cb
+     * @public
+     */
+    CreateLaunchTemplate(req, cb) {
+        let resp = new CreateLaunchTemplateResponse();
+        this.request("CreateLaunchTemplate", req, resp, cb);
     }
 
     /**
@@ -776,6 +894,22 @@ class CvmClient extends AbstractClient {
     }
 
     /**
+     * 本接口 (StartInstances) 用于启动一个或多个实例。
+
+* 只有状态为`STOPPED`的实例才可以进行此操作。
+* 接口调用成功时，实例会进入`STARTING`状态；启动实例成功时，实例会进入`RUNNING`状态。
+* 支持批量操作。每次请求批量实例的上限为100。
+* 本接口为异步接口，启动实例请求发送成功后会返回一个RequestId，此时操作并未立即完成。实例操作结果可以通过调用 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728#.E7.A4.BA.E4.BE.8B3-.E6.9F.A5.E8.AF.A2.E5.AE.9E.E4.BE.8B.E7.9A.84.E6.9C.80.E6.96.B0.E6.93.8D.E4.BD.9C.E6.83.85.E5.86.B5) 接口查询，如果实例的最新操作状态(LatestOperationState)为“SUCCESS”，则代表启动实例操作成功。
+     * @param {StartInstancesRequest} req
+     * @param {function(string, StartInstancesResponse):void} cb
+     * @public
+     */
+    StartInstances(req, cb) {
+        let resp = new StartInstancesResponse();
+        this.request("StartInstances", req, resp, cb);
+    }
+
+    /**
      * 本接口(DescribeZones)用于查询可用区信息。
      * @param {DescribeZonesRequest} req
      * @param {function(string, DescribeZonesResponse):void} cb
@@ -815,14 +949,25 @@ class CvmClient extends AbstractClient {
     }
 
     /**
-     * 本接口（DescribeInstanceFamilyConfigs）查询当前用户和地域所支持的机型族列表信息。
-     * @param {DescribeInstanceFamilyConfigsRequest} req
-     * @param {function(string, DescribeInstanceFamilyConfigsResponse):void} cb
+     * 本接口（DeleteLaunchTemplateVersions）用于删除一个或者多个实例启动模板版本。
+     * @param {DeleteLaunchTemplateVersionsRequest} req
+     * @param {function(string, DeleteLaunchTemplateVersionsResponse):void} cb
      * @public
      */
-    DescribeInstanceFamilyConfigs(req, cb) {
-        let resp = new DescribeInstanceFamilyConfigsResponse();
-        this.request("DescribeInstanceFamilyConfigs", req, resp, cb);
+    DeleteLaunchTemplateVersions(req, cb) {
+        let resp = new DeleteLaunchTemplateVersionsResponse();
+        this.request("DeleteLaunchTemplateVersions", req, resp, cb);
+    }
+
+    /**
+     * 本接口（CreateLaunchTemplateVersion）根据指定的实例模板ID以及对应的模板版本号创建新的实例启动模板，若未指定模板版本号则使用默认版本号。每个实例启动模板最多创建30个版本。
+     * @param {CreateLaunchTemplateVersionRequest} req
+     * @param {function(string, CreateLaunchTemplateVersionResponse):void} cb
+     * @public
+     */
+    CreateLaunchTemplateVersion(req, cb) {
+        let resp = new CreateLaunchTemplateVersionResponse();
+        this.request("CreateLaunchTemplateVersion", req, resp, cb);
     }
 
     /**
@@ -876,6 +1021,17 @@ class CvmClient extends AbstractClient {
     }
 
     /**
+     * 提供导出自定义镜像到指定COS存储桶的能力
+     * @param {ExportImagesRequest} req
+     * @param {function(string, ExportImagesResponse):void} cb
+     * @public
+     */
+    ExportImages(req, cb) {
+        let resp = new ExportImagesResponse();
+        this.request("ExportImages", req, resp, cb);
+    }
+
+    /**
      * 本接口 (ResetInstance) 用于重装指定实例上的操作系统。
 
 * 如果指定了`ImageId`参数，则使用指定的镜像重装；否则按照当前实例使用的镜像进行重装。
@@ -919,7 +1075,7 @@ class CvmClient extends AbstractClient {
     }
 
     /**
-     * 本接口(ImportImage)用于导入镜像，导入后的镜像可用于创建实例。 
+     * 本接口(ImportImage)用于导入镜像，导入后的镜像可用于创建实例。目前支持 RAW、VHD、QCOW2、VMDK 镜像格式。
      * @param {ImportImageRequest} req
      * @param {function(string, ImportImageResponse):void} cb
      * @public
@@ -930,18 +1086,29 @@ class CvmClient extends AbstractClient {
     }
 
     /**
-     * 本接口 (RenewInstances) 用于续费包年包月实例。
+     * 本接口 (ImportKeyPair) 用于导入密钥对。
 
-* 只支持操作包年包月实例。
-* 续费时请确保账户余额充足。可通过[`DescribeAccountBalance`](https://cloud.tencent.com/document/product/555/20253)接口查询账户余额。
-* 实例操作结果可以通过调用 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728#.E7.A4.BA.E4.BE.8B3-.E6.9F.A5.E8.AF.A2.E5.AE.9E.E4.BE.8B.E7.9A.84.E6.9C.80.E6.96.B0.E6.93.8D.E4.BD.9C.E6.83.85.E5.86.B5) 接口查询，如果实例的最新操作状态(LatestOperationState)为“SUCCESS”，则代表操作成功。
-     * @param {RenewInstancesRequest} req
-     * @param {function(string, RenewInstancesResponse):void} cb
+* 本接口的功能是将密钥对导入到用户账户，并不会自动绑定到实例。如需绑定可以使用[AssociasteInstancesKeyPair](https://cloud.tencent.com/document/api/213/9404)接口。
+* 需指定密钥对名称以及该密钥对的公钥文本。
+* 如果用户只有私钥，可以通过 `SSL` 工具将私钥转换成公钥后再导入。
+     * @param {ImportKeyPairRequest} req
+     * @param {function(string, ImportKeyPairResponse):void} cb
      * @public
      */
-    RenewInstances(req, cb) {
-        let resp = new RenewInstancesResponse();
-        this.request("RenewInstances", req, resp, cb);
+    ImportKeyPair(req, cb) {
+        let resp = new ImportKeyPairResponse();
+        this.request("ImportKeyPair", req, resp, cb);
+    }
+
+    /**
+     * 本接口（DescribeLaunchTemplates）用于查询一个或者多个实例启动模板。
+     * @param {DescribeLaunchTemplatesRequest} req
+     * @param {function(string, DescribeLaunchTemplatesResponse):void} cb
+     * @public
+     */
+    DescribeLaunchTemplates(req, cb) {
+        let resp = new DescribeLaunchTemplatesResponse();
+        this.request("DescribeLaunchTemplates", req, resp, cb);
     }
 
     /**
@@ -956,29 +1123,14 @@ class CvmClient extends AbstractClient {
     }
 
     /**
-     * 本接口 ( DescribeInstanceVncUrl ) 用于查询实例管理终端地址，获取的地址可用于实例的 VNC 登录。
-
-* 处于 `STOPPED` 状态的机器无法使用此功能。
-* 管理终端地址的有效期为 15 秒，调用接口成功后如果 15 秒内不使用该链接进行访问，管理终端地址自动失效，您需要重新查询。
-* 管理终端地址一旦被访问，将自动失效，您需要重新查询。
-* 如果连接断开，每分钟内重新连接的次数不能超过 30 次。
-* 获取到 `InstanceVncUrl` 后，您需要在链接 <https://img.qcloud.com/qcloud/app/active_vnc/index.html?> 末尾加上参数 `InstanceVncUrl=xxxx`  。
-
-  - 参数 `InstanceVncUrl` ：调用接口成功后会返回的 `InstanceVncUrl` 的值。
-
-    最后组成的 URL 格式如下：
-
-```
-https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F%2Fbjvnc.qcloud.com%3A26789%2Fvnc%3Fs%3DaHpjWnRVMFNhYmxKdDM5MjRHNlVTSVQwajNUSW0wb2tBbmFtREFCTmFrcy8vUUNPMG0wSHZNOUUxRm5PMmUzWmFDcWlOdDJIbUJxSTZDL0RXcHZxYnZZMmRkWWZWcEZia2lyb09XMzdKNmM9
-```
-
-     * @param {DescribeInstanceVncUrlRequest} req
-     * @param {function(string, DescribeInstanceVncUrlResponse):void} cb
+     * 本接口（DescribeInstanceFamilyConfigs）查询当前用户和地域所支持的机型族列表信息。
+     * @param {DescribeInstanceFamilyConfigsRequest} req
+     * @param {function(string, DescribeInstanceFamilyConfigsResponse):void} cb
      * @public
      */
-    DescribeInstanceVncUrl(req, cb) {
-        let resp = new DescribeInstanceVncUrlResponse();
-        this.request("DescribeInstanceVncUrl", req, resp, cb);
+    DescribeInstanceFamilyConfigs(req, cb) {
+        let resp = new DescribeInstanceFamilyConfigsResponse();
+        this.request("DescribeInstanceFamilyConfigs", req, resp, cb);
     }
 
     /**
@@ -1022,19 +1174,20 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
     }
 
     /**
-     * 本接口 (StartInstances) 用于启动一个或多个实例。
+     * 本接口 (RunInstances) 用于创建一个或多个指定配置的实例。
 
-* 只有状态为`STOPPED`的实例才可以进行此操作。
-* 接口调用成功时，实例会进入`STARTING`状态；启动实例成功时，实例会进入`RUNNING`状态。
-* 支持批量操作。每次请求批量实例的上限为100。
-* 本接口为异步接口，启动实例请求发送成功后会返回一个RequestId，此时操作并未立即完成。实例操作结果可以通过调用 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728#.E7.A4.BA.E4.BE.8B3-.E6.9F.A5.E8.AF.A2.E5.AE.9E.E4.BE.8B.E7.9A.84.E6.9C.80.E6.96.B0.E6.93.8D.E4.BD.9C.E6.83.85.E5.86.B5) 接口查询，如果实例的最新操作状态(LatestOperationState)为“SUCCESS”，则代表启动实例操作成功。
-     * @param {StartInstancesRequest} req
-     * @param {function(string, StartInstancesResponse):void} cb
+* 实例创建成功后将自动开机启动，[实例状态](https://cloud.tencent.com/document/product/213/15753#InstanceStatus)变为“运行中”。
+* 预付费实例的购买会预先扣除本次实例购买所需金额，按小时后付费实例购买会预先冻结本次实例购买一小时内所需金额，在调用本接口前请确保账户余额充足。
+* 调用本接口创建实例，支持代金券自动抵扣（注意，代金券不可用于抵扣后付费冻结金额），详情请参考[代金券选用规则](https://cloud.tencent.com/document/product/555/7428)。
+* 本接口允许购买的实例数量遵循[CVM实例购买限制](https://cloud.tencent.com/document/product/213/2664)，所创建的实例和官网入口创建的实例共用配额。
+* 本接口为异步接口，当创建实例请求下发成功后会返回一个实例`ID`列表和一个`RequestId`，此时创建实例操作并未立即完成。在此期间实例的状态将会处于“PENDING”，实例创建结果可以通过调用 [DescribeInstancesStatus](https://cloud.tencent.com/document/product/213/15738)  接口查询，如果实例状态(InstanceState)由“PENDING”变为“RUNNING”，则代表实例创建成功，“LAUNCH_FAILED”代表实例创建失败。
+     * @param {RunInstancesRequest} req
+     * @param {function(string, RunInstancesResponse):void} cb
      * @public
      */
-    StartInstances(req, cb) {
-        let resp = new StartInstancesResponse();
-        this.request("StartInstances", req, resp, cb);
+    RunInstances(req, cb) {
+        let resp = new RunInstancesResponse();
+        this.request("RunInstances", req, resp, cb);
     }
 
     /**
@@ -1132,6 +1285,17 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
     }
 
     /**
+     * 本接口（ModifyHostsAttribute）用于修改CDH实例的属性，如实例名称和续费标记等。参数HostName和RenewFlag必须设置其中一个，但不能同时设置。
+     * @param {ModifyHostsAttributeRequest} req
+     * @param {function(string, ModifyHostsAttributeResponse):void} cb
+     * @public
+     */
+    ModifyHostsAttribute(req, cb) {
+        let resp = new ModifyHostsAttributeResponse();
+        this.request("ModifyHostsAttribute", req, resp, cb);
+    }
+
+    /**
      * 本接口 (DescribeInstanceTypeConfigs) 用于查询实例机型配置。
 
 * 可以根据`zone`、`instance-family`来查询实例机型配置。过滤条件详见过滤器[`Filter`](https://cloud.tencent.com/document/api/213/15753#Filter)。
@@ -1155,6 +1319,22 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
     DisassociateSecurityGroups(req, cb) {
         let resp = new DisassociateSecurityGroupsResponse();
         this.request("DisassociateSecurityGroups", req, resp, cb);
+    }
+
+    /**
+     * 本接口 (ModifyInstanceDiskType) 用于修改实例硬盘介质类型。
+
+* 只支持实例的本地系统盘、本地数据盘转化成指定云硬盘介质。
+* 只支持实例在关机状态下转换成指定云硬盘介质。
+* 不支持竞价实例类型。
+* 修改前请确保账户余额充足。可通过[`DescribeAccountBalance`](https://cloud.tencent.com/document/product/378/4397)接口查询账户余额。
+     * @param {ModifyInstanceDiskTypeRequest} req
+     * @param {function(string, ModifyInstanceDiskTypeResponse):void} cb
+     * @public
+     */
+    ModifyInstanceDiskType(req, cb) {
+        let resp = new ModifyInstanceDiskTypeResponse();
+        this.request("ModifyInstanceDiskType", req, resp, cb);
     }
 
 

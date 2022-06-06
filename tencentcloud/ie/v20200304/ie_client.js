@@ -16,6 +16,7 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const VideoSuperResolution = models.VideoSuperResolution;
 const MediaJoiningTaskResult = models.MediaJoiningTaskResult;
 const Denoise = models.Denoise;
 const StripTaskResultItem = models.StripTaskResultItem;
@@ -93,6 +94,7 @@ const FileInfo = models.FileInfo;
 const ResultAudioInfo = models.ResultAudioInfo;
 const OpeningEndingTaskResult = models.OpeningEndingTaskResult;
 const VideoEnhance = models.VideoEnhance;
+const VideoRepair = models.VideoRepair;
 const QualityControlResultItems = models.QualityControlResultItems;
 const FrameTagItem = models.FrameTagItem;
 const QualityControlItem = models.QualityControlItem;
@@ -102,6 +104,7 @@ const AudioEnhance = models.AudioEnhance;
 const CosInfo = models.CosInfo;
 const MediaResultInfo = models.MediaResultInfo;
 const FrameTagResult = models.FrameTagResult;
+const TextMarkInfoItem = models.TextMarkInfoItem;
 const MediaCuttingTimeInfo = models.MediaCuttingTimeInfo;
 const TargetInfo = models.TargetInfo;
 const CreateMediaQualityRestorationTaskRequest = models.CreateMediaQualityRestorationTaskRequest;

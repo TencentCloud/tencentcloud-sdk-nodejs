@@ -273,6 +273,13 @@ class ParamDesc extends  AbstractModel {
          */
         this.HaveSetValue = null;
 
+        /**
+         * 是否需要重启生效，false:不需要重启，
+true:需要重启
+         * @type {boolean || null}
+         */
+        this.NeedRestart = null;
+
     }
 
     /**
@@ -293,6 +300,49 @@ class ParamDesc extends  AbstractModel {
             this.Constraint = obj;
         }
         this.HaveSetValue = 'HaveSetValue' in params ? params.HaveSetValue : null;
+        this.NeedRestart = 'NeedRestart' in params ? params.NeedRestart : null;
+
+    }
+}
+
+/**
+ * DestroyDCDBInstance返回参数结构体
+ * @class
+ */
+class DestroyDCDBInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例 ID，与入参InstanceId一致。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 异步任务的请求 ID，可使用此 ID [查询异步任务的执行结果](https://cloud.tencent.com/document/product/557/56485)。
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -397,6 +447,76 @@ class SpecConfig extends  AbstractModel {
 }
 
 /**
+ * ModifyRealServerAccessStrategy返回参数结构体
+ * @class
+ */
+class ModifyRealServerAccessStrategyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ActiveHourDCDBInstance返回参数结构体
+ * @class
+ */
+class ActiveHourDCDBInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 解隔离成功的实例id列表
+         * @type {Array.<string> || null}
+         */
+        this.SuccessInstanceIds = null;
+
+        /**
+         * 解隔离失败的实例id列表
+         * @type {Array.<string> || null}
+         */
+        this.FailedInstanceIds = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SuccessInstanceIds = 'SuccessInstanceIds' in params ? params.SuccessInstanceIds : null;
+        this.FailedInstanceIds = 'FailedInstanceIds' in params ? params.FailedInstanceIds : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeDCDBPrice返回参数结构体
  * @class
  */
@@ -481,6 +601,41 @@ class AssociateSecurityGroupsRequest extends  AbstractModel {
 }
 
 /**
+ * TerminateDedicatedDBInstance返回参数结构体
+ * @class
+ */
+class TerminateDedicatedDBInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 异步流程Id
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * FlushBinlog返回参数结构体
  * @class
  */
@@ -532,7 +687,7 @@ class DescribeDBSecurityGroupsResponse extends  AbstractModel {
         /**
          * 实例端口
 注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
+         * @type {string || null}
          */
         this.VPort = null;
 
@@ -563,6 +718,83 @@ class DescribeDBSecurityGroupsResponse extends  AbstractModel {
         this.VIP = 'VIP' in params ? params.VIP : null;
         this.VPort = 'VPort' in params ? params.VPort : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CancelDcnJob返回参数结构体
+ * @class
+ */
+class CancelDcnJobResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 流程ID
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeFileDownloadUrl请求参数结构体
+ * @class
+ */
+class DescribeFileDownloadUrlRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 实例分片ID
+         * @type {string || null}
+         */
+        this.ShardId = null;
+
+        /**
+         * 不带签名的文件路径
+         * @type {string || null}
+         */
+        this.FilePath = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.ShardId = 'ShardId' in params ? params.ShardId : null;
+        this.FilePath = 'FilePath' in params ? params.FilePath : null;
 
     }
 }
@@ -672,6 +904,12 @@ class DescribeDCDBUpgradePriceResponse extends  AbstractModel {
         this.Price = null;
 
         /**
+         * 变配明细计算公式
+         * @type {string || null}
+         */
+        this.Formula = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -688,7 +926,99 @@ class DescribeDCDBUpgradePriceResponse extends  AbstractModel {
         }
         this.OriginalPrice = 'OriginalPrice' in params ? params.OriginalPrice : null;
         this.Price = 'Price' in params ? params.Price : null;
+        this.Formula = 'Formula' in params ? params.Formula : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeDBSlowLogs请求参数结构体
+ * @class
+ */
+class DescribeDBSlowLogsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例 ID，形如：dcdbt-hw0qj6m1
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 从结果的第几条数据开始返回
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 返回的结果条数
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 查询的起始时间，形如2016-07-23 14:55:20
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 实例的分片ID，形如shard-53ima8ln
+         * @type {string || null}
+         */
+        this.ShardId = null;
+
+        /**
+         * 查询的结束时间，形如2016-08-22 14:55:20。如果不填，那么查询结束时间就是当前时间
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 要查询的具体数据库名称
+         * @type {string || null}
+         */
+        this.Db = null;
+
+        /**
+         * 排序指标，取值为query_time_sum或者query_count。不填默认按照query_time_sum排序
+         * @type {string || null}
+         */
+        this.OrderBy = null;
+
+        /**
+         * 排序类型，desc（降序）或者asc（升序）。不填默认desc排序
+         * @type {string || null}
+         */
+        this.OrderByType = null;
+
+        /**
+         * 是否查询从机的慢查询，0-主机; 1-从机。不填默认查询主机慢查询
+         * @type {number || null}
+         */
+        this.Slave = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.ShardId = 'ShardId' in params ? params.ShardId : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Db = 'Db' in params ? params.Db : null;
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
+        this.OrderByType = 'OrderByType' in params ? params.OrderByType : null;
+        this.Slave = 'Slave' in params ? params.Slave : null;
 
     }
 }
@@ -720,7 +1050,7 @@ class CreateAccountRequest extends  AbstractModel {
         this.Host = null;
 
         /**
-         * 账号密码，由字母、数字或常见符号组成，不能包含分号、单引号和双引号，长度为6~32位。
+         * 账号密码，密码需要 8-32 个字符，不能以 '/' 开头，并且必须包含小写字母、大写字母、数字和符号()~!@#$%^&*-+=_|{}[]:<>,.?/。
          * @type {string || null}
          */
         this.Password = null;
@@ -815,6 +1145,104 @@ class DescribeDBParametersResponse extends  AbstractModel {
 }
 
 /**
+ * IsolateHourDCDBInstance请求参数结构体
+ * @class
+ */
+class IsolateHourDCDBInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例uuid列表
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+
+    }
+}
+
+/**
+ * ModifyDBInstanceName返回参数结构体
+ * @class
+ */
+class ModifyDBInstanceNameResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeFlow返回参数结构体
+ * @class
+ */
+class DescribeFlowResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 流程状态，0：成功，1：失败，2：运行中
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CloneAccount返回参数结构体
  * @class
  */
@@ -873,6 +1301,34 @@ class ModifyAccountDescriptionResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DestroyDCDBInstance请求参数结构体
+ * @class
+ */
+class DestroyDCDBInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例 ID，格式如：tdsqlshard-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -1148,7 +1604,7 @@ class DescribeOrdersResponse extends  AbstractModel {
 
         /**
          * 返回的订单数量。
-         * @type {Array.<number> || null}
+         * @type {number || null}
          */
         this.TotalCount = null;
 
@@ -1189,78 +1645,168 @@ class DescribeOrdersResponse extends  AbstractModel {
 }
 
 /**
- * DCN详情条目
+ * CreateDedicatedClusterDCDBInstance请求参数结构体
  * @class
  */
-class DcnDetailItem extends  AbstractModel {
+class CreateDedicatedClusterDCDBInstanceRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 实例ID
-         * @type {string || null}
+         * 分配实例个数
+         * @type {number || null}
          */
-        this.InstanceId = null;
+        this.GoodsNum = null;
 
         /**
-         * 实例名称
-         * @type {string || null}
+         * 分片数量
+         * @type {number || null}
          */
-        this.InstanceName = null;
+        this.ShardNum = null;
 
         /**
-         * 实例地域
-         * @type {string || null}
+         * 分片內存大小, 单位GB
+         * @type {number || null}
          */
-        this.Region = null;
+        this.ShardMemory = null;
 
         /**
-         * 实例可用区
+         * 分片磁盘大小, 单位GB
+         * @type {number || null}
+         */
+        this.ShardStorage = null;
+
+        /**
+         * 独享集群集群uuid
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * （废弃）可用区
          * @type {string || null}
          */
         this.Zone = null;
 
         /**
-         * 实例IP地址
+         * 项目ID
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * （废弃）cpu大小，单位：核
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
+        /**
+         * 网络ID
          * @type {string || null}
          */
-        this.Vip = null;
+        this.VpcId = null;
 
         /**
-         * 实例IPv6地址
+         * 子网ID
          * @type {string || null}
          */
-        this.Vipv6 = null;
+        this.SubnetId = null;
 
         /**
-         * 实例端口
-         * @type {number || null}
-         */
-        this.Vport = null;
-
-        /**
-         * 实例状态
-         * @type {number || null}
-         */
-        this.Status = null;
-
-        /**
-         * 实例状态描述
+         * （废弃）分片机型
          * @type {string || null}
          */
-        this.StatusDesc = null;
+        this.ShardMachine = null;
 
         /**
-         * 实例DCN标志，1-主，2-备
+         * 分片的节点个数
          * @type {number || null}
          */
-        this.DcnFlag = null;
+        this.ShardNodeNum = null;
 
         /**
-         * 实例DCN状态，0-无，1-创建中，2-同步中，3-已断开
+         * （废弃）节点cpu核数，单位：1/100核
          * @type {number || null}
          */
-        this.DcnStatus = null;
+        this.ShardNodeCpu = null;
+
+        /**
+         * （废弃）节点內存大小，单位：GB
+         * @type {number || null}
+         */
+        this.ShardNodeMemory = null;
+
+        /**
+         * （废弃）节点磁盘大小，单位：GB
+         * @type {number || null}
+         */
+        this.ShardNodeStorage = null;
+
+        /**
+         * db版本
+         * @type {string || null}
+         */
+        this.DbVersionId = null;
+
+        /**
+         * 安全组ID
+         * @type {string || null}
+         */
+        this.SecurityGroupId = null;
+
+        /**
+         * DCN源实例ID
+         * @type {string || null}
+         */
+        this.DcnInstanceId = null;
+
+        /**
+         * DCN源实例地域名
+         * @type {string || null}
+         */
+        this.DcnRegion = null;
+
+        /**
+         * 自定义实例名称
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * 标签
+         * @type {Array.<ResourceTag> || null}
+         */
+        this.ResourceTags = null;
+
+        /**
+         * 支持IPv6标志：1 支持， 0 不支持
+         * @type {number || null}
+         */
+        this.Ipv6Flag = null;
+
+        /**
+         * （废弃）Pid，可通过获取独享集群售卖配置接口得到
+         * @type {number || null}
+         */
+        this.Pid = null;
+
+        /**
+         * 参数列表。本接口的可选值为：character_set_server（字符集，必传），lower_case_table_names（表名大小写敏感，必传，0 - 敏感；1-不敏感），innodb_page_size（innodb数据页，默认16K），sync_mode（同步模式：0 - 异步； 1 - 强同步；2 - 强同步可退化。默认为强同步可退化）。
+         * @type {DBParamValue || null}
+         */
+        this.InitParams = null;
+
+        /**
+         * 指定主节点uuid，不填随机分配
+         * @type {string || null}
+         */
+        this.MasterHostId = null;
+
+        /**
+         * 指定从节点uuid，不填随机分配
+         * @type {Array.<string> || null}
+         */
+        this.SlaveHostIds = null;
 
     }
 
@@ -1271,17 +1817,237 @@ class DcnDetailItem extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
-        this.Region = 'Region' in params ? params.Region : null;
+        this.GoodsNum = 'GoodsNum' in params ? params.GoodsNum : null;
+        this.ShardNum = 'ShardNum' in params ? params.ShardNum : null;
+        this.ShardMemory = 'ShardMemory' in params ? params.ShardMemory : null;
+        this.ShardStorage = 'ShardStorage' in params ? params.ShardStorage : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
         this.Zone = 'Zone' in params ? params.Zone : null;
-        this.Vip = 'Vip' in params ? params.Vip : null;
-        this.Vipv6 = 'Vipv6' in params ? params.Vipv6 : null;
-        this.Vport = 'Vport' in params ? params.Vport : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.StatusDesc = 'StatusDesc' in params ? params.StatusDesc : null;
-        this.DcnFlag = 'DcnFlag' in params ? params.DcnFlag : null;
-        this.DcnStatus = 'DcnStatus' in params ? params.DcnStatus : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.ShardMachine = 'ShardMachine' in params ? params.ShardMachine : null;
+        this.ShardNodeNum = 'ShardNodeNum' in params ? params.ShardNodeNum : null;
+        this.ShardNodeCpu = 'ShardNodeCpu' in params ? params.ShardNodeCpu : null;
+        this.ShardNodeMemory = 'ShardNodeMemory' in params ? params.ShardNodeMemory : null;
+        this.ShardNodeStorage = 'ShardNodeStorage' in params ? params.ShardNodeStorage : null;
+        this.DbVersionId = 'DbVersionId' in params ? params.DbVersionId : null;
+        this.SecurityGroupId = 'SecurityGroupId' in params ? params.SecurityGroupId : null;
+        this.DcnInstanceId = 'DcnInstanceId' in params ? params.DcnInstanceId : null;
+        this.DcnRegion = 'DcnRegion' in params ? params.DcnRegion : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+
+        if (params.ResourceTags) {
+            this.ResourceTags = new Array();
+            for (let z in params.ResourceTags) {
+                let obj = new ResourceTag();
+                obj.deserialize(params.ResourceTags[z]);
+                this.ResourceTags.push(obj);
+            }
+        }
+        this.Ipv6Flag = 'Ipv6Flag' in params ? params.Ipv6Flag : null;
+        this.Pid = 'Pid' in params ? params.Pid : null;
+
+        if (params.InitParams) {
+            let obj = new DBParamValue();
+            obj.deserialize(params.InitParams)
+            this.InitParams = obj;
+        }
+        this.MasterHostId = 'MasterHostId' in params ? params.MasterHostId : null;
+        this.SlaveHostIds = 'SlaveHostIds' in params ? params.SlaveHostIds : null;
+
+    }
+}
+
+/**
+ * CreateHourDCDBInstance请求参数结构体
+ * @class
+ */
+class CreateHourDCDBInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 分片内存大小，单位：GB，可以通过 DescribeShardSpec
+ 查询实例规格获得。
+         * @type {number || null}
+         */
+        this.ShardMemory = null;
+
+        /**
+         * 分片存储空间大小，单位：GB，可以通过 DescribeShardSpec
+ 查询实例规格获得。
+         * @type {number || null}
+         */
+        this.ShardStorage = null;
+
+        /**
+         * 单个分片节点个数，可以通过 DescribeShardSpec
+ 查询实例规格获得。
+         * @type {number || null}
+         */
+        this.ShardNodeCount = null;
+
+        /**
+         * 实例分片个数，可选范围2-8，可以通过升级实例进行新增分片到最多64个分片。
+         * @type {number || null}
+         */
+        this.ShardCount = null;
+
+        /**
+         * 欲购买实例的数量
+         * @type {number || null}
+         */
+        this.Count = null;
+
+        /**
+         * 项目 ID，可以通过查看项目列表获取，不传则关联到默认项目
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * 虚拟私有网络 ID，不传或传空表示创建为基础网络
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * 虚拟私有网络子网 ID，VpcId不为空时必填
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * 分片cpu大小，单位：核，可以通过 DescribeShardSpec
+ 查询实例规格获得。
+         * @type {number || null}
+         */
+        this.ShardCpu = null;
+
+        /**
+         * 数据库引擎版本，当前可选：10.0.10，10.1.9，5.7.17。
+10.0.10 - Mariadb 10.0.10；
+10.1.9 - Mariadb 10.1.9；
+5.7.17 - Percona 5.7.17。
+如果不填的话，默认为10.1.9，表示Mariadb 10.1.9。
+         * @type {string || null}
+         */
+        this.DbVersionId = null;
+
+        /**
+         * 分片节点可用区分布，最多可填两个可用区。当分片规格为一主两从时，其中两个节点在第一个可用区。
+         * @type {Array.<string> || null}
+         */
+        this.Zones = null;
+
+        /**
+         * 安全组id
+         * @type {string || null}
+         */
+        this.SecurityGroupId = null;
+
+        /**
+         * 实例名称， 可以通过该字段自主的设置实例的名字
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * 是否支持IPv6
+         * @type {number || null}
+         */
+        this.Ipv6Flag = null;
+
+        /**
+         * 标签键值对数组
+         * @type {Array.<ResourceTag> || null}
+         */
+        this.ResourceTags = null;
+
+        /**
+         * DCN源地域
+         * @type {string || null}
+         */
+        this.DcnRegion = null;
+
+        /**
+         * DCN源实例ID
+         * @type {string || null}
+         */
+        this.DcnInstanceId = null;
+
+        /**
+         * 参数列表。本接口的可选值为：character_set_server（字符集，必传），lower_case_table_names（表名大小写敏感，必传，0 - 敏感；1-不敏感），innodb_page_size（innodb数据页，默认16K），sync_mode（同步模式：0 - 异步； 1 - 强同步；2 - 强同步可退化。默认为强同步可退化）。
+         * @type {Array.<DBParamValue> || null}
+         */
+        this.InitParams = null;
+
+        /**
+         * 需要回档的源实例ID
+         * @type {string || null}
+         */
+        this.RollbackInstanceId = null;
+
+        /**
+         * 回档时间
+         * @type {string || null}
+         */
+        this.RollbackTime = null;
+
+        /**
+         * 安全组ids，安全组可以传数组形式，兼容之前SecurityGroupId参数
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroupIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ShardMemory = 'ShardMemory' in params ? params.ShardMemory : null;
+        this.ShardStorage = 'ShardStorage' in params ? params.ShardStorage : null;
+        this.ShardNodeCount = 'ShardNodeCount' in params ? params.ShardNodeCount : null;
+        this.ShardCount = 'ShardCount' in params ? params.ShardCount : null;
+        this.Count = 'Count' in params ? params.Count : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.ShardCpu = 'ShardCpu' in params ? params.ShardCpu : null;
+        this.DbVersionId = 'DbVersionId' in params ? params.DbVersionId : null;
+        this.Zones = 'Zones' in params ? params.Zones : null;
+        this.SecurityGroupId = 'SecurityGroupId' in params ? params.SecurityGroupId : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.Ipv6Flag = 'Ipv6Flag' in params ? params.Ipv6Flag : null;
+
+        if (params.ResourceTags) {
+            this.ResourceTags = new Array();
+            for (let z in params.ResourceTags) {
+                let obj = new ResourceTag();
+                obj.deserialize(params.ResourceTags[z]);
+                this.ResourceTags.push(obj);
+            }
+        }
+        this.DcnRegion = 'DcnRegion' in params ? params.DcnRegion : null;
+        this.DcnInstanceId = 'DcnInstanceId' in params ? params.DcnInstanceId : null;
+
+        if (params.InitParams) {
+            this.InitParams = new Array();
+            for (let z in params.InitParams) {
+                let obj = new DBParamValue();
+                obj.deserialize(params.InitParams[z]);
+                this.InitParams.push(obj);
+            }
+        }
+        this.RollbackInstanceId = 'RollbackInstanceId' in params ? params.RollbackInstanceId : null;
+        this.RollbackTime = 'RollbackTime' in params ? params.RollbackTime : null;
+        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
 
     }
 }
@@ -1532,6 +2298,34 @@ class DescribeDBSecurityGroupsRequest extends  AbstractModel {
 }
 
 /**
+ * 数据库存储过程信息
+ * @class
+ */
+class DatabaseProcedure extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 存储过程名称
+         * @type {string || null}
+         */
+        this.Proc = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Proc = 'Proc' in params ? params.Proc : null;
+
+    }
+}
+
+/**
  * DescribeDCDBPrice请求参数结构体
  * @class
  */
@@ -1612,6 +2406,41 @@ class DescribeDCDBPriceRequest extends  AbstractModel {
 }
 
 /**
+ * SwitchDBInstanceHA返回参数结构体
+ * @class
+ */
+class SwitchDBInstanceHAResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 异步流程Id
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeProjectSecurityGroups返回参数结构体
  * @class
  */
@@ -1624,6 +2453,12 @@ class DescribeProjectSecurityGroupsResponse extends  AbstractModel {
          * @type {Array.<SecurityGroup> || null}
          */
         this.Groups = null;
+
+        /**
+         * 安全组个数。
+         * @type {number || null}
+         */
+        this.Total = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1649,6 +2484,7 @@ class DescribeProjectSecurityGroupsResponse extends  AbstractModel {
                 this.Groups.push(obj);
             }
         }
+        this.Total = 'Total' in params ? params.Total : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1824,6 +2660,41 @@ class DescribeDCDBSaleInfoRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+
+    }
+}
+
+/**
+ * ModifyRealServerAccessStrategy请求参数结构体
+ * @class
+ */
+class ModifyRealServerAccessStrategyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例 ID，格式如：tdsqlshard-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * RS就近模式, 0-无策略, 1-可用区就近访问。
+         * @type {number || null}
+         */
+        this.RsAccessStrategy = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.RsAccessStrategy = 'RsAccessStrategy' in params ? params.RsAccessStrategy : null;
 
     }
 }
@@ -2092,17 +2963,16 @@ class GrantAccountPrivilegesRequest extends  AbstractModel {
         this.DbName = null;
 
         /**
-         * 全局权限： SELECT，INSERT，UPDATE，DELETE，CREATE，DROP，REFERENCES，INDEX，ALTER，CREATE TEMPORARY TABLES，LOCK TABLES，EXECUTE，CREATE VIEW，SHOW VIEW，CREATE ROUTINE，ALTER ROUTINE，EVENT，TRIGGER，SHOW DATABASES 
+         * 全局权限： SELECT，INSERT，UPDATE，DELETE，CREATE，DROP，REFERENCES，INDEX，ALTER，CREATE TEMPORARY TABLES，LOCK TABLES，EXECUTE，CREATE VIEW，SHOW VIEW，CREATE ROUTINE，ALTER ROUTINE，EVENT，TRIGGER，SHOW DATABASES，REPLICATION CLIENT，REPLICATION SLAVE
 库权限： SELECT，INSERT，UPDATE，DELETE，CREATE，DROP，REFERENCES，INDEX，ALTER，CREATE TEMPORARY TABLES，LOCK TABLES，EXECUTE，CREATE VIEW，SHOW VIEW，CREATE ROUTINE，ALTER ROUTINE，EVENT，TRIGGER 
-表/视图权限： SELECT，INSERT，UPDATE，DELETE，CREATE，DROP，REFERENCES，INDEX，ALTER，CREATE VIEW，SHOW VIEW，TRIGGER 
-存储过程/函数权限： ALTER ROUTINE，EXECUTE 
+表权限： SELECT，INSERT，UPDATE，DELETE，CREATE，DROP，REFERENCES，INDEX，ALTER，CREATE VIEW，SHOW VIEW，TRIGGER  
 字段权限： INSERT，REFERENCES，SELECT，UPDATE
          * @type {Array.<string> || null}
          */
         this.Privileges = null;
 
         /**
-         * 类型,可以填入 table 、 view 、 proc 、 func 和 \*。当 DbName 为具体数据库名，Type为 \* 时，表示设置该数据库权限（即db.\*），此时忽略 Object 参数
+         * 类型,可以填入 table 和 \*。当 DbName 为具体数据库名，Type为 \* 时，表示设置该数据库权限（即db.\*），此时忽略 Object 参数
          * @type {string || null}
          */
         this.Type = null;
@@ -2220,6 +3090,41 @@ class DescribeDCDBShardsRequest extends  AbstractModel {
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
         this.OrderByType = 'OrderByType' in params ? params.OrderByType : null;
+
+    }
+}
+
+/**
+ * SwitchDBInstanceHA请求参数结构体
+ * @class
+ */
+class SwitchDBInstanceHARequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例Id，形如 tdsql-ow728lmc。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 切换的目标区域，会自动选择该可用区中延迟最低的节点。
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
 
     }
 }
@@ -2442,7 +3347,7 @@ class DCDBInstanceInfo extends  AbstractModel {
         this.StatusDesc = null;
 
         /**
-         * 状态
+         * 实例状态：0 创建中，1 流程处理中， 2 运行中，3 实例未初始化，-1 实例已隔离，4 实例初始化中，5 实例删除中，6 实例重启中，7 数据迁移中
          * @type {number || null}
          */
         this.Status = null;
@@ -2685,6 +3590,13 @@ class DCDBInstanceInfo extends  AbstractModel {
          */
         this.InstanceType = null;
 
+        /**
+         * 实例标签信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<ResourceTag> || null}
+         */
+        this.ResourceTags = null;
+
     }
 
     /**
@@ -2750,6 +3662,15 @@ class DCDBInstanceInfo extends  AbstractModel {
         this.DcnStatus = 'DcnStatus' in params ? params.DcnStatus : null;
         this.DcnDstNum = 'DcnDstNum' in params ? params.DcnDstNum : null;
         this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+
+        if (params.ResourceTags) {
+            this.ResourceTags = new Array();
+            for (let z in params.ResourceTags) {
+                let obj = new ResourceTag();
+                obj.deserialize(params.ResourceTags[z]);
+                this.ResourceTags.push(obj);
+            }
+        }
 
     }
 }
@@ -2820,6 +3741,41 @@ class DescribeDcnDetailRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
+ * DescribeFileDownloadUrl返回参数结构体
+ * @class
+ */
+class DescribeFileDownloadUrlResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 带签名的下载连接
+         * @type {string || null}
+         */
+        this.PreSignedUrl = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PreSignedUrl = 'PreSignedUrl' in params ? params.PreSignedUrl : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3371,6 +4327,34 @@ class KillSessionRequest extends  AbstractModel {
 }
 
 /**
+ * TerminateDedicatedDBInstance请求参数结构体
+ * @class
+ */
+class TerminateDedicatedDBInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例 Id，形如：dcdbt-ow728lmc。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
  * DescribeDatabaseObjects返回参数结构体
  * @class
  */
@@ -3473,6 +4457,41 @@ class DescribeDatabaseObjectsResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyDBInstanceName请求参数结构体
+ * @class
+ */
+class ModifyDBInstanceNameRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例ID，形如tdsql-hdaprz0v
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 实例名称
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+
+    }
+}
+
+/**
  * DescribeDcnDetail返回参数结构体
  * @class
  */
@@ -3559,16 +4578,16 @@ class SecurityGroupBound extends  AbstractModel {
         super();
 
         /**
-         * 策略，ACCEPT 或者 DROP
-         * @type {string || null}
-         */
-        this.Action = null;
-
-        /**
          * 来源 IP 或 IP 段，例如192.168.0.0/16
          * @type {string || null}
          */
         this.CidrIp = null;
+
+        /**
+         * 策略，ACCEPT 或者 DROP
+         * @type {string || null}
+         */
+        this.Action = null;
 
         /**
          * 端口
@@ -3591,8 +4610,8 @@ class SecurityGroupBound extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Action = 'Action' in params ? params.Action : null;
         this.CidrIp = 'CidrIp' in params ? params.CidrIp : null;
+        this.Action = 'Action' in params ? params.Action : null;
         this.PortRange = 'PortRange' in params ? params.PortRange : null;
         this.IpProtocol = 'IpProtocol' in params ? params.IpProtocol : null;
 
@@ -3614,7 +4633,7 @@ class SplitShardConfig extends  AbstractModel {
         this.ShardInstanceIds = null;
 
         /**
-         * 数据切分比例
+         * 数据切分比例，固定50%
          * @type {number || null}
          */
         this.SplitRate = null;
@@ -3898,6 +4917,56 @@ class ZonesInfo extends  AbstractModel {
 }
 
 /**
+ * CreateHourDCDBInstance返回参数结构体
+ * @class
+ */
+class CreateHourDCDBInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 订单对应的实例 ID 列表，如果此处没有返回实例 ID，可以通过订单查询接口获取。还可通过实例查询接口查询实例是否创建完成。
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+        /**
+         * 流程id，可以根据流程id查询创建进度
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * 订单号。可以据此调用 DescribeOrders
+ 查询订单详细信息，或在支付失败时调用用户账号相关接口进行支付。
+         * @type {string || null}
+         */
+        this.DealName = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.DealName = 'DealName' in params ? params.DealName : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 数据库信息
  * @class
  */
@@ -3948,6 +5017,76 @@ class GrantAccountPrivilegesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CancelDcnJob请求参数结构体
+ * @class
+ */
+class CancelDcnJobRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 灾备实例ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
+ * IsolateHourDCDBInstance返回参数结构体
+ * @class
+ */
+class IsolateHourDCDBInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 隔离成功的实例id列表
+         * @type {Array.<string> || null}
+         */
+        this.SuccessInstanceIds = null;
+
+        /**
+         * 隔离失败的实例id列表
+         * @type {Array.<string> || null}
+         */
+        this.FailedInstanceIds = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SuccessInstanceIds = 'SuccessInstanceIds' in params ? params.SuccessInstanceIds : null;
+        this.FailedInstanceIds = 'FailedInstanceIds' in params ? params.FailedInstanceIds : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -4123,18 +5262,24 @@ class DescribeDCDBSaleInfoResponse extends  AbstractModel {
 }
 
 /**
- * ModifyDBInstanceSecurityGroups返回参数结构体
+ * ModifyDBInstancesProject请求参数结构体
  * @class
  */
-class ModifyDBInstanceSecurityGroupsResponse extends  AbstractModel {
+class ModifyDBInstancesProjectRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
+         * 待修改的实例ID列表。实例 ID 形如：dcdbt-ow728lmc。
+         * @type {Array.<string> || null}
          */
-        this.RequestId = null;
+        this.InstanceIds = null;
+
+        /**
+         * 要分配的项目 ID，可以通过 DescribeProjects 查询项目列表接口获取。
+         * @type {number || null}
+         */
+        this.ProjectId = null;
 
     }
 
@@ -4145,7 +5290,155 @@ class ModifyDBInstanceSecurityGroupsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+
+    }
+}
+
+/**
+ * DCN详情条目
+ * @class
+ */
+class DcnDetailItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 实例名称
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * 实例地域
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * 实例可用区
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * 实例IP地址
+         * @type {string || null}
+         */
+        this.Vip = null;
+
+        /**
+         * 实例IPv6地址
+         * @type {string || null}
+         */
+        this.Vipv6 = null;
+
+        /**
+         * 实例端口
+         * @type {number || null}
+         */
+        this.Vport = null;
+
+        /**
+         * 实例状态
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 实例状态描述
+         * @type {string || null}
+         */
+        this.StatusDesc = null;
+
+        /**
+         * 实例DCN标志，1-主，2-备
+         * @type {number || null}
+         */
+        this.DcnFlag = null;
+
+        /**
+         * 实例DCN状态，0-无，1-创建中，2-同步中，3-已断开
+         * @type {number || null}
+         */
+        this.DcnStatus = null;
+
+        /**
+         * 实例CPU核数
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
+        /**
+         * 实例内存大小，单位 GB
+         * @type {number || null}
+         */
+        this.Memory = null;
+
+        /**
+         * 实例存储大小，单位 GB
+         * @type {number || null}
+         */
+        this.Storage = null;
+
+        /**
+         * 付费模式
+         * @type {number || null}
+         */
+        this.PayMode = null;
+
+        /**
+         * 实例创建时间，格式为 2006-01-02 15:04:05
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 实例到期时间，格式为 2006-01-02 15:04:05
+         * @type {string || null}
+         */
+        this.PeriodEndTime = null;
+
+        /**
+         * 1： 主实例（独享型）, 2: 主实例, 3： 灾备实例, 4： 灾备实例（独享型）
+         * @type {number || null}
+         */
+        this.InstanceType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.Vip = 'Vip' in params ? params.Vip : null;
+        this.Vipv6 = 'Vipv6' in params ? params.Vipv6 : null;
+        this.Vport = 'Vport' in params ? params.Vport : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.StatusDesc = 'StatusDesc' in params ? params.StatusDesc : null;
+        this.DcnFlag = 'DcnFlag' in params ? params.DcnFlag : null;
+        this.DcnStatus = 'DcnStatus' in params ? params.DcnStatus : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.Storage = 'Storage' in params ? params.Storage : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.PeriodEndTime = 'PeriodEndTime' in params ? params.PeriodEndTime : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
 
     }
 }
@@ -4298,12 +5591,128 @@ class KillSessionResponse extends  AbstractModel {
 }
 
 /**
- * DescribeProjects请求参数结构体
+ * 慢查询条目信息
  * @class
  */
-class DescribeProjectsRequest extends  AbstractModel {
+class SlowLogData extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * 语句校验和，用于查询详情
+         * @type {string || null}
+         */
+        this.CheckSum = null;
+
+        /**
+         * 数据库名称
+         * @type {string || null}
+         */
+        this.Db = null;
+
+        /**
+         * 抽象的SQL语句
+         * @type {string || null}
+         */
+        this.FingerPrint = null;
+
+        /**
+         * 平均的锁时间
+         * @type {string || null}
+         */
+        this.LockTimeAvg = null;
+
+        /**
+         * 最大锁时间
+         * @type {string || null}
+         */
+        this.LockTimeMax = null;
+
+        /**
+         * 最小锁时间
+         * @type {string || null}
+         */
+        this.LockTimeMin = null;
+
+        /**
+         * 锁时间总和
+         * @type {string || null}
+         */
+        this.LockTimeSum = null;
+
+        /**
+         * 查询次数
+         * @type {string || null}
+         */
+        this.QueryCount = null;
+
+        /**
+         * 平均查询时间
+         * @type {string || null}
+         */
+        this.QueryTimeAvg = null;
+
+        /**
+         * 最大查询时间
+         * @type {string || null}
+         */
+        this.QueryTimeMax = null;
+
+        /**
+         * 最小查询时间
+         * @type {string || null}
+         */
+        this.QueryTimeMin = null;
+
+        /**
+         * 查询时间总和
+         * @type {string || null}
+         */
+        this.QueryTimeSum = null;
+
+        /**
+         * 扫描行数
+         * @type {string || null}
+         */
+        this.RowsExaminedSum = null;
+
+        /**
+         * 发送行数
+         * @type {string || null}
+         */
+        this.RowsSentSum = null;
+
+        /**
+         * 最后执行时间
+         * @type {string || null}
+         */
+        this.TsMax = null;
+
+        /**
+         * 首次执行时间
+         * @type {string || null}
+         */
+        this.TsMin = null;
+
+        /**
+         * 帐号
+         * @type {string || null}
+         */
+        this.User = null;
+
+        /**
+         * 样例Sql
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ExampleSql = null;
+
+        /**
+         * 账户的域名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Host = null;
 
     }
 
@@ -4314,6 +5723,25 @@ class DescribeProjectsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.CheckSum = 'CheckSum' in params ? params.CheckSum : null;
+        this.Db = 'Db' in params ? params.Db : null;
+        this.FingerPrint = 'FingerPrint' in params ? params.FingerPrint : null;
+        this.LockTimeAvg = 'LockTimeAvg' in params ? params.LockTimeAvg : null;
+        this.LockTimeMax = 'LockTimeMax' in params ? params.LockTimeMax : null;
+        this.LockTimeMin = 'LockTimeMin' in params ? params.LockTimeMin : null;
+        this.LockTimeSum = 'LockTimeSum' in params ? params.LockTimeSum : null;
+        this.QueryCount = 'QueryCount' in params ? params.QueryCount : null;
+        this.QueryTimeAvg = 'QueryTimeAvg' in params ? params.QueryTimeAvg : null;
+        this.QueryTimeMax = 'QueryTimeMax' in params ? params.QueryTimeMax : null;
+        this.QueryTimeMin = 'QueryTimeMin' in params ? params.QueryTimeMin : null;
+        this.QueryTimeSum = 'QueryTimeSum' in params ? params.QueryTimeSum : null;
+        this.RowsExaminedSum = 'RowsExaminedSum' in params ? params.RowsExaminedSum : null;
+        this.RowsSentSum = 'RowsSentSum' in params ? params.RowsSentSum : null;
+        this.TsMax = 'TsMax' in params ? params.TsMax : null;
+        this.TsMin = 'TsMin' in params ? params.TsMin : null;
+        this.User = 'User' in params ? params.User : null;
+        this.ExampleSql = 'ExampleSql' in params ? params.ExampleSql : null;
+        this.Host = 'Host' in params ? params.Host : null;
 
     }
 }
@@ -4765,6 +6193,34 @@ class DescribeDCDBInstancesResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeFlow请求参数结构体
+ * @class
+ */
+class DescribeFlowRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 异步请求接口返回的任务流程号。
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+
+    }
+}
+
+/**
  * CreateDCDBInstance请求参数结构体
  * @class
  */
@@ -4882,6 +6338,36 @@ class CreateDCDBInstanceRequest extends  AbstractModel {
          */
         this.ResourceTags = null;
 
+        /**
+         * 参数列表。本接口的可选值为：character_set_server（字符集，必传），lower_case_table_names（表名大小写敏感，必传，0 - 敏感；1-不敏感），innodb_page_size（innodb数据页，默认16K），sync_mode（同步模式：0 - 异步； 1 - 强同步；2 - 强同步可退化。默认为强同步可退化）。
+         * @type {Array.<DBParamValue> || null}
+         */
+        this.InitParams = null;
+
+        /**
+         * DCN源地域
+         * @type {string || null}
+         */
+        this.DcnRegion = null;
+
+        /**
+         * DCN源实例ID
+         * @type {string || null}
+         */
+        this.DcnInstanceId = null;
+
+        /**
+         * 自动续费标记，0表示默认状态(用户未设置，即初始状态即手动续费，用户开通了预付费不停服特权也会进行自动续费)， 1表示自动续费，2表示明确不自动续费(用户设置)，若业务无续费概念或无需自动续费，需要设置为0
+         * @type {number || null}
+         */
+        this.AutoRenewFlag = null;
+
+        /**
+         * 安全组ids，安全组可以传数组形式，兼容之前SecurityGroupId参数
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroupIds = null;
+
     }
 
     /**
@@ -4916,6 +6402,19 @@ class CreateDCDBInstanceRequest extends  AbstractModel {
                 this.ResourceTags.push(obj);
             }
         }
+
+        if (params.InitParams) {
+            this.InitParams = new Array();
+            for (let z in params.InitParams) {
+                let obj = new DBParamValue();
+                obj.deserialize(params.InitParams[z]);
+                this.InitParams.push(obj);
+            }
+        }
+        this.DcnRegion = 'DcnRegion' in params ? params.DcnRegion : null;
+        this.DcnInstanceId = 'DcnInstanceId' in params ? params.DcnInstanceId : null;
+        this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
+        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
 
     }
 }
@@ -4990,6 +6489,34 @@ class DescribeDCDBUpgradePriceRequest extends  AbstractModel {
             obj.deserialize(params.SplitShardConfig)
             this.SplitShardConfig = obj;
         }
+
+    }
+}
+
+/**
+ * CreateDedicatedClusterDCDBInstance返回参数结构体
+ * @class
+ */
+class CreateDedicatedClusterDCDBInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5093,18 +6620,12 @@ class UserTaskInfo extends  AbstractModel {
 }
 
 /**
- * 数据库存储过程信息
+ * DescribeProjects请求参数结构体
  * @class
  */
-class DatabaseProcedure extends  AbstractModel {
+class DescribeProjectsRequest extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * 存储过程名称
-         * @type {string || null}
-         */
-        this.Proc = null;
 
     }
 
@@ -5115,7 +6636,6 @@ class DatabaseProcedure extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Proc = 'Proc' in params ? params.Proc : null;
 
     }
 }
@@ -5456,6 +6976,12 @@ class UpgradeDCDBInstanceRequest extends  AbstractModel {
          */
         this.VoucherIds = null;
 
+        /**
+         * 变更部署时指定的新可用区列表，第1个为主可用区，其余为从可用区
+         * @type {Array.<string> || null}
+         */
+        this.Zones = null;
+
     }
 
     /**
@@ -5487,6 +7013,49 @@ class UpgradeDCDBInstanceRequest extends  AbstractModel {
         }
         this.AutoVoucher = 'AutoVoucher' in params ? params.AutoVoucher : null;
         this.VoucherIds = 'VoucherIds' in params ? params.VoucherIds : null;
+        this.Zones = 'Zones' in params ? params.Zones : null;
+
+    }
+}
+
+/**
+ * DestroyHourDCDBInstance返回参数结构体
+ * @class
+ */
+class DestroyHourDCDBInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 异步任务的请求 ID，可使用此 ID [查询异步任务的执行结果](https://cloud.tencent.com/document/product/557/56485)。
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * 实例 ID，与入参InstanceId一致。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5571,6 +7140,34 @@ class LogFileInfo extends  AbstractModel {
         this.Length = 'Length' in params ? params.Length : null;
         this.Uri = 'Uri' in params ? params.Uri : null;
         this.FileName = 'FileName' in params ? params.FileName : null;
+
+    }
+}
+
+/**
+ * ActiveHourDCDBInstance请求参数结构体
+ * @class
+ */
+class ActiveHourDCDBInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 待升级的实例ID列表。形如：["dcdbt-ow728lmc"]，可以通过 DescribeDCDBInstances 查询实例详情获得。
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
 
     }
 }
@@ -5965,6 +7562,77 @@ class DescribeAccountsResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeDBSlowLogs返回参数结构体
+ * @class
+ */
+class DescribeDBSlowLogsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 所有语句锁时间总和
+         * @type {number || null}
+         */
+        this.LockTimeSum = null;
+
+        /**
+         * 所有语句查询总次数
+         * @type {number || null}
+         */
+        this.QueryCount = null;
+
+        /**
+         * 总记录数
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * 所有语句查询时间总和
+         * @type {number || null}
+         */
+        this.QueryTimeSum = null;
+
+        /**
+         * 慢查询日志数据
+         * @type {Array.<SlowLogData> || null}
+         */
+        this.Data = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LockTimeSum = 'LockTimeSum' in params ? params.LockTimeSum : null;
+        this.QueryCount = 'QueryCount' in params ? params.QueryCount : null;
+        this.Total = 'Total' in params ? params.Total : null;
+        this.QueryTimeSum = 'QueryTimeSum' in params ? params.QueryTimeSum : null;
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new SlowLogData();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeDCDBInstances请求参数结构体
  * @class
  */
@@ -6068,6 +7736,18 @@ class DescribeDCDBInstancesRequest extends  AbstractModel {
          */
         this.FilterInstanceType = null;
 
+        /**
+         * 按实例状态筛选
+         * @type {Array.<number> || null}
+         */
+        this.Status = null;
+
+        /**
+         * 排除实例状态
+         * @type {Array.<number> || null}
+         */
+        this.ExcludeStatus = null;
+
     }
 
     /**
@@ -6093,6 +7773,8 @@ class DescribeDCDBInstancesRequest extends  AbstractModel {
         this.ExclusterIds = 'ExclusterIds' in params ? params.ExclusterIds : null;
         this.TagKeys = 'TagKeys' in params ? params.TagKeys : null;
         this.FilterInstanceType = 'FilterInstanceType' in params ? params.FilterInstanceType : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ExcludeStatus = 'ExcludeStatus' in params ? params.ExcludeStatus : null;
 
     }
 }
@@ -6196,24 +7878,18 @@ class Project extends  AbstractModel {
 }
 
 /**
- * ModifyDBInstancesProject请求参数结构体
+ * ModifyDBInstanceSecurityGroups返回参数结构体
  * @class
  */
-class ModifyDBInstancesProjectRequest extends  AbstractModel {
+class ModifyDBInstanceSecurityGroupsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 待修改的实例ID列表。实例 ID 形如：dcdbt-ow728lmc。
-         * @type {Array.<string> || null}
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
          */
-        this.InstanceIds = null;
-
-        /**
-         * 要分配的项目 ID，可以通过 DescribeProjects 查询项目列表接口获取。
-         * @type {number || null}
-         */
-        this.ProjectId = null;
+        this.RequestId = null;
 
     }
 
@@ -6224,8 +7900,35 @@ class ModifyDBInstancesProjectRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
-        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DestroyHourDCDBInstance请求参数结构体
+ * @class
+ */
+class DestroyHourDCDBInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例 ID，格式如：tdsqlshard-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -6433,20 +8136,31 @@ module.exports = {
     DescribeAccountPrivilegesResponse: DescribeAccountPrivilegesResponse,
     DescribeDatabasesRequest: DescribeDatabasesRequest,
     ParamDesc: ParamDesc,
+    DestroyDCDBInstanceResponse: DestroyDCDBInstanceResponse,
     DescribeDBParametersRequest: DescribeDBParametersRequest,
     DescribeAccountsRequest: DescribeAccountsRequest,
     SpecConfig: SpecConfig,
+    ModifyRealServerAccessStrategyResponse: ModifyRealServerAccessStrategyResponse,
+    ActiveHourDCDBInstanceResponse: ActiveHourDCDBInstanceResponse,
     DescribeDCDBPriceResponse: DescribeDCDBPriceResponse,
     AssociateSecurityGroupsRequest: AssociateSecurityGroupsRequest,
+    TerminateDedicatedDBInstanceResponse: TerminateDedicatedDBInstanceResponse,
     FlushBinlogResponse: FlushBinlogResponse,
     DescribeDBSecurityGroupsResponse: DescribeDBSecurityGroupsResponse,
+    CancelDcnJobResponse: CancelDcnJobResponse,
+    DescribeFileDownloadUrlRequest: DescribeFileDownloadUrlRequest,
     DescribeDBSyncModeResponse: DescribeDBSyncModeResponse,
     DescribeProjectSecurityGroupsRequest: DescribeProjectSecurityGroupsRequest,
     DescribeDCDBUpgradePriceResponse: DescribeDCDBUpgradePriceResponse,
+    DescribeDBSlowLogsRequest: DescribeDBSlowLogsRequest,
     CreateAccountRequest: CreateAccountRequest,
     DescribeDBParametersResponse: DescribeDBParametersResponse,
+    IsolateHourDCDBInstanceRequest: IsolateHourDCDBInstanceRequest,
+    ModifyDBInstanceNameResponse: ModifyDBInstanceNameResponse,
+    DescribeFlowResponse: DescribeFlowResponse,
     CloneAccountResponse: CloneAccountResponse,
     ModifyAccountDescriptionResponse: ModifyAccountDescriptionResponse,
+    DestroyDCDBInstanceRequest: DestroyDCDBInstanceRequest,
     OpenDBExtranetAccessResponse: OpenDBExtranetAccessResponse,
     CreateDCDBInstanceResponse: CreateDCDBInstanceResponse,
     BriefNodeInfo: BriefNodeInfo,
@@ -6455,20 +8169,24 @@ module.exports = {
     DatabaseView: DatabaseView,
     DescribeDBLogFilesRequest: DescribeDBLogFilesRequest,
     DescribeOrdersResponse: DescribeOrdersResponse,
-    DcnDetailItem: DcnDetailItem,
+    CreateDedicatedClusterDCDBInstanceRequest: CreateDedicatedClusterDCDBInstanceRequest,
+    CreateHourDCDBInstanceRequest: CreateHourDCDBInstanceRequest,
     ResetAccountPasswordRequest: ResetAccountPasswordRequest,
     CopyAccountPrivilegesResponse: CopyAccountPrivilegesResponse,
     CloneAccountRequest: CloneAccountRequest,
     DescribeDCDBRenewalPriceRequest: DescribeDCDBRenewalPriceRequest,
     ParamModifyResult: ParamModifyResult,
     DescribeDBSecurityGroupsRequest: DescribeDBSecurityGroupsRequest,
+    DatabaseProcedure: DatabaseProcedure,
     DescribeDCDBPriceRequest: DescribeDCDBPriceRequest,
+    SwitchDBInstanceHAResponse: SwitchDBInstanceHAResponse,
     DescribeProjectSecurityGroupsResponse: DescribeProjectSecurityGroupsResponse,
     DatabaseFunction: DatabaseFunction,
     DescribeSqlLogsRequest: DescribeSqlLogsRequest,
     ParamConstraint: ParamConstraint,
     ResetAccountPasswordResponse: ResetAccountPasswordResponse,
     DescribeDCDBSaleInfoRequest: DescribeDCDBSaleInfoRequest,
+    ModifyRealServerAccessStrategyRequest: ModifyRealServerAccessStrategyRequest,
     ExpandShardConfig: ExpandShardConfig,
     RenewDCDBInstanceRequest: RenewDCDBInstanceRequest,
     ShardZoneChooseInfo: ShardZoneChooseInfo,
@@ -6477,12 +8195,14 @@ module.exports = {
     GrantAccountPrivilegesRequest: GrantAccountPrivilegesRequest,
     DescribeShardSpecRequest: DescribeShardSpecRequest,
     DescribeDCDBShardsRequest: DescribeDCDBShardsRequest,
+    SwitchDBInstanceHARequest: SwitchDBInstanceHARequest,
     DBParamValue: DBParamValue,
     SpecConfigInfo: SpecConfigInfo,
     ModifyDBParametersRequest: ModifyDBParametersRequest,
     DCDBInstanceInfo: DCDBInstanceInfo,
     ModifyDBInstanceSecurityGroupsRequest: ModifyDBInstanceSecurityGroupsRequest,
     DescribeDcnDetailRequest: DescribeDcnDetailRequest,
+    DescribeFileDownloadUrlResponse: DescribeFileDownloadUrlResponse,
     ModifyDBParametersResponse: ModifyDBParametersResponse,
     DCDBShardInfo: DCDBShardInfo,
     CopyAccountPrivilegesRequest: CopyAccountPrivilegesRequest,
@@ -6490,7 +8210,9 @@ module.exports = {
     DescribeDatabaseTableRequest: DescribeDatabaseTableRequest,
     DescribeDCDBInstanceNodeInfoResponse: DescribeDCDBInstanceNodeInfoResponse,
     KillSessionRequest: KillSessionRequest,
+    TerminateDedicatedDBInstanceRequest: TerminateDedicatedDBInstanceRequest,
     DescribeDatabaseObjectsResponse: DescribeDatabaseObjectsResponse,
+    ModifyDBInstanceNameRequest: ModifyDBInstanceNameRequest,
     DescribeDcnDetailResponse: DescribeDcnDetailResponse,
     TableColumn: TableColumn,
     SecurityGroupBound: SecurityGroupBound,
@@ -6501,17 +8223,21 @@ module.exports = {
     DescribeDCDBRenewalPriceResponse: DescribeDCDBRenewalPriceResponse,
     DescribeDCDBShardsResponse: DescribeDCDBShardsResponse,
     ZonesInfo: ZonesInfo,
+    CreateHourDCDBInstanceResponse: CreateHourDCDBInstanceResponse,
     Database: Database,
     GrantAccountPrivilegesResponse: GrantAccountPrivilegesResponse,
+    CancelDcnJobRequest: CancelDcnJobRequest,
+    IsolateHourDCDBInstanceResponse: IsolateHourDCDBInstanceResponse,
     ShardInfo: ShardInfo,
     OpenDBExtranetAccessRequest: OpenDBExtranetAccessRequest,
     DescribeDCDBSaleInfoResponse: DescribeDCDBSaleInfoResponse,
-    ModifyDBInstanceSecurityGroupsResponse: ModifyDBInstanceSecurityGroupsResponse,
+    ModifyDBInstancesProjectRequest: ModifyDBInstancesProjectRequest,
+    DcnDetailItem: DcnDetailItem,
     DescribeDBSyncModeRequest: DescribeDBSyncModeRequest,
     CloseDBExtranetAccessResponse: CloseDBExtranetAccessResponse,
     ModifyAccountDescriptionRequest: ModifyAccountDescriptionRequest,
     KillSessionResponse: KillSessionResponse,
-    DescribeProjectsRequest: DescribeProjectsRequest,
+    SlowLogData: SlowLogData,
     DescribeDatabasesResponse: DescribeDatabasesResponse,
     DescribeOrdersRequest: DescribeOrdersRequest,
     DescribeDBLogFilesResponse: DescribeDBLogFilesResponse,
@@ -6521,10 +8247,12 @@ module.exports = {
     DescribeSqlLogsResponse: DescribeSqlLogsResponse,
     DeleteAccountRequest: DeleteAccountRequest,
     DescribeDCDBInstancesResponse: DescribeDCDBInstancesResponse,
+    DescribeFlowRequest: DescribeFlowRequest,
     CreateDCDBInstanceRequest: CreateDCDBInstanceRequest,
     DescribeDCDBUpgradePriceRequest: DescribeDCDBUpgradePriceRequest,
+    CreateDedicatedClusterDCDBInstanceResponse: CreateDedicatedClusterDCDBInstanceResponse,
     UserTaskInfo: UserTaskInfo,
-    DatabaseProcedure: DatabaseProcedure,
+    DescribeProjectsRequest: DescribeProjectsRequest,
     AddShardConfig: AddShardConfig,
     ModifyDBSyncModeRequest: ModifyDBSyncModeRequest,
     DescribeProjectsResponse: DescribeProjectsResponse,
@@ -6532,17 +8260,21 @@ module.exports = {
     RegionInfo: RegionInfo,
     DescribeDatabaseObjectsRequest: DescribeDatabaseObjectsRequest,
     UpgradeDCDBInstanceRequest: UpgradeDCDBInstanceRequest,
+    DestroyHourDCDBInstanceResponse: DestroyHourDCDBInstanceResponse,
     ConstraintRange: ConstraintRange,
     LogFileInfo: LogFileInfo,
+    ActiveHourDCDBInstanceRequest: ActiveHourDCDBInstanceRequest,
     DisassociateSecurityGroupsRequest: DisassociateSecurityGroupsRequest,
     DBAccount: DBAccount,
     DescribeDatabaseTableResponse: DescribeDatabaseTableResponse,
     DescribeAccountPrivilegesRequest: DescribeAccountPrivilegesRequest,
     SqlLogItem: SqlLogItem,
     DescribeAccountsResponse: DescribeAccountsResponse,
+    DescribeDBSlowLogsResponse: DescribeDBSlowLogsResponse,
     DescribeDCDBInstancesRequest: DescribeDCDBInstancesRequest,
     Project: Project,
-    ModifyDBInstancesProjectRequest: ModifyDBInstancesProjectRequest,
+    ModifyDBInstanceSecurityGroupsResponse: ModifyDBInstanceSecurityGroupsResponse,
+    DestroyHourDCDBInstanceRequest: DestroyHourDCDBInstanceRequest,
     FlushBinlogRequest: FlushBinlogRequest,
     ModifyDBSyncModeResponse: ModifyDBSyncModeResponse,
     DisassociateSecurityGroupsResponse: DisassociateSecurityGroupsResponse,

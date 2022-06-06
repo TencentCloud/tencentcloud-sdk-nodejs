@@ -17,6 +17,7 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const CostComponentSet = models.CostComponentSet;
+const VoucherInfos = models.VoucherInfos;
 const DescribeCostSummaryByProductRequest = models.DescribeCostSummaryByProductRequest;
 const ConsumptionSummaryTotal = models.ConsumptionSummaryTotal;
 const DescribeCostSummaryByProjectResponse = models.DescribeCostSummaryByProjectResponse;
@@ -36,11 +37,12 @@ const BillTagInfo = models.BillTagInfo;
 const DescribeBillSummaryByRegionResponse = models.DescribeBillSummaryByRegionResponse;
 const DetailSet = models.DetailSet;
 const BillTransactionInfo = models.BillTransactionInfo;
-const RegionSummaryOverviewItem = models.RegionSummaryOverviewItem;
+const DescribeVoucherInfoResponse = models.DescribeVoucherInfoResponse;
 const ConsumptionResourceSummaryDataItem = models.ConsumptionResourceSummaryDataItem;
 const DescribeAccountBalanceRequest = models.DescribeAccountBalanceRequest;
 const DescribeBillDetailRequest = models.DescribeBillDetailRequest;
 const ConsumptionProjectSummaryDataItem = models.ConsumptionProjectSummaryDataItem;
+const RegionSummaryOverviewItem = models.RegionSummaryOverviewItem;
 const DescribeCostSummaryByProductResponse = models.DescribeCostSummaryByProductResponse;
 const ProductInfo = models.ProductInfo;
 const DescribeDosageDetailByDateResponse = models.DescribeDosageDetailByDateResponse;
@@ -53,16 +55,22 @@ const ConsumptionSummaryTrend = models.ConsumptionSummaryTrend;
 const DescribeBillSummaryByRegionRequest = models.DescribeBillSummaryByRegionRequest;
 const DescribeBillSummaryByPayModeRequest = models.DescribeBillSummaryByPayModeRequest;
 const DescribeCostSummaryByProjectRequest = models.DescribeCostSummaryByProjectRequest;
+const UsageRecords = models.UsageRecords;
 const ConsumptionRegionSummaryDataItem = models.ConsumptionRegionSummaryDataItem;
 const DescribeDosageCosDetailByDateResponse = models.DescribeDosageCosDetailByDateResponse;
+const UsageDetails = models.UsageDetails;
 const DescribeBillResourceSummaryResponse = models.DescribeBillResourceSummaryResponse;
 const ActionSummaryOverviewItem = models.ActionSummaryOverviewItem;
+const DescribeVoucherInfoRequest = models.DescribeVoucherInfoRequest;
+const ApplicableProducts = models.ApplicableProducts;
 const ConditionPayMode = models.ConditionPayMode;
+const DescribeVoucherUsageDetailsRequest = models.DescribeVoucherUsageDetailsRequest;
 const DescribeDealsByCondRequest = models.DescribeDealsByCondRequest;
 const DescribeBillResourceSummaryRequest = models.DescribeBillResourceSummaryRequest;
 const PayDealsRequest = models.PayDealsRequest;
 const DescribeBillListRequest = models.DescribeBillListRequest;
 const PayDealsResponse = models.PayDealsResponse;
+const SummaryTotal = models.SummaryTotal;
 const BillDetail = models.BillDetail;
 const DescribeBillSummaryByTagResponse = models.DescribeBillSummaryByTagResponse;
 const TagSummaryOverviewItem = models.TagSummaryOverviewItem;
@@ -71,6 +79,7 @@ const DescribeBillDetailResponse = models.DescribeBillDetailResponse;
 const ConsumptionResourceSummaryConditionValue = models.ConsumptionResourceSummaryConditionValue;
 const Deal = models.Deal;
 const DescribeCostDetailRequest = models.DescribeCostDetailRequest;
+const DescribeVoucherUsageDetailsResponse = models.DescribeVoucherUsageDetailsResponse;
 const DescribeDealsByCondResponse = models.DescribeDealsByCondResponse;
 const ConditionProject = models.ConditionProject;
 const CosDetailSets = models.CosDetailSets;
@@ -80,6 +89,7 @@ const ConditionBusiness = models.ConditionBusiness;
 const DescribeCostSummaryByResourceRequest = models.DescribeCostSummaryByResourceRequest;
 const DescribeCostDetailResponse = models.DescribeCostDetailResponse;
 const DescribeDosageCosDetailByDateRequest = models.DescribeDosageCosDetailByDateRequest;
+const ExcludedProducts = models.ExcludedProducts;
 const PayModeSummaryOverviewItem = models.PayModeSummaryOverviewItem;
 const BusinessSummaryTotal = models.BusinessSummaryTotal;
 const DescribeCostSummaryByRegionResponse = models.DescribeCostSummaryByRegionResponse;
@@ -107,6 +117,17 @@ class BillingClient extends AbstractClient {
     }
 
     /**
+     * 获取代金券相关信息
+     * @param {DescribeVoucherInfoRequest} req
+     * @param {function(string, DescribeVoucherInfoResponse):void} cb
+     * @public
+     */
+    DescribeVoucherInfo(req, cb) {
+        let resp = new DescribeVoucherInfoResponse();
+        this.request("DescribeVoucherInfo", req, resp, cb);
+    }
+
+    /**
      * 按日期获取产品用量明细
      * @param {DescribeDosageDetailByDateRequest} req
      * @param {function(string, DescribeDosageDetailByDateResponse):void} cb
@@ -126,6 +147,17 @@ class BillingClient extends AbstractClient {
     DescribeCostSummaryByResource(req, cb) {
         let resp = new DescribeCostSummaryByResourceResponse();
         this.request("DescribeCostSummaryByResource", req, resp, cb);
+    }
+
+    /**
+     * 获取代金券使用记录
+     * @param {DescribeVoucherUsageDetailsRequest} req
+     * @param {function(string, DescribeVoucherUsageDetailsResponse):void} cb
+     * @public
+     */
+    DescribeVoucherUsageDetails(req, cb) {
+        let resp = new DescribeVoucherUsageDetailsResponse();
+        this.request("DescribeVoucherUsageDetails", req, resp, cb);
     }
 
     /**

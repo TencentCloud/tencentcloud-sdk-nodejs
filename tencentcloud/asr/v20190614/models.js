@@ -299,6 +299,12 @@ class CreateAsyncRecognitionTaskRequest extends  AbstractModel {
          */
         this.HotwordId = null;
 
+        /**
+         * 回调数据中，是否需要对应音频数据。
+         * @type {boolean || null}
+         */
+        this.AudioData = null;
+
     }
 
     /**
@@ -318,6 +324,7 @@ class CreateAsyncRecognitionTaskRequest extends  AbstractModel {
         this.ConvertNumMode = 'ConvertNumMode' in params ? params.ConvertNumMode : null;
         this.WordInfo = 'WordInfo' in params ? params.WordInfo : null;
         this.HotwordId = 'HotwordId' in params ? params.HotwordId : null;
+        this.AudioData = 'AudioData' in params ? params.AudioData : null;
 
     }
 }
@@ -455,8 +462,8 @@ class SentenceRecognitionRequest extends  AbstractModel {
 • 16k_en：16k 英语；
 • 16k_ca：16k 粤语；
 • 16k_ja：16k 日语；
-•16k_wuu-SH：16k 上海话方言；
-•16k_zh_medical：16k 医疗。
+• 16k_zh_medical：16k 医疗；
+• 16k_zh_dialect：多方言。
          * @type {string || null}
          */
         this.EngSerViceType = null;
@@ -468,7 +475,7 @@ class SentenceRecognitionRequest extends  AbstractModel {
         this.SourceType = null;
 
         /**
-         * 识别音频的音频格式。mp3、wav。
+         * 识别音频的音频格式，支持wav、pcm、ogg-opus、speex、silk、mp3、m4a、aac。
          * @type {string || null}
          */
         this.VoiceFormat = null;
@@ -480,13 +487,13 @@ class SentenceRecognitionRequest extends  AbstractModel {
         this.UsrAudioKey = null;
 
         /**
-         * 语音 URL，公网可下载。当 SourceType 值为 0（语音 URL上传） 时须填写该字段，为 1 时不填；URL 的长度大于 0，小于 2048，需进行urlencode编码。音频时间长度要小于60s。
+         * 语音 URL，公网可下载。当 SourceType 值为 0（语音 URL上传） 时须填写该字段，为 1 时不填；URL 的长度大于 0，小于 2048，需进行urlencode编码。音频时长不能超过60s，音频文件大小不能超过3MB。
          * @type {string || null}
          */
         this.Url = null;
 
         /**
-         * 语音数据，当SourceType 值为1（本地语音数据上传）时必须填写，当SourceType 值为0（语音 URL上传）可不写。要使用base64编码(采用python语言时注意读取文件应该为string而不是byte，以byte格式读取后要decode()。编码后的数据不可带有回车换行符)。数据长度要小于3MB（Base64后）。
+         * 语音数据，当SourceType 值为1（本地语音数据上传）时必须填写，当SourceType 值为0（语音 URL上传）可不写。要使用base64编码(采用python语言时注意读取文件应该为string而不是byte，以byte格式读取后要decode()。编码后的数据不可带有回车换行符)。音频时长不能超过60s，音频文件大小不能超过3MB（Base64后）。
          * @type {string || null}
          */
         this.Data = null;
@@ -528,7 +535,7 @@ class SentenceRecognitionRequest extends  AbstractModel {
         this.ConvertNumMode = null;
 
         /**
-         * 是否显示词级别时间戳。0：不显示；1：显示，不包含标点时间戳，2：显示，包含标点时间戳。支持引擎8k_zh，16k_zh，16k_en，16k_ca，16k_ja，16k_wuu-SH。默认值为 0。
+         * 是否显示词级别时间戳。0：不显示；1：显示，不包含标点时间戳，2：显示，包含标点时间戳。默认值为 0。
          * @type {number || null}
          */
         this.WordInfo = null;
@@ -916,12 +923,14 @@ class CreateRecTaskRequest extends  AbstractModel {
 • 16k_en_edu 英文教育；
 • 16k_zh_medical  医疗；
 • 16k_th 泰语；
+• 16k_wuu-SH：16k 上海话方言；
+• 16k_zh_dialect：多方言。
          * @type {string || null}
          */
         this.EngineModelType = null;
 
         /**
-         * 识别声道数。1：单声道；2：双声道（仅支持 8k_zh 引擎模）。注意：录音识别会自动将音频转码为填写的识别声道数
+         * 识别声道数。1：单声道（非电话场景，直接选择单声道即可，忽略音频声道数）；2：双声道（仅支持8k_zh电话场景，双声道应分别对应通话双方）。注意：双声道的电话音频已物理分离说话人，无需再开启说话人分离功能。
          * @type {number || null}
          */
         this.ChannelNum = null;
@@ -939,7 +948,8 @@ class CreateRecTaskRequest extends  AbstractModel {
         this.SourceType = null;
 
         /**
-         * 是否开启说话人分离，0：不开启，1：开启(仅支持8k_zh，16k_zh，16k_zh_video引擎模型，单声道音频)，默认值为 0。
+         * 是否开启说话人分离，0：不开启，1：开启(仅支持8k_zh，16k_zh，16k_zh_video，单声道音频)，默认值为 0。
+注意：8k电话场景建议使用双声道来区分通话双方，设置ChannelNum=2即可，不用开启说话人分离。
          * @type {number || null}
          */
         this.SpeakerDiarization = null;
@@ -964,7 +974,7 @@ class CreateRecTaskRequest extends  AbstractModel {
         this.Url = null;
 
         /**
-         * 语音数据，当SourceType 值为1时必须填写，为0可不写。要base64编码(采用python语言时注意读取文件应该为string而不是byte，以byte格式读取后要decode()。编码后的数据不可带有回车换行符)。音频数据要小于5MB。
+         * 语音数据base64编码，当SourceType 值为1时必须填写，为0可不写。音频数据要小于5MB。
          * @type {string || null}
          */
         this.Data = null;
@@ -976,10 +986,10 @@ class CreateRecTaskRequest extends  AbstractModel {
         this.DataLen = null;
 
         /**
-         * 热词id。用于调用对应的热词表，如果在调用语音识别服务时，不进行单独的热词id设置，自动生效默认热词；如果进行了单独的热词id设置，那么将生效单独设置的热词id。
-         * @type {string || null}
+         * 是否进行阿拉伯数字智能转换（目前支持中文普通话引擎）。0：不转换，直接输出中文数字，1：根据场景智能转换为阿拉伯数字，3: 打开数学相关数字转换。默认值为 1。
+         * @type {number || null}
          */
-        this.HotwordId = null;
+        this.ConvertNumMode = null;
 
         /**
          * 是否过滤脏词（目前支持中文普通话引擎）。0：不过滤脏词；1：过滤脏词；2：将脏词替换为 * 。默认值为 0。
@@ -988,16 +998,16 @@ class CreateRecTaskRequest extends  AbstractModel {
         this.FilterDirty = null;
 
         /**
-         * 是否过滤语气词（目前支持中文普通话引擎）。0：不过滤语气词；1：部分过滤；2：严格过滤 。默认值为 0。
-         * @type {number || null}
+         * 热词表id。如不设置该参数，自动生效默认热词表；如果设置了该参数，那么将生效对应的热词表。
+         * @type {string || null}
          */
-        this.FilterModal = null;
+        this.HotwordId = null;
 
         /**
-         * 是否进行阿拉伯数字智能转换（目前支持中文普通话引擎）。0：不转换，直接输出中文数字，1：根据场景智能转换为阿拉伯数字，3: 打开数学相关数字转换。默认值为 1。
-         * @type {number || null}
+         * 自学习模型 id。如不设置该参数，自动生效最后一次上线的自学习模型；如果设置了该参数，那么将生效对应的自学习模型。
+         * @type {string || null}
          */
-        this.ConvertNumMode = null;
+        this.CustomizationId = null;
 
         /**
          * 附加参数(该参数无意义，忽略即可)
@@ -1010,6 +1020,12 @@ class CreateRecTaskRequest extends  AbstractModel {
          * @type {number || null}
          */
         this.FilterPunc = null;
+
+        /**
+         * 是否过滤语气词（目前支持中文普通话引擎）。0：不过滤语气词；1：部分过滤；2：严格过滤 。默认值为 0。
+         * @type {number || null}
+         */
+        this.FilterModal = null;
 
     }
 
@@ -1030,12 +1046,13 @@ class CreateRecTaskRequest extends  AbstractModel {
         this.Url = 'Url' in params ? params.Url : null;
         this.Data = 'Data' in params ? params.Data : null;
         this.DataLen = 'DataLen' in params ? params.DataLen : null;
-        this.HotwordId = 'HotwordId' in params ? params.HotwordId : null;
-        this.FilterDirty = 'FilterDirty' in params ? params.FilterDirty : null;
-        this.FilterModal = 'FilterModal' in params ? params.FilterModal : null;
         this.ConvertNumMode = 'ConvertNumMode' in params ? params.ConvertNumMode : null;
+        this.FilterDirty = 'FilterDirty' in params ? params.FilterDirty : null;
+        this.HotwordId = 'HotwordId' in params ? params.HotwordId : null;
+        this.CustomizationId = 'CustomizationId' in params ? params.CustomizationId : null;
         this.Extra = 'Extra' in params ? params.Extra : null;
         this.FilterPunc = 'FilterPunc' in params ? params.FilterPunc : null;
+        this.FilterModal = 'FilterModal' in params ? params.FilterModal : null;
 
     }
 }
@@ -1454,7 +1471,7 @@ class DeleteCustomizationResponse extends  AbstractModel {
 }
 
 /**
- * 获取录音识别结果结果的返回参数
+ * 获取录音识别结果的返回参数
  * @class
  */
 class TaskStatus extends  AbstractModel {
@@ -1498,6 +1515,13 @@ class TaskStatus extends  AbstractModel {
          */
         this.ResultDetail = null;
 
+        /**
+         * 音频时长(秒)。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.AudioDuration = null;
+
     }
 
     /**
@@ -1521,6 +1545,7 @@ class TaskStatus extends  AbstractModel {
                 this.ResultDetail.push(obj);
             }
         }
+        this.AudioDuration = 'AudioDuration' in params ? params.AudioDuration : null;
 
     }
 }
@@ -1858,6 +1883,13 @@ class SentenceDetail extends  AbstractModel {
          */
         this.SpeechSpeed = null;
 
+        /**
+         * 声道或说话人 Id（请求中如果设置了 speaker_diarization或者ChannelNum为双声道，可区分说话人或声道）
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.SpeakerId = null;
+
     }
 
     /**
@@ -1882,6 +1914,7 @@ class SentenceDetail extends  AbstractModel {
             }
         }
         this.SpeechSpeed = 'SpeechSpeed' in params ? params.SpeechSpeed : null;
+        this.SpeakerId = 'SpeakerId' in params ? params.SpeakerId : null;
 
     }
 }

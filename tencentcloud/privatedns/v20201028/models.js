@@ -17,6 +17,46 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * DescribeQuotaUsage返回参数结构体
+ * @class
+ */
+class DescribeQuotaUsageResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Tld额度使用情况
+         * @type {TldQuota || null}
+         */
+        this.TldQuota = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.TldQuota) {
+            let obj = new TldQuota();
+            obj.deserialize(params.TldQuota)
+            this.TldQuota = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyPrivateZoneVpc请求参数结构体
  * @class
  */
@@ -36,6 +76,12 @@ class ModifyPrivateZoneVpcRequest extends  AbstractModel {
          */
         this.VpcSet = null;
 
+        /**
+         * 私有域账号关联的全部VPC列表
+         * @type {Array.<AccountVpcInfo> || null}
+         */
+        this.AccountVpcSet = null;
+
     }
 
     /**
@@ -53,6 +99,15 @@ class ModifyPrivateZoneVpcRequest extends  AbstractModel {
                 let obj = new VpcInfo();
                 obj.deserialize(params.VpcSet[z]);
                 this.VpcSet.push(obj);
+            }
+        }
+
+        if (params.AccountVpcSet) {
+            this.AccountVpcSet = new Array();
+            for (let z in params.AccountVpcSet) {
+                let obj = new AccountVpcInfo();
+                obj.deserialize(params.AccountVpcSet[z]);
+                this.AccountVpcSet.push(obj);
             }
         }
 
@@ -103,6 +158,56 @@ class DescribeAuditLogResponse extends  AbstractModel {
 }
 
 /**
+ * DescribePrivateDNSAccountList返回参数结构体
+ * @class
+ */
+class DescribePrivateDNSAccountListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 私有域解析账号数量
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 私有域解析账号列表
+         * @type {Array.<PrivateDNSAccount> || null}
+         */
+        this.AccountSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.AccountSet) {
+            this.AccountSet = new Array();
+            for (let z in params.AccountSet) {
+                let obj = new PrivateDNSAccount();
+                obj.deserialize(params.AccountSet[z]);
+                this.AccountSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribePrivateZoneRecordList请求参数结构体
  * @class
  */
@@ -117,7 +222,7 @@ class DescribePrivateZoneRecordListRequest extends  AbstractModel {
         this.ZoneId = null;
 
         /**
-         * 过滤参数
+         * 过滤参数（支持使用Value、RecordType过滤）
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -129,7 +234,7 @@ class DescribePrivateZoneRecordListRequest extends  AbstractModel {
         this.Offset = null;
 
         /**
-         * 分页限制数目， 最大100，默认20
+         * 分页限制数目， 最大200，默认20
          * @type {number || null}
          */
         this.Limit = null;
@@ -155,6 +260,190 @@ class DescribePrivateZoneRecordListRequest extends  AbstractModel {
         }
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * 私有域解析账号
+ * @class
+ */
+class PrivateDNSAccount extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 主账号Uin
+         * @type {string || null}
+         */
+        this.Uin = null;
+
+        /**
+         * 主账号名称
+         * @type {string || null}
+         */
+        this.Account = null;
+
+        /**
+         * 用户昵称
+         * @type {string || null}
+         */
+        this.Nickname = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Uin = 'Uin' in params ? params.Uin : null;
+        this.Account = 'Account' in params ? params.Account : null;
+        this.Nickname = 'Nickname' in params ? params.Nickname : null;
+
+    }
+}
+
+/**
+ * DescribePrivateZoneRecordList返回参数结构体
+ * @class
+ */
+class DescribePrivateZoneRecordListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 解析记录数量
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 解析记录列表
+         * @type {Array.<PrivateZoneRecord> || null}
+         */
+        this.RecordSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.RecordSet) {
+            this.RecordSet = new Array();
+            for (let z in params.RecordSet) {
+                let obj = new PrivateZoneRecord();
+                obj.deserialize(params.RecordSet[z]);
+                this.RecordSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribePrivateZoneList返回参数结构体
+ * @class
+ */
+class DescribePrivateZoneListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 私有域数量
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 私有域列表
+         * @type {Array.<PrivateZone> || null}
+         */
+        this.PrivateZoneSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.PrivateZoneSet) {
+            this.PrivateZoneSet = new Array();
+            for (let z in params.PrivateZoneSet) {
+                let obj = new PrivateZone();
+                obj.deserialize(params.PrivateZoneSet[z]);
+                this.PrivateZoneSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 关联的VPC出参
+ * @class
+ */
+class AccountVpcInfoOutput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 关联账户的uin
+         * @type {string || null}
+         */
+        this.Uin = null;
+
+        /**
+         * vpcid
+         * @type {string || null}
+         */
+        this.UniqVpcId = null;
+
+        /**
+         * 地域
+         * @type {string || null}
+         */
+        this.Region = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Uin = 'Uin' in params ? params.Uin : null;
+        this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
+        this.Region = 'Region' in params ? params.Region : null;
 
     }
 }
@@ -218,6 +507,77 @@ class DatePoint extends  AbstractModel {
         }
         this.Date = 'Date' in params ? params.Date : null;
         this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
+ * DescribeAccountVpcList返回参数结构体
+ * @class
+ */
+class DescribeAccountVpcListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * VPC数量
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * VPC 列表
+         * @type {Array.<AccountVpcInfoOut> || null}
+         */
+        this.VpcSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.VpcSet) {
+            this.VpcSet = new Array();
+            for (let z in params.VpcSet) {
+                let obj = new AccountVpcInfoOut();
+                obj.deserialize(params.VpcSet[z]);
+                this.VpcSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribePrivateZoneService请求参数结构体
+ * @class
+ */
+class DescribePrivateZoneServiceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
 
     }
 }
@@ -381,7 +741,7 @@ class DescribeRequestDataRequest extends  AbstractModel {
         super();
 
         /**
-         * 请求量统计起始时间
+         * 请求量统计起始时间，格式：2020-11-22 00:00:00
          * @type {string || null}
          */
         this.TimeRangeBegin = null;
@@ -393,7 +753,7 @@ class DescribeRequestDataRequest extends  AbstractModel {
         this.Filters = null;
 
         /**
-         * 请求量统计结束时间
+         * 请求量统计结束时间，格式：2020-11-22 23:59:59
          * @type {string || null}
          */
         this.TimeRangeEnd = null;
@@ -451,30 +811,36 @@ class ModifyPrivateZoneRecordResponse extends  AbstractModel {
 }
 
 /**
- * DescribePrivateZoneRecordList返回参数结构体
+ * DescribeAccountVpcList请求参数结构体
  * @class
  */
-class DescribePrivateZoneRecordListResponse extends  AbstractModel {
+class DescribeAccountVpcListRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 解析记录数量
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * 解析记录列表
-         * @type {Array.<PrivateZoneRecord> || null}
-         */
-        this.RecordSet = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 关联账号的uin
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.AccountUin = null;
+
+        /**
+         * 分页偏移量，从0开始
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 分页限制数目， 最大100，默认20
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 过滤参数
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
 
     }
 
@@ -485,17 +851,18 @@ class DescribePrivateZoneRecordListResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.AccountUin = 'AccountUin' in params ? params.AccountUin : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
-        if (params.RecordSet) {
-            this.RecordSet = new Array();
-            for (let z in params.RecordSet) {
-                let obj = new PrivateZoneRecord();
-                obj.deserialize(params.RecordSet[z]);
-                this.RecordSet.push(obj);
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
             }
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -559,7 +926,7 @@ class ModifyPrivateZoneRequest extends  AbstractModel {
         super();
 
         /**
-         * 域名，格式必须是标准的TLD
+         * 私有域ID
          * @type {string || null}
          */
         this.ZoneId = null;
@@ -628,6 +995,55 @@ class TagInfo extends  AbstractModel {
 }
 
 /**
+ * Tld额度
+ * @class
+ */
+class TldQuota extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总共额度
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * 已使用额度
+         * @type {number || null}
+         */
+        this.Used = null;
+
+        /**
+         * 库存
+         * @type {number || null}
+         */
+        this.Stock = null;
+
+        /**
+         * 用户限额
+         * @type {number || null}
+         */
+        this.Quota = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+        this.Used = 'Used' in params ? params.Used : null;
+        this.Stock = 'Stock' in params ? params.Stock : null;
+        this.Quota = 'Quota' in params ? params.Quota : null;
+
+    }
+}
+
+/**
  * CreatePrivateZone请求参数结构体
  * @class
  */
@@ -660,7 +1076,7 @@ class CreatePrivateZoneRequest extends  AbstractModel {
         this.Remark = null;
 
         /**
-         * 是否开启子域名递归, ENABLED， DISABLED
+         * 是否开启子域名递归, ENABLED， DISABLED。默认值为DISABLED
          * @type {string || null}
          */
         this.DnsForwardStatus = null;
@@ -670,6 +1086,12 @@ class CreatePrivateZoneRequest extends  AbstractModel {
          * @type {Array.<VpcInfo> || null}
          */
         this.Vpcs = null;
+
+        /**
+         * 创建私有域同时绑定关联账号的VPC
+         * @type {Array.<AccountVpcInfo> || null}
+         */
+        this.AccountVpcSet = null;
 
     }
 
@@ -711,6 +1133,151 @@ class CreatePrivateZoneRequest extends  AbstractModel {
             }
         }
 
+        if (params.AccountVpcSet) {
+            this.AccountVpcSet = new Array();
+            for (let z in params.AccountVpcSet) {
+                let obj = new AccountVpcInfo();
+                obj.deserialize(params.AccountVpcSet[z]);
+                this.AccountVpcSet.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * Vpc信息
+ * @class
+ */
+class VpcInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * VpcId： vpc-xadsafsdasd
+         * @type {string || null}
+         */
+        this.UniqVpcId = null;
+
+        /**
+         * Vpc所属地区: ap-guangzhou, ap-shanghai
+         * @type {string || null}
+         */
+        this.Region = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
+        this.Region = 'Region' in params ? params.Region : null;
+
+    }
+}
+
+/**
+ * 查询关联账号VPC列表出参
+ * @class
+ */
+class AccountVpcInfoOut extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * VpcId： vpc-xadsafsdasd
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * Vpc所属地区: ap-guangzhou, ap-shanghai
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * Vpc所属账号: 123456789
+         * @type {string || null}
+         */
+        this.Uin = null;
+
+        /**
+         * vpc资源名称：testname
+         * @type {string || null}
+         */
+        this.VpcName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.Uin = 'Uin' in params ? params.Uin : null;
+        this.VpcName = 'VpcName' in params ? params.VpcName : null;
+
+    }
+}
+
+/**
+ * 私有域解析账号Vpc信息
+ * @class
+ */
+class AccountVpcInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * VpcId： vpc-xadsafsdasd
+         * @type {string || null}
+         */
+        this.UniqVpcId = null;
+
+        /**
+         * Vpc所属地区: ap-guangzhou, ap-shanghai
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * Vpc所属账号: 123456789
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Uin = null;
+
+        /**
+         * vpc资源名称：testname
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.VpcName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.Uin = 'Uin' in params ? params.Uin : null;
+        this.VpcName = 'VpcName' in params ? params.VpcName : null;
+
     }
 }
 
@@ -743,30 +1310,30 @@ class ModifyPrivateZoneResponse extends  AbstractModel {
 }
 
 /**
- * CreatePrivateZone返回参数结构体
+ * DescribePrivateZoneList请求参数结构体
  * @class
  */
-class CreatePrivateZoneResponse extends  AbstractModel {
+class DescribePrivateZoneListRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 私有域ID, zone-xxxxxx
-         * @type {string || null}
+         * 分页偏移量，从0开始
+         * @type {number || null}
          */
-        this.ZoneId = null;
+        this.Offset = null;
 
         /**
-         * 私有域名
-         * @type {string || null}
+         * 分页限制数目， 最大100，默认20
+         * @type {number || null}
          */
-        this.Domain = null;
+        this.Limit = null;
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
+         * 过滤参数
+         * @type {Array.<Filter> || null}
          */
-        this.RequestId = null;
+        this.Filters = null;
 
     }
 
@@ -777,9 +1344,17 @@ class CreatePrivateZoneResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
-        this.Domain = 'Domain' in params ? params.Domain : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
 
     }
 }
@@ -846,30 +1421,30 @@ class DescribePrivateZoneResponse extends  AbstractModel {
 }
 
 /**
- * DescribePrivateZoneList请求参数结构体
+ * CreatePrivateZone返回参数结构体
  * @class
  */
-class DescribePrivateZoneListRequest extends  AbstractModel {
+class CreatePrivateZoneResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 分页偏移量，从0开始
-         * @type {number || null}
+         * 私有域ID, zone-xxxxxx
+         * @type {string || null}
          */
-        this.Offset = null;
+        this.ZoneId = null;
 
         /**
-         * 分页限制数目， 最大100，默认20
-         * @type {number || null}
+         * 私有域名
+         * @type {string || null}
          */
-        this.Limit = null;
+        this.Domain = null;
 
         /**
-         * 过滤参数
-         * @type {Array.<Filter> || null}
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
          */
-        this.Filters = null;
+        this.RequestId = null;
 
     }
 
@@ -880,17 +1455,9 @@ class DescribePrivateZoneListRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
-            }
-        }
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1003,7 +1570,7 @@ class DescribePrivateZoneServiceResponse extends  AbstractModel {
         super();
 
         /**
-         * 私有域解析服务开通状态
+         * 私有域解析服务开通状态。ENABLED已开通，DISABLED未开通
          * @type {string || null}
          */
         this.ServiceStatus = null;
@@ -1030,24 +1597,18 @@ class DescribePrivateZoneServiceResponse extends  AbstractModel {
 }
 
 /**
- * Vpc信息
+ * CreatePrivateDNSAccount返回参数结构体
  * @class
  */
-class VpcInfo extends  AbstractModel {
+class CreatePrivateDNSAccountResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * VpcId： vpc-xadsafsdasd
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.UniqVpcId = null;
-
-        /**
-         * Vpc所属地区: ap-guangzhou, ap-shanghai
-         * @type {string || null}
-         */
-        this.Region = null;
+        this.RequestId = null;
 
     }
 
@@ -1058,8 +1619,7 @@ class VpcInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
-        this.Region = 'Region' in params ? params.Region : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1079,7 +1639,7 @@ class DescribeAuditLogRequest extends  AbstractModel {
         this.TimeRangeBegin = null;
 
         /**
-         * 筛选参数：
+         * 筛选参数：ZoneId：私有域ID；Domain：私有域；OperatorUin：操作者账号ID
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -1277,6 +1837,39 @@ class SubscribePrivateZoneServiceResponse extends  AbstractModel {
 }
 
 /**
+ * DeletePrivateDNSAccount请求参数结构体
+ * @class
+ */
+class DeletePrivateDNSAccountRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 私有域解析账号
+         * @type {PrivateDNSAccount || null}
+         */
+        this.Account = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Account) {
+            let obj = new PrivateDNSAccount();
+            obj.deserialize(params.Account)
+            this.Account = obj;
+        }
+
+    }
+}
+
+/**
  * DeletePrivateZoneRecord请求参数结构体
  * @class
  */
@@ -1382,30 +1975,18 @@ class DeletePrivateZoneResponse extends  AbstractModel {
 }
 
 /**
- * DescribePrivateZoneList返回参数结构体
+ * CreatePrivateDNSAccount请求参数结构体
  * @class
  */
-class DescribePrivateZoneListResponse extends  AbstractModel {
+class CreatePrivateDNSAccountRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 私有域数量
-         * @type {number || null}
+         * 私有域解析账号
+         * @type {PrivateDNSAccount || null}
          */
-        this.TotalCount = null;
-
-        /**
-         * 私有域列表
-         * @type {Array.<PrivateZone> || null}
-         */
-        this.PrivateZoneSet = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.Account = null;
 
     }
 
@@ -1416,17 +1997,12 @@ class DescribePrivateZoneListResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
-        if (params.PrivateZoneSet) {
-            this.PrivateZoneSet = new Array();
-            for (let z in params.PrivateZoneSet) {
-                let obj = new PrivateZone();
-                obj.deserialize(params.PrivateZoneSet[z]);
-                this.PrivateZoneSet.push(obj);
-            }
+        if (params.Account) {
+            let obj = new PrivateDNSAccount();
+            obj.deserialize(params.Account)
+            this.Account = obj;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1482,12 +2058,30 @@ class MetricData extends  AbstractModel {
 }
 
 /**
- * DescribePrivateZoneService请求参数结构体
+ * DescribePrivateDNSAccountList请求参数结构体
  * @class
  */
-class DescribePrivateZoneServiceRequest extends  AbstractModel {
+class DescribePrivateDNSAccountListRequest extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * 分页偏移量，从0开始
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 分页限制数目， 最大100，默认20
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 过滤参数
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
 
     }
 
@@ -1497,6 +2091,17 @@ class DescribePrivateZoneServiceRequest extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
         }
 
     }
@@ -1577,6 +2182,20 @@ class PrivateZone extends  AbstractModel {
          */
         this.Tags = null;
 
+        /**
+         * 绑定的关联账号的vpc列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<AccountVpcInfoOutput> || null}
+         */
+        this.AccountVpcSet = null;
+
+        /**
+         * 是否自定义TLD
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.IsCustomTld = null;
+
     }
 
     /**
@@ -1613,6 +2232,16 @@ class PrivateZone extends  AbstractModel {
                 this.Tags.push(obj);
             }
         }
+
+        if (params.AccountVpcSet) {
+            this.AccountVpcSet = new Array();
+            for (let z in params.AccountVpcSet) {
+                let obj = new AccountVpcInfoOutput();
+                obj.deserialize(params.AccountVpcSet[z]);
+                this.AccountVpcSet.push(obj);
+            }
+        }
+        this.IsCustomTld = 'IsCustomTld' in params ? params.IsCustomTld : null;
 
     }
 }
@@ -1683,6 +2312,27 @@ class CreatePrivateZoneRecordRequest extends  AbstractModel {
         this.Weight = 'Weight' in params ? params.Weight : null;
         this.MX = 'MX' in params ? params.MX : null;
         this.TTL = 'TTL' in params ? params.TTL : null;
+
+    }
+}
+
+/**
+ * DescribeQuotaUsage请求参数结构体
+ * @class
+ */
+class DescribeQuotaUsageRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
 
     }
 }
@@ -1760,6 +2410,34 @@ class ModifyPrivateZoneRecordRequest extends  AbstractModel {
         this.Weight = 'Weight' in params ? params.Weight : null;
         this.MX = 'MX' in params ? params.MX : null;
         this.TTL = 'TTL' in params ? params.TTL : null;
+
+    }
+}
+
+/**
+ * DeletePrivateDNSAccount返回参数结构体
+ * @class
+ */
+class DeletePrivateDNSAccountResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1855,6 +2533,12 @@ class ModifyPrivateZoneVpcResponse extends  AbstractModel {
         this.VpcSet = null;
 
         /**
+         * 私有域账号关联的全部VPC列表
+         * @type {Array.<AccountVpcInfoOutput> || null}
+         */
+        this.AccountVpcSet = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -1879,49 +2563,73 @@ class ModifyPrivateZoneVpcResponse extends  AbstractModel {
                 this.VpcSet.push(obj);
             }
         }
+
+        if (params.AccountVpcSet) {
+            this.AccountVpcSet = new Array();
+            for (let z in params.AccountVpcSet) {
+                let obj = new AccountVpcInfoOutput();
+                obj.deserialize(params.AccountVpcSet[z]);
+                this.AccountVpcSet.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
 
 module.exports = {
+    DescribeQuotaUsageResponse: DescribeQuotaUsageResponse,
     ModifyPrivateZoneVpcRequest: ModifyPrivateZoneVpcRequest,
     DescribeAuditLogResponse: DescribeAuditLogResponse,
+    DescribePrivateDNSAccountListResponse: DescribePrivateDNSAccountListResponse,
     DescribePrivateZoneRecordListRequest: DescribePrivateZoneRecordListRequest,
+    PrivateDNSAccount: PrivateDNSAccount,
+    DescribePrivateZoneRecordListResponse: DescribePrivateZoneRecordListResponse,
+    DescribePrivateZoneListResponse: DescribePrivateZoneListResponse,
+    AccountVpcInfoOutput: AccountVpcInfoOutput,
     DescribePrivateZoneRequest: DescribePrivateZoneRequest,
     DatePoint: DatePoint,
+    DescribeAccountVpcListResponse: DescribeAccountVpcListResponse,
+    DescribePrivateZoneServiceRequest: DescribePrivateZoneServiceRequest,
     PrivateZoneRecord: PrivateZoneRecord,
     AuditLogInfo: AuditLogInfo,
     DescribeRequestDataRequest: DescribeRequestDataRequest,
     ModifyPrivateZoneRecordResponse: ModifyPrivateZoneRecordResponse,
-    DescribePrivateZoneRecordListResponse: DescribePrivateZoneRecordListResponse,
+    DescribeAccountVpcListRequest: DescribeAccountVpcListRequest,
     DescribeRequestDataResponse: DescribeRequestDataResponse,
     ModifyPrivateZoneRequest: ModifyPrivateZoneRequest,
     TagInfo: TagInfo,
+    TldQuota: TldQuota,
     CreatePrivateZoneRequest: CreatePrivateZoneRequest,
+    VpcInfo: VpcInfo,
+    AccountVpcInfoOut: AccountVpcInfoOut,
+    AccountVpcInfo: AccountVpcInfo,
     ModifyPrivateZoneResponse: ModifyPrivateZoneResponse,
-    CreatePrivateZoneResponse: CreatePrivateZoneResponse,
+    DescribePrivateZoneListRequest: DescribePrivateZoneListRequest,
     SubscribePrivateZoneServiceRequest: SubscribePrivateZoneServiceRequest,
     DescribePrivateZoneResponse: DescribePrivateZoneResponse,
-    DescribePrivateZoneListRequest: DescribePrivateZoneListRequest,
+    CreatePrivateZoneResponse: CreatePrivateZoneResponse,
     DescribeDashboardResponse: DescribeDashboardResponse,
     CreatePrivateZoneRecordResponse: CreatePrivateZoneRecordResponse,
     DescribePrivateZoneServiceResponse: DescribePrivateZoneServiceResponse,
-    VpcInfo: VpcInfo,
+    CreatePrivateDNSAccountResponse: CreatePrivateDNSAccountResponse,
     DescribeAuditLogRequest: DescribeAuditLogRequest,
     DescribeDashboardRequest: DescribeDashboardRequest,
     DeletePrivateZoneRequest: DeletePrivateZoneRequest,
     AuditLog: AuditLog,
     SubscribePrivateZoneServiceResponse: SubscribePrivateZoneServiceResponse,
+    DeletePrivateDNSAccountRequest: DeletePrivateDNSAccountRequest,
     DeletePrivateZoneRecordRequest: DeletePrivateZoneRecordRequest,
     Filter: Filter,
     DeletePrivateZoneResponse: DeletePrivateZoneResponse,
-    DescribePrivateZoneListResponse: DescribePrivateZoneListResponse,
+    CreatePrivateDNSAccountRequest: CreatePrivateDNSAccountRequest,
     MetricData: MetricData,
-    DescribePrivateZoneServiceRequest: DescribePrivateZoneServiceRequest,
+    DescribePrivateDNSAccountListRequest: DescribePrivateDNSAccountListRequest,
     PrivateZone: PrivateZone,
     CreatePrivateZoneRecordRequest: CreatePrivateZoneRecordRequest,
+    DescribeQuotaUsageRequest: DescribeQuotaUsageRequest,
     ModifyPrivateZoneRecordRequest: ModifyPrivateZoneRecordRequest,
+    DeletePrivateDNSAccountResponse: DeletePrivateDNSAccountResponse,
     FlowUsage: FlowUsage,
     DeletePrivateZoneRecordResponse: DeletePrivateZoneRecordResponse,
     ModifyPrivateZoneVpcResponse: ModifyPrivateZoneVpcResponse,

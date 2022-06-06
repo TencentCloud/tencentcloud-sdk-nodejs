@@ -325,16 +325,16 @@ class FaceFusionRequest extends  AbstractModel {
         this.ModelId = null;
 
         /**
+         * 返回图像方式（url 或 base64) ，二选一。url有效期为7天。
+         * @type {string || null}
+         */
+        this.RspImgType = null;
+
+        /**
          * 图片 base64 数据。请确保人脸为正脸，无旋转。若某些手机拍摄后人脸被旋转，请使用图片的 EXIF 信息对图片进行旋转处理；请勿在 base64 数据中包含头部，如“data:image/jpeg;base64,”。
          * @type {string || null}
          */
         this.Image = null;
-
-        /**
-         * 返回图像方式（url 或 base64) ，二选一。url有效期为30天。
-         * @type {string || null}
-         */
-        this.RspImgType = null;
 
         /**
          * 历史遗留字段，无需填写。因为融合只需提取人脸特征，不需要鉴黄。
@@ -349,6 +349,12 @@ class FaceFusionRequest extends  AbstractModel {
          */
         this.CelebrityIdentify = null;
 
+        /**
+         * 图片Url地址，目前Url方式还不支持，后续会支持，可以使用FuseFace接口
+         * @type {string || null}
+         */
+        this.Url = null;
+
     }
 
     /**
@@ -360,10 +366,11 @@ class FaceFusionRequest extends  AbstractModel {
         }
         this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
         this.ModelId = 'ModelId' in params ? params.ModelId : null;
-        this.Image = 'Image' in params ? params.Image : null;
         this.RspImgType = 'RspImgType' in params ? params.RspImgType : null;
+        this.Image = 'Image' in params ? params.Image : null;
         this.PornDetect = 'PornDetect' in params ? params.PornDetect : null;
         this.CelebrityIdentify = 'CelebrityIdentify' in params ? params.CelebrityIdentify : null;
+        this.Url = 'Url' in params ? params.Url : null;
 
     }
 }
@@ -440,7 +447,7 @@ class FuseFaceReviewDetail extends  AbstractModel {
         this.Label = null;
 
         /**
-         * 对应识别label的置信度，分数越高意味涉政可能性越大。 
+         * 对应识别label的置信度，分数越高意味违法违规可能性越大。 
 0到70，Suggestion建议为PASS； 
 70到80，Suggestion建议为REVIEW； 
 80到100，Suggestion建议为BLOCK。
@@ -501,7 +508,7 @@ class MergeInfo extends  AbstractModel {
         this.InputImageFaceRect = null;
 
         /**
-         * 控制台上传的素材人脸ID
+         * 控制台上传的素材人脸ID，不填默认取最大人脸
          * @type {string || null}
          */
         this.TemplateFaceID = null;
@@ -742,7 +749,7 @@ class FuseFaceRequest extends  AbstractModel {
         this.ModelId = null;
 
         /**
-         * 返回图像方式（url 或 base64) ，二选一。url有效期为30天。
+         * 返回图像方式（url 或 base64) ，二选一。url有效期为7天。
          * @type {string || null}
          */
         this.RspImgType = null;

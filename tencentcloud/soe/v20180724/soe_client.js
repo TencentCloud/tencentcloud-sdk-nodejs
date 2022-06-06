@@ -64,7 +64,7 @@ class SoeClient extends AbstractClient {
     }
 
     /**
-     * 传输音频数据，必须在完成发音评估初始化接口之后调用，且SessonId要与初始化接口保持一致。分片传输时，尽量保证SeqId顺序传输。音频源目前仅支持16k采样率16bit单声道编码方式，如有不一致可能导致评估不准确或失败。
+     * 本接口可用于中英文发音评测数据传输。在使用本接口时需要注意：传输音频数据，必须在完成发音评估初始化接口之后调用，且SessonId要与初始化接口保持一致。分片传输时，尽量保证SeqId顺序传输（请确认SeqId由1开始）。音频源目前仅支持16k采样率16bit单声道编码方式，如有不一致可能导致评估不准确或失败。
      * @param {TransmitOralProcessRequest} req
      * @param {function(string, TransmitOralProcessResponse):void} cb
      * @public
@@ -75,7 +75,7 @@ class SoeClient extends AbstractClient {
     }
 
     /**
-     * 初始化并传输音频数据，分片传输时，尽量保证SeqId顺序传输。音频源目前仅支持16k采样率16bit单声道编码方式，如有不一致可能导致评估不准确或失败。
+     * 本接口可用于中英文发音评测。在使用本接口时需要注意：初始化并传输音频数据，分片传输时，尽量保证SeqId顺序传输（请确认SeqId由1开始）。音频源目前仅支持16k采样率16bit单声道编码方式，如有不一致可能导致评估不准确或失败。
      * @param {TransmitOralProcessWithInitRequest} req
      * @param {function(string, TransmitOralProcessWithInitResponse):void} cb
      * @public

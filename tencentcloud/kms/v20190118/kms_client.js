@@ -190,7 +190,7 @@ class KmsClient extends AbstractClient {
     }
 
     /**
-     * 该接口用户获取 KeyUsage为ASYMMETRIC_DECRYPT_RSA_2048 和 ASYMMETRIC_DECRYPT_SM2 的非对称密钥的公钥信息，使用该公钥用户可在本地进行数据加密，使用该公钥加密的数据只能通过KMS使用对应的私钥进行解密。只有处于Enabled状态的非对称密钥才可能获取公钥。
+     * 该接口用于获取非对称密钥的公钥信息，可用于本地数据加密或验签。只有处于Enabled状态的非对称密钥才可能获取公钥。
      * @param {GetPublicKeyRequest} req
      * @param {function(string, GetPublicKeyResponse):void} cb
      * @public
@@ -246,7 +246,7 @@ class KmsClient extends AbstractClient {
 
     /**
      * 非对称密钥签名。
-注意：只有成功创建了KeyUsage= ASYMMETRIC_SIGN_VERIFY_SM2 的密钥才可以使用签名功能
+注意：只有 KeyUsage 为 ASYMMETRIC_SIGN_VERIFY_SM2、ASYMMETRIC_SIGN_VERIFY_ECC 或其他支持的 ASYMMETRIC_SIGN_VERIFY_${ALGORITHM} 的密钥才可以使用签名功能。
      * @param {SignByAsymmetricKeyRequest} req
      * @param {function(string, SignByAsymmetricKeyResponse):void} cb
      * @public
@@ -653,7 +653,7 @@ class KmsClient extends AbstractClient {
     }
 
     /**
-     * 获取支持的地域列表
+     * 获取可以提供KMS服务的地域列表
      * @param {GetRegionsRequest} req
      * @param {function(string, GetRegionsResponse):void} cb
      * @public

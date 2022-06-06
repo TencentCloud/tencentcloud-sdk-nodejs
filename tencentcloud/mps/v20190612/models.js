@@ -476,14 +476,14 @@ class WorkflowInfo extends  AbstractModel {
         this.Trigger = null;
 
         /**
-         * 视频处理的文件输出存储位置。
+         * 媒体处理的文件输出存储位置。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {TaskOutputStorage || null}
          */
         this.OutputStorage = null;
 
         /**
-         * 视频处理类型任务参数。
+         * 媒体处理类型任务参数。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {MediaProcessTaskInput || null}
          */
@@ -524,7 +524,7 @@ class WorkflowInfo extends  AbstractModel {
         this.TaskPriority = null;
 
         /**
-         * 视频处理生成的文件输出的目标目录，如`/movie/201907/`。
+         * 媒体处理生成的文件输出的目标目录，如`/movie/201907/`。
          * @type {string || null}
          */
         this.OutputDir = null;
@@ -802,7 +802,7 @@ class AiReviewTaskProhibitedAsrResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+         * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
          * @type {string || null}
          */
         this.ErrCodeExt = null;
@@ -1011,7 +1011,7 @@ class AiReviewTaskProhibitedOcrResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+         * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
          * @type {string || null}
          */
         this.ErrCodeExt = null;
@@ -1297,7 +1297,7 @@ class AiAnalysisTaskCoverResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+         * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
          * @type {string || null}
          */
         this.ErrCodeExt = null;
@@ -1470,7 +1470,7 @@ class ModifySampleSnapshotTemplateRequest extends  AbstractModel {
 }
 
 /**
- * 内容审核 Ocr 文字鉴政任务输入参数类型
+ * 内容审核 Ocr 文字敏感任务输入参数类型
  * @class
  */
 class AiReviewPoliticalOcrTaskInput extends  AbstractModel {
@@ -1478,7 +1478,7 @@ class AiReviewPoliticalOcrTaskInput extends  AbstractModel {
         super();
 
         /**
-         * 鉴政模板 ID。
+         * 模板 ID。
          * @type {number || null}
          */
         this.Definition = null;
@@ -1498,7 +1498,7 @@ class AiReviewPoliticalOcrTaskInput extends  AbstractModel {
 }
 
 /**
- * 视频处理的输入对象信息。
+ * 媒体处理的输入对象信息。
  * @class
  */
 class MediaInputInfo extends  AbstractModel {
@@ -1512,13 +1512,13 @@ class MediaInputInfo extends  AbstractModel {
         this.Type = null;
 
         /**
-         * 当 Type 为 COS 时有效，则该项为必填，表示视频处理 COS 对象信息。
+         * 当 Type 为 COS 时有效，则该项为必填，表示媒体处理 COS 对象信息。
          * @type {CosInputInfo || null}
          */
         this.CosInputInfo = null;
 
         /**
-         * 当 Type 为 URL 时有效，则该项为必填，表示视频处理 URL 对象信息。
+         * 当 Type 为 URL 时有效，则该项为必填，表示媒体处理 URL 对象信息。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {UrlInputInfo || null}
          */
@@ -1571,19 +1571,19 @@ class CreateWorkflowRequest extends  AbstractModel {
         this.Trigger = null;
 
         /**
-         * 视频处理的文件输出存储位置。不填则继承 Trigger 中的存储位置。
+         * 媒体处理的文件输出存储位置。不填则继承 Trigger 中的存储位置。
          * @type {TaskOutputStorage || null}
          */
         this.OutputStorage = null;
 
         /**
-         * 视频处理生成的文件输出的目标目录，如`/movie/201907/`。如果不填，表示与触发文件所在的目录一致。
+         * 媒体处理生成的文件输出的目标目录，如`/movie/201907/`。如果不填，表示与触发文件所在的目录一致。
          * @type {string || null}
          */
         this.OutputDir = null;
 
         /**
-         * 视频处理类型任务参数。
+         * 媒体处理类型任务参数。
          * @type {MediaProcessTaskInput || null}
          */
         this.MediaProcessTask = null;
@@ -1785,7 +1785,7 @@ class RawWatermarkParameter extends  AbstractModel {
 }
 
 /**
- * 内容审核 Ocr 文字鉴政、敏感任务结果类型
+ * 内容审核 Ocr 文字敏感任务结果类型
  * @class
  */
 class AiReviewTaskPoliticalOcrResult extends  AbstractModel {
@@ -1799,7 +1799,7 @@ class AiReviewTaskPoliticalOcrResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+         * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
          * @type {string || null}
          */
         this.ErrCodeExt = null;
@@ -1817,13 +1817,13 @@ class AiReviewTaskPoliticalOcrResult extends  AbstractModel {
         this.Message = null;
 
         /**
-         * 内容审核 Ocr 文字鉴政任务输入。
+         * 内容审核 Ocr 文字敏感任务输入。
          * @type {AiReviewPoliticalOcrTaskInput || null}
          */
         this.Input = null;
 
         /**
-         * 内容审核 Ocr 文字鉴政任务输出。
+         * 内容审核 Ocr 文字敏感任务输出。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {AiReviewPoliticalOcrTaskOutput || null}
          */
@@ -2018,7 +2018,7 @@ class MediaSnapshotByTimePicInfoItem extends  AbstractModel {
         super();
 
         /**
-         * 该张截图对应视频文件中的时间偏移，单位为<font color=red>毫秒</font>。
+         * 该张截图对应视频文件中的时间偏移，单位为秒。
          * @type {number || null}
          */
         this.TimeOffset = null;
@@ -2137,14 +2137,14 @@ class ContentReviewTemplateItem extends  AbstractModel {
         this.PornConfigure = null;
 
         /**
-         * 鉴恐控制参数。
+         * 涉敏控制参数。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {TerrorismConfigureInfo || null}
          */
         this.TerrorismConfigure = null;
 
         /**
-         * 鉴政控制参数。
+         * 涉敏控制参数。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {PoliticalConfigureInfo || null}
          */
@@ -2177,6 +2177,15 @@ class ContentReviewTemplateItem extends  AbstractModel {
          * @type {string || null}
          */
         this.UpdateTime = null;
+
+        /**
+         * 模板类型，取值范围：
+* Preset：系统预置模板；
+* Custom：用户自定义模板。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Type = null;
 
     }
 
@@ -2222,6 +2231,7 @@ class ContentReviewTemplateItem extends  AbstractModel {
         }
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.Type = 'Type' in params ? params.Type : null;
 
     }
 }
@@ -2255,7 +2265,7 @@ class DeleteAIRecognitionTemplateResponse extends  AbstractModel {
 }
 
 /**
- * 视频处理任务中的马赛克参数类型
+ * 媒体处理任务中的马赛克参数类型
  * @class
  */
 class MosaicInput extends  AbstractModel {
@@ -2345,7 +2355,7 @@ class MosaicInput extends  AbstractModel {
 }
 
 /**
- * 内容审核鉴政任务输入参数类型
+ * 内容审核敏感任务输入参数类型
  * @class
  */
 class AiReviewPoliticalTaskInput extends  AbstractModel {
@@ -2353,7 +2363,7 @@ class AiReviewPoliticalTaskInput extends  AbstractModel {
         super();
 
         /**
-         * 鉴政模板 ID。
+         * 模板 ID。
          * @type {number || null}
          */
         this.Definition = null;
@@ -2941,6 +2951,15 @@ class AIRecognitionTemplateItem extends  AbstractModel {
          */
         this.UpdateTime = null;
 
+        /**
+         * 模板类型，取值范围：
+* Preset：系统预置模板；
+* Custom：用户自定义模板。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Type = null;
+
     }
 
     /**
@@ -2985,6 +3004,7 @@ class AIRecognitionTemplateItem extends  AbstractModel {
         }
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.Type = 'Type' in params ? params.Type : null;
 
     }
 }
@@ -3032,7 +3052,7 @@ class AiRecognitionTaskFaceResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+         * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
          * @type {string || null}
          */
         this.ErrCodeExt = null;
@@ -3172,7 +3192,7 @@ class CreateAdaptiveDynamicStreamingTemplateRequest extends  AbstractModel {
 }
 
 /**
- * 画面鉴恐任务控制参数。
+ * 画面涉敏任务控制参数。
  * @class
  */
 class TerrorismImgReviewTemplateInfoForUpdate extends  AbstractModel {
@@ -3180,24 +3200,24 @@ class TerrorismImgReviewTemplateInfoForUpdate extends  AbstractModel {
         super();
 
         /**
-         * 画面鉴恐任务开关，可选值：
-<li>ON：开启画面鉴恐任务；</li>
-<li>OFF：关闭画面鉴恐任务。</li>
+         * 画面涉敏任务开关，可选值：
+<li>ON：开启画面涉敏任务；</li>
+<li>OFF：关闭画面涉敏任务。</li>
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * 画面鉴恐过滤标签，审核结果包含选择的标签则返回结果，如果过滤标签为空，则审核结果全部返回，可选值为：
+         * 画面涉敏过滤标签，审核结果包含选择的标签则返回结果，如果过滤标签为空，则审核结果全部返回，可选值为：
 <li>guns：武器枪支；</li>
 <li>crowd：人群聚集；</li>
 <li>bloody：血腥画面；</li>
 <li>police：警察部队；</li>
-<li>banners：暴恐旗帜；</li>
+<li>banners：涉敏旗帜；</li>
 <li>militant：武装分子；</li>
 <li>explosion：爆炸火灾；</li>
-<li>terrorists：暴恐人物；</li>
-<li>scenario：暴恐画面。</li>
+<li>terrorists：涉敏人物；</li>
+<li>scenario：涉敏画面。</li>
          * @type {Array.<string> || null}
          */
         this.LabelSet = null;
@@ -3349,7 +3369,7 @@ class TextWatermarkTemplateInputForUpdate extends  AbstractModel {
 }
 
 /**
- * 内容审核 Ocr 文字鉴恐任务输入参数类型
+ * 内容审核 Ocr 文字敏感任务输入参数类型
  * @class
  */
 class AiReviewTerrorismOcrTaskInput extends  AbstractModel {
@@ -3357,7 +3377,7 @@ class AiReviewTerrorismOcrTaskInput extends  AbstractModel {
         super();
 
         /**
-         * 鉴恐模板 ID。
+         * 模板 ID。
          * @type {number || null}
          */
         this.Definition = null;
@@ -3558,7 +3578,7 @@ class MediaAiAnalysisCoverItem extends  AbstractModel {
 }
 
 /**
- * 视频处理 COS 对象信息。
+ * 媒体处理 COS 对象信息。
  * @class
  */
 class CosInputInfo extends  AbstractModel {
@@ -3566,19 +3586,19 @@ class CosInputInfo extends  AbstractModel {
         super();
 
         /**
-         * 视频处理对象文件所在的 COS Bucket 名，如 TopRankVideo-125xxx88。
+         * 媒体处理对象文件所在的 COS Bucket 名，如 TopRankVideo-125xxx88。
          * @type {string || null}
          */
         this.Bucket = null;
 
         /**
-         * 视频处理对象文件所在的 COS Bucket 所属园区，如 ap-chongqing。
+         * 媒体处理对象文件所在的 COS Bucket 所属园区，如 ap-chongqing。
          * @type {string || null}
          */
         this.Region = null;
 
         /**
-         * 视频处理对象文件的输入路径，如`/movie/201907/WildAnimal.mov`。
+         * 媒体处理对象文件的输入路径，如`/movie/201907/WildAnimal.mov`。
          * @type {string || null}
          */
         this.Object = null;
@@ -4192,7 +4212,7 @@ class MediaProcessTaskAdaptiveDynamicStreamingResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+         * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
          * @type {string || null}
          */
         this.ErrCodeExt = null;
@@ -4626,7 +4646,7 @@ class EditMediaResponse extends  AbstractModel {
 }
 
 /**
- * 文本鉴政任务控制参数。
+ * 文本涉敏任务控制参数。
  * @class
  */
 class PoliticalOcrReviewTemplateInfoForUpdate extends  AbstractModel {
@@ -4634,9 +4654,9 @@ class PoliticalOcrReviewTemplateInfoForUpdate extends  AbstractModel {
         super();
 
         /**
-         * 文本鉴政任务开关，可选值：
-<li>ON：开启文本鉴政任务；</li>
-<li>OFF：关闭文本鉴政任务。</li>
+         * 文本涉敏任务开关，可选值：
+<li>ON：开启文本涉敏任务；</li>
+<li>OFF：关闭文本涉敏任务。</li>
          * @type {string || null}
          */
         this.Switch = null;
@@ -4793,7 +4813,7 @@ class AiRecognitionTaskAsrFullTextResultInput extends  AbstractModel {
 }
 
 /**
- * 视频处理任务类型
+ * 媒体处理任务类型
  * @class
  */
 class MediaProcessTaskInput extends  AbstractModel {
@@ -4904,7 +4924,7 @@ class MediaProcessTaskInput extends  AbstractModel {
 }
 
 /**
- * 视频处理 COS 输出对象信息。
+ * 媒体处理 COS 输出对象信息。
  * @class
  */
 class CosOutputStorage extends  AbstractModel {
@@ -4912,13 +4932,13 @@ class CosOutputStorage extends  AbstractModel {
         super();
 
         /**
-         * 视频处理生成的文件输出的目标 Bucket 名，如 TopRankVideo-125xxx88。如果不填，表示继承上层。
+         * 媒体处理生成的文件输出的目标 Bucket 名，如 TopRankVideo-125xxx88。如果不填，表示继承上层。
          * @type {string || null}
          */
         this.Bucket = null;
 
         /**
-         * 视频处理生成的文件输出的目标 Bucket 的园区，如 ap-chongqing。如果不填，表示继承上层。
+         * 媒体处理生成的文件输出的目标 Bucket 的园区，如 ap-chongqing。如果不填，表示继承上层。
          * @type {string || null}
          */
         this.Region = null;
@@ -5188,7 +5208,7 @@ class CreateWordSamplesRequest extends  AbstractModel {
 }
 
 /**
- * 语音鉴政任务控制参数。
+ * 语音涉敏任务控制参数。
  * @class
  */
 class PoliticalAsrReviewTemplateInfoForUpdate extends  AbstractModel {
@@ -5196,9 +5216,9 @@ class PoliticalAsrReviewTemplateInfoForUpdate extends  AbstractModel {
         super();
 
         /**
-         * 语音鉴政任务开关，可选值：
-<li>ON：开启语音鉴政任务；</li>
-<li>OFF：关闭语音鉴政任务。</li>
+         * 语音涉敏任务开关，可选值：
+<li>ON：开启语音涉敏任务；</li>
+<li>OFF：关闭语音涉敏任务。</li>
          * @type {string || null}
          */
         this.Switch = null;
@@ -5328,7 +5348,7 @@ class SvgWatermarkInputForUpdate extends  AbstractModel {
 }
 
 /**
- * 内容审核 Ocr 文字鉴恐任务结果类型
+ * 内容审核 Ocr 文字敏感任务结果类型
  * @class
  */
 class AiReviewTaskTerrorismOcrResult extends  AbstractModel {
@@ -5342,7 +5362,7 @@ class AiReviewTaskTerrorismOcrResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+         * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
          * @type {string || null}
          */
         this.ErrCodeExt = null;
@@ -5360,13 +5380,13 @@ class AiReviewTaskTerrorismOcrResult extends  AbstractModel {
         this.Message = null;
 
         /**
-         * 内容审核 Ocr 文字鉴恐任务输入。
+         * 内容审核 Ocr 文字敏感任务输入。
          * @type {AiReviewTerrorismOcrTaskInput || null}
          */
         this.Input = null;
 
         /**
-         * 内容审核 Ocr 文字鉴恐任务输出。
+         * 内容审核 Ocr 文字敏感任务输出。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {AiReviewTerrorismOcrTaskOutput || null}
          */
@@ -5416,7 +5436,7 @@ class AiRecognitionTaskOcrWordsResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+         * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
          * @type {string || null}
          */
         this.ErrCodeExt = null;
@@ -5670,6 +5690,34 @@ class AiRecognitionTaskOcrFullTextSegmentItem extends  AbstractModel {
 }
 
 /**
+ * 编辑视频的结果文件输出配置。
+ * @class
+ */
+class EditMediaOutputConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 封装格式，可选值：mp4、hls、mov、flv、avi。默认是 mp4。
+         * @type {string || null}
+         */
+        this.Container = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Container = 'Container' in params ? params.Container : null;
+
+    }
+}
+
+/**
  * Asr 文字涉黄信息
  * @class
  */
@@ -5765,16 +5813,22 @@ class EditMediaRequest extends  AbstractModel {
         this.FileInfos = null;
 
         /**
-         * 视频处理输出文件的目标存储。
+         * 媒体处理输出文件的目标存储。
          * @type {TaskOutputStorage || null}
          */
         this.OutputStorage = null;
 
         /**
-         * 视频处理输出文件的目标路径。
+         * 媒体处理输出文件的目标路径。
          * @type {string || null}
          */
         this.OutputObjectPath = null;
+
+        /**
+         * 编辑后生成的文件配置。
+         * @type {EditMediaOutputConfig || null}
+         */
+        this.OutputConfig = null;
 
         /**
          * 任务的事件通知信息，不填代表不获取事件通知。
@@ -5826,6 +5880,12 @@ class EditMediaRequest extends  AbstractModel {
         }
         this.OutputObjectPath = 'OutputObjectPath' in params ? params.OutputObjectPath : null;
 
+        if (params.OutputConfig) {
+            let obj = new EditMediaOutputConfig();
+            obj.deserialize(params.OutputConfig)
+            this.OutputConfig = obj;
+        }
+
         if (params.TaskNotifyConfig) {
             let obj = new TaskNotifyConfig();
             obj.deserialize(params.TaskNotifyConfig)
@@ -5853,7 +5913,7 @@ class MediaProcessTaskImageSpriteResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+         * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
          * @type {string || null}
          */
         this.ErrCodeExt = null;
@@ -6044,7 +6104,7 @@ PicUrlExpireTime 时间点后图片将被删除）。
 }
 
 /**
- * 视频处理 URL 对象信息。
+ * 媒体处理 URL 对象信息。
  * @class
  */
 class UrlInputInfo extends  AbstractModel {
@@ -6282,7 +6342,7 @@ class CreateContentReviewTemplateResponse extends  AbstractModel {
         super();
 
         /**
-         * 内容智能识别模板唯一标识。
+         * 内容审核模板唯一标识。
          * @type {number || null}
          */
         this.Definition = null;
@@ -6527,6 +6587,18 @@ class LiveStreamTaskNotifyConfig extends  AbstractModel {
          */
         this.TopicName = null;
 
+        /**
+         * 通知类型，默认CMQ，指定URL时HTTP回调推送到 NotifyUrl 指定的地址。
+         * @type {string || null}
+         */
+        this.NotifyType = null;
+
+        /**
+         * HTTP回调地址，NotifyType为URL时必填。
+         * @type {string || null}
+         */
+        this.NotifyUrl = null;
+
     }
 
     /**
@@ -6540,6 +6612,8 @@ class LiveStreamTaskNotifyConfig extends  AbstractModel {
         this.CmqRegion = 'CmqRegion' in params ? params.CmqRegion : null;
         this.QueueName = 'QueueName' in params ? params.QueueName : null;
         this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.NotifyType = 'NotifyType' in params ? params.NotifyType : null;
+        this.NotifyUrl = 'NotifyUrl' in params ? params.NotifyUrl : null;
 
     }
 }
@@ -6557,7 +6631,6 @@ class VideoTemplateInfo extends  AbstractModel {
 <li>libx264：H.264 编码</li>
 <li>libx265：H.265 编码</li>
 <li>av1：AOMedia Video 1 编码</li>
-目前 H.265 编码必须指定分辨率，并且需要在 640*480 以内。av1 编码容器目前只支持 mp4 。
          * @type {string || null}
          */
         this.Codec = null;
@@ -6570,7 +6643,7 @@ class VideoTemplateInfo extends  AbstractModel {
         this.Fps = null;
 
         /**
-         * 视频流的码率，取值范围：0 和 [128, 35000]，单位：kbps。
+         * 视频流的码率，取值范围：0 和 [75, 35000]，单位：kbps。
 当取值为 0，表示视频码率和原始视频保持一致。
          * @type {number || null}
          */
@@ -6656,7 +6729,7 @@ class VideoTemplateInfo extends  AbstractModel {
 }
 
 /**
- * 文本鉴政任务控制参数
+ * 文本涉敏任务控制参数
  * @class
  */
 class PoliticalOcrReviewTemplateInfo extends  AbstractModel {
@@ -6664,9 +6737,9 @@ class PoliticalOcrReviewTemplateInfo extends  AbstractModel {
         super();
 
         /**
-         * 文本鉴政任务开关，可选值：
-<li>ON：开启文本鉴政任务；</li>
-<li>OFF：关闭文本鉴政任务。</li>
+         * 文本涉敏任务开关，可选值：
+<li>ON：开启文本涉敏任务；</li>
+<li>OFF：关闭文本涉敏任务。</li>
          * @type {string || null}
          */
         this.Switch = null;
@@ -6758,7 +6831,7 @@ class AiReviewTaskPornOcrResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+         * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
          * @type {string || null}
          */
         this.ErrCodeExt = null;
@@ -6899,7 +6972,7 @@ class DescribeWatermarkTemplatesRequest extends  AbstractModel {
 }
 
 /**
- * 视频处理输出对象信息。
+ * 媒体处理输出对象信息。
  * @class
  */
 class TaskOutputStorage extends  AbstractModel {
@@ -6907,13 +6980,13 @@ class TaskOutputStorage extends  AbstractModel {
         super();
 
         /**
-         * 视频处理输出对象存储位置的类型，现在仅支持 COS。
+         * 媒体处理输出对象存储位置的类型，现在仅支持 COS。
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * 当 Type 为 COS 时有效，则该项为必填，表示视频处理 COS 输出位置。
+         * 当 Type 为 COS 时有效，则该项为必填，表示媒体处理 COS 输出位置。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {CosOutputStorage || null}
          */
@@ -7337,7 +7410,7 @@ class MediaProcessTaskAnimatedGraphicResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+         * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
          * @type {string || null}
          */
         this.ErrCodeExt = null;
@@ -7411,7 +7484,7 @@ class AiAnalysisTaskTagResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+         * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
          * @type {string || null}
          */
         this.ErrCodeExt = null;
@@ -7515,25 +7588,25 @@ class ProcessMediaRequest extends  AbstractModel {
         super();
 
         /**
-         * 视频处理的文件输入信息。
+         * 媒体处理的文件输入信息。
          * @type {MediaInputInfo || null}
          */
         this.InputInfo = null;
 
         /**
-         * 视频处理输出文件的目标存储。不填则继承 InputInfo 中的存储位置。
+         * 媒体处理输出文件的目标存储。不填则继承 InputInfo 中的存储位置。
          * @type {TaskOutputStorage || null}
          */
         this.OutputStorage = null;
 
         /**
-         * 视频处理生成的文件输出的目标目录，如`/movie/201907/`。如果不填，表示与 InputInfo 中文件所在的目录一致。
+         * 媒体处理生成的文件输出的目标目录，如`/movie/201907/`。如果不填，表示与 InputInfo 中文件所在的目录一致。
          * @type {string || null}
          */
         this.OutputDir = null;
 
         /**
-         * 视频处理类型任务参数。
+         * 媒体处理类型任务参数。
          * @type {MediaProcessTaskInput || null}
          */
         this.MediaProcessTask = null;
@@ -7654,7 +7727,7 @@ class AiRecognitionTaskOcrFullTextResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+         * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
          * @type {string || null}
          */
         this.ErrCodeExt = null;
@@ -7728,7 +7801,7 @@ class MediaProcessTaskSnapshotByTimeOffsetResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+         * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
          * @type {string || null}
          */
         this.ErrCodeExt = null;
@@ -8015,7 +8088,7 @@ class MediaProcessTaskTranscodeResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+         * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
          * @type {string || null}
          */
         this.ErrCodeExt = null;
@@ -8045,6 +8118,13 @@ class MediaProcessTaskTranscodeResult extends  AbstractModel {
          */
         this.Output = null;
 
+        /**
+         * 转码进度，取值范围 [0-100]
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Progress = null;
+
     }
 
     /**
@@ -8070,6 +8150,7 @@ class MediaProcessTaskTranscodeResult extends  AbstractModel {
             obj.deserialize(params.Output)
             this.Output = obj;
         }
+        this.Progress = 'Progress' in params ? params.Progress : null;
 
     }
 }
@@ -8928,7 +9009,7 @@ class LiveStreamAiRecognitionResultInfo extends  AbstractModel {
 }
 
 /**
- * 直播 AI 内容审核图片鉴政结果
+ * 直播 AI 内容审核图片敏感结果
  * @class
  */
 class LiveStreamAiReviewImagePoliticalResult extends  AbstractModel {
@@ -8948,7 +9029,7 @@ class LiveStreamAiReviewImagePoliticalResult extends  AbstractModel {
         this.EndPtsTime = null;
 
         /**
-         * 嫌疑片段涉政分数。
+         * 嫌疑片段敏感分数。
          * @type {number || null}
          */
         this.Confidence = null;
@@ -8963,21 +9044,21 @@ class LiveStreamAiReviewImagePoliticalResult extends  AbstractModel {
         this.Suggestion = null;
 
         /**
-         * 视频鉴政结果标签，取值范围：
-<li>politician：政治人物。</li>
+         * 视频敏感结果标签，取值范围：
+<li>politician：敏感人物。</li>
 <li>violation_photo：违规图标。</li>
          * @type {string || null}
          */
         this.Label = null;
 
         /**
-         * 涉政人物、违规图标名字。
+         * 敏感人物、违规图标名字。
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * 涉政人物、违规图标出现的区域坐标 (像素级)，[x1, y1, x2, y2]，即左上角坐标、右下角坐标。
+         * 敏感人物、违规图标出现的区域坐标 (像素级)，[x1, y1, x2, y2]，即左上角坐标、右下角坐标。
          * @type {Array.<number> || null}
          */
         this.AreaCoordSet = null;
@@ -9018,7 +9099,7 @@ PicUrlExpireTime 时间点后图片将被删除）。
 }
 
 /**
- * 文本鉴恐任务控制参数
+ * 文本涉敏任务控制参数
  * @class
  */
 class TerrorismOcrReviewTemplateInfoForUpdate extends  AbstractModel {
@@ -9026,9 +9107,9 @@ class TerrorismOcrReviewTemplateInfoForUpdate extends  AbstractModel {
         super();
 
         /**
-         * 文本鉴恐任务开关，可选值：
-<li>ON：开启文本鉴恐任务；</li>
-<li>OFF：关闭文本鉴恐任务。</li>
+         * 文本涉敏任务开关，可选值：
+<li>ON：开启文本涉敏任务；</li>
+<li>OFF：关闭文本涉敏任务。</li>
          * @type {string || null}
          */
         this.Switch = null;
@@ -9255,7 +9336,7 @@ class CreateWatermarkTemplateRequest extends  AbstractModel {
 }
 
 /**
- * 鉴恐任务控制参数。
+ * 涉敏任务控制参数。
  * @class
  */
 class TerrorismConfigureInfoForUpdate extends  AbstractModel {
@@ -9263,13 +9344,13 @@ class TerrorismConfigureInfoForUpdate extends  AbstractModel {
         super();
 
         /**
-         * 画面鉴恐任务控制参数。
+         * 画面涉敏任务控制参数。
          * @type {TerrorismImgReviewTemplateInfoForUpdate || null}
          */
         this.ImgReviewInfo = null;
 
         /**
-         * 文本鉴恐任务控制参数。
+         * 文本涉敏任务控制参数。
          * @type {TerrorismOcrReviewTemplateInfoForUpdate || null}
          */
         this.OcrReviewInfo = null;
@@ -9370,7 +9451,7 @@ class DeleteContentReviewTemplateRequest extends  AbstractModel {
         super();
 
         /**
-         * 内容智能识别模板唯一标识。
+         * 内容审核模板唯一标识。
          * @type {number || null}
          */
         this.Definition = null;
@@ -9455,6 +9536,15 @@ class AIAnalysisTemplateItem extends  AbstractModel {
          */
         this.UpdateTime = null;
 
+        /**
+         * 模板类型，取值范围：
+* Preset：系统预置模板；
+* Custom：用户自定义模板。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Type = null;
+
     }
 
     /**
@@ -9493,6 +9583,58 @@ class AIAnalysisTemplateItem extends  AbstractModel {
         }
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.Type = 'Type' in params ? params.Type : null;
+
+    }
+}
+
+/**
+ * 片头片尾参数
+ * @class
+ */
+class HeadTailParameter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 片头列表。
+         * @type {Array.<MediaInputInfo> || null}
+         */
+        this.HeadSet = null;
+
+        /**
+         * 片尾列表。
+         * @type {Array.<MediaInputInfo> || null}
+         */
+        this.TailSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.HeadSet) {
+            this.HeadSet = new Array();
+            for (let z in params.HeadSet) {
+                let obj = new MediaInputInfo();
+                obj.deserialize(params.HeadSet[z]);
+                this.HeadSet.push(obj);
+            }
+        }
+
+        if (params.TailSet) {
+            this.TailSet = new Array();
+            for (let z in params.TailSet) {
+                let obj = new MediaInputInfo();
+                obj.deserialize(params.TailSet[z]);
+                this.TailSet.push(obj);
+            }
+        }
 
     }
 }
@@ -9710,7 +9852,7 @@ class DeleteTranscodeTemplateRequest extends  AbstractModel {
 }
 
 /**
- * 暴恐信息
+ * 涉敏信息
  * @class
  */
 class AiReviewTerrorismTaskOutput extends  AbstractModel {
@@ -9718,13 +9860,13 @@ class AiReviewTerrorismTaskOutput extends  AbstractModel {
         super();
 
         /**
-         * 视频暴恐评分，分值为0到100。
+         * 视频涉敏评分，分值为0到100。
          * @type {number || null}
          */
         this.Confidence = null;
 
         /**
-         * 暴恐结果建议，取值范围：
+         * 涉敏结果建议，取值范围：
 <li>pass。</li>
 <li>review。</li>
 <li>block。</li>
@@ -9733,22 +9875,22 @@ class AiReviewTerrorismTaskOutput extends  AbstractModel {
         this.Suggestion = null;
 
         /**
-         * 视频暴恐结果标签，取值范围：
+         * 视频涉敏结果标签，取值范围：
 <li>guns：武器枪支。</li>
 <li>crowd：人群聚集。</li>
 <li>police：警察部队。</li>
 <li>bloody：血腥画面。</li>
-<li>banners：暴恐旗帜。</li>
+<li>banners：涉敏旗帜。</li>
 <li>militant：武装分子。</li>
 <li>explosion：爆炸火灾。</li>
-<li>terrorists：暴恐人物。</li>
-<li>scenario：暴恐画面。</li>
+<li>terrorists：涉敏人物。</li>
+<li>scenario：涉敏画面。</li>
          * @type {string || null}
          */
         this.Label = null;
 
         /**
-         * 有暴恐嫌疑的视频片段列表。
+         * 有涉敏嫌疑的视频片段列表。
          * @type {Array.<MediaContentReviewSegmentItem> || null}
          */
         this.SegmentSet = null;
@@ -9826,7 +9968,7 @@ class ProhibitedConfigureInfo extends  AbstractModel {
 }
 
 /**
- * Ocr 文字涉恐信息
+ * Ocr 文字涉敏信息
  * @class
  */
 class AiReviewTerrorismOcrTaskOutput extends  AbstractModel {
@@ -9834,13 +9976,13 @@ class AiReviewTerrorismOcrTaskOutput extends  AbstractModel {
         super();
 
         /**
-         * Ocr 文字涉恐评分，分值为0到100。
+         * Ocr 文字涉敏评分，分值为0到100。
          * @type {number || null}
          */
         this.Confidence = null;
 
         /**
-         * Ocr 文字涉恐结果建议，取值范围：
+         * Ocr 文字涉敏结果建议，取值范围：
 <li>pass。</li>
 <li>review。</li>
 <li>block。</li>
@@ -9849,7 +9991,7 @@ class AiReviewTerrorismOcrTaskOutput extends  AbstractModel {
         this.Suggestion = null;
 
         /**
-         * Ocr 文字有涉恐嫌疑的视频片段列表。
+         * Ocr 文字有涉敏嫌疑的视频片段列表。
          * @type {Array.<MediaContentReviewOcrTextSegmentItem> || null}
          */
         this.SegmentSet = null;
@@ -9989,6 +10131,14 @@ class DescribeAIAnalysisTemplatesRequest extends  AbstractModel {
          */
         this.Limit = null;
 
+        /**
+         * 模板类型过滤条件，不填则返回所有，可选值：
+* Preset：系统预置模板；
+* Custom：用户自定义模板。
+         * @type {string || null}
+         */
+        this.Type = null;
+
     }
 
     /**
@@ -10001,6 +10151,7 @@ class DescribeAIAnalysisTemplatesRequest extends  AbstractModel {
         this.Definitions = 'Definitions' in params ? params.Definitions : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Type = 'Type' in params ? params.Type : null;
 
     }
 }
@@ -10238,7 +10389,7 @@ class ResetWorkflowRequest extends  AbstractModel {
 }
 
 /**
- * 内容审核鉴恐任务结果类型
+ * 内容审核涉敏任务结果类型
  * @class
  */
 class AiReviewTaskTerrorismResult extends  AbstractModel {
@@ -10252,7 +10403,7 @@ class AiReviewTaskTerrorismResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+         * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
          * @type {string || null}
          */
         this.ErrCodeExt = null;
@@ -10270,13 +10421,13 @@ class AiReviewTaskTerrorismResult extends  AbstractModel {
         this.Message = null;
 
         /**
-         * 内容审核鉴恐任务输入。
+         * 内容审核涉敏任务输入。
          * @type {AiReviewTerrorismTaskInput || null}
          */
         this.Input = null;
 
         /**
-         * 内容审核鉴恐任务输出。
+         * 内容审核涉敏任务输出。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {AiReviewTerrorismTaskOutput || null}
          */
@@ -10431,7 +10582,7 @@ class MediaContentReviewAsrTextSegmentItem extends  AbstractModel {
 }
 
 /**
- * 内容审核涉政嫌疑片段
+ * 内容审核涉敏嫌疑片段
  * @class
  */
 class MediaContentReviewPoliticalSegmentItem extends  AbstractModel {
@@ -10451,13 +10602,13 @@ class MediaContentReviewPoliticalSegmentItem extends  AbstractModel {
         this.EndTimeOffset = null;
 
         /**
-         * 嫌疑片段涉政分数。
+         * 嫌疑片段涉敏分数。
          * @type {number || null}
          */
         this.Confidence = null;
 
         /**
-         * 嫌疑片段鉴政结果建议，取值范围：
+         * 嫌疑片段涉敏结果建议，取值范围：
 <li>pass。</li>
 <li>review。</li>
 <li>block。</li>
@@ -10466,13 +10617,13 @@ class MediaContentReviewPoliticalSegmentItem extends  AbstractModel {
         this.Suggestion = null;
 
         /**
-         * 涉政人物、违规图标名字。
+         * 涉敏人物、违规图标名字。
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * 嫌疑片段鉴政结果标签。内容审核模板[画面鉴政任务控制参数](https://cloud.tencent.com/document/api/862/37615#PoliticalImgReviewTemplateInfo)里 LabelSet 参数与此参数取值范围的对应关系：
+         * 嫌疑片段涉敏结果标签。内容审核模板[画面涉敏任务控制参数](https://cloud.tencent.com/document/api/862/37615#PoliticalImgReviewTemplateInfo)里 LabelSet 参数与此参数取值范围的对应关系：
 violation_photo：
 <li>violation_photo：违规图标。</li>
 politician：
@@ -10481,7 +10632,7 @@ politician：
 <li>bureau_politician：厅局级领导人；</li>
 <li>county_politician：县处级领导人；</li>
 <li>rural_politician：乡科级领导人；</li>
-<li>sensitive_politician：敏感政治人物；</li>
+<li>sensitive_politician：涉敏人物；</li>
 <li>foreign_politician：国外领导人。</li>
 entertainment：
 <li>sensitive_entertainment：敏感娱乐人物。</li>
@@ -10508,7 +10659,7 @@ military：
         this.Url = null;
 
         /**
-         * 涉政人物、违规图标出现的区域坐标 (像素级)，[x1, y1, x2, y2]，即左上角坐标、右下角坐标。
+         * 涉敏人物、违规图标出现的区域坐标 (像素级)，[x1, y1, x2, y2]，即左上角坐标、右下角坐标。
          * @type {Array.<number> || null}
          */
         this.AreaCoordSet = null;
@@ -10613,19 +10764,19 @@ class ModifyContentReviewTemplateRequest extends  AbstractModel {
         super();
 
         /**
-         * 内容智能识别模板唯一标识。
+         * 内容审核模板唯一标识。
          * @type {number || null}
          */
         this.Definition = null;
 
         /**
-         * 内容智能识别模板名称，长度限制：64 个字符。
+         * 内容审核模板名称，长度限制：64 个字符。
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * 内容智能识别模板描述信息，长度限制：256 个字符。
+         * 内容审核模板描述信息，长度限制：256 个字符。
          * @type {string || null}
          */
         this.Comment = null;
@@ -10658,7 +10809,7 @@ class ModifyContentReviewTemplateRequest extends  AbstractModel {
         this.ProhibitedConfigure = null;
 
         /**
-         * 用户自定义内容智能识别控制参数。
+         * 用户自定义内容审核控制参数。
          * @type {UserDefineConfigureInfoForUpdate || null}
          */
         this.UserDefineConfigure = null;
@@ -11246,7 +11397,7 @@ class ProhibitedAsrReviewTemplateInfo extends  AbstractModel {
 }
 
 /**
- * 内容审核 Asr 文字鉴政、敏感任务输入参数类型
+ * 内容审核 Asr 文字敏感任务输入参数类型
  * @class
  */
 class AiReviewPoliticalAsrTaskInput extends  AbstractModel {
@@ -11254,7 +11405,7 @@ class AiReviewPoliticalAsrTaskInput extends  AbstractModel {
         super();
 
         /**
-         * 鉴政模板 ID。
+         * 模板 ID。
          * @type {number || null}
          */
         this.Definition = null;
@@ -11519,7 +11670,7 @@ class PornOcrReviewTemplateInfo extends  AbstractModel {
 }
 
 /**
- * 内容审核 Asr 文字鉴政、敏感任务结果类型
+ * 内容审核 Asr 文字敏感任务结果类型
  * @class
  */
 class AiReviewTaskPoliticalAsrResult extends  AbstractModel {
@@ -11533,7 +11684,7 @@ class AiReviewTaskPoliticalAsrResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+         * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
          * @type {string || null}
          */
         this.ErrCodeExt = null;
@@ -11551,13 +11702,13 @@ class AiReviewTaskPoliticalAsrResult extends  AbstractModel {
         this.Message = null;
 
         /**
-         * 内容审核 Asr 文字鉴政任务输入。
+         * 内容审核 Asr 文字敏感任务输入。
          * @type {AiReviewPoliticalAsrTaskInput || null}
          */
         this.Input = null;
 
         /**
-         * 内容审核 Asr 文字鉴政任务输出。
+         * 内容审核 Asr 文字敏感任务输出。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {AiReviewPoliticalAsrTaskOutput || null}
          */
@@ -11720,7 +11871,7 @@ class AiReviewProhibitedAsrTaskInput extends  AbstractModel {
 }
 
 /**
- * 内容审核涉黄/暴恐嫌疑片段
+ * 内容审核涉黄/涉敏嫌疑片段
  * @class
  */
 class MediaContentReviewSegmentItem extends  AbstractModel {
@@ -11794,7 +11945,7 @@ class MediaContentReviewSegmentItem extends  AbstractModel {
 }
 
 /**
- * 文本鉴恐任务控制参数
+ * 文本涉敏任务控制参数
  * @class
  */
 class TerrorismOcrReviewTemplateInfo extends  AbstractModel {
@@ -11802,9 +11953,9 @@ class TerrorismOcrReviewTemplateInfo extends  AbstractModel {
         super();
 
         /**
-         * 文本鉴恐任务开关，可选值：
-<li>ON：开启文本鉴恐任务；</li>
-<li>OFF：关闭文本鉴恐任务。</li>
+         * 文本涉敏任务开关，可选值：
+<li>ON：开启文本涉敏任务；</li>
+<li>OFF：关闭文本涉敏任务。</li>
          * @type {string || null}
          */
         this.Switch = null;
@@ -11852,7 +12003,7 @@ class AiReviewTaskPornResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+         * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
          * @type {string || null}
          */
         this.ErrCodeExt = null;
@@ -12277,7 +12428,7 @@ class SampleSnapshotTemplate extends  AbstractModel {
 }
 
 /**
- * 画面鉴政任务控制参数。
+ * 画面涉敏任务控制参数。
  * @class
  */
 class PoliticalImgReviewTemplateInfoForUpdate extends  AbstractModel {
@@ -12285,17 +12436,17 @@ class PoliticalImgReviewTemplateInfoForUpdate extends  AbstractModel {
         super();
 
         /**
-         * 画面鉴政任务开关，可选值：
-<li>ON：开启画面鉴政任务；</li>
-<li>OFF：关闭画面鉴政任务。</li>
+         * 画面涉敏任务开关，可选值：
+<li>ON：开启画面涉敏任务；</li>
+<li>OFF：关闭画面涉敏任务。</li>
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * 画面鉴政过滤标签，审核结果包含选择的标签则返回结果，如果过滤标签为空，则审核结果全部返回，可选值为：
+         * 画面涉敏过滤标签，审核结果包含选择的标签则返回结果，如果过滤标签为空，则审核结果全部返回，可选值为：
 <li>violation_photo：违规图标；</li>
-<li>politician：政治人物；</li>
+<li>politician：涉敏人物；</li>
 <li>entertainment：娱乐人物；</li>
 <li>sport：体育人物；</li>
 <li>entrepreneur：商业人物；</li>
@@ -12538,6 +12689,13 @@ class TranscodeTaskInput extends  AbstractModel {
          */
         this.ObjectNumberFormat = null;
 
+        /**
+         * 片头片尾参数。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {HeadTailParameter || null}
+         */
+        this.HeadTailParameter = null;
+
     }
 
     /**
@@ -12593,6 +12751,12 @@ class TranscodeTaskInput extends  AbstractModel {
             let obj = new NumberFormat();
             obj.deserialize(params.ObjectNumberFormat)
             this.ObjectNumberFormat = obj;
+        }
+
+        if (params.HeadTailParameter) {
+            let obj = new HeadTailParameter();
+            obj.deserialize(params.HeadTailParameter)
+            this.HeadTailParameter = obj;
         }
 
     }
@@ -12855,7 +13019,7 @@ class MediaProcessTaskSampleSnapshotResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+         * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
          * @type {string || null}
          */
         this.ErrCodeExt = null;
@@ -13021,7 +13185,7 @@ class CosFileUploadTrigger extends  AbstractModel {
 }
 
 /**
- * Asr 文字涉政信息
+ * Asr 文字敏感信息
  * @class
  */
 class AiReviewPoliticalAsrTaskOutput extends  AbstractModel {
@@ -13029,13 +13193,13 @@ class AiReviewPoliticalAsrTaskOutput extends  AbstractModel {
         super();
 
         /**
-         * Asr 文字涉政、敏感评分，分值为0到100。
+         * Asr 文字敏感评分，分值为0到100。
          * @type {number || null}
          */
         this.Confidence = null;
 
         /**
-         * Asr 文字涉政、敏感结果建议，取值范围：
+         * Asr 文字敏感结果建议，取值范围：
 <li>pass。</li>
 <li>review。</li>
 <li>block。</li>
@@ -13044,7 +13208,7 @@ class AiReviewPoliticalAsrTaskOutput extends  AbstractModel {
         this.Suggestion = null;
 
         /**
-         * Asr 文字有涉政、敏感嫌疑的视频片段列表。
+         * Asr 文字敏感嫌疑的视频片段列表。
          * @type {Array.<MediaContentReviewAsrTextSegmentItem> || null}
          */
         this.SegmentSet = null;
@@ -13402,7 +13566,7 @@ class AiAnalysisTaskFrameTagResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+         * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
          * @type {string || null}
          */
         this.ErrCodeExt = null;
@@ -13575,7 +13739,7 @@ class AiRecognitionTaskAsrFullTextResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+         * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
          * @type {string || null}
          */
         this.ErrCodeExt = null;
@@ -13663,7 +13827,7 @@ class ModifyAIRecognitionTemplateResponse extends  AbstractModel {
 }
 
 /**
- * 画面鉴政任务控制参数
+ * 画面涉敏任务控制参数
  * @class
  */
 class PoliticalImgReviewTemplateInfo extends  AbstractModel {
@@ -13671,17 +13835,17 @@ class PoliticalImgReviewTemplateInfo extends  AbstractModel {
         super();
 
         /**
-         * 画面鉴政任务开关，可选值：
-<li>ON：开启画面鉴政任务；</li>
-<li>OFF：关闭画面鉴政任务。</li>
+         * 画面涉敏任务开关，可选值：
+<li>ON：开启画面涉敏任务；</li>
+<li>OFF：关闭画面涉敏任务。</li>
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * 画面鉴政过滤标签，审核结果包含选择的标签则返回结果，如果过滤标签为空，则审核结果全部返回，可选值为：
+         * 画面涉敏过滤标签，审核结果包含选择的标签则返回结果，如果过滤标签为空，则审核结果全部返回，可选值为：
 <li>violation_photo：违规图标；</li>
-<li>politician：政治人物；</li>
+<li>politician：涉敏人物；</li>
 <li>entertainment：娱乐人物；</li>
 <li>sport：体育人物；</li>
 <li>entrepreneur：商业人物；</li>
@@ -13722,7 +13886,7 @@ class PoliticalImgReviewTemplateInfo extends  AbstractModel {
 }
 
 /**
- * 鉴政任务控制参数
+ * 涉敏任务控制参数
  * @class
  */
 class PoliticalConfigureInfo extends  AbstractModel {
@@ -13730,19 +13894,19 @@ class PoliticalConfigureInfo extends  AbstractModel {
         super();
 
         /**
-         * 画面鉴政控制参数。
+         * 画面涉敏控制参数。
          * @type {PoliticalImgReviewTemplateInfo || null}
          */
         this.ImgReviewInfo = null;
 
         /**
-         * 语音鉴政控制参数。
+         * 语音涉敏控制参数。
          * @type {PoliticalAsrReviewTemplateInfo || null}
          */
         this.AsrReviewInfo = null;
 
         /**
-         * 文本鉴政控制参数。
+         * 文本涉敏控制参数。
          * @type {PoliticalOcrReviewTemplateInfo || null}
          */
         this.OcrReviewInfo = null;
@@ -14066,7 +14230,7 @@ class DeleteWordSamplesResponse extends  AbstractModel {
 }
 
 /**
- * 视频处理任务中的水印参数类型
+ * 媒体处理任务中的水印参数类型
  * @class
  */
 class WatermarkInput extends  AbstractModel {
@@ -14613,6 +14777,15 @@ class VideoTemplateInfoForUpdate extends  AbstractModel {
          */
         this.Vcrf = null;
 
+        /**
+         * 内容自适应编码。可选值：
+<li>0：不开启</li>
+<li>1：开启</li>
+默认值: 0.   当开启该参数时，将会自适应生成多个不同分辨率，不同码率的码流， 其中VideoTemplate的宽和高为多个码流中的最大分辨率，VideoTemplate中的码率为多个码流中的最高码率， VideoTemplate中的vcrf为多个码流中的最高质量。 当不设置分辨率、码率和vcrf时， ContentAdaptStream 参数生成的最高分辨率为视频源的分辨率，视频质量为接近vmaf95分。 若要开启该参数或了解计费细节, 请联系您的腾讯云商务。
+         * @type {number || null}
+         */
+        this.ContentAdaptStream = null;
+
     }
 
     /**
@@ -14631,6 +14804,7 @@ class VideoTemplateInfoForUpdate extends  AbstractModel {
         this.Gop = 'Gop' in params ? params.Gop : null;
         this.FillType = 'FillType' in params ? params.FillType : null;
         this.Vcrf = 'Vcrf' in params ? params.Vcrf : null;
+        this.ContentAdaptStream = 'ContentAdaptStream' in params ? params.ContentAdaptStream : null;
 
     }
 }
@@ -14644,13 +14818,13 @@ class CreateContentReviewTemplateRequest extends  AbstractModel {
         super();
 
         /**
-         * 内容智能识别模板名称，长度限制：64 个字符。
+         * 内容审核模板名称，长度限制：64 个字符。
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * 内容智能识别模板描述信息，长度限制：256 个字符。
+         * 内容审核模板描述信息，长度限制：256 个字符。
          * @type {string || null}
          */
         this.Comment = null;
@@ -14683,7 +14857,7 @@ class CreateContentReviewTemplateRequest extends  AbstractModel {
         this.ProhibitedConfigure = null;
 
         /**
-         * 用户自定义内容智能识别控制参数。
+         * 用户自定义内容审核控制参数。
          * @type {UserDefineConfigureInfo || null}
          */
         this.UserDefineConfigure = null;
@@ -14742,7 +14916,7 @@ class DescribeContentReviewTemplatesRequest extends  AbstractModel {
         super();
 
         /**
-         * 内容智能识别模板唯一标识过滤条件，数组长度限制：50。
+         * 智能审核模板唯一标识过滤条件，数组长度限制：50。
          * @type {Array.<number> || null}
          */
         this.Definitions = null;
@@ -14759,6 +14933,14 @@ class DescribeContentReviewTemplatesRequest extends  AbstractModel {
          */
         this.Limit = null;
 
+        /**
+         * 模板类型过滤条件，不填则返回所有，可选值：
+* Preset：系统预置模板；
+* Custom：用户自定义模板。
+         * @type {string || null}
+         */
+        this.Type = null;
+
     }
 
     /**
@@ -14771,6 +14953,7 @@ class DescribeContentReviewTemplatesRequest extends  AbstractModel {
         this.Definitions = 'Definitions' in params ? params.Definitions : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Type = 'Type' in params ? params.Type : null;
 
     }
 }
@@ -14911,34 +15094,50 @@ class TaskNotifyConfig extends  AbstractModel {
         super();
 
         /**
-         * CMQ 的模型，有 Queue 和 Topic 两种，目前仅支持 Queue。
+         * CMQ或TDMQ-CMQ 的模型，有 Queue 和 Topic 两种。
          * @type {string || null}
          */
         this.CmqModel = null;
 
         /**
-         * CMQ 的园区，如 sh，bj 等。
+         * CMQ或TDMQ-CMQ 的园区，如 sh，bj 等。
          * @type {string || null}
          */
         this.CmqRegion = null;
 
         /**
-         * 当模型为 Queue 时有效，表示接收事件通知的 CMQ 的队列名。
-         * @type {string || null}
-         */
-        this.QueueName = null;
-
-        /**
-         * 当模型为 Topic 时有效，表示接收事件通知的 CMQ 的主题名。
+         * 当模型为 Topic 时有效，表示接收事件通知的 CMQ 或 TDMQ-CMQ 的主题名。
          * @type {string || null}
          */
         this.TopicName = null;
+
+        /**
+         * 当模型为 Queue 时有效，表示接收事件通知的 CMQ 或 TDMQ-CMQ 的队列名。
+         * @type {string || null}
+         */
+        this.QueueName = null;
 
         /**
          * 工作流通知的模式，可取值有 Finish 和 Change，不填代表 Finish。
          * @type {string || null}
          */
         this.NotifyMode = null;
+
+        /**
+         * 通知类型，可选值：
+<li>CMQ：已下线，建议切换到TDMQ-CMQ</li>
+<li>TDMQ-CMQ：消息队列</li>
+<li>URL：指定URL时HTTP回调推送到 NotifyUrl 指定的地址，回调协议http+json，包体内容同解析事件通知接口的输出参数 </li>
+目前 默认CMQ。
+         * @type {string || null}
+         */
+        this.NotifyType = null;
+
+        /**
+         * HTTP回调地址，NotifyType为URL时必填。
+         * @type {string || null}
+         */
+        this.NotifyUrl = null;
 
     }
 
@@ -14951,15 +15150,17 @@ class TaskNotifyConfig extends  AbstractModel {
         }
         this.CmqModel = 'CmqModel' in params ? params.CmqModel : null;
         this.CmqRegion = 'CmqRegion' in params ? params.CmqRegion : null;
-        this.QueueName = 'QueueName' in params ? params.QueueName : null;
         this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.QueueName = 'QueueName' in params ? params.QueueName : null;
         this.NotifyMode = 'NotifyMode' in params ? params.NotifyMode : null;
+        this.NotifyType = 'NotifyType' in params ? params.NotifyType : null;
+        this.NotifyUrl = 'NotifyUrl' in params ? params.NotifyUrl : null;
 
     }
 }
 
 /**
- * 内容审核鉴政任务结果类型
+ * 内容审核涉敏任务结果类型
  * @class
  */
 class AiReviewTaskPoliticalResult extends  AbstractModel {
@@ -14973,7 +15174,7 @@ class AiReviewTaskPoliticalResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+         * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
          * @type {string || null}
          */
         this.ErrCodeExt = null;
@@ -14991,13 +15192,13 @@ class AiReviewTaskPoliticalResult extends  AbstractModel {
         this.Message = null;
 
         /**
-         * 内容审核鉴政任务输入。
+         * 内容审核涉敏任务输入。
          * @type {AiReviewPoliticalTaskInput || null}
          */
         this.Input = null;
 
         /**
-         * 内容审核鉴政任务输出。
+         * 内容审核涉敏任务输出。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {AiReviewPoliticalTaskOutput || null}
          */
@@ -15676,7 +15877,7 @@ class AiRecognitionTaskFaceResultInput extends  AbstractModel {
 }
 
 /**
- * 涉政信息
+ * 涉敏信息
  * @class
  */
 class AiReviewPoliticalTaskOutput extends  AbstractModel {
@@ -15684,13 +15885,13 @@ class AiReviewPoliticalTaskOutput extends  AbstractModel {
         super();
 
         /**
-         * 视频涉政评分，分值为0到100。
+         * 视频涉敏评分，分值为0到100。
          * @type {number || null}
          */
         this.Confidence = null;
 
         /**
-         * 涉政结果建议，取值范围：
+         * 涉敏结果建议，取值范围：
 <li>pass。</li>
 <li>review。</li>
 <li>block。</li>
@@ -15699,17 +15900,17 @@ class AiReviewPoliticalTaskOutput extends  AbstractModel {
         this.Suggestion = null;
 
         /**
-         * 视频鉴政结果标签。内容审核模板[画面鉴政任务控制参数](https://cloud.tencent.com/document/api/862/37615#AiReviewPoliticalTaskOutput)里 LabelSet 参数与此参数取值范围的对应关系：
+         * 视频涉敏结果标签。内容审核模板[画面涉敏任务控制参数](https://cloud.tencent.com/document/api/862/37615#AiReviewPoliticalTaskOutput)里 LabelSet 参数与此参数取值范围的对应关系：
 violation_photo：
 <li>violation_photo：违规图标。</li>
 其他（即 politician/entertainment/sport/entrepreneur/scholar/celebrity/military）：
-<li>politician：政治人物。</li>
+<li>politician：涉敏人物。</li>
          * @type {string || null}
          */
         this.Label = null;
 
         /**
-         * 有涉政嫌疑的视频片段列表。
+         * 有涉敏嫌疑的视频片段列表。
          * @type {Array.<MediaContentReviewPoliticalSegmentItem> || null}
          */
         this.SegmentSet = null;
@@ -15923,8 +16124,8 @@ class LiveStreamAiReviewResultItem extends  AbstractModel {
         /**
          * 审核结果的类型，可以取的值有：
 <li>ImagePorn：图片鉴黄</li>
-<li>ImageTerrorism：图片鉴恐</li>
-<li>ImagePolitical：图片鉴政</li>
+<li>ImageTerrorism：图片涉敏</li>
+<li>ImagePolitical：图片涉敏</li>
 <li>PornVoice：声音鉴黄</li>
          * @type {string || null}
          */
@@ -15937,13 +16138,13 @@ class LiveStreamAiReviewResultItem extends  AbstractModel {
         this.ImagePornResultSet = null;
 
         /**
-         * 图片鉴恐的结果，当 Type 为 ImageTerrorism 时有效。
+         * 图片涉敏的结果，当 Type 为 ImageTerrorism 时有效。
          * @type {Array.<LiveStreamAiReviewImageTerrorismResult> || null}
          */
         this.ImageTerrorismResultSet = null;
 
         /**
-         * 图片鉴政的结果，当 Type 为 ImagePolitical 时有效。
+         * 图片涉敏的结果，当 Type 为 ImagePolitical 时有效。
          * @type {Array.<LiveStreamAiReviewImagePoliticalResult> || null}
          */
         this.ImagePoliticalResultSet = null;
@@ -16151,6 +16352,34 @@ class MediaVideoStreamItem extends  AbstractModel {
          */
         this.Fps = null;
 
+        /**
+         * 色彩空间。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ColorPrimaries = null;
+
+        /**
+         * 色彩空间。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ColorSpace = null;
+
+        /**
+         * 色彩空间。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ColorTransfer = null;
+
+        /**
+         * HDR类型。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.HdrType = null;
+
     }
 
     /**
@@ -16165,6 +16394,10 @@ class MediaVideoStreamItem extends  AbstractModel {
         this.Width = 'Width' in params ? params.Width : null;
         this.Codec = 'Codec' in params ? params.Codec : null;
         this.Fps = 'Fps' in params ? params.Fps : null;
+        this.ColorPrimaries = 'ColorPrimaries' in params ? params.ColorPrimaries : null;
+        this.ColorSpace = 'ColorSpace' in params ? params.ColorSpace : null;
+        this.ColorTransfer = 'ColorTransfer' in params ? params.ColorTransfer : null;
+        this.HdrType = 'HdrType' in params ? params.HdrType : null;
 
     }
 }
@@ -16427,14 +16660,14 @@ class FaceConfigureInfoForUpdate extends  AbstractModel {
          * 默认人物过滤标签，指定需要返回的默认人物的标签。如果未填或者为空，则全部默认人物结果都返回。标签可选值：
 <li>entertainment：娱乐明星；</li>
 <li>sport：体育明星；</li>
-<li>politician：政治人物。</li>
+<li>politician：敏感人物。</li>
          * @type {Array.<string> || null}
          */
         this.DefaultLibraryLabelSet = null;
 
         /**
          * 用户自定义人物过滤标签，指定需要返回的用户自定义人物的标签。如果未填或者为空，则全部自定义人物结果都返回。
-标签个数最多 10 个，每个标签长度最多 16 个字符。
+标签个数最多 100 个，每个标签长度最多 16 个字符。
          * @type {Array.<string> || null}
          */
         this.UserDefineLibraryLabelSet = null;
@@ -16613,7 +16846,7 @@ class CreateAIAnalysisTemplateRequest extends  AbstractModel {
 }
 
 /**
- * 内容审核鉴恐任务输入参数类型
+ * 内容审核涉敏任务输入参数类型
  * @class
  */
 class AiReviewTerrorismTaskInput extends  AbstractModel {
@@ -16621,7 +16854,7 @@ class AiReviewTerrorismTaskInput extends  AbstractModel {
         super();
 
         /**
-         * 鉴恐模板 ID。
+         * 模板 ID。
          * @type {number || null}
          */
         this.Definition = null;
@@ -16718,6 +16951,13 @@ class MediaAudioStreamItem extends  AbstractModel {
          */
         this.Codec = null;
 
+        /**
+         * 音频声道数，例如 2。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Channel = null;
+
     }
 
     /**
@@ -16730,12 +16970,13 @@ class MediaAudioStreamItem extends  AbstractModel {
         this.Bitrate = 'Bitrate' in params ? params.Bitrate : null;
         this.SamplingRate = 'SamplingRate' in params ? params.SamplingRate : null;
         this.Codec = 'Codec' in params ? params.Codec : null;
+        this.Channel = 'Channel' in params ? params.Channel : null;
 
     }
 }
 
 /**
- * 直播 AI 内容审核图片鉴恐结果
+ * 直播 AI 内容审核图片涉敏结果
  * @class
  */
 class LiveStreamAiReviewImageTerrorismResult extends  AbstractModel {
@@ -16755,13 +16996,13 @@ class LiveStreamAiReviewImageTerrorismResult extends  AbstractModel {
         this.EndPtsTime = null;
 
         /**
-         * 嫌疑片段涉恐分数。
+         * 嫌疑片段涉敏分数。
          * @type {number || null}
          */
         this.Confidence = null;
 
         /**
-         * 嫌疑片段鉴恐结果建议，取值范围：
+         * 嫌疑片段涉敏结果建议，取值范围：
 <li>pass</li>
 <li>review</li>
 <li>block</li>
@@ -16770,15 +17011,15 @@ class LiveStreamAiReviewImageTerrorismResult extends  AbstractModel {
         this.Suggestion = null;
 
         /**
-         * 视频暴恐结果标签，取值范围：
+         * 视频涉敏结果标签，取值范围：
 <li>guns：武器枪支。</li>
 <li>crowd：人群聚集。</li>
 <li>police：警察部队。</li>
 <li>bloody：血腥画面。</li>
-<li>banners：暴恐旗帜。</li>
+<li>banners：涉敏旗帜。</li>
 <li>militant：武装分子。</li>
 <li>explosion：爆炸火灾。</li>
-<li>terrorists：暴恐人物。</li>
+<li>terrorists：涉敏人物。</li>
          * @type {string || null}
          */
         this.Label = null;
@@ -17250,7 +17491,7 @@ class LiveStreamProcessTask extends  AbstractModel {
         super();
 
         /**
-         * 视频处理任务 ID。
+         * 媒体处理任务 ID。
          * @type {string || null}
          */
         this.TaskId = null;
@@ -17430,13 +17671,13 @@ class AiContentReviewResult extends  AbstractModel {
         /**
          * 任务的类型，可以取的值有：
 <li>Porn：图片鉴黄</li>
-<li>Terrorism：图片鉴恐</li>
-<li>Political：图片鉴政</li>
+<li>Terrorism：图片敏感</li>
+<li>Political：图片敏感</li>
 <li>Porn.Asr：Asr 文字鉴黄</li>
 <li>Porn.Ocr：Ocr 文字鉴黄</li>
-<li>Political.Asr：Asr 文字鉴政</li>
-<li>Political.Ocr：Ocr 文字鉴政</li>
-<li>Terrorism.Ocr：Ocr 文字鉴恐</li>
+<li>Political.Asr：Asr 文字敏感</li>
+<li>Political.Ocr：Ocr 文字敏感</li>
+<li>Terrorism.Ocr：Ocr 文字敏感</li>
 <li>Prohibited.Asr：Asr 文字鉴违禁</li>
 <li>Prohibited.Ocr：Ocr 文字鉴违禁</li>
          * @type {string || null}
@@ -17463,14 +17704,14 @@ class AiContentReviewResult extends  AbstractModel {
         this.PornTask = null;
 
         /**
-         * 视频内容审核智能画面鉴恐任务的查询结果，当任务类型为 Terrorism 时有效。
+         * 视频内容审核智能画面敏感任务的查询结果，当任务类型为 Terrorism 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {AiReviewTaskTerrorismResult || null}
          */
         this.TerrorismTask = null;
 
         /**
-         * 视频内容审核智能画面鉴政任务的查询结果，当任务类型为 Political 时有效。
+         * 视频内容审核智能画面敏感任务的查询结果，当任务类型为 Political 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {AiReviewTaskPoliticalResult || null}
          */
@@ -17491,21 +17732,21 @@ class AiContentReviewResult extends  AbstractModel {
         this.PornOcrTask = null;
 
         /**
-         * 视频内容审核 Asr 文字鉴政任务的查询结果，当任务类型为 Political.Asr 时有效。
+         * 视频内容审核 Asr 文字敏感任务的查询结果，当任务类型为 Political.Asr 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {AiReviewTaskPoliticalAsrResult || null}
          */
         this.PoliticalAsrTask = null;
 
         /**
-         * 视频内容审核 Ocr 文字鉴政任务的查询结果，当任务类型为 Political.Ocr 时有效。
+         * 视频内容审核 Ocr 文字敏感任务的查询结果，当任务类型为 Political.Ocr 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {AiReviewTaskPoliticalOcrResult || null}
          */
         this.PoliticalOcrTask = null;
 
         /**
-         * 视频内容审核 Ocr 文字鉴恐任务的查询结果，当任务类型为 Terrorism.Ocr 时有效。
+         * 视频内容审核 Ocr 文字敏感任务的查询结果，当任务类型为 Terrorism.Ocr 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {AiReviewTaskTerrorismOcrResult || null}
          */
@@ -17602,7 +17843,7 @@ class AiContentReviewResult extends  AbstractModel {
 }
 
 /**
- * 画面鉴恐任务控制参数
+ * 画面涉敏任务控制参数
  * @class
  */
 class TerrorismImgReviewTemplateInfo extends  AbstractModel {
@@ -17610,24 +17851,24 @@ class TerrorismImgReviewTemplateInfo extends  AbstractModel {
         super();
 
         /**
-         * 画面鉴恐任务开关，可选值：
-<li>ON：开启画面鉴恐任务；</li>
-<li>OFF：关闭画面鉴恐任务。</li>
+         * 画面涉敏任务开关，可选值：
+<li>ON：开启画面涉敏任务；</li>
+<li>OFF：关闭画面涉敏任务。</li>
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * 画面鉴恐过滤标签，审核结果包含选择的标签则返回结果，如果过滤标签为空，则审核结果全部返回，可选值为：
+         * 画面涉敏过滤标签，审核结果包含选择的标签则返回结果，如果过滤标签为空，则审核结果全部返回，可选值为：
 <li>guns：武器枪支；</li>
 <li>crowd：人群聚集；</li>
 <li>bloody：血腥画面；</li>
 <li>police：警察部队；</li>
-<li>banners：暴恐旗帜；</li>
+<li>banners：涉敏旗帜；</li>
 <li>militant：武装分子；</li>
 <li>explosion：爆炸火灾；</li>
-<li>terrorists：暴恐人物；</li>
-<li>scenario：暴恐画面。</li>
+<li>terrorists：涉敏人物；</li>
+<li>scenario：涉敏画面。</li>
          * @type {Array.<string> || null}
          */
         this.LabelSet = null;
@@ -17759,7 +18000,7 @@ class DisableWorkflowRequest extends  AbstractModel {
 }
 
 /**
- * 鉴政任务控制参数。
+ * 涉敏任务控制参数。
  * @class
  */
 class PoliticalConfigureInfoForUpdate extends  AbstractModel {
@@ -17767,19 +18008,19 @@ class PoliticalConfigureInfoForUpdate extends  AbstractModel {
         super();
 
         /**
-         * 画面鉴政控制参数。
+         * 画面涉敏控制参数。
          * @type {PoliticalImgReviewTemplateInfoForUpdate || null}
          */
         this.ImgReviewInfo = null;
 
         /**
-         * 语音鉴政控制参数。
+         * 语音涉敏控制参数。
          * @type {PoliticalAsrReviewTemplateInfoForUpdate || null}
          */
         this.AsrReviewInfo = null;
 
         /**
-         * 文本鉴政控制参数。
+         * 文本涉敏控制参数。
          * @type {PoliticalOcrReviewTemplateInfoForUpdate || null}
          */
         this.OcrReviewInfo = null;
@@ -18518,7 +18759,7 @@ class AiRecognitionTaskAsrWordsResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+         * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
          * @type {string || null}
          */
         this.ErrCodeExt = null;
@@ -18684,7 +18925,7 @@ class CreateSampleSnapshotTemplateRequest extends  AbstractModel {
 }
 
 /**
- * 视频处理任务信息
+ * 媒体处理任务信息
  * @class
  */
 class WorkflowTask extends  AbstractModel {
@@ -18692,7 +18933,7 @@ class WorkflowTask extends  AbstractModel {
         super();
 
         /**
-         * 视频处理任务 ID。
+         * 媒体处理任务 ID。
          * @type {string || null}
          */
         this.TaskId = null;
@@ -18718,7 +18959,7 @@ class WorkflowTask extends  AbstractModel {
         this.Message = null;
 
         /**
-         * 视频处理的目标文件信息。
+         * 媒体处理的目标文件信息。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {MediaInputInfo || null}
          */
@@ -18732,7 +18973,7 @@ class WorkflowTask extends  AbstractModel {
         this.MetaData = null;
 
         /**
-         * 视频处理任务的执行状态与结果。
+         * 媒体处理任务的执行状态与结果。
          * @type {Array.<MediaProcessTaskResult> || null}
          */
         this.MediaProcessResultSet = null;
@@ -18835,7 +19076,7 @@ class AiReviewTaskPornAsrResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+         * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
          * @type {string || null}
          */
         this.ErrCodeExt = null;
@@ -18967,14 +19208,14 @@ class FaceConfigureInfo extends  AbstractModel {
          * 默认人物过滤标签，指定需要返回的默认人物的标签。如果未填或者为空，则全部默认人物结果都返回。标签可选值：
 <li>entertainment：娱乐明星；</li>
 <li>sport：体育明星；</li>
-<li>politician：政治人物。</li>
+<li>politician：敏感人物。</li>
          * @type {Array.<string> || null}
          */
         this.DefaultLibraryLabelSet = null;
 
         /**
          * 用户自定义人物过滤标签，指定需要返回的用户自定义人物的标签。如果未填或者为空，则全部自定义人物结果都返回。
-标签个数最多 10 个，每个标签长度最多 16 个字符。
+标签个数最多 100 个，每个标签长度最多 16 个字符。
          * @type {Array.<string> || null}
          */
         this.UserDefineLibraryLabelSet = null;
@@ -19232,7 +19473,7 @@ class PornImgReviewTemplateInfo extends  AbstractModel {
 }
 
 /**
- * Ocr 文字涉政信息
+ * Ocr 文字敏感信息
  * @class
  */
 class AiReviewPoliticalOcrTaskOutput extends  AbstractModel {
@@ -19240,13 +19481,13 @@ class AiReviewPoliticalOcrTaskOutput extends  AbstractModel {
         super();
 
         /**
-         * Ocr 文字涉政、敏感评分，分值为0到100。
+         * Ocr 文字敏感评分，分值为0到100。
          * @type {number || null}
          */
         this.Confidence = null;
 
         /**
-         * Ocr 文字涉政、敏感结果建议，取值范围：
+         * Ocr 文字敏感结果建议，取值范围：
 <li>pass。</li>
 <li>review。</li>
 <li>block。</li>
@@ -19255,7 +19496,7 @@ class AiReviewPoliticalOcrTaskOutput extends  AbstractModel {
         this.Suggestion = null;
 
         /**
-         * Ocr 文字有涉政、敏感嫌疑的视频片段列表。
+         * Ocr 文字有敏感嫌疑的视频片段列表。
          * @type {Array.<MediaContentReviewOcrTextSegmentItem> || null}
          */
         this.SegmentSet = null;
@@ -19590,7 +19831,7 @@ class SampleSnapshotTaskInput extends  AbstractModel {
 }
 
 /**
- * 鉴恐任务控制参数
+ * 涉敏任务控制参数
  * @class
  */
 class TerrorismConfigureInfo extends  AbstractModel {
@@ -19598,13 +19839,13 @@ class TerrorismConfigureInfo extends  AbstractModel {
         super();
 
         /**
-         * 画面鉴恐任务控制参数。
+         * 画面涉敏任务控制参数。
          * @type {TerrorismImgReviewTemplateInfo || null}
          */
         this.ImgReviewInfo = null;
 
         /**
-         * 文本鉴恐任务控制参数。
+         * 文本涉敏任务控制参数。
          * @type {TerrorismOcrReviewTemplateInfo || null}
          */
         this.OcrReviewInfo = null;
@@ -19635,7 +19876,7 @@ class TerrorismConfigureInfo extends  AbstractModel {
 }
 
 /**
- * 语音鉴政任务控制参数
+ * 语音涉敏任务控制参数
  * @class
  */
 class PoliticalAsrReviewTemplateInfo extends  AbstractModel {
@@ -19643,9 +19884,9 @@ class PoliticalAsrReviewTemplateInfo extends  AbstractModel {
         super();
 
         /**
-         * 语音鉴政任务开关，可选值：
-<li>ON：开启语音鉴政任务；</li>
-<li>OFF：关闭语音鉴政任务。</li>
+         * 语音涉敏任务开关，可选值：
+<li>ON：开启语音涉敏任务；</li>
+<li>OFF：关闭语音涉敏任务。</li>
          * @type {string || null}
          */
         this.Switch = null;
@@ -19728,7 +19969,7 @@ class AiAnalysisTaskClassificationResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+         * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
          * @type {string || null}
          */
         this.ErrCodeExt = null;
@@ -19964,6 +20205,75 @@ class AiRecognitionTaskFaceResultItem extends  AbstractModel {
          */
         this.SegmentSet = null;
 
+        /**
+         * 人物性别：
+<li>Male：男性；</li>
+<li>Female：女性。</li>
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Gender = null;
+
+        /**
+         * 人物出生日期。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Birthday = null;
+
+        /**
+         * 人物职业或者职务。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Profession = null;
+
+        /**
+         * 人物毕业院校。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SchoolOfGraduation = null;
+
+        /**
+         * 人物简介。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Abstract = null;
+
+        /**
+         * 人物出生地或者籍贯。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.PlaceOfBirth = null;
+
+        /**
+         * 人物类型：
+<li>Politician：官员；</li>
+<li>Artist：艺人。</li>
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.PersonType = null;
+
+        /**
+         * 敏感度标注：
+<li>Normal：正常；</li>
+<li>Sensitive：敏感。</li>
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * 截图链接
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Url = null;
+
     }
 
     /**
@@ -19985,6 +20295,15 @@ class AiRecognitionTaskFaceResultItem extends  AbstractModel {
                 this.SegmentSet.push(obj);
             }
         }
+        this.Gender = 'Gender' in params ? params.Gender : null;
+        this.Birthday = 'Birthday' in params ? params.Birthday : null;
+        this.Profession = 'Profession' in params ? params.Profession : null;
+        this.SchoolOfGraduation = 'SchoolOfGraduation' in params ? params.SchoolOfGraduation : null;
+        this.Abstract = 'Abstract' in params ? params.Abstract : null;
+        this.PlaceOfBirth = 'PlaceOfBirth' in params ? params.PlaceOfBirth : null;
+        this.PersonType = 'PersonType' in params ? params.PersonType : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.Url = 'Url' in params ? params.Url : null;
 
     }
 }
@@ -20209,6 +20528,14 @@ class DescribeAIRecognitionTemplatesRequest extends  AbstractModel {
          */
         this.Limit = null;
 
+        /**
+         * 模板类型过滤条件，不填则返回所有，可选值：
+* Preset：系统预置模板；
+* Custom：用户自定义模板。
+         * @type {string || null}
+         */
+        this.Type = null;
+
     }
 
     /**
@@ -20221,6 +20548,7 @@ class DescribeAIRecognitionTemplatesRequest extends  AbstractModel {
         this.Definitions = 'Definitions' in params ? params.Definitions : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Type = 'Type' in params ? params.Type : null;
 
     }
 }
@@ -20470,6 +20798,7 @@ module.exports = {
     ModifyAnimatedGraphicsTemplateResponse: ModifyAnimatedGraphicsTemplateResponse,
     DeleteAdaptiveDynamicStreamingTemplateRequest: DeleteAdaptiveDynamicStreamingTemplateRequest,
     AiRecognitionTaskOcrFullTextSegmentItem: AiRecognitionTaskOcrFullTextSegmentItem,
+    EditMediaOutputConfig: EditMediaOutputConfig,
     AiReviewPornAsrTaskOutput: AiReviewPornAsrTaskOutput,
     DeleteAIAnalysisTemplateRequest: DeleteAIAnalysisTemplateRequest,
     EditMediaRequest: EditMediaRequest,
@@ -20537,6 +20866,7 @@ module.exports = {
     AnimatedGraphicTaskInput: AnimatedGraphicTaskInput,
     DeleteContentReviewTemplateRequest: DeleteContentReviewTemplateRequest,
     AIAnalysisTemplateItem: AIAnalysisTemplateItem,
+    HeadTailParameter: HeadTailParameter,
     RawImageWatermarkInput: RawImageWatermarkInput,
     DescribeImageSpriteTemplatesRequest: DescribeImageSpriteTemplatesRequest,
     AiSampleTagOperation: AiSampleTagOperation,

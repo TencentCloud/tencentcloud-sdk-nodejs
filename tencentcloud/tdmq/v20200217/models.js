@@ -17,24 +17,24 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
- * DescribeBindClusters返回参数结构体
+ * DescribeRoles返回参数结构体
  * @class
  */
-class DescribeBindClustersResponse extends  AbstractModel {
+class DescribeRolesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 专享集群的数量
+         * 记录数。
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * 专享集群的列表
-         * @type {Array.<BindCluster> || null}
+         * 角色数组。
+         * @type {Array.<Role> || null}
          */
-        this.ClusterSet = null;
+        this.RoleSets = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -53,15 +53,85 @@ class DescribeBindClustersResponse extends  AbstractModel {
         }
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
-        if (params.ClusterSet) {
-            this.ClusterSet = new Array();
-            for (let z in params.ClusterSet) {
-                let obj = new BindCluster();
-                obj.deserialize(params.ClusterSet[z]);
-                this.ClusterSet.push(obj);
+        if (params.RoleSets) {
+            this.RoleSets = new Array();
+            for (let z in params.RoleSets) {
+                let obj = new Role();
+                obj.deserialize(params.RoleSets[z]);
+                this.RoleSets.push(obj);
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeAMQPRouteRelations请求参数结构体
+ * @class
+ */
+class DescribeAMQPRouteRelationsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 查询偏移量
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 查询限制数
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Vhost名称
+         * @type {string || null}
+         */
+        this.VHostId = null;
+
+        /**
+         * 按源exchange名称过滤查询结果，支持模糊查询
+         * @type {string || null}
+         */
+        this.FilterSourceExchange = null;
+
+        /**
+         * 按绑定的目标类型过滤查询结果，可选值:Exchange、Queue
+         * @type {string || null}
+         */
+        this.FilterDestType = null;
+
+        /**
+         * 按目标名称过滤查询结果，支持模糊查询
+         * @type {string || null}
+         */
+        this.FilterDestValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.VHostId = 'VHostId' in params ? params.VHostId : null;
+        this.FilterSourceExchange = 'FilterSourceExchange' in params ? params.FilterSourceExchange : null;
+        this.FilterDestType = 'FilterDestType' in params ? params.FilterDestType : null;
+        this.FilterDestValue = 'FilterDestValue' in params ? params.FilterDestValue : null;
 
     }
 }
@@ -115,6 +185,135 @@ class CmqDeadLetterPolicy extends  AbstractModel {
         this.Policy = 'Policy' in params ? params.Policy : null;
         this.MaxTimeToLive = 'MaxTimeToLive' in params ? params.MaxTimeToLive : null;
         this.MaxReceiveCount = 'MaxReceiveCount' in params ? params.MaxReceiveCount : null;
+
+    }
+}
+
+/**
+ * DescribeNamespaceBundlesOpt请求参数结构体
+ * @class
+ */
+class DescribeNamespaceBundlesOptRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 物理集群名
+         * @type {string || null}
+         */
+        this.ClusterName = null;
+
+        /**
+         * 虚拟集群（租户）ID
+         * @type {string || null}
+         */
+        this.TenantId = null;
+
+        /**
+         * 命名空间名
+         * @type {string || null}
+         */
+        this.NamespaceName = null;
+
+        /**
+         * 是否需要监控指标，若传false，则不需要传Limit和Offset分页参数
+         * @type {boolean || null}
+         */
+        this.NeedMetrics = null;
+
+        /**
+         * 查询限制条数
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 查询偏移量
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
+        this.TenantId = 'TenantId' in params ? params.TenantId : null;
+        this.NamespaceName = 'NamespaceName' in params ? params.NamespaceName : null;
+        this.NeedMetrics = 'NeedMetrics' in params ? params.NeedMetrics : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
+ * RocketMQ命名空间信息
+ * @class
+ */
+class RocketMQNamespace extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 命名空间名称，3-64个字符，只能包含字母、数字、“-”及“_”
+         * @type {string || null}
+         */
+        this.NamespaceId = null;
+
+        /**
+         * 未消费消息的保留时间，以毫秒单位，范围60秒到15天
+         * @type {number || null}
+         */
+        this.Ttl = null;
+
+        /**
+         * 消息持久化后保留的时间，以毫秒单位
+         * @type {number || null}
+         */
+        this.RetentionTime = null;
+
+        /**
+         * 说明
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * 公网接入点地址
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.PublicEndpoint = null;
+
+        /**
+         * VPC接入点地址
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.VpcEndpoint = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
+        this.Ttl = 'Ttl' in params ? params.Ttl : null;
+        this.RetentionTime = 'RetentionTime' in params ? params.RetentionTime : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.PublicEndpoint = 'PublicEndpoint' in params ? params.PublicEndpoint : null;
+        this.VpcEndpoint = 'VpcEndpoint' in params ? params.VpcEndpoint : null;
 
     }
 }
@@ -193,6 +392,130 @@ class DescribeSubscriptionsRequest extends  AbstractModel {
             }
         }
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+    }
+}
+
+/**
+ * CreateRocketMQGroup请求参数结构体
+ * @class
+ */
+class CreateRocketMQGroupRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Group名称，8~64个字符
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
+        /**
+         * 命名空间，目前只支持单个命名空间
+         * @type {Array.<string> || null}
+         */
+        this.Namespaces = null;
+
+        /**
+         * 是否开启消费
+         * @type {boolean || null}
+         */
+        this.ReadEnable = null;
+
+        /**
+         * 是否开启广播消费
+         * @type {boolean || null}
+         */
+        this.BroadcastEnable = null;
+
+        /**
+         * 集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 说明信息，最长128个字符
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.Namespaces = 'Namespaces' in params ? params.Namespaces : null;
+        this.ReadEnable = 'ReadEnable' in params ? params.ReadEnable : null;
+        this.BroadcastEnable = 'BroadcastEnable' in params ? params.BroadcastEnable : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+
+    }
+}
+
+/**
+ * ModifyEnvironmentAttributes请求参数结构体
+ * @class
+ */
+class ModifyEnvironmentAttributesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 命名空间名称。
+         * @type {string || null}
+         */
+        this.EnvironmentId = null;
+
+        /**
+         * 未消费消息过期时间，单位：秒，最大1296000。
+         * @type {number || null}
+         */
+        this.MsgTTL = null;
+
+        /**
+         * 备注，字符串最长不超过128。
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * 集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 消息保留策略
+         * @type {RetentionPolicy || null}
+         */
+        this.RetentionPolicy = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
+        this.MsgTTL = 'MsgTTL' in params ? params.MsgTTL : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+        if (params.RetentionPolicy) {
+            let obj = new RetentionPolicy();
+            obj.deserialize(params.RetentionPolicy)
+            this.RetentionPolicy = obj;
+        }
 
     }
 }
@@ -277,18 +600,18 @@ class SendBatchMessagesResponse extends  AbstractModel {
 }
 
 /**
- * DescribeClusterDetail请求参数结构体
+ * ModifyCmqSubscriptionAttribute返回参数结构体
  * @class
  */
-class DescribeClusterDetailRequest extends  AbstractModel {
+class ModifyCmqSubscriptionAttributeResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 集群的ID
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.ClusterId = null;
+        this.RequestId = null;
 
     }
 
@@ -299,7 +622,7 @@ class DescribeClusterDetailRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -342,6 +665,12 @@ class CreateCmqTopicRequest extends  AbstractModel {
          */
         this.Trace = null;
 
+        /**
+         * 标签数组
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -356,6 +685,213 @@ class CreateCmqTopicRequest extends  AbstractModel {
         this.FilterType = 'FilterType' in params ? params.FilterType : null;
         this.MsgRetentionSeconds = 'MsgRetentionSeconds' in params ? params.MsgRetentionSeconds : null;
         this.Trace = 'Trace' in params ? params.Trace : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * CreateAMQPExchange请求参数结构体
+ * @class
+ */
+class CreateAMQPExchangeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 交换机名称，3-64个字符，只能包含字母、数字、“-”及“_”
+         * @type {string || null}
+         */
+        this.Exchange = null;
+
+        /**
+         * 交换机所在的vhost，目前支持在单个vhost下创建主题
+         * @type {Array.<string> || null}
+         */
+        this.VHosts = null;
+
+        /**
+         * 交换机类型，可选值为Direct, Fanout, Topic, x-delayed-message
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 交换机说明，最大128个字符
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * 备用交换机名称
+         * @type {string || null}
+         */
+        this.AlternateExchange = null;
+
+        /**
+         * 延迟交换机类型，可选值为Direct, Fanout, Topic, 不允许为x-delayed-message
+         * @type {string || null}
+         */
+        this.DelayedType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Exchange = 'Exchange' in params ? params.Exchange : null;
+        this.VHosts = 'VHosts' in params ? params.VHosts : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.AlternateExchange = 'AlternateExchange' in params ? params.AlternateExchange : null;
+        this.DelayedType = 'DelayedType' in params ? params.DelayedType : null;
+
+    }
+}
+
+/**
+ * DescribeRocketMQNamespaces返回参数结构体
+ * @class
+ */
+class DescribeRocketMQNamespacesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 命名空间列表
+         * @type {Array.<RocketMQNamespace> || null}
+         */
+        this.Namespaces = null;
+
+        /**
+         * 总条数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Namespaces) {
+            this.Namespaces = new Array();
+            for (let z in params.Namespaces) {
+                let obj = new RocketMQNamespace();
+                obj.deserialize(params.Namespaces[z]);
+                this.Namespaces.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ResetRocketMQConsumerOffSet返回参数结构体
+ * @class
+ */
+class ResetRocketMQConsumerOffSetResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeBindClusters返回参数结构体
+ * @class
+ */
+class DescribeBindClustersResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 专享集群的数量
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 专享集群的列表
+         * @type {Array.<BindCluster> || null}
+         */
+        this.ClusterSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.ClusterSet) {
+            this.ClusterSet = new Array();
+            for (let z in params.ClusterSet) {
+                let obj = new BindCluster();
+                obj.deserialize(params.ClusterSet[z]);
+                this.ClusterSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -424,6 +960,55 @@ class ModifyClusterResponse extends  AbstractModel {
 }
 
 /**
+ * RocketMQ近期使用量
+ * @class
+ */
+class RocketMQClusterRecentStats extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Topic数量
+         * @type {number || null}
+         */
+        this.TopicNum = null;
+
+        /**
+         * 消息生产数
+         * @type {number || null}
+         */
+        this.ProducedMsgNum = null;
+
+        /**
+         * 消息消费数
+         * @type {number || null}
+         */
+        this.ConsumedMsgNum = null;
+
+        /**
+         * 消息堆积数
+         * @type {number || null}
+         */
+        this.AccumulativeMsgNum = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TopicNum = 'TopicNum' in params ? params.TopicNum : null;
+        this.ProducedMsgNum = 'ProducedMsgNum' in params ? params.ProducedMsgNum : null;
+        this.ConsumedMsgNum = 'ConsumedMsgNum' in params ? params.ConsumedMsgNum : null;
+        this.AccumulativeMsgNum = 'AccumulativeMsgNum' in params ? params.AccumulativeMsgNum : null;
+
+    }
+}
+
+/**
  * DescribeCmqQueues返回参数结构体
  * @class
  */
@@ -475,30 +1060,30 @@ class DescribeCmqQueuesResponse extends  AbstractModel {
 }
 
 /**
- * PublishCmqMsg请求参数结构体
+ * DescribeAllTenants返回参数结构体
  * @class
  */
-class PublishCmqMsgRequest extends  AbstractModel {
+class DescribeAllTenantsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 主题名
-         * @type {string || null}
+         * 总条数
+         * @type {number || null}
          */
-        this.TopicName = null;
+        this.TotalCount = null;
 
         /**
-         * 消息内容
-         * @type {string || null}
+         * 虚拟集群列表
+         * @type {Array.<InternalTenant> || null}
          */
-        this.MsgContent = null;
+        this.Tenants = null;
 
         /**
-         * 消息标签
-         * @type {Array.<string> || null}
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
          */
-        this.MsgTag = null;
+        this.RequestId = null;
 
     }
 
@@ -509,68 +1094,46 @@ class PublishCmqMsgRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TopicName = 'TopicName' in params ? params.TopicName : null;
-        this.MsgContent = 'MsgContent' in params ? params.MsgContent : null;
-        this.MsgTag = 'MsgTag' in params ? params.MsgTag : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Tenants) {
+            this.Tenants = new Array();
+            for (let z in params.Tenants) {
+                let obj = new InternalTenant();
+                obj.deserialize(params.Tenants[z]);
+                this.Tenants.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
 
 /**
- * CreateCmqSubscribe请求参数结构体
+ * DescribeNamespaceBundlesOpt返回参数结构体
  * @class
  */
-class CreateCmqSubscribeRequest extends  AbstractModel {
+class DescribeNamespaceBundlesOptResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 主题名字，在单个地域同一帐号下唯一。主题名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线（-）。
+         * 记录条数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * bundle列表
+         * @type {Array.<BundleSetOpt> || null}
+         */
+        this.BundleSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.TopicName = null;
-
-        /**
-         * 订阅名字，在单个地域同一帐号的同一主题下唯一。订阅名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。
-         * @type {string || null}
-         */
-        this.SubscriptionName = null;
-
-        /**
-         * 订阅的协议，目前支持两种协议：http、queue。使用http协议，用户需自己搭建接受消息的web server。使用queue，消息会自动推送到CMQ queue，用户可以并发地拉取消息。
-         * @type {string || null}
-         */
-        this.Protocol = null;
-
-        /**
-         * 接收通知的Endpoint，根据协议Protocol区分：对于http，Endpoint必须以“`http://`”开头，host可以是域名或IP；对于Queue，则填QueueName。 请注意，目前推送服务不能推送到私有网络中，因此Endpoint填写为私有网络域名或地址将接收不到推送的消息，目前支持推送到公网和基础网络。
-         * @type {string || null}
-         */
-        this.Endpoint = null;
-
-        /**
-         * 向Endpoint推送消息出现错误时，CMQ推送服务器的重试策略。取值有：1）BACKOFF_RETRY，退避重试。每隔一定时间重试一次，重试够一定次数后，就把该消息丢弃，继续推送下一条消息；2）EXPONENTIAL_DECAY_RETRY，指数衰退重试。每次重试的间隔是指数递增的，例如开始1s，后面是2s，4s，8s...由于Topic消息的周期是一天，所以最多重试一天就把消息丢弃。默认值是EXPONENTIAL_DECAY_RETRY。
-         * @type {string || null}
-         */
-        this.NotifyStrategy = null;
-
-        /**
-         * 消息正文。消息标签（用于消息过滤)。标签数量不能超过5个，每个标签不超过16个字符。与(Batch)PublishMessage的MsgTag参数配合使用，规则：1）如果FilterTag没有设置，则无论MsgTag是否有设置，订阅接收所有发布到Topic的消息；2）如果FilterTag数组有值，则只有数组中至少有一个值在MsgTag数组中也存在时（即FilterTag和MsgTag有交集），订阅才接收该发布到Topic的消息；3）如果FilterTag数组有值，但MsgTag没设置，则不接收任何发布到Topic的消息，可以认为是2）的一种特例，此时FilterTag和MsgTag没有交集。规则整体的设计思想是以订阅者的意愿为主。
-         * @type {Array.<string> || null}
-         */
-        this.FilterTag = null;
-
-        /**
-         * BindingKey数量不超过5个， 每个BindingKey长度不超过64字节，该字段表示订阅接收消息的过滤策略，每个BindingKey最多含有15个“.”， 即最多16个词组。
-         * @type {Array.<string> || null}
-         */
-        this.BindingKey = null;
-
-        /**
-         * 推送内容的格式。取值：1）JSON；2）SIMPLIFIED，即raw格式。如果Protocol是queue，则取值必须为SIMPLIFIED。如果Protocol是http，两个值均可以，默认值是JSON。
-         * @type {string || null}
-         */
-        this.NotifyContentFormat = null;
+        this.RequestId = null;
 
     }
 
@@ -581,14 +1144,67 @@ class CreateCmqSubscribeRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TopicName = 'TopicName' in params ? params.TopicName : null;
-        this.SubscriptionName = 'SubscriptionName' in params ? params.SubscriptionName : null;
-        this.Protocol = 'Protocol' in params ? params.Protocol : null;
-        this.Endpoint = 'Endpoint' in params ? params.Endpoint : null;
-        this.NotifyStrategy = 'NotifyStrategy' in params ? params.NotifyStrategy : null;
-        this.FilterTag = 'FilterTag' in params ? params.FilterTag : null;
-        this.BindingKey = 'BindingKey' in params ? params.BindingKey : null;
-        this.NotifyContentFormat = 'NotifyContentFormat' in params ? params.NotifyContentFormat : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.BundleSet) {
+            this.BundleSet = new Array();
+            for (let z in params.BundleSet) {
+                let obj = new BundleSetOpt();
+                obj.deserialize(params.BundleSet[z]);
+                this.BundleSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeBindVpcs返回参数结构体
+ * @class
+ */
+class DescribeBindVpcsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 记录数。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Vpc集合。
+         * @type {Array.<VpcBindRecord> || null}
+         */
+        this.VpcSets = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.VpcSets) {
+            this.VpcSets = new Array();
+            for (let z in params.VpcSets) {
+                let obj = new VpcBindRecord();
+                obj.deserialize(params.VpcSets[z]);
+                this.VpcSets.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -771,6 +1387,340 @@ filterType = 2表示用户使用 bindingKey 过滤。
 }
 
 /**
+ * ModifyAMQPVHost返回参数结构体
+ * @class
+ */
+class ModifyAMQPVHostResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeAMQPCluster返回参数结构体
+ * @class
+ */
+class DescribeAMQPClusterResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群信息
+         * @type {AMQPClusterInfo || null}
+         */
+        this.ClusterInfo = null;
+
+        /**
+         * 集群配置
+         * @type {AMQPClusterConfig || null}
+         */
+        this.ClusterConfig = null;
+
+        /**
+         * 集群最近使用量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {AMQPClusterRecentStats || null}
+         */
+        this.ClusterStats = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ClusterInfo) {
+            let obj = new AMQPClusterInfo();
+            obj.deserialize(params.ClusterInfo)
+            this.ClusterInfo = obj;
+        }
+
+        if (params.ClusterConfig) {
+            let obj = new AMQPClusterConfig();
+            obj.deserialize(params.ClusterConfig)
+            this.ClusterConfig = obj;
+        }
+
+        if (params.ClusterStats) {
+            let obj = new AMQPClusterRecentStats();
+            obj.deserialize(params.ClusterStats)
+            this.ClusterStats = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateAMQPCluster请求参数结构体
+ * @class
+ */
+class CreateAMQPClusterRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 3-64个字符，只能包含字母、数字、“-”及“_”
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 集群描述，128个字符以内
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+
+    }
+}
+
+/**
+ * DeleteRocketMQGroup请求参数结构体
+ * @class
+ */
+class DeleteRocketMQGroupRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 命名空间名称
+         * @type {string || null}
+         */
+        this.NamespaceId = null;
+
+        /**
+         * 消费组名称
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+
+    }
+}
+
+/**
+ * RocketMQ消费组信息
+ * @class
+ */
+class RocketMQGroup extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 消费组名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 在线消费者数量
+         * @type {number || null}
+         */
+        this.ConsumerNum = null;
+
+        /**
+         * 消费TPS
+         * @type {number || null}
+         */
+        this.TPS = null;
+
+        /**
+         * 总堆积数量
+         * @type {number || null}
+         */
+        this.TotalAccumulative = null;
+
+        /**
+         * 0表示集群消费模式，1表示广播消费模式，-1表示未知
+         * @type {number || null}
+         */
+        this.ConsumptionMode = null;
+
+        /**
+         * 是否允许消费
+         * @type {boolean || null}
+         */
+        this.ReadEnabled = null;
+
+        /**
+         * 重试队列分区数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.RetryPartitionNum = null;
+
+        /**
+         * 创建时间，以毫秒为单位
+         * @type {number || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 修改时间，以毫秒为单位
+         * @type {number || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * 客户端协议
+         * @type {string || null}
+         */
+        this.ClientProtocol = null;
+
+        /**
+         * 说明信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * 消费者类型，枚举值ACTIVELY, PASSIVELY
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ConsumerType = null;
+
+        /**
+         * 是否开启广播消费
+         * @type {boolean || null}
+         */
+        this.BroadcastEnabled = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.ConsumerNum = 'ConsumerNum' in params ? params.ConsumerNum : null;
+        this.TPS = 'TPS' in params ? params.TPS : null;
+        this.TotalAccumulative = 'TotalAccumulative' in params ? params.TotalAccumulative : null;
+        this.ConsumptionMode = 'ConsumptionMode' in params ? params.ConsumptionMode : null;
+        this.ReadEnabled = 'ReadEnabled' in params ? params.ReadEnabled : null;
+        this.RetryPartitionNum = 'RetryPartitionNum' in params ? params.RetryPartitionNum : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.ClientProtocol = 'ClientProtocol' in params ? params.ClientProtocol : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.ConsumerType = 'ConsumerType' in params ? params.ConsumerType : null;
+        this.BroadcastEnabled = 'BroadcastEnabled' in params ? params.BroadcastEnabled : null;
+
+    }
+}
+
+/**
+ * AMQP集群近期使用量
+ * @class
+ */
+class AMQPClusterRecentStats extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Queue数量
+         * @type {number || null}
+         */
+        this.QueueNum = null;
+
+        /**
+         * 消息生产数
+         * @type {number || null}
+         */
+        this.ProducedMsgNum = null;
+
+        /**
+         * 消息堆积数
+         * @type {number || null}
+         */
+        this.AccumulativeMsgNum = null;
+
+        /**
+         * Exchange数量
+         * @type {number || null}
+         */
+        this.ExchangeNum = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.QueueNum = 'QueueNum' in params ? params.QueueNum : null;
+        this.ProducedMsgNum = 'ProducedMsgNum' in params ? params.ProducedMsgNum : null;
+        this.AccumulativeMsgNum = 'AccumulativeMsgNum' in params ? params.AccumulativeMsgNum : null;
+        this.ExchangeNum = 'ExchangeNum' in params ? params.ExchangeNum : null;
+
+    }
+}
+
+/**
  * DeleteCmqTopic返回参数结构体
  * @class
  */
@@ -794,6 +1744,55 @@ class DeleteCmqTopicResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyAMQPVHost请求参数结构体
+ * @class
+ */
+class ModifyAMQPVHostRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * vhost名称，3-64个字符，只能包含字母、数字、“-”及“_”
+         * @type {string || null}
+         */
+        this.VHostId = null;
+
+        /**
+         * 未消费消息的保留时间，以毫秒为单位，60秒-15天
+         * @type {number || null}
+         */
+        this.MsgTtl = null;
+
+        /**
+         * 说明，最大128个字符
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.VHostId = 'VHostId' in params ? params.VHostId : null;
+        this.MsgTtl = 'MsgTtl' in params ? params.MsgTtl : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
 
     }
 }
@@ -848,6 +1847,12 @@ class CreateSubscriptionRequest extends  AbstractModel {
          */
         this.AutoCreatePolicyTopic = null;
 
+        /**
+         * 指定死信和重试主题名称规范，LEGACY表示历史命名规则，COMMUNITY表示Pulsar社区命名规范
+         * @type {string || null}
+         */
+        this.PostFixPattern = null;
+
     }
 
     /**
@@ -864,6 +1869,277 @@ class CreateSubscriptionRequest extends  AbstractModel {
         this.Remark = 'Remark' in params ? params.Remark : null;
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
         this.AutoCreatePolicyTopic = 'AutoCreatePolicyTopic' in params ? params.AutoCreatePolicyTopic : null;
+        this.PostFixPattern = 'PostFixPattern' in params ? params.PostFixPattern : null;
+
+    }
+}
+
+/**
+ * CreateRocketMQNamespace请求参数结构体
+ * @class
+ */
+class CreateRocketMQNamespaceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 命名空间名称，3-64个字符，只能包含字母、数字、“-”及“_”
+         * @type {string || null}
+         */
+        this.NamespaceId = null;
+
+        /**
+         * 未消费消息的保留时间，以毫秒为单位，60秒-15天
+         * @type {number || null}
+         */
+        this.Ttl = null;
+
+        /**
+         * 消息持久化后保留的时间，以毫秒为单位
+         * @type {number || null}
+         */
+        this.RetentionTime = null;
+
+        /**
+         * 说明，最大128个字符
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
+        this.Ttl = 'Ttl' in params ? params.Ttl : null;
+        this.RetentionTime = 'RetentionTime' in params ? params.RetentionTime : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+
+    }
+}
+
+/**
+ * 主题实例
+ * @class
+ */
+class Topic extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 最后一次间隔内发布消息的平均byte大小。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.AverageMsgSize = null;
+
+        /**
+         * 消费者数量。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ConsumerCount = null;
+
+        /**
+         * 被记录下来的消息总数。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.LastConfirmedEntry = null;
+
+        /**
+         * 最后一个ledger创建的时间。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.LastLedgerCreatedTimestamp = null;
+
+        /**
+         * 本地和复制的发布者每秒发布消息的速率。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.MsgRateIn = null;
+
+        /**
+         * 本地和复制的消费者每秒分发消息的数量之和。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.MsgRateOut = null;
+
+        /**
+         * 本地和复制的发布者每秒发布消息的byte。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.MsgThroughputIn = null;
+
+        /**
+         * 本地和复制的消费者每秒分发消息的byte。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.MsgThroughputOut = null;
+
+        /**
+         * 被记录下来的消息总数。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.NumberOfEntries = null;
+
+        /**
+         * 分区数<=0：topic下无子分区。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Partitions = null;
+
+        /**
+         * 生产者数量。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ProducerCount = null;
+
+        /**
+         * 以byte计算的所有消息存储总量。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TotalSize = null;
+
+        /**
+         * 分区topic里面的子分区。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<PartitionsTopic> || null}
+         */
+        this.SubTopicSets = null;
+
+        /**
+         * topic类型描述：
+0：普通消息；
+1：全局顺序消息；
+2：局部顺序消息；
+3：重试队列；
+4：死信队列；
+5：事务消息。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TopicType = null;
+
+        /**
+         * 环境（命名空间）名称。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.EnvironmentId = null;
+
+        /**
+         * 主题名称。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+        /**
+         * 说明，128个字符以内。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * 创建时间。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 最近修改时间。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * 生产者上限。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ProducerLimit = null;
+
+        /**
+         * 消费者上限。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ConsumerLimit = null;
+
+        /**
+         * 0: 非持久非分区
+1: 非持久分区
+2: 持久非分区
+3: 持久分区
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.PulsarTopicType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AverageMsgSize = 'AverageMsgSize' in params ? params.AverageMsgSize : null;
+        this.ConsumerCount = 'ConsumerCount' in params ? params.ConsumerCount : null;
+        this.LastConfirmedEntry = 'LastConfirmedEntry' in params ? params.LastConfirmedEntry : null;
+        this.LastLedgerCreatedTimestamp = 'LastLedgerCreatedTimestamp' in params ? params.LastLedgerCreatedTimestamp : null;
+        this.MsgRateIn = 'MsgRateIn' in params ? params.MsgRateIn : null;
+        this.MsgRateOut = 'MsgRateOut' in params ? params.MsgRateOut : null;
+        this.MsgThroughputIn = 'MsgThroughputIn' in params ? params.MsgThroughputIn : null;
+        this.MsgThroughputOut = 'MsgThroughputOut' in params ? params.MsgThroughputOut : null;
+        this.NumberOfEntries = 'NumberOfEntries' in params ? params.NumberOfEntries : null;
+        this.Partitions = 'Partitions' in params ? params.Partitions : null;
+        this.ProducerCount = 'ProducerCount' in params ? params.ProducerCount : null;
+        this.TotalSize = 'TotalSize' in params ? params.TotalSize : null;
+
+        if (params.SubTopicSets) {
+            this.SubTopicSets = new Array();
+            for (let z in params.SubTopicSets) {
+                let obj = new PartitionsTopic();
+                obj.deserialize(params.SubTopicSets[z]);
+                this.SubTopicSets.push(obj);
+            }
+        }
+        this.TopicType = 'TopicType' in params ? params.TopicType : null;
+        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.ProducerLimit = 'ProducerLimit' in params ? params.ProducerLimit : null;
+        this.ConsumerLimit = 'ConsumerLimit' in params ? params.ConsumerLimit : null;
+        this.PulsarTopicType = 'PulsarTopicType' in params ? params.PulsarTopicType : null;
 
     }
 }
@@ -904,6 +2180,97 @@ class DescribeCmqTopicDetailResponse extends  AbstractModel {
             this.TopicDescribe = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 命名空间信息
+ * @class
+ */
+class Environment extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 命名空间名称
+         * @type {string || null}
+         */
+        this.EnvironmentId = null;
+
+        /**
+         * 说明
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * 未消费消息过期时间，单位：秒，最大1296000（15天）
+         * @type {number || null}
+         */
+        this.MsgTTL = null;
+
+        /**
+         * 创建时间
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 最近修改时间
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * 命名空间ID
+         * @type {string || null}
+         */
+        this.NamespaceId = null;
+
+        /**
+         * 命名空间名称
+         * @type {string || null}
+         */
+        this.NamespaceName = null;
+
+        /**
+         * Topic数量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TopicNum = null;
+
+        /**
+         * 消息保留策略
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {RetentionPolicy || null}
+         */
+        this.RetentionPolicy = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.MsgTTL = 'MsgTTL' in params ? params.MsgTTL : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
+        this.NamespaceName = 'NamespaceName' in params ? params.NamespaceName : null;
+        this.TopicNum = 'TopicNum' in params ? params.TopicNum : null;
+
+        if (params.RetentionPolicy) {
+            let obj = new RetentionPolicy();
+            obj.deserialize(params.RetentionPolicy)
+            this.RetentionPolicy = obj;
+        }
 
     }
 }
@@ -1102,6 +2469,34 @@ class CmqQueue extends  AbstractModel {
          */
         this.NamespaceName = null;
 
+        /**
+         * 集群状态，0:创建中，1:正常，2:销毁中，3:已删除，4: 隔离中，5:创建失败，6: 删除失败
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 最大未确认消息数量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.MaxUnackedMsgNum = null;
+
+        /**
+         * 最大消息堆积大小（字节）
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.MaxMsgBacklogSize = null;
+
+        /**
+         * 队列可回溯存储空间，取值范围1024MB - 10240MB，0表示不开启
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.RetentionSizeInMB = null;
+
     }
 
     /**
@@ -1164,6 +2559,10 @@ class CmqQueue extends  AbstractModel {
         this.Trace = 'Trace' in params ? params.Trace : null;
         this.TenantId = 'TenantId' in params ? params.TenantId : null;
         this.NamespaceName = 'NamespaceName' in params ? params.NamespaceName : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.MaxUnackedMsgNum = 'MaxUnackedMsgNum' in params ? params.MaxUnackedMsgNum : null;
+        this.MaxMsgBacklogSize = 'MaxMsgBacklogSize' in params ? params.MaxMsgBacklogSize : null;
+        this.RetentionSizeInMB = 'RetentionSizeInMB' in params ? params.RetentionSizeInMB : null;
 
     }
 }
@@ -1226,65 +2625,6 @@ class CreateEnvironmentResponse extends  AbstractModel {
 }
 
 /**
- * 生产者
- * @class
- */
-class Producer extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 环境（命名空间）名称。
-         * @type {string || null}
-         */
-        this.EnvironmentId = null;
-
-        /**
-         * 主题名称。
-         * @type {string || null}
-         */
-        this.TopicName = null;
-
-        /**
-         * 连接数。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.CountConnect = null;
-
-        /**
-         * 连接集合。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<Connection> || null}
-         */
-        this.ConnectionSets = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
-        this.TopicName = 'TopicName' in params ? params.TopicName : null;
-        this.CountConnect = 'CountConnect' in params ? params.CountConnect : null;
-
-        if (params.ConnectionSets) {
-            this.ConnectionSets = new Array();
-            for (let z in params.ConnectionSets) {
-                let obj = new Connection();
-                obj.deserialize(params.ConnectionSets[z]);
-                this.ConnectionSets.push(obj);
-            }
-        }
-
-    }
-}
-
-/**
  * CreateSubscription返回参数结构体
  * @class
  */
@@ -1314,6 +2654,34 @@ class CreateSubscriptionResponse extends  AbstractModel {
             return;
         }
         this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteAMQPQueue返回参数结构体
+ * @class
+ */
+class DeleteAMQPQueueResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1397,165 +2765,46 @@ class DescribeCmqSubscriptionDetailRequest extends  AbstractModel {
 }
 
 /**
- * 主题实例
+ * DescribePublisherSummary返回参数结构体
  * @class
  */
-class Topic extends  AbstractModel {
+class DescribePublisherSummaryResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 最后一次间隔内发布消息的平均byte大小。
+         * 生产速率（条/秒）
 注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.AverageMsgSize = null;
-
-        /**
-         * 消费者数量。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ConsumerCount = null;
-
-        /**
-         * 被记录下来的消息总数。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.LastConfirmedEntry = null;
-
-        /**
-         * 最后一个ledger创建的时间。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.LastLedgerCreatedTimestamp = null;
-
-        /**
-         * 本地和复制的发布者每秒发布消息的速率。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
+         * @type {number || null}
          */
         this.MsgRateIn = null;
 
         /**
-         * 本地和复制的消费者每秒分发消息的数量之和。
+         * 生产速率（字节/秒）
 注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.MsgRateOut = null;
-
-        /**
-         * 本地和复制的发布者每秒发布消息的byte。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
+         * @type {number || null}
          */
         this.MsgThroughputIn = null;
 
         /**
-         * 本地和复制的消费者每秒分发消息的byte。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.MsgThroughputOut = null;
-
-        /**
-         * 被记录下来的消息总数。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.NumberOfEntries = null;
-
-        /**
-         * 分区数<=0：topic下无子分区。
+         * 生产者数量
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
-        this.Partitions = null;
+        this.PublisherCount = null;
 
         /**
-         * 生产者数量。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ProducerCount = null;
-
-        /**
-         * 以byte计算的所有消息存储总量。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.TotalSize = null;
-
-        /**
-         * 分区topic里面的子分区。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<PartitionsTopic> || null}
-         */
-        this.SubTopicSets = null;
-
-        /**
-         * topic类型描述：
-0：普通消息；
-1：全局顺序消息；
-2：局部顺序消息；
-3：重试队列；
-4：死信队列；
-5：事务消息。
+         * 消息存储大小，以字节为单位
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
-        this.TopicType = null;
+        this.StorageSize = null;
 
         /**
-         * 环境（命名空间）名称。
-注意：此字段可能返回 null，表示取不到有效值。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.EnvironmentId = null;
-
-        /**
-         * 主题名称。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.TopicName = null;
-
-        /**
-         * 说明，128个字符以内。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.Remark = null;
-
-        /**
-         * 创建时间。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * 最近修改时间。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.UpdateTime = null;
-
-        /**
-         * 生产者上限。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ProducerLimit = null;
-
-        /**
-         * 消费者上限。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ConsumerLimit = null;
+        this.RequestId = null;
 
     }
 
@@ -1566,35 +2815,61 @@ class Topic extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AverageMsgSize = 'AverageMsgSize' in params ? params.AverageMsgSize : null;
-        this.ConsumerCount = 'ConsumerCount' in params ? params.ConsumerCount : null;
-        this.LastConfirmedEntry = 'LastConfirmedEntry' in params ? params.LastConfirmedEntry : null;
-        this.LastLedgerCreatedTimestamp = 'LastLedgerCreatedTimestamp' in params ? params.LastLedgerCreatedTimestamp : null;
         this.MsgRateIn = 'MsgRateIn' in params ? params.MsgRateIn : null;
-        this.MsgRateOut = 'MsgRateOut' in params ? params.MsgRateOut : null;
         this.MsgThroughputIn = 'MsgThroughputIn' in params ? params.MsgThroughputIn : null;
-        this.MsgThroughputOut = 'MsgThroughputOut' in params ? params.MsgThroughputOut : null;
-        this.NumberOfEntries = 'NumberOfEntries' in params ? params.NumberOfEntries : null;
-        this.Partitions = 'Partitions' in params ? params.Partitions : null;
-        this.ProducerCount = 'ProducerCount' in params ? params.ProducerCount : null;
-        this.TotalSize = 'TotalSize' in params ? params.TotalSize : null;
+        this.PublisherCount = 'PublisherCount' in params ? params.PublisherCount : null;
+        this.StorageSize = 'StorageSize' in params ? params.StorageSize : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
-        if (params.SubTopicSets) {
-            this.SubTopicSets = new Array();
-            for (let z in params.SubTopicSets) {
-                let obj = new PartitionsTopic();
-                obj.deserialize(params.SubTopicSets[z]);
-                this.SubTopicSets.push(obj);
+    }
+}
+
+/**
+ * DescribeAMQPVHosts返回参数结构体
+ * @class
+ */
+class DescribeAMQPVHostsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Vhost 列表
+         * @type {Array.<AMQPVHost> || null}
+         */
+        this.VHosts = null;
+
+        /**
+         * 总条数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.VHosts) {
+            this.VHosts = new Array();
+            for (let z in params.VHosts) {
+                let obj = new AMQPVHost();
+                obj.deserialize(params.VHosts[z]);
+                this.VHosts.push(obj);
             }
         }
-        this.TopicType = 'TopicType' in params ? params.TopicType : null;
-        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
-        this.TopicName = 'TopicName' in params ? params.TopicName : null;
-        this.Remark = 'Remark' in params ? params.Remark : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
-        this.ProducerLimit = 'ProducerLimit' in params ? params.ProducerLimit : null;
-        this.ConsumerLimit = 'ConsumerLimit' in params ? params.ConsumerLimit : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1662,6 +2937,397 @@ class DescribeEnvironmentsRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * DescribeRocketMQNamespaces请求参数结构体
+ * @class
+ */
+class DescribeRocketMQNamespacesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 偏移量
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 限制数目
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 按名称搜索
+         * @type {string || null}
+         */
+        this.NameKeyword = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.NameKeyword = 'NameKeyword' in params ? params.NameKeyword : null;
+
+    }
+}
+
+/**
+ * DeleteAMQPCluster返回参数结构体
+ * @class
+ */
+class DeleteAMQPClusterResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeAMQPCluster请求参数结构体
+ * @class
+ */
+class DescribeAMQPClusterRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+    }
+}
+
+/**
+ * DescribeRocketMQTopics请求参数结构体
+ * @class
+ */
+class DescribeRocketMQTopicsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 查询偏移量
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 查询限制数
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 命名空间
+         * @type {string || null}
+         */
+        this.NamespaceId = null;
+
+        /**
+         * 按主题类型过滤查询结果，可选择Normal, GlobalOrder, PartitionedOrder, Transaction
+         * @type {Array.<string> || null}
+         */
+        this.FilterType = null;
+
+        /**
+         * 按主题名称搜索，支持模糊查询
+         * @type {string || null}
+         */
+        this.FilterName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
+        this.FilterType = 'FilterType' in params ? params.FilterType : null;
+        this.FilterName = 'FilterName' in params ? params.FilterName : null;
+
+    }
+}
+
+/**
+ * ModifyRocketMQCluster返回参数结构体
+ * @class
+ */
+class ModifyRocketMQClusterResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 订阅者
+ * @class
+ */
+class Subscription extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 主题名称。
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+        /**
+         * 环境（命名空间）名称。
+         * @type {string || null}
+         */
+        this.EnvironmentId = null;
+
+        /**
+         * 消费者开始连接的时间。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ConnectedSince = null;
+
+        /**
+         * 消费者地址。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ConsumerAddr = null;
+
+        /**
+         * 消费者数量。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ConsumerCount = null;
+
+        /**
+         * 消费者名称。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ConsumerName = null;
+
+        /**
+         * 堆积的消息数量。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.MsgBacklog = null;
+
+        /**
+         * 于TTL，此订阅下没有被发送而是被丢弃的比例。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.MsgRateExpired = null;
+
+        /**
+         * 消费者每秒分发消息的数量之和。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.MsgRateOut = null;
+
+        /**
+         * 消费者每秒消息的byte。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.MsgThroughputOut = null;
+
+        /**
+         * 订阅名称。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SubscriptionName = null;
+
+        /**
+         * 消费者集合。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Consumer> || null}
+         */
+        this.ConsumerSets = null;
+
+        /**
+         * 是否在线。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.IsOnline = null;
+
+        /**
+         * 消费进度集合。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<ConsumersSchedule> || null}
+         */
+        this.ConsumersScheduleSets = null;
+
+        /**
+         * 备注。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * 创建时间。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 最近修改时间。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * 订阅类型，Exclusive，Shared，Failover， Key_Shared，空或NULL表示未知，
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SubType = null;
+
+        /**
+         * 是否由于未 ack 数到达上限而被 block
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.BlockedSubscriptionOnUnackedMsgs = null;
+
+        /**
+         * 未 ack 消息数上限
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.MaxUnackedMsgNum = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
+        this.ConnectedSince = 'ConnectedSince' in params ? params.ConnectedSince : null;
+        this.ConsumerAddr = 'ConsumerAddr' in params ? params.ConsumerAddr : null;
+        this.ConsumerCount = 'ConsumerCount' in params ? params.ConsumerCount : null;
+        this.ConsumerName = 'ConsumerName' in params ? params.ConsumerName : null;
+        this.MsgBacklog = 'MsgBacklog' in params ? params.MsgBacklog : null;
+        this.MsgRateExpired = 'MsgRateExpired' in params ? params.MsgRateExpired : null;
+        this.MsgRateOut = 'MsgRateOut' in params ? params.MsgRateOut : null;
+        this.MsgThroughputOut = 'MsgThroughputOut' in params ? params.MsgThroughputOut : null;
+        this.SubscriptionName = 'SubscriptionName' in params ? params.SubscriptionName : null;
+
+        if (params.ConsumerSets) {
+            this.ConsumerSets = new Array();
+            for (let z in params.ConsumerSets) {
+                let obj = new Consumer();
+                obj.deserialize(params.ConsumerSets[z]);
+                this.ConsumerSets.push(obj);
+            }
+        }
+        this.IsOnline = 'IsOnline' in params ? params.IsOnline : null;
+
+        if (params.ConsumersScheduleSets) {
+            this.ConsumersScheduleSets = new Array();
+            for (let z in params.ConsumersScheduleSets) {
+                let obj = new ConsumersSchedule();
+                obj.deserialize(params.ConsumersScheduleSets[z]);
+                this.ConsumersScheduleSets.push(obj);
+            }
+        }
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.SubType = 'SubType' in params ? params.SubType : null;
+        this.BlockedSubscriptionOnUnackedMsgs = 'BlockedSubscriptionOnUnackedMsgs' in params ? params.BlockedSubscriptionOnUnackedMsgs : null;
+        this.MaxUnackedMsgNum = 'MaxUnackedMsgNum' in params ? params.MaxUnackedMsgNum : null;
 
     }
 }
@@ -1738,6 +3404,12 @@ class CreateEnvironmentRequest extends  AbstractModel {
          */
         this.ClusterId = null;
 
+        /**
+         * 消息保留策略
+         * @type {RetentionPolicy || null}
+         */
+        this.RetentionPolicy = null;
+
     }
 
     /**
@@ -1752,28 +3424,64 @@ class CreateEnvironmentRequest extends  AbstractModel {
         this.Remark = 'Remark' in params ? params.Remark : null;
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
 
+        if (params.RetentionPolicy) {
+            let obj = new RetentionPolicy();
+            obj.deserialize(params.RetentionPolicy)
+            this.RetentionPolicy = obj;
+        }
+
     }
 }
 
 /**
- * DeleteTopics返回参数结构体
+ * CreateAMQPQueue请求参数结构体
  * @class
  */
-class DeleteTopicsResponse extends  AbstractModel {
+class CreateAMQPQueueRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 被删除的主题数组。
-         * @type {Array.<TopicRecord> || null}
-         */
-        this.TopicSets = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 队列名称，3-64个字符，只能包含字母、数字、“-”及“_”
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Queue = null;
+
+        /**
+         * 队列所在的vhost名称
+         * @type {string || null}
+         */
+        this.VHostId = null;
+
+        /**
+         * 是否自动清除
+         * @type {boolean || null}
+         */
+        this.AutoDelete = null;
+
+        /**
+         * 集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 队列说明，最大128个字符
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * 死信exchange
+         * @type {string || null}
+         */
+        this.DeadLetterExchange = null;
+
+        /**
+         * 路由键
+         * @type {string || null}
+         */
+        this.DeadLetterRoutingKey = null;
 
     }
 
@@ -1784,16 +3492,41 @@ class DeleteTopicsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Queue = 'Queue' in params ? params.Queue : null;
+        this.VHostId = 'VHostId' in params ? params.VHostId : null;
+        this.AutoDelete = 'AutoDelete' in params ? params.AutoDelete : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.DeadLetterExchange = 'DeadLetterExchange' in params ? params.DeadLetterExchange : null;
+        this.DeadLetterRoutingKey = 'DeadLetterRoutingKey' in params ? params.DeadLetterRoutingKey : null;
 
-        if (params.TopicSets) {
-            this.TopicSets = new Array();
-            for (let z in params.TopicSets) {
-                let obj = new TopicRecord();
-                obj.deserialize(params.TopicSets[z]);
-                this.TopicSets.push(obj);
-            }
+    }
+}
+
+/**
+ * ClearCmqQueue请求参数结构体
+ * @class
+ */
+class ClearCmqQueueRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 队列名字，在单个地域同一帐号下唯一。队列名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。
+         * @type {string || null}
+         */
+        this.QueueName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.QueueName = 'QueueName' in params ? params.QueueName : null;
 
     }
 }
@@ -1818,6 +3551,24 @@ class DescribeClustersRequest extends  AbstractModel {
          */
         this.Limit = null;
 
+        /**
+         * 集群ID列表过滤
+         * @type {Array.<string> || null}
+         */
+        this.ClusterIdList = null;
+
+        /**
+         * 是否标签过滤
+         * @type {boolean || null}
+         */
+        this.IsTagFilter = null;
+
+        /**
+         * 过滤器。目前支持按标签过滤。
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
     }
 
     /**
@@ -1829,41 +3580,91 @@ class DescribeClustersRequest extends  AbstractModel {
         }
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+        this.ClusterIdList = 'ClusterIdList' in params ? params.ClusterIdList : null;
+        this.IsTagFilter = 'IsTagFilter' in params ? params.IsTagFilter : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
 
     }
 }
 
 /**
- * ModifyEnvironmentAttributes请求参数结构体
+ * 生产者信息
  * @class
  */
-class ModifyEnvironmentAttributesRequest extends  AbstractModel {
+class Publisher extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 命名空间名称。
-         * @type {string || null}
-         */
-        this.EnvironmentId = null;
-
-        /**
-         * 未消费消息过期时间，单位：秒，最大1296000。
+         * 生产者id
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
-        this.MsgTTL = null;
+        this.ProducerId = null;
 
         /**
-         * 备注，字符串最长不超过128。
+         * 生产者名称
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.Remark = null;
+        this.ProducerName = null;
 
         /**
-         * 集群ID
+         * 生产者地址
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.ClusterId = null;
+        this.Address = null;
+
+        /**
+         * 客户端版本
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ClientVersion = null;
+
+        /**
+         * 消息生产速率（条/秒）
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.MsgRateIn = null;
+
+        /**
+         * 消息生产吞吐速率（字节/秒）
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.MsgThroughputIn = null;
+
+        /**
+         * 平均消息大小（字节）
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.AverageMsgSize = null;
+
+        /**
+         * 连接时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ConnectedSince = null;
+
+        /**
+         * 生产者连接的主题分区号
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Partition = null;
 
     }
 
@@ -1874,10 +3675,165 @@ class ModifyEnvironmentAttributesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
-        this.MsgTTL = 'MsgTTL' in params ? params.MsgTTL : null;
+        this.ProducerId = 'ProducerId' in params ? params.ProducerId : null;
+        this.ProducerName = 'ProducerName' in params ? params.ProducerName : null;
+        this.Address = 'Address' in params ? params.Address : null;
+        this.ClientVersion = 'ClientVersion' in params ? params.ClientVersion : null;
+        this.MsgRateIn = 'MsgRateIn' in params ? params.MsgRateIn : null;
+        this.MsgThroughputIn = 'MsgThroughputIn' in params ? params.MsgThroughputIn : null;
+        this.AverageMsgSize = 'AverageMsgSize' in params ? params.AverageMsgSize : null;
+        this.ConnectedSince = 'ConnectedSince' in params ? params.ConnectedSince : null;
+        this.Partition = 'Partition' in params ? params.Partition : null;
+
+    }
+}
+
+/**
+ * RocketMQ主题信息
+ * @class
+ */
+class RocketMQTopic extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 主题名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 说明
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * 读写分区数
+         * @type {number || null}
+         */
+        this.PartitionNum = null;
+
+        /**
+         * 创建时间，以毫秒为单位
+         * @type {number || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 创建时间，以毫秒为单位
+         * @type {number || null}
+         */
+        this.UpdateTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
         this.Remark = 'Remark' in params ? params.Remark : null;
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.PartitionNum = 'PartitionNum' in params ? params.PartitionNum : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+
+    }
+}
+
+/**
+ * DescribeRocketMQCluster返回参数结构体
+ * @class
+ */
+class DescribeRocketMQClusterResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群信息
+         * @type {RocketMQClusterInfo || null}
+         */
+        this.ClusterInfo = null;
+
+        /**
+         * 集群配置
+         * @type {RocketMQClusterConfig || null}
+         */
+        this.ClusterConfig = null;
+
+        /**
+         * 集群最近使用量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {RocketMQClusterRecentStats || null}
+         */
+        this.ClusterStats = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ClusterInfo) {
+            let obj = new RocketMQClusterInfo();
+            obj.deserialize(params.ClusterInfo)
+            this.ClusterInfo = obj;
+        }
+
+        if (params.ClusterConfig) {
+            let obj = new RocketMQClusterConfig();
+            obj.deserialize(params.ClusterConfig)
+            this.ClusterConfig = obj;
+        }
+
+        if (params.ClusterStats) {
+            let obj = new RocketMQClusterRecentStats();
+            obj.deserialize(params.ClusterStats)
+            this.ClusterStats = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateAMQPVHost返回参数结构体
+ * @class
+ */
+class CreateAMQPVHostResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2033,6 +3989,62 @@ class RewindCmqQueueRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeAMQPVHosts请求参数结构体
+ * @class
+ */
+class DescribeAMQPVHostsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 偏移量
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 限制数目
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 按名称搜索
+         * @type {string || null}
+         */
+        this.NameKeyword = null;
+
+        /**
+         * VHostId 列表过滤
+         * @type {Array.<string> || null}
+         */
+        this.VHostIdList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.NameKeyword = 'NameKeyword' in params ? params.NameKeyword : null;
+        this.VHostIdList = 'VHostIdList' in params ? params.VHostIdList : null;
+
+    }
+}
+
+/**
  * ModifyCluster请求参数结构体
  * @class
  */
@@ -2058,6 +4070,132 @@ class ModifyClusterRequest extends  AbstractModel {
          */
         this.Remark = null;
 
+        /**
+         * 开启公网访问，只能为true
+         * @type {boolean || null}
+         */
+        this.PublicAccessEnabled = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.PublicAccessEnabled = 'PublicAccessEnabled' in params ? params.PublicAccessEnabled : null;
+
+    }
+}
+
+/**
+ * DescribeAMQPQueues请求参数结构体
+ * @class
+ */
+class DescribeAMQPQueuesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 查询偏移量
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 查询限制数
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Vhost名称
+         * @type {string || null}
+         */
+        this.VHostId = null;
+
+        /**
+         * 按队列名称搜索，支持模糊查询
+         * @type {string || null}
+         */
+        this.NameKeyword = null;
+
+        /**
+         * 查询结果排序规则，ASC为升序，DESC为降序
+         * @type {string || null}
+         */
+        this.SortOrder = null;
+
+        /**
+         * 对查询结果排序，此为排序字段，目前支持Accumulative（消息堆积量）、Tps
+         * @type {string || null}
+         */
+        this.SortedBy = null;
+
+        /**
+         * 队列名称，指定此参数后将只返回该队列信息
+         * @type {string || null}
+         */
+        this.FilterOneQueue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.VHostId = 'VHostId' in params ? params.VHostId : null;
+        this.NameKeyword = 'NameKeyword' in params ? params.NameKeyword : null;
+        this.SortOrder = 'SortOrder' in params ? params.SortOrder : null;
+        this.SortedBy = 'SortedBy' in params ? params.SortedBy : null;
+        this.FilterOneQueue = 'FilterOneQueue' in params ? params.FilterOneQueue : null;
+
+    }
+}
+
+/**
+ * ModifyRocketMQCluster请求参数结构体
+ * @class
+ */
+class ModifyRocketMQClusterRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * RocketMQ集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 3-64个字符，只能包含字母、数字、“-”及“_”
+         * @type {string || null}
+         */
+        this.ClusterName = null;
+
+        /**
+         * 说明信息，不超过128个字符
+         * @type {string || null}
+         */
+        this.Remark = null;
+
     }
 
     /**
@@ -2075,21 +4213,214 @@ class ModifyClusterRequest extends  AbstractModel {
 }
 
 /**
- * DescribeEnvironmentAttributes请求参数结构体
+ * vhostd信息
  * @class
  */
-class DescribeEnvironmentAttributesRequest extends  AbstractModel {
+class AMQPVHost extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 环境（命名空间）名称。
+         * 命名空间名称，3-64个字符，只能包含字母、数字、“-”及“_”
          * @type {string || null}
          */
-        this.EnvironmentId = null;
+        this.VHostId = null;
 
         /**
-         * Pulsar 集群的ID
+         * 未消费消息的保留时间，以毫秒单位，范围60秒到15天
+         * @type {number || null}
+         */
+        this.MsgTtl = null;
+
+        /**
+         * 备注
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * 创建时间，以毫秒为单位
+         * @type {number || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 更新时间，以毫秒为单位
+         * @type {number || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * 用户名
+         * @type {string || null}
+         */
+        this.Username = null;
+
+        /**
+         * 密码
+         * @type {string || null}
+         */
+        this.Password = null;
+
+        /**
+         * 集群状态，0:创建中，1:正常，2:销毁中，3:已删除，4: 隔离中，5:创建失败，6: 删除失败
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VHostId = 'VHostId' in params ? params.VHostId : null;
+        this.MsgTtl = 'MsgTtl' in params ? params.MsgTtl : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.Username = 'Username' in params ? params.Username : null;
+        this.Password = 'Password' in params ? params.Password : null;
+        this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
+ * ModifyAMQPExchange返回参数结构体
+ * @class
+ */
+class ModifyAMQPExchangeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeAMQPExchanges返回参数结构体
+ * @class
+ */
+class DescribeAMQPExchangesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总记录数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 主题信息列表
+         * @type {Array.<AMQPExchange> || null}
+         */
+        this.Exchanges = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Exchanges) {
+            this.Exchanges = new Array();
+            for (let z in params.Exchanges) {
+                let obj = new AMQPExchange();
+                obj.deserialize(params.Exchanges[z]);
+                this.Exchanges.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * AcknowledgeMessage请求参数结构体
+ * @class
+ */
+class AcknowledgeMessageRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 用作标识消息的唯一的ID（可从 receiveMessage 的返回值中获得）
+         * @type {string || null}
+         */
+        this.MessageId = null;
+
+        /**
+         * Topic 名字（可从 receiveMessage 的返回值中获得）这里尽量需要使用topic的全路径，即：tenant/namespace/topic。如果不指定，默认使用的是：public/default
+         * @type {string || null}
+         */
+        this.AckTopic = null;
+
+        /**
+         * 订阅者的名字，可以从receiveMessage的返回值中获取到。这里尽量与receiveMessage中的订阅者保持一致，否则没办法正确ack 接收回来的消息。
+         * @type {string || null}
+         */
+        this.SubName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MessageId = 'MessageId' in params ? params.MessageId : null;
+        this.AckTopic = 'AckTopic' in params ? params.AckTopic : null;
+        this.SubName = 'SubName' in params ? params.SubName : null;
+
+    }
+}
+
+/**
+ * DeleteAMQPCluster请求参数结构体
+ * @class
+ */
+class DeleteAMQPClusterRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 待删除的集群Id。
          * @type {string || null}
          */
         this.ClusterId = null;
@@ -2103,7 +4434,6 @@ class DescribeEnvironmentAttributesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
 
     }
@@ -2202,30 +4532,54 @@ class PublishCmqMsgResponse extends  AbstractModel {
 }
 
 /**
- * SendCmqMsg请求参数结构体
+ * DescribePublishers请求参数结构体
  * @class
  */
-class SendCmqMsgRequest extends  AbstractModel {
+class DescribePublishersRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 队列名
+         * 集群ID
          * @type {string || null}
          */
-        this.QueueName = null;
+        this.ClusterId = null;
 
         /**
-         * 消息内容
+         * 命名空间名称
          * @type {string || null}
          */
-        this.MsgContent = null;
+        this.Namespace = null;
 
         /**
-         * 延迟时间
+         * 主题名称
+         * @type {string || null}
+         */
+        this.Topic = null;
+
+        /**
+         * 参数过滤器，支持ProducerName，Address字段
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 查询偏移量，默认为0
          * @type {number || null}
          */
-        this.DelaySeconds = null;
+        this.Offset = null;
+
+        /**
+         * 查询条数，默认为20
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 排序器
+         * @type {Sort || null}
+         */
+        this.Sort = null;
 
     }
 
@@ -2236,18 +4590,141 @@ class SendCmqMsgRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.QueueName = 'QueueName' in params ? params.QueueName : null;
-        this.MsgContent = 'MsgContent' in params ? params.MsgContent : null;
-        this.DelaySeconds = 'DelaySeconds' in params ? params.DelaySeconds : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.Topic = 'Topic' in params ? params.Topic : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+        if (params.Sort) {
+            let obj = new Sort();
+            obj.deserialize(params.Sort)
+            this.Sort = obj;
+        }
 
     }
 }
 
 /**
- * ModifyCmqSubscriptionAttribute返回参数结构体
+ * CreateRocketMQCluster请求参数结构体
  * @class
  */
-class ModifyCmqSubscriptionAttributeResponse extends  AbstractModel {
+class CreateRocketMQClusterRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群名称，3-64个字符，只能包含字母、数字、“-”及“_”
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 集群描述，128个字符以内
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+
+    }
+}
+
+/**
+ * DeleteAMQPVHost请求参数结构体
+ * @class
+ */
+class DeleteAMQPVHostRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * vhost名称
+         * @type {string || null}
+         */
+        this.VHostId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.VHostId = 'VHostId' in params ? params.VHostId : null;
+
+    }
+}
+
+/**
+ * AcknowledgeMessage返回参数结构体
+ * @class
+ */
+class AcknowledgeMessageResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 如果为“”，则说明没有错误返回
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ErrorMsg = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ErrorMsg = 'ErrorMsg' in params ? params.ErrorMsg : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyCmqQueueAttribute返回参数结构体
+ * @class
+ */
+class ModifyCmqQueueAttributeResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -2267,6 +4744,174 @@ class ModifyCmqSubscriptionAttributeResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteEnvironmentRoles返回参数结构体
+ * @class
+ */
+class DeleteEnvironmentRolesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeClusterDetail请求参数结构体
+ * @class
+ */
+class DescribeClusterDetailRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群的ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+    }
+}
+
+/**
+ * ModifyRole返回参数结构体
+ * @class
+ */
+class ModifyRoleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 角色名称
+         * @type {string || null}
+         */
+        this.RoleName = null;
+
+        /**
+         * 备注说明
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RoleName = 'RoleName' in params ? params.RoleName : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyAMQPQueue请求参数结构体
+ * @class
+ */
+class ModifyAMQPQueueRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Vhost名称
+         * @type {string || null}
+         */
+        this.VHostId = null;
+
+        /**
+         * 队列名称
+         * @type {string || null}
+         */
+        this.Queue = null;
+
+        /**
+         * 是否自动清除
+         * @type {boolean || null}
+         */
+        this.AutoDelete = null;
+
+        /**
+         * 说明信息，最大128个字符
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * 死信exchange
+         * @type {string || null}
+         */
+        this.DeadLetterExchange = null;
+
+        /**
+         * 路由键
+         * @type {string || null}
+         */
+        this.DeadLetterRoutingKey = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.VHostId = 'VHostId' in params ? params.VHostId : null;
+        this.Queue = 'Queue' in params ? params.Queue : null;
+        this.AutoDelete = 'AutoDelete' in params ? params.AutoDelete : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.DeadLetterExchange = 'DeadLetterExchange' in params ? params.DeadLetterExchange : null;
+        this.DeadLetterRoutingKey = 'DeadLetterRoutingKey' in params ? params.DeadLetterRoutingKey : null;
 
     }
 }
@@ -2335,48 +4980,18 @@ class DeleteCmqQueueResponse extends  AbstractModel {
 }
 
 /**
- * SendMessages请求参数结构体
+ * DescribeRocketMQCluster请求参数结构体
  * @class
  */
-class SendMessagesRequest extends  AbstractModel {
+class DescribeRocketMQClusterRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Token 是用来做鉴权使用的
+         * 集群ID
          * @type {string || null}
          */
-        this.StringToken = null;
-
-        /**
-         * 消息要发送的topic的名字
-         * @type {string || null}
-         */
-        this.Topic = null;
-
-        /**
-         * 要发送的消息的内容
-         * @type {string || null}
-         */
-        this.Payload = null;
-
-        /**
-         * 设置 producer 的名字，要求全局唯一，用户不配置，系统会随机生成
-         * @type {string || null}
-         */
-        this.ProducerName = null;
-
-        /**
-         * 设置消息发送的超时时间，默认为30s
-         * @type {number || null}
-         */
-        this.SendTimeout = null;
-
-        /**
-         * 内存中缓存的最大的生产消息的数量，默认为1000条
-         * @type {number || null}
-         */
-        this.MaxPendingMessages = null;
+        this.ClusterId = null;
 
     }
 
@@ -2387,12 +5002,35 @@ class SendMessagesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.StringToken = 'StringToken' in params ? params.StringToken : null;
-        this.Topic = 'Topic' in params ? params.Topic : null;
-        this.Payload = 'Payload' in params ? params.Payload : null;
-        this.ProducerName = 'ProducerName' in params ? params.ProducerName : null;
-        this.SendTimeout = 'SendTimeout' in params ? params.SendTimeout : null;
-        this.MaxPendingMessages = 'MaxPendingMessages' in params ? params.MaxPendingMessages : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+    }
+}
+
+/**
+ * DeleteRocketMQTopic返回参数结构体
+ * @class
+ */
+class DeleteRocketMQTopicResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2447,129 +5085,24 @@ class ModifyCmqTopicAttributeRequest extends  AbstractModel {
 }
 
 /**
- * 订阅者
+ * DeleteRoles请求参数结构体
  * @class
  */
-class Subscription extends  AbstractModel {
+class DeleteRolesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 主题名称。
+         * 角色名称数组。
+         * @type {Array.<string> || null}
+         */
+        this.RoleNames = null;
+
+        /**
+         * 必填字段，集群Id
          * @type {string || null}
          */
-        this.TopicName = null;
-
-        /**
-         * 环境（命名空间）名称。
-         * @type {string || null}
-         */
-        this.EnvironmentId = null;
-
-        /**
-         * 消费者开始连接的时间。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ConnectedSince = null;
-
-        /**
-         * 消费者地址。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ConsumerAddr = null;
-
-        /**
-         * 消费者数量。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ConsumerCount = null;
-
-        /**
-         * 消费者名称。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ConsumerName = null;
-
-        /**
-         * 堆积的消息数量。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.MsgBacklog = null;
-
-        /**
-         * 于TTL，此订阅下没有被发送而是被丢弃的比例。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.MsgRateExpired = null;
-
-        /**
-         * 消费者每秒分发消息的数量之和。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.MsgRateOut = null;
-
-        /**
-         * 消费者每秒消息的byte。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.MsgThroughputOut = null;
-
-        /**
-         * 订阅名称。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.SubscriptionName = null;
-
-        /**
-         * 消费者集合。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<Consumer> || null}
-         */
-        this.ConsumerSets = null;
-
-        /**
-         * 是否在线。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {boolean || null}
-         */
-        this.IsOnline = null;
-
-        /**
-         * 消费进度集合。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<ConsumersSchedule> || null}
-         */
-        this.ConsumersScheduleSets = null;
-
-        /**
-         * 备注。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.Remark = null;
-
-        /**
-         * 创建时间。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * 最近修改时间。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.UpdateTime = null;
+        this.ClusterId = null;
 
     }
 
@@ -2580,39 +5113,36 @@ class Subscription extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TopicName = 'TopicName' in params ? params.TopicName : null;
-        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
-        this.ConnectedSince = 'ConnectedSince' in params ? params.ConnectedSince : null;
-        this.ConsumerAddr = 'ConsumerAddr' in params ? params.ConsumerAddr : null;
-        this.ConsumerCount = 'ConsumerCount' in params ? params.ConsumerCount : null;
-        this.ConsumerName = 'ConsumerName' in params ? params.ConsumerName : null;
-        this.MsgBacklog = 'MsgBacklog' in params ? params.MsgBacklog : null;
-        this.MsgRateExpired = 'MsgRateExpired' in params ? params.MsgRateExpired : null;
-        this.MsgRateOut = 'MsgRateOut' in params ? params.MsgRateOut : null;
-        this.MsgThroughputOut = 'MsgThroughputOut' in params ? params.MsgThroughputOut : null;
-        this.SubscriptionName = 'SubscriptionName' in params ? params.SubscriptionName : null;
+        this.RoleNames = 'RoleNames' in params ? params.RoleNames : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
 
-        if (params.ConsumerSets) {
-            this.ConsumerSets = new Array();
-            for (let z in params.ConsumerSets) {
-                let obj = new Consumer();
-                obj.deserialize(params.ConsumerSets[z]);
-                this.ConsumerSets.push(obj);
-            }
-        }
-        this.IsOnline = 'IsOnline' in params ? params.IsOnline : null;
+    }
+}
 
-        if (params.ConsumersScheduleSets) {
-            this.ConsumersScheduleSets = new Array();
-            for (let z in params.ConsumersScheduleSets) {
-                let obj = new ConsumersSchedule();
-                obj.deserialize(params.ConsumersScheduleSets[z]);
-                this.ConsumersScheduleSets.push(obj);
-            }
+/**
+ * ModifyRocketMQTopic返回参数结构体
+ * @class
+ */
+class ModifyRocketMQTopicResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
-        this.Remark = 'Remark' in params ? params.Remark : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2648,6 +5178,55 @@ class CreateCmqSubscribeResponse extends  AbstractModel {
         }
         this.SubscriptionId = 'SubscriptionId' in params ? params.SubscriptionId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeCmqDeadLetterSourceQueues请求参数结构体
+ * @class
+ */
+class DescribeCmqDeadLetterSourceQueuesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 死信队列名称
+         * @type {string || null}
+         */
+        this.DeadLetterQueueName = null;
+
+        /**
+         * 分页时本页获取主题列表的起始位置。如果填写了该值，必须也要填写 limit 。该值缺省时，后台取默认值 0。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 分页时本页获取主题的个数，如果不传递该参数，则该参数默认为20，最大值为50。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 根据SourceQueueName过滤
+         * @type {string || null}
+         */
+        this.SourceQueueName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DeadLetterQueueName = 'DeadLetterQueueName' in params ? params.DeadLetterQueueName : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.SourceQueueName = 'SourceQueueName' in params ? params.SourceQueueName : null;
 
     }
 }
@@ -2703,6 +5282,48 @@ class DescribeSubscriptionsResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyRole请求参数结构体
+ * @class
+ */
+class ModifyRoleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 角色名称，不支持中字以及除了短线和下划线外的特殊字符且长度必须大于0且小等于32。
+         * @type {string || null}
+         */
+        this.RoleName = null;
+
+        /**
+         * 备注说明，长度必须大等于0且小等于128。
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * 必填字段，集群Id
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RoleName = 'RoleName' in params ? params.RoleName : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+    }
+}
+
+/**
  * SendMessages返回参数结构体
  * @class
  */
@@ -2747,6 +5368,55 @@ class SendMessagesResponse extends  AbstractModel {
 }
 
 /**
+ * ReceiveMessage请求参数结构体
+ * @class
+ */
+class ReceiveMessageRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 接收消息的topic的名字, 这里尽量需要使用topic的全路径，如果不指定，即：tenant/namespace/topic。默认使用的是：public/default
+         * @type {string || null}
+         */
+        this.Topic = null;
+
+        /**
+         * 订阅者的名字
+         * @type {string || null}
+         */
+        this.SubscriptionName = null;
+
+        /**
+         * 默认值为1000，consumer接收的消息会首先存储到receiverQueueSize这个队列中，用作调优接收消息的速率
+         * @type {number || null}
+         */
+        this.ReceiverQueueSize = null;
+
+        /**
+         * 默认值为：Latest。用作判定consumer初始接收消息的位置，可选参数为：Earliest, Latest
+         * @type {string || null}
+         */
+        this.SubInitialPosition = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Topic = 'Topic' in params ? params.Topic : null;
+        this.SubscriptionName = 'SubscriptionName' in params ? params.SubscriptionName : null;
+        this.ReceiverQueueSize = 'ReceiverQueueSize' in params ? params.ReceiverQueueSize : null;
+        this.SubInitialPosition = 'SubInitialPosition' in params ? params.SubInitialPosition : null;
+
+    }
+}
+
+/**
  * CreateTopic请求参数结构体
  * @class
  */
@@ -2773,27 +5443,36 @@ class CreateTopicRequest extends  AbstractModel {
         this.Partitions = null;
 
         /**
-         * 0： 普通消息；
-1 ：全局顺序消息；
-2 ：局部顺序消息；
-3 ：重试队列；
-4 ：死信队列；
-5 ：事务消息。
-         * @type {number || null}
-         */
-        this.TopicType = null;
-
-        /**
          * 备注，128字符以内。
          * @type {string || null}
          */
         this.Remark = null;
 
         /**
+         * 0： 普通消息；
+1 ：全局顺序消息；
+2 ：局部顺序消息；
+3 ：重试队列；
+4 ：死信队列。
+         * @type {number || null}
+         */
+        this.TopicType = null;
+
+        /**
          * Pulsar 集群的ID
          * @type {string || null}
          */
         this.ClusterId = null;
+
+        /**
+         * Pulsar 主题类型
+0: 非持久非分区
+1: 非持久分区
+2: 持久非分区
+3: 持久分区
+         * @type {number || null}
+         */
+        this.PulsarTopicType = null;
 
     }
 
@@ -2807,9 +5486,10 @@ class CreateTopicRequest extends  AbstractModel {
         this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
         this.TopicName = 'TopicName' in params ? params.TopicName : null;
         this.Partitions = 'Partitions' in params ? params.Partitions : null;
-        this.TopicType = 'TopicType' in params ? params.TopicType : null;
         this.Remark = 'Remark' in params ? params.Remark : null;
+        this.TopicType = 'TopicType' in params ? params.TopicType : null;
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.PulsarTopicType = 'PulsarTopicType' in params ? params.PulsarTopicType : null;
 
     }
 }
@@ -2937,6 +5617,48 @@ class DeleteEnvironmentsResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyAMQPCluster请求参数结构体
+ * @class
+ */
+class ModifyAMQPClusterRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 3-64个字符，只能包含字母、数字、“-”及“_”
+         * @type {string || null}
+         */
+        this.ClusterName = null;
+
+        /**
+         * 说明信息，不超过128个字符
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+
+    }
+}
+
+/**
  * DescribeEnvironmentRoles返回参数结构体
  * @class
  */
@@ -2987,18 +5709,48 @@ class DescribeEnvironmentRolesResponse extends  AbstractModel {
 }
 
 /**
- * ClearCmqQueue请求参数结构体
+ * DescribeAMQPCreateQuota返回参数结构体
  * @class
  */
-class ClearCmqQueueRequest extends  AbstractModel {
+class DescribeAMQPCreateQuotaResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 队列名字，在单个地域同一帐号下唯一。队列名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。
+         * 租户总共可使用集群数量
+         * @type {number || null}
+         */
+        this.MaxClusterNum = null;
+
+        /**
+         * 租户已创建集群数量
+         * @type {number || null}
+         */
+        this.UsedClusterNum = null;
+
+        /**
+         * Exchange容量
+         * @type {number || null}
+         */
+        this.ExchangeCapacity = null;
+
+        /**
+         * Queue容量
+         * @type {number || null}
+         */
+        this.QueueCapacity = null;
+
+        /**
+         * 单Vhost TPS
+         * @type {number || null}
+         */
+        this.MaxTpsPerVHost = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.QueueName = null;
+        this.RequestId = null;
 
     }
 
@@ -3009,7 +5761,75 @@ class ClearCmqQueueRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.QueueName = 'QueueName' in params ? params.QueueName : null;
+        this.MaxClusterNum = 'MaxClusterNum' in params ? params.MaxClusterNum : null;
+        this.UsedClusterNum = 'UsedClusterNum' in params ? params.UsedClusterNum : null;
+        this.ExchangeCapacity = 'ExchangeCapacity' in params ? params.ExchangeCapacity : null;
+        this.QueueCapacity = 'QueueCapacity' in params ? params.QueueCapacity : null;
+        this.MaxTpsPerVHost = 'MaxTpsPerVHost' in params ? params.MaxTpsPerVHost : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyRocketMQGroup请求参数结构体
+ * @class
+ */
+class ModifyRocketMQGroupRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 命名空间
+         * @type {string || null}
+         */
+        this.NamespaceId = null;
+
+        /**
+         * 消费组名称
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
+        /**
+         * 说明信息，最长128个字符
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * 是否开启消费
+         * @type {boolean || null}
+         */
+        this.ReadEnable = null;
+
+        /**
+         * 是否开启广播消费
+         * @type {boolean || null}
+         */
+        this.BroadcastEnable = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.ReadEnable = 'ReadEnable' in params ? params.ReadEnable : null;
+        this.BroadcastEnable = 'BroadcastEnable' in params ? params.BroadcastEnable : null;
 
     }
 }
@@ -3250,6 +6070,13 @@ FilterType = 2表示用户使用 BindingKey 过滤。
          */
         this.NamespaceName = null;
 
+        /**
+         * 集群状态，0:创建中，1:正常，2:销毁中，3:已删除，4: 隔离中，5:创建失败，6: 删除失败
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Status = null;
+
     }
 
     /**
@@ -3281,6 +6108,7 @@ FilterType = 2表示用户使用 BindingKey 过滤。
         this.Trace = 'Trace' in params ? params.Trace : null;
         this.TenantId = 'TenantId' in params ? params.TenantId : null;
         this.NamespaceName = 'NamespaceName' in params ? params.NamespaceName : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -3309,6 +6137,161 @@ class UnbindCmqDeadLetterResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyRocketMQNamespace返回参数结构体
+ * @class
+ */
+class ModifyRocketMQNamespaceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * AMQP路由关系
+ * @class
+ */
+class AMQPRouteRelation extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 路由关系ID
+         * @type {string || null}
+         */
+        this.RouteRelationId = null;
+
+        /**
+         * 源Exchange
+         * @type {string || null}
+         */
+        this.SourceExchange = null;
+
+        /**
+         * 目标类型:Queue|Exchange
+         * @type {string || null}
+         */
+        this.DestType = null;
+
+        /**
+         * 目标值
+         * @type {string || null}
+         */
+        this.DestValue = null;
+
+        /**
+         * 绑定key
+         * @type {string || null}
+         */
+        this.RoutingKey = null;
+
+        /**
+         * 源路由类型:Direct|Topic|Fanout
+         * @type {string || null}
+         */
+        this.SourceExchangeType = null;
+
+        /**
+         * 创建时间，以毫秒为单位
+         * @type {number || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 修改时间，以毫秒为单位
+         * @type {number || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * 说明信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RouteRelationId = 'RouteRelationId' in params ? params.RouteRelationId : null;
+        this.SourceExchange = 'SourceExchange' in params ? params.SourceExchange : null;
+        this.DestType = 'DestType' in params ? params.DestType : null;
+        this.DestValue = 'DestValue' in params ? params.DestValue : null;
+        this.RoutingKey = 'RoutingKey' in params ? params.RoutingKey : null;
+        this.SourceExchangeType = 'SourceExchangeType' in params ? params.SourceExchangeType : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+
+    }
+}
+
+/**
+ * DeleteAMQPQueue请求参数结构体
+ * @class
+ */
+class DeleteAMQPQueueRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Vhost名称
+         * @type {string || null}
+         */
+        this.VHostId = null;
+
+        /**
+         * 队列名称
+         * @type {string || null}
+         */
+        this.Queue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.VHostId = 'VHostId' in params ? params.VHostId : null;
+        this.Queue = 'Queue' in params ? params.Queue : null;
 
     }
 }
@@ -3344,6 +6327,149 @@ class DeleteEnvironmentsRequest extends  AbstractModel {
         }
         this.EnvironmentIds = 'EnvironmentIds' in params ? params.EnvironmentIds : null;
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+    }
+}
+
+/**
+ * DescribeRocketMQClusters请求参数结构体
+ * @class
+ */
+class DescribeRocketMQClustersRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 偏移量
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 限制数目
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 按照集群ID关键字搜索
+         * @type {string || null}
+         */
+        this.IdKeyword = null;
+
+        /**
+         * 按照集群名称关键字搜索
+         * @type {string || null}
+         */
+        this.NameKeyword = null;
+
+        /**
+         * 集群ID列表过滤
+         * @type {Array.<string> || null}
+         */
+        this.ClusterIdList = null;
+
+        /**
+         * 标签过滤查找时，需要设置为true
+         * @type {boolean || null}
+         */
+        this.IsTagFilter = null;
+
+        /**
+         * 过滤器。目前支持标签过滤。
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.IdKeyword = 'IdKeyword' in params ? params.IdKeyword : null;
+        this.NameKeyword = 'NameKeyword' in params ? params.NameKeyword : null;
+        this.ClusterIdList = 'ClusterIdList' in params ? params.ClusterIdList : null;
+        this.IsTagFilter = 'IsTagFilter' in params ? params.IsTagFilter : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * ReceiveMessage返回参数结构体
+ * @class
+ */
+class ReceiveMessageResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 用作标识消息的唯一主键
+         * @type {string || null}
+         */
+        this.MessageID = null;
+
+        /**
+         * 接收消息的内容
+         * @type {string || null}
+         */
+        this.MessagePayload = null;
+
+        /**
+         * 提供给 Ack 接口，用来Ack哪一个topic中的消息
+         * @type {string || null}
+         */
+        this.AckTopic = null;
+
+        /**
+         * 返回的错误信息，如果为空，说明没有错误
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ErrorMsg = null;
+
+        /**
+         * 返回订阅者的名字，用来创建 ack consumer时使用
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SubName = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MessageID = 'MessageID' in params ? params.MessageID : null;
+        this.MessagePayload = 'MessagePayload' in params ? params.MessagePayload : null;
+        this.AckTopic = 'AckTopic' in params ? params.AckTopic : null;
+        this.ErrorMsg = 'ErrorMsg' in params ? params.ErrorMsg : null;
+        this.SubName = 'SubName' in params ? params.SubName : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3441,6 +6567,34 @@ class DescribeClustersResponse extends  AbstractModel {
 }
 
 /**
+ * DeleteRocketMQNamespace返回参数结构体
+ * @class
+ */
+class DeleteRocketMQNamespaceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ClearCmqSubscriptionFilterTags请求参数结构体
  * @class
  */
@@ -3511,6 +6665,83 @@ class TopicRecord extends  AbstractModel {
 }
 
 /**
+ * CreateRocketMQGroup返回参数结构体
+ * @class
+ */
+class CreateRocketMQGroupResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateEnvironmentRole请求参数结构体
+ * @class
+ */
+class CreateEnvironmentRoleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 环境（命名空间）名称。
+         * @type {string || null}
+         */
+        this.EnvironmentId = null;
+
+        /**
+         * 角色名称。
+         * @type {string || null}
+         */
+        this.RoleName = null;
+
+        /**
+         * 授权项，最多只能包含produce、consume两项的非空字符串数组。
+         * @type {Array.<string> || null}
+         */
+        this.Permissions = null;
+
+        /**
+         * 必填字段，集群的ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
+        this.RoleName = 'RoleName' in params ? params.RoleName : null;
+        this.Permissions = 'Permissions' in params ? params.Permissions : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+    }
+}
+
+/**
  * DescribeEnvironmentRoles请求参数结构体
  * @class
  */
@@ -3519,7 +6750,7 @@ class DescribeEnvironmentRolesRequest extends  AbstractModel {
         super();
 
         /**
-         * 环境（命名空间）名称。
+         * 必填字段，环境（命名空间）名称。
          * @type {string || null}
          */
         this.EnvironmentId = null;
@@ -3537,7 +6768,7 @@ class DescribeEnvironmentRolesRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * Pulsar 集群的ID
+         * 必填字段，Pulsar 集群的ID
          * @type {string || null}
          */
         this.ClusterId = null;
@@ -3547,6 +6778,15 @@ class DescribeEnvironmentRolesRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.RoleName = null;
+
+        /**
+         * * RoleName
+按照角色名进行过滤，精确查询。
+类型：String
+必选：否
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
 
     }
 
@@ -3563,58 +6803,37 @@ class DescribeEnvironmentRolesRequest extends  AbstractModel {
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
         this.RoleName = 'RoleName' in params ? params.RoleName : null;
 
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+
     }
 }
 
 /**
- * 命名空间信息
+ * DeleteRoles返回参数结构体
  * @class
  */
-class Environment extends  AbstractModel {
+class DeleteRolesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 命名空间名称
-         * @type {string || null}
+         * 成功删除的角色名称数组。
+         * @type {Array.<string> || null}
          */
-        this.EnvironmentId = null;
+        this.RoleNames = null;
 
         /**
-         * 说明
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.Remark = null;
-
-        /**
-         * 未消费消息过期时间，单位：秒，最大1296000（15天）
-         * @type {number || null}
-         */
-        this.MsgTTL = null;
-
-        /**
-         * 创建时间
-         * @type {string || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * 最近修改时间
-         * @type {string || null}
-         */
-        this.UpdateTime = null;
-
-        /**
-         * 命名空间ID
-         * @type {string || null}
-         */
-        this.NamespaceId = null;
-
-        /**
-         * 命名空间名称
-         * @type {string || null}
-         */
-        this.NamespaceName = null;
+        this.RequestId = null;
 
     }
 
@@ -3625,13 +6844,351 @@ class Environment extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
-        this.Remark = 'Remark' in params ? params.Remark : null;
-        this.MsgTTL = 'MsgTTL' in params ? params.MsgTTL : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.RoleNames = 'RoleNames' in params ? params.RoleNames : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * SendMsg返回参数结构体
+ * @class
+ */
+class SendMsgResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyRocketMQTopic请求参数结构体
+ * @class
+ */
+class ModifyRocketMQTopicRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 命名空间名称
+         * @type {string || null}
+         */
+        this.NamespaceId = null;
+
+        /**
+         * 主题名称
+         * @type {string || null}
+         */
+        this.Topic = null;
+
+        /**
+         * 说明信息，最大128个字符
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * 分区数，全局类型无效，不可小于当前分区数
+         * @type {number || null}
+         */
+        this.PartitionNum = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
         this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
-        this.NamespaceName = 'NamespaceName' in params ? params.NamespaceName : null;
+        this.Topic = 'Topic' in params ? params.Topic : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.PartitionNum = 'PartitionNum' in params ? params.PartitionNum : null;
+
+    }
+}
+
+/**
+ * RocketMQ集群基本信息
+ * @class
+ */
+class RocketMQClusterInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 集群名称
+         * @type {string || null}
+         */
+        this.ClusterName = null;
+
+        /**
+         * 地域信息
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * 创建时间，毫秒为单位
+         * @type {number || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 集群说明信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * 公网接入地址
+         * @type {string || null}
+         */
+        this.PublicEndPoint = null;
+
+        /**
+         * VPC接入地址
+         * @type {string || null}
+         */
+        this.VpcEndPoint = null;
+
+        /**
+         * 是否支持命名空间接入点
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.SupportNamespaceEndpoint = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.PublicEndPoint = 'PublicEndPoint' in params ? params.PublicEndPoint : null;
+        this.VpcEndPoint = 'VpcEndPoint' in params ? params.VpcEndPoint : null;
+        this.SupportNamespaceEndpoint = 'SupportNamespaceEndpoint' in params ? params.SupportNamespaceEndpoint : null;
+
+    }
+}
+
+/**
+ * DescribeRocketMQTopics返回参数结构体
+ * @class
+ */
+class DescribeRocketMQTopicsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总记录数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 主题信息列表
+         * @type {Array.<RocketMQTopic> || null}
+         */
+        this.Topics = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Topics) {
+            this.Topics = new Array();
+            for (let z in params.Topics) {
+                let obj = new RocketMQTopic();
+                obj.deserialize(params.Topics[z]);
+                this.Topics.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateAMQPVHost请求参数结构体
+ * @class
+ */
+class CreateAMQPVHostRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * vhost名称，3-64个字符，只能包含字母、数字、“-”及“_”
+         * @type {string || null}
+         */
+        this.VHostId = null;
+
+        /**
+         * 未消费消息的保留时间，以毫秒为单位，60秒-15天
+         * @type {number || null}
+         */
+        this.MsgTtl = null;
+
+        /**
+         * 说明，最大128个字符
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.VHostId = 'VHostId' in params ? params.VHostId : null;
+        this.MsgTtl = 'MsgTtl' in params ? params.MsgTtl : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+
+    }
+}
+
+/**
+ * 租户RocketMQ集群详细信息
+ * @class
+ */
+class RocketMQClusterDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群基本信息
+         * @type {RocketMQClusterInfo || null}
+         */
+        this.Info = null;
+
+        /**
+         * 集群配置信息
+         * @type {RocketMQClusterConfig || null}
+         */
+        this.Config = null;
+
+        /**
+         * 集群状态，0:创建中，1:正常，2:销毁中，3:已删除，4: 隔离中，5:创建失败，6: 删除失败
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Info) {
+            let obj = new RocketMQClusterInfo();
+            obj.deserialize(params.Info)
+            this.Info = obj;
+        }
+
+        if (params.Config) {
+            let obj = new RocketMQClusterConfig();
+            obj.deserialize(params.Config)
+            this.Config = obj;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
+ * DeleteRocketMQGroup返回参数结构体
+ * @class
+ */
+class DeleteRocketMQGroupResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3797,6 +7354,56 @@ class PartitionsTopic extends  AbstractModel {
 }
 
 /**
+ * DescribeRocketMQGroups返回参数结构体
+ * @class
+ */
+class DescribeRocketMQGroupsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总数量
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 订阅组列表
+         * @type {Array.<RocketMQGroup> || null}
+         */
+        this.Groups = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Groups) {
+            this.Groups = new Array();
+            for (let z in params.Groups) {
+                let obj = new RocketMQGroup();
+                obj.deserialize(params.Groups[z]);
+                this.Groups.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ResetMsgSubOffsetByTimestamp返回参数结构体
  * @class
  */
@@ -3868,36 +7475,18 @@ class CreateClusterResponse extends  AbstractModel {
 }
 
 /**
- * DescribeCmqDeadLetterSourceQueues请求参数结构体
+ * DeleteAMQPExchange返回参数结构体
  * @class
  */
-class DescribeCmqDeadLetterSourceQueuesRequest extends  AbstractModel {
+class DeleteAMQPExchangeResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 死信队列名称
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.DeadLetterQueueName = null;
-
-        /**
-         * 分页时本页获取主题列表的起始位置。如果填写了该值，必须也要填写 limit 。该值缺省时，后台取默认值 0。
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * 分页时本页获取主题的个数，如果不传递该参数，则该参数默认为20，最大值为50。
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * 根据SourceQueueName过滤
-         * @type {string || null}
-         */
-        this.SourceQueueName = null;
+        this.RequestId = null;
 
     }
 
@@ -3908,10 +7497,137 @@ class DescribeCmqDeadLetterSourceQueuesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DeadLetterQueueName = 'DeadLetterQueueName' in params ? params.DeadLetterQueueName : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteRocketMQNamespace请求参数结构体
+ * @class
+ */
+class DeleteRocketMQNamespaceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 命名空间名称
+         * @type {string || null}
+         */
+        this.NamespaceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
+
+    }
+}
+
+/**
+ * DescribeRoles请求参数结构体
+ * @class
+ */
+class DescribeRolesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 角色名称，模糊查询
+         * @type {string || null}
+         */
+        this.RoleName = null;
+
+        /**
+         * 起始下标，不填默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 返回数量，不填则默认为10，最大值为20。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 必填字段，集群Id
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * * RoleName
+按照角色名进行过滤，精确查询。
+类型：String
+必选：否
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RoleName = 'RoleName' in params ? params.RoleName : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
-        this.SourceQueueName = 'SourceQueueName' in params ? params.SourceQueueName : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * CreateAMQPQueue返回参数结构体
+ * @class
+ */
+class CreateAMQPQueueResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3943,10 +7659,16 @@ class CreateClusterRequest extends  AbstractModel {
         this.Remark = null;
 
         /**
-         * 集群的标签列表
+         * 集群的标签列表(已废弃)
          * @type {Array.<Tag> || null}
          */
         this.Tags = null;
+
+        /**
+         * 是否开启公网访问，不填时默认开启
+         * @type {boolean || null}
+         */
+        this.PublicAccessEnabled = null;
 
     }
 
@@ -3969,15 +7691,94 @@ class CreateClusterRequest extends  AbstractModel {
                 this.Tags.push(obj);
             }
         }
+        this.PublicAccessEnabled = 'PublicAccessEnabled' in params ? params.PublicAccessEnabled : null;
 
     }
 }
 
 /**
- * ModifyCmqQueueAttribute返回参数结构体
+ * DescribeAMQPClusters请求参数结构体
  * @class
  */
-class ModifyCmqQueueAttributeResponse extends  AbstractModel {
+class DescribeAMQPClustersRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 偏移量
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 限制数目
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 按照集群ID关键字搜索
+         * @type {string || null}
+         */
+        this.IdKeyword = null;
+
+        /**
+         * 按照集群名称关键字搜索
+         * @type {string || null}
+         */
+        this.NameKeyword = null;
+
+        /**
+         * 集群ID列表过滤
+         * @type {Array.<string> || null}
+         */
+        this.ClusterIdList = null;
+
+        /**
+         * 标签过滤查找时，需要设置为true
+         * @type {boolean || null}
+         */
+        this.IsTagFilter = null;
+
+        /**
+         * 过滤器。目前支持按标签过滤。
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.IdKeyword = 'IdKeyword' in params ? params.IdKeyword : null;
+        this.NameKeyword = 'NameKeyword' in params ? params.NameKeyword : null;
+        this.ClusterIdList = 'ClusterIdList' in params ? params.ClusterIdList : null;
+        this.IsTagFilter = 'IsTagFilter' in params ? params.IsTagFilter : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * CreateAMQPRouteRelation返回参数结构体
+ * @class
+ */
+class CreateAMQPRouteRelationResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -4097,6 +7898,24 @@ class DescribeCmqQueuesRequest extends  AbstractModel {
          */
         this.QueueName = null;
 
+        /**
+         * CMQ 队列名称列表过滤
+         * @type {Array.<string> || null}
+         */
+        this.QueueNameList = null;
+
+        /**
+         * 标签过滤查找时，需要设置为 true
+         * @type {boolean || null}
+         */
+        this.IsTagFilter = null;
+
+        /**
+         * 过滤器。目前支持按标签过滤，标签的Name需要加前缀“tag:”，例如：tag:负责人、tag:环境、tag:业务
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
     }
 
     /**
@@ -4109,6 +7928,17 @@ class DescribeCmqQueuesRequest extends  AbstractModel {
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.QueueName = 'QueueName' in params ? params.QueueName : null;
+        this.QueueNameList = 'QueueNameList' in params ? params.QueueNameList : null;
+        this.IsTagFilter = 'IsTagFilter' in params ? params.IsTagFilter : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
 
     }
 }
@@ -4271,6 +8101,277 @@ class ModifyTopicResponse extends  AbstractModel {
 }
 
 /**
+ * AMQP集群基本信息
+ * @class
+ */
+class AMQPClusterInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 集群名称
+         * @type {string || null}
+         */
+        this.ClusterName = null;
+
+        /**
+         * 地域信息
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * 创建时间，毫秒为单位
+         * @type {number || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 集群说明信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * 公网接入地址
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.PublicEndPoint = null;
+
+        /**
+         * VPC接入地址
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.VpcEndPoint = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.PublicEndPoint = 'PublicEndPoint' in params ? params.PublicEndPoint : null;
+        this.VpcEndPoint = 'VpcEndPoint' in params ? params.VpcEndPoint : null;
+
+    }
+}
+
+/**
+ * DescribeAMQPRouteRelations返回参数结构体
+ * @class
+ */
+class DescribeAMQPRouteRelationsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总记录数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 路由关系列表
+         * @type {Array.<AMQPRouteRelation> || null}
+         */
+        this.RouteRelations = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.RouteRelations) {
+            this.RouteRelations = new Array();
+            for (let z in params.RouteRelations) {
+                let obj = new AMQPRouteRelation();
+                obj.deserialize(params.RouteRelations[z]);
+                this.RouteRelations.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteTopics返回参数结构体
+ * @class
+ */
+class DeleteTopicsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 被删除的主题数组。
+         * @type {Array.<TopicRecord> || null}
+         */
+        this.TopicSets = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.TopicSets) {
+            this.TopicSets = new Array();
+            for (let z in params.TopicSets) {
+                let obj = new TopicRecord();
+                obj.deserialize(params.TopicSets[z]);
+                this.TopicSets.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateAMQPCluster返回参数结构体
+ * @class
+ */
+class CreateAMQPClusterResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteAMQPExchange请求参数结构体
+ * @class
+ */
+class DeleteAMQPExchangeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Vhost名称
+         * @type {string || null}
+         */
+        this.VHostId = null;
+
+        /**
+         * 交换机名称
+         * @type {string || null}
+         */
+        this.Exchange = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.VHostId = 'VHostId' in params ? params.VHostId : null;
+        this.Exchange = 'Exchange' in params ? params.Exchange : null;
+
+    }
+}
+
+/**
+ * DeleteRocketMQCluster返回参数结构体
+ * @class
+ */
+class DeleteRocketMQClusterResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateCmqTopic返回参数结构体
  * @class
  */
@@ -4396,6 +8497,24 @@ class DescribeCmqTopicsRequest extends  AbstractModel {
          */
         this.TopicName = null;
 
+        /**
+         * CMQ 主题名称列表过滤
+         * @type {Array.<string> || null}
+         */
+        this.TopicNameList = null;
+
+        /**
+         * 标签过滤查找时，需要设置为 true
+         * @type {boolean || null}
+         */
+        this.IsTagFilter = null;
+
+        /**
+         * 过滤器。目前支持按标签过滤，标签的Name需要加前缀“tag:”，例如：tag:负责人、tag:环境、tag:业务
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
     }
 
     /**
@@ -4408,6 +8527,17 @@ class DescribeCmqTopicsRequest extends  AbstractModel {
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.TopicNameList = 'TopicNameList' in params ? params.TopicNameList : null;
+        this.IsTagFilter = 'IsTagFilter' in params ? params.IsTagFilter : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
 
     }
 }
@@ -4448,61 +8578,82 @@ class Filter extends  AbstractModel {
 }
 
 /**
- * 生产者连接实例
+ * AMQP Exchange信息
  * @class
  */
-class Connection extends  AbstractModel {
+class AMQPExchange extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 生产者地址。
-注意：此字段可能返回 null，表示取不到有效值。
+         * Exchange名称
          * @type {string || null}
          */
-        this.Address = null;
+        this.Name = null;
 
         /**
-         * 主题分区。
-注意：此字段可能返回 null，表示取不到有效值。
+         * Exchange的类别，为枚举类型:Direct, Fanout, Topic
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 主绑定数
          * @type {number || null}
          */
-        this.Partitions = null;
+        this.SourceBindedNum = null;
 
         /**
-         * 生产者版本。
+         * 说明
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.ClientVersion = null;
+        this.Remark = null;
 
         /**
-         * 生产者名称。
+         * 被绑定数
+         * @type {number || null}
+         */
+        this.DestBindedNum = null;
+
+        /**
+         * 创建时间，以毫秒为单位
+         * @type {number || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 创建时间，以毫秒为单位
+         * @type {number || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * 是否为内部Exchange(以amq.前缀开头的)
+         * @type {boolean || null}
+         */
+        this.Internal = null;
+
+        /**
+         * 备用Exchange名称
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.ProducerName = null;
+        this.AlternateExchange = null;
 
         /**
-         * 生产者ID。
+         * 备用Exchange是否删除标识: true(已删除)
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.AlternateExchangeDeleteMark = null;
+
+        /**
+         * 延迟Exchange的类别，为枚举类型:Direct, Fanout, Topic
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.ProducerId = null;
-
-        /**
-         * 消息平均大小(byte)。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.AverageMsgSize = null;
-
-        /**
-         * 生成速率(byte/秒)。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.MsgThroughputIn = null;
+        this.DelayType = null;
 
     }
 
@@ -4513,13 +8664,17 @@ class Connection extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Address = 'Address' in params ? params.Address : null;
-        this.Partitions = 'Partitions' in params ? params.Partitions : null;
-        this.ClientVersion = 'ClientVersion' in params ? params.ClientVersion : null;
-        this.ProducerName = 'ProducerName' in params ? params.ProducerName : null;
-        this.ProducerId = 'ProducerId' in params ? params.ProducerId : null;
-        this.AverageMsgSize = 'AverageMsgSize' in params ? params.AverageMsgSize : null;
-        this.MsgThroughputIn = 'MsgThroughputIn' in params ? params.MsgThroughputIn : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.SourceBindedNum = 'SourceBindedNum' in params ? params.SourceBindedNum : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.DestBindedNum = 'DestBindedNum' in params ? params.DestBindedNum : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.Internal = 'Internal' in params ? params.Internal : null;
+        this.AlternateExchange = 'AlternateExchange' in params ? params.AlternateExchange : null;
+        this.AlternateExchangeDeleteMark = 'AlternateExchangeDeleteMark' in params ? params.AlternateExchangeDeleteMark : null;
+        this.DelayType = 'DelayType' in params ? params.DelayType : null;
 
     }
 }
@@ -4550,6 +8705,12 @@ class DeleteTopicsRequest extends  AbstractModel {
          */
         this.EnvironmentId = null;
 
+        /**
+         * 是否强制删除，默认为false
+         * @type {boolean || null}
+         */
+        this.Force = null;
+
     }
 
     /**
@@ -4570,6 +8731,7 @@ class DeleteTopicsRequest extends  AbstractModel {
         }
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
         this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
+        this.Force = 'Force' in params ? params.Force : null;
 
     }
 }
@@ -4607,6 +8769,27 @@ class CmqTransactionPolicy extends  AbstractModel {
         }
         this.FirstQueryInterval = 'FirstQueryInterval' in params ? params.FirstQueryInterval : null;
         this.MaxQueryCount = 'MaxQueryCount' in params ? params.MaxQueryCount : null;
+
+    }
+}
+
+/**
+ * 运营端命名空间bundle实体
+ * @class
+ */
+class BundleSetOpt extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
 
     }
 }
@@ -4724,6 +8907,34 @@ class ResetMsgSubOffsetByTimestampRequest extends  AbstractModel {
 }
 
 /**
+ * CreateEnvironmentRole返回参数结构体
+ * @class
+ */
+class CreateEnvironmentRoleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  *  消费者
  * @class
  */
@@ -4759,6 +8970,13 @@ class Consumer extends  AbstractModel {
          */
         this.ClientVersion = null;
 
+        /**
+         * 消费者连接的主题分区号
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Partition = null;
+
     }
 
     /**
@@ -4772,35 +8990,66 @@ class Consumer extends  AbstractModel {
         this.ConsumerAddr = 'ConsumerAddr' in params ? params.ConsumerAddr : null;
         this.ConsumerName = 'ConsumerName' in params ? params.ConsumerName : null;
         this.ClientVersion = 'ClientVersion' in params ? params.ClientVersion : null;
+        this.Partition = 'Partition' in params ? params.Partition : null;
 
     }
 }
 
 /**
- * DescribeBindVpcs返回参数结构体
+ * CreateCmqSubscribe请求参数结构体
  * @class
  */
-class DescribeBindVpcsResponse extends  AbstractModel {
+class CreateCmqSubscribeRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 记录数。
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * Vpc集合。
-         * @type {Array.<VpcBindRecord> || null}
-         */
-        this.VpcSets = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 主题名字，在单个地域同一帐号下唯一。主题名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线（-）。
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.TopicName = null;
+
+        /**
+         * 订阅名字，在单个地域同一帐号的同一主题下唯一。订阅名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。
+         * @type {string || null}
+         */
+        this.SubscriptionName = null;
+
+        /**
+         * 订阅的协议，目前支持两种协议：http、queue。使用http协议，用户需自己搭建接受消息的web server。使用queue，消息会自动推送到CMQ queue，用户可以并发地拉取消息。
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * 接收通知的Endpoint，根据协议Protocol区分：对于http，Endpoint必须以“`http://`”开头，host可以是域名或IP；对于Queue，则填QueueName。 请注意，目前推送服务不能推送到私有网络中，因此Endpoint填写为私有网络域名或地址将接收不到推送的消息，目前支持推送到公网和基础网络。
+         * @type {string || null}
+         */
+        this.Endpoint = null;
+
+        /**
+         * 向Endpoint推送消息出现错误时，CMQ推送服务器的重试策略。取值有：1）BACKOFF_RETRY，退避重试。每隔一定时间重试一次，重试够一定次数后，就把该消息丢弃，继续推送下一条消息；2）EXPONENTIAL_DECAY_RETRY，指数衰退重试。每次重试的间隔是指数递增的，例如开始1s，后面是2s，4s，8s...由于Topic消息的周期是一天，所以最多重试一天就把消息丢弃。默认值是EXPONENTIAL_DECAY_RETRY。
+         * @type {string || null}
+         */
+        this.NotifyStrategy = null;
+
+        /**
+         * 消息正文。消息标签（用于消息过滤)。标签数量不能超过5个，每个标签不超过16个字符。与(Batch)PublishMessage的MsgTag参数配合使用，规则：1）如果FilterTag没有设置，则无论MsgTag是否有设置，订阅接收所有发布到Topic的消息；2）如果FilterTag数组有值，则只有数组中至少有一个值在MsgTag数组中也存在时（即FilterTag和MsgTag有交集），订阅才接收该发布到Topic的消息；3）如果FilterTag数组有值，但MsgTag没设置，则不接收任何发布到Topic的消息，可以认为是2）的一种特例，此时FilterTag和MsgTag没有交集。规则整体的设计思想是以订阅者的意愿为主。
+         * @type {Array.<string> || null}
+         */
+        this.FilterTag = null;
+
+        /**
+         * BindingKey数量不超过5个， 每个BindingKey长度不超过64字节，该字段表示订阅接收消息的过滤策略，每个BindingKey最多含有15个“.”， 即最多16个词组。
+         * @type {Array.<string> || null}
+         */
+        this.BindingKey = null;
+
+        /**
+         * 推送内容的格式。取值：1）JSON；2）SIMPLIFIED，即raw格式。如果Protocol是queue，则取值必须为SIMPLIFIED。如果Protocol是http，两个值均可以，默认值是JSON。
+         * @type {string || null}
+         */
+        this.NotifyContentFormat = null;
 
     }
 
@@ -4811,17 +9060,14 @@ class DescribeBindVpcsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.VpcSets) {
-            this.VpcSets = new Array();
-            for (let z in params.VpcSets) {
-                let obj = new VpcBindRecord();
-                obj.deserialize(params.VpcSets[z]);
-                this.VpcSets.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.SubscriptionName = 'SubscriptionName' in params ? params.SubscriptionName : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.Endpoint = 'Endpoint' in params ? params.Endpoint : null;
+        this.NotifyStrategy = 'NotifyStrategy' in params ? params.NotifyStrategy : null;
+        this.FilterTag = 'FilterTag' in params ? params.FilterTag : null;
+        this.BindingKey = 'BindingKey' in params ? params.BindingKey : null;
+        this.NotifyContentFormat = 'NotifyContentFormat' in params ? params.NotifyContentFormat : null;
 
     }
 }
@@ -4857,6 +9103,141 @@ class DeleteCmqSubscribeRequest extends  AbstractModel {
         }
         this.TopicName = 'TopicName' in params ? params.TopicName : null;
         this.SubscriptionName = 'SubscriptionName' in params ? params.SubscriptionName : null;
+
+    }
+}
+
+/**
+ * DescribeAMQPClusters返回参数结构体
+ * @class
+ */
+class DescribeAMQPClustersResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<AMQPClusterDetail> || null}
+         */
+        this.ClusterList = null;
+
+        /**
+         * 总条数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ClusterList) {
+            this.ClusterList = new Array();
+            for (let z in params.ClusterList) {
+                let obj = new AMQPClusterDetail();
+                obj.deserialize(params.ClusterList[z]);
+                this.ClusterList.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * RocketMQ集群配置
+ * @class
+ */
+class RocketMQClusterConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 单命名空间TPS上线
+         * @type {number || null}
+         */
+        this.MaxTpsPerNamespace = null;
+
+        /**
+         * 最大命名空间数量
+         * @type {number || null}
+         */
+        this.MaxNamespaceNum = null;
+
+        /**
+         * 已使用命名空间数量
+         * @type {number || null}
+         */
+        this.UsedNamespaceNum = null;
+
+        /**
+         * 最大Topic数量
+         * @type {number || null}
+         */
+        this.MaxTopicNum = null;
+
+        /**
+         * 已使用Topic数量
+         * @type {number || null}
+         */
+        this.UsedTopicNum = null;
+
+        /**
+         * 最大Group数量
+         * @type {number || null}
+         */
+        this.MaxGroupNum = null;
+
+        /**
+         * 已使用Group数量
+         * @type {number || null}
+         */
+        this.UsedGroupNum = null;
+
+        /**
+         * 消息最大保留时间，以毫秒为单位
+         * @type {number || null}
+         */
+        this.MaxRetentionTime = null;
+
+        /**
+         * 消息最长延时，以毫秒为单位
+         * @type {number || null}
+         */
+        this.MaxLatencyTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MaxTpsPerNamespace = 'MaxTpsPerNamespace' in params ? params.MaxTpsPerNamespace : null;
+        this.MaxNamespaceNum = 'MaxNamespaceNum' in params ? params.MaxNamespaceNum : null;
+        this.UsedNamespaceNum = 'UsedNamespaceNum' in params ? params.UsedNamespaceNum : null;
+        this.MaxTopicNum = 'MaxTopicNum' in params ? params.MaxTopicNum : null;
+        this.UsedTopicNum = 'UsedTopicNum' in params ? params.UsedTopicNum : null;
+        this.MaxGroupNum = 'MaxGroupNum' in params ? params.MaxGroupNum : null;
+        this.UsedGroupNum = 'UsedGroupNum' in params ? params.UsedGroupNum : null;
+        this.MaxRetentionTime = 'MaxRetentionTime' in params ? params.MaxRetentionTime : null;
+        this.MaxLatencyTime = 'MaxLatencyTime' in params ? params.MaxLatencyTime : null;
 
     }
 }
@@ -4950,6 +9331,48 @@ class DeleteSubscriptionsResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteRocketMQTopic请求参数结构体
+ * @class
+ */
+class DeleteRocketMQTopicRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 命名空间名称
+         * @type {string || null}
+         */
+        this.NamespaceId = null;
+
+        /**
+         * 主题名称
+         * @type {string || null}
+         */
+        this.Topic = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
+        this.Topic = 'Topic' in params ? params.Topic : null;
 
     }
 }
@@ -5073,7 +9496,7 @@ class Cluster extends  AbstractModel {
         this.HealthyInfo = null;
 
         /**
-         * 集群状态，0:创建中，1:正常，2:删除中，3:已删除，5:创建失败，6: 删除失败
+         * 集群状态，0:创建中，1:正常，2:销毁中，3:已删除，4: 隔离中，5:创建失败，6: 删除失败
          * @type {number || null}
          */
         this.Status = null;
@@ -5097,7 +9520,7 @@ class Cluster extends  AbstractModel {
         this.MaxQps = null;
 
         /**
-         * 消息保留时间
+         * 最大消息保留时间，秒为单位
          * @type {number || null}
          */
         this.MessageRetentionTime = null;
@@ -5107,6 +9530,106 @@ class Cluster extends  AbstractModel {
          * @type {number || null}
          */
         this.MaxStorageCapacity = null;
+
+        /**
+         * 集群版本
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Version = null;
+
+        /**
+         * 公网访问接入点
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.PublicEndPoint = null;
+
+        /**
+         * VPC访问接入点
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.VpcEndPoint = null;
+
+        /**
+         * 命名空间数量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.NamespaceNum = null;
+
+        /**
+         * 已使用存储限制，MB为单位
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.UsedStorageBudget = null;
+
+        /**
+         * 最大生产消息速率，以条数为单位
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.MaxPublishRateInMessages = null;
+
+        /**
+         * 最大推送消息速率，以条数为单位
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.MaxDispatchRateInMessages = null;
+
+        /**
+         * 最大生产消息速率，以字节为单位
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.MaxPublishRateInBytes = null;
+
+        /**
+         * 最大推送消息速率，以字节为单位
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.MaxDispatchRateInBytes = null;
+
+        /**
+         * 已创建主题数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TopicNum = null;
+
+        /**
+         * 最长消息延时，以秒为单位
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.MaxMessageDelayInSeconds = null;
+
+        /**
+         * 是否开启公网访问，不填时默认开启
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.PublicAccessEnabled = null;
+
+        /**
+         * 标签
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * 计费模式：
+0: 按量计费
+1: 包年包月
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.PayMode = null;
 
     }
 
@@ -5130,6 +9653,468 @@ class Cluster extends  AbstractModel {
         this.MaxQps = 'MaxQps' in params ? params.MaxQps : null;
         this.MessageRetentionTime = 'MessageRetentionTime' in params ? params.MessageRetentionTime : null;
         this.MaxStorageCapacity = 'MaxStorageCapacity' in params ? params.MaxStorageCapacity : null;
+        this.Version = 'Version' in params ? params.Version : null;
+        this.PublicEndPoint = 'PublicEndPoint' in params ? params.PublicEndPoint : null;
+        this.VpcEndPoint = 'VpcEndPoint' in params ? params.VpcEndPoint : null;
+        this.NamespaceNum = 'NamespaceNum' in params ? params.NamespaceNum : null;
+        this.UsedStorageBudget = 'UsedStorageBudget' in params ? params.UsedStorageBudget : null;
+        this.MaxPublishRateInMessages = 'MaxPublishRateInMessages' in params ? params.MaxPublishRateInMessages : null;
+        this.MaxDispatchRateInMessages = 'MaxDispatchRateInMessages' in params ? params.MaxDispatchRateInMessages : null;
+        this.MaxPublishRateInBytes = 'MaxPublishRateInBytes' in params ? params.MaxPublishRateInBytes : null;
+        this.MaxDispatchRateInBytes = 'MaxDispatchRateInBytes' in params ? params.MaxDispatchRateInBytes : null;
+        this.TopicNum = 'TopicNum' in params ? params.TopicNum : null;
+        this.MaxMessageDelayInSeconds = 'MaxMessageDelayInSeconds' in params ? params.MaxMessageDelayInSeconds : null;
+        this.PublicAccessEnabled = 'PublicAccessEnabled' in params ? params.PublicAccessEnabled : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+
+    }
+}
+
+/**
+ * 订阅关系
+ * @class
+ */
+class SubscriptionTopic extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 环境（命名空间）名称。
+         * @type {string || null}
+         */
+        this.EnvironmentId = null;
+
+        /**
+         * 主题名称。
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+        /**
+         * 订阅名称。
+         * @type {string || null}
+         */
+        this.SubscriptionName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.SubscriptionName = 'SubscriptionName' in params ? params.SubscriptionName : null;
+
+    }
+}
+
+/**
+ * 消息保留策略
+ * @class
+ */
+class RetentionPolicy extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 消息保留时长
+         * @type {number || null}
+         */
+        this.TimeInMinutes = null;
+
+        /**
+         * 消息保留大小
+         * @type {number || null}
+         */
+        this.SizeInMB = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TimeInMinutes = 'TimeInMinutes' in params ? params.TimeInMinutes : null;
+        this.SizeInMB = 'SizeInMB' in params ? params.SizeInMB : null;
+
+    }
+}
+
+/**
+ * CreateRocketMQCluster返回参数结构体
+ * @class
+ */
+class CreateRocketMQClusterResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeAMQPCreateQuota请求参数结构体
+ * @class
+ */
+class DescribeAMQPCreateQuotaRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
+ * AMQP 队列信息
+ * @class
+ */
+class AMQPQueueDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Queue名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 说明
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * 被绑定数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.DestBindedNum = null;
+
+        /**
+         * 创建时间，以毫秒为单位
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 创建时间，以毫秒为单位
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * 在线消费者数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.OnlineConsumerNum = null;
+
+        /**
+         * 每秒钟的事务数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Tps = null;
+
+        /**
+         * 消息堆积数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.AccumulativeMsgNum = null;
+
+        /**
+         * 是否自动删除
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.AutoDelete = null;
+
+        /**
+         * 死信交换机
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DeadLetterExchange = null;
+
+        /**
+         * 死信交换机路由键
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DeadLetterRoutingKey = null;
+
+        /**
+         * Queue对应的Topic名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.DestBindedNum = 'DestBindedNum' in params ? params.DestBindedNum : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.OnlineConsumerNum = 'OnlineConsumerNum' in params ? params.OnlineConsumerNum : null;
+        this.Tps = 'Tps' in params ? params.Tps : null;
+        this.AccumulativeMsgNum = 'AccumulativeMsgNum' in params ? params.AccumulativeMsgNum : null;
+        this.AutoDelete = 'AutoDelete' in params ? params.AutoDelete : null;
+        this.DeadLetterExchange = 'DeadLetterExchange' in params ? params.DeadLetterExchange : null;
+        this.DeadLetterRoutingKey = 'DeadLetterRoutingKey' in params ? params.DeadLetterRoutingKey : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+
+    }
+}
+
+/**
+ * DescribePublishers返回参数结构体
+ * @class
+ */
+class DescribePublishersResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总条数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 生产者信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Publisher> || null}
+         */
+        this.Publishers = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Publishers) {
+            this.Publishers = new Array();
+            for (let z in params.Publishers) {
+                let obj = new Publisher();
+                obj.deserialize(params.Publishers[z]);
+                this.Publishers.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteAMQPRouteRelation返回参数结构体
+ * @class
+ */
+class DeleteAMQPRouteRelationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * SendMsg请求参数结构体
+ * @class
+ */
+class SendMsgRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 环境（命名空间）名称。
+         * @type {string || null}
+         */
+        this.EnvironmentId = null;
+
+        /**
+         * 主题名称，如果是分区topic需要指定具体分区，如果没有指定则默认发到0分区，例如：my_topic-partition-0。
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+        /**
+         * 消息内容，不能为空且大小不得大于5242880个byte。
+         * @type {string || null}
+         */
+        this.MsgContent = null;
+
+        /**
+         * Pulsar 集群的ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.MsgContent = 'MsgContent' in params ? params.MsgContent : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+    }
+}
+
+/**
+ * ResetRocketMQConsumerOffSet请求参数结构体
+ * @class
+ */
+class ResetRocketMQConsumerOffSetRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 命名空间名称
+         * @type {string || null}
+         */
+        this.NamespaceId = null;
+
+        /**
+         * 消费组名称
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
+        /**
+         * 主题名称
+         * @type {string || null}
+         */
+        this.Topic = null;
+
+        /**
+         * 重置方式，0表示从最新位点开始，1表示从指定时间点开始
+         * @type {number || null}
+         */
+        this.Type = null;
+
+        /**
+         * 重置指定的时间戳，仅在 Type 为1是生效，以毫秒为单位
+         * @type {number || null}
+         */
+        this.ResetTimestamp = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.Topic = 'Topic' in params ? params.Topic : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.ResetTimestamp = 'ResetTimestamp' in params ? params.ResetTimestamp : null;
 
     }
 }
@@ -5163,6 +10148,445 @@ class DescribeCmqQueueDetailRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeAMQPQueues返回参数结构体
+ * @class
+ */
+class DescribeAMQPQueuesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总记录数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 队列信息列表
+         * @type {Array.<AMQPQueueDetail> || null}
+         */
+        this.Queues = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Queues) {
+            this.Queues = new Array();
+            for (let z in params.Queues) {
+                let obj = new AMQPQueueDetail();
+                obj.deserialize(params.Queues[z]);
+                this.Queues.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateRocketMQTopic请求参数结构体
+ * @class
+ */
+class CreateRocketMQTopicRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 主题名称，3-64个字符，只能包含字母、数字、“-”及“_”
+         * @type {string || null}
+         */
+        this.Topic = null;
+
+        /**
+         * 主题所在的命名空间，目前支持在单个命名空间下创建主题
+         * @type {Array.<string> || null}
+         */
+        this.Namespaces = null;
+
+        /**
+         * 主题类型，可选值为Normal, GlobalOrder, PartitionedOrder
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 主题说明，最大128个字符
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * 分区数，全局顺序无效
+         * @type {number || null}
+         */
+        this.PartitionNum = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Topic = 'Topic' in params ? params.Topic : null;
+        this.Namespaces = 'Namespaces' in params ? params.Namespaces : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.PartitionNum = 'PartitionNum' in params ? params.PartitionNum : null;
+
+    }
+}
+
+/**
+ * CreateRole返回参数结构体
+ * @class
+ */
+class CreateRoleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 角色名称
+         * @type {string || null}
+         */
+        this.RoleName = null;
+
+        /**
+         * 角色token
+         * @type {string || null}
+         */
+        this.Token = null;
+
+        /**
+         * 备注说明
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RoleName = 'RoleName' in params ? params.RoleName : null;
+        this.Token = 'Token' in params ? params.Token : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteRocketMQCluster请求参数结构体
+ * @class
+ */
+class DeleteRocketMQClusterRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 待删除的集群Id。
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+    }
+}
+
+/**
+ * 面向运营端的虚拟集群信息
+ * @class
+ */
+class InternalTenant extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 虚拟集群ID
+         * @type {string || null}
+         */
+        this.TenantId = null;
+
+        /**
+         * 虚拟集群名称
+         * @type {string || null}
+         */
+        this.TenantName = null;
+
+        /**
+         * 客户UIN
+         * @type {string || null}
+         */
+        this.CustomerUin = null;
+
+        /**
+         * 客户的APPID
+         * @type {string || null}
+         */
+        this.CustomerAppId = null;
+
+        /**
+         * 物理集群名称
+         * @type {string || null}
+         */
+        this.ClusterName = null;
+
+        /**
+         * 集群协议类型，支持的值为TDMQ，ROCKETMQ，AMQP，CMQ
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 命名空间配额
+         * @type {number || null}
+         */
+        this.MaxNamespaces = null;
+
+        /**
+         * 已使用命名空间配额
+         * @type {number || null}
+         */
+        this.UsedNamespaces = null;
+
+        /**
+         * Topic配额
+         * @type {number || null}
+         */
+        this.MaxTopics = null;
+
+        /**
+         * 已使用Topic配额
+         * @type {number || null}
+         */
+        this.UsedTopics = null;
+
+        /**
+         * Topic分区数配额
+         * @type {number || null}
+         */
+        this.MaxPartitions = null;
+
+        /**
+         * 已使用Topic分区数配额
+         * @type {number || null}
+         */
+        this.UsedPartitions = null;
+
+        /**
+         * 存储配额, byte为单位
+         * @type {number || null}
+         */
+        this.MaxMsgBacklogSize = null;
+
+        /**
+         * 命名空间最大生产TPS
+         * @type {number || null}
+         */
+        this.MaxPublishTps = null;
+
+        /**
+         * 消息最大保留时间，秒为单位
+         * @type {number || null}
+         */
+        this.MaxRetention = null;
+
+        /**
+         * 创建时间，毫秒为单位
+         * @type {number || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 修改时间，毫秒为单位
+         * @type {number || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * 命名空间最大消费TPS
+         * @type {number || null}
+         */
+        this.MaxDispatchTps = null;
+
+        /**
+         * 命名空间最大消费带宽，byte为单位
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.MaxDispatchRateInBytes = null;
+
+        /**
+         * 命名空间最大生产带宽，byte为单位
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.MaxPublishRateInBytes = null;
+
+        /**
+         * 消息最大保留空间，MB为单位
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.MaxRetentionSizeInMB = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TenantId = 'TenantId' in params ? params.TenantId : null;
+        this.TenantName = 'TenantName' in params ? params.TenantName : null;
+        this.CustomerUin = 'CustomerUin' in params ? params.CustomerUin : null;
+        this.CustomerAppId = 'CustomerAppId' in params ? params.CustomerAppId : null;
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.MaxNamespaces = 'MaxNamespaces' in params ? params.MaxNamespaces : null;
+        this.UsedNamespaces = 'UsedNamespaces' in params ? params.UsedNamespaces : null;
+        this.MaxTopics = 'MaxTopics' in params ? params.MaxTopics : null;
+        this.UsedTopics = 'UsedTopics' in params ? params.UsedTopics : null;
+        this.MaxPartitions = 'MaxPartitions' in params ? params.MaxPartitions : null;
+        this.UsedPartitions = 'UsedPartitions' in params ? params.UsedPartitions : null;
+        this.MaxMsgBacklogSize = 'MaxMsgBacklogSize' in params ? params.MaxMsgBacklogSize : null;
+        this.MaxPublishTps = 'MaxPublishTps' in params ? params.MaxPublishTps : null;
+        this.MaxRetention = 'MaxRetention' in params ? params.MaxRetention : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.MaxDispatchTps = 'MaxDispatchTps' in params ? params.MaxDispatchTps : null;
+        this.MaxDispatchRateInBytes = 'MaxDispatchRateInBytes' in params ? params.MaxDispatchRateInBytes : null;
+        this.MaxPublishRateInBytes = 'MaxPublishRateInBytes' in params ? params.MaxPublishRateInBytes : null;
+        this.MaxRetentionSizeInMB = 'MaxRetentionSizeInMB' in params ? params.MaxRetentionSizeInMB : null;
+
+    }
+}
+
+/**
+ * DescribeEnvironmentAttributes请求参数结构体
+ * @class
+ */
+class DescribeEnvironmentAttributesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 环境（命名空间）名称。
+         * @type {string || null}
+         */
+        this.EnvironmentId = null;
+
+        /**
+         * Pulsar 集群的ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+    }
+}
+
+/**
+ * DeleteEnvironmentRoles请求参数结构体
+ * @class
+ */
+class DeleteEnvironmentRolesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 环境（命名空间）名称。
+         * @type {string || null}
+         */
+        this.EnvironmentId = null;
+
+        /**
+         * 角色名称数组。
+         * @type {Array.<string> || null}
+         */
+        this.RoleNames = null;
+
+        /**
+         * 必填字段，集群的ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
+        this.RoleNames = 'RoleNames' in params ? params.RoleNames : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+    }
+}
+
+/**
  * ClearCmqQueue返回参数结构体
  * @class
  */
@@ -5191,6 +10615,62 @@ class ClearCmqQueueResponse extends  AbstractModel {
 }
 
 /**
+ * CreateAMQPExchange返回参数结构体
+ * @class
+ */
+class CreateAMQPExchangeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeNodeHealthOpt请求参数结构体
+ * @class
+ */
+class DescribeNodeHealthOptRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 节点实例ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
  * DescribeBindClusters请求参数结构体
  * @class
  */
@@ -5212,18 +10692,12 @@ class DescribeBindClustersRequest extends  AbstractModel {
 }
 
 /**
- * DescribeClusterDetail返回参数结构体
+ * CreateRocketMQTopic返回参数结构体
  * @class
  */
-class DescribeClusterDetailResponse extends  AbstractModel {
+class CreateRocketMQTopicResponse extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * 集群的详细信息
-         * @type {Cluster || null}
-         */
-        this.ClusterSet = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -5240,11 +10714,154 @@ class DescribeClusterDetailResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
-        if (params.ClusterSet) {
-            let obj = new Cluster();
-            obj.deserialize(params.ClusterSet)
-            this.ClusterSet = obj;
+    }
+}
+
+/**
+ * ModifyEnvironmentAttributes返回参数结构体
+ * @class
+ */
+class ModifyEnvironmentAttributesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 命名空间名称。
+         * @type {string || null}
+         */
+        this.EnvironmentId = null;
+
+        /**
+         * 未消费消息过期时间，单位：秒。
+         * @type {number || null}
+         */
+        this.MsgTTL = null;
+
+        /**
+         * 备注，字符串最长不超过128。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * 命名空间ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.NamespaceId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
+        this.MsgTTL = 'MsgTTL' in params ? params.MsgTTL : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 环境角色集合
+ * @class
+ */
+class EnvironmentRole extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 环境（命名空间）。
+         * @type {string || null}
+         */
+        this.EnvironmentId = null;
+
+        /**
+         * 角色名称。
+         * @type {string || null}
+         */
+        this.RoleName = null;
+
+        /**
+         * 授权项，最多只能包含produce、consume两项的非空字符串数组。
+         * @type {Array.<string> || null}
+         */
+        this.Permissions = null;
+
+        /**
+         * 角色描述。
+         * @type {string || null}
+         */
+        this.RoleDescribe = null;
+
+        /**
+         * 创建时间。
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 更新时间。
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
+        this.RoleName = 'RoleName' in params ? params.RoleName : null;
+        this.Permissions = 'Permissions' in params ? params.Permissions : null;
+        this.RoleDescribe = 'RoleDescribe' in params ? params.RoleDescribe : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+
+    }
+}
+
+/**
+ * ModifyAMQPQueue返回参数结构体
+ * @class
+ */
+class ModifyAMQPQueueResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -5290,13 +10907,13 @@ class CreateCmqQueueRequest extends  AbstractModel {
         this.MaxMsgSize = null;
 
         /**
-         * 消息保留周期。取值范围 60-1296000 秒（1min-15天），默认值 345600 (4 天)。
+         * 消息最长未确认时间。取值范围 30-43200 秒（30秒~12小时），默认值 3600 (1 小时)。
          * @type {number || null}
          */
         this.MsgRetentionSeconds = null;
 
         /**
-         * 队列是否开启回溯消息能力，该参数取值范围0-msgRetentionSeconds,即最大的回溯时间为消息在队列中的保留周期，0表示不开启。
+         * 队列是否开启回溯消息能力，该参数取值范围0-1296000，0表示不开启。
          * @type {number || null}
          */
         this.RewindSeconds = null;
@@ -5349,6 +10966,18 @@ class CreateCmqQueueRequest extends  AbstractModel {
          */
         this.Trace = null;
 
+        /**
+         * 标签数组
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * 队列可回溯存储空间，取值范围1024MB - 10240MB，0表示不开启
+         * @type {number || null}
+         */
+        this.RetentionSizeInMB = null;
+
     }
 
     /**
@@ -5373,6 +11002,44 @@ class CreateCmqQueueRequest extends  AbstractModel {
         this.MaxReceiveCount = 'MaxReceiveCount' in params ? params.MaxReceiveCount : null;
         this.MaxTimeToLive = 'MaxTimeToLive' in params ? params.MaxTimeToLive : null;
         this.Trace = 'Trace' in params ? params.Trace : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+        this.RetentionSizeInMB = 'RetentionSizeInMB' in params ? params.RetentionSizeInMB : null;
+
+    }
+}
+
+/**
+ * ModifyEnvironmentRole返回参数结构体
+ * @class
+ */
+class ModifyEnvironmentRoleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5406,10 +11073,187 @@ class DeleteCmqQueueRequest extends  AbstractModel {
 }
 
 /**
- * DescribeProducers请求参数结构体
+ * DescribeRocketMQGroups请求参数结构体
  * @class
  */
-class DescribeProducersRequest extends  AbstractModel {
+class DescribeRocketMQGroupsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 命名空间
+         * @type {string || null}
+         */
+        this.NamespaceId = null;
+
+        /**
+         * 偏移量
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 限制条数
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 主题名称，输入此参数可查询该主题下所有的订阅组
+         * @type {string || null}
+         */
+        this.FilterTopic = null;
+
+        /**
+         * 按消费组名称查询消费组，支持模糊查询
+         * @type {string || null}
+         */
+        this.FilterGroup = null;
+
+        /**
+         * 按照指定字段排序，可选值为tps，accumulative
+         * @type {string || null}
+         */
+        this.SortedBy = null;
+
+        /**
+         * 按升序或降序排列，可选值为asc，desc
+         * @type {string || null}
+         */
+        this.SortOrder = null;
+
+        /**
+         * 订阅组名称，指定此参数后将只返回该订阅组信息
+         * @type {string || null}
+         */
+        this.FilterOneGroup = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.FilterTopic = 'FilterTopic' in params ? params.FilterTopic : null;
+        this.FilterGroup = 'FilterGroup' in params ? params.FilterGroup : null;
+        this.SortedBy = 'SortedBy' in params ? params.SortedBy : null;
+        this.SortOrder = 'SortOrder' in params ? params.SortOrder : null;
+        this.FilterOneGroup = 'FilterOneGroup' in params ? params.FilterOneGroup : null;
+
+    }
+}
+
+/**
+ * DescribeRocketMQClusters返回参数结构体
+ * @class
+ */
+class DescribeRocketMQClustersResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<RocketMQClusterDetail> || null}
+         */
+        this.ClusterList = null;
+
+        /**
+         * 总条数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ClusterList) {
+            this.ClusterList = new Array();
+            for (let z in params.ClusterList) {
+                let obj = new RocketMQClusterDetail();
+                obj.deserialize(params.ClusterList[z]);
+                this.ClusterList.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateRole请求参数结构体
+ * @class
+ */
+class CreateRoleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 角色名称，不支持中字以及除了短线和下划线外的特殊字符且长度必须大于0且小等于32。
+         * @type {string || null}
+         */
+        this.RoleName = null;
+
+        /**
+         * 备注说明，长度必须大等于0且小等于128。
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * 必填字段，集群Id
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RoleName = 'RoleName' in params ? params.RoleName : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+    }
+}
+
+/**
+ * ModifyEnvironmentRole请求参数结构体
+ * @class
+ */
+class ModifyEnvironmentRoleRequest extends  AbstractModel {
     constructor(){
         super();
 
@@ -5420,31 +11264,19 @@ class DescribeProducersRequest extends  AbstractModel {
         this.EnvironmentId = null;
 
         /**
-         * 主题名。
+         * 角色名称。
          * @type {string || null}
          */
-        this.TopicName = null;
+        this.RoleName = null;
 
         /**
-         * 起始下标，不填默认为0。
-         * @type {number || null}
+         * 授权项，最多只能包含produce、consume两项的非空字符串数组。
+         * @type {Array.<string> || null}
          */
-        this.Offset = null;
+        this.Permissions = null;
 
         /**
-         * 返回数量，不填则默认为10，最大值为20。
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * 生产者名称，模糊匹配。
-         * @type {string || null}
-         */
-        this.ProducerName = null;
-
-        /**
-         * Pulsar 集群的ID
+         * 必填字段，集群的ID
          * @type {string || null}
          */
         this.ClusterId = null;
@@ -5459,10 +11291,8 @@ class DescribeProducersRequest extends  AbstractModel {
             return;
         }
         this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
-        this.TopicName = 'TopicName' in params ? params.TopicName : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.ProducerName = 'ProducerName' in params ? params.ProducerName : null;
+        this.RoleName = 'RoleName' in params ? params.RoleName : null;
+        this.Permissions = 'Permissions' in params ? params.Permissions : null;
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
 
     }
@@ -5553,30 +11383,42 @@ class DescribeEnvironmentAttributesResponse extends  AbstractModel {
 }
 
 /**
- * 订阅关系
+ * 角色实例
  * @class
  */
-class SubscriptionTopic extends  AbstractModel {
+class Role extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 环境（命名空间）名称。
+         * 角色名称。
          * @type {string || null}
          */
-        this.EnvironmentId = null;
+        this.RoleName = null;
 
         /**
-         * 主题名称。
+         * 角色token值。
          * @type {string || null}
          */
-        this.TopicName = null;
+        this.Token = null;
 
         /**
-         * 订阅名称。
+         * 备注说明。
          * @type {string || null}
          */
-        this.SubscriptionName = null;
+        this.Remark = null;
+
+        /**
+         * 创建时间。
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 更新时间。
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
 
     }
 
@@ -5587,32 +11429,22 @@ class SubscriptionTopic extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
-        this.TopicName = 'TopicName' in params ? params.TopicName : null;
-        this.SubscriptionName = 'SubscriptionName' in params ? params.SubscriptionName : null;
+        this.RoleName = 'RoleName' in params ? params.RoleName : null;
+        this.Token = 'Token' in params ? params.Token : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
 
     }
 }
 
 /**
- * DescribeProducers返回参数结构体
+ * ModifyAMQPCluster返回参数结构体
  * @class
  */
-class DescribeProducersResponse extends  AbstractModel {
+class ModifyAMQPClusterResponse extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * 生产者集合数组。
-         * @type {Array.<Producer> || null}
-         */
-        this.ProducerSets = null;
-
-        /**
-         * 记录总数。
-         * @type {number || null}
-         */
-        this.TotalCount = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -5629,17 +11461,273 @@ class DescribeProducersResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.ProducerSets) {
-            this.ProducerSets = new Array();
-            for (let z in params.ProducerSets) {
-                let obj = new Producer();
-                obj.deserialize(params.ProducerSets[z]);
-                this.ProducerSets.push(obj);
-            }
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 排序器
+ * @class
+ */
+class Sort extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 排序字段
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 升序ASC，降序DESC
+         * @type {string || null}
+         */
+        this.Order = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Order = 'Order' in params ? params.Order : null;
+
+    }
+}
+
+/**
+ * AMQP集群配置
+ * @class
+ */
+class AMQPClusterConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 单Vhost TPS上限
+         * @type {number || null}
+         */
+        this.MaxTpsPerVHost = null;
+
+        /**
+         * 单Vhost客户端连接数上限
+         * @type {number || null}
+         */
+        this.MaxConnNumPerVHost = null;
+
+        /**
+         * 最大Vhost数量
+         * @type {number || null}
+         */
+        this.MaxVHostNum = null;
+
+        /**
+         * 最大exchange数量
+         * @type {number || null}
+         */
+        this.MaxExchangeNum = null;
+
+        /**
+         * 最大Queue数量
+         * @type {number || null}
+         */
+        this.MaxQueueNum = null;
+
+        /**
+         * 消息最大保留时间，以毫秒为单位
+         * @type {number || null}
+         */
+        this.MaxRetentionTime = null;
+
+        /**
+         * 已使用Vhost数量
+         * @type {number || null}
+         */
+        this.UsedVHostNum = null;
+
+        /**
+         * 已使用exchange数量
+         * @type {number || null}
+         */
+        this.UsedExchangeNum = null;
+
+        /**
+         * 已使用queue数量
+         * @type {number || null}
+         */
+        this.UsedQueueNum = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MaxTpsPerVHost = 'MaxTpsPerVHost' in params ? params.MaxTpsPerVHost : null;
+        this.MaxConnNumPerVHost = 'MaxConnNumPerVHost' in params ? params.MaxConnNumPerVHost : null;
+        this.MaxVHostNum = 'MaxVHostNum' in params ? params.MaxVHostNum : null;
+        this.MaxExchangeNum = 'MaxExchangeNum' in params ? params.MaxExchangeNum : null;
+        this.MaxQueueNum = 'MaxQueueNum' in params ? params.MaxQueueNum : null;
+        this.MaxRetentionTime = 'MaxRetentionTime' in params ? params.MaxRetentionTime : null;
+        this.UsedVHostNum = 'UsedVHostNum' in params ? params.UsedVHostNum : null;
+        this.UsedExchangeNum = 'UsedExchangeNum' in params ? params.UsedExchangeNum : null;
+        this.UsedQueueNum = 'UsedQueueNum' in params ? params.UsedQueueNum : null;
+
+    }
+}
+
+/**
+ * DescribeAMQPExchanges请求参数结构体
+ * @class
+ */
+class DescribeAMQPExchangesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 查询偏移量
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 查询限制数
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Vhost ID
+         * @type {string || null}
+         */
+        this.VHostId = null;
+
+        /**
+         * 按路由类型过滤查询结果，可选择Direct, Fanout, Topic
+         * @type {Array.<string> || null}
+         */
+        this.FilterType = null;
+
+        /**
+         * 按exchange名称搜索，支持模糊查询
+         * @type {string || null}
+         */
+        this.FilterName = null;
+
+        /**
+         * 过滤查询内部或者外部exchange
+         * @type {boolean || null}
+         */
+        this.FilterInternal = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.VHostId = 'VHostId' in params ? params.VHostId : null;
+        this.FilterType = 'FilterType' in params ? params.FilterType : null;
+        this.FilterName = 'FilterName' in params ? params.FilterName : null;
+        this.FilterInternal = 'FilterInternal' in params ? params.FilterInternal : null;
+
+    }
+}
+
+/**
+ * CreateRocketMQNamespace返回参数结构体
+ * @class
+ */
+class CreateRocketMQNamespaceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyAMQPExchange请求参数结构体
+ * @class
+ */
+class ModifyAMQPExchangeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Vhost间名称
+         * @type {string || null}
+         */
+        this.VHostId = null;
+
+        /**
+         * 交换机名称
+         * @type {string || null}
+         */
+        this.Exchange = null;
+
+        /**
+         * 说明信息，最大128个字符
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.VHostId = 'VHostId' in params ? params.VHostId : null;
+        this.Exchange = 'Exchange' in params ? params.Exchange : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
 
     }
 }
@@ -5653,7 +11741,7 @@ class SendBatchMessagesRequest extends  AbstractModel {
         super();
 
         /**
-         * Topic name
+         * 消息要发送的topic的名字, 这里尽量需要使用topic的全路径，即：tenant/namespace/topic。如果不指定，默认使用的是：public/default
          * @type {string || null}
          */
         this.Topic = null;
@@ -5665,7 +11753,7 @@ class SendBatchMessagesRequest extends  AbstractModel {
         this.Payload = null;
 
         /**
-         * String 类型的 token，用来校验客户端和服务端之间的连接
+         * String 类型的 token，可以不填，系统会自动获取
          * @type {string || null}
          */
         this.StringToken = null;
@@ -5757,6 +11845,48 @@ class DeleteCmqTopicRequest extends  AbstractModel {
 }
 
 /**
+ * DeleteAMQPRouteRelation请求参数结构体
+ * @class
+ */
+class DeleteAMQPRouteRelationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Vhost名称
+         * @type {string || null}
+         */
+        this.VHostId = null;
+
+        /**
+         * 路由关系ID
+         * @type {string || null}
+         */
+        this.RouteRelationId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.VHostId = 'VHostId' in params ? params.VHostId : null;
+        this.RouteRelationId = 'RouteRelationId' in params ? params.RouteRelationId : null;
+
+    }
+}
+
+/**
  * SendCmqMsg返回参数结构体
  * @class
  */
@@ -5799,6 +11929,90 @@ class SendCmqMsgResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeNodeHealthOpt返回参数结构体
+ * @class
+ */
+class DescribeNodeHealthOptResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 0-异常；1-正常
+         * @type {number || null}
+         */
+        this.NodeState = null;
+
+        /**
+         * 最近一次健康检查的时间
+         * @type {string || null}
+         */
+        this.LatestHealthCheckTime = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NodeState = 'NodeState' in params ? params.NodeState : null;
+        this.LatestHealthCheckTime = 'LatestHealthCheckTime' in params ? params.LatestHealthCheckTime : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * PublishCmqMsg请求参数结构体
+ * @class
+ */
+class PublishCmqMsgRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 主题名
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+        /**
+         * 消息内容
+         * @type {string || null}
+         */
+        this.MsgContent = null;
+
+        /**
+         * 消息标签
+         * @type {Array.<string> || null}
+         */
+        this.MsgTag = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.MsgContent = 'MsgContent' in params ? params.MsgContent : null;
+        this.MsgTag = 'MsgTag' in params ? params.MsgTag : null;
+
+    }
+}
+
+/**
  * UnbindCmqDeadLetter请求参数结构体
  * @class
  */
@@ -5822,6 +12036,245 @@ class UnbindCmqDeadLetterRequest extends  AbstractModel {
             return;
         }
         this.SourceQueueName = 'SourceQueueName' in params ? params.SourceQueueName : null;
+
+    }
+}
+
+/**
+ * CreateAMQPRouteRelation请求参数结构体
+ * @class
+ */
+class CreateAMQPRouteRelationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 交换机所在的vhost
+         * @type {string || null}
+         */
+        this.VHostId = null;
+
+        /**
+         * 源Exchange名称
+         * @type {string || null}
+         */
+        this.SourceExchange = null;
+
+        /**
+         * 目标类型:Queue|Exchange
+         * @type {string || null}
+         */
+        this.DestType = null;
+
+        /**
+         * 目标值
+         * @type {string || null}
+         */
+        this.DestValue = null;
+
+        /**
+         * 交换机说明，最大128个字符
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * 绑定key,缺省值为default
+         * @type {string || null}
+         */
+        this.RoutingKey = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.VHostId = 'VHostId' in params ? params.VHostId : null;
+        this.SourceExchange = 'SourceExchange' in params ? params.SourceExchange : null;
+        this.DestType = 'DestType' in params ? params.DestType : null;
+        this.DestValue = 'DestValue' in params ? params.DestValue : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.RoutingKey = 'RoutingKey' in params ? params.RoutingKey : null;
+
+    }
+}
+
+/**
+ * DeleteCmqSubscribe返回参数结构体
+ * @class
+ */
+class DeleteCmqSubscribeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribePublisherSummary请求参数结构体
+ * @class
+ */
+class DescribePublisherSummaryRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 命名空间名称
+         * @type {string || null}
+         */
+        this.Namespace = null;
+
+        /**
+         * 主题名称
+         * @type {string || null}
+         */
+        this.Topic = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.Topic = 'Topic' in params ? params.Topic : null;
+
+    }
+}
+
+/**
+ * DeleteSubscriptions请求参数结构体
+ * @class
+ */
+class DeleteSubscriptionsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 订阅关系集合，每次最多删除20个。
+         * @type {Array.<SubscriptionTopic> || null}
+         */
+        this.SubscriptionTopicSets = null;
+
+        /**
+         * pulsar集群Id。
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 环境（命名空间）名称。
+         * @type {string || null}
+         */
+        this.EnvironmentId = null;
+
+        /**
+         * 是否强制删除，默认为false
+         * @type {boolean || null}
+         */
+        this.Force = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.SubscriptionTopicSets) {
+            this.SubscriptionTopicSets = new Array();
+            for (let z in params.SubscriptionTopicSets) {
+                let obj = new SubscriptionTopic();
+                obj.deserialize(params.SubscriptionTopicSets[z]);
+                this.SubscriptionTopicSets.push(obj);
+            }
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
+        this.Force = 'Force' in params ? params.Force : null;
+
+    }
+}
+
+/**
+ * SendCmqMsg请求参数结构体
+ * @class
+ */
+class SendCmqMsgRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 队列名
+         * @type {string || null}
+         */
+        this.QueueName = null;
+
+        /**
+         * 消息内容
+         * @type {string || null}
+         */
+        this.MsgContent = null;
+
+        /**
+         * 延迟时间
+         * @type {number || null}
+         */
+        this.DelaySeconds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.QueueName = 'QueueName' in params ? params.QueueName : null;
+        this.MsgContent = 'MsgContent' in params ? params.MsgContent : null;
+        this.DelaySeconds = 'DelaySeconds' in params ? params.DelaySeconds : null;
 
     }
 }
@@ -5859,19 +12312,19 @@ class ModifyCmqQueueAttributeRequest extends  AbstractModel {
         this.VisibilityTimeout = null;
 
         /**
-         * 消息最大长度。取值范围 1024-65536 Byte（即1-64K），默认值 65536。
+         * 消息最大长度，新版CMQ新建的队列默认1024KB，不支持修改
          * @type {number || null}
          */
         this.MaxMsgSize = null;
 
         /**
-         * 消息保留周期。取值范围 60-1296000 秒（1min-15天），默认值 345600 (4 天)。
+         * 消息最长未确认时间。取值范围 30-43200 秒（30秒~12小时），默认值 3600 (1 小时)。
          * @type {number || null}
          */
         this.MsgRetentionSeconds = null;
 
         /**
-         * 消息最长回溯时间，取值范围0-msgRetentionSeconds，消息的最大回溯之间为消息在队列中的保存周期，0表示不开启消息回溯。
+         * 队列是否开启回溯消息能力，该参数取值范围0-1296000，0表示不开启。
          * @type {number || null}
          */
         this.RewindSeconds = null;
@@ -5924,6 +12377,12 @@ class ModifyCmqQueueAttributeRequest extends  AbstractModel {
          */
         this.Transaction = null;
 
+        /**
+         * 队列可回溯存储空间，取值范围1024MB - 10240MB，0表示不开启
+         * @type {number || null}
+         */
+        this.RetentionSizeInMB = null;
+
     }
 
     /**
@@ -5948,15 +12407,16 @@ class ModifyCmqQueueAttributeRequest extends  AbstractModel {
         this.Policy = 'Policy' in params ? params.Policy : null;
         this.Trace = 'Trace' in params ? params.Trace : null;
         this.Transaction = 'Transaction' in params ? params.Transaction : null;
+        this.RetentionSizeInMB = 'RetentionSizeInMB' in params ? params.RetentionSizeInMB : null;
 
     }
 }
 
 /**
- * DeleteCmqSubscribe返回参数结构体
+ * ModifyRocketMQGroup返回参数结构体
  * @class
  */
-class DeleteCmqSubscribeResponse extends  AbstractModel {
+class ModifyRocketMQGroupResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -5981,38 +12441,87 @@ class DeleteCmqSubscribeResponse extends  AbstractModel {
 }
 
 /**
- * ModifyEnvironmentAttributes返回参数结构体
+ * 租户AMQP集群详细信息
  * @class
  */
-class ModifyEnvironmentAttributesResponse extends  AbstractModel {
+class AMQPClusterDetail extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 命名空间名称。
-         * @type {string || null}
+         * 集群基本信息
+         * @type {AMQPClusterInfo || null}
          */
-        this.EnvironmentId = null;
+        this.Info = null;
 
         /**
-         * 未消费消息过期时间，单位：秒。
+         * 集群配置信息
+         * @type {AMQPClusterConfig || null}
+         */
+        this.Config = null;
+
+        /**
+         * 标签
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * 集群状态，0:创建中，1:正常，2:销毁中，3:已删除，4: 隔离中，5:创建失败，6: 删除失败
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
-        this.MsgTTL = null;
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Info) {
+            let obj = new AMQPClusterInfo();
+            obj.deserialize(params.Info)
+            this.Info = obj;
+        }
+
+        if (params.Config) {
+            let obj = new AMQPClusterConfig();
+            obj.deserialize(params.Config)
+            this.Config = obj;
+        }
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
+ * DescribeClusterDetail返回参数结构体
+ * @class
+ */
+class DescribeClusterDetailResponse extends  AbstractModel {
+    constructor(){
+        super();
 
         /**
-         * 备注，字符串最长不超过128。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
+         * 集群的详细信息
+         * @type {Cluster || null}
          */
-        this.Remark = null;
-
-        /**
-         * 命名空间ID
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.NamespaceId = null;
+        this.ClusterSet = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -6029,40 +12538,117 @@ class ModifyEnvironmentAttributesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
-        this.MsgTTL = 'MsgTTL' in params ? params.MsgTTL : null;
-        this.Remark = 'Remark' in params ? params.Remark : null;
-        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
+
+        if (params.ClusterSet) {
+            let obj = new Cluster();
+            obj.deserialize(params.ClusterSet)
+            this.ClusterSet = obj;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
 
 /**
- * DeleteSubscriptions请求参数结构体
+ * SendMessages请求参数结构体
  * @class
  */
-class DeleteSubscriptionsRequest extends  AbstractModel {
+class SendMessagesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 订阅关系集合，每次最多删除20个。
-         * @type {Array.<SubscriptionTopic> || null}
+         * 消息要发送的topic的名字, 这里尽量需要使用topic的全路径，即：tenant/namespace/topic。如果不指定，默认使用的是：public/default
+         * @type {string || null}
          */
-        this.SubscriptionTopicSets = null;
+        this.Topic = null;
 
         /**
-         * pulsar集群Id。
+         * 要发送的消息的内容
+         * @type {string || null}
+         */
+        this.Payload = null;
+
+        /**
+         * Token 是用来做鉴权使用的，可以不填，系统会自动获取
+         * @type {string || null}
+         */
+        this.StringToken = null;
+
+        /**
+         * 设置 producer 的名字，要求全局唯一，用户不配置，系统会随机生成
+         * @type {string || null}
+         */
+        this.ProducerName = null;
+
+        /**
+         * 设置消息发送的超时时间，默认为30s
+         * @type {number || null}
+         */
+        this.SendTimeout = null;
+
+        /**
+         * 内存中缓存的最大的生产消息的数量，默认为1000条
+         * @type {number || null}
+         */
+        this.MaxPendingMessages = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Topic = 'Topic' in params ? params.Topic : null;
+        this.Payload = 'Payload' in params ? params.Payload : null;
+        this.StringToken = 'StringToken' in params ? params.StringToken : null;
+        this.ProducerName = 'ProducerName' in params ? params.ProducerName : null;
+        this.SendTimeout = 'SendTimeout' in params ? params.SendTimeout : null;
+        this.MaxPendingMessages = 'MaxPendingMessages' in params ? params.MaxPendingMessages : null;
+
+    }
+}
+
+/**
+ * ModifyRocketMQNamespace请求参数结构体
+ * @class
+ */
+class ModifyRocketMQNamespaceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群ID
          * @type {string || null}
          */
         this.ClusterId = null;
 
         /**
-         * 环境（命名空间）名称。
+         * 命名空间名称，3-64个字符，只能包含字母、数字、“-”及“_”
          * @type {string || null}
          */
-        this.EnvironmentId = null;
+        this.NamespaceId = null;
+
+        /**
+         * 未消费消息的保留时间，以毫秒为单位，60秒-15天
+         * @type {number || null}
+         */
+        this.Ttl = null;
+
+        /**
+         * 消息持久化后保留的时间，以毫秒为单位
+         * @type {number || null}
+         */
+        this.RetentionTime = null;
+
+        /**
+         * 说明，最大128个字符
+         * @type {string || null}
+         */
+        this.Remark = null;
 
     }
 
@@ -6073,64 +12659,28 @@ class DeleteSubscriptionsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.SubscriptionTopicSets) {
-            this.SubscriptionTopicSets = new Array();
-            for (let z in params.SubscriptionTopicSets) {
-                let obj = new SubscriptionTopic();
-                obj.deserialize(params.SubscriptionTopicSets[z]);
-                this.SubscriptionTopicSets.push(obj);
-            }
-        }
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
+        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
+        this.Ttl = 'Ttl' in params ? params.Ttl : null;
+        this.RetentionTime = 'RetentionTime' in params ? params.RetentionTime : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
 
     }
 }
 
 /**
- * 环境角色集合
+ * DeleteAMQPVHost返回参数结构体
  * @class
  */
-class EnvironmentRole extends  AbstractModel {
+class DeleteAMQPVHostResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 环境（命名空间）。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.EnvironmentId = null;
-
-        /**
-         * 角色名称。
-         * @type {string || null}
-         */
-        this.RoleName = null;
-
-        /**
-         * 授权项，最多只能包含produce、consume两项的非空字符串数组。
-         * @type {Array.<string> || null}
-         */
-        this.Permissions = null;
-
-        /**
-         * 角色描述。
-         * @type {string || null}
-         */
-        this.RoleDescribe = null;
-
-        /**
-         * 创建时间。
-         * @type {string || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * 更新时间。
-         * @type {string || null}
-         */
-        this.UpdateTime = null;
+        this.RequestId = null;
 
     }
 
@@ -6141,129 +12691,326 @@ class EnvironmentRole extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
-        this.RoleName = 'RoleName' in params ? params.RoleName : null;
-        this.Permissions = 'Permissions' in params ? params.Permissions : null;
-        this.RoleDescribe = 'RoleDescribe' in params ? params.RoleDescribe : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeAllTenants请求参数结构体
+ * @class
+ */
+class DescribeAllTenantsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 查询偏移量
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 查询限制条数
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 物理集群名称
+         * @type {string || null}
+         */
+        this.ClusterName = null;
+
+        /**
+         * 虚拟集群ID
+         * @type {string || null}
+         */
+        this.TenantId = null;
+
+        /**
+         * 虚拟集群名称
+         * @type {string || null}
+         */
+        this.TenantName = null;
+
+        /**
+         * 协议类型数组
+         * @type {Array.<string> || null}
+         */
+        this.Types = null;
+
+        /**
+         * 排序字段名，支持createTime，updateTime
+         * @type {string || null}
+         */
+        this.SortBy = null;
+
+        /**
+         * 升序排列ASC，降序排列DESC
+         * @type {string || null}
+         */
+        this.SortOrder = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
+        this.TenantId = 'TenantId' in params ? params.TenantId : null;
+        this.TenantName = 'TenantName' in params ? params.TenantName : null;
+        this.Types = 'Types' in params ? params.Types : null;
+        this.SortBy = 'SortBy' in params ? params.SortBy : null;
+        this.SortOrder = 'SortOrder' in params ? params.SortOrder : null;
 
     }
 }
 
 module.exports = {
-    DescribeBindClustersResponse: DescribeBindClustersResponse,
+    DescribeRolesResponse: DescribeRolesResponse,
+    DescribeAMQPRouteRelationsRequest: DescribeAMQPRouteRelationsRequest,
     CmqDeadLetterPolicy: CmqDeadLetterPolicy,
+    DescribeNamespaceBundlesOptRequest: DescribeNamespaceBundlesOptRequest,
+    RocketMQNamespace: RocketMQNamespace,
     DescribeSubscriptionsRequest: DescribeSubscriptionsRequest,
+    CreateRocketMQGroupRequest: CreateRocketMQGroupRequest,
+    ModifyEnvironmentAttributesRequest: ModifyEnvironmentAttributesRequest,
     DeleteClusterResponse: DeleteClusterResponse,
     SendBatchMessagesResponse: SendBatchMessagesResponse,
-    DescribeClusterDetailRequest: DescribeClusterDetailRequest,
+    ModifyCmqSubscriptionAttributeResponse: ModifyCmqSubscriptionAttributeResponse,
     CreateCmqTopicRequest: CreateCmqTopicRequest,
+    CreateAMQPExchangeRequest: CreateAMQPExchangeRequest,
+    DescribeRocketMQNamespacesResponse: DescribeRocketMQNamespacesResponse,
+    ResetRocketMQConsumerOffSetResponse: ResetRocketMQConsumerOffSetResponse,
+    DescribeBindClustersResponse: DescribeBindClustersResponse,
     BindCluster: BindCluster,
     ModifyClusterResponse: ModifyClusterResponse,
+    RocketMQClusterRecentStats: RocketMQClusterRecentStats,
     DescribeCmqQueuesResponse: DescribeCmqQueuesResponse,
-    PublishCmqMsgRequest: PublishCmqMsgRequest,
-    CreateCmqSubscribeRequest: CreateCmqSubscribeRequest,
+    DescribeAllTenantsResponse: DescribeAllTenantsResponse,
+    DescribeNamespaceBundlesOptResponse: DescribeNamespaceBundlesOptResponse,
+    DescribeBindVpcsResponse: DescribeBindVpcsResponse,
     RewindCmqQueueResponse: RewindCmqQueueResponse,
     DeleteClusterRequest: DeleteClusterRequest,
     CmqSubscription: CmqSubscription,
+    ModifyAMQPVHostResponse: ModifyAMQPVHostResponse,
+    DescribeAMQPClusterResponse: DescribeAMQPClusterResponse,
+    CreateAMQPClusterRequest: CreateAMQPClusterRequest,
+    DeleteRocketMQGroupRequest: DeleteRocketMQGroupRequest,
+    RocketMQGroup: RocketMQGroup,
+    AMQPClusterRecentStats: AMQPClusterRecentStats,
     DeleteCmqTopicResponse: DeleteCmqTopicResponse,
+    ModifyAMQPVHostRequest: ModifyAMQPVHostRequest,
     CreateSubscriptionRequest: CreateSubscriptionRequest,
+    CreateRocketMQNamespaceRequest: CreateRocketMQNamespaceRequest,
+    Topic: Topic,
     DescribeCmqTopicDetailResponse: DescribeCmqTopicDetailResponse,
+    Environment: Environment,
     CmqQueue: CmqQueue,
     CreateEnvironmentResponse: CreateEnvironmentResponse,
-    Producer: Producer,
     CreateSubscriptionResponse: CreateSubscriptionResponse,
+    DeleteAMQPQueueResponse: DeleteAMQPQueueResponse,
     ModifyCmqTopicAttributeResponse: ModifyCmqTopicAttributeResponse,
     DescribeCmqSubscriptionDetailRequest: DescribeCmqSubscriptionDetailRequest,
-    Topic: Topic,
+    DescribePublisherSummaryResponse: DescribePublisherSummaryResponse,
+    DescribeAMQPVHostsResponse: DescribeAMQPVHostsResponse,
     DescribeEnvironmentsRequest: DescribeEnvironmentsRequest,
+    DescribeRocketMQNamespacesRequest: DescribeRocketMQNamespacesRequest,
+    DeleteAMQPClusterResponse: DeleteAMQPClusterResponse,
+    DescribeAMQPClusterRequest: DescribeAMQPClusterRequest,
+    DescribeRocketMQTopicsRequest: DescribeRocketMQTopicsRequest,
+    ModifyRocketMQClusterResponse: ModifyRocketMQClusterResponse,
+    Subscription: Subscription,
     DescribeCmqQueueDetailResponse: DescribeCmqQueueDetailResponse,
     CreateEnvironmentRequest: CreateEnvironmentRequest,
-    DeleteTopicsResponse: DeleteTopicsResponse,
+    CreateAMQPQueueRequest: CreateAMQPQueueRequest,
+    ClearCmqQueueRequest: ClearCmqQueueRequest,
     DescribeClustersRequest: DescribeClustersRequest,
-    ModifyEnvironmentAttributesRequest: ModifyEnvironmentAttributesRequest,
+    Publisher: Publisher,
+    RocketMQTopic: RocketMQTopic,
+    DescribeRocketMQClusterResponse: DescribeRocketMQClusterResponse,
+    CreateAMQPVHostResponse: CreateAMQPVHostResponse,
     DescribeCmqSubscriptionDetailResponse: DescribeCmqSubscriptionDetailResponse,
     VpcBindRecord: VpcBindRecord,
     RewindCmqQueueRequest: RewindCmqQueueRequest,
+    DescribeAMQPVHostsRequest: DescribeAMQPVHostsRequest,
     ModifyClusterRequest: ModifyClusterRequest,
-    DescribeEnvironmentAttributesRequest: DescribeEnvironmentAttributesRequest,
+    DescribeAMQPQueuesRequest: DescribeAMQPQueuesRequest,
+    ModifyRocketMQClusterRequest: ModifyRocketMQClusterRequest,
+    AMQPVHost: AMQPVHost,
+    ModifyAMQPExchangeResponse: ModifyAMQPExchangeResponse,
+    DescribeAMQPExchangesResponse: DescribeAMQPExchangesResponse,
+    AcknowledgeMessageRequest: AcknowledgeMessageRequest,
+    DeleteAMQPClusterRequest: DeleteAMQPClusterRequest,
     DescribeTopicsResponse: DescribeTopicsResponse,
     PublishCmqMsgResponse: PublishCmqMsgResponse,
-    SendCmqMsgRequest: SendCmqMsgRequest,
-    ModifyCmqSubscriptionAttributeResponse: ModifyCmqSubscriptionAttributeResponse,
+    DescribePublishersRequest: DescribePublishersRequest,
+    CreateRocketMQClusterRequest: CreateRocketMQClusterRequest,
+    DeleteAMQPVHostRequest: DeleteAMQPVHostRequest,
+    AcknowledgeMessageResponse: AcknowledgeMessageResponse,
+    ModifyCmqQueueAttributeResponse: ModifyCmqQueueAttributeResponse,
+    DeleteEnvironmentRolesResponse: DeleteEnvironmentRolesResponse,
+    DescribeClusterDetailRequest: DescribeClusterDetailRequest,
+    ModifyRoleResponse: ModifyRoleResponse,
+    ModifyAMQPQueueRequest: ModifyAMQPQueueRequest,
     Tag: Tag,
     DeleteCmqQueueResponse: DeleteCmqQueueResponse,
-    SendMessagesRequest: SendMessagesRequest,
+    DescribeRocketMQClusterRequest: DescribeRocketMQClusterRequest,
+    DeleteRocketMQTopicResponse: DeleteRocketMQTopicResponse,
     ModifyCmqTopicAttributeRequest: ModifyCmqTopicAttributeRequest,
-    Subscription: Subscription,
+    DeleteRolesRequest: DeleteRolesRequest,
+    ModifyRocketMQTopicResponse: ModifyRocketMQTopicResponse,
     CreateCmqSubscribeResponse: CreateCmqSubscribeResponse,
+    DescribeCmqDeadLetterSourceQueuesRequest: DescribeCmqDeadLetterSourceQueuesRequest,
     DescribeSubscriptionsResponse: DescribeSubscriptionsResponse,
+    ModifyRoleRequest: ModifyRoleRequest,
     SendMessagesResponse: SendMessagesResponse,
+    ReceiveMessageRequest: ReceiveMessageRequest,
     CreateTopicRequest: CreateTopicRequest,
     DescribeTopicsRequest: DescribeTopicsRequest,
     DeleteEnvironmentsResponse: DeleteEnvironmentsResponse,
+    ModifyAMQPClusterRequest: ModifyAMQPClusterRequest,
     DescribeEnvironmentRolesResponse: DescribeEnvironmentRolesResponse,
-    ClearCmqQueueRequest: ClearCmqQueueRequest,
+    DescribeAMQPCreateQuotaResponse: DescribeAMQPCreateQuotaResponse,
+    ModifyRocketMQGroupRequest: ModifyRocketMQGroupRequest,
     FilterSubscription: FilterSubscription,
     DescribeCmqTopicsResponse: DescribeCmqTopicsResponse,
     DescribeCmqTopicDetailRequest: DescribeCmqTopicDetailRequest,
     CmqTopic: CmqTopic,
     UnbindCmqDeadLetterResponse: UnbindCmqDeadLetterResponse,
+    ModifyRocketMQNamespaceResponse: ModifyRocketMQNamespaceResponse,
+    AMQPRouteRelation: AMQPRouteRelation,
+    DeleteAMQPQueueRequest: DeleteAMQPQueueRequest,
     DeleteEnvironmentsRequest: DeleteEnvironmentsRequest,
+    DescribeRocketMQClustersRequest: DescribeRocketMQClustersRequest,
+    ReceiveMessageResponse: ReceiveMessageResponse,
     DescribeBindVpcsRequest: DescribeBindVpcsRequest,
     DescribeClustersResponse: DescribeClustersResponse,
+    DeleteRocketMQNamespaceResponse: DeleteRocketMQNamespaceResponse,
     ClearCmqSubscriptionFilterTagsRequest: ClearCmqSubscriptionFilterTagsRequest,
     TopicRecord: TopicRecord,
+    CreateRocketMQGroupResponse: CreateRocketMQGroupResponse,
+    CreateEnvironmentRoleRequest: CreateEnvironmentRoleRequest,
     DescribeEnvironmentRolesRequest: DescribeEnvironmentRolesRequest,
-    Environment: Environment,
+    DeleteRolesResponse: DeleteRolesResponse,
+    SendMsgResponse: SendMsgResponse,
+    ModifyRocketMQTopicRequest: ModifyRocketMQTopicRequest,
+    RocketMQClusterInfo: RocketMQClusterInfo,
+    DescribeRocketMQTopicsResponse: DescribeRocketMQTopicsResponse,
+    CreateAMQPVHostRequest: CreateAMQPVHostRequest,
+    RocketMQClusterDetail: RocketMQClusterDetail,
+    DeleteRocketMQGroupResponse: DeleteRocketMQGroupResponse,
     CreateCmqQueueResponse: CreateCmqQueueResponse,
     PartitionsTopic: PartitionsTopic,
+    DescribeRocketMQGroupsResponse: DescribeRocketMQGroupsResponse,
     ResetMsgSubOffsetByTimestampResponse: ResetMsgSubOffsetByTimestampResponse,
     CreateClusterResponse: CreateClusterResponse,
-    DescribeCmqDeadLetterSourceQueuesRequest: DescribeCmqDeadLetterSourceQueuesRequest,
+    DeleteAMQPExchangeResponse: DeleteAMQPExchangeResponse,
+    DeleteRocketMQNamespaceRequest: DeleteRocketMQNamespaceRequest,
+    DescribeRolesRequest: DescribeRolesRequest,
+    CreateAMQPQueueResponse: CreateAMQPQueueResponse,
     CreateClusterRequest: CreateClusterRequest,
-    ModifyCmqQueueAttributeResponse: ModifyCmqQueueAttributeResponse,
+    DescribeAMQPClustersRequest: DescribeAMQPClustersRequest,
+    CreateAMQPRouteRelationResponse: CreateAMQPRouteRelationResponse,
     CreateTopicResponse: CreateTopicResponse,
     DescribeCmqQueuesRequest: DescribeCmqQueuesRequest,
     DescribeEnvironmentsResponse: DescribeEnvironmentsResponse,
     ModifyCmqSubscriptionAttributeRequest: ModifyCmqSubscriptionAttributeRequest,
     ModifyTopicResponse: ModifyTopicResponse,
+    AMQPClusterInfo: AMQPClusterInfo,
+    DescribeAMQPRouteRelationsResponse: DescribeAMQPRouteRelationsResponse,
+    DeleteTopicsResponse: DeleteTopicsResponse,
+    CreateAMQPClusterResponse: CreateAMQPClusterResponse,
+    DeleteAMQPExchangeRequest: DeleteAMQPExchangeRequest,
+    DeleteRocketMQClusterResponse: DeleteRocketMQClusterResponse,
     CreateCmqTopicResponse: CreateCmqTopicResponse,
     CmqDeadLetterSource: CmqDeadLetterSource,
     ClearCmqSubscriptionFilterTagsResponse: ClearCmqSubscriptionFilterTagsResponse,
     DescribeCmqTopicsRequest: DescribeCmqTopicsRequest,
     Filter: Filter,
-    Connection: Connection,
+    AMQPExchange: AMQPExchange,
     DeleteTopicsRequest: DeleteTopicsRequest,
     CmqTransactionPolicy: CmqTransactionPolicy,
+    BundleSetOpt: BundleSetOpt,
     ModifyTopicRequest: ModifyTopicRequest,
     ResetMsgSubOffsetByTimestampRequest: ResetMsgSubOffsetByTimestampRequest,
+    CreateEnvironmentRoleResponse: CreateEnvironmentRoleResponse,
     Consumer: Consumer,
-    DescribeBindVpcsResponse: DescribeBindVpcsResponse,
+    CreateCmqSubscribeRequest: CreateCmqSubscribeRequest,
     DeleteCmqSubscribeRequest: DeleteCmqSubscribeRequest,
+    DescribeAMQPClustersResponse: DescribeAMQPClustersResponse,
+    RocketMQClusterConfig: RocketMQClusterConfig,
     DescribeCmqDeadLetterSourceQueuesResponse: DescribeCmqDeadLetterSourceQueuesResponse,
     DeleteSubscriptionsResponse: DeleteSubscriptionsResponse,
+    DeleteRocketMQTopicRequest: DeleteRocketMQTopicRequest,
     ConsumersSchedule: ConsumersSchedule,
     Cluster: Cluster,
-    DescribeCmqQueueDetailRequest: DescribeCmqQueueDetailRequest,
-    ClearCmqQueueResponse: ClearCmqQueueResponse,
-    DescribeBindClustersRequest: DescribeBindClustersRequest,
-    DescribeClusterDetailResponse: DescribeClusterDetailResponse,
-    CreateCmqQueueRequest: CreateCmqQueueRequest,
-    DeleteCmqQueueRequest: DeleteCmqQueueRequest,
-    DescribeProducersRequest: DescribeProducersRequest,
-    DescribeEnvironmentAttributesResponse: DescribeEnvironmentAttributesResponse,
     SubscriptionTopic: SubscriptionTopic,
-    DescribeProducersResponse: DescribeProducersResponse,
+    RetentionPolicy: RetentionPolicy,
+    CreateRocketMQClusterResponse: CreateRocketMQClusterResponse,
+    DescribeAMQPCreateQuotaRequest: DescribeAMQPCreateQuotaRequest,
+    AMQPQueueDetail: AMQPQueueDetail,
+    DescribePublishersResponse: DescribePublishersResponse,
+    DeleteAMQPRouteRelationResponse: DeleteAMQPRouteRelationResponse,
+    SendMsgRequest: SendMsgRequest,
+    ResetRocketMQConsumerOffSetRequest: ResetRocketMQConsumerOffSetRequest,
+    DescribeCmqQueueDetailRequest: DescribeCmqQueueDetailRequest,
+    DescribeAMQPQueuesResponse: DescribeAMQPQueuesResponse,
+    CreateRocketMQTopicRequest: CreateRocketMQTopicRequest,
+    CreateRoleResponse: CreateRoleResponse,
+    DeleteRocketMQClusterRequest: DeleteRocketMQClusterRequest,
+    InternalTenant: InternalTenant,
+    DescribeEnvironmentAttributesRequest: DescribeEnvironmentAttributesRequest,
+    DeleteEnvironmentRolesRequest: DeleteEnvironmentRolesRequest,
+    ClearCmqQueueResponse: ClearCmqQueueResponse,
+    CreateAMQPExchangeResponse: CreateAMQPExchangeResponse,
+    DescribeNodeHealthOptRequest: DescribeNodeHealthOptRequest,
+    DescribeBindClustersRequest: DescribeBindClustersRequest,
+    CreateRocketMQTopicResponse: CreateRocketMQTopicResponse,
+    ModifyEnvironmentAttributesResponse: ModifyEnvironmentAttributesResponse,
+    EnvironmentRole: EnvironmentRole,
+    ModifyAMQPQueueResponse: ModifyAMQPQueueResponse,
+    CreateCmqQueueRequest: CreateCmqQueueRequest,
+    ModifyEnvironmentRoleResponse: ModifyEnvironmentRoleResponse,
+    DeleteCmqQueueRequest: DeleteCmqQueueRequest,
+    DescribeRocketMQGroupsRequest: DescribeRocketMQGroupsRequest,
+    DescribeRocketMQClustersResponse: DescribeRocketMQClustersResponse,
+    CreateRoleRequest: CreateRoleRequest,
+    ModifyEnvironmentRoleRequest: ModifyEnvironmentRoleRequest,
+    DescribeEnvironmentAttributesResponse: DescribeEnvironmentAttributesResponse,
+    Role: Role,
+    ModifyAMQPClusterResponse: ModifyAMQPClusterResponse,
+    Sort: Sort,
+    AMQPClusterConfig: AMQPClusterConfig,
+    DescribeAMQPExchangesRequest: DescribeAMQPExchangesRequest,
+    CreateRocketMQNamespaceResponse: CreateRocketMQNamespaceResponse,
+    ModifyAMQPExchangeRequest: ModifyAMQPExchangeRequest,
     SendBatchMessagesRequest: SendBatchMessagesRequest,
     DeleteCmqTopicRequest: DeleteCmqTopicRequest,
+    DeleteAMQPRouteRelationRequest: DeleteAMQPRouteRelationRequest,
     SendCmqMsgResponse: SendCmqMsgResponse,
+    DescribeNodeHealthOptResponse: DescribeNodeHealthOptResponse,
+    PublishCmqMsgRequest: PublishCmqMsgRequest,
     UnbindCmqDeadLetterRequest: UnbindCmqDeadLetterRequest,
-    ModifyCmqQueueAttributeRequest: ModifyCmqQueueAttributeRequest,
+    CreateAMQPRouteRelationRequest: CreateAMQPRouteRelationRequest,
     DeleteCmqSubscribeResponse: DeleteCmqSubscribeResponse,
-    ModifyEnvironmentAttributesResponse: ModifyEnvironmentAttributesResponse,
+    DescribePublisherSummaryRequest: DescribePublisherSummaryRequest,
     DeleteSubscriptionsRequest: DeleteSubscriptionsRequest,
-    EnvironmentRole: EnvironmentRole,
+    SendCmqMsgRequest: SendCmqMsgRequest,
+    ModifyCmqQueueAttributeRequest: ModifyCmqQueueAttributeRequest,
+    ModifyRocketMQGroupResponse: ModifyRocketMQGroupResponse,
+    AMQPClusterDetail: AMQPClusterDetail,
+    DescribeClusterDetailResponse: DescribeClusterDetailResponse,
+    SendMessagesRequest: SendMessagesRequest,
+    ModifyRocketMQNamespaceRequest: ModifyRocketMQNamespaceRequest,
+    DeleteAMQPVHostResponse: DeleteAMQPVHostResponse,
+    DescribeAllTenantsRequest: DescribeAllTenantsRequest,
 
 }

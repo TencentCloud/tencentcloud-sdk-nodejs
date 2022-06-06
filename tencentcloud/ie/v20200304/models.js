@@ -17,6 +17,45 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * 视频超分
+ * @class
+ */
+class VideoSuperResolution extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 超分视频类型：可选值：lq,hq
+lq: 针对低清晰度有较多噪声视频的超分;
+hq: 针对高清晰度视频超分;
+默认取值：lq。
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 超分倍数，可选值：2。
+注意：当前只支持两倍超分。
+         * @type {number || null}
+         */
+        this.Size = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Size = 'Size' in params ? params.Size : null;
+
+    }
+}
+
+/**
  * 编辑处理/拼接任务/处理结果
  * @class
  */
@@ -148,7 +187,7 @@ class CosAuthMode extends  AbstractModel {
 
         /**
          * 授权类型，可选值： 
-0：bucket授权，需要将对应bucket授权给本服务帐号（3020447271），否则会读写cos失败； 
+0：bucket授权，需要将对应bucket授权给本服务帐号（3020447271和100012301793），否则会读写cos失败； 
 1：key托管，把cos的账号id和key托管于本服务，本服务会提供一个托管id； 
 3：临时key授权。
 注意：目前智能编辑还不支持临时key授权；画质重生目前只支持bucket授权
@@ -633,8 +672,7 @@ class VideoInfo extends  AbstractModel {
          * 编码器支持选项，可选值：
 h264,
 h265,
-av1
-。
+av1。
 不填默认h264。
          * @type {string || null}
          */
@@ -672,6 +710,12 @@ hlg。
          * @type {HiddenMarkInfo || null}
          */
         this.HiddenMarkInfo = null;
+
+        /**
+         * 文本水印参数信息。
+         * @type {Array.<TextMarkInfoItem> || null}
+         */
+        this.TextMarkInfo = null;
 
     }
 
@@ -717,6 +761,15 @@ hlg。
             let obj = new HiddenMarkInfo();
             obj.deserialize(params.HiddenMarkInfo)
             this.HiddenMarkInfo = obj;
+        }
+
+        if (params.TextMarkInfo) {
+            this.TextMarkInfo = new Array();
+            for (let z in params.TextMarkInfo) {
+                let obj = new TextMarkInfoItem();
+                obj.deserialize(params.TextMarkInfo[z]);
+                this.TextMarkInfo.push(obj);
+            }
         }
 
     }
@@ -1401,8 +1454,7 @@ class ArtifactReduction extends  AbstractModel {
 edaf,
 wdaf，
 默认edaf。
-注意：edaf：速度快，去毛刺效果强，保护边缘效果较弱；
-wdaf：速度慢，保护边缘效果好
+注意：此参数已经弃用
          * @type {string || null}
          */
         this.Algorithm = null;
@@ -1873,7 +1925,7 @@ class UrlInfo extends  AbstractModel {
         this.Format = null;
 
         /**
-         * 指定请求资源时，HTTP头部host的值。
+         * 【不再支持】指定请求资源时，HTTP头部host的值。
          * @type {string || null}
          */
         this.Host = null;
@@ -2757,14 +2809,13 @@ class AudioInfoResultItem extends  AbstractModel {
         super();
 
         /**
-         * 音频流的流id
+         * 音频流的流id。
          * @type {number || null}
          */
         this.Stream = null;
 
         /**
          * 音频采样率 。
-注意：此字段可能返回 null，表示取不到有效值。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
@@ -2773,14 +2824,12 @@ class AudioInfoResultItem extends  AbstractModel {
         /**
          * 音频声道数。
 注意：此字段可能返回 null，表示取不到有效值。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.Channel = null;
 
         /**
          * 编码格式，如aac, mp3等。
-注意：此字段可能返回 null，表示取不到有效值。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -2789,14 +2838,12 @@ class AudioInfoResultItem extends  AbstractModel {
         /**
          * 码率，单位：bps。
 注意：此字段可能返回 null，表示取不到有效值。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.Bitrate = null;
 
         /**
          * 音频时长，单位：ms。
-注意：此字段可能返回 null，表示取不到有效值。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
@@ -3597,7 +3644,6 @@ class SubTaskResultItem extends  AbstractModel {
         /**
          * 子任务名称。
 注意：此字段可能返回 null，表示取不到有效值。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.TaskName = null;
@@ -3620,14 +3666,12 @@ class SubTaskResultItem extends  AbstractModel {
         /**
          * 子任务进度。
 注意：此字段可能返回 null，表示取不到有效值。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.ProgressRate = null;
 
         /**
          * 画质重生处理后文件的下载地址。
-注意：此字段可能返回 null，表示取不到有效值。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -3636,14 +3680,12 @@ class SubTaskResultItem extends  AbstractModel {
         /**
          * 画质重生处理后文件的MD5。
 注意：此字段可能返回 null，表示取不到有效值。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Md5 = null;
 
         /**
          * 画质重生处理后文件的详细信息。
-注意：此字段可能返回 null，表示取不到有效值。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {FileInfo || null}
          */
@@ -3779,7 +3821,6 @@ class FileInfo extends  AbstractModel {
 
         /**
          * 任务结束后生成的文件大小。
-注意：此字段可能返回 null，表示取不到有效值 。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
@@ -3787,7 +3828,6 @@ class FileInfo extends  AbstractModel {
 
         /**
          * 任务结束后生成的文件格式，例如：mp4,flv等等。
-注意：此字段可能返回 null，表示取不到有效值 。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -3796,14 +3836,12 @@ class FileInfo extends  AbstractModel {
         /**
          * 任务结束后生成的文件整体码率，单位：bps。
 注意：此字段可能返回 null，表示取不到有效值。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.Bitrate = null;
 
         /**
          * 任务结束后生成的文件时长，单位：ms。
-注意：此字段可能返回 null，表示取不到有效值。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
@@ -3812,14 +3850,12 @@ class FileInfo extends  AbstractModel {
         /**
          * 任务结束后生成的文件视频信息。
 注意：此字段可能返回 null，表示取不到有效值。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<VideoInfoResultItem> || null}
          */
         this.VideoInfoResult = null;
 
         /**
          * 任务结束后生成的文件音频信息。
-注意：此字段可能返回 null，表示取不到有效值。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<AudioInfoResultItem> || null}
          */
@@ -3988,6 +4024,7 @@ class VideoEnhance extends  AbstractModel {
 
         /**
          * 超分参数，可选项：2，目前仅支持2倍超分。
+注意：此参数已经弃用，超分可以使用VideoSuperResolution参数
          * @type {number || null}
          */
         this.WdSuperResolution = null;
@@ -4016,6 +4053,18 @@ class VideoEnhance extends  AbstractModel {
          * @type {LowLightEnhance || null}
          */
         this.LowLightEnhance = null;
+
+        /**
+         * 视频超分参数
+         * @type {VideoSuperResolution || null}
+         */
+        this.VideoSuperResolution = null;
+
+        /**
+         * 视频画质修复参数
+         * @type {VideoRepair || null}
+         */
+        this.VideoRepair = null;
 
     }
 
@@ -4070,6 +4119,47 @@ class VideoEnhance extends  AbstractModel {
             obj.deserialize(params.LowLightEnhance)
             this.LowLightEnhance = obj;
         }
+
+        if (params.VideoSuperResolution) {
+            let obj = new VideoSuperResolution();
+            obj.deserialize(params.VideoSuperResolution)
+            this.VideoSuperResolution = obj;
+        }
+
+        if (params.VideoRepair) {
+            let obj = new VideoRepair();
+            obj.deserialize(params.VideoRepair)
+            this.VideoRepair = obj;
+        }
+
+    }
+}
+
+/**
+ * 综合画质修复，包括：去噪，去毛刺，细节增强，主观画质提升。
+ * @class
+ */
+class VideoRepair extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 画质修复类型，可选值：weak，normal，strong;
+默认值: weak
+         * @type {string || null}
+         */
+        this.Type = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
 
     }
 }
@@ -4528,6 +4618,76 @@ class FrameTagResult extends  AbstractModel {
 }
 
 /**
+ * 画质重生子任务文字水印信息
+ * @class
+ */
+class TextMarkInfoItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 文字内容。
+         * @type {string || null}
+         */
+        this.Text = null;
+
+        /**
+         * 文字水印X坐标。
+         * @type {number || null}
+         */
+        this.PosX = null;
+
+        /**
+         * 文字水印Y坐标。
+         * @type {number || null}
+         */
+        this.PosY = null;
+
+        /**
+         * 文字大小
+         * @type {number || null}
+         */
+        this.FontSize = null;
+
+        /**
+         * 字体，可选项：hei,song，simkai,arial；默认hei(黑体）。
+         * @type {string || null}
+         */
+        this.FontFile = null;
+
+        /**
+         * 字体颜色，颜色见附录，不填默认black。
+         * @type {string || null}
+         */
+        this.FontColor = null;
+
+        /**
+         * 文字透明度，可选值0-1。0：不透明，1：全透明。默认为0
+         * @type {number || null}
+         */
+        this.FontAlpha = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Text = 'Text' in params ? params.Text : null;
+        this.PosX = 'PosX' in params ? params.PosX : null;
+        this.PosY = 'PosY' in params ? params.PosY : null;
+        this.FontSize = 'FontSize' in params ? params.FontSize : null;
+        this.FontFile = 'FontFile' in params ? params.FontFile : null;
+        this.FontColor = 'FontColor' in params ? params.FontColor : null;
+        this.FontAlpha = 'FontAlpha' in params ? params.FontAlpha : null;
+
+    }
+}
+
+/**
  * 编辑处理/剪切任务/时间信息
  * @class
  */
@@ -4866,14 +5026,12 @@ class VideoInfoResultItem extends  AbstractModel {
         /**
          * 视频宽度。
 注意：此字段可能返回 null，表示取不到有效值。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.Width = null;
 
         /**
          * 视频高度。
-注意：此字段可能返回 null，表示取不到有效值。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
@@ -4882,14 +5040,12 @@ class VideoInfoResultItem extends  AbstractModel {
         /**
          * 视频码率，单位：bps。
 注意：此字段可能返回 null，表示取不到有效值。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.Bitrate = null;
 
         /**
          * 视频帧率，用分数格式表示，如：25/1, 99/32等等。
-注意：此字段可能返回 null，表示取不到有效值 。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -4898,14 +5054,12 @@ class VideoInfoResultItem extends  AbstractModel {
         /**
          * 编码格式，如h264,h265等等 。
 注意：此字段可能返回 null，表示取不到有效值。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Codec = null;
 
         /**
          * 播放旋转角度，可选值0-360。
-注意：此字段可能返回 null，表示取不到有效值。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
@@ -4914,14 +5068,12 @@ class VideoInfoResultItem extends  AbstractModel {
         /**
          * 视频时长，单位：ms 。
 注意：此字段可能返回 null，表示取不到有效值。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.Duration = null;
 
         /**
          * 颜色空间，如yuv420p，yuv444p等等。
-注意：此字段可能返回 null，表示取不到有效值。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -5620,6 +5772,7 @@ class HighlightsTaskResultItemSegment extends  AbstractModel {
 }
 
 module.exports = {
+    VideoSuperResolution: VideoSuperResolution,
     MediaJoiningTaskResult: MediaJoiningTaskResult,
     Denoise: Denoise,
     StripTaskResultItem: StripTaskResultItem,
@@ -5697,6 +5850,7 @@ module.exports = {
     ResultAudioInfo: ResultAudioInfo,
     OpeningEndingTaskResult: OpeningEndingTaskResult,
     VideoEnhance: VideoEnhance,
+    VideoRepair: VideoRepair,
     QualityControlResultItems: QualityControlResultItems,
     FrameTagItem: FrameTagItem,
     QualityControlItem: QualityControlItem,
@@ -5706,6 +5860,7 @@ module.exports = {
     CosInfo: CosInfo,
     MediaResultInfo: MediaResultInfo,
     FrameTagResult: FrameTagResult,
+    TextMarkInfoItem: TextMarkInfoItem,
     MediaCuttingTimeInfo: MediaCuttingTimeInfo,
     TargetInfo: TargetInfo,
     CreateMediaQualityRestorationTaskRequest: CreateMediaQualityRestorationTaskRequest,

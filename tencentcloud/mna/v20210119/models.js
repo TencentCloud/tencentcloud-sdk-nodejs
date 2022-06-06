@@ -52,6 +52,34 @@ class Capacity extends  AbstractModel {
 }
 
 /**
+ * DescribeQos请求参数结构体
+ * @class
+ */
+class DescribeQosRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 单次加速唯一 Id
+         * @type {string || null}
+         */
+        this.SessionId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
+
+    }
+}
+
+/**
  * 移动网络加速目标地址结构体
  * @class
  */
@@ -75,6 +103,97 @@ class DestAddressInfo extends  AbstractModel {
             return;
         }
         this.DestIp = 'DestIp' in params ? params.DestIp : null;
+
+    }
+}
+
+/**
+ * 测速数据
+ * @class
+ */
+class NetworkData extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 时延数组，最大长度30
+         * @type {Array.<number> || null}
+         */
+        this.RTT = null;
+
+        /**
+         * 丢包率
+         * @type {number || null}
+         */
+        this.Loss = null;
+
+        /**
+         * 抖动
+         * @type {number || null}
+         */
+        this.Jitter = null;
+
+        /**
+         * 10位秒级时间戳
+         * @type {number || null}
+         */
+        this.Timestamp = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RTT = 'RTT' in params ? params.RTT : null;
+        this.Loss = 'Loss' in params ? params.Loss : null;
+        this.Jitter = 'Jitter' in params ? params.Jitter : null;
+        this.Timestamp = 'Timestamp' in params ? params.Timestamp : null;
+
+    }
+}
+
+/**
+ * 移动网络加速源地址结构体
+ * @class
+ */
+class SrcAddressInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 用户私网 ipv4 地址
+         * @type {string || null}
+         */
+        this.SrcIpv4 = null;
+
+        /**
+         * 用户公网 ipv4 地址
+         * @type {string || null}
+         */
+        this.SrcPublicIpv4 = null;
+
+        /**
+         * 用户 ipv6 地址
+         * @type {string || null}
+         */
+        this.SrcIpv6 = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SrcIpv4 = 'SrcIpv4' in params ? params.SrcIpv4 : null;
+        this.SrcPublicIpv4 = 'SrcPublicIpv4' in params ? params.SrcPublicIpv4 : null;
+        this.SrcIpv6 = 'SrcIpv6' in params ? params.SrcIpv6 : null;
 
     }
 }
@@ -178,6 +297,48 @@ Android 填写 IMEI
 }
 
 /**
+ * 用户期望门限
+ * @class
+ */
+class ExpectedThreshold extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 期望发起加速的时延阈值
+         * @type {number || null}
+         */
+        this.RTT = null;
+
+        /**
+         * 期望发起加速的丢包率阈值
+         * @type {number || null}
+         */
+        this.Loss = null;
+
+        /**
+         * 期望发起加速的抖动阈值
+         * @type {number || null}
+         */
+        this.Jitter = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RTT = 'RTT' in params ? params.RTT : null;
+        this.Loss = 'Loss' in params ? params.Loss : null;
+        this.Jitter = 'Jitter' in params ? params.Jitter : null;
+
+    }
+}
+
+/**
  * DeleteQos返回参数结构体
  * @class
  */
@@ -215,6 +376,63 @@ class DeleteQosResponse extends  AbstractModel {
         this.SessionId = 'SessionId' in params ? params.SessionId : null;
         this.Duration = 'Duration' in params ? params.Duration : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 加速策略关键数据
+ * @class
+ */
+class Context extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 测速数据
+         * @type {NetworkData || null}
+         */
+        this.NetworkData = null;
+
+        /**
+         * 用户期望最低门限
+         * @type {ExpectedThreshold || null}
+         */
+        this.ExpectedLowThreshold = null;
+
+        /**
+         * 用户期望最高门限
+         * @type {ExpectedThreshold || null}
+         */
+        this.ExpectedHighThreshold = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.NetworkData) {
+            let obj = new NetworkData();
+            obj.deserialize(params.NetworkData)
+            this.NetworkData = obj;
+        }
+
+        if (params.ExpectedLowThreshold) {
+            let obj = new ExpectedThreshold();
+            obj.deserialize(params.ExpectedLowThreshold)
+            this.ExpectedLowThreshold = obj;
+        }
+
+        if (params.ExpectedHighThreshold) {
+            let obj = new ExpectedThreshold();
+            obj.deserialize(params.ExpectedHighThreshold)
+            this.ExpectedHighThreshold = obj;
+        }
 
     }
 }
@@ -262,30 +480,53 @@ class CreateQosResponse extends  AbstractModel {
 }
 
 /**
- * 移动网络加速源地址结构体
+ * DescribeQos返回参数结构体
  * @class
  */
-class SrcAddressInfo extends  AbstractModel {
+class DescribeQosResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 用户私网 ipv4 地址
-         * @type {string || null}
+         * 0：无匹配的加速中会话
+1：存在匹配的加速中会话
+         * @type {number || null}
          */
-        this.SrcIpv4 = null;
+        this.Status = null;
 
         /**
-         * 用户公网 ipv4 地址
+         * 手机公网出口IP，仅匹配时返回
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.SrcPublicIpv4 = null;
 
         /**
-         * 用户 ipv6 地址
+         * 业务访问目的IP，仅匹配时返回
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.DestIpv4 = null;
+
+        /**
+         * 当前加速剩余时长（单位秒）有，仅匹配时返回
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Duration = null;
+
+        /**
+         * 加速套餐类型，仅匹配时返回
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.SrcIpv6 = null;
+        this.QosMenu = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -296,9 +537,12 @@ class SrcAddressInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SrcIpv4 = 'SrcIpv4' in params ? params.SrcIpv4 : null;
+        this.Status = 'Status' in params ? params.Status : null;
         this.SrcPublicIpv4 = 'SrcPublicIpv4' in params ? params.SrcPublicIpv4 : null;
-        this.SrcIpv6 = 'SrcIpv6' in params ? params.SrcIpv6 : null;
+        this.DestIpv4 = 'DestIpv4' in params ? params.DestIpv4 : null;
+        this.Duration = 'Duration' in params ? params.Duration : null;
+        this.QosMenu = 'QosMenu' in params ? params.QosMenu : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -325,15 +569,15 @@ class CreateQosRequest extends  AbstractModel {
 
         /**
          * 加速套餐
-T100K：上/下行保障 100kbps
-T200K：上/下行保障 200kbps
-T400K：上/下行保障 400kbps
-BD1M：下行带宽保障1Mbps
-BD2M：下行带宽保障2Mbps
-BD4M：下行带宽保障4Mbps
-BU1M：上行带宽保障1Mbps
-BU2M：上行带宽保障2Mbps
-BU4M：上行带宽保障4Mbps
+T100K：时延性保障 + 带宽保障上下行保障 100kbps
+T200K：时延性保障 + 带宽保障上下行保障 200kbps
+T400K：时延性保障 + 带宽保障上下行保障  400kbps
+BD1M：带宽型保障 + 下行带宽保障1Mbps
+BD2M：带宽型保障 + 下行带宽保障2Mbps
+BD4M：带宽型保障 + 下行带宽保障4Mbps
+BU1M：带宽型保障 + 上行带宽保障1Mbps
+BU2M：带宽型保障 + 上行带宽保障2Mbps
+BU4M：带宽型保障 + 上行带宽保障4Mbps
          * @type {string || null}
          */
         this.QosMenu = null;
@@ -355,6 +599,33 @@ BU4M：上行带宽保障4Mbps
          * @type {Capacity || null}
          */
         this.Capacity = null;
+
+        /**
+         * 应用模板ID
+         * @type {string || null}
+         */
+        this.TemplateId = null;
+
+        /**
+         * 针对特殊协议进行加速
+1. IP （默认值）
+2. UDP
+3. TCP
+         * @type {number || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * 加速策略关键数据
+         * @type {Context || null}
+         */
+        this.Context = null;
+
+        /**
+         * 签名
+         * @type {string || null}
+         */
+        this.Extern = null;
 
     }
 
@@ -391,18 +662,32 @@ BU4M：上行带宽保障4Mbps
             obj.deserialize(params.Capacity)
             this.Capacity = obj;
         }
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+
+        if (params.Context) {
+            let obj = new Context();
+            obj.deserialize(params.Context)
+            this.Context = obj;
+        }
+        this.Extern = 'Extern' in params ? params.Extern : null;
 
     }
 }
 
 module.exports = {
     Capacity: Capacity,
+    DescribeQosRequest: DescribeQosRequest,
     DestAddressInfo: DestAddressInfo,
+    NetworkData: NetworkData,
+    SrcAddressInfo: SrcAddressInfo,
     DeleteQosRequest: DeleteQosRequest,
     DeviceInfo: DeviceInfo,
+    ExpectedThreshold: ExpectedThreshold,
     DeleteQosResponse: DeleteQosResponse,
+    Context: Context,
     CreateQosResponse: CreateQosResponse,
-    SrcAddressInfo: SrcAddressInfo,
+    DescribeQosResponse: DescribeQosResponse,
     CreateQosRequest: CreateQosRequest,
 
 }

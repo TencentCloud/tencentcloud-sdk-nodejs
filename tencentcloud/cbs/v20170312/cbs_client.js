@@ -16,89 +16,99 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const DetachDisksRequest = models.DetachDisksRequest;
-const DescribeDiskOperationLogsResponse = models.DescribeDiskOperationLogsResponse;
-const ResizeDiskRequest = models.ResizeDiskRequest;
-const RenewDiskRequest = models.RenewDiskRequest;
-const Price = models.Price;
-const DescribeSnapshotSharePermissionResponse = models.DescribeSnapshotSharePermissionResponse;
-const SharePermission = models.SharePermission;
 const ModifyDiskExtraPerformanceRequest = models.ModifyDiskExtraPerformanceRequest;
 const ModifyDiskAttributesResponse = models.ModifyDiskAttributesResponse;
-const TerminateDisksRequest = models.TerminateDisksRequest;
-const ModifyDisksChargeTypeResponse = models.ModifyDisksChargeTypeResponse;
-const DescribeDisksRequest = models.DescribeDisksRequest;
-const DescribeInstancesDiskNumRequest = models.DescribeInstancesDiskNumRequest;
 const AutoSnapshotPolicy = models.AutoSnapshotPolicy;
-const Policy = models.Policy;
-const ModifySnapshotsSharePermissionResponse = models.ModifySnapshotsSharePermissionResponse;
-const InquirePriceModifyDiskExtraPerformanceRequest = models.InquirePriceModifyDiskExtraPerformanceRequest;
-const GetSnapOverviewRequest = models.GetSnapOverviewRequest;
 const DescribeSnapshotOperationLogsRequest = models.DescribeSnapshotOperationLogsRequest;
-const ModifySnapshotAttributeRequest = models.ModifySnapshotAttributeRequest;
-const InquiryPriceRenewDisksRequest = models.InquiryPriceRenewDisksRequest;
-const DescribeSnapshotSharePermissionRequest = models.DescribeSnapshotSharePermissionRequest;
-const RenewDiskResponse = models.RenewDiskResponse;
-const InquiryPriceRenewDisksResponse = models.InquiryPriceRenewDisksResponse;
-const ModifyDisksRenewFlagRequest = models.ModifyDisksRenewFlagRequest;
+const CopySnapshotCrossRegionsResponse = models.CopySnapshotCrossRegionsResponse;
 const ModifyAutoSnapshotPolicyAttributeResponse = models.ModifyAutoSnapshotPolicyAttributeResponse;
-const ModifyDisksChargeTypeRequest = models.ModifyDisksChargeTypeRequest;
-const ModifyDiskExtraPerformanceResponse = models.ModifyDiskExtraPerformanceResponse;
-const UnbindAutoSnapshotPolicyResponse = models.UnbindAutoSnapshotPolicyResponse;
 const InquiryPriceCreateDisksResponse = models.InquiryPriceCreateDisksResponse;
-const DiskConfig = models.DiskConfig;
 const BindAutoSnapshotPolicyRequest = models.BindAutoSnapshotPolicyRequest;
 const CreateSnapshotResponse = models.CreateSnapshotResponse;
-const DeleteSnapshotsRequest = models.DeleteSnapshotsRequest;
-const DescribeDiskConfigQuotaRequest = models.DescribeDiskConfigQuotaRequest;
-const DeleteAutoSnapshotPoliciesRequest = models.DeleteAutoSnapshotPoliciesRequest;
-const DiskChargePrepaid = models.DiskChargePrepaid;
-const DescribeSnapshotOperationLogsResponse = models.DescribeSnapshotOperationLogsResponse;
-const ModifyDisksRenewFlagResponse = models.ModifyDisksRenewFlagResponse;
-const DescribeDiskAssociatedAutoSnapshotPolicyResponse = models.DescribeDiskAssociatedAutoSnapshotPolicyResponse;
+const DescribeAutoSnapshotPoliciesRequest = models.DescribeAutoSnapshotPoliciesRequest;
+const ModifySnapshotsSharePermissionResponse = models.ModifySnapshotsSharePermissionResponse;
+const InitializeDisksResponse = models.InitializeDisksResponse;
+const DescribeDiskStoragePoolRequest = models.DescribeDiskStoragePoolRequest;
+const SnapshotOperationLog = models.SnapshotOperationLog;
+const SnapshotCopyResult = models.SnapshotCopyResult;
+const RenewDiskRequest = models.RenewDiskRequest;
+const InquirePriceModifyDiskExtraPerformanceResponse = models.InquirePriceModifyDiskExtraPerformanceResponse;
+const CreateDisksRequest = models.CreateDisksRequest;
+const AttachDisksRequest = models.AttachDisksRequest;
+const DescribeDiskAssociatedAutoSnapshotPolicyRequest = models.DescribeDiskAssociatedAutoSnapshotPolicyRequest;
+const DescribeSnapshotsRequest = models.DescribeSnapshotsRequest;
+const ModifyAutoSnapshotPolicyAttributeRequest = models.ModifyAutoSnapshotPolicyAttributeRequest;
+const DescribeDiskConfigQuotaResponse = models.DescribeDiskConfigQuotaResponse;
+const InquiryPriceResizeDiskResponse = models.InquiryPriceResizeDiskResponse;
+const Tag = models.Tag;
+const ResizeDiskResponse = models.ResizeDiskResponse;
+const Disk = models.Disk;
 const TerminateDisksResponse = models.TerminateDisksResponse;
-const GetSnapOverviewResponse = models.GetSnapOverviewResponse;
 const ApplySnapshotResponse = models.ApplySnapshotResponse;
+const DetachDisksRequest = models.DetachDisksRequest;
+const ModifyDisksChargeTypeResponse = models.ModifyDisksChargeTypeResponse;
+const CreateSnapshotRequest = models.CreateSnapshotRequest;
+const DescribeInstancesDiskNumRequest = models.DescribeInstancesDiskNumRequest;
+const DescribeSnapshotSharePermissionResponse = models.DescribeSnapshotSharePermissionResponse;
+const CopySnapshotCrossRegionsRequest = models.CopySnapshotCrossRegionsRequest;
+const InquiryPriceRenewDisksRequest = models.InquiryPriceRenewDisksRequest;
+const DescribeSnapshotSharePermissionRequest = models.DescribeSnapshotSharePermissionRequest;
+const DescribeSnapshotOperationLogsResponse = models.DescribeSnapshotOperationLogsResponse;
+const DeleteSnapshotsRequest = models.DeleteSnapshotsRequest;
+const ModifyDisksRenewFlagResponse = models.ModifyDisksRenewFlagResponse;
 const DeleteAutoSnapshotPoliciesResponse = models.DeleteAutoSnapshotPoliciesResponse;
 const DescribeDisksResponse = models.DescribeDisksResponse;
-const ModifySnapshotAttributeResponse = models.ModifySnapshotAttributeResponse;
-const PrepayPrice = models.PrepayPrice;
+const Placement = models.Placement;
 const DeleteSnapshotsResponse = models.DeleteSnapshotsResponse;
-const DetachDisksResponse = models.DetachDisksResponse;
+const ModifyDisksRenewFlagRequest = models.ModifyDisksRenewFlagRequest;
+const ModifyDiskAttributesRequest = models.ModifyDiskAttributesRequest;
+const GetSnapOverviewRequest = models.GetSnapOverviewRequest;
+const Image = models.Image;
+const TerminateDisksRequest = models.TerminateDisksRequest;
+const CdcSize = models.CdcSize;
+const DescribeInstancesDiskNumResponse = models.DescribeInstancesDiskNumResponse;
+const DescribeDiskOperationLogsResponse = models.DescribeDiskOperationLogsResponse;
+const ResizeDiskRequest = models.ResizeDiskRequest;
+const ModifyDisksChargeTypeRequest = models.ModifyDisksChargeTypeRequest;
+const InitializeDisksRequest = models.InitializeDisksRequest;
+const CreateAutoSnapshotPolicyResponse = models.CreateAutoSnapshotPolicyResponse;
+const ModifySnapshotAttributeRequest = models.ModifySnapshotAttributeRequest;
+const UnbindAutoSnapshotPolicyRequest = models.UnbindAutoSnapshotPolicyRequest;
+const DiskConfig = models.DiskConfig;
+const DeleteAutoSnapshotPoliciesRequest = models.DeleteAutoSnapshotPoliciesRequest;
+const DiskChargePrepaid = models.DiskChargePrepaid;
 const Filter = models.Filter;
 const InquiryPriceCreateDisksRequest = models.InquiryPriceCreateDisksRequest;
 const DescribeSnapshotsResponse = models.DescribeSnapshotsResponse;
 const Snapshot = models.Snapshot;
-const SnapshotOperationLog = models.SnapshotOperationLog;
 const CreateDisksResponse = models.CreateDisksResponse;
 const AttachDisksResponse = models.AttachDisksResponse;
-const CreateAutoSnapshotPolicyResponse = models.CreateAutoSnapshotPolicyResponse;
 const ModifySnapshotsSharePermissionRequest = models.ModifySnapshotsSharePermissionRequest;
 const DiskOperationLog = models.DiskOperationLog;
-const UnbindAutoSnapshotPolicyRequest = models.UnbindAutoSnapshotPolicyRequest;
-const DescribeDiskOperationLogsRequest = models.DescribeDiskOperationLogsRequest;
-const InquirePriceModifyDiskExtraPerformanceResponse = models.InquirePriceModifyDiskExtraPerformanceResponse;
 const BindAutoSnapshotPolicyResponse = models.BindAutoSnapshotPolicyResponse;
-const CreateDisksRequest = models.CreateDisksRequest;
-const AttachDisksRequest = models.AttachDisksRequest;
-const DescribeAutoSnapshotPoliciesResponse = models.DescribeAutoSnapshotPoliciesResponse;
-const DescribeDiskAssociatedAutoSnapshotPolicyRequest = models.DescribeDiskAssociatedAutoSnapshotPolicyRequest;
-const DescribeAutoSnapshotPoliciesRequest = models.DescribeAutoSnapshotPoliciesRequest;
-const Image = models.Image;
-const DescribeDiskConfigQuotaResponse = models.DescribeDiskConfigQuotaResponse;
-const ModifyDiskAttributesRequest = models.ModifyDiskAttributesRequest;
-const CreateSnapshotRequest = models.CreateSnapshotRequest;
-const AttachDetail = models.AttachDetail;
-const InquiryPriceResizeDiskResponse = models.InquiryPriceResizeDiskResponse;
-const DescribeInstancesDiskNumResponse = models.DescribeInstancesDiskNumResponse;
-const ResizeDiskResponse = models.ResizeDiskResponse;
-const DescribeSnapshotsRequest = models.DescribeSnapshotsRequest;
-const Placement = models.Placement;
-const CreateAutoSnapshotPolicyRequest = models.CreateAutoSnapshotPolicyRequest;
+const DescribeDiskOperationLogsRequest = models.DescribeDiskOperationLogsRequest;
+const DescribeDisksRequest = models.DescribeDisksRequest;
+const DetachDisksResponse = models.DetachDisksResponse;
+const InquiryPriceRenewDisksResponse = models.InquiryPriceRenewDisksResponse;
+const SharePermission = models.SharePermission;
+const DescribeDiskStoragePoolResponse = models.DescribeDiskStoragePoolResponse;
+const Policy = models.Policy;
+const Price = models.Price;
+const InquirePriceModifyDiskExtraPerformanceRequest = models.InquirePriceModifyDiskExtraPerformanceRequest;
 const InquiryPriceResizeDiskRequest = models.InquiryPriceResizeDiskRequest;
-const Disk = models.Disk;
-const ModifyAutoSnapshotPolicyAttributeRequest = models.ModifyAutoSnapshotPolicyAttributeRequest;
-const Tag = models.Tag;
+const DescribeDiskConfigQuotaRequest = models.DescribeDiskConfigQuotaRequest;
+const DescribeDiskAssociatedAutoSnapshotPolicyResponse = models.DescribeDiskAssociatedAutoSnapshotPolicyResponse;
+const GetSnapOverviewResponse = models.GetSnapOverviewResponse;
+const AutoMountConfiguration = models.AutoMountConfiguration;
+const ModifySnapshotAttributeResponse = models.ModifySnapshotAttributeResponse;
+const PrepayPrice = models.PrepayPrice;
+const RenewDiskResponse = models.RenewDiskResponse;
+const DescribeAutoSnapshotPoliciesResponse = models.DescribeAutoSnapshotPoliciesResponse;
+const Cdc = models.Cdc;
+const UnbindAutoSnapshotPolicyResponse = models.UnbindAutoSnapshotPolicyResponse;
+const AttachDetail = models.AttachDetail;
+const CreateAutoSnapshotPolicyRequest = models.CreateAutoSnapshotPolicyRequest;
+const ModifyDiskExtraPerformanceResponse = models.ModifyDiskExtraPerformanceResponse;
 const ApplySnapshotRequest = models.ApplySnapshotRequest;
 
 
@@ -137,6 +147,20 @@ class CbsClient extends AbstractClient {
     RenewDisk(req, cb) {
         let resp = new RenewDiskResponse();
         this.request("RenewDisk", req, resp, cb);
+    }
+
+    /**
+     * 本接口（CopySnapshotCrossRegions）用于快照跨地域复制。
+
+* 本接口为异步接口，当跨地域复制的请求下发成功后会返回一个新的快照ID，此时快照未立即复制到目标地域，可请求目标地域的[DescribeSnapshots](/document/product/362/15647)接口查询新快照的状态，判断是否复制完成。如果快照的状态为“NORMAL”，表示快照复制完成。
+* 本接口实现的快照跨地域复制操作将产生跨地域流量，预计2022年第三季度会针对此功能进行商业化计费；请留意后续站内信公告，避免产生预期外扣费。
+     * @param {CopySnapshotCrossRegionsRequest} req
+     * @param {function(string, CopySnapshotCrossRegionsResponse):void} cb
+     * @public
+     */
+    CopySnapshotCrossRegions(req, cb) {
+        let resp = new CopySnapshotCrossRegionsResponse();
+        this.request("CopySnapshotCrossRegions", req, resp, cb);
     }
 
     /**
@@ -244,10 +268,7 @@ class CbsClient extends AbstractClient {
     }
 
     /**
-     * 本接口（DescribeDiskOperationLogs）用于查询云盘操作日志列表。
-
-可根据云盘ID过滤。云盘ID形如：disk-a1kmcp13。
-
+     * 查询云盘操作日志功能已迁移至LookUpEvents接口（https://cloud.tencent.com/document/product/629/12359），本接口（DescribeDiskOperationLogs）即将下线，后续不再提供调用，请知悉。
      * @param {DescribeDiskOperationLogsRequest} req
      * @param {function(string, DescribeDiskOperationLogsResponse):void} cb
      * @public
@@ -268,6 +289,20 @@ class CbsClient extends AbstractClient {
     DeleteAutoSnapshotPolicies(req, cb) {
         let resp = new DeleteAutoSnapshotPoliciesResponse();
         this.request("DeleteAutoSnapshotPolicies", req, resp, cb);
+    }
+
+    /**
+     * 本接口（CreateAutoSnapshotPolicy）用于创建定期快照策略。
+
+* 每个地域可创建的定期快照策略数量限制请参考文档[定期快照](/document/product/362/8191)。
+* 每个地域可创建的快照有数量和容量的限制，具体请见腾讯云控制台快照页面提示，如果快照超配额，定期快照创建会失败。
+     * @param {CreateAutoSnapshotPolicyRequest} req
+     * @param {function(string, CreateAutoSnapshotPolicyResponse):void} cb
+     * @public
+     */
+    CreateAutoSnapshotPolicy(req, cb) {
+        let resp = new CreateAutoSnapshotPolicyResponse();
+        this.request("CreateAutoSnapshotPolicy", req, resp, cb);
     }
 
     /**
@@ -316,7 +351,7 @@ class CbsClient extends AbstractClient {
      * 本接口（DeleteSnapshots）用于删除快照。
 
 * 快照必须处于NORMAL状态，快照状态可以通过[DescribeSnapshots](/document/product/362/15647)接口查询，见输出参数中SnapshotState字段解释。
-* 支持批量操作。如果多个快照存在无法删除的快照，则操作不执行，以返回特定的错误码返回。
+* 支持批量操作。如果多个快照存在无法删除的快照，则操作不执行，以特定的错误码返回。
      * @param {DeleteSnapshotsRequest} req
      * @param {function(string, DeleteSnapshotsResponse):void} cb
      * @public
@@ -391,17 +426,18 @@ class CbsClient extends AbstractClient {
     }
 
     /**
-     * 本接口（CreateAutoSnapshotPolicy）用于创建定期快照策略。
-
-* 每个地域可创建的定期快照策略数量限制请参考文档[定期快照](/document/product/362/8191)。
-* 每个地域可创建的快照有数量和容量的限制，具体请见腾讯云控制台快照页面提示，如果快照超配额，定期快照创建会失败。
-     * @param {CreateAutoSnapshotPolicyRequest} req
-     * @param {function(string, CreateAutoSnapshotPolicyResponse):void} cb
+     * 重新初始化云硬盘至云硬盘初始创建时的状态。使用云硬盘的重新初始化功能时需要注意以下4点：
+1. 如果云硬盘是由快照创建的，则重新初始化会通过此快照重新回滚此云硬盘，即将云硬盘恢复为与快照一致的状态；
+2. 如果云硬盘不是通过快照创建的，则重新初始化会清空此云硬盘的数据；请在重新初始化云硬盘前检查并备份必要的数据；
+3. 当前仅未挂载的、非共享属性的数据盘云硬盘支持重新初始化；
+4. 当创建此云硬盘的原始快照被删除时，不再支持重新初始化此云硬盘。
+     * @param {InitializeDisksRequest} req
+     * @param {function(string, InitializeDisksResponse):void} cb
      * @public
      */
-    CreateAutoSnapshotPolicy(req, cb) {
-        let resp = new CreateAutoSnapshotPolicyResponse();
-        this.request("CreateAutoSnapshotPolicy", req, resp, cb);
+    InitializeDisks(req, cb) {
+        let resp = new InitializeDisksResponse();
+        this.request("InitializeDisks", req, resp, cb);
     }
 
     /**
@@ -463,6 +499,20 @@ class CbsClient extends AbstractClient {
     }
 
     /**
+     * 本接口（DescribeDiskStoragePool）查询用户的云硬盘独享集群列表。
+
+* 可以根据独享集群ID(CdcId)、可用区(zone)等信息来查询和过滤云硬盘独享集群详细信息，不同的过滤条件之间为与(AND)的关系，过滤信息详细请见过滤器`Filter`。
+* 如果参数为空，返回当前用户一定数量（`Limit`所指定的数量，默认为20）的云硬盘独享集群列表。
+     * @param {DescribeDiskStoragePoolRequest} req
+     * @param {function(string, DescribeDiskStoragePoolResponse):void} cb
+     * @public
+     */
+    DescribeDiskStoragePool(req, cb) {
+        let resp = new DescribeDiskStoragePoolResponse();
+        this.request("DescribeDiskStoragePool", req, resp, cb);
+    }
+
+    /**
      * 本接口（ApplySnapshot）用于回滚快照到原云硬盘。
 
 * 仅支持回滚到原云硬盘上。对于数据盘快照，如果您需要复制快照数据到其它云硬盘上，请使用[CreateDisks](/document/product/362/16312)接口创建新的弹性云盘，将快照数据复制到新购云盘上。 
@@ -513,6 +563,7 @@ class CbsClient extends AbstractClient {
 
 * 只有具有快照能力的云硬盘才能创建快照。云硬盘是否具有快照能力可由[DescribeDisks](/document/product/362/16315)接口查询，见SnapshotAbility字段。
 * 可创建快照数量限制见[产品使用限制](https://cloud.tencent.com/doc/product/362/5145)。
+* 当前支持将备份点转化为普通快照，转化之后可能会收取快照使用费用，备份点不保留，其占用的备份点配额也将被释放。
      * @param {CreateSnapshotRequest} req
      * @param {function(string, CreateSnapshotResponse):void} cb
      * @public

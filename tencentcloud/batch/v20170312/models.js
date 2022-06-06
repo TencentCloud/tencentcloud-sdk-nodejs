@@ -878,7 +878,7 @@ class Task extends  AbstractModel {
         this.RestartComputeNode = null;
 
         /**
-         * 启动任务过程中，创建计算资源如CVM失败后的最大重试次数，默认为0。
+         * 启动任务过程中，创建计算资源如CVM失败后的最大重试次数，默认为0。最大值100。
          * @type {number || null}
          */
         this.ResourceMaxRetryCount = null;
@@ -2500,6 +2500,15 @@ class Job extends  AbstractModel {
          */
         this.Tags = null;
 
+        /**
+         * 表示通知信息的通知目标类型。
+取值范围：CMQ，TDMQ_CMQ。
+CMQ:表示向腾讯云CMQ发送消息。
+TDMQ_CMQ：表示向腾讯云TDMQ_CMQ发送消息。<br/>默认值为CMQ。<br/>注：腾讯云计划于2022年6月前正式下线消息队列 CMQ，建议使用TDMQ_CMQ。参考文档：[CMQ迁移到TDMQ_CMQ](https://cloud.tencent.com/document/product/406/60860)
+         * @type {string || null}
+         */
+        this.NotificationTarget = null;
+
     }
 
     /**
@@ -2550,6 +2559,7 @@ class Job extends  AbstractModel {
                 this.Tags.push(obj);
             }
         }
+        this.NotificationTarget = 'NotificationTarget' in params ? params.NotificationTarget : null;
 
     }
 }
@@ -3371,7 +3381,7 @@ class NamedCpmComputeEnv extends  AbstractModel {
         this.ActionIfComputeNodeInactive = null;
 
         /**
-         * 对于实例创建失败或异常退还的计算节点，定期重新创建实例资源的最大重试次数，最大值11，如果不设置的话，系统会设置一个默认值，当前为7
+         * 对于实例创建失败或异常退还的计算节点，定期重新创建实例资源的最大重试次数，最大值100，如果不设置的话，系统会设置一个默认值，当前为7。
          * @type {number || null}
          */
         this.ResourceMaxRetryCount = null;
@@ -3381,6 +3391,15 @@ class NamedCpmComputeEnv extends  AbstractModel {
          * @type {Array.<Tag> || null}
          */
         this.Tags = null;
+
+        /**
+         * 表示通知信息的通知目标类型。
+取值范围：CMQ，TDMQ_CMQ。
+CMQ:表示向腾讯云CMQ发送消息。
+TDMQ_CMQ：表示向腾讯云TDMQ_CMQ发送消息。<br/>默认值为CMQ。<br/>注：腾讯云计划于2022年6月前正式下线消息队列 CMQ，建议使用TDMQ_CMQ。参考文档：[CMQ迁移到TDMQ_CMQ](https://cloud.tencent.com/document/product/406/60860)
+         * @type {string || null}
+         */
+        this.NotificationTarget = null;
 
     }
 
@@ -3436,6 +3455,7 @@ class NamedCpmComputeEnv extends  AbstractModel {
                 this.Tags.push(obj);
             }
         }
+        this.NotificationTarget = 'NotificationTarget' in params ? params.NotificationTarget : null;
 
     }
 }
@@ -3762,6 +3782,7 @@ class DataDisk extends  AbstractModel {
 
         /**
          * 数据盘ID。LOCAL_BASIC 和 LOCAL_SSD 类型没有ID，暂时不支持该参数。
+该参数目前仅用于`DescribeInstances`接口。
          * @type {string || null}
          */
         this.DiskId = null;
@@ -3904,7 +3925,7 @@ class NamedComputeEnv extends  AbstractModel {
 
         /**
          * 通知信息
-         * @type {Notification || null}
+         * @type {Array.<Notification> || null}
          */
         this.Notifications = null;
 
@@ -3915,7 +3936,7 @@ class NamedComputeEnv extends  AbstractModel {
         this.ActionIfComputeNodeInactive = null;
 
         /**
-         * 对于实例创建失败或异常退还的计算节点，定期重新创建实例资源的最大重试次数，最大值11，如果不设置的话，系统会设置一个默认值，当前为7
+         * 对于实例创建失败或异常退还的计算节点，定期重新创建实例资源的最大重试次数，最大值100，如果不设置的话，系统会设置一个默认值，当前为7
          * @type {number || null}
          */
         this.ResourceMaxRetryCount = null;
@@ -3925,6 +3946,15 @@ class NamedComputeEnv extends  AbstractModel {
          * @type {Array.<Tag> || null}
          */
         this.Tags = null;
+
+        /**
+         * 表示通知信息的通知目标类型。
+取值范围：CMQ，TDMQ_CMQ。
+CMQ:表示向腾讯云CMQ发送消息。
+TDMQ_CMQ：表示向腾讯云TDMQ_CMQ发送消息。<br/>默认值为CMQ。<br/>注：腾讯云计划于2022年6月前正式下线消息队列 CMQ，建议使用TDMQ_CMQ。参考文档：[CMQ迁移到TDMQ_CMQ](https://cloud.tencent.com/document/product/406/60860)
+         * @type {string || null}
+         */
+        this.NotificationTarget = null;
 
     }
 
@@ -3980,9 +4010,12 @@ class NamedComputeEnv extends  AbstractModel {
         }
 
         if (params.Notifications) {
-            let obj = new Notification();
-            obj.deserialize(params.Notifications)
-            this.Notifications = obj;
+            this.Notifications = new Array();
+            for (let z in params.Notifications) {
+                let obj = new Notification();
+                obj.deserialize(params.Notifications[z]);
+                this.Notifications.push(obj);
+            }
         }
         this.ActionIfComputeNodeInactive = 'ActionIfComputeNodeInactive' in params ? params.ActionIfComputeNodeInactive : null;
         this.ResourceMaxRetryCount = 'ResourceMaxRetryCount' in params ? params.ResourceMaxRetryCount : null;
@@ -3995,6 +4028,7 @@ class NamedComputeEnv extends  AbstractModel {
                 this.Tags.push(obj);
             }
         }
+        this.NotificationTarget = 'NotificationTarget' in params ? params.NotificationTarget : null;
 
     }
 }
@@ -4277,6 +4311,12 @@ class EnhancedService extends  AbstractModel {
          */
         this.MonitorService = null;
 
+        /**
+         * 开启云自动化助手服务。若不指定该参数，则默认不开启云自动化助手服务。
+         * @type {RunAutomationServiceEnabled || null}
+         */
+        this.AutomationService = null;
+
     }
 
     /**
@@ -4298,6 +4338,40 @@ class EnhancedService extends  AbstractModel {
             obj.deserialize(params.MonitorService)
             this.MonitorService = obj;
         }
+
+        if (params.AutomationService) {
+            let obj = new RunAutomationServiceEnabled();
+            obj.deserialize(params.AutomationService)
+            this.AutomationService = obj;
+        }
+
+    }
+}
+
+/**
+ * 描述了 “云自动化助手” 服务相关的信息
+ * @class
+ */
+class RunAutomationServiceEnabled extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 是否开启云自动化助手。取值范围：<br><li>TRUE：表示开启云自动化助手服务<br><li>FALSE：表示不开启云自动化助手服务<br><br>默认取值：FALSE。
+         * @type {boolean || null}
+         */
+        this.Enabled = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Enabled = 'Enabled' in params ? params.Enabled : null;
 
     }
 }
@@ -4979,7 +5053,7 @@ class ModifyComputeEnvResponse extends  AbstractModel {
 }
 
 /**
- * 描述了实例的抽象位置，包括其所在的可用区，所属的项目，宿主机（仅CDH产品可用），母机ip等
+ * 描述了实例的抽象位置，包括其所在的可用区，所属的项目，宿主机（仅专用宿主机产品可用），母机ip等
  * @class
  */
 class Placement extends  AbstractModel {
@@ -5343,7 +5417,7 @@ class InstanceTypeQuotaItem extends  AbstractModel {
         this.InstanceType = null;
 
         /**
-         * 实例计费模式。取值范围： <br><li>PREPAID：表示预付费，即包年包月<br><li>POSTPAID_BY_HOUR：表示后付费，即按量计费<br><li>CDHPAID：表示[CDH](https://cloud.tencent.com/document/product/416)付费，即只对CDH计费，不对CDH上的实例计费。<br><li>`SPOTPAID`：表示竞价实例付费。
+         * 实例计费模式。取值范围： <br><li>PREPAID：表示预付费，即包年包月<br><li>POSTPAID_BY_HOUR：表示后付费，即按量计费<br><li>CDHPAID：表示[专用宿主机](https://cloud.tencent.com/document/product/416)付费，即只对`专用宿主机`计费，不对`专用宿主机`上的实例计费。<br><li>`SPOTPAID`：表示竞价实例付费。
          * @type {string || null}
          */
         this.InstanceChargeType = null;
@@ -6819,7 +6893,7 @@ class VirtualPrivateCloud extends  AbstractModel {
         this.SubnetId = null;
 
         /**
-         * 是否用作公网网关。公网网关只有在实例拥有公网IP以及处于私有网络下时才能正常使用。取值范围：<br><li>TRUE：表示用作公网网关<br><li>FALSE：表示不用作公网网关<br><br>默认取值：FALSE。
+         * 是否用作公网网关。公网网关只有在实例拥有公网IP以及处于私有网络下时才能正常使用。取值范围：<br><li>TRUE：表示用作公网网关<br><li>FALSE：表示不作为公网网关<br><br>默认取值：FALSE。
          * @type {boolean || null}
          */
         this.AsVpcGateway = null;
@@ -7234,6 +7308,7 @@ module.exports = {
     Instance: Instance,
     OutputMapping: OutputMapping,
     EnhancedService: EnhancedService,
+    RunAutomationServiceEnabled: RunAutomationServiceEnabled,
     DescribeJobSubmitInfoResponse: DescribeJobSubmitInfoResponse,
     DescribeComputeEnvCreateInfosResponse: DescribeComputeEnvCreateInfosResponse,
     RunSecurityServiceEnabled: RunSecurityServiceEnabled,

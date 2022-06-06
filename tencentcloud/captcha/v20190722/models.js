@@ -788,7 +788,7 @@ class DescribeCaptchaMiniRiskResultRequest extends  AbstractModel {
         this.Ticket = null;
 
         /**
-         * 用户操作来源的外网 IP
+         * 业务侧获取到的验证码使用者的外网IP
          * @type {string || null}
          */
         this.UserIp = null;
@@ -1012,6 +1012,12 @@ class DescribeCaptchaTicketDataRequest extends  AbstractModel {
          */
         this.Start = null;
 
+        /**
+         * 查询结束时间 例如：20220314
+         * @type {number || null}
+         */
+        this.End = null;
+
     }
 
     /**
@@ -1023,6 +1029,7 @@ class DescribeCaptchaTicketDataRequest extends  AbstractModel {
         }
         this.CaptchaAppId = 'CaptchaAppId' in params ? params.CaptchaAppId : null;
         this.Start = 'Start' in params ? params.Start : null;
+        this.End = 'End' in params ? params.End : null;
 
     }
 }
@@ -1137,6 +1144,12 @@ class DescribeCaptchaOperDataRequest extends  AbstractModel {
          */
         this.Type = null;
 
+        /**
+         * 查询结束时间
+         * @type {number || null}
+         */
+        this.End = null;
+
     }
 
     /**
@@ -1149,6 +1162,7 @@ class DescribeCaptchaOperDataRequest extends  AbstractModel {
         this.CaptchaAppId = 'CaptchaAppId' in params ? params.CaptchaAppId : null;
         this.Start = 'Start' in params ? params.Start : null;
         this.Type = 'Type' in params ? params.Type : null;
+        this.End = 'End' in params ? params.End : null;
 
     }
 }
@@ -1447,7 +1461,7 @@ class DescribeCaptchaResultRequest extends  AbstractModel {
         this.Ticket = null;
 
         /**
-         * 透传业务侧获取到的验证码使用者的IP
+         * 业务侧获取到的验证码使用者的外网IP
          * @type {string || null}
          */
         this.UserIp = null;
@@ -1459,13 +1473,13 @@ class DescribeCaptchaResultRequest extends  AbstractModel {
         this.Randstr = null;
 
         /**
-         * 验证码应用ID
+         * 验证码应用ID。登录 [验证码控制台](https://console.cloud.tencent.com/captcha/graphical)，在验证列表的【密钥】列，即可查看到CaptchaAppId。
          * @type {number || null}
          */
         this.CaptchaAppId = null;
 
         /**
-         * 用于服务器端校验验证码票据的验证密钥，请妥善保密，请勿泄露给第三方
+         * 验证码应用密钥。登录 [验证码控制台](https://console.cloud.tencent.com/captcha/graphical)，在验证列表的【密钥】列，即可查看到AppSecretKey。AppSecretKey属于服务器端校验验证码票据的密钥，请妥善保密，请勿泄露给第三方。
          * @type {string || null}
          */
         this.AppSecretKey = null;
@@ -1543,18 +1557,19 @@ class DescribeCaptchaResultResponse extends  AbstractModel {
 12 sig len error 签名长度错误
 13 verify ip no match ip不匹配，非法请求，可能存在不规范接入
 15 decrypt fail 验证码签名解密失败，票据校验失败，请检查Ticket票据是否与前端返回Ticket一致
-16 appid no match 验证码强校验appid错误，请检查CaptchaAppId是否为控制台基础配置界面系统分配的APPID
+16 appid no match 验证码强校验appid错误，前端代码 data-appid 和后端 CaptchaAppId 所填写的值，必须和 验证码控制台 中【验证详情】>【基础配置】内的 AppID 一致,请检查CaptchaAppId是否为控制台基础配置界面系统分配的APPID
 17 cmd no much 验证码系统命令不匹配
 18 uin no match 号码不匹配
 19 seq redirect 重定向验证
 20 opt no vcode 操作使用pt免验证码校验错误
-21 diff 差别，验证错误
+21 diff 差别，验证错误 
+该情况出现原因一般为，当验证码前端生成terror格式票据并进行后端票据校验时，用户网络较差，该情况下仍会返回可用票据，业务侧可以自行根据需要，进行票据生成或做其他处理。详情参见 [验证码Web前端接入-异常处理文档](https://cloud.tencent.com/document/product/1110/36841#.E5.BC.82.E5.B8.B8.E5.A4.84.E7.90.86)。
 22 captcha type not match 验证码类型与拉取时不一致
 23 verify type error 验证类型错误
 24 invalid pkg 非法请求包
 25 bad visitor 策略拦截
 26 system busy 系统内部错误
-100 param err appsecretkey 参数校验错误，请检查AppSecretKey是否与控制台基础配置界面系统分配的APPID、AppSecretKey相对应
+100 param err appsecretkey 参数校验错误，CaptchaAppId 与对应 AppSecretKey 不一致，需检查 AppSecretKey 参数是否有误。其中 CaptchaAppId、 AppSecretKey 在 验证码控制台 的【验证详情】>【基础配置】中获取
 104 Ticket Reuse 票据重复使用，同个票据验证多次，请重新生成Randstr、Ticket进行校验
          * @type {number || null}
          */
@@ -1673,6 +1688,12 @@ class DescribeCaptchaMiniOperDataRequest extends  AbstractModel {
          */
         this.Type = null;
 
+        /**
+         * 查询结束时间
+         * @type {number || null}
+         */
+        this.End = null;
+
     }
 
     /**
@@ -1685,6 +1706,7 @@ class DescribeCaptchaMiniOperDataRequest extends  AbstractModel {
         this.CaptchaAppId = 'CaptchaAppId' in params ? params.CaptchaAppId : null;
         this.Start = 'Start' in params ? params.Start : null;
         this.Type = 'Type' in params ? params.Type : null;
+        this.End = 'End' in params ? params.End : null;
 
     }
 }
@@ -1981,19 +2003,19 @@ class DescribeCaptchaMiniResultRequest extends  AbstractModel {
         this.Ticket = null;
 
         /**
-         * 透传业务侧获取到的验证码使用者的IP
+         * 业务侧获取到的验证码使用者的外网IP
          * @type {string || null}
          */
         this.UserIp = null;
 
         /**
-         * 验证码应用APPID
+         * 验证码应用ID。登录 [验证码控制台](https://console.cloud.tencent.com/captcha/graphical)，在验证列表的【密钥】列，即可查看到CaptchaAppId。
          * @type {number || null}
          */
         this.CaptchaAppId = null;
 
         /**
-         * 用于服务器端校验验证码票据的验证密钥，请妥善保密，请勿泄露给第三方
+         * 验证码应用密钥。登录 [验证码控制台](https://console.cloud.tencent.com/captcha/graphical)，在验证列表的【密钥】列，即可查看到AppSecretKey。AppSecretKey属于服务器端校验验证码票据的密钥，请妥善保密，请勿泄露给第三方。
          * @type {string || null}
          */
         this.AppSecretKey = null;
@@ -2182,6 +2204,7 @@ class DescribeCaptchaMiniResultResponse extends  AbstractModel {
 15     ticket decryption failed     票据解密失败
 16     CaptchaAppId wrong format     检查验证码应用APPID错误
 21     ticket error     票据验证错误
+25     invalid ticket     无效票据
 26     system internal error     系统内部错误
 100   param err     参数校验错误
          * @type {number || null}

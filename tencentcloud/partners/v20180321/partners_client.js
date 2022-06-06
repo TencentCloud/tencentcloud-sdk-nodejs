@@ -18,7 +18,7 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const AgentClientElem = models.AgentClientElem;
 const DescribeAgentDealsCacheRequest = models.DescribeAgentDealsCacheRequest;
-const DescribeClientBaseInfoResponse = models.DescribeClientBaseInfoResponse;
+const DescribeSalesmansRequest = models.DescribeSalesmansRequest;
 const DescribeAgentAuditedClientsRequest = models.DescribeAgentAuditedClientsRequest;
 const RemovePayRelationForClientRequest = models.RemovePayRelationForClientRequest;
 const AgentPayDealsRequest = models.AgentPayDealsRequest;
@@ -34,8 +34,6 @@ const DescribeAgentPayDealsV2Request = models.DescribeAgentPayDealsV2Request;
 const ProductInfoElem = models.ProductInfoElem;
 const UnbindClientElem = models.UnbindClientElem;
 const RemovePayRelationForClientResponse = models.RemovePayRelationForClientResponse;
-const DescribeSalesmansRequest = models.DescribeSalesmansRequest;
-const DescribeClientBaseInfoRequest = models.DescribeClientBaseInfoRequest;
 const DescribeRebateInfosRequest = models.DescribeRebateInfosRequest;
 const CreatePayRelationForClientResponse = models.CreatePayRelationForClientResponse;
 const DescribeAgentAuditedClientsResponse = models.DescribeAgentAuditedClientsResponse;
@@ -50,7 +48,6 @@ const DescribeAgentSelfPayDealsV2Request = models.DescribeAgentSelfPayDealsV2Req
 const DescribeSalesmansResponse = models.DescribeSalesmansResponse;
 const AgentAuditedClient = models.AgentAuditedClient;
 const DescribeUnbindClientListRequest = models.DescribeUnbindClientListRequest;
-const DescribeRebateInfosResponse = models.DescribeRebateInfosResponse;
 const DescribeAgentPayDealsResponse = models.DescribeAgentPayDealsResponse;
 const DealGoodsPriceElem = models.DealGoodsPriceElem;
 const DescribeAgentDealsByCacheRequest = models.DescribeAgentDealsByCacheRequest;
@@ -62,14 +59,16 @@ const DescribeUnbindClientListResponse = models.DescribeUnbindClientListResponse
 const DescribeAgentSelfPayDealsV2Response = models.DescribeAgentSelfPayDealsV2Response;
 const AgentBillElem = models.AgentBillElem;
 const AuditApplyClientResponse = models.AuditApplyClientResponse;
-const ClientBaseElem = models.ClientBaseElem;
+const DescribeAgentDealsCacheResponse = models.DescribeAgentDealsCacheResponse;
 const DescribeAgentBillsRequest = models.DescribeAgentBillsRequest;
 const AgentPayDealsResponse = models.AgentPayDealsResponse;
 const AgentDealElem = models.AgentDealElem;
 const AgentSalesmanElem = models.AgentSalesmanElem;
+const DescribeClientBalanceNewRequest = models.DescribeClientBalanceNewRequest;
 const DealGoodsPriceNewElem = models.DealGoodsPriceNewElem;
-const DescribeAgentDealsCacheResponse = models.DescribeAgentDealsCacheResponse;
+const DescribeRebateInfosResponse = models.DescribeRebateInfosResponse;
 const DescribeAgentClientGradeRequest = models.DescribeAgentClientGradeRequest;
+const DescribeClientBalanceNewResponse = models.DescribeClientBalanceNewResponse;
 
 
 /**
@@ -94,8 +93,7 @@ class PartnersClient extends AbstractClient {
     }
 
     /**
-     * 【该接口将逐步下线，请切换使用升级版本DescribeAgentDealsByCache】供超大型代理商（代客数量>=3000 ）拉取缓存的全量客户订单。
-
+     * 【该接口将逐步下线，请切换使用升级版本DescribeAgentDealsByCache】代理商拉取缓存的全量客户订单
      * @param {DescribeAgentDealsCacheRequest} req
      * @param {function(string, DescribeAgentDealsCacheResponse):void} cb
      * @public
@@ -106,18 +104,18 @@ class PartnersClient extends AbstractClient {
     }
 
     /**
-     * 代理商名下客户解绑记录查询接口
-     * @param {DescribeUnbindClientListRequest} req
-     * @param {function(string, DescribeUnbindClientListResponse):void} cb
+     * 代理商可以对名下客户添加备注、修改备注
+     * @param {ModifyClientRemarkRequest} req
+     * @param {function(string, ModifyClientRemarkResponse):void} cb
      * @public
      */
-    DescribeUnbindClientList(req, cb) {
-        let resp = new DescribeUnbindClientListResponse();
-        this.request("DescribeUnbindClientList", req, resp, cb);
+    ModifyClientRemark(req, cb) {
+        let resp = new ModifyClientRemarkResponse();
+        this.request("ModifyClientRemark", req, resp, cb);
     }
 
     /**
-     * 可以查询代理商下指定客户的自付订单
+     * 查询代理商名下指定代客的自付订单
      * @param {DescribeAgentSelfPayDealsV2Request} req
      * @param {function(string, DescribeAgentSelfPayDealsV2Response):void} cb
      * @public
@@ -172,14 +170,14 @@ class PartnersClient extends AbstractClient {
     }
 
     /**
-     * 国际站根据UIN查询代客基础信息【本接口仅限主账号访问】
-     * @param {DescribeClientBaseInfoRequest} req
-     * @param {function(string, DescribeClientBaseInfoResponse):void} cb
+     * 代理商查询名下业务员列表信息
+     * @param {DescribeSalesmansRequest} req
+     * @param {function(string, DescribeSalesmansResponse):void} cb
      * @public
      */
-    DescribeClientBaseInfo(req, cb) {
-        let resp = new DescribeClientBaseInfoResponse();
-        this.request("DescribeClientBaseInfo", req, resp, cb);
+    DescribeSalesmans(req, cb) {
+        let resp = new DescribeSalesmansResponse();
+        this.request("DescribeSalesmans", req, resp, cb);
     }
 
     /**
@@ -194,14 +192,14 @@ class PartnersClient extends AbstractClient {
     }
 
     /**
-     * 代理商可以对名下客户添加备注、修改备注
-     * @param {ModifyClientRemarkRequest} req
-     * @param {function(string, ModifyClientRemarkResponse):void} cb
+     * 为合作伙伴提供查询客户余额能力。调用者必须是合作伙伴，只能查询自己名下客户余额
+     * @param {DescribeClientBalanceNewRequest} req
+     * @param {function(string, DescribeClientBalanceNewResponse):void} cb
      * @public
      */
-    ModifyClientRemark(req, cb) {
-        let resp = new ModifyClientRemarkResponse();
-        this.request("ModifyClientRemark", req, resp, cb);
+    DescribeClientBalanceNew(req, cb) {
+        let resp = new DescribeClientBalanceNewResponse();
+        this.request("DescribeClientBalanceNew", req, resp, cb);
     }
 
     /**
@@ -216,14 +214,14 @@ class PartnersClient extends AbstractClient {
     }
 
     /**
-     * 代理商查询名下业务员列表信息
-     * @param {DescribeSalesmansRequest} req
-     * @param {function(string, DescribeSalesmansResponse):void} cb
+     * 代理商名下客户解绑记录查询接口
+     * @param {DescribeUnbindClientListRequest} req
+     * @param {function(string, DescribeUnbindClientListResponse):void} cb
      * @public
      */
-    DescribeSalesmans(req, cb) {
-        let resp = new DescribeSalesmansResponse();
-        this.request("DescribeSalesmans", req, resp, cb);
+    DescribeUnbindClientList(req, cb) {
+        let resp = new DescribeUnbindClientListResponse();
+        this.request("DescribeUnbindClientList", req, resp, cb);
     }
 
     /**
@@ -238,7 +236,7 @@ class PartnersClient extends AbstractClient {
     }
 
     /**
-     * 为合作伙伴提供查询客户余额能力。调用者必须是合作伙伴，只能查询自己名下客户余额
+     * 【该接口将逐步下线，请切换使用升级版本DescribeClientBalanceNew】为合作伙伴提供查询客户余额能力。调用者必须是合作伙伴，只能查询自己名下客户余额.
      * @param {DescribeClientBalanceRequest} req
      * @param {function(string, DescribeClientBalanceResponse):void} cb
      * @public
@@ -304,7 +302,7 @@ class PartnersClient extends AbstractClient {
     }
 
     /**
-     * 供超大型代理商（代客数量>=3000 ）拉取缓存的全量客户订单。
+     * 供代理商拉取缓存的全量客户订单
      * @param {DescribeAgentDealsByCacheRequest} req
      * @param {function(string, DescribeAgentDealsByCacheResponse):void} cb
      * @public

@@ -817,6 +817,18 @@ class MountInfo extends  AbstractModel {
          */
         this.SubnetName = null;
 
+        /**
+         * CFS Turbo使用的云联网ID
+         * @type {string || null}
+         */
+        this.CcnID = null;
+
+        /**
+         * 云联网中CFS Turbo使用的网段
+         * @type {string || null}
+         */
+        this.CidrBlock = null;
+
     }
 
     /**
@@ -836,6 +848,8 @@ class MountInfo extends  AbstractModel {
         this.VpcName = 'VpcName' in params ? params.VpcName : null;
         this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
         this.SubnetName = 'SubnetName' in params ? params.SubnetName : null;
+        this.CcnID = 'CcnID' in params ? params.CcnID : null;
+        this.CidrBlock = 'CidrBlock' in params ? params.CidrBlock : null;
 
     }
 }
@@ -1050,13 +1064,13 @@ class CreateCfsFileSystemResponse extends  AbstractModel {
         this.FileSystemId = null;
 
         /**
-         * 文件系统状态
+         * 文件系统状态，可能出现状态包括：“creating”  创建中, “create_failed” 创建失败, “available” 可用, “unserviced” 不可用, “upgrading” 升级中， “deleting” 删除中。
          * @type {string || null}
          */
         this.LifeCycleState = null;
 
         /**
-         * 文件系统已使用容量大小
+         * 文件系统已使用容量大小，单位为 Byte
          * @type {number || null}
          */
         this.SizeByte = null;
@@ -1223,6 +1237,18 @@ class FileSystemInfo extends  AbstractModel {
          */
         this.BandwidthLimit = null;
 
+        /**
+         * 文件系统总容量
+         * @type {number || null}
+         */
+        this.Capacity = null;
+
+        /**
+         * 文件系统标签列表
+         * @type {Array.<TagInfo> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -1255,6 +1281,16 @@ class FileSystemInfo extends  AbstractModel {
         this.KmsKeyId = 'KmsKeyId' in params ? params.KmsKeyId : null;
         this.AppId = 'AppId' in params ? params.AppId : null;
         this.BandwidthLimit = 'BandwidthLimit' in params ? params.BandwidthLimit : null;
+        this.Capacity = 'Capacity' in params ? params.Capacity : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new TagInfo();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -1548,25 +1584,25 @@ class CreateCfsFileSystemRequest extends  AbstractModel {
         this.Zone = null;
 
         /**
-         * 网络类型，值为 VPC，BASIC；其中 VPC 为私有网络，BASIC 为基础网络
+         * 网络类型，可选值为 VPC，BASIC，CCN；其中 VPC 为私有网络，BASIC 为基础网络, CCN 为云联网，Turbo系列当前必须选择云联网。目前基础网络已逐渐淘汰，不推荐使用。
          * @type {string || null}
          */
         this.NetInterface = null;
 
         /**
-         * 权限组 ID
+         * 权限组 ID，通用标准型和性能型必填，turbo系列请填写pgroupbasic
          * @type {string || null}
          */
         this.PGroupId = null;
 
         /**
-         * 文件系统协议类型， 值为 NFS、CIFS; 若留空则默认为 NFS协议
+         * 文件系统协议类型， 值为 NFS、CIFS、TURBO ; 若留空则默认为 NFS协议，turbo系列必须选择turbo，不支持NFS、CIFS
          * @type {string || null}
          */
         this.Protocol = null;
 
         /**
-         * 文件系统存储类型，值为 SD ；其中 SD 为标准型存储， HP为性能存储。
+         * 文件系统存储类型，默认值为 SD ；其中 SD 为通用标准型标准型存储， HP为通用性能型存储， TB为turbo标准型， TP 为turbo性能型。
          * @type {string || null}
          */
         this.StorageType = null;
@@ -1584,7 +1620,7 @@ class CreateCfsFileSystemRequest extends  AbstractModel {
         this.SubnetId = null;
 
         /**
-         * 指定IP地址，仅VPC网络支持；若不填写、将在该子网下随机分配 IP
+         * 指定IP地址，仅VPC网络支持；若不填写、将在该子网下随机分配 IP，Turbo系列当前不支持指定
          * @type {string || null}
          */
         this.MountIP = null;
@@ -1606,6 +1642,24 @@ class CreateCfsFileSystemRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.ClientToken = null;
+
+        /**
+         * 云联网ID， 若网络类型选择的是CCN，该字段为必填
+         * @type {string || null}
+         */
+        this.CcnId = null;
+
+        /**
+         * 云联网中CFS使用的网段， 若网络类型选择的是Ccn，该字段为必填，且不能和Ccn中已经绑定的网段冲突
+         * @type {string || null}
+         */
+        this.CidrBlock = null;
+
+        /**
+         * 文件系统容量，turbo系列必填，单位为GiB。 turbo标准型单位GB，起售40TiB，即40960 GiB；扩容步长20TiB，即20480 GiB。turbo性能型起售20TiB，即20480 GiB；扩容步长10TiB，10240 GiB。
+         * @type {number || null}
+         */
+        this.Capacity = null;
 
     }
 
@@ -1635,6 +1689,9 @@ class CreateCfsFileSystemRequest extends  AbstractModel {
             }
         }
         this.ClientToken = 'ClientToken' in params ? params.ClientToken : null;
+        this.CcnId = 'CcnId' in params ? params.CcnId : null;
+        this.CidrBlock = 'CidrBlock' in params ? params.CidrBlock : null;
+        this.Capacity = 'Capacity' in params ? params.Capacity : null;
 
     }
 }

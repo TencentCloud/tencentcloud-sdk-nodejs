@@ -23,6 +23,7 @@ const GetProvisionedConcurrencyConfigRequest = models.GetProvisionedConcurrencyC
 const ListAliasesResponse = models.ListAliasesResponse;
 const DeleteLayerVersionResponse = models.DeleteLayerVersionResponse;
 const GetReservedConcurrencyConfigResponse = models.GetReservedConcurrencyConfigResponse;
+const ProtocolParams = models.ProtocolParams;
 const RoutingConfig = models.RoutingConfig;
 const DeleteProvisionedConcurrencyConfigResponse = models.DeleteProvisionedConcurrencyConfigResponse;
 const VersionWeight = models.VersionWeight;
@@ -41,17 +42,20 @@ const VersionProvisionedConcurrencyInfo = models.VersionProvisionedConcurrencyIn
 const GetFunctionLogsRequest = models.GetFunctionLogsRequest;
 const StatusReason = models.StatusReason;
 const Tag = models.Tag;
+const GetRequestStatusRequest = models.GetRequestStatusRequest;
 const LogFilter = models.LogFilter;
 const EipConfigIn = models.EipConfigIn;
 const ListLayerVersionsResponse = models.ListLayerVersionsResponse;
 const DeleteFunctionRequest = models.DeleteFunctionRequest;
 const CopyFunctionResponse = models.CopyFunctionResponse;
+const InvokeFunctionResponse = models.InvokeFunctionResponse;
 const Namespace = models.Namespace;
 const GetFunctionRequest = models.GetFunctionRequest;
 const ListNamespacesRequest = models.ListNamespacesRequest;
 const PublishVersionRequest = models.PublishVersionRequest;
 const DeleteAliasRequest = models.DeleteAliasRequest;
 const ListVersionByFunctionResponse = models.ListVersionByFunctionResponse;
+const WSParams = models.WSParams;
 const GetAliasRequest = models.GetAliasRequest;
 const CreateNamespaceResponse = models.CreateNamespaceResponse;
 const PublicNetConfigOut = models.PublicNetConfigOut;
@@ -79,9 +83,11 @@ const Result = models.Result;
 const CreateAliasResponse = models.CreateAliasResponse;
 const LogSearchContext = models.LogSearchContext;
 const TriggerInfo = models.TriggerInfo;
+const RequestStatus = models.RequestStatus;
 const CreateFunctionRequest = models.CreateFunctionRequest;
 const GetAccountRequest = models.GetAccountRequest;
 const PutTotalConcurrencyConfigResponse = models.PutTotalConcurrencyConfigResponse;
+const GetAsyncEventStatusRequest = models.GetAsyncEventStatusRequest;
 const DeleteAliasResponse = models.DeleteAliasResponse;
 const PublishVersionResponse = models.PublishVersionResponse;
 const AsyncEvent = models.AsyncEvent;
@@ -108,11 +114,15 @@ const Code = models.Code;
 const PutTotalConcurrencyConfigRequest = models.PutTotalConcurrencyConfigRequest;
 const UpdateNamespaceRequest = models.UpdateNamespaceRequest;
 const GetLayerVersionResponse = models.GetLayerVersionResponse;
+const GetRequestStatusResponse = models.GetRequestStatusResponse;
+const AsyncEventStatus = models.AsyncEventStatus;
 const PutReservedConcurrencyConfigResponse = models.PutReservedConcurrencyConfigResponse;
 const FunctionLog = models.FunctionLog;
+const InvokeFunctionRequest = models.InvokeFunctionRequest;
 const RetryConfig = models.RetryConfig;
 const GetFunctionAddressResponse = models.GetFunctionAddressResponse;
 const CfsInsInfo = models.CfsInsInfo;
+const TriggerAction = models.TriggerAction;
 const LimitsInfo = models.LimitsInfo;
 const ListLayersResponse = models.ListLayersResponse;
 const FunctionVersion = models.FunctionVersion;
@@ -120,6 +130,7 @@ const AsyncTriggerConfig = models.AsyncTriggerConfig;
 const DeadLetterConfig = models.DeadLetterConfig;
 const ListVersionByFunctionRequest = models.ListVersionByFunctionRequest;
 const ListFunctionsResponse = models.ListFunctionsResponse;
+const GetAsyncEventStatusResponse = models.GetAsyncEventStatusResponse;
 const ListTriggersRequest = models.ListTriggersRequest;
 const CreateFunctionResponse = models.CreateFunctionResponse;
 const GetReservedConcurrencyConfigRequest = models.GetReservedConcurrencyConfigRequest;
@@ -131,7 +142,9 @@ const EipOutConfig = models.EipOutConfig;
 const Alias = models.Alias;
 const GetLayerVersionRequest = models.GetLayerVersionRequest;
 const GetFunctionLogsResponse = models.GetFunctionLogsResponse;
+const ImageConfig = models.ImageConfig;
 const DeleteTriggerResponse = models.DeleteTriggerResponse;
+const SearchKey = models.SearchKey;
 const DeleteTriggerRequest = models.DeleteTriggerRequest;
 const VpcConfig = models.VpcConfig;
 const GetProvisionedConcurrencyConfigResponse = models.GetProvisionedConcurrencyConfigResponse;
@@ -171,6 +184,17 @@ class ScfClient extends AbstractClient {
     UpdateNamespace(req, cb) {
         let resp = new UpdateNamespaceResponse();
         this.request("UpdateNamespace", req, resp, cb);
+    }
+
+    /**
+     *  SCF同步调用函数接口
+     * @param {InvokeFunctionRequest} req
+     * @param {function(string, InvokeFunctionResponse):void} cb
+     * @public
+     */
+    InvokeFunction(req, cb) {
+        let resp = new InvokeFunctionResponse();
+        this.request("InvokeFunction", req, resp, cb);
     }
 
     /**
@@ -290,7 +314,7 @@ class ScfClient extends AbstractClient {
     }
 
     /**
-     * 该接口根据指定的日志查询条件返回函数运行日志。
+     * 该接口根据指定的日志查询条件返回函数运行日志。该接口已下线，查询函数请求运行的返回信息，请使用 [GetRequestStatus](https://cloud.tencent.com/document/product/583/65348)。查询函数运行日志，请参考[日志检索教程](https://cloud.tencent.com/document/product/583/52637)。
      * @param {GetFunctionLogsRequest} req
      * @param {function(string, GetFunctionLogsResponse):void} cb
      * @public
@@ -323,14 +347,14 @@ class ScfClient extends AbstractClient {
     }
 
     /**
-     * 该接口用于运行函数。
-     * @param {InvokeRequest} req
-     * @param {function(string, InvokeResponse):void} cb
+     * 删除函数版本的预置并发配置。
+     * @param {DeleteProvisionedConcurrencyConfigRequest} req
+     * @param {function(string, DeleteProvisionedConcurrencyConfigResponse):void} cb
      * @public
      */
-    Invoke(req, cb) {
-        let resp = new InvokeResponse();
-        this.request("Invoke", req, resp, cb);
+    DeleteProvisionedConcurrencyConfig(req, cb) {
+        let resp = new DeleteProvisionedConcurrencyConfigResponse();
+        this.request("DeleteProvisionedConcurrencyConfig", req, resp, cb);
     }
 
     /**
@@ -375,6 +399,17 @@ class ScfClient extends AbstractClient {
     DeleteAlias(req, cb) {
         let resp = new DeleteAliasResponse();
         this.request("DeleteAlias", req, resp, cb);
+    }
+
+    /**
+     * 获取函数异步执行事件状态，事件状态保留 3 * 24 小时（从事件完成开始计时）。
+     * @param {GetAsyncEventStatusRequest} req
+     * @param {function(string, GetAsyncEventStatusResponse):void} cb
+     * @public
+     */
+    GetAsyncEventStatus(req, cb) {
+        let resp = new GetAsyncEventStatusResponse();
+        this.request("GetAsyncEventStatus", req, resp, cb);
     }
 
     /**
@@ -467,7 +502,7 @@ class ScfClient extends AbstractClient {
     }
 
     /**
-     * 获取函数的保留并发详情。
+     * 获取函数的最大独占配额详情。
      * @param {GetReservedConcurrencyConfigRequest} req
      * @param {function(string, GetReservedConcurrencyConfigResponse):void} cb
      * @public
@@ -500,7 +535,7 @@ class ScfClient extends AbstractClient {
     }
 
     /**
-     * 设置函数保留并发
+     * 设置函数最大独占配额
      * @param {PutReservedConcurrencyConfigRequest} req
      * @param {function(string, PutReservedConcurrencyConfigResponse):void} cb
      * @public
@@ -522,7 +557,7 @@ class ScfClient extends AbstractClient {
     }
 
     /**
-     * 删除函数的保留并发配置。
+     * 删除函数的最大独占配额配置。
      * @param {DeleteReservedConcurrencyConfigRequest} req
      * @param {function(string, DeleteReservedConcurrencyConfigResponse):void} cb
      * @public
@@ -533,14 +568,14 @@ class ScfClient extends AbstractClient {
     }
 
     /**
-     * 删除函数版本的预置并发配置。
-     * @param {DeleteProvisionedConcurrencyConfigRequest} req
-     * @param {function(string, DeleteProvisionedConcurrencyConfigResponse):void} cb
+     * 该接口用于运行函数。
+     * @param {InvokeRequest} req
+     * @param {function(string, InvokeResponse):void} cb
      * @public
      */
-    DeleteProvisionedConcurrencyConfig(req, cb) {
-        let resp = new DeleteProvisionedConcurrencyConfigResponse();
-        this.request("DeleteProvisionedConcurrencyConfig", req, resp, cb);
+    Invoke(req, cb) {
+        let resp = new InvokeResponse();
+        this.request("Invoke", req, resp, cb);
     }
 
     /**
@@ -607,6 +642,17 @@ class ScfClient extends AbstractClient {
     UpdateFunctionCode(req, cb) {
         let resp = new UpdateFunctionCodeResponse();
         this.request("UpdateFunctionCode", req, resp, cb);
+    }
+
+    /**
+     * 该接口根据指定的查询条件返回函数单个请求运行状态。
+     * @param {GetRequestStatusRequest} req
+     * @param {function(string, GetRequestStatusResponse):void} cb
+     * @public
+     */
+    GetRequestStatus(req, cb) {
+        let resp = new GetRequestStatusResponse();
+        this.request("GetRequestStatus", req, resp, cb);
     }
 
 

@@ -17,9 +17,11 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const AudioStreamInfo = models.AudioStreamInfo;
+const ClassDeletedEvent = models.ClassDeletedEvent;
 const ModifyMaterialResponse = models.ModifyMaterialResponse;
 const DeleteProjectRequest = models.DeleteProjectRequest;
 const ExportVideoByVideoSegmentationDataResponse = models.ExportVideoByVideoSegmentationDataResponse;
+const MaterialDeletedEvent = models.MaterialDeletedEvent;
 const ImportMaterialResponse = models.ImportMaterialResponse;
 const StreamConnectProjectInput = models.StreamConnectProjectInput;
 const DescribeAccountsRequest = models.DescribeAccountsRequest;
@@ -32,18 +34,21 @@ const ClassInfo = models.ClassInfo;
 const ModifyProjectResponse = models.ModifyProjectResponse;
 const AudioTrackItem = models.AudioTrackItem;
 const StreamConnectProjectInfo = models.StreamConnectProjectInfo;
+const VideoEncodingPresetAudioSettingForUpdate = models.VideoEncodingPresetAudioSettingForUpdate;
+const VideoEncodingPresetAudioSetting = models.VideoEncodingPresetAudioSetting;
 const IntegerRange = models.IntegerRange;
 const SearchMaterialRequest = models.SearchMaterialRequest;
 const DeleteTeamResponse = models.DeleteTeamResponse;
 const StreamConnectOutput = models.StreamConnectOutput;
-const VideoSegmentationProjectInput = models.VideoSegmentationProjectInput;
+const CopyProjectRequest = models.CopyProjectRequest;
 const SearchScope = models.SearchScope;
 const RevokeResourceAuthorizationResponse = models.RevokeResourceAuthorizationResponse;
-const HandleStreamConnectProjectRequest = models.HandleStreamConnectProjectRequest;
+const DescribeTasksResponse = models.DescribeTasksResponse;
 const ProjectInfo = models.ProjectInfo;
 const VideoTrackItem = models.VideoTrackItem;
 const DeleteTeamRequest = models.DeleteTeamRequest;
 const DescribeTeamsRequest = models.DescribeTeamsRequest;
+const PlatformInfo = models.PlatformInfo;
 const LinkMaterial = models.LinkMaterial;
 const SwitcherProjectInput = models.SwitcherProjectInput;
 const FlattenListMediaRequest = models.FlattenListMediaRequest;
@@ -75,17 +80,24 @@ const SearchMaterialResponse = models.SearchMaterialResponse;
 const StreamConnectOutputInfo = models.StreamConnectOutputInfo;
 const ParseEventRequest = models.ParseEventRequest;
 const EmptyTrackItem = models.EmptyTrackItem;
-const PlatformInfo = models.PlatformInfo;
+const ClassMovedEvent = models.ClassMovedEvent;
+const DeleteVideoEncodingPresetRequest = models.DeleteVideoEncodingPresetRequest;
+const MaterialImportedEvent = models.MaterialImportedEvent;
+const ModifyVideoEncodingPresetResponse = models.ModifyVideoEncodingPresetResponse;
 const DescribeJoinTeamsRequest = models.DescribeJoinTeamsRequest;
+const VideoSegmentationProjectInput = models.VideoSegmentationProjectInput;
 const DeleteMaterialRequest = models.DeleteMaterialRequest;
 const CreateProjectResponse = models.CreateProjectResponse;
 const VideoEditProjectInput = models.VideoEditProjectInput;
 const DeleteProjectResponse = models.DeleteProjectResponse;
+const VideoEncodingPresetVideoSetting = models.VideoEncodingPresetVideoSetting;
+const MediaImageSpriteInfo = models.MediaImageSpriteInfo;
 const DeleteClassRequest = models.DeleteClassRequest;
 const CreateLinkRequest = models.CreateLinkRequest;
 const CreateClassRequest = models.CreateClassRequest;
 const DescribeMaterialsResponse = models.DescribeMaterialsResponse;
-const HandleStreamConnectProjectResponse = models.HandleStreamConnectProjectResponse;
+const CreateVideoEncodingPresetResponse = models.CreateVideoEncodingPresetResponse;
+const VideoEncodingPresetVideoSettingForUpdate = models.VideoEncodingPresetVideoSettingForUpdate;
 const GrantResourceAuthorizationResponse = models.GrantResourceAuthorizationResponse;
 const SwitcherPgmOutputConfig = models.SwitcherPgmOutputConfig;
 const CMEExportInfo = models.CMEExportInfo;
@@ -101,7 +113,7 @@ const DescribeSharedSpaceResponse = models.DescribeSharedSpaceResponse;
 const DescribeAccountsResponse = models.DescribeAccountsResponse;
 const MoveResourceResponse = models.MoveResourceResponse;
 const MoveClassRequest = models.MoveClassRequest;
-const TimeRange = models.TimeRange;
+const TextSlotInfo = models.TextSlotInfo;
 const DeleteTeamMembersResponse = models.DeleteTeamMembersResponse;
 const MoveClassResponse = models.MoveClassResponse;
 const ImportMediaToProjectResponse = models.ImportMediaToProjectResponse;
@@ -111,67 +123,86 @@ const AddTeamMemberResponse = models.AddTeamMemberResponse;
 const CreateTeamResponse = models.CreateTeamResponse;
 const ModifyTeamRequest = models.ModifyTeamRequest;
 const ModifyTeamMemberRequest = models.ModifyTeamMemberRequest;
+const MaterialMovedEvent = models.MaterialMovedEvent;
 const CreateTeamRequest = models.CreateTeamRequest;
 const MaterialBasicInfo = models.MaterialBasicInfo;
+const VideoExportCompletedEvent = models.VideoExportCompletedEvent;
 const ResourceInfo = models.ResourceInfo;
+const MediaPreprocessOperation = models.MediaPreprocessOperation;
 const JoinTeamInfo = models.JoinTeamInfo;
 const DescribeResourceAuthorizationRequest = models.DescribeResourceAuthorizationRequest;
 const CreateClassResponse = models.CreateClassResponse;
 const SlotInfo = models.SlotInfo;
 const MediaReplacementInfo = models.MediaReplacementInfo;
+const TaskBaseInfo = models.TaskBaseInfo;
 const RecordReplayProjectInput = models.RecordReplayProjectInput;
 const VideoStreamInfo = models.VideoStreamInfo;
 const AddTeamMemberRequest = models.AddTeamMemberRequest;
-const ExportVideoEditProjectResponse = models.ExportVideoEditProjectResponse;
+const GrantResourceAuthorizationRequest = models.GrantResourceAuthorizationRequest;
+const TimeRange = models.TimeRange;
 const ThirdPartyPublishInfo = models.ThirdPartyPublishInfo;
 const ListMediaRequest = models.ListMediaRequest;
+const DeleteVideoEncodingPresetResponse = models.DeleteVideoEncodingPresetResponse;
 const VodPullInputInfo = models.VodPullInputInfo;
 const ModifyTeamResponse = models.ModifyTeamResponse;
 const DeleteLoginStatusRequest = models.DeleteLoginStatusRequest;
 const GenerateVideoSegmentationSchemeByAiRequest = models.GenerateVideoSegmentationSchemeByAiRequest;
 const LiveStreamClipProjectInput = models.LiveStreamClipProjectInput;
+const MaterialModifiedEvent = models.MaterialModifiedEvent;
+const HandleStreamConnectProjectResponse = models.HandleStreamConnectProjectResponse;
 const DeleteTeamMembersRequest = models.DeleteTeamMembersRequest;
 const ExportVideoByTemplateRequest = models.ExportVideoByTemplateRequest;
 const DescribePlatformsRequest = models.DescribePlatformsRequest;
 const OtherMaterial = models.OtherMaterial;
 const EventContent = models.EventContent;
 const VideoMaterial = models.VideoMaterial;
+const DescribeVideoEncodingPresetsResponse = models.DescribeVideoEncodingPresetsResponse;
 const DescribeResourceAuthorizationResponse = models.DescribeResourceAuthorizationResponse;
 const FlattenListMediaResponse = models.FlattenListMediaResponse;
 const AccountInfo = models.AccountInfo;
 const DescribeProjectsRequest = models.DescribeProjectsRequest;
 const DescribeLoginStatusResponse = models.DescribeLoginStatusResponse;
-const TeamMemberInfo = models.TeamMemberInfo;
+const MaterialAddedEvent = models.MaterialAddedEvent;
+const CreateVideoEncodingPresetRequest = models.CreateVideoEncodingPresetRequest;
+const ProjectStreamConnectStatusChangedEvent = models.ProjectStreamConnectStatusChangedEvent;
 const DescribeJoinTeamsResponse = models.DescribeJoinTeamsResponse;
 const DescribeTeamMembersRequest = models.DescribeTeamMembersRequest;
 const MaterialStatus = models.MaterialStatus;
 const DescribeProjectsResponse = models.DescribeProjectsResponse;
 const AuthorizationInfo = models.AuthorizationInfo;
 const VideoEditTemplateMaterial = models.VideoEditTemplateMaterial;
+const VideoExportExtensionArgs = models.VideoExportExtensionArgs;
 const SlotReplacementInfo = models.SlotReplacementInfo;
 const ParseEventResponse = models.ParseEventResponse;
 const DeleteMaterialResponse = models.DeleteMaterialResponse;
 const RevokeResourceAuthorizationRequest = models.RevokeResourceAuthorizationRequest;
 const DescribeTaskDetailRequest = models.DescribeTaskDetailRequest;
+const ModifyVideoEncodingPresetRequest = models.ModifyVideoEncodingPresetRequest;
+const TeamMemberInfo = models.TeamMemberInfo;
 const CosPublishInputInfo = models.CosPublishInputInfo;
-const DescribeTasksResponse = models.DescribeTasksResponse;
+const HandleStreamConnectProjectRequest = models.HandleStreamConnectProjectRequest;
 const ModifyProjectRequest = models.ModifyProjectRequest;
 const MaterialInfo = models.MaterialInfo;
+const DescribeVideoEncodingPresetsRequest = models.DescribeVideoEncodingPresetsRequest;
 const LoginStatusInfo = models.LoginStatusInfo;
 const DescribeClassResponse = models.DescribeClassResponse;
 const GenerateVideoSegmentationSchemeByAiResponse = models.GenerateVideoSegmentationSchemeByAiResponse;
 const PresetTagInfo = models.PresetTagInfo;
 const DescribeSharedSpaceRequest = models.DescribeSharedSpaceRequest;
 const KuaishouPublishInfo = models.KuaishouPublishInfo;
-const TaskBaseInfo = models.TaskBaseInfo;
+const CopyProjectResponse = models.CopyProjectResponse;
 const DeleteClassResponse = models.DeleteClassResponse;
-const GrantResourceAuthorizationRequest = models.GrantResourceAuthorizationRequest;
+const ExportVideoEditProjectResponse = models.ExportVideoEditProjectResponse;
 const MediaMetaData = models.MediaMetaData;
+const ProjectSwitcherStatusChangedEvent = models.ProjectSwitcherStatusChangedEvent;
 const ExternalMediaInfo = models.ExternalMediaInfo;
 const LinkMaterialInfo = models.LinkMaterialInfo;
 const ExportVideoByEditorTrackDataResponse = models.ExportVideoByEditorTrackDataResponse;
-const MediaImageSpriteInfo = models.MediaImageSpriteInfo;
+const ClassCreatedEvent = models.ClassCreatedEvent;
+const VideoEncodingPreset = models.VideoEncodingPreset;
 const ImportMaterialRequest = models.ImportMaterialRequest;
+const TextReplacementInfo = models.TextReplacementInfo;
+const ImportMediaInfo = models.ImportMediaInfo;
 const DescribeMaterialsRequest = models.DescribeMaterialsRequest;
 
 
@@ -186,14 +217,14 @@ class CmeClient extends AbstractClient {
     }
     
     /**
-     * 根据媒体 Id 批量获取媒体详情。
-     * @param {DescribeMaterialsRequest} req
-     * @param {function(string, DescribeMaterialsResponse):void} cb
+     * 获取任务列表，支持条件筛选，返回对应的任务基础信息列表。
+     * @param {DescribeTasksRequest} req
+     * @param {function(string, DescribeTasksResponse):void} cb
      * @public
      */
-    DescribeMaterials(req, cb) {
-        let resp = new DescribeMaterialsResponse();
-        this.request("DescribeMaterials", req, resp, cb);
+    DescribeTasks(req, cb) {
+        let resp = new DescribeTasksResponse();
+        this.request("DescribeTasks", req, resp, cb);
     }
 
     /**
@@ -205,6 +236,17 @@ class CmeClient extends AbstractClient {
     DescribeTeams(req, cb) {
         let resp = new DescribeTeamsResponse();
         this.request("DescribeTeams", req, resp, cb);
+    }
+
+    /**
+     * 查询视频编码配置信息。
+     * @param {DescribeVideoEncodingPresetsRequest} req
+     * @param {function(string, DescribeVideoEncodingPresetsResponse):void} cb
+     * @public
+     */
+    DescribeVideoEncodingPresets(req, cb) {
+        let resp = new DescribeVideoEncodingPresetsResponse();
+        this.request("DescribeVideoEncodingPresets", req, resp, cb);
     }
 
     /**
@@ -243,7 +285,7 @@ class CmeClient extends AbstractClient {
     }
 
     /**
-     * 使用视频智能拆条数据导出视频，将指定的视频拆条片段导出为一个视频。
+     * 使用视频智能拆条数据导出视频，将指定的视频拆条片段导出为一个视频(内测中，请勿使用)。
      * @param {ExportVideoByVideoSegmentationDataRequest} req
      * @param {function(string, ExportVideoByVideoSegmentationDataResponse):void} cb
      * @public
@@ -254,7 +296,7 @@ class CmeClient extends AbstractClient {
     }
 
     /**
-     * 资源归属者对目标个人或团队授予目标资源的相应权限。
+     * 资源归属者对个人或团队授予目标资源的相应权限。
      * @param {GrantResourceAuthorizationRequest} req
      * @param {function(string, GrantResourceAuthorizationResponse):void} cb
      * @public
@@ -287,7 +329,7 @@ class CmeClient extends AbstractClient {
     }
 
     /**
-     * 获取指定的团队成员所加入的团队列表。
+     * 获取用户所加入的团队列表
      * @param {DescribeJoinTeamsRequest} req
      * @param {function(string, DescribeJoinTeamsResponse):void} cb
      * @public
@@ -298,7 +340,7 @@ class CmeClient extends AbstractClient {
     }
 
     /**
-     * 查询指定资源的授权列表。
+     * 查询资源被授权的情况。
      * @param {DescribeResourceAuthorizationRequest} req
      * @param {function(string, DescribeResourceAuthorizationResponse):void} cb
      * @public
@@ -309,7 +351,7 @@ class CmeClient extends AbstractClient {
     }
 
     /**
-     * 将云点播媒资文件导入到云剪媒体资源库。
+     * 将云点播媒资文件导入到多媒体创作引擎媒体资源库。支持导入媒体归属团队或者个人。
      * @param {ImportMaterialRequest} req
      * @param {function(string, ImportMaterialResponse):void} cb
      * @public
@@ -320,7 +362,7 @@ class CmeClient extends AbstractClient {
     }
 
     /**
-     * 使用视频合成协议导出视频，支持导出到CME云媒资和VOD云媒资。
+     * 使用 [视频合成协议](https://cloud.tencent.com/document/product/1156/51225) 合成视频，支持导出视频到 CME 云媒资或者云点播媒资。
      * @param {ExportVideoByEditorTrackDataRequest} req
      * @param {function(string, ExportVideoByEditorTrackDataResponse):void} cb
      * @public
@@ -331,17 +373,14 @@ class CmeClient extends AbstractClient {
     }
 
     /**
-     * <li>支持获取所创建的所有平台列表信息；</li>
-<li>支持获取指定的平台列表信息。</li>
-
-
-     * @param {DescribePlatformsRequest} req
-     * @param {function(string, DescribePlatformsResponse):void} cb
+     * 获取指定归属者下所有的分类信息。
+     * @param {DescribeClassRequest} req
+     * @param {function(string, DescribeClassResponse):void} cb
      * @public
      */
-    DescribePlatforms(req, cb) {
-        let resp = new DescribePlatformsResponse();
-        this.request("DescribePlatforms", req, resp, cb);
+    DescribeClass(req, cb) {
+        let resp = new DescribeClassResponse();
+        this.request("DescribeClass", req, resp, cb);
     }
 
     /**
@@ -358,14 +397,14 @@ class CmeClient extends AbstractClient {
     }
 
     /**
-     *  创建媒体链接或分类路径链接，将源资源信息链接到目标。
-     * @param {CreateLinkRequest} req
-     * @param {function(string, CreateLinkResponse):void} cb
+     * 指定导出的参数，创建一个视频编码配置
+     * @param {CreateVideoEncodingPresetRequest} req
+     * @param {function(string, CreateVideoEncodingPresetResponse):void} cb
      * @public
      */
-    CreateLink(req, cb) {
-        let resp = new CreateLinkResponse();
-        this.request("CreateLink", req, resp, cb);
+    CreateVideoEncodingPreset(req, cb) {
+        let resp = new CreateVideoEncodingPresetResponse();
+        this.request("CreateVideoEncodingPreset", req, resp, cb);
     }
 
     /**
@@ -403,7 +442,7 @@ class CmeClient extends AbstractClient {
     }
 
     /**
-     * 删除一个团队。
+     * 删除一个团队。要删除团队，必须满足以下条件：
 <li>要删除的团队必须没有归属的素材；</li>
 <li>要删除的团队必须没有归属的分类。</li>
      * @param {DeleteTeamRequest} req
@@ -416,7 +455,7 @@ class CmeClient extends AbstractClient {
     }
 
     /**
-     * 向一个团队中团队成员，并且指定成员的角色。
+     * 向一个团队中添加团队成员，并且指定成员的角色。
      * @param {AddTeamMemberRequest} req
      * @param {function(string, AddTeamMemberResponse):void} cb
      * @public
@@ -441,6 +480,17 @@ class CmeClient extends AbstractClient {
     }
 
     /**
+     *  创建媒体链接或分类路径链接，将源资源信息链接到目标。
+     * @param {CreateLinkRequest} req
+     * @param {function(string, CreateLinkResponse):void} cb
+     * @public
+     */
+    CreateLink(req, cb) {
+        let resp = new CreateLinkResponse();
+        this.request("CreateLink", req, resp, cb);
+    }
+
+    /**
      * 修改团队成员信息，包括成员备注、角色等。
      * @param {ModifyTeamMemberRequest} req
      * @param {function(string, ModifyTeamMemberResponse):void} cb
@@ -452,7 +502,18 @@ class CmeClient extends AbstractClient {
     }
 
     /**
-     * 将团队成员从团队中删除，默认只有 Owner 及管理员才有此权限。
+     * 删除指定 ID 的视频编码配置
+     * @param {DeleteVideoEncodingPresetRequest} req
+     * @param {function(string, DeleteVideoEncodingPresetResponse):void} cb
+     * @public
+     */
+    DeleteVideoEncodingPreset(req, cb) {
+        let resp = new DeleteVideoEncodingPresetResponse();
+        this.request("DeleteVideoEncodingPreset", req, resp, cb);
+    }
+
+    /**
+     * 将团队成员从团队中删除。
      * @param {DeleteTeamMembersRequest} req
      * @param {function(string, DeleteTeamMembersResponse):void} cb
      * @public
@@ -463,7 +524,7 @@ class CmeClient extends AbstractClient {
     }
 
     /**
-     * 删除用户登录态，使用户登出云剪平台。
+     * 删除用户登录态，使用户登出多媒体创作引擎平台。
      * @param {DeleteLoginStatusRequest} req
      * @param {function(string, DeleteLoginStatusResponse):void} cb
      * @public
@@ -496,18 +557,54 @@ class CmeClient extends AbstractClient {
     }
 
     /**
-     * 获取任务列表，支持条件筛选，返回对应的任务基础信息列表。
-     * @param {DescribeTasksRequest} req
-     * @param {function(string, DescribeTasksResponse):void} cb
+     * 修改视频编码配置信息。
+     * @param {ModifyVideoEncodingPresetRequest} req
+     * @param {function(string, ModifyVideoEncodingPresetResponse):void} cb
      * @public
      */
-    DescribeTasks(req, cb) {
-        let resp = new DescribeTasksResponse();
-        this.request("DescribeTasks", req, resp, cb);
+    ModifyVideoEncodingPreset(req, cb) {
+        let resp = new ModifyVideoEncodingPresetResponse();
+        this.request("ModifyVideoEncodingPreset", req, resp, cb);
     }
 
     /**
-     * 获取用户账号信息。
+     * 根据媒体 Id 批量获取媒体详情。
+     * @param {DescribeMaterialsRequest} req
+     * @param {function(string, DescribeMaterialsResponse):void} cb
+     * @public
+     */
+    DescribeMaterials(req, cb) {
+        let resp = new DescribeMaterialsResponse();
+        this.request("DescribeMaterials", req, resp, cb);
+    }
+
+    /**
+     * 对云转推项目进行操作。
+### 操作类型<a id="Operation"></a>
+- `AddInput`（添加输入源），包括：
+	- 添加直播拉流输入源，参见 [示例1](#.E7.A4.BA.E4.BE.8B1-.E6.B7.BB.E5.8A.A0.E7.9B.B4.E6.92.AD.E6.8B.89.E6.B5.81.E8.BE.93.E5.85.A5.E6.BA.90)；
+	- 添加直播推流输入源，参见 [示例2](#.E7.A4.BA.E4.BE.8B2-.E6.B7.BB.E5.8A.A0.E7.9B.B4.E6.92.AD.E6.8E.A8.E6.B5.81.E8.BE.93.E5.85.A5.E6.BA.90)；
+	- 添加点播拉流输入源，参见 [示例3](#.E7.A4.BA.E4.BE.8B3-.E6.B7.BB.E5.8A.A0.E7.82.B9.E6.92.AD.E6.8B.89.E6.B5.81.E8.BE.93.E5.85.A5.E6.BA.90.E4.B8.94.E5.BE.AA.E7.8E.AF.E6.92.AD.E6.94.BE)、[示例4](#.E7.A4.BA.E4.BE.8B4-.E6.B7.BB.E5.8A.A0.E7.82.B9.E6.92.AD.E6.8B.89.E6.B5.81.E8.BE.93.E5.85.A5.E6.BA.90.E4.B8.94.E5.8D.95.E6.AC.A1.E6.92.AD.E6.94.BE)；
+- `DeleteInput`（删除输入源），参见 [示例5](#.E7.A4.BA.E4.BE.8B5-.E5.88.A0.E9.99.A4.E8.BE.93.E5.85.A5.E6.BA.90)；
+- `ModifyInput`（修改输入源），参见 [示例6](#.E7.A4.BA.E4.BE.8B6-.E4.BF.AE.E6.94.B9.E8.BE.93.E5.85.A5.E6.BA.90)；
+- `AddOutput`（ 添加输出源），参见 [示例7](#.E7.A4.BA.E4.BE.8B7-.E6.B7.BB.E5.8A.A0.E8.BE.93.E5.87.BA.E6.BA.90)；
+- `DeleteOutput`（删除输出源），参见 [示例8](#.E7.A4.BA.E4.BE.8B8-.E5.88.A0.E9.99.A4.E8.BE.93.E5.87.BA.E6.BA.90)；
+- `ModifyOutput`（修改输出源），参见 [示例9](#.E7.A4.BA.E4.BE.8B9-.E4.BF.AE.E6.94.B9.E8.BE.93.E5.87.BA.E6.BA.90)；
+- `Start`（开启转推），参见 [示例10](#.E7.A4.BA.E4.BE.8B10-.E5.BC.80.E5.90.AF.E4.BA.91.E8.BD.AC.E6.8E.A8)；
+- `Stop`（停止转推），参见 [示例11](#.E7.A4.BA.E4.BE.8B11-.E5.81.9C.E6.AD.A2.E4.BA.91.E8.BD.AC.E6.8E.A8)；
+- `SwitchInput`（切换输入源），参见 [示例12](#.E7.A4.BA.E4.BE.8B12-.E5.88.87.E6.8D.A2.E8.BE.93.E5.85.A5.E6.BA.90)；
+- `ModifyCurrentStopTime`（修改当前计划结束时间），参见 [示例13](#.E7.A4.BA.E4.BE.8B13-.E4.BF.AE.E6.94.B9.E8.BD.AC.E6.8E.A8.E7.BB.93.E6.9D.9F.E6.97.B6.E9.97.B4)。
+     * @param {HandleStreamConnectProjectRequest} req
+     * @param {function(string, HandleStreamConnectProjectResponse):void} cb
+     * @public
+     */
+    HandleStreamConnectProject(req, cb) {
+        let resp = new HandleStreamConnectProjectResponse();
+        this.request("HandleStreamConnectProject", req, resp, cb);
+    }
+
+    /**
+     * 获取平台中所有的已注册账号。
      * @param {DescribeAccountsRequest} req
      * @param {function(string, DescribeAccountsResponse):void} cb
      * @public
@@ -518,14 +615,19 @@ class CmeClient extends AbstractClient {
     }
 
     /**
-     * 获取指定归属者下所有的分类信息。
-     * @param {DescribeClassRequest} req
-     * @param {function(string, DescribeClassResponse):void} cb
+     * <li>支持获取所创建的所有平台列表信息；</li>
+<li>支持获取指定的平台列表信息。</li>
+
+关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
+
+
+     * @param {DescribePlatformsRequest} req
+     * @param {function(string, DescribePlatformsResponse):void} cb
      * @public
      */
-    DescribeClass(req, cb) {
-        let resp = new DescribeClassResponse();
-        this.request("DescribeClass", req, resp, cb);
+    DescribePlatforms(req, cb) {
+        let resp = new DescribePlatformsResponse();
+        this.request("DescribePlatforms", req, resp, cb);
     }
 
     /**
@@ -540,7 +642,7 @@ class CmeClient extends AbstractClient {
     }
 
     /**
-     * 修改云剪编辑项目的信息。
+     * 修改项目信息。
      * @param {ModifyProjectRequest} req
      * @param {function(string, ModifyProjectResponse):void} cb
      * @public
@@ -551,9 +653,7 @@ class CmeClient extends AbstractClient {
     }
 
     /**
-     * 新增分类，用于管理素材。
-<li>分类层数不能超过10；</li>
-<li>子分类数不能超过10。</li>
+     * 新增分类，用于管理素材。分类层数不能超过20。
      * @param {CreateClassRequest} req
      * @param {function(string, CreateClassResponse):void} cb
      * @public
@@ -564,7 +664,7 @@ class CmeClient extends AbstractClient {
     }
 
     /**
-     *  资源所属实体对目标实体回收目标资源的相应权限，若原本没有相应权限则不产生变更。
+     *  资源所属实体对目标实体撤销目标资源的相应权限，若原本没有相应权限则不产生变更。
      * @param {RevokeResourceAuthorizationRequest} req
      * @param {function(string, RevokeResourceAuthorizationResponse):void} cb
      * @public
@@ -575,7 +675,7 @@ class CmeClient extends AbstractClient {
     }
 
     /**
-     * 将云点播中的媒资或者用户自有媒资文件添加到媒体库中，跟项目关联，供后续视频编辑使用。目前仅普通编辑项目和智能视频拆条项目有效。
+     * 将云点播中的媒资或者用户自有媒资文件添加到项目中与项目关联，供后续视频编辑使用。目前仅视频编辑项目和智能视频拆条项目有效。
      * @param {ImportMediaToProjectRequest} req
      * @param {function(string, ImportMediaToProjectResponse):void} cb
      * @public
@@ -597,10 +697,13 @@ class CmeClient extends AbstractClient {
     }
 
     /**
-     * 创建云剪的编辑项目，支持创建视频剪辑、直播剪辑、导播台、视频拆条、录制回放以及云转推项目。
-
-<b>若需使用云转推功能，请先咨询 [智能客服](https://cloud.tencent.com/act/event/smarty-service?from=doc_1138) 或 [提交工单](https://console.cloud.tencent.com/workorder/category) 。</b>
-
+     * 创建多媒体创作引擎项目，目前支持的项目类型有：
+<li>视频剪辑项目：用于普通视频剪辑；</li>
+<li>直播剪辑项目：用于直播流剪辑；</li>
+<li>导播台项目：用于云导播台；</li>
+<li>视频拆条：用于视频拆条；</li>
+<li>录制回放项目：用于直播录制回放；</li>
+<li>云转推项目：用于直播云转推。</li>
      * @param {CreateProjectRequest} req
      * @param {function(string, CreateProjectResponse):void} cb
      * @public
@@ -611,7 +714,7 @@ class CmeClient extends AbstractClient {
     }
 
     /**
-     * 使用视频编辑模板直接导出视频。
+     * 使用视频剪辑模板直接导出视频。
      * @param {ExportVideoByTemplateRequest} req
      * @param {function(string, ExportVideoByTemplateResponse):void} cb
      * @public
@@ -652,7 +755,7 @@ class CmeClient extends AbstractClient {
     }
 
     /**
-     * 删除云剪编辑项目。
+     * 删除项目。
      * @param {DeleteProjectRequest} req
      * @param {function(string, DeleteProjectResponse):void} cb
      * @public
@@ -663,7 +766,7 @@ class CmeClient extends AbstractClient {
     }
 
     /**
-     * 平铺分类路径下及其子分类下的所有媒体基础信息。
+     * 平铺分类路径下及其子分类下的所有媒体基础信息，返回当前分类及子分类中的所有媒体的基础信息。
      * @param {FlattenListMediaRequest} req
      * @param {function(string, FlattenListMediaResponse):void} cb
      * @public
@@ -674,32 +777,18 @@ class CmeClient extends AbstractClient {
     }
 
     /**
-     * 对云转推项目进行操作。
-### 操作类型<a id="Operation"></a>
-- `AddInput`（添加输入源），包括：
-	- 添加直播拉流输入源，参见 [示例1](#.E7.A4.BA.E4.BE.8B1-.E6.B7.BB.E5.8A.A0.E7.9B.B4.E6.92.AD.E6.8B.89.E6.B5.81.E8.BE.93.E5.85.A5.E6.BA.90)；
-	- 添加直播推流输入源，参见 [示例2](#.E7.A4.BA.E4.BE.8B2-.E6.B7.BB.E5.8A.A0.E7.9B.B4.E6.92.AD.E6.8E.A8.E6.B5.81.E8.BE.93.E5.85.A5.E6.BA.90)；
-	- 添加点播拉流输入源，参见 [示例3](#.E7.A4.BA.E4.BE.8B3-.E6.B7.BB.E5.8A.A0.E7.82.B9.E6.92.AD.E6.8B.89.E6.B5.81.E8.BE.93.E5.85.A5.E6.BA.90.E4.B8.94.E5.BE.AA.E7.8E.AF.E6.92.AD.E6.94.BE)、[示例4](#.E7.A4.BA.E4.BE.8B4-.E6.B7.BB.E5.8A.A0.E7.82.B9.E6.92.AD.E6.8B.89.E6.B5.81.E8.BE.93.E5.85.A5.E6.BA.90.E4.B8.94.E5.8D.95.E6.AC.A1.E6.92.AD.E6.94.BE)；
-- `DeleteInput`（删除输入源），参见 [示例5](#.E7.A4.BA.E4.BE.8B5-.E5.88.A0.E9.99.A4.E8.BE.93.E5.85.A5.E6.BA.90)；
-- `ModifyInput`（修改输入源），参见 [示例6](#.E7.A4.BA.E4.BE.8B6-.E4.BF.AE.E6.94.B9.E8.BE.93.E5.85.A5.E6.BA.90)；
-- `AddOutput`（ 添加输出源），参见 [示例7](#.E7.A4.BA.E4.BE.8B7-.E6.B7.BB.E5.8A.A0.E8.BE.93.E5.87.BA.E6.BA.90)；
-- `DeleteOutput`（删除输出源），参见 [示例8](#.E7.A4.BA.E4.BE.8B8-.E5.88.A0.E9.99.A4.E8.BE.93.E5.87.BA.E6.BA.90)；
-- `ModifyOutput`（修改输出源），参见 [示例9](#.E7.A4.BA.E4.BE.8B9-.E4.BF.AE.E6.94.B9.E8.BE.93.E5.87.BA.E6.BA.90)；
-- `Start`（开启转推），参见 [示例10](#.E7.A4.BA.E4.BE.8B10-.E5.BC.80.E5.90.AF.E4.BA.91.E8.BD.AC.E6.8E.A8)；
-- `Stop`（停止转推），参见 [示例11](#.E7.A4.BA.E4.BE.8B11-.E5.81.9C.E6.AD.A2.E4.BA.91.E8.BD.AC.E6.8E.A8)；
-- `SwitchInput`（切换输入源），参见 [示例12](#.E7.A4.BA.E4.BE.8B12-.E5.88.87.E6.8D.A2.E8.BE.93.E5.85.A5.E6.BA.90)；
-- `ModifyCurrentStopTime`（修改当前计划结束时间），参见 [示例13](#.E7.A4.BA.E4.BE.8B13-.E4.BF.AE.E6.94.B9.E8.BD.AC.E6.8E.A8.E7.BB.93.E6.9D.9F.E6.97.B6.E9.97.B4)。
-     * @param {HandleStreamConnectProjectRequest} req
-     * @param {function(string, HandleStreamConnectProjectResponse):void} cb
+     * 复制一个项目，包括项目素材及轨道数据。目前仅普通剪辑及模板制作项目可复制，其它类型的项目不支持复制。
+     * @param {CopyProjectRequest} req
+     * @param {function(string, CopyProjectResponse):void} cb
      * @public
      */
-    HandleStreamConnectProject(req, cb) {
-        let resp = new HandleStreamConnectProjectResponse();
-        this.request("HandleStreamConnectProject", req, resp, cb);
+    CopyProject(req, cb) {
+        let resp = new CopyProjectResponse();
+        this.request("CopyProject", req, resp, cb);
     }
 
     /**
-     * 获取指定成员 ID 的信息，同时支持拉取所有团队成员信息。
+     * 获取指定团队的成员信息。支持获取指定成员的信息，同时也支持分页拉取指定团队的所有成员信息。
      * @param {DescribeTeamMembersRequest} req
      * @param {function(string, DescribeTeamMembersResponse):void} cb
      * @public

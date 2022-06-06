@@ -28,6 +28,7 @@ const RecognizeCustomizedAudienceResponse = models.RecognizeCustomizedAudienceRe
 const OutputKolValue = models.OutputKolValue;
 const EnhanceTaDegreeResponse = models.EnhanceTaDegreeResponse;
 const InputTaBspData = models.InputTaBspData;
+const Device = models.Device;
 const OutputSendTrafficSecuritySmsMsg = models.OutputSendTrafficSecuritySmsMsg;
 const RecognizeEffectiveFlowResponse = models.RecognizeEffectiveFlowResponse;
 const SendTrafficSecuritySmsMessageResponse = models.SendTrafficSecuritySmsMessageResponse;
@@ -41,8 +42,9 @@ const OutputTaData = models.OutputTaData;
 const OutputTaValue = models.OutputTaValue;
 const RecognizePreciseTargetAudienceRequest = models.RecognizePreciseTargetAudienceRequest;
 const InputKolDataList = models.InputKolDataList;
-const InputRecognizeEffectiveFlow = models.InputRecognizeEffectiveFlow;
 const RecognizePreciseTargetAudienceResponse = models.RecognizePreciseTargetAudienceResponse;
+const InputRecognizeEffectiveFlow = models.InputRecognizeEffectiveFlow;
+const InputBusinessEncryptData = models.InputBusinessEncryptData;
 const OutputRecognizeTargetAudience = models.OutputRecognizeTargetAudience;
 const InputSendTrafficSecuritySmsMsg = models.InputSendTrafficSecuritySmsMsg;
 
@@ -104,7 +106,7 @@ class TafClient extends AbstractClient {
     }
 
     /**
-     * DetectFraudKOL
+     * 流量反欺诈-KOL欺诈识别
      * @param {DetectFraudKOLRequest} req
      * @param {function(string, DetectFraudKOLResponse):void} cb
      * @public
@@ -126,7 +128,7 @@ class TafClient extends AbstractClient {
     }
 
     /**
-     * SendTrafficSecuritySmsMessage
+     * 流量安选产品，短信发送接口
      * @param {SendTrafficSecuritySmsMessageRequest} req
      * @param {function(string, SendTrafficSecuritySmsMessageResponse):void} cb
      * @public

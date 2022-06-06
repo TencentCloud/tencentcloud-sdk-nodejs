@@ -17,6 +17,97 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * PublishMessage请求参数结构体
+ * @class
+ */
+class PublishMessageRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 消息发往的主题。命名规则：${ProductId}/${DeviceName}/[a-zA-Z0-9:_-]{1,128}
+         * @type {string || null}
+         */
+        this.Topic = null;
+
+        /**
+         * 消息内容
+         * @type {string || null}
+         */
+        this.Payload = null;
+
+        /**
+         * 产品ID
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 设备名称
+         * @type {string || null}
+         */
+        this.DeviceName = null;
+
+        /**
+         * 服务质量等级，取值为0或1
+         * @type {number || null}
+         */
+        this.Qos = null;
+
+        /**
+         * Payload内容的编码格式，取值为base64或空。base64表示云端将收到的请求数据进行base64解码后下发到设备，空则直接将原始内容下发到设备
+         * @type {string || null}
+         */
+        this.PayloadEncoding = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Topic = 'Topic' in params ? params.Topic : null;
+        this.Payload = 'Payload' in params ? params.Payload : null;
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
+        this.Qos = 'Qos' in params ? params.Qos : null;
+        this.PayloadEncoding = 'PayloadEncoding' in params ? params.PayloadEncoding : null;
+
+    }
+}
+
+/**
+ * UpdateDevicesEnableState返回参数结构体
+ * @class
+ */
+class UpdateDevicesEnableStateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * UnbindDevices请求参数结构体
  * @class
  */
@@ -320,6 +411,97 @@ class TopicRulePayload extends  AbstractModel {
         this.Actions = 'Actions' in params ? params.Actions : null;
         this.Description = 'Description' in params ? params.Description : null;
         this.RuleDisabled = 'RuleDisabled' in params ? params.RuleDisabled : null;
+
+    }
+}
+
+/**
+ * 内容日志项
+ * @class
+ */
+class PayloadLogItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 账号id
+         * @type {string || null}
+         */
+        this.Uin = null;
+
+        /**
+         * 产品id
+         * @type {string || null}
+         */
+        this.ProductID = null;
+
+        /**
+         * 设备名称
+         * @type {string || null}
+         */
+        this.DeviceName = null;
+
+        /**
+         * 来源类型
+         * @type {string || null}
+         */
+        this.SrcType = null;
+
+        /**
+         * 来源名称
+         * @type {string || null}
+         */
+        this.SrcName = null;
+
+        /**
+         * 消息topic
+         * @type {string || null}
+         */
+        this.Topic = null;
+
+        /**
+         * 内容格式类型
+         * @type {string || null}
+         */
+        this.PayloadFmtType = null;
+
+        /**
+         * 内容信息
+         * @type {string || null}
+         */
+        this.Payload = null;
+
+        /**
+         * 请求ID
+         * @type {string || null}
+         */
+        this.RequestID = null;
+
+        /**
+         * 日期时间
+         * @type {string || null}
+         */
+        this.DateTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Uin = 'Uin' in params ? params.Uin : null;
+        this.ProductID = 'ProductID' in params ? params.ProductID : null;
+        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
+        this.SrcType = 'SrcType' in params ? params.SrcType : null;
+        this.SrcName = 'SrcName' in params ? params.SrcName : null;
+        this.Topic = 'Topic' in params ? params.Topic : null;
+        this.PayloadFmtType = 'PayloadFmtType' in params ? params.PayloadFmtType : null;
+        this.Payload = 'Payload' in params ? params.Payload : null;
+        this.RequestID = 'RequestID' in params ? params.RequestID : null;
+        this.DateTime = 'DateTime' in params ? params.DateTime : null;
 
     }
 }
@@ -821,6 +1003,34 @@ class DescribeProductResourcesRequest extends  AbstractModel {
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.ProductID = 'ProductID' in params ? params.ProductID : null;
         this.Name = 'Name' in params ? params.Name : null;
+
+    }
+}
+
+/**
+ * DescribeProduct请求参数结构体
+ * @class
+ */
+class DescribeProductRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品ID
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
 
     }
 }
@@ -1487,6 +1697,48 @@ class DescribeTasksRequest extends  AbstractModel {
 }
 
 /**
+ * DownloadDeviceResource请求参数结构体
+ * @class
+ */
+class DownloadDeviceResourceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品ID
+         * @type {string || null}
+         */
+        this.ProductID = null;
+
+        /**
+         * 资源名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 设备名称
+         * @type {string || null}
+         */
+        this.DeviceName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductID = 'ProductID' in params ? params.ProductID : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
+
+    }
+}
+
+/**
  * DescribeDeviceResource请求参数结构体
  * @class
  */
@@ -1560,6 +1812,12 @@ class EditFirmwareRequest extends  AbstractModel {
          */
         this.FirmwareDescription = null;
 
+        /**
+         * 固件类型：选填 mcu、moudule。默认：mcu
+         * @type {string || null}
+         */
+        this.FwType = null;
+
     }
 
     /**
@@ -1573,6 +1831,7 @@ class EditFirmwareRequest extends  AbstractModel {
         this.FirmwareVersion = 'FirmwareVersion' in params ? params.FirmwareVersion : null;
         this.FirmwareName = 'FirmwareName' in params ? params.FirmwareName : null;
         this.FirmwareDescription = 'FirmwareDescription' in params ? params.FirmwareDescription : null;
+        this.FwType = 'FwType' in params ? params.FwType : null;
 
     }
 }
@@ -1711,42 +1970,60 @@ class DescribeDeviceClientKeyRequest extends  AbstractModel {
 }
 
 /**
- * UpdateTopicPolicy请求参数结构体
+ * CLS日志
  * @class
  */
-class UpdateTopicPolicyRequest extends  AbstractModel {
+class CLSLogItem extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * 日志内容
+         * @type {string || null}
+         */
+        this.Content = null;
+
+        /**
+         * 设备名称
+         * @type {string || null}
+         */
+        this.Devicename = null;
 
         /**
          * 产品ID
          * @type {string || null}
          */
-        this.ProductID = null;
+        this.Productid = null;
 
         /**
-         * 更新前Topic名
+         * 请求ID
          * @type {string || null}
          */
-        this.TopicName = null;
+        this.Requestid = null;
 
         /**
-         * 更新后Topic名
+         * 结果
          * @type {string || null}
          */
-        this.NewTopicName = null;
+        this.Result = null;
 
         /**
-         * Topic权限
-         * @type {number || null}
+         * 模块
+         * @type {string || null}
          */
-        this.Privilege = null;
+        this.Scene = null;
 
         /**
-         * 代理订阅信息
-         * @type {BrokerSubscribe || null}
+         * 日志时间
+         * @type {string || null}
          */
-        this.BrokerSubscribe = null;
+        this.Time = null;
+
+        /**
+         * 腾讯云账号
+         * @type {string || null}
+         */
+        this.Userid = null;
 
     }
 
@@ -1757,16 +2034,14 @@ class UpdateTopicPolicyRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ProductID = 'ProductID' in params ? params.ProductID : null;
-        this.TopicName = 'TopicName' in params ? params.TopicName : null;
-        this.NewTopicName = 'NewTopicName' in params ? params.NewTopicName : null;
-        this.Privilege = 'Privilege' in params ? params.Privilege : null;
-
-        if (params.BrokerSubscribe) {
-            let obj = new BrokerSubscribe();
-            obj.deserialize(params.BrokerSubscribe)
-            this.BrokerSubscribe = obj;
-        }
+        this.Content = 'Content' in params ? params.Content : null;
+        this.Devicename = 'Devicename' in params ? params.Devicename : null;
+        this.Productid = 'Productid' in params ? params.Productid : null;
+        this.Requestid = 'Requestid' in params ? params.Requestid : null;
+        this.Result = 'Result' in params ? params.Result : null;
+        this.Scene = 'Scene' in params ? params.Scene : null;
+        this.Time = 'Time' in params ? params.Time : null;
+        this.Userid = 'Userid' in params ? params.Userid : null;
 
     }
 }
@@ -1960,6 +2235,12 @@ class DescribeFirmwareResponse extends  AbstractModel {
         this.ProductName = null;
 
         /**
+         * 固件类型。选项：mcu、module
+         * @type {string || null}
+         */
+        this.FwType = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -1981,6 +2262,7 @@ class DescribeFirmwareResponse extends  AbstractModel {
         this.Md5sum = 'Md5sum' in params ? params.Md5sum : null;
         this.Createtime = 'Createtime' in params ? params.Createtime : null;
         this.ProductName = 'ProductName' in params ? params.ProductName : null;
+        this.FwType = 'FwType' in params ? params.FwType : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2109,6 +2391,34 @@ class CreateMultiDevicesTaskRequest extends  AbstractModel {
         this.FileSize = 'FileSize' in params ? params.FileSize : null;
         this.BatchCount = 'BatchCount' in params ? params.BatchCount : null;
         this.Hash = 'Hash' in params ? params.Hash : null;
+
+    }
+}
+
+/**
+ * DeleteDeviceResource返回参数结构体
+ * @class
+ */
+class DeleteDeviceResourceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2273,6 +2583,136 @@ class CreateLoraDeviceRequest extends  AbstractModel {
         this.AppKey = 'AppKey' in params ? params.AppKey : null;
         this.AuthKey = 'AuthKey' in params ? params.AuthKey : null;
         this.Memo = 'Memo' in params ? params.Memo : null;
+
+    }
+}
+
+/**
+ * UpdateDevicesEnableState请求参数结构体
+ * @class
+ */
+class UpdateDevicesEnableStateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 设备所属产品id
+         * @type {string || null}
+         */
+        this.ProductID = null;
+
+        /**
+         * 设备名称集合
+         * @type {Array.<string> || null}
+         */
+        this.DeviceNames = null;
+
+        /**
+         * 要设置的设备状态，1为启用，0为禁用
+         * @type {number || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductID = 'ProductID' in params ? params.ProductID : null;
+        this.DeviceNames = 'DeviceNames' in params ? params.DeviceNames : null;
+        this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
+ * ListSDKLog请求参数结构体
+ * @class
+ */
+class ListSDKLogRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 日志开始时间
+         * @type {number || null}
+         */
+        this.MinTime = null;
+
+        /**
+         * 日志结束时间
+         * @type {number || null}
+         */
+        this.MaxTime = null;
+
+        /**
+         * 查询关键字，可以同时支持键值查询和文本查询，
+例如，查询某key的值为value，并且包含某word的日志，该参数为：key:value word。
+键值或文本可以包含多个，以空格隔开。
+其中可以索引的key包括：productid、devicename、loglevel
+一个典型的查询示例：productid:7JK1G72JNE devicename:name publish loglevel:WARN一个典型的查询示例：productid:ABCDE12345 devicename:test scene:SHADOW publish
+         * @type {string || null}
+         */
+        this.Keywords = null;
+
+        /**
+         * 日志检索上下文
+         * @type {string || null}
+         */
+        this.Context = null;
+
+        /**
+         * 查询条数
+         * @type {number || null}
+         */
+        this.MaxNum = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MinTime = 'MinTime' in params ? params.MinTime : null;
+        this.MaxTime = 'MaxTime' in params ? params.MaxTime : null;
+        this.Keywords = 'Keywords' in params ? params.Keywords : null;
+        this.Context = 'Context' in params ? params.Context : null;
+        this.MaxNum = 'MaxNum' in params ? params.MaxNum : null;
+
+    }
+}
+
+/**
+ * SetProductsForbiddenStatus返回参数结构体
+ * @class
+ */
+class SetProductsForbiddenStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2532,6 +2972,34 @@ class DescribeProductResourceResponse extends  AbstractModel {
             let obj = new ProductResourceInfo();
             obj.deserialize(params.Result)
             this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CancelDeviceFirmwareTask返回参数结构体
+ * @class
+ */
+class CancelDeviceFirmwareTaskResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -3480,60 +3948,6 @@ class PublishBroadcastMessageRequest extends  AbstractModel {
          */
         this.Qos = null;
 
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ProductId = 'ProductId' in params ? params.ProductId : null;
-        this.Payload = 'Payload' in params ? params.Payload : null;
-        this.Qos = 'Qos' in params ? params.Qos : null;
-
-    }
-}
-
-/**
- * PublishMessage请求参数结构体
- * @class
- */
-class PublishMessageRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 消息发往的主题。命名规则：${ProductId}/${DeviceName}/[a-zA-Z0-9:_-]{1,128}
-         * @type {string || null}
-         */
-        this.Topic = null;
-
-        /**
-         * 消息内容
-         * @type {string || null}
-         */
-        this.Payload = null;
-
-        /**
-         * 产品ID
-         * @type {string || null}
-         */
-        this.ProductId = null;
-
-        /**
-         * 设备名称
-         * @type {string || null}
-         */
-        this.DeviceName = null;
-
-        /**
-         * 服务质量等级，取值为0或1
-         * @type {number || null}
-         */
-        this.Qos = null;
-
         /**
          * Payload内容的编码格式，取值为base64或空。base64表示云端将收到的请求数据进行base64解码后下发到设备，空则直接将原始内容下发到设备
          * @type {string || null}
@@ -3549,12 +3963,74 @@ class PublishMessageRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Topic = 'Topic' in params ? params.Topic : null;
-        this.Payload = 'Payload' in params ? params.Payload : null;
         this.ProductId = 'ProductId' in params ? params.ProductId : null;
-        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
+        this.Payload = 'Payload' in params ? params.Payload : null;
         this.Qos = 'Qos' in params ? params.Qos : null;
         this.PayloadEncoding = 'PayloadEncoding' in params ? params.PayloadEncoding : null;
+
+    }
+}
+
+/**
+ * ListLog返回参数结构体
+ * @class
+ */
+class ListLogResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 日志上下文
+         * @type {string || null}
+         */
+        this.Context = null;
+
+        /**
+         * 是否还有日志，如有仍有日志，下次查询的请求带上当前请求返回的Context
+         * @type {boolean || null}
+         */
+        this.Listover = null;
+
+        /**
+         * 日志列表
+         * @type {Array.<CLSLogItem> || null}
+         */
+        this.Results = null;
+
+        /**
+         * 日志总条数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Context = 'Context' in params ? params.Context : null;
+        this.Listover = 'Listover' in params ? params.Listover : null;
+
+        if (params.Results) {
+            this.Results = new Array();
+            for (let z in params.Results) {
+                let obj = new CLSLogItem();
+                obj.deserialize(params.Results[z]);
+                this.Results.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3839,6 +4315,63 @@ class EditFirmwareResponse extends  AbstractModel {
 }
 
 /**
+ * ListSDKLog返回参数结构体
+ * @class
+ */
+class ListSDKLogResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 日志检索上下文
+         * @type {string || null}
+         */
+        this.Context = null;
+
+        /**
+         * 是否还有日志，如有仍有日志，下次查询的请求带上当前请求返回的Context
+         * @type {boolean || null}
+         */
+        this.Listover = null;
+
+        /**
+         * 日志列表
+         * @type {Array.<SDKLogItem> || null}
+         */
+        this.Results = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Context = 'Context' in params ? params.Context : null;
+        this.Listover = 'Listover' in params ? params.Listover : null;
+
+        if (params.Results) {
+            this.Results = new Array();
+            for (let z in params.Results) {
+                let obj = new SDKLogItem();
+                obj.deserialize(params.Results[z]);
+                this.Results.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CancelTask请求参数结构体
  * @class
  */
@@ -3993,6 +4526,63 @@ class GetUserResourceInfoResponse extends  AbstractModel {
 }
 
 /**
+ * ListLogPayload返回参数结构体
+ * @class
+ */
+class ListLogPayloadResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 日志上下文
+         * @type {string || null}
+         */
+        this.Context = null;
+
+        /**
+         * 是否还有日志，如有仍有日志，下次查询的请求带上当前请求返回的Context
+         * @type {boolean || null}
+         */
+        this.Listover = null;
+
+        /**
+         * 日志列表
+         * @type {Array.<PayloadLogItem> || null}
+         */
+        this.Results = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Context = 'Context' in params ? params.Context : null;
+        this.Listover = 'Listover' in params ? params.Listover : null;
+
+        if (params.Results) {
+            this.Results = new Array();
+            for (let z in params.Results) {
+                let obj = new PayloadLogItem();
+                obj.deserialize(params.Results[z]);
+                this.Results.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DeleteProduct返回参数结构体
  * @class
  */
@@ -4118,6 +4708,76 @@ class PublishToDeviceRequest extends  AbstractModel {
         this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
         this.Port = 'Port' in params ? params.Port : null;
         this.Payload = 'Payload' in params ? params.Payload : null;
+
+    }
+}
+
+/**
+ * SetProductsForbiddenStatus请求参数结构体
+ * @class
+ */
+class SetProductsForbiddenStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 要设置禁用状态的产品列表
+         * @type {Array.<string> || null}
+         */
+        this.ProductID = null;
+
+        /**
+         * 0启用，1禁用
+         * @type {number || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductID = 'ProductID' in params ? params.ProductID : null;
+        this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
+ * DownloadDeviceResource返回参数结构体
+ * @class
+ */
+class DownloadDeviceResourceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 设备资源的cos链接
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Url = 'Url' in params ? params.Url : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4404,6 +5064,48 @@ class DescribeProductResourcesResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * UpdateProductDynamicRegister请求参数结构体
+ * @class
+ */
+class UpdateProductDynamicRegisterRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品Id
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 动态注册类型，0-关闭 1-预创建设备 2-自动创建设备
+         * @type {number || null}
+         */
+        this.RegisterType = null;
+
+        /**
+         * 动态注册设备上限
+         * @type {number || null}
+         */
+        this.RegisterLimit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.RegisterType = 'RegisterType' in params ? params.RegisterType : null;
+        this.RegisterLimit = 'RegisterLimit' in params ? params.RegisterLimit : null;
 
     }
 }
@@ -4802,6 +5504,67 @@ class CancelTaskResponse extends  AbstractModel {
 }
 
 /**
+ * UpdateTopicPolicy请求参数结构体
+ * @class
+ */
+class UpdateTopicPolicyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品ID
+         * @type {string || null}
+         */
+        this.ProductID = null;
+
+        /**
+         * 更新前Topic名
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+        /**
+         * 更新后Topic名
+         * @type {string || null}
+         */
+        this.NewTopicName = null;
+
+        /**
+         * Topic权限
+         * @type {number || null}
+         */
+        this.Privilege = null;
+
+        /**
+         * 代理订阅信息
+         * @type {BrokerSubscribe || null}
+         */
+        this.BrokerSubscribe = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductID = 'ProductID' in params ? params.ProductID : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.NewTopicName = 'NewTopicName' in params ? params.NewTopicName : null;
+        this.Privilege = 'Privilege' in params ? params.Privilege : null;
+
+        if (params.BrokerSubscribe) {
+            let obj = new BrokerSubscribe();
+            obj.deserialize(params.BrokerSubscribe)
+            this.BrokerSubscribe = obj;
+        }
+
+    }
+}
+
+/**
  * 设备属性
  * @class
  */
@@ -5099,18 +5862,30 @@ class CancelDeviceFirmwareTaskRequest extends  AbstractModel {
 }
 
 /**
- * CancelDeviceFirmwareTask返回参数结构体
+ * DeleteDeviceResource请求参数结构体
  * @class
  */
-class CancelDeviceFirmwareTaskResponse extends  AbstractModel {
+class DeleteDeviceResourceRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 产品ID
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.ProductID = null;
+
+        /**
+         * 资源名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 设备名称
+         * @type {string || null}
+         */
+        this.DeviceName = null;
 
     }
 
@@ -5121,7 +5896,9 @@ class CancelDeviceFirmwareTaskResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.ProductID = 'ProductID' in params ? params.ProductID : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
 
     }
 }
@@ -5214,6 +5991,55 @@ class DescribeDeviceShadowRequest extends  AbstractModel {
         }
         this.ProductId = 'ProductId' in params ? params.ProductId : null;
         this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
+
+    }
+}
+
+/**
+ * UpdateProductDynamicRegister返回参数结构体
+ * @class
+ */
+class UpdateProductDynamicRegisterResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 动态注册类型，0-关闭 1-预创建设备 2-自动创建设备
+         * @type {number || null}
+         */
+        this.RegisterType = null;
+
+        /**
+         * 动态注册产品密钥
+         * @type {string || null}
+         */
+        this.ProductSecret = null;
+
+        /**
+         * 动态注册设备上限
+         * @type {number || null}
+         */
+        this.RegisterLimit = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RegisterType = 'RegisterType' in params ? params.RegisterType : null;
+        this.ProductSecret = 'ProductSecret' in params ? params.ProductSecret : null;
+        this.RegisterLimit = 'RegisterLimit' in params ? params.RegisterLimit : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6009,6 +6835,63 @@ class DescribeAllDevicesResponse extends  AbstractModel {
 }
 
 /**
+ * ListLog请求参数结构体
+ * @class
+ */
+class ListLogRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 日志开始时间，毫秒级时间戳
+         * @type {number || null}
+         */
+        this.MinTime = null;
+
+        /**
+         * 日志结束时间，毫秒级时间戳
+         * @type {number || null}
+         */
+        this.MaxTime = null;
+
+        /**
+         * 查询关键字，可以同时支持键值查询和文本查询，例如，查询某key的值为value，并且包含某word的日志，该参数为：key:value word。键值或文本可以包含多个，以空格隔开。其中可以索引的key包括：requestid、productid、devicename、scene、content。
+一个典型的查询示例：productid:ABCDE12345 devicename:test scene:SHADOW content:Device%20connect publish
+         * @type {string || null}
+         */
+        this.Keywords = null;
+
+        /**
+         * 日志检索上下文
+         * @type {string || null}
+         */
+        this.Context = null;
+
+        /**
+         * 查询条数
+         * @type {number || null}
+         */
+        this.MaxNum = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MinTime = 'MinTime' in params ? params.MinTime : null;
+        this.MaxTime = 'MaxTime' in params ? params.MaxTime : null;
+        this.Keywords = 'Keywords' in params ? params.Keywords : null;
+        this.Context = 'Context' in params ? params.Context : null;
+        this.MaxNum = 'MaxNum' in params ? params.MaxNum : null;
+
+    }
+}
+
+/**
  * 产品元数据
  * @class
  */
@@ -6032,6 +6915,128 @@ class ProductMetadata extends  AbstractModel {
             return;
         }
         this.CreationDate = 'CreationDate' in params ? params.CreationDate : null;
+
+    }
+}
+
+/**
+ * SDK日志项
+ * @class
+ */
+class SDKLogItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品ID
+         * @type {string || null}
+         */
+        this.ProductID = null;
+
+        /**
+         * 设备名称
+         * @type {string || null}
+         */
+        this.DeviceName = null;
+
+        /**
+         * 日志等级
+         * @type {string || null}
+         */
+        this.Level = null;
+
+        /**
+         * 日志时间
+         * @type {string || null}
+         */
+        this.DateTime = null;
+
+        /**
+         * 日志内容
+         * @type {string || null}
+         */
+        this.Content = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductID = 'ProductID' in params ? params.ProductID : null;
+        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
+        this.Level = 'Level' in params ? params.Level : null;
+        this.DateTime = 'DateTime' in params ? params.DateTime : null;
+        this.Content = 'Content' in params ? params.Content : null;
+
+    }
+}
+
+/**
+ * DescribeProduct返回参数结构体
+ * @class
+ */
+class DescribeProductResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品ID
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 产品名
+         * @type {string || null}
+         */
+        this.ProductName = null;
+
+        /**
+         * 产品元数据
+         * @type {ProductMetadata || null}
+         */
+        this.ProductMetadata = null;
+
+        /**
+         * 产品属性
+         * @type {ProductProperties || null}
+         */
+        this.ProductProperties = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.ProductName = 'ProductName' in params ? params.ProductName : null;
+
+        if (params.ProductMetadata) {
+            let obj = new ProductMetadata();
+            obj.deserialize(params.ProductMetadata)
+            this.ProductMetadata = obj;
+        }
+
+        if (params.ProductProperties) {
+            let obj = new ProductProperties();
+            obj.deserialize(params.ProductProperties)
+            this.ProductProperties = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6375,6 +7380,12 @@ class UploadFirmwareRequest extends  AbstractModel {
          */
         this.FirmwareDescription = null;
 
+        /**
+         * 固件类型：选填 mcu、moudule。默认：mcu
+         * @type {string || null}
+         */
+        this.FwType = null;
+
     }
 
     /**
@@ -6390,6 +7401,7 @@ class UploadFirmwareRequest extends  AbstractModel {
         this.FileSize = 'FileSize' in params ? params.FileSize : null;
         this.FirmwareName = 'FirmwareName' in params ? params.FirmwareName : null;
         this.FirmwareDescription = 'FirmwareDescription' in params ? params.FirmwareDescription : null;
+        this.FwType = 'FwType' in params ? params.FwType : null;
 
     }
 }
@@ -6549,6 +7561,63 @@ class CreateTopicRuleResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ListLogPayload请求参数结构体
+ * @class
+ */
+class ListLogPayloadRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 日志开始时间，毫秒级时间戳
+         * @type {number || null}
+         */
+        this.MinTime = null;
+
+        /**
+         * 日志结束时间，毫秒级时间戳
+         * @type {number || null}
+         */
+        this.MaxTime = null;
+
+        /**
+         * 查询关键字，可以同时支持键值查询和文本查询，例如，查询某key的值为value，并且包含某word的日志，该参数为：key:value word。键值或文本可以包含多个，以空格隔开。其中可以索引的key比如：RequestID、ProductID、DeviceName等。
+一个典型的查询示例：ProductID:ABCDE12345 DeviceName:test publish
+         * @type {string || null}
+         */
+        this.Keywords = null;
+
+        /**
+         * 日志检索上下文
+         * @type {string || null}
+         */
+        this.Context = null;
+
+        /**
+         * 日志最大条数
+         * @type {number || null}
+         */
+        this.MaxNum = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MinTime = 'MinTime' in params ? params.MinTime : null;
+        this.MaxTime = 'MaxTime' in params ? params.MaxTime : null;
+        this.Keywords = 'Keywords' in params ? params.Keywords : null;
+        this.Context = 'Context' in params ? params.Context : null;
+        this.MaxNum = 'MaxNum' in params ? params.MaxNum : null;
 
     }
 }
@@ -6983,11 +8052,14 @@ class DescribeFirmwareTaskRequest extends  AbstractModel {
 }
 
 module.exports = {
+    PublishMessageRequest: PublishMessageRequest,
+    UpdateDevicesEnableStateResponse: UpdateDevicesEnableStateResponse,
     UnbindDevicesRequest: UnbindDevicesRequest,
     DescribeDeviceResourcesRequest: DescribeDeviceResourcesRequest,
     BindDevicesRequest: BindDevicesRequest,
     DescribeProductsRequest: DescribeProductsRequest,
     TopicRulePayload: TopicRulePayload,
+    PayloadLogItem: PayloadLogItem,
     DescribeFirmwareRequest: DescribeFirmwareRequest,
     DescribeDevicesResponse: DescribeDevicesResponse,
     DeleteTopicRuleResponse: DeleteTopicRuleResponse,
@@ -6999,6 +8071,7 @@ module.exports = {
     DescribeMultiDevTaskRequest: DescribeMultiDevTaskRequest,
     DescribeDeviceResourceResponse: DescribeDeviceResourceResponse,
     DescribeProductResourcesRequest: DescribeProductResourcesRequest,
+    DescribeProductRequest: DescribeProductRequest,
     DescribeProductsResponse: DescribeProductsResponse,
     DescribeDeviceShadowResponse: DescribeDeviceShadowResponse,
     EnableTopicRuleResponse: EnableTopicRuleResponse,
@@ -7012,27 +8085,33 @@ module.exports = {
     DeleteProductRequest: DeleteProductRequest,
     StatusStatistic: StatusStatistic,
     DescribeTasksRequest: DescribeTasksRequest,
+    DownloadDeviceResourceRequest: DownloadDeviceResourceRequest,
     DescribeDeviceResourceRequest: DescribeDeviceResourceRequest,
     EditFirmwareRequest: EditFirmwareRequest,
     MultiDevicesInfo: MultiDevicesInfo,
     ResetDeviceStateRequest: ResetDeviceStateRequest,
     DescribeDeviceClientKeyRequest: DescribeDeviceClientKeyRequest,
-    UpdateTopicPolicyRequest: UpdateTopicPolicyRequest,
+    CLSLogItem: CLSLogItem,
     BatchUpdateShadow: BatchUpdateShadow,
     DeleteDeviceRequest: DeleteDeviceRequest,
     DescribeFirmwareTaskDevicesRequest: DescribeFirmwareTaskDevicesRequest,
     DescribeFirmwareResponse: DescribeFirmwareResponse,
     DescribeResourceTasksRequest: DescribeResourceTasksRequest,
     CreateMultiDevicesTaskRequest: CreateMultiDevicesTaskRequest,
+    DeleteDeviceResourceResponse: DeleteDeviceResourceResponse,
     DescribeFirmwareTaskStatisticsResponse: DescribeFirmwareTaskStatisticsResponse,
     DescribePushResourceTaskStatisticsRequest: DescribePushResourceTaskStatisticsRequest,
     CreateLoraDeviceRequest: CreateLoraDeviceRequest,
+    UpdateDevicesEnableStateRequest: UpdateDevicesEnableStateRequest,
+    ListSDKLogRequest: ListSDKLogRequest,
+    SetProductsForbiddenStatusResponse: SetProductsForbiddenStatusResponse,
     CreateProductResponse: CreateProductResponse,
     CreateMultiDeviceRequest: CreateMultiDeviceRequest,
     DeleteLoraDeviceResponse: DeleteLoraDeviceResponse,
     CreateTaskRequest: CreateTaskRequest,
     DescribeAllDevicesRequest: DescribeAllDevicesRequest,
     DescribeProductResourceResponse: DescribeProductResourceResponse,
+    CancelDeviceFirmwareTaskResponse: CancelDeviceFirmwareTaskResponse,
     CreateTopicPolicyResponse: CreateTopicPolicyResponse,
     PublishToDeviceResponse: PublishToDeviceResponse,
     RetryDeviceFirmwareTaskResponse: RetryDeviceFirmwareTaskResponse,
@@ -7050,7 +8129,7 @@ module.exports = {
     DescribeProductTaskResponse: DescribeProductTaskResponse,
     DescribeDeviceResponse: DescribeDeviceResponse,
     PublishBroadcastMessageRequest: PublishBroadcastMessageRequest,
-    PublishMessageRequest: PublishMessageRequest,
+    ListLogResponse: ListLogResponse,
     RetryDeviceFirmwareTaskRequest: RetryDeviceFirmwareTaskRequest,
     DescribeFirmwareTaskDevicesResponse: DescribeFirmwareTaskDevicesResponse,
     DescribeFirmwareTasksResponse: DescribeFirmwareTasksResponse,
@@ -7058,13 +8137,17 @@ module.exports = {
     GetCOSURLResponse: GetCOSURLResponse,
     UpdateDeviceAvailableStateResponse: UpdateDeviceAvailableStateResponse,
     EditFirmwareResponse: EditFirmwareResponse,
+    ListSDKLogResponse: ListSDKLogResponse,
     CancelTaskRequest: CancelTaskRequest,
     DescribeFirmwareTaskDistributionRequest: DescribeFirmwareTaskDistributionRequest,
     UpdateDeviceAvailableStateRequest: UpdateDeviceAvailableStateRequest,
     GetUserResourceInfoResponse: GetUserResourceInfoResponse,
+    ListLogPayloadResponse: ListLogPayloadResponse,
     DeleteProductResponse: DeleteProductResponse,
     DeviceProperty: DeviceProperty,
     PublishToDeviceRequest: PublishToDeviceRequest,
+    SetProductsForbiddenStatusRequest: SetProductsForbiddenStatusRequest,
+    DownloadDeviceResourceResponse: DownloadDeviceResourceResponse,
     UploadFirmwareResponse: UploadFirmwareResponse,
     ProductInfo: ProductInfo,
     DescribeFirmwareTaskDistributionResponse: DescribeFirmwareTaskDistributionResponse,
@@ -7072,6 +8155,7 @@ module.exports = {
     DescribeDeviceRequest: DescribeDeviceRequest,
     CreateMultiDevicesTaskResponse: CreateMultiDevicesTaskResponse,
     DescribeProductResourcesResponse: DescribeProductResourcesResponse,
+    UpdateProductDynamicRegisterRequest: UpdateProductDynamicRegisterRequest,
     CreateTopicPolicyRequest: CreateTopicPolicyRequest,
     DescribeProductResourceRequest: DescribeProductResourceRequest,
     DescribeLoraDeviceResponse: DescribeLoraDeviceResponse,
@@ -7079,6 +8163,7 @@ module.exports = {
     ReplaceTopicRuleRequest: ReplaceTopicRuleRequest,
     PublishRRPCMessageResponse: PublishRRPCMessageResponse,
     CancelTaskResponse: CancelTaskResponse,
+    UpdateTopicPolicyRequest: UpdateTopicPolicyRequest,
     Attribute: Attribute,
     DescribeDeviceResourcesResponse: DescribeDeviceResourcesResponse,
     CreateLoraDeviceResponse: CreateLoraDeviceResponse,
@@ -7086,9 +8171,10 @@ module.exports = {
     ReplaceTopicRuleResponse: ReplaceTopicRuleResponse,
     PublishAsDeviceRequest: PublishAsDeviceRequest,
     CancelDeviceFirmwareTaskRequest: CancelDeviceFirmwareTaskRequest,
-    CancelDeviceFirmwareTaskResponse: CancelDeviceFirmwareTaskResponse,
+    DeleteDeviceResourceRequest: DeleteDeviceResourceRequest,
     DescribeMultiDevicesResponse: DescribeMultiDevicesResponse,
     DescribeDeviceShadowRequest: DescribeDeviceShadowRequest,
+    UpdateProductDynamicRegisterResponse: UpdateProductDynamicRegisterResponse,
     UnbindDevicesResponse: UnbindDevicesResponse,
     DeviceInfo: DeviceInfo,
     DescribeMultiDevicesRequest: DescribeMultiDevicesRequest,
@@ -7102,7 +8188,10 @@ module.exports = {
     GetUserResourceInfoRequest: GetUserResourceInfoRequest,
     DeviceTag: DeviceTag,
     DescribeAllDevicesResponse: DescribeAllDevicesResponse,
+    ListLogRequest: ListLogRequest,
     ProductMetadata: ProductMetadata,
+    SDKLogItem: SDKLogItem,
+    DescribeProductResponse: DescribeProductResponse,
     DescribeLoraDeviceRequest: DescribeLoraDeviceRequest,
     DescribeTaskRequest: DescribeTaskRequest,
     PublishMessageResponse: PublishMessageResponse,
@@ -7116,6 +8205,7 @@ module.exports = {
     ResetDeviceStateResponse: ResetDeviceStateResponse,
     FirmwareTaskInfo: FirmwareTaskInfo,
     CreateTopicRuleResponse: CreateTopicRuleResponse,
+    ListLogPayloadRequest: ListLogPayloadRequest,
     CreateTopicRuleRequest: CreateTopicRuleRequest,
     DescribeResourceTasksResponse: DescribeResourceTasksResponse,
     DescribeFirmwareTaskStatisticsRequest: DescribeFirmwareTaskStatisticsRequest,

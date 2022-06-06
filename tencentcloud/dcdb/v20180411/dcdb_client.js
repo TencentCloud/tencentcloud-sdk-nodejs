@@ -22,20 +22,31 @@ const UpgradeDCDBInstanceResponse = models.UpgradeDCDBInstanceResponse;
 const DescribeAccountPrivilegesResponse = models.DescribeAccountPrivilegesResponse;
 const DescribeDatabasesRequest = models.DescribeDatabasesRequest;
 const ParamDesc = models.ParamDesc;
+const DestroyDCDBInstanceResponse = models.DestroyDCDBInstanceResponse;
 const DescribeDBParametersRequest = models.DescribeDBParametersRequest;
 const DescribeAccountsRequest = models.DescribeAccountsRequest;
 const SpecConfig = models.SpecConfig;
+const ModifyRealServerAccessStrategyResponse = models.ModifyRealServerAccessStrategyResponse;
+const ActiveHourDCDBInstanceResponse = models.ActiveHourDCDBInstanceResponse;
 const DescribeDCDBPriceResponse = models.DescribeDCDBPriceResponse;
 const AssociateSecurityGroupsRequest = models.AssociateSecurityGroupsRequest;
+const TerminateDedicatedDBInstanceResponse = models.TerminateDedicatedDBInstanceResponse;
 const FlushBinlogResponse = models.FlushBinlogResponse;
 const DescribeDBSecurityGroupsResponse = models.DescribeDBSecurityGroupsResponse;
+const CancelDcnJobResponse = models.CancelDcnJobResponse;
+const DescribeFileDownloadUrlRequest = models.DescribeFileDownloadUrlRequest;
 const DescribeDBSyncModeResponse = models.DescribeDBSyncModeResponse;
 const DescribeProjectSecurityGroupsRequest = models.DescribeProjectSecurityGroupsRequest;
 const DescribeDCDBUpgradePriceResponse = models.DescribeDCDBUpgradePriceResponse;
+const DescribeDBSlowLogsRequest = models.DescribeDBSlowLogsRequest;
 const CreateAccountRequest = models.CreateAccountRequest;
 const DescribeDBParametersResponse = models.DescribeDBParametersResponse;
+const IsolateHourDCDBInstanceRequest = models.IsolateHourDCDBInstanceRequest;
+const ModifyDBInstanceNameResponse = models.ModifyDBInstanceNameResponse;
+const DescribeFlowResponse = models.DescribeFlowResponse;
 const CloneAccountResponse = models.CloneAccountResponse;
 const ModifyAccountDescriptionResponse = models.ModifyAccountDescriptionResponse;
+const DestroyDCDBInstanceRequest = models.DestroyDCDBInstanceRequest;
 const OpenDBExtranetAccessResponse = models.OpenDBExtranetAccessResponse;
 const CreateDCDBInstanceResponse = models.CreateDCDBInstanceResponse;
 const BriefNodeInfo = models.BriefNodeInfo;
@@ -44,20 +55,24 @@ const DescribeDCDBInstanceNodeInfoRequest = models.DescribeDCDBInstanceNodeInfoR
 const DatabaseView = models.DatabaseView;
 const DescribeDBLogFilesRequest = models.DescribeDBLogFilesRequest;
 const DescribeOrdersResponse = models.DescribeOrdersResponse;
-const DcnDetailItem = models.DcnDetailItem;
+const CreateDedicatedClusterDCDBInstanceRequest = models.CreateDedicatedClusterDCDBInstanceRequest;
+const CreateHourDCDBInstanceRequest = models.CreateHourDCDBInstanceRequest;
 const ResetAccountPasswordRequest = models.ResetAccountPasswordRequest;
 const CopyAccountPrivilegesResponse = models.CopyAccountPrivilegesResponse;
 const CloneAccountRequest = models.CloneAccountRequest;
 const DescribeDCDBRenewalPriceRequest = models.DescribeDCDBRenewalPriceRequest;
 const ParamModifyResult = models.ParamModifyResult;
 const DescribeDBSecurityGroupsRequest = models.DescribeDBSecurityGroupsRequest;
+const DatabaseProcedure = models.DatabaseProcedure;
 const DescribeDCDBPriceRequest = models.DescribeDCDBPriceRequest;
+const SwitchDBInstanceHAResponse = models.SwitchDBInstanceHAResponse;
 const DescribeProjectSecurityGroupsResponse = models.DescribeProjectSecurityGroupsResponse;
 const DatabaseFunction = models.DatabaseFunction;
 const DescribeSqlLogsRequest = models.DescribeSqlLogsRequest;
 const ParamConstraint = models.ParamConstraint;
 const ResetAccountPasswordResponse = models.ResetAccountPasswordResponse;
 const DescribeDCDBSaleInfoRequest = models.DescribeDCDBSaleInfoRequest;
+const ModifyRealServerAccessStrategyRequest = models.ModifyRealServerAccessStrategyRequest;
 const ExpandShardConfig = models.ExpandShardConfig;
 const RenewDCDBInstanceRequest = models.RenewDCDBInstanceRequest;
 const ShardZoneChooseInfo = models.ShardZoneChooseInfo;
@@ -66,12 +81,14 @@ const Deal = models.Deal;
 const GrantAccountPrivilegesRequest = models.GrantAccountPrivilegesRequest;
 const DescribeShardSpecRequest = models.DescribeShardSpecRequest;
 const DescribeDCDBShardsRequest = models.DescribeDCDBShardsRequest;
+const SwitchDBInstanceHARequest = models.SwitchDBInstanceHARequest;
 const DBParamValue = models.DBParamValue;
 const SpecConfigInfo = models.SpecConfigInfo;
 const ModifyDBParametersRequest = models.ModifyDBParametersRequest;
 const DCDBInstanceInfo = models.DCDBInstanceInfo;
 const ModifyDBInstanceSecurityGroupsRequest = models.ModifyDBInstanceSecurityGroupsRequest;
 const DescribeDcnDetailRequest = models.DescribeDcnDetailRequest;
+const DescribeFileDownloadUrlResponse = models.DescribeFileDownloadUrlResponse;
 const ModifyDBParametersResponse = models.ModifyDBParametersResponse;
 const DCDBShardInfo = models.DCDBShardInfo;
 const CopyAccountPrivilegesRequest = models.CopyAccountPrivilegesRequest;
@@ -79,7 +96,9 @@ const SecurityGroup = models.SecurityGroup;
 const DescribeDatabaseTableRequest = models.DescribeDatabaseTableRequest;
 const DescribeDCDBInstanceNodeInfoResponse = models.DescribeDCDBInstanceNodeInfoResponse;
 const KillSessionRequest = models.KillSessionRequest;
+const TerminateDedicatedDBInstanceRequest = models.TerminateDedicatedDBInstanceRequest;
 const DescribeDatabaseObjectsResponse = models.DescribeDatabaseObjectsResponse;
+const ModifyDBInstanceNameRequest = models.ModifyDBInstanceNameRequest;
 const DescribeDcnDetailResponse = models.DescribeDcnDetailResponse;
 const TableColumn = models.TableColumn;
 const SecurityGroupBound = models.SecurityGroupBound;
@@ -90,17 +109,21 @@ const AssociateSecurityGroupsResponse = models.AssociateSecurityGroupsResponse;
 const DescribeDCDBRenewalPriceResponse = models.DescribeDCDBRenewalPriceResponse;
 const DescribeDCDBShardsResponse = models.DescribeDCDBShardsResponse;
 const ZonesInfo = models.ZonesInfo;
+const CreateHourDCDBInstanceResponse = models.CreateHourDCDBInstanceResponse;
 const Database = models.Database;
 const GrantAccountPrivilegesResponse = models.GrantAccountPrivilegesResponse;
+const CancelDcnJobRequest = models.CancelDcnJobRequest;
+const IsolateHourDCDBInstanceResponse = models.IsolateHourDCDBInstanceResponse;
 const ShardInfo = models.ShardInfo;
 const OpenDBExtranetAccessRequest = models.OpenDBExtranetAccessRequest;
 const DescribeDCDBSaleInfoResponse = models.DescribeDCDBSaleInfoResponse;
-const ModifyDBInstanceSecurityGroupsResponse = models.ModifyDBInstanceSecurityGroupsResponse;
+const ModifyDBInstancesProjectRequest = models.ModifyDBInstancesProjectRequest;
+const DcnDetailItem = models.DcnDetailItem;
 const DescribeDBSyncModeRequest = models.DescribeDBSyncModeRequest;
 const CloseDBExtranetAccessResponse = models.CloseDBExtranetAccessResponse;
 const ModifyAccountDescriptionRequest = models.ModifyAccountDescriptionRequest;
 const KillSessionResponse = models.KillSessionResponse;
-const DescribeProjectsRequest = models.DescribeProjectsRequest;
+const SlowLogData = models.SlowLogData;
 const DescribeDatabasesResponse = models.DescribeDatabasesResponse;
 const DescribeOrdersRequest = models.DescribeOrdersRequest;
 const DescribeDBLogFilesResponse = models.DescribeDBLogFilesResponse;
@@ -110,10 +133,12 @@ const ResourceTag = models.ResourceTag;
 const DescribeSqlLogsResponse = models.DescribeSqlLogsResponse;
 const DeleteAccountRequest = models.DeleteAccountRequest;
 const DescribeDCDBInstancesResponse = models.DescribeDCDBInstancesResponse;
+const DescribeFlowRequest = models.DescribeFlowRequest;
 const CreateDCDBInstanceRequest = models.CreateDCDBInstanceRequest;
 const DescribeDCDBUpgradePriceRequest = models.DescribeDCDBUpgradePriceRequest;
+const CreateDedicatedClusterDCDBInstanceResponse = models.CreateDedicatedClusterDCDBInstanceResponse;
 const UserTaskInfo = models.UserTaskInfo;
-const DatabaseProcedure = models.DatabaseProcedure;
+const DescribeProjectsRequest = models.DescribeProjectsRequest;
 const AddShardConfig = models.AddShardConfig;
 const ModifyDBSyncModeRequest = models.ModifyDBSyncModeRequest;
 const DescribeProjectsResponse = models.DescribeProjectsResponse;
@@ -121,17 +146,21 @@ const CreateAccountResponse = models.CreateAccountResponse;
 const RegionInfo = models.RegionInfo;
 const DescribeDatabaseObjectsRequest = models.DescribeDatabaseObjectsRequest;
 const UpgradeDCDBInstanceRequest = models.UpgradeDCDBInstanceRequest;
+const DestroyHourDCDBInstanceResponse = models.DestroyHourDCDBInstanceResponse;
 const ConstraintRange = models.ConstraintRange;
 const LogFileInfo = models.LogFileInfo;
+const ActiveHourDCDBInstanceRequest = models.ActiveHourDCDBInstanceRequest;
 const DisassociateSecurityGroupsRequest = models.DisassociateSecurityGroupsRequest;
 const DBAccount = models.DBAccount;
 const DescribeDatabaseTableResponse = models.DescribeDatabaseTableResponse;
 const DescribeAccountPrivilegesRequest = models.DescribeAccountPrivilegesRequest;
 const SqlLogItem = models.SqlLogItem;
 const DescribeAccountsResponse = models.DescribeAccountsResponse;
+const DescribeDBSlowLogsResponse = models.DescribeDBSlowLogsResponse;
 const DescribeDCDBInstancesRequest = models.DescribeDCDBInstancesRequest;
 const Project = models.Project;
-const ModifyDBInstancesProjectRequest = models.ModifyDBInstancesProjectRequest;
+const ModifyDBInstanceSecurityGroupsResponse = models.ModifyDBInstanceSecurityGroupsResponse;
+const DestroyHourDCDBInstanceRequest = models.DestroyHourDCDBInstanceRequest;
 const FlushBinlogRequest = models.FlushBinlogRequest;
 const ModifyDBSyncModeResponse = models.ModifyDBSyncModeResponse;
 const DisassociateSecurityGroupsResponse = models.DisassociateSecurityGroupsResponse;
@@ -162,14 +191,14 @@ class DcdbClient extends AbstractClient {
     }
 
     /**
-     * 本接口（DescribeOrders）用于查询分布式数据库订单信息。传入订单ID来查询订单关联的分布式数据库实例，和对应的任务流程ID。
-     * @param {DescribeOrdersRequest} req
-     * @param {function(string, DescribeOrdersResponse):void} cb
+     * 解隔离DCDB后付费实例
+     * @param {ActiveHourDCDBInstanceRequest} req
+     * @param {function(string, ActiveHourDCDBInstanceResponse):void} cb
      * @public
      */
-    DescribeOrders(req, cb) {
-        let resp = new DescribeOrdersResponse();
-        this.request("DescribeOrders", req, resp, cb);
+    ActiveHourDCDBInstance(req, cb) {
+        let resp = new ActiveHourDCDBInstanceResponse();
+        this.request("ActiveHourDCDBInstance", req, resp, cb);
     }
 
     /**
@@ -230,6 +259,33 @@ class DcdbClient extends AbstractClient {
     }
 
     /**
+     * 本接口(ModifyRealServerAccessStrategy)用于修改云数据库的VPCGW到RS的访问策略。
+
+**注意**
+- 修改策略后只对新建立的连接生效，老连接不受影响
+- 就近访问只针对实例是跨可用区部署有用，单可用区部署实例就近与否并无作用
+- DB每个Node对应一个proxy，如果开启就近访问，将会把连接集中到对应可用区的proxy上，可能造成热点问题，这种情况下如果是线上业务，请务必根据自己的业务请求量测试符合预期后再进行就近策略变更
+     * @param {ModifyRealServerAccessStrategyRequest} req
+     * @param {function(string, ModifyRealServerAccessStrategyResponse):void} cb
+     * @public
+     */
+    ModifyRealServerAccessStrategy(req, cb) {
+        let resp = new ModifyRealServerAccessStrategyResponse();
+        this.request("ModifyRealServerAccessStrategy", req, resp, cb);
+    }
+
+    /**
+     * 本接口(DescribeFileDownloadUrl)用于获取数据库指定备份或日志文件的下载连接。
+     * @param {DescribeFileDownloadUrlRequest} req
+     * @param {function(string, DescribeFileDownloadUrlResponse):void} cb
+     * @public
+     */
+    DescribeFileDownloadUrl(req, cb) {
+        let resp = new DescribeFileDownloadUrlResponse();
+        this.request("DescribeFileDownloadUrl", req, resp, cb);
+    }
+
+    /**
      * 本接口（ModifyAccountDescription）用于修改云数据库账号备注。
 注意：相同用户名，不同Host是不同的账号。
      * @param {ModifyAccountDescriptionRequest} req
@@ -239,6 +295,17 @@ class DcdbClient extends AbstractClient {
     ModifyAccountDescription(req, cb) {
         let resp = new ModifyAccountDescriptionResponse();
         this.request("ModifyAccountDescription", req, resp, cb);
+    }
+
+    /**
+     * 本接口（DescribeOrders）用于查询分布式数据库订单信息。传入订单ID来查询订单关联的分布式数据库实例，和对应的任务流程ID。
+     * @param {DescribeOrdersRequest} req
+     * @param {function(string, DescribeOrdersResponse):void} cb
+     * @public
+     */
+    DescribeOrders(req, cb) {
+        let resp = new DescribeOrdersResponse();
+        this.request("DescribeOrders", req, resp, cb);
     }
 
     /**
@@ -286,14 +353,36 @@ class DcdbClient extends AbstractClient {
     }
 
     /**
-     * 本接口（OpenDBExtranetAccess）用于开通云数据库实例的外网访问。开通外网访问后，您可通过外网域名和端口访问实例，可使用查询实例列表接口获取外网域名和端口信息。
-     * @param {OpenDBExtranetAccessRequest} req
-     * @param {function(string, OpenDBExtranetAccessResponse):void} cb
+     * 本接口(DescribeDBSlowLogs)用于查询慢查询日志列表。
+     * @param {DescribeDBSlowLogsRequest} req
+     * @param {function(string, DescribeDBSlowLogsResponse):void} cb
      * @public
      */
-    OpenDBExtranetAccess(req, cb) {
-        let resp = new OpenDBExtranetAccessResponse();
-        this.request("OpenDBExtranetAccess", req, resp, cb);
+    DescribeDBSlowLogs(req, cb) {
+        let resp = new DescribeDBSlowLogsResponse();
+        this.request("DescribeDBSlowLogs", req, resp, cb);
+    }
+
+    /**
+     * 本接口（DescribeFlow）用于查询流程状态
+     * @param {DescribeFlowRequest} req
+     * @param {function(string, DescribeFlowResponse):void} cb
+     * @public
+     */
+    DescribeFlow(req, cb) {
+        let resp = new DescribeFlowResponse();
+        this.request("DescribeFlow", req, resp, cb);
+    }
+
+    /**
+     * 本接口(SwitchDBInstanceHA)用于实例主备切换。
+     * @param {SwitchDBInstanceHARequest} req
+     * @param {function(string, SwitchDBInstanceHAResponse):void} cb
+     * @public
+     */
+    SwitchDBInstanceHA(req, cb) {
+        let resp = new SwitchDBInstanceHAResponse();
+        this.request("SwitchDBInstanceHA", req, resp, cb);
     }
 
     /**
@@ -308,15 +397,14 @@ class DcdbClient extends AbstractClient {
     }
 
     /**
-     * 本接口（GrantAccountPrivileges）用于给云数据库账号赋权。
-注意：相同用户名，不同Host是不同的账号。
-     * @param {GrantAccountPrivilegesRequest} req
-     * @param {function(string, GrantAccountPrivilegesResponse):void} cb
+     * 创建独享集群DCDB实例
+     * @param {CreateDedicatedClusterDCDBInstanceRequest} req
+     * @param {function(string, CreateDedicatedClusterDCDBInstanceResponse):void} cb
      * @public
      */
-    GrantAccountPrivileges(req, cb) {
-        let resp = new GrantAccountPrivilegesResponse();
-        this.request("GrantAccountPrivileges", req, resp, cb);
+    CreateDedicatedClusterDCDBInstance(req, cb) {
+        let resp = new CreateDedicatedClusterDCDBInstanceResponse();
+        this.request("CreateDedicatedClusterDCDBInstance", req, resp, cb);
     }
 
     /**
@@ -386,14 +474,14 @@ class DcdbClient extends AbstractClient {
     }
 
     /**
-     * 本接口（UpgradeDCDBInstance）用于升级分布式数据库实例。本接口完成下单和支付两个动作，如果发生支付失败的错误，调用用户账户相关接口中的支付订单接口（PayDeals）重新支付即可。
-     * @param {UpgradeDCDBInstanceRequest} req
-     * @param {function(string, UpgradeDCDBInstanceResponse):void} cb
+     * 隔离DCDB后付费实例
+     * @param {IsolateHourDCDBInstanceRequest} req
+     * @param {function(string, IsolateHourDCDBInstanceResponse):void} cb
      * @public
      */
-    UpgradeDCDBInstance(req, cb) {
-        let resp = new UpgradeDCDBInstanceResponse();
-        this.request("UpgradeDCDBInstance", req, resp, cb);
+    IsolateHourDCDBInstance(req, cb) {
+        let resp = new IsolateHourDCDBInstanceResponse();
+        this.request("IsolateHourDCDBInstance", req, resp, cb);
     }
 
     /**
@@ -452,14 +540,25 @@ class DcdbClient extends AbstractClient {
     }
 
     /**
-     * 本接口（ModifyDBInstanceSecurityGroups）用于修改云数据库安全组
-     * @param {ModifyDBInstanceSecurityGroupsRequest} req
-     * @param {function(string, ModifyDBInstanceSecurityGroupsResponse):void} cb
+     * 本接口（OpenDBExtranetAccess）用于开通云数据库实例的外网访问。开通外网访问后，您可通过外网域名和端口访问实例，可使用查询实例列表接口获取外网域名和端口信息。
+     * @param {OpenDBExtranetAccessRequest} req
+     * @param {function(string, OpenDBExtranetAccessResponse):void} cb
      * @public
      */
-    ModifyDBInstanceSecurityGroups(req, cb) {
-        let resp = new ModifyDBInstanceSecurityGroupsResponse();
-        this.request("ModifyDBInstanceSecurityGroups", req, resp, cb);
+    OpenDBExtranetAccess(req, cb) {
+        let resp = new OpenDBExtranetAccessResponse();
+        this.request("OpenDBExtranetAccess", req, resp, cb);
+    }
+
+    /**
+     * 本接口(DestroyDCDBInstance)用于销毁已隔离的包年包月实例。
+     * @param {DestroyDCDBInstanceRequest} req
+     * @param {function(string, DestroyDCDBInstanceResponse):void} cb
+     * @public
+     */
+    DestroyDCDBInstance(req, cb) {
+        let resp = new DestroyDCDBInstanceResponse();
+        this.request("DestroyDCDBInstance", req, resp, cb);
     }
 
     /**
@@ -540,6 +639,18 @@ class DcdbClient extends AbstractClient {
     }
 
     /**
+     * 本接口（GrantAccountPrivileges）用于给云数据库账号赋权。
+注意：相同用户名，不同Host是不同的账号。
+     * @param {GrantAccountPrivilegesRequest} req
+     * @param {function(string, GrantAccountPrivilegesResponse):void} cb
+     * @public
+     */
+    GrantAccountPrivileges(req, cb) {
+        let resp = new GrantAccountPrivilegesResponse();
+        this.request("GrantAccountPrivileges", req, resp, cb);
+    }
+
+    /**
      * 本接口（CopyAccountPrivileges）用于复制云数据库账号的权限。
 注意：相同用户名，不同Host是不同的账号，Readonly属性相同的账号之间才能复制权限。
      * @param {CopyAccountPrivilegesRequest} req
@@ -585,6 +696,17 @@ class DcdbClient extends AbstractClient {
     }
 
     /**
+     * 本接口（DestroyHourDCDBInstance）用于销毁按量计费实例。
+     * @param {DestroyHourDCDBInstanceRequest} req
+     * @param {function(string, DestroyHourDCDBInstanceResponse):void} cb
+     * @public
+     */
+    DestroyHourDCDBInstance(req, cb) {
+        let resp = new DestroyHourDCDBInstanceResponse();
+        this.request("DestroyHourDCDBInstance", req, resp, cb);
+    }
+
+    /**
      * 本接口（DescribeDBSecurityGroups）用于查询实例安全组信息
      * @param {DescribeDBSecurityGroupsRequest} req
      * @param {function(string, DescribeDBSecurityGroupsResponse):void} cb
@@ -596,7 +718,7 @@ class DcdbClient extends AbstractClient {
     }
 
     /**
-     * 本接口（DescribeDCDBUpgradePrice）用于查询升级分布式数据库实例价格。
+     * 本接口（DescribeDCDBUpgradePrice）用于查询变配分布式数据库实例价格。
      * @param {DescribeDCDBUpgradePriceRequest} req
      * @param {function(string, DescribeDCDBUpgradePriceResponse):void} cb
      * @public
@@ -604,6 +726,28 @@ class DcdbClient extends AbstractClient {
     DescribeDCDBUpgradePrice(req, cb) {
         let resp = new DescribeDCDBUpgradePriceResponse();
         this.request("DescribeDCDBUpgradePrice", req, resp, cb);
+    }
+
+    /**
+     * 取消DCN同步
+     * @param {CancelDcnJobRequest} req
+     * @param {function(string, CancelDcnJobResponse):void} cb
+     * @public
+     */
+    CancelDcnJob(req, cb) {
+        let resp = new CancelDcnJobResponse();
+        this.request("CancelDcnJob", req, resp, cb);
+    }
+
+    /**
+     * 本接口（IsolateDedicatedDBInstance）用于销毁已隔离的独享分布式数据库实例。
+     * @param {TerminateDedicatedDBInstanceRequest} req
+     * @param {function(string, TerminateDedicatedDBInstanceResponse):void} cb
+     * @public
+     */
+    TerminateDedicatedDBInstance(req, cb) {
+        let resp = new TerminateDedicatedDBInstanceResponse();
+        this.request("TerminateDedicatedDBInstance", req, resp, cb);
     }
 
     /**
@@ -618,6 +762,28 @@ class DcdbClient extends AbstractClient {
     }
 
     /**
+     * 本接口（ModifyDBInstanceName）用于修改实例名字
+     * @param {ModifyDBInstanceNameRequest} req
+     * @param {function(string, ModifyDBInstanceNameResponse):void} cb
+     * @public
+     */
+    ModifyDBInstanceName(req, cb) {
+        let resp = new ModifyDBInstanceNameResponse();
+        this.request("ModifyDBInstanceName", req, resp, cb);
+    }
+
+    /**
+     * 创建DCDB后付费实例
+     * @param {CreateHourDCDBInstanceRequest} req
+     * @param {function(string, CreateHourDCDBInstanceResponse):void} cb
+     * @public
+     */
+    CreateHourDCDBInstance(req, cb) {
+        let resp = new CreateHourDCDBInstanceResponse();
+        this.request("CreateHourDCDBInstance", req, resp, cb);
+    }
+
+    /**
      * 本接口(DisassociateSecurityGroups)用于安全组批量解绑实例。
      * @param {DisassociateSecurityGroupsRequest} req
      * @param {function(string, DisassociateSecurityGroupsResponse):void} cb
@@ -629,6 +795,17 @@ class DcdbClient extends AbstractClient {
     }
 
     /**
+     * 本接口（UpgradeDCDBInstance）用于升级分布式数据库实例。本接口完成下单和支付两个动作，如果发生支付失败的错误，调用用户账户相关接口中的支付订单接口（PayDeals）重新支付即可。
+     * @param {UpgradeDCDBInstanceRequest} req
+     * @param {function(string, UpgradeDCDBInstanceResponse):void} cb
+     * @public
+     */
+    UpgradeDCDBInstance(req, cb) {
+        let resp = new UpgradeDCDBInstanceResponse();
+        this.request("UpgradeDCDBInstance", req, resp, cb);
+    }
+
+    /**
      * 本接口（DescribeDCDBRenewalPrice）用于在续费分布式数据库实例时，查询续费的价格。
      * @param {DescribeDCDBRenewalPriceRequest} req
      * @param {function(string, DescribeDCDBRenewalPriceResponse):void} cb
@@ -637,6 +814,17 @@ class DcdbClient extends AbstractClient {
     DescribeDCDBRenewalPrice(req, cb) {
         let resp = new DescribeDCDBRenewalPriceResponse();
         this.request("DescribeDCDBRenewalPrice", req, resp, cb);
+    }
+
+    /**
+     * 本接口（ModifyDBInstanceSecurityGroups）用于修改云数据库安全组
+     * @param {ModifyDBInstanceSecurityGroupsRequest} req
+     * @param {function(string, ModifyDBInstanceSecurityGroupsResponse):void} cb
+     * @public
+     */
+    ModifyDBInstanceSecurityGroups(req, cb) {
+        let resp = new ModifyDBInstanceSecurityGroupsResponse();
+        this.request("ModifyDBInstanceSecurityGroups", req, resp, cb);
     }
 
 

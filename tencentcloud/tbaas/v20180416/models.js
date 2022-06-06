@@ -200,6 +200,62 @@ class QueryRequest extends  AbstractModel {
 }
 
 /**
+ * QueryChainMakerContract请求参数结构体
+ * @class
+ */
+class QueryChainMakerContractRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 网络ID，可在区块链网络详情或列表中获取
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 业务链编号，可在业务链列表中获取
+         * @type {string || null}
+         */
+        this.ChainId = null;
+
+        /**
+         * 合约名称，可在合约管理中获取
+         * @type {string || null}
+         */
+        this.ContractName = null;
+
+        /**
+         * 合约方法名
+         * @type {string || null}
+         */
+        this.FuncName = null;
+
+        /**
+         * 合约方法入参，json格式字符串，key/value都是string类型的map
+         * @type {string || null}
+         */
+        this.FuncParam = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.ChainId = 'ChainId' in params ? params.ChainId : null;
+        this.ContractName = 'ContractName' in params ? params.ContractName : null;
+        this.FuncName = 'FuncName' in params ? params.FuncName : null;
+        this.FuncParam = 'FuncParam' in params ? params.FuncParam : null;
+
+    }
+}
+
+/**
  * DeployDynamicBcosContract返回参数结构体
  * @class
  */
@@ -280,6 +336,69 @@ class GetClusterListForUserResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * SendTransactionHandler请求参数结构体
+ * @class
+ */
+class SendTransactionHandlerRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 模块名，固定字段：transaction
+         * @type {string || null}
+         */
+        this.Module = null;
+
+        /**
+         * 操作名，固定字段：send_transaction
+         * @type {string || null}
+         */
+        this.Operation = null;
+
+        /**
+         * 群组编号
+         * @type {string || null}
+         */
+        this.GroupPk = null;
+
+        /**
+         * 合约编号
+         * @type {number || null}
+         */
+        this.ContractId = null;
+
+        /**
+         * 合约方法名
+         * @type {string || null}
+         */
+        this.FuncName = null;
+
+        /**
+         * 合约方法入参
+         * @type {Array.<string> || null}
+         */
+        this.FuncParam = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Module = 'Module' in params ? params.Module : null;
+        this.Operation = 'Operation' in params ? params.Operation : null;
+        this.GroupPk = 'GroupPk' in params ? params.GroupPk : null;
+        this.ContractId = 'ContractId' in params ? params.ContractId : null;
+        this.FuncName = 'FuncName' in params ? params.FuncName : null;
+        this.FuncParam = 'FuncParam' in params ? params.FuncParam : null;
 
     }
 }
@@ -1206,6 +1325,48 @@ class DownloadUserCertResponse extends  AbstractModel {
 }
 
 /**
+ * QueryChainMakerBlockTransaction请求参数结构体
+ * @class
+ */
+class QueryChainMakerBlockTransactionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 网络ID，可在区块链网络详情或列表中获取
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 业务链编号，可在业务链列表中获取
+         * @type {string || null}
+         */
+        this.ChainId = null;
+
+        /**
+         * 区块高度，-1表示最新区块
+         * @type {number || null}
+         */
+        this.BlockHeight = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.ChainId = 'ChainId' in params ? params.ChainId : null;
+        this.BlockHeight = 'BlockHeight' in params ? params.BlockHeight : null;
+
+    }
+}
+
+/**
  * GetChaincodeLogForUser请求参数结构体
  * @class
  */
@@ -1543,60 +1704,60 @@ class GetBlockListResponse extends  AbstractModel {
 }
 
 /**
- * 交易列表项信息
+ * GetBlockTransactionListForUser请求参数结构体
  * @class
  */
-class TransactionItem extends  AbstractModel {
+class GetBlockTransactionListForUserRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 交易ID
+         * 模块名，固定字段：transaction
          * @type {string || null}
          */
-        this.TransactionId = null;
+        this.Module = null;
 
         /**
-         * 交易hash
+         * 操作名，固定字段：block_transaction_list_for_user
          * @type {string || null}
          */
-        this.TransactionHash = null;
+        this.Operation = null;
 
         /**
-         * 创建交易的组织名
+         * 区块链网络ID，可在区块链网络详情或列表中获取
          * @type {string || null}
          */
-        this.CreateOrgName = null;
+        this.ClusterId = null;
 
         /**
-         * 交易所在区块号
+         * 参与交易的组织名称，可以在组织管理列表中获取当前组织的名称
+         * @type {string || null}
+         */
+        this.GroupName = null;
+
+        /**
+         * 业务所属通道名称，可在通道详情或列表中获取
+         * @type {string || null}
+         */
+        this.ChannelName = null;
+
+        /**
+         * 区块ID，通过GetInvokeTx接口可以获取交易所在的区块ID
          * @type {number || null}
          */
         this.BlockId = null;
 
         /**
-         * 交易类型（普通交易和配置交易）
-         * @type {string || null}
-         */
-        this.TransactionType = null;
-
-        /**
-         * 交易创建时间
-         * @type {string || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * 交易所在区块高度
+         * 查询的交易列表起始偏移地址
          * @type {number || null}
          */
-        this.BlockHeight = null;
+        this.Offset = null;
 
         /**
-         * 交易状态
-         * @type {string || null}
+         * 查询的交易列表数量
+         * @type {number || null}
          */
-        this.TransactionStatus = null;
+        this.Limit = null;
 
     }
 
@@ -1607,14 +1768,80 @@ class TransactionItem extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TransactionId = 'TransactionId' in params ? params.TransactionId : null;
-        this.TransactionHash = 'TransactionHash' in params ? params.TransactionHash : null;
-        this.CreateOrgName = 'CreateOrgName' in params ? params.CreateOrgName : null;
+        this.Module = 'Module' in params ? params.Module : null;
+        this.Operation = 'Operation' in params ? params.Operation : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.GroupName = 'GroupName' in params ? params.GroupName : null;
+        this.ChannelName = 'ChannelName' in params ? params.ChannelName : null;
         this.BlockId = 'BlockId' in params ? params.BlockId : null;
-        this.TransactionType = 'TransactionType' in params ? params.TransactionType : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * QueryChainMakerBlockTransaction返回参数结构体
+ * @class
+ */
+class QueryChainMakerBlockTransactionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 区块交易
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<ChainMakerTransactionResult> || null}
+         */
+        this.Result = null;
+
+        /**
+         * 区块高度
+         * @type {number || null}
+         */
+        this.BlockHeight = null;
+
+        /**
+         * 交易数量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TxCount = null;
+
+        /**
+         * 区块时间戳，单位是秒
+         * @type {number || null}
+         */
+        this.BlockTimestamp = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            this.Result = new Array();
+            for (let z in params.Result) {
+                let obj = new ChainMakerTransactionResult();
+                obj.deserialize(params.Result[z]);
+                this.Result.push(obj);
+            }
+        }
         this.BlockHeight = 'BlockHeight' in params ? params.BlockHeight : null;
-        this.TransactionStatus = 'TransactionStatus' in params ? params.TransactionStatus : null;
+        this.TxCount = 'TxCount' in params ? params.TxCount : null;
+        this.BlockTimestamp = 'BlockTimestamp' in params ? params.BlockTimestamp : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1832,6 +2059,47 @@ class GetTransListHandlerRequest extends  AbstractModel {
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.GroupPk = 'GroupPk' in params ? params.GroupPk : null;
         this.TransHash = 'TransHash' in params ? params.TransHash : null;
+
+    }
+}
+
+/**
+ * InvokeChainMakerContract返回参数结构体
+ * @class
+ */
+class InvokeChainMakerContractResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 交易结果
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {ChainMakerContractResult || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new ChainMakerContractResult();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2189,6 +2457,47 @@ class GetLatesdTransactionListResponse extends  AbstractModel {
 }
 
 /**
+ * QueryChainMakerTransaction返回参数结构体
+ * @class
+ */
+class QueryChainMakerTransactionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 交易结果
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {ChainMakerTransactionResult || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new ChainMakerTransactionResult();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DownloadUserCert请求参数结构体
  * @class
  */
@@ -2455,60 +2764,67 @@ class PeerSet extends  AbstractModel {
 }
 
 /**
- * GetBlockTransactionListForUser请求参数结构体
+ * 长安链交易查询结果
  * @class
  */
-class GetBlockTransactionListForUserRequest extends  AbstractModel {
+class ChainMakerTransactionResult extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 模块名，固定字段：transaction
-         * @type {string || null}
-         */
-        this.Module = null;
-
-        /**
-         * 操作名，固定字段：block_transaction_list_for_user
-         * @type {string || null}
-         */
-        this.Operation = null;
-
-        /**
-         * 区块链网络ID，可在区块链网络详情或列表中获取
-         * @type {string || null}
-         */
-        this.ClusterId = null;
-
-        /**
-         * 参与交易的组织名称，可以在组织管理列表中获取当前组织的名称
-         * @type {string || null}
-         */
-        this.GroupName = null;
-
-        /**
-         * 业务所属通道名称，可在通道详情或列表中获取
-         * @type {string || null}
-         */
-        this.ChannelName = null;
-
-        /**
-         * 区块ID，通过GetInvokeTx接口可以获取交易所在的区块ID
+         * 交易结果码
          * @type {number || null}
          */
-        this.BlockId = null;
+        this.Code = null;
 
         /**
-         * 查询的交易列表起始偏移地址
-         * @type {number || null}
+         * 交易结果码含义
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
          */
-        this.Offset = null;
+        this.CodeMessage = null;
 
         /**
-         * 查询的交易列表数量
+         * 交易ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TxId = null;
+
+        /**
+         * Gas使用量
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
-        this.Limit = null;
+        this.GasUsed = null;
+
+        /**
+         * 区块高度
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.BlockHeight = null;
+
+        /**
+         * 合约执行结果
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ContractEvent = null;
+
+        /**
+         * 合约返回信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * 交易时间，单位是秒
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Timestamp = null;
 
     }
 
@@ -2519,14 +2835,14 @@ class GetBlockTransactionListForUserRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Module = 'Module' in params ? params.Module : null;
-        this.Operation = 'Operation' in params ? params.Operation : null;
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-        this.GroupName = 'GroupName' in params ? params.GroupName : null;
-        this.ChannelName = 'ChannelName' in params ? params.ChannelName : null;
-        this.BlockId = 'BlockId' in params ? params.BlockId : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Code = 'Code' in params ? params.Code : null;
+        this.CodeMessage = 'CodeMessage' in params ? params.CodeMessage : null;
+        this.TxId = 'TxId' in params ? params.TxId : null;
+        this.GasUsed = 'GasUsed' in params ? params.GasUsed : null;
+        this.BlockHeight = 'BlockHeight' in params ? params.BlockHeight : null;
+        this.ContractEvent = 'ContractEvent' in params ? params.ContractEvent : null;
+        this.Message = 'Message' in params ? params.Message : null;
+        this.Timestamp = 'Timestamp' in params ? params.Timestamp : null;
 
     }
 }
@@ -2987,6 +3303,74 @@ class GetBcosBlockByNumberResponse extends  AbstractModel {
         }
         this.BlockJson = 'BlockJson' in params ? params.BlockJson : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 长安链合约执行结果
+ * @class
+ */
+class ChainMakerContractResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 交易结果码
+         * @type {number || null}
+         */
+        this.Code = null;
+
+        /**
+         * 交易结果码含义
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CodeMessage = null;
+
+        /**
+         * 交易ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TxId = null;
+
+        /**
+         * Gas使用量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.GasUsed = null;
+
+        /**
+         * 合约返回消息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * 合约函数返回，base64编码
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Result = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Code = 'Code' in params ? params.Code : null;
+        this.CodeMessage = 'CodeMessage' in params ? params.CodeMessage : null;
+        this.TxId = 'TxId' in params ? params.TxId : null;
+        this.GasUsed = 'GasUsed' in params ? params.GasUsed : null;
+        this.Message = 'Message' in params ? params.Message : null;
+        this.Result = 'Result' in params ? params.Result : null;
 
     }
 }
@@ -3625,6 +4009,47 @@ class GetTransactionDetailForUserResponse extends  AbstractModel {
 }
 
 /**
+ * QueryChainMakerContract返回参数结构体
+ * @class
+ */
+class QueryChainMakerContractResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 交易结果
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {ChainMakerContractResult || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new ChainMakerContractResult();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * GetBcosTransByHash请求参数结构体
  * @class
  */
@@ -3712,6 +4137,48 @@ class GetChannelListForUserResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * QueryChainMakerTransaction请求参数结构体
+ * @class
+ */
+class QueryChainMakerTransactionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 网络ID，可在区块链网络详情或列表中获取
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 业务链编号，可在业务链列表中获取
+         * @type {string || null}
+         */
+        this.ChainId = null;
+
+        /**
+         * 交易ID，通过调用合约的返回值获取
+         * @type {string || null}
+         */
+        this.TxID = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.ChainId = 'ChainId' in params ? params.ChainId : null;
+        this.TxID = 'TxID' in params ? params.TxID : null;
 
     }
 }
@@ -3830,36 +4297,30 @@ class DeployDynamicBcosContractRequest extends  AbstractModel {
 }
 
 /**
- * SendTransactionHandler请求参数结构体
+ * InvokeChainMakerContract请求参数结构体
  * @class
  */
-class SendTransactionHandlerRequest extends  AbstractModel {
+class InvokeChainMakerContractRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 模块名，固定字段：transaction
+         * 网络ID，可在区块链网络详情或列表中获取
          * @type {string || null}
          */
-        this.Module = null;
+        this.ClusterId = null;
 
         /**
-         * 操作名，固定字段：send_transaction
+         * 业务链编号，可在业务链列表中获取
          * @type {string || null}
          */
-        this.Operation = null;
+        this.ChainId = null;
 
         /**
-         * 群组编号
+         * 合约名称，可在合约管理中获取
          * @type {string || null}
          */
-        this.GroupPk = null;
-
-        /**
-         * 合约编号
-         * @type {number || null}
-         */
-        this.ContractId = null;
+        this.ContractName = null;
 
         /**
          * 合约方法名
@@ -3868,10 +4329,16 @@ class SendTransactionHandlerRequest extends  AbstractModel {
         this.FuncName = null;
 
         /**
-         * 合约方法入参
-         * @type {Array.<string> || null}
+         * 合约方法入参，json格式字符串，key/value都是string类型的map
+         * @type {string || null}
          */
         this.FuncParam = null;
+
+        /**
+         * 是否异步执行，1为是，否则为0；如果异步执行，可使用返回值中的交易TxID查询执行结果
+         * @type {number || null}
+         */
+        this.AsyncFlag = null;
 
     }
 
@@ -3882,12 +4349,12 @@ class SendTransactionHandlerRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Module = 'Module' in params ? params.Module : null;
-        this.Operation = 'Operation' in params ? params.Operation : null;
-        this.GroupPk = 'GroupPk' in params ? params.GroupPk : null;
-        this.ContractId = 'ContractId' in params ? params.ContractId : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.ChainId = 'ChainId' in params ? params.ChainId : null;
+        this.ContractName = 'ContractName' in params ? params.ContractName : null;
         this.FuncName = 'FuncName' in params ? params.FuncName : null;
         this.FuncParam = 'FuncParam' in params ? params.FuncParam : null;
+        this.AsyncFlag = 'AsyncFlag' in params ? params.AsyncFlag : null;
 
     }
 }
@@ -4321,12 +4788,91 @@ class EndorserGroup extends  AbstractModel {
     }
 }
 
+/**
+ * 交易列表项信息
+ * @class
+ */
+class TransactionItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 交易ID
+         * @type {string || null}
+         */
+        this.TransactionId = null;
+
+        /**
+         * 交易hash
+         * @type {string || null}
+         */
+        this.TransactionHash = null;
+
+        /**
+         * 创建交易的组织名
+         * @type {string || null}
+         */
+        this.CreateOrgName = null;
+
+        /**
+         * 交易所在区块号
+         * @type {number || null}
+         */
+        this.BlockId = null;
+
+        /**
+         * 交易类型（普通交易和配置交易）
+         * @type {string || null}
+         */
+        this.TransactionType = null;
+
+        /**
+         * 交易创建时间
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 交易所在区块高度
+         * @type {number || null}
+         */
+        this.BlockHeight = null;
+
+        /**
+         * 交易状态
+         * @type {string || null}
+         */
+        this.TransactionStatus = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TransactionId = 'TransactionId' in params ? params.TransactionId : null;
+        this.TransactionHash = 'TransactionHash' in params ? params.TransactionHash : null;
+        this.CreateOrgName = 'CreateOrgName' in params ? params.CreateOrgName : null;
+        this.BlockId = 'BlockId' in params ? params.BlockId : null;
+        this.TransactionType = 'TransactionType' in params ? params.TransactionType : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.BlockHeight = 'BlockHeight' in params ? params.BlockHeight : null;
+        this.TransactionStatus = 'TransactionStatus' in params ? params.TransactionStatus : null;
+
+    }
+}
+
 module.exports = {
     PeerDetailForUser: PeerDetailForUser,
     GetBcosTransListRequest: GetBcosTransListRequest,
     QueryRequest: QueryRequest,
+    QueryChainMakerContractRequest: QueryChainMakerContractRequest,
     DeployDynamicBcosContractResponse: DeployDynamicBcosContractResponse,
     GetClusterListForUserResponse: GetClusterListForUserResponse,
+    SendTransactionHandlerRequest: SendTransactionHandlerRequest,
     GetBlockTransactionListForUserResponse: GetBlockTransactionListForUserResponse,
     SendTransactionHandlerResponse: SendTransactionHandlerResponse,
     ApplyUserCertRequest: ApplyUserCertRequest,
@@ -4343,27 +4889,31 @@ module.exports = {
     GetPeerLogForUserResponse: GetPeerLogForUserResponse,
     GetBcosBlockListResponse: GetBcosBlockListResponse,
     DownloadUserCertResponse: DownloadUserCertResponse,
+    QueryChainMakerBlockTransactionRequest: QueryChainMakerBlockTransactionRequest,
     GetChaincodeLogForUserRequest: GetChaincodeLogForUserRequest,
     GetLatesdTransactionListRequest: GetLatesdTransactionListRequest,
     InvokeResponse: InvokeResponse,
     GetTransactionDetailForUserRequest: GetTransactionDetailForUserRequest,
     GetBlockListResponse: GetBlockListResponse,
-    TransactionItem: TransactionItem,
+    GetBlockTransactionListForUserRequest: GetBlockTransactionListForUserRequest,
+    QueryChainMakerBlockTransactionResponse: QueryChainMakerBlockTransactionResponse,
     GetBcosBlockListRequest: GetBcosBlockListRequest,
     GetClusterSummaryRequest: GetClusterSummaryRequest,
     BlockByNumberHandlerResponse: BlockByNumberHandlerResponse,
     GetTransListHandlerRequest: GetTransListHandlerRequest,
+    InvokeChainMakerContractResponse: InvokeChainMakerContractResponse,
     GetTransByHashHandlerResponse: GetTransByHashHandlerResponse,
     GetInvokeTxRequest: GetInvokeTxRequest,
     DeployDynamicContractHandlerRequest: DeployDynamicContractHandlerRequest,
     ClusterDetailForUser: ClusterDetailForUser,
     GetPeerLogForUserRequest: GetPeerLogForUserRequest,
     GetLatesdTransactionListResponse: GetLatesdTransactionListResponse,
+    QueryChainMakerTransactionResponse: QueryChainMakerTransactionResponse,
     DownloadUserCertRequest: DownloadUserCertRequest,
     GetClusterSummaryResponse: GetClusterSummaryResponse,
     TransByDynamicContractHandlerResponse: TransByDynamicContractHandlerResponse,
     PeerSet: PeerSet,
-    GetBlockTransactionListForUserRequest: GetBlockTransactionListForUserRequest,
+    ChainMakerTransactionResult: ChainMakerTransactionResult,
     CreateChaincodeAndInstallForUserRequest: CreateChaincodeAndInstallForUserRequest,
     SrvInvokeResponse: SrvInvokeResponse,
     GetBcosTransByHashResponse: GetBcosTransByHashResponse,
@@ -4374,6 +4924,7 @@ module.exports = {
     InitializeChaincodeForUserResponse: InitializeChaincodeForUserResponse,
     GroupDetailForUser: GroupDetailForUser,
     GetBcosBlockByNumberResponse: GetBcosBlockByNumberResponse,
+    ChainMakerContractResult: ChainMakerContractResult,
     GetClusterListForUserRequest: GetClusterListForUserRequest,
     Block: Block,
     GetBlockListRequest: GetBlockListRequest,
@@ -4383,11 +4934,13 @@ module.exports = {
     GetInvokeTxResponse: GetInvokeTxResponse,
     GetBlockListHandlerResponse: GetBlockListHandlerResponse,
     GetTransactionDetailForUserResponse: GetTransactionDetailForUserResponse,
+    QueryChainMakerContractResponse: QueryChainMakerContractResponse,
     GetBcosTransByHashRequest: GetBcosTransByHashRequest,
     GetChannelListForUserResponse: GetChannelListForUserResponse,
+    QueryChainMakerTransactionRequest: QueryChainMakerTransactionRequest,
     GetChaincodeCompileLogForUserResponse: GetChaincodeCompileLogForUserResponse,
     DeployDynamicBcosContractRequest: DeployDynamicBcosContractRequest,
-    SendTransactionHandlerRequest: SendTransactionHandlerRequest,
+    InvokeChainMakerContractRequest: InvokeChainMakerContractRequest,
     GetBcosTransListResponse: GetBcosTransListResponse,
     BlockByNumberHandlerRequest: BlockByNumberHandlerRequest,
     BcosBlockObj: BcosBlockObj,
@@ -4397,5 +4950,6 @@ module.exports = {
     GetChannelListForUserRequest: GetChannelListForUserRequest,
     QueryResponse: QueryResponse,
     EndorserGroup: EndorserGroup,
+    TransactionItem: TransactionItem,
 
 }

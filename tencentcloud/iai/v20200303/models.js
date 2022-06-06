@@ -291,6 +291,41 @@ class SearchPersonsReturnsByGroupResponse extends  AbstractModel {
 }
 
 /**
+ * 包含此人员的人员库及描述字段内容列表
+ * @class
+ */
+class PersonGroupInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 包含此人员的人员库ID
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
+        /**
+         * 人员描述字段内容
+         * @type {Array.<string> || null}
+         */
+        this.PersonExDescriptions = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.PersonExDescriptions = 'PersonExDescriptions' in params ? params.PersonExDescriptions : null;
+
+    }
+}
+
+/**
  * 帽子信息
  * @class
  */
@@ -860,28 +895,33 @@ class FaceInfo extends  AbstractModel {
 }
 
 /**
- * CheckSimilarPerson请求参数结构体
+ * 眉毛信息
  * @class
  */
-class CheckSimilarPersonRequest extends  AbstractModel {
+class Eyebrow extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 待整理的人员库列表。 
-人员库总人数不可超过200万，人员库个数不可超过10个。
-数组元素取值为创建人员库接口中的GroupId
-         * @type {Array.<string> || null}
+         * 眉毛浓密。
+AttributeItem对应的Type为 —— 0：淡眉，1：浓眉。
+         * @type {AttributeItem || null}
          */
-        this.GroupIds = null;
+        this.EyebrowDensity = null;
 
         /**
-         * 人员查重整理力度的控制。
-1：力度较高的档案整理，能够消除更多的重复身份，对应稍高的非重复身份误清除率；
-2：力度较低的档案整理，非重复身份的误清除率较低，对应稍低的重复身份消除率。
-         * @type {number || null}
+         * 眉毛弯曲。
+AttributeItem对应的Type为 —— 0：不弯，1：弯眉。
+         * @type {AttributeItem || null}
          */
-        this.UniquePersonControl = null;
+        this.EyebrowCurve = null;
+
+        /**
+         * 眉毛长短。
+AttributeItem对应的Type为 —— 0：短眉毛，1：长眉毛。
+         * @type {AttributeItem || null}
+         */
+        this.EyebrowLength = null;
 
     }
 
@@ -892,8 +932,24 @@ class CheckSimilarPersonRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.GroupIds = 'GroupIds' in params ? params.GroupIds : null;
-        this.UniquePersonControl = 'UniquePersonControl' in params ? params.UniquePersonControl : null;
+
+        if (params.EyebrowDensity) {
+            let obj = new AttributeItem();
+            obj.deserialize(params.EyebrowDensity)
+            this.EyebrowDensity = obj;
+        }
+
+        if (params.EyebrowCurve) {
+            let obj = new AttributeItem();
+            obj.deserialize(params.EyebrowCurve)
+            this.EyebrowCurve = obj;
+        }
+
+        if (params.EyebrowLength) {
+            let obj = new AttributeItem();
+            obj.deserialize(params.EyebrowLength)
+            this.EyebrowLength = obj;
+        }
 
     }
 }
@@ -1089,7 +1145,7 @@ Unix 纪元时间是 1970 年 1 月 1 日星期四，协调世界时 (UTC) 00:00
         this.GroupId = null;
 
         /**
-         * 无法升级的人脸Id信息，文件格式
+         * 无法升级的人脸Id信息，文件格式为json。内容参见下方示例。url有效期为半小时。
          * @type {string || null}
          */
         this.FailedFacesUrl = null;
@@ -1398,41 +1454,6 @@ class CopyPersonResponse extends  AbstractModel {
 }
 
 /**
- * EstimateCheckSimilarPersonCostTime返回参数结构体
- * @class
- */
-class EstimateCheckSimilarPersonCostTimeResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 人员查重任务预估需要耗费时间。 单位为分钟。
-         * @type {number || null}
-         */
-        this.EstimatedTimeCost = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.EstimatedTimeCost = 'EstimatedTimeCost' in params ? params.EstimatedTimeCost : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * 分组识别结果Item
  * @class
  */
@@ -1717,64 +1738,6 @@ class DeleteGroupRequest extends  AbstractModel {
 }
 
 /**
- * EstimateCheckSimilarPersonCostTime请求参数结构体
- * @class
- */
-class EstimateCheckSimilarPersonCostTimeRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 待整理的人员库列表。 
-人员库总人数不可超过200万，人员库个数不可超过10个。
-数组元素取值为创建人员库接口中的GroupId
-         * @type {Array.<string> || null}
-         */
-        this.GroupIds = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.GroupIds = 'GroupIds' in params ? params.GroupIds : null;
-
-    }
-}
-
-/**
- * RevertGroupFaceModelVersion返回参数结构体
- * @class
- */
-class RevertGroupFaceModelVersionResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * UpgradeGroupFaceModelVersion请求参数结构体
  * @class
  */
@@ -1789,7 +1752,7 @@ class UpgradeGroupFaceModelVersionRequest extends  AbstractModel {
         this.GroupId = null;
 
         /**
-         * 需要升级至的算法模型版本。默认为最新版本。
+         * 需要升级至的算法模型版本。默认为最新版本。不可逆向升级
          * @type {string || null}
          */
         this.FaceModelVersion = null;
@@ -1912,34 +1875,6 @@ class GetPersonBaseInfoResponse extends  AbstractModel {
         this.Gender = 'Gender' in params ? params.Gender : null;
         this.FaceIds = 'FaceIds' in params ? params.FaceIds : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * GetSimilarPersonResult请求参数结构体
- * @class
- */
-class GetSimilarPersonResultRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 查重任务ID，用于查询、获取查重的进度和结果。取值为人员查重接口返回的JobId
-         * @type {string || null}
-         */
-        this.JobId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.JobId = 'JobId' in params ? params.JobId : null;
 
     }
 }
@@ -2386,56 +2321,6 @@ class DeletePersonFromGroupResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * GetCheckSimilarPersonJobIdList返回参数结构体
- * @class
- */
-class GetCheckSimilarPersonJobIdListResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 人员查重任务信息列表。
-         * @type {Array.<JobIdInfo> || null}
-         */
-        this.JobIdInfos = null;
-
-        /**
-         * 查重任务总数量。
-         * @type {number || null}
-         */
-        this.JobIdNum = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.JobIdInfos) {
-            this.JobIdInfos = new Array();
-            for (let z in params.JobIdInfos) {
-                let obj = new JobIdInfo();
-                obj.deserialize(params.JobIdInfos[z]);
-                this.JobIdInfos.push(obj);
-            }
-        }
-        this.JobIdNum = 'JobIdNum' in params ? params.JobIdNum : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -3069,41 +2954,6 @@ AttributeItem对应的Type为 —— 0：黑色，1：金色，2：棕色，3：
 }
 
 /**
- * CheckSimilarPerson返回参数结构体
- * @class
- */
-class CheckSimilarPersonResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 查重任务ID，用于查询、获取查重的进度和结果。
-         * @type {string || null}
-         */
-        this.JobId = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.JobId = 'JobId' in params ? params.JobId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * 人脸的识别结果
  * @class
  */
@@ -3451,49 +3301,6 @@ class ModifyPersonBaseInfoResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * GetSimilarPersonResult返回参数结构体
- * @class
- */
-class GetSimilarPersonResultResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 查重任务完成进度。取值[0.0，100.0]。当且仅当值为100时，SimilarPersons才有意义。
-         * @type {number || null}
-         */
-        this.Progress = null;
-
-        /**
-         * 疑似同一人的人员信息文件临时下载链接， 有效时间为5分钟，结果文件实际保存90天。
-文件内容由 SimilarPerson 的数组组成。
-         * @type {string || null}
-         */
-        this.SimilarPersonsUrl = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Progress = 'Progress' in params ? params.Progress : null;
-        this.SimilarPersonsUrl = 'SimilarPersonsUrl' in params ? params.SimilarPersonsUrl : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -3983,33 +3790,40 @@ Url、Image必须提供一个，如果都提供，只使用 Url。
 }
 
 /**
- * 查重任务信息
+ * VerifyFace返回参数结构体
  * @class
  */
-class JobIdInfo extends  AbstractModel {
+class VerifyFaceResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 查重任务ID，用于查询、获取查重的进度和结果。
+         * 给定的人脸图片与 PersonId 对应人脸的相似度。若 PersonId 下有多张人脸（Face），返回相似度最大的分数。
+
+不同算法版本返回的相似度分数不同。
+若需要验证两张图片中人脸是否为同一人，3.0版本误识率千分之一对应分数为40分，误识率万分之一对应分数为50分，误识率十万分之一对应分数为60分。 一般超过50分则可认定为同一人。
+2.0版本误识率千分之一对应分数为70分，误识率万分之一对应分数为80分，误识率十万分之一对应分数为90分。 一般超过80分则可认定为同一人。
+         * @type {number || null}
+         */
+        this.Score = null;
+
+        /**
+         * 是否为同一人的判断。
+         * @type {boolean || null}
+         */
+        this.IsMatch = null;
+
+        /**
+         * 人脸识别所用的算法模型版本，是该 Person 所在的人员库的算法模型版本。在创建人员库时设置，详情可参考[算法模型版本](https://cloud.tencent.com/document/product/867/40042)
          * @type {string || null}
          */
-        this.JobId = null;
+        this.FaceModelVersion = null;
 
         /**
-         * 查重起始时间。 
-StartTime的值是自 Unix 纪元时间到Group创建时间的毫秒数。 
-Unix 纪元时间是 1970 年 1 月 1 日星期四，协调世界时 (UTC) 00:00:00。 
-有关更多信息，请参阅 Unix 时间。
-         * @type {number || null}
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
          */
-        this.StartTime = null;
-
-        /**
-         * 查重任务是否已完成。0: 成功 1: 未完成 2: 失败
-         * @type {number || null}
-         */
-        this.JobStatus = null;
+        this.RequestId = null;
 
     }
 
@@ -4020,9 +3834,10 @@ Unix 纪元时间是 1970 年 1 月 1 日星期四，协调世界时 (UTC) 00:00
         if (!params) {
             return;
         }
-        this.JobId = 'JobId' in params ? params.JobId : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.JobStatus = 'JobStatus' in params ? params.JobStatus : null;
+        this.Score = 'Score' in params ? params.Score : null;
+        this.IsMatch = 'IsMatch' in params ? params.IsMatch : null;
+        this.FaceModelVersion = 'FaceModelVersion' in params ? params.FaceModelVersion : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4182,41 +3997,6 @@ MaxFaceNum用于，当输入的待识别图片包含多张人脸时，设定要�
         this.QualityControl = 'QualityControl' in params ? params.QualityControl : null;
         this.FaceMatchThreshold = 'FaceMatchThreshold' in params ? params.FaceMatchThreshold : null;
         this.NeedRotateDetection = 'NeedRotateDetection' in params ? params.NeedRotateDetection : null;
-
-    }
-}
-
-/**
- * GetCheckSimilarPersonJobIdList请求参数结构体
- * @class
- */
-class GetCheckSimilarPersonJobIdListRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 起始序号，默认值为0。
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * 返回数量，默认值为10，最大值为1000。
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -4957,7 +4737,7 @@ Url、Image必须提供一个，如果都提供，只使用 Url。
 
         /**
          * 是否返回年龄、性别、情绪等属性。 
-合法值为（大小写不敏感）：None、Age、Beauty、Emotion、Eye、Eyebrow 
+合法值为（大小写不敏感）：None、Age、Beauty、Emotion、Eye、Eyebrow、 
 Gender、Hair、Hat、Headpose、Mask、Mouth、Moustache、Nose、Shape、Skin、Smile。 
 None为不需要返回。默认为 None。 
 需要将属性组成一个用逗号分隔的字符串，属性之间的顺序没有要求。 
@@ -5149,69 +4929,12 @@ AttributeItem对应的Type为 —— 0：不张嘴，1：张嘴。
 }
 
 /**
- * 包含此人员的人员库及描述字段内容列表
+ * RevertGroupFaceModelVersion返回参数结构体
  * @class
  */
-class PersonGroupInfo extends  AbstractModel {
+class RevertGroupFaceModelVersionResponse extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * 包含此人员的人员库ID
-         * @type {string || null}
-         */
-        this.GroupId = null;
-
-        /**
-         * 人员描述字段内容
-         * @type {Array.<string> || null}
-         */
-        this.PersonExDescriptions = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.GroupId = 'GroupId' in params ? params.GroupId : null;
-        this.PersonExDescriptions = 'PersonExDescriptions' in params ? params.PersonExDescriptions : null;
-
-    }
-}
-
-/**
- * VerifyFace返回参数结构体
- * @class
- */
-class VerifyFaceResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 给定的人脸图片与 PersonId 对应人脸的相似度。若 PersonId 下有多张人脸（Face），返回相似度最大的分数。
-
-不同算法版本返回的相似度分数不同。
-若需要验证两张图片中人脸是否为同一人，3.0版本误识率千分之一对应分数为40分，误识率万分之一对应分数为50分，误识率十万分之一对应分数为60分。 一般超过50分则可认定为同一人。
-2.0版本误识率千分之一对应分数为70分，误识率万分之一对应分数为80分，误识率十万分之一对应分数为90分。 一般超过80分则可认定为同一人。
-         * @type {number || null}
-         */
-        this.Score = null;
-
-        /**
-         * 是否为同一人的判断。
-         * @type {boolean || null}
-         */
-        this.IsMatch = null;
-
-        /**
-         * 人脸识别所用的算法模型版本，是该 Person 所在的人员库的算法模型版本。在创建人员库时设置，详情可参考[算法模型版本](https://cloud.tencent.com/document/product/867/40042)
-         * @type {string || null}
-         */
-        this.FaceModelVersion = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -5228,9 +4951,6 @@ class VerifyFaceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Score = 'Score' in params ? params.Score : null;
-        this.IsMatch = 'IsMatch' in params ? params.IsMatch : null;
-        this.FaceModelVersion = 'FaceModelVersion' in params ? params.FaceModelVersion : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -5660,66 +5380,6 @@ class GetPersonListNumRequest extends  AbstractModel {
             return;
         }
         this.GroupId = 'GroupId' in params ? params.GroupId : null;
-
-    }
-}
-
-/**
- * 眉毛信息
- * @class
- */
-class Eyebrow extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 眉毛浓密。
-AttributeItem对应的Type为 —— 0：淡眉，1：浓眉。
-         * @type {AttributeItem || null}
-         */
-        this.EyebrowDensity = null;
-
-        /**
-         * 眉毛弯曲。
-AttributeItem对应的Type为 —— 0：不弯，1：弯眉。
-         * @type {AttributeItem || null}
-         */
-        this.EyebrowCurve = null;
-
-        /**
-         * 眉毛长短。
-AttributeItem对应的Type为 —— 0：短眉毛，1：长眉毛。
-         * @type {AttributeItem || null}
-         */
-        this.EyebrowLength = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.EyebrowDensity) {
-            let obj = new AttributeItem();
-            obj.deserialize(params.EyebrowDensity)
-            this.EyebrowDensity = obj;
-        }
-
-        if (params.EyebrowCurve) {
-            let obj = new AttributeItem();
-            obj.deserialize(params.EyebrowCurve)
-            this.EyebrowCurve = obj;
-        }
-
-        if (params.EyebrowLength) {
-            let obj = new AttributeItem();
-            obj.deserialize(params.EyebrowLength)
-            this.EyebrowLength = obj;
-        }
 
     }
 }
@@ -6269,6 +5929,7 @@ module.exports = {
     Candidate: Candidate,
     DetectFaceAttributesResponse: DetectFaceAttributesResponse,
     SearchPersonsReturnsByGroupResponse: SearchPersonsReturnsByGroupResponse,
+    PersonGroupInfo: PersonGroupInfo,
     Hat: Hat,
     CreatePersonRequest: CreatePersonRequest,
     CreateFaceResponse: CreateFaceResponse,
@@ -6277,7 +5938,7 @@ module.exports = {
     CreateGroupRequest: CreateGroupRequest,
     GetPersonGroupInfoRequest: GetPersonGroupInfoRequest,
     FaceInfo: FaceInfo,
-    CheckSimilarPersonRequest: CheckSimilarPersonRequest,
+    Eyebrow: Eyebrow,
     AnalyzeDenseLandmarksRequest: AnalyzeDenseLandmarksRequest,
     GetGroupListRequest: GetGroupListRequest,
     GetUpgradeGroupFaceModelVersionJobListRequest: GetUpgradeGroupFaceModelVersionJobListRequest,
@@ -6287,7 +5948,6 @@ module.exports = {
     CreatePersonResponse: CreatePersonResponse,
     SearchFacesResponse: SearchFacesResponse,
     CopyPersonResponse: CopyPersonResponse,
-    EstimateCheckSimilarPersonCostTimeResponse: EstimateCheckSimilarPersonCostTimeResponse,
     GroupCandidate: GroupCandidate,
     DeleteFaceResponse: DeleteFaceResponse,
     DeletePersonRequest: DeletePersonRequest,
@@ -6295,12 +5955,9 @@ module.exports = {
     DeleteFaceRequest: DeleteFaceRequest,
     ModifyGroupRequest: ModifyGroupRequest,
     DeleteGroupRequest: DeleteGroupRequest,
-    EstimateCheckSimilarPersonCostTimeRequest: EstimateCheckSimilarPersonCostTimeRequest,
-    RevertGroupFaceModelVersionResponse: RevertGroupFaceModelVersionResponse,
     UpgradeGroupFaceModelVersionRequest: UpgradeGroupFaceModelVersionRequest,
     DetectLiveFaceRequest: DetectLiveFaceRequest,
     GetPersonBaseInfoResponse: GetPersonBaseInfoResponse,
-    GetSimilarPersonResultRequest: GetSimilarPersonResultRequest,
     SearchPersonsResponse: SearchPersonsResponse,
     GetUpgradeGroupFaceModelVersionResultRequest: GetUpgradeGroupFaceModelVersionResultRequest,
     GroupInfo: GroupInfo,
@@ -6309,7 +5966,6 @@ module.exports = {
     CopyPersonRequest: CopyPersonRequest,
     SearchPersonsReturnsByGroupRequest: SearchPersonsReturnsByGroupRequest,
     DeletePersonFromGroupResponse: DeletePersonFromGroupResponse,
-    GetCheckSimilarPersonJobIdListResponse: GetCheckSimilarPersonJobIdListResponse,
     DenseFaceShape: DenseFaceShape,
     ResultsReturnsByGroup: ResultsReturnsByGroup,
     Point: Point,
@@ -6318,14 +5974,12 @@ module.exports = {
     VerifyFaceRequest: VerifyFaceRequest,
     GetPersonListResponse: GetPersonListResponse,
     Hair: Hair,
-    CheckSimilarPersonResponse: CheckSimilarPersonResponse,
     Result: Result,
     GetPersonGroupInfoResponse: GetPersonGroupInfoResponse,
     UpgradeGroupFaceModelVersionResponse: UpgradeGroupFaceModelVersionResponse,
     SearchFacesReturnsByGroupRequest: SearchFacesReturnsByGroupRequest,
     AnalyzeDenseLandmarksResponse: AnalyzeDenseLandmarksResponse,
     ModifyPersonBaseInfoResponse: ModifyPersonBaseInfoResponse,
-    GetSimilarPersonResultResponse: GetSimilarPersonResultResponse,
     ModifyPersonGroupInfoRequest: ModifyPersonGroupInfoRequest,
     RevertGroupFaceModelVersionRequest: RevertGroupFaceModelVersionRequest,
     FaceQualityCompleteness: FaceQualityCompleteness,
@@ -6334,10 +5988,9 @@ module.exports = {
     CompareMaskFaceResponse: CompareMaskFaceResponse,
     ModifyPersonBaseInfoRequest: ModifyPersonBaseInfoRequest,
     DetectLiveFaceAccurateRequest: DetectLiveFaceAccurateRequest,
-    JobIdInfo: JobIdInfo,
+    VerifyFaceResponse: VerifyFaceResponse,
     FaceDetailInfo: FaceDetailInfo,
     SearchFacesRequest: SearchFacesRequest,
-    GetCheckSimilarPersonJobIdListRequest: GetCheckSimilarPersonJobIdListRequest,
     SearchPersonsRequest: SearchPersonsRequest,
     PersonInfo: PersonInfo,
     GroupExDescriptionInfo: GroupExDescriptionInfo,
@@ -6354,15 +6007,13 @@ module.exports = {
     GetGroupInfoResponse: GetGroupInfoResponse,
     CompareFaceResponse: CompareFaceResponse,
     Mouth: Mouth,
-    PersonGroupInfo: PersonGroupInfo,
-    VerifyFaceResponse: VerifyFaceResponse,
+    RevertGroupFaceModelVersionResponse: RevertGroupFaceModelVersionResponse,
     DeleteGroupResponse: DeleteGroupResponse,
     FaceShape: FaceShape,
     CompareFaceRequest: CompareFaceRequest,
     VerifyPersonResponse: VerifyPersonResponse,
     DetectFaceResponse: DetectFaceResponse,
     GetPersonListNumRequest: GetPersonListNumRequest,
-    Eyebrow: Eyebrow,
     GetGroupInfoRequest: GetGroupInfoRequest,
     UpgradeJobInfo: UpgradeJobInfo,
     ModifyGroupResponse: ModifyGroupResponse,

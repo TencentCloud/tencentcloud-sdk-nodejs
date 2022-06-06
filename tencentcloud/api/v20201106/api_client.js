@@ -16,6 +16,9 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const RegionProduct = models.RegionProduct;
+const DescribeProductsRequest = models.DescribeProductsRequest;
+const DescribeProductsResponse = models.DescribeProductsResponse;
 const ZoneInfo = models.ZoneInfo;
 const DescribeZonesRequest = models.DescribeZonesRequest;
 const DescribeZonesResponse = models.DescribeZonesResponse;
@@ -35,7 +38,18 @@ class ApiClient extends AbstractClient {
     }
     
     /**
-     * 本接口(DescribeRegions)用于查询各个产品支持地域信息，当前只支持cvm。
+     * 本接口(DescribeProducts)用于查询各个支持地域列表查询的产品信息。
+     * @param {DescribeProductsRequest} req
+     * @param {function(string, DescribeProductsResponse):void} cb
+     * @public
+     */
+    DescribeProducts(req, cb) {
+        let resp = new DescribeProductsResponse();
+        this.request("DescribeProducts", req, resp, cb);
+    }
+
+    /**
+     * 本接口(DescribeRegions)用于查询各个产品支持地域信息。
      * @param {DescribeRegionsRequest} req
      * @param {function(string, DescribeRegionsResponse):void} cb
      * @public
@@ -46,7 +60,7 @@ class ApiClient extends AbstractClient {
     }
 
     /**
-     * 本接口(DescribeZones)用于查询产品可用区信息，当前只支持cvm。
+     * 本接口(DescribeZones)用于查询产品可用区信息。
      * @param {DescribeZonesRequest} req
      * @param {function(string, DescribeZonesResponse):void} cb
      * @public

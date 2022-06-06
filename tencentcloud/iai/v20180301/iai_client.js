@@ -20,6 +20,7 @@ const Eye = models.Eye;
 const Candidate = models.Candidate;
 const DetectFaceAttributesResponse = models.DetectFaceAttributesResponse;
 const SearchPersonsReturnsByGroupResponse = models.SearchPersonsReturnsByGroupResponse;
+const PersonGroupInfo = models.PersonGroupInfo;
 const Hat = models.Hat;
 const CreatePersonRequest = models.CreatePersonRequest;
 const CreateFaceResponse = models.CreateFaceResponse;
@@ -28,7 +29,7 @@ const CreateFaceRequest = models.CreateFaceRequest;
 const CreateGroupRequest = models.CreateGroupRequest;
 const GetPersonGroupInfoRequest = models.GetPersonGroupInfoRequest;
 const FaceInfo = models.FaceInfo;
-const CheckSimilarPersonRequest = models.CheckSimilarPersonRequest;
+const Eyebrow = models.Eyebrow;
 const AnalyzeDenseLandmarksRequest = models.AnalyzeDenseLandmarksRequest;
 const GetGroupListRequest = models.GetGroupListRequest;
 const GetUpgradeGroupFaceModelVersionJobListRequest = models.GetUpgradeGroupFaceModelVersionJobListRequest;
@@ -37,7 +38,6 @@ const AnalyzeFaceRequest = models.AnalyzeFaceRequest;
 const CreatePersonResponse = models.CreatePersonResponse;
 const SearchFacesResponse = models.SearchFacesResponse;
 const CopyPersonResponse = models.CopyPersonResponse;
-const EstimateCheckSimilarPersonCostTimeResponse = models.EstimateCheckSimilarPersonCostTimeResponse;
 const GroupCandidate = models.GroupCandidate;
 const DeleteFaceResponse = models.DeleteFaceResponse;
 const DeletePersonRequest = models.DeletePersonRequest;
@@ -45,12 +45,9 @@ const DetectLiveFaceResponse = models.DetectLiveFaceResponse;
 const DeleteFaceRequest = models.DeleteFaceRequest;
 const ModifyGroupRequest = models.ModifyGroupRequest;
 const DeleteGroupRequest = models.DeleteGroupRequest;
-const EstimateCheckSimilarPersonCostTimeRequest = models.EstimateCheckSimilarPersonCostTimeRequest;
-const RevertGroupFaceModelVersionResponse = models.RevertGroupFaceModelVersionResponse;
 const UpgradeGroupFaceModelVersionRequest = models.UpgradeGroupFaceModelVersionRequest;
 const DetectLiveFaceRequest = models.DetectLiveFaceRequest;
 const GetPersonBaseInfoResponse = models.GetPersonBaseInfoResponse;
-const GetSimilarPersonResultRequest = models.GetSimilarPersonResultRequest;
 const SearchPersonsResponse = models.SearchPersonsResponse;
 const GetUpgradeGroupFaceModelVersionResultRequest = models.GetUpgradeGroupFaceModelVersionResultRequest;
 const GroupInfo = models.GroupInfo;
@@ -59,7 +56,6 @@ const SearchFacesReturnsByGroupResponse = models.SearchFacesReturnsByGroupRespon
 const CopyPersonRequest = models.CopyPersonRequest;
 const SearchPersonsReturnsByGroupRequest = models.SearchPersonsReturnsByGroupRequest;
 const DeletePersonFromGroupResponse = models.DeletePersonFromGroupResponse;
-const GetCheckSimilarPersonJobIdListResponse = models.GetCheckSimilarPersonJobIdListResponse;
 const DenseFaceShape = models.DenseFaceShape;
 const ResultsReturnsByGroup = models.ResultsReturnsByGroup;
 const Point = models.Point;
@@ -68,24 +64,21 @@ const DeletePersonFromGroupRequest = models.DeletePersonFromGroupRequest;
 const VerifyFaceRequest = models.VerifyFaceRequest;
 const GetPersonListResponse = models.GetPersonListResponse;
 const Hair = models.Hair;
-const GetPersonListNumRequest = models.GetPersonListNumRequest;
 const Result = models.Result;
 const GetPersonGroupInfoResponse = models.GetPersonGroupInfoResponse;
 const UpgradeGroupFaceModelVersionResponse = models.UpgradeGroupFaceModelVersionResponse;
 const SearchFacesReturnsByGroupRequest = models.SearchFacesReturnsByGroupRequest;
 const AnalyzeDenseLandmarksResponse = models.AnalyzeDenseLandmarksResponse;
 const ModifyPersonBaseInfoResponse = models.ModifyPersonBaseInfoResponse;
-const GetSimilarPersonResultResponse = models.GetSimilarPersonResultResponse;
 const ModifyPersonGroupInfoRequest = models.ModifyPersonGroupInfoRequest;
 const RevertGroupFaceModelVersionRequest = models.RevertGroupFaceModelVersionRequest;
 const FaceQualityCompleteness = models.FaceQualityCompleteness;
 const FaceAttributesInfo = models.FaceAttributesInfo;
 const VerifyPersonRequest = models.VerifyPersonRequest;
 const ModifyPersonBaseInfoRequest = models.ModifyPersonBaseInfoRequest;
-const JobIdInfo = models.JobIdInfo;
+const VerifyFaceResponse = models.VerifyFaceResponse;
 const FaceDetailInfo = models.FaceDetailInfo;
 const SearchFacesRequest = models.SearchFacesRequest;
-const GetCheckSimilarPersonJobIdListRequest = models.GetCheckSimilarPersonJobIdListRequest;
 const SearchPersonsRequest = models.SearchPersonsRequest;
 const PersonInfo = models.PersonInfo;
 const GroupExDescriptionInfo = models.GroupExDescriptionInfo;
@@ -101,15 +94,13 @@ const DetectFaceAttributesRequest = models.DetectFaceAttributesRequest;
 const GetGroupInfoResponse = models.GetGroupInfoResponse;
 const CompareFaceResponse = models.CompareFaceResponse;
 const Mouth = models.Mouth;
-const PersonGroupInfo = models.PersonGroupInfo;
-const VerifyFaceResponse = models.VerifyFaceResponse;
+const RevertGroupFaceModelVersionResponse = models.RevertGroupFaceModelVersionResponse;
 const DeleteGroupResponse = models.DeleteGroupResponse;
 const FaceShape = models.FaceShape;
 const CompareFaceRequest = models.CompareFaceRequest;
 const VerifyPersonResponse = models.VerifyPersonResponse;
 const DetectFaceResponse = models.DetectFaceResponse;
-const CheckSimilarPersonResponse = models.CheckSimilarPersonResponse;
-const Eyebrow = models.Eyebrow;
+const GetPersonListNumRequest = models.GetPersonListNumRequest;
 const GetGroupInfoRequest = models.GetGroupInfoRequest;
 const UpgradeJobInfo = models.UpgradeJobInfo;
 const ModifyGroupResponse = models.ModifyGroupResponse;
@@ -180,19 +171,6 @@ class IaiClient extends AbstractClient {
     CreateGroup(req, cb) {
         let resp = new CreateGroupResponse();
         this.request("CreateGroup", req, resp, cb);
-    }
-
-    /**
-     * 获取人员查重任务列表，按任务创建时间逆序（最新的在前面）。
-
-只保留最近1年的数据。
-     * @param {GetCheckSimilarPersonJobIdListRequest} req
-     * @param {function(string, GetCheckSimilarPersonJobIdListResponse):void} cb
-     * @public
-     */
-    GetCheckSimilarPersonJobIdList(req, cb) {
-        let resp = new GetCheckSimilarPersonJobIdListResponse();
-        this.request("GetCheckSimilarPersonJobIdList", req, resp, cb);
     }
 
     /**
@@ -338,24 +316,21 @@ class IaiClient extends AbstractClient {
     }
 
     /**
-     * 对指定的人员库进行人员查重，给出疑似相同人的信息。
+     * 给定一张人脸图片和一个 PersonId，判断图片中的人和 PersonId 对应的人是否为同一人。PersonId 请参考[人员库管理相关接口](https://cloud.tencent.com/document/product/867/32794)。 
 
-可以使用本接口对已有的单个人员库进行人员查重，避免同一人在单个人员库中拥有多个身份；也可以使用本接口对已有的多个人员库进行人员查重，查询同一人是否同时存在多个人员库中。
+与[人脸比对](https://cloud.tencent.com/document/product/867/32802)接口不同的是，人脸验证用于判断 “此人是否是此人”，“此人”的信息已存于人员库中，“此人”可能存在多张人脸图片；而[人脸比对](https://cloud.tencent.com/document/product/867/32802)用于判断两张人脸的相似度。
 
-不支持跨算法模型版本查重，且目前仅支持算法模型为3.0的人员库使用查重功能。
-
->     
-- 若对完全相同的指定人员库进行查重操作，需等待上次操作完成才可。即，若两次请求输入的 GroupIds 相同，第一次请求若未完成，第二次请求将返回失败。
+与[人员验证](https://cloud.tencent.com/document/product/867/38879)接口不同的是，人脸验证将该人员（Person）下的每个人脸（Face）都作为单独个体进行验证，而[人员验证](https://cloud.tencent.com/document/product/867/38879)会将该人员（Person）下的所有人脸（Face）进行融合特征处理，即若某个 Person下有4张 Face，人员验证接口会将4张 Face 的特征进行融合处理，生成对应这个 Person 的特征，使人员验证（确定待识别的人脸图片是某人员）更加准确。
 
 >     
-- 查重的人员库状态为腾讯云开始进行查重任务的那一刻，即您可以理解为当您发起查重请求后，若您的查重任务需要排队，在排队期间您对人员库的增删操作均会会影响查重的结果。腾讯云将以开始进行查重任务的那一刻人员库的状态进行查重。查重任务开始后，您对人员库的任何操作均不影响查重任务的进行。但建议查重任务开始后，请不要对人员库中人员和人脸进行增删操作。
-     * @param {CheckSimilarPersonRequest} req
-     * @param {function(string, CheckSimilarPersonResponse):void} cb
+- 公共参数中的签名方式请使用V3版本，即配置SignatureMethod参数为TC3-HMAC-SHA256。
+     * @param {VerifyFaceRequest} req
+     * @param {function(string, VerifyFaceResponse):void} cb
      * @public
      */
-    CheckSimilarPerson(req, cb) {
-        let resp = new CheckSimilarPersonResponse();
-        this.request("CheckSimilarPerson", req, resp, cb);
+    VerifyFace(req, cb) {
+        let resp = new VerifyFaceResponse();
+        this.request("VerifyFace", req, resp, cb);
     }
 
     /**
@@ -402,17 +377,6 @@ class IaiClient extends AbstractClient {
     UpgradeGroupFaceModelVersion(req, cb) {
         let resp = new UpgradeGroupFaceModelVersionResponse();
         this.request("UpgradeGroupFaceModelVersion", req, resp, cb);
-    }
-
-    /**
-     * 获取人员查重接口（CheckSimilarPerson）结果。
-     * @param {GetSimilarPersonResultRequest} req
-     * @param {function(string, GetSimilarPersonResultResponse):void} cb
-     * @public
-     */
-    GetSimilarPersonResult(req, cb) {
-        let resp = new GetSimilarPersonResultResponse();
-        this.request("GetSimilarPersonResult", req, resp, cb);
     }
 
     /**
@@ -579,24 +543,6 @@ class IaiClient extends AbstractClient {
     }
 
     /**
-     * 给定一张人脸图片和一个 PersonId，判断图片中的人和 PersonId 对应的人是否为同一人。PersonId 请参考[人员库管理相关接口](https://cloud.tencent.com/document/product/867/32794)。 
-
-与[人脸比对](https://cloud.tencent.com/document/product/867/32802)接口不同的是，人脸验证用于判断 “此人是否是此人”，“此人”的信息已存于人员库中，“此人”可能存在多张人脸图片；而[人脸比对](https://cloud.tencent.com/document/product/867/32802)用于判断两张人脸的相似度。
-
-与[人员验证](https://cloud.tencent.com/document/product/867/38879)接口不同的是，人脸验证将该人员（Person）下的每个人脸（Face）都作为单独个体进行验证，而[人员验证](https://cloud.tencent.com/document/product/867/38879)会将该人员（Person）下的所有人脸（Face）进行融合特征处理，即若某个 Person下有4张 Face，人员验证接口会将4张 Face 的特征进行融合处理，生成对应这个 Person 的特征，使人员验证（确定待识别的人脸图片是某人员）更加准确。
-
->     
-- 公共参数中的签名方式请使用V3版本，即配置SignatureMethod参数为TC3-HMAC-SHA256。
-     * @param {VerifyFaceRequest} req
-     * @param {function(string, VerifyFaceResponse):void} cb
-     * @public
-     */
-    VerifyFace(req, cb) {
-        let resp = new VerifyFaceResponse();
-        this.request("VerifyFace", req, resp, cb);
-    }
-
-    /**
      * 用于对一张待识别的人脸图片，在一个或多个人员库中识别出最相似的 TopK 人员，按照相似度从大到小排列。
 
 支持一次性识别图片中的最多 10 张人脸，支持一次性跨 100 个人员库（Group）搜索。
@@ -662,21 +608,6 @@ class IaiClient extends AbstractClient {
     GetGroupList(req, cb) {
         let resp = new GetGroupListResponse();
         this.request("GetGroupList", req, resp, cb);
-    }
-
-    /**
-     * 获取若要开始一个人员查重任务，这个任务结束的预估时间。
-
-若EndTimestamp符合您预期，请您尽快发起人员查重请求，否则导致可能需要更多处理时间。
-
-若预估时间超过5小时，则无法使用人员查重功能。
-     * @param {EstimateCheckSimilarPersonCostTimeRequest} req
-     * @param {function(string, EstimateCheckSimilarPersonCostTimeResponse):void} cb
-     * @public
-     */
-    EstimateCheckSimilarPersonCostTime(req, cb) {
-        let resp = new EstimateCheckSimilarPersonCostTimeResponse();
-        this.request("EstimateCheckSimilarPersonCostTime", req, resp, cb);
     }
 
     /**

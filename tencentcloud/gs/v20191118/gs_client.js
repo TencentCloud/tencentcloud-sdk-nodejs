@@ -16,17 +16,21 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const StopPublishStreamResponse = models.StopPublishStreamResponse;
 const StopGameRequest = models.StopGameRequest;
 const SaveGameArchiveResponse = models.SaveGameArchiveResponse;
+const StopPublishStreamRequest = models.StopPublishStreamRequest;
 const SwitchGameArchiveRequest = models.SwitchGameArchiveRequest;
 const TrylockWorkerResponse = models.TrylockWorkerResponse;
 const DescribeInstancesCountResponse = models.DescribeInstancesCountResponse;
+const StartPublishStreamResponse = models.StartPublishStreamResponse;
 const CreateSessionRequest = models.CreateSessionRequest;
 const CreateSessionResponse = models.CreateSessionResponse;
 const DescribeInstancesCountRequest = models.DescribeInstancesCountRequest;
 const SaveGameArchiveRequest = models.SaveGameArchiveRequest;
 const TrylockWorkerRequest = models.TrylockWorkerRequest;
 const SwitchGameArchiveResponse = models.SwitchGameArchiveResponse;
+const StartPublishStreamRequest = models.StartPublishStreamRequest;
 const StopGameResponse = models.StopGameResponse;
 
 
@@ -93,6 +97,28 @@ class GsClient extends AbstractClient {
     SwitchGameArchive(req, cb) {
         let resp = new SwitchGameArchiveResponse();
         this.request("SwitchGameArchive", req, resp, cb);
+    }
+
+    /**
+     * 开始云端推流
+     * @param {StartPublishStreamRequest} req
+     * @param {function(string, StartPublishStreamResponse):void} cb
+     * @public
+     */
+    StartPublishStream(req, cb) {
+        let resp = new StartPublishStreamResponse();
+        this.request("StartPublishStream", req, resp, cb);
+    }
+
+    /**
+     * 停止云端推流
+     * @param {StopPublishStreamRequest} req
+     * @param {function(string, StopPublishStreamResponse):void} cb
+     * @public
+     */
+    StopPublishStream(req, cb) {
+        let resp = new StopPublishStreamResponse();
+        this.request("StopPublishStream", req, resp, cb);
     }
 
     /**

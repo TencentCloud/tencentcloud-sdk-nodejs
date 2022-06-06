@@ -16,89 +16,94 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const BatchRecordInfo = models.BatchRecordInfo;
 const CreateRecordRequest = models.CreateRecordRequest;
-const DescribeRecordTypeRequest = models.DescribeRecordTypeRequest;
+const DescribeBatchTaskDetail = models.DescribeBatchTaskDetail;
+const DeleteDomainAliasResponse = models.DeleteDomainAliasResponse;
+const ModifySubdomainStatusRequest = models.ModifySubdomainStatusRequest;
+const CreateRecordBatchResponse = models.CreateRecordBatchResponse;
+const CreateDomainBatchRecord = models.CreateDomainBatchRecord;
+const DescribeBatchTaskRequest = models.DescribeBatchTaskRequest;
+const DescribeDomainResponse = models.DescribeDomainResponse;
+const DescribeRecordLineListResponse = models.DescribeRecordLineListResponse;
+const DomainInfo = models.DomainInfo;
+const CreateDomainBatchRequest = models.CreateDomainBatchRequest;
+const DescribeDomainShareInfoRequest = models.DescribeDomainShareInfoRequest;
+const DomainListItem = models.DomainListItem;
+const DescribeRecordTypeResponse = models.DescribeRecordTypeResponse;
+const ModifyDomainRemarkResponse = models.ModifyDomainRemarkResponse;
+const DescribeDomainAliasListResponse = models.DescribeDomainAliasListResponse;
+const RecordCountInfo = models.RecordCountInfo;
+const DeleteShareDomainResponse = models.DeleteShareDomainResponse;
+const ModifyRecordRequest = models.ModifyRecordRequest;
+const BatchRecordInfo = models.BatchRecordInfo;
+const LineGroupInfo = models.LineGroupInfo;
 const DeleteDomainRequest = models.DeleteDomainRequest;
 const ModifyDomainOwnerRequest = models.ModifyDomainOwnerRequest;
-const DeleteShareDomainRequest = models.DeleteShareDomainRequest;
-const DescribeBatchTaskDetail = models.DescribeBatchTaskDetail;
-const RecordInfo = models.RecordInfo;
-const LineGroupInfo = models.LineGroupInfo;
 const DomainShareInfo = models.DomainShareInfo;
-const DeleteDomainAliasResponse = models.DeleteDomainAliasResponse;
-const RecordListItem = models.RecordListItem;
-const CreateDomainBatchResponse = models.CreateDomainBatchResponse;
-const ModifyDomainStatusRequest = models.ModifyDomainStatusRequest;
-const ModifyDynamicDNSRequest = models.ModifyDynamicDNSRequest;
-const ModifyDomainOwnerResponse = models.ModifyDomainOwnerResponse;
 const DescribeRecordLineListRequest = models.DescribeRecordLineListRequest;
-const ModifyRecordRemarkRequest = models.ModifyRecordRemarkRequest;
 const DescribeRecordListResponse = models.DescribeRecordListResponse;
 const CreateRecordBatchRequest = models.CreateRecordBatchRequest;
-const DescribeUserDetailRequest = models.DescribeUserDetailRequest;
 const DeleteDomainAliasRequest = models.DeleteDomainAliasRequest;
-const ModifyRecordBatchDetail = models.ModifyRecordBatchDetail;
-const CreateRecordBatchResponse = models.CreateRecordBatchResponse;
-const DescribeUserDetailResponse = models.DescribeUserDetailResponse;
-const CreateDomainBatchRecord = models.CreateDomainBatchRecord;
+const DomainAliasInfo = models.DomainAliasInfo;
 const ModifyDomainLockRequest = models.ModifyDomainLockRequest;
+const ModifyDomainStatusRequest = models.ModifyDomainStatusRequest;
+const ModifyDomainStatusResponse = models.ModifyDomainStatusResponse;
+const AddRecordBatch = models.AddRecordBatch;
+const DescribeRecordRequest = models.DescribeRecordRequest;
+const CreateDomainGroupResponse = models.CreateDomainGroupResponse;
+const DeleteRecordRequest = models.DeleteRecordRequest;
+const DescribeDomainRequest = models.DescribeDomainRequest;
+const ModifyRecordStatusRequest = models.ModifyRecordStatusRequest;
+const CreateRecordResponse = models.CreateRecordResponse;
+const DescribeRecordResponse = models.DescribeRecordResponse;
+const RecordInfo = models.RecordInfo;
+const CreateRecordBatchDetail = models.CreateRecordBatchDetail;
+const ModifyRecordResponse = models.ModifyRecordResponse;
+const ModifyDomainUnlockResponse = models.ModifyDomainUnlockResponse;
+const DescribeDomainLogListRequest = models.DescribeDomainLogListRequest;
+const DescribeDomainListResponse = models.DescribeDomainListResponse;
+const ModifyRecordBatchRequest = models.ModifyRecordBatchRequest;
+const DeleteRecordResponse = models.DeleteRecordResponse;
+const CreateRecordBatchRecord = models.CreateRecordBatchRecord;
+const CreateDomainResponse = models.CreateDomainResponse;
+const DomainCountInfo = models.DomainCountInfo;
+const UserInfo = models.UserInfo;
+const ModifyRecordBatchResponse = models.ModifyRecordBatchResponse;
+const DescribeDomainLogListResponse = models.DescribeDomainLogListResponse;
+const DescribeRecordTypeRequest = models.DescribeRecordTypeRequest;
+const RecordListItem = models.RecordListItem;
+const CreateDomainBatchResponse = models.CreateDomainBatchResponse;
+const ModifyDomainOwnerResponse = models.ModifyDomainOwnerResponse;
+const ModifyRecordBatchDetail = models.ModifyRecordBatchDetail;
+const DescribeUserDetailResponse = models.DescribeUserDetailResponse;
+const CreateDomainRequest = models.CreateDomainRequest;
+const DescribeDomainShareInfoResponse = models.DescribeDomainShareInfoResponse;
+const ModifyDomainRemarkRequest = models.ModifyDomainRemarkRequest;
+const CreateDomainAliasResponse = models.CreateDomainAliasResponse;
+const DescribeRecordListRequest = models.DescribeRecordListRequest;
+const DescribeDomainPurviewResponse = models.DescribeDomainPurviewResponse;
+const ModifySubdomainStatusResponse = models.ModifySubdomainStatusResponse;
+const ModifyRecordStatusResponse = models.ModifyRecordStatusResponse;
+const CreateDomainGroupRequest = models.CreateDomainGroupRequest;
+const LineInfo = models.LineInfo;
+const DeleteDomainResponse = models.DeleteDomainResponse;
+const DescribeDomainAliasListRequest = models.DescribeDomainAliasListRequest;
+const CreateDomainAliasRequest = models.CreateDomainAliasRequest;
+const DeleteShareDomainRequest = models.DeleteShareDomainRequest;
+const ModifyDynamicDNSRequest = models.ModifyDynamicDNSRequest;
+const PurviewInfo = models.PurviewInfo;
+const ModifyRecordRemarkRequest = models.ModifyRecordRemarkRequest;
+const DescribeUserDetailRequest = models.DescribeUserDetailRequest;
 const ModifyRecordRemarkResponse = models.ModifyRecordRemarkResponse;
 const DescribeDomainListRequest = models.DescribeDomainListRequest;
 const DomainCreateInfo = models.DomainCreateInfo;
-const DescribeDomainShareInfoResponse = models.DescribeDomainShareInfoResponse;
-const DescribeBatchTaskRequest = models.DescribeBatchTaskRequest;
 const DescribeDomainPurviewRequest = models.DescribeDomainPurviewRequest;
-const ModifyDomainStatusResponse = models.ModifyDomainStatusResponse;
 const CreateDomainBatchDetail = models.CreateDomainBatchDetail;
-const DescribeRecordRequest = models.DescribeRecordRequest;
 const ModifyDomainUnlockRequest = models.ModifyDomainUnlockRequest;
-const CreateDomainGroupResponse = models.CreateDomainGroupResponse;
 const ModifyDomainLockResponse = models.ModifyDomainLockResponse;
-const DescribeDomainResponse = models.DescribeDomainResponse;
-const DomainInfo = models.DomainInfo;
-const DeleteRecordRequest = models.DeleteRecordRequest;
-const CreateDomainAliasResponse = models.CreateDomainAliasResponse;
-const DescribeRecordListRequest = models.DescribeRecordListRequest;
-const DescribeDomainRequest = models.DescribeDomainRequest;
-const DescribeRecordLineListResponse = models.DescribeRecordLineListResponse;
-const DescribeRecordResponse = models.DescribeRecordResponse;
-const ModifyRecordStatusRequest = models.ModifyRecordStatusRequest;
-const ModifyDynamicDNSResponse = models.ModifyDynamicDNSResponse;
-const CreateRecordResponse = models.CreateRecordResponse;
-const CreateDomainBatchRequest = models.CreateDomainBatchRequest;
-const DescribeDomainLogListRequest = models.DescribeDomainLogListRequest;
-const DescribeDomainPurviewResponse = models.DescribeDomainPurviewResponse;
-const DescribeDomainShareInfoRequest = models.DescribeDomainShareInfoRequest;
-const CreateRecordBatchDetail = models.CreateRecordBatchDetail;
-const DomainListItem = models.DomainListItem;
-const ModifyRecordStatusResponse = models.ModifyRecordStatusResponse;
 const LockInfo = models.LockInfo;
-const ModifyRecordResponse = models.ModifyRecordResponse;
-const PurviewInfo = models.PurviewInfo;
-const DescribeRecordTypeResponse = models.DescribeRecordTypeResponse;
-const ModifyDomainUnlockResponse = models.ModifyDomainUnlockResponse;
-const CreateDomainRequest = models.CreateDomainRequest;
-const ModifyRecordBatchResponse = models.ModifyRecordBatchResponse;
-const DescribeDomainListResponse = models.DescribeDomainListResponse;
-const ModifyDomainRemarkResponse = models.ModifyDomainRemarkResponse;
-const ModifyRecordBatchRequest = models.ModifyRecordBatchRequest;
-const ModifyDomainRemarkRequest = models.ModifyDomainRemarkRequest;
 const DescribeBatchTaskResponse = models.DescribeBatchTaskResponse;
-const DeleteRecordResponse = models.DeleteRecordResponse;
-const CreateDomainGroupRequest = models.CreateDomainGroupRequest;
-const CreateRecordBatchRecord = models.CreateRecordBatchRecord;
-const LineInfo = models.LineInfo;
-const DeleteDomainResponse = models.DeleteDomainResponse;
-const CreateDomainResponse = models.CreateDomainResponse;
-const DomainCountInfo = models.DomainCountInfo;
-const AddRecordBatch = models.AddRecordBatch;
-const ModifyRecordRequest = models.ModifyRecordRequest;
-const UserInfo = models.UserInfo;
-const RecordCountInfo = models.RecordCountInfo;
-const DeleteShareDomainResponse = models.DeleteShareDomainResponse;
-const DescribeDomainLogListResponse = models.DescribeDomainLogListResponse;
-const CreateDomainAliasRequest = models.CreateDomainAliasRequest;
+const ModifyDynamicDNSResponse = models.ModifyDynamicDNSResponse;
 
 
 /**
@@ -134,6 +139,17 @@ class DnspodClient extends AbstractClient {
     }
 
     /**
+     * 暂停子域名的解析记录
+     * @param {ModifySubdomainStatusRequest} req
+     * @param {function(string, ModifySubdomainStatusResponse):void} cb
+     * @public
+     */
+    ModifySubdomainStatus(req, cb) {
+        let resp = new ModifySubdomainStatusResponse();
+        this.request("ModifySubdomainStatus", req, resp, cb);
+    }
+
+    /**
      * 删除记录
      * @param {DeleteRecordRequest} req
      * @param {function(string, DeleteRecordResponse):void} cb
@@ -142,6 +158,17 @@ class DnspodClient extends AbstractClient {
     DeleteRecord(req, cb) {
         let resp = new DeleteRecordResponse();
         this.request("DeleteRecord", req, resp, cb);
+    }
+
+    /**
+     * 获取域名别名列表
+     * @param {DescribeDomainAliasListRequest} req
+     * @param {function(string, DescribeDomainAliasListResponse):void} cb
+     * @public
+     */
+    DescribeDomainAliasList(req, cb) {
+        let resp = new DescribeDomainAliasListResponse();
+        this.request("DescribeDomainAliasList", req, resp, cb);
     }
 
     /**
@@ -246,14 +273,14 @@ class DnspodClient extends AbstractClient {
     }
 
     /**
-     * 锁定域名
-     * @param {ModifyDomainLockRequest} req
-     * @param {function(string, ModifyDomainLockResponse):void} cb
+     * 获取帐户信息
+     * @param {DescribeUserDetailRequest} req
+     * @param {function(string, DescribeUserDetailResponse):void} cb
      * @public
      */
-    ModifyDomainLock(req, cb) {
-        let resp = new ModifyDomainLockResponse();
-        this.request("ModifyDomainLock", req, resp, cb);
+    DescribeUserDetail(req, cb) {
+        let resp = new DescribeUserDetailResponse();
+        this.request("DescribeUserDetail", req, resp, cb);
     }
 
     /**
@@ -424,14 +451,14 @@ class DnspodClient extends AbstractClient {
     }
 
     /**
-     * 获取帐户信息
-     * @param {DescribeUserDetailRequest} req
-     * @param {function(string, DescribeUserDetailResponse):void} cb
+     * 锁定域名
+     * @param {ModifyDomainLockRequest} req
+     * @param {function(string, ModifyDomainLockResponse):void} cb
      * @public
      */
-    DescribeUserDetail(req, cb) {
-        let resp = new DescribeUserDetailResponse();
-        this.request("DescribeUserDetail", req, resp, cb);
+    ModifyDomainLock(req, cb) {
+        let resp = new ModifyDomainLockResponse();
+        this.request("ModifyDomainLock", req, resp, cb);
     }
 
     /**

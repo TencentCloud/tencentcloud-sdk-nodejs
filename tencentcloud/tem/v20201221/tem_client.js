@@ -16,22 +16,29 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const MountedSettingConf = models.MountedSettingConf;
+const ModifyServiceInfoResponse = models.ModifyServiceInfoResponse;
+const StorageMountConf = models.StorageMountConf;
 const CreateResourceRequest = models.CreateResourceRequest;
 const CreateServiceV2Response = models.CreateServiceV2Response;
 const CreateCosTokenV2Request = models.CreateCosTokenV2Request;
 const DeployServiceV2Response = models.DeployServiceV2Response;
-const IngressTls = models.IngressTls;
+const EsInfo = models.EsInfo;
 const DescribeNamespacesResponse = models.DescribeNamespacesResponse;
+const PortMapping = models.PortMapping;
+const RestartServiceRunPodRequest = models.RestartServiceRunPodRequest;
 const ModifyIngressResponse = models.ModifyIngressResponse;
 const DeleteIngressRequest = models.DeleteIngressRequest;
+const ModifyServiceInfoRequest = models.ModifyServiceInfoRequest;
 const CreateNamespaceResponse = models.CreateNamespaceResponse;
-const StorageMountConf = models.StorageMountConf;
+const DescribeRelatedIngressesRequest = models.DescribeRelatedIngressesRequest;
 const CosToken = models.CosToken;
 const DescribeNamespacesRequest = models.DescribeNamespacesRequest;
 const CreateCosTokenRequest = models.CreateCosTokenRequest;
 const DeployServiceV2Request = models.DeployServiceV2Request;
 const ModifyIngressRequest = models.ModifyIngressRequest;
-const Pair = models.Pair;
+const GenerateDownloadUrlResponse = models.GenerateDownloadUrlResponse;
+const DescribeRelatedIngressesResponse = models.DescribeRelatedIngressesResponse;
 const CreateNamespaceRequest = models.CreateNamespaceRequest;
 const DescribeIngressesRequest = models.DescribeIngressesRequest;
 const DescribeRunPodPage = models.DescribeRunPodPage;
@@ -40,6 +47,7 @@ const LogOutputConf = models.LogOutputConf;
 const DescribeIngressesResponse = models.DescribeIngressesResponse;
 const IngressInfo = models.IngressInfo;
 const DeleteIngressResponse = models.DeleteIngressResponse;
+const RestartServiceRunPodResponse = models.RestartServiceRunPodResponse;
 const ModifyNamespaceRequest = models.ModifyNamespaceRequest;
 const IngressRuleBackend = models.IngressRuleBackend;
 const DescribeIngressResponse = models.DescribeIngressResponse;
@@ -54,10 +62,15 @@ const CreateResourceResponse = models.CreateResourceResponse;
 const DescribeServiceRunPodListV2Response = models.DescribeServiceRunPodListV2Response;
 const TemNamespaceInfo = models.TemNamespaceInfo;
 const NamespacePage = models.NamespacePage;
+const HealthCheckConfig = models.HealthCheckConfig;
 const CreateCosTokenV2Response = models.CreateCosTokenV2Response;
-const EsInfo = models.EsInfo;
+const IngressTls = models.IngressTls;
+const GenerateDownloadUrlRequest = models.GenerateDownloadUrlRequest;
+const DeployStrategyConf = models.DeployStrategyConf;
 const DescribeIngressRequest = models.DescribeIngressRequest;
 const CreateServiceV2Request = models.CreateServiceV2Request;
+const EksService = models.EksService;
+const Pair = models.Pair;
 
 
 /**
@@ -101,6 +114,17 @@ class TemClient extends AbstractClient {
     ModifyIngress(req, cb) {
         let resp = new ModifyIngressResponse();
         this.request("ModifyIngress", req, resp, cb);
+    }
+
+    /**
+     * 生成包预签名下载链接
+     * @param {GenerateDownloadUrlRequest} req
+     * @param {function(string, GenerateDownloadUrlResponse):void} cb
+     * @public
+     */
+    GenerateDownloadUrl(req, cb) {
+        let resp = new GenerateDownloadUrlResponse();
+        this.request("GenerateDownloadUrl", req, resp, cb);
     }
 
     /**
@@ -156,6 +180,39 @@ class TemClient extends AbstractClient {
     CreateServiceV2(req, cb) {
         let resp = new CreateServiceV2Response();
         this.request("CreateServiceV2", req, resp, cb);
+    }
+
+    /**
+     * 查询服务关联的 Ingress 规则列表
+     * @param {DescribeRelatedIngressesRequest} req
+     * @param {function(string, DescribeRelatedIngressesResponse):void} cb
+     * @public
+     */
+    DescribeRelatedIngresses(req, cb) {
+        let resp = new DescribeRelatedIngressesResponse();
+        this.request("DescribeRelatedIngresses", req, resp, cb);
+    }
+
+    /**
+     * 修改服务基本信息
+     * @param {ModifyServiceInfoRequest} req
+     * @param {function(string, ModifyServiceInfoResponse):void} cb
+     * @public
+     */
+    ModifyServiceInfo(req, cb) {
+        let resp = new ModifyServiceInfoResponse();
+        this.request("ModifyServiceInfo", req, resp, cb);
+    }
+
+    /**
+     * 重启实例
+     * @param {RestartServiceRunPodRequest} req
+     * @param {function(string, RestartServiceRunPodResponse):void} cb
+     * @public
+     */
+    RestartServiceRunPod(req, cb) {
+        let resp = new RestartServiceRunPodResponse();
+        this.request("RestartServiceRunPod", req, resp, cb);
     }
 
     /**

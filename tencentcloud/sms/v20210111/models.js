@@ -153,12 +153,13 @@ class ModifySmsSignRequest extends  AbstractModel {
 
         /**
          * 签名类型。其中每种类型后面标注了其可选的 DocumentType（证明类型）：
-0：公司，可选 DocumentType 有（0，1，2，3）。
+0：公司，可选 DocumentType 有（0，1）。
 1：APP，可选 DocumentType 有（0，1，2，3，4） 。
 2：网站，可选 DocumentType 有（0，1，2，3，5）。
-3：公众号或者小程序，可选 DocumentType 有（0，1，2，3，6）。
+3：公众号，可选 DocumentType 有（0，1，2，3，8）。
 4：商标，可选 DocumentType 有（7）。
 5：政府/机关事业单位/其他机构，可选 DocumentType 有（2，3）。
+6：小程序，可选 DocumentType 有（0，1，2，3，6）。
 注：必须按照对应关系选择证明类型，否则会审核失败。
          * @type {number || null}
          */
@@ -174,7 +175,7 @@ class ModifySmsSignRequest extends  AbstractModel {
 5：网站备案后台截图（个人开发网站）。
 6：小程序设置页面截图（个人认证小程序）。
 7：商标注册书。
-注：必选按照 SignType 选择对应的DocumentType。
+8：公众号设置页面截图（个人认证公众号）。
          * @type {number || null}
          */
         this.DocumentType = null;
@@ -183,6 +184,7 @@ class ModifySmsSignRequest extends  AbstractModel {
          * 是否国际/港澳台短信：
 0：表示国内短信。
 1：表示国际/港澳台短信。
+注：需要和待修改签名International值保持一致，该参数不能直接修改国内签名到国际签名。
          * @type {number || null}
          */
         this.International = null;
@@ -238,6 +240,64 @@ class ModifySmsSignRequest extends  AbstractModel {
 }
 
 /**
+ * SmsPackagesStatistics请求参数结构体
+ * @class
+ */
+class SmsPackagesStatisticsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 短信 SdkAppId 在 [短信控制台](https://console.cloud.tencent.com/smsv2/app-manage)  添加应用后生成的实际 SdkAppId，示例如1400006666。
+         * @type {string || null}
+         */
+        this.SmsSdkAppId = null;
+
+        /**
+         * 最大上限(需要拉取的套餐包个数)。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 起始时间，格式为yyyymmddhh，精确到小时，例如2021050113，表示2021年5月1号13时。
+注：拉取套餐包的创建时间不小于起始时间。
+         * @type {string || null}
+         */
+        this.BeginTime = null;
+
+        /**
+         * 结束时间，格式为yyyymmddhh，精确到小时，例如2021050118，表示2021年5月1号18时。
+注：EndTime 必须大于 BeginTime且小于当前时间，拉取套餐包的创建时间不大于结束时间。
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SmsSdkAppId = 'SmsSdkAppId' in params ? params.SmsSdkAppId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+
+    }
+}
+
+/**
  * AddSmsSign请求参数结构体
  * @class
  */
@@ -247,18 +307,20 @@ class AddSmsSignRequest extends  AbstractModel {
 
         /**
          * 签名名称。
+注：不能重复申请已通过或待审核的签名。
          * @type {string || null}
          */
         this.SignName = null;
 
         /**
          * 签名类型。其中每种类型后面标注了其可选的 DocumentType（证明类型）：
-0：公司，可选 DocumentType 有（0，1，2，3）。
+0：公司，可选 DocumentType 有（0，1）。
 1：APP，可选 DocumentType 有（0，1，2，3，4） 。
 2：网站，可选 DocumentType 有（0，1，2，3，5）。
-3：公众号或者小程序，可选 DocumentType 有（0，1，2，3，6）。
+3：公众号，可选 DocumentType 有（0，1，2，3，8）。
 4：商标，可选 DocumentType 有（7）。
 5：政府/机关事业单位/其他机构，可选 DocumentType 有（2，3）。
+6：小程序，可选 DocumentType 有（0，1，2，3，6）。
 注：必须按照对应关系选择证明类型，否则会审核失败。
          * @type {number || null}
          */
@@ -274,7 +336,7 @@ class AddSmsSignRequest extends  AbstractModel {
 5：网站备案后台截图（个人开发网站）。
 6：小程序设置页面截图（个人认证小程序）。
 7：商标注册书。
-注：必选按照 SignType 选择对应的DocumentType。
+8：公众号设置页面截图（个人认证公众号）。
          * @type {number || null}
          */
         this.DocumentType = null;
@@ -403,6 +465,35 @@ class DescribeSmsTemplateListResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribePhoneNumberInfo请求参数结构体
+ * @class
+ */
+class DescribePhoneNumberInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 查询手机号码，采用 E.164 标准，格式为+[国家或地区码][手机号]，单次请求最多支持200个手机号。
+例如：+8613711112222， 其中前面有一个+号 ，86为国家码，13711112222为手机号。
+         * @type {Array.<string> || null}
+         */
+        this.PhoneNumberSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PhoneNumberSet = 'PhoneNumberSet' in params ? params.PhoneNumberSet : null;
 
     }
 }
@@ -1039,6 +1130,7 @@ class SendSmsRequest extends  AbstractModel {
         /**
          * 下发手机号码，采用 E.164 标准，格式为+[国家或地区码][手机号]，单次请求最多支持200个手机号且要求全为境内手机号或全为境外手机号。
 例如：+8613711112222， 其中前面有一个+号 ，86为国家码，13711112222为手机号。
+注：发送国内短信格式还支持0086、86或无任何国家或地区码的11位手机号码，前缀默认为+86。
          * @type {Array.<string> || null}
          */
         this.PhoneNumberSet = null;
@@ -1050,26 +1142,27 @@ class SendSmsRequest extends  AbstractModel {
         this.SmsSdkAppId = null;
 
         /**
-         * 模板 ID，必须填写已审核通过的模板 ID。模板 ID 可登录 [短信控制台](https://console.cloud.tencent.com/smsv2) 查看，若向境外手机号发送短信，仅支持使用国际/港澳台短信模板。
+         * 模板 ID，必须填写已审核通过的模板 ID。模板 ID 可前往 [国内短信](https://console.cloud.tencent.com/smsv2/csms-template) 或 [国际/港澳台短信](https://console.cloud.tencent.com/smsv2/isms-template) 的正文模板管理查看，若向境外手机号发送短信，仅支持使用国际/港澳台短信模板。
          * @type {string || null}
          */
         this.TemplateId = null;
 
         /**
-         * 短信签名内容，使用 UTF-8 编码，必须填写已审核通过的签名，例如：腾讯云，签名信息可登录 [短信控制台](https://console.cloud.tencent.com/smsv2)  查看。
-注：国内短信为必填参数。
+         * 短信签名内容，使用 UTF-8 编码，必须填写已审核通过的签名，例如：腾讯云，签名信息可前往 [国内短信](https://console.cloud.tencent.com/smsv2/csms-sign) 或 [国际/港澳台短信](https://console.cloud.tencent.com/smsv2/isms-sign) 的签名管理查看。
+<dx-alert infotype="notice" title="注意">发送国内短信该参数必填。</dx-alert>
          * @type {string || null}
          */
         this.SignName = null;
 
         /**
          * 模板参数，若无模板参数，则设置为空。
+<dx-alert infotype="notice" title="注意">模板参数的个数需要与 TemplateId 对应模板的变量个数保持一致。</dx-alert>
          * @type {Array.<string> || null}
          */
         this.TemplateParamSet = null;
 
         /**
-         * 短信码号扩展号，默认未开通，如需开通请联系 [sms helper](https://cloud.tencent.com/document/product/382/3773#.E6.8A.80.E6.9C.AF.E4.BA.A4.E6.B5.81)。
+         * 短信码号扩展号，默认未开通，如需开通请联系 [腾讯云短信小助手](https://cloud.tencent.com/document/product/382/3773#.E6.8A.80.E6.9C.AF.E4.BA.A4.E6.B5.81)。
          * @type {string || null}
          */
         this.ExtendCode = null;
@@ -1082,7 +1175,7 @@ class SendSmsRequest extends  AbstractModel {
 
         /**
          * 国内短信无需填写该项；国际/港澳台短信已申请独立 SenderId 需要填写该字段，默认使用公共 SenderId，无需填写该字段。
-注：月度使用量达到指定量级可申请独立 SenderId 使用，详情请联系 [sms helper](https://cloud.tencent.com/document/product/382/3773#.E6.8A.80.E6.9C.AF.E4.BA.A4.E6.B5.81)。
+注：月度使用量达到指定量级可申请独立 SenderId 使用，详情请联系 [腾讯云短信小助手](https://cloud.tencent.com/document/product/382/3773#.E6.8A.80.E6.9C.AF.E4.BA.A4.E6.B5.81)。
          * @type {string || null}
          */
         this.SenderId = null;
@@ -1283,44 +1376,24 @@ class DescribeSmsSignListRequest extends  AbstractModel {
 }
 
 /**
- * SmsPackagesStatistics请求参数结构体
+ * DescribePhoneNumberInfo返回参数结构体
  * @class
  */
-class SmsPackagesStatisticsRequest extends  AbstractModel {
+class DescribePhoneNumberInfoResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 短信 SdkAppId 在 [短信控制台](https://console.cloud.tencent.com/smsv2/app-manage)  添加应用后生成的实际 SdkAppId，示例如1400006666。
+         * 获取号码信息。
+         * @type {Array.<PhoneNumberInfo> || null}
+         */
+        this.PhoneNumberInfoSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.SmsSdkAppId = null;
-
-        /**
-         * 最大上限(需要拉取的套餐包个数)。
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * 偏移量。
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * 起始时间，格式为yyyymmddhh，精确到小时，例如2021050113，表示2021年5月1号13时。
-注：拉取套餐包的创建时间不小于起始时间。
-         * @type {string || null}
-         */
-        this.BeginTime = null;
-
-        /**
-         * 结束时间，格式为yyyymmddhh，精确到小时，例如2021050118，表示2021年5月1号18时。
-注：EndTime 必须大于 BeginTime，拉取套餐包的创建时间不大于结束时间。
-         * @type {string || null}
-         */
-        this.EndTime = null;
+        this.RequestId = null;
 
     }
 
@@ -1331,11 +1404,16 @@ class SmsPackagesStatisticsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SmsSdkAppId = 'SmsSdkAppId' in params ? params.SmsSdkAppId : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+
+        if (params.PhoneNumberInfoSet) {
+            this.PhoneNumberInfoSet = new Array();
+            for (let z in params.PhoneNumberInfoSet) {
+                let obj = new PhoneNumberInfo();
+                obj.deserialize(params.PhoneNumberInfoSet[z]);
+                this.PhoneNumberInfoSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1500,6 +1578,13 @@ class PullSmsSendStatus extends  AbstractModel {
          */
         this.Description = null;
 
+        /**
+         * 用户的 session 内容。与请求中的 SessionContext 一致，默认为空，如需开通请联系 [腾讯云短信小助手](https://cloud.tencent.com/document/product/382/3773#.E6.8A.80.E6.9C.AF.E4.BA.A4.E6.B5.81)。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SessionContext = null;
+
     }
 
     /**
@@ -1516,6 +1601,7 @@ class PullSmsSendStatus extends  AbstractModel {
         this.SerialNo = 'SerialNo' in params ? params.SerialNo : null;
         this.ReportStatus = 'ReportStatus' in params ? params.ReportStatus : null;
         this.Description = 'Description' in params ? params.Description : null;
+        this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
 
     }
 }
@@ -1572,19 +1658,33 @@ class DescribeSmsTemplateListRequest extends  AbstractModel {
         super();
 
         /**
-         * 模板 ID 数组。
-注：默认数组长度最大100。
-         * @type {Array.<number> || null}
-         */
-        this.TemplateIdSet = null;
-
-        /**
          * 是否国际/港澳台短信：
 0：表示国内短信。
 1：表示国际/港澳台短信。
          * @type {number || null}
          */
         this.International = null;
+
+        /**
+         * 模板 ID 数组。数组为空时默认查询模板列表信息（仅允许主账号使用），请使用 Limit 和 Offset 字段设置查询范围。
+<dx-alert infotype="notice" title="注意">默认数组长度最大100</dx-alert>
+         * @type {Array.<number> || null}
+         */
+        this.TemplateIdSet = null;
+
+        /**
+         * 最大上限，最多100。
+注：默认为0，TemplateIdSet 为空时启用。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量。
+注：默认为0，TemplateIdSet 为空时启用。
+         * @type {number || null}
+         */
+        this.Offset = null;
 
     }
 
@@ -1595,8 +1695,10 @@ class DescribeSmsTemplateListRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TemplateIdSet = 'TemplateIdSet' in params ? params.TemplateIdSet : null;
         this.International = 'International' in params ? params.International : null;
+        this.TemplateIdSet = 'TemplateIdSet' in params ? params.TemplateIdSet : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
     }
 }
@@ -1681,6 +1783,76 @@ class CallbackStatusStatistics extends  AbstractModel {
         this.ShutdownErrorCount = 'ShutdownErrorCount' in params ? params.ShutdownErrorCount : null;
         this.BlackListCount = 'BlackListCount' in params ? params.BlackListCount : null;
         this.FrequencyLimitCount = 'FrequencyLimitCount' in params ? params.FrequencyLimitCount : null;
+
+    }
+}
+
+/**
+ * 号码信息。
+ * @class
+ */
+class PhoneNumberInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 号码信息查询错误码，查询成功返回 "Ok"。
+         * @type {string || null}
+         */
+        this.Code = null;
+
+        /**
+         * 号码信息查询错误码描述。
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * 国家（或地区）码。
+         * @type {string || null}
+         */
+        this.NationCode = null;
+
+        /**
+         * 用户号码，去除国家或地区码前缀的普通格式，示例如：13711112222。
+         * @type {string || null}
+         */
+        this.SubscriberNumber = null;
+
+        /**
+         * 解析后的规范的 E.164 号码，与下发短信的号码解析结果一致。解析失败时会原样返回。
+         * @type {string || null}
+         */
+        this.PhoneNumber = null;
+
+        /**
+         * 国家码或地区码，例如 CN、US 等，对于未识别出国家码或者地区码，默认返回 DEF。
+         * @type {string || null}
+         */
+        this.IsoCode = null;
+
+        /**
+         * 国家码或地区名，例如 China，可参考 [国际/港澳台短信价格总览](https://cloud.tencent.com/document/product/382/18051#.E6.97.A5.E7.BB.93.E5.90.8E.E4.BB.98.E8.B4.B9.3Ca-id.3D.22post-payment.22.3E.3C.2Fa.3E)
+         * @type {string || null}
+         */
+        this.IsoName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Code = 'Code' in params ? params.Code : null;
+        this.Message = 'Message' in params ? params.Message : null;
+        this.NationCode = 'NationCode' in params ? params.NationCode : null;
+        this.SubscriberNumber = 'SubscriberNumber' in params ? params.SubscriberNumber : null;
+        this.PhoneNumber = 'PhoneNumber' in params ? params.PhoneNumber : null;
+        this.IsoCode = 'IsoCode' in params ? params.IsoCode : null;
+        this.IsoName = 'IsoName' in params ? params.IsoName : null;
 
     }
 }
@@ -1848,7 +2020,7 @@ class SendStatus extends  AbstractModel {
         this.SessionContext = null;
 
         /**
-         * 短信请求错误码，具体含义请参考 [错误码](https://cloud.tencent.com/document/product/382/49316)。
+         * 短信请求错误码，具体含义请参考 [错误码](https://cloud.tencent.com/document/api/382/55981#6.-.E9.94.99.E8.AF.AF.E7.A0.81)，发送成功返回 "Ok"。
          * @type {string || null}
          */
         this.Code = null;
@@ -2323,9 +2495,11 @@ module.exports = {
     DeleteSmsTemplateResponse: DeleteSmsTemplateResponse,
     ModifySmsTemplateResponse: ModifySmsTemplateResponse,
     ModifySmsSignRequest: ModifySmsSignRequest,
+    SmsPackagesStatisticsRequest: SmsPackagesStatisticsRequest,
     AddSmsSignRequest: AddSmsSignRequest,
     AddTemplateStatus: AddTemplateStatus,
     DescribeSmsTemplateListResponse: DescribeSmsTemplateListResponse,
+    DescribePhoneNumberInfoRequest: DescribePhoneNumberInfoRequest,
     PullSmsSendStatusByPhoneNumberRequest: PullSmsSendStatusByPhoneNumberRequest,
     AddSmsTemplateRequest: AddSmsTemplateRequest,
     ModifySmsTemplateRequest: ModifySmsTemplateRequest,
@@ -2343,13 +2517,14 @@ module.exports = {
     CallbackStatusStatisticsRequest: CallbackStatusStatisticsRequest,
     DeleteTemplateStatus: DeleteTemplateStatus,
     DescribeSmsSignListRequest: DescribeSmsSignListRequest,
-    SmsPackagesStatisticsRequest: SmsPackagesStatisticsRequest,
+    DescribePhoneNumberInfoResponse: DescribePhoneNumberInfoResponse,
     DescribeTemplateListStatus: DescribeTemplateListStatus,
     AddSmsTemplateResponse: AddSmsTemplateResponse,
     PullSmsSendStatus: PullSmsSendStatus,
     DescribeSmsSignListResponse: DescribeSmsSignListResponse,
     DescribeSmsTemplateListRequest: DescribeSmsTemplateListRequest,
     CallbackStatusStatistics: CallbackStatusStatistics,
+    PhoneNumberInfo: PhoneNumberInfo,
     SendStatusStatisticsRequest: SendStatusStatisticsRequest,
     DeleteSmsTemplateRequest: DeleteSmsTemplateRequest,
     PullSmsReplyStatusByPhoneNumberResponse: PullSmsReplyStatusByPhoneNumberResponse,

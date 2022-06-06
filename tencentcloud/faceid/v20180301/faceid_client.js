@@ -24,44 +24,61 @@ const Encryption = models.Encryption;
 const CheckBankCardInformationRequest = models.CheckBankCardInformationRequest;
 const MobileNetworkTimeVerificationResponse = models.MobileNetworkTimeVerificationResponse;
 const GetLiveCodeRequest = models.GetLiveCodeRequest;
-const GetEidResultResponse = models.GetEidResultResponse;
+const CheckIdNameDateResponse = models.CheckIdNameDateResponse;
 const IdCardVerificationRequest = models.IdCardVerificationRequest;
 const BankCardVerificationRequest = models.BankCardVerificationRequest;
 const CheckBankCardInformationResponse = models.CheckBankCardInformationResponse;
 const DetectInfoBestFrame = models.DetectInfoBestFrame;
+const WeChatBillDetail = models.WeChatBillDetail;
+const GetEidTokenConfig = models.GetEidTokenConfig;
 const CheckIdCardInformationResponse = models.CheckIdCardInformationResponse;
 const GetDetectInfoEnhancedResponse = models.GetDetectInfoEnhancedResponse;
 const PhoneVerificationRequest = models.PhoneVerificationRequest;
+const PhoneVerificationCMCCRequest = models.PhoneVerificationCMCCRequest;
 const GetEidResultRequest = models.GetEidResultRequest;
 const DetectAuthResponse = models.DetectAuthResponse;
 const PhoneVerificationResponse = models.PhoneVerificationResponse;
 const GetEidTokenRequest = models.GetEidTokenRequest;
 const IdCardOCRVerificationRequest = models.IdCardOCRVerificationRequest;
+const GetWeChatBillDetailsResponse = models.GetWeChatBillDetailsResponse;
 const CheckPhoneAndNameResponse = models.CheckPhoneAndNameResponse;
 const BankCard4EVerificationResponse = models.BankCard4EVerificationResponse;
 const MobileStatusRequest = models.MobileStatusRequest;
+const DetectReflectLivenessAndCompareResponse = models.DetectReflectLivenessAndCompareResponse;
 const GetRealNameAuthTokenRequest = models.GetRealNameAuthTokenRequest;
+const ParseNfcDataResponse = models.ParseNfcDataResponse;
+const CheckIdNameDateRequest = models.CheckIdNameDateRequest;
 const BankCard2EVerificationRequest = models.BankCard2EVerificationRequest;
 const LivenessRecognitionRequest = models.LivenessRecognitionRequest;
 const EidInfo = models.EidInfo;
 const GetFaceIdTokenResponse = models.GetFaceIdTokenResponse;
-const GetEidTokenConfig = models.GetEidTokenConfig;
+const DetectReflectLivenessAndCompareRequest = models.DetectReflectLivenessAndCompareRequest;
+const PhoneVerificationCMCCResponse = models.PhoneVerificationCMCCResponse;
+const CheckEidTokenStatusResponse = models.CheckEidTokenStatusResponse;
+const PhoneVerificationCTCCResponse = models.PhoneVerificationCTCCResponse;
 const MobileStatusResponse = models.MobileStatusResponse;
+const PhoneVerificationCTCCRequest = models.PhoneVerificationCTCCRequest;
 const IdCardOCRVerificationResponse = models.IdCardOCRVerificationResponse;
-const GetRealNameAuthTokenResponse = models.GetRealNameAuthTokenResponse;
+const ChargeDetail = models.ChargeDetail;
+const ParseNfcDataRequest = models.ParseNfcDataRequest;
 const LivenessResponse = models.LivenessResponse;
 const CheckIdCardInformationRequest = models.CheckIdCardInformationRequest;
 const DetectInfoText = models.DetectInfoText;
 const DetectAuthRequest = models.DetectAuthRequest;
 const MinorsVerificationResponse = models.MinorsVerificationResponse;
-const BankCardVerificationResponse = models.BankCardVerificationResponse;
+const GetWeChatBillDetailsRequest = models.GetWeChatBillDetailsRequest;
+const CheckEidTokenStatusRequest = models.CheckEidTokenStatusRequest;
+const GetEidResultResponse = models.GetEidResultResponse;
 const GetRealNameAuthResultRequest = models.GetRealNameAuthResultRequest;
 const ImageRecognitionRequest = models.ImageRecognitionRequest;
+const PhoneVerificationCUCCRequest = models.PhoneVerificationCUCCRequest;
 const BankCard4EVerificationRequest = models.BankCard4EVerificationRequest;
 const MobileNetworkTimeVerificationRequest = models.MobileNetworkTimeVerificationRequest;
 const GetFaceIdResultRequest = models.GetFaceIdResultRequest;
+const PhoneVerificationCUCCResponse = models.PhoneVerificationCUCCResponse;
 const GetActionSequenceResponse = models.GetActionSequenceResponse;
 const LivenessRecognitionResponse = models.LivenessRecognitionResponse;
+const BankCardVerificationResponse = models.BankCardVerificationResponse;
 const MinorsVerificationRequest = models.MinorsVerificationRequest;
 const ImageRecognitionResponse = models.ImageRecognitionResponse;
 const GetActionSequenceRequest = models.GetActionSequenceRequest;
@@ -74,10 +91,12 @@ const IdCardVerificationResponse = models.IdCardVerificationResponse;
 const DetectInfoIdCardData = models.DetectInfoIdCardData;
 const CheckPhoneAndNameRequest = models.CheckPhoneAndNameRequest;
 const GetEidTokenResponse = models.GetEidTokenResponse;
+const IntentionVerifyData = models.IntentionVerifyData;
 const LivenessCompareRequest = models.LivenessCompareRequest;
 const DetectDetail = models.DetectDetail;
 const GetFaceIdResultResponse = models.GetFaceIdResultResponse;
 const EncryptedPhoneVerificationRequest = models.EncryptedPhoneVerificationRequest;
+const GetRealNameAuthTokenResponse = models.GetRealNameAuthTokenResponse;
 const GetRealNameAuthResultResponse = models.GetRealNameAuthResultResponse;
 const EncryptedPhoneVerificationResponse = models.EncryptedPhoneVerificationResponse;
 
@@ -115,7 +134,18 @@ class FaceidClient extends AbstractClient {
     }
 
     /**
-     * 传入身份证人像面照片，识别身份证照片上的信息，并将姓名、身份证号、身份证人像照片与公安权威库的证件照进行比对，是否属于同一个人，从而验证身份证信息的真实性。
+     * 查询微信渠道服务（微信小程序、微信原生H5、微信普通H5）的账单明细及计费状态。
+     * @param {GetWeChatBillDetailsRequest} req
+     * @param {function(string, GetWeChatBillDetailsResponse):void} cb
+     * @public
+     */
+    GetWeChatBillDetails(req, cb) {
+        let resp = new GetWeChatBillDetailsResponse();
+        this.request("GetWeChatBillDetails", req, resp, cb);
+    }
+
+    /**
+     * 传入身份证人像面照片，识别身份证照片上的信息，并将姓名、身份证号、身份证人像照片与权威库的证件照进行比对，是否属于同一个人，从而验证身份证信息的真实性。
      * @param {CheckIdCardInformationRequest} req
      * @param {function(string, CheckIdCardInformationResponse):void} cb
      * @public
@@ -123,6 +153,17 @@ class FaceidClient extends AbstractClient {
     CheckIdCardInformation(req, cb) {
         let resp = new CheckIdCardInformationResponse();
         this.request("CheckIdCardInformation", req, resp, cb);
+    }
+
+    /**
+     * 用于轮询E证通H5场景EidToken验证状态。
+     * @param {CheckEidTokenStatusRequest} req
+     * @param {function(string, CheckEidTokenStatusResponse):void} cb
+     * @public
+     */
+    CheckEidTokenStatus(req, cb) {
+        let resp = new CheckEidTokenStatusResponse();
+        this.request("CheckEidTokenStatus", req, resp, cb);
     }
 
     /**
@@ -137,7 +178,7 @@ class FaceidClient extends AbstractClient {
     }
 
     /**
-     * 本接口用于校验手机号、姓名和身份证号的真实性和一致性，入参支持MD5加密传输。
+     * 本接口用于校验手机号、姓名和身份证号的真实性和一致性，入参支持明文、MD5和SHA256加密传输。
      * @param {EncryptedPhoneVerificationRequest} req
      * @param {function(string, EncryptedPhoneVerificationResponse):void} cb
      * @public
@@ -238,7 +279,7 @@ class FaceidClient extends AbstractClient {
     }
 
     /**
-     * 传入照片和身份信息，判断该照片与公安权威库的证件照是否属于同一个人。
+     * 传入照片和身份信息，判断该照片与权威库的证件照是否属于同一个人。
      * @param {ImageRecognitionRequest} req
      * @param {function(string, ImageRecognitionResponse):void} cb
      * @public
@@ -249,7 +290,7 @@ class FaceidClient extends AbstractClient {
     }
 
     /**
-     * 每次调用E证通小程序服务前，需先调用本接口获取EidToken，用来串联核身流程，在验证完成后，用于获取验证结果信息。
+     * 每次调用E证通服务前，需先调用本接口获取EidToken，用来串联E证通流程，在验证完成后，用于获取E证通结果信息。
      * @param {GetEidTokenRequest} req
      * @param {function(string, GetEidTokenResponse):void} cb
      * @public
@@ -282,7 +323,18 @@ class FaceidClient extends AbstractClient {
     }
 
     /**
-     * 未成年人守护接口是通过传入手机号或姓名和身份证号，结合权威数据源和腾讯健康守护可信模型，判断该信息是否真实且年满18周岁。腾讯健康守护可信模型覆盖了上十亿手机库源，覆盖率高、准确率高，如果不在库中的手机号，还可以通过姓名+身份证进行兜底验证。
+     * 本接口用于校验中国移动手机号、姓名和身份证号的真实性和一致性。中国移动支持的手机号段详情请查阅<a href="https://cloud.tencent.com/document/product/1007/46063">运营商类</a>文档。
+     * @param {PhoneVerificationCMCCRequest} req
+     * @param {function(string, PhoneVerificationCMCCResponse):void} cb
+     * @public
+     */
+    PhoneVerificationCMCC(req, cb) {
+        let resp = new PhoneVerificationCMCCResponse();
+        this.request("PhoneVerificationCMCC", req, resp, cb);
+    }
+
+    /**
+     * 通过传入手机号或姓名和身份证号，结合权威数据源和腾讯健康守护可信模型，判断该信息是否真实且年满18周岁。腾讯健康守护可信模型覆盖了上十亿手机库源，覆盖率高、准确率高，如果不在库中的手机号，还可以通过姓名+身份证进行兜底验证。
      * @param {MinorsVerificationRequest} req
      * @param {function(string, MinorsVerificationResponse):void} cb
      * @public
@@ -290,6 +342,29 @@ class FaceidClient extends AbstractClient {
     MinorsVerification(req, cb) {
         let resp = new MinorsVerificationResponse();
         this.request("MinorsVerification", req, resp, cb);
+    }
+
+    /**
+     * 使用活体比对（光线）SDK生成的数据包检测活体，并和传入的图片进行比对。
+图片和SDK生成的数据内容必须存储在腾讯云COS，COS Bucket所在的Region需要和本接口请求的Region保持一致，推荐使用生成上传链接接口来完成资源传递。
+     * @param {DetectReflectLivenessAndCompareRequest} req
+     * @param {function(string, DetectReflectLivenessAndCompareResponse):void} cb
+     * @public
+     */
+    DetectReflectLivenessAndCompare(req, cb) {
+        let resp = new DetectReflectLivenessAndCompareResponse();
+        this.request("DetectReflectLivenessAndCompare", req, resp, cb);
+    }
+
+    /**
+     * 本接口用于校验姓名、身份证号、身份证有效期的真实性和一致性。
+     * @param {CheckIdNameDateRequest} req
+     * @param {function(string, CheckIdNameDateResponse):void} cb
+     * @public
+     */
+    CheckIdNameDate(req, cb) {
+        let resp = new CheckIdNameDateResponse();
+        this.request("CheckIdNameDate", req, resp, cb);
     }
 
     /**
@@ -304,7 +379,18 @@ class FaceidClient extends AbstractClient {
     }
 
     /**
-     * 传入视频和身份信息，先判断视频中是否为真人，判断为真人后，再判断该视频中的人与公安权威库的证件照是否属于同一个人。
+     * 本接口用于校验中国联通手机号、姓名和身份证号的真实性和一致性。中国联通支持的手机号段详情请查阅<a href="https://cloud.tencent.com/document/product/1007/46063">运营商类</a>文档。
+     * @param {PhoneVerificationCUCCRequest} req
+     * @param {function(string, PhoneVerificationCUCCResponse):void} cb
+     * @public
+     */
+    PhoneVerificationCUCC(req, cb) {
+        let resp = new PhoneVerificationCUCCResponse();
+        this.request("PhoneVerificationCUCC", req, resp, cb);
+    }
+
+    /**
+     * 传入视频和身份信息，先判断视频中是否为真人，判断为真人后，再判断该视频中的人与权威库的证件照是否属于同一个人。
      * @param {LivenessRecognitionRequest} req
      * @param {function(string, LivenessRecognitionResponse):void} cb
      * @public
@@ -312,6 +398,17 @@ class FaceidClient extends AbstractClient {
     LivenessRecognition(req, cb) {
         let resp = new LivenessRecognitionResponse();
         this.request("LivenessRecognition", req, resp, cb);
+    }
+
+    /**
+     * 解析SDK获取到的证件NFC数据，接口传入SDK返回的ReqId，返回证件信息（个别字段为特定证件类型特有）。SDK生成的ReqId五分钟内有效，重复查询仅收一次费。支持身份证类证件（二代身份证、港澳居住证、台湾居住证、外国人永居证）以及旅行类证件（港澳通行证、台湾通行证、台胞证、回乡证）的NFC识别及核验。
+     * @param {ParseNfcDataRequest} req
+     * @param {function(string, ParseNfcDataResponse):void} cb
+     * @public
+     */
+    ParseNfcData(req, cb) {
+        let resp = new ParseNfcDataResponse();
+        this.request("ParseNfcData", req, resp, cb);
     }
 
     /**
@@ -389,6 +486,17 @@ class FaceidClient extends AbstractClient {
     BankCard2EVerification(req, cb) {
         let resp = new BankCard2EVerificationResponse();
         this.request("BankCard2EVerification", req, resp, cb);
+    }
+
+    /**
+     * 本接口用于校验中国电信手机号、姓名和身份证号的真实性和一致性。中国电信支持的手机号段详情请查阅<a href="https://cloud.tencent.com/document/product/1007/46063">运营商类</a>文档。
+     * @param {PhoneVerificationCTCCRequest} req
+     * @param {function(string, PhoneVerificationCTCCResponse):void} cb
+     * @public
+     */
+    PhoneVerificationCTCC(req, cb) {
+        let resp = new PhoneVerificationCTCCResponse();
+        this.request("PhoneVerificationCTCC", req, resp, cb);
     }
 
     /**

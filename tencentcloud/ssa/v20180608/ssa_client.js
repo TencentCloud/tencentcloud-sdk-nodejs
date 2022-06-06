@@ -16,54 +16,85 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const DescribeMappingResultsResponse = models.DescribeMappingResultsResponse;
 const DescribeAssetDetailRequest = models.DescribeAssetDetailRequest;
+const DescribeSocCheckItemListResponse = models.DescribeSocCheckItemListResponse;
 const DescribeVulListResponse = models.DescribeVulListResponse;
+const DescribeSocAlertDetailsRequest = models.DescribeSocAlertDetailsRequest;
 const DescribeComplianceAssetListResponse = models.DescribeComplianceAssetListResponse;
 const DataCheck = models.DataCheck;
+const DescribeSocCheckResultListResponse = models.DescribeSocCheckResultListResponse;
+const SocProductionItem = models.SocProductionItem;
+const MappingResult = models.MappingResult;
 const DescribeCheckConfigAssetListRequest = models.DescribeCheckConfigAssetListRequest;
 const Asset = models.Asset;
+const SaDivulgeDataQueryPubRequest = models.SaDivulgeDataQueryPubRequest;
 const DescribeComplianceListResponse = models.DescribeComplianceListResponse;
 const DescribeConfigListResponse = models.DescribeConfigListResponse;
 const AggregationObj = models.AggregationObj;
 const DescribeCheckConfigDetailResponse = models.DescribeCheckConfigDetailResponse;
 const DescribeAssetListResponse = models.DescribeAssetListResponse;
+const DescribeSocAlertDetailsResponse = models.DescribeSocAlertDetailsResponse;
+const VulItem = models.VulItem;
 const DescribeCheckConfigAssetListResponse = models.DescribeCheckConfigAssetListResponse;
-const DescribeCheckConfigDetailRequest = models.DescribeCheckConfigDetailRequest;
+const Tag = models.Tag;
+const SocCheckResult = models.SocCheckResult;
+const AlertListData = models.AlertListData;
 const SaDivulgeDataQueryPub = models.SaDivulgeDataQueryPub;
+const SocComplianceInfoResp = models.SocComplianceInfoResp;
 const DescribeAssetListRequest = models.DescribeAssetListRequest;
 const DescribeComplianceDetailResponse = models.DescribeComplianceDetailResponse;
 const DescribeAssetsMappingListResponse = models.DescribeAssetsMappingListResponse;
-const Tag = models.Tag;
-const VulItem = models.VulItem;
+const DescribeSocAlertListResponse = models.DescribeSocAlertListResponse;
+const SocComplianceItem = models.SocComplianceItem;
+const SecurityStatus = models.SecurityStatus;
+const QuerySort = models.QuerySort;
 const DescribeComplianceListRequest = models.DescribeComplianceListRequest;
 const DescribeVulListRequest = models.DescribeVulListRequest;
 const DescribeLeakDetectionListRequest = models.DescribeLeakDetectionListRequest;
+const SocCheckItemV1 = models.SocCheckItemV1;
 const DescribeEventDetailResponse = models.DescribeEventDetailResponse;
 const DescribeSafetyEventListResponse = models.DescribeSafetyEventListResponse;
 const SaDivulgeDataQueryPubList = models.SaDivulgeDataQueryPubList;
+const DescribeSocCheckResultListRequest = models.DescribeSocCheckResultListRequest;
 const DescribeSafetyEventListRequest = models.DescribeSafetyEventListRequest;
+const AssetQueryFilter = models.AssetQueryFilter;
+const AlertType = models.AlertType;
+const DescribeSocAlertListRequest = models.DescribeSocAlertListRequest;
 const ComplianceCheckDetail = models.ComplianceCheckDetail;
 const SaDivulgeDataQueryPubResponse = models.SaDivulgeDataQueryPubResponse;
 const Bucket = models.Bucket;
 const DescribeConfigListRequest = models.DescribeConfigListRequest;
+const DescribeSocCspmComplianceResponse = models.DescribeSocCspmComplianceResponse;
+const DescribeMappingResultsRequest = models.DescribeMappingResultsRequest;
 const Filter = models.Filter;
 const AssetList = models.AssetList;
 const DataAssetMapping = models.DataAssetMapping;
+const DescribeCheckConfigDetailRequest = models.DescribeCheckConfigDetailRequest;
 const VulList = models.VulList;
 const DescribeLeakDetectionListResponse = models.DescribeLeakDetectionListResponse;
 const DataEvent = models.DataEvent;
+const DescribeSocCheckItemListRequest = models.DescribeSocCheckItemListRequest;
 const CheckConfigDetail = models.CheckConfigDetail;
+const DescribeSocCheckItemListRspRsp = models.DescribeSocCheckItemListRspRsp;
+const SocCheckItem = models.SocCheckItem;
 const DescribeEventDetailRequest = models.DescribeEventDetailRequest;
 const CheckAssetItem = models.CheckAssetItem;
-const SaDivulgeDataQueryPubRequest = models.SaDivulgeDataQueryPubRequest;
+const AssetTypeStatistic = models.AssetTypeStatistic;
+const DescribeSocCheckResultListRspRsp = models.DescribeSocCheckResultListRspRsp;
 const DescribeVulDetailRequest = models.DescribeVulDetailRequest;
-const DataCompliance = models.DataCompliance;
+const ConcernInfo = models.ConcernInfo;
 const DescribeAssetsMappingListRequest = models.DescribeAssetsMappingListRequest;
-const DescribeComplianceDetailRequest = models.DescribeComplianceDetailRequest;
+const DataCompliance = models.DataCompliance;
+const Results = models.Results;
 const AssetDetail = models.AssetDetail;
 const DescribeComplianceAssetListRequest = models.DescribeComplianceAssetListRequest;
+const QueryFilter = models.QueryFilter;
 const DescribeAssetDetailResponse = models.DescribeAssetDetailResponse;
 const DescribeVulDetailResponse = models.DescribeVulDetailResponse;
+const DescribeSocCspmComplianceRequest = models.DescribeSocCspmComplianceRequest;
+const AlertDetail = models.AlertDetail;
+const DescribeComplianceDetailRequest = models.DescribeComplianceDetailRequest;
 
 
 /**
@@ -176,6 +207,39 @@ class SsaClient extends AbstractClient {
     }
 
     /**
+     * 合规详情项
+     * @param {DescribeSocCspmComplianceRequest} req
+     * @param {function(string, DescribeSocCspmComplianceResponse):void} cb
+     * @public
+     */
+    DescribeSocCspmCompliance(req, cb) {
+        let resp = new DescribeSocCspmComplianceResponse();
+        this.request("DescribeSocCspmCompliance", req, resp, cb);
+    }
+
+    /**
+     * 获取测绘列表
+     * @param {DescribeMappingResultsRequest} req
+     * @param {function(string, DescribeMappingResultsResponse):void} cb
+     * @public
+     */
+    DescribeMappingResults(req, cb) {
+        let resp = new DescribeMappingResultsResponse();
+        this.request("DescribeMappingResults", req, resp, cb);
+    }
+
+    /**
+     * 云安全配置检查项列表
+     * @param {DescribeSocCheckItemListRequest} req
+     * @param {function(string, DescribeSocCheckItemListResponse):void} cb
+     * @public
+     */
+    DescribeSocCheckItemList(req, cb) {
+        let resp = new DescribeSocCheckItemListResponse();
+        this.request("DescribeSocCheckItemList", req, resp, cb);
+    }
+
+    /**
      * 漏洞管理页，获取漏洞列表
      * @param {DescribeVulListRequest} req
      * @param {function(string, DescribeVulListResponse):void} cb
@@ -231,6 +295,28 @@ class SsaClient extends AbstractClient {
     }
 
     /**
+     * 返回告警详情
+     * @param {DescribeSocAlertDetailsRequest} req
+     * @param {function(string, DescribeSocAlertDetailsResponse):void} cb
+     * @public
+     */
+    DescribeSocAlertDetails(req, cb) {
+        let resp = new DescribeSocAlertDetailsResponse();
+        this.request("DescribeSocAlertDetails", req, resp, cb);
+    }
+
+    /**
+     * 拉取告警列表
+     * @param {DescribeSocAlertListRequest} req
+     * @param {function(string, DescribeSocAlertListResponse):void} cb
+     * @public
+     */
+    DescribeSocAlertList(req, cb) {
+        let resp = new DescribeSocAlertListResponse();
+        this.request("DescribeSocAlertList", req, resp, cb);
+    }
+
+    /**
      * 漏洞列表页，获取漏洞详情信息
      * @param {DescribeVulDetailRequest} req
      * @param {function(string, DescribeVulDetailResponse):void} cb
@@ -239,6 +325,17 @@ class SsaClient extends AbstractClient {
     DescribeVulDetail(req, cb) {
         let resp = new DescribeVulDetailResponse();
         this.request("DescribeVulDetail", req, resp, cb);
+    }
+
+    /**
+     * 云安全配置检查项结果列表
+     * @param {DescribeSocCheckResultListRequest} req
+     * @param {function(string, DescribeSocCheckResultListResponse):void} cb
+     * @public
+     */
+    DescribeSocCheckResultList(req, cb) {
+        let resp = new DescribeSocCheckResultListResponse();
+        this.request("DescribeSocCheckResultList", req, resp, cb);
     }
 
 

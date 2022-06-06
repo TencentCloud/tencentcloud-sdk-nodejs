@@ -347,6 +347,118 @@ class VoiceFilterRequest extends  AbstractModel {
 }
 
 /**
+ * CreateScanUser返回参数结构体
+ * @class
+ */
+class CreateScanUserResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回结果码
+         * @type {number || null}
+         */
+        this.ErrorCode = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ErrorCode = 'ErrorCode' in params ? params.ErrorCode : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeRealtimeScanConfig返回参数结构体
+ * @class
+ */
+class DescribeRealtimeScanConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回结果码，0正常，非0失败
+         * @type {number || null}
+         */
+        this.ErrorCode = null;
+
+        /**
+         * 应用ID
+         * @type {number || null}
+         */
+        this.BizId = null;
+
+        /**
+         * 送检类型，0: 全量送审，1: 自定义送审
+         * @type {number || null}
+         */
+        this.AuditType = null;
+
+        /**
+         * 用户号正则表达式
+         * @type {Array.<string> || null}
+         */
+        this.UserIdRegex = null;
+
+        /**
+         * 房间号正则表达式
+         * @type {Array.<string> || null}
+         */
+        this.RoomIdRegex = null;
+
+        /**
+         * 用户号字符串，逗号分隔，示例："0001,0002,0003"
+         * @type {string || null}
+         */
+        this.UserIdString = null;
+
+        /**
+         * 房间号字符串，逗号分隔，示例："0001,0002,0003"
+         * @type {string || null}
+         */
+        this.RoomIdString = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ErrorCode = 'ErrorCode' in params ? params.ErrorCode : null;
+        this.BizId = 'BizId' in params ? params.BizId : null;
+        this.AuditType = 'AuditType' in params ? params.AuditType : null;
+        this.UserIdRegex = 'UserIdRegex' in params ? params.UserIdRegex : null;
+        this.RoomIdRegex = 'RoomIdRegex' in params ? params.RoomIdRegex : null;
+        this.UserIdString = 'UserIdString' in params ? params.UserIdString : null;
+        this.RoomIdString = 'RoomIdString' in params ? params.RoomIdString : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 语音消息用量统计信息
  * @class
  */
@@ -395,6 +507,13 @@ class RoomUser extends  AbstractModel {
          */
         this.Uins = null;
 
+        /**
+         * 字符串房间id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.StrRoomId = null;
+
     }
 
     /**
@@ -406,6 +525,7 @@ class RoomUser extends  AbstractModel {
         }
         this.RoomId = 'RoomId' in params ? params.RoomId : null;
         this.Uins = 'Uins' in params ? params.Uins : null;
+        this.StrRoomId = 'StrRoomId' in params ? params.StrRoomId : null;
 
     }
 }
@@ -425,10 +545,16 @@ class DescribeRoomInfoRequest extends  AbstractModel {
         this.SdkAppId = null;
 
         /**
-         * 房间号列表，最大不能超过10个
+         * 房间号列表，最大不能超过10个（RoomIds、StrRoomIds必须填一个）
          * @type {Array.<number> || null}
          */
         this.RoomIds = null;
+
+        /**
+         * 字符串类型房间号列表，最大不能超过10个（RoomIds、StrRoomIds必须填一个）
+         * @type {Array.<string> || null}
+         */
+        this.StrRoomIds = null;
 
     }
 
@@ -441,6 +567,118 @@ class DescribeRoomInfoRequest extends  AbstractModel {
         }
         this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
         this.RoomIds = 'RoomIds' in params ? params.RoomIds : null;
+        this.StrRoomIds = 'StrRoomIds' in params ? params.StrRoomIds : null;
+
+    }
+}
+
+/**
+ * UpdateScanRooms请求参数结构体
+ * @class
+ */
+class UpdateScanRoomsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 应用ID
+         * @type {number || null}
+         */
+        this.BizId = null;
+
+        /**
+         * 需要送检的所有房间号。多个房间号之间用","分隔。示例："0001,0002,0003"
+         * @type {string || null}
+         */
+        this.RoomIdString = null;
+
+        /**
+         * 符合此正则表达式规则的房间号将被送检。示例：["^6.*"] 表示所有以6开头的房间号将被送检
+         * @type {Array.<string> || null}
+         */
+        this.RoomIdRegex = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BizId = 'BizId' in params ? params.BizId : null;
+        this.RoomIdString = 'RoomIdString' in params ? params.RoomIdString : null;
+        this.RoomIdRegex = 'RoomIdRegex' in params ? params.RoomIdRegex : null;
+
+    }
+}
+
+/**
+ * DescribeFilterResult返回参数结构体
+ * @class
+ */
+class DescribeFilterResultResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 过滤结果
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {VoiceFilterInfo || null}
+         */
+        this.Data = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            let obj = new VoiceFilterInfo();
+            obj.deserialize(params.Data)
+            this.Data = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeRealtimeScanConfig请求参数结构体
+ * @class
+ */
+class DescribeRealtimeScanConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 应用ID
+         * @type {number || null}
+         */
+        this.BizId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BizId = 'BizId' in params ? params.BizId : null;
 
     }
 }
@@ -483,6 +721,58 @@ class DescribeScanResultListRequest extends  AbstractModel {
         this.BizId = 'BizId' in params ? params.BizId : null;
         this.TaskIdList = 'TaskIdList' in params ? params.TaskIdList : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * CreateAgeDetectTask请求参数结构体
+ * @class
+ */
+class CreateAgeDetectTaskRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 应用id
+         * @type {number || null}
+         */
+        this.BizId = null;
+
+        /**
+         * 语音检测子任务列表，列表最多支持100个检测子任务。结构体中包含：
+<li>DataId：数据的唯一ID</li>
+<li>Url：数据文件的url，为 urlencode 编码，流式则为拉流地址</li>
+         * @type {Array.<AgeDetectTask> || null}
+         */
+        this.Tasks = null;
+
+        /**
+         * 任务结束时gme后台会自动触发回调
+         * @type {string || null}
+         */
+        this.Callback = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BizId = 'BizId' in params ? params.BizId : null;
+
+        if (params.Tasks) {
+            this.Tasks = new Array();
+            for (let z in params.Tasks) {
+                let obj = new AgeDetectTask();
+                obj.deserialize(params.Tasks[z]);
+                this.Tasks.push(obj);
+            }
+        }
+        this.Callback = 'Callback' in params ? params.Callback : null;
 
     }
 }
@@ -551,6 +841,41 @@ class RealTimeSpeechStatisticsItem extends  AbstractModel {
 }
 
 /**
+ * CreateScanUser请求参数结构体
+ * @class
+ */
+class CreateScanUserRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 应用ID，登录控制台 - 服务管理创建应用得到的AppID
+         * @type {number || null}
+         */
+        this.BizId = null;
+
+        /**
+         * 需要新增送检的用户号。示例：1234
+         * @type {number || null}
+         */
+        this.UserId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BizId = 'BizId' in params ? params.BizId : null;
+        this.UserId = 'UserId' in params ? params.UserId : null;
+
+    }
+}
+
+/**
  * VoiceFilter返回参数结构体
  * @class
  */
@@ -611,6 +936,95 @@ class Tag extends  AbstractModel {
         }
         this.TagKey = 'TagKey' in params ? params.TagKey : null;
         this.TagValue = 'TagValue' in params ? params.TagValue : null;
+
+    }
+}
+
+/**
+ * 年龄语音识别子任务
+ * @class
+ */
+class AgeDetectTask extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 数据唯一ID
+         * @type {string || null}
+         */
+        this.DataId = null;
+
+        /**
+         * 数据文件的url，为 urlencode 编码,音频文件格式支持的类型：.wav、.m4a、.amr、.mp3、.aac、.wma、.ogg
+         * @type {string || null}
+         */
+        this.Url = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DataId = 'DataId' in params ? params.DataId : null;
+        this.Url = 'Url' in params ? params.Url : null;
+
+    }
+}
+
+/**
+ * DescribeAgeDetectTask返回参数结构体
+ * @class
+ */
+class DescribeAgeDetectTaskResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务ID
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 语音检测返回。Results 字段是 JSON 数组，每一个元素包含：
+DataId： 请求中对应的 DataId。
+Url ：该请求中对应的 Url。
+Status ：子任务状态，0:已创建，1:运行中，2:已完成，3:任务异常，4:任务超时。
+Age ：子任务完成后的结果，0:成年人，1:未成年人，100:未知结果。
+         * @type {Array.<AgeDetectTaskResult> || null}
+         */
+        this.Results = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+
+        if (params.Results) {
+            this.Results = new Array();
+            for (let z in params.Results) {
+                let obj = new AgeDetectTaskResult();
+                obj.deserialize(params.Results[z]);
+                this.Results.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -835,24 +1249,86 @@ class ApplicationDataStatistics extends  AbstractModel {
 }
 
 /**
- * DescribeFilterResultList返回参数结构体
+ * DeleteScanUser请求参数结构体
  * @class
  */
-class DescribeFilterResultListResponse extends  AbstractModel {
+class DeleteScanUserRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 过滤结果总数
-注意：此字段可能返回 null，表示取不到有效值。
+         * 应用ID，登录控制台 - 服务管理创建应用得到的AppID
          * @type {number || null}
          */
-        this.TotalCount = null;
+        this.BizId = null;
 
         /**
-         * 当前分页过滤结果列表
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<VoiceFilterInfo> || null}
+         * 需要删除送检的用户号。示例：1234
+         * @type {number || null}
+         */
+        this.UserId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BizId = 'BizId' in params ? params.BizId : null;
+        this.UserId = 'UserId' in params ? params.UserId : null;
+
+    }
+}
+
+/**
+ * ModifyAppStatus接口输出参数
+ * @class
+ */
+class ModifyAppStatusResp extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * GME应用ID
+         * @type {number || null}
+         */
+        this.BizId = null;
+
+        /**
+         * 应用状态，取值：open/close
+         * @type {string || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BizId = 'BizId' in params ? params.BizId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
+ * DescribeAppStatistics返回参数结构体
+ * @class
+ */
+class DescribeAppStatisticsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 应用用量统计数据
+         * @type {DescribeAppStatisticsResp || null}
          */
         this.Data = null;
 
@@ -871,15 +1347,11 @@ class DescribeFilterResultListResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.Data) {
-            this.Data = new Array();
-            for (let z in params.Data) {
-                let obj = new VoiceFilterInfo();
-                obj.deserialize(params.Data[z]);
-                this.Data.push(obj);
-            }
+            let obj = new DescribeAppStatisticsResp();
+            obj.deserialize(params.Data)
+            this.Data = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -887,18 +1359,25 @@ class DescribeFilterResultListResponse extends  AbstractModel {
 }
 
 /**
- * 获取应用用量统计数据输出参数
+ * UpdateScanRooms返回参数结构体
  * @class
  */
-class DescribeAppStatisticsResponse extends  AbstractModel {
+class UpdateScanRoomsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 应用用量统计数据
-         * @type {Array.<AppStatisticsItem> || null}
+         * 返回结果码
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
          */
-        this.AppStatistics = null;
+        this.ErrorCode = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -909,15 +1388,8 @@ class DescribeAppStatisticsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.AppStatistics) {
-            this.AppStatistics = new Array();
-            for (let z in params.AppStatistics) {
-                let obj = new AppStatisticsItem();
-                obj.deserialize(params.AppStatistics[z]);
-                this.AppStatistics.push(obj);
-            }
-        }
+        this.ErrorCode = 'ErrorCode' in params ? params.ErrorCode : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1012,6 +1484,76 @@ class Task extends  AbstractModel {
 }
 
 /**
+ * DeleteScanUser返回参数结构体
+ * @class
+ */
+class DeleteScanUserResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回结果码
+         * @type {number || null}
+         */
+        this.ErrorCode = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ErrorCode = 'ErrorCode' in params ? params.ErrorCode : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * UpdateScanUsers返回参数结构体
+ * @class
+ */
+class UpdateScanUsersResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回结果码
+         * @type {number || null}
+         */
+        this.ErrorCode = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ErrorCode = 'ErrorCode' in params ? params.ErrorCode : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 语音过滤用量统计数据
  * @class
  */
@@ -1040,24 +1582,60 @@ class VoiceFilterStatisticsItem extends  AbstractModel {
 }
 
 /**
- * 用量数据单元
+ * CreateApp的输出参数
  * @class
  */
-class StatisticsItem extends  AbstractModel {
+class CreateAppResp extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 日期，格式为年-月-日，如2018-07-13
-         * @type {string || null}
-         */
-        this.StatDate = null;
-
-        /**
-         * 统计值
+         * 应用ID，由后台自动生成。
          * @type {number || null}
          */
-        this.Data = null;
+        this.BizId = null;
+
+        /**
+         * 应用名称，透传输入参数的AppName
+         * @type {string || null}
+         */
+        this.AppName = null;
+
+        /**
+         * 项目ID，透传输入的ProjectId
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * 应用密钥，GME SDK初始化时使用
+         * @type {string || null}
+         */
+        this.SecretKey = null;
+
+        /**
+         * 服务创建时间戳
+         * @type {number || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 实时语音服务配置数据
+         * @type {RealtimeSpeechConf || null}
+         */
+        this.RealtimeSpeechConf = null;
+
+        /**
+         * 语音消息及转文本服务配置数据
+         * @type {VoiceMessageConf || null}
+         */
+        this.VoiceMessageConf = null;
+
+        /**
+         * 语音分析服务配置数据
+         * @type {VoiceFilterConf || null}
+         */
+        this.VoiceFilterConf = null;
 
     }
 
@@ -1068,8 +1646,29 @@ class StatisticsItem extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.StatDate = 'StatDate' in params ? params.StatDate : null;
-        this.Data = 'Data' in params ? params.Data : null;
+        this.BizId = 'BizId' in params ? params.BizId : null;
+        this.AppName = 'AppName' in params ? params.AppName : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.SecretKey = 'SecretKey' in params ? params.SecretKey : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+
+        if (params.RealtimeSpeechConf) {
+            let obj = new RealtimeSpeechConf();
+            obj.deserialize(params.RealtimeSpeechConf)
+            this.RealtimeSpeechConf = obj;
+        }
+
+        if (params.VoiceMessageConf) {
+            let obj = new VoiceMessageConf();
+            obj.deserialize(params.VoiceMessageConf)
+            this.VoiceMessageConf = obj;
+        }
+
+        if (params.VoiceFilterConf) {
+            let obj = new VoiceFilterConf();
+            obj.deserialize(params.VoiceFilterConf)
+            this.VoiceFilterConf = obj;
+        }
 
     }
 }
@@ -1122,6 +1721,85 @@ class DescribeRoomInfoResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeAgeDetectTask请求参数结构体
+ * @class
+ */
+class DescribeAgeDetectTaskRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 应用id
+         * @type {number || null}
+         */
+        this.BizId = null;
+
+        /**
+         * 创建年龄语音识别任务时返回的taskid
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BizId = 'BizId' in params ? params.BizId : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+
+    }
+}
+
+/**
+ * ModifyRoomInfo请求参数结构体
+ * @class
+ */
+class ModifyRoomInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 应用ID，登录[控制台 - 服务管理](https://console.cloud.tencent.com/gamegme)创建应用得到的AppID
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * 房间id
+         * @type {number || null}
+         */
+        this.RoomId = null;
+
+        /**
+         * 301 启动推流
+302 停止推流
+303 重置RTMP连接
+         * @type {number || null}
+         */
+        this.OperationType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.RoomId = 'RoomId' in params ? params.RoomId : null;
+        this.OperationType = 'OperationType' in params ? params.OperationType : null;
 
     }
 }
@@ -1254,25 +1932,36 @@ class VoiceFilterInfo extends  AbstractModel {
 }
 
 /**
- * DescribeFilterResult返回参数结构体
+ * 年龄语音任务结果
  * @class
  */
-class DescribeFilterResultResponse extends  AbstractModel {
+class AgeDetectTaskResult extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 过滤结果
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {VoiceFilterInfo || null}
-         */
-        this.Data = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 数据唯一ID
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.DataId = null;
+
+        /**
+         * 数据文件的url
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * 任务状态，0: 已创建，1:运行中，2:正常结束，3:异常结束，4:运行超时
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 任务结果：0: 成年，1:未成年，100:未知
+         * @type {number || null}
+         */
+        this.Age = null;
 
     }
 
@@ -1283,13 +1972,10 @@ class DescribeFilterResultResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Data) {
-            let obj = new VoiceFilterInfo();
-            obj.deserialize(params.Data)
-            this.Data = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.DataId = 'DataId' in params ? params.DataId : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Age = 'Age' in params ? params.Age : null;
 
     }
 }
@@ -1423,6 +2109,12 @@ class DescribeScanResult extends  AbstractModel {
          */
         this.Status = null;
 
+        /**
+         * 提交检测的应用 ID
+         * @type {number || null}
+         */
+        this.BizId = null;
+
     }
 
     /**
@@ -1452,6 +2144,7 @@ class DescribeScanResult extends  AbstractModel {
         this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.Url = 'Url' in params ? params.Url : null;
         this.Status = 'Status' in params ? params.Status : null;
+        this.BizId = 'BizId' in params ? params.BizId : null;
 
     }
 }
@@ -1521,7 +2214,7 @@ class VoiceFilter extends  AbstractModel {
         super();
 
         /**
-         * 过滤类型，1：政治，2：色情，3：涉毒，4：谩骂
+         * 过滤类型，1：色情，2：涉毒，3：谩骂
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
@@ -1606,32 +2299,32 @@ class ScanDetail extends  AbstractModel {
 }
 
 /**
- * ModifyRoomInfo请求参数结构体
+ * DescribeFilterResultList返回参数结构体
  * @class
  */
-class ModifyRoomInfoRequest extends  AbstractModel {
+class DescribeFilterResultListResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 应用ID，登录[控制台 - 服务管理](https://console.cloud.tencent.com/gamegme)创建应用得到的AppID
+         * 过滤结果总数
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
-        this.SdkAppId = null;
+        this.TotalCount = null;
 
         /**
-         * 房间id
-         * @type {number || null}
+         * 当前分页过滤结果列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<VoiceFilterInfo> || null}
          */
-        this.RoomId = null;
+        this.Data = null;
 
         /**
-         * 301 启动推流
-302 停止推流
-303 重置RTMP连接
-         * @type {number || null}
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
          */
-        this.OperationType = null;
+        this.RequestId = null;
 
     }
 
@@ -1642,9 +2335,52 @@ class ModifyRoomInfoRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
-        this.RoomId = 'RoomId' in params ? params.RoomId : null;
-        this.OperationType = 'OperationType' in params ? params.OperationType : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new VoiceFilterInfo();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateAgeDetectTask返回参数结构体
+ * @class
+ */
+class CreateAgeDetectTaskResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 本次任务提交后唯一id，用于获取任务运行结果
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1764,7 +2500,7 @@ class RealtimeSpeechConf extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 实时语音音质类型，取值：high-高音质，ordinary-普通音质。默认高音质。普通音质仅白名单开放，如需要普通音质，请联系腾讯云商务。
+         * 实时语音音质类型，取值：high-高音质
          * @type {string || null}
          */
         this.Quality = null;
@@ -1780,6 +2516,42 @@ class RealtimeSpeechConf extends  AbstractModel {
         }
         this.Status = 'Status' in params ? params.Status : null;
         this.Quality = 'Quality' in params ? params.Quality : null;
+
+    }
+}
+
+/**
+ * 获取应用用量统计数据输出参数
+ * @class
+ */
+class DescribeAppStatisticsResp extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 应用用量统计数据
+         * @type {Array.<AppStatisticsItem> || null}
+         */
+        this.AppStatistics = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.AppStatistics) {
+            this.AppStatistics = new Array();
+            for (let z in params.AppStatistics) {
+                let obj = new AppStatisticsItem();
+                obj.deserialize(params.AppStatistics[z]);
+                this.AppStatistics.push(obj);
+            }
+        }
 
     }
 }
@@ -1820,7 +2592,7 @@ class ScanVoiceResult extends  AbstractModel {
 }
 
 /**
- * CreateApp的输出参数
+ * CreateApp返回参数结构体
  * @class
  */
 class CreateAppResponse extends  AbstractModel {
@@ -1828,52 +2600,16 @@ class CreateAppResponse extends  AbstractModel {
         super();
 
         /**
-         * 应用ID，由后台自动生成。
-         * @type {number || null}
+         * 创建应用返回数据
+         * @type {CreateAppResp || null}
          */
-        this.BizId = null;
+        this.Data = null;
 
         /**
-         * 应用名称，透传输入参数的AppName
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.AppName = null;
-
-        /**
-         * 项目ID，透传输入的ProjectId
-         * @type {number || null}
-         */
-        this.ProjectId = null;
-
-        /**
-         * 应用密钥，GME SDK初始化时使用
-         * @type {string || null}
-         */
-        this.SecretKey = null;
-
-        /**
-         * 服务创建时间戳
-         * @type {number || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * 实时语音服务配置数据
-         * @type {RealtimeSpeechConf || null}
-         */
-        this.RealtimeSpeechConf = null;
-
-        /**
-         * 语音消息及转文本服务配置数据
-         * @type {VoiceMessageConf || null}
-         */
-        this.VoiceMessageConf = null;
-
-        /**
-         * 语音分析服务配置数据
-         * @type {VoiceFilterConf || null}
-         */
-        this.VoiceFilterConf = null;
+        this.RequestId = null;
 
     }
 
@@ -1884,29 +2620,13 @@ class CreateAppResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.BizId = 'BizId' in params ? params.BizId : null;
-        this.AppName = 'AppName' in params ? params.AppName : null;
-        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
-        this.SecretKey = 'SecretKey' in params ? params.SecretKey : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
 
-        if (params.RealtimeSpeechConf) {
-            let obj = new RealtimeSpeechConf();
-            obj.deserialize(params.RealtimeSpeechConf)
-            this.RealtimeSpeechConf = obj;
+        if (params.Data) {
+            let obj = new CreateAppResp();
+            obj.deserialize(params.Data)
+            this.Data = obj;
         }
-
-        if (params.VoiceMessageConf) {
-            let obj = new VoiceMessageConf();
-            obj.deserialize(params.VoiceMessageConf)
-            this.VoiceMessageConf = obj;
-        }
-
-        if (params.VoiceFilterConf) {
-            let obj = new VoiceFilterConf();
-            obj.deserialize(params.VoiceFilterConf)
-            this.VoiceFilterConf = obj;
-        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2068,7 +2788,7 @@ class ScanPiece extends  AbstractModel {
 }
 
 /**
- * ModifyAppStatus接口输出参数
+ * ModifyAppStatus返回参数结构体
  * @class
  */
 class ModifyAppStatusResponse extends  AbstractModel {
@@ -2076,16 +2796,16 @@ class ModifyAppStatusResponse extends  AbstractModel {
         super();
 
         /**
-         * GME应用ID
-         * @type {number || null}
+         * 修改应用开关状态返回数据
+         * @type {ModifyAppStatusResp || null}
          */
-        this.BizId = null;
+        this.Data = null;
 
         /**
-         * 应用状态，取值：open/close
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.Status = null;
+        this.RequestId = null;
 
     }
 
@@ -2096,8 +2816,13 @@ class ModifyAppStatusResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.BizId = 'BizId' in params ? params.BizId : null;
-        this.Status = 'Status' in params ? params.Status : null;
+
+        if (params.Data) {
+            let obj = new ModifyAppStatusResp();
+            obj.deserialize(params.Data)
+            this.Data = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2117,7 +2842,7 @@ class ScanVoiceRequest extends  AbstractModel {
         this.BizId = null;
 
         /**
-         * 语音检测场景，参数值目前要求为 default。 预留场景设置： 谩骂、色情、涉政、广告、暴恐、违禁等场景，<a href="#Label_Value">具体取值见上述 Label 说明。</a>
+         * 语音检测场景，参数值目前要求为 default。 预留场景设置： 谩骂、色情、广告、违禁等场景，<a href="#Label_Value">具体取值见上述 Label 说明。</a>
          * @type {Array.<string> || null}
          */
         this.Scenes = null;
@@ -2142,6 +2867,12 @@ class ScanVoiceRequest extends  AbstractModel {
          */
         this.Callback = null;
 
+        /**
+         * 语言，目前jp代表日语
+         * @type {string || null}
+         */
+        this.Lang = null;
+
     }
 
     /**
@@ -2164,6 +2895,7 @@ class ScanVoiceRequest extends  AbstractModel {
             }
         }
         this.Callback = 'Callback' in params ? params.Callback : null;
+        this.Lang = 'Lang' in params ? params.Lang : null;
 
     }
 }
@@ -2192,6 +2924,83 @@ class VoiceFilterConf extends  AbstractModel {
             return;
         }
         this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
+ * UpdateScanUsers请求参数结构体
+ * @class
+ */
+class UpdateScanUsersRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 应用ID
+         * @type {number || null}
+         */
+        this.BizId = null;
+
+        /**
+         * 需要送检的所有用户号。多个用户号之间用","分隔。示例："0001,0002,0003"
+         * @type {string || null}
+         */
+        this.UserIdString = null;
+
+        /**
+         * 符合此正则表达式规则的用户号将被送检。示例：["^6.*"] 表示所有以6开头的用户号将被送检
+         * @type {Array.<string> || null}
+         */
+        this.UserIdRegex = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BizId = 'BizId' in params ? params.BizId : null;
+        this.UserIdString = 'UserIdString' in params ? params.UserIdString : null;
+        this.UserIdRegex = 'UserIdRegex' in params ? params.UserIdRegex : null;
+
+    }
+}
+
+/**
+ * 用量数据单元
+ * @class
+ */
+class StatisticsItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 日期，格式为年-月-日，如2018-07-13
+         * @type {string || null}
+         */
+        this.StatDate = null;
+
+        /**
+         * 统计值
+         * @type {number || null}
+         */
+        this.Data = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StatDate = 'StatDate' in params ? params.StatDate : null;
+        this.Data = 'Data' in params ? params.Data : null;
 
     }
 }
@@ -2281,33 +3090,50 @@ module.exports = {
     DescribeScanResultListResponse: DescribeScanResultListResponse,
     DescribeApplicationDataRequest: DescribeApplicationDataRequest,
     VoiceFilterRequest: VoiceFilterRequest,
+    CreateScanUserResponse: CreateScanUserResponse,
+    DescribeRealtimeScanConfigResponse: DescribeRealtimeScanConfigResponse,
     VoiceMessageStatisticsItem: VoiceMessageStatisticsItem,
     RoomUser: RoomUser,
     DescribeRoomInfoRequest: DescribeRoomInfoRequest,
+    UpdateScanRoomsRequest: UpdateScanRoomsRequest,
+    DescribeFilterResultResponse: DescribeFilterResultResponse,
+    DescribeRealtimeScanConfigRequest: DescribeRealtimeScanConfigRequest,
     DescribeScanResultListRequest: DescribeScanResultListRequest,
+    CreateAgeDetectTaskRequest: CreateAgeDetectTaskRequest,
     RealTimeSpeechStatisticsItem: RealTimeSpeechStatisticsItem,
+    CreateScanUserRequest: CreateScanUserRequest,
     VoiceFilterResponse: VoiceFilterResponse,
     Tag: Tag,
+    AgeDetectTask: AgeDetectTask,
+    DescribeAgeDetectTaskResponse: DescribeAgeDetectTaskResponse,
     VoiceMessageConf: VoiceMessageConf,
     ApplicationDataStatistics: ApplicationDataStatistics,
-    DescribeFilterResultListResponse: DescribeFilterResultListResponse,
+    DeleteScanUserRequest: DeleteScanUserRequest,
+    ModifyAppStatusResp: ModifyAppStatusResp,
     DescribeAppStatisticsResponse: DescribeAppStatisticsResponse,
+    UpdateScanRoomsResponse: UpdateScanRoomsResponse,
     DescribeApplicationDataResponse: DescribeApplicationDataResponse,
     Task: Task,
+    DeleteScanUserResponse: DeleteScanUserResponse,
+    UpdateScanUsersResponse: UpdateScanUsersResponse,
     VoiceFilterStatisticsItem: VoiceFilterStatisticsItem,
-    StatisticsItem: StatisticsItem,
+    CreateAppResp: CreateAppResp,
     DescribeRoomInfoResponse: DescribeRoomInfoResponse,
+    DescribeAgeDetectTaskRequest: DescribeAgeDetectTaskRequest,
+    ModifyRoomInfoRequest: ModifyRoomInfoRequest,
     DescribeUserInAndOutTimeResponse: DescribeUserInAndOutTimeResponse,
     VoiceFilterInfo: VoiceFilterInfo,
-    DescribeFilterResultResponse: DescribeFilterResultResponse,
+    AgeDetectTaskResult: AgeDetectTaskResult,
     ModifyRoomInfoResponse: ModifyRoomInfoResponse,
     DescribeScanResult: DescribeScanResult,
     DescribeFilterResultListRequest: DescribeFilterResultListRequest,
     VoiceFilter: VoiceFilter,
     ScanDetail: ScanDetail,
-    ModifyRoomInfoRequest: ModifyRoomInfoRequest,
+    DescribeFilterResultListResponse: DescribeFilterResultListResponse,
+    CreateAgeDetectTaskResponse: CreateAgeDetectTaskResponse,
     CreateAppRequest: CreateAppRequest,
     RealtimeSpeechConf: RealtimeSpeechConf,
+    DescribeAppStatisticsResp: DescribeAppStatisticsResp,
     ScanVoiceResult: ScanVoiceResult,
     CreateAppResponse: CreateAppResponse,
     DescribeAppStatisticsRequest: DescribeAppStatisticsRequest,
@@ -2315,6 +3141,8 @@ module.exports = {
     ModifyAppStatusResponse: ModifyAppStatusResponse,
     ScanVoiceRequest: ScanVoiceRequest,
     VoiceFilterConf: VoiceFilterConf,
+    UpdateScanUsersRequest: UpdateScanUsersRequest,
+    StatisticsItem: StatisticsItem,
     DescribeFilterResultRequest: DescribeFilterResultRequest,
     DescribeUserInAndOutTimeRequest: DescribeUserInAndOutTimeRequest,
 

@@ -16,307 +16,360 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const ModifyAuditConfigRequest = models.ModifyAuditConfigRequest;
-const CreateDBInstanceRequest = models.CreateDBInstanceRequest;
+const SellType = models.SellType;
 const TaskDetail = models.TaskDetail;
-const DeviceDiskInfo = models.DeviceDiskInfo;
-const DescribeAccountPrivilegesResponse = models.DescribeAccountPrivilegesResponse;
 const CreateDBImportJobRequest = models.CreateDBImportJobRequest;
 const DescribeDatabasesRequest = models.DescribeDatabasesRequest;
-const UpgradeDBInstanceRequest = models.UpgradeDBInstanceRequest;
-const DescribeBackupConfigRequest = models.DescribeBackupConfigRequest;
-const DescribeRoMinScaleResponse = models.DescribeRoMinScaleResponse;
-const CreateAuditRuleResponse = models.CreateAuditRuleResponse;
-const StopDBImportJobRequest = models.StopDBImportJobRequest;
-const OfflineIsolatedInstancesResponse = models.OfflineIsolatedInstancesResponse;
-const DescribeSlowLogDataResponse = models.DescribeSlowLogDataResponse;
-const SellType = models.SellType;
-const DescribeDBInstanceInfoResponse = models.DescribeDBInstanceInfoResponse;
-const DescribeErrorLogDataRequest = models.DescribeErrorLogDataRequest;
-const Parameter = models.Parameter;
-const DescribeAuditLogFilesResponse = models.DescribeAuditLogFilesResponse;
-const DescribeDBInstanceRebootTimeRequest = models.DescribeDBInstanceRebootTimeRequest;
-const DescribeSlowLogsRequest = models.DescribeSlowLogsRequest;
-const Inbound = models.Inbound;
-const AssociateSecurityGroupsRequest = models.AssociateSecurityGroupsRequest;
-const TagInfoItem = models.TagInfoItem;
-const CreateAccountsResponse = models.CreateAccountsResponse;
-const RegionSellConf = models.RegionSellConf;
+const RWInfo = models.RWInfo;
 const InstanceRollbackRangeTime = models.InstanceRollbackRangeTime;
-const SqlFileInfo = models.SqlFileInfo;
-const CreateDeployGroupResponse = models.CreateDeployGroupResponse;
 const DescribeTablesResponse = models.DescribeTablesResponse;
-const SellConfig = models.SellConfig;
-const DescribeDBSecurityGroupsResponse = models.DescribeDBSecurityGroupsResponse;
-const MasterInfo = models.MasterInfo;
-const DeleteAuditRuleRequest = models.DeleteAuditRuleRequest;
-const DeleteParamTemplateResponse = models.DeleteParamTemplateResponse;
-const ParamInfo = models.ParamInfo;
-const DescribeRoMinScaleRequest = models.DescribeRoMinScaleRequest;
-const DescribeDefaultParamsRequest = models.DescribeDefaultParamsRequest;
-const DBSwitchInfo = models.DBSwitchInfo;
-const ModifyNameOrDescByDpIdResponse = models.ModifyNameOrDescByDpIdResponse;
-const StopDBImportJobResponse = models.StopDBImportJobResponse;
-const DescribeDBPriceResponse = models.DescribeDBPriceResponse;
-const DescribeTasksResponse = models.DescribeTasksResponse;
-const ReleaseIsolatedDBInstancesResponse = models.ReleaseIsolatedDBInstancesResponse;
-const AuditLogFilter = models.AuditLogFilter;
-const DescribeParamTemplatesRequest = models.DescribeParamTemplatesRequest;
+const ApplyCDBProxyResponse = models.ApplyCDBProxyResponse;
+const ModifyBackupDownloadRestrictionResponse = models.ModifyBackupDownloadRestrictionResponse;
+const ModifyTimeWindowResponse = models.ModifyTimeWindowResponse;
+const ParamRecord = models.ParamRecord;
+const ModifyTimeWindowRequest = models.ModifyTimeWindowRequest;
 const DescribeRollbackRangeTimeRequest = models.DescribeRollbackRangeTimeRequest;
 const DescribeBackupOverviewRequest = models.DescribeBackupOverviewRequest;
-const DescribeBackupsRequest = models.DescribeBackupsRequest;
-const DescribeAuditPoliciesResponse = models.DescribeAuditPoliciesResponse;
-const DescribeInstanceParamRecordsResponse = models.DescribeInstanceParamRecordsResponse;
-const DescribeDBInstanceGTIDResponse = models.DescribeDBInstanceGTIDResponse;
-const OpenDBInstanceGTIDResponse = models.OpenDBInstanceGTIDResponse;
-const DescribeDBZoneConfigRequest = models.DescribeDBZoneConfigRequest;
-const DescribeDBInstanceRebootTimeResponse = models.DescribeDBInstanceRebootTimeResponse;
-const SwitchDrInstanceToMasterRequest = models.SwitchDrInstanceToMasterRequest;
-const DeleteParamTemplateRequest = models.DeleteParamTemplateRequest;
-const DrInfo = models.DrInfo;
-const RoGroup = models.RoGroup;
+const ModifyDBInstanceProjectResponse = models.ModifyDBInstanceProjectResponse;
 const DescribeDataBackupOverviewResponse = models.DescribeDataBackupOverviewResponse;
-const ParameterDetail = models.ParameterDetail;
 const DeleteAuditPolicyRequest = models.DeleteAuditPolicyRequest;
 const BackupSummaryItem = models.BackupSummaryItem;
-const RollbackTimeRange = models.RollbackTimeRange;
-const ModifyInstanceTagResponse = models.ModifyInstanceTagResponse;
-const CreateParamTemplateResponse = models.CreateParamTemplateResponse;
-const CreateDBInstanceHourResponse = models.CreateDBInstanceHourResponse;
-const DescribeCloneListResponse = models.DescribeCloneListResponse;
-const ModifyAccountMaxUserConnectionsRequest = models.ModifyAccountMaxUserConnectionsRequest;
-const ReleaseIsolatedDBInstancesRequest = models.ReleaseIsolatedDBInstancesRequest;
-const BinlogInfo = models.BinlogInfo;
-const DescribeAccountsRequest = models.DescribeAccountsRequest;
-const CloneItem = models.CloneItem;
-const StartDelayReplicationResponse = models.StartDelayReplicationResponse;
-const DescribeTasksRequest = models.DescribeTasksRequest;
-const IsolateDBInstanceResponse = models.IsolateDBInstanceResponse;
-const SlaveConfig = models.SlaveConfig;
-const DescribeErrorLogDataResponse = models.DescribeErrorLogDataResponse;
-const AddTimeWindowRequest = models.AddTimeWindowRequest;
-const SwitchForUpgradeRequest = models.SwitchForUpgradeRequest;
-const ImportRecord = models.ImportRecord;
-const DeleteAuditLogFileResponse = models.DeleteAuditLogFileResponse;
-const DescribeRollbackTaskDetailResponse = models.DescribeRollbackTaskDetailResponse;
-const CreateAccountsRequest = models.CreateAccountsRequest;
-const CreateDBInstanceHourRequest = models.CreateDBInstanceHourRequest;
-const DescribeDeployGroupListRequest = models.DescribeDeployGroupListRequest;
-const RollbackInstancesInfo = models.RollbackInstancesInfo;
-const DescribeCloneListRequest = models.DescribeCloneListRequest;
-const BackupInfo = models.BackupInfo;
-const CloseWanServiceResponse = models.CloseWanServiceResponse;
-const CreateCloneInstanceRequest = models.CreateCloneInstanceRequest;
-const DescribeDBInstancesRequest = models.DescribeDBInstancesRequest;
-const DescribeDBSecurityGroupsRequest = models.DescribeDBSecurityGroupsRequest;
-const ModifyDBInstanceVipVportResponse = models.ModifyDBInstanceVipVportResponse;
-const DescribeDBSwitchRecordsResponse = models.DescribeDBSwitchRecordsResponse;
-const TableName = models.TableName;
-const RenewDBInstanceRequest = models.RenewDBInstanceRequest;
-const RollbackTableName = models.RollbackTableName;
-const DeleteBackupResponse = models.DeleteBackupResponse;
 const ModifyInstanceParamRequest = models.ModifyInstanceParamRequest;
-const DescribeProjectSecurityGroupsResponse = models.DescribeProjectSecurityGroupsResponse;
-const ModifyDBInstanceProjectRequest = models.ModifyDBInstanceProjectRequest;
-const CreateAuditLogFileResponse = models.CreateAuditLogFileResponse;
-const CommonTimeWindow = models.CommonTimeWindow;
-const StartBatchRollbackResponse = models.StartBatchRollbackResponse;
-const DescribeRoGroupsRequest = models.DescribeRoGroupsRequest;
-const DescribeDBSwitchRecordsRequest = models.DescribeDBSwitchRecordsRequest;
-const ModifyBackupConfigResponse = models.ModifyBackupConfigResponse;
-const DescribeSupportedPrivilegesRequest = models.DescribeSupportedPrivilegesRequest;
-const DescribeAsyncRequestInfoResponse = models.DescribeAsyncRequestInfoResponse;
-const CreateDBInstanceResponse = models.CreateDBInstanceResponse;
-const ModifyInstanceTagRequest = models.ModifyInstanceTagRequest;
-const DescribeDBInstanceCharsetResponse = models.DescribeDBInstanceCharsetResponse;
+const CreateParamTemplateRequest = models.CreateParamTemplateRequest;
+const RWInstanceInfo = models.RWInstanceInfo;
+const DescribeParamTemplateInfoRequest = models.DescribeParamTemplateInfoRequest;
+const DescribeDBInstancesRequest = models.DescribeDBInstancesRequest;
+const TableName = models.TableName;
 const DeleteAccountsResponse = models.DeleteAccountsResponse;
-const DescribeRoGroupsResponse = models.DescribeRoGroupsResponse;
+const SlowLogInfo = models.SlowLogInfo;
 const CloseWanServiceRequest = models.CloseWanServiceRequest;
-const RestartDBInstancesResponse = models.RestartDBInstancesResponse;
+const DescribeAuditConfigRequest = models.DescribeAuditConfigRequest;
 const CreateRoInstanceIpResponse = models.CreateRoInstanceIpResponse;
-const DescribeBackupDatabasesResponse = models.DescribeBackupDatabasesResponse;
-const VerifyRootAccountRequest = models.VerifyRootAccountRequest;
-const SwitchForUpgradeResponse = models.SwitchForUpgradeResponse;
-const ModifyAccountMaxUserConnectionsResponse = models.ModifyAccountMaxUserConnectionsResponse;
-const DescribeBackupSummariesResponse = models.DescribeBackupSummariesResponse;
-const DescribeInstanceParamRecordsRequest = models.DescribeInstanceParamRecordsRequest;
-const SwitchDBInstanceMasterSlaveRequest = models.SwitchDBInstanceMasterSlaveRequest;
-const StopRollbackResponse = models.StopRollbackResponse;
-const ParamTemplateInfo = models.ParamTemplateInfo;
-const ModifyAutoRenewFlagResponse = models.ModifyAutoRenewFlagResponse;
-const DeleteTimeWindowResponse = models.DeleteTimeWindowResponse;
-const DescribeBinlogBackupOverviewRequest = models.DescribeBinlogBackupOverviewRequest;
-const RollbackTask = models.RollbackTask;
-const DescribeBackupsResponse = models.DescribeBackupsResponse;
-const CreateAuditPolicyRequest = models.CreateAuditPolicyRequest;
-const CreateRoInstanceIpRequest = models.CreateRoInstanceIpRequest;
-const ModifyInstanceParamResponse = models.ModifyInstanceParamResponse;
-const DescribeDBImportRecordsResponse = models.DescribeDBImportRecordsResponse;
 const CreateAuditPolicyResponse = models.CreateAuditPolicyResponse;
-const BackupItem = models.BackupItem;
+const DescribeInstanceParamRecordsRequest = models.DescribeInstanceParamRecordsRequest;
+const StopRollbackResponse = models.StopRollbackResponse;
+const StopReplicationResponse = models.StopReplicationResponse;
 const DatabaseName = models.DatabaseName;
-const AuditFilter = models.AuditFilter;
-const SwitchDBInstanceMasterSlaveResponse = models.SwitchDBInstanceMasterSlaveResponse;
-const DescribeBackupConfigResponse = models.DescribeBackupConfigResponse;
-const DeleteDeployGroupsResponse = models.DeleteDeployGroupsResponse;
-const ModifyDBInstanceSecurityGroupsRequest = models.ModifyDBInstanceSecurityGroupsRequest;
-const DescribeParamTemplatesResponse = models.DescribeParamTemplatesResponse;
-const DescribeBackupTablesResponse = models.DescribeBackupTablesResponse;
-const Outbound = models.Outbound;
-const SlaveInstanceInfo = models.SlaveInstanceInfo;
-const RoWeightValue = models.RoWeightValue;
-const ModifyDBInstanceVipVportRequest = models.ModifyDBInstanceVipVportRequest;
-const ModifyParamTemplateResponse = models.ModifyParamTemplateResponse;
-const ModifyDBInstanceSecurityGroupsResponse = models.ModifyDBInstanceSecurityGroupsResponse;
-const DescribeProjectSecurityGroupsRequest = models.DescribeProjectSecurityGroupsRequest;
-const ModifyRoReplicationDelayRequest = models.ModifyRoReplicationDelayRequest;
-const StartBatchRollbackRequest = models.StartBatchRollbackRequest;
-const SecurityGroup = models.SecurityGroup;
-const ZoneConf = models.ZoneConf;
-const BalanceRoGroupLoadResponse = models.BalanceRoGroupLoadResponse;
-const DeviceNetInfo = models.DeviceNetInfo;
-const SlaveInfo = models.SlaveInfo;
-const TagInfo = models.TagInfo;
-const DescribeBackupSummariesRequest = models.DescribeBackupSummariesRequest;
-const DescribeSupportedPrivilegesResponse = models.DescribeSupportedPrivilegesResponse;
-const CreateCloneInstanceResponse = models.CreateCloneInstanceResponse;
-const ModifyDBInstanceProjectResponse = models.ModifyDBInstanceProjectResponse;
+const DescribeInstanceParamsRequest = models.DescribeInstanceParamsRequest;
+const DescribeRoMinScaleResponse = models.DescribeRoMinScaleResponse;
+const StopDBImportJobResponse = models.StopDBImportJobResponse;
 const ModifyDBInstanceNameRequest = models.ModifyDBInstanceNameRequest;
 const TagInfoUnit = models.TagInfoUnit;
-const OpenDBInstanceGTIDRequest = models.OpenDBInstanceGTIDRequest;
-const UpgradeDBInstanceEngineVersionResponse = models.UpgradeDBInstanceEngineVersionResponse;
-const InquiryPriceUpgradeInstancesRequest = models.InquiryPriceUpgradeInstancesRequest;
 const ModifyAuditRuleResponse = models.ModifyAuditRuleResponse;
-const DescribeAsyncRequestInfoRequest = models.DescribeAsyncRequestInfoRequest;
-const TablePrivilege = models.TablePrivilege;
-const BalanceRoGroupLoadRequest = models.BalanceRoGroupLoadRequest;
-const ModifyRoTypeResponse = models.ModifyRoTypeResponse;
 const DescribeAuditRulesRequest = models.DescribeAuditRulesRequest;
-const DescribeBackupOverviewResponse = models.DescribeBackupOverviewResponse;
-const ColumnPrivilege = models.ColumnPrivilege;
-const DescribeUploadedFilesRequest = models.DescribeUploadedFilesRequest;
+const UpgradeDBInstanceEngineVersionResponse = models.UpgradeDBInstanceEngineVersionResponse;
 const ErrlogItem = models.ErrlogItem;
-const DescribeDeviceMonitorInfoRequest = models.DescribeDeviceMonitorInfoRequest;
-const DescribeDBPriceRequest = models.DescribeDBPriceRequest;
 const AssociateSecurityGroupsResponse = models.AssociateSecurityGroupsResponse;
-const TagsInfoOfInstance = models.TagsInfoOfInstance;
-const DescribeUploadedFilesResponse = models.DescribeUploadedFilesResponse;
-const CreateBackupResponse = models.CreateBackupResponse;
-const DescribeDBInstanceConfigResponse = models.DescribeDBInstanceConfigResponse;
-const DescribeDefaultParamsResponse = models.DescribeDefaultParamsResponse;
-const ModifyAccountPrivilegesResponse = models.ModifyAccountPrivilegesResponse;
-const DeviceCpuRateInfo = models.DeviceCpuRateInfo;
+const ModifyCDBProxyDescRequest = models.ModifyCDBProxyDescRequest;
 const BackupConfig = models.BackupConfig;
-const ModifyAuditRuleRequest = models.ModifyAuditRuleRequest;
-const VerifyRootAccountResponse = models.VerifyRootAccountResponse;
-const DeviceCpuInfo = models.DeviceCpuInfo;
+const DescribeCDBProxyResponse = models.DescribeCDBProxyResponse;
+const UpgradeCDBProxyResponse = models.UpgradeCDBProxyResponse;
+const Rule = models.Rule;
 const AuditPolicy = models.AuditPolicy;
-const DescribeDeployGroupListResponse = models.DescribeDeployGroupListResponse;
-const DescribeDBInstanceConfigRequest = models.DescribeDBInstanceConfigRequest;
 const DescribeBackupTablesRequest = models.DescribeBackupTablesRequest;
-const DescribeBinlogsResponse = models.DescribeBinlogsResponse;
-const ModifyRoTypeRequest = models.ModifyRoTypeRequest;
-const SwitchDrInstanceToMasterResponse = models.SwitchDrInstanceToMasterResponse;
-const DatabasePrivilege = models.DatabasePrivilege;
-const RoGroupAttr = models.RoGroupAttr;
-const ModifyAuditConfigResponse = models.ModifyAuditConfigResponse;
-const RoVipInfo = models.RoVipInfo;
-const ModifyDBInstanceNameResponse = models.ModifyDBInstanceNameResponse;
-const ModifyAccountDescriptionRequest = models.ModifyAccountDescriptionRequest;
-const ModifyAccountPasswordRequest = models.ModifyAccountPasswordRequest;
-const DescribeAuditPoliciesRequest = models.DescribeAuditPoliciesRequest;
 const DescribeTablesRequest = models.DescribeTablesRequest;
-const InstanceRebootTime = models.InstanceRebootTime;
-const RenewDBInstanceResponse = models.RenewDBInstanceResponse;
-const DescribeDatabasesResponse = models.DescribeDatabasesResponse;
+const UpgradeDBInstanceRequest = models.UpgradeDBInstanceRequest;
 const ModifyParamTemplateRequest = models.ModifyParamTemplateRequest;
-const AddTimeWindowResponse = models.AddTimeWindowResponse;
-const DescribeAuditConfigRequest = models.DescribeAuditConfigRequest;
+const StartReplicationResponse = models.StartReplicationResponse;
 const ZoneSellConf = models.ZoneSellConf;
-const DescribeAuditRulesResponse = models.DescribeAuditRulesResponse;
+const ModifyCDBProxyVipVPortRequest = models.ModifyCDBProxyVipVPortRequest;
 const DescribeBinlogBackupOverviewResponse = models.DescribeBinlogBackupOverviewResponse;
-const RollbackTables = models.RollbackTables;
 const InitDBInstancesRequest = models.InitDBInstancesRequest;
-const RoInstanceInfo = models.RoInstanceInfo;
-const RollbackDBName = models.RollbackDBName;
-const CreateParamTemplateRequest = models.CreateParamTemplateRequest;
-const DeleteAuditRuleResponse = models.DeleteAuditRuleResponse;
-const IsolateDBInstanceRequest = models.IsolateDBInstanceRequest;
-const CreateAuditRuleRequest = models.CreateAuditRuleRequest;
-const ModifyTimeWindowRequest = models.ModifyTimeWindowRequest;
-const AuditLogFile = models.AuditLogFile;
-const ModifyAccountPrivilegesRequest = models.ModifyAccountPrivilegesRequest;
-const Account = models.Account;
-const CreateBackupRequest = models.CreateBackupRequest;
-const ModifyRoGroupInfoResponse = models.ModifyRoGroupInfoResponse;
-const AccountInfo = models.AccountInfo;
-const DescribeDBInstanceCharsetRequest = models.DescribeDBInstanceCharsetRequest;
-const DescribeTimeWindowRequest = models.DescribeTimeWindowRequest;
-const DescribeBackupDatabasesRequest = models.DescribeBackupDatabasesRequest;
-const ModifyTimeWindowResponse = models.ModifyTimeWindowResponse;
-const DeviceMemInfo = models.DeviceMemInfo;
+const SwitchDBInstanceMasterSlaveRequest = models.SwitchDBInstanceMasterSlaveRequest;
+const ModifyCDBProxyConnectionPoolRequest = models.ModifyCDBProxyConnectionPoolRequest;
 const ModifyAutoRenewFlagRequest = models.ModifyAutoRenewFlagRequest;
-const UpgradeDBInstanceEngineVersionRequest = models.UpgradeDBInstanceEngineVersionRequest;
-const StartDelayReplicationRequest = models.StartDelayReplicationRequest;
-const ModifyBackupConfigRequest = models.ModifyBackupConfigRequest;
 const DeleteDeployGroupsRequest = models.DeleteDeployGroupsRequest;
-const DescribeSlowLogDataRequest = models.DescribeSlowLogDataRequest;
 const DescribeAuditConfigResponse = models.DescribeAuditConfigResponse;
-const DatabasesWithCharacterLists = models.DatabasesWithCharacterLists;
-const UpgradeDBInstanceResponse = models.UpgradeDBInstanceResponse;
-const CreateAuditLogFileRequest = models.CreateAuditLogFileRequest;
-const DeleteAuditLogFileRequest = models.DeleteAuditLogFileRequest;
-const DescribeSlowLogsResponse = models.DescribeSlowLogsResponse;
-const DescribeDBImportRecordsRequest = models.DescribeDBImportRecordsRequest;
-const CreateDBImportJobResponse = models.CreateDBImportJobResponse;
-const DescribeTagsOfInstanceIdsRequest = models.DescribeTagsOfInstanceIdsRequest;
-const StopDelayReplicationResponse = models.StopDelayReplicationResponse;
-const DescribeTimeWindowResponse = models.DescribeTimeWindowResponse;
-const DeleteTimeWindowRequest = models.DeleteTimeWindowRequest;
-const DeleteAuditPolicyResponse = models.DeleteAuditPolicyResponse;
-const DescribeDBInstancesResponse = models.DescribeDBInstancesResponse;
-const DescribeParamTemplateInfoRequest = models.DescribeParamTemplateInfoRequest;
-const SlowLogInfo = models.SlowLogInfo;
-const InitDBInstancesResponse = models.InitDBInstancesResponse;
-const DescribeDataBackupOverviewRequest = models.DescribeDataBackupOverviewRequest;
-const DescribeParamTemplateInfoResponse = models.DescribeParamTemplateInfoResponse;
-const ParamRecord = models.ParamRecord;
-const RestartDBInstancesRequest = models.RestartDBInstancesRequest;
-const DescribeDBInstanceInfoRequest = models.DescribeDBInstanceInfoRequest;
-const DescribeInstanceParamsResponse = models.DescribeInstanceParamsResponse;
-const DescribeDBZoneConfigResponse = models.DescribeDBZoneConfigResponse;
-const CreateDeployGroupRequest = models.CreateDeployGroupRequest;
-const DisassociateSecurityGroupsRequest = models.DisassociateSecurityGroupsRequest;
-const DeleteAccountsRequest = models.DeleteAccountsRequest;
-const OfflineIsolatedInstancesRequest = models.OfflineIsolatedInstancesRequest;
-const ModifyAccountDescriptionResponse = models.ModifyAccountDescriptionResponse;
-const DescribeAccountPrivilegesRequest = models.DescribeAccountPrivilegesRequest;
-const DescribeAccountsResponse = models.DescribeAccountsResponse;
+const ModifyBackupConfigResponse = models.ModifyBackupConfigResponse;
 const OpenWanServiceRequest = models.OpenWanServiceRequest;
-const StopRollbackRequest = models.StopRollbackRequest;
-const DeleteBackupRequest = models.DeleteBackupRequest;
-const ModifyNameOrDescByDpIdRequest = models.ModifyNameOrDescByDpIdRequest;
-const DescribeInstanceParamsRequest = models.DescribeInstanceParamsRequest;
-const SlowLogItem = models.SlowLogItem;
-const DescribeDeviceMonitorInfoResponse = models.DescribeDeviceMonitorInfoResponse;
+const DeleteAuditPolicyResponse = models.DeleteAuditPolicyResponse;
+const InitDBInstancesResponse = models.InitDBInstancesResponse;
+const DescribeParamTemplateInfoResponse = models.DescribeParamTemplateInfoResponse;
+const DescribeInstanceParamsResponse = models.DescribeInstanceParamsResponse;
 const UploadInfo = models.UploadInfo;
-const DescribeRollbackTaskDetailRequest = models.DescribeRollbackTaskDetailRequest;
+const DisassociateSecurityGroupsRequest = models.DisassociateSecurityGroupsRequest;
+const ModifyLocalBinlogConfigRequest = models.ModifyLocalBinlogConfigRequest;
+const StartBatchRollbackResponse = models.StartBatchRollbackResponse;
+const ModifyAccountHostResponse = models.ModifyAccountHostResponse;
 const DescribeRollbackRangeTimeResponse = models.DescribeRollbackRangeTimeResponse;
 const ModifyRoGroupInfoRequest = models.ModifyRoGroupInfoRequest;
 const ReleaseResult = models.ReleaseResult;
-const InstanceInfo = models.InstanceInfo;
-const OpenWanServiceResponse = models.OpenWanServiceResponse;
-const ModifyRoReplicationDelayResponse = models.ModifyRoReplicationDelayResponse;
-const DescribeAuditLogFilesRequest = models.DescribeAuditLogFilesRequest;
-const DescribeTagsOfInstanceIdsResponse = models.DescribeTagsOfInstanceIdsResponse;
-const ModifyAccountPasswordResponse = models.ModifyAccountPasswordResponse;
+const ProxyGroups = models.ProxyGroups;
 const AuditRule = models.AuditRule;
-const StopDelayReplicationRequest = models.StopDelayReplicationRequest;
+const RegionSellConf = models.RegionSellConf;
+const RollbackDBName = models.RollbackDBName;
+const CreateAuditRuleResponse = models.CreateAuditRuleResponse;
+const DescribeDBInstanceInfoResponse = models.DescribeDBInstanceInfoResponse;
+const AssociateSecurityGroupsRequest = models.AssociateSecurityGroupsRequest;
+const ApplyCDBProxyRequest = models.ApplyCDBProxyRequest;
+const ModifyAuditRuleRequest = models.ModifyAuditRuleRequest;
+const DescribeBinlogsResponse = models.DescribeBinlogsResponse;
+const DescribeRoMinScaleRequest = models.DescribeRoMinScaleRequest;
+const DescribeDefaultParamsRequest = models.DescribeDefaultParamsRequest;
+const Address = models.Address;
+const CustomConfig = models.CustomConfig;
+const SwitchDBInstanceMasterSlaveResponse = models.SwitchDBInstanceMasterSlaveResponse;
+const DescribeBackupsRequest = models.DescribeBackupsRequest;
+const DescribeInstanceParamRecordsResponse = models.DescribeInstanceParamRecordsResponse;
+const DescribeDBInstanceGTIDResponse = models.DescribeDBInstanceGTIDResponse;
+const DeleteParamTemplateRequest = models.DeleteParamTemplateRequest;
+const DrInfo = models.DrInfo;
 const DescribeBinlogsRequest = models.DescribeBinlogsRequest;
+const ModifyBackupDownloadRestrictionRequest = models.ModifyBackupDownloadRestrictionRequest;
+const CreateParamTemplateResponse = models.CreateParamTemplateResponse;
+const ModifyAccountPasswordResponse = models.ModifyAccountPasswordResponse;
+const ReleaseIsolatedDBInstancesRequest = models.ReleaseIsolatedDBInstancesRequest;
+const BinlogInfo = models.BinlogInfo;
+const DescribeErrorLogDataResponse = models.DescribeErrorLogDataResponse;
+const AddTimeWindowRequest = models.AddTimeWindowRequest;
+const ImportRecord = models.ImportRecord;
+const DeleteAuditLogFileResponse = models.DeleteAuditLogFileResponse;
+const Parameter = models.Parameter;
+const SlaveInfo = models.SlaveInfo;
+const DescribeDBSecurityGroupsRequest = models.DescribeDBSecurityGroupsRequest;
+const DescribeDBSwitchRecordsResponse = models.DescribeDBSwitchRecordsResponse;
+const ModifyCDBProxyConnectionPoolResponse = models.ModifyCDBProxyConnectionPoolResponse;
+const Tag = models.Tag;
+const CreateAuditLogFileResponse = models.CreateAuditLogFileResponse;
+const ModifyInstanceTagResponse = models.ModifyInstanceTagResponse;
+const DescribeDBSwitchRecordsRequest = models.DescribeDBSwitchRecordsRequest;
+const DescribeSupportedPrivilegesRequest = models.DescribeSupportedPrivilegesRequest;
+const DescribeAsyncRequestInfoResponse = models.DescribeAsyncRequestInfoResponse;
+const DescribeRoGroupsRequest = models.DescribeRoGroupsRequest;
+const ParamTemplateInfo = models.ParamTemplateInfo;
+const DeleteTimeWindowResponse = models.DeleteTimeWindowResponse;
+const DescribeBackupsResponse = models.DescribeBackupsResponse;
+const CreateAuditPolicyRequest = models.CreateAuditPolicyRequest;
+const CreateRoInstanceIpRequest = models.CreateRoInstanceIpRequest;
+const DescribeTimeWindowResponse = models.DescribeTimeWindowResponse;
+const DescribeBackupConfigResponse = models.DescribeBackupConfigResponse;
+const DescribeParamTemplatesResponse = models.DescribeParamTemplatesResponse;
+const ZoneConf = models.ZoneConf;
+const SlaveInstanceInfo = models.SlaveInstanceInfo;
+const DescribeProjectSecurityGroupsRequest = models.DescribeProjectSecurityGroupsRequest;
+const StopReplicationRequest = models.StopReplicationRequest;
+const CreateCloneInstanceResponse = models.CreateCloneInstanceResponse;
+const DeviceCpuInfo = models.DeviceCpuInfo;
+const DescribeAsyncRequestInfoRequest = models.DescribeAsyncRequestInfoRequest;
+const BalanceRoGroupLoadRequest = models.BalanceRoGroupLoadRequest;
+const QueryCDBProxyRequest = models.QueryCDBProxyRequest;
+const DescribeBackupOverviewResponse = models.DescribeBackupOverviewResponse;
+const DescribeLocalBinlogConfigRequest = models.DescribeLocalBinlogConfigRequest;
+const QueryCDBProxyResponse = models.QueryCDBProxyResponse;
+const DescribeDeviceMonitorInfoRequest = models.DescribeDeviceMonitorInfoRequest;
+const SwitchDrInstanceToMasterResponse = models.SwitchDrInstanceToMasterResponse;
+const DescribeDBInstanceConfigResponse = models.DescribeDBInstanceConfigResponse;
+const SlaveConfig = models.SlaveConfig;
+const ModifyAccountPrivilegesResponse = models.ModifyAccountPrivilegesResponse;
+const StopRollbackRequest = models.StopRollbackRequest;
+const DescribeDeviceMonitorInfoResponse = models.DescribeDeviceMonitorInfoResponse;
+const TagsInfoOfInstance = models.TagsInfoOfInstance;
+const ResetRootAccountRequest = models.ResetRootAccountRequest;
+const DescribeDBInstanceConfigRequest = models.DescribeDBInstanceConfigRequest;
+const DescribeProxyCustomConfResponse = models.DescribeProxyCustomConfResponse;
+const ModifyAuditConfigResponse = models.ModifyAuditConfigResponse;
+const ModifyDBInstanceNameResponse = models.ModifyDBInstanceNameResponse;
+const VerifyRootAccountRequest = models.VerifyRootAccountRequest;
+const PoolConf = models.PoolConf;
+const DescribeCloneListResponse = models.DescribeCloneListResponse;
+const StartBatchRollbackRequest = models.StartBatchRollbackRequest;
+const DescribeDBInstanceCharsetRequest = models.DescribeDBInstanceCharsetRequest;
+const DeviceMemInfo = models.DeviceMemInfo;
+const UpgradeDBInstanceEngineVersionRequest = models.UpgradeDBInstanceEngineVersionRequest;
+const SlowLogItem = models.SlowLogItem;
+const TagInfo = models.TagInfo;
+const DescribeDBInstancesResponse = models.DescribeDBInstancesResponse;
+const ModifyCDBProxyResponse = models.ModifyCDBProxyResponse;
+const DescribeBackupDownloadRestrictionRequest = models.DescribeBackupDownloadRestrictionRequest;
+const CreateDeployGroupRequest = models.CreateDeployGroupRequest;
+const DeleteAccountsRequest = models.DeleteAccountsRequest;
+const ReloadBalanceProxyNodeRequest = models.ReloadBalanceProxyNodeRequest;
+const DescribeAccountsResponse = models.DescribeAccountsResponse;
+const RollbackTimeRange = models.RollbackTimeRange;
+const DescribeAuditLogFilesRequest = models.DescribeAuditLogFilesRequest;
+const ModifyBackupConfigRequest = models.ModifyBackupConfigRequest;
 const DisassociateSecurityGroupsResponse = models.DisassociateSecurityGroupsResponse;
-const DescribeDBInstanceGTIDRequest = models.DescribeDBInstanceGTIDRequest;
 const DeployGroupInfo = models.DeployGroupInfo;
+const LocalBinlogConfig = models.LocalBinlogConfig;
 const InquiryPriceUpgradeInstancesResponse = models.InquiryPriceUpgradeInstancesResponse;
+const CreateDBInstanceRequest = models.CreateDBInstanceRequest;
+const DescribeProxyConnectionPoolConfRequest = models.DescribeProxyConnectionPoolConfRequest;
+const DescribeParamTemplatesRequest = models.DescribeParamTemplatesRequest;
+const DescribeAccountPrivilegesResponse = models.DescribeAccountPrivilegesResponse;
+const DescribeBackupConfigRequest = models.DescribeBackupConfigRequest;
+const RoVipInfo = models.RoVipInfo;
+const DescribeAccountsRequest = models.DescribeAccountsRequest;
+const DescribeErrorLogDataRequest = models.DescribeErrorLogDataRequest;
+const DescribeAuditLogFilesResponse = models.DescribeAuditLogFilesResponse;
+const DescribeDBInstanceRebootTimeRequest = models.DescribeDBInstanceRebootTimeRequest;
+const Inbound = models.Inbound;
+const CreateAccountsResponse = models.CreateAccountsResponse;
+const CreateDeployGroupResponse = models.CreateDeployGroupResponse;
+const SellConfig = models.SellConfig;
+const MasterInfo = models.MasterInfo;
+const ResetRootAccountResponse = models.ResetRootAccountResponse;
+const ProxyNodeInfo = models.ProxyNodeInfo;
+const Account = models.Account;
+const ModifyNameOrDescByDpIdResponse = models.ModifyNameOrDescByDpIdResponse;
+const DescribeDBPriceResponse = models.DescribeDBPriceResponse;
+const AuditLogFilter = models.AuditLogFilter;
+const ConnectionPoolInfo = models.ConnectionPoolInfo;
+const OpenDBInstanceGTIDResponse = models.OpenDBInstanceGTIDResponse;
+const VerifyRootAccountResponse = models.VerifyRootAccountResponse;
+const DescribeDBInstanceRebootTimeResponse = models.DescribeDBInstanceRebootTimeResponse;
+const SwitchDrInstanceToMasterRequest = models.SwitchDrInstanceToMasterRequest;
+const RoGroup = models.RoGroup;
+const ParameterDetail = models.ParameterDetail;
+const ModifyCDBProxyVipVPortResponse = models.ModifyCDBProxyVipVPortResponse;
+const SwitchForUpgradeRequest = models.SwitchForUpgradeRequest;
+const CreateDBInstanceHourResponse = models.CreateDBInstanceHourResponse;
+const DescribeBackupDownloadRestrictionResponse = models.DescribeBackupDownloadRestrictionResponse;
+const DatabasesWithCharacterLists = models.DatabasesWithCharacterLists;
+const CloneItem = models.CloneItem;
+const ModifyDBInstanceSecurityGroupsResponse = models.ModifyDBInstanceSecurityGroupsResponse;
+const CreateAccountsRequest = models.CreateAccountsRequest;
+const DescribeDeployGroupListRequest = models.DescribeDeployGroupListRequest;
+const BackupInfo = models.BackupInfo;
+const CloseWanServiceResponse = models.CloseWanServiceResponse;
+const RoWeight = models.RoWeight;
+const RenewDBInstanceRequest = models.RenewDBInstanceRequest;
+const RollbackTableName = models.RollbackTableName;
+const ModifyLocalBinlogConfigResponse = models.ModifyLocalBinlogConfigResponse;
+const DescribeCloneListRequest = models.DescribeCloneListRequest;
+const ModifyInstanceTagRequest = models.ModifyInstanceTagRequest;
+const ModifyAutoRenewFlagResponse = models.ModifyAutoRenewFlagResponse;
+const RollbackTask = models.RollbackTask;
+const ReloadBalanceProxyNodeResponse = models.ReloadBalanceProxyNodeResponse;
+const DescribeTimeWindowRequest = models.DescribeTimeWindowRequest;
+const DescribeDBImportRecordsResponse = models.DescribeDBImportRecordsResponse;
+const DescribeBackupDatabasesResponse = models.DescribeBackupDatabasesResponse;
+const BackupItem = models.BackupItem;
+const AuditFilter = models.AuditFilter;
+const DescribeRollbackTaskDetailRequest = models.DescribeRollbackTaskDetailRequest;
+const DescribeBackupTablesResponse = models.DescribeBackupTablesResponse;
+const ModifyParamTemplateResponse = models.ModifyParamTemplateResponse;
+const BalanceRoGroupLoadResponse = models.BalanceRoGroupLoadResponse;
+const DeviceNetInfo = models.DeviceNetInfo;
+const ModifyDBInstanceVipVportResponse = models.ModifyDBInstanceVipVportResponse;
+const DescribeUploadedFilesRequest = models.DescribeUploadedFilesRequest;
+const InstanceInfo = models.InstanceInfo;
+const DescribeDefaultParamsResponse = models.DescribeDefaultParamsResponse;
+const SwitchCDBProxyRequest = models.SwitchCDBProxyRequest;
+const DescribeTagsOfInstanceIdsResponse = models.DescribeTagsOfInstanceIdsResponse;
+const DescribeDeployGroupListResponse = models.DescribeDeployGroupListResponse;
+const OfflineIsolatedInstancesResponse = models.OfflineIsolatedInstancesResponse;
+const DatabasePrivilege = models.DatabasePrivilege;
+const DescribeAuditPoliciesRequest = models.DescribeAuditPoliciesRequest;
+const DescribeDatabasesResponse = models.DescribeDatabasesResponse;
+const DescribeRoGroupsResponse = models.DescribeRoGroupsResponse;
+const DescribeAuditRulesResponse = models.DescribeAuditRulesResponse;
+const RoInstanceInfo = models.RoInstanceInfo;
+const ModifyAccountHostRequest = models.ModifyAccountHostRequest;
+const CreateAuditLogFileRequest = models.CreateAuditLogFileRequest;
+const CreateAuditRuleRequest = models.CreateAuditRuleRequest;
+const DeviceCpuRateInfo = models.DeviceCpuRateInfo;
+const ModifyAccountPrivilegesRequest = models.ModifyAccountPrivilegesRequest;
+const CreateBackupRequest = models.CreateBackupRequest;
+const AccountInfo = models.AccountInfo;
+const ModifyCDBProxyDescResponse = models.ModifyCDBProxyDescResponse;
+const ModifyDBInstanceVipVportRequest = models.ModifyDBInstanceVipVportRequest;
+const DescribeDBImportRecordsRequest = models.DescribeDBImportRecordsRequest;
+const CreateDBImportJobResponse = models.CreateDBImportJobResponse;
+const DescribeTagsOfInstanceIdsRequest = models.DescribeTagsOfInstanceIdsRequest;
+const RWInfos = models.RWInfos;
+const CloseCDBProxyResponse = models.CloseCDBProxyResponse;
+const DescribeDataBackupOverviewRequest = models.DescribeDataBackupOverviewRequest;
+const DescribeDBInstanceInfoRequest = models.DescribeDBInstanceInfoRequest;
+const BackupLimitVpcItem = models.BackupLimitVpcItem;
+const DescribeDBZoneConfigResponse = models.DescribeDBZoneConfigResponse;
+const ModifyDBInstanceProjectRequest = models.ModifyDBInstanceProjectRequest;
+const SwitchForUpgradeResponse = models.SwitchForUpgradeResponse;
+const DescribeCDBProxyRequest = models.DescribeCDBProxyRequest;
+const DescribeAccountPrivilegesRequest = models.DescribeAccountPrivilegesRequest;
+const DescribeSupportedPrivilegesResponse = models.DescribeSupportedPrivilegesResponse;
+const StopDBImportJobRequest = models.StopDBImportJobRequest;
+const DescribeLocalBinlogConfigResponse = models.DescribeLocalBinlogConfigResponse;
+const OpenWanServiceResponse = models.OpenWanServiceResponse;
+const DescribeDBInstanceGTIDRequest = models.DescribeDBInstanceGTIDRequest;
+const ModifyCDBProxyRequest = models.ModifyCDBProxyRequest;
+const ModifyAuditConfigRequest = models.ModifyAuditConfigRequest;
+const DeviceDiskInfo = models.DeviceDiskInfo;
+const RoWeightValue = models.RoWeightValue;
+const DescribeSlowLogDataResponse = models.DescribeSlowLogDataResponse;
+const RestartDBInstancesResponse = models.RestartDBInstancesResponse;
+const DescribeSlowLogsRequest = models.DescribeSlowLogsRequest;
+const TagInfoItem = models.TagInfoItem;
+const DescribeProxyCustomConfRequest = models.DescribeProxyCustomConfRequest;
+const DescribeDBSecurityGroupsResponse = models.DescribeDBSecurityGroupsResponse;
+const ModifyRoGroupInfoResponse = models.ModifyRoGroupInfoResponse;
+const DeleteAuditRuleRequest = models.DeleteAuditRuleRequest;
+const DeleteParamTemplateResponse = models.DeleteParamTemplateResponse;
+const DBSwitchInfo = models.DBSwitchInfo;
+const DescribeTasksResponse = models.DescribeTasksResponse;
+const DescribeAuditPoliciesResponse = models.DescribeAuditPoliciesResponse;
+const IsolateDBInstanceResponse = models.IsolateDBInstanceResponse;
+const DescribeDBZoneConfigRequest = models.DescribeDBZoneConfigRequest;
+const ModifyAccountDescriptionResponse = models.ModifyAccountDescriptionResponse;
+const CommonTimeWindow = models.CommonTimeWindow;
+const ModifyAccountMaxUserConnectionsRequest = models.ModifyAccountMaxUserConnectionsRequest;
+const ProxyGroup = models.ProxyGroup;
+const DeleteDeployGroupsResponse = models.DeleteDeployGroupsResponse;
+const DescribeTasksRequest = models.DescribeTasksRequest;
+const DescribeRollbackTaskDetailResponse = models.DescribeRollbackTaskDetailResponse;
+const CreateDBInstanceHourRequest = models.CreateDBInstanceHourRequest;
+const RollbackInstancesInfo = models.RollbackInstancesInfo;
+const CreateCloneInstanceRequest = models.CreateCloneInstanceRequest;
+const CloseCDBProxyRequest = models.CloseCDBProxyRequest;
+const DeleteBackupResponse = models.DeleteBackupResponse;
+const DescribeProjectSecurityGroupsResponse = models.DescribeProjectSecurityGroupsResponse;
+const DescribeBackupSummariesRequest = models.DescribeBackupSummariesRequest;
+const CreateDBInstanceResponse = models.CreateDBInstanceResponse;
+const StartReplicationRequest = models.StartReplicationRequest;
+const DescribeDBInstanceCharsetResponse = models.DescribeDBInstanceCharsetResponse;
+const UpgradeCDBProxyRequest = models.UpgradeCDBProxyRequest;
+const DescribeBackupSummariesResponse = models.DescribeBackupSummariesResponse;
+const DescribeBinlogBackupOverviewRequest = models.DescribeBinlogBackupOverviewRequest;
+const ModifyDBInstanceSecurityGroupsRequest = models.ModifyDBInstanceSecurityGroupsRequest;
+const ModifyAccountMaxUserConnectionsResponse = models.ModifyAccountMaxUserConnectionsResponse;
+const Outbound = models.Outbound;
+const ParamInfo = models.ParamInfo;
+const SecurityGroup = models.SecurityGroup;
+const DescribeProxyConnectionPoolConfResponse = models.DescribeProxyConnectionPoolConfResponse;
+const OfflineIsolatedInstancesRequest = models.OfflineIsolatedInstancesRequest;
+const InquiryPriceUpgradeInstancesRequest = models.InquiryPriceUpgradeInstancesRequest;
+const ModifyInstanceParamResponse = models.ModifyInstanceParamResponse;
+const ColumnPrivilege = models.ColumnPrivilege;
+const DescribeUploadedFilesResponse = models.DescribeUploadedFilesResponse;
+const DescribeDBPriceRequest = models.DescribeDBPriceRequest;
+const CreateBackupResponse = models.CreateBackupResponse;
+const OpenDBInstanceGTIDRequest = models.OpenDBInstanceGTIDRequest;
+const SqlFileInfo = models.SqlFileInfo;
+const RoGroupAttr = models.RoGroupAttr;
+const UpgradeCDBProxyVersionResponse = models.UpgradeCDBProxyVersionResponse;
+const ModifyAccountDescriptionRequest = models.ModifyAccountDescriptionRequest;
+const ModifyAccountPasswordRequest = models.ModifyAccountPasswordRequest;
+const InstanceRebootTime = models.InstanceRebootTime;
+const RenewDBInstanceResponse = models.RenewDBInstanceResponse;
+const TablePrivilege = models.TablePrivilege;
+const AddTimeWindowResponse = models.AddTimeWindowResponse;
+const BaseGroupInfo = models.BaseGroupInfo;
+const DeleteAuditRuleResponse = models.DeleteAuditRuleResponse;
+const IsolateDBInstanceRequest = models.IsolateDBInstanceRequest;
+const AuditLogFile = models.AuditLogFile;
+const RollbackTables = models.RollbackTables;
+const DescribeBackupDatabasesRequest = models.DescribeBackupDatabasesRequest;
+const LocalBinlogConfigDefault = models.LocalBinlogConfigDefault;
+const DescribeSlowLogDataRequest = models.DescribeSlowLogDataRequest;
+const ReleaseIsolatedDBInstancesResponse = models.ReleaseIsolatedDBInstancesResponse;
+const DeleteAuditLogFileRequest = models.DeleteAuditLogFileRequest;
+const DescribeSlowLogsResponse = models.DescribeSlowLogsResponse;
+const DeleteTimeWindowRequest = models.DeleteTimeWindowRequest;
+const SwitchCDBProxyResponse = models.SwitchCDBProxyResponse;
+const RestartDBInstancesRequest = models.RestartDBInstancesRequest;
+const DeleteBackupRequest = models.DeleteBackupRequest;
+const ModifyNameOrDescByDpIdRequest = models.ModifyNameOrDescByDpIdRequest;
+const UpgradeDBInstanceResponse = models.UpgradeDBInstanceResponse;
+const UpgradeCDBProxyVersionRequest = models.UpgradeCDBProxyVersionRequest;
 
 
 /**
@@ -352,14 +405,14 @@ class CdbClient extends AbstractClient {
     }
 
     /**
-     * 本接口(CreateAuditPolicy)用于创建云数据库实例的审计策略，即将审计规则绑定到具体的云数据库实例上。
-     * @param {CreateAuditPolicyRequest} req
-     * @param {function(string, CreateAuditPolicyResponse):void} cb
+     * 本接口(DescribeTimeWindow)用于查询云数据库实例的维护时间窗口。
+     * @param {DescribeTimeWindowRequest} req
+     * @param {function(string, DescribeTimeWindowResponse):void} cb
      * @public
      */
-    CreateAuditPolicy(req, cb) {
-        let resp = new CreateAuditPolicyResponse();
-        this.request("CreateAuditPolicy", req, resp, cb);
+    DescribeTimeWindow(req, cb) {
+        let resp = new DescribeTimeWindowResponse();
+        this.request("DescribeTimeWindow", req, resp, cb);
     }
 
     /**
@@ -422,14 +475,14 @@ class CdbClient extends AbstractClient {
     }
 
     /**
-     * 本接口(DescribeTimeWindow)用于查询云数据库实例的维护时间窗口。
-     * @param {DescribeTimeWindowRequest} req
-     * @param {function(string, DescribeTimeWindowResponse):void} cb
+     * 本接口(CreateAuditPolicy)用于创建云数据库实例的审计策略，即将审计规则绑定到具体的云数据库实例上。
+     * @param {CreateAuditPolicyRequest} req
+     * @param {function(string, CreateAuditPolicyResponse):void} cb
      * @public
      */
-    DescribeTimeWindow(req, cb) {
-        let resp = new DescribeTimeWindowResponse();
-        this.request("DescribeTimeWindow", req, resp, cb);
+    CreateAuditPolicy(req, cb) {
+        let resp = new CreateAuditPolicyResponse();
+        this.request("CreateAuditPolicy", req, resp, cb);
     }
 
     /**
@@ -441,6 +494,17 @@ class CdbClient extends AbstractClient {
     DescribeBackupOverview(req, cb) {
         let resp = new DescribeBackupOverviewResponse();
         this.request("DescribeBackupOverview", req, resp, cb);
+    }
+
+    /**
+     * 停止 RO 复制，中断从主实例同步数据。
+     * @param {StopReplicationRequest} req
+     * @param {function(string, StopReplicationResponse):void} cb
+     * @public
+     */
+    StopReplication(req, cb) {
+        let resp = new StopReplicationResponse();
+        this.request("StopReplication", req, resp, cb);
     }
 
     /**
@@ -503,6 +567,17 @@ class CdbClient extends AbstractClient {
     }
 
     /**
+     * 修改数据库代理描述
+     * @param {ModifyCDBProxyDescRequest} req
+     * @param {function(string, ModifyCDBProxyDescResponse):void} cb
+     * @public
+     */
+    ModifyCDBProxyDesc(req, cb) {
+        let resp = new ModifyCDBProxyDescResponse();
+        this.request("ModifyCDBProxyDesc", req, resp, cb);
+    }
+
+    /**
      * 本接口(DescribeRollbackTaskDetail)用于查询云数据库实例回档任务详情。
      * @param {DescribeRollbackTaskDetailRequest} req
      * @param {function(string, DescribeRollbackTaskDetailResponse):void} cb
@@ -514,14 +589,14 @@ class CdbClient extends AbstractClient {
     }
 
     /**
-     * 本接口(ModifyDBInstanceSecurityGroups)用于修改实例绑定的安全组。
-     * @param {ModifyDBInstanceSecurityGroupsRequest} req
-     * @param {function(string, ModifyDBInstanceSecurityGroupsResponse):void} cb
+     * 该接口用于修改用户当前地域的备份文件限制下载来源，可以设置内外网均可下载、仅内网可下载，或内网指定的vpc、ip可以下载。
+     * @param {ModifyBackupDownloadRestrictionRequest} req
+     * @param {function(string, ModifyBackupDownloadRestrictionResponse):void} cb
      * @public
      */
-    ModifyDBInstanceSecurityGroups(req, cb) {
-        let resp = new ModifyDBInstanceSecurityGroupsResponse();
-        this.request("ModifyDBInstanceSecurityGroups", req, resp, cb);
+    ModifyBackupDownloadRestriction(req, cb) {
+        let resp = new ModifyBackupDownloadRestrictionResponse();
+        this.request("ModifyBackupDownloadRestriction", req, resp, cb);
     }
 
     /**
@@ -603,6 +678,7 @@ class CdbClient extends AbstractClient {
 
     /**
      * 根据检索条件查询实例错误日志详情。只能查询一个月之内的错误日志。
+使用时需要注意：可能存在单条错误日志太大，导致整个http请求的回包太大，进而引发接口超时。一旦发生超时，建议您缩小查询时的Limit参数值，从而降低包的大小，让接口能够及时返回内容。
      * @param {DescribeErrorLogDataRequest} req
      * @param {function(string, DescribeErrorLogDataResponse):void} cb
      * @public
@@ -646,17 +722,6 @@ class CdbClient extends AbstractClient {
     }
 
     /**
-     * 本接口(DeleteTimeWindow)用于删除云数据库实例的维护时间窗口。删除实例维护时间窗口之后，默认的维护时间窗为 03:00-04:00，即当选择在维护时间窗口内切换访问新实例时，默认会在 03:00-04:00 点进行切换访问新实例。
-     * @param {DeleteTimeWindowRequest} req
-     * @param {function(string, DeleteTimeWindowResponse):void} cb
-     * @public
-     */
-    DeleteTimeWindow(req, cb) {
-        let resp = new DeleteTimeWindowResponse();
-        this.request("DeleteTimeWindow", req, resp, cb);
-    }
-
-    /**
      * 本接口(DescribeAccountPrivileges)用于查询云数据库账户支持的权限信息。
      * @param {DescribeAccountPrivilegesRequest} req
      * @param {function(string, DescribeAccountPrivilegesResponse):void} cb
@@ -665,17 +730,6 @@ class CdbClient extends AbstractClient {
     DescribeAccountPrivileges(req, cb) {
         let resp = new DescribeAccountPrivilegesResponse();
         this.request("DescribeAccountPrivileges", req, resp, cb);
-    }
-
-    /**
-     * 修改只读实例类型，可以将普通只读实例变为延迟只读实例，或者将延迟只读实例变为普通只读实例。
-     * @param {ModifyRoTypeRequest} req
-     * @param {function(string, ModifyRoTypeResponse):void} cb
-     * @public
-     */
-    ModifyRoType(req, cb) {
-        let resp = new ModifyRoTypeResponse();
-        this.request("ModifyRoType", req, resp, cb);
     }
 
     /**
@@ -745,7 +799,7 @@ class CdbClient extends AbstractClient {
     }
 
     /**
-     * 该接口（DeleteParamTemplate）用于删除参数模板。
+     * 该接口（DeleteParamTemplate）用于删除参数模板，全地域公共参数Region均为ap-guangzhou。
      * @param {DeleteParamTemplateRequest} req
      * @param {function(string, DeleteParamTemplateResponse):void} cb
      * @public
@@ -767,7 +821,7 @@ class CdbClient extends AbstractClient {
     }
 
     /**
-     * 该接口（CreateParamTemplate）用于创建参数模板。
+     * 该接口（CreateParamTemplate）用于创建参数模板，全地域公共参数Region均为ap-guangzhou。
      * @param {CreateParamTemplateRequest} req
      * @param {function(string, CreateParamTemplateResponse):void} cb
      * @public
@@ -805,6 +859,17 @@ class CdbClient extends AbstractClient {
     AddTimeWindow(req, cb) {
         let resp = new AddTimeWindowResponse();
         this.request("AddTimeWindow", req, resp, cb);
+    }
+
+    /**
+     * 本接口（DescribeDeviceMonitorInfo）用于查询云数据库物理机当天的监控信息，暂只支持内存488G、硬盘6T的实例查询。
+     * @param {DescribeDeviceMonitorInfoRequest} req
+     * @param {function(string, DescribeDeviceMonitorInfoResponse):void} cb
+     * @public
+     */
+    DescribeDeviceMonitorInfo(req, cb) {
+        let resp = new DescribeDeviceMonitorInfoResponse();
+        this.request("DescribeDeviceMonitorInfo", req, resp, cb);
     }
 
     /**
@@ -876,6 +941,17 @@ class CdbClient extends AbstractClient {
     }
 
     /**
+     * 请求该接口配置数据库连接池；支持的连接池配置请求DescribeProxyConnectionPoolConf接口获取。
+     * @param {ModifyCDBProxyConnectionPoolRequest} req
+     * @param {function(string, ModifyCDBProxyConnectionPoolResponse):void} cb
+     * @public
+     */
+    ModifyCDBProxyConnectionPool(req, cb) {
+        let resp = new ModifyCDBProxyConnectionPoolResponse();
+        this.request("ModifyCDBProxyConnectionPool", req, resp, cb);
+    }
+
+    /**
      * 本接口(DescribeSlowLogs)用于获取云数据库实例的慢查询日志。
      * @param {DescribeSlowLogsRequest} req
      * @param {function(string, DescribeSlowLogsResponse):void} cb
@@ -898,14 +974,14 @@ class CdbClient extends AbstractClient {
     }
 
     /**
-     * 停止延迟只读实例的延迟复制。
-     * @param {StopDelayReplicationRequest} req
-     * @param {function(string, StopDelayReplicationResponse):void} cb
+     * 该接口用于修改实例本地binlog保留策略。
+     * @param {ModifyLocalBinlogConfigRequest} req
+     * @param {function(string, ModifyLocalBinlogConfigResponse):void} cb
      * @public
      */
-    StopDelayReplication(req, cb) {
-        let resp = new StopDelayReplicationResponse();
-        this.request("StopDelayReplication", req, resp, cb);
+    ModifyLocalBinlogConfig(req, cb) {
+        let resp = new ModifyLocalBinlogConfigResponse();
+        this.request("ModifyLocalBinlogConfig", req, resp, cb);
     }
 
     /**
@@ -929,7 +1005,7 @@ class CdbClient extends AbstractClient {
     }
 
     /**
-     * 该接口（ModifyParamTemplate）用于修改参数模板。
+     * 该接口（ModifyParamTemplate）用于修改参数模板，全地域公共参数Region均为ap-guangzhou。
      * @param {ModifyParamTemplateRequest} req
      * @param {function(string, ModifyParamTemplateResponse):void} cb
      * @public
@@ -948,6 +1024,28 @@ class CdbClient extends AbstractClient {
     DescribeInstanceParams(req, cb) {
         let resp = new DescribeInstanceParamsResponse();
         this.request("DescribeInstanceParams", req, resp, cb);
+    }
+
+    /**
+     * 配置数据库代理读写分离
+     * @param {ModifyCDBProxyRequest} req
+     * @param {function(string, ModifyCDBProxyResponse):void} cb
+     * @public
+     */
+    ModifyCDBProxy(req, cb) {
+        let resp = new ModifyCDBProxyResponse();
+        this.request("ModifyCDBProxy", req, resp, cb);
+    }
+
+    /**
+     * 查询代理规格配置
+     * @param {DescribeProxyCustomConfRequest} req
+     * @param {function(string, DescribeProxyCustomConfResponse):void} cb
+     * @public
+     */
+    DescribeProxyCustomConf(req, cb) {
+        let resp = new DescribeProxyCustomConfResponse();
+        this.request("DescribeProxyCustomConf", req, resp, cb);
     }
 
     /**
@@ -981,6 +1079,17 @@ class CdbClient extends AbstractClient {
     CreateAccounts(req, cb) {
         let resp = new CreateAccountsResponse();
         this.request("CreateAccounts", req, resp, cb);
+    }
+
+    /**
+     * 调整数据库代理配置
+     * @param {UpgradeCDBProxyRequest} req
+     * @param {function(string, UpgradeCDBProxyResponse):void} cb
+     * @public
+     */
+    UpgradeCDBProxy(req, cb) {
+        let resp = new UpgradeCDBProxyResponse();
+        this.request("UpgradeCDBProxy", req, resp, cb);
     }
 
     /**
@@ -1028,7 +1137,7 @@ class CdbClient extends AbstractClient {
     }
 
     /**
-     * 该接口（DescribeParamTemplateInfo）用于查询参数模板详情。
+     * 该接口（DescribeParamTemplateInfo）用于查询参数模板详情，全地域公共参数Region均为ap-guangzhou。
      * @param {DescribeParamTemplateInfoRequest} req
      * @param {function(string, DescribeParamTemplateInfoResponse):void} cb
      * @public
@@ -1094,7 +1203,7 @@ class CdbClient extends AbstractClient {
     }
 
     /**
-     * 该接口（DescribeParamTemplates）查询参数模板列表。
+     * 该接口（DescribeParamTemplates）查询参数模板列表，全地域公共参数Region均为ap-guangzhou。
      * @param {DescribeParamTemplatesRequest} req
      * @param {function(string, DescribeParamTemplatesResponse):void} cb
      * @public
@@ -1116,6 +1225,17 @@ class CdbClient extends AbstractClient {
     }
 
     /**
+     * 修改数据库代理VIP或端口
+     * @param {ModifyCDBProxyVipVPortRequest} req
+     * @param {function(string, ModifyCDBProxyVipVPortResponse):void} cb
+     * @public
+     */
+    ModifyCDBProxyVipVPort(req, cb) {
+        let resp = new ModifyCDBProxyVipVPortResponse();
+        this.request("ModifyCDBProxyVipVPort", req, resp, cb);
+    }
+
+    /**
      * 本接口(DescribeRoMinScale)用于获取只读实例购买、升级时的最小规格。
      * @param {DescribeRoMinScaleRequest} req
      * @param {function(string, DescribeRoMinScaleResponse):void} cb
@@ -1124,6 +1244,17 @@ class CdbClient extends AbstractClient {
     DescribeRoMinScale(req, cb) {
         let resp = new DescribeRoMinScaleResponse();
         this.request("DescribeRoMinScale", req, resp, cb);
+    }
+
+    /**
+     * 本接口(ModifyAccountHost)用于修改云数据库账户的主机。
+     * @param {ModifyAccountHostRequest} req
+     * @param {function(string, ModifyAccountHostResponse):void} cb
+     * @public
+     */
+    ModifyAccountHost(req, cb) {
+        let resp = new ModifyAccountHostResponse();
+        this.request("ModifyAccountHost", req, resp, cb);
     }
 
     /**
@@ -1146,6 +1277,28 @@ class CdbClient extends AbstractClient {
     ModifyInstanceParam(req, cb) {
         let resp = new ModifyInstanceParamResponse();
         this.request("ModifyInstanceParam", req, resp, cb);
+    }
+
+    /**
+     * 关闭数据库代理
+     * @param {CloseCDBProxyRequest} req
+     * @param {function(string, CloseCDBProxyResponse):void} cb
+     * @public
+     */
+    CloseCDBProxy(req, cb) {
+        let resp = new CloseCDBProxyResponse();
+        this.request("CloseCDBProxy", req, resp, cb);
+    }
+
+    /**
+     * 本接口(ModifyAccountMaxUserConnections)用于修改云数据库账户最大可用连接数。
+     * @param {ModifyAccountMaxUserConnectionsRequest} req
+     * @param {function(string, ModifyAccountMaxUserConnectionsResponse):void} cb
+     * @public
+     */
+    ModifyAccountMaxUserConnections(req, cb) {
+        let resp = new ModifyAccountMaxUserConnectionsResponse();
+        this.request("ModifyAccountMaxUserConnections", req, resp, cb);
     }
 
     /**
@@ -1193,7 +1346,7 @@ class CdbClient extends AbstractClient {
     }
 
     /**
-     * 本接口（ModifyRoGroupInfo）用于更新云数据库只读组的信息。包括设置实例延迟超限剔除策略，设置只读实例读权重等。
+     * 本接口（ModifyRoGroupInfo）用于更新云数据库只读组的信息。包括设置实例延迟超限剔除策略，设置只读实例读权重，设置复制延迟时间等。
      * @param {ModifyRoGroupInfoRequest} req
      * @param {function(string, ModifyRoGroupInfoResponse):void} cb
      * @public
@@ -1308,6 +1461,17 @@ class CdbClient extends AbstractClient {
     }
 
     /**
+     * 重新负载均衡数据库代理
+     * @param {ReloadBalanceProxyNodeRequest} req
+     * @param {function(string, ReloadBalanceProxyNodeResponse):void} cb
+     * @public
+     */
+    ReloadBalanceProxyNode(req, cb) {
+        let resp = new ReloadBalanceProxyNodeResponse();
+        this.request("ReloadBalanceProxyNode", req, resp, cb);
+    }
+
+    /**
      * 本接口(VerifyRootAccount)用于校验云数据库实例的 ROOT 账号是否有足够的权限进行授权操作。
      * @param {VerifyRootAccountRequest} req
      * @param {function(string, VerifyRootAccountResponse):void} cb
@@ -1319,14 +1483,25 @@ class CdbClient extends AbstractClient {
     }
 
     /**
-     * 启动延迟只读实例的延迟复制。
-     * @param {StartDelayReplicationRequest} req
-     * @param {function(string, StartDelayReplicationResponse):void} cb
+     * 该接口用户查询当前地域用户设置的默认备份下载来源限制。
+     * @param {DescribeBackupDownloadRestrictionRequest} req
+     * @param {function(string, DescribeBackupDownloadRestrictionResponse):void} cb
      * @public
      */
-    StartDelayReplication(req, cb) {
-        let resp = new StartDelayReplicationResponse();
-        this.request("StartDelayReplication", req, resp, cb);
+    DescribeBackupDownloadRestriction(req, cb) {
+        let resp = new DescribeBackupDownloadRestrictionResponse();
+        this.request("DescribeBackupDownloadRestriction", req, resp, cb);
+    }
+
+    /**
+     * 重置实例ROOT账号，初始化账号权限
+     * @param {ResetRootAccountRequest} req
+     * @param {function(string, ResetRootAccountResponse):void} cb
+     * @public
+     */
+    ResetRootAccount(req, cb) {
+        let resp = new ResetRootAccountResponse();
+        this.request("ResetRootAccount", req, resp, cb);
     }
 
     /**
@@ -1341,7 +1516,7 @@ class CdbClient extends AbstractClient {
     }
 
     /**
-     * 本接口(DescribeUploadedFiles)用于查询用户导入的SQL文件列表。
+     * 本接口(DescribeUploadedFiles)用于查询用户导入的SQL文件列表，全地域公共参数Region均为ap-shanghai。
      * @param {DescribeUploadedFilesRequest} req
      * @param {function(string, DescribeUploadedFilesResponse):void} cb
      * @public
@@ -1349,6 +1524,17 @@ class CdbClient extends AbstractClient {
     DescribeUploadedFiles(req, cb) {
         let resp = new DescribeUploadedFilesResponse();
         this.request("DescribeUploadedFiles", req, resp, cb);
+    }
+
+    /**
+     * 查询数据库代理（待下线，替换接口QueryCDBProxy）
+     * @param {DescribeCDBProxyRequest} req
+     * @param {function(string, DescribeCDBProxyResponse):void} cb
+     * @public
+     */
+    DescribeCDBProxy(req, cb) {
+        let resp = new DescribeCDBProxyResponse();
+        this.request("DescribeCDBProxy", req, resp, cb);
     }
 
     /**
@@ -1363,7 +1549,8 @@ class CdbClient extends AbstractClient {
     }
 
     /**
-     * 条件检索实例的慢日志。只允许查看一个月之内的慢日志
+     * 条件检索实例的慢日志。只允许查看一个月之内的慢日志。
+使用时需要注意：可能存在单条慢日志太大，导致整个http请求的回包太大，进而引发接口超时。一旦发生超时，建议您缩小查询时的Limit参数值，从而降低包的大小，让接口能够及时返回内容。
      * @param {DescribeSlowLogDataRequest} req
      * @param {function(string, DescribeSlowLogDataResponse):void} cb
      * @public
@@ -1371,6 +1558,17 @@ class CdbClient extends AbstractClient {
     DescribeSlowLogData(req, cb) {
         let resp = new DescribeSlowLogDataResponse();
         this.request("DescribeSlowLogData", req, resp, cb);
+    }
+
+    /**
+     * 开启 RO 复制，从主实例同步数据。
+     * @param {StartReplicationRequest} req
+     * @param {function(string, StartReplicationResponse):void} cb
+     * @public
+     */
+    StartReplication(req, cb) {
+        let resp = new StartReplicationResponse();
+        this.request("StartReplication", req, resp, cb);
     }
 
     /**
@@ -1393,6 +1591,17 @@ class CdbClient extends AbstractClient {
     ModifyBackupConfig(req, cb) {
         let resp = new ModifyBackupConfigResponse();
         this.request("ModifyBackupConfig", req, resp, cb);
+    }
+
+    /**
+     * 针对主实例申请创建数据库代理。
+     * @param {ApplyCDBProxyRequest} req
+     * @param {function(string, ApplyCDBProxyResponse):void} cb
+     * @public
+     */
+    ApplyCDBProxy(req, cb) {
+        let resp = new ApplyCDBProxyResponse();
+        this.request("ApplyCDBProxy", req, resp, cb);
     }
 
     /**
@@ -1444,6 +1653,17 @@ class CdbClient extends AbstractClient {
     }
 
     /**
+     * 数据库代理配置变更或则升级版本后手动发起立即切换
+     * @param {SwitchCDBProxyRequest} req
+     * @param {function(string, SwitchCDBProxyResponse):void} cb
+     * @public
+     */
+    SwitchCDBProxy(req, cb) {
+        let resp = new SwitchCDBProxyResponse();
+        this.request("SwitchCDBProxy", req, resp, cb);
+    }
+
+    /**
      * 本接口(RenewDBInstance)用于续费云数据库实例，支持付费模式为包年包月的实例。按量计费实例可通过该接口续费为包年包月的实例。
      * @param {RenewDBInstanceRequest} req
      * @param {function(string, RenewDBInstanceResponse):void} cb
@@ -1477,14 +1697,14 @@ class CdbClient extends AbstractClient {
     }
 
     /**
-     * 本接口（DescribeDeviceMonitorInfo）用于查询云数据库物理机当天的监控信息，暂只支持内存488G、硬盘6T的实例查询。
-     * @param {DescribeDeviceMonitorInfoRequest} req
-     * @param {function(string, DescribeDeviceMonitorInfoResponse):void} cb
+     * 该接口用于查询实例本地binlog保留策略。
+     * @param {DescribeLocalBinlogConfigRequest} req
+     * @param {function(string, DescribeLocalBinlogConfigResponse):void} cb
      * @public
      */
-    DescribeDeviceMonitorInfo(req, cb) {
-        let resp = new DescribeDeviceMonitorInfoResponse();
-        this.request("DescribeDeviceMonitorInfo", req, resp, cb);
+    DescribeLocalBinlogConfig(req, cb) {
+        let resp = new DescribeLocalBinlogConfigResponse();
+        this.request("DescribeLocalBinlogConfig", req, resp, cb);
     }
 
     /**
@@ -1512,6 +1732,28 @@ class CdbClient extends AbstractClient {
     }
 
     /**
+     * 查询代理详情
+     * @param {QueryCDBProxyRequest} req
+     * @param {function(string, QueryCDBProxyResponse):void} cb
+     * @public
+     */
+    QueryCDBProxy(req, cb) {
+        let resp = new QueryCDBProxyResponse();
+        this.request("QueryCDBProxy", req, resp, cb);
+    }
+
+    /**
+     * 本接口(ModifyDBInstanceSecurityGroups)用于修改实例绑定的安全组。
+     * @param {ModifyDBInstanceSecurityGroupsRequest} req
+     * @param {function(string, ModifyDBInstanceSecurityGroupsResponse):void} cb
+     * @public
+     */
+    ModifyDBInstanceSecurityGroups(req, cb) {
+        let resp = new ModifyDBInstanceSecurityGroupsResponse();
+        this.request("ModifyDBInstanceSecurityGroups", req, resp, cb);
+    }
+
+    /**
      * 本接口(DeleteAuditRule)用于删除用户的审计规则。
      * @param {DeleteAuditRuleRequest} req
      * @param {function(string, DeleteAuditRuleResponse):void} cb
@@ -1520,6 +1762,17 @@ class CdbClient extends AbstractClient {
     DeleteAuditRule(req, cb) {
         let resp = new DeleteAuditRuleResponse();
         this.request("DeleteAuditRule", req, resp, cb);
+    }
+
+    /**
+     * 获取数据库代理连接池相关规格配置
+     * @param {DescribeProxyConnectionPoolConfRequest} req
+     * @param {function(string, DescribeProxyConnectionPoolConfResponse):void} cb
+     * @public
+     */
+    DescribeProxyConnectionPoolConf(req, cb) {
+        let resp = new DescribeProxyConnectionPoolConfResponse();
+        this.request("DescribeProxyConnectionPoolConf", req, resp, cb);
     }
 
     /**
@@ -1534,14 +1787,14 @@ class CdbClient extends AbstractClient {
     }
 
     /**
-     * 修改延迟只读实例的延迟复制时间。
-     * @param {ModifyRoReplicationDelayRequest} req
-     * @param {function(string, ModifyRoReplicationDelayResponse):void} cb
+     * 升级数据库代理版本
+     * @param {UpgradeCDBProxyVersionRequest} req
+     * @param {function(string, UpgradeCDBProxyVersionResponse):void} cb
      * @public
      */
-    ModifyRoReplicationDelay(req, cb) {
-        let resp = new ModifyRoReplicationDelayResponse();
-        this.request("ModifyRoReplicationDelay", req, resp, cb);
+    UpgradeCDBProxyVersion(req, cb) {
+        let resp = new UpgradeCDBProxyVersionResponse();
+        this.request("UpgradeCDBProxyVersion", req, resp, cb);
     }
 
     /**
@@ -1622,14 +1875,14 @@ class CdbClient extends AbstractClient {
     }
 
     /**
-     * 本接口(ModifyAccountMaxUserConnections)用于修改云数据库账户最大可用连接数。
-     * @param {ModifyAccountMaxUserConnectionsRequest} req
-     * @param {function(string, ModifyAccountMaxUserConnectionsResponse):void} cb
+     * 本接口(DeleteTimeWindow)用于删除云数据库实例的维护时间窗口。删除实例维护时间窗口之后，默认的维护时间窗为 03:00-04:00，即当选择在维护时间窗口内切换访问新实例时，默认会在 03:00-04:00 点进行切换访问新实例。
+     * @param {DeleteTimeWindowRequest} req
+     * @param {function(string, DeleteTimeWindowResponse):void} cb
      * @public
      */
-    ModifyAccountMaxUserConnections(req, cb) {
-        let resp = new ModifyAccountMaxUserConnectionsResponse();
-        this.request("ModifyAccountMaxUserConnections", req, resp, cb);
+    DeleteTimeWindow(req, cb) {
+        let resp = new DeleteTimeWindowResponse();
+        this.request("DeleteTimeWindow", req, resp, cb);
     }
 
 

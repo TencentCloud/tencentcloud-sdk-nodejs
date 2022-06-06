@@ -16,81 +16,95 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const ResetDBInstancePasswordResponse = models.ResetDBInstancePasswordResponse;
 const DescribeSpecInfoRequest = models.DescribeSpecInfoRequest;
-const KillOpsRequest = models.KillOpsRequest;
 const CreateDBInstanceRequest = models.CreateDBInstanceRequest;
-const DescribeSecurityGroupResponse = models.DescribeSecurityGroupResponse;
 const DescribeCurrentOpResponse = models.DescribeCurrentOpResponse;
-const IsolateDBInstanceResponse = models.IsolateDBInstanceResponse;
-const BackupDownloadTaskStatus = models.BackupDownloadTaskStatus;
 const CreateBackupDBInstanceResponse = models.CreateBackupDBInstanceResponse;
 const DBInstancePrice = models.DBInstancePrice;
-const DescribeBackupAccessResponse = models.DescribeBackupAccessResponse;
-const InquirePriceCreateDBInstancesRequest = models.InquirePriceCreateDBInstancesRequest;
-const IsolateDBInstanceRequest = models.IsolateDBInstanceRequest;
+const KillOpsRequest = models.KillOpsRequest;
+const InquirePriceRenewDBInstancesRequest = models.InquirePriceRenewDBInstancesRequest;
+const DescribeSlowLogsRequest = models.DescribeSlowLogsRequest;
+const FlushInstanceRouterConfigResponse = models.FlushInstanceRouterConfigResponse;
+const DescribeSecurityGroupRequest = models.DescribeSecurityGroupRequest;
+const SlowLogPattern = models.SlowLogPattern;
+const AssignProjectResponse = models.AssignProjectResponse;
+const DescribeDBInstanceDealResponse = models.DescribeDBInstanceDealResponse;
+const OfflineIsolatedDBInstanceResponse = models.OfflineIsolatedDBInstanceResponse;
+const IsolateDBInstanceResponse = models.IsolateDBInstanceResponse;
+const InstanceMultiParam = models.InstanceMultiParam;
+const DescribeBackupDownloadTaskResponse = models.DescribeBackupDownloadTaskResponse;
+const FlushInstanceRouterConfigRequest = models.FlushInstanceRouterConfigRequest;
+const DBInstanceInfo = models.DBInstanceInfo;
+const SetAccountUserPrivilegeResponse = models.SetAccountUserPrivilegeResponse;
+const ModifyDBInstanceNetworkAddressRequest = models.ModifyDBInstanceNetworkAddressRequest;
+const CreateDBInstanceHourResponse = models.CreateDBInstanceHourResponse;
+const Operation = models.Operation;
+const SpecItem = models.SpecItem;
+const ModifyDBInstanceNetworkAddressResponse = models.ModifyDBInstanceNetworkAddressResponse;
 const DescribeSlowLogPatternsResponse = models.DescribeSlowLogPatternsResponse;
-const ReplicaSetInfo = models.ReplicaSetInfo;
-const CreateDBInstanceHourRequest = models.CreateDBInstanceHourRequest;
-const AssignProjectRequest = models.AssignProjectRequest;
-const SecurityGroupBound = models.SecurityGroupBound;
-const CreateBackupDownloadTaskResponse = models.CreateBackupDownloadTaskResponse;
-const ClientConnection = models.ClientConnection;
+const BackupDownloadTaskStatus = models.BackupDownloadTaskStatus;
+const DescribeSlowLogsResponse = models.DescribeSlowLogsResponse;
 const InquirePriceModifyDBInstanceSpecRequest = models.InquirePriceModifyDBInstanceSpecRequest;
 const BackupInfo = models.BackupInfo;
-const InquirePriceRenewDBInstancesRequest = models.InquirePriceRenewDBInstancesRequest;
-const DescribeAsyncRequestInfoRequest = models.DescribeAsyncRequestInfoRequest;
-const KillOpsResponse = models.KillOpsResponse;
-const SpecificationInfo = models.SpecificationInfo;
-const CreateBackupDownloadTaskRequest = models.CreateBackupDownloadTaskRequest;
-const DescribeSlowLogPatternsRequest = models.DescribeSlowLogPatternsRequest;
-const DescribeSlowLogsResponse = models.DescribeSlowLogsResponse;
-const FlushInstanceRouterConfigResponse = models.FlushInstanceRouterConfigResponse;
-const InquirePriceModifyDBInstanceSpecResponse = models.InquirePriceModifyDBInstanceSpecResponse;
-const SpecItem = models.SpecItem;
-const DescribeSpecInfoResponse = models.DescribeSpecInfoResponse;
-const InquirePriceRenewDBInstancesResponse = models.InquirePriceRenewDBInstancesResponse;
-const ResetDBInstancePasswordRequest = models.ResetDBInstancePasswordRequest;
-const TagInfo = models.TagInfo;
-const DescribeDBInstancesResponse = models.DescribeDBInstancesResponse;
-const OfflineIsolatedDBInstanceRequest = models.OfflineIsolatedDBInstanceRequest;
-const DescribeCurrentOpRequest = models.DescribeCurrentOpRequest;
-const DescribeDBInstanceDealRequest = models.DescribeDBInstanceDealRequest;
 const DescribeDBInstancesRequest = models.DescribeDBInstancesRequest;
+const CurrentOp = models.CurrentOp;
+const ModifyDBInstanceSpecRequest = models.ModifyDBInstanceSpecRequest;
+const Auth = models.Auth;
+const ResetDBInstancePasswordRequest = models.ResetDBInstancePasswordRequest;
+const InstanceIntegerParam = models.InstanceIntegerParam;
+const ModifyNetworkAddress = models.ModifyNetworkAddress;
 const DescribeAsyncRequestInfoResponse = models.DescribeAsyncRequestInfoResponse;
 const CreateDBInstanceResponse = models.CreateDBInstanceResponse;
-const DescribeSlowLogsRequest = models.DescribeSlowLogsRequest;
-const AssignProjectResponse = models.AssignProjectResponse;
+const InstanceTextParam = models.InstanceTextParam;
+const ModifyDBInstanceSecurityGroupRequest = models.ModifyDBInstanceSecurityGroupRequest;
+const DescribeBackupDownloadTaskRequest = models.DescribeBackupDownloadTaskRequest;
+const DescribeClientConnectionsResponse = models.DescribeClientConnectionsResponse;
+const DescribeDBBackupsResponse = models.DescribeDBBackupsResponse;
+const ModifyDBInstanceSecurityGroupResponse = models.ModifyDBInstanceSecurityGroupResponse;
+const DescribeInstanceParamsRequest = models.DescribeInstanceParamsRequest;
+const InquirePriceCreateDBInstancesResponse = models.InquirePriceCreateDBInstancesResponse;
+const DescribeSecurityGroupResponse = models.DescribeSecurityGroupResponse;
+const SecurityGroup = models.SecurityGroup;
+const DescribeBackupAccessResponse = models.DescribeBackupAccessResponse;
+const ReplicaSetInfo = models.ReplicaSetInfo;
+const ResetDBInstancePasswordResponse = models.ResetDBInstancePasswordResponse;
+const ClientConnection = models.ClientConnection;
+const DescribeDBInstanceDealRequest = models.DescribeDBInstanceDealRequest;
+const DescribeAsyncRequestInfoRequest = models.DescribeAsyncRequestInfoRequest;
+const CreateBackupDownloadTaskRequest = models.CreateBackupDownloadTaskRequest;
+const InquirePriceModifyDBInstanceSpecResponse = models.InquirePriceModifyDBInstanceSpecResponse;
+const SecurityGroupBound = models.SecurityGroupBound;
+const DescribeCurrentOpRequest = models.DescribeCurrentOpRequest;
 const BackupDownloadTask = models.BackupDownloadTask;
 const DescribeDBBackupsRequest = models.DescribeDBBackupsRequest;
 const DescribeClientConnectionsRequest = models.DescribeClientConnectionsRequest;
-const DescribeDBInstanceDealResponse = models.DescribeDBInstanceDealResponse;
-const ModifyDBInstanceSpecResponse = models.ModifyDBInstanceSpecResponse;
-const SecurityGroup = models.SecurityGroup;
-const OfflineIsolatedDBInstanceResponse = models.OfflineIsolatedDBInstanceResponse;
-const DescribeBackupDownloadTaskRequest = models.DescribeBackupDownloadTaskRequest;
+const ShardInfo = models.ShardInfo;
 const DescribeBackupAccessRequest = models.DescribeBackupAccessRequest;
 const RenameInstanceRequest = models.RenameInstanceRequest;
-const DescribeSecurityGroupRequest = models.DescribeSecurityGroupRequest;
 const RenewDBInstancesResponse = models.RenewDBInstancesResponse;
-const DescribeBackupDownloadTaskResponse = models.DescribeBackupDownloadTaskResponse;
+const InstanceEnumParam = models.InstanceEnumParam;
 const RenameInstanceResponse = models.RenameInstanceResponse;
-const DescribeClientConnectionsResponse = models.DescribeClientConnectionsResponse;
-const FlushInstanceRouterConfigRequest = models.FlushInstanceRouterConfigRequest;
-const DBInstanceInfo = models.DBInstanceInfo;
-const CurrentOp = models.CurrentOp;
-const BackupFile = models.BackupFile;
-const DescribeDBBackupsResponse = models.DescribeDBBackupsResponse;
-const InstanceDetail = models.InstanceDetail;
-const ModifyDBInstanceSpecRequest = models.ModifyDBInstanceSpecRequest;
-const SlowLogPattern = models.SlowLogPattern;
-const CreateDBInstanceHourResponse = models.CreateDBInstanceHourResponse;
 const CreateBackupDBInstanceRequest = models.CreateBackupDBInstanceRequest;
-const Operation = models.Operation;
+const SetAccountUserPrivilegeRequest = models.SetAccountUserPrivilegeRequest;
+const KillOpsResponse = models.KillOpsResponse;
+const IsolateDBInstanceRequest = models.IsolateDBInstanceRequest;
+const CreateDBInstanceHourRequest = models.CreateDBInstanceHourRequest;
+const BackupFile = models.BackupFile;
+const AssignProjectRequest = models.AssignProjectRequest;
+const CreateBackupDownloadTaskResponse = models.CreateBackupDownloadTaskResponse;
+const SpecificationInfo = models.SpecificationInfo;
+const DescribeSlowLogPatternsRequest = models.DescribeSlowLogPatternsRequest;
+const DescribeSpecInfoResponse = models.DescribeSpecInfoResponse;
+const InquirePriceRenewDBInstancesResponse = models.InquirePriceRenewDBInstancesResponse;
+const TagInfo = models.TagInfo;
+const DescribeDBInstancesResponse = models.DescribeDBInstancesResponse;
+const OfflineIsolatedDBInstanceRequest = models.OfflineIsolatedDBInstanceRequest;
+const InquirePriceCreateDBInstancesRequest = models.InquirePriceCreateDBInstancesRequest;
+const DescribeInstanceParamsResponse = models.DescribeInstanceParamsResponse;
+const InstanceDetail = models.InstanceDetail;
+const ModifyDBInstanceSpecResponse = models.ModifyDBInstanceSpecResponse;
 const InstanceChargePrepaid = models.InstanceChargePrepaid;
-const InquirePriceCreateDBInstancesResponse = models.InquirePriceCreateDBInstancesResponse;
 const RenewDBInstancesRequest = models.RenewDBInstancesRequest;
-const ShardInfo = models.ShardInfo;
 
 
 /**
@@ -159,6 +173,17 @@ class MongodbClient extends AbstractClient {
     }
 
     /**
+     * 账户权限设置。
+     * @param {SetAccountUserPrivilegeRequest} req
+     * @param {function(string, SetAccountUserPrivilegeResponse):void} cb
+     * @public
+     */
+    SetAccountUserPrivilege(req, cb) {
+        let resp = new SetAccountUserPrivilegeResponse();
+        this.request("SetAccountUserPrivilege", req, resp, cb);
+    }
+
+    /**
      * 在所有mongos上执行FlushRouterConfig命令
      * @param {FlushInstanceRouterConfigRequest} req
      * @param {function(string, FlushInstanceRouterConfigResponse):void} cb
@@ -224,6 +249,17 @@ class MongodbClient extends AbstractClient {
     DescribeAsyncRequestInfo(req, cb) {
         let resp = new DescribeAsyncRequestInfoResponse();
         this.request("DescribeAsyncRequestInfo", req, resp, cb);
+    }
+
+    /**
+     * 本接口(ModifyDBInstanceNetworkAddress)用于修改云数据库实例的网络信息，可进行基础网络转VPC网络和VPC网络之间的变换。
+     * @param {ModifyDBInstanceNetworkAddressRequest} req
+     * @param {function(string, ModifyDBInstanceNetworkAddressResponse):void} cb
+     * @public
+     */
+    ModifyDBInstanceNetworkAddress(req, cb) {
+        let resp = new ModifyDBInstanceNetworkAddressResponse();
+        this.request("ModifyDBInstanceNetworkAddress", req, resp, cb);
     }
 
     /**
@@ -326,6 +362,17 @@ class MongodbClient extends AbstractClient {
     }
 
     /**
+     * 本接口(DescribeInstanceParams)用于查询当前实例可修改的参数列表。
+     * @param {DescribeInstanceParamsRequest} req
+     * @param {function(string, DescribeInstanceParamsResponse):void} cb
+     * @public
+     */
+    DescribeInstanceParams(req, cb) {
+        let resp = new DescribeInstanceParamsResponse();
+        this.request("DescribeInstanceParams", req, resp, cb);
+    }
+
+    /**
      * 本接口(DescribeSpecInfo)用于查询实例的售卖规格。
      * @param {DescribeSpecInfoRequest} req
      * @param {function(string, DescribeSpecInfoResponse):void} cb
@@ -412,6 +459,17 @@ class MongodbClient extends AbstractClient {
     InquirePriceRenewDBInstances(req, cb) {
         let resp = new InquirePriceRenewDBInstancesResponse();
         this.request("InquirePriceRenewDBInstances", req, resp, cb);
+    }
+
+    /**
+     * 修改实例绑定的安全组
+     * @param {ModifyDBInstanceSecurityGroupRequest} req
+     * @param {function(string, ModifyDBInstanceSecurityGroupResponse):void} cb
+     * @public
+     */
+    ModifyDBInstanceSecurityGroup(req, cb) {
+        let resp = new ModifyDBInstanceSecurityGroupResponse();
+        this.request("ModifyDBInstanceSecurityGroup", req, resp, cb);
     }
 
 

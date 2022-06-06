@@ -18,6 +18,7 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const DescribeResourceConfigsResponse = models.DescribeResourceConfigsResponse;
 const CreateResourceRequest = models.CreateResourceRequest;
+const CheckSavepointRequest = models.CheckSavepointRequest;
 const CreateJobRequest = models.CreateJobRequest;
 const ResourceRefDetail = models.ResourceRefDetail;
 const StopJobsRequest = models.StopJobsRequest;
@@ -31,6 +32,7 @@ const CreateJobConfigRequest = models.CreateJobConfigRequest;
 const CreateResourceConfigRequest = models.CreateResourceConfigRequest;
 const Property = models.Property;
 const DeleteTableConfigRequest = models.DeleteTableConfigRequest;
+const Savepoint = models.Savepoint;
 const SystemResourceItem = models.SystemResourceItem;
 const DescribeResourceRelatedJobsRequest = models.DescribeResourceRelatedJobsRequest;
 const DeleteResourcesResponse = models.DeleteResourcesResponse;
@@ -38,7 +40,10 @@ const CreateJobConfigResponse = models.CreateJobConfigResponse;
 const ResourceConfigItem = models.ResourceConfigItem;
 const DescribeResourcesRequest = models.DescribeResourcesRequest;
 const ResourceLocParam = models.ResourceLocParam;
+const DescribeJobSavepointRequest = models.DescribeJobSavepointRequest;
+const CheckSavepointResponse = models.CheckSavepointResponse;
 const DeleteResourceConfigsRequest = models.DeleteResourceConfigsRequest;
+const DescribeJobSavepointResponse = models.DescribeJobSavepointResponse;
 const RunJobsResponse = models.RunJobsResponse;
 const Filter = models.Filter;
 const DeleteResourcesRequest = models.DeleteResourcesRequest;
@@ -117,14 +122,14 @@ class OceanusClient extends AbstractClient {
     }
 
     /**
-     * 获取资源关联作业信息
-     * @param {DescribeResourceRelatedJobsRequest} req
-     * @param {function(string, DescribeResourceRelatedJobsResponse):void} cb
+     * 查找Savepoint列表
+     * @param {DescribeJobSavepointRequest} req
+     * @param {function(string, DescribeJobSavepointResponse):void} cb
      * @public
      */
-    DescribeResourceRelatedJobs(req, cb) {
-        let resp = new DescribeResourceRelatedJobsResponse();
-        this.request("DescribeResourceRelatedJobs", req, resp, cb);
+    DescribeJobSavepoint(req, cb) {
+        let resp = new DescribeJobSavepointResponse();
+        this.request("DescribeJobSavepoint", req, resp, cb);
     }
 
     /**
@@ -147,6 +152,17 @@ class OceanusClient extends AbstractClient {
     DeleteResources(req, cb) {
         let resp = new DeleteResourcesResponse();
         this.request("DeleteResources", req, resp, cb);
+    }
+
+    /**
+     * 获取资源关联作业信息
+     * @param {DescribeResourceRelatedJobsRequest} req
+     * @param {function(string, DescribeResourceRelatedJobsResponse):void} cb
+     * @public
+     */
+    DescribeResourceRelatedJobs(req, cb) {
+        let resp = new DescribeResourceRelatedJobsResponse();
+        this.request("DescribeResourceRelatedJobs", req, resp, cb);
     }
 
     /**
@@ -180,6 +196,17 @@ class OceanusClient extends AbstractClient {
     DeleteResourceConfigs(req, cb) {
         let resp = new DeleteResourceConfigsResponse();
         this.request("DeleteResourceConfigs", req, resp, cb);
+    }
+
+    /**
+     * 检查快照是否可用
+     * @param {CheckSavepointRequest} req
+     * @param {function(string, CheckSavepointResponse):void} cb
+     * @public
+     */
+    CheckSavepoint(req, cb) {
+        let resp = new CheckSavepointResponse();
+        this.request("CheckSavepoint", req, resp, cb);
     }
 
     /**
