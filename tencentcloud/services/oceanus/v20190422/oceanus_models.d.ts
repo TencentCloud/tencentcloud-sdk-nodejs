@@ -559,6 +559,51 @@ export interface ResourceConfigItem {
     RefJobCount: number;
 }
 /**
+ * TriggerJobSavepoint返回参数结构体
+ */
+export interface TriggerJobSavepointResponse {
+    /**
+      * 是否成功
+      */
+    SavepointTrigger: boolean;
+    /**
+      * 错误消息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ErrorMsg: string;
+    /**
+      * 快照路径
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FinalSavepointPath: string;
+    /**
+      * 快照 ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SavepointId: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * TriggerJobSavepoint请求参数结构体
+ */
+export interface TriggerJobSavepointRequest {
+    /**
+      * 作业 SerialId
+      */
+    JobId: string;
+    /**
+      * 描述
+      */
+    Description?: string;
+    /**
+      * 工作空间 SerialId
+      */
+    WorkSpaceId?: string;
+}
+/**
  * DescribeResources请求参数结构体
  */
 export interface DescribeResourcesRequest {

@@ -372,6 +372,8 @@ var tms_1 = require("./tms");
 Object.defineProperty(exports, "tms", { enumerable: true, get: function () { return tms_1.tms; } });
 var tmt_1 = require("./tmt");
 Object.defineProperty(exports, "tmt", { enumerable: true, get: function () { return tmt_1.tmt; } });
+var trp_1 = require("./trp");
+Object.defineProperty(exports, "trp", { enumerable: true, get: function () { return trp_1.trp; } });
 var trtc_1 = require("./trtc");
 Object.defineProperty(exports, "trtc", { enumerable: true, get: function () { return trtc_1.trtc; } });
 var tse_1 = require("./tse");

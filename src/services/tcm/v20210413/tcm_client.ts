@@ -19,6 +19,7 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   HorizontalPodAutoscalerSpec,
+  CustomPromConfig,
   Service,
   MeshConfig,
   LoadBalancerStatus,

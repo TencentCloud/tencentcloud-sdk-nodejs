@@ -40,6 +40,8 @@ import {
   DeleteResourcesResponse,
   CreateJobConfigResponse,
   ResourceConfigItem,
+  TriggerJobSavepointResponse,
+  TriggerJobSavepointRequest,
   DescribeResourcesRequest,
   ResourceLocParam,
   DescribeJobSavepointRequest,
@@ -86,6 +88,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: StopJobsResponse) => void
   ): Promise<StopJobsResponse> {
     return this.request("StopJobs", req, cb)
+  }
+
+  /**
+   * 触发Savepoint
+   */
+  async TriggerJobSavepoint(
+    req: TriggerJobSavepointRequest,
+    cb?: (error: string, rep: TriggerJobSavepointResponse) => void
+  ): Promise<TriggerJobSavepointResponse> {
+    return this.request("TriggerJobSavepoint", req, cb)
   }
 
   /**

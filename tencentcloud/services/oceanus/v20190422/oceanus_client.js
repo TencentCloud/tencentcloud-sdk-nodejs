@@ -34,6 +34,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("StopJobs", req, cb);
     }
     /**
+     * 触发Savepoint
+     */
+    async TriggerJobSavepoint(req, cb) {
+        return this.request("TriggerJobSavepoint", req, cb);
+    }
+    /**
      * 描述资源接口
      */
     async DescribeResources(req, cb) {

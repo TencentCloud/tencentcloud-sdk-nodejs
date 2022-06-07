@@ -28,6 +28,14 @@ export interface DescribeTaskStrategyRisksRequest {
       * 偏移量,默认0
       */
     Offset?: number;
+    /**
+      * 环境
+      */
+    Env?: string;
+    /**
+      * 任务类型
+      */
+    TaskType?: string;
 }
 /**
  * 评估项信息
@@ -104,6 +112,11 @@ export interface DescribeTaskStrategyRisksResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Risks: string;
+    /**
+      * 巡检资源数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ResourceCount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

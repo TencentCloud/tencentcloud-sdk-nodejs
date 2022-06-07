@@ -221,6 +221,10 @@ export interface SubnetInfo {
     SubnetId?: string;
 }
 /**
+ * 用户管理列表过滤器
+ */
+export declare type UserManagerFilter = null;
+/**
  * 元数据库信息
  */
 export interface MetaDbInfo {
@@ -1345,6 +1349,22 @@ export interface PodParameter {
  */
 export interface DescribeUsersForUserManagerRequest {
     /**
+      * 集群实例ID
+      */
+    InstanceId: string;
+    /**
+      * 页码
+      */
+    PageNo: number;
+    /**
+      * 分页的大小
+      */
+    PageSize: number;
+    /**
+      * 查询用户列表过滤器
+      */
+    UserManagerFilter?: UserManagerFilter;
+    /**
       * 是否需要keytab文件的信息，仅对开启kerberos的集群有效，默认为false
       */
     NeedKeytabInfo?: boolean;
@@ -2294,6 +2314,15 @@ export interface DescribeInstancesResponse {
  */
 export interface DescribeUsersForUserManagerResponse {
     /**
+      * 总数
+      */
+    TotalCnt: number;
+    /**
+      * 用户信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UserManagerUserList: Array<UserManagerUserBriefInfo>;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
@@ -2467,6 +2496,10 @@ export interface MultiDiskMC {
  * AddUsersForUserManager请求参数结构体
  */
 export interface AddUsersForUserManagerRequest {
+    /**
+      * 集群字符串ID
+      */
+    InstanceId: string;
     /**
       * 用户信息列表
       */
@@ -2996,6 +3029,37 @@ export interface DescribeInstanceRenewNodesResponse {
     RequestId?: string;
 }
 /**
+ * 用户管理中用户的简要信息
+ */
+export interface UserManagerUserBriefInfo {
+    /**
+      * 用户名
+      */
+    UserName: string;
+    /**
+      * 用户所属的组
+      */
+    UserGroup: string;
+    /**
+      * Manager表示管理员、NormalUser表示普通用户
+      */
+    UserType: string;
+    /**
+      * 用户创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreateTime: string;
+    /**
+      * 是否可以下载用户对应的keytab文件，对开启kerberos的集群才有意义
+      */
+    SupportDownLoadKeyTab: boolean;
+    /**
+      * keytab文件的下载地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DownLoadKeyTabUrl: string;
+}
+/**
  * 磁盘组。
  */
 export interface DiskGroup {
@@ -3067,6 +3131,16 @@ export interface ShortNodeInfo {
  * AddUsersForUserManager返回参数结构体
  */
 export interface AddUsersForUserManagerResponse {
+    /**
+      * 添加成功的用户列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SuccessUserList: Array<string>;
+    /**
+      * 添加失败的用户列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FailedUserList: Array<string>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

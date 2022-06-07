@@ -36,6 +36,41 @@ export interface HorizontalPodAutoscalerSpec {
 }
 
 /**
+ * 第三方 Prometheus 配置参数
+ */
+export interface CustomPromConfig {
+  /**
+   * Prometheus 访问地址
+   */
+  Url: string
+
+  /**
+   * 认证方式
+   */
+  AuthType: string
+
+  /**
+   * 是否公网地址，缺省为 false
+   */
+  IsPublicAddr?: boolean
+
+  /**
+   * 虚拟网络id
+   */
+  VpcId?: string
+
+  /**
+   * Prometheus 用户名（用于 basic 认证方式）
+   */
+  Username?: string
+
+  /**
+   * Prometheus 密码（用于 basic 认证方式）
+   */
+  Password?: string
+}
+
+/**
  * Service信息
  */
 export interface Service {
@@ -637,6 +672,12 @@ export interface PrometheusConfig {
    * 关联已存在实例Id，不填则默认创建
    */
   InstanceId?: string
+
+  /**
+      * 第三方 Prometheus
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CustomProm?: CustomPromConfig
 }
 
 /**
@@ -977,6 +1018,21 @@ export interface AccessLogConfig {
    * 日志格式
    */
   Format?: string
+
+  /**
+   * GRPC第三方服务器地址
+   */
+  Address?: string
+
+  /**
+   * 是否启用GRPC第三方服务器
+   */
+  EnableServer?: boolean
+
+  /**
+   * 是否启用标准输出
+   */
+  EnableStdout?: boolean
 }
 
 /**

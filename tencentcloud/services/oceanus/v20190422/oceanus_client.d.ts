@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeResourceConfigsResponse, CreateResourceRequest, CheckSavepointRequest, CreateJobRequest, StopJobsRequest, CreateJobResponse, RunJobsRequest, DeleteTableConfigResponse, CreateResourceConfigResponse, CreateJobConfigRequest, CreateResourceConfigRequest, DeleteTableConfigRequest, DescribeResourceRelatedJobsRequest, DeleteResourcesResponse, CreateJobConfigResponse, DescribeResourcesRequest, DescribeJobSavepointRequest, CheckSavepointResponse, DeleteResourceConfigsRequest, DescribeJobSavepointResponse, RunJobsResponse, DeleteResourcesRequest, DescribeJobsResponse, StopJobsResponse, CreateResourceResponse, DescribeSystemResourcesRequest, DescribeJobConfigsRequest, DescribeResourcesResponse, DescribeJobConfigsResponse, DeleteResourceConfigsResponse, DescribeResourceRelatedJobsResponse, DescribeSystemResourcesResponse, DescribeJobsRequest, DescribeResourceConfigsRequest } from "./oceanus_models";
+import { DescribeResourceConfigsResponse, CreateResourceRequest, CheckSavepointRequest, CreateJobRequest, StopJobsRequest, CreateJobResponse, RunJobsRequest, DeleteTableConfigResponse, CreateResourceConfigResponse, CreateJobConfigRequest, CreateResourceConfigRequest, DeleteTableConfigRequest, DescribeResourceRelatedJobsRequest, DeleteResourcesResponse, CreateJobConfigResponse, TriggerJobSavepointResponse, TriggerJobSavepointRequest, DescribeResourcesRequest, DescribeJobSavepointRequest, CheckSavepointResponse, DeleteResourceConfigsRequest, DescribeJobSavepointResponse, RunJobsResponse, DeleteResourcesRequest, DescribeJobsResponse, StopJobsResponse, CreateResourceResponse, DescribeSystemResourcesRequest, DescribeJobConfigsRequest, DescribeResourcesResponse, DescribeJobConfigsResponse, DeleteResourceConfigsResponse, DescribeResourceRelatedJobsResponse, DescribeSystemResourcesResponse, DescribeJobsRequest, DescribeResourceConfigsRequest } from "./oceanus_models";
 /**
  * oceanus client
  * @class
@@ -11,6 +11,10 @@ export declare class Client extends AbstractClient {
      * 批量停止作业，批量操作数量上限为20
      */
     StopJobs(req: StopJobsRequest, cb?: (error: string, rep: StopJobsResponse) => void): Promise<StopJobsResponse>;
+    /**
+     * 触发Savepoint
+     */
+    TriggerJobSavepoint(req: TriggerJobSavepointRequest, cb?: (error: string, rep: TriggerJobSavepointResponse) => void): Promise<TriggerJobSavepointResponse>;
     /**
      * 描述资源接口
      */

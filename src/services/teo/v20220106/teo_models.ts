@@ -45,6 +45,84 @@ export interface HostCertSetting {
 }
 
 /**
+ * ACL用户规则
+ */
+export interface ACLUserRule {
+  /**
+   * 规则名
+   */
+  RuleName: string
+
+  /**
+   * 动作
+   */
+  Action: string
+
+  /**
+   * 状态
+   */
+  RuleStatus: string
+
+  /**
+   * ACL规则
+   */
+  Conditions: Array<ACLCondition>
+
+  /**
+   * 规则优先级
+   */
+  RulePriority: number
+
+  /**
+      * 规则id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RuleID?: number
+
+  /**
+      * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UpdateTime?: string
+
+  /**
+      * ip封禁的惩罚时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PunishTime?: number
+
+  /**
+      * ip封禁的惩罚时间单位
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PunishTimeUnit?: string
+
+  /**
+      * 自定义返回页面的名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Name?: string
+
+  /**
+      * 自定义返回页面的实例id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PageId?: number
+
+  /**
+      * 重定向时候的地址，必须为本用户接入的站点子域名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RedirectUrl?: string
+
+  /**
+      * 重定向时候的返回码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ResponseCode?: number
+}
+
+/**
  * ModifyDefaultCertificate请求参数结构体
  */
 export interface ModifyDefaultCertificateRequest {
@@ -158,6 +236,26 @@ export interface DescribeZoneDetailsResponse {
 }
 
 /**
+ * DescribeOriginGroup返回参数结构体
+ */
+export interface DescribeOriginGroupResponse {
+  /**
+   * 源站组信息
+   */
+  Data: Array<OriginGroup>
+
+  /**
+   * 记录总数
+   */
+  TotalCount: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteApplicationProxy返回参数结构体
  */
 export interface DeleteApplicationProxyResponse {
@@ -207,47 +305,136 @@ off：关闭
 }
 
 /**
- * ScanDnsRecords返回参数结构体
+ * 源站组查询过滤参数
  */
-export interface ScanDnsRecordsResponse {
+export interface OriginFilter {
   /**
-      * 扫描状态
-- doing 扫描中
-- done 扫描完成
-      */
-  Status: string
-
-  /**
-   * 扫描后添加的记录数
+   * 要过滤的字段，支持：name
    */
-  RecordsAdded: number
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 站点查询过滤条件
- */
-export interface ZoneFilter {
-  /**
-      * 过滤字段名，支持的列表如下：
-- name: 站点名。
-- status: 站点状态
-      */
   Name: string
 
   /**
-   * 过滤字段值
+   * 要过滤的值
    */
-  Values: Array<string>
+  Value: string
+}
+
+/**
+ * DescribeOriginGroupDetail请求参数结构体
+ */
+export interface DescribeOriginGroupDetailRequest {
+  /**
+   * 源站组ID
+   */
+  OriginId: string
 
   /**
-   * 是否启用模糊查询，仅支持过滤字段名为name。模糊查询时，Values长度最大为1
+   * 站点ID
    */
-  Fuzzy?: boolean
+  ZoneId: string
+}
+
+/**
+ * DDoS防护分区
+ */
+export interface ShieldArea {
+  /**
+   * 一级域名id
+   */
+  ZoneId: string
+
+  /**
+   * 策略id
+   */
+  PolicyId: number
+
+  /**
+   * 防护类型 domain/application
+   */
+  Type: string
+
+  /**
+      * 四层应用名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EntityName?: string
+
+  /**
+      * 7层域名参数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Application?: Array<DDoSApplication>
+
+  /**
+      * 四层tcp转发规则数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TcpNum?: number
+
+  /**
+      * 四层udp转发规则数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UdpNum?: number
+
+  /**
+      * 实例名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Entity?: string
+
+  /**
+      * 是否为共享资源客户，注意共享资源用户不可以切换代理模式，true-是；false-否
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Share?: boolean
+}
+
+/**
+ * Ddos防护配置
+ */
+export interface DdosRule {
+  /**
+      * DDoS防护等级
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DdosStatusInfo?: DDoSStatusInfo
+
+  /**
+      * DDoS地域封禁
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DdosGeoIp?: DDoSGeoIp
+
+  /**
+      * DDoS黑白名单
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DdosAllowBlock?: DdosAllowBlock
+
+  /**
+      * DDoS 协议封禁+连接防护
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DdosAntiPly?: DDoSAntiPly
+
+  /**
+      * DDoS特征过滤
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DdosPacketFilter?: DdosPacketFilter
+
+  /**
+      * DDoS端口过滤
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DdosAcl?: DdosAcls
+
+  /**
+      * DDoS开关 on-开启；off-关闭
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Switch?: string
 }
 
 /**
@@ -298,6 +485,36 @@ export interface DeleteApplicationProxyRequest {
    * 代理ID
    */
   ProxyId: string
+}
+
+/**
+ * CreateCustomErrorPage返回参数结构体
+ */
+export interface CreateCustomErrorPageResponse {
+  /**
+   * 自定义页面上传后的唯一id
+   */
+  PageId: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ReclaimZone返回参数结构体
+ */
+export interface ReclaimZoneResponse {
+  /**
+   * 站点名称
+   */
+  Name: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -370,6 +587,66 @@ export interface ModifyDnsRecordRequest {
    * 代理模式
    */
   Mode?: string
+}
+
+/**
+ * DDoS配置端口过滤
+ */
+export interface DDoSAcl {
+  /**
+   * 目的端口end
+   */
+  DportEnd?: number
+
+  /**
+   * 目的端口start
+   */
+  DportStart?: number
+
+  /**
+   * 源端口end
+   */
+  SportEnd?: number
+
+  /**
+   * 源端口start
+   */
+  SportStart?: number
+
+  /**
+   * 协议 'tcp', 'udp', 'all'
+   */
+  Protocol?: string
+
+  /**
+   * 动作  drop-丢弃,；transmit-放行； forward-继续防护
+   */
+  Action?: string
+
+  /**
+   * 是否为系统配置 0-人工配置；1-系统配置
+   */
+  Default?: number
+}
+
+/**
+ * ModifySecurityPolicy请求参数结构体
+ */
+export interface ModifySecurityPolicyRequest {
+  /**
+   * 一级域名
+   */
+  ZoneId: string
+
+  /**
+   * 二级域名/应用名
+   */
+  Entity: string
+
+  /**
+   * 安全配置
+   */
+  Config: SecurityConfig
 }
 
 /**
@@ -548,18 +825,18 @@ export interface ModifyZoneSettingRequest {
 }
 
 /**
- * DescribeApplicationProxyDetail请求参数结构体
+ * ddos特征过滤
  */
-export interface DescribeApplicationProxyDetailRequest {
+export interface DdosPacketFilter {
   /**
-   * 站点ID
+   * 特征过滤清空标识，off清空处理
    */
-  ZoneId: string
+  Switch?: string
 
   /**
-   * 实例ID
+   * 特征过滤数组
    */
-  ProxyId: string
+  PacketFilter?: Array<DDoSFeaturesFilter>
 }
 
 /**
@@ -606,17 +883,18 @@ off：关闭
 }
 
 /**
- * 源站配置。
+ * ModifyOriginGroup返回参数结构体
  */
-export interface Origin {
+export interface ModifyOriginGroupResponse {
   /**
-      * 回源协议配置
-http：强制 http 回源
-follow：协议跟随回源
-https：强制 https 回源，https 回源时仅支持源站 443 端口
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  OriginPullProtocol?: string
+   * 源站组ID
+   */
+  OriginId: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -655,6 +933,77 @@ export interface Task {
 }
 
 /**
+ * 源站配置。
+ */
+export interface Origin {
+  /**
+      * 回源协议配置
+http：强制 http 回源
+follow：协议跟随回源
+https：强制 https 回源，https 回源时仅支持源站 443 端口
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OriginPullProtocol?: string
+}
+
+/**
+ * ModifyZoneStatus返回参数结构体
+ */
+export interface ModifyZoneStatusResponse {
+  /**
+   * 站点 ID
+   */
+  Id: string
+
+  /**
+   * 站点名称
+   */
+  Name: string
+
+  /**
+      * 站点状态
+- false 开启站点
+- true 关闭站点
+      */
+  Paused: boolean
+
+  /**
+   * 更新时间
+   */
+  ModifiedOn: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeSecurityPolicyManagedRules请求参数结构体
+ */
+export interface DescribeSecurityPolicyManagedRulesRequest {
+  /**
+   * 一级域名
+   */
+  ZoneId: string
+
+  /**
+   * 子域名/应用名
+   */
+  Entity: string
+
+  /**
+   * 页数
+   */
+  Page: number
+
+  /**
+   * 每页数量
+   */
+  PerPage: number
+}
+
+/**
  * 查询结果排序条件。
  */
 export interface CertSort {
@@ -673,6 +1022,46 @@ certDeployTime,  证书部署时间
 }
 
 /**
+ * ModifySecurityPolicy返回参数结构体
+ */
+export interface ModifySecurityPolicyResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyDDoSPolicyHost请求参数结构体
+ */
+export interface ModifyDDoSPolicyHostRequest {
+  /**
+   * 站点id
+   */
+  ZoneId: string
+
+  /**
+   * 二级域名
+   */
+  Host: string
+
+  /**
+   * 加速开关 on-开启加速；off-关闭加速（AccelerateType：on，SecurityType：on，安全加速，未开防护增强；AccelerateType：off，SecurityType：on，安全加速，开启防护增强；AccelerateType：on，SecurityType：off，内容加速，未开防护增强）
+   */
+  AccelerateType: string
+
+  /**
+   * 策略id
+   */
+  PolicyId: number
+
+  /**
+   * 安全开关 on-开启安全；off-关闭安全（AccelerateType：on，SecurityType：on，安全加速，未开防护增强；AccelerateType：off，SecurityType：on，安全加速，开启防护增强；AccelerateType：on，SecurityType：off，内容加速，未开防护增强）
+   */
+  SecurityType?: string
+}
+
+/**
  * DescribeHostsSetting返回参数结构体
  */
 export interface DescribeHostsSettingResponse {
@@ -685,6 +1074,26 @@ export interface DescribeHostsSettingResponse {
    * 域名数量
    */
   TotalNumber: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeSecurityPolicyRegions返回参数结构体
+ */
+export interface DescribeSecurityPolicyRegionsResponse {
+  /**
+   * 总数
+   */
+  Count: number
+
+  /**
+   * 地域信息
+   */
+  GeoIp: Array<GeoIp>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -793,18 +1202,51 @@ export interface DeleteZoneResponse {
 }
 
 /**
- * ReclaimZone返回参数结构体
+ * ModifyHostsCertificate请求参数结构体
  */
-export interface ReclaimZoneResponse {
+export interface ModifyHostsCertificateRequest {
   /**
-   * 站点名称
+   * Zone ID
    */
-  Name: string
+  ZoneId: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 本次变更的域名
    */
-  RequestId?: string
+  Hosts: Array<string>
+
+  /**
+   * 证书信息, 只需要传入 CertId 即可, 如果为空, 则使用默认证书
+   */
+  CertInfo?: Array<ServerCertInfo>
+}
+
+/**
+ * Hsts配置
+ */
+export interface Hsts {
+  /**
+   * 是否开启，on或off。
+   */
+  Switch: string
+
+  /**
+      * MaxAge数值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MaxAge?: number
+
+  /**
+      * 是否包含子域名，on或off。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IncludeSubDomains?: string
+
+  /**
+      * 是否预加载，on或off。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Preload?: string
 }
 
 /**
@@ -844,13 +1286,43 @@ export interface DeleteApplicationProxyRuleResponse {
 }
 
 /**
- * DescribeIdentification请求参数结构体
+ * ddos端口过滤
  */
-export interface DescribeIdentificationRequest {
+export interface DdosAcls {
   /**
-   * 站点名称
+   * 开关 off清空规则标识
    */
-  Name: string
+  Switch?: string
+
+  /**
+   * 端口过了详细参数
+   */
+  Acl?: Array<DDoSAcl>
+}
+
+/**
+ * DeleteOriginGroup请求参数结构体
+ */
+export interface DeleteOriginGroupRequest {
+  /**
+   * 源站组ID
+   */
+  OriginId: string
+
+  /**
+   * 站点ID
+   */
+  ZoneId: string
+}
+
+/**
+ * ModifyHostsCertificate返回参数结构体
+ */
+export interface ModifyHostsCertificateResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -926,6 +1398,27 @@ export interface L7OfflineLog {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   LogPacketName: string
+}
+
+/**
+ * Waf规则
+ */
+export interface WafRule {
+  /**
+   * 黑名单
+   */
+  BlockRuleIDs: Array<number>
+
+  /**
+   * id的开关
+   */
+  Switch: string
+
+  /**
+      * 观察模式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ObserveRuleIDs?: Array<number>
 }
 
 /**
@@ -1095,6 +1588,16 @@ export interface Zone {
 }
 
 /**
+ * DescribeSecurityPolicyManagedRulesId请求参数结构体
+ */
+export interface DescribeSecurityPolicyManagedRulesIdRequest {
+  /**
+   * 规则id集合
+   */
+  RuleId: Array<number>
+}
+
+/**
  * ModifyApplicationProxyStatus请求参数结构体
  */
 export interface ModifyApplicationProxyStatusRequest {
@@ -1170,6 +1673,16 @@ export interface CertFilter {
 }
 
 /**
+ * DescribeIdentification请求参数结构体
+ */
+export interface DescribeIdentificationRequest {
+  /**
+   * 站点名称
+   */
+  Name: string
+}
+
+/**
  * ModifyLoadBalancingStatus请求参数结构体
  */
 export interface ModifyLoadBalancingStatusRequest {
@@ -1209,6 +1722,21 @@ export interface DescribeCnameStatusResponse {
    * 状态列表
    */
   Status: Array<CnameStatus>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteDnsRecords返回参数结构体
+ */
+export interface DeleteDnsRecordsResponse {
+  /**
+   * 记录 ID
+   */
+  Ids: Array<string>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1314,6 +1842,26 @@ OFF：不传递
 }
 
 /**
+ * DDoS封禁等级
+ */
+export interface DDoSStatusInfo {
+  /**
+   * 不支持，填off
+   */
+  AiStatus: string
+
+  /**
+   * 用户appid
+   */
+  Appid: string
+
+  /**
+   * 策略等级 low, middle, high
+   */
+  PlyLevel: string
+}
+
+/**
  * CNAME 状态
  */
 export interface CnameStatus {
@@ -1353,43 +1901,77 @@ export interface ModifyZoneSettingResponse {
 }
 
 /**
- * DownloadL7Logs返回参数结构体
+ * DescribeZones返回参数结构体
  */
-export interface DownloadL7LogsResponse {
+export interface DescribeZonesResponse {
   /**
-      * 七层离线日志data
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Data: Array<L7OfflineLog>
+   * 符合条件的站点数
+   */
+  TotalCount: number
 
   /**
-      * 页面大小
+      * 站点详细信息列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  PageSize: number
-
-  /**
-      * 页号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  PageNo: number
-
-  /**
-      * 总页数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Pages: number
-
-  /**
-      * 总条数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  TotalSize: number
+  Zones: Array<Zone>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ScanDnsRecords返回参数结构体
+ */
+export interface ScanDnsRecordsResponse {
+  /**
+      * 扫描状态
+- doing 扫描中
+- done 扫描完成
+      */
+  Status: string
+
+  /**
+   * 扫描后添加的记录数
+   */
+  RecordsAdded: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 门神配置
+ */
+export interface WafConfig {
+  /**
+   * 开关
+   */
+  Switch: string
+
+  /**
+   * 防护级别，loose/normal/strict/stricter/custom
+   */
+  Level: string
+
+  /**
+   * 模式 block-阻断；observe-观察模式；close-关闭
+   */
+  Mode: string
+
+  /**
+   * 门神黑白名单
+   */
+  WafRules: WafRule
+
+  /**
+      * AI规则引擎防护
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AiRule?: AiRule
 }
 
 /**
@@ -1522,6 +2104,16 @@ deployed: 已部署
 }
 
 /**
+ * DDoS配置
+ */
+export interface DDoSConfig {
+  /**
+   * 开关
+   */
+  Switch: string
+}
+
+/**
  * DescribeZones请求参数结构体
  */
 export interface DescribeZonesRequest {
@@ -1647,20 +2239,28 @@ off：关闭
 }
 
 /**
- * 自定义 nameservers
+ * 精准防护条件
  */
-export interface VanityNameServers {
+export interface ACLCondition {
   /**
-      * 自定义 ns 开关
-- on 开启
-- off 关闭
-      */
-  Switch: string
+   * 匹配字段
+   */
+  MatchFrom: string
 
   /**
-   * 自定义 ns 列表
+   * 匹配字符串
    */
-  Servers?: Array<string>
+  MatchParam: string
+
+  /**
+   * 匹配关系
+   */
+  Operator: string
+
+  /**
+   * 匹配内容
+   */
+  MatchContent: string
 }
 
 /**
@@ -1704,6 +2304,16 @@ export interface CreateLoadBalancingResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 功能总开关
+ */
+export interface SwitchConfig {
+  /**
+   * Web类型的安全总开关：Web基础防护，自定义规则，速率限制
+   */
+  WebSwitch: string
 }
 
 /**
@@ -1905,54 +2515,94 @@ proxied: 开启代理
 }
 
 /**
- * DescribePrefetchTasks请求参数结构体
+ * 安全配置
  */
-export interface DescribePrefetchTasksRequest {
+export interface SecurityConfig {
   /**
-   * 任务ID
-   */
-  JobId?: string
-
-  /**
-   * 查询起始时间
-   */
-  StartTime?: string
-
-  /**
-   * 查询结束时间
-   */
-  EndTime?: string
-
-  /**
-   * 查询起始偏移量
-   */
-  Offset?: number
-
-  /**
-   * 查询最大返回的结果条数
-   */
-  Limit?: number
-
-  /**
-      * 查询的状态
-允许的值为：processing、success、failed、timeout、invalid
+      * 门神配置
+注意：此字段可能返回 null，表示取不到有效值。
       */
-  Statuses?: Array<string>
+  WafConfig?: WafConfig
 
   /**
-   * zone id
-   */
-  ZoneId?: string
+      * RateLimit配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RateLimitConfig?: RateLimitConfig
 
   /**
-   * 查询的域名列表
-   */
-  Domains?: Array<string>
+      * DDoS配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DdosConfig?: DDoSConfig
 
   /**
-   * 查询的资源
+      * ACL配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AclConfig?: AclConfig
+
+  /**
+      * Bot配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BotConfig?: BotConfig
+
+  /**
+      * 总开关
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SwitchConfig?: SwitchConfig
+}
+
+/**
+ * bot托管规则详情
+ */
+export interface BotManagedRuleDetail {
+  /**
+   * 规则ID
    */
-  Target?: string
+  RuleId: number
+
+  /**
+   * 规则描述
+   */
+  Description: string
+
+  /**
+   * 规则分类
+   */
+  RuleTypeName: string
+
+  /**
+   * 该规则开启/关闭
+   */
+  Status: string
+}
+
+/**
+ * DescribeBotManagedRules返回参数结构体
+ */
+export interface DescribeBotManagedRulesResponse {
+  /**
+   * 本次返回的规则数
+   */
+  Count: number
+
+  /**
+   * Bot规则
+   */
+  Rules: Array<BotManagedRuleDetail>
+
+  /**
+   * 总规则数
+   */
+  Total: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2044,6 +2694,91 @@ pending: 不生效
 }
 
 /**
+ * DDoS协议防护+连接防护
+ */
+export interface DDoSAntiPly {
+  /**
+   * tcp协议封禁 on-开；off-关
+   */
+  DropTcp: string
+
+  /**
+   * udp协议封禁 on-开；off-关
+   */
+  DropUdp: string
+
+  /**
+   * icmp协议封禁 on-开；off-关
+   */
+  DropIcmp: string
+
+  /**
+   * 其他协议封禁 on-开；off-关
+   */
+  DropOther: string
+
+  /**
+   * 源每秒新建数限制  0-4294967295
+   */
+  SourceCreateLimit: number
+
+  /**
+   * 源并发连接控制 0-4294967295
+   */
+  SourceConnectLimit: number
+
+  /**
+   * 目的每秒新建数限制 0-4294967295
+   */
+  DestinationCreateLimit: number
+
+  /**
+   * 目的端口的并发连接控制 0-4294967295
+   */
+  DestinationConnectLimit: number
+
+  /**
+   * 异常连接数阈值  0-4294967295
+   */
+  AbnormalConnectNum: number
+
+  /**
+   * syn占比异常阈值 0-100
+   */
+  AbnormalSynRatio: number
+
+  /**
+   * syn个数异常阈值 0-65535
+   */
+  AbnormalSynNum: number
+
+  /**
+   * 连接超时检测 0-65535
+   */
+  ConnectTimeout: number
+
+  /**
+   * 空连接防护开启 0-1
+   */
+  EmptyConnectProtect: string
+}
+
+/**
+ * ModifyDDoSPolicy返回参数结构体
+ */
+export interface ModifyDDoSPolicyResponse {
+  /**
+   * 策略组ID
+   */
+  PolicyId: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeDnsRecords请求参数结构体
  */
 export interface DescribeDnsRecordsRequest {
@@ -2115,6 +2850,51 @@ export interface DescribeDefaultCertificatesRequest {
 }
 
 /**
+ * 地域信息
+ */
+export interface GeoIp {
+  /**
+   * 地域ID
+   */
+  RegionId: number
+
+  /**
+   * 国家名
+   */
+  Country?: string
+
+  /**
+   * 洲
+   */
+  Continent?: string
+
+  /**
+   * 国家英文名
+   */
+  CountryEn?: string
+
+  /**
+   * 洲
+   */
+  ContinentEn?: string
+}
+
+/**
+ * DescribeSecurityPolicy请求参数结构体
+ */
+export interface DescribeSecurityPolicyRequest {
+  /**
+   * 一级域名
+   */
+  ZoneId: string
+
+  /**
+   * 二级域名
+   */
+  Entity: string
+}
+
+/**
  * ModifyApplicationProxyRule返回参数结构体
  */
 export interface ModifyApplicationProxyRuleResponse {
@@ -2122,6 +2902,26 @@ export interface ModifyApplicationProxyRuleResponse {
    * 规则ID
    */
   RuleId: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeSecurityPolicyManagedRulesId返回参数结构体
+ */
+export interface DescribeSecurityPolicyManagedRulesIdResponse {
+  /**
+   * 返回总数
+   */
+  Total: number
+
+  /**
+   * 门神规则
+   */
+  Rules: Array<ManagedRule>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2168,6 +2968,62 @@ export interface CreateZoneRequest {
 }
 
 /**
+ * RateLimit配置
+ */
+export interface RateLimitConfig {
+  /**
+   * 开关
+   */
+  Switch: string
+
+  /**
+   * 用户规则
+   */
+  UserRules: Array<RateLimitUserRule>
+
+  /**
+      * 默认模板
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Template?: RateLimitTemplate
+}
+
+/**
+ * DescribeSecurityPolicyList返回参数结构体
+ */
+export interface DescribeSecurityPolicyListResponse {
+  /**
+   * 防护资源列表
+   */
+  Entities: Array<SecurityEntity>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribePurgeTasks返回参数结构体
+ */
+export interface DescribePurgeTasksResponse {
+  /**
+   * 该查询条件总共条目数
+   */
+  TotalCount: number
+
+  /**
+   * 任务结果列表
+   */
+  Tasks: Array<Task>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 源站记录私有鉴权参数
  */
 export interface OriginRecordPrivateParameter {
@@ -2195,23 +3051,36 @@ export interface CheckCertificateResponse {
 }
 
 /**
- * DescribePurgeTasks返回参数结构体
+ * DDoS7层应用
  */
-export interface DescribePurgeTasksResponse {
+export interface DDoSApplication {
   /**
-   * 该查询条件总共条目数
-   */
-  TotalCount: number
+      * 二级域名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Host?: string
 
   /**
-   * 任务结果列表
-   */
-  Tasks: Array<Task>
+      * 域名状态；
+init  待切ns
+offline 需要dns开启站点加速
+process 在部署中，稍等一会
+online 正常状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Status?: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+      * 加速开关；on-开启加速；off-关闭加速（AccelerateType：on，SecurityType：on，安全加速，未开防护增强；AccelerateType：off，SecurityType：on，安全加速，开启防护增强；AccelerateType：on，SecurityType：off，内容加速，未开防护增强）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AccelerateType?: string
+
+  /**
+      * 安全开关；on-开启安全；off-关闭安全（AccelerateType：on，SecurityType：on，安全加速，未开防护增强；AccelerateType：off，SecurityType：on，安全加速，开启防护增强；AccelerateType：on，SecurityType：off，内容加速，未开防护增强）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SecurityType?: string
 }
 
 /**
@@ -2342,6 +3211,57 @@ OFF：不传递
 }
 
 /**
+ * DescribePrefetchTasks请求参数结构体
+ */
+export interface DescribePrefetchTasksRequest {
+  /**
+   * 任务ID
+   */
+  JobId?: string
+
+  /**
+   * 查询起始时间
+   */
+  StartTime?: string
+
+  /**
+   * 查询结束时间
+   */
+  EndTime?: string
+
+  /**
+   * 查询起始偏移量
+   */
+  Offset?: number
+
+  /**
+   * 查询最大返回的结果条数
+   */
+  Limit?: number
+
+  /**
+      * 查询的状态
+允许的值为：processing、success、failed、timeout、invalid
+      */
+  Statuses?: Array<string>
+
+  /**
+   * zone id
+   */
+  ZoneId?: string
+
+  /**
+   * 查询的域名列表
+   */
+  Domains?: Array<string>
+
+  /**
+   * 查询的资源
+   */
+  Target?: string
+}
+
+/**
  * 访问协议强制https跳转配置
  */
 export interface ForceRedirect {
@@ -2467,100 +3387,38 @@ export interface DescribeDnsRecordsResponse {
 }
 
 /**
- * DescribeApplicationProxyDetail返回参数结构体
+ * bot 用户画像规则
  */
-export interface DescribeApplicationProxyDetailResponse {
+export interface BotPortraitRule {
   /**
-   * 实例ID
-   */
-  ProxyId: string
-
-  /**
-   * 实例名称
-   */
-  ProxyName: string
-
-  /**
-      * 调度模式：
-ip表示Anycast IP
-domain表示CNAME
+      * 本规则的id
+注意：此字段可能返回 null，表示取不到有效值。
       */
-  PlatType: string
+  RuleID?: number
 
   /**
-   * 0关闭安全，1开启安全
-   */
-  SecurityType: number
-
-  /**
-   * 0关闭加速，1开启加速
-   */
-  AccelerateType: number
-
-  /**
-   * 字段已经移至Rule.ForwardClientIp
-   */
-  ForwardClientIp: string
-
-  /**
-   * 字段已经移至Rule.SessionPersist
-   */
-  SessionPersist: boolean
-
-  /**
-   * 规则列表
-   */
-  Rule: Array<ApplicationProxyRule>
-
-  /**
-      * 状态：
-online：启用
-offline：停用
-progress：部署中
+      * JS挑战的规则ID
+注意：此字段可能返回 null，表示取不到有效值。
       */
-  Status: string
+  AlgManagedIds?: Array<number>
 
   /**
-   * 调度信息
-   */
-  ScheduleValue: Array<string>
-
-  /**
-   * 更新时间
-   */
-  UpdateTime: string
-
-  /**
-   * 站点ID
-   */
-  ZoneId: string
-
-  /**
-   * 站点名称
-   */
-  ZoneName: string
-
-  /**
-   * 会话保持时间
-   */
-  SessionPersistTime: number
-
-  /**
-      * 服务类型
-hostname：子域名
-instance：实例
+      * 数字验证码的规则ID
+注意：此字段可能返回 null，表示取不到有效值。
       */
-  ProxyType: string
+  CapManagedIds?: Array<number>
 
   /**
-   * 七层实例ID
-   */
-  HostId: string
+      * 观察的规则ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MonManagedIds?: Array<number>
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+      * 拦截的规则ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DropManagedIds?: Array<number>
 }
 
 /**
@@ -2611,37 +3469,24 @@ export interface DescribeHostsCertificateRequest {
 }
 
 /**
- * Hsts配置
+ * DescribeSecurityPolicyManagedRules返回参数结构体
  */
-export interface Hsts {
+export interface DescribeSecurityPolicyManagedRulesResponse {
   /**
-   * 是否开启，on或off。
+   * 本次返回的规则数
    */
-  Switch: string
+  Count: number
 
   /**
-      * MaxAge数值。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  MaxAge?: number
+   * 门神规则
+   */
+  Rules: Array<ManagedRule>
 
   /**
-      * 是否包含子域名，on或off。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  IncludeSubDomains?: string
+   * 总规则数
+   */
+  Total: number
 
-  /**
-      * 是否预加载，on或off。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Preload?: string
-}
-
-/**
- * ModifyHostsCertificate返回参数结构体
- */
-export interface ModifyHostsCertificateResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2649,18 +3494,123 @@ export interface ModifyHostsCertificateResponse {
 }
 
 /**
- * ModifyLoadBalancing返回参数结构体
+ * 速率限制模板
  */
-export interface ModifyLoadBalancingResponse {
+export interface RateLimitTemplate {
   /**
-   * 负载均衡ID
+      * 模板名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Mode?: string
+
+  /**
+      * 模板值详情
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Detail?: RateLimitTemplateDetail
+}
+
+/**
+ * DescribeApplicationProxy请求参数结构体
+ */
+export interface DescribeApplicationProxyRequest {
+  /**
+   * 站点ID
    */
-  LoadBalancingId: string
+  ZoneId?: string
+
+  /**
+   * 分页参数Offset
+   */
+  Offset?: number
+
+  /**
+   * 分页参数Limit
+   */
+  Limit?: number
+}
+
+/**
+ * ModifyDDoSPolicyHost返回参数结构体
+ */
+export interface ModifyDDoSPolicyHostResponse {
+  /**
+   * 修改成功的host
+   */
+  Host: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyApplicationProxyRuleStatus请求参数结构体
+ */
+export interface ModifyApplicationProxyRuleStatusRequest {
+  /**
+   * 站点ID
+   */
+  ZoneId: string
+
+  /**
+   * 四层代理ID
+   */
+  ProxyId: string
+
+  /**
+   * 规则ID
+   */
+  RuleId: string
+
+  /**
+      * 状态
+offline: 停用
+online: 启用
+      */
+  Status: string
+}
+
+/**
+ * 模板当前详细配置
+ */
+export interface RateLimitTemplateDetail {
+  /**
+      * 模板名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Mode?: string
+
+  /**
+      * 唯一id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ID?: number
+
+  /**
+      * 处置动作
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Action?: string
+
+  /**
+      * 惩罚时间，秒
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PunishTime?: number
+
+  /**
+      * 阈值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Threshold?: number
+
+  /**
+      * 统计周期
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Period?: number
 }
 
 /**
@@ -2676,6 +3626,74 @@ export interface CreateApplicationProxyRuleResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * RateLimit规则
+ */
+export interface RateLimitUserRule {
+  /**
+   * RateLimit统计阈值
+   */
+  Threshold: number
+
+  /**
+   * RateLimit统计时间
+   */
+  Period: number
+
+  /**
+   * 规则名
+   */
+  RuleName: string
+
+  /**
+   * 动作：monitor(观察), drop(拦截)
+   */
+  Action: string
+
+  /**
+   * 惩罚时长
+   */
+  PunishTime: number
+
+  /**
+   * 处罚时长单位，second
+   */
+  PunishTimeUnit: string
+
+  /**
+   * 规则状态
+   */
+  RuleStatus: string
+
+  /**
+   * 规则
+   */
+  Conditions: Array<ACLCondition>
+
+  /**
+   * 规则权重
+   */
+  RulePriority: number
+
+  /**
+      * 规则id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RuleID?: number
+
+  /**
+      * 过滤词
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FreqFields?: Array<string>
+
+  /**
+      * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UpdateTime?: string
 }
 
 /**
@@ -2842,6 +3860,74 @@ export interface PostMaxSize {
 }
 
 /**
+ * 门神规则
+ */
+export interface ManagedRule {
+  /**
+   * 规则id
+   */
+  RuleId: number
+
+  /**
+   * 规则描述
+   */
+  Description: string
+
+  /**
+   * 规则类型名
+   */
+  RuleTypeName: string
+
+  /**
+   * 策略规则防护等级
+   */
+  RuleLevelDesc: string
+
+  /**
+   * 更新时间
+   */
+  UpdateTime: string
+
+  /**
+   * 规则当前状态  block, allow
+   */
+  Status: string
+
+  /**
+      * 规则标签
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RuleTags?: Array<string>
+
+  /**
+      * 规则类型详细描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RuleTypeDesc?: string
+
+  /**
+      * 规则类型id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RuleTypeId?: number
+}
+
+/**
+ * ModifyLoadBalancing返回参数结构体
+ */
+export interface ModifyLoadBalancingResponse {
+  /**
+   * 负载均衡ID
+   */
+  LoadBalancingId: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeCnameStatus请求参数结构体
  */
 export interface DescribeCnameStatusRequest {
@@ -2854,6 +3940,31 @@ export interface DescribeCnameStatusRequest {
    * 域名列表
    */
   Names: Array<string>
+}
+
+/**
+ * CreateCustomErrorPage请求参数结构体
+ */
+export interface CreateCustomErrorPageRequest {
+  /**
+   * zone的id
+   */
+  ZoneId: string
+
+  /**
+   * 具体所属实体
+   */
+  Entity: string
+
+  /**
+   * 自定义页面的文件名
+   */
+  Name: string
+
+  /**
+   * 自定义页面的内容
+   */
+  Content: string
 }
 
 /**
@@ -3012,6 +4123,31 @@ export interface DeleteLoadBalancingRequest {
 }
 
 /**
+ * 安全防护实例
+ */
+export interface SecurityEntity {
+  /**
+   * 用户appid
+   */
+  AppId: number
+
+  /**
+   * 一级域名
+   */
+  ZoneId: string
+
+  /**
+   * 二级域名
+   */
+  Entity: string
+
+  /**
+   * 类型 domain/application
+   */
+  EntityType: string
+}
+
+/**
  * 应用代理实例
  */
 export interface ApplicationProxy {
@@ -3130,6 +4266,16 @@ export interface ModifyApplicationProxyResponse {
 }
 
 /**
+ * DescribeDDoSPolicy返回参数结构体
+ */
+export interface DescribeDDoSPolicyResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 缓存键配置
  */
 export interface CacheKey {
@@ -3155,6 +4301,46 @@ off：关闭全路径缓存（即开启参数忽略）
 }
 
 /**
+ * ModifyOriginGroup请求参数结构体
+ */
+export interface ModifyOriginGroupRequest {
+  /**
+   * 源站组ID
+   */
+  OriginId: string
+
+  /**
+   * 源站组名称
+   */
+  OriginName: string
+
+  /**
+      * 配置类型，当OriginType=self 时，需要填写：
+area: 按区域配置
+weight: 按权重配置
+当OriginType=third_party 时，不需要填写
+      */
+  Type: string
+
+  /**
+   * 源站记录
+   */
+  Record: Array<OriginRecord>
+
+  /**
+   * 站点ID
+   */
+  ZoneId: string
+
+  /**
+      * 源站类型
+self：自有源站
+third_party：第三方源站
+      */
+  OriginType?: string
+}
+
+/**
  * ModifyApplicationProxyRuleStatus返回参数结构体
  */
 export interface ModifyApplicationProxyRuleStatusResponse {
@@ -3170,19 +4356,38 @@ export interface ModifyApplicationProxyRuleStatusResponse {
 }
 
 /**
- * DescribeZones返回参数结构体
+ * DescribeSecurityPolicyList请求参数结构体
  */
-export interface DescribeZonesResponse {
+export interface DescribeSecurityPolicyListRequest {
   /**
-   * 符合条件的站点数
+   * 一级域名
    */
-  TotalCount: number
+  ZoneId: string
+}
+
+/**
+ * DescribeApplicationProxyDetail请求参数结构体
+ */
+export interface DescribeApplicationProxyDetailRequest {
+  /**
+   * 站点ID
+   */
+  ZoneId: string
 
   /**
-      * 站点详细信息列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Zones: Array<Zone>
+   * 实例ID
+   */
+  ProxyId: string
+}
+
+/**
+ * DeleteOriginGroup返回参数结构体
+ */
+export interface DeleteOriginGroupResponse {
+  /**
+   * 源站组ID
+   */
+  OriginId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3216,6 +4421,21 @@ export interface DescribeZoneDetailsRequest {
 }
 
 /**
+ * DescribeDDoSPolicy请求参数结构体
+ */
+export interface DescribeDDoSPolicyRequest {
+  /**
+   * 策略组id
+   */
+  PolicyId: number
+
+  /**
+   * 一级域名zone
+   */
+  ZoneId: string
+}
+
+/**
  * DescribeDefaultCertificates返回参数结构体
  */
 export interface DescribeDefaultCertificatesResponse {
@@ -3237,50 +4457,49 @@ export interface DescribeDefaultCertificatesResponse {
 }
 
 /**
- * DescribeApplicationProxy请求参数结构体
+ * CreateOriginGroup返回参数结构体
  */
-export interface DescribeApplicationProxyRequest {
+export interface CreateOriginGroupResponse {
   /**
-   * 站点ID
+   * 新增的源站组ID
    */
-  ZoneId?: string
+  OriginId: string
 
   /**
-   * 分页参数Offset
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Offset?: number
-
-  /**
-   * 分页参数Limit
-   */
-  Limit?: number
+  RequestId?: string
 }
 
 /**
- * ModifyApplicationProxyRuleStatus请求参数结构体
+ * DescribeSecurityPolicy返回参数结构体
  */
-export interface ModifyApplicationProxyRuleStatusRequest {
+export interface DescribeSecurityPolicyResponse {
   /**
-   * 站点ID
+   * 用户id
+   */
+  AppId: number
+
+  /**
+   * 一级域名
    */
   ZoneId: string
 
   /**
-   * 四层代理ID
+   * 二级域名
    */
-  ProxyId: string
+  Entity: string
 
   /**
-   * 规则ID
-   */
-  RuleId: string
-
-  /**
-      * 状态
-offline: 停用
-online: 启用
+      * 安全配置
+注意：此字段可能返回 null，表示取不到有效值。
       */
-  Status: string
+  Config: SecurityConfig
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3308,6 +4527,11 @@ excludeCustom:排除部分url参数
 }
 
 /**
+ * DescribeSecurityPolicyRegions请求参数结构体
+ */
+export type DescribeSecurityPolicyRegionsRequest = null
+
+/**
  * ReclaimZone请求参数结构体
  */
 export interface ReclaimZoneRequest {
@@ -3325,6 +4549,93 @@ export interface DeleteZoneRequest {
    * 站点 ID
    */
   Id: string
+}
+
+/**
+ * Bot 规则
+ */
+export interface BotManagedRule {
+  /**
+      * 想开启的规则id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ManagedIds: Array<number>
+
+  /**
+   * 本规则的id
+   */
+  RuleID: number
+
+  /**
+   * drop/trans/monitor/alg
+   */
+  Action?: string
+
+  /**
+      * ip封禁的惩罚时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PunishTime?: number
+
+  /**
+      * 单位
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PunishTimeUnit?: string
+
+  /**
+      * 自定义返回页面的名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Name?: string
+
+  /**
+      * 自定义返回页面的实例id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PageId?: number
+
+  /**
+      * 重定向时候的地址，必须为本用户接入的站点子域名，使用URLENCODE
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RedirectUrl?: string
+
+  /**
+      * 重定向时候的返回码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ResponseCode?: number
+
+  /**
+      * 放行的规则ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TransManagedIds?: Array<number>
+
+  /**
+      * JS挑战的规则ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AlgManagedIds?: Array<number>
+
+  /**
+      * 数字验证码的规则ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CapManagedIds?: Array<number>
+
+  /**
+      * 观察的规则ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MonManagedIds?: Array<number>
+
+  /**
+      * 拦截的规则ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DropManagedIds?: Array<number>
 }
 
 /**
@@ -3352,6 +4663,28 @@ export interface ClientIp {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   HeaderName?: string
+}
+
+/**
+ * DNS 记录查询过滤条件
+ */
+export interface DnsRecordFilter {
+  /**
+      * 过滤字段名，支持的列表如下：
+- name: 站点名。
+- status: 站点状态
+      */
+  Name: string
+
+  /**
+   * 过滤字段值
+   */
+  Values: Array<string>
+
+  /**
+   * 是否启用模糊查询，仅支持过滤字段名为name。模糊查询时，Values长度最大为1
+   */
+  Fuzzy?: boolean
 }
 
 /**
@@ -3480,6 +4813,18 @@ export interface DescribeZoneSettingResponse {
 }
 
 /**
+ * AI规则引擎防护
+ */
+export interface AiRule {
+  /**
+      * smart_status_close-关闭；smart_status_open-拦截处置；
+smart_status_observe-观察处置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Mode?: string
+}
+
+/**
  * DescribePurgeTasks请求参数结构体
  */
 export interface DescribePurgeTasksRequest {
@@ -3569,6 +4914,26 @@ export interface CacheConfig {
 }
 
 /**
+ * ModifyDDoSPolicy请求参数结构体
+ */
+export interface ModifyDDoSPolicyRequest {
+  /**
+   * 策略组ID
+   */
+  PolicyId: number
+
+  /**
+   * 一级域名
+   */
+  ZoneId: string
+
+  /**
+   * DDoS具体防护配置
+   */
+  DdosRule?: DdosRule
+}
+
+/**
  * ModifyZoneCnameSpeedUp返回参数结构体
  */
 export interface ModifyZoneCnameSpeedUpResponse {
@@ -3598,6 +4963,28 @@ export interface ModifyZoneCnameSpeedUpResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 站点查询过滤条件
+ */
+export interface ZoneFilter {
+  /**
+      * 过滤字段名，支持的列表如下：
+- name: 站点名。
+- status: 站点状态
+      */
+  Name: string
+
+  /**
+   * 过滤字段值
+   */
+  Values: Array<string>
+
+  /**
+   * 是否启用模糊查询，仅支持过滤字段名为name。模糊查询时，Values长度最大为1
+   */
+  Fuzzy?: boolean
 }
 
 /**
@@ -3634,55 +5021,76 @@ export interface DeleteDnsRecordsRequest {
 }
 
 /**
- * ModifyHostsCertificate请求参数结构体
+ * ddos黑白名单
  */
-export interface ModifyHostsCertificateRequest {
+export interface DdosAllowBlock {
   /**
-   * Zone ID
+   * 开关标识防护是否清空
    */
-  ZoneId: string
+  Switch?: string
 
   /**
-   * 本次变更的域名
+   * 黑白名单数组
    */
-  Hosts: Array<string>
-
-  /**
-   * 证书信息, 只需要传入 CertId 即可, 如果为空, 则使用默认证书
-   */
-  CertInfo?: Array<ServerCertInfo>
+  UserAllowBlockIp?: Array<DDoSUserAllowBlockIP>
 }
 
 /**
- * ModifyZoneStatus返回参数结构体
+ * DDoS地域封禁
  */
-export interface ModifyZoneStatusResponse {
+export interface DDoSGeoIp {
   /**
-   * 站点 ID
-   */
-  Id: string
-
-  /**
-   * 站点名称
-   */
-  Name: string
-
-  /**
-      * 站点状态
-- false 开启站点
-- true 关闭站点
+      * 地域信息
+注意：此字段可能返回 null，表示取不到有效值。
       */
-  Paused: boolean
+  RegionId?: Array<number>
 
   /**
-   * 更新时间
+      * 区域封禁清空标识
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Switch?: string
+}
+
+/**
+ * DescribeZoneDDoSPolicy返回参数结构体
+ */
+export interface DescribeZoneDDoSPolicyResponse {
+  /**
+   * 用户appid
    */
-  ModifiedOn: string
+  AppId: number
+
+  /**
+   * 防护分区
+   */
+  ShieldAreas: Array<ShieldArea>
+
+  /**
+      * 所有子域名信息，包含安全加速/内容加速
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Domains: Array<DDoSApplication>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ACL配置
+ */
+export interface AclConfig {
+  /**
+   * 开关
+   */
+  Switch: string
+
+  /**
+   * ACL用户规则
+   */
+  UserRules: Array<ACLUserRule>
 }
 
 /**
@@ -3713,6 +5121,116 @@ hour：1小时粒度
 day：天粒度
       */
   Interval?: string
+}
+
+/**
+ * DDoS特征过滤
+ */
+export interface DDoSFeaturesFilter {
+  /**
+   * 动作 drop-丢弃；transmit-放行；drop_block-丢弃并拉黑；forward-继续防护
+   */
+  Action?: string
+
+  /**
+   * 深度值1
+   */
+  Depth?: number
+
+  /**
+   * 深度值2
+   */
+  Depth2?: number
+
+  /**
+   * 目标端口结束
+   */
+  DportEnd?: number
+
+  /**
+   * 目标端口开始
+   */
+  DportStart?: number
+
+  /**
+   * 取非判断1
+   */
+  IsNot?: number
+
+  /**
+   * 取非判断2
+   */
+  IsNot2?: number
+
+  /**
+   * 多特征关系（单特征时(none)，第二特征相关配置可不填） none；and；or
+   */
+  MatchLogic?: string
+
+  /**
+   * 匹配方式1 pcre-正则匹配, sunday-字符串匹配
+   */
+  MatchType?: string
+
+  /**
+   * 匹配方式2 pcre-正则匹配, sunday-字符串匹配
+   */
+  MatchType2?: string
+
+  /**
+   * 偏移量1
+   */
+  Offset?: number
+
+  /**
+   * 偏移量2
+   */
+  Offset2?: number
+
+  /**
+   * 最大包长
+   */
+  PacketMax?: number
+
+  /**
+   * 最小包长
+   */
+  PacketMin?: number
+
+  /**
+   * 协议 tcp；udp；icmp；all
+   */
+  Protocol?: string
+
+  /**
+   * 源端口结束
+   */
+  SportEnd?: number
+
+  /**
+   * 源端口开始
+   */
+  SportStart?: number
+
+  /**
+   * 匹配字符串1
+   */
+  Str?: string
+
+  /**
+   * 匹配字符串2
+   */
+  Str2?: string
+
+  /**
+   * 匹配开始层级，层级参考计算机网络结构 begin_l5, no_match, begin_l3, begin_l4
+   */
+  MatchBegin?: string
+
+  /**
+   * 匹配开始层级，层级参考计算机网络结构 begin_l5, no_match, begin_l3, begin_l4
+   */
+  MatchBegin2?: string
 }
 
 /**
@@ -3754,18 +5272,175 @@ Targets可为空，不需要填写
 }
 
 /**
- * DeleteDnsRecords返回参数结构体
+ * DescribeApplicationProxyDetail返回参数结构体
  */
-export interface DeleteDnsRecordsResponse {
+export interface DescribeApplicationProxyDetailResponse {
   /**
-   * 记录 ID
+   * 实例ID
    */
-  Ids: Array<string>
+  ProxyId: string
+
+  /**
+   * 实例名称
+   */
+  ProxyName: string
+
+  /**
+      * 调度模式：
+ip表示Anycast IP
+domain表示CNAME
+      */
+  PlatType: string
+
+  /**
+   * 0关闭安全，1开启安全
+   */
+  SecurityType: number
+
+  /**
+   * 0关闭加速，1开启加速
+   */
+  AccelerateType: number
+
+  /**
+   * 字段已经移至Rule.ForwardClientIp
+   */
+  ForwardClientIp: string
+
+  /**
+   * 字段已经移至Rule.SessionPersist
+   */
+  SessionPersist: boolean
+
+  /**
+   * 规则列表
+   */
+  Rule: Array<ApplicationProxyRule>
+
+  /**
+      * 状态：
+online：启用
+offline：停用
+progress：部署中
+      */
+  Status: string
+
+  /**
+   * 调度信息
+   */
+  ScheduleValue: Array<string>
+
+  /**
+   * 更新时间
+   */
+  UpdateTime: string
+
+  /**
+   * 站点ID
+   */
+  ZoneId: string
+
+  /**
+   * 站点名称
+   */
+  ZoneName: string
+
+  /**
+   * 会话保持时间
+   */
+  SessionPersistTime: number
+
+  /**
+      * 服务类型
+hostname：子域名
+instance：实例
+      */
+  ProxyType: string
+
+  /**
+   * 七层实例ID
+   */
+  HostId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DownloadL7Logs返回参数结构体
+ */
+export interface DownloadL7LogsResponse {
+  /**
+      * 七层离线日志data
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Data: Array<L7OfflineLog>
+
+  /**
+      * 页面大小
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PageSize: number
+
+  /**
+      * 页号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PageNo: number
+
+  /**
+      * 总页数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Pages: number
+
+  /**
+      * 总条数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TotalSize: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateOriginGroup请求参数结构体
+ */
+export interface CreateOriginGroupRequest {
+  /**
+   * 源站组名称
+   */
+  OriginName: string
+
+  /**
+      * 配置类型，当OriginType=self 时，需要填写：
+area: 按区域配置
+weight: 按权重配置
+当OriginType=third_party 时，不需要填写
+      */
+  Type: string
+
+  /**
+   * 源站记录
+   */
+  Record: Array<OriginRecord>
+
+  /**
+   * 站点ID
+   */
+  ZoneId: string
+
+  /**
+      * 源站类型
+self：自有源站
+third_party：第三方源站
+      */
+  OriginType?: string
 }
 
 /**
@@ -3791,6 +5466,16 @@ export interface DescribeHostsSettingRequest {
    * 指定域名查询
    */
   Hosts?: Array<string>
+}
+
+/**
+ * DescribeZoneDDoSPolicy请求参数结构体
+ */
+export interface DescribeZoneDDoSPolicyRequest {
+  /**
+   * 一级域名id
+   */
+  ZoneId?: string
 }
 
 /**
@@ -3910,6 +5595,47 @@ export interface OriginGroup {
 }
 
 /**
+ * DDoS黑白名单
+ */
+export interface DDoSUserAllowBlockIP {
+  /**
+      * 用户ip
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Ip?: string
+
+  /**
+      * 掩码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Mask?: number
+
+  /**
+      * 类型 block-丢弃；allow-允许
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Type?: string
+
+  /**
+      * 时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UpdateTime?: number
+
+  /**
+      * 用户ip范围截止
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Ip2?: string
+
+  /**
+      * 掩码截止范围
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Mask2?: number
+}
+
+/**
  * DescribeLoadBalancing返回参数结构体
  */
 export interface DescribeLoadBalancingResponse {
@@ -3975,6 +5701,23 @@ export interface ScanDnsRecordsRequest {
    * 站点 ID
    */
   ZoneId: string
+}
+
+/**
+ * 自定义 nameservers
+ */
+export interface VanityNameServers {
+  /**
+      * 自定义 ns 开关
+- on 开启
+- off 关闭
+      */
+  Switch: string
+
+  /**
+   * 自定义 ns 列表
+   */
+  Servers?: Array<string>
 }
 
 /**
@@ -4125,25 +5868,92 @@ export interface DnssecInfo {
 }
 
 /**
- * DNS 记录查询过滤条件
+ * DescribeOriginGroup请求参数结构体
  */
-export interface DnsRecordFilter {
+export interface DescribeOriginGroupRequest {
   /**
-      * 过滤字段名，支持的列表如下：
-- name: 站点名。
-- status: 站点状态
+   * 分页参数Offset
+   */
+  Offset: number
+
+  /**
+   * 分页参数Limit
+   */
+  Limit: number
+
+  /**
+   * 过滤参数
+   */
+  Filters?: Array<OriginFilter>
+
+  /**
+      * 站点ID
+不填写获取所有站点源站组
       */
-  Name: string
+  ZoneId?: string
+}
+
+/**
+ * DescribeOriginGroupDetail返回参数结构体
+ */
+export interface DescribeOriginGroupDetailResponse {
+  /**
+   * 源站组ID
+   */
+  OriginId: string
 
   /**
-   * 过滤字段值
+   * 源站组名称
    */
-  Values: Array<string>
+  OriginName: string
 
   /**
-   * 是否启用模糊查询，仅支持过滤字段名为name。模糊查询时，Values长度最大为1
+   * 配置类型
    */
-  Fuzzy?: boolean
+  Type: string
+
+  /**
+   * 记录
+   */
+  Record: Array<OriginRecord>
+
+  /**
+   * 更新时间
+   */
+  UpdateTime: string
+
+  /**
+   * 站点ID
+   */
+  ZoneId: string
+
+  /**
+   * 站点名称
+   */
+  ZoneName: string
+
+  /**
+      * 源站类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OriginType: string
+
+  /**
+      * 是否被四层代理使用
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ApplicationProxyUsed: boolean
+
+  /**
+      * 是否被负载均衡使用
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LoadBalancingUsed: boolean
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4170,6 +5980,36 @@ export interface OfflineCache {
 }
 
 /**
+ * 安全Bot配置
+ */
+export interface BotConfig {
+  /**
+   * bot开关
+   */
+  Switch: string
+
+  /**
+   * 预置规则
+   */
+  ManagedRule?: BotManagedRule
+
+  /**
+   * 保留
+   */
+  UaBotRule?: BotManagedRule
+
+  /**
+   * 保留
+   */
+  IspBotRule?: BotManagedRule
+
+  /**
+   * 用户画像规则
+   */
+  PortraitRule?: BotPortraitRule
+}
+
+/**
  * 自定义名字服务器 IP 信息
  */
 export interface VanityNameServersIps {
@@ -4182,4 +6022,34 @@ export interface VanityNameServersIps {
    * 自定义名字服务器 IPv4 地址
    */
   IPv4: string
+}
+
+/**
+ * DescribeBotManagedRules请求参数结构体
+ */
+export interface DescribeBotManagedRulesRequest {
+  /**
+   * 一级域名
+   */
+  ZoneId: string
+
+  /**
+   * 子域名/应用名
+   */
+  Entity: string
+
+  /**
+   * 页数
+   */
+  Page: number
+
+  /**
+   * 每页数量
+   */
+  PerPage: number
+
+  /**
+   * idcid/sipbot/uabot规则类型，空代表拉取全部
+   */
+  RuleType?: string
 }

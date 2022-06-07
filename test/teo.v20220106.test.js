@@ -48,6 +48,16 @@ it("teo.v20220106.ModifyApplicationProxyRule", async function () {
     }
 })
 
+it("teo.v20220106.DeleteOriginGroup", async function () {
+    try {
+       const data = await client.DeleteOriginGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("teo.v20220106.DeleteApplicationProxy", async function () {
     try {
        const data = await client.DeleteApplicationProxy({})
@@ -78,9 +88,29 @@ it("teo.v20220106.CreatePurgeTask", async function () {
     }
 })
 
+it("teo.v20220106.CreateOriginGroup", async function () {
+    try {
+       const data = await client.CreateOriginGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("teo.v20220106.DescribePurgeTasks", async function () {
     try {
        const data = await client.DescribePurgeTasks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("teo.v20220106.DescribeSecurityPolicyManagedRules", async function () {
+    try {
+       const data = await client.DescribeSecurityPolicyManagedRules({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -148,9 +178,29 @@ it("teo.v20220106.CreateZone", async function () {
     }
 })
 
+it("teo.v20220106.ModifyZone", async function () {
+    try {
+       const data = await client.ModifyZone({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("teo.v20220106.DescribeHostsSetting", async function () {
     try {
        const data = await client.DescribeHostsSetting({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("teo.v20220106.DescribeZoneDDoSPolicy", async function () {
+    try {
+       const data = await client.DescribeZoneDDoSPolicy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -178,6 +228,26 @@ it("teo.v20220106.CreateLoadBalancing", async function () {
     }
 })
 
+it("teo.v20220106.ModifyDDoSPolicyHost", async function () {
+    try {
+       const data = await client.ModifyDDoSPolicyHost({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("teo.v20220106.CreateCustomErrorPage", async function () {
+    try {
+       const data = await client.CreateCustomErrorPage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("teo.v20220106.IdentifyZone", async function () {
     try {
        const data = await client.IdentifyZone({})
@@ -191,6 +261,16 @@ it("teo.v20220106.IdentifyZone", async function () {
 it("teo.v20220106.DescribeDefaultCertificates", async function () {
     try {
        const data = await client.DescribeDefaultCertificates({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("teo.v20220106.ModifyDDoSPolicy", async function () {
+    try {
+       const data = await client.ModifyDDoSPolicy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -238,6 +318,16 @@ it("teo.v20220106.DescribeHostsCertificate", async function () {
     }
 })
 
+it("teo.v20220106.DescribeOriginGroupDetail", async function () {
+    try {
+       const data = await client.DescribeOriginGroupDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("teo.v20220106.CreateApplicationProxyRule", async function () {
     try {
        const data = await client.CreateApplicationProxyRule({})
@@ -261,6 +351,16 @@ it("teo.v20220106.DescribeApplicationProxyDetail", async function () {
 it("teo.v20220106.DeleteLoadBalancing", async function () {
     try {
        const data = await client.DeleteLoadBalancing({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("teo.v20220106.ModifyZoneSetting", async function () {
+    try {
+       const data = await client.ModifyZoneSetting({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -308,9 +408,9 @@ it("teo.v20220106.DownloadL7Logs", async function () {
     }
 })
 
-it("teo.v20220106.ModifyLoadBalancingStatus", async function () {
+it("teo.v20220106.DescribeZones", async function () {
     try {
-       const data = await client.ModifyLoadBalancingStatus({})
+       const data = await client.DescribeZones({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -348,9 +448,29 @@ it("teo.v20220106.ScanDnsRecords", async function () {
     }
 })
 
-it("teo.v20220106.DescribeApplicationProxy", async function () {
+it("teo.v20220106.ModifyOriginGroup", async function () {
     try {
-       const data = await client.DescribeApplicationProxy({})
+       const data = await client.ModifyOriginGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("teo.v20220106.DescribeDDoSPolicy", async function () {
+    try {
+       const data = await client.DescribeDDoSPolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("teo.v20220106.ModifyLoadBalancingStatus", async function () {
+    try {
+       const data = await client.ModifyLoadBalancingStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -368,9 +488,9 @@ it("teo.v20220106.DeleteDnsRecords", async function () {
     }
 })
 
-it("teo.v20220106.ModifyZone", async function () {
+it("teo.v20220106.ModifySecurityPolicy", async function () {
     try {
-       const data = await client.ModifyZone({})
+       const data = await client.ModifySecurityPolicy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -391,6 +511,16 @@ it("teo.v20220106.CreatePrefetchTask", async function () {
 it("teo.v20220106.ModifyDefaultCertificate", async function () {
     try {
        const data = await client.ModifyDefaultCertificate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("teo.v20220106.DescribeSecurityPolicy", async function () {
+    try {
+       const data = await client.DescribeSecurityPolicy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -428,6 +558,26 @@ it("teo.v20220106.CheckCertificate", async function () {
     }
 })
 
+it("teo.v20220106.DescribeSecurityPolicyManagedRulesId", async function () {
+    try {
+       const data = await client.DescribeSecurityPolicyManagedRulesId({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("teo.v20220106.DescribeBotManagedRules", async function () {
+    try {
+       const data = await client.DescribeBotManagedRules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("teo.v20220106.DescribeCnameStatus", async function () {
     try {
        const data = await client.DescribeCnameStatus({})
@@ -438,9 +588,9 @@ it("teo.v20220106.DescribeCnameStatus", async function () {
     }
 })
 
-it("teo.v20220106.DescribeZones", async function () {
+it("teo.v20220106.DescribeSecurityPolicyRegions", async function () {
     try {
-       const data = await client.DescribeZones({})
+       const data = await client.DescribeSecurityPolicyRegions({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -478,9 +628,9 @@ it("teo.v20220106.CreateApplicationProxy", async function () {
     }
 })
 
-it("teo.v20220106.ModifyZoneSetting", async function () {
+it("teo.v20220106.DescribeOriginGroup", async function () {
     try {
-       const data = await client.ModifyZoneSetting({})
+       const data = await client.DescribeOriginGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -508,9 +658,29 @@ it("teo.v20220106.ModifyApplicationProxyRuleStatus", async function () {
     }
 })
 
+it("teo.v20220106.DescribeSecurityPolicyList", async function () {
+    try {
+       const data = await client.DescribeSecurityPolicyList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("teo.v20220106.ModifyDnssec", async function () {
     try {
        const data = await client.ModifyDnssec({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("teo.v20220106.DescribeApplicationProxy", async function () {
+    try {
+       const data = await client.DescribeApplicationProxy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

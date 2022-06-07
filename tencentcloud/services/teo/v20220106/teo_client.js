@@ -46,6 +46,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyApplicationProxyRule", req, cb);
     }
     /**
+     * 源站组删除
+     */
+    async DeleteOriginGroup(req, cb) {
+        return this.request("DeleteOriginGroup", req, cb);
+    }
+    /**
      * 删除应用代理
      */
     async DeleteApplicationProxy(req, cb) {
@@ -64,10 +70,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreatePurgeTask", req, cb);
     }
     /**
+     * 源站组创建
+     */
+    async CreateOriginGroup(req, cb) {
+        return this.request("CreateOriginGroup", req, cb);
+    }
+    /**
      * 查询清除缓存历史记录
      */
     async DescribePurgeTasks(req, cb) {
         return this.request("DescribePurgeTasks", req, cb);
+    }
+    /**
+     * 分页查询门神规则
+     */
+    async DescribeSecurityPolicyManagedRules(req, cb) {
+        return this.request("DescribeSecurityPolicyManagedRules", req, cb);
     }
     /**
      * 用于修改域名证书
@@ -106,10 +124,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateZone", req, cb);
     }
     /**
+     * 用该站点信息
+     */
+    async ModifyZone(req, cb) {
+        return this.request("ModifyZone", req, cb);
+    }
+    /**
      * 用于查询域名配置信息
      */
     async DescribeHostsSetting(req, cb) {
         return this.request("DescribeHostsSetting", req, cb);
+    }
+    /**
+     * 查询所有DDoS防护分区
+     */
+    async DescribeZoneDDoSPolicy(req, cb) {
+        return this.request("DescribeZoneDDoSPolicy", req, cb);
     }
     /**
      * 修改负载均衡
@@ -124,6 +154,18 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateLoadBalancing", req, cb);
     }
     /**
+     * 域名DDoS高可用开关
+     */
+    async ModifyDDoSPolicyHost(req, cb) {
+        return this.request("ModifyDDoSPolicyHost", req, cb);
+    }
+    /**
+     * 创建自定义规则的自定义页
+     */
+    async CreateCustomErrorPage(req, cb) {
+        return this.request("CreateCustomErrorPage", req, cb);
+    }
+    /**
      * 用于验证站点所有权
      */
     async IdentifyZone(req, cb) {
@@ -134,6 +176,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeDefaultCertificates(req, cb) {
         return this.request("DescribeDefaultCertificates", req, cb);
+    }
+    /**
+     * 修改DDoS防护分区配置
+     */
+    async ModifyDDoSPolicy(req, cb) {
+        return this.request("ModifyDDoSPolicy", req, cb);
     }
     /**
      * 获取DNS请求数统计曲线
@@ -160,6 +208,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeHostsCertificate", req, cb);
     }
     /**
+     * 获取源站组详细信息
+     */
+    async DescribeOriginGroupDetail(req, cb) {
+        return this.request("DescribeOriginGroupDetail", req, cb);
+    }
+    /**
      * 创建应用代理规则
      */
     async CreateApplicationProxyRule(req, cb) {
@@ -176,6 +230,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteLoadBalancing(req, cb) {
         return this.request("DeleteLoadBalancing", req, cb);
+    }
+    /**
+     * 用于修改站点配置
+     */
+    async ModifyZoneSetting(req, cb) {
+        return this.request("ModifyZoneSetting", req, cb);
     }
     /**
      * 站点被其他用户接入后，验证了站点所有权之后，可以找回该站点
@@ -202,10 +262,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DownloadL7Logs", req, cb);
     }
     /**
-     * 修改负载均衡状态
+     * 用户查询用户站点信息列表，支持分页
      */
-    async ModifyLoadBalancingStatus(req, cb) {
-        return this.request("ModifyLoadBalancingStatus", req, cb);
+    async DescribeZones(req, cb) {
+        return this.request("DescribeZones", req, cb);
     }
     /**
      * 删除应用代理规则
@@ -226,10 +286,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ScanDnsRecords", req, cb);
     }
     /**
-     * 获取应用代理列表
+     * 源站组修改
      */
-    async DescribeApplicationProxy(req, cb) {
-        return this.request("DescribeApplicationProxy", req, cb);
+    async ModifyOriginGroup(req, cb) {
+        return this.request("ModifyOriginGroup", req, cb);
+    }
+    /**
+     * 查询DDoS防护配置详情
+     */
+    async DescribeDDoSPolicy(req, cb) {
+        return this.request("DescribeDDoSPolicy", req, cb);
+    }
+    /**
+     * 修改负载均衡状态
+     */
+    async ModifyLoadBalancingStatus(req, cb) {
+        return this.request("ModifyLoadBalancingStatus", req, cb);
     }
     /**
      * 批量删除 DNS 记录
@@ -238,10 +310,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteDnsRecords", req, cb);
     }
     /**
-     * 用该站点信息
+     * 修改Web&Bot安全配置
      */
-    async ModifyZone(req, cb) {
-        return this.request("ModifyZone", req, cb);
+    async ModifySecurityPolicy(req, cb) {
+        return this.request("ModifySecurityPolicy", req, cb);
     }
     /**
      * 创建预热任务
@@ -254,6 +326,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyDefaultCertificate(req, cb) {
         return this.request("ModifyDefaultCertificate", req, cb);
+    }
+    /**
+     * 查询安全防护配置详情
+     */
+    async DescribeSecurityPolicy(req, cb) {
+        return this.request("DescribeSecurityPolicy", req, cb);
     }
     /**
      * 导入 DNS 记录
@@ -274,16 +352,28 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CheckCertificate", req, cb);
     }
     /**
+     * 规则id查询门神规则详情
+     */
+    async DescribeSecurityPolicyManagedRulesId(req, cb) {
+        return this.request("DescribeSecurityPolicyManagedRulesId", req, cb);
+    }
+    /**
+     * 分页查询Bot托管规则
+     */
+    async DescribeBotManagedRules(req, cb) {
+        return this.request("DescribeBotManagedRules", req, cb);
+    }
+    /**
      * 查询域名 CNAME 状态
      */
     async DescribeCnameStatus(req, cb) {
         return this.request("DescribeCnameStatus", req, cb);
     }
     /**
-     * 用户查询用户站点信息列表，支持分页
+     * 查询所有地域信息
      */
-    async DescribeZones(req, cb) {
-        return this.request("DescribeZones", req, cb);
+    async DescribeSecurityPolicyRegions(req, cb) {
+        return this.request("DescribeSecurityPolicyRegions", req, cb);
     }
     /**
      * 用于查询 DNSSEC 相关信息
@@ -304,10 +394,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateApplicationProxy", req, cb);
     }
     /**
-     * 用于修改站点配置
+     * 获取源站组信息列表
      */
-    async ModifyZoneSetting(req, cb) {
-        return this.request("ModifyZoneSetting", req, cb);
+    async DescribeOriginGroup(req, cb) {
+        return this.request("DescribeOriginGroup", req, cb);
     }
     /**
      * 修改应用代理的状态
@@ -322,10 +412,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyApplicationProxyRuleStatus", req, cb);
     }
     /**
+     * 查询全部安全实例
+     */
+    async DescribeSecurityPolicyList(req, cb) {
+        return this.request("DescribeSecurityPolicyList", req, cb);
+    }
+    /**
      * 修改 DNSSEC 状态
      */
     async ModifyDnssec(req, cb) {
         return this.request("ModifyDnssec", req, cb);
+    }
+    /**
+     * 获取应用代理列表
+     */
+    async DescribeApplicationProxy(req, cb) {
+        return this.request("DescribeApplicationProxy", req, cb);
     }
 }
 exports.Client = Client;

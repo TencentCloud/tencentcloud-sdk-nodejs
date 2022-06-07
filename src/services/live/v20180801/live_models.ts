@@ -235,13 +235,13 @@ export interface DeleteLiveTranscodeTemplateResponse {
 }
 
 /**
- * StopScreenshotTask请求参数结构体
+ * flv格式特殊配置
  */
-export interface StopScreenshotTaskRequest {
+export interface FlvSpecialParam {
   /**
-   * 截图任务ID。
+   * 是否开启边录边传，仅flv格式有效。
    */
-  TaskId: string
+  UploadInRecording?: boolean
 }
 
 /**
@@ -488,6 +488,14 @@ ContinueBreakPoint：播放完当前正在播放的点播 url 后再使用新的
    * 任务描述，限制 512 字节。
    */
   Comment?: string
+
+  /**
+      * 完整目标 URL 地址。
+用法注意：如果使用该参数来传完整目标地址，则 DomainName, AppName, StreamName 需要传入空值，任务将会使用该 ToUrl 参数指定的目标地址。
+
+注意：签名时间需要超过任务结束时间，避免因签名过期造成任务失败。
+      */
+  ToUrl?: string
 
   /**
       * 备源的类型：
@@ -937,7 +945,7 @@ export interface RecordTemplateInfo {
   IsDelayLive: number
 
   /**
-   * HLS 录制定制参数
+   * HLS 录制定制参数。
    */
   HlsSpecialParam: HlsSpecialParam
 
@@ -951,6 +959,12 @@ export interface RecordTemplateInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   RemoveWatermark: boolean
+
+  /**
+      * FLV 录制定制参数。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FlvSpecialParam: FlvSpecialParam
 }
 
 /**
@@ -5841,6 +5855,11 @@ export interface ModifyLiveRecordTemplateRequest {
    * 是否去除水印，类型为慢直播时此参数无效。
    */
   RemoveWatermark?: boolean
+
+  /**
+   * FLV 录制定制参数。
+   */
+  FlvSpecialParam?: FlvSpecialParam
 }
 
 /**
@@ -6092,6 +6111,16 @@ export interface HttpStatusData {
    * 播放状态码详细信息。
    */
   HttpStatusInfoList: Array<HttpStatusInfo>
+}
+
+/**
+ * StopScreenshotTask请求参数结构体
+ */
+export interface StopScreenshotTaskRequest {
+  /**
+   * 截图任务ID。
+   */
+  TaskId: string
 }
 
 /**
@@ -7968,6 +7997,11 @@ export interface CreateLiveRecordTemplateRequest {
    * 是否去除水印，类型为慢直播时此参数无效。
    */
   RemoveWatermark?: boolean
+
+  /**
+   * FLV 录制特殊参数。
+   */
+  FlvSpecialParam?: FlvSpecialParam
 }
 
 /**

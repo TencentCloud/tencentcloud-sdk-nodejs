@@ -1480,7 +1480,7 @@ export interface CronHorizontalAutoscaler {
   /**
    * 定时伸缩策略名称
    */
-  Name: string
+  Name?: string
 
   /**
       * 策略周期
@@ -1490,17 +1490,17 @@ export interface CronHorizontalAutoscaler {
 * * 0-3 （每周日到周三）
 1,11,21 * *（每个月1号，11号，21号）
       */
-  Period: string
+  Period?: string
 
   /**
    * 定时伸缩策略明细
    */
-  Schedules: Array<CronHorizontalAutoscalerSchedule>
+  Schedules?: Array<CronHorizontalAutoscalerSchedule>
 
   /**
    * 是否启用
    */
-  Enabled: boolean
+  Enabled?: boolean
 
   /**
    * 策略优先级，值越大优先级越高，0为最小值
@@ -1831,24 +1831,29 @@ export interface CreateApplicationResponse {
  */
 export interface HorizontalAutoscaler {
   /**
-   * 最小实例数
+   * 最小实例数（可以不传）
    */
-  MinReplicas: number
+  MinReplicas?: number
 
   /**
-   * 最大实例数
+   * 最大实例数（可以不传）
    */
-  MaxReplicas: number
+  MaxReplicas?: number
 
   /**
    * 指标度量（CPU or MEMORY）
    */
-  Metrics: string
+  Metrics?: string
 
   /**
    * 阈值（百分比）
    */
-  Threshold: number
+  Threshold?: number
+
+  /**
+   * 是否启用
+   */
+  Enabled?: boolean
 }
 
 /**

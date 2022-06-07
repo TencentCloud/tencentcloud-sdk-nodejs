@@ -3959,7 +3959,7 @@ export interface ConsumerContent {
       */
     EnableTag: boolean;
     /**
-      * 需要投递的元数据列表，目前仅支持：__SOURCE__，__FILENAME__和__TIMESTAMP__
+      * 需要投递的元数据列表，目前仅支持：\_\_SOURCE\_\_，\_\_FILENAME\_\_和\_\_TIMESTAMP\_\_
 注意：此字段可能返回 null，表示取不到有效值。
       */
     MetaFields: Array<string>;
@@ -3968,6 +3968,11 @@ export interface ConsumerContent {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     TagJsonNotTiled?: boolean;
+    /**
+      * 投递时间戳精度，可选项 [1:秒；2:毫秒] ，默认是秒
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TimestampAccuracy?: number;
 }
 /**
  * CreateExport返回参数结构体
