@@ -28,10 +28,22 @@ class Client extends abstract_client_1.AbstractClient {
         super("tse.tencentcloudapi.com", "2020-12-07", clientConfig);
     }
     /**
+     * 删除引擎实例
+     */
+    async DeleteEngine(req, cb) {
+        return this.request("DeleteEngine", req, cb);
+    }
+    /**
      * 查询引擎实例访问地址
      */
     async DescribeSREInstanceAccessAddress(req, cb) {
         return this.request("DescribeSREInstanceAccessAddress", req, cb);
+    }
+    /**
+     * 创建引擎实例
+     */
+    async CreateEngine(req, cb) {
+        return this.request("CreateEngine", req, cb);
     }
     /**
      * 用于查询引擎实例列表

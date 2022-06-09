@@ -886,6 +886,12 @@ export interface FlowLog {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   FlowLogStorage: FlowLogStorage
+
+  /**
+      * 流日志存储ID对应的地域信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CloudLogRegion: string
 }
 
 /**
@@ -1299,6 +1305,11 @@ export interface DescribeFlowLogsRequest {
 <li>tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。</li>
       */
   Filters?: Filter
+
+  /**
+   * 流日志存储ID对应的地域信息
+   */
+  CloudLogRegion?: string
 }
 
 /**
@@ -9348,6 +9359,11 @@ export interface CreateFlowLogRequest {
    * 流日志消费端信息，当消费端类型为ckafka时，必填。
    */
   FlowLogStorage?: FlowLogStorage
+
+  /**
+   * 流日志存储ID对应的地域，不传递默认为本地域。
+   */
+  CloudLogRegion?: string
 }
 
 /**

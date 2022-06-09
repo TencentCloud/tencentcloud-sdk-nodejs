@@ -136,6 +136,12 @@ export interface DescribeOrganizationResponse {
   PayName: string
 
   /**
+      * 是否集团服务委派管理员 true-是、false-否
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsAssignManager: boolean
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -254,6 +260,16 @@ export interface DescribeOrganizationMembersRequest {
    * 成员名或者成员ID搜索
    */
   SearchKey?: string
+
+  /**
+   * 主体名称
+   */
+  AuthName?: string
+
+  /**
+   * 集团服务（服务管理员查询时，必须指定）
+   */
+  Product?: string
 }
 
 /**
@@ -406,6 +422,11 @@ export interface DescribeOrganizationRequest {
    * 国际站：en，国内站：zh
    */
   Lang?: string
+
+  /**
+   * 产品简称（查询是否集团服务委派管理员必须）
+   */
+  Product?: string
 }
 
 /**

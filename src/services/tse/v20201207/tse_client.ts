@@ -18,18 +18,25 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  Filter,
   DescribeSREInstancesRequest,
   SREInstance,
-  DescribeSREInstanceAccessAddressResponse,
+  ApolloEnvParam,
   DescribeSREInstancesResponse,
+  DescribeSREInstanceAccessAddressResponse,
   KVPair,
-  EnvInfo,
-  Filter,
+  DeleteEngineResponse,
+  CreateEngineResponse,
+  EngineAdmin,
   EnvAddressInfo,
-  VpcInfo,
+  CreateEngineRequest,
+  InstanceTagInfo,
+  DeleteEngineRequest,
   BoundK8SInfo,
   DescribeSREInstanceAccessAddressRequest,
   ServiceGovernanceInfo,
+  VpcInfo,
+  EnvInfo,
 } from "./tse_models"
 
 /**
@@ -42,6 +49,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除引擎实例
+   */
+  async DeleteEngine(
+    req: DeleteEngineRequest,
+    cb?: (error: string, rep: DeleteEngineResponse) => void
+  ): Promise<DeleteEngineResponse> {
+    return this.request("DeleteEngine", req, cb)
+  }
+
+  /**
    * 查询引擎实例访问地址
    */
   async DescribeSREInstanceAccessAddress(
@@ -49,6 +66,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSREInstanceAccessAddressResponse) => void
   ): Promise<DescribeSREInstanceAccessAddressResponse> {
     return this.request("DescribeSREInstanceAccessAddress", req, cb)
+  }
+
+  /**
+   * 创建引擎实例
+   */
+  async CreateEngine(
+    req: CreateEngineRequest,
+    cb?: (error: string, rep: CreateEngineResponse) => void
+  ): Promise<CreateEngineResponse> {
+    return this.request("CreateEngine", req, cb)
   }
 
   /**

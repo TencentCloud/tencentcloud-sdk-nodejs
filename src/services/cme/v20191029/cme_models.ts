@@ -368,6 +368,18 @@ export interface ExportVideoEditProjectRequest {
 }
 
 /**
+ * 云转推输入断流信息。
+ */
+export interface StreamConnectInputInterruptInfo {
+  /**
+      * 云转推输入源标识，取值有：
+<li>Main：主源；</li>
+<li>Backup：备源。</li>
+      */
+  EndPoint: string
+}
+
+/**
  * 分类信息
  */
 export interface ClassInfo {
@@ -2926,6 +2938,26 @@ export interface MediaPreprocessOperation {
 }
 
 /**
+ * 云转推输出断流信息
+ */
+export interface StreamConnectOutputInterruptInfo {
+  /**
+   * 云转推输出标识。
+   */
+  Id: string
+
+  /**
+   * 云转推输出名称。
+   */
+  Name: string
+
+  /**
+   * 云转推输出地址。
+   */
+  Url: string
+}
+
+/**
  * 加入的团队信息
  */
 export interface JoinTeamInfo {
@@ -3948,9 +3980,23 @@ export interface ProjectStreamConnectStatusChangedEvent {
   /**
       * 项目状态，取值有：
 <li>Working：云转推推流开始；</li>
-<li>Stopped：云转推推流结束。</li>
+<li>Stopped：云转推推流结束；</li>
+<li>InputInterrupted：云转推输入断流；</li>
+<li>OutputInterrupted：云转推输出断流。</li>
       */
   Status: string
+
+  /**
+      * 云转推输入断流信息，仅当 Status 取值 InputInterrupted 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InputInterruptInfo: StreamConnectInputInterruptInfo
+
+  /**
+      * 云转推输出断流信息，仅当 Status 取值 OutputInterrupted 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OutputInterruptInfo: StreamConnectOutputInterruptInfo
 }
 
 /**

@@ -18,9 +18,29 @@ const client = new tencentcloud.tse.v20201207.Client({
 })
 describe("tse.v20201207.test.js", function () {
 
+it("tse.v20201207.DeleteEngine", async function () {
+    try {
+       const data = await client.DeleteEngine({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tse.v20201207.DescribeSREInstanceAccessAddress", async function () {
     try {
        const data = await client.DescribeSREInstanceAccessAddress({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tse.v20201207.CreateEngine", async function () {
+    try {
+       const data = await client.CreateEngine({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
