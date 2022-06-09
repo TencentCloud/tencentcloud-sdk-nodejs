@@ -36,6 +36,7 @@ import {
   InputInfo,
   DescribeTasksResponse,
   AudioResultDetailLanguageResult,
+  RecognitionResult,
   MoanResult,
   CancelTaskResponse,
   AudioResultDetailTextResult,
@@ -43,6 +44,7 @@ import {
   AudioResultDetailMoanResult,
   TaskData,
   MediaInfo,
+  Tag,
   AudioSegments,
 } from "./ams_models"
 

@@ -51,5 +51,11 @@ class Client extends abstract_client_1.AbstractClient {
     async DescribeKBVulnerability(req, cb) {
         return this.request("DescribeKBVulnerability", req, cb);
     }
+    /**
+     * 本接口(MatchKBPURLList)用于在知识库中匹配与特征对应的开源组件列表。
+     */
+    async MatchKBPURLList(req, cb) {
+        return this.request("MatchKBPURLList", req, cb);
+    }
 }
 exports.Client = Client;

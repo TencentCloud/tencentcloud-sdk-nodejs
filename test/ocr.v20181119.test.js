@@ -508,6 +508,16 @@ it("ocr.v20181119.SealOCR", async function () {
     }
 })
 
+it("ocr.v20181119.RecognizePhilippinesVoteIDOCR", async function () {
+    try {
+       const data = await client.RecognizePhilippinesVoteIDOCR({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ocr.v20181119.TrainTicketOCR", async function () {
     try {
        const data = await client.TrainTicketOCR({})
@@ -668,6 +678,16 @@ it("ocr.v20181119.FinanBillOCR", async function () {
     }
 })
 
+it("ocr.v20181119.RecognizePhilippinesDrivingLicenseOCR", async function () {
+    try {
+       const data = await client.RecognizePhilippinesDrivingLicenseOCR({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ocr.v20181119.VerifyOfdVatInvoiceOCR", async function () {
     try {
        const data = await client.VerifyOfdVatInvoiceOCR({})
@@ -681,6 +701,16 @@ it("ocr.v20181119.VerifyOfdVatInvoiceOCR", async function () {
 it("ocr.v20181119.MixedInvoiceOCR", async function () {
     try {
        const data = await client.MixedInvoiceOCR({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ocr.v20181119.RecognizeIndonesiaIDCardOCR", async function () {
+    try {
+       const data = await client.RecognizeIndonesiaIDCardOCR({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

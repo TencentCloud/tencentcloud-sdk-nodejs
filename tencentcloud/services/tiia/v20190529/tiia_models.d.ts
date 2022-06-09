@@ -276,25 +276,34 @@ export interface DetectProductRequest {
     ImageBase64?: string;
 }
 /**
- * 图像的主体信息。
+ * DetectLabel返回参数结构体
  */
-export interface ObjectInfo {
+export interface DetectLabelResponse {
     /**
-      * 图像主体区域。
+      * Web网络版标签结果数组。如未选择WEB场景，则为空。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Box: Box;
+    Labels: Array<DetectLabelItem>;
     /**
-      * 主体类别ID。
+      * Camera摄像头版标签结果数组。如未选择CAMERA场景，则为空。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    CategoryId: number;
+    CameraLabels: Array<DetectLabelItem>;
     /**
-      * 整张图颜色信息。
+      * Album相册版标签结果数组。如未选择ALBUM场景，则为空。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Colors: Array<ColorInfo>;
+    AlbumLabels: Array<DetectLabelItem>;
     /**
-      * 属性信息。
+      * News新闻版标签结果数组。如未选择NEWS场景，则为空。
+新闻版目前为测试阶段，暂不提供每个标签的一级、二级分类信息的输出。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Attributes: Array<Attribute>;
+    NewsLabels: Array<DetectLabelItem>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 检测到的图片中的商品位置和品类预测。
@@ -403,6 +412,27 @@ export interface DetectDisgustResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 图像的主体信息。
+ */
+export interface ObjectInfo {
+    /**
+      * 图像主体区域。
+      */
+    Box: Box;
+    /**
+      * 主体类别ID。
+      */
+    CategoryId: number;
+    /**
+      * 整张图颜色信息。
+      */
+    Colors: Array<ColorInfo>;
+    /**
+      * 属性信息。
+      */
+    Attributes: Array<Attribute>;
 }
 /**
  * SearchImage请求参数结构体
@@ -521,30 +551,14 @@ NEWS，针对新闻、资讯、广电等行业优化；
     Scenes?: Array<string>;
 }
 /**
- * DetectLabel返回参数结构体
+ * DetectLabelPro返回参数结构体
  */
-export interface DetectLabelResponse {
+export interface DetectLabelProResponse {
     /**
-      * Web网络版标签结果数组。如未选择WEB场景，则为空。
+      * 返回标签数组。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Labels: Array<DetectLabelItem>;
-    /**
-      * Camera摄像头版标签结果数组。如未选择CAMERA场景，则为空。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    CameraLabels: Array<DetectLabelItem>;
-    /**
-      * Album相册版标签结果数组。如未选择ALBUM场景，则为空。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    AlbumLabels: Array<DetectLabelItem>;
-    /**
-      * News新闻版标签结果数组。如未选择NEWS场景，则为空。
-新闻版目前为测试阶段，暂不提供每个标签的一级、二级分类信息的输出。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    NewsLabels: Array<DetectLabelItem>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1093,6 +1107,27 @@ export interface CarPlateContent {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     PlateLocation: Array<Coord>;
+}
+/**
+ * DetectLabelPro请求参数结构体
+ */
+export interface DetectLabelProRequest {
+    /**
+      * 图片URL地址。
+图片限制：
+• 图片格式：PNG、JPG、JPEG、BMP。
+• 图片大小：所下载图片经Base64编码后不超过4M。图片下载时间不超过3秒。
+建议：
+• 图片像素：大于50*50像素，否则影响识别效果；
+• 长宽比：长边：短边<5；
+接口响应时间会受到图片下载时间的影响，建议使用更可靠的存储服务，推荐将图片存储在腾讯云COS。
+      */
+    ImageUrl?: string;
+    /**
+      * 图片经过base64编码的内容。最大不超过4M。与ImageUrl同时存在时优先使用ImageUrl字段。
+**注意：图片需要base64编码，并且要去掉编码头部。**
+      */
+    ImageBase64?: string;
 }
 /**
  * DetectLabelBeta返回参数结构体

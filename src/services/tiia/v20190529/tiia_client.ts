@@ -28,16 +28,17 @@ import {
   DeleteImagesResponse,
   CropImageRequest,
   DetectProductRequest,
-  ObjectInfo,
+  DetectLabelResponse,
   RegionDetected,
   DescribeGroupsRequest,
   DetectMisbehaviorResponse,
   AssessQualityResponse,
   DetectDisgustResponse,
+  ObjectInfo,
   SearchImageRequest,
   RecognizeCarResponse,
   DetectLabelRequest,
-  DetectLabelResponse,
+  DetectLabelProResponse,
   EnhanceImageResponse,
   ProductInfo,
   AssessQualityRequest,
@@ -61,6 +62,7 @@ import {
   DetectLabelItem,
   Location,
   CarPlateContent,
+  DetectLabelProRequest,
   DetectLabelBetaResponse,
   ImageInfo,
   Attribute,
@@ -107,6 +109,19 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DetectProductBetaResponse) => void
   ): Promise<DetectProductBetaResponse> {
     return this.request("DetectProductBeta", req, cb)
+  }
+
+  /**
+     * 通用图像标签可识别数千种常见物体或场景，覆盖日常物品、场景、动物、植物、食物、饮品、交通工具等多个大类，返回主体的标签名称和所属细分类目等，广泛应用于拍照识物、场景分析、图像内容审核与推荐、智能相册分类等场景。
+
+>     
+- 通用图像标签在原图像标签接口的基础上进行了升级，识别精度和标签覆盖范围相比原图像标签接口更优，推荐使用。
+     */
+  async DetectLabelPro(
+    req: DetectLabelProRequest,
+    cb?: (error: string, rep: DetectLabelProResponse) => void
+  ): Promise<DetectLabelProResponse> {
+    return this.request("DetectLabelPro", req, cb)
   }
 
   /**

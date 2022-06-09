@@ -1,4 +1,17 @@
 /**
+ * MatchKBPURLList返回参数结构体
+ */
+export interface MatchKBPURLListResponse {
+    /**
+      * 组件列表。
+      */
+    PURLList: Array<PURL>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeKBComponentVulnerability请求参数结构体
  */
 export interface DescribeKBComponentVulnerabilityRequest {
@@ -226,6 +239,15 @@ export interface DescribeKBLicenseResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * MatchKBPURLList请求参数结构体
+ */
+export interface MatchKBPURLListRequest {
+    /**
+      * SHA1。
+      */
+    SHA1?: string;
 }
 /**
  * 描述漏洞的详细信息。

@@ -44,6 +44,15 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DetectProductBeta", req, cb);
     }
     /**
+     * 通用图像标签可识别数千种常见物体或场景，覆盖日常物品、场景、动物、植物、食物、饮品、交通工具等多个大类，返回主体的标签名称和所属细分类目等，广泛应用于拍照识物、场景分析、图像内容审核与推荐、智能相册分类等场景。
+
+>
+- 通用图像标签在原图像标签接口的基础上进行了升级，识别精度和标签覆盖范围相比原图像标签接口更优，推荐使用。
+     */
+    async DetectLabelPro(req, cb) {
+        return this.request("DetectLabelPro", req, cb);
+    }
+    /**
      * 车辆识别可对图片中车辆的车型进行识别，可识别7000多种车型，输出车辆的品牌（如路虎）、车系（如神行者2）、类型（如中型SUV）、颜色、年份和坐标等信息，覆盖轿车、SUV、大型客车等市面常见车。如果图片中存在多辆车，会分别输出每辆车的车型和坐标。
 
 >

@@ -27,6 +27,7 @@ import {
   DeleteClusterResponse,
   ContainerState,
   CreateClusterRouteTableResponse,
+  SubnetInfos,
   CbsVolume,
   DescribeEKSClustersRequest,
   DescribePrometheusInstancesOverviewRequest,

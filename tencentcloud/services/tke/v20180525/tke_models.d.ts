@@ -134,6 +134,19 @@ export interface CreateClusterRouteTableResponse {
     RequestId?: string;
 }
 /**
+ * 子网信息
+ */
+export interface SubnetInfos {
+    /**
+      * 子网id
+      */
+    SubnetId: string;
+    /**
+      * 子网节点名称
+      */
+    Name: string;
+}
+/**
  * EKS Instnace CBS volume
  */
 export interface CbsVolume {
@@ -6683,6 +6696,10 @@ export interface CreateEKSClusterRequest {
       * 标签描述列表。通过指定该参数可以同时绑定标签到相应的资源实例，当前仅支持绑定标签到集群实例。
       */
     TagSpecification?: Array<TagSpecification>;
+    /**
+      * 子网信息列表
+      */
+    SubnetInfos?: Array<SubnetInfos>;
 }
 /**
  * 账户UIN与客户端证书CommonName的映射

@@ -58,4 +58,14 @@ it("bsca.v20210811.DescribeKBVulnerability", async function () {
     }
 })
 
+it("bsca.v20210811.MatchKBPURLList", async function () {
+    try {
+       const data = await client.MatchKBPURLList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 })

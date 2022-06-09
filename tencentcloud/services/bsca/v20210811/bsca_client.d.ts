@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeKBComponentVulnerabilityRequest, DescribeKBComponentVulnerabilityResponse, DescribeKBVulnerabilityResponse, DescribeKBLicenseResponse, DescribeKBVulnerabilityRequest, DescribeKBComponentResponse, DescribeKBLicenseRequest, DescribeKBComponentRequest } from "./bsca_models";
+import { MatchKBPURLListResponse, DescribeKBComponentVulnerabilityRequest, DescribeKBComponentVulnerabilityResponse, DescribeKBVulnerabilityResponse, DescribeKBLicenseResponse, MatchKBPURLListRequest, DescribeKBVulnerabilityRequest, DescribeKBComponentResponse, DescribeKBLicenseRequest, DescribeKBComponentRequest } from "./bsca_models";
 /**
  * bsca client
  * @class
@@ -23,4 +23,8 @@ export declare class Client extends AbstractClient {
      * 本接口(DescribeKBVulnerability)用于在知识库中查询漏洞详细信息，支持根据CVE ID查询或者根据Vul ID查询。
      */
     DescribeKBVulnerability(req: DescribeKBVulnerabilityRequest, cb?: (error: string, rep: DescribeKBVulnerabilityResponse) => void): Promise<DescribeKBVulnerabilityResponse>;
+    /**
+     * 本接口(MatchKBPURLList)用于在知识库中匹配与特征对应的开源组件列表。
+     */
+    MatchKBPURLList(req: MatchKBPURLListRequest, cb?: (error: string, rep: MatchKBPURLListResponse) => void): Promise<MatchKBPURLListResponse>;
 }

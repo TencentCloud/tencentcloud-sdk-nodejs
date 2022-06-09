@@ -30,6 +30,7 @@ import {
   TrainTicketOCRRequest,
   EstateCertOCRResponse,
   FlightInvoiceOCRRequest,
+  RecognizePhilippinesDrivingLicenseOCRRequest,
   MLIDPassportOCRRequest,
   TextDetectResponse,
   TollInvoiceOCRResponse,
@@ -50,6 +51,7 @@ import {
   VehicleRegCertInfo,
   VehicleLicenseOCRRequest,
   EnterpriseLicenseOCRResponse,
+  RecognizePhilippinesVoteIDOCRRequest,
   InvoiceGeneralInfo,
   WordCoordPoint,
   InstitutionOCRResponse,
@@ -80,6 +82,7 @@ import {
   GeneralHandwritingOCRRequest,
   BizLicenseOCRRequest,
   MixedInvoiceDetectResponse,
+  RideHailingDriverLicenseOCRRequest,
   VatInvoiceUserInfo,
   InsuranceBillOCRResponse,
   GeneralAccurateOCRResponse,
@@ -89,6 +92,7 @@ import {
   GeneralBasicOCRResponse,
   RecognizeThaiIDCardOCRResponse,
   CellContent,
+  RecognizePhilippinesDrivingLicenseOCRResponse,
   MixedInvoiceOCRResponse,
   ClassifyDetectOCRResponse,
   VatInvoiceVerifyNewRequest,
@@ -125,6 +129,7 @@ import {
   LicensePlateOCRRequest,
   GeneralBasicOCRRequest,
   TextVehicleBack,
+  RecognizeIndonesiaIDCardOCRResponse,
   GeneralEfficientOCRRequest,
   AdvertiseOCRRequest,
   RideHailingDriverLicenseOCRResponse,
@@ -134,10 +139,12 @@ import {
   SmartStructuralOCRResponse,
   DetectedWords,
   VerifyEnterpriseFourFactorsRequest,
+  RecognizeIndonesiaIDCardOCRRequest,
   ShipInvoiceInfo,
   GeneralAccurateOCRRequest,
   OrgCodeCertOCRRequest,
   FlightInvoiceOCRResponse,
+  TextDetectionResult,
   InstitutionOCRRequest,
   CarInvoiceInfo,
   FlightInvoiceInfo,
@@ -165,7 +172,7 @@ import {
   PassportOCRRequest,
   DutyPaidProofOCRRequest,
   RecognizeHealthCodeOCRResponse,
-  RideHailingDriverLicenseOCRRequest,
+  RecognizePhilippinesVoteIDOCRResponse,
   QueryBarCodeRequest,
   ItemCoord,
   OrgCodeCertOCRResponse,
@@ -914,6 +921,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 菲律宾VoteID识别
+   */
+  async RecognizePhilippinesVoteIDOCR(
+    req: RecognizePhilippinesVoteIDOCRRequest,
+    cb?: (error: string, rep: RecognizePhilippinesVoteIDOCRResponse) => void
+  ): Promise<RecognizePhilippinesVoteIDOCRResponse> {
+    return this.request("RecognizePhilippinesVoteIDOCR", req, cb)
+  }
+
+  /**
      * 本接口支持火车票全字段的识别，包括编号、票价、姓名、座位号、出发时间、出发站、到达站、车次、席别、发票类型及序列号等。
 
      */
@@ -1146,6 +1163,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 菲律宾驾驶证识别
+   */
+  async RecognizePhilippinesDrivingLicenseOCR(
+    req: RecognizePhilippinesDrivingLicenseOCRRequest,
+    cb?: (error: string, rep: RecognizePhilippinesDrivingLicenseOCRResponse) => void
+  ): Promise<RecognizePhilippinesDrivingLicenseOCRResponse> {
+    return this.request("RecognizePhilippinesDrivingLicenseOCR", req, cb)
+  }
+
+  /**
    * 本接口支持OFD格式的增值税电子普通发票和增值税电子专用发票的识别，返回发票代码、发票号码、开票日期、验证码、机器编号、密码区，购买方和销售方信息，包括名称、纳税人识别号、地址电话、开户行及账号，以及价税合计、开票人、收款人、复核人、税额、不含税金额等字段信息。
    */
   async VerifyOfdVatInvoiceOCR(
@@ -1163,6 +1190,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: MixedInvoiceOCRResponse) => void
   ): Promise<MixedInvoiceOCRResponse> {
     return this.request("MixedInvoiceOCR", req, cb)
+  }
+
+  /**
+   * 印尼身份证识别
+   */
+  async RecognizeIndonesiaIDCardOCR(
+    req: RecognizeIndonesiaIDCardOCRRequest,
+    cb?: (error: string, rep: RecognizeIndonesiaIDCardOCRResponse) => void
+  ): Promise<RecognizeIndonesiaIDCardOCRResponse> {
+    return this.request("RecognizeIndonesiaIDCardOCR", req, cb)
   }
 
   /**

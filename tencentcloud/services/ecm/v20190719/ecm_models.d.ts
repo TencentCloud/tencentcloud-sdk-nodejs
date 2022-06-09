@@ -2783,6 +2783,13 @@ export interface AssignIpv6AddressesRequest {
       * 自动分配IPv6地址个数，内网IP地址个数总和不能超过配数。与入参Ipv6Addresses合并计算配额。与Ipv6Addresses必填一个。
       */
     Ipv6AddressCount?: number;
+    /**
+      * ipv6运营商如下：
+CTCC：中国电信
+CUCC：中国联通
+CMCC：中国移动
+      */
+    Ipv6ISP?: string;
 }
 /**
  * DescribeModuleDetail返回参数结构体
@@ -5354,7 +5361,7 @@ export interface ReleaseIpv6AddressesResponse {
     /**
       * 任务ID，可以通过DescribeTaskResult查询任务状态
       */
-    TaskId?: number;
+    TaskId: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -6067,7 +6074,7 @@ export interface AssignIpv6AddressesResponse {
     /**
       * 分配给弹性网卡的IPv6地址列表。
       */
-    Ipv6AddressSet?: Array<Ipv6Address>;
+    Ipv6AddressSet: Array<Ipv6Address>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

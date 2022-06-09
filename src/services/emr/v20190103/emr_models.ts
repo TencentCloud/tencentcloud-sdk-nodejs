@@ -279,7 +279,13 @@ export interface SubnetInfo {
 /**
  * 用户管理列表过滤器
  */
-export type UserManagerFilter = null
+export interface UserManagerFilter {
+  /**
+      * 用户名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UserName?: string
+}
 
 /**
  * 元数据库信息

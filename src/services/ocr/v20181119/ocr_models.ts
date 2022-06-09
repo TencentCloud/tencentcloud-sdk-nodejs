@@ -404,6 +404,33 @@ export interface FlightInvoiceOCRRequest {
 }
 
 /**
+ * RecognizePhilippinesDrivingLicenseOCR请求参数结构体
+ */
+export interface RecognizePhilippinesDrivingLicenseOCRRequest {
+  /**
+   * 是否返回人像照片。
+   */
+  ReturnHeadImage: boolean
+
+  /**
+      * 图片的 Base64 值。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
+图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+      */
+  ImageBase64?: string
+
+  /**
+      * 图片的 Url 地址。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
+图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
+非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+      */
+  ImageUrl?: string
+}
+
+/**
  * MLIDPassportOCR请求参数结构体
  */
 export interface MLIDPassportOCRRequest {
@@ -1133,6 +1160,33 @@ export interface EnterpriseLicenseOCRResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * RecognizePhilippinesVoteIDOCR请求参数结构体
+ */
+export interface RecognizePhilippinesVoteIDOCRRequest {
+  /**
+   * 是否返回人像照片。
+   */
+  ReturnHeadImage: boolean
+
+  /**
+      * 图片的 Base64 值。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
+图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+      */
+  ImageBase64?: string
+
+  /**
+      * 图片的 Url 地址。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
+图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
+非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+      */
+  ImageUrl?: string
 }
 
 /**
@@ -2040,6 +2094,23 @@ export interface MixedInvoiceDetectResponse {
 }
 
 /**
+ * RideHailingDriverLicenseOCR请求参数结构体
+ */
+export interface RideHailingDriverLicenseOCRRequest {
+  /**
+      * 图片的 Base64 值。要求图片经Base64编码后不超过 7M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。
+图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+      */
+  ImageBase64?: string
+
+  /**
+      * 图片的 Url 地址。要求图片经Base64编码后不超过 7M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。图片下载时间不超过 3 秒。
+建议图片存储于腾讯云，可保障更高的下载速度和稳定性。
+      */
+  ImageUrl?: string
+}
+
+/**
  * 发票人员信息
  */
 export interface VatInvoiceUserInfo {
@@ -2312,6 +2383,76 @@ export interface CellContent {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   WordSize: number
+}
+
+/**
+ * RecognizePhilippinesDrivingLicenseOCR返回参数结构体
+ */
+export interface RecognizePhilippinesDrivingLicenseOCRResponse {
+  /**
+   * 人像照片Base64后的结果
+   */
+  HeadPortrait: TextDetectionResult
+
+  /**
+   * 姓名
+   */
+  Name: TextDetectionResult
+
+  /**
+   * 姓氏
+   */
+  LastName: TextDetectionResult
+
+  /**
+   * 首姓名
+   */
+  FirstName: TextDetectionResult
+
+  /**
+   * 中间姓名
+   */
+  MiddleName: TextDetectionResult
+
+  /**
+   * 国籍
+   */
+  Nationality: TextDetectionResult
+
+  /**
+   * 性别
+   */
+  Sex: TextDetectionResult
+
+  /**
+   * 地址
+   */
+  Address: TextDetectionResult
+
+  /**
+   * 证号
+   */
+  LicenseNo: TextDetectionResult
+
+  /**
+   * 有效期
+   */
+  ExpiresDate: TextDetectionResult
+
+  /**
+   * 机构代码
+   */
+  AgencyCode: TextDetectionResult
+
+  /**
+   * 出生日期
+   */
+  Birthday: TextDetectionResult
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3744,6 +3885,96 @@ export interface TextVehicleBack {
 }
 
 /**
+ * RecognizeIndonesiaIDCardOCR返回参数结构体
+ */
+export interface RecognizeIndonesiaIDCardOCRResponse {
+  /**
+   * 证件号码
+   */
+  NIK: string
+
+  /**
+   * 姓名
+   */
+  Nama: string
+
+  /**
+   * 出生地/出生时间
+   */
+  TempatTglLahir: string
+
+  /**
+   * 性别
+   */
+  JenisKelamin: string
+
+  /**
+   * 血型
+   */
+  GolDarah: string
+
+  /**
+   * 地址
+   */
+  Alamat: string
+
+  /**
+   * 街道
+   */
+  RTRW: string
+
+  /**
+   * 村
+   */
+  KelDesa: string
+
+  /**
+   * 地区
+   */
+  Kecamatan: string
+
+  /**
+   * 宗教信仰
+   */
+  Agama: string
+
+  /**
+   * 婚姻状况
+   */
+  StatusPerkawinan: string
+
+  /**
+   * 职业
+   */
+  Perkerjaan: string
+
+  /**
+   * 国籍
+   */
+  KewargaNegaraan: string
+
+  /**
+   * 身份证有效期限
+   */
+  BerlakuHingga: string
+
+  /**
+   * 发证日期
+   */
+  IssuedDate: string
+
+  /**
+   * 人像截图
+   */
+  Photo: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * GeneralEfficientOCR请求参数结构体
  */
 export interface GeneralEfficientOCRRequest {
@@ -3957,6 +4188,41 @@ export interface VerifyEnterpriseFourFactorsRequest {
 }
 
 /**
+ * RecognizeIndonesiaIDCardOCR请求参数结构体
+ */
+export interface RecognizeIndonesiaIDCardOCRRequest {
+  /**
+      * 图片的 Base64 值。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
+图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+      */
+  ImageBase64?: string
+
+  /**
+      * 图片的 Url 地址。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
+图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
+非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+      */
+  ImageUrl?: string
+
+  /**
+   * 是否返回人像照片。
+   */
+  ReturnHeadImage?: boolean
+
+  /**
+      * 场景参数，默认值为V1
+可选值：
+V1
+V2
+      */
+  Scene?: string
+}
+
+/**
  * 轮船票字段信息
  */
 export interface ShipInvoiceInfo {
@@ -4051,6 +4317,21 @@ export interface FlightInvoiceOCRResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 识别结果
+ */
+export interface TextDetectionResult {
+  /**
+   * 识别出的文本行内容
+   */
+  Value: string
+
+  /**
+   * 坐标，以四个顶点坐标表示
+   */
+  Polygon: Array<Coord>
 }
 
 /**
@@ -4814,20 +5095,58 @@ export interface RecognizeHealthCodeOCRResponse {
 }
 
 /**
- * RideHailingDriverLicenseOCR请求参数结构体
+ * RecognizePhilippinesVoteIDOCR返回参数结构体
  */
-export interface RideHailingDriverLicenseOCRRequest {
+export interface RecognizePhilippinesVoteIDOCRResponse {
   /**
-      * 图片的 Base64 值。要求图片经Base64编码后不超过 7M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。
-图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
-      */
-  ImageBase64?: string
+   * 人像照片Base64后的结果
+   */
+  HeadPortrait: TextDetectionResult
 
   /**
-      * 图片的 Url 地址。要求图片经Base64编码后不超过 7M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。图片下载时间不超过 3 秒。
-建议图片存储于腾讯云，可保障更高的下载速度和稳定性。
-      */
-  ImageUrl?: string
+   * 菲律宾VoteID的VIN
+   */
+  VIN: TextDetectionResult
+
+  /**
+   * 姓名
+   */
+  FirstName: TextDetectionResult
+
+  /**
+   * 姓氏
+   */
+  LastName: TextDetectionResult
+
+  /**
+   * 出生日期
+   */
+  Birthday: TextDetectionResult
+
+  /**
+   * 婚姻状况
+   */
+  CivilStatus: TextDetectionResult
+
+  /**
+   * 国籍
+   */
+  Citizenship: TextDetectionResult
+
+  /**
+   * 地址
+   */
+  Address: TextDetectionResult
+
+  /**
+   * 地区
+   */
+  PrecinctNo: TextDetectionResult
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

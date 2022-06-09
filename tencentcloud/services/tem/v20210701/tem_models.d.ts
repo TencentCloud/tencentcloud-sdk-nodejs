@@ -630,11 +630,11 @@ export interface DeployApplicationRequest {
       */
     DeployStrategyConf?: DeployStrategyConf;
     /**
-      * 弹性策略
+      * 弹性策略（已弃用，请使用弹性伸缩策略组合相关接口）
       */
     HorizontalAutoscaler?: Array<HorizontalAutoscaler>;
     /**
-      * 定时弹性策略
+      * 定时弹性策略（已弃用，请使用弹性伸缩策略组合相关接口）
       */
     CronHorizontalAutoscaler?: Array<CronHorizontalAutoscaler>;
     /**
@@ -667,6 +667,10 @@ export interface DeployApplicationRequest {
       * 是否开启prometheus 业务指标监控
       */
     EnablePrometheusConf?: EnablePrometheusConf;
+    /**
+      * 1：开始apm采集；0：关闭apm采集
+      */
+    EnableTracing?: number;
 }
 /**
  * Ingress 配置

@@ -18,6 +18,7 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  MatchKBPURLListResponse,
   DescribeKBComponentVulnerabilityRequest,
   ComponentVulnerabilityUnion,
   LicenseUnion,
@@ -28,6 +29,7 @@ import {
   Component,
   DescribeKBVulnerabilityResponse,
   DescribeKBLicenseResponse,
+  MatchKBPURLListRequest,
   VulnerabilityUnion,
   LicenseDetail,
   DescribeKBVulnerabilityRequest,
@@ -89,5 +91,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeKBVulnerabilityResponse) => void
   ): Promise<DescribeKBVulnerabilityResponse> {
     return this.request("DescribeKBVulnerability", req, cb)
+  }
+
+  /**
+   * 本接口(MatchKBPURLList)用于在知识库中匹配与特征对应的开源组件列表。
+   */
+  async MatchKBPURLList(
+    req: MatchKBPURLListRequest,
+    cb?: (error: string, rep: MatchKBPURLListResponse) => void
+  ): Promise<MatchKBPURLListResponse> {
+    return this.request("MatchKBPURLList", req, cb)
   }
 }

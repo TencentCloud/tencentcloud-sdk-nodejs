@@ -510,6 +510,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SealOCR", req, cb);
     }
     /**
+     * 菲律宾VoteID识别
+     */
+    async RecognizePhilippinesVoteIDOCR(req, cb) {
+        return this.request("RecognizePhilippinesVoteIDOCR", req, cb);
+    }
+    /**
      * 本接口支持火车票全字段的识别，包括编号、票价、姓名、座位号、出发时间、出发站、到达站、车次、席别、发票类型及序列号等。
 
      */
@@ -678,6 +684,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("FinanBillOCR", req, cb);
     }
     /**
+     * 菲律宾驾驶证识别
+     */
+    async RecognizePhilippinesDrivingLicenseOCR(req, cb) {
+        return this.request("RecognizePhilippinesDrivingLicenseOCR", req, cb);
+    }
+    /**
      * 本接口支持OFD格式的增值税电子普通发票和增值税电子专用发票的识别，返回发票代码、发票号码、开票日期、验证码、机器编号、密码区，购买方和销售方信息，包括名称、纳税人识别号、地址电话、开户行及账号，以及价税合计、开票人、收款人、复核人、税额、不含税金额等字段信息。
      */
     async VerifyOfdVatInvoiceOCR(req, cb) {
@@ -688,6 +700,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async MixedInvoiceOCR(req, cb) {
         return this.request("MixedInvoiceOCR", req, cb);
+    }
+    /**
+     * 印尼身份证识别
+     */
+    async RecognizeIndonesiaIDCardOCR(req, cb) {
+        return this.request("RecognizeIndonesiaIDCardOCR", req, cb);
     }
     /**
      * 本接口支持北京、上海、广东、江苏、吉林、黑龙江省市健康码的识别，包括持码人姓名、持码人身份证号、健康码更新时间、健康码颜色、核酸检测结果、核酸检测间隔时长、核酸检测时间，七个字段的识别结果输出。不同省市健康码显示的字段信息有所不同，上述字段的识别结果可能为空，以图片上具体展示的信息为准。

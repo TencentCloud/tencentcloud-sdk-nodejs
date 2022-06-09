@@ -38,6 +38,16 @@ it("tiia.v20190529.DetectProductBeta", async function () {
     }
 })
 
+it("tiia.v20190529.DetectLabelPro", async function () {
+    try {
+       const data = await client.DetectLabelPro({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tiia.v20190529.RecognizeCar", async function () {
     try {
        const data = await client.RecognizeCar({})

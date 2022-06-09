@@ -505,6 +505,21 @@ export interface AudioResultDetailLanguageResult {
     SubLabelCode: string;
 }
 /**
+ * 识别类标签结果信息
+ */
+export interface RecognitionResult {
+    /**
+      * 可能的取值有：Teenager 、Gender
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Label: string;
+    /**
+      * 识别标签列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Tags: Array<Tag>;
+}
+/**
  * 呻吟低俗检测结果
  */
 export interface MoanResult {
@@ -652,6 +667,11 @@ export interface AudioResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     SubLabel: string;
+    /**
+      * 识别类标签结果信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RecognitionResults: Array<RecognitionResult>;
 }
 /**
  * 音频呻吟审核结果
@@ -766,6 +786,33 @@ export interface MediaInfo {
       * *内测中，敬请期待*
       */
     Thumbnail: string;
+}
+/**
+ * 音频切片识别标签
+ */
+export interface Tag {
+    /**
+      * 根据Label字段确定具体名称：
+当Label 为Teenager 时 Name可能取值有：Teenager
+当Label 为Gender 时 Name可能取值有：Male 、Female
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Name: string;
+    /**
+      * 置信分：0～100，数值越大表示置信度越高
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Score: number;
+    /**
+      * 识别开始偏移时间，单位：毫秒
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    StartTime: number;
+    /**
+      * 识别结束偏移时间，单位：毫秒
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EndTime: number;
 }
 /**
  * 表示声音段信息

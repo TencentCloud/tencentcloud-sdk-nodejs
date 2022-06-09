@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DetectProductBetaResponse, DetectDisgustRequest, SearchImageResponse, RecognizeCarProRequest, RecognizeCarProResponse, CreateImageRequest, DetectLabelBetaRequest, DeleteImagesResponse, CropImageRequest, DetectProductRequest, DescribeGroupsRequest, DetectMisbehaviorResponse, AssessQualityResponse, DetectDisgustResponse, SearchImageRequest, RecognizeCarResponse, DetectLabelRequest, DetectLabelResponse, EnhanceImageResponse, AssessQualityRequest, DeleteImagesRequest, CreateGroupRequest, DescribeImagesRequest, DetectProductBetaRequest, RecognizeCarRequest, EnhanceImageRequest, CropImageResponse, DetectCelebrityRequest, DetectProductResponse, CreateImageResponse, DetectLabelBetaResponse, DetectCelebrityResponse, DescribeGroupsResponse, DescribeImagesResponse, DetectMisbehaviorRequest, CreateGroupResponse } from "./tiia_models";
+import { DetectProductBetaResponse, DetectDisgustRequest, SearchImageResponse, RecognizeCarProRequest, RecognizeCarProResponse, CreateImageRequest, DetectLabelBetaRequest, DeleteImagesResponse, CropImageRequest, DetectProductRequest, DetectLabelResponse, DescribeGroupsRequest, DetectMisbehaviorResponse, AssessQualityResponse, DetectDisgustResponse, SearchImageRequest, RecognizeCarResponse, DetectLabelRequest, DetectLabelProResponse, EnhanceImageResponse, AssessQualityRequest, DeleteImagesRequest, CreateGroupRequest, DescribeImagesRequest, DetectProductBetaRequest, RecognizeCarRequest, EnhanceImageRequest, CropImageResponse, DetectCelebrityRequest, DetectProductResponse, CreateImageResponse, DetectLabelProRequest, DetectLabelBetaResponse, DetectCelebrityResponse, DescribeGroupsResponse, DescribeImagesResponse, DetectMisbehaviorRequest, CreateGroupResponse } from "./tiia_models";
 /**
  * tiia client
  * @class
@@ -19,6 +19,13 @@ export declare class Client extends AbstractClient {
 - 公共参数中的签名方式必须指定为V3版本，即配置SignatureMethod参数为TC3-HMAC-SHA256。
      */
     DetectProductBeta(req: DetectProductBetaRequest, cb?: (error: string, rep: DetectProductBetaResponse) => void): Promise<DetectProductBetaResponse>;
+    /**
+     * 通用图像标签可识别数千种常见物体或场景，覆盖日常物品、场景、动物、植物、食物、饮品、交通工具等多个大类，返回主体的标签名称和所属细分类目等，广泛应用于拍照识物、场景分析、图像内容审核与推荐、智能相册分类等场景。
+
+>
+- 通用图像标签在原图像标签接口的基础上进行了升级，识别精度和标签覆盖范围相比原图像标签接口更优，推荐使用。
+     */
+    DetectLabelPro(req: DetectLabelProRequest, cb?: (error: string, rep: DetectLabelProResponse) => void): Promise<DetectLabelProResponse>;
     /**
      * 车辆识别可对图片中车辆的车型进行识别，可识别7000多种车型，输出车辆的品牌（如路虎）、车系（如神行者2）、类型（如中型SUV）、颜色、年份和坐标等信息，覆盖轿车、SUV、大型客车等市面常见车。如果图片中存在多辆车，会分别输出每辆车的车型和坐标。
 
