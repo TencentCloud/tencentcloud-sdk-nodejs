@@ -48,6 +48,23 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTemplates", req, cb);
     }
     /**
+     * 此接口（OperateChannelTemplate）用于渠道侧将模板库中的模板对合作企业进行查询和设置, 其中包括可见性的修改以及对合作企业的设置.
+1、同步标识=select时：
+返回渠道侧模板库当前模板的属性.
+2、同步标识=update或者delete时：
+对渠道子客进行模板库中模板授权,修改操作
+     */
+    async OperateChannelTemplate(req, cb) {
+        return this.request("OperateChannelTemplate", req, cb);
+    }
+    /**
+     * 此接口（ChannelCreateMultiFlowSignQRCode）用于创建一码多扫流程签署二维码。
+适用的模版仅限于B2C（1、无序签署，2、顺序签署时B静默签署，3、顺序签署时B非首位签署）、单C的模版，且模版中发起方没有填写控件。
+     */
+    async ChannelCreateMultiFlowSignQRCode(req, cb) {
+        return this.request("ChannelCreateMultiFlowSignQRCode", req, cb);
+    }
+    /**
      * 接口（ChannelCreateFlowByFiles）用于渠道版通过文件创建流程。此接口不可直接使用，需要运营申请
      */
     async ChannelCreateFlowByFiles(req, cb) {
@@ -62,14 +79,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("PrepareFlows", req, cb);
     }
     /**
-     * 此接口（OperateChannelTemplate）用于渠道侧将模板库中的模板对合作企业进行查询和设置, 其中包括可见性的修改以及对合作企业的设置.
-1、同步标识=select时：
-返回渠道侧模板库当前模板的属性.
-2、同步标识=update或者delete时：
-对渠道子客进行模板库中模板授权,修改操作
+     * 创建参与者签署短链
      */
-    async OperateChannelTemplate(req, cb) {
-        return this.request("OperateChannelTemplate", req, cb);
+    async CreateSignUrls(req, cb) {
+        return this.request("CreateSignUrls", req, cb);
     }
     /**
      * 渠道通过图片为子客代创建印章，图片最大5m；此接口不可直接使用，需要运营申请
@@ -78,10 +91,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateSealByImage", req, cb);
     }
     /**
-     * 创建参与者签署短链
+     * 此接口（ChannelCancelMultiFlowSignQRCode）用于取消一码多扫二维码。该接口对传入的二维码ID，若还在有效期内，可以提前失效。
      */
-    async CreateSignUrls(req, cb) {
-        return this.request("CreateSignUrls", req, cb);
+    async ChannelCancelMultiFlowSignQRCode(req, cb) {
+        return this.request("ChannelCancelMultiFlowSignQRCode", req, cb);
     }
     /**
      * 此接口（CreateConsoleLoginUrl）用于创建电子签控制台登录链接。若企业未激活，调用同步企业信息、同步经办人信息

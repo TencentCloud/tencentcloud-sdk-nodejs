@@ -668,6 +668,10 @@ export interface CreateReplicationInstanceRequest {
       * 复制实例地域名称
       */
     ReplicationRegionName?: string;
+    /**
+      * 是否同步TCR云标签至生成的COS Bucket
+      */
+    SyncTag?: boolean;
 }
 /**
  * ModifyInstanceToken返回参数结构体
@@ -2435,6 +2439,10 @@ export interface CreateInstanceRequest {
       * 实例计费类型，0表示按量计费，1表示预付费，默认为按量计费
       */
     RegistryChargeType?: number;
+    /**
+      * 是否同步TCR云标签至生成的COS Bucket
+      */
+    SyncTag?: boolean;
 }
 /**
  * DescribeInstanceToken请求参数结构体
@@ -2923,6 +2931,10 @@ export interface DeleteInstanceRequest {
       * 是否删除存储桶，默认为false
       */
     DeleteBucket?: boolean;
+    /**
+      * 是否dryRun模式，缺省值：false
+      */
+    DryRun?: boolean;
 }
 /**
  * DescribeImageManifests返回参数结构体

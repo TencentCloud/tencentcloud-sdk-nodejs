@@ -12,6 +12,23 @@ export interface UploadFile {
     FileName?: string;
 }
 /**
+ * CancelMultiFlowSignQRCode请求参数结构体
+ */
+export interface CancelMultiFlowSignQRCodeRequest {
+    /**
+      * 用户信息
+      */
+    Operator: UserInfo;
+    /**
+      * 二维码id
+      */
+    QrCodeId: string;
+    /**
+      * 应用信息
+      */
+    Agent?: Agent;
+}
+/**
  * DescribeFileUrls返回参数结构体
  */
 export interface DescribeFileUrlsResponse {
@@ -292,6 +309,23 @@ export interface DescribeThirdPartyAuthCodeRequest {
     AuthCode: string;
 }
 /**
+ * 一码多扫签署二维码对象
+ */
+export interface SignQrCode {
+    /**
+      * 二维码id
+      */
+    QrCodeId: string;
+    /**
+      * 二维码url
+      */
+    QrCodeUrl: string;
+    /**
+      * 二维码过期时间
+      */
+    ExpiredTime: number;
+}
+/**
  * UploadFiles请求参数结构体
  */
 export interface UploadFilesRequest {
@@ -460,6 +494,84 @@ KEYWORD 关键字，使用ComponentId指定关键字
       * 指定关键字时纵坐标偏移量
       */
     OffsetY?: number;
+}
+/**
+ * CreateMultiFlowSignQRCode返回参数结构体
+ */
+export interface CreateMultiFlowSignQRCodeResponse {
+    /**
+      * 签署二维码对象
+      */
+    QrCode: SignQrCode;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * 创建流程的签署方信息
+ */
+export interface FlowCreateApprover {
+    /**
+      * 参与者类型：
+0：企业
+1：个人
+3：企业静默签署
+注：类型为3（企业静默签署）时，此接口会默认完成该签署方的签署。
+      */
+    ApproverType: number;
+    /**
+      * 如果签署方为企业，需要填入企业全称
+      */
+    OrganizationName?: string;
+    /**
+      * 是否需要签署
+- `false`: 不需要签署
+-  `true`:  需要签署
+      */
+    Required?: boolean;
+    /**
+      * 签署方经办人姓名
+      */
+    ApproverName?: string;
+    /**
+      * 签署方经办人手机号码
+      */
+    ApproverMobile?: string;
+    /**
+      * 签署方经办人证件号码
+      */
+    ApproverIdCardNumber?: string;
+    /**
+      * 签署方经办人证件类型ID_CARD 身份证
+HONGKONG_AND_MACAO 港澳居民来往内地通行证
+HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证(格式同居民身份证)
+      */
+    ApproverIdCardType?: string;
+    /**
+      * 签署方经办人在模板中的角色ID
+      */
+    RecipientId?: string;
+    /**
+      * 签署方经办人的用户ID,和签署方经办人姓名+手机号+证件必须有一个
+      */
+    UserId?: string;
+    /**
+      * 签署前置条件：是否需要阅读全文，默认为不需要
+      */
+    IsFullText?: boolean;
+    /**
+      * 签署前置条件：阅读时长限制，默认为不需要
+      */
+    PreReadTime?: number;
+    /**
+      * 是否发送短信，sms--短信通知，none--不通知，默认为sms
+      */
+    NotifyType?: string;
+    /**
+      * 签署意愿确认渠道,WEIXINAPP:人脸识别
+      */
+    VerifyChannel?: Array<string>;
 }
 /**
  * UploadFiles返回参数结构体
@@ -765,69 +877,41 @@ export interface FileInfo {
     CreatedOn?: number;
 }
 /**
- * 创建流程的签署方信息
+ * CreateMultiFlowSignQRCode请求参数结构体
  */
-export interface FlowCreateApprover {
+export interface CreateMultiFlowSignQRCodeRequest {
     /**
-      * 参与者类型：
-0：企业
-1：个人
-3：企业静默签署
-注：类型为3（企业静默签署）时，此接口会默认完成该签署方的签署。
+      * 模版ID
       */
-    ApproverType: number;
+    TemplateId: string;
     /**
-      * 如果签署方为企业，需要填入企业全称
+      * 用户信息
       */
-    OrganizationName?: string;
+    Operator: UserInfo;
     /**
-      * 是否需要签署
-- `false`: 不需要签署
--  `true`:  需要签署
+      * 合同名称
       */
-    Required?: boolean;
+    FlowName: string;
     /**
-      * 签署方经办人姓名
+      * 应用信息
       */
-    ApproverName?: string;
+    Agent?: Agent;
     /**
-      * 签署方经办人手机号码
+      * 合同有效天数 默认7天 最高设置不超过30天
       */
-    ApproverMobile?: string;
+    FlowEffectiveDay?: number;
     /**
-      * 签署方经办人证件号码
+      * 二维码有效天数 默认7天 最高设置不超过90天
       */
-    ApproverIdCardNumber?: string;
+    QrEffectiveDay?: number;
     /**
-      * 签署方经办人证件类型ID_CARD 身份证
-HONGKONG_AND_MACAO 港澳居民来往内地通行证
-HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证(格式同居民身份证)
+      * 最大合同份数，默认5份 超过此上限 二维码自动失效
       */
-    ApproverIdCardType?: string;
+    MaxFlowNum?: number;
     /**
-      * 签署方经办人在模板中的角色ID
+      * 回调地址
       */
-    RecipientId?: string;
-    /**
-      * 签署方经办人的用户ID,和签署方经办人姓名+手机号+证件必须有一个
-      */
-    UserId?: string;
-    /**
-      * 签署前置条件：是否需要阅读全文，默认为不需要
-      */
-    IsFullText?: boolean;
-    /**
-      * 签署前置条件：阅读时长限制，默认为不需要
-      */
-    PreReadTime?: number;
-    /**
-      * 是否发送短信，sms--短信通知，none--不通知，默认为sms
-      */
-    NotifyType?: string;
-    /**
-      * 签署意愿确认渠道,WEIXINAPP:人脸识别
-      */
-    VerifyChannel?: Array<string>;
+    CallbackUrl?: string;
 }
 /**
  * StartFlow返回参数结构体
@@ -913,6 +997,15 @@ MULTI_LINE_TEXT - 多行文本控件
       * 是否需要预览，true：预览模式，false：非预览（默认）
       */
     NeedPreview?: boolean;
+}
+/**
+ * CancelMultiFlowSignQRCode返回参数结构体
+ */
+export interface CancelMultiFlowSignQRCodeResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * CreateFlow返回参数结构体

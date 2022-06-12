@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeFileUrlsResponse, CreateDocumentResponse, StartFlowRequest, CancelFlowResponse, CreateDocumentRequest, CreateFlowRequest, CreateSchemeUrlRequest, DescribeThirdPartyAuthCodeRequest, UploadFilesRequest, CancelFlowRequest, DescribeFlowBriefsResponse, UploadFilesResponse, DescribeThirdPartyAuthCodeResponse, CreateFlowByFilesResponse, DescribeFlowBriefsRequest, DescribeFileUrlsRequest, DescribeFlowTemplatesResponse, StartFlowResponse, CreateSchemeUrlResponse, CreateFlowByFilesRequest, CreateFlowResponse, DescribeFlowTemplatesRequest } from "./ess_models";
+import { CancelMultiFlowSignQRCodeRequest, DescribeFileUrlsResponse, CreateDocumentResponse, StartFlowRequest, CancelFlowResponse, CreateDocumentRequest, CreateFlowRequest, CreateSchemeUrlRequest, DescribeThirdPartyAuthCodeRequest, UploadFilesRequest, CancelFlowRequest, DescribeFlowBriefsResponse, CreateMultiFlowSignQRCodeResponse, UploadFilesResponse, DescribeThirdPartyAuthCodeResponse, CreateFlowByFilesResponse, DescribeFlowBriefsRequest, DescribeFileUrlsRequest, DescribeFlowTemplatesResponse, CreateMultiFlowSignQRCodeRequest, StartFlowResponse, CreateSchemeUrlResponse, CreateFlowByFilesRequest, CancelMultiFlowSignQRCodeResponse, CreateFlowResponse, DescribeFlowTemplatesRequest } from "./ess_models";
 /**
  * ess client
  * @class
@@ -11,6 +11,11 @@ export declare class Client extends AbstractClient {
      * 此接口用于发起流程
      */
     StartFlow(req: StartFlowRequest, cb?: (error: string, rep: StartFlowResponse) => void): Promise<StartFlowResponse>;
+    /**
+     * 此接口（CreateMultiFlowSignQRCode）用于创建一码多扫流程签署二维码。
+适用的模版仅限于B2C（1、无序签署，2、顺序签署时B静默签署，3、顺序签署时B非首位签署）、单C的模版，且模版中发起方没有填写控件。
+     */
+    CreateMultiFlowSignQRCode(req: CreateMultiFlowSignQRCodeRequest, cb?: (error: string, rep: CreateMultiFlowSignQRCodeResponse) => void): Promise<CreateMultiFlowSignQRCodeResponse>;
     /**
      * 用于撤销流程
      */
@@ -31,6 +36,10 @@ export declare class Client extends AbstractClient {
      * 创建签署流程
      */
     CreateFlow(req: CreateFlowRequest, cb?: (error: string, rep: CreateFlowResponse) => void): Promise<CreateFlowResponse>;
+    /**
+     * 此接口（CancelMultiFlowSignQRCode）用于取消一码多扫二维码。该接口对传入的二维码ID，若还在有效期内，可以提前失效。
+     */
+    CancelMultiFlowSignQRCode(req: CancelMultiFlowSignQRCodeRequest, cb?: (error: string, rep: CancelMultiFlowSignQRCodeResponse) => void): Promise<CancelMultiFlowSignQRCodeResponse>;
     /**
      * 获取小程序跳转链接
 

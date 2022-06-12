@@ -48,6 +48,26 @@ it("essbasic.v20210526.DescribeTemplates", async function () {
     }
 })
 
+it("essbasic.v20210526.OperateChannelTemplate", async function () {
+    try {
+       const data = await client.OperateChannelTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("essbasic.v20210526.ChannelCreateMultiFlowSignQRCode", async function () {
+    try {
+       const data = await client.ChannelCreateMultiFlowSignQRCode({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("essbasic.v20210526.ChannelCreateFlowByFiles", async function () {
     try {
        const data = await client.ChannelCreateFlowByFiles({})
@@ -68,9 +88,9 @@ it("essbasic.v20210526.PrepareFlows", async function () {
     }
 })
 
-it("essbasic.v20210526.OperateChannelTemplate", async function () {
+it("essbasic.v20210526.CreateSignUrls", async function () {
     try {
-       const data = await client.OperateChannelTemplate({})
+       const data = await client.CreateSignUrls({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -88,9 +108,9 @@ it("essbasic.v20210526.CreateSealByImage", async function () {
     }
 })
 
-it("essbasic.v20210526.CreateSignUrls", async function () {
+it("essbasic.v20210526.ChannelCancelMultiFlowSignQRCode", async function () {
     try {
-       const data = await client.CreateSignUrls({})
+       const data = await client.ChannelCancelMultiFlowSignQRCode({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

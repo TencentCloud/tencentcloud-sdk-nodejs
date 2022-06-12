@@ -34,6 +34,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("StartFlow", req, cb);
     }
     /**
+     * 此接口（CreateMultiFlowSignQRCode）用于创建一码多扫流程签署二维码。
+适用的模版仅限于B2C（1、无序签署，2、顺序签署时B静默签署，3、顺序签署时B非首位签署）、单C的模版，且模版中发起方没有填写控件。
+     */
+    async CreateMultiFlowSignQRCode(req, cb) {
+        return this.request("CreateMultiFlowSignQRCode", req, cb);
+    }
+    /**
      * 用于撤销流程
      */
     async CancelFlow(req, cb) {
@@ -62,6 +69,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateFlow(req, cb) {
         return this.request("CreateFlow", req, cb);
+    }
+    /**
+     * 此接口（CancelMultiFlowSignQRCode）用于取消一码多扫二维码。该接口对传入的二维码ID，若还在有效期内，可以提前失效。
+     */
+    async CancelMultiFlowSignQRCode(req, cb) {
+        return this.request("CancelMultiFlowSignQRCode", req, cb);
     }
     /**
      * 获取小程序跳转链接

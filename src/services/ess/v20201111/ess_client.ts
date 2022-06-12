@@ -19,6 +19,7 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   UploadFile,
+  CancelMultiFlowSignQRCodeRequest,
   DescribeFileUrlsResponse,
   TemplateInfo,
   CreateDocumentResponse,
@@ -29,10 +30,13 @@ import {
   CreateSchemeUrlRequest,
   FileUrl,
   DescribeThirdPartyAuthCodeRequest,
+  SignQrCode,
   UploadFilesRequest,
   CancelFlowRequest,
   DescribeFlowBriefsResponse,
   Component,
+  CreateMultiFlowSignQRCodeResponse,
+  FlowCreateApprover,
   UploadFilesResponse,
   DescribeThirdPartyAuthCodeResponse,
   CreateFlowByFilesResponse,
@@ -44,10 +48,11 @@ import {
   DescribeFlowTemplatesResponse,
   Filter,
   FileInfo,
-  FlowCreateApprover,
+  CreateMultiFlowSignQRCodeRequest,
   StartFlowResponse,
   CreateSchemeUrlResponse,
   CreateFlowByFilesRequest,
+  CancelMultiFlowSignQRCodeResponse,
   CreateFlowResponse,
   Agent,
   FormField,
@@ -74,6 +79,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: StartFlowResponse) => void
   ): Promise<StartFlowResponse> {
     return this.request("StartFlow", req, cb)
+  }
+
+  /**
+     * 此接口（CreateMultiFlowSignQRCode）用于创建一码多扫流程签署二维码。
+适用的模版仅限于B2C（1、无序签署，2、顺序签署时B静默签署，3、顺序签署时B非首位签署）、单C的模版，且模版中发起方没有填写控件。
+     */
+  async CreateMultiFlowSignQRCode(
+    req: CreateMultiFlowSignQRCodeRequest,
+    cb?: (error: string, rep: CreateMultiFlowSignQRCodeResponse) => void
+  ): Promise<CreateMultiFlowSignQRCodeResponse> {
+    return this.request("CreateMultiFlowSignQRCode", req, cb)
   }
 
   /**
@@ -124,6 +140,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateFlowResponse) => void
   ): Promise<CreateFlowResponse> {
     return this.request("CreateFlow", req, cb)
+  }
+
+  /**
+   * 此接口（CancelMultiFlowSignQRCode）用于取消一码多扫二维码。该接口对传入的二维码ID，若还在有效期内，可以提前失效。
+   */
+  async CancelMultiFlowSignQRCode(
+    req: CancelMultiFlowSignQRCodeRequest,
+    cb?: (error: string, rep: CancelMultiFlowSignQRCodeResponse) => void
+  ): Promise<CancelMultiFlowSignQRCodeResponse> {
+    return this.request("CancelMultiFlowSignQRCode", req, cb)
   }
 
   /**

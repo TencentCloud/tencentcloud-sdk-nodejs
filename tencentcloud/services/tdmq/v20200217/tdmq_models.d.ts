@@ -4700,7 +4700,7 @@ export interface CreateCmqQueueRequest {
       */
     Tags?: Array<Tag>;
     /**
-      * 队列可回溯存储空间，取值范围1024MB - 10240MB，0表示不开启
+      * 队列可回溯存储空间：若开启消息回溯，取值范围：10240MB - 512000MB，若不开启消息回溯，取值：0
       */
     RetentionSizeInMB?: number;
 }
@@ -5121,11 +5121,11 @@ export interface PublishCmqMsgRequest {
       */
     TopicName: string;
     /**
-      * 消息内容
+      * 消息内容，消息总大小需不大于1024K
       */
     MsgContent: string;
     /**
-      * 消息标签
+      * 消息标签，支持传递多标签或单路由，单个标签、路由长度不能超过64个字符。
       */
     MsgTag?: Array<string>;
 }
@@ -5300,7 +5300,7 @@ export interface ModifyCmqQueueAttributeRequest {
       */
     Transaction?: number;
     /**
-      * 队列可回溯存储空间，取值范围1024MB - 10240MB，0表示不开启
+      * 队列可回溯存储空间：若开启消息回溯，取值范围：10240MB - 512000MB，若不开启消息回溯，取值：0
       */
     RetentionSizeInMB?: number;
 }

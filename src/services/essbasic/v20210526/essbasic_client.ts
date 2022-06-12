@@ -26,12 +26,15 @@ import {
   TemplateInfo,
   GetDownloadFlowUrlResponse,
   DescribeResourceUrlsByFlowsResponse,
+  ChannelCreateMultiFlowSignQRCodeResponse,
   Recipient,
   DescribeTemplatesResponse,
   OperateChannelTemplateResponse,
   CreateSignUrlsRequest,
+  ChannelCreateMultiFlowSignQRCodeRequest,
   AuthFailMessage,
   DescribeFlowDetailInfoRequest,
+  SignQrCode,
   UploadFilesRequest,
   DescribeResourceUrlsByFlowsRequest,
   UploadFile,
@@ -51,11 +54,12 @@ import {
   SyncProxyOrganizationRequest,
   CreateSealByImageRequest,
   UserInfo,
+  DescribeUsageResponse,
   UsageDetail,
   CreateSignUrlsResponse,
   OperateChannelTemplateRequest,
   DownloadFlowInfo,
-  CcInfo,
+  ChannelCancelMultiFlowSignQRCodeRequest,
   SyncFailReason,
   DescribeUsageRequest,
   ChannelCreateFlowByFilesRequest,
@@ -66,7 +70,8 @@ import {
   FlowApproverDetail,
   FlowInfo,
   SignUrlInfo,
-  DescribeUsageResponse,
+  CcInfo,
+  ChannelCancelMultiFlowSignQRCodeResponse,
   DescribeFlowDetailInfoResponse,
 } from "./essbasic_models"
 
@@ -112,6 +117,31 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 此接口（OperateChannelTemplate）用于渠道侧将模板库中的模板对合作企业进行查询和设置, 其中包括可见性的修改以及对合作企业的设置.
+1、同步标识=select时：
+返回渠道侧模板库当前模板的属性.
+2、同步标识=update或者delete时：
+对渠道子客进行模板库中模板授权,修改操作
+     */
+  async OperateChannelTemplate(
+    req: OperateChannelTemplateRequest,
+    cb?: (error: string, rep: OperateChannelTemplateResponse) => void
+  ): Promise<OperateChannelTemplateResponse> {
+    return this.request("OperateChannelTemplate", req, cb)
+  }
+
+  /**
+     * 此接口（ChannelCreateMultiFlowSignQRCode）用于创建一码多扫流程签署二维码。
+适用的模版仅限于B2C（1、无序签署，2、顺序签署时B静默签署，3、顺序签署时B非首位签署）、单C的模版，且模版中发起方没有填写控件。
+     */
+  async ChannelCreateMultiFlowSignQRCode(
+    req: ChannelCreateMultiFlowSignQRCodeRequest,
+    cb?: (error: string, rep: ChannelCreateMultiFlowSignQRCodeResponse) => void
+  ): Promise<ChannelCreateMultiFlowSignQRCodeResponse> {
+    return this.request("ChannelCreateMultiFlowSignQRCode", req, cb)
+  }
+
+  /**
    * 接口（ChannelCreateFlowByFiles）用于渠道版通过文件创建流程。此接口不可直接使用，需要运营申请
    */
   async ChannelCreateFlowByFiles(
@@ -134,17 +164,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 此接口（OperateChannelTemplate）用于渠道侧将模板库中的模板对合作企业进行查询和设置, 其中包括可见性的修改以及对合作企业的设置.
-1、同步标识=select时：
-返回渠道侧模板库当前模板的属性.
-2、同步标识=update或者delete时：
-对渠道子客进行模板库中模板授权,修改操作
-     */
-  async OperateChannelTemplate(
-    req: OperateChannelTemplateRequest,
-    cb?: (error: string, rep: OperateChannelTemplateResponse) => void
-  ): Promise<OperateChannelTemplateResponse> {
-    return this.request("OperateChannelTemplate", req, cb)
+   * 创建参与者签署短链
+   */
+  async CreateSignUrls(
+    req: CreateSignUrlsRequest,
+    cb?: (error: string, rep: CreateSignUrlsResponse) => void
+  ): Promise<CreateSignUrlsResponse> {
+    return this.request("CreateSignUrls", req, cb)
   }
 
   /**
@@ -158,13 +184,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建参与者签署短链
+   * 此接口（ChannelCancelMultiFlowSignQRCode）用于取消一码多扫二维码。该接口对传入的二维码ID，若还在有效期内，可以提前失效。
    */
-  async CreateSignUrls(
-    req: CreateSignUrlsRequest,
-    cb?: (error: string, rep: CreateSignUrlsResponse) => void
-  ): Promise<CreateSignUrlsResponse> {
-    return this.request("CreateSignUrls", req, cb)
+  async ChannelCancelMultiFlowSignQRCode(
+    req: ChannelCancelMultiFlowSignQRCodeRequest,
+    cb?: (error: string, rep: ChannelCancelMultiFlowSignQRCodeResponse) => void
+  ): Promise<ChannelCancelMultiFlowSignQRCodeResponse> {
+    return this.request("ChannelCancelMultiFlowSignQRCode", req, cb)
   }
 
   /**

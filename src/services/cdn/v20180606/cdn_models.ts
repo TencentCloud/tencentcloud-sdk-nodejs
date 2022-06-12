@@ -3391,6 +3391,18 @@ disabled：未启用
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ExtensionMode: number
+
+  /**
+      * 流量包实际生效时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TrueEnableTime: string
+
+  /**
+      * 流量包实际过期时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TrueExpireTime: string
 }
 
 /**
@@ -4709,7 +4721,7 @@ export interface WebSocket {
   Switch: string
 
   /**
-      * 设置超时时间，单位为秒，最大超时时间65秒。
+      * 设置超时时间，单位为秒，最大超时时间300秒。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Timeout?: number

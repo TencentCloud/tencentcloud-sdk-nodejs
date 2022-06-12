@@ -90,7 +90,7 @@ export declare class Client extends AbstractClient {
      */
     DeleteBlackList(req: DeleteBlackListRequest, cb?: (error: string, rep: DeleteBlackListResponse) => void): Promise<DeleteBlackListResponse>;
     /**
-     * 您可以通过此API发送TEXT或者HTML邮件，适用于触发类邮件（验证码、交易类）。默认仅支持使用模板发送邮件。
+     * 您可以通过此API发送HTML或者TEXT邮件，适用于触发类邮件（验证码、交易类）。默认仅支持使用模板发送邮件。
      */
     SendEmail(req: SendEmailRequest, cb?: (error: string, rep: SendEmailResponse) => void): Promise<SendEmailResponse>;
     /**

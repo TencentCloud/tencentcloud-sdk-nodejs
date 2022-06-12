@@ -1347,8 +1347,9 @@ export interface AudioTemplateInfoForUpdate {
 <li>libmp3lame：更适合 flv；</li>
 <li>mp2。</li>
 当外层参数 Container 为 hls 时，可选值为：
-<li>libfdk_aac；</li>
-<li>libmp3lame。</li>
+<li>libfdk_aac。</li>
+当外层参数 Format 为 HLS 或 MPEG-DASH 时，可选值为：
+<li>libfdk_aac。</li>
       */
     Codec?: string;
     /**
@@ -1460,8 +1461,9 @@ export interface AudioTemplateInfo {
 <li>libmp3lame：更适合 flv；</li>
 <li>mp2。</li>
 当外层参数 Container 为 hls 时，可选值为：
-<li>libfdk_aac；</li>
-<li>libmp3lame。</li>
+<li>libfdk_aac。</li>
+当外层参数 Format 为 HLS 或 MPEG-DASH 时，可选值为：
+<li>libfdk_aac。</li>
       */
     Codec: string;
     /**
@@ -1663,7 +1665,8 @@ export interface AiRecognitionTaskHeadTailResultInput {
 export interface CreateAdaptiveDynamicStreamingTemplateRequest {
     /**
       * 自适应转码格式，取值范围：
-<li>HLS。</li>
+<li>HLS；</li>
+<li>MPEG-DASH。</li>
       */
     Format: string;
     /**
@@ -4931,12 +4934,17 @@ export interface ModifyAdaptiveDynamicStreamingTemplateRequest {
       */
     Definition: number;
     /**
+      * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+      */
+    SubAppId?: number;
+    /**
       * 模板名称，长度限制：64 个字符。
       */
     Name?: string;
     /**
       * 自适应转码格式，取值范围：
-<li>HLS。</li>
+<li>HLS；</li>
+<li>MPEG-DASH。</li>
       */
     Format?: string;
     /**
@@ -4960,10 +4968,6 @@ export interface ModifyAdaptiveDynamicStreamingTemplateRequest {
       * 模板描述信息，长度限制：256 个字符。
       */
     Comment?: string;
-    /**
-      * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
-      */
-    SubAppId?: number;
 }
 /**
  * 视频转动图结果信息

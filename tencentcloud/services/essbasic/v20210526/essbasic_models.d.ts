@@ -214,6 +214,19 @@ export interface DescribeResourceUrlsByFlowsResponse {
     RequestId?: string;
 }
 /**
+ * ChannelCreateMultiFlowSignQRCode返回参数结构体
+ */
+export interface ChannelCreateMultiFlowSignQRCodeResponse {
+    /**
+      * 签署二维码对象
+      */
+    QrCode: SignQrCode;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 签署参与者信息
  */
 export interface Recipient {
@@ -348,6 +361,44 @@ export interface CreateSignUrlsRequest {
     AutoJumpBack?: boolean;
 }
 /**
+ * ChannelCreateMultiFlowSignQRCode请求参数结构体
+ */
+export interface ChannelCreateMultiFlowSignQRCodeRequest {
+    /**
+      * 应用信息
+此接口Agent.ProxyOrganizationOpenId 和 Agent. ProxyOperator.OpenId 必填
+      */
+    Agent: Agent;
+    /**
+      * 模版ID
+      */
+    TemplateId: string;
+    /**
+      * 合同名称
+      */
+    FlowName: string;
+    /**
+      * 用户信息
+      */
+    Operator?: UserInfo;
+    /**
+      * 合同有效天数 默认7天 最高设置不超过30天
+      */
+    FlowEffectiveDay?: number;
+    /**
+      * 二维码有效天数 默认7天 最高设置不超过90天
+      */
+    QrEffectiveDay?: number;
+    /**
+      * 最大合同份数，默认5份 超过此上限 二维码自动失效
+      */
+    MaxFlowNum?: number;
+    /**
+      * 回调地址
+      */
+    CallbackUrl?: string;
+}
+/**
  * 授权出错信息
  */
 export interface AuthFailMessage {
@@ -376,6 +427,23 @@ export interface DescribeFlowDetailInfoRequest {
       * 操作者的信息
       */
     Operator?: UserInfo;
+}
+/**
+ * 一码多扫签署二维码对象
+ */
+export interface SignQrCode {
+    /**
+      * 二维码id
+      */
+    QrCodeId: string;
+    /**
+      * 二维码url
+      */
+    QrCodeUrl: string;
+    /**
+      * 二维码过期时间
+      */
+    ExpiredTime: number;
 }
 /**
  * UploadFiles请求参数结构体
@@ -734,7 +802,7 @@ export interface DescribeTemplatesRequest {
       */
     TemplateId?: string;
     /**
-      * 查询内容：0-模版列表及详情（默认），1-仅模版列表
+      * 查询内容：0-模板列表及详情（默认），1-仅模板列表
       */
     ContentType?: number;
     /**
@@ -879,6 +947,24 @@ export interface UserInfo {
     ProxyIp?: string;
 }
 /**
+ * DescribeUsage返回参数结构体
+ */
+export interface DescribeUsageResponse {
+    /**
+      * 用量明细条数
+      */
+    Total: number;
+    /**
+      * 用量明细
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Details: Array<UsageDetail>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 用量明细
  */
 export interface UsageDetail {
@@ -961,13 +1047,22 @@ export interface DownloadFlowInfo {
     FlowIdList: Array<string>;
 }
 /**
- * 抄送信息
+ * ChannelCancelMultiFlowSignQRCode请求参数结构体
  */
-export interface CcInfo {
+export interface ChannelCancelMultiFlowSignQRCodeRequest {
     /**
-      * 被抄送人手机号
+      * 应用信息
+此接口Agent.ProxyOrganizationOpenId 和 Agent. ProxyOperator.OpenId 必填
       */
-    Mobile?: string;
+    Agent: Agent;
+    /**
+      * 二维码id
+      */
+    QrCodeId: string;
+    /**
+      * 用户信息
+      */
+    Operator?: UserInfo;
 }
 /**
  * 同步经办人失败原因
@@ -1319,18 +1414,18 @@ PERSON 自然人
     OpenId: string;
 }
 /**
- * DescribeUsage返回参数结构体
+ * 抄送信息
  */
-export interface DescribeUsageResponse {
+export interface CcInfo {
     /**
-      * 用量明细条数
+      * 被抄送人手机号
       */
-    Total: number;
-    /**
-      * 用量明细
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Details: Array<UsageDetail>;
+    Mobile?: string;
+}
+/**
+ * ChannelCancelMultiFlowSignQRCode返回参数结构体
+ */
+export interface ChannelCancelMultiFlowSignQRCodeResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

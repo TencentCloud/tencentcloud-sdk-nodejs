@@ -150,7 +150,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteBlackList", req, cb);
     }
     /**
-     * 您可以通过此API发送TEXT或者HTML邮件，适用于触发类邮件（验证码、交易类）。默认仅支持使用模板发送邮件。
+     * 您可以通过此API发送HTML或者TEXT邮件，适用于触发类邮件（验证码、交易类）。默认仅支持使用模板发送邮件。
      */
     async SendEmail(req, cb) {
         return this.request("SendEmail", req, cb);

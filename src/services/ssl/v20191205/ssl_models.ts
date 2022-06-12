@@ -598,7 +598,25 @@ export interface DescribeManagersResponse {
 /**
  * 根证书
  */
-export type RootCertificates = null
+export interface RootCertificates {
+  /**
+      * 国密签名证书
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Sign: string
+
+  /**
+      * 国密加密证书
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Encrypt: string
+
+  /**
+      * 标准证书
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Standard: string
+}
 
 /**
  * DescribeCertificate返回参数结构体

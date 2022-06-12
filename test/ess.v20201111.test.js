@@ -28,6 +28,16 @@ it("ess.v20201111.StartFlow", async function () {
     }
 })
 
+it("ess.v20201111.CreateMultiFlowSignQRCode", async function () {
+    try {
+       const data = await client.CreateMultiFlowSignQRCode({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ess.v20201111.CancelFlow", async function () {
     try {
        const data = await client.CancelFlow({})
@@ -71,6 +81,16 @@ it("ess.v20201111.DescribeThirdPartyAuthCode", async function () {
 it("ess.v20201111.CreateFlow", async function () {
     try {
        const data = await client.CreateFlow({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ess.v20201111.CancelMultiFlowSignQRCode", async function () {
+    try {
+       const data = await client.CancelMultiFlowSignQRCode({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
