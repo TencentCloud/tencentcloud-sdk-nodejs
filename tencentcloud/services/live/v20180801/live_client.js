@@ -613,6 +613,12 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
         return this.request("DescribePlayErrorCodeDetailInfoList", req, cb);
     }
     /**
+     * 提供给客户对账，按天统计，维度：推流域名、时移文件时长（累加）、配置天数（不累加）、时移总时长（累加）。
+     */
+    async DescribeLiveTimeShiftBillInfoList(req, cb) {
+        return this.request("DescribeLiveTimeShiftBillInfoList", req, cb);
+    }
+    /**
      * 返回已经推过流的流列表。<br>
 注意：分页最多支持查询1万条记录，可通过调整查询时间范围来获取更多数据。
      */

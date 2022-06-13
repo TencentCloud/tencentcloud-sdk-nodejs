@@ -468,9 +468,9 @@ it("apigateway.v20180808.DeleteIPStrategy", async function () {
     }
 })
 
-it("apigateway.v20180808.ModifyService", async function () {
+it("apigateway.v20180808.ReleaseService", async function () {
     try {
-       const data = await client.ModifyService({})
+       const data = await client.ReleaseService({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -758,9 +758,9 @@ it("apigateway.v20180808.DescribeUpstreamBindApis", async function () {
     }
 })
 
-it("apigateway.v20180808.ReleaseService", async function () {
+it("apigateway.v20180808.ModifyService", async function () {
     try {
-       const data = await client.ReleaseService({})
+       const data = await client.ModifyService({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -911,6 +911,16 @@ it("apigateway.v20180808.CreateIPStrategy", async function () {
 it("apigateway.v20180808.DeleteAPIDoc", async function () {
     try {
        const data = await client.DeleteAPIDoc({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("apigateway.v20180808.DescribeExclusiveInstancesStatus", async function () {
+    try {
+       const data = await client.DescribeExclusiveInstancesStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

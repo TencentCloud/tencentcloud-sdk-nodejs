@@ -55,6 +55,7 @@ import {
   ConcurrentRecordStreamNum,
   DescribeStreamPlayInfoListResponse,
   DescribeScreenShotSheetNumListResponse,
+  ForbidLiveStreamResponse,
   DescribeLiveCertRequest,
   CreateLivePullStreamTaskResponse,
   ModifyLivePushAuthKeyRequest,
@@ -126,9 +127,11 @@ import {
   ModifyLivePlayDomainResponse,
   CancelCommonMixStreamResponse,
   DescribeConcurrentRecordStreamNumResponse,
+  DescribeLiveTimeShiftBillInfoListRequest,
   RecordTask,
   DescribeLiveCertsResponse,
   CommonMixInputParam,
+  WatermarkInfo,
   DescribeProvinceIspPlayInfoListResponse,
   DescribeLiveRecordTemplatesResponse,
   DescribeScreenshotTaskRequest,
@@ -192,7 +195,7 @@ import {
   DescribeStreamPushInfoListResponse,
   DescribeLiveStreamPushInfoListRequest,
   DescribeLiveWatermarksResponse,
-  WatermarkInfo,
+  TimeShiftBillData,
   DescribeLiveForbidStreamListRequest,
   DescribeLiveDomainPlayInfoListRequest,
   CreatePullStreamConfigResponse,
@@ -213,7 +216,7 @@ import {
   SnapshotTemplateInfo,
   DeleteLiveSnapshotRuleResponse,
   CreateLiveRecordRequest,
-  ForbidLiveStreamResponse,
+  DescribeLiveTimeShiftBillInfoListResponse,
   BandwidthInfo,
   DescribeLogDownloadListResponse,
   CancelCommonMixStreamRequest,
@@ -1260,6 +1263,16 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
     cb?: (error: string, rep: DescribePlayErrorCodeDetailInfoListResponse) => void
   ): Promise<DescribePlayErrorCodeDetailInfoListResponse> {
     return this.request("DescribePlayErrorCodeDetailInfoList", req, cb)
+  }
+
+  /**
+   * 提供给客户对账，按天统计，维度：推流域名、时移文件时长（累加）、配置天数（不累加）、时移总时长（累加）。
+   */
+  async DescribeLiveTimeShiftBillInfoList(
+    req: DescribeLiveTimeShiftBillInfoListRequest,
+    cb?: (error: string, rep: DescribeLiveTimeShiftBillInfoListResponse) => void
+  ): Promise<DescribeLiveTimeShiftBillInfoListResponse> {
+    return this.request("DescribeLiveTimeShiftBillInfoList", req, cb)
   }
 
   /**

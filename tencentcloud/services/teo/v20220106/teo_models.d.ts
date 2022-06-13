@@ -838,6 +838,19 @@ export interface DescribeSecurityPolicyManagedRulesRequest {
     PerPage: number;
 }
 /**
+ * DescribeSecurityPortraitRules请求参数结构体
+ */
+export interface DescribeSecurityPortraitRulesRequest {
+    /**
+      * 一级域名
+      */
+    ZoneId: string;
+    /**
+      * 子域名/应用名
+      */
+    Entity: string;
+}
+/**
  * 查询结果排序条件。
  */
 export interface CertSort {
@@ -1145,6 +1158,36 @@ export interface CreateDnsRecordRequest {
       * 优先级
       */
     Priority?: number;
+}
+/**
+ * 用户画像规则详情
+ */
+export interface PortraitManagedRuleDetail {
+    /**
+      * 规则唯一id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RuleId?: number;
+    /**
+      * 规则的描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Description?: string;
+    /**
+      * 规则所属类型的名字, botdb(用户画像)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RuleTypeName?: string;
+    /**
+      * 规则内的功能分类Id(扫描器，Bot行为等)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ClassificationId?: number;
+    /**
+      * 规则当前所属动作状态(block, alg, ...)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Status?: string;
 }
 /**
  * 离线日志详细信息
@@ -2669,6 +2712,27 @@ export interface CheckCertificateRequest {
     PrivateKey: string;
 }
 /**
+ * DescribeSecurityPortraitRules返回参数结构体
+ */
+export interface DescribeSecurityPortraitRulesResponse {
+    /**
+      * 本次返回的规则数
+      */
+    Count: number;
+    /**
+      * Bot用户画像规则
+      */
+    Rules: Array<PortraitManagedRuleDetail>;
+    /**
+      * 总规则数
+      */
+    Total: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * CreateApplicationProxyRule请求参数结构体
  */
 export interface CreateApplicationProxyRuleRequest {
@@ -2900,6 +2964,11 @@ export interface BotPortraitRule {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     DropManagedIds?: Array<number>;
+    /**
+      * 本功能的开关
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Switch?: string;
 }
 /**
  * ModifyZoneCnameSpeedUp请求参数结构体

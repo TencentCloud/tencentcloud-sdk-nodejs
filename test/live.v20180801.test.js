@@ -878,6 +878,16 @@ it("live.v20180801.DescribePlayErrorCodeDetailInfoList", async function () {
     }
 })
 
+it("live.v20180801.DescribeLiveTimeShiftBillInfoList", async function () {
+    try {
+       const data = await client.DescribeLiveTimeShiftBillInfoList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("live.v20180801.DescribeLiveStreamPublishedList", async function () {
     try {
        const data = await client.DescribeLiveStreamPublishedList({})

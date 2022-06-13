@@ -307,10 +307,11 @@ API 网关可绑定自定义域名到服务，并且可以对自定义域名的�
         return this.request("DeleteIPStrategy", req, cb);
     }
     /**
-     * 本接口（ModifyService）用于修改服务的相关信息。当服务创建后，服务的名称、描述和服务类型均可被修改。
+     * 本接口（ReleaseService）用于发布服务。
+API 网关的服务创建后，需要发布到某个环境方生效后，使用者才能进行调用，此接口用于发布服务到环境，如 release 环境。
      */
-    async ModifyService(req, cb) {
-        return this.request("ModifyService", req, cb);
+    async ReleaseService(req, cb) {
+        return this.request("ReleaseService", req, cb);
     }
     /**
      * 本接口（DescribeExclusiveInstances）用于查询独享实例列表信息。​
@@ -486,11 +487,10 @@ API 网关可绑定自定义域名到服务，并且可以对自定义域名的�
         return this.request("DescribeUpstreamBindApis", req, cb);
     }
     /**
-     * 本接口（ReleaseService）用于发布服务。
-API 网关的服务创建后，需要发布到某个环境方生效后，使用者才能进行调用，此接口用于发布服务到环境，如 release 环境。
+     * 本接口（ModifyService）用于修改服务的相关信息。当服务创建后，服务的名称、描述和服务类型均可被修改。
      */
-    async ReleaseService(req, cb) {
-        return this.request("ReleaseService", req, cb);
+    async ModifyService(req, cb) {
+        return this.request("ModifyService", req, cb);
     }
     /**
      * 本接口（BindSecretIds）用于为使用计划绑定密钥。
@@ -587,6 +587,12 @@ API 网关可绑定自定义域名到服务，用于服务调用。此接口用�
      */
     async DeleteAPIDoc(req, cb) {
         return this.request("DeleteAPIDoc", req, cb);
+    }
+    /**
+     * 查询专享实例列表（新）
+     */
+    async DescribeExclusiveInstancesStatus(req, cb) {
+        return this.request("DescribeExclusiveInstancesStatus", req, cb);
     }
     /**
      * 本接口（UnBindEnvironment）用于将使用计划从特定环境解绑。

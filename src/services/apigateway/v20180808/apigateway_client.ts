@@ -31,7 +31,7 @@ import {
   DisableApiKeyResponse,
   DescribeApiResponse,
   UnReleaseServiceRequest,
-  DetachPluginRequest,
+  DescribeExclusiveInstancesStatusResponse,
   ModifySubDomainRequest,
   DescribeApiAppsStatusRequest,
   DescribeServiceUsagePlanRequest,
@@ -92,7 +92,7 @@ import {
   IPStrategyApi,
   DescribeIPStrategyResponse,
   DescribePluginRequest,
-  DocumentSDK,
+  DetachPluginRequest,
   AttachedApiInfo,
   CreateApiResponse,
   DescribeIPStrategyApisStatusRequest,
@@ -119,6 +119,7 @@ import {
   DescribeUpstreamsResponse,
   DescribePluginApisRequest,
   ResponseErrorCodeReq,
+  InstanceSummary,
   CreateServiceRequest,
   DescribeIPStrategysStatusRequest,
   DemoteServiceUsagePlanResponse,
@@ -214,6 +215,7 @@ import {
   DeletePluginResponse,
   DescribeUpstreamBindApis,
   ModifyServiceEnvironmentStrategyRequest,
+  DocumentSDK,
   CreateAPIDocRequest,
   DescribeApiAppBindApisStatusResponse,
   DescribeServiceSubDomainsRequest,
@@ -284,6 +286,7 @@ import {
   ApiEnvironmentStrategy,
   DescribeIPStrategysStatusResponse,
   UpdateApiAppKeyResponse,
+  DescribeExclusiveInstancesStatusRequest,
   InstanceDetail,
   UnBindSecretIdsResponse,
   CreateApiAppRequest,
@@ -767,13 +770,14 @@ API 网关可绑定自定义域名到服务，并且可以对自定义域名的�
   }
 
   /**
-   * 本接口（ModifyService）用于修改服务的相关信息。当服务创建后，服务的名称、描述和服务类型均可被修改。
-   */
-  async ModifyService(
-    req: ModifyServiceRequest,
-    cb?: (error: string, rep: ModifyServiceResponse) => void
-  ): Promise<ModifyServiceResponse> {
-    return this.request("ModifyService", req, cb)
+     * 本接口（ReleaseService）用于发布服务。
+API 网关的服务创建后，需要发布到某个环境方生效后，使用者才能进行调用，此接口用于发布服务到环境，如 release 环境。
+     */
+  async ReleaseService(
+    req: ReleaseServiceRequest,
+    cb?: (error: string, rep: ReleaseServiceResponse) => void
+  ): Promise<ReleaseServiceResponse> {
+    return this.request("ReleaseService", req, cb)
   }
 
   /**
@@ -1062,14 +1066,13 @@ API 网关可绑定自定义域名到服务，并且可以对自定义域名的�
   }
 
   /**
-     * 本接口（ReleaseService）用于发布服务。
-API 网关的服务创建后，需要发布到某个环境方生效后，使用者才能进行调用，此接口用于发布服务到环境，如 release 环境。
-     */
-  async ReleaseService(
-    req: ReleaseServiceRequest,
-    cb?: (error: string, rep: ReleaseServiceResponse) => void
-  ): Promise<ReleaseServiceResponse> {
-    return this.request("ReleaseService", req, cb)
+   * 本接口（ModifyService）用于修改服务的相关信息。当服务创建后，服务的名称、描述和服务类型均可被修改。
+   */
+  async ModifyService(
+    req: ModifyServiceRequest,
+    cb?: (error: string, rep: ModifyServiceResponse) => void
+  ): Promise<ModifyServiceResponse> {
+    return this.request("ModifyService", req, cb)
   }
 
   /**
@@ -1226,6 +1229,16 @@ API 网关可绑定自定义域名到服务，用于服务调用。此接口用�
     cb?: (error: string, rep: DeleteAPIDocResponse) => void
   ): Promise<DeleteAPIDocResponse> {
     return this.request("DeleteAPIDoc", req, cb)
+  }
+
+  /**
+   * 查询专享实例列表（新）
+   */
+  async DescribeExclusiveInstancesStatus(
+    req: DescribeExclusiveInstancesStatusRequest,
+    cb?: (error: string, rep: DescribeExclusiveInstancesStatusResponse) => void
+  ): Promise<DescribeExclusiveInstancesStatusResponse> {
+    return this.request("DescribeExclusiveInstancesStatus", req, cb)
   }
 
   /**

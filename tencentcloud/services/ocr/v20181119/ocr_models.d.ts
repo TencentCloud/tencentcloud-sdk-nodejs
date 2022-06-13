@@ -973,6 +973,23 @@ export interface EnterpriseLicenseOCRResponse {
     RequestId?: string;
 }
 /**
+ * 印章信息
+ */
+export interface SealInfo {
+    /**
+      * 印章主体内容
+      */
+    SealBody: string;
+    /**
+      * 印章坐标
+      */
+    Location: Rect;
+    /**
+      * 印章其它文本内容
+      */
+    OtherTexts: Array<string>;
+}
+/**
  * RecognizePhilippinesVoteIDOCR请求参数结构体
  */
 export interface RecognizePhilippinesVoteIDOCRRequest {
@@ -4046,15 +4063,19 @@ export interface SealOCRResponse {
     /**
       * 印章内容
       */
-    SealBody?: string;
+    SealBody: string;
     /**
       * 印章坐标
       */
-    Location?: Rect;
+    Location: Rect;
     /**
       * 其它文本内容
       */
-    OtherTexts?: Array<string>;
+    OtherTexts: Array<string>;
+    /**
+      * 全部印章信息
+      */
+    SealInfos: Array<SealInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

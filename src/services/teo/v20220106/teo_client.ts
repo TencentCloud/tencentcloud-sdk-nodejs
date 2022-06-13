@@ -53,6 +53,7 @@ import {
   Origin,
   ModifyZoneStatusResponse,
   DescribeSecurityPolicyManagedRulesRequest,
+  DescribeSecurityPortraitRulesRequest,
   CertSort,
   ModifySecurityPolicyResponse,
   ModifyDDoSPolicyHostRequest,
@@ -69,6 +70,7 @@ import {
   DeleteOriginGroupRequest,
   ModifyHostsCertificateResponse,
   CreateDnsRecordRequest,
+  PortraitManagedRuleDetail,
   L7OfflineLog,
   WafRule,
   ApplicationProxyRule,
@@ -135,6 +137,7 @@ import {
   DownloadL7LogsRequest,
   DeleteLoadBalancingResponse,
   CheckCertificateRequest,
+  DescribeSecurityPortraitRulesResponse,
   CreateApplicationProxyRuleRequest,
   DescribePrefetchTasksRequest,
   ForceRedirect,
@@ -339,6 +342,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSecurityPolicyManagedRulesResponse) => void
   ): Promise<DescribeSecurityPolicyManagedRulesResponse> {
     return this.request("DescribeSecurityPolicyManagedRules", req, cb)
+  }
+
+  /**
+   * 站点被其他用户接入后，验证了站点所有权之后，可以找回该站点
+   */
+  async ReclaimZone(
+    req: ReclaimZoneRequest,
+    cb?: (error: string, rep: ReclaimZoneResponse) => void
+  ): Promise<ReclaimZoneResponse> {
+    return this.request("ReclaimZone", req, cb)
   }
 
   /**
@@ -592,13 +605,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 站点被其他用户接入后，验证了站点所有权之后，可以找回该站点
+   * 查询Bot用户画像规则
    */
-  async ReclaimZone(
-    req: ReclaimZoneRequest,
-    cb?: (error: string, rep: ReclaimZoneResponse) => void
-  ): Promise<ReclaimZoneResponse> {
-    return this.request("ReclaimZone", req, cb)
+  async DescribeSecurityPortraitRules(
+    req: DescribeSecurityPortraitRulesRequest,
+    cb?: (error: string, rep: DescribeSecurityPortraitRulesResponse) => void
+  ): Promise<DescribeSecurityPortraitRulesResponse> {
+    return this.request("DescribeSecurityPortraitRules", req, cb)
   }
 
   /**

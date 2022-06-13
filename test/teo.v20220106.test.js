@@ -118,6 +118,16 @@ it("teo.v20220106.DescribeSecurityPolicyManagedRules", async function () {
     }
 })
 
+it("teo.v20220106.ReclaimZone", async function () {
+    try {
+       const data = await client.ReclaimZone({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("teo.v20220106.ModifyHostsCertificate", async function () {
     try {
        const data = await client.ModifyHostsCertificate({})
@@ -368,9 +378,9 @@ it("teo.v20220106.ModifyZoneSetting", async function () {
     }
 })
 
-it("teo.v20220106.ReclaimZone", async function () {
+it("teo.v20220106.DescribeSecurityPortraitRules", async function () {
     try {
-       const data = await client.ReclaimZone({})
+       const data = await client.DescribeSecurityPortraitRules({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

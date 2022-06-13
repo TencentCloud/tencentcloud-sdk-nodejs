@@ -1593,6 +1593,11 @@ string|tinyint|smallint|int|bigint|boolean|float|double|decimal|timestamp|date|b
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ModifiedTime?: string;
+    /**
+      * 是否为分区字段
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IsPartition?: boolean;
 }
 /**
  * DescribeTaskResult请求参数结构体

@@ -88,6 +88,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeSecurityPolicyManagedRules", req, cb);
     }
     /**
+     * 站点被其他用户接入后，验证了站点所有权之后，可以找回该站点
+     */
+    async ReclaimZone(req, cb) {
+        return this.request("ReclaimZone", req, cb);
+    }
+    /**
      * 用于修改域名证书
      */
     async ModifyHostsCertificate(req, cb) {
@@ -238,10 +244,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyZoneSetting", req, cb);
     }
     /**
-     * 站点被其他用户接入后，验证了站点所有权之后，可以找回该站点
+     * 查询Bot用户画像规则
      */
-    async ReclaimZone(req, cb) {
-        return this.request("ReclaimZone", req, cb);
+    async DescribeSecurityPortraitRules(req, cb) {
+        return this.request("DescribeSecurityPortraitRules", req, cb);
     }
     /**
      * 删除站点

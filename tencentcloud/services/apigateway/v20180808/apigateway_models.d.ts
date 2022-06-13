@@ -251,25 +251,17 @@ export interface UnReleaseServiceRequest {
     ApiIds?: Array<string>;
 }
 /**
- * DetachPlugin请求参数结构体
+ * DescribeExclusiveInstancesStatus返回参数结构体
  */
-export interface DetachPluginRequest {
+export interface DescribeExclusiveInstancesStatusResponse {
     /**
-      * 要解绑的API网关插件ID。
+      * 独享实例列表查询结果
       */
-    PluginId: string;
+    Result: InstanceSummary;
     /**
-      * 要操作的服务ID。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    ServiceId: string;
-    /**
-      * 要操作API的环境。
-      */
-    EnvironmentName: string;
-    /**
-      * 要解绑的API ID。
-      */
-    ApiId: string;
+    RequestId?: string;
 }
 /**
  * ModifySubDomain请求参数结构体
@@ -1874,17 +1866,25 @@ export interface DescribePluginRequest {
     Offset?: number;
 }
 /**
- * api文档下载
+ * DetachPlugin请求参数结构体
  */
-export interface DocumentSDK {
+export interface DetachPluginRequest {
     /**
-      * 生成的 document 会存放到 COS 中，此出参返回产生文件的下载链接。
+      * 要解绑的API网关插件ID。
       */
-    DocumentURL: string;
+    PluginId: string;
     /**
-      * 生成的 SDK 会存放到 COS 中，此出参返回产生 SDK 文件的下载链接。
+      * 要操作的服务ID。
       */
-    SdkURL: string;
+    ServiceId: string;
+    /**
+      * 要操作API的环境。
+      */
+    EnvironmentName: string;
+    /**
+      * 要解绑的API ID。
+      */
+    ApiId: string;
 }
 /**
  * 插件绑定的API信息
@@ -2454,6 +2454,21 @@ export interface ResponseErrorCodeReq {
       * 是否需要开启错误码转换。
       */
     NeedConvert?: boolean;
+}
+/**
+ * 专享查询列表
+ */
+export interface InstanceSummary {
+    /**
+      * 专享实例总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TotalCount: number;
+    /**
+      * 专享实例列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InstanceSet: Array<InstanceInfo>;
 }
 /**
  * CreateService请求参数结构体
@@ -4757,6 +4772,19 @@ export interface ModifyServiceEnvironmentStrategyRequest {
     EnvironmentNames: Array<string>;
 }
 /**
+ * api文档下载
+ */
+export interface DocumentSDK {
+    /**
+      * 生成的 document 会存放到 COS 中，此出参返回产生文件的下载链接。
+      */
+    DocumentURL: string;
+    /**
+      * 生成的 SDK 会存放到 COS 中，此出参返回产生 SDK 文件的下载链接。
+      */
+    SdkURL: string;
+}
+/**
  * CreateAPIDoc请求参数结构体
  */
 export interface CreateAPIDocRequest {
@@ -6242,6 +6270,23 @@ export interface UpdateApiAppKeyResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DescribeExclusiveInstancesStatus请求参数结构体
+ */
+export interface DescribeExclusiveInstancesStatusRequest {
+    /**
+      * 分页查询，limit
+      */
+    Limit: number;
+    /**
+      * 分页查询，offset
+      */
+    Offset: number;
+    /**
+      * 过滤条件
+      */
+    Filters?: Array<Filter>;
 }
 /**
  * 独享实例详情

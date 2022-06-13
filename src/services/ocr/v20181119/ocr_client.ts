@@ -51,6 +51,7 @@ import {
   VehicleRegCertInfo,
   VehicleLicenseOCRRequest,
   EnterpriseLicenseOCRResponse,
+  SealInfo,
   RecognizePhilippinesVoteIDOCRRequest,
   InvoiceGeneralInfo,
   WordCoordPoint,
@@ -911,7 +912,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 印章识别已支持各类印章，包括发票章，财务章等，适用于公文，票据等场景。
+   * 本接口支持各类印章识别，包括发票章，财务章等，适用于公文，票据等场景。
    */
   async SealOCR(
     req: SealOCRRequest,

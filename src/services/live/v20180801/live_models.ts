@@ -1023,6 +1023,16 @@ export interface DescribeScreenShotSheetNumListResponse {
 }
 
 /**
+ * ForbidLiveStream返回参数结构体
+ */
+export interface ForbidLiveStreamResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeLiveCert请求参数结构体
  */
 export interface DescribeLiveCertRequest {
@@ -2932,6 +2942,34 @@ export interface DescribeConcurrentRecordStreamNumResponse {
 }
 
 /**
+ * DescribeLiveTimeShiftBillInfoList请求参数结构体
+ */
+export interface DescribeLiveTimeShiftBillInfoListRequest {
+  /**
+      * UTC开始时间，支持最近三个月的查询，查询时间最长跨度为一个月。
+
+使用 UTC 格式时间，
+例如：2019-01-08T10:00:00Z。
+注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
+      */
+  StartTime: string
+
+  /**
+      * UTC结束时间，支持最近三个月的查询，查询时间最长跨度为一个月。
+
+使用 UTC 格式时间，
+例如：2019-01-08T10:00:00Z。
+注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
+      */
+  EndTime: string
+
+  /**
+   * 推流域名列表，若不传递此参数，则表示查询总体数据。
+   */
+  PushDomains?: Array<string>
+}
+
+/**
  * 录制任务
  */
 export interface RecordTask {
@@ -3011,6 +3049,56 @@ export interface CommonMixInputParam {
    * 输入流裁剪参数。
    */
   CropParams?: CommonMixCropParams
+}
+
+/**
+ * 水印信息。
+ */
+export interface WatermarkInfo {
+  /**
+   * 水印 ID。
+   */
+  WatermarkId: number
+
+  /**
+   * 水印图片 URL。
+   */
+  PictureUrl: string
+
+  /**
+   * 显示位置，X 轴偏移。
+   */
+  XPosition: number
+
+  /**
+   * 显示位置，Y 轴偏移。
+   */
+  YPosition: number
+
+  /**
+   * 水印名称。
+   */
+  WatermarkName: string
+
+  /**
+   * 当前状态。0：未使用，1:使用中。
+   */
+  Status: number
+
+  /**
+   * 添加时间。
+   */
+  CreateTime: string
+
+  /**
+   * 水印宽。
+   */
+  Width: number
+
+  /**
+   * 水印高。
+   */
+  Height: number
 }
 
 /**
@@ -4827,53 +4915,28 @@ export interface DescribeLiveWatermarksResponse {
 }
 
 /**
- * 水印信息。
+ * 时移计费明细数据。
  */
-export interface WatermarkInfo {
+export interface TimeShiftBillData {
   /**
-   * 水印 ID。
+   * 推流域名。
    */
-  WatermarkId: number
+  Domain: string
 
   /**
-   * 水印图片 URL。
+   * 时移时长,单位分钟。
    */
-  PictureUrl: string
+  Duration: number
 
   /**
-   * 显示位置，X 轴偏移。
+   * 时移配置天数，单位天。
    */
-  XPosition: number
+  StoragePeriod: number
 
   /**
-   * 显示位置，Y 轴偏移。
+   * 时间点，格式: yyyy-mm-ddTHH:MM:SSZ。
    */
-  YPosition: number
-
-  /**
-   * 水印名称。
-   */
-  WatermarkName: string
-
-  /**
-   * 当前状态。0：未使用，1:使用中。
-   */
-  Status: number
-
-  /**
-   * 添加时间。
-   */
-  CreateTime: string
-
-  /**
-   * 水印宽。
-   */
-  Width: number
-
-  /**
-   * 水印高。
-   */
-  Height: number
+  Time: string
 }
 
 /**
@@ -5453,9 +5516,14 @@ eg. record_interval=3600&storage_time=2592000。
 }
 
 /**
- * ForbidLiveStream返回参数结构体
+ * DescribeLiveTimeShiftBillInfoList返回参数结构体
  */
-export interface ForbidLiveStreamResponse {
+export interface DescribeLiveTimeShiftBillInfoListResponse {
+  /**
+   * 时移计费明细数据。
+   */
+  DataInfoList: Array<TimeShiftBillData>
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
