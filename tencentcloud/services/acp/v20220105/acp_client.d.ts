@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CreateAppScanTaskRepeatRequest, DescribeScanTaskListResponse, DescribeScanTaskListRequest, CreateAppScanTaskRequest, DescribeScanTaskStatusResponse, DescribeFileTicketResponse, DescribeScanTaskReportUrlRequest, DescribeScanTaskStatusRequest, DescribeFileTicketRequest, CreateAppScanTaskResponse, DescribeScanTaskReportUrlResponse, CreateAppScanTaskRepeatResponse } from "./acp_models";
+import { CreateAppScanTaskRepeatRequest, DescribeScanTaskListResponse, DescribeResourceUsageInfoResponse, DescribeScanTaskListRequest, CreateAppScanTaskRequest, DescribeScanTaskStatusResponse, DescribeFileTicketResponse, DescribeScanTaskReportUrlRequest, DescribeScanTaskStatusRequest, DescribeFileTicketRequest, CreateAppScanTaskResponse, DescribeResourceUsageInfoRequest, DescribeScanTaskReportUrlResponse, CreateAppScanTaskRepeatResponse } from "./acp_models";
 /**
  * acp client
  * @class
@@ -16,17 +16,21 @@ export declare class Client extends AbstractClient {
      */
     CreateAppScanTaskRepeat(req: CreateAppScanTaskRepeatRequest, cb?: (error: string, rep: CreateAppScanTaskRepeatResponse) => void): Promise<CreateAppScanTaskRepeatResponse>;
     /**
-     * 获取应用合规文件上传凭证，用于上传诊断文件
+     * 查询应用合规平台用户资源的使用情况
      */
-    DescribeFileTicket(req: DescribeFileTicketRequest, cb?: (error: string, rep: DescribeFileTicketResponse) => void): Promise<DescribeFileTicketResponse>;
+    DescribeResourceUsageInfo(req: DescribeResourceUsageInfoRequest, cb?: (error: string, rep: DescribeResourceUsageInfoResponse) => void): Promise<DescribeResourceUsageInfoResponse>;
+    /**
+     * 查询App隐私合规诊断任务状态
+     */
+    DescribeScanTaskStatus(req: DescribeScanTaskStatusRequest, cb?: (error: string, rep: DescribeScanTaskStatusResponse) => void): Promise<DescribeScanTaskStatusResponse>;
     /**
      * 获取App合规诊断任务报告url
      */
     DescribeScanTaskReportUrl(req: DescribeScanTaskReportUrlRequest, cb?: (error: string, rep: DescribeScanTaskReportUrlResponse) => void): Promise<DescribeScanTaskReportUrlResponse>;
     /**
-     * 查询App隐私合规诊断任务状态
+     * 获取应用合规文件上传凭证，用于上传诊断文件
      */
-    DescribeScanTaskStatus(req: DescribeScanTaskStatusRequest, cb?: (error: string, rep: DescribeScanTaskStatusResponse) => void): Promise<DescribeScanTaskStatusResponse>;
+    DescribeFileTicket(req: DescribeFileTicketRequest, cb?: (error: string, rep: DescribeFileTicketResponse) => void): Promise<DescribeFileTicketResponse>;
     /**
      * 获取App隐私合规诊断任务列表
      */

@@ -58,6 +58,16 @@ it("mmps.v20200710.DescribeFlySecMiniAppScanTaskStatus", async function () {
     }
 })
 
+it("mmps.v20200710.DescribeResourceUsageInfo", async function () {
+    try {
+       const data = await client.DescribeResourceUsageInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mmps.v20200710.CreateFlySecMiniAppScanTask", async function () {
     try {
        const data = await client.CreateFlySecMiniAppScanTask({})
@@ -101,6 +111,16 @@ it("mmps.v20200710.DescribeFlySecMiniAppScanTaskList", async function () {
 it("mmps.v20200710.DescribeScanTaskStatus", async function () {
     try {
        const data = await client.DescribeScanTaskStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mmps.v20200710.DescribeBasicDiagnosisResourceUsageInfo", async function () {
+    try {
+       const data = await client.DescribeBasicDiagnosisResourceUsageInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

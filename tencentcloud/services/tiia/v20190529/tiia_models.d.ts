@@ -975,6 +975,23 @@ export interface Face {
     ID: string;
 }
 /**
+ * DetectEnvelope请求参数结构体
+ */
+export interface DetectEnvelopeRequest {
+    /**
+      * 图片的URL地址。图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。
+非腾讯云存储的Url速度和稳定性可能受一定影响。
+图片大小的限制为4M，图片像素的限制为4k。
+      */
+    ImageUrl?: string;
+    /**
+      * 图片经过base64编码的内容。与ImageUrl同时存在时优先使用ImageUrl字段。
+图片大小的限制为4M，图片像素的限制为4k。
+**注意：图片需要base64编码，并且要去掉编码头部。
+      */
+    ImageBase64?: string;
+}
+/**
  * DetectProduct返回参数结构体
  */
 export interface DetectProductResponse {
@@ -1170,6 +1187,51 @@ export interface DetectLabelBetaResponse {
     RequestId?: string;
 }
 /**
+ * DetectEnvelope返回参数结构体
+ */
+export interface DetectEnvelopeResponse {
+    /**
+      * 一级标签结果数组。识别是否文件封。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FirstTags: Array<ImageTag>;
+    /**
+      * 二级标签结果数组。识别文件封正反面。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SecondTags: Array<ImageTag>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * 图片标签。
+ */
+export interface ImageTag {
+    /**
+      * 标签内容。
+      */
+    Name: string;
+    /**
+      * 置信度范围在0-100之间。值越高，表示目标为相应结果的可能性越高。
+      */
+    Confidence: number;
+}
+/**
+ * 属性
+ */
+export interface Attribute {
+    /**
+      * 属性
+      */
+    Type: string;
+    /**
+      * 属性详情
+      */
+    Details: string;
+}
+/**
  * 图片信息
  */
 export interface ImageInfo {
@@ -1193,19 +1255,6 @@ export interface ImageInfo {
       * 相似度。
       */
     Score: number;
-}
-/**
- * 属性
- */
-export interface Attribute {
-    /**
-      * 属性
-      */
-    Type: string;
-    /**
-      * 属性详情
-      */
-    Details: string;
 }
 /**
  * 名人识别的标签

@@ -125,7 +125,7 @@ export interface CreateDBInstancesRequest {
  */
 export interface SetAutoRenewFlagRequest {
   /**
-   * 实例ID数组
+   * 实例ID集合。注意：当前已不支持同时操作多个实例，这里只能传入单个实例ID。
    */
   DBInstanceIdSet: Array<string>
 
@@ -215,12 +215,12 @@ export interface DescribeAccountsRequest {
   DBInstanceId: string
 
   /**
-   * 分页返回，每页最大返回数目，默认20，取值范围为1-100
+   * 分页返回，每页最大返回数目，默认10，取值范围为1-100
    */
   Limit?: number
 
   /**
-   * 分页返回，返回第几页的用户数据。页码从0开始计数
+   * 数据偏移量，从0开始。
    */
   Offset?: number
 
@@ -381,12 +381,12 @@ export interface CreateInstancesRequest {
   NeedSupportTDE?: number
 
   /**
-   * 自定义密钥的keyId，若选择自定义密匙加密，则需要传入自定义密匙的keyId，keyId是CMK的唯一标识。
+   * 自定义密钥的KeyId，若选择自定义密匙加密，则需要传入自定义密匙的KeyId，KeyId是CMK的唯一标识。
    */
   KMSKeyId?: string
 
   /**
-   * 使用KMS服务的地域，KMSRegion为空默认使用本地域的kms，本地域不支持的情况下需自选其他KMS支持的地域。
+   * 使用KMS服务的地域，KMSRegion为空默认使用本地域的KMS，本地域不支持的情况下需自选其他KMS支持的地域。
    */
   KMSRegion?: string
 }
@@ -677,7 +677,7 @@ export interface RenewInstanceResponse {
   /**
    * 订单名
    */
-  DealName?: string
+  DealName: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -772,7 +772,7 @@ export interface InitDBInstancesResponse {
   /**
    * 实例ID集合。
    */
-  DBInstanceIdSet?: Array<string>
+  DBInstanceIdSet: Array<string>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -822,12 +822,12 @@ export interface DescribeRegionsResponse {
   /**
    * 返回的结果数量。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 地域信息集合。
    */
-  RegionSet?: Array<RegionInfo>
+  RegionSet: Array<RegionInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1257,12 +1257,12 @@ export interface DescribeOrdersResponse {
   /**
    * 订单数量
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 订单数组
    */
-  Deals?: Array<PgDeal>
+  Deals: Array<PgDeal>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1287,12 +1287,17 @@ export interface InquiryPriceCreateDBInstancesResponse {
   /**
    * 原始价格，单位：分
    */
-  OriginalPrice?: number
+  OriginalPrice: number
 
   /**
    * 折后价格，单位：分
    */
-  Price?: number
+  Price: number
+
+  /**
+   * 币种。例如，CNY：人民币。
+   */
+  Currency: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1345,7 +1350,7 @@ export interface ModifySwitchTimePeriodResponse {
  */
 export interface DisIsolateDBInstancesRequest {
   /**
-   * 资源ID列表
+   * 资源ID列表。注意：当前已不支持同时解隔离多个实例，这里只能传入单个实例ID。
    */
   DBInstanceIdSet: Array<string>
 
@@ -1435,14 +1440,14 @@ db-tag-key：按照标签键过滤，类型为string
   Limit?: number
 
   /**
+   * 数据偏移量，从0开始。
+   */
+  Offset?: number
+
+  /**
    * 排序指标，如实例名、创建时间等，支持DBInstanceId,CreateTime,Name,EndTime
    */
   OrderBy?: string
-
-  /**
-   * 页码偏移量，从0开始。
-   */
-  Offset?: number
 
   /**
    * 排序方式，包括升序：asc、降序：desc。
@@ -1613,7 +1618,7 @@ export interface SetAutoRenewFlagResponse {
   /**
    * 设置成功的实例个数
    */
-  Count?: number
+  Count: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1691,7 +1696,7 @@ export interface ModifyDBInstancesProjectResponse {
   /**
    * 转移项目成功的实例个数
    */
-  Count?: number
+  Count: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2165,12 +2170,12 @@ export interface DescribeDBBackupsResponse {
   /**
    * 返回备份列表中备份文件的个数
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 备份列表
    */
-  BackupList?: Array<DBBackup>
+  BackupList: Array<DBBackup>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2604,7 +2609,7 @@ export interface OpenDBExtranetAccessResponse {
   /**
    * 异步任务流程ID
    */
-  FlowId?: number
+  FlowId: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2710,12 +2715,17 @@ export interface InquiryPriceRenewDBInstanceResponse {
   /**
    * 总费用，打折前的。比如24650表示246.5元
    */
-  OriginalPrice?: number
+  OriginalPrice: number
 
   /**
    * 实际需要付款金额。比如24650表示246.5元
    */
-  Price?: number
+  Price: number
+
+  /**
+   * 币种。例如，CNY：人民币。
+   */
+  Currency: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2819,7 +2829,7 @@ export interface DescribeServerlessDBInstancesResponse {
  */
 export interface IsolateDBInstancesRequest {
   /**
-   * 实例ID集合
+   * 实例ID集合。注意：当前已不支持同时隔离多个实例，这里只能传入单个实例ID。
    */
   DBInstanceIdSet: Array<string>
 }
@@ -3255,7 +3265,7 @@ export interface CloseDBExtranetAccessResponse {
   /**
    * 异步任务流程ID
    */
-  FlowId?: number
+  FlowId: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3415,7 +3425,7 @@ export interface CreateServerlessDBInstanceResponse {
   /**
    * 实例ID，该ID全局唯一，如：postgres-xxxxx
    */
-  DBInstanceId?: string
+  DBInstanceId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3430,7 +3440,7 @@ export interface DescribeDatabasesResponse {
   /**
    * 数据库信息
    */
-  Items?: Array<string>
+  Items: Array<string>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3798,12 +3808,17 @@ export interface InquiryPriceUpgradeDBInstanceResponse {
   /**
    * 总费用，打折前的
    */
-  OriginalPrice?: number
+  OriginalPrice: number
 
   /**
    * 实际需要付款金额
    */
-  Price?: number
+  Price: number
+
+  /**
+   * 币种。例如，CNY：人民币。
+   */
+  Currency: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3929,7 +3944,7 @@ export interface RestartDBInstanceResponse {
   /**
    * 异步流程ID
    */
-  FlowId?: number
+  FlowId: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4109,12 +4124,12 @@ export interface DescribeAccountsResponse {
   /**
    * 本次调用接口共返回了多少条数据。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 帐号列表详细信息。
    */
-  Details?: Array<AccountInfo>
+  Details: Array<AccountInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4147,12 +4162,12 @@ export interface UpgradeDBInstanceResponse {
  */
 export interface ModifyDBInstancesProjectRequest {
   /**
-   * postgresql实例ID数组
+   * 实例ID集合。注意：当前已不支持同时操作多个实例，这里只能传入单个实例ID。
    */
   DBInstanceIdSet: Array<string>
 
   /**
-   * postgresql实例所属新项目的ID
+   * 所属新项目的ID
    */
   ProjectId: string
 }
@@ -4254,12 +4269,12 @@ export interface DescribeDBXlogsResponse {
   /**
    * 表示此次返回结果有多少条数据。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * Xlog列表
    */
-  XlogList?: Array<Xlog>
+  XlogList: Array<Xlog>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

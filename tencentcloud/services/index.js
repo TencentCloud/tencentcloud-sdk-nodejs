@@ -90,6 +90,8 @@ var cfw_1 = require("./cfw");
 Object.defineProperty(exports, "cfw", { enumerable: true, get: function () { return cfw_1.cfw; } });
 var chdfs_1 = require("./chdfs");
 Object.defineProperty(exports, "chdfs", { enumerable: true, get: function () { return chdfs_1.chdfs; } });
+var ciam_1 = require("./ciam");
+Object.defineProperty(exports, "ciam", { enumerable: true, get: function () { return ciam_1.ciam; } });
 var cii_1 = require("./cii");
 Object.defineProperty(exports, "cii", { enumerable: true, get: function () { return cii_1.cii; } });
 var cim_1 = require("./cim");

@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DetectProductBetaResponse, DetectDisgustRequest, SearchImageResponse, RecognizeCarProRequest, RecognizeCarProResponse, CreateImageRequest, DetectLabelBetaRequest, DeleteImagesResponse, CropImageRequest, DetectProductRequest, DetectLabelResponse, DescribeGroupsRequest, DetectMisbehaviorResponse, AssessQualityResponse, DetectDisgustResponse, SearchImageRequest, RecognizeCarResponse, DetectLabelRequest, DetectLabelProResponse, EnhanceImageResponse, AssessQualityRequest, DeleteImagesRequest, CreateGroupRequest, DescribeImagesRequest, DetectProductBetaRequest, RecognizeCarRequest, EnhanceImageRequest, CropImageResponse, DetectCelebrityRequest, DetectProductResponse, CreateImageResponse, DetectLabelProRequest, DetectLabelBetaResponse, DetectCelebrityResponse, DescribeGroupsResponse, DescribeImagesResponse, DetectMisbehaviorRequest, CreateGroupResponse } from "./tiia_models";
+import { DetectProductBetaResponse, DetectDisgustRequest, SearchImageResponse, RecognizeCarProRequest, RecognizeCarProResponse, CreateImageRequest, DetectLabelBetaRequest, DeleteImagesResponse, CropImageRequest, DetectProductRequest, DetectLabelResponse, DescribeGroupsRequest, DetectMisbehaviorResponse, AssessQualityResponse, DetectDisgustResponse, SearchImageRequest, RecognizeCarResponse, DetectLabelRequest, DetectLabelProResponse, EnhanceImageResponse, AssessQualityRequest, DeleteImagesRequest, CreateGroupRequest, DescribeImagesRequest, DetectProductBetaRequest, RecognizeCarRequest, EnhanceImageRequest, CropImageResponse, DetectCelebrityRequest, DetectEnvelopeRequest, DetectProductResponse, CreateImageResponse, DetectLabelProRequest, DetectLabelBetaResponse, DetectEnvelopeResponse, DetectCelebrityResponse, DescribeGroupsResponse, DescribeImagesResponse, DetectMisbehaviorRequest, CreateGroupResponse } from "./tiia_models";
 /**
  * tiia client
  * @class
@@ -147,6 +147,13 @@ export declare class Client extends AbstractClient {
 - 公共参数中的签名方式必须指定为V3版本，即配置SignatureMethod参数为TC3-HMAC-SHA256。
      */
     EnhanceImage(req: EnhanceImageRequest, cb?: (error: string, rep: EnhanceImageResponse) => void): Promise<EnhanceImageResponse>;
+    /**
+     * 文件封识别可检测图片中是否包含符合文件封（即文件、单据、资料等的袋状包装）特征的物品，覆盖顺丰快递文件封、文件袋、档案袋等多种文件封类型，可应用于物流行业对文件快递的包装审核等场景。
+
+>?
+- 公共参数中的签名方式必须指定为V3版本，即配置SignatureMethod参数为TC3-HMAC-SHA256。
+     */
+    DetectEnvelope(req: DetectEnvelopeRequest, cb?: (error: string, rep: DetectEnvelopeResponse) => void): Promise<DetectEnvelopeResponse>;
     /**
      * 传入一张图片，可以识别图片中包含的人物是否为公众人物，如果是，输出人物的姓名、基本信息、脸部坐标。
 

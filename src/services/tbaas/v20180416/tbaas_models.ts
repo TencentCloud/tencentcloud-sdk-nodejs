@@ -700,7 +700,7 @@ export interface QueryChainMakerBlockTransactionRequest {
   ChainId: string
 
   /**
-   * 区块高度，-1表示最新区块
+   * 区块高度
    */
   BlockHeight: number
 }

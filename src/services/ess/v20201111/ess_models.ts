@@ -1067,7 +1067,7 @@ export interface FileInfo {
  */
 export interface CreateMultiFlowSignQRCodeRequest {
   /**
-   * 模版ID
+   * 模板ID
    */
   TemplateId: string
 

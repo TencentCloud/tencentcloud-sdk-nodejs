@@ -204,6 +204,15 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("EnhanceImage", req, cb);
     }
     /**
+     * 文件封识别可检测图片中是否包含符合文件封（即文件、单据、资料等的袋状包装）特征的物品，覆盖顺丰快递文件封、文件袋、档案袋等多种文件封类型，可应用于物流行业对文件快递的包装审核等场景。
+
+>?
+- 公共参数中的签名方式必须指定为V3版本，即配置SignatureMethod参数为TC3-HMAC-SHA256。
+     */
+    async DetectEnvelope(req, cb) {
+        return this.request("DetectEnvelope", req, cb);
+    }
+    /**
      * 传入一张图片，可以识别图片中包含的人物是否为公众人物，如果是，输出人物的姓名、基本信息、脸部坐标。
 
 支持识别一张图片中存在的多个人脸，针对每个人脸，会给出与之最相似的公众人物。

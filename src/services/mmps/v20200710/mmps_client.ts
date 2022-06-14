@@ -21,29 +21,34 @@ import {
   DescribeFlySecMiniAppReportUrlRequest,
   DescribeScanTaskListRequest,
   DescribeFlySecMiniAppScanTaskParamRequest,
+  ResourceUsageInfoData,
   CreateAppScanTaskRequest,
   DescribeScanTaskStatusRequest,
-  DescribeScanTaskListResponse,
+  DescribeBasicDiagnosisResourceUsageInfoResponse,
+  CreateAppScanTaskRepeatResponse,
+  DescribeBasicDiagnosisResourceUsageInfoRequest,
+  DescribeResourceUsageInfoResponse,
+  DescribeScanTaskReportUrlResponse,
   DescribeFlySecMiniAppScanTaskStatusRequest,
   CreateFlySecMiniAppScanTaskResponse,
-  CreateAppScanTaskRepeatResponse,
+  CreateFlySecMiniAppScanTaskRequest,
   DescribeFlySecMiniAppScanTaskListRequest,
   DescribeFlySecMiniAppScanTaskParamResponse,
-  DescribeScanTaskReportUrlResponse,
-  CreateFlySecMiniAppScanTaskRequest,
+  CreateFlySecMiniAppScanTaskRepeatRequest,
   CreateAppScanTaskRepeatRequest,
   DescribeScanTaskReportUrlRequest,
   TaskFlowStepsInfo,
   DescribeFlySecMiniAppScanTaskListResponse,
   FlySecMiniAppTaskData,
-  CreateFlySecMiniAppScanTaskRepeatRequest,
   CreateAppScanTaskResponse,
   DescribeFlySecMiniAppReportUrlResponse,
+  DescribeScanTaskListResponse,
   AppInfoItem,
   DescribeFlySecMiniAppScanTaskStatusResponse,
   CreateFlySecMiniAppScanTaskRepeatResponse,
   DescribeScanTaskStatusResponse,
   AppTaskData,
+  DescribeResourceUsageInfoRequest,
 } from "./mmps_models"
 
 /**
@@ -96,6 +101,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询翼扬安全资源使用情况
+   */
+  async DescribeResourceUsageInfo(
+    req?: DescribeResourceUsageInfoRequest,
+    cb?: (error: string, rep: DescribeResourceUsageInfoResponse) => void
+  ): Promise<DescribeResourceUsageInfoResponse> {
+    return this.request("DescribeResourceUsageInfo", req, cb)
+  }
+
+  /**
    * 创建小程序翼扬安全的基础或深度诊断任务
    */
   async CreateFlySecMiniAppScanTask(
@@ -143,6 +158,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeScanTaskStatusResponse) => void
   ): Promise<DescribeScanTaskStatusResponse> {
     return this.request("DescribeScanTaskStatus", req, cb)
+  }
+
+  /**
+   * 查询翼扬安全基础诊断资源使用情况
+   */
+  async DescribeBasicDiagnosisResourceUsageInfo(
+    req: DescribeBasicDiagnosisResourceUsageInfoRequest,
+    cb?: (error: string, rep: DescribeBasicDiagnosisResourceUsageInfoResponse) => void
+  ): Promise<DescribeBasicDiagnosisResourceUsageInfoResponse> {
+    return this.request("DescribeBasicDiagnosisResourceUsageInfo", req, cb)
   }
 
   /**

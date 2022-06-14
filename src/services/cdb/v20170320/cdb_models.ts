@@ -4313,7 +4313,7 @@ export interface CreateDBInstanceRequest {
   RoGroup?: RoGroup
 
   /**
-   * 实例名称。
+   * 实例名称。一次购买多个实例命名会用后缀数字区分，例instnaceName=db，goodsNum=3，实例命名分别为db1，db2，db3。
    */
   InstanceName?: string
 
@@ -7695,7 +7695,7 @@ export interface CreateDBInstanceHourRequest {
   AutoRenewFlag?: number
 
   /**
-   * 实例名称。
+   * 实例名称。一次购买多个实例命名会用后缀数字区分，例instnaceName=db，goodsNum=3，实例命名分别为db1，db2，db3。
    */
   InstanceName?: string
 

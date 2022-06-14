@@ -55,6 +55,7 @@ import {
   DetectCelebrityRequest,
   Coord,
   Face,
+  DetectEnvelopeRequest,
   DetectProductResponse,
   ColorInfo,
   ImageRect,
@@ -64,8 +65,10 @@ import {
   CarPlateContent,
   DetectLabelProRequest,
   DetectLabelBetaResponse,
-  ImageInfo,
+  DetectEnvelopeResponse,
+  ImageTag,
   Attribute,
+  ImageInfo,
   Labels,
   DetectCelebrityResponse,
   Product,
@@ -333,6 +336,19 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: EnhanceImageResponse) => void
   ): Promise<EnhanceImageResponse> {
     return this.request("EnhanceImage", req, cb)
+  }
+
+  /**
+     * 文件封识别可检测图片中是否包含符合文件封（即文件、单据、资料等的袋状包装）特征的物品，覆盖顺丰快递文件封、文件袋、档案袋等多种文件封类型，可应用于物流行业对文件快递的包装审核等场景。
+
+>?   
+- 公共参数中的签名方式必须指定为V3版本，即配置SignatureMethod参数为TC3-HMAC-SHA256。
+     */
+  async DetectEnvelope(
+    req: DetectEnvelopeRequest,
+    cb?: (error: string, rep: DetectEnvelopeResponse) => void
+  ): Promise<DetectEnvelopeResponse> {
+    return this.request("DetectEnvelope", req, cb)
   }
 
   /**

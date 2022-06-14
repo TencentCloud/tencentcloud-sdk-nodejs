@@ -40,10 +40,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateAppScanTaskRepeat", req, cb);
     }
     /**
-     * 获取应用合规文件上传凭证，用于上传诊断文件
+     * 查询应用合规平台用户资源的使用情况
      */
-    async DescribeFileTicket(req, cb) {
-        return this.request("DescribeFileTicket", req, cb);
+    async DescribeResourceUsageInfo(req, cb) {
+        return this.request("DescribeResourceUsageInfo", req, cb);
+    }
+    /**
+     * 查询App隐私合规诊断任务状态
+     */
+    async DescribeScanTaskStatus(req, cb) {
+        return this.request("DescribeScanTaskStatus", req, cb);
     }
     /**
      * 获取App合规诊断任务报告url
@@ -52,10 +58,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeScanTaskReportUrl", req, cb);
     }
     /**
-     * 查询App隐私合规诊断任务状态
+     * 获取应用合规文件上传凭证，用于上传诊断文件
      */
-    async DescribeScanTaskStatus(req, cb) {
-        return this.request("DescribeScanTaskStatus", req, cb);
+    async DescribeFileTicket(req, cb) {
+        return this.request("DescribeFileTicket", req, cb);
     }
     /**
      * 获取App隐私合规诊断任务列表

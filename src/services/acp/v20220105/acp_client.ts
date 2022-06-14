@@ -21,7 +21,9 @@ import {
   CreateAppScanTaskRepeatRequest,
   DescribeScanTaskListResponse,
   AppInfoItem,
+  DescribeResourceUsageInfoResponse,
   DescribeScanTaskListRequest,
+  ResourceUsageInfoData,
   TaskFlowStepsInfo,
   CreateAppScanTaskRequest,
   DescribeScanTaskStatusResponse,
@@ -31,6 +33,7 @@ import {
   DescribeScanTaskStatusRequest,
   DescribeFileTicketRequest,
   CreateAppScanTaskResponse,
+  DescribeResourceUsageInfoRequest,
   DescribeScanTaskReportUrlResponse,
   CreateAppScanTaskRepeatResponse,
 } from "./acp_models"
@@ -65,13 +68,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取应用合规文件上传凭证，用于上传诊断文件
+   * 查询应用合规平台用户资源的使用情况
    */
-  async DescribeFileTicket(
-    req: DescribeFileTicketRequest,
-    cb?: (error: string, rep: DescribeFileTicketResponse) => void
-  ): Promise<DescribeFileTicketResponse> {
-    return this.request("DescribeFileTicket", req, cb)
+  async DescribeResourceUsageInfo(
+    req: DescribeResourceUsageInfoRequest,
+    cb?: (error: string, rep: DescribeResourceUsageInfoResponse) => void
+  ): Promise<DescribeResourceUsageInfoResponse> {
+    return this.request("DescribeResourceUsageInfo", req, cb)
+  }
+
+  /**
+   * 查询App隐私合规诊断任务状态
+   */
+  async DescribeScanTaskStatus(
+    req: DescribeScanTaskStatusRequest,
+    cb?: (error: string, rep: DescribeScanTaskStatusResponse) => void
+  ): Promise<DescribeScanTaskStatusResponse> {
+    return this.request("DescribeScanTaskStatus", req, cb)
   }
 
   /**
@@ -85,13 +98,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询App隐私合规诊断任务状态
+   * 获取应用合规文件上传凭证，用于上传诊断文件
    */
-  async DescribeScanTaskStatus(
-    req: DescribeScanTaskStatusRequest,
-    cb?: (error: string, rep: DescribeScanTaskStatusResponse) => void
-  ): Promise<DescribeScanTaskStatusResponse> {
-    return this.request("DescribeScanTaskStatus", req, cb)
+  async DescribeFileTicket(
+    req: DescribeFileTicketRequest,
+    cb?: (error: string, rep: DescribeFileTicketResponse) => void
+  ): Promise<DescribeFileTicketResponse> {
+    return this.request("DescribeFileTicket", req, cb)
   }
 
   /**

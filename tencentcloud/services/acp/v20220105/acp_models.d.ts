@@ -129,6 +129,23 @@ export interface AppInfoItem {
     PrivacyTextMD5: string;
 }
 /**
+ * DescribeResourceUsageInfo返回参数结构体
+ */
+export interface DescribeResourceUsageInfoResponse {
+    /**
+      * 返回值, 0:成功, 其他值请查看“返回值”定义，暂时未定
+      */
+    Result: number;
+    /**
+      * 资源使用信息
+      */
+    Data: ResourceUsageInfoData;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeScanTaskList请求参数结构体
  */
 export interface DescribeScanTaskListRequest {
@@ -168,6 +185,23 @@ export interface DescribeScanTaskListRequest {
       * 查询时间范围, 查询结束时间(2021-09-30 或 2021-09-30 10:57:34)
       */
     EndTime?: string;
+}
+/**
+ * 资源使用情况信息
+ */
+export interface ResourceUsageInfoData {
+    /**
+      * 资源计费项名称
+      */
+    ResourceName: string;
+    /**
+      * 资源总数
+      */
+    Total: number;
+    /**
+      * 未使用资源数
+      */
+    UnusedCount: number;
 }
 /**
  * 任务流步骤详情
@@ -448,6 +482,15 @@ export interface CreateAppScanTaskResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DescribeResourceUsageInfo请求参数结构体
+ */
+export interface DescribeResourceUsageInfoRequest {
+    /**
+      * 资源计费项名称
+      */
+    PriceName: string;
 }
 /**
  * DescribeScanTaskReportUrl返回参数结构体

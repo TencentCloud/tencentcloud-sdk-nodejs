@@ -38,9 +38,19 @@ it("acp.v20220105.CreateAppScanTaskRepeat", async function () {
     }
 })
 
-it("acp.v20220105.DescribeFileTicket", async function () {
+it("acp.v20220105.DescribeResourceUsageInfo", async function () {
     try {
-       const data = await client.DescribeFileTicket({})
+       const data = await client.DescribeResourceUsageInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("acp.v20220105.DescribeScanTaskStatus", async function () {
+    try {
+       const data = await client.DescribeScanTaskStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -58,9 +68,9 @@ it("acp.v20220105.DescribeScanTaskReportUrl", async function () {
     }
 })
 
-it("acp.v20220105.DescribeScanTaskStatus", async function () {
+it("acp.v20220105.DescribeFileTicket", async function () {
     try {
-       const data = await client.DescribeScanTaskStatus({})
+       const data = await client.DescribeFileTicket({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

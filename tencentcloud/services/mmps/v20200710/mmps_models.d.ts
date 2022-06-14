@@ -70,6 +70,23 @@ export interface DescribeFlySecMiniAppScanTaskParamRequest {
     TaskID: string;
 }
 /**
+ * 翼扬安全资源使用情况
+ */
+export interface ResourceUsageInfoData {
+    /**
+      * 资源名称, 具体名称请查看产品配置
+      */
+    ResourceName: string;
+    /**
+      * 资源总数
+      */
+    Total: number;
+    /**
+      * 资源未使用次数
+      */
+    UnusedCount: number;
+}
+/**
  * CreateAppScanTask请求参数结构体
  */
 export interface CreateAppScanTaskRequest {
@@ -140,23 +157,94 @@ export interface DescribeScanTaskStatusRequest {
     Platform: number;
 }
 /**
- * DescribeScanTaskList返回参数结构体
+ * DescribeBasicDiagnosisResourceUsageInfo返回参数结构体
  */
-export interface DescribeScanTaskListResponse {
+export interface DescribeBasicDiagnosisResourceUsageInfoResponse {
+    /**
+      * 返回值, 0:成功, 其他值请查看“返回值”定义
+      */
+    Ret: number;
+    /**
+      * 资源类型
+      */
+    ResourceName: string;
+    /**
+      * 资源总数
+      */
+    Total: number;
+    /**
+      * 资源未使用次数
+      */
+    UnusedCount: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * CreateAppScanTaskRepeat返回参数结构体
+ */
+export interface CreateAppScanTaskRepeatResponse {
     /**
       * 返回值, 0:成功, 其他值请查看“返回值”定义
       */
     Result: number;
     /**
-      * 诊断任务数据列表
-注意：此字段可能返回 null，表示取不到有效值。
+      * 任务id
       */
-    Data: Array<AppTaskData>;
+    TaskID: string;
     /**
-      * 任务总数量
-注意：此字段可能返回 null，表示取不到有效值。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeBasicDiagnosisResourceUsageInfo请求参数结构体
+ */
+export interface DescribeBasicDiagnosisResourceUsageInfoRequest {
+    /**
+      * 诊断模式 1:基础诊断，2:深度诊断
+      */
+    Mode: number;
+}
+/**
+ * DescribeResourceUsageInfo返回参数结构体
+ */
+export interface DescribeResourceUsageInfoResponse {
+    /**
+      * 返回值, 0:成功, 其他值请查看“返回值”定义
+      */
+    Ret: number;
+    /**
+      * 安全资源数据列表
+      */
+    Data: Array<ResourceUsageInfoData>;
+    /**
+      * 安全资源数量
       */
     Total: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeScanTaskReportUrl返回参数结构体
+ */
+export interface DescribeScanTaskReportUrlResponse {
+    /**
+      * 返回值, 0:成功, 其他值请查看“返回值”定义
+      */
+    Result: number;
+    /**
+      * 诊断报告/堆栈信息下载链接
+      */
+    ReportUrl: string;
+    /**
+      * 诊断报告/堆栈名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ReportTitle: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -189,21 +277,49 @@ export interface CreateFlySecMiniAppScanTaskResponse {
     RequestId?: string;
 }
 /**
- * CreateAppScanTaskRepeat返回参数结构体
+ * CreateFlySecMiniAppScanTask请求参数结构体
  */
-export interface CreateAppScanTaskRepeatResponse {
+export interface CreateFlySecMiniAppScanTaskRequest {
     /**
-      * 返回值, 0:成功, 其他值请查看“返回值”定义
+      * 小程序AppID
       */
-    Result: number;
+    MiniAppID: string;
     /**
-      * 任务id
+      * 诊断模式 1:基础诊断，2:深度诊断
       */
-    TaskID: string;
+    Mode: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 小程序测试账号(自有账号体系需提供,其他情况不需要)
       */
-    RequestId?: string;
+    MiniAppTestAccount?: string;
+    /**
+      * 小程序测试密码(自有账号体系需提供,其他情况不需要)
+      */
+    MiniAppTestPwd?: string;
+    /**
+      * 小程序所属行业
+      */
+    Industry?: string;
+    /**
+      * 小程序调查问卷json字符串
+      */
+    SurveyContent?: string;
+    /**
+      * 手机号码
+      */
+    Mobile?: string;
+    /**
+      * 邮箱地址
+      */
+    Email?: string;
+    /**
+      * 商务合作接口人
+      */
+    SalesPerson?: string;
+    /**
+      * 诊断扫描版本 0:正式版 1:体验版
+      */
+    ScanVersion?: number;
 }
 /**
  * DescribeFlySecMiniAppScanTaskList请求参数结构体
@@ -263,31 +379,9 @@ export interface DescribeFlySecMiniAppScanTaskParamResponse {
     RequestId?: string;
 }
 /**
- * DescribeScanTaskReportUrl返回参数结构体
+ * CreateFlySecMiniAppScanTaskRepeat请求参数结构体
  */
-export interface DescribeScanTaskReportUrlResponse {
-    /**
-      * 返回值, 0:成功, 其他值请查看“返回值”定义
-      */
-    Result: number;
-    /**
-      * 诊断报告/堆栈信息下载链接
-      */
-    ReportUrl: string;
-    /**
-      * 诊断报告/堆栈名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ReportTitle: string;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * CreateFlySecMiniAppScanTask请求参数结构体
- */
-export interface CreateFlySecMiniAppScanTaskRequest {
+export interface CreateFlySecMiniAppScanTaskRepeatRequest {
     /**
       * 小程序AppID
       */
@@ -297,6 +391,10 @@ export interface CreateFlySecMiniAppScanTaskRequest {
       */
     Mode: number;
     /**
+      * 原任务id
+      */
+    OrgTaskID: string;
+    /**
       * 小程序测试账号(自有账号体系需提供,其他情况不需要)
       */
     MiniAppTestAccount?: string;
@@ -304,26 +402,6 @@ export interface CreateFlySecMiniAppScanTaskRequest {
       * 小程序测试密码(自有账号体系需提供,其他情况不需要)
       */
     MiniAppTestPwd?: string;
-    /**
-      * 小程序所属行业
-      */
-    Industry?: string;
-    /**
-      * 小程序调查问卷json字符串
-      */
-    SurveyContent?: string;
-    /**
-      * 手机号码
-      */
-    Mobile?: string;
-    /**
-      * 邮箱地址
-      */
-    Email?: string;
-    /**
-      * 商务合作接口人
-      */
-    SalesPerson?: string;
     /**
       * 诊断扫描版本 0:正式版 1:体验版
       */
@@ -473,35 +551,6 @@ export interface FlySecMiniAppTaskData {
     Error: number;
 }
 /**
- * CreateFlySecMiniAppScanTaskRepeat请求参数结构体
- */
-export interface CreateFlySecMiniAppScanTaskRepeatRequest {
-    /**
-      * 小程序AppID
-      */
-    MiniAppID: string;
-    /**
-      * 诊断模式 1:基础诊断，2:深度诊断
-      */
-    Mode: number;
-    /**
-      * 原任务id
-      */
-    OrgTaskID: string;
-    /**
-      * 小程序测试账号(自有账号体系需提供,其他情况不需要)
-      */
-    MiniAppTestAccount?: string;
-    /**
-      * 小程序测试密码(自有账号体系需提供,其他情况不需要)
-      */
-    MiniAppTestPwd?: string;
-    /**
-      * 诊断扫描版本 0:正式版 1:体验版
-      */
-    ScanVersion?: number;
-}
-/**
  * CreateAppScanTask返回参数结构体
  */
 export interface CreateAppScanTaskResponse {
@@ -531,6 +580,29 @@ export interface DescribeFlySecMiniAppReportUrlResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Url: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeScanTaskList返回参数结构体
+ */
+export interface DescribeScanTaskListResponse {
+    /**
+      * 返回值, 0:成功, 其他值请查看“返回值”定义
+      */
+    Result: number;
+    /**
+      * 诊断任务数据列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Data: Array<AppTaskData>;
+    /**
+      * 任务总数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Total: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -693,3 +765,7 @@ export interface AppTaskData {
       */
     EndTime: string;
 }
+/**
+ * DescribeResourceUsageInfo请求参数结构体
+ */
+export declare type DescribeResourceUsageInfoRequest = null;

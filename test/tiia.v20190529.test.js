@@ -198,6 +198,16 @@ it("tiia.v20190529.EnhanceImage", async function () {
     }
 })
 
+it("tiia.v20190529.DetectEnvelope", async function () {
+    try {
+       const data = await client.DetectEnvelope({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tiia.v20190529.DetectCelebrity", async function () {
     try {
        const data = await client.DetectCelebrity({})

@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeResourceConfigsResponse, CreateResourceRequest, CheckSavepointRequest, CreateJobRequest, StopJobsRequest, CreateJobResponse, RunJobsRequest, DeleteTableConfigResponse, CreateResourceConfigResponse, CreateJobConfigRequest, CreateResourceConfigRequest, DeleteTableConfigRequest, DescribeResourceRelatedJobsRequest, DeleteResourcesResponse, CreateJobConfigResponse, TriggerJobSavepointResponse, TriggerJobSavepointRequest, DescribeResourcesRequest, DescribeJobSavepointRequest, CheckSavepointResponse, DeleteResourceConfigsRequest, DescribeJobSavepointResponse, RunJobsResponse, DeleteResourcesRequest, DescribeJobsResponse, StopJobsResponse, CreateResourceResponse, DescribeSystemResourcesRequest, DescribeJobConfigsRequest, DescribeResourcesResponse, DescribeJobConfigsResponse, DeleteResourceConfigsResponse, DescribeResourceRelatedJobsResponse, DescribeSystemResourcesResponse, DescribeJobsRequest, DescribeResourceConfigsRequest } from "./oceanus_models";
+import { DescribeResourceConfigsResponse, CreateResourceRequest, CheckSavepointRequest, CreateJobRequest, StopJobsRequest, CreateJobResponse, RunJobsRequest, ModifyJobResponse, DeleteTableConfigResponse, CreateResourceConfigResponse, CreateJobConfigRequest, CreateResourceConfigRequest, DeleteTableConfigRequest, DescribeResourceRelatedJobsRequest, DeleteResourcesResponse, CreateJobConfigResponse, TriggerJobSavepointResponse, TriggerJobSavepointRequest, DescribeResourcesRequest, DescribeJobSavepointRequest, CheckSavepointResponse, DeleteResourceConfigsRequest, DescribeJobSavepointResponse, ModifyJobRequest, RunJobsResponse, DeleteResourcesRequest, DescribeJobsResponse, StopJobsResponse, CreateResourceResponse, DescribeSystemResourcesRequest, DescribeJobConfigsRequest, DescribeResourcesResponse, DescribeJobConfigsResponse, DeleteResourceConfigsResponse, DescribeResourceRelatedJobsResponse, DescribeSystemResourcesResponse, DescribeJobsRequest, DescribeResourceConfigsRequest } from "./oceanus_models";
 /**
  * oceanus client
  * @class
@@ -51,6 +51,20 @@ export declare class Client extends AbstractClient {
      * 描述系统资源接口
      */
     DescribeSystemResources(req: DescribeSystemResourcesRequest, cb?: (error: string, rep: DescribeSystemResourcesResponse) => void): Promise<DescribeSystemResourcesResponse>;
+    /**
+     * 更新作业属性，仅允许以下3种操作，不支持组合操作：
+(1)	更新作业名称
+(2)	更新作业备注
+(3)	更新作业最大并行度
+变更前提：WorkerCuNum<=MaxParallelism
+如果MaxParallelism变小，不重启作业，待下一次重启生效
+如果MaxParallelism变大，则要求入参RestartAllowed必须为True
+假设作业运行状态，则先停止作业，再启动作业，中间状态丢失
+假设作业暂停状态，则将作业更改为停止状态，中间状态丢失
+
+
+     */
+    ModifyJob(req: ModifyJobRequest, cb?: (error: string, rep: ModifyJobResponse) => void): Promise<ModifyJobResponse>;
     /**
      * 删除资源版本
      */

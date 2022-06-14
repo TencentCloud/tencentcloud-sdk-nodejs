@@ -261,6 +261,16 @@ export interface StopJobDescription {
 }
 
 /**
+ * ModifyJob返回参数结构体
+ */
+export interface ModifyJobResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteTableConfig返回参数结构体
  */
 export interface DeleteTableConfigResponse {
@@ -886,6 +896,36 @@ export interface DescribeJobSavepointResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyJob请求参数结构体
+ */
+export interface ModifyJobRequest {
+  /**
+   * 作业Id
+   */
+  JobId: string
+
+  /**
+   * 作业名称，支持长度小于50的中文/英文/数字/”-”/”_”/”.”，不能重名
+   */
+  Name?: string
+
+  /**
+   * 描述
+   */
+  Remark?: string
+
+  /**
+   * 拖拽文件需传入此参数
+   */
+  TargetFolderId?: string
+
+  /**
+   * 工作空间 SerialId
+   */
+  WorkSpaceId?: string
 }
 
 /**

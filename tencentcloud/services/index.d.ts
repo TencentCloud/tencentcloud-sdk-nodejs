@@ -43,6 +43,7 @@ export { cfg } from "./cfg";
 export { cfs } from "./cfs";
 export { cfw } from "./cfw";
 export { chdfs } from "./chdfs";
+export { ciam } from "./ciam";
 export { cii } from "./cii";
 export { cim } from "./cim";
 export { cis } from "./cis";

@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeFlySecMiniAppReportUrlRequest, DescribeScanTaskListRequest, DescribeFlySecMiniAppScanTaskParamRequest, CreateAppScanTaskRequest, DescribeScanTaskStatusRequest, DescribeScanTaskListResponse, DescribeFlySecMiniAppScanTaskStatusRequest, CreateFlySecMiniAppScanTaskResponse, CreateAppScanTaskRepeatResponse, DescribeFlySecMiniAppScanTaskListRequest, DescribeFlySecMiniAppScanTaskParamResponse, DescribeScanTaskReportUrlResponse, CreateFlySecMiniAppScanTaskRequest, CreateAppScanTaskRepeatRequest, DescribeScanTaskReportUrlRequest, DescribeFlySecMiniAppScanTaskListResponse, CreateFlySecMiniAppScanTaskRepeatRequest, CreateAppScanTaskResponse, DescribeFlySecMiniAppReportUrlResponse, DescribeFlySecMiniAppScanTaskStatusResponse, CreateFlySecMiniAppScanTaskRepeatResponse, DescribeScanTaskStatusResponse } from "./mmps_models";
+import { DescribeFlySecMiniAppReportUrlRequest, DescribeScanTaskListRequest, DescribeFlySecMiniAppScanTaskParamRequest, CreateAppScanTaskRequest, DescribeScanTaskStatusRequest, DescribeBasicDiagnosisResourceUsageInfoResponse, CreateAppScanTaskRepeatResponse, DescribeBasicDiagnosisResourceUsageInfoRequest, DescribeResourceUsageInfoResponse, DescribeScanTaskReportUrlResponse, DescribeFlySecMiniAppScanTaskStatusRequest, CreateFlySecMiniAppScanTaskResponse, CreateFlySecMiniAppScanTaskRequest, DescribeFlySecMiniAppScanTaskListRequest, DescribeFlySecMiniAppScanTaskParamResponse, CreateFlySecMiniAppScanTaskRepeatRequest, CreateAppScanTaskRepeatRequest, DescribeScanTaskReportUrlRequest, DescribeFlySecMiniAppScanTaskListResponse, CreateAppScanTaskResponse, DescribeFlySecMiniAppReportUrlResponse, DescribeScanTaskListResponse, DescribeFlySecMiniAppScanTaskStatusResponse, CreateFlySecMiniAppScanTaskRepeatResponse, DescribeScanTaskStatusResponse, DescribeResourceUsageInfoRequest } from "./mmps_models";
 /**
  * mmps client
  * @class
@@ -24,6 +24,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeFlySecMiniAppScanTaskStatus(req: DescribeFlySecMiniAppScanTaskStatusRequest, cb?: (error: string, rep: DescribeFlySecMiniAppScanTaskStatusResponse) => void): Promise<DescribeFlySecMiniAppScanTaskStatusResponse>;
     /**
+     * 查询翼扬安全资源使用情况
+     */
+    DescribeResourceUsageInfo(req?: DescribeResourceUsageInfoRequest, cb?: (error: string, rep: DescribeResourceUsageInfoResponse) => void): Promise<DescribeResourceUsageInfoResponse>;
+    /**
      * 创建小程序翼扬安全的基础或深度诊断任务
      */
     CreateFlySecMiniAppScanTask(req: CreateFlySecMiniAppScanTaskRequest, cb?: (error: string, rep: CreateFlySecMiniAppScanTaskResponse) => void): Promise<CreateFlySecMiniAppScanTaskResponse>;
@@ -43,6 +47,10 @@ export declare class Client extends AbstractClient {
      * 查询小程序隐私合规诊断任务状态
      */
     DescribeScanTaskStatus(req: DescribeScanTaskStatusRequest, cb?: (error: string, rep: DescribeScanTaskStatusResponse) => void): Promise<DescribeScanTaskStatusResponse>;
+    /**
+     * 查询翼扬安全基础诊断资源使用情况
+     */
+    DescribeBasicDiagnosisResourceUsageInfo(req: DescribeBasicDiagnosisResourceUsageInfoRequest, cb?: (error: string, rep: DescribeBasicDiagnosisResourceUsageInfoResponse) => void): Promise<DescribeBasicDiagnosisResourceUsageInfoResponse>;
     /**
      * 小程序隐私合规诊断重试任务
      */

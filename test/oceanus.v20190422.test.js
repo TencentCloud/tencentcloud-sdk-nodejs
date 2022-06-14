@@ -128,6 +128,16 @@ it("oceanus.v20190422.DescribeSystemResources", async function () {
     }
 })
 
+it("oceanus.v20190422.ModifyJob", async function () {
+    try {
+       const data = await client.ModifyJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("oceanus.v20190422.DeleteResourceConfigs", async function () {
     try {
        const data = await client.DeleteResourceConfigs({})

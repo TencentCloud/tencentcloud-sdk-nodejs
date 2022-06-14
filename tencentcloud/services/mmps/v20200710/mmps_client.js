@@ -52,6 +52,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeFlySecMiniAppScanTaskStatus", req, cb);
     }
     /**
+     * 查询翼扬安全资源使用情况
+     */
+    async DescribeResourceUsageInfo(req, cb) {
+        return this.request("DescribeResourceUsageInfo", req, cb);
+    }
+    /**
      * 创建小程序翼扬安全的基础或深度诊断任务
      */
     async CreateFlySecMiniAppScanTask(req, cb) {
@@ -80,6 +86,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeScanTaskStatus(req, cb) {
         return this.request("DescribeScanTaskStatus", req, cb);
+    }
+    /**
+     * 查询翼扬安全基础诊断资源使用情况
+     */
+    async DescribeBasicDiagnosisResourceUsageInfo(req, cb) {
+        return this.request("DescribeBasicDiagnosisResourceUsageInfo", req, cb);
     }
     /**
      * 小程序隐私合规诊断重试任务
