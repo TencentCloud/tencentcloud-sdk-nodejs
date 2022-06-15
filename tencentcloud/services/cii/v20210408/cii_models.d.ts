@@ -128,6 +128,15 @@ export interface DescribeStructCompareDataRequest {
     SubTaskId?: string;
 }
 /**
+ * 位置信息
+ */
+export interface Location {
+    /**
+      * 位置信息
+      */
+    Points: Array<Point>;
+}
+/**
  * AddSubStructureTasks返回参数结构体
  */
 export interface AddSubStructureTasksResponse {
@@ -754,6 +763,27 @@ export interface DescribeMachineUnderwriteResponse {
     RequestId?: string;
 }
 /**
+ * Ocr识别结果
+ */
+export interface OcrRecognise {
+    /**
+      * 原文字段
+      */
+    OriginalField: string;
+    /**
+      * 识别结果
+      */
+    Value: string;
+    /**
+      * 置信度
+      */
+    Confidence: number;
+    /**
+      * 位置信息
+      */
+    Location: Location;
+}
+/**
  * CreateAutoClassifyStructureTask返回参数结构体
  */
 export interface CreateAutoClassifyStructureTaskResponse {
@@ -765,6 +795,23 @@ export interface CreateAutoClassifyStructureTaskResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 点信息
+ */
+export interface Point {
+    /**
+      * x坐标
+      */
+    XCoordinate: number;
+    /**
+      * y坐标
+      */
+    YCoordinate: number;
+    /**
+      * 页码
+      */
+    Page: number;
 }
 /**
  * DescribeReportClassify返回参数结构体
@@ -816,6 +863,11 @@ export interface StructureResultObject {
       * 任务文件列表
       */
     TaskFiles: Array<string>;
+    /**
+      * 结构化字段结果数组
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ResultFields: Array<OcrRecognise>;
 }
 /**
  * 创建结构化任务子任务信息

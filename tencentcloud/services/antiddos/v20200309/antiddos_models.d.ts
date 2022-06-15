@@ -564,6 +564,10 @@ export interface DescribeListBGPInstancesRequest {
       * 企业版搜索
       */
     FilterEnterpriseFlag?: number;
+    /**
+      * 标签搜索
+      */
+    FilterTag?: TagFilter;
 }
 /**
  * 字段值，K-V形式
@@ -1007,6 +1011,10 @@ export interface DescribeListBGPIPInstancesRequest {
       * 批量查询实例ID对应的高防IP实例资源
       */
     FilterInstanceIdList?: Array<string>;
+    /**
+      * 标签搜索
+      */
+    FilterTag?: TagFilter;
 }
 /**
  * 三网高防套餐详情
@@ -1080,6 +1088,19 @@ export interface DescribeL7RulesBySSLCertIdRequest {
       * 证书ID列表
       */
     CertIds: Array<string>;
+}
+/**
+ * 标签类型
+ */
+export interface TagFilter {
+    /**
+      * 标签键
+      */
+    TagKey: string;
+    /**
+      * 标签键值列表
+      */
+    TagValue: Array<string>;
 }
 /**
  * DescribeListPacketFilterConfig返回参数结构体
@@ -1453,6 +1474,10 @@ export interface BlackWhiteIpRelation {
       * ip掩码，0表示32位完整ip
       */
     Mask: number;
+    /**
+      * 修改时间
+      */
+    ModifyTime: string;
 }
 /**
  * DeleteWaterPrintKey返回参数结构体
@@ -1732,7 +1757,7 @@ export interface DescribeCCLevelListResponse {
       */
     Total: number;
     /**
-      * 分级策略列表详情
+      * 分级策略列表总数
       */
     LevelList: Array<CCLevelPolicy>;
     /**
@@ -2156,6 +2181,11 @@ export interface BGPIPInstance {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     BGPIPChannelFlag: number;
+    /**
+      * 资源关联标签
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TagInfoList: Array<TagInfo>;
 }
 /**
  * DeleteWaterPrintConfig返回参数结构体
@@ -2500,7 +2530,7 @@ export interface ListenerCcThreholdConfig {
       */
     Domain: string;
     /**
-      * 协议（可取值htttps）
+      * 协议（可取值https）
       */
     Protocol: string;
     /**
@@ -4108,6 +4138,19 @@ export interface DescribeListBGPInstancesResponse {
     RequestId?: string;
 }
 /**
+ * 标签信息，用于资源列表返回关联的标签
+ */
+export interface TagInfo {
+    /**
+      * 标签键
+      */
+    TagKey: string;
+    /**
+      * 标签值
+      */
+    TagValue: string;
+}
+/**
  * DescribeDDoSTrend请求参数结构体
  */
 export interface DescribeDDoSTrendRequest {
@@ -4246,6 +4289,10 @@ export interface BGPInstance {
       * CC防护开关
       */
     CCEnable: number;
+    /**
+      * 资源关联标签
+      */
+    TagInfoList: Array<TagInfo>;
 }
 /**
  * DescribeListPortAclList返回参数结构体
@@ -4720,6 +4767,10 @@ export interface CreateCCReqLimitPolicyRequest {
       * 策略项
       */
     Policy: CCReqLimitPolicyRecord;
+    /**
+      * 是否为兜底频控
+      */
+    IsGlobal?: number;
 }
 /**
  * ModifyDDoSSpeedLimitConfig返回参数结构体
@@ -4886,6 +4937,10 @@ export interface PacketFilterRelation {
       * 特征过滤配置所属的实例
       */
     InstanceDetailList: Array<InstanceRelation>;
+    /**
+      * 修改时间
+      */
+    ModifyTime: string;
 }
 /**
  * 四七层规则的

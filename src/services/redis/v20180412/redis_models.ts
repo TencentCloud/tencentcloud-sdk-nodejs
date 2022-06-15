@@ -2434,6 +2434,16 @@ export interface DescribeTaskListRequest {
    * 任务状态
    */
   TaskStatus?: Array<number>
+
+  /**
+   * 任务状态
+   */
+  Result?: Array<number>
+
+  /**
+   * 操作者Uin
+   */
+  OperatorUin?: Array<number>
 }
 
 /**

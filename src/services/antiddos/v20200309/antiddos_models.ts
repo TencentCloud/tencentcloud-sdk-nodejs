@@ -680,6 +680,11 @@ export interface DescribeListBGPInstancesRequest {
    * 企业版搜索
    */
   FilterEnterpriseFlag?: number
+
+  /**
+   * 标签搜索
+   */
+  FilterTag?: TagFilter
 }
 
 /**
@@ -1199,6 +1204,11 @@ export interface DescribeListBGPIPInstancesRequest {
    * 批量查询实例ID对应的高防IP实例资源
    */
   FilterInstanceIdList?: Array<string>
+
+  /**
+   * 标签搜索
+   */
+  FilterTag?: TagFilter
 }
 
 /**
@@ -1284,6 +1294,21 @@ export interface DescribeL7RulesBySSLCertIdRequest {
    * 证书ID列表
    */
   CertIds: Array<string>
+}
+
+/**
+ * 标签类型
+ */
+export interface TagFilter {
+  /**
+   * 标签键
+   */
+  TagKey: string
+
+  /**
+   * 标签键值列表
+   */
+  TagValue: Array<string>
 }
 
 /**
@@ -1725,6 +1750,11 @@ export interface BlackWhiteIpRelation {
    * ip掩码，0表示32位完整ip
    */
   Mask: number
+
+  /**
+   * 修改时间
+   */
+  ModifyTime: string
 }
 
 /**
@@ -2052,7 +2082,7 @@ export interface DescribeCCLevelListResponse {
   Total: number
 
   /**
-   * 分级策略列表详情
+   * 分级策略列表总数
    */
   LevelList: Array<CCLevelPolicy>
 
@@ -2546,6 +2576,12 @@ export interface BGPIPInstance {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   BGPIPChannelFlag: number
+
+  /**
+      * 资源关联标签
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TagInfoList: Array<TagInfo>
 }
 
 /**
@@ -2948,7 +2984,7 @@ export interface ListenerCcThreholdConfig {
   Domain: string
 
   /**
-   * 协议（可取值htttps）
+   * 协议（可取值https）
    */
   Protocol: string
 
@@ -4844,6 +4880,21 @@ export interface DescribeListBGPInstancesResponse {
 }
 
 /**
+ * 标签信息，用于资源列表返回关联的标签
+ */
+export interface TagInfo {
+  /**
+   * 标签键
+   */
+  TagKey: string
+
+  /**
+   * 标签值
+   */
+  TagValue: string
+}
+
+/**
  * DescribeDDoSTrend请求参数结构体
  */
 export interface DescribeDDoSTrendRequest {
@@ -5008,6 +5059,11 @@ export interface BGPInstance {
    * CC防护开关
    */
   CCEnable: number
+
+  /**
+   * 资源关联标签
+   */
+  TagInfoList: Array<TagInfo>
 }
 
 /**
@@ -5576,6 +5632,11 @@ export interface CreateCCReqLimitPolicyRequest {
    * 策略项
    */
   Policy: CCReqLimitPolicyRecord
+
+  /**
+   * 是否为兜底频控
+   */
+  IsGlobal?: number
 }
 
 /**
@@ -5772,6 +5833,11 @@ export interface PacketFilterRelation {
    * 特征过滤配置所属的实例
    */
   InstanceDetailList: Array<InstanceRelation>
+
+  /**
+   * 修改时间
+   */
+  ModifyTime: string
 }
 
 /**

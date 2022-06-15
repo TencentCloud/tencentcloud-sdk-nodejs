@@ -108,6 +108,30 @@ export interface RuntimeMC {
    * 内存上限 MB
    */
   MemoryLimit: number
+
+  /**
+      * 运行时过期时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ExpiredAt: number
+
+  /**
+      * 收费类型：0:缺省，1:通过订单页自助下单(支持续费/升配等操作)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ChargeType: number
+
+  /**
+      * 资源限制类型：0:无限制，1:有限制
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ResourceLimitType: number
+
+  /**
+      * 是否开启自动续费
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AutoRenewal: boolean
 }
 
 /**
@@ -163,6 +187,11 @@ export interface ListRuntimeDeployedInstancesMCRequest {
    * 运行时地域
    */
   Zone: string
+
+  /**
+   * 1:3.0版本新控制台传1；否则传0
+   */
+  ApiVersion?: number
 }
 
 /**
@@ -305,6 +334,16 @@ export interface AbstractRuntimeMC {
    * 运行时应用listener地址后缀
    */
   Addr: string
+
+  /**
+   * 运行时状态
+   */
+  Status: number
+
+  /**
+   * 运行时过期时间
+   */
+  ExpiredAt: number
 }
 
 /**

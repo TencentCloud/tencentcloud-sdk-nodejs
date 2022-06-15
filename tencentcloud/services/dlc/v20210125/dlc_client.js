@@ -124,6 +124,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateWorkGroup", req, cb);
     }
     /**
+     * 本接口（ListTaskJobLogDetail）用于获取spark-jar日志列表
+     */
+    async ListTaskJobLogDetail(req, cb) {
+        return this.request("ListTaskJobLogDetail", req, cb);
+    }
+    /**
      * 解绑用户上的用户组
      */
     async UnbindWorkGroupsFromUser(req, cb) {

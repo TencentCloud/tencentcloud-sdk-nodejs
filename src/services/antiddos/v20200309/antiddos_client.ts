@@ -71,6 +71,7 @@ import {
   CreatePortAclConfigRequest,
   DescribeCCThresholdListResponse,
   DescribeL7RulesBySSLCertIdRequest,
+  TagFilter,
   DescribeListPacketFilterConfigResponse,
   DeleteBlackWhiteIpListResponse,
   CreateSchedulingDomainRequest,
@@ -226,6 +227,7 @@ import {
   DDoSGeoIPBlockConfigRelation,
   DescribeListProtocolBlockConfigRequest,
   DescribeListBGPInstancesResponse,
+  TagInfo,
   DescribeDDoSTrendRequest,
   DeleteCCRequestLimitPolicyResponse,
   CreateCcBlackWhiteIpListRequest,
@@ -352,7 +354,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取CC防护等级列表
+   * 获取边界防护CC防护等级列表
    */
   async DescribeCCLevelList(
     req: DescribeCCLevelListRequest,

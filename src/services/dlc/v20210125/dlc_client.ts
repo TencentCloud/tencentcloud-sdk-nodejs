@@ -50,6 +50,7 @@ import {
   KVPair,
   TableBaseInfo,
   AttachUserPolicyRequest,
+  ListTaskJobLogDetailRequest,
   TasksInfo,
   AttachWorkGroupPolicyRequest,
   CreateUserResponse,
@@ -109,6 +110,7 @@ import {
   CreateExportTaskResponse,
   UnbindWorkGroupsFromUserRequest,
   DescribeTableRequest,
+  JobLogResult,
   Other,
   DeleteUsersFromWorkGroupRequest,
   Policy,
@@ -125,6 +127,7 @@ import {
   CreateTasksResponse,
   CreateSparkAppRequest,
   UnbindWorkGroupsFromUserResponse,
+  ListTaskJobLogDetailResponse,
   CreateWorkGroupRequest,
   DescribeSparkAppTasksRequest,
   SQLTask,
@@ -304,6 +307,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateWorkGroupResponse) => void
   ): Promise<CreateWorkGroupResponse> {
     return this.request("CreateWorkGroup", req, cb)
+  }
+
+  /**
+   * 本接口（ListTaskJobLogDetail）用于获取spark-jar日志列表
+   */
+  async ListTaskJobLogDetail(
+    req: ListTaskJobLogDetailRequest,
+    cb?: (error: string, rep: ListTaskJobLogDetailResponse) => void
+  ): Promise<ListTaskJobLogDetailResponse> {
+    return this.request("ListTaskJobLogDetail", req, cb)
   }
 
   /**

@@ -28,6 +28,41 @@ off：关闭
 }
 
 /**
+ * web攻击日志Data
+ */
+export interface WebLogData {
+  /**
+      * 数据
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  List: Array<WebLogs>
+
+  /**
+      * 当前页
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PageNo: number
+
+  /**
+      * 每页展示条数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PageSize: number
+
+  /**
+      * 总页数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Pages: number
+
+  /**
+      * 总条数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TotalSize: number
+}
+
+/**
  * 域名证书配置
  */
 export interface HostCertSetting {
@@ -146,88 +181,23 @@ disabled:禁用证书
 }
 
 /**
- * DescribeZoneDetails返回参数结构体
+ * DescribeWebManagedRulesTopData返回参数结构体
  */
-export interface DescribeZoneDetailsResponse {
+export interface DescribeWebManagedRulesTopDataResponse {
   /**
-   * 站点 ID
+   * topn数据
    */
-  Id: string
+  Data: Array<TopNEntry>
 
   /**
-   * 站点名称
+   * 状态，1:失败，0:成功
    */
-  Name: string
+  Status: number
 
   /**
-      * 用户当前使用的 NS 列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  OriginalNameServers: Array<string>
-
-  /**
-      * 腾讯云分配给用户的 NS 列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  NameServers: Array<string>
-
-  /**
-      * 站点状态
-- active：NS 已切换
-- pending：NS 未切换
-- moved：NS 已切走
-- deactivated：被封禁
-      */
-  Status: string
-
-  /**
-      * 站点接入方式
-- full：NS 接入
-- partial：CNAME 接入
-      */
-  Type: string
-
-  /**
-   * 站点是否关闭
+   * 返回消息
    */
-  Paused: boolean
-
-  /**
-   * 站点创建时间
-   */
-  CreatedOn: string
-
-  /**
-   * 站点修改时间
-   */
-  ModifiedOn: string
-
-  /**
-      * 用户自定义 NS 信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  VanityNameServers: VanityNameServers
-
-  /**
-      * 用户自定义 NS IP 信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  VanityNameServersIps: Array<VanityNameServersIps>
-
-  /**
-      * 是否开启 CNAME 加速
-- enabled：开启
-- disabled：关闭
-      */
-  CnameSpeedUp: string
-
-  /**
-      * cname切换验证状态
-- finished 切换完成
-- pending 切换验证中
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  CnameStatus: string
+  Msg: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -253,6 +223,49 @@ export interface DescribeOriginGroupResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeWebManagedRulesAttackEvents返回参数结构体
+ */
+export interface DescribeWebManagedRulesAttackEventsResponse {
+  /**
+   * Web攻击事件数据
+   */
+  Data: WebEventData
+
+  /**
+   * 状态，1:失败，0:成功
+   */
+  Status: number
+
+  /**
+   * 返回数据
+   */
+  Msg: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 浏览器缓存规则配置，用于设置 MaxAge 默认值，默认为关闭状态
+ */
+export interface MaxAge {
+  /**
+      * MaxAge 时间设置，单位秒，最大365天
+注意：时间为0，即不缓存。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MaxAgeTime?: number
+
+  /**
+      * 是否遵循源站，on或off，开启时忽略时间设置。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FollowOrigin?: string
 }
 
 /**
@@ -305,6 +318,31 @@ off：关闭
 }
 
 /**
+ * 安全防护实例
+ */
+export interface SecurityEntity {
+  /**
+   * 用户appid
+   */
+  AppId: number
+
+  /**
+   * 一级域名
+   */
+  ZoneId: string
+
+  /**
+   * 二级域名
+   */
+  Entity: string
+
+  /**
+   * 类型 domain/application
+   */
+  EntityType: string
+}
+
+/**
  * 源站组查询过滤参数
  */
 export interface OriginFilter {
@@ -320,18 +358,75 @@ export interface OriginFilter {
 }
 
 /**
- * DescribeOriginGroupDetail请求参数结构体
+ * 限速拦截日志
  */
-export interface DescribeOriginGroupDetailRequest {
+export interface BotLogData {
   /**
-   * 源站组ID
-   */
-  OriginId: string
+      * Bot攻击日志数据集合
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  List: Array<BotLog>
 
   /**
-   * 站点ID
+      * 当前页
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PageNo: number
+
+  /**
+      * 每页展示条数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PageSize: number
+
+  /**
+      * 总页数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Pages: number
+
+  /**
+      * 总条数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TotalSize: number
+}
+
+/**
+ * DescribeZones请求参数结构体
+ */
+export interface DescribeZonesRequest {
+  /**
+   * 分页参数，页偏移
    */
-  ZoneId: string
+  Offset?: number
+
+  /**
+   * 分页参数，每页返回的站点个数
+   */
+  Limit?: number
+
+  /**
+   * 查询条件过滤器，复杂类型
+   */
+  Filters?: Array<ZoneFilter>
+}
+
+/**
+ * 速率限制模板
+ */
+export interface RateLimitTemplate {
+  /**
+      * 模板名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Mode?: string
+
+  /**
+      * 模板值详情
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Detail?: RateLimitTemplateDetail
 }
 
 /**
@@ -465,6 +560,31 @@ export interface DescribePrefetchTasksResponse {
    * 任务结果列表
    */
   Tasks: Array<Task>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeDDosAttackEvent返回参数结构体
+ */
+export interface DescribeDDosAttackEventResponse {
+  /**
+   * DDos攻击事件数据
+   */
+  Data: DDosAttackEventData
+
+  /**
+   * 状态，1:失败，0:成功
+   */
+  Status: number
+
+  /**
+   * 返回信息
+   */
+  Msg: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -898,38 +1018,200 @@ export interface ModifyOriginGroupResponse {
 }
 
 /**
- * 内容管理任务结果
+ * DescribeZoneDetails返回参数结构体
  */
-export interface Task {
+export interface DescribeZoneDetailsResponse {
   /**
-   * 任务ID
+   * 站点 ID
    */
-  JobId: string
+  Id: string
 
   /**
-   * 状态
+   * 站点名称
    */
+  Name: string
+
+  /**
+      * 用户当前使用的 NS 列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OriginalNameServers: Array<string>
+
+  /**
+      * 腾讯云分配给用户的 NS 列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NameServers: Array<string>
+
+  /**
+      * 站点状态
+- active：NS 已切换
+- pending：NS 未切换
+- moved：NS 已切走
+- deactivated：被封禁
+      */
   Status: string
 
   /**
-   * 资源
-   */
-  Target: string
-
-  /**
-   * 任务类型
-   */
+      * 站点接入方式
+- full：NS 接入
+- partial：CNAME 接入
+      */
   Type: string
 
   /**
-   * 任务创建时间
+   * 站点是否关闭
    */
-  CreateTime: string
+  Paused: boolean
 
   /**
-   * 任务完成时间
+   * 站点创建时间
    */
-  UpdateTime: string
+  CreatedOn: string
+
+  /**
+   * 站点修改时间
+   */
+  ModifiedOn: string
+
+  /**
+      * 用户自定义 NS 信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VanityNameServers: VanityNameServers
+
+  /**
+      * 用户自定义 NS IP 信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VanityNameServersIps: Array<VanityNameServersIps>
+
+  /**
+      * 是否开启 CNAME 加速
+- enabled：开启
+- disabled：关闭
+      */
+  CnameSpeedUp: string
+
+  /**
+      * cname切换验证状态
+- finished 切换完成
+- pending 切换验证中
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CnameStatus: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * Bot攻击日志
+ */
+export interface BotLog {
+  /**
+      * 攻击时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AttackTime: number
+
+  /**
+      * 攻击ip
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AttackIp: string
+
+  /**
+      * 域名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Domain: string
+
+  /**
+      * 请求uri
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RequestUri: string
+
+  /**
+      * 攻击类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AttackType: string
+
+  /**
+      * 请求方法
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RequestMethod: string
+
+  /**
+      * 攻击内容
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AttackContent: string
+
+  /**
+      * 风险等级
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RiskLevel: string
+
+  /**
+      * 规则编号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RuleId: number
+
+  /**
+      * IP所在国家
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SipCountryCode: string
+
+  /**
+      * 事件id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EventId: string
+
+  /**
+      * 处置方式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DisposalMethod: string
+
+  /**
+      * http_log
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  HttpLog: string
+
+  /**
+      * user agent
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Ua: string
+
+  /**
+      * 检出方法
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DetectionMethod: string
+
+  /**
+      * 置信度
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Confidence: string
+
+  /**
+      * 恶意度
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Maliciousness: string
 }
 
 /**
@@ -1180,6 +1462,46 @@ export interface ModifyZoneResponse {
 }
 
 /**
+ * DescribeDDosAttackSourceEvent请求参数结构体
+ */
+export interface DescribeDDosAttackSourceEventRequest {
+  /**
+   * 开始时间
+   */
+  StartTime: string
+
+  /**
+   * 结束时间
+   */
+  EndTime: string
+
+  /**
+   * 条数
+   */
+  PageSize: number
+
+  /**
+   * 当前页
+   */
+  PageNo: number
+
+  /**
+   * ddos策略组id 集合
+   */
+  PolicyIds?: Array<number>
+
+  /**
+   * 站点集合
+   */
+  ZoneIds?: Array<string>
+
+  /**
+   * 协议类型,{tcp,udp,all}
+   */
+  ProtocolType?: string
+}
+
+/**
  * ModifyZone请求参数结构体
  */
 export interface ModifyZoneRequest {
@@ -1217,23 +1539,38 @@ export interface DeleteZoneResponse {
 }
 
 /**
- * ModifyHostsCertificate请求参数结构体
+ * DDos攻击事件数据
  */
-export interface ModifyHostsCertificateRequest {
+export interface DDosAttackEventData {
   /**
-   * Zone ID
-   */
-  ZoneId: string
+      * 攻击事件数据集合
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  List: Array<DDosAttackEvent>
 
   /**
-   * 本次变更的域名
-   */
-  Hosts: Array<string>
+      * 当前页
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PageNo: number
 
   /**
-   * 证书信息, 只需要传入 CertId 即可, 如果为空, 则使用默认证书
-   */
-  CertInfo?: Array<ServerCertInfo>
+      * 每页展示条数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PageSize: number
+
+  /**
+      * 总页数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Pages: number
+
+  /**
+      * 总条数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TotalSize: number
 }
 
 /**
@@ -1301,6 +1638,51 @@ export interface DeleteApplicationProxyRuleResponse {
 }
 
 /**
+ * DDos攻击事件对象
+ */
+export interface DDosAttackSourceEvent {
+  /**
+      * 攻击源ip
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AttackSourceIp: string
+
+  /**
+      * 地区(国家)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AttackRegion: string
+
+  /**
+      * 累计攻击流量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AttackFlow: number
+
+  /**
+      * 累计攻击包量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AttackPacketNum: number
+}
+
+/**
+ * L7数据分析时序数据
+ */
+export interface TimingDataRecord {
+  /**
+   * 查询维度值
+   */
+  TypeKey: string
+
+  /**
+      * 详细时序数据
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TypeValue: Array<TimingTypeValue>
+}
+
+/**
  * ddos端口过滤
  */
 export interface DdosAcls {
@@ -1328,6 +1710,21 @@ export interface DeleteOriginGroupRequest {
    * 站点ID
    */
   ZoneId: string
+}
+
+/**
+ * 用于对top数据排序的结构体
+ */
+export interface TopDetailData {
+  /**
+   * 字段名
+   */
+  Key: string
+
+  /**
+   * 字段值
+   */
+  Value: number
 }
 
 /**
@@ -1451,24 +1848,23 @@ export interface L7OfflineLog {
 }
 
 /**
- * Waf规则
+ * ModifyHostsCertificate请求参数结构体
  */
-export interface WafRule {
+export interface ModifyHostsCertificateRequest {
   /**
-   * 黑名单
+   * Zone ID
    */
-  BlockRuleIDs: Array<number>
+  ZoneId: string
 
   /**
-   * id的开关
+   * 本次变更的域名
    */
-  Switch: string
+  Hosts: Array<string>
 
   /**
-      * 观察模式
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ObserveRuleIDs?: Array<number>
+   * 证书信息, 只需要传入 CertId 即可, 如果为空, 则使用默认证书
+   */
+  CertInfo?: Array<ServerCertInfo>
 }
 
 /**
@@ -1638,6 +2034,28 @@ export interface Zone {
 }
 
 /**
+ * 站点查询过滤条件
+ */
+export interface ZoneFilter {
+  /**
+      * 过滤字段名，支持的列表如下：
+- name: 站点名。
+- status: 站点状态
+      */
+  Name: string
+
+  /**
+   * 过滤字段值
+   */
+  Values: Array<string>
+
+  /**
+   * 是否启用模糊查询，仅支持过滤字段名为name。模糊查询时，Values长度最大为1
+   */
+  Fuzzy?: boolean
+}
+
+/**
  * DescribeSecurityPolicyManagedRulesId请求参数结构体
  */
 export interface DescribeSecurityPolicyManagedRulesIdRequest {
@@ -1755,13 +2173,28 @@ offline: 停用
 }
 
 /**
- * Quic配置项
+ * DescribeDDosAttackTopData返回参数结构体
  */
-export interface Quic {
+export interface DescribeDDosAttackTopDataResponse {
   /**
-   * 是否启动Quic配置
+   * topn数据
    */
-  Switch: string
+  Data: Array<TopNEntry>
+
+  /**
+   * 状态，1:失败，0:成功
+   */
+  Status: number
+
+  /**
+   * 返回消息
+   */
+  Msg: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1825,70 +2258,25 @@ export interface DescribeLoadBalancingRequest {
 }
 
 /**
- * ModifyApplicationProxyRule请求参数结构体
+ * CC拦截事件
  */
-export interface ModifyApplicationProxyRuleRequest {
+export interface CCInterceptEvent {
   /**
-   * 站点ID
-   */
-  ZoneId: string
-
-  /**
-   * 代理ID
-   */
-  ProxyId: string
-
-  /**
-   * 规则ID
-   */
-  RuleId: string
-
-  /**
-   * 协议，取值为TCP或者UDP
-   */
-  Proto: string
-
-  /**
-      * 端口，支持格式：
-80：80端口
-81-90：81至90端口
+      * 客户端ip
+注意：此字段可能返回 null，表示取不到有效值。
       */
-  Port: Array<string>
+  ClientIp: string
 
   /**
-      * 源站类型，取值：
-custom：手动添加
-origins：源站组
-load_balancing：负载均衡
+      * 拦截次数/min
+注意：此字段可能返回 null，表示取不到有效值。
       */
-  OriginType: string
+  InterceptNum: number
 
   /**
-      * 源站信息：
-当OriginType=custom时，表示多个：
-IP:端口
-域名:端口
-当OriginType=origins时，包含一个元素，表示源站组ID
-当OriginType=load_balancing时，包含一个元素，表示负载均衡ID
-      */
-  OriginValue: Array<string>
-
-  /**
-      * 传递客户端IP，当Proto=TCP时，取值：
-TOA：TOA
-PPV1: Proxy Protocol传递，协议版本V1
-PPV2: Proxy Protocol传递，协议版本V2
-OFF：不传递
-当Proto=UDP时，取值：
-PPV2: Proxy Protocol传递，协议版本V2
-OFF：不传递
-      */
-  ForwardClientIp?: string
-
-  /**
-   * 是否开启会话保持
+   * 速拦截时间，分钟时间/min,单位为s
    */
-  SessionPersist?: boolean
+  InterceptTime: number
 }
 
 /**
@@ -1912,27 +2300,18 @@ export interface DDoSStatusInfo {
 }
 
 /**
- * CNAME 状态
+ * ACL配置
  */
-export interface CnameStatus {
+export interface AclConfig {
   /**
-   * 记录名称
+   * 开关
    */
-  Name: string
+  Switch: string
 
   /**
-      * CNAME 地址
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Cname: string
-
-  /**
-      * 状态
-生效：active
-不生效：moved
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Status: string
+   * ACL用户规则
+   */
+  UserRules: Array<ACLUserRule>
 }
 
 /**
@@ -2108,6 +2487,77 @@ pending: 不生效
 }
 
 /**
+ * 限速拦截日志
+ */
+export interface CCLog {
+  /**
+      * 攻击时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AttackTime: number
+
+  /**
+      * 攻击源ip
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AttackSip: string
+
+  /**
+      * 攻击域名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AttackDomain: string
+
+  /**
+      * 请求uri
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RequestUri: string
+
+  /**
+      * 命中次数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  HitCount: number
+
+  /**
+      * IP所在国家
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SipCountryCode: string
+
+  /**
+      * 事件id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EventId: string
+
+  /**
+      * 处置方式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DisposalMethod: string
+
+  /**
+      * http_log
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  HttpLog: string
+
+  /**
+      * 规则编号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RuleId: number
+
+  /**
+      * 风险等级
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RiskLevel: string
+}
+
+/**
  * https 服务端证书配置
  */
 export interface ServerCertInfo {
@@ -2164,23 +2614,59 @@ export interface DDoSConfig {
 }
 
 /**
- * DescribeZones请求参数结构体
+ * DescribeWebManagedRulesData返回参数结构体
  */
-export interface DescribeZonesRequest {
+export interface DescribeWebManagedRulesDataResponse {
   /**
-   * 分页参数，页偏移
-   */
-  Offset?: number
+      * Web攻击日志实体
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Data: Array<SecEntry>
 
   /**
-   * 分页参数，每页返回的站点个数
+   * 状态，1:失败，0:成功
    */
-  Limit?: number
+  Status: number
 
   /**
-   * 查询条件过滤器，复杂类型
+   * 返回消息
    */
-  Filters?: Array<ZoneFilter>
+  Msg: string
+
+  /**
+   * 查询时间粒度，可选{min,5min,hour,day}
+   */
+  Interval: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeWebManagedRulesLog返回参数结构体
+ */
+export interface DescribeWebManagedRulesLogResponse {
+  /**
+   * web攻击日志data
+   */
+  Data: WebLogData
+
+  /**
+   * 状态，1:失败，0:失败
+   */
+  Status: number
+
+  /**
+   * 返回信息
+   */
+  Msg: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2314,6 +2800,61 @@ export interface ACLCondition {
 }
 
 /**
+ * DescribeTopL7AnalysisData请求参数结构体
+ */
+export interface DescribeTopL7AnalysisDataRequest {
+  /**
+   * RFC3339标准，客户端时间
+   */
+  StartTime: string
+
+  /**
+   * RFC3339标准，客户端时间
+   */
+  EndTime: string
+
+  /**
+   * 时序类访问流量指标
+   */
+  MetricName: string
+
+  /**
+   * topN,填0时返回全量数据
+   */
+  Limit: number
+
+  /**
+   * 时间间隔，选填{min, 5min, hour, day, week}
+   */
+  Interval: string
+
+  /**
+   * ZoneId数组
+   */
+  ZoneIds?: Array<string>
+
+  /**
+   * 筛选条件
+   */
+  Filters?: Array<Filter>
+}
+
+/**
+ * TopN entry
+ */
+export interface TopNEntry {
+  /**
+   * Entry key
+   */
+  Key: string
+
+  /**
+   * TopN数据
+   */
+  Value: Array<TopNEntryValue>
+}
+
+/**
  * DescribeApplicationProxy返回参数结构体
  */
 export interface DescribeApplicationProxyResponse {
@@ -2354,6 +2895,46 @@ export interface CreateLoadBalancingResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeOverviewL7Data请求参数结构体
+ */
+export interface DescribeOverviewL7DataRequest {
+  /**
+   * RFC3339格式，客户端时间
+   */
+  StartTime: string
+
+  /**
+   * RFC3339格式，客户端时间
+   */
+  EndTime: string
+
+  /**
+   * 指标列表
+   */
+  MetricNames: Array<string>
+
+  /**
+   * 时间间隔，选填{min, 5min, hour, day, week}
+   */
+  Interval: string
+
+  /**
+   * ZoneId列表，仅在zone/domain维度下查询时该参数有效
+   */
+  ZoneIds?: Array<string>
+
+  /**
+   * Domain列表，仅在domain维度下查询时该参数有效
+   */
+  Domains?: Array<string>
+
+  /**
+   * 协议类型， 选填{http,http2,https,all}
+   */
+  Protocol?: string
 }
 
 /**
@@ -2502,6 +3083,66 @@ export interface DescribeDnssecRequest {
 }
 
 /**
+ * DescribeWebProtectionLog返回参数结构体
+ */
+export interface DescribeWebProtectionLogResponse {
+  /**
+   * 限速拦截Data
+   */
+  Data: CCLogData
+
+  /**
+   * 状态，1：失败，0:成功
+   */
+  Status: number
+
+  /**
+   * 返回信息
+   */
+  Msg: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CC拦截事件数据
+ */
+export interface CCInterceptEventData {
+  /**
+      * 攻击事件数据集合
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  List: Array<CCInterceptEvent>
+
+  /**
+      * 当前页
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PageNo: number
+
+  /**
+      * 每页展示条数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PageSize: number
+
+  /**
+      * 总页数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Pages: number
+
+  /**
+      * 总条数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TotalSize: number
+}
+
+/**
  * DescribeLoadBalancingDetail返回参数结构体
  */
 export interface DescribeLoadBalancingDetailResponse {
@@ -2606,28 +3247,38 @@ export interface SecurityConfig {
 }
 
 /**
- * bot托管规则详情
+ * 主攻击对象Data
  */
-export interface BotManagedRuleDetail {
+export interface DDosMajorAttackEventData {
   /**
-   * 规则ID
-   */
-  RuleId: number
+      * DDosMajorAttackEvent ddos 攻击事件
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  List: Array<DDosMajorAttackEvent>
 
   /**
-   * 规则描述
-   */
-  Description: string
+      * 当前页
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PageNo: number
 
   /**
-   * 规则分类
-   */
-  RuleTypeName: string
+      * 每页展示条数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PageSize: number
 
   /**
-   * 该规则开启/关闭
-   */
-  Status: string
+      * 总页数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Pages: number
+
+  /**
+      * 总条数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TotalSize: number
 }
 
 /**
@@ -2744,6 +3395,22 @@ pending: 不生效
 }
 
 /**
+ * 七层数据分析类top数据
+ */
+export interface TopDataRecord {
+  /**
+   * 查询维度值
+   */
+  TypeKey: string
+
+  /**
+      * top数据排行
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DetailData: Array<TopDetailData>
+}
+
+/**
  * DDoS协议防护+连接防护
  */
 export interface DDoSAntiPly {
@@ -2811,6 +3478,100 @@ export interface DDoSAntiPly {
    * 空连接防护开启 0-1
    */
   EmptyConnectProtect: string
+}
+
+/**
+ * DescribeWebManagedRulesData请求参数结构体
+ */
+export interface DescribeWebManagedRulesDataRequest {
+  /**
+   * 开始时间
+   */
+  StartTime: string
+
+  /**
+   * 结束时间
+   */
+  EndTime: string
+
+  /**
+   * 统计指标列表
+   */
+  MetricNames: Array<string>
+
+  /**
+   * 站点id列表
+   */
+  ZoneIds?: Array<string>
+
+  /**
+   * 子域名列表
+   */
+  Domains?: Array<string>
+
+  /**
+   * 协议类型
+   */
+  ProtocolType?: string
+
+  /**
+      * "webshell" : Webshell检测防护
+"oa" : 常见OA漏洞防护
+"xss" : XSS跨站脚本攻击防护
+"xxe" : XXE攻击防护
+"webscan" : 扫描器攻击漏洞防护
+"cms" : 常见CMS漏洞防护
+"upload" : 恶意文件上传攻击防护
+"sql" : SQL注入攻击防护
+"cmd_inject": 命令/代码注入攻击防护
+"osc" : 开源组件漏洞防护
+"file_read" : 任意文件读取
+"ldap" : LDAP注入攻击防护
+"other" : 其它漏洞防护
+
+"all":"所有"
+      */
+  AttackType?: string
+
+  /**
+   * 查询时间粒度，可选{min,5min,hour,day}
+   */
+  Interval?: string
+}
+
+/**
+ * DDos攻击源数据
+ */
+export interface DDosAttackSourceEventData {
+  /**
+      * DDos攻击源数据集合
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  List: Array<DDosAttackSourceEvent>
+
+  /**
+      * 当前页
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PageNo: number
+
+  /**
+      * 每页展示条数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PageSize: number
+
+  /**
+      * 总页数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Pages: number
+
+  /**
+      * 总条数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TotalSize: number
 }
 
 /**
@@ -2890,6 +3651,27 @@ export interface CreatePrefetchTaskResponse {
 }
 
 /**
+ * Waf规则
+ */
+export interface WafRule {
+  /**
+   * 黑名单
+   */
+  BlockRuleIDs: Array<number>
+
+  /**
+   * id的开关
+   */
+  Switch: string
+
+  /**
+      * 观察模式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ObserveRuleIDs?: Array<number>
+}
+
+/**
  * DescribeDefaultCertificates请求参数结构体
  */
 export interface DescribeDefaultCertificatesRequest {
@@ -2960,23 +3742,62 @@ export interface ModifyApplicationProxyRuleResponse {
 }
 
 /**
- * DescribeSecurityPolicyManagedRulesId返回参数结构体
+ * DDos攻击事件对象
  */
-export interface DescribeSecurityPolicyManagedRulesIdResponse {
+export interface DDosAttackEvent {
   /**
-   * 返回总数
-   */
-  Total: number
+      * ddos 策略组id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PolicyId: number
 
   /**
-   * 门神规则
-   */
-  Rules: Array<ManagedRule>
+      * 攻击类型(对应交互事件名称)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AttackType: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+      * 攻击状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AttackStatus: number
+
+  /**
+      * 攻击最大带宽
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AttackMaxBandWidth: number
+
+  /**
+      * 攻击包速率峰值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AttackPacketMaxRate: number
+
+  /**
+      * 攻击开始时间 单位为s
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AttackStartTime: number
+
+  /**
+      * 攻击结束时间 单位为s
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AttackEndTime: number
+
+  /**
+      * 事件ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EventId: string
+
+  /**
+      * 站点id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ZoneId: string
 }
 
 /**
@@ -3184,6 +4005,65 @@ export interface DeleteLoadBalancingResponse {
 }
 
 /**
+ * DescribeWebProtectionData请求参数结构体
+ */
+export interface DescribeWebProtectionDataRequest {
+  /**
+   * 开始时间
+   */
+  StartTime: string
+
+  /**
+   * 结束时间
+   */
+  EndTime: string
+
+  /**
+   * 统计指标列表
+   */
+  MetricNames: Array<string>
+
+  /**
+   * 站点id列表
+   */
+  ZoneIds?: Array<string>
+
+  /**
+   * 子域名列表
+   */
+  Domains?: Array<string>
+
+  /**
+   * 协议类型
+   */
+  ProtocolType?: string
+
+  /**
+      * "webshell" : Webshell检测防护
+"oa" : 常见OA漏洞防护
+"xss" : XSS跨站脚本攻击防护
+"xxe" : XXE攻击防护
+"webscan" : 扫描器攻击漏洞防护
+"cms" : 常见CMS漏洞防护
+"upload" : 恶意文件上传攻击防护
+"sql" : SQL注入攻击防护
+"cmd_inject": 命令/代码注入攻击防护
+"osc" : 开源组件漏洞防护
+"file_read" : 任意文件读取
+"ldap" : LDAP注入攻击防护
+"other" : 其它漏洞防护
+
+"all":"所有"
+      */
+  AttackType?: string
+
+  /**
+   * 查询时间粒度，可选{min,5min,hour,day}
+   */
+  Interval?: string
+}
+
+/**
  * CheckCertificate请求参数结构体
  */
 export interface CheckCertificateRequest {
@@ -3286,54 +4166,28 @@ OFF：不传递
 }
 
 /**
- * DescribePrefetchTasks请求参数结构体
+ * bot托管规则详情
  */
-export interface DescribePrefetchTasksRequest {
+export interface BotManagedRuleDetail {
   /**
-   * 任务ID
+   * 规则ID
    */
-  JobId?: string
+  RuleId: number
 
   /**
-   * 查询起始时间
+   * 规则描述
    */
-  StartTime?: string
+  Description: string
 
   /**
-   * 查询结束时间
+   * 规则分类
    */
-  EndTime?: string
+  RuleTypeName: string
 
   /**
-   * 查询起始偏移量
+   * 该规则开启/关闭
    */
-  Offset?: number
-
-  /**
-   * 查询最大返回的结果条数
-   */
-  Limit?: number
-
-  /**
-      * 查询的状态
-允许的值为：processing、success、failed、timeout、invalid
-      */
-  Statuses?: Array<string>
-
-  /**
-   * zone id
-   */
-  ZoneId?: string
-
-  /**
-   * 查询的域名列表
-   */
-  Domains?: Array<string>
-
-  /**
-   * 查询的资源
-   */
-  Target?: string
+  Status: string
 }
 
 /**
@@ -3414,6 +4268,16 @@ export interface ModifyApplicationProxyStatusResponse {
 }
 
 /**
+ * IdentifyZone请求参数结构体
+ */
+export interface IdentifyZoneRequest {
+  /**
+   * 站点名称
+   */
+  Name: string
+}
+
+/**
  * 域名配置信息
  */
 export interface DetailHost {
@@ -3454,6 +4318,53 @@ export interface DescribeDnsRecordsResponse {
    * DNS 记录列表
    */
   Records: Array<DnsRecord>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeDefaultCertificates返回参数结构体
+ */
+export interface DescribeDefaultCertificatesResponse {
+  /**
+   * 证书总数
+   */
+  TotalCount: number
+
+  /**
+      * 默认证书列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CertInfo: Array<DefaultServerCertInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeTimingL7AnalysisData返回参数结构体
+ */
+export interface DescribeTimingL7AnalysisDataResponse {
+  /**
+      * 详细数据
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Data: Array<TimingDataRecord>
+
+  /**
+   * 查询维度
+   */
+  Type: string
+
+  /**
+   * 时间间隔
+   */
+  Interval: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3503,20 +4414,63 @@ export interface BotPortraitRule {
 }
 
 /**
- * ModifyZoneCnameSpeedUp请求参数结构体
+ * DescribeWebProtectionAttackEvents请求参数结构体
  */
-export interface ModifyZoneCnameSpeedUpRequest {
+export interface DescribeWebProtectionAttackEventsRequest {
   /**
-   * 站点 ID
+   * 开始时间
    */
-  Id: string
+  StartTime: string
 
   /**
-      * CNAME 加速状态
-- enabled 开启
-- disabled 关闭
-      */
-  Status: string
+   * 结束时间
+   */
+  EndTime: string
+
+  /**
+   * 条数
+   */
+  PageSize: number
+
+  /**
+   * 当前页
+   */
+  PageNo: number
+
+  /**
+   * 域名
+   */
+  Domains?: Array<string>
+
+  /**
+   * 站点集合
+   */
+  ZoneIds?: Array<string>
+}
+
+/**
+ * DescribeOverviewL7Data返回参数结构体
+ */
+export interface DescribeOverviewL7DataResponse {
+  /**
+   * 查询维度
+   */
+  Type: string
+
+  /**
+   * 时间间隔
+   */
+  Interval: string
+
+  /**
+   * 详细数据
+   */
+  Data: Array<TimingDataRecord>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3575,20 +4529,61 @@ export interface DescribeSecurityPolicyManagedRulesResponse {
 }
 
 /**
- * 速率限制模板
+ * 源站组信息
  */
-export interface RateLimitTemplate {
+export interface OriginGroup {
   /**
-      * 模板名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Mode?: string
+   * 源站组ID
+   */
+  OriginId: string
 
   /**
-      * 模板值详情
+   * 源站组名称
+   */
+  OriginName: string
+
+  /**
+   * 配置类型
+   */
+  Type: string
+
+  /**
+   * 记录
+   */
+  Record: Array<OriginRecord>
+
+  /**
+   * 更新时间
+   */
+  UpdateTime: string
+
+  /**
+   * 站点ID
+   */
+  ZoneId: string
+
+  /**
+   * 站点名称
+   */
+  ZoneName: string
+
+  /**
+      * 源站类型
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Detail?: RateLimitTemplateDetail
+  OriginType: string
+
+  /**
+      * 是否为四层代理使用
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ApplicationProxyUsed: boolean
+
+  /**
+      * 是否为负载均衡使用
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LoadBalancingUsed: boolean
 }
 
 /**
@@ -3609,6 +4604,21 @@ export interface DescribeApplicationProxyRequest {
    * 分页参数Limit
    */
   Limit?: number
+}
+
+/**
+ * TopN数据Entry
+ */
+export interface TopNEntryValue {
+  /**
+   * Entry的name
+   */
+  Name: string
+
+  /**
+   * 数量
+   */
+  Count: number
 }
 
 /**
@@ -3654,44 +4664,76 @@ online: 启用
 }
 
 /**
- * 模板当前详细配置
+ * Web拦截事件
  */
-export interface RateLimitTemplateDetail {
+export interface WebAttackEvent {
   /**
-      * 模板名称
+      * 客户端ip
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Mode?: string
+  ClientIp: string
 
   /**
-      * 唯一id
+      * 攻击URL
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ID?: number
+  AttackUrl: string
 
   /**
-      * 处置动作
+      * 攻击时间 单位为s
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Action?: string
+  AttackTime: number
+}
+
+/**
+ * DescribeDDosAttackTopData请求参数结构体
+ */
+export interface DescribeDDosAttackTopDataRequest {
+  /**
+   * 开始时间
+   */
+  StartTime: string
 
   /**
-      * 惩罚时间，秒
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  PunishTime?: number
+   * 结束时间
+   */
+  EndTime: string
 
   /**
-      * 阈值
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Threshold?: number
+   * 过滤指标
+   */
+  MetricName: string
 
   /**
-      * 统计周期
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Period?: number
+   * 查询前多少名,传值为0 全量
+   */
+  Limit: number
+
+  /**
+   * 站点集合
+   */
+  ZoneIds?: Array<string>
+
+  /**
+   * ddos策略组id 集合
+   */
+  PolicyIds?: Array<number>
+
+  /**
+   * 端口号
+   */
+  Port?: number
+
+  /**
+   * 协议类型,tcp,udp,all
+   */
+  ProtocolType?: string
+
+  /**
+   * 攻击类型,flood,icmpFlood......,all
+   */
+  AttackType?: string
 }
 
 /**
@@ -3710,71 +4752,53 @@ export interface CreateApplicationProxyRuleResponse {
 }
 
 /**
- * RateLimit规则
+ * DescribeDDosAttackData请求参数结构体
  */
-export interface RateLimitUserRule {
+export interface DescribeDDosAttackDataRequest {
   /**
-   * RateLimit统计阈值
+   * 开始时间
    */
-  Threshold: number
+  StartTime: string
 
   /**
-   * RateLimit统计时间
+   * 结束时间
    */
-  Period: number
+  EndTime: string
 
   /**
-   * 规则名
+   * 统计指标列表
    */
-  RuleName: string
+  MetricNames: Array<string>
 
   /**
-   * 动作：monitor(观察), drop(拦截)
+   * 站点id列表
    */
-  Action: string
+  ZoneIds?: Array<string>
 
   /**
-   * 惩罚时长
+   * ddos策略组id列表
    */
-  PunishTime: number
+  PolicyIds?: Array<number>
 
   /**
-   * 处罚时长单位，second
+   * 端口号
    */
-  PunishTimeUnit: string
+  Port?: number
 
   /**
-   * 规则状态
+   * 协议类型,tcp,udp,all
    */
-  RuleStatus: string
+  ProtocolType?: string
 
   /**
-   * 规则
+   * 攻击类型,flood,icmpFlood......,all
    */
-  Conditions: Array<ACLCondition>
+  AttackType?: string
 
   /**
-   * 规则权重
+   * 查询时间粒度，可选{min,5min,hour,day}
    */
-  RulePriority: number
-
-  /**
-      * 规则id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  RuleID?: number
-
-  /**
-      * 过滤词
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  FreqFields?: Array<string>
-
-  /**
-      * 更新时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  UpdateTime?: string
+  Interval?: string
 }
 
 /**
@@ -3859,6 +4883,64 @@ export interface ModifyDnsRecordResponse {
 }
 
 /**
+ * 模板当前详细配置
+ */
+export interface RateLimitTemplateDetail {
+  /**
+      * 模板名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Mode?: string
+
+  /**
+      * 唯一id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ID?: number
+
+  /**
+      * 处置动作
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Action?: string
+
+  /**
+      * 惩罚时间，秒
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PunishTime?: number
+
+  /**
+      * 阈值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Threshold?: number
+
+  /**
+      * 统计周期
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Period?: number
+}
+
+/**
+ * 统计曲线数据项
+ */
+export interface TimingDataItem {
+  /**
+      * 秒级时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Timestamp: number
+
+  /**
+      * 数值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Value: number
+}
+
+/**
  * CreateApplicationProxy请求参数结构体
  */
 export interface CreateApplicationProxyRequest {
@@ -3923,6 +5005,127 @@ instance：实例
 }
 
 /**
+ * DescribeTopL7AnalysisData返回参数结构体
+ */
+export interface DescribeTopL7AnalysisDataResponse {
+  /**
+      * top详细数据
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Data: Array<TopDataRecord>
+
+  /**
+   * 查询维度
+   */
+  Type: string
+
+  /**
+   * 查询指标
+   */
+  MetricName: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * web攻击日志
+ */
+export interface WebLogs {
+  /**
+      * 攻击内容
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AttackContent: string
+
+  /**
+      * 攻击IP
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AttackIp: string
+
+  /**
+      * 攻击类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AttackType: string
+
+  /**
+      * 域名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Domain: string
+
+  /**
+      * uuid
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Msuuid: string
+
+  /**
+      * 请求方法
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RequestMethod: string
+
+  /**
+      * 请求URI
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RequestUri: string
+
+  /**
+      * 风险等级
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RiskLevel: string
+
+  /**
+      * 规则ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RuleId: number
+
+  /**
+      * IP所在国家
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SipCountryCode: string
+
+  /**
+      * 事件id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EventId: string
+
+  /**
+      * 处置方式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DisposalMethod: string
+
+  /**
+      * http_log
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  HttpLog: string
+
+  /**
+      * user agent
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Ua: string
+
+  /**
+      * 攻击时间，为保持统一，原参数time更名为AttackTime
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AttackTime: number
+}
+
+/**
  * POST请求上传文件流式传输最大限制
  */
 export interface PostMaxSize {
@@ -3938,6 +5141,74 @@ export interface PostMaxSize {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   MaxSize?: number
+}
+
+/**
+ * RateLimit规则
+ */
+export interface RateLimitUserRule {
+  /**
+   * RateLimit统计阈值
+   */
+  Threshold: number
+
+  /**
+   * RateLimit统计时间
+   */
+  Period: number
+
+  /**
+   * 规则名
+   */
+  RuleName: string
+
+  /**
+   * 动作：monitor(观察), drop(拦截)
+   */
+  Action: string
+
+  /**
+   * 惩罚时长
+   */
+  PunishTime: number
+
+  /**
+   * 处罚时长单位，second
+   */
+  PunishTimeUnit: string
+
+  /**
+   * 规则状态
+   */
+  RuleStatus: string
+
+  /**
+   * 规则
+   */
+  Conditions: Array<ACLCondition>
+
+  /**
+   * 规则权重
+   */
+  RulePriority: number
+
+  /**
+      * 规则id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RuleID?: number
+
+  /**
+      * 过滤词
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FreqFields?: Array<string>
+
+  /**
+      * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UpdateTime?: string
 }
 
 /**
@@ -3994,18 +5265,68 @@ export interface ManagedRule {
 }
 
 /**
- * ModifyLoadBalancing返回参数结构体
+ * 过滤条件
  */
-export interface ModifyLoadBalancingResponse {
+export interface Filter {
   /**
-   * 负载均衡ID
+   * 筛选维度
    */
-  LoadBalancingId: string
+  Key: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 操作符
    */
-  RequestId?: string
+  Operator: string
+
+  /**
+   * 筛选维度值
+   */
+  Value: Array<string>
+}
+
+/**
+ * DescribeWebManagedRulesAttackEvents请求参数结构体
+ */
+export interface DescribeWebManagedRulesAttackEventsRequest {
+  /**
+   * 开始时间
+   */
+  StartTime: string
+
+  /**
+   * 结束时间
+   */
+  EndTime: string
+
+  /**
+   * 条数
+   */
+  PageSize: number
+
+  /**
+   * 当前页
+   */
+  PageNo: number
+
+  /**
+   * ddos策略组id 集合
+   */
+  PolicyIds?: Array<number>
+
+  /**
+   * 站点集合
+   */
+  ZoneIds?: Array<string>
+
+  /**
+   * 协议类型,{tcp,udp,all}
+   */
+  Domains?: Array<string>
+
+  /**
+   * 选填{Y、N},默认为Y；Y：展示，N：不展示
+   */
+  IsShowDetail?: string
 }
 
 /**
@@ -4204,28 +5525,98 @@ export interface DeleteLoadBalancingRequest {
 }
 
 /**
- * 安全防护实例
+ * DescribeTimingL7AnalysisData请求参数结构体
  */
-export interface SecurityEntity {
+export interface DescribeTimingL7AnalysisDataRequest {
   /**
-   * 用户appid
+   * RFC3339标准，客户端时间
    */
-  AppId: number
+  StartTime: string
 
   /**
-   * 一级域名
+   * RFC3339标准，客户端时间
    */
-  ZoneId: string
+  EndTime: string
 
   /**
-   * 二级域名
+   * 时序类访问流量指标
    */
-  Entity: string
+  MetricNames: Array<string>
 
   /**
-   * 类型 domain/application
+   * 时间间隔，选填{min, 5min, hour, day, week}
    */
-  EntityType: string
+  Interval: string
+
+  /**
+   * ZoneId数组
+   */
+  ZoneIds?: Array<string>
+
+  /**
+   * 筛选条件
+   */
+  Filters?: Array<Filter>
+}
+
+/**
+ * DescribeSecurityPolicyManagedRulesId返回参数结构体
+ */
+export interface DescribeSecurityPolicyManagedRulesIdResponse {
+  /**
+   * 返回总数
+   */
+  Total: number
+
+  /**
+   * 门神规则
+   */
+  Rules: Array<ManagedRule>
+
+  /**
+   * 返回总数
+   */
+  Count: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * web事件数据
+ */
+export interface WebEventData {
+  /**
+      * 攻击事件数据集合
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  List: Array<WebAttackEvent>
+
+  /**
+      * 当前页
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PageNo: number
+
+  /**
+      * 每页展示条数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PageSize: number
+
+  /**
+      * 总页数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Pages: number
+
+  /**
+      * 总条数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TotalSize: number
 }
 
 /**
@@ -4492,6 +5883,46 @@ export interface Header {
 }
 
 /**
+ * 自定义名字服务器 IP 信息
+ */
+export interface VanityNameServersIps {
+  /**
+   * 自定义名字服务器名称
+   */
+  Name: string
+
+  /**
+   * 自定义名字服务器 IPv4 地址
+   */
+  IPv4: string
+}
+
+/**
+ * DescribeDDosAttackSourceEvent返回参数结构体
+ */
+export interface DescribeDDosAttackSourceEventResponse {
+  /**
+   * DDos攻击源数据
+   */
+  Data: DDosAttackSourceEventData
+
+  /**
+   * 状态，1:失败，0:成功
+   */
+  Status: number
+
+  /**
+   * 返回信息
+   */
+  Msg: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeZoneDetails请求参数结构体
  */
 export interface DescribeZoneDetailsRequest {
@@ -4517,24 +5948,70 @@ export interface DescribeDDoSPolicyRequest {
 }
 
 /**
- * DescribeDefaultCertificates返回参数结构体
+ * 安全数据Entry返回值
  */
-export interface DescribeDefaultCertificatesResponse {
+export interface SecEntry {
   /**
-   * 证书总数
-   */
-  TotalCount: number
-
-  /**
-      * 默认证书列表
+      * Entry的Key
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  CertInfo: Array<DefaultServerCertInfo>
+  Key: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * Entry的Value
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Value: Array<SecEntryValue>
+}
+
+/**
+ * DescribeDDosMajorAttackEvent请求参数结构体
+ */
+export interface DescribeDDosMajorAttackEventRequest {
+  /**
+   * 开始时间
    */
-  RequestId?: string
+  StartTime: string
+
+  /**
+   * 结束时间
+   */
+  EndTime: string
+
+  /**
+   * 条数
+   */
+  PageSize: number
+
+  /**
+   * 当前页
+   */
+  PageNo: number
+
+  /**
+   * ddos 策略组id集合
+   */
+  PolicyIds?: Array<number>
+
+  /**
+   * 协议类型，{tcp,udp,all}
+   */
+  ProtocolType?: string
+
+  /**
+   * 站点集合
+   */
+  ZoneIds?: Array<string>
+}
+
+/**
+ * Quic配置项
+ */
+export interface Quic {
+  /**
+   * 是否启动Quic配置
+   */
+  Switch: string
 }
 
 /**
@@ -4611,6 +6088,41 @@ excludeCustom:排除部分url参数
  * DescribeSecurityPolicyRegions请求参数结构体
  */
 export type DescribeSecurityPolicyRegionsRequest = null
+
+/**
+ * 安全数据Entry对应的值
+ */
+export interface SecEntryValue {
+  /**
+      * 指标名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Metric: string
+
+  /**
+      * 指标数据明细
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Detail: Array<TimingDataItem>
+
+  /**
+      * 最大值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Max: number
+
+  /**
+      * 平均值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Avg: number
+
+  /**
+      * 数据总和
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Sum: number
+}
 
 /**
  * ReclaimZone请求参数结构体
@@ -4727,6 +6239,51 @@ export interface ModifyDefaultCertificateResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeDDosAttackEvent请求参数结构体
+ */
+export interface DescribeDDosAttackEventRequest {
+  /**
+   * 开始时间
+   */
+  StartTime: string
+
+  /**
+   * 结束时间
+   */
+  EndTime: string
+
+  /**
+   * 条数
+   */
+  PageSize: number
+
+  /**
+   * 当前页
+   */
+  PageNo: number
+
+  /**
+   * ddos策略组id 集合
+   */
+  PolicyIds?: Array<number>
+
+  /**
+   * 站点集合
+   */
+  ZoneIds?: Array<string>
+
+  /**
+   * 协议类型,{tcp,udp,all}
+   */
+  ProtocolType?: string
+
+  /**
+   * 选填{Y、N},默认为Y；Y：展示，N：不展示
+   */
+  IsShowDetail?: string
 }
 
 /**
@@ -4962,13 +6519,53 @@ export interface DescribePurgeTasksRequest {
 }
 
 /**
- * IdentifyZone请求参数结构体
+ * 查询条件
  */
-export interface IdentifyZoneRequest {
+export interface QueryCondition {
   /**
-   * 站点名称
+   * 维度
    */
-  Name: string
+  Key: string
+
+  /**
+   * 操作符
+   */
+  Operator: string
+
+  /**
+   * 维度值
+   */
+  Value: Array<string>
+}
+
+/**
+ * DescribeDnsData请求参数结构体
+ */
+export interface DescribeDnsDataRequest {
+  /**
+   * 起始时间
+   */
+  StartTime: string
+
+  /**
+   * 结束时间
+   */
+  EndTime: string
+
+  /**
+   * 过滤参数
+   */
+  Filters?: Array<DnsDataFilter>
+
+  /**
+      * 时间粒度，默认为1分钟粒度，服务端根据时间范围自适应。
+支持指定以下几种粒度：
+min：1分钟粒度
+5min：5分钟粒度
+hour：1小时粒度
+day：天粒度
+      */
+  Interval?: string
 }
 
 /**
@@ -4992,6 +6589,98 @@ export interface CacheConfig {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   FollowOrigin?: CacheConfigFollowOrigin
+}
+
+/**
+ * DescribeDDosAttackEventDetail返回参数结构体
+ */
+export interface DescribeDDosAttackEventDetailResponse {
+  /**
+   * DDos攻击事件详情
+   */
+  Data: DDosAttackEventDetailData
+
+  /**
+   * 状态，1:失败，0:成功
+   */
+  Status: number
+
+  /**
+   * 返回信息
+   */
+  Msg: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyApplicationProxyRule请求参数结构体
+ */
+export interface ModifyApplicationProxyRuleRequest {
+  /**
+   * 站点ID
+   */
+  ZoneId: string
+
+  /**
+   * 代理ID
+   */
+  ProxyId: string
+
+  /**
+   * 规则ID
+   */
+  RuleId: string
+
+  /**
+   * 协议，取值为TCP或者UDP
+   */
+  Proto: string
+
+  /**
+      * 端口，支持格式：
+80：80端口
+81-90：81至90端口
+      */
+  Port: Array<string>
+
+  /**
+      * 源站类型，取值：
+custom：手动添加
+origins：源站组
+load_balancing：负载均衡
+      */
+  OriginType: string
+
+  /**
+      * 源站信息：
+当OriginType=custom时，表示多个：
+IP:端口
+域名:端口
+当OriginType=origins时，包含一个元素，表示源站组ID
+当OriginType=load_balancing时，包含一个元素，表示负载均衡ID
+      */
+  OriginValue: Array<string>
+
+  /**
+      * 传递客户端IP，当Proto=TCP时，取值：
+TOA：TOA
+PPV1: Proxy Protocol传递，协议版本V1
+PPV2: Proxy Protocol传递，协议版本V2
+OFF：不传递
+当Proto=UDP时，取值：
+PPV2: Proxy Protocol传递，协议版本V2
+OFF：不传递
+      */
+  ForwardClientIp?: string
+
+  /**
+   * 是否开启会话保持
+   */
+  SessionPersist?: boolean
 }
 
 /**
@@ -5047,43 +6736,164 @@ export interface ModifyZoneCnameSpeedUpResponse {
 }
 
 /**
- * 站点查询过滤条件
+ * DescribeWebProtectionLog请求参数结构体
  */
-export interface ZoneFilter {
+export interface DescribeWebProtectionLogRequest {
   /**
-      * 过滤字段名，支持的列表如下：
-- name: 站点名。
-- status: 站点状态
-      */
-  Name: string
+   * 起始时间
+   */
+  StartTime: string
 
   /**
-   * 过滤字段值
+   * 结束时间
    */
-  Values: Array<string>
+  EndTime: string
 
   /**
-   * 是否启用模糊查询，仅支持过滤字段名为name。模糊查询时，Values长度最大为1
+   * 每页条数
    */
-  Fuzzy?: boolean
+  PageSize: number
+
+  /**
+   * 当前页
+   */
+  PageNo: number
+
+  /**
+   * 站点集合
+   */
+  ZoneIds?: Array<string>
+
+  /**
+   * 域名集合
+   */
+  Domains?: Array<string>
+
+  /**
+   * 查询条件
+   */
+  QueryCondition?: Array<QueryCondition>
 }
 
 /**
- * 浏览器缓存规则配置，用于设置 MaxAge 默认值，默认为关闭状态
+ * 限速拦截日志
  */
-export interface MaxAge {
+export interface CCLogData {
   /**
-      * MaxAge 时间设置，单位秒，最大365天
-注意：时间为0，即不缓存。
+      * CC拦截日志数据集合
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  MaxAgeTime?: number
+  List: Array<CCLog>
 
   /**
-      * 是否遵循源站，on或off，开启时忽略时间设置。
+      * 当前页
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  FollowOrigin?: string
+  PageNo: number
+
+  /**
+      * 每页展示条数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PageSize: number
+
+  /**
+      * 总页数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Pages: number
+
+  /**
+      * 总条数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TotalSize: number
+}
+
+/**
+ * DescribePrefetchTasks请求参数结构体
+ */
+export interface DescribePrefetchTasksRequest {
+  /**
+   * 任务ID
+   */
+  JobId?: string
+
+  /**
+   * 查询起始时间
+   */
+  StartTime?: string
+
+  /**
+   * 查询结束时间
+   */
+  EndTime?: string
+
+  /**
+   * 查询起始偏移量
+   */
+  Offset?: number
+
+  /**
+   * 查询最大返回的结果条数
+   */
+  Limit?: number
+
+  /**
+      * 查询的状态
+允许的值为：processing、success、failed、timeout、invalid
+      */
+  Statuses?: Array<string>
+
+  /**
+   * zone id
+   */
+  ZoneId?: string
+
+  /**
+   * 查询的域名列表
+   */
+  Domains?: Array<string>
+
+  /**
+   * 查询的资源
+   */
+  Target?: string
+}
+
+/**
+ * 内容管理任务结果
+ */
+export interface Task {
+  /**
+   * 任务ID
+   */
+  JobId: string
+
+  /**
+   * 状态
+   */
+  Status: string
+
+  /**
+   * 资源
+   */
+  Target: string
+
+  /**
+   * 任务类型
+   */
+  Type: string
+
+  /**
+   * 任务创建时间
+   */
+  CreateTime: string
+
+  /**
+   * 任务完成时间
+   */
+  UpdateTime: string
 }
 
 /**
@@ -5160,48 +6970,52 @@ export interface DescribeZoneDDoSPolicyResponse {
 }
 
 /**
- * ACL配置
+ * CNAME 状态
  */
-export interface AclConfig {
+export interface CnameStatus {
   /**
-   * 开关
+   * 记录名称
    */
-  Switch: string
+  Name: string
 
   /**
-   * ACL用户规则
-   */
-  UserRules: Array<ACLUserRule>
+      * CNAME 地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Cname: string
+
+  /**
+      * 状态
+生效：active
+不生效：moved
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Status: string
 }
 
 /**
- * DescribeDnsData请求参数结构体
+ * DescribeDDosMajorAttackEvent返回参数结构体
  */
-export interface DescribeDnsDataRequest {
+export interface DescribeDDosMajorAttackEventResponse {
   /**
-   * 起始时间
+   * DDos查询主攻击事件
    */
-  StartTime: string
+  Data: DDosMajorAttackEventData
 
   /**
-   * 结束时间
+   * 状态，1:失败，0:成功
    */
-  EndTime: string
+  Status: number
 
   /**
-   * 过滤参数
+   * 返回消息
    */
-  Filters?: Array<DnsDataFilter>
+  Msg: string
 
   /**
-      * 时间粒度，默认为1分钟粒度，服务端根据时间范围自适应。
-支持指定以下几种粒度：
-min：1分钟粒度
-5min：5分钟粒度
-hour：1小时粒度
-day：天粒度
-      */
-  Interval?: string
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5312,6 +7126,31 @@ export interface DDoSFeaturesFilter {
    * 匹配开始层级，层级参考计算机网络结构 begin_l5, no_match, begin_l3, begin_l4
    */
   MatchBegin2?: string
+}
+
+/**
+ * DescribeWebProtectionAttackEvents返回参数结构体
+ */
+export interface DescribeWebProtectionAttackEventsResponse {
+  /**
+   * DDos攻击事件数据
+   */
+  Data: CCInterceptEventData
+
+  /**
+   * 状态，1:失败，0:成功
+   */
+  Status: number
+
+  /**
+   * 返回消息
+   */
+  Msg: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5450,6 +7289,46 @@ instance：实例
 }
 
 /**
+ * DescribeBotLog请求参数结构体
+ */
+export interface DescribeBotLogRequest {
+  /**
+   * 起始时间
+   */
+  StartTime: string
+
+  /**
+   * 结束时间
+   */
+  EndTime: string
+
+  /**
+   * 每页条数
+   */
+  PageSize: number
+
+  /**
+   * 当前页
+   */
+  PageNo: number
+
+  /**
+   * 站点集合
+   */
+  ZoneIds?: Array<string>
+
+  /**
+   * 域名集合
+   */
+  Domains?: Array<string>
+
+  /**
+   * 查询条件
+   */
+  QueryCondition?: Array<QueryCondition>
+}
+
+/**
  * DownloadL7Logs返回参数结构体
  */
 export interface DownloadL7LogsResponse {
@@ -5490,6 +7369,51 @@ export interface DownloadL7LogsResponse {
 }
 
 /**
+ * ddos 攻击事件的详情
+ */
+export interface DDosAttackEventDetailData {
+  /**
+   * 攻击状态
+   */
+  AttackStatus: number
+
+  /**
+   * 攻击类型
+   */
+  AttackType: string
+
+  /**
+   * 结束时间
+   */
+  EndTime: number
+
+  /**
+   * 开始时间
+   */
+  StartTime: number
+
+  /**
+   * 最大带宽
+   */
+  MaxBandWidth: number
+
+  /**
+   * 最大包速率
+   */
+  PacketMaxRate: number
+
+  /**
+   * 事件Id
+   */
+  EventId: string
+
+  /**
+   * ddos 策略组id
+   */
+  PolicyId: number
+}
+
+/**
  * CreateOriginGroup请求参数结构体
  */
 export interface CreateOriginGroupRequest {
@@ -5522,6 +7446,51 @@ self：自有源站
 third_party：第三方源站
       */
   OriginType?: string
+}
+
+/**
+ * DescribeTimingL4Data请求参数结构体
+ */
+export interface DescribeTimingL4DataRequest {
+  /**
+   * RFC3339格式，客户端时间
+   */
+  StartTime: string
+
+  /**
+   * RFC3339格式，客户端时间
+   */
+  EndTime: string
+
+  /**
+   * 指标列表
+   */
+  MetricNames: Array<string>
+
+  /**
+   * ZoneId列表，仅在zone/instance维度下查询时该参数有效
+   */
+  ZoneIds?: Array<string>
+
+  /**
+   * InstanceId列表，仅在Instance维度下查询时该参数有效
+   */
+  InstanceIds?: Array<string>
+
+  /**
+   * 协议类型， 该字段当前无效
+   */
+  Protocol?: string
+
+  /**
+   * 时间间隔，选填{min, 5min, hour, day}
+   */
+  Interval?: string
+
+  /**
+   * 规则ID，仅在instance维度有效
+   */
+  RuleId?: string
 }
 
 /**
@@ -5560,6 +7529,77 @@ export interface DescribeZoneDDoSPolicyRequest {
 }
 
 /**
+ * DescribeDDosAttackData返回参数结构体
+ */
+export interface DescribeDDosAttackDataResponse {
+  /**
+      * DDos攻击数据
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Data: Array<SecEntry>
+
+  /**
+   * 状态，1:失败，0:成功
+   */
+  Status: number
+
+  /**
+   * 返回数据
+   */
+  Msg: string
+
+  /**
+   * 查询时间粒度，可选{min,5min,hour,day}
+   */
+  Interval: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeWebManagedRulesLog请求参数结构体
+ */
+export interface DescribeWebManagedRulesLogRequest {
+  /**
+   * 起始时间
+   */
+  StartTime: string
+
+  /**
+   * 结束时间
+   */
+  EndTime: string
+
+  /**
+   * 每页条数
+   */
+  PageSize: number
+
+  /**
+   * 当前页
+   */
+  PageNo: number
+
+  /**
+   * 站点集合
+   */
+  ZoneIds?: Array<string>
+
+  /**
+   * 域名集合
+   */
+  Domains?: Array<string>
+
+  /**
+   * 查询条件
+   */
+  QueryCondition?: Array<QueryCondition>
+}
+
+/**
  * CreateApplicationProxyRules返回参数结构体
  */
 export interface CreateApplicationProxyRulesResponse {
@@ -5572,6 +7612,61 @@ export interface CreateApplicationProxyRulesResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeWebManagedRulesTopData请求参数结构体
+ */
+export interface DescribeWebManagedRulesTopDataRequest {
+  /**
+   * 开始时间
+   */
+  StartTime: string
+
+  /**
+   * 结束时间
+   */
+  EndTime: string
+
+  /**
+   * 过滤指标
+   */
+  MetricName: string
+
+  /**
+   * 查询前多少名,传值为0 全量
+   */
+  Limit: number
+
+  /**
+   * 站点集合
+   */
+  ZoneIds?: Array<string>
+
+  /**
+   * ddos策略组id 集合
+   */
+  PolicyIds?: Array<number>
+
+  /**
+   * 端口号
+   */
+  Port?: number
+
+  /**
+   * 协议类型,tcp,udp,all
+   */
+  ProtocolType?: string
+
+  /**
+   * 攻击类型,flood,icmpFlood......,all
+   */
+  AttackType?: string
+
+  /**
+   * 域名集合
+   */
+  Domains?: Array<string>
 }
 
 /**
@@ -5618,61 +7713,55 @@ export interface DescribeIdentificationResponse {
 }
 
 /**
- * 源站组信息
+ * DDos主攻击事件
  */
-export interface OriginGroup {
+export interface DDosMajorAttackEvent {
   /**
-   * 源站组ID
+   * ddos 策略组id
    */
-  OriginId: string
+  PolicyId: number
 
   /**
-   * 源站组名称
+   * 攻击最大带宽
    */
-  OriginName: string
+  AttackMaxBandWidth: number
 
   /**
-   * 配置类型
+   * 攻击时间 单位为s
    */
-  Type: string
+  AttackTime: number
+}
+
+/**
+ * ModifyZoneCnameSpeedUp请求参数结构体
+ */
+export interface ModifyZoneCnameSpeedUpRequest {
+  /**
+   * 站点 ID
+   */
+  Id: string
 
   /**
-   * 记录
-   */
-  Record: Array<OriginRecord>
-
-  /**
-   * 更新时间
-   */
-  UpdateTime: string
-
-  /**
-   * 站点ID
-   */
-  ZoneId: string
-
-  /**
-   * 站点名称
-   */
-  ZoneName: string
-
-  /**
-      * 源站类型
-注意：此字段可能返回 null，表示取不到有效值。
+      * CNAME 加速状态
+- enabled 开启
+- disabled 关闭
       */
-  OriginType: string
+  Status: string
+}
+
+/**
+ * ModifyLoadBalancing返回参数结构体
+ */
+export interface ModifyLoadBalancingResponse {
+  /**
+   * 负载均衡ID
+   */
+  LoadBalancingId: string
 
   /**
-      * 是否为四层代理使用
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ApplicationProxyUsed: boolean
-
-  /**
-      * 是否为负载均衡使用
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  LoadBalancingUsed: boolean
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5717,6 +7806,31 @@ export interface DDoSUserAllowBlockIP {
 }
 
 /**
+ * DescribeBotLog返回参数结构体
+ */
+export interface DescribeBotLogResponse {
+  /**
+   * Bot攻击Data
+   */
+  Data: BotLogData
+
+  /**
+   * 状态，1：失败，0:成功
+   */
+  Status: number
+
+  /**
+   * 返回信息
+   */
+  Msg: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeLoadBalancing返回参数结构体
  */
 export interface DescribeLoadBalancingResponse {
@@ -5729,6 +7843,37 @@ export interface DescribeLoadBalancingResponse {
    * 负载均衡信息
    */
   Data: Array<LoadBalancing>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeWebProtectionData返回参数结构体
+ */
+export interface DescribeWebProtectionDataResponse {
+  /**
+      * 数据详情
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Data: Array<SecEntry>
+
+  /**
+   * 状态，1:失败，0:成功
+   */
+  Status: number
+
+  /**
+   * 消息
+   */
+  Msg: string
+
+  /**
+   * 查询时间粒度，可选{min,5min,hour,day}
+   */
+  Interval: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -6061,6 +8206,57 @@ export interface OfflineCache {
 }
 
 /**
+ * DescribeOriginGroupDetail请求参数结构体
+ */
+export interface DescribeOriginGroupDetailRequest {
+  /**
+   * 源站组ID
+   */
+  OriginId: string
+
+  /**
+   * 站点ID
+   */
+  ZoneId: string
+}
+
+/**
+ * DescribeDDosAttackEventDetail请求参数结构体
+ */
+export interface DescribeDDosAttackEventDetailRequest {
+  /**
+   * 时间id
+   */
+  EventId: string
+}
+
+/**
+ * DescribeTimingL4Data返回参数结构体
+ */
+export interface DescribeTimingL4DataResponse {
+  /**
+   * 查询维度
+   */
+  Type: string
+
+  /**
+   * 时间间隔
+   */
+  Interval: string
+
+  /**
+      * 详细数据
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Data: Array<TimingDataRecord>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 安全Bot配置
  */
 export interface BotConfig {
@@ -6091,18 +8287,43 @@ export interface BotConfig {
 }
 
 /**
- * 自定义名字服务器 IP 信息
+ * 时序类型详细数据
  */
-export interface VanityNameServersIps {
+export interface TimingTypeValue {
   /**
-   * 自定义名字服务器名称
-   */
-  Name: string
+      * 数据和
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Sum: number
 
   /**
-   * 自定义名字服务器 IPv4 地址
+      * 最大
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Max: number
+
+  /**
+      * 平均
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Avg: number
+
+  /**
+   * 指标名
    */
-  IPv4: string
+  MetricName: string
+
+  /**
+      * 废弃字段，即将下线，请使用Detail字段
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DetailData: Array<number>
+
+  /**
+      * 详细数据
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Detail: Array<TimingDataItem>
 }
 
 /**

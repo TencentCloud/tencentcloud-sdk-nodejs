@@ -178,6 +178,16 @@ it("dlc.v20210125.CreateWorkGroup", async function () {
     }
 })
 
+it("dlc.v20210125.ListTaskJobLogDetail", async function () {
+    try {
+       const data = await client.ListTaskJobLogDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.UnbindWorkGroupsFromUser", async function () {
     try {
        const data = await client.UnbindWorkGroupsFromUser({})

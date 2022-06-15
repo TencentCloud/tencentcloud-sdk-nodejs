@@ -484,7 +484,7 @@ export interface ModifySparkAppRequest {
       */
     AppConf?: string;
     /**
-      * 是否本地上传，可去cos,lakefs
+      * jar资源依赖上传方式，1、cos；2、lakefs（控制台使用，该方式不支持直接接口调用）
       */
     IsLocalJars?: string;
     /**
@@ -492,7 +492,7 @@ export interface ModifySparkAppRequest {
       */
     AppJars?: string;
     /**
-      * 是否本地上传，可去cos,lakefs
+      * file资源依赖上传方式，1、cos；2、lakefs（控制台使用，该方式不支持直接接口调用）
       */
     IsLocalFiles?: string;
     /**
@@ -696,6 +696,31 @@ export interface AttachUserPolicyRequest {
       * 鉴权策略集合
       */
     PolicySet?: Array<Policy>;
+}
+/**
+ * ListTaskJobLogDetail请求参数结构体
+ */
+export interface ListTaskJobLogDetailRequest {
+    /**
+      * 列表返回的Id
+      */
+    TaskId: string;
+    /**
+      * 开始运行时间，unix时间戳（毫秒）
+      */
+    StartTime: number;
+    /**
+      * 结束运行时间，unix时间戳（毫秒）
+      */
+    EndTime: number;
+    /**
+      * 分页大小，最大100，配合Context一起使用
+      */
+    Limit: number;
+    /**
+      * 下一次分页参数，第一次传空
+      */
+    Context: string;
 }
 /**
  * 批量顺序执行任务集合
@@ -1033,15 +1058,15 @@ view-id - String - （过滤条件）view id形如：12342。
       */
     Sort?: string;
     /**
-      * 排序规则
+      * 排序规则，true:升序；false:降序
       */
     Asc?: boolean;
     /**
-      * 开始时间
+      * 按视图更新时间筛选，开始时间，如2021-11-11 00:00:00
       */
     StartTime?: string;
     /**
-      * 结束时间
+      * 按视图更新时间筛选，结束时间，如2021-11-12 00:00:00
       */
     EndTime?: string;
 }
@@ -1897,7 +1922,7 @@ table-id - String - （过滤条件）table id形如：12342。
       */
     Sort?: string;
     /**
-      * 排序字段，false：降序（默认）；true
+      * 排序字段，false：降序（默认）；true：升序
       */
     Asc?: boolean;
     /**
@@ -2009,6 +2034,31 @@ export interface DescribeTableRequest {
       * 查询表所在的数据源名称
       */
     DatasourceConnectionName?: string;
+}
+/**
+ * 日志详情
+ */
+export interface JobLogResult {
+    /**
+      * 日志时间戳，毫秒
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Time: number;
+    /**
+      * 日志topic id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TopicId: string;
+    /**
+      * 日志topic name
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TopicName: string;
+    /**
+      * 日志内容，json字符串
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LogJson: string;
 }
 /**
  * 数据格式其它类型。
@@ -2402,6 +2452,30 @@ export interface CreateSparkAppRequest {
  * UnbindWorkGroupsFromUser返回参数结构体
  */
 export interface UnbindWorkGroupsFromUserResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ListTaskJobLogDetail返回参数结构体
+ */
+export interface ListTaskJobLogDetailResponse {
+    /**
+      * 下一次分页参数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Context: string;
+    /**
+      * 是否获取完结
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ListOver: boolean;
+    /**
+      * 日志详情
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Results: Array<JobLogResult>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

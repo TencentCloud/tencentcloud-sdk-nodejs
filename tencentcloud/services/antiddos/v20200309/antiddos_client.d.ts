@@ -40,7 +40,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeBlackWhiteIpList(req: DescribeBlackWhiteIpListRequest, cb?: (error: string, rep: DescribeBlackWhiteIpListResponse) => void): Promise<DescribeBlackWhiteIpListResponse>;
     /**
-     * 获取CC防护等级列表
+     * 获取边界防护CC防护等级列表
      */
     DescribeCCLevelList(req: DescribeCCLevelListRequest, cb?: (error: string, rep: DescribeCCLevelListResponse) => void): Promise<DescribeCCLevelListResponse>;
     /**

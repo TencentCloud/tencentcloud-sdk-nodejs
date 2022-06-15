@@ -28,6 +28,60 @@ class Client extends abstract_client_1.AbstractClient {
         super("ciam.tencentcloudapi.com", "2022-03-31", clientConfig);
     }
     /**
+     * 批量删除用户
+     */
+    async DeleteUsers(req, cb) {
+        return this.request("DeleteUsers", req, cb);
+    }
+    /**
+     * 更新用户
+     */
+    async UpdateUser(req, cb) {
+        return this.request("UpdateUser", req, cb);
+    }
+    /**
+     * 查询用户列表
+     */
+    async ListUser(req, cb) {
+        return this.request("ListUser", req, cb);
+    }
+    /**
+     * 更新用户状态
+     */
+    async UpdateUserStatus(req, cb) {
+        return this.request("UpdateUserStatus", req, cb);
+    }
+    /**
+     * 根据属性查询用户列表
+     */
+    async ListUserByProperty(req, cb) {
+        return this.request("ListUserByProperty", req, cb);
+    }
+    /**
+     * 根据ID查询用户信息
+     */
+    async DescribeUserById(req, cb) {
+        return this.request("DescribeUserById", req, cb);
+    }
+    /**
+     * 创建用户
+     */
+    async CreateUser(req, cb) {
+        return this.request("CreateUser", req, cb);
+    }
+    /**
+     * 设置用户密码
+     */
+    async SetPassword(req, cb) {
+        return this.request("SetPassword", req, cb);
+    }
+    /**
+     * 账号融合
+     */
+    async LinkAccount(req, cb) {
+        return this.request("LinkAccount", req, cb);
+    }
+    /**
      * 重置用户密码
      */
     async ResetPassword(req, cb) {

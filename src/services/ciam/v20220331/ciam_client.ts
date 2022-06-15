@@ -17,7 +17,32 @@
  */
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
-import { ResetPasswordRequest, ResetPasswordResponse } from "./ciam_models"
+import {
+  UpdateUserRequest,
+  DescribeUserByIdRequest,
+  ListUserRequest,
+  DeleteUsersRequest,
+  UpdateUserStatusResponse,
+  ResetPasswordRequest,
+  CreateUserResponse,
+  SetPasswordResponse,
+  ListUserByPropertyResponse,
+  DescribeUserByIdResponse,
+  DeleteUsersResponse,
+  User,
+  Pageable,
+  ResetPasswordResponse,
+  SetPasswordRequest,
+  UpdateUserStatusRequest,
+  Filter,
+  ListUserByPropertyRequest,
+  LinkAccountResponse,
+  CreateUserRequest,
+  MemberMap,
+  LinkAccountRequest,
+  ListUserResponse,
+  UpdateUserResponse,
+} from "./ciam_models"
 
 /**
  * ciam client
@@ -26,6 +51,96 @@ import { ResetPasswordRequest, ResetPasswordResponse } from "./ciam_models"
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("ciam.tencentcloudapi.com", "2022-03-31", clientConfig)
+  }
+
+  /**
+   * 批量删除用户
+   */
+  async DeleteUsers(
+    req: DeleteUsersRequest,
+    cb?: (error: string, rep: DeleteUsersResponse) => void
+  ): Promise<DeleteUsersResponse> {
+    return this.request("DeleteUsers", req, cb)
+  }
+
+  /**
+   * 更新用户
+   */
+  async UpdateUser(
+    req: UpdateUserRequest,
+    cb?: (error: string, rep: UpdateUserResponse) => void
+  ): Promise<UpdateUserResponse> {
+    return this.request("UpdateUser", req, cb)
+  }
+
+  /**
+   * 查询用户列表
+   */
+  async ListUser(
+    req: ListUserRequest,
+    cb?: (error: string, rep: ListUserResponse) => void
+  ): Promise<ListUserResponse> {
+    return this.request("ListUser", req, cb)
+  }
+
+  /**
+   * 更新用户状态
+   */
+  async UpdateUserStatus(
+    req: UpdateUserStatusRequest,
+    cb?: (error: string, rep: UpdateUserStatusResponse) => void
+  ): Promise<UpdateUserStatusResponse> {
+    return this.request("UpdateUserStatus", req, cb)
+  }
+
+  /**
+   * 根据属性查询用户列表
+   */
+  async ListUserByProperty(
+    req: ListUserByPropertyRequest,
+    cb?: (error: string, rep: ListUserByPropertyResponse) => void
+  ): Promise<ListUserByPropertyResponse> {
+    return this.request("ListUserByProperty", req, cb)
+  }
+
+  /**
+   * 根据ID查询用户信息
+   */
+  async DescribeUserById(
+    req: DescribeUserByIdRequest,
+    cb?: (error: string, rep: DescribeUserByIdResponse) => void
+  ): Promise<DescribeUserByIdResponse> {
+    return this.request("DescribeUserById", req, cb)
+  }
+
+  /**
+   * 创建用户
+   */
+  async CreateUser(
+    req: CreateUserRequest,
+    cb?: (error: string, rep: CreateUserResponse) => void
+  ): Promise<CreateUserResponse> {
+    return this.request("CreateUser", req, cb)
+  }
+
+  /**
+   * 设置用户密码
+   */
+  async SetPassword(
+    req: SetPasswordRequest,
+    cb?: (error: string, rep: SetPasswordResponse) => void
+  ): Promise<SetPasswordResponse> {
+    return this.request("SetPassword", req, cb)
+  }
+
+  /**
+   * 账号融合
+   */
+  async LinkAccount(
+    req: LinkAccountRequest,
+    cb?: (error: string, rep: LinkAccountResponse) => void
+  ): Promise<LinkAccountResponse> {
+    return this.request("LinkAccount", req, cb)
   }
 
   /**

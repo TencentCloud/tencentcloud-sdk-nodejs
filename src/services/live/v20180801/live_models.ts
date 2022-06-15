@@ -4924,7 +4924,7 @@ export interface TimeShiftBillData {
   Domain: string
 
   /**
-   * 时移时长,单位分钟。
+   * 时移文件时长,单位分钟。
    */
   Duration: number
 

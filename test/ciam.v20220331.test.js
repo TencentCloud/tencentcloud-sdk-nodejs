@@ -18,6 +18,96 @@ const client = new tencentcloud.ciam.v20220331.Client({
 })
 describe("ciam.v20220331.test.js", function () {
 
+it("ciam.v20220331.DeleteUsers", async function () {
+    try {
+       const data = await client.DeleteUsers({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ciam.v20220331.UpdateUser", async function () {
+    try {
+       const data = await client.UpdateUser({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ciam.v20220331.ListUser", async function () {
+    try {
+       const data = await client.ListUser({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ciam.v20220331.UpdateUserStatus", async function () {
+    try {
+       const data = await client.UpdateUserStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ciam.v20220331.ListUserByProperty", async function () {
+    try {
+       const data = await client.ListUserByProperty({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ciam.v20220331.DescribeUserById", async function () {
+    try {
+       const data = await client.DescribeUserById({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ciam.v20220331.CreateUser", async function () {
+    try {
+       const data = await client.CreateUser({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ciam.v20220331.SetPassword", async function () {
+    try {
+       const data = await client.SetPassword({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ciam.v20220331.LinkAccount", async function () {
+    try {
+       const data = await client.LinkAccount({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ciam.v20220331.ResetPassword", async function () {
     try {
        const data = await client.ResetPassword({})

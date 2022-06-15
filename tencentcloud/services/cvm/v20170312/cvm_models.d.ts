@@ -678,7 +678,7 @@ export interface ImportKeyPairResponse {
     /**
       * 密钥对ID。
       */
-    KeyId: string;
+    KeyId?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1669,23 +1669,23 @@ export interface DescribeDisasterRecoverGroupQuotaResponse {
     /**
       * 可创建置放群组数量的上限。
       */
-    GroupQuota?: number;
+    GroupQuota: number;
     /**
       * 当前用户已经创建的置放群组数量。
       */
-    CurrentNum?: number;
+    CurrentNum: number;
     /**
       * 物理机类型容灾组内实例的配额数。
       */
-    CvmInHostGroupQuota?: number;
+    CvmInHostGroupQuota: number;
     /**
       * 交换机类型容灾组内实例的配额数。
       */
-    CvmInSwGroupQuota?: number;
+    CvmInSwGroupQuota: number;
     /**
       * 机架类型容灾组内实例的配额数。
       */
-    CvmInRackGroupQuota?: number;
+    CvmInRackGroupQuota: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1837,7 +1837,11 @@ export interface DescribeKeyPairsRequest {
     /**
       * 过滤条件。
 <li> project-id - Integer - 是否必填：否 -（过滤条件）按照项目ID过滤。可以通过[项目列表](https://console.cloud.tencent.com/project)查询项目ID，或者调用接口 [DescribeProject](https://cloud.tencent.com/document/api/378/4400)，取返回信息中的projectId获取项目ID。</li>
-<li> key-name - String - 是否必填：否 -（过滤条件）按照密钥对名称过滤。</li>参数不支持同时指定 `KeyIds` 和 `Filters`。
+<li> key-name - String - 是否必填：否 -（过滤条件）按照密钥对名称过滤。</li>
+<li> tag-key - String - 是否必填：否 -（过滤条件）按照标签键过滤。</li>
+<li> tag-value - String - 是否必填：否 -（过滤条件）按照标签值过滤。</li>
+<li> tag:tag-key - String - 是否必填：否 -（过滤条件）按照标签键值对过滤。tag-key使用具体的标签键进行替换。</li>
+参数不支持同时指定 `KeyIds` 和 `Filters`。
       */
     Filters?: Array<Filter>;
     /**
@@ -2472,7 +2476,7 @@ export interface CreateKeyPairResponse {
     /**
       * 密钥对信息。
       */
-    KeyPair: KeyPair;
+    KeyPair?: KeyPair;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4444,6 +4448,11 @@ export interface KeyPair {
       * 创建时间。按照`ISO8601`标准表示，并且使用`UTC`时间。格式为：`YYYY-MM-DDThh:mm:ssZ`。
       */
     CreatedTime?: string;
+    /**
+      * 密钥关联的标签列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Tags?: Array<Tag>;
 }
 /**
  * DescribeReservedInstancesOfferings返回参数结构体

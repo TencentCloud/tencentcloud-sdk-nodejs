@@ -76,7 +76,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBlackWhiteIpList", req, cb);
     }
     /**
-     * 获取CC防护等级列表
+     * 获取边界防护CC防护等级列表
      */
     async DescribeCCLevelList(req, cb) {
         return this.request("DescribeCCLevelList", req, cb);
