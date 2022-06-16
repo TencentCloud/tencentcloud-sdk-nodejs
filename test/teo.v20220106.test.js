@@ -358,6 +358,16 @@ it("teo.v20220106.DescribeDDosAttackEventDetail", async function () {
     }
 })
 
+it("teo.v20220106.DescribeTimingL7CacheData", async function () {
+    try {
+       const data = await client.DescribeTimingL7CacheData({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("teo.v20220106.DescribeLoadBalancing", async function () {
     try {
        const data = await client.DescribeLoadBalancing({})
@@ -381,6 +391,16 @@ it("teo.v20220106.DeleteLoadBalancing", async function () {
 it("teo.v20220106.DescribeTimingL4Data", async function () {
     try {
        const data = await client.DescribeTimingL4Data({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("teo.v20220106.DescribeTopL7CacheData", async function () {
+    try {
+       const data = await client.DescribeTopL7CacheData({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

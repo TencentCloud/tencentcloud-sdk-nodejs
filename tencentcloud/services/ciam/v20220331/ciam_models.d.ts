@@ -77,6 +77,33 @@ export interface ListUserRequest {
     Filters?: Array<Filter>;
 }
 /**
+ * ResetPassword请求参数结构体
+ */
+export interface ResetPasswordRequest {
+    /**
+      * 用户ID
+      */
+    UserId: string;
+    /**
+      * 用户目录ID
+      */
+    UserStoreId: string;
+}
+/**
+ * 失败详情
+ */
+export interface ErrorDetails {
+    /**
+      * 用户信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UserId: string;
+    /**
+      * 失败原因
+      */
+    Error: string;
+}
+/**
  * DeleteUsers请求参数结构体
  */
 export interface DeleteUsersRequest {
@@ -90,6 +117,121 @@ export interface DeleteUsersRequest {
     UserIds: Array<string>;
 }
 /**
+ * 导入用户信息
+1、UserName，PhoneNumber ，Email ，WechatOpenId ，WechatUnionId ，AlipayUserId ，QqOpenId ，QqUnionId 八个属性中，导入时必须包含其中一个属性并遵守初始化自定义属性的正则表达式规则。UserName，PhoneNumber，Email的正则表达式在控制台的自定义属性中可以查询到。
+2、对于密码的导入，导入的密码支持明文导入，MD5密文导入，SHA1密文导入，BCRYPT密文导入 ，这个需要在PasswordEncryptTypeEnum 字段中指定。
+3、IdentityVerified，IdentityVerificationMethod 支持导入，
+IdentityVerified 为true，IdentityVerificationMethod必传；
+IdentityVerificationMethod 为nameAndIdCard，Name,ResidentIdentityCard必传
+IdentityVerificationMethod 为nameIdCardAndPhone，Name,PhoneNumber,ResidentIdentityCard必传;
+ */
+export interface ImportUser {
+    /**
+      * 用户名
+      */
+    UserName?: string;
+    /**
+      * 手机号
+      */
+    PhoneNumber?: string;
+    /**
+      * 邮箱
+      */
+    Email?: string;
+    /**
+      * 身份证号
+      */
+    ResidentIdentityCard?: string;
+    /**
+      * 昵称
+      */
+    Nickname?: string;
+    /**
+      * 地址
+      */
+    Address?: string;
+    /**
+      * 用户组ID
+      */
+    UserGroup?: Array<string>;
+    /**
+      * QQ qqOpenId
+      */
+    QqOpenId?: string;
+    /**
+      * QQ qqUnionId
+      */
+    QqUnionId?: string;
+    /**
+      * 微信wechatOpenId
+      */
+    WechatOpenId?: string;
+    /**
+      * 微信wechatUnionId
+      */
+    WechatUnionId?: string;
+    /**
+      * 支付宝alipayUserId
+      */
+    AlipayUserId?: string;
+    /**
+      * 描述
+      */
+    Description?: string;
+    /**
+      * 生日
+      */
+    Birthdate?: string;
+    /**
+      * 姓名
+      */
+    Name?: string;
+    /**
+      * 坐标
+      */
+    Locale?: string;
+    /**
+      * 性别（MALE;FEMALE;UNKNOWN）
+      */
+    Gender?: string;
+    /**
+      * 实名核验方式
+      */
+    IdentityVerificationMethod?: string;
+    /**
+      * 是否已实名核验
+      */
+    IdentityVerified?: boolean;
+    /**
+      * 工作
+      */
+    Job?: string;
+    /**
+      * 国家
+      */
+    Nationality?: string;
+    /**
+      * 时区
+      */
+    Zone?: string;
+    /**
+      * 密码密文
+      */
+    Password?: string;
+    /**
+      * 自定义属性
+      */
+    CustomizationAttributes?: Array<MemberMap>;
+    /**
+      * 密码盐
+      */
+    Salt?: Salt;
+    /**
+      * 密码加密方式（SHA1;BCRYPT）
+      */
+    PasswordEncryptTypeEnum?: string;
+}
+/**
  * UpdateUserStatus返回参数结构体
  */
 export interface UpdateUserStatusResponse {
@@ -99,17 +241,39 @@ export interface UpdateUserStatusResponse {
     RequestId?: string;
 }
 /**
- * ResetPassword请求参数结构体
+ * 失败的用户
  */
-export interface ResetPasswordRequest {
+export interface FailedUsers {
     /**
-      * 用户ID
+      * 失败用户标识
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    UserId: string;
+    FailedUserIdentification: string;
+    /**
+      * 导入的用户失败原因
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FailedReason: string;
+}
+/**
+ * ListUserByProperty请求参数结构体
+ */
+export interface ListUserByPropertyRequest {
     /**
       * 用户目录ID
       */
     UserStoreId: string;
+    /**
+      * 查询的属性
+
+<li> **phoneNumber** </li>	  手机号码
+<li> **email** </li>  邮箱
+      */
+    PropertyCode: string;
+    /**
+      * 属性值
+      */
+    PropertyValue: string;
 }
 /**
  * CreateUser返回参数结构体
@@ -124,6 +288,23 @@ export interface CreateUserResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 查询条件
+ */
+export interface Filter {
+    /**
+      * key值
+      */
+    Key?: string;
+    /**
+      * value值
+      */
+    Values?: Array<string>;
+    /**
+      * 逻辑值
+      */
+    Logic?: boolean;
 }
 /**
  * SetPassword返回参数结构体
@@ -149,6 +330,19 @@ export interface ListUserByPropertyResponse {
     RequestId?: string;
 }
 /**
+ * ListJobs请求参数结构体
+ */
+export interface ListJobsRequest {
+    /**
+      * 用户目录ID
+      */
+    UserStoreId: string;
+    /**
+      * 任务ID列表，为空时返回全部任务
+      */
+    JobIds?: Array<string>;
+}
+/**
  * DescribeUserById返回参数结构体
  */
 export interface DescribeUserByIdResponse {
@@ -163,13 +357,85 @@ export interface DescribeUserByIdResponse {
     RequestId?: string;
 }
 /**
- * DeleteUsers返回参数结构体
+ * 任务详情
  */
-export interface DeleteUsersResponse {
+export interface Job {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 任务ID
       */
-    RequestId?: string;
+    Id: string;
+    /**
+      * 任务状态
+
+<li> **PENDING** </li>  待执行
+<li> **PROCESSING** </li>  执行中
+<li> **COMPLETED** </li>  完成
+<li> **FAILED** </li>  失败
+      */
+    Status: string;
+    /**
+      * 任务类型
+
+<li> **IMPORT_USER** </li>  用户导入
+<li> **EXPORT_USER** </li>  用户导出
+      */
+    Type: string;
+    /**
+      * 任务创建时间
+      */
+    CreatedDate: number;
+    /**
+      * 任务的数据类型
+
+<li> **JSON** </li>  JSON
+<li> **NDJSON** </li>  New-line Delimited JSON
+<li> **CSV** </li>  Comma-Separated Values
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Format: string;
+    /**
+      * 任务结果下载地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Location: string;
+    /**
+      * 失败详情
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ErrorDetails: Array<ErrorDetails>;
+    /**
+      * 失败的用户
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FailedUsers: Array<FailedUsers>;
+}
+/**
+ * CreateFileExportUserJob请求参数结构体
+ */
+export interface CreateFileExportUserJobRequest {
+    /**
+      * 用户目录ID
+      */
+    UserStoreId: string;
+    /**
+      * 导出的数据类型
+
+<li> **JSON** </li>  JSON
+<li> **NDJSON** </li>  New-line Delimited JSON
+<li> **CSV** </li>  Comma-Separated Values
+      */
+    Format?: string;
+    /**
+      * Key可选值为condition、userGroupId
+
+<li> **condition** </li>	Values = 查询条件，用户ID，用户名称，手机或邮箱
+<li> **userGroupId** </li>	Values = 用户组ID
+      */
+    Filters?: Array<Filter>;
+    /**
+      * 导出用户包含的属性和映射名称，为空时包含所有的属性
+      */
+    ExportPropertyMaps?: Array<ExportPropertyMap>;
 }
 /**
  * 用户信息
@@ -396,6 +662,10 @@ export interface SetPasswordRequest {
     Password: string;
 }
 /**
+ * 盐位
+ */
+export declare type SaltLocation = null;
+/**
  * UpdateUserStatus请求参数结构体
  */
 export interface UpdateUserStatusRequest {
@@ -408,43 +678,40 @@ export interface UpdateUserStatusRequest {
       */
     UserId: string;
     /**
-      * NORMAL（正常）,LOCK（锁定）,FREEZE（冻结）,请传英文大写字母
+      * 用户状态
+
+<li> **NORMAL** </li>	  正常
+<li> **LOCK** </li>  锁定
+<li> **FREEZE** </li>	  冻结
       */
     Status: string;
 }
 /**
- * 查询条件
+ * ListJobs返回参数结构体
  */
-export interface Filter {
+export interface ListJobsResponse {
     /**
-      * key值
+      * 任务列表
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Key?: string;
+    JobSet: Array<Job>;
     /**
-      * value值
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Values?: Array<string>;
-    /**
-      * 逻辑值
-      */
-    Logic?: boolean;
+    RequestId?: string;
 }
 /**
- * ListUserByProperty请求参数结构体
+ * 导出属性映射
  */
-export interface ListUserByPropertyRequest {
+export interface ExportPropertyMap {
     /**
-      * 用户目录ID
+      * 用户属性code
       */
-    UserStoreId: string;
+    UserPropertyCode: string;
     /**
-      * 查询的属性（支持phoneNumber，email）
+      * 用户属性映射名称
       */
-    PropertyCode: string;
-    /**
-      * 属性值
-      */
-    PropertyValue: string;
+    ColumnName: string;
 }
 /**
  * LinkAccount返回参数结构体
@@ -501,22 +768,65 @@ export interface CreateUserRequest {
     CustomizationAttributes?: Array<MemberMap>;
 }
 /**
- * Map数据类型
+ * 密码盐
  */
-export interface MemberMap {
+export interface Salt {
     /**
-      * 健
+      * 盐值
       */
-    Name: string;
+    SaltValue?: string;
     /**
-      * 值
+      * 盐值位置
       */
-    Value: string;
+    SaltLocation?: SaltLocation;
+}
+/**
+ * DeleteUsers返回参数结构体
+ */
+export interface DeleteUsersResponse {
     /**
-      * 类型
-注意：此字段可能返回 null，表示取不到有效值。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Type?: string;
+    RequestId?: string;
+}
+/**
+ * CreateApiImportUserJob请求参数结构体
+ */
+export interface CreateApiImportUserJobRequest {
+    /**
+      * 用户目录ID
+      */
+    UserStoreId: string;
+    /**
+      * 导入的用户数据
+      */
+    DataFlowUserCreateList: Array<ImportUser>;
+}
+/**
+ * CreateFileExportUserJob返回参数结构体
+ */
+export interface CreateFileExportUserJobResponse {
+    /**
+      * 数据流任务
+      */
+    Job: Job;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * CreateApiImportUserJob返回参数结构体
+ */
+export interface CreateApiImportUserJobResponse {
+    /**
+      * 数据流任务
+      */
+    Job: Job;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * LinkAccount请求参数结构体
@@ -535,9 +845,30 @@ export interface LinkAccountRequest {
       */
     SecondaryUserId: string;
     /**
-      * 融合属性(PHONENUMBER,EMAIL)
+      * 融合属性
+
+<li> **PHONENUMBER** </li>	  手机号码
+<li> **EMAIL** </li>  邮箱
       */
     UserLinkedOnAttribute: string;
+}
+/**
+ * Map数据类型
+ */
+export interface MemberMap {
+    /**
+      * 健
+      */
+    Name: string;
+    /**
+      * 值
+      */
+    Value: string;
+    /**
+      * 类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Type?: string;
 }
 /**
  * ListUser返回参数结构体

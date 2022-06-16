@@ -555,6 +555,15 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeStorageRegions", req, cb);
     }
     /**
+     * 1. 刷新指定的 URL 列表。
+2. URL 的域名必须已在云点播中注册。
+3. 单次请求最多指定20个 URL。
+4. 默认刷新配额为每天100000个 URL。
+     */
+    async RefreshUrlCache(req, cb) {
+        return this.request("RefreshUrlCache", req, cb);
+    }
+    /**
      * * 该接口用于业务服务器获取 [可靠回调](https://cloud.tencent.com/document/product/266/33779#.E5.8F.AF.E9.9D.A0.E5.9B.9E.E8.B0.83) 事件通知的状态。
 
      */
@@ -1028,6 +1037,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteImageSpriteTemplate(req, cb) {
         return this.request("DeleteImageSpriteTemplate", req, cb);
+    }
+    /**
+     * 当媒体文件的存储类型是归档存储或深度归档存储时，是不可访问的。如需访问，则需要调用本接口进行解冻，解冻后可访问的媒体文件是临时的，在有效期过后，则不可访问。
+     */
+    async RestoreMedia(req, cb) {
+        return this.request("RestoreMedia", req, cb);
     }
 }
 exports.Client = Client;

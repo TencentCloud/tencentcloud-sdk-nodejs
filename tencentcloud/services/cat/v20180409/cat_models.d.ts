@@ -630,7 +630,7 @@ export interface NodeDefine {
       */
     Location: number;
     /**
-      * 节点类型
+      * 节点类型  如果为base 则为可用性拨测点，为空则为高级拨测点
 注意：此字段可能返回 null，表示取不到有效值。
       */
     CodeType: string;

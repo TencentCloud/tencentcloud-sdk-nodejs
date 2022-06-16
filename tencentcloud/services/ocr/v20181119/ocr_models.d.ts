@@ -4347,6 +4347,10 @@ export interface RecognizeHealthCodeOCRResponse {
       */
     TestingTime: string;
     /**
+      * 疫苗接种信息，返回接种针数或接种情况（允许返回空值）
+      */
+    Vaccination: string;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;

@@ -34,6 +34,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteUsers", req, cb);
     }
     /**
+     * 查询任务详情
+     */
+    async ListJobs(req, cb) {
+        return this.request("ListJobs", req, cb);
+    }
+    /**
      * 更新用户
      */
     async UpdateUser(req, cb) {
@@ -74,6 +80,18 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async SetPassword(req, cb) {
         return this.request("SetPassword", req, cb);
+    }
+    /**
+     * 新建文件导出用户任务
+     */
+    async CreateFileExportUserJob(req, cb) {
+        return this.request("CreateFileExportUserJob", req, cb);
+    }
+    /**
+     * 新建接口导入用户任务
+     */
+    async CreateApiImportUserJob(req, cb) {
+        return this.request("CreateApiImportUserJob", req, cb);
     }
     /**
      * 账号融合

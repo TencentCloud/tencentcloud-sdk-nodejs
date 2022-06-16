@@ -251,21 +251,43 @@ export interface DescribeWebManagedRulesAttackEventsResponse {
 }
 
 /**
- * 浏览器缓存规则配置，用于设置 MaxAge 默认值，默认为关闭状态
+ * DescribeTopL7CacheData请求参数结构体
  */
-export interface MaxAge {
+export interface DescribeTopL7CacheDataRequest {
   /**
-      * MaxAge 时间设置，单位秒，最大365天
-注意：时间为0，即不缓存。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  MaxAgeTime?: number
+   * RFC3339标准，客户端时间
+   */
+  StartTime: string
 
   /**
-      * 是否遵循源站，on或off，开启时忽略时间设置。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  FollowOrigin?: string
+   * RFC3339标准，客户端时间
+   */
+  EndTime: string
+
+  /**
+   * 时序类访问流量指标
+   */
+  MetricName: string
+
+  /**
+   * topN,填0时返回全量数据
+   */
+  Limit: number
+
+  /**
+   * 时间间隔，选填{min, 5min, hour, day, week}
+   */
+  Interval: string
+
+  /**
+   * ZoneId数组
+   */
+  ZoneIds?: Array<string>
+
+  /**
+   * 筛选条件
+   */
+  Filters?: Array<Filter>
 }
 
 /**
@@ -2898,6 +2920,32 @@ export interface CreateLoadBalancingResponse {
 }
 
 /**
+ * DescribeTopL7CacheData返回参数结构体
+ */
+export interface DescribeTopL7CacheDataResponse {
+  /**
+      * top详细数据
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Data: Array<TopDataRecord>
+
+  /**
+   * 查询维度
+   */
+  Type: string
+
+  /**
+   * 查询指标
+   */
+  MetricName: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeOverviewL7Data请求参数结构体
  */
 export interface DescribeOverviewL7DataRequest {
@@ -3857,6 +3905,41 @@ export interface RateLimitConfig {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Template?: RateLimitTemplate
+}
+
+/**
+ * DescribeTimingL7CacheData请求参数结构体
+ */
+export interface DescribeTimingL7CacheDataRequest {
+  /**
+   * RFC3339标准，客户端时间
+   */
+  StartTime: string
+
+  /**
+   * RFC3339标准，客户端时间
+   */
+  EndTime: string
+
+  /**
+   * 时序类访问流量指标列表
+   */
+  MetricNames: Array<string>
+
+  /**
+   * 时间间隔，选填{min, 5min, hour, day, week}
+   */
+  Interval: string
+
+  /**
+   * 站点id列表
+   */
+  ZoneIds?: Array<string>
+
+  /**
+   * 筛选条件
+   */
+  Filters?: Array<Filter>
 }
 
 /**
@@ -5309,7 +5392,7 @@ export interface DescribeWebManagedRulesAttackEventsRequest {
   PageNo: number
 
   /**
-   * ddos策略组id 集合
+   * ddos策略组id列表
    */
   PolicyIds?: Array<number>
 
@@ -5319,7 +5402,7 @@ export interface DescribeWebManagedRulesAttackEventsRequest {
   ZoneIds?: Array<string>
 
   /**
-   * 协议类型,{tcp,udp,all}
+   * 子域名列表
    */
   Domains?: Array<string>
 
@@ -5835,6 +5918,32 @@ export interface DescribeSecurityPolicyListRequest {
    * 一级域名
    */
   ZoneId: string
+}
+
+/**
+ * DescribeTimingL7CacheData返回参数结构体
+ */
+export interface DescribeTimingL7CacheDataResponse {
+  /**
+      * 详细数据
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Data: Array<TimingDataRecord>
+
+  /**
+   * 查询维度
+   */
+  Type: string
+
+  /**
+   * 时间间隔
+   */
+  Interval: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -6460,6 +6569,24 @@ smart_status_observe-观察处置
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Mode?: string
+}
+
+/**
+ * 浏览器缓存规则配置，用于设置 MaxAge 默认值，默认为关闭状态
+ */
+export interface MaxAge {
+  /**
+      * MaxAge 时间设置，单位秒，最大365天
+注意：时间为0，即不缓存。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MaxAgeTime?: number
+
+  /**
+      * 是否遵循源站，on或off，开启时忽略时间设置。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FollowOrigin?: string
 }
 
 /**
@@ -8225,7 +8352,7 @@ export interface DescribeOriginGroupDetailRequest {
  */
 export interface DescribeDDosAttackEventDetailRequest {
   /**
-   * 时间id
+   * 事件id
    */
   EventId: string
 }

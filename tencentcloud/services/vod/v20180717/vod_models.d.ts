@@ -91,7 +91,7 @@ export interface CreateStorageRegionRequest {
       */
     StorageRegion: string;
     /**
-      * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+      * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
       */
     SubAppId?: number;
 }
@@ -145,7 +145,7 @@ export interface UserDefineOcrTextReviewTemplateInfoForUpdate {
  */
 export interface DescribeAllClassRequest {
     /**
-      * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+      * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
       */
     SubAppId?: number;
 }
@@ -158,13 +158,13 @@ export interface WeChatMiniProgramPublishRequest {
       */
     FileId: string;
     /**
-      * 发布视频所对应的转码模板 ID，为0代表原始视频。
-      */
-    SourceDefinition?: number;
-    /**
       * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
       */
     SubAppId?: number;
+    /**
+      * 发布视频所对应的转码模板 ID，为0代表原始视频。
+      */
+    SourceDefinition?: number;
 }
 /**
  * 智能分类任务输入类型
@@ -655,11 +655,11 @@ export interface CreateImageProcessingTemplateRequest {
  */
 export interface ModifyDefaultStorageRegionRequest {
     /**
-      * 默认的存储地域，必须是已经开通的地域」，建议改成「默认的存储地域，必须是已经开通的地域（通过 DescribeStorageRegions 接口查询）。
+      * 默认的存储地域，必须是已经开通的地域（通过 DescribeStorageRegions 接口查询）。
       */
     StorageRegion: string;
     /**
-      * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+      * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
       */
     SubAppId?: number;
 }
@@ -1080,6 +1080,19 @@ export interface UserDefineFaceReviewTemplateInfo {
     ReviewConfidence?: number;
 }
 /**
+ * RefreshUrlCache请求参数结构体
+ */
+export interface RefreshUrlCacheRequest {
+    /**
+      * 刷新的 URL 列表，单次最多指定20个 URL。
+      */
+    Urls: Array<string>;
+    /**
+      * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+      */
+    SubAppId?: number;
+}
+/**
  * 智能识别模板详情
  */
 export interface ContentReviewTemplateItem {
@@ -1306,23 +1319,31 @@ export interface DescribeStorageDataResponse {
     /**
       * 当前媒体总量。
       */
-    MediaCount?: number;
+    MediaCount: number;
     /**
       * 当前总存储量，单位是字节。
       */
-    TotalStorage?: number;
-    /**
-      * 当前低频存储量，单位是字节。
-      */
-    InfrequentStorage?: number;
+    TotalStorage: number;
     /**
       * 当前标准存储量，单位是字节。
       */
-    StandardStorage?: number;
+    StandardStorage: number;
+    /**
+      * 当前低频存储量，单位是字节。
+      */
+    InfrequentStorage: number;
+    /**
+      * 当前归档存储量，单位是字节。
+      */
+    ArchiveStorage: number;
+    /**
+      * 当前深度归档存储量，单位是字节。
+      */
+    DeepArchiveStorage: number;
     /**
       * 各计费区域的存储用量。
       */
-    StorageStat?: Array<StorageStatData>;
+    StorageStat: Array<StorageStatData>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1391,7 +1412,7 @@ export interface DescribeDailyMediaPlayStatResponse {
  */
 export interface ModifySubAppIdInfoRequest {
     /**
-      * 子应用 ID。
+      * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
       */
     SubAppId: number;
     /**
@@ -1496,7 +1517,7 @@ export interface ExecuteFunctionResponse {
     /**
       * 处理结果打包后的字符串，具体与后台一同协调。
       */
-    Result?: string;
+    Result: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1526,6 +1547,10 @@ export interface ComposeMediaRequest {
       */
     Output: ComposeMediaOutput;
     /**
+      * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+      */
+    SubAppId?: number;
+    /**
       * 制作视频文件时使用的画布。
       */
     Canvas?: Canvas;
@@ -1537,10 +1562,6 @@ export interface ComposeMediaRequest {
       * 用于任务去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
       */
     SessionId?: string;
-    /**
-      * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
-      */
-    SubAppId?: number;
 }
 /**
  * 视频内容识别模板详情
@@ -1765,7 +1786,7 @@ export interface DescribeDailyMediaPlayStatRequest {
       */
     EndDate: string;
     /**
-      * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+      * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
       */
     SubAppId?: number;
 }
@@ -1982,7 +2003,7 @@ export interface DeleteSuperPlayerConfigRequest {
       */
     Name: string;
     /**
-      * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+      * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
       */
     SubAppId?: number;
 }
@@ -2207,6 +2228,15 @@ export interface AiRecognitionTaskOcrWordsResultOutput {
     ResultSetFileUrlExpireTime: string;
 }
 /**
+ * RefreshUrlCache返回参数结构体
+ */
+export interface RefreshUrlCacheResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 视频拼接任务信息，该结构仅用于对 2017 版[视频拼接](https://cloud.tencent.com/document/product/266/7821)接口发起的任务。
  */
 export interface ConcatTask2017 {
@@ -2294,7 +2324,7 @@ export interface AttachMediaSubtitlesRequest {
       */
     SubtitleIds: Array<string>;
     /**
-      * 点播[子应用](/document/product/266/14574) ID 。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+      * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
       */
     SubAppId?: number;
 }
@@ -2522,7 +2552,7 @@ export interface ModifyVodDomainAccelerateConfigRequest {
       */
     Status: string;
     /**
-      * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+      * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
       */
     SubAppId?: number;
 }
@@ -2685,7 +2715,7 @@ export interface ForbidMediaDistributionRequest {
       */
     Operation: string;
     /**
-      * 点播[子应用](/document/product/266/14574) ID 。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+      * <b>点播[子应用](/document/product/266/14574) ID 。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
       */
     SubAppId?: number;
 }
@@ -2877,6 +2907,10 @@ export interface ModifyMediaInfoRequest {
       */
     FileId: string;
     /**
+      * <b>点播[子应用](/document/product/266/14574) ID 。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+      */
+    SubAppId?: number;
+    /**
       * 媒体文件名称，最长 64 个字符。
       */
     Name?: string;
@@ -2935,10 +2969,6 @@ export interface ModifyMediaInfoRequest {
 同一个请求里，ClearSubtitles 与 AddSubtitles不能同时出现。
       */
     ClearSubtitles?: number;
-    /**
-      * 点播[子应用](/document/product/266/14574) ID 。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
-      */
-    SubAppId?: number;
 }
 /**
  * DeleteTranscodeTemplate请求参数结构体
@@ -3236,6 +3266,10 @@ export interface CreateVodDomainRequest {
       */
     Domain: string;
     /**
+      * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+      */
+    SubAppId?: number;
+    /**
       * 需要开启 CDN 加速的区域：
 <li>Chinese Mainland：中国境内（不包含港澳台）。</li>
 <li>Outside Chinese Mainland: 中国境外。</li>
@@ -3243,10 +3277,6 @@ export interface CreateVodDomainRequest {
 如果没有设置 AccelerateArea， 点播会根据用户在腾讯云设置的地域信息自动开通中国境内或者中国境外的 CDN 加速。开启中国境内加速的域名，需要先[备案域名](/document/product/243/18905)。
       */
     AccelerateArea?: string;
-    /**
-      * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
-      */
-    SubAppId?: number;
 }
 /**
  * 文本全文本识别任务控制参数
@@ -3272,6 +3302,10 @@ export interface ProcessMediaByProcedureRequest {
       */
     ProcedureName: string;
     /**
+      * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+      */
+    SubAppId?: number;
+    /**
       * 任务流的优先级，数值越大优先级越高，取值范围是-10到10，不填代表0。
       */
     TasksPriority?: number;
@@ -3291,10 +3325,6 @@ export interface ProcessMediaByProcedureRequest {
       * 保留字段，特殊用途时使用。
       */
     ExtInfo?: string;
-    /**
-      * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
-      */
-    SubAppId?: number;
 }
 /**
  * 点播文件雪碧图信息
@@ -3714,6 +3744,10 @@ export interface LiveRealTimeClipRequest {
       */
     EndTime: string;
     /**
+      * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+      */
+    SubAppId?: number;
+    /**
       * 是否固化。0 不固化，1 固化。默认不固化。
       */
     IsPersistence?: number;
@@ -3737,10 +3771,6 @@ export interface LiveRealTimeClipRequest {
       * 系统保留字段，请勿填写。
       */
     ExtInfo?: string;
-    /**
-      * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
-      */
-    SubAppId?: number;
 }
 /**
  * DeleteAdaptiveDynamicStreamingTemplate请求参数结构体
@@ -3856,15 +3886,15 @@ export interface SimpleHlsClipResponse {
     /**
       * 裁剪后的视频地址。
       */
-    Url?: string;
+    Url: string;
     /**
       * 裁剪后的视频元信息。目前`Size`，`Rotate`，`VideoDuration`，`AudioDuration` 几个字段暂时缺省，没有真实数据。
       */
-    MetaData?: MediaMetaData;
+    MetaData: MediaMetaData;
     /**
       * 剪辑固化后的视频的媒体文件的唯一标识。
       */
-    FileId?: string;
+    FileId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3891,6 +3921,10 @@ export interface EditMediaRequest {
       * 输入视频的类型，可以取的值为  File，Stream 两种。
       */
     InputType: string;
+    /**
+      * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+      */
+    SubAppId?: number;
     /**
       * 输入的视频文件信息，当 InputType 为 File 时必填。
       */
@@ -3929,10 +3963,6 @@ export interface EditMediaRequest {
       * 保留字段，特殊用途时使用。
       */
     ExtInfo?: string;
-    /**
-      * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
-      */
-    SubAppId?: number;
 }
 /**
  * License 请求次数统计数据。
@@ -4108,7 +4138,7 @@ export interface ForbidMediaDistributionResponse {
     /**
       * 不存在的文件 ID 列表。
       */
-    NotExistFileIdSet?: Array<string>;
+    NotExistFileIdSet: Array<string>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -5021,11 +5051,11 @@ export interface DescribeCDNUsageDataResponse {
     /**
       * 时间粒度，单位：分钟。
       */
-    DataInterval?: number;
+    DataInterval: number;
     /**
       * CDN 统计数据。
       */
-    Data?: Array<StatDataItem>;
+    Data: Array<StatDataItem>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -5177,7 +5207,7 @@ export interface ModifyMediaStorageClassRequest {
       */
     StorageClass: string;
     /**
-      * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+      * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
       */
     SubAppId?: number;
     /**
@@ -5454,6 +5484,15 @@ export interface MediaTrackItem {
     EmptyItem?: EmptyTrackItem;
 }
 /**
+ * RestoreMedia返回参数结构体
+ */
+export interface RestoreMediaResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 对视频按指定时间点截图任务结果类型
  */
 export interface MediaProcessTaskSnapshotByTimeOffsetResult {
@@ -5497,7 +5536,7 @@ export interface ManageTaskRequest {
       */
     OperationType: string;
     /**
-      * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+      * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
       */
     SubAppId?: number;
 }
@@ -5758,13 +5797,13 @@ export interface DeleteMediaRequest {
       */
     FileId: string;
     /**
+      * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+      */
+    SubAppId?: number;
+    /**
       * 指定本次需要删除的部分。默认值为 "[]", 表示删除媒体及其对应的全部视频处理文件。
       */
     DeleteParts?: Array<MediaDeleteItem>;
-    /**
-      * 点播[子应用](/document/product/266/14574) ID 。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
-      */
-    SubAppId?: number;
 }
 /**
  * CreateSuperPlayerConfig请求参数结构体
@@ -5774,6 +5813,10 @@ export interface CreateSuperPlayerConfigRequest {
       * 播放器配置名称，长度限制：64 个字符。只允许出现 [0-9a-zA-Z] 及 _- 字符（如 test_ABC-123），同一个用户该名称唯一。
       */
     Name: string;
+    /**
+      * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+      */
+    SubAppId?: number;
     /**
       * 播放的音视频类型，可选值：
 <li>AdaptiveDynamicStream：自适应码流输出；</li>
@@ -5837,10 +5880,6 @@ export interface CreateSuperPlayerConfigRequest {
       * 模板描述信息，长度限制：256 个字符。
       */
     Comment?: string;
-    /**
-      * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
-      */
-    SubAppId?: number;
 }
 /**
  * 图片水印模板
@@ -5914,6 +5953,10 @@ export interface SimpleHlsClipRequest {
       */
     Url: string;
     /**
+      * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+      */
+    SubAppId?: number;
+    /**
       * 裁剪的开始偏移时间，单位秒。默认 0，即从视频开头开始裁剪。负数表示距离视频结束多少秒开始裁剪。例如 -10 表示从倒数第 10 秒开始裁剪。
       */
     StartTimeOffset?: number;
@@ -5925,10 +5968,6 @@ export interface SimpleHlsClipRequest {
       * 是否固化。0 不固化，1 固化。默认不固化。
       */
     IsPersistence?: number;
-    /**
-      * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
-      */
-    SubAppId?: number;
 }
 /**
  * 指定删除点播视频时的删除内容
@@ -6031,7 +6070,7 @@ export interface DescribeDailyPlayStatFileListRequest {
       */
     EndTime: string;
     /**
-      * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+      * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
       */
     SubAppId?: number;
 }
@@ -6073,7 +6112,7 @@ export interface AsrWordsConfigureInfoForUpdate {
  */
 export interface DescribeStorageDataRequest {
     /**
-      * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+      * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
       */
     SubAppId?: number;
 }
@@ -6258,7 +6297,7 @@ export interface DescribeEventsStateResponse {
     /**
       * 待进行拉取的事件通知数，为近似值，约5秒延迟。
       */
-    CountOfEventsToPull?: number;
+    CountOfEventsToPull: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -6417,7 +6456,7 @@ export interface TerrorismConfigureInfoForUpdate {
  */
 export interface DescribeEventsStateRequest {
     /**
-      * 点播 [子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+      * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
       */
     SubAppId?: number;
 }
@@ -6864,6 +6903,10 @@ export interface ModifyVodDomainConfigRequest {
       */
     Domain: string;
     /**
+      * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+      */
+    SubAppId?: number;
+    /**
       * [Referer 防盗链](/document/product/266/14046)规则。
       */
     RefererAuthPolicy?: RefererAuthPolicy;
@@ -6871,10 +6914,6 @@ export interface ModifyVodDomainConfigRequest {
       * [Key 防盗链](/document/product/266/14047)规则。
       */
     UrlSignatureAuthPolicy?: UrlSignatureAuthPolicy;
-    /**
-      * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
-      */
-    SubAppId?: number;
 }
 /**
  * AI 样本管理，标签操作。
@@ -6986,7 +7025,7 @@ export interface CreateAIRecognitionTemplateResponse {
  */
 export interface ModifySubAppIdStatusRequest {
     /**
-      * 子应用 ID。
+      * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
       */
     SubAppId: number;
     /**
@@ -7151,6 +7190,10 @@ export interface SplitMediaRequest {
       */
     Segments: Array<SplitMediaTaskConfig>;
     /**
+      * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+      */
+    SubAppId?: number;
+    /**
       * 标识来源上下文，用于透传用户请求信息，在 SplitMediaComplete 回调和任务流状态变更回调将返回该字段值，最长 1000个字符。
       */
     SessionContext?: string;
@@ -7162,10 +7205,6 @@ export interface SplitMediaRequest {
       * 任务的优先级，数值越大优先级越高，取值范围是 -10 到 10，不填代表 0。
       */
     TasksPriority?: number;
-    /**
-      * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
-      */
-    SubAppId?: number;
 }
 /**
  * Ocr 文字涉及令人不安全的信息
@@ -7439,6 +7478,10 @@ export interface DescribeCdnLogsRequest {
       */
     EndTime: string;
     /**
+      * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+      */
+    SubAppId?: number;
+    /**
       * 分页拉取的最大返回结果数。默认值：100；最大值：1000。
       */
     Limit?: number;
@@ -7446,10 +7489,6 @@ export interface DescribeCdnLogsRequest {
       * 分页拉取的起始偏移量。默认值：0。
       */
     Offset?: number;
-    /**
-      * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
-      */
-    SubAppId?: number;
 }
 /**
  * 视频处理任务类型
@@ -7608,7 +7647,7 @@ export interface DescribeImageReviewUsageDataRequest {
       */
     EndTime: string;
     /**
-      * 点播 [子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+      * <b>点播 [子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
       */
     SubAppId?: number;
 }
@@ -8320,9 +8359,13 @@ export interface AiReviewPoliticalAsrTaskInput {
 export interface PullUploadRequest {
     /**
       * 要拉取的媒体 URL，暂不支持拉取 Dash 格式（可以支持 HLS）。
-支持的扩展名详见[媒体类型](https://cloud.tencent.com/document/product/266/9760#.E5.AA.92.E4.BD.93.E7.B1.BB.E5.9E.8B)。
+支持的扩展名详见[媒体类型](https://cloud.tencent.com/document/product/266/9760#.E5.AA.92.E4.BD.93.E7.B1.BB.E5.9E.8B)。请确保媒体 URL 可以访问。
       */
     MediaUrl: string;
+    /**
+      * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+      */
+    SubAppId?: number;
     /**
       * 媒体名称。
       */
@@ -8361,10 +8404,6 @@ export interface PullUploadRequest {
       * 保留字段，特殊用途时使用。
       */
     ExtInfo?: string;
-    /**
-      * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
-      */
-    SubAppId?: number;
     /**
       * 来源上下文，用于透传用户请求信息，[上传完成回调](/document/product/266/7830) 将返回该字段值，最长 250 个字符。
       */
@@ -8487,6 +8526,11 @@ export interface DescribeCDNUsageDataRequest {
       */
     DataType: string;
     /**
+      * <b>点播 [子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+当该字段为1时，表示以管理员身份查询所有子应用（含主应用）的用量合计，此时时间粒度只支持天粒度。</b>
+      */
+    SubAppId?: number;
+    /**
       * 用量数据的时间粒度，单位：分钟，取值有：
 <li>5：5 分钟粒度，返回指定查询时间内5分钟粒度的明细数据。</li>
 <li>60：小时粒度，返回指定查询时间内1小时粒度的数据。</li>
@@ -8498,11 +8542,6 @@ export interface DescribeCDNUsageDataRequest {
       * 域名列表。一次最多查询20个域名的用量数据。可以指定多个域名，查询这些域名叠加的用量数据。默认返回所有域名叠加的用量数据。
       */
     DomainNames?: Array<string>;
-    /**
-      * 点播 [子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
-当该字段为1时，表示以管理员身份查询所有子应用（含主应用）的用量合计，此时时间粒度只支持天粒度。
-      */
-    SubAppId?: number;
 }
 /**
  * 文本鉴别涉及令人反感的信息的任务控制参数
@@ -8565,7 +8604,7 @@ export interface DescribeReviewDetailsRequest {
       */
     EndTime: string;
     /**
-      * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+      * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
       */
     SubAppId?: number;
 }
@@ -8720,16 +8759,16 @@ export interface DescribeMediaPlayStatDetailsRequest {
       */
     EndTime: string;
     /**
+      * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+      */
+    SubAppId?: number;
+    /**
       * 统计时间粒度，有效值：
 <li>Hour：以小时为粒度。</li>
 <li>Day：以天为粒度。</li>
 默认按时间跨度决定，小于1天以小时为粒度，大于等于1天则以天为粒度。
       */
     Interval?: string;
-    /**
-      * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
-      */
-    SubAppId?: number;
 }
 /**
  * Asr 文字涉违禁信息
@@ -8767,7 +8806,7 @@ export interface CreateClassResponse {
     /**
       * 分类 ID
       */
-    ClassId?: number;
+    ClassId: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -9049,7 +9088,7 @@ export interface ModifyAIRecognitionTemplateRequest {
  */
 export interface DescribeStorageRegionsRequest {
     /**
-      * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+      * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
       */
     SubAppId?: number;
 }
@@ -9127,6 +9166,10 @@ export interface DescribeCDNStatDetailsRequest {
       */
     EndTime: string;
     /**
+      * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+      */
+    SubAppId?: number;
+    /**
       * 域名列表。一次最多查询20个域名的数据。默认返回所有域名叠加的用量数据。
       */
     DomainNames?: Array<string>;
@@ -9201,10 +9244,6 @@ export interface DescribeCDNStatDetailsRequest {
 当 StartTime 和 EndTime 时间跨度大于24小时时，DataInterval 默认为 1440。
       */
     DataInterval?: number;
-    /**
-      * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
-      */
-    SubAppId?: number;
 }
 /**
  * 文本全文识别输入。
@@ -9595,7 +9634,7 @@ export interface ModifyClassRequest {
       */
     ClassName: string;
     /**
-      * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+      * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
       */
     SubAppId?: number;
 }
@@ -9779,7 +9818,7 @@ export interface DeleteVodDomainRequest {
       */
     Domain: string;
     /**
-      * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+      * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
       */
     SubAppId?: number;
 }
@@ -10157,7 +10196,7 @@ export interface DeleteProcedureTemplateRequest {
       */
     Name: string;
     /**
-      * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+      * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
       */
     SubAppId?: number;
 }
@@ -10779,7 +10818,7 @@ export interface CreateClassRequest {
       */
     ClassName: string;
     /**
-      * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+      * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
       */
     SubAppId?: number;
 }
@@ -11115,7 +11154,7 @@ export interface DescribeStorageRegionsResponse {
     /**
       * 存储地域信息列表。
       */
-    StorageRegionInfos?: Array<StorageRegionInfo>;
+    StorageRegionInfos: Array<StorageRegionInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -11538,6 +11577,10 @@ export interface DescribeVodDomainsRequest {
  */
 export interface DescribeTasksRequest {
     /**
+      * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+      */
+    SubAppId?: number;
+    /**
       * 过滤条件：任务状态，可选值：WAITING（等待中）、PROCESSING（处理中）、FINISH（已完成）。
       */
     Status?: string;
@@ -11567,10 +11610,6 @@ export interface DescribeTasksRequest {
       * 翻页标识，分批拉取时使用：当单次请求无法拉取所有数据，接口将会返回 ScrollToken，下一次请求携带该 Token，将会从下一条记录开始获取。
       */
     ScrollToken?: string;
-    /**
-      * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
-      */
-    SubAppId?: number;
 }
 /**
  * DescribeReviewDetails返回参数结构体
@@ -11579,15 +11618,15 @@ export interface DescribeReviewDetailsResponse {
     /**
       * 发起内容智能识别次数。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 内容智能识别总时长。
       */
-    TotalDuration?: number;
+    TotalDuration: number;
     /**
       * 内容智能识别时长统计数据，每天一个数据。
       */
-    Data?: Array<StatDataItem>;
+    Data: Array<StatDataItem>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -11734,7 +11773,7 @@ export interface DescribeAllClassResponse {
       * 分类信息集合
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ClassInfoSet?: Array<MediaClassInfo>;
+    ClassInfoSet: Array<MediaClassInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -11959,17 +11998,15 @@ export interface CommitUploadResponse {
     /**
       * 媒体文件的唯一标识。
       */
-    FileId?: string;
+    FileId: string;
     /**
       * 媒体播放地址。
-注意：此字段可能返回 null，表示取不到有效值。
       */
-    MediaUrl?: string;
+    MediaUrl: string;
     /**
       * 媒体封面地址。
-注意：此字段可能返回 null，表示取不到有效值。
       */
-    CoverUrl?: string;
+    CoverUrl: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -12128,7 +12165,7 @@ export interface DeleteClassRequest {
       */
     ClassId: number;
     /**
-      * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+      * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
       */
     SubAppId?: number;
 }
@@ -12347,6 +12384,10 @@ export interface ExecuteFunctionRequest {
       */
     FunctionArg: string;
     /**
+      * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+      */
+    SubAppId?: number;
+    /**
       * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。
       */
     SessionContext?: string;
@@ -12358,10 +12399,6 @@ export interface ExecuteFunctionRequest {
       * 保留字段，特殊用途时使用。
       */
     ExtInfo?: string;
-    /**
-      * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
-      */
-    SubAppId?: number;
 }
 /**
  * ConfirmEvents返回参数结构体
@@ -12632,11 +12669,38 @@ export interface SplitMediaResponse {
     /**
       * 视频拆条的任务 ID，可以通过该 ID 查询拆条任务（任务类型为 SplitMedia）的状态。
       */
-    TaskId?: string;
+    TaskId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * RestoreMedia请求参数结构体
+ */
+export interface RestoreMediaRequest {
+    /**
+      * 媒体文件唯一标识列表。
+      */
+    FileIds: Array<string>;
+    /**
+      * 解冻出的临时媒体文件的可访问持续时长，单位为“天”。
+      */
+    RestoreDay?: number;
+    /**
+      * 解冻模式。当媒体文件当前的存储类型为归档存储时，有以下取值：
+<li>极速模式：Expedited，解冻任务在5分钟后完成。</li>
+<li>标准模式：Standard，解冻任务在5小时后完成 。</li>
+<li>批量模式：Bulk，，解冻任务在12小时后完成。</li>
+当媒体文件的存储类型为深度归档存储时，有以下取值：
+<li>标准模式：Standard，解冻任务在24小时后完成。</li>
+<li>批量模式：Bulk，解冻任务在48小时后完成。</li>
+      */
+    RestoreTier?: string;
+    /**
+      * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+      */
+    SubAppId?: number;
 }
 /**
  * PullEvents请求参数结构体
@@ -13164,7 +13228,7 @@ export interface ProcessMediaByProcedureResponse {
     /**
       * 任务 ID。
       */
-    TaskId?: string;
+    TaskId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -13177,7 +13241,7 @@ export interface PullUploadResponse {
     /**
       * 拉取上传视频的任务 ID，可以通过该 ID 查询拉取上传任务的状态。
       */
-    TaskId?: string;
+    TaskId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -13408,7 +13472,7 @@ export interface CommitUploadRequest {
       */
     VodSessionKey: string;
     /**
-      * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+      * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
       */
     SubAppId?: number;
 }
@@ -13856,6 +13920,11 @@ export interface DescribeStorageDetailsRequest {
       */
     EndTime: string;
     /**
+      * <b>点播 [子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+当该字段为1时，表示以管理员身份查询所有子应用（含主应用）的用量合计。</b>
+      */
+    SubAppId?: number;
+    /**
       * 统计时间粒度，有效值：
 <li>Minute：以5分钟为粒度。</li>
 <li>Day：以天为粒度。</li>
@@ -13880,11 +13949,6 @@ export interface DescribeStorageDetailsRequest {
 默认值为 TotalStorage。
       */
     StorageType?: string;
-    /**
-      * 点播 [子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
-当该字段为1时，表示以管理员身份查询所有子应用（含主应用）的用量合计。
-      */
-    SubAppId?: number;
     /**
       * 查询的存储区域，有效值：
 <li>Chinese Mainland：中国境内（不包含港澳台）。</li>

@@ -21,25 +21,38 @@ import {
   UpdateUserRequest,
   DescribeUserByIdRequest,
   ListUserRequest,
-  DeleteUsersRequest,
-  UpdateUserStatusResponse,
   ResetPasswordRequest,
+  ErrorDetails,
+  DeleteUsersRequest,
+  ImportUser,
+  UpdateUserStatusResponse,
+  FailedUsers,
+  ListUserByPropertyRequest,
   CreateUserResponse,
+  Filter,
   SetPasswordResponse,
   ListUserByPropertyResponse,
+  ListJobsRequest,
   DescribeUserByIdResponse,
-  DeleteUsersResponse,
+  Job,
+  CreateFileExportUserJobRequest,
   User,
   Pageable,
   ResetPasswordResponse,
   SetPasswordRequest,
+  SaltLocation,
   UpdateUserStatusRequest,
-  Filter,
-  ListUserByPropertyRequest,
+  ListJobsResponse,
+  ExportPropertyMap,
   LinkAccountResponse,
   CreateUserRequest,
-  MemberMap,
+  Salt,
+  DeleteUsersResponse,
+  CreateApiImportUserJobRequest,
+  CreateFileExportUserJobResponse,
+  CreateApiImportUserJobResponse,
   LinkAccountRequest,
+  MemberMap,
   ListUserResponse,
   UpdateUserResponse,
 } from "./ciam_models"
@@ -61,6 +74,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteUsersResponse) => void
   ): Promise<DeleteUsersResponse> {
     return this.request("DeleteUsers", req, cb)
+  }
+
+  /**
+   * 查询任务详情
+   */
+  async ListJobs(
+    req: ListJobsRequest,
+    cb?: (error: string, rep: ListJobsResponse) => void
+  ): Promise<ListJobsResponse> {
+    return this.request("ListJobs", req, cb)
   }
 
   /**
@@ -131,6 +154,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SetPasswordResponse) => void
   ): Promise<SetPasswordResponse> {
     return this.request("SetPassword", req, cb)
+  }
+
+  /**
+   * 新建文件导出用户任务
+   */
+  async CreateFileExportUserJob(
+    req: CreateFileExportUserJobRequest,
+    cb?: (error: string, rep: CreateFileExportUserJobResponse) => void
+  ): Promise<CreateFileExportUserJobResponse> {
+    return this.request("CreateFileExportUserJob", req, cb)
+  }
+
+  /**
+   * 新建接口导入用户任务
+   */
+  async CreateApiImportUserJob(
+    req: CreateApiImportUserJobRequest,
+    cb?: (error: string, rep: CreateApiImportUserJobResponse) => void
+  ): Promise<CreateApiImportUserJobResponse> {
+    return this.request("CreateApiImportUserJob", req, cb)
   }
 
   /**

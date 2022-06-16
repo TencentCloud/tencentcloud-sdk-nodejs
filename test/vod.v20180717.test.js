@@ -658,6 +658,16 @@ it("vod.v20180717.DescribeStorageRegions", async function () {
     }
 })
 
+it("vod.v20180717.RefreshUrlCache", async function () {
+    try {
+       const data = await client.RefreshUrlCache({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vod.v20180717.DescribeEventsState", async function () {
     try {
        const data = await client.DescribeEventsState({})
@@ -1271,6 +1281,16 @@ it("vod.v20180717.DescribeDailyPlayStatFileList", async function () {
 it("vod.v20180717.DeleteImageSpriteTemplate", async function () {
     try {
        const data = await client.DeleteImageSpriteTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vod.v20180717.RestoreMedia", async function () {
+    try {
+       const data = await client.RestoreMedia({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

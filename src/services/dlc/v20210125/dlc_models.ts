@@ -1174,7 +1174,7 @@ export interface DescribeScriptsRequest {
   SortBy?: string
 
   /**
-   * 排序方式，desc表示正序，asc表示反序
+   * 排序方式，desc表示正序，asc表示反序，默认asc
    */
   Sorting?: string
 

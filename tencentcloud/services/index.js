@@ -332,6 +332,8 @@ var tcaplusdb_1 = require("./tcaplusdb");
 Object.defineProperty(exports, "tcaplusdb", { enumerable: true, get: function () { return tcaplusdb_1.tcaplusdb; } });
 var tcb_1 = require("./tcb");
 Object.defineProperty(exports, "tcb", { enumerable: true, get: function () { return tcb_1.tcb; } });
+var tcbr_1 = require("./tcbr");
+Object.defineProperty(exports, "tcbr", { enumerable: true, get: function () { return tcbr_1.tcbr; } });
 var tcex_1 = require("./tcex");
 Object.defineProperty(exports, "tcex", { enumerable: true, get: function () { return tcex_1.tcex; } });
 var tci_1 = require("./tci");

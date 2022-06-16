@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { UpdateUserRequest, DescribeUserByIdRequest, ListUserRequest, DeleteUsersRequest, UpdateUserStatusResponse, ResetPasswordRequest, CreateUserResponse, SetPasswordResponse, ListUserByPropertyResponse, DescribeUserByIdResponse, DeleteUsersResponse, ResetPasswordResponse, SetPasswordRequest, UpdateUserStatusRequest, ListUserByPropertyRequest, LinkAccountResponse, CreateUserRequest, LinkAccountRequest, ListUserResponse, UpdateUserResponse } from "./ciam_models";
+import { UpdateUserRequest, DescribeUserByIdRequest, ListUserRequest, ResetPasswordRequest, DeleteUsersRequest, UpdateUserStatusResponse, ListUserByPropertyRequest, CreateUserResponse, SetPasswordResponse, ListUserByPropertyResponse, ListJobsRequest, DescribeUserByIdResponse, CreateFileExportUserJobRequest, ResetPasswordResponse, SetPasswordRequest, UpdateUserStatusRequest, ListJobsResponse, LinkAccountResponse, CreateUserRequest, DeleteUsersResponse, CreateApiImportUserJobRequest, CreateFileExportUserJobResponse, CreateApiImportUserJobResponse, LinkAccountRequest, ListUserResponse, UpdateUserResponse } from "./ciam_models";
 /**
  * ciam client
  * @class
@@ -11,6 +11,10 @@ export declare class Client extends AbstractClient {
      * 批量删除用户
      */
     DeleteUsers(req: DeleteUsersRequest, cb?: (error: string, rep: DeleteUsersResponse) => void): Promise<DeleteUsersResponse>;
+    /**
+     * 查询任务详情
+     */
+    ListJobs(req: ListJobsRequest, cb?: (error: string, rep: ListJobsResponse) => void): Promise<ListJobsResponse>;
     /**
      * 更新用户
      */
@@ -39,6 +43,14 @@ export declare class Client extends AbstractClient {
      * 设置用户密码
      */
     SetPassword(req: SetPasswordRequest, cb?: (error: string, rep: SetPasswordResponse) => void): Promise<SetPasswordResponse>;
+    /**
+     * 新建文件导出用户任务
+     */
+    CreateFileExportUserJob(req: CreateFileExportUserJobRequest, cb?: (error: string, rep: CreateFileExportUserJobResponse) => void): Promise<CreateFileExportUserJobResponse>;
+    /**
+     * 新建接口导入用户任务
+     */
+    CreateApiImportUserJob(req: CreateApiImportUserJobRequest, cb?: (error: string, rep: CreateApiImportUserJobResponse) => void): Promise<CreateApiImportUserJobResponse>;
     /**
      * 账号融合
      */

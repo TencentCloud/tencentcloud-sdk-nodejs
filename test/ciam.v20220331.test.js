@@ -28,6 +28,16 @@ it("ciam.v20220331.DeleteUsers", async function () {
     }
 })
 
+it("ciam.v20220331.ListJobs", async function () {
+    try {
+       const data = await client.ListJobs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ciam.v20220331.UpdateUser", async function () {
     try {
        const data = await client.UpdateUser({})
@@ -91,6 +101,26 @@ it("ciam.v20220331.CreateUser", async function () {
 it("ciam.v20220331.SetPassword", async function () {
     try {
        const data = await client.SetPassword({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ciam.v20220331.CreateFileExportUserJob", async function () {
+    try {
+       const data = await client.CreateFileExportUserJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ciam.v20220331.CreateApiImportUserJob", async function () {
+    try {
+       const data = await client.CreateApiImportUserJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

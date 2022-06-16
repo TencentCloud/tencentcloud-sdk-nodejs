@@ -232,6 +232,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDDosAttackEventDetail", req, cb);
     }
     /**
+     * 七层查询缓存分析时序类流量数据
+     */
+    async DescribeTimingL7CacheData(req, cb) {
+        return this.request("DescribeTimingL7CacheData", req, cb);
+    }
+    /**
      * 获取负载均衡列表
      */
     async DescribeLoadBalancing(req, cb) {
@@ -248,6 +254,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeTimingL4Data(req, cb) {
         return this.request("DescribeTimingL4Data", req, cb);
+    }
+    /**
+     * 七层查询缓存分析top类流量数据
+     */
+    async DescribeTopL7CacheData(req, cb) {
+        return this.request("DescribeTopL7CacheData", req, cb);
     }
     /**
      * 扫描站点历史解析记录

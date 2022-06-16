@@ -26,7 +26,7 @@ import {
   DescribeWebManagedRulesTopDataResponse,
   DescribeOriginGroupResponse,
   DescribeWebManagedRulesAttackEventsResponse,
-  MaxAge,
+  DescribeTopL7CacheDataRequest,
   DeleteApplicationProxyResponse,
   Https,
   SecurityEntity,
@@ -122,6 +122,7 @@ import {
   TopNEntry,
   DescribeApplicationProxyResponse,
   CreateLoadBalancingResponse,
+  DescribeTopL7CacheDataResponse,
   DescribeOverviewL7DataRequest,
   SwitchConfig,
   IdentifyZoneResponse,
@@ -153,6 +154,7 @@ import {
   FailReason,
   CreateZoneRequest,
   RateLimitConfig,
+  DescribeTimingL7CacheDataRequest,
   DescribeSecurityPolicyListResponse,
   DescribePurgeTasksResponse,
   OriginRecordPrivateParameter,
@@ -214,6 +216,7 @@ import {
   ModifyOriginGroupRequest,
   ModifyApplicationProxyRuleStatusResponse,
   DescribeSecurityPolicyListRequest,
+  DescribeTimingL7CacheDataResponse,
   DescribeApplicationProxyDetailRequest,
   DeleteOriginGroupResponse,
   Header,
@@ -239,6 +242,7 @@ import {
   DescribeHostsCertificateResponse,
   DescribeZoneSettingResponse,
   AiRule,
+  MaxAge,
   DescribePurgeTasksRequest,
   QueryCondition,
   DescribeDnsDataRequest,
@@ -649,6 +653,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 七层查询缓存分析时序类流量数据
+   */
+  async DescribeTimingL7CacheData(
+    req: DescribeTimingL7CacheDataRequest,
+    cb?: (error: string, rep: DescribeTimingL7CacheDataResponse) => void
+  ): Promise<DescribeTimingL7CacheDataResponse> {
+    return this.request("DescribeTimingL7CacheData", req, cb)
+  }
+
+  /**
    * 获取负载均衡列表
    */
   async DescribeLoadBalancing(
@@ -676,6 +690,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTimingL4DataResponse) => void
   ): Promise<DescribeTimingL4DataResponse> {
     return this.request("DescribeTimingL4Data", req, cb)
+  }
+
+  /**
+   * 七层查询缓存分析top类流量数据
+   */
+  async DescribeTopL7CacheData(
+    req: DescribeTopL7CacheDataRequest,
+    cb?: (error: string, rep: DescribeTopL7CacheDataResponse) => void
+  ): Promise<DescribeTopL7CacheDataResponse> {
+    return this.request("DescribeTopL7CacheData", req, cb)
   }
 
   /**
