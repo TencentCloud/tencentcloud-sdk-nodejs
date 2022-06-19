@@ -68,6 +68,16 @@ it("dnspod.v20210323.DescribeDomainAliasList", async function () {
     }
 })
 
+it("dnspod.v20210323.DescribeSubdomainAnalytics", async function () {
+    try {
+       const data = await client.DescribeSubdomainAnalytics({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dnspod.v20210323.ModifyRecordStatus", async function () {
     try {
        const data = await client.ModifyRecordStatus({})
@@ -191,6 +201,16 @@ it("dnspod.v20210323.DescribeRecord", async function () {
 it("dnspod.v20210323.DescribeRecordLineList", async function () {
     try {
        const data = await client.DescribeRecordLineList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dnspod.v20210323.DescribeDomainAnalytics", async function () {
+    try {
+       const data = await client.DescribeDomainAnalytics({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

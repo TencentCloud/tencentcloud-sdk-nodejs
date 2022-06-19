@@ -664,7 +664,16 @@ export interface SetPasswordRequest {
 /**
  * 盐位
  */
-export declare type SaltLocation = null;
+export interface SaltLocation {
+    /**
+      * 密码加盐的类型（HEAD，TAIL，OTHER）
+      */
+    SaltLocationTypeEnum?: string;
+    /**
+      * 加盐规则
+      */
+    SaltLocationRule?: SaltLocationRule;
+}
 /**
  * UpdateUserStatus请求参数结构体
  */
@@ -851,6 +860,15 @@ export interface LinkAccountRequest {
 <li> **EMAIL** </li>  邮箱
       */
     UserLinkedOnAttribute: string;
+}
+/**
+ * 盐位规则
+ */
+export interface SaltLocationRule {
+    /**
+      * 表达式
+      */
+    Regex?: string;
 }
 /**
  * Map数据类型

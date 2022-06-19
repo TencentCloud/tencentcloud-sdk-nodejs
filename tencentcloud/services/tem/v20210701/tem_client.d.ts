@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { RestartApplicationPodResponse, DeleteApplicationRequest, CreateResourceRequest, ResumeDeployApplicationResponse, RestartApplicationResponse, StopApplicationRequest, DescribeDeployApplicationDetailRequest, DescribeApplicationPodsResponse, DeleteIngressRequest, RestartApplicationPodRequest, DescribeRelatedIngressesRequest, ModifyEnvironmentResponse, GenerateApplicationPackageDownloadUrlRequest, DeployApplicationRequest, ModifyIngressResponse, DescribeEnvironmentsResponse, ModifyIngressRequest, DescribeApplicationPodsRequest, CreateApplicationRequest, DescribeRelatedIngressesResponse, DescribeIngressesRequest, ModifyApplicationReplicasResponse, ModifyApplicationReplicasRequest, DescribeIngressesResponse, DeleteIngressResponse, GenerateApplicationPackageDownloadUrlResponse, DescribeIngressResponse, CreateCosTokenResponse, RollingUpdateApplicationByVersionResponse, RollingUpdateApplicationByVersionRequest, DescribeDeployApplicationDetailResponse, CreateResourceResponse, ModifyApplicationInfoRequest, ModifyApplicationInfoResponse, DeleteApplicationResponse, CreateEnvironmentResponse, RestartApplicationRequest, CreateApplicationResponse, RevertDeployApplicationRequest, ModifyEnvironmentRequest, RevertDeployApplicationResponse, DescribeIngressRequest, CreateCosTokenRequest, DescribeEnvironmentsRequest, StopApplicationResponse, ResumeDeployApplicationRequest, DeployApplicationResponse, CreateEnvironmentRequest } from "./tem_models";
+import { RestartApplicationPodResponse, DeleteApplicationRequest, CreateResourceRequest, ResumeDeployApplicationResponse, RestartApplicationResponse, DescribeApplicationsStatusResponse, DescribeDeployApplicationDetailRequest, DescribeApplicationPodsResponse, DeleteIngressRequest, RestartApplicationPodRequest, DescribeRelatedIngressesRequest, ModifyEnvironmentResponse, GenerateApplicationPackageDownloadUrlRequest, DeployApplicationRequest, ModifyIngressResponse, DescribeEnvironmentsResponse, ModifyIngressRequest, DescribeApplicationPodsRequest, CreateApplicationRequest, DescribeRelatedIngressesResponse, DescribeIngressesRequest, ModifyApplicationReplicasResponse, ModifyApplicationReplicasRequest, DescribeIngressesResponse, DeleteIngressResponse, GenerateApplicationPackageDownloadUrlResponse, DescribeIngressResponse, CreateCosTokenResponse, DescribeApplicationsStatusRequest, RollingUpdateApplicationByVersionResponse, RollingUpdateApplicationByVersionRequest, DescribeDeployApplicationDetailResponse, CreateResourceResponse, ModifyApplicationInfoRequest, ModifyApplicationInfoResponse, DeleteApplicationResponse, CreateEnvironmentResponse, RestartApplicationRequest, CreateApplicationResponse, RevertDeployApplicationRequest, ModifyEnvironmentRequest, RevertDeployApplicationResponse, StopApplicationRequest, DescribeIngressRequest, CreateCosTokenRequest, DescribeEnvironmentsRequest, StopApplicationResponse, ResumeDeployApplicationRequest, DeployApplicationResponse, CreateEnvironmentRequest } from "./tem_models";
 /**
  * tem client
  * @class
@@ -8,13 +8,17 @@ import { RestartApplicationPodResponse, DeleteApplicationRequest, CreateResource
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
     /**
-     * 修改应用实例数量
+     * 单环境下所有应用状态查看
      */
-    ModifyApplicationReplicas(req: ModifyApplicationReplicasRequest, cb?: (error: string, rep: ModifyApplicationReplicasResponse) => void): Promise<ModifyApplicationReplicasResponse>;
+    DescribeApplicationsStatus(req: DescribeApplicationsStatusRequest, cb?: (error: string, rep: DescribeApplicationsStatusResponse) => void): Promise<DescribeApplicationsStatusResponse>;
     /**
      * 创建或者更新 Ingress 规则
      */
     ModifyIngress(req: ModifyIngressRequest, cb?: (error: string, rep: ModifyIngressResponse) => void): Promise<ModifyIngressResponse>;
+    /**
+     * 修改应用实例数量
+     */
+    ModifyApplicationReplicas(req: ModifyApplicationReplicasRequest, cb?: (error: string, rep: ModifyApplicationReplicasResponse) => void): Promise<ModifyApplicationReplicasResponse>;
     /**
      * 服务删除
   - 停止当前运行服务

@@ -24,7 +24,9 @@ import {
   ModifySubdomainStatusRequest,
   CreateRecordBatchResponse,
   CreateDomainBatchRecord,
+  DomainAnalyticsInfo,
   DescribeBatchTaskRequest,
+  DomainAnalyticsDetail,
   DescribeDomainResponse,
   DescribeRecordLineListResponse,
   DomainInfo,
@@ -49,10 +51,12 @@ import {
   DomainAliasInfo,
   ModifyDomainLockRequest,
   ModifyDomainStatusRequest,
+  SubdomainAliasAnalyticsItem,
   ModifyDomainStatusResponse,
   AddRecordBatch,
   DescribeRecordRequest,
   CreateDomainGroupResponse,
+  DescribeSubdomainAnalyticsRequest,
   DeleteRecordRequest,
   DescribeDomainRequest,
   ModifyRecordStatusRequest,
@@ -60,6 +64,7 @@ import {
   DescribeRecordResponse,
   RecordInfo,
   CreateRecordBatchDetail,
+  DescribeSubdomainAnalyticsResponse,
   ModifyRecordResponse,
   ModifyDomainUnlockResponse,
   DescribeDomainLogListRequest,
@@ -76,15 +81,18 @@ import {
   RecordListItem,
   CreateDomainBatchResponse,
   ModifyDomainOwnerResponse,
+  SubdomainAnalyticsInfo,
   ModifyRecordBatchDetail,
   DescribeUserDetailResponse,
   CreateDomainRequest,
+  DomainAliasAnalyticsItem,
   DescribeDomainShareInfoResponse,
   ModifyDomainRemarkRequest,
   CreateDomainAliasResponse,
   DescribeRecordListRequest,
   DescribeDomainPurviewResponse,
   ModifySubdomainStatusResponse,
+  DescribeDomainAnalyticsResponse,
   ModifyRecordStatusResponse,
   CreateDomainGroupRequest,
   LineInfo,
@@ -105,6 +113,7 @@ import {
   ModifyDomainLockResponse,
   LockInfo,
   DescribeBatchTaskResponse,
+  DescribeDomainAnalyticsRequest,
   ModifyDynamicDNSResponse,
 } from "./dnspod_models"
 
@@ -165,6 +174,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDomainAliasListResponse) => void
   ): Promise<DescribeDomainAliasListResponse> {
     return this.request("DescribeDomainAliasList", req, cb)
+  }
+
+  /**
+   * 统计子域名的解析量，帮助您了解流量情况、时间段分布。支持查看近 3 个月内的统计情况。仅付费套餐域名可用。
+   */
+  async DescribeSubdomainAnalytics(
+    req: DescribeSubdomainAnalyticsRequest,
+    cb?: (error: string, rep: DescribeSubdomainAnalyticsResponse) => void
+  ): Promise<DescribeSubdomainAnalyticsResponse> {
+    return this.request("DescribeSubdomainAnalytics", req, cb)
   }
 
   /**
@@ -297,6 +316,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeRecordLineListResponse) => void
   ): Promise<DescribeRecordLineListResponse> {
     return this.request("DescribeRecordLineList", req, cb)
+  }
+
+  /**
+   * 统计各个域名的解析量，帮助您了解流量情况、时间段分布。支持查看近 3 个月内的统计情况
+   */
+  async DescribeDomainAnalytics(
+    req: DescribeDomainAnalyticsRequest,
+    cb?: (error: string, rep: DescribeDomainAnalyticsResponse) => void
+  ): Promise<DescribeDomainAnalyticsResponse> {
+    return this.request("DescribeDomainAnalytics", req, cb)
   }
 
   /**

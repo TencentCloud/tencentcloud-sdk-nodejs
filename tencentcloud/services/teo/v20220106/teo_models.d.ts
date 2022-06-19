@@ -3333,7 +3333,9 @@ export interface DescribeTimingL7CacheDataRequest {
       */
     ZoneIds?: Array<string>;
     /**
-      * 筛选条件
+      * 筛选条件，筛选EO/源站响应如下：
+EO响应：{Key: "cacheType", Value: ["hit"], Operator: "equals"}；
+源站响应：{Key: "cacheType", Value: ["miss", "dynamic"], Operator: "equals"}
       */
     Filters?: Array<Filter>;
 }

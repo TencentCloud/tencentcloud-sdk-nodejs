@@ -1376,6 +1376,12 @@ RENEW_FLAG_DEFAULT：不自动续费
 注意：此字段可能返回 null，表示取不到有效值。
       */
   EsPrivateDomain: string
+
+  /**
+      * 集群的配置组信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EsConfigSets: Array<EsConfigSetInfo>
 }
 
 /**

@@ -125,8 +125,9 @@ export interface DescribeVsmsResponse {
  */
 export interface DescribeSupportedHsmResponse {
   /**
-   * 当前地域所支持的设备列表
-   */
+      * 当前地域所支持的设备列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
   DeviceTypes: Array<DeviceInfo>
 
   /**
@@ -150,7 +151,7 @@ export interface InquiryPriceBuyVsmRequest {
   PayMode: number
 
   /**
-   * 商品的时间大小
+   * 商品的时间大小，整型参数，举例：当TimeSpan为1，TImeUnit为m时，表示询价购买时长为1个月时的价格
    */
   TimeSpan: string
 
@@ -168,6 +169,11 @@ export interface InquiryPriceBuyVsmRequest {
    * 默认为CREATE，可选RENEW
    */
   Type?: string
+
+  /**
+   * Hsm服务类型，可选值virtualization、physical、GHSM、EHSM、SHSM
+   */
+  HsmType?: string
 }
 
 /**
@@ -268,7 +274,12 @@ export interface VsmInfo {
 /**
  * DescribeSupportedHsm请求参数结构体
  */
-export type DescribeSupportedHsmRequest = null
+export interface DescribeSupportedHsmRequest {
+  /**
+   * Hsm类型，可选值all、virtulization、GHSM、EHSM、SHSM
+   */
+  HsmType?: string
+}
 
 /**
  * 安全组基础信息
@@ -776,7 +787,7 @@ export interface UsgRuleDetail {
  */
 export interface InquiryPriceBuyVsmResponse {
   /**
-      * 原始总金额
+      * 原始总金额，浮点型参数，精确到小数点后两位，如：2000.99
 注意：此字段可能返回 null，表示取不到有效值。
       */
   TotalCost: number
@@ -800,7 +811,7 @@ export interface InquiryPriceBuyVsmResponse {
   TimeUnit: string
 
   /**
-      * 应付总金额
+      * 应付总金额，浮点型参数，精确到小数点后两位，如：2000.99
 注意：此字段可能返回 null，表示取不到有效值。
       */
   OriginalCost: number
@@ -905,6 +916,11 @@ export interface DescribeVsmsRequest {
    * 设备所属的厂商名称，根据厂商来进行筛选
    */
   Manufacturer?: string
+
+  /**
+   * Hsm服务类型，可选virtualization、physical、GHSM、EHSM、SHSM、all
+   */
+  HsmType?: string
 }
 
 /**

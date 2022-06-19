@@ -2249,6 +2249,13 @@ __ALIPAY__: 支付宝
       * 备注信息。
       */
     Remark?: string;
+    /**
+      * 环境类型。
+__release__:生产环境
+__sandbox__:沙箱环境
+_不填默认为生产环境_
+      */
+    Environment?: string;
 }
 /**
  * 支付方式费率及自定义表单项
@@ -7086,6 +7093,13 @@ export interface QueryOpenBankOrderDetailReceiptInfoRequest {
       * 渠道回单申请ID，与外部回单申请ID二者选填其一
       */
     ChannelApplyId?: string;
+    /**
+      * 环境类型。
+__release__:生产环境
+__sandbox__:沙箱环境
+_不填默认为生产环境_
+      */
+    Environment?: string;
 }
 /**
  * QueryOpenBankExternalSubAccountBookBalance返回参数结构体
@@ -7698,6 +7712,13 @@ __OPENBANK_PAYMENT__: openbank支付
 __SAFT_ISV__: 安心发支付
       */
     PaymentMethod: string;
+    /**
+      * 环境类型。
+__release__:生产环境
+__sandbox__:沙箱环境
+_不填默认为生产环境_
+      */
+    Environment?: string;
 }
 /**
  * QueryFlexPayeeInfo请求参数结构体
@@ -13862,6 +13883,13 @@ export interface ApplyOpenBankOrderDetailReceiptRequest {
       * 云企付平台订单号
       */
     ChannelOrderId: string;
+    /**
+      * 环境类型。
+__release__:生产环境
+__sandbox__:沙箱环境
+_不填默认为生产环境_
+      */
+    Environment?: string;
 }
 /**
  * GetBillDownloadUrl返回参数结构体
@@ -18448,6 +18476,13 @@ __SAFT_ISV__: 安心发支付
       * 渠道账本号ID。与OutAccountBookId二者选填其一。
       */
     ChannelAccountBookId?: string;
+    /**
+      * 环境类型。
+__release__:生产环境
+__sandbox__:沙箱环境
+_不填默认为生产环境_
+      */
+    Environment?: string;
 }
 /**
  * 汇出指令申请结果

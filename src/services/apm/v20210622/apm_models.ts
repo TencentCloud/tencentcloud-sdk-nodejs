@@ -526,6 +526,11 @@ export interface DescribeApmAgentRequest {
    * 语言
    */
   LanguageEnvironment?: string
+
+  /**
+   * 上报方式
+   */
+  ReportMethod?: string
 }
 
 /**
@@ -610,7 +615,7 @@ span.kind:
   InstanceId: string
 
   /**
-   * 视图名称
+   * 视图名称，不可自定义输入。支持：service_metric
    */
   ViewName: string
 

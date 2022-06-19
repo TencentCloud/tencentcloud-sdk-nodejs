@@ -146,7 +146,7 @@ export class Client extends AbstractClient {
    * 获取当前地域所支持的设备列表
    */
   async DescribeSupportedHsm(
-    req?: DescribeSupportedHsmRequest,
+    req: DescribeSupportedHsmRequest,
     cb?: (error: string, rep: DescribeSupportedHsmResponse) => void
   ): Promise<DescribeSupportedHsmResponse> {
     return this.request("DescribeSupportedHsm", req, cb)

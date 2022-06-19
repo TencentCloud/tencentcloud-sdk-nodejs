@@ -21,6 +21,7 @@ import {
   StopAutoCalloutTaskRequest,
   BindStaffSkillGroupListRequest,
   DescribePSTNActiveSessionListRequest,
+  UnbindStaffSkillGroupListRequest,
   IVRKeyPressedElement,
   CreateAutoCalloutTaskRequest,
   CreateSDKLoginTokenResponse,
@@ -31,7 +32,7 @@ import {
   TelCdrInfo,
   CreateUserSigRequest,
   PhoneNumBuyInfo,
-  UnbindStaffSkillGroupListRequest,
+  CreateCCCSkillGroupRequest,
   DescribeIMCdrsRequest,
   DescribeAutoCalloutTaskResponse,
   DescribeStaffStatusMetricsRequest,
@@ -39,6 +40,7 @@ import {
   SkillGroupItem,
   CreateUserSigResponse,
   DeleteStaffRequest,
+  CreateCCCSkillGroupResponse,
   DescribeTelSessionRequest,
   CallInMetrics,
   DescribeCCCBuyInfoListRequest,
@@ -249,6 +251,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCCCBuyInfoListResponse) => void
   ): Promise<DescribeCCCBuyInfoListResponse> {
     return this.request("DescribeCCCBuyInfoList", req, cb)
+  }
+
+  /**
+   * 创建技能组
+   */
+  async CreateCCCSkillGroup(
+    req: CreateCCCSkillGroupRequest,
+    cb?: (error: string, rep: CreateCCCSkillGroupResponse) => void
+  ): Promise<CreateCCCSkillGroupResponse> {
+    return this.request("CreateCCCSkillGroup", req, cb)
   }
 
   /**

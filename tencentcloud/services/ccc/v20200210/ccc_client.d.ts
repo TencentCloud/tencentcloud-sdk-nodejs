@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { StopAutoCalloutTaskRequest, BindStaffSkillGroupListRequest, DescribePSTNActiveSessionListRequest, CreateAutoCalloutTaskRequest, CreateSDKLoginTokenResponse, DescribeCallInMetricsResponse, DescribeStaffInfoListResponse, CreateAutoCalloutTaskResponse, CreateUserSigRequest, UnbindStaffSkillGroupListRequest, DescribeIMCdrsRequest, DescribeAutoCalloutTaskResponse, DescribeStaffStatusMetricsRequest, DescribeAutoCalloutTaskRequest, CreateUserSigResponse, DeleteStaffRequest, DescribeTelSessionRequest, DescribeCCCBuyInfoListRequest, DeleteStaffResponse, DescribeSkillGroupInfoListRequest, CreateStaffRequest, DescribeChatMessagesResponse, DescribePSTNActiveSessionListResponse, CreateCallOutSessionResponse, DescribeProtectedTelCdrResponse, DescribeAutoCalloutTasksRequest, DescribeChatMessagesRequest, DescribeTelSessionResponse, DescribeStaffInfoListRequest, DescribeTelCdrResponse, DescribeStaffStatusMetricsResponse, DescribeTelCallInfoResponse, StopAutoCalloutTaskResponse, DescribeSeatUserListResponse, DescribeSeatUserListRequest, CreateCallOutSessionRequest, BindStaffSkillGroupListResponse, DescribeAutoCalloutTasksResponse, DescribeTelCdrRequest, DescribeProtectedTelCdrRequest, CreateSDKLoginTokenRequest, DescribeTelCallInfoRequest, DescribeCCCBuyInfoListResponse, UnbindStaffSkillGroupListResponse, DescribeCallInMetricsRequest, CreateStaffResponse, DescribeSkillGroupInfoListResponse, DescribeIMCdrsResponse } from "./ccc_models";
+import { StopAutoCalloutTaskRequest, BindStaffSkillGroupListRequest, DescribePSTNActiveSessionListRequest, UnbindStaffSkillGroupListRequest, CreateAutoCalloutTaskRequest, CreateSDKLoginTokenResponse, DescribeCallInMetricsResponse, DescribeStaffInfoListResponse, CreateAutoCalloutTaskResponse, CreateUserSigRequest, CreateCCCSkillGroupRequest, DescribeIMCdrsRequest, DescribeAutoCalloutTaskResponse, DescribeStaffStatusMetricsRequest, DescribeAutoCalloutTaskRequest, CreateUserSigResponse, DeleteStaffRequest, CreateCCCSkillGroupResponse, DescribeTelSessionRequest, DescribeCCCBuyInfoListRequest, DeleteStaffResponse, DescribeSkillGroupInfoListRequest, CreateStaffRequest, DescribeChatMessagesResponse, DescribePSTNActiveSessionListResponse, CreateCallOutSessionResponse, DescribeProtectedTelCdrResponse, DescribeAutoCalloutTasksRequest, DescribeChatMessagesRequest, DescribeTelSessionResponse, DescribeStaffInfoListRequest, DescribeTelCdrResponse, DescribeStaffStatusMetricsResponse, DescribeTelCallInfoResponse, StopAutoCalloutTaskResponse, DescribeSeatUserListResponse, DescribeSeatUserListRequest, CreateCallOutSessionRequest, BindStaffSkillGroupListResponse, DescribeAutoCalloutTasksResponse, DescribeTelCdrRequest, DescribeProtectedTelCdrRequest, CreateSDKLoginTokenRequest, DescribeTelCallInfoRequest, DescribeCCCBuyInfoListResponse, UnbindStaffSkillGroupListResponse, DescribeCallInMetricsRequest, CreateStaffResponse, DescribeSkillGroupInfoListResponse, DescribeIMCdrsResponse } from "./ccc_models";
 /**
  * ccc client
  * @class
@@ -67,6 +67,10 @@ export declare class Client extends AbstractClient {
      * 获取用户购买信息列表
      */
     DescribeCCCBuyInfoList(req: DescribeCCCBuyInfoListRequest, cb?: (error: string, rep: DescribeCCCBuyInfoListResponse) => void): Promise<DescribeCCCBuyInfoListResponse>;
+    /**
+     * 创建技能组
+     */
+    CreateCCCSkillGroup(req: CreateCCCSkillGroupRequest, cb?: (error: string, rep: CreateCCCSkillGroupResponse) => void): Promise<CreateCCCSkillGroupResponse>;
     /**
      * 解绑坐席所属技能组
      */

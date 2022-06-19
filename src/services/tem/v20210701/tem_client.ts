@@ -24,7 +24,7 @@ import {
   CreateResourceRequest,
   ResumeDeployApplicationResponse,
   RestartApplicationResponse,
-  StopApplicationRequest,
+  DescribeApplicationsStatusResponse,
   HealthCheckConfig,
   TemDeployApplicationDetailInfo,
   DescribeDeployApplicationDetailRequest,
@@ -62,6 +62,7 @@ import {
   CreateCosTokenResponse,
   IngressRule,
   CronHorizontalAutoscaler,
+  DescribeApplicationsStatusRequest,
   RollingUpdateApplicationByVersionResponse,
   RollingUpdateApplicationByVersionRequest,
   RunVersionPod,
@@ -84,6 +85,7 @@ import {
   UseDefaultRepoParameters,
   RevertDeployApplicationResponse,
   DeployStrategyConf,
+  StopApplicationRequest,
   DescribeIngressRequest,
   CreateCosTokenRequest,
   DescribeEnvironmentsRequest,
@@ -93,6 +95,7 @@ import {
   ResumeDeployApplicationRequest,
   DeployApplicationResponse,
   StorageConf,
+  ServiceVersionBrief,
   CreateEnvironmentRequest,
   Pair,
 } from "./tem_models"
@@ -107,13 +110,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改应用实例数量
+   * 单环境下所有应用状态查看
    */
-  async ModifyApplicationReplicas(
-    req: ModifyApplicationReplicasRequest,
-    cb?: (error: string, rep: ModifyApplicationReplicasResponse) => void
-  ): Promise<ModifyApplicationReplicasResponse> {
-    return this.request("ModifyApplicationReplicas", req, cb)
+  async DescribeApplicationsStatus(
+    req: DescribeApplicationsStatusRequest,
+    cb?: (error: string, rep: DescribeApplicationsStatusResponse) => void
+  ): Promise<DescribeApplicationsStatusResponse> {
+    return this.request("DescribeApplicationsStatus", req, cb)
   }
 
   /**
@@ -124,6 +127,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyIngressResponse) => void
   ): Promise<ModifyIngressResponse> {
     return this.request("ModifyIngress", req, cb)
+  }
+
+  /**
+   * 修改应用实例数量
+   */
+  async ModifyApplicationReplicas(
+    req: ModifyApplicationReplicasRequest,
+    cb?: (error: string, rep: ModifyApplicationReplicasResponse) => void
+  ): Promise<ModifyApplicationReplicasResponse> {
+    return this.request("ModifyApplicationReplicas", req, cb)
   }
 
   /**

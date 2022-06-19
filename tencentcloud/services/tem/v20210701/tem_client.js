@@ -28,16 +28,22 @@ class Client extends abstract_client_1.AbstractClient {
         super("tem.tencentcloudapi.com", "2021-07-01", clientConfig);
     }
     /**
-     * 修改应用实例数量
+     * 单环境下所有应用状态查看
      */
-    async ModifyApplicationReplicas(req, cb) {
-        return this.request("ModifyApplicationReplicas", req, cb);
+    async DescribeApplicationsStatus(req, cb) {
+        return this.request("DescribeApplicationsStatus", req, cb);
     }
     /**
      * 创建或者更新 Ingress 规则
      */
     async ModifyIngress(req, cb) {
         return this.request("ModifyIngress", req, cb);
+    }
+    /**
+     * 修改应用实例数量
+     */
+    async ModifyApplicationReplicas(req, cb) {
+        return this.request("ModifyApplicationReplicas", req, cb);
     }
     /**
      * 服务删除

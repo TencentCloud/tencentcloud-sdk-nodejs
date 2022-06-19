@@ -118,6 +118,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCCCBuyInfoList", req, cb);
     }
     /**
+     * 创建技能组
+     */
+    async CreateCCCSkillGroup(req, cb) {
+        return this.request("CreateCCCSkillGroup", req, cb);
+    }
+    /**
      * 解绑坐席所属技能组
      */
     async UnbindStaffSkillGroupList(req, cb) {

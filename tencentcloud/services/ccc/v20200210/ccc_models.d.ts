@@ -46,6 +46,23 @@ export interface DescribePSTNActiveSessionListRequest {
     Limit: number;
 }
 /**
+ * UnbindStaffSkillGroupList请求参数结构体
+ */
+export interface UnbindStaffSkillGroupListRequest {
+    /**
+      * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
+      */
+    SdkAppId: number;
+    /**
+      * 客服邮箱
+      */
+    StaffEmail: string;
+    /**
+      * 解绑技能组列表
+      */
+    SkillGroupList: Array<number>;
+}
+/**
  * ivr 按键信息
  */
 export interface IVRKeyPressedElement {
@@ -435,21 +452,26 @@ export interface PhoneNumBuyInfo {
     State: number;
 }
 /**
- * UnbindStaffSkillGroupList请求参数结构体
+ * CreateCCCSkillGroup请求参数结构体
  */
-export interface UnbindStaffSkillGroupListRequest {
+export interface CreateCCCSkillGroupRequest {
     /**
-      * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
+      * 应用 ID（必填）
       */
     SdkAppId: number;
     /**
-      * 客服邮箱
+      * 技能组名称
       */
-    StaffEmail: string;
+    SkillGroupName: string;
     /**
-      * 解绑技能组列表
+      * 技能组类型0-电话，1-在线，3-音频，4-视频
       */
-    SkillGroupList: Array<number>;
+    SkillGroupType: number;
+    /**
+      * 技能组接待人数上限（该技能组中1个座席可接待的人数上限）默认为1。1、若技能组类型为在线，则接待上限可设置为1及以上
+2、若技能组类型为电话、音频、视频，则接待上线必须只能为1
+      */
+    MaxConcurrency?: number;
 }
 /**
  * DescribeIMCdrs请求参数结构体
@@ -598,6 +620,19 @@ export interface DeleteStaffRequest {
       * 待删除客服邮箱列表
       */
     StaffList: Array<string>;
+}
+/**
+ * CreateCCCSkillGroup返回参数结构体
+ */
+export interface CreateCCCSkillGroupResponse {
+    /**
+      * 技能组ID
+      */
+    SkillGroupId: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeTelSession请求参数结构体

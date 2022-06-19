@@ -58,6 +58,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDomainAliasList", req, cb);
     }
     /**
+     * 统计子域名的解析量，帮助您了解流量情况、时间段分布。支持查看近 3 个月内的统计情况。仅付费套餐域名可用。
+     */
+    async DescribeSubdomainAnalytics(req, cb) {
+        return this.request("DescribeSubdomainAnalytics", req, cb);
+    }
+    /**
      * 修改解析记录的状态
      */
     async ModifyRecordStatus(req, cb) {
@@ -136,6 +142,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeRecordLineList(req, cb) {
         return this.request("DescribeRecordLineList", req, cb);
+    }
+    /**
+     * 统计各个域名的解析量，帮助您了解流量情况、时间段分布。支持查看近 3 个月内的统计情况
+     */
+    async DescribeDomainAnalytics(req, cb) {
+        return this.request("DescribeDomainAnalytics", req, cb);
     }
     /**
      * 设置记录备注

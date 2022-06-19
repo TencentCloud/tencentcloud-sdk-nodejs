@@ -246,6 +246,36 @@ export interface CreateDomainBatchRecord {
 }
 
 /**
+ * 域名解析量统计查询信息
+ */
+export interface DomainAnalyticsInfo {
+  /**
+   * DATE:按天维度统计 HOUR:按小时维度统计
+   */
+  DnsFormat: string
+
+  /**
+   * 当前统计周期解析量总计
+   */
+  DnsTotal: number
+
+  /**
+   * 当前查询的域名
+   */
+  Domain: string
+
+  /**
+   * 当前统计周期开始时间
+   */
+  StartDate: string
+
+  /**
+   * 当前统计周期结束时间
+   */
+  EndDate: string
+}
+
+/**
  * DescribeBatchTask请求参数结构体
  */
 export interface DescribeBatchTaskRequest {
@@ -253,6 +283,27 @@ export interface DescribeBatchTaskRequest {
    * 任务ID
    */
   JobId: number
+}
+
+/**
+ * 当前统计维度解析量小计
+ */
+export interface DomainAnalyticsDetail {
+  /**
+   * 当前统计维度解析量小计
+   */
+  Num: number
+
+  /**
+   * 按天统计时，为统计日期
+   */
+  DateKey: string
+
+  /**
+      * 按小时统计时，为统计的当前时间的小时数(0-23)，例：HourKey为23时，统计周期为22点-23点的解析量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  HourKey: number
 }
 
 /**
@@ -982,6 +1033,21 @@ export interface ModifyDomainStatusRequest {
 }
 
 /**
+ * 子域名别名解析量统计信息
+ */
+export interface SubdomainAliasAnalyticsItem {
+  /**
+   * 子域名解析量统计查询信息
+   */
+  Info: SubdomainAnalyticsInfo
+
+  /**
+   * 当前统计维度解析量小计
+   */
+  Data: Array<DomainAnalyticsDetail>
+}
+
+/**
  * ModifyDomainStatus返回参数结构体
  */
 export interface ModifyDomainStatusResponse {
@@ -1080,6 +1146,41 @@ export interface CreateDomainGroupResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeSubdomainAnalytics请求参数结构体
+ */
+export interface DescribeSubdomainAnalyticsRequest {
+  /**
+   * 要查询解析量的域名
+   */
+  Domain: string
+
+  /**
+   * 查询的开始时间，格式：YYYY-MM-DD
+   */
+  StartDate: string
+
+  /**
+   * 查询的结束时间，格式：YYYY-MM-DD
+   */
+  EndDate: string
+
+  /**
+   * 要查询解析量的子域名
+   */
+  Subdomain: string
+
+  /**
+   * DATE:按天维度统计 HOUR:按小时维度统计
+   */
+  DnsFormat?: string
+
+  /**
+   * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+   */
+  DomainId?: number
 }
 
 /**
@@ -1303,6 +1404,31 @@ export interface CreateRecordBatchDetail {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   DomainId: number
+}
+
+/**
+ * DescribeSubdomainAnalytics返回参数结构体
+ */
+export interface DescribeSubdomainAnalyticsResponse {
+  /**
+   * 当前统计维度解析量小计
+   */
+  Data: Array<DomainAnalyticsDetail>
+
+  /**
+   * 子域名解析量统计查询信息
+   */
+  Info: SubdomainAnalyticsInfo
+
+  /**
+   * 子域名别名解析量统计信息
+   */
+  AliasData: Array<SubdomainAliasAnalyticsItem>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1780,6 +1906,41 @@ export interface ModifyDomainOwnerResponse {
 }
 
 /**
+ * 子域名解析量统计查询信息
+ */
+export interface SubdomainAnalyticsInfo {
+  /**
+   * DATE:按天维度统计 HOUR:按小时维度统计
+   */
+  DnsFormat: string
+
+  /**
+   * 当前统计周期解析量总计
+   */
+  DnsTotal: number
+
+  /**
+   * 当前查询的域名
+   */
+  Domain: string
+
+  /**
+   * 当前统计周期开始时间
+   */
+  StartDate: string
+
+  /**
+   * 当前统计周期结束时间
+   */
+  EndDate: string
+
+  /**
+   * 当前统计的子域名
+   */
+  Subdomain: string
+}
+
+/**
  * 批量添加记录返回结构
  */
 export interface ModifyRecordBatchDetail {
@@ -1864,6 +2025,21 @@ export interface CreateDomainRequest {
    * 是否星标域名，”yes”、”no” 分别代表是和否。
    */
   IsMark?: string
+}
+
+/**
+ * 域名别名解析量统计信息
+ */
+export interface DomainAliasAnalyticsItem {
+  /**
+   * 域名解析量统计查询信息
+   */
+  Info: DomainAnalyticsInfo
+
+  /**
+   * 当前统计维度解析量小计
+   */
+  Data: Array<DomainAnalyticsDetail>
 }
 
 /**
@@ -2005,6 +2181,31 @@ export interface DescribeDomainPurviewResponse {
  * ModifySubdomainStatus返回参数结构体
  */
 export interface ModifySubdomainStatusResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeDomainAnalytics返回参数结构体
+ */
+export interface DescribeDomainAnalyticsResponse {
+  /**
+   * 当前统计维度解析量小计
+   */
+  Data: Array<DomainAnalyticsDetail>
+
+  /**
+   * 域名解析量统计查询信息
+   */
+  Info: DomainAnalyticsInfo
+
+  /**
+   * 域名别名解析量统计信息
+   */
+  AliasData: Array<DomainAliasAnalyticsItem>
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2425,6 +2626,36 @@ export interface DescribeBatchTaskResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeDomainAnalytics请求参数结构体
+ */
+export interface DescribeDomainAnalyticsRequest {
+  /**
+   * 要查询解析量的域名
+   */
+  Domain: string
+
+  /**
+   * 查询的开始时间，格式：YYYY-MM-DD
+   */
+  StartDate: string
+
+  /**
+   * 查询的结束时间，格式：YYYY-MM-DD
+   */
+  EndDate: string
+
+  /**
+   * DATE:按天维度统计 HOUR:按小时维度统计
+   */
+  DnsFormat?: string
+
+  /**
+   * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+   */
+  DomainId?: number
 }
 
 /**

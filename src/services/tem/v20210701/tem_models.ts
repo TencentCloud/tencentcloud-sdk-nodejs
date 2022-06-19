@@ -147,23 +147,18 @@ export interface RestartApplicationResponse {
 }
 
 /**
- * StopApplication请求参数结构体
+ * DescribeApplicationsStatus返回参数结构体
  */
-export interface StopApplicationRequest {
+export interface DescribeApplicationsStatusResponse {
   /**
-   * 服务id
+   * 返回结果
    */
-  ApplicationId: string
+  Result: Array<ServiceVersionBrief>
 
   /**
-   * 来源渠道
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  SourceChannel?: number
-
-  /**
-   * 环境ID
-   */
-  EnvironmentId?: string
+  RequestId?: string
 }
 
 /**
@@ -1514,6 +1509,21 @@ export interface CronHorizontalAutoscaler {
 }
 
 /**
+ * DescribeApplicationsStatus请求参数结构体
+ */
+export interface DescribeApplicationsStatusRequest {
+  /**
+   * 来源渠道
+   */
+  SourceChannel?: number
+
+  /**
+   * 环境ID
+   */
+  EnvironmentId?: string
+}
+
+/**
  * RollingUpdateApplicationByVersion返回参数结构体
  */
 export interface RollingUpdateApplicationByVersionResponse {
@@ -2020,6 +2030,26 @@ export interface DeployStrategyConf {
 }
 
 /**
+ * StopApplication请求参数结构体
+ */
+export interface StopApplicationRequest {
+  /**
+   * 服务id
+   */
+  ApplicationId: string
+
+  /**
+   * 来源渠道
+   */
+  SourceChannel?: number
+
+  /**
+   * 环境ID
+   */
+  EnvironmentId?: string
+}
+
+/**
  * DescribeIngress请求参数结构体
  */
 export interface DescribeIngressRequest {
@@ -2247,6 +2277,90 @@ export interface StorageConf {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   StorageVolIp?: string
+}
+
+/**
+ * 服务版本信息列表
+ */
+export interface ServiceVersionBrief {
+  /**
+   * 版本名称
+   */
+  VersionName: string
+
+  /**
+   * 状态
+   */
+  Status: string
+
+  /**
+   * 是否启动弹性 -- 已废弃
+   */
+  EnableEs: number
+
+  /**
+   * 当前实例
+   */
+  CurrentInstances: number
+
+  /**
+   * version的id
+   */
+  VersionId: string
+
+  /**
+      * 日志输出配置 -- 已废弃
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LogOutputConf: LogOutputConf
+
+  /**
+      * 期望实例
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ExpectedInstances: number
+
+  /**
+      * 部署方式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DeployMode: string
+
+  /**
+      * 建构任务ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BuildTaskId: string
+
+  /**
+      * 环境ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EnvironmentId: string
+
+  /**
+      * 环境name
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EnvironmentName: string
+
+  /**
+      * 服务ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ApplicationId: string
+
+  /**
+      * 服务name
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ApplicationName: string
+
+  /**
+      * 是否正在发布中
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UnderDeploying: boolean
 }
 
 /**

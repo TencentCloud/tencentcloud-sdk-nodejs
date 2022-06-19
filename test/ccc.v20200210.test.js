@@ -168,6 +168,16 @@ it("ccc.v20200210.DescribeCCCBuyInfoList", async function () {
     }
 })
 
+it("ccc.v20200210.CreateCCCSkillGroup", async function () {
+    try {
+       const data = await client.CreateCCCSkillGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ccc.v20200210.UnbindStaffSkillGroupList", async function () {
     try {
        const data = await client.UnbindStaffSkillGroupList({})

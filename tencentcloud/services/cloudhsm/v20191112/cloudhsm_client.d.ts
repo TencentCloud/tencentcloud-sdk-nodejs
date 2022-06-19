@@ -42,7 +42,7 @@ export declare class Client extends AbstractClient {
     /**
      * 获取当前地域所支持的设备列表
      */
-    DescribeSupportedHsm(req?: DescribeSupportedHsmRequest, cb?: (error: string, rep: DescribeSupportedHsmResponse) => void): Promise<DescribeSupportedHsmResponse>;
+    DescribeSupportedHsm(req: DescribeSupportedHsmRequest, cb?: (error: string, rep: DescribeSupportedHsmResponse) => void): Promise<DescribeSupportedHsmResponse>;
     /**
      * 购买询价接口
      */

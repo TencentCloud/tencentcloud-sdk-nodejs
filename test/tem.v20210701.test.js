@@ -18,9 +18,9 @@ const client = new tencentcloud.tem.v20210701.Client({
 })
 describe("tem.v20210701.test.js", function () {
 
-it("tem.v20210701.ModifyApplicationReplicas", async function () {
+it("tem.v20210701.DescribeApplicationsStatus", async function () {
     try {
-       const data = await client.ModifyApplicationReplicas({})
+       const data = await client.DescribeApplicationsStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -31,6 +31,16 @@ it("tem.v20210701.ModifyApplicationReplicas", async function () {
 it("tem.v20210701.ModifyIngress", async function () {
     try {
        const data = await client.ModifyIngress({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tem.v20210701.ModifyApplicationReplicas", async function () {
+    try {
+       const data = await client.ModifyApplicationReplicas({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

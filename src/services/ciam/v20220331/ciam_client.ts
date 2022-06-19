@@ -52,6 +52,7 @@ import {
   CreateFileExportUserJobResponse,
   CreateApiImportUserJobResponse,
   LinkAccountRequest,
+  SaltLocationRule,
   MemberMap,
   ListUserResponse,
   UpdateUserResponse,
