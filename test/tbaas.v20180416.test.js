@@ -228,6 +228,16 @@ it("tbaas.v20180416.BlockByNumberHandler", async function () {
     }
 })
 
+it("tbaas.v20180416.QueryChainMakerDemoTransaction", async function () {
+    try {
+       const data = await client.QueryChainMakerDemoTransaction({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tbaas.v20180416.GetInvokeTx", async function () {
     try {
        const data = await client.GetInvokeTx({})
@@ -271,6 +281,16 @@ it("tbaas.v20180416.QueryChainMakerBlockTransaction", async function () {
 it("tbaas.v20180416.InitializeChaincodeForUser", async function () {
     try {
        const data = await client.InitializeChaincodeForUser({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tbaas.v20180416.QueryChainMakerDemoContract", async function () {
+    try {
+       const data = await client.QueryChainMakerDemoContract({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -328,6 +348,16 @@ it("tbaas.v20180416.SendTransactionHandler", async function () {
     }
 })
 
+it("tbaas.v20180416.InvokeChainMakerDemoContract", async function () {
+    try {
+       const data = await client.InvokeChainMakerDemoContract({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tbaas.v20180416.GetChaincodeCompileLogForUser", async function () {
     try {
        const data = await client.GetChaincodeCompileLogForUser({})
@@ -361,6 +391,16 @@ it("tbaas.v20180416.GetBlockList", async function () {
 it("tbaas.v20180416.Query", async function () {
     try {
        const data = await client.Query({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tbaas.v20180416.QueryChainMakerDemoBlockTransaction", async function () {
+    try {
+       const data = await client.QueryChainMakerDemoBlockTransaction({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -160,6 +160,12 @@ Bcos根据块高查询区块信息
         return this.request("BlockByNumberHandler", req, cb);
     }
     /**
+     * 通过交易ID查询长安链体验网络交易
+     */
+    async QueryChainMakerDemoTransaction(req, cb) {
+        return this.request("QueryChainMakerDemoTransaction", req, cb);
+    }
+    /**
      * Invoke异步调用结果查询
      */
     async GetInvokeTx(req, cb) {
@@ -188,6 +194,12 @@ Bcos根据块高查询区块信息
      */
     async InitializeChaincodeForUser(req, cb) {
         return this.request("InitializeChaincodeForUser", req, cb);
+    }
+    /**
+     * 调用长安链体验网络合约查询
+     */
+    async QueryChainMakerDemoContract(req, cb) {
+        return this.request("QueryChainMakerDemoContract", req, cb);
     }
     /**
      * 版本升级
@@ -226,6 +238,12 @@ Bcos发送交易
         return this.request("SendTransactionHandler", req, cb);
     }
     /**
+     * 调用长安链体验网络合约执行交易
+     */
+    async InvokeChainMakerDemoContract(req, cb) {
+        return this.request("InvokeChainMakerDemoContract", req, cb);
+    }
+    /**
      * 获取合约编译日志
      */
     async GetChaincodeCompileLogForUser(req, cb) {
@@ -248,6 +266,12 @@ Bcos发送交易
      */
     async Query(req, cb) {
         return this.request("Query", req, cb);
+    }
+    /**
+     * 查询长安链体验网络指定高度区块的交易
+     */
+    async QueryChainMakerDemoBlockTransaction(req, cb) {
+        return this.request("QueryChainMakerDemoBlockTransaction", req, cb);
     }
     /**
      * 版本升级
