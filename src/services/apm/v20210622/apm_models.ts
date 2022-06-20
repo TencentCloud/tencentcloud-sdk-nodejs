@@ -49,7 +49,7 @@ export interface ApmInstanceDetail {
   CreateUin: string
 
   /**
-      * 该实例已上报的服务数
+      * 该实例已上报的服务端应用数量
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ServiceCount: number
@@ -148,6 +148,18 @@ export interface ApmInstanceDetail {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   LogTopicID: string
+
+  /**
+      * 该实例已上报的客户端应用数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClientCount: number
+
+  /**
+      * 该实例已上报的总应用数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TotalCount: number
 }
 
 /**

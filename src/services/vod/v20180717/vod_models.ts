@@ -3496,6 +3496,16 @@ export interface DeleteTranscodeTemplateRequest {
 }
 
 /**
+ * 溯源水印参数
+ */
+export interface TraceWatermarkInput {
+  /**
+   * 水印模板 ID。
+   */
+  Definition: number
+}
+
+/**
  * 语音鉴别涉及令人反感的信息的任务控制参数。
  */
 export interface PornAsrReviewTemplateInfoForUpdate {
@@ -6178,6 +6188,11 @@ export interface ProcessMediaRequest {
   FileId: string
 
   /**
+   * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+   */
+  SubAppId?: number
+
+  /**
    * 视频处理类型任务参数。
    */
   MediaProcessTask?: MediaProcessTaskInput
@@ -6221,11 +6236,6 @@ export interface ProcessMediaRequest {
    * 保留字段，特殊用途时使用。
    */
   ExtInfo?: string
-
-  /**
-   * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
-   */
-  SubAppId?: number
 }
 
 /**
@@ -7390,6 +7400,11 @@ export interface AdaptiveDynamicStreamingTaskInput {
    * 水印列表，支持多张图片或文字水印，最大可支持 10 张。
    */
   WatermarkSet?: Array<WatermarkInput>
+
+  /**
+   * 溯源水印。
+   */
+  TraceWatermark?: TraceWatermarkInput
 
   /**
    * 字幕列表，元素为字幕 ID，支持多个字幕，最大可支持16个。
@@ -10515,9 +10530,9 @@ export interface TranscodeTaskInput {
   WatermarkSet?: Array<WatermarkInput>
 
   /**
-   * 马赛克列表，最大可支持 10 张。
+   * 溯源水印。
    */
-  MosaicSet?: Array<MosaicInput>
+  TraceWatermark?: TraceWatermarkInput
 
   /**
    * 片头片尾列表，支持多片头片尾，最大可支持 10 个。
@@ -10525,12 +10540,9 @@ export interface TranscodeTaskInput {
   HeadTailSet?: Array<HeadTailTaskInput>
 
   /**
-      * 转码后的视频的起始时间偏移，单位：秒。
-<li>不填或填0，表示转码后的视频从原始视频的起始位置开始；</li>
-<li>当数值大于0时（假设为 n），表示转码后的视频从原始视频的第 n 秒位置开始；</li>
-<li>当数值小于0时（假设为 -n），表示转码后的视频从原始视频结束 n 秒前的位置开始。</li>
-      */
-  StartTimeOffset?: number
+   * 马赛克列表，最大可支持 10 张。
+   */
+  MosaicSet?: Array<MosaicInput>
 
   /**
       * 转码后视频的终止时间偏移，单位：秒。
@@ -10539,6 +10551,14 @@ export interface TranscodeTaskInput {
 <li>当数值小于0时（假设为 -n），表示转码后的视频持续到原始视频结束 n 秒前终止。</li>
       */
   EndTimeOffset?: number
+
+  /**
+      * 转码后的视频的起始时间偏移，单位：秒。
+<li>不填或填0，表示转码后的视频从原始视频的起始位置开始；</li>
+<li>当数值大于0时（假设为 n），表示转码后的视频从原始视频的第 n 秒位置开始；</li>
+<li>当数值小于0时（假设为 -n），表示转码后的视频从原始视频结束 n 秒前的位置开始。</li>
+      */
+  StartTimeOffset?: number
 }
 
 /**

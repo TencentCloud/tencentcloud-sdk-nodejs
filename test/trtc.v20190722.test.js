@@ -108,9 +108,9 @@ it("trtc.v20190722.DescribeCallDetail", async function () {
     }
 })
 
-it("trtc.v20190722.MeasureTrtcMcuExternal", async function () {
+it("trtc.v20190722.ModifyCloudRecording", async function () {
     try {
-       const data = await client.MeasureTrtcMcuExternal({})
+       const data = await client.ModifyCloudRecording({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -141,16 +141,6 @@ it("trtc.v20190722.DescribeExternalTrtcMeasure", async function () {
 it("trtc.v20190722.StopMCUMixTranscodeByStrRoomId", async function () {
     try {
        const data = await client.StopMCUMixTranscodeByStrRoomId({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("trtc.v20190722.ModifyCloudRecording", async function () {
-    try {
-       const data = await client.ModifyCloudRecording({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

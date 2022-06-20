@@ -5472,6 +5472,21 @@ export interface ClusterCheckItem {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     AffectedVersion: string;
+    /**
+      * 忽略的资产数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IgnoredAssetNum: number;
+    /**
+      * 是否忽略该检测项
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IsIgnored: boolean;
+    /**
+      * 受影响评估
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RiskAssessment: string;
 }
 /**
  * DescribeAssetImageVulList返回参数结构体

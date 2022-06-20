@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribePublicConfigSummaryRequest, ModifyPathRewriteRequest, UpdateApiRateLimitRuleRequest, DeletePathRewritesResponse, DescribeUnitApiUseDetailRequest, DescribeApiVersionsResponse, StopContainerGroupResponse, DeletePathRewritesRequest, DeleteLaneResponse, DescribeGroupReleaseRequest, ContinueRunFailedTaskBatchRequest, DescribeSimpleClustersResponse, DeleteRepositoryResponse, DeleteApplicationResponse, UpdateRepositoryRequest, DescribePathRewriteResponse, DescribeConfigsResponse, ModifyContainerReplicasRequest, ReleaseFileConfigRequest, DescribeInvocationMetricDataDimensionResponse, SearchStdoutLogResponse, CreateGatewayApiResponse, DescribeFileConfigsResponse, DescribeApiVersionsRequest, DescribeGroupBindedGatewaysResponse, DescribeJvmMonitorRequest, UnbindApiGroupRequest, CreateNamespaceResponse, RedoTaskBatchRequest, DescribeTaskLastStatusRequest, ModifyUploadInfoResponse, CreateApiRateLimitRuleRequest, DescribeJvmMonitorResponse, DeleteServerlessGroupRequest, ChangeApiUsableStatusRequest, DescribeMicroservicesResponse, DescribeApiRateLimitRulesRequest, DescribeApiGroupsResponse, DeletePublicConfigRequest, DeleteNamespaceResponse, CreateMicroserviceRequest, ReleaseConfigResponse, DescribeUnitRuleResponse, DeleteImageTagsRequest, DescribeRepositoriesRequest, RollbackConfigRequest, CreateGatewayApiRequest, DescribeCreateGatewayApiStatusResponse, DeleteConfigResponse, DescribeGroupGatewaysRequest, UpdateApiRateLimitRuleResponse, DescribeGatewayAllGroupApisResponse, ModifyLaneRuleRequest, AddInstancesResponse, StartContainerGroupRequest, DescribeRepositoryResponse, UpdateHealthCheckSettingsRequest, EnableUnitRuleRequest, CreateClusterResponse, CreateMicroserviceResponse, StopGroupRequest, ShrinkGroupResponse, DescribeLanesResponse, CreateNamespaceRequest, DescribeClusterInstancesRequest, DescribeGroupBindedGatewaysRequest, DescribeRepositoryRequest, RedoTaskRequest, DeleteApiGroupResponse, DraftApiGroupRequest, CreateLaneResponse, UpdateApiTimeoutsResponse, DescribePkgsResponse, DescribeSimpleNamespacesResponse, DescribeContainerGroupDeployInfoResponse, DescribeOverviewInvocationRequest, DescribeProgramsRequest, DescribePublicConfigRequest, DescribeInovcationIndicatorsRequest, CreatePublicConfigResponse, CreateConfigResponse, DescribeCreateGatewayApiStatusRequest, RevocationPublicConfigResponse, DescribeConfigReleaseLogsRequest, ModifyContainerGroupRequest, UpdateRepositoryResponse, RollbackConfigResponse, RevocationConfigRequest, StartContainerGroupResponse, ModifyTaskRequest, DeleteUnitNamespacesResponse, DisableTaskRequest, DescribeStatisticsResponse, DescribeBasicResourceUsageResponse, CreateAllGatewayApiAsyncResponse, RemoveInstancesRequest, DeleteGroupResponse, DescribeSimpleApplicationsResponse, DeployContainerGroupRequest, DescribeSimpleApplicationsRequest, OperateApplicationTcrBindingRequest, UpdateUnitRuleRequest, ReleasePublicConfigResponse, ReleaseApiGroupResponse, CreateFileConfigRequest, UpdateApiRateLimitRulesRequest, DescribeGroupInstancesRequest, DescribeMsApiListRequest, DescribeUploadInfoResponse, DescribeMsApiListResponse, EnableTaskRequest, DisableTaskResponse, DescribeMicroserviceRequest, DescribePodInstancesResponse, DescribeInvocationMetricDataPointRequest, DescribeRepositoriesResponse, CreateGroupRequest, StopTaskBatchResponse, CreateContainGroupResponse, DescribeContainerGroupDetailResponse, DescribeGroupGatewaysResponse, RevocationConfigResponse, DeleteTaskResponse, DeleteMicroserviceRequest, RemoveInstancesResponse, DescribeContainerEventsRequest, DisableUnitRuleRequest, DescribeGroupResponse, DeleteContainerGroupResponse, DeleteServerlessGroupResponse, DeleteImageTagsResponse, CreateLaneRuleRequest, DisableUnitRouteResponse, ExecuteTaskRequest, DescribeApplicationResponse, DescribeConfigReleaseLogsResponse, DeletePublicConfigResponse, DescribeSimpleGroupsResponse, DescribeFlowLastBatchStateRequest, TerminateTaskFlowBatchResponse, ShrinkInstancesRequest, ShrinkInstancesResponse, DeleteLaneRuleResponse, DescribeApiRateLimitRulesResponse, AddClusterInstancesRequest, DescribeGroupUseDetailResponse, UpdateApiTimeoutsRequest, DescribeOverviewInvocationResponse, DescribeSimpleNamespacesRequest, ExecuteTaskFlowResponse, SearchBusinessLogRequest, ExpandGroupResponse, DescribePublicConfigsResponse, DescribeUnitNamespacesResponse, ContinueRunFailedTaskBatchResponse, DescribeSimpleClustersRequest, DescribeLaneRulesResponse, DescribeImageRepositoryRequest, DescribeApiGroupRequest, DescribeGatewayApisRequest, DescribeContainerGroupDetailRequest, DescribeGroupsWithPluginRequest, ModifyTaskResponse, SearchBusinessLogResponse, DeleteUnitNamespacesRequest, DescribeGroupRequest, BindPluginRequest, DeleteLaneRuleRequest, DescribeGroupUseDetailRequest, UpdateUnitRuleResponse, StartGroupResponse, DescribePathRewritesRequest, ShrinkGroupRequest, CreateLaneRuleResponse, CreateTaskResponse, DescribeContainerGroupsResponse, UpdateApiGroupResponse, DescribeGroupsWithPluginResponse, AddInstancesRequest, CreateApplicationRequest, DeployGroupRequest, CreateTaskFlowRequest, ModifyContainerReplicasResponse, UnbindApiGroupResponse, DescribeGroupReleaseResponse, DescribePathRewriteRequest, CreateApplicationResponse, DescribeInvocationMetricDataDimensionRequest, DeployGroupResponse, BindApiGroupResponse, DescribeGroupAttributeResponse, ModifyPathRewriteResponse, EnableUnitRuleResponse, DescribeEnabledUnitRuleResponse, UpdateApiGroupRequest, EnableUnitRouteResponse, DisableUnitRuleResponse, ExecuteTaskFlowRequest, TerminateTaskFlowBatchRequest, CreateUnitRuleResponse, DescribeTaskRecordsResponse, DescribeApiUseDetailResponse, ModifyUploadInfoRequest, DescribeGatewayApisResponse, DescribeUnitRuleRequest, UpdateGatewayApiResponse, DescribeInstancesResponse, ModifyLaneResponse, DescribeDownloadInfoRequest, DescribePublicConfigSummaryResponse, DescribePublicConfigReleaseLogsRequest, DescribeApplicationAttributeResponse, ModifyLaneRequest, DescribeLanesRequest, DescribeGatewayMonitorOverviewResponse, CreatePublicConfigRequest, CreateAllGatewayApiAsyncRequest, EnableTaskFlowResponse, DeleteUnitRuleResponse, DisableTaskFlowResponse, DescribeGatewayMonitorOverviewRequest, DescribeImageTagsResponse, BindPluginResponse, RedoTaskFlowBatchRequest, StopTaskExecuteRequest, DescribePkgsRequest, DescribeApplicationAttributeRequest, CreateTaskRequest, DescribePublicConfigResponse, DescribeUsableUnitNamespacesResponse, ReleaseFileConfigResponse, DescribeConfigResponse, DescribeContainerEventsResponse, DescribeTaskRecordsRequest, ModifyContainerGroupResponse, DeleteApplicationRequest, DescribeUnitNamespacesRequest, DeleteTaskRequest, CreateUnitRuleRequest, DescribePluginInstancesRequest, DescribeInovcationIndicatorsResponse, CreateFileConfigResponse, CreateConfigRequest, DescribeUploadInfoRequest, DescribeUnitRulesResponse, UpdateGatewayApiRequest, DescribeInstancesRequest, DescribeApiGroupsRequest, DeleteUnitRuleRequest, DeletePkgsResponse, DescribeGroupsResponse, DescribeInvocationMetricScatterPlotRequest, CreateTaskFlowResponse, DescribeMicroservicesRequest, AddClusterInstancesResponse, DescribeInvocationMetricDataCurveRequest, DescribeTaskLastStatusResponse, DescribePublicConfigsRequest, DescribeApplicationsRequest, DescribeTaskDetailRequest, DescribePublicConfigReleasesRequest, DescribeLaneRulesRequest, DescribePluginInstancesResponse, CreateRepositoryResponse, DeletePkgsRequest, ChangeApiUsableStatusResponse, EnableTaskResponse, DescribeGroupInstancesResponse, DescribeContainerGroupDeployInfoRequest, OperateApplicationTcrBindingResponse, DescribePublicConfigReleaseLogsResponse, DeleteApiGroupRequest, ReleaseApiGroupRequest, StartGroupRequest, DescribeClusterInstancesResponse, DescribeTaskDetailResponse, ExpandGroupRequest, RevocationPublicConfigRequest, ModifyLaneRuleResponse, DescribeGroupAttributeRequest, EnableTaskFlowRequest, DescribeReleasedConfigRequest, StopGroupResponse, CreateRepositoryRequest, ModifyMicroserviceRequest, DescribeConfigReleasesRequest, DescribeEnabledUnitRuleRequest, DescribeApiGroupResponse, RedoTaskExecuteResponse, CreateLaneRequest, CreateApiGroupResponse, RedoTaskExecuteRequest, DescribeApplicationsResponse, DescribeConfigRequest, DisableUnitRouteRequest, DescribeUnitRulesRequest, DescribeGatewayAllGroupApisRequest, DeleteGroupRequest, BindApiGroupRequest, StopTaskBatchRequest, DescribeUnitApiUseDetailResponse, DescribeInvocationMetricScatterPlotResponse, DescribeUsableUnitNamespacesRequest, DescribeContainerGroupsRequest, DescribeProgramsResponse, DisableTaskFlowRequest, DescribePodInstancesRequest, RedoTaskResponse, DescribeConfigsRequest, EnableUnitRouteRequest, DescribeInvocationMetricDataCurveResponse, DeleteConfigRequest, DescribeFileConfigsRequest, ExecuteTaskResponse, CreateApiRateLimitRuleResponse, DescribeApiUseDetailRequest, CreateClusterRequest, DeleteContainerGroupRequest, ReleaseConfigRequest, DescribeApiDetailRequest, StopContainerGroupRequest, UpdateHealthCheckSettingsResponse, DescribeInvocationMetricDataPointResponse, DescribePathRewritesResponse, DescribeFlowLastBatchStateResponse, StopTaskExecuteResponse, UpdateApiRateLimitRulesResponse, DescribeSimpleGroupsRequest, DescribeConfigReleasesResponse, ModifyMicroserviceResponse, CreateApiGroupRequest, DescribeDownloadInfoResponse, DescribeApplicationRequest, DeployContainerGroupResponse, DescribeBasicResourceUsageRequest, DeleteMicroserviceResponse, DescribeReleasedConfigResponse, DescribeApiDetailResponse, DescribeGroupsRequest, CreatePathRewritesRequest, DeleteNamespaceRequest, SearchStdoutLogRequest, RedoTaskBatchResponse, DescribeStatisticsRequest, DescribeMicroserviceResponse, DescribeImageRepositoryResponse, DescribeImageTagsRequest, DescribeConfigSummaryResponse, CreateContainGroupRequest, DescribePublicConfigReleasesResponse, CreatePathRewritesResponse, DeleteRepositoryRequest, DraftApiGroupResponse, DescribeConfigSummaryRequest, DeleteLaneRequest, ReleasePublicConfigRequest, RedoTaskFlowBatchResponse, CreateGroupResponse } from "./tsf_models";
+import { DescribePublicConfigSummaryRequest, ModifyPathRewriteRequest, UpdateApiRateLimitRuleRequest, DeletePathRewritesResponse, DescribeUnitApiUseDetailRequest, DescribeApiVersionsResponse, ReassociateBusinessLogConfigRequest, StopContainerGroupResponse, DeletePathRewritesRequest, DeleteLaneResponse, DescribeGroupReleaseRequest, DescribeDeliveryConfigResponse, ContinueRunFailedTaskBatchRequest, DescribeSimpleClustersResponse, DeleteRepositoryResponse, DeleteApplicationResponse, UpdateRepositoryRequest, DescribePathRewriteResponse, DescribeConfigsResponse, ModifyContainerReplicasRequest, ReleaseFileConfigRequest, DescribeInvocationMetricDataDimensionResponse, SearchStdoutLogResponse, CreateGatewayApiResponse, DescribeFileConfigsResponse, DescribeApiVersionsRequest, DescribeGroupBindedGatewaysResponse, DescribeJvmMonitorRequest, UnbindApiGroupRequest, CreateNamespaceResponse, RedoTaskBatchRequest, DescribeGroupsResponse, ModifyUploadInfoResponse, CreateApiRateLimitRuleRequest, AssociateBusinessLogConfigRequest, DescribeJvmMonitorResponse, DescribeDeliveryConfigRequest, DeleteServerlessGroupRequest, ChangeApiUsableStatusRequest, DescribeMicroservicesResponse, DescribeApiRateLimitRulesRequest, DescribeApiGroupsResponse, DeletePublicConfigRequest, DeleteNamespaceResponse, CreateMicroserviceRequest, ReleaseConfigResponse, DescribeUnitRuleResponse, DeleteImageTagsRequest, DescribeRepositoriesRequest, RollbackConfigRequest, DescribeProgramsRequest, CreateGatewayApiRequest, DescribeCreateGatewayApiStatusResponse, DeleteConfigResponse, DescribeGroupGatewaysRequest, UpdateApiRateLimitRuleResponse, DescribeGatewayAllGroupApisResponse, ModifyLaneRuleRequest, AddInstancesResponse, StartContainerGroupRequest, DescribeRepositoryResponse, UpdateHealthCheckSettingsRequest, EnableUnitRuleRequest, CreateClusterResponse, CreateMicroserviceResponse, StopGroupRequest, ShrinkGroupResponse, DescribeLanesResponse, CreateNamespaceRequest, DescribeClusterInstancesRequest, DescribeGroupBindedGatewaysRequest, DescribeRepositoryRequest, RedoTaskRequest, DeleteApiGroupResponse, DraftApiGroupRequest, CreateLaneResponse, DescribeDeliveryConfigsResponse, UpdateApiTimeoutsResponse, DescribePkgsResponse, DescribeSimpleNamespacesResponse, DescribeContainerGroupDeployInfoResponse, DescribeOverviewInvocationRequest, DisassociateBusinessLogConfigResponse, DescribePublicConfigRequest, AddClusterInstancesResponse, DescribeInovcationIndicatorsRequest, CreatePublicConfigResponse, CreateConfigResponse, DescribeCreateGatewayApiStatusRequest, RevocationPublicConfigResponse, DescribeConfigReleaseLogsRequest, AssociateConfigWithGroupResponse, UpdateRepositoryResponse, DisassociateKafkaConfigRequest, RollbackConfigResponse, RevocationConfigRequest, StartContainerGroupResponse, ModifyTaskRequest, DeleteUnitNamespacesResponse, DisableTaskRequest, DescribeStatisticsResponse, DescribeBasicResourceUsageResponse, CreateAllGatewayApiAsyncResponse, RemoveInstancesRequest, DeleteGroupResponse, DescribeSimpleApplicationsResponse, DeployContainerGroupRequest, DescribeSimpleApplicationsRequest, DescribeDeliveryConfigByGroupIdResponse, ModifyContainerGroupRequest, OperateApplicationTcrBindingRequest, DescribeGroupBusinessLogConfigsResponse, UpdateUnitRuleRequest, ReleasePublicConfigResponse, ReleaseApiGroupResponse, UpdateApiRateLimitRulesRequest, DescribeGroupInstancesRequest, DescribeMsApiListRequest, DescribeUploadInfoResponse, DescribeMsApiListResponse, EnableTaskRequest, DisableTaskResponse, DescribeMicroserviceRequest, DescribePodInstancesResponse, DescribeInvocationMetricDataPointRequest, DescribeRepositoriesResponse, CreateGroupRequest, StopTaskBatchResponse, CreateContainGroupResponse, DescribeContainerGroupDetailResponse, DescribeGroupGatewaysResponse, RevocationConfigResponse, DeleteTaskResponse, DeleteMicroserviceRequest, RemoveInstancesResponse, DescribeContainerEventsRequest, DisableUnitRuleRequest, DescribeApplicationBusinessLogConfigResponse, DescribeGroupResponse, DeleteContainerGroupResponse, DeleteServerlessGroupResponse, DeleteImageTagsResponse, DisableUnitRouteResponse, ExecuteTaskRequest, DescribeGroupBusinessLogConfigsRequest, DescribeApplicationResponse, DescribeConfigReleaseLogsResponse, DeletePublicConfigResponse, DescribeSimpleGroupsResponse, DescribeFlowLastBatchStateRequest, TerminateTaskFlowBatchResponse, DisassociateKafkaConfigResponse, ShrinkInstancesResponse, DeleteLaneRuleResponse, DescribeApiRateLimitRulesResponse, AddClusterInstancesRequest, DescribeGroupUseDetailResponse, UpdateApiTimeoutsRequest, DescribeOverviewInvocationResponse, ShrinkInstancesRequest, DescribeSimpleNamespacesRequest, ExecuteTaskFlowResponse, SearchBusinessLogRequest, ExpandGroupResponse, DescribePublicConfigsResponse, DescribeUnitNamespacesResponse, ContinueRunFailedTaskBatchResponse, DescribeSimpleClustersRequest, DescribeLaneRulesResponse, DescribeImageRepositoryRequest, DescribeApiGroupRequest, AssociateBusinessLogConfigResponse, DescribeGatewayApisRequest, AssociateConfigWithGroupRequest, DescribeContainerGroupDetailRequest, DescribeGroupsWithPluginRequest, ModifyTaskResponse, SearchBusinessLogResponse, DeleteUnitNamespacesRequest, DescribeGroupRequest, BindPluginRequest, DeleteLaneRuleRequest, DescribeGroupUseDetailRequest, UpdateUnitRuleResponse, CreateUnitRuleRequest, StartGroupResponse, DescribePathRewritesRequest, ShrinkGroupRequest, CreateLaneRuleResponse, CreateTaskResponse, DescribeContainerGroupsResponse, UpdateApiGroupResponse, DescribeGroupsWithPluginResponse, AddInstancesRequest, CreateApplicationRequest, DeployGroupRequest, CreateTaskFlowRequest, ModifyContainerReplicasResponse, UnbindApiGroupResponse, DescribeGroupReleaseResponse, DescribePathRewriteRequest, CreateApplicationResponse, DescribeInvocationMetricDataDimensionRequest, DeployGroupResponse, BindApiGroupResponse, DescribeGroupAttributeResponse, ModifyPathRewriteResponse, EnableUnitRuleResponse, DescribeEnabledUnitRuleResponse, UpdateApiGroupRequest, EnableUnitRouteResponse, DescribeBusinessLogConfigRequest, ExecuteTaskFlowRequest, DescribeBusinessLogConfigResponse, TerminateTaskFlowBatchRequest, CreateUnitRuleResponse, DescribeTaskRecordsResponse, DescribeApiUseDetailResponse, ModifyUploadInfoRequest, DescribeGatewayApisResponse, DescribeUnitRuleRequest, UpdateGatewayApiResponse, DescribeInstancesResponse, ModifyLaneResponse, DescribeDownloadInfoRequest, DescribePublicConfigSummaryResponse, DescribePublicConfigReleaseLogsRequest, DescribeApplicationAttributeResponse, ModifyLaneRequest, DescribeLanesRequest, DescribeGatewayMonitorOverviewResponse, CreatePublicConfigRequest, CreateAllGatewayApiAsyncRequest, EnableTaskFlowResponse, DeleteUnitRuleResponse, DisableTaskFlowResponse, DescribeGatewayMonitorOverviewRequest, DescribeImageTagsResponse, BindPluginResponse, RedoTaskFlowBatchRequest, StopTaskExecuteRequest, DescribePkgsRequest, DescribeApplicationAttributeRequest, CreateTaskRequest, DescribePublicConfigResponse, DescribeUsableUnitNamespacesResponse, ReleaseFileConfigResponse, DescribeConfigResponse, DescribeContainerEventsResponse, DescribeTaskRecordsRequest, ModifyContainerGroupResponse, DeleteApplicationRequest, DescribeUnitNamespacesRequest, DeleteTaskRequest, DescribeBusinessLogConfigsRequest, DescribePluginInstancesRequest, DescribeInovcationIndicatorsResponse, CreateFileConfigResponse, CreateConfigRequest, DescribeUploadInfoRequest, DescribeUnitRulesResponse, UpdateGatewayApiRequest, DescribeInstancesRequest, ReassociateBusinessLogConfigResponse, DescribeApiGroupsRequest, DeleteUnitRuleRequest, DeletePkgsResponse, DescribeTaskLastStatusRequest, DescribeBusinessLogConfigsResponse, DescribeInvocationMetricScatterPlotRequest, CreateTaskFlowResponse, DescribeMicroservicesRequest, DescribeApplicationBusinessLogConfigRequest, DescribeInvocationMetricDataCurveRequest, DescribeTaskLastStatusResponse, DescribePublicConfigsRequest, DescribeApplicationsRequest, DescribeTaskDetailRequest, DescribePublicConfigReleasesRequest, DescribeLaneRulesRequest, DescribePluginInstancesResponse, CreateRepositoryResponse, CreateLaneRuleRequest, DeletePkgsRequest, CreateFileConfigRequest, ChangeApiUsableStatusResponse, EnableTaskResponse, DescribeGroupInstancesResponse, DescribeContainerGroupDeployInfoRequest, DescribeDeliveryConfigsRequest, DisassociateBusinessLogConfigRequest, DescribePublicConfigReleaseLogsResponse, DeleteApiGroupRequest, ReleaseApiGroupRequest, StartGroupRequest, DescribeClusterInstancesResponse, DescribeTaskDetailResponse, ExpandGroupRequest, RevocationPublicConfigRequest, ModifyLaneRuleResponse, DescribeGroupAttributeRequest, EnableTaskFlowRequest, DescribeReleasedConfigRequest, StopGroupResponse, CreateRepositoryRequest, ModifyMicroserviceRequest, DescribeConfigReleasesRequest, DescribeEnabledUnitRuleRequest, DescribeApiGroupResponse, RedoTaskExecuteResponse, CreateLaneRequest, CreateApiGroupResponse, RedoTaskExecuteRequest, DescribeApplicationsResponse, DescribeConfigRequest, OperateApplicationTcrBindingResponse, DisableUnitRouteRequest, DescribeUnitRulesRequest, DescribeGatewayAllGroupApisRequest, DeleteGroupRequest, BindApiGroupRequest, StopTaskBatchRequest, DescribeUnitApiUseDetailResponse, DescribeInvocationMetricScatterPlotResponse, DescribeUsableUnitNamespacesRequest, DescribeContainerGroupsRequest, DescribeProgramsResponse, DisableTaskFlowRequest, DescribePodInstancesRequest, RedoTaskResponse, DescribeConfigsRequest, EnableUnitRouteRequest, DescribeInvocationMetricDataCurveResponse, DeleteConfigRequest, DescribeFileConfigsRequest, ExecuteTaskResponse, CreateApiRateLimitRuleResponse, DescribeApiUseDetailRequest, CreateClusterRequest, DescribeDeliveryConfigByGroupIdRequest, DeleteContainerGroupRequest, ReleaseConfigRequest, DescribeApiDetailRequest, StopContainerGroupRequest, UpdateHealthCheckSettingsResponse, DescribeInvocationMetricDataPointResponse, DisableUnitRuleResponse, DescribePathRewritesResponse, DescribeFlowLastBatchStateResponse, StopTaskExecuteResponse, UpdateApiRateLimitRulesResponse, DescribeSimpleGroupsRequest, DescribeConfigReleasesResponse, ModifyMicroserviceResponse, CreateApiGroupRequest, DescribeDownloadInfoResponse, DescribeApplicationRequest, DeployContainerGroupResponse, DescribeBasicResourceUsageRequest, DeleteMicroserviceResponse, DescribeReleasedConfigResponse, DescribeApiDetailResponse, DescribeGroupsRequest, CreatePathRewritesRequest, DeleteNamespaceRequest, SearchStdoutLogRequest, RedoTaskBatchResponse, DescribeStatisticsRequest, DescribeMicroserviceResponse, DescribeImageRepositoryResponse, DescribeImageTagsRequest, DescribeConfigSummaryResponse, CreateContainGroupRequest, DescribePublicConfigReleasesResponse, CreatePathRewritesResponse, DeleteRepositoryRequest, DraftApiGroupResponse, DescribeConfigSummaryRequest, DeleteLaneRequest, ReleasePublicConfigRequest, RedoTaskFlowBatchResponse, CreateGroupResponse } from "./tsf_models";
 /**
  * tsf client
  * @class
@@ -24,9 +24,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeMicroservices(req: DescribeMicroservicesRequest, cb?: (error: string, rep: DescribeMicroservicesResponse) => void): Promise<DescribeMicroservicesResponse>;
     /**
-     * 修改容器部署组实例数
+     * 查询应用关联日志配置项信息
      */
-    ModifyContainerReplicas(req: ModifyContainerReplicasRequest, cb?: (error: string, rep: ModifyContainerReplicasResponse) => void): Promise<ModifyContainerReplicasResponse>;
+    DescribeApplicationBusinessLogConfig(req: DescribeApplicationBusinessLogConfigRequest, cb?: (error: string, rep: DescribeApplicationBusinessLogConfigResponse) => void): Promise<DescribeApplicationBusinessLogConfigResponse>;
     /**
      * 虚拟机部署组下线实例
      */
@@ -124,6 +124,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeFileConfigs(req: DescribeFileConfigsRequest, cb?: (error: string, rep: DescribeFileConfigsResponse) => void): Promise<DescribeFileConfigsResponse>;
     /**
+     * 修改容器部署组实例数
+     */
+    ModifyContainerReplicas(req: ModifyContainerReplicasRequest, cb?: (error: string, rep: ModifyContainerReplicasResponse) => void): Promise<ModifyContainerReplicasResponse>;
+    /**
      * 查询简单集群列表
      */
     DescribeSimpleClusters(req: DescribeSimpleClustersRequest, cb?: (error: string, rep: DescribeSimpleClustersResponse) => void): Promise<DescribeSimpleClustersResponse>;
@@ -132,6 +136,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeApiDetail(req: DescribeApiDetailRequest, cb?: (error: string, rep: DescribeApiDetailResponse) => void): Promise<DescribeApiDetailResponse>;
     /**
+     * 创建容器部署组
+     */
+    CreateContainGroup(req: CreateContainGroupRequest, cb?: (error: string, rep: CreateContainGroupResponse) => void): Promise<CreateContainGroupResponse>;
+    /**
      * 查询某个插件下绑定或未绑定的API分组
      */
     DescribeGroupsWithPlugin(req: DescribeGroupsWithPluginRequest, cb?: (error: string, rep: DescribeGroupsWithPluginResponse) => void): Promise<DescribeGroupsWithPluginResponse>;
@@ -139,6 +147,10 @@ export declare class Client extends AbstractClient {
      * 禁用单元化路由
      */
     DisableUnitRoute(req: DisableUnitRouteRequest, cb?: (error: string, rep: DisableUnitRouteResponse) => void): Promise<DisableUnitRouteResponse>;
+    /**
+     * 取消关联业务日志配置项和应用
+     */
+    DisassociateBusinessLogConfig(req: DisassociateBusinessLogConfigRequest, cb?: (error: string, rep: DisassociateBusinessLogConfigResponse) => void): Promise<DisassociateBusinessLogConfigResponse>;
     /**
      * 创建配置项
      */
@@ -193,6 +205,10 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
      */
     CreateUnitRule(req: CreateUnitRuleRequest, cb?: (error: string, rep: CreateUnitRuleResponse) => void): Promise<CreateUnitRuleResponse>;
     /**
+     * 更新仓库信息
+     */
+    UpdateRepository(req: UpdateRepositoryRequest, cb?: (error: string, rep: UpdateRepositoryResponse) => void): Promise<UpdateRepositoryResponse>;
+    /**
      * 查询网关分组监控明细数据
      */
     DescribeGroupUseDetail(req: DescribeGroupUseDetailRequest, cb?: (error: string, rep: DescribeGroupUseDetailResponse) => void): Promise<DescribeGroupUseDetailResponse>;
@@ -201,9 +217,9 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
      */
     DescribePublicConfig(req: DescribePublicConfigRequest, cb?: (error: string, rep: DescribePublicConfigResponse) => void): Promise<DescribePublicConfigResponse>;
     /**
-     * 更新仓库信息
+     * 重关联业务日志配置
      */
-    UpdateRepository(req: UpdateRepositoryRequest, cb?: (error: string, rep: UpdateRepositoryResponse) => void): Promise<UpdateRepositoryResponse>;
+    ReassociateBusinessLogConfig(req: ReassociateBusinessLogConfigRequest, cb?: (error: string, rep: ReassociateBusinessLogConfigResponse) => void): Promise<ReassociateBusinessLogConfigResponse>;
     /**
      * 批量更新API超时
      */
@@ -245,6 +261,10 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
      */
     StopContainerGroup(req: StopContainerGroupRequest, cb?: (error: string, rep: StopContainerGroupResponse) => void): Promise<StopContainerGroupResponse>;
     /**
+     * 查询分组管理日志配置列表
+     */
+    DescribeGroupBusinessLogConfigs(req: DescribeGroupBusinessLogConfigsRequest, cb?: (error: string, rep: DescribeGroupBusinessLogConfigsResponse) => void): Promise<DescribeGroupBusinessLogConfigsResponse>;
+    /**
      * 查询部署组相关的发布信息
      */
     DescribeGroupRelease(req: DescribeGroupReleaseRequest, cb?: (error: string, rep: DescribeGroupReleaseResponse) => void): Promise<DescribeGroupReleaseResponse>;
@@ -273,6 +293,10 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
      */
     UnbindApiGroup(req: UnbindApiGroupRequest, cb?: (error: string, rep: UnbindApiGroupResponse) => void): Promise<UnbindApiGroupResponse>;
     /**
+     * 查询虚拟机部署组云主机列表
+     */
+    DescribeGroupInstances(req: DescribeGroupInstancesRequest, cb?: (error: string, rep: DescribeGroupInstancesResponse) => void): Promise<DescribeGroupInstancesResponse>;
+    /**
      * 创建泳道规则
      */
     CreateLaneRule(req: CreateLaneRuleRequest, cb?: (error: string, rep: CreateLaneRuleResponse) => void): Promise<CreateLaneRuleResponse>;
@@ -284,6 +308,10 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
      * 查询API 分组信息列表
      */
     DescribeApiGroups(req: DescribeApiGroupsRequest, cb?: (error: string, rep: DescribeApiGroupsResponse) => void): Promise<DescribeApiGroupsResponse>;
+    /**
+     * 查询日志配置项列表
+     */
+    DescribeBusinessLogConfigs(req: DescribeBusinessLogConfigsRequest, cb?: (error: string, rep: DescribeBusinessLogConfigsResponse) => void): Promise<DescribeBusinessLogConfigsResponse>;
     /**
      * 发布配置
      */
@@ -336,6 +364,10 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
      * 查询调用监控指标
      */
     DescribeInovcationIndicators(req: DescribeInovcationIndicatorsRequest, cb?: (error: string, rep: DescribeInovcationIndicatorsResponse) => void): Promise<DescribeInovcationIndicatorsResponse>;
+    /**
+     * 用部署组id获取绑定信息
+     */
+    DescribeDeliveryConfigByGroupId(req: DescribeDeliveryConfigByGroupIdRequest, cb?: (error: string, rep: DescribeDeliveryConfigByGroupIdResponse) => void): Promise<DescribeDeliveryConfigByGroupIdResponse>;
     /**
      * 查询简单部署组列表
      */
@@ -422,13 +454,13 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
      */
     DescribeTaskLastStatus(req: DescribeTaskLastStatusRequest, cb?: (error: string, rep: DescribeTaskLastStatusResponse) => void): Promise<DescribeTaskLastStatusResponse>;
     /**
-     * 查询虚拟机部署组云主机列表
+     * 查询业务日志配置项信息
      */
-    DescribeGroupInstances(req: DescribeGroupInstancesRequest, cb?: (error: string, rep: DescribeGroupInstancesResponse) => void): Promise<DescribeGroupInstancesResponse>;
+    DescribeBusinessLogConfig(req: DescribeBusinessLogConfigRequest, cb?: (error: string, rep: DescribeBusinessLogConfigResponse) => void): Promise<DescribeBusinessLogConfigResponse>;
     /**
-     * 删除仓库
+     * 查询网关所有分组下Api列表
      */
-    DeleteRepository(req: DeleteRepositoryRequest, cb?: (error: string, rep: DeleteRepositoryResponse) => void): Promise<DeleteRepositoryResponse>;
+    DescribeGatewayAllGroupApis(req: DescribeGatewayAllGroupApisRequest, cb?: (error: string, rep: DescribeGatewayAllGroupApisResponse) => void): Promise<DescribeGatewayAllGroupApisResponse>;
     /**
      * 从软件仓库批量删除程序包。
 一次最多支持删除1000个包，数量超过1000，返回UpperDeleteLimit错误。
@@ -446,6 +478,10 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
      * 查询路径重写
      */
     DescribePathRewrite(req: DescribePathRewriteRequest, cb?: (error: string, rep: DescribePathRewriteResponse) => void): Promise<DescribePathRewriteResponse>;
+    /**
+     * 取消关联投递信息和部署组
+     */
+    DisassociateKafkaConfig(req: DisassociateKafkaConfigRequest, cb?: (error: string, rep: DisassociateKafkaConfigResponse) => void): Promise<DisassociateKafkaConfigResponse>;
     /**
      * 查询调用指标数据变化曲线
      */
@@ -499,6 +535,10 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
      */
     DeployGroup(req: DeployGroupRequest, cb?: (error: string, rep: DeployGroupResponse) => void): Promise<DeployGroupResponse>;
     /**
+     * 获取多个投递项配置
+     */
+    DescribeDeliveryConfigs(req: DescribeDeliveryConfigsRequest, cb?: (error: string, rep: DescribeDeliveryConfigsResponse) => void): Promise<DescribeDeliveryConfigsResponse>;
+    /**
      * 更新Api分组
      */
     UpdateApiGroup(req: UpdateApiGroupRequest, cb?: (error: string, rep: UpdateApiGroupResponse) => void): Promise<UpdateApiGroupResponse>;
@@ -539,6 +579,10 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
      */
     RedoTaskBatch(req: RedoTaskBatchRequest, cb?: (error: string, rep: RedoTaskBatchResponse) => void): Promise<RedoTaskBatchResponse>;
     /**
+     * 关联日志配置项到应用
+     */
+    AssociateBusinessLogConfig(req: AssociateBusinessLogConfigRequest, cb?: (error: string, rep: AssociateBusinessLogConfigResponse) => void): Promise<AssociateBusinessLogConfigResponse>;
+    /**
      * 查询公共配置发布历史
      */
     DescribePublicConfigReleaseLogs(req: DescribePublicConfigReleaseLogsRequest, cb?: (error: string, rep: DescribePublicConfigReleaseLogsResponse) => void): Promise<DescribePublicConfigReleaseLogsResponse>;
@@ -567,9 +611,9 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
      */
     DescribeJvmMonitor(req: DescribeJvmMonitorRequest, cb?: (error: string, rep: DescribeJvmMonitorResponse) => void): Promise<DescribeJvmMonitorResponse>;
     /**
-     * 查询网关所有分组下Api列表
+     * 删除仓库
      */
-    DescribeGatewayAllGroupApis(req: DescribeGatewayAllGroupApisRequest, cb?: (error: string, rep: DescribeGatewayAllGroupApisResponse) => void): Promise<DescribeGatewayAllGroupApisResponse>;
+    DeleteRepository(req: DeleteRepositoryRequest, cb?: (error: string, rep: DeleteRepositoryResponse) => void): Promise<DeleteRepositoryResponse>;
     /**
      * 启动容器部署组
      */
@@ -647,9 +691,9 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
      */
     ChangeApiUsableStatus(req: ChangeApiUsableStatusRequest, cb?: (error: string, rep: ChangeApiUsableStatusResponse) => void): Promise<ChangeApiUsableStatusResponse>;
     /**
-     * 创建容器部署组
+     * 获取单个投递项配置信息
      */
-    CreateContainGroup(req: CreateContainGroupRequest, cb?: (error: string, rep: CreateContainGroupResponse) => void): Promise<CreateContainGroupResponse>;
+    DescribeDeliveryConfig(req: DescribeDeliveryConfigRequest, cb?: (error: string, rep: DescribeDeliveryConfigResponse) => void): Promise<DescribeDeliveryConfigResponse>;
     /**
      * 查询生效的单元化规则
      */
@@ -686,6 +730,10 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
      * 查询公共配置发布信息
      */
     DescribePublicConfigReleases(req: DescribePublicConfigReleasesRequest, cb?: (error: string, rep: DescribePublicConfigReleasesResponse) => void): Promise<DescribePublicConfigReleasesResponse>;
+    /**
+     * 关联投递配置到部署组
+     */
+    AssociateConfigWithGroup(req: AssociateConfigWithGroupRequest, cb?: (error: string, rep: AssociateConfigWithGroupResponse) => void): Promise<AssociateConfigWithGroupResponse>;
     /**
      * 查询泳道列表
      */

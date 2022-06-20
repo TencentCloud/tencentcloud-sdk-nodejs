@@ -2518,6 +2518,10 @@ export interface DescribeSparkAppTasksRequest {
       * 分页查询Limit
       */
     Limit?: number;
+    /**
+      * 执行实例id
+      */
+    TaskId?: string;
 }
 /**
  *  SQL查询任务

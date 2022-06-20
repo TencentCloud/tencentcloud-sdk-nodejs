@@ -29,10 +29,12 @@ import {
   PathRewritePage,
   DescribeUnitApiUseDetailRequest,
   DescribeApiVersionsResponse,
+  ReassociateBusinessLogConfigRequest,
   StopContainerGroupResponse,
   DeletePathRewritesRequest,
   DeleteLaneResponse,
   DescribeGroupReleaseRequest,
+  DescribeDeliveryConfigResponse,
   SimpleApplication,
   ContinueRunFailedTaskBatchRequest,
   DescribeSimpleClustersResponse,
@@ -56,12 +58,14 @@ import {
   TaskRecord,
   CreateNamespaceResponse,
   RedoTaskBatchRequest,
-  DescribeTaskLastStatusRequest,
+  DescribeGroupsResponse,
   ModifyUploadInfoResponse,
   TsfPageConfig,
   CreateApiRateLimitRuleRequest,
   TaskRecordPage,
+  AssociateBusinessLogConfigRequest,
   DescribeJvmMonitorResponse,
+  DescribeDeliveryConfigRequest,
   DeleteServerlessGroupRequest,
   ChangeApiUsableStatusRequest,
   DescribeMicroservicesResponse,
@@ -76,6 +80,7 @@ import {
   DescribeRepositoriesRequest,
   InvocationMetricScatterPlot,
   RollbackConfigRequest,
+  DescribeProgramsRequest,
   CreateGatewayApiRequest,
   DescribeCreateGatewayApiStatusResponse,
   DeleteConfigResponse,
@@ -109,6 +114,7 @@ import {
   RepositoryInfo,
   DraftApiGroupRequest,
   CreateLaneResponse,
+  DescribeDeliveryConfigsResponse,
   TcrRepoInfo,
   UpdateApiTimeoutsResponse,
   TsfPageDimension,
@@ -119,8 +125,9 @@ import {
   DescribeContainerGroupDeployInfoResponse,
   DescribeOverviewInvocationRequest,
   TaskLastExecuteStatus,
-  DescribeProgramsRequest,
+  DisassociateBusinessLogConfigResponse,
   DescribePublicConfigRequest,
+  AddClusterInstancesResponse,
   ImageRepository,
   DescribeInovcationIndicatorsRequest,
   CreatePublicConfigResponse,
@@ -130,8 +137,9 @@ import {
   DescribeCreateGatewayApiStatusRequest,
   RevocationPublicConfigResponse,
   DescribeConfigReleaseLogsRequest,
-  ModifyContainerGroupRequest,
+  AssociateConfigWithGroupResponse,
   UpdateRepositoryResponse,
+  DisassociateKafkaConfigRequest,
   RollbackConfigResponse,
   RevocationConfigRequest,
   StartContainerGroupResponse,
@@ -147,13 +155,16 @@ import {
   DescribeSimpleApplicationsResponse,
   DeployContainerGroupRequest,
   DescribeSimpleApplicationsRequest,
+  DescribeDeliveryConfigByGroupIdResponse,
+  ModifyContainerGroupRequest,
   OperateApplicationTcrBindingRequest,
   ContainGroup,
+  DescribeGroupBusinessLogConfigsResponse,
   ContainGroupResult,
   UpdateUnitRuleRequest,
   ReleasePublicConfigResponse,
   ReleaseApiGroupResponse,
-  CreateFileConfigRequest,
+  InstanceAdvancedSettings,
   UpdateApiRateLimitRulesRequest,
   DescribeGroupInstancesRequest,
   DescribeMsApiListRequest,
@@ -177,6 +188,7 @@ import {
   DescribeContainerGroupDetailResponse,
   Ports,
   DescribeGroupGatewaysResponse,
+  SimpleKafkaDeliveryConfig,
   RevocationConfigResponse,
   PkgBind,
   DeleteTaskResponse,
@@ -186,6 +198,7 @@ import {
   DescribeContainerEventsRequest,
   DisableUnitRuleRequest,
   Namespace,
+  DescribeApplicationBusinessLogConfigResponse,
   DescribeGroupResponse,
   Env,
   ResourceFieldRef,
@@ -193,9 +206,10 @@ import {
   DeleteContainerGroupResponse,
   DeleteServerlessGroupResponse,
   DeleteImageTagsResponse,
-  CreateLaneRuleRequest,
+  GroupUnitApiDailyUseStatistics,
   DisableUnitRouteResponse,
   ExecuteTaskRequest,
+  DescribeGroupBusinessLogConfigsRequest,
   DescribeApplicationResponse,
   LaneInfo,
   DescribeConfigReleaseLogsResponse,
@@ -203,8 +217,9 @@ import {
   DescribeSimpleGroupsResponse,
   DescribeFlowLastBatchStateRequest,
   MetricDataCurve,
+  GroupInfo,
   TerminateTaskFlowBatchResponse,
-  ShrinkInstancesRequest,
+  DisassociateKafkaConfigResponse,
   ValueFrom,
   ShrinkInstancesResponse,
   DeleteLaneRuleResponse,
@@ -217,6 +232,7 @@ import {
   UpdateApiTimeoutsRequest,
   Metric,
   DescribeOverviewInvocationResponse,
+  ShrinkInstancesRequest,
   DescribeSimpleNamespacesRequest,
   ExecuteTaskFlowResponse,
   SearchBusinessLogRequest,
@@ -226,13 +242,16 @@ import {
   ContinueRunFailedTaskBatchResponse,
   DescribeSimpleClustersRequest,
   Program,
+  KafkaDeliveryConfig,
   ApiDefinitionDescr,
   DescribeLaneRulesResponse,
   DescribeImageRepositoryRequest,
   IndicatorCoord,
   TsfPageUnitRule,
   DescribeApiGroupRequest,
+  AssociateBusinessLogConfigResponse,
   DescribeGatewayApisRequest,
+  AssociateConfigWithGroupRequest,
   DescribeContainerGroupDetailRequest,
   JvmMonitorData,
   DescribeGroupsWithPluginRequest,
@@ -252,7 +271,7 @@ import {
   DescribeGroupUseDetailRequest,
   Microservice,
   UpdateUnitRuleResponse,
-  HealthCheckSettings,
+  CreateUnitRuleRequest,
   StartGroupResponse,
   GroupRelease,
   DescribePathRewritesRequest,
@@ -291,10 +310,12 @@ import {
   UpdateApiGroupRequest,
   TsfApiListResponse,
   EnableUnitRouteResponse,
-  DisableUnitRuleResponse,
+  GroupUseStatisticsEntity,
+  DescribeBusinessLogConfigRequest,
   TsfPageGatewayDeployGroup,
   ImageTag,
   ExecuteTaskFlowRequest,
+  DescribeBusinessLogConfigResponse,
   TerminateTaskFlowBatchRequest,
   CreateUnitRuleResponse,
   DescribeTaskRecordsResponse,
@@ -318,6 +339,7 @@ import {
   ModifyLaneRequest,
   DescribeLanesRequest,
   DescribeGatewayMonitorOverviewResponse,
+  BusinesLogConfigAssociatedGroup,
   CreatePublicConfigRequest,
   CreateAllGatewayApiAsyncRequest,
   PathRewrite,
@@ -330,6 +352,7 @@ import {
   BindPluginResponse,
   RedoTaskFlowBatchRequest,
   TsfPageUnitNamespace,
+  BusinessLogConfigSchema,
   MetricDataSingleValue,
   StopTaskExecuteRequest,
   DescribePkgsRequest,
@@ -350,12 +373,14 @@ import {
   DeleteApplicationRequest,
   DescribeUnitNamespacesRequest,
   DeleteTaskRequest,
-  CreateUnitRuleRequest,
+  HealthCheckSettings,
   VmGroupSimple,
   ApiResponseDescr,
+  DescribeBusinessLogConfigsRequest,
   DescribePluginInstancesRequest,
   ApiRequestDescr,
   ApiVersionArray,
+  DeliveryConfigBindGroups,
   DescribeInovcationIndicatorsResponse,
   MultiValueDataPoints,
   ConfigReleaseLog,
@@ -366,18 +391,20 @@ import {
   DescribeUnitRulesResponse,
   UpdateGatewayApiRequest,
   DescribeInstancesRequest,
+  ReassociateBusinessLogConfigResponse,
   PathRewriteCreateObject,
   DescribeApiGroupsRequest,
   DeleteUnitRuleRequest,
   ApplicationAttribute,
   TaskFlowLastBatchState,
   DeletePkgsResponse,
-  DescribeGroupsResponse,
+  DescribeTaskLastStatusRequest,
+  DescribeBusinessLogConfigsResponse,
   ApplicationForPage,
   DescribeInvocationMetricScatterPlotRequest,
   CreateTaskFlowResponse,
   DescribeMicroservicesRequest,
-  AddClusterInstancesResponse,
+  DescribeApplicationBusinessLogConfigRequest,
   DescribeInvocationMetricDataCurveRequest,
   VmGroupOther,
   DescribeTaskLastStatusResponse,
@@ -391,11 +418,11 @@ import {
   UnitRuleTag,
   DescribePluginInstancesResponse,
   CreateRepositoryResponse,
-  GroupUnitApiDailyUseStatistics,
+  CreateLaneRuleRequest,
   CurvePoint,
   CosDownloadInfo,
   DeletePkgsRequest,
-  InstanceAdvancedSettings,
+  CreateFileConfigRequest,
   GroupApiUseStatistics,
   ChangeApiUsableStatusResponse,
   EnableTaskResponse,
@@ -404,7 +431,8 @@ import {
   GroupUnitApiUseStatistics,
   DescribeGroupInstancesResponse,
   DescribeContainerGroupDeployInfoRequest,
-  OperateApplicationTcrBindingResponse,
+  DescribeDeliveryConfigsRequest,
+  DisassociateBusinessLogConfigRequest,
   DescribePublicConfigReleaseLogsResponse,
   DeleteApiGroupRequest,
   ReleaseApiGroupRequest,
@@ -438,6 +466,7 @@ import {
   DescribeApplicationsResponse,
   InvocationIndicator,
   DescribeConfigRequest,
+  OperateApplicationTcrBindingResponse,
   DisableUnitRouteRequest,
   DescribeUnitRulesRequest,
   DescribeGatewayAllGroupApisRequest,
@@ -450,11 +479,13 @@ import {
   DescribeInvocationMetricScatterPlotResponse,
   DescribeUsableUnitNamespacesRequest,
   DescribeContainerGroupsRequest,
+  TsfPageBusinessLogConfig,
   DescribeProgramsResponse,
   ProgramItem,
   DisableTaskFlowRequest,
   DescribePodInstancesRequest,
   RedoTaskResponse,
+  DeliveryConfigBindGroup,
   DescribeConfigsRequest,
   EnableUnitRouteRequest,
   TsfPageApplication,
@@ -470,19 +501,21 @@ import {
   TsfPageBusinessLogV2,
   FieldRef,
   CreateClusterRequest,
+  DescribeDeliveryConfigByGroupIdRequest,
   TsfPageMicroservice,
   ConfigRelease,
   DeleteContainerGroupRequest,
   AdvanceSettings,
   ReleaseConfigRequest,
   MsApiArray,
+  BusinessLogConfig,
   DescribeApiDetailRequest,
   StopContainerGroupRequest,
   UpdateHealthCheckSettingsResponse,
   ApiRateLimitRule,
   Filter,
   DescribeInvocationMetricDataPointResponse,
-  GroupUseStatisticsEntity,
+  DisableUnitRuleResponse,
   DescribePathRewritesResponse,
   AddInstanceResult,
   DescribeFlowLastBatchStateResponse,
@@ -586,13 +619,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改容器部署组实例数
+   * 查询应用关联日志配置项信息
    */
-  async ModifyContainerReplicas(
-    req: ModifyContainerReplicasRequest,
-    cb?: (error: string, rep: ModifyContainerReplicasResponse) => void
-  ): Promise<ModifyContainerReplicasResponse> {
-    return this.request("ModifyContainerReplicas", req, cb)
+  async DescribeApplicationBusinessLogConfig(
+    req: DescribeApplicationBusinessLogConfigRequest,
+    cb?: (error: string, rep: DescribeApplicationBusinessLogConfigResponse) => void
+  ): Promise<DescribeApplicationBusinessLogConfigResponse> {
+    return this.request("DescribeApplicationBusinessLogConfig", req, cb)
   }
 
   /**
@@ -836,6 +869,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改容器部署组实例数
+   */
+  async ModifyContainerReplicas(
+    req: ModifyContainerReplicasRequest,
+    cb?: (error: string, rep: ModifyContainerReplicasResponse) => void
+  ): Promise<ModifyContainerReplicasResponse> {
+    return this.request("ModifyContainerReplicas", req, cb)
+  }
+
+  /**
    * 查询简单集群列表
    */
   async DescribeSimpleClusters(
@@ -856,6 +899,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建容器部署组
+   */
+  async CreateContainGroup(
+    req: CreateContainGroupRequest,
+    cb?: (error: string, rep: CreateContainGroupResponse) => void
+  ): Promise<CreateContainGroupResponse> {
+    return this.request("CreateContainGroup", req, cb)
+  }
+
+  /**
    * 查询某个插件下绑定或未绑定的API分组
    */
   async DescribeGroupsWithPlugin(
@@ -873,6 +926,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DisableUnitRouteResponse) => void
   ): Promise<DisableUnitRouteResponse> {
     return this.request("DisableUnitRoute", req, cb)
+  }
+
+  /**
+   * 取消关联业务日志配置项和应用
+   */
+  async DisassociateBusinessLogConfig(
+    req: DisassociateBusinessLogConfigRequest,
+    cb?: (error: string, rep: DisassociateBusinessLogConfigResponse) => void
+  ): Promise<DisassociateBusinessLogConfigResponse> {
+    return this.request("DisassociateBusinessLogConfig", req, cb)
   }
 
   /**
@@ -1007,6 +1070,16 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
   }
 
   /**
+   * 更新仓库信息
+   */
+  async UpdateRepository(
+    req: UpdateRepositoryRequest,
+    cb?: (error: string, rep: UpdateRepositoryResponse) => void
+  ): Promise<UpdateRepositoryResponse> {
+    return this.request("UpdateRepository", req, cb)
+  }
+
+  /**
    * 查询网关分组监控明细数据
    */
   async DescribeGroupUseDetail(
@@ -1027,13 +1100,13 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
   }
 
   /**
-   * 更新仓库信息
+   * 重关联业务日志配置
    */
-  async UpdateRepository(
-    req: UpdateRepositoryRequest,
-    cb?: (error: string, rep: UpdateRepositoryResponse) => void
-  ): Promise<UpdateRepositoryResponse> {
-    return this.request("UpdateRepository", req, cb)
+  async ReassociateBusinessLogConfig(
+    req: ReassociateBusinessLogConfigRequest,
+    cb?: (error: string, rep: ReassociateBusinessLogConfigResponse) => void
+  ): Promise<ReassociateBusinessLogConfigResponse> {
+    return this.request("ReassociateBusinessLogConfig", req, cb)
   }
 
   /**
@@ -1137,6 +1210,16 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
   }
 
   /**
+   * 查询分组管理日志配置列表
+   */
+  async DescribeGroupBusinessLogConfigs(
+    req: DescribeGroupBusinessLogConfigsRequest,
+    cb?: (error: string, rep: DescribeGroupBusinessLogConfigsResponse) => void
+  ): Promise<DescribeGroupBusinessLogConfigsResponse> {
+    return this.request("DescribeGroupBusinessLogConfigs", req, cb)
+  }
+
+  /**
    * 查询部署组相关的发布信息
    */
   async DescribeGroupRelease(
@@ -1207,6 +1290,16 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
   }
 
   /**
+   * 查询虚拟机部署组云主机列表
+   */
+  async DescribeGroupInstances(
+    req: DescribeGroupInstancesRequest,
+    cb?: (error: string, rep: DescribeGroupInstancesResponse) => void
+  ): Promise<DescribeGroupInstancesResponse> {
+    return this.request("DescribeGroupInstances", req, cb)
+  }
+
+  /**
    * 创建泳道规则
    */
   async CreateLaneRule(
@@ -1234,6 +1327,16 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     cb?: (error: string, rep: DescribeApiGroupsResponse) => void
   ): Promise<DescribeApiGroupsResponse> {
     return this.request("DescribeApiGroups", req, cb)
+  }
+
+  /**
+   * 查询日志配置项列表
+   */
+  async DescribeBusinessLogConfigs(
+    req: DescribeBusinessLogConfigsRequest,
+    cb?: (error: string, rep: DescribeBusinessLogConfigsResponse) => void
+  ): Promise<DescribeBusinessLogConfigsResponse> {
+    return this.request("DescribeBusinessLogConfigs", req, cb)
   }
 
   /**
@@ -1364,6 +1467,16 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     cb?: (error: string, rep: DescribeInovcationIndicatorsResponse) => void
   ): Promise<DescribeInovcationIndicatorsResponse> {
     return this.request("DescribeInovcationIndicators", req, cb)
+  }
+
+  /**
+   * 用部署组id获取绑定信息
+   */
+  async DescribeDeliveryConfigByGroupId(
+    req: DescribeDeliveryConfigByGroupIdRequest,
+    cb?: (error: string, rep: DescribeDeliveryConfigByGroupIdResponse) => void
+  ): Promise<DescribeDeliveryConfigByGroupIdResponse> {
+    return this.request("DescribeDeliveryConfigByGroupId", req, cb)
   }
 
   /**
@@ -1578,23 +1691,23 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
   }
 
   /**
-   * 查询虚拟机部署组云主机列表
+   * 查询业务日志配置项信息
    */
-  async DescribeGroupInstances(
-    req: DescribeGroupInstancesRequest,
-    cb?: (error: string, rep: DescribeGroupInstancesResponse) => void
-  ): Promise<DescribeGroupInstancesResponse> {
-    return this.request("DescribeGroupInstances", req, cb)
+  async DescribeBusinessLogConfig(
+    req: DescribeBusinessLogConfigRequest,
+    cb?: (error: string, rep: DescribeBusinessLogConfigResponse) => void
+  ): Promise<DescribeBusinessLogConfigResponse> {
+    return this.request("DescribeBusinessLogConfig", req, cb)
   }
 
   /**
-   * 删除仓库
+   * 查询网关所有分组下Api列表
    */
-  async DeleteRepository(
-    req: DeleteRepositoryRequest,
-    cb?: (error: string, rep: DeleteRepositoryResponse) => void
-  ): Promise<DeleteRepositoryResponse> {
-    return this.request("DeleteRepository", req, cb)
+  async DescribeGatewayAllGroupApis(
+    req: DescribeGatewayAllGroupApisRequest,
+    cb?: (error: string, rep: DescribeGatewayAllGroupApisResponse) => void
+  ): Promise<DescribeGatewayAllGroupApisResponse> {
+    return this.request("DescribeGatewayAllGroupApis", req, cb)
   }
 
   /**
@@ -1636,6 +1749,16 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     cb?: (error: string, rep: DescribePathRewriteResponse) => void
   ): Promise<DescribePathRewriteResponse> {
     return this.request("DescribePathRewrite", req, cb)
+  }
+
+  /**
+   * 取消关联投递信息和部署组
+   */
+  async DisassociateKafkaConfig(
+    req: DisassociateKafkaConfigRequest,
+    cb?: (error: string, rep: DisassociateKafkaConfigResponse) => void
+  ): Promise<DisassociateKafkaConfigResponse> {
+    return this.request("DisassociateKafkaConfig", req, cb)
   }
 
   /**
@@ -1769,6 +1892,16 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
   }
 
   /**
+   * 获取多个投递项配置
+   */
+  async DescribeDeliveryConfigs(
+    req: DescribeDeliveryConfigsRequest,
+    cb?: (error: string, rep: DescribeDeliveryConfigsResponse) => void
+  ): Promise<DescribeDeliveryConfigsResponse> {
+    return this.request("DescribeDeliveryConfigs", req, cb)
+  }
+
+  /**
    * 更新Api分组
    */
   async UpdateApiGroup(
@@ -1869,6 +2002,16 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
   }
 
   /**
+   * 关联日志配置项到应用
+   */
+  async AssociateBusinessLogConfig(
+    req: AssociateBusinessLogConfigRequest,
+    cb?: (error: string, rep: AssociateBusinessLogConfigResponse) => void
+  ): Promise<AssociateBusinessLogConfigResponse> {
+    return this.request("AssociateBusinessLogConfig", req, cb)
+  }
+
+  /**
    * 查询公共配置发布历史
    */
   async DescribePublicConfigReleaseLogs(
@@ -1939,13 +2082,13 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
   }
 
   /**
-   * 查询网关所有分组下Api列表
+   * 删除仓库
    */
-  async DescribeGatewayAllGroupApis(
-    req: DescribeGatewayAllGroupApisRequest,
-    cb?: (error: string, rep: DescribeGatewayAllGroupApisResponse) => void
-  ): Promise<DescribeGatewayAllGroupApisResponse> {
-    return this.request("DescribeGatewayAllGroupApis", req, cb)
+  async DeleteRepository(
+    req: DeleteRepositoryRequest,
+    cb?: (error: string, rep: DeleteRepositoryResponse) => void
+  ): Promise<DeleteRepositoryResponse> {
+    return this.request("DeleteRepository", req, cb)
   }
 
   /**
@@ -2139,13 +2282,13 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
   }
 
   /**
-   * 创建容器部署组
+   * 获取单个投递项配置信息
    */
-  async CreateContainGroup(
-    req: CreateContainGroupRequest,
-    cb?: (error: string, rep: CreateContainGroupResponse) => void
-  ): Promise<CreateContainGroupResponse> {
-    return this.request("CreateContainGroup", req, cb)
+  async DescribeDeliveryConfig(
+    req: DescribeDeliveryConfigRequest,
+    cb?: (error: string, rep: DescribeDeliveryConfigResponse) => void
+  ): Promise<DescribeDeliveryConfigResponse> {
+    return this.request("DescribeDeliveryConfig", req, cb)
   }
 
   /**
@@ -2236,6 +2379,16 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     cb?: (error: string, rep: DescribePublicConfigReleasesResponse) => void
   ): Promise<DescribePublicConfigReleasesResponse> {
     return this.request("DescribePublicConfigReleases", req, cb)
+  }
+
+  /**
+   * 关联投递配置到部署组
+   */
+  async AssociateConfigWithGroup(
+    req: AssociateConfigWithGroupRequest,
+    cb?: (error: string, rep: AssociateConfigWithGroupResponse) => void
+  ): Promise<AssociateConfigWithGroupResponse> {
+    return this.request("AssociateConfigWithGroup", req, cb)
   }
 
   /**

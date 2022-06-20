@@ -655,25 +655,6 @@ export interface EncodeParams {
     BackgroundImageUrl?: string;
 }
 /**
- * MeasureTrtcMcuExternal返回参数结构体
- */
-export interface MeasureTrtcMcuExternalResponse {
-    /**
-      * 应用的用量信息数组。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Usages: Array<OneSdkAppIdTranscodeTimeUsagesNewInfo>;
-    /**
-      * 用户计费类型
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Type: string;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
  * DescribeUserInformation请求参数结构体
  */
 export interface DescribeUserInformationRequest {
@@ -831,24 +812,6 @@ export interface SubscribeStreamUserIds {
     UnSubscribeVideoUserIds?: Array<string>;
 }
 /**
- * MeasureTrtcMcuExternal请求参数结构体
- */
-export interface MeasureTrtcMcuExternalRequest {
-    /**
-      * 查询开始时间，格式为YYYY-MM-DD。
-      */
-    StartTime: string;
-    /**
-      * 查询结束时间，格式为YYYY-MM-DD。
-单次查询统计区间最多不能超过2天。
-      */
-    EndTime: string;
-    /**
-      * 应用ID，可不传。传应用ID时返回的是该应用的用量，不传时返回多个应用的合计值。
-      */
-    SdkAppId?: number;
-}
-/**
  * sdk或webrtc的事件列表。
  */
 export interface EventList {
@@ -890,64 +853,6 @@ export interface WaterMarkImage {
  * 查询旁路转码计费时长。
 查询时间小于等于1天时，返回每5分钟粒度的数据；查询时间大于1天时，返回按天汇总的数据。
  */
-export interface SdkAppIdTrtcMcuTranscodeTimeNewUsage {
-    /**
-      * 本组数据对应的时间点，格式如：2020-09-07或2020-09-07 00:05:05。
-      */
-    TimeKey: string;
-    /**
-      * 语音时长，单位：秒。
-      */
-    AudioTime: number;
-    /**
-      * 视频时长-标清SD，单位：秒。
-      */
-    VideoTimeH264SD: number;
-    /**
-      * 视频时长-高清HD，单位：秒。
-      */
-    VideoTimeH264HD: number;
-    /**
-      * 视频时长-全高清FHD，单位：秒。
-      */
-    VideoTimeH264FHD: number;
-    /**
-      * 视频时长-带宽，单位：mbps。
-      */
-    Flux: number;
-    /**
-      * 视频时长-标清2K，单位：秒。
-      */
-    VideoTimeH2642K: number;
-    /**
-      * 视频时长-标清4K，单位：秒。
-      */
-    VideoTimeH2644K: number;
-    /**
-      * 视频时长-标清265SD，单位：秒。
-      */
-    VideoTimeH265SD: number;
-    /**
-      * 视频时长-高清265HD，单位：秒。
-      */
-    VideoTimeH265HD: number;
-    /**
-      * 视频时长-全高清265FHD，单位：秒。
-      */
-    VideoTimeH265FHD: number;
-    /**
-      * 视频时长-标清2652K，单位：秒。
-      */
-    VideoTimeH2652K: number;
-    /**
-      * 视频时长-标清265 4K，单位：秒。
-      */
-    VideoTimeH2654K: number;
-}
-/**
- * 查询旁路转码计费时长。
-查询时间小于等于1天时，返回每5分钟粒度的数据；查询时间大于1天时，返回按天汇总的数据。
- */
 export interface SdkAppIdTrtcMcuTranscodeTimeUsage {
     /**
       * 本组数据对应的时间点，格式如：2020-09-07或2020-09-07 00:05:05。
@@ -969,23 +874,6 @@ export interface SdkAppIdTrtcMcuTranscodeTimeUsage {
       * 视频时长-全高清FHD，单位：秒。
       */
     VideoTimeFhd: number;
-}
-/**
- * 旁路转码时长的查询结果
- */
-export interface OneSdkAppIdTranscodeTimeUsagesNewInfo {
-    /**
-      * 旁路转码时长查询结果数组
-      */
-    SdkAppIdTranscodeTimeUsages: Array<SdkAppIdTrtcMcuTranscodeTimeNewUsage>;
-    /**
-      * 查询记录数量
-      */
-    TotalNum: number;
-    /**
-      * 所查询的应用ID，可能值为:1-应用的应用ID，2-total，显示为total则表示查询的是所有应用的用量合计值。
-      */
-    SdkAppId: string;
 }
 /**
  * ModifyPicture返回参数结构体

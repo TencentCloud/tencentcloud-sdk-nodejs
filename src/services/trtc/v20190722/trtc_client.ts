@@ -45,18 +45,14 @@ import {
   StorageParams,
   CloudVod,
   EncodeParams,
-  MeasureTrtcMcuExternalResponse,
   DescribeUserInformationRequest,
   TrtcTimeNewUsage,
   ModifyPictureRequest,
   SmallVideoLayoutParams,
   SubscribeStreamUserIds,
-  MeasureTrtcMcuExternalRequest,
   EventList,
   WaterMarkImage,
-  SdkAppIdTrtcMcuTranscodeTimeNewUsage,
   SdkAppIdTrtcMcuTranscodeTimeUsage,
-  OneSdkAppIdTranscodeTimeUsagesNewInfo,
   ModifyPictureResponse,
   StorageFile,
   WaterMark,
@@ -235,17 +231,13 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
   }
 
   /**
-     * 查询旁路转码计费时长。
-- 查询时间小于等于1天时，返回每5分钟粒度的数据；查询时间大于1天时，返回按天汇总的数据。
-- 单次查询统计区间最多不能超过2天。
-- 若查询当天用量，由于统计延迟等原因，返回数据可能不够准确。
-- 日结后付费将于次日上午推送账单，建议次日上午9点以后再来查询前一天的用量。
-     */
-  async MeasureTrtcMcuExternal(
-    req: MeasureTrtcMcuExternalRequest,
-    cb?: (error: string, rep: MeasureTrtcMcuExternalResponse) => void
-  ): Promise<MeasureTrtcMcuExternalResponse> {
-    return this.request("MeasureTrtcMcuExternal", req, cb)
+   * 成功开启录制后，可以使用此接口来更新录制任务。仅在录制任务进行时有效，录制退出后更新将会返回错误。更新操作是全量覆盖，并不是增量更新的模式，也就是说每次更新都需要携带全量的信息。
+   */
+  async ModifyCloudRecording(
+    req: ModifyCloudRecordingRequest,
+    cb?: (error: string, rep: ModifyCloudRecordingResponse) => void
+  ): Promise<ModifyCloudRecordingResponse> {
+    return this.request("ModifyCloudRecording", req, cb)
   }
 
   /**
@@ -287,16 +279,6 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
     cb?: (error: string, rep: StopMCUMixTranscodeByStrRoomIdResponse) => void
   ): Promise<StopMCUMixTranscodeByStrRoomIdResponse> {
     return this.request("StopMCUMixTranscodeByStrRoomId", req, cb)
-  }
-
-  /**
-   * 成功开启录制后，可以使用此接口来更新录制任务。仅在录制任务进行时有效，录制退出后更新将会返回错误。更新操作是全量覆盖，并不是增量更新的模式，也就是说每次更新都需要携带全量的信息。
-   */
-  async ModifyCloudRecording(
-    req: ModifyCloudRecordingRequest,
-    cb?: (error: string, rep: ModifyCloudRecordingResponse) => void
-  ): Promise<ModifyCloudRecordingResponse> {
-    return this.request("ModifyCloudRecording", req, cb)
   }
 
   /**

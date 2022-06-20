@@ -52,10 +52,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeMicroservices", req, cb);
     }
     /**
-     * 修改容器部署组实例数
+     * 查询应用关联日志配置项信息
      */
-    async ModifyContainerReplicas(req, cb) {
-        return this.request("ModifyContainerReplicas", req, cb);
+    async DescribeApplicationBusinessLogConfig(req, cb) {
+        return this.request("DescribeApplicationBusinessLogConfig", req, cb);
     }
     /**
      * 虚拟机部署组下线实例
@@ -202,6 +202,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeFileConfigs", req, cb);
     }
     /**
+     * 修改容器部署组实例数
+     */
+    async ModifyContainerReplicas(req, cb) {
+        return this.request("ModifyContainerReplicas", req, cb);
+    }
+    /**
      * 查询简单集群列表
      */
     async DescribeSimpleClusters(req, cb) {
@@ -214,6 +220,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeApiDetail", req, cb);
     }
     /**
+     * 创建容器部署组
+     */
+    async CreateContainGroup(req, cb) {
+        return this.request("CreateContainGroup", req, cb);
+    }
+    /**
      * 查询某个插件下绑定或未绑定的API分组
      */
     async DescribeGroupsWithPlugin(req, cb) {
@@ -224,6 +236,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DisableUnitRoute(req, cb) {
         return this.request("DisableUnitRoute", req, cb);
+    }
+    /**
+     * 取消关联业务日志配置项和应用
+     */
+    async DisassociateBusinessLogConfig(req, cb) {
+        return this.request("DisassociateBusinessLogConfig", req, cb);
     }
     /**
      * 创建配置项
@@ -305,6 +323,12 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
         return this.request("CreateUnitRule", req, cb);
     }
     /**
+     * 更新仓库信息
+     */
+    async UpdateRepository(req, cb) {
+        return this.request("UpdateRepository", req, cb);
+    }
+    /**
      * 查询网关分组监控明细数据
      */
     async DescribeGroupUseDetail(req, cb) {
@@ -317,10 +341,10 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
         return this.request("DescribePublicConfig", req, cb);
     }
     /**
-     * 更新仓库信息
+     * 重关联业务日志配置
      */
-    async UpdateRepository(req, cb) {
-        return this.request("UpdateRepository", req, cb);
+    async ReassociateBusinessLogConfig(req, cb) {
+        return this.request("ReassociateBusinessLogConfig", req, cb);
     }
     /**
      * 批量更新API超时
@@ -383,6 +407,12 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
         return this.request("StopContainerGroup", req, cb);
     }
     /**
+     * 查询分组管理日志配置列表
+     */
+    async DescribeGroupBusinessLogConfigs(req, cb) {
+        return this.request("DescribeGroupBusinessLogConfigs", req, cb);
+    }
+    /**
      * 查询部署组相关的发布信息
      */
     async DescribeGroupRelease(req, cb) {
@@ -425,6 +455,12 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
         return this.request("UnbindApiGroup", req, cb);
     }
     /**
+     * 查询虚拟机部署组云主机列表
+     */
+    async DescribeGroupInstances(req, cb) {
+        return this.request("DescribeGroupInstances", req, cb);
+    }
+    /**
      * 创建泳道规则
      */
     async CreateLaneRule(req, cb) {
@@ -441,6 +477,12 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
      */
     async DescribeApiGroups(req, cb) {
         return this.request("DescribeApiGroups", req, cb);
+    }
+    /**
+     * 查询日志配置项列表
+     */
+    async DescribeBusinessLogConfigs(req, cb) {
+        return this.request("DescribeBusinessLogConfigs", req, cb);
     }
     /**
      * 发布配置
@@ -519,6 +561,12 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
      */
     async DescribeInovcationIndicators(req, cb) {
         return this.request("DescribeInovcationIndicators", req, cb);
+    }
+    /**
+     * 用部署组id获取绑定信息
+     */
+    async DescribeDeliveryConfigByGroupId(req, cb) {
+        return this.request("DescribeDeliveryConfigByGroupId", req, cb);
     }
     /**
      * 查询简单部署组列表
@@ -648,16 +696,16 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
         return this.request("DescribeTaskLastStatus", req, cb);
     }
     /**
-     * 查询虚拟机部署组云主机列表
+     * 查询业务日志配置项信息
      */
-    async DescribeGroupInstances(req, cb) {
-        return this.request("DescribeGroupInstances", req, cb);
+    async DescribeBusinessLogConfig(req, cb) {
+        return this.request("DescribeBusinessLogConfig", req, cb);
     }
     /**
-     * 删除仓库
+     * 查询网关所有分组下Api列表
      */
-    async DeleteRepository(req, cb) {
-        return this.request("DeleteRepository", req, cb);
+    async DescribeGatewayAllGroupApis(req, cb) {
+        return this.request("DescribeGatewayAllGroupApis", req, cb);
     }
     /**
      * 从软件仓库批量删除程序包。
@@ -683,6 +731,12 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
      */
     async DescribePathRewrite(req, cb) {
         return this.request("DescribePathRewrite", req, cb);
+    }
+    /**
+     * 取消关联投递信息和部署组
+     */
+    async DisassociateKafkaConfig(req, cb) {
+        return this.request("DisassociateKafkaConfig", req, cb);
     }
     /**
      * 查询调用指标数据变化曲线
@@ -763,6 +817,12 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
         return this.request("DeployGroup", req, cb);
     }
     /**
+     * 获取多个投递项配置
+     */
+    async DescribeDeliveryConfigs(req, cb) {
+        return this.request("DescribeDeliveryConfigs", req, cb);
+    }
+    /**
      * 更新Api分组
      */
     async UpdateApiGroup(req, cb) {
@@ -823,6 +883,12 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
         return this.request("RedoTaskBatch", req, cb);
     }
     /**
+     * 关联日志配置项到应用
+     */
+    async AssociateBusinessLogConfig(req, cb) {
+        return this.request("AssociateBusinessLogConfig", req, cb);
+    }
+    /**
      * 查询公共配置发布历史
      */
     async DescribePublicConfigReleaseLogs(req, cb) {
@@ -865,10 +931,10 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
         return this.request("DescribeJvmMonitor", req, cb);
     }
     /**
-     * 查询网关所有分组下Api列表
+     * 删除仓库
      */
-    async DescribeGatewayAllGroupApis(req, cb) {
-        return this.request("DescribeGatewayAllGroupApis", req, cb);
+    async DeleteRepository(req, cb) {
+        return this.request("DeleteRepository", req, cb);
     }
     /**
      * 启动容器部署组
@@ -985,10 +1051,10 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
         return this.request("ChangeApiUsableStatus", req, cb);
     }
     /**
-     * 创建容器部署组
+     * 获取单个投递项配置信息
      */
-    async CreateContainGroup(req, cb) {
-        return this.request("CreateContainGroup", req, cb);
+    async DescribeDeliveryConfig(req, cb) {
+        return this.request("DescribeDeliveryConfig", req, cb);
     }
     /**
      * 查询生效的单元化规则
@@ -1043,6 +1109,12 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
      */
     async DescribePublicConfigReleases(req, cb) {
         return this.request("DescribePublicConfigReleases", req, cb);
+    }
+    /**
+     * 关联投递配置到部署组
+     */
+    async AssociateConfigWithGroup(req, cb) {
+        return this.request("AssociateConfigWithGroup", req, cb);
     }
     /**
      * 查询泳道列表

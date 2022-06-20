@@ -324,6 +324,31 @@ export interface DescribeApiVersionsResponse {
 }
 
 /**
+ * ReassociateBusinessLogConfig请求参数结构体
+ */
+export interface ReassociateBusinessLogConfigRequest {
+  /**
+   * 原关联日志配置ID
+   */
+  ConfigId: string
+
+  /**
+   * 新关联日志配置ID
+   */
+  NewConfigId: string
+
+  /**
+   * TSF应用ID
+   */
+  ApplicationId: string
+
+  /**
+   * TSF部署组ID
+   */
+  GroupId: string
+}
+
+/**
  * StopContainerGroup返回参数结构体
  */
 export interface StopContainerGroupResponse {
@@ -373,6 +398,21 @@ export interface DescribeGroupReleaseRequest {
    * 部署组ID
    */
   GroupId: string
+}
+
+/**
+ * DescribeDeliveryConfig返回参数结构体
+ */
+export interface DescribeDeliveryConfigResponse {
+  /**
+   * 投递kafka配置
+   */
+  Result?: KafkaDeliveryConfig
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -928,13 +968,19 @@ export interface RedoTaskBatchRequest {
 }
 
 /**
- * DescribeTaskLastStatus请求参数结构体
+ * DescribeGroups返回参数结构体
  */
-export interface DescribeTaskLastStatusRequest {
+export interface DescribeGroupsResponse {
   /**
-   * 任务ID
+      * 虚拟机部署组分页信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result: TsfPageVmGroup
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  TaskId: string
+  RequestId?: string
 }
 
 /**
@@ -998,6 +1044,21 @@ export interface TaskRecordPage {
 }
 
 /**
+ * AssociateBusinessLogConfig请求参数结构体
+ */
+export interface AssociateBusinessLogConfigRequest {
+  /**
+   * TSF分组ID
+   */
+  GroupId: string
+
+  /**
+   * 日志配置项ID列表
+   */
+  ConfigIdList?: Array<string>
+}
+
+/**
  * DescribeJvmMonitor返回参数结构体
  */
 export interface DescribeJvmMonitorResponse {
@@ -1011,6 +1072,16 @@ export interface DescribeJvmMonitorResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeDeliveryConfig请求参数结构体
+ */
+export interface DescribeDeliveryConfigRequest {
+  /**
+   * 投递配置id
+   */
+  ConfigId: string
 }
 
 /**
@@ -1237,6 +1308,26 @@ export interface RollbackConfigRequest {
    * 回滚描述
    */
   ReleaseDesc?: string
+}
+
+/**
+ * DescribePrograms请求参数结构体
+ */
+export interface DescribeProgramsRequest {
+  /**
+   * 模糊查询数据集ID，数据集名称，不传入时查询全量
+   */
+  SearchWord?: string
+
+  /**
+   * 每页数量
+   */
+  Limit?: number
+
+  /**
+   * 起始偏移量
+   */
+  Offset?: number
 }
 
 /**
@@ -2339,6 +2430,22 @@ export interface CreateLaneResponse {
 }
 
 /**
+ * DescribeDeliveryConfigs返回参数结构体
+ */
+export interface DescribeDeliveryConfigsResponse {
+  /**
+      * 投递项关联部署组信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result?: DeliveryConfigBindGroups
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * tcr仓库信息
  */
 export interface TcrRepoInfo {
@@ -2558,23 +2665,19 @@ export interface TaskLastExecuteStatus {
 }
 
 /**
- * DescribePrograms请求参数结构体
+ * DisassociateBusinessLogConfig返回参数结构体
  */
-export interface DescribeProgramsRequest {
+export interface DisassociateBusinessLogConfigResponse {
   /**
-   * 模糊查询数据集ID，数据集名称，不传入时查询全量
-   */
-  SearchWord?: string
+      * 操作结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result?: boolean
 
   /**
-   * 每页数量
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Limit?: number
-
-  /**
-   * 起始偏移量
-   */
-  Offset?: number
+  RequestId?: string
 }
 
 /**
@@ -2585,6 +2688,22 @@ export interface DescribePublicConfigRequest {
    * 需要查询的配置项ID
    */
   ConfigId: string
+}
+
+/**
+ * AddClusterInstances返回参数结构体
+ */
+export interface AddClusterInstancesResponse {
+  /**
+      * 添加云主机的返回列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result: AddInstanceResult
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2884,43 +3003,19 @@ export interface DescribeConfigReleaseLogsRequest {
 }
 
 /**
- * ModifyContainerGroup请求参数结构体
+ * AssociateConfigWithGroup返回参数结构体
  */
-export interface ModifyContainerGroupRequest {
+export interface AssociateConfigWithGroupResponse {
   /**
-   * 部署组ID
-   */
-  GroupId?: string
+      * 绑定是否成功
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result: boolean
 
   /**
-   * 0:公网 1:集群内访问 2：NodePort
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  AccessType?: number
-
-  /**
-   * ProtocolPorts数组
-   */
-  ProtocolPorts?: Array<ProtocolPort>
-
-  /**
-   * 更新方式：0:快速更新 1:滚动更新
-   */
-  UpdateType?: number
-
-  /**
-   * 更新间隔,单位秒
-   */
-  UpdateIvl?: number
-
-  /**
-   * 子网ID
-   */
-  SubnetId?: string
-
-  /**
-   * 部署组备注
-   */
-  Alias?: string
+  RequestId?: string
 }
 
 /**
@@ -2937,6 +3032,21 @@ export interface UpdateRepositoryResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DisassociateKafkaConfig请求参数结构体
+ */
+export interface DisassociateKafkaConfigRequest {
+  /**
+   * 配置项id
+   */
+  ConfigId: string
+
+  /**
+   * 部署组id
+   */
+  GroupIds?: Array<string>
 }
 
 /**
@@ -3441,6 +3551,61 @@ export interface DescribeSimpleApplicationsRequest {
 }
 
 /**
+ * DescribeDeliveryConfigByGroupId返回参数结构体
+ */
+export interface DescribeDeliveryConfigByGroupIdResponse {
+  /**
+   * 投递kafak配置项
+   */
+  Result?: SimpleKafkaDeliveryConfig
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyContainerGroup请求参数结构体
+ */
+export interface ModifyContainerGroupRequest {
+  /**
+   * 部署组ID
+   */
+  GroupId?: string
+
+  /**
+   * 0:公网 1:集群内访问 2：NodePort
+   */
+  AccessType?: number
+
+  /**
+   * ProtocolPorts数组
+   */
+  ProtocolPorts?: Array<ProtocolPort>
+
+  /**
+   * 更新方式：0:快速更新 1:滚动更新
+   */
+  UpdateType?: number
+
+  /**
+   * 更新间隔,单位秒
+   */
+  UpdateIvl?: number
+
+  /**
+   * 子网ID
+   */
+  SubnetId?: string
+
+  /**
+   * 部署组备注
+   */
+  Alias?: string
+}
+
+/**
  * OperateApplicationTcrBinding请求参数结构体
  */
 export interface OperateApplicationTcrBindingRequest {
@@ -3562,6 +3727,22 @@ export interface ContainGroup {
 }
 
 /**
+ * DescribeGroupBusinessLogConfigs返回参数结构体
+ */
+export interface DescribeGroupBusinessLogConfigsResponse {
+  /**
+      * 业务日志配置列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result?: TsfPageBusinessLogConfig
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 部署组列表（应用下钻）
  */
 export interface ContainGroupResult {
@@ -3634,63 +3815,21 @@ export interface ReleaseApiGroupResponse {
 }
 
 /**
- * CreateFileConfig请求参数结构体
+ * 容器导入实例高级设置
  */
-export interface CreateFileConfigRequest {
+export interface InstanceAdvancedSettings {
   /**
-   * 配置项名称
-   */
-  ConfigName: string
+      * 数据盘挂载点, 默认不挂载数据盘. 已格式化的 ext3，ext4，xfs 文件系统的数据盘将直接挂载，其他文件系统或未格式化的数据盘将自动格式化为ext4 并挂载，请注意备份数据! 无数据盘或有多块数据盘的云主机此设置不生效。
+注意，注意，多盘场景请使用下方的DataDisks数据结构，设置对应的云盘类型、云盘大小、挂载路径、是否格式化等信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MountTarget: string
 
   /**
-   * 配置项版本
-   */
-  ConfigVersion: string
-
-  /**
-   * 配置项文件名
-   */
-  ConfigFileName: string
-
-  /**
-   * 配置项文件内容（原始内容编码需要 utf-8 格式，如果 ConfigFileCode 为 gbk，后台会进行转换）
-   */
-  ConfigFileValue: string
-
-  /**
-   * 配置项关联应用ID
-   */
-  ApplicationId: string
-
-  /**
-   * 发布路径
-   */
-  ConfigFilePath: string
-
-  /**
-   * 配置项版本描述
-   */
-  ConfigVersionDesc?: string
-
-  /**
-   * 配置项文件编码，utf-8 或 gbk。注：如果选择 gbk，需要新版本 tsf-consul-template （公有云虚拟机需要使用 1.32 tsf-agent，容器需要从文档中获取最新的 tsf-consul-template-docker.tar.gz）的支持
-   */
-  ConfigFileCode?: string
-
-  /**
-   * 后置命令
-   */
-  ConfigPostCmd?: string
-
-  /**
-   * Base64编码的配置项
-   */
-  EncodeWithBase64?: boolean
-
-  /**
-   * 无
-   */
-  ProgramIdList?: Array<string>
+      * dockerd --graph 指定值, 默认为 /var/lib/docker
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DockerGraphPath: string
 }
 
 /**
@@ -4401,6 +4540,23 @@ export interface DescribeGroupGatewaysResponse {
 }
 
 /**
+ * 日志投递kafka配置描述的缩简版
+ */
+export interface SimpleKafkaDeliveryConfig {
+  /**
+      * 配置项id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ConfigId: string
+
+  /**
+      * 配置项名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ConfigName: string
+}
+
+/**
  * RevocationConfig返回参数结构体
  */
 export interface RevocationConfigResponse {
@@ -4626,6 +4782,16 @@ export interface Namespace {
 }
 
 /**
+ * DescribeApplicationBusinessLogConfig返回参数结构体
+ */
+export interface DescribeApplicationBusinessLogConfigResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeGroup返回参数结构体
  */
 export interface DescribeGroupResponse {
@@ -4818,38 +4984,53 @@ false：失败。
 }
 
 /**
- * CreateLaneRule请求参数结构体
+ * 单元化API使用详情统计对象列表
  */
-export interface CreateLaneRuleRequest {
+export interface GroupUnitApiDailyUseStatistics {
   /**
-   * 泳道规则名称
+   * 命名空间ID
    */
-  RuleName: string
+  NamespaceId: string
 
   /**
-   * 泳道规则备注
+   * 命名空间名称
    */
-  Remark: string
+  NamespaceName: string
 
   /**
-   * 泳道规则标签列表
+   * 该API在该命名空间下的总调用次数
    */
-  RuleTagList: Array<LaneRuleTag>
+  SumReqAmount: string
 
   /**
-   * 泳道规则标签关系
+   * 该API在该命名空间下的平均错误率
    */
-  RuleTagRelationship: string
+  AvgFailureRate: string
 
   /**
-   * 泳道Id
+   * 该API在该命名空间下的平均响应时间
    */
-  LaneId: string
+  AvgTimeCost: string
 
   /**
-   * 无
+   * 监控数据曲线点位图Map集合
    */
-  ProgramIdList?: Array<string>
+  MetricDataPointMap: MetricDataPointMap
+
+  /**
+   * 状态码分布详情
+   */
+  TopStatusCode: Array<ApiUseStatisticsEntity>
+
+  /**
+   * 耗时分布详情
+   */
+  TopTimeCost: Array<ApiUseStatisticsEntity>
+
+  /**
+   * 分位值对象
+   */
+  Quantile: QuantileEntity
 }
 
 /**
@@ -4876,6 +5057,16 @@ export interface ExecuteTaskRequest {
    * 任务 ID。
    */
   TaskId: string
+}
+
+/**
+ * DescribeGroupBusinessLogConfigs请求参数结构体
+ */
+export interface DescribeGroupBusinessLogConfigsRequest {
+  /**
+   * 分组ID
+   */
+  GroupId: string
 }
 
 /**
@@ -5029,6 +5220,50 @@ export interface MetricDataCurve {
 }
 
 /**
+ * 日志投递kafka用，描述部署组信息
+ */
+export interface GroupInfo {
+  /**
+   * 部署组id
+   */
+  GroupId: string
+
+  /**
+   * 部署组名称
+   */
+  GroupName: string
+
+  /**
+   * 集群类型
+   */
+  ClusterType: string
+
+  /**
+      * 集群id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClusterId?: string
+
+  /**
+      * 集群名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClusterName?: string
+
+  /**
+      * 命名空间名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NamespaceName?: string
+
+  /**
+      * 绑定时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AssociateTime?: string
+}
+
+/**
  * TerminateTaskFlowBatch返回参数结构体
  */
 export interface TerminateTaskFlowBatchResponse {
@@ -5044,18 +5279,19 @@ export interface TerminateTaskFlowBatchResponse {
 }
 
 /**
- * ShrinkInstances请求参数结构体
+ * DisassociateKafkaConfig返回参数结构体
  */
-export interface ShrinkInstancesRequest {
+export interface DisassociateKafkaConfigResponse {
   /**
-   * 部署组ID
-   */
-  GroupId: string
+      * 解除绑定是否成功
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result?: boolean
 
   /**
-   * 下线机器实例ID列表
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  InstanceIdList: Array<string>
+  RequestId?: string
 }
 
 /**
@@ -5513,6 +5749,21 @@ export interface DescribeOverviewInvocationResponse {
 }
 
 /**
+ * ShrinkInstances请求参数结构体
+ */
+export interface ShrinkInstancesRequest {
+  /**
+   * 部署组ID
+   */
+  GroupId: string
+
+  /**
+   * 下线机器实例ID列表
+   */
+  InstanceIdList: Array<string>
+}
+
+/**
  * DescribeSimpleNamespaces请求参数结构体
  */
 export interface DescribeSimpleNamespacesRequest {
@@ -5803,6 +6054,53 @@ export interface Program {
 }
 
 /**
+ * 投递kafka配置项
+ */
+export interface KafkaDeliveryConfig {
+  /**
+      * 配置项id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ConfigId: string
+
+  /**
+      * 配置名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ConfigName: string
+
+  /**
+      * 采集路径
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CollectPath: Array<string>
+
+  /**
+      * kafka vip
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  KafkaVIp: string
+
+  /**
+      * kafka vport
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  KafkaVPort: string
+
+  /**
+      * kafka topic
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Topic: string
+
+  /**
+      * 换行规则
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LineRule: string
+}
+
+/**
  * API 对象类型描述
  */
 export interface ApiDefinitionDescr {
@@ -5918,6 +6216,22 @@ export interface DescribeApiGroupRequest {
 }
 
 /**
+ * AssociateBusinessLogConfig返回参数结构体
+ */
+export interface AssociateBusinessLogConfigResponse {
+  /**
+      * 操作结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result?: boolean
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeGatewayApis请求参数结构体
  */
 export interface DescribeGatewayApisRequest {
@@ -5945,6 +6259,41 @@ export interface DescribeGatewayApisRequest {
    * 部署组ID
    */
   GatewayDeployGroupId?: string
+}
+
+/**
+ * AssociateConfigWithGroup请求参数结构体
+ */
+export interface AssociateConfigWithGroupRequest {
+  /**
+   * 配置项id
+   */
+  ConfigId: string
+
+  /**
+   * 部署组信息
+   */
+  Groups?: Array<GroupInfo>
+
+  /**
+   * 是否选择全部投递，1 表示全部，0或不填表示非全部
+   */
+  SelectAll?: number
+
+  /**
+   * 命名空间id
+   */
+  NamespaceId?: string
+
+  /**
+   * 集群id
+   */
+  ClusterId?: string
+
+  /**
+   * 模糊搜索关键词
+   */
+  SearchWord?: string
 }
 
 /**
@@ -6660,20 +7009,28 @@ export interface UpdateUnitRuleResponse {
 }
 
 /**
- * 健康检查参数
+ * CreateUnitRule请求参数结构体
  */
-export interface HealthCheckSettings {
+export interface CreateUnitRuleRequest {
   /**
-      * 存活健康检查
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  LivenessProbe?: HealthCheckSetting
+   * 网关实体ID
+   */
+  GatewayInstanceId: string
 
   /**
-      * 就绪健康检查
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ReadinessProbe?: HealthCheckSetting
+   * 规则名称
+   */
+  Name: string
+
+  /**
+   * 规则描述
+   */
+  Description?: string
+
+  /**
+   * 规则项列表
+   */
+  UnitRuleItemList?: Array<UnitRuleItem>
 }
 
 /**
@@ -7591,19 +7948,42 @@ export interface EnableUnitRouteResponse {
 }
 
 /**
- * DisableUnitRule返回参数结构体
+ * API分组日使用统计对象数据点
  */
-export interface DisableUnitRuleResponse {
+export interface GroupUseStatisticsEntity {
   /**
-      * 是否成功
+      * API 路径
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Result?: boolean
+  ApiPath: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 服务名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ServiceName: string
+
+  /**
+      * 统计值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Value: string
+
+  /**
+      * API ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ApiId: string
+}
+
+/**
+ * DescribeBusinessLogConfig请求参数结构体
+ */
+export interface DescribeBusinessLogConfigRequest {
+  /**
+   * 配置项ID
    */
-  RequestId?: string
+  ConfigId: string
 }
 
 /**
@@ -7706,6 +8086,22 @@ export interface ExecuteTaskFlowRequest {
    * 工作流 ID
    */
   FlowId?: string
+}
+
+/**
+ * DescribeBusinessLogConfig返回参数结构体
+ */
+export interface DescribeBusinessLogConfigResponse {
+  /**
+      * 日志配置项
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result?: BusinessLogConfig
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -8393,6 +8789,77 @@ export interface DescribeGatewayMonitorOverviewResponse {
 }
 
 /**
+ * 业务日志配置关联部署组信息
+ */
+export interface BusinesLogConfigAssociatedGroup {
+  /**
+      * 部署组ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  GroupId: string
+
+  /**
+      * 部署组名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  GroupName: string
+
+  /**
+      * 部署组所属应用ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ApplicationId: string
+
+  /**
+      * 部署组所属应用名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ApplicationName: string
+
+  /**
+      * 部署组所属应用类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ApplicationType: string
+
+  /**
+      * 部署组所属命名空间ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NamespaceId: string
+
+  /**
+      * 部署组所属命名空间名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NamespaceName: string
+
+  /**
+      * 部署组所属集群ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClusterId: string
+
+  /**
+      * 部署组所属集群名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClusterName: string
+
+  /**
+      * 部署组所属集群类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClusterType: string
+
+  /**
+      * 部署组关联日志配置时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AssociatedTime: string
+}
+
+/**
  * CreatePublicConfig请求参数结构体
  */
 export interface CreatePublicConfigRequest {
@@ -8609,6 +9076,46 @@ export interface TsfPageUnitNamespace {
    * 记录实体列表
    */
   Content: Array<UnitNamespace>
+}
+
+/**
+ * 业务日志配置解析规则
+ */
+export interface BusinessLogConfigSchema {
+  /**
+   * 解析规则类型
+   */
+  SchemaType: number
+
+  /**
+      * 解析规则内容
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SchemaContent?: string
+
+  /**
+      * 解析规则时间格式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SchemaDateFormat?: string
+
+  /**
+      * 解析规则对应的多行匹配规则
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SchemaMultilinePattern?: string
+
+  /**
+      * 解析规则创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SchemaCreateTime?: string
+
+  /**
+      * 用户填写的解析规则
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SchemaPatternLayout?: string
 }
 
 /**
@@ -9154,28 +9661,20 @@ export interface DeleteTaskRequest {
 }
 
 /**
- * CreateUnitRule请求参数结构体
+ * 健康检查参数
  */
-export interface CreateUnitRuleRequest {
+export interface HealthCheckSettings {
   /**
-   * 网关实体ID
-   */
-  GatewayInstanceId: string
+      * 存活健康检查
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LivenessProbe?: HealthCheckSetting
 
   /**
-   * 规则名称
-   */
-  Name: string
-
-  /**
-   * 规则描述
-   */
-  Description?: string
-
-  /**
-   * 规则项列表
-   */
-  UnitRuleItemList?: Array<UnitRuleItem>
+      * 就绪健康检查
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ReadinessProbe?: HealthCheckSetting
 }
 
 /**
@@ -9312,6 +9811,36 @@ export interface ApiResponseDescr {
 }
 
 /**
+ * DescribeBusinessLogConfigs请求参数结构体
+ */
+export interface DescribeBusinessLogConfigsRequest {
+  /**
+   * 偏移量，取值范围大于等于0，默认值为0
+   */
+  Offset?: number
+
+  /**
+   * 单页请求配置数量，取值范围[1, 50]，默认值为10
+   */
+  Limit?: number
+
+  /**
+   * 模糊匹配关键词
+   */
+  SearchWord?: string
+
+  /**
+   * 无
+   */
+  DisableProgramAuthCheck?: boolean
+
+  /**
+   * 无
+   */
+  ConfigIdList?: Array<string>
+}
+
+/**
  * DescribePluginInstances请求参数结构体
  */
 export interface DescribePluginInstancesRequest {
@@ -9403,6 +9932,23 @@ export interface ApiVersionArray {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   PkgVersion: string
+}
+
+/**
+ * 描述配置项绑定的部署组
+ */
+export interface DeliveryConfigBindGroups {
+  /**
+      * 公共条数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TotalCount: number
+
+  /**
+      * 内容
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Content: Array<DeliveryConfigBindGroup>
 }
 
 /**
@@ -9756,6 +10302,16 @@ export interface DescribeInstancesRequest {
 }
 
 /**
+ * ReassociateBusinessLogConfig返回参数结构体
+ */
+export interface ReassociateBusinessLogConfigResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 路径重写创建对象
  */
 export interface PathRewriteCreateObject {
@@ -9902,14 +10458,24 @@ export interface DeletePkgsResponse {
 }
 
 /**
- * DescribeGroups返回参数结构体
+ * DescribeTaskLastStatus请求参数结构体
  */
-export interface DescribeGroupsResponse {
+export interface DescribeTaskLastStatusRequest {
   /**
-      * 虚拟机部署组分页信息
+   * 任务ID
+   */
+  TaskId: string
+}
+
+/**
+ * DescribeBusinessLogConfigs返回参数结构体
+ */
+export interface DescribeBusinessLogConfigsResponse {
+  /**
+      * 业务日志配置列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Result: TsfPageVmGroup
+  Result: TsfPageBusinessLogConfig
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -10102,19 +10668,13 @@ export interface DescribeMicroservicesRequest {
 }
 
 /**
- * AddClusterInstances返回参数结构体
+ * DescribeApplicationBusinessLogConfig请求参数结构体
  */
-export interface AddClusterInstancesResponse {
+export interface DescribeApplicationBusinessLogConfigRequest {
   /**
-      * 添加云主机的返回列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Result: AddInstanceResult
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * TSF应用ID
    */
-  RequestId?: string
+  ApplicationId: string
 }
 
 /**
@@ -10503,53 +11063,38 @@ export interface CreateRepositoryResponse {
 }
 
 /**
- * 单元化API使用详情统计对象列表
+ * CreateLaneRule请求参数结构体
  */
-export interface GroupUnitApiDailyUseStatistics {
+export interface CreateLaneRuleRequest {
   /**
-   * 命名空间ID
+   * 泳道规则名称
    */
-  NamespaceId: string
+  RuleName: string
 
   /**
-   * 命名空间名称
+   * 泳道规则备注
    */
-  NamespaceName: string
+  Remark: string
 
   /**
-   * 该API在该命名空间下的总调用次数
+   * 泳道规则标签列表
    */
-  SumReqAmount: string
+  RuleTagList: Array<LaneRuleTag>
 
   /**
-   * 该API在该命名空间下的平均错误率
+   * 泳道规则标签关系
    */
-  AvgFailureRate: string
+  RuleTagRelationship: string
 
   /**
-   * 该API在该命名空间下的平均响应时间
+   * 泳道Id
    */
-  AvgTimeCost: string
+  LaneId: string
 
   /**
-   * 监控数据曲线点位图Map集合
+   * 无
    */
-  MetricDataPointMap: MetricDataPointMap
-
-  /**
-   * 状态码分布详情
-   */
-  TopStatusCode: Array<ApiUseStatisticsEntity>
-
-  /**
-   * 耗时分布详情
-   */
-  TopTimeCost: Array<ApiUseStatisticsEntity>
-
-  /**
-   * 分位值对象
-   */
-  Quantile: QuantileEntity
+  ProgramIdList?: Array<string>
 }
 
 /**
@@ -10627,21 +11172,63 @@ export interface DeletePkgsRequest {
 }
 
 /**
- * 容器导入实例高级设置
+ * CreateFileConfig请求参数结构体
  */
-export interface InstanceAdvancedSettings {
+export interface CreateFileConfigRequest {
   /**
-      * 数据盘挂载点, 默认不挂载数据盘. 已格式化的 ext3，ext4，xfs 文件系统的数据盘将直接挂载，其他文件系统或未格式化的数据盘将自动格式化为ext4 并挂载，请注意备份数据! 无数据盘或有多块数据盘的云主机此设置不生效。
-注意，注意，多盘场景请使用下方的DataDisks数据结构，设置对应的云盘类型、云盘大小、挂载路径、是否格式化等信息。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  MountTarget: string
+   * 配置项名称
+   */
+  ConfigName: string
 
   /**
-      * dockerd --graph 指定值, 默认为 /var/lib/docker
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DockerGraphPath: string
+   * 配置项版本
+   */
+  ConfigVersion: string
+
+  /**
+   * 配置项文件名
+   */
+  ConfigFileName: string
+
+  /**
+   * 配置项文件内容（原始内容编码需要 utf-8 格式，如果 ConfigFileCode 为 gbk，后台会进行转换）
+   */
+  ConfigFileValue: string
+
+  /**
+   * 配置项关联应用ID
+   */
+  ApplicationId: string
+
+  /**
+   * 发布路径
+   */
+  ConfigFilePath: string
+
+  /**
+   * 配置项版本描述
+   */
+  ConfigVersionDesc?: string
+
+  /**
+   * 配置项文件编码，utf-8 或 gbk。注：如果选择 gbk，需要新版本 tsf-consul-template （公有云虚拟机需要使用 1.32 tsf-agent，容器需要从文档中获取最新的 tsf-consul-template-docker.tar.gz）的支持
+   */
+  ConfigFileCode?: string
+
+  /**
+   * 后置命令
+   */
+  ConfigPostCmd?: string
+
+  /**
+   * Base64编码的配置项
+   */
+  EncodeWithBase64?: boolean
+
+  /**
+   * 无
+   */
+  ProgramIdList?: Array<string>
 }
 
 /**
@@ -10779,18 +11366,38 @@ export interface DescribeContainerGroupDeployInfoRequest {
 }
 
 /**
- * OperateApplicationTcrBinding返回参数结构体
+ * DescribeDeliveryConfigs请求参数结构体
  */
-export interface OperateApplicationTcrBindingResponse {
+export interface DescribeDeliveryConfigsRequest {
   /**
-   * 是否成功
+   * 关键字
    */
-  Result: boolean
+  SearchWord?: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 偏移
    */
-  RequestId?: string
+  Offset?: number
+
+  /**
+   * 搜索条数
+   */
+  Limit?: number
+}
+
+/**
+ * DisassociateBusinessLogConfig请求参数结构体
+ */
+export interface DisassociateBusinessLogConfigRequest {
+  /**
+   * 业务日志配置项ID列表
+   */
+  ConfigIdList: Array<string>
+
+  /**
+   * TSF分组ID
+   */
+  GroupId: string
 }
 
 /**
@@ -11530,6 +12137,21 @@ export interface DescribeConfigRequest {
 }
 
 /**
+ * OperateApplicationTcrBinding返回参数结构体
+ */
+export interface OperateApplicationTcrBindingResponse {
+  /**
+   * 是否成功
+   */
+  Result: boolean
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DisableUnitRoute请求参数结构体
  */
 export interface DisableUnitRouteRequest {
@@ -12074,6 +12696,23 @@ export interface DescribeContainerGroupsRequest {
 }
 
 /**
+ * 业务日志配置项列表
+ */
+export interface TsfPageBusinessLogConfig {
+  /**
+      * 总条数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TotalCount: number
+
+  /**
+      * 业务日志配置项列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Content: Array<BusinessLogConfig>
+}
+
+/**
  * DescribePrograms返回参数结构体
  */
 export interface DescribeProgramsResponse {
@@ -12189,6 +12828,39 @@ export interface RedoTaskResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 描述投递配置项绑定的部署组
+ */
+export interface DeliveryConfigBindGroup {
+  /**
+   * 配置id
+   */
+  ConfigId: string
+
+  /**
+   * 配置名
+   */
+  ConfigName: string
+
+  /**
+      * 采集路径
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CollectPath: Array<string>
+
+  /**
+      * 关联部署组信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Groups: Array<GroupInfo>
+
+  /**
+      * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CreateTime: string
 }
 
 /**
@@ -12715,6 +13387,16 @@ export interface CreateClusterRequest {
 }
 
 /**
+ * DescribeDeliveryConfigByGroupId请求参数结构体
+ */
+export interface DescribeDeliveryConfigByGroupIdRequest {
+  /**
+   * 部署组id
+   */
+  GroupId: string
+}
+
+/**
  * 微服务列表信息
  */
 export interface TsfPageMicroservice {
@@ -12882,6 +13564,69 @@ export interface MsApiArray {
 }
 
 /**
+ * 业务日志配置
+ */
+export interface BusinessLogConfig {
+  /**
+   * 配置项ID
+   */
+  ConfigId?: string
+
+  /**
+   * 配置项名称
+   */
+  ConfigName?: string
+
+  /**
+      * 配置项日志路径
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ConfigPath?: string
+
+  /**
+      * 配置项描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ConfigDesc?: string
+
+  /**
+      * 配置项标签
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ConfigTags?: string
+
+  /**
+      * 配置项对应的ES管道
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ConfigPipeline?: string
+
+  /**
+      * 配置项创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ConfigCreateTime?: string
+
+  /**
+      * 配置项更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ConfigUpdateTime?: string
+
+  /**
+      * 配置项解析规则
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ConfigSchema?: BusinessLogConfigSchema
+
+  /**
+      * 配置项关联部署组
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ConfigAssociatedGroups?: Array<BusinesLogConfigAssociatedGroup>
+}
+
+/**
  * DescribeApiDetail请求参数结构体
  */
 export interface DescribeApiDetailRequest {
@@ -13036,32 +13781,19 @@ export interface DescribeInvocationMetricDataPointResponse {
 }
 
 /**
- * API分组日使用统计对象数据点
+ * DisableUnitRule返回参数结构体
  */
-export interface GroupUseStatisticsEntity {
+export interface DisableUnitRuleResponse {
   /**
-      * API 路径
+      * 是否成功
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ApiPath: string
+  Result?: boolean
 
   /**
-      * 服务名
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ServiceName: string
-
-  /**
-      * 统计值
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Value: string
-
-  /**
-      * API ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ApiId: string
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
