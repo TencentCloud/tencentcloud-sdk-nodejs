@@ -1249,6 +1249,18 @@ export interface CreateVpnGatewaySslServerRequest {
       * 是否支持压缩。当前仅支持不支持压缩。默认False
       */
     Compress?: boolean;
+    /**
+      * 是否开启SSO认证
+      */
+    SsoEnabled?: boolean;
+    /**
+      * 是否开启策略访问控制
+      */
+    AccessPolicyEnabled?: boolean;
+    /**
+      * SAML-DATA
+      */
+    SamlData?: string;
 }
 /**
  * CreateVpcEndPoint请求参数结构体
@@ -3808,21 +3820,17 @@ export interface AssociateNetworkAclSubnetsRequest {
     SubnetIds: Array<string>;
 }
 /**
- * CheckAssistantCidr请求参数结构体
+ * AdjustPublicAddress返回参数结构体
  */
-export interface CheckAssistantCidrRequest {
+export interface AdjustPublicAddressResponse {
     /**
-      * `VPC`实例`ID`。形如：`vpc-6v2ht8q5`
+      * 异步任务TaskId。可以使用[DescribeTaskResult](https://cloud.tencent.com/document/api/215/36271)接口查询任务状态。
       */
-    VpcId: string;
+    TaskId: number;
     /**
-      * 待添加的负载CIDR。CIDR数组，格式如["10.0.0.0/16", "172.16.0.0/16"]。入参NewCidrBlocks和OldCidrBlocks至少需要其一。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    NewCidrBlocks?: Array<string>;
-    /**
-      * 待删除的负载CIDR。CIDR数组，格式如["10.0.0.0/16", "172.16.0.0/16"]。入参NewCidrBlocks和OldCidrBlocks至少需要其一。
-      */
-    OldCidrBlocks?: Array<string>;
+    RequestId?: string;
 }
 /**
  * RenewVpnGateway请求参数结构体
@@ -9191,6 +9199,19 @@ export interface DeleteNatGatewayResponse {
     RequestId?: string;
 }
 /**
+ * AdjustPublicAddress请求参数结构体
+ */
+export interface AdjustPublicAddressRequest {
+    /**
+      * 标识CVM实例的唯一 ID。CVM 唯一 ID 形如：`ins-11112222`。
+      */
+    InstanceId?: string;
+    /**
+      * 标识EIP实例的唯一 ID。EIP 唯一 ID 形如：`eip-11112222`。
+      */
+    AddressId?: string;
+}
+/**
  * CreateDirectConnectGateway返回参数结构体
  */
 export interface CreateDirectConnectGatewayResponse {
@@ -9456,6 +9477,23 @@ export interface Ip6Translator {
       * IPV6转换规则信息
       */
     IP6RuleSet: Array<Ip6Rule>;
+}
+/**
+ * CheckAssistantCidr请求参数结构体
+ */
+export interface CheckAssistantCidrRequest {
+    /**
+      * `VPC`实例`ID`。形如：`vpc-6v2ht8q5`
+      */
+    VpcId: string;
+    /**
+      * 待添加的负载CIDR。CIDR数组，格式如["10.0.0.0/16", "172.16.0.0/16"]。入参NewCidrBlocks和OldCidrBlocks至少需要其一。
+      */
+    NewCidrBlocks?: Array<string>;
+    /**
+      * 待删除的负载CIDR。CIDR数组，格式如["10.0.0.0/16", "172.16.0.0/16"]。入参NewCidrBlocks和OldCidrBlocks至少需要其一。
+      */
+    OldCidrBlocks?: Array<string>;
 }
 /**
  * NAT网关的端口转发规则

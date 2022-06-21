@@ -6666,7 +6666,7 @@ export interface CreateClusterNodePoolRequest {
   RuntimeVersion?: string
 
   /**
-   * 节点池os
+   * 节点池os，当为自定义镜像时，传镜像id；否则为公共镜像的osName
    */
   NodePoolOs?: string
 
@@ -8331,7 +8331,7 @@ export interface DeleteClusterEndpointVipResponse {
  */
 export interface ClusterBasicSettings {
   /**
-   * 集群系统。centos7.2x86_64 或者 ubuntu16.04.1 LTSx86_64，默认取值为ubuntu16.04.1 LTSx86_64
+   * 集群系统，支持的os：https://cloud.tencent.com/document/product/457/68289
    */
   ClusterOs?: string
 

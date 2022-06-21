@@ -810,7 +810,7 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
         return this.request("CreateRecordTask", req, cb);
     }
     /**
-     * 创建转码模板，成功返回模板id后，需要调用[CreateLiveTranscodeRule](/document/product/267/32647)接口，将返回的模板id绑定到流使用。
+     * 创建转码模板，数量上限：50，成功返回模板id后，需要调用[CreateLiveTranscodeRule](/document/product/267/32647)接口，将返回的模板id绑定到流使用。
 <br>转码相关文档：[直播转封装及转码](/document/product/267/32736)。
      */
     async CreateLiveTranscodeTemplate(req, cb) {

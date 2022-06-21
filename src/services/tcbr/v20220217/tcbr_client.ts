@@ -19,23 +19,27 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   DescribeCloudRunServersResponse,
-  HpaPolicy,
+  RepositoryInfo,
+  ReleaseGrayRequest,
   StorageInfo,
   DescribeEnvBaseInfoResponse,
   CreateCloudRunServerRequest,
   FunctionInfo,
   DescribeCloudRunEnvsResponse,
   DescribeCloudRunEnvsRequest,
+  ReleaseGrayResponse,
   DeployParam,
+  OperateServerManageRequest,
   StaticStorageInfo,
   UpdateCloudRunServerRequest,
   LogServiceInfo,
+  OperateServerManageResponse,
   DescribeCloudRunServerDetailRequest,
   DatabasesInfo,
   DescribeCloudRunServersRequest,
   ClsInfo,
   ServerBaseConfig,
-  RepositoryInfo,
+  HpaPolicy,
   DescribeCloudRunServerDetailResponse,
   CreateCloudRunEnvResponse,
   EnvBaseInfo,
@@ -44,7 +48,9 @@ import {
   Tag,
   DescribeEnvBaseInfoRequest,
   CreateCloudRunServerResponse,
+  VersionFlowInfo,
   UpdateCloudRunServerResponse,
+  ObjectKV,
   BuildPacksInfo,
   CreateCloudRunEnvRequest,
 } from "./tcbr_models"
@@ -99,6 +105,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 灰度发布
+   */
+  async ReleaseGray(
+    req: ReleaseGrayRequest,
+    cb?: (error: string, rep: ReleaseGrayResponse) => void
+  ): Promise<ReleaseGrayResponse> {
+    return this.request("ReleaseGray", req, cb)
+  }
+
+  /**
    * 创建云托管环境，并开通资源。
    */
   async CreateCloudRunEnv(
@@ -116,6 +132,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCloudRunEnvsResponse) => void
   ): Promise<DescribeCloudRunEnvsResponse> {
     return this.request("DescribeCloudRunEnvs", req, cb)
+  }
+
+  /**
+   * 操作发布单
+   */
+  async OperateServerManage(
+    req: OperateServerManageRequest,
+    cb?: (error: string, rep: OperateServerManageResponse) => void
+  ): Promise<OperateServerManageResponse> {
+    return this.request("OperateServerManage", req, cb)
   }
 
   /**

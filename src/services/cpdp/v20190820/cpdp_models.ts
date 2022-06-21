@@ -4233,24 +4233,30 @@ ANONYMOUS: 匿名类型 USER_ID
  */
 export interface OpenBankSceneInfo {
   /**
-   * 用户端实际 ip，示例值：14.17.22.32
+   * 用户端实际 ip。汇付渠道必填。
    */
   PayerClientIp?: string
 
   /**
-   * 浏览器 User-Agent
+   * 浏览器 User-Agent。
    */
   PayerUa?: string
 
   /**
-   * 用户下单时间，若不上送，服务端默认当前时间
+   * 用户下单时间。若不上送，服务端默认当前时间。
    */
   OrderTime?: string
 
   /**
-   * 终端设备号（门店号或收银设备 ID），示例值：POS1:1
+   * 终端设备号（门店号或收银设备 ID），示例值：POS1:1。
    */
   DeviceId?: string
+
+  /**
+      * 终端设备类型。MOBILE_BROWSER:手机浏览器，MOBILE_APP:手机应用程序，TABLET:平板；WATCH:手表，PC:电脑PC，OTHER:其他。
+汇付渠道必填。
+      */
+  DeviceType?: string
 }
 
 /**
@@ -13257,6 +13263,19 @@ __WORKING__: 正常工作
 注意：此字段可能返回 null，表示取不到有效值。
       */
   BankNotice: string
+
+  /**
+      * 支持银行代码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BankId: string
+
+  /**
+      * 卡类型。
+D：借记卡，C：信用卡，Z：借贷合一卡。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CardType: string
 }
 
 /**
@@ -14230,19 +14249,24 @@ export interface RegisterBillRequest {
  */
 export interface OpenBankGoodsInfo {
   /**
-   * 商品标题，默认值“商品支付”
+   * 商品标题。默认值“商品支付”。
    */
   GoodsName?: string
 
   /**
-   * 商品详细描述（商品列表）
+   * 商品详细描述（商品列表）。
    */
   GoodsDetail?: string
 
   /**
-   * 银行附言，不可以有以下字符：<>+{}()%*&';"[]等特殊符号
+   * 银行附言。不可以有以下字符：<>+{}()%*&';"[]等特殊符号
    */
   GoodsDescription?: string
+
+  /**
+   * 业务类型。汇付渠道必填，汇付渠道传入固定值100099。
+   */
+  GoodsBizType?: string
 }
 
 /**
@@ -21728,7 +21752,7 @@ export interface OpenBankPayerInfo {
 
   /**
       * 付款方付款账户标识。
-当付款方式为OPENBANK_PAYMENT时，必输表示企业账户ID；当付款方式为SAFT_ISV时，必须上送付款方的渠道电子记账本ID。
+当付款方式为OPENBANK_PAYMENT时，必输表示企业账户ID；当付款方式为SAFT_ISV时，必须上送付款方的渠道电子记账本ID；当付款方式为ONLINEBANK，上送付款方银行编号BankId。
       */
   BindSerialNo?: string
 
@@ -21739,6 +21763,13 @@ ACCOUNT_BOOK_ID：电子记账本ID。
 当付款方式为SAFT_ISV时，必须上送类型为ACCOUNT_BOOK_ID。
       */
   AccountType?: string
+
+  /**
+      * 付款卡类型。汇付渠道必填。
+DEBIT_CARD：借记卡
+CREDIT_CARD：信用卡
+      */
+  BankCardType?: string
 }
 
 /**

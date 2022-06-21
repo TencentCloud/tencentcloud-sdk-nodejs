@@ -4924,7 +4924,7 @@ export interface TimeShiftBillData {
   Domain: string
 
   /**
-   * 时移文件时长,单位分钟。
+   * 时移文件时长，单位分钟。
    */
   Duration: number
 
@@ -4937,6 +4937,11 @@ export interface TimeShiftBillData {
    * 时间点，格式: yyyy-mm-ddTHH:MM:SSZ。
    */
   Time: string
+
+  /**
+   * 时移总时长，单位分钟。
+   */
+  TotalDuration: number
 }
 
 /**
@@ -6378,6 +6383,18 @@ baseline/main/high。默认baseline
    * 是否以短边作为高度，0：否，1：是。默认0。
    */
   ShortEdgeAsHeight?: number
+
+  /**
+      * DRM 加密类型，可选值：fairplay、normalaes、widevine。
+不传递或着为空字符串，清空之前的DRM配置。
+      */
+  DRMType?: string
+
+  /**
+      * DRM 加密项，可选值：AUDIO、SD、HD、UHD1、UHD2，后四个为一组，同组中的内容只能选一个。
+不传递或着为空字符串，清空之前的DRM配置。
+      */
+  DRMTracks?: string
 }
 
 /**
@@ -6631,6 +6648,18 @@ baseline/main/high。
    * 是否以短边作为高度，0：否，1：是。默认0。
    */
   ShortEdgeAsHeight?: number
+
+  /**
+      * DRM 加密类型，可选值：fairplay、normalaes、widevine。
+不传递或着为空字符串，清空之前的DRM配置。
+      */
+  DRMType?: string
+
+  /**
+      * DRM 加密项，可选值：AUDIO、SD、HD、UHD1、UHD2，后四个为一组，同组中的内容只能选一个。
+不传递或着为空字符串，清空之前的DRM配置。
+      */
+  DRMTracks?: string
 }
 
 /**
@@ -8205,6 +8234,18 @@ baseline/main/high。默认baseline
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ShortEdgeAsHeight: number
+
+  /**
+      * DRM 加密类型，可选值：fairplay、normalaes、widevine。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DRMType: string
+
+  /**
+      * DRM 加密项，多个用|分割，可选值：AUDIO、SD、HD、UHD1、UHD2，后四个为一组，同组中的内容只能选一个。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DRMTracks: string
 }
 
 /**

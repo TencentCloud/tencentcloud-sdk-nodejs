@@ -220,7 +220,7 @@ import {
   ModifyIp6RuleRequest,
   ReplaceRouteTableAssociationRequest,
   AssociateNetworkAclSubnetsRequest,
-  CheckAssistantCidrRequest,
+  AdjustPublicAddressResponse,
   RenewVpnGatewayRequest,
   SecurityGroupPolicy,
   NotifyRoutesRequest,
@@ -506,6 +506,7 @@ import {
   DescribeBandwidthPackageQuotaResponse,
   DeleteServiceTemplateGroupRequest,
   DeleteNatGatewayResponse,
+  AdjustPublicAddressRequest,
   CreateDirectConnectGatewayResponse,
   ModifyVpcEndPointAttributeRequest,
   DescribeTaskResultResponse,
@@ -519,6 +520,7 @@ import {
   InquirePriceCreateDirectConnectGatewayResponse,
   DeleteIp6TranslatorsRequest,
   Ip6Translator,
+  CheckAssistantCidrRequest,
   DestinationIpPortTranslationNatRule,
   CreateDefaultVpcRequest,
   DescribeSubnetsResponse,
@@ -730,6 +732,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ReplaceSecurityGroupPolicyResponse) => void
   ): Promise<ReplaceSecurityGroupPolicyResponse> {
     return this.request("ReplaceSecurityGroupPolicy", req, cb)
+  }
+
+  /**
+     * 本接口 (AdjustPublicAddress) 用于更换IP地址，支持更换CVM实例的普通公网IP和包月带宽的EIP。
+
+     */
+  async AdjustPublicAddress(
+    req: AdjustPublicAddressRequest,
+    cb?: (error: string, rep: AdjustPublicAddressResponse) => void
+  ): Promise<AdjustPublicAddressResponse> {
+    return this.request("AdjustPublicAddress", req, cb)
   }
 
   /**

@@ -58,6 +58,16 @@ it("tcbr.v20220217.DescribeCloudRunServers", async function () {
     }
 })
 
+it("tcbr.v20220217.ReleaseGray", async function () {
+    try {
+       const data = await client.ReleaseGray({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcbr.v20220217.CreateCloudRunEnv", async function () {
     try {
        const data = await client.CreateCloudRunEnv({})
@@ -71,6 +81,16 @@ it("tcbr.v20220217.CreateCloudRunEnv", async function () {
 it("tcbr.v20220217.DescribeCloudRunEnvs", async function () {
     try {
        const data = await client.DescribeCloudRunEnvs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcbr.v20220217.OperateServerManage", async function () {
+    try {
+       const data = await client.OperateServerManage({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

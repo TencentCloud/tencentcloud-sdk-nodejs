@@ -58,6 +58,16 @@ it("vpc.v20170312.ReplaceSecurityGroupPolicy", async function () {
     }
 })
 
+it("vpc.v20170312.AdjustPublicAddress", async function () {
+    try {
+       const data = await client.AdjustPublicAddress({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.CreateFlowLog", async function () {
     try {
        const data = await client.CreateFlowLog({})

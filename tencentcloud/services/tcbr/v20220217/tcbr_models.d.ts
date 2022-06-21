@@ -12,17 +12,54 @@ export interface DescribeCloudRunServersResponse {
     RequestId?: string;
 }
 /**
- * 扩缩容入参
+ * 代码仓库信息
  */
-export interface HpaPolicy {
+export interface RepositoryInfo {
     /**
-      * 扩缩容类型
+      * git source
       */
-    PolicyType: string;
+    Source: string;
     /**
-      * 扩缩容阈值
+      * 仓库名
       */
-    PolicyThreshold: number;
+    Repo: string;
+    /**
+      * 分之名
+      */
+    Branch: string;
+}
+/**
+ * ReleaseGray请求参数结构体
+ */
+export interface ReleaseGrayRequest {
+    /**
+      * 环境Id
+      */
+    EnvId: string;
+    /**
+      * 服务名
+      */
+    ServerName: string;
+    /**
+      * 灰度类型
+      */
+    GrayType: string;
+    /**
+      * 流量类型
+      */
+    TrafficType: string;
+    /**
+      * 流量策略
+      */
+    VersionFlowItems?: Array<VersionFlowInfo>;
+    /**
+      * 操作标识
+      */
+    OperatorRemark?: string;
+    /**
+      * 流量比例
+      */
+    GrayFlowRatio?: number;
 }
 /**
  * StorageInfo 资源信息
@@ -126,6 +163,15 @@ export interface DescribeCloudRunEnvsRequest {
     Channels?: Array<string>;
 }
 /**
+ * ReleaseGray返回参数结构体
+ */
+export interface ReleaseGrayResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 部署参数
  */
 export interface DeployParam {
@@ -161,6 +207,31 @@ export interface DeployParam {
       * 发布类型 GRAY | FULL
       */
     ReleaseType?: string;
+}
+/**
+ * OperateServerManage请求参数结构体
+ */
+export interface OperateServerManageRequest {
+    /**
+      * 环境Id
+      */
+    EnvId: string;
+    /**
+      * 服务名
+      */
+    ServerName: string;
+    /**
+      * 任报Id
+      */
+    TaskId: number;
+    /**
+      * 操作类型:cancel | go_back | done
+      */
+    OperateType: string;
+    /**
+      * 操作标识
+      */
+    OperatorRemark?: string;
 }
 /**
  * 静态CDN资源信息
@@ -232,6 +303,15 @@ export interface LogServiceInfo {
       * cls日志所属地域
       */
     Region: string;
+}
+/**
+ * OperateServerManage返回参数结构体
+ */
+export interface OperateServerManageResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeCloudRunServerDetail请求参数结构体
@@ -384,21 +464,17 @@ export interface ServerBaseConfig {
     LogParseType?: string;
 }
 /**
- * 代码仓库信息
+ * 扩缩容入参
  */
-export interface RepositoryInfo {
+export interface HpaPolicy {
     /**
-      * git source
+      * 扩缩容类型
       */
-    Source: string;
+    PolicyType: string;
     /**
-      * 仓库名
+      * 扩缩容阈值
       */
-    Repo: string;
-    /**
-      * 分之名
-      */
-    Branch: string;
+    PolicyThreshold: number;
 }
 /**
  * DescribeCloudRunServerDetail返回参数结构体
@@ -641,6 +717,31 @@ export interface CreateCloudRunServerResponse {
     RequestId?: string;
 }
 /**
+ * 版本流量信息
+ */
+export interface VersionFlowInfo {
+    /**
+      * 版本名
+      */
+    VersionName: string;
+    /**
+      * 是否默认版本
+      */
+    IsDefaultPriority: boolean;
+    /**
+      * 流量比例
+      */
+    FlowRatio?: number;
+    /**
+      * 测试KV值
+      */
+    UrlParam?: ObjectKV;
+    /**
+      * 权重
+      */
+    Priority?: number;
+}
+/**
  * UpdateCloudRunServer返回参数结构体
  */
 export interface UpdateCloudRunServerResponse {
@@ -656,6 +757,19 @@ export interface UpdateCloudRunServerResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 通用Key Value
+ */
+export interface ObjectKV {
+    /**
+      * 键值对Key
+      */
+    Key: string;
+    /**
+      * 键值对Value
+      */
+    Value: string;
 }
 /**
  * BuildPacks信息

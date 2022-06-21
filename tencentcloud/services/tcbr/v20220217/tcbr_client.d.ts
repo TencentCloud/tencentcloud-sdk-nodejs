@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeCloudRunServersResponse, DescribeEnvBaseInfoResponse, CreateCloudRunServerRequest, DescribeCloudRunEnvsResponse, DescribeCloudRunEnvsRequest, UpdateCloudRunServerRequest, DescribeCloudRunServerDetailRequest, DescribeCloudRunServersRequest, DescribeCloudRunServerDetailResponse, CreateCloudRunEnvResponse, DescribeEnvBaseInfoRequest, CreateCloudRunServerResponse, UpdateCloudRunServerResponse, CreateCloudRunEnvRequest } from "./tcbr_models";
+import { DescribeCloudRunServersResponse, ReleaseGrayRequest, DescribeEnvBaseInfoResponse, CreateCloudRunServerRequest, DescribeCloudRunEnvsResponse, DescribeCloudRunEnvsRequest, ReleaseGrayResponse, OperateServerManageRequest, UpdateCloudRunServerRequest, OperateServerManageResponse, DescribeCloudRunServerDetailRequest, DescribeCloudRunServersRequest, DescribeCloudRunServerDetailResponse, CreateCloudRunEnvResponse, DescribeEnvBaseInfoRequest, CreateCloudRunServerResponse, UpdateCloudRunServerResponse, CreateCloudRunEnvRequest } from "./tcbr_models";
 /**
  * tcbr client
  * @class
@@ -24,6 +24,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeCloudRunServers(req: DescribeCloudRunServersRequest, cb?: (error: string, rep: DescribeCloudRunServersResponse) => void): Promise<DescribeCloudRunServersResponse>;
     /**
+     * 灰度发布
+     */
+    ReleaseGray(req: ReleaseGrayRequest, cb?: (error: string, rep: ReleaseGrayResponse) => void): Promise<ReleaseGrayResponse>;
+    /**
      * 创建云托管环境，并开通资源。
      */
     CreateCloudRunEnv(req: CreateCloudRunEnvRequest, cb?: (error: string, rep: CreateCloudRunEnvResponse) => void): Promise<CreateCloudRunEnvResponse>;
@@ -31,6 +35,10 @@ export declare class Client extends AbstractClient {
      * 获取环境列表，含环境下的各个资源信息。尤其是各资源的唯一标识，是请求各资源的关键参数
      */
     DescribeCloudRunEnvs(req: DescribeCloudRunEnvsRequest, cb?: (error: string, rep: DescribeCloudRunEnvsResponse) => void): Promise<DescribeCloudRunEnvsResponse>;
+    /**
+     * 操作发布单
+     */
+    OperateServerManage(req: OperateServerManageRequest, cb?: (error: string, rep: OperateServerManageResponse) => void): Promise<OperateServerManageResponse>;
     /**
      * 查询云托管服务详情
      */
