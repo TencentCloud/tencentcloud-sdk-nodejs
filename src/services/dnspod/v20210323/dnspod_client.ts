@@ -20,6 +20,7 @@ import { ClientConfig } from "../../../common/interface"
 import {
   CreateRecordRequest,
   DescribeBatchTaskDetail,
+  ModifyVasAutoRenewStatusResponse,
   DeleteDomainAliasResponse,
   ModifySubdomainStatusRequest,
   CreateRecordBatchResponse,
@@ -27,6 +28,7 @@ import {
   DomainAnalyticsInfo,
   DescribeBatchTaskRequest,
   DomainAnalyticsDetail,
+  PayOrderWithBalanceResponse,
   DescribeDomainResponse,
   DescribeRecordLineListResponse,
   DomainInfo,
@@ -43,12 +45,14 @@ import {
   LineGroupInfo,
   DeleteDomainRequest,
   ModifyDomainOwnerRequest,
+  ModifyPackageAutoRenewRequest,
   DomainShareInfo,
   DescribeRecordLineListRequest,
   DescribeRecordListResponse,
   CreateRecordBatchRequest,
   DeleteDomainAliasRequest,
   DomainAliasInfo,
+  CreateDealRequest,
   ModifyDomainLockRequest,
   ModifyDomainStatusRequest,
   SubdomainAliasAnalyticsItem,
@@ -85,12 +89,15 @@ import {
   ModifyRecordBatchDetail,
   DescribeUserDetailResponse,
   CreateDomainRequest,
+  ModifyPackageAutoRenewResponse,
   DomainAliasAnalyticsItem,
   DescribeDomainShareInfoResponse,
   ModifyDomainRemarkRequest,
   CreateDomainAliasResponse,
   DescribeRecordListRequest,
+  PayOrderWithBalanceRequest,
   DescribeDomainPurviewResponse,
+  Deals,
   ModifySubdomainStatusResponse,
   DescribeDomainAnalyticsResponse,
   ModifyRecordStatusResponse,
@@ -111,6 +118,8 @@ import {
   CreateDomainBatchDetail,
   ModifyDomainUnlockRequest,
   ModifyDomainLockResponse,
+  CreateDealResponse,
+  ModifyVasAutoRenewStatusRequest,
   LockInfo,
   DescribeBatchTaskResponse,
   DescribeDomainAnalyticsRequest,
@@ -157,13 +166,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除记录
+   * 获取等级允许的记录类型
    */
-  async DeleteRecord(
-    req: DeleteRecordRequest,
-    cb?: (error: string, rep: DeleteRecordResponse) => void
-  ): Promise<DeleteRecordResponse> {
-    return this.request("DeleteRecord", req, cb)
+  async DescribeRecordType(
+    req: DescribeRecordTypeRequest,
+    cb?: (error: string, rep: DescribeRecordTypeResponse) => void
+  ): Promise<DescribeRecordTypeResponse> {
+    return this.request("DescribeRecordType", req, cb)
   }
 
   /**
@@ -194,6 +203,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyRecordStatusResponse) => void
   ): Promise<ModifyRecordStatusResponse> {
     return this.request("ModifyRecordStatus", req, cb)
+  }
+
+  /**
+   * 增值服务自动续费设置
+   */
+  async ModifyVasAutoRenewStatus(
+    req: ModifyVasAutoRenewStatusRequest,
+    cb?: (error: string, rep: ModifyVasAutoRenewStatusResponse) => void
+  ): Promise<ModifyVasAutoRenewStatusResponse> {
+    return this.request("ModifyVasAutoRenewStatus", req, cb)
   }
 
   /**
@@ -237,6 +256,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * DNSPod商品下单
+   */
+  async CreateDeal(
+    req: CreateDealRequest,
+    cb?: (error: string, rep: CreateDealResponse) => void
+  ): Promise<CreateDealResponse> {
+    return this.request("CreateDeal", req, cb)
+  }
+
+  /**
    * 删除域名共享
    */
   async DeleteShareDomain(
@@ -268,14 +297,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 添加域名
-
-     */
-  async CreateDomain(
-    req: CreateDomainRequest,
-    cb?: (error: string, rep: CreateDomainResponse) => void
-  ): Promise<CreateDomainResponse> {
-    return this.request("CreateDomain", req, cb)
+   * 批量添加记录
+   */
+  async CreateRecordBatch(
+    req: CreateRecordBatchRequest,
+    cb?: (error: string, rep: CreateRecordBatchResponse) => void
+  ): Promise<CreateRecordBatchResponse> {
+    return this.request("CreateRecordBatch", req, cb)
   }
 
   /**
@@ -289,13 +317,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取等级允许的记录类型
+   * 删除记录
    */
-  async DescribeRecordType(
-    req: DescribeRecordTypeRequest,
-    cb?: (error: string, rep: DescribeRecordTypeResponse) => void
-  ): Promise<DescribeRecordTypeResponse> {
-    return this.request("DescribeRecordType", req, cb)
+  async DeleteRecord(
+    req: DeleteRecordRequest,
+    cb?: (error: string, rep: DeleteRecordResponse) => void
+  ): Promise<DeleteRecordResponse> {
+    return this.request("DeleteRecord", req, cb)
   }
 
   /**
@@ -326,6 +354,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDomainAnalyticsResponse) => void
   ): Promise<DescribeDomainAnalyticsResponse> {
     return this.request("DescribeDomainAnalytics", req, cb)
+  }
+
+  /**
+   *  DNS 解析套餐自动续费设置
+   */
+  async ModifyPackageAutoRenew(
+    req: ModifyPackageAutoRenewRequest,
+    cb?: (error: string, rep: ModifyPackageAutoRenewResponse) => void
+  ): Promise<ModifyPackageAutoRenewResponse> {
+    return this.request("ModifyPackageAutoRenew", req, cb)
   }
 
   /**
@@ -410,13 +448,24 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 批量添加记录
+     * 添加域名
+
+     */
+  async CreateDomain(
+    req: CreateDomainRequest,
+    cb?: (error: string, rep: CreateDomainResponse) => void
+  ): Promise<CreateDomainResponse> {
+    return this.request("CreateDomain", req, cb)
+  }
+
+  /**
+   * DNSPod商品余额支付
    */
-  async CreateRecordBatch(
-    req: CreateRecordBatchRequest,
-    cb?: (error: string, rep: CreateRecordBatchResponse) => void
-  ): Promise<CreateRecordBatchResponse> {
-    return this.request("CreateRecordBatch", req, cb)
+  async PayOrderWithBalance(
+    req: PayOrderWithBalanceRequest,
+    cb?: (error: string, rep: PayOrderWithBalanceResponse) => void
+  ): Promise<PayOrderWithBalanceResponse> {
+    return this.request("PayOrderWithBalance", req, cb)
   }
 
   /**

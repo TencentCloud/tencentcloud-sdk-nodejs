@@ -722,6 +722,16 @@ TEXT控件可以指定字体
    * 控件描述
    */
   ComponentDescription?: string
+
+  /**
+   * 指定关键字时横坐标偏移量
+   */
+  OffsetX?: number
+
+  /**
+   * 指定关键字时纵坐标偏移量
+   */
+  OffsetY?: number
 }
 
 /**

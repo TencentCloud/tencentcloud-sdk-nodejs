@@ -746,6 +746,31 @@ export interface TrustMalwaresRequest {
     Ids: Array<number>;
 }
 /**
+ * 授权订单对象内容
+ */
+export interface LicenseOrder {
+    /**
+      * 授权ID
+      */
+    LicenseId: number;
+    /**
+      * 授权类型
+      */
+    LicenseType: number;
+    /**
+      * 授权订单资源状态
+      */
+    Status: number;
+    /**
+      * 订单类型
+      */
+    SourceType: number;
+    /**
+      * 资源ID
+      */
+    ResourceId: string;
+}
+/**
  * ExportVulEffectHostList请求参数结构体
  */
 export interface ExportVulEffectHostListRequest {
@@ -4649,6 +4674,11 @@ export interface EffectiveMachineInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     MachineStatus: string;
+    /**
+      * 授权订单对象
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LicenseOrder: LicenseOrder;
 }
 /**
  * DescribeVulCountByDates返回参数结构体
@@ -6956,8 +6986,8 @@ export interface DescribeImportMachineInfoRequest {
       */
     IsQueryProMachine?: boolean;
     /**
-      * 过滤条件。
-<li>Version - String  是否必填：否 - 当前防护版本（ PRO_VERSION：专业版 | BASIC_VERSION：基础版 | Flagship : 旗舰版 | ProtectedMachines: 专业版+旗舰版）</li>
+      * 过滤条件：
+<li>Version - String  是否必填：否 - 当前防护版本（ PRO_VERSION：专业版 | BASIC_VERSION：基础版 | Flagship：旗舰版 | ProtectedMachines：专业版+旗舰版） | BASIC_PROPOST_GENERAL_DISCOUNT：普惠版+专业版按量计费+基础版主机 | UnFlagship：专业版预付费+专业版后付费+基础版+普惠版</li>
       */
     Filters?: Array<Filters>;
 }

@@ -78,6 +78,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateAccessExport", req, cb);
     }
     /**
+     * 查询用户所有实例的详细信息
+     */
+    async DescribeInstances(req, cb) {
+        return this.request("DescribeInstances", req, cb);
+    }
+    /**
      * Waf IP黑白名单Delete接口
      */
     async DeleteIpAccessControl(req, cb) {
@@ -102,10 +108,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeFlowTrend", req, cb);
     }
     /**
-     * 创建攻击日志下载任务
+     * 在负载均衡型WAF的添加、编辑域名配置的时候，需要展示负载均衡型WAF（clb-waf)支持的地域列表，通过DescribeUserClbWafRegions既可以获得当前对客户已经开放的地域列表
      */
-    async CreateAttackDownloadTask(req, cb) {
-        return this.request("CreateAttackDownloadTask", req, cb);
+    async DescribeUserClbWafRegions(req, cb) {
+        return this.request("DescribeUserClbWafRegions", req, cb);
     }
     /**
      * 更改某一条规则
@@ -156,10 +162,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyWafAutoDenyRules", req, cb);
     }
     /**
-     * 在负载均衡型WAF的添加、编辑域名配置的时候，需要展示负载均衡型WAF（clb-waf)支持的地域列表，通过DescribeUserClbWafRegions既可以获得当前对客户已经开放的地域列表
+     * 创建攻击日志下载任务
      */
-    async DescribeUserClbWafRegions(req, cb) {
-        return this.request("DescribeUserClbWafRegions", req, cb);
+    async CreateAttackDownloadTask(req, cb) {
+        return this.request("CreateAttackDownloadTask", req, cb);
     }
     /**
      * 删除攻击日志下载任务记录

@@ -265,38 +265,53 @@ export interface DescribeIpAccessControlResponse {
 }
 
 /**
- * ModifyDomainWhiteRule请求参数结构体
+ * DescribeInstances返回参数结构体
  */
-export interface ModifyDomainWhiteRuleRequest {
+export interface DescribeInstancesResponse {
   /**
-   * 需要更改的规则的域名
+   * 总数
+   */
+  Total: number
+
+  /**
+   * instance列表
+   */
+  Instances: Array<InstanceInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyWafAutoDenyRules请求参数结构体
+ */
+export interface ModifyWafAutoDenyRulesRequest {
+  /**
+   * 域名
    */
   Domain: string
 
   /**
-   * 白名单id
+   * 攻击次数阈值
    */
-  Id: number
+  AttackThreshold: number
 
   /**
-   * 规则的id列表
+   * 攻击时间阈值
    */
-  Rules: Array<number>
+  TimeThreshold: number
 
   /**
-   * 规则匹配路径
+   * 自动封禁时间
    */
-  Url: string
+  DenyTimeThreshold: number
 
   /**
-   * 规则匹配方法
+   * 自动封禁状态
    */
-  Function: string
-
-  /**
-   * 规则的开关状态
-   */
-  Status: number
+  DefenseStatus: number
 }
 
 /**
@@ -470,38 +485,13 @@ export interface DeleteDownloadRecordRequest {
 }
 
 /**
- * 规则白名单
+ * DeleteAccessExport返回参数结构体
  */
-export interface RuleList {
+export interface DeleteAccessExportResponse {
   /**
-   * 规则Id
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Id: number
-
-  /**
-   * 规则列表的id
-   */
-  Rules: Array<number>
-
-  /**
-   * 请求url
-   */
-  Url: string
-
-  /**
-   * 请求的方法
-   */
-  Function: string
-
-  /**
-   * 时间戳
-   */
-  Time: string
-
-  /**
-   * 开关状态
-   */
-  Status: number
+  RequestId?: string
 }
 
 /**
@@ -525,18 +515,13 @@ export interface DescribeAccessExportsRequest {
 }
 
 /**
- * 响应体的返回码
+ * ModifyWafAutoDenyStatus请求参数结构体
  */
-export interface ResponseCode {
+export interface ModifyWafAutoDenyStatusRequest {
   /**
-   * 如果成功则返回Success，失败则返回yunapi定义的错误码
+   * WAF 自动封禁配置项
    */
-  Code: string
-
-  /**
-   * 如果成功则返回Success，失败则返回WAF定义的二级错误码
-   */
-  Message: string
+  WafAutoDenyDetails: AutoDenyDetail
 }
 
 /**
@@ -550,13 +535,33 @@ export interface ModifyAccessPeriodResponse {
 }
 
 /**
- * DeleteAccessExport返回参数结构体
+ * clb-waf QPS套餐 New
  */
-export interface DeleteAccessExportResponse {
+export interface QPSPackageNew {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 资源ID
    */
-  RequestId?: string
+  ResourceIds: string
+
+  /**
+   * 过期时间
+   */
+  ValidTime: string
+
+  /**
+   * 是否自动续费，1：自动续费，0：不自动续费
+   */
+  RenewFlag: number
+
+  /**
+   * 套餐购买个数
+   */
+  Count: number
+
+  /**
+   * 套餐购买地域，clb-waf暂时没有用到
+   */
+  Region: string
 }
 
 /**
@@ -1078,6 +1083,71 @@ export interface DeleteDomainWhiteRulesRequest {
 }
 
 /**
+ * clb-waf 域名扩展套餐
+ */
+export interface DomainPackageNew {
+  /**
+   * 资源ID
+   */
+  ResourceIds: string
+
+  /**
+   * 过期时间
+   */
+  ValidTime: string
+
+  /**
+   * 是否自动续费，1：自动续费，0：不自动续费
+   */
+  RenewFlag: number
+
+  /**
+   * 套餐购买个数
+   */
+  Count: number
+
+  /**
+   * 套餐购买地域，clb-waf暂时没有用到
+   */
+  Region: string
+}
+
+/**
+ * 规则白名单
+ */
+export interface RuleList {
+  /**
+   * 规则Id
+   */
+  Id: number
+
+  /**
+   * 规则列表的id
+   */
+  Rules: Array<number>
+
+  /**
+   * 请求url
+   */
+  Url: string
+
+  /**
+   * 请求的方法
+   */
+  Function: string
+
+  /**
+   * 时间戳
+   */
+  Time: string
+
+  /**
+   * 开关状态
+   */
+  Status: number
+}
+
+/**
  * ModifyCustomRuleStatus返回参数结构体
  */
 export interface ModifyCustomRuleStatusResponse {
@@ -1270,6 +1340,118 @@ export interface ModifyAccessPeriodRequest {
 }
 
 /**
+ * 一个实例的详细信息
+ */
+export interface InstanceInfo {
+  /**
+   * id
+   */
+  InstanceId: string
+
+  /**
+   * name
+   */
+  InstanceName: string
+
+  /**
+   * 资源id
+   */
+  ResourceIds: string
+
+  /**
+   * 地域
+   */
+  Region: string
+
+  /**
+   * 付费模式
+   */
+  PayMode: number
+
+  /**
+   * 自动续费
+   */
+  RenewFlag: number
+
+  /**
+   * 弹性计费
+   */
+  Mode: number
+
+  /**
+   * 套餐版本
+   */
+  Level: number
+
+  /**
+   * 过期时间
+   */
+  ValidTime: string
+
+  /**
+   * 开始时间
+   */
+  BeginTime: string
+
+  /**
+   * 已用
+   */
+  DomainCount: number
+
+  /**
+   * 上限
+   */
+  SubDomainLimit: number
+
+  /**
+   * 已用
+   */
+  MainDomainCount: number
+
+  /**
+   * 上限
+   */
+  MainDomainLimit: number
+
+  /**
+   * 峰值
+   */
+  MaxQPS: number
+
+  /**
+   * qps套餐
+   */
+  QPS: QPSPackageNew
+
+  /**
+   * 域名套餐
+   */
+  DomainPkg: DomainPackageNew
+
+  /**
+   * 用户appid
+   */
+  AppId: number
+
+  /**
+   * clb或saas
+   */
+  Edition: string
+
+  /**
+      * 业务安全包
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FraudPkg?: FraudPkg
+
+  /**
+      * Bot资源包
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BotPkg?: BotPkg
+}
+
+/**
  * ModifyWafAutoDenyRules返回参数结构体
  */
 export interface ModifyWafAutoDenyRulesResponse {
@@ -1282,6 +1464,26 @@ export interface ModifyWafAutoDenyRulesResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeInstances请求参数结构体
+ */
+export interface DescribeInstancesRequest {
+  /**
+   * 偏移
+   */
+  Offset: number
+
+  /**
+   * 容量
+   */
+  Limit: number
+
+  /**
+   * 过滤数组
+   */
+  Filters?: Array<FiltersItemNew>
 }
 
 /**
@@ -1337,43 +1539,57 @@ export interface DeleteIpAccessControlResponse {
 }
 
 /**
- * SearchAccessLog请求参数结构体
+ * 单条日志数据描述
  */
-export interface SearchAccessLogRequest {
+export interface AccessLogInfo {
   /**
-   * 客户要查询的日志主题ID，每个客户都有对应的一个主题
-   */
+      * 日志时间，单位ms
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Time: number
+
+  /**
+      * 日志主题ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
   TopicId: string
 
   /**
-   * 要查询的日志的起始时间，Unix时间戳，单位ms
-   */
-  From: number
+      * 日志主题名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TopicName: string
 
   /**
-   * 要查询的日志的结束时间，Unix时间戳，单位ms
-   */
-  To: number
+      * 日志来源IP
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Source: string
 
   /**
-   * 查询语句，语句长度最大为4096
-   */
-  Query: string
+      * 日志文件名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FileName: string
 
   /**
-   * 单次查询返回的日志条数，最大值为100
-   */
-  Limit?: number
+      * 日志上报请求包的ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PkgId: string
 
   /**
-   * 加载更多日志时使用，透传上次返回的Context值，获取后续的日志内容
-   */
-  Context?: string
+      * 请求包内日志的ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PkgLogId: string
 
   /**
-   * 日志接口是否按时间排序返回；可选值：asc(升序)、desc(降序)，默认为 desc
-   */
-  Sort?: string
+      * 日志内容的Json序列化字符串
+注意：此字段可能返回 null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LogJson: string
 }
 
 /**
@@ -1441,6 +1657,53 @@ export interface AddCustomRuleRequest {
    * 放行的详情
    */
   Bypass?: string
+}
+
+/**
+ * 业务安全资源信息
+ */
+export interface FraudPkg {
+  /**
+      * 资源id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ResourceIds?: string
+
+  /**
+      * 状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Status?: number
+
+  /**
+      * 地域
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Region?: number
+
+  /**
+      * 开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BeginTime?: string
+
+  /**
+      * 结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EndTime?: string
+
+  /**
+      * 申请数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InquireNum?: number
+
+  /**
+      * 使用数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UsedNum?: number
 }
 
 /**
@@ -1555,33 +1818,38 @@ export interface ExportAccessInfo {
 }
 
 /**
- * ModifyWafAutoDenyRules请求参数结构体
+ * ModifyDomainWhiteRule请求参数结构体
  */
-export interface ModifyWafAutoDenyRulesRequest {
+export interface ModifyDomainWhiteRuleRequest {
   /**
-   * 域名
+   * 需要更改的规则的域名
    */
   Domain: string
 
   /**
-   * 攻击次数阈值
+   * 白名单id
    */
-  AttackThreshold: number
+  Id: number
 
   /**
-   * 攻击时间阈值
+   * 规则的id列表
    */
-  TimeThreshold: number
+  Rules: Array<number>
 
   /**
-   * 自动封禁时间
+   * 规则匹配路径
    */
-  DenyTimeThreshold: number
+  Url: string
 
   /**
-   * 自动封禁状态
+   * 规则匹配方法
    */
-  DefenseStatus: number
+  Function: string
+
+  /**
+   * 规则的开关状态
+   */
+  Status: number
 }
 
 /**
@@ -1651,13 +1919,18 @@ export interface AutoDenyDetail {
 }
 
 /**
- * ModifyWafAutoDenyStatus请求参数结构体
+ * 响应体的返回码
  */
-export interface ModifyWafAutoDenyStatusRequest {
+export interface ResponseCode {
   /**
-   * WAF 自动封禁配置项
+   * 如果成功则返回Success，失败则返回yunapi定义的错误码
    */
-  WafAutoDenyDetails: AutoDenyDetail
+  Code: string
+
+  /**
+   * 如果成功则返回Success，失败则返回WAF定义的二级错误码
+   */
+  Message: string
 }
 
 /**
@@ -2087,57 +2360,43 @@ export interface BotStatPointItem {
 }
 
 /**
- * 单条日志数据描述
+ * SearchAccessLog请求参数结构体
  */
-export interface AccessLogInfo {
+export interface SearchAccessLogRequest {
   /**
-      * 日志时间，单位ms
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Time: number
-
-  /**
-      * 日志主题ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 客户要查询的日志主题ID，每个客户都有对应的一个主题
+   */
   TopicId: string
 
   /**
-      * 日志主题名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  TopicName: string
+   * 要查询的日志的起始时间，Unix时间戳，单位ms
+   */
+  From: number
 
   /**
-      * 日志来源IP
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Source: string
+   * 要查询的日志的结束时间，Unix时间戳，单位ms
+   */
+  To: number
 
   /**
-      * 日志文件名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  FileName: string
+   * 查询语句，语句长度最大为4096
+   */
+  Query: string
 
   /**
-      * 日志上报请求包的ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  PkgId: string
+   * 单次查询返回的日志条数，最大值为100
+   */
+  Limit?: number
 
   /**
-      * 请求包内日志的ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  PkgLogId: string
+   * 加载更多日志时使用，透传上次返回的Context值，获取后续的日志内容
+   */
+  Context?: string
 
   /**
-      * 日志内容的Json序列化字符串
-注意：此字段可能返回 null，表示取不到有效值。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  LogJson: string
+   * 日志接口是否按时间排序返回；可选值：asc(升序)、desc(降序)，默认为 desc
+   */
+  Sort?: string
 }
 
 /**
@@ -2175,6 +2434,53 @@ export interface DescribeDomainsRequest {
    * 过滤数组
    */
   Filters?: Array<FiltersItemNew>
+}
+
+/**
+ * Bot资源信息
+ */
+export interface BotPkg {
+  /**
+      * 资源id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ResourceIds?: string
+
+  /**
+      * 状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Status?: number
+
+  /**
+      * 地域
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Region?: number
+
+  /**
+      * 开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BeginTime?: string
+
+  /**
+      * 结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EndTime?: string
+
+  /**
+      * 申请数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InquireNum?: number
+
+  /**
+      * 使用数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UsedNum?: number
 }
 
 /**

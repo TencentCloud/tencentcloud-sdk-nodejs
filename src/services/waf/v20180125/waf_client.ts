@@ -30,7 +30,8 @@ import {
   AccessLogItems,
   AddDomainWhiteRuleResponse,
   DescribeIpAccessControlResponse,
-  ModifyDomainWhiteRuleRequest,
+  DescribeInstancesResponse,
+  ModifyWafAutoDenyRulesRequest,
   AccessRuleTagInfo,
   DescribeAccessIndexRequest,
   DomainInfo,
@@ -43,11 +44,11 @@ import {
   UpsertIpAccessControlRequest,
   DescribeCustomRulesPagingInfo,
   DeleteDownloadRecordRequest,
-  RuleList,
-  DescribeAccessExportsRequest,
-  ResponseCode,
-  ModifyAccessPeriodResponse,
   DeleteAccessExportResponse,
+  DescribeAccessExportsRequest,
+  ModifyWafAutoDenyStatusRequest,
+  ModifyAccessPeriodResponse,
+  QPSPackageNew,
   FiltersItemNew,
   DescribeAutoDenyIPResponse,
   SearchAccessLogResponse,
@@ -61,6 +62,8 @@ import {
   CreateAttackDownloadTaskRequest,
   DescribeWafAutoDenyStatusResponse,
   DeleteDomainWhiteRulesRequest,
+  DomainPackageNew,
+  RuleList,
   ModifyCustomRuleStatusResponse,
   AddSpartaProtectionResponse,
   IpAccessControlData,
@@ -71,20 +74,23 @@ import {
   ModifyCustomRuleStatusRequest,
   DeleteDownloadRecordResponse,
   ModifyAccessPeriodRequest,
+  InstanceInfo,
   ModifyWafAutoDenyRulesResponse,
+  DescribeInstancesRequest,
   AccessValueInfo,
   DeleteIpAccessControlResponse,
-  SearchAccessLogRequest,
+  AccessLogInfo,
   AccessKeyValueInfo,
   AddCustomRuleRequest,
+  FraudPkg,
   DescribeCustomRulesRequest,
   ModifyDomainWhiteRuleResponse,
   ExportAccessInfo,
-  ModifyWafAutoDenyRulesRequest,
+  ModifyDomainWhiteRuleRequest,
   DescribeAccessFastAnalysisResponse,
   DescribeDomainsResponse,
   AutoDenyDetail,
-  ModifyWafAutoDenyStatusRequest,
+  ResponseCode,
   ModifyWafThreatenIntelligenceRequest,
   Strategy,
   AccessFullTextInfo,
@@ -105,9 +111,10 @@ import {
   DescribeAccessExportsResponse,
   CreateAccessExportResponse,
   BotStatPointItem,
-  AccessLogInfo,
+  SearchAccessLogRequest,
   AccessRuleKeyValueInfo,
   DescribeDomainsRequest,
+  BotPkg,
   ModifyWafThreatenIntelligenceResponse,
 } from "./waf_models"
 
@@ -203,6 +210,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询用户所有实例的详细信息
+   */
+  async DescribeInstances(
+    req: DescribeInstancesRequest,
+    cb?: (error: string, rep: DescribeInstancesResponse) => void
+  ): Promise<DescribeInstancesResponse> {
+    return this.request("DescribeInstances", req, cb)
+  }
+
+  /**
    * Waf IP黑白名单Delete接口
    */
   async DeleteIpAccessControl(
@@ -243,13 +260,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建攻击日志下载任务
+   * 在负载均衡型WAF的添加、编辑域名配置的时候，需要展示负载均衡型WAF（clb-waf)支持的地域列表，通过DescribeUserClbWafRegions既可以获得当前对客户已经开放的地域列表
    */
-  async CreateAttackDownloadTask(
-    req: CreateAttackDownloadTaskRequest,
-    cb?: (error: string, rep: CreateAttackDownloadTaskResponse) => void
-  ): Promise<CreateAttackDownloadTaskResponse> {
-    return this.request("CreateAttackDownloadTask", req, cb)
+  async DescribeUserClbWafRegions(
+    req?: DescribeUserClbWafRegionsRequest,
+    cb?: (error: string, rep: DescribeUserClbWafRegionsResponse) => void
+  ): Promise<DescribeUserClbWafRegionsResponse> {
+    return this.request("DescribeUserClbWafRegions", req, cb)
   }
 
   /**
@@ -333,13 +350,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 在负载均衡型WAF的添加、编辑域名配置的时候，需要展示负载均衡型WAF（clb-waf)支持的地域列表，通过DescribeUserClbWafRegions既可以获得当前对客户已经开放的地域列表
+   * 创建攻击日志下载任务
    */
-  async DescribeUserClbWafRegions(
-    req?: DescribeUserClbWafRegionsRequest,
-    cb?: (error: string, rep: DescribeUserClbWafRegionsResponse) => void
-  ): Promise<DescribeUserClbWafRegionsResponse> {
-    return this.request("DescribeUserClbWafRegions", req, cb)
+  async CreateAttackDownloadTask(
+    req: CreateAttackDownloadTaskRequest,
+    cb?: (error: string, rep: CreateAttackDownloadTaskResponse) => void
+  ): Promise<CreateAttackDownloadTaskResponse> {
+    return this.request("CreateAttackDownloadTask", req, cb)
   }
 
   /**

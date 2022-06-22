@@ -14667,8 +14667,9 @@ export interface MediaTranscodeItem {
   Width: number
 
   /**
-   * 媒体文件总大小（视频为 HLS 时，大小是 m3u8 和 ts 文件大小的总和），单位：字节。
-   */
+      * 媒体文件总大小，单位：字节。
+<li>当媒体文件为 HLS 时，大小是 m3u8 和 ts 文件大小的总和。</li>
+      */
   Size: number
 
   /**
@@ -14677,24 +14678,24 @@ export interface MediaTranscodeItem {
   Duration: number
 
   /**
-   * 容器类型，例如 m4a，mp4 等。
-   */
-  Container: string
-
-  /**
    * 视频的 md5 值。
    */
   Md5: string
 
   /**
-   * 音频流信息。
+   * 容器类型，例如 m4a，mp4 等。
    */
-  AudioStreamSet: Array<MediaAudioStreamItem>
+  Container: string
 
   /**
    * 视频流信息。
    */
   VideoStreamSet: Array<MediaVideoStreamItem>
+
+  /**
+   * 音频流信息。
+   */
+  AudioStreamSet: Array<MediaAudioStreamItem>
 }
 
 /**
@@ -15060,6 +15061,11 @@ export interface DescribeProcedureTemplatesResponse {
  */
 export interface SearchMediaRequest {
   /**
+   * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+   */
+  SubAppId?: number
+
+  /**
       * 文件 ID 集合，匹配集合中的任意元素。
 <li>数组长度限制：10。</li>
 <li>单个 ID 长度限制：40个字符。</li>
@@ -15095,7 +15101,7 @@ export interface SearchMediaRequest {
 
   /**
       * 标签集合，匹配集合中任意元素。
-<li>单个标签长度限制：8个字符。</li>
+<li>单个标签长度限制：16个字符。</li>
 <li>数组长度限制：10。</li>
       */
   Tags?: Array<string>
@@ -15178,11 +15184,6 @@ export interface SearchMediaRequest {
 <li>数组长度限制：20。</li>
       */
   StorageRegions?: Array<string>
-
-  /**
-   * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
-   */
-  SubAppId?: number
 
   /**
       * 存储类型数组。可选值有：

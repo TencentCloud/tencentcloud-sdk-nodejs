@@ -1554,7 +1554,7 @@ export interface L7OfflineLog {
       */
     LogTime: number;
     /**
-      * 站点名称
+      * 子域名
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Domain: string;
@@ -3443,11 +3443,11 @@ export interface DownloadL7LogsRequest {
       */
     PageNo: number;
     /**
-      * 站点集合
+      * 站点名集合
       */
     Zones?: Array<string>;
     /**
-      * 域名集合
+      * 子域名集合
       */
     Domains?: Array<string>;
 }

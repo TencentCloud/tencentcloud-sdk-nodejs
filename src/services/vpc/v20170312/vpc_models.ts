@@ -3428,6 +3428,11 @@ export interface DescribeVpnGatewaySslClientsRequest {
    * SSL-VPN-CLIENT实例ID。形如：vpngwSslClient-f49l6u0z。每次请求的实例的上限为100。参数不支持同时指定SslVpnClientIds和Filters。
    */
   SslVpnClientIds?: Array<string>
+
+  /**
+   * VPN门户网站使用。默认是False。
+   */
+  IsVpnPortal?: boolean
 }
 
 /**
@@ -3488,6 +3493,11 @@ export interface DescribeVpnGatewaySslServersRequest {
 <li>ssl-vpn-server-id - String - （过滤条件）SSL-VPN-SERVER实例ID形如：vpngwSslServer-123456。</li>
       */
   Filters?: Array<FilterObject>
+
+  /**
+   * vpn门户使用。 默认Flase
+   */
+  IsVpnPortal?: boolean
 }
 
 /**
@@ -6268,6 +6278,36 @@ export interface AssociateAddressResponse {
 }
 
 /**
+ * 策略信息
+ */
+export interface AccessPolicy {
+  /**
+   * 目的CIDR
+   */
+  TargetCidr: string
+
+  /**
+   * 策略ID
+   */
+  VpnGatewayIdSslAccessPolicyId: string
+
+  /**
+   * 是否对所有用户都生效。1 生效 0不生效
+   */
+  ForAllClient: number
+
+  /**
+   * 用户组ID
+   */
+  UserGroupIds: Array<string>
+
+  /**
+   * 更新时间
+   */
+  UpdateTime: string
+}
+
+/**
  * ModifyCcnAttachedInstancesAttribute返回参数结构体
  */
 export interface ModifyCcnAttachedInstancesAttributeResponse {
@@ -8244,6 +8284,26 @@ export interface SslVpnSever {
 7 未知
       */
   State: number
+
+  /**
+   * 是否开启SSO认证。1：开启  0： 不开启
+   */
+  SsoEnabled: number
+
+  /**
+   * EIAM应用ID
+   */
+  EiamApplicationId: string
+
+  /**
+   * 是否开启策略控制。0：不开启 1： 开启
+   */
+  AccessPolicyEnabled: number
+
+  /**
+   * 策略信息
+   */
+  AccessPolicy: Array<AccessPolicy>
 }
 
 /**
@@ -8251,9 +8311,19 @@ export interface SslVpnSever {
  */
 export interface DownloadVpnGatewaySslClientCertResponse {
   /**
-   * SSL-VPN-CLIENT 证书配置
+   * 无
    */
   SslClientConfigsSet: string
+
+  /**
+   * SSL-VPN client配置
+   */
+  SslClientConfig: Array<SslClientConfig>
+
+  /**
+   * 是否鉴权成功 只有传入SamlToken 才生效
+   */
+  Authenticated: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -11322,6 +11392,31 @@ export interface ModifyServiceTemplateGroupAttributeResponse {
 }
 
 /**
+ * DownloadVpnGatewaySslClientCert 使用
+ */
+export interface SslClientConfig {
+  /**
+   * 客户端配置
+   */
+  SslVpnClientConfiguration: string
+
+  /**
+   * 更证书
+   */
+  SslVpnRootCert: string
+
+  /**
+   * 客户端密钥
+   */
+  SslVpnKey: string
+
+  /**
+   * 客户端证书
+   */
+  SslVpnCert: string
+}
+
+/**
  * DeleteSubnet请求参数结构体
  */
 export interface DeleteSubnetRequest {
@@ -12407,6 +12502,16 @@ export interface DownloadVpnGatewaySslClientCertRequest {
    * SSL-VPN-CLIENT 实例ID。
    */
   SslVpnClientId: string
+
+  /**
+   * SAML-TOKEN
+   */
+  SamlToken?: string
+
+  /**
+   * VPN门户网站使用。默认Flase
+   */
+  IsVpnPortal?: boolean
 }
 
 /**

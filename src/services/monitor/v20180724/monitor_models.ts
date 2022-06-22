@@ -3614,19 +3614,24 @@ export interface BindingPolicyTagRequest {
   GroupId: string
 
   /**
-   * 策略标签
-   */
-  Tag: PolicyTag
-
-  /**
    * 产品类型
    */
   ServiceType: string
 
   /**
+   * 策略标签
+   */
+  Tag?: PolicyTag
+
+  /**
    * 实例分组ID
    */
   InstanceGroupId?: number
+
+  /**
+   * 批量绑定标签
+   */
+  BatchTag?: Array<PolicyTag>
 }
 
 /**

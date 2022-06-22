@@ -6392,6 +6392,16 @@ export interface CreateVerifyRecordResponse {
       */
     FileVerifyUrl: string;
     /**
+      * 文件校验域名列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FileVerifyDomains: Array<string>;
+    /**
+      * 文件校验文件名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FileVerifyName: string;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;

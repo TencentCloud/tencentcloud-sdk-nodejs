@@ -128,6 +128,16 @@ export interface DescribeBatchTaskDetail {
 }
 
 /**
+ * ModifyVasAutoRenewStatus返回参数结构体
+ */
+export interface ModifyVasAutoRenewStatusResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteDomainAlias返回参数结构体
  */
 export interface DeleteDomainAliasResponse {
@@ -304,6 +314,31 @@ export interface DomainAnalyticsDetail {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   HourKey: number
+}
+
+/**
+ * PayOrderWithBalance返回参数结构体
+ */
+export interface PayOrderWithBalanceResponse {
+  /**
+   * 此次操作支付成功的订单id数组
+   */
+  DealIdList: Array<string>
+
+  /**
+   * 此次操作支付成功的大订单号数组
+   */
+  BigDealIdList: Array<string>
+
+  /**
+   * 此次操作支付成功的订单号数组
+   */
+  DealNameList: Array<string>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -881,6 +916,21 @@ export interface ModifyDomainOwnerRequest {
 }
 
 /**
+ * ModifyPackageAutoRenew请求参数结构体
+ */
+export interface ModifyPackageAutoRenewRequest {
+  /**
+   * 资源ID
+   */
+  ResourceId: string
+
+  /**
+   * enable 开启自动续费；disable 关闭自动续费
+   */
+  Status: string
+}
+
+/**
  * 域名共享信息
  */
 export interface DomainShareInfo {
@@ -990,6 +1040,65 @@ export interface DomainAliasInfo {
    * 域名别名
    */
   DomainAlias: string
+}
+
+/**
+ * CreateDeal请求参数结构体
+ */
+export interface CreateDealRequest {
+  /**
+   * 询价类型，1 新购，2 续费，3 套餐升级（增值服务暂时只支持新购）
+   */
+  DealType: number
+
+  /**
+   * 商品类型，1 域名套餐 2 增值服务
+   */
+  GoodsType: number
+
+  /**
+      * 套餐类型：
+DP_PLUS：专业版
+DP_EXPERT：企业版
+DP_ULTRA：尊享版
+
+增值服务类型
+LB：负载均衡
+URL：URL转发
+DMONITOR_TASKS：D监控任务数
+DMONITOR_IP：D监控备用 IP 数
+CUSTOMLINE：自定义线路数
+      */
+  GoodsChildType: string
+
+  /**
+      * 增值服务购买数量，如果是域名套餐固定为1，如果是增值服务则按以下规则：
+负载均衡、D监控任务数、D监控备用 IP 数、自定义线路数、URL 转发（必须是5的正整数倍，如 5、10、15 等）
+      */
+  GoodsNum: number
+
+  /**
+   * 是否开启自动续费，1 开启，2 不开启（增值服务暂不支持自动续费），默认值为 2 不开启
+   */
+  AutoRenew: number
+
+  /**
+   * 需要绑定套餐的域名，如 dnspod.cn，如果是续费或升级，domain 参数必须要传，新购可不传。
+   */
+  Domain?: string
+
+  /**
+      * 套餐时长：
+1. 套餐以月为单位（按月只能是 3、6 还有 12 的倍数），套餐例如购买一年则传12，最大120 。（续费最低一年）
+2. 升级套餐时不需要传。
+3. 增值服务的时长单位为年，买一年传1（增值服务新购按年只能是 1，增值服务续费最大为 10）
+      */
+  TimeSpan?: number
+
+  /**
+   * 套餐类型，需要升级到的套餐类型，只有升级时需要。
+   */
+  NewPackageType?: string
 }
 
 /**
@@ -2028,6 +2137,16 @@ export interface CreateDomainRequest {
 }
 
 /**
+ * ModifyPackageAutoRenew返回参数结构体
+ */
+export interface ModifyPackageAutoRenewResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 域名别名解析量统计信息
  */
 export interface DomainAliasAnalyticsItem {
@@ -2163,6 +2282,21 @@ export interface DescribeRecordListRequest {
 }
 
 /**
+ * PayOrderWithBalance请求参数结构体
+ */
+export interface PayOrderWithBalanceRequest {
+  /**
+   * 需要支付的大订单号数组
+   */
+  BigDealIdList: Array<string>
+
+  /**
+   * 代金券ID数组
+   */
+  VoucherIdList?: Array<string>
+}
+
+/**
  * DescribeDomainPurview返回参数结构体
  */
 export interface DescribeDomainPurviewResponse {
@@ -2175,6 +2309,21 @@ export interface DescribeDomainPurviewResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 子订单号列表
+ */
+export interface Deals {
+  /**
+   * 子订单ID
+   */
+  DealId: string
+
+  /**
+   * 子订单号
+   */
+  DealName: string
 }
 
 /**
@@ -2566,6 +2715,41 @@ export interface ModifyDomainLockResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreateDeal返回参数结构体
+ */
+export interface CreateDealResponse {
+  /**
+   * 大订单号，一个大订单号下可以有多个子订单，说明是同一次下单
+   */
+  BigDealId: string
+
+  /**
+   * 子订单列表
+   */
+  DealList: Array<Deals>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyVasAutoRenewStatus请求参数结构体
+ */
+export interface ModifyVasAutoRenewStatusRequest {
+  /**
+   * 资源ID
+   */
+  ResourceId: string
+
+  /**
+   * enable 开启自动续费；disable 关闭自动续费
+   */
+  Status: string
 }
 
 /**

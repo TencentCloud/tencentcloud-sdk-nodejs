@@ -51,6 +51,7 @@ import {
   ExportAttackLogsResponse,
   DescribeBaselineEffectHostListResponse,
   TrustMalwaresRequest,
+  LicenseOrder,
   ExportVulEffectHostListRequest,
   DescribeBaselineBasicInfoRequest,
   DescribeProVersionInfoRequest,

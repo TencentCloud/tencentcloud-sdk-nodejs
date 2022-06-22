@@ -46,10 +46,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifySubdomainStatus", req, cb);
     }
     /**
-     * 删除记录
+     * 获取等级允许的记录类型
      */
-    async DeleteRecord(req, cb) {
-        return this.request("DeleteRecord", req, cb);
+    async DescribeRecordType(req, cb) {
+        return this.request("DescribeRecordType", req, cb);
     }
     /**
      * 获取域名别名列表
@@ -68,6 +68,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyRecordStatus(req, cb) {
         return this.request("ModifyRecordStatus", req, cb);
+    }
+    /**
+     * 增值服务自动续费设置
+     */
+    async ModifyVasAutoRenewStatus(req, cb) {
+        return this.request("ModifyVasAutoRenewStatus", req, cb);
     }
     /**
      * 修改域名状态
@@ -94,6 +100,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDomainShareInfo", req, cb);
     }
     /**
+     * DNSPod商品下单
+     */
+    async CreateDeal(req, cb) {
+        return this.request("CreateDeal", req, cb);
+    }
+    /**
      * 删除域名共享
      */
     async DeleteShareDomain(req, cb) {
@@ -113,11 +125,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyDynamicDNS", req, cb);
     }
     /**
-     * 添加域名
-
+     * 批量添加记录
      */
-    async CreateDomain(req, cb) {
-        return this.request("CreateDomain", req, cb);
+    async CreateRecordBatch(req, cb) {
+        return this.request("CreateRecordBatch", req, cb);
     }
     /**
      * 获取帐户信息
@@ -126,10 +137,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeUserDetail", req, cb);
     }
     /**
-     * 获取等级允许的记录类型
+     * 删除记录
      */
-    async DescribeRecordType(req, cb) {
-        return this.request("DescribeRecordType", req, cb);
+    async DeleteRecord(req, cb) {
+        return this.request("DeleteRecord", req, cb);
     }
     /**
      * 获取记录信息
@@ -148,6 +159,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeDomainAnalytics(req, cb) {
         return this.request("DescribeDomainAnalytics", req, cb);
+    }
+    /**
+     *  DNS 解析套餐自动续费设置
+     */
+    async ModifyPackageAutoRenew(req, cb) {
+        return this.request("ModifyPackageAutoRenew", req, cb);
     }
     /**
      * 设置记录备注
@@ -199,10 +216,17 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBatchTask", req, cb);
     }
     /**
-     * 批量添加记录
+     * 添加域名
+
      */
-    async CreateRecordBatch(req, cb) {
-        return this.request("CreateRecordBatch", req, cb);
+    async CreateDomain(req, cb) {
+        return this.request("CreateDomain", req, cb);
+    }
+    /**
+     * DNSPod商品余额支付
+     */
+    async PayOrderWithBalance(req, cb) {
+        return this.request("PayOrderWithBalance", req, cb);
     }
     /**
      * 获取域名列表

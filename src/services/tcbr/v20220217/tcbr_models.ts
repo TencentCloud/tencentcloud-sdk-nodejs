@@ -45,7 +45,7 @@ export interface RepositoryInfo {
   Repo: string
 
   /**
-   * 分之名
+   * 分支名
    */
   Branch: string
 }
