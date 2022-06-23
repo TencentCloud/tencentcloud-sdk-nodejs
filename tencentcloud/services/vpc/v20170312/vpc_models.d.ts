@@ -894,9 +894,9 @@ export interface ModifyNetworkAclEntriesRequest {
       */
     NetworkAclId: string;
     /**
-      * 网络ACL规则集。
+      * 网络ACL规则集。NetworkAclEntrySet和NetworkAclQuintupleSet只能输入一个。
       */
-    NetworkAclEntrySet: NetworkAclEntrySet;
+    NetworkAclEntrySet?: NetworkAclEntrySet;
 }
 /**
  * DescribeVpcPrivateIpAddresses请求参数结构体
@@ -5449,7 +5449,7 @@ export interface CreateSecurityGroupResponse {
     /**
       * 安全组对象。
       */
-    SecurityGroup?: SecurityGroup;
+    SecurityGroup: SecurityGroup;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

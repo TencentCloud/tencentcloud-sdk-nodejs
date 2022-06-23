@@ -719,6 +719,21 @@ export interface SearchScope {
 }
 
 /**
+ * 点播文件播放信息，包含当前在播地址和该地址已播时长 。
+ */
+export interface VodPullInputPlayInfo {
+  /**
+   * 当前正在播放文件 Url 。
+   */
+  Url: string
+
+  /**
+   * 点播文件已播放时长，单位：秒。
+   */
+  TimeOffset: number
+}
+
+/**
  * RevokeResourceAuthorization返回参数结构体
  */
 export interface RevokeResourceAuthorizationResponse {
@@ -3460,6 +3475,12 @@ export interface HandleStreamConnectProjectResponse {
    * 输入源推流地址，当 Operation 取值 AddInput 且 InputType 为 RtmpPush 类型时有效。
    */
   StreamInputRtmpPushUrl: string
+
+  /**
+      * 点播输入源播放进度信息，当 Operation 取值 DescribeInputPlayInfo 且 InputType 为 VodPull 类型时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VodPullInputPlayInfo: VodPullInputPlayInfo
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

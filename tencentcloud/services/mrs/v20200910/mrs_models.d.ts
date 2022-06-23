@@ -277,6 +277,41 @@ export interface ReportInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Diagnose: string;
+    /**
+      * 检查项目
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CheckItem: string;
+    /**
+      * 检查方法
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CheckMethod: string;
+    /**
+      * 诊断时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DiagnoseTime: string;
+    /**
+      * 体检号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    HealthCheckupNum: string;
+    /**
+      * 其它时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OtherTime: string;
+    /**
+      * 打印时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PrintTime: string;
+    /**
+      * 未归类时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Times: Array<Time>;
 }
 /**
  * 内窥镜报告
@@ -1225,6 +1260,11 @@ export interface PatientInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     MedicalInsuranceTypeCode: string;
+    /**
+      * 床号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BedNo: string;
 }
 /**
  * 组织学等级
@@ -1737,6 +1777,21 @@ export interface TextToClassResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 时间
+ */
+export interface Time {
+    /**
+      * 具体时间类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Name: string;
+    /**
+      * 时间值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Value: string;
 }
 /**
  * 组织学类型

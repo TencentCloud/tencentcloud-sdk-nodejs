@@ -34,10 +34,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateCloudRunServer", req, cb);
     }
     /**
-     * 更新云托管服务
+     * 查询服务管理任务信息
      */
-    async UpdateCloudRunServer(req, cb) {
-        return this.request("UpdateCloudRunServer", req, cb);
+    async DescribeServerManageTask(req, cb) {
+        return this.request("DescribeServerManageTask", req, cb);
     }
     /**
      * 查询环境基础信息
@@ -56,6 +56,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ReleaseGray(req, cb) {
         return this.request("ReleaseGray", req, cb);
+    }
+    /**
+     * 更新云托管服务
+     */
+    async UpdateCloudRunServer(req, cb) {
+        return this.request("UpdateCloudRunServer", req, cb);
     }
     /**
      * 创建云托管环境，并开通资源。

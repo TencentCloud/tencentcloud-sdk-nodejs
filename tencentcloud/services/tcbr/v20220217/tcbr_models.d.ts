@@ -132,6 +132,55 @@ export interface FunctionInfo {
     Region: string;
 }
 /**
+ * DescribeServerManageTask返回参数结构体
+ */
+export interface DescribeServerManageTaskResponse {
+    /**
+      * 是否存在
+      */
+    IsExist: boolean;
+    /**
+      * 任务信息
+      */
+    Task: ServerManageTaskInfo;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * 任务步骤信息
+ */
+export interface TaskStepInfo {
+    /**
+      * 步骤名
+      */
+    Name: string;
+    /**
+      * 未启动："todo"
+运行中："running"
+失败："failed"
+成功结束："finished"
+      */
+    Status: string;
+    /**
+      * 开始时间
+      */
+    StartTime: string;
+    /**
+      * 结束时间
+      */
+    EndTime: string;
+    /**
+      * 消耗时间：秒
+      */
+    CostTime: number;
+    /**
+      * 失败原因
+      */
+    FailReason: string;
+}
+/**
  * DescribeCloudRunEnvs返回参数结构体
  */
 export interface DescribeCloudRunEnvsResponse {
@@ -379,6 +428,40 @@ export interface ClsInfo {
     CreateTime: string;
 }
 /**
+ * DescribeServerManageTask请求参数结构体
+ */
+export interface DescribeServerManageTaskRequest {
+    /**
+      * 环境Id
+      */
+    EnvId: string;
+    /**
+      * 服务名
+      */
+    ServerName: string;
+    /**
+      * 任务Id
+      */
+    TaskId: number;
+    /**
+      * 操作标识
+      */
+    OperatorRemark?: string;
+}
+/**
+ * 扩缩容入参
+ */
+export interface HpaPolicy {
+    /**
+      * 扩缩容类型
+      */
+    PolicyType: string;
+    /**
+      * 扩缩容阈值
+      */
+    PolicyThreshold: number;
+}
+/**
  * 服务基础配置信息
  */
 export interface ServerBaseConfig {
@@ -462,19 +545,6 @@ export interface ServerBaseConfig {
       * 解析类型：json ｜ line
       */
     LogParseType?: string;
-}
-/**
- * 扩缩容入参
- */
-export interface HpaPolicy {
-    /**
-      * 扩缩容类型
-      */
-    PolicyType: string;
-    /**
-      * 扩缩容阈值
-      */
-    PolicyThreshold: number;
 }
 /**
  * DescribeCloudRunServerDetail返回参数结构体
@@ -834,4 +904,73 @@ Activity：活动来源
       * 渠道：wechat | cloud
       */
     Channel?: string;
+}
+/**
+ * 服务管理任务信息
+ */
+export interface ServerManageTaskInfo {
+    /**
+      * 任务Id
+      */
+    Id: number;
+    /**
+      * 环境Id
+      */
+    EnvId: string;
+    /**
+      * 服务名
+      */
+    ServerName: string;
+    /**
+      * 创建时间
+      */
+    CreateTime: string;
+    /**
+      * 变更类型
+      */
+    ChangeType: string;
+    /**
+      * 发布类型
+      */
+    ReleaseType: string;
+    /**
+      * 部署类型
+      */
+    DeployType: string;
+    /**
+      * 上一个版本名
+      */
+    PreVersionName: string;
+    /**
+      * 版本名
+      */
+    VersionName: string;
+    /**
+      * 流水线Id
+      */
+    PipelineId: number;
+    /**
+      * 流水线任务Id
+      */
+    PipelineTaskId: number;
+    /**
+      * 发布单Id
+      */
+    ReleaseId: number;
+    /**
+      * 状态
+      */
+    Status: string;
+    /**
+      * 步骤信息
+      */
+    Steps: Array<TaskStepInfo>;
+    /**
+      * 失败原因
+      */
+    FailReason: string;
+    /**
+      * 操作标识
+      */
+    OperatorRemark: string;
 }

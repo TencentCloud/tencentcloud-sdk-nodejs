@@ -3723,9 +3723,9 @@ export interface QueryOpenBankPaymentOrderResult {
   ThirdPayOrderId: string
 
   /**
-      * INIT：初始化
+      * 订单状态。
+INIT：初始化
 PAYING：支付中
-DEDUCTED：扣款成功
 ACCEPTED：支付受理成功
 SUCCESS：支付成功
 CLOSED：关单
@@ -3785,6 +3785,18 @@ OPENBANK_PAYMENT
 注意：此字段可能返回 null，表示取不到有效值。
       */
   BankApprovalGuideInfo: OpenBankApprovalGuideInfo
+
+  /**
+      * 手续费金额
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FeeAmount: number
+
+  /**
+      * 手续费费率
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FeeRate: number
 }
 
 /**
@@ -7224,7 +7236,7 @@ export interface CreateOpenBankPaymentOrderRequest {
   ChannelMerchantId: string
 
   /**
-      * 渠道名称。
+      * 渠道名称。详见附录-云企付枚举类说明-ChannelName。
 __TENPAY__: 商企付
 __WECHAT__: 微信支付
 __ALIPAY__: 支付宝
@@ -7233,7 +7245,7 @@ __WECHAT__: 微信支付
   ChannelName: string
 
   /**
-      * 付款方式。如
+      * 付款方式。详见附录-云企付枚举类说明-PaymentMethod。
 __EBANK_PAYMENT__:B2B EBank付款
 __OPENBANK_PAYMENT__:B2C  openbank付款
 __SAFT_ISV__:支付宝安心发
@@ -7471,7 +7483,7 @@ export interface CreateOpenBankExternalSubMerchantRegistrationRequest {
   OutSubMerchantId: string
 
   /**
-      * 渠道名称。
+      * 渠道名称。详见附录-云企付枚举类说明-ChannelName。
 __TENPAY__: 商企付
 __WECHAT__: 微信支付
 __ALIPAY__: 支付宝
@@ -7479,7 +7491,7 @@ __ALIPAY__: 支付宝
   ChannelName: string
 
   /**
-      * 支付方式。
+      * 支付方式。详见附录-云企付枚举类说明-PaymentMethod。
 __EBANK_PAYMENT__: ebank支付
 __OPENBANK_PAYMENT__: openbank支付
       */

@@ -78,6 +78,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBindingPolicyObjectList", req, cb);
     }
     /**
+     * 列出 Prometheus 抓取任务
+     */
+    async DescribePrometheusScrapeJobs(req, cb) {
+        return this.request("DescribePrometheusScrapeJobs", req, cb);
+    }
+    /**
      * 云监控告警修改告警策略绑定的告警通知模板
      */
     async ModifyAlarmPolicyNotice(req, cb) {
@@ -92,10 +98,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteServiceDiscovery", req, cb);
     }
     /**
+     * 删除 Grafana Dashboard
+     */
+    async UninstallGrafanaDashboard(req, cb) {
+        return this.request("UninstallGrafanaDashboard", req, cb);
+    }
+    /**
      * 获取基础策略告警组列表
      */
     async DescribePolicyGroupList(req, cb) {
         return this.request("DescribePolicyGroupList", req, cb);
+    }
+    /**
+     * 修改 Prometheus 实例相关属性
+     */
+    async ModifyPrometheusInstanceAttributes(req, cb) {
+        return this.request("ModifyPrometheusInstanceAttributes", req, cb);
     }
     /**
      * 删除告警策略
@@ -119,6 +137,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyAlarmPolicyTasks", req, cb);
     }
     /**
+     * 本接口 (DescribePrometheusInstances) 用于查询一个或多个实例的详细信息。
+<ul>
+<li>可以根据实例ID、实例名称或者实例状态等信息来查询实例的详细信息</li>
+<li>如果参数为空，返回当前用户一定数量（Limit所指定的数量，默认为20）的实例。</li>
+</ul>
+     */
+    async DescribePrometheusInstances(req, cb) {
+        return this.request("DescribePrometheusInstances", req, cb);
+    }
+    /**
      * 获取基础告警策略条件
      */
     async DescribePolicyConditionList(req, cb) {
@@ -135,6 +163,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeBasicAlarmList(req, cb) {
         return this.request("DescribeBasicAlarmList", req, cb);
+    }
+    /**
+     * 创建 Prometheus CVM Agent
+     */
+    async CreatePrometheusAgent(req, cb) {
+        return this.request("CreatePrometheusAgent", req, cb);
     }
     /**
      * 将告警策略绑定到特定对象
@@ -161,6 +195,24 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdateAlertRuleState", req, cb);
     }
     /**
+     * 更新 exporter 集成配置
+     */
+    async UpdateExporterIntegration(req, cb) {
+        return this.request("UpdateExporterIntegration", req, cb);
+    }
+    /**
+     * 更新 Prometheus 抓取任务
+     */
+    async UpdatePrometheusScrapeJob(req, cb) {
+        return this.request("UpdatePrometheusScrapeJob", req, cb);
+    }
+    /**
+     * 解除实例绑定的 Grafana 可视化实例
+     */
+    async UnbindPrometheusManagedGrafana(req, cb) {
+        return this.request("UnbindPrometheusManagedGrafana", req, cb);
+    }
+    /**
      * 创建云监控告警策略
      */
     async CreateAlarmPolicy(req, cb) {
@@ -179,6 +231,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeProductList", req, cb);
     }
     /**
+     * 查询 exporter 集成列表
+     */
+    async DescribeExporterIntegrations(req, cb) {
+        return this.request("DescribeExporterIntegrations", req, cb);
+    }
+    /**
      * 查询所有名字空间
      */
     async DescribeAllNamespaces(req, cb) {
@@ -193,10 +251,28 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateServiceDiscovery", req, cb);
     }
     /**
+     * 删除全部的关联对象
+     */
+    async UnBindingAllPolicyObject(req, cb) {
+        return this.request("UnBindingAllPolicyObject", req, cb);
+    }
+    /**
      * 根据维度条件查询监控数据
      */
     async DescribeStatisticData(req, cb) {
         return this.request("DescribeStatisticData", req, cb);
+    }
+    /**
+     * 升级 Grafana Dashboard
+     */
+    async UpgradeGrafanaDashboard(req, cb) {
+        return this.request("UpgradeGrafanaDashboard", req, cb);
+    }
+    /**
+     * 绑定 Grafana 可视化服务实例
+     */
+    async BindPrometheusManagedGrafana(req, cb) {
+        return this.request("BindPrometheusManagedGrafana", req, cb);
     }
     /**
      * 查询通知模板列表
@@ -229,16 +305,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyAlarmReceivers", req, cb);
     }
     /**
-     * 删除全部的关联对象
+     * 彻底删除 Prometheus 实例相关数据，给定的实例必须先被 Terminate
      */
-    async UnBindingAllPolicyObject(req, cb) {
-        return this.request("UnBindingAllPolicyObject", req, cb);
+    async DestroyPrometheusInstance(req, cb) {
+        return this.request("DestroyPrometheusInstance", req, cb);
     }
     /**
      * 删除告警策略组
      */
     async DeletePolicyGroup(req, cb) {
         return this.request("DeletePolicyGroup", req, cb);
+    }
+    /**
+     * 获取 Prometheus Agent 管理相关的命令行
+     */
+    async GetPrometheusAgentManagementCommand(req, cb) {
+        return this.request("GetPrometheusAgentManagementCommand", req, cb);
     }
     /**
      * 在腾讯云容器服务下更新 Prometheus 服务发现。
@@ -263,6 +345,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdateAlertRule", req, cb);
     }
     /**
+     * 创建 exporter 集成
+     */
+    async CreateExporterIntegration(req, cb) {
+        return this.request("CreateExporterIntegration", req, cb);
+    }
+    /**
      * 设置一个策略为该告警策略类型、该项目的默认告警策略。
 同一项目下相同的告警策略类型，就会被设置为非默认。
      */
@@ -274,6 +362,18 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreatePolicyGroup(req, cb) {
         return this.request("CreatePolicyGroup", req, cb);
+    }
+    /**
+     * 销毁按量 Prometheus 实例
+     */
+    async TerminatePrometheusInstances(req, cb) {
+        return this.request("TerminatePrometheusInstances", req, cb);
+    }
+    /**
+     * 删除 Prometheus 抓取任务
+     */
+    async DeletePrometheusScrapeJobs(req, cb) {
+        return this.request("DeletePrometheusScrapeJobs", req, cb);
     }
     /**
      * 分页获取产品事件的列表
@@ -308,14 +408,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAlarmMetrics", req, cb);
     }
     /**
-     * 本接口 (DescribePrometheusInstances) 用于查询一个或多个实例的详细信息。
-<ul>
-<li>可以根据实例ID、实例名称或者实例状态等信息来查询实例的详细信息</li>
-<li>如果参数为空，返回当前用户一定数量（Limit所指定的数量，默认为20）的实例。</li>
-</ul>
+     * 删除 exporter 集成
      */
-    async DescribePrometheusInstances(req, cb) {
-        return this.request("DescribePrometheusInstances", req, cb);
+    async DeleteExporterIntegration(req, cb) {
+        return this.request("DeleteExporterIntegration", req, cb);
     }
     /**
      * 获取基础指标属性
@@ -334,6 +430,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeAlarmEvents(req, cb) {
         return this.request("DescribeAlarmEvents", req, cb);
+    }
+    /**
+     * 更新 Prometheus CVM Agent 状态
+     */
+    async UpdatePrometheusAgentStatus(req, cb) {
+        return this.request("UpdatePrometheusAgentStatus", req, cb);
     }
     /**
      * 云监控告警删除告警通知模板
@@ -372,6 +474,18 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeAlarmPolicy(req, cb) {
         return this.request("DescribeAlarmPolicy", req, cb);
+    }
+    /**
+     * 创建 Prometheus 抓取任务
+     */
+    async CreatePrometheusScrapeJob(req, cb) {
+        return this.request("CreatePrometheusScrapeJob", req, cb);
+    }
+    /**
+     * 列出 Prometheus CVM Agent
+     */
+    async DescribePrometheusAgents(req, cb) {
+        return this.request("DescribePrometheusAgents", req, cb);
     }
 }
 exports.Client = Client;

@@ -900,7 +900,7 @@ export interface DescribeEKSClusterCredentialResponse {
       */
     Addresses: Array<IPAddress>;
     /**
-      * 集群的认证信息
+      * 集群的认证信息（token只有请求是主账号才返回，子账户请使用返回的kubeconfig）
       */
     Credential: ClusterCredential;
     /**

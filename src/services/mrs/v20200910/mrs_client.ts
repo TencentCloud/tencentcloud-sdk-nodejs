@@ -62,6 +62,7 @@ import {
   DiseaseMedicalHistory,
   PathologyReport,
   TextToClassResponse,
+  Time,
   HistologyType,
   BlockInfo,
   SurgeryAttr,

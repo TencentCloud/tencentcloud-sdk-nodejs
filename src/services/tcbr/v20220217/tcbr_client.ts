@@ -25,6 +25,8 @@ import {
   DescribeEnvBaseInfoResponse,
   CreateCloudRunServerRequest,
   FunctionInfo,
+  DescribeServerManageTaskResponse,
+  TaskStepInfo,
   DescribeCloudRunEnvsResponse,
   DescribeCloudRunEnvsRequest,
   ReleaseGrayResponse,
@@ -38,8 +40,9 @@ import {
   DatabasesInfo,
   DescribeCloudRunServersRequest,
   ClsInfo,
-  ServerBaseConfig,
+  DescribeServerManageTaskRequest,
   HpaPolicy,
+  ServerBaseConfig,
   DescribeCloudRunServerDetailResponse,
   CreateCloudRunEnvResponse,
   EnvBaseInfo,
@@ -53,6 +56,7 @@ import {
   ObjectKV,
   BuildPacksInfo,
   CreateCloudRunEnvRequest,
+  ServerManageTaskInfo,
 } from "./tcbr_models"
 
 /**
@@ -75,13 +79,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更新云托管服务
+   * 查询服务管理任务信息
    */
-  async UpdateCloudRunServer(
-    req: UpdateCloudRunServerRequest,
-    cb?: (error: string, rep: UpdateCloudRunServerResponse) => void
-  ): Promise<UpdateCloudRunServerResponse> {
-    return this.request("UpdateCloudRunServer", req, cb)
+  async DescribeServerManageTask(
+    req: DescribeServerManageTaskRequest,
+    cb?: (error: string, rep: DescribeServerManageTaskResponse) => void
+  ): Promise<DescribeServerManageTaskResponse> {
+    return this.request("DescribeServerManageTask", req, cb)
   }
 
   /**
@@ -112,6 +116,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ReleaseGrayResponse) => void
   ): Promise<ReleaseGrayResponse> {
     return this.request("ReleaseGray", req, cb)
+  }
+
+  /**
+   * 更新云托管服务
+   */
+  async UpdateCloudRunServer(
+    req: UpdateCloudRunServerRequest,
+    cb?: (error: string, rep: UpdateCloudRunServerResponse) => void
+  ): Promise<UpdateCloudRunServerResponse> {
+    return this.request("UpdateCloudRunServer", req, cb)
   }
 
   /**

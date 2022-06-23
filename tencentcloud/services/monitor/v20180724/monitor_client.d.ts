@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ModifyAlarmPolicyNoticeResponse, ModifyAlarmPolicyInfoRequest, DescribeProductEventListRequest, DescribeServiceDiscoveryResponse, DescribeAlertRulesRequest, DescribePrometheusInstancesResponse, DescribePolicyGroupListResponse, BindingPolicyObjectRequest, CreateServiceDiscoveryResponse, PutMonitorDataResponse, DescribePolicyGroupInfoRequest, UpdateAlertRuleStateResponse, BindingPolicyTagResponse, DeleteServiceDiscoveryResponse, CreateAlarmPolicyRequest, DescribeAlarmEventsResponse, DescribePolicyGroupInfoResponse, ModifyAlarmPolicyNoticeRequest, DeleteAlarmPolicyRequest, DescribeConditionsTemplateListRequest, CreateAlertRuleResponse, CreatePolicyGroupResponse, ModifyAlarmPolicyTasksResponse, DescribeBaseMetricsResponse, DeleteAlertRulesResponse, GetMonitorDataRequest, DescribeAlarmPoliciesResponse, DescribeStatisticDataRequest, SendCustomAlarmMsgRequest, UnBindingPolicyObjectRequest, DescribeServiceDiscoveryRequest, DescribePolicyConditionListRequest, DeletePolicyGroupResponse, DescribeAccidentEventListResponse, DescribeMonitorTypesRequest, DescribeAlarmNoticesResponse, ModifyAlarmPolicyTasksRequest, SetDefaultAlarmPolicyRequest, ModifyAlarmNoticeRequest, CreateServiceDiscoveryRequest, DescribeAlertRulesResponse, DescribeProductListRequest, CreateAlarmPolicyResponse, ModifyAlarmReceiversResponse, DescribePolicyConditionListResponse, DescribeAllNamespacesResponse, DeleteAlarmNoticesResponse, DescribeBasicAlarmListResponse, ModifyAlarmReceiversRequest, DescribeAlarmNoticeCallbacksRequest, ModifyAlarmPolicyConditionResponse, UpdateAlertRuleStateRequest, ModifyPolicyGroupRequest, DescribeAlarmHistoriesResponse, DescribeAlarmMetricsRequest, DescribeBaseMetricsRequest, DescribeAlarmNoticeCallbacksResponse, ModifyAlarmPolicyConditionRequest, ModifyAlarmPolicyStatusResponse, DeletePolicyGroupRequest, DescribeAlarmPolicyResponse, UpdateServiceDiscoveryResponse, DescribeMonitorTypesResponse, UpdateServiceDiscoveryRequest, CreateAlarmNoticeResponse, DescribeAlarmHistoriesRequest, ModifyPolicyGroupResponse, PutMonitorDataRequest, ModifyAlarmPolicyStatusRequest, BindingPolicyTagRequest, UpdateAlertRuleRequest, DescribeBindingPolicyObjectListResponse, DescribeBindingPolicyObjectListRequest, UnBindingPolicyObjectResponse, DeleteAlarmNoticesRequest, DescribeAllNamespacesRequest, UpdateAlertRuleResponse, DescribeAlarmMetricsResponse, DescribeAlarmPoliciesRequest, DescribeConditionsTemplateListResponse, ModifyAlarmPolicyInfoResponse, DescribeAlarmEventsRequest, ModifyAlarmNoticeResponse, CreateAlertRuleRequest, DescribeProductListResponse, DescribeProductEventListResponse, DeleteAlarmPolicyResponse, DescribeAlarmPolicyRequest, CreatePolicyGroupRequest, DescribeStatisticDataResponse, DescribePolicyGroupListRequest, DescribeBasicAlarmListRequest, UnBindingAllPolicyObjectResponse, DescribeAlarmNoticesRequest, DescribeAccidentEventListRequest, DescribeAlarmNoticeResponse, DeleteAlertRulesRequest, DescribeAlarmNoticeRequest, CreateAlarmNoticeRequest, GetMonitorDataResponse, UnBindingAllPolicyObjectRequest, SendCustomAlarmMsgResponse, DeleteServiceDiscoveryRequest, DescribePrometheusInstancesRequest, SetDefaultAlarmPolicyResponse, BindingPolicyObjectResponse } from "./monitor_models";
+import { ModifyAlarmPolicyNoticeResponse, ModifyAlarmPolicyInfoRequest, DescribeProductEventListRequest, DescribeServiceDiscoveryResponse, DestroyPrometheusInstanceResponse, DescribeAlertRulesRequest, DescribePrometheusInstancesResponse, DescribePolicyGroupListResponse, BindingPolicyObjectRequest, DescribeAlarmNoticeCallbacksRequest, DescribeBindingPolicyObjectListResponse, PutMonitorDataResponse, DescribePolicyGroupInfoRequest, UpdateAlertRuleStateResponse, BindingPolicyTagResponse, DeleteServiceDiscoveryResponse, CreatePrometheusScrapeJobResponse, CreateAlarmPolicyRequest, CreateExporterIntegrationRequest, DescribeAlarmEventsResponse, DescribePolicyGroupInfoResponse, DeleteExporterIntegrationRequest, ModifyAlarmPolicyNoticeRequest, DeleteAlarmPolicyRequest, DescribeConditionsTemplateListRequest, DescribePrometheusScrapeJobsRequest, CreateAlertRuleResponse, CreatePolicyGroupResponse, ModifyAlarmPolicyTasksResponse, DescribeBaseMetricsResponse, ModifyPrometheusInstanceAttributesResponse, DeleteAlertRulesResponse, GetMonitorDataRequest, DescribeAlarmPoliciesResponse, DescribeStatisticDataRequest, SendCustomAlarmMsgRequest, ModifyPrometheusInstanceAttributesRequest, DescribeServiceDiscoveryRequest, DescribePolicyConditionListRequest, DeletePolicyGroupResponse, DescribeConditionsTemplateListResponse, DescribeMonitorTypesRequest, DescribeAlarmNoticesResponse, ModifyAlarmPolicyTasksRequest, ModifyAlarmPolicyStatusRequest, UpdatePrometheusAgentStatusResponse, SetDefaultAlarmPolicyRequest, ModifyAlarmNoticeRequest, CreateServiceDiscoveryRequest, DescribeAlertRulesResponse, DescribeProductListRequest, BindPrometheusManagedGrafanaResponse, CreateAlarmPolicyResponse, ModifyAlarmReceiversResponse, DescribePolicyConditionListResponse, DescribeAllNamespacesResponse, GetPrometheusAgentManagementCommandRequest, DeleteAlarmNoticesResponse, TerminatePrometheusInstancesRequest, UnbindPrometheusManagedGrafanaResponse, UpdatePrometheusAgentStatusRequest, DescribeBasicAlarmListResponse, ModifyAlarmReceiversRequest, CreateServiceDiscoveryResponse, CreatePrometheusAgentResponse, DescribeExporterIntegrationsRequest, ModifyAlarmPolicyConditionResponse, UpgradeGrafanaDashboardRequest, UpdateAlertRuleStateRequest, ModifyPolicyGroupRequest, DescribeAlarmHistoriesResponse, DescribeAlarmMetricsRequest, DescribeBaseMetricsRequest, UpdatePrometheusScrapeJobRequest, DescribeAlarmNoticeCallbacksResponse, UpdateExporterIntegrationResponse, ModifyAlarmPolicyConditionRequest, ModifyAlarmNoticeResponse, BindPrometheusManagedGrafanaRequest, DeletePolicyGroupRequest, DescribeAlarmPolicyResponse, DeleteExporterIntegrationResponse, UpdateServiceDiscoveryResponse, DescribeMonitorTypesResponse, UpdateServiceDiscoveryRequest, CreateAlarmNoticeResponse, DescribeAlarmHistoriesRequest, ModifyPolicyGroupResponse, DescribeAlarmMetricsResponse, UpdateAlertRuleResponse, PutMonitorDataRequest, DescribePrometheusAgentsRequest, TerminatePrometheusInstancesResponse, BindingPolicyTagRequest, UpdateAlertRuleRequest, DescribeBindingPolicyObjectListRequest, UnBindingPolicyObjectResponse, SendCustomAlarmMsgResponse, DeleteAlarmNoticesRequest, DescribeExporterIntegrationsResponse, UpgradeGrafanaDashboardResponse, DescribeAllNamespacesRequest, UnbindPrometheusManagedGrafanaRequest, UpdatePrometheusScrapeJobResponse, DescribeAlarmPoliciesRequest, DescribeAccidentEventListResponse, DescribePrometheusScrapeJobsResponse, ModifyAlarmPolicyInfoResponse, DestroyPrometheusInstanceRequest, DescribePrometheusAgentsResponse, DescribeAlarmEventsRequest, DeletePrometheusScrapeJobsRequest, CreateAlertRuleRequest, DescribeProductListResponse, DescribeProductEventListResponse, DeleteAlarmPolicyResponse, DeletePrometheusScrapeJobsResponse, DescribeAlarmPolicyRequest, CreatePolicyGroupRequest, DescribeStatisticDataResponse, CreatePrometheusScrapeJobRequest, UninstallGrafanaDashboardRequest, CreateExporterIntegrationResponse, DescribePolicyGroupListRequest, DescribeBasicAlarmListRequest, UnBindingAllPolicyObjectResponse, DescribeAlarmNoticesRequest, UpdateExporterIntegrationRequest, DescribeAccidentEventListRequest, UnBindingPolicyObjectRequest, DescribeAlarmNoticeResponse, DeleteAlertRulesRequest, DescribeAlarmNoticeRequest, CreatePrometheusAgentRequest, CreateAlarmNoticeRequest, GetMonitorDataResponse, UnBindingAllPolicyObjectRequest, ModifyAlarmPolicyStatusResponse, GetPrometheusAgentManagementCommandResponse, DeleteServiceDiscoveryRequest, DescribePrometheusInstancesRequest, SetDefaultAlarmPolicyResponse, UninstallGrafanaDashboardResponse, BindingPolicyObjectResponse } from "./monitor_models";
 /**
  * monitor client
  * @class
@@ -44,6 +44,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeBindingPolicyObjectList(req: DescribeBindingPolicyObjectListRequest, cb?: (error: string, rep: DescribeBindingPolicyObjectListResponse) => void): Promise<DescribeBindingPolicyObjectListResponse>;
     /**
+     * 列出 Prometheus 抓取任务
+     */
+    DescribePrometheusScrapeJobs(req: DescribePrometheusScrapeJobsRequest, cb?: (error: string, rep: DescribePrometheusScrapeJobsResponse) => void): Promise<DescribePrometheusScrapeJobsResponse>;
+    /**
      * 云监控告警修改告警策略绑定的告警通知模板
      */
     ModifyAlarmPolicyNotice(req: ModifyAlarmPolicyNoticeRequest, cb?: (error: string, rep: ModifyAlarmPolicyNoticeResponse) => void): Promise<ModifyAlarmPolicyNoticeResponse>;
@@ -54,9 +58,17 @@ export declare class Client extends AbstractClient {
      */
     DeleteServiceDiscovery(req: DeleteServiceDiscoveryRequest, cb?: (error: string, rep: DeleteServiceDiscoveryResponse) => void): Promise<DeleteServiceDiscoveryResponse>;
     /**
+     * 删除 Grafana Dashboard
+     */
+    UninstallGrafanaDashboard(req: UninstallGrafanaDashboardRequest, cb?: (error: string, rep: UninstallGrafanaDashboardResponse) => void): Promise<UninstallGrafanaDashboardResponse>;
+    /**
      * 获取基础策略告警组列表
      */
     DescribePolicyGroupList(req: DescribePolicyGroupListRequest, cb?: (error: string, rep: DescribePolicyGroupListResponse) => void): Promise<DescribePolicyGroupListResponse>;
+    /**
+     * 修改 Prometheus 实例相关属性
+     */
+    ModifyPrometheusInstanceAttributes(req: ModifyPrometheusInstanceAttributesRequest, cb?: (error: string, rep: ModifyPrometheusInstanceAttributesResponse) => void): Promise<ModifyPrometheusInstanceAttributesResponse>;
     /**
      * 删除告警策略
      */
@@ -73,6 +85,14 @@ export declare class Client extends AbstractClient {
      */
     ModifyAlarmPolicyTasks(req: ModifyAlarmPolicyTasksRequest, cb?: (error: string, rep: ModifyAlarmPolicyTasksResponse) => void): Promise<ModifyAlarmPolicyTasksResponse>;
     /**
+     * 本接口 (DescribePrometheusInstances) 用于查询一个或多个实例的详细信息。
+<ul>
+<li>可以根据实例ID、实例名称或者实例状态等信息来查询实例的详细信息</li>
+<li>如果参数为空，返回当前用户一定数量（Limit所指定的数量，默认为20）的实例。</li>
+</ul>
+     */
+    DescribePrometheusInstances(req: DescribePrometheusInstancesRequest, cb?: (error: string, rep: DescribePrometheusInstancesResponse) => void): Promise<DescribePrometheusInstancesResponse>;
+    /**
      * 获取基础告警策略条件
      */
     DescribePolicyConditionList(req: DescribePolicyConditionListRequest, cb?: (error: string, rep: DescribePolicyConditionListResponse) => void): Promise<DescribePolicyConditionListResponse>;
@@ -84,6 +104,10 @@ export declare class Client extends AbstractClient {
      * 获取基础告警列表
      */
     DescribeBasicAlarmList(req: DescribeBasicAlarmListRequest, cb?: (error: string, rep: DescribeBasicAlarmListResponse) => void): Promise<DescribeBasicAlarmListResponse>;
+    /**
+     * 创建 Prometheus CVM Agent
+     */
+    CreatePrometheusAgent(req: CreatePrometheusAgentRequest, cb?: (error: string, rep: CreatePrometheusAgentResponse) => void): Promise<CreatePrometheusAgentResponse>;
     /**
      * 将告警策略绑定到特定对象
      */
@@ -101,6 +125,18 @@ export declare class Client extends AbstractClient {
      */
     UpdateAlertRuleState(req: UpdateAlertRuleStateRequest, cb?: (error: string, rep: UpdateAlertRuleStateResponse) => void): Promise<UpdateAlertRuleStateResponse>;
     /**
+     * 更新 exporter 集成配置
+     */
+    UpdateExporterIntegration(req: UpdateExporterIntegrationRequest, cb?: (error: string, rep: UpdateExporterIntegrationResponse) => void): Promise<UpdateExporterIntegrationResponse>;
+    /**
+     * 更新 Prometheus 抓取任务
+     */
+    UpdatePrometheusScrapeJob(req: UpdatePrometheusScrapeJobRequest, cb?: (error: string, rep: UpdatePrometheusScrapeJobResponse) => void): Promise<UpdatePrometheusScrapeJobResponse>;
+    /**
+     * 解除实例绑定的 Grafana 可视化实例
+     */
+    UnbindPrometheusManagedGrafana(req: UnbindPrometheusManagedGrafanaRequest, cb?: (error: string, rep: UnbindPrometheusManagedGrafanaResponse) => void): Promise<UnbindPrometheusManagedGrafanaResponse>;
+    /**
      * 创建云监控告警策略
      */
     CreateAlarmPolicy(req: CreateAlarmPolicyRequest, cb?: (error: string, rep: CreateAlarmPolicyResponse) => void): Promise<CreateAlarmPolicyResponse>;
@@ -113,6 +149,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeProductList(req: DescribeProductListRequest, cb?: (error: string, rep: DescribeProductListResponse) => void): Promise<DescribeProductListResponse>;
     /**
+     * 查询 exporter 集成列表
+     */
+    DescribeExporterIntegrations(req: DescribeExporterIntegrationsRequest, cb?: (error: string, rep: DescribeExporterIntegrationsResponse) => void): Promise<DescribeExporterIntegrationsResponse>;
+    /**
      * 查询所有名字空间
      */
     DescribeAllNamespaces(req: DescribeAllNamespacesRequest, cb?: (error: string, rep: DescribeAllNamespacesResponse) => void): Promise<DescribeAllNamespacesResponse>;
@@ -123,9 +163,21 @@ export declare class Client extends AbstractClient {
      */
     CreateServiceDiscovery(req: CreateServiceDiscoveryRequest, cb?: (error: string, rep: CreateServiceDiscoveryResponse) => void): Promise<CreateServiceDiscoveryResponse>;
     /**
+     * 删除全部的关联对象
+     */
+    UnBindingAllPolicyObject(req: UnBindingAllPolicyObjectRequest, cb?: (error: string, rep: UnBindingAllPolicyObjectResponse) => void): Promise<UnBindingAllPolicyObjectResponse>;
+    /**
      * 根据维度条件查询监控数据
      */
     DescribeStatisticData(req: DescribeStatisticDataRequest, cb?: (error: string, rep: DescribeStatisticDataResponse) => void): Promise<DescribeStatisticDataResponse>;
+    /**
+     * 升级 Grafana Dashboard
+     */
+    UpgradeGrafanaDashboard(req: UpgradeGrafanaDashboardRequest, cb?: (error: string, rep: UpgradeGrafanaDashboardResponse) => void): Promise<UpgradeGrafanaDashboardResponse>;
+    /**
+     * 绑定 Grafana 可视化服务实例
+     */
+    BindPrometheusManagedGrafana(req: BindPrometheusManagedGrafanaRequest, cb?: (error: string, rep: BindPrometheusManagedGrafanaResponse) => void): Promise<BindPrometheusManagedGrafanaResponse>;
     /**
      * 查询通知模板列表
      */
@@ -147,13 +199,17 @@ export declare class Client extends AbstractClient {
      */
     ModifyAlarmReceivers(req: ModifyAlarmReceiversRequest, cb?: (error: string, rep: ModifyAlarmReceiversResponse) => void): Promise<ModifyAlarmReceiversResponse>;
     /**
-     * 删除全部的关联对象
+     * 彻底删除 Prometheus 实例相关数据，给定的实例必须先被 Terminate
      */
-    UnBindingAllPolicyObject(req: UnBindingAllPolicyObjectRequest, cb?: (error: string, rep: UnBindingAllPolicyObjectResponse) => void): Promise<UnBindingAllPolicyObjectResponse>;
+    DestroyPrometheusInstance(req: DestroyPrometheusInstanceRequest, cb?: (error: string, rep: DestroyPrometheusInstanceResponse) => void): Promise<DestroyPrometheusInstanceResponse>;
     /**
      * 删除告警策略组
      */
     DeletePolicyGroup(req: DeletePolicyGroupRequest, cb?: (error: string, rep: DeletePolicyGroupResponse) => void): Promise<DeletePolicyGroupResponse>;
+    /**
+     * 获取 Prometheus Agent 管理相关的命令行
+     */
+    GetPrometheusAgentManagementCommand(req: GetPrometheusAgentManagementCommandRequest, cb?: (error: string, rep: GetPrometheusAgentManagementCommandResponse) => void): Promise<GetPrometheusAgentManagementCommandResponse>;
     /**
      * 在腾讯云容器服务下更新 Prometheus 服务发现。
 <p>注意：前提条件，已经通过 Prometheus 控制台集成了对应的腾讯云容器服务，具体请参考
@@ -171,6 +227,10 @@ export declare class Client extends AbstractClient {
      */
     UpdateAlertRule(req: UpdateAlertRuleRequest, cb?: (error: string, rep: UpdateAlertRuleResponse) => void): Promise<UpdateAlertRuleResponse>;
     /**
+     * 创建 exporter 集成
+     */
+    CreateExporterIntegration(req: CreateExporterIntegrationRequest, cb?: (error: string, rep: CreateExporterIntegrationResponse) => void): Promise<CreateExporterIntegrationResponse>;
+    /**
      * 设置一个策略为该告警策略类型、该项目的默认告警策略。
 同一项目下相同的告警策略类型，就会被设置为非默认。
      */
@@ -179,6 +239,14 @@ export declare class Client extends AbstractClient {
      * 增加策略组
      */
     CreatePolicyGroup(req: CreatePolicyGroupRequest, cb?: (error: string, rep: CreatePolicyGroupResponse) => void): Promise<CreatePolicyGroupResponse>;
+    /**
+     * 销毁按量 Prometheus 实例
+     */
+    TerminatePrometheusInstances(req: TerminatePrometheusInstancesRequest, cb?: (error: string, rep: TerminatePrometheusInstancesResponse) => void): Promise<TerminatePrometheusInstancesResponse>;
+    /**
+     * 删除 Prometheus 抓取任务
+     */
+    DeletePrometheusScrapeJobs(req: DeletePrometheusScrapeJobsRequest, cb?: (error: string, rep: DeletePrometheusScrapeJobsResponse) => void): Promise<DeletePrometheusScrapeJobsResponse>;
     /**
      * 分页获取产品事件的列表
      */
@@ -202,13 +270,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeAlarmMetrics(req: DescribeAlarmMetricsRequest, cb?: (error: string, rep: DescribeAlarmMetricsResponse) => void): Promise<DescribeAlarmMetricsResponse>;
     /**
-     * 本接口 (DescribePrometheusInstances) 用于查询一个或多个实例的详细信息。
-<ul>
-<li>可以根据实例ID、实例名称或者实例状态等信息来查询实例的详细信息</li>
-<li>如果参数为空，返回当前用户一定数量（Limit所指定的数量，默认为20）的实例。</li>
-</ul>
+     * 删除 exporter 集成
      */
-    DescribePrometheusInstances(req: DescribePrometheusInstancesRequest, cb?: (error: string, rep: DescribePrometheusInstancesResponse) => void): Promise<DescribePrometheusInstancesResponse>;
+    DeleteExporterIntegration(req: DeleteExporterIntegrationRequest, cb?: (error: string, rep: DeleteExporterIntegrationResponse) => void): Promise<DeleteExporterIntegrationResponse>;
     /**
      * 获取基础指标属性
      */
@@ -221,6 +285,10 @@ export declare class Client extends AbstractClient {
      * 查询告警事件列表
      */
     DescribeAlarmEvents(req: DescribeAlarmEventsRequest, cb?: (error: string, rep: DescribeAlarmEventsResponse) => void): Promise<DescribeAlarmEventsResponse>;
+    /**
+     * 更新 Prometheus CVM Agent 状态
+     */
+    UpdatePrometheusAgentStatus(req: UpdatePrometheusAgentStatusRequest, cb?: (error: string, rep: UpdatePrometheusAgentStatusResponse) => void): Promise<UpdatePrometheusAgentStatusResponse>;
     /**
      * 云监控告警删除告警通知模板
      */
@@ -247,4 +315,12 @@ export declare class Client extends AbstractClient {
      * 获取单个告警策略详情
      */
     DescribeAlarmPolicy(req: DescribeAlarmPolicyRequest, cb?: (error: string, rep: DescribeAlarmPolicyResponse) => void): Promise<DescribeAlarmPolicyResponse>;
+    /**
+     * 创建 Prometheus 抓取任务
+     */
+    CreatePrometheusScrapeJob(req: CreatePrometheusScrapeJobRequest, cb?: (error: string, rep: CreatePrometheusScrapeJobResponse) => void): Promise<CreatePrometheusScrapeJobResponse>;
+    /**
+     * 列出 Prometheus CVM Agent
+     */
+    DescribePrometheusAgents(req: DescribePrometheusAgentsRequest, cb?: (error: string, rep: DescribePrometheusAgentsResponse) => void): Promise<DescribePrometheusAgentsResponse>;
 }

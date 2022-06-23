@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeCloudRunServersResponse, ReleaseGrayRequest, DescribeEnvBaseInfoResponse, CreateCloudRunServerRequest, DescribeCloudRunEnvsResponse, DescribeCloudRunEnvsRequest, ReleaseGrayResponse, OperateServerManageRequest, UpdateCloudRunServerRequest, OperateServerManageResponse, DescribeCloudRunServerDetailRequest, DescribeCloudRunServersRequest, DescribeCloudRunServerDetailResponse, CreateCloudRunEnvResponse, DescribeEnvBaseInfoRequest, CreateCloudRunServerResponse, UpdateCloudRunServerResponse, CreateCloudRunEnvRequest } from "./tcbr_models";
+import { DescribeCloudRunServersResponse, ReleaseGrayRequest, DescribeEnvBaseInfoResponse, CreateCloudRunServerRequest, DescribeServerManageTaskResponse, DescribeCloudRunEnvsResponse, DescribeCloudRunEnvsRequest, ReleaseGrayResponse, OperateServerManageRequest, UpdateCloudRunServerRequest, OperateServerManageResponse, DescribeCloudRunServerDetailRequest, DescribeCloudRunServersRequest, DescribeServerManageTaskRequest, DescribeCloudRunServerDetailResponse, CreateCloudRunEnvResponse, DescribeEnvBaseInfoRequest, CreateCloudRunServerResponse, UpdateCloudRunServerResponse, CreateCloudRunEnvRequest } from "./tcbr_models";
 /**
  * tcbr client
  * @class
@@ -12,9 +12,9 @@ export declare class Client extends AbstractClient {
      */
     CreateCloudRunServer(req: CreateCloudRunServerRequest, cb?: (error: string, rep: CreateCloudRunServerResponse) => void): Promise<CreateCloudRunServerResponse>;
     /**
-     * 更新云托管服务
+     * 查询服务管理任务信息
      */
-    UpdateCloudRunServer(req: UpdateCloudRunServerRequest, cb?: (error: string, rep: UpdateCloudRunServerResponse) => void): Promise<UpdateCloudRunServerResponse>;
+    DescribeServerManageTask(req: DescribeServerManageTaskRequest, cb?: (error: string, rep: DescribeServerManageTaskResponse) => void): Promise<DescribeServerManageTaskResponse>;
     /**
      * 查询环境基础信息
      */
@@ -27,6 +27,10 @@ export declare class Client extends AbstractClient {
      * 灰度发布
      */
     ReleaseGray(req: ReleaseGrayRequest, cb?: (error: string, rep: ReleaseGrayResponse) => void): Promise<ReleaseGrayResponse>;
+    /**
+     * 更新云托管服务
+     */
+    UpdateCloudRunServer(req: UpdateCloudRunServerRequest, cb?: (error: string, rep: UpdateCloudRunServerResponse) => void): Promise<UpdateCloudRunServerResponse>;
     /**
      * 创建云托管环境，并开通资源。
      */
