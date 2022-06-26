@@ -3185,11 +3185,11 @@ export interface ParamEntry {
  */
 export interface InquiryPriceUpgradeDBInstanceResponse {
     /**
-      * 总费用，打折前的
+      * 刊例价费用
       */
     OriginalPrice: number;
     /**
-      * 实际需要付款金额
+      * 折后实际付款金额
       */
     Price: number;
     /**

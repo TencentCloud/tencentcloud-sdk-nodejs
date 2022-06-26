@@ -1388,6 +1388,16 @@ it("tke.v20180525.EnableClusterDeletionProtection", async function () {
     }
 })
 
+it("tke.v20180525.ForwardTKEEdgeApplicationRequestV3", async function () {
+    try {
+       const data = await client.ForwardTKEEdgeApplicationRequestV3({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tke.v20180525.SyncPrometheusTemplate", async function () {
     try {
        const data = await client.SyncPrometheusTemplate({})

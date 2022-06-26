@@ -26,6 +26,7 @@ import {
   DescribeProductEventListRequest,
   AlarmPolicyTriggerTask,
   DescribeServiceDiscoveryResponse,
+  DescribeRecordingRulesResponse,
   PrometheusTag,
   DestroyPrometheusInstanceResponse,
   DescribePolicyConditionListMetric,
@@ -54,7 +55,7 @@ import {
   DeleteAlarmPolicyRequest,
   PolicyTag,
   EventCondition,
-  PrometheusInstancesItem,
+  MetricSet,
   DescribeConditionsTemplateListRequest,
   DescribePrometheusScrapeJobsRequest,
   CreateAlertRuleResponse,
@@ -72,6 +73,7 @@ import {
   DescribeStatisticDataRequest,
   ConditionsTemp,
   SendCustomAlarmMsgRequest,
+  CreateRecordingRuleRequest,
   ModifyPrometheusInstanceAttributesRequest,
   DescribePolicyConditionListConfigManualPeriod,
   MetricConfig,
@@ -117,8 +119,9 @@ import {
   ModifyAlarmPolicyConditionResponse,
   UpgradeGrafanaDashboardRequest,
   InstanceGroups,
-  Dimension,
+  DestroyPrometheusInstanceRequest,
   PrometheusInstanceGrantInfo,
+  UnbindPrometheusManagedGrafanaRequest,
   TemplateGroup,
   DescribeBindingPolicyObjectListInstance,
   Point,
@@ -144,9 +147,9 @@ import {
   DeleteExporterIntegrationResponse,
   UpdateServiceDiscoveryResponse,
   DescribeMonitorTypesResponse,
-  MetricSet,
+  Dimension,
   DescribeBasicAlarmListAlarms,
-  UpdateServiceDiscoveryRequest,
+  UpdateRecordingRuleResponse,
   CreateAlarmNoticeResponse,
   DescribeAlarmHistoriesRequest,
   MetricObjectMeaning,
@@ -176,7 +179,7 @@ import {
   UpgradeGrafanaDashboardResponse,
   DescribeAllNamespacesRequest,
   PolicyGroup,
-  UnbindPrometheusManagedGrafanaRequest,
+  DeleteRecordingRulesRequest,
   UpdatePrometheusScrapeJobResponse,
   DescribePolicyConditionListConfigManualCalcType,
   DescribePolicyGroupListGroupInstanceGroup,
@@ -186,12 +189,13 @@ import {
   DescribePolicyConditionListConfigManualStatType,
   ModifyAlarmPolicyInfoResponse,
   AlarmNotice,
-  DestroyPrometheusInstanceRequest,
+  DeleteRecordingRulesResponse,
   PolicyGroupReceiverInfo,
   DescribePrometheusAgentsResponse,
   DescribeAlarmEventsRequest,
   MidQueryCondition,
   DeletePrometheusScrapeJobsRequest,
+  UnBindingPolicyObjectRequest,
   URLNotice,
   CreateAlertRuleRequest,
   DescribeProductListResponse,
@@ -206,7 +210,7 @@ import {
   DescribePolicyGroupInfoReceiverInfo,
   DescribeStatisticDataResponse,
   CreatePrometheusScrapeJobRequest,
-  UninstallGrafanaDashboardRequest,
+  RecordingRuleSet,
   CreateExporterIntegrationResponse,
   DescribePolicyConditionListEventMetric,
   DescribePolicyGroupListRequest,
@@ -216,27 +220,32 @@ import {
   DescribePolicyGroupListGroup,
   UpdateExporterIntegrationRequest,
   DescribeAccidentEventListRequest,
-  UnBindingPolicyObjectRequest,
+  CreateRecordingRuleResponse,
   MetricDatum,
   DescribeAlarmNoticeResponse,
   DescribeBindingPolicyObjectListInstanceGroup,
+  UpdateServiceDiscoveryRequest,
   DeleteAlertRulesRequest,
   DescribeAlarmNoticeRequest,
+  UninstallGrafanaDashboardRequest,
   CreatePrometheusAgentRequest,
   DescribeBindingPolicyObjectListDimension,
   CreateAlarmNoticeRequest,
   DescribePolicyGroupInfoCondition,
   GetMonitorDataResponse,
   ReceiverInfo,
+  DescribeRecordingRulesRequest,
   UnBindingAllPolicyObjectRequest,
   CLSNotice,
   DescribePolicyGroupInfoEventCondition,
   PrometheusRuleKV,
   ModifyAlarmPolicyStatusResponse,
   GetPrometheusAgentManagementCommandResponse,
+  UpdateRecordingRuleRequest,
   AlarmPolicyCondition,
   ModifyPolicyGroupCondition,
   DescribePolicyConditionListCondition,
+  PrometheusInstancesItem,
   DeleteServiceDiscoveryRequest,
   DescribeProductEventListEventsGroupInfo,
   DescribePrometheusInstancesRequest,
@@ -748,6 +757,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 云监控告警编辑告警通知模板
+   */
+  async ModifyAlarmNotice(
+    req: ModifyAlarmNoticeRequest,
+    cb?: (error: string, rep: ModifyAlarmNoticeResponse) => void
+  ): Promise<ModifyAlarmNoticeResponse> {
+    return this.request("ModifyAlarmNotice", req, cb)
+  }
+
+  /**
    * 云监控支持多种类型的监控，此接口列出支持的所有类型
    */
   async DescribeMonitorTypes(
@@ -780,14 +799,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 设置一个策略为该告警策略类型、该项目的默认告警策略。
-同一项目下相同的告警策略类型，就会被设置为非默认。
-     */
-  async SetDefaultAlarmPolicy(
-    req: SetDefaultAlarmPolicyRequest,
-    cb?: (error: string, rep: SetDefaultAlarmPolicyResponse) => void
-  ): Promise<SetDefaultAlarmPolicyResponse> {
-    return this.request("SetDefaultAlarmPolicy", req, cb)
+   * 批量删除 Prometheus 预聚合规则
+   */
+  async DeleteRecordingRules(
+    req: DeleteRecordingRulesRequest,
+    cb?: (error: string, rep: DeleteRecordingRulesResponse) => void
+  ): Promise<DeleteRecordingRulesResponse> {
+    return this.request("DeleteRecordingRules", req, cb)
   }
 
   /**
@@ -873,6 +891,27 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 设置一个策略为该告警策略类型、该项目的默认告警策略。
+同一项目下相同的告警策略类型，就会被设置为非默认。
+     */
+  async SetDefaultAlarmPolicy(
+    req: SetDefaultAlarmPolicyRequest,
+    cb?: (error: string, rep: SetDefaultAlarmPolicyResponse) => void
+  ): Promise<SetDefaultAlarmPolicyResponse> {
+    return this.request("SetDefaultAlarmPolicy", req, cb)
+  }
+
+  /**
+   * 根据条件查询 Prometheus 预聚合规则
+   */
+  async DescribeRecordingRules(
+    req: DescribeRecordingRulesRequest,
+    cb?: (error: string, rep: DescribeRecordingRulesResponse) => void
+  ): Promise<DescribeRecordingRulesResponse> {
+    return this.request("DescribeRecordingRules", req, cb)
+  }
+
+  /**
    * 删除 exporter 集成
    */
   async DeleteExporterIntegration(
@@ -933,6 +972,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 更新 Prometheus 的预聚合规则
+   */
+  async UpdateRecordingRule(
+    req: UpdateRecordingRuleRequest,
+    cb?: (error: string, rep: UpdateRecordingRuleResponse) => void
+  ): Promise<UpdateRecordingRuleResponse> {
+    return this.request("UpdateRecordingRule", req, cb)
+  }
+
+  /**
      * 列出在腾讯云容器服务下创建的 Prometheus 服务发现。
 <p>注意：前提条件，已经通过 Prometheus 控制台集成了对应的腾讯云容器服务，具体请参考
 <a href="https://cloud.tencent.com/document/product/248/48859" target="_blank">Agent 安装</a>。</p>
@@ -945,13 +994,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 云监控告警编辑告警通知模板
+   * 创建 Prometheus 的预聚合规则
    */
-  async ModifyAlarmNotice(
-    req: ModifyAlarmNoticeRequest,
-    cb?: (error: string, rep: ModifyAlarmNoticeResponse) => void
-  ): Promise<ModifyAlarmNoticeResponse> {
-    return this.request("ModifyAlarmNotice", req, cb)
+  async CreateRecordingRule(
+    req: CreateRecordingRuleRequest,
+    cb?: (error: string, rep: CreateRecordingRuleResponse) => void
+  ): Promise<CreateRecordingRuleResponse> {
+    return this.request("CreateRecordingRule", req, cb)
   }
 
   /**

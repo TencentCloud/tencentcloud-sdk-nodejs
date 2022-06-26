@@ -935,6 +935,11 @@ export interface OcrRecognise {
    * 位置信息
    */
   Location: Location
+
+  /**
+   * 字段名
+   */
+  Field: string
 }
 
 /**

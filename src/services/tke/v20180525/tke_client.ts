@@ -208,7 +208,7 @@ import {
   CreateClusterInstancesResponse,
   InstanceUpgradeClusterStatus,
   DescribeClusterRoutesRequest,
-  DeleteECMInstancesRequest,
+  ForwardTKEEdgeApplicationRequestV3Request,
   ClusterLevelAttribute,
   RemoveNodeFromNodePoolResponse,
   SetNodePoolNodeProtectionRequest,
@@ -246,6 +246,7 @@ import {
   AddNodeToNodePoolRequest,
   DescribeExternalClusterSpecRequest,
   ModifyPrometheusGlobalNotificationResponse,
+  ForwardTKEEdgeApplicationRequestV3Response,
   AutoScalingGroupRange,
   DescribePrometheusGlobalNotificationRequest,
   ClusterPublicLB,
@@ -321,6 +322,7 @@ import {
   ECMRunSecurityServiceEnabled,
   SyncPrometheusTemplateResponse,
   ClusterAsGroupAttribute,
+  DeleteECMInstancesRequest,
   DisableEventPersistenceRequest,
   RunMonitorServiceEnabled,
   CreateEKSContainerInstancesRequest,
@@ -1822,6 +1824,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: EnableClusterDeletionProtectionResponse) => void
   ): Promise<EnableClusterDeletionProtectionResponse> {
     return this.request("EnableClusterDeletionProtection", req, cb)
+  }
+
+  /**
+   * 操作TKEEdge集群的addon
+   */
+  async ForwardTKEEdgeApplicationRequestV3(
+    req: ForwardTKEEdgeApplicationRequestV3Request,
+    cb?: (error: string, rep: ForwardTKEEdgeApplicationRequestV3Response) => void
+  ): Promise<ForwardTKEEdgeApplicationRequestV3Response> {
+    return this.request("ForwardTKEEdgeApplicationRequestV3", req, cb)
   }
 
   /**

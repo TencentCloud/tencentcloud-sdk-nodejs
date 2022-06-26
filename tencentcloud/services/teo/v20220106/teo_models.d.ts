@@ -802,6 +802,10 @@ export interface ModifyZoneSettingRequest {
       * 客户端IP回源请求头配置
       */
     ClientIpHeader?: ClientIp;
+    /**
+      * 缓存预刷新配置
+      */
+    CachePrefresh?: CachePrefresh;
 }
 /**
  * ddos特征过滤
@@ -1886,19 +1890,6 @@ export interface DescribeCnameStatusResponse {
       * 状态列表
       */
     Status: Array<CnameStatus>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * DeleteDnsRecords返回参数结构体
- */
-export interface DeleteDnsRecordsResponse {
-    /**
-      * 记录 ID
-      */
-    Ids: Array<string>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3759,6 +3750,20 @@ export interface DescribeDefaultCertificatesResponse {
     RequestId?: string;
 }
 /**
+ * 缓存预刷新
+ */
+export interface CachePrefresh {
+    /**
+      * 缓存预刷新配置开关
+      */
+    Switch: string;
+    /**
+      * 缓存预刷新百分比：1-99
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Percent?: number;
+}
+/**
  * DescribeTimingL7AnalysisData返回参数结构体
  */
 export interface DescribeTimingL7AnalysisDataResponse {
@@ -4024,6 +4029,19 @@ offline: 停用
 online: 启用
       */
     Status: string;
+}
+/**
+ * ModifyLoadBalancing返回参数结构体
+ */
+export interface ModifyLoadBalancingResponse {
+    /**
+      * 负载均衡ID
+      */
+    LoadBalancingId: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * Web拦截事件
@@ -5557,6 +5575,11 @@ export interface DescribeZoneSettingResponse {
       */
     ClientIpHeader: ClientIp;
     /**
+      * 缓存预刷新配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CachePrefresh: CachePrefresh;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
@@ -6204,80 +6227,13 @@ Targets可为空，不需要填写
     EncodeUrl?: boolean;
 }
 /**
- * DescribeApplicationProxyDetail返回参数结构体
+ * DeleteDnsRecords返回参数结构体
  */
-export interface DescribeApplicationProxyDetailResponse {
+export interface DeleteDnsRecordsResponse {
     /**
-      * 实例ID
+      * 记录 ID
       */
-    ProxyId: string;
-    /**
-      * 实例名称
-      */
-    ProxyName: string;
-    /**
-      * 调度模式：
-ip表示Anycast IP
-domain表示CNAME
-      */
-    PlatType: string;
-    /**
-      * 0关闭安全，1开启安全
-      */
-    SecurityType: number;
-    /**
-      * 0关闭加速，1开启加速
-      */
-    AccelerateType: number;
-    /**
-      * 字段已经移至Rule.ForwardClientIp
-      */
-    ForwardClientIp: string;
-    /**
-      * 字段已经移至Rule.SessionPersist
-      */
-    SessionPersist: boolean;
-    /**
-      * 规则列表
-      */
-    Rule: Array<ApplicationProxyRule>;
-    /**
-      * 状态：
-online：启用
-offline：停用
-progress：部署中
-      */
-    Status: string;
-    /**
-      * 调度信息
-      */
-    ScheduleValue: Array<string>;
-    /**
-      * 更新时间
-      */
-    UpdateTime: string;
-    /**
-      * 站点ID
-      */
-    ZoneId: string;
-    /**
-      * 站点名称
-      */
-    ZoneName: string;
-    /**
-      * 会话保持时间
-      */
-    SessionPersistTime: number;
-    /**
-      * 服务类型
-hostname：子域名
-instance：实例
-      */
-    ProxyType: string;
-    /**
-      * 七层实例ID
-      */
-    HostId: string;
+    Ids: Array<string>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -6670,13 +6626,80 @@ export interface ModifyZoneCnameSpeedUpRequest {
     Status: string;
 }
 /**
- * ModifyLoadBalancing返回参数结构体
+ * DescribeApplicationProxyDetail返回参数结构体
  */
-export interface ModifyLoadBalancingResponse {
+export interface DescribeApplicationProxyDetailResponse {
     /**
-      * 负载均衡ID
+      * 实例ID
       */
-    LoadBalancingId: string;
+    ProxyId: string;
+    /**
+      * 实例名称
+      */
+    ProxyName: string;
+    /**
+      * 调度模式：
+ip表示Anycast IP
+domain表示CNAME
+      */
+    PlatType: string;
+    /**
+      * 0关闭安全，1开启安全
+      */
+    SecurityType: number;
+    /**
+      * 0关闭加速，1开启加速
+      */
+    AccelerateType: number;
+    /**
+      * 字段已经移至Rule.ForwardClientIp
+      */
+    ForwardClientIp: string;
+    /**
+      * 字段已经移至Rule.SessionPersist
+      */
+    SessionPersist: boolean;
+    /**
+      * 规则列表
+      */
+    Rule: Array<ApplicationProxyRule>;
+    /**
+      * 状态：
+online：启用
+offline：停用
+progress：部署中
+      */
+    Status: string;
+    /**
+      * 调度信息
+      */
+    ScheduleValue: Array<string>;
+    /**
+      * 更新时间
+      */
+    UpdateTime: string;
+    /**
+      * 站点ID
+      */
+    ZoneId: string;
+    /**
+      * 站点名称
+      */
+    ZoneName: string;
+    /**
+      * 会话保持时间
+      */
+    SessionPersistTime: number;
+    /**
+      * 服务类型
+hostname：子域名
+instance：实例
+      */
+    ProxyType: string;
+    /**
+      * 七层实例ID
+      */
+    HostId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

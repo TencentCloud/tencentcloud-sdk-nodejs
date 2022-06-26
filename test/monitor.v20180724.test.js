@@ -488,6 +488,16 @@ it("monitor.v20180724.UpdateServiceDiscovery", async function () {
     }
 })
 
+it("monitor.v20180724.ModifyAlarmNotice", async function () {
+    try {
+       const data = await client.ModifyAlarmNotice({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("monitor.v20180724.DescribeMonitorTypes", async function () {
     try {
        const data = await client.DescribeMonitorTypes({})
@@ -518,9 +528,9 @@ it("monitor.v20180724.CreateExporterIntegration", async function () {
     }
 })
 
-it("monitor.v20180724.SetDefaultAlarmPolicy", async function () {
+it("monitor.v20180724.DeleteRecordingRules", async function () {
     try {
-       const data = await client.SetDefaultAlarmPolicy({})
+       const data = await client.DeleteRecordingRules({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -608,6 +618,26 @@ it("monitor.v20180724.DescribeAlarmMetrics", async function () {
     }
 })
 
+it("monitor.v20180724.SetDefaultAlarmPolicy", async function () {
+    try {
+       const data = await client.SetDefaultAlarmPolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.DescribeRecordingRules", async function () {
+    try {
+       const data = await client.DescribeRecordingRules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("monitor.v20180724.DeleteExporterIntegration", async function () {
     try {
        const data = await client.DeleteExporterIntegration({})
@@ -668,6 +698,16 @@ it("monitor.v20180724.DeleteAlarmNotices", async function () {
     }
 })
 
+it("monitor.v20180724.UpdateRecordingRule", async function () {
+    try {
+       const data = await client.UpdateRecordingRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("monitor.v20180724.DescribeServiceDiscovery", async function () {
     try {
        const data = await client.DescribeServiceDiscovery({})
@@ -678,9 +718,9 @@ it("monitor.v20180724.DescribeServiceDiscovery", async function () {
     }
 })
 
-it("monitor.v20180724.ModifyAlarmNotice", async function () {
+it("monitor.v20180724.CreateRecordingRule", async function () {
     try {
-       const data = await client.ModifyAlarmNotice({})
+       const data = await client.CreateRecordingRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

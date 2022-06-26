@@ -4743,18 +4743,43 @@ export interface DescribeClusterRoutesRequest {
 }
 
 /**
- * DeleteECMInstances请求参数结构体
+ * ForwardTKEEdgeApplicationRequestV3请求参数结构体
  */
-export interface DeleteECMInstancesRequest {
+export interface ForwardTKEEdgeApplicationRequestV3Request {
   /**
-   * 集群ID
+   * 请求集群addon的访问
    */
-  ClusterID: string
+  Method: string
 
   /**
-   * ecm id集合
+   * 请求集群addon的路径
    */
-  EcmIdSet: Array<string>
+  Path: string
+
+  /**
+   * 请求集群addon后允许接收的数据格式
+   */
+  Accept?: string
+
+  /**
+   * 请求集群addon的数据格式
+   */
+  ContentType?: string
+
+  /**
+   * 请求集群addon的数据
+   */
+  RequestBody?: string
+
+  /**
+   * 集群名称，例如cls-1234abcd
+   */
+  ClusterName?: string
+
+  /**
+   * 是否编码请求内容
+   */
+  EncodedBody?: string
 }
 
 /**
@@ -5509,6 +5534,21 @@ export interface DescribeExternalClusterSpecRequest {
  * ModifyPrometheusGlobalNotification返回参数结构体
  */
 export interface ModifyPrometheusGlobalNotificationResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ForwardTKEEdgeApplicationRequestV3返回参数结构体
+ */
+export interface ForwardTKEEdgeApplicationRequestV3Response {
+  /**
+   * 请求集群addon后返回的数据
+   */
+  ResponseBody: string
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7119,6 +7159,21 @@ export interface ClusterAsGroupAttribute {
    * 伸缩组最大最小实例数
    */
   AutoScalingGroupRange?: AutoScalingGroupRange
+}
+
+/**
+ * DeleteECMInstances请求参数结构体
+ */
+export interface DeleteECMInstancesRequest {
+  /**
+   * 集群ID
+   */
+  ClusterID: string
+
+  /**
+   * ecm id集合
+   */
+  EcmIdSet: Array<string>
 }
 
 /**

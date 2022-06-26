@@ -331,6 +331,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdateServiceDiscovery", req, cb);
     }
     /**
+     * 云监控告警编辑告警通知模板
+     */
+    async ModifyAlarmNotice(req, cb) {
+        return this.request("ModifyAlarmNotice", req, cb);
+    }
+    /**
      * 云监控支持多种类型的监控，此接口列出支持的所有类型
      */
     async DescribeMonitorTypes(req, cb) {
@@ -351,11 +357,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateExporterIntegration", req, cb);
     }
     /**
-     * 设置一个策略为该告警策略类型、该项目的默认告警策略。
-同一项目下相同的告警策略类型，就会被设置为非默认。
+     * 批量删除 Prometheus 预聚合规则
      */
-    async SetDefaultAlarmPolicy(req, cb) {
-        return this.request("SetDefaultAlarmPolicy", req, cb);
+    async DeleteRecordingRules(req, cb) {
+        return this.request("DeleteRecordingRules", req, cb);
     }
     /**
      * 增加策略组
@@ -408,6 +413,19 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAlarmMetrics", req, cb);
     }
     /**
+     * 设置一个策略为该告警策略类型、该项目的默认告警策略。
+同一项目下相同的告警策略类型，就会被设置为非默认。
+     */
+    async SetDefaultAlarmPolicy(req, cb) {
+        return this.request("SetDefaultAlarmPolicy", req, cb);
+    }
+    /**
+     * 根据条件查询 Prometheus 预聚合规则
+     */
+    async DescribeRecordingRules(req, cb) {
+        return this.request("DescribeRecordingRules", req, cb);
+    }
+    /**
      * 删除 exporter 集成
      */
     async DeleteExporterIntegration(req, cb) {
@@ -444,6 +462,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteAlarmNotices", req, cb);
     }
     /**
+     * 更新 Prometheus 的预聚合规则
+     */
+    async UpdateRecordingRule(req, cb) {
+        return this.request("UpdateRecordingRule", req, cb);
+    }
+    /**
      * 列出在腾讯云容器服务下创建的 Prometheus 服务发现。
 <p>注意：前提条件，已经通过 Prometheus 控制台集成了对应的腾讯云容器服务，具体请参考
 <a href="https://cloud.tencent.com/document/product/248/48859" target="_blank">Agent 安装</a>。</p>
@@ -452,10 +476,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeServiceDiscovery", req, cb);
     }
     /**
-     * 云监控告警编辑告警通知模板
+     * 创建 Prometheus 的预聚合规则
      */
-    async ModifyAlarmNotice(req, cb) {
-        return this.request("ModifyAlarmNotice", req, cb);
+    async CreateRecordingRule(req, cb) {
+        return this.request("CreateRecordingRule", req, cb);
     }
     /**
      * 更新策略组

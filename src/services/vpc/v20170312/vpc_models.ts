@@ -1021,7 +1021,7 @@ export interface CreateVpcResponse {
   /**
    * Vpc对象。
    */
-  Vpc?: Vpc
+  Vpc: Vpc
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2223,7 +2223,7 @@ export interface DescribeVpcsRequest {
   /**
       * 过滤条件，不支持同时指定VpcIds和Filters参数。
 支持的过滤条件如下：
-<li>vpc-name：VPC实例名称。</li>
+<li>vpc-name：VPC实例名称，支持模糊查询。</li>
 <li>is-default ：是否默认VPC。</li>
 <li>vpc-id ：VPC实例ID，例如：vpc-f49l6u0z。</li>
 <li>cidr-block：VPC的CIDR。</li>

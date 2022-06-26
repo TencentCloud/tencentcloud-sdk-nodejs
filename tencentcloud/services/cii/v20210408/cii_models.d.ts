@@ -782,6 +782,10 @@ export interface OcrRecognise {
       * 位置信息
       */
     Location: Location;
+    /**
+      * 字段名
+      */
+    Field: string;
 }
 /**
  * CreateAutoClassifyStructureTask返回参数结构体

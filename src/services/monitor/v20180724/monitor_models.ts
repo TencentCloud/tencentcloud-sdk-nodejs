@@ -277,6 +277,27 @@ export interface DescribeServiceDiscoveryResponse {
 }
 
 /**
+ * DescribeRecordingRules返回参数结构体
+ */
+export interface DescribeRecordingRulesResponse {
+  /**
+   * 规则组数量
+   */
+  TotalCount: number
+
+  /**
+      * 规则组详情
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RecordingRuleSet: Array<RecordingRuleSet>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * Prometheus 托管服务标签
  */
 export interface PrometheusTag {
@@ -1009,202 +1030,60 @@ export interface EventCondition {
 }
 
 /**
- * Prometheus 服务响应体
+ * 对业务指标的单位及支持统计周期的描述
  */
-export interface PrometheusInstancesItem {
+export interface MetricSet {
   /**
-   * 实例ID。
+   * 命名空间，每个云产品会有一个命名空间
    */
-  InstanceId: string
+  Namespace: string
 
   /**
-   * 实例名称。
+   * 指标名称
    */
-  InstanceName: string
+  MetricName: string
 
   /**
-      * 实例计费模式。取值范围：
-<ul>
-<li>2：包年包月</li>
-<li>3：按量</li>
-</ul>
-      */
-  InstanceChargeType: number
-
-  /**
-   * 地域 ID
+   * 指标使用的单位
    */
-  RegionId: number
+  Unit: string
 
   /**
-   * 可用区
+   * 指标使用的单位
    */
-  Zone: string
+  UnitCname: string
 
   /**
-   * VPC ID
+   * 指标支持的统计周期，单位是秒，如60、300
    */
-  VpcId: string
+  Period: Array<number>
 
   /**
-   * 子网 ID
+   * 统计周期内指标方式
    */
-  SubnetId: string
+  Periods: Array<PeriodsSt>
 
   /**
-      * 存储周期
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DataRetentionTime: number
-
-  /**
-      * 实例业务状态。取值范围：
-<ul>
-<li>1：正在创建</li>
-<li>2：运行中</li>
-<li>3：异常</li>
-<li>4：重建中</li>
-<li>5：销毁中</li>
-<li>6：已停服</li>
-<li>8：欠费停服中</li>
-<li>9：欠费已停服</li>
-</ul>
-      */
-  InstanceStatus: number
-
-  /**
-      * Grafana 面板 URL
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  GrafanaURL: string
-
-  /**
-   * 创建时间
+   * 统计指标含义解释
    */
-  CreatedAt: string
+  Meaning: MetricObjectMeaning
 
   /**
-      * 是否开启 Grafana
-<li>0：不开启</li>
-<li>1：开启</li>
-      */
-  EnableGrafana: number
+   * 维度描述信息
+   */
+  Dimensions: Array<DimensionsDesc>
 
   /**
-      * 实例IPV4地址
+      * 指标中文名
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  IPv4Address: string
+  MetricCName: string
 
   /**
-      * 实例关联的标签列表。
+      * 指标英文名
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  TagSpecification: Array<PrometheusTag>
-
-  /**
-      * 购买的实例过期时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ExpireTime: string
-
-  /**
-      * 计费状态
-<ul>
-<li>1：正常</li>
-<li>2：过期</li>
-<li>3：销毁</li>
-<li>4：分配中</li>
-<li>5：分配失败</li>
-</ul>
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ChargeStatus: number
-
-  /**
-      * 规格名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  SpecName: string
-
-  /**
-      * 自动续费标记
-<ul>
-<li>0：不自动续费</li>
-<li>1：开启自动续费</li>
-<li>2：禁止自动续费</li>
-<li>-1：无效</ii>
-</ul>
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  AutoRenewFlag: number
-
-  /**
-      * 是否快过期
-<ul>
-<li>0：否</li>
-<li>1：快过期</li>
-</ul>
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  IsNearExpire: number
-
-  /**
-      * 数据写入需要的 Token
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  AuthToken: string
-
-  /**
-      * Prometheus Remote Write 的地址
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  RemoteWrite: string
-
-  /**
-      * Prometheus HTTP Api 根地址
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ApiRootPath: string
-
-  /**
-      * Proxy 的地址
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ProxyAddress: string
-
-  /**
-      * Grafana 运行状态
-<ul>
-<li>1：正在创建</li>
-<li>2：运行中</li>
-<li>3：异常</li>
-<li>4：重启中</li>
-<li>5：销毁中</li>
-<li>6：已停机</li>
-<li>7：已删除</li>
-</ul>
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  GrafanaStatus: number
-
-  /**
-      * Grafana IP 白名单列表，使用英文分号分隔
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  GrafanaIpWhiteList: string
-
-  /**
-      * 实例的授权信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Grant: PrometheusInstanceGrantInfo
-
-  /**
-      * 绑定的 Grafana 实例 ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  GrafanaInstanceId: string
+  MetricEName: string
 }
 
 /**
@@ -1588,6 +1467,35 @@ export interface SendCustomAlarmMsgRequest {
    * 用户想要发送的自定义消息内容
    */
   Msg: string
+}
+
+/**
+ * CreateRecordingRule请求参数结构体
+ */
+export interface CreateRecordingRuleRequest {
+  /**
+   * 聚合规则名称
+   */
+  Name: string
+
+  /**
+   * 聚合规则组内容，格式为 yaml
+   */
+  Group: string
+
+  /**
+   * Prometheus 实例 ID
+   */
+  InstanceId: string
+
+  /**
+      * 规则状态码，取值如下：
+<li>1=RuleDeleted</li>
+<li>2=RuleEnabled</li>
+<li>3=RuleDisabled</li>
+默认状态码为 2 启用。
+      */
+  RuleState?: number
 }
 
 /**
@@ -2826,18 +2734,13 @@ export interface InstanceGroups {
 }
 
 /**
- * 实例对象的维度组合
+ * DestroyPrometheusInstance请求参数结构体
  */
-export interface Dimension {
+export interface DestroyPrometheusInstanceRequest {
   /**
-   * 实例维度名称
+   * 实例 ID，该实例必须先被 terminate
    */
-  Name: string
-
-  /**
-   * 实例维度值
-   */
-  Value: string
+  InstanceId: string
 }
 
 /**
@@ -2873,6 +2776,21 @@ export interface PrometheusInstanceGrantInfo {
    * 是否显示API等信息(1=有, 2=无)
    */
   HasApiOperation: number
+}
+
+/**
+ * UnbindPrometheusManagedGrafana请求参数结构体
+ */
+export interface UnbindPrometheusManagedGrafanaRequest {
+  /**
+   * Prometheus 实例 ID
+   */
+  InstanceId: string
+
+  /**
+   * Grafana 实例 ID
+   */
+  GrafanaId: string
 }
 
 /**
@@ -3520,60 +3438,18 @@ export interface DescribeMonitorTypesResponse {
 }
 
 /**
- * 对业务指标的单位及支持统计周期的描述
+ * 实例对象的维度组合
  */
-export interface MetricSet {
+export interface Dimension {
   /**
-   * 命名空间，每个云产品会有一个命名空间
+   * 实例维度名称
    */
-  Namespace: string
+  Name: string
 
   /**
-   * 指标名称
+   * 实例维度值
    */
-  MetricName: string
-
-  /**
-   * 指标使用的单位
-   */
-  Unit: string
-
-  /**
-   * 指标使用的单位
-   */
-  UnitCname: string
-
-  /**
-   * 指标支持的统计周期，单位是秒，如60、300
-   */
-  Period: Array<number>
-
-  /**
-   * 统计周期内指标方式
-   */
-  Periods: Array<PeriodsSt>
-
-  /**
-   * 统计指标含义解释
-   */
-  Meaning: MetricObjectMeaning
-
-  /**
-   * 维度描述信息
-   */
-  Dimensions: Array<DimensionsDesc>
-
-  /**
-      * 指标中文名
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  MetricCName: string
-
-  /**
-      * 指标英文名
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  MetricEName: string
+  Value: string
 }
 
 /**
@@ -3713,37 +3589,19 @@ export interface DescribeBasicAlarmListAlarms {
 }
 
 /**
- * UpdateServiceDiscovery请求参数结构体
+ * UpdateRecordingRule返回参数结构体
  */
-export interface UpdateServiceDiscoveryRequest {
+export interface UpdateRecordingRuleResponse {
   /**
-   * Prometheus 实例 ID
-   */
-  InstanceId: string
-
-  /**
-   * <li>类型是 TKE，为对应的腾讯云容器服务集群 ID</li>
-   */
-  KubeClusterId: string
-
-  /**
-      * 用户 Kubernetes 集群类型：
-<li> 1 = 容器服务集群(TKE) </li>
+      * 规则 ID
+注意：此字段可能返回 null，表示取不到有效值。
       */
-  KubeType: number
+  RuleId: string
 
   /**
-      * 服务发现类型，取值如下：
-<li> 1 = ServiceMonitor</li>
-<li> 2 = PodMonitor</li>
-<li> 3 = JobMonitor</li>
-      */
-  Type: number
-
-  /**
-   * 服务发现配置信息
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Yaml: string
+  RequestId?: string
 }
 
 /**
@@ -4706,18 +4564,18 @@ export interface PolicyGroup {
 }
 
 /**
- * UnbindPrometheusManagedGrafana请求参数结构体
+ * DeleteRecordingRules请求参数结构体
  */
-export interface UnbindPrometheusManagedGrafanaRequest {
+export interface DeleteRecordingRulesRequest {
+  /**
+   * 规则 ID 列表
+   */
+  RuleIds: Array<string>
+
   /**
    * Prometheus 实例 ID
    */
   InstanceId: string
-
-  /**
-   * Grafana 实例 ID
-   */
-  GrafanaId: string
 }
 
 /**
@@ -5083,13 +4941,13 @@ export interface AlarmNotice {
 }
 
 /**
- * DestroyPrometheusInstance请求参数结构体
+ * DeleteRecordingRules返回参数结构体
  */
-export interface DestroyPrometheusInstanceRequest {
+export interface DeleteRecordingRulesResponse {
   /**
-   * 实例 ID，该实例必须先被 terminate
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  InstanceId: string
+  RequestId?: string
 }
 
 /**
@@ -5247,6 +5105,36 @@ export interface DeletePrometheusScrapeJobsRequest {
    * 任务 ID 列表
    */
   JobIds: Array<string>
+}
+
+/**
+ * UnBindingPolicyObject请求参数结构体
+ */
+export interface UnBindingPolicyObjectRequest {
+  /**
+   * 固定值，为"monitor"
+   */
+  Module: string
+
+  /**
+   * 策略组id，如传入 PolicyId 则该字段被忽略可传入任意值如 0
+   */
+  GroupId: number
+
+  /**
+   * 待删除对象实例的唯一id列表，UniqueId从调用[获取已绑定对象列表接口](https://cloud.tencent.com/document/api/248/40570)的出参的List中得到
+   */
+  UniqueId: Array<string>
+
+  /**
+   * 实例分组id，如果按实例分组删除的话UniqueId参数是无效的
+   */
+  InstanceGroupId?: number
+
+  /**
+   * 告警策略ID，使用此字段时 GroupId 会被忽略
+   */
+  PolicyId?: string
 }
 
 /**
@@ -5808,35 +5696,43 @@ export interface CreatePrometheusScrapeJobRequest {
 }
 
 /**
- * UninstallGrafanaDashboard请求参数结构体
+ * Prometheus 聚合规则响应结构体内信息
  */
-export interface UninstallGrafanaDashboardRequest {
+export interface RecordingRuleSet {
   /**
-   * 实例 ID
+   * 规则 ID
    */
-  InstanceId: string
+  RuleId: string
 
   /**
-      * Prometheus 集成项 Code，删除对应的 Dashboard，Code 如下：
-<li>spring_mvc</li>
-<li>mysql</li>
-<li>go</li>
-<li>redis</li>
-<li>jvm</li>
-<li>pgsql</li>
-<li>mongo</li>
-<li>kafka</li>
-<li>es</li>
-<li>flink</li>
-<li>blackbox</li>
-<li>consule</li>
-<li>memcached</li>
-<li>zk</li>
-<li>tps</li>
-<li>istio</li>
-<li>etcd</li>
-      */
-  IntegrationCodes?: Array<string>
+   * 规则状态码
+   */
+  RuleState: number
+
+  /**
+   * 规则名称
+   */
+  Name: string
+
+  /**
+   * 规则内容组
+   */
+  Group: string
+
+  /**
+   * 规则数量
+   */
+  Total: number
+
+  /**
+   * 规则创建时间
+   */
+  CreatedAt: string
+
+  /**
+   * 规则最近更新时间
+   */
+  UpdatedAt: string
 }
 
 /**
@@ -6294,33 +6190,19 @@ export interface DescribeAccidentEventListRequest {
 }
 
 /**
- * UnBindingPolicyObject请求参数结构体
+ * CreateRecordingRule返回参数结构体
  */
-export interface UnBindingPolicyObjectRequest {
+export interface CreateRecordingRuleResponse {
   /**
-   * 固定值，为"monitor"
-   */
-  Module: string
+      * 规则 ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RuleId: string
 
   /**
-   * 策略组id，如传入 PolicyId 则该字段被忽略可传入任意值如 0
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  GroupId: number
-
-  /**
-   * 待删除对象实例的唯一id列表，UniqueId从调用[获取已绑定对象列表接口](https://cloud.tencent.com/document/api/248/40570)的出参的List中得到
-   */
-  UniqueId: Array<string>
-
-  /**
-   * 实例分组id，如果按实例分组删除的话UniqueId参数是无效的
-   */
-  InstanceGroupId?: number
-
-  /**
-   * 告警策略ID，使用此字段时 GroupId 会被忽略
-   */
-  PolicyId?: string
+  RequestId?: string
 }
 
 /**
@@ -6400,6 +6282,40 @@ export interface DescribeBindingPolicyObjectListInstanceGroup {
 }
 
 /**
+ * UpdateServiceDiscovery请求参数结构体
+ */
+export interface UpdateServiceDiscoveryRequest {
+  /**
+   * Prometheus 实例 ID
+   */
+  InstanceId: string
+
+  /**
+   * <li>类型是 TKE，为对应的腾讯云容器服务集群 ID</li>
+   */
+  KubeClusterId: string
+
+  /**
+      * 用户 Kubernetes 集群类型：
+<li> 1 = 容器服务集群(TKE) </li>
+      */
+  KubeType: number
+
+  /**
+      * 服务发现类型，取值如下：
+<li> 1 = ServiceMonitor</li>
+<li> 2 = PodMonitor</li>
+<li> 3 = JobMonitor</li>
+      */
+  Type: number
+
+  /**
+   * 服务发现配置信息
+   */
+  Yaml: string
+}
+
+/**
  * DeleteAlertRules请求参数结构体
  */
 export interface DeleteAlertRulesRequest {
@@ -6427,6 +6343,38 @@ export interface DescribeAlarmNoticeRequest {
    * 告警通知模板 id
    */
   NoticeId: string
+}
+
+/**
+ * UninstallGrafanaDashboard请求参数结构体
+ */
+export interface UninstallGrafanaDashboardRequest {
+  /**
+   * 实例 ID
+   */
+  InstanceId: string
+
+  /**
+      * Prometheus 集成项 Code，删除对应的 Dashboard，Code 如下：
+<li>spring_mvc</li>
+<li>mysql</li>
+<li>go</li>
+<li>redis</li>
+<li>jvm</li>
+<li>pgsql</li>
+<li>mongo</li>
+<li>kafka</li>
+<li>es</li>
+<li>flink</li>
+<li>blackbox</li>
+<li>consule</li>
+<li>memcached</li>
+<li>zk</li>
+<li>tps</li>
+<li>istio</li>
+<li>etcd</li>
+      */
+  IntegrationCodes?: Array<string>
 }
 
 /**
@@ -6689,6 +6637,44 @@ export interface ReceiverInfo {
 }
 
 /**
+ * DescribeRecordingRules请求参数结构体
+ */
+export interface DescribeRecordingRulesRequest {
+  /**
+   * Prometheus 实例 ID
+   */
+  InstanceId: string
+
+  /**
+   * 返回数量，默认为 20，最大值为 100
+   */
+  Limit?: number
+
+  /**
+   * 偏移量，默认为 0
+   */
+  Offset?: number
+
+  /**
+   * 规则 ID
+   */
+  RuleId?: string
+
+  /**
+      * 规则状态码，取值如下：
+<li>1=RuleDeleted</li>
+<li>2=RuleEnabled</li>
+<li>3=RuleDisabled</li>
+      */
+  RuleState?: number
+
+  /**
+   * 规则名称
+   */
+  Name?: string
+}
+
+/**
  * UnBindingAllPolicyObject请求参数结构体
  */
 export interface UnBindingAllPolicyObjectRequest {
@@ -6804,6 +6790,40 @@ export interface GetPrometheusAgentManagementCommandResponse {
 }
 
 /**
+ * UpdateRecordingRule请求参数结构体
+ */
+export interface UpdateRecordingRuleRequest {
+  /**
+   * 聚合规则名称
+   */
+  Name: string
+
+  /**
+   * 聚合规则组内容，格式为 yaml，通过 base64 进行编码。
+   */
+  Group: string
+
+  /**
+   * Prometheus 实例 ID
+   */
+  InstanceId: string
+
+  /**
+   * Prometheus 聚合规则 ID
+   */
+  RuleId: string
+
+  /**
+      * 规则状态码，取值如下：
+<li>1=RuleDeleted</li>
+<li>2=RuleEnabled</li>
+<li>3=RuleDisabled</li>
+默认状态码为 2 启用。
+      */
+  RuleState?: number
+}
+
+/**
  * 告警策略指标触发条件
  */
 export interface AlarmPolicyCondition {
@@ -6911,6 +6931,205 @@ export interface DescribePolicyConditionListCondition {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   SupportRegions: Array<string>
+}
+
+/**
+ * Prometheus 服务响应体
+ */
+export interface PrometheusInstancesItem {
+  /**
+   * 实例ID。
+   */
+  InstanceId: string
+
+  /**
+   * 实例名称。
+   */
+  InstanceName: string
+
+  /**
+      * 实例计费模式。取值范围：
+<ul>
+<li>2：包年包月</li>
+<li>3：按量</li>
+</ul>
+      */
+  InstanceChargeType: number
+
+  /**
+   * 地域 ID
+   */
+  RegionId: number
+
+  /**
+   * 可用区
+   */
+  Zone: string
+
+  /**
+   * VPC ID
+   */
+  VpcId: string
+
+  /**
+   * 子网 ID
+   */
+  SubnetId: string
+
+  /**
+      * 存储周期
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DataRetentionTime: number
+
+  /**
+      * 实例业务状态。取值范围：
+<ul>
+<li>1：正在创建</li>
+<li>2：运行中</li>
+<li>3：异常</li>
+<li>4：重建中</li>
+<li>5：销毁中</li>
+<li>6：已停服</li>
+<li>8：欠费停服中</li>
+<li>9：欠费已停服</li>
+</ul>
+      */
+  InstanceStatus: number
+
+  /**
+      * Grafana 面板 URL
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  GrafanaURL: string
+
+  /**
+   * 创建时间
+   */
+  CreatedAt: string
+
+  /**
+      * 是否开启 Grafana
+<li>0：不开启</li>
+<li>1：开启</li>
+      */
+  EnableGrafana: number
+
+  /**
+      * 实例IPV4地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IPv4Address: string
+
+  /**
+      * 实例关联的标签列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TagSpecification: Array<PrometheusTag>
+
+  /**
+      * 购买的实例过期时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ExpireTime: string
+
+  /**
+      * 计费状态
+<ul>
+<li>1：正常</li>
+<li>2：过期</li>
+<li>3：销毁</li>
+<li>4：分配中</li>
+<li>5：分配失败</li>
+</ul>
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ChargeStatus: number
+
+  /**
+      * 规格名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SpecName: string
+
+  /**
+      * 自动续费标记
+<ul>
+<li>0：不自动续费</li>
+<li>1：开启自动续费</li>
+<li>2：禁止自动续费</li>
+<li>-1：无效</ii>
+</ul>
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AutoRenewFlag: number
+
+  /**
+      * 是否快过期
+<ul>
+<li>0：否</li>
+<li>1：快过期</li>
+</ul>
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsNearExpire: number
+
+  /**
+      * 数据写入需要的 Token
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AuthToken: string
+
+  /**
+      * Prometheus Remote Write 的地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RemoteWrite: string
+
+  /**
+      * Prometheus HTTP Api 根地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ApiRootPath: string
+
+  /**
+      * Proxy 的地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProxyAddress: string
+
+  /**
+      * Grafana 运行状态
+<ul>
+<li>1：正在创建</li>
+<li>2：运行中</li>
+<li>3：异常</li>
+<li>4：重启中</li>
+<li>5：销毁中</li>
+<li>6：已停机</li>
+<li>7：已删除</li>
+</ul>
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  GrafanaStatus: number
+
+  /**
+      * Grafana IP 白名单列表，使用英文分号分隔
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  GrafanaIpWhiteList: string
+
+  /**
+      * 实例的授权信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Grant: PrometheusInstanceGrantInfo
+
+  /**
+      * 绑定的 Grafana 实例 ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  GrafanaInstanceId: string
 }
 
 /**

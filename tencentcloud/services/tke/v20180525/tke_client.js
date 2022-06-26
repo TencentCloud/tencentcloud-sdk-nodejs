@@ -850,6 +850,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("EnableClusterDeletionProtection", req, cb);
     }
     /**
+     * 操作TKEEdge集群的addon
+     */
+    async ForwardTKEEdgeApplicationRequestV3(req, cb) {
+        return this.request("ForwardTKEEdgeApplicationRequestV3", req, cb);
+    }
+    /**
      * 同步模板到实例或者集群
      */
     async SyncPrometheusTemplate(req, cb) {
