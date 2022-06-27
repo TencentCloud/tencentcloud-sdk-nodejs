@@ -316,10 +316,6 @@ export interface EventBus {
  */
 export interface ListTargetsRequest {
     /**
-      * 事件规则ID
-      */
-    RuleId: string;
-    /**
       * 事件集ID
       */
     EventBusId: string;
@@ -327,6 +323,10 @@ export interface ListTargetsRequest {
       * 根据哪个字段进行返回结果排序,支持以下字段：AddTime（创建时间）, ModTime（修改时间）
       */
     OrderBy?: string;
+    /**
+      * 事件规则ID
+      */
+    RuleId?: string;
     /**
       * 返回数量，默认为20，最大值为100。
       */

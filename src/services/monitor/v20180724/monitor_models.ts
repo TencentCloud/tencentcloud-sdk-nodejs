@@ -910,39 +910,6 @@ export interface PrometheusAgent {
 }
 
 /**
- * DeleteExporterIntegration请求参数结构体
- */
-export interface DeleteExporterIntegrationRequest {
-  /**
-   * 实例 ID
-   */
-  InstanceId: string
-
-  /**
-      * Kubernetes 集群类型，取值如下：
-<li> 1= 容器集群(TKE) </li>
-<li> 2=弹性集群<EKS> </li>
-<li> 3= Prometheus管理的弹性集群<MEKS> </li>
-      */
-  KubeType: number
-
-  /**
-   * 集群 ID
-   */
-  ClusterId: string
-
-  /**
-   * 类型
-   */
-  Kind: string
-
-  /**
-   * 名字
-   */
-  Name: string
-}
-
-/**
  * ModifyAlarmPolicyNotice请求参数结构体
  */
 export interface ModifyAlarmPolicyNoticeRequest {
@@ -1245,13 +1212,43 @@ export interface PrometheusScrapeJob {
 }
 
 /**
- * ModifyPrometheusInstanceAttributes返回参数结构体
+ * CreatePrometheusMultiTenantInstancePostPayMode请求参数结构体
  */
-export interface ModifyPrometheusInstanceAttributesResponse {
+export interface CreatePrometheusMultiTenantInstancePostPayModeRequest {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 实例名
    */
-  RequestId?: string
+  InstanceName: string
+
+  /**
+   * VPC ID
+   */
+  VpcId: string
+
+  /**
+   * 子网 ID
+   */
+  SubnetId: string
+
+  /**
+   * 数据存储时间（单位天），限制值为15，30，45之一
+   */
+  DataRetentionTime: number
+
+  /**
+   * 可用区
+   */
+  Zone: string
+
+  /**
+   * 实例的标签
+   */
+  TagSpecification?: Array<PrometheusTag>
+
+  /**
+   * 需要关联的 Grafana 实例
+   */
+  GrafanaInstanceId?: string
 }
 
 /**
@@ -1748,6 +1745,21 @@ export interface ModifyAlarmPolicyStatusRequest {
 }
 
 /**
+ * CreatePrometheusMultiTenantInstancePostPayMode返回参数结构体
+ */
+export interface CreatePrometheusMultiTenantInstancePostPayModeResponse {
+  /**
+   * 实例 ID
+   */
+  InstanceId: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * UpdatePrometheusAgentStatus返回参数结构体
  */
 export interface UpdatePrometheusAgentStatusResponse {
@@ -1908,6 +1920,28 @@ export interface DescribeAlertRulesResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   AlertRuleSet: Array<PrometheusRuleSet>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeBasicAlarmList返回参数结构体
+ */
+export interface DescribeBasicAlarmListResponse {
+  /**
+      * 告警列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Alarms?: Array<DescribeBasicAlarmListAlarms>
+
+  /**
+      * 总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Total?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2172,23 +2206,36 @@ export interface AlarmPolicy {
 }
 
 /**
- * CreateAlarmPolicy返回参数结构体
+ * DeleteExporterIntegration请求参数结构体
  */
-export interface CreateAlarmPolicyResponse {
+export interface DeleteExporterIntegrationRequest {
   /**
-   * 告警策略 ID
+   * 实例 ID
    */
-  PolicyId: string
+  InstanceId: string
 
   /**
-   * 可用于实例、实例组的绑定和解绑接口（[BindingPolicyObject](https://cloud.tencent.com/document/product/248/40421)、[UnBindingAllPolicyObject](https://cloud.tencent.com/document/product/248/40568)、[UnBindingPolicyObject](https://cloud.tencent.com/document/product/248/40567)）的策略 ID
-   */
-  OriginId: string
+      * Kubernetes 集群类型，取值如下：
+<li> 1= 容器集群(TKE) </li>
+<li> 2=弹性集群<EKS> </li>
+<li> 3= Prometheus管理的弹性集群<MEKS> </li>
+      */
+  KubeType: number
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 集群 ID
    */
-  RequestId?: string
+  ClusterId: string
+
+  /**
+   * 类型
+   */
+  Kind: string
+
+  /**
+   * 名字
+   */
+  Name: string
 }
 
 /**
@@ -2374,6 +2421,16 @@ export interface GetPrometheusAgentManagementCommandRequest {
 }
 
 /**
+ * ModifyPrometheusInstanceAttributes返回参数结构体
+ */
+export interface ModifyPrometheusInstanceAttributesResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteAlarmNotices返回参数结构体
  */
 export interface DeleteAlarmNoticesResponse {
@@ -2426,20 +2483,18 @@ export interface UpdatePrometheusAgentStatusRequest {
 }
 
 /**
- * DescribeBasicAlarmList返回参数结构体
+ * CreateAlarmPolicy返回参数结构体
  */
-export interface DescribeBasicAlarmListResponse {
+export interface CreateAlarmPolicyResponse {
   /**
-      * 告警列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Alarms?: Array<DescribeBasicAlarmListAlarms>
+   * 告警策略 ID
+   */
+  PolicyId: string
 
   /**
-      * 总数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Total?: number
+   * 可用于实例、实例组的绑定和解绑接口（[BindingPolicyObject](https://cloud.tencent.com/document/product/248/40421)、[UnBindingAllPolicyObject](https://cloud.tencent.com/document/product/248/40568)、[UnBindingPolicyObject](https://cloud.tencent.com/document/product/248/40567)）的策略 ID
+   */
+  OriginId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

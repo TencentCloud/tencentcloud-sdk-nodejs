@@ -28,9 +28,9 @@ it("mmps.v20200710.CreateAppScanTask", async function () {
     }
 })
 
-it("mmps.v20200710.DescribeScanTaskList", async function () {
+it("mmps.v20200710.DescribeFlySecMiniAppScanReportList", async function () {
     try {
-       const data = await client.DescribeScanTaskList({})
+       const data = await client.DescribeFlySecMiniAppScanReportList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -91,6 +91,16 @@ it("mmps.v20200710.CreateFlySecMiniAppScanTaskRepeat", async function () {
 it("mmps.v20200710.DescribeScanTaskReportUrl", async function () {
     try {
        const data = await client.DescribeScanTaskReportUrl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mmps.v20200710.DescribeScanTaskList", async function () {
+    try {
+       const data = await client.DescribeScanTaskList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

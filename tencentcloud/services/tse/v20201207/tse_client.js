@@ -28,16 +28,34 @@ class Client extends abstract_client_1.AbstractClient {
         super("tse.tencentcloudapi.com", "2020-12-07", clientConfig);
     }
     /**
+     * 查询Zookeeper类型注册引擎实例副本信息
+     */
+    async DescribeZookeeperReplicas(req, cb) {
+        return this.request("DescribeZookeeperReplicas", req, cb);
+    }
+    /**
      * 删除引擎实例
      */
     async DeleteEngine(req, cb) {
         return this.request("DeleteEngine", req, cb);
     }
     /**
-     * 查询引擎实例访问地址
+     * 用于查询引擎实例列表
      */
-    async DescribeSREInstanceAccessAddress(req, cb) {
-        return this.request("DescribeSREInstanceAccessAddress", req, cb);
+    async DescribeSREInstances(req, cb) {
+        return this.request("DescribeSREInstances", req, cb);
+    }
+    /**
+     * 查询Nacos类型引擎实例副本信息
+     */
+    async DescribeNacosReplicas(req, cb) {
+        return this.request("DescribeNacosReplicas", req, cb);
+    }
+    /**
+     * 查询zookeeper服务接口列表
+     */
+    async DescribeZookeeperServerInterfaces(req, cb) {
+        return this.request("DescribeZookeeperServerInterfaces", req, cb);
     }
     /**
      * 创建引擎实例
@@ -46,10 +64,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateEngine", req, cb);
     }
     /**
-     * 用于查询引擎实例列表
+     * 查询nacos服务接口列表
      */
-    async DescribeSREInstances(req, cb) {
-        return this.request("DescribeSREInstances", req, cb);
+    async DescribeNacosServerInterfaces(req, cb) {
+        return this.request("DescribeNacosServerInterfaces", req, cb);
+    }
+    /**
+     * 查询引擎实例访问地址
+     */
+    async DescribeSREInstanceAccessAddress(req, cb) {
+        return this.request("DescribeSREInstanceAccessAddress", req, cb);
     }
 }
 exports.Client = Client;

@@ -2130,6 +2130,35 @@ export interface Time {
 }
 
 /**
+ * 坐标
+ */
+export interface Coordinate {
+  /**
+      * 左上角x坐标
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  X: number
+
+  /**
+      * 左上角y坐标
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Y: number
+
+  /**
+      * 宽度，单位像素
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Width: number
+
+  /**
+      * 高度，单位像素
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Height: number
+}
+
+/**
  * 组织学类型
  */
 export interface HistologyType {
@@ -2444,6 +2473,18 @@ export interface IndicatorItem {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ItemString: string
+
+  /**
+      * 指标项ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Id: number
+
+  /**
+      * 指标项坐标位置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Coords: Coordinate
 }
 
 /**

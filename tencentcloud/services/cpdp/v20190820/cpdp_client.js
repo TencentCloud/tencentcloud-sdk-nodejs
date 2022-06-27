@@ -40,6 +40,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DistributeAccreditQuery", req, cb);
     }
     /**
+     * 云企付-子商户费率配置结果查询
+     */
+    async QueryOpenBankSubMerchantRateConfigure(req, cb) {
+        return this.request("QueryOpenBankSubMerchantRateConfigure", req, cb);
+    }
+    /**
      * 灵云V2-查询冻结订单列表
      */
     async QueryFlexFreezeOrderList(req, cb) {
@@ -88,10 +94,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("QueryOrder", req, cb);
     }
     /**
-     * 灵云-上传主播信息
+     * 云企付-退款结果查询
      */
-    async UploadExternalAnchorInfo(req, cb) {
-        return this.request("UploadExternalAnchorInfo", req, cb);
+    async QueryOpenBankRefundOrder(req, cb) {
+        return this.request("QueryOpenBankRefundOrder", req, cb);
     }
     /**
      * 根据订单号或用户ID，查询支付订单状态。
@@ -146,6 +152,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ViewContract(req, cb) {
         return this.request("ViewContract", req, cb);
+    }
+    /**
+     * 云企付-聚合下单
+     */
+    async CreateOpenBankUnifiedOrder(req, cb) {
+        return this.request("CreateOpenBankUnifiedOrder", req, cb);
     }
     /**
      * 查询银行子账户余额。查询会员子账户以及平台的功能子账户的余额。
@@ -389,6 +401,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreatePayRollPreOrder", req, cb);
     }
     /**
+     * 云支付-添加合同接口
+     */
+    async AddContract(req, cb) {
+        return this.request("AddContract", req, cb);
+    }
+    /**
      * 创建子商户
      */
     async CreateCloudSubMerchant(req, cb) {
@@ -431,10 +449,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("QueryFlexPayeeAccountInfo", req, cb);
     }
     /**
+     * 云企付-退款申请
+     */
+    async RefundOpenBankOrder(req, cb) {
+        return this.request("RefundOpenBankOrder", req, cb);
+    }
+    /**
      * 务工卡-生成授权令牌
      */
     async CreatePayRollToken(req, cb) {
         return this.request("CreatePayRollToken", req, cb);
+    }
+    /**
+     * 灵云-上传主播信息
+     */
+    async UploadExternalAnchorInfo(req, cb) {
+        return this.request("UploadExternalAnchorInfo", req, cb);
     }
     /**
      * 应用需要先调用本接口生成支付订单号，并将应答的PayInfo透传给聚鑫SDK，拉起客户端（包括微信公众号/微信小程序/客户端App）支付。
@@ -459,6 +489,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async QueryContractRelateShop(req, cb) {
         return this.request("QueryContractRelateShop", req, cb);
+    }
+    /**
+     * 云支付-查询门店明细接口
+     */
+    async ViewShop(req, cb) {
+        return this.request("ViewShop", req, cb);
     }
     /**
      * 验证鉴权金额。此接口可受理BindRelateAcctSmallAmount接口发起的转账金额（往账鉴权方式）的验证处理。若所回填的验证金额验证通过，则会绑定原申请中的银行账户作为提现账户。通过此接口也可以查得BindRelateAcctSmallAmount接口发起的来账鉴权方式的申请的当前状态。
@@ -509,6 +545,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("MigrateOrderRefund", req, cb);
     }
     /**
+     * 云企付-子商户资质文件查询
+     */
+    async QueryOpenBankSubMerchantCredential(req, cb) {
+        return this.request("QueryOpenBankSubMerchantCredential", req, cb);
+    }
+    /**
      * 灵云V2-查询付款订单状态
      */
     async QueryFlexPaymentOrderStatus(req, cb) {
@@ -543,6 +585,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async QueryBankWithdrawCashDetails(req, cb) {
         return this.request("QueryBankWithdrawCashDetails", req, cb);
+    }
+    /**
+     * 云企付-分页查询对账单数据
+     */
+    async QueryOpenBankBillDataPage(req, cb) {
+        return this.request("QueryOpenBankBillDataPage", req, cb);
     }
     /**
      * 云鉴-查询对账单下载地址的接口
@@ -867,10 +915,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DistributeQuery", req, cb);
     }
     /**
-     * 云支付-添加合同接口
+     * 云企付-子商户费率配置
      */
-    async AddContract(req, cb) {
-        return this.request("AddContract", req, cb);
+    async CreateOpenBankSubMerchantRateConfigure(req, cb) {
+        return this.request("CreateOpenBankSubMerchantRateConfigure", req, cb);
     }
     /**
      * 灵云-单笔主播转账接口
@@ -999,6 +1047,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("QueryMemberTransaction", req, cb);
     }
     /**
+     * 云企付-子商户资质文件上传
+     */
+    async UploadOpenBankSubMerchantCredential(req, cb) {
+        return this.request("UploadOpenBankSubMerchantCredential", req, cb);
+    }
+    /**
      * 云支付-查询已添加分账接收方接口
      */
     async DistributeQueryReceiver(req, cb) {
@@ -1065,10 +1119,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("MigrateOrderRefundQuery", req, cb);
     }
     /**
-     * 云支付-查询门店明细接口
+     * 直播平台-查询代理商结算单链接
      */
-    async ViewShop(req, cb) {
-        return this.request("ViewShop", req, cb);
+    async QueryAgentStatements(req, cb) {
+        return this.request("QueryAgentStatements", req, cb);
     }
     /**
      * 通过此接口查询签约数据
@@ -1155,10 +1209,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("QueryAcctInfoList", req, cb);
     }
     /**
-     * 直播平台-查询代理商结算单链接
+     * 云企付-子商户进件V2
      */
-    async QueryAgentStatements(req, cb) {
-        return this.request("QueryAgentStatements", req, cb);
+    async CreateOpenBankAggregatedSubMerchantRegistration(req, cb) {
+        return this.request("CreateOpenBankAggregatedSubMerchantRegistration", req, cb);
     }
     /**
      * 查询对账文件信息。平台调用该接口获取需下载对账文件的文件名称以及密钥。 平台获取到信息后， 可以再调用OPENAPI的文件下载功能。

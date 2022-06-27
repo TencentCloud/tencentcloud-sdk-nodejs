@@ -131,10 +131,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetMonitorData", req, cb);
     }
     /**
-     * 云监控告警修改告警策略的触发任务，TriggerTasks字段放触发任务列表，TriggerTasks传空数组时，代表解绑该策略的所有触发任务。
+     * 创建按量 Prometheus 实例，根据用量收费实例
      */
-    async ModifyAlarmPolicyTasks(req, cb) {
-        return this.request("ModifyAlarmPolicyTasks", req, cb);
+    async CreatePrometheusMultiTenantInstancePostPayMode(req, cb) {
+        return this.request("CreatePrometheusMultiTenantInstancePostPayMode", req, cb);
     }
     /**
      * 本接口 (DescribePrometheusInstances) 用于查询一个或多个实例的详细信息。
@@ -418,6 +418,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async SetDefaultAlarmPolicy(req, cb) {
         return this.request("SetDefaultAlarmPolicy", req, cb);
+    }
+    /**
+     * 云监控告警修改告警策略的触发任务，TriggerTasks字段放触发任务列表，TriggerTasks传空数组时，代表解绑该策略的所有触发任务。
+     */
+    async ModifyAlarmPolicyTasks(req, cb) {
+        return this.request("ModifyAlarmPolicyTasks", req, cb);
     }
     /**
      * 根据条件查询 Prometheus 预聚合规则

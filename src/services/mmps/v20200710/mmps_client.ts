@@ -23,6 +23,7 @@ import {
   DescribeFlySecMiniAppScanTaskParamRequest,
   ResourceUsageInfoData,
   CreateAppScanTaskRequest,
+  FlySecMiniAppRiskItems,
   DescribeScanTaskStatusRequest,
   DescribeBasicDiagnosisResourceUsageInfoResponse,
   CreateAppScanTaskRepeatResponse,
@@ -33,6 +34,7 @@ import {
   CreateFlySecMiniAppScanTaskResponse,
   CreateFlySecMiniAppScanTaskRequest,
   DescribeFlySecMiniAppScanTaskListRequest,
+  DescribeFlySecMiniAppScanReportListRequest,
   DescribeFlySecMiniAppScanTaskParamResponse,
   CreateFlySecMiniAppScanTaskRepeatRequest,
   CreateAppScanTaskRepeatRequest,
@@ -45,9 +47,11 @@ import {
   DescribeScanTaskListResponse,
   AppInfoItem,
   DescribeFlySecMiniAppScanTaskStatusResponse,
+  DescribeFlySecMiniAppScanReportListResponse,
   CreateFlySecMiniAppScanTaskRepeatResponse,
   DescribeScanTaskStatusResponse,
   AppTaskData,
+  FlySecMiniAppReportData,
   DescribeResourceUsageInfoRequest,
 } from "./mmps_models"
 
@@ -71,13 +75,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取小程序隐私合规诊断任务列表
+   * 查询指定小程序版本的翼扬诊断安全得分
    */
-  async DescribeScanTaskList(
-    req: DescribeScanTaskListRequest,
-    cb?: (error: string, rep: DescribeScanTaskListResponse) => void
-  ): Promise<DescribeScanTaskListResponse> {
-    return this.request("DescribeScanTaskList", req, cb)
+  async DescribeFlySecMiniAppScanReportList(
+    req: DescribeFlySecMiniAppScanReportListRequest,
+    cb?: (error: string, rep: DescribeFlySecMiniAppScanReportListResponse) => void
+  ): Promise<DescribeFlySecMiniAppScanReportListResponse> {
+    return this.request("DescribeFlySecMiniAppScanReportList", req, cb)
   }
 
   /**
@@ -138,6 +142,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeScanTaskReportUrlResponse) => void
   ): Promise<DescribeScanTaskReportUrlResponse> {
     return this.request("DescribeScanTaskReportUrl", req, cb)
+  }
+
+  /**
+   * 获取小程序隐私合规诊断任务列表
+   */
+  async DescribeScanTaskList(
+    req: DescribeScanTaskListRequest,
+    cb?: (error: string, rep: DescribeScanTaskListResponse) => void
+  ): Promise<DescribeScanTaskListResponse> {
+    return this.request("DescribeScanTaskList", req, cb)
   }
 
   /**

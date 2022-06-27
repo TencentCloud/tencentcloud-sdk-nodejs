@@ -2307,6 +2307,18 @@ export interface ReceiveMessageRequest {
       * 默认值为：Latest。用作判定consumer初始接收消息的位置，可选参数为：Earliest, Latest
       */
     SubInitialPosition?: string;
+    /**
+      * 用于设置BatchReceivePolicy，指在一次batch中最多接收多少条消息，默认是 0。即不开启BatchReceivePolicy
+      */
+    MaxNumMessages?: number;
+    /**
+      * 用于设置BatchReceivePolicy，指在一次batch中最多接收的消息体有多大，单位是 bytes。默认是 0，即不开启BatchReceivePolicy
+      */
+    MaxNumBytes?: number;
+    /**
+      * 用于设置BatchReceivePolicy，指在一次batch消息的接收z中最多等待的超时时间，单位是毫秒。默认是 0，即不开启BatchReceivePolicy
+      */
+    Timeout?: number;
 }
 /**
  * CreateTopic请求参数结构体
@@ -2775,6 +2787,16 @@ export interface ReceiveMessageResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     SubName: string;
+    /**
+      * BatchReceivePolicy 一次性返回的多条消息的 MessageID，用 ‘###’ 来区分不同的 MessageID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MessageIDList: string;
+    /**
+      * BatchReceivePolicy 一次性返回的多条消息的消息内容，用 ‘###’ 来区分不同的消息内容
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MessagesPayload: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

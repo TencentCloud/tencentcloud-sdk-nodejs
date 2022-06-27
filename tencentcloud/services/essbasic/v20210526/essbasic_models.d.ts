@@ -336,7 +336,7 @@ export interface OperateChannelTemplateResponse {
  */
 export interface CreateSignUrlsRequest {
     /**
-      * 渠道应用相关信息
+      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
       */
     Agent: Agent;
     /**
@@ -365,8 +365,8 @@ export interface CreateSignUrlsRequest {
  */
 export interface ChannelCreateMultiFlowSignQRCodeRequest {
     /**
-      * 应用信息
-此接口Agent.ProxyOrganizationOpenId 和 Agent. ProxyOperator.OpenId 必填
+      * 渠道应用相关信息。
+此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 必填。
       */
     Agent: Agent;
     /**
@@ -416,7 +416,7 @@ export interface AuthFailMessage {
  */
 export interface DescribeFlowDetailInfoRequest {
     /**
-      * 应用信息
+      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
       */
     Agent: Agent;
     /**
@@ -473,7 +473,8 @@ export interface UploadFilesRequest {
  */
 export interface DescribeResourceUrlsByFlowsRequest {
     /**
-      * 渠道应用相关信息
+      * 渠道应用相关信息。
+此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
       */
     Agent: Agent;
     /**
@@ -609,8 +610,7 @@ TEXT控件可以指定字体
  */
 export interface GetDownloadFlowUrlRequest {
     /**
-      * 应用信息
-此接口Agent.ProxyOrganizationOpenId 和 Agent. ProxyOperator.OpenId 必填
+      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
       */
     Agent: Agent;
     /**
@@ -798,7 +798,7 @@ export interface FlowResourceUrlInfo {
  */
 export interface DescribeTemplatesRequest {
     /**
-      * 渠道应用相关信息
+      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
       */
     Agent: Agent;
     /**
@@ -1017,7 +1017,7 @@ export interface CreateSignUrlsResponse {
  */
 export interface OperateChannelTemplateRequest {
     /**
-      * 应用信息
+      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
       */
     Agent: Agent;
     /**
@@ -1059,8 +1059,7 @@ export interface DownloadFlowInfo {
  */
 export interface ChannelCancelMultiFlowSignQRCodeRequest {
     /**
-      * 应用信息
-此接口Agent.ProxyOrganizationOpenId 和 Agent. ProxyOperator.OpenId 必填
+      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
       */
     Agent: Agent;
     /**

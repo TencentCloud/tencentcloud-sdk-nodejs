@@ -1,40 +1,190 @@
 /**
- * 查询过滤通用对象
+ * Nacos副本信息
  */
-export interface Filter {
+export interface NacosReplica {
     /**
-      * 过滤参数名
+      * 名称
       */
     Name: string;
     /**
-      * 过滤参数值
+      * 角色
       */
-    Values: Array<string>;
+    Role: string;
+    /**
+      * 状态
+      */
+    Status: string;
+    /**
+      * 子网ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SubnetId: string;
+    /**
+      * 可用区ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Zone: string;
+    /**
+      * 可用区ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ZoneId: string;
 }
 /**
- * DescribeSREInstances请求参数结构体
+ * DescribeNacosReplicas请求参数结构体
  */
-export interface DescribeSREInstancesRequest {
+export interface DescribeNacosReplicasRequest {
     /**
-      * 请求过滤参数
+      * 引擎实例ID
       */
-    Filters?: Array<Filter>;
+    InstanceId: string;
     /**
-      * 翻页单页查询限制数量[0,1000], 默认值0
+      * 副本列表Limit
       */
     Limit?: number;
     /**
-      * 翻页单页偏移量，默认值0
+      * 副本列表Offset
       */
     Offset?: number;
+}
+/**
+ * Apollo 环境配置参数
+ */
+export interface ApolloEnvParam {
     /**
-      * 查询类型
+      * 环境名称
       */
-    QueryType?: string;
+    Name: string;
     /**
-      * 调用方来源
+      * 环境内引擎的节点规格 ID
       */
-    QuerySource?: string;
+    EngineResourceSpec: string;
+    /**
+      * 环境内引擎的节点数量
+      */
+    EngineNodeNum: number;
+    /**
+      * 配置存储空间大小，以GB为单位
+      */
+    StorageCapacity: number;
+    /**
+      * VPC ID。在 VPC 的子网内分配一个 IP 作为 ConfigServer 的访问地址
+      */
+    VpcId: string;
+    /**
+      * 子网 ID。在 VPC 的子网内分配一个 IP 作为 ConfigServer 的访问地址
+      */
+    SubnetId: string;
+}
+/**
+ * 键值对
+ */
+export interface KVPair {
+    /**
+      * 键
+      */
+    Key: string;
+    /**
+      * 值
+      */
+    Value: string;
+}
+/**
+ * DeleteEngine返回参数结构体
+ */
+export interface DeleteEngineResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * CreateEngine返回参数结构体
+ */
+export interface CreateEngineResponse {
+    /**
+      * 引擎实例 ID
+      */
+    InstanceId: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeZookeeperReplicas请求参数结构体
+ */
+export interface DescribeZookeeperReplicasRequest {
+    /**
+      * 注册引擎实例ID
+      */
+    InstanceId: string;
+    /**
+      * 副本列表Limit
+      */
+    Limit?: number;
+    /**
+      * 副本列表Offset
+      */
+    Offset?: number;
+}
+/**
+ * DeleteEngine请求参数结构体
+ */
+export interface DeleteEngineRequest {
+    /**
+      * 引擎实例 ID
+      */
+    InstanceId: string;
+}
+/**
+ * Zookeeper副本信息
+ */
+export interface ZookeeperReplica {
+    /**
+      * 名称
+      */
+    Name: string;
+    /**
+      * 角色
+      */
+    Role: string;
+    /**
+      * 状态
+      */
+    Status: string;
+    /**
+      * 子网ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SubnetId: string;
+    /**
+      * 可用区ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Zone: string;
+    /**
+      * 可用区ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ZoneId: string;
+}
+/**
+ * DescribeNacosServerInterfaces请求参数结构体
+ */
+export interface DescribeNacosServerInterfacesRequest {
+    /**
+      * 实例id
+      */
+    InstanceId?: string;
+    /**
+      * 返回的列表个数
+      */
+    Limit?: number;
+    /**
+      * 返回的列表起始偏移量
+      */
+    Offset?: number;
 }
 /**
  * 微服务注册引擎实例
@@ -179,52 +329,6 @@ export interface SREInstance {
     IsolateTime: string;
 }
 /**
- * Apollo 环境配置参数
- */
-export interface ApolloEnvParam {
-    /**
-      * 环境名称
-      */
-    Name: string;
-    /**
-      * 环境内引擎的节点规格 ID
-      */
-    EngineResourceSpec: string;
-    /**
-      * 环境内引擎的节点数量
-      */
-    EngineNodeNum: number;
-    /**
-      * 配置存储空间大小，以GB为单位
-      */
-    StorageCapacity: number;
-    /**
-      * VPC ID。在 VPC 的子网内分配一个 IP 作为 ConfigServer 的访问地址
-      */
-    VpcId: string;
-    /**
-      * 子网 ID。在 VPC 的子网内分配一个 IP 作为 ConfigServer 的访问地址
-      */
-    SubnetId: string;
-}
-/**
- * DescribeSREInstances返回参数结构体
- */
-export interface DescribeSREInstancesResponse {
-    /**
-      * 总数量
-      */
-    TotalCount: number;
-    /**
-      * 实例记录
-      */
-    Content: Array<SREInstance>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
  * DescribeSREInstanceAccessAddress返回参数结构体
  */
 export interface DescribeSREInstanceAccessAddressResponse {
@@ -266,73 +370,188 @@ export interface DescribeSREInstanceAccessAddressResponse {
     RequestId?: string;
 }
 /**
- * 键值对
+ * DescribeSREInstances返回参数结构体
  */
-export interface KVPair {
+export interface DescribeSREInstancesResponse {
     /**
-      * 键
+      * 总数量
       */
-    Key: string;
+    TotalCount: number;
     /**
-      * 值
+      * 实例记录
       */
-    Value: string;
-}
-/**
- * DeleteEngine返回参数结构体
- */
-export interface DeleteEngineResponse {
+    Content: Array<SREInstance>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
 }
 /**
- * CreateEngine返回参数结构体
+ * Zookeeper服务端接口列表，用于云监控
  */
-export interface CreateEngineResponse {
+export interface ZookeeperServerInterface {
     /**
-      * 引擎实例 ID
+      * 接口名
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    InstanceId: string;
+    Interface: string;
+}
+/**
+ * 服务治理相关的信息
+ */
+export interface ServiceGovernanceInfo {
+    /**
+      * 引擎所在的地域
+      */
+    EngineRegion: string;
+    /**
+      * 服务治理引擎绑定的kubernetes集群信息
+      */
+    BoundK8SInfos?: Array<BoundK8SInfo>;
+    /**
+      * 服务治理引擎绑定的网络信息
+      */
+    VpcInfos?: Array<VpcInfo>;
+    /**
+      * 当前实例鉴权是否开启
+      */
+    AuthOpen?: boolean;
+    /**
+      * 该实例支持的功能，鉴权就是 Auth
+      */
+    Features?: Array<string>;
+    /**
+      * 主账户名默认为 polaris，该值为主账户的默认密码
+      */
+    MainPassword?: string;
+}
+/**
+ * DescribeNacosReplicas返回参数结构体
+ */
+export interface DescribeNacosReplicasResponse {
+    /**
+      * 引擎实例副本信息
+      */
+    Replicas: Array<NacosReplica>;
+    /**
+      * 副本个数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TotalCount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
 }
 /**
- * 引擎的初始管理帐号
+ * DescribeZookeeperServerInterfaces返回参数结构体
  */
-export interface EngineAdmin {
+export interface DescribeZookeeperServerInterfacesResponse {
     /**
-      * 控制台初始用户名
+      * 接口总个数
       */
-    Name?: string;
+    TotalCount: number;
     /**
-      * 控制台初始密码
+      * 接口列表
       */
-    Password?: string;
+    Content: Array<ZookeeperServerInterface>;
     /**
-      * 引擎接口的管理员 Token
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Token?: string;
+    RequestId?: string;
 }
 /**
- * 多环境网络信息
+ * 服务治理引擎绑定的kubernetes信息
  */
-export interface EnvAddressInfo {
+export interface BoundK8SInfo {
     /**
-      * 环境名
+      * 绑定的kubernetes集群ID
       */
-    EnvName: string;
+    BoundClusterId: string;
     /**
-      * 是否开启config公网
+      * 绑定的kubernetes的集群类型，分tke和eks两种
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    EnableConfigInternet: boolean;
+    BoundClusterType: string;
     /**
-      * config公网ip
+      * 服务同步模式，all为全量同步，demand为按需同步
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    ConfigInternetServiceIp: string;
+    SyncMode?: string;
+}
+/**
+ * DescribeSREInstances请求参数结构体
+ */
+export interface DescribeSREInstancesRequest {
+    /**
+      * 请求过滤参数
+      */
+    Filters?: Array<Filter>;
+    /**
+      * 翻页单页查询限制数量[0,1000], 默认值0
+      */
+    Limit?: number;
+    /**
+      * 翻页单页偏移量，默认值0
+      */
+    Offset?: number;
+    /**
+      * 查询类型
+      */
+    QueryType?: string;
+    /**
+      * 调用方来源
+      */
+    QuerySource?: string;
+}
+/**
+ * DescribeZookeeperReplicas返回参数结构体
+ */
+export interface DescribeZookeeperReplicasResponse {
+    /**
+      * 注册引擎实例副本信息
+      */
+    Replicas: Array<ZookeeperReplica>;
+    /**
+      * 副本个数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TotalCount: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * 私有网络信息
+ */
+export interface VpcInfo {
+    /**
+      * Vpc Id
+      */
+    VpcId: string;
+    /**
+      * 子网ID
+      */
+    SubnetId: string;
+    /**
+      * 内网访问地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IntranetAddress?: string;
+}
+/**
+ * 查询过滤通用对象
+ */
+export interface Filter {
+    /**
+      * 过滤参数名
+      */
+    Name: string;
+    /**
+      * 过滤参数值
+      */
+    Values: Array<string>;
 }
 /**
  * CreateEngine请求参数结构体
@@ -451,47 +670,6 @@ eureka - STANDARD版本
     PrepaidRenewFlag?: number;
 }
 /**
- * 引擎实例的标签信息
- */
-export interface InstanceTagInfo {
-    /**
-      * 标签键
-      */
-    TagKey?: string;
-    /**
-      * 标签值
-      */
-    TagValue?: string;
-}
-/**
- * DeleteEngine请求参数结构体
- */
-export interface DeleteEngineRequest {
-    /**
-      * 引擎实例 ID
-      */
-    InstanceId: string;
-}
-/**
- * 服务治理引擎绑定的kubernetes信息
- */
-export interface BoundK8SInfo {
-    /**
-      * 绑定的kubernetes集群ID
-      */
-    BoundClusterId: string;
-    /**
-      * 绑定的kubernetes的集群类型，分tke和eks两种
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    BoundClusterType: string;
-    /**
-      * 服务同步模式，all为全量同步，demand为按需同步
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    SyncMode?: string;
-}
-/**
  * DescribeSREInstanceAccessAddress请求参数结构体
  */
 export interface DescribeSREInstanceAccessAddressRequest {
@@ -509,51 +687,65 @@ export interface DescribeSREInstanceAccessAddressRequest {
     SubnetId?: string;
 }
 /**
- * 服务治理相关的信息
+ * DescribeNacosServerInterfaces返回参数结构体
  */
-export interface ServiceGovernanceInfo {
+export interface DescribeNacosServerInterfacesResponse {
     /**
-      * 引擎所在的地域
+      * 接口总个数
       */
-    EngineRegion: string;
+    TotalCount: number;
     /**
-      * 服务治理引擎绑定的kubernetes集群信息
+      * 接口列表
       */
-    BoundK8SInfos?: Array<BoundK8SInfo>;
+    Content: Array<NacosServerInterface>;
     /**
-      * 服务治理引擎绑定的网络信息
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    VpcInfos?: Array<VpcInfo>;
-    /**
-      * 当前实例鉴权是否开启
-      */
-    AuthOpen?: boolean;
-    /**
-      * 该实例支持的功能，鉴权就是 Auth
-      */
-    Features?: Array<string>;
-    /**
-      * 主账户名默认为 polaris，该值为主账户的默认密码
-      */
-    MainPassword?: string;
+    RequestId?: string;
 }
 /**
- * 私有网络信息
+ * 引擎的初始管理帐号
  */
-export interface VpcInfo {
+export interface EngineAdmin {
     /**
-      * Vpc Id
+      * 控制台初始用户名
       */
-    VpcId: string;
+    Name?: string;
     /**
-      * 子网ID
+      * 控制台初始密码
       */
-    SubnetId: string;
+    Password?: string;
     /**
-      * 内网访问地址
+      * 引擎接口的管理员 Token
+      */
+    Token?: string;
+}
+/**
+ * nacos服务端接口列表，用于云监控
+ */
+export interface NacosServerInterface {
+    /**
+      * 接口名
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    IntranetAddress?: string;
+    Interface: string;
+}
+/**
+ * DescribeZookeeperServerInterfaces请求参数结构体
+ */
+export interface DescribeZookeeperServerInterfacesRequest {
+    /**
+      * 实例id
+      */
+    InstanceId?: string;
+    /**
+      * 返回的列表个数
+      */
+    Limit?: number;
+    /**
+      * 返回的列表起始偏移量
+      */
+    Offset?: number;
 }
 /**
  * 环境具体信息
@@ -607,4 +799,34 @@ export interface EnvInfo {
       * 环境别名
       */
     AliasEnvName?: string;
+}
+/**
+ * 多环境网络信息
+ */
+export interface EnvAddressInfo {
+    /**
+      * 环境名
+      */
+    EnvName: string;
+    /**
+      * 是否开启config公网
+      */
+    EnableConfigInternet: boolean;
+    /**
+      * config公网ip
+      */
+    ConfigInternetServiceIp: string;
+}
+/**
+ * 引擎实例的标签信息
+ */
+export interface InstanceTagInfo {
+    /**
+      * 标签键
+      */
+    TagKey?: string;
+    /**
+      * 标签值
+      */
+    TagValue?: string;
 }

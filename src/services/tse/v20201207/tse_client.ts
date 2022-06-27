@@ -18,25 +18,37 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  Filter,
-  DescribeSREInstancesRequest,
-  SREInstance,
+  NacosReplica,
+  DescribeNacosReplicasRequest,
   ApolloEnvParam,
-  DescribeSREInstancesResponse,
-  DescribeSREInstanceAccessAddressResponse,
   KVPair,
   DeleteEngineResponse,
   CreateEngineResponse,
-  EngineAdmin,
-  EnvAddressInfo,
-  CreateEngineRequest,
-  InstanceTagInfo,
+  DescribeZookeeperReplicasRequest,
   DeleteEngineRequest,
-  BoundK8SInfo,
-  DescribeSREInstanceAccessAddressRequest,
+  ZookeeperReplica,
+  DescribeNacosServerInterfacesRequest,
+  SREInstance,
+  DescribeSREInstanceAccessAddressResponse,
+  DescribeSREInstancesResponse,
+  ZookeeperServerInterface,
   ServiceGovernanceInfo,
+  DescribeNacosReplicasResponse,
+  DescribeZookeeperServerInterfacesResponse,
+  BoundK8SInfo,
+  DescribeSREInstancesRequest,
+  DescribeZookeeperReplicasResponse,
   VpcInfo,
+  Filter,
+  CreateEngineRequest,
+  DescribeSREInstanceAccessAddressRequest,
+  DescribeNacosServerInterfacesResponse,
+  EngineAdmin,
+  NacosServerInterface,
+  DescribeZookeeperServerInterfacesRequest,
   EnvInfo,
+  EnvAddressInfo,
+  InstanceTagInfo,
 } from "./tse_models"
 
 /**
@@ -46,6 +58,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("tse.tencentcloudapi.com", "2020-12-07", clientConfig)
+  }
+
+  /**
+   * 查询Zookeeper类型注册引擎实例副本信息
+   */
+  async DescribeZookeeperReplicas(
+    req: DescribeZookeeperReplicasRequest,
+    cb?: (error: string, rep: DescribeZookeeperReplicasResponse) => void
+  ): Promise<DescribeZookeeperReplicasResponse> {
+    return this.request("DescribeZookeeperReplicas", req, cb)
   }
 
   /**
@@ -59,13 +81,33 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询引擎实例访问地址
+   * 用于查询引擎实例列表
    */
-  async DescribeSREInstanceAccessAddress(
-    req: DescribeSREInstanceAccessAddressRequest,
-    cb?: (error: string, rep: DescribeSREInstanceAccessAddressResponse) => void
-  ): Promise<DescribeSREInstanceAccessAddressResponse> {
-    return this.request("DescribeSREInstanceAccessAddress", req, cb)
+  async DescribeSREInstances(
+    req: DescribeSREInstancesRequest,
+    cb?: (error: string, rep: DescribeSREInstancesResponse) => void
+  ): Promise<DescribeSREInstancesResponse> {
+    return this.request("DescribeSREInstances", req, cb)
+  }
+
+  /**
+   * 查询Nacos类型引擎实例副本信息
+   */
+  async DescribeNacosReplicas(
+    req: DescribeNacosReplicasRequest,
+    cb?: (error: string, rep: DescribeNacosReplicasResponse) => void
+  ): Promise<DescribeNacosReplicasResponse> {
+    return this.request("DescribeNacosReplicas", req, cb)
+  }
+
+  /**
+   * 查询zookeeper服务接口列表
+   */
+  async DescribeZookeeperServerInterfaces(
+    req: DescribeZookeeperServerInterfacesRequest,
+    cb?: (error: string, rep: DescribeZookeeperServerInterfacesResponse) => void
+  ): Promise<DescribeZookeeperServerInterfacesResponse> {
+    return this.request("DescribeZookeeperServerInterfaces", req, cb)
   }
 
   /**
@@ -79,12 +121,22 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于查询引擎实例列表
+   * 查询nacos服务接口列表
    */
-  async DescribeSREInstances(
-    req: DescribeSREInstancesRequest,
-    cb?: (error: string, rep: DescribeSREInstancesResponse) => void
-  ): Promise<DescribeSREInstancesResponse> {
-    return this.request("DescribeSREInstances", req, cb)
+  async DescribeNacosServerInterfaces(
+    req: DescribeNacosServerInterfacesRequest,
+    cb?: (error: string, rep: DescribeNacosServerInterfacesResponse) => void
+  ): Promise<DescribeNacosServerInterfacesResponse> {
+    return this.request("DescribeNacosServerInterfaces", req, cb)
+  }
+
+  /**
+   * 查询引擎实例访问地址
+   */
+  async DescribeSREInstanceAccessAddress(
+    req: DescribeSREInstanceAccessAddressRequest,
+    cb?: (error: string, rep: DescribeSREInstanceAccessAddressResponse) => void
+  ): Promise<DescribeSREInstanceAccessAddressResponse> {
+    return this.request("DescribeSREInstanceAccessAddress", req, cb)
   }
 }

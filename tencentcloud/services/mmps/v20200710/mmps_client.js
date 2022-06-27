@@ -34,10 +34,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateAppScanTask", req, cb);
     }
     /**
-     * 获取小程序隐私合规诊断任务列表
+     * 查询指定小程序版本的翼扬诊断安全得分
      */
-    async DescribeScanTaskList(req, cb) {
-        return this.request("DescribeScanTaskList", req, cb);
+    async DescribeFlySecMiniAppScanReportList(req, cb) {
+        return this.request("DescribeFlySecMiniAppScanReportList", req, cb);
     }
     /**
      * 获取翼扬诊断任务报告链接地址
@@ -74,6 +74,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeScanTaskReportUrl(req, cb) {
         return this.request("DescribeScanTaskReportUrl", req, cb);
+    }
+    /**
+     * 获取小程序隐私合规诊断任务列表
+     */
+    async DescribeScanTaskList(req, cb) {
+        return this.request("DescribeScanTaskList", req, cb);
     }
     /**
      * 获取翼扬安全诊断任务列表

@@ -63,6 +63,7 @@ import {
   PathologyReport,
   TextToClassResponse,
   Time,
+  Coordinate,
   HistologyType,
   BlockInfo,
   SurgeryAttr,

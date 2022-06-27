@@ -4520,6 +4520,12 @@ export interface CountryAreaMap {
    * 大洲编码。
    */
   ContinentInnerCode: string
+
+  /**
+      * 标注信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Remark: string
 }
 
 /**

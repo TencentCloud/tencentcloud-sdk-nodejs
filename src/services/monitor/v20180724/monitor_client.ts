@@ -50,7 +50,6 @@ import {
   DescribeProductEventListDimensions,
   DescribePolicyGroupInfoResponse,
   PrometheusAgent,
-  DeleteExporterIntegrationRequest,
   ModifyAlarmPolicyNoticeRequest,
   DeleteAlarmPolicyRequest,
   PolicyTag,
@@ -63,7 +62,7 @@ import {
   ModifyAlarmPolicyTasksResponse,
   DescribeBaseMetricsResponse,
   PrometheusScrapeJob,
-  ModifyPrometheusInstanceAttributesResponse,
+  CreatePrometheusMultiTenantInstancePostPayModeRequest,
   MetricDataPoint,
   DescribePolicyConditionListConfigManualContinueTime,
   DeleteAlertRulesResponse,
@@ -87,28 +86,31 @@ import {
   ModifyAlarmPolicyTasksRequest,
   DimensionsDesc,
   ModifyAlarmPolicyStatusRequest,
+  CreatePrometheusMultiTenantInstancePostPayModeResponse,
   UpdatePrometheusAgentStatusResponse,
   ServiceDiscoveryItem,
   SetDefaultAlarmPolicyRequest,
   ModifyAlarmNoticeRequest,
   CreateServiceDiscoveryRequest,
   DescribeAlertRulesResponse,
+  DescribeBasicAlarmListResponse,
   DescribeProductListRequest,
   PeriodsSt,
   BindPrometheusManagedGrafanaResponse,
   AlarmPolicy,
-  CreateAlarmPolicyResponse,
+  DeleteExporterIntegrationRequest,
   ModifyAlarmReceiversResponse,
   ManagementCommand,
   DescribePolicyConditionListResponse,
   PrometheusRuleSet,
   DescribeAllNamespacesResponse,
   GetPrometheusAgentManagementCommandRequest,
+  ModifyPrometheusInstanceAttributesResponse,
   DeleteAlarmNoticesResponse,
   TerminatePrometheusInstancesRequest,
   UnbindPrometheusManagedGrafanaResponse,
   UpdatePrometheusAgentStatusRequest,
-  DescribeBasicAlarmListResponse,
+  CreateAlarmPolicyResponse,
   ProductSimple,
   ModifyAlarmReceiversRequest,
   AlarmPolicyRule,
@@ -429,13 +431,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 云监控告警修改告警策略的触发任务，TriggerTasks字段放触发任务列表，TriggerTasks传空数组时，代表解绑该策略的所有触发任务。
+   * 创建按量 Prometheus 实例，根据用量收费实例
    */
-  async ModifyAlarmPolicyTasks(
-    req: ModifyAlarmPolicyTasksRequest,
-    cb?: (error: string, rep: ModifyAlarmPolicyTasksResponse) => void
-  ): Promise<ModifyAlarmPolicyTasksResponse> {
-    return this.request("ModifyAlarmPolicyTasks", req, cb)
+  async CreatePrometheusMultiTenantInstancePostPayMode(
+    req: CreatePrometheusMultiTenantInstancePostPayModeRequest,
+    cb?: (error: string, rep: CreatePrometheusMultiTenantInstancePostPayModeResponse) => void
+  ): Promise<CreatePrometheusMultiTenantInstancePostPayModeResponse> {
+    return this.request("CreatePrometheusMultiTenantInstancePostPayMode", req, cb)
   }
 
   /**
@@ -899,6 +901,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SetDefaultAlarmPolicyResponse) => void
   ): Promise<SetDefaultAlarmPolicyResponse> {
     return this.request("SetDefaultAlarmPolicy", req, cb)
+  }
+
+  /**
+   * 云监控告警修改告警策略的触发任务，TriggerTasks字段放触发任务列表，TriggerTasks传空数组时，代表解绑该策略的所有触发任务。
+   */
+  async ModifyAlarmPolicyTasks(
+    req: ModifyAlarmPolicyTasksRequest,
+    cb?: (error: string, rep: ModifyAlarmPolicyTasksResponse) => void
+  ): Promise<ModifyAlarmPolicyTasksResponse> {
+    return this.request("ModifyAlarmPolicyTasks", req, cb)
   }
 
   /**

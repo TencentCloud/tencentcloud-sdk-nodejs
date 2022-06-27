@@ -462,6 +462,26 @@ export interface HpaPolicy {
     PolicyThreshold: number;
 }
 /**
+ * 在线版本信息
+ */
+export interface OnlineVersionInfo {
+    /**
+      * 版本名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VersionName: string;
+    /**
+      * 镜像url
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ImageUrl: string;
+    /**
+      * 流量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FlowRatio: string;
+}
+/**
  * 服务基础配置信息
  */
 export interface ServerBaseConfig {
@@ -560,6 +580,11 @@ export interface DescribeCloudRunServerDetailResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ServerConfig: ServerBaseConfig;
+    /**
+      * 在线版本信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OnlineVersionInfos: Array<OnlineVersionInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

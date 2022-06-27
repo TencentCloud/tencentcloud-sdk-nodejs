@@ -168,9 +168,9 @@ it("monitor.v20180724.GetMonitorData", async function () {
     }
 })
 
-it("monitor.v20180724.ModifyAlarmPolicyTasks", async function () {
+it("monitor.v20180724.CreatePrometheusMultiTenantInstancePostPayMode", async function () {
     try {
-       const data = await client.ModifyAlarmPolicyTasks({})
+       const data = await client.CreatePrometheusMultiTenantInstancePostPayMode({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -621,6 +621,16 @@ it("monitor.v20180724.DescribeAlarmMetrics", async function () {
 it("monitor.v20180724.SetDefaultAlarmPolicy", async function () {
     try {
        const data = await client.SetDefaultAlarmPolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.ModifyAlarmPolicyTasks", async function () {
+    try {
+       const data = await client.ModifyAlarmPolicyTasks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

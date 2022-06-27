@@ -42,6 +42,7 @@ import {
   ClsInfo,
   DescribeServerManageTaskRequest,
   HpaPolicy,
+  OnlineVersionInfo,
   ServerBaseConfig,
   DescribeCloudRunServerDetailResponse,
   CreateCloudRunEnvResponse,

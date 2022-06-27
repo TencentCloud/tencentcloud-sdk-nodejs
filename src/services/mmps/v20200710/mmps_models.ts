@@ -181,6 +181,51 @@ export interface CreateAppScanTaskRequest {
 }
 
 /**
+ * 翼扬诊断小程序的诊断报告风险数据
+ */
+export interface FlySecMiniAppRiskItems {
+  /**
+   * 代码防护(基础诊断)
+   */
+  RiskItem1Score: number
+
+  /**
+   * 开发测试信息泄露(基础诊断)
+   */
+  RiskItem2Score: number
+
+  /**
+   * 编码规范(基础诊断)
+   */
+  RiskItem3Score: number
+
+  /**
+   * 配置风险(基础诊断)
+   */
+  RiskItem4Score: number
+
+  /**
+   * 账号安全(基础诊断)
+   */
+  RiskItem5Score: number
+
+  /**
+   * 用户信息安全(基础诊断)
+   */
+  RiskItem6Score: number
+
+  /**
+   * 内部信息泄露(基础诊断)
+   */
+  RiskItem7Score: number
+
+  /**
+   * 其他安全(基础诊断)
+   */
+  RiskItem8Score: number
+}
+
+/**
  * DescribeScanTaskStatus请求参数结构体
  */
 export interface DescribeScanTaskStatusRequest {
@@ -424,6 +469,36 @@ export interface DescribeFlySecMiniAppScanTaskListRequest {
    * 小程序appid(为空的时候,则查询当前用户诊断的所有小程序)
    */
   MiniAppID?: string
+}
+
+/**
+ * DescribeFlySecMiniAppScanReportList请求参数结构体
+ */
+export interface DescribeFlySecMiniAppScanReportListRequest {
+  /**
+   * 任务id
+   */
+  MiniAppID: string
+
+  /**
+   * 诊断方式 1:基础诊断，2:深度诊断
+   */
+  Mode: number
+
+  /**
+   * 诊断状态 -1:查询全部, 0:排队中, 1:成功, 2:失败, 3:进行中
+   */
+  Status: number
+
+  /**
+   * 查询数量, 0:查询所有, 其他值:最近几次的诊断数量
+   */
+  Size: number
+
+  /**
+   * 小程序版本
+   */
+  MiniAppVersion?: string
 }
 
 /**
@@ -839,6 +914,33 @@ export interface DescribeFlySecMiniAppScanTaskStatusResponse {
 }
 
 /**
+ * DescribeFlySecMiniAppScanReportList返回参数结构体
+ */
+export interface DescribeFlySecMiniAppScanReportListResponse {
+  /**
+   * 返回值, 0:成功, 其他值请查看“返回值”定义
+   */
+  Ret: number
+
+  /**
+      * 诊断报告数据
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Data: Array<FlySecMiniAppReportData>
+
+  /**
+      * 诊断任务数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Total: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateFlySecMiniAppScanTaskRepeat返回参数结构体
  */
 export interface CreateFlySecMiniAppScanTaskRepeatResponse {
@@ -934,6 +1036,61 @@ export interface AppTaskData {
    * 任务完成时间(更新时间)
    */
   EndTime: string
+}
+
+/**
+ * 翼扬诊断小程序报告数据
+ */
+export interface FlySecMiniAppReportData {
+  /**
+   * 任务id
+   */
+  TaskID: string
+
+  /**
+   * 小程序appid
+   */
+  MiniAppID: string
+
+  /**
+   * 小程序名称
+   */
+  MiniAppName: string
+
+  /**
+   * 小程序版本
+   */
+  MiniAppVersion: string
+
+  /**
+   * 诊断模式 1:基础诊断，2:深度诊断
+   */
+  Mode: number
+
+  /**
+   * 诊断状态, 0:排队中, 1:成功, 2:失败, 3:进行中
+   */
+  Status: number
+
+  /**
+   * 诊断时间
+   */
+  CreateTime: number
+
+  /**
+   * 诊断得分
+   */
+  RiskScore: string
+
+  /**
+   * 诊断风险等级 1:高风险 2:中风险 3:低风险
+   */
+  RiskLevel: number
+
+  /**
+   * 诊断8大维度得分情况(每项总分100分)
+   */
+  RiskItems: FlySecMiniAppRiskItems
 }
 
 /**
