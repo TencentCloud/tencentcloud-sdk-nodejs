@@ -266,6 +266,7 @@ export interface SystemDisk {
     DiskType?: string;
     /**
       * 系统盘ID。LOCAL_BASIC 和 LOCAL_SSD 类型没有ID。暂时不支持该参数。
+该参数目前仅用于`DescribeInstances`等查询类接口的返回参数，不可用于`RunInstances`等写接口的入参。
       */
     DiskId?: string;
     /**
@@ -1476,7 +1477,7 @@ export interface DataDisk {
     DiskType?: string;
     /**
       * 数据盘ID。LOCAL_BASIC 和 LOCAL_SSD 类型没有ID，暂时不支持该参数。
-该参数目前仅用于`DescribeInstances`接口。
+该参数目前仅用于`DescribeInstances`等查询类接口的返回参数，不可用于`RunInstances`等写接口的入参。
       */
     DiskId?: string;
     /**

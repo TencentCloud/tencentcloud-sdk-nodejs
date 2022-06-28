@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeAbnormalEventResponse, DescribeAbnormalEventRequest, CreatePictureRequest, DescribeHistoryScaleRequest, DescribeCallDetailRequest, RemoveUserByStrRoomIdResponse, StartMCUMixTranscodeRequest, StartMCUMixTranscodeByStrRoomIdRequest, CreateTroubleInfoRequest, DescribeDetailEventResponse, StopMCUMixTranscodeByStrRoomIdResponse, DescribeRoomInformationRequest, DescribeRecordStatisticResponse, StartMCUMixTranscodeByStrRoomIdResponse, DismissRoomByStrRoomIdRequest, DescribeRecordStatisticRequest, DescribeUserInformationRequest, ModifyPictureRequest, ModifyPictureResponse, StopMCUMixTranscodeResponse, RemoveUserRequest, DismissRoomRequest, DescribeCloudRecordingRequest, StopMCUMixTranscodeRequest, CreateCloudRecordingRequest, DeleteCloudRecordingResponse, CreateTroubleInfoResponse, StopMCUMixTranscodeByStrRoomIdRequest, DeletePictureResponse, ModifyCloudRecordingRequest, CreateCloudRecordingResponse, StartMCUMixTranscodeResponse, DescribeTrtcMcuTranscodeTimeResponse, DeleteCloudRecordingRequest, DescribePictureRequest, DescribeExternalTrtcMeasureResponse, DescribePictureResponse, DescribeTrtcMcuTranscodeTimeRequest, DescribeDetailEventRequest, DismissRoomByStrRoomIdResponse, ModifyCloudRecordingResponse, DescribeCloudRecordingResponse, DismissRoomResponse, DescribeUserInformationResponse, DescribeCallDetailResponse, DeletePictureRequest, DescribeRoomInformationResponse, DescribeExternalTrtcMeasureRequest, RemoveUserByStrRoomIdRequest, CreatePictureResponse, RemoveUserResponse, DescribeHistoryScaleResponse } from "./trtc_models";
+import { DescribeAbnormalEventResponse, DescribeAbnormalEventRequest, ModifyPictureResponse, StartMCUMixTranscodeByStrRoomIdRequest, CreatePictureRequest, DescribeTrtcMcuTranscodeTimeRequest, StopMCUMixTranscodeResponse, RemoveUserByStrRoomIdRequest, DismissRoomResponse, DescribeRecordStatisticRequest, DescribeUserInformationRequest, DescribeCallDetailRequest, DescribeUserInformationResponse, RemoveUserByStrRoomIdResponse, StartMCUMixTranscodeRequest, StopMCUMixTranscodeRequest, DescribeHistoryScaleRequest, DeletePictureRequest, DescribeRoomInformationResponse, RemoveUserRequest, DescribeExternalTrtcMeasureRequest, ModifyPictureRequest, CreateTroubleInfoResponse, StopMCUMixTranscodeByStrRoomIdRequest, StopMCUMixTranscodeByStrRoomIdResponse, DeletePictureResponse, CreateTroubleInfoRequest, DismissRoomRequest, DescribeDetailEventResponse, DismissRoomByStrRoomIdRequest, DescribeExternalTrtcMeasureResponse, DescribeTrtcMcuTranscodeTimeResponse, DescribePictureRequest, RemoveUserResponse, DescribeCallDetailResponse, DescribePictureResponse, DescribeRoomInformationRequest, DescribeDetailEventRequest, StartMCUMixTranscodeResponse, CreatePictureResponse, DescribeRecordStatisticResponse, DismissRoomByStrRoomIdResponse, DescribeHistoryScaleResponse, StartMCUMixTranscodeByStrRoomIdResponse } from "./trtc_models";
 /**
  * trtc client
  * @class
@@ -65,25 +65,6 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
 **注意**：该接口只用于历史数据统计或核对数据使用，实时类关键业务逻辑不能使用。
      */
     DescribeCallDetail(req: DescribeCallDetailRequest, cb?: (error: string, rep: DescribeCallDetailResponse) => void): Promise<DescribeCallDetailResponse>;
-    /**
-     * 成功开启录制后，可以使用此接口来更新录制任务。仅在录制任务进行时有效，录制退出后更新将会返回错误。更新操作是全量覆盖，并不是增量更新的模式，也就是说每次更新都需要携带全量的信息。
-     */
-    ModifyCloudRecording(req: ModifyCloudRecordingRequest, cb?: (error: string, rep: ModifyCloudRecordingResponse) => void): Promise<ModifyCloudRecordingResponse>;
-    /**
-     * ###接口说明：
-启动云端录制功能，完成房间内的音视频录制，并上传到指定的云存储。您可以通过此 API 接口把TRTC 房间中的每一路音视频流做单独的录制有或者多路视频画面混流一路。
-
-###您可以通过此接口实现如下目标：
-* 指定订阅流参数（RecordParams）来指定需要录制的主播的黑名单或者白名单。
-* 指定第三方存储的参数（StorageParams）来指定上传到您希望的云存储
-* 指定混流模式下的音视频转码详细参数（MixTranscodeParams），包括视频分辨率、视频码率、视频帧率、以及声音质量等
-* 指定混流模式各路画面的位置和布局或者也可以指定自动模板的方式来配置。
-
-###关键名词：
-* 单流录制：分别录制房间的订阅UserId的音频和视频。录制服务会实时将录制文件（M3U8/TS）上传至云存储。
-* 混流录制：将房间内订阅UserId的音视频混录成一个音视频文件，并将录制文件（M3U8/TS）上传至云存储。
-     */
-    CreateCloudRecording(req: CreateCloudRecordingRequest, cb?: (error: string, rep: CreateCloudRecordingResponse) => void): Promise<CreateCloudRecordingResponse>;
     /**
      * 获取Trtc的用量统计数据。走计费渠道二期 只允许查两天的数据
      */
@@ -153,14 +134,6 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
 - 日结后付费将于次日上午推送账单，建议次日上午9点以后再来查询前一天的用量。
      */
     DescribeTrtcMcuTranscodeTime(req: DescribeTrtcMcuTranscodeTimeRequest, cb?: (error: string, rep: DescribeTrtcMcuTranscodeTimeResponse) => void): Promise<DescribeTrtcMcuTranscodeTimeResponse>;
-    /**
-     * 成功开启录制后，可以使用此接口来查询录制状态。仅在录制任务进行时有效，录制退出后查询将会返回错误。
-     */
-    DescribeCloudRecording(req: DescribeCloudRecordingRequest, cb?: (error: string, rep: DescribeCloudRecordingResponse) => void): Promise<DescribeCloudRecordingResponse>;
-    /**
-     * 成功开启录制后，可以使用此接口来停止录制任务。仅在录制任务进行时有效，录制退出后更新将会返回错误。停止录制成功后不代表文件全部传输完成，如果未完成后台将会继续上传文件，成功后通过事件回调通知客户文件全部传输完成状态。
-     */
-    DeleteCloudRecording(req: DeleteCloudRecordingRequest, cb?: (error: string, rep: DeleteCloudRecordingResponse) => void): Promise<DeleteCloudRecordingResponse>;
     /**
      * 如果您需要在 [云端混流转码](https://cloud.tencent.com/document/product/647/16827) 时频繁查找自定义背景图或水印信息，可通过此接口查找已上传的图片信息。无需频繁查找图片信息的场景，建议直接在 [控制台 > 应用管理 > 素材管理](https://cloud.tencent.com/document/product/647/50769) 中查看。
      */

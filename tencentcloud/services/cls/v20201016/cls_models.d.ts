@@ -305,23 +305,6 @@ export interface ModifyConfigExtraResponse {
     RequestId?: string;
 }
 /**
- * ModifyLogset请求参数结构体
- */
-export interface ModifyLogsetRequest {
-    /**
-      * 日志集ID
-      */
-    LogsetId: string;
-    /**
-      * 日志集名称
-      */
-    LogsetName?: string;
-    /**
-      * 日志集的绑定的标签键值对。最大支持10个标签键值对，同一个资源只能同时绑定一个标签键。
-      */
-    Tags?: Array<Tag>;
-}
-/**
  * CreateLogset请求参数结构体
  */
 export interface CreateLogsetRequest {
@@ -335,29 +318,43 @@ export interface CreateLogsetRequest {
     Tags?: Array<Tag>;
 }
 /**
- * ModifyDataTransform请求参数结构体
+ * DescribeShippers请求参数结构体
  */
-export interface ModifyDataTransformRequest {
+export interface DescribeShippersRequest {
     /**
-      * 加工任务id
+      * <br><li> shipperName
+
+按照【投递规则名称】进行过滤。
+类型：String
+
+必选：否
+
+<br><li> shipperId
+
+按照【投递规则ID】进行过滤。
+类型：String
+
+必选：否
+
+<br><li> topicId
+
+按照【日志主题】进行过滤。
+
+类型：String
+
+必选：否
+
+每次请求的Filters的上限为10，Filter.Values的上限为5。
       */
-    TaskId: string;
+    Filters?: Array<Filter>;
     /**
-      * 加工任务名称
+      * 分页的偏移量，默认值为0
       */
-    Name?: string;
+    Offset?: number;
     /**
-      * 加工逻辑函数
+      * 分页单页的限制数目，默认值为20，最大值100
       */
-    EtlContent?: string;
-    /**
-      * 任务启动状态. 默认为1，正常开启,  2关闭
-      */
-    EnableFlag?: number;
-    /**
-      * 加工任务目的topic_id以及别名
-      */
-    DstResources?: Array<DataTransformResouceInfo>;
+    Limit?: number;
 }
 /**
  * 日志中的KV对
@@ -919,13 +916,13 @@ export interface TopicInfo {
     Period: number;
 }
 /**
- * DeleteDataTransform返回参数结构体
+ * DescribeConsumer请求参数结构体
  */
-export interface DeleteDataTransformResponse {
+export interface DescribeConsumerRequest {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 投递任务绑定的日志主题 ID
       */
-    RequestId?: string;
+    TopicId: string;
 }
 /**
  * DeleteConfigExtra返回参数结构体
@@ -998,17 +995,24 @@ export interface ModifyMachineGroupResponse {
     RequestId?: string;
 }
 /**
- * 数据加工的资源信息
+ * 索引规则，FullText、KeyValue、Tag参数必须输入一个有效参数
  */
-export interface DataTransformResouceInfo {
+export interface RuleInfo {
     /**
-      * 目标主题id
+      * 全文索引配置
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    TopicId: string;
+    FullText?: FullTextInfo;
     /**
-      * 别名
+      * 键值索引配置
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Alias: string;
+    KeyValue?: RuleKeyValueInfo;
+    /**
+      * 元字段索引配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Tag?: RuleTagInfo;
 }
 /**
  * DeleteMachineGroup请求参数结构体
@@ -1275,43 +1279,77 @@ export interface PartitionInfo {
     LastWriteTime: string;
 }
 /**
- * DescribeShippers请求参数结构体
+ * CreateConfigExtra请求参数结构体
  */
-export interface DescribeShippersRequest {
+export interface CreateConfigExtraRequest {
     /**
-      * <br><li> shipperName
-
-按照【投递规则名称】进行过滤。
-类型：String
-
-必选：否
-
-<br><li> shipperId
-
-按照【投递规则ID】进行过滤。
-类型：String
-
-必选：否
-
-<br><li> topicId
-
-按照【日志主题】进行过滤。
-
-类型：String
-
-必选：否
-
-每次请求的Filters的上限为10，Filter.Values的上限为5。
+      * 采集配置规程名称，最长63个字符，只能包含小写字符、数字及分隔符（“-”），且必须以小写字符开头，数字或小写字符结尾
       */
-    Filters?: Array<Filter>;
+    Name: string;
     /**
-      * 分页的偏移量，默认值为0
+      * 日志主题id
       */
-    Offset?: number;
+    TopicId: string;
     /**
-      * 分页单页的限制数目，默认值为20，最大值100
+      * 类型：container_stdout、container_file、host_file
       */
-    Limit?: number;
+    Type: string;
+    /**
+      * 采集的日志类型，json_log代表json格式日志，delimiter_log代表分隔符格式日志，minimalist_log代表极简日志，multiline_log代表多行日志，fullregex_log代表完整正则，默认为minimalist_log
+      */
+    LogType: string;
+    /**
+      * 采集配置标
+      */
+    ConfigFlag: string;
+    /**
+      * 日志集id
+      */
+    LogsetId: string;
+    /**
+      * 日志集name
+      */
+    LogsetName: string;
+    /**
+      * 日志主题名称
+      */
+    TopicName: string;
+    /**
+      * 节点文件配置信息
+      */
+    HostFile?: HostFileInfo;
+    /**
+      * 容器文件路径信息
+      */
+    ContainerFile?: ContainerFileInfo;
+    /**
+      * 容器标准输出信息
+      */
+    ContainerStdout?: ContainerStdoutInfo;
+    /**
+      * 日志格式化方式
+      */
+    LogFormat?: string;
+    /**
+      * 提取规则，如果设置了ExtractRule，则必须设置LogType
+      */
+    ExtractRule?: ExtractRuleInfo;
+    /**
+      * 采集黑名单路径列表
+      */
+    ExcludePaths?: Array<ExcludePathInfo>;
+    /**
+      * 用户自定义采集规则，Json格式序列化的字符串
+      */
+    UserDefineRule?: string;
+    /**
+      * 绑定的机器组id
+      */
+    GroupId?: string;
+    /**
+      * 绑定的机器组id列表
+      */
+    GroupIds?: Array<string>;
 }
 /**
  * 黑名单path信息
@@ -1946,15 +1984,6 @@ export interface LogsetInfo {
     RoleName: string;
 }
 /**
- * DescribeConsumer请求参数结构体
- */
-export interface DescribeConsumerRequest {
-    /**
-      * 投递任务绑定的日志主题 ID
-      */
-    TopicId: string;
-}
-/**
  * DeleteConfig请求参数结构体
  */
 export interface DeleteConfigRequest {
@@ -2080,15 +2109,6 @@ export interface DescribeAlarmNoticesResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
-}
-/**
- * DeleteDataTransform请求参数结构体
- */
-export interface DeleteDataTransformRequest {
-    /**
-      * 数据加工任务id
-      */
-    TaskId: string;
 }
 /**
  * DeleteConfigExtra请求参数结构体
@@ -2440,43 +2460,37 @@ text类型字段推荐使用 @&?|#()='",;:<>[]{}/ \n\t\r\\ 作为分词符；
     ContainZH?: boolean;
 }
 /**
- * DescribeDataTransformInfo请求参数结构体
+ * GetAlarmLog请求参数结构体
  */
-export interface DescribeDataTransformInfoRequest {
+export interface GetAlarmLogRequest {
     /**
-      * <br><li> taskName
-
-按照【加工任务名称】进行过滤。
-类型：String
-
-必选：否
-
-<br><li> taskId
-
-按照【加工任务id】进行过滤。
-类型：String
-
-必选：否
-
-每次请求的Filters的上限为10，Filter.Values的上限为100。
+      * 要查询的日志的起始时间，Unix时间戳，单位ms
       */
-    Filters?: Array<Filter>;
+    From: number;
     /**
-      * 分页的偏移量，默认值为0。
+      * 要查询的日志的结束时间，Unix时间戳，单位ms
       */
-    Offset?: number;
+    To: number;
     /**
-      * 分页单页限制数目，默认值为20，最大值100。
+      * 查询语句，语句长度最大为1024
+      */
+    Query: string;
+    /**
+      * 单次查询返回的日志条数，最大值为1000
       */
     Limit?: number;
     /**
-      * 默认值为2.   1: 获取单个任务的详细信息 2：获取任务列表
+      * 加载更多日志时使用，透传上次返回的Context值，获取后续的日志内容
       */
-    Type?: number;
+    Context?: string;
     /**
-      * Type为1， 此参数必填
+      * 日志接口是否按时间排序返回；可选值：asc(升序)、desc(降序)，默认为 desc
       */
-    TaskId?: string;
+    Sort?: string;
+    /**
+      * 为true代表使用新检索,响应参数AnalysisRecords和Columns有效， 为false时代表使用老检索方式, AnalysisResults和ColNames有效
+      */
+    UseNewAnalysis?: boolean;
 }
 /**
  * DeleteShipper返回参数结构体
@@ -2543,27 +2557,6 @@ export interface ExportInfo {
       * 日志导出创建时间
       */
     CreateTime: string;
-}
-/**
- * DescribeLogContext返回参数结构体
- */
-export interface DescribeLogContextResponse {
-    /**
-      * 日志上下文信息集合
-      */
-    LogContextInfos: Array<LogContextInfo>;
-    /**
-      * 上文日志是否已经返回
-      */
-    PrevOver: boolean;
-    /**
-      * 下文日志是否已经返回
-      */
-    NextOver: boolean;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
 }
 /**
  * 采集规则配置信息
@@ -2634,19 +2627,6 @@ export interface SplitPartitionResponse {
       * 分裂结果集
       */
     Partitions: Array<PartitionInfo>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * CreateDataTransform返回参数结构体
- */
-export interface CreateDataTransformResponse {
-    /**
-      * 任务id
-      */
-    TaskId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2736,97 +2716,25 @@ export interface ModifyShipperRequest {
     Content?: ContentInfo;
 }
 /**
- * 索引规则，FullText、KeyValue、Tag参数必须输入一个有效参数
+ * DescribeLogContext返回参数结构体
  */
-export interface RuleInfo {
+export interface DescribeLogContextResponse {
     /**
-      * 全文索引配置
-注意：此字段可能返回 null，表示取不到有效值。
+      * 日志上下文信息集合
       */
-    FullText?: FullTextInfo;
+    LogContextInfos: Array<LogContextInfo>;
     /**
-      * 键值索引配置
-注意：此字段可能返回 null，表示取不到有效值。
+      * 上文日志是否已经返回
       */
-    KeyValue?: RuleKeyValueInfo;
+    PrevOver: boolean;
     /**
-      * 元字段索引配置
-注意：此字段可能返回 null，表示取不到有效值。
+      * 下文日志是否已经返回
       */
-    Tag?: RuleTagInfo;
-}
-/**
- * CreateConfigExtra请求参数结构体
- */
-export interface CreateConfigExtraRequest {
+    NextOver: boolean;
     /**
-      * 采集配置规程名称，最长63个字符，只能包含小写字符、数字及分隔符（“-”），且必须以小写字符开头，数字或小写字符结尾
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Name: string;
-    /**
-      * 日志主题id
-      */
-    TopicId: string;
-    /**
-      * 类型：container_stdout、container_file、host_file
-      */
-    Type: string;
-    /**
-      * 采集的日志类型，json_log代表json格式日志，delimiter_log代表分隔符格式日志，minimalist_log代表极简日志，multiline_log代表多行日志，fullregex_log代表完整正则，默认为minimalist_log
-      */
-    LogType: string;
-    /**
-      * 采集配置标
-      */
-    ConfigFlag: string;
-    /**
-      * 日志集id
-      */
-    LogsetId: string;
-    /**
-      * 日志集name
-      */
-    LogsetName: string;
-    /**
-      * 日志主题名称
-      */
-    TopicName: string;
-    /**
-      * 节点文件配置信息
-      */
-    HostFile?: HostFileInfo;
-    /**
-      * 容器文件路径信息
-      */
-    ContainerFile?: ContainerFileInfo;
-    /**
-      * 容器标准输出信息
-      */
-    ContainerStdout?: ContainerStdoutInfo;
-    /**
-      * 日志格式化方式
-      */
-    LogFormat?: string;
-    /**
-      * 提取规则，如果设置了ExtractRule，则必须设置LogType
-      */
-    ExtractRule?: ExtractRuleInfo;
-    /**
-      * 采集黑名单路径列表
-      */
-    ExcludePaths?: Array<ExcludePathInfo>;
-    /**
-      * 用户自定义采集规则，Json格式序列化的字符串
-      */
-    UserDefineRule?: string;
-    /**
-      * 绑定的机器组id
-      */
-    GroupId?: string;
-    /**
-      * 绑定的机器组id列表
-      */
-    GroupIds?: Array<string>;
+    RequestId?: string;
 }
 /**
  * CreateConsumer请求参数结构体
@@ -2909,63 +2817,6 @@ export interface ModifyAlarmNoticeResponse {
     RequestId?: string;
 }
 /**
- * 数据加工任务基本详情
- */
-export interface DataTransformTaskInfo {
-    /**
-      * 数据加工任务名称
-      */
-    Name: string;
-    /**
-      * 数据加工任务id
-      */
-    TaskId: string;
-    /**
-      * 任务启用状态，默认为1，正常开启,  2关闭
-      */
-    EnableFlag: number;
-    /**
-      * 加工任务类型，1： DSL， 2：SQL
-      */
-    Type: number;
-    /**
-      * 源日志主题
-      */
-    SrcTopicId: string;
-    /**
-      * 当前加工任务状态（1准备中/2运行中/3停止中/4已停止）
-      */
-    Status: number;
-    /**
-      * 加工任务创建时间
-      */
-    CreateTime: string;
-    /**
-      * 最近修改时间
-      */
-    UpdateTime: string;
-    /**
-      * 最后启用时间，如果需要重建集群，修改该时间
-      */
-    LastEnableTime: string;
-    /**
-      * 日志主题名称
-      */
-    SrcTopicName: string;
-    /**
-      * 日志集id
-      */
-    LogsetId: string;
-    /**
-      * 加工任务目的topic_id以及别名
-      */
-    DstResources: Array<DataTransformResouceInfo>;
-    /**
-      * 加工逻辑函数
-      */
-    EtlContent: string;
-}
-/**
  * DescribeMachines返回参数结构体
  */
 export interface DescribeMachinesResponse {
@@ -2997,36 +2848,6 @@ export interface DescribeMachinesResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
-}
-/**
- * 预览数据详情
- */
-export interface PreviewLogStatistic {
-    /**
-      * 日志内容
-      */
-    LogContent: string;
-    /**
-      * 行号
-      */
-    LineNum: number;
-    /**
-      * 目标日志主题
-      */
-    DstTopicId?: string;
-    /**
-      * 失败错误码， 空字符串""表示正常
-      */
-    FailReason?: string;
-    /**
-      * 日志时间戳
-      */
-    Time?: string;
-    /**
-      * 目标topic-name
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    DstTopicName?: string;
 }
 /**
  * 投递日志的内容格式配置
@@ -3520,39 +3341,6 @@ export interface ApplyConfigToMachineGroupRequest {
     GroupId: string;
 }
 /**
- * GetAlarmLog请求参数结构体
- */
-export interface GetAlarmLogRequest {
-    /**
-      * 要查询的日志的起始时间，Unix时间戳，单位ms
-      */
-    From: number;
-    /**
-      * 要查询的日志的结束时间，Unix时间戳，单位ms
-      */
-    To: number;
-    /**
-      * 查询语句，语句长度最大为1024
-      */
-    Query: string;
-    /**
-      * 单次查询返回的日志条数，最大值为1000
-      */
-    Limit?: number;
-    /**
-      * 加载更多日志时使用，透传上次返回的Context值，获取后续的日志内容
-      */
-    Context?: string;
-    /**
-      * 日志接口是否按时间排序返回；可选值：asc(升序)、desc(降序)，默认为 desc
-      */
-    Sort?: string;
-    /**
-      * 为true代表使用新检索,响应参数AnalysisRecords和Columns有效， 为false时代表使用老检索方式, AnalysisResults和ColNames有效
-      */
-    UseNewAnalysis?: boolean;
-}
-/**
  * 自建k8s-容器文件路径信息
  */
 export interface ContainerFileInfo {
@@ -3792,41 +3580,21 @@ export interface ModifyConfigExtraRequest {
     TopicName?: string;
 }
 /**
- * CreateDataTransform请求参数结构体
+ * ModifyLogset请求参数结构体
  */
-export interface CreateDataTransformRequest {
+export interface ModifyLogsetRequest {
     /**
-      * 函数类型. DSL:1 SQL:2
+      * 日志集ID
       */
-    FuncType: number;
+    LogsetId: string;
     /**
-      * 源日志主题
+      * 日志集名称
       */
-    SrcTopicId: string;
+    LogsetName?: string;
     /**
-      * 加工任务名称
+      * 日志集的绑定的标签键值对。最大支持10个标签键值对，同一个资源只能同时绑定一个标签键。
       */
-    Name: string;
-    /**
-      * 加工逻辑函数
-      */
-    EtlContent: string;
-    /**
-      * 加工任务目的topic_id以及别名
-      */
-    DstResources: Array<DataTransformResouceInfo>;
-    /**
-      * 任务类型.  以SrcTopicId为数据源建立预览任务:1，以PreviewLogStatistics为数据源建立预览任务:2  真实任务:3
-      */
-    TaskType: number;
-    /**
-      * 任务启动状态.   默认为1，正常开启,  2关闭
-      */
-    EnableFlag?: number;
-    /**
-      * 测试数据
-      */
-    PreviewLogStatistics?: Array<PreviewLogStatistic>;
+    Tags?: Array<Tag>;
 }
 /**
  * DescribeMachineGroups返回参数结构体
@@ -3923,32 +3691,6 @@ export interface Filter {
       * 需要过滤的值。
       */
     Values: Array<string>;
-}
-/**
- * ModifyDataTransform返回参数结构体
- */
-export interface ModifyDataTransformResponse {
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * DescribeDataTransformInfo返回参数结构体
- */
-export interface DescribeDataTransformInfoResponse {
-    /**
-      * 数据加工任务列表信息
-      */
-    DataTransformTaskInfos: Array<DataTransformTaskInfo>;
-    /**
-      * 任务总次数
-      */
-    TotalCount: number;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
 }
 /**
  * 投递任务出入参 Content

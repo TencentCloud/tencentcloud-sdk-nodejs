@@ -1545,6 +1545,11 @@ export interface Listener {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     DeregisterTargetRst: boolean;
+    /**
+      * 监听器的属性
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AttrFlags: Array<string>;
 }
 /**
  * 负载均衡流量数据。

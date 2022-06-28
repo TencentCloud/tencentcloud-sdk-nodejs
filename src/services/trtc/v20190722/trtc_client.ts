@@ -20,93 +20,71 @@ import { ClientConfig } from "../../../common/interface"
 import {
   DescribeAbnormalEventResponse,
   DescribeAbnormalEventRequest,
-  CreatePictureRequest,
-  MixLayout,
-  DescribeHistoryScaleRequest,
-  DescribeCallDetailRequest,
-  RemoveUserByStrRoomIdResponse,
-  StartMCUMixTranscodeRequest,
-  StartMCUMixTranscodeByStrRoomIdRequest,
-  ScaleInfomation,
-  CreateTroubleInfoRequest,
-  DescribeDetailEventResponse,
-  StopMCUMixTranscodeByStrRoomIdResponse,
-  PictureInfo,
-  MixTranscodeParams,
-  DescribeRoomInformationRequest,
-  WaterMarkParams,
-  DescribeRecordStatisticResponse,
-  StartMCUMixTranscodeByStrRoomIdResponse,
-  CloudStorage,
-  TimeValue,
-  DismissRoomByStrRoomIdRequest,
-  EventMessage,
-  DescribeRecordStatisticRequest,
-  StorageParams,
-  CloudVod,
-  EncodeParams,
-  DescribeUserInformationRequest,
-  TrtcTimeNewUsage,
-  ModifyPictureRequest,
-  SmallVideoLayoutParams,
-  SubscribeStreamUserIds,
-  EventList,
-  WaterMarkImage,
   SdkAppIdTrtcMcuTranscodeTimeUsage,
   ModifyPictureResponse,
-  StorageFile,
-  WaterMark,
-  MixLayoutParams,
-  StopMCUMixTranscodeResponse,
-  SdkAppIdNewTrtcTimeUsage,
-  RemoveUserRequest,
-  DismissRoomRequest,
-  DescribeCloudRecordingRequest,
-  TencentVod,
-  StopMCUMixTranscodeRequest,
+  StartMCUMixTranscodeByStrRoomIdRequest,
   LayoutParams,
+  TimeValue,
+  CreatePictureRequest,
+  DescribeTrtcMcuTranscodeTimeRequest,
+  StopMCUMixTranscodeResponse,
+  RemoveUserByStrRoomIdRequest,
+  DismissRoomResponse,
+  EventMessage,
+  DescribeRecordStatisticRequest,
+  DescribeUserInformationRequest,
+  DescribeCallDetailRequest,
+  ScaleInfomation,
+  DescribeUserInformationResponse,
+  SdkAppIdNewTrtcTimeUsage,
+  EncodeParams,
+  RemoveUserByStrRoomIdResponse,
+  StartMCUMixTranscodeRequest,
+  StopMCUMixTranscodeRequest,
+  UserInformation,
+  DescribeHistoryScaleRequest,
+  DeletePictureRequest,
+  TrtcTimeNewUsage,
+  DescribeRoomInformationResponse,
   RecordUsage,
-  CreateCloudRecordingRequest,
+  RemoveUserRequest,
   OutputParams,
-  DeleteCloudRecordingResponse,
+  DescribeExternalTrtcMeasureRequest,
+  ModifyPictureRequest,
   CreateTroubleInfoResponse,
   StopMCUMixTranscodeByStrRoomIdRequest,
   QualityData,
-  DeletePictureResponse,
-  ModifyCloudRecordingRequest,
-  VideoParams,
-  OneSdkAppIdTranscodeTimeUsagesInfo,
-  CreateCloudRecordingResponse,
-  StartMCUMixTranscodeResponse,
-  DescribeTrtcMcuTranscodeTimeResponse,
-  DeleteCloudRecordingRequest,
-  DescribePictureRequest,
-  DescribeExternalTrtcMeasureResponse,
-  DescribePictureResponse,
-  DescribeTrtcMcuTranscodeTimeRequest,
-  DescribeDetailEventRequest,
-  UserInformation,
-  DismissRoomByStrRoomIdResponse,
-  ModifyCloudRecordingResponse,
   AbnormalEvent,
-  DescribeCloudRecordingResponse,
-  DismissRoomResponse,
-  DescribeUserInformationResponse,
-  DescribeCallDetailResponse,
-  DeletePictureRequest,
-  DescribeRoomInformationResponse,
-  DescribeExternalTrtcMeasureRequest,
-  RemoveUserByStrRoomIdRequest,
-  RecordParams,
+  StopMCUMixTranscodeByStrRoomIdResponse,
+  DeletePictureResponse,
+  CreateTroubleInfoRequest,
+  EventList,
+  DismissRoomRequest,
+  DescribeDetailEventResponse,
+  DismissRoomByStrRoomIdRequest,
+  DescribeExternalTrtcMeasureResponse,
+  OneSdkAppIdTranscodeTimeUsagesInfo,
+  DescribeTrtcMcuTranscodeTimeResponse,
+  DescribePictureRequest,
   SdkAppIdRecordUsage,
+  SmallVideoLayoutParams,
+  RemoveUserResponse,
   PresetLayoutConfig,
-  AudioParams,
+  DescribeCallDetailResponse,
+  DescribePictureResponse,
   PublishCdnParams,
+  DescribeRoomInformationRequest,
+  DescribeDetailEventRequest,
   AbnormalExperience,
+  StartMCUMixTranscodeResponse,
   RoomState,
   CreatePictureResponse,
-  RemoveUserResponse,
+  WaterMarkParams,
+  DescribeRecordStatisticResponse,
+  DismissRoomByStrRoomIdResponse,
   DescribeHistoryScaleResponse,
+  StartMCUMixTranscodeByStrRoomIdResponse,
+  PictureInfo,
 } from "./trtc_models"
 
 /**
@@ -228,37 +206,6 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
     cb?: (error: string, rep: DescribeCallDetailResponse) => void
   ): Promise<DescribeCallDetailResponse> {
     return this.request("DescribeCallDetail", req, cb)
-  }
-
-  /**
-   * 成功开启录制后，可以使用此接口来更新录制任务。仅在录制任务进行时有效，录制退出后更新将会返回错误。更新操作是全量覆盖，并不是增量更新的模式，也就是说每次更新都需要携带全量的信息。
-   */
-  async ModifyCloudRecording(
-    req: ModifyCloudRecordingRequest,
-    cb?: (error: string, rep: ModifyCloudRecordingResponse) => void
-  ): Promise<ModifyCloudRecordingResponse> {
-    return this.request("ModifyCloudRecording", req, cb)
-  }
-
-  /**
-     * ###接口说明：
-启动云端录制功能，完成房间内的音视频录制，并上传到指定的云存储。您可以通过此 API 接口把TRTC 房间中的每一路音视频流做单独的录制有或者多路视频画面混流一路。
-
-###您可以通过此接口实现如下目标：
-* 指定订阅流参数（RecordParams）来指定需要录制的主播的黑名单或者白名单。
-* 指定第三方存储的参数（StorageParams）来指定上传到您希望的云存储
-* 指定混流模式下的音视频转码详细参数（MixTranscodeParams），包括视频分辨率、视频码率、视频帧率、以及声音质量等
-* 指定混流模式各路画面的位置和布局或者也可以指定自动模板的方式来配置。
-
-###关键名词：
-* 单流录制：分别录制房间的订阅UserId的音频和视频。录制服务会实时将录制文件（M3U8/TS）上传至云存储。
-* 混流录制：将房间内订阅UserId的音视频混录成一个音视频文件，并将录制文件（M3U8/TS）上传至云存储。
-     */
-  async CreateCloudRecording(
-    req: CreateCloudRecordingRequest,
-    cb?: (error: string, rep: CreateCloudRecordingResponse) => void
-  ): Promise<CreateCloudRecordingResponse> {
-    return this.request("CreateCloudRecording", req, cb)
   }
 
   /**
@@ -388,26 +335,6 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
     cb?: (error: string, rep: DescribeTrtcMcuTranscodeTimeResponse) => void
   ): Promise<DescribeTrtcMcuTranscodeTimeResponse> {
     return this.request("DescribeTrtcMcuTranscodeTime", req, cb)
-  }
-
-  /**
-   * 成功开启录制后，可以使用此接口来查询录制状态。仅在录制任务进行时有效，录制退出后查询将会返回错误。
-   */
-  async DescribeCloudRecording(
-    req: DescribeCloudRecordingRequest,
-    cb?: (error: string, rep: DescribeCloudRecordingResponse) => void
-  ): Promise<DescribeCloudRecordingResponse> {
-    return this.request("DescribeCloudRecording", req, cb)
-  }
-
-  /**
-   * 成功开启录制后，可以使用此接口来停止录制任务。仅在录制任务进行时有效，录制退出后更新将会返回错误。停止录制成功后不代表文件全部传输完成，如果未完成后台将会继续上传文件，成功后通过事件回调通知客户文件全部传输完成状态。
-   */
-  async DeleteCloudRecording(
-    req: DeleteCloudRecordingRequest,
-    cb?: (error: string, rep: DeleteCloudRecordingResponse) => void
-  ): Promise<DeleteCloudRecordingResponse> {
-    return this.request("DeleteCloudRecording", req, cb)
   }
 
   /**

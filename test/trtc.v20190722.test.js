@@ -108,26 +108,6 @@ it("trtc.v20190722.DescribeCallDetail", async function () {
     }
 })
 
-it("trtc.v20190722.ModifyCloudRecording", async function () {
-    try {
-       const data = await client.ModifyCloudRecording({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("trtc.v20190722.CreateCloudRecording", async function () {
-    try {
-       const data = await client.CreateCloudRecording({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("trtc.v20190722.DescribeExternalTrtcMeasure", async function () {
     try {
        const data = await client.DescribeExternalTrtcMeasure({})
@@ -221,26 +201,6 @@ it("trtc.v20190722.DescribeRecordStatistic", async function () {
 it("trtc.v20190722.DescribeTrtcMcuTranscodeTime", async function () {
     try {
        const data = await client.DescribeTrtcMcuTranscodeTime({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("trtc.v20190722.DescribeCloudRecording", async function () {
-    try {
-       const data = await client.DescribeCloudRecording({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("trtc.v20190722.DeleteCloudRecording", async function () {
-    try {
-       const data = await client.DeleteCloudRecording({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

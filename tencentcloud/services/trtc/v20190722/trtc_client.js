@@ -104,29 +104,6 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
         return this.request("DescribeCallDetail", req, cb);
     }
     /**
-     * 成功开启录制后，可以使用此接口来更新录制任务。仅在录制任务进行时有效，录制退出后更新将会返回错误。更新操作是全量覆盖，并不是增量更新的模式，也就是说每次更新都需要携带全量的信息。
-     */
-    async ModifyCloudRecording(req, cb) {
-        return this.request("ModifyCloudRecording", req, cb);
-    }
-    /**
-     * ###接口说明：
-启动云端录制功能，完成房间内的音视频录制，并上传到指定的云存储。您可以通过此 API 接口把TRTC 房间中的每一路音视频流做单独的录制有或者多路视频画面混流一路。
-
-###您可以通过此接口实现如下目标：
-* 指定订阅流参数（RecordParams）来指定需要录制的主播的黑名单或者白名单。
-* 指定第三方存储的参数（StorageParams）来指定上传到您希望的云存储
-* 指定混流模式下的音视频转码详细参数（MixTranscodeParams），包括视频分辨率、视频码率、视频帧率、以及声音质量等
-* 指定混流模式各路画面的位置和布局或者也可以指定自动模板的方式来配置。
-
-###关键名词：
-* 单流录制：分别录制房间的订阅UserId的音频和视频。录制服务会实时将录制文件（M3U8/TS）上传至云存储。
-* 混流录制：将房间内订阅UserId的音视频混录成一个音视频文件，并将录制文件（M3U8/TS）上传至云存储。
-     */
-    async CreateCloudRecording(req, cb) {
-        return this.request("CreateCloudRecording", req, cb);
-    }
-    /**
      * 获取Trtc的用量统计数据。走计费渠道二期 只允许查两天的数据
      */
     async DescribeExternalTrtcMeasure(req, cb) {
@@ -214,18 +191,6 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
      */
     async DescribeTrtcMcuTranscodeTime(req, cb) {
         return this.request("DescribeTrtcMcuTranscodeTime", req, cb);
-    }
-    /**
-     * 成功开启录制后，可以使用此接口来查询录制状态。仅在录制任务进行时有效，录制退出后查询将会返回错误。
-     */
-    async DescribeCloudRecording(req, cb) {
-        return this.request("DescribeCloudRecording", req, cb);
-    }
-    /**
-     * 成功开启录制后，可以使用此接口来停止录制任务。仅在录制任务进行时有效，录制退出后更新将会返回错误。停止录制成功后不代表文件全部传输完成，如果未完成后台将会继续上传文件，成功后通过事件回调通知客户文件全部传输完成状态。
-     */
-    async DeleteCloudRecording(req, cb) {
-        return this.request("DeleteCloudRecording", req, cb);
     }
     /**
      * 如果您需要在 [云端混流转码](https://cloud.tencent.com/document/product/647/16827) 时频繁查找自定义背景图或水印信息，可通过此接口查找已上传的图片信息。无需频繁查找图片信息的场景，建议直接在 [控制台 > 应用管理 > 素材管理](https://cloud.tencent.com/document/product/647/50769) 中查看。

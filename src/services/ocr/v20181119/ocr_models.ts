@@ -6921,66 +6921,68 @@ export interface BizLicenseOCRResponse {
   /**
    * 统一社会信用代码（三合一之前为注册号）
    */
-  RegNum?: string
+  RegNum: string
 
   /**
    * 公司名称
    */
-  Name?: string
+  Name: string
 
   /**
    * 注册资本
    */
-  Capital?: string
+  Capital: string
 
   /**
    * 法定代表人
    */
-  Person?: string
+  Person: string
 
   /**
    * 地址
    */
-  Address?: string
+  Address: string
 
   /**
    * 经营范围
    */
-  Business?: string
+  Business: string
 
   /**
    * 主体类型
    */
-  Type?: string
+  Type: string
 
   /**
    * 营业期限
    */
-  Period?: string
+  Period: string
 
   /**
    * 组成形式
    */
-  ComposingForm?: string
+  ComposingForm: string
 
   /**
    * 成立日期
    */
-  SetDate?: string
+  SetDate: string
 
   /**
       * Code 告警码列表和释义：
 -20001 非营业执照
+-9102 黑白复印件告警
 注：告警码可以同时存在多个
       */
-  RecognizeWarnCode?: Array<number>
+  RecognizeWarnCode: Array<number>
 
   /**
       * 告警码说明：
 OCR_WARNING_TPYE_NOT_MATCH 非营业执照
+WARN_COPY_CARD 黑白复印件告警
 注：告警信息可以同时存在多个
       */
-  RecognizeWarnMsg?: Array<string>
+  RecognizeWarnMsg: Array<string>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

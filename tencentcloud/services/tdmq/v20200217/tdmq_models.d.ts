@@ -205,7 +205,7 @@ export interface ModifyEnvironmentAttributesRequest {
       */
     EnvironmentId: string;
     /**
-      * 未消费消息过期时间，单位：秒，最大1296000。
+      * 未消费消息过期时间，单位：秒，范围60秒~1天。
       */
     MsgTTL: number;
     /**
@@ -1491,7 +1491,7 @@ export interface CreateEnvironmentRequest {
       */
     EnvironmentId: string;
     /**
-      * 未消费消息过期时间，单位：秒，最小60，最大1296000，（15天）。
+      * 未消费消息过期时间，单位：秒，取值范围：60秒~1天。
       */
     MsgTTL: number;
     /**
@@ -2333,7 +2333,7 @@ export interface CreateTopicRequest {
       */
     TopicName: string;
     /**
-      * 0：非分区topic，无分区；非0：具体分区topic的分区数，最大不允许超过128。
+      * 入参为1，即是创建非分区topic，无分区；入参大于1，表示分区topic的分区数，最大不允许超过128。
       */
     Partitions: number;
     /**
@@ -2341,7 +2341,8 @@ export interface CreateTopicRequest {
       */
     Remark?: string;
     /**
-      * 0： 普通消息；
+      * 该入参将逐步弃用，可切换至PulsarTopicType参数
+0： 普通消息；
 1 ：全局顺序消息；
 2 ：局部顺序消息；
 3 ：重试队列；
@@ -2383,12 +2384,10 @@ export interface DescribeTopicsRequest {
     Limit?: number;
     /**
       * topic类型描述：
-0：普通消息；
-1：全局顺序消息；
-2：局部顺序消息；
-3：重试队列；
-4：死信队列；
-5：事务消息。
+0：非持久非分区主题类型；
+1：非持久分区主题类型；
+2：持久非分区主题类型；
+3：持久分区主题类型；
       */
     TopicType?: number;
     /**
@@ -2402,6 +2401,12 @@ export interface DescribeTopicsRequest {
 必选：否
       */
     Filters?: Array<Filter>;
+    /**
+      * 创建来源：
+1：用户创建
+2：系统创建
+      */
+    TopicCreator?: number;
 }
 /**
  * DeleteEnvironments返回参数结构体
@@ -3350,7 +3355,7 @@ export interface CreateTopicResponse {
       */
     TopicName: string;
     /**
-      * 0：非分区topic，无分区；非0：具体分区topic的分区数。
+      * 0或1：非分区topic，无分区；大于1：具体分区topic的分区数。（存量非分区主题返回0，增量非分区主题返回1）
       */
     Partitions: number;
     /**
@@ -3364,7 +3369,6 @@ export interface CreateTopicResponse {
 2 ：局部顺序消息；
 3 ：重试队列；
 4 ：死信队列；
-5 ：事务消息。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     TopicType: number;

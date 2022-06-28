@@ -384,7 +384,7 @@ export interface DescribeFlySecMiniAppScanTaskListRequest {
  */
 export interface DescribeFlySecMiniAppScanReportListRequest {
     /**
-      * 任务id
+      * 小程序AppID
       */
     MiniAppID: string;
     /**
