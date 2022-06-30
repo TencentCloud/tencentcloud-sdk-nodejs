@@ -7,6 +7,10 @@ export interface DescribeCloudRunServersResponse {
       */
     ServerList: Array<ServerBaseInfo>;
     /**
+      * 服务总数
+      */
+    Total: number;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
@@ -405,6 +409,16 @@ export interface DescribeCloudRunServersRequest {
       * 环境Id
       */
     EnvId: string;
+    /**
+      * 默认为9， 最大为30
+不传或传0时 取默认9
+大于30时取30
+      */
+    PageSize?: number;
+    /**
+      * 不传或传0时 会默认为1
+      */
+    PageNum?: number;
 }
 /**
  * cls日志信息

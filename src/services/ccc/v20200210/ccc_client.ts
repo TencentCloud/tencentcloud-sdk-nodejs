@@ -39,6 +39,7 @@ import {
   DescribeAutoCalloutTaskRequest,
   SkillGroupItem,
   CreateUserSigResponse,
+  ModifyStaffRequest,
   DeleteStaffRequest,
   CreateCCCSkillGroupResponse,
   DescribeTelSessionRequest,
@@ -66,6 +67,7 @@ import {
   AutoCalloutTaskInfo,
   StaffInfo,
   PSTNSessionInfo,
+  ModifyStaffResponse,
   ServeParticipant,
   DescribeTelCdrResponse,
   DescribeStaffStatusMetricsResponse,
@@ -101,6 +103,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("ccc.tencentcloudapi.com", "2020-02-10", clientConfig)
+  }
+
+  /**
+   * 修改客服账号
+   */
+  async ModifyStaff(
+    req: ModifyStaffRequest,
+    cb?: (error: string, rep: ModifyStaffResponse) => void
+  ): Promise<ModifyStaffResponse> {
+    return this.request("ModifyStaff", req, cb)
   }
 
   /**

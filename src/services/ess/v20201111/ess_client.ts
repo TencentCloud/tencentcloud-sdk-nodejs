@@ -93,7 +93,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于撤销流程
+   * 用于撤销签署流程
    */
   async CancelFlow(
     req: CancelFlowRequest,
@@ -158,7 +158,7 @@ export class Client extends AbstractClient {
 跳转到小程序的实现，参考官方文档（分为<a href="https://developers.weixin.qq.com/miniprogram/dev/api/navigate/wx.navigateToMiniProgram.html">全屏</a>、<a href="https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/openEmbeddedMiniProgram.html">半屏</a>两种方式）
 
 
-如您需要自主配置小程序跳转链接，请参考: <a href="https://tcloud-doc.isd.com/document/product/1323/74774">跳转小程序链接配置说明</a>
+如您需要自主配置小程序跳转链接，请参考: <a href="https://cloud.tencent.com/document/product/1323/74774">跳转小程序链接配置说明</a>
      */
   async CreateSchemeUrl(
     req: CreateSchemeUrlRequest,
@@ -188,7 +188,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 此接口（CreateFlowByFiles）用来通过上传后的pdf资源编号来创建流程。
+   * 此接口（CreateFlowByFiles）用来通过上传后的pdf资源编号来创建签署流程。
    */
   async CreateFlowByFiles(
     req: CreateFlowByFilesRequest,

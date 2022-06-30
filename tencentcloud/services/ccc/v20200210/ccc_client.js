@@ -28,6 +28,12 @@ class Client extends abstract_client_1.AbstractClient {
         super("ccc.tencentcloudapi.com", "2020-02-10", clientConfig);
     }
     /**
+     * 修改客服账号
+     */
+    async ModifyStaff(req, cb) {
+        return this.request("ModifyStaff", req, cb);
+    }
+    /**
      * 获取坐席信息列表
      */
     async DescribeStaffInfoList(req, cb) {

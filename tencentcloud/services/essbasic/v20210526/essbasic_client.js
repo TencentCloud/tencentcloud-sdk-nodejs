@@ -28,7 +28,7 @@ class Client extends abstract_client_1.AbstractClient {
         super("essbasic.tencentcloudapi.com", "2021-05-26", clientConfig);
     }
     /**
-     * 接口（CreateFlowsByTemplates）用于使用多个模板批量创建流程。当前可批量发起合同（流程）数量最大为20个。
+     * 接口（CreateFlowsByTemplates）用于使用多个模板批量创建签署流程。当前可批量发起合同（签署流程）数量最大为20个。
      */
     async CreateFlowsByTemplates(req, cb) {
         return this.request("CreateFlowsByTemplates", req, cb);
@@ -58,21 +58,21 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("OperateChannelTemplate", req, cb);
     }
     /**
-     * 此接口（ChannelCreateMultiFlowSignQRCode）用于创建一码多扫流程签署二维码。
+     * 此接口（ChannelCreateMultiFlowSignQRCode）用于创建一码多扫签署流程二维码。
 适用的模版仅限于B2C（1、无序签署，2、顺序签署时B静默签署，3、顺序签署时B非首位签署）、单C的模版，且模版中发起方没有填写控件。
      */
     async ChannelCreateMultiFlowSignQRCode(req, cb) {
         return this.request("ChannelCreateMultiFlowSignQRCode", req, cb);
     }
     /**
-     * 接口（ChannelCreateFlowByFiles）用于渠道版通过文件创建流程。此接口不可直接使用，需要运营申请
+     * 接口（ChannelCreateFlowByFiles）用于渠道版通过文件创建签署流程。此接口不可直接使用，需要运营申请
      */
     async ChannelCreateFlowByFiles(req, cb) {
         return this.request("ChannelCreateFlowByFiles", req, cb);
     }
     /**
      * 该接口 (PrepareFlows) 用于创建待发起文件
-用户通过该接口进入流程发起的确认页面，进行发起信息二次确认， 如果确认则进行正常发起。
+用户通过该接口进入签署流程发起的确认页面，进行发起信息二次确认， 如果确认则进行正常发起。
 目前该接口只支持B2C，不建议使用。
      */
     async PrepareFlows(req, cb) {
@@ -117,7 +117,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeUsage", req, cb);
     }
     /**
-     * 此接口（DescribeFlowDetailInfo）用于查询合同(流程)的详细信息。
+     * 此接口（DescribeFlowDetailInfo）用于查询合同(签署流程)的详细信息。
      */
     async DescribeFlowDetailInfo(req, cb) {
         return this.request("DescribeFlowDetailInfo", req, cb);
@@ -129,8 +129,8 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SyncProxyOrganization", req, cb);
     }
     /**
-     * 根据流程信息批量获取资源下载链接，可直接下载
-限制：只能下载合作企业授权过的、单方签署的流程文件（若合作企业与渠道是同一企业，可以下载所有流程文件）
+     * 根据签署流程信息批量获取资源下载链接，可直接下载
+限制：只能下载合作企业授权过的、单方签署的签署流程文件（若合作企业与渠道是同一企业，可以下载所有签署流程文件）
      */
     async DescribeResourceUrlsByFlows(req, cb) {
         return this.request("DescribeResourceUrlsByFlows", req, cb);

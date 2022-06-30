@@ -64,6 +64,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ListUserByProperty", req, cb);
     }
     /**
+     * 查询日志信息
+     */
+    async ListLogMessageByCondition(req, cb) {
+        return this.request("ListLogMessageByCondition", req, cb);
+    }
+    /**
      * 根据ID查询用户信息
      */
     async DescribeUserById(req, cb) {

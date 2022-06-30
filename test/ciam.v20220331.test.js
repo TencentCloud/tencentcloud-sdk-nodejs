@@ -78,6 +78,16 @@ it("ciam.v20220331.ListUserByProperty", async function () {
     }
 })
 
+it("ciam.v20220331.ListLogMessageByCondition", async function () {
+    try {
+       const data = await client.ListLogMessageByCondition({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ciam.v20220331.DescribeUserById", async function () {
     try {
        const data = await client.DescribeUserById({})

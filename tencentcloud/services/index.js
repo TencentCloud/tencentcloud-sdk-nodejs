@@ -408,6 +408,8 @@ var wav_1 = require("./wav");
 Object.defineProperty(exports, "wav", { enumerable: true, get: function () { return wav_1.wav; } });
 var wss_1 = require("./wss");
 Object.defineProperty(exports, "wss", { enumerable: true, get: function () { return wss_1.wss; } });
+var yinsuda_1 = require("./yinsuda");
+Object.defineProperty(exports, "yinsuda", { enumerable: true, get: function () { return yinsuda_1.yinsuda; } });
 var youmall_1 = require("./youmall");
 Object.defineProperty(exports, "youmall", { enumerable: true, get: function () { return youmall_1.youmall; } });
 var yunjing_1 = require("./yunjing");

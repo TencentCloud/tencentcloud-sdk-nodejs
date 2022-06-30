@@ -382,6 +382,11 @@ export interface DescribeExistedInstancesRequest {
 }
 
 /**
+ * DeletePrometheusClusterAgent请求参数结构体
+ */
+export type DeletePrometheusClusterAgentRequest = null
+
+/**
  * 集群等级变配记录
  */
 export interface ClusterLevelChangeRecord {
@@ -1000,6 +1005,21 @@ export interface DescribeTKEEdgeClusterStatusResponse {
 }
 
 /**
+ * ModifyClusterAsGroupOptionAttribute请求参数结构体
+ */
+export interface ModifyClusterAsGroupOptionAttributeRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+
+  /**
+   * 集群弹性伸缩属性
+   */
+  ClusterAsGroupOption: ClusterAsGroupOption
+}
+
+/**
  * DescribeClusterStatus请求参数结构体
  */
 export interface DescribeClusterStatusRequest {
@@ -1410,6 +1430,16 @@ export interface PrometheusInstancesOverview {
 }
 
 /**
+ * DescribePrometheusInstanceInitStatus返回参数结构体
+ */
+export interface DescribePrometheusInstanceInitStatusResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DisableEventPersistence返回参数结构体
  */
 export interface DisableEventPersistenceResponse {
@@ -1503,6 +1533,21 @@ export interface DescribeEdgeAvailableExtraArgsResponse {
 }
 
 /**
+ * CreatePrometheusRecordRuleYaml请求参数结构体
+ */
+export interface CreatePrometheusRecordRuleYamlRequest {
+  /**
+   * 实例id
+   */
+  InstanceId: string
+
+  /**
+   * yaml的内容
+   */
+  Content: string
+}
+
+/**
  * DescribeEnableVpcCniProgress请求参数结构体
  */
 export interface DescribeEnableVpcCniProgressRequest {
@@ -1573,14 +1618,38 @@ export interface Instance {
 }
 
 /**
- * DescribePrometheusAgentInstances返回参数结构体
+ * ModifyClusterAttribute返回参数结构体
  */
-export interface DescribePrometheusAgentInstancesResponse {
+export interface ModifyClusterAttributeResponse {
   /**
-      * 关联该集群的实例列表
+      * 集群所属项目
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Instances?: Array<string>
+  ProjectId: number
+
+  /**
+      * 集群名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClusterName: string
+
+  /**
+      * 集群描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClusterDesc: string
+
+  /**
+      * 集群等级
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClusterLevel: string
+
+  /**
+      * 自动变配集群等级
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AutoUpgradeClusterLevel: AutoUpgradeClusterLevel
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1695,6 +1764,16 @@ export interface DeletePrometheusAlertRuleResponse {
 }
 
 /**
+ * DeletePrometheusConfig返回参数结构体
+ */
+export interface DeletePrometheusConfigResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeEksContainerInstanceLog请求参数结构体
  */
 export interface DescribeEksContainerInstanceLogRequest {
@@ -1732,6 +1811,16 @@ export interface DescribeEksContainerInstanceLogRequest {
    * 日志总大小限制
    */
   LimitBytes?: number
+}
+
+/**
+ * CreatePrometheusRecordRuleYaml返回参数结构体
+ */
+export interface CreatePrometheusRecordRuleYamlResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1910,16 +1999,6 @@ export interface DescribePrometheusTemplateSyncRequest {
 }
 
 /**
- * DeleteTKEEdgeCluster返回参数结构体
- */
-export interface DeleteTKEEdgeClusterResponse {
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * 可升级节点信息
  */
 export interface UpgradeAbleInstancesItem {
@@ -1961,38 +2040,14 @@ export interface DescribeClusterAsGroupOptionRequest {
 }
 
 /**
- * ModifyClusterAttribute返回参数结构体
+ * DescribePrometheusAgentInstances返回参数结构体
  */
-export interface ModifyClusterAttributeResponse {
+export interface DescribePrometheusAgentInstancesResponse {
   /**
-      * 集群所属项目
+      * 关联该集群的实例列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ProjectId: number
-
-  /**
-      * 集群名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ClusterName: string
-
-  /**
-      * 集群描述
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ClusterDesc: string
-
-  /**
-      * 集群等级
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ClusterLevel: string
-
-  /**
-      * 自动变配集群等级
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  AutoUpgradeClusterLevel: AutoUpgradeClusterLevel
+  Instances?: Array<string>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2259,18 +2314,18 @@ export interface DescribePrometheusTempSyncRequest {
 }
 
 /**
- * DescribePrometheusClusterAgents返回参数结构体
+ * DescribeClusters返回参数结构体
  */
-export interface DescribePrometheusClusterAgentsResponse {
+export interface DescribeClustersResponse {
   /**
-   * 被关联集群信息
+   * 集群总个数
    */
-  Agents: Array<PrometheusAgentOverview>
+  TotalCount: number
 
   /**
-   * 被关联集群总量
+   * 集群信息列表
    */
-  Total: number
+  Clusters: Array<Cluster>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3568,6 +3623,16 @@ export interface DeletePrometheusAlertPolicyRequest {
 }
 
 /**
+ * ModifyPrometheusAgentExternalLabels返回参数结构体
+ */
+export interface ModifyPrometheusAgentExternalLabelsResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 路由表冲突对象
  */
 export interface RouteTableConflict {
@@ -3786,19 +3851,42 @@ export interface DescribeEdgeClusterExtraArgsRequest {
 }
 
 /**
- * DescribeClusters返回参数结构体
+ * DescribePrometheusGlobalConfig返回参数结构体
  */
-export interface DescribeClustersResponse {
+export interface DescribePrometheusGlobalConfigResponse {
   /**
-   * 集群总个数
+   * 配置内容
    */
-  TotalCount: number
+  Config: string
 
   /**
-   * 集群信息列表
-   */
-  Clusters: Array<Cluster>
+      * ServiceMonitors列表以及对应targets信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ServiceMonitors: Array<PrometheusConfigItem>
 
+  /**
+      * PodMonitors列表以及对应targets信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PodMonitors: Array<PrometheusConfigItem>
+
+  /**
+      * RawJobs列表以及对应targets信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RawJobs: Array<PrometheusConfigItem>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreatePrometheusClusterAgent返回参数结构体
+ */
+export interface CreatePrometheusClusterAgentResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4139,6 +4227,26 @@ export interface RegionInstance {
 }
 
 /**
+ * DescribePrometheusConfig请求参数结构体
+ */
+export interface DescribePrometheusConfigRequest {
+  /**
+   * 实例id
+   */
+  InstanceId: string
+
+  /**
+   * 集群id
+   */
+  ClusterId: string
+
+  /**
+   * 集群类型
+   */
+  ClusterType: string
+}
+
+/**
  * 加入存量节点时的节点池选项
  */
 export interface NodePoolOption {
@@ -4166,6 +4274,16 @@ export interface DeletePrometheusTemplateRequest {
    * 模板id
    */
   TemplateId: string
+}
+
+/**
+ * DeletePrometheusRecordRuleYaml返回参数结构体
+ */
+export interface DeletePrometheusRecordRuleYamlResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4551,6 +4669,16 @@ export interface CreateClusterEndpointRequest {
    * 创建lb参数，只有外网访问需要设置
    */
   ExtensiveParameters?: string
+}
+
+/**
+ * DeletePrometheusClusterAgent返回参数结构体
+ */
+export interface DeletePrometheusClusterAgentResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5014,23 +5142,13 @@ export interface InstanceUpgradePreCheckResultItem {
 }
 
 /**
- * ModifyNodePoolDesiredCapacityAboutAsg请求参数结构体
+ * DeleteClusterNodePool返回参数结构体
  */
-export interface ModifyNodePoolDesiredCapacityAboutAsgRequest {
+export interface DeleteClusterNodePoolResponse {
   /**
-   * 集群id
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  ClusterId: string
-
-  /**
-   * 节点池id
-   */
-  NodePoolId: string
-
-  /**
-   * 节点池所关联的伸缩组的期望实例数
-   */
-  DesiredCapacity: number
+  RequestId?: string
 }
 
 /**
@@ -5449,6 +5567,16 @@ export interface DNSConfig {
 }
 
 /**
+ * ModifyPrometheusConfig返回参数结构体
+ */
+export interface ModifyPrometheusConfigResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeTKEEdgeExternalKubeconfig请求参数结构体
  */
 export interface DescribeTKEEdgeExternalKubeconfigRequest {
@@ -5556,6 +5684,41 @@ export interface ForwardTKEEdgeApplicationRequestV3Response {
 }
 
 /**
+ * ModifyPrometheusConfig请求参数结构体
+ */
+export interface ModifyPrometheusConfigRequest {
+  /**
+   * 实例id
+   */
+  InstanceId: string
+
+  /**
+   * 集群类型
+   */
+  ClusterType: string
+
+  /**
+   * 集群id
+   */
+  ClusterId: string
+
+  /**
+   * ServiceMonitors配置
+   */
+  ServiceMonitors?: Array<PrometheusConfigItem>
+
+  /**
+   * PodMonitors配置
+   */
+  PodMonitors?: Array<PrometheusConfigItem>
+
+  /**
+   * prometheus原生Job配置
+   */
+  RawJobs?: Array<PrometheusConfigItem>
+}
+
+/**
  * 集群关联的伸缩组最大实例数最小值实例数
  */
 export interface AutoScalingGroupRange {
@@ -5639,6 +5802,36 @@ export interface ModifyPrometheusTemplateResponse {
  * ModifyPrometheusAlertPolicy返回参数结构体
  */
 export interface ModifyPrometheusAlertPolicyResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribePrometheusClusterAgents返回参数结构体
+ */
+export interface DescribePrometheusClusterAgentsResponse {
+  /**
+   * 被关联集群信息
+   */
+  Agents: Array<PrometheusAgentOverview>
+
+  /**
+   * 被关联集群总量
+   */
+  Total: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreatePrometheusConfig返回参数结构体
+ */
+export interface CreatePrometheusConfigResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5861,6 +6054,41 @@ export interface UpdateImageCacheResponse {
 }
 
 /**
+ * CreatePrometheusConfig请求参数结构体
+ */
+export interface CreatePrometheusConfigRequest {
+  /**
+   * 实例id
+   */
+  InstanceId: string
+
+  /**
+   * 集群类型
+   */
+  ClusterType: string
+
+  /**
+   * 集群id
+   */
+  ClusterId: string
+
+  /**
+   * ServiceMonitors配置
+   */
+  ServiceMonitors?: Array<PrometheusConfigItem>
+
+  /**
+   * PodMonitors配置
+   */
+  PodMonitors?: Array<PrometheusConfigItem>
+
+  /**
+   * prometheus原生Job配置
+   */
+  RawJobs?: Array<PrometheusConfigItem>
+}
+
+/**
  * 镜像缓存的事件
  */
 export interface ImageCacheEvent {
@@ -5894,6 +6122,11 @@ export interface ImageCacheEvent {
    */
   LastTimestamp: string
 }
+
+/**
+ * CreatePrometheusClusterAgent请求参数结构体
+ */
+export type CreatePrometheusClusterAgentRequest = null
 
 /**
  * DeleteEKSContainerInstances返回参数结构体
@@ -5977,18 +6210,68 @@ export interface DisableClusterDeletionProtectionRequest {
 }
 
 /**
- * ModifyClusterAsGroupOptionAttribute请求参数结构体
+ * CreateECMInstances请求参数结构体
  */
-export interface ModifyClusterAsGroupOptionAttributeRequest {
+export interface CreateECMInstancesRequest {
   /**
-   * 集群ID
+   * 集群id
    */
-  ClusterId: string
+  ClusterID: string
 
   /**
-   * 集群弹性伸缩属性
+   * 模块id
    */
-  ClusterAsGroupOption: ClusterAsGroupOption
+  ModuleId: string
+
+  /**
+   * 需要创建实例的可用区及创建数目及运营商的列表
+   */
+  ZoneInstanceCountISPSet: Array<ECMZoneInstanceCountISP>
+
+  /**
+   * 密码
+   */
+  Password?: string
+
+  /**
+   * 公网带宽
+   */
+  InternetMaxBandwidthOut?: number
+
+  /**
+   * 镜像id
+   */
+  ImageId?: string
+
+  /**
+   * 实例名称
+   */
+  InstanceName?: string
+
+  /**
+   * 主机名称
+   */
+  HostName?: string
+
+  /**
+   * 增强服务，包括云镜和云监控
+   */
+  EnhancedService?: ECMEnhancedService
+
+  /**
+   * 用户自定义脚本
+   */
+  UserData?: string
+
+  /**
+   * 实例扩展信息
+   */
+  External?: string
+
+  /**
+   * 实例所属安全组
+   */
+  SecurityGroupIds?: Array<string>
 }
 
 /**
@@ -6520,6 +6803,11 @@ export interface AddClusterCIDRResponse {
 }
 
 /**
+ * DescribePrometheusInstanceInitStatus请求参数结构体
+ */
+export type DescribePrometheusInstanceInitStatusRequest = null
+
+/**
  * DescribeClusterLevelAttribute返回参数结构体
  */
 export interface DescribeClusterLevelAttributeResponse {
@@ -6940,68 +7228,13 @@ export interface UninstallLogAgentResponse {
 }
 
 /**
- * CreateECMInstances请求参数结构体
+ * DeleteTKEEdgeCluster返回参数结构体
  */
-export interface CreateECMInstancesRequest {
+export interface DeleteTKEEdgeClusterResponse {
   /**
-   * 集群id
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  ClusterID: string
-
-  /**
-   * 模块id
-   */
-  ModuleId: string
-
-  /**
-   * 需要创建实例的可用区及创建数目及运营商的列表
-   */
-  ZoneInstanceCountISPSet: Array<ECMZoneInstanceCountISP>
-
-  /**
-   * 密码
-   */
-  Password?: string
-
-  /**
-   * 公网带宽
-   */
-  InternetMaxBandwidthOut?: number
-
-  /**
-   * 镜像id
-   */
-  ImageId?: string
-
-  /**
-   * 实例名称
-   */
-  InstanceName?: string
-
-  /**
-   * 主机名称
-   */
-  HostName?: string
-
-  /**
-   * 增强服务，包括云镜和云监控
-   */
-  EnhancedService?: ECMEnhancedService
-
-  /**
-   * 用户自定义脚本
-   */
-  UserData?: string
-
-  /**
-   * 实例扩展信息
-   */
-  External?: string
-
-  /**
-   * 实例所属安全组
-   */
-  SecurityGroupIds?: Array<string>
+  RequestId?: string
 }
 
 /**
@@ -7044,6 +7277,16 @@ Name=state
 Value=up, down, unknown
       */
   Filters?: Array<Filter>
+}
+
+/**
+ * RunPrometheusInstance返回参数结构体
+ */
+export interface RunPrometheusInstanceResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -7464,6 +7707,36 @@ export interface DescribeClusterAsGroupsResponse {
 }
 
 /**
+ * DescribePrometheusConfig返回参数结构体
+ */
+export interface DescribePrometheusConfigResponse {
+  /**
+   * 全局配置
+   */
+  Config?: string
+
+  /**
+   * ServiceMonitor配置
+   */
+  ServiceMonitors?: Array<PrometheusConfigItem>
+
+  /**
+   * PodMonitor配置
+   */
+  PodMonitors?: Array<PrometheusConfigItem>
+
+  /**
+   * 原生Job
+   */
+  RawJobs?: Array<PrometheusConfigItem>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ScaleOutClusterMaster请求参数结构体
  */
 export interface ScaleOutClusterMasterRequest {
@@ -7792,6 +8065,26 @@ export interface DescribeAvailableTKEEdgeVersionResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyPrometheusRecordRuleYaml请求参数结构体
+ */
+export interface ModifyPrometheusRecordRuleYamlRequest {
+  /**
+   * 实例id
+   */
+  InstanceId: string
+
+  /**
+   * 聚合实例名称
+   */
+  Name: string
+
+  /**
+   * 新的内容
+   */
+  Content: string
 }
 
 /**
@@ -8680,6 +8973,21 @@ export interface ClusterInternalLB {
 }
 
 /**
+ * DescribePrometheusGlobalConfig请求参数结构体
+ */
+export interface DescribePrometheusGlobalConfigRequest {
+  /**
+   * 实例级别抓取配置
+   */
+  InstanceId: string
+
+  /**
+   * 是否禁用统计
+   */
+  DisableStatistics?: boolean
+}
+
+/**
  * CreateECMInstances返回参数结构体
  */
 export interface CreateECMInstancesResponse {
@@ -8800,13 +9108,23 @@ export interface Event {
 }
 
 /**
- * DeleteClusterNodePool返回参数结构体
+ * ModifyNodePoolDesiredCapacityAboutAsg请求参数结构体
  */
-export interface DeleteClusterNodePoolResponse {
+export interface ModifyNodePoolDesiredCapacityAboutAsgRequest {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 集群id
    */
-  RequestId?: string
+  ClusterId: string
+
+  /**
+   * 节点池id
+   */
+  NodePoolId: string
+
+  /**
+   * 节点池所关联的伸缩组的期望实例数
+   */
+  DesiredCapacity: number
 }
 
 /**
@@ -8817,6 +9135,41 @@ export interface DeleteClusterRouteResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DeletePrometheusConfig请求参数结构体
+ */
+export interface DeletePrometheusConfigRequest {
+  /**
+   * 实例id
+   */
+  InstanceId: string
+
+  /**
+   * 集群类型
+   */
+  ClusterType: string
+
+  /**
+   * 集群id
+   */
+  ClusterId: string
+
+  /**
+   * 要删除的ServiceMonitor名字列表
+   */
+  ServiceMonitors?: Array<string>
+
+  /**
+   * 要删除的PodMonitor名字列表
+   */
+  PodMonitors?: Array<string>
+
+  /**
+   * 要删除的RawJobs名字列表
+   */
+  RawJobs?: Array<string>
 }
 
 /**
@@ -8882,6 +9235,26 @@ export interface PrometheusAlertPolicyItem {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ClusterId?: string
+}
+
+/**
+ * ModifyPrometheusAgentExternalLabels请求参数结构体
+ */
+export interface ModifyPrometheusAgentExternalLabelsRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+
+  /**
+   * 新的external_labels
+   */
+  ExternalLabels: Array<Label>
 }
 
 /**
@@ -9549,6 +9922,11 @@ ipvs-bpf模式: 设置KubeProxyMode为kube-proxy-bpf
    * 启用 CiliumMode 的模式，空值表示不启用，“clusterIP” 表示启用 Cilium 支持 ClusterIP
    */
   CiliumMode?: string
+
+  /**
+   * 集群VPC-CNI模式下是否是双栈集群，默认false，表明非双栈集群。
+   */
+  IsDualStack?: boolean
 }
 
 /**
@@ -9776,6 +10154,16 @@ export interface DescribeEKSContainerInstanceRegionsResponse {
 }
 
 /**
+ * ModifyPrometheusRecordRuleYaml返回参数结构体
+ */
+export interface ModifyPrometheusRecordRuleYamlResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeTKEEdgeScript请求参数结构体
  */
 export interface DescribeTKEEdgeScriptRequest {
@@ -9854,6 +10242,21 @@ export interface DescribePrometheusOverviewsResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DeletePrometheusRecordRuleYaml请求参数结构体
+ */
+export interface DeletePrometheusRecordRuleYamlRequest {
+  /**
+   * 实例id
+   */
+  InstanceId: string
+
+  /**
+   * 聚合规则列表
+   */
+  Names: Array<string>
 }
 
 /**
@@ -10137,3 +10540,8 @@ export interface ScaleInMaster {
    */
   InstanceDeleteMode: string
 }
+
+/**
+ * RunPrometheusInstance请求参数结构体
+ */
+export type RunPrometheusInstanceRequest = null

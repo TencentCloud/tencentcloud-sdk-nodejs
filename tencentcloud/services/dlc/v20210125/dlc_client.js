@@ -40,10 +40,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateTask", req, cb);
     }
     /**
-     * 添加用户到工作组
+     * 按顺序创建任务（已经废弃，后期不再维护，请使用接口CreateTasks）
      */
-    async AddUsersToWorkGroup(req, cb) {
-        return this.request("AddUsersToWorkGroup", req, cb);
+    async CreateTasksInOrder(req, cb) {
+        return this.request("CreateTasksInOrder", req, cb);
+    }
+    /**
+     * 元数据锁检查
+     */
+    async CheckLockMetaData(req, cb) {
+        return this.request("CheckLockMetaData", req, cb);
     }
     /**
      * 该接口（CreateImportTask）用于创建导入任务
@@ -52,22 +58,46 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateImportTask", req, cb);
     }
     /**
-     * 查询任务结果
+     * DMS元数据更新表
      */
-    async DescribeTaskResult(req, cb) {
-        return this.request("DescribeTaskResult", req, cb);
+    async AlterDMSTable(req, cb) {
+        return this.request("AlterDMSTable", req, cb);
     }
     /**
-     * 绑定工作组到用户
+     * DMS元数据删除库
      */
-    async BindWorkGroupsToUser(req, cb) {
-        return this.request("BindWorkGroupsToUser", req, cb);
+    async DropDMSDatabase(req, cb) {
+        return this.request("DropDMSDatabase", req, cb);
+    }
+    /**
+     * DMS元数据新增分区
+     */
+    async AddDMSPartitions(req, cb) {
+        return this.request("AddDMSPartitions", req, cb);
+    }
+    /**
+     * 该接口（DeleteScript）用于删除sql脚本。
+     */
+    async DeleteScript(req, cb) {
+        return this.request("DeleteScript", req, cb);
+    }
+    /**
+     * 元数据锁
+     */
+    async LockMetaData(req, cb) {
+        return this.request("LockMetaData", req, cb);
     }
     /**
      * 本接口（CreateTable）用于生成建表SQL。
      */
     async CreateTable(req, cb) {
         return this.request("CreateTable", req, cb);
+    }
+    /**
+     * 查询任务结果
+     */
+    async DescribeTaskResult(req, cb) {
+        return this.request("DescribeTaskResult", req, cb);
     }
     /**
      * 该接口（CreateExportTask）用于创建导出任务
@@ -106,10 +136,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteWorkGroup", req, cb);
     }
     /**
+     * 元数据解锁
+     */
+    async UnlockMetaData(req, cb) {
+        return this.request("UnlockMetaData", req, cb);
+    }
+    /**
      * 该接口（CreateStoreLocation）新增或覆盖计算结果存储位置。
      */
     async CreateStoreLocation(req, cb) {
         return this.request("CreateStoreLocation", req, cb);
+    }
+    /**
+     * DMS元数据获取表
+     */
+    async DescribeDMSTable(req, cb) {
+        return this.request("DescribeDMSTable", req, cb);
     }
     /**
      * 从工作组中删除用户
@@ -130,6 +172,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ListTaskJobLogDetail", req, cb);
     }
     /**
+     * DMS元数据更新库
+     */
+    async AlterDMSDatabase(req, cb) {
+        return this.request("AlterDMSDatabase", req, cb);
+    }
+    /**
      * 解绑用户上的用户组
      */
     async UnbindWorkGroupsFromUser(req, cb) {
@@ -140,6 +188,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async AttachWorkGroupPolicy(req, cb) {
         return this.request("AttachWorkGroupPolicy", req, cb);
+    }
+    /**
+     * DMS元数据获取分区
+     */
+    async DescribeDMSPartitions(req, cb) {
+        return this.request("DescribeDMSPartitions", req, cb);
     }
     /**
      * 创建spark应用
@@ -154,10 +208,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CancelTask", req, cb);
     }
     /**
+     * DMS元数据删除表
+     */
+    async DropDMSTable(req, cb) {
+        return this.request("DropDMSTable", req, cb);
+    }
+    /**
      * 该接口（CreateScript）用于创建sql脚本。
      */
     async CreateScript(req, cb) {
         return this.request("CreateScript", req, cb);
+    }
+    /**
+     * DMS元数据获取表列表
+     */
+    async DescribeDMSTables(req, cb) {
+        return this.request("DescribeDMSTables", req, cb);
     }
     /**
      * 本接口（CreateDatabase）用于生成建库SQL语句。
@@ -196,22 +262,34 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTable", req, cb);
     }
     /**
+     * DMS元数据获取库
+     */
+    async DescribeDMSDatabase(req, cb) {
+        return this.request("DescribeDMSDatabase", req, cb);
+    }
+    /**
      * 该接口（DescribleTasks）用于查询任务列表
      */
     async DescribeTasks(req, cb) {
         return this.request("DescribeTasks", req, cb);
     }
     /**
-     * 该接口（DeleteScript）用于删除sql脚本。
+     * 绑定工作组到用户
      */
-    async DeleteScript(req, cb) {
-        return this.request("DeleteScript", req, cb);
+    async BindWorkGroupsToUser(req, cb) {
+        return this.request("BindWorkGroupsToUser", req, cb);
     }
     /**
      * 创建spark任务
      */
     async CreateSparkAppTask(req, cb) {
         return this.request("CreateSparkAppTask", req, cb);
+    }
+    /**
+     * DMS元数据删除分区
+     */
+    async DropDMSPartitions(req, cb) {
+        return this.request("DropDMSPartitions", req, cb);
     }
     /**
      * 修改用户信息
@@ -232,10 +310,28 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDatabases", req, cb);
     }
     /**
-     * 按顺序创建任务（已经废弃，后期不再维护，请使用接口CreateTasks）
+     * 添加用户到工作组
      */
-    async CreateTasksInOrder(req, cb) {
-        return this.request("CreateTasksInOrder", req, cb);
+    async AddUsersToWorkGroup(req, cb) {
+        return this.request("AddUsersToWorkGroup", req, cb);
+    }
+    /**
+     * 查询计算结果存储位置。
+     */
+    async DescribeStoreLocation(req, cb) {
+        return this.request("DescribeStoreLocation", req, cb);
+    }
+    /**
+     * DMS元数据创建库
+     */
+    async CreateDMSDatabase(req, cb) {
+        return this.request("CreateDMSDatabase", req, cb);
+    }
+    /**
+     * DMS元数据更新分区
+     */
+    async AlterDMSPartition(req, cb) {
+        return this.request("AlterDMSPartition", req, cb);
     }
     /**
      * 绑定鉴权策略到用户
@@ -244,10 +340,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AttachUserPolicy", req, cb);
     }
     /**
-     * 查询计算结果存储位置。
+     * DMS元数据创建表
      */
-    async DescribeStoreLocation(req, cb) {
-        return this.request("DescribeStoreLocation", req, cb);
+    async CreateDMSTable(req, cb) {
+        return this.request("CreateDMSTable", req, cb);
     }
     /**
      * 查询具体的spark应用

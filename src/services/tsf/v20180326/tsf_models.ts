@@ -1988,6 +1988,12 @@ export interface Instance {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   AgentVersion: string
+
+  /**
+      * 容器母机实例ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NodeInstanceId: string
 }
 
 /**
@@ -3231,7 +3237,7 @@ export interface DescribeBasicResourceUsageResponse {
       * TSF基本资源信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Result?: OverviewBasicResourceUsage
+  Result: OverviewBasicResourceUsage
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -9139,6 +9145,12 @@ export interface MetricDataSingleValue {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   MetricDataValue: string
+
+  /**
+      * 日环比
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DailyPercent: number
 }
 
 /**
@@ -14291,7 +14303,12 @@ export interface TsfPageApiDetailInfo {
 /**
  * DescribeBasicResourceUsage请求参数结构体
  */
-export type DescribeBasicResourceUsageRequest = null
+export interface DescribeBasicResourceUsageRequest {
+  /**
+   * 是否无视权限查询全租户的，默认 true。注：无论 true 还是 false，PackageSpaceUsed 和 ConsulInstanceCount  都是全租户的
+   */
+  All?: boolean
+}
 
 /**
  * DeleteMicroservice返回参数结构体
@@ -14702,6 +14719,11 @@ export interface DescribeStatisticsRequest {
    * 数据库
    */
   DbName?: string
+
+  /**
+   * 命名空间id数组
+   */
+  NamespaceIdList?: Array<string>
 }
 
 /**

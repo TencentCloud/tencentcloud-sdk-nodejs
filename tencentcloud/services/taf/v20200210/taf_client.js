@@ -28,12 +28,6 @@ class Client extends abstract_client_1.AbstractClient {
         super("taf.tencentcloudapi.com", "2020-02-10", clientConfig);
     }
     /**
-     * 流量反欺诈-虚假TA识别
-     */
-    async EnhanceTaDegree(req, cb) {
-        return this.request("EnhanceTaDegree", req, cb);
-    }
-    /**
      * 流量反欺诈-流量验准
      */
     async RecognizeTargetAudience(req, cb) {

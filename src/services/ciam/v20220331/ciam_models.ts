@@ -779,6 +779,22 @@ export interface ResetPasswordResponse {
 }
 
 /**
+ * UpdateUser返回参数结构体
+ */
+export interface UpdateUserResponse {
+  /**
+      * 更新之后的用户信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  User: User
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * SetPassword请求参数结构体
  */
 export interface SetPasswordRequest {
@@ -1032,6 +1048,33 @@ export interface LinkAccountRequest {
 }
 
 /**
+ * ListLogMessageByCondition请求参数结构体
+ */
+export interface ListLogMessageByConditionRequest {
+  /**
+   * 用户池ID
+   */
+  UserStoreId: string
+
+  /**
+   * 分页数据
+   */
+  Pageable: Pageable
+
+  /**
+   * 开始时间，时间戳精确到毫秒
+   */
+  StartTime: number
+
+  /**
+      * Key可选值为events
+
+<li> **events** </li>	Values为["SIGNUP", "USER_UPDATE", "USER_DELETE", "USER_CREATE", "ACCOUNT_LINKING"] 中的一个或多个
+      */
+  Filters?: Array<Filter>
+}
+
+/**
  * 盐位规则
  */
 export interface SaltLocationRule {
@@ -1091,14 +1134,133 @@ export interface ListUserResponse {
 }
 
 /**
- * UpdateUser返回参数结构体
+ * 日志详情
  */
-export interface UpdateUserResponse {
+export interface LogMessage {
   /**
-      * 更新之后的用户信息
+   * 日志标识
+   */
+  LogId: string
+
+  /**
+      * 租户ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  User: User
+  TenantId: string
+
+  /**
+      * 用户池ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UserStoreId: string
+
+  /**
+      * 事件编码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EventCode: string
+
+  /**
+      * 事件发生时间戳，单位：毫秒
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EventDate: number
+
+  /**
+      * 描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Description: string
+
+  /**
+      * 事件参与者
+
+<li> **TENANT** </li>  租户
+<li> **USER** </li>  用户
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Participant: string
+
+  /**
+      * 应用clientId
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ApplicationClientId: string
+
+  /**
+      * 应用名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ApplicationName: string
+
+  /**
+      * 认证源ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AuthSourceId: string
+
+  /**
+      * 认证源名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AuthSourceName: string
+
+  /**
+      * 认证源类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AuthSourceType: string
+
+  /**
+      * 认证源类别
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AuthSourceCategory: string
+
+  /**
+      * IP地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Ip: string
+
+  /**
+      * 用户代理
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UserAgent: string
+
+  /**
+      * 用户ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UserId: string
+
+  /**
+      * 详情
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Detail: string
+}
+
+/**
+ * ListLogMessageByCondition返回参数结构体
+ */
+export interface ListLogMessageByConditionResponse {
+  /**
+   * 总条数
+   */
+  Total: number
+
+  /**
+   * 分页对象
+   */
+  Pageable: Pageable
+
+  /**
+      * 日志列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Content: Array<LogMessage>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

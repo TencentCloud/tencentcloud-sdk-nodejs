@@ -7,7 +7,7 @@ export interface UploadFile {
       */
     FileBody: string;
     /**
-      * 文件名
+      * 文件名，最大长度不超过200字符
       */
     FileName?: string;
 }
@@ -111,11 +111,11 @@ export interface TemplateInfo {
  */
 export interface CreateDocumentResponse {
     /**
-      * 返回的电子文档ID
+      * 签署流程电子文档ID
       */
     DocumentId: string;
     /**
-      * 返回合同文件的预览地址 5分钟内有效。仅当NeedPreview为true 时返回
+      * 签署流程文件的预览地址, 5分钟内有效。仅当NeedPreview为true 时返回
 注意：此字段可能返回 null，表示取不到有效值。
       */
     PreviewFileUrl: string;
@@ -129,19 +129,19 @@ export interface CreateDocumentResponse {
  */
 export interface StartFlowRequest {
     /**
+      * 签署流程编号，由CreateFlow接口返回
+      */
+    FlowId: string;
+    /**
       * 用户信息
       */
     Operator: UserInfo;
-    /**
-      * 流程编号
-      */
-    FlowId: string;
     /**
       * 应用相关信息
       */
     Agent?: Agent;
     /**
-      * 客户端Token，保持接口幂等性
+      * 客户端Token，保持接口幂等性,最大长度64个字符
       */
     ClientToken?: string;
 }
@@ -159,87 +159,96 @@ export interface CancelFlowResponse {
  */
 export interface CreateDocumentRequest {
     /**
-      * 无
+      * 签署流程编号,由CreateFlow接口返回
       */
-    Operator: UserInfo;
+    FlowId: string;
     /**
       * 用户上传的模板ID
       */
     TemplateId: string;
     /**
-      * 流程ID
-      */
-    FlowId: string;
-    /**
-      * 文件名列表
+      * 文件名列表,单个文件名最大长度200个字符
       */
     FileNames: Array<string>;
     /**
-      * 内容控件信息数组
+      * 无
       */
-    FormFields?: Array<FormField>;
+    Operator: UserInfo;
     /**
       * 应用相关信息
       */
     Agent?: Agent;
     /**
-      * 客户端Token，保持接口幂等性
+      * 内容控件信息数组
       */
-    ClientToken?: string;
+    FormFields?: Array<FormField>;
     /**
       * 是否需要生成预览文件 默认不生成；
 预览链接有效期300秒；
       */
     NeedPreview?: boolean;
+    /**
+      * 客户端Token，保持接口幂等性,最大长度64个字符
+      */
+    ClientToken?: string;
 }
 /**
  * CreateFlow请求参数结构体
  */
 export interface CreateFlowRequest {
     /**
-      * 操作人信息
-      */
-    Operator: UserInfo;
-    /**
-      * 流程的名字, 长度不能超过200，中文字母数字下划线
+      * 签署流程名称,最大长度200个字符
       */
     FlowName: string;
     /**
-      * 参与者信息
+      * 签署流程参与者信息
       */
     Approvers: Array<FlowCreateApprover>;
     /**
-      * 流程的描述, 长度不能超过1000
+      * 操作人信息
       */
-    FlowDescription?: string;
-    /**
-      * 发送类型(true为无序签,false为顺序签)
-      */
-    Unordered?: boolean;
-    /**
-      * 流程的种类(如销售合同/入职合同等)
-      */
-    FlowType?: string;
-    /**
-      * 过期时间戳,如果是0则为不过期
-      */
-    DeadLine?: number;
-    /**
-      * 执行结果的回调URL(需要以http://或者https://)开头
-      */
-    CallbackUrl?: string;
-    /**
-      * 用户自定义字段(需进行base64 encode),回调的时候会进行透传, 长度需要小于20480
-      */
-    UserData?: string;
+    Operator: UserInfo;
     /**
       * 应用相关信息
       */
     Agent?: Agent;
     /**
-      * 客户端Token，保持接口幂等性
+      * 发送类型(true为无序签,false为顺序签)
+      */
+    Unordered?: boolean;
+    /**
+      * 签署流程的签署截止时间。
+值为unix时间戳,精确到秒,不传默认为当前时间一年后
+      */
+    DeadLine?: number;
+    /**
+      * 签署流程的类型(如销售合同/入职合同等)，最大长度200个字符
+      */
+    FlowType?: string;
+    /**
+      * 用户自定义字段(需进行base64 encode),回调的时候会进行透传, 长度需要小于20480
+      */
+    UserData?: string;
+    /**
+      * 签署流程描述,最大长度1000个字符
+      */
+    FlowDescription?: string;
+    /**
+      * 客户端Token，保持接口幂等性,最大长度64个字符
       */
     ClientToken?: string;
+    /**
+      * 合同显示的页卡模板，说明：只支持{合同名称}, {发起方企业}, {发起方姓名}, {签署方N企业}, {签署方N姓名}，且N不能超过签署人的数量，N从1开始
+      */
+    CustomShowMap?: string;
+    /**
+      * 暂未开放
+      */
+    RelatedFlowId?: string;
+    /**
+      * 暂未开放
+      */
+    CallbackUrl?: string;
 }
 /**
  * CreateSchemeUrl请求参数结构体
@@ -250,29 +259,9 @@ export interface CreateSchemeUrlRequest {
       */
     Operator: UserInfo;
     /**
-      * 调用方渠道信息，参考通用结构
+      * 应用相关信息
       */
     Agent?: Agent;
-    /**
-      * 姓名
-      */
-    Name?: string;
-    /**
-      * 手机号
-      */
-    Mobile?: string;
-    /**
-      * 跳转页面 1: 小程序合同详情 2: 小程序合同列表页 0: 不传, 默认主页
-      */
-    PathType?: number;
-    /**
-      * 合同详情 id (PathType=1时必传)
-      */
-    FlowId?: string;
-    /**
-      * 企业名称
-      */
-    OrganizationName?: string;
     /**
       * 链接类型
 HTTP：跳转电子签小程序的http_url，
@@ -280,6 +269,26 @@ APP：第三方APP或小程序跳转电子签小程序的path。
 默认为HTTP类型
       */
     EndPoint?: string;
+    /**
+      * 姓名,最大长度50个字符
+      */
+    Name?: string;
+    /**
+      * 手机号，大陆手机号11位
+      */
+    Mobile?: string;
+    /**
+      * 企业名称
+      */
+    OrganizationName?: string;
+    /**
+      * 签署流程编号 (PathType=1时必传)
+      */
+    FlowId?: string;
+    /**
+      * 跳转页面 1: 小程序合同详情 2: 小程序合同列表页 0: 不传, 默认主页
+      */
+    PathType?: number;
     /**
       * 是否自动回跳 true：是， false：否。该参数只针对"APP" 类型的签署链接有效
       */
@@ -304,7 +313,7 @@ export interface FileUrl {
  */
 export interface DescribeThirdPartyAuthCodeRequest {
     /**
-      * AuthCode 值
+      * 电子签小程序跳转客户小程序时携带的授权查看码
       */
     AuthCode: string;
 }
@@ -372,17 +381,17 @@ HTML-- .html文件
  */
 export interface CancelFlowRequest {
     /**
-      * 操作用户id
-      */
-    Operator: UserInfo;
-    /**
-      * 流程id
+      * 签署流程id
       */
     FlowId: string;
     /**
-      * 撤销原因
+      * 撤销原因，最长200个字符；
       */
     CancelMessage: string;
+    /**
+      * 操作用户id
+      */
+    Operator: UserInfo;
     /**
       * 应用相关信息
       */
@@ -409,7 +418,7 @@ export interface Component {
       * 如果是 Component 控件类型，则可选类型为：
 TEXT - 内容文本控件
 DATE - 内容日期控件
-SELECT - 勾选框控件
+CHECK_BOX - 勾选框控件
 如果是 SignComponent 控件类型，则可选类型为：
 SIGN_SEAL - 签署印章控件
 SIGN_DATE - 签署日期控件
@@ -487,11 +496,11 @@ KEYWORD 关键字，使用ComponentId指定关键字
       */
     ComponentDateFontSize?: number;
     /**
-      * 指定关键字时横坐标偏移量
+      * 指定关键字时横坐标偏移量，单位pt
       */
     OffsetX?: number;
     /**
-      * 指定关键字时纵坐标偏移量
+      * 指定关键字时纵坐标偏移量，单位pt
       */
     OffsetY?: number;
 }
@@ -525,12 +534,6 @@ export interface FlowCreateApprover {
       */
     OrganizationName?: string;
     /**
-      * 是否需要签署
-- `false`: 不需要签署
--  `true`:  需要签署
-      */
-    Required?: boolean;
-    /**
       * 签署方经办人姓名
       */
     ApproverName?: string;
@@ -539,23 +542,27 @@ export interface FlowCreateApprover {
       */
     ApproverMobile?: string;
     /**
-      * 签署方经办人证件号码
-      */
-    ApproverIdCardNumber?: string;
-    /**
       * 签署方经办人证件类型ID_CARD 身份证
 HONGKONG_AND_MACAO 港澳居民来往内地通行证
 HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证(格式同居民身份证)
       */
     ApproverIdCardType?: string;
     /**
+      * 签署方经办人证件号码
+      */
+    ApproverIdCardNumber?: string;
+    /**
       * 签署方经办人在模板中的角色ID
       */
     RecipientId?: string;
     /**
-      * 签署方经办人的用户ID,和签署方经办人姓名+手机号+证件必须有一个
+      * 签署意愿确认渠道,WEIXINAPP:人脸识别
       */
-    UserId?: string;
+    VerifyChannel?: Array<string>;
+    /**
+      * 是否发送短信，sms--短信通知，none--不通知，默认为sms
+      */
+    NotifyType?: string;
     /**
       * 签署前置条件：是否需要阅读全文，默认为不需要
       */
@@ -565,13 +572,13 @@ HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证(格式同居民身份证)
       */
     PreReadTime?: number;
     /**
-      * 是否发送短信，sms--短信通知，none--不通知，默认为sms
+      * 签署方经办人的用户ID,和签署方经办人姓名+手机号+证件必须有一个
       */
-    NotifyType?: string;
+    UserId?: string;
     /**
-      * 签署意愿确认渠道,WEIXINAPP:人脸识别
+      * 当前只支持true，默认为true
       */
-    VerifyChannel?: Array<string>;
+    Required?: boolean;
 }
 /**
  * UploadFiles返回参数结构体
@@ -608,7 +615,7 @@ export interface DescribeThirdPartyAuthCodeResponse {
  */
 export interface CreateFlowByFilesResponse {
     /**
-      * 流程编号
+      * 签署流程编号
       */
     FlowId: string;
     /**
@@ -626,15 +633,15 @@ export interface CreateFlowByFilesResponse {
  */
 export interface DescribeFlowBriefsRequest {
     /**
-      * 操作人信息
-      */
-    Operator: UserInfo;
-    /**
       * 需要查询的流程ID列表
       */
     FlowIds: Array<string>;
     /**
-      * 代理商信息
+      * 操作人信息
+      */
+    Operator: UserInfo;
+    /**
+      * 应用相关信息
       */
     Agent?: Agent;
 }
@@ -708,23 +715,28 @@ export interface DescribeFileUrlsRequest {
       */
     BusinessType: string;
     /**
+      * 业务编号的数组，如模板编号、文档编号、印章编号
+最大支持20个资源
+      */
+    BusinessIds: Array<string>;
+    /**
       * 操作者信息
       */
     Operator: UserInfo;
     /**
-      * 业务编号的数组，如模板编号、文档编号、印章编号
+      * 应用相关信息
       */
-    BusinessIds: Array<string>;
-    /**
-      * 文件类型，"JPG", "PDF","ZIP"等
-      */
-    FileType?: string;
+    Agent?: Agent;
     /**
       * 下载后的文件命名，只有fileType为zip的时候生效
       */
     FileName?: string;
     /**
-      * 指定资源起始偏移量
+      * 文件类型，"JPG", "PDF","ZIP"等
+      */
+    FileType?: string;
+    /**
+      * 指定资源起始偏移量，默认0
       */
     Offset?: number;
     /**
@@ -732,21 +744,17 @@ export interface DescribeFileUrlsRequest {
       */
     Limit?: number;
     /**
-      * 应用相关信息
-      */
-    Agent?: Agent;
-    /**
-      * 下载url过期时间，0: 按默认值5分钟，允许范围：1s~24*60*60s(1天)
+      * 下载url过期时间，单位秒。0: 按默认值5分钟，允许范围：1s~24*60*60s(1天)
       */
     UrlTtl?: number;
     /**
-      * 流程校验发送邮件权限
-      */
-    CcToken?: string;
-    /**
-      * 场景
+      * 暂不开放
       */
     Scene?: string;
+    /**
+      * 暂不开放
+      */
+    CcToken?: string;
 }
 /**
  * 参与者信息
@@ -811,19 +819,19 @@ export interface Caller {
     /**
       * 应用号
       */
-    ApplicationId: string;
+    ApplicationId?: string;
     /**
       * 主机构ID
       */
     OrganizationId?: string;
     /**
-      * 下属机构ID
-      */
-    SubOrganizationId?: string;
-    /**
       * 经办人的用户ID
       */
     OperatorId?: string;
+    /**
+      * 下属机构ID
+      */
+    SubOrganizationId?: string;
 }
 /**
  * DescribeFlowTemplates返回参数结构体
@@ -885,33 +893,36 @@ export interface CreateMultiFlowSignQRCodeRequest {
       */
     TemplateId: string;
     /**
+      * 签署流程名称，最大长度不超过200字符
+      */
+    FlowName: string;
+    /**
       * 用户信息
       */
     Operator: UserInfo;
-    /**
-      * 合同名称
-      */
-    FlowName: string;
     /**
       * 应用信息
       */
     Agent?: Agent;
     /**
-      * 合同有效天数 默认7天 最高设置不超过30天
+      * 回调地址,最大长度1000字符串
+回调时机：
+用户通过签署二维码发起签署流程时，企业额度不足导致失败
+      */
+    CallbackUrl?: string;
+    /**
+      * 最大可发起签署流程份数，默认5份
+发起流程数量超过此上限后二维码自动失效
+      */
+    MaxFlowNum?: number;
+    /**
+      * 签署流程有效天数 默认7天 最高设置不超过30天
       */
     FlowEffectiveDay?: number;
     /**
       * 二维码有效天数 默认7天 最高设置不超过90天
       */
     QrEffectiveDay?: number;
-    /**
-      * 最大合同份数，默认5份 超过此上限 二维码自动失效
-      */
-    MaxFlowNum?: number;
-    /**
-      * 回调地址
-      */
-    CallbackUrl?: string;
 }
 /**
  * StartFlow返回参数结构体
@@ -944,40 +955,21 @@ export interface CreateSchemeUrlResponse {
  */
 export interface CreateFlowByFilesRequest {
     /**
-      * 调用方用户信息
-      */
-    Operator: UserInfo;
-    /**
-      * 流程名称
+      * 签署流程名称,最大长度200个字符
       */
     FlowName: string;
-    /**
-      * 签署pdf文件的资源编号列表
-      */
-    FileIds: Array<string>;
     /**
       * 签署参与者信息
       */
     Approvers: Array<ApproverInfo>;
     /**
-      * 流程描述
+      * 签署pdf文件的资源编号列表，通过UploadFiles接口获取
       */
-    FlowDescription?: string;
+    FileIds: Array<string>;
     /**
-      * 发送类型：
-true：无序签
-false：有序签
-注：默认为false（有序签）
+      * 调用方用户信息
       */
-    Unordered?: boolean;
-    /**
-      * 流程的类型
-      */
-    FlowType?: string;
-    /**
-      * 流程的签署截止时间
-      */
-    Deadline?: number;
+    Operator: UserInfo;
     /**
       * 应用号信息
       */
@@ -986,17 +978,44 @@ false：有序签
       * 经办人内容控件配置。可选类型为：
 TEXT - 内容文本控件
 MULTI_LINE_TEXT - 多行文本控件
+CHECK_BOX - 勾选框控件
 注：默认字体大小为 字号12
       */
     Components?: Array<Component>;
     /**
-      * 被抄送人的信息列表
+      * 签署流程的签署截止时间。
+值为unix时间戳,精确到秒,不传默认为当前时间一年后
+      */
+    Deadline?: number;
+    /**
+      * 发送类型：
+true：无序签
+false：有序签
+注：默认为false（有序签）
+      */
+    Unordered?: boolean;
+    /**
+      * 是否需要预览，true：预览模式，false：非预览（默认）；
+预览链接有效期300秒；
+      */
+    NeedPreview?: boolean;
+    /**
+      * 签署流程描述,最大长度1000个字符
+      */
+    FlowDescription?: string;
+    /**
+      * 签署流程的类型(如销售合同/入职合同等)，最大长度200个字符
+      */
+    FlowType?: string;
+    /**
+      * 被抄送人的信息列表。
+注:此功能为白名单功能，若有需要，请联系电子签客服开白使用
       */
     CcInfos?: Array<CcInfo>;
     /**
-      * 是否需要预览，true：预览模式，false：非预览（默认）
+      * 合同显示的页卡模板，说明：只支持{合同名称}, {发起方企业}, {发起方姓名}, {签署方N企业}, {签署方N姓名}，且N不能超过签署人的数量，N从1开始
       */
-    NeedPreview?: boolean;
+    CustomShowMap?: string;
 }
 /**
  * CancelMultiFlowSignQRCode返回参数结构体
@@ -1012,7 +1031,7 @@ export interface CancelMultiFlowSignQRCodeResponse {
  */
 export interface CreateFlowResponse {
     /**
-      * 流程编号
+      * 签署流程编号
       */
     FlowId: string;
     /**
@@ -1037,7 +1056,7 @@ export interface FormField {
       */
     ComponentId?: string;
     /**
-      * 控件名字
+      * 控件名字，最大长度不超过30字符
       */
     ComponentName?: string;
 }

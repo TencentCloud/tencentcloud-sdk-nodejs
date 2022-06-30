@@ -3736,7 +3736,7 @@ export interface CreateOpenBankOrderPaymentResult {
       */
     ThirdPayOrderId: string;
     /**
-      * 小程序跳转参数渠道为TENPAY，付款方式为EBANK_PAYMENT时必选。
+      * 跳转参数渠道为TENPAY，付款方式为EBANK_PAYMENT时必选。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     RedirectInfo: OpenBankRedirectInfo;
@@ -9989,6 +9989,11 @@ export interface OpenBankRedirectInfo {
       * 小程序原始 id
       */
     MpUserName: string;
+    /**
+      * 网银支付提交页面信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FormInfo: OpenBankFormInfo;
 }
 /**
  * ViewContract请求参数结构体
@@ -16661,6 +16666,21 @@ export interface QueryCityCodeRequest {
       * 沙箱环境填sandbox，正式环境不填
       */
     Profile?: string;
+}
+/**
+ * 网银页面提交html
+ */
+export interface OpenBankFormInfo {
+    /**
+      * 网银页面提交html
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FormHtml: string;
+    /**
+      * 网银提交页面字符集
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FormEncoding: string;
 }
 /**
  * CreateOrder请求参数结构体

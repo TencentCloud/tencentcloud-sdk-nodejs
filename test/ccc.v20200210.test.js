@@ -18,6 +18,16 @@ const client = new tencentcloud.ccc.v20200210.Client({
 })
 describe("ccc.v20200210.test.js", function () {
 
+it("ccc.v20200210.ModifyStaff", async function () {
+    try {
+       const data = await client.ModifyStaff({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ccc.v20200210.DescribeStaffInfoList", async function () {
     try {
        const data = await client.DescribeStaffInfoList({})

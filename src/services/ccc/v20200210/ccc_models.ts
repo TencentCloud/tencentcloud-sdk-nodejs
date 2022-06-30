@@ -735,6 +735,41 @@ export interface CreateUserSigResponse {
 }
 
 /**
+ * ModifyStaff请求参数结构体
+ */
+export interface ModifyStaffRequest {
+  /**
+   * 应用ID
+   */
+  SdkAppId: number
+
+  /**
+   * 坐席账户
+   */
+  Email: string
+
+  /**
+   * 坐席名称
+   */
+  Name?: string
+
+  /**
+   * 坐席手机号（带0086前缀,示例：008618011111111）
+   */
+  Phone?: string
+
+  /**
+   * 坐席昵称
+   */
+  Nick?: string
+
+  /**
+   * 绑定技能组ID列表
+   */
+  SkillGroupIds?: Array<number>
+}
+
+/**
  * DeleteStaff请求参数结构体
  */
 export interface DeleteStaffRequest {
@@ -1521,6 +1556,16 @@ export interface PSTNSessionInfo {
    * 被叫号码保护ID，开启号码保护映射功能时有效，且Callee字段置空
    */
   ProtectedCallee: string
+}
+
+/**
+ * ModifyStaff返回参数结构体
+ */
+export interface ModifyStaffResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

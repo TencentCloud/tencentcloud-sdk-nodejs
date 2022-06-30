@@ -18,16 +18,6 @@ const client = new tencentcloud.taf.v20200210.Client({
 })
 describe("taf.v20200210.test.js", function () {
 
-it("taf.v20200210.EnhanceTaDegree", async function () {
-    try {
-       const data = await client.EnhanceTaDegree({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("taf.v20200210.RecognizeTargetAudience", async function () {
     try {
        const data = await client.RecognizeTargetAudience({})

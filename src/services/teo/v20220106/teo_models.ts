@@ -1914,17 +1914,17 @@ export interface ApplicationProxyRule {
       * 源站类型，取值：
 custom：手动添加
 origins：源站组
-load_balancing：负载均衡
       */
   OriginType: string
 
   /**
       * 源站信息：
-当OriginType=custom时，表示多个：
-IP:端口
-域名:端口
-当OriginType=origins时，包含一个元素，表示源站组ID
-当OriginType=load_balancing时，包含一个元素，表示负载均衡ID
+当OriginType=custom时，表示一个或多个源站，如：
+OriginValue=["8.8.8.8:80","9.9.9.9:80"]
+OriginValue=["test.com:80"]
+
+当OriginType=origins时，包含一个元素，表示源站组ID，如：
+OriginValue=["origin-xxx"]
       */
   OriginValue: Array<string>
 
@@ -2102,7 +2102,7 @@ export interface ModifyApplicationProxyStatusRequest {
   ZoneId: string
 
   /**
-   * 四层代理ID
+   * 代理ID
    */
   ProxyId: string
 
@@ -2692,13 +2692,15 @@ export interface OriginRecord {
 
   /**
       * 当源站配置类型Type=area时，表示区域
-当源站类型Type=area时，为空表示默认区域
+为空表示默认区域
       */
   Area: Array<string>
 
   /**
-   * 当源站配置类型Type=weight时，表示权重
-   */
+      * 当源站配置类型Type=weight时，表示权重
+取值范围为[1-100]
+源站组内多个源站权重总和应为100
+      */
   Weight: number
 
   /**
@@ -2883,10 +2885,22 @@ export interface DescribeApplicationProxyResponse {
   TotalCount: number
 
   /**
-      * 当ZoneId不为空时，表示当前站点允许创建的实例数量
+      * 字段已废弃
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Quota: number
+
+  /**
+      * 表示套餐内PlatType为ip的Anycast IP实例数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IpCount: number
+
+  /**
+      * 表示套餐内PlatType为domain的CNAME实例数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DomainCount: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3423,10 +3437,10 @@ pending: 不生效
   Cname: string
 
   /**
-      * 域名是否开启了lb，四层，安全
+      * 域名是否开启了负载均衡，四层代理，安全
 - lb 负载均衡
 - security 安全
-- l4 四层
+- l4 四层代理
 注意：此字段可能返回 null，表示取不到有效值。
       */
   DomainStatus: Array<string>
@@ -4208,7 +4222,6 @@ export interface CreateApplicationProxyRuleRequest {
       * 源站类型，取值：
 custom：手动添加
 origins：源站组
-load_balancing：负载均衡
       */
   OriginType: string
 
@@ -4218,7 +4231,6 @@ load_balancing：负载均衡
 IP:端口
 域名:端口
 当OriginType=origins时，包含一个元素，表示源站组ID
-当OriginType=load_balancing时，包含一个元素，表示负载均衡ID
       */
   OriginValue: Array<string>
 
@@ -4295,13 +4307,15 @@ export interface ModifyApplicationProxyRequest {
   ZoneId: string
 
   /**
-   * 四层代理ID
+   * 代理ID
    */
   ProxyId: string
 
   /**
-   * 四层代理名称
-   */
+      * 代理名称
+当ProxyType=hostname时，表示域名或者子域名
+当ProxyType=instance时，表示实例名称
+      */
   ProxyName: string
 
   /**
@@ -4321,8 +4335,8 @@ export interface ModifyApplicationProxyRequest {
 
   /**
       * 服务类型
-hostname：子域名
-instance：实例
+hostname：子域名模式
+instance：实例模式
       */
   ProxyType?: string
 }
@@ -4332,7 +4346,7 @@ instance：实例
  */
 export interface ModifyApplicationProxyStatusResponse {
   /**
-   * 四层代理ID
+   * 代理ID
    */
   ProxyId: string
 
@@ -4378,6 +4392,74 @@ offline：已关闭
    * 域名
    */
   Host: string
+}
+
+/**
+ * RateLimit规则
+ */
+export interface RateLimitUserRule {
+  /**
+   * RateLimit统计阈值
+   */
+  Threshold: number
+
+  /**
+   * RateLimit统计时间
+   */
+  Period: number
+
+  /**
+   * 规则名
+   */
+  RuleName: string
+
+  /**
+   * 动作：monitor(观察), drop(拦截)
+   */
+  Action: string
+
+  /**
+   * 惩罚时长
+   */
+  PunishTime: number
+
+  /**
+   * 处罚时长单位，second
+   */
+  PunishTimeUnit: string
+
+  /**
+   * 规则状态
+   */
+  RuleStatus: string
+
+  /**
+   * 规则
+   */
+  Conditions: Array<ACLCondition>
+
+  /**
+   * 规则权重
+   */
+  RulePriority: number
+
+  /**
+      * 规则id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RuleID?: number
+
+  /**
+      * 过滤词
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FreqFields?: Array<string>
+
+  /**
+      * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UpdateTime?: string
 }
 
 /**
@@ -4634,8 +4716,10 @@ export interface OriginGroup {
   OriginName: string
 
   /**
-   * 配置类型
-   */
+      * 源站组配置类型
+area：表示按照Record记录中的Area字段进行按客户端IP所在区域回源。
+weight：表示按照Record记录中的Weight字段进行按权重回源。
+      */
   Type: string
 
   /**
@@ -4665,16 +4749,32 @@ export interface OriginGroup {
   OriginType: string
 
   /**
-      * 是否为四层代理使用
+      * 当前源站组是否被四层代理使用。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ApplicationProxyUsed: boolean
 
   /**
-      * 是否为负载均衡使用
+      * 当前源站组是否被负载均衡使用。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   LoadBalancingUsed: boolean
+
+  /**
+      * 源站状态信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Status: OriginCheckOriginStatus
+
+  /**
+      * 使用当前源站组的负载均衡的类型：
+none：未被使用
+dns_only：被仅DNS类型负载均衡使用
+proxied：被代理加速类型负载均衡使用
+both：同时被仅DNS和代理加速类型负载均衡使用
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LoadBalancingUsedType: string
 }
 
 /**
@@ -4737,7 +4837,7 @@ export interface ModifyApplicationProxyRuleStatusRequest {
   ZoneId: string
 
   /**
-   * 四层代理ID
+   * 代理ID
    */
   ProxyId: string
 
@@ -5061,8 +5161,10 @@ export interface CreateApplicationProxyRequest {
   ZoneName: string
 
   /**
-   * 四层代理名称
-   */
+      * 代理名称
+当ProxyType=hostname时，表示域名或者子域名
+当ProxyType=instance时，表示实例名称
+      */
   ProxyName: string
 
   /**
@@ -5104,8 +5206,8 @@ domain表示CNAME
 
   /**
       * 服务类型
-hostname：子域名
-instance：实例
+hostname：子域名模式
+instance：实例模式
       */
   ProxyType?: string
 }
@@ -5250,71 +5352,19 @@ export interface PostMaxSize {
 }
 
 /**
- * RateLimit规则
+ * 源站健康检查，源站状态信息
  */
-export interface RateLimitUserRule {
+export interface OriginCheckOriginStatus {
   /**
-   * RateLimit统计阈值
+   * healthy: 健康，unhealthy: 不健康，process: 探测中
    */
-  Threshold: number
+  Status: string
 
   /**
-   * RateLimit统计时间
-   */
-  Period: number
-
-  /**
-   * 规则名
-   */
-  RuleName: string
-
-  /**
-   * 动作：monitor(观察), drop(拦截)
-   */
-  Action: string
-
-  /**
-   * 惩罚时长
-   */
-  PunishTime: number
-
-  /**
-   * 处罚时长单位，second
-   */
-  PunishTimeUnit: string
-
-  /**
-   * 规则状态
-   */
-  RuleStatus: string
-
-  /**
-   * 规则
-   */
-  Conditions: Array<ACLCondition>
-
-  /**
-   * 规则权重
-   */
-  RulePriority: number
-
-  /**
-      * 规则id
+      * host列表，源站组不健康时存在值
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  RuleID?: number
-
-  /**
-      * 过滤词
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  FreqFields?: Array<string>
-
-  /**
-      * 更新时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  UpdateTime?: string
+  Host: Array<string>
 }
 
 /**
@@ -5730,14 +5780,16 @@ export interface WebEventData {
  */
 export interface ApplicationProxy {
   /**
-      * 实例ID
+      * 代理ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ProxyId?: string
 
   /**
-   * 实例名称
-   */
+      * 代理名称
+当ProxyType=hostname时，表示域名或者子域名
+当ProxyType=instance时，表示实例名称
+      */
   ProxyName: string
 
   /**
@@ -5815,14 +5867,16 @@ fail：部署失败/停用失败
 
   /**
       * 服务类型
-hostname：子域名
-instance：实例
+hostname：子域名模式
+instance：实例模式
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ProxyType: string
 
   /**
-      * 七层实例ID
+      * 当ProxyType=hostname时：
+ProxyName为域名，如：test.123.com
+HostId表示该域名，即test.123.com对应的代理加速唯一标识
 注意：此字段可能返回 null，表示取不到有效值。
       */
   HostId: string
@@ -5833,7 +5887,7 @@ instance：实例
  */
 export interface ModifyApplicationProxyResponse {
   /**
-   * 四层代理ID
+   * 代理ID
    */
   ProxyId: string
 
@@ -5896,7 +5950,7 @@ export interface ModifyOriginGroupRequest {
       * 配置类型，当OriginType=self 时，需要填写：
 area: 按区域配置
 weight: 按权重配置
-当OriginType=third_party 时，不需要填写
+当OriginType=third_party/cos 时，不需要填写
       */
   Type: string
 
@@ -5914,6 +5968,7 @@ weight: 按权重配置
       * 源站类型
 self：自有源站
 third_party：第三方源站
+cos：腾讯云COS源站
       */
   OriginType?: string
 }
@@ -6807,17 +6862,17 @@ export interface ModifyApplicationProxyRuleRequest {
       * 源站类型，取值：
 custom：手动添加
 origins：源站组
-load_balancing：负载均衡
       */
   OriginType: string
 
   /**
       * 源站信息：
-当OriginType=custom时，表示多个：
-IP:端口
-域名:端口
-当OriginType=origins时，包含一个元素，表示源站组ID
-当OriginType=load_balancing时，包含一个元素，表示负载均衡ID
+当OriginType=custom时，表示一个或多个源站，如：
+OriginValue=["8.8.8.8:80","9.9.9.9:80"]
+OriginValue=["test.com:80"]
+
+当OriginType=origins时，包含一个元素，表示源站组ID，如：
+OriginValue=["origin-xxx"]
       */
   OriginValue: Array<string>
 
@@ -7500,7 +7555,7 @@ export interface CreateOriginGroupRequest {
       * 配置类型，当OriginType=self 时，需要填写：
 area: 按区域配置
 weight: 按权重配置
-当OriginType=third_party 时，不需要填写
+当OriginType=third_party/cos 时，不需要填写
       */
   Type: string
 
@@ -7518,6 +7573,7 @@ weight: 按权重配置
       * 源站类型
 self：自有源站
 third_party：第三方源站
+cos：腾讯云COS源站
       */
   OriginType?: string
 }
@@ -7833,8 +7889,10 @@ export interface DescribeApplicationProxyDetailResponse {
   ProxyId: string
 
   /**
-   * 实例名称
-   */
+      * 代理名称
+当ProxyType=hostname时，表示域名或者子域名
+当ProxyType=instance时，表示实例名称
+      */
   ProxyName: string
 
   /**
@@ -7904,14 +7962,16 @@ progress：部署中
 
   /**
       * 服务类型
-hostname：子域名
-instance：实例
+hostname：子域名模式
+instance：实例模式
       */
   ProxyType: string
 
   /**
-   * 七层实例ID
-   */
+      * 当ProxyType=hostname时：
+ProxyName为域名，如：test.123.com
+HostId表示该域名，即test.123.com对应的代理加速唯一标识
+      */
   HostId: string
 
   /**
@@ -8290,8 +8350,10 @@ export interface DescribeOriginGroupDetailResponse {
   OriginName: string
 
   /**
-   * 配置类型
-   */
+      * 源站组配置类型
+area：表示按照Record记录中的Area字段进行按客户端IP所在区域回源。
+weight：表示按照Record记录中的Weight字段进行按权重回源。
+      */
   Type: string
 
   /**
@@ -8321,16 +8383,26 @@ export interface DescribeOriginGroupDetailResponse {
   OriginType: string
 
   /**
-      * 是否被四层代理使用
+      * 当前源站组是否被四层代理使用。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ApplicationProxyUsed: boolean
 
   /**
-      * 是否被负载均衡使用
+      * 当前源站组是否被负载均衡使用。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   LoadBalancingUsed: boolean
+
+  /**
+      * 使用当前源站组的负载均衡的类型：
+none：未被使用
+dns_only：被仅DNS类型负载均衡使用
+proxied：被代理加速类型负载均衡使用
+both：同时被仅DNS和代理加速类型负载均衡使用
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LoadBalancingUsedType: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

@@ -1209,6 +1209,11 @@ export interface DescribeListBGPIPInstancesRequest {
    * 标签搜索
    */
   FilterTag?: TagFilter
+
+  /**
+   * 按照套餐类型进行过滤
+   */
+  FilterPackType?: Array<string>
 }
 
 /**
@@ -2582,6 +2587,13 @@ export interface BGPIPInstance {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   TagInfoList: Array<TagInfo>
+
+  /**
+      * 资产实例所属的全力防护套餐包详情，
+注意：当资产实例不是全力防护套餐包的实例时，此字段为null
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AnycastOutPackRelation: AnycastOutPackRelation
 }
 
 /**
@@ -3424,33 +3436,32 @@ SMP(smp协议)
 }
 
 /**
- * AssociateDDoSEipLoadBalancer请求参数结构体
+ * Anycast转外套餐详情
  */
-export interface AssociateDDoSEipLoadBalancerRequest {
+export interface AnycastOutPackRelation {
   /**
-   * 资源实例ID，实例ID形如：bgpip-0000011x。只能填写高防IP实例。
-   */
-  InstanceId: string
+      * 业务带宽(单位M)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NormalBandwidth: number
 
   /**
-   * 资源实例ID对应的高防弹性公网IP。
-   */
-  Eip: string
+      * 转发规则数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ForwardRulesLimit: number
 
   /**
-   * 要绑定的负载均衡ID。负载均衡 ID 形如：lb-0000002i。可通过登录控制台查询，也可通过 DescribeLoadBalancers 接口返回值中的LoadBalancerId获取。
-   */
-  LoadBalancerID: string
+      * 自动续费标记
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AutoRenewFlag: number
 
   /**
-   * CLB所在地域，例如：ap-hongkong。
-   */
-  LoadBalancerRegion: string
-
-  /**
-   * CLB内网IP
-   */
-  Vip?: string
+      * 到期时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CurDeadline: string
 }
 
 /**
@@ -3557,6 +3568,26 @@ export interface ModifyDDoSLevelRequest {
    * 防护等级，取值[low,middle,high]；当Method=set时必填
    */
   DDoSLevel?: string
+}
+
+/**
+ * DescribeListSchedulingDomain返回参数结构体
+ */
+export interface DescribeListSchedulingDomainResponse {
+  /**
+   * 总数
+   */
+  Total: number
+
+  /**
+   * 调度域名信息列表
+   */
+  DomainList: Array<SchedulingDomainInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4564,23 +4595,33 @@ export interface SwitchWaterPrintConfigRequest {
 }
 
 /**
- * DescribeListSchedulingDomain返回参数结构体
+ * AssociateDDoSEipLoadBalancer请求参数结构体
  */
-export interface DescribeListSchedulingDomainResponse {
+export interface AssociateDDoSEipLoadBalancerRequest {
   /**
-   * 总数
+   * 资源实例ID，实例ID形如：bgpip-0000011x。只能填写高防IP实例。
    */
-  Total: number
+  InstanceId: string
 
   /**
-   * 调度域名信息列表
+   * 资源实例ID对应的高防弹性公网IP。
    */
-  DomainList: Array<SchedulingDomainInfo>
+  Eip: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 要绑定的负载均衡ID。负载均衡 ID 形如：lb-0000002i。可通过登录控制台查询，也可通过 DescribeLoadBalancers 接口返回值中的LoadBalancerId获取。
    */
-  RequestId?: string
+  LoadBalancerID: string
+
+  /**
+   * CLB所在地域，例如：ap-hongkong。
+   */
+  LoadBalancerRegion: string
+
+  /**
+   * CLB内网IP
+   */
+  Vip?: string
 }
 
 /**
@@ -5064,6 +5105,11 @@ export interface BGPInstance {
    * 资源关联标签
    */
   TagInfoList: Array<TagInfo>
+
+  /**
+   * 新版本1ip高防包
+   */
+  IpCountNewFlag: number
 }
 
 /**

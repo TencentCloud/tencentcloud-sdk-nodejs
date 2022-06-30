@@ -154,29 +154,29 @@ export interface AiRecognitionTaskAsrFullTextSegmentItem {
 }
 
 /**
- * 用户自定义文本智能识别任务控制参数。
+ * 用户自定义文本音视频审核任务控制参数。
  */
 export interface UserDefineOcrTextReviewTemplateInfoForUpdate {
   /**
-      * 用户自定文本智能识别任务开关，可选值：
-<li>ON：开启自定义文本智能识别任务；</li>
-<li>OFF：关闭自定义文本智能识别任务。</li>
+      * 用户自定文本音视频审核任务开关，可选值：
+<li>ON：开启自定义文本音视频审核任务；</li>
+<li>OFF：关闭自定义文本音视频审核任务。</li>
       */
   Switch?: string
 
   /**
-      * 用户自定义文本过滤标签，智能识别结果包含选择的标签则返回结果，如果过滤标签为空，则智能识别结果全部返回。如果要使用标签过滤功能，添加自定义文本关键词素材时需要添加对应标签。
+      * 用户自定义文本过滤标签，音视频审核结果包含选择的标签则返回结果，如果过滤标签为空，则音视频审核结果全部返回。如果要使用标签过滤功能，添加自定义文本关键词素材时需要添加对应标签。
 标签个数最多 10 个，每个标签长度最多 16 个字符。
       */
   LabelSet?: Array<string>
 
   /**
-   * 判定涉嫌违规的分数阈值，当智能识别达到该分数以上，认为涉嫌违规。取值范围：0~100。
+   * 判定涉嫌违规的分数阈值，当审核达到该分数以上，认为涉嫌违规。取值范围：0~100。
    */
   BlockConfidence?: number
 
   /**
-   * 判定需人工复核是否违规的分数阈值，当智能识别达到该分数以上，认为需人工复核。取值范围：0~100。
+   * 判定需人工复核是否违规的分数阈值，当审核达到该分数以上，认为需人工复核。取值范围：0~100。
    */
   ReviewConfidence?: number
 }
@@ -491,7 +491,7 @@ export interface LiveRealTimeClipResponse {
 }
 
 /**
- * 智能识别 Asr 文字鉴违禁任务结果类型
+ * 音视频审核 Asr 文字鉴违禁任务结果类型
  */
 export interface AiReviewTaskProhibitedAsrResult {
   /**
@@ -515,12 +515,12 @@ export interface AiReviewTaskProhibitedAsrResult {
   Message: string
 
   /**
-   * 智能识别 Asr 文字鉴违禁任务输入。
+   * 音视频审核 Asr 文字鉴违禁任务输入。
    */
   Input: AiReviewProhibitedAsrTaskInput
 
   /**
-      * 智能识别 Asr 文字鉴违禁任务输出。
+      * 音视频审核 Asr 文字鉴违禁任务输出。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Output: AiReviewProhibitedAsrTaskOutput
@@ -608,7 +608,7 @@ export interface DeleteAnimatedGraphicsTemplateResponse {
 }
 
 /**
- * 智能识别 Ocr 文字鉴违禁任务结果类型
+ * 音视频审核 Ocr 文字鉴违禁任务结果类型
  */
 export interface AiReviewTaskProhibitedOcrResult {
   /**
@@ -632,12 +632,12 @@ export interface AiReviewTaskProhibitedOcrResult {
   Message: string
 
   /**
-   * 智能识别 Ocr 文字鉴违禁任务输入。
+   * 音视频审核 Ocr 文字鉴违禁任务输入。
    */
   Input: AiReviewProhibitedOcrTaskInput
 
   /**
-      * 智能识别 Ocr 文字鉴违禁任务输出。
+      * 音视频审核 Ocr 文字鉴违禁任务输出。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Output: AiReviewProhibitedOcrTaskOutput
@@ -704,11 +704,11 @@ export interface AiReviewProhibitedOcrTaskOutput {
 }
 
 /**
- * 小程序智能识别概要元信息
+ * 小程序音视频审核概要元信息
  */
 export interface MediaMiniProgramReviewElem {
   /**
-      * 智能识别类型。 
+      * 音视频审核类型。 
 <li>Porn：画面涉及令人反感的信息，</li>
 <li>Porn.Ocr：文字涉及令人反感的信息，</li>
 <li>Porn.Asr：声音涉及令人反感的信息，</li>
@@ -720,7 +720,7 @@ export interface MediaMiniProgramReviewElem {
   Type: string
 
   /**
-      * 智能识别意见。
+      * 音视频审核意见。
 <li>pass：确认正常，</li>
 <li>block：确认违规，</li>
 <li>review：疑似违规。</li>
@@ -728,7 +728,7 @@ export interface MediaMiniProgramReviewElem {
   Suggestion: string
 
   /**
-   * 智能识别结果置信度。取值 0~100。
+   * 音视频审核结果置信度。取值 0~100。
    */
   Confidence: number
 }
@@ -913,7 +913,7 @@ export interface ModifySampleSnapshotTemplateRequest {
 }
 
 /**
- * 智能识别 Ocr 文字涉及令人不适宜信息的任务输入参数类型
+ * 音视频审核 Ocr 文字涉及令人不适宜信息的任务输入参数类型
  */
 export interface AiReviewPoliticalOcrTaskInput {
   /**
@@ -1052,7 +1052,7 @@ export interface TempCertificate {
 }
 
 /**
- * 智能识别 Ocr 文字涉及令人不适宜信息、违规任务结果类型
+ * 音视频审核 Ocr 文字涉及令人不适宜信息、违规任务结果类型
  */
 export interface AiReviewTaskPoliticalOcrResult {
   /**
@@ -1076,12 +1076,12 @@ export interface AiReviewTaskPoliticalOcrResult {
   Message: string
 
   /**
-   * 智能识别 Ocr 文字涉及令人不适宜信息的任务输入。
+   * 音视频审核 Ocr 文字涉及令人不适宜信息的任务输入。
    */
   Input: AiReviewPoliticalOcrTaskInput
 
   /**
-      * 智能识别 Ocr 文字涉及令人不适宜信息的任务输出。
+      * 音视频审核 Ocr 文字涉及令人不适宜信息的任务输出。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Output: AiReviewPoliticalOcrTaskOutput
@@ -1245,29 +1245,29 @@ export interface DescribeDailyMostPlayedStatRequest {
 }
 
 /**
- * 用户自定义人物智能识别任务控制参数
+ * 用户自定义人物音视频审核任务控制参数
  */
 export interface UserDefineFaceReviewTemplateInfo {
   /**
-      * 用户自定义人物智能识别任务开关，可选值：
-<li>ON：开启自定义人物智能识别任务；</li>
-<li>OFF：关闭自定义人物智能识别任务。</li>
+      * 用户自定义人物音视频审核任务开关，可选值：
+<li>ON：开启自定义人物音视频审核任务；</li>
+<li>OFF：关闭自定义人物音视频审核任务。</li>
       */
   Switch: string
 
   /**
-      * 用户自定义人物过滤标签，智能识别结果包含选择的标签则返回结果，如果过滤标签为空，则审核结果全部返回。如果要使用标签过滤功能，添加自定义人物库的时，需要添加对应人物标签。
+      * 用户自定义人物过滤标签，音视频审核结果包含选择的标签则返回结果，如果过滤标签为空，则审核结果全部返回。如果要使用标签过滤功能，添加自定义人物库的时，需要添加对应人物标签。
 标签个数最多 10 个，每个标签长度最多 16 个字符。
       */
   LabelSet?: Array<string>
 
   /**
-   * 判定涉嫌违规的分数阈值，当智能智能识别达到该分数以上，认为涉嫌违规，不填默认为 97 分。取值范围：0~100。
+   * 判定涉嫌违规的分数阈值，当审核达到该分数以上，认为涉嫌违规，不填默认为 97 分。取值范围：0~100。
    */
   BlockConfidence?: number
 
   /**
-   * 判定需人工复核是否违规的分数阈值，当智能识别达到该分数以上，认为需人工复核，不填默认为 95 分。取值范围：0~100。
+   * 判定需人工复核是否违规的分数阈值，当审核达到该分数以上，认为需人工复核，不填默认为 95 分。取值范围：0~100。
    */
   ReviewConfidence?: number
 }
@@ -1288,21 +1288,21 @@ export interface RefreshUrlCacheRequest {
 }
 
 /**
- * 智能识别模板详情
+ * 音视频审核模板详情
  */
 export interface ContentReviewTemplateItem {
   /**
-   * 智能识别模板唯一标识。
+   * 音视频审核模板唯一标识。
    */
   Definition: number
 
   /**
-   * 智能识别模板名称，长度限制：64 个字符。
+   * 音视频审核模板名称，长度限制：64 个字符。
    */
   Name: string
 
   /**
-   * 智能识别模板描述信息，长度限制：256 个字符。
+   * 音视频审核模板描述信息，长度限制：256 个字符。
    */
   Comment: string
 
@@ -1333,13 +1333,13 @@ export interface ContentReviewTemplateItem {
   ProhibitedConfigure: ProhibitedConfigureInfo
 
   /**
-      * 用户自定义智能识别控制参数。
+      * 用户自定义音视频审核控制参数。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   UserDefineConfigure: UserDefineConfigureInfo
 
   /**
-      * 智能识别结果是否进入智能识别墙（对智能识别结果进行人工复核）的开关。
+      * 音视频审核结果是否进入音视频审核墙（对音视频审核结果进行人工复核）的开关。
 <li>ON：是；</li>
 <li>OFF：否。</li>
       */
@@ -1376,7 +1376,7 @@ export interface DeleteAIRecognitionTemplateResponse {
  */
 export interface DeleteContentReviewTemplateRequest {
   /**
-   * 内容智能识别模板唯一标识。
+   * 内容审核模板唯一标识。
    */
   Definition: number
 
@@ -1387,7 +1387,7 @@ export interface DeleteContentReviewTemplateRequest {
 }
 
 /**
- * 智能识别涉及令人不适宜信息的任务输入参数类型
+ * 音视频审核涉及令人不适宜信息的任务输入参数类型
  */
 export interface AiReviewPoliticalTaskInput {
   /**
@@ -1915,7 +1915,7 @@ export interface AIRecognitionTemplateItem {
 }
 
 /**
- * 智能识别 Asr 文字涉及令人反感的信息的任务输入参数类型
+ * 音视频审核 Asr 文字涉及令人反感的信息的任务输入参数类型
  */
 export interface AiReviewPornAsrTaskInput {
   /**
@@ -2111,7 +2111,7 @@ export interface TerrorismImgReviewTemplateInfoForUpdate {
   Switch?: string
 
   /**
-      * 画面鉴别涉及令人不安全的信息的过滤标签，智能识别结果包含选择的标签则返回结果，如果过滤标签为空，则审核结果全部返回，可选值为：
+      * 画面鉴别涉及令人不安全的信息的过滤标签，审核结果包含选择的标签则返回结果，如果过滤标签为空，则审核结果全部返回，可选值为：
 <li>guns：武器枪支；</li>
 <li>crowd：人群聚集；</li>
 <li>bloody：血腥画面；</li>
@@ -2125,12 +2125,12 @@ export interface TerrorismImgReviewTemplateInfoForUpdate {
   LabelSet?: Array<string>
 
   /**
-   * 判定涉嫌违规的分数阈值，当智能识别达到该分数以上，认为涉嫌违规。取值范围：0~100。
+   * 判定涉嫌违规的分数阈值，当审核达到该分数以上，认为涉嫌违规。取值范围：0~100。
    */
   BlockConfidence?: number
 
   /**
-   * 判定需人工复核是否违规的分数阈值，当智能识别达到该分数以上，认为需人工复核。取值范围：0~100。
+   * 判定需人工复核是否违规的分数阈值，当审核达到该分数以上，认为需人工复核。取值范围：0~100。
    */
   ReviewConfidence?: number
 }
@@ -2355,7 +2355,7 @@ export interface DeleteSuperPlayerConfigRequest {
 }
 
 /**
- * 智能识别 Ocr 文字涉及令人不安全的信息的任务输入参数类型
+ * 音视频审核 Ocr 文字涉及令人不安全的信息的任务输入参数类型
  */
 export interface AiReviewTerrorismOcrTaskInput {
   /**
@@ -2385,7 +2385,7 @@ export interface ModifyMediaStorageClassResponse {
 }
 
 /**
- * 智能识别涉及令人反感的信息的任务输入参数类型
+ * 音视频审核涉及令人反感的信息的任务输入参数类型
  */
 export interface AiReviewPornTaskInput {
   /**
@@ -2404,6 +2404,11 @@ export interface CreateProcedureTemplateRequest {
   Name: string
 
   /**
+   * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+   */
+  SubAppId?: number
+
+  /**
    * 模板描述信息，长度限制：256 个字符。
    */
   Comment?: string
@@ -2414,12 +2419,12 @@ export interface CreateProcedureTemplateRequest {
   MediaProcessTask?: MediaProcessTaskInput
 
   /**
-   * AI 智能识别类型任务参数。
+   * AI 内容审核类型任务参数。
    */
   AiContentReviewTask?: AiContentReviewTaskInput
 
   /**
-   * AI 智能内容分析类型任务参数。
+   * AI 内容分析类型任务参数。
    */
   AiAnalysisTask?: AiAnalysisTaskInput
 
@@ -2427,11 +2432,6 @@ export interface CreateProcedureTemplateRequest {
    * AI 内容识别类型任务参数。
    */
   AiRecognitionTask?: AiRecognitionTaskInput
-
-  /**
-   * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
-   */
-  SubAppId?: number
 }
 
 /**
@@ -2638,7 +2638,7 @@ export interface ConcatTask2017 {
  */
 export interface DeleteAIRecognitionTemplateRequest {
   /**
-   * 视频内容识别模板唯一标识。
+   * 音视频内容识别模板唯一标识。
    */
   Definition: number
 
@@ -2865,29 +2865,29 @@ export interface EditMediaTaskInput {
 }
 
 /**
- * 用户自定义语音智能识别任务控制参数
+ * 用户自定义语音审核任务控制参数
  */
 export interface UserDefineAsrTextReviewTemplateInfo {
   /**
-      * 用户自定语音智能识别任务开关，可选值：
-<li>ON：开启自定义语音智能识别任务；</li>
-<li>OFF：关闭自定义语音智能识别任务。</li>
+      * 用户自定语音审核任务开关，可选值：
+<li>ON：开启自定义语音审核任务；</li>
+<li>OFF：关闭自定义语音审核任务。</li>
       */
   Switch: string
 
   /**
-      * 用户自定义语音过滤标签，智能识别结果包含选择的标签则返回结果，如果过滤标签为空，则审核结果全部返回。如果要使用标签过滤功能，添加自定义语音关键词素材时需要添加对应标签。
+      * 用户自定义语音过滤标签，审核结果包含选择的标签则返回结果，如果过滤标签为空，则审核结果全部返回。如果要使用标签过滤功能，添加自定义语音关键词素材时需要添加对应标签。
 标签个数最多 10 个，每个标签长度最多 16 个字符。
       */
   LabelSet?: Array<string>
 
   /**
-   * 判定涉嫌违规的分数阈值，当智能智能识别达到该分数以上，认为涉嫌违规，不填默认为 100 分。取值范围：0~100。
+   * 判定涉嫌违规的分数阈值，当智能审核达到该分数以上，认为涉嫌违规，不填默认为 100 分。取值范围：0~100。
    */
   BlockConfidence?: number
 
   /**
-   * 判定需人工复核是否违规的分数阈值，当智能识别达到该分数以上，认为需人工复核，不填默认为 75 分。取值范围：0~100。
+   * 判定需人工复核是否违规的分数阈值，当审核达到该分数以上，认为需人工复核，不填默认为 75 分。取值范围：0~100。
    */
   ReviewConfidence?: number
 }
@@ -3194,7 +3194,7 @@ export interface DescribeAIRecognitionTemplatesResponse {
   TotalCount: number
 
   /**
-   * 视频内容识别模板详情列表。
+   * 音视频内容识别模板详情列表。
    */
   AIRecognitionTemplateSet: Array<AIRecognitionTemplateItem>
 
@@ -3231,12 +3231,12 @@ export interface PoliticalOcrReviewTemplateInfoForUpdate {
   Switch?: string
 
   /**
-   * 判定涉嫌违规的分数阈值，当智能识别达到该分数以上，认为涉嫌违规。取值范围：0~100。
+   * 判定涉嫌违规的分数阈值，当审核达到该分数以上，认为涉嫌违规。取值范围：0~100。
    */
   BlockConfidence?: number
 
   /**
-   * 判定需人工复核是否违规的分数阈值，当智能识别达到该分数以上，认为需人工复核。取值范围：0~100。
+   * 判定需人工复核是否违规的分数阈值，当审核达到该分数以上，认为需人工复核。取值范围：0~100。
    */
   ReviewConfidence?: number
 }
@@ -3517,12 +3517,12 @@ export interface PornAsrReviewTemplateInfoForUpdate {
   Switch?: string
 
   /**
-   * 判定涉嫌违规的分数阈值，当智能识别达到该分数以上，认为涉嫌违规。取值范围：0~100。
+   * 判定涉嫌违规的分数阈值，当审核达到该分数以上，认为涉嫌违规。取值范围：0~100。
    */
   BlockConfidence?: number
 
   /**
-   * 判定需人工复核是否违规的分数阈值，当智能识别达到该分数以上，认为需人工复核。取值范围：0~100。
+   * 判定需人工复核是否违规的分数阈值，当审核达到该分数以上，认为需人工复核。取值范围：0~100。
    */
   ReviewConfidence?: number
 }
@@ -3705,7 +3705,7 @@ export interface AiRecognitionTaskAsrFullTextResultInput {
 }
 
 /**
- * 小程序智能识别信息单元
+ * 小程序音视频审核信息单元
  */
 export interface MediaMiniProgramReviewInfoItem {
   /**
@@ -3719,7 +3719,7 @@ export interface MediaMiniProgramReviewInfoItem {
   MetaData?: MediaMetaData
 
   /**
-   * 小程序智能识别视频播放地址。
+   * 小程序音视频审核视频播放地址。
    */
   Url: string
 
@@ -3731,7 +3731,7 @@ export interface MediaMiniProgramReviewInfoItem {
   ReviewResult: string
 
   /**
-   * 小程序智能识别元素。
+   * 小程序音视频审核元素。
    */
   ReviewSummary: Array<MediaMiniProgramReviewElem>
 }
@@ -3916,27 +3916,27 @@ export interface ProductInstanceRecource {
 <li>Traffic：流量资源包。</li>
 <li>Transcode：普通转码资源包。</li>
 <li>TESHD：极速高清转码资源包。</li>
-<li>Review：视频智能识别转码资源包。</li>
+<li>Review：音视频审核转码资源包。</li>
       */
   ResourceType: string
 
   /**
       * 资源包额度。
-<li>视频存储资源包，单位为字节。</li>
-<li>视频转码资源包，单位为秒。</li>
-<li>视频智能识别资源包，单位为秒。</li>
-<li>视频极速高清资源包，单位为秒。</li>
-<li>视频加速资源包，单位为字节。</li>
+<li>音视频存储资源包，单位为字节。</li>
+<li>音视频转码资源包，单位为秒。</li>
+<li>音视频审核资源包，单位为秒。</li>
+<li>音视频极速高清资源包，单位为秒。</li>
+<li>音视频加速资源包，单位为字节。</li>
       */
   Amount: number
 
   /**
       * 资源包余量。
-<li>视频存储资源包，单位为字节。</li>
-<li>视频转码资源包，单位为秒。</li>
-<li>视频智能识别资源包，单位为秒。</li>
-<li>视频极速高清资源包，单位为秒。</li>
-<li>视频加速资源包，单位为字节。</li>
+<li>音视频存储资源包，单位为字节。</li>
+<li>音视频转码资源包，单位为秒。</li>
+<li>音视频审核资源包，单位为秒。</li>
+<li>音视频极速高清资源包，单位为秒。</li>
+<li>音视频加速资源包，单位为字节。</li>
       */
   Left: number
 }
@@ -4064,12 +4064,12 @@ export interface PoliticalAsrReviewTemplateInfoForUpdate {
   Switch?: string
 
   /**
-   * 判定涉嫌违规的分数阈值，当智能识别达到该分数以上，认为涉嫌违规。取值范围：0~100。
+   * 判定涉嫌违规的分数阈值，当音视频审核达到该分数以上，认为涉嫌违规。取值范围：0~100。
    */
   BlockConfidence?: number
 
   /**
-   * 判定需人工复核是否违规的分数阈值，当智能识别达到该分数以上，认为需人工复核。取值范围：0~100。
+   * 判定需人工复核是否违规的分数阈值，当音视频审核达到该分数以上，认为需人工复核。取值范围：0~100。
    */
   ReviewConfidence?: number
 }
@@ -4149,7 +4149,7 @@ export interface SvgWatermarkInputForUpdate {
 }
 
 /**
- * 智能识别 Ocr 文字鉴别涉及令人不安全的信息的任务结果类型
+ * 音视频审核 Ocr 文字鉴别涉及令人不安全的信息的任务结果类型
  */
 export interface AiReviewTaskTerrorismOcrResult {
   /**
@@ -4173,12 +4173,12 @@ export interface AiReviewTaskTerrorismOcrResult {
   Message: string
 
   /**
-   * 智能识别 Ocr 文字涉及令人不安全的信息的任务输入。
+   * 音视频审核 Ocr 文字涉及令人不安全的信息的任务输入。
    */
   Input: AiReviewTerrorismOcrTaskInput
 
   /**
-      * 智能识别 Ocr 文字涉及令人不安全的信息的任务输出。
+      * 音视频审核 Ocr 文字涉及令人不安全的信息的任务输出。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Output: AiReviewTerrorismOcrTaskOutput
@@ -4232,12 +4232,12 @@ export interface PornAsrReviewTemplateInfo {
   Switch: string
 
   /**
-   * 判定涉嫌违规的分数阈值，当智能识别达到该分数以上，认为涉嫌违规，不填默认为 100 分。取值范围：0~100。
+   * 判定涉嫌违规的分数阈值，当审核达到该分数以上，认为涉嫌违规，不填默认为 100 分。取值范围：0~100。
    */
   BlockConfidence?: number
 
   /**
-   * 判定需人工复核是否违规的分数阈值，当智能识别达到该分数以上，认为需人工复核，不填默认为 75 分。取值范围：0~100。
+   * 判定需人工复核是否违规的分数阈值，当审核达到该分数以上，认为需人工复核，不填默认为 75 分。取值范围：0~100。
    */
   ReviewConfidence?: number
 }
@@ -4326,12 +4326,12 @@ export interface ProhibitedAsrReviewTemplateInfoForUpdate {
   Switch?: string
 
   /**
-   * 判定涉嫌违规的分数阈值，当智能识别达到该分数以上，认为涉嫌违规，不填默认为 100 分。取值范围：0~100。
+   * 判定涉嫌违规的分数阈值，当审核达到该分数以上，认为涉嫌违规，不填默认为 100 分。取值范围：0~100。
    */
   BlockConfidence?: number
 
   /**
-   * 判定需人工复核是否违规的分数阈值，当智能识别达到该分数以上，认为需人工复核，不填默认为 75 分。取值范围：0~100。
+   * 判定需人工复核是否违规的分数阈值，当审核达到该分数以上，认为需人工复核，不填默认为 75 分。取值范围：0~100。
    */
   ReviewConfidence?: number
 }
@@ -4567,7 +4567,7 @@ export interface SimpleHlsClipResponse {
  */
 export interface DeleteAIAnalysisTemplateRequest {
   /**
-   * 视频内容分析模板唯一标识。
+   * 音视频内容分析模板唯一标识。
    */
   Definition: number
 
@@ -4825,11 +4825,11 @@ export interface DescribeAdaptiveDynamicStreamingTemplatesResponse {
 }
 
 /**
- * 小程序智能识别信息
+ * 小程序音视频审核信息
  */
 export interface MediaMiniProgramReviewInfo {
   /**
-   * 智能识别信息列表。
+   * 音视频审核信息列表。
    */
   MiniProgramReviewList: Array<MediaMiniProgramReviewInfoItem>
 }
@@ -5053,7 +5053,7 @@ export interface CreatePersonSampleResponse {
  */
 export interface CreateContentReviewTemplateResponse {
   /**
-   * 内容智能识别模板唯一标识。
+   * 音视频内容审核模板唯一标识。
    */
   Definition: number
 
@@ -5469,12 +5469,12 @@ export interface PoliticalOcrReviewTemplateInfo {
   Switch: string
 
   /**
-   * 判定涉嫌违规的分数阈值，当智能识别达到该分数以上，认为涉嫌违规，不填默认为 100 分。取值范围：0~100。
+   * 判定涉嫌违规的分数阈值，当审核达到该分数以上，认为涉嫌违规，不填默认为 100 分。取值范围：0~100。
    */
   BlockConfidence?: number
 
   /**
-   * 判定需人工复核是否违规的分数阈值，当智能识别达到该分数以上，认为需人工复核，不填默认为 75 分。取值范围：0~100。
+   * 判定需人工复核是否违规的分数阈值，当审核达到该分数以上，认为需人工复核，不填默认为 75 分。取值范围：0~100。
    */
   ReviewConfidence?: number
 }
@@ -5502,7 +5502,7 @@ export interface PornOcrReviewTemplateInfoForUpdate {
 }
 
 /**
- * 智能识别 Ocr 文字涉及令人反感的信息的任务结果类型
+ * 音视频审核 Ocr 文字涉及令人反感的信息的任务结果类型
  */
 export interface AiReviewTaskPornOcrResult {
   /**
@@ -5526,12 +5526,12 @@ export interface AiReviewTaskPornOcrResult {
   Message: string
 
   /**
-   * 智能识别 Ocr 文字涉及令人反感的信息的任务输入。
+   * 音视频审核 Ocr 文字涉及令人反感的信息的任务输入。
    */
   Input: AiReviewPornOcrTaskInput
 
   /**
-      * Ocr 文字智能识别涉及令人反感的信息的任务输出。
+      * Ocr 文字音视频审核涉及令人反感的信息的任务输出。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Output: AiReviewPornOcrTaskOutput
@@ -5624,23 +5624,23 @@ export interface SegmentConfigureInfoForUpdate {
 }
 
 /**
- * 用户自定义智能识别任务控制参数
+ * 用户自定义音视频审核任务控制参数
  */
 export interface UserDefineConfigureInfo {
   /**
-      * 用户自定义人物智能识别控制参数。
+      * 用户自定义人物音视频审核控制参数。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   FaceReviewInfo?: UserDefineFaceReviewTemplateInfo
 
   /**
-      * 用户自定义语音智能识别控制参数。
+      * 用户自定义语音音视频审核控制参数。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   AsrReviewInfo?: UserDefineAsrTextReviewTemplateInfo
 
   /**
-      * 用户自定义文本智能识别控制参数。
+      * 用户自定义文本音视频审核控制参数。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   OcrReviewInfo?: UserDefineOcrTextReviewTemplateInfo
@@ -5730,7 +5730,7 @@ export interface RestoreMediaTask {
 }
 
 /**
- * 智能识别 Ocr 文字涉及令人反感的信息的任务输入参数类型
+ * 音视频审核 Ocr 文字涉及令人反感的信息的任务输入参数类型
  */
 export interface AiReviewPornOcrTaskInput {
   /**
@@ -6198,17 +6198,17 @@ export interface ProcessMediaRequest {
   MediaProcessTask?: MediaProcessTaskInput
 
   /**
-   * 视频智能识别类型任务参数。
+   * 音视频内容审核类型任务参数。
    */
   AiContentReviewTask?: AiContentReviewTaskInput
 
   /**
-   * 视频内容分析类型任务参数。
+   * 音视频内容分析类型任务参数。
    */
   AiAnalysisTask?: AiAnalysisTaskInput
 
   /**
-   * 视频内容识别类型任务参数。
+   * 音视频内容识别类型任务参数。
    */
   AiRecognitionTask?: AiRecognitionTaskInput
 
@@ -6239,7 +6239,7 @@ export interface ProcessMediaRequest {
 }
 
 /**
- * 图片画面智能识别涉及令人反感的信息的任务结果类型
+ * 图片画面审核涉及令人反感的信息的任务结果类型
  */
 export interface PornImageResult {
   /**
@@ -6994,7 +6994,7 @@ export interface MediaDeleteItem {
 }
 
 /**
- * 图片画面智能识别涉及令人不适宜信息的任务结果类型
+ * 图片画面审核涉及令人不适宜信息的任务结果类型
  */
 export interface PoliticalImageResult {
   /**
@@ -7179,7 +7179,7 @@ export interface DescribeContentReviewTemplatesResponse {
   TotalCount: number
 
   /**
-   * 内容智能识别模板详情列表。
+   * 内容审核模板详情列表。
    */
   ContentReviewTemplateSet: Array<ContentReviewTemplateItem>
 
@@ -7206,7 +7206,7 @@ export interface TEHDConfig {
 }
 
 /**
- * 图片智能识别次数统计数据。
+ * 图片审核次数统计数据。
  */
 export interface ImageReviewUsageDataItem {
   /**
@@ -7337,12 +7337,12 @@ export interface TerrorismOcrReviewTemplateInfoForUpdate {
   Switch?: string
 
   /**
-   * 判定涉嫌违规的分数阈值，当智能识别达到该分数以上，认为涉嫌违规，不填默认为 100 分。取值范围：0~100。
+   * 判定涉嫌违规的分数阈值，当审核达到该分数以上，认为涉嫌违规，不填默认为 100 分。取值范围：0~100。
    */
   BlockConfidence?: number
 
   /**
-   * 判定需人工复核是否违规的分数阈值，当智能识别达到该分数以上，认为需人工复核，不填默认为 75 分。取值范围：0~100。
+   * 判定需人工复核是否违规的分数阈值，当审核达到该分数以上，认为需人工复核，不填默认为 75 分。取值范围：0~100。
    */
   ReviewConfidence?: number
 }
@@ -7594,7 +7594,7 @@ FINISH：已完成。
       * 微信小程序视频发布状态，取值：
 <li>Pass：发布成功；</li>
 <li>Failed：发布失败；</li>
-<li>Rejected：智能识别未通过。</li>
+<li>Rejected：音视频审核未通过。</li>
       */
   PublishResult: string
 }
@@ -8197,7 +8197,7 @@ export interface ConfirmEventsRequest {
  */
 export interface CreateAIRecognitionTemplateResponse {
   /**
-   * 视频内容识别模板唯一标识。
+   * 音视频内容识别模板唯一标识。
    */
   Definition: number
 
@@ -8544,7 +8544,7 @@ export interface DescribeAIAnalysisTemplatesRequest {
   SubAppId?: number
 
   /**
-   * 视频内容分析模板唯一标识过滤条件，数组长度最大值：100。
+   * 音视频内容分析模板唯一标识过滤条件，数组长度最大值：100。
    */
   Definitions?: Array<number>
 
@@ -8838,7 +8838,7 @@ export interface ProcedureTemplate {
   MediaProcessTask: MediaProcessTaskInput
 
   /**
-      * AI 智能识别类型任务参数。
+      * AI 智能审核类型任务参数。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   AiContentReviewTask: AiContentReviewTaskInput
@@ -8873,7 +8873,7 @@ export interface ProcedureTemplate {
 }
 
 /**
- * 智能识别涉及令人不安全的信息的任务结果类型
+ * 音视频审核涉及令人不安全的信息的任务结果类型
  */
 export interface AiReviewTaskTerrorismResult {
   /**
@@ -8897,12 +8897,12 @@ export interface AiReviewTaskTerrorismResult {
   Message: string
 
   /**
-   * 智能识别涉及令人不安全的信息的任务输入。
+   * 音视频审核涉及令人不安全的信息的任务输入。
    */
   Input: AiReviewTerrorismTaskInput
 
   /**
-      * 智能识别涉及令人不安全的信息的任务输出。
+      * 音视频审核涉及令人不安全的信息的任务输出。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Output: AiReviewTerrorismTaskOutput
@@ -8944,7 +8944,7 @@ export interface DescribeImageReviewUsageDataRequest {
 }
 
 /**
- * 智能识别 Asr 文字的嫌疑片段
+ * 音视频审核 Asr 文字的嫌疑片段
  */
 export interface MediaContentReviewAsrTextSegmentItem {
   /**
@@ -8963,7 +8963,7 @@ export interface MediaContentReviewAsrTextSegmentItem {
   Confidence: number
 
   /**
-      * 嫌疑片段智能识别的结果建议，取值范围：
+      * 嫌疑片段音视频审核的结果建议，取值范围：
 <li>pass。</li>
 <li>review。</li>
 <li>block。</li>
@@ -9035,7 +9035,7 @@ export interface DescribeCdnLogsResponse {
 }
 
 /**
- * 智能识别涉及令人不适宜信息的嫌疑片段
+ * 音视频审核涉及令人不适宜信息的嫌疑片段
  */
 export interface MediaContentReviewPoliticalSegmentItem {
   /**
@@ -9067,7 +9067,7 @@ export interface MediaContentReviewPoliticalSegmentItem {
   Name: string
 
   /**
-      * 嫌疑片段涉及令人不适宜的信息的结果标签。智能识别模板[画面涉及令人不适宜的信息的任务控制参数](https://cloud.tencent.com/document/api/266/31773#PoliticalImgReviewTemplateInfo)里 LabelSet 参数与此参数取值范围的对应关系：
+      * 嫌疑片段涉及令人不适宜的信息的结果标签。音视频审核模板[画面涉及令人不适宜的信息的任务控制参数](https://cloud.tencent.com/document/api/266/31773#PoliticalImgReviewTemplateInfo)里 LabelSet 参数与此参数取值范围的对应关系：
 violation_photo：
 <li>violation_photo：违规图标。</li>
 politician：
@@ -9146,7 +9146,7 @@ export interface CreateSnapshotByTimeOffsetTemplateResponse {
  */
 export interface ModifyContentReviewTemplateRequest {
   /**
-   * 内容智能识别模板唯一标识。
+   * 内容审核模板唯一标识。
    */
   Definition: number
 
@@ -9156,12 +9156,12 @@ export interface ModifyContentReviewTemplateRequest {
   SubAppId?: number
 
   /**
-   * 内容智能识别模板名称，长度限制：64 个字符。
+   * 内容审核模板名称，长度限制：64 个字符。
    */
   Name?: string
 
   /**
-   * 内容智能识别模板描述信息，长度限制：256 个字符。
+   * 内容审核模板描述信息，长度限制：256 个字符。
    */
   Comment?: string
 
@@ -9188,7 +9188,7 @@ export interface ModifyContentReviewTemplateRequest {
   ProhibitedConfigure?: ProhibitedConfigureInfoForUpdate
 
   /**
-   * 用户自定义内容智能识别控制参数。
+   * 用户自定义内容审核控制参数。
    */
   UserDefineConfigure?: UserDefineConfigureInfoForUpdate
 
@@ -9198,7 +9198,7 @@ export interface ModifyContentReviewTemplateRequest {
   ScreenshotInterval?: number
 
   /**
-      * 智能识别结果是否进入智能识别墙（对智能识别结果进行人工识别）的开关。
+      * 审核结果是否进入审核墙（对审核结果进行人工识别）的开关。
 <li>ON：是；</li>
 <li>OFF：否。</li>
       */
@@ -9216,11 +9216,11 @@ export interface AttachMediaSubtitlesResponse {
 }
 
 /**
- * 智能识别任务类型
+ * 音视频审核任务类型
  */
 export interface AiContentReviewTaskInput {
   /**
-   * 智能识别模板 ID。
+   * 音视频审核模板 ID。
    */
   Definition: number
 }
@@ -9755,7 +9755,7 @@ export interface MediaBasicInfo {
 }
 
 /**
- * 智能识别 Asr 文字涉及令人不适宜的信息、违规任务输入参数类型
+ * 音视频审核 Asr 文字涉及令人不适宜的信息、违规任务输入参数类型
  */
 export interface AiReviewPoliticalAsrTaskInput {
   /**
@@ -10002,18 +10002,18 @@ export interface PornOcrReviewTemplateInfo {
   Switch: string
 
   /**
-   * 判定涉嫌违规的分数阈值，当智能识别达到该分数以上，认为涉嫌违规，不填默认为 100 分。取值范围：0~100。
+   * 判定涉嫌违规的分数阈值，当审核达到该分数以上，认为涉嫌违规，不填默认为 100 分。取值范围：0~100。
    */
   BlockConfidence?: number
 
   /**
-   * 判定需人工复核是否违规的分数阈值，当智能识别达到该分数以上，认为需人工复核，不填默认为 75 分。取值范围：0~100。
+   * 判定需人工复核是否违规的分数阈值，当审核达到该分数以上，认为需人工复核，不填默认为 75 分。取值范围：0~100。
    */
   ReviewConfidence?: number
 }
 
 /**
- * 智能识别 Asr 文字涉及令人不适宜信息、违规任务结果类型
+ * 音视频审核 Asr 文字涉及令人不适宜信息、违规任务结果类型
  */
 export interface AiReviewTaskPoliticalAsrResult {
   /**
@@ -10037,12 +10037,12 @@ export interface AiReviewTaskPoliticalAsrResult {
   Message: string
 
   /**
-   * 智能识别 Asr 文字涉及令人不适宜信息的任务输入。
+   * 音视频审核 Asr 文字涉及令人不适宜信息的任务输入。
    */
   Input: AiReviewPoliticalAsrTaskInput
 
   /**
-   * 智能识别 Asr 文字涉及令人不适宜信息的任务输出。
+   * 音视频审核 Asr 文字涉及令人不适宜信息的任务输出。
    */
   Output: AiReviewPoliticalAsrTaskOutput
 }
@@ -10088,7 +10088,7 @@ export interface PornConfigureInfoForUpdate {
 }
 
 /**
- * 智能识别 Asr 文字鉴违禁任务输入参数类型
+ * 音视频审核 Asr 文字鉴违禁任务输入参数类型
  */
 export interface AiReviewProhibitedAsrTaskInput {
   /**
@@ -10098,7 +10098,7 @@ export interface AiReviewProhibitedAsrTaskInput {
 }
 
 /**
- * 智能识别涉及令人反感的信息、涉及令人不安全的信息的嫌疑片段
+ * 音视频审核涉及令人反感的信息、涉及令人不安全的信息的嫌疑片段
  */
 export interface MediaContentReviewSegmentItem {
   /**
@@ -10158,18 +10158,18 @@ export interface TerrorismOcrReviewTemplateInfo {
   Switch: string
 
   /**
-   * 判定涉嫌违规的分数阈值，当智能识别达到该分数以上，认为涉嫌违规，不填默认为 100 分。取值范围：0~100。
+   * 判定涉嫌违规的分数阈值，当审核达到该分数以上，认为涉嫌违规，不填默认为 100 分。取值范围：0~100。
    */
   BlockConfidence?: number
 
   /**
-   * 判定需人工复核是否违规的分数阈值，当智能识别达到该分数以上，认为需人工复核，不填默认为 75 分。取值范围：0~100。
+   * 判定需人工复核是否违规的分数阈值，当审核达到该分数以上，认为需人工复核，不填默认为 75 分。取值范围：0~100。
    */
   ReviewConfidence?: number
 }
 
 /**
- * 智能识别涉及令人反感的信息的任务结果类型
+ * 音视频审核涉及令人反感的信息的任务结果类型
  */
 export interface AiReviewTaskPornResult {
   /**
@@ -10193,12 +10193,12 @@ export interface AiReviewTaskPornResult {
   Message: string
 
   /**
-   * 智能识别涉及令人反感的信息的任务输入。
+   * 音视频审核涉及令人反感的信息的任务输入。
    */
   Input: AiReviewPornTaskInput
 
   /**
-      * 智能识别涉及令人反感的信息的任务输出。
+      * 音视频审核涉及令人反感的信息的任务输出。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Output: AiReviewPornTaskOutput
@@ -10409,7 +10409,7 @@ export interface PoliticalImgReviewTemplateInfoForUpdate {
   Switch?: string
 
   /**
-      * 画面鉴别涉及令人不适宜的信息的过滤标签，智能识别结果包含选择的标签则返回结果，如果过滤标签为空，则智能识别结果全部返回，可选值为：
+      * 画面鉴别涉及令人不适宜的信息的过滤标签，审核结果包含选择的标签则返回结果，如果过滤标签为空，则审核结果全部返回，可选值为：
 <li>violation_photo：违规图标；</li>
 <li>politician：相关人物；</li>
 <li>entertainment：娱乐人物；</li>
@@ -10422,40 +10422,40 @@ export interface PoliticalImgReviewTemplateInfoForUpdate {
   LabelSet?: Array<string>
 
   /**
-   * 判定涉嫌违规的分数阈值，当智能识别达到该分数以上，认为涉嫌违规。取值范围：0~100。
+   * 判定涉嫌违规的分数阈值，当审核达到该分数以上，认为涉嫌违规。取值范围：0~100。
    */
   BlockConfidence?: number
 
   /**
-   * 判定需人工复核是否违规的分数阈值，当智能识别达到该分数以上，认为需人工复核。取值范围：0~100。
+   * 判定需人工复核是否违规的分数阈值，当审核达到该分数以上，认为需人工复核。取值范围：0~100。
    */
   ReviewConfidence?: number
 }
 
 /**
- * 用户自定义文本智能识别任务控制参数
+ * 用户自定义文本音视频审核任务控制参数
  */
 export interface UserDefineOcrTextReviewTemplateInfo {
   /**
-      * 用户自定文本智能识别任务开关，可选值：
-<li>ON：开启自定义文本智能识别任务；</li>
-<li>OFF：关闭自定义文本智能识别任务。</li>
+      * 用户自定文本音视频审核任务开关，可选值：
+<li>ON：开启自定义文本音视频审核任务；</li>
+<li>OFF：关闭自定义文本音视频审核任务。</li>
       */
   Switch: string
 
   /**
-      * 用户自定义文本过滤标签，智能识别结果包含选择的标签则返回结果，如果过滤标签为空，则智能识别结果全部返回。如果要使用标签过滤功能，添加自定义文本关键词素材时需要添加对应标签。
+      * 用户自定义文本过滤标签，音视频审核结果包含选择的标签则返回结果，如果过滤标签为空，则音视频审核结果全部返回。如果要使用标签过滤功能，添加自定义文本关键词素材时需要添加对应标签。
 标签个数最多 10 个，每个标签长度最多 16 个字符。
       */
   LabelSet?: Array<string>
 
   /**
-   * 判定涉嫌违规的分数阈值，当智能识别达到该分数以上，认为涉嫌违规，不填默认为 100 分。取值范围：0~100。
+   * 判定涉嫌违规的分数阈值，当审核达到该分数以上，认为涉嫌违规，不填默认为 100 分。取值范围：0~100。
    */
   BlockConfidence?: number
 
   /**
-   * 判定需人工复核是否违规的分数阈值，当智能识别达到该分数以上，认为需人工复核，不填默认为 75 分。取值范围：0~100。
+   * 判定需人工复核是否违规的分数阈值，当审核达到该分数以上，认为需人工复核，不填默认为 75 分。取值范围：0~100。
    */
   ReviewConfidence?: number
 }
@@ -10566,7 +10566,7 @@ export interface TranscodeTaskInput {
  */
 export interface ModifyAIRecognitionTemplateRequest {
   /**
-   * 视频内容识别模板唯一标识。
+   * 音视频内容识别模板唯一标识。
    */
   Definition: number
 
@@ -10576,12 +10576,12 @@ export interface ModifyAIRecognitionTemplateRequest {
   SubAppId?: number
 
   /**
-   * 视频内容识别模板名称，长度限制：64 个字符。
+   * 音视频内容识别模板名称，长度限制：64 个字符。
    */
   Name?: string
 
   /**
-   * 视频内容识别模板描述信息，长度限制：256 个字符。
+   * 音视频内容识别模板描述信息，长度限制：256 个字符。
    */
   Comment?: string
 
@@ -10828,7 +10828,7 @@ export interface AiRecognitionTaskOcrFullTextResultInput {
  */
 export interface DescribeImageReviewUsageDataResponse {
   /**
-   * 图片智能识别次数统计数据，展示查询时间范围内的图片智能识别次数的概览数据。
+   * 图片审核次数统计数据，展示查询时间范围内的图片审核次数的概览数据。
    */
   ImageReviewUsageDataSet: Array<ImageReviewUsageDataItem>
 
@@ -10940,12 +10940,12 @@ export interface ProhibitedAsrReviewTemplateInfo {
   Switch: string
 
   /**
-   * 判定涉嫌违规的分数阈值，当智能识别达到该分数以上，认为涉嫌违规，不填默认为 100 分。取值范围：0~100。
+   * 判定涉嫌违规的分数阈值，当审核达到该分数以上，认为涉嫌违规，不填默认为 100 分。取值范围：0~100。
    */
   BlockConfidence?: number
 
   /**
-   * 判定需人工复核是否违规的分数阈值，当智能识别达到该分数以上，认为需人工复核，不填默认为 75 分。取值范围：0~100。
+   * 判定需人工复核是否违规的分数阈值，当审核达到该分数以上，认为需人工复核，不填默认为 75 分。取值范围：0~100。
    */
   ReviewConfidence?: number
 }
@@ -10970,7 +10970,7 @@ export interface PushUrlCacheRequest {
  */
 export interface CreateAIAnalysisTemplateResponse {
   /**
-   * 视频内容分析模板唯一标识。
+   * 音视频内容分析模板唯一标识。
    */
   Definition: number
 
@@ -11161,21 +11161,21 @@ export interface AiRecognitionTaskObjectResult {
 }
 
 /**
- * 用户自定义智能识别任务控制参数。
+ * 用户自定义音视频审核任务控制参数。
  */
 export interface UserDefineConfigureInfoForUpdate {
   /**
-   * 用户自定义人物智能识别控制参数。
+   * 用户自定义人物音视频审核控制参数。
    */
   FaceReviewInfo?: UserDefineFaceReviewTemplateInfoForUpdate
 
   /**
-   * 用户自定义语音智能识别控制参数。
+   * 用户自定义语音音视频审核控制参数。
    */
   AsrReviewInfo?: UserDefineAsrTextReviewTemplateInfoForUpdate
 
   /**
-   * 用户自定义文本智能识别控制参数。
+   * 用户自定义文本音视频审核控制参数。
    */
   OcrReviewInfo?: UserDefineOcrTextReviewTemplateInfoForUpdate
 }
@@ -11433,7 +11433,7 @@ export interface AsrFullTextConfigureInfo {
 }
 
 /**
- * 图片画面智能识别涉及令人不安全的信息的任务结果类型
+ * 图片画面审核涉及令人不安全的信息的任务结果类型
  */
 export interface TerrorismImageResult {
   /**
@@ -11487,12 +11487,12 @@ export interface CreateAIRecognitionTemplateRequest {
   SubAppId?: number
 
   /**
-   * 视频内容识别模板名称，长度限制：64 个字符。
+   * 音视频内容识别模板名称，长度限制：64 个字符。
    */
   Name?: string
 
   /**
-   * 视频内容识别模板描述信息，长度限制：256 个字符。
+   * 音视频内容识别模板描述信息，长度限制：256 个字符。
    */
   Comment?: string
 
@@ -11737,7 +11737,7 @@ export interface PoliticalImgReviewTemplateInfo {
   Switch: string
 
   /**
-      * 画面鉴别涉及令人不适宜的信息的过滤标签，智能识别结果包含选择的标签则返回结果，如果过滤标签为空，则智能识别结果全部返回，可选值为：
+      * 画面鉴别涉及令人不适宜的信息的过滤标签，审核结果包含选择的标签则返回结果，如果过滤标签为空，则审核结果全部返回，可选值为：
 <li>violation_photo：违规图标；</li>
 <li>politician：相关人物；</li>
 <li>entertainment：娱乐人物；</li>
@@ -11750,12 +11750,12 @@ export interface PoliticalImgReviewTemplateInfo {
   LabelSet?: Array<string>
 
   /**
-   * 判定涉嫌违规的分数阈值，当智能识别达到该分数以上，认为涉嫌违规，不填默认为 97 分。取值范围：0~100。
+   * 判定涉嫌违规的分数阈值，当审核达到该分数以上，认为涉嫌违规，不填默认为 97 分。取值范围：0~100。
    */
   BlockConfidence?: number
 
   /**
-   * 判定需人工复核是否违规的分数阈值，当智能识别达到该分数以上，认为需人工复核，不填默认为 95 分。取值范围：0~100。
+   * 判定需人工复核是否违规的分数阈值，当审核达到该分数以上，认为需人工复核，不填默认为 95 分。取值范围：0~100。
    */
   ReviewConfidence?: number
 }
@@ -12019,12 +12019,12 @@ export interface ProhibitedOcrReviewTemplateInfo {
   Switch: string
 
   /**
-   * 判定涉嫌违规的分数阈值，当智能识别达到该分数以上，认为涉嫌违规，不填默认为 100 分。取值范围：0~100。
+   * 判定涉嫌违规的分数阈值，当审核达到该分数以上，认为涉嫌违规，不填默认为 100 分。取值范围：0~100。
    */
   BlockConfidence?: number
 
   /**
-   * 判定需人工复核是否违规的分数阈值，当智能识别达到该分数以上，认为需人工复核，不填默认为 75 分。取值范围：0~100。
+   * 判定需人工复核是否违规的分数阈值，当审核达到该分数以上，认为需人工复核，不填默认为 75 分。取值范围：0~100。
    */
   ReviewConfidence?: number
 }
@@ -12295,7 +12295,7 @@ export interface VideoTemplateInfoForUpdate {
  */
 export interface CreateContentReviewTemplateRequest {
   /**
-      * 智能识别结果是否进入智能识别墙（对识别结果进行人工复核）的开关。
+      * 音视频审核结果是否进入音视频审核墙（对识别结果进行人工复核）的开关。
 <li>ON：是；</li>
 <li>OFF：否。</li>
       */
@@ -12307,12 +12307,12 @@ export interface CreateContentReviewTemplateRequest {
   SubAppId?: number
 
   /**
-   * 内容智能识别模板名称，长度限制：64 个字符。
+   * 内容审核模板名称，长度限制：64 个字符。
    */
   Name?: string
 
   /**
-   * 内容智能识别模板描述信息，长度限制：256 个字符。
+   * 内容审核模板描述信息，长度限制：256 个字符。
    */
   Comment?: string
 
@@ -12339,7 +12339,7 @@ export interface CreateContentReviewTemplateRequest {
   ProhibitedConfigure?: ProhibitedConfigureInfo
 
   /**
-   * 用户自定义内容智能识别控制参数。
+   * 用户自定义内容审核控制参数。
    */
   UserDefineConfigure?: UserDefineConfigureInfo
 
@@ -12359,7 +12359,7 @@ export interface DescribeContentReviewTemplatesRequest {
   SubAppId?: number
 
   /**
-   * 内容智能识别模板唯一标识过滤条件，数组长度限制：100。
+   * 内容审核模板唯一标识过滤条件，数组长度限制：100。
    */
   Definitions?: Array<number>
 
@@ -12669,29 +12669,29 @@ export interface AiSampleFailFaceInfo {
 }
 
 /**
- * 用户自定义人物智能识别任务控制参数。
+ * 用户自定义人物音视频审核任务控制参数。
  */
 export interface UserDefineFaceReviewTemplateInfoForUpdate {
   /**
-      * 用户自定义人物智能识别任务开关，可选值：
-<li>ON：开启自定义人物智能识别任务；</li>
-<li>OFF：关闭自定义人物智能识别任务。</li>
+      * 用户自定义人物音视频审核任务开关，可选值：
+<li>ON：开启自定义人物音视频审核任务；</li>
+<li>OFF：关闭自定义人物音视频审核任务。</li>
       */
   Switch?: string
 
   /**
-      * 用户自定义人物过滤标签，智能识别结果包含选择的标签则返回结果，如果过滤标签为空，则智能识别结果全部返回。如果要使用标签过滤功能，添加自定义人物库的时，需要添加对应人物标签。
+      * 用户自定义人物过滤标签，音视频审核结果包含选择的标签则返回结果，如果过滤标签为空，则音视频审核结果全部返回。如果要使用标签过滤功能，添加自定义人物库的时，需要添加对应人物标签。
 标签个数最多 10 个，每个标签长度最多 16 个字符。
       */
   LabelSet?: Array<string>
 
   /**
-   * 判定涉嫌违规的分数阈值，当智能识别达到该分数以上，认为涉嫌违规。取值范围：0~100。
+   * 判定涉嫌违规的分数阈值，当音视频审核达到该分数以上，认为涉嫌违规。取值范围：0~100。
    */
   BlockConfidence?: number
 
   /**
-   * 判定需人工复核是否违规的分数阈值，当智能识别达到该分数以上，认为需人工复核。取值范围：0~100。
+   * 判定需人工复核是否违规的分数阈值，当音视频审核达到该分数以上，认为需人工复核。取值范围：0~100。
    */
   ReviewConfidence?: number
 }
@@ -12948,7 +12948,7 @@ export interface AiReviewPoliticalTaskOutput {
   Suggestion: string
 
   /**
-      * 视频涉及令人不适宜信息的结果标签。智能识别模板[画面鉴政任务控制参数](https://cloud.tencent.com/document/api/266/31773#PoliticalImgReviewTemplateInfo)里 LabelSet 参数与此参数取值范围的对应关系：
+      * 视频涉及令人不适宜信息的结果标签。音视频审核模板[画面鉴政任务控制参数](https://cloud.tencent.com/document/api/266/31773#PoliticalImgReviewTemplateInfo)里 LabelSet 参数与此参数取值范围的对应关系：
 violation_photo：
 <li>violation_photo：违规图标。</li>
 其他（即 politician/entertainment/sport/entrepreneur/scholar/celebrity/military）：
@@ -12974,7 +12974,7 @@ violation_photo：
 }
 
 /**
- * 智能识别涉及令人不适宜信息的任务结果类型
+ * 音视频审核涉及令人不适宜信息的任务结果类型
  */
 export interface AiReviewTaskPoliticalResult {
   /**
@@ -12998,12 +12998,12 @@ export interface AiReviewTaskPoliticalResult {
   Message: string
 
   /**
-   * 智能识别涉及令人不适宜信息的任务输入。
+   * 音视频审核涉及令人不适宜信息的任务输入。
    */
   Input: AiReviewPoliticalTaskInput
 
   /**
-      * 智能识别涉及令人不适宜信息的任务输出。
+      * 音视频审核涉及令人不适宜信息的任务输出。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Output: AiReviewPoliticalTaskOutput
@@ -13014,7 +13014,7 @@ export interface AiReviewTaskPoliticalResult {
  */
 export interface ReviewImageResponse {
   /**
-   * 图片智能识别任务结果。
+   * 图片审核任务结果。
    */
   ReviewResultSet: Array<ContentReviewResult>
 
@@ -13108,11 +13108,11 @@ export interface ModifySnapshotByTimeOffsetTemplateRequest {
 }
 
 /**
- * 视频处理任务信息
+ * 音视频处理任务信息
  */
 export interface ProcedureTask {
   /**
-   * 视频处理任务 ID。
+   * 音视频处理任务 ID。
    */
   TaskId: string
 
@@ -13155,28 +13155,28 @@ export interface ProcedureTask {
   FileUrl: string
 
   /**
-      * 原始视频的元信息。
+      * 原始音视频的元信息。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   MetaData: MediaMetaData
 
   /**
-   * 视频处理任务的执行状态与结果。
+   * 音视频处理任务的执行状态与结果。
    */
   MediaProcessResultSet: Array<MediaProcessTaskResult>
 
   /**
-   * 视频智能识别任务的执行状态与结果。
+   * 音视频审核任务的执行状态与结果。
    */
   AiContentReviewResultSet: Array<AiContentReviewResult>
 
   /**
-   * 视频内容分析任务的执行状态与结果。
+   * 音视频内容分析任务的执行状态与结果。
    */
   AiAnalysisResultSet: Array<AiAnalysisResult>
 
   /**
-   * 视频内容识别任务的执行状态与结果。
+   * 音视频内容识别任务的执行状态与结果。
    */
   AiRecognitionResultSet: Array<AiRecognitionResult>
 
@@ -13488,12 +13488,12 @@ export interface ProhibitedOcrReviewTemplateInfoForUpdate {
   Switch?: string
 
   /**
-   * 判定涉嫌违规的分数阈值，当智能识别达到该分数以上，认为涉嫌违规，不填默认为 100 分。取值范围：0~100。
+   * 判定涉嫌违规的分数阈值，当审核达到该分数以上，认为涉嫌违规，不填默认为 100 分。取值范围：0~100。
    */
   BlockConfidence?: number
 
   /**
-   * 判定需人工复核是否违规的分数阈值，当智能识别达到该分数以上，认为需人工复核，不填默认为 75 分。取值范围：0~100。
+   * 判定需人工复核是否违规的分数阈值，当审核达到该分数以上，认为需人工复核，不填默认为 75 分。取值范围：0~100。
    */
   ReviewConfidence?: number
 }
@@ -13653,12 +13653,12 @@ export interface CreateAIAnalysisTemplateRequest {
   SubAppId?: number
 
   /**
-   * 视频内容分析模板名称，长度限制：64 个字符。
+   * 音视频内容分析模板名称，长度限制：64 个字符。
    */
   Name?: string
 
   /**
-   * 视频内容分析模板描述信息，长度限制：256 个字符。
+   * 音视频内容分析模板描述信息，长度限制：256 个字符。
    */
   Comment?: string
 
@@ -13689,7 +13689,7 @@ export interface CreateAIAnalysisTemplateRequest {
 }
 
 /**
- * 智能识别涉及令人不安全的信息的任务输入参数类型
+ * 音视频审核涉及令人不安全的信息的任务输入参数类型
  */
 export interface AiReviewTerrorismTaskInput {
   /**
@@ -13844,7 +13844,7 @@ export interface ModifyImageSpriteTemplateRequest {
 }
 
 /**
- * 智能识别 Ocr 文字鉴违禁任务输入参数类型
+ * 音视频审核 Ocr 文字鉴违禁任务输入参数类型
  */
 export interface AiReviewProhibitedOcrTaskInput {
   /**
@@ -13973,7 +13973,7 @@ export interface ImageCenterCut {
  */
 export interface ModifyAIAnalysisTemplateRequest {
   /**
-   * 视频内容分析模板唯一标识。
+   * 音视频内容分析模板唯一标识。
    */
   Definition: number
 
@@ -13983,12 +13983,12 @@ export interface ModifyAIAnalysisTemplateRequest {
   SubAppId?: number
 
   /**
-   * 视频内容分析模板名称，长度限制：64 个字符。
+   * 音视频内容分析模板名称，长度限制：64 个字符。
    */
   Name?: string
 
   /**
-   * 视频内容分析模板描述信息，长度限制：256 个字符。
+   * 音视频内容分析模板描述信息，长度限制：256 个字符。
    */
   Comment?: string
 
@@ -14074,7 +14074,7 @@ export interface ModifyWordSampleResponse {
 }
 
 /**
- * 智能识别结果
+ * 音视频审核结果
  */
 export interface AiContentReviewResult {
   /**
@@ -14093,61 +14093,61 @@ export interface AiContentReviewResult {
   Type: string
 
   /**
-      * 视频智能识别任务（画面涉及令人反感的信息）的查询结果，当任务类型为 Porn 时有效。
+      * 视频音视频审核任务（画面涉及令人反感的信息）的查询结果，当任务类型为 Porn 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   PornTask: AiReviewTaskPornResult
 
   /**
-      * 视频智能识别任务（画面涉及令人不安全的信息）的查询结果，当任务类型为 Terrorism 时有效。
+      * 视频音视频审核任务（画面涉及令人不安全的信息）的查询结果，当任务类型为 Terrorism 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   TerrorismTask: AiReviewTaskTerrorismResult
 
   /**
-      * 视频智能识别任务（画面涉及令人不适宜的信息）的查询结果，当任务类型为 Political 时有效。
+      * 视频音视频审核任务（画面涉及令人不适宜的信息）的查询结果，当任务类型为 Political 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   PoliticalTask: AiReviewTaskPoliticalResult
 
   /**
-      * 视频智能识别任务（Asr 文字涉及令人反感的信息）的查询结果，当任务类型为 Porn.Asr 时有效。
+      * 视频音视频审核任务（Asr 文字涉及令人反感的信息）的查询结果，当任务类型为 Porn.Asr 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   PornAsrTask: AiReviewTaskPornAsrResult
 
   /**
-      * 视频智能识别任务（Ocr 文字涉及令人反感的信息）的查询结果，当任务类型为 Porn.Ocr 时有效。
+      * 视频音视频审核任务（Ocr 文字涉及令人反感的信息）的查询结果，当任务类型为 Porn.Ocr 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   PornOcrTask: AiReviewTaskPornOcrResult
 
   /**
-      * 视频智能识别任务（Asr 文字涉及令人不适宜的信息）的查询结果，当任务类型为 Political.Asr 时有效。
+      * 视频音视频审核任务（Asr 文字涉及令人不适宜的信息）的查询结果，当任务类型为 Political.Asr 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   PoliticalAsrTask: AiReviewTaskPoliticalAsrResult
 
   /**
-      * 视频智能识别任务（Ocr 文字涉及令人不适宜的信息）的查询结果，当任务类型为 Political.Ocr 时有效。
+      * 视频音视频审核任务（Ocr 文字涉及令人不适宜的信息）的查询结果，当任务类型为 Political.Ocr 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   PoliticalOcrTask: AiReviewTaskPoliticalOcrResult
 
   /**
-      * 视频智能识别任务（ Ocr 文字涉及令人不安全的信息）的查询结果，当任务类型为 Terrorism.Ocr 时有效。
+      * 视频音视频审核任务（ Ocr 文字涉及令人不安全的信息）的查询结果，当任务类型为 Terrorism.Ocr 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   TerrorismOcrTask: AiReviewTaskTerrorismOcrResult
 
   /**
-      * 视频智能识别 Ocr 文字鉴违禁任务的查询结果，当任务类型为 Prohibited.Ocr 时有效。
+      * 视频音视频审核 Ocr 文字鉴违禁任务的查询结果，当任务类型为 Prohibited.Ocr 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ProhibitedOcrTask: AiReviewTaskProhibitedOcrResult
 
   /**
-      * 视频智能识别 Asr 文字鉴违禁任务的查询结果，当任务类型为 Prohibited.Asr 时有效。
+      * 视频音视频审核 Asr 文字鉴违禁任务的查询结果，当任务类型为 Prohibited.Asr 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ProhibitedAsrTask: AiReviewTaskProhibitedAsrResult
@@ -14165,7 +14165,7 @@ export interface TerrorismImgReviewTemplateInfo {
   Switch: string
 
   /**
-      * 画面鉴别涉及令人不安全的信息的过滤标签，智能识别结果包含选择的标签则返回结果，如果过滤标签为空，则智能识别结果全部返回，可选值为：
+      * 画面鉴别涉及令人不安全的信息的过滤标签，审核结果包含选择的标签则返回结果，如果过滤标签为空，则审核结果全部返回，可选值为：
 <li>guns：武器枪支；</li>
 <li>crowd：人群聚集；</li>
 <li>bloody：血腥画面；</li>
@@ -14179,12 +14179,12 @@ export interface TerrorismImgReviewTemplateInfo {
   LabelSet?: Array<string>
 
   /**
-   * 判定涉嫌违规的分数阈值，当智能识别达到该分数以上，认为涉嫌违规，不填默认为 90 分。取值范围：0~100。
+   * 判定涉嫌违规的分数阈值，当审核达到该分数以上，认为涉嫌违规，不填默认为 90 分。取值范围：0~100。
    */
   BlockConfidence?: number
 
   /**
-   * 判定需人工复核是否违规的分数阈值，当智能识别达到该分数以上，认为需人工复核，不填默认为 80 分。取值范围：0~100。
+   * 判定需人工复核是否违规的分数阈值，当审核达到该分数以上，认为需人工复核，不填默认为 80 分。取值范围：0~100。
    */
   ReviewConfidence?: number
 }
@@ -14271,29 +14271,29 @@ export interface DescribeTranscodeTemplatesRequest {
 }
 
 /**
- * 用户自定义语音智能识别任务控制参数
+ * 用户自定义语音审核任务控制参数
  */
 export interface UserDefineAsrTextReviewTemplateInfoForUpdate {
   /**
-      * 用户自定语音智能识别任务开关，可选值：
-<li>ON：开启自定义语音智能识别任务；</li>
-<li>OFF：关闭自定义语音智能识别任务。</li>
+      * 用户自定语音审核任务开关，可选值：
+<li>ON：开启自定义语音审核任务；</li>
+<li>OFF：关闭自定义语音审核任务。</li>
       */
   Switch?: string
 
   /**
-      * 用户自定义语音过滤标签，智能识别结果包含选择的标签则返回结果，如果过滤标签为空，则智能识别结果全部返回。如果要使用标签过滤功能，添加自定义语音关键词素材时需要添加对应标签。
+      * 用户自定义语音过滤标签，审核结果包含选择的标签则返回结果，如果过滤标签为空，则审核结果全部返回。如果要使用标签过滤功能，添加自定义语音关键词素材时需要添加对应标签。
 标签个数最多 10 个，每个标签长度最多 16 个字符。
       */
   LabelSet?: Array<string>
 
   /**
-   * 判定涉嫌违规的分数阈值，当智能识别达到该分数以上，认为涉嫌违规。取值范围：0~100。
+   * 判定涉嫌违规的分数阈值，当审核达到该分数以上，认为涉嫌违规。取值范围：0~100。
    */
   BlockConfidence?: number
 
   /**
-   * 判定需人工复核是否违规的分数阈值，当智能识别达到该分数以上，认为需人工复核。取值范围：0~100。
+   * 判定需人工复核是否违规的分数阈值，当审核达到该分数以上，认为需人工复核。取值范围：0~100。
    */
   ReviewConfidence?: number
 }
@@ -14912,7 +14912,7 @@ export interface DescribeAIAnalysisTemplatesResponse {
   TotalCount: number
 
   /**
-   * 视频内容分析模板详情列表。
+   * 音视频内容分析模板详情列表。
    */
   AIAnalysisTemplateSet: Array<AIAnalysisTemplateItem>
 
@@ -15315,7 +15315,7 @@ export interface CreateSampleSnapshotTemplateRequest {
 }
 
 /**
- * 智能识别 Ocr 文字的嫌疑片段
+ * 音视频审核 Ocr 文字的嫌疑片段
  */
 export interface MediaContentReviewOcrTextSegmentItem {
   /**
@@ -15334,7 +15334,7 @@ export interface MediaContentReviewOcrTextSegmentItem {
   Confidence: number
 
   /**
-      * 嫌疑片段智能识别的结果建议，取值范围：
+      * 嫌疑片段音视频审核的结果建议，取值范围：
 <li>pass。</li>
 <li>review。</li>
 <li>block。</li>
@@ -15386,7 +15386,7 @@ export interface AudioVolumeParam {
 }
 
 /**
- * 智能识别 Asr 文字涉及令人反感的信息的任务结果类型
+ * 音视频审核 Asr 文字涉及令人反感的信息的任务结果类型
  */
 export interface AiReviewTaskPornAsrResult {
   /**
@@ -15410,12 +15410,12 @@ export interface AiReviewTaskPornAsrResult {
   Message: string
 
   /**
-   * 智能识别 Asr 文字涉及令人反感的信息的任务输入。
+   * 音视频审核 Asr 文字涉及令人反感的信息的任务输入。
    */
   Input: AiReviewPornAsrTaskInput
 
   /**
-      * 智能识别 Asr 文字涉及令人反感的信息的任务输出。
+      * 音视频审核 Asr 文字涉及令人反感的信息的任务输出。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Output: AiReviewPornAsrTaskOutput
@@ -15564,7 +15564,7 @@ export interface PornImgReviewTemplateInfoForUpdate {
   Switch?: string
 
   /**
-      * 画面鉴别涉及令人反感的信息的过滤标签，智能识别结果包含选择的标签则返回结果，如果过滤标签为空，则智能识别结果全部返回，可选值为：
+      * 画面鉴别涉及令人反感的信息的过滤标签，审核结果包含选择的标签则返回结果，如果过滤标签为空，则审核结果全部返回，可选值为：
 <li>porn：色情；</li>
 <li>vulgar：低俗；</li>
 <li>intimacy：亲密行为；</li>
@@ -15573,12 +15573,12 @@ export interface PornImgReviewTemplateInfoForUpdate {
   LabelSet?: Array<string>
 
   /**
-   * 判定涉嫌违规的分数阈值，当智能识别达到该分数以上，认为涉嫌违规。取值范围：0~100。
+   * 判定涉嫌违规的分数阈值，当审核达到该分数以上，认为涉嫌违规。取值范围：0~100。
    */
   BlockConfidence?: number
 
   /**
-   * 判定需人工复核是否违规的分数阈值，当智能识别达到该分数以上，认为需人工复核。取值范围：0~100。
+   * 判定需人工复核是否违规的分数阈值，当审核达到该分数以上，认为需人工复核。取值范围：0~100。
    */
   ReviewConfidence?: number
 }
@@ -15667,7 +15667,7 @@ export interface PornImgReviewTemplateInfo {
   Switch: string
 
   /**
-      * 画面鉴别涉及令人反感的信息的过滤标签，智能识别结果包含选择的标签则返回结果，如果过滤标签为空，则智能识别结果全部返回，可选值为：
+      * 画面鉴别涉及令人反感的信息的过滤标签，审核结果包含选择的标签则返回结果，如果过滤标签为空，则审核结果全部返回，可选值为：
 <li>porn：色情；</li>
 <li>vulgar：低俗；</li>
 <li>intimacy：亲密行为；</li>
@@ -15676,12 +15676,12 @@ export interface PornImgReviewTemplateInfo {
   LabelSet?: Array<string>
 
   /**
-   * 判定涉嫌违规的分数阈值，当智能识别达到该分数以上，认为涉嫌违规，不填默认为 90 分。取值范围：0~100。
+   * 判定涉嫌违规的分数阈值，当审核达到该分数以上，认为涉嫌违规，不填默认为 90 分。取值范围：0~100。
    */
   BlockConfidence?: number
 
   /**
-   * 判定需人工复核是否违规的分数阈值，当智能识别达到该分数以上，认为需人工复核，不填默认为 0 分。取值范围：0~100。
+   * 判定需人工复核是否违规的分数阈值，当审核达到该分数以上，认为需人工复核，不填默认为 0 分。取值范围：0~100。
    */
   ReviewConfidence?: number
 }
@@ -15960,7 +15960,7 @@ export interface ReviewImageRequest {
   FileId: string
 
   /**
-   * 图片智能识别模板 ID，当前固定填 10。
+   * 图片审核模板 ID，当前固定填 10。
    */
   Definition: number
 
@@ -16019,12 +16019,12 @@ export interface PoliticalAsrReviewTemplateInfo {
   Switch: string
 
   /**
-   * 判定需人工复核是否违规的分数阈值，当智能识别达到该分数以上，认为需人工复核，不填默认为 75 分。取值范围：0~100。
+   * 判定需人工复核是否违规的分数阈值，当音视频审核达到该分数以上，认为需人工复核，不填默认为 75 分。取值范围：0~100。
    */
   ReviewConfidence?: number
 
   /**
-   * 判定涉嫌违规的分数阈值，当智能识别达到该分数以上，认为涉嫌违规，不填默认为 100 分。取值范围：0~100。
+   * 判定涉嫌违规的分数阈值，当音视频审核达到该分数以上，认为涉嫌违规，不填默认为 100 分。取值范围：0~100。
    */
   BlockConfidence?: number
 }
@@ -16648,7 +16648,7 @@ export interface DescribeAIRecognitionTemplatesRequest {
   SubAppId?: number
 
   /**
-   * 视频内容识别模板唯一标识过滤条件，数组长度限制：100。
+   * 音视频内容识别模板唯一标识过滤条件，数组长度限制：100。
    */
   Definitions?: Array<number>
 

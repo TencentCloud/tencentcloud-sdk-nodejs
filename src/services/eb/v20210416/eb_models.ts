@@ -36,6 +36,41 @@ export interface ListConnectionsResponse {
 }
 
 /**
+ * 描述Es规则目标
+ */
+export interface ESTargetParams {
+  /**
+   * 网络连接类型
+   */
+  NetMode: string
+
+  /**
+   * 索引前缀
+   */
+  IndexPrefix: string
+
+  /**
+   * es日志轮换粒度
+   */
+  RotationInterval: string
+
+  /**
+   * DTS事件配置
+   */
+  OutputMode: string
+
+  /**
+   * DTS索引配置
+   */
+  IndexSuffixMode: string
+
+  /**
+   * es模版类型
+   */
+  IndexTemplateType?: string
+}
+
+/**
  * GetEventBus返回参数结构体
  */
 export interface GetEventBusResponse {
@@ -1225,6 +1260,11 @@ export interface TargetDescription {
    * Ckafka参数
    */
   CkafkaTargetParams?: CkafkaTargetParams
+
+  /**
+   * ElasticSearch参数
+   */
+  ESTargetParams?: ESTargetParams
 }
 
 /**

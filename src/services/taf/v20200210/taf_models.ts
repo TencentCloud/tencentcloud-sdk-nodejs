@@ -76,21 +76,6 @@ export interface RecognizeEffectiveFlowRequest {
 }
 
 /**
- * EnhanceTaDegree请求参数结构体
- */
-export interface EnhanceTaDegreeRequest {
-  /**
-   * 业务数据
-   */
-  BspData: InputTaBspData
-
-  /**
-   * 业务加密数据
-   */
-  BusinessEncryptData?: InputBusinessEncryptData
-}
-
-/**
  * 流量反欺诈-验准返回的查询分值
  */
 export interface OutputRecognizeTargetAudienceValue {
@@ -185,154 +170,18 @@ export interface OutputKolValue {
 }
 
 /**
- * EnhanceTaDegree返回参数结构体
+ * RecognizeTargetAudience请求参数结构体
  */
-export interface EnhanceTaDegreeResponse {
+export interface RecognizeTargetAudienceRequest {
   /**
-      * 回包数据
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Data: OutputTaData
+   * 业务数据
+   */
+  BspData: InputRecognizeTargetAudience
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 业务加密数据
    */
-  RequestId?: string
-}
-
-/**
- * 流量反欺诈-虚假TA识别
- */
-export interface InputTaBspData {
-  /**
-   * 请求序列号
-   */
-  Seq: number
-
-  /**
-   * 操作系统类型[0：未知；1：android；2：ios；3：windows]
-   */
-  OsType: string
-
-  /**
-   * 年龄下限
-   */
-  AgeFloor: number
-
-  /**
-   * 年龄上限
-   */
-  AgeCeil: number
-
-  /**
-   * 性别[1：男；2：女]
-   */
-  Gender: number
-
-  /**
-   * 用户操作时间,uinux时间戳，精确到秒
-   */
-  UserTime?: number
-
-  /**
-   * Imei [在(Imei|ImeiMd5|Idfa|IdfaMd5)里面4选1]
-   */
-  Imei?: string
-
-  /**
-   * Imei小写后加密Md5 [在(Imei|ImeiMd5|Idfa|IdfaMd5)里面4选1]
-   */
-  ImeiMd5?: string
-
-  /**
-   * Idfa [在(Imei|ImeiMd5|Idfa|IdfaMd5)里面4选1]
-   */
-  Idfa?: string
-
-  /**
-   * Idfa大写后加密Md5 [在(Imei|ImeiMd5|Idfa|IdfaMd5)里面4选1]
-   */
-  IdfaMd5?: string
-
-  /**
-   * 用户IP
-   */
-  UserIp?: string
-
-  /**
-   * MAC地址[建议提供]
-   */
-  Mac?: string
-
-  /**
-   * 手机号码[中国大陆]
-   */
-  PhoneNum?: string
-
-  /**
-   * 浏览器
-   */
-  UserAgent?: string
-
-  /**
-   * APP名称
-   */
-  App?: string
-
-  /**
-   * 应用安装包名称
-   */
-  Package?: string
-
-  /**
-   * 设备制造商
-   */
-  DeviceMaker?: string
-
-  /**
-   * 设备型号
-   */
-  DeviceModule?: string
-
-  /**
-   * 入网方式[1：WIFI；2：4G；3：3G；4：2G；5：其它]
-   */
-  AccessMode?: string
-
-  /**
-   * 运营商[1：移动；2：联通；3：电信；4：其它]
-   */
-  Sp?: string
-
-  /**
-   * 网址
-   */
-  Url?: string
-
-  /**
-   * 用户地址
-   */
-  Location?: string
-
-  /**
-   * 纬度
-   */
-  Latitude?: string
-
-  /**
-   * 精度
-   */
-  Longitude?: string
-
-  /**
-   * 辅助区分信息
-   */
-  Context?: string
-
-  /**
-   * 是否授权
-   */
-  IsAuthorized?: number
+  BusinessEncryptData?: InputBusinessEncryptData
 }
 
 /**
@@ -426,21 +275,6 @@ export interface RecognizeCustomizedAudienceRequest {
    * 业务入参
    */
   BspData: InputRecognizeTargetAudience
-}
-
-/**
- * RecognizeTargetAudience请求参数结构体
- */
-export interface RecognizeTargetAudienceRequest {
-  /**
-   * 业务数据
-   */
-  BspData: InputRecognizeTargetAudience
-
-  /**
-   * 业务加密数据
-   */
-  BusinessEncryptData?: InputBusinessEncryptData
 }
 
 /**
@@ -688,45 +522,6 @@ export interface InputRecognizeTargetAudience {
 }
 
 /**
- * 流量反欺诈-虚假TA识别
- */
-export interface OutputTaData {
-  /**
-   * 错误码[0:成功；非0：失败的错误码]
-   */
-  Code: number
-
-  /**
-      * 错误信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Message: string
-
-  /**
-      * 结果数据
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Value: OutputTaValue
-}
-
-/**
- * 流量反欺诈-虚假TA识别
- */
-export interface OutputTaValue {
-  /**
-      * 是否查得[0：未查得；1：查得]
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  IsCheck: number
-
-  /**
-      * 是否符合[0：不符合；1：符合]
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  IsMatch: number
-}
-
-/**
  * RecognizePreciseTargetAudience请求参数结构体
  */
 export interface RecognizePreciseTargetAudienceRequest {
@@ -772,6 +567,16 @@ export interface InputKolDataList {
 }
 
 /**
+ * 业务入参
+ */
+export type InputBusinessEncryptData = null
+
+/**
+ * 接口入参
+ */
+export type InputRecognizeEffectiveFlow = null
+
+/**
  * RecognizePreciseTargetAudience返回参数结构体
  */
 export interface RecognizePreciseTargetAudienceResponse {
@@ -786,16 +591,6 @@ export interface RecognizePreciseTargetAudienceResponse {
    */
   RequestId?: string
 }
-
-/**
- * 接口入参
- */
-export type InputRecognizeEffectiveFlow = null
-
-/**
- * 业务入参
- */
-export type InputBusinessEncryptData = null
 
 /**
  * 流量反欺诈-验准返回值

@@ -39,6 +39,7 @@ import {
   User,
   Pageable,
   ResetPasswordResponse,
+  UpdateUserResponse,
   SetPasswordRequest,
   SaltLocation,
   UpdateUserStatusRequest,
@@ -52,10 +53,12 @@ import {
   CreateFileExportUserJobResponse,
   CreateApiImportUserJobResponse,
   LinkAccountRequest,
+  ListLogMessageByConditionRequest,
   SaltLocationRule,
   MemberMap,
   ListUserResponse,
-  UpdateUserResponse,
+  LogMessage,
+  ListLogMessageByConditionResponse,
 } from "./ciam_models"
 
 /**
@@ -125,6 +128,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ListUserByPropertyResponse) => void
   ): Promise<ListUserByPropertyResponse> {
     return this.request("ListUserByProperty", req, cb)
+  }
+
+  /**
+   * 查询日志信息
+   */
+  async ListLogMessageByCondition(
+    req: ListLogMessageByConditionRequest,
+    cb?: (error: string, rep: ListLogMessageByConditionResponse) => void
+  ): Promise<ListLogMessageByConditionResponse> {
+    return this.request("ListLogMessageByCondition", req, cb)
   }
 
   /**

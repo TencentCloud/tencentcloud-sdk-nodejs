@@ -22,31 +22,26 @@ import {
   OutputKolData,
   InputKolBspData,
   RecognizeEffectiveFlowRequest,
-  EnhanceTaDegreeRequest,
   OutputRecognizeTargetAudienceValue,
   SendTrafficSecuritySmsMessageRequest,
   DetectFraudKOLResponse,
   RecognizeCustomizedAudienceResponse,
   OutputKolValue,
-  EnhanceTaDegreeResponse,
-  InputTaBspData,
+  RecognizeTargetAudienceRequest,
   Device,
   OutputSendTrafficSecuritySmsMsg,
   RecognizeEffectiveFlowResponse,
   SendTrafficSecuritySmsMessageResponse,
   DetectFraudKOLRequest,
   RecognizeCustomizedAudienceRequest,
-  RecognizeTargetAudienceRequest,
   RecognizeTargetAudienceResponse,
   OutputRecognizeEffectiveFlow,
   InputRecognizeTargetAudience,
-  OutputTaData,
-  OutputTaValue,
   RecognizePreciseTargetAudienceRequest,
   InputKolDataList,
-  RecognizePreciseTargetAudienceResponse,
-  InputRecognizeEffectiveFlow,
   InputBusinessEncryptData,
+  InputRecognizeEffectiveFlow,
+  RecognizePreciseTargetAudienceResponse,
   OutputRecognizeTargetAudience,
   InputSendTrafficSecuritySmsMsg,
 } from "./taf_models"
@@ -58,16 +53,6 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("taf.tencentcloudapi.com", "2020-02-10", clientConfig)
-  }
-
-  /**
-   * 流量反欺诈-虚假TA识别
-   */
-  async EnhanceTaDegree(
-    req: EnhanceTaDegreeRequest,
-    cb?: (error: string, rep: EnhanceTaDegreeResponse) => void
-  ): Promise<EnhanceTaDegreeResponse> {
-    return this.request("EnhanceTaDegree", req, cb)
   }
 
   /**

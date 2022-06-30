@@ -507,6 +507,7 @@ import {
   WithdrawItem,
   QueryMemberTransactionRequest,
   QueryCityCodeRequest,
+  OpenBankFormInfo,
   CreateOrderRequest,
   ModifyBindedAccountRequest,
   WithdrawCashMembershipResponse,

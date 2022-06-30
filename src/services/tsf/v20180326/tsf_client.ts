@@ -2185,7 +2185,7 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
    * TSF基本资源信息概览接口
    */
   async DescribeBasicResourceUsage(
-    req?: DescribeBasicResourceUsageRequest,
+    req: DescribeBasicResourceUsageRequest,
     cb?: (error: string, rep: DescribeBasicResourceUsageResponse) => void
   ): Promise<DescribeBasicResourceUsageResponse> {
     return this.request("DescribeBasicResourceUsage", req, cb)

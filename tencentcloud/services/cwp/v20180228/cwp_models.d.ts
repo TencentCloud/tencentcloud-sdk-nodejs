@@ -584,6 +584,11 @@ export interface DescribeVulInfoCvssResponse {
       */
     Labels: string;
     /**
+      * 已防御的攻击次数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DefenseAttackCount: number;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
@@ -1679,6 +1684,16 @@ export interface EmergencyVul {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     HostCount: number;
+    /**
+      * 是否支持防御， 0:不支持 1:支持
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IsSupportDefense: number;
+    /**
+      * 已防御的攻击次数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DefenseAttackCount: number;
 }
 /**
  * ExportReverseShellEvents请求参数结构体
@@ -2911,6 +2926,8 @@ export interface DescribeVulListRequest {
 <li>Uuid- String - 是否必填：否 - 主机uuid查询</li>
 <li>VulName- string -</li>
 <li>VulCategory- string - 是否必填：否 - 漏洞类别 1: web-cms漏洞 2:应用漏洞  4: Linux软件漏洞 5: Windows系统漏洞</li>
+<li>IsSupportDefense - int- 是否必填：否 - 是否支持防御 0:不支持 1:支持</li>
+<li>Labels- string- 是否必填：否 - 标签搜索</li>
       */
     Filters?: Array<Filters>;
     /**
@@ -4956,6 +4973,11 @@ export interface VulEffectHostList {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     InstanceState: string;
+    /**
+      * 外网ip
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PublicIpAddresses: string;
 }
 /**
  * DescribeServerRelatedDirInfo请求参数结构体
@@ -6252,6 +6274,10 @@ export interface ScanTaskDetails {
       * 失败详情
       */
     FailType: number;
+    /**
+      * 外网ip
+      */
+    MachineWanIp: string;
 }
 /**
  * 资源管理数据库列表信息
@@ -7466,6 +7492,7 @@ export interface DescribeEmergencyVulListRequest {
 <li>Level - String - 是否必填：否 - 漏洞等级筛选 1:低 2:中 3:高 4:提示</li>
 <li>VulName- String - 是否必填：否 - 漏洞名称搜索</li>
 <li>Uuids- String - 是否必填：否 - 主机uuid</li>
+<li>IsSupportDefense - int- 是否必填：否 - 是否支持防御 0:不支持 1:支持</li>
       */
     Filters?: Array<Filters>;
     /**
@@ -7473,7 +7500,7 @@ export interface DescribeEmergencyVulListRequest {
       */
     Order?: string;
     /**
-      * 排序字段 PublishDate
+      * 排序字段 PublishDate  LastScanTime HostCount
       */
     By?: string;
 }
@@ -7656,6 +7683,11 @@ export interface DescribeScanTaskDetailsResponse {
       */
     StoppingAll: boolean;
     /**
+      * 扫描出漏洞个数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VulCount: number;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
@@ -7759,9 +7791,13 @@ export interface DescribeVulHostTopRequest {
       */
     Top: number;
     /**
-      * 1:web-cms 漏洞，2.应用漏洞 3:安全基线 4: Linux软件漏洞 5: windows系统漏洞 6:应急漏洞
+      * 1:web-cms 漏洞，2.应用漏洞   4: Linux软件漏洞 5: windows系统漏洞 6:应急漏洞，不填或者填0时返回 1，2，4，5 的总统计数据
       */
     VulCategory?: number;
+    /**
+      * 是否仅统计重点关注漏洞 1=仅统计重点关注漏洞, 0=统计全部漏洞
+      */
+    IsFollowVul?: number;
 }
 /**
  * DescribeIgnoreRuleEffectHostList请求参数结构体
@@ -11121,6 +11157,26 @@ export interface VulInfoList {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     TaskId: number;
+    /**
+      * 是否支持防御， 0:不支持 1:支持
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IsSupportDefense: number;
+    /**
+      * 已防御的攻击次数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DefenseAttackCount: number;
+    /**
+      * 首次出现时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FirstAppearTime: string;
+    /**
+      * 漏洞类别 1: web-cms漏洞 2:应用漏洞  4: Linux软件漏洞 5: Windows系统漏洞
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VulCategory: number;
 }
 /**
  * ExportIgnoreRuleEffectHostList请求参数结构体
@@ -11709,9 +11765,13 @@ export interface DescribeAssetWebLocationListRequest {
  */
 export interface DescribeVulLevelCountRequest {
     /**
-      * 1:web-cms 漏洞，2.应用漏洞 3:安全基线 4: Linux软件漏洞 5: windows系统漏洞 6:应急漏洞
+      * 1:web-cms 漏洞，2.应用漏洞 3:安全基线 4: Linux软件漏洞 5: windows系统漏洞 6:应急漏洞，不填或者填0时返回 1，2，4，5 的总统计数据
       */
     VulCategory?: number;
+    /**
+      * 是否仅统计重点关注漏洞 1=仅统计重点关注漏洞, 0=统计全部漏洞
+      */
+    IsFollowVul?: number;
 }
 /**
  * DeleteWebPageEventLog请求参数结构体
@@ -11789,9 +11849,13 @@ export interface DescribeVulTopRequest {
       */
     Top: number;
     /**
-      * 1:web-cms 漏洞，2.应用漏洞 3:安全基线 4: Linux软件漏洞 5: windows系统漏洞 6:应急漏洞
+      * 1:web-cms 漏洞，2.应用漏洞 4: Linux软件漏洞 5: windows系统漏洞 6:应急漏洞，不填或者填0时返回 1，2，4，5 的总统计数据
       */
     VulCategory?: number;
+    /**
+      * 是否仅统计重点关注漏洞 1=仅统计重点关注漏洞, 0=统计全部漏洞
+      */
+    IsFollowVul?: number;
 }
 /**
  * DescribeMachineInfo请求参数结构体

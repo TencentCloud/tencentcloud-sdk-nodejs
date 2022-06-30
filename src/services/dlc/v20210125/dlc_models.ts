@@ -32,6 +32,16 @@ export interface DescribeTaskResultResponse {
 }
 
 /**
+ * AlterDMSTable返回参数结构体
+ */
+export interface AlterDMSTableResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeDatabases请求参数结构体
  */
 export interface DescribeDatabasesRequest {
@@ -108,6 +118,34 @@ export interface DeleteUserRequest {
 }
 
 /**
+ * ListTaskJobLogDetail返回参数结构体
+ */
+export interface ListTaskJobLogDetailResponse {
+  /**
+      * 下一次分页参数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Context: string
+
+  /**
+      * 是否获取完结
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ListOver: boolean
+
+  /**
+      * 日志详情
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Results: Array<JobLogResult>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeSparkAppJob请求参数结构体
  */
 export interface DescribeSparkAppJobRequest {
@@ -123,6 +161,16 @@ export interface DescribeSparkAppJobRequest {
 }
 
 /**
+ * CreateDMSDatabase返回参数结构体
+ */
+export interface CreateDMSDatabaseResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateStoreLocation返回参数结构体
  */
 export interface CreateStoreLocationResponse {
@@ -131,6 +179,21 @@ export interface CreateStoreLocationResponse {
    */
   RequestId?: string
 }
+
+/**
+ * DescribeDMSDatabase返回参数结构体
+ */
+export interface DescribeDMSDatabaseResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DropDMSDatabase请求参数结构体
+ */
+export type DropDMSDatabaseRequest = null
 
 /**
  * CreateScript返回参数结构体
@@ -474,6 +537,159 @@ export interface DescribeTasksResponse {
 }
 
 /**
+ * DescribeDMSTable返回参数结构体
+ */
+export interface DescribeDMSTableResponse {
+  /**
+      * 基础对象
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Asset: Asset
+
+  /**
+      * 视图文本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ViewOriginalText: string
+
+  /**
+      * 视图文本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ViewExpandedText: string
+
+  /**
+      * hive维护版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Retention: number
+
+  /**
+      * 存储对象
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Sds: DMSSds
+
+  /**
+      * 分区列
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PartitionKeys: Array<DMSColumn>
+
+  /**
+      * 分区
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Partitions: Array<DMSPartition>
+
+  /**
+      * 表类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Type: string
+
+  /**
+      * 数据库名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DbName: string
+
+  /**
+      * Schame名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SchemaName: string
+
+  /**
+      * 存储大小
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  StorageSize: number
+
+  /**
+      * 记录数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RecordCount: number
+
+  /**
+      * 生命周期
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LifeTime: number
+
+  /**
+      * 最后访问时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LastAccessTime: string
+
+  /**
+      * 数据更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DataUpdateTime: string
+
+  /**
+      * 结构更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  StructUpdateTime: string
+
+  /**
+      * 列
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Columns: Array<DMSColumn>
+
+  /**
+      * 表名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Name: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DropDMSPartitions请求参数结构体
+ */
+export interface DropDMSPartitionsRequest {
+  /**
+   * 数据库名称
+   */
+  DatabaseName?: string
+
+  /**
+   * 数据库Schema名称
+   */
+  SchemaName?: string
+
+  /**
+   * 数据表名称
+   */
+  TableName?: string
+
+  /**
+   * 分区名称
+   */
+  Name?: string
+
+  /**
+   * 单个分区名称
+   */
+  Values?: Array<string>
+
+  /**
+   * 是否删除分区数据
+   */
+  DeleteData?: boolean
+}
+
+/**
  * CreateTasksInOrder请求参数结构体
  */
 export interface CreateTasksInOrderRequest {
@@ -491,6 +707,26 @@ export interface CreateTasksInOrderRequest {
    * 数据源名称，默认为COSDataCatalog
    */
   DatasourceConnectionName?: string
+}
+
+/**
+ * AddDMSPartitions返回参数结构体
+ */
+export interface AddDMSPartitionsResponse {
+  /**
+   * 成功数量
+   */
+  Total: number
+
+  /**
+   * 分区值
+   */
+  Partitions: Array<DMSPartition>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -639,6 +875,66 @@ export interface ModifySparkAppRequest {
 }
 
 /**
+ * spark流任务统计信息
+ */
+export interface StreamingStatistics {
+  /**
+   * 任务开始时间
+   */
+  StartTime: string
+
+  /**
+   * 数据接收器数
+   */
+  Receivers: number
+
+  /**
+   * 运行中的接收器数
+   */
+  NumActiveReceivers: number
+
+  /**
+   * 不活跃的接收器数
+   */
+  NumInactiveReceivers: number
+
+  /**
+   * 运行中的批数
+   */
+  NumActiveBatches: number
+
+  /**
+   * 待处理的批数
+   */
+  NumRetainedCompletedBatches: number
+
+  /**
+   * 已完成的批数
+   */
+  NumTotalCompletedBatches: number
+
+  /**
+   * 平均输入速率
+   */
+  AverageInputRate: number
+
+  /**
+   * 平均等待时长
+   */
+  AverageSchedulingDelay: number
+
+  /**
+   * 平均处理时长
+   */
+  AverageProcessingTime: number
+
+  /**
+   * 平均延时
+   */
+  AverageTotalDelay: number
+}
+
+/**
  * CreateDatabase请求参数结构体
  */
 export interface CreateDatabaseRequest {
@@ -651,6 +947,28 @@ export interface CreateDatabaseRequest {
    * 数据源名称，默认为DataLakeCatalog
    */
   DatasourceConnectionName?: string
+}
+
+/**
+ * DescribeDMSTables返回参数结构体
+ */
+export interface DescribeDMSTablesResponse {
+  /**
+      * DMS元数据列表信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TableList: Array<DMSTableInfo>
+
+  /**
+      * 统计值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TotalCount: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -669,6 +987,31 @@ export interface UserIdSetOfWorkGroupId {
 }
 
 /**
+ * AlterDMSPartition请求参数结构体
+ */
+export interface AlterDMSPartitionRequest {
+  /**
+   * 当前名称，变更前db名称
+   */
+  CurrentDbName: string
+
+  /**
+   * 当前名称，变更前table名称
+   */
+  CurrentTableName: string
+
+  /**
+   * 当前名称，变更前Part名称
+   */
+  CurrentValues: string
+
+  /**
+   * 分区
+   */
+  Partition?: DMSPartition
+}
+
+/**
  * 视图基本配置信息
  */
 export interface ViewBaseInfo {
@@ -682,6 +1025,36 @@ export interface ViewBaseInfo {
    */
   ViewName: string
 }
+
+/**
+ * CheckLockMetaData请求参数结构体
+ */
+export interface CheckLockMetaDataRequest {
+  /**
+   * 锁ID
+   */
+  LockId: number
+
+  /**
+   * 数据源名称
+   */
+  DatasourceConnectionName?: string
+
+  /**
+   * 事务ID
+   */
+  TxnId?: number
+
+  /**
+   * 过期时间ms
+   */
+  ElapsedMs?: number
+}
+
+/**
+ * 元数据基本对象
+ */
+export type Asset = null
 
 /**
  * CreateDatabase返回参数结构体
@@ -830,6 +1203,21 @@ export interface TableBaseInfo {
 }
 
 /**
+ * UnlockMetaData请求参数结构体
+ */
+export interface UnlockMetaDataRequest {
+  /**
+   * 锁ID
+   */
+  LockId: number
+
+  /**
+   * 数据源名称
+   */
+  DatasourceConnectionName?: string
+}
+
+/**
  * AttachUserPolicy请求参数结构体
  */
 export interface AttachUserPolicyRequest {
@@ -950,6 +1338,111 @@ export interface CreateStoreLocationRequest {
 }
 
 /**
+ * 元数据加锁内容
+ */
+export interface LockComponentInfo {
+  /**
+   * 数据库名称
+   */
+  DbName: string
+
+  /**
+   * 表名称
+   */
+  TableName?: string
+
+  /**
+   * 分区
+   */
+  Partition?: string
+
+  /**
+   * 锁类型：SHARED_READ、SHARED_WRITE、EXCLUSIVE
+   */
+  LockType?: string
+
+  /**
+   * 锁级别：DB、TABLE、PARTITION
+   */
+  LockLevel?: string
+
+  /**
+   * 锁操作：SELECT,INSERT,UPDATE,DELETE,UNSET,NO_TXN
+   */
+  DataOperationType?: string
+
+  /**
+   * 是否保持Acid
+   */
+  IsAcid?: boolean
+
+  /**
+   * 是否动态分区写
+   */
+  IsDynamicPartitionWrite?: boolean
+}
+
+/**
+ * DescribeDMSPartitions请求参数结构体
+ */
+export interface DescribeDMSPartitionsRequest {
+  /**
+   * 数据库名
+   */
+  DatabaseName: string
+
+  /**
+   * 表名称
+   */
+  TableName: string
+
+  /**
+   * schema名称
+   */
+  SchemaName?: string
+
+  /**
+   * 名称
+   */
+  Name?: string
+
+  /**
+   * 单个分区名称，精准匹配
+   */
+  Values?: Array<string>
+
+  /**
+   * 多个分区名称，精准匹配
+   */
+  PartitionNames?: Array<string>
+
+  /**
+   * 多个分区字段的匹配，模糊匹配
+   */
+  PartValues?: Array<string>
+
+  /**
+   * 过滤SQL
+   */
+  Filter?: string
+
+  /**
+   * 最大分区数量
+   */
+  MaxParts?: number
+
+  /**
+   * 翻页跳过数量
+   */
+  Offset?: number
+
+  /**
+   * 页面数量
+   */
+  Limit?: number
+}
+
+/**
  * DescribeSparkAppJobs请求参数结构体
  */
 export interface DescribeSparkAppJobsRequest {
@@ -987,6 +1480,16 @@ export interface DescribeSparkAppJobsRequest {
    * 查询列表限制数量
    */
   Limit?: number
+}
+
+/**
+ * CreateDMSTable返回参数结构体
+ */
+export interface CreateDMSTableResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1120,38 +1623,28 @@ export interface DescribeWorkGroupsResponse {
 }
 
 /**
- * DescribeUsers请求参数结构体
+ * CreateImportTask请求参数结构体
  */
-export interface DescribeUsersRequest {
+export interface CreateImportTaskRequest {
   /**
-   * 指定查询的子用户uin，用户需要通过CreateUser接口创建。
+   * 数据来源，cos
    */
-  UserId?: string
+  InputType: string
 
   /**
-   * 偏移量，默认为0
+   * 输入配置
    */
-  Offset?: number
+  InputConf: Array<KVPair>
 
   /**
-   * 返回数量，默认20，最大值100
+   * 输出配置
    */
-  Limit?: number
+  OutputConf: Array<KVPair>
 
   /**
-   * 排序字段，支持如下字段类型，create-time
+   * 目标数据源的类型，目前支持导入到托管存储，即lakefsStorage
    */
-  SortBy?: string
-
-  /**
-   * 排序方式，desc表示正序，asc表示反序， 默认为asc
-   */
-  Sorting?: string
-
-  /**
-   * 过滤条件，支持如下字段类型，user-type：根据用户类型过滤。user-keyword：根据用户名称过滤
-   */
-  Filters?: Array<Filter>
+  OutputType?: string
 }
 
 /**
@@ -1233,55 +1726,13 @@ export interface AddUsersToWorkGroupRequest {
 export type DescribeStoreLocationRequest = null
 
 /**
- * DescribeViews请求参数结构体
+ * AddUsersToWorkGroup返回参数结构体
  */
-export interface DescribeViewsRequest {
+export interface AddUsersToWorkGroupResponse {
   /**
-   * 列出该数据库下所属数据表。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  DatabaseName: string
-
-  /**
-   * 返回数量，默认为10，最大值为100。
-   */
-  Limit?: number
-
-  /**
-   * 数据偏移量，从0开始，默认为0。
-   */
-  Offset?: number
-
-  /**
-      * 过滤条件，如下支持的过滤类型，传参Name应为其一
-view-name - String - （过滤条件）数据表名称,形如：view-001。
-view-id - String - （过滤条件）view id形如：12342。
-      */
-  Filters?: Array<Filter>
-
-  /**
-   * 数据库所属的数据源名称
-   */
-  DatasourceConnectionName?: string
-
-  /**
-   * 排序字段
-   */
-  Sort?: string
-
-  /**
-   * 排序规则，true:升序；false:降序
-   */
-  Asc?: boolean
-
-  /**
-   * 按视图更新时间筛选，开始时间，如2021-11-11 00:00:00
-   */
-  StartTime?: string
-
-  /**
-   * 按视图更新时间筛选，结束时间，如2021-11-12 00:00:00
-   */
-  EndTime?: string
+  RequestId?: string
 }
 
 /**
@@ -1366,6 +1817,223 @@ export interface CreateExportTaskRequest {
 }
 
 /**
+ * CreateDMSTable请求参数结构体
+ */
+export interface CreateDMSTableRequest {
+  /**
+   * 基础对象
+   */
+  Asset?: Asset
+
+  /**
+   * 表类型
+   */
+  Type?: string
+
+  /**
+   * 数据库名称
+   */
+  DbName?: string
+
+  /**
+   * 存储大小
+   */
+  StorageSize?: number
+
+  /**
+   * 记录数量
+   */
+  RecordCount?: number
+
+  /**
+   * 生命周期
+   */
+  LifeTime?: number
+
+  /**
+   * 数据更新时间
+   */
+  DataUpdateTime?: string
+
+  /**
+   * 结构更新时间
+   */
+  StructUpdateTime?: string
+
+  /**
+   * 最后访问时间
+   */
+  LastAccessTime?: string
+
+  /**
+   * 存储对象
+   */
+  Sds?: DMSSds
+
+  /**
+   * 列
+   */
+  Columns?: Array<DMSColumn>
+
+  /**
+   * 分区键值
+   */
+  PartitionKeys?: Array<DMSColumn>
+
+  /**
+   * 视图文本
+   */
+  ViewOriginalText?: string
+
+  /**
+   * 视图文本
+   */
+  ViewExpandedText?: string
+
+  /**
+   * 分区
+   */
+  Partitions?: Array<DMSPartition>
+
+  /**
+   * 表名称
+   */
+  Name?: string
+}
+
+/**
+ * DropDMSTable请求参数结构体
+ */
+export interface DropDMSTableRequest {
+  /**
+   * 数据库名称
+   */
+  DbName?: string
+
+  /**
+   * 表名称
+   */
+  Name?: string
+
+  /**
+   * 是否删除数据
+   */
+  DeleteData?: boolean
+
+  /**
+   * 环境属性
+   */
+  EnvProps?: KVPair
+}
+
+/**
+ * DMSTable基本信息
+ */
+export interface DMSTable {
+  /**
+      * 视图文本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ViewOriginalText?: string
+
+  /**
+      * 视图文本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ViewExpandedText?: string
+
+  /**
+      * hive维护版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Retention?: number
+
+  /**
+      * 存储对象
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Sds?: DMSSds
+
+  /**
+      * 分区列
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PartitionKeys?: Array<DMSColumn>
+
+  /**
+      * 分区
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Partitions?: Array<DMSPartition>
+
+  /**
+      * 表类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Type?: string
+
+  /**
+      * 数据库名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DbName?: string
+
+  /**
+      * Schema名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SchemaName?: string
+
+  /**
+      * 存储大小
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  StorageSize?: number
+
+  /**
+      * 记录数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RecordCount?: number
+
+  /**
+      * 生命周期
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LifeTime?: number
+
+  /**
+      * 最后访问时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LastAccessTime?: string
+
+  /**
+      * 数据更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DataUpdateTime?: string
+
+  /**
+      * 结构更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  StructUpdateTime?: string
+
+  /**
+      * 列
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Columns?: Array<DMSColumn>
+
+  /**
+      * 表名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Name?: string
+}
+
+/**
  * AttachWorkGroupPolicy返回参数结构体
  */
 export interface AttachWorkGroupPolicyResponse {
@@ -1386,6 +2054,76 @@ export interface ModifyWorkGroupResponse {
 }
 
 /**
+ * DescribeDMSTables请求参数结构体
+ */
+export interface DescribeDMSTablesRequest {
+  /**
+   * 数据库名称
+   */
+  DbName?: string
+
+  /**
+   * 数据库schema名称
+   */
+  SchemaName?: string
+
+  /**
+   * 表名称
+   */
+  Name?: string
+
+  /**
+   * 数据目录
+   */
+  Catalog?: string
+
+  /**
+   * 查询关键词
+   */
+  Keyword?: string
+
+  /**
+   * 查询模式
+   */
+  Pattern?: string
+
+  /**
+   * 表类型
+   */
+  Type?: string
+
+  /**
+   * 筛选参数：更新开始时间
+   */
+  StartTime?: string
+
+  /**
+   * 筛选参数：更新结束时间
+   */
+  EndTime?: string
+
+  /**
+   * 分页参数
+   */
+  Limit?: number
+
+  /**
+   * 分页参数
+   */
+  Offset?: number
+
+  /**
+   * 排序字段：create_time：创建时间
+   */
+  Sort?: string
+
+  /**
+   * 排序字段：true：升序（默认），false：降序
+   */
+  Asc?: boolean
+}
+
+/**
  * ModifyUser请求参数结构体
  */
 export interface ModifyUserRequest {
@@ -1401,63 +2139,92 @@ export interface ModifyUserRequest {
 }
 
 /**
- * spark流任务统计信息
+ * 元数据存储描述属性
  */
-export interface StreamingStatistics {
+export interface DMSSds {
   /**
-   * 任务开始时间
-   */
-  StartTime: string
+      * 存储地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Location?: string
 
   /**
-   * 数据接收器数
-   */
-  Receivers: number
+      * 输入格式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InputFormat?: string
 
   /**
-   * 运行中的接收器数
-   */
-  NumActiveReceivers: number
+      * 输出格式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OutputFormat?: string
 
   /**
-   * 不活跃的接收器数
-   */
-  NumInactiveReceivers: number
+      * bucket数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NumBuckets?: number
 
   /**
-   * 运行中的批数
-   */
-  NumActiveBatches: number
+      * 是是否压缩
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Compressed?: boolean
 
   /**
-   * 待处理的批数
-   */
-  NumRetainedCompletedBatches: number
+      * 是否有子目录
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  StoredAsSubDirectories?: boolean
 
   /**
-   * 已完成的批数
-   */
-  NumTotalCompletedBatches: number
+      * 序列化lib
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SerdeLib?: string
 
   /**
-   * 平均输入速率
-   */
-  AverageInputRate: number
+      * 序列化名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SerdeName?: string
 
   /**
-   * 平均等待时长
-   */
-  AverageSchedulingDelay: number
+      * 桶名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BucketCols?: Array<string>
 
   /**
-   * 平均处理时长
-   */
-  AverageProcessingTime: number
+      * 序列化参数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SerdeParams?: Array<KVPair>
 
   /**
-   * 平均延时
-   */
-  AverageTotalDelay: number
+      * 附加参数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Params?: Array<KVPair>
+
+  /**
+      * 列排序(Expired)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SortCols?: DMSColumnOrder
+
+  /**
+      * 列
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Cols?: Array<DMSColumn>
+
+  /**
+      * 列排序字段
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SortColumns?: Array<DMSColumnOrder>
 }
 
 /**
@@ -1713,6 +2480,16 @@ export interface DeleteScriptRequest {
 }
 
 /**
+ * AddDMSPartitions请求参数结构体
+ */
+export interface AddDMSPartitionsRequest {
+  /**
+   * 分区
+   */
+  Partitions?: Array<DMSPartition>
+}
+
+/**
  * script实例。
  */
 export interface Script {
@@ -1751,6 +2528,96 @@ export interface Script {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   UpdateTime: number
+}
+
+/**
+ * AlterDMSTable请求参数结构体
+ */
+export interface AlterDMSTableRequest {
+  /**
+   * 当前名称
+   */
+  CurrentName: string
+
+  /**
+   * 当前数据库名称
+   */
+  CurrentDbName: string
+
+  /**
+   * 基础对象
+   */
+  Asset?: Asset
+
+  /**
+   * 表类型
+   */
+  Type?: string
+
+  /**
+   * 数据库名称
+   */
+  DbName?: string
+
+  /**
+   * 存储大小
+   */
+  StorageSize?: number
+
+  /**
+   * 记录数量
+   */
+  RecordCount?: number
+
+  /**
+   * 生命周期
+   */
+  LifeTime?: number
+
+  /**
+   * 数据更新时间
+   */
+  DataUpdateTime?: string
+
+  /**
+   * 结构更新时间
+   */
+  StructUpdateTime?: string
+
+  /**
+   * 最后访问时间
+   */
+  LastAccessTime?: string
+
+  /**
+   * 存储对象
+   */
+  Sds?: DMSSds
+
+  /**
+   * 列
+   */
+  Columns?: Array<DMSColumn>
+
+  /**
+   * 分区键值
+   */
+  PartitionKeys?: Array<DMSColumn>
+
+  /**
+   * 视图文本
+   */
+  ViewOriginalText?: string
+
+  /**
+   * 视图文本
+   */
+  ViewExpandedText?: string
+
+  /**
+   * 分区
+   */
+  Partitions?: Array<DMSPartition>
 }
 
 /**
@@ -2109,9 +2976,29 @@ export interface CancelTaskResponse {
 }
 
 /**
+ * UnlockMetaData返回参数结构体
+ */
+export interface UnlockMetaDataResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteWorkGroup返回参数结构体
  */
 export interface DeleteWorkGroupResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DropDMSTable返回参数结构体
+ */
+export interface DropDMSTableResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2330,6 +3217,93 @@ export interface DescribeDatabasesResponse {
 }
 
 /**
+ * DMSTable信息
+ */
+export interface DMSTableInfo {
+  /**
+      * DMS表信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Table: DMSTable
+
+  /**
+      * 基础对象信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Asset: Asset
+}
+
+/**
+ * 迁移元数据分区对象
+ */
+export interface DMSPartition {
+  /**
+   * 数据库名称
+   */
+  DatabaseName?: string
+
+  /**
+   * 数据目录名称
+   */
+  SchemaName?: string
+
+  /**
+   * 表名称
+   */
+  TableName?: string
+
+  /**
+   * 数据版本
+   */
+  DataVersion?: number
+
+  /**
+   * 分区名称
+   */
+  Name?: string
+
+  /**
+   * 值列表
+   */
+  Values?: Array<string>
+
+  /**
+   * 存储大小
+   */
+  StorageSize?: number
+
+  /**
+   * 记录数量
+   */
+  RecordCount?: number
+
+  /**
+   * 创建时间
+   */
+  CreateTime?: string
+
+  /**
+   * 修改时间
+   */
+  ModifiedTime?: string
+
+  /**
+   * 最后访问时间
+   */
+  LastAccessTime?: string
+
+  /**
+   * 附件属性
+   */
+  Params?: Array<KVPair>
+
+  /**
+   * 存储对象
+   */
+  Sds?: DMSSds
+}
+
+/**
  * 数据库对象
  */
 export interface DatabaseInfo {
@@ -2358,28 +3332,23 @@ export interface DatabaseInfo {
 }
 
 /**
- * CreateImportTask请求参数结构体
+ * DescribeDMSPartitions返回参数结构体
  */
-export interface CreateImportTaskRequest {
+export interface DescribeDMSPartitionsResponse {
   /**
-   * 数据来源，cos
+   * 分区信息
    */
-  InputType: string
+  Partitions: Array<DMSPartition>
 
   /**
-   * 输入配置
+   * 总数
    */
-  InputConf: Array<KVPair>
+  Total: number
 
   /**
-   * 输出配置
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  OutputConf: Array<KVPair>
-
-  /**
-   * 目标数据源的类型，目前支持导入到托管存储，即lakefsStorage
-   */
-  OutputType?: string
+  RequestId?: string
 }
 
 /**
@@ -2408,6 +3377,11 @@ export interface UnbindWorkGroupsFromUserRequest {
 }
 
 /**
+ * DescribeDMSDatabase请求参数结构体
+ */
+export type DescribeDMSDatabaseRequest = null
+
+/**
  * DescribeTable请求参数结构体
  */
 export interface DescribeTableRequest {
@@ -2425,55 +3399,6 @@ export interface DescribeTableRequest {
    * 查询表所在的数据源名称
    */
   DatasourceConnectionName?: string
-}
-
-/**
- * 日志详情
- */
-export interface JobLogResult {
-  /**
-      * 日志时间戳，毫秒
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Time: number
-
-  /**
-      * 日志topic id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  TopicId: string
-
-  /**
-      * 日志topic name
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  TopicName: string
-
-  /**
-      * 日志内容，json字符串
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  LogJson: string
-}
-
-/**
- * 数据格式其它类型。
- */
-export interface Other {
-  /**
-   * 枚举类型，默认值为Json，可选值为[Json, Parquet, ORC, AVRD]之一。
-   */
-  Format: string
-}
-
-/**
- * DeleteUsersFromWorkGroup请求参数结构体
- */
-export interface DeleteUsersFromWorkGroupRequest {
-  /**
-   * 要删除的用户信息
-   */
-  AddInfo: UserIdSetOfWorkGroupId
 }
 
 /**
@@ -2573,6 +3498,117 @@ export interface Policy {
 }
 
 /**
+ * 日志详情
+ */
+export interface JobLogResult {
+  /**
+      * 日志时间戳，毫秒
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Time: number
+
+  /**
+      * 日志topic id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TopicId: string
+
+  /**
+      * 日志topic name
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TopicName: string
+
+  /**
+      * 日志内容，json字符串
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LogJson: string
+}
+
+/**
+ * 数据格式其它类型。
+ */
+export interface Other {
+  /**
+   * 枚举类型，默认值为Json，可选值为[Json, Parquet, ORC, AVRD]之一。
+   */
+  Format: string
+}
+
+/**
+ * DropDMSDatabase返回参数结构体
+ */
+export interface DropDMSDatabaseResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeUsers请求参数结构体
+ */
+export interface DescribeUsersRequest {
+  /**
+   * 指定查询的子用户uin，用户需要通过CreateUser接口创建。
+   */
+  UserId?: string
+
+  /**
+   * 偏移量，默认为0
+   */
+  Offset?: number
+
+  /**
+   * 返回数量，默认20，最大值100
+   */
+  Limit?: number
+
+  /**
+   * 排序字段，支持如下字段类型，create-time
+   */
+  SortBy?: string
+
+  /**
+   * 排序方式，desc表示正序，asc表示反序， 默认为asc
+   */
+  Sorting?: string
+
+  /**
+   * 过滤条件，支持如下字段类型，user-type：根据用户类型过滤。user-keyword：根据用户名称过滤
+   */
+  Filters?: Array<Filter>
+}
+
+/**
+ * DeleteUsersFromWorkGroup请求参数结构体
+ */
+export interface DeleteUsersFromWorkGroupRequest {
+  /**
+   * 要删除的用户信息
+   */
+  AddInfo: UserIdSetOfWorkGroupId
+}
+
+/**
+ * 列排序对象
+ */
+export interface DMSColumnOrder {
+  /**
+      * 列名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Col?: string
+
+  /**
+      * 排序
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Order?: number
+}
+
+/**
  * CreateSparkApp返回参数结构体
  */
 export interface CreateSparkAppResponse {
@@ -2602,6 +3638,16 @@ export interface CreateTaskResponse {
  * DeleteSparkApp返回参数结构体
  */
 export interface DeleteSparkAppResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * AlterDMSPartition返回参数结构体
+ */
+export interface AlterDMSPartitionResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2733,13 +3779,85 @@ export interface TableResponseInfo {
 }
 
 /**
- * AddUsersToWorkGroup返回参数结构体
+ * DescribeViews请求参数结构体
  */
-export interface AddUsersToWorkGroupResponse {
+export interface DescribeViewsRequest {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 列出该数据库下所属数据表。
    */
-  RequestId?: string
+  DatabaseName: string
+
+  /**
+   * 返回数量，默认为10，最大值为100。
+   */
+  Limit?: number
+
+  /**
+   * 数据偏移量，从0开始，默认为0。
+   */
+  Offset?: number
+
+  /**
+      * 过滤条件，如下支持的过滤类型，传参Name应为其一
+view-name - String - （过滤条件）数据表名称,形如：view-001。
+view-id - String - （过滤条件）view id形如：12342。
+      */
+  Filters?: Array<Filter>
+
+  /**
+   * 数据库所属的数据源名称
+   */
+  DatasourceConnectionName?: string
+
+  /**
+   * 排序字段
+   */
+  Sort?: string
+
+  /**
+   * 排序规则，true:升序；false:降序
+   */
+  Asc?: boolean
+
+  /**
+   * 按视图更新时间筛选，开始时间，如2021-11-11 00:00:00
+   */
+  StartTime?: string
+
+  /**
+   * 按视图更新时间筛选，结束时间，如2021-11-12 00:00:00
+   */
+  EndTime?: string
+}
+
+/**
+ * LockMetaData请求参数结构体
+ */
+export interface LockMetaDataRequest {
+  /**
+   * 加锁内容
+   */
+  LockComponentList: Array<LockComponentInfo>
+
+  /**
+   * 数据源名称
+   */
+  DatasourceConnectionName?: string
+
+  /**
+   * 事务id
+   */
+  TxnId?: number
+
+  /**
+   * 客户端信息
+   */
+  AgentInfo?: string
+
+  /**
+   * 主机名
+   */
+  Hostname?: string
 }
 
 /**
@@ -2928,27 +4046,24 @@ export interface UnbindWorkGroupsFromUserResponse {
 }
 
 /**
- * ListTaskJobLogDetail返回参数结构体
+ * DropDMSPartitions返回参数结构体
  */
-export interface ListTaskJobLogDetailResponse {
+export interface DropDMSPartitionsResponse {
   /**
-      * 下一次分页参数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Context: string
+   * 状态
+   */
+  Status: boolean
 
   /**
-      * 是否获取完结
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ListOver: boolean
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
 
-  /**
-      * 日志详情
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Results: Array<JobLogResult>
-
+/**
+ * AlterDMSDatabase返回参数结构体
+ */
+export interface AlterDMSDatabaseResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3004,6 +4119,51 @@ export interface DescribeSparkAppTasksRequest {
    */
   TaskId?: string
 }
+
+/**
+ * LockMetaData返回参数结构体
+ */
+export interface LockMetaDataResponse {
+  /**
+   * 锁id
+   */
+  LockId: number
+
+  /**
+   * 锁状态：ACQUIRED、WAITING、ABORT、NOT_ACQUIRED
+   */
+  LockState: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CheckLockMetaData返回参数结构体
+ */
+export interface CheckLockMetaDataResponse {
+  /**
+   * 锁ID
+   */
+  LockId: number
+
+  /**
+   * 锁状态：ACQUIRED、WAITING、ABORT、NOT_ACQUIRED
+   */
+  LockState: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * AlterDMSDatabase请求参数结构体
+ */
+export type AlterDMSDatabaseRequest = null
 
 /**
  *  SQL查询任务
@@ -3077,6 +4237,16 @@ export interface AttachUserPolicyResponse {
 }
 
 /**
+ * CreateDMSDatabase请求参数结构体
+ */
+export interface CreateDMSDatabaseRequest {
+  /**
+   * 数据库名称
+   */
+  Name?: string
+}
+
+/**
  * DetachWorkGroupPolicy请求参数结构体
  */
 export interface DetachWorkGroupPolicyRequest {
@@ -3089,6 +4259,46 @@ export interface DetachWorkGroupPolicyRequest {
    * 解绑的权限集合
    */
   PolicySet?: Array<Policy>
+}
+
+/**
+ * DescribeDMSTable请求参数结构体
+ */
+export interface DescribeDMSTableRequest {
+  /**
+   * 数据库名称
+   */
+  DbName?: string
+
+  /**
+   * 数据库schema名称
+   */
+  SchemaName?: string
+
+  /**
+   * 表名称
+   */
+  Name?: string
+
+  /**
+   * 数据目录
+   */
+  Catalog?: string
+
+  /**
+   * 查询关键词
+   */
+  Keyword?: string
+
+  /**
+   * 查询模式
+   */
+  Pattern?: string
+
+  /**
+   * 表类型
+   */
+  Type?: string
 }
 
 /**
@@ -3184,4 +4394,51 @@ export interface DatabaseResponseInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ModifiedTime?: string
+}
+
+/**
+ * 迁移列对象
+ */
+export interface DMSColumn {
+  /**
+      * 名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Name?: string
+
+  /**
+      * 描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Description?: string
+
+  /**
+      * 类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Type?: string
+
+  /**
+      * 排序
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Position?: number
+
+  /**
+      * 附加参数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Params?: Array<KVPair>
+
+  /**
+      * 业务参数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BizParams?: Array<KVPair>
+
+  /**
+      * 是否分区
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsPartition?: boolean
 }

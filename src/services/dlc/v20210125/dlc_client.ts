@@ -19,11 +19,16 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   DescribeTaskResultResponse,
+  AlterDMSTableResponse,
   DescribeDatabasesRequest,
   WorkGroupMessage,
   DeleteUserRequest,
+  ListTaskJobLogDetailResponse,
   DescribeSparkAppJobRequest,
+  CreateDMSDatabaseResponse,
   CreateStoreLocationResponse,
+  DescribeDMSDatabaseResponse,
+  DropDMSDatabaseRequest,
   CreateScriptResponse,
   CreateTasksInOrderResponse,
   DescribeTablesResponse,
@@ -36,19 +41,28 @@ import {
   DetachUserPolicyRequest,
   DescribeSparkAppTasksResponse,
   DescribeTasksResponse,
+  DescribeDMSTableResponse,
+  DropDMSPartitionsRequest,
   CreateTasksInOrderRequest,
+  AddDMSPartitionsResponse,
   DetachWorkGroupPolicyResponse,
   CSVSerde,
   ModifySparkAppRequest,
+  StreamingStatistics,
   CreateDatabaseRequest,
+  DescribeDMSTablesResponse,
   UserIdSetOfWorkGroupId,
+  AlterDMSPartitionRequest,
   ViewBaseInfo,
+  CheckLockMetaDataRequest,
+  Asset,
   CreateDatabaseResponse,
   DescribeTasksRequest,
   CreateSparkAppTaskRequest,
   DeleteWorkGroupRequest,
   KVPair,
   TableBaseInfo,
+  UnlockMetaDataRequest,
   AttachUserPolicyRequest,
   ListTaskJobLogDetailRequest,
   TasksInfo,
@@ -56,26 +70,33 @@ import {
   CreateUserResponse,
   DeleteUserResponse,
   CreateStoreLocationRequest,
+  LockComponentInfo,
+  DescribeDMSPartitionsRequest,
   DescribeSparkAppJobsRequest,
+  CreateDMSTableResponse,
   Partition,
   CreateTaskRequest,
   ModifySparkAppResponse,
   CSV,
   CreateTableRequest,
   DescribeWorkGroupsResponse,
-  DescribeUsersRequest,
+  CreateImportTaskRequest,
   DescribeScriptsRequest,
   DescribeSparkAppJobResponse,
   DeleteUsersFromWorkGroupResponse,
   AddUsersToWorkGroupRequest,
   DescribeStoreLocationRequest,
-  DescribeViewsRequest,
+  AddUsersToWorkGroupResponse,
   UserInfo,
   CreateExportTaskRequest,
+  CreateDMSTableRequest,
+  DropDMSTableRequest,
+  DMSTable,
   AttachWorkGroupPolicyResponse,
   ModifyWorkGroupResponse,
+  DescribeDMSTablesRequest,
   ModifyUserRequest,
-  StreamingStatistics,
+  DMSSds,
   CreateSparkAppTaskResponse,
   CancelTaskRequest,
   TaskResponseInfo,
@@ -83,7 +104,9 @@ import {
   BindWorkGroupsToUserResponse,
   DescribeStoreLocationResponse,
   DeleteScriptRequest,
+  AddDMSPartitionsRequest,
   Script,
+  AlterDMSTableRequest,
   CreateImportTaskResponse,
   Execution,
   CreateTableResponse,
@@ -99,45 +122,62 @@ import {
   CreateUserRequest,
   ModifyWorkGroupRequest,
   CancelTaskResponse,
+  UnlockMetaDataResponse,
   DeleteWorkGroupResponse,
+  DropDMSTableResponse,
   WorkGroupIdSetOfUserId,
   CreateWorkGroupResponse,
   TaskResultInfo,
   DescribeTablesRequest,
   DescribeDatabasesResponse,
+  DMSTableInfo,
+  DMSPartition,
   DatabaseInfo,
-  CreateImportTaskRequest,
+  DescribeDMSPartitionsResponse,
   CreateExportTaskResponse,
   UnbindWorkGroupsFromUserRequest,
+  DescribeDMSDatabaseRequest,
   DescribeTableRequest,
+  Policy,
   JobLogResult,
   Other,
+  DropDMSDatabaseResponse,
+  DescribeUsersRequest,
   DeleteUsersFromWorkGroupRequest,
-  Policy,
+  DMSColumnOrder,
   CreateSparkAppResponse,
   CreateTaskResponse,
   DeleteSparkAppResponse,
+  AlterDMSPartitionResponse,
   CreateTasksRequest,
   DescribeTableResponse,
   DescribeSparkAppJobsResponse,
   TableResponseInfo,
-  AddUsersToWorkGroupResponse,
+  DescribeViewsRequest,
+  LockMetaDataRequest,
   DetachUserPolicyResponse,
   DescribeWorkGroupsRequest,
   CreateTasksResponse,
   CreateSparkAppRequest,
   UnbindWorkGroupsFromUserResponse,
-  ListTaskJobLogDetailResponse,
+  DropDMSPartitionsResponse,
+  AlterDMSDatabaseResponse,
   CreateWorkGroupRequest,
   DescribeSparkAppTasksRequest,
+  LockMetaDataResponse,
+  CheckLockMetaDataResponse,
+  AlterDMSDatabaseRequest,
   SQLTask,
   UserMessage,
   Property,
   AttachUserPolicyResponse,
+  CreateDMSDatabaseRequest,
   DetachWorkGroupPolicyRequest,
+  DescribeDMSTableRequest,
   DescribeViewsResponse,
   DataFormat,
   DatabaseResponseInfo,
+  DMSColumn,
 } from "./dlc_models"
 
 /**
@@ -170,13 +210,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 添加用户到工作组
+   * 按顺序创建任务（已经废弃，后期不再维护，请使用接口CreateTasks）
    */
-  async AddUsersToWorkGroup(
-    req: AddUsersToWorkGroupRequest,
-    cb?: (error: string, rep: AddUsersToWorkGroupResponse) => void
-  ): Promise<AddUsersToWorkGroupResponse> {
-    return this.request("AddUsersToWorkGroup", req, cb)
+  async CreateTasksInOrder(
+    req: CreateTasksInOrderRequest,
+    cb?: (error: string, rep: CreateTasksInOrderResponse) => void
+  ): Promise<CreateTasksInOrderResponse> {
+    return this.request("CreateTasksInOrder", req, cb)
+  }
+
+  /**
+   * 元数据锁检查
+   */
+  async CheckLockMetaData(
+    req: CheckLockMetaDataRequest,
+    cb?: (error: string, rep: CheckLockMetaDataResponse) => void
+  ): Promise<CheckLockMetaDataResponse> {
+    return this.request("CheckLockMetaData", req, cb)
   }
 
   /**
@@ -190,23 +240,53 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询任务结果
+   * DMS元数据更新表
    */
-  async DescribeTaskResult(
-    req: DescribeTaskResultRequest,
-    cb?: (error: string, rep: DescribeTaskResultResponse) => void
-  ): Promise<DescribeTaskResultResponse> {
-    return this.request("DescribeTaskResult", req, cb)
+  async AlterDMSTable(
+    req: AlterDMSTableRequest,
+    cb?: (error: string, rep: AlterDMSTableResponse) => void
+  ): Promise<AlterDMSTableResponse> {
+    return this.request("AlterDMSTable", req, cb)
   }
 
   /**
-   * 绑定工作组到用户
+   * DMS元数据删除库
    */
-  async BindWorkGroupsToUser(
-    req: BindWorkGroupsToUserRequest,
-    cb?: (error: string, rep: BindWorkGroupsToUserResponse) => void
-  ): Promise<BindWorkGroupsToUserResponse> {
-    return this.request("BindWorkGroupsToUser", req, cb)
+  async DropDMSDatabase(
+    req?: DropDMSDatabaseRequest,
+    cb?: (error: string, rep: DropDMSDatabaseResponse) => void
+  ): Promise<DropDMSDatabaseResponse> {
+    return this.request("DropDMSDatabase", req, cb)
+  }
+
+  /**
+   * DMS元数据新增分区
+   */
+  async AddDMSPartitions(
+    req: AddDMSPartitionsRequest,
+    cb?: (error: string, rep: AddDMSPartitionsResponse) => void
+  ): Promise<AddDMSPartitionsResponse> {
+    return this.request("AddDMSPartitions", req, cb)
+  }
+
+  /**
+   * 该接口（DeleteScript）用于删除sql脚本。
+   */
+  async DeleteScript(
+    req: DeleteScriptRequest,
+    cb?: (error: string, rep: DeleteScriptResponse) => void
+  ): Promise<DeleteScriptResponse> {
+    return this.request("DeleteScript", req, cb)
+  }
+
+  /**
+   * 元数据锁
+   */
+  async LockMetaData(
+    req: LockMetaDataRequest,
+    cb?: (error: string, rep: LockMetaDataResponse) => void
+  ): Promise<LockMetaDataResponse> {
+    return this.request("LockMetaData", req, cb)
   }
 
   /**
@@ -217,6 +297,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateTableResponse) => void
   ): Promise<CreateTableResponse> {
     return this.request("CreateTable", req, cb)
+  }
+
+  /**
+   * 查询任务结果
+   */
+  async DescribeTaskResult(
+    req: DescribeTaskResultRequest,
+    cb?: (error: string, rep: DescribeTaskResultResponse) => void
+  ): Promise<DescribeTaskResultResponse> {
+    return this.request("DescribeTaskResult", req, cb)
   }
 
   /**
@@ -280,6 +370,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 元数据解锁
+   */
+  async UnlockMetaData(
+    req: UnlockMetaDataRequest,
+    cb?: (error: string, rep: UnlockMetaDataResponse) => void
+  ): Promise<UnlockMetaDataResponse> {
+    return this.request("UnlockMetaData", req, cb)
+  }
+
+  /**
    * 该接口（CreateStoreLocation）新增或覆盖计算结果存储位置。
    */
   async CreateStoreLocation(
@@ -287,6 +387,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateStoreLocationResponse) => void
   ): Promise<CreateStoreLocationResponse> {
     return this.request("CreateStoreLocation", req, cb)
+  }
+
+  /**
+   * DMS元数据获取表
+   */
+  async DescribeDMSTable(
+    req: DescribeDMSTableRequest,
+    cb?: (error: string, rep: DescribeDMSTableResponse) => void
+  ): Promise<DescribeDMSTableResponse> {
+    return this.request("DescribeDMSTable", req, cb)
   }
 
   /**
@@ -320,6 +430,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * DMS元数据更新库
+   */
+  async AlterDMSDatabase(
+    req?: AlterDMSDatabaseRequest,
+    cb?: (error: string, rep: AlterDMSDatabaseResponse) => void
+  ): Promise<AlterDMSDatabaseResponse> {
+    return this.request("AlterDMSDatabase", req, cb)
+  }
+
+  /**
    * 解绑用户上的用户组
    */
   async UnbindWorkGroupsFromUser(
@@ -337,6 +457,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AttachWorkGroupPolicyResponse) => void
   ): Promise<AttachWorkGroupPolicyResponse> {
     return this.request("AttachWorkGroupPolicy", req, cb)
+  }
+
+  /**
+   * DMS元数据获取分区
+   */
+  async DescribeDMSPartitions(
+    req: DescribeDMSPartitionsRequest,
+    cb?: (error: string, rep: DescribeDMSPartitionsResponse) => void
+  ): Promise<DescribeDMSPartitionsResponse> {
+    return this.request("DescribeDMSPartitions", req, cb)
   }
 
   /**
@@ -360,6 +490,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * DMS元数据删除表
+   */
+  async DropDMSTable(
+    req: DropDMSTableRequest,
+    cb?: (error: string, rep: DropDMSTableResponse) => void
+  ): Promise<DropDMSTableResponse> {
+    return this.request("DropDMSTable", req, cb)
+  }
+
+  /**
    * 该接口（CreateScript）用于创建sql脚本。
    */
   async CreateScript(
@@ -367,6 +507,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateScriptResponse) => void
   ): Promise<CreateScriptResponse> {
     return this.request("CreateScript", req, cb)
+  }
+
+  /**
+   * DMS元数据获取表列表
+   */
+  async DescribeDMSTables(
+    req: DescribeDMSTablesRequest,
+    cb?: (error: string, rep: DescribeDMSTablesResponse) => void
+  ): Promise<DescribeDMSTablesResponse> {
+    return this.request("DescribeDMSTables", req, cb)
   }
 
   /**
@@ -430,6 +580,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * DMS元数据获取库
+   */
+  async DescribeDMSDatabase(
+    req?: DescribeDMSDatabaseRequest,
+    cb?: (error: string, rep: DescribeDMSDatabaseResponse) => void
+  ): Promise<DescribeDMSDatabaseResponse> {
+    return this.request("DescribeDMSDatabase", req, cb)
+  }
+
+  /**
    * 该接口（DescribleTasks）用于查询任务列表
    */
   async DescribeTasks(
@@ -440,13 +600,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 该接口（DeleteScript）用于删除sql脚本。
+   * 绑定工作组到用户
    */
-  async DeleteScript(
-    req: DeleteScriptRequest,
-    cb?: (error: string, rep: DeleteScriptResponse) => void
-  ): Promise<DeleteScriptResponse> {
-    return this.request("DeleteScript", req, cb)
+  async BindWorkGroupsToUser(
+    req: BindWorkGroupsToUserRequest,
+    cb?: (error: string, rep: BindWorkGroupsToUserResponse) => void
+  ): Promise<BindWorkGroupsToUserResponse> {
+    return this.request("BindWorkGroupsToUser", req, cb)
   }
 
   /**
@@ -457,6 +617,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateSparkAppTaskResponse) => void
   ): Promise<CreateSparkAppTaskResponse> {
     return this.request("CreateSparkAppTask", req, cb)
+  }
+
+  /**
+   * DMS元数据删除分区
+   */
+  async DropDMSPartitions(
+    req: DropDMSPartitionsRequest,
+    cb?: (error: string, rep: DropDMSPartitionsResponse) => void
+  ): Promise<DropDMSPartitionsResponse> {
+    return this.request("DropDMSPartitions", req, cb)
   }
 
   /**
@@ -490,13 +660,43 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 按顺序创建任务（已经废弃，后期不再维护，请使用接口CreateTasks）
+   * 添加用户到工作组
    */
-  async CreateTasksInOrder(
-    req: CreateTasksInOrderRequest,
-    cb?: (error: string, rep: CreateTasksInOrderResponse) => void
-  ): Promise<CreateTasksInOrderResponse> {
-    return this.request("CreateTasksInOrder", req, cb)
+  async AddUsersToWorkGroup(
+    req: AddUsersToWorkGroupRequest,
+    cb?: (error: string, rep: AddUsersToWorkGroupResponse) => void
+  ): Promise<AddUsersToWorkGroupResponse> {
+    return this.request("AddUsersToWorkGroup", req, cb)
+  }
+
+  /**
+   * 查询计算结果存储位置。
+   */
+  async DescribeStoreLocation(
+    req?: DescribeStoreLocationRequest,
+    cb?: (error: string, rep: DescribeStoreLocationResponse) => void
+  ): Promise<DescribeStoreLocationResponse> {
+    return this.request("DescribeStoreLocation", req, cb)
+  }
+
+  /**
+   * DMS元数据创建库
+   */
+  async CreateDMSDatabase(
+    req: CreateDMSDatabaseRequest,
+    cb?: (error: string, rep: CreateDMSDatabaseResponse) => void
+  ): Promise<CreateDMSDatabaseResponse> {
+    return this.request("CreateDMSDatabase", req, cb)
+  }
+
+  /**
+   * DMS元数据更新分区
+   */
+  async AlterDMSPartition(
+    req: AlterDMSPartitionRequest,
+    cb?: (error: string, rep: AlterDMSPartitionResponse) => void
+  ): Promise<AlterDMSPartitionResponse> {
+    return this.request("AlterDMSPartition", req, cb)
   }
 
   /**
@@ -510,13 +710,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询计算结果存储位置。
+   * DMS元数据创建表
    */
-  async DescribeStoreLocation(
-    req?: DescribeStoreLocationRequest,
-    cb?: (error: string, rep: DescribeStoreLocationResponse) => void
-  ): Promise<DescribeStoreLocationResponse> {
-    return this.request("DescribeStoreLocation", req, cb)
+  async CreateDMSTable(
+    req: CreateDMSTableRequest,
+    cb?: (error: string, rep: CreateDMSTableResponse) => void
+  ): Promise<CreateDMSTableResponse> {
+    return this.request("CreateDMSTable", req, cb)
   }
 
   /**

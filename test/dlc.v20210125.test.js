@@ -38,9 +38,19 @@ it("dlc.v20210125.CreateTask", async function () {
     }
 })
 
-it("dlc.v20210125.AddUsersToWorkGroup", async function () {
+it("dlc.v20210125.CreateTasksInOrder", async function () {
     try {
-       const data = await client.AddUsersToWorkGroup({})
+       const data = await client.CreateTasksInOrder({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.CheckLockMetaData", async function () {
+    try {
+       const data = await client.CheckLockMetaData({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -58,9 +68,9 @@ it("dlc.v20210125.CreateImportTask", async function () {
     }
 })
 
-it("dlc.v20210125.DescribeTaskResult", async function () {
+it("dlc.v20210125.AlterDMSTable", async function () {
     try {
-       const data = await client.DescribeTaskResult({})
+       const data = await client.AlterDMSTable({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -68,9 +78,39 @@ it("dlc.v20210125.DescribeTaskResult", async function () {
     }
 })
 
-it("dlc.v20210125.BindWorkGroupsToUser", async function () {
+it("dlc.v20210125.DropDMSDatabase", async function () {
     try {
-       const data = await client.BindWorkGroupsToUser({})
+       const data = await client.DropDMSDatabase({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.AddDMSPartitions", async function () {
+    try {
+       const data = await client.AddDMSPartitions({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.DeleteScript", async function () {
+    try {
+       const data = await client.DeleteScript({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.LockMetaData", async function () {
+    try {
+       const data = await client.LockMetaData({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -81,6 +121,16 @@ it("dlc.v20210125.BindWorkGroupsToUser", async function () {
 it("dlc.v20210125.CreateTable", async function () {
     try {
        const data = await client.CreateTable({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.DescribeTaskResult", async function () {
+    try {
+       const data = await client.DescribeTaskResult({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -148,9 +198,29 @@ it("dlc.v20210125.DeleteWorkGroup", async function () {
     }
 })
 
+it("dlc.v20210125.UnlockMetaData", async function () {
+    try {
+       const data = await client.UnlockMetaData({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.CreateStoreLocation", async function () {
     try {
        const data = await client.CreateStoreLocation({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.DescribeDMSTable", async function () {
+    try {
+       const data = await client.DescribeDMSTable({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -188,6 +258,16 @@ it("dlc.v20210125.ListTaskJobLogDetail", async function () {
     }
 })
 
+it("dlc.v20210125.AlterDMSDatabase", async function () {
+    try {
+       const data = await client.AlterDMSDatabase({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.UnbindWorkGroupsFromUser", async function () {
     try {
        const data = await client.UnbindWorkGroupsFromUser({})
@@ -201,6 +281,16 @@ it("dlc.v20210125.UnbindWorkGroupsFromUser", async function () {
 it("dlc.v20210125.AttachWorkGroupPolicy", async function () {
     try {
        const data = await client.AttachWorkGroupPolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.DescribeDMSPartitions", async function () {
+    try {
+       const data = await client.DescribeDMSPartitions({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -228,9 +318,29 @@ it("dlc.v20210125.CancelTask", async function () {
     }
 })
 
+it("dlc.v20210125.DropDMSTable", async function () {
+    try {
+       const data = await client.DropDMSTable({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.CreateScript", async function () {
     try {
        const data = await client.CreateScript({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.DescribeDMSTables", async function () {
+    try {
+       const data = await client.DescribeDMSTables({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -298,6 +408,16 @@ it("dlc.v20210125.DescribeTable", async function () {
     }
 })
 
+it("dlc.v20210125.DescribeDMSDatabase", async function () {
+    try {
+       const data = await client.DescribeDMSDatabase({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.DescribeTasks", async function () {
     try {
        const data = await client.DescribeTasks({})
@@ -308,9 +428,9 @@ it("dlc.v20210125.DescribeTasks", async function () {
     }
 })
 
-it("dlc.v20210125.DeleteScript", async function () {
+it("dlc.v20210125.BindWorkGroupsToUser", async function () {
     try {
-       const data = await client.DeleteScript({})
+       const data = await client.BindWorkGroupsToUser({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -321,6 +441,16 @@ it("dlc.v20210125.DeleteScript", async function () {
 it("dlc.v20210125.CreateSparkAppTask", async function () {
     try {
        const data = await client.CreateSparkAppTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.DropDMSPartitions", async function () {
+    try {
+       const data = await client.DropDMSPartitions({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -358,9 +488,39 @@ it("dlc.v20210125.DescribeDatabases", async function () {
     }
 })
 
-it("dlc.v20210125.CreateTasksInOrder", async function () {
+it("dlc.v20210125.AddUsersToWorkGroup", async function () {
     try {
-       const data = await client.CreateTasksInOrder({})
+       const data = await client.AddUsersToWorkGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.DescribeStoreLocation", async function () {
+    try {
+       const data = await client.DescribeStoreLocation({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.CreateDMSDatabase", async function () {
+    try {
+       const data = await client.CreateDMSDatabase({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.AlterDMSPartition", async function () {
+    try {
+       const data = await client.AlterDMSPartition({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -378,9 +538,9 @@ it("dlc.v20210125.AttachUserPolicy", async function () {
     }
 })
 
-it("dlc.v20210125.DescribeStoreLocation", async function () {
+it("dlc.v20210125.CreateDMSTable", async function () {
     try {
-       const data = await client.DescribeStoreLocation({})
+       const data = await client.CreateDMSTable({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
