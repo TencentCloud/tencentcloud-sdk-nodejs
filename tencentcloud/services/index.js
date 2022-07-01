@@ -406,6 +406,8 @@ var waf_1 = require("./waf");
 Object.defineProperty(exports, "waf", { enumerable: true, get: function () { return waf_1.waf; } });
 var wav_1 = require("./wav");
 Object.defineProperty(exports, "wav", { enumerable: true, get: function () { return wav_1.wav; } });
+var wedata_1 = require("./wedata");
+Object.defineProperty(exports, "wedata", { enumerable: true, get: function () { return wedata_1.wedata; } });
 var wss_1 = require("./wss");
 Object.defineProperty(exports, "wss", { enumerable: true, get: function () { return wss_1.wss; } });
 var yinsuda_1 = require("./yinsuda");

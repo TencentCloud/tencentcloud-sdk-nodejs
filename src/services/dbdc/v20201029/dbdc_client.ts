@@ -18,19 +18,22 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  InstanceDeviceInfo,
+  InstanceDetail,
   DescribeInstanceDetailResponse,
-  DescribeInstanceListResponse,
+  DescribeInstanceDetail,
   DescribeDBInstancesRequest,
   DescribeInstanceDetailRequest,
+  HostDetail,
+  InstanceDeviceInfo,
   DescribeInstancesRequest,
   DeviceInfo,
   DBInstanceDetail,
   ModifyInstanceNameResponse,
   InstanceExpand,
-  InstanceDetail,
+  DescribeHostListResponse,
+  DescribeInstanceListResponse,
   DescribeDBInstancesResponse,
-  DescribeInstanceDetail,
+  DescribeHostListRequest,
   DescribeInstancesResponse,
   DescribeInstanceListRequest,
   ModifyInstanceNameRequest,
@@ -46,6 +49,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口用于查询独享集群实例列表
+   */
+  async DescribeInstanceList(
+    req: DescribeInstanceListRequest,
+    cb?: (error: string, rep: DescribeInstanceListResponse) => void
+  ): Promise<DescribeInstanceListResponse> {
+    return this.request("DescribeInstanceList", req, cb)
+  }
+
+  /**
    * 根据不同地域不同用户，获取集群列表信息
    */
   async DescribeInstances(
@@ -56,13 +69,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口用于查询独享集群实例列表
+   * 本接口用于查询主机列表
    */
-  async DescribeInstanceList(
-    req: DescribeInstanceListRequest,
-    cb?: (error: string, rep: DescribeInstanceListResponse) => void
-  ): Promise<DescribeInstanceListResponse> {
-    return this.request("DescribeInstanceList", req, cb)
+  async DescribeHostList(
+    req: DescribeHostListRequest,
+    cb?: (error: string, rep: DescribeHostListResponse) => void
+  ): Promise<DescribeHostListResponse> {
+    return this.request("DescribeHostList", req, cb)
+  }
+
+  /**
+   * 本接口用于修改集群名称
+   */
+  async ModifyInstanceName(
+    req: ModifyInstanceNameRequest,
+    cb?: (error: string, rep: ModifyInstanceNameResponse) => void
+  ): Promise<ModifyInstanceNameResponse> {
+    return this.request("ModifyInstanceName", req, cb)
   }
 
   /**
@@ -83,15 +106,5 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDBInstancesResponse) => void
   ): Promise<DescribeDBInstancesResponse> {
     return this.request("DescribeDBInstances", req, cb)
-  }
-
-  /**
-   * 本接口用于修改集群名称
-   */
-  async ModifyInstanceName(
-    req: ModifyInstanceNameRequest,
-    cb?: (error: string, rep: ModifyInstanceNameResponse) => void
-  ): Promise<ModifyInstanceNameResponse> {
-    return this.request("ModifyInstanceName", req, cb)
   }
 }

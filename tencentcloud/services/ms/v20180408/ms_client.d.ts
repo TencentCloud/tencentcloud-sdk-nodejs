@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CreateShieldPlanInstanceResponse, CreateResourceInstancesRequest, DescribeShieldInstancesResponse, DescribeShieldResultRequest, CreateShieldInstanceRequest, CreateCosSecKeyInstanceRequest, DescribeScanResultsResponse, CreateScanInstancesRequest, DescribeUserBaseInfoInstanceResponse, CreateShieldPlanInstanceRequest, CreateBindInstanceRequest, CreateShieldInstanceResponse, DeleteShieldInstancesRequest, DescribeShieldInstancesRequest, CreateScanInstancesResponse, DescribeScanInstancesResponse, DescribeShieldPlanInstanceResponse, DescribeResourceInstancesRequest, DescribeShieldPlanInstanceRequest, CreateResourceInstancesResponse, DeleteScanInstancesResponse, DeleteShieldInstancesResponse, DescribeScanInstancesRequest, DescribeUserBaseInfoInstanceRequest, DescribeResourceInstancesResponse, DescribeScanResultsRequest, CreateCosSecKeyInstanceResponse, DescribeShieldResultResponse, CreateBindInstanceResponse, DeleteScanInstancesRequest } from "./ms_models";
+import { CreateShieldPlanInstanceResponse, CreateResourceInstancesRequest, DescribeShieldInstancesResponse, DescribeShieldResultRequest, CreateShieldInstanceRequest, CreateCosSecKeyInstanceRequest, DescribeScanResultsResponse, CreateScanInstancesRequest, DescribeUserBaseInfoInstanceResponse, CreateShieldPlanInstanceRequest, CreateBindInstanceRequest, CreateShieldInstanceResponse, DeleteShieldInstancesRequest, DescribeShieldInstancesRequest, CreateScanInstancesResponse, DescribeScanInstancesResponse, DescribeUrlDetectionResultRequest, DescribeShieldPlanInstanceResponse, DescribeResourceInstancesRequest, DescribeUrlDetectionResultResponse, DescribeShieldPlanInstanceRequest, CreateResourceInstancesResponse, DeleteScanInstancesResponse, DeleteShieldInstancesResponse, DescribeScanInstancesRequest, DescribeUserBaseInfoInstanceRequest, DescribeResourceInstancesResponse, DescribeScanResultsRequest, CreateCosSecKeyInstanceResponse, DescribeShieldResultResponse, CreateBindInstanceResponse, DeleteScanInstancesRequest } from "./ms_models";
 /**
  * ms client
  * @class
@@ -53,6 +53,10 @@ export declare class Client extends AbstractClient {
 
      */
     DescribeShieldInstances(req: DescribeShieldInstancesRequest, cb?: (error: string, rep: DescribeShieldInstancesResponse) => void): Promise<DescribeShieldInstancesResponse>;
+    /**
+     * 移动安全-网址检测服务
+     */
+    DescribeUrlDetectionResult(req: DescribeUrlDetectionResultRequest, cb?: (error: string, rep: DescribeUrlDetectionResultResponse) => void): Promise<DescribeUrlDetectionResultResponse>;
     /**
      * 对资源进行策略新增
      */

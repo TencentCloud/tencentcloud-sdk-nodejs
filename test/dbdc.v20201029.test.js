@@ -18,6 +18,16 @@ const client = new tencentcloud.dbdc.v20201029.Client({
 })
 describe("dbdc.v20201029.test.js", function () {
 
+it("dbdc.v20201029.DescribeInstanceList", async function () {
+    try {
+       const data = await client.DescribeInstanceList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dbdc.v20201029.DescribeInstances", async function () {
     try {
        const data = await client.DescribeInstances({})
@@ -28,9 +38,19 @@ it("dbdc.v20201029.DescribeInstances", async function () {
     }
 })
 
-it("dbdc.v20201029.DescribeInstanceList", async function () {
+it("dbdc.v20201029.DescribeHostList", async function () {
     try {
-       const data = await client.DescribeInstanceList({})
+       const data = await client.DescribeHostList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dbdc.v20201029.ModifyInstanceName", async function () {
+    try {
+       const data = await client.ModifyInstanceName({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -51,16 +71,6 @@ it("dbdc.v20201029.DescribeInstanceDetail", async function () {
 it("dbdc.v20201029.DescribeDBInstances", async function () {
     try {
        const data = await client.DescribeDBInstances({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("dbdc.v20201029.ModifyInstanceName", async function () {
-    try {
-       const data = await client.ModifyInstanceName({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

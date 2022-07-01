@@ -28,16 +28,28 @@ class Client extends abstract_client_1.AbstractClient {
         super("dbdc.tencentcloudapi.com", "2020-10-29", clientConfig);
     }
     /**
+     * 本接口用于查询独享集群实例列表
+     */
+    async DescribeInstanceList(req, cb) {
+        return this.request("DescribeInstanceList", req, cb);
+    }
+    /**
      * 根据不同地域不同用户，获取集群列表信息
      */
     async DescribeInstances(req, cb) {
         return this.request("DescribeInstances", req, cb);
     }
     /**
-     * 本接口用于查询独享集群实例列表
+     * 本接口用于查询主机列表
      */
-    async DescribeInstanceList(req, cb) {
-        return this.request("DescribeInstanceList", req, cb);
+    async DescribeHostList(req, cb) {
+        return this.request("DescribeHostList", req, cb);
+    }
+    /**
+     * 本接口用于修改集群名称
+     */
+    async ModifyInstanceName(req, cb) {
+        return this.request("ModifyInstanceName", req, cb);
     }
     /**
      * 本接口用于查询独享集群详情
@@ -50,12 +62,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeDBInstances(req, cb) {
         return this.request("DescribeDBInstances", req, cb);
-    }
-    /**
-     * 本接口用于修改集群名称
-     */
-    async ModifyInstanceName(req, cb) {
-        return this.request("ModifyInstanceName", req, cb);
     }
 }
 exports.Client = Client;

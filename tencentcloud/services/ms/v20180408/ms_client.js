@@ -96,6 +96,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeShieldInstances", req, cb);
     }
     /**
+     * 移动安全-网址检测服务
+     */
+    async DescribeUrlDetectionResult(req, cb) {
+        return this.request("DescribeUrlDetectionResult", req, cb);
+    }
+    /**
      * 对资源进行策略新增
      */
     async CreateShieldPlanInstance(req, cb) {

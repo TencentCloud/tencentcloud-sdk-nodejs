@@ -43,6 +43,7 @@ import {
   DescribeShieldInstancesRequest,
   CreateScanInstancesResponse,
   DescribeScanInstancesResponse,
+  DescribeUrlDetectionResultRequest,
   VulInfo,
   AppInfo,
   ServiceInfo,
@@ -52,6 +53,7 @@ import {
   ResourceServiceInfo,
   DescribeResourceInstancesRequest,
   AdInfo,
+  DescribeUrlDetectionResultResponse,
   DescribeShieldPlanInstanceRequest,
   ShieldInfo,
   ScanPermissionList,
@@ -194,6 +196,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeShieldInstancesResponse) => void
   ): Promise<DescribeShieldInstancesResponse> {
     return this.request("DescribeShieldInstances", req, cb)
+  }
+
+  /**
+   * 移动安全-网址检测服务
+   */
+  async DescribeUrlDetectionResult(
+    req: DescribeUrlDetectionResultRequest,
+    cb?: (error: string, rep: DescribeUrlDetectionResultResponse) => void
+  ): Promise<DescribeUrlDetectionResultResponse> {
+    return this.request("DescribeUrlDetectionResult", req, cb)
   }
 
   /**

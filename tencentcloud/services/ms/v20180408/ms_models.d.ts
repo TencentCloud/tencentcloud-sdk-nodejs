@@ -556,6 +556,15 @@ export interface DescribeScanInstancesResponse {
     RequestId?: string;
 }
 /**
+ * DescribeUrlDetectionResult请求参数结构体
+ */
+export interface DescribeUrlDetectionResultRequest {
+    /**
+      * 查询的网址
+      */
+    Url: string;
+}
+/**
  * 漏洞信息
  */
 export interface VulInfo {
@@ -747,6 +756,67 @@ export interface AdInfo {
       * 通知栏广告列表
       */
     NotifyBars: Array<PluginInfo>;
+}
+/**
+ * DescribeUrlDetectionResult返回参数结构体
+ */
+export interface DescribeUrlDetectionResultResponse {
+    /**
+      * [查询结果]查询结果；枚举值：0 查询成功，否则查询失败
+      */
+    ResultCode: number;
+    /**
+      * [固定信息]响应协议版本号；
+      */
+    RespVer: number;
+    /**
+      * [查询结果]url恶意状态；枚举值：1-灰， 2-黑（具体的恶意类型参考恶意类型定义Eviltype字段) ，3-非腾讯白名单，4-腾讯白名单。查询结果（level、evilclass、eviltype）这3个字段在Urltype=2（url状态为黑）下才有意义。
+      */
+    UrlType: number;
+    /**
+      * [查询结果]url恶意大类；枚举值：1-链接，2-Cgi，3-路劲，4-整站，5-整域。
+      */
+    EvilClass: number;
+    /**
+      * [查询结果]url恶意类型；枚举值：1-社工欺诈（仿冒、账号钓鱼、中奖诈骗）；2-信息诈骗（虚假充值、虚假兼职、虚假金融投资、虚假信用卡代办、网络赌博诈骗；3-虚假销售（男女保健美容减肥产品、电子产品、虚假广告、违法销售）；4-恶意文件（病毒文件，木马文件，恶意apk文件的下载链接以及站点，挂马网站）；5-博彩网站（博彩网站，在线赌博网站）；6-色情网站（涉嫌传播色情内容，提供色情服务的网站；7-风险网站（弱类型，传播垃圾信息的网站, 如果客户端有阻断，不建议使用这个数据）；8-非法内容（根据法律法规不能传播的内容，主要为政治敏感内容，默认内部使用）
+      */
+    EvilType: number;
+    /**
+      * [查询结果]url恶意级别
+      */
+    Level: number;
+    /**
+      * [查询详情]url检出时间
+      */
+    DetectTime: number;
+    /**
+      * [查询详情]拦截Wording
+      */
+    Wording: string;
+    /**
+      * [查询详情]拦截Wording 标题
+      */
+    WordingTitle: string;
+    /**
+      * [查询结果]url恶意状态说明
+      */
+    UrlTypeDesc: string;
+    /**
+      * [查询结果]url恶意大类说明
+      */
+    EvilClassDesc: string;
+    /**
+      * [查询结果]url恶意类型说明
+      */
+    EvilTypeDesc: string;
+    /**
+      * [查询结果]url恶意级别说明
+      */
+    LevelDesc: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeShieldPlanInstance请求参数结构体

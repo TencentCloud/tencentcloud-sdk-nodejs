@@ -1,27 +1,47 @@
 /**
- * 集群设备组信息。
+ * 集群容量信息。
  */
-export interface InstanceDeviceInfo {
+export interface InstanceDetail {
     /**
-      * 集群ID
-注意：此字段可能返回 null，表示取不到有效值。
+      * 集群状态，0：运行中，1：不在运行
       */
-    InstanceId: string;
+    Status: number;
     /**
-      * 读写设备组
-注意：此字段可能返回 null，表示取不到有效值。
+      * 读写集群剩余内存容量，单位GB
       */
-    ReadWriteDevice: Array<DeviceInfo>;
+    ReadWriteTotalLeaveMemory: number;
     /**
-      * 只读设备组
-注意：此字段可能返回 null，表示取不到有效值。
+      * 读写集群剩余磁盘容量，单位GB
       */
-    ReadOnlyDevice: Array<DeviceInfo>;
+    ReadWriteTotalLeaveDisk: number;
     /**
-      * 空闲设备组
-注意：此字段可能返回 null，表示取不到有效值。
+      * 读写集群总内存容量，单位GB
       */
-    FreeDevice: Array<DeviceInfo>;
+    ReadWriteTotalMemory: number;
+    /**
+      * 读写集群总磁盘容量，单位GB
+      */
+    ReadWriteTotalDisk: number;
+    /**
+      * 只读集群剩余内存容量，单位GB
+      */
+    ReadOnlyTotalLeaveMemory: number;
+    /**
+      * 只读集群剩余磁盘容量，单位GB
+      */
+    ReadOnlyTotalLeaveDisk: number;
+    /**
+      * 只读集群总内存容量，单位GB
+      */
+    ReadOnlyTotalMemory: number;
+    /**
+      * 只读集群总磁盘容量，单位GB
+      */
+    ReadOnlyTotalDisk: number;
+    /**
+      * 集群设备详情
+      */
+    InstanceDeviceInfos: Array<InstanceDeviceInfo>;
 }
 /**
  * DescribeInstanceDetail返回参数结构体
@@ -134,21 +154,110 @@ export interface DescribeInstanceDetailResponse {
     RequestId?: string;
 }
 /**
- * DescribeInstanceList返回参数结构体
+ * 独享集群详情
  */
-export interface DescribeInstanceListResponse {
+export interface DescribeInstanceDetail {
     /**
-      * 独享集群列表
+      * 独享集群实例Id
       */
-    Instances: Array<DescribeInstanceDetail>;
+    InstanceId: string;
     /**
-      * 独享集群实例总数
+      * 独享集群实例名称
       */
-    TotalCount: number;
+    InstanceName: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 地域
       */
-    RequestId?: string;
+    Region: string;
+    /**
+      * 产品ID, 0:CDB, 1:TDSQL
+      */
+    ProductId: number;
+    /**
+      * 集群类型, 0:公有云, 1:金融围笼
+      */
+    Type: number;
+    /**
+      * 主机类型, 0:物理机, 1:cvm本地盘, 2:cvm云盘
+      */
+    HostType: number;
+    /**
+      * 自动续费标志, 0:未设置, 1:自动续费, 2:到期不续费
+      */
+    AutoRenewFlag: number;
+    /**
+      * 集群状态
+      */
+    Status: number;
+    /**
+      * 集群状态描述
+      */
+    StatusDesc: string;
+    /**
+      * 创建时间
+      */
+    CreateTime: string;
+    /**
+      * 到期时间
+      */
+    PeriodEndTime: string;
+    /**
+      * 主机数
+      */
+    HostNum: number;
+    /**
+      * DB实例数
+      */
+    DbNum: number;
+    /**
+      * 分配策略, 0:紧凑, 1:均匀
+      */
+    AssignStrategy: number;
+    /**
+      * 总主机CPU(单位:核数)
+      */
+    CpuSpec: number;
+    /**
+      * 总已分配CPU(单位:核数)
+      */
+    CpuAssigned: number;
+    /**
+      * 总可分配CPU(单位:核数)
+      */
+    CpuAssignable: number;
+    /**
+      * 总主机内存(单位:GB)
+      */
+    MemorySpec: number;
+    /**
+      * 总已分配内存(单位:GB)
+      */
+    MemoryAssigned: number;
+    /**
+      * 总可分配内存(单位:GB)
+      */
+    MemoryAssignable: number;
+    /**
+      * 总机器磁盘(单位:GB)
+      */
+    DiskSpec: number;
+    /**
+      * 总已分配磁盘(单位:GB)
+      */
+    DiskAssigned: number;
+    /**
+      * 总可分配磁盘(单位:GB)
+      */
+    DiskAssignable: number;
+    /**
+      * 可用区
+      */
+    Zone: string;
+    /**
+      * 围笼ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FenceId: string;
 }
 /**
  * DescribeDBInstances请求参数结构体
@@ -183,6 +292,128 @@ export interface DescribeInstanceDetailRequest {
       * 独享集群实例Id
       */
     InstanceId: string;
+}
+/**
+ * 主机详情
+ */
+export interface HostDetail {
+    /**
+      * 主机Id
+      */
+    HostId: string;
+    /**
+      * 主机名称
+      */
+    HostName: string;
+    /**
+      * 可用区
+      */
+    Zone: string;
+    /**
+      * 主机状态
+      */
+    Status: number;
+    /**
+      * 分配DB实例状态,0:可分配,1:不可分配
+      */
+    AssignStatus: number;
+    /**
+      * 主机类型, 0:物理机, 1:cvm本地盘, 2:cvm云盘
+      */
+    HostType: number;
+    /**
+      * DB实例数
+      */
+    DbNum: number;
+    /**
+      * 主机CPU(单位:核数)
+      */
+    CpuSpec: number;
+    /**
+      * 已分配CPU(单位:核数)
+      */
+    CpuAssigned: number;
+    /**
+      * 可分配CPU(单位:核数)
+      */
+    CpuAssignable: number;
+    /**
+      * 主机内存(单位:GB)
+      */
+    MemorySpec: number;
+    /**
+      * 已分配内存(单位:GB)
+      */
+    MemoryAssigned: number;
+    /**
+      * 可分配内存(单位:GB)
+      */
+    MemoryAssignable: number;
+    /**
+      * 主机磁盘(单位:GB)
+      */
+    DiskSpec: number;
+    /**
+      * 已分配磁盘(单位:GB)
+      */
+    DiskAssigned: number;
+    /**
+      * 可分配磁盘(GB)
+      */
+    DiskAssignable: number;
+    /**
+      * CPU分配比
+      */
+    CpuRatio: number;
+    /**
+      * 内存分配比
+      */
+    MemoryRatio: number;
+    /**
+      * 磁盘分配比
+      */
+    DiskRatio: number;
+    /**
+      * 机型名称
+      */
+    MachineName: string;
+    /**
+      * 机型类别
+      */
+    MachineType: string;
+    /**
+      * 计费标签
+      */
+    PidTag: string;
+    /**
+      * 计费ID
+      */
+    Pid: number;
+}
+/**
+ * 集群设备组信息。
+ */
+export interface InstanceDeviceInfo {
+    /**
+      * 集群ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InstanceId: string;
+    /**
+      * 读写设备组
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ReadWriteDevice: Array<DeviceInfo>;
+    /**
+      * 只读设备组
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ReadOnlyDevice: Array<DeviceInfo>;
+    /**
+      * 空闲设备组
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FreeDevice: Array<DeviceInfo>;
 }
 /**
  * DescribeInstances请求参数结构体
@@ -418,49 +649,38 @@ export interface InstanceExpand {
     Pid: number;
 }
 /**
- * 集群容量信息。
+ * DescribeHostList返回参数结构体
  */
-export interface InstanceDetail {
+export interface DescribeHostListResponse {
     /**
-      * 集群状态，0：运行中，1：不在运行
+      * 主机总数
       */
-    Status: number;
+    TotalCount: number;
     /**
-      * 读写集群剩余内存容量，单位GB
+      * 主机详情
       */
-    ReadWriteTotalLeaveMemory: number;
+    Hosts: Array<HostDetail>;
     /**
-      * 读写集群剩余磁盘容量，单位GB
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    ReadWriteTotalLeaveDisk: number;
+    RequestId?: string;
+}
+/**
+ * DescribeInstanceList返回参数结构体
+ */
+export interface DescribeInstanceListResponse {
     /**
-      * 读写集群总内存容量，单位GB
+      * 独享集群列表
       */
-    ReadWriteTotalMemory: number;
+    Instances: Array<DescribeInstanceDetail>;
     /**
-      * 读写集群总磁盘容量，单位GB
+      * 独享集群实例总数
       */
-    ReadWriteTotalDisk: number;
+    TotalCount: number;
     /**
-      * 只读集群剩余内存容量，单位GB
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    ReadOnlyTotalLeaveMemory: number;
-    /**
-      * 只读集群剩余磁盘容量，单位GB
-      */
-    ReadOnlyTotalLeaveDisk: number;
-    /**
-      * 只读集群总内存容量，单位GB
-      */
-    ReadOnlyTotalMemory: number;
-    /**
-      * 只读集群总磁盘容量，单位GB
-      */
-    ReadOnlyTotalDisk: number;
-    /**
-      * 集群设备详情
-      */
-    InstanceDeviceInfos: Array<InstanceDeviceInfo>;
+    RequestId?: string;
 }
 /**
  * DescribeDBInstances返回参数结构体
@@ -480,110 +700,25 @@ export interface DescribeDBInstancesResponse {
     RequestId?: string;
 }
 /**
- * 独享集群详情
+ * DescribeHostList请求参数结构体
  */
-export interface DescribeInstanceDetail {
+export interface DescribeHostListRequest {
     /**
       * 独享集群实例Id
       */
     InstanceId: string;
     /**
-      * 独享集群实例名称
+      * 分页返回数量
       */
-    InstanceName: string;
+    Limit?: number;
     /**
-      * 地域
+      * 分页偏移量
       */
-    Region: string;
+    Offset?: number;
     /**
-      * 产品ID, 0:CDB, 1:TDSQL
+      * 分配状态过滤，0-可分配，1-禁止分配
       */
-    ProductId: number;
-    /**
-      * 集群类型, 0:公有云, 1:金融围笼
-      */
-    Type: number;
-    /**
-      * 主机类型, 0:物理机, 1:cvm本地盘, 2:cvm云盘
-      */
-    HostType: number;
-    /**
-      * 自动续费标志, 0:未设置, 1:自动续费, 2:到期不续费
-      */
-    AutoRenewFlag: number;
-    /**
-      * 集群状态
-      */
-    Status: number;
-    /**
-      * 集群状态描述
-      */
-    StatusDesc: string;
-    /**
-      * 创建时间
-      */
-    CreateTime: string;
-    /**
-      * 到期时间
-      */
-    PeriodEndTime: string;
-    /**
-      * 主机数
-      */
-    HostNum: number;
-    /**
-      * DB实例数
-      */
-    DbNum: number;
-    /**
-      * 分配策略, 0:紧凑, 1:均匀
-      */
-    AssignStrategy: number;
-    /**
-      * 总主机CPU(单位:核数)
-      */
-    CpuSpec: number;
-    /**
-      * 总已分配CPU(单位:核数)
-      */
-    CpuAssigned: number;
-    /**
-      * 总可分配CPU(单位:核数)
-      */
-    CpuAssignable: number;
-    /**
-      * 总主机内存(单位:GB)
-      */
-    MemorySpec: number;
-    /**
-      * 总已分配内存(单位:GB)
-      */
-    MemoryAssigned: number;
-    /**
-      * 总可分配内存(单位:GB)
-      */
-    MemoryAssignable: number;
-    /**
-      * 总机器磁盘(单位:GB)
-      */
-    DiskSpec: number;
-    /**
-      * 总已分配磁盘(单位:GB)
-      */
-    DiskAssigned: number;
-    /**
-      * 总可分配磁盘(单位:GB)
-      */
-    DiskAssignable: number;
-    /**
-      * 可用区
-      */
-    Zone: string;
-    /**
-      * 围笼ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    FenceId: string;
+    AssignStatus?: Array<number>;
 }
 /**
  * DescribeInstances返回参数结构体

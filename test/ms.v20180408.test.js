@@ -128,6 +128,16 @@ it("ms.v20180408.DescribeShieldInstances", async function () {
     }
 })
 
+it("ms.v20180408.DescribeUrlDetectionResult", async function () {
+    try {
+       const data = await client.DescribeUrlDetectionResult({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ms.v20180408.CreateShieldPlanInstance", async function () {
     try {
        const data = await client.CreateShieldPlanInstance({})
