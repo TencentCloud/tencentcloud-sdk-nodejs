@@ -94,7 +94,7 @@ export interface ModifyMaintainPeriodConfigRequest {
       */
     MaintainDuration: number;
     /**
-      * 每周维护日期
+      * 每周维护日期，日期取值范围[Mon, Tue, Wed, Thu, Fri, Sat, Sun]
       */
     MaintainWeekDays: Array<string>;
 }
@@ -116,6 +116,15 @@ export interface DescribeRollbackTimeRangeResponse {
     RequestId?: string;
 }
 /**
+ * ModifyBackupName返回参数结构体
+ */
+export interface ModifyBackupNameResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * AssociateSecurityGroups请求参数结构体
  */
 export interface AssociateSecurityGroupsRequest {
@@ -131,6 +140,19 @@ export interface AssociateSecurityGroupsRequest {
       * 可用区
       */
     Zone: string;
+}
+/**
+ * DescribeBinlogDownloadUrl请求参数结构体
+ */
+export interface DescribeBinlogDownloadUrlRequest {
+    /**
+      * 集群ID
+      */
+    ClusterId: string;
+    /**
+      * Binlog文件ID
+      */
+    BinlogId: number;
 }
 /**
  * CreateAccounts返回参数结构体
@@ -188,6 +210,24 @@ export interface AccountParam {
       * 参数值
       */
     ParamValue: string;
+}
+/**
+ * DescribeBinlogs返回参数结构体
+ */
+export interface DescribeBinlogsResponse {
+    /**
+      * 记录总条数
+      */
+    TotalCount: number;
+    /**
+      * Binlog列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Binlogs: Array<BinlogItem>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeInstances返回参数结构体
@@ -269,9 +309,9 @@ export interface Account {
     Host: string;
 }
 /**
- * ModifyBackupConfig返回参数结构体
+ * ModifyClusterName返回参数结构体
  */
-export interface ModifyBackupConfigResponse {
+export interface ModifyClusterNameResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -439,17 +479,53 @@ export interface CynosdbInstanceGrp {
     InstanceSet: Array<CynosdbInstance>;
 }
 /**
- * 集群绑定的标签信息，包含标签键TagKey和标签值TagValue
+ * 实例慢查询信息
  */
-export interface Tag {
+export interface SlowQueriesItem {
     /**
-      * 标签键
+      * 执行时间戳
       */
-    TagKey: string;
+    Timestamp: number;
     /**
-      * 标签值
+      * 执行时长，单位秒
       */
-    TagValue: string;
+    QueryTime: number;
+    /**
+      * sql语句
+      */
+    SqlText: string;
+    /**
+      * 客户端host
+      */
+    UserHost: string;
+    /**
+      * 用户名
+      */
+    UserName: string;
+    /**
+      * 数据库名
+      */
+    Database: string;
+    /**
+      * 锁时长，单位秒
+      */
+    LockTime: number;
+    /**
+      * 扫描行数
+      */
+    RowsExamined: number;
+    /**
+      * 返回行数
+      */
+    RowsSent: number;
+    /**
+      * sql模版
+      */
+    SqlTemplate: string;
+    /**
+      * sql语句md5
+      */
+    SqlMd5: string;
 }
 /**
  * ActivateInstance请求参数结构体
@@ -600,7 +676,7 @@ export interface ModifyAccountParamsRequest {
       */
     Account: InputAccount;
     /**
-      * 数据库表权限数组,当前仅支持参数：max_user_connections
+      * 数据库表权限数组,当前仅支持参数：max_user_connections，max_user_connections不能大于10240
       */
     AccountParams: Array<AccountParam>;
 }
@@ -665,10 +741,22 @@ export interface IsolateInstanceRequest {
       */
     InstanceIdList: Array<string>;
     /**
-      * 数据库类型，取值范围:
-<li> MYSQL </li>
+      * 该参数已废弃
       */
     DbType?: string;
+}
+/**
+ * ExportInstanceSlowQueries返回参数结构体
+ */
+export interface ExportInstanceSlowQueriesResponse {
+    /**
+      * 慢查询导出内容
+      */
+    FileContent: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeDBSecurityGroups请求参数结构体
@@ -733,6 +821,19 @@ export interface DescribeClusterDetailRequest {
       * 集群Id
       */
     ClusterId: string;
+}
+/**
+ * 集群绑定的标签信息，包含标签键TagKey和标签值TagValue
+ */
+export interface Tag {
+    /**
+      * 标签键
+      */
+    TagKey: string;
+    /**
+      * 标签值
+      */
+    TagValue: string;
 }
 /**
  * DescribeProjectSecurityGroups返回参数结构体
@@ -830,6 +931,36 @@ export interface BackupFileInfo {
       * 备份文件时间
       */
     SnapshotTime: string;
+}
+/**
+ * mysql表权限
+ */
+export interface TablePrivileges {
+    /**
+      * 数据库名
+      */
+    Db: string;
+    /**
+      * 表名
+      */
+    TableName: string;
+    /**
+      * 权限列表
+      */
+    Privileges: Array<string>;
+}
+/**
+ * DescribeBinlogDownloadUrl返回参数结构体
+ */
+export interface DescribeBinlogDownloadUrlResponse {
+    /**
+      * 下载地址
+      */
+    DownloadUrl: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeBackupList请求参数结构体
@@ -1448,6 +1579,19 @@ export interface SecurityGroup {
     SecurityGroupRemark: string;
 }
 /**
+ * DescribeBackupDownloadUrl请求参数结构体
+ */
+export interface DescribeBackupDownloadUrlRequest {
+    /**
+      * 集群ID
+      */
+    ClusterId: string;
+    /**
+      * 备份ID
+      */
+    BackupId: number;
+}
+/**
  * 网络信息
  */
 export interface NetAddr {
@@ -1521,9 +1665,39 @@ export interface DescribeRollbackTimeValidityResponse {
     RequestId?: string;
 }
 /**
+ * DescribeInstanceSlowQueries返回参数结构体
+ */
+export interface DescribeInstanceSlowQueriesResponse {
+    /**
+      * 总条数
+      */
+    TotalCount: number;
+    /**
+      * 慢查询记录
+      */
+    SlowQueries: Array<SlowQueriesItem>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * GrantAccountPrivileges返回参数结构体
  */
 export interface GrantAccountPrivilegesResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeBackupDownloadUrl返回参数结构体
+ */
+export interface DescribeBackupDownloadUrlResponse {
+    /**
+      * 备份下载地址
+      */
+    DownloadUrl: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1552,9 +1726,9 @@ export interface BillingResourceInfo {
     InstanceIds: Array<string>;
 }
 /**
- * ModifyClusterName返回参数结构体
+ * ModifyBackupConfig返回参数结构体
  */
-export interface ModifyClusterNameResponse {
+export interface ModifyBackupConfigResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1569,6 +1743,47 @@ export interface DescribeInstanceSpecsRequest {
 <li> MYSQL </li>
       */
     DbType: string;
+}
+/**
+ * ExportInstanceSlowQueries请求参数结构体
+ */
+export interface ExportInstanceSlowQueriesRequest {
+    /**
+      * 实例ID
+      */
+    InstanceId: string;
+    /**
+      * 事务开始最早时间
+      */
+    StartTime?: string;
+    /**
+      * 事务开始最晚时间
+      */
+    EndTime?: string;
+    /**
+      * 限制条数
+      */
+    Limit?: number;
+    /**
+      * 偏移量
+      */
+    Offset?: number;
+    /**
+      * 用户名
+      */
+    Username?: string;
+    /**
+      * 客户端host
+      */
+    Host?: string;
+    /**
+      * 数据库名
+      */
+    Database?: string;
+    /**
+      * 文件类型，可选值：csv, original
+      */
+    FileType?: string;
 }
 /**
  * UpgradeInstance返回参数结构体
@@ -1764,17 +1979,29 @@ pause
     NetAddrs?: Array<NetAddr>;
 }
 /**
- * SetRenewFlag返回参数结构体
+ * Binlog描述
  */
-export interface SetRenewFlagResponse {
+export interface BinlogItem {
     /**
-      * 操作成功实例数
+      * Binlog文件名称
       */
-    Count: number;
+    FileName: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 文件大小，单位：字节
       */
-    RequestId?: string;
+    FileSize: number;
+    /**
+      * 事务最早时间
+      */
+    StartTime: string;
+    /**
+      * 事务最晚时间
+      */
+    FinishTime: string;
+    /**
+      * Binlog文件ID
+      */
+    BinlogId: number;
 }
 /**
  * OfflineCluster返回参数结构体
@@ -1832,6 +2059,19 @@ export interface InstanceSpec {
     MinStorageSize: number;
 }
 /**
+ * SetRenewFlag返回参数结构体
+ */
+export interface SetRenewFlagResponse {
+    /**
+      * 操作成功实例数
+      */
+    Count: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeClusterParamLogs请求参数结构体
  */
 export interface DescribeClusterParamLogsRequest {
@@ -1869,7 +2109,7 @@ export interface UpgradeInstanceRequest {
       */
     UpgradeType: string;
     /**
-      * 存储上限，为0表示使用标准配置
+      * 该参数已废弃
       */
     StorageLimit?: number;
     /**
@@ -1877,8 +2117,7 @@ export interface UpgradeInstanceRequest {
       */
     AutoVoucher?: number;
     /**
-      * 数据库类型，取值范围:
-<li> MYSQL </li>
+      * 该参数已废弃
       */
     DbType?: string;
     /**
@@ -1938,6 +2177,15 @@ export interface RollBackClusterResponse {
     RequestId?: string;
 }
 /**
+ * DescribeBinlogSaveDays请求参数结构体
+ */
+export interface DescribeBinlogSaveDaysRequest {
+    /**
+      * 集群ID
+      */
+    ClusterId: string;
+}
+/**
  * DescribeClusterDetail返回参数结构体
  */
 export interface DescribeClusterDetailResponse {
@@ -1989,8 +2237,7 @@ export interface IsolateClusterRequest {
       */
     ClusterId: string;
     /**
-      * 数据库类型，取值范围:
-<li> MYSQL </li>
+      * 该参数已废用
       */
     DbType?: string;
 }
@@ -2028,19 +2275,19 @@ export interface AddInstancesRequest {
       */
     Memory: number;
     /**
-      * 新增只读实例数，取值范围为(0,16]
+      * 新增只读实例数，取值范围为[0,4]
       */
     ReadOnlyCount: number;
     /**
-      * 实例组ID，在已有RO组中新增实例时使用，不传则新增RO组
+      * 实例组ID，在已有RO组中新增实例时使用，不传则新增RO组。当前版本不建议传输该值。
       */
     InstanceGrpId?: string;
     /**
-      * 所属VPC网络ID
+      * 所属VPC网络ID，该参数已废弃
       */
     VpcId?: string;
     /**
-      * 所属子网ID，如果设置了VpcId，则SubnetId必填
+      * 所属子网ID，如果设置了VpcId，则SubnetId必填。该参数已废弃。
       */
     SubnetId?: string;
     /**
@@ -2048,7 +2295,7 @@ export interface AddInstancesRequest {
       */
     Port?: number;
     /**
-      * 实例名称，字符串长度范围为[0,64)
+      * 实例名称，字符串长度范围为[0,64)，取值范围为大小写字母，0-9数字，'_','-','.'
       */
     InstanceName?: string;
     /**
@@ -2430,21 +2677,34 @@ export interface DisassociateSecurityGroupsRequest {
     Zone: string;
 }
 /**
- * mysql表权限
+ * ModifyBackupName请求参数结构体
  */
-export interface TablePrivileges {
+export interface ModifyBackupNameRequest {
     /**
-      * 数据库名
+      * 集群ID
       */
-    Db: string;
+    ClusterId: string;
     /**
-      * 表名
+      * 备份文件ID
       */
-    TableName: string;
+    BackupId: number;
     /**
-      * 权限列表
+      * 备注名，长度不能超过60个字符
       */
-    Privileges: Array<string>;
+    BackupName: string;
+}
+/**
+ * DescribeBinlogSaveDays返回参数结构体
+ */
+export interface DescribeBinlogSaveDaysResponse {
+    /**
+      * Binlog保留天数
+      */
+    BinlogSaveDays: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * ModifyClusterParam请求参数结构体
@@ -2608,17 +2868,87 @@ export interface ModifyBackupConfigRequest {
       */
     BackupTimeEnd: number;
     /**
-      * 表示保留备份时长, 单位秒，超过该时间将被清理, 七天表示为3600*24*7=604800
+      * 表示保留备份时长, 单位秒，超过该时间将被清理, 七天表示为3600*24*7=604800，最大为158112000
       */
     ReserveDuration: number;
     /**
-      * 备份频率，长度为7的数组，分别对应周一到周日的备份方式，full-全量备份，increment-增量备份
+      * 该参数目前不支持修改，无需填写。备份频率，长度为7的数组，分别对应周一到周日的备份方式，full-全量备份，increment-增量备份
       */
     BackupFreq?: Array<string>;
     /**
-      * 备份方式，logic-逻辑备份，snapshot-快照备份
+      * 该参数目前不支持修改，无需填写。备份方式，logic-逻辑备份，snapshot-快照备份
       */
     BackupType?: string;
+}
+/**
+ * DescribeInstanceSlowQueries请求参数结构体
+ */
+export interface DescribeInstanceSlowQueriesRequest {
+    /**
+      * 实例ID
+      */
+    InstanceId: string;
+    /**
+      * 事务开始最早时间
+      */
+    StartTime?: string;
+    /**
+      * 事务开始最晚时间
+      */
+    EndTime?: string;
+    /**
+      * 限制条数
+      */
+    Limit?: number;
+    /**
+      * 偏移量
+      */
+    Offset?: number;
+    /**
+      * 用户名
+      */
+    Username?: string;
+    /**
+      * 客户端host
+      */
+    Host?: string;
+    /**
+      * 数据库名
+      */
+    Database?: string;
+    /**
+      * 排序字段，可选值：QueryTime,LockTime,RowsExamined,RowsSent
+      */
+    OrderBy?: string;
+    /**
+      * 排序类型，可选值：asc,desc
+      */
+    OrderByType?: string;
+}
+/**
+ * DescribeBinlogs请求参数结构体
+ */
+export interface DescribeBinlogsRequest {
+    /**
+      * 集群ID
+      */
+    ClusterId: string;
+    /**
+      * 开始时间
+      */
+    StartTime?: string;
+    /**
+      * 结束时间
+      */
+    EndTime?: string;
+    /**
+      * 偏移量
+      */
+    Offset?: number;
+    /**
+      * 限制条数
+      */
+    Limit?: number;
 }
 /**
  * 账号，包含accountName和host

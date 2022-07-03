@@ -681,6 +681,17 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
         return this.request("RebootInstances", req, cb);
     }
     /**
+     * 本接口 (ModifyInstanceDiskType) 用于修改实例硬盘介质类型。
+
+* 只支持实例的本地系统盘、本地数据盘转化成指定云硬盘介质。
+* 只支持实例在关机状态下转换成指定云硬盘介质。
+* 不支持竞价实例类型。
+* 修改前请确保账户余额充足。可通过[`DescribeAccountBalance`](https://cloud.tencent.com/document/product/378/4397)接口查询账户余额。
+     */
+    async ModifyInstanceDiskType(req, cb) {
+        return this.request("ModifyInstanceDiskType", req, cb);
+    }
+    /**
      * 本接口（ModifyHostsAttribute）用于修改CDH实例的属性，如实例名称和续费标记等。参数HostName和RenewFlag必须设置其中一个，但不能同时设置。
      */
     async ModifyHostsAttribute(req, cb) {
@@ -703,15 +714,13 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
         return this.request("DisassociateSecurityGroups", req, cb);
     }
     /**
-     * 本接口 (ModifyInstanceDiskType) 用于修改实例硬盘介质类型。
+     * 本接口 (DescribeChcHosts) 用于查询一个或多个CHC物理服务器详细信息。
 
-* 只支持实例的本地系统盘、本地数据盘转化成指定云硬盘介质。
-* 只支持实例在关机状态下转换成指定云硬盘介质。
-* 不支持竞价实例类型。
-* 修改前请确保账户余额充足。可通过[`DescribeAccountBalance`](https://cloud.tencent.com/document/product/378/4397)接口查询账户余额。
+* 可以根据实例`ID`、实例名称或者设备类型等信息来查询实例的详细信息。过滤信息详细请见过滤器`Filter`。
+* 如果参数为空，返回当前用户一定数量（`Limit`所指定的数量，默认为20）的实例。
      */
-    async ModifyInstanceDiskType(req, cb) {
-        return this.request("ModifyInstanceDiskType", req, cb);
+    async DescribeChcHosts(req, cb) {
+        return this.request("DescribeChcHosts", req, cb);
     }
 }
 exports.Client = Client;

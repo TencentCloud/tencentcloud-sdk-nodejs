@@ -474,7 +474,7 @@ export declare class Client extends AbstractClient {
     /**
      * 与云监控融合的2.0实例关联集群
      */
-    CreatePrometheusClusterAgent(req?: CreatePrometheusClusterAgentRequest, cb?: (error: string, rep: CreatePrometheusClusterAgentResponse) => void): Promise<CreatePrometheusClusterAgentResponse>;
+    CreatePrometheusClusterAgent(req: CreatePrometheusClusterAgentRequest, cb?: (error: string, rep: CreatePrometheusClusterAgentResponse) => void): Promise<CreatePrometheusClusterAgentResponse>;
     /**
      * 删除2.0实例告警策略
      */

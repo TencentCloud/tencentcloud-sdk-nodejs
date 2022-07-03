@@ -238,6 +238,16 @@ it("dlc.v20210125.DeleteUsersFromWorkGroup", async function () {
     }
 })
 
+it("dlc.v20210125.ReportHeartbeatMetaData", async function () {
+    try {
+       const data = await client.ReportHeartbeatMetaData({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.CreateWorkGroup", async function () {
     try {
        const data = await client.CreateWorkGroup({})

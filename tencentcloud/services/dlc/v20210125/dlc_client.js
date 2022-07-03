@@ -160,6 +160,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteUsersFromWorkGroup", req, cb);
     }
     /**
+     * 上报元数据心跳
+     */
+    async ReportHeartbeatMetaData(req, cb) {
+        return this.request("ReportHeartbeatMetaData", req, cb);
+    }
+    /**
      * 创建工作组
      */
     async CreateWorkGroup(req, cb) {

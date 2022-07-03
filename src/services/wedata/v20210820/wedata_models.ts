@@ -16,6 +16,56 @@
  */
 
 /**
+ * DescribeProject返回参数结构体
+ */
+export interface DescribeProjectResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeProject请求参数结构体
+ */
+export interface DescribeProjectRequest {
+  /**
+   * 项目id。一般使用项目Id来查询，与projectName必须存在一个。
+   */
+  ProjectId?: string
+
+  /**
+   * 是否展示关联集群信息
+   */
+  DescribeClusters?: boolean
+
+  /**
+   * 是否展示关联执行组的信息，仅部分信息。
+   */
+  DescribeExecutors?: boolean
+
+  /**
+   * 默认不展示项目管理员信息
+   */
+  DescribeAdminUsers?: boolean
+
+  /**
+   * 默认不统计项目人员数量
+   */
+  DescribeMemberCount?: boolean
+
+  /**
+   * 默认不查询创建者的信息
+   */
+  DescribeCreator?: boolean
+
+  /**
+   * 项目名只在租户内唯一，一般用来转化为项目ID。
+   */
+  ProjectName?: string
+}
+
+/**
  * DescribeTaskInstances请求参数结构体
  */
 export interface DescribeTaskInstancesRequest {
@@ -96,28 +146,18 @@ export interface DescribeTaskInstancesRequest {
 }
 
 /**
- * 查询任务实例列表
+ * DescribeTaskInstances返回参数结构体
  */
-export interface DescribeTaskInstancesData {
+export interface DescribeTaskInstancesResponse {
   /**
-   * 实例列表
+   * 无
    */
-  Items: Array<TaskInstanceInfo>
+  Data: DescribeTaskInstancesData
 
   /**
-   * 总条数
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  TotalCount: number
-
-  /**
-   * 页号
-   */
-  PageNumber: number
-
-  /**
-   * 页大小
-   */
-  PageSize: number
+  RequestId?: string
 }
 
 /**
@@ -258,18 +298,28 @@ export interface TaskInstanceInfo {
 }
 
 /**
- * DescribeTaskInstances返回参数结构体
+ * 查询任务实例列表
  */
-export interface DescribeTaskInstancesResponse {
+export interface DescribeTaskInstancesData {
   /**
-   * 无
+   * 实例列表
    */
-  Data: DescribeTaskInstancesData
+  Items: Array<TaskInstanceInfo>
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 总条数
    */
-  RequestId?: string
+  TotalCount: number
+
+  /**
+   * 页号
+   */
+  PageNumber: number
+
+  /**
+   * 页大小
+   */
+  PageSize: number
 }
 
 /**

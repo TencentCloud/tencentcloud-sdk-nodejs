@@ -28,6 +28,12 @@ class Client extends abstract_client_1.AbstractClient {
         super("wedata.tencentcloudapi.com", "2021-08-20", clientConfig);
     }
     /**
+     * 获取项目信息
+     */
+    async DescribeProject(req, cb) {
+        return this.request("DescribeProject", req, cb);
+    }
+    /**
      * 查询任务实例的关联实例列表
      */
     async DescribeRelatedInstances(req, cb) {

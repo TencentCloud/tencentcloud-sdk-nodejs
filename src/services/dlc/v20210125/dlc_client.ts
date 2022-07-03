@@ -27,6 +27,7 @@ import {
   DescribeSparkAppJobRequest,
   CreateDMSDatabaseResponse,
   CreateStoreLocationResponse,
+  ReportHeartbeatMetaDataRequest,
   DescribeDMSDatabaseResponse,
   DropDMSDatabaseRequest,
   CreateScriptResponse,
@@ -89,6 +90,7 @@ import {
   AddUsersToWorkGroupResponse,
   UserInfo,
   CreateExportTaskRequest,
+  ReportHeartbeatMetaDataResponse,
   CreateDMSTableRequest,
   DropDMSTableRequest,
   DMSTable,
@@ -407,6 +409,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteUsersFromWorkGroupResponse) => void
   ): Promise<DeleteUsersFromWorkGroupResponse> {
     return this.request("DeleteUsersFromWorkGroup", req, cb)
+  }
+
+  /**
+   * 上报元数据心跳
+   */
+  async ReportHeartbeatMetaData(
+    req: ReportHeartbeatMetaDataRequest,
+    cb?: (error: string, rep: ReportHeartbeatMetaDataResponse) => void
+  ): Promise<ReportHeartbeatMetaDataResponse> {
+    return this.request("ReportHeartbeatMetaData", req, cb)
   }
 
   /**

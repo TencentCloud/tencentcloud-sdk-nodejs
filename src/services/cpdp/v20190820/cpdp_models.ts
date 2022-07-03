@@ -28,6 +28,15 @@ export interface QueryFlexPaymentOrderStatusRequest {
    * 订单ID
    */
   OrderId?: string
+
+  /**
+      * 环境类型
+__release__:生产环境
+__sandbox__:沙箱环境
+__test__:测试环境
+缺省默认为生产环境
+      */
+  Environment?: string
 }
 
 /**
@@ -3241,6 +3250,11 @@ FAILED:已失败
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Remark: string
+
+  /**
+   * 收款用户ID
+   */
+  PayeeId: string
 }
 
 /**
@@ -3709,6 +3723,24 @@ export interface QueryFlexSettlementOrderListRequest {
    * 分页
    */
   PageNumber: Paging
+
+  /**
+      * 操作类型。
+ENABLE_SETTLE: 正常结算
+DISABLE_SETTLE: 停用结算
+UNFREEZE_SETTLE: 解冻结算
+若需要支持多个操作类型，则以;分隔
+      */
+  OperationType?: string
+
+  /**
+      * 环境类型
+__release__:生产环境
+__sandbox__:沙箱环境
+__test__:测试环境
+缺省默认为生产环境
+      */
+  Environment?: string
 }
 
 /**
@@ -4638,6 +4670,15 @@ ENABLE:启用
 DISABLE:停用
       */
   AccountRightStatus: string
+
+  /**
+      * 环境类型
+__release__:生产环境
+__sandbox__:沙箱环境
+__test__:测试环境
+缺省默认为生产环境
+      */
+  Environment?: string
 }
 
 /**
@@ -5533,6 +5574,15 @@ LABOR:劳务所得
 OCCASION:偶然所得
       */
   IncomeType: string
+
+  /**
+      * 环境类型
+__release__:生产环境
+__sandbox__:沙箱环境
+__test__:测试环境
+缺省默认为生产环境
+      */
+  Environment?: string
 }
 
 /**
@@ -9754,6 +9804,15 @@ export interface QueryFlexPayeeInfoRequest {
    * 外部用户ID
    */
   OutUserId?: string
+
+  /**
+      * 环境类型
+__release__:生产环境
+__sandbox__:沙箱环境
+__test__:测试环境
+缺省默认为生产环境
+      */
+  Environment?: string
 }
 
 /**
@@ -10372,6 +10431,15 @@ export interface QueryFlexPaymentOrderListRequest {
    * 分页
    */
   PageNumber: Paging
+
+  /**
+      * 环境类型
+__release__:生产环境
+__sandbox__:沙箱环境
+__test__:测试环境
+缺省默认为生产环境
+      */
+  Environment?: string
 }
 
 /**
@@ -10411,6 +10479,15 @@ UNFREEZE:解冻
    * 冻结备注
    */
   Remark?: string
+
+  /**
+      * 环境类型
+__release__:生产环境
+__sandbox__:沙箱环境
+__test__:测试环境
+缺省默认为生产环境
+      */
+  Environment?: string
 }
 
 /**
@@ -11257,6 +11334,15 @@ OCCASION:偶然所得
    * 提现备注
    */
   Remark?: string
+
+  /**
+      * 环境类型
+__release__:生产环境
+__sandbox__:沙箱环境
+__test__:测试环境
+缺省默认为生产环境
+      */
+  Environment?: string
 }
 
 /**
@@ -15265,6 +15351,15 @@ OCCASION:偶然所得
    * 备注
    */
   Remark: string
+
+  /**
+      * 环境类型
+__release__:生产环境
+__sandbox__:沙箱环境
+__test__:测试环境
+缺省默认为生产环境
+      */
+  Environment?: string
 }
 
 /**
@@ -15280,6 +15375,15 @@ export interface QueryFlexPayeeAccountInfoRequest {
    * 外部用户ID
    */
   OutUserId?: string
+
+  /**
+      * 环境类型
+__release__:生产环境
+__sandbox__:沙箱环境
+__test__:测试环境
+缺省默认为生产环境
+      */
+  Environment?: string
 }
 
 /**
@@ -16447,6 +16551,15 @@ UNFREEZE:解冻
    * 分页
    */
   PageNumber: Paging
+
+  /**
+      * 环境类型
+__release__:生产环境
+__sandbox__:沙箱环境
+__test__:测试环境
+缺省默认为生产环境
+      */
+  Environment?: string
 }
 
 /**
@@ -18135,6 +18248,15 @@ OCCASION:偶然所得
    * 税后金额
    */
   AmountAfterTax: string
+
+  /**
+      * 环境类型
+__release__:生产环境
+__sandbox__:沙箱环境
+__test__:测试环境
+缺省默认为生产环境
+      */
+  Environment?: string
 }
 
 /**
@@ -19398,6 +19520,15 @@ export interface QueryFlexPayeeAccountListRequest {
    * 分页
    */
   PageNumber?: Paging
+
+  /**
+      * 环境类型
+__release__:生产环境
+__sandbox__:沙箱环境
+__test__:测试环境
+缺省默认为生产环境
+      */
+  Environment?: string
 }
 
 /**
@@ -23066,6 +23197,20 @@ export interface CreateFlexPayeeRequest {
    * 备注
    */
   Remark?: string
+
+  /**
+   * 手机号码
+   */
+  PhoneNo?: string
+
+  /**
+      * 环境类型
+__release__:生产环境
+__sandbox__:沙箱环境
+__test__:测试环境
+缺省默认为生产环境
+      */
+  Environment?: string
 }
 
 /**

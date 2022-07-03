@@ -18,10 +18,12 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  DescribeProjectResponse,
+  DescribeProjectRequest,
   DescribeTaskInstancesRequest,
-  DescribeTaskInstancesData,
-  TaskInstanceInfo,
   DescribeTaskInstancesResponse,
+  TaskInstanceInfo,
+  DescribeTaskInstancesData,
   OrderField,
   DescribeRelatedInstancesRequest,
   DescribeRelatedInstancesResponse,
@@ -34,6 +36,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("wedata.tencentcloudapi.com", "2021-08-20", clientConfig)
+  }
+
+  /**
+   * 获取项目信息
+   */
+  async DescribeProject(
+    req: DescribeProjectRequest,
+    cb?: (error: string, rep: DescribeProjectResponse) => void
+  ): Promise<DescribeProjectResponse> {
+    return this.request("DescribeProject", req, cb)
   }
 
   /**

@@ -307,6 +307,10 @@ export interface CreateJobConfigRequest {
       * 工作空间 SerialId
       */
     WorkSpaceId?: string;
+    /**
+      * 日志级别
+      */
+    LogLevel?: string;
 }
 /**
  * CreateResourceConfig请求参数结构体

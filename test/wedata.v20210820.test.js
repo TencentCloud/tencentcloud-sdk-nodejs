@@ -18,6 +18,16 @@ const client = new tencentcloud.wedata.v20210820.Client({
 })
 describe("wedata.v20210820.test.js", function () {
 
+it("wedata.v20210820.DescribeProject", async function () {
+    try {
+       const data = await client.DescribeProject({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20210820.DescribeRelatedInstances", async function () {
     try {
        const data = await client.DescribeRelatedInstances({})

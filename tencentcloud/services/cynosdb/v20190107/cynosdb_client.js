@@ -40,16 +40,28 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBackupList", req, cb);
     }
     /**
-     * 批量回收账号权限
+     * 账号所有权限
      */
-    async RevokeAccountPrivileges(req, cb) {
-        return this.request("RevokeAccountPrivileges", req, cb);
+    async DescribeAccountAllGrantPrivileges(req, cb) {
+        return this.request("DescribeAccountAllGrantPrivileges", req, cb);
     }
     /**
      * 本接口（RollBackCluster）用于回档集群
      */
     async RollBackCluster(req, cb) {
         return this.request("RollBackCluster", req, cb);
+    }
+    /**
+     * 查询项目安全组信息
+     */
+    async DescribeProjectSecurityGroups(req, cb) {
+        return this.request("DescribeProjectSecurityGroups", req, cb);
+    }
+    /**
+     * 此接口（DescribeBinlogSaveDays）用于查询集群的Binlog保留天数。
+     */
+    async DescribeBinlogSaveDays(req, cb) {
+        return this.request("DescribeBinlogSaveDays", req, cb);
     }
     /**
      * 获取指定集群的备份配置信息，包括全量备份时间段，备份文件保留时间
@@ -80,6 +92,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyClusterName(req, cb) {
         return this.request("ModifyClusterName", req, cb);
+    }
+    /**
+     * 批量回收账号权限
+     */
+    async RevokeAccountPrivileges(req, cb) {
+        return this.request("RevokeAccountPrivileges", req, cb);
     }
     /**
      * 本接口(DescribeInstanceDetail)用于查询实例详情。
@@ -160,10 +178,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("IsolateCluster", req, cb);
     }
     /**
-     * 查询项目安全组信息
+     * 此接口（DescribeBackupDownloadUrl）用于查询集群备份文件下载地址。
      */
-    async DescribeProjectSecurityGroups(req, cb) {
-        return this.request("DescribeProjectSecurityGroups", req, cb);
+    async DescribeBackupDownloadUrl(req, cb) {
+        return this.request("DescribeBackupDownloadUrl", req, cb);
     }
     /**
      * 安全组批量绑定云资源
@@ -202,10 +220,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstanceSpecs", req, cb);
     }
     /**
-     * 账号所有权限
+     * 此接口（DescribeInstanceSlowQueries）用于查询实例慢查询日志。
      */
-    async DescribeAccountAllGrantPrivileges(req, cb) {
-        return this.request("DescribeAccountAllGrantPrivileges", req, cb);
+    async DescribeInstanceSlowQueries(req, cb) {
+        return this.request("DescribeInstanceSlowQueries", req, cb);
+    }
+    /**
+     * 此接口（ModifyBackupName）用于修改备份文件备注名。
+     */
+    async ModifyBackupName(req, cb) {
+        return this.request("ModifyBackupName", req, cb);
+    }
+    /**
+     * 此接口（DescribeBinlogDownloadUrl）用于查询Binlog的下载地址。
+     */
+    async DescribeBinlogDownloadUrl(req, cb) {
+        return this.request("DescribeBinlogDownloadUrl", req, cb);
     }
     /**
      * 本接口(DescribeAccounts)用于查询数据库管理账号。
@@ -238,6 +268,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateClusters", req, cb);
     }
     /**
+     * 此接口（DescribeBinlogs）用来查询集群Binlog日志列表。
+     */
+    async DescribeBinlogs(req, cb) {
+        return this.request("DescribeBinlogs", req, cb);
+    }
+    /**
      * 创建账号
      */
     async CreateAccounts(req, cb) {
@@ -254,6 +290,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeDBSecurityGroups(req, cb) {
         return this.request("DescribeDBSecurityGroups", req, cb);
+    }
+    /**
+     * 此接口（ExportInstanceSlowQueries）用于导出实例慢日志。
+     */
+    async ExportInstanceSlowQueries(req, cb) {
+        return this.request("ExportInstanceSlowQueries", req, cb);
     }
     /**
      * 安全组批量解绑云资源

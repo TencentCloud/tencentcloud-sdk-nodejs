@@ -856,6 +856,7 @@ export interface DescribeTaskStatusRequest {
     TaskId?: string;
     /**
       * 订单ID。
+注意：参数TaskId和DealName必须传一个。
       */
     DealName?: string;
 }

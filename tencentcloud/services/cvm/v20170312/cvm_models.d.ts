@@ -312,29 +312,121 @@ export interface ResetInstancesTypeRequest {
     ForceStop?: boolean;
 }
 /**
- * InquiryPriceResetInstance请求参数结构体
+ * CHC物理服务器信息
  */
-export interface InquiryPriceResetInstanceRequest {
+export interface ChcHost {
     /**
-      * 实例ID。可通过 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) API返回值中的`InstanceId`获取。
+      * CHC物理服务器ID。
       */
-    InstanceId: string;
+    ChcId: string;
     /**
-      * 指定有效的[镜像](/document/product/213/4940)ID，格式形如`img-xxx`。镜像类型分为四种：<br/><li>公共镜像</li><li>自定义镜像</li><li>共享镜像</li><li>服务市场镜像</li><br/>可通过以下方式获取可用的镜像ID：<br/><li>`公共镜像`、`自定义镜像`、`共享镜像`的镜像ID可通过登录[控制台](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_IMAGE)查询；`服务镜像市场`的镜像ID可通过[云市场](https://market.cloud.tencent.com/list)查询。</li><li>通过调用接口 [DescribeImages](https://cloud.tencent.com/document/api/213/15715) ，取返回信息中的`ImageId`字段。</li>
+      * 实例名称。
       */
-    ImageId?: string;
+    InstanceName: string;
     /**
-      * 实例系统盘配置信息。系统盘为云盘的实例可以通过该参数指定重装后的系统盘大小来实现对系统盘的扩容操作，若不指定则默认系统盘大小保持不变。系统盘大小只支持扩容不支持缩容；重装只支持修改系统盘的大小，不能修改系统盘的类型。
+      * 服务器序列号。
       */
-    SystemDisk?: SystemDisk;
+    SerialNumber: string;
     /**
-      * 实例登录设置。通过该参数可以设置实例的登录方式密码、密钥或保持镜像的原始登录设置。默认情况下会随机生成密码，并以站内信方式知会到用户。
+      * CHC的状态<br/>
+<ul>
+<li>REGISTERED: 设备已录入。还未配置带外和部署网络</li>
+<li>VPC_READY: 已配置带外和部署网络</li>
+<li>PREPARED: 可分配云主机</li>
+<li>ONLINE: 已分配云主机</li>
+</ul>
       */
-    LoginSettings?: LoginSettings;
+    InstanceState: string;
     /**
-      * 增强服务。通过该参数可以指定是否开启云安全、云监控等服务。若不指定该参数，则默认开启云监控、云安全服务。
+      * 设备类型。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    EnhancedService?: EnhancedService;
+    DeviceType?: string;
+    /**
+      * 所属可用区
+      */
+    Placement: Placement;
+    /**
+      * 带外网络。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BmcVirtualPrivateCloud?: VirtualPrivateCloud;
+    /**
+      * 带外网络Ip。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BmcIp?: string;
+    /**
+      * 带外网络安全组Id。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BmcSecurityGroupIds?: Array<string>;
+    /**
+      * 部署网络。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DeployVirtualPrivateCloud?: VirtualPrivateCloud;
+    /**
+      * 部署网络Ip。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DeployIp?: string;
+    /**
+      * 部署网络安全组Id。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DeploySecurityGroupIds?: Array<string>;
+    /**
+      * 关联的云主机Id。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CvmInstanceId?: string;
+    /**
+      * 服务器导入的时间。
+      */
+    CreatedTime: string;
+    /**
+      * 机型的硬件描述，分别为CPU核数，内存容量和磁盘容量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    HardwareDescription?: string;
+    /**
+      * CHC物理服务器的CPU核数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CPU: number;
+    /**
+      * CHC物理服务器的内存大小，单位为GB
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Memory: number;
+    /**
+      * CHC物理服务器的磁盘信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Disk: string;
+    /**
+      * 带外网络下分配的MAC地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BmcMAC: string;
+    /**
+      * 部署网络下分配的MAC地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DeployMAC: string;
+    /**
+      * 设备托管类型。
+HOSTING: 托管
+TENANT: 租赁
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TenantType?: string;
+    /**
+      * chc dhcp选项，用于minios调试
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DeployExtraConfig?: ChcDeployExtraConfig;
 }
 /**
  * DeleteLaunchTemplateVersions请求参数结构体
@@ -482,6 +574,23 @@ export interface LaunchTemplate {
       * 实例启动模板版本号，若给定，新实例启动模板将基于给定的版本号创建
       */
     LaunchTemplateVersion?: number;
+}
+/**
+ * DescribeChcHosts返回参数结构体
+ */
+export interface DescribeChcHostsResponse {
+    /**
+      * 符合条件的实例数量。
+      */
+    TotalCount: number;
+    /**
+      * 返回的实例列表
+      */
+    ChcHostSet: Array<ChcHost>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 描述实例机型配置信息
@@ -913,19 +1022,13 @@ export interface ModifyInstancesVpcAttributeResponse {
     RequestId?: string;
 }
 /**
- * DescribeLaunchTemplates返回参数结构体
+ * CreateKeyPair返回参数结构体
  */
-export interface DescribeLaunchTemplatesResponse {
+export interface CreateKeyPairResponse {
     /**
-      * 符合条件的实例模板数量。
-注意：此字段可能返回 null，表示取不到有效值。
+      * 密钥对信息。
       */
-    TotalCount: number;
-    /**
-      * 实例详细信息列表。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    LaunchTemplateSet: Array<LaunchTemplateInfo>;
+    KeyPair?: KeyPair;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1663,6 +1766,10 @@ IMPORTFAILED-导入失败
       */
     LicenseType?: string;
 }
+/**
+ * chc部署网络minos引导配置。
+ */
+export declare type ChcDeployExtraConfig = null;
 /**
  * DescribeDisasterRecoverGroupQuota返回参数结构体
  */
@@ -2471,13 +2578,19 @@ export interface EnhancedService {
     AutomationService?: RunAutomationServiceEnabled;
 }
 /**
- * CreateKeyPair返回参数结构体
+ * DescribeLaunchTemplates返回参数结构体
  */
-export interface CreateKeyPairResponse {
+export interface DescribeLaunchTemplatesResponse {
     /**
-      * 密钥对信息。
+      * 符合条件的实例模板数量。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    KeyPair?: KeyPair;
+    TotalCount: number;
+    /**
+      * 实例详细信息列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LaunchTemplateSet: Array<LaunchTemplateInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2792,17 +2905,29 @@ duration
     Filters?: Array<Filter>;
 }
 /**
- * 创建资源实例时同时绑定的标签对说明
+ * InquiryPriceResetInstance请求参数结构体
  */
-export interface TagSpecification {
+export interface InquiryPriceResetInstanceRequest {
     /**
-      * 标签绑定的资源类型，云服务器为“instance”，专用宿主机为“host”，镜像为“image”
+      * 实例ID。可通过 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) API返回值中的`InstanceId`获取。
       */
-    ResourceType: string;
+    InstanceId: string;
     /**
-      * 标签对列表
+      * 指定有效的[镜像](/document/product/213/4940)ID，格式形如`img-xxx`。镜像类型分为四种：<br/><li>公共镜像</li><li>自定义镜像</li><li>共享镜像</li><li>服务市场镜像</li><br/>可通过以下方式获取可用的镜像ID：<br/><li>`公共镜像`、`自定义镜像`、`共享镜像`的镜像ID可通过登录[控制台](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_IMAGE)查询；`服务镜像市场`的镜像ID可通过[云市场](https://market.cloud.tencent.com/list)查询。</li><li>通过调用接口 [DescribeImages](https://cloud.tencent.com/document/api/213/15715) ，取返回信息中的`ImageId`字段。</li>
       */
-    Tags: Array<Tag>;
+    ImageId?: string;
+    /**
+      * 实例系统盘配置信息。系统盘为云盘的实例可以通过该参数指定重装后的系统盘大小来实现对系统盘的扩容操作，若不指定则默认系统盘大小保持不变。系统盘大小只支持扩容不支持缩容；重装只支持修改系统盘的大小，不能修改系统盘的类型。
+      */
+    SystemDisk?: SystemDisk;
+    /**
+      * 实例登录设置。通过该参数可以设置实例的登录方式密码、密钥或保持镜像的原始登录设置。默认情况下会随机生成密码，并以站内信方式知会到用户。
+      */
+    LoginSettings?: LoginSettings;
+    /**
+      * 增强服务。通过该参数可以指定是否开启云安全、云监控等服务。若不指定该参数，则默认开启云监控、云安全服务。
+      */
+    EnhancedService?: EnhancedService;
 }
 /**
  * DescribeLaunchTemplates请求参数结构体
@@ -3748,6 +3873,19 @@ export interface InquiryPriceRunInstancesResponse {
     RequestId?: string;
 }
 /**
+ * 创建资源实例时同时绑定的标签对说明
+ */
+export interface TagSpecification {
+    /**
+      * 标签绑定的资源类型，云服务器为“instance”，专用宿主机为“host”，镜像为“image”
+      */
+    ResourceType: string;
+    /**
+      * 标签对列表
+      */
+    Tags: Array<Tag>;
+}
+/**
  * DescribeHosts请求参数结构体
  */
 export interface DescribeHostsRequest {
@@ -3981,6 +4119,38 @@ export interface ReservedInstancePriceItem {
 返回项： linux 。
       */
     ProductDescription: string;
+}
+/**
+ * DescribeChcHosts请求参数结构体
+ */
+export interface DescribeChcHostsRequest {
+    /**
+      * CHC物理服务器实例ID。每次请求的实例的上限为100。参数不支持同时指定`ChcIds`和`Filters`。
+      */
+    ChcIds?: Array<string>;
+    /**
+      * <li><strong>zone</strong></li>
+<p style="padding-left: 30px;">按照【<strong>可用区</strong>】进行过滤。可用区形如：ap-guangzhou-1。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">可选项：<a href="https://cloud.tencent.com/document/product/213/6091">可用区列表</a></p>
+<li><strong>instance-name</strong></li>
+<p style="padding-left: 30px;">按照【<strong>实例名称</strong>】进行过滤。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
+<li><strong>instance-state</strong></li>
+<p style="padding-left: 30px;">按照【<strong>实例状态</strong>】进行过滤。状态类型详见[实例状态表](https://cloud.tencent.com/document/api/213/15753#InstanceStatus)</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
+<li><strong>device-type</strong></li>
+<p style="padding-left: 30px;">按照【<strong>设备类型</strong>】进行过滤。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
+<li><strong>vpc-id</strong></li>
+<p style="padding-left: 30px;">按照【<strong>私有网络唯一ID</strong>】进行过滤。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
+<li><strong>subnet-id</strong></li>
+<p style="padding-left: 30px;">按照【<strong>私有子网唯一ID</strong>】进行过滤。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
+      */
+    Filters?: Array<Filter>;
+    /**
+      * 偏移量，默认为0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
+      */
+    Offset?: number;
+    /**
+      * 返回数量，默认为20，最大值为100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
+      */
+    Limit?: number;
 }
 /**
  * RebootInstances返回参数结构体

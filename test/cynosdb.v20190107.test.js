@@ -38,9 +38,9 @@ it("cynosdb.v20190107.DescribeBackupList", async function () {
     }
 })
 
-it("cynosdb.v20190107.RevokeAccountPrivileges", async function () {
+it("cynosdb.v20190107.DescribeAccountAllGrantPrivileges", async function () {
     try {
-       const data = await client.RevokeAccountPrivileges({})
+       const data = await client.DescribeAccountAllGrantPrivileges({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -51,6 +51,26 @@ it("cynosdb.v20190107.RevokeAccountPrivileges", async function () {
 it("cynosdb.v20190107.RollBackCluster", async function () {
     try {
        const data = await client.RollBackCluster({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.DescribeProjectSecurityGroups", async function () {
+    try {
+       const data = await client.DescribeProjectSecurityGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.DescribeBinlogSaveDays", async function () {
+    try {
+       const data = await client.DescribeBinlogSaveDays({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -101,6 +121,16 @@ it("cynosdb.v20190107.PauseServerless", async function () {
 it("cynosdb.v20190107.ModifyClusterName", async function () {
     try {
        const data = await client.ModifyClusterName({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.RevokeAccountPrivileges", async function () {
+    try {
+       const data = await client.RevokeAccountPrivileges({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -238,9 +268,9 @@ it("cynosdb.v20190107.IsolateCluster", async function () {
     }
 })
 
-it("cynosdb.v20190107.DescribeProjectSecurityGroups", async function () {
+it("cynosdb.v20190107.DescribeBackupDownloadUrl", async function () {
     try {
-       const data = await client.DescribeProjectSecurityGroups({})
+       const data = await client.DescribeBackupDownloadUrl({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -308,9 +338,29 @@ it("cynosdb.v20190107.DescribeInstanceSpecs", async function () {
     }
 })
 
-it("cynosdb.v20190107.DescribeAccountAllGrantPrivileges", async function () {
+it("cynosdb.v20190107.DescribeInstanceSlowQueries", async function () {
     try {
-       const data = await client.DescribeAccountAllGrantPrivileges({})
+       const data = await client.DescribeInstanceSlowQueries({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.ModifyBackupName", async function () {
+    try {
+       const data = await client.ModifyBackupName({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.DescribeBinlogDownloadUrl", async function () {
+    try {
+       const data = await client.DescribeBinlogDownloadUrl({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -368,6 +418,16 @@ it("cynosdb.v20190107.CreateClusters", async function () {
     }
 })
 
+it("cynosdb.v20190107.DescribeBinlogs", async function () {
+    try {
+       const data = await client.DescribeBinlogs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cynosdb.v20190107.CreateAccounts", async function () {
     try {
        const data = await client.CreateAccounts({})
@@ -391,6 +451,16 @@ it("cynosdb.v20190107.ActivateInstance", async function () {
 it("cynosdb.v20190107.DescribeDBSecurityGroups", async function () {
     try {
        const data = await client.DescribeDBSecurityGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.ExportInstanceSlowQueries", async function () {
+    try {
+       const data = await client.ExportInstanceSlowQueries({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

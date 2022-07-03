@@ -141,6 +141,23 @@ export interface CreateStoreLocationResponse {
     RequestId?: string;
 }
 /**
+ * ReportHeartbeatMetaData请求参数结构体
+ */
+export interface ReportHeartbeatMetaDataRequest {
+    /**
+      * 数据源名称
+      */
+    DatasourceConnectionName?: string;
+    /**
+      * 锁ID
+      */
+    LockId?: number;
+    /**
+      * 事务ID
+      */
+    TxnId?: number;
+}
+/**
  * DescribeDMSDatabase返回参数结构体
  */
 export interface DescribeDMSDatabaseResponse {
@@ -1517,6 +1534,15 @@ export interface CreateExportTaskRequest {
       * 目标数据源的类型，目前支持导出到cos
       */
     OutputType?: string;
+}
+/**
+ * ReportHeartbeatMetaData返回参数结构体
+ */
+export interface ReportHeartbeatMetaDataResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * CreateDMSTable请求参数结构体

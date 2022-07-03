@@ -778,6 +778,16 @@ it("cvm.v20170312.RebootInstances", async function () {
     }
 })
 
+it("cvm.v20170312.ModifyInstanceDiskType", async function () {
+    try {
+       const data = await client.ModifyInstanceDiskType({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cvm.v20170312.ModifyHostsAttribute", async function () {
     try {
        const data = await client.ModifyHostsAttribute({})
@@ -808,9 +818,9 @@ it("cvm.v20170312.DisassociateSecurityGroups", async function () {
     }
 })
 
-it("cvm.v20170312.ModifyInstanceDiskType", async function () {
+it("cvm.v20170312.DescribeChcHosts", async function () {
     try {
-       const data = await client.ModifyInstanceDiskType({})
+       const data = await client.DescribeChcHosts({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

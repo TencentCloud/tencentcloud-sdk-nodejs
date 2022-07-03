@@ -1683,6 +1683,26 @@ export interface CreateClusterResponse {
 }
 
 /**
+ * 关联集群时在集群内部署组件的pod额外配置
+ */
+export interface PrometheusClusterAgentPodConfig {
+  /**
+   * 是否使用HostNetWork
+   */
+  HostNet?: boolean
+
+  /**
+   * 指定pod运行节点
+   */
+  NodeSelector?: Array<Label>
+
+  /**
+   * 容忍污点
+   */
+  Tolerations?: Array<Toleration>
+}
+
+/**
  * 描述了 “云安全” 服务相关的信息
  */
 export interface RunSecurityServiceEnabled {
@@ -2738,6 +2758,26 @@ export interface ScaleOutClusterMasterResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * kubernetes Taint
+ */
+export interface Toleration {
+  /**
+   * 容忍应用到的 taint key
+   */
+  Key?: string
+
+  /**
+   * 键与值的关系
+   */
+  Operator?: string
+
+  /**
+   * 要匹配的污点效果
+   */
+  Effect?: string
 }
 
 /**
@@ -6126,7 +6166,17 @@ export interface ImageCacheEvent {
 /**
  * CreatePrometheusClusterAgent请求参数结构体
  */
-export type CreatePrometheusClusterAgentRequest = null
+export interface CreatePrometheusClusterAgentRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+
+  /**
+   * agent列表
+   */
+  Agents: Array<PrometheusClusterAgentBasic>
+}
 
 /**
  * DeleteEKSContainerInstances返回参数结构体
@@ -7225,6 +7275,51 @@ export interface UninstallLogAgentResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 与云监控融合托管prometheus实例，关联集群基础信息
+ */
+export interface PrometheusClusterAgentBasic {
+  /**
+   * 集群ID
+   */
+  Region: string
+
+  /**
+   * 集群类型
+   */
+  ClusterType: string
+
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+
+  /**
+   * 是否开启公网CLB
+   */
+  EnableExternal: boolean
+
+  /**
+   * 集群内部署组件的pod配置
+   */
+  InClusterPodConfig?: PrometheusClusterAgentPodConfig
+
+  /**
+   * 该集群采集的所有指标都会带上这些labels
+   */
+  ExternalLabels?: Array<Label>
+
+  /**
+   * 是否安装默认采集配置
+   */
+  NotInstallBasicScrape?: boolean
+
+  /**
+   * 是否采集指标，true代表drop所有指标，false代表采集默认指标
+   */
+  NotScrape?: boolean
 }
 
 /**

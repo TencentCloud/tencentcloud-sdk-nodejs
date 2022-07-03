@@ -90,6 +90,7 @@ import {
   ModifyClusterAttributeResponse,
   RunAutomationServiceEnabled,
   CreateClusterResponse,
+  PrometheusClusterAgentPodConfig,
   RunSecurityServiceEnabled,
   ImageCache,
   DeletePrometheusAlertRuleResponse,
@@ -138,6 +139,7 @@ import {
   DescribeClusterNodePoolDetailResponse,
   DescribeEKSContainerInstanceEventRequest,
   ScaleOutClusterMasterResponse,
+  Toleration,
   CreateEKSContainerInstancesResponse,
   DescribeClusterKubeconfigResponse,
   DescribeClusterCommonNamesRequest,
@@ -328,6 +330,7 @@ import {
   PrometheusJobTargets,
   ModifyClusterAsGroupOptionAttributeResponse,
   UninstallLogAgentResponse,
+  PrometheusClusterAgentBasic,
   DeleteTKEEdgeClusterResponse,
   CreatePrometheusTempResponse,
   DescribePrometheusTargetsRequest,
@@ -1646,7 +1649,7 @@ export class Client extends AbstractClient {
    * 与云监控融合的2.0实例关联集群
    */
   async CreatePrometheusClusterAgent(
-    req?: CreatePrometheusClusterAgentRequest,
+    req: CreatePrometheusClusterAgentRequest,
     cb?: (error: string, rep: CreatePrometheusClusterAgentResponse) => void
   ): Promise<CreatePrometheusClusterAgentResponse> {
     return this.request("CreatePrometheusClusterAgent", req, cb)
