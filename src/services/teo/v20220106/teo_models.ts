@@ -552,6 +552,12 @@ export interface DdosRule {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Switch?: string
+
+  /**
+      * UDP分片功能是否支持，off-不支持，on-支持
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UdpShardOpen?: string
 }
 
 /**
@@ -1805,38 +1811,38 @@ export interface CreateDnsRecordRequest {
 }
 
 /**
- * 用户画像规则详情
+ * IP黑白名单详细规则
  */
-export interface PortraitManagedRuleDetail {
+export interface IpTableRule {
   /**
-      * 规则唯一id
+      * 动作: drop拦截，trans放行，monitor观察
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  RuleId?: number
+  Action?: string
 
   /**
-      * 规则的描述
+      * 根据类型匹配：ip(根据ip), area(根据区域)
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Description?: string
+  MatchFrom?: string
 
   /**
-      * 规则所属类型的名字, botdb(用户画像)
+      * 匹配内容
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  RuleTypeName?: string
+  MatchContent?: string
 
   /**
-      * 规则内的功能分类Id(扫描器，Bot行为等)
+      * 规则id
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ClassificationId?: number
+  RuleID?: number
 
   /**
-      * 规则当前所属动作状态(block, alg, ...)
+      * 更新时间
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Status?: string
+  UpdateTime?: string
 }
 
 /**
@@ -2729,6 +2735,101 @@ export interface OriginRecord {
 }
 
 /**
+ * web攻击日志
+ */
+export interface WebLogs {
+  /**
+      * 攻击内容
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AttackContent: string
+
+  /**
+      * 攻击IP
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AttackIp: string
+
+  /**
+      * 攻击类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AttackType: string
+
+  /**
+      * 域名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Domain: string
+
+  /**
+      * uuid
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Msuuid: string
+
+  /**
+      * 请求方法
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RequestMethod: string
+
+  /**
+      * 请求URI
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RequestUri: string
+
+  /**
+      * 风险等级
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RiskLevel: string
+
+  /**
+      * 规则ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RuleId: number
+
+  /**
+      * IP所在国家
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SipCountryCode: string
+
+  /**
+      * 事件id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EventId: string
+
+  /**
+      * 处置方式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DisposalMethod: string
+
+  /**
+      * http_log
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  HttpLog: string
+
+  /**
+      * user agent
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Ua: string
+
+  /**
+      * 攻击时间，为保持统一，原参数time更名为AttackTime
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AttackTime: number
+}
+
+/**
  * CreatePrefetchTask请求参数结构体
  */
 export interface CreatePrefetchTaskRequest {
@@ -3296,6 +3397,12 @@ export interface SecurityConfig {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   SwitchConfig?: SwitchConfig
+
+  /**
+      * IP黑白名单
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IpTableConfig?: IpTableConfig
 }
 
 /**
@@ -3530,6 +3637,12 @@ export interface DDoSAntiPly {
    * 空连接防护开启 0-1
    */
   EmptyConnectProtect: string
+
+  /**
+      * UDP分片开关；off-关闭，on-开启
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UdpShard?: string
 }
 
 /**
@@ -3909,6 +4022,12 @@ export interface RateLimitConfig {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Template?: RateLimitTemplate
+
+  /**
+      * 智能客户端过滤
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Intelligence?: RateLimitIntelligence
 }
 
 /**
@@ -4543,6 +4662,41 @@ export interface DescribeTimingL7AnalysisDataResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 用户画像规则详情
+ */
+export interface PortraitManagedRuleDetail {
+  /**
+      * 规则唯一id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RuleId?: number
+
+  /**
+      * 规则的描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Description?: string
+
+  /**
+      * 规则所属类型的名字, botdb(用户画像)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RuleTypeName?: string
+
+  /**
+      * 规则内的功能分类Id(扫描器，Bot行为等)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClassificationId?: number
+
+  /**
+      * 规则当前所属动作状态(block, alg, ...)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Status?: string
 }
 
 /**
@@ -5239,98 +5393,37 @@ export interface DescribeTopL7AnalysisDataResponse {
 }
 
 /**
- * web攻击日志
+ * Bot智能分析规则详情
  */
-export interface WebLogs {
+export interface IntelligenceRuleItem {
   /**
-      * 攻击内容
+      * 恶意BOT
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  AttackContent: string
+  Label?: string
 
   /**
-      * 攻击IP
+      * 动作
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  AttackIp: string
+  Action?: string
+}
+
+/**
+ * 智能分析规则
+ */
+export interface IntelligenceRule {
+  /**
+      * 开关
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Switch?: string
 
   /**
-      * 攻击类型
+      * 规则详情
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  AttackType: string
-
-  /**
-      * 域名
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Domain: string
-
-  /**
-      * uuid
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Msuuid: string
-
-  /**
-      * 请求方法
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  RequestMethod: string
-
-  /**
-      * 请求URI
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  RequestUri: string
-
-  /**
-      * 风险等级
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  RiskLevel: string
-
-  /**
-      * 规则ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  RuleId: number
-
-  /**
-      * IP所在国家
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  SipCountryCode: string
-
-  /**
-      * 事件id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  EventId: string
-
-  /**
-      * 处置方式
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DisposalMethod: string
-
-  /**
-      * http_log
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  HttpLog: string
-
-  /**
-      * user agent
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Ua: string
-
-  /**
-      * 攻击时间，为保持统一，原参数time更名为AttackTime
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  AttackTime: number
+  Items?: Array<IntelligenceRuleItem>
 }
 
 /**
@@ -6037,6 +6130,40 @@ export interface DescribeApplicationProxyDetailRequest {
    * 实例ID
    */
   ProxyId: string
+}
+
+/**
+ * 智能客户端过滤
+ */
+export interface RateLimitIntelligence {
+  /**
+      * 功能开关
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Switch?: string
+
+  /**
+      * 执行动作 monitor(观察), alg(挑战)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Action?: string
+}
+
+/**
+ * IP黑白名单及IP区域控制配置
+ */
+export interface IpTableConfig {
+  /**
+      * 开关
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Switch?: string
+
+  /**
+      * []
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Rules?: Array<IpTableRule>
 }
 
 /**
@@ -7598,17 +7725,17 @@ export interface DescribeTimingL4DataRequest {
   MetricNames: Array<string>
 
   /**
-   * ZoneId列表，仅在zone/instance维度下查询时该参数有效
+   * 站点id列表
    */
   ZoneIds?: Array<string>
 
   /**
-   * InstanceId列表，仅在Instance维度下查询时该参数有效
+   * 该字段已废弃，请使用ProxyIds字段
    */
   InstanceIds?: Array<string>
 
   /**
-   * 协议类型， 该字段当前无效
+   * 该字段当前无效
    */
   Protocol?: string
 
@@ -7618,9 +7745,19 @@ export interface DescribeTimingL4DataRequest {
   Interval?: string
 
   /**
-   * 规则ID，仅在instance维度有效
+   * 该字段当前无效，请使用Filter筛选
    */
   RuleId?: string
+
+  /**
+   * 支持的 Filter：proxyd,ruleId
+   */
+  Filters?: Array<Filter>
+
+  /**
+   * 四层实例列表
+   */
+  ProxyIds?: Array<string>
 }
 
 /**
@@ -8491,7 +8628,7 @@ export interface BotConfig {
   /**
    * bot开关
    */
-  Switch: string
+  Switch?: string
 
   /**
    * 预置规则
@@ -8512,6 +8649,12 @@ export interface BotConfig {
    * 用户画像规则
    */
   PortraitRule?: BotPortraitRule
+
+  /**
+      * Bot智能分析
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IntelligenceRule?: IntelligenceRule
 }
 
 /**

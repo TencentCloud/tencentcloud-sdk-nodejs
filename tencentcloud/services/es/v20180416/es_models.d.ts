@@ -124,6 +124,16 @@ export interface NodeInfo {
       * 节点磁盘是否加密 0: 不加密，1: 加密；默认不加密
       */
     DiskEncrypt?: number;
+    /**
+      * cpu数目
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CpuNum?: number;
+    /**
+      * 内存大小，单位GB
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MemSize?: number;
 }
 /**
  * UpgradeInstance返回参数结构体

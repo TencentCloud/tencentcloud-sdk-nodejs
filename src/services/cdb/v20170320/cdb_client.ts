@@ -43,9 +43,9 @@ import {
   DescribeDBInstancesRequest,
   TableName,
   DeleteAccountsResponse,
-  SlowLogInfo,
+  RollbackTableName,
   CloseWanServiceRequest,
-  DescribeAuditConfigRequest,
+  OpenAuditServiceResponse,
   CreateRoInstanceIpResponse,
   CreateAuditPolicyResponse,
   DescribeInstanceParamRecordsRequest,
@@ -58,6 +58,7 @@ import {
   ModifyDBInstanceNameRequest,
   TagInfoUnit,
   ModifyAuditRuleResponse,
+  OpenAuditServiceRequest,
   DescribeAuditRulesRequest,
   UpgradeDBInstanceEngineVersionResponse,
   ErrlogItem,
@@ -194,6 +195,7 @@ import {
   DeployGroupInfo,
   LocalBinlogConfig,
   InquiryPriceUpgradeInstancesResponse,
+  DescribeAuditConfigRequest,
   CreateDBInstanceRequest,
   DescribeProxyConnectionPoolConfRequest,
   DescribeParamTemplatesRequest,
@@ -235,7 +237,7 @@ import {
   CloseWanServiceResponse,
   RoWeight,
   RenewDBInstanceRequest,
-  RollbackTableName,
+  SlowLogInfo,
   ModifyLocalBinlogConfigResponse,
   DescribeCloneListRequest,
   ModifyInstanceTagRequest,
@@ -1182,6 +1184,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 开启 RO 复制，从主实例同步数据。
+   */
+  async StartReplication(
+    req: StartReplicationRequest,
+    cb?: (error: string, rep: StartReplicationResponse) => void
+  ): Promise<StartReplicationResponse> {
+    return this.request("StartReplication", req, cb)
+  }
+
+  /**
    * 本接口(DescribeAuditConfig)用于查询云数据库审计策略的服务配置，包括审计日志保存时长等。
    */
   async DescribeAuditConfig(
@@ -1458,13 +1470,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 开启 RO 复制，从主实例同步数据。
+   * CDB实例开通审计服务
    */
-  async StartReplication(
-    req: StartReplicationRequest,
-    cb?: (error: string, rep: StartReplicationResponse) => void
-  ): Promise<StartReplicationResponse> {
-    return this.request("StartReplication", req, cb)
+  async OpenAuditService(
+    req: OpenAuditServiceRequest,
+    cb?: (error: string, rep: OpenAuditServiceResponse) => void
+  ): Promise<OpenAuditServiceResponse> {
+    return this.request("OpenAuditService", req, cb)
   }
 
   /**

@@ -6400,6 +6400,32 @@ __其他__: 见附录-错误码表
 }
 
 /**
+ * QueryFlexSettlementOrderList返回参数结构体
+ */
+export interface QueryFlexSettlementOrderListResponse {
+  /**
+   * 错误码。SUCCESS为成功，其他为失败
+   */
+  ErrCode: string
+
+  /**
+   * 错误消息
+   */
+  ErrMessage: string
+
+  /**
+      * 返回结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result: SettlementOrders
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * QueryFlexPayeeInfo返回参数结构体
  */
 export interface QueryFlexPayeeInfoResponse {
@@ -11486,6 +11512,32 @@ export interface CreateBatchPaymentData {
 }
 
 /**
+ * AddFlexPhoneNo返回参数结构体
+ */
+export interface AddFlexPhoneNoResponse {
+  /**
+   * 错误码。SUCCESS为成功，其他为失败
+   */
+  ErrCode: string
+
+  /**
+   * 错误消息
+   */
+  ErrMessage: string
+
+  /**
+      * 无
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DistributeQuery请求参数结构体
  */
 export interface DistributeQueryRequest {
@@ -12162,30 +12214,43 @@ export interface QueryExchangeRateRequest {
 }
 
 /**
- * AddContract返回参数结构体
+ * 订单汇总结果
  */
-export interface AddContractResponse {
+export interface OrderSummaryResult {
   /**
-      * 业务系统返回消息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ErrMessage: string
-
-  /**
-   * 业务系统返回码
+   * 汇总ID
    */
-  ErrCode: string
+  SummaryId: string
 
   /**
-      * 添加合同响应对象
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Result: AddContractResult
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 收款账户ID
    */
-  RequestId?: string
+  PayeeId: string
+
+  /**
+   * 收款账户名称
+   */
+  Name: string
+
+  /**
+   * 收入类型
+   */
+  IncomeType: string
+
+  /**
+   * 汇总金额
+   */
+  SummaryAmount: string
+
+  /**
+   * 汇总日期
+   */
+  SummaryTime: string
+
+  /**
+   * 汇总记录数量
+   */
+  SummaryCount: number
 }
 
 /**
@@ -12366,6 +12431,21 @@ export interface DistributeQueryResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Orders?: Array<MultiApplyOrder>
+}
+
+/**
+ * 订单汇总列表
+ */
+export interface OrderSummaries {
+  /**
+   * 汇总列表
+   */
+  List: Array<OrderSummaryResult>
+
+  /**
+   * 总数
+   */
+  Count: number
 }
 
 /**
@@ -14758,9 +14838,9 @@ export interface AgencyClientInfo {
 }
 
 /**
- * QueryFlexSettlementOrderList返回参数结构体
+ * QueryFlexOrderSummaryList返回参数结构体
  */
-export interface QueryFlexSettlementOrderListResponse {
+export interface QueryFlexOrderSummaryListResponse {
   /**
    * 错误码。SUCCESS为成功，其他为失败
    */
@@ -14775,7 +14855,7 @@ export interface QueryFlexSettlementOrderListResponse {
       * 返回结果
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Result: SettlementOrders
+  Result: OrderSummaries
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -15084,6 +15164,40 @@ export interface QueryShopOpenIdResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   MerchantName: string
+}
+
+/**
+ * QueryFlexOrderSummaryList请求参数结构体
+ */
+export interface QueryFlexOrderSummaryListRequest {
+  /**
+   * 汇总日期:yyyy-MM-dd
+   */
+  SummaryDate: string
+
+  /**
+   * 分页
+   */
+  PageNumber: Paging
+
+  /**
+   * 汇总订单类型:FREEZE, SETTLEMENT,PAYMENT
+   */
+  OrderType: string
+
+  /**
+   * 收款用户ID
+   */
+  PayeeId?: string
+
+  /**
+      * 环境类型
+__release__:生产环境
+__sandbox__:沙箱环境
+__test__:测试环境
+缺省默认为生产环境
+      */
+  Environment?: string
 }
 
 /**
@@ -15935,6 +16049,21 @@ export interface DeleteAgentTaxPaymentInfosRequest {
    * 批次号
    */
   BatchNum: number
+}
+
+/**
+ * 对账单文件下载链接
+ */
+export interface FlexBillDownloadUrlResult {
+  /**
+   * 对账单文件下载链接
+   */
+  Url: string
+
+  /**
+   * 下载链接过期时间
+   */
+  ExpireTime: string
 }
 
 /**
@@ -16798,6 +16927,33 @@ export interface OpenBankApprovalGuideInfo {
 }
 
 /**
+ * AddContract返回参数结构体
+ */
+export interface AddContractResponse {
+  /**
+      * 业务系统返回消息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ErrMessage: string
+
+  /**
+   * 业务系统返回码
+   */
+  ErrCode: string
+
+  /**
+      * 添加合同响应对象
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result: AddContractResult
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateOrder返回参数结构体
  */
 export interface CreateOrderResponse {
@@ -16872,6 +17028,37 @@ export interface MultiApplyOrder {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Details: Array<MultiApplyDetail>
+}
+
+/**
+ * AddFlexIdInfo请求参数结构体
+ */
+export interface AddFlexIdInfoRequest {
+  /**
+      * 证件类型
+0:身份证
+1:社会信用代码
+      */
+  IdType: number
+
+  /**
+   * 证件号
+   */
+  IdNo: string
+
+  /**
+   * 收款用户ID
+   */
+  PayeeId: string
+
+  /**
+      * 环境类型
+__release__:生产环境
+__sandbox__:沙箱环境
+__test__:测试环境
+缺省默认为生产环境
+      */
+  Environment?: string
 }
 
 /**
@@ -17272,6 +17459,32 @@ export interface QueryOpenBankRefundOrderResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Result: OpenBankQueryRefundOrderResult
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * QueryFlexBillDownloadUrl返回参数结构体
+ */
+export interface QueryFlexBillDownloadUrlResponse {
+  /**
+   * 错误码。SUCCESS为成功，其他为失败
+   */
+  ErrCode: string
+
+  /**
+   * 错误消息
+   */
+  ErrMessage: string
+
+  /**
+      * 返回结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result: FlexBillDownloadUrlResult
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -20422,30 +20635,27 @@ export interface DistributeAccreditQueryResult {
 }
 
 /**
- * QueryShopOpenId返回参数结构体
+ * AddFlexPhoneNo请求参数结构体
  */
-export interface QueryShopOpenIdResponse {
+export interface AddFlexPhoneNoRequest {
   /**
-      * 业务系统返回消息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ErrMessage: string
-
-  /**
-   * 业务系统返回码
+   * 手机号
    */
-  ErrCode: string
+  PhoneNo: string
 
   /**
-      * 获取门店OpenId响应对象
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Result: QueryShopOpenIdResult
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 收款用户ID
    */
-  RequestId?: string
+  PayeeId: string
+
+  /**
+      * 环境类型
+__release__:生产环境
+__sandbox__:沙箱环境
+__test__:测试环境
+缺省默认为生产环境
+      */
+  Environment?: string
 }
 
 /**
@@ -21105,6 +21315,35 @@ export interface CreateAnchorResponse {
 }
 
 /**
+ * QueryFlexBillDownloadUrl请求参数结构体
+ */
+export interface QueryFlexBillDownloadUrlRequest {
+  /**
+   * 对账单日期
+   */
+  BillDate: string
+
+  /**
+   * 对账单类型：FREEZE, SETTLEMENT,PAYMENT
+   */
+  BillType: string
+
+  /**
+   * 服务商ID，如不填则查询平台级别对账单文件
+   */
+  ServiceProviderId?: string
+
+  /**
+      * 环境类型
+__release__:生产环境
+__sandbox__:沙箱环境
+__test__:测试环境
+缺省默认为生产环境
+      */
+  Environment?: string
+}
+
+/**
  * CreateOpenBankSubMerchantRateConfigure返回参数结构体
  */
 export interface CreateOpenBankSubMerchantRateConfigureResponse {
@@ -21519,6 +21758,33 @@ export interface MerchantRiskInfo {
 }
 
 /**
+ * QueryShopOpenId返回参数结构体
+ */
+export interface QueryShopOpenIdResponse {
+  /**
+      * 业务系统返回消息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ErrMessage: string
+
+  /**
+   * 业务系统返回码
+   */
+  ErrCode: string
+
+  /**
+      * 获取门店OpenId响应对象
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result: QueryShopOpenIdResult
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 账户开立结果
  */
 export interface CreateFlexPayeeResult {
@@ -21926,6 +22192,32 @@ export interface QueryInvoiceResultData {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ImageUrl: string
+}
+
+/**
+ * AddFlexIdInfo返回参数结构体
+ */
+export interface AddFlexIdInfoResponse {
+  /**
+   * 错误码。SUCCESS为成功，其他为失败
+   */
+  ErrCode: string
+
+  /**
+   * 错误消息
+   */
+  ErrMessage: string
+
+  /**
+      * 无
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

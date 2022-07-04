@@ -19,6 +19,7 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   VideoSuperResolution,
+  DynamicImageInfo,
   MediaJoiningTaskResult,
   Denoise,
   StripTaskResultItem,
@@ -65,6 +66,7 @@ import {
   ResultVideoInfo,
   PicMarkInfoItem,
   MediaJoiningInfo,
+  MediaCuttingWatermarkText,
   DescribeMediaQualityRestorationTaskRusultRequest,
   ColorEnhance,
   SegmentInfo,
@@ -104,6 +106,7 @@ import {
   TagTaskResult,
   AudioEnhance,
   CosInfo,
+  MediaCuttingWatermarkImage,
   MediaResultInfo,
   FrameTagResult,
   TextMarkInfoItem,
@@ -118,6 +121,7 @@ import {
   CoverEditingInfo,
   SubtitleItem,
   DescribeMediaProcessTaskResultRequest,
+  SpriteImageInfo,
   MediaProcessTaskResult,
   EditingTaskResult,
   MediaProcessInfo,
@@ -125,6 +129,7 @@ import {
   TagItem,
   DescribeMediaProcessTaskResultResponse,
   HighlightsTaskResultItemSegment,
+  MediaCuttingWatermark,
 } from "./ie_models"
 
 /**

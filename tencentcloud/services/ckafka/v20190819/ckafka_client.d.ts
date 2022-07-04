@@ -188,7 +188,7 @@ export declare class Client extends AbstractClient {
     /**
      * 用于查看ckafka的可用区列表
      */
-    DescribeCkafkaZone(req?: DescribeCkafkaZoneRequest, cb?: (error: string, rep: DescribeCkafkaZoneResponse) => void): Promise<DescribeCkafkaZoneResponse>;
+    DescribeCkafkaZone(req: DescribeCkafkaZoneRequest, cb?: (error: string, rep: DescribeCkafkaZoneResponse) => void): Promise<DescribeCkafkaZoneResponse>;
     /**
      * 枚举地域,只支持广州地域
      */

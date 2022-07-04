@@ -40,10 +40,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DistributeAccreditQuery", req, cb);
     }
     /**
-     * 云企付-子商户费率配置结果查询
+     * 灵云V2-补充手机号信息
      */
-    async QueryOpenBankSubMerchantRateConfigure(req, cb) {
-        return this.request("QueryOpenBankSubMerchantRateConfigure", req, cb);
+    async AddFlexPhoneNo(req, cb) {
+        return this.request("AddFlexPhoneNo", req, cb);
     }
     /**
      * 灵云V2-查询冻结订单列表
@@ -190,16 +190,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyMerchant", req, cb);
     }
     /**
+     * 云企付-子商户费率配置结果查询
+     */
+    async QueryOpenBankSubMerchantRateConfigure(req, cb) {
+        return this.request("QueryOpenBankSubMerchantRateConfigure", req, cb);
+    }
+    /**
      * 登记挂账(支持撤销)。此接口可实现把不明来账或自有资金等已登记在挂账子账户下的资金调整到普通会员子账户。即通过申请调用此接口，将会减少挂账子账户的资金，调增指定的普通会员子账户的可提现余额及可用余额。此接口不支持把挂账子账户资金清分到功能子账户。
      */
     async RegisterBillSupportWithdraw(req, cb) {
         return this.request("RegisterBillSupportWithdraw", req, cb);
     }
     /**
-     * 云企付-按日期批量查询回单下载地址
+     * 灵云V2-补充证件信息
      */
-    async QueryOpenBankDailyReceiptDownloadUrl(req, cb) {
-        return this.request("QueryOpenBankDailyReceiptDownloadUrl", req, cb);
+    async AddFlexIdInfo(req, cb) {
+        return this.request("AddFlexIdInfo", req, cb);
     }
     /**
      * 云企付-创建充值订单
@@ -334,6 +340,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RegisterBehavior", req, cb);
     }
     /**
+     * 云企付-查询支持银行列表
+     */
+    async QueryOpenBankSupportBankList(req, cb) {
+        return this.request("QueryOpenBankSupportBankList", req, cb);
+    }
+    /**
      * 云支付-查询商户明细接口
      */
     async ViewMerchant(req, cb) {
@@ -352,11 +364,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreatePayRollPreOrderWithAuth", req, cb);
     }
     /**
-     * 会员绑定信息查询。查询标志为“单个会员”的情况下，返回该会员的有效的绑定账户信息。
-查询标志为“全部会员”的情况下，返回市场下的全部的有效的绑定账户信息。查询标志为“单个会员的证件信息”的情况下，返回市场下的指定的会员的留存在电商见证宝系统的证件信息。
+     * 灵云V2-订单汇总列表查询
      */
-    async QueryMemberBind(req, cb) {
-        return this.request("QueryMemberBind", req, cb);
+    async QueryFlexOrderSummaryList(req, cb) {
+        return this.request("QueryFlexOrderSummaryList", req, cb);
     }
     /**
      * 云企付-创建支付订单
@@ -465,6 +476,13 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async UploadExternalAnchorInfo(req, cb) {
         return this.request("UploadExternalAnchorInfo", req, cb);
+    }
+    /**
+     * 会员绑定信息查询。查询标志为“单个会员”的情况下，返回该会员的有效的绑定账户信息。
+查询标志为“全部会员”的情况下，返回市场下的全部的有效的绑定账户信息。查询标志为“单个会员的证件信息”的情况下，返回市场下的指定的会员的留存在电商见证宝系统的证件信息。
+     */
+    async QueryMemberBind(req, cb) {
+        return this.request("QueryMemberBind", req, cb);
     }
     /**
      * 应用需要先调用本接口生成支付订单号，并将应答的PayInfo透传给聚鑫SDK，拉起客户端（包括微信公众号/微信小程序/客户端App）支付。
@@ -933,6 +951,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RegisterBill", req, cb);
     }
     /**
+     * 灵云V2-查询对账单文件下载链接
+     */
+    async QueryFlexBillDownloadUrl(req, cb) {
+        return this.request("QueryFlexBillDownloadUrl", req, cb);
+    }
+    /**
      * 云企付-查询对账单下载地址
      */
     async QueryOpenBankDownLoadUrl(req, cb) {
@@ -1013,10 +1037,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RevokeMemberRechargeThirdPay", req, cb);
     }
     /**
-     * 云企付-查询支持银行列表
+     * 云企付-按日期批量查询回单下载地址
      */
-    async QueryOpenBankSupportBankList(req, cb) {
-        return this.request("QueryOpenBankSupportBankList", req, cb);
+    async QueryOpenBankDailyReceiptDownloadUrl(req, cb) {
+        return this.request("QueryOpenBankDailyReceiptDownloadUrl", req, cb);
     }
     /**
      * 云支付-分账撤销接口

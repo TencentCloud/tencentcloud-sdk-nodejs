@@ -2215,6 +2215,10 @@ export interface AlterDMSTableRequest {
       * 分区
       */
     Partitions?: Array<DMSPartition>;
+    /**
+      * 当前表名
+      */
+    Name?: string;
 }
 /**
  * CreateImportTask返回参数结构体

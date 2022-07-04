@@ -307,11 +307,6 @@ export interface CreateClusterRequest {
   Zone: string
 
   /**
-   * 数据库版本，目前仅支持 10.17
-   */
-  DBVersion: string
-
-  /**
    * 数据库用户密码，必须满足 8-64个字符，至少包含 大写字母、小写字母、数字和符号~!@#$%^&*_-+=`|\(){}[]:;'<>,.?/中的任意三种
    */
   MasterUserPassword: string
@@ -349,6 +344,13 @@ export interface CreateClusterRequest {
   ClusterName?: string
 
   /**
+      * TDSQL-C PostgreSQL 合入的社区版本号。
+支持入参值为：10.17。当输入该参数时，会基于此版本号创建对应的最新DBKernelVersion数据库内核。
+注：该参数与DBMajorVersion、DBKernelVersion只能传递一个，且需要传递一个。
+      */
+  DBVersion?: string
+
+  /**
    * 项目Id，默认为0表示默认项目
    */
   ProjectId?: number
@@ -373,6 +375,20 @@ export interface CreateClusterRequest {
    * 是否自动续费，0-不 1-是。默认值为0，只有当PayMode为PREPAID时生效。
    */
   AutoRenewFlag?: number
+
+  /**
+      * TDSQL-C PostgreSQL 合入的社区主要版本号。
+支持入参值为：10。当输入该参数时，会基于此版本号创建对应的最新DBKernelVersion数据库内核。
+注：该参数和DBVersion、DBKernelVersion只能传递一个，且需要传递一个。
+      */
+  DBMajorVersion?: string
+
+  /**
+      * TDSQL-C PostgreSQL 内核版本号。
+支持入参值为：v10.17_r1.4。当输入该参数时，会创建此版本号对应的数据库内核。
+注：该参数和DBVersion、DBMajorVersion只能传递一个，且需要传递一个。
+      */
+  DBKernelVersion?: string
 }
 
 /**
@@ -998,6 +1014,16 @@ export interface Instance {
  - RO：只读实例
       */
   InstanceType: string
+
+  /**
+   * TDSQL-C PostgreSQL 合入的社区主要版本号
+   */
+  DBMajorVersion: string
+
+  /**
+   * TDSQL-C PostgreSQL 内核版本号
+   */
+  DBKernelVersion: string
 }
 
 /**
@@ -1100,7 +1126,7 @@ export interface Cluster {
   Zone: string
 
   /**
-   * 数据库版本
+   * TDSQL-C PostgreSQL 合入的社区版本号
    */
   DBVersion: string
 
@@ -1174,6 +1200,16 @@ export interface Cluster {
    * 集群内访问点信息
    */
   EndpointSet: Array<Endpoint>
+
+  /**
+   * TDSQL-C PostgreSQL 合入的社区主要版本号
+   */
+  DBMajorVersion: string
+
+  /**
+   * TDSQL-C PostgreSQL 内核版本号
+   */
+  DBKernelVersion: string
 }
 
 /**

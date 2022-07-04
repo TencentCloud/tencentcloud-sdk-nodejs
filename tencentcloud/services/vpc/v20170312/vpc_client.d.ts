@@ -953,7 +953,7 @@ export declare class Client extends AbstractClient {
     EnableFlowLogs(req: EnableFlowLogsRequest, cb?: (error: string, rep: EnableFlowLogsResponse) => void): Promise<EnableFlowLogsResponse>;
     /**
      * 本接口（DescribeIpGeolocationInfos）用于查询IP地址信息，包括地理位置信息和网络信息。
-本接口目前处于内测中，如需使用，请提交 [工单申请](https://console.cloud.tencent.com/workorder/category?level1_id=6&level2_id=660&source=0&data_title=%E5%BC%B9%E6%80%A7%E5%85%AC%E7%BD%91%20EIP&level3_id=662&queue=96&scene_code=16400&step=2)。
+本接口仅供存量客户使用，如有疑问，请提交[工单申请](https://console.cloud.tencent.com/workorder/category?level1_id=6&level2_id=660&source=0&data_title=%E5%BC%B9%E6%80%A7%E5%85%AC%E7%BD%91%20EIP&level3_id=662&queue=96&scene_code=16400&step=2)。
      */
     DescribeIpGeolocationInfos(req: DescribeIpGeolocationInfosRequest, cb?: (error: string, rep: DescribeIpGeolocationInfosResponse) => void): Promise<DescribeIpGeolocationInfosResponse>;
     /**

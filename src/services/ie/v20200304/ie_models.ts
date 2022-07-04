@@ -35,6 +35,18 @@ hq: 针对高清晰度视频超分;
 }
 
 /**
+ * 动图参数
+ */
+export interface DynamicImageInfo {
+  /**
+      * 画面质量，范围：1~100。
+<li>对于webp格式，默认：75</li>
+<li>对于gif格式，小于10为低质量，大于50为高质量，其它为普通。默认：低质量。</li>
+      */
+  Quality?: number
+}
+
+/**
  * 编辑处理/拼接任务/处理结果
  */
 export interface MediaJoiningTaskResult {
@@ -175,6 +187,15 @@ export interface MediaCuttingTaskResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   LastFile: TaskResultFile
+
+  /**
+      * 任务结果包含的图片总数。
+静态图：总数即为文件数；
+雪碧图：所有小图总数；
+动图、视频：不计算图片数，为 0。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ImageCount: number
 }
 
 /**
@@ -193,7 +214,8 @@ export interface CoverTaskResultItem {
 }
 
 /**
- * 编辑处理/剪切任务信息
+ * 编辑处理/剪切任务信息。
+截图结果默认存在 SaveInfoSet 的第一个存储位置。
  */
 export interface MediaCuttingInfo {
   /**
@@ -213,10 +235,21 @@ export interface MediaCuttingInfo {
 
   /**
       * 列表文件形式，存储到用户存储服务中，可选值：
-UseSaveInfo：默认，结果列表和结果存储同一位置；
-NoListFile：不存储结果列表。
+<li>NoListFile：不存储结果列表; </li>
+<li>UseSaveInfo：默认，结果列表和结果存储同一位置（即SaveInfoSet 的第一个存储位置）；</li>
+<li>SaveInfoSet 存储的Id：存储在指定的存储位置。</li>
       */
   ResultListSaveType?: string
+
+  /**
+   * 水印信息，最多支持 10 个水印。
+   */
+  WatermarkInfoSet?: Array<MediaCuttingWatermark>
+
+  /**
+   * 是否去除纯色截图，如果值为 True ，对应时间点的截图如果是纯色，将略过。
+   */
+  DropPureColor?: string
 }
 
 /**
@@ -264,12 +297,12 @@ export interface MuxInfo {
  */
 export interface TargetVideoInfo {
   /**
-   * 视频宽度，单位像素
+   * 视频宽度，单位像素，一般要求是偶数，否则会向下对齐。
    */
   Width?: number
 
   /**
-   * 视频高度，单位像素
+   * 视频高度，单位像素，一般要求是偶数，否则会向下对齐。
    */
   Height?: number
 
@@ -637,6 +670,12 @@ export interface SaveInfo {
    * Cos形式存储信息，当Type等于1时必选。
    */
   CosInfo?: CosInfo
+
+  /**
+      * 存储信息ID标记，用于多个输出场景。部分任务支持多输出时，一般要求必选。
+ID只能包含字母、数字、下划线、中划线，长读不能超过128。
+      */
+  Id?: string
 }
 
 /**
@@ -791,7 +830,7 @@ export interface CreateMediaProcessTaskResponse {
       * 编辑任务 ID，可以通过该 ID 查询任务状态和结果。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  TaskId?: string
+  TaskId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -820,6 +859,12 @@ export interface TaskResultFile {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   MediaInfo: MediaResultInfo
+
+  /**
+      * 文件对应的md5。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Md5: string
 }
 
 /**
@@ -958,7 +1003,7 @@ export interface ResultVideoInfo {
   Height: number
 
   /**
-      * 视频帧率
+      * 视频帧率，如果高于原始帧率，部分服务将无效。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Fps: number
@@ -1018,6 +1063,68 @@ export interface MediaJoiningInfo {
 其中Format只支持mp4.
       */
   TargetInfo: MediaTargetInfo
+
+  /**
+      * 拼接模式：
+Fast：快速；
+Normal：正常；
+      */
+  Mode?: string
+}
+
+/**
+ * 媒体剪切文字水印参数。
+ */
+export interface MediaCuttingWatermarkText {
+  /**
+   * 水印文字。
+   */
+  Text: string
+
+  /**
+   * 文字大小
+   */
+  FontSize: number
+
+  /**
+   * 水印水平坐标，单位像素，默认：0。
+   */
+  PosX?: number
+
+  /**
+   * 水印垂直坐标，单位像素，默认：0。
+   */
+  PosY?: number
+
+  /**
+   * 文字颜色，格式为：#RRGGBBAA，默认值：#000000。
+   */
+  FontColor?: string
+
+  /**
+   * 文字透明度，范围：0~100，默认值：100。
+   */
+  FontAlpha?: number
+
+  /**
+      * 指定坐标原点，可选值：
+<li>LeftTop：PosXY 表示水印左上点到图片左上点的相对位置</li>
+<li>RightTop：PosXY 表示水印右上点到图片右上点的相对位置</li>
+<li>LeftBottom：PosXY 表示水印左下点到图片左下点的相对位置</li>
+<li>RightBottom：PosXY 表示水印右下点到图片右下点的相对位置</li>
+<li>Center：PosXY 表示水印中心点到图片中心点的相对位置</li>
+默认：LeftTop。
+      */
+  PosOriginType?: string
+
+  /**
+      * 字体，可选值：
+<li>SimHei</li>
+<li>SimKai</li>
+<li>Arial</li>
+默认 SimHei。
+      */
+  Font?: string
 }
 
 /**
@@ -1106,10 +1213,8 @@ index：序号；
   TargetVideoInfo?: TargetVideoInfo
 
   /**
-      * 【不再使用】 对于多输出任务，部分子服务推荐结果信息以列表文件形式，存储到用户存储服务中，可选值：
-UseSaveInfo：默认，结果列表和结果存储同一位置；
-NoListFile：不存储结果列表。
-      */
+   * 【不再使用】
+   */
   ResultListSaveType?: string
 }
 
@@ -1556,14 +1661,24 @@ Gaussian：高斯模糊；
   FillType?: string
 
   /**
-   * Type=Sprite时有效，表示雪碧图行数，范围为 [1,200]，默认100。
+   * 【废弃】参考SpriteInfo
    */
   SpriteRowCount?: number
 
   /**
-   * Type=Sprite时有效，表示雪碧图列数，范围为 [1,200]，默认100。
+   * 【废弃】参考SpriteInfo
    */
   SpriteColumnCount?: number
+
+  /**
+   * Type=Sprite时有效，表示雪碧图参数信息。
+   */
+  SpriteInfo?: SpriteImageInfo
+
+  /**
+   * Type=Dynamic时有效，表示动图参数信息。
+   */
+  DynamicInfo?: DynamicImageInfo
 }
 
 /**
@@ -2075,6 +2190,54 @@ export interface CosInfo {
 }
 
 /**
+ * 媒体剪切图像水印参数。
+ */
+export interface MediaCuttingWatermarkImage {
+  /**
+      * 水印源的ID，对应SourceInfoSet内的源。
+注意1：对应的 MediaSourceInfo.Type需要为Image。
+注意2：对于动图，只取第一帧图像作为水印源。
+      */
+  SourceId: string
+
+  /**
+   * 水印水平坐标，单位像素，默认：0。
+   */
+  PosX?: number
+
+  /**
+   * 水印垂直坐标，单位像素，默认：0。
+   */
+  PosY?: number
+
+  /**
+   * 水印宽度，单位像素，默认：0。
+   */
+  Width?: number
+
+  /**
+      * 水印高度，单位像素，默认：0。
+注意：对于宽高符合以下规则：
+1、Width>0 且 Height>0，按指定宽高拉伸；
+2、Width=0 且 Height>0，以Height为基准等比缩放；
+3、Width>0 且 Height=0，以Width为基准等比缩放；
+4、Width=0 且 Height=0，采用源的宽高。
+      */
+  Height?: number
+
+  /**
+      * 指定坐标原点，可选值：
+<li>LeftTop：PosXY 表示水印左上点到图片左上点的相对位置</li>
+<li>RightTop：PosXY 表示水印右上点到图片右上点的相对位置</li>
+<li>LeftBottom：PosXY 表示水印左下点到图片左下点的相对位置</li>
+<li>RightBottom：PosXY 表示水印右下点到图片右下点的相对位置</li>
+<li>Center：PosXY 表示水印中心点到图片中心点的相对位置</li>
+默认：LeftTop。
+      */
+  PosOriginType?: string
+}
+
+/**
  * 结果文件媒体信息
  */
 export interface MediaResultInfo {
@@ -2423,6 +2586,67 @@ export interface DescribeMediaProcessTaskResultRequest {
 }
 
 /**
+ * 雪碧图参数信息
+注意：雪碧图大图整体的宽和高都不能大于 65000 像素。
+ */
+export interface SpriteImageInfo {
+  /**
+   * 表示雪碧图行数，默认：10。
+   */
+  RowCount?: number
+
+  /**
+   * 表示雪碧图列数，默认：10。
+   */
+  ColumnCount?: number
+
+  /**
+   * 第一行元素与顶部像素距离，默认：0。
+   */
+  MarginTop?: number
+
+  /**
+   * 最后一行元素与底部像素距离，默认：0。
+   */
+  MarginBottom?: number
+
+  /**
+   * 最左一行元素与左边像素距离，默认：0。
+   */
+  MarginLeft?: number
+
+  /**
+   * 最右一行元素与右边像素距离，默认：0。
+   */
+  MarginRight?: number
+
+  /**
+   * 小图与元素顶部像素距离，默认：0。
+   */
+  PaddingTop?: number
+
+  /**
+   * 小图与元素底部像素距离，默认：0。
+   */
+  PaddingBottom?: number
+
+  /**
+   * 小图与元素左边像素距离，默认：0。
+   */
+  PaddingLeft?: number
+
+  /**
+   * 小图与元素右边像素距离，默认：0。
+   */
+  PaddingRight?: number
+
+  /**
+   * 背景颜色，格式：#RRGGBB，默认：#FFFFFF。
+   */
+  BackgroundColor?: string
+}
+
+/**
  * 编辑处理/任务处理结果
  */
 export interface MediaProcessTaskResult {
@@ -2633,7 +2857,7 @@ export interface DescribeMediaProcessTaskResultResponse {
       * 任务处理结果。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  TaskResult?: MediaProcessTaskResult
+  TaskResult: MediaProcessTaskResult
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2659,4 +2883,26 @@ export interface HighlightsTaskResultItemSegment {
    * 集锦片段终止的偏移时间，单位：秒。
    */
   EndTimeOffset: number
+}
+
+/**
+ * 媒体剪切水印信息。
+ */
+export interface MediaCuttingWatermark {
+  /**
+      * 水印类型，可选值：
+<li>Image：图像水印；</li>
+<li>Text：文字水印。</li>
+      */
+  Type: string
+
+  /**
+   * 图像水印信息，当 Type=Image 时必选。
+   */
+  Image?: MediaCuttingWatermarkImage
+
+  /**
+   * 文字水印信息，当 Type=Text 时必选。
+   */
+  Text?: MediaCuttingWatermarkText
 }

@@ -524,6 +524,16 @@ export interface CreateAccountRequest {
 建议该参数值大于10。当ReadOnly选择1、2时该参数生效。
       */
   DelayThresh?: number
+
+  /**
+   * 针对只读账号，设置策略是否固定备机，0：不固定备机，即备机不满足条件与客户端不断开连接，Proxy选择其他可用备机，1：备机不满足条件断开连接，确保一个连接固定备机。
+   */
+  SlaveConst?: number
+
+  /**
+   * 用户最大连接数限制参数。不传或者传0表示为不限制，对应max_user_connections参数，目前10.1内核版本不支持设置。
+   */
+  MaxUserConnections?: number
 }
 
 /**
@@ -3626,6 +3636,11 @@ export interface DBAccount {
 建议该参数值大于10。当ReadOnly选择1、2时该参数生效。
       */
   DelayThresh: number
+
+  /**
+   * 针对只读账号，设置策略是否固定备机，0：不固定备机，即备机不满足条件与客户端不断开连接，Proxy选择其他可用备机，1：备机不满足条件断开连接，确保一个连接固定备机。
+   */
+  SlaveConst: number
 }
 
 /**

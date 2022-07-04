@@ -899,7 +899,12 @@ export interface DescribeTopicSubscribeGroupResponse {
 /**
  * DescribeCkafkaZone请求参数结构体
  */
-export type DescribeCkafkaZoneRequest = null
+export interface DescribeCkafkaZoneRequest {
+  /**
+   * cdc专业集群业务参数
+   */
+  CdcId?: string
+}
 
 /**
  * 标准版销售信息
@@ -1756,6 +1761,11 @@ export interface DescribeRegionRequest {
    * 业务字段，可忽略
    */
   Business?: string
+
+  /**
+   * cdc专有集群业务字段，可忽略
+   */
+  CdcId?: string
 }
 
 /**
@@ -4136,6 +4146,12 @@ export interface InstanceDetail {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   PublicNetwork: number
+
+  /**
+      * 实例类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClusterType: string
 }
 
 /**

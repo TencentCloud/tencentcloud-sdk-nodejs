@@ -636,7 +636,7 @@ export class Client extends AbstractClient {
    * 用于查看ckafka的可用区列表
    */
   async DescribeCkafkaZone(
-    req?: DescribeCkafkaZoneRequest,
+    req: DescribeCkafkaZoneRequest,
     cb?: (error: string, rep: DescribeCkafkaZoneResponse) => void
   ): Promise<DescribeCkafkaZoneResponse> {
     return this.request("DescribeCkafkaZone", req, cb)

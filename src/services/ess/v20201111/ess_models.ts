@@ -422,20 +422,17 @@ export interface SignQrCode {
  */
 export interface UploadFilesRequest {
   /**
-   * 调用方信息
-   */
-  Caller: Caller
-
-  /**
       * 文件对应业务类型，用于区分文件存储路径：
 1. TEMPLATE - 模板； 文件类型：.pdf/.html
 2. DOCUMENT - 签署过程及签署后的合同文档 文件类型：.pdf/.html
-3. FLOW - 签署过程 文件类型：.pdf/.html
-4. SEAL - 印章； 文件类型：.jpg/.jpeg/.png
-5. BUSINESSLICENSE - 营业执照 文件类型：.jpg/.jpeg/.png
-6. IDCARD - 身份证 文件类型：.jpg/.jpeg/.png
+3. SEAL - 印章； 文件类型：.jpg/.jpeg/.png
       */
   BusinessType: string
+
+  /**
+   * 调用方信息
+   */
+  Caller?: Caller
 
   /**
    * 上传文件内容数组，最多支持20个文件
@@ -448,15 +445,15 @@ export interface UploadFilesRequest {
   FileUrls?: string
 
   /**
-      * 是否将pdf灰色矩阵置白
+      * 此参数只对 PDF 文件有效。是否将pdf灰色矩阵置白
 true--是，处理置白
 false--否，不处理
       */
   CoverRect?: boolean
 
   /**
-      * 特殊文件类型需要指定文件类型：
-HTML-- .html文件
+      * 文件类型， 默认通过文件内容解析得到文件类型，客户可以显示的说明上传文件的类型。
+如：PDF 表示上传的文件 xxx.pdf的文件类型是 PDF
       */
   FileType?: string
 

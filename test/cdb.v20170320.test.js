@@ -788,6 +788,16 @@ it("cdb.v20170320.ModifyAccountHost", async function () {
     }
 })
 
+it("cdb.v20170320.StartReplication", async function () {
+    try {
+       const data = await client.StartReplication({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdb.v20170320.DescribeAuditConfig", async function () {
     try {
        const data = await client.DescribeAuditConfig({})
@@ -1058,9 +1068,9 @@ it("cdb.v20170320.DescribeSlowLogData", async function () {
     }
 })
 
-it("cdb.v20170320.StartReplication", async function () {
+it("cdb.v20170320.OpenAuditService", async function () {
     try {
-       const data = await client.StartReplication({})
+       const data = await client.OpenAuditService({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

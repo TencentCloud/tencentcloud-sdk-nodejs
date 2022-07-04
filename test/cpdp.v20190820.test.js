@@ -38,9 +38,9 @@ it("cpdp.v20190820.DistributeAccreditQuery", async function () {
     }
 })
 
-it("cpdp.v20190820.QueryOpenBankSubMerchantRateConfigure", async function () {
+it("cpdp.v20190820.AddFlexPhoneNo", async function () {
     try {
-       const data = await client.QueryOpenBankSubMerchantRateConfigure({})
+       const data = await client.AddFlexPhoneNo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -288,6 +288,16 @@ it("cpdp.v20190820.ModifyMerchant", async function () {
     }
 })
 
+it("cpdp.v20190820.QueryOpenBankSubMerchantRateConfigure", async function () {
+    try {
+       const data = await client.QueryOpenBankSubMerchantRateConfigure({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cpdp.v20190820.RegisterBillSupportWithdraw", async function () {
     try {
        const data = await client.RegisterBillSupportWithdraw({})
@@ -298,9 +308,9 @@ it("cpdp.v20190820.RegisterBillSupportWithdraw", async function () {
     }
 })
 
-it("cpdp.v20190820.QueryOpenBankDailyReceiptDownloadUrl", async function () {
+it("cpdp.v20190820.AddFlexIdInfo", async function () {
     try {
-       const data = await client.QueryOpenBankDailyReceiptDownloadUrl({})
+       const data = await client.AddFlexIdInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -528,6 +538,16 @@ it("cpdp.v20190820.RegisterBehavior", async function () {
     }
 })
 
+it("cpdp.v20190820.QueryOpenBankSupportBankList", async function () {
+    try {
+       const data = await client.QueryOpenBankSupportBankList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cpdp.v20190820.ViewMerchant", async function () {
     try {
        const data = await client.ViewMerchant({})
@@ -558,9 +578,9 @@ it("cpdp.v20190820.CreatePayRollPreOrderWithAuth", async function () {
     }
 })
 
-it("cpdp.v20190820.QueryMemberBind", async function () {
+it("cpdp.v20190820.QueryFlexOrderSummaryList", async function () {
     try {
-       const data = await client.QueryMemberBind({})
+       const data = await client.QueryFlexOrderSummaryList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -741,6 +761,16 @@ it("cpdp.v20190820.CreatePayRollToken", async function () {
 it("cpdp.v20190820.UploadExternalAnchorInfo", async function () {
     try {
        const data = await client.UploadExternalAnchorInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cpdp.v20190820.QueryMemberBind", async function () {
+    try {
+       const data = await client.QueryMemberBind({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1518,6 +1548,16 @@ it("cpdp.v20190820.RegisterBill", async function () {
     }
 })
 
+it("cpdp.v20190820.QueryFlexBillDownloadUrl", async function () {
+    try {
+       const data = await client.QueryFlexBillDownloadUrl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cpdp.v20190820.QueryOpenBankDownLoadUrl", async function () {
     try {
        const data = await client.QueryOpenBankDownLoadUrl({})
@@ -1648,9 +1688,9 @@ it("cpdp.v20190820.RevokeMemberRechargeThirdPay", async function () {
     }
 })
 
-it("cpdp.v20190820.QueryOpenBankSupportBankList", async function () {
+it("cpdp.v20190820.QueryOpenBankDailyReceiptDownloadUrl", async function () {
     try {
-       const data = await client.QueryOpenBankSupportBankList({})
+       const data = await client.QueryOpenBankDailyReceiptDownloadUrl({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

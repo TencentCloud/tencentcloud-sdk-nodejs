@@ -518,6 +518,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyAccountHost", req, cb);
     }
     /**
+     * 开启 RO 复制，从主实例同步数据。
+     */
+    async StartReplication(req, cb) {
+        return this.request("StartReplication", req, cb);
+    }
+    /**
      * 本接口(DescribeAuditConfig)用于查询云数据库审计策略的服务配置，包括审计日志保存时长等。
      */
     async DescribeAuditConfig(req, cb) {
@@ -686,10 +692,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeSlowLogData", req, cb);
     }
     /**
-     * 开启 RO 复制，从主实例同步数据。
+     * CDB实例开通审计服务
      */
-    async StartReplication(req, cb) {
-        return this.request("StartReplication", req, cb);
+    async OpenAuditService(req, cb) {
+        return this.request("OpenAuditService", req, cb);
     }
     /**
      * 本接口(DeleteAuditLogFile)用于删除云数据库实例的审计日志文件。

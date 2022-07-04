@@ -176,6 +176,7 @@ import {
   QueryContractPayFeeRequest,
   QueryOrderResponse,
   CreateOpenBankExternalSubMerchantRegistrationResponse,
+  QueryFlexSettlementOrderListResponse,
   QueryFlexPayeeInfoResponse,
   RefundOrderResult,
   QueryBatchPaymentResultDataInfo,
@@ -295,6 +296,7 @@ import {
   SyncContractDataRequest,
   DistributeApplyResponse,
   CreateBatchPaymentData,
+  AddFlexPhoneNoResponse,
   DistributeQueryRequest,
   CloseOrderRequest,
   QueryFlexPayeeAccountBalanceResponse,
@@ -306,7 +308,7 @@ import {
   QueryBankTransactionDetailsRequest,
   CloudSubOrderReturn,
   QueryExchangeRateRequest,
-  AddContractResponse,
+  OrderSummaryResult,
   QueryBillDownloadURLRequest,
   PaymentOrders,
   CloudSubRefundItem,
@@ -314,6 +316,7 @@ import {
   RevResigterBillSupportWithdrawResponse,
   ApplyApplicationMaterialResponse,
   DistributeQueryResult,
+  OrderSummaries,
   ExecuteMemberTransactionRequest,
   CreateExternalAnchorData,
   DescribeOrderStatusResponse,
@@ -361,7 +364,7 @@ import {
   UploadTaxPaymentResponse,
   QueryCloudRefundOrderResponse,
   AgencyClientInfo,
-  QueryFlexSettlementOrderListResponse,
+  QueryFlexOrderSummaryListResponse,
   QueryOpenBankUnbindExternalSubMerchantBankAccountResult,
   ApplyDeclareResult,
   DistributeAccreditQueryResponse,
@@ -370,6 +373,7 @@ import {
   PayeeAccountInfoResult,
   PayeeAccountUserInfo,
   QueryShopOpenIdResult,
+  QueryFlexOrderSummaryListRequest,
   ApplyReWithdrawalResponse,
   GetPayRollAuthResultResponse,
   RegisterBillRequest,
@@ -399,6 +403,7 @@ import {
   BillDownloadUrlResult,
   CreatePayRollPreOrderRequest,
   DeleteAgentTaxPaymentInfosRequest,
+  FlexBillDownloadUrlResult,
   QueryAcctInfoListRequest,
   CreatePayRollTokenRequest,
   AddShopRequest,
@@ -422,8 +427,10 @@ import {
   ApplyOpenBankOrderDetailReceiptResponse,
   QueryMerchantClassificationRequest,
   OpenBankApprovalGuideInfo,
+  AddContractResponse,
   CreateOrderResponse,
   MultiApplyOrder,
+  AddFlexIdInfoRequest,
   ModifyMerchantRequest,
   TransferItem,
   OrderItem,
@@ -432,6 +439,7 @@ import {
   CreateCloudSubMerchantResponse,
   QueryFundsTransactionDetailsRequest,
   QueryOpenBankRefundOrderResponse,
+  QueryFlexBillDownloadUrlResponse,
   BindOpenBankExternalSubMerchantBankAccountResult,
   CheckAmountRequest,
   CreateMerchantResultData,
@@ -520,7 +528,7 @@ import {
   OpenBankQueryRefundOrderResult,
   ApplyOutwardOrderResponse,
   DistributeAccreditQueryResult,
-  QueryShopOpenIdResponse,
+  AddFlexPhoneNoRequest,
   Acct,
   CloseOrderResponse,
   ApplyPayerinfoData,
@@ -536,11 +544,13 @@ import {
   ChannelContractInfo,
   RefundOpenBankOrderResponse,
   CreateAnchorResponse,
+  QueryFlexBillDownloadUrlRequest,
   CreateOpenBankSubMerchantRateConfigureResponse,
   UnifiedCloudOrderRequest,
   UploadOpenBankSubMerchantCredentialRequest,
   QueryOpenBankSubMerchantCredentialRequest,
   MerchantRiskInfo,
+  QueryShopOpenIdResponse,
   CreateFlexPayeeResult,
   FreezeOrders,
   QueryOrderStatusResult,
@@ -551,6 +561,7 @@ import {
   QueryContractResponse,
   CreateRedInvoiceResponse,
   QueryInvoiceResultData,
+  AddFlexIdInfoResponse,
   RefundOrderResponse,
   ClearItem,
   MerchantManagementResult,
@@ -663,13 +674,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 云企付-子商户费率配置结果查询
+   * 灵云V2-补充手机号信息
    */
-  async QueryOpenBankSubMerchantRateConfigure(
-    req: QueryOpenBankSubMerchantRateConfigureRequest,
-    cb?: (error: string, rep: QueryOpenBankSubMerchantRateConfigureResponse) => void
-  ): Promise<QueryOpenBankSubMerchantRateConfigureResponse> {
-    return this.request("QueryOpenBankSubMerchantRateConfigure", req, cb)
+  async AddFlexPhoneNo(
+    req: AddFlexPhoneNoRequest,
+    cb?: (error: string, rep: AddFlexPhoneNoResponse) => void
+  ): Promise<AddFlexPhoneNoResponse> {
+    return this.request("AddFlexPhoneNo", req, cb)
   }
 
   /**
@@ -913,6 +924,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 云企付-子商户费率配置结果查询
+   */
+  async QueryOpenBankSubMerchantRateConfigure(
+    req: QueryOpenBankSubMerchantRateConfigureRequest,
+    cb?: (error: string, rep: QueryOpenBankSubMerchantRateConfigureResponse) => void
+  ): Promise<QueryOpenBankSubMerchantRateConfigureResponse> {
+    return this.request("QueryOpenBankSubMerchantRateConfigure", req, cb)
+  }
+
+  /**
    * 登记挂账(支持撤销)。此接口可实现把不明来账或自有资金等已登记在挂账子账户下的资金调整到普通会员子账户。即通过申请调用此接口，将会减少挂账子账户的资金，调增指定的普通会员子账户的可提现余额及可用余额。此接口不支持把挂账子账户资金清分到功能子账户。
    */
   async RegisterBillSupportWithdraw(
@@ -923,13 +944,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 云企付-按日期批量查询回单下载地址
+   * 灵云V2-补充证件信息
    */
-  async QueryOpenBankDailyReceiptDownloadUrl(
-    req: QueryOpenBankDailyReceiptDownloadUrlRequest,
-    cb?: (error: string, rep: QueryOpenBankDailyReceiptDownloadUrlResponse) => void
-  ): Promise<QueryOpenBankDailyReceiptDownloadUrlResponse> {
-    return this.request("QueryOpenBankDailyReceiptDownloadUrl", req, cb)
+  async AddFlexIdInfo(
+    req: AddFlexIdInfoRequest,
+    cb?: (error: string, rep: AddFlexIdInfoResponse) => void
+  ): Promise<AddFlexIdInfoResponse> {
+    return this.request("AddFlexIdInfo", req, cb)
   }
 
   /**
@@ -1153,6 +1174,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 云企付-查询支持银行列表
+   */
+  async QueryOpenBankSupportBankList(
+    req: QueryOpenBankSupportBankListRequest,
+    cb?: (error: string, rep: QueryOpenBankSupportBankListResponse) => void
+  ): Promise<QueryOpenBankSupportBankListResponse> {
+    return this.request("QueryOpenBankSupportBankList", req, cb)
+  }
+
+  /**
    * 云支付-查询商户明细接口
    */
   async ViewMerchant(
@@ -1183,14 +1214,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 会员绑定信息查询。查询标志为“单个会员”的情况下，返回该会员的有效的绑定账户信息。
-查询标志为“全部会员”的情况下，返回市场下的全部的有效的绑定账户信息。查询标志为“单个会员的证件信息”的情况下，返回市场下的指定的会员的留存在电商见证宝系统的证件信息。
-     */
-  async QueryMemberBind(
-    req: QueryMemberBindRequest,
-    cb?: (error: string, rep: QueryMemberBindResponse) => void
-  ): Promise<QueryMemberBindResponse> {
-    return this.request("QueryMemberBind", req, cb)
+   * 灵云V2-订单汇总列表查询
+   */
+  async QueryFlexOrderSummaryList(
+    req: QueryFlexOrderSummaryListRequest,
+    cb?: (error: string, rep: QueryFlexOrderSummaryListResponse) => void
+  ): Promise<QueryFlexOrderSummaryListResponse> {
+    return this.request("QueryFlexOrderSummaryList", req, cb)
   }
 
   /**
@@ -1371,6 +1401,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UploadExternalAnchorInfoResponse) => void
   ): Promise<UploadExternalAnchorInfoResponse> {
     return this.request("UploadExternalAnchorInfo", req, cb)
+  }
+
+  /**
+     * 会员绑定信息查询。查询标志为“单个会员”的情况下，返回该会员的有效的绑定账户信息。
+查询标志为“全部会员”的情况下，返回市场下的全部的有效的绑定账户信息。查询标志为“单个会员的证件信息”的情况下，返回市场下的指定的会员的留存在电商见证宝系统的证件信息。
+     */
+  async QueryMemberBind(
+    req: QueryMemberBindRequest,
+    cb?: (error: string, rep: QueryMemberBindResponse) => void
+  ): Promise<QueryMemberBindResponse> {
+    return this.request("QueryMemberBind", req, cb)
   }
 
   /**
@@ -2148,6 +2189,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 灵云V2-查询对账单文件下载链接
+   */
+  async QueryFlexBillDownloadUrl(
+    req: QueryFlexBillDownloadUrlRequest,
+    cb?: (error: string, rep: QueryFlexBillDownloadUrlResponse) => void
+  ): Promise<QueryFlexBillDownloadUrlResponse> {
+    return this.request("QueryFlexBillDownloadUrl", req, cb)
+  }
+
+  /**
    * 云企付-查询对账单下载地址
    */
   async QueryOpenBankDownLoadUrl(
@@ -2280,13 +2331,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 云企付-查询支持银行列表
+   * 云企付-按日期批量查询回单下载地址
    */
-  async QueryOpenBankSupportBankList(
-    req: QueryOpenBankSupportBankListRequest,
-    cb?: (error: string, rep: QueryOpenBankSupportBankListResponse) => void
-  ): Promise<QueryOpenBankSupportBankListResponse> {
-    return this.request("QueryOpenBankSupportBankList", req, cb)
+  async QueryOpenBankDailyReceiptDownloadUrl(
+    req: QueryOpenBankDailyReceiptDownloadUrlRequest,
+    cb?: (error: string, rep: QueryOpenBankDailyReceiptDownloadUrlResponse) => void
+  ): Promise<QueryOpenBankDailyReceiptDownloadUrlResponse> {
+    return this.request("QueryOpenBankDailyReceiptDownloadUrl", req, cb)
   }
 
   /**

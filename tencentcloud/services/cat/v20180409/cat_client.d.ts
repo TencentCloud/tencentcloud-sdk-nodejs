@@ -12,7 +12,7 @@ export declare class Client extends AbstractClient {
      */
     SuspendProbeTask(req: SuspendProbeTaskRequest, cb?: (error: string, rep: SuspendProbeTaskResponse) => void): Promise<SuspendProbeTaskResponse>;
     /**
-     * 列出云拨测指标详细数据
+     * 查询云拨测指标数据，指标支持使用sum,avg,max,min聚合函数进行指标数据查询
      */
     DescribeProbeMetricData(req: DescribeProbeMetricDataRequest, cb?: (error: string, rep: DescribeProbeMetricDataResponse) => void): Promise<DescribeProbeMetricDataResponse>;
     /**

@@ -773,38 +773,20 @@ export interface DeleteAccountsResponse {
 }
 
 /**
- * 慢查询日志详情
+ * 用于回档的数据库表名
  */
-export interface SlowLogInfo {
+export interface RollbackTableName {
   /**
-   * 备份文件名
-   */
-  Name: string
+      * 回档前的原数据库表名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TableName: string
 
   /**
-   * 备份文件大小，单位：Byte
-   */
-  Size: number
-
-  /**
-   * 备份快照时间，时间格式：2016-03-17 02:10:37
-   */
-  Date: string
-
-  /**
-   * 内网下载地址
-   */
-  IntranetUrl: string
-
-  /**
-   * 外网下载地址
-   */
-  InternetUrl: string
-
-  /**
-   * 日志具体类型，可能的值：slowlog - 慢日志
-   */
-  Type: string
+      * 回档后的新数据库表名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NewTableName: string
 }
 
 /**
@@ -818,13 +800,13 @@ export interface CloseWanServiceRequest {
 }
 
 /**
- * DescribeAuditConfig请求参数结构体
+ * OpenAuditService返回参数结构体
  */
-export interface DescribeAuditConfigRequest {
+export interface OpenAuditServiceResponse {
   /**
-   * 实例 ID，格式如：cdb-c1nl9rpv 或者 cdbro-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  InstanceId: string
+  RequestId?: string
 }
 
 /**
@@ -1011,6 +993,38 @@ export interface ModifyAuditRuleResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * OpenAuditService请求参数结构体
+ */
+export interface OpenAuditServiceRequest {
+  /**
+   * CDB实例ID
+   */
+  InstanceId: string
+
+  /**
+      * 审计日志保存时长。支持值包括：
+7 - 一周
+30 - 一个月；
+180 - 六个月；
+365 - 一年；
+1095 - 三年；
+1825 - 五年；
+      */
+  LogExpireDay: number
+
+  /**
+      * 高频审计日志保存时长。支持值包括：
+7 - 一周
+30 - 一个月；
+180 - 六个月；
+365 - 一年；
+1095 - 三年；
+1825 - 五年；
+      */
+  HighLogExpireDay?: number
 }
 
 /**
@@ -4199,6 +4213,16 @@ export interface InquiryPriceUpgradeInstancesResponse {
 }
 
 /**
+ * DescribeAuditConfig请求参数结构体
+ */
+export interface DescribeAuditConfigRequest {
+  /**
+   * 实例 ID，格式如：cdb-c1nl9rpv 或者 cdbro-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
+   */
+  InstanceId: string
+}
+
+/**
  * CreateDBInstance请求参数结构体
  */
 export interface CreateDBInstanceRequest {
@@ -5551,20 +5575,38 @@ export interface RenewDBInstanceRequest {
 }
 
 /**
- * 用于回档的数据库表名
+ * 慢查询日志详情
  */
-export interface RollbackTableName {
+export interface SlowLogInfo {
   /**
-      * 回档前的原数据库表名
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  TableName: string
+   * 备份文件名
+   */
+  Name: string
 
   /**
-      * 回档后的新数据库表名
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  NewTableName: string
+   * 备份文件大小，单位：Byte
+   */
+  Size: number
+
+  /**
+   * 备份快照时间，时间格式：2016-03-17 02:10:37
+   */
+  Date: string
+
+  /**
+   * 内网下载地址
+   */
+  IntranetUrl: string
+
+  /**
+   * 外网下载地址
+   */
+  InternetUrl: string
+
+  /**
+   * 日志具体类型，可能的值：slowlog - 慢日志
+   */
+  Type: string
 }
 
 /**
@@ -7111,6 +7153,17 @@ export interface ModifyAuditConfigRequest {
 CloseAudit、LogExpireDay必须至少提供一个，如果两个都提供则按照CloseAudit优先的逻辑处理。
       */
   CloseAudit?: boolean
+
+  /**
+      * 高频审计日志保存时长。支持值包括：
+7 - 一周
+30 - 一个月；
+180 - 六个月；
+365 - 一年；
+1095 - 三年；
+1825 - 五年；
+      */
+  HighLogExpireDay?: number
 }
 
 /**

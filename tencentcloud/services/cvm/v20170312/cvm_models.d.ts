@@ -103,6 +103,15 @@ export interface ModifyInstancesProjectRequest {
     ProjectId: number;
 }
 /**
+ * ConfigureChcDeployVpc返回参数结构体
+ */
+export interface ConfigureChcDeployVpcResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * ResetInstancesType返回参数结构体
  */
 export interface ResetInstancesTypeResponse {
@@ -226,6 +235,10 @@ export interface InquiryPriceResetInstancesInternetMaxBandwidthResponse {
       */
     RequestId?: string;
 }
+/**
+ * DescribeZones请求参数结构体
+ */
+export declare type DescribeZonesRequest = null;
 /**
  * 描述了按带宽计费的相关信息
  */
@@ -983,6 +996,15 @@ Windows 实例密码必须12\~30位，不能以“/”开头且不包括用户�
     ForceStop?: boolean;
 }
 /**
+ * RemoveChcAssistVpc返回参数结构体
+ */
+export interface RemoveChcAssistVpcResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 描述了网络计费
  */
 export interface InternetChargeTypeConfig {
@@ -1321,9 +1343,47 @@ export interface RenewHostsRequest {
     HostChargePrepaid: ChargePrepaid;
 }
 /**
- * DescribeZones请求参数结构体
+ * CreateDisasterRecoverGroup返回参数结构体
  */
-export declare type DescribeZonesRequest = null;
+export interface CreateDisasterRecoverGroupResponse {
+    /**
+      * 分散置放群组ID列表。
+      */
+    DisasterRecoverGroupId: string;
+    /**
+      * 分散置放群组类型，取值范围：<br><li>HOST：物理机<br><li>SW：交换机<br><li>RACK：机架
+      */
+    Type: string;
+    /**
+      * 分散置放群组名称，长度1-60个字符，支持中、英文。
+      */
+    Name: string;
+    /**
+      * 置放群组内可容纳的云服务器数量。
+      */
+    CvmQuotaTotal: number;
+    /**
+      * 置放群组内已有的云服务器数量。
+      */
+    CurrentNum: number;
+    /**
+      * 置放群组创建时间。
+      */
+    CreateTime: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * RemoveChcAssistVpc请求参数结构体
+ */
+export interface RemoveChcAssistVpcRequest {
+    /**
+      * CHC物理服务器Id。
+      */
+    ChcIds: Array<string>;
+}
 /**
  * StartInstances请求参数结构体
  */
@@ -1512,6 +1572,23 @@ export interface ResetInstancesInternetMaxBandwidthResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * ConfigureChcDeployVpc请求参数结构体
+ */
+export interface ConfigureChcDeployVpcRequest {
+    /**
+      * CHC物理服务器的实例Id。
+      */
+    ChcIds: Array<string>;
+    /**
+      * 部署网络信息。
+      */
+    DeployVirtualPrivateCloud: VirtualPrivateCloud;
+    /**
+      * 部署网络的安全组列表。
+      */
+    DeploySecurityGroupIds?: Array<string>;
 }
 /**
  * DescribeInstanceFamilyConfigs返回参数结构体
@@ -1918,17 +1995,17 @@ export interface PrePaidQuota {
     Zone: string;
 }
 /**
- * DescribeInstancesModification返回参数结构体
+ * DescribeReservedInstancesOfferings返回参数结构体
  */
-export interface DescribeInstancesModificationResponse {
+export interface DescribeReservedInstancesOfferingsResponse {
     /**
-      * 实例调整的机型配置的数量。
+      * 符合条件的预留实例计费数量。
       */
-    TotalCount: number;
+    TotalCount?: number;
     /**
-      * 实例支持调整的机型配置列表。
+      * 符合条件的预留实例计费列表。
       */
-    InstanceTypeConfigStatusSet: Array<InstanceTypeConfigStatus>;
+    ReservedInstancesOfferingsSet?: Array<ReservedInstancesOffering>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2987,6 +3064,15 @@ export interface InstanceFamilyConfig {
     InstanceFamily: string;
 }
 /**
+ * RemoveChcDeployVpc返回参数结构体
+ */
+export interface RemoveChcDeployVpcResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * AssociateSecurityGroups返回参数结构体
  */
 export interface AssociateSecurityGroupsResponse {
@@ -3048,6 +3134,31 @@ export interface SpotMarketOptions {
       * 竞价请求类型，当前仅支持类型：one-time
       */
     SpotInstanceType?: string;
+}
+/**
+ * ConfigureChcAssistVpc请求参数结构体
+ */
+export interface ConfigureChcAssistVpcRequest {
+    /**
+      * CHC物理服务器的实例Id。
+      */
+    ChcIds: Array<string>;
+    /**
+      * 带外网络信息。
+      */
+    BmcVirtualPrivateCloud: VirtualPrivateCloud;
+    /**
+      * 带外网络的安全组列表
+      */
+    BmcSecurityGroupIds?: Array<string>;
+    /**
+      * 部署网络信息。
+      */
+    DeployVirtualPrivateCloud?: VirtualPrivateCloud;
+    /**
+      * 部署网络的安全组列表
+      */
+    DeploySecurityGroupIds?: Array<string>;
 }
 /**
  * DescribeImportImageOs请求参数结构体
@@ -3413,6 +3524,15 @@ export interface InquiryPriceResetInstancesInternetMaxBandwidthRequest {
  * ModifyHostsAttribute返回参数结构体
  */
 export interface ModifyHostsAttributeResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ModifyChcAttribute返回参数结构体
+ */
+export interface ModifyChcAttributeResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3860,6 +3980,15 @@ export interface ExportImagesResponse {
     RequestId?: string;
 }
 /**
+ * RemoveChcDeployVpc请求参数结构体
+ */
+export interface RemoveChcDeployVpcRequest {
+    /**
+      * CHC物理服务器Id。
+      */
+    ChcIds: Array<string>;
+}
+/**
  * InquiryPriceRunInstances返回参数结构体
  */
 export interface InquiryPriceRunInstancesResponse {
@@ -3877,7 +4006,7 @@ export interface InquiryPriceRunInstancesResponse {
  */
 export interface TagSpecification {
     /**
-      * 标签绑定的资源类型，云服务器为“instance”，专用宿主机为“host”，镜像为“image”
+      * 标签绑定的资源类型，云服务器为“instance”，专用宿主机为“host”，镜像为“image”，密钥为“keypair”
       */
     ResourceType: string;
     /**
@@ -3923,6 +4052,35 @@ export interface DescribeAccountQuotaRequest {
 <p style="padding-left: 30px;">按照【<strong>配额类型</strong>】进行过滤。配额类型形如：PostPaidQuotaSet。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">可选项：PostPaidQuotaSet,DisasterRecoverGroupQuotaSet,PrePaidQuotaSet,SpotPaidQuotaSet</p>
       */
     Filters?: Array<Filter>;
+}
+/**
+ * ModifyChcAttribute请求参数结构体
+ */
+export interface ModifyChcAttributeRequest {
+    /**
+      * CHC物理服务器ID。
+      */
+    ChcIds: Array<string>;
+    /**
+      * CHC物理服务器名称
+      */
+    InstanceName?: string;
+    /**
+      * 服务器类型
+      */
+    DeviceType?: string;
+    /**
+      * 合法字符为字母,数字, 横线和下划线
+      */
+    BmcUser?: string;
+    /**
+      * 密码8-16位字符, 允许数字，字母， 和特殊字符()`~!@#$%^&*-+=_|{}[]:;'<>,.?/
+      */
+    Password?: string;
+    /**
+      * bmc网络的安全组列表
+      */
+    BmcSecurityGroupIds?: Array<string>;
 }
 /**
  * ModifyInstancesRenewFlag返回参数结构体
@@ -4121,6 +4279,24 @@ export interface ReservedInstancePriceItem {
     ProductDescription: string;
 }
 /**
+ * ConfigureChcAssistVpc返回参数结构体
+ */
+export interface ConfigureChcAssistVpcResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * RebootInstances返回参数结构体
+ */
+export interface RebootInstancesResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeChcHosts请求参数结构体
  */
 export interface DescribeChcHostsRequest {
@@ -4151,48 +4327,6 @@ export interface DescribeChcHostsRequest {
       * 返回数量，默认为20，最大值为100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
       */
     Limit?: number;
-}
-/**
- * RebootInstances返回参数结构体
- */
-export interface RebootInstancesResponse {
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * CreateDisasterRecoverGroup返回参数结构体
- */
-export interface CreateDisasterRecoverGroupResponse {
-    /**
-      * 分散置放群组ID列表。
-      */
-    DisasterRecoverGroupId: string;
-    /**
-      * 分散置放群组类型，取值范围：<br><li>HOST：物理机<br><li>SW：交换机<br><li>RACK：机架
-      */
-    Type: string;
-    /**
-      * 分散置放群组名称，长度1-60个字符，支持中、英文。
-      */
-    Name: string;
-    /**
-      * 置放群组内可容纳的云服务器数量。
-      */
-    CvmQuotaTotal: number;
-    /**
-      * 置放群组内已有的云服务器数量。
-      */
-    CurrentNum: number;
-    /**
-      * 置放群组创建时间。
-      */
-    CreateTime: string;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
 }
 /**
  * ModifyInstanceDiskType请求参数结构体
@@ -4632,17 +4766,17 @@ export interface KeyPair {
     Tags?: Array<Tag>;
 }
 /**
- * DescribeReservedInstancesOfferings返回参数结构体
+ * DescribeInstancesModification返回参数结构体
  */
-export interface DescribeReservedInstancesOfferingsResponse {
+export interface DescribeInstancesModificationResponse {
     /**
-      * 符合条件的预留实例计费数量。
+      * 实例调整的机型配置的数量。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
-      * 符合条件的预留实例计费列表。
+      * 实例支持调整的机型配置列表。
       */
-    ReservedInstancesOfferingsSet?: Array<ReservedInstancesOffering>;
+    InstanceTypeConfigStatusSet: Array<InstanceTypeConfigStatus>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
