@@ -686,7 +686,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取边缘脚本链接
+   * 获取边缘脚本链接，此接口用于添加第三方节点，通过下载脚本从而将节点添加到边缘集群。
    */
   async DescribeTKEEdgeScript(
     req: DescribeTKEEdgeScriptRequest,

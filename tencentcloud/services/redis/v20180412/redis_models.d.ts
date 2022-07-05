@@ -2049,9 +2049,13 @@ export interface DescribeTaskListRequest {
       */
     Result?: Array<number>;
     /**
-      * 操作者Uin
+      * 操作者Uin，该字段已废弃，使用OperateUin代替
       */
     OperatorUin?: Array<number>;
+    /**
+      * 操作者Uin
+      */
+    OperateUin?: Array<string>;
 }
 /**
  * ChangeReplicaToMaster返回参数结构体

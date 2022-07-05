@@ -1423,6 +1423,15 @@ export interface DescribeSaleInfoResponse {
     RequestId?: string;
 }
 /**
+ * DestroyDBInstance请求参数结构体
+ */
+export interface DestroyDBInstanceRequest {
+    /**
+      * 实例 ID，格式如：tdsqlshard-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
+      */
+    InstanceId: string;
+}
+/**
  * 数据库表信息
  */
 export interface DatabaseTable {
@@ -2574,6 +2583,23 @@ export interface DescribeOrdersRequest {
     DealNames: Array<string>;
 }
 /**
+ * 监控数据
+ */
+export interface MonitorData {
+    /**
+      * 起始时间，形如 2018-03-24 23:59:59
+      */
+    StartTime: string;
+    /**
+      * 结束时间，形如 2018-03-24 23:59:59
+      */
+    EndTime: string;
+    /**
+      * 监控数据
+      */
+    Data: Array<number>;
+}
+/**
  * DescribeDBLogFiles返回参数结构体
  */
 export interface DescribeDBLogFilesResponse {
@@ -3410,21 +3436,21 @@ export interface FlushBinlogRequest {
     InstanceId: string;
 }
 /**
- * 监控数据
+ * DestroyDBInstance返回参数结构体
  */
-export interface MonitorData {
+export interface DestroyDBInstanceResponse {
     /**
-      * 起始时间，形如 2018-03-24 23:59:59
+      * 实例 ID，与入参InstanceId一致。
       */
-    StartTime: string;
+    InstanceId: string;
     /**
-      * 结束时间，形如 2018-03-24 23:59:59
+      * 异步任务的请求 ID，可使用此 ID [查询异步任务的执行结果](https://cloud.tencent.com/document/product/237/16177)。
       */
-    EndTime: string;
+    FlowId: number;
     /**
-      * 监控数据
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Data: Array<number>;
+    RequestId?: string;
 }
 /**
  * ModifyDBSyncMode返回参数结构体

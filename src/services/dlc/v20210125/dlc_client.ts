@@ -255,7 +255,7 @@ export class Client extends AbstractClient {
    * DMS元数据删除库
    */
   async DropDMSDatabase(
-    req?: DropDMSDatabaseRequest,
+    req: DropDMSDatabaseRequest,
     cb?: (error: string, rep: DropDMSDatabaseResponse) => void
   ): Promise<DropDMSDatabaseResponse> {
     return this.request("DropDMSDatabase", req, cb)
@@ -445,7 +445,7 @@ export class Client extends AbstractClient {
    * DMS元数据更新库
    */
   async AlterDMSDatabase(
-    req?: AlterDMSDatabaseRequest,
+    req: AlterDMSDatabaseRequest,
     cb?: (error: string, rep: AlterDMSDatabaseResponse) => void
   ): Promise<AlterDMSDatabaseResponse> {
     return this.request("AlterDMSDatabase", req, cb)
@@ -595,7 +595,7 @@ export class Client extends AbstractClient {
    * DMS元数据获取库
    */
   async DescribeDMSDatabase(
-    req?: DescribeDMSDatabaseRequest,
+    req: DescribeDMSDatabaseRequest,
     cb?: (error: string, rep: DescribeDMSDatabaseResponse) => void
   ): Promise<DescribeDMSDatabaseResponse> {
     return this.request("DescribeDMSDatabase", req, cb)

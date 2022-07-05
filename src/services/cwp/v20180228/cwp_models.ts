@@ -5586,6 +5586,12 @@ export interface EffectiveMachineInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   LicenseOrder: LicenseOrder
+
+  /**
+      * 漏洞数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VulNum: number
 }
 
 /**

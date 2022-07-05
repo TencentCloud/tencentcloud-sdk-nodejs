@@ -108,9 +108,9 @@ it("mariadb.v20170312.ModifyAccountDescription", async function () {
     }
 })
 
-it("mariadb.v20170312.ModifyRealServerAccessStrategy", async function () {
+it("mariadb.v20170312.DestroyDBInstance", async function () {
     try {
-       const data = await client.ModifyRealServerAccessStrategy({})
+       const data = await client.DestroyDBInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -301,6 +301,16 @@ it("mariadb.v20170312.DescribeDBSlowLogs", async function () {
 it("mariadb.v20170312.DescribeDBLogFiles", async function () {
     try {
        const data = await client.DescribeDBLogFiles({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mariadb.v20170312.ModifyRealServerAccessStrategy", async function () {
+    try {
+       const data = await client.ModifyRealServerAccessStrategy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

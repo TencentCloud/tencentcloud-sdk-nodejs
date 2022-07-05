@@ -682,6 +682,19 @@ export interface DescribePurchaseStateInfoResponse {
   GivenAuthorizedCnt: number
 
   /**
+      * 起始时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BeginTime: string
+
+  /**
+      * 子状态(具体意义依据State字段而定)
+State为4时，有效值为: ISOLATE(隔离) DESTROED(已销毁)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SubState: string
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string

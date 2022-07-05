@@ -8967,6 +8967,21 @@ export interface DeletePrometheusTempRequest {
  */
 export interface DescribeTKEEdgeScriptResponse {
   /**
+   * 下载链接
+   */
+  Link: string
+
+  /**
+   * 下载需要的token
+   */
+  Token: string
+
+  /**
+   * 下载命令
+   */
+  Command: string
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string

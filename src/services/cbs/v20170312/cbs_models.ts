@@ -552,16 +552,6 @@ export interface ModifyAutoSnapshotPolicyAttributeRequest {
   AutoSnapshotPolicyId: string
 
   /**
-   * 定期快照的执行策略。
-   */
-  Policy?: Array<Policy>
-
-  /**
-   * 要创建的定期快照策略名。不传则默认为“未命名”。最大长度不能超60个字节。
-   */
-  AutoSnapshotPolicyName?: string
-
-  /**
    * 是否激活定期快照策略，FALSE表示未激活，TRUE表示激活，默认为TRUE。
    */
   IsActivated?: boolean
@@ -572,7 +562,17 @@ export interface ModifyAutoSnapshotPolicyAttributeRequest {
   IsPermanent?: boolean
 
   /**
-   * 通过该定期快照策略创建的快照保留天数，该参数不可与`IsPermanent`参数冲突，即若定期快照策略设置为永久保留，`RetentionDays`应置0。
+   * 要创建的定期快照策略名。不传则默认为“未命名”。最大长度不能超60个字节。
+   */
+  AutoSnapshotPolicyName?: string
+
+  /**
+   * 定期快照的执行策略。
+   */
+  Policy?: Array<Policy>
+
+  /**
+   * 通过该定期快照策略创建的快照保留天数。如果指定本参数，则IsPermanent入参不可指定为TRUE，否则会产生冲突。
    */
   RetentionDays?: number
 }
@@ -1295,12 +1295,12 @@ export interface CreateAutoSnapshotPolicyResponse {
   /**
    * 新创建的定期快照策略ID。
    */
-  AutoSnapshotPolicyId?: string
+  AutoSnapshotPolicyId: string
 
   /**
    * 首次开始备份的时间。
    */
-  NextTriggerTime?: string
+  NextTriggerTime: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1839,18 +1839,18 @@ export interface DescribeDiskStoragePoolResponse {
 }
 
 /**
- * 描述了定期快照的执行策略。可理解为在DayOfWeek指定的那几天中，在Hour指定的小时执行该条定期快照策略。
+ * 描述了定期快照的执行策略。可理解为在DayOfWeek/DayOfMonth指定的几天中，或者是IntervalDays设定的间隔的几天，在Hour指定的小时执行该条定期快照策略。注：DayOfWeek/DayOfMonth/IntervalDays为互斥规则，仅可设置其中一条策略规则。
  */
 export interface Policy {
-  /**
-   * 指定每周从周一到周日需要触发定期快照的日期，取值范围：[0, 6]。0表示周日触发，1-6分别表示周一至周六。
-   */
-  DayOfWeek: Array<number>
-
   /**
    * 指定定期快照策略的触发时间。单位为小时，取值范围：[0, 23]。00:00 ~ 23:00 共 24 个时间点可选，1表示 01:00，依此类推。
    */
   Hour: Array<number>
+
+  /**
+   * 指定每周从周一到周日需要触发定期快照的日期，取值范围：[0, 6]。0表示周日触发，1-6分别表示周一至周六。
+   */
+  DayOfWeek?: Array<number>
 }
 
 /**
@@ -2249,14 +2249,19 @@ export interface CreateAutoSnapshotPolicyRequest {
   Policy: Array<Policy>
 
   /**
-   * 要创建的定期快照策略名。不传则默认为“未命名”。最大长度不能超60个字节。
+   * 是否创建定期快照的执行策略。TRUE表示只需获取首次开始备份的时间，不实际创建定期快照策略，FALSE表示创建，默认为FALSE。
    */
-  AutoSnapshotPolicyName?: string
+  DryRun?: boolean
 
   /**
    * 是否激活定期快照策略，FALSE表示未激活，TRUE表示激活，默认为TRUE。
    */
   IsActivated?: boolean
+
+  /**
+   * 要创建的定期快照策略名。不传则默认为“未命名”。最大长度不能超60个字节。
+   */
+  AutoSnapshotPolicyName?: string
 
   /**
    * 通过该定期快照策略创建的快照是否永久保留。FALSE表示非永久保留，TRUE表示永久保留，默认为FALSE。
@@ -2267,11 +2272,6 @@ export interface CreateAutoSnapshotPolicyRequest {
    * 通过该定期快照策略创建的快照保留天数，默认保留7天。如果指定本参数，则IsPermanent入参不可指定为TRUE，否则会产生冲突。
    */
   RetentionDays?: number
-
-  /**
-   * 是否创建定期快照的执行策略。TRUE表示只需获取首次开始备份的时间，不实际创建定期快照策略，FALSE表示创建，默认为FALSE。
-   */
-  DryRun?: boolean
 }
 
 /**

@@ -1608,7 +1608,7 @@ export interface ModifyLocalBinlogConfigRequest {
       */
     InstanceId: string;
     /**
-      * 本地binlog保留时长，可取值范围：[72,168]。
+      * 本地binlog保留时长，可取值范围：[120,168]。
       */
     SaveHours: number;
     /**

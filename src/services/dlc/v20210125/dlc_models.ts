@@ -205,6 +205,30 @@ export interface ReportHeartbeatMetaDataRequest {
  */
 export interface DescribeDMSDatabaseResponse {
   /**
+      * 数据库名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Name: string
+
+  /**
+      * schema名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SchemaName: string
+
+  /**
+      * 存储地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Location: string
+
+  /**
+      * 数据对象
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Asset: Asset
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -213,7 +237,22 @@ export interface DescribeDMSDatabaseResponse {
 /**
  * DropDMSDatabase请求参数结构体
  */
-export type DropDMSDatabaseRequest = null
+export interface DropDMSDatabaseRequest {
+  /**
+   * 数据库名称
+   */
+  Name: string
+
+  /**
+   * 是否删除数据
+   */
+  DeleteData?: boolean
+
+  /**
+   * 是否级联删除
+   */
+  Cascade?: boolean
+}
 
 /**
  * CreateScript返回参数结构体
@@ -1074,7 +1113,81 @@ export interface CheckLockMetaDataRequest {
 /**
  * 元数据基本对象
  */
-export type Asset = null
+export interface Asset {
+  /**
+      * 主键
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Id?: number
+
+  /**
+      * 名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Name?: string
+
+  /**
+      * 对象GUID值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Guid?: string
+
+  /**
+      * 数据目录
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Catalog?: string
+
+  /**
+   * 描述信息
+   */
+  Description?: string
+
+  /**
+   * 对象owner
+   */
+  Owner?: string
+
+  /**
+   * 对象owner账户
+   */
+  OwnerAccount?: string
+
+  /**
+   * 权限
+   */
+  PermValues?: Array<KVPair>
+
+  /**
+   * 附加属性
+   */
+  Params?: Array<KVPair>
+
+  /**
+   * 附加业务属性
+   */
+  BizParams?: Array<KVPair>
+
+  /**
+   * 数据版本
+   */
+  DataVersion?: number
+
+  /**
+   * 创建时间
+   */
+  CreateTime?: string
+
+  /**
+   * 修改时间
+   */
+  ModifiedTime?: string
+
+  /**
+   * 数据源主键
+   */
+  DatasourceId?: number
+}
 
 /**
  * CreateDatabase返回参数结构体
@@ -1460,6 +1573,11 @@ export interface DescribeDMSPartitionsRequest {
    * 页面数量
    */
   Limit?: number
+
+  /**
+   * 表达式
+   */
+  Expression?: string
 }
 
 /**
@@ -3414,7 +3532,22 @@ export interface UnbindWorkGroupsFromUserRequest {
 /**
  * DescribeDMSDatabase请求参数结构体
  */
-export type DescribeDMSDatabaseRequest = null
+export interface DescribeDMSDatabaseRequest {
+  /**
+   * 数据库名称
+   */
+  Name?: string
+
+  /**
+   * schema名称
+   */
+  SchemaName?: string
+
+  /**
+   * 匹配规则
+   */
+  Pattern?: string
+}
 
 /**
  * DescribeTable请求参数结构体
@@ -4198,7 +4331,27 @@ export interface CheckLockMetaDataResponse {
 /**
  * AlterDMSDatabase请求参数结构体
  */
-export type AlterDMSDatabaseRequest = null
+export interface AlterDMSDatabaseRequest {
+  /**
+   * 当前名称
+   */
+  CurrentName?: string
+
+  /**
+   * schema名称
+   */
+  SchemaName?: string
+
+  /**
+   * 路径
+   */
+  Location?: string
+
+  /**
+   * 基础对象
+   */
+  Asset?: Asset
+}
 
 /**
  *  SQL查询任务
@@ -4275,6 +4428,21 @@ export interface AttachUserPolicyResponse {
  * CreateDMSDatabase请求参数结构体
  */
 export interface CreateDMSDatabaseRequest {
+  /**
+   * 基础元数据对象
+   */
+  Asset?: Asset
+
+  /**
+   * Schema目录
+   */
+  SchemaName?: string
+
+  /**
+   * Db存储路径
+   */
+  Location?: string
+
   /**
    * 数据库名称
    */

@@ -205,7 +205,7 @@ export interface ModifyEnvironmentAttributesRequest {
       */
     EnvironmentId: string;
     /**
-      * 未消费消息过期时间，单位：秒，范围60秒~1天。
+      * 未消费消息过期时间，单位：秒，范围60秒~15天。
       */
     MsgTTL: number;
     /**
@@ -1491,7 +1491,7 @@ export interface CreateEnvironmentRequest {
       */
     EnvironmentId: string;
     /**
-      * 未消费消息过期时间，单位：秒，取值范围：60秒~1天。
+      * 未消费消息过期时间，单位：秒，取值范围：60秒~15天。
       */
     MsgTTL: number;
     /**

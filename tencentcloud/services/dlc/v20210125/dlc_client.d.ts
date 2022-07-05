@@ -34,7 +34,7 @@ export declare class Client extends AbstractClient {
     /**
      * DMS元数据删除库
      */
-    DropDMSDatabase(req?: DropDMSDatabaseRequest, cb?: (error: string, rep: DropDMSDatabaseResponse) => void): Promise<DropDMSDatabaseResponse>;
+    DropDMSDatabase(req: DropDMSDatabaseRequest, cb?: (error: string, rep: DropDMSDatabaseResponse) => void): Promise<DropDMSDatabaseResponse>;
     /**
      * DMS元数据新增分区
      */
@@ -110,7 +110,7 @@ export declare class Client extends AbstractClient {
     /**
      * DMS元数据更新库
      */
-    AlterDMSDatabase(req?: AlterDMSDatabaseRequest, cb?: (error: string, rep: AlterDMSDatabaseResponse) => void): Promise<AlterDMSDatabaseResponse>;
+    AlterDMSDatabase(req: AlterDMSDatabaseRequest, cb?: (error: string, rep: AlterDMSDatabaseResponse) => void): Promise<AlterDMSDatabaseResponse>;
     /**
      * 解绑用户上的用户组
      */
@@ -170,7 +170,7 @@ export declare class Client extends AbstractClient {
     /**
      * DMS元数据获取库
      */
-    DescribeDMSDatabase(req?: DescribeDMSDatabaseRequest, cb?: (error: string, rep: DescribeDMSDatabaseResponse) => void): Promise<DescribeDMSDatabaseResponse>;
+    DescribeDMSDatabase(req: DescribeDMSDatabaseRequest, cb?: (error: string, rep: DescribeDMSDatabaseResponse) => void): Promise<DescribeDMSDatabaseResponse>;
     /**
      * 该接口（DescribleTasks）用于查询任务列表
      */

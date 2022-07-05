@@ -148,7 +148,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetMostSuitableImageCache", req, cb);
     }
     /**
-     * 获取边缘脚本链接
+     * 获取边缘脚本链接，此接口用于添加第三方节点，通过下载脚本从而将节点添加到边缘集群。
      */
     async DescribeTKEEdgeScript(req, cb) {
         return this.request("DescribeTKEEdgeScript", req, cb);

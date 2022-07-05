@@ -434,19 +434,53 @@ export interface CreateSignUrlsRequest {
   FlowIds: Array<string>
 
   /**
-   * 签署链接类型：“WEIXINAPP”-直接跳小程序；“CHANNEL”-跳转H5页面；“APP”-第三方APP或小程序跳转电子签小程序；默认“WEIXINAPP”类型，即跳转至小程序。
+   * 签署链接类型：“WEIXINAPP”-直接跳小程序；“CHANNEL”-跳转H5页面；“APP”-第三方APP或小程序跳转电子签小程序；默认“WEIXINAPP”类型，即跳转至小程序；
    */
   Endpoint?: string
 
   /**
-   * 签署完之后的H5页面的跳转链接，针对Endpoint为CHANNEL时有效，最大长度1000个字符。
+      * 签署链接生成类型，默认是 "ALL"；
+"ALL"：全部签署方签署链接；
+"CHANNEL"：渠道合作企业；
+"NOT_CHANNEL"：非渠道合作企业；
+"PERSON"：个人；
+      */
+  GenerateType?: string
+
+  /**
+   * 非渠道合作企业参与方的企业名称，GenerateType为"NOT_CHANNEL"时必填
    */
-  JumpUrl?: string
+  OrganizationName?: string
+
+  /**
+   * 参与人姓名，GenerateType为"PERSON"时必填
+   */
+  Name?: string
+
+  /**
+   * 参与人手机号，GenerateType为"PERSON"时必填
+   */
+  Mobile?: string
+
+  /**
+   * 渠道合作企业的企业Id，GenerateType为"CHANNEL"时必填
+   */
+  OrganizationOpenId?: string
+
+  /**
+   * 渠道合作企业参与人OpenId，GenerateType为"CHANNEL"时可用，指定到具体参与人
+   */
+  OpenId?: string
 
   /**
    * Endpoint为"APP" 类型的签署链接，可以设置此值；支持调用方小程序打开签署链接，在电子签小程序完成签署后自动回跳至调用方小程序
    */
   AutoJumpBack?: boolean
+
+  /**
+   * 签署完之后的H5页面的跳转链接，针对Endpoint为CHANNEL时有效，最大长度1000个字符。
+   */
+  JumpUrl?: string
 
   /**
    * 操作者的信息
