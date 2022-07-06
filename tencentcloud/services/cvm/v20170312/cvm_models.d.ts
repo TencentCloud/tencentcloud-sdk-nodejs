@@ -3015,7 +3015,7 @@ export interface DescribeLaunchTemplatesRequest {
       */
     LaunchTemplateIds?: Array<string>;
     /**
-      * <p style="padding-left: 30px;">按照【<strong>LaunchTemplateNames</strong>】进行过滤。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
+      * <p style="padding-left: 30px;">按照【<strong>LaunchTemplateName</strong>】进行过滤。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
 每次请求的`Filters`的上限为10，`Filter.Values`的上限为5。参数不支持同时指定`LaunchTemplateIds`和`Filters`。
       */
     Filters?: Array<Filter>;

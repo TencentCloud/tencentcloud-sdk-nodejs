@@ -702,6 +702,11 @@ export interface ModifyClusterAttributeRequest {
    * 自动变配集群等级
    */
   AutoUpgradeClusterLevel?: AutoUpgradeClusterLevel
+
+  /**
+   * 是否开启QGPU共享
+   */
+  QGPUShareEnable?: boolean
 }
 
 /**
@@ -1650,6 +1655,12 @@ export interface ModifyClusterAttributeResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   AutoUpgradeClusterLevel: AutoUpgradeClusterLevel
+
+  /**
+      * 是否开启QGPU共享
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  QGPUShareEnable: boolean
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3067,6 +3078,12 @@ export interface NodePool {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Tags: Array<Tag>
+
+  /**
+      * 删除保护开关
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DeletionProtection: boolean
 }
 
 /**
@@ -4460,6 +4477,12 @@ export interface Cluster {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   AutoUpgradeClusterLevel: boolean
+
+  /**
+      * 是否开启QGPU共享
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  QGPUShareEnable: boolean
 }
 
 /**
@@ -7057,6 +7080,11 @@ export interface CreateClusterNodePoolRequest {
    * 资源标签
    */
   Tags?: Array<Tag>
+
+  /**
+   * 删除保护开关
+   */
+  DeletionProtection?: boolean
 }
 
 /**
@@ -8608,6 +8636,18 @@ export interface ClusterNetworkSettings {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   IgnoreServiceCIDRConflict: boolean
+
+  /**
+      * 集群VPC-CNI模式是否为非双栈集群，默认false，非双栈。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsDualStack: boolean
+
+  /**
+      * 用于分配service的IP range，由系统自动分配
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Ipv6ServiceCIDR: string
 }
 
 /**
@@ -9906,6 +9946,11 @@ export interface ModifyClusterNodePoolRequest {
    * 设置加入的节点是否参与调度，默认值为0，表示参与调度；非0表示不参与调度, 待节点初始化完成之后, 可执行kubectl uncordon nodename使node加入调度.
    */
   Unschedulable?: number
+
+  /**
+   * 删除保护开关
+   */
+  DeletionProtection?: boolean
 }
 
 /**
@@ -10037,6 +10082,11 @@ ipvs-bpf模式: 设置KubeProxyMode为kube-proxy-bpf
    * 集群VPC-CNI模式下是否是双栈集群，默认false，表明非双栈集群。
    */
   IsDualStack?: boolean
+
+  /**
+   * 是否开启QGPU共享
+   */
+  QGPUShareEnable?: boolean
 }
 
 /**

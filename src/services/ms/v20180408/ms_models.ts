@@ -127,12 +127,12 @@ export interface CreateShieldPlanInstanceResponse {
   /**
    * 策略id
    */
-  PlanId?: number
+  PlanId: number
 
   /**
    * 任务状态: 1-已完成,2-处理中,3-处理出错,4-处理超时
    */
-  Progress?: number
+  Progress: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -187,12 +187,12 @@ export interface DescribeShieldInstancesResponse {
   /**
    * 符合要求的app数量
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 一个关于app详细信息的结构体，主要包括app的基本信息和加固信息。
    */
-  AppSet?: Array<AppSetInfo>
+  AppSet: Array<AppSetInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -527,12 +527,12 @@ export interface CreateShieldInstanceResponse {
   /**
    * 任务状态: 1-已完成,2-处理中,3-处理出错,4-处理超时
    */
-  Progress?: number
+  Progress: number
 
   /**
    * 任务唯一标识
    */
-  ItemId?: string
+  ItemId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -792,17 +792,17 @@ export interface DescribeShieldPlanInstanceResponse {
   /**
    * 绑定资源信息
    */
-  BindInfo?: BindInfo
+  BindInfo: BindInfo
 
   /**
    * 加固策略信息
    */
-  ShieldPlanInfo?: ShieldPlanInfo
+  ShieldPlanInfo: ShieldPlanInfo
 
   /**
    * 加固资源信息
    */
-  ResourceServiceInfo?: ResourceServiceInfo
+  ResourceServiceInfo: ResourceServiceInfo
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -855,12 +855,7 @@ export interface ResourceServiceInfo {
  */
 export interface DescribeResourceInstancesRequest {
   /**
-   * 资源类别id数组，13624：加固专业版，12750：企业版。空数组表示返回全部资源。
-   */
-  Pids: Array<number>
-
-  /**
-   * 支持通过资源id，pid进行查询
+   * 支持CreateTime、ExpireTime、AppName、AppPkgName、BindValue、IsBind过滤
    */
   Filters?: Array<Filter>
 
@@ -873,6 +868,11 @@ export interface DescribeResourceInstancesRequest {
    * 数量限制，默认为20，最大值为100。
    */
   Limit?: number
+
+  /**
+   * 资源类别id数组，13624：加固专业版，12750：企业版。空数组表示返回全部资源。
+   */
+  Pids?: Array<number>
 
   /**
    * 按某个字段排序，目前支持CreateTime、ExpireTime其中的一个排序。
@@ -1152,7 +1152,7 @@ export interface DeleteShieldInstancesResponse {
   /**
    * 任务状态: 1-已完成,2-处理中,3-处理出错,4-处理超时
    */
-  Progress?: number
+  Progress: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1207,12 +1207,12 @@ export interface DescribeResourceInstancesResponse {
   /**
    * 符合要求的资源数量
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 符合要求的资源数组
    */
-  ResourceSet?: Array<ResourceInfo>
+  ResourceSet: Array<ResourceInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1407,27 +1407,27 @@ export interface DescribeShieldResultResponse {
   /**
    * 任务状态: 0-请返回,1-已完成,2-处理中,3-处理出错,4-处理超时
    */
-  TaskStatus?: number
+  TaskStatus: number
 
   /**
    * app加固前的详细信息
    */
-  AppDetailInfo?: AppDetailInfo
+  AppDetailInfo: AppDetailInfo
 
   /**
    * app加固后的详细信息
    */
-  ShieldInfo?: ShieldInfo
+  ShieldInfo: ShieldInfo
 
   /**
    * 状态描述
    */
-  StatusDesc?: string
+  StatusDesc: string
 
   /**
    * 状态指引
    */
-  StatusRef?: string
+  StatusRef: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

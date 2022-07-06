@@ -3065,8 +3065,11 @@ export interface DescribeOverviewL7DataRequest {
   EndTime: string
 
   /**
-   * 指标列表
-   */
+      * 指标列表，支持的指标
+l7Flow_outFlux: 访问流量
+l7Flow_request: 访问请求数
+l7Flow_outBandwidth: 访问带宽
+      */
   MetricNames: Array<string>
 
   /**
@@ -4045,8 +4048,10 @@ export interface DescribeTimingL7CacheDataRequest {
   EndTime: string
 
   /**
-   * 时序类访问流量指标列表
-   */
+      * 时序类访问流量指标列表，支持的指标
+l7Cache_outFlux: 访问流量
+l7Cache_request: 访问请求数
+      */
   MetricNames: Array<string>
 
   /**
@@ -5788,8 +5793,11 @@ export interface DescribeTimingL7AnalysisDataRequest {
   EndTime: string
 
   /**
-   * 时序类访问流量指标
-   */
+      * 指标列表，支持的指标
+l7Flow_outFlux: 访问流量
+l7Flow_request: 访问请求数
+l7Flow_outBandwidth: 访问带宽
+      */
   MetricNames: Array<string>
 
   /**
@@ -7720,8 +7728,12 @@ export interface DescribeTimingL4DataRequest {
   EndTime: string
 
   /**
-   * 指标列表
-   */
+      * 支持的指标：
+l4Flow_connections: 访问连接数
+l4Flow_flux: 访问总流量
+l4Flow_inFlux: 访问入流量
+l4Flow_outFlux: 访问出流量
+      */
   MetricNames: Array<string>
 
   /**

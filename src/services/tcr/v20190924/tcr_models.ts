@@ -2022,6 +2022,12 @@ export interface TcrNamespaceInfo {
    * 命名空间的Id
    */
   NamespaceId: number
+
+  /**
+      * 实例云标签
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TagSpecification: TagSpecification
 }
 
 /**
@@ -2758,9 +2764,19 @@ export interface DescribeNamespacesRequest {
   Limit?: number
 
   /**
-   * 页偏移
+   * 页面偏移（第几页）
    */
   Offset?: number
+
+  /**
+   * 列出所有命名空间
+   */
+  All?: boolean
+
+  /**
+   * 过滤条件
+   */
+  Filters?: Array<Filter>
 }
 
 /**
@@ -2932,6 +2948,11 @@ export interface CreateNamespaceRequest {
    * 是否公开，true为公开，fale为私有
    */
   IsPublic: boolean
+
+  /**
+   * 云标签描述
+   */
+  TagSpecification?: TagSpecification
 }
 
 /**

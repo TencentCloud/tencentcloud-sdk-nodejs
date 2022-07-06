@@ -45,7 +45,7 @@ export declare class Client extends AbstractClient {
      */
     PrepareFlows(req: PrepareFlowsRequest, cb?: (error: string, rep: PrepareFlowsResponse) => void): Promise<PrepareFlowsResponse>;
     /**
-     * 创建参与者签署短链
+     * 创建跳转小程序查看或签署的链接
      */
     CreateSignUrls(req: CreateSignUrlsRequest, cb?: (error: string, rep: CreateSignUrlsResponse) => void): Promise<CreateSignUrlsResponse>;
     /**

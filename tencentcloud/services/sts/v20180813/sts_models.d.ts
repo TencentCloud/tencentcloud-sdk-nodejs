@@ -270,6 +270,10 @@ qcs::cam::uin/12345678:role/tencentcloudServiceRole/4611686018427397920、qcs::c
       * 会话标签列表。最多可以传递 50 个会话标签，不支持包含相同标签键。
       */
     Tags?: Array<Tag>;
+    /**
+      * 调用者身份uin
+      */
+    SourceIdentity?: string;
 }
 /**
  * GetCallerIdentity请求参数结构体

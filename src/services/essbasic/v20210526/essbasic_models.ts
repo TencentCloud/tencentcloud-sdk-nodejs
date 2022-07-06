@@ -1237,9 +1237,15 @@ export interface UsageDetail {
   Date: string
 
   /**
-   * 消耗量
+   * 消耗数量
    */
   Usage: number
+
+  /**
+      * 撤回数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Cancel: number
 }
 
 /**
@@ -1478,7 +1484,7 @@ export interface ChannelCreateFlowByFilesResponse {
  */
 export interface UploadFilesResponse {
   /**
-   * 文件id数组
+   * 文件id数组，有效期一个小时
    */
   FileIds: Array<string>
 

@@ -433,6 +433,11 @@ export interface ObjectInfo {
       * 属性信息。
       */
     Attributes: Array<Attribute>;
+    /**
+      * 图像的所有主体区域。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AllBox: Array<Box>;
 }
 /**
  * SearchImage请求参数结构体

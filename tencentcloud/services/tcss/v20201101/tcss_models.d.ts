@@ -1677,6 +1677,17 @@ export interface ReverseShellEventInfo {
       * 容器隔离操作来源
       */
     ContainerIsolateOperationSrc: string;
+    /**
+      * 容器状态
+正在运行: RUNNING
+暂停: PAUSED
+停止: STOPPED
+已经创建: CREATED
+已经销毁: DESTROYED
+正在重启中: RESTARTING
+迁移中: REMOVING
+      */
+    ContainerStatus: string;
 }
 /**
  * DescribeRiskSyscallDetail请求参数结构体
@@ -2630,6 +2641,7 @@ export interface DescribeVirusListRequest {
 <li>TaskId- string - 是否必填：否 - 任务ID</li>
 <li>ContainerNetStatus - String -是否必填: 否 -  容器网络状态筛选 NORMAL ISOLATED ISOLATING RESTORING RESTORE_FAILED</li>
 <li>TimeRange - string -是否必填: 否 - 时间范围筛选 ["2022-03-31 16:55:00", "2022-03-31 17:00:00"]</li>
+<li>ContainerStatus - string -是否必填: 否 - 容器状态 RUNNING PAUSED STOPPED CREATED DESTROYED RESTARTING REMOVING</li>
       */
     Filters?: Array<RunTimeFilters>;
     /**
@@ -3065,6 +3077,17 @@ RULE_MODE_HOLDUP 拦截
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ContainerIsolateOperationSrc: string;
+    /**
+      * 容器状态
+正在运行: RUNNING
+暂停: PAUSED
+停止: STOPPED
+已经创建: CREATED
+已经销毁: DESTROYED
+正在重启中: RESTARTING
+迁移中: REMOVING
+      */
+    ContainerStatus: string;
 }
 /**
  * DescribeCompliancePeriodTaskList返回参数结构体
@@ -3243,6 +3266,17 @@ RULE_MODE_HOLDUP 拦截
       * 容器隔离操作来源
       */
     ContainerIsolateOperationSrc: string;
+    /**
+      * 容器状态
+正在运行: RUNNING
+暂停: PAUSED
+停止: STOPPED
+已经创建: CREATED
+已经销毁: DESTROYED
+正在重启中: RESTARTING
+迁移中: REMOVING
+      */
+    ContainerStatus: string;
 }
 /**
  * DescribeClusterSummary返回参数结构体
@@ -5399,6 +5433,17 @@ export interface RiskSyscallEventInfo {
       * 容器隔离操作来源
       */
     ContainerIsolateOperationSrc: string;
+    /**
+      * 容器状态
+正在运行: RUNNING
+暂停: PAUSED
+停止: STOPPED
+已经创建: CREATED
+已经销毁: DESTROYED
+正在重启中: RESTARTING
+迁移中: REMOVING
+      */
+    ContainerStatus: string;
 }
 /**
  * 表示一条集群安全检测项的详细信息
@@ -6121,6 +6166,17 @@ MountNamespace逃逸、
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ContainerIsolateOperationSrc: string;
+    /**
+      * 容器状态
+正在运行: RUNNING
+暂停: PAUSED
+停止: STOPPED
+已经创建: CREATED
+已经销毁: DESTROYED
+正在重启中: RESTARTING
+迁移中: REMOVING
+      */
+    ContainerStatus: string;
 }
 /**
  * ModifyVirusScanTimeoutSetting返回参数结构体
@@ -10582,8 +10638,14 @@ export interface VirusInfo {
       */
     ContainerId: string;
     /**
-      * 容器状态，CS_RUNING:运行， CS_PAUSE:暂停，CS_STOP:停止，
-                                                       CS_CREATE:已经创建， CS_DESTORY:销毁
+      * 容器状态
+正在运行: RUNNING
+暂停: PAUSED
+停止: STOPPED
+已经创建: CREATED
+已经销毁: DESTROYED
+正在重启中: RESTARTING
+迁移中: REMOVING
       */
     ContainerStatus: string;
     /**
