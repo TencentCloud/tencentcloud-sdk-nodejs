@@ -97,7 +97,9 @@ export interface FlowApproverInfo {
   OrganizationOpenId?: string
 
   /**
-      * 签署人类型，PERSON-个人；ORGANIZATION-企业；
+      * 签署人类型，PERSON-个人；
+PERSON_AUTO_SIGN-个人自动签；
+ORGANIZATION-企业；
 ENTERPRISESERVER-企业静默签;
 注：ENTERPRISESERVER 类型仅用于使用文件创建签署流程（ChannelCreateFlowByFiles）接口；并且仅能指定发起方企业签署方为静默签署；
       */
@@ -222,7 +224,7 @@ export interface TemplateInfo {
   Recipients: Array<Recipient>
 
   /**
-   * 模板类型：1-静默签；2-静默签授权；3-普通模板
+   * 模板类型：1-静默签；3-普通模板
    */
   TemplateType: number
 
@@ -1666,7 +1668,7 @@ export interface FlowInfo {
   FlowDescription?: string
 
   /**
-   * 渠道的业务信息，最大长度1000个字符
+   * 渠道的业务信息，最大长度1000个字符。发起自动签署时，需设置对应自动签署场景，目前仅支持场景：处方单-E_PRESCRIPTION_AUTO_SIGN
    */
   CustomerData?: string
 

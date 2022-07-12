@@ -92,7 +92,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SetSecurityGroupForLoadbalancers", req, cb);
     }
     /**
-     * 批量解绑四七层后端服务。批量解绑的资源数量上限为500。
+     * 批量解绑四七层后端服务。批量解绑的资源数量上限为500。只支持VPC网络负载均衡。
      */
     async BatchDeregisterTargets(req, cb) {
         return this.request("BatchDeregisterTargets", req, cb);
@@ -304,7 +304,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateListener", req, cb);
     }
     /**
-     * 批量绑定虚拟主机或弹性网卡，支持跨域绑定，支持四层、七层（TCP、UDP、HTTP、HTTPS）协议绑定。批量绑定的资源数量上限为500。
+     * 批量绑定虚拟主机或弹性网卡，支持跨域绑定，支持四层、七层（TCP、UDP、HTTP、HTTPS）协议绑定。批量绑定的资源数量上限为500。只支持VPC网络负载均衡。
      */
     async BatchRegisterTargets(req, cb) {
         return this.request("BatchRegisterTargets", req, cb);

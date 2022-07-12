@@ -51,35 +51,17 @@ export interface EnableLiveDomainResponse {
     RequestId?: string;
 }
 /**
- * CreateLiveCert请求参数结构体
+ * DescribeUploadStreamNums返回参数结构体
  */
-export interface CreateLiveCertRequest {
+export interface DescribeUploadStreamNumsResponse {
     /**
-      * 证书类型。0-用户添加证书；1-腾讯云托管证书。
-注意：当证书类型为0时，HttpsCrt和HttpsKey必选；
-当证书类型为1时，优先使用CloudCertId对应证书，若CloudCertId为空则使用HttpsCrt和HttpsKey。
+      * 明细数据信息
       */
-    CertType: number;
+    DataInfoList: Array<ConcurrentRecordStreamNum>;
     /**
-      * 证书名称。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    CertName?: string;
-    /**
-      * 证书内容，即公钥。
-      */
-    HttpsCrt?: string;
-    /**
-      * 私钥。
-      */
-    HttpsKey?: string;
-    /**
-      * 描述。
-      */
-    Description?: string;
-    /**
-      * 腾讯云证书托管ID。
-      */
-    CloudCertId?: string;
+    RequestId?: string;
 }
 /**
  * HLS专属录制参数
@@ -482,17 +464,17 @@ export interface PushAuthKeyInfo {
     AuthDelta: number;
 }
 /**
- * DescribeUploadStreamNums返回参数结构体
+ * 多个域名信息列表
  */
-export interface DescribeUploadStreamNumsResponse {
+export interface DomainInfoList {
     /**
-      * 明细数据信息
+      * 域名。
       */
-    DataInfoList: Array<ConcurrentRecordStreamNum>;
+    Domain: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 明细信息。
       */
-    RequestId?: string;
+    DetailInfoList: Array<DomainDetailInfo>;
 }
 /**
  * 各状态码的总次数，支持大多数的 HTTP 协议返回码。
@@ -918,15 +900,13 @@ export interface ModifyLivePushAuthKeyRequest {
     AuthDelta?: number;
 }
 /**
- * DeleteLiveCallbackTemplate请求参数结构体
+ * DeleteLiveSnapshotTemplate返回参数结构体
  */
-export interface DeleteLiveCallbackTemplateRequest {
+export interface DeleteLiveSnapshotTemplateResponse {
     /**
-      * 模板 ID。
-1. 在创建回调模板接口 [CreateLiveCallbackTemplate](/document/product/267/32637) 调用的返回值中获取模板 ID。
-2. 可以从接口 [DescribeLiveCallbackTemplates](/document/product/267/32632) 查询已经创建的过的模板列表。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    TemplateId: number;
+    RequestId?: string;
 }
 /**
  * DescribeLiveStreamState请求参数结构体
@@ -1370,6 +1350,11 @@ Middle East 中东
 Africa 非洲。
       */
     RegionNames?: Array<string>;
+    /**
+      * 国家，映射表参照如下文档：
+https://cloud.tencent.com/document/product/267/34019。
+      */
+    CountryNames?: Array<string>;
 }
 /**
  * CreateLiveRecordRule请求参数结构体
@@ -1460,23 +1445,6 @@ export interface DescribeLiveRecordTemplateRequest {
       * [DescribeLiveRecordTemplates](/document/product/267/32609)接口获取到的模板 ID。
       */
     TemplateId: number;
-}
-/**
- * ModifyLiveDomainCert请求参数结构体
- */
-export interface ModifyLiveDomainCertRequest {
-    /**
-      * 播放域名。
-      */
-    DomainName: string;
-    /**
-      * 证书Id。
-      */
-    CertId?: number;
-    /**
-      * 状态，0：关闭  1：打开。
-      */
-    Status?: number;
 }
 /**
  * 查询当前正在推流的信息
@@ -1629,15 +1597,6 @@ URL中禁止包含的字符：
     Height?: number;
 }
 /**
- * ModifyLiveTranscodeTemplate返回参数结构体
- */
-export interface ModifyLiveTranscodeTemplateResponse {
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
  * 海外分区直播带宽出参国家带宽信息
  */
 export interface BillCountryInfo {
@@ -1649,15 +1608,6 @@ export interface BillCountryInfo {
       * 带宽明细数据信息。
       */
     BandInfoList: Array<BillDataInfo>;
-}
-/**
- * ModifyLiveRecordTemplate返回参数结构体
- */
-export interface ModifyLiveRecordTemplateResponse {
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
 }
 /**
  * ModifyLivePlayDomain请求参数结构体
@@ -1712,76 +1662,32 @@ export interface LogInfo {
     FileSize: number;
 }
 /**
- * 通用混流布局参数。
+ * AddDelayLiveStream请求参数结构体
  */
-export interface CommonMixLayoutParams {
+export interface AddDelayLiveStreamRequest {
     /**
-      * 输入图层。取值范围[1，16]。
-1)背景流（即大主播画面或画布）的 image_layer 填1。
-2)纯音频混流，该参数也需填。
-注意：不同输入，该值不可重复
+      * 推流路径，与推流和播放地址中的 AppName 保持一致，默认为 live。
       */
-    ImageLayer: number;
+    AppName: string;
     /**
-      * 输入类型。取值范围[0，5]。
-不填默认为0。
-0表示输入流为音视频。
-2表示输入流为图片。
-3表示输入流为画布。
-4表示输入流为音频。
-5表示输入流为纯视频。
+      * 推流域名。
       */
-    InputType?: number;
+    DomainName: string;
     /**
-      * 输入画面在输出时的高度。取值范围：
-像素：[0，2000]
-百分比：[0.01，0.99]
-不填默认为输入流的高度。
-使用百分比时，期望输出为（百分比 * 背景高）。
+      * 流名称。
       */
-    ImageHeight?: number;
+    StreamName: string;
     /**
-      * 输入画面在输出时的宽度。取值范围：
-像素：[0，2000]
-百分比：[0.01，0.99]
-不填默认为输入流的宽度。
-使用百分比时，期望输出为（百分比 * 背景宽）。
+      * 延播时间，单位：秒，上限：600秒。
       */
-    ImageWidth?: number;
+    DelayTime: number;
     /**
-      * 输入在输出画面的X偏移。取值范围：
-像素：[0，2000]
-百分比：[0.01，0.99]
-不填默认为0。
-相对于大主播背景画面左上角的横向偏移。
-使用百分比时，期望输出为（百分比 * 背景宽）。
+      * 延播设置的过期时间。UTC 格式，例如：2018-11-29T19:00:00Z。
+注意：
+1. 默认7天后过期，且最长支持7天内生效。
+2. 北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
       */
-    LocationX?: number;
-    /**
-      * 输入在输出画面的Y偏移。取值范围：
-像素：[0，2000]
-百分比：[0.01，0.99]
-不填默认为0。
-相对于大主播背景画面左上角的纵向偏移。
-使用百分比时，期望输出为（百分比 * 背景宽）
-      */
-    LocationY?: number;
-    /**
-      * 当InputType为3(画布)时，该值表示画布的颜色。
-常用的颜色有：
-红色：0xcc0033。
-黄色：0xcc9900。
-绿色：0xcccc33。
-蓝色：0x99CCFF。
-黑色：0x000000。
-白色：0xFFFFFF。
-灰色：0x999999。
-      */
-    Color?: string;
-    /**
-      * 当InputType为2(图片)时，该值是水印ID。
-      */
-    WatermarkId?: number;
+    ExpireTime?: string;
 }
 /**
  * DescribeLiveDomainCert请求参数结构体
@@ -3019,63 +2925,6 @@ export interface DeleteRecordTaskResponse {
  */
 export declare type DescribeLiveWatermarksRequest = null;
 /**
- * DescribeLivePackageInfo返回参数结构体
- */
-export interface DescribeLivePackageInfoResponse {
-    /**
-      * 套餐包信息。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    LivePackageInfoList: Array<LivePackageInfo>;
-    /**
-      * 套餐包当前计费方式:
--1: 无计费方式或获取失败
-0: 无计费方式
-201: 月结带宽
-202: 月结流量
-203: 日结带宽
-204: 日结流量
-205: 日结时长
-206: 月结时长
-304: 日结流量。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    PackageBillMode: number;
-    /**
-      * 总页数。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    TotalPage: number;
-    /**
-      * 数据总条数。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    TotalNum: number;
-    /**
-      * 当前页数。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    PageNum: number;
-    /**
-      * 当前每页数量。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    PageSize: number;
-    /**
-      * 当请求参数 PackageType = 0 时生效，逗号分隔，从第一个到最后一个分别表示：
-标准直播，中国大陆（境内全地区）计费方式。
-标准直播，国际/港澳台（境外多地区）计费方式。
-快直播，中国大陆（境内全地区）计费方式。
-快直播，国际/港澳台（境外多地区）计费方式。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    FluxPackageBillMode: string;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
  * CreateLiveTranscodeRule请求参数结构体
  */
 export interface CreateLiveTranscodeRuleRequest {
@@ -3125,43 +2974,6 @@ export interface StopLiveRecordResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
-}
-/**
- * UpdateLiveWatermark请求参数结构体
- */
-export interface UpdateLiveWatermarkRequest {
-    /**
-      * 水印 ID。
-在添加水印接口 [AddLiveWatermark](/document/product/267/30154) 调用返回值中获取水印 ID。
-      */
-    WatermarkId: number;
-    /**
-      * 水印图片 URL。
-URL中禁止包含的字符：
- ;(){}$>`#"\'|
-      */
-    PictureUrl: string;
-    /**
-      * 显示位置，X轴偏移，单位是百分比，默认 0。
-      */
-    XPosition: number;
-    /**
-      * 显示位置，Y轴偏移，单位是百分比，默认 0。
-      */
-    YPosition: number;
-    /**
-      * 水印名称。
-最长16字节。
-      */
-    WatermarkName?: string;
-    /**
-      * 水印宽度，占直播原始画面宽度百分比，建议高宽只设置一项，另外一项会自适应缩放，避免变形。默认原始宽度。
-      */
-    Width?: number;
-    /**
-      * 水印高度，占直播原始画面宽度百分比，建议高宽只设置一项，另外一项会自适应缩放，避免变形。默认原始高度。
-      */
-    Height?: number;
 }
 /**
  * CreateCommonMixStream请求参数结构体
@@ -3220,17 +3032,25 @@ export interface RefererAuthConfig {
     Rules: string;
 }
 /**
- * CreateLiveCert返回参数结构体
+ * 获取省份/运营商的播放信息。
  */
-export interface CreateLiveCertResponse {
+export interface ProIspPlaySumInfo {
     /**
-      * 证书ID
+      * 省份/运营商/国家或地区。
       */
-    CertId?: number;
+    Name: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 总流量，单位: MB。
       */
-    RequestId?: string;
+    TotalFlux: number;
+    /**
+      * 总请求数。
+      */
+    TotalRequest: number;
+    /**
+      * 平均下载流量，单位: MB/s。
+      */
+    AvgFluxPerSecond: number;
 }
 /**
  * 推流数据信息
@@ -3308,32 +3128,76 @@ export interface PushDataInfo {
     MetaFps: number;
 }
 /**
- * AddDelayLiveStream请求参数结构体
+ * 通用混流布局参数。
  */
-export interface AddDelayLiveStreamRequest {
+export interface CommonMixLayoutParams {
     /**
-      * 推流路径，与推流和播放地址中的 AppName 保持一致，默认为 live。
+      * 输入图层。取值范围[1，16]。
+1)背景流（即大主播画面或画布）的 image_layer 填1。
+2)纯音频混流，该参数也需填。
+注意：不同输入，该值不可重复
       */
-    AppName: string;
+    ImageLayer: number;
     /**
-      * 推流域名。
+      * 输入类型。取值范围[0，5]。
+不填默认为0。
+0表示输入流为音视频。
+2表示输入流为图片。
+3表示输入流为画布。
+4表示输入流为音频。
+5表示输入流为纯视频。
       */
-    DomainName: string;
+    InputType?: number;
     /**
-      * 流名称。
+      * 输入画面在输出时的高度。取值范围：
+像素：[0，2000]
+百分比：[0.01，0.99]
+不填默认为输入流的高度。
+使用百分比时，期望输出为（百分比 * 背景高）。
       */
-    StreamName: string;
+    ImageHeight?: number;
     /**
-      * 延播时间，单位：秒，上限：600秒。
+      * 输入画面在输出时的宽度。取值范围：
+像素：[0，2000]
+百分比：[0.01，0.99]
+不填默认为输入流的宽度。
+使用百分比时，期望输出为（百分比 * 背景宽）。
       */
-    DelayTime: number;
+    ImageWidth?: number;
     /**
-      * 延播设置的过期时间。UTC 格式，例如：2018-11-29T19:00:00Z。
-注意：
-1. 默认7天后过期，且最长支持7天内生效。
-2. 北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
+      * 输入在输出画面的X偏移。取值范围：
+像素：[0，2000]
+百分比：[0.01，0.99]
+不填默认为0。
+相对于大主播背景画面左上角的横向偏移。
+使用百分比时，期望输出为（百分比 * 背景宽）。
       */
-    ExpireTime?: string;
+    LocationX?: number;
+    /**
+      * 输入在输出画面的Y偏移。取值范围：
+像素：[0，2000]
+百分比：[0.01，0.99]
+不填默认为0。
+相对于大主播背景画面左上角的纵向偏移。
+使用百分比时，期望输出为（百分比 * 背景宽）
+      */
+    LocationY?: number;
+    /**
+      * 当InputType为3(画布)时，该值表示画布的颜色。
+常用的颜色有：
+红色：0xcc0033。
+黄色：0xcc9900。
+绿色：0xcccc33。
+蓝色：0x99CCFF。
+黑色：0x000000。
+白色：0xFFFFFF。
+灰色：0x999999。
+      */
+    Color?: string;
+    /**
+      * 当InputType为2(图片)时，该值是水印ID。
+      */
+    WatermarkId?: number;
 }
 /**
  * DescribeGroupProIspPlayInfoList请求参数结构体
@@ -3990,19 +3854,6 @@ export interface ModifyLivePushAuthKeyResponse {
     RequestId?: string;
 }
 /**
- * 多个域名信息列表
- */
-export interface DomainInfoList {
-    /**
-      * 域名。
-      */
-    Domain: string;
-    /**
-      * 明细信息。
-      */
-    DetailInfoList: Array<DomainDetailInfo>;
-}
-/**
  * DescribeLiveWatermark返回参数结构体
  */
 export interface DescribeLiveWatermarkResponse {
@@ -4249,21 +4100,61 @@ export interface CreatePullStreamConfigResponse {
     RequestId?: string;
 }
 /**
- * BindLiveDomainCert请求参数结构体
+ * DescribeLivePackageInfo返回参数结构体
  */
-export interface BindLiveDomainCertRequest {
+export interface DescribeLivePackageInfoResponse {
     /**
-      * 证书Id。使用添加证书接口获取证书Id。
+      * 套餐包信息。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    CertId: number;
+    LivePackageInfoList: Array<LivePackageInfo>;
     /**
-      * 播放域名。
+      * 套餐包当前计费方式:
+-1: 无计费方式或获取失败
+0: 无计费方式
+201: 月结带宽
+202: 月结流量
+203: 日结带宽
+204: 日结流量
+205: 日结时长
+206: 月结时长
+304: 日结流量。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    DomainName: string;
+    PackageBillMode: number;
     /**
-      * HTTPS开启状态，0： 关闭  1：打开。
+      * 总页数。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Status?: number;
+    TotalPage: number;
+    /**
+      * 数据总条数。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TotalNum: number;
+    /**
+      * 当前页数。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PageNum: number;
+    /**
+      * 当前每页数量。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PageSize: number;
+    /**
+      * 当请求参数 PackageType = 0 时生效，逗号分隔，从第一个到最后一个分别表示：
+标准直播，中国大陆（境内全地区）计费方式。
+标准直播，国际/港澳台（境外多地区）计费方式。
+快直播，中国大陆（境内全地区）计费方式。
+快直播，国际/港澳台（境外多地区）计费方式。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FluxPackageBillMode: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeTopClientIpSumInfoList请求参数结构体
@@ -4369,9 +4260,9 @@ UTC 格式，例如：2018-06-29T19:00:00Z。
     PublishTime: string;
 }
 /**
- * ModifyLiveCert返回参数结构体
+ * ModifyLiveTranscodeTemplate返回参数结构体
  */
-export interface ModifyLiveCertResponse {
+export interface ModifyLiveTranscodeTemplateResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4548,25 +4439,27 @@ export interface DescribeLiveDomainsRequest {
     PlayType?: number;
 }
 /**
- * 获取省份/运营商的播放信息。
+ * 直播拉流当前正在拉的文件信息。
  */
-export interface ProIspPlaySumInfo {
+export interface RecentPullInfo {
     /**
-      * 省份/运营商/国家或地区。
+      * 当前正在拉的文件地址。
       */
-    Name: string;
+    FileUrl: string;
     /**
-      * 总流量，单位: MB。
+      * 当前正在拉的文件偏移，单位：秒。
       */
-    TotalFlux: number;
+    OffsetTime: number;
     /**
-      * 总请求数。
+      * 最新上报偏移信息时间。UTC格式。
+如：2020-07-23T03:20:39Z。
+注意：与北京时间相差八小时。
       */
-    TotalRequest: number;
+    ReportTime: string;
     /**
-      * 平均下载流量，单位: MB/s。
+      * 已经轮播的次数。
       */
-    AvgFluxPerSecond: number;
+    LoopedTimes: number;
 }
 /**
  * 截图模板信息。
@@ -4752,27 +4645,41 @@ export interface CancelCommonMixStreamRequest {
     MixStreamSessionId: string;
 }
 /**
- * 直播拉流当前正在拉的文件信息。
+ * UpdateLiveWatermark请求参数结构体
  */
-export interface RecentPullInfo {
+export interface UpdateLiveWatermarkRequest {
     /**
-      * 当前正在拉的文件地址。
+      * 水印 ID。
+在添加水印接口 [AddLiveWatermark](/document/product/267/30154) 调用返回值中获取水印 ID。
       */
-    FileUrl: string;
+    WatermarkId: number;
     /**
-      * 当前正在拉的文件偏移，单位：秒。
+      * 水印图片 URL。
+URL中禁止包含的字符：
+ ;(){}$>`#"\'|
       */
-    OffsetTime: number;
+    PictureUrl: string;
     /**
-      * 最新上报偏移信息时间。UTC格式。
-如：2020-07-23T03:20:39Z。
-注意：与北京时间相差八小时。
+      * 显示位置，X轴偏移，单位是百分比，默认 0。
       */
-    ReportTime: string;
+    XPosition: number;
     /**
-      * 已经轮播的次数。
+      * 显示位置，Y轴偏移，单位是百分比，默认 0。
       */
-    LoopedTimes: number;
+    YPosition: number;
+    /**
+      * 水印名称。
+最长16字节。
+      */
+    WatermarkName?: string;
+    /**
+      * 水印宽度，占直播原始画面宽度百分比，建议高宽只设置一项，另外一项会自适应缩放，避免变形。默认原始宽度。
+      */
+    Width?: number;
+    /**
+      * 水印高度，占直播原始画面宽度百分比，建议高宽只设置一项，另外一项会自适应缩放，避免变形。默认原始高度。
+      */
+    Height?: number;
 }
 /**
  * 证书信息。
@@ -4951,33 +4858,13 @@ export interface DeleteScreenshotTaskResponse {
     RequestId?: string;
 }
 /**
- * ModifyLiveCert请求参数结构体
+ * ModifyLiveRecordTemplate返回参数结构体
  */
-export interface ModifyLiveCertRequest {
+export interface ModifyLiveRecordTemplateResponse {
     /**
-      * 证书Id。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    CertId: string;
-    /**
-      * 证书类型。0-用户添加证书；1-腾讯云托管证书。
-      */
-    CertType?: number;
-    /**
-      * 证书名称。
-      */
-    CertName?: string;
-    /**
-      * 证书内容，即公钥。
-      */
-    HttpsCrt?: string;
-    /**
-      * 私钥。
-      */
-    HttpsKey?: string;
-    /**
-      * 描述信息。
-      */
-    Description?: string;
+    RequestId?: string;
 }
 /**
  * 通用混流控制参数
@@ -5673,15 +5560,6 @@ baseline/main/high。
     DRMTracks?: string;
 }
 /**
- * ModifyLiveDomainCert返回参数结构体
- */
-export interface ModifyLiveDomainCertResponse {
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
  * ModifyLiveCallbackTemplate返回参数结构体
  */
 export interface ModifyLiveCallbackTemplateResponse {
@@ -5820,15 +5698,6 @@ export interface DescribeAreaBillBandwidthAndFluxListRequest {
       * 直播播放域名，若不填，表示总体数据。
       */
     PlayDomains?: Array<string>;
-}
-/**
- * BindLiveDomainCert返回参数结构体
- */
-export interface BindLiveDomainCertResponse {
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
 }
 /**
  * 规则信息
@@ -6086,13 +5955,15 @@ export interface DescribeLiveStreamOnlineListRequest {
     StreamName?: string;
 }
 /**
- * DeleteLiveSnapshotTemplate返回参数结构体
+ * DeleteLiveCallbackTemplate请求参数结构体
  */
-export interface DeleteLiveSnapshotTemplateResponse {
+export interface DeleteLiveCallbackTemplateRequest {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 模板 ID。
+1. 在创建回调模板接口 [CreateLiveCallbackTemplate](/document/product/267/32637) 调用的返回值中获取模板 ID。
+2. 可以从接口 [DescribeLiveCallbackTemplates](/document/product/267/32632) 查询已经创建的过的模板列表。
       */
-    RequestId?: string;
+    TemplateId: number;
 }
 /**
  * DescribeLiveSnapshotTemplate请求参数结构体
@@ -6103,15 +5974,6 @@ export interface DescribeLiveSnapshotTemplateRequest {
 调用 [CreateLiveSnapshotTemplate](/document/product/267/32624) 时返回的模板 ID。
       */
     TemplateId: number;
-}
-/**
- * DeleteLiveCert返回参数结构体
- */
-export interface DeleteLiveCertResponse {
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
 }
 /**
  * CreateCommonMixStream返回参数结构体
@@ -7074,15 +6936,6 @@ export interface DescribeProIspPlaySumInfoListResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
-}
-/**
- * DeleteLiveCert请求参数结构体
- */
-export interface DeleteLiveCertRequest {
-    /**
-      * DescribeLiveCerts接口获取到的证书Id。
-      */
-    CertId: number;
 }
 /**
  * DescribeHttpStatusInfoList返回参数结构体

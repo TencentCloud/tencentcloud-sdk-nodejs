@@ -587,11 +587,11 @@ export interface DescribeAccountAllGrantPrivilegesResponse {
  */
 export interface RollbackDatabase {
     /**
-      * 旧数据库
+      * 旧数据库名称
       */
     OldDatabase: string;
     /**
-      * 新数据库
+      * 新数据库名称
       */
     NewDatabase: string;
 }
@@ -1267,7 +1267,7 @@ export interface CreateClustersRequest {
       */
     AdminPassword?: string;
     /**
-      * 端口，默认5432
+      * 端口，默认3306，取值范围[0, 65535)
       */
     Port?: number;
     /**
@@ -1308,7 +1308,7 @@ timeRollback，时间点回档
       */
     StorageLimit?: number;
     /**
-      * 实例数量
+      * 实例数量，数量范围为(0,16]
       */
     InstanceCount?: number;
     /**
@@ -1320,7 +1320,7 @@ timeRollback，时间点回档
       */
     TimeUnit?: string;
     /**
-      * 包年包月购买是否自动续费
+      * 包年包月购买是否自动续费，默认为0
       */
     AutoRenewFlag?: number;
     /**
@@ -1391,9 +1391,13 @@ cpu最大值，可选范围参考DescribeServerlessInstanceSpecs接口返回
       */
     DealMode?: number;
     /**
-      * 参数模版ID
+      * 参数模版ID，可以通过查询参数模板信息DescribeParamTemplates获得参数模板ID
       */
     ParamTemplateId?: number;
+    /**
+      * 多可用区地址
+      */
+    SlaveZone?: string;
 }
 /**
  * DescribeClusters返回参数结构体
@@ -1635,9 +1639,13 @@ export interface AssociateSecurityGroupsResponse {
  */
 export interface DescribeResourcesByDealNameRequest {
     /**
-      * 计费订单id（如果计费还没回调业务发货，可能出现错误码InvalidParameterValue.DealNameNotFound，这种情况需要业务重试DescribeResourcesByDealName接口直到成功）
+      * 计费订单ID（如果计费还没回调业务发货，可能出现错误码InvalidParameterValue.DealNameNotFound，这种情况需要业务重试DescribeResourcesByDealName接口直到成功）
       */
-    DealName: string;
+    DealName?: string;
+    /**
+      * 计费订单ID列表，可以一次查询若干条订单ID对应资源信息（如果计费还没回调业务发货，可能出现错误码InvalidParameterValue.DealNameNotFound，这种情况需要业务重试DescribeResourcesByDealName接口直到成功）
+      */
+    DealNames?: Array<string>;
 }
 /**
  * DescribeRollbackTimeValidity返回参数结构体
@@ -1724,6 +1732,10 @@ export interface BillingResourceInfo {
       * 实例ID列表
       */
     InstanceIds: Array<string>;
+    /**
+      * 订单ID
+      */
+    DealName: string;
 }
 /**
  * ModifyBackupConfig返回参数结构体
@@ -2715,7 +2727,7 @@ export interface ModifyClusterParamRequest {
       */
     ClusterId: string;
     /**
-      * 要修改的参数列表。每一个元素是ParamName、CurrentValue和OldValue的组合。ParamName是参数名称，CurrentValue是当前值，OldValue是之前值
+      * 要修改的参数列表。每一个元素是ParamName、CurrentValue和OldValue的组合。ParamName是参数名称，CurrentValue是当前值，OldValue是之前值且不做校验
       */
     ParamList: Array<ParamItem>;
     /**

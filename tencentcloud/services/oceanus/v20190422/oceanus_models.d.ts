@@ -16,33 +16,29 @@ export interface DescribeResourceConfigsResponse {
     RequestId?: string;
 }
 /**
- * CreateResource请求参数结构体
+ * DescribeClusters请求参数结构体
  */
-export interface CreateResourceRequest {
+export interface DescribeClustersRequest {
     /**
-      * 资源位置
+      * 按照一个或者多个集群 ID 查询，每次请求的集群上限为 100
       */
-    ResourceLoc: ResourceLoc;
+    ClusterIds?: Array<string>;
     /**
-      * 资源类型。目前只支持 JAR，取值为 1
+      * 偏移量，默认 0
       */
-    ResourceType: number;
+    Offset?: number;
     /**
-      * 资源描述
+      * 请求的集群数量，默认 20，最大值 100
       */
-    Remark?: string;
+    Limit?: number;
     /**
-      * 资源名称
+      * 集群信息结果排序规则，1 按时间降序，2 按照时间升序，3  按照状态排序
       */
-    Name?: string;
+    OrderType?: number;
     /**
-      * 资源版本描述
+      * 过滤规则
       */
-    ResourceConfigRemark?: string;
-    /**
-      * 目录ID
-      */
-    FolderId?: string;
+    Filters?: Array<Filter>;
     /**
       * 工作空间 SerialId
       */
@@ -188,6 +184,36 @@ export interface RunJobsRequest {
     RunJobDescriptions: Array<RunJobDescription>;
     /**
       * 工作空间 SerialId
+      */
+    WorkSpaceId?: string;
+}
+/**
+ * 云联网描述信息
+ */
+export interface CCN {
+    /**
+      * 私有网络 ID
+      */
+    VpcId: string;
+    /**
+      * 子网 ID
+      */
+    SubnetId: string;
+    /**
+      * 云联网 ID，如 ccn-rahigzjd
+      */
+    CcnId: string;
+}
+/**
+ * DeleteJobs请求参数结构体
+ */
+export interface DeleteJobsRequest {
+    /**
+      * 作业Id列表
+      */
+    JobIds: Array<string>;
+    /**
+      * 工作空间Id
       */
     WorkSpaceId?: string;
 }
@@ -349,6 +375,63 @@ export interface Property {
       * 系统配置的Value
       */
     Value: string;
+}
+/**
+ * 集群的版本相关信息
+ */
+export interface ClusterVersion {
+    /**
+      * 集群的Flink版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Flink: string;
+    /**
+      * 集群支持的Flink版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SupportedFlink: Array<string>;
+}
+/**
+ * CreateResource请求参数结构体
+ */
+export interface CreateResourceRequest {
+    /**
+      * 资源位置
+      */
+    ResourceLoc: ResourceLoc;
+    /**
+      * 资源类型。目前只支持 JAR，取值为 1
+      */
+    ResourceType: number;
+    /**
+      * 资源描述
+      */
+    Remark?: string;
+    /**
+      * 资源名称
+      */
+    Name?: string;
+    /**
+      * 资源版本描述
+      */
+    ResourceConfigRemark?: string;
+    /**
+      * 目录ID
+      */
+    FolderId?: string;
+    /**
+      * 工作空间 SerialId
+      */
+    WorkSpaceId?: string;
+}
+/**
+ * DescribeTreeJobs返回参数结构体
+ */
+export interface DescribeTreeJobsResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DeleteTableConfig请求参数结构体
@@ -600,21 +683,19 @@ export interface TriggerJobSavepointResponse {
     RequestId?: string;
 }
 /**
- * TriggerJobSavepoint请求参数结构体
+ * 标签
  */
-export interface TriggerJobSavepointRequest {
+export interface Tag {
     /**
-      * 作业 SerialId
+      * 标签键
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    JobId: string;
+    TagKey?: string;
     /**
-      * 描述
+      * 标签值
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Description?: string;
-    /**
-      * 工作空间 SerialId
-      */
-    WorkSpaceId?: string;
+    TagValue?: string;
 }
 /**
  * DescribeResources请求参数结构体
@@ -745,29 +826,13 @@ export interface DescribeJobSavepointResponse {
     RequestId?: string;
 }
 /**
- * ModifyJob请求参数结构体
+ * DeleteJobs返回参数结构体
  */
-export interface ModifyJobRequest {
+export interface DeleteJobsResponse {
     /**
-      * 作业Id
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    JobId: string;
-    /**
-      * 作业名称，支持长度小于50的中文/英文/数字/”-”/”_”/”.”，不能重名
-      */
-    Name?: string;
-    /**
-      * 描述
-      */
-    Remark?: string;
-    /**
-      * 拖拽文件需传入此参数
-      */
-    TargetFolderId?: string;
-    /**
-      * 工作空间 SerialId
-      */
-    WorkSpaceId?: string;
+    RequestId?: string;
 }
 /**
  * RunJobs返回参数结构体
@@ -884,6 +949,35 @@ export interface ResourceItem {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     RefJobCount: number;
+}
+/**
+ * 空间和集群绑定关系
+ */
+export interface WorkSpaceClusterItem {
+    /**
+      * 集群 ID
+      */
+    ClusterGroupId: number;
+    /**
+      * 集群 SerialId
+      */
+    ClusterGroupSerialId: string;
+    /**
+      * 集群名称
+      */
+    ClusterName: string;
+    /**
+      * 工作空间 SerialId
+      */
+    WorkSpaceId: string;
+    /**
+      * 工作空间名称
+      */
+    WorkSpaceName: string;
+    /**
+      * 绑定状态  2 绑定 1  解除绑定
+      */
+    Status: number;
 }
 /**
  * StopJobs返回参数结构体
@@ -1020,6 +1114,40 @@ export interface RunJobDescription {
     SavepointId?: string;
 }
 /**
+ * ModifyJob请求参数结构体
+ */
+export interface ModifyJobRequest {
+    /**
+      * 作业Id
+      */
+    JobId: string;
+    /**
+      * 作业名称，支持长度小于50的中文/英文/数字/”-”/”_”/”.”，不能重名
+      */
+    Name?: string;
+    /**
+      * 描述
+      */
+    Remark?: string;
+    /**
+      * 拖拽文件需传入此参数
+      */
+    TargetFolderId?: string;
+    /**
+      * 工作空间 SerialId
+      */
+    WorkSpaceId?: string;
+}
+/**
+ * DescribeTreeJobs请求参数结构体
+ */
+export interface DescribeTreeJobsRequest {
+    /**
+      * 工作空间 Serialid
+      */
+    WorkSpaceId?: string;
+}
+/**
  * DescribeJobConfigs返回参数结构体
  */
 export interface DescribeJobConfigsResponse {
@@ -1078,6 +1206,198 @@ export interface DescribeSystemResourcesResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 描述用户创建的集群信息
+ */
+export interface Cluster {
+    /**
+      * 集群 ID
+      */
+    ClusterId: string;
+    /**
+      * 集群名称
+      */
+    Name: string;
+    /**
+      * 地域
+      */
+    Region: string;
+    /**
+      * 用户 AppID
+      */
+    AppId: number;
+    /**
+      * 主账号 UIN
+      */
+    OwnerUin: string;
+    /**
+      * 创建者 UIN
+      */
+    CreatorUin: string;
+    /**
+      * 集群状态, 1 未初始化,，3 初始化中，2 运行中
+      */
+    Status: number;
+    /**
+      * 描述
+      */
+    Remark: string;
+    /**
+      * 集群创建时间
+      */
+    CreateTime: string;
+    /**
+      * 最后一次操作集群的时间
+      */
+    UpdateTime: string;
+    /**
+      * CU 数量
+      */
+    CuNum: number;
+    /**
+      * CU 内存规格
+      */
+    CuMem: number;
+    /**
+      * 可用区
+      */
+    Zone: string;
+    /**
+      * 状态描述
+      */
+    StatusDesc: string;
+    /**
+      * 网络
+      */
+    CCNs: Array<CCN>;
+    /**
+      * 网络
+      */
+    NetEnvironmentType: number;
+    /**
+      * 空闲 CU
+      */
+    FreeCuNum: number;
+    /**
+      * 集群绑定的标签
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Tags: Array<Tag>;
+    /**
+      * 集群隔离时间; 没隔离时间，则为 -
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IsolatedTime: string;
+    /**
+      * 集群过期时间; 没过期概念，则为 -
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ExpireTime: string;
+    /**
+      * 距离过期还有多少秒; 没过期概念，则为 -
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SecondsUntilExpiry: string;
+    /**
+      * 自动续费标记，0 表示默认状态 (用户未设置，即初始状态，用户开通了预付费不停服特权会进行自动续费)， 1 表示自动续费，2表示明确不自动续费(用户设置)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AutoRenewFlag: number;
+    /**
+      * 集群的默认 COS 存储桶
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DefaultCOSBucket: string;
+    /**
+      * 集群的CLS 日志集 LogSet
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CLSLogSet: string;
+    /**
+      * 集群的CLS 日志主题 TopicId
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CLSTopicId: string;
+    /**
+      * 集群的CLS 日志集  名字
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CLSLogName: string;
+    /**
+      * 集群的CLS 日志主题  名字
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CLSTopicName: string;
+    /**
+      * 集群的版本信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Version: ClusterVersion;
+    /**
+      * 细粒度资源下的空闲CU
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FreeCu: number;
+    /**
+      * 集群的默认日志采集配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DefaultLogCollectConf: string;
+    /**
+      * 取值：0-没有设置，1-已设置，2-不允许设置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CustomizedDNSEnabled: number;
+    /**
+      * 空间信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Correlations: Array<WorkSpaceClusterItem>;
+    /**
+      * 运行CU
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RunningCu: number;
+    /**
+      * 0 后付费,1 预付费
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PayMode: number;
+}
+/**
+ * DescribeClusters返回参数结构体
+ */
+export interface DescribeClustersResponse {
+    /**
+      * 集群总数
+      */
+    TotalCount: number;
+    /**
+      * 集群列表
+      */
+    ClusterSet: Array<Cluster>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * TriggerJobSavepoint请求参数结构体
+ */
+export interface TriggerJobSavepointRequest {
+    /**
+      * 作业 SerialId
+      */
+    JobId: string;
+    /**
+      * 描述
+      */
+    Description?: string;
+    /**
+      * 工作空间 SerialId
+      */
+    WorkSpaceId?: string;
 }
 /**
  * 资源被Job 引用信息

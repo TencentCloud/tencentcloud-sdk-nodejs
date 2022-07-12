@@ -108,9 +108,9 @@ it("live.v20180801.DescribeLiveStreamEventList", async function () {
     }
 })
 
-it("live.v20180801.CreateCommonMixStream", async function () {
+it("live.v20180801.DescribePullStreamConfigs", async function () {
     try {
-       const data = await client.CreateCommonMixStream({})
+       const data = await client.DescribePullStreamConfigs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -221,16 +221,6 @@ it("live.v20180801.CreateScreenshotTask", async function () {
 it("live.v20180801.DescribeLiveRecordTemplates", async function () {
     try {
        const data = await client.DescribeLiveRecordTemplates({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("live.v20180801.ModifyLiveDomainCert", async function () {
-    try {
-       const data = await client.ModifyLiveDomainCert({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -388,9 +378,9 @@ it("live.v20180801.StopScreenshotTask", async function () {
     }
 })
 
-it("live.v20180801.DescribePullStreamConfigs", async function () {
+it("live.v20180801.CreateCommonMixStream", async function () {
     try {
-       const data = await client.DescribePullStreamConfigs({})
+       const data = await client.CreateCommonMixStream({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -538,16 +528,6 @@ it("live.v20180801.DescribeLiveCert", async function () {
     }
 })
 
-it("live.v20180801.ModifyLiveCert", async function () {
-    try {
-       const data = await client.ModifyLiveCert({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("live.v20180801.DescribeLiveDomains", async function () {
     try {
        const data = await client.DescribeLiveDomains({})
@@ -561,16 +541,6 @@ it("live.v20180801.DescribeLiveDomains", async function () {
 it("live.v20180801.ModifyLivePullStreamTask", async function () {
     try {
        const data = await client.ModifyLivePullStreamTask({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("live.v20180801.DeleteLiveCert", async function () {
-    try {
-       const data = await client.DeleteLiveCert({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -651,16 +621,6 @@ it("live.v20180801.DescribeProIspPlaySumInfoList", async function () {
 it("live.v20180801.DescribeStreamPlayInfoList", async function () {
     try {
        const data = await client.DescribeStreamPlayInfoList({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("live.v20180801.CreateLiveCert", async function () {
-    try {
-       const data = await client.CreateLiveCert({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -841,16 +801,6 @@ it("live.v20180801.DescribeLiveDomain", async function () {
 it("live.v20180801.CreateLiveCallbackRule", async function () {
     try {
        const data = await client.CreateLiveCallbackRule({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("live.v20180801.BindLiveDomainCert", async function () {
-    try {
-       const data = await client.BindLiveDomainCert({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -447,10 +447,34 @@ export interface SparkJobInfo {
   IsLocalPythonFiles: string
 
   /**
-      * pyspark：python依赖, 除py文件外，还支持zip/egg等归档格式，多文件以逗号分隔
+      * 注：该返回值已废弃
 注意：此字段可能返回 null，表示取不到有效值。
       */
   AppPythonFiles: string
+
+  /**
+      * archives：依赖上传方式，1、cos；2、lakefs（控制台使用，该方式不支持直接接口调用）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsLocalArchives: string
+
+  /**
+      * archives：依赖资源
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  JobArchives: string
+
+  /**
+      * pyspark：python依赖, 除py文件外，还支持zip/egg等归档格式，多文件以逗号分隔
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  JobPythonFiles: string
+
+  /**
+      * 当前job正在运行或准备运行的任务个数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TaskNum: number
 }
 
 /**
@@ -931,6 +955,16 @@ export interface ModifySparkAppRequest {
    * 数据源名
    */
   DataSource?: string
+
+  /**
+   * archives：依赖上传方式，1、cos；2、lakefs（控制台使用，该方式不支持直接接口调用）
+   */
+  IsLocalArchives?: string
+
+  /**
+   * archives：依赖资源
+   */
+  AppArchives?: string
 }
 
 /**
@@ -1595,7 +1629,7 @@ export interface DescribeSparkAppJobsRequest {
   Sorting?: string
 
   /**
-   * 按照该参数过滤
+   * 按照该参数过滤,支持spark-job-name
    */
   Filters?: Array<Filter>
 
@@ -4201,6 +4235,16 @@ export interface CreateSparkAppRequest {
    * pyspark：python依赖, 除py文件外，还支持zip/egg等归档格式，多文件以逗号分隔
    */
   AppPythonFiles?: string
+
+  /**
+   * archives：依赖上传方式，1、cos；2、lakefs（控制台使用，该方式不支持直接接口调用）
+   */
+  IsLocalArchives?: string
+
+  /**
+   * archives：依赖资源
+   */
+  AppArchives?: string
 }
 
 /**

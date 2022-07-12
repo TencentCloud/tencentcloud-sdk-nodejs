@@ -124,6 +124,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AssociateDDoSEipLoadBalancer", req, cb);
     }
     /**
+     * 添加7层转发规则
+     */
+    async CreateNewL7Rules(req, cb) {
+        return this.request("CreateNewL7Rules", req, cb);
+    }
+    /**
      * 删除DDoS防护的水印防护配置
      */
     async DeleteWaterPrintConfig(req, cb) {
@@ -200,6 +206,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteDDoSSpeedLimitConfig(req, cb) {
         return this.request("DeleteDDoSSpeedLimitConfig", req, cb);
+    }
+    /**
+     * 高防IP获取7层规则
+     */
+    async DescribeNewL7Rules(req, cb) {
+        return this.request("DescribeNewL7Rules", req, cb);
     }
     /**
      * 修改CC防护等级

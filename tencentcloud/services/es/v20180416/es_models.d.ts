@@ -145,25 +145,13 @@ export interface UpgradeInstanceResponse {
     RequestId?: string;
 }
 /**
- * UpdateJdk请求参数结构体
+ * UpdateDiagnoseSettings返回参数结构体
  */
-export interface UpdateJdkRequest {
+export interface UpdateDiagnoseSettingsResponse {
     /**
-      * ES实例ID
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    InstanceId: string;
-    /**
-      * Jdk类型，支持kona和oracle
-      */
-    Jdk?: string;
-    /**
-      * Gc类型，支持g1和cms
-      */
-    Gc?: string;
-    /**
-      * 是否强制重启
-      */
-    ForceRestart?: boolean;
+    RequestId?: string;
 }
 /**
  * DescribeIndexMeta返回参数结构体
@@ -217,6 +205,27 @@ export interface DescribeInstanceOperationsRequest {
       * 分页大小
       */
     Limit: number;
+}
+/**
+ * UpdateJdk请求参数结构体
+ */
+export interface UpdateJdkRequest {
+    /**
+      * ES实例ID
+      */
+    InstanceId: string;
+    /**
+      * Jdk类型，支持kona和oracle
+      */
+    Jdk?: string;
+    /**
+      * Gc类型，支持g1和cms
+      */
+    Gc?: string;
+    /**
+      * 是否强制重启
+      */
+    ForceRestart?: boolean;
 }
 /**
  * CreateIndex返回参数结构体
@@ -503,6 +512,28 @@ export interface UpdateRequestTargetNodeTypesRequest {
       * 接收请求的目标节点类型列表
       */
     TargetNodeTypes: Array<string>;
+}
+/**
+ * 集群可运维时间
+ */
+export interface OperationDuration {
+    /**
+      * 维护周期，表示周一到周日，可取值[0, 6]
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Periods: Array<number>;
+    /**
+      * 维护开始时间
+      */
+    TimeStart: string;
+    /**
+      * 维护结束时间
+      */
+    TimeEnd: string;
+    /**
+      * 时区，以UTC形式表示
+      */
+    TimeZone: string;
 }
 /**
  * 节点维度视图数据
@@ -793,6 +824,10 @@ export interface CreateInstanceRequest {
       * 创建https集群，默认是http
       */
     Protocol?: string;
+    /**
+      * 可维护时间段
+      */
+    OperationDuration?: OperationDuration;
 }
 /**
  * UpdateDictionaries返回参数结构体
@@ -1151,6 +1186,11 @@ RENEW_FLAG_DEFAULT：不自动续费
 注意：此字段可能返回 null，表示取不到有效值。
       */
     EsConfigSets: Array<EsConfigSetInfo>;
+    /**
+      * 集群可维护时间段
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OperationDuration: OperationDuration;
 }
 /**
  * DeleteInstance返回参数结构体
@@ -1365,6 +1405,10 @@ export interface DescribeInstancesRequest {
       * 健康状态筛列表
       */
     HealthStatus?: Array<number>;
+    /**
+      * Vpc列表 筛选项
+      */
+    VpcIds?: Array<string>;
 }
 /**
  * CreateIndex请求参数结构体
@@ -1620,6 +1664,10 @@ export interface UpdateInstanceRequest {
       * 新增或修改的配置组信息
       */
     EsConfigSet?: EsConfigSetInfo;
+    /**
+      * 可维护时间段
+      */
+    OperationDuration?: OperationDurationUpdated;
 }
 /**
  * ES 词库信息
@@ -1748,13 +1796,29 @@ export interface KibanaNodeInfo {
     KibanaNodeDiskSize: number;
 }
 /**
- * UpdateDiagnoseSettings返回参数结构体
+ * 集群可运维时间
  */
-export interface UpdateDiagnoseSettingsResponse {
+export interface OperationDurationUpdated {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 维护周期，表示周一到周日，可取值[0, 6]
       */
-    RequestId?: string;
+    Periods: Array<number>;
+    /**
+      * 维护开始时间
+      */
+    TimeStart: string;
+    /**
+      * 维护结束时间
+      */
+    TimeEnd: string;
+    /**
+      * 时区，以UTC形式表示
+      */
+    TimeZone: string;
+    /**
+      * ES集群ID数组
+      */
+    MoreInstances?: Array<string>;
 }
 /**
  * UpgradeLicense返回参数结构体

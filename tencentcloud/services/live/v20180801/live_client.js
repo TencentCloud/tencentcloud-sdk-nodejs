@@ -106,12 +106,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeLiveStreamEventList", req, cb);
     }
     /**
-     * 该接口用来创建通用混流。用法与旧接口 mix_streamv2.start_mix_stream_advanced 基本一致。
-注意：当前最多支持16路混流。
-最佳实践：https://cloud.tencent.com/document/product/267/45566
+     * 查询直播拉流配置。
      */
-    async CreateCommonMixStream(req, cb) {
-        return this.request("CreateCommonMixStream", req, cb);
+    async DescribePullStreamConfigs(req, cb) {
+        return this.request("DescribePullStreamConfigs", req, cb);
     }
     /**
      * 查询某段时间内5分钟粒度的各播放http状态码的个数。
@@ -186,12 +184,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeLiveRecordTemplates(req, cb) {
         return this.request("DescribeLiveRecordTemplates", req, cb);
-    }
-    /**
-     * 修改域名和证书绑定信息
-     */
-    async ModifyLiveDomainCert(req, cb) {
-        return this.request("ModifyLiveDomainCert", req, cb);
     }
     /**
      * 查询某时间段top n的域名或流id信息（暂支持top 1000）。
@@ -291,10 +283,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("StopScreenshotTask", req, cb);
     }
     /**
-     * 查询直播拉流配置。
+     * 该接口用来创建通用混流。用法与旧接口 mix_streamv2.start_mix_stream_advanced 基本一致。
+注意：当前最多支持16路混流。
+最佳实践：https://cloud.tencent.com/document/product/267/45566
      */
-    async DescribePullStreamConfigs(req, cb) {
-        return this.request("DescribePullStreamConfigs", req, cb);
+    async CreateCommonMixStream(req, cb) {
+        return this.request("CreateCommonMixStream", req, cb);
     }
     /**
      * 删除水印。
@@ -399,12 +393,6 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
         return this.request("DescribeLiveCert", req, cb);
     }
     /**
-     * 修改证书
-     */
-    async ModifyLiveCert(req, cb) {
-        return this.request("ModifyLiveCert", req, cb);
-    }
-    /**
      * 根据域名状态、类型等信息查询用户的域名信息。
      */
     async DescribeLiveDomains(req, cb) {
@@ -417,12 +405,6 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
      */
     async ModifyLivePullStreamTask(req, cb) {
         return this.request("ModifyLivePullStreamTask", req, cb);
-    }
-    /**
-     * 删除域名对应的证书
-     */
-    async DeleteLiveCert(req, cb) {
-        return this.request("DeleteLiveCert", req, cb);
     }
     /**
      * 创建回调模板，成功返回模板id后，需要调用[CreateLiveCallbackRule](/document/product/267/32638)接口将模板 ID 绑定到域名/路径使用。
@@ -475,12 +457,6 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
      */
     async DescribeStreamPlayInfoList(req, cb) {
         return this.request("DescribeStreamPlayInfoList", req, cb);
-    }
-    /**
-     * 添加证书
-     */
-    async CreateLiveCert(req, cb) {
-        return this.request("CreateLiveCert", req, cb);
     }
     /**
      * 获取转码规则列表
@@ -590,13 +566,6 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
      */
     async CreateLiveCallbackRule(req, cb) {
         return this.request("CreateLiveCallbackRule", req, cb);
-    }
-    /**
-     * 域名绑定证书。
-注意：需先调用添加证书接口进行证书添加。获取到证书Id后再调用该接口进行绑定。
-     */
-    async BindLiveDomainCert(req, cb) {
-        return this.request("BindLiveDomainCert", req, cb);
     }
     /**
      * 获取回调规则列表

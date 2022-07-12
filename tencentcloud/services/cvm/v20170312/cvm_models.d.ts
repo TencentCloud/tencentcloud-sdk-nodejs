@@ -1075,7 +1075,7 @@ export interface DescribeInstancesOperationLimitRequest {
  */
 export interface ModifyInstancesChargeTypeRequest {
     /**
-      * 一个或多个待操作的实例ID。可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728)接口返回值中的`InstanceId`获取。每次请求批量实例的上限为100。
+      * 一个或多个待操作的实例ID。可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728)接口返回值中的`InstanceId`获取。每次请求批量实例的上限为30。
       */
     InstanceIds: Array<string>;
     /**
@@ -3192,6 +3192,10 @@ export interface CreateKeyPairRequest {
 <li>通过调用接口DescribeProject，取返回信息中的`projectId `获取项目ID。
       */
     ProjectId: number;
+    /**
+      * 标签描述列表。通过指定该参数可以同时绑定标签到密钥对。
+      */
+    TagSpecification?: Array<TagSpecification>;
 }
 /**
  * 描述实例的状态。状态类型详见[实例状态表](/document/api/213/15753#InstanceStatus)
@@ -4722,6 +4726,10 @@ export interface ImportKeyPairRequest {
       * 密钥对的公钥内容，`OpenSSH RSA` 格式。
       */
     PublicKey: string;
+    /**
+      * 标签描述列表。通过指定该参数可以同时绑定标签到密钥对。
+      */
+    TagSpecification?: Array<TagSpecification>;
 }
 /**
  * 描述密钥对信息

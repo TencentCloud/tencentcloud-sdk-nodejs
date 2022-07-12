@@ -129,6 +129,7 @@ import {
   CreateConfigRequest,
   CreateShipperResponse,
   DeleteIndexResponse,
+  AlarmAnalysisConfig,
   ModifyIndexRequest,
   Column,
   CompressInfo,

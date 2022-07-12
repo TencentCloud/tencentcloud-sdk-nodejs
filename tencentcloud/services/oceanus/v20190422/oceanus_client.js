@@ -28,34 +28,34 @@ class Client extends abstract_client_1.AbstractClient {
         super("oceanus.tencentcloudapi.com", "2019-04-22", clientConfig);
     }
     /**
-     * 批量停止作业，批量操作数量上限为20
+     * 生成树状作业显示结构
      */
-    async StopJobs(req, cb) {
-        return this.request("StopJobs", req, cb);
+    async DescribeTreeJobs(req, cb) {
+        return this.request("DescribeTreeJobs", req, cb);
     }
     /**
-     * 触发Savepoint
+     * 删除资源版本
      */
-    async TriggerJobSavepoint(req, cb) {
-        return this.request("TriggerJobSavepoint", req, cb);
+    async DeleteResourceConfigs(req, cb) {
+        return this.request("DeleteResourceConfigs", req, cb);
     }
     /**
-     * 描述资源接口
+     * 创建资源配置接口
      */
-    async DescribeResources(req, cb) {
-        return this.request("DescribeResources", req, cb);
+    async CreateResourceConfig(req, cb) {
+        return this.request("CreateResourceConfig", req, cb);
     }
     /**
-     * 新建作业接口，一个 AppId 最多允许创建1000个作业
+     * 删除作业表配置
      */
-    async CreateJob(req, cb) {
-        return this.request("CreateJob", req, cb);
+    async DeleteTableConfig(req, cb) {
+        return this.request("DeleteTableConfig", req, cb);
     }
     /**
-     * 创建资源接口
+     * 描述资源配置接口
      */
-    async CreateResource(req, cb) {
-        return this.request("CreateResource", req, cb);
+    async DescribeResourceConfigs(req, cb) {
+        return this.request("DescribeResourceConfigs", req, cb);
     }
     /**
      * 查找Savepoint列表
@@ -64,16 +64,58 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeJobSavepoint", req, cb);
     }
     /**
+     * 描述资源接口
+     */
+    async DescribeResources(req, cb) {
+        return this.request("DescribeResources", req, cb);
+    }
+    /**
+     * 查询集群
+     */
+    async DescribeClusters(req, cb) {
+        return this.request("DescribeClusters", req, cb);
+    }
+    /**
+     * 新建作业接口，一个 AppId 最多允许创建1000个作业
+     */
+    async CreateJob(req, cb) {
+        return this.request("CreateJob", req, cb);
+    }
+    /**
+     * 触发Savepoint
+     */
+    async TriggerJobSavepoint(req, cb) {
+        return this.request("TriggerJobSavepoint", req, cb);
+    }
+    /**
      * 批量启动或者恢复作业，批量操作数量上限20
      */
     async RunJobs(req, cb) {
         return this.request("RunJobs", req, cb);
     }
     /**
-     * 删除资源接口
+     * 批量删除作业接口，批量操作数量上限20
      */
-    async DeleteResources(req, cb) {
-        return this.request("DeleteResources", req, cb);
+    async DeleteJobs(req, cb) {
+        return this.request("DeleteJobs", req, cb);
+    }
+    /**
+     * 检查快照是否可用
+     */
+    async CheckSavepoint(req, cb) {
+        return this.request("CheckSavepoint", req, cb);
+    }
+    /**
+     * 创建作业配置，一个作业最多有100个配置版本
+     */
+    async CreateJobConfig(req, cb) {
+        return this.request("CreateJobConfig", req, cb);
+    }
+    /**
+     * 批量停止作业，批量操作数量上限为20
+     */
+    async StopJobs(req, cb) {
+        return this.request("StopJobs", req, cb);
     }
     /**
      * 获取资源关联作业信息
@@ -82,16 +124,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeResourceRelatedJobs", req, cb);
     }
     /**
+     * 删除资源接口
+     */
+    async DeleteResources(req, cb) {
+        return this.request("DeleteResources", req, cb);
+    }
+    /**
      * 查询作业
      */
     async DescribeJobs(req, cb) {
         return this.request("DescribeJobs", req, cb);
-    }
-    /**
-     * 描述系统资源接口
-     */
-    async DescribeSystemResources(req, cb) {
-        return this.request("DescribeSystemResources", req, cb);
     }
     /**
      * 更新作业属性，仅允许以下3种操作，不支持组合操作：
@@ -110,40 +152,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyJob", req, cb);
     }
     /**
-     * 删除资源版本
+     * 创建资源接口
      */
-    async DeleteResourceConfigs(req, cb) {
-        return this.request("DeleteResourceConfigs", req, cb);
+    async CreateResource(req, cb) {
+        return this.request("CreateResource", req, cb);
     }
     /**
-     * 检查快照是否可用
+     * 描述系统资源接口
      */
-    async CheckSavepoint(req, cb) {
-        return this.request("CheckSavepoint", req, cb);
-    }
-    /**
-     * 创建资源配置接口
-     */
-    async CreateResourceConfig(req, cb) {
-        return this.request("CreateResourceConfig", req, cb);
-    }
-    /**
-     * 创建作业配置，一个作业最多有100个配置版本
-     */
-    async CreateJobConfig(req, cb) {
-        return this.request("CreateJobConfig", req, cb);
-    }
-    /**
-     * 删除作业表配置
-     */
-    async DeleteTableConfig(req, cb) {
-        return this.request("DeleteTableConfig", req, cb);
-    }
-    /**
-     * 描述资源配置接口
-     */
-    async DescribeResourceConfigs(req, cb) {
-        return this.request("DescribeResourceConfigs", req, cb);
+    async DescribeSystemResources(req, cb) {
+        return this.request("DescribeSystemResources", req, cb);
     }
     /**
      * 查询作业配置列表，一次最多查询100个

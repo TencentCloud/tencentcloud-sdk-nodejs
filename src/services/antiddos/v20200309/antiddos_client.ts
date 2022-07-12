@@ -57,16 +57,19 @@ import {
   CreateIPAlarmThresholdConfigRequest,
   CreateCcBlackWhiteIpListResponse,
   DescribeDefaultAlarmThresholdResponse,
+  CreateNewL7RulesResponse,
   CreateDDoSAIRequest,
   DescribeListProtectThresholdConfigRequest,
   ModifyNewDomainRulesResponse,
   CcBlackWhiteIpPolicy,
   DescribeDDoSConnectLimitListResponse,
+  L7RuleHealth,
   ModifyPacketFilterConfigResponse,
   DescribeCCLevelPolicyRequest,
   CreateWaterPrintConfigResponse,
   DescribeOverviewAttackTrendRequest,
   DescribeListBGPIPInstancesRequest,
+  DescribeNewL7RulesResponse,
   StaticPackRelation,
   CreatePortAclConfigRequest,
   DescribeCCThresholdListResponse,
@@ -95,6 +98,7 @@ import {
   EipAddressPackRelation,
   CreateDDoSBlackWhiteIpListResponse,
   ModifyCcBlackWhiteIpListResponse,
+  DescribeNewL7RulesRequest,
   ProtocolBlockRelation,
   DescribeListPacketFilterConfigRequest,
   DescribeOverviewIndexRequest,
@@ -187,6 +191,7 @@ import {
   DescribeListDDoSAIRequest,
   DescribeListIPAlarmConfigRequest,
   PortSegment,
+  CreateNewL7RulesRequest,
   DescribeOverviewCCTrendResponse,
   ModifyCCReqLimitPolicyResponse,
   DefaultAlarmThreshold,
@@ -435,6 +440,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 添加7层转发规则
+   */
+  async CreateNewL7Rules(
+    req: CreateNewL7RulesRequest,
+    cb?: (error: string, rep: CreateNewL7RulesResponse) => void
+  ): Promise<CreateNewL7RulesResponse> {
+    return this.request("CreateNewL7Rules", req, cb)
+  }
+
+  /**
    * 删除DDoS防护的水印防护配置
    */
   async DeleteWaterPrintConfig(
@@ -562,6 +577,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteDDoSSpeedLimitConfigResponse) => void
   ): Promise<DeleteDDoSSpeedLimitConfigResponse> {
     return this.request("DeleteDDoSSpeedLimitConfig", req, cb)
+  }
+
+  /**
+   * 高防IP获取7层规则
+   */
+  async DescribeNewL7Rules(
+    req: DescribeNewL7RulesRequest,
+    cb?: (error: string, rep: DescribeNewL7RulesResponse) => void
+  ): Promise<DescribeNewL7RulesResponse> {
+    return this.request("DescribeNewL7Rules", req, cb)
   }
 
   /**

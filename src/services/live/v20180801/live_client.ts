@@ -21,7 +21,7 @@ import {
   CreateLiveSnapshotRuleRequest,
   BillDataInfo,
   EnableLiveDomainResponse,
-  CreateLiveCertRequest,
+  DescribeUploadStreamNumsResponse,
   HlsSpecialParam,
   TranscodeTotalInfo,
   StopRecordTaskResponse,
@@ -40,7 +40,7 @@ import {
   DeleteLiveSnapshotTemplateRequest,
   DescribeGroupProIspPlayInfoListResponse,
   PushAuthKeyInfo,
-  DescribeUploadStreamNumsResponse,
+  DomainInfoList,
   PlayCodeTotalInfo,
   DeleteLiveRecordTemplateRequest,
   DeleteLiveCallbackTemplateResponse,
@@ -59,7 +59,7 @@ import {
   DescribeLiveCertRequest,
   CreateLivePullStreamTaskResponse,
   ModifyLivePushAuthKeyRequest,
-  DeleteLiveCallbackTemplateRequest,
+  DeleteLiveSnapshotTemplateResponse,
   DescribeLiveStreamStateRequest,
   DescribeLivePlayAuthKeyResponse,
   DescribeLiveCallbackTemplatesRequest,
@@ -83,7 +83,6 @@ import {
   DescribeLiveStreamPushInfoListResponse,
   DescribeLiveDomainCertResponse,
   DescribeLiveRecordTemplateRequest,
-  ModifyLiveDomainCertRequest,
   StreamOnlineInfo,
   CreateLiveWatermarkRuleResponse,
   ModifyLiveSnapshotTemplateResponse,
@@ -92,14 +91,12 @@ import {
   DescribeDeliverBandwidthListRequest,
   DescribeScreenshotTaskResponse,
   AddLiveWatermarkRequest,
-  ModifyLiveTranscodeTemplateResponse,
   BillCountryInfo,
-  ModifyLiveRecordTemplateResponse,
   ModifyLivePlayDomainRequest,
   DeleteLiveRecordTemplateResponse,
   DescribeLiveWatermarkRequest,
   LogInfo,
-  CommonMixLayoutParams,
+  AddDelayLiveStreamRequest,
   DescribeLiveDomainCertRequest,
   DescribeLiveStreamEventListRequest,
   DescribePullStreamConfigsRequest,
@@ -149,17 +146,15 @@ import {
   StreamEventInfo,
   DeleteRecordTaskResponse,
   DescribeLiveWatermarksRequest,
-  DescribeLivePackageInfoResponse,
   CreateLiveTranscodeRuleRequest,
   DescribeLiveWatermarkRulesRequest,
   DropLiveStreamRequest,
   StopLiveRecordResponse,
-  UpdateLiveWatermarkRequest,
   CreateCommonMixStreamRequest,
   RefererAuthConfig,
-  CreateLiveCertResponse,
+  ProIspPlaySumInfo,
   PushDataInfo,
-  AddDelayLiveStreamRequest,
+  CommonMixLayoutParams,
   DescribeGroupProIspPlayInfoListRequest,
   ModifyPullStreamStatusRequest,
   DescribeStreamDayPlayInfoListRequest,
@@ -186,7 +181,6 @@ import {
   DescribeStreamPushInfoListRequest,
   DescribeLivePullStreamTasksResponse,
   ModifyLivePushAuthKeyResponse,
-  DomainInfoList,
   DescribeLiveWatermarkResponse,
   ResumeLiveStreamResponse,
   DescribeLiveStreamOnlineListResponse,
@@ -199,20 +193,20 @@ import {
   DescribeLiveForbidStreamListRequest,
   DescribeLiveDomainPlayInfoListRequest,
   CreatePullStreamConfigResponse,
-  BindLiveDomainCertRequest,
+  DescribeLivePackageInfoResponse,
   DescribeTopClientIpSumInfoListRequest,
   CreateLiveCallbackRuleRequest,
   DeleteLiveWatermarkRuleResponse,
   DescribeCallbackRecordsListResponse,
   PublishTime,
-  ModifyLiveCertResponse,
+  ModifyLiveTranscodeTemplateResponse,
   MonitorStreamPlayInfo,
   DescribePlayErrorCodeSumInfoListRequest,
   DescribeLiveTranscodeDetailInfoRequest,
   ModifyLiveDomainRefererResponse,
   DeleteLiveWatermarkRequest,
   DescribeLiveDomainsRequest,
-  ProIspPlaySumInfo,
+  RecentPullInfo,
   SnapshotTemplateInfo,
   DeleteLiveSnapshotRuleResponse,
   CreateLiveRecordRequest,
@@ -220,7 +214,7 @@ import {
   BandwidthInfo,
   DescribeLogDownloadListResponse,
   CancelCommonMixStreamRequest,
-  RecentPullInfo,
+  UpdateLiveWatermarkRequest,
   CertInfo,
   DescribeRecordTaskResponse,
   DescribeLiveDelayInfoListResponse,
@@ -231,7 +225,7 @@ import {
   CreateLiveSnapshotTemplateResponse,
   DescribeConcurrentRecordStreamNumRequest,
   DeleteScreenshotTaskResponse,
-  ModifyLiveCertRequest,
+  ModifyLiveRecordTemplateResponse,
   CommonMixControlParams,
   ModifyLiveRecordTemplateRequest,
   DescribeAreaBillBandwidthAndFluxListResponse,
@@ -259,7 +253,6 @@ import {
   DeleteLiveCallbackRuleRequest,
   PlayAuthKeyInfo,
   ModifyLiveTranscodeTemplateRequest,
-  ModifyLiveDomainCertResponse,
   ModifyLiveCallbackTemplateResponse,
   EnableLiveDomainRequest,
   DescribeAllStreamPlayInfoListResponse,
@@ -270,7 +263,6 @@ import {
   CreateLiveCallbackRuleResponse,
   DescribeLiveRecordTemplateResponse,
   DescribeAreaBillBandwidthAndFluxListRequest,
-  BindLiveDomainCertResponse,
   CallBackRuleInfo,
   PlaySumStatInfo,
   DescribeLiveTranscodeTemplatesRequest,
@@ -280,9 +272,8 @@ import {
   DescribeLiveDomainPlayInfoListResponse,
   HttpCodeValue,
   DescribeLiveStreamOnlineListRequest,
-  DeleteLiveSnapshotTemplateResponse,
+  DeleteLiveCallbackTemplateRequest,
   DescribeLiveSnapshotTemplateRequest,
-  DeleteLiveCertResponse,
   CreateCommonMixStreamResponse,
   ModifyLiveDomainRefererRequest,
   CreateLiveCallbackTemplateResponse,
@@ -322,7 +313,6 @@ import {
   CreateLiveRecordTemplateRequest,
   TemplateInfo,
   DescribeProIspPlaySumInfoListResponse,
-  DeleteLiveCertRequest,
   DescribeHttpStatusInfoListResponse,
   DeleteLiveRecordRuleResponse,
 } from "./live_models"
@@ -451,15 +441,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 该接口用来创建通用混流。用法与旧接口 mix_streamv2.start_mix_stream_advanced 基本一致。
-注意：当前最多支持16路混流。
-最佳实践：https://cloud.tencent.com/document/product/267/45566
-     */
-  async CreateCommonMixStream(
-    req: CreateCommonMixStreamRequest,
-    cb?: (error: string, rep: CreateCommonMixStreamResponse) => void
-  ): Promise<CreateCommonMixStreamResponse> {
-    return this.request("CreateCommonMixStream", req, cb)
+   * 查询直播拉流配置。
+   */
+  async DescribePullStreamConfigs(
+    req: DescribePullStreamConfigsRequest,
+    cb?: (error: string, rep: DescribePullStreamConfigsResponse) => void
+  ): Promise<DescribePullStreamConfigsResponse> {
+    return this.request("DescribePullStreamConfigs", req, cb)
   }
 
   /**
@@ -578,16 +566,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeLiveRecordTemplatesResponse) => void
   ): Promise<DescribeLiveRecordTemplatesResponse> {
     return this.request("DescribeLiveRecordTemplates", req, cb)
-  }
-
-  /**
-   * 修改域名和证书绑定信息
-   */
-  async ModifyLiveDomainCert(
-    req: ModifyLiveDomainCertRequest,
-    cb?: (error: string, rep: ModifyLiveDomainCertResponse) => void
-  ): Promise<ModifyLiveDomainCertResponse> {
-    return this.request("ModifyLiveDomainCert", req, cb)
   }
 
   /**
@@ -748,13 +726,15 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询直播拉流配置。
-   */
-  async DescribePullStreamConfigs(
-    req: DescribePullStreamConfigsRequest,
-    cb?: (error: string, rep: DescribePullStreamConfigsResponse) => void
-  ): Promise<DescribePullStreamConfigsResponse> {
-    return this.request("DescribePullStreamConfigs", req, cb)
+     * 该接口用来创建通用混流。用法与旧接口 mix_streamv2.start_mix_stream_advanced 基本一致。
+注意：当前最多支持16路混流。
+最佳实践：https://cloud.tencent.com/document/product/267/45566
+     */
+  async CreateCommonMixStream(
+    req: CreateCommonMixStreamRequest,
+    cb?: (error: string, rep: CreateCommonMixStreamResponse) => void
+  ): Promise<CreateCommonMixStreamResponse> {
+    return this.request("CreateCommonMixStream", req, cb)
   }
 
   /**
@@ -916,16 +896,6 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
   }
 
   /**
-   * 修改证书
-   */
-  async ModifyLiveCert(
-    req: ModifyLiveCertRequest,
-    cb?: (error: string, rep: ModifyLiveCertResponse) => void
-  ): Promise<ModifyLiveCertResponse> {
-    return this.request("ModifyLiveCert", req, cb)
-  }
-
-  /**
    * 根据域名状态、类型等信息查询用户的域名信息。
    */
   async DescribeLiveDomains(
@@ -945,16 +915,6 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
     cb?: (error: string, rep: ModifyLivePullStreamTaskResponse) => void
   ): Promise<ModifyLivePullStreamTaskResponse> {
     return this.request("ModifyLivePullStreamTask", req, cb)
-  }
-
-  /**
-   * 删除域名对应的证书
-   */
-  async DeleteLiveCert(
-    req: DeleteLiveCertRequest,
-    cb?: (error: string, rep: DeleteLiveCertResponse) => void
-  ): Promise<DeleteLiveCertResponse> {
-    return this.request("DeleteLiveCert", req, cb)
   }
 
   /**
@@ -1039,16 +999,6 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
     cb?: (error: string, rep: DescribeStreamPlayInfoListResponse) => void
   ): Promise<DescribeStreamPlayInfoListResponse> {
     return this.request("DescribeStreamPlayInfoList", req, cb)
-  }
-
-  /**
-   * 添加证书
-   */
-  async CreateLiveCert(
-    req: CreateLiveCertRequest,
-    cb?: (error: string, rep: CreateLiveCertResponse) => void
-  ): Promise<CreateLiveCertResponse> {
-    return this.request("CreateLiveCert", req, cb)
   }
 
   /**
@@ -1230,17 +1180,6 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
     cb?: (error: string, rep: CreateLiveCallbackRuleResponse) => void
   ): Promise<CreateLiveCallbackRuleResponse> {
     return this.request("CreateLiveCallbackRule", req, cb)
-  }
-
-  /**
-     * 域名绑定证书。
-注意：需先调用添加证书接口进行证书添加。获取到证书Id后再调用该接口进行绑定。
-     */
-  async BindLiveDomainCert(
-    req: BindLiveDomainCertRequest,
-    cb?: (error: string, rep: BindLiveDomainCertResponse) => void
-  ): Promise<BindLiveDomainCertResponse> {
-    return this.request("BindLiveDomainCert", req, cb)
   }
 
   /**

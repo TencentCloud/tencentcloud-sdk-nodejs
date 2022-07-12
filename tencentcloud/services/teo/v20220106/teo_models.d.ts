@@ -948,6 +948,11 @@ export interface DescribeZoneDetailsResponse {
       */
     CnameStatus: string;
     /**
+      * 资源标签
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Tags: Array<Tag>;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
@@ -1469,17 +1474,19 @@ export interface DeleteOriginGroupRequest {
     ZoneId: string;
 }
 /**
- * 用于对top数据排序的结构体
+ * 标签配置
  */
-export interface TopDetailData {
+export interface Tag {
     /**
-      * 字段名
+      * 标签键
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Key: string;
+    TagKey: string;
     /**
-      * 字段值
+      * 标签值
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Value: number;
+    TagValue: string;
 }
 /**
  * ModifyHostsCertificate返回参数结构体
@@ -1743,6 +1750,11 @@ export interface Zone {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     CnameStatus: string;
+    /**
+      * 资源标签
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Tags: Array<Tag>;
 }
 /**
  * 站点查询过滤条件
@@ -1752,6 +1764,8 @@ export interface ZoneFilter {
       * 过滤字段名，支持的列表如下：
 - name: 站点名。
 - status: 站点状态
+- tagKey: 标签键
+- tagValue: 标签值
       */
     Name: string;
     /**
@@ -2393,6 +2407,19 @@ export interface WebLogs {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     AttackTime: number;
+}
+/**
+ * 用于对top数据排序的结构体
+ */
+export interface TopDetailData {
+    /**
+      * 字段名
+      */
+    Key: string;
+    /**
+      * 字段值
+      */
+    Value: number;
 }
 /**
  * CreatePrefetchTask请求参数结构体
@@ -3390,6 +3417,10 @@ export interface CreateZoneRequest {
       * 是否跳过站点历史解析记录扫描
       */
     JumpStart?: boolean;
+    /**
+      * 资源标签
+      */
+    Tags?: Array<Tag>;
 }
 /**
  * RateLimit配置

@@ -52,7 +52,7 @@ export declare class Client extends AbstractClient {
      */
     SetSecurityGroupForLoadbalancers(req: SetSecurityGroupForLoadbalancersRequest, cb?: (error: string, rep: SetSecurityGroupForLoadbalancersResponse) => void): Promise<SetSecurityGroupForLoadbalancersResponse>;
     /**
-     * 批量解绑四七层后端服务。批量解绑的资源数量上限为500。
+     * 批量解绑四七层后端服务。批量解绑的资源数量上限为500。只支持VPC网络负载均衡。
      */
     BatchDeregisterTargets(req: BatchDeregisterTargetsRequest, cb?: (error: string, rep: BatchDeregisterTargetsResponse) => void): Promise<BatchDeregisterTargetsResponse>;
     /**
@@ -200,7 +200,7 @@ export declare class Client extends AbstractClient {
      */
     CreateListener(req: CreateListenerRequest, cb?: (error: string, rep: CreateListenerResponse) => void): Promise<CreateListenerResponse>;
     /**
-     * 批量绑定虚拟主机或弹性网卡，支持跨域绑定，支持四层、七层（TCP、UDP、HTTP、HTTPS）协议绑定。批量绑定的资源数量上限为500。
+     * 批量绑定虚拟主机或弹性网卡，支持跨域绑定，支持四层、七层（TCP、UDP、HTTP、HTTPS）协议绑定。批量绑定的资源数量上限为500。只支持VPC网络负载均衡。
      */
     BatchRegisterTargets(req: BatchRegisterTargetsRequest, cb?: (error: string, rep: BatchRegisterTargetsResponse) => void): Promise<BatchRegisterTargetsResponse>;
     /**

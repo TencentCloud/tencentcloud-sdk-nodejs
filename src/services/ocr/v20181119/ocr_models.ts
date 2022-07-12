@@ -410,11 +410,6 @@ export interface FlightInvoiceOCRRequest {
  */
 export interface RecognizePhilippinesDrivingLicenseOCRRequest {
   /**
-   * 是否返回人像照片。
-   */
-  ReturnHeadImage: boolean
-
-  /**
       * 图片的 Base64 值。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
 支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
@@ -430,6 +425,11 @@ export interface RecognizePhilippinesDrivingLicenseOCRRequest {
 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
       */
   ImageUrl?: string
+
+  /**
+   * 是否返回人像照片。
+   */
+  ReturnHeadImage?: boolean
 }
 
 /**
@@ -2014,6 +2014,16 @@ export interface SmartStructuralOCRRequest {
 ItemNames=["姓名","性别"]
       */
   ItemNames?: Array<string>
+
+  /**
+   * 是否开启PDF识别，默认值为false，开启后可同时支持图片和PDF的识别。
+   */
+  IsPdf?: boolean
+
+  /**
+   * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。
+   */
+  PdfPageNumber?: number
 }
 
 /**
@@ -3631,12 +3641,12 @@ export interface RecognizeTravelCardOCRResponse {
   Color: string
 
   /**
-   * 14天内到达或途经的城市
+   * 7天内到达或途经的城市（自2022年7月8日起，通信行程卡查询结果的覆盖时间范围由“14天”调整为“7天”）
    */
   ReachedCity: Array<string>
 
   /**
-   * 14天内到达或途径存在中高风险地区的城市
+   * 7天内到达或途径存在中高风险地区的城市（自2022年6月29日起，通信行程卡取消“星号”标记，改字段将返回空值）
    */
   RiskArea: Array<string>
 

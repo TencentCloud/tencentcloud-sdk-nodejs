@@ -2001,13 +2001,17 @@ export interface AnalysisDimensional {
       */
     Name: string;
     /**
-      * 分析类型：query，field
+      * 分析类型：query，field ，original
       */
     Type: string;
     /**
       * 分析内容
       */
     Content: string;
+    /**
+      * 配置
+      */
+    ConfigInfo?: Array<AlarmAnalysisConfig>;
 }
 /**
  * 投递任务信息
@@ -2386,6 +2390,19 @@ export interface DeleteIndexResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 告警多维分析一些配置信息
+ */
+export interface AlarmAnalysisConfig {
+    /**
+      * 键
+      */
+    Key: string;
+    /**
+      * 值
+      */
+    Value: string;
 }
 /**
  * ModifyIndex请求参数结构体

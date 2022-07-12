@@ -110,7 +110,7 @@ export type InquireAuditCreditRequest = null
  */
 export interface DescribeEventsResponse {
   /**
-   * 日志集合是否结束
+   * 日志集合是否结束。true表示结束，无需进行翻页。
    */
   ListOver: boolean
 
@@ -126,7 +126,7 @@ export interface DescribeEventsResponse {
   Events: Array<Event>
 
   /**
-      * 总数
+      * 此字段已经废弃。翻页请使用ListOver配合NextToken，在ListOver为false进行下一页数据读取。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   TotalCount: number

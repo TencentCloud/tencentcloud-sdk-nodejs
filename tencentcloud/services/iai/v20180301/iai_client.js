@@ -82,6 +82,16 @@ class Client extends abstract_client_1.AbstractClient {
 
 >
 - 公共参数中的签名方式请使用V3版本，即配置SignatureMethod参数为TC3-HMAC-SHA256。
+
+## 调用次数计费（资源包）
+|资源包规格|100万次|1000万次|5000万次|1亿次|
+|-|-|-|-|-|
+|人脸静态活体检测|1800元|17400元|75000元|110000元|
+
+## 调用次数计费（后付费）
+|月接口调用总量|0<调用量≤300万|300万<调用量≤1500万|调用量>1500万|
+|-|-|-|-|
+|人脸静态活体检测|0.0019元/次|0.0017元/次|0.0013元/次|
      */
     async DetectLiveFace(req, cb) {
         return this.request("DetectLiveFace", req, cb);

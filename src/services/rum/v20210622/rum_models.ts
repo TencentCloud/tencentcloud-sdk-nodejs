@@ -183,6 +183,16 @@ export interface DescribeDataFetchProjectRequest {
    * 环境
    */
   Env?: string
+
+  /**
+   * httpcode响应码
+   */
+  Status?: string
+
+  /**
+   * retcode
+   */
+  Ret?: string
 }
 
 /**
@@ -1424,6 +1434,16 @@ export interface DescribeDataFetchUrlRequest {
    * 环境
    */
   Env?: string
+
+  /**
+   * httpcode响应码
+   */
+  Status?: string
+
+  /**
+   * retcode
+   */
+  Ret?: string
 }
 
 /**
@@ -2071,6 +2091,11 @@ export interface DescribeDataSetUrlStatisticsRequest {
    * 环境
    */
   Env?: string
+
+  /**
+   * 获取package
+   */
+  PackageType?: string
 }
 
 /**

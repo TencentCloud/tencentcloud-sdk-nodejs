@@ -1284,6 +1284,11 @@ export interface RuleInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ServerNameIndication: string;
+    /**
+      * 强转HTTPS指示，当传递值为https:时表示强转为https
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ForcedRedirect: string;
 }
 /**
  * 源站绑定信息查询，BindStatus， 0: 未被绑定 1：被规则或者监听器绑定
@@ -1734,6 +1739,10 @@ lc，最小连接数。
       * 服务器名称指示（ServerNameIndication，简称SNI），当SNI开关打开时，该字段必填。
       */
     ServerNameIndication?: string;
+    /**
+      * HTTP强制跳转HTTPS。输入当前规则对应的域名与地址。
+      */
+    ForcedRedirect?: string;
 }
 /**
  * CreateSecurityPolicy返回参数结构体
@@ -2817,6 +2826,10 @@ export interface CreateRuleRequest {
       * 服务器名称指示（ServerNameIndication，简称SNI），当SNI开关打开时，该字段必填。
       */
     ServerNameIndication?: string;
+    /**
+      * HTTP强制跳转HTTPS。输入当前规则对应的域名与地址。
+      */
+    ForcedRedirect?: string;
 }
 /**
  * 内部接口使用，返回可以查询统计数据的通道和对应的监听器信息

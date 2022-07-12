@@ -283,6 +283,16 @@ export interface KTVMusicDetailInfo {
    * 副歌片段信息。
    */
   ChorusClipSet: Array<ChorusClip>
+
+  /**
+   * 前奏间隔。
+   */
+  PreludeInterval: number
+
+  /**
+   * 歌曲流派列表。
+   */
+  GenreSet: Array<string>
 }
 
 /**

@@ -85,6 +85,7 @@ import {
   ModifyFlexPayeeAccountRightStatusResponse,
   ModifyMerchantResponse,
   ReturnContractInfo,
+  VerifyOpenBankAccountRequest,
   QuerySmallAmountTransferResponse,
   CityCodeResult,
   CreateFlexPayeeResponse,
@@ -103,6 +104,7 @@ import {
   QueryExceedingInfoResponse,
   AddContractRequest,
   CreateAcctResponse,
+  CreateOpenBankVerificationOrderResponse,
   PaymentOrderResult,
   DistributeAddReceiverRequest,
   QueryExchangerateData,
@@ -246,6 +248,7 @@ import {
   BindRelateAcctUnionPayRequest,
   FileItem,
   QueryCloudOrderResponse,
+  CreateOpenBankVerificationOrderRequest,
   QueryFlexFreezeOrderListResponse,
   PayeeTaxTemplateInfo,
   UnifiedOrderInSubOrderList,
@@ -281,6 +284,7 @@ import {
   CloudSubOrder,
   AnchorExtendInfo,
   QueryOpenBankExternalSubMerchantRegistrationResponse,
+  VerifyOpenBankAccountResponse,
   GetBillDownloadUrlRequest,
   CreatePayMerchantResponse,
   UnbindRelateAcctResponse,
@@ -314,6 +318,7 @@ import {
   CloudSubRefundItem,
   QueryOpenBankDownLoadUrlResponse,
   RevResigterBillSupportWithdrawResponse,
+  QueryOpenBankVerificationOrderResponse,
   ApplyApplicationMaterialResponse,
   DistributeQueryResult,
   OrderSummaries,
@@ -463,6 +468,7 @@ import {
   QueryBankTransactionDetailsResponse,
   PaymentOrderStatusResult,
   TransferSinglePayRequest,
+  QueryOpenBankVerificationOrderRequest,
   QueryFlexAmountBeforeTaxRequest,
   CreateSinglePayResponse,
   MigrateOrderRefundRequest,
@@ -512,6 +518,7 @@ import {
   CreateMerchantResult,
   RefundResponse,
   CreateTransferBatchRequest,
+  QueryOpenBankVerificationResult,
   WithdrawItem,
   QueryMemberTransactionRequest,
   QueryCityCodeRequest,
@@ -587,6 +594,7 @@ import {
   DistributeAccreditTlinxResponse,
   RechargeMemberThirdPayRequest,
   CreateInvoiceRequest,
+  VerifyOpenBankAccountResult,
   QueryOpenBankUnbindExternalSubMerchantBankAccountRequest,
   CreateFlexPayeeRequest,
   AnchorContractInfo,
@@ -616,6 +624,7 @@ import {
   QuerySinglePayResult,
   CloudExternalPromptInfo,
   DistributeCancelResponse,
+  CreateOpenBankVerificationResult,
   QueryOpenBankBankBranchListRequest,
   QueryOpenBankBankBranchListResult,
   ApplyTradeData,
@@ -771,6 +780,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: QueryOpenBankRefundOrderResponse) => void
   ): Promise<QueryOpenBankRefundOrderResponse> {
     return this.request("QueryOpenBankRefundOrder", req, cb)
+  }
+
+  /**
+   * 云企付-查询核销订单状态，客户可以使用该接口来查询核销申请的订单状态。目前仅支持TENPAY渠道EBANK_PAYMENT付款方式的担保支付订单查询。
+   */
+  async QueryOpenBankVerificationOrder(
+    req: QueryOpenBankVerificationOrderRequest,
+    cb?: (error: string, rep: QueryOpenBankVerificationOrderResponse) => void
+  ): Promise<QueryOpenBankVerificationOrderResponse> {
+    return this.request("QueryOpenBankVerificationOrder", req, cb)
   }
 
   /**
@@ -1224,7 +1243,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 云企付-创建支付订单
+   * 云企付-创建支付订单。支持B2B网关支付，B2C转账下单。
    */
   async CreateOpenBankPaymentOrder(
     req: CreateOpenBankPaymentOrderRequest,
@@ -1665,6 +1684,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 云企付-子商户银行卡打款验证，在接入TENPAY渠道EBANK_PAYMENT付款时，若客户期望接入担保支付，需在接入前先完成，收款商户绑定的银行卡进行打款验证。验证成功后，才可以调用CreateOpenBankPaymentOrder接口进行担保支付下单。
+   */
+  async VerifyOpenBankAccount(
+    req: VerifyOpenBankAccountRequest,
+    cb?: (error: string, rep: VerifyOpenBankAccountResponse) => void
+  ): Promise<VerifyOpenBankAccountResponse> {
+    return this.request("VerifyOpenBankAccount", req, cb)
+  }
+
+  /**
    * 灵云V2-收款用户开立
    */
   async CreateFlexPayee(
@@ -1906,6 +1935,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: QueryFundsTransactionDetailsResponse) => void
   ): Promise<QueryFundsTransactionDetailsResponse> {
     return this.request("QueryFundsTransactionDetails", req, cb)
+  }
+
+  /**
+   * 云企付-创建核销申请，适用于针对支付订单维度的确认收货，解冻等业务场景。目前支持的渠道有TENPAY下的EBANK_PAYMENT付款方式创建支付订单时，选择担保支付下单的订单进行解冻。
+   */
+  async CreateOpenBankVerificationOrder(
+    req: CreateOpenBankVerificationOrderRequest,
+    cb?: (error: string, rep: CreateOpenBankVerificationOrderResponse) => void
+  ): Promise<CreateOpenBankVerificationOrderResponse> {
+    return this.request("CreateOpenBankVerificationOrder", req, cb)
   }
 
   /**

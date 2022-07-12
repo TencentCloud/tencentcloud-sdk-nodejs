@@ -664,7 +664,8 @@ export interface DeployApplicationRequest {
       */
     EnablePrometheusConf?: EnablePrometheusConf;
     /**
-      * 1：开始apm采集；0：关闭apm采集
+      * 1：开始apm采集（skywalking）；
+0：关闭apm采集；
       */
     EnableTracing?: number;
 }
@@ -1425,7 +1426,7 @@ export interface ModifyApplicationInfoRequest {
       */
     SourceChannel?: number;
     /**
-      * 是否开启调用链, 0 为关闭，1位开启
+      * 是否开启调用链,（此参数已弃用）
       */
     EnableTracing?: number;
 }
@@ -1630,6 +1631,10 @@ export interface PortMapping {
       * 协议栈 TCP/UDP
       */
     Protocol: string;
+    /**
+      * k8s service名称
+      */
+    ServiceName?: string;
 }
 /**
  * 创建应用，创建仓库参数

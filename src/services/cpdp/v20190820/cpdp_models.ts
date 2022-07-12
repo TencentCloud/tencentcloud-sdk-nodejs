@@ -2181,6 +2181,11 @@ export interface FlexFundingAccountInfo {
    * 资金账户绑定序列号
    */
   FundingAccountBindSerialNo?: string
+
+  /**
+   * 资金账户名称
+   */
+  FundingAccountName?: string
 }
 
 /**
@@ -2270,6 +2275,40 @@ export interface ReturnContractInfo {
    * 第三方渠道合约信息
    */
   ExternalReturnContractInfo: ExternalReturnContractInfo
+}
+
+/**
+ * VerifyOpenBankAccount请求参数结构体
+ */
+export interface VerifyOpenBankAccountRequest {
+  /**
+   * 渠道商户号。外部接入平台入驻云企付平台下发
+   */
+  ChannelMerchantId: string
+
+  /**
+      * 渠道名称。详见附录-云企付枚举类说明-ChannelName。
+__TENPAY__: 商企付
+      */
+  ChannelName: string
+
+  /**
+   * 收款方信息。
+   */
+  PayeeInfo: OpenBankPayeeInfo
+
+  /**
+   * 通知地址，如www.test.com。
+   */
+  NotifyUrl?: string
+
+  /**
+      * 环境类型。
+__release__:生产环境
+__sandbox__:沙箱环境
+_不填默认为生产环境_
+      */
+  Environment?: string
 }
 
 /**
@@ -3183,6 +3222,33 @@ export interface CreateAcctResponse {
 }
 
 /**
+ * CreateOpenBankVerificationOrder返回参数结构体
+ */
+export interface CreateOpenBankVerificationOrderResponse {
+  /**
+   * 业务系统返回码，SUCCESS表示成功，其他表示失败。
+   */
+  ErrCode: string
+
+  /**
+      * 业务系统返回消息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ErrMessage: string
+
+  /**
+      * 核销申请响应对象。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result: CreateOpenBankVerificationResult
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 付款订单结果
  */
 export interface PaymentOrderResult {
@@ -3255,6 +3321,11 @@ FAILED:已失败
    * 收款用户ID
    */
   PayeeId: string
+
+  /**
+   * 外部用户ID
+   */
+  OutUserId: string
 }
 
 /**
@@ -5867,6 +5938,12 @@ OCCASION:偶然所得
 注意：此字段可能返回 null，表示取不到有效值。
       */
   InPayBalance: string
+
+  /**
+      * 累计结算金额
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SumSettlementAmount: string
 }
 
 /**
@@ -5967,6 +6044,16 @@ FAILED:已失败
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Remark: string
+
+  /**
+   * 收款用户ID
+   */
+  PayeeId: string
+
+  /**
+   * 外部用户ID
+   */
+  OutUserId: string
 }
 
 /**
@@ -7672,7 +7759,7 @@ export interface CreateOpenBankPaymentOrderRequest {
 __TENPAY__: 商企付
 __WECHAT__: 微信支付
 __ALIPAY__: 支付宝
-__WECHAT__: 微信支付
+__HUIFU__: 汇付斗拱
       */
   ChannelName: string
 
@@ -7682,6 +7769,8 @@ __EBANK_PAYMENT__:B2B EBank付款
 __OPENBANK_PAYMENT__:B2C  openbank付款
 __SAFT_ISV__:支付宝安心发
 __TRANS_TO_CHANGE__: 微信支付转账到零钱v2
+__TRANS_TO_CHANGE_V3__: 微信支付转账到零钱v3
+__ONLINEBANK__: 汇付网银
       */
   PaymentMethod: string
 
@@ -9498,6 +9587,21 @@ FAILED:已失败
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Remark: string
+
+  /**
+   * 收款用户ID
+   */
+  PayeeId: string
+
+  /**
+   * 外部用户ID
+   */
+  OutUserId: string
+
+  /**
+   * 操作类型
+   */
+  OperationType: string
 }
 
 /**
@@ -9618,6 +9722,59 @@ export interface QueryCloudOrderResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreateOpenBankVerificationOrder请求参数结构体
+ */
+export interface CreateOpenBankVerificationOrderRequest {
+  /**
+   * 云企付渠道商户号。外部接入平台入驻云企付平台后下发。
+   */
+  ChannelMerchantId: string
+
+  /**
+   * 外部核销申请订单号
+   */
+  OutVerificationId: string
+
+  /**
+   * 核销金额，单位分
+   */
+  VerificationAmount: number
+
+  /**
+   * 外部支付订单号。调用创建支付订单时，下单支付时的外部订单号。与ChannelOrderId不能同时为空。
+   */
+  OutOrderId?: string
+
+  /**
+   * 云企付渠道订单号。调用创建支付订单时，下单支付时的云企付渠道订单号。与OutOrderId不能同时为空。
+   */
+  ChannelOrderId?: string
+
+  /**
+   * 核销成功回调地址。若不上送，则不回调通知。
+   */
+  NotifyUrl?: string
+
+  /**
+   * 备注。
+   */
+  Remark?: string
+
+  /**
+   * 第三方支付渠道需要额外上送字段。详情见附录描述。
+   */
+  ExternalVerificationData?: string
+
+  /**
+      * 环境类型。
+__release__:生产环境
+__sandbox__:沙箱环境
+_不填默认为生产环境_
+      */
+  Environment?: string
 }
 
 /**
@@ -10439,11 +10596,6 @@ export interface QueryOpenBankBillDataPageResult {
  */
 export interface QueryFlexPaymentOrderListRequest {
   /**
-   * 收款用户ID
-   */
-  PayeeId: string
-
-  /**
    * 开始时间，格式"yyyy-MM-dd hh:mm:ss"
    */
   StartTime: string
@@ -10457,6 +10609,11 @@ export interface QueryFlexPaymentOrderListRequest {
    * 分页
    */
   PageNumber: Paging
+
+  /**
+   * 收款用户ID
+   */
+  PayeeId?: string
 
   /**
       * 环境类型
@@ -10873,6 +11030,33 @@ __其他__: 见附录-错误码表
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Result: QueryOpenBankExternalSubMerchantRegistrationResult
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * VerifyOpenBankAccount返回参数结构体
+ */
+export interface VerifyOpenBankAccountResponse {
+  /**
+   * 业务系统返回码，SUCCESS表示成功，其他表示失败。
+   */
+  ErrCode: string
+
+  /**
+      * 业务系统返回消息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ErrMessage: string
+
+  /**
+      * 打款验证结果。前端使用url字段，根据指引完成打款验证动作
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result: VerifyOpenBankAccountResult
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -12251,6 +12435,11 @@ export interface OrderSummaryResult {
    * 汇总记录数量
    */
   SummaryCount: number
+
+  /**
+   * 外部用户ID
+   */
+  OutUserId: string
 }
 
 /**
@@ -12400,6 +12589,33 @@ export interface RevResigterBillSupportWithdrawResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ReservedMsg?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * QueryOpenBankVerificationOrder返回参数结构体
+ */
+export interface QueryOpenBankVerificationOrderResponse {
+  /**
+   * 业务系统返回码，SUCCESS表示成功，其他表示失败。
+   */
+  ErrCode: string
+
+  /**
+      * 业务系统返回消息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ErrMessage: string
+
+  /**
+      * 核销查询响应对象。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result: QueryOpenBankVerificationResult
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -18442,6 +18658,34 @@ PayeeBankName：收款人开户行名称
 }
 
 /**
+ * QueryOpenBankVerificationOrder请求参数结构体
+ */
+export interface QueryOpenBankVerificationOrderRequest {
+  /**
+   * 云企付渠道商户号。外部接入平台入驻云企付平台后下发。
+   */
+  ChannelMerchantId: string
+
+  /**
+   * 云企付渠道核销订单号。与OutVerificationId不能同时为空。
+   */
+  ChannelVerificationId?: string
+
+  /**
+   * 外部核销申请订单号。与ChannelVerificationId不能同时为空。
+   */
+  OutVerificationId?: string
+
+  /**
+      * 环境类型。
+__release__:生产环境
+__sandbox__:沙箱环境
+_不填默认为生产环境_
+      */
+  Environment?: string
+}
+
+/**
  * QueryFlexAmountBeforeTax请求参数结构体
  */
 export interface QueryFlexAmountBeforeTaxRequest {
@@ -19967,6 +20211,47 @@ development: 开发环境
 缺省: release
       */
   Profile?: string
+}
+
+/**
+ * 云企付-查询核销申请结果
+ */
+export interface QueryOpenBankVerificationResult {
+  /**
+   * 云企付渠道核销订单号
+   */
+  ChannelVerificationId: string
+
+  /**
+   * 第三方支付渠道核销订单号
+   */
+  ThirdVerificationId: string
+
+  /**
+   * 核销金额，单位分
+   */
+  VerificationAmount: number
+
+  /**
+      * 核销状态
+INIT("INIT","初始化"),
+SUCCESS("SUCCESS","核销成功"),
+FAILED("FAILED","核销失败"),
+PROCESSING("PROCESSING","核销中");
+      */
+  VerificationStatus: string
+
+  /**
+      * 失败原因，若核销失败，附上原因。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FailReason: string
+
+  /**
+      * 渠道附加返回信息，一般情况可以不关注
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ThirdVerificationReturnData: string
 }
 
 /**
@@ -23412,6 +23697,26 @@ export interface CreateInvoiceRequest {
 }
 
 /**
+ * 打款验证响应结果结构体
+ */
+export interface VerifyOpenBankAccountResult {
+  /**
+      * 打款验证状态。
+ INIT("打款中"),
+PENDING("打款成功待验证"),
+VERIFIED("验证成功"),
+FAILED("打款失败"),
+VERIFY_FAILED("验证失败")
+      */
+  VerifyState: string
+
+  /**
+   * 重定向参数，用于客户端跳转，收款商户未完成打款验证时返回该参数
+   */
+  RedirectInfo: OpenBankRedirectInfo
+}
+
+/**
  * QueryOpenBankUnbindExternalSubMerchantBankAccount请求参数结构体
  */
 export interface QueryOpenBankUnbindExternalSubMerchantBankAccountRequest {
@@ -24349,6 +24654,41 @@ export interface DistributeCancelResponse {
 }
 
 /**
+ * 云企付-核销确认收货申请响应结果
+ */
+export interface CreateOpenBankVerificationResult {
+  /**
+   * 云企付渠道核销订单号
+   */
+  ChannelVerificationId: string
+
+  /**
+   * 第三方支付渠道核销订单号
+   */
+  ThirdVerificationId: string
+
+  /**
+      * 核销状态
+INIT("INIT","初始化"),
+SUCCESS("SUCCESS","核销成功"),
+FAILED("FAILED","核销失败"),
+PROCESSING("PROCESSING","核销中");
+      */
+  VerificationStatus: string
+
+  /**
+   * 核销金额，单位分
+   */
+  VerificationAmount: number
+
+  /**
+      * 渠道附加返回信息，一般情况可以不关注
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ThirdVerificationReturnInfo: string
+}
+
+/**
  * QueryOpenBankBankBranchList请求参数结构体
  */
 export interface QueryOpenBankBankBranchListRequest {
@@ -24544,17 +24884,17 @@ export interface RefundOpenBankOrderRequest {
   RefundAmount: number
 
   /**
-   * 渠道商户号。
+   * 渠道商户号。外部平台接入云企付平台下发。必填。
    */
   ChannelMerchantId?: string
 
   /**
-   * 外部商户订单号，与云企付渠道订单号二者选填其一。
+   * 外部商户订单号，与云企付渠道订单号二者不能同时为空。
    */
   OutOrderId?: string
 
   /**
-   * 云企付渠道订单号，与外部订单号二者选填其一。
+   * 云企付渠道订单号，与外部订单号二者不能同时为空。
    */
   ChannelOrderId?: string
 
@@ -24564,8 +24904,9 @@ export interface RefundOpenBankOrderRequest {
   NotifyUrl?: string
 
   /**
-   * 退款原因。
-   */
+      * 退款原因。
+当EBANK_PAYMENT担保支付订单退款时，此字段必传。
+      */
   RefundReason?: string
 
   /**

@@ -19,7 +19,7 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   DescribeResourceConfigsResponse,
-  CreateResourceRequest,
+  DescribeClustersRequest,
   CheckSavepointRequest,
   CreateJobRequest,
   ResourceRefDetail,
@@ -27,6 +27,8 @@ import {
   CreateJobResponse,
   ResourceLoc,
   RunJobsRequest,
+  CCN,
+  DeleteJobsRequest,
   StopJobDescription,
   ModifyJobResponse,
   DeleteTableConfigResponse,
@@ -34,6 +36,9 @@ import {
   CreateJobConfigRequest,
   CreateResourceConfigRequest,
   Property,
+  ClusterVersion,
+  CreateResourceRequest,
+  DescribeTreeJobsResponse,
   DeleteTableConfigRequest,
   Savepoint,
   SystemResourceItem,
@@ -42,29 +47,35 @@ import {
   CreateJobConfigResponse,
   ResourceConfigItem,
   TriggerJobSavepointResponse,
-  TriggerJobSavepointRequest,
+  Tag,
   DescribeResourcesRequest,
   ResourceLocParam,
   DescribeJobSavepointRequest,
   CheckSavepointResponse,
   DeleteResourceConfigsRequest,
   DescribeJobSavepointResponse,
-  ModifyJobRequest,
+  DeleteJobsResponse,
   RunJobsResponse,
   Filter,
   DeleteResourcesRequest,
   DescribeJobsResponse,
   ResourceItem,
+  WorkSpaceClusterItem,
   StopJobsResponse,
   CreateResourceResponse,
   DescribeSystemResourcesRequest,
   DescribeJobConfigsRequest,
   DescribeResourcesResponse,
   RunJobDescription,
+  ModifyJobRequest,
+  DescribeTreeJobsRequest,
   DescribeJobConfigsResponse,
   DeleteResourceConfigsResponse,
   DescribeResourceRelatedJobsResponse,
   DescribeSystemResourcesResponse,
+  Cluster,
+  DescribeClustersResponse,
+  TriggerJobSavepointRequest,
   ResourceRefJobInfo,
   ResourceRef,
   DescribeJobsRequest,
@@ -83,53 +94,53 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 批量停止作业，批量操作数量上限为20
+   * 生成树状作业显示结构
    */
-  async StopJobs(
-    req: StopJobsRequest,
-    cb?: (error: string, rep: StopJobsResponse) => void
-  ): Promise<StopJobsResponse> {
-    return this.request("StopJobs", req, cb)
+  async DescribeTreeJobs(
+    req: DescribeTreeJobsRequest,
+    cb?: (error: string, rep: DescribeTreeJobsResponse) => void
+  ): Promise<DescribeTreeJobsResponse> {
+    return this.request("DescribeTreeJobs", req, cb)
   }
 
   /**
-   * 触发Savepoint
+   * 删除资源版本
    */
-  async TriggerJobSavepoint(
-    req: TriggerJobSavepointRequest,
-    cb?: (error: string, rep: TriggerJobSavepointResponse) => void
-  ): Promise<TriggerJobSavepointResponse> {
-    return this.request("TriggerJobSavepoint", req, cb)
+  async DeleteResourceConfigs(
+    req: DeleteResourceConfigsRequest,
+    cb?: (error: string, rep: DeleteResourceConfigsResponse) => void
+  ): Promise<DeleteResourceConfigsResponse> {
+    return this.request("DeleteResourceConfigs", req, cb)
   }
 
   /**
-   * 描述资源接口
+   * 创建资源配置接口
    */
-  async DescribeResources(
-    req: DescribeResourcesRequest,
-    cb?: (error: string, rep: DescribeResourcesResponse) => void
-  ): Promise<DescribeResourcesResponse> {
-    return this.request("DescribeResources", req, cb)
+  async CreateResourceConfig(
+    req: CreateResourceConfigRequest,
+    cb?: (error: string, rep: CreateResourceConfigResponse) => void
+  ): Promise<CreateResourceConfigResponse> {
+    return this.request("CreateResourceConfig", req, cb)
   }
 
   /**
-   * 新建作业接口，一个 AppId 最多允许创建1000个作业
+   * 删除作业表配置
    */
-  async CreateJob(
-    req: CreateJobRequest,
-    cb?: (error: string, rep: CreateJobResponse) => void
-  ): Promise<CreateJobResponse> {
-    return this.request("CreateJob", req, cb)
+  async DeleteTableConfig(
+    req: DeleteTableConfigRequest,
+    cb?: (error: string, rep: DeleteTableConfigResponse) => void
+  ): Promise<DeleteTableConfigResponse> {
+    return this.request("DeleteTableConfig", req, cb)
   }
 
   /**
-   * 创建资源接口
+   * 描述资源配置接口
    */
-  async CreateResource(
-    req: CreateResourceRequest,
-    cb?: (error: string, rep: CreateResourceResponse) => void
-  ): Promise<CreateResourceResponse> {
-    return this.request("CreateResource", req, cb)
+  async DescribeResourceConfigs(
+    req: DescribeResourceConfigsRequest,
+    cb?: (error: string, rep: DescribeResourceConfigsResponse) => void
+  ): Promise<DescribeResourceConfigsResponse> {
+    return this.request("DescribeResourceConfigs", req, cb)
   }
 
   /**
@@ -143,6 +154,46 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 描述资源接口
+   */
+  async DescribeResources(
+    req: DescribeResourcesRequest,
+    cb?: (error: string, rep: DescribeResourcesResponse) => void
+  ): Promise<DescribeResourcesResponse> {
+    return this.request("DescribeResources", req, cb)
+  }
+
+  /**
+   * 查询集群
+   */
+  async DescribeClusters(
+    req: DescribeClustersRequest,
+    cb?: (error: string, rep: DescribeClustersResponse) => void
+  ): Promise<DescribeClustersResponse> {
+    return this.request("DescribeClusters", req, cb)
+  }
+
+  /**
+   * 新建作业接口，一个 AppId 最多允许创建1000个作业
+   */
+  async CreateJob(
+    req: CreateJobRequest,
+    cb?: (error: string, rep: CreateJobResponse) => void
+  ): Promise<CreateJobResponse> {
+    return this.request("CreateJob", req, cb)
+  }
+
+  /**
+   * 触发Savepoint
+   */
+  async TriggerJobSavepoint(
+    req: TriggerJobSavepointRequest,
+    cb?: (error: string, rep: TriggerJobSavepointResponse) => void
+  ): Promise<TriggerJobSavepointResponse> {
+    return this.request("TriggerJobSavepoint", req, cb)
+  }
+
+  /**
    * 批量启动或者恢复作业，批量操作数量上限20
    */
   async RunJobs(
@@ -153,13 +204,43 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除资源接口
+   * 批量删除作业接口，批量操作数量上限20
    */
-  async DeleteResources(
-    req: DeleteResourcesRequest,
-    cb?: (error: string, rep: DeleteResourcesResponse) => void
-  ): Promise<DeleteResourcesResponse> {
-    return this.request("DeleteResources", req, cb)
+  async DeleteJobs(
+    req: DeleteJobsRequest,
+    cb?: (error: string, rep: DeleteJobsResponse) => void
+  ): Promise<DeleteJobsResponse> {
+    return this.request("DeleteJobs", req, cb)
+  }
+
+  /**
+   * 检查快照是否可用
+   */
+  async CheckSavepoint(
+    req: CheckSavepointRequest,
+    cb?: (error: string, rep: CheckSavepointResponse) => void
+  ): Promise<CheckSavepointResponse> {
+    return this.request("CheckSavepoint", req, cb)
+  }
+
+  /**
+   * 创建作业配置，一个作业最多有100个配置版本
+   */
+  async CreateJobConfig(
+    req: CreateJobConfigRequest,
+    cb?: (error: string, rep: CreateJobConfigResponse) => void
+  ): Promise<CreateJobConfigResponse> {
+    return this.request("CreateJobConfig", req, cb)
+  }
+
+  /**
+   * 批量停止作业，批量操作数量上限为20
+   */
+  async StopJobs(
+    req: StopJobsRequest,
+    cb?: (error: string, rep: StopJobsResponse) => void
+  ): Promise<StopJobsResponse> {
+    return this.request("StopJobs", req, cb)
   }
 
   /**
@@ -173,6 +254,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除资源接口
+   */
+  async DeleteResources(
+    req: DeleteResourcesRequest,
+    cb?: (error: string, rep: DeleteResourcesResponse) => void
+  ): Promise<DeleteResourcesResponse> {
+    return this.request("DeleteResources", req, cb)
+  }
+
+  /**
    * 查询作业
    */
   async DescribeJobs(
@@ -180,16 +271,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeJobsResponse) => void
   ): Promise<DescribeJobsResponse> {
     return this.request("DescribeJobs", req, cb)
-  }
-
-  /**
-   * 描述系统资源接口
-   */
-  async DescribeSystemResources(
-    req: DescribeSystemResourcesRequest,
-    cb?: (error: string, rep: DescribeSystemResourcesResponse) => void
-  ): Promise<DescribeSystemResourcesResponse> {
-    return this.request("DescribeSystemResources", req, cb)
   }
 
   /**
@@ -213,63 +294,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除资源版本
+   * 创建资源接口
    */
-  async DeleteResourceConfigs(
-    req: DeleteResourceConfigsRequest,
-    cb?: (error: string, rep: DeleteResourceConfigsResponse) => void
-  ): Promise<DeleteResourceConfigsResponse> {
-    return this.request("DeleteResourceConfigs", req, cb)
+  async CreateResource(
+    req: CreateResourceRequest,
+    cb?: (error: string, rep: CreateResourceResponse) => void
+  ): Promise<CreateResourceResponse> {
+    return this.request("CreateResource", req, cb)
   }
 
   /**
-   * 检查快照是否可用
+   * 描述系统资源接口
    */
-  async CheckSavepoint(
-    req: CheckSavepointRequest,
-    cb?: (error: string, rep: CheckSavepointResponse) => void
-  ): Promise<CheckSavepointResponse> {
-    return this.request("CheckSavepoint", req, cb)
-  }
-
-  /**
-   * 创建资源配置接口
-   */
-  async CreateResourceConfig(
-    req: CreateResourceConfigRequest,
-    cb?: (error: string, rep: CreateResourceConfigResponse) => void
-  ): Promise<CreateResourceConfigResponse> {
-    return this.request("CreateResourceConfig", req, cb)
-  }
-
-  /**
-   * 创建作业配置，一个作业最多有100个配置版本
-   */
-  async CreateJobConfig(
-    req: CreateJobConfigRequest,
-    cb?: (error: string, rep: CreateJobConfigResponse) => void
-  ): Promise<CreateJobConfigResponse> {
-    return this.request("CreateJobConfig", req, cb)
-  }
-
-  /**
-   * 删除作业表配置
-   */
-  async DeleteTableConfig(
-    req: DeleteTableConfigRequest,
-    cb?: (error: string, rep: DeleteTableConfigResponse) => void
-  ): Promise<DeleteTableConfigResponse> {
-    return this.request("DeleteTableConfig", req, cb)
-  }
-
-  /**
-   * 描述资源配置接口
-   */
-  async DescribeResourceConfigs(
-    req: DescribeResourceConfigsRequest,
-    cb?: (error: string, rep: DescribeResourceConfigsResponse) => void
-  ): Promise<DescribeResourceConfigsResponse> {
-    return this.request("DescribeResourceConfigs", req, cb)
+  async DescribeSystemResources(
+    req: DescribeSystemResourcesRequest,
+    cb?: (error: string, rep: DescribeSystemResourcesResponse) => void
+  ): Promise<DescribeSystemResourcesResponse> {
+    return this.request("DescribeSystemResources", req, cb)
   }
 
   /**

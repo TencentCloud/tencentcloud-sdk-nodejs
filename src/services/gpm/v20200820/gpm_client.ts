@@ -80,8 +80,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 取消匹配。
-   */
+     * 此接口无法使用，游戏玩家匹配GPM已于6.1正式下架，感谢您的支持
+
+取消匹配。
+     */
   async CancelMatching(
     req: CancelMatchingRequest,
     cb?: (error: string, rep: CancelMatchingResponse) => void
@@ -90,8 +92,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改匹配Token。
-   */
+     * 此接口无法使用，游戏玩家匹配GPM已于6.1正式下架，感谢您的支持
+
+修改匹配Token。
+     */
   async ModifyToken(
     req: ModifyTokenRequest,
     cb?: (error: string, rep: ModifyTokenResponse) => void
@@ -100,8 +104,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询匹配进度。
-   */
+     * 此接口无法使用，游戏玩家匹配GPM已于6.1正式下架，感谢您的支持
+
+查询匹配进度。
+     */
   async DescribeMatchingProgress(
     req: DescribeMatchingProgressRequest,
     cb?: (error: string, rep: DescribeMatchingProgressResponse) => void
@@ -110,8 +116,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建匹配
-   */
+     * 此接口无法使用，游戏玩家匹配GPM已于6.1正式下架，感谢您的支持
+
+创建匹配
+     */
   async CreateMatch(
     req: CreateMatchRequest,
     cb?: (error: string, rep: CreateMatchResponse) => void
@@ -120,8 +128,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改匹配
-   */
+     * 此接口无法使用，游戏玩家匹配GPM已于6.1正式下架，感谢您的支持
+
+修改匹配
+     */
   async ModifyMatch(
     req: ModifyMatchRequest,
     cb?: (error: string, rep: ModifyMatchResponse) => void
@@ -130,8 +140,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询匹配Token，Token用于push消息验证。
-   */
+     * 此接口无法使用，游戏玩家匹配GPM已于6.1正式下架，感谢您的支持
+
+查询匹配Token，Token用于push消息验证。
+     */
   async DescribeToken(
     req: DescribeTokenRequest,
     cb?: (error: string, rep: DescribeTokenResponse) => void
@@ -140,8 +152,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询规则详情
-   */
+     * 此接口无法使用，游戏玩家匹配GPM已于6.1正式下架，感谢您的支持
+
+查询规则详情
+     */
   async DescribeRule(
     req: DescribeRuleRequest,
     cb?: (error: string, rep: DescribeRuleResponse) => void
@@ -150,8 +164,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 通过调用StartMatchingBackfill，用户可以传入一个回填的匹配请求，GPM为回填请求搜索符合条件的ticket并形成一个新的match。
-   */
+     * 此接口无法使用，游戏玩家匹配GPM已于6.1正式下架，感谢您的支持
+
+通过调用StartMatchingBackfill，用户可以传入一个回填的匹配请求，GPM为回填请求搜索符合条件的ticket并形成一个新的match。
+     */
   async StartMatchingBackfill(
     req: StartMatchingBackfillRequest,
     cb?: (error: string, rep: StartMatchingBackfillResponse) => void
@@ -160,8 +176,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询匹配详情
-   */
+     * 此接口无法使用，游戏玩家匹配GPM已于6.1正式下架，感谢您的支持
+
+查询匹配详情
+     */
   async DescribeMatch(
     req: DescribeMatchRequest,
     cb?: (error: string, rep: DescribeMatchResponse) => void
@@ -170,8 +188,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除规则
-   */
+     * 此接口无法使用，游戏玩家匹配GPM已于6.1正式下架，感谢您的支持
+
+删除规则
+     */
   async DeleteRule(
     req: DeleteRuleRequest,
     cb?: (error: string, rep: DeleteRuleResponse) => void
@@ -180,8 +200,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除匹配
-   */
+     * 此接口无法使用，游戏玩家匹配GPM已于6.1正式下架，感谢您的支持
+
+删除匹配
+     */
   async DeleteMatch(
     req: DeleteMatchRequest,
     cb?: (error: string, rep: DeleteMatchResponse) => void
@@ -190,8 +212,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 分页查询规则集列表
-   */
+     * 此接口无法使用，游戏玩家匹配GPM已于6.1正式下架，感谢您的支持
+
+分页查询规则集列表
+     */
   async DescribeRules(
     req: DescribeRulesRequest,
     cb?: (error: string, rep: DescribeRulesResponse) => void
@@ -200,8 +224,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改规则（描述、标签）
-   */
+     * 此接口无法使用，游戏玩家匹配GPM已于6.1正式下架，感谢您的支持
+
+修改规则（描述、标签）
+     */
   async ModifyRule(
     req: ModifyRuleRequest,
     cb?: (error: string, rep: ModifyRuleResponse) => void
@@ -210,8 +236,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建规则
-   */
+     * 此接口无法使用，游戏玩家匹配GPM已于6.1正式下架，感谢您的支持
+
+创建规则
+     */
   async CreateRule(
     req: CreateRuleRequest,
     cb?: (error: string, rep: CreateRuleResponse) => void
@@ -220,8 +248,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 支持传入一个玩家或多个玩家发起匹配，在同一个请求内的玩家将被分到同一个对局。
-   */
+     * 此接口无法使用，游戏玩家匹配GPM已于6.1正式下架，感谢您的支持
+
+支持传入一个玩家或多个玩家发起匹配，在同一个请求内的玩家将被分到同一个对局。
+     */
   async StartMatching(
     req: StartMatchingRequest,
     cb?: (error: string, rep: StartMatchingResponse) => void
@@ -230,8 +260,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 分页查询匹配列表
-   */
+     * 此接口无法使用，游戏玩家匹配GPM已于6.1正式下架，感谢您的支持
+
+分页查询匹配列表
+     */
   async DescribeMatches(
     req: DescribeMatchesRequest,
     cb?: (error: string, rep: DescribeMatchesResponse) => void
@@ -240,8 +272,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 分页查询匹配Code
-   */
+     * 此接口无法使用，游戏玩家匹配GPM已于6.1正式下架，感谢您的支持
+
+分页查询匹配Code
+     */
   async DescribeMatchCodes(
     req: DescribeMatchCodesRequest,
     cb?: (error: string, rep: DescribeMatchCodesResponse) => void
@@ -250,8 +284,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 统计数据
-   */
+     * 此接口无法使用，游戏玩家匹配GPM已于6.1正式下架，感谢您的支持
+
+统计数据
+     */
   async DescribeData(
     req: DescribeDataRequest,
     cb?: (error: string, rep: DescribeDataResponse) => void

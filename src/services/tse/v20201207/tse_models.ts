@@ -520,6 +520,11 @@ export interface ServiceGovernanceInfo {
    * 主账户名默认为 polaris，该值为主账户的默认密码
    */
   MainPassword?: string
+
+  /**
+   * 服务治理pushgateway引擎绑定的网络信息
+   */
+  PgwVpcInfos?: Array<VpcInfo>
 }
 
 /**
@@ -821,6 +826,11 @@ export interface DescribeSREInstanceAccessAddressRequest {
    * 子网ID
    */
   SubnetId?: string
+
+  /**
+   * 引擎其他组件名称（pushgateway）
+   */
+  Workload?: string
 }
 
 /**
@@ -977,6 +987,12 @@ export interface EnvAddressInfo {
    * config公网ip
    */
   ConfigInternetServiceIp: string
+
+  /**
+      * config内网访问地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ConfigIntranetAddress: string
 }
 
 /**

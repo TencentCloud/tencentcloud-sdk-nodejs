@@ -1133,6 +1133,12 @@ export interface ExistedInstance {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     InstanceChargeType: string;
+    /**
+      * 实例的IPv6地址。
+注意：此字段可能返回 null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IPv6Addresses: Array<string>;
 }
 /**
  * AddNodeToNodePool返回参数结构体
@@ -3234,7 +3240,7 @@ export interface ClusterCIDRSettings {
       */
     IgnoreClusterCIDRConflict?: boolean;
     /**
-      * 集群中每个Node上最大的Pod数量。取值范围4～256。不为2的幂值时会向上取最接近的2的幂值。
+      * 集群中每个Node上最大的Pod数量。取值范围16～256。不为2的幂值时会向上取最接近的2的幂值。
       */
     MaxNodePodNum?: number;
     /**

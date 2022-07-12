@@ -766,6 +766,19 @@ export interface DescribeDefaultAlarmThresholdResponse {
     RequestId?: string;
 }
 /**
+ * CreateNewL7Rules返回参数结构体
+ */
+export interface CreateNewL7RulesResponse {
+    /**
+      * 成功码
+      */
+    Success: SuccessCode;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * CreateDDoSAI请求参数结构体
  */
 export interface CreateDDoSAIRequest {
@@ -884,6 +897,47 @@ export interface DescribeDDoSConnectLimitListResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * L7规则健康检查参数
+ */
+export interface L7RuleHealth {
+    /**
+      * 配置状态，0： 正常，1：配置中，2：配置失败
+      */
+    Status: number;
+    /**
+      * =1表示开启；=0表示关闭
+      */
+    Enable: number;
+    /**
+      * 规则ID
+      */
+    RuleId: string;
+    /**
+      * 检查目录的URL，默认为/
+      */
+    Url: string;
+    /**
+      * 检测间隔时间，单位秒
+      */
+    Interval: number;
+    /**
+      * 健康阈值，单位次
+      */
+    AliveNum: number;
+    /**
+      * 不健康阈值，单位次
+      */
+    KickNum: number;
+    /**
+      * HTTP请求方式，取值[HEAD,GET]
+      */
+    Method: string;
+    /**
+      * 健康检查判定正常状态码，1xx =1, 2xx=2, 3xx=4, 4xx=8,5xx=16，多个状态码值加和
+      */
+    StatusCode: number;
 }
 /**
  * ModifyPacketFilterConfig返回参数结构体
@@ -1019,6 +1073,27 @@ export interface DescribeListBGPIPInstancesRequest {
       * 按照套餐类型进行过滤
       */
     FilterPackType?: Array<string>;
+}
+/**
+ * DescribeNewL7Rules返回参数结构体
+ */
+export interface DescribeNewL7RulesResponse {
+    /**
+      * 转发规则列表
+      */
+    Rules: Array<NewL7RuleEntry>;
+    /**
+      * 健康检查配置列表
+      */
+    Healths: Array<L7RuleHealth>;
+    /**
+      * 总规则数
+      */
+    Total: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 三网高防套餐详情
@@ -1526,6 +1601,43 @@ export interface ModifyCcBlackWhiteIpListResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DescribeNewL7Rules请求参数结构体
+ */
+export interface DescribeNewL7RulesRequest {
+    /**
+      * 大禹子产品代号（bgpip表示高防IP）
+      */
+    Business: string;
+    /**
+      * 状态搜索，选填，取值[0(规则配置成功)，1(规则配置生效中)，2(规则配置失败)，3(规则删除生效中)，5(规则删除失败)，6(规则等待配置)，7(规则等待删除)，8(规则待配置证书)]
+      */
+    StatusList?: Array<number>;
+    /**
+      * 域名搜索，选填，当需要搜索域名请填写
+      */
+    Domain?: string;
+    /**
+      * IP搜索，选填，当需要搜索IP请填写
+      */
+    Ip?: string;
+    /**
+      * 一页条数，填0表示不分页
+      */
+    Limit?: number;
+    /**
+      * 页起始偏移，取值为(页码-1)*一页条数
+      */
+    Offset?: number;
+    /**
+      * 转发协议搜索，选填，取值[http, https, http/https]
+      */
+    ProtocolList?: Array<string>;
+    /**
+      * 高防IP实例的Cname
+      */
+    Cname?: string;
 }
 /**
  * 协议封禁相关信息
@@ -3333,6 +3445,27 @@ export interface PortSegment {
       * 结束端口，取值1~65535，必须不小于起始端口
       */
     EndPort: number;
+}
+/**
+ * CreateNewL7Rules请求参数结构体
+ */
+export interface CreateNewL7RulesRequest {
+    /**
+      * 规则列表
+      */
+    Rules: Array<L7RuleEntry>;
+    /**
+      * 大禹子产品代号（bgpip表示高防IP）
+      */
+    Business: string;
+    /**
+      * 资源ID列表
+      */
+    IdList: Array<string>;
+    /**
+      * 资源IP列表
+      */
+    VipList: Array<string>;
 }
 /**
  * DescribeOverviewCCTrend返回参数结构体

@@ -2089,6 +2089,10 @@ export interface DescribeMediaProcessUsageDataRequest {
       */
     EndTime: string;
     /**
+      * <b>点播 [子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+      */
+    SubAppId?: number;
+    /**
       * 查询视频处理任务类型，目前支持的任务类型包括：
 <li> Transcoding: 普通转码</li>
 <li> Transcoding-TESHD: 极速高清转码</li>
@@ -2096,14 +2100,12 @@ export interface DescribeMediaProcessUsageDataRequest {
 <li> Editing-TESHD: 极速高清视频编辑</li>
 <li> AdaptiveBitrateStreaming: 自适应码流</li>
 <li> ContentAudit: 内容审核</li>
+<li> ContentRecognition: 内容识别</li>
 <li> RemoveWatermark: 去除水印</li>
+<li> ExtractTraceWatermark: 提取水印</li>
 <li>Transcode: 转码，包含普通转码、极速高清和视频编辑（不推荐使用）</li>
       */
     Type?: string;
-    /**
-      * 点播 [子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
-      */
-    SubAppId?: number;
 }
 /**
  * CreatePersonSample请求参数结构体
@@ -3201,8 +3203,10 @@ export interface TaskStatData {
 <li> Editing: 视频编辑</li>
 <li> Editing-TESHD: 极速高清视频编辑</li>
 <li> AdaptiveBitrateStreaming: 自适应码流</li>
-<li> ContentAudit: 智能识别</li>
+<li> ContentAudit: 内容审核</li>
+<li> ContentRecognition: 内容识别</li>
 <li> RemoveWatermark: 去水印</li>
+<li> ExtractTraceWatermark: 提取水印</li>
 <li>Transcode: 转码，包含普通转码、极速高清和视频编辑（不推荐使用）</li>
       */
     TaskType: string;
@@ -3257,12 +3261,12 @@ export interface TaskStatData {
 <li>Edit.TESHD-10.H265.2K: H.265编码方式2K极速高清视频编辑</li>
 <li>Edit.TESHD-10.H265.4K: H.265编码方式4K极速高清视频编辑</li>
 去水印规格：
-<li>480P: 分辨率640*480及以下</li>
-<li>720P: 分辨率1280*720及以下</li>
-<li>1080P: 分辨率1920*1080及以下</li>
-<li>2K: 分辨率2560*1440及以下</li>
-<li>4K: 分辨率3840*2160及以下</li>
-<li>8K: 分辨率7680*4320及以下</li>
+<li>480P: 短边 ≤ 480px</li>
+<li>720P: 短边 ≤ 720px</li>
+<li>1080P: 短边 ≤ 1080px</li>
+<li>2K: 短边 ≤ 1440px</li>
+<li>4K: 短边 ≤ 2160px</li>
+<li>8K: 短边 ≤ 4320px</li>
       */
     Details: Array<SpecificationDataItem>;
 }
@@ -4224,6 +4228,13 @@ export interface ImageWatermarkInput {
 <li>repeat：水印循环播放，直到视频结束（默认值）。</li>
       */
     RepeatType?: string;
+    /**
+      * 图片透明度，取值范围：[0, 100]
+<li>0：完全不透明</li>
+<li>100：完全透明</li>
+默认值：0。
+      */
+    Transparency?: number;
 }
 /**
  * 物体识别任务控制参数
@@ -5918,6 +5929,12 @@ export interface ImageWatermarkTemplate {
 <li>repeat：水印循环播放，直到视频结束。</li>
       */
     RepeatType: string;
+    /**
+      * 图片透明度，取值范围：[0, 100]
+<li>0：完全不透明</li>
+<li>100：完全透明。</li>
+      */
+    Transparency: number;
 }
 /**
  * ModifySubAppIdInfo返回参数结构体
@@ -7314,6 +7331,12 @@ export interface ImageWatermarkInputForUpdate {
 <li>repeat：水印循环播放，直到视频结束。</li>
       */
     RepeatType?: string;
+    /**
+      * 图片透明度，取值范围：[0, 100]
+<li>0：完全不透明</li>
+<li>100：完全透明。</li>
+      */
+    Transparency?: number;
 }
 /**
  * DescribeAIAnalysisTemplates请求参数结构体
@@ -10014,6 +10037,10 @@ export interface AiRecognitionTaskAsrFullTextResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Output: AiRecognitionTaskAsrFullTextResultOutput;
+    /**
+      * 任务进度，取值范围 [0-100] 。
+      */
+    Progress: number;
 }
 /**
  * 图片智能内容识别任务输入

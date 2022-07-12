@@ -178,6 +178,16 @@ it("antiddos.v20200309.AssociateDDoSEipLoadBalancer", async function () {
     }
 })
 
+it("antiddos.v20200309.CreateNewL7Rules", async function () {
+    try {
+       const data = await client.CreateNewL7Rules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("antiddos.v20200309.DeleteWaterPrintConfig", async function () {
     try {
        const data = await client.DeleteWaterPrintConfig({})
@@ -301,6 +311,16 @@ it("antiddos.v20200309.DescribeOverviewDDoSTrend", async function () {
 it("antiddos.v20200309.DeleteDDoSSpeedLimitConfig", async function () {
     try {
        const data = await client.DeleteDDoSSpeedLimitConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("antiddos.v20200309.DescribeNewL7Rules", async function () {
+    try {
+       const data = await client.DescribeNewL7Rules({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -138,6 +138,16 @@ it("cpdp.v20190820.QueryOpenBankRefundOrder", async function () {
     }
 })
 
+it("cpdp.v20190820.QueryOpenBankVerificationOrder", async function () {
+    try {
+       const data = await client.QueryOpenBankVerificationOrder({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cpdp.v20190820.QueryCloudOrder", async function () {
     try {
        const data = await client.QueryCloudOrder({})
@@ -1028,6 +1038,16 @@ it("cpdp.v20190820.QueryMerchantOrder", async function () {
     }
 })
 
+it("cpdp.v20190820.VerifyOpenBankAccount", async function () {
+    try {
+       const data = await client.VerifyOpenBankAccount({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cpdp.v20190820.CreateFlexPayee", async function () {
     try {
        const data = await client.CreateFlexPayee({})
@@ -1261,6 +1281,16 @@ it("cpdp.v20190820.QueryAcctBinding", async function () {
 it("cpdp.v20190820.QueryFundsTransactionDetails", async function () {
     try {
        const data = await client.QueryFundsTransactionDetails({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cpdp.v20190820.CreateOpenBankVerificationOrder", async function () {
+    try {
+       const data = await client.CreateOpenBankVerificationOrder({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -108,6 +108,7 @@ export { iotexplorer } from "./iotexplorer";
 export { iottid } from "./iottid";
 export { iotvideo } from "./iotvideo";
 export { iotvideoindustry } from "./iotvideoindustry";
+export { irp } from "./irp";
 export { ivld } from "./ivld";
 export { kms } from "./kms";
 export { lighthouse } from "./lighthouse";
