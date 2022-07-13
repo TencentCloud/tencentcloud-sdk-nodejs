@@ -34,10 +34,28 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DiagnoseInstance", req, cb);
     }
     /**
+     * 用于删除Logstash实例
+     */
+    async DeleteLogstashInstance(req, cb) {
+        return this.request("DeleteLogstashInstance", req, cb);
+    }
+    /**
+     * 更新索引
+     */
+    async UpdateIndex(req, cb) {
+        return this.request("UpdateIndex", req, cb);
+    }
+    /**
      * 获取接收客户端请求的节点类型
      */
     async GetRequestTargetNodeTypes(req, cb) {
         return this.request("GetRequestTargetNodeTypes", req, cb);
+    }
+    /**
+     * 用于批量停止Logstash管道
+     */
+    async StopLogstashPipelines(req, cb) {
+        return this.request("StopLogstashPipelines", req, cb);
     }
     /**
      * 获取索引列表
@@ -58,6 +76,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateIndex", req, cb);
     }
     /**
+     * 更新接收客户端请求的节点类型
+     */
+    async UpdateRequestTargetNodeTypes(req, cb) {
+        return this.request("UpdateRequestTargetNodeTypes", req, cb);
+    }
+    /**
      * 更新智能运维配置
      */
     async UpdateDiagnoseSettings(req, cb) {
@@ -74,6 +98,17 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async UpdatePlugins(req, cb) {
         return this.request("UpdatePlugins", req, cb);
+    }
+    /**
+     * 对集群进行节点规格变更，修改实例名称，修改配置，等操作。参数中InstanceId为必传参数，参数传递组合及含义如下：
+- InstanceName：修改实例名称(仅用于标识实例)
+- NodeNum: 修改实例节点数量（节点横向扩缩容，纵向扩缩容等）
+- YMLConfig: 修改实例YML配置
+- BindedES：修改绑定的ES集群配置
+以上参数组合只能传递一种，多传或少传均会导致请求失败
+     */
+    async UpdateLogstashInstance(req, cb) {
+        return this.request("UpdateLogstashInstance", req, cb);
     }
     /**
      * 更新实例Jdk配置
@@ -95,6 +130,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdateInstance", req, cb);
     }
     /**
+     * 用于创建Logstash实例
+     */
+    async CreateLogstashInstance(req, cb) {
+        return this.request("CreateLogstashInstance", req, cb);
+    }
+    /**
      * 重启ES集群实例(用于系统版本更新等操作)
      */
     async RestartInstance(req, cb) {
@@ -113,22 +154,46 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RestartKibana", req, cb);
     }
     /**
-     * 更新ES集群词典
+     * 用于下发并且部署管道
      */
-    async UpdateDictionaries(req, cb) {
-        return this.request("UpdateDictionaries", req, cb);
+    async SaveAndDeployLogstashPipeline(req, cb) {
+        return this.request("SaveAndDeployLogstashPipeline", req, cb);
     }
     /**
-     * 更新接收客户端请求的节点类型
+     * 查询实例指定条件下的操作记录
      */
-    async UpdateRequestTargetNodeTypes(req, cb) {
-        return this.request("UpdateRequestTargetNodeTypes", req, cb);
+    async DescribeLogstashInstanceOperations(req, cb) {
+        return this.request("DescribeLogstashInstanceOperations", req, cb);
+    }
+    /**
+     * 用于启动Logstash管道
+     */
+    async StartLogstashPipelines(req, cb) {
+        return this.request("StartLogstashPipelines", req, cb);
     }
     /**
      * 查询实例指定条件下的操作记录
      */
     async DescribeInstanceOperations(req, cb) {
         return this.request("DescribeInstanceOperations", req, cb);
+    }
+    /**
+     * 用于获取Logstash实例管道列表
+     */
+    async DescribeLogstashPipelines(req, cb) {
+        return this.request("DescribeLogstashPipelines", req, cb);
+    }
+    /**
+     * 查询用户该地域下符合条件的所有Logstash实例
+     */
+    async DescribeLogstashInstances(req, cb) {
+        return this.request("DescribeLogstashInstances", req, cb);
+    }
+    /**
+     * 用于更新管道描述信息
+     */
+    async UpdateLogstashPipelineDesc(req, cb) {
+        return this.request("UpdateLogstashPipelineDesc", req, cb);
     }
     /**
      * 查询集群各视图数据，包括集群维度、节点维度、Kibana维度
@@ -143,10 +208,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateInstance", req, cb);
     }
     /**
-     * 更新索引
+     * 升级ES集群版本
      */
-    async UpdateIndex(req, cb) {
-        return this.request("UpdateIndex", req, cb);
+    async UpgradeInstance(req, cb) {
+        return this.request("UpgradeInstance", req, cb);
+    }
+    /**
+     * 用于批量删除Logstash管道
+     */
+    async DeleteLogstashPipelines(req, cb) {
+        return this.request("DeleteLogstashPipelines", req, cb);
     }
     /**
      * 用于重启集群节点
@@ -161,10 +232,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteIndex", req, cb);
     }
     /**
-     * 升级ES集群版本
+     * 用于重启Logstash实例
      */
-    async UpgradeInstance(req, cb) {
-        return this.request("UpgradeInstance", req, cb);
+    async RestartLogstashInstance(req, cb) {
+        return this.request("RestartLogstashInstance", req, cb);
+    }
+    /**
+     * 查询用户该地域下符合条件的Logstash实例的日志
+     */
+    async DescribeLogstashInstanceLogs(req, cb) {
+        return this.request("DescribeLogstashInstanceLogs", req, cb);
+    }
+    /**
+     * 更新ES集群词典
+     */
+    async UpdateDictionaries(req, cb) {
+        return this.request("UpdateDictionaries", req, cb);
     }
     /**
      * 升级ES商业特性

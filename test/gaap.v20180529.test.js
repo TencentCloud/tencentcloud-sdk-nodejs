@@ -108,6 +108,16 @@ it("gaap.v20180529.CreateCustomHeader", async function () {
     }
 })
 
+it("gaap.v20180529.DescribeCrossBorderProxies", async function () {
+    try {
+       const data = await client.DescribeCrossBorderProxies({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("gaap.v20180529.DescribeGroupAndStatisticsProxy", async function () {
     try {
        const data = await client.DescribeGroupAndStatisticsProxy({})
@@ -821,6 +831,16 @@ it("gaap.v20180529.DescribeProxyStatistics", async function () {
 it("gaap.v20180529.DescribeDomainErrorPageInfo", async function () {
     try {
        const data = await client.DescribeDomainErrorPageInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gaap.v20180529.BanAndRecoverProxy", async function () {
+    try {
+       const data = await client.BanAndRecoverProxy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

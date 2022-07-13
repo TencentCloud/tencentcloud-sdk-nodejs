@@ -8,7 +8,7 @@ import { CreateBlockNodeRecordsRequest, CreateBlockNodeRecordsResponse } from ".
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
     /**
-     * 创建节点记录
+     * 推送节点数据
      */
     CreateBlockNodeRecords(req: CreateBlockNodeRecordsRequest, cb?: (error: string, rep: CreateBlockNodeRecordsResponse) => void): Promise<CreateBlockNodeRecordsResponse>;
 }

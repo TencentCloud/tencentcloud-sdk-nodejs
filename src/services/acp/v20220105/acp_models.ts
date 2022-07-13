@@ -20,7 +20,7 @@
  */
 export interface CreateAppScanTaskRepeatRequest {
   /**
-   * 任务来源, 0:默认值(私域), 1:灵犀, 2:灵鲲;
+   * 任务来源, 0:小程序诊断, 1:预留字段(暂未使用), 2:app诊断(android);
    */
   Source: number
 
@@ -45,17 +45,17 @@ export interface CreateAppScanTaskRepeatRequest {
   AppPackage?: string
 
   /**
-   * 上传的文件ID(灵犀诊断必填)
+   * 上传的文件ID(任务来源为1时必填)
    */
   FileID?: string
 
   /**
-   * 软件下载链接地址(灵鲲诊断必填)
+   * 软件下载链接地址(任务来源为2时必填)
    */
   AppDownloadUrl?: string
 
   /**
-   * 隐私文本下载地址(灵鲲诊断必填)
+   * 隐私文本下载地址(任务来源为2时必填)
    */
   PrivacyTextUrl?: string
 
@@ -196,7 +196,7 @@ export interface DescribeResourceUsageInfoResponse {
  */
 export interface DescribeScanTaskListRequest {
   /**
-   * 任务来源, -1:所有, 0:默认值(私域), 1:灵犀, 2:灵鲲;
+   * 任务来源, -1:所有, 0:小程序诊断, 1:预留字段(暂未使用), 2:app诊断(android);
    */
   Source: number
 
@@ -310,7 +310,7 @@ export interface CreateAppScanTaskRequest {
   TaskType: number
 
   /**
-   * 任务来源, 0:默认值(私域), 1:灵犀, 2:灵鲲;
+   * 任务来源, 0:小程序诊断, 1:预留字段(暂未使用), 2:app诊断(android);
    */
   Source: number
 
@@ -335,17 +335,17 @@ export interface CreateAppScanTaskRequest {
   AppVersion?: string
 
   /**
-   * 上传的软件文件ID(灵犀诊断必填)
+   * 上传的软件文件ID(任务来源为1时必填)
    */
   FileID?: string
 
   /**
-   * 软件下载链接地址(灵鲲诊断必填)
+   * 软件下载链接地址(任务来源为2时必填)
    */
   AppDownloadUrl?: string
 
   /**
-   * 隐私文本下载地址(灵鲲诊断必填)
+   * 隐私文本下载地址(任务来源为2时必填)
    */
   PrivacyTextUrl?: string
 
@@ -432,18 +432,18 @@ export interface DescribeFileTicketResponse {
   Result: number
 
   /**
-   * 上传url(灵鲲:Post方法（100:apk,101:txt）, 灵犀:put方法)
+   * 上传url(任务来源为2时:Post方法（100:apk,101:txt）, 任务来源为1时:put方法)
    */
   UploadUrl: string
 
   /**
-      * 上传url鉴权信息(灵犀上传需要, Authorization参数值)
+      * 上传url鉴权信息(任务来源为1时上传需要, Authorization参数值)
 注意：此字段可能返回 null，表示取不到有效值。
       */
   UploadSign: string
 
   /**
-      * 上传文件ID(灵犀提交诊断任务需要)
+      * 上传文件ID(任务来源为1时提交诊断任务需要)
 注意：此字段可能返回 null，表示取不到有效值。
       */
   FildID: string
@@ -459,7 +459,7 @@ export interface DescribeFileTicketResponse {
  */
 export interface DescribeScanTaskReportUrlRequest {
   /**
-   * 任务来源, 0:默认值(私域), 1:灵犀, 2:灵鲲;
+   * 任务来源, 0:小程序诊断, 1:预留字段(暂未使用), 2:app诊断(android);
    */
   Source: number
 
@@ -510,7 +510,7 @@ export interface AppTaskData {
   TaskErrMsg: string
 
   /**
-   * 任务来源,0:默认值(私域), 1:灵犀, 2:灵鲲
+   * 任务来源,0:小程序诊断, 1:预留字段(暂未使用), 2:app诊断(android)
    */
   Source: number
 
@@ -541,7 +541,7 @@ export interface AppTaskData {
  */
 export interface DescribeScanTaskStatusRequest {
   /**
-   * 任务来源, 0:默认值(私域), 1:灵犀, 2:灵鲲;
+   * 任务来源, 0:小程序诊断, 1:预留字段(暂未使用), 2:app诊断(android);
    */
   Source: number
 
@@ -566,7 +566,7 @@ export interface DescribeScanTaskStatusRequest {
  */
 export interface DescribeFileTicketRequest {
   /**
-   * 任务来源, 0:默认值(私域), 1:灵犀, 2:灵鲲;
+   * 任务来源, 0:小程序诊断, 1:预留字段(暂未使用), 2:app诊断(android);
    */
   Source: number
 

@@ -21,7 +21,6 @@ import {
   CreateAccessExportRequest,
   DescribeWafAutoDenyRulesResponse,
   DescribeIpHitItemsResponse,
-  DescribeCustomRulesRspRuleListItem,
   DescribeUserClbWafRegionsResponse,
   IpHitItemsData,
   DeleteAttackDownloadRecordResponse,
@@ -36,19 +35,17 @@ import {
   DescribeAccessIndexRequest,
   DomainInfo,
   AccessLogItem,
-  DescribeCustomRulesResponse,
   DeleteSessionRequest,
   DescribeWafAutoDenyRulesRequest,
   AddCustomRuleResponse,
   DescribeFlowTrendResponse,
   UpsertIpAccessControlRequest,
-  DescribeCustomRulesPagingInfo,
   DeleteDownloadRecordRequest,
   DeleteAccessExportResponse,
   DescribeAccessExportsRequest,
   ModifyWafAutoDenyStatusRequest,
   ModifyAccessPeriodResponse,
-  QPSPackageNew,
+  DescribeWafThreatenIntelligenceResponse,
   FiltersItemNew,
   DescribeAutoDenyIPResponse,
   SearchAccessLogResponse,
@@ -83,7 +80,6 @@ import {
   AccessKeyValueInfo,
   AddCustomRuleRequest,
   FraudPkg,
-  DescribeCustomRulesRequest,
   ModifyDomainWhiteRuleResponse,
   ExportAccessInfo,
   ModifyDomainWhiteRuleRequest,
@@ -100,7 +96,7 @@ import {
   DescribeUserClbWafRegionsRequest,
   DescribeDomainWhiteRulesResponse,
   DeleteAttackDownloadRecordRequest,
-  DescribeWafThreatenIntelligenceResponse,
+  QPSPackageNew,
   AddDomainWhiteRuleRequest,
   UpsertIpAccessControlResponse,
   IpHitItem,
@@ -135,16 +131,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAccessExportsResponse) => void
   ): Promise<DescribeAccessExportsResponse> {
     return this.request("DescribeAccessExports", req, cb)
-  }
-
-  /**
-   * 获取防护配置中的自定义策略列表
-   */
-  async DescribeCustomRules(
-    req: DescribeCustomRulesRequest,
-    cb?: (error: string, rep: DescribeCustomRulesResponse) => void
-  ): Promise<DescribeCustomRulesResponse> {
-    return this.request("DescribeCustomRules", req, cb)
   }
 
   /**
@@ -260,13 +246,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 在负载均衡型WAF的添加、编辑域名配置的时候，需要展示负载均衡型WAF（clb-waf)支持的地域列表，通过DescribeUserClbWafRegions既可以获得当前对客户已经开放的地域列表
+   * 创建攻击日志下载任务
    */
-  async DescribeUserClbWafRegions(
-    req?: DescribeUserClbWafRegionsRequest,
-    cb?: (error: string, rep: DescribeUserClbWafRegionsResponse) => void
-  ): Promise<DescribeUserClbWafRegionsResponse> {
-    return this.request("DescribeUserClbWafRegions", req, cb)
+  async CreateAttackDownloadTask(
+    req: CreateAttackDownloadTaskRequest,
+    cb?: (error: string, rep: CreateAttackDownloadTaskResponse) => void
+  ): Promise<CreateAttackDownloadTaskResponse> {
+    return this.request("CreateAttackDownloadTask", req, cb)
   }
 
   /**
@@ -350,13 +336,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建攻击日志下载任务
+   * 在负载均衡型WAF的添加、编辑域名配置的时候，需要展示负载均衡型WAF（clb-waf)支持的地域列表，通过DescribeUserClbWafRegions既可以获得当前对客户已经开放的地域列表
    */
-  async CreateAttackDownloadTask(
-    req: CreateAttackDownloadTaskRequest,
-    cb?: (error: string, rep: CreateAttackDownloadTaskResponse) => void
-  ): Promise<CreateAttackDownloadTaskResponse> {
-    return this.request("CreateAttackDownloadTask", req, cb)
+  async DescribeUserClbWafRegions(
+    req?: DescribeUserClbWafRegionsRequest,
+    cb?: (error: string, rep: DescribeUserClbWafRegionsResponse) => void
+  ): Promise<DescribeUserClbWafRegionsResponse> {
+    return this.request("DescribeUserClbWafRegions", req, cb)
   }
 
   /**

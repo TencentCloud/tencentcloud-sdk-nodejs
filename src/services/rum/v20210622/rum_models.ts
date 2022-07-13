@@ -25,7 +25,7 @@ export interface CreateTawInstanceRequest {
   AreaId: number
 
   /**
-   * 计费类型, (1=体验，2=预付费，3=后付费)
+   * 计费类型, (1=后付费，2=预付费)
    */
   ChargeType: number
 

@@ -28,7 +28,7 @@ class Client extends abstract_client_1.AbstractClient {
         super("tan.tencentcloudapi.com", "2022-04-20", clientConfig);
     }
     /**
-     * 创建节点记录
+     * 推送节点数据
      */
     async CreateBlockNodeRecords(req, cb) {
         return this.request("CreateBlockNodeRecords", req, cb);

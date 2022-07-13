@@ -504,6 +504,12 @@ export interface Certificates {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   IsIgnore: boolean
+
+  /**
+      * 是否国密证书
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsSM: boolean
 }
 
 /**
@@ -2134,7 +2140,7 @@ export interface DescribeCertificatesRequest {
   ExpirationSort?: string
 
   /**
-   * 证书状态。
+   * 证书状态：0 = 审核中，1 = 已通过，2 = 审核失败，3 = 已过期，4 = 已添加DNS记录，5 = 企业证书，待提交，6 = 订单取消中，7 = 已取消，8 = 已提交资料， 待上传确认函，9 = 证书吊销中，10 = 已吊销，11 = 重颁发中，12 = 待上传吊销确认函，13 = 免费证书待提交资料。
    */
   CertificateStatus?: Array<number>
 
@@ -2157,6 +2163,11 @@ export interface DescribeCertificatesRequest {
    * 筛选来源， upload：上传证书， buy：腾讯云证书， 不传默认全部
    */
   FilterSource?: string
+
+  /**
+   * 是否筛选国密证书。1:筛选  0:不筛选
+   */
+  IsSM?: number
 }
 
 /**

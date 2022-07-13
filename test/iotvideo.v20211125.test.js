@@ -28,6 +28,36 @@ it("iotvideo.v20211125.DescribeMessageDataStats", async function () {
     }
 })
 
+it("iotvideo.v20211125.CreateProduct", async function () {
+    try {
+       const data = await client.CreateProduct({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotvideo.v20211125.DescribeDeviceDataStats", async function () {
+    try {
+       const data = await client.DescribeDeviceDataStats({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotvideo.v20211125.GenSingleDeviceSignatureOfPublic", async function () {
+    try {
+       const data = await client.GenSingleDeviceSignatureOfPublic({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotvideo.v20211125.CallDeviceActionAsync", async function () {
     try {
        const data = await client.CallDeviceActionAsync({})
@@ -41,16 +71,6 @@ it("iotvideo.v20211125.CallDeviceActionAsync", async function () {
 it("iotvideo.v20211125.CallDeviceActionSync", async function () {
     try {
        const data = await client.CallDeviceActionSync({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("iotvideo.v20211125.DescribeDeviceDataStats", async function () {
-    try {
-       const data = await client.DescribeDeviceDataStats({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

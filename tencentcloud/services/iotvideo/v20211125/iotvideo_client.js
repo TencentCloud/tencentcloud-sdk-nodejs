@@ -34,6 +34,24 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeMessageDataStats", req, cb);
     }
     /**
+     * 创建产品
+     */
+    async CreateProduct(req, cb) {
+        return this.request("CreateProduct", req, cb);
+    }
+    /**
+     * 查询设备数据统计
+     */
+    async DescribeDeviceDataStats(req, cb) {
+        return this.request("DescribeDeviceDataStats", req, cb);
+    }
+    /**
+     * 获取设备的绑定签名
+     */
+    async GenSingleDeviceSignatureOfPublic(req, cb) {
+        return this.request("GenSingleDeviceSignatureOfPublic", req, cb);
+    }
+    /**
      * 异步调用设备行为
      */
     async CallDeviceActionAsync(req, cb) {
@@ -44,12 +62,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CallDeviceActionSync(req, cb) {
         return this.request("CallDeviceActionSync", req, cb);
-    }
-    /**
-     * 查询设备数据统计
-     */
-    async DescribeDeviceDataStats(req, cb) {
-        return this.request("DescribeDeviceDataStats", req, cb);
     }
 }
 exports.Client = Client;

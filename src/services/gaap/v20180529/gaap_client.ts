@@ -26,6 +26,7 @@ import {
   DescribeListenerStatisticsRequest,
   DescribeProxyAndStatisticsListenersResponse,
   DeleteRuleRequest,
+  DescribeCrossBorderProxiesRequest,
   BindRuleRealServersRequest,
   DescribeHTTPSListenersResponse,
   ModifyProxiesProjectRequest,
@@ -86,6 +87,7 @@ import {
   DescribeTCPListenersResponse,
   DescribeRulesRequest,
   DescribeCountryAreaMappingResponse,
+  DescribeCrossBorderProxiesResponse,
   DescribeRealServersResponse,
   ModifyHTTPListenerAttributeResponse,
   DescribeRealServerStatisticsRequest,
@@ -114,7 +116,7 @@ import {
   DescribeProxyGroupListResponse,
   DescribeDomainErrorPageInfoRequest,
   HTTPSListener,
-  DomainAccessRegionDict,
+  BanAndRecoverProxyRequest,
   CloseSecurityPolicyRequest,
   ModifyCertificateAttributesRequest,
   ModifyProxyConfigurationRequest,
@@ -140,6 +142,7 @@ import {
   DescribeDomainErrorPageInfoResponse,
   DestroyProxiesResponse,
   DescribeRuleRealServersResponse,
+  BanAndRecoverProxyResponse,
   DescribeRealServersStatusRequest,
   ModifyHTTPListenerAttributeRequest,
   CreateProxyRequest,
@@ -168,6 +171,7 @@ import {
   ModifyDomainResponse,
   DescribeRulesByRuleIdsResponse,
   SetAuthenticationRequest,
+  DomainAccessRegionDict,
   InquiryPriceCreateProxyResponse,
   NewRealServer,
   DescribeFirstLinkSessionResponse,
@@ -344,6 +348,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateCustomHeaderResponse) => void
   ): Promise<CreateCustomHeaderResponse> {
     return this.request("CreateCustomHeader", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeCrossBorderProxies）用于查询跨境通道实例列表。
+   */
+  async DescribeCrossBorderProxies(
+    req?: DescribeCrossBorderProxiesRequest,
+    cb?: (error: string, rep: DescribeCrossBorderProxiesResponse) => void
+  ): Promise<DescribeCrossBorderProxiesResponse> {
+    return this.request("DescribeCrossBorderProxies", req, cb)
   }
 
   /**
@@ -1066,6 +1080,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDomainErrorPageInfoResponse) => void
   ): Promise<DescribeDomainErrorPageInfoResponse> {
     return this.request("DescribeDomainErrorPageInfo", req, cb)
+  }
+
+  /**
+   * 本接口（BanAndRecoverProxy）用于联通封禁解封GAAP跨境通道实例，支持按照客户UIN维度下发请求。被封禁的实例带宽上限将会被限制到0Mbps，无法正常处理客户端和源站之间的请求。
+   */
+  async BanAndRecoverProxy(
+    req?: BanAndRecoverProxyRequest,
+    cb?: (error: string, rep: BanAndRecoverProxyResponse) => void
+  ): Promise<BanAndRecoverProxyResponse> {
+    return this.request("BanAndRecoverProxy", req, cb)
   }
 
   /**

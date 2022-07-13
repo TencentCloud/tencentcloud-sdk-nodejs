@@ -45,7 +45,7 @@ export interface DescribeFlySecMiniAppReportUrlRequest {
  */
 export interface DescribeScanTaskListRequest {
   /**
-   * 任务来源, -1:所有, 0:默认值(私域), 1:灵犀, 2:灵鲲;
+   * 任务来源, -1:所有, 0:小程序诊断, 1:预留字段(暂未使用), 2:app诊断(android);
    */
   Source: number
 
@@ -130,7 +130,7 @@ export interface CreateAppScanTaskRequest {
   TaskType: number
 
   /**
-   * 任务来源, 0:默认值(私域), 1:灵犀, 2:灵鲲;
+   * 任务来源, 0:小程序诊断, 1:预留字段(暂未使用), 2:app诊断(android);
    */
   Source: number
 
@@ -235,7 +235,7 @@ export interface DescribeScanTaskStatusRequest {
   TaskType: number
 
   /**
-   * 任务来源, 0:默认值(私域), 1:灵犀, 2:灵鲲;
+   * 任务来源, 0:小程序诊断, 1:预留字段(暂未使用), 2:app诊断(android);
    */
   Source: number
 
@@ -589,7 +589,7 @@ export interface CreateAppScanTaskRepeatRequest {
   TaskType: number
 
   /**
-   * 任务来源, 0:默认值(私域), 1:灵犀, 2:灵鲲;
+   * 任务来源, 0:小程序诊断, 1:预留字段(暂未使用), 2:app诊断(android);
    */
   Source: number
 
@@ -614,7 +614,7 @@ export interface CreateAppScanTaskRepeatRequest {
  */
 export interface DescribeScanTaskReportUrlRequest {
   /**
-   * 任务来源, 0:默认值(私域), 1:灵犀, 2:灵鲲;
+   * 任务来源, 0:小程序诊断, 1:预留字段(暂未使用), 2:app诊断(android);
    */
   Source: number
 
@@ -1018,7 +1018,7 @@ export interface AppTaskData {
   TaskErrMsg: string
 
   /**
-   * 来源,0:默认值(私域), 1:灵犀, 2:灵鲲
+   * 任务来源,0:小程序诊断, 1:预留字段(暂未使用), 2:app诊断(android);
    */
   Source: number
 

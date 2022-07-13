@@ -28,9 +28,39 @@ it("es.v20180416.DiagnoseInstance", async function () {
     }
 })
 
+it("es.v20180416.DeleteLogstashInstance", async function () {
+    try {
+       const data = await client.DeleteLogstashInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.UpdateIndex", async function () {
+    try {
+       const data = await client.UpdateIndex({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("es.v20180416.GetRequestTargetNodeTypes", async function () {
     try {
        const data = await client.GetRequestTargetNodeTypes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.StopLogstashPipelines", async function () {
+    try {
+       const data = await client.StopLogstashPipelines({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -68,6 +98,16 @@ it("es.v20180416.CreateIndex", async function () {
     }
 })
 
+it("es.v20180416.UpdateRequestTargetNodeTypes", async function () {
+    try {
+       const data = await client.UpdateRequestTargetNodeTypes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("es.v20180416.UpdateDiagnoseSettings", async function () {
     try {
        const data = await client.UpdateDiagnoseSettings({})
@@ -98,6 +138,16 @@ it("es.v20180416.UpdatePlugins", async function () {
     }
 })
 
+it("es.v20180416.UpdateLogstashInstance", async function () {
+    try {
+       const data = await client.UpdateLogstashInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("es.v20180416.UpdateJdk", async function () {
     try {
        const data = await client.UpdateJdk({})
@@ -111,6 +161,16 @@ it("es.v20180416.UpdateJdk", async function () {
 it("es.v20180416.UpdateInstance", async function () {
     try {
        const data = await client.UpdateInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.CreateLogstashInstance", async function () {
+    try {
+       const data = await client.CreateLogstashInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -148,9 +208,9 @@ it("es.v20180416.RestartKibana", async function () {
     }
 })
 
-it("es.v20180416.UpdateDictionaries", async function () {
+it("es.v20180416.SaveAndDeployLogstashPipeline", async function () {
     try {
-       const data = await client.UpdateDictionaries({})
+       const data = await client.SaveAndDeployLogstashPipeline({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -158,9 +218,19 @@ it("es.v20180416.UpdateDictionaries", async function () {
     }
 })
 
-it("es.v20180416.UpdateRequestTargetNodeTypes", async function () {
+it("es.v20180416.DescribeLogstashInstanceOperations", async function () {
     try {
-       const data = await client.UpdateRequestTargetNodeTypes({})
+       const data = await client.DescribeLogstashInstanceOperations({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.StartLogstashPipelines", async function () {
+    try {
+       const data = await client.StartLogstashPipelines({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -171,6 +241,36 @@ it("es.v20180416.UpdateRequestTargetNodeTypes", async function () {
 it("es.v20180416.DescribeInstanceOperations", async function () {
     try {
        const data = await client.DescribeInstanceOperations({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.DescribeLogstashPipelines", async function () {
+    try {
+       const data = await client.DescribeLogstashPipelines({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.DescribeLogstashInstances", async function () {
+    try {
+       const data = await client.DescribeLogstashInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.UpdateLogstashPipelineDesc", async function () {
+    try {
+       const data = await client.UpdateLogstashPipelineDesc({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -198,9 +298,19 @@ it("es.v20180416.CreateInstance", async function () {
     }
 })
 
-it("es.v20180416.UpdateIndex", async function () {
+it("es.v20180416.UpgradeInstance", async function () {
     try {
-       const data = await client.UpdateIndex({})
+       const data = await client.UpgradeInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.DeleteLogstashPipelines", async function () {
+    try {
+       const data = await client.DeleteLogstashPipelines({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -228,9 +338,29 @@ it("es.v20180416.DeleteIndex", async function () {
     }
 })
 
-it("es.v20180416.UpgradeInstance", async function () {
+it("es.v20180416.RestartLogstashInstance", async function () {
     try {
-       const data = await client.UpgradeInstance({})
+       const data = await client.RestartLogstashInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.DescribeLogstashInstanceLogs", async function () {
+    try {
+       const data = await client.DescribeLogstashInstanceLogs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.UpdateDictionaries", async function () {
+    try {
+       const data = await client.UpdateDictionaries({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

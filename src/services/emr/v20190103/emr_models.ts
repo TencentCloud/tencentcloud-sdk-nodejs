@@ -760,6 +760,11 @@ export interface ScaleOutInstanceRequest {
    * 子网，默认是集群创建时的子网
    */
   SubnetId?: string
+
+  /**
+   * 预设配置组
+   */
+  ScaleOutServiceConfAssign?: string
 }
 
 /**

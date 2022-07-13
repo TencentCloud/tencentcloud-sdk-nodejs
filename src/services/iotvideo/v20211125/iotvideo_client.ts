@@ -19,13 +19,19 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   MessageCntStats,
+  DeviceSignatureInfo,
   CallDeviceActionAsyncResponse,
-  DescribeDeviceDataStatsResponse,
+  GenSingleDeviceSignatureOfPublicResponse,
+  CreateProductRequest,
+  GenSingleDeviceSignatureOfPublicRequest,
   DescribeDeviceDataStatsRequest,
   CallDeviceActionSyncResponse,
+  CreateProductResponse,
   DeviceCntStats,
-  DescribeMessageDataStatsResponse,
+  DescribeDeviceDataStatsResponse,
+  VideoProduct,
   DescribeMessageDataStatsRequest,
+  DescribeMessageDataStatsResponse,
   CallDeviceActionAsyncRequest,
   CallDeviceActionSyncRequest,
 } from "./iotvideo_models"
@@ -50,6 +56,36 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建产品
+   */
+  async CreateProduct(
+    req: CreateProductRequest,
+    cb?: (error: string, rep: CreateProductResponse) => void
+  ): Promise<CreateProductResponse> {
+    return this.request("CreateProduct", req, cb)
+  }
+
+  /**
+   * 查询设备数据统计
+   */
+  async DescribeDeviceDataStats(
+    req: DescribeDeviceDataStatsRequest,
+    cb?: (error: string, rep: DescribeDeviceDataStatsResponse) => void
+  ): Promise<DescribeDeviceDataStatsResponse> {
+    return this.request("DescribeDeviceDataStats", req, cb)
+  }
+
+  /**
+   * 获取设备的绑定签名
+   */
+  async GenSingleDeviceSignatureOfPublic(
+    req: GenSingleDeviceSignatureOfPublicRequest,
+    cb?: (error: string, rep: GenSingleDeviceSignatureOfPublicResponse) => void
+  ): Promise<GenSingleDeviceSignatureOfPublicResponse> {
+    return this.request("GenSingleDeviceSignatureOfPublic", req, cb)
+  }
+
+  /**
    * 异步调用设备行为
    */
   async CallDeviceActionAsync(
@@ -67,15 +103,5 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CallDeviceActionSyncResponse) => void
   ): Promise<CallDeviceActionSyncResponse> {
     return this.request("CallDeviceActionSync", req, cb)
-  }
-
-  /**
-   * 查询设备数据统计
-   */
-  async DescribeDeviceDataStats(
-    req: DescribeDeviceDataStatsRequest,
-    cb?: (error: string, rep: DescribeDeviceDataStatsResponse) => void
-  ): Promise<DescribeDeviceDataStatsResponse> {
-    return this.request("DescribeDeviceDataStats", req, cb)
   }
 }

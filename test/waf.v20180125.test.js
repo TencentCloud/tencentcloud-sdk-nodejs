@@ -28,16 +28,6 @@ it("waf.v20180125.DescribeAccessExports", async function () {
     }
 })
 
-it("waf.v20180125.DescribeCustomRules", async function () {
-    try {
-       const data = await client.DescribeCustomRules({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("waf.v20180125.ModifyCustomRuleStatus", async function () {
     try {
        const data = await client.ModifyCustomRuleStatus({})
@@ -148,9 +138,9 @@ it("waf.v20180125.DescribeFlowTrend", async function () {
     }
 })
 
-it("waf.v20180125.DescribeUserClbWafRegions", async function () {
+it("waf.v20180125.CreateAttackDownloadTask", async function () {
     try {
-       const data = await client.DescribeUserClbWafRegions({})
+       const data = await client.CreateAttackDownloadTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -238,9 +228,9 @@ it("waf.v20180125.ModifyWafAutoDenyRules", async function () {
     }
 })
 
-it("waf.v20180125.CreateAttackDownloadTask", async function () {
+it("waf.v20180125.DescribeUserClbWafRegions", async function () {
     try {
-       const data = await client.CreateAttackDownloadTask({})
+       const data = await client.DescribeUserClbWafRegions({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

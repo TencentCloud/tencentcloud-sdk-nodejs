@@ -83,6 +83,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateCustomHeader", req, cb);
     }
     /**
+     * 本接口（DescribeCrossBorderProxies）用于查询跨境通道实例列表。
+     */
+    async DescribeCrossBorderProxies(req, cb) {
+        return this.request("DescribeCrossBorderProxies", req, cb);
+    }
+    /**
      * 该接口为内部接口，用于查询可以获取统计数据的通道组和通道信息
      */
     async DescribeGroupAndStatisticsProxy(req, cb) {
@@ -515,6 +521,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeDomainErrorPageInfo(req, cb) {
         return this.request("DescribeDomainErrorPageInfo", req, cb);
+    }
+    /**
+     * 本接口（BanAndRecoverProxy）用于联通封禁解封GAAP跨境通道实例，支持按照客户UIN维度下发请求。被封禁的实例带宽上限将会被限制到0Mbps，无法正常处理客户端和源站之间的请求。
+     */
+    async BanAndRecoverProxy(req, cb) {
+        return this.request("BanAndRecoverProxy", req, cb);
     }
     /**
      * 本接口（ModifyProxyGroupAttribute）用于修改通道组属性，目前仅支持修改通道组名称。

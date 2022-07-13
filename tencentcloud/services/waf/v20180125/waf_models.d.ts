@@ -71,51 +71,6 @@ export interface DescribeIpHitItemsResponse {
     RequestId?: string;
 }
 /**
- * DescribeCustomRules接口回包中的复杂类型
- */
-export interface DescribeCustomRulesRspRuleListItem {
-    /**
-      * 动作类型
-      */
-    ActionType: string;
-    /**
-      * 跳过的策略
-      */
-    Bypass: string;
-    /**
-      * 创建时间
-      */
-    CreateTime: string;
-    /**
-      * 过期时间
-      */
-    ExpireTime: string;
-    /**
-      * 策略名称
-      */
-    Name: string;
-    /**
-      * 重定向地址
-      */
-    Redirect: string;
-    /**
-      * 策略ID
-      */
-    RuleId: string;
-    /**
-      * 优先级
-      */
-    SortId: string;
-    /**
-      * 状态
-      */
-    Status: string;
-    /**
-      * 策略详情
-      */
-    Strategies: Array<Strategy>;
-}
-/**
  * DescribeUserClbWafRegions返回参数结构体
  */
 export interface DescribeUserClbWafRegionsResponse {
@@ -290,23 +245,6 @@ export interface AccessLogItem {
     Value: string;
 }
 /**
- * DescribeCustomRules返回参数结构体
- */
-export interface DescribeCustomRulesResponse {
-    /**
-      * 规则详情
-      */
-    RuleList: Array<DescribeCustomRulesRspRuleListItem>;
-    /**
-      * 规则条数
-      */
-    TotalCount: string;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
  * DeleteSession请求参数结构体
  */
 export interface DeleteSessionRequest {
@@ -377,19 +315,6 @@ export interface UpsertIpAccessControlRequest {
     Edition?: string;
 }
 /**
- * DescribeCustomRules接口的翻页参数
- */
-export interface DescribeCustomRulesPagingInfo {
-    /**
-      * 当前页码
-      */
-    Offset: number;
-    /**
-      * 当前页的最大数据条数
-      */
-    Limit: number;
-}
-/**
  * DeleteDownloadRecord请求参数结构体
  */
 export interface DeleteDownloadRecordRequest {
@@ -443,29 +368,17 @@ export interface ModifyAccessPeriodResponse {
     RequestId?: string;
 }
 /**
- * clb-waf QPS套餐 New
+ * DescribeWafThreatenIntelligence返回参数结构体
  */
-export interface QPSPackageNew {
+export interface DescribeWafThreatenIntelligenceResponse {
     /**
-      * 资源ID
+      * WAF 威胁情报封禁信息
       */
-    ResourceIds: string;
+    WafThreatenIntelligenceDetails?: WafThreatenIntelligenceDetails;
     /**
-      * 过期时间
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    ValidTime: string;
-    /**
-      * 是否自动续费，1：自动续费，0：不自动续费
-      */
-    RenewFlag: number;
-    /**
-      * 套餐购买个数
-      */
-    Count: number;
-    /**
-      * 套餐购买地域，clb-waf暂时没有用到
-      */
-    Region: string;
+    RequestId?: string;
 }
 /**
  * 实例入参过滤器
@@ -1423,31 +1336,6 @@ export interface FraudPkg {
     UsedNum?: number;
 }
 /**
- * DescribeCustomRules请求参数结构体
- */
-export interface DescribeCustomRulesRequest {
-    /**
-      * 域名
-      */
-    Domain: string;
-    /**
-      * 分页参数
-      */
-    Paging: DescribeCustomRulesPagingInfo;
-    /**
-      * clb-waf或者sparta-waf
-      */
-    Edition?: string;
-    /**
-      * 过滤参数：动作类型：0放行，1阻断，2人机识别，3观察，4重定向
-      */
-    ActionType?: string;
-    /**
-      * 过滤参数：规则名称过滤条件
-      */
-    Search?: string;
-}
-/**
  * ModifyDomainWhiteRule返回参数结构体
  */
 export interface ModifyDomainWhiteRuleResponse {
@@ -1784,17 +1672,29 @@ export interface DeleteAttackDownloadRecordRequest {
     Id: number;
 }
 /**
- * DescribeWafThreatenIntelligence返回参数结构体
+ * clb-waf QPS套餐 New
  */
-export interface DescribeWafThreatenIntelligenceResponse {
+export interface QPSPackageNew {
     /**
-      * WAF 威胁情报封禁信息
+      * 资源ID
       */
-    WafThreatenIntelligenceDetails?: WafThreatenIntelligenceDetails;
+    ResourceIds: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 过期时间
       */
-    RequestId?: string;
+    ValidTime: string;
+    /**
+      * 是否自动续费，1：自动续费，0：不自动续费
+      */
+    RenewFlag: number;
+    /**
+      * 套餐购买个数
+      */
+    Count: number;
+    /**
+      * 套餐购买地域，clb-waf暂时没有用到
+      */
+    Region: string;
 }
 /**
  * AddDomainWhiteRule请求参数结构体

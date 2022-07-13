@@ -234,6 +234,11 @@ export interface DeleteRuleRequest {
 }
 
 /**
+ * DescribeCrossBorderProxies请求参数结构体
+ */
+export type DescribeCrossBorderProxiesRequest = null
+
+/**
  * BindRuleRealServers请求参数结构体
  */
 export interface BindRuleRealServersRequest {
@@ -1601,6 +1606,16 @@ export interface DescribeCountryAreaMappingResponse {
 }
 
 /**
+ * DescribeCrossBorderProxies返回参数结构体
+ */
+export interface DescribeCrossBorderProxiesResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeRealServers返回参数结构体
  */
 export interface DescribeRealServersResponse {
@@ -2392,39 +2407,9 @@ export interface HTTPSListener {
 }
 
 /**
- * 域名解析就近访问配置详情
+ * BanAndRecoverProxy请求参数结构体
  */
-export interface DomainAccessRegionDict {
-  /**
-   * 就近接入区域
-   */
-  NationCountryInnerList: Array<NationCountryInnerInfo>
-
-  /**
-   * 加速区域通道列表
-   */
-  ProxyList: Array<ProxyIdDict>
-
-  /**
-   * 加速区域ID
-   */
-  RegionId: string
-
-  /**
-   * 加速区域内部编码
-   */
-  GeographicalZoneInnerCode: string
-
-  /**
-   * 加速区域所属大洲内部编码
-   */
-  ContinentInnerCode: string
-
-  /**
-   * 加速区域别名
-   */
-  RegionName: string
-}
+export type BanAndRecoverProxyRequest = null
 
 /**
  * CloseSecurityPolicy请求参数结构体
@@ -3075,6 +3060,16 @@ export interface DescribeRuleRealServersResponse {
    */
   BindRealServerSet: Array<BindRealServer>
 
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * BanAndRecoverProxy返回参数结构体
+ */
+export interface BanAndRecoverProxyResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3828,6 +3823,41 @@ export interface SetAuthenticationRequest {
    * 多源站CA证书ID，从证书管理页获取。源站认证时，填写该参数或RealServerCertificateId参数
    */
   PolyRealServerCertificateIds?: Array<string>
+}
+
+/**
+ * 域名解析就近访问配置详情
+ */
+export interface DomainAccessRegionDict {
+  /**
+   * 就近接入区域
+   */
+  NationCountryInnerList: Array<NationCountryInnerInfo>
+
+  /**
+   * 加速区域通道列表
+   */
+  ProxyList: Array<ProxyIdDict>
+
+  /**
+   * 加速区域ID
+   */
+  RegionId: string
+
+  /**
+   * 加速区域内部编码
+   */
+  GeographicalZoneInnerCode: string
+
+  /**
+   * 加速区域所属大洲内部编码
+   */
+  ContinentInnerCode: string
+
+  /**
+   * 加速区域别名
+   */
+  RegionName: string
 }
 
 /**

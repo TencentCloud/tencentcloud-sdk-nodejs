@@ -44,6 +44,21 @@ export interface MessageCntStats {
 }
 
 /**
+ * 设备签名信息
+ */
+export interface DeviceSignatureInfo {
+  /**
+   * 设备名称
+   */
+  DeviceName: string
+
+  /**
+   * 设备签名
+   */
+  DeviceSignature: string
+}
+
+/**
  * CallDeviceActionAsync返回参数结构体
  */
 export interface CallDeviceActionAsyncResponse {
@@ -66,31 +81,93 @@ export interface CallDeviceActionAsyncResponse {
 }
 
 /**
- * DescribeDeviceDataStats返回参数结构体
+ * GenSingleDeviceSignatureOfPublic返回参数结构体
  */
-export interface DescribeDeviceDataStatsResponse {
+export interface GenSingleDeviceSignatureOfPublicResponse {
   /**
-      * 累计注册设备数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  RegisterCnt: number
-
-  /**
-      * 设备数量列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Data: Array<DeviceCntStats>
-
-  /**
-      * 总数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Total: number
+   * 设备签名信息
+   */
+  DeviceSignature: DeviceSignatureInfo
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreateProduct请求参数结构体
+ */
+export interface CreateProductRequest {
+  /**
+   * 产品名称
+   */
+  ProductName: string
+
+  /**
+   * 产品设备类型 1.普通设备 2.NVR设备
+   */
+  DeviceType: number
+
+  /**
+   * 产品有效期
+   */
+  ProductVaildYears: number
+
+  /**
+   * 设备功能码 ypsxth音频双向通话 spdxth视频单向通话 sxysp双向音视频
+   */
+  Features: Array<string>
+
+  /**
+   * 设备操作系统，通用设备填default
+   */
+  ChipOs: string
+
+  /**
+   * 芯片厂商id，通用设备填default
+   */
+  ChipManufactureId: string
+
+  /**
+   * 芯片id，通用设备填default
+   */
+  ChipId: string
+
+  /**
+   * 产品描述信息
+   */
+  ProductDescription: string
+
+  /**
+   * 认证方式 只支持取值为2 psk认证
+   */
+  EncryptionType?: number
+
+  /**
+   * 连接类型，wifi表示WIFI连接，cellular表示4G连接
+   */
+  NetType?: string
+}
+
+/**
+ * GenSingleDeviceSignatureOfPublic请求参数结构体
+ */
+export interface GenSingleDeviceSignatureOfPublicRequest {
+  /**
+   * 设备所属的产品ID
+   */
+  ProductId: string
+
+  /**
+   * 需要绑定的设备
+   */
+  DeviceName: string
+
+  /**
+   * 设备绑定签名的有效时间,以秒为单位。取值范围：0 < Expire <= 86400，Expire == -1（十年）
+   */
+  Expire: number
 }
 
 /**
@@ -142,6 +219,21 @@ export interface CallDeviceActionSyncResponse {
 }
 
 /**
+ * CreateProduct返回参数结构体
+ */
+export interface CreateProductResponse {
+  /**
+   * 产品详情
+   */
+  Data: VideoProduct
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 设备数量统计
  */
 export interface DeviceCntStats {
@@ -170,14 +262,20 @@ export interface DeviceCntStats {
 }
 
 /**
- * DescribeMessageDataStats返回参数结构体
+ * DescribeDeviceDataStats返回参数结构体
  */
-export interface DescribeMessageDataStatsResponse {
+export interface DescribeDeviceDataStatsResponse {
   /**
-      * 消息数量列表
+      * 累计注册设备数
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Data: Array<MessageCntStats>
+  RegisterCnt: number
+
+  /**
+      * 设备数量列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Data: Array<DeviceCntStats>
 
   /**
       * 总数
@@ -189,6 +287,72 @@ export interface DescribeMessageDataStatsResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * video产品元数据
+ */
+export interface VideoProduct {
+  /**
+   * 产品ID
+   */
+  ProductId: string
+
+  /**
+   * 产品名称
+   */
+  ProductName: string
+
+  /**
+   * 产品设备类型（普通设备)	1.普通设备
+   */
+  DeviceType: number
+
+  /**
+   * 认证方式：2：PSK
+   */
+  EncryptionType: number
+
+  /**
+   * 设备功能码
+   */
+  Features: Array<string>
+
+  /**
+   * 操作系统
+   */
+  ChipOs: string
+
+  /**
+   * 芯片厂商id
+   */
+  ChipManufactureId: string
+
+  /**
+   * 芯片id
+   */
+  ChipId: string
+
+  /**
+   * 产品描述信息
+   */
+  ProductDescription: string
+
+  /**
+   * 创建时间unix时间戳
+   */
+  CreateTime: number
+
+  /**
+   * 修改时间unix时间戳
+   */
+  UpdateTime: number
+
+  /**
+      * 连接类型，wifi表示WIFI连接，cellular表示4G连接
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NetType: string
 }
 
 /**
@@ -209,6 +373,28 @@ export interface DescribeMessageDataStatsRequest {
    * 产品id
    */
   ProductId?: string
+}
+
+/**
+ * DescribeMessageDataStats返回参数结构体
+ */
+export interface DescribeMessageDataStatsResponse {
+  /**
+      * 消息数量列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Data: Array<MessageCntStats>
+
+  /**
+      * 总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Total: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

@@ -18,84 +18,116 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  WebNodeTypeInfo,
-  InstanceLog,
-  LocalDiskInfo,
-  IndexPolicyField,
-  NodeInfo,
-  UpgradeInstanceResponse,
-  UpdateDiagnoseSettingsResponse,
-  DescribeIndexMetaResponse,
-  UpdateInstanceResponse,
+  TaskDetail,
+  RestartLogstashInstanceRequest,
   DescribeInstanceOperationsRequest,
-  UpdateJdkRequest,
-  CreateIndexResponse,
+  LogstashInstanceInfo,
   OperationDetail,
-  DiagnoseInstanceResponse,
-  KibanaView,
+  StartLogstashPipelinesRequest,
   EsPublicAcl,
-  BackingIndexMetaField,
   DictInfo,
-  RestartInstanceResponse,
-  RestartKibanaRequest,
+  DescribeLogstashInstanceLogsResponse,
   CreateInstanceResponse,
-  IndexSettingsField,
   DescribeInstanceLogsRequest,
-  UpdateDictionariesRequest,
-  ZoneDetail,
-  UpdateRequestTargetNodeTypesRequest,
-  OperationDuration,
-  NodeView,
-  DescribeIndexListRequest,
-  CosBackup,
-  TagInfo,
+  DeleteLogstashPipelinesResponse,
   KeyValue,
-  CreateInstanceRequest,
-  UpdateDictionariesResponse,
-  InstanceInfo,
-  DeleteInstanceResponse,
+  UpdateLogstashPipelineDescResponse,
   DescribeInstancesResponse,
   DescribeInstanceLogsResponse,
   IndexMetaField,
-  UpdatePluginsResponse,
   DiagnoseInstanceRequest,
-  RestartInstanceRequest,
-  RestartKibanaResponse,
-  DescribeInstancesRequest,
-  CreateIndexRequest,
-  ClusterView,
-  UpdateInstanceRequest,
-  EsDictionaryInfo,
-  DescribeInstanceOperationsResponse,
-  RestartNodesRequest,
-  UpdatePluginsRequest,
-  GetRequestTargetNodeTypesRequest,
-  KibanaNodeInfo,
-  OperationDurationUpdated,
-  UpgradeLicenseResponse,
-  EsAcl,
-  UpdateIndexRequest,
-  MasterNodeInfo,
-  IndexOptionsField,
-  TaskDetail,
-  DeleteInstanceRequest,
-  DescribeViewsResponse,
-  UpdateJdkResponse,
-  RestartNodesResponse,
-  SubTaskDetail,
-  DescribeIndexMetaRequest,
-  UpgradeInstanceRequest,
-  DeleteIndexResponse,
-  DeleteIndexRequest,
-  EsConfigSetInfo,
-  DescribeViewsRequest,
-  GetRequestTargetNodeTypesResponse,
+  LogstashBindedES,
   UpdateDiagnoseSettingsRequest,
-  DescribeIndexListResponse,
-  Operation,
-  UpdateIndexResponse,
-  UpgradeLicenseRequest,
+  DescribeInstanceOperationsResponse,
+  IndexOptionsField,
   UpdateRequestTargetNodeTypesResponse,
+  DeleteLogstashInstanceResponse,
+  LogstashPipeline,
+  SubTaskDetail,
+  EsConfigSetInfo,
+  GetRequestTargetNodeTypesResponse,
+  Operation,
+  InstanceLog,
+  NodeInfo,
+  DescribeIndexMetaResponse,
+  DiagnoseInstanceResponse,
+  LogstashNodeInfo,
+  IndexSettingsField,
+  UpgradeLicenseResponse,
+  LogstashExtendedFile,
+  UpdateLogstashInstanceRequest,
+  UpdateRequestTargetNodeTypesRequest,
+  DescribeLogstashInstancesResponse,
+  DeleteInstanceResponse,
+  DescribeLogstashInstanceOperationsResponse,
+  CreateIndexRequest,
+  LogstashPipelineInfo,
+  UpdatePluginsRequest,
+  UpgradeLicenseRequest,
+  UpdateJdkResponse,
+  UpdateInstanceResponse,
+  DeleteIndexRequest,
+  DescribeViewsRequest,
+  DescribeIndexListResponse,
+  StartLogstashPipelinesResponse,
+  DescribeLogstashInstanceOperationsRequest,
+  CreateLogstashInstanceResponse,
+  SaveAndDeployLogstashPipelineRequest,
+  ClusterView,
+  CreateIndexResponse,
+  DeleteLogstashPipelinesRequest,
+  RestartKibanaRequest,
+  DescribeIndexListRequest,
+  UpdateDictionariesRequest,
+  CosBackup,
+  SaveAndDeployLogstashPipelineResponse,
+  OperationDuration,
+  DescribeLogstashPipelinesResponse,
+  OperationDurationUpdated,
+  CreateInstanceRequest,
+  CreateLogstashInstanceRequest,
+  UpdateDictionariesResponse,
+  InstanceInfo,
+  DeleteIndexResponse,
+  UpdatePluginsResponse,
+  DescribeInstancesRequest,
+  EsDictionaryInfo,
+  DescribeLogstashPipelinesRequest,
+  RestartNodesRequest,
+  GetRequestTargetNodeTypesRequest,
+  DescribeLogstashInstancesRequest,
+  MasterNodeInfo,
+  DeleteInstanceRequest,
+  UpgradeInstanceResponse,
+  DescribeIndexMetaRequest,
+  RestartKibanaResponse,
+  UpdateIndexRequest,
+  UpdateIndexResponse,
+  WebNodeTypeInfo,
+  LocalDiskInfo,
+  IndexPolicyField,
+  UpdateJdkRequest,
+  UpdateLogstashInstanceResponse,
+  StopLogstashPipelinesRequest,
+  KibanaView,
+  RestartInstanceResponse,
+  BackingIndexMetaField,
+  UpdateLogstashPipelineDescRequest,
+  NodeView,
+  TagInfo,
+  UpdateInstanceRequest,
+  DescribeLogstashInstanceLogsRequest,
+  RestartInstanceRequest,
+  ZoneDetail,
+  StopLogstashPipelinesResponse,
+  KibanaNodeInfo,
+  UpdateDiagnoseSettingsResponse,
+  EsAcl,
+  RestartNodesResponse,
+  DeleteLogstashInstanceRequest,
+  UpgradeInstanceRequest,
+  DescribeViewsResponse,
+  RestartLogstashInstanceResponse,
 } from "./es_models"
 
 /**
@@ -118,6 +150,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 用于删除Logstash实例
+   */
+  async DeleteLogstashInstance(
+    req: DeleteLogstashInstanceRequest,
+    cb?: (error: string, rep: DeleteLogstashInstanceResponse) => void
+  ): Promise<DeleteLogstashInstanceResponse> {
+    return this.request("DeleteLogstashInstance", req, cb)
+  }
+
+  /**
+   * 更新索引
+   */
+  async UpdateIndex(
+    req: UpdateIndexRequest,
+    cb?: (error: string, rep: UpdateIndexResponse) => void
+  ): Promise<UpdateIndexResponse> {
+    return this.request("UpdateIndex", req, cb)
+  }
+
+  /**
    * 获取接收客户端请求的节点类型
    */
   async GetRequestTargetNodeTypes(
@@ -125,6 +177,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetRequestTargetNodeTypesResponse) => void
   ): Promise<GetRequestTargetNodeTypesResponse> {
     return this.request("GetRequestTargetNodeTypes", req, cb)
+  }
+
+  /**
+   * 用于批量停止Logstash管道
+   */
+  async StopLogstashPipelines(
+    req: StopLogstashPipelinesRequest,
+    cb?: (error: string, rep: StopLogstashPipelinesResponse) => void
+  ): Promise<StopLogstashPipelinesResponse> {
+    return this.request("StopLogstashPipelines", req, cb)
   }
 
   /**
@@ -158,6 +220,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 更新接收客户端请求的节点类型
+   */
+  async UpdateRequestTargetNodeTypes(
+    req: UpdateRequestTargetNodeTypesRequest,
+    cb?: (error: string, rep: UpdateRequestTargetNodeTypesResponse) => void
+  ): Promise<UpdateRequestTargetNodeTypesResponse> {
+    return this.request("UpdateRequestTargetNodeTypes", req, cb)
+  }
+
+  /**
    * 更新智能运维配置
    */
   async UpdateDiagnoseSettings(
@@ -188,6 +260,21 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 对集群进行节点规格变更，修改实例名称，修改配置，等操作。参数中InstanceId为必传参数，参数传递组合及含义如下：
+- InstanceName：修改实例名称(仅用于标识实例)
+- NodeNum: 修改实例节点数量（节点横向扩缩容，纵向扩缩容等）
+- YMLConfig: 修改实例YML配置
+- BindedES：修改绑定的ES集群配置
+以上参数组合只能传递一种，多传或少传均会导致请求失败
+     */
+  async UpdateLogstashInstance(
+    req: UpdateLogstashInstanceRequest,
+    cb?: (error: string, rep: UpdateLogstashInstanceResponse) => void
+  ): Promise<UpdateLogstashInstanceResponse> {
+    return this.request("UpdateLogstashInstance", req, cb)
+  }
+
+  /**
    * 更新实例Jdk配置
    */
   async UpdateJdk(
@@ -212,6 +299,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpdateInstanceResponse) => void
   ): Promise<UpdateInstanceResponse> {
     return this.request("UpdateInstance", req, cb)
+  }
+
+  /**
+   * 用于创建Logstash实例
+   */
+  async CreateLogstashInstance(
+    req: CreateLogstashInstanceRequest,
+    cb?: (error: string, rep: CreateLogstashInstanceResponse) => void
+  ): Promise<CreateLogstashInstanceResponse> {
+    return this.request("CreateLogstashInstance", req, cb)
   }
 
   /**
@@ -245,23 +342,33 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更新ES集群词典
+   * 用于下发并且部署管道
    */
-  async UpdateDictionaries(
-    req: UpdateDictionariesRequest,
-    cb?: (error: string, rep: UpdateDictionariesResponse) => void
-  ): Promise<UpdateDictionariesResponse> {
-    return this.request("UpdateDictionaries", req, cb)
+  async SaveAndDeployLogstashPipeline(
+    req: SaveAndDeployLogstashPipelineRequest,
+    cb?: (error: string, rep: SaveAndDeployLogstashPipelineResponse) => void
+  ): Promise<SaveAndDeployLogstashPipelineResponse> {
+    return this.request("SaveAndDeployLogstashPipeline", req, cb)
   }
 
   /**
-   * 更新接收客户端请求的节点类型
+   * 查询实例指定条件下的操作记录
    */
-  async UpdateRequestTargetNodeTypes(
-    req: UpdateRequestTargetNodeTypesRequest,
-    cb?: (error: string, rep: UpdateRequestTargetNodeTypesResponse) => void
-  ): Promise<UpdateRequestTargetNodeTypesResponse> {
-    return this.request("UpdateRequestTargetNodeTypes", req, cb)
+  async DescribeLogstashInstanceOperations(
+    req: DescribeLogstashInstanceOperationsRequest,
+    cb?: (error: string, rep: DescribeLogstashInstanceOperationsResponse) => void
+  ): Promise<DescribeLogstashInstanceOperationsResponse> {
+    return this.request("DescribeLogstashInstanceOperations", req, cb)
+  }
+
+  /**
+   * 用于启动Logstash管道
+   */
+  async StartLogstashPipelines(
+    req: StartLogstashPipelinesRequest,
+    cb?: (error: string, rep: StartLogstashPipelinesResponse) => void
+  ): Promise<StartLogstashPipelinesResponse> {
+    return this.request("StartLogstashPipelines", req, cb)
   }
 
   /**
@@ -272,6 +379,36 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeInstanceOperationsResponse) => void
   ): Promise<DescribeInstanceOperationsResponse> {
     return this.request("DescribeInstanceOperations", req, cb)
+  }
+
+  /**
+   * 用于获取Logstash实例管道列表
+   */
+  async DescribeLogstashPipelines(
+    req: DescribeLogstashPipelinesRequest,
+    cb?: (error: string, rep: DescribeLogstashPipelinesResponse) => void
+  ): Promise<DescribeLogstashPipelinesResponse> {
+    return this.request("DescribeLogstashPipelines", req, cb)
+  }
+
+  /**
+   * 查询用户该地域下符合条件的所有Logstash实例
+   */
+  async DescribeLogstashInstances(
+    req: DescribeLogstashInstancesRequest,
+    cb?: (error: string, rep: DescribeLogstashInstancesResponse) => void
+  ): Promise<DescribeLogstashInstancesResponse> {
+    return this.request("DescribeLogstashInstances", req, cb)
+  }
+
+  /**
+   * 用于更新管道描述信息
+   */
+  async UpdateLogstashPipelineDesc(
+    req: UpdateLogstashPipelineDescRequest,
+    cb?: (error: string, rep: UpdateLogstashPipelineDescResponse) => void
+  ): Promise<UpdateLogstashPipelineDescResponse> {
+    return this.request("UpdateLogstashPipelineDesc", req, cb)
   }
 
   /**
@@ -295,13 +432,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更新索引
+   * 升级ES集群版本
    */
-  async UpdateIndex(
-    req: UpdateIndexRequest,
-    cb?: (error: string, rep: UpdateIndexResponse) => void
-  ): Promise<UpdateIndexResponse> {
-    return this.request("UpdateIndex", req, cb)
+  async UpgradeInstance(
+    req: UpgradeInstanceRequest,
+    cb?: (error: string, rep: UpgradeInstanceResponse) => void
+  ): Promise<UpgradeInstanceResponse> {
+    return this.request("UpgradeInstance", req, cb)
+  }
+
+  /**
+   * 用于批量删除Logstash管道
+   */
+  async DeleteLogstashPipelines(
+    req: DeleteLogstashPipelinesRequest,
+    cb?: (error: string, rep: DeleteLogstashPipelinesResponse) => void
+  ): Promise<DeleteLogstashPipelinesResponse> {
+    return this.request("DeleteLogstashPipelines", req, cb)
   }
 
   /**
@@ -325,13 +472,33 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 升级ES集群版本
+   * 用于重启Logstash实例
    */
-  async UpgradeInstance(
-    req: UpgradeInstanceRequest,
-    cb?: (error: string, rep: UpgradeInstanceResponse) => void
-  ): Promise<UpgradeInstanceResponse> {
-    return this.request("UpgradeInstance", req, cb)
+  async RestartLogstashInstance(
+    req: RestartLogstashInstanceRequest,
+    cb?: (error: string, rep: RestartLogstashInstanceResponse) => void
+  ): Promise<RestartLogstashInstanceResponse> {
+    return this.request("RestartLogstashInstance", req, cb)
+  }
+
+  /**
+   * 查询用户该地域下符合条件的Logstash实例的日志
+   */
+  async DescribeLogstashInstanceLogs(
+    req: DescribeLogstashInstanceLogsRequest,
+    cb?: (error: string, rep: DescribeLogstashInstanceLogsResponse) => void
+  ): Promise<DescribeLogstashInstanceLogsResponse> {
+    return this.request("DescribeLogstashInstanceLogs", req, cb)
+  }
+
+  /**
+   * 更新ES集群词典
+   */
+  async UpdateDictionaries(
+    req: UpdateDictionariesRequest,
+    cb?: (error: string, rep: UpdateDictionariesResponse) => void
+  ): Promise<UpdateDictionariesResponse> {
+    return this.request("UpdateDictionaries", req, cb)
   }
 
   /**
