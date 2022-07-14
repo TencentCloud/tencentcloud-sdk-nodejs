@@ -157,7 +157,7 @@ export interface Encryption {
   EncryptList: Array<string>
 
   /**
-   * 有加密需求的用户，传入CBC加密的初始向量
+   * 有加密需求的用户，传入CBC加密的初始向量（客户自定义字符串，长度16字符）。
    */
   Iv: string
 }
@@ -388,6 +388,16 @@ export interface GetEidTokenConfig {
 注：使用OCR时仅支持用户修改结果中的姓名
       */
   InputType?: string
+
+  /**
+   * 是否使用意愿核身，默认不使用。注意：如开启使用，则计费标签按【意愿核身】计费标签计价；如不开启，则计费标签按【E证通】计费标签计价，价格详见：[价格说明](https://cloud.tencent.com/document/product/1007/56804)。
+   */
+  UseIntentionVerify?: boolean
+
+  /**
+   * 意愿核身使用的文案，若未使用意愿核身功能，该字段无需传入。默认为空，最长可接受120的字符串长度。
+   */
+  IntentionVerifyText?: string
 }
 
 /**
@@ -557,31 +567,6 @@ export interface PhoneVerificationRequest {
 }
 
 /**
- * PhoneVerificationCMCC请求参数结构体
- */
-export interface PhoneVerificationCMCCRequest {
-  /**
-   * 身份证号
-   */
-  IdCard: string
-
-  /**
-   * 姓名
-   */
-  Name: string
-
-  /**
-   * 手机号
-   */
-  Phone: string
-
-  /**
-   * 敏感数据加密信息。对传入信息（姓名、身份证号、手机号）有加密需求的用户可使用此参数，详情请点击左侧链接。
-   */
-  Encryption?: Encryption
-}
-
-/**
  * GetEidResult请求参数结构体
  */
 export interface GetEidResultRequest {
@@ -591,7 +576,7 @@ export interface GetEidResultRequest {
   EidToken: string
 
   /**
-      * 指定拉取的结果信息，取值（0：全部；1：文本类；2：身份证信息；3：最佳截图信息）。
+      * 指定拉取的结果信息，取值（0：全部；1：文本类；2：身份证信息；3：最佳截图信息；5：意愿核身相关结果；）。
 如 13表示拉取文本类、最佳截图信息。
 默认值：0
       */
@@ -685,7 +670,7 @@ export interface GetEidTokenRequest {
   Extra?: string
 
   /**
-   * 小程序模式配置，包括如何传入姓名身份证的配置。
+   * 小程序模式配置，包括如何传入姓名身份证的配置，以及是否使用意愿核身。
    */
   Config?: GetEidTokenConfig
 
@@ -701,38 +686,26 @@ export interface GetEidTokenRequest {
 }
 
 /**
- * IdCardOCRVerification请求参数结构体
+ * PhoneVerificationCMCC请求参数结构体
  */
-export interface IdCardOCRVerificationRequest {
+export interface PhoneVerificationCMCCRequest {
   /**
-      * 身份证号
-姓名和身份证号、ImageBase64、ImageUrl三者必须提供其中之一。若都提供了，则按照姓名和身份证号>ImageBase64>ImageUrl的优先级使用参数。
-      */
-  IdCard?: string
+   * 身份证号
+   */
+  IdCard: string
 
   /**
    * 姓名
    */
-  Name?: string
+  Name: string
 
   /**
-      * 身份证人像面的 Base64 值
-支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 3M。请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。
-      */
-  ImageBase64?: string
+   * 手机号
+   */
+  Phone: string
 
   /**
-      * 身份证人像面的 Url 地址
-支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
-图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
-非腾讯云存储的 Url 速度和稳定性可能受一定影响。
-      */
-  ImageUrl?: string
-
-  /**
-   * 敏感数据加密信息。对传入信息（姓名、身份证号）有加密需求的用户可使用此参数，详情请点击左侧链接。
+   * 敏感数据加密信息。对传入信息（姓名、身份证号、手机号）有加密需求的用户可使用此参数，详情请点击左侧链接。
    */
   Encryption?: Encryption
 }
@@ -846,38 +819,40 @@ export interface MobileStatusRequest {
 }
 
 /**
- * DetectReflectLivenessAndCompare返回参数结构体
+ * IdCardOCRVerification请求参数结构体
  */
-export interface DetectReflectLivenessAndCompareResponse {
+export interface IdCardOCRVerificationRequest {
   /**
-   * 验证通过后的视频最佳截图资源临时地址，jpg格式，资源和链接有效期2小时，务必在有效期内下载。
-   */
-  BestFrameUrl: string
+      * 身份证号
+姓名和身份证号、ImageBase64、ImageUrl三者必须提供其中之一。若都提供了，则按照姓名和身份证号>ImageBase64>ImageUrl的优先级使用参数。
+      */
+  IdCard?: string
 
   /**
-   * 验证通过后的视频最佳截图资源MD5（32位，用于校验BestFrame的一致性）。
+   * 姓名
    */
-  BestFrameMd5: string
+  Name?: string
 
   /**
-   * 业务错误码，成功情况返回Success，错误情况请参考下方错误码 列表中FailedOperation部分。
-   */
-  Result: string
+      * 身份证人像面的 Base64 值
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经Base64编码后不超过 3M。请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。
+      */
+  ImageBase64?: string
 
   /**
-   * 业务结果描述。
-   */
-  Description: string
+      * 身份证人像面的 Url 地址
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
+图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
+非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+      */
+  ImageUrl?: string
 
   /**
-   * 相似度，取值范围 [0.00, 100.00]。推荐相似度大于等于70时可判断为同一人，可根据具体场景自行调整阈值（阈值70的误通过率为千分之一，阈值80的误通过率是万分之一）。
+   * 敏感数据加密信息。对传入信息（姓名、身份证号）有加密需求的用户可使用此参数，详情请点击左侧链接。
    */
-  Sim: number
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  Encryption?: Encryption
 }
 
 /**
@@ -1179,28 +1154,23 @@ export interface GetFaceIdTokenResponse {
 }
 
 /**
- * DetectReflectLivenessAndCompare请求参数结构体
+ * GetRealNameAuthToken返回参数结构体
  */
-export interface DetectReflectLivenessAndCompareRequest {
+export interface GetRealNameAuthTokenResponse {
   /**
-   * SDK生成的活体检测数据包的资源地址。
+   * 查询实名认证结果的唯一凭证
    */
-  LiveDataUrl: string
+  AuthToken?: string
 
   /**
-   * SDK生成的活体检测数据包的资源内容MD5（32位，用于校验LiveData的一致性）。
+   * 实名认证授权地址，认证发起方需要重定向到这个地址获取认证用户的授权，仅能在微信环境下打开。
    */
-  LiveDataMd5: string
+  RedirectURL?: string
 
   /**
-   * 用于比对的目标图片的资源地址。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  ImageUrl: string
-
-  /**
-   * 用于比对的目标图片的资源MD5（32位，用于校验Image的一致性）。
-   */
-  ImageMd5: string
+  RequestId?: string
 }
 
 /**
@@ -1848,6 +1818,12 @@ export interface GetEidResultResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   EidInfo: EidInfo
+
+  /**
+      * 意愿核身相关信息。若未使用意愿核身功能，该字段返回值可以不处理。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IntentionVerifyData: IntentionVerifyData
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2770,26 +2746,6 @@ export interface EncryptedPhoneVerificationRequest {
 2:   使用SHA256
       */
   EncryptionMode: string
-}
-
-/**
- * GetRealNameAuthToken返回参数结构体
- */
-export interface GetRealNameAuthTokenResponse {
-  /**
-   * 查询实名认证结果的唯一凭证
-   */
-  AuthToken?: string
-
-  /**
-   * 实名认证授权地址，认证发起方需要重定向到这个地址获取认证用户的授权，仅能在微信环境下打开。
-   */
-  RedirectURL?: string
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**

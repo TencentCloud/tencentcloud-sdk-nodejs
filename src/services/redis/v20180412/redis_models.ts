@@ -354,6 +354,16 @@ TypeId为标准架构时，MemSize是实例总内存容量；TypeId为集群架�
    * false ：默认值,发送正常请求，通过检查后直接创建实例 true：发送检查请求，不会创建实例。
    */
   DryRun?: boolean
+
+  /**
+   * "local"本地盘版，"cloud"云盘版，"cdc"独享集群版，如果不传默认发货为本地盘版本
+   */
+  ProductVersion?: string
+
+  /**
+   * 独享集群id，ProductVersion="cdc"时必传
+   */
+  RedisClusterId?: string
 }
 
 /**
@@ -4307,6 +4317,11 @@ TypeId为标准架构时，MemSize是实例总内存容量；TypeId为集群架�
    * 实例所属的可用区名称，可参考[地域和可用区](https://cloud.tencent.com/document/product/239/4106)  。
    */
   ZoneName?: string
+
+  /**
+   * "local"本地盘版，"cloud"云盘版，"cdc"独享集群版，如果不传默认询价为本地盘版本
+   */
+  ProductVersion?: string
 }
 
 /**

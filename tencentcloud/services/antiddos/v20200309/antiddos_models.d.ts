@@ -4820,6 +4820,10 @@ export interface L7RuleEntry {
       * 同ruleId
       */
     Id?: string;
+    /**
+      * 智能cc开关，取值[0(关闭), 1(开启)]
+      */
+    CCAIEnable?: number;
 }
 /**
  * ModifyCCThresholdPolicy返回参数结构体

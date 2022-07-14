@@ -947,16 +947,6 @@ export interface ModifyPictureRequest {
 }
 
 /**
- * CreateTroubleInfo返回参数结构体
- */
-export interface CreateTroubleInfoResponse {
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * StopMCUMixTranscodeByStrRoomId请求参数结构体
  */
 export interface StopMCUMixTranscodeByStrRoomIdRequest {
@@ -1031,59 +1021,6 @@ export interface DeletePictureResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * CreateTroubleInfo请求参数结构体
- */
-export interface CreateTroubleInfoRequest {
-  /**
-   * 应用的ID
-   */
-  SdkAppId: string
-
-  /**
-   * 房间ID
-   */
-  RoomId: string
-
-  /**
-   * 老师用户ID
-   */
-  TeacherUserId: string
-
-  /**
-   * 学生用户ID
-   */
-  StudentUserId: string
-
-  /**
-   * 体验异常端（老师或学生）的用户 ID。
-   */
-  TroubleUserId: string
-
-  /**
-      * 异常类型。
-1. 仅视频异常
-2. 仅声音异常
-3. 音视频都异常
-5. 进房异常
-4. 切课
-6. 求助
-7. 问题反馈
-8. 投诉
-      */
-  TroubleType: number
-
-  /**
-   * 异常发生的UNIX 时间戳，单位为秒。
-   */
-  TroubleTime: number
-
-  /**
-   * 异常详情
-   */
-  TroubleMsg: string
 }
 
 /**

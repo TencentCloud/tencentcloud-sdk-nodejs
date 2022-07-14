@@ -467,6 +467,10 @@ export interface DeleteServiceDiscoveryResponse {
  */
 export interface CreatePrometheusScrapeJobResponse {
     /**
+      * 成功创建抓取任务 Id
+      */
+    JobId: string;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
@@ -583,17 +587,6 @@ export interface CreateExporterIntegrationRequest {
       */
     InstanceId: string;
     /**
-      * Kubernetes 集群类型，取值如下：
-<li> 1= 容器集群(TKE) </li>
-<li> 2=弹性集群<EKS> </li>
-<li> 3= Prometheus管理的弹性集群<MEKS> </li>
-      */
-    KubeType: number;
-    /**
-      * 集群 ID
-      */
-    ClusterId: string;
-    /**
       * 类型
       */
     Kind: string;
@@ -601,6 +594,17 @@ export interface CreateExporterIntegrationRequest {
       * 集成配置
       */
     Content: string;
+    /**
+      * Kubernetes 集群类型，取值如下：
+<li> 1= 容器集群(TKE) </li>
+<li> 2=弹性集群<EKS> </li>
+<li> 3= Prometheus管理的弹性集群<MEKS> </li>
+      */
+    KubeType?: number;
+    /**
+      * 集群 ID
+      */
+    ClusterId?: string;
 }
 /**
  * DescribeAlarmEvents返回参数结构体
@@ -2252,6 +2256,10 @@ export interface CreateServiceDiscoveryResponse {
  * CreatePrometheusAgent返回参数结构体
  */
 export interface CreatePrometheusAgentResponse {
+    /**
+      * 创建成功的 Agent Id
+      */
+    AgentId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4886,6 +4894,10 @@ export interface RecordingRuleSet {
  * CreateExporterIntegration返回参数结构体
  */
 export interface CreateExporterIntegrationResponse {
+    /**
+      * 返回创建成功的集成名称列表
+      */
+    Names: Array<string>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

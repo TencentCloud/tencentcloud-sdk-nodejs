@@ -12595,6 +12595,18 @@ export interface MalwareInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Uuid: string
+
+  /**
+      * 最近修改时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ModifyTime: string
+
+  /**
+      * 最近访问时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  StrFileAccessTime: string
 }
 
 /**
