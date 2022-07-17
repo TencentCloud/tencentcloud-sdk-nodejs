@@ -1326,23 +1326,18 @@ export interface RenewPostpaidDBInstanceRequest {
 }
 
 /**
- * ModifyInstanceParam请求参数结构体
+ * 跨地域备份的目标地域和备份状态
  */
-export interface ModifyInstanceParamRequest {
+export interface CrossRegionStatus {
   /**
-   * 实例短 ID 列表
+   * 跨地域备份目标地域
    */
-  InstanceIds: Array<string>
+  CrossRegion: string
 
   /**
-   * 要修改的参数列表。每一个元素是 Name 和 CurrentValue 的组合。Name 是参数名，CurrentValue 是要修改的值。<b>注意</b>：如果修改的参数需要<b>重启</b>实例，那么您的实例将会在执行修改时<b>重启</b>。您可以通过DescribeInstanceParams接口查询修改参数时是否会重启实例，以免导致您的实例不符合预期重启。
+   * 备份跨地域的同步状态 0-创建中；1-成功；2-失败；4-同步中
    */
-  ParamList: Array<Parameter>
-
-  /**
-   * 执行参数调整任务的方式，默认为 0。支持值包括：0 - 立刻执行，1 - 时间窗执行。
-   */
-  WaitSwitch?: number
+  CrossStatus: number
 }
 
 /**
@@ -2213,23 +2208,23 @@ export interface DeleteDBRequest {
 }
 
 /**
- * StartIncrementalMigration请求参数结构体
+ * ModifyInstanceParam请求参数结构体
  */
-export interface StartIncrementalMigrationRequest {
+export interface ModifyInstanceParamRequest {
   /**
-   * 导入目标实例ID
+   * 实例短 ID 列表
    */
-  InstanceId: string
+  InstanceIds: Array<string>
 
   /**
-   * 备份导入任务ID，由CreateBackupMigration接口返回
+   * 要修改的参数列表。每一个元素是 Name 和 CurrentValue 的组合。Name 是参数名，CurrentValue 是要修改的值。<b>注意</b>：如果修改的参数需要<b>重启</b>实例，那么您的实例将会在执行修改时<b>重启</b>。您可以通过DescribeInstanceParams接口查询修改参数时是否会重启实例，以免导致您的实例不符合预期重启。
    */
-  BackupMigrationId: string
+  ParamList: Array<Parameter>
 
   /**
-   * 增量备份导入任务ID
+   * 执行参数调整任务的方式，默认为 0。支持值包括：0 - 立刻执行，1 - 时间窗执行。
    */
-  IncrementalMigrationId: string
+  WaitSwitch?: number
 }
 
 /**
@@ -2679,6 +2674,26 @@ export interface CreateBackupMigrationRequest {
 }
 
 /**
+ * StartIncrementalMigration请求参数结构体
+ */
+export interface StartIncrementalMigrationRequest {
+  /**
+   * 导入目标实例ID
+   */
+  InstanceId: string
+
+  /**
+   * 备份导入任务ID，由CreateBackupMigration接口返回
+   */
+  BackupMigrationId: string
+
+  /**
+   * 增量备份导入任务ID
+   */
+  IncrementalMigrationId: string
+}
+
+/**
  * DescribeDBsNormal返回参数结构体
  */
 export interface DescribeDBsNormalResponse {
@@ -2791,6 +2806,26 @@ export interface DescribeDBsRequest {
    * 分页返回，页编号，默认值为第0页
    */
   Offset?: number
+}
+
+/**
+ * DescribeMigrationDatabases请求参数结构体
+ */
+export interface DescribeMigrationDatabasesRequest {
+  /**
+   * 迁移源实例的ID，格式如：mssql-si2823jyl
+   */
+  InstanceId: string
+
+  /**
+   * 迁移源实例用户名
+   */
+  UserName: string
+
+  /**
+   * 迁移源实例密码
+   */
+  Password: string
 }
 
 /**
@@ -3978,6 +4013,21 @@ export interface DBInstance {
    * 实例类型 HA-高可用 RO-只读实例 SI-基础版 BI-商业智能服务
    */
   InstanceType: string
+
+  /**
+   * 跨地域备份目的地域，如果为空，则表示未开启跨地域备份
+   */
+  CrossRegions: Array<string>
+
+  /**
+   * 跨地域备份状态 enable-开启，disable-关闭
+   */
+  CrossBackupEnabled: string
+
+  /**
+   * 跨地域备份保留天数，则默认7天
+   */
+  CrossBackupSaveDays: number
 }
 
 /**
@@ -4428,6 +4478,21 @@ export interface Backup {
    * 备份文件形式（pkg-打包备份文件，single-单库备份文件）
    */
   BackupFormat: string
+
+  /**
+   * 实例当前地域Code
+   */
+  Region: string
+
+  /**
+   * 跨地域备份的目的地域下载链接
+   */
+  CrossBackupAddr: Array<CrossBackupAddr>
+
+  /**
+   * 跨地域备份的目标地域和备份状态
+   */
+  CrossBackupStatus: Array<CrossRegionStatus>
 }
 
 /**
@@ -4998,6 +5063,16 @@ export interface BackupFile {
    * 下载地址
    */
   DownloadLink: string
+
+  /**
+   * 当前实例地域码
+   */
+  Region: string
+
+  /**
+   * 备份的跨地域region和所对应的下载地址
+   */
+  CrossBackupAddr: Array<CrossBackupAddr>
 }
 
 /**
@@ -5211,23 +5286,23 @@ export interface ModifyMigrationRequest {
 }
 
 /**
- * DescribeMigrationDatabases请求参数结构体
+ * 跨地域备份下载地址集合
  */
-export interface DescribeMigrationDatabasesRequest {
+export interface CrossBackupAddr {
   /**
-   * 迁移源实例的ID，格式如：mssql-si2823jyl
+   * 跨地域备份目标地域
    */
-  InstanceId: string
+  CrossRegion: string
 
   /**
-   * 迁移源实例用户名
+   * 跨地域备份内网下载地址
    */
-  UserName: string
+  CrossInternalAddr: string
 
   /**
-   * 迁移源实例密码
+   * 跨地域备份外网下载地址
    */
-  Password: string
+  CrossExternalAddr: string
 }
 
 /**

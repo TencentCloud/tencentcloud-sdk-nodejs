@@ -365,6 +365,11 @@ export interface DescribeFlowTrendResponse {
 }
 
 /**
+ * GetAttackDownloadRecords请求参数结构体
+ */
+export type GetAttackDownloadRecordsRequest = null
+
+/**
  * UpsertIpAccessControl请求参数结构体
  */
 export interface UpsertIpAccessControlRequest {
@@ -445,18 +450,33 @@ export interface ModifyAccessPeriodResponse {
 }
 
 /**
- * DescribeWafThreatenIntelligence返回参数结构体
+ * clb-waf QPS套餐 New
  */
-export interface DescribeWafThreatenIntelligenceResponse {
+export interface QPSPackageNew {
   /**
-   * WAF 威胁情报封禁信息
+   * 资源ID
    */
-  WafThreatenIntelligenceDetails?: WafThreatenIntelligenceDetails
+  ResourceIds: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 过期时间
    */
-  RequestId?: string
+  ValidTime: string
+
+  /**
+   * 是否自动续费，1：自动续费，0：不自动续费
+   */
+  RenewFlag: number
+
+  /**
+   * 套餐购买个数
+   */
+  Count: number
+
+  /**
+   * 套餐购买地域，clb-waf暂时没有用到
+   */
+  Region: string
 }
 
 /**
@@ -1949,6 +1969,16 @@ export interface AccessRuleInfo {
 }
 
 /**
+ * GetAttackDownloadRecords返回参数结构体
+ */
+export interface GetAttackDownloadRecordsResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteAccessExport请求参数结构体
  */
 export interface DeleteAccessExportRequest {
@@ -1999,33 +2029,18 @@ export interface DeleteAttackDownloadRecordRequest {
 }
 
 /**
- * clb-waf QPS套餐 New
+ * DescribeWafThreatenIntelligence返回参数结构体
  */
-export interface QPSPackageNew {
+export interface DescribeWafThreatenIntelligenceResponse {
   /**
-   * 资源ID
+   * WAF 威胁情报封禁信息
    */
-  ResourceIds: string
+  WafThreatenIntelligenceDetails?: WafThreatenIntelligenceDetails
 
   /**
-   * 过期时间
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  ValidTime: string
-
-  /**
-   * 是否自动续费，1：自动续费，0：不自动续费
-   */
-  RenewFlag: number
-
-  /**
-   * 套餐购买个数
-   */
-  Count: number
-
-  /**
-   * 套餐购买地域，clb-waf暂时没有用到
-   */
-  Region: string
+  RequestId?: string
 }
 
 /**

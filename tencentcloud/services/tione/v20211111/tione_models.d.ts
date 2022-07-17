@@ -1269,6 +1269,10 @@ export interface DeleteTrainingModelRequest {
       * 模型ID
       */
     TrainingModelId: string;
+    /**
+      * 是否同步清理cos
+      */
+    EnableDeleteCos?: boolean;
 }
 /**
  * DeleteTrainingTask返回参数结构体
@@ -2483,6 +2487,10 @@ export interface DeleteTrainingModelVersionRequest {
       * 模型版本ID
       */
     TrainingModelVersionId: string;
+    /**
+      * 是否同步清理cos
+      */
+    EnableDeleteCos?: boolean;
 }
 /**
  * DescribeBillingSpecsPrice返回参数结构体

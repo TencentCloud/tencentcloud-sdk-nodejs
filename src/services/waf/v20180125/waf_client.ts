@@ -39,13 +39,14 @@ import {
   DescribeWafAutoDenyRulesRequest,
   AddCustomRuleResponse,
   DescribeFlowTrendResponse,
+  GetAttackDownloadRecordsRequest,
   UpsertIpAccessControlRequest,
   DeleteDownloadRecordRequest,
   DeleteAccessExportResponse,
   DescribeAccessExportsRequest,
   ModifyWafAutoDenyStatusRequest,
   ModifyAccessPeriodResponse,
-  DescribeWafThreatenIntelligenceResponse,
+  QPSPackageNew,
   FiltersItemNew,
   DescribeAutoDenyIPResponse,
   SearchAccessLogResponse,
@@ -92,11 +93,12 @@ import {
   AccessFullTextInfo,
   DescribeIpHitItemsRequest,
   AccessRuleInfo,
+  GetAttackDownloadRecordsResponse,
   DeleteAccessExportRequest,
   DescribeUserClbWafRegionsRequest,
   DescribeDomainWhiteRulesResponse,
   DeleteAttackDownloadRecordRequest,
-  QPSPackageNew,
+  DescribeWafThreatenIntelligenceResponse,
   AddDomainWhiteRuleRequest,
   UpsertIpAccessControlResponse,
   IpHitItem,
@@ -293,6 +295,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeWafAutoDenyStatusResponse) => void
   ): Promise<DescribeWafAutoDenyStatusResponse> {
     return this.request("DescribeWafAutoDenyStatus", req, cb)
+  }
+
+  /**
+   * 查询下载攻击日志任务记录列表
+   */
+  async GetAttackDownloadRecords(
+    req?: GetAttackDownloadRecordsRequest,
+    cb?: (error: string, rep: GetAttackDownloadRecordsResponse) => void
+  ): Promise<GetAttackDownloadRecordsResponse> {
+    return this.request("GetAttackDownloadRecords", req, cb)
   }
 
   /**

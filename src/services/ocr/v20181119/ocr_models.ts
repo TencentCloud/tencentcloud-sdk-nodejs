@@ -781,6 +781,21 @@ WARN_DRIVER_LICENSE_PS_CARD ps告警
 }
 
 /**
+ * WaybillOCR返回参数结构体
+ */
+export interface WaybillOCRResponse {
+  /**
+   * 检测到的文本信息，具体内容请点击左侧链接。
+   */
+  TextDetections: TextWaybill
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 识别出来的单词信息包括单词（包括单词Character和单词置信度confidence）
  */
 export interface Words {
@@ -979,18 +994,28 @@ export interface Rect {
 }
 
 /**
- * WaybillOCR返回参数结构体
+ * 全部车牌信息
  */
-export interface WaybillOCRResponse {
+export interface LicensePlateInfo {
   /**
-   * 检测到的文本信息，具体内容请点击左侧链接。
+   * 识别出的车牌号码。
    */
-  TextDetections: TextWaybill
+  Number: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 置信度，0 - 100 之间。
    */
-  RequestId?: string
+  Confidence: number
+
+  /**
+   * 文本行在原图片中的像素坐标框。
+   */
+  Rect: Rect
+
+  /**
+   * 识别出的车牌颜色，目前支持颜色包括 “白”、“黑”、“蓝”、“绿“、“黄”、“黄绿”、“临牌”。
+   */
+  Color: string
 }
 
 /**
@@ -2805,6 +2830,11 @@ export interface LicensePlateOCRResponse {
    * 识别出的车牌颜色，目前支持颜色包括 “白”、“黑”、“蓝”、“绿“、“黄”、“黄绿”、“临牌”。
    */
   Color: string
+
+  /**
+   * 全部车牌信息。
+   */
+  LicensePlateInfos: Array<LicensePlateInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

@@ -111,6 +111,25 @@ export interface UserDefineOcrTextReviewTemplateInfoForUpdate {
     ReviewConfidence?: number;
 }
 /**
+ * 插帧帧率配置
+ */
+export interface FrameRateConfig {
+    /**
+      * 能力配置开关，可选值：
+<li>ON：开启；</li>
+<li>OFF：关闭。</li>
+默认值：ON。
+      */
+    Switch?: string;
+    /**
+      * 帧率，取值范围：[0, 100]，单位：Hz。
+默认值 0。
+注意：对于转码，该参数会覆盖 VideoTemplate 内部的 Fps。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Fps?: number;
+}
+/**
  * 自定义转码的规格参数。用于覆盖模板中对应参数值。
  */
 export interface OverrideTranscodeParameter {
@@ -292,6 +311,10 @@ export interface CreateTranscodeTemplateRequest {
       * 极速高清转码参数。
       */
     TEHDConfig?: TEHDConfig;
+    /**
+      * 音视频增强配置。
+      */
+    EnhanceConfig?: EnhanceConfig;
 }
 /**
  * ProcessLiveStream返回参数结构体
@@ -624,6 +647,16 @@ export interface AiReviewPoliticalOcrTaskInput {
       * 模板 ID。
       */
     Definition: number;
+}
+/**
+ * 音视频增强配置
+ */
+export interface EnhanceConfig {
+    /**
+      * 视频增强配置。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VideoEnhance?: VideoEnhanceConfig;
 }
 /**
  * 媒体处理的输入对象信息。
@@ -961,6 +994,66 @@ export interface DeleteAIRecognitionTemplateResponse {
     RequestId?: string;
 }
 /**
+ * 视频增强配置
+ */
+export interface VideoEnhanceConfig {
+    /**
+      * 插帧帧率配置。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FrameRate?: FrameRateConfig;
+    /**
+      * 超分配置。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SuperResolution?: SuperResolutionConfig;
+    /**
+      * HDR配置。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Hdr?: HdrConfig;
+    /**
+      * 视频降噪配置。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Denoise?: VideoDenoiseConfig;
+    /**
+      * 综合增强配置。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ImageQualityEnhance?: ImageQualityEnhanceConfig;
+    /**
+      * 色彩增强配置。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ColorEnhance?: ColorEnhanceConfig;
+    /**
+      * 细节增强配置。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SharpEnhance?: SharpEnhanceConfig;
+    /**
+      * 人脸增强配置。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FaceEnhance?: FaceEnhanceConfig;
+    /**
+      * 低光照增强配置。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LowLightEnhance?: LowLightEnhanceConfig;
+    /**
+      * 去划痕配置。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ScratchRepair?: ScratchRepairConfig;
+    /**
+      * 去伪影（毛刺）配置。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ArtifactRepair?: ArtifactRepairConfig;
+}
+/**
  * 媒体处理任务中的马赛克参数类型
  */
 export interface MosaicInput {
@@ -1089,6 +1182,33 @@ export interface AudioTemplateInfoForUpdate {
 当媒体的封装格式是音频格式时（flac，ogg，mp3，m4a）时，声道数不允许设为立体声。
       */
     AudioChannel?: number;
+}
+/**
+ * 超分配置
+ */
+export interface SuperResolutionConfig {
+    /**
+      * 能力配置开关，可选值：
+<li>ON：开启；</li>
+<li>OFF：关闭。</li>
+默认值：ON。
+      */
+    Switch?: string;
+    /**
+      * 类型，可选值：
+<li>lq：针对低清晰度有较多噪声视频的超分；</li>
+<li>hq：针对高清晰度视频超分。</li>
+默认值：lq。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Type?: string;
+    /**
+      * 超分倍数，可选值：
+<li>2：目前只支持 2 倍超分。</li>
+默认值：2。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Size?: number;
 }
 /**
  * DeletePersonSample请求参数结构体
@@ -1494,6 +1614,58 @@ export interface AiReviewPornTaskInput {
     Definition: number;
 }
 /**
+ * HDR配置
+ */
+export interface HdrConfig {
+    /**
+      * 能力配置开关，可选值：
+<li>ON：开启；</li>
+<li>OFF：关闭。</li>
+默认值：ON。
+      */
+    Switch?: string;
+    /**
+      * 类型，可选值：
+<li>HDR10</li>
+<li>HLG</li>
+默认值：HDR10。
+注意：video的编码方式需要为libx265；
+注意：视频编码位深为10。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Type?: string;
+}
+/**
+ * 编排任务信息
+ */
+export interface ScheduleTask {
+    /**
+      * 编排任务 ID。
+      */
+    TaskId: string;
+    /**
+      * 任务流状态，取值：
+<li>PROCESSING：处理中；</li>
+<li>FINISH：已完成。</li>
+      */
+    Status: string;
+    /**
+      * 媒体处理的目标文件信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InputInfo: MediaInputInfo;
+    /**
+      * 原始视频的元信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MetaData: MediaMetaData;
+    /**
+      * 编排任务输出。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ActivityResultSet: Array<ActivityResult>;
+}
+/**
  * CreatePersonSample请求参数结构体
  */
 export interface CreatePersonSampleRequest {
@@ -1679,6 +1851,10 @@ export interface ModifyTranscodeTemplateRequest {
       * 极速高清转码参数。
       */
     TEHDConfig?: TEHDConfigForUpdate;
+    /**
+      * 音视频增强参数。
+      */
+    EnhanceConfig?: EnhanceConfig;
 }
 /**
  * 编辑视频任务的输入。
@@ -1923,6 +2099,24 @@ export interface DescribeAIRecognitionTemplatesResponse {
     RequestId?: string;
 }
 /**
+ * 去划痕配置
+ */
+export interface ScratchRepairConfig {
+    /**
+      * 能力配置开关，可选值：
+<li>ON：开启；</li>
+<li>OFF：关闭。</li>
+默认值：ON。
+      */
+    Switch?: string;
+    /**
+      * 强度，取值范围：0.0~1.0。
+默认：0.0。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Intensity?: number;
+}
+/**
  * 直播流 AI 审核结果
  */
 export interface LiveStreamAiReviewResultInfo {
@@ -2004,6 +2198,36 @@ export interface DescribeSnapshotByTimeOffsetTemplatesRequest {
 <li>Custom：用户自定义模板。</li>
       */
     Type?: string;
+}
+/**
+ * 编排视频识别任务结果类型
+ */
+export interface ScheduleRecognitionTaskResult {
+    /**
+      * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
+      */
+    Status: string;
+    /**
+      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+      */
+    ErrCodeExt: string;
+    /**
+      * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
+      */
+    ErrCode: number;
+    /**
+      * 错误信息。
+      */
+    Message: string;
+    /**
+      * 识别任务的输入。
+      */
+    Input: AiRecognitionTaskInput;
+    /**
+      * 识别任务的输出。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Output: Array<AiRecognitionResult>;
 }
 /**
  * 语音全文识别的输入。
@@ -2120,13 +2344,24 @@ export interface DeleteAdaptiveDynamicStreamingTemplateResponse {
     RequestId?: string;
 }
 /**
- * ParseNotification请求参数结构体
+ * 去伪影（毛刺）配置
  */
-export interface ParseNotificationRequest {
+export interface ArtifactRepairConfig {
     /**
-      * 从 CMQ 获取到的事件通知内容。
+      * 能力配置开关，可选值：
+<li>ON：开启；</li>
+<li>OFF：关闭。</li>
+默认值：ON。
       */
-    Content: string;
+    Switch?: string;
+    /**
+      * 类型，可选值：
+<li>weak</li>
+<li>strong</li>
+默认值：weak。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Type?: string;
 }
 /**
  * CreateWordSamples请求参数结构体
@@ -2727,15 +2962,18 @@ export interface VideoTemplateInfo {
 <li>libx264：H.264 编码</li>
 <li>libx265：H.265 编码</li>
 <li>av1：AOMedia Video 1 编码</li>
+注意：目前 H.265 编码必须指定分辨率，并且需要在 640*480 以内。
+注意：av1 编码容器目前只支持 mp4 。
       */
     Codec: string;
     /**
       * 视频帧率，取值范围：[0, 100]，单位：Hz。
 当取值为 0，表示帧率和原始视频保持一致。
+注意：自适应码率时取值范围是 [0, 60]
       */
     Fps: number;
     /**
-      * 视频流的码率，取值范围：0 和 [75, 35000]，单位：kbps。
+      * 视频流的码率，取值范围：0 和 [128, 35000]，单位：kbps。
 当取值为 0，表示视频码率和原始视频保持一致。
       */
     Bitrate: number;
@@ -2744,6 +2982,7 @@ export interface VideoTemplateInfo {
 <li>open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；</li>
 <li>close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。</li>
 默认值：open。
+注意：自适应模式时，Width不能小于Height。
       */
     ResolutionAdaptive?: string;
     /**
@@ -2776,6 +3015,7 @@ export interface VideoTemplateInfo {
 <li>white：留白，保持视频宽高比不变，边缘剩余部分使用白色填充。</li>
 <li>gauss：高斯模糊，保持视频宽高比不变，边缘剩余部分使用高斯模糊填充。</li>
 默认值：black 。
+注意：自适应码流只支持 stretch、black。
       */
     FillType?: string;
     /**
@@ -2917,6 +3157,27 @@ export interface UserDefineConfigureInfo {
       * 用户自定义文本审核控制参数。
       */
     OcrReviewInfo?: UserDefineOcrTextReviewTemplateInfo;
+}
+/**
+ * 色彩增强配置
+ */
+export interface ColorEnhanceConfig {
+    /**
+      * 能力配置开关，可选值：
+<li>ON：开启；</li>
+<li>OFF：关闭。</li>
+默认值：ON。
+      */
+    Switch?: string;
+    /**
+      * 类型，可选值：
+<li>weak</li>
+<li>normal</li>
+<li>strong</li>
+默认值：weak。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Type?: string;
 }
 /**
  * 内容审核 Ocr 文字鉴黄任务输入参数类型
@@ -3175,6 +3436,13 @@ export interface ProcessMediaRequest {
       * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。
       */
     SessionContext?: string;
+    /**
+      * 编排ID。
+注意1：对于OutputStorage、OutputDir，如果编排任务里没有配置，将采用请求里对应参数。
+注意2：对于TaskNotifyConfig，如果编排任务里没有配置，将采用请求里对应的参数。
+注意3：编排的 Trigger 只是用来自动化触发场景，在手动发起的请求中已经配置的 Trigger 无意义。
+      */
+    ScheduleId?: number;
 }
 /**
  * 文本全文识别结果。
@@ -3235,6 +3503,27 @@ export interface MediaProcessTaskSnapshotByTimeOffsetResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Output: MediaSnapshotByTimeOffsetItem;
+}
+/**
+ * 综合增强配置
+ */
+export interface ImageQualityEnhanceConfig {
+    /**
+      * 能力配置开关，可选值：
+<li>ON：开启；</li>
+<li>OFF：关闭。</li>
+默认值：ON。
+      */
+    Switch?: string;
+    /**
+      * 类型，可选值：
+<li>weak</li>
+<li>normal</li>
+<li>strong</li>
+默认值：weak。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Type?: string;
 }
 /**
  * AI 样本管理，关键词输出信息。
@@ -3864,6 +4153,36 @@ export interface CreateWatermarkTemplateRequest {
     SvgTemplate?: SvgWatermarkInput;
 }
 /**
+ * 编排视频分析任务结果类型
+ */
+export interface ScheduleAnalysisTaskResult {
+    /**
+      * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
+      */
+    Status: string;
+    /**
+      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+      */
+    ErrCodeExt: string;
+    /**
+      * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
+      */
+    ErrCode: number;
+    /**
+      * 错误信息。
+      */
+    Message: string;
+    /**
+      * 分析任务的输入。
+      */
+    Input: AiAnalysisTaskInput;
+    /**
+      * 分析任务的输出。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Output: Array<AiAnalysisResult>;
+}
+/**
  * 涉敏任务控制参数。
  */
 export interface TerrorismConfigureInfoForUpdate {
@@ -3875,6 +4194,15 @@ export interface TerrorismConfigureInfoForUpdate {
       * 文本涉敏任务控制参数。
       */
     OcrReviewInfo?: TerrorismOcrReviewTemplateInfoForUpdate;
+}
+/**
+ * ParseNotification请求参数结构体
+ */
+export interface ParseNotificationRequest {
+    /**
+      * 从 CMQ 获取到的事件通知内容。
+      */
+    Content: string;
 }
 /**
  * 转动图任务类型。
@@ -4822,6 +5150,11 @@ export interface TranscodeTemplate {
       * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
       */
     UpdateTime: string;
+    /**
+      * 音视频增强配置。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EnhanceConfig: EnhanceConfig;
 }
 /**
  * 文本鉴黄任务控制参数
@@ -5368,30 +5701,58 @@ export interface ParseNotificationResponse {
       * 支持事件类型，目前取值有：
 <li>WorkflowTask：视频工作流处理任务。</li>
 <li>EditMediaTask：视频编辑任务。</li>
+<li>ScheduleTask：编排任务。</li>
       */
-    EventType?: string;
+    EventType: string;
     /**
       * 视频处理任务信息，仅当 TaskType 为 WorkflowTask，该字段有值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    WorkflowTaskEvent?: WorkflowTask;
+    WorkflowTaskEvent: WorkflowTask;
     /**
       * 视频编辑任务信息，仅当 TaskType 为 EditMediaTask，该字段有值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    EditMediaTaskEvent?: EditMediaTask;
+    EditMediaTaskEvent: EditMediaTask;
     /**
       * 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长50个字符，不带或者带空字符串表示不做去重。
       */
-    SessionId?: string;
+    SessionId: string;
     /**
       * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长1000个字符。
       */
-    SessionContext?: string;
+    SessionContext: string;
+    /**
+      * 编排任务信息，仅当 TaskType 为 ScheduleTask，该字段有值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ScheduleTaskEvent: ScheduleTask;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 编排任务输出
+ */
+export interface ActivityResult {
+    /**
+      * 原子任务类型。
+<li>Transcode：转码。</li>
+<li>SampleSnapshot：采样截图。</li>
+<li>AnimatedGraphics：转动图。</li>
+<li>SnapshotByTimeOffset：时间点截图。</li>
+<li>ImageSprites：雪碧图。</li>
+<li>AdaptiveDynamicStreaming：自适应码流。</li>
+<li>AiContentReview：内容审核。</li>
+<li>AIRecognition：智能识别。</li>
+<li>AIAnalysis：智能分析。</li>
+      */
+    ActivityType: string;
+    /**
+      * 原子任务输出。
+      */
+    ActivityResItem: ActivityResItem;
 }
 /**
  * ResetWorkflow返回参数结构体
@@ -6038,6 +6399,36 @@ export interface LiveStreamOcrFullTextRecognitionResult {
     AreaCoordSet: Array<number>;
 }
 /**
+ * 编排视频审核任务结果类型
+ */
+export interface ScheduleReviewTaskResult {
+    /**
+      * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
+      */
+    Status: string;
+    /**
+      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+      */
+    ErrCodeExt: string;
+    /**
+      * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
+      */
+    ErrCode: number;
+    /**
+      * 错误信息。
+      */
+    Message: string;
+    /**
+      * 审核任务的输入。
+      */
+    Input: AiContentReviewTaskInput;
+    /**
+      * 审核任务的输出。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Output: Array<AiContentReviewResult>;
+}
+/**
  * ModifyTranscodeTemplate返回参数结构体
  */
 export interface ModifyTranscodeTemplateResponse {
@@ -6115,7 +6506,8 @@ export interface VideoTemplateInfoForUpdate {
 <li>libx264：H.264 编码</li>
 <li>libx265：H.265 编码</li>
 <li>av1：AOMedia Video 1 编码</li>
-目前 H.265 编码必须指定分辨率，并且需要在 640*480 以内。av1 编码容器目前只支持 mp4 。
+注意：目前 H.265 编码必须指定分辨率，并且需要在 640*480 以内。
+注意：av1 编码容器目前只支持 mp4 。
       */
     Codec?: string;
     /**
@@ -6132,6 +6524,7 @@ export interface VideoTemplateInfoForUpdate {
       * 分辨率自适应，可选值：
 <li>open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；</li>
 <li>close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。</li>
+注意：自适应模式时，Width不能小于Height。
       */
     ResolutionAdaptive?: string;
     /**
@@ -6306,6 +6699,7 @@ export interface TaskNotifyConfig {
 <li>CMQ：已下线，建议切换到TDMQ-CMQ</li>
 <li>TDMQ-CMQ：消息队列</li>
 <li>URL：指定URL时HTTP回调推送到 NotifyUrl 指定的地址，回调协议http+json，包体内容同解析事件通知接口的输出参数 </li>
+<li>SCF：不推荐使用，需要在控制台额外配置SCF</li>
 目前 默认CMQ。
       */
     NotifyType?: string;
@@ -6313,6 +6707,24 @@ export interface TaskNotifyConfig {
       * HTTP回调地址，NotifyType为URL时必填。
       */
     NotifyUrl?: string;
+}
+/**
+ * 人脸增强配置
+ */
+export interface FaceEnhanceConfig {
+    /**
+      * 能力配置开关，可选值：
+<li>ON：开启；</li>
+<li>OFF：关闭。</li>
+默认值：ON。
+      */
+    Switch?: string;
+    /**
+      * 强度，取值范围：0.0~1.0。
+默认：0.0。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Intensity?: number;
 }
 /**
  * 内容审核涉敏任务结果类型
@@ -6392,63 +6804,69 @@ export interface DescribeTaskDetailResponse {
 <li>WorkflowTask：视频工作流处理任务。</li>
 <li>EditMediaTask：视频编辑任务。</li>
 <li>LiveStreamProcessTask：直播流处理任务。</li>
+<li>ScheduleTask：编排处理任务。</li>
       */
-    TaskType?: string;
+    TaskType: string;
     /**
       * 任务状态，取值：
 <li>WAITING：等待中；</li>
 <li>PROCESSING：处理中；</li>
 <li>FINISH：已完成。</li>
       */
-    Status?: string;
+    Status: string;
     /**
       * 任务的创建时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
       */
-    CreateTime?: string;
+    CreateTime: string;
     /**
       * 任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
       */
-    BeginProcessTime?: string;
+    BeginProcessTime: string;
     /**
       * 任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
       */
-    FinishTime?: string;
-    /**
-      * 视频处理任务信息，仅当 TaskType 为 WorkflowTask，该字段有值。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    WorkflowTask?: WorkflowTask;
+    FinishTime: string;
     /**
       * 视频编辑任务信息，仅当 TaskType 为 EditMediaTask，该字段有值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    EditMediaTask?: EditMediaTask;
+    EditMediaTask: EditMediaTask;
+    /**
+      * 视频处理任务信息，仅当 TaskType 为 WorkflowTask，该字段有值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    WorkflowTask: WorkflowTask;
     /**
       * 直播流处理任务信息，仅当 TaskType 为 LiveStreamProcessTask，该字段有值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    LiveStreamProcessTask?: LiveStreamProcessTask;
+    LiveStreamProcessTask: LiveStreamProcessTask;
     /**
       * 任务的事件通知信息。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    TaskNotifyConfig?: TaskNotifyConfig;
+    TaskNotifyConfig: TaskNotifyConfig;
     /**
       * 任务流的优先级，取值范围为 [-10, 10]。
       */
-    TasksPriority?: number;
+    TasksPriority: number;
     /**
       * 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长50个字符，不带或者带空字符串表示不做去重。
       */
-    SessionId?: string;
+    SessionId: string;
     /**
       * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长1000个字符。
       */
-    SessionContext?: string;
+    SessionContext: string;
     /**
       * 扩展信息字段，仅用于特定场景。
       */
-    ExtInfo?: string;
+    ExtInfo: string;
+    /**
+      * 编排处理任务信息，仅当 TaskType 为 ScheduleTask，该字段有值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ScheduleTask: ScheduleTask;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -6546,6 +6964,24 @@ export interface UserDefineFaceReviewTemplateInfoForUpdate {
     ReviewConfidence?: number;
 }
 /**
+ * 细节增强配置
+ */
+export interface SharpEnhanceConfig {
+    /**
+      * 能力配置开关，可选值：
+<li>ON：开启；</li>
+<li>OFF：关闭。</li>
+默认值：ON。
+      */
+    Switch?: string;
+    /**
+      * 强度，取值范围：0.0~1.0。
+默认：0.0。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Intensity?: number;
+}
+/**
  * 文本全文本识别任务控制参数
  */
 export interface OcrFullTextConfigureInfoForUpdate {
@@ -6572,11 +7008,15 @@ export interface DescribeTasksResponse {
     /**
       * 任务概要列表。
       */
-    TaskSet?: Array<TaskSimpleInfo>;
+    TaskSet: Array<TaskSimpleInfo>;
     /**
       * 翻页标识，当请求未返回所有数据，该字段表示下一条记录的 ID。当该字段为空字符串，说明已无更多数据。
       */
-    ScrollToken?: string;
+    ScrollToken: string;
+    /**
+      * 符合过滤条件的记录总数。
+      */
+    TotalCount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -7536,6 +7976,14 @@ export interface DescribeTranscodeTemplatesRequest {
       * 返回记录条数，默认值：10，最大值：100。
       */
     Limit?: number;
+    /**
+      * 模板类型（替换旧版本 TEHDType），可选值：
+<li>Common：普通转码模板；</li>
+<li>TEHD：极速高清模板。</li>
+<li>Enhance：音视频增强模板。</li>
+默认空，不限制类型。
+      */
+    TranscodeType?: string;
 }
 /**
  * DisableWorkflow请求参数结构体
@@ -7767,6 +8215,26 @@ export interface PornConfigureInfo {
       * 文本鉴黄控制参数。
       */
     OcrReviewInfo?: PornOcrReviewTemplateInfo;
+}
+/**
+ * 视频降噪配置
+ */
+export interface VideoDenoiseConfig {
+    /**
+      * 能力配置开关，可选值：
+<li>ON：开启；</li>
+<li>OFF：关闭。</li>
+默认值：ON。
+      */
+    Switch?: string;
+    /**
+      * 类型，可选值：
+<li>weak</li>
+<li>strong</li>
+默认值：weak。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Type?: string;
 }
 /**
  * DescribeAIAnalysisTemplates返回参数结构体
@@ -8268,6 +8736,56 @@ export interface MediaAiAnalysisFrameTagItem {
     Confidence: number;
 }
 /**
+ * 编排子任务输出
+ */
+export interface ActivityResItem {
+    /**
+      * 转码任务输出
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TranscodeTask: MediaProcessTaskTranscodeResult;
+    /**
+      * 转动图任务输出
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AnimatedGraphicTask: MediaProcessTaskAnimatedGraphicResult;
+    /**
+      * 时间点截图任务输出
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SnapshotByTimeOffsetTask: MediaProcessTaskSampleSnapshotResult;
+    /**
+      * 采样截图任务输出
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SampleSnapshotTask: MediaProcessTaskSampleSnapshotResult;
+    /**
+      * 雪碧图任务输出
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ImageSpriteTask: MediaProcessTaskImageSpriteResult;
+    /**
+      * 自适应码流任务输出
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AdaptiveDynamicStreamingTask: MediaProcessTaskAdaptiveDynamicStreamingResult;
+    /**
+      * 识别任务输出
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RecognitionTask: ScheduleRecognitionTaskResult;
+    /**
+      * 审核任务输出
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ReviewTask: ScheduleReviewTaskResult;
+    /**
+      * 分析任务输出
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AnalysisTask: ScheduleAnalysisTaskResult;
+}
+/**
  * 对视频做采样截图任务输入参数类型。
  */
 export interface SampleSnapshotTaskInput {
@@ -8540,6 +9058,25 @@ export interface DeleteWatermarkTemplateResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 低光照增强配置
+ */
+export interface LowLightEnhanceConfig {
+    /**
+      * 能力配置开关，可选值：
+<li>ON：开启；</li>
+<li>OFF：关闭。</li>
+默认值：ON。
+      */
+    Switch?: string;
+    /**
+      * 类型，可选值：
+<li>normal</li>
+默认值：normal。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Type?: string;
 }
 /**
  * DescribeMediaMetaData请求参数结构体

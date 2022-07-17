@@ -653,6 +653,10 @@ export interface CreateSSHKeyPairSecretRequest {
       * 标签列表。
       */
     Tags?: Array<Tag>;
+    /**
+      * 用户自定义输入的SSH密钥对的名称，可由数字，字母和下划线组成，只能以数字和字母开头，长度不超过25个字符。
+      */
+    SSHKeyName?: string;
 }
 /**
  * UpdateRotationStatus请求参数结构体

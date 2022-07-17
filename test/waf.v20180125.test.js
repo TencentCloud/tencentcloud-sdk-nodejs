@@ -188,6 +188,16 @@ it("waf.v20180125.DescribeWafAutoDenyStatus", async function () {
     }
 })
 
+it("waf.v20180125.GetAttackDownloadRecords", async function () {
+    try {
+       const data = await client.GetAttackDownloadRecords({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.AddCustomRule", async function () {
     try {
        const data = await client.AddCustomRule({})

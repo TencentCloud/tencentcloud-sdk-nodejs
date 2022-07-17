@@ -247,6 +247,14 @@ export interface WorkloadConfig {
       * 部署到指定节点
       */
     SelectedNodeList?: Array<string>;
+    /**
+      * 组件的部署模式，取值说明：
+IN_GENERAL_NODE：常规节点
+IN_EKLET：eklet 节点
+IN_SHARED_NODE_POOL：共享节电池
+IN_EXCLUSIVE_NODE_POOL：独占节点池
+      */
+    DeployMode?: string;
 }
 /**
  * Egress配置
@@ -566,6 +574,21 @@ export interface PrometheusConfig {
     CustomProm?: CustomPromConfig;
 }
 /**
+ * 内网独占集群配置
+ */
+export interface ExtensiveCluster {
+    /**
+      * Cluster ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ClusterId?: string;
+    /**
+      * 可用区
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Zone?: string;
+}
+/**
  * Istio配置
  */
 export interface IstioConfig {
@@ -660,6 +683,21 @@ export interface IngressGateway {
     LoadBalancerId?: string;
 }
 /**
+ * 内网独占集群配置列表
+ */
+export interface ExtensiveClusters {
+    /**
+      * 4层集群配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    L4Clusters?: Array<ExtensiveCluster>;
+    /**
+      * 7层集群配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    L7Clusters?: Array<ExtensiveCluster>;
+}
+/**
  * 选中的项目
  */
 export interface SelectedItems {
@@ -732,6 +770,27 @@ export interface Cluster {
 - EKS
       */
     Type?: string;
+    /**
+      * 集群关联的 Namespace 列表
+      */
+    HostedNamespaces?: Array<string>;
+}
+/**
+ * 标签
+ */
+export interface Tag {
+    /**
+      * 标签键
+      */
+    Key: string;
+    /**
+      * 标签值
+      */
+    Value: string;
+    /**
+      * 是否透传给其他关联产品
+      */
+    Passthrough?: boolean;
 }
 /**
  * DescribeMeshList返回参数结构体
@@ -874,7 +933,7 @@ export interface LoadBalancer {
 OPEN：公网属性， INTERNAL：内网属性。
 只读。
       */
-    LoadBalancerType: string;
+    LoadBalancerType?: string;
     /**
       * 负载均衡实例所在的子网（仅对内网VPC型LB有意义），只读。
       */
@@ -884,7 +943,37 @@ OPEN：公网属性， INTERNAL：内网属性。
       */
     InternetChargeType?: string;
     /**
-      * 最大出带宽，单位Mbps，范围支持0到2048，仅对公网属性的LB生效，默认值 10
+      * 最大出带宽，单位Mbps，仅对公网属性的LB生效，默认值 10
       */
     InternetMaxBandwidthOut?: number;
+    /**
+      * 可用区 ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ZoneID?: string;
+    /**
+      * 运营商类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VipIsp?: string;
+    /**
+      * TGW Group 名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TgwGroupName?: string;
+    /**
+      * IP 类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AddressIPVersion?: string;
+    /**
+      * 标签列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Tags?: Array<Tag>;
+    /**
+      * 内网独占集群配置列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ExtensiveClusters?: ExtensiveClusters;
 }

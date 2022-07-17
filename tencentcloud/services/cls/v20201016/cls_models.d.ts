@@ -856,6 +856,16 @@ export interface ExtractRuleInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Backtracking?: number;
+    /**
+      * 是否为Gbk编码.   0: 否, 1: 是
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IsGBK?: number;
+    /**
+      * 是否为标准json.   0: 否, 1: 是
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    JsonStandard?: number;
 }
 /**
  * 日志主题信息
@@ -2555,7 +2565,7 @@ export interface ExportInfo {
       */
     Count: number;
     /**
-      * 日志下载状态。Processing:导出正在进行中，Complete:导出完成，Failed:导出失败，Expired:日志导出已过期（三天有效期）。
+      * 日志下载状态。Processing:导出正在进行中，Completed:导出完成，Failed:导出失败，Expired:日志导出已过期(三天有效期), Queuing 排队中
       */
     Status: string;
     /**
