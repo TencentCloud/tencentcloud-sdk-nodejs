@@ -967,6 +967,16 @@ export interface EnvInfo {
    * 环境别名
    */
   AliasEnvName?: string
+
+  /**
+   * 环境描述
+   */
+  EnvDesc?: string
+
+  /**
+   * 客户端带宽
+   */
+  ClientBandWidth?: number
 }
 
 /**

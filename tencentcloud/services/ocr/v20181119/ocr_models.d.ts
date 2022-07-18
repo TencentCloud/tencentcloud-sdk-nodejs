@@ -1160,6 +1160,14 @@ export interface VehicleInvoiceInfo {
       * 账号
       */
     MotorBankAccount: string;
+    /**
+      * 销售地址
+      */
+    SellerAddress: string;
+    /**
+      * 销售电话
+      */
+    SellerTel: string;
 }
 /**
  * DriverLicenseOCR请求参数结构体

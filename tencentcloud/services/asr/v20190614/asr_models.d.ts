@@ -367,7 +367,7 @@ export interface DownloadCustomizationResponse {
  */
 export interface CreateRecTaskRequest {
     /**
-      * 引擎模型类型。
+      * 引擎模型类型。注意：非电话场景请务必使用16k的引擎。
 电话场景：
 • 8k_en：电话 8k 英语；
 • 8k_zh：电话 8k 中文普通话通用；

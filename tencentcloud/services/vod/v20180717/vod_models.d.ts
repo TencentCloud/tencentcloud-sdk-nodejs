@@ -11791,7 +11791,7 @@ export interface SubAppIdInfo {
     /**
       * 子应用名称。
       */
-    Name: string;
+    SubAppIdName: string;
     /**
       * 子应用简介。
       */
@@ -11808,6 +11808,10 @@ export interface SubAppIdInfo {
 <li>Destroyed：销毁完成。</li>
       */
     Status: string;
+    /**
+      * 子应用名称（该字段已不推荐使用，建议使用新的子应用名称字段 SubAppIdName）。
+      */
+    Name: string;
 }
 /**
  * DescribeAllClass返回参数结构体
@@ -13565,7 +13569,7 @@ export interface SnapshotByTimeOffsetTask2017 {
  */
 export interface MediaClassInfo {
     /**
-      * 分类 ID
+      * 分类 ID。
       */
     ClassId: number;
     /**
@@ -13573,17 +13577,21 @@ export interface MediaClassInfo {
       */
     ParentId: number;
     /**
-      * 分类名称
+      * 分类名称。
       */
-    ClassName: string;
+    Name: string;
     /**
       * 分类级别，一级分类为 0，最大值为 3，即最多允许 4 级分类层次。
       */
     Level: number;
     /**
-      * 当前分类的第一级子类 ID 集合
+      * 当前分类的第一级子类 ID 集合。
       */
     SubClassIdSet: Array<number>;
+    /**
+      * 分类名称（该字段已不推荐使用，建议使用新的分类名称字段 Name）。
+      */
+    ClassName: string;
 }
 /**
  * DescribeTranscodeTemplates返回参数结构体

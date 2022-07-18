@@ -178,6 +178,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateTopic", req, cb);
     }
     /**
+     * 用于查询cdc-ckafka任务状态
+     */
+    async CheckCdcCluster(req, cb) {
+        return this.request("CheckCdcCluster", req, cb);
+    }
+    /**
      * 本接口用于增加主题中的分区
      */
     async CreatePartition(req, cb) {
@@ -304,6 +310,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeRegion(req, cb) {
         return this.request("DescribeRegion", req, cb);
+    }
+    /**
+     * 用于cdc的专用ckafka集群
+     */
+    async CreateCdcCluster(req, cb) {
+        return this.request("CreateCdcCluster", req, cb);
     }
     /**
      * 添加用户

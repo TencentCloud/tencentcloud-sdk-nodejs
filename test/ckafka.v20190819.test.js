@@ -268,6 +268,16 @@ it("ckafka.v20190819.CreateTopic", async function () {
     }
 })
 
+it("ckafka.v20190819.CheckCdcCluster", async function () {
+    try {
+       const data = await client.CheckCdcCluster({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ckafka.v20190819.CreatePartition", async function () {
     try {
        const data = await client.CreatePartition({})
@@ -471,6 +481,16 @@ it("ckafka.v20190819.DescribeCkafkaZone", async function () {
 it("ckafka.v20190819.DescribeRegion", async function () {
     try {
        const data = await client.DescribeRegion({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ckafka.v20190819.CreateCdcCluster", async function () {
+    try {
+       const data = await client.CreateCdcCluster({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

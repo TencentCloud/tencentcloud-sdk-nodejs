@@ -1690,6 +1690,10 @@ export interface ModifyListenerRequest {
       */
     SniSwitch?: number;
     /**
+      * 后端目标类型，NODE表示绑定普通节点，TARGETGROUP表示绑定目标组。
+      */
+    TargetType?: string;
+    /**
       * 是否开启长连接，此参数仅适用于HTTP/HTTPS监听器。
       */
     KeepaliveEnable?: number;

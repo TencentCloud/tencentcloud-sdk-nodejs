@@ -99,8 +99,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建服务
-   */
+     * 因业务策略调整，腾讯云TI平台TI-EMS已经于2022年6月30日下线并停止提供服务。若您有新增的业务需求，可前往TI-ONE(https://cloud.tencent.com/document/product/851)使用。
+
+创建服务
+     */
   async CreateService(
     req: CreateServiceRequest,
     cb?: (error: string, rep: CreateServiceResponse) => void
@@ -109,8 +111,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建服务配置
-   */
+     * 因业务策略调整，腾讯云TI平台TI-EMS已经于2022年6月30日下线并停止提供服务。若您有新增的业务需求，可前往TI-ONE(https://cloud.tencent.com/document/product/851)使用。
+
+创建服务配置
+     */
   async CreateServiceConfig(
     req: CreateServiceConfigRequest,
     cb?: (error: string, rep: CreateServiceConfigResponse) => void
@@ -119,8 +123,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建资源组的伸缩组。当前一个资源组仅允许创建一个伸缩组。
-   */
+     * 因业务策略调整，腾讯云TI平台TI-EMS已经于2022年6月30日下线并停止提供服务。若您有新增的业务需求，可前往TI-ONE(https://cloud.tencent.com/document/product/851)使用。
+
+创建资源组的伸缩组。当前一个资源组仅允许创建一个伸缩组。
+     */
   async CreateRsgAsGroup(
     req: CreateRsgAsGroupRequest,
     cb?: (error: string, rep: CreateRsgAsGroupResponse) => void
@@ -129,8 +135,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除资源组中的节点。目前仅支持删除已经到期的预付费节点，和按量付费节点。
-   */
+     * 因业务策略调整，腾讯云TI平台TI-EMS已经于2022年6月30日下线并停止提供服务。若您有新增的业务需求，可前往TI-ONE(https://cloud.tencent.com/document/product/851)使用。
+
+删除资源组中的节点。目前仅支持删除已经到期的预付费节点，和按量付费节点。
+     */
   async DeleteInstance(
     req: DeleteInstanceRequest,
     cb?: (error: string, rep: DeleteInstanceResponse) => void
@@ -139,8 +147,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除服务
-   */
+     * 因业务策略调整，腾讯云TI平台TI-EMS已经于2022年6月30日下线并停止提供服务。若您有新增的业务需求，可前往TI-ONE(https://cloud.tencent.com/document/product/851)使用。
+
+删除服务
+     */
   async DeleteService(
     req: DeleteServiceRequest,
     cb?: (error: string, rep: DeleteServiceResponse) => void
@@ -149,8 +159,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建任务
-   */
+     * 因业务策略调整，腾讯云TI平台TI-EMS已经于2022年6月30日下线并停止提供服务。若您有新增的业务需求，可前往TI-ONE(https://cloud.tencent.com/document/product/851)使用。
+
+创建任务
+     */
   async CreateJob(
     req: CreateJobRequest,
     cb?: (error: string, rep: CreateJobResponse) => void
@@ -159,8 +171,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更新资源组的伸缩组
-   */
+     * 因业务策略调整，腾讯云TI平台TI-EMS已经于2022年6月30日下线并停止提供服务。若您有新增的业务需求，可前往TI-ONE(https://cloud.tencent.com/document/product/851)使用。
+
+更新资源组的伸缩组
+     */
   async UpdateRsgAsGroup(
     req: UpdateRsgAsGroupRequest,
     cb?: (error: string, rep: UpdateRsgAsGroupResponse) => void
@@ -169,8 +183,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 描述服务
-   */
+     * 因业务策略调整，腾讯云TI平台TI-EMS已经于2022年6月30日下线并停止提供服务。若您有新增的业务需求，可前往TI-ONE(https://cloud.tencent.com/document/product/851)使用。
+
+描述服务
+     */
   async DescribeServices(
     req: DescribeServicesRequest,
     cb?: (error: string, rep: DescribeServicesResponse) => void
@@ -179,8 +195,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 停用资源组的伸缩组
-   */
+     * 因业务策略调整，腾讯云TI平台TI-EMS已经于2022年6月30日下线并停止提供服务。若您有新增的业务需求，可前往TI-ONE(https://cloud.tencent.com/document/product/851)使用。
+
+停用资源组的伸缩组
+     */
   async DisableRsgAsGroup(
     req: DisableRsgAsGroupRequest,
     cb?: (error: string, rep: DisableRsgAsGroupResponse) => void
@@ -189,8 +207,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更新服务
-   */
+     * 因业务策略调整，腾讯云TI平台TI-EMS已经于2022年6月30日下线并停止提供服务。若您有新增的业务需求，可前往TI-ONE(https://cloud.tencent.com/document/product/851)使用。
+
+更新服务
+     */
   async UpdateService(
     req: UpdateServiceRequest,
     cb?: (error: string, rep: UpdateServiceResponse) => void
@@ -199,8 +219,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建运行环境
-   */
+     * 因业务策略调整，腾讯云TI平台TI-EMS已经于2022年6月30日下线并停止提供服务。若您有新增的业务需求，可前往TI-ONE(https://cloud.tencent.com/document/product/851)使用。
+
+创建运行环境
+     */
   async CreateRuntime(
     req: CreateRuntimeRequest,
     cb?: (error: string, rep: CreateRuntimeResponse) => void
@@ -209,8 +231,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除服务配置
-   */
+     * 因业务策略调整，腾讯云TI平台TI-EMS已经于2022年6月30日下线并停止提供服务。若您有新增的业务需求，可前往TI-ONE(https://cloud.tencent.com/document/product/851)使用。
+
+删除服务配置
+     */
   async DeleteServiceConfig(
     req: DeleteServiceConfigRequest,
     cb?: (error: string, rep: DeleteServiceConfigResponse) => void
@@ -219,8 +243,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取节点列表
-   */
+     * 因业务策略调整，腾讯云TI平台TI-EMS已经于2022年6月30日下线并停止提供服务。若您有新增的业务需求，可前往TI-ONE(https://cloud.tencent.com/document/product/851)使用。
+
+获取节点列表
+     */
   async DescribeInstances(
     req: DescribeInstancesRequest,
     cb?: (error: string, rep: DescribeInstancesResponse) => void
@@ -229,8 +255,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询伸缩组活动
-   */
+     * 因业务策略调整，腾讯云TI平台TI-EMS已经于2022年6月30日下线并停止提供服务。若您有新增的业务需求，可前往TI-ONE(https://cloud.tencent.com/document/product/851)使用。
+
+查询伸缩组活动
+     */
   async DescribeRsgAsGroupActivities(
     req: DescribeRsgAsGroupActivitiesRequest,
     cb?: (error: string, rep: DescribeRsgAsGroupActivitiesResponse) => void
@@ -239,8 +267,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 描述服务运行环境
-   */
+     * 因业务策略调整，腾讯云TI平台TI-EMS已经于2022年6月30日下线并停止提供服务。若您有新增的业务需求，可前往TI-ONE(https://cloud.tencent.com/document/product/851)使用。
+
+描述服务运行环境
+     */
   async DescribeRuntimes(
     req?: DescribeRuntimesRequest,
     cb?: (error: string, rep: DescribeRuntimesResponse) => void
@@ -249,8 +279,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取资源组列表
-   */
+     * 因业务策略调整，腾讯云TI平台TI-EMS已经于2022年6月30日下线并停止提供服务。若您有新增的业务需求，可前往TI-ONE(https://cloud.tencent.com/document/product/851)使用。
+
+获取资源组列表
+     */
   async DescribeResourceGroups(
     req: DescribeResourceGroupsRequest,
     cb?: (error: string, rep: DescribeResourceGroupsResponse) => void
@@ -259,8 +291,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更新任务
-   */
+     * 因业务策略调整，腾讯云TI平台TI-EMS已经于2022年6月30日下线并停止提供服务。若您有新增的业务需求，可前往TI-ONE(https://cloud.tencent.com/document/product/851)使用。
+
+更新任务
+     */
   async UpdateJob(
     req: UpdateJobRequest,
     cb?: (error: string, rep: UpdateJobResponse) => void
@@ -269,8 +303,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 伸缩
-   */
+     * 因业务策略调整，腾讯云TI平台TI-EMS已经于2022年6月30日下线并停止提供服务。若您有新增的业务需求，可前往TI-ONE(https://cloud.tencent.com/document/product/851)使用。
+
+伸缩
+     */
   async DeleteRsgAsGroup(
     req: DeleteRsgAsGroupRequest,
     cb?: (error: string, rep: DeleteRsgAsGroupResponse) => void
@@ -279,8 +315,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除资源组
-   */
+     * 因业务策略调整，腾讯云TI平台TI-EMS已经于2022年6月30日下线并停止提供服务。若您有新增的业务需求，可前往TI-ONE(https://cloud.tencent.com/document/product/851)使用。
+
+删除资源组
+     */
   async DeleteResourceGroup(
     req: DeleteResourceGroupRequest,
     cb?: (error: string, rep: DeleteResourceGroupResponse) => void
@@ -289,8 +327,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除运行环境
-   */
+     * 因业务策略调整，腾讯云TI平台TI-EMS已经于2022年6月30日下线并停止提供服务。若您有新增的业务需求，可前往TI-ONE(https://cloud.tencent.com/document/product/851)使用。
+
+删除运行环境
+     */
   async DeleteRuntime(
     req: DeleteRuntimeRequest,
     cb?: (error: string, rep: DeleteRuntimeResponse) => void
@@ -299,8 +339,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 暴露服务
-   */
+     * 因业务策略调整，腾讯云TI平台TI-EMS已经于2022年6月30日下线并停止提供服务。若您有新增的业务需求，可前往TI-ONE(https://cloud.tencent.com/document/product/851)使用。
+
+暴露服务
+     */
   async ExposeService(
     req: ExposeServiceRequest,
     cb?: (error: string, rep: ExposeServiceResponse) => void
@@ -309,8 +351,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除任务
-   */
+     * 因业务策略调整，腾讯云TI平台TI-EMS已经于2022年6月30日下线并停止提供服务。若您有新增的业务需求，可前往TI-ONE(https://cloud.tencent.com/document/product/851)使用。
+
+删除任务
+     */
   async DeleteJob(
     req: DeleteJobRequest,
     cb?: (error: string, rep: DeleteJobResponse) => void
@@ -319,8 +363,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 启用资源组的伸缩组
-   */
+     * 因业务策略调整，腾讯云TI平台TI-EMS已经于2022年6月30日下线并停止提供服务。若您有新增的业务需求，可前往TI-ONE(https://cloud.tencent.com/document/product/851)使用。
+
+启用资源组的伸缩组
+     */
   async EnableRsgAsGroup(
     req: EnableRsgAsGroupRequest,
     cb?: (error: string, rep: EnableRsgAsGroupResponse) => void
@@ -329,8 +375,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 描述服务配置
-   */
+     * 因业务策略调整，腾讯云TI平台TI-EMS已经于2022年6月30日下线并停止提供服务。若您有新增的业务需求，可前往TI-ONE(https://cloud.tencent.com/document/product/851)使用。
+
+描述服务配置
+     */
   async DescribeServiceConfigs(
     req: DescribeServiceConfigsRequest,
     cb?: (error: string, rep: DescribeServiceConfigsResponse) => void
@@ -339,8 +387,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询资源组的伸缩组信息
-   */
+     * 因业务策略调整，腾讯云TI平台TI-EMS已经于2022年6月30日下线并停止提供服务。若您有新增的业务需求，可前往TI-ONE(https://cloud.tencent.com/document/product/851)使用。
+
+查询资源组的伸缩组信息
+     */
   async DescribeRsgAsGroups(
     req: DescribeRsgAsGroupsRequest,
     cb?: (error: string, rep: DescribeRsgAsGroupsResponse) => void

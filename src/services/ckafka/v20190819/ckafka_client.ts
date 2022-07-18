@@ -47,6 +47,7 @@ import {
   DescribeInstancesDetailResponse,
   CreateInstancePreData,
   AclRule,
+  CheckCdcClusterResponse,
   DescribeACLResponse,
   DynamicDiskConfig,
   JgwOperateResponse,
@@ -61,8 +62,9 @@ import {
   CreateTokenRequest,
   DeleteAclRuleRequest,
   CreateConsumerResponse,
-  RouteResponse,
+  CreateCdcClusterResponse,
   DescribeGroupResponse,
+  CdcClusterResponse,
   ModifyInstanceAttributesConfig,
   AuthorizeTokenRequest,
   OperateResponseData,
@@ -136,10 +138,13 @@ import {
   BatchCreateAclResponse,
   ModifyInstancePreResponse,
   CreateUserRequest,
+  RouteResponse,
   InstanceDetailResponse,
   DeleteRouteRequest,
+  CreateCdcClusterRequest,
   DeleteTopicIpWhiteListResponse,
   CreateInstancePreResponse,
+  CheckCdcClusterRequest,
   DescribeInstancesDetailRequest,
   CreateConsumerRequest,
   DescribeRouteRequest,
@@ -441,6 +446,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 用于查询cdc-ckafka任务状态
+   */
+  async CheckCdcCluster(
+    req: CheckCdcClusterRequest,
+    cb?: (error: string, rep: CheckCdcClusterResponse) => void
+  ): Promise<CheckCdcClusterResponse> {
+    return this.request("CheckCdcCluster", req, cb)
+  }
+
+  /**
    * 本接口用于增加主题中的分区
    */
   async CreatePartition(
@@ -650,6 +665,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeRegionResponse) => void
   ): Promise<DescribeRegionResponse> {
     return this.request("DescribeRegion", req, cb)
+  }
+
+  /**
+   * 用于cdc的专用ckafka集群
+   */
+  async CreateCdcCluster(
+    req: CreateCdcClusterRequest,
+    cb?: (error: string, rep: CreateCdcClusterResponse) => void
+  ): Promise<CreateCdcClusterResponse> {
+    return this.request("CreateCdcCluster", req, cb)
   }
 
   /**

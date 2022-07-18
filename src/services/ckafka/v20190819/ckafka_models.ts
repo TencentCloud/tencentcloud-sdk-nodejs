@@ -766,6 +766,22 @@ export interface AclRule {
 }
 
 /**
+ * CheckCdcCluster返回参数结构体
+ */
+export interface CheckCdcClusterResponse {
+  /**
+      * 返回结果状态Success
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeACL返回参数结构体
  */
 export interface DescribeACLResponse {
@@ -1049,14 +1065,18 @@ export interface CreateConsumerResponse {
 }
 
 /**
- * 路由信息返回对象
+ * CreateCdcCluster返回参数结构体
  */
-export interface RouteResponse {
+export interface CreateCdcClusterResponse {
   /**
-      * 路由信息列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Routers: Array<Route>
+   * 无
+   */
+  Result: CdcClusterResponse
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1072,6 +1092,17 @@ export interface DescribeGroupResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 创建CDC 标准版共享集群出参
+ */
+export interface CdcClusterResponse {
+  /**
+      * 任务ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TaskId: number
 }
 
 /**
@@ -2901,6 +2932,17 @@ export interface CreateUserRequest {
 }
 
 /**
+ * 路由信息返回对象
+ */
+export interface RouteResponse {
+  /**
+      * 路由信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Routers: Array<Route>
+}
+
+/**
  * 实例详情返回结果
  */
 export interface InstanceDetailResponse {
@@ -2941,6 +2983,51 @@ export interface DeleteRouteRequest {
 }
 
 /**
+ * CreateCdcCluster请求参数结构体
+ */
+export interface CreateCdcClusterRequest {
+  /**
+   * cdc的id
+   */
+  CdcId: string
+
+  /**
+   * vpcId,一个地域只有唯一一个vpcid用于CDC
+   */
+  CdcVpcId: string
+
+  /**
+   * 每个CDC集群有唯一一个子网ID
+   */
+  CdcSubnetId: string
+
+  /**
+   * 所在可用区ID
+   */
+  ZoneId: number
+
+  /**
+   * cdc集群的总带宽
+   */
+  Bandwidth: number
+
+  /**
+   * cdc集群的总磁盘
+   */
+  DiskSize: number
+
+  /**
+   * 数据盘类型
+   */
+  DiskType: string
+
+  /**
+   * 系统盘类型
+   */
+  SystemDiskType: string
+}
+
+/**
  * DeleteTopicIpWhiteList返回参数结构体
  */
 export interface DeleteTopicIpWhiteListResponse {
@@ -2968,6 +3055,16 @@ export interface CreateInstancePreResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CheckCdcCluster请求参数结构体
+ */
+export interface CheckCdcClusterRequest {
+  /**
+   * 任务ID
+   */
+  TaskId: number
 }
 
 /**

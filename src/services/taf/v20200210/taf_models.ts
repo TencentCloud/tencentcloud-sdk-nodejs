@@ -321,19 +321,19 @@ export interface OutputRecognizeEffectiveFlow {
  */
 export interface InputRecognizeTargetAudience {
   /**
+   * 模型ID列表
+   */
+  ModelIdList: Array<number>
+
+  /**
    * 设备ID，AccountType指定的类型
    */
-  Uid: string
+  Uid?: string
 
   /**
    * 设备号类型，1.imei 2.imeiMd5（小写后转MD5转小写）3.idfa， 4.idfaMd5（大写后转MD5转小写），5.手机号,256.其它
    */
-  AccountType: number
-
-  /**
-   * 模型ID列表
-   */
-  ModelIdList: Array<number>
+  AccountType?: number
 
   /**
    * 用户IP

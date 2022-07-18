@@ -3237,7 +3237,7 @@ export interface CreateLoadBalancingRequest {
   ZoneId: string
 
   /**
-   * 子域名，填写@表示根域
+   * 子域名
    */
   Host: string
 
