@@ -23,6 +23,7 @@ import {
   ListUserRequest,
   ResetPasswordRequest,
   ErrorDetails,
+  DescribeUserRequest,
   DeleteUsersRequest,
   ImportUser,
   UpdateUserStatusResponse,
@@ -56,6 +57,8 @@ import {
   ListLogMessageByConditionRequest,
   SaltLocationRule,
   MemberMap,
+  QueryUserFilter,
+  DescribeUserResponse,
   ListUserResponse,
   LogMessage,
   ListLogMessageByConditionResponse,
@@ -98,6 +101,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpdateUserResponse) => void
   ): Promise<UpdateUserResponse> {
     return this.request("UpdateUser", req, cb)
+  }
+
+  /**
+   * 多条件查询用户信息
+   */
+  async DescribeUser(
+    req: DescribeUserRequest,
+    cb?: (error: string, rep: DescribeUserResponse) => void
+  ): Promise<DescribeUserResponse> {
+    return this.request("DescribeUser", req, cb)
   }
 
   /**

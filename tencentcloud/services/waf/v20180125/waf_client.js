@@ -150,6 +150,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeIpAccessControl", req, cb);
     }
     /**
+     * 创建搜索下载攻击日志任务，使用CLS新版本的搜索下载getlog接口
+     */
+    async PostAttackDownloadTask(req, cb) {
+        return this.request("PostAttackDownloadTask", req, cb);
+    }
+    /**
      * 配置WAF威胁情报封禁模块详情
      */
     async ModifyWafThreatenIntelligence(req, cb) {

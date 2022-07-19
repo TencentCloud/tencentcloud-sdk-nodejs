@@ -164,7 +164,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建跳转小程序查看或签署的链接
+   * 创建跳转小程序查看或签署的链接；自动签署的签署方不创建签署链接；
    */
   async CreateSignUrls(
     req: CreateSignUrlsRequest,

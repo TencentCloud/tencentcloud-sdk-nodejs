@@ -46,6 +46,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdateUser", req, cb);
     }
     /**
+     * 多条件查询用户信息
+     */
+    async DescribeUser(req, cb) {
+        return this.request("DescribeUser", req, cb);
+    }
+    /**
      * 查询用户列表
      */
     async ListUser(req, cb) {

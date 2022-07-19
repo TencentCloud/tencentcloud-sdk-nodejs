@@ -3257,6 +3257,10 @@ export interface ModifyTopicAttributesRequest {
       * 消费限流，单位 MB/s
       */
     QuotaConsumerByteRate?: number;
+    /**
+      * 调整topic副本数
+      */
+    ReplicaNum?: number;
 }
 /**
  * CreateTopic返回参数结构体

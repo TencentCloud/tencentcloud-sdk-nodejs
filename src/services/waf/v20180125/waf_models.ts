@@ -852,6 +852,41 @@ export interface AddSpartaProtectionRequest {
 }
 
 /**
+ * PostAttackDownloadTask请求参数结构体
+ */
+export interface PostAttackDownloadTaskRequest {
+  /**
+   * 查询的域名，所有域名使用all
+   */
+  Domain: string
+
+  /**
+   * 查询起始时间
+   */
+  StartTime: string
+
+  /**
+   * 查询结束时间
+   */
+  EndTime: string
+
+  /**
+   * Lucene语法
+   */
+  QueryString: string
+
+  /**
+   * 任务名称
+   */
+  TaskName: string
+
+  /**
+   * 默认为desc，可以取值desc和asc
+   */
+  Sort?: string
+}
+
+/**
  * DescribeAccessFastAnalysis请求参数结构体
  */
 export interface DescribeAccessFastAnalysisRequest {
@@ -915,6 +950,66 @@ export interface DeleteDomainWhiteRulesResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 下载攻击日志记录数据项
+ */
+export interface DownloadAttackRecordInfo {
+  /**
+   * 记录ID
+   */
+  Id: number
+
+  /**
+   * 下载任务名
+   */
+  TaskName: string
+
+  /**
+   * 任务ID
+   */
+  TaskId: string
+
+  /**
+   * 域名
+   */
+  Host: string
+
+  /**
+   * 当前下载任务的日志条数
+   */
+  Count: number
+
+  /**
+   * 下载任务运行状态：-1-下载超时，0-下载等待，1-下载完成，2-下载失败，4-正在下载
+   */
+  Status: number
+
+  /**
+   * 下载文件URL
+   */
+  Url: string
+
+  /**
+   * 创建时间
+   */
+  CreateTime: string
+
+  /**
+   * 最后更新修改时间
+   */
+  ModifyTime: string
+
+  /**
+   * 过期时间
+   */
+  ExpireTime: string
+
+  /**
+   * 下载任务需下载的日志总条数
+   */
+  TotalCount: number
 }
 
 /**
@@ -1060,6 +1155,21 @@ export interface RuleList {
    * 开关状态
    */
   Status: number
+}
+
+/**
+ * PostAttackDownloadTask返回参数结构体
+ */
+export interface PostAttackDownloadTaskResponse {
+  /**
+   * 任务task id
+   */
+  Flow?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1972,6 +2082,11 @@ export interface AccessRuleInfo {
  * GetAttackDownloadRecords返回参数结构体
  */
 export interface GetAttackDownloadRecordsResponse {
+  /**
+   * 下载攻击日志记录数组
+   */
+  Records: Array<DownloadAttackRecordInfo>
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

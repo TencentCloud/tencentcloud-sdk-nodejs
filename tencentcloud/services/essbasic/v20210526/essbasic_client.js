@@ -79,7 +79,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("PrepareFlows", req, cb);
     }
     /**
-     * 创建跳转小程序查看或签署的链接
+     * 创建跳转小程序查看或签署的链接；自动签署的签署方不创建签署链接；
      */
     async CreateSignUrls(req, cb) {
         return this.request("CreateSignUrls", req, cb);

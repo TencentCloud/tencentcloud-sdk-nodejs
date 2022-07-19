@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { UpdateUserRequest, DescribeUserByIdRequest, ListUserRequest, ResetPasswordRequest, DeleteUsersRequest, UpdateUserStatusResponse, ListUserByPropertyRequest, CreateUserResponse, SetPasswordResponse, ListUserByPropertyResponse, ListJobsRequest, DescribeUserByIdResponse, CreateFileExportUserJobRequest, ResetPasswordResponse, UpdateUserResponse, SetPasswordRequest, UpdateUserStatusRequest, ListJobsResponse, LinkAccountResponse, CreateUserRequest, DeleteUsersResponse, CreateApiImportUserJobRequest, CreateFileExportUserJobResponse, CreateApiImportUserJobResponse, LinkAccountRequest, ListLogMessageByConditionRequest, ListUserResponse, ListLogMessageByConditionResponse } from "./ciam_models";
+import { UpdateUserRequest, DescribeUserByIdRequest, ListUserRequest, ResetPasswordRequest, DescribeUserRequest, DeleteUsersRequest, UpdateUserStatusResponse, ListUserByPropertyRequest, CreateUserResponse, SetPasswordResponse, ListUserByPropertyResponse, ListJobsRequest, DescribeUserByIdResponse, CreateFileExportUserJobRequest, ResetPasswordResponse, UpdateUserResponse, SetPasswordRequest, UpdateUserStatusRequest, ListJobsResponse, LinkAccountResponse, CreateUserRequest, DeleteUsersResponse, CreateApiImportUserJobRequest, CreateFileExportUserJobResponse, CreateApiImportUserJobResponse, LinkAccountRequest, ListLogMessageByConditionRequest, DescribeUserResponse, ListUserResponse, ListLogMessageByConditionResponse } from "./ciam_models";
 /**
  * ciam client
  * @class
@@ -19,6 +19,10 @@ export declare class Client extends AbstractClient {
      * 更新用户
      */
     UpdateUser(req: UpdateUserRequest, cb?: (error: string, rep: UpdateUserResponse) => void): Promise<UpdateUserResponse>;
+    /**
+     * 多条件查询用户信息
+     */
+    DescribeUser(req: DescribeUserRequest, cb?: (error: string, rep: DescribeUserResponse) => void): Promise<DescribeUserResponse>;
     /**
      * 查询用户列表
      */

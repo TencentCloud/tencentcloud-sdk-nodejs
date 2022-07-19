@@ -83,6 +83,14 @@ export interface DescribeUserByIdRequest {
    * 用户ID
    */
   UserId: string
+
+  /**
+      * 返回信息是否为原文
+
+<li> **false** </li>	默认，返回信息为脱敏信息
+<li> **true** </li>	返回用户信息原文
+      */
+  Original?: boolean
 }
 
 /**
@@ -106,6 +114,11 @@ export interface ListUserRequest {
 <li> **userGroupId** </li>	Values = 用户组ID
       */
   Filters?: Array<Filter>
+
+  /**
+   * 返回信息是否为原文
+   */
+  Original?: boolean
 }
 
 /**
@@ -137,6 +150,31 @@ export interface ErrorDetails {
    * 失败原因
    */
   Error: string
+}
+
+/**
+ * DescribeUser请求参数结构体
+ */
+export interface DescribeUserRequest {
+  /**
+   * 用户目录ID
+   */
+  UserStoreId: string
+
+  /**
+   * 分页数据
+   */
+  Pageable: Pageable
+
+  /**
+   * 查询条件，根据propertycode和propertykey
+   */
+  Filters?: Array<QueryUserFilter>
+
+  /**
+   * 是否返回明文
+   */
+  Original?: boolean
 }
 
 /**
@@ -343,6 +381,11 @@ export interface ListUserByPropertyRequest {
    * 属性值
    */
   PropertyValue: string
+
+  /**
+   * 返回信息是否为原文
+   */
+  Original?: boolean
 }
 
 /**
@@ -1103,6 +1146,54 @@ export interface MemberMap {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Type?: string
+}
+
+/**
+ * 查询用户信息条件
+ */
+export interface QueryUserFilter {
+  /**
+   * 属性key
+   */
+  PropertyKey?: string
+
+  /**
+   * 属性value
+   */
+  PropertyValue?: string
+
+  /**
+   * 逻辑值，等于true，不等于false
+   */
+  Logic?: boolean
+}
+
+/**
+ * DescribeUser返回参数结构体
+ */
+export interface DescribeUserResponse {
+  /**
+      * 总条数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Total: number
+
+  /**
+      * 分页对象
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Pageable: Pageable
+
+  /**
+      * 用户列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Content: Array<User>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

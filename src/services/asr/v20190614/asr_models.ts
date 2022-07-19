@@ -124,7 +124,7 @@ export interface CreateAsyncRecognitionTaskRequest {
   EngineType: string
 
   /**
-   * 语音流地址，支持rtmp、hls、rtsp等流媒体协议，以及各类基于http协议的直播流
+   * 语音流地址，支持rtmp、rtsp等流媒体协议，以及各类基于http协议的直播流(不支持hls)
    */
   Url: string
 

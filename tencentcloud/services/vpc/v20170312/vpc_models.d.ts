@@ -43,6 +43,14 @@ export interface NetworkAcl {
       * 网络ACL出站规则。
       */
     EgressEntries: Array<NetworkAclEntry>;
+    /**
+      * 网络ACL类型。三元组：'TRIPLE'   五元组：'QUINTUPLE'
+      */
+    NetworkAclType: string;
+    /**
+      * 标签键值对
+      */
+    TagSet: Array<Tag>;
 }
 /**
  * ModifyAddressTemplateAttribute返回参数结构体

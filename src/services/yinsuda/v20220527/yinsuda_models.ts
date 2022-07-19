@@ -191,6 +191,13 @@ export interface KTVMusicBaseInfo {
 <li>Sing：可唱。</li>
       */
   RightSet: Array<string>
+
+  /**
+      * 推荐类型，取值有：
+<li>Featured：精选；</li>
+<li>Other：其他。</li>
+      */
+  RecommendType: string
 }
 
 /**

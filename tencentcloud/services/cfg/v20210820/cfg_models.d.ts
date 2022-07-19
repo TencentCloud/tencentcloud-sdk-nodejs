@@ -87,6 +87,16 @@ export interface TaskGroupAction {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ActionType?: string;
+    /**
+      * 是否可重试
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IsExecuteRedo?: boolean;
+    /**
+      * 动作风险级别
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ActionRisk?: string;
 }
 /**
  * 监控指标
@@ -473,6 +483,11 @@ export interface TaskGroupInstance {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     TaskGroupInstanceEndTime: string;
+    /**
+      * 实例是否可重试
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TaskGroupInstanceIsRedo?: boolean;
 }
 /**
  * ExecuteTask请求参数结构体

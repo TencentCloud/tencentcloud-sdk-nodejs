@@ -361,6 +361,7 @@ export interface CreateSignUrlsRequest {
 "CHANNEL"：渠道合作企业；
 "NOT_CHANNEL"：非渠道合作企业；
 "PERSON"：个人；
+"FOLLOWER"：关注方，目前是合同抄送方；
       */
     GenerateType?: string;
     /**
@@ -372,7 +373,8 @@ export interface CreateSignUrlsRequest {
       */
     Name?: string;
     /**
-      * 参与人手机号，GenerateType为"PERSON"时必填
+      * 参与人手机号；
+GenerateType为"PERSON"或"FOLLOWER"时必填
       */
     Mobile?: string;
     /**

@@ -54,14 +54,17 @@ import {
   DescribeAutoDenyIPRequest,
   DescribeIpAccessControlRequest,
   AddSpartaProtectionRequest,
+  PostAttackDownloadTaskRequest,
   DescribeAccessFastAnalysisRequest,
   DeleteIpAccessControlRequest,
   DeleteDomainWhiteRulesResponse,
+  DownloadAttackRecordInfo,
   CreateAttackDownloadTaskRequest,
   DescribeWafAutoDenyStatusResponse,
   DeleteDomainWhiteRulesRequest,
   DomainPackageNew,
   RuleList,
+  PostAttackDownloadTaskResponse,
   ModifyCustomRuleStatusResponse,
   AddSpartaProtectionResponse,
   IpAccessControlData,
@@ -325,6 +328,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeIpAccessControlResponse) => void
   ): Promise<DescribeIpAccessControlResponse> {
     return this.request("DescribeIpAccessControl", req, cb)
+  }
+
+  /**
+   * 创建搜索下载攻击日志任务，使用CLS新版本的搜索下载getlog接口
+   */
+  async PostAttackDownloadTask(
+    req: PostAttackDownloadTaskRequest,
+    cb?: (error: string, rep: PostAttackDownloadTaskResponse) => void
+  ): Promise<PostAttackDownloadTaskResponse> {
+    return this.request("PostAttackDownloadTask", req, cb)
   }
 
   /**
