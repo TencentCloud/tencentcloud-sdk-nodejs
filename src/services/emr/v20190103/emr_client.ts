@@ -27,7 +27,7 @@ import {
   TerminateTasksRequest,
   HostVolumeContext,
   Step,
-  SubnetInfo,
+  DescribeEmrApplicationStaticsRequest,
   UserManagerFilter,
   MetaDbInfo,
   DiskSpec,
@@ -70,6 +70,7 @@ import {
   RunJobFlowRequest,
   PriceResource,
   CustomServiceDefine,
+  SubnetInfo,
   DescribeCvmQuotaResponse,
   BootstrapAction,
   DescribeCvmQuotaRequest,
@@ -92,6 +93,7 @@ import {
   MultiDiskMC,
   AddUsersForUserManagerRequest,
   CustomMetaInfo,
+  ApplicationStatics,
   InquiryPriceCreateInstanceRequest,
   DescribeClusterNodesResponse,
   ModifyResourceScheduleConfigRequest,
@@ -104,6 +106,7 @@ import {
   InquiryPriceScaleOutInstanceRequest,
   Resource,
   Filters,
+  DescribeEmrApplicationStaticsResponse,
   InquirePriceRenewEmrRequest,
   DescribeInstanceRenewNodesResponse,
   UserManagerUserBriefInfo,
@@ -248,6 +251,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AddUsersForUserManagerResponse) => void
   ): Promise<AddUsersForUserManagerResponse> {
     return this.request("AddUsersForUserManager", req, cb)
+  }
+
+  /**
+   * （通过走emrcc接入到cam） yarn applciation 统计接口
+   */
+  async DescribeEmrApplicationStatics(
+    req: DescribeEmrApplicationStaticsRequest,
+    cb?: (error: string, rep: DescribeEmrApplicationStaticsResponse) => void
+  ): Promise<DescribeEmrApplicationStaticsResponse> {
+    return this.request("DescribeEmrApplicationStatics", req, cb)
   }
 
   /**

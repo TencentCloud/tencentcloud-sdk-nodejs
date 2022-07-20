@@ -260,20 +260,63 @@ export interface Step {
 }
 
 /**
- * 子网信息
+ * DescribeEmrApplicationStatics请求参数结构体
  */
-export interface SubnetInfo {
+export interface DescribeEmrApplicationStaticsRequest {
   /**
-      * 子网信息（名字）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  SubnetName?: string
+   * 集群id
+   */
+  InstanceId: string
 
   /**
-      * 子网信息（ID）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  SubnetId?: string
+   * 起始时间
+   */
+  StartTime?: number
+
+  /**
+   * 结束时间
+   */
+  EndTime?: number
+
+  /**
+   * 过滤的队列名
+   */
+  Queues?: Array<string>
+
+  /**
+   * 过滤的用户名
+   */
+  Users?: Array<string>
+
+  /**
+   * 过滤的作业类型
+   */
+  ApplicationTypes?: Array<string>
+
+  /**
+   * 分组字段，可选：queue, user, applicationType
+   */
+  GroupBy?: Array<string>
+
+  /**
+   * 排序字段，可选：sumMemorySeconds, sumVCoreSeconds, sumHDFSBytesWritten, sumHDFSBytesRead
+   */
+  OrderBy?: string
+
+  /**
+   * 是否顺序排序，0-逆序，1-正序
+   */
+  IsAsc?: number
+
+  /**
+   * 页号
+   */
+  Offset?: number
+
+  /**
+   * 页容量
+   */
+  Limit?: number
 }
 
 /**
@@ -2114,6 +2157,23 @@ export interface CustomServiceDefine {
 }
 
 /**
+ * 子网信息
+ */
+export interface SubnetInfo {
+  /**
+      * 子网信息（名字）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SubnetName?: string
+
+  /**
+      * 子网信息（ID）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SubnetId?: string
+}
+
+/**
  * DescribeCvmQuota返回参数结构体
  */
 export interface DescribeCvmQuotaResponse {
@@ -2983,6 +3043,51 @@ export interface CustomMetaInfo {
 }
 
 /**
+ * yarn application 统计信息
+ */
+export interface ApplicationStatics {
+  /**
+   * 队列名
+   */
+  Queue: string
+
+  /**
+   * 用户名
+   */
+  User: string
+
+  /**
+   * 作业类型
+   */
+  ApplicationType: string
+
+  /**
+   * SumMemorySeconds含义
+   */
+  SumMemorySeconds: number
+
+  /**
+   * SumVCoreSeconds含义
+   */
+  SumVCoreSeconds: number
+
+  /**
+   * SumHDFSBytesWritten（带单位）
+   */
+  SumHDFSBytesWritten: string
+
+  /**
+   * SumHDFSBytesRead（待单位）
+   */
+  SumHDFSBytesRead: string
+
+  /**
+   * 作业数
+   */
+  CountApps: number
+}
+
+/**
  * InquiryPriceCreateInstance请求参数结构体
  */
 export interface InquiryPriceCreateInstanceRequest {
@@ -3515,6 +3620,41 @@ export interface Filters {
    * 过滤字段值
    */
   Values: Array<string>
+}
+
+/**
+ * DescribeEmrApplicationStatics返回参数结构体
+ */
+export interface DescribeEmrApplicationStaticsResponse {
+  /**
+   * 作业统计信息
+   */
+  Statics: Array<ApplicationStatics>
+
+  /**
+   * 总数
+   */
+  TotalCount: number
+
+  /**
+   * 可选择的队列名
+   */
+  Queues: Array<string>
+
+  /**
+   * 可选择的用户名
+   */
+  Users: Array<string>
+
+  /**
+   * 可选择的作业类型
+   */
+  ApplicationTypes: Array<string>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

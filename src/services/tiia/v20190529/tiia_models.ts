@@ -1597,7 +1597,7 @@ export interface CarTagItem {
   Color: string
 
   /**
-   * 置信度，0-100
+   * 车系置信度，0-100
    */
   Confidence: number
 
@@ -1612,10 +1612,28 @@ export interface CarTagItem {
   CarLocation: Array<Coord>
 
   /**
-      * 车牌信息
+      * 车牌信息，仅车辆识别（增强版）支持
 注意：此字段可能返回 null，表示取不到有效值。
       */
   PlateContent: CarPlateContent
+
+  /**
+      * 车牌信息置信度，0-100，仅车辆识别（增强版）支持
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PlateConfidence: number
+
+  /**
+      * 车辆类型置信度，0-100，仅车辆识别（增强版）支持
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TypeConfidence: number
+
+  /**
+      * 车辆颜色置信度，0-100，仅车辆识别（增强版）支持
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ColorConfidence: number
 }
 
 /**

@@ -28,13 +28,17 @@ class Client extends abstract_client_1.AbstractClient {
         super("tcex.tencentcloudapi.com", "2020-07-27", clientConfig);
     }
     /**
-     * 获取服务调用结果。和InvokeService接口配置合适，其InvokeId参数为InvokeService接口返回的RequestId。
+     * 产品控制台已经下线
+
+获取服务调用结果。和InvokeService接口配置合适，其InvokeId参数为InvokeService接口返回的RequestId。
      */
     async DescribeInvocationResult(req, cb) {
         return this.request("DescribeInvocationResult", req, cb);
     }
     /**
-     * 通过传入文档url，测试服务算法。此接口需要和DescribeInvocationResult接口配置使用，该接口使用InvokeService返回的RequestId作为InvokeId参数，用于查询调用结果。
+     * 产品控制台已经下线
+
+通过传入文档url，测试服务算法。此接口需要和DescribeInvocationResult接口配置使用，该接口使用InvokeService返回的RequestId作为InvokeId参数，用于查询调用结果。
      */
     async InvokeService(req, cb) {
         return this.request("InvokeService", req, cb);

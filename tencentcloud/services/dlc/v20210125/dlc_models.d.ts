@@ -925,6 +925,14 @@ export interface ViewBaseInfo {
       * 视图名称
       */
     ViewName: string;
+    /**
+      * 视图创建人昵称
+      */
+    UserAlias?: string;
+    /**
+      * 视图创建人ID
+      */
+    UserSubUin?: string;
 }
 /**
  * CheckLockMetaData请求参数结构体
@@ -1136,6 +1144,16 @@ export interface TableBaseInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     TableFormat?: string;
+    /**
+      * 建表用户昵称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UserAlias?: string;
+    /**
+      * 建表用户ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UserSubUin?: string;
 }
 /**
  * UnlockMetaData请求参数结构体
@@ -2817,7 +2835,7 @@ table-id - String - （过滤条件）table id形如：12342。
       */
     EndTime?: string;
     /**
-      * 排序字段，支持：ModifiedTime（默认）；CreateTime
+      * 排序字段，支持：CreateTime、UpdateTime、StorageSize、RecordCount、Name（不传则默认按name升序）
       */
     Sort?: string;
     /**
@@ -3633,6 +3651,18 @@ export interface DescribeSparkAppTasksRequest {
       * 执行实例id
       */
     TaskId?: string;
+    /**
+      * 更新时间起始点
+      */
+    StartTime?: string;
+    /**
+      * 更新时间截止点
+      */
+    EndTime?: string;
+    /**
+      * 按照该参数过滤,支持task-state
+      */
+    Filters?: Array<Filter>;
 }
 /**
  * LockMetaData返回参数结构体
@@ -3897,6 +3927,21 @@ export interface DatabaseResponseInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ModifiedTime?: string;
+    /**
+      * cos存储路径
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Location: string;
+    /**
+      * 建库用户昵称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UserAlias: string;
+    /**
+      * 建库用户ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UserSubUin: string;
 }
 /**
  * 迁移列对象

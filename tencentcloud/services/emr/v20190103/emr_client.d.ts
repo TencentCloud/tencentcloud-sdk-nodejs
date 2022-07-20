@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ScaleOutInstanceResponse, SyncPodStateResponse, CreateInstanceResponse, TerminateTasksRequest, ScaleOutInstanceRequest, ModifyResourceScheduleConfigResponse, DescribeInstancesListResponse, DescribeInstanceRenewNodesRequest, InquiryPriceRenewInstanceResponse, DescribeJobFlowRequest, InquiryPriceCreateInstanceResponse, TerminateInstanceRequest, DescribeResourceScheduleRequest, DescribeUsersForUserManagerRequest, RunJobFlowResponse, TerminateInstanceResponse, InquiryPriceUpdateInstanceResponse, DescribeResourceScheduleResponse, ModifyResourceSchedulerRequest, RunJobFlowRequest, DescribeCvmQuotaResponse, DescribeCvmQuotaRequest, DescribeClusterNodesRequest, SyncPodStateRequest, CreateInstanceRequest, DescribeInstancesRequest, InquiryPriceUpdateInstanceRequest, DescribeInstancesListRequest, ModifyResourcePoolsResponse, TerminateTasksResponse, DescribeInstancesResponse, DescribeUsersForUserManagerResponse, InquiryPriceRenewInstanceRequest, InquirePriceRenewEmrResponse, AddUsersForUserManagerRequest, InquiryPriceCreateInstanceRequest, DescribeClusterNodesResponse, ModifyResourceScheduleConfigRequest, InquiryPriceScaleOutInstanceRequest, InquirePriceRenewEmrRequest, DescribeInstanceRenewNodesResponse, InquiryPriceScaleOutInstanceResponse, ModifyResourceSchedulerResponse, AddUsersForUserManagerResponse, ModifyResourcePoolsRequest, DescribeJobFlowResponse } from "./emr_models";
+import { ScaleOutInstanceResponse, SyncPodStateResponse, CreateInstanceResponse, TerminateTasksRequest, DescribeEmrApplicationStaticsRequest, ScaleOutInstanceRequest, ModifyResourceScheduleConfigResponse, DescribeInstancesListResponse, DescribeInstanceRenewNodesRequest, InquiryPriceRenewInstanceResponse, DescribeJobFlowRequest, InquiryPriceCreateInstanceResponse, TerminateInstanceRequest, DescribeResourceScheduleRequest, DescribeUsersForUserManagerRequest, RunJobFlowResponse, TerminateInstanceResponse, InquiryPriceUpdateInstanceResponse, DescribeResourceScheduleResponse, ModifyResourceSchedulerRequest, RunJobFlowRequest, DescribeCvmQuotaResponse, DescribeCvmQuotaRequest, DescribeClusterNodesRequest, SyncPodStateRequest, CreateInstanceRequest, DescribeInstancesRequest, InquiryPriceUpdateInstanceRequest, DescribeInstancesListRequest, ModifyResourcePoolsResponse, TerminateTasksResponse, DescribeInstancesResponse, DescribeUsersForUserManagerResponse, InquiryPriceRenewInstanceRequest, InquirePriceRenewEmrResponse, AddUsersForUserManagerRequest, InquiryPriceCreateInstanceRequest, DescribeClusterNodesResponse, ModifyResourceScheduleConfigRequest, InquiryPriceScaleOutInstanceRequest, DescribeEmrApplicationStaticsResponse, InquirePriceRenewEmrRequest, DescribeInstanceRenewNodesResponse, InquiryPriceScaleOutInstanceResponse, ModifyResourceSchedulerResponse, AddUsersForUserManagerResponse, ModifyResourcePoolsRequest, DescribeJobFlowResponse } from "./emr_models";
 /**
  * emr client
  * @class
@@ -57,6 +57,10 @@ export declare class Client extends AbstractClient {
 新增用户列表（用户管理）。
      */
     AddUsersForUserManager(req: AddUsersForUserManagerRequest, cb?: (error: string, rep: AddUsersForUserManagerResponse) => void): Promise<AddUsersForUserManagerResponse>;
+    /**
+     * （通过走emrcc接入到cam） yarn applciation 统计接口
+     */
+    DescribeEmrApplicationStatics(req: DescribeEmrApplicationStaticsRequest, cb?: (error: string, rep: DescribeEmrApplicationStaticsResponse) => void): Promise<DescribeEmrApplicationStaticsResponse>;
     /**
      * 预付费集群隔离后续费资源查询
      */

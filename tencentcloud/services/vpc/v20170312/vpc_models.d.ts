@@ -905,6 +905,10 @@ export interface ModifyNetworkAclEntriesRequest {
       * 网络ACL规则集。NetworkAclEntrySet和NetworkAclQuintupleSet只能输入一个。
       */
     NetworkAclEntrySet?: NetworkAclEntrySet;
+    /**
+      * 网络ACL五元组规则集。NetworkAclEntrySet和NetworkAclQuintupleSet只能输入一个。
+      */
+    NetworkAclQuintupleSet?: NetworkAclQuintupleEntries;
 }
 /**
  * DescribeVpcPrivateIpAddresses请求参数结构体
@@ -2925,6 +2929,31 @@ export interface DescribeVpnGatewaySslClientsRequest {
       * VPN门户网站使用。默认是False。
       */
     IsVpnPortal?: boolean;
+}
+/**
+ * 终端节点服务的服务白名单对象详情。
+ */
+export interface VpcEndPointServiceUser {
+    /**
+      * AppId。
+      */
+    Owner: number;
+    /**
+      * Uin。
+      */
+    UserUin: string;
+    /**
+      * 描述信息。
+      */
+    Description: string;
+    /**
+      * 创建时间。
+      */
+    CreateTime: string;
+    /**
+      * 终端节点服务ID。
+      */
+    EndPointServiceId: string;
 }
 /**
  * DescribeIp6TranslatorQuota请求参数结构体
@@ -4965,6 +4994,81 @@ export interface ResourceDashboard {
     RouteTable: number;
 }
 /**
+ * 子网对象
+ */
+export interface Subnet {
+    /**
+      * `VPC`实例`ID`。
+      */
+    VpcId: string;
+    /**
+      * 子网实例`ID`，例如：subnet-bthucmmy。
+      */
+    SubnetId: string;
+    /**
+      * 子网名称。
+      */
+    SubnetName: string;
+    /**
+      * 子网的 `IPv4` `CIDR`。
+      */
+    CidrBlock: string;
+    /**
+      * 是否默认子网。
+      */
+    IsDefault: boolean;
+    /**
+      * 是否开启广播。
+      */
+    EnableBroadcast: boolean;
+    /**
+      * 可用区。
+      */
+    Zone: string;
+    /**
+      * 路由表实例ID，例如：rtb-l2h8d7c2。
+      */
+    RouteTableId: string;
+    /**
+      * 创建时间。
+      */
+    CreatedTime?: string;
+    /**
+      * 可用`IPv4`数。
+      */
+    AvailableIpAddressCount: number;
+    /**
+      * 子网的 `IPv6` `CIDR`。
+      */
+    Ipv6CidrBlock: string;
+    /**
+      * 关联`ACL`ID
+      */
+    NetworkAclId: string;
+    /**
+      * 是否为 `SNAT` 地址池子网。
+      */
+    IsRemoteVpcSnat: boolean;
+    /**
+      * 子网`IPv4`总数。
+      */
+    TotalIpAddressCount: number;
+    /**
+      * 标签键值对。
+      */
+    TagSet: Array<Tag>;
+    /**
+      * CDC实例ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CdcId: string;
+    /**
+      * 是否是CDC所属子网。0:否 1:是
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IsCdcSubnet: number;
+}
+/**
  * DescribeCcnAttachedInstances返回参数结构体
  */
 export interface DescribeCcnAttachedInstancesResponse {
@@ -5383,6 +5487,14 @@ export interface CreateNetworkAclRequest {
       * 网络ACL名称，最大长度不能超过60个字节。
       */
     NetworkAclName: string;
+    /**
+      * 网络ACL类型，三元组(TRIPLE)或五元组(QUINTUPLE)
+      */
+    NetworkAclType?: string;
+    /**
+      * 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]。
+      */
+    Tags?: Array<Tag>;
 }
 /**
  * DescribeAddresses请求参数结构体
@@ -7799,11 +7911,11 @@ export interface DescribeNetworkAclsResponse {
     /**
       * 实例详细信息列表。
       */
-    NetworkAclSet?: Array<NetworkAcl>;
+    NetworkAclSet: Array<NetworkAcl>;
     /**
       * 符合条件的实例数量。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -9454,29 +9566,53 @@ export interface CCN {
     RouteTableFlag: boolean;
 }
 /**
- * 终端节点服务的服务白名单对象详情。
+ * 网络ACL五元组Entry
  */
-export interface VpcEndPointServiceUser {
+export interface NetworkAclQuintupleEntry {
     /**
-      * AppId。
+      * 协议, 取值: TCP,UDP, ICMP, ALL。
       */
-    Owner: number;
+    Protocol?: string;
     /**
-      * Uin。
+      * 描述。
       */
-    UserUin: string;
+    Description?: string;
     /**
-      * 描述信息。
+      * 源端口(all, 单个port,  range)。当Protocol为ALL或ICMP时，不能指定Port。
       */
-    Description: string;
+    SourcePort?: string;
     /**
-      * 创建时间。
+      * 源CIDR。
       */
-    CreateTime: string;
+    SourceCidr?: string;
     /**
-      * 终端节点服务ID。
+      * 目的端口(all, 单个port,  range)。当Protocol为ALL或ICMP时，不能指定Port。
       */
-    EndPointServiceId: string;
+    DestinationPort?: string;
+    /**
+      * 目的CIDR。
+      */
+    DestinationCidr?: string;
+    /**
+      * 动作，ACCEPT 或 DROP。
+      */
+    Action?: string;
+    /**
+      * 网络ACL条目唯一ID。
+      */
+    NetworkAclQuintupleEntryId?: string;
+    /**
+      * 优先级，从1开始。
+      */
+    Priority?: number;
+    /**
+      * 创建时间，用于DescribeNetworkAclQuintupleEntries的出参。
+      */
+    CreateTime?: string;
+    /**
+      * 方向，INGRESS或EGRESS，用于DescribeNetworkAclQuintupleEntries的出参。
+      */
+    NetworkAclDirection?: string;
 }
 /**
  * InquirePriceCreateDirectConnectGateway返回参数结构体
@@ -10718,79 +10854,17 @@ DIRECTCONNECT：专线网关
     UpdateTime: string;
 }
 /**
- * 子网对象
+ * 网络ACL五元组
  */
-export interface Subnet {
+export interface NetworkAclQuintupleEntries {
     /**
-      * `VPC`实例`ID`。
+      * 网络ACL五元组入站规则。
       */
-    VpcId: string;
+    Ingress?: Array<NetworkAclQuintupleEntry>;
     /**
-      * 子网实例`ID`，例如：subnet-bthucmmy。
+      * 网络ACL五元组出站规则
       */
-    SubnetId: string;
-    /**
-      * 子网名称。
-      */
-    SubnetName: string;
-    /**
-      * 子网的 `IPv4` `CIDR`。
-      */
-    CidrBlock: string;
-    /**
-      * 是否默认子网。
-      */
-    IsDefault: boolean;
-    /**
-      * 是否开启广播。
-      */
-    EnableBroadcast: boolean;
-    /**
-      * 可用区。
-      */
-    Zone: string;
-    /**
-      * 路由表实例ID，例如：rtb-l2h8d7c2。
-      */
-    RouteTableId: string;
-    /**
-      * 创建时间。
-      */
-    CreatedTime?: string;
-    /**
-      * 可用`IPv4`数。
-      */
-    AvailableIpAddressCount: number;
-    /**
-      * 子网的 `IPv6` `CIDR`。
-      */
-    Ipv6CidrBlock: string;
-    /**
-      * 关联`ACL`ID
-      */
-    NetworkAclId: string;
-    /**
-      * 是否为 `SNAT` 地址池子网。
-      */
-    IsRemoteVpcSnat: boolean;
-    /**
-      * 子网`IPv4`总数。
-      */
-    TotalIpAddressCount: number;
-    /**
-      * 标签键值对。
-      */
-    TagSet: Array<Tag>;
-    /**
-      * CDC实例ID。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    CdcId: string;
-    /**
-      * 是否是CDC所属子网。0:否 1:是
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    IsCdcSubnet: number;
+    Egress?: Array<NetworkAclQuintupleEntry>;
 }
 /**
  * AttachNetworkInterface请求参数结构体

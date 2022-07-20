@@ -371,6 +371,12 @@ export interface OrgMember {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   BindStatus: string
+
+  /**
+      * 成员权限状态 已确认：Confirmed ，待确认：UnConfirmed
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PermissionStatus: string
 }
 
 /**

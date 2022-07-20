@@ -138,6 +138,16 @@ it("emr.v20190103.AddUsersForUserManager", async function () {
     }
 })
 
+it("emr.v20190103.DescribeEmrApplicationStatics", async function () {
+    try {
+       const data = await client.DescribeEmrApplicationStatics({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("emr.v20190103.DescribeInstanceRenewNodes", async function () {
     try {
        const data = await client.DescribeInstanceRenewNodes({})

@@ -733,6 +733,10 @@ export interface CreateConsoleLoginUrlRequest {
       */
     UniformSocialCreditCode?: string;
     /**
+      * 是否展示左侧菜单栏 是：ENABLE（默认） 否：DISABLE
+      */
+    MenuStatus?: string;
+    /**
       * 操作者的信息
       */
     Operator?: UserInfo;
