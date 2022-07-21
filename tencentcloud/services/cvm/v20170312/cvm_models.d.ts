@@ -3121,6 +3121,13 @@ export interface ImportImageRequest {
       * 标签描述列表。通过指定该参数可以同时绑定标签到自定义镜像。
       */
     TagSpecification?: Array<TagSpecification>;
+    /**
+      * 导入镜像后，激活操作系统采用的许可证类型。
+可选项：
+TencentCloud: 腾讯云官方许可
+BYOL: 自带许可（Bring Your Own License）
+      */
+    LicenseType?: string;
 }
 /**
  * 竞价相关选项

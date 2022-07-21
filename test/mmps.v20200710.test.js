@@ -28,6 +28,16 @@ it("mmps.v20200710.CreateAppScanTask", async function () {
     }
 })
 
+it("mmps.v20200710.CreateFlySecMiniAppProfessionalScanTask", async function () {
+    try {
+       const data = await client.CreateFlySecMiniAppProfessionalScanTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mmps.v20200710.DescribeFlySecMiniAppScanReportList", async function () {
     try {
        const data = await client.DescribeFlySecMiniAppScanReportList({})

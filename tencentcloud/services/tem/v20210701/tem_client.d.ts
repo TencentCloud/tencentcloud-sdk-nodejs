@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { RestartApplicationPodResponse, DeleteApplicationRequest, CreateResourceRequest, ResumeDeployApplicationResponse, RestartApplicationResponse, DescribeApplicationsStatusResponse, DescribeDeployApplicationDetailRequest, DescribeApplicationPodsResponse, DeleteIngressRequest, RestartApplicationPodRequest, DescribeRelatedIngressesRequest, ModifyEnvironmentResponse, GenerateApplicationPackageDownloadUrlRequest, DeployApplicationRequest, ModifyIngressResponse, DescribeEnvironmentsResponse, ModifyIngressRequest, DescribeApplicationPodsRequest, CreateApplicationRequest, DescribeRelatedIngressesResponse, DescribeIngressesRequest, ModifyApplicationReplicasResponse, ModifyApplicationReplicasRequest, DescribeIngressesResponse, DeleteIngressResponse, GenerateApplicationPackageDownloadUrlResponse, DescribeIngressResponse, CreateCosTokenResponse, DescribeApplicationsStatusRequest, RollingUpdateApplicationByVersionResponse, RollingUpdateApplicationByVersionRequest, DescribeDeployApplicationDetailResponse, CreateResourceResponse, ModifyApplicationInfoRequest, ModifyApplicationInfoResponse, DeleteApplicationResponse, CreateEnvironmentResponse, RestartApplicationRequest, CreateApplicationResponse, RevertDeployApplicationRequest, ModifyEnvironmentRequest, RevertDeployApplicationResponse, StopApplicationRequest, DescribeIngressRequest, CreateCosTokenRequest, DescribeEnvironmentsRequest, StopApplicationResponse, ResumeDeployApplicationRequest, DeployApplicationResponse, CreateEnvironmentRequest } from "./tem_models";
+import { RestartApplicationPodResponse, DeleteApplicationRequest, CreateResourceRequest, ResumeDeployApplicationResponse, RestartApplicationResponse, DescribeApplicationsStatusResponse, DescribeDeployApplicationDetailRequest, DescribeApplicationPodsResponse, RestartApplicationRequest, DeleteIngressRequest, RestartApplicationPodRequest, DescribeRelatedIngressesRequest, ModifyEnvironmentResponse, GenerateApplicationPackageDownloadUrlRequest, DeployApplicationRequest, ModifyIngressResponse, DescribeEnvironmentsResponse, ModifyIngressRequest, DescribeApplicationPodsRequest, CreateApplicationRequest, DescribeRelatedIngressesResponse, DescribeIngressesRequest, ModifyApplicationReplicasResponse, ModifyApplicationReplicasRequest, DescribeIngressesResponse, DeleteIngressResponse, DestroyEnvironmentRequest, GenerateApplicationPackageDownloadUrlResponse, DescribeIngressResponse, CreateCosTokenResponse, DescribeApplicationsStatusRequest, RollingUpdateApplicationByVersionResponse, RollingUpdateApplicationByVersionRequest, DescribeDeployApplicationDetailResponse, CreateResourceResponse, ModifyApplicationInfoRequest, ModifyApplicationInfoResponse, DeleteApplicationResponse, CreateEnvironmentResponse, DestroyEnvironmentResponse, CreateApplicationResponse, RevertDeployApplicationRequest, ModifyEnvironmentRequest, RevertDeployApplicationResponse, StopApplicationRequest, DescribeIngressRequest, CreateCosTokenRequest, DescribeEnvironmentsRequest, StopApplicationResponse, ResumeDeployApplicationRequest, DeployApplicationResponse, CreateEnvironmentRequest } from "./tem_models";
 /**
  * tem client
  * @class
@@ -55,9 +55,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeApplicationPods(req: DescribeApplicationPodsRequest, cb?: (error: string, rep: DescribeApplicationPodsResponse) => void): Promise<DescribeApplicationPodsResponse>;
     /**
-     * 服务重启
+     * 重启应用实例
      */
-    RestartApplication(req: RestartApplicationRequest, cb?: (error: string, rep: RestartApplicationResponse) => void): Promise<RestartApplicationResponse>;
+    RestartApplicationPod(req: RestartApplicationPodRequest, cb?: (error: string, rep: RestartApplicationPodResponse) => void): Promise<RestartApplicationPodResponse>;
     /**
      * 修改应用基本信息
      */
@@ -91,9 +91,9 @@ export declare class Client extends AbstractClient {
      */
     CreateApplication(req: CreateApplicationRequest, cb?: (error: string, rep: CreateApplicationResponse) => void): Promise<CreateApplicationResponse>;
     /**
-     * 重启应用实例
+     * 服务重启
      */
-    RestartApplicationPod(req: RestartApplicationPodRequest, cb?: (error: string, rep: RestartApplicationPodResponse) => void): Promise<RestartApplicationPodResponse>;
+    RestartApplication(req: RestartApplicationRequest, cb?: (error: string, rep: RestartApplicationResponse) => void): Promise<RestartApplicationResponse>;
     /**
      * 更新应用部署版本
      */
@@ -110,4 +110,8 @@ export declare class Client extends AbstractClient {
      * 绑定云资源
      */
     CreateResource(req: CreateResourceRequest, cb?: (error: string, rep: CreateResourceResponse) => void): Promise<CreateResourceResponse>;
+    /**
+     * 销毁命名空间
+     */
+    DestroyEnvironment(req: DestroyEnvironmentRequest, cb?: (error: string, rep: DestroyEnvironmentResponse) => void): Promise<DestroyEnvironmentResponse>;
 }

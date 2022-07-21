@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeFlySecMiniAppReportUrlRequest, DescribeScanTaskListRequest, DescribeFlySecMiniAppScanTaskParamRequest, CreateAppScanTaskRequest, DescribeScanTaskStatusRequest, DescribeBasicDiagnosisResourceUsageInfoResponse, CreateAppScanTaskRepeatResponse, DescribeBasicDiagnosisResourceUsageInfoRequest, DescribeResourceUsageInfoResponse, DescribeScanTaskReportUrlResponse, DescribeFlySecMiniAppScanTaskStatusRequest, CreateFlySecMiniAppScanTaskResponse, CreateFlySecMiniAppScanTaskRequest, DescribeFlySecMiniAppScanTaskListRequest, DescribeFlySecMiniAppScanReportListRequest, DescribeFlySecMiniAppScanTaskParamResponse, CreateFlySecMiniAppScanTaskRepeatRequest, CreateAppScanTaskRepeatRequest, DescribeScanTaskReportUrlRequest, DescribeFlySecMiniAppScanTaskListResponse, CreateAppScanTaskResponse, DescribeFlySecMiniAppReportUrlResponse, DescribeScanTaskListResponse, DescribeFlySecMiniAppScanTaskStatusResponse, DescribeFlySecMiniAppScanReportListResponse, CreateFlySecMiniAppScanTaskRepeatResponse, DescribeScanTaskStatusResponse, DescribeResourceUsageInfoRequest } from "./mmps_models";
+import { DescribeFlySecMiniAppReportUrlRequest, DescribeScanTaskListRequest, DescribeFlySecMiniAppScanTaskParamRequest, CreateAppScanTaskRequest, DescribeScanTaskStatusRequest, DescribeBasicDiagnosisResourceUsageInfoResponse, CreateAppScanTaskRepeatResponse, DescribeBasicDiagnosisResourceUsageInfoRequest, DescribeResourceUsageInfoResponse, DescribeScanTaskReportUrlResponse, DescribeFlySecMiniAppScanTaskStatusRequest, CreateFlySecMiniAppScanTaskResponse, CreateFlySecMiniAppProfessionalScanTaskRequest, CreateFlySecMiniAppProfessionalScanTaskResponse, DescribeFlySecMiniAppScanTaskListRequest, DescribeFlySecMiniAppScanReportListRequest, DescribeFlySecMiniAppScanTaskParamResponse, CreateFlySecMiniAppScanTaskRepeatRequest, CreateFlySecMiniAppScanTaskRequest, CreateAppScanTaskRepeatRequest, DescribeScanTaskReportUrlRequest, DescribeFlySecMiniAppScanTaskListResponse, CreateAppScanTaskResponse, DescribeFlySecMiniAppReportUrlResponse, DescribeScanTaskListResponse, DescribeFlySecMiniAppScanTaskStatusResponse, DescribeFlySecMiniAppScanReportListResponse, CreateFlySecMiniAppScanTaskRepeatResponse, DescribeScanTaskStatusResponse, DescribeResourceUsageInfoRequest } from "./mmps_models";
 /**
  * mmps client
  * @class
@@ -11,6 +11,10 @@ export declare class Client extends AbstractClient {
      * 创建小程序隐私合规诊断任务
      */
     CreateAppScanTask(req: CreateAppScanTaskRequest, cb?: (error: string, rep: CreateAppScanTaskResponse) => void): Promise<CreateAppScanTaskResponse>;
+    /**
+     * 创建小程序安全深度诊断任务
+     */
+    CreateFlySecMiniAppProfessionalScanTask(req: CreateFlySecMiniAppProfessionalScanTaskRequest, cb?: (error: string, rep: CreateFlySecMiniAppProfessionalScanTaskResponse) => void): Promise<CreateFlySecMiniAppProfessionalScanTaskResponse>;
     /**
      * 查询指定小程序版本的翼扬诊断安全得分
      */

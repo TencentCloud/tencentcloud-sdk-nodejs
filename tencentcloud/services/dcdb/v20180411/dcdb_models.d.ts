@@ -1548,6 +1548,11 @@ export interface DCDBInstanceInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ResourceTags: Array<ResourceTag>;
+    /**
+      * 数据库引擎版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DbVersionId: string;
 }
 /**
  * ModifyDBInstanceSecurityGroups请求参数结构体

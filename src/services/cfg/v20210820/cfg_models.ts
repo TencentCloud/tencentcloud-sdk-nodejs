@@ -133,6 +133,12 @@ export interface TaskGroupAction {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ActionRisk?: string
+
+  /**
+      * 动作运行时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TaskGroupActionExecuteTime?: number
 }
 
 /**
@@ -600,6 +606,12 @@ export interface TaskGroupInstance {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   TaskGroupInstanceIsRedo?: boolean
+
+  /**
+      * 动作实例执行时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TaskGroupInstanceExecuteTime?: number
 }
 
 /**

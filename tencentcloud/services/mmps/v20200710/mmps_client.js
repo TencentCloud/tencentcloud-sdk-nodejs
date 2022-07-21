@@ -34,6 +34,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateAppScanTask", req, cb);
     }
     /**
+     * 创建小程序安全深度诊断任务
+     */
+    async CreateFlySecMiniAppProfessionalScanTask(req, cb) {
+        return this.request("CreateFlySecMiniAppProfessionalScanTask", req, cb);
+    }
+    /**
      * 查询指定小程序版本的翼扬诊断安全得分
      */
     async DescribeFlySecMiniAppScanReportList(req, cb) {

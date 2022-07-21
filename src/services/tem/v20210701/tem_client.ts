@@ -31,6 +31,7 @@ import {
   EsInfo,
   DeployServiceBatchDetail,
   DescribeApplicationPodsResponse,
+  RestartApplicationRequest,
   DeleteIngressRequest,
   RestartApplicationPodRequest,
   DescribeRelatedIngressesRequest,
@@ -55,6 +56,7 @@ import {
   LogOutputConf,
   DescribeIngressesResponse,
   DeleteIngressResponse,
+  DestroyEnvironmentRequest,
   TemNamespaceInfo,
   GenerateApplicationPackageDownloadUrlResponse,
   IngressRuleBackend,
@@ -75,7 +77,7 @@ import {
   IngressRulePath,
   CreateEnvironmentResponse,
   NamespacePage,
-  RestartApplicationRequest,
+  DestroyEnvironmentResponse,
   CreateApplicationResponse,
   HorizontalAutoscaler,
   RevertDeployApplicationRequest,
@@ -223,13 +225,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 服务重启
+   * 重启应用实例
    */
-  async RestartApplication(
-    req: RestartApplicationRequest,
-    cb?: (error: string, rep: RestartApplicationResponse) => void
-  ): Promise<RestartApplicationResponse> {
-    return this.request("RestartApplication", req, cb)
+  async RestartApplicationPod(
+    req: RestartApplicationPodRequest,
+    cb?: (error: string, rep: RestartApplicationPodResponse) => void
+  ): Promise<RestartApplicationPodResponse> {
+    return this.request("RestartApplicationPod", req, cb)
   }
 
   /**
@@ -313,13 +315,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 重启应用实例
+   * 服务重启
    */
-  async RestartApplicationPod(
-    req: RestartApplicationPodRequest,
-    cb?: (error: string, rep: RestartApplicationPodResponse) => void
-  ): Promise<RestartApplicationPodResponse> {
-    return this.request("RestartApplicationPod", req, cb)
+  async RestartApplication(
+    req: RestartApplicationRequest,
+    cb?: (error: string, rep: RestartApplicationResponse) => void
+  ): Promise<RestartApplicationResponse> {
+    return this.request("RestartApplication", req, cb)
   }
 
   /**
@@ -360,5 +362,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateResourceResponse) => void
   ): Promise<CreateResourceResponse> {
     return this.request("CreateResource", req, cb)
+  }
+
+  /**
+   * 销毁命名空间
+   */
+  async DestroyEnvironment(
+    req: DestroyEnvironmentRequest,
+    cb?: (error: string, rep: DestroyEnvironmentResponse) => void
+  ): Promise<DestroyEnvironmentResponse> {
+    return this.request("DestroyEnvironment", req, cb)
   }
 }

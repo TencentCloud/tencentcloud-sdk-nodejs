@@ -4254,6 +4254,12 @@ export interface InstanceDetail {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ClusterType: string
+
+  /**
+      * 实例功能列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Features: Array<string>
 }
 
 /**

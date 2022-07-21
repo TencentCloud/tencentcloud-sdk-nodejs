@@ -254,7 +254,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * （通过走emrcc接入到cam） yarn applciation 统计接口
+   *  yarn applciation 统计接口查询
    */
   async DescribeEmrApplicationStatics(
     req: DescribeEmrApplicationStaticsRequest,

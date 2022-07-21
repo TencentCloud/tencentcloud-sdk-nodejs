@@ -314,49 +314,50 @@ export interface CreateFlySecMiniAppScanTaskResponse {
     RequestId?: string;
 }
 /**
- * CreateFlySecMiniAppScanTask请求参数结构体
+ * CreateFlySecMiniAppProfessionalScanTask请求参数结构体
  */
-export interface CreateFlySecMiniAppScanTaskRequest {
+export interface CreateFlySecMiniAppProfessionalScanTaskRequest {
     /**
       * 小程序AppID
       */
     MiniAppID: string;
     /**
-      * 诊断模式 1:基础诊断，2:深度诊断
+      * 小程序名称
+      */
+    MiniAppName: string;
+    /**
+      * 诊断模式 2:深度诊断
       */
     Mode: number;
     /**
-      * 小程序测试账号(自有账号体系需提供,其他情况不需要)
+      * 公司名称
       */
-    MiniAppTestAccount?: string;
-    /**
-      * 小程序测试密码(自有账号体系需提供,其他情况不需要)
-      */
-    MiniAppTestPwd?: string;
-    /**
-      * 小程序所属行业
-      */
-    Industry?: string;
-    /**
-      * 小程序调查问卷json字符串
-      */
-    SurveyContent?: string;
+    CorpName: string;
     /**
       * 手机号码
       */
-    Mobile?: string;
+    Mobile: string;
     /**
-      * 邮箱地址
+      * 电子邮箱
       */
-    Email?: string;
+    Email: string;
     /**
-      * 商务合作接口人
+      * 备注信息
       */
-    SalesPerson?: string;
+    Remark?: string;
+}
+/**
+ * CreateFlySecMiniAppProfessionalScanTask返回参数结构体
+ */
+export interface CreateFlySecMiniAppProfessionalScanTaskResponse {
     /**
-      * 诊断扫描版本 0:正式版 1:体验版
+      * 返回值, 0:成功, 其他值请查看“返回值”定义
       */
-    ScanVersion?: number;
+    Ret: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeFlySecMiniAppScanTaskList请求参数结构体
@@ -449,7 +450,7 @@ export interface CreateFlySecMiniAppScanTaskRepeatRequest {
       */
     MiniAppID: string;
     /**
-      * 诊断模式 1:基础诊断，2:深度诊断
+      * 诊断模式 1:基础诊断
       */
     Mode: number;
     /**
@@ -464,6 +465,51 @@ export interface CreateFlySecMiniAppScanTaskRepeatRequest {
       * 小程序测试密码(自有账号体系需提供,其他情况不需要)
       */
     MiniAppTestPwd?: string;
+    /**
+      * 诊断扫描版本 0:正式版 1:体验版
+      */
+    ScanVersion?: number;
+}
+/**
+ * CreateFlySecMiniAppScanTask请求参数结构体
+ */
+export interface CreateFlySecMiniAppScanTaskRequest {
+    /**
+      * 小程序AppID
+      */
+    MiniAppID: string;
+    /**
+      * 诊断模式 1:基础诊断
+      */
+    Mode: number;
+    /**
+      * 小程序测试账号(自有账号体系需提供,其他情况不需要)
+      */
+    MiniAppTestAccount?: string;
+    /**
+      * 小程序测试密码(自有账号体系需提供,其他情况不需要)
+      */
+    MiniAppTestPwd?: string;
+    /**
+      * 小程序所属行业
+      */
+    Industry?: string;
+    /**
+      * 小程序调查问卷json字符串
+      */
+    SurveyContent?: string;
+    /**
+      * 手机号码
+      */
+    Mobile?: string;
+    /**
+      * 邮箱地址
+      */
+    Email?: string;
+    /**
+      * 商务合作接口人
+      */
+    SalesPerson?: string;
     /**
       * 诊断扫描版本 0:正式版 1:体验版
       */

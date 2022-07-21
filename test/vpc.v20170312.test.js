@@ -288,6 +288,16 @@ it("vpc.v20170312.DescribeNetDetects", async function () {
     }
 })
 
+it("vpc.v20170312.ModifyNetworkAclQuintupleEntries", async function () {
+    try {
+       const data = await client.ModifyNetworkAclQuintupleEntries({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.DescribeVpcPrivateIpAddresses", async function () {
     try {
        const data = await client.DescribeVpcPrivateIpAddresses({})
@@ -488,9 +498,9 @@ it("vpc.v20170312.DisassociateVpcEndPointSecurityGroups", async function () {
     }
 })
 
-it("vpc.v20170312.CreateDirectConnectGatewayCcnRoutes", async function () {
+it("vpc.v20170312.DeleteRouteTable", async function () {
     try {
-       const data = await client.CreateDirectConnectGatewayCcnRoutes({})
+       const data = await client.DeleteRouteTable({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -918,6 +928,16 @@ it("vpc.v20170312.CheckAssistantCidr", async function () {
     }
 })
 
+it("vpc.v20170312.DescribeFlowLogs", async function () {
+    try {
+       const data = await client.DescribeFlowLogs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.DescribeVpcIpv6Addresses", async function () {
     try {
        const data = await client.DescribeVpcIpv6Addresses({})
@@ -1048,9 +1068,9 @@ it("vpc.v20170312.MigratePrivateIpAddress", async function () {
     }
 })
 
-it("vpc.v20170312.DescribeFlowLogs", async function () {
+it("vpc.v20170312.DeleteNetworkAclQuintupleEntries", async function () {
     try {
-       const data = await client.DescribeFlowLogs({})
+       const data = await client.DeleteNetworkAclQuintupleEntries({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1528,6 +1548,16 @@ it("vpc.v20170312.CreateNatGateway", async function () {
     }
 })
 
+it("vpc.v20170312.DescribeNetworkAclQuintupleEntries", async function () {
+    try {
+       const data = await client.DescribeNetworkAclQuintupleEntries({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.DeleteNetDetect", async function () {
     try {
        const data = await client.DeleteNetDetect({})
@@ -1588,9 +1618,9 @@ it("vpc.v20170312.DeleteVpcEndPointService", async function () {
     }
 })
 
-it("vpc.v20170312.ModifyAssistantCidr", async function () {
+it("vpc.v20170312.CreateNetworkAclQuintupleEntries", async function () {
     try {
-       const data = await client.ModifyAssistantCidr({})
+       const data = await client.CreateNetworkAclQuintupleEntries({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1858,9 +1888,9 @@ it("vpc.v20170312.DescribeVpnGatewaySslServers", async function () {
     }
 })
 
-it("vpc.v20170312.DeleteRouteTable", async function () {
+it("vpc.v20170312.CreateDirectConnectGatewayCcnRoutes", async function () {
     try {
-       const data = await client.DeleteRouteTable({})
+       const data = await client.CreateDirectConnectGatewayCcnRoutes({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2451,6 +2481,16 @@ it("vpc.v20170312.ModifyRouteTableAttribute", async function () {
 it("vpc.v20170312.ReplaceRoutes", async function () {
     try {
        const data = await client.ReplaceRoutes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vpc.v20170312.ModifyAssistantCidr", async function () {
+    try {
+       const data = await client.ModifyAssistantCidr({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

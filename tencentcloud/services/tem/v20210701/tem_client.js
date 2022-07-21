@@ -97,10 +97,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeApplicationPods", req, cb);
     }
     /**
-     * 服务重启
+     * 重启应用实例
      */
-    async RestartApplication(req, cb) {
-        return this.request("RestartApplication", req, cb);
+    async RestartApplicationPod(req, cb) {
+        return this.request("RestartApplicationPod", req, cb);
     }
     /**
      * 修改应用基本信息
@@ -151,10 +151,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateApplication", req, cb);
     }
     /**
-     * 重启应用实例
+     * 服务重启
      */
-    async RestartApplicationPod(req, cb) {
-        return this.request("RestartApplicationPod", req, cb);
+    async RestartApplication(req, cb) {
+        return this.request("RestartApplication", req, cb);
     }
     /**
      * 更新应用部署版本
@@ -179,6 +179,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateResource(req, cb) {
         return this.request("CreateResource", req, cb);
+    }
+    /**
+     * 销毁命名空间
+     */
+    async DestroyEnvironment(req, cb) {
+        return this.request("DestroyEnvironment", req, cb);
     }
 }
 exports.Client = Client;

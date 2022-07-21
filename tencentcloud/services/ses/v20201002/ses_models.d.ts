@@ -882,7 +882,15 @@ export interface ListEmailIdentitiesResponse {
     /**
       * 发信域名列表
       */
-    EmailIdentities?: Array<EmailIdentity>;
+    EmailIdentities: Array<EmailIdentity>;
+    /**
+      * 最大信誉等级
+      */
+    MaxReputationLevel: number;
+    /**
+      * 单域名最高日发送量
+      */
+    MaxDailyQuota: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -952,6 +960,14 @@ export interface EmailIdentity {
       * 是否已通过验证
       */
     SendingEnabled: boolean;
+    /**
+      * 当前信誉等级
+      */
+    CurrentReputationLevel: number;
+    /**
+      * 当日最高发信量
+      */
+    DailyQuota: number;
 }
 /**
  * 邮箱黑名单结构，包含被拉黑的邮箱地址和被拉黑时间

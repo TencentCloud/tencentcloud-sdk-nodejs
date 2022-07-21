@@ -44,6 +44,7 @@ import {
   ModifyIp6RuleResponse,
   ModifyCcnRegionBandwidthLimitsTypeResponse,
   DescribeVpnGatewaysResponse,
+  ModifyNetworkAclQuintupleEntriesRequest,
   ServiceTemplateGroup,
   CreateDhcpIpResponse,
   DeleteVpnGatewaySslServerResponse,
@@ -52,6 +53,7 @@ import {
   CreateDefaultSecurityGroupRequest,
   DescribeServiceTemplateGroupsResponse,
   DescribeVpcEndPointRequest,
+  AssignPrivateIpAddressesRequest,
   DetachClassicLinkVpcRequest,
   DescribeBandwidthPackageBillUsageResponse,
   DeleteBandwidthPackageResponse,
@@ -120,6 +122,7 @@ import {
   DescribeVpcsRequest,
   DescribeRouteConflictsResponse,
   AcceptAttachCcnInstancesRequest,
+  CreateNetworkAclQuintupleEntriesResponse,
   DescribeGatewayFlowMonitorDetailResponse,
   IpGeolocationInfo,
   DeleteFlowLogRequest,
@@ -130,6 +133,7 @@ import {
   ModifyAddressInternetChargeTypeResponse,
   UnassignIpv6SubnetCidrBlockRequest,
   DeleteVpcEndPointServiceResponse,
+  ModifyNetworkAclQuintupleEntriesResponse,
   AssignIpv6CidrBlockRequest,
   CreateSecurityGroupPoliciesResponse,
   UnassignIpv6CidrBlockResponse,
@@ -313,6 +317,7 @@ import {
   RemoveIp6RulesRequest,
   DescribeIpGeolocationDatabaseUrlRequest,
   DescribeVpcEndPointResponse,
+  DescribeNetworkAclQuintupleEntriesRequest,
   DisableGatewayFlowMonitorRequest,
   EnableRoutesResponse,
   DeleteVpnConnectionRequest,
@@ -338,6 +343,7 @@ import {
   DescribeVpnGatewayCcnRoutesRequest,
   DisassociateDirectConnectGatewayNatGatewayResponse,
   CreateServiceTemplateGroupRequest,
+  CreateNetworkAclQuintupleEntriesRequest,
   DescribeClassicLinkInstancesResponse,
   EnableVpnGatewaySslClientCertRequest,
   DescribeVpnGatewayCcnRoutesResponse,
@@ -361,6 +367,7 @@ import {
   VpcPrivateIpAddress,
   CvmInstance,
   DescribeNetworkAclsRequest,
+  DescribeNetworkAclQuintupleEntriesResponse,
   DescribeSubnetsRequest,
   CreateSubnetRequest,
   AddressTemplateGroup,
@@ -506,6 +513,7 @@ import {
   DescribeSecurityGroupReferencesResponse,
   AddIp6RulesResponse,
   CreateAddressTemplateGroupResponse,
+  SslClientConfig,
   DescribeBandwidthPackageQuotaResponse,
   DeleteServiceTemplateGroupRequest,
   DeleteNatGatewayResponse,
@@ -534,7 +542,7 @@ import {
   ModifyVpnGatewayCcnRoutesResponse,
   DetachCcnInstancesResponse,
   ModifyServiceTemplateGroupAttributeResponse,
-  SslClientConfig,
+  DeleteNetworkAclQuintupleEntriesRequest,
   DeleteSubnetRequest,
   DescribeAddressTemplateGroupsRequest,
   CheckNetDetectStateResponse,
@@ -664,7 +672,7 @@ import {
   WithdrawNotifyRoutesResponse,
   DescribeNetworkInterfacesResponse,
   DeleteNetworkAclResponse,
-  AssignPrivateIpAddressesRequest,
+  DeleteNetworkAclQuintupleEntriesResponse,
   DescribeServiceTemplateGroupsRequest,
   CreateSecurityGroupWithPoliciesRequest,
   CreateVpcRequest,
@@ -981,6 +989,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（ModifyNetworkAclQuintupleEntries）用于修改网络ACL五元组的入站规则和出站规则。在NetworkAclQuintupleEntrySet参数中：NetworkAclQuintupleEntry需要提供NetworkAclQuintupleEntryId。
+   */
+  async ModifyNetworkAclQuintupleEntries(
+    req: ModifyNetworkAclQuintupleEntriesRequest,
+    cb?: (error: string, rep: ModifyNetworkAclQuintupleEntriesResponse) => void
+  ): Promise<ModifyNetworkAclQuintupleEntriesResponse> {
+    return this.request("ModifyNetworkAclQuintupleEntries", req, cb)
+  }
+
+  /**
      * 本接口（DescribeVpcPrivateIpAddresses）用于查询VPC内网IP信息。<br />
 只能查询已使用的IP信息，当查询未使用的IP时，本接口不会报错，但不会出现在返回结果里。
      */
@@ -1189,13 +1207,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（CreateDirectConnectGatewayCcnRoutes）用于创建专线网关的云联网路由（IDC网段）
+   * 删除路由表
    */
-  async CreateDirectConnectGatewayCcnRoutes(
-    req: CreateDirectConnectGatewayCcnRoutesRequest,
-    cb?: (error: string, rep: CreateDirectConnectGatewayCcnRoutesResponse) => void
-  ): Promise<CreateDirectConnectGatewayCcnRoutesResponse> {
-    return this.request("CreateDirectConnectGatewayCcnRoutes", req, cb)
+  async DeleteRouteTable(
+    req: DeleteRouteTableRequest,
+    cb?: (error: string, rep: DeleteRouteTableResponse) => void
+  ): Promise<DeleteRouteTableResponse> {
+    return this.request("DeleteRouteTable", req, cb)
   }
 
   /**
@@ -1664,6 +1682,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（DescribeFlowLogs）用于查询获取流日志集合
+   */
+  async DescribeFlowLogs(
+    req: DescribeFlowLogsRequest,
+    cb?: (error: string, rep: DescribeFlowLogsResponse) => void
+  ): Promise<DescribeFlowLogsResponse> {
+    return this.request("DescribeFlowLogs", req, cb)
+  }
+
+  /**
      * 本接口（DescribeVpcIpv6Addresses）用于查询 `VPC` `IPv6` 信息。
 只能查询已使用的`IPv6`信息，当查询未使用的IP时，本接口不会报错，但不会出现在返回结果里。
      */
@@ -1811,13 +1839,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeFlowLogs）用于查询获取流日志集合
+   * 本接口（DeleteNetworkAclQuintupleEntries）用于删除网络ACL五元组指定的入站规则和出站规则（但不是全量删除该ACL下的所有条目）。在NetworkAclQuintupleEntrySet参数中：NetworkAclQuintupleEntry需要提供NetworkAclQuintupleEntryId。
    */
-  async DescribeFlowLogs(
-    req: DescribeFlowLogsRequest,
-    cb?: (error: string, rep: DescribeFlowLogsResponse) => void
-  ): Promise<DescribeFlowLogsResponse> {
-    return this.request("DescribeFlowLogs", req, cb)
+  async DeleteNetworkAclQuintupleEntries(
+    req: DeleteNetworkAclQuintupleEntriesRequest,
+    cb?: (error: string, rep: DeleteNetworkAclQuintupleEntriesResponse) => void
+  ): Promise<DeleteNetworkAclQuintupleEntriesResponse> {
+    return this.request("DeleteNetworkAclQuintupleEntries", req, cb)
   }
 
   /**
@@ -2355,6 +2383,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（DescribeNetworkAclQuintupleEntries）查询入方向或出方向网络ACL五元组条目列表。
+   */
+  async DescribeNetworkAclQuintupleEntries(
+    req?: DescribeNetworkAclQuintupleEntriesRequest,
+    cb?: (error: string, rep: DescribeNetworkAclQuintupleEntriesResponse) => void
+  ): Promise<DescribeNetworkAclQuintupleEntriesResponse> {
+    return this.request("DescribeNetworkAclQuintupleEntries", req, cb)
+  }
+
+  /**
    * 本接口(DeleteNetDetect)用于删除网络探测实例。
    */
   async DeleteNetDetect(
@@ -2417,13 +2455,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(ModifyAssistantCidr)用于批量修改辅助CIDR，支持新增和删除。（接口灰度中，如需使用请提工单。）
+   * 本接口（CreateNetworkAclQuintupleEntries）用于增量网络ACL五元组的入站规则和出站规则。
    */
-  async ModifyAssistantCidr(
-    req: ModifyAssistantCidrRequest,
-    cb?: (error: string, rep: ModifyAssistantCidrResponse) => void
-  ): Promise<ModifyAssistantCidrResponse> {
-    return this.request("ModifyAssistantCidr", req, cb)
+  async CreateNetworkAclQuintupleEntries(
+    req: CreateNetworkAclQuintupleEntriesRequest,
+    cb?: (error: string, rep: CreateNetworkAclQuintupleEntriesResponse) => void
+  ): Promise<CreateNetworkAclQuintupleEntriesResponse> {
+    return this.request("CreateNetworkAclQuintupleEntries", req, cb)
   }
 
   /**
@@ -2696,13 +2734,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除路由表
+   * 本接口（CreateDirectConnectGatewayCcnRoutes）用于创建专线网关的云联网路由（IDC网段）
    */
-  async DeleteRouteTable(
-    req: DeleteRouteTableRequest,
-    cb?: (error: string, rep: DeleteRouteTableResponse) => void
-  ): Promise<DeleteRouteTableResponse> {
-    return this.request("DeleteRouteTable", req, cb)
+  async CreateDirectConnectGatewayCcnRoutes(
+    req: CreateDirectConnectGatewayCcnRoutesRequest,
+    cb?: (error: string, rep: CreateDirectConnectGatewayCcnRoutesResponse) => void
+  ): Promise<CreateDirectConnectGatewayCcnRoutesResponse> {
+    return this.request("CreateDirectConnectGatewayCcnRoutes", req, cb)
   }
 
   /**
@@ -3358,6 +3396,16 @@ LimitTypes取值范围：
     cb?: (error: string, rep: ReplaceRoutesResponse) => void
   ): Promise<ReplaceRoutesResponse> {
     return this.request("ReplaceRoutes", req, cb)
+  }
+
+  /**
+   * 本接口(ModifyAssistantCidr)用于批量修改辅助CIDR，支持新增和删除。（接口灰度中，如需使用请提工单。）
+   */
+  async ModifyAssistantCidr(
+    req: ModifyAssistantCidrRequest,
+    cb?: (error: string, rep: ModifyAssistantCidrResponse) => void
+  ): Promise<ModifyAssistantCidrResponse> {
+    return this.request("ModifyAssistantCidr", req, cb)
   }
 
   /**

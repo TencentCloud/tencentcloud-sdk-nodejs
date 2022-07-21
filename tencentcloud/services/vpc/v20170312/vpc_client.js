@@ -200,6 +200,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeNetDetects", req, cb);
     }
     /**
+     * 本接口（ModifyNetworkAclQuintupleEntries）用于修改网络ACL五元组的入站规则和出站规则。在NetworkAclQuintupleEntrySet参数中：NetworkAclQuintupleEntry需要提供NetworkAclQuintupleEntryId。
+     */
+    async ModifyNetworkAclQuintupleEntries(req, cb) {
+        return this.request("ModifyNetworkAclQuintupleEntries", req, cb);
+    }
+    /**
      * 本接口（DescribeVpcPrivateIpAddresses）用于查询VPC内网IP信息。<br />
 只能查询已使用的IP信息，当查询未使用的IP时，本接口不会报错，但不会出现在返回结果里。
      */
@@ -328,10 +334,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DisassociateVpcEndPointSecurityGroups", req, cb);
     }
     /**
-     * 本接口（CreateDirectConnectGatewayCcnRoutes）用于创建专线网关的云联网路由（IDC网段）
+     * 删除路由表
      */
-    async CreateDirectConnectGatewayCcnRoutes(req, cb) {
-        return this.request("CreateDirectConnectGatewayCcnRoutes", req, cb);
+    async DeleteRouteTable(req, cb) {
+        return this.request("DeleteRouteTable", req, cb);
     }
     /**
      * 接口用于删除带宽包资源，包括[弹性公网IP](https://cloud.tencent.com/document/product/213/1941)和[负载均衡](https://cloud.tencent.com/document/product/214/517)等
@@ -631,6 +637,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CheckAssistantCidr", req, cb);
     }
     /**
+     * 本接口（DescribeFlowLogs）用于查询获取流日志集合
+     */
+    async DescribeFlowLogs(req, cb) {
+        return this.request("DescribeFlowLogs", req, cb);
+    }
+    /**
      * 本接口（DescribeVpcIpv6Addresses）用于查询 `VPC` `IPv6` 信息。
 只能查询已使用的`IPv6`信息，当查询未使用的IP时，本接口不会报错，但不会出现在返回结果里。
      */
@@ -726,10 +738,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("MigratePrivateIpAddress", req, cb);
     }
     /**
-     * 本接口（DescribeFlowLogs）用于查询获取流日志集合
+     * 本接口（DeleteNetworkAclQuintupleEntries）用于删除网络ACL五元组指定的入站规则和出站规则（但不是全量删除该ACL下的所有条目）。在NetworkAclQuintupleEntrySet参数中：NetworkAclQuintupleEntry需要提供NetworkAclQuintupleEntryId。
      */
-    async DescribeFlowLogs(req, cb) {
-        return this.request("DescribeFlowLogs", req, cb);
+    async DeleteNetworkAclQuintupleEntries(req, cb) {
+        return this.request("DeleteNetworkAclQuintupleEntries", req, cb);
     }
     /**
      * 本接口（DeleteDirectConnectGateway）用于删除专线网关。
@@ -1078,6 +1090,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateNatGateway", req, cb);
     }
     /**
+     * 本接口（DescribeNetworkAclQuintupleEntries）查询入方向或出方向网络ACL五元组条目列表。
+     */
+    async DescribeNetworkAclQuintupleEntries(req, cb) {
+        return this.request("DescribeNetworkAclQuintupleEntries", req, cb);
+    }
+    /**
      * 本接口(DeleteNetDetect)用于删除网络探测实例。
      */
     async DeleteNetDetect(req, cb) {
@@ -1116,10 +1134,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteVpcEndPointService", req, cb);
     }
     /**
-     * 本接口(ModifyAssistantCidr)用于批量修改辅助CIDR，支持新增和删除。（接口灰度中，如需使用请提工单。）
+     * 本接口（CreateNetworkAclQuintupleEntries）用于增量网络ACL五元组的入站规则和出站规则。
      */
-    async ModifyAssistantCidr(req, cb) {
-        return this.request("ModifyAssistantCidr", req, cb);
+    async CreateNetworkAclQuintupleEntries(req, cb) {
+        return this.request("CreateNetworkAclQuintupleEntries", req, cb);
     }
     /**
      * 删除终端节点。
@@ -1287,10 +1305,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeVpnGatewaySslServers", req, cb);
     }
     /**
-     * 删除路由表
+     * 本接口（CreateDirectConnectGatewayCcnRoutes）用于创建专线网关的云联网路由（IDC网段）
      */
-    async DeleteRouteTable(req, cb) {
-        return this.request("DeleteRouteTable", req, cb);
+    async CreateDirectConnectGatewayCcnRoutes(req, cb) {
+        return this.request("CreateDirectConnectGatewayCcnRoutes", req, cb);
     }
     /**
      * 本接口(DescribeSecurityGroupLimits)用于查询用户安全组配额。
@@ -1710,6 +1728,12 @@ LimitTypes取值范围：
      */
     async ReplaceRoutes(req, cb) {
         return this.request("ReplaceRoutes", req, cb);
+    }
+    /**
+     * 本接口(ModifyAssistantCidr)用于批量修改辅助CIDR，支持新增和删除。（接口灰度中，如需使用请提工单。）
+     */
+    async ModifyAssistantCidr(req, cb) {
+        return this.request("ModifyAssistantCidr", req, cb);
     }
     /**
      * 本接口(ModifyNetDetect)用于修改网络探测参数。

@@ -335,6 +335,23 @@ export interface DescribeApplicationPodsResponse {
     RequestId?: string;
 }
 /**
+ * RestartApplication请求参数结构体
+ */
+export interface RestartApplicationRequest {
+    /**
+      * 服务id
+      */
+    ApplicationId: string;
+    /**
+      * 来源渠道
+      */
+    SourceChannel?: number;
+    /**
+      * 环境ID
+      */
+    EnvironmentId?: string;
+}
+/**
  * DeleteIngress请求参数结构体
  */
 export interface DeleteIngressRequest {
@@ -1077,6 +1094,19 @@ export interface DeleteIngressResponse {
     RequestId?: string;
 }
 /**
+ * DestroyEnvironment请求参数结构体
+ */
+export interface DestroyEnvironmentRequest {
+    /**
+      * 命名空间ID
+      */
+    EnvironmentId: string;
+    /**
+      * Namespace
+      */
+    SourceChannel?: number;
+}
+/**
  * 命名空间对象
  */
 export interface TemNamespaceInfo {
@@ -1506,21 +1536,17 @@ export interface NamespacePage {
     Pages: number;
 }
 /**
- * RestartApplication请求参数结构体
+ * DestroyEnvironment返回参数结构体
  */
-export interface RestartApplicationRequest {
+export interface DestroyEnvironmentResponse {
     /**
-      * 服务id
+      * 返回结果
       */
-    ApplicationId: string;
+    Result: boolean;
     /**
-      * 来源渠道
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    SourceChannel?: number;
-    /**
-      * 环境ID
-      */
-    EnvironmentId?: string;
+    RequestId?: string;
 }
 /**
  * CreateApplication返回参数结构体

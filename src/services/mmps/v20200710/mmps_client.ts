@@ -32,11 +32,13 @@ import {
   DescribeScanTaskReportUrlResponse,
   DescribeFlySecMiniAppScanTaskStatusRequest,
   CreateFlySecMiniAppScanTaskResponse,
-  CreateFlySecMiniAppScanTaskRequest,
+  CreateFlySecMiniAppProfessionalScanTaskRequest,
+  CreateFlySecMiniAppProfessionalScanTaskResponse,
   DescribeFlySecMiniAppScanTaskListRequest,
   DescribeFlySecMiniAppScanReportListRequest,
   DescribeFlySecMiniAppScanTaskParamResponse,
   CreateFlySecMiniAppScanTaskRepeatRequest,
+  CreateFlySecMiniAppScanTaskRequest,
   CreateAppScanTaskRepeatRequest,
   DescribeScanTaskReportUrlRequest,
   TaskFlowStepsInfo,
@@ -72,6 +74,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateAppScanTaskResponse) => void
   ): Promise<CreateAppScanTaskResponse> {
     return this.request("CreateAppScanTask", req, cb)
+  }
+
+  /**
+   * 创建小程序安全深度诊断任务
+   */
+  async CreateFlySecMiniAppProfessionalScanTask(
+    req: CreateFlySecMiniAppProfessionalScanTaskRequest,
+    cb?: (error: string, rep: CreateFlySecMiniAppProfessionalScanTaskResponse) => void
+  ): Promise<CreateFlySecMiniAppProfessionalScanTaskResponse> {
+    return this.request("CreateFlySecMiniAppProfessionalScanTask", req, cb)
   }
 
   /**

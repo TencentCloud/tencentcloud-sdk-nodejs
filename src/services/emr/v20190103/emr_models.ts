@@ -269,12 +269,12 @@ export interface DescribeEmrApplicationStaticsRequest {
   InstanceId: string
 
   /**
-   * 起始时间
+   * 起始时间，时间戳（秒）
    */
   StartTime?: number
 
   /**
-   * 结束时间
+   * 结束时间，时间戳（秒）
    */
   EndTime?: number
 

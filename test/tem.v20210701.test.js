@@ -128,9 +128,9 @@ it("tem.v20210701.DescribeApplicationPods", async function () {
     }
 })
 
-it("tem.v20210701.RestartApplication", async function () {
+it("tem.v20210701.RestartApplicationPod", async function () {
     try {
-       const data = await client.RestartApplication({})
+       const data = await client.RestartApplicationPod({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -218,9 +218,9 @@ it("tem.v20210701.CreateApplication", async function () {
     }
 })
 
-it("tem.v20210701.RestartApplicationPod", async function () {
+it("tem.v20210701.RestartApplication", async function () {
     try {
-       const data = await client.RestartApplicationPod({})
+       const data = await client.RestartApplication({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -261,6 +261,16 @@ it("tem.v20210701.DescribeRelatedIngresses", async function () {
 it("tem.v20210701.CreateResource", async function () {
     try {
        const data = await client.CreateResource({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tem.v20210701.DestroyEnvironment", async function () {
+    try {
+       const data = await client.DestroyEnvironment({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

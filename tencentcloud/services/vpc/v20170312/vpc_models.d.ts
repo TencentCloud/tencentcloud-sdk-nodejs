@@ -488,6 +488,19 @@ export interface DescribeVpnGatewaysResponse {
     RequestId?: string;
 }
 /**
+ * ModifyNetworkAclQuintupleEntries请求参数结构体
+ */
+export interface ModifyNetworkAclQuintupleEntriesRequest {
+    /**
+      * 网络ACL实例ID。例如：acl-12345678。
+      */
+    NetworkAclId: string;
+    /**
+      * 网络五元组ACL规则集。
+      */
+    NetworkAclQuintupleSet: NetworkAclQuintupleEntries;
+}
+/**
  * 协议端口模板集合
  */
 export interface ServiceTemplateGroup {
@@ -610,6 +623,23 @@ export interface DescribeVpcEndPointRequest {
       * 终端节点ID列表。
       */
     EndPointId?: Array<string>;
+}
+/**
+ * AssignPrivateIpAddresses请求参数结构体
+ */
+export interface AssignPrivateIpAddressesRequest {
+    /**
+      * 弹性网卡实例ID，例如：eni-m6dyj72l。
+      */
+    NetworkInterfaceId: string;
+    /**
+      * 指定的内网IP信息，单次最多指定10个。与SecondaryPrivateIpAddressCount至少提供一个。
+      */
+    PrivateIpAddresses?: Array<PrivateIpAddressSpecification>;
+    /**
+      * 新申请的内网IP地址个数，与PrivateIpAddresses至少提供一个。内网IP地址个数总和不能超过配额数，详见<a href="/document/product/576/18527">弹性网卡使用限制</a>。
+      */
+    SecondaryPrivateIpAddressCount?: number;
 }
 /**
  * DetachClassicLinkVpc请求参数结构体
@@ -1936,6 +1966,15 @@ export interface AcceptAttachCcnInstancesRequest {
     Instances: Array<CcnInstance>;
 }
 /**
+ * CreateNetworkAclQuintupleEntries返回参数结构体
+ */
+export interface CreateNetworkAclQuintupleEntriesResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeGatewayFlowMonitorDetail返回参数结构体
  */
 export interface DescribeGatewayFlowMonitorDetailResponse {
@@ -2089,6 +2128,15 @@ export interface UnassignIpv6SubnetCidrBlockRequest {
  * DeleteVpcEndPointService返回参数结构体
  */
 export interface DeleteVpcEndPointServiceResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ModifyNetworkAclQuintupleEntries返回参数结构体
+ */
+export interface ModifyNetworkAclQuintupleEntriesResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -5742,6 +5790,10 @@ export interface DescribeVpcEndPointResponse {
     RequestId?: string;
 }
 /**
+ * DescribeNetworkAclQuintupleEntries请求参数结构体
+ */
+export declare type DescribeNetworkAclQuintupleEntriesRequest = null;
+/**
  * DisableGatewayFlowMonitor请求参数结构体
  */
 export interface DisableGatewayFlowMonitorRequest {
@@ -6285,6 +6337,19 @@ export interface CreateServiceTemplateGroupRequest {
     ServiceTemplateIds: Array<string>;
 }
 /**
+ * CreateNetworkAclQuintupleEntries请求参数结构体
+ */
+export interface CreateNetworkAclQuintupleEntriesRequest {
+    /**
+      * 网络ACL实例ID。例如：acl-12345678。
+      */
+    NetworkAclId: string;
+    /**
+      * 网络五元组ACL规则集。
+      */
+    NetworkAclQuintupleSet: NetworkAclQuintupleEntries;
+}
+/**
  * DescribeClassicLinkInstances返回参数结构体
  */
 export interface DescribeClassicLinkInstancesResponse {
@@ -6743,6 +6808,23 @@ export interface DescribeNetworkAclsRequest {
       * 返回数量，默认为20，最小值为1，最大值为100。
       */
     Limit?: number;
+}
+/**
+ * DescribeNetworkAclQuintupleEntries返回参数结构体
+ */
+export interface DescribeNetworkAclQuintupleEntriesResponse {
+    /**
+      * 网络ACL条目列表（NetworkAclTuple5Entry）
+      */
+    NetworkAclQuintupleSet: Array<NetworkAclQuintupleEntry>;
+    /**
+      * 符合条件的实例数量。
+      */
+    TotalCount: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeSubnets请求参数结构体
@@ -9345,6 +9427,27 @@ export interface CreateAddressTemplateGroupResponse {
     RequestId?: string;
 }
 /**
+ * DownloadVpnGatewaySslClientCert 使用
+ */
+export interface SslClientConfig {
+    /**
+      * 客户端配置
+      */
+    SslVpnClientConfiguration: string;
+    /**
+      * 更证书
+      */
+    SslVpnRootCert: string;
+    /**
+      * 客户端密钥
+      */
+    SslVpnKey: string;
+    /**
+      * 客户端证书
+      */
+    SslVpnCert: string;
+}
+/**
  * DescribeBandwidthPackageQuota返回参数结构体
  */
 export interface DescribeBandwidthPackageQuotaResponse {
@@ -9835,25 +9938,17 @@ export interface ModifyServiceTemplateGroupAttributeResponse {
     RequestId?: string;
 }
 /**
- * DownloadVpnGatewaySslClientCert 使用
+ * DeleteNetworkAclQuintupleEntries请求参数结构体
  */
-export interface SslClientConfig {
+export interface DeleteNetworkAclQuintupleEntriesRequest {
     /**
-      * 客户端配置
+      * 网络ACL实例ID。例如：acl-12345678。
       */
-    SslVpnClientConfiguration: string;
+    NetworkAclId: string;
     /**
-      * 更证书
+      * 网络五元组ACL规则集。
       */
-    SslVpnRootCert: string;
-    /**
-      * 客户端密钥
-      */
-    SslVpnKey: string;
-    /**
-      * 客户端证书
-      */
-    SslVpnCert: string;
+    NetworkAclQuintupleSet: NetworkAclQuintupleEntries;
 }
 /**
  * DeleteSubnet请求参数结构体
@@ -11831,21 +11926,13 @@ export interface DeleteNetworkAclResponse {
     RequestId?: string;
 }
 /**
- * AssignPrivateIpAddresses请求参数结构体
+ * DeleteNetworkAclQuintupleEntries返回参数结构体
  */
-export interface AssignPrivateIpAddressesRequest {
+export interface DeleteNetworkAclQuintupleEntriesResponse {
     /**
-      * 弹性网卡实例ID，例如：eni-m6dyj72l。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    NetworkInterfaceId: string;
-    /**
-      * 指定的内网IP信息，单次最多指定10个。与SecondaryPrivateIpAddressCount至少提供一个。
-      */
-    PrivateIpAddresses?: Array<PrivateIpAddressSpecification>;
-    /**
-      * 新申请的内网IP地址个数，与PrivateIpAddresses至少提供一个。内网IP地址个数总和不能超过配额数，详见<a href="/document/product/576/18527">弹性网卡使用限制</a>。
-      */
-    SecondaryPrivateIpAddressCount?: number;
+    RequestId?: string;
 }
 /**
  * DescribeServiceTemplateGroups请求参数结构体
