@@ -54,7 +54,7 @@ import {
   DescribeClustersRequest,
   DescribeInstanceDetailResponse,
   ModifyDBInstanceSecurityGroupsResponse,
-  ModifyAccountParamsRequest,
+  DescribeClusterParamLogsResponse,
   DescribeClusterInstanceGrpsRequest,
   DescribeResourcesByDealNameResponse,
   ResumeServerlessResponse,
@@ -97,17 +97,19 @@ import {
   GrantAccountPrivilegesResponse,
   DescribeBackupDownloadUrlResponse,
   ResumeServerlessRequest,
+  InquirePriceCreateRequest,
   BillingResourceInfo,
   ModifyBackupConfigResponse,
   DescribeInstanceSpecsRequest,
   ExportInstanceSlowQueriesRequest,
   UpgradeInstanceResponse,
-  DescribeClusterParamLogsResponse,
+  ModifyAccountParamsRequest,
   CynosdbCluster,
   BinlogItem,
   OfflineClusterResponse,
   RevokeAccountPrivilegesRequest,
   InstanceSpec,
+  InquirePriceCreateResponse,
   SetRenewFlagResponse,
   DescribeClusterParamLogsRequest,
   UpgradeInstanceRequest,
@@ -134,6 +136,7 @@ import {
   DescribeAccountsResponse,
   ModifyAccountParamsResponse,
   OfflineInstanceRequest,
+  TradePrice,
   DescribeInstanceSpecsResponse,
   DescribeAccountAllGrantPrivilegesRequest,
   OfflineInstanceResponse,
@@ -403,6 +406,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: IsolateClusterResponse) => void
   ): Promise<IsolateClusterResponse> {
     return this.request("IsolateCluster", req, cb)
+  }
+
+  /**
+   * 查询新购集群价格
+   */
+  async InquirePriceCreate(
+    req: InquirePriceCreateRequest,
+    cb?: (error: string, rep: InquirePriceCreateResponse) => void
+  ): Promise<InquirePriceCreateResponse> {
+    return this.request("InquirePriceCreate", req, cb)
   }
 
   /**

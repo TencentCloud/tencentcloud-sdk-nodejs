@@ -136,6 +136,41 @@ export interface DeleteAclRequest {
 }
 
 /**
+ * dip失败消息写入cls的配置
+ */
+export interface DropCls {
+  /**
+      * 是否投递到cls
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DropInvalidMessageToCls?: boolean
+
+  /**
+      * 投递cls的地域
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DropClsRegion?: string
+
+  /**
+      * 投递cls的账号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DropClsOwneruin?: string
+
+  /**
+      * 投递cls的主题
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DropClsTopicId?: string
+
+  /**
+      * 投递cls的日志集id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DropClsLogSet?: string
+}
+
+/**
  * consumer信息
  */
 export interface GroupInfoMember {
@@ -158,6 +193,59 @@ export interface GroupInfoMember {
    * 存储着分配给该消费者的 partition 信息
    */
   Assignment: Assignment
+}
+
+/**
+ * Es连接源参数
+ */
+export interface EsConnectParam {
+  /**
+      * Es的连接port
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Port: number
+
+  /**
+      * Es连接源的用户名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UserName: string
+
+  /**
+      * Es连接源的密码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Password: string
+
+  /**
+      * Es连接源的实例资源
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Resource: string
+
+  /**
+      * Es连接源是否为自建集群
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SelfBuilt: boolean
+
+  /**
+      * Es连接源的实例vip，当为腾讯云实例时，必填
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ServiceVip?: string
+
+  /**
+      * Es连接源的vpcId，当为腾讯云实例时，必填
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UniqVpcId?: string
+
+  /**
+      * 是否更新到关联的Datahub任务
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsUpdate?: boolean
 }
 
 /**
@@ -215,6 +303,53 @@ export interface PartitionOffset {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Offset: number
+}
+
+/**
+ * SQLServer连接源参数
+ */
+export interface SQLServerConnectParam {
+  /**
+      * SQLServer的连接port
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Port: number
+
+  /**
+      * SQLServer连接源的用户名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UserName: string
+
+  /**
+      * SQLServer连接源的密码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Password: string
+
+  /**
+      * SQLServer连接源的实例资源
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Resource: string
+
+  /**
+      * SQLServer连接源的实例vip，当为腾讯云实例时，必填
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ServiceVip?: string
+
+  /**
+      * SQLServer连接源的vpcId，当为腾讯云实例时，必填
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UniqVpcId?: string
+
+  /**
+      * 是否更新到关联的Dip任务
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsUpdate?: boolean
 }
 
 /**
@@ -353,18 +488,153 @@ export interface AuthorizeTokenResponse {
 }
 
 /**
- * DescribeConsumerGroup返回参数结构体
+ * Es类型入参
  */
-export interface DescribeConsumerGroupResponse {
+export interface EsParam {
   /**
-   * 返回的消费分组信息
+   * 实例资源
    */
-  Result?: ConsumerGroupResponse
+  Resource: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * Es的连接port
    */
-  RequestId?: string
+  Port?: number
+
+  /**
+   * Es用户名
+   */
+  UserName?: string
+
+  /**
+   * Es密码
+   */
+  Password?: string
+
+  /**
+   * 是否为自建集群
+   */
+  SelfBuilt?: boolean
+
+  /**
+   * 实例vip
+   */
+  ServiceVip?: string
+
+  /**
+   * 实例的vpcId
+   */
+  UniqVpcId?: string
+
+  /**
+   * Es是否抛弃解析失败的消息
+   */
+  DropInvalidMessage?: boolean
+
+  /**
+   * Es自定义index名称
+   */
+  Index?: string
+
+  /**
+   * Es自定义日期后缀
+   */
+  DateFormat?: string
+
+  /**
+   * 非json格式数据的自定义key
+   */
+  ContentKey?: string
+
+  /**
+   * Es是否抛弃非json格式的消息
+   */
+  DropInvalidJsonMessage?: boolean
+
+  /**
+   * 转储到Es中的文档ID取值字段名
+   */
+  DocumentIdField?: string
+
+  /**
+   * Es自定义index名称的类型，STRING，JSONPATH，默认为STRING
+   */
+  IndexType?: string
+
+  /**
+   * 当设置成员参数DropInvalidMessageToCls设置为true时,DropInvalidMessage参数失效
+   */
+  DropCls?: DropCls
+
+  /**
+   * 转储到ES的消息为Database的binlog时，如果需要同步数据库操作，即增删改的操作到ES时填写数据库表主键
+   */
+  DatabasePrimaryKey?: string
+}
+
+/**
+ * Dts类型入参
+ */
+export interface DtsParam {
+  /**
+   * Dts实例Id
+   */
+  Resource: string
+
+  /**
+   * Dts的连接ip
+   */
+  Ip?: string
+
+  /**
+   * Dts的连接port
+   */
+  Port?: number
+
+  /**
+   * Dts订阅的topic
+   */
+  Topic?: string
+
+  /**
+   * Dts消费分组的Id
+   */
+  GroupId?: string
+
+  /**
+   * Dts消费分组的账号
+   */
+  GroupUser?: string
+
+  /**
+   * Dts消费分组的密码
+   */
+  GroupPassword?: string
+
+  /**
+   * false同步原始数据，true同步解析后的json格式数据,默认true
+   */
+  TranSql?: boolean
+}
+
+/**
+ * CancelAuthorizationToken请求参数结构体
+ */
+export interface CancelAuthorizationTokenRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+
+  /**
+   * 用户
+   */
+  User: string
+
+  /**
+   * token串
+   */
+  Tokens: string
 }
 
 /**
@@ -381,6 +651,59 @@ export interface CancelAuthorizationTokenResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * MySQL连接源参数
+ */
+export interface MySQLConnectParam {
+  /**
+      * MySQL的连接port
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Port: number
+
+  /**
+      * MySQL连接源的用户名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UserName: string
+
+  /**
+      * MySQL连接源的密码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Password: string
+
+  /**
+      * MySQL连接源的实例资源
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Resource: string
+
+  /**
+      * MySQL连接源的实例vip，当为腾讯云实例时，必填
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ServiceVip?: string
+
+  /**
+      * MySQL连接源的vpcId，当为腾讯云实例时，必填
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UniqVpcId?: string
+
+  /**
+      * 是否更新到关联的Datahub任务
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsUpdate?: boolean
+
+  /**
+      * 当type为TDSQL_C_MYSQL时，必填
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClusterId?: string
 }
 
 /**
@@ -464,18 +787,97 @@ export interface DescribeInstancesResponse {
 }
 
 /**
- * FetchMessageByOffset返回参数结构体
+ * Datahub资源配置
  */
-export interface FetchMessageByOffsetResponse {
+export interface DatahubResource {
   /**
-   * 返回结果
+   * 资源类型
    */
-  Result: ConsumerRecord
+  Type: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+      * ckafka配置，Type为KAFKA时必填
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  KafkaParam?: KafkaParam
+
+  /**
+      * EB配置，Type为EB时必填
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EventBusParam?: EventBusParam
+
+  /**
+      * MongoDB配置，Type为MONGODB时必填
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MongoDBParam?: MongoDBParam
+
+  /**
+      * Es配置，Type为ES时必填
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EsParam?: EsParam
+
+  /**
+      * Tdw配置，Type为TDW时必填
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TdwParam?: TdwParam
+
+  /**
+      * Dts配置，Type为DTS时必填
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DtsParam?: DtsParam
+
+  /**
+      * ClickHouse配置，Type为CLICKHOUSE时必填
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClickHouseParam?: ClickHouseParam
+
+  /**
+      * Cls配置，Type为CLS时必填
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClsParam?: ClsParam
+
+  /**
+      * Cos配置，Type为COS时必填
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CosParam?: CosParam
+
+  /**
+      * MySQL配置，Type为MYSQL时必填
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MySQLParam?: MySQLParam
+
+  /**
+      * PostgreSQL配置，Type为POSTGRESQL或TDSQL_C_POSTGRESQL时必填
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PostgreSQLParam?: PostgreSQLParam
+
+  /**
+      * Topic配置，Type为Topic时必填
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TopicParam?: TopicParam
+
+  /**
+      * MariaDB配置，Type为MARIADB时必填
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MariaDBParam?: MariaDBParam
+
+  /**
+      * SQLServer配置，Type为SQLSERVER时必填
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SQLServerParam?: SQLServerParam
 }
 
 /**
@@ -491,6 +893,111 @@ export interface BatchModifyTopicAttributesResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ClickHouse类型入参
+ */
+export interface ClickHouseParam {
+  /**
+   * ClickHouse的集群
+   */
+  Cluster: string
+
+  /**
+   * ClickHouse的数据库名
+   */
+  Database: string
+
+  /**
+   * ClickHouse的数据表名
+   */
+  Table: string
+
+  /**
+   * ClickHouse的schema
+   */
+  Schema: Array<ClickHouseSchema>
+
+  /**
+   * 实例资源
+   */
+  Resource: string
+
+  /**
+   * ClickHouse的连接ip
+   */
+  Ip?: string
+
+  /**
+   * ClickHouse的连接port
+   */
+  Port?: number
+
+  /**
+   * ClickHouse的用户名
+   */
+  UserName?: string
+
+  /**
+   * ClickHouse的密码
+   */
+  Password?: string
+
+  /**
+   * 实例vip
+   */
+  ServiceVip?: string
+
+  /**
+   * 实例的vpcId
+   */
+  UniqVpcId?: string
+
+  /**
+   * 是否为自建集群
+   */
+  SelfBuilt?: boolean
+
+  /**
+   * ClickHouse是否抛弃解析失败的消息，默认为true
+   */
+  DropInvalidMessage?: boolean
+
+  /**
+   * ClickHouse 类型，emr-clickhouse : "emr";cdw-clickhouse : "cdwch";自建 : ""
+   */
+  Type?: string
+
+  /**
+   * 当设置成员参数DropInvalidMessageToCls设置为true时,DropInvalidMessage参数失效
+   */
+  DropCls?: DropCls
+}
+
+/**
+ * 过滤器参数
+ */
+export interface FilterMapParam {
+  /**
+   * Key值
+   */
+  Key: string
+
+  /**
+   * 匹配模式，前缀匹配PREFIX，后缀匹配SUFFIX，包含匹配CONTAINS，EXCEPT除外匹配，数值匹配NUMBER，IP匹配IP
+   */
+  MatchMode: string
+
+  /**
+   * Value值
+   */
+  Value: string
+
+  /**
+   * 固定REGULAR
+   */
+  Type?: string
 }
 
 /**
@@ -645,6 +1152,51 @@ export interface CreateTokenResponse {
 }
 
 /**
+ * 数据处理参数
+ */
+export interface TransformsParam {
+  /**
+   * 原始数据
+   */
+  Content: string
+
+  /**
+   * 处理链
+   */
+  FieldChain: Array<FieldParam>
+
+  /**
+      * 过滤器
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FilterParam?: Array<FilterMapParam>
+
+  /**
+      * 失败处理
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FailureParam?: FailureParam
+
+  /**
+      * 测试结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result?: string
+
+  /**
+      * 数据来源
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SourceType?: string
+
+  /**
+      * 输出格式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OutputFormat?: string
+}
+
+/**
  * DescribeInstancesDetail返回参数结构体
  */
 export interface DescribeInstancesDetailResponse {
@@ -680,6 +1232,66 @@ export interface CreateInstancePreData {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   InstanceId: string
+}
+
+/**
+ * CreateConnectResource请求参数结构体
+ */
+export interface CreateConnectResourceRequest {
+  /**
+   * 连接源名称
+   */
+  ResourceName: string
+
+  /**
+   * 连接源类型
+   */
+  Type: string
+
+  /**
+   * 连接源描述
+   */
+  Description?: string
+
+  /**
+   * Dts配置，Type为DTS时必填
+   */
+  DtsConnectParam?: DtsConnectParam
+
+  /**
+   * MongoDB配置，Type为MONGODB时必填
+   */
+  MongoDBConnectParam?: MongoDBConnectParam
+
+  /**
+   * Es配置，Type为ES时必填
+   */
+  EsConnectParam?: EsConnectParam
+
+  /**
+   * ClickHouse配置，Type为CLICKHOUSE时必填
+   */
+  ClickHouseConnectParam?: ClickHouseConnectParam
+
+  /**
+   * MySQL配置，Type为MYSQL或TDSQL_C_MYSQL时必填
+   */
+  MySQLConnectParam?: MySQLConnectParam
+
+  /**
+   * PostgreSQL配置，Type为POSTGRESQL或TDSQL_C_POSTGRESQL时必填
+   */
+  PostgreSQLConnectParam?: PostgreSQLConnectParam
+
+  /**
+   * MariaDB配置，Type为MARIADB时必填
+   */
+  MariaDBConnectParam?: MariaDBConnectParam
+
+  /**
+   * SQLServer配置，Type为SQLSERVER时必填
+   */
+  SQLServerConnectParam?: SQLServerConnectParam
 }
 
 /**
@@ -763,6 +1375,50 @@ export interface AclRule {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   PatternTypeTitle: string
+}
+
+/**
+ * 数据处理——数据处理参数
+ */
+export interface SMTParam {
+  /**
+   * 数据处理KEY
+   */
+  Key: string
+
+  /**
+   * 操作，DATE系统预设-时间戳，CUSTOMIZE自定义，MAPPING映射，JSONPATH
+   */
+  Operate: string
+
+  /**
+   * 数据类型，ORIGINAL原始，STRING，INT64，FLOAT64，BOOLEAN，MAP，ARRAY
+   */
+  SchemeType: string
+
+  /**
+      * 数据处理VALUE
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Value?: string
+
+  /**
+      * VALUE处理
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ValueOperate?: ValueParam
+
+  /**
+      * 原始VALUE
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OriginalValue?: string
+
+  /**
+      * VALUE处理链
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ValueOperates?: Array<ValueParam>
 }
 
 /**
@@ -913,13 +1569,18 @@ export interface DescribeTopicSubscribeGroupResponse {
 }
 
 /**
- * DescribeCkafkaZone请求参数结构体
+ * DeleteAclRule请求参数结构体
  */
-export interface DescribeCkafkaZoneRequest {
+export interface DeleteAclRuleRequest {
   /**
-   * cdc专业集群业务参数
+   * 实例id信息
    */
-  CdcId?: string
+  InstanceId: string
+
+  /**
+   * acl规则名称
+   */
+  RuleName: string
 }
 
 /**
@@ -988,6 +1649,56 @@ export interface Tag {
 }
 
 /**
+ * record 与数据库表的映射关系
+ */
+export interface RecordMapping {
+  /**
+   * 消息的 key 名称
+   */
+  JsonKey?: string
+
+  /**
+   * 消息类型
+   */
+  Type?: string
+
+  /**
+   * 消息是否允许为空
+   */
+  AllowNull?: boolean
+
+  /**
+   * 对应映射列名称
+   */
+  ColumnName?: string
+
+  /**
+   * 数据库表额外字段
+   */
+  ExtraInfo?: string
+
+  /**
+   * 当前列大小
+   */
+  ColumnSize?: string
+
+  /**
+   * 当前列精度
+   */
+  DecimalDigits?: string
+
+  /**
+   * 是否为自增列
+   */
+  AutoIncrement?: boolean
+
+  /**
+   * 数据库表默认参数
+   */
+  DefaultValue?: string
+}
+
+/**
  * BatchModifyGroupOffsets返回参数结构体
  */
 export interface BatchModifyGroupOffsetsResponse {
@@ -1035,18 +1746,44 @@ export interface CreateTokenRequest {
 }
 
 /**
- * DeleteAclRule请求参数结构体
+ * DescribeTopic返回参数结构体
  */
-export interface DeleteAclRuleRequest {
+export interface DescribeTopicResponse {
   /**
-   * 实例id信息
-   */
-  InstanceId: string
+      * 返回的结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result: TopicResult
 
   /**
-   * acl规则名称
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  RuleName: string
+  RequestId?: string
+}
+
+/**
+ * Tdw类型入参
+ */
+export interface TdwParam {
+  /**
+   * Tdw的bid
+   */
+  Bid: string
+
+  /**
+   * Tdw的tid
+   */
+  Tid: string
+}
+
+/**
+ * DescribeCkafkaZone请求参数结构体
+ */
+export interface DescribeCkafkaZoneRequest {
+  /**
+   * cdc专业集群业务参数
+   */
+  CdcId?: string
 }
 
 /**
@@ -1106,6 +1843,21 @@ export interface CdcClusterResponse {
 }
 
 /**
+ * ModifyPassword返回参数结构体
+ */
+export interface ModifyPasswordResponse {
+  /**
+   * 返回结果
+   */
+  Result?: JgwOperateResponse
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 修改实例属性的配置对象
  */
 export interface ModifyInstanceAttributesConfig {
@@ -1154,6 +1906,21 @@ export interface OperateResponseData {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   FlowId: number
+}
+
+/**
+ * CreateConnectResource返回参数结构体
+ */
+export interface CreateConnectResourceResponse {
+  /**
+   * 连接源的Id
+   */
+  Result: ConnectResourceResourceIdResp
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1268,6 +2035,36 @@ export interface DeleteGroupRequest {
 }
 
 /**
+ * DescribeConsumerGroup请求参数结构体
+ */
+export interface DescribeConsumerGroupRequest {
+  /**
+   * ckafka实例id。
+   */
+  InstanceId: string
+
+  /**
+   * 可选，用户需要查询的group名称。
+   */
+  GroupName?: string
+
+  /**
+   * 可选，用户需要查询的group中的对应的topic名称，如果指定了该参数，而group又未指定则忽略该参数。
+   */
+  TopicName?: string
+
+  /**
+   * 本次返回个数限制
+   */
+  Limit?: number
+
+  /**
+   * 偏移位置
+   */
+  Offset?: number
+}
+
+/**
  * DeleteUser返回参数结构体
  */
 export interface DeleteUserResponse {
@@ -1358,6 +2155,78 @@ export interface DescribeAppInfoRequest {
 }
 
 /**
+ * MariaDB类型入参
+ */
+export interface MariaDBParam {
+  /**
+   * MariaDB的数据库名称，"*"为全数据库
+   */
+  Database: string
+
+  /**
+   * MariaDB的数据表名称，"*"为所监听的所有数据库中的非系统表，可以","间隔，监听多个数据表，但数据表需要以"数据库名.数据表名"的格式进行填写
+   */
+  Table: string
+
+  /**
+   * 该MariaDB在连接管理内的Id
+   */
+  Resource: string
+
+  /**
+   * 复制存量信息(schema_only不复制, initial全量)，默认位initial
+   */
+  SnapshotMode?: string
+}
+
+/**
+ * 路由实体对象
+ */
+export interface Route {
+  /**
+      * 实例接入方式
+0：PLAINTEXT (明文方式，没有带用户信息老版本及社区版本都支持)
+1：SASL_PLAINTEXT（明文方式，不过在数据开始时，会通过SASL方式登录鉴权，仅社区版本支持）
+2：SSL（SSL加密通信，没有带用户信息，老版本及社区版本都支持）
+3：SASL_SSL（SSL加密通信，在数据开始时，会通过SASL方式登录鉴权，仅社区版本支持）
+      */
+  AccessType: number
+
+  /**
+   * 路由ID
+   */
+  RouteId: number
+
+  /**
+   * vip网络类型（1:外网TGW  2:基础网络 3:VPC网络 4:支撑网络(idc 环境) 5:SSL外网访问方式访问 6:黑石环境vpc 7:支撑网络(cvm 环境）
+   */
+  VipType: number
+
+  /**
+   * 虚拟IP列表
+   */
+  VipList: Array<VipEntity>
+
+  /**
+      * 域名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Domain: string
+
+  /**
+      * 域名port
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DomainPort: number
+
+  /**
+      * 时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DeleteTimestamp: string
+}
+
+/**
  * DeleteRoute返回参数结构体
  */
 export interface DeleteRouteResponse {
@@ -1388,19 +2257,19 @@ export interface Partitions {
 }
 
 /**
- * DescribeTopic返回参数结构体
+ * 创建数据转储返回值
  */
-export interface DescribeTopicResponse {
+export interface CreateDatahubTaskRes {
   /**
-      * 返回的结果
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Result: TopicResult
+   * 转储任务id
+   */
+  TaskId: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+      * 数据转储Id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DatahubId: string
 }
 
 /**
@@ -1524,6 +2393,43 @@ export interface CreateAclResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 数据处理规则失败处理
+ */
+export interface FailureParam {
+  /**
+   * 类型，DLQ死信队列，IGNORE_ERROR保留，DROP废弃
+   */
+  Type: string
+
+  /**
+   * Ckafka类型死信队列
+   */
+  KafkaParam?: KafkaParam
+
+  /**
+   * 重试间隔
+   */
+  RetryInterval?: number
+
+  /**
+   * 重试次数
+   */
+  MaxRetryAttempts?: number
+
+  /**
+      * DIP Topic类型死信队列
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TopicParam?: TopicParam
+
+  /**
+      * 死信队列类型，CKAFKA，TOPIC
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DlqType?: string
 }
 
 /**
@@ -1658,6 +2564,69 @@ export interface DynamicRetentionTime {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   BottomRetention?: number
+}
+
+/**
+ * 数据处理参数
+ */
+export interface TransformParam {
+  /**
+   * 解析格式，JSON，DELIMITER分隔符，REGULAR正则提取
+   */
+  AnalysisFormat: string
+
+  /**
+   * 输出格式
+   */
+  OutputFormat: string
+
+  /**
+   * 是否保留解析失败数据
+   */
+  FailureParam: FailureParam
+
+  /**
+   * 原始数据
+   */
+  Content: string
+
+  /**
+   * 数据来源，TOPIC从源topic拉取，CUSTOMIZE自定义
+   */
+  SourceType: string
+
+  /**
+   * 分隔符、正则表达式
+   */
+  Regex?: string
+
+  /**
+   * Map
+   */
+  MapParam?: Array<MapParam>
+
+  /**
+   * 过滤器
+   */
+  FilterParam?: Array<FilterMapParam>
+
+  /**
+      * 测试结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result?: string
+
+  /**
+      * 解析结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AnalyseResult?: Array<MapParam>
+
+  /**
+      * 底层引擎是否使用eb
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UseEventBus?: boolean
 }
 
 /**
@@ -1937,6 +2906,53 @@ export interface DescribeUserResponse {
 }
 
 /**
+ * Dts连接源参数
+ */
+export interface DtsConnectParam {
+  /**
+      * Dts的连接port
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Port: number
+
+  /**
+      * Dts消费分组的Id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  GroupId: string
+
+  /**
+      * Dts消费分组的账号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UserName: string
+
+  /**
+      * Dts消费分组的密码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Password: string
+
+  /**
+      * Dts实例Id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Resource: string
+
+  /**
+      * Dts订阅的topic
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Topic: string
+
+  /**
+      * 是否更新到关联的Datahub任务
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsUpdate?: boolean
+}
+
+/**
  * AppId的查询结果
  */
 export interface AppIdResponse {
@@ -2065,6 +3081,51 @@ export interface DescribeAppInfoResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * Cos Datahub 任务接入参数
+ */
+export interface CosParam {
+  /**
+   * cos 存储桶名称
+   */
+  BucketName: string
+
+  /**
+   * 地域代码
+   */
+  Region: string
+
+  /**
+   * 对象名称
+   */
+  ObjectKey?: string
+
+  /**
+   * 汇聚消息量的大小（单位：MB)
+   */
+  AggregateBatchSize?: number
+
+  /**
+   * 汇聚的时间间隔（单位：小时）
+   */
+  AggregateInterval?: number
+
+  /**
+   * 消息汇聚后的文件格式（支持csv, json）
+   */
+  FormatOutputType?: string
+
+  /**
+   * 转储的对象目录前缀
+   */
+  ObjectKeyPrefix?: string
+
+  /**
+   * 根据strptime 时间格式化的分区格式
+   */
+  DirectoryTimeFormat?: string
 }
 
 /**
@@ -2197,18 +3258,23 @@ export interface DescribeInstanceAttributesResponse {
 }
 
 /**
- * ModifyPassword返回参数结构体
+ * Map参数
  */
-export interface ModifyPasswordResponse {
+export interface MapParam {
   /**
-   * 返回结果
+   * key值
    */
-  Result?: JgwOperateResponse
+  Key: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 类型，DEFAULT默认，DATE系统预设-时间戳，CUSTOMIZE自定义，MAPPING映射
    */
-  RequestId?: string
+  Type?: string
+
+  /**
+   * 值
+   */
+  Value?: string
 }
 
 /**
@@ -2319,6 +3385,31 @@ delete：日志按保存时间删除；compact：日志按 key 压缩；compact,
 }
 
 /**
+ * ClickHouse的Schema
+ */
+export interface ClickHouseSchema {
+  /**
+   * 表的列名
+   */
+  ColumnName: string
+
+  /**
+   * 该列对应的jsonKey名
+   */
+  JsonKey: string
+
+  /**
+   * 表列项的类型
+   */
+  Type: string
+
+  /**
+   * 列项是否允许为空
+   */
+  AllowNull: boolean
+}
+
+/**
  * ModifyPassword请求参数结构体
  */
 export interface ModifyPasswordRequest {
@@ -2405,33 +3496,18 @@ export interface DescribeRegionResponse {
 }
 
 /**
- * DescribeConsumerGroup请求参数结构体
+ * CreateTopic返回参数结构体
  */
-export interface DescribeConsumerGroupRequest {
+export interface CreateTopicResponse {
   /**
-   * ckafka实例id。
+   * 返回创建结果
    */
-  InstanceId: string
+  Result: CreateTopicResp
 
   /**
-   * 可选，用户需要查询的group名称。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  GroupName?: string
-
-  /**
-   * 可选，用户需要查询的group中的对应的topic名称，如果指定了该参数，而group又未指定则忽略该参数。
-   */
-  TopicName?: string
-
-  /**
-   * 本次返回个数限制
-   */
-  Limit?: number
-
-  /**
-   * 偏移位置
-   */
-  Offset?: number
+  RequestId?: string
 }
 
 /**
@@ -2541,38 +3617,118 @@ export interface DescribeTopicAttributesResponse {
 }
 
 /**
- * CancelAuthorizationToken请求参数结构体
+ * DescribeConsumerGroup返回参数结构体
  */
-export interface CancelAuthorizationTokenRequest {
+export interface DescribeConsumerGroupResponse {
   /**
-   * 实例ID
+   * 返回的消费分组信息
    */
-  InstanceId: string
-
-  /**
-   * 用户
-   */
-  User: string
-
-  /**
-   * token串
-   */
-  Tokens: string
-}
-
-/**
- * DeleteTopic返回参数结构体
- */
-export interface DeleteTopicResponse {
-  /**
-   * 返回的结果集
-   */
-  Result?: JgwOperateResponse
+  Result?: ConsumerGroupResponse
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * MongoDB类型入参
+ */
+export interface MongoDBParam {
+  /**
+   * MongoDB的数据库名称
+   */
+  Database: string
+
+  /**
+   * MongoDB的集群
+   */
+  Collection: string
+
+  /**
+   * 是否复制存量数据，默认传参true
+   */
+  CopyExisting: boolean
+
+  /**
+   * 实例资源
+   */
+  Resource: string
+
+  /**
+   * MongoDB的连接ip
+   */
+  Ip?: string
+
+  /**
+   * MongoDB的连接port
+   */
+  Port?: number
+
+  /**
+   * MongoDB数据库用户名
+   */
+  UserName?: string
+
+  /**
+   * MongoDB数据库密码
+   */
+  Password?: string
+
+  /**
+   * 监听事件类型，为空时表示全选。取值包括insert,update,replace,delete,invalidate,drop,dropdatabase,rename，多个类型间使用,逗号分隔
+   */
+  ListeningEvent?: string
+
+  /**
+   * 主从优先级，默认主节点
+   */
+  ReadPreference?: string
+
+  /**
+   * 聚合管道
+   */
+  Pipeline?: string
+
+  /**
+   * 是否为自建集群
+   */
+  SelfBuilt?: boolean
+}
+
+/**
+ * DescribeGroupOffsets请求参数结构体
+ */
+export interface DescribeGroupOffsetsRequest {
+  /**
+   * （过滤条件）按照实例 ID 过滤
+   */
+  InstanceId: string
+
+  /**
+   * Kafka 消费分组
+   */
+  Group: string
+
+  /**
+   * group 订阅的主题名称数组，如果没有该数组，则表示指定的 group 下所有 topic 信息
+   */
+  Topics?: Array<string>
+
+  /**
+   * 模糊匹配 topicName
+   */
+  SearchWord?: string
+
+  /**
+   * 本次查询的偏移位置，默认为0
+   */
+  Offset?: number
+
+  /**
+   * 本次返回结果的最大个数，默认为50，最大值为50
+   */
+  Limit?: number
 }
 
 /**
@@ -2583,6 +3739,58 @@ export interface DeleteRouteTriggerTimeRequest {
    * 修改时间
    */
   DelayTime: string
+}
+
+/**
+ * 数据处理——处理链
+ */
+export interface FieldParam {
+  /**
+   * 解析
+   */
+  Analyse: AnalyseParam
+
+  /**
+      * 二次解析
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SecondaryAnalyse?: SecondaryAnalyseParam
+
+  /**
+      * 数据处理
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SMT?: Array<SMTParam>
+
+  /**
+      * 测试结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result?: string
+
+  /**
+      * 解析结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AnalyseResult?: Array<SMTParam>
+
+  /**
+      * 二次解析结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SecondaryAnalyseResult?: Array<SMTParam>
+
+  /**
+      * JSON格式解析结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AnalyseJsonResult?: string
+
+  /**
+      * JSON格式二次解析结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SecondaryAnalyseJsonResult?: string
 }
 
 /**
@@ -2818,6 +4026,34 @@ export interface InstanceAttributesResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   DynamicDiskConfig: DynamicDiskConfig
+}
+
+/**
+ * Topic配置
+ */
+export interface TopicParam {
+  /**
+   * 单独售卖Topic的Topic名称
+   */
+  Resource: string
+
+  /**
+      * Offset类型，最开始位置earliest，最新位置latest，时间点位置timestamp
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OffsetType?: string
+
+  /**
+      * Offset类型为timestamp时必传，传时间戳，精确到秒
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  StartTime?: number
+
+  /**
+      * Topic的TopicId【出参】
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TopicId?: string
 }
 
 /**
@@ -3058,6 +4294,17 @@ export interface CreateInstancePreResponse {
 }
 
 /**
+ * 返回连接源的Id
+ */
+export interface ConnectResourceResourceIdResp {
+  /**
+      * 连接源的Id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ResourceId: string
+}
+
+/**
  * CheckCdcCluster请求参数结构体
  */
 export interface CheckCdcClusterRequest {
@@ -3118,6 +4365,89 @@ export interface DescribeInstancesDetailRequest {
 }
 
 /**
+ * MongoDB连接源参数
+ */
+export interface MongoDBConnectParam {
+  /**
+      * MongoDB的连接port
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Port: number
+
+  /**
+      * MongoDB连接源的用户名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UserName: string
+
+  /**
+      * MongoDB连接源的密码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Password: string
+
+  /**
+      * MongoDB连接源的实例资源
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Resource: string
+
+  /**
+      * MongoDB连接源是否为自建集群
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SelfBuilt: boolean
+
+  /**
+      * MongoDB连接源的实例vip，当为腾讯云实例时，必填
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ServiceVip?: string
+
+  /**
+      * MongoDB连接源的vpcId，当为腾讯云实例时，必填
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UniqVpcId?: string
+
+  /**
+      * 是否更新到关联的Datahub任务
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsUpdate?: boolean
+}
+
+/**
+ * 数据处理——Value处理参数——截取参数
+ */
+export interface SubstrParam {
+  /**
+   * 截取起始位置
+   */
+  Start: number
+
+  /**
+   * 截取截止位置
+   */
+  End: number
+}
+
+/**
+ * FetchMessageByOffset返回参数结构体
+ */
+export interface FetchMessageByOffsetResponse {
+  /**
+   * 返回结果
+   */
+  Result: ConsumerRecord
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateConsumer请求参数结构体
  */
 export interface CreateConsumerRequest {
@@ -3150,6 +4480,62 @@ export interface DescribeRouteRequest {
    * 实例唯一id
    */
   InstanceId: string
+}
+
+/**
+ * 数据处理——Value处理参数——转换时间格式参数
+ */
+export interface DateParam {
+  /**
+   * 时间格式
+   */
+  Format?: string
+
+  /**
+      * 输入类型，string，unix时间戳，默认string
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TargetType?: string
+
+  /**
+      * 时区，默认GMT+8
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TimeZone?: string
+}
+
+/**
+ * 数据处理——Value处理参数
+ */
+export interface ValueParam {
+  /**
+   * 处理模式，REPLACE替换，SUBSTR截取，DATE日期转换，TRIM去除前后空格，REGEX_REPLACE正则替换
+   */
+  Type: string
+
+  /**
+      * 替换，TYPE=REPLACE时必传
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Replace?: ReplaceParam
+
+  /**
+      * 截取，TYPE=SUBSTR时必传
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Substr?: SubstrParam
+
+  /**
+      * 时间转换，TYPE=DATE时必传
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Date?: DateParam
+
+  /**
+      * 正则替换，TYPE=REGEX_REPLACE时必传
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RegexReplace?: RegexReplaceParam
 }
 
 /**
@@ -3287,6 +4673,104 @@ export interface TopicAttributesResponse {
 }
 
 /**
+ * Ckafka配置
+ */
+export interface KafkaParam {
+  /**
+   * 是否为自建集群
+   */
+  SelfBuilt: boolean
+
+  /**
+   * 实例资源
+   */
+  Resource: string
+
+  /**
+   * Topic名称，多个以“,”分隔
+   */
+  Topic: string
+
+  /**
+      * Offset类型，最开始位置earliest，最新位置latest，时间点位置timestamp
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OffsetType?: string
+
+  /**
+      * Offset类型为timestamp时必传，传时间戳，精确到秒
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  StartTime?: number
+
+  /**
+      * 实例资源名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ResourceName?: string
+
+  /**
+      * Zone ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ZoneId?: number
+
+  /**
+      * Topic的Id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TopicId?: string
+
+  /**
+      * Topic的分区数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PartitionNum?: number
+
+  /**
+      * 启用容错实例/开启死信队列
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EnableToleration?: boolean
+
+  /**
+      * Qps 限制
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  QpsLimit?: number
+}
+
+/**
+ * 数据处理——Value处理参数——正则替换参数
+ */
+export interface RegexReplaceParam {
+  /**
+   * 正则表达式
+   */
+  Regex: string
+
+  /**
+   * 替换新值
+   */
+  NewValue: string
+}
+
+/**
+ * 建立私有连接的参数
+ */
+export interface PrivateLinkParam {
+  /**
+   * 客户实例的vip
+   */
+  ServiceVip: string
+
+  /**
+   * 客户实例的vpcId
+   */
+  UniqVpcId: string
+}
+
+/**
  * CreateRoute返回参数结构体
  */
 export interface CreateRouteResponse {
@@ -3334,6 +4818,69 @@ export interface DescribeGroup {
 }
 
 /**
+ * Cls类型入参
+ */
+export interface ClsParam {
+  /**
+      * 生产的信息是否为json格式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DecodeJson: boolean
+
+  /**
+   * cls日志主题id
+   */
+  Resource: string
+
+  /**
+      * cls日志集id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LogSet?: string
+
+  /**
+      * 当DecodeJson为false时必填
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ContentKey?: string
+}
+
+/**
+ * EventBus配置
+ */
+export interface EventBusParam {
+  /**
+   * 资源类型。EB_COS/EB_ES/EB_CLS
+   */
+  Type: string
+
+  /**
+   * 是否为自建集群
+   */
+  SelfBuilt: boolean
+
+  /**
+   * 实例资源
+   */
+  Resource: string
+
+  /**
+   * SCF云函数命名空间
+   */
+  Namespace?: string
+
+  /**
+   * SCF云函数函数名
+   */
+  FunctionName?: string
+
+  /**
+   * SCF云函数版本及别名
+   */
+  Qualifier?: string
+}
+
+/**
  * 分区详情
  */
 export interface TopicPartitionDO {
@@ -3366,6 +4913,34 @@ export interface CreateTopicResp {
    * 主题Id
    */
   TopicId: string
+}
+
+/**
+ * 数据处理-解析参数
+ */
+export interface AnalyseParam {
+  /**
+   * 解析格式，JSON，DELIMITER分隔符，REGULAR正则提取，SOURCE处理上层所有结果
+   */
+  Format: string
+
+  /**
+      * 分隔符、正则表达式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Regex?: string
+
+  /**
+      * 需再次处理的KEY——模式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InputValueType?: string
+
+  /**
+      * 需再次处理的KEY——KEY表达式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InputValue?: string
 }
 
 /**
@@ -3441,6 +5016,86 @@ export interface DescribeRouteResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreateDatahubTask请求参数结构体
+ */
+export interface CreateDatahubTaskRequest {
+  /**
+   * 任务名称
+   */
+  TaskName: string
+
+  /**
+   * 任务类型，SOURCE数据接入，SINK数据流出
+   */
+  TaskType: string
+
+  /**
+   * 数据源
+   */
+  SourceResource?: DatahubResource
+
+  /**
+   * 数据目标
+   */
+  TargetResource?: DatahubResource
+
+  /**
+   * 数据处理规则
+   */
+  TransformParam?: TransformParam
+
+  /**
+   * 实例连接参数【已废弃】
+   */
+  PrivateLinkParam?: PrivateLinkParam
+
+  /**
+   * 选择所要绑定的SchemaId
+   */
+  SchemaId?: string
+
+  /**
+   * 数据处理规则
+   */
+  TransformsParam?: TransformsParam
+
+  /**
+   * 任务ID
+   */
+  TaskId?: string
+}
+
+/**
+ * PostgreSQL类型入参
+ */
+export interface PostgreSQLParam {
+  /**
+   * PostgreSQL的数据库名称
+   */
+  Database: string
+
+  /**
+   * PostgreSQL的数据表名称，"*"为所监听的所有数据库中的非系统表，可以","间隔，监听多个数据表，但数据表需要以"数据库名.数据表名"的格式进行填写
+   */
+  Table: string
+
+  /**
+   * 该PostgreSQL在连接管理内的Id
+   */
+  Resource: string
+
+  /**
+   * 插件名(decoderbufs/pgoutput)，默认为decoderbufs
+   */
+  PluginName: string
+
+  /**
+   * 复制存量信息(never增量, initial全量)，默认为initial
+   */
+  SnapshotMode?: string
 }
 
 /**
@@ -3542,6 +5197,59 @@ export interface ConsumerRecord {
 }
 
 /**
+ * PostgreSQL连接源参数
+ */
+export interface PostgreSQLConnectParam {
+  /**
+      * PostgreSQL的连接port
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Port: number
+
+  /**
+      * PostgreSQL连接源的用户名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UserName: string
+
+  /**
+      * PostgreSQL连接源的密码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Password: string
+
+  /**
+      * PostgreSQL连接源的实例资源
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Resource: string
+
+  /**
+      * PostgreSQL连接源的实例vip，当为腾讯云实例时，必填
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ServiceVip?: string
+
+  /**
+      * PostgreSQL连接源的vpcId，当为腾讯云实例时，必填
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UniqVpcId?: string
+
+  /**
+      * 当type为TDSQL_C_POSTGRESQL时，必填
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClusterId?: string
+
+  /**
+      * 是否更新到关联的Datahub任务
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsUpdate?: boolean
+}
+
+/**
  * ModifyGroupOffsets请求参数结构体
  */
 export interface ModifyGroupOffsetsRequest {
@@ -3637,50 +5345,50 @@ export interface CreateTopicIpWhiteListRequest {
 }
 
 /**
- * 路由实体对象
+ * MariaDB连接源参数
  */
-export interface Route {
+export interface MariaDBConnectParam {
   /**
-      * 实例接入方式
-0：PLAINTEXT (明文方式，没有带用户信息老版本及社区版本都支持)
-1：SASL_PLAINTEXT（明文方式，不过在数据开始时，会通过SASL方式登录鉴权，仅社区版本支持）
-2：SSL（SSL加密通信，没有带用户信息，老版本及社区版本都支持）
-3：SASL_SSL（SSL加密通信，在数据开始时，会通过SASL方式登录鉴权，仅社区版本支持）
-      */
-  AccessType: number
-
-  /**
-   * 路由ID
-   */
-  RouteId: number
-
-  /**
-   * vip网络类型（1:外网TGW  2:基础网络 3:VPC网络 4:支撑网络(idc 环境) 5:SSL外网访问方式访问 6:黑石环境vpc 7:支撑网络(cvm 环境）
-   */
-  VipType: number
-
-  /**
-   * 虚拟IP列表
-   */
-  VipList: Array<VipEntity>
-
-  /**
-      * 域名
+      * MariaDB的连接port
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Domain: string
+  Port: number
 
   /**
-      * 域名port
+      * MariaDB连接源的用户名
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  DomainPort: number
+  UserName: string
 
   /**
-      * 时间戳
+      * MariaDB连接源的密码
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  DeleteTimestamp: string
+  Password: string
+
+  /**
+      * MariaDB连接源的实例资源
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Resource: string
+
+  /**
+      * MariaDB连接源的实例vip，当为腾讯云实例时，必填
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ServiceVip?: string
+
+  /**
+      * MariaDB连接源的vpcId，当为腾讯云实例时，必填
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UniqVpcId?: string
+
+  /**
+      * 是否更新到关联的Datahub任务
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsUpdate?: boolean
 }
 
 /**
@@ -3864,18 +5572,13 @@ export interface ModifyTopicAttributesRequest {
 }
 
 /**
- * CreateTopic返回参数结构体
+ * 数据处理——二次解析参数
  */
-export interface CreateTopicResponse {
+export interface SecondaryAnalyseParam {
   /**
-   * 返回创建结果
+   * 分隔符
    */
-  Result: CreateTopicResp
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  Regex: string
 }
 
 /**
@@ -3995,38 +5698,86 @@ export interface DeleteTopicIpWhiteListRequest {
 }
 
 /**
- * DescribeGroupOffsets请求参数结构体
+ * DeleteTopic返回参数结构体
  */
-export interface DescribeGroupOffsetsRequest {
+export interface DeleteTopicResponse {
   /**
-   * （过滤条件）按照实例 ID 过滤
+   * 返回的结果集
    */
-  InstanceId: string
+  Result?: JgwOperateResponse
 
   /**
-   * Kafka 消费分组
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Group: string
+  RequestId?: string
+}
+
+/**
+ * CreateDatahubTask返回参数结构体
+ */
+export interface CreateDatahubTaskResponse {
+  /**
+   * 任务id
+   */
+  Result: CreateDatahubTaskRes
 
   /**
-   * group 订阅的主题名称数组，如果没有该数组，则表示指定的 group 下所有 topic 信息
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Topics?: Array<string>
+  RequestId?: string
+}
+
+/**
+ * ClickHouse连接源参数
+ */
+export interface ClickHouseConnectParam {
+  /**
+      * ClickHouse的连接port
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Port: number
 
   /**
-   * 模糊匹配 topicName
-   */
-  SearchWord?: string
+      * ClickHouse连接源的用户名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UserName: string
 
   /**
-   * 本次查询的偏移位置，默认为0
-   */
-  Offset?: number
+      * ClickHouse连接源的密码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Password: string
 
   /**
-   * 本次返回结果的最大个数，默认为50，最大值为50
-   */
-  Limit?: number
+      * ClickHouse连接源的实例资源
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Resource: string
+
+  /**
+      * ClickHouse连接源是否为自建集群
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SelfBuilt: boolean
+
+  /**
+      * ClickHouse连接源的实例vip，当为腾讯云实例时，必填
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ServiceVip?: string
+
+  /**
+      * ClickHouse连接源的vpcId，当为腾讯云实例时，必填
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UniqVpcId?: string
+
+  /**
+      * 是否更新到关联的Datahub任务
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsUpdate?: boolean
 }
 
 /**
@@ -4052,6 +5803,76 @@ export interface DescribeUserRequest {
    * 本次返回个数
    */
   Limit?: number
+}
+
+/**
+ * MySQL类型入参
+ */
+export interface MySQLParam {
+  /**
+   * MySQL的数据库名称，"*"为全数据库
+   */
+  Database: string
+
+  /**
+   * MySQL的数据表名称，"*"为所监听的所有数据库中的非系统表，可以","间隔，监听多个数据表，但数据表需要以"数据库名.数据表名"的格式进行填写
+   */
+  Table: string
+
+  /**
+   * 该MySQL在连接管理内的Id
+   */
+  Resource: string
+
+  /**
+   * 复制存量信息(schema_only不复制, initial全量)，默认位initial
+   */
+  SnapshotMode?: string
+
+  /**
+   * 存放MySQL的Ddl信息的Topic，为空则默认不存放
+   */
+  DdlTopic?: string
+
+  /**
+   * "TABLE" 表示读取项为 table，"QUERY" 表示读取项为 query
+   */
+  DataSourceMonitorMode?: string
+
+  /**
+   * 当 "DataMonitorMode"="TABLE" 时，传入需要读取的 Table；当 "DataMonitorMode"="QUERY" 时，传入需要读取的查询 sql 语句
+   */
+  DataSourceMonitorResource?: string
+
+  /**
+   * "TIMESTAMP" 表示增量列为时间戳类型，"INCREMENT" 表示增量列为自增 id 类型
+   */
+  DataSourceIncrementMode?: string
+
+  /**
+   * 传入需要监听的列名称
+   */
+  DataSourceIncrementColumn?: string
+
+  /**
+   * "HEAD" 表示复制存量 + 增量数据，"TAIL" 表示只复制增量数据
+   */
+  DataSourceStartFrom?: string
+
+  /**
+   * "INSERT" 表示使用 Insert 模式插入，"UPSERT" 表示使用 Upsert 模式插入
+   */
+  DataTargetInsertMode?: string
+
+  /**
+   * 当 "DataInsertMode"="UPSERT" 时，传入当前 upsert 时依赖的主键
+   */
+  DataTargetPrimaryKeyField?: string
+
+  /**
+   * 表与消息间的映射关系
+   */
+  DataTargetRecordMapping?: Array<RecordMapping>
 }
 
 /**
@@ -4320,6 +6141,46 @@ export interface SubscribedInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   TopicId: string
+}
+
+/**
+ * SQLServer类型入参
+ */
+export interface SQLServerParam {
+  /**
+   * SQLServer的数据库名称
+   */
+  Database: string
+
+  /**
+   * SQLServer的数据表名称，"*"为所监听的所有数据库中的非系统表，可以","间隔，监听多个数据表，但数据表需要以"数据库名.数据表名"的格式进行填写
+   */
+  Table: string
+
+  /**
+   * 该SQLServer在连接管理内的Id
+   */
+  Resource: string
+
+  /**
+   * 复制存量信息(schema_only增量, initial全量)，默认为initial
+   */
+  SnapshotMode?: string
+}
+
+/**
+ * 数据处理——Value处理参数——替换参数
+ */
+export interface ReplaceParam {
+  /**
+   * 被替换值
+   */
+  OldValue: string
+
+  /**
+   * 替换值
+   */
+  NewValue: string
 }
 
 /**

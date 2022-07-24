@@ -797,23 +797,24 @@ export interface ModifyDBInstanceSecurityGroupsResponse {
 }
 
 /**
- * ModifyAccountParams请求参数结构体
+ * DescribeClusterParamLogs返回参数结构体
  */
-export interface ModifyAccountParamsRequest {
+export interface DescribeClusterParamLogsResponse {
   /**
-   * 集群id，不超过32个字符
+   * 记录总数
    */
-  ClusterId: string
+  TotalCount: number
 
   /**
-   * 账号信息
-   */
-  Account: InputAccount
+      * 参数修改记录
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClusterParamLogs: Array<ClusterParamModifyLog>
 
   /**
-   * 数据库表权限数组,当前仅支持参数：max_user_connections，max_user_connections不能大于10240
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  AccountParams: Array<AccountParam>
+  RequestId?: string
 }
 
 /**
@@ -2055,6 +2056,61 @@ export interface ResumeServerlessRequest {
 }
 
 /**
+ * InquirePriceCreate请求参数结构体
+ */
+export interface InquirePriceCreateRequest {
+  /**
+   * 可用区,每个地域提供最佳实践
+   */
+  Zone: string
+
+  /**
+   * 购买商品数量
+   */
+  GoodsNum: number
+
+  /**
+   * 实例购买类型，可选值为：PREPAID, POSTPAID, SERVERLESS
+   */
+  InstancePayMode: string
+
+  /**
+   * 存储购买类型，可选值为：PREPAID, POSTPAID
+   */
+  StoragePayMode: string
+
+  /**
+   * CPU核数，PREPAID与POSTPAID实例类型必传
+   */
+  Cpu?: number
+
+  /**
+   * 内存大小，单位G，PREPAID与POSTPAID实例类型必传
+   */
+  Memory?: number
+
+  /**
+   * Ccu大小，serverless类型必传
+   */
+  Ccu?: number
+
+  /**
+   * 存储大小，PREPAID存储类型必传
+   */
+  StorageLimit?: number
+
+  /**
+   * 购买时长，PREPAID购买类型必传
+   */
+  TimeSpan?: number
+
+  /**
+   * 时长单位，可选值为：m,d。PREPAID购买类型必传
+   */
+  TimeUnit?: string
+}
+
+/**
  * 计费资源信息
  */
 export interface BillingResourceInfo {
@@ -2173,24 +2229,23 @@ export interface UpgradeInstanceResponse {
 }
 
 /**
- * DescribeClusterParamLogs返回参数结构体
+ * ModifyAccountParams请求参数结构体
  */
-export interface DescribeClusterParamLogsResponse {
+export interface ModifyAccountParamsRequest {
   /**
-   * 记录总数
+   * 集群id，不超过32个字符
    */
-  TotalCount: number
+  ClusterId: string
 
   /**
-      * 参数修改记录
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ClusterParamLogs: Array<ClusterParamModifyLog>
+   * 账号信息
+   */
+  Account: InputAccount
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 数据库表权限数组,当前仅支持参数：max_user_connections，max_user_connections不能大于10240
    */
-  RequestId?: string
+  AccountParams: Array<AccountParam>
 }
 
 /**
@@ -2472,6 +2527,26 @@ export interface InstanceSpec {
    * 实例最小可用存储，单位：GB
    */
   MinStorageSize: number
+}
+
+/**
+ * InquirePriceCreate返回参数结构体
+ */
+export interface InquirePriceCreateResponse {
+  /**
+   * 实例价格
+   */
+  InstancePrice: TradePrice
+
+  /**
+   * 存储价格
+   */
+  StoragePrice: TradePrice
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3310,6 +3385,45 @@ export interface OfflineInstanceRequest {
    * 实例ID数组
    */
   InstanceIdList: Array<string>
+}
+
+/**
+ * 计费询价结果
+ */
+export interface TradePrice {
+  /**
+      * 预付费模式下资源总价，不包含优惠，单位:分
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TotalPrice: number
+
+  /**
+   * 总的折扣，100表示100%不打折
+   */
+  Discount: number
+
+  /**
+      * 预付费模式下的优惠后总价, 单位: 分,例如用户享有折扣 =TotalPrice × Discount
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TotalPriceDiscount: number
+
+  /**
+      * 后付费模式下的单位资源价格，不包含优惠，单位:分
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UnitPrice: number
+
+  /**
+      * 优惠后后付费模式下的单位资源价格, 单位: 分,例如用户享有折扣=UnitPricet × Discount
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UnitPriceDiscount: number
+
+  /**
+   * 计费价格单位
+   */
+  ChargeUnit: string
 }
 
 /**

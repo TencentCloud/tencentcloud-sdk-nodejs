@@ -19,7 +19,7 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   DescribeResourceConfigsResponse,
-  DescribeClustersRequest,
+  CreateResourceRequest,
   CheckSavepointRequest,
   CreateJobRequest,
   ResourceRefDetail,
@@ -30,27 +30,30 @@ import {
   CCN,
   DeleteJobsRequest,
   StopJobDescription,
+  CreateFolderRequest,
   ModifyJobResponse,
-  DeleteTableConfigResponse,
+  CreateJobConfigResponse,
   CreateResourceConfigResponse,
   CreateJobConfigRequest,
   CreateResourceConfigRequest,
   Property,
   ClusterVersion,
-  CreateResourceRequest,
+  DescribeClustersRequest,
   DescribeTreeJobsResponse,
   DeleteTableConfigRequest,
+  CopyJobsRequest,
+  CopyJobsResponse,
   Savepoint,
   SystemResourceItem,
   DescribeResourceRelatedJobsRequest,
   DeleteResourcesResponse,
-  CreateJobConfigResponse,
+  DeleteTableConfigResponse,
   ResourceConfigItem,
   TriggerJobSavepointResponse,
   Tag,
   DescribeResourcesRequest,
   ResourceLocParam,
-  DescribeJobSavepointRequest,
+  DescribeJobConfigsRequest,
   CheckSavepointResponse,
   DeleteResourceConfigsRequest,
   DescribeJobSavepointResponse,
@@ -62,9 +65,10 @@ import {
   ResourceItem,
   WorkSpaceClusterItem,
   StopJobsResponse,
+  DescribeJobSavepointRequest,
   CreateResourceResponse,
   DescribeSystemResourcesRequest,
-  DescribeJobConfigsRequest,
+  CreateFolderResponse,
   DescribeResourcesResponse,
   RunJobDescription,
   ModifyJobRequest,
@@ -101,6 +105,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTreeJobsResponse) => void
   ): Promise<DescribeTreeJobsResponse> {
     return this.request("DescribeTreeJobs", req, cb)
+  }
+
+  /**
+     * 单条和批量复制作业
+https://iwiki.woa.com/pages/viewpage.action?pageId=1288112774
+     */
+  async CopyJobs(
+    req?: CopyJobsRequest,
+    cb?: (error: string, rep: CopyJobsResponse) => void
+  ): Promise<CopyJobsResponse> {
+    return this.request("CopyJobs", req, cb)
   }
 
   /**
@@ -211,6 +226,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteJobsResponse) => void
   ): Promise<DeleteJobsResponse> {
     return this.request("DeleteJobs", req, cb)
+  }
+
+  /**
+   * 作业列表页面新建文件夹请求
+   */
+  async CreateFolder(
+    req: CreateFolderRequest,
+    cb?: (error: string, rep: CreateFolderResponse) => void
+  ): Promise<CreateFolderResponse> {
+    return this.request("CreateFolder", req, cb)
   }
 
   /**

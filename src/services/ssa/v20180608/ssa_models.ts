@@ -3083,23 +3083,23 @@ export interface DescribeComplianceAssetListRequest {
 }
 
 /**
- * 查询参数
+ * 过滤条件
  */
 export interface QueryFilter {
   /**
-   * 查询的字段
+   * 过滤key
    */
-  FilterKey: string
+  FilterKey?: string
 
   /**
-   * 查询的值
+   * 操作符(只支持32位)
    */
-  FilterValue: string
+  FilterOperatorType?: number
 
   /**
-   * 匹配类型，1等于；2大于；3小于；4大于等于；5小于等于；6不等于；7in；8not in；9模糊匹配
+   * 过滤value
    */
-  FilterOperatorType: number
+  FilterValue?: string
 }
 
 /**

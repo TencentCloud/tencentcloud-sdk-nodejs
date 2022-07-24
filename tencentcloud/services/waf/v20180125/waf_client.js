@@ -102,12 +102,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeFlowTrend", req, cb);
     }
     /**
-     * 创建攻击日志下载任务
-     */
-    async CreateAttackDownloadTask(req, cb) {
-        return this.request("CreateAttackDownloadTask", req, cb);
-    }
-    /**
      * 更改某一条规则
      */
     async ModifyDomainWhiteRule(req, cb) {

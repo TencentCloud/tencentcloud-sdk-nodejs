@@ -3635,6 +3635,11 @@ export interface DescribeInstancesRequest {
    * 需要过滤的产品版本支持多个，"local"本地盘版，"cloud"云盘版，"cdc"独享集群版，如果不传则默认不过滤
    */
   ProductVersions?: Array<string>
+
+  /**
+   * 批量查询指定的实例
+   */
+  InstanceIds?: Array<string>
 }
 
 /**

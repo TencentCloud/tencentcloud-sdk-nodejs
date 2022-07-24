@@ -178,6 +178,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("IsolateCluster", req, cb);
     }
     /**
+     * 查询新购集群价格
+     */
+    async InquirePriceCreate(req, cb) {
+        return this.request("InquirePriceCreate", req, cb);
+    }
+    /**
      * 此接口（DescribeBackupDownloadUrl）用于查询集群备份文件下载地址。
      */
     async DescribeBackupDownloadUrl(req, cb) {

@@ -328,13 +328,27 @@ export interface DeleteDownloadRecordRequest {
     Flow: string;
 }
 /**
- * DeleteAccessExport返回参数结构体
+ * DescribeAccessIndex接口的出参数
  */
-export interface DeleteAccessExportResponse {
+export interface AccessRuleInfo {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 全文索引配置
+注意：此字段可能返回 null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    RequestId?: string;
+    FullText: AccessFullTextInfo;
+    /**
+      * 键值索引配置
+注意：此字段可能返回 null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    KeyValue: AccessRuleKeyValueInfo;
+    /**
+      * 元字段索引配置
+注意：此字段可能返回 null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Tag: AccessRuleTagInfo;
 }
 /**
  * DescribeAccessExports请求参数结构体
@@ -366,6 +380,15 @@ export interface ModifyWafAutoDenyStatusRequest {
  * ModifyAccessPeriod返回参数结构体
  */
 export interface ModifyAccessPeriodResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DeleteAccessExport返回参数结构体
+ */
+export interface DeleteAccessExportResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -837,47 +860,6 @@ export interface DownloadAttackRecordInfo {
     TotalCount: number;
 }
 /**
- * CreateAttackDownloadTask请求参数结构体
- */
-export interface CreateAttackDownloadTaskRequest {
-    /**
-      * 域名，所有域名填写all
-      */
-    Domain: string;
-    /**
-      * 查询起始时间
-      */
-    FromTime: string;
-    /**
-      * 查询结束时间
-      */
-    ToTime: string;
-    /**
-      * 下载任务名字
-      */
-    Name: string;
-    /**
-      * 风险等级
-      */
-    RiskLevel?: number;
-    /**
-      * 拦截状态
-      */
-    Status?: number;
-    /**
-      * 自定义策略ID
-      */
-    RuleId?: number;
-    /**
-      * 攻击者IP
-      */
-    AttackIp?: string;
-    /**
-      * 攻击类型
-      */
-    AttackType?: string;
-}
-/**
  * DescribeWafAutoDenyStatus返回参数结构体
  */
 export interface DescribeWafAutoDenyStatusResponse {
@@ -1030,19 +1012,6 @@ export interface PortItem {
       * Nginx的服务器ID
       */
     NginxServerId: string;
-}
-/**
- * CreateAttackDownloadTask返回参数结构体
- */
-export interface CreateAttackDownloadTaskResponse {
-    /**
-      * 任务ID
-      */
-    Flow: string;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
 }
 /**
  * Waf 威胁情报封禁模块配置详情
@@ -1711,29 +1680,6 @@ export interface DescribeIpHitItemsRequest {
       * IP
       */
     Ip?: string;
-}
-/**
- * DescribeAccessIndex接口的出参数
- */
-export interface AccessRuleInfo {
-    /**
-      * 全文索引配置
-注意：此字段可能返回 null，表示取不到有效值。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    FullText: AccessFullTextInfo;
-    /**
-      * 键值索引配置
-注意：此字段可能返回 null，表示取不到有效值。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    KeyValue: AccessRuleKeyValueInfo;
-    /**
-      * 元字段索引配置
-注意：此字段可能返回 null，表示取不到有效值。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Tag: AccessRuleTagInfo;
 }
 /**
  * GetAttackDownloadRecords返回参数结构体

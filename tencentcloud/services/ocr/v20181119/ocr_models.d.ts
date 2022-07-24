@@ -2691,11 +2691,11 @@ export interface VatInvoiceVerifyRequest {
       */
     InvoiceCode: string;
     /**
-      * 发票号码（8位）。
+      * 发票号码（8位）
       */
     InvoiceNo: string;
     /**
-      * 开票日期（不支持当天发票查询，支持五年以内开具的发票），如：2019-12-20。
+      * 开票日期（不支持当天发票查询，支持五年以内开具的发票），格式：“YYYY-MM-DD”，如：2019-12-20。
       */
     InvoiceDate: string;
     /**

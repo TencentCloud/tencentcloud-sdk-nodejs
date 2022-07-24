@@ -138,16 +138,6 @@ it("waf.v20180125.DescribeFlowTrend", async function () {
     }
 })
 
-it("waf.v20180125.CreateAttackDownloadTask", async function () {
-    try {
-       const data = await client.CreateAttackDownloadTask({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("waf.v20180125.ModifyDomainWhiteRule", async function () {
     try {
        const data = await client.ModifyDomainWhiteRule({})

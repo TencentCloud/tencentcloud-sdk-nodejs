@@ -34,6 +34,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTreeJobs", req, cb);
     }
     /**
+     * 单条和批量复制作业
+https://iwiki.woa.com/pages/viewpage.action?pageId=1288112774
+     */
+    async CopyJobs(req, cb) {
+        return this.request("CopyJobs", req, cb);
+    }
+    /**
      * 删除资源版本
      */
     async DeleteResourceConfigs(req, cb) {
@@ -98,6 +105,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteJobs(req, cb) {
         return this.request("DeleteJobs", req, cb);
+    }
+    /**
+     * 作业列表页面新建文件夹请求
+     */
+    async CreateFolder(req, cb) {
+        return this.request("CreateFolder", req, cb);
     }
     /**
      * 检查快照是否可用

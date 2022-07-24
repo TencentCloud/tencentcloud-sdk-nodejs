@@ -318,6 +318,8 @@ export declare class Client extends AbstractClient {
         </tr>
       </tbody>
     </table>
+
+默认接口请求频率限制：20次/秒。
      */
     GeneralBasicOCR(req: GeneralBasicOCRRequest, cb?: (error: string, rep: GeneralBasicOCRResponse) => void): Promise<GeneralBasicOCRResponse>;
     /**

@@ -36,33 +36,38 @@ export interface DescribeResourceConfigsResponse {
 }
 
 /**
- * DescribeClusters请求参数结构体
+ * CreateResource请求参数结构体
  */
-export interface DescribeClustersRequest {
+export interface CreateResourceRequest {
   /**
-   * 按照一个或者多个集群 ID 查询，每次请求的集群上限为 100
+   * 资源位置
    */
-  ClusterIds?: Array<string>
+  ResourceLoc: ResourceLoc
 
   /**
-   * 偏移量，默认 0
+   * 资源类型。目前只支持 JAR，取值为 1
    */
-  Offset?: number
+  ResourceType: number
 
   /**
-   * 请求的集群数量，默认 20，最大值 100
+   * 资源描述
    */
-  Limit?: number
+  Remark?: string
 
   /**
-   * 集群信息结果排序规则，1 按时间降序，2 按照时间升序，3  按照状态排序
+   * 资源名称
    */
-  OrderType?: number
+  Name?: string
 
   /**
-   * 过滤规则
+   * 资源版本描述
    */
-  Filters?: Array<Filter>
+  ResourceConfigRemark?: string
+
+  /**
+   * 目录ID
+   */
+  FolderId?: string
 
   /**
    * 工作空间 SerialId
@@ -291,6 +296,21 @@ export interface StopJobDescription {
 }
 
 /**
+ * CreateFolder请求参数结构体
+ */
+export interface CreateFolderRequest {
+  /**
+   * 文件夹类型，0是任务文件夹，1是依赖文件夹
+   */
+  FolderType?: number
+
+  /**
+   * 工作空间 SerialId
+   */
+  WorkSpaceId?: string
+}
+
+/**
  * ModifyJob返回参数结构体
  */
 export interface ModifyJobResponse {
@@ -301,9 +321,14 @@ export interface ModifyJobResponse {
 }
 
 /**
- * DeleteTableConfig返回参数结构体
+ * CreateJobConfig返回参数结构体
  */
-export interface DeleteTableConfigResponse {
+export interface CreateJobConfigResponse {
+  /**
+   * 作业配置版本号
+   */
+  Version: number
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -483,38 +508,33 @@ export interface ClusterVersion {
 }
 
 /**
- * CreateResource请求参数结构体
+ * DescribeClusters请求参数结构体
  */
-export interface CreateResourceRequest {
+export interface DescribeClustersRequest {
   /**
-   * 资源位置
+   * 按照一个或者多个集群 ID 查询，每次请求的集群上限为 100
    */
-  ResourceLoc: ResourceLoc
+  ClusterIds?: Array<string>
 
   /**
-   * 资源类型。目前只支持 JAR，取值为 1
+   * 偏移量，默认 0
    */
-  ResourceType: number
+  Offset?: number
 
   /**
-   * 资源描述
+   * 请求的集群数量，默认 20，最大值 100
    */
-  Remark?: string
+  Limit?: number
 
   /**
-   * 资源名称
+   * 集群信息结果排序规则，1 按时间降序，2 按照时间升序，3  按照状态排序
    */
-  Name?: string
+  OrderType?: number
 
   /**
-   * 资源版本描述
+   * 过滤规则
    */
-  ResourceConfigRemark?: string
-
-  /**
-   * 目录ID
-   */
-  FolderId?: string
+  Filters?: Array<Filter>
 
   /**
    * 工作空间 SerialId
@@ -555,6 +575,21 @@ export interface DeleteTableConfigRequest {
    * 工作空间 SerialId
    */
   WorkSpaceId?: string
+}
+
+/**
+ * CopyJobs请求参数结构体
+ */
+export type CopyJobsRequest = null
+
+/**
+ * CopyJobs返回参数结构体
+ */
+export interface CopyJobsResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -715,14 +750,9 @@ export interface DeleteResourcesResponse {
 }
 
 /**
- * CreateJobConfig返回参数结构体
+ * DeleteTableConfig返回参数结构体
  */
-export interface CreateJobConfigResponse {
-  /**
-   * 作业配置版本号
-   */
-  Version: number
-
+export interface DeleteTableConfigResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -899,23 +929,38 @@ export interface ResourceLocParam {
 }
 
 /**
- * DescribeJobSavepoint请求参数结构体
+ * DescribeJobConfigs请求参数结构体
  */
-export interface DescribeJobSavepointRequest {
+export interface DescribeJobConfigsRequest {
   /**
-   * 作业 SerialId
+   * 作业Id
    */
   JobId: string
 
   /**
-   * 分页参数，单页总数
+   * 作业配置版本
    */
-  Limit: number
+  JobConfigVersions?: Array<number>
 
   /**
-   * 分页参数，偏移量
+   * 偏移量，默认0
    */
-  Offset: number
+  Offset?: number
+
+  /**
+   * 分页大小，默认20，最大100
+   */
+  Limit?: number
+
+  /**
+   * 过滤条件
+   */
+  Filters?: Array<Filter>
+
+  /**
+   * true 表示只展示草稿
+   */
+  OnlyDraft?: boolean
 
   /**
    * 工作空间 SerialId
@@ -1191,6 +1236,31 @@ export interface StopJobsResponse {
 }
 
 /**
+ * DescribeJobSavepoint请求参数结构体
+ */
+export interface DescribeJobSavepointRequest {
+  /**
+   * 作业 SerialId
+   */
+  JobId: string
+
+  /**
+   * 分页参数，单页总数
+   */
+  Limit: number
+
+  /**
+   * 分页参数，偏移量
+   */
+  Offset: number
+
+  /**
+   * 工作空间 SerialId
+   */
+  WorkSpaceId?: string
+}
+
+/**
  * CreateResource返回参数结构体
  */
 export interface CreateResourceResponse {
@@ -1246,43 +1316,13 @@ export interface DescribeSystemResourcesRequest {
 }
 
 /**
- * DescribeJobConfigs请求参数结构体
+ * CreateFolder返回参数结构体
  */
-export interface DescribeJobConfigsRequest {
+export interface CreateFolderResponse {
   /**
-   * 作业Id
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  JobId: string
-
-  /**
-   * 作业配置版本
-   */
-  JobConfigVersions?: Array<number>
-
-  /**
-   * 偏移量，默认0
-   */
-  Offset?: number
-
-  /**
-   * 分页大小，默认20，最大100
-   */
-  Limit?: number
-
-  /**
-   * 过滤条件
-   */
-  Filters?: Array<Filter>
-
-  /**
-   * true 表示只展示草稿
-   */
-  OnlyDraft?: boolean
-
-  /**
-   * 工作空间 SerialId
-   */
-  WorkSpaceId?: string
+  RequestId?: string
 }
 
 /**

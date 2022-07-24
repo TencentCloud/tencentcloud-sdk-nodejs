@@ -178,6 +178,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateTopic", req, cb);
     }
     /**
+     * 创建Datahub连接源
+     */
+    async CreateConnectResource(req, cb) {
+        return this.request("CreateConnectResource", req, cb);
+    }
+    /**
      * 用于查询cdc-ckafka任务状态
      */
     async CheckCdcCluster(req, cb) {
@@ -249,6 +255,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async BatchCreateAcl(req, cb) {
         return this.request("BatchCreateAcl", req, cb);
+    }
+    /**
+     * 创建Datahub转储任务
+     */
+    async CreateDatahubTask(req, cb) {
+        return this.request("CreateDatahubTask", req, cb);
     }
     /**
      * 删除ACL规则

@@ -402,6 +402,8 @@ class Client extends abstract_client_1.AbstractClient {
         </tr>
       </tbody>
     </table>
+
+默认接口请求频率限制：20次/秒。
      */
     async GeneralBasicOCR(req, cb) {
         return this.request("GeneralBasicOCR", req, cb);

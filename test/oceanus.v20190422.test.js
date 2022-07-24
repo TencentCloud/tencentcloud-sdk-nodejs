@@ -28,6 +28,16 @@ it("oceanus.v20190422.DescribeTreeJobs", async function () {
     }
 })
 
+it("oceanus.v20190422.CopyJobs", async function () {
+    try {
+       const data = await client.CopyJobs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("oceanus.v20190422.DeleteResourceConfigs", async function () {
     try {
        const data = await client.DeleteResourceConfigs({})
@@ -131,6 +141,16 @@ it("oceanus.v20190422.RunJobs", async function () {
 it("oceanus.v20190422.DeleteJobs", async function () {
     try {
        const data = await client.DeleteJobs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("oceanus.v20190422.CreateFolder", async function () {
+    try {
+       const data = await client.CreateFolder({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -16,6 +16,79 @@ export interface DescribeAbnormalEventResponse {
     RequestId?: string;
 }
 /**
+ * SdkAppId级别录制时长数据。
+ */
+export interface SdkAppIdRecordUsage {
+    /**
+      * SdkAppId的值。
+      */
+    SdkAppId: string;
+    /**
+      * 统计的时间点数据。
+      */
+    Usages: Array<RecordUsage>;
+}
+/**
+ * MCU混流输出流编码参数
+ */
+export interface EncodeParams {
+    /**
+      * 混流-输出流音频采样率。取值为[48000, 44100, 32000, 24000, 16000, 8000]，单位是Hz。
+      */
+    AudioSampleRate: number;
+    /**
+      * 混流-输出流音频码率。取值范围[8,500]，单位为kbps。
+      */
+    AudioBitrate: number;
+    /**
+      * 混流-输出流音频声道数，取值范围[1,2]，1表示混流输出音频为单声道，2表示混流输出音频为双声道。
+      */
+    AudioChannels: number;
+    /**
+      * 混流-输出流宽，音视频输出时必填。取值范围[0,1920]，单位为像素值。
+      */
+    VideoWidth?: number;
+    /**
+      * 混流-输出流高，音视频输出时必填。取值范围[0,1080]，单位为像素值。
+      */
+    VideoHeight?: number;
+    /**
+      * 混流-输出流码率，音视频输出时必填。取值范围[1,10000]，单位为kbps。
+      */
+    VideoBitrate?: number;
+    /**
+      * 混流-输出流帧率，音视频输出时必填。取值范围[1,60]，表示混流的输出帧率可选范围为1到60fps。
+      */
+    VideoFramerate?: number;
+    /**
+      * 混流-输出流gop，音视频输出时必填。取值范围[1,5]，单位为秒。
+      */
+    VideoGop?: number;
+    /**
+      * 混流-输出流背景色，取值是十进制整数。常用的颜色有：
+红色：0xff0000，对应的十进制整数是16724736。
+黄色：0xffff00。对应的十进制整数是16776960。
+绿色：0x33cc00。对应的十进制整数是3394560。
+蓝色：0x0066ff。对应的十进制整数是26367。
+黑色：0x000000。对应的十进制整数是0。
+白色：0xFFFFFF。对应的十进制整数是16777215。
+灰色：0x999999。对应的十进制整数是10066329。
+      */
+    BackgroundColor?: number;
+    /**
+      * 混流-输出流背景图片，取值为实时音视频控制台上传的图片ID。
+      */
+    BackgroundImageId?: number;
+    /**
+      * 混流-输出流音频编码类型，取值范围[0,1, 2]，0为LC-AAC，1为HE-AAC，2为HE-AACv2。默认值为0。当音频编码设置为HE-AACv2时，只支持输出流音频声道数为双声道。HE-AAC和HE-AACv2支持的输出流音频采样率范围为[48000, 44100, 32000, 24000, 16000]
+      */
+    AudioCodec?: number;
+    /**
+      * 混流-输出流背景图片URL地址，支持png、jpg、jpeg、bmp格式，暂不支持透明通道。URL链接长度限制为512字节。BackgroundImageUrl和BackgroundImageId参数都填时，以BackgroundImageUrl为准。图片大小限制不超过2MB。
+      */
+    BackgroundImageUrl?: string;
+}
+/**
  * DescribeAbnormalEvent请求参数结构体
  */
 export interface DescribeAbnormalEventRequest {
@@ -38,30 +111,23 @@ export interface DescribeAbnormalEventRequest {
     RoomId?: string;
 }
 /**
- * 查询旁路转码计费时长。
-查询时间小于等于1天时，返回每5分钟粒度的数据；查询时间大于1天时，返回按天汇总的数据。
+ * DescribeScaleInfo请求参数结构体
  */
-export interface SdkAppIdTrtcMcuTranscodeTimeUsage {
+export interface DescribeScaleInfoRequest {
     /**
-      * 本组数据对应的时间点，格式如：2020-09-07或2020-09-07 00:05:05。
+      * 用户SdkAppId（如：1400xxxxxx）
       */
-    TimeKey: string;
+    SdkAppId: number;
     /**
-      * 语音时长，单位：秒。
+      * 查询开始时间，本地unix时间戳，单位为秒（如：1590065777）
+注意：支持查询14天内的数据。
       */
-    AudioTime: number;
+    StartTime: number;
     /**
-      * 视频时长-标清SD，单位：秒。
+      * 查询结束时间，本地unix时间戳，单位为秒（如：1590065877），建议与StartTime间隔时间超过24小时。
+注意：按天统计，结束时间小于前一天，否则查询数据为空（如：需查询20号数据，结束时间需小于20号0点）。
       */
-    VideoTimeSd: number;
-    /**
-      * 视频时长-高清HD，单位：秒。
-      */
-    VideoTimeHd: number;
-    /**
-      * 视频时长-全高清FHD，单位：秒。
-      */
-    VideoTimeFhd: number;
+    EndTime: number;
 }
 /**
  * ModifyPicture返回参数结构体
@@ -147,17 +213,22 @@ export interface LayoutParams {
     WaterMarkParams?: WaterMarkParams;
 }
 /**
- * 返回的质量数据，时间:值
+ * DescribeScaleInfo返回参数结构体
  */
-export interface TimeValue {
+export interface DescribeScaleInfoResponse {
     /**
-      * 时间，unix时间戳（1590065877s)
+      * 返回的数据条数
       */
-    Time: number;
+    Total: number;
     /**
-      * 当前时间返回参数取值，如（bigvCapFps在1590065877取值为0，则Value：0 ）
+      * 返回的数据
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Value: number;
+    ScaleList: Array<ScaleInfomation>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * CreatePicture请求参数结构体
@@ -211,13 +282,30 @@ export interface DescribeTrtcMcuTranscodeTimeRequest {
     SdkAppId?: number;
 }
 /**
- * StopMCUMixTranscode返回参数结构体
+ * 查询旁路转码计费时长。
+查询时间小于等于1天时，返回每5分钟粒度的数据；查询时间大于1天时，返回按天汇总的数据。
  */
-export interface StopMCUMixTranscodeResponse {
+export interface SdkAppIdTrtcMcuTranscodeTimeUsage {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 本组数据对应的时间点，格式如：2020-09-07或2020-09-07 00:05:05。
       */
-    RequestId?: string;
+    TimeKey: string;
+    /**
+      * 语音时长，单位：秒。
+      */
+    AudioTime: number;
+    /**
+      * 视频时长-标清SD，单位：秒。
+      */
+    VideoTimeSd: number;
+    /**
+      * 视频时长-高清HD，单位：秒。
+      */
+    VideoTimeHd: number;
+    /**
+      * 视频时长-全高清FHD，单位：秒。
+      */
+    VideoTimeFhd: number;
 }
 /**
  * RemoveUserByStrRoomId请求参数结构体
@@ -446,64 +534,17 @@ export interface SdkAppIdNewTrtcTimeUsage {
     AudienceTrtcTimeUsages: Array<TrtcTimeNewUsage>;
 }
 /**
- * MCU混流输出流编码参数
+ * DescribeTrtcMcuTranscodeTime返回参数结构体
  */
-export interface EncodeParams {
+export interface DescribeTrtcMcuTranscodeTimeResponse {
     /**
-      * 混流-输出流音频采样率。取值为[48000, 44100, 32000, 24000, 16000, 8000]，单位是Hz。
+      * 应用的用量信息数组。
       */
-    AudioSampleRate: number;
+    Usages: Array<OneSdkAppIdTranscodeTimeUsagesInfo>;
     /**
-      * 混流-输出流音频码率。取值范围[8,500]，单位为kbps。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    AudioBitrate: number;
-    /**
-      * 混流-输出流音频声道数，取值范围[1,2]，1表示混流输出音频为单声道，2表示混流输出音频为双声道。
-      */
-    AudioChannels: number;
-    /**
-      * 混流-输出流宽，音视频输出时必填。取值范围[0,1920]，单位为像素值。
-      */
-    VideoWidth?: number;
-    /**
-      * 混流-输出流高，音视频输出时必填。取值范围[0,1080]，单位为像素值。
-      */
-    VideoHeight?: number;
-    /**
-      * 混流-输出流码率，音视频输出时必填。取值范围[1,10000]，单位为kbps。
-      */
-    VideoBitrate?: number;
-    /**
-      * 混流-输出流帧率，音视频输出时必填。取值范围[1,60]，表示混流的输出帧率可选范围为1到60fps。
-      */
-    VideoFramerate?: number;
-    /**
-      * 混流-输出流gop，音视频输出时必填。取值范围[1,5]，单位为秒。
-      */
-    VideoGop?: number;
-    /**
-      * 混流-输出流背景色，取值是十进制整数。常用的颜色有：
-红色：0xff0000，对应的十进制整数是16724736。
-黄色：0xffff00。对应的十进制整数是16776960。
-绿色：0x33cc00。对应的十进制整数是3394560。
-蓝色：0x0066ff。对应的十进制整数是26367。
-黑色：0x000000。对应的十进制整数是0。
-白色：0xFFFFFF。对应的十进制整数是16777215。
-灰色：0x999999。对应的十进制整数是10066329。
-      */
-    BackgroundColor?: number;
-    /**
-      * 混流-输出流背景图片，取值为实时音视频控制台上传的图片ID。
-      */
-    BackgroundImageId?: number;
-    /**
-      * 混流-输出流音频编码类型，取值范围[0,1, 2]，0为LC-AAC，1为HE-AAC，2为HE-AACv2。默认值为0。当音频编码设置为HE-AACv2时，只支持输出流音频声道数为双声道。HE-AAC和HE-AACv2支持的输出流音频采样率范围为[48000, 44100, 32000, 24000, 16000]
-      */
-    AudioCodec?: number;
-    /**
-      * 混流-输出流背景图片URL地址，支持png、jpg、jpeg、bmp格式，暂不支持透明通道。URL链接长度限制为512字节。BackgroundImageUrl和BackgroundImageId参数都填时，以BackgroundImageUrl为准。图片大小限制不超过2MB。
-      */
-    BackgroundImageUrl?: string;
+    RequestId?: string;
 }
 /**
  * RemoveUserByStrRoomId返回参数结构体
@@ -557,41 +598,58 @@ export interface StopMCUMixTranscodeRequest {
     RoomId: number;
 }
 /**
- * 用户信息，包括用户进房时间，退房时间等
+ * DescribeCallDetailInfo返回参数结构体
  */
-export interface UserInformation {
+export interface DescribeCallDetailInfoResponse {
     /**
-      * 房间号
+      * 返回的用户总条数
       */
-    RoomStr: string;
+    Total: number;
     /**
-      * 用户Id
+      * 用户信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UserList: Array<UserInformation>;
+    /**
+      * 质量数据
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Data: Array<QualityData>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeUserEvent请求参数结构体
+ */
+export interface DescribeUserEventRequest {
+    /**
+      * 通话 ID（唯一标识一次通话）： SdkAppId_RoomId（房间号）_ CreateTime（房间创建时间，unix时间戳，单位为s）例：1400xxxxxx_218695_1590065777。通过 DescribeRoomInfo（查询历史房间列表）接口获取（[查询历史房间列表](https://cloud.tencent.com/document/product/647/44050)）。
+      */
+    CommId: string;
+    /**
+      * 查询开始时间，本地unix时间戳，单位为秒（如：1590065777）
+注意：支持查询14天内的数据
+      */
+    StartTime: number;
+    /**
+      * 查询结束时间，本地unix时间戳，单位为秒（如：1590065877）
+注意：查询时间大于房间结束时间，以房间结束时间为准。
+      */
+    EndTime: number;
+    /**
+      * 用户UserId
       */
     UserId: string;
     /**
-      * 用户进房时间
+      * 房间号（如：223）
       */
-    JoinTs: number;
+    RoomId: string;
     /**
-      * 用户退房时间，用户没有退房则返回当前时间
+      * 用户SdkAppId（如：1400xxxxxx）
       */
-    LeaveTs: number;
-    /**
-      * 终端类型
-      */
-    DeviceType: string;
-    /**
-      * Sdk版本号
-      */
-    SdkVersion: string;
-    /**
-      * 客户端IP地址
-      */
-    ClientIp: string;
-    /**
-      * 判断用户是否已经离开房间
-      */
-    Finished: boolean;
+    SdkAppId: number;
 }
 /**
  * DescribeHistoryScale请求参数结构体
@@ -730,25 +788,37 @@ export interface RemoveUserRequest {
     UserIds: Array<string>;
 }
 /**
- * MCU混流的输出参数
+ * DescribeRoomInfo请求参数结构体
  */
-export interface OutputParams {
+export interface DescribeRoomInfoRequest {
     /**
-      * 直播流 ID，由用户自定义设置，该流 ID 不能与用户旁路的流 ID 相同。
+      * 用户SdkAppId（如：1400xxxxxx）
       */
-    StreamId: string;
+    SdkAppId: number;
     /**
-      * 取值范围[0,1]， 填0：直播流为音视频(默认); 填1：直播流为纯音频
+      * 查询开始时间，本地unix时间戳，单位为秒（如：1590065777）
+注意：支持查询14天内的数据
       */
-    PureAudioStream?: number;
+    StartTime: number;
     /**
-      * 自定义录制文件名称前缀。请先在实时音视频控制台开通录制功能，https://cloud.tencent.com/document/product/647/50768
+      * 查询结束时间，本地unix时间戳，单位为秒（如：1590065877）
+注意：与StartTime间隔时间不超过24小时。
       */
-    RecordId?: string;
+    EndTime: number;
     /**
-      * 取值范围[0,1]，填0无实际含义; 填1：指定录制文件格式为mp3。此参数不建议使用，建议在实时音视频控制台配置纯音频录制模板。
+      * 房间号（如：223)
       */
-    RecordAudioOnly?: number;
+    RoomId?: string;
+    /**
+      * 当前页数，默认为0，
+注意：PageNumber和PageSize 其中一个不填均默认返回10条数据。
+      */
+    PageNumber?: number;
+    /**
+      * 每页个数，默认为10，
+范围：[1，100]
+      */
+    PageSize?: number;
 }
 /**
  * DescribeExternalTrtcMeasure请求参数结构体
@@ -797,6 +867,19 @@ export interface ModifyPictureRequest {
     YPosition?: number;
 }
 /**
+ * 返回的质量数据，时间:值
+ */
+export interface TimeValue {
+    /**
+      * 时间，unix时间戳（1590065877s)
+      */
+    Time: number;
+    /**
+      * 当前时间返回参数取值，如（bigvCapFps在1590065877取值为0，则Value：0 ）
+      */
+    Value: number;
+}
+/**
  * StopMCUMixTranscodeByStrRoomId请求参数结构体
  */
 export interface StopMCUMixTranscodeByStrRoomIdRequest {
@@ -808,6 +891,27 @@ export interface StopMCUMixTranscodeByStrRoomIdRequest {
       * 字符串房间号。
       */
     StrRoomId: string;
+}
+/**
+ * MCU混流的输出参数
+ */
+export interface OutputParams {
+    /**
+      * 直播流 ID，由用户自定义设置，该流 ID 不能与用户旁路的流 ID 相同。
+      */
+    StreamId: string;
+    /**
+      * 取值范围[0,1]， 填0：直播流为音视频(默认); 填1：直播流为纯音频
+      */
+    PureAudioStream?: number;
+    /**
+      * 自定义录制文件名称前缀。请先在实时音视频控制台开通录制功能，https://cloud.tencent.com/document/product/647/50768
+      */
+    RecordId?: string;
+    /**
+      * 取值范围[0,1]，填0无实际含义; 填1：指定录制文件格式为mp3。此参数不建议使用，建议在实时音视频控制台配置纯音频录制模板。
+      */
+    RecordAudioOnly?: number;
 }
 /**
  * Es返回的质量数据
@@ -877,6 +981,23 @@ export interface EventList {
     PeerId: string;
 }
 /**
+ * DescribeRoomInfo返回参数结构体
+ */
+export interface DescribeRoomInfoResponse {
+    /**
+      * 返回当页数据总数
+      */
+    Total: number;
+    /**
+      * 房间信息列表
+      */
+    RoomList: Array<RoomState>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DismissRoom请求参数结构体
  */
 export interface DismissRoomRequest {
@@ -916,6 +1037,43 @@ export interface DismissRoomByStrRoomIdRequest {
     RoomId: string;
 }
 /**
+ * 用户信息，包括用户进房时间，退房时间等
+ */
+export interface UserInformation {
+    /**
+      * 房间号
+      */
+    RoomStr: string;
+    /**
+      * 用户Id
+      */
+    UserId: string;
+    /**
+      * 用户进房时间
+      */
+    JoinTs: number;
+    /**
+      * 用户退房时间，用户没有退房则返回当前时间
+      */
+    LeaveTs: number;
+    /**
+      * 终端类型
+      */
+    DeviceType: string;
+    /**
+      * Sdk版本号
+      */
+    SdkVersion: string;
+    /**
+      * 客户端IP地址
+      */
+    ClientIp: string;
+    /**
+      * 判断用户是否已经离开房间
+      */
+    Finished: boolean;
+}
+/**
  * DescribeExternalTrtcMeasure返回参数结构体
  */
 export interface DescribeExternalTrtcMeasureResponse {
@@ -937,34 +1095,73 @@ export interface DescribeExternalTrtcMeasureResponse {
     RequestId?: string;
 }
 /**
- * 旁路转码时长的查询结果
+ * DescribeUserEvent返回参数结构体
  */
-export interface OneSdkAppIdTranscodeTimeUsagesInfo {
+export interface DescribeUserEventResponse {
     /**
-      * 旁路转码时长查询结果数组
+      * 返回的事件列表，若没有数据，会返回空数组。
       */
-    SdkAppIdTranscodeTimeUsages: Array<SdkAppIdTrtcMcuTranscodeTimeUsage>;
-    /**
-      * 查询记录数量
-      */
-    TotalNum: number;
-    /**
-      * 所查询的应用ID，可能值为:1-应用的应用ID，2-total，显示为total则表示查询的是所有应用的用量合计值。
-      */
-    SdkAppId: string;
-}
-/**
- * DescribeTrtcMcuTranscodeTime返回参数结构体
- */
-export interface DescribeTrtcMcuTranscodeTimeResponse {
-    /**
-      * 应用的用量信息数组。
-      */
-    Usages: Array<OneSdkAppIdTranscodeTimeUsagesInfo>;
+    Data: Array<EventList>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DescribeCallDetailInfo请求参数结构体
+ */
+export interface DescribeCallDetailInfoRequest {
+    /**
+      * 通话 ID（唯一标识一次通话）： SdkAppId_RoomId（房间号）_ CreateTime（房间创建时间，unix时间戳，单位为s）例：1400xxxxxx_218695_1590065777。通过 DescribeRoomInfo（查询历史房间列表）接口获取（[查询历史房间列表](https://cloud.tencent.com/document/product/647/44050)）。
+      */
+    CommId: string;
+    /**
+      * 查询开始时间，本地unix时间戳，单位为秒（如：1590065777），
+注意：支持查询14天内的数据。
+      */
+    StartTime: number;
+    /**
+      * 查询结束时间，本地unix时间戳，单位为秒（如：1590065877）
+注意：DataType 不为null ，与StartTime间隔时间不超过1小时；DataType 为null，与StartTime间隔时间不超过4小时。
+      */
+    EndTime: number;
+    /**
+      * 用户SdkAppId（如：1400xxxxxx）。
+      */
+    SdkAppId: number;
+    /**
+      * 需查询的用户数组，默认不填返回6个用户。
+      */
+    UserIds?: Array<string>;
+    /**
+      * 需查询的指标，不填则只返回用户列表，填all则返回所有指标。
+appCpu：APP CPU使用率；
+sysCpu：系统 CPU使用率；
+aBit：上/下行音频码率；单位：bps
+aBlock：音频卡顿时长；单位：ms
+bigvBit：上/下行视频码率；单位：bps
+bigvCapFps：视频采集帧率；
+bigvEncFps：视频发送帧率；
+bigvDecFps：渲染帧率；
+bigvBlock：视频卡顿时长；单位：ms
+aLoss：上/下行音频丢包率；
+bigvLoss：上/下行视频丢包率；
+bigvWidth：上/下行分辨率宽；
+bigvHeight：上/下行分辨率高
+      */
+    DataType?: Array<string>;
+    /**
+      * 当前页数，默认为0，
+注意：PageNumber和PageSize 其中一个不填均默认返回6条数据。
+      */
+    PageNumber?: number;
+    /**
+      * 每页个数，默认为6，
+范围：[1，100]
+注意：DataType不为null，UserIds长度不能超过6，PageSize最大值不超过6；
+DataType 为null，UserIds长度不超过100，PageSize最大不超过100。
+      */
+    PageSize?: number;
 }
 /**
  * DescribePicture请求参数结构体
@@ -988,17 +1185,44 @@ export interface DescribePictureRequest {
     PageNo?: number;
 }
 /**
- * SdkAppId级别录制时长数据。
+ * DescribeUnusualEvent请求参数结构体
  */
-export interface SdkAppIdRecordUsage {
+export interface DescribeUnusualEventRequest {
     /**
-      * SdkAppId的值。
+      * 用户SdkAppId（如：1400xxxxxx）
       */
-    SdkAppId: string;
+    SdkAppId: number;
     /**
-      * 统计的时间点数据。
+      * 查询开始时间，本地unix时间戳，单位为秒（如：1590065777）
+注意：支持查询14天内的数据
       */
-    Usages: Array<RecordUsage>;
+    StartTime: number;
+    /**
+      * 查询结束时间，本地unix时间戳，单位为秒（如：1590065877）注意：与StartTime间隔时间不超过1小时。
+      */
+    EndTime: number;
+    /**
+      * 房间号，查询房间内任意20条以内异常体验事件
+      */
+    RoomId?: string;
+}
+/**
+ * DescribeUserInfo返回参数结构体
+ */
+export interface DescribeUserInfoResponse {
+    /**
+      * 返回的用户总条数
+      */
+    Total: number;
+    /**
+      * 用户信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UserList: Array<UserInformation>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 画中画模板中有效，代表小画面的布局参数
@@ -1084,6 +1308,15 @@ export interface PresetLayoutConfig {
     PlaceImageId?: number;
 }
 /**
+ * StopMCUMixTranscode返回参数结构体
+ */
+export interface StopMCUMixTranscodeResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeCallDetail返回参数结构体
  */
 export interface DescribeCallDetailResponse {
@@ -1105,6 +1338,23 @@ export interface DescribeCallDetailResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 旁路转码时长的查询结果
+ */
+export interface OneSdkAppIdTranscodeTimeUsagesInfo {
+    /**
+      * 旁路转码时长查询结果数组
+      */
+    SdkAppIdTranscodeTimeUsages: Array<SdkAppIdTrtcMcuTranscodeTimeUsage>;
+    /**
+      * 查询记录数量
+      */
+    TotalNum: number;
+    /**
+      * 所查询的应用ID，可能值为:1-应用的应用ID，2-total，显示为total则表示查询的是所有应用的用量合计值。
+      */
+    SdkAppId: string;
 }
 /**
  * DescribePicture返回参数结构体
@@ -1168,6 +1418,44 @@ export interface DescribeRoomInformationRequest {
 范围：[1，100]
       */
     PageSize?: string;
+}
+/**
+ * DescribeUserInfo请求参数结构体
+ */
+export interface DescribeUserInfoRequest {
+    /**
+      * 通话 ID（唯一标识一次通话）： SdkAppId_RoomId（房间号）_ CreateTime（房间创建时间，unix时间戳，单位为s）例：1400xxxxxx_218695_1590065777。通过 DescribeRoomInfo（查询历史房间列表）接口获取（[查询历史房间列表](https://cloud.tencent.com/document/product/647/44050)）。
+      */
+    CommId: string;
+    /**
+      * 查询开始时间，本地unix时间戳，单位为秒（如：1590065777）
+注意：支持查询14天内的数据
+      */
+    StartTime: number;
+    /**
+      * 查询结束时间，本地unix时间戳，单位为秒（如：1590065877）
+注意：与StartTime间隔时间不超过4小时。
+      */
+    EndTime: number;
+    /**
+      * 用户SdkAppId（如：1400xxxxxx）
+      */
+    SdkAppId: number;
+    /**
+      * 需查询的用户数组，不填默认返回6个用户
+范围：[1，100]。
+      */
+    UserIds?: Array<string>;
+    /**
+      * 当前页数，默认为0，
+注意：PageNumber和PageSize 其中一个不填均默认返回6条数据。
+      */
+    PageNumber?: number;
+    /**
+      * 每页个数，默认为6，
+范围：[1，100]。
+      */
+    PageSize?: number;
 }
 /**
  * DescribeDetailEvent请求参数结构体
@@ -1336,6 +1624,24 @@ export interface DescribeHistoryScaleResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ScaleList: Array<ScaleInfomation>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeUnusualEvent返回参数结构体
+ */
+export interface DescribeUnusualEventResponse {
+    /**
+      * 返回的数据总条数
+范围：[0，20]
+      */
+    Total: number;
+    /**
+      * 异常体验列表
+      */
+    AbnormalExperienceList: Array<AbnormalExperience>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

@@ -42,10 +42,11 @@ import {
   GetAttackDownloadRecordsRequest,
   UpsertIpAccessControlRequest,
   DeleteDownloadRecordRequest,
-  DeleteAccessExportResponse,
+  AccessRuleInfo,
   DescribeAccessExportsRequest,
   ModifyWafAutoDenyStatusRequest,
   ModifyAccessPeriodResponse,
+  DeleteAccessExportResponse,
   QPSPackageNew,
   FiltersItemNew,
   DescribeAutoDenyIPResponse,
@@ -59,7 +60,6 @@ import {
   DeleteIpAccessControlRequest,
   DeleteDomainWhiteRulesResponse,
   DownloadAttackRecordInfo,
-  CreateAttackDownloadTaskRequest,
   DescribeWafAutoDenyStatusResponse,
   DeleteDomainWhiteRulesRequest,
   DomainPackageNew,
@@ -69,7 +69,6 @@ import {
   AddSpartaProtectionResponse,
   IpAccessControlData,
   PortItem,
-  CreateAttackDownloadTaskResponse,
   WafThreatenIntelligenceDetails,
   DescribeDomainWhiteRulesRequest,
   ModifyCustomRuleStatusRequest,
@@ -95,7 +94,6 @@ import {
   Strategy,
   AccessFullTextInfo,
   DescribeIpHitItemsRequest,
-  AccessRuleInfo,
   GetAttackDownloadRecordsResponse,
   DeleteAccessExportRequest,
   DescribeUserClbWafRegionsRequest,
@@ -248,16 +246,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeFlowTrendResponse) => void
   ): Promise<DescribeFlowTrendResponse> {
     return this.request("DescribeFlowTrend", req, cb)
-  }
-
-  /**
-   * 创建攻击日志下载任务
-   */
-  async CreateAttackDownloadTask(
-    req: CreateAttackDownloadTaskRequest,
-    cb?: (error: string, rep: CreateAttackDownloadTaskResponse) => void
-  ): Promise<CreateAttackDownloadTaskResponse> {
-    return this.request("CreateAttackDownloadTask", req, cb)
   }
 
   /**

@@ -4090,6 +4090,11 @@ global: 全球节点
    * 是否以IP段的格式返回。
    */
   Segment?: boolean
+
+  /**
+   * 是否查询节点 IPV6 信息。
+   */
+  ShowIpv6?: boolean
 }
 
 /**
@@ -9791,6 +9796,12 @@ online：上线状态，正常调度服务中
 offline：下线状态
       */
   Status: string
+
+  /**
+      * 节点 IPV6
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Ipv6: string
 }
 
 /**
