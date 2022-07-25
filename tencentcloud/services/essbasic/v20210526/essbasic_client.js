@@ -129,8 +129,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SyncProxyOrganization", req, cb);
     }
     /**
-     * 根据签署流程信息批量获取资源下载链接，可直接下载
-限制：只能下载合作企业授权过的、单方签署的签署流程文件（若合作企业与渠道是同一企业，可以下载所有签署流程文件）
+     * 根据签署流程信息批量获取资源下载链接，需合作企业先进行授权
      */
     async DescribeResourceUrlsByFlows(req, cb) {
         return this.request("DescribeResourceUrlsByFlows", req, cb);

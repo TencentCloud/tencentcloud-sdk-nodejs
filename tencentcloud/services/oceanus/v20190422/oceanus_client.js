@@ -35,7 +35,6 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 单条和批量复制作业
-https://iwiki.woa.com/pages/viewpage.action?pageId=1288112774
      */
     async CopyJobs(req, cb) {
         return this.request("CopyJobs", req, cb);

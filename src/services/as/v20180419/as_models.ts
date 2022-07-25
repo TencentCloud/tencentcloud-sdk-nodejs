@@ -524,9 +524,15 @@ export interface LaunchConfiguration {
   InstanceTypes: Array<string>
 
   /**
-   * 标签列表。
+   * 实例标签列表。扩容出来的实例会自动带上标签，最多支持10个标签。
    */
   InstanceTags: Array<InstanceTag>
+
+  /**
+      * 标签列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Tags: Array<Tag>
 
   /**
    * 版本号。
@@ -1297,6 +1303,11 @@ export interface CreateLaunchConfigurationRequest {
   InstanceTypes?: Array<string>
 
   /**
+   * CAM角色名称。可通过DescribeRoleList接口返回值中的roleName获取。
+   */
+  CamRoleName?: string
+
+  /**
       * 实例类型校验策略，取值包括 ALL 和 ANY，默认取值为ANY。
 <br><li> ALL，所有实例类型（InstanceType）都可用则通过校验，否则校验报错。
 <br><li> ANY，存在任何一个实例类型（InstanceType）可用则通过校验，否则校验报错。
@@ -1312,9 +1323,9 @@ export interface CreateLaunchConfigurationRequest {
   InstanceTags?: Array<InstanceTag>
 
   /**
-   * CAM角色名称。可通过DescribeRoleList接口返回值中的roleName获取。
+   * 标签描述列表。通过指定该参数可以支持绑定标签到启动配置。每个启动配置最多支持30个标签。
    */
-  CamRoleName?: string
+  Tags?: Array<Tag>
 
   /**
    * 云服务器主机名（HostName）的相关设置。
@@ -1815,6 +1826,47 @@ export interface DeleteLaunchConfigurationRequest {
    * 需要删除的启动配置ID。
    */
   LaunchConfigurationId: string
+}
+
+/**
+ * 执行命令结果。
+ */
+export interface InvocationResult {
+  /**
+      * 实例ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceId: string
+
+  /**
+      * 执行活动ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InvocationId: string
+
+  /**
+      * 执行任务ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InvocationTaskId: string
+
+  /**
+      * 命令ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CommandId: string
+
+  /**
+      * 执行任务状态。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TaskStatus: string
+
+  /**
+      * 执行异常信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ErrorMessage: string
 }
 
 /**
@@ -3021,6 +3073,10 @@ export interface DescribeLaunchConfigurationsRequest {
 <li> launch-configuration-id - String - 是否必填：否 -（过滤条件）按照启动配置ID过滤。</li>
 <li> launch-configuration-name - String - 是否必填：否 -（过滤条件）按照启动配置名称过滤。</li>
 <li> vague-launch-configuration-name - String - 是否必填：否 -（过滤条件）按照启动配置名称模糊搜索。</li>
+<li> tag-key - String - 是否必填：否 -（过滤条件）按照标签键进行过滤。</li>
+<li> tag-value - String - 是否必填：否 -（过滤条件）按照标签值进行过滤。</li>
+<li> tag:tag-key - String - 是否必填：否 -（过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。使用请参考示例3
+</li>
 每次请求的`Filters`的上限为10，`Filter.Values`的上限为5。参数不支持同时指定`LaunchConfigurationIds`和`Filters`。
       */
   Filters?: Array<Filter>
@@ -3499,6 +3555,7 @@ export interface Activity {
 <li>SCALE_OUT：扩容活动<li>SCALE_IN：缩容活动<li>ATTACH_INSTANCES：添加实例<li>REMOVE_INSTANCES：销毁实例<li>DETACH_INSTANCES：移出实例<li>TERMINATE_INSTANCES_UNEXPECTEDLY：实例在CVM控制台被销毁<li>REPLACE_UNHEALTHY_INSTANCE：替换不健康实例
 <li>START_INSTANCES：开启实例
 <li>STOP_INSTANCES：关闭实例
+<li>INVOKE_COMMAND：执行命令
       */
   ActivityType: string
 
@@ -3562,6 +3619,11 @@ export interface Activity {
    * 伸缩活动状态详细描述。
    */
   DetailedStatusMessageSet: Array<DetailedStatusMessage>
+
+  /**
+   * 执行命令结果。
+   */
+  InvocationResultSet: Array<InvocationResult>
 }
 
 /**

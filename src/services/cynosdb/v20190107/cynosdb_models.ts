@@ -41,6 +41,26 @@ export interface DescribeRollbackTimeRangeRequest {
 }
 
 /**
+ * InquirePriceRenew请求参数结构体
+ */
+export interface InquirePriceRenewRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+
+  /**
+   * 购买时长,与TimeUnit组合才能生效
+   */
+  TimeSpan: number
+
+  /**
+   * 购买时长单位, 与TimeSpan组合生效，可选:日:d,月:m
+   */
+  TimeUnit: string
+}
+
+/**
  * 任务信息
  */
 export interface ObjectTask {
@@ -417,6 +437,11 @@ export interface ModifyInstanceNameResponse {
    */
   RequestId?: string
 }
+
+/**
+ * DescribeParamTemplates请求参数结构体
+ */
+export type DescribeParamTemplatesRequest = null
 
 /**
  * PauseServerless请求参数结构体
@@ -1782,6 +1807,26 @@ export interface ModifyDBInstanceSecurityGroupsRequest {
 }
 
 /**
+ * DescribeParamTemplates返回参数结构体
+ */
+export interface DescribeParamTemplatesResponse {
+  /**
+   * 参数模板数量
+   */
+  TotalCount: number
+
+  /**
+   * 参数模板信息
+   */
+  Items: Array<ParamTemplateListInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * AddInstances返回参数结构体
  */
 export interface AddInstancesResponse {
@@ -1828,6 +1873,31 @@ export interface Addr {
    * 端口
    */
   Port: number
+}
+
+/**
+ * 参数模板信息
+ */
+export interface ParamTemplateListInfo {
+  /**
+   * 参数模板ID
+   */
+  Id: number
+
+  /**
+   * 参数模板名称
+   */
+  TemplateName: string
+
+  /**
+   * 参数模板描述
+   */
+  TemplateDescription: string
+
+  /**
+   * 引擎版本
+   */
+  EngineVersion: string
 }
 
 /**
@@ -2700,18 +2770,38 @@ export interface DescribeBinlogSaveDaysRequest {
 }
 
 /**
- * DescribeClusterDetail返回参数结构体
+ * ModifyBackupConfig请求参数结构体
  */
-export interface DescribeClusterDetailResponse {
+export interface ModifyBackupConfigRequest {
   /**
-   * 集群详细信息
+   * 集群ID
    */
-  Detail: CynosdbClusterDetail
+  ClusterId: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 表示全备开始时间，[0-24*3600]， 如0:00, 1:00, 2:00 分别为 0，3600， 7200
    */
-  RequestId?: string
+  BackupTimeBeg: number
+
+  /**
+   * 表示全备结束时间，[0-24*3600]， 如0:00, 1:00, 2:00 分别为 0，3600， 7200
+   */
+  BackupTimeEnd: number
+
+  /**
+   * 表示保留备份时长, 单位秒，超过该时间将被清理, 七天表示为3600*24*7=604800，最大为158112000
+   */
+  ReserveDuration: number
+
+  /**
+   * 该参数目前不支持修改，无需填写。备份频率，长度为7的数组，分别对应周一到周日的备份方式，full-全量备份，increment-增量备份
+   */
+  BackupFreq?: Array<string>
+
+  /**
+   * 该参数目前不支持修改，无需填写。备份方式，logic-逻辑备份，snapshot-快照备份
+   */
+  BackupType?: string
 }
 
 /**
@@ -3537,38 +3627,18 @@ export interface PolicyRule {
 }
 
 /**
- * ModifyBackupConfig请求参数结构体
+ * DescribeClusterDetail返回参数结构体
  */
-export interface ModifyBackupConfigRequest {
+export interface DescribeClusterDetailResponse {
   /**
-   * 集群ID
+   * 集群详细信息
    */
-  ClusterId: string
+  Detail: CynosdbClusterDetail
 
   /**
-   * 表示全备开始时间，[0-24*3600]， 如0:00, 1:00, 2:00 分别为 0，3600， 7200
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  BackupTimeBeg: number
-
-  /**
-   * 表示全备结束时间，[0-24*3600]， 如0:00, 1:00, 2:00 分别为 0，3600， 7200
-   */
-  BackupTimeEnd: number
-
-  /**
-   * 表示保留备份时长, 单位秒，超过该时间将被清理, 七天表示为3600*24*7=604800，最大为158112000
-   */
-  ReserveDuration: number
-
-  /**
-   * 该参数目前不支持修改，无需填写。备份频率，长度为7的数组，分别对应周一到周日的备份方式，full-全量备份，increment-增量备份
-   */
-  BackupFreq?: Array<string>
-
-  /**
-   * 该参数目前不支持修改，无需填写。备份方式，logic-逻辑备份，snapshot-快照备份
-   */
-  BackupType?: string
+  RequestId?: string
 }
 
 /**
@@ -3675,6 +3745,41 @@ export interface InputAccount {
  * DisassociateSecurityGroups返回参数结构体
  */
 export interface DisassociateSecurityGroupsResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * InquirePriceRenew返回参数结构体
+ */
+export interface InquirePriceRenewResponse {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+
+  /**
+   * 实例ID列表
+   */
+  InstanceIds: Array<string>
+
+  /**
+   * 对应的询价结果数组
+   */
+  Prices: Array<TradePrice>
+
+  /**
+   * 续费计算节点的总价格
+   */
+  InstanceRealTotalPrice: number
+
+  /**
+   * 续费存储节点的总价格
+   */
+  StorageRealTotalPrice: number
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

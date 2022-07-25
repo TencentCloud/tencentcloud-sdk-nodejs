@@ -20,6 +20,7 @@ import { ClientConfig } from "../../../common/interface"
 import {
   ModifyClusterNameRequest,
   DescribeRollbackTimeRangeRequest,
+  InquirePriceRenewRequest,
   ObjectTask,
   DescribeBackupConfigRequest,
   DescribeAccountsRequest,
@@ -40,6 +41,7 @@ import {
   ModifyClusterNameResponse,
   IsolateInstanceResponse,
   ModifyInstanceNameResponse,
+  DescribeParamTemplatesRequest,
   PauseServerlessRequest,
   RevokeAccountPrivilegesResponse,
   CreateClustersResponse,
@@ -83,8 +85,10 @@ import {
   QueryFilter,
   DescribeBackupConfigResponse,
   ModifyDBInstanceSecurityGroupsRequest,
+  DescribeParamTemplatesResponse,
   AddInstancesResponse,
   Addr,
+  ParamTemplateListInfo,
   DescribeProjectSecurityGroupsRequest,
   ModifyClusterParamResponse,
   SecurityGroup,
@@ -117,7 +121,7 @@ import {
   DescribeBackupListResponse,
   RollBackClusterResponse,
   DescribeBinlogSaveDaysRequest,
-  DescribeClusterDetailResponse,
+  ModifyBackupConfigRequest,
   ActivateInstanceResponse,
   DescribeRollbackTimeValidityRequest,
   IsolateClusterRequest,
@@ -142,11 +146,12 @@ import {
   OfflineInstanceResponse,
   ParamItem,
   PolicyRule,
-  ModifyBackupConfigRequest,
+  DescribeClusterDetailResponse,
   DescribeInstanceSlowQueriesRequest,
   DescribeBinlogsRequest,
   InputAccount,
   DisassociateSecurityGroupsResponse,
+  InquirePriceRenewResponse,
 } from "./cynosdb_models"
 
 /**
@@ -229,6 +234,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询用户指定产品下的所有参数模板信息
+   */
+  async DescribeParamTemplates(
+    req?: DescribeParamTemplatesRequest,
+    cb?: (error: string, rep: DescribeParamTemplatesResponse) => void
+  ): Promise<DescribeParamTemplatesResponse> {
+    return this.request("DescribeParamTemplates", req, cb)
+  }
+
+  /**
    * 本接口（DescribeClusterInstanceGrps）用于查询实例组
    */
   async DescribeClusterInstanceGrps(
@@ -249,13 +264,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 暂停serverless集群
+   * 此接口（ModifyBackupName）用于修改备份文件备注名。
    */
-  async PauseServerless(
-    req: PauseServerlessRequest,
-    cb?: (error: string, rep: PauseServerlessResponse) => void
-  ): Promise<PauseServerlessResponse> {
-    return this.request("PauseServerless", req, cb)
+  async ModifyBackupName(
+    req: ModifyBackupNameRequest,
+    cb?: (error: string, rep: ModifyBackupNameResponse) => void
+  ): Promise<ModifyBackupNameResponse> {
+    return this.request("ModifyBackupName", req, cb)
   }
 
   /**
@@ -499,13 +514,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 此接口（ModifyBackupName）用于修改备份文件备注名。
+   * 查询续费集群价格
    */
-  async ModifyBackupName(
-    req: ModifyBackupNameRequest,
-    cb?: (error: string, rep: ModifyBackupNameResponse) => void
-  ): Promise<ModifyBackupNameResponse> {
-    return this.request("ModifyBackupName", req, cb)
+  async InquirePriceRenew(
+    req: InquirePriceRenewRequest,
+    cb?: (error: string, rep: InquirePriceRenewResponse) => void
+  ): Promise<InquirePriceRenewResponse> {
+    return this.request("InquirePriceRenew", req, cb)
   }
 
   /**
@@ -536,6 +551,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeResourcesByDealNameResponse) => void
   ): Promise<DescribeResourcesByDealNameResponse> {
     return this.request("DescribeResourcesByDealName", req, cb)
+  }
+
+  /**
+   * 暂停serverless集群
+   */
+  async PauseServerless(
+    req: PauseServerlessRequest,
+    cb?: (error: string, rep: PauseServerlessResponse) => void
+  ): Promise<PauseServerlessResponse> {
+    return this.request("PauseServerless", req, cb)
   }
 
   /**

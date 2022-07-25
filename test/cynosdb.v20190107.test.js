@@ -88,6 +88,16 @@ it("cynosdb.v20190107.DescribeBackupConfig", async function () {
     }
 })
 
+it("cynosdb.v20190107.DescribeParamTemplates", async function () {
+    try {
+       const data = await client.DescribeParamTemplates({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cynosdb.v20190107.DescribeClusterInstanceGrps", async function () {
     try {
        const data = await client.DescribeClusterInstanceGrps({})
@@ -108,9 +118,9 @@ it("cynosdb.v20190107.OfflineCluster", async function () {
     }
 })
 
-it("cynosdb.v20190107.PauseServerless", async function () {
+it("cynosdb.v20190107.ModifyBackupName", async function () {
     try {
-       const data = await client.PauseServerless({})
+       const data = await client.ModifyBackupName({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -358,9 +368,9 @@ it("cynosdb.v20190107.DescribeInstanceSlowQueries", async function () {
     }
 })
 
-it("cynosdb.v20190107.ModifyBackupName", async function () {
+it("cynosdb.v20190107.InquirePriceRenew", async function () {
     try {
-       const data = await client.ModifyBackupName({})
+       const data = await client.InquirePriceRenew({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -391,6 +401,16 @@ it("cynosdb.v20190107.DescribeAccounts", async function () {
 it("cynosdb.v20190107.DescribeResourcesByDealName", async function () {
     try {
        const data = await client.DescribeResourcesByDealName({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.PauseServerless", async function () {
+    try {
+       const data = await client.PauseServerless({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DeleteAclRequest, BatchCreateAclRequest, DeleteUserRequest, DescribeACLRequest, DescribeTopicAttributesRequest, DescribeInstanceAttributesRequest, AuthorizeTokenResponse, CancelAuthorizationTokenRequest, CancelAuthorizationTokenResponse, CreateRouteRequest, DeleteTopicRequest, DescribeInstancesResponse, BatchModifyTopicAttributesResponse, ModifyInstancePreRequest, CreateTokenResponse, DescribeInstancesDetailResponse, CreateConnectResourceRequest, CheckCdcClusterResponse, DescribeACLResponse, DescribeTopicSubscribeGroupResponse, DeleteAclRuleRequest, BatchModifyGroupOffsetsResponse, CreateTokenRequest, DescribeTopicResponse, DescribeCkafkaZoneRequest, CreateConsumerResponse, CreateCdcClusterResponse, DescribeGroupResponse, ModifyPasswordResponse, AuthorizeTokenRequest, CreateConnectResourceResponse, CreateUserResponse, ModifyInstanceAttributesResponse, CreatePartitionResponse, DeleteGroupRequest, DescribeConsumerGroupRequest, DeleteUserResponse, CreateAclRequest, DescribeTopicSyncReplicaResponse, DescribeAppInfoRequest, DeleteRouteResponse, CreateTopicIpWhiteListResponse, ModifyGroupOffsetsResponse, CreateAclResponse, CreateTopicRequest, DeleteAclResponse, DescribeTopicSubscribeGroupRequest, DeleteInstancePreResponse, FetchMessageByOffsetRequest, DescribeRegionRequest, DeleteAclRuleResponse, DescribeGroupInfoRequest, DescribeGroupInfoResponse, ModifyTopicAttributesResponse, DeleteRouteTriggerTimeResponse, DescribeUserResponse, DescribeTopicRequest, CreatePartitionRequest, DescribeAppInfoResponse, DescribeInstanceAttributesResponse, DeleteInstancePreRequest, ModifyPasswordRequest, ModifyInstanceAttributesRequest, DescribeRegionResponse, CreateTopicResponse, DescribeTopicAttributesResponse, DescribeConsumerGroupResponse, DescribeGroupOffsetsRequest, DeleteRouteTriggerTimeRequest, DescribeInstancesRequest, DescribeGroupRequest, BatchCreateAclResponse, ModifyInstancePreResponse, CreateUserRequest, DeleteRouteRequest, CreateCdcClusterRequest, DeleteTopicIpWhiteListResponse, CreateInstancePreResponse, CheckCdcClusterRequest, DescribeInstancesDetailRequest, FetchMessageByOffsetResponse, CreateConsumerRequest, DescribeRouteRequest, SendMessageResponse, DescribeCkafkaZoneResponse, BatchModifyGroupOffsetsRequest, CreateRouteResponse, DescribeRouteResponse, CreateDatahubTaskRequest, DescribeTopicDetailRequest, DescribeGroupOffsetsResponse, SendMessageRequest, ModifyGroupOffsetsRequest, BatchModifyTopicAttributesRequest, DeleteGroupResponse, CreateTopicIpWhiteListRequest, ModifyTopicAttributesRequest, CreateInstancePreRequest, DeleteTopicIpWhiteListRequest, DeleteTopicResponse, CreateDatahubTaskResponse, DescribeUserRequest, DescribeTopicSyncReplicaRequest, DescribeTopicDetailResponse } from "./ckafka_models";
+import { DeleteAclRequest, BatchCreateAclRequest, DescribeDatahubTaskResponse, DeleteUserRequest, CreateConnectResourceResponse, DescribeTopicAttributesRequest, DescribeDatahubGroupOffsetsResponse, AuthorizeTokenResponse, DescribeDatahubTaskRequest, FetchLatestDatahubMessageListResponse, CancelAuthorizationTokenRequest, CancelAuthorizationTokenResponse, CreateRouteRequest, DeleteTopicRequest, DescribeInstancesResponse, BatchModifyTopicAttributesResponse, ModifyDatahubTaskResponse, ModifyInstancePreRequest, CreateTokenResponse, DescribeInstancesDetailResponse, DescribeAppInfoRequest, CheckCdcClusterResponse, DescribeDatahubTasksRequest, DescribeACLResponse, DescribeTopicSubscribeGroupResponse, DeleteAclRuleRequest, DescribeConnectResourcesRequest, ModifyConnectResourceRequest, ModifyInstanceAttributesResponse, BatchModifyGroupOffsetsResponse, CreateTokenRequest, DescribeTopicResponse, DescribeCkafkaZoneRequest, FetchDatahubMessageByOffsetResponse, CreateConsumerResponse, CreateCdcClusterResponse, DescribeGroupResponse, ModifyPasswordResponse, FetchDatahubMessageByOffsetRequest, AuthorizeTokenRequest, DescribeACLRequest, CreateUserResponse, CreatePartitionResponse, DeleteGroupRequest, DescribeConsumerGroupRequest, DeleteUserResponse, DescribeConnectResourceRequest, CreateAclRequest, DescribeTopicSyncReplicaResponse, CreateConnectResourceRequest, DeleteRouteResponse, CreateTopicIpWhiteListResponse, ModifyGroupOffsetsResponse, CreateAclResponse, CreateTopicRequest, DeleteAclResponse, DescribeTopicSubscribeGroupRequest, DeleteInstancePreResponse, DescribeInstanceAttributesRequest, DeleteConnectResourceResponse, DescribeRegionRequest, DeleteAclRuleResponse, DescribeGroupInfoRequest, ModifyTopicAttributesResponse, DeleteRouteTriggerTimeResponse, DescribeUserResponse, DescribeGroupInfoResponse, DescribeTopicRequest, DeleteConnectResourceRequest, CreatePartitionRequest, DescribeAppInfoResponse, DescribeInstanceAttributesResponse, DeleteInstancePreRequest, ModifyPasswordRequest, ModifyInstanceAttributesRequest, DeleteDatahubTopicRequest, DescribeRegionResponse, CreateTopicResponse, FetchLatestDatahubMessageListRequest, DescribeTopicAttributesResponse, DeleteDatahubTopicResponse, DescribeConsumerGroupResponse, DeleteDatahubTaskRequest, DescribeGroupOffsetsRequest, DeleteRouteTriggerTimeRequest, DeleteDatahubTaskResponse, DescribeInstancesRequest, DescribeConnectResourceResponse, DescribeGroupRequest, BatchCreateAclResponse, ModifyInstancePreResponse, CreateUserRequest, DeleteRouteRequest, CreateCdcClusterRequest, DeleteTopicIpWhiteListResponse, CreateInstancePreResponse, CheckCdcClusterRequest, FetchMessageByOffsetRequest, DescribeInstancesDetailRequest, FetchMessageByOffsetResponse, CreateConsumerRequest, DescribeRouteRequest, DescribeDatahubTasksResponse, SendMessageResponse, DescribeDatahubGroupOffsetsRequest, DescribeCkafkaZoneResponse, BatchModifyGroupOffsetsRequest, CreateRouteResponse, DescribeRouteResponse, ModifyConnectResourceResponse, CreateDatahubTaskRequest, DescribeTopicDetailRequest, DescribeGroupOffsetsResponse, SendMessageRequest, ModifyGroupOffsetsRequest, BatchModifyTopicAttributesRequest, DeleteGroupResponse, CreateTopicIpWhiteListRequest, ModifyTopicAttributesRequest, CreateInstancePreRequest, DeleteTopicIpWhiteListRequest, DeleteTopicResponse, CreateDatahubTaskResponse, DescribeUserRequest, DescribeTopicSyncReplicaRequest, ModifyDatahubTaskRequest, DescribeTopicDetailResponse, DescribeConnectResourcesResponse } from "./ckafka_models";
 /**
  * ckafka client
  * @class
@@ -24,6 +24,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeConsumerGroup(req: DescribeConsumerGroupRequest, cb?: (error: string, rep: DescribeConsumerGroupResponse) => void): Promise<DescribeConsumerGroupResponse>;
     /**
+     * 查询Datahub连接源
+     */
+    DescribeConnectResource(req: DescribeConnectResourceRequest, cb?: (error: string, rep: DescribeConnectResourceResponse) => void): Promise<DescribeConnectResourceResponse>;
+    /**
      * 查询订阅某主题消息分组信息
      */
     DescribeTopicSubscribeGroup(req: DescribeTopicSubscribeGroupRequest, cb?: (error: string, rep: DescribeTopicSubscribeGroupResponse) => void): Promise<DescribeTopicSubscribeGroupResponse>;
@@ -31,6 +35,10 @@ export declare class Client extends AbstractClient {
      * 预付费实例变配接口，调整磁盘，带宽
      */
     ModifyInstancePre(req: ModifyInstancePreRequest, cb?: (error: string, rep: ModifyInstancePreResponse) => void): Promise<ModifyInstancePreResponse>;
+    /**
+     * 获取主题列表详情（仅控制台调用）
+     */
+    DescribeTopicDetail(req: DescribeTopicDetailRequest, cb?: (error: string, rep: DescribeTopicDetailResponse) => void): Promise<DescribeTopicDetailResponse>;
     /**
      * 批量设置主题属性
      */
@@ -52,13 +60,21 @@ export declare class Client extends AbstractClient {
      */
     CreateTopicIpWhiteList(req: CreateTopicIpWhiteListRequest, cb?: (error: string, rep: CreateTopicIpWhiteListResponse) => void): Promise<CreateTopicIpWhiteListResponse>;
     /**
+     * 删除Datahub任务
+     */
+    DeleteDatahubTask(req: DeleteDatahubTaskRequest, cb?: (error: string, rep: DeleteDatahubTaskResponse) => void): Promise<DeleteDatahubTaskResponse>;
+    /**
      * 枚举消费分组(精简版)
      */
     DescribeGroup(req: DescribeGroupRequest, cb?: (error: string, rep: DescribeGroupResponse) => void): Promise<DescribeGroupResponse>;
     /**
-     * 设置Groups 消费分组offset
+     * 修改Datahub任务
      */
-    ModifyGroupOffsets(req: ModifyGroupOffsetsRequest, cb?: (error: string, rep: ModifyGroupOffsetsResponse) => void): Promise<ModifyGroupOffsetsResponse>;
+    ModifyDatahubTask(req: ModifyDatahubTaskRequest, cb?: (error: string, rep: ModifyDatahubTaskResponse) => void): Promise<ModifyDatahubTaskResponse>;
+    /**
+     * 查询Datahub任务列表
+     */
+    DescribeDatahubTasks(req: DescribeDatahubTasksRequest, cb?: (error: string, rep: DescribeDatahubTasksResponse) => void): Promise<DescribeDatahubTasksResponse>;
     /**
      * 本接口（DescribeInstance）用于在用户账户下获取消息队列 CKafka 实例列表
      */
@@ -67,6 +83,10 @@ export declare class Client extends AbstractClient {
      * 添加实例路由
      */
     CreateRoute(req: CreateRouteRequest, cb?: (error: string, rep: CreateRouteResponse) => void): Promise<CreateRouteResponse>;
+    /**
+     * 删除Datahub连接源
+     */
+    DeleteConnectResource(req: DeleteConnectResourceRequest, cb?: (error: string, rep: DeleteConnectResourceResponse) => void): Promise<DeleteConnectResourceResponse>;
     /**
      * 删除消费组
      */
@@ -92,13 +112,21 @@ export declare class Client extends AbstractClient {
      */
     FetchMessageByOffset(req: FetchMessageByOffsetRequest, cb?: (error: string, rep: FetchMessageByOffsetResponse) => void): Promise<FetchMessageByOffsetResponse>;
     /**
+     * 删除Datahub主题
+     */
+    DeleteDatahubTopic(req: DeleteDatahubTopicRequest, cb?: (error: string, rep: DeleteDatahubTopicResponse) => void): Promise<DeleteDatahubTopicResponse>;
+    /**
      * 删除主题IP白名单
      */
     DeleteTopicIpWhiteList(req: DeleteTopicIpWhiteListRequest, cb?: (error: string, rep: DeleteTopicIpWhiteListResponse) => void): Promise<DeleteTopicIpWhiteListResponse>;
     /**
-     * 修改密码
+     * 枚举地域,只支持广州地域
      */
-    ModifyPassword(req: ModifyPasswordRequest, cb?: (error: string, rep: ModifyPasswordResponse) => void): Promise<ModifyPasswordResponse>;
+    DescribeRegion(req: DescribeRegionRequest, cb?: (error: string, rep: DescribeRegionResponse) => void): Promise<DescribeRegionResponse>;
+    /**
+     * 设置Groups 消费分组offset
+     */
+    ModifyGroupOffsets(req: ModifyGroupOffsetsRequest, cb?: (error: string, rep: ModifyGroupOffsetsResponse) => void): Promise<ModifyGroupOffsetsResponse>;
     /**
      * 添加 ACL 策略
      */
@@ -112,6 +140,10 @@ export declare class Client extends AbstractClient {
      */
     CreateConnectResource(req: CreateConnectResourceRequest, cb?: (error: string, rep: CreateConnectResourceResponse) => void): Promise<CreateConnectResourceResponse>;
     /**
+     * 查询Datahub任务信息
+     */
+    DescribeDatahubTask(req: DescribeDatahubTaskRequest, cb?: (error: string, rep: DescribeDatahubTaskResponse) => void): Promise<DescribeDatahubTaskResponse>;
+    /**
      * 用于查询cdc-ckafka任务状态
      */
     CheckCdcCluster(req: CheckCdcClusterRequest, cb?: (error: string, rep: CheckCdcClusterResponse) => void): Promise<CheckCdcClusterResponse>;
@@ -120,17 +152,29 @@ export declare class Client extends AbstractClient {
      */
     CreatePartition(req: CreatePartitionRequest, cb?: (error: string, rep: CreatePartitionResponse) => void): Promise<CreatePartitionResponse>;
     /**
+     * 查询最新消息列表
+     */
+    FetchLatestDatahubMessageList(req: FetchLatestDatahubMessageListRequest, cb?: (error: string, rep: FetchLatestDatahubMessageListResponse) => void): Promise<FetchLatestDatahubMessageListResponse>;
+    /**
      * 删除用户
      */
     DeleteUser(req: DeleteUserRequest, cb?: (error: string, rep: DeleteUserResponse) => void): Promise<DeleteUserResponse>;
+    /**
+     * 编辑Datahub连接源
+     */
+    ModifyConnectResource(req: ModifyConnectResourceRequest, cb?: (error: string, rep: ModifyConnectResourceResponse) => void): Promise<ModifyConnectResourceResponse>;
+    /**
+     * 根据指定offset位置的消息
+     */
+    FetchDatahubMessageByOffset(req: FetchDatahubMessageByOffsetRequest, cb?: (error: string, rep: FetchDatahubMessageByOffsetResponse) => void): Promise<FetchDatahubMessageByOffsetResponse>;
     /**
      * 创建最高权限的token
      */
     CreateToken(req: CreateTokenRequest, cb?: (error: string, rep: CreateTokenResponse) => void): Promise<CreateTokenResponse>;
     /**
-     * 获取主题列表详情（仅控制台调用）
+     * 获取Datahub消费分组offset
      */
-    DescribeTopicDetail(req: DescribeTopicDetailRequest, cb?: (error: string, rep: DescribeTopicDetailResponse) => void): Promise<DescribeTopicDetailResponse>;
+    DescribeDatahubGroupOffsets(req: DescribeDatahubGroupOffsetsRequest, cb?: (error: string, rep: DescribeDatahubGroupOffsetsResponse) => void): Promise<DescribeDatahubGroupOffsetsResponse>;
     /**
      * 删除ACL
      */
@@ -202,9 +246,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeCkafkaZone(req: DescribeCkafkaZoneRequest, cb?: (error: string, rep: DescribeCkafkaZoneResponse) => void): Promise<DescribeCkafkaZoneResponse>;
     /**
-     * 枚举地域,只支持广州地域
+     * 查询Datahub连接源列表
      */
-    DescribeRegion(req: DescribeRegionRequest, cb?: (error: string, rep: DescribeRegionResponse) => void): Promise<DescribeRegionResponse>;
+    DescribeConnectResources(req: DescribeConnectResourcesRequest, cb?: (error: string, rep: DescribeConnectResourcesResponse) => void): Promise<DescribeConnectResourcesResponse>;
     /**
      * 用于cdc的专用ckafka集群
      */
@@ -217,4 +261,8 @@ export declare class Client extends AbstractClient {
      * 删除ckafka主题
      */
     DeleteTopic(req: DeleteTopicRequest, cb?: (error: string, rep: DeleteTopicResponse) => void): Promise<DeleteTopicResponse>;
+    /**
+     * 修改密码
+     */
+    ModifyPassword(req: ModifyPasswordRequest, cb?: (error: string, rep: ModifyPasswordResponse) => void): Promise<ModifyPasswordResponse>;
 }

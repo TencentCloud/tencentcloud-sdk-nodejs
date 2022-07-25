@@ -82,6 +82,8 @@ export declare class Client extends AbstractClient {
         </tr>
       </tbody>
     </table>
+
+默认接口请求频率限制：20次/秒。
      */
     IDCardOCR(req: IDCardOCRRequest, cb?: (error: string, rep: IDCardOCRResponse) => void): Promise<IDCardOCRResponse>;
     /**
@@ -164,6 +166,8 @@ export declare class Client extends AbstractClient {
         </tr>
       </tbody>
     </table>
+
+默认接口请求频率限制：10次/秒。
      */
     GeneralAccurateOCR(req: GeneralAccurateOCRRequest, cb?: (error: string, rep: GeneralAccurateOCRResponse) => void): Promise<GeneralAccurateOCRResponse>;
     /**
@@ -202,6 +206,8 @@ export declare class Client extends AbstractClient {
     VinOCR(req: VinOCRRequest, cb?: (error: string, rep: VinOCRResponse) => void): Promise<VinOCRResponse>;
     /**
      * 本接口支持图片中整体文字的检测和识别，返回文字框位置与文字内容。相比通用印刷体识别接口，识别速度更快。
+
+默认接口请求频率限制：10次/秒。
      */
     GeneralFastOCR(req: GeneralFastOCRRequest, cb?: (error: string, rep: GeneralFastOCRResponse) => void): Promise<GeneralFastOCRResponse>;
     /**
@@ -215,6 +221,8 @@ export declare class Client extends AbstractClient {
     BizLicenseOCR(req: BizLicenseOCRRequest, cb?: (error: string, rep: BizLicenseOCRResponse) => void): Promise<BizLicenseOCRResponse>;
     /**
      * 本接口支持图片内手写体文字的检测和识别，针对手写字体无规则、字迹潦草、模糊等特点进行了识别能力的增强。
+
+默认接口请求频率限制：10次/秒。
      */
     GeneralHandwritingOCR(req: GeneralHandwritingOCRRequest, cb?: (error: string, rep: GeneralHandwritingOCRResponse) => void): Promise<GeneralHandwritingOCRResponse>;
     /**
@@ -472,6 +480,8 @@ export declare class Client extends AbstractClient {
         </tr>
       </tbody>
     </table>
+
+默认接口请求频率限制：10次/秒。
      */
     GeneralEfficientOCR(req: GeneralEfficientOCRRequest, cb?: (error: string, rep: GeneralEfficientOCRResponse) => void): Promise<GeneralEfficientOCRResponse>;
     /**
@@ -486,6 +496,8 @@ export declare class Client extends AbstractClient {
     VehicleRegCertOCR(req: VehicleRegCertOCRRequest, cb?: (error: string, rep: VehicleRegCertOCRResponse) => void): Promise<VehicleRegCertOCRResponse>;
     /**
      * 本接口支持通信大数据行程卡识别，包括行程卡颜色、更新时间、途经地、存在中高风险地区的城市、电话号码，五个字段的识别结果输出。
+
+默认接口请求频率限制：20次/秒。
      */
     RecognizeTravelCardOCR(req: RecognizeTravelCardOCRRequest, cb?: (error: string, rep: RecognizeTravelCardOCRResponse) => void): Promise<RecognizeTravelCardOCRResponse>;
     /**
@@ -502,6 +514,8 @@ export declare class Client extends AbstractClient {
     ResidenceBookletOCR(req: ResidenceBookletOCRRequest, cb?: (error: string, rep: ResidenceBookletOCRResponse) => void): Promise<ResidenceBookletOCRResponse>;
     /**
      * 本接口支持对中国大陆主流银行卡正反面关键字段的检测与识别，包括卡号、卡类型、卡名字、银行信息、有效期。支持竖排异形卡识别、多角度旋转图片识别。支持对复印件、翻拍件、边框遮挡的银行卡进行告警，可应用于各种银行卡信息有效性校验场景，如金融行业身份认证、第三方支付绑卡等场景。
+
+默认接口请求频率限制：10次/秒。
      */
     BankCardOCR(req: BankCardOCRRequest, cb?: (error: string, rep: BankCardOCRResponse) => void): Promise<BankCardOCRResponse>;
     /**

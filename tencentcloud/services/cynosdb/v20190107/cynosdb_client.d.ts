@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ModifyClusterNameRequest, DescribeRollbackTimeRangeRequest, DescribeBackupConfigRequest, DescribeAccountsRequest, ModifyMaintainPeriodConfigRequest, DescribeRollbackTimeRangeResponse, ModifyBackupNameResponse, AssociateSecurityGroupsRequest, DescribeBinlogDownloadUrlRequest, CreateAccountsResponse, ModifyInstanceNameRequest, DescribeDBSecurityGroupsResponse, DescribeMaintainPeriodRequest, DescribeBinlogsResponse, DescribeInstancesResponse, ModifyClusterNameResponse, IsolateInstanceResponse, ModifyInstanceNameResponse, PauseServerlessRequest, RevokeAccountPrivilegesResponse, CreateClustersResponse, SetRenewFlagRequest, ActivateInstanceRequest, DescribeAccountAllGrantPrivilegesResponse, DescribeClustersRequest, DescribeInstanceDetailResponse, ModifyDBInstanceSecurityGroupsResponse, DescribeClusterParamLogsResponse, DescribeClusterInstanceGrpsRequest, DescribeResourcesByDealNameResponse, ResumeServerlessResponse, CreateAccountsRequest, IsolateInstanceRequest, ExportInstanceSlowQueriesResponse, DescribeDBSecurityGroupsRequest, RollBackClusterRequest, DescribeClusterDetailRequest, DescribeProjectSecurityGroupsResponse, PauseServerlessResponse, OfflineClusterRequest, DescribeBinlogDownloadUrlResponse, DescribeBackupListRequest, GrantAccountPrivilegesRequest, IsolateClusterResponse, CreateClustersRequest, DescribeClustersResponse, DescribeBackupConfigResponse, ModifyDBInstanceSecurityGroupsRequest, AddInstancesResponse, DescribeProjectSecurityGroupsRequest, ModifyClusterParamResponse, DescribeBackupDownloadUrlRequest, AssociateSecurityGroupsResponse, DescribeResourcesByDealNameRequest, DescribeRollbackTimeValidityResponse, DescribeInstanceSlowQueriesResponse, GrantAccountPrivilegesResponse, DescribeBackupDownloadUrlResponse, ResumeServerlessRequest, InquirePriceCreateRequest, ModifyBackupConfigResponse, DescribeInstanceSpecsRequest, ExportInstanceSlowQueriesRequest, UpgradeInstanceResponse, ModifyAccountParamsRequest, OfflineClusterResponse, RevokeAccountPrivilegesRequest, InquirePriceCreateResponse, SetRenewFlagResponse, DescribeClusterParamLogsRequest, UpgradeInstanceRequest, DescribeMaintainPeriodResponse, DescribeBackupListResponse, RollBackClusterResponse, DescribeBinlogSaveDaysRequest, DescribeClusterDetailResponse, ActivateInstanceResponse, DescribeRollbackTimeValidityRequest, IsolateClusterRequest, DescribeClusterInstanceGrpsResponse, AddInstancesRequest, DescribeInstancesRequest, DescribeInstanceDetailRequest, ModifyMaintainPeriodConfigResponse, DisassociateSecurityGroupsRequest, ModifyBackupNameRequest, DescribeBinlogSaveDaysResponse, ModifyClusterParamRequest, DescribeAccountsResponse, ModifyAccountParamsResponse, OfflineInstanceRequest, DescribeInstanceSpecsResponse, DescribeAccountAllGrantPrivilegesRequest, OfflineInstanceResponse, ModifyBackupConfigRequest, DescribeInstanceSlowQueriesRequest, DescribeBinlogsRequest, DisassociateSecurityGroupsResponse } from "./cynosdb_models";
+import { ModifyClusterNameRequest, DescribeRollbackTimeRangeRequest, InquirePriceRenewRequest, DescribeBackupConfigRequest, DescribeAccountsRequest, ModifyMaintainPeriodConfigRequest, DescribeRollbackTimeRangeResponse, ModifyBackupNameResponse, AssociateSecurityGroupsRequest, DescribeBinlogDownloadUrlRequest, CreateAccountsResponse, ModifyInstanceNameRequest, DescribeDBSecurityGroupsResponse, DescribeMaintainPeriodRequest, DescribeBinlogsResponse, DescribeInstancesResponse, ModifyClusterNameResponse, IsolateInstanceResponse, ModifyInstanceNameResponse, DescribeParamTemplatesRequest, PauseServerlessRequest, RevokeAccountPrivilegesResponse, CreateClustersResponse, SetRenewFlagRequest, ActivateInstanceRequest, DescribeAccountAllGrantPrivilegesResponse, DescribeClustersRequest, DescribeInstanceDetailResponse, ModifyDBInstanceSecurityGroupsResponse, DescribeClusterParamLogsResponse, DescribeClusterInstanceGrpsRequest, DescribeResourcesByDealNameResponse, ResumeServerlessResponse, CreateAccountsRequest, IsolateInstanceRequest, ExportInstanceSlowQueriesResponse, DescribeDBSecurityGroupsRequest, RollBackClusterRequest, DescribeClusterDetailRequest, DescribeProjectSecurityGroupsResponse, PauseServerlessResponse, OfflineClusterRequest, DescribeBinlogDownloadUrlResponse, DescribeBackupListRequest, GrantAccountPrivilegesRequest, IsolateClusterResponse, CreateClustersRequest, DescribeClustersResponse, DescribeBackupConfigResponse, ModifyDBInstanceSecurityGroupsRequest, DescribeParamTemplatesResponse, AddInstancesResponse, DescribeProjectSecurityGroupsRequest, ModifyClusterParamResponse, DescribeBackupDownloadUrlRequest, AssociateSecurityGroupsResponse, DescribeResourcesByDealNameRequest, DescribeRollbackTimeValidityResponse, DescribeInstanceSlowQueriesResponse, GrantAccountPrivilegesResponse, DescribeBackupDownloadUrlResponse, ResumeServerlessRequest, InquirePriceCreateRequest, ModifyBackupConfigResponse, DescribeInstanceSpecsRequest, ExportInstanceSlowQueriesRequest, UpgradeInstanceResponse, ModifyAccountParamsRequest, OfflineClusterResponse, RevokeAccountPrivilegesRequest, InquirePriceCreateResponse, SetRenewFlagResponse, DescribeClusterParamLogsRequest, UpgradeInstanceRequest, DescribeMaintainPeriodResponse, DescribeBackupListResponse, RollBackClusterResponse, DescribeBinlogSaveDaysRequest, ModifyBackupConfigRequest, ActivateInstanceResponse, DescribeRollbackTimeValidityRequest, IsolateClusterRequest, DescribeClusterInstanceGrpsResponse, AddInstancesRequest, DescribeInstancesRequest, DescribeInstanceDetailRequest, ModifyMaintainPeriodConfigResponse, DisassociateSecurityGroupsRequest, ModifyBackupNameRequest, DescribeBinlogSaveDaysResponse, ModifyClusterParamRequest, DescribeAccountsResponse, ModifyAccountParamsResponse, OfflineInstanceRequest, DescribeInstanceSpecsResponse, DescribeAccountAllGrantPrivilegesRequest, OfflineInstanceResponse, DescribeClusterDetailResponse, DescribeInstanceSlowQueriesRequest, DescribeBinlogsRequest, DisassociateSecurityGroupsResponse, InquirePriceRenewResponse } from "./cynosdb_models";
 /**
  * cynosdb client
  * @class
@@ -36,6 +36,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeBackupConfig(req: DescribeBackupConfigRequest, cb?: (error: string, rep: DescribeBackupConfigResponse) => void): Promise<DescribeBackupConfigResponse>;
     /**
+     * 查询用户指定产品下的所有参数模板信息
+     */
+    DescribeParamTemplates(req?: DescribeParamTemplatesRequest, cb?: (error: string, rep: DescribeParamTemplatesResponse) => void): Promise<DescribeParamTemplatesResponse>;
+    /**
      * 本接口（DescribeClusterInstanceGrps）用于查询实例组
      */
     DescribeClusterInstanceGrps(req: DescribeClusterInstanceGrpsRequest, cb?: (error: string, rep: DescribeClusterInstanceGrpsResponse) => void): Promise<DescribeClusterInstanceGrpsResponse>;
@@ -44,9 +48,9 @@ export declare class Client extends AbstractClient {
      */
     OfflineCluster(req: OfflineClusterRequest, cb?: (error: string, rep: OfflineClusterResponse) => void): Promise<OfflineClusterResponse>;
     /**
-     * 暂停serverless集群
+     * 此接口（ModifyBackupName）用于修改备份文件备注名。
      */
-    PauseServerless(req: PauseServerlessRequest, cb?: (error: string, rep: PauseServerlessResponse) => void): Promise<PauseServerlessResponse>;
+    ModifyBackupName(req: ModifyBackupNameRequest, cb?: (error: string, rep: ModifyBackupNameResponse) => void): Promise<ModifyBackupNameResponse>;
     /**
      * 修改集群名称
      */
@@ -144,9 +148,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeInstanceSlowQueries(req: DescribeInstanceSlowQueriesRequest, cb?: (error: string, rep: DescribeInstanceSlowQueriesResponse) => void): Promise<DescribeInstanceSlowQueriesResponse>;
     /**
-     * 此接口（ModifyBackupName）用于修改备份文件备注名。
+     * 查询续费集群价格
      */
-    ModifyBackupName(req: ModifyBackupNameRequest, cb?: (error: string, rep: ModifyBackupNameResponse) => void): Promise<ModifyBackupNameResponse>;
+    InquirePriceRenew(req: InquirePriceRenewRequest, cb?: (error: string, rep: InquirePriceRenewResponse) => void): Promise<InquirePriceRenewResponse>;
     /**
      * 此接口（DescribeBinlogDownloadUrl）用于查询Binlog的下载地址。
      */
@@ -159,6 +163,10 @@ export declare class Client extends AbstractClient {
      * 根据计费订单id查询资源列表
      */
     DescribeResourcesByDealName(req: DescribeResourcesByDealNameRequest, cb?: (error: string, rep: DescribeResourcesByDealNameResponse) => void): Promise<DescribeResourcesByDealNameResponse>;
+    /**
+     * 暂停serverless集群
+     */
+    PauseServerless(req: PauseServerlessRequest, cb?: (error: string, rep: PauseServerlessResponse) => void): Promise<PauseServerlessResponse>;
     /**
      * 修改集群参数
      */

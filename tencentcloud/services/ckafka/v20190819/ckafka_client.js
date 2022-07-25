@@ -52,6 +52,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeConsumerGroup", req, cb);
     }
     /**
+     * 查询Datahub连接源
+     */
+    async DescribeConnectResource(req, cb) {
+        return this.request("DescribeConnectResource", req, cb);
+    }
+    /**
      * 查询订阅某主题消息分组信息
      */
     async DescribeTopicSubscribeGroup(req, cb) {
@@ -62,6 +68,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyInstancePre(req, cb) {
         return this.request("ModifyInstancePre", req, cb);
+    }
+    /**
+     * 获取主题列表详情（仅控制台调用）
+     */
+    async DescribeTopicDetail(req, cb) {
+        return this.request("DescribeTopicDetail", req, cb);
     }
     /**
      * 批量设置主题属性
@@ -94,16 +106,28 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateTopicIpWhiteList", req, cb);
     }
     /**
+     * 删除Datahub任务
+     */
+    async DeleteDatahubTask(req, cb) {
+        return this.request("DeleteDatahubTask", req, cb);
+    }
+    /**
      * 枚举消费分组(精简版)
      */
     async DescribeGroup(req, cb) {
         return this.request("DescribeGroup", req, cb);
     }
     /**
-     * 设置Groups 消费分组offset
+     * 修改Datahub任务
      */
-    async ModifyGroupOffsets(req, cb) {
-        return this.request("ModifyGroupOffsets", req, cb);
+    async ModifyDatahubTask(req, cb) {
+        return this.request("ModifyDatahubTask", req, cb);
+    }
+    /**
+     * 查询Datahub任务列表
+     */
+    async DescribeDatahubTasks(req, cb) {
+        return this.request("DescribeDatahubTasks", req, cb);
     }
     /**
      * 本接口（DescribeInstance）用于在用户账户下获取消息队列 CKafka 实例列表
@@ -116,6 +140,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateRoute(req, cb) {
         return this.request("CreateRoute", req, cb);
+    }
+    /**
+     * 删除Datahub连接源
+     */
+    async DeleteConnectResource(req, cb) {
+        return this.request("DeleteConnectResource", req, cb);
     }
     /**
      * 删除消费组
@@ -154,16 +184,28 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("FetchMessageByOffset", req, cb);
     }
     /**
+     * 删除Datahub主题
+     */
+    async DeleteDatahubTopic(req, cb) {
+        return this.request("DeleteDatahubTopic", req, cb);
+    }
+    /**
      * 删除主题IP白名单
      */
     async DeleteTopicIpWhiteList(req, cb) {
         return this.request("DeleteTopicIpWhiteList", req, cb);
     }
     /**
-     * 修改密码
+     * 枚举地域,只支持广州地域
      */
-    async ModifyPassword(req, cb) {
-        return this.request("ModifyPassword", req, cb);
+    async DescribeRegion(req, cb) {
+        return this.request("DescribeRegion", req, cb);
+    }
+    /**
+     * 设置Groups 消费分组offset
+     */
+    async ModifyGroupOffsets(req, cb) {
+        return this.request("ModifyGroupOffsets", req, cb);
     }
     /**
      * 添加 ACL 策略
@@ -184,6 +226,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateConnectResource", req, cb);
     }
     /**
+     * 查询Datahub任务信息
+     */
+    async DescribeDatahubTask(req, cb) {
+        return this.request("DescribeDatahubTask", req, cb);
+    }
+    /**
      * 用于查询cdc-ckafka任务状态
      */
     async CheckCdcCluster(req, cb) {
@@ -196,10 +244,28 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreatePartition", req, cb);
     }
     /**
+     * 查询最新消息列表
+     */
+    async FetchLatestDatahubMessageList(req, cb) {
+        return this.request("FetchLatestDatahubMessageList", req, cb);
+    }
+    /**
      * 删除用户
      */
     async DeleteUser(req, cb) {
         return this.request("DeleteUser", req, cb);
+    }
+    /**
+     * 编辑Datahub连接源
+     */
+    async ModifyConnectResource(req, cb) {
+        return this.request("ModifyConnectResource", req, cb);
+    }
+    /**
+     * 根据指定offset位置的消息
+     */
+    async FetchDatahubMessageByOffset(req, cb) {
+        return this.request("FetchDatahubMessageByOffset", req, cb);
     }
     /**
      * 创建最高权限的token
@@ -208,10 +274,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateToken", req, cb);
     }
     /**
-     * 获取主题列表详情（仅控制台调用）
+     * 获取Datahub消费分组offset
      */
-    async DescribeTopicDetail(req, cb) {
-        return this.request("DescribeTopicDetail", req, cb);
+    async DescribeDatahubGroupOffsets(req, cb) {
+        return this.request("DescribeDatahubGroupOffsets", req, cb);
     }
     /**
      * 删除ACL
@@ -318,10 +384,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCkafkaZone", req, cb);
     }
     /**
-     * 枚举地域,只支持广州地域
+     * 查询Datahub连接源列表
      */
-    async DescribeRegion(req, cb) {
-        return this.request("DescribeRegion", req, cb);
+    async DescribeConnectResources(req, cb) {
+        return this.request("DescribeConnectResources", req, cb);
     }
     /**
      * 用于cdc的专用ckafka集群
@@ -340,6 +406,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteTopic(req, cb) {
         return this.request("DeleteTopic", req, cb);
+    }
+    /**
+     * 修改密码
+     */
+    async ModifyPassword(req, cb) {
+        return this.request("ModifyPassword", req, cb);
     }
 }
 exports.Client = Client;

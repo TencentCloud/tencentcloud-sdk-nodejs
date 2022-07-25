@@ -18,7 +18,7 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  DescribeResourceConfigsResponse,
+  CopyJobResult,
   CreateResourceRequest,
   CheckSavepointRequest,
   CreateJobRequest,
@@ -36,7 +36,7 @@ import {
   CreateResourceConfigResponse,
   CreateJobConfigRequest,
   CreateResourceConfigRequest,
-  Property,
+  DescribeSystemResourcesResponse,
   ClusterVersion,
   DescribeClustersRequest,
   DescribeTreeJobsResponse,
@@ -53,6 +53,7 @@ import {
   Tag,
   DescribeResourcesRequest,
   ResourceLocParam,
+  ResourceRefJobInfo,
   DescribeJobConfigsRequest,
   CheckSavepointResponse,
   DeleteResourceConfigsRequest,
@@ -69,18 +70,19 @@ import {
   CreateResourceResponse,
   DescribeSystemResourcesRequest,
   CreateFolderResponse,
-  DescribeResourcesResponse,
+  CopyJobItem,
   RunJobDescription,
   ModifyJobRequest,
   DescribeTreeJobsRequest,
   DescribeJobConfigsResponse,
+  Property,
   DeleteResourceConfigsResponse,
   DescribeResourceRelatedJobsResponse,
-  DescribeSystemResourcesResponse,
+  DescribeResourcesResponse,
   Cluster,
   DescribeClustersResponse,
   TriggerJobSavepointRequest,
-  ResourceRefJobInfo,
+  DescribeResourceConfigsResponse,
   ResourceRef,
   DescribeJobsRequest,
   JobV1,
@@ -108,11 +110,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 单条和批量复制作业
-https://iwiki.woa.com/pages/viewpage.action?pageId=1288112774
-     */
+   * 单条和批量复制作业
+   */
   async CopyJobs(
-    req?: CopyJobsRequest,
+    req: CopyJobsRequest,
     cb?: (error: string, rep: CopyJobsResponse) => void
   ): Promise<CopyJobsResponse> {
     return this.request("CopyJobs", req, cb)

@@ -52,6 +52,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateCluster", req, cb);
     }
     /**
+     * 在tke@edge集群的边缘节点上安装日志采集组件
+     */
+    async InstallEdgeLogAgent(req, cb) {
+        return this.request("InstallEdgeLogAgent", req, cb);
+    }
+    /**
      * 修改集群弹性伸缩属性
      */
     async ModifyClusterAsGroupOptionAttribute(req, cb) {
@@ -68,6 +74,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteCluster(req, cb) {
         return this.request("DeleteCluster", req, cb);
+    }
+    /**
+     * 从tke@edge集群边缘节点上卸载日志采集组件
+     */
+    async UninstallEdgeLogAgent(req, cb) {
+        return this.request("UninstallEdgeLogAgent", req, cb);
     }
     /**
      * 删除边缘计算实例
@@ -224,6 +236,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async UpdateClusterVersion(req, cb) {
         return this.request("UpdateClusterVersion", req, cb);
+    }
+    /**
+     * 以Yaml的方式创建聚合规则
+     */
+    async CreatePrometheusRecordRuleYaml(req, cb) {
+        return this.request("CreatePrometheusRecordRuleYaml", req, cb);
     }
     /**
      * 获取集群可以升级的所有版本
@@ -676,6 +694,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeClusterSecurity", req, cb);
     }
     /**
+     * 获取集群的访问地址，包括内网地址，外网地址，外网域名，外网访问安全策略
+     */
+    async DescribeClusterEndpoints(req, cb) {
+        return this.request("DescribeClusterEndpoints", req, cb);
+    }
+    /**
      * 获取2.0实例关联集群列表
      */
     async DescribePrometheusClusterAgents(req, cb) {
@@ -898,10 +922,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateClusterNodePool", req, cb);
     }
     /**
-     * 以Yaml的方式创建聚合规则
+     * 创建边缘集群日志采集配置
      */
-    async CreatePrometheusRecordRuleYaml(req, cb) {
-        return this.request("CreatePrometheusRecordRuleYaml", req, cb);
+    async CreateEdgeLogConfig(req, cb) {
+        return this.request("CreateEdgeLogConfig", req, cb);
     }
     /**
      * 删除一个云原生Prometheus配置模板

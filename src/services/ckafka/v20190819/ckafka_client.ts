@@ -21,25 +21,34 @@ import {
   TopicDetail,
   DeleteAclRequest,
   DropCls,
+  PostgreSQLModifyConnectParam,
   GroupInfoMember,
   EsConnectParam,
   BatchCreateAclRequest,
+  DescribeDatahubTaskResponse,
   DeleteUserRequest,
   PartitionOffset,
   SQLServerConnectParam,
-  DescribeACLRequest,
+  CreateConnectResourceResponse,
   BatchModifyTopicResultDTO,
+  SubscribedInfo,
   DescribeTopicAttributesRequest,
-  DescribeInstanceAttributesRequest,
+  DescribeDatahubGroupOffsetsResponse,
   ConsumerGroup,
   Assignment,
+  DescribeConnectResourceResp,
   AuthorizeTokenResponse,
+  DescribeDatahubTaskRequest,
+  FetchLatestDatahubMessageListResponse,
   EsParam,
+  DescribeConnectResource,
   DtsParam,
+  GroupOffsetPartition,
   CancelAuthorizationTokenRequest,
   CancelAuthorizationTokenResponse,
   MySQLConnectParam,
   CreateRouteRequest,
+  SQLServerModifyConnectParam,
   DeleteTopicRequest,
   DescribeInstancesResponse,
   DatahubResource,
@@ -47,53 +56,65 @@ import {
   ClickHouseParam,
   FilterMapParam,
   CreateInstancePreResp,
+  ModifyDatahubTaskResponse,
   GroupInfoTopics,
   TopicResult,
   Region,
   ModifyInstancePreRequest,
   CreateTokenResponse,
   TransformsParam,
+  ClickHouseModifyConnectParam,
+  DescribeDatahubTasksRes,
   DescribeInstancesDetailResponse,
   CreateInstancePreData,
-  CreateConnectResourceRequest,
+  DescribeAppInfoRequest,
   AclRule,
   SMTParam,
   CheckCdcClusterResponse,
+  DescribeDatahubTasksRequest,
   DescribeACLResponse,
   DynamicDiskConfig,
   JgwOperateResponse,
   ZoneInfo,
   DescribeTopicSubscribeGroupResponse,
   DeleteAclRuleRequest,
-  SaleInfo,
+  DescribeConnectResourcesRequest,
   Topic,
   Tag,
+  ModifyConnectResourceRequest,
+  ModifyInstanceAttributesResponse,
   RecordMapping,
   BatchModifyGroupOffsetsResponse,
   GroupResponse,
+  InstanceDetailResponse,
+  GroupOffsetResponse,
   CreateTokenRequest,
   DescribeTopicResponse,
+  MongoDBModifyConnectParam,
   TdwParam,
   DescribeCkafkaZoneRequest,
+  FetchDatahubMessageByOffsetResponse,
   CreateConsumerResponse,
   CreateCdcClusterResponse,
   DescribeGroupResponse,
   CdcClusterResponse,
   ModifyPasswordResponse,
   ModifyInstanceAttributesConfig,
+  FetchDatahubMessageByOffsetRequest,
   AuthorizeTokenRequest,
   OperateResponseData,
-  CreateConnectResourceResponse,
+  DescribeACLRequest,
   CreateUserResponse,
-  ModifyInstanceAttributesResponse,
+  DescribeDatahubTaskRes,
   CreatePartitionResponse,
   ClusterInfo,
   DeleteGroupRequest,
   DescribeConsumerGroupRequest,
   DeleteUserResponse,
+  DescribeConnectResourceRequest,
   CreateAclRequest,
   DescribeTopicSyncReplicaResponse,
-  DescribeAppInfoRequest,
+  CreateConnectResourceRequest,
   MariaDBParam,
   Route,
   DeleteRouteResponse,
@@ -112,21 +133,25 @@ import {
   TransformParam,
   DescribeTopicSubscribeGroupRequest,
   DeleteInstancePreResponse,
-  FetchMessageByOffsetRequest,
+  DescribeInstanceAttributesRequest,
   TopicInSyncReplicaInfo,
+  DeleteConnectResourceResponse,
   DescribeRegionRequest,
   InstanceConfigDO,
   DeleteAclRuleResponse,
   UserResponse,
   DescribeGroupInfoRequest,
-  DescribeGroupInfoResponse,
+  DescribeConnectResourcesResp,
   ModifyTopicAttributesResponse,
   BatchContent,
   DeleteRouteTriggerTimeResponse,
+  User,
   DescribeUserResponse,
   DtsConnectParam,
+  DescribeGroupInfoResponse,
   AppIdResponse,
   DescribeTopicRequest,
+  DeleteConnectResourceRequest,
   CreatePartitionRequest,
   Group,
   GroupInfoResponse,
@@ -143,36 +168,42 @@ import {
   Config,
   ClickHouseSchema,
   ModifyPasswordRequest,
+  MariaDBModifyConnectParam,
   ModifyInstanceAttributesRequest,
+  DeleteDatahubTopicRequest,
   DescribeRegionResponse,
   CreateTopicResponse,
   VipEntity,
+  FetchLatestDatahubMessageListRequest,
   ConsumerGroupTopic,
-  User,
-  GroupOffsetPartition,
+  DatahubTaskInfo,
+  FieldParam,
   DescribeTopicAttributesResponse,
+  DeleteDatahubTopicResponse,
   DescribeConsumerGroupResponse,
   MongoDBParam,
+  DeleteDatahubTaskRequest,
   DescribeGroupOffsetsRequest,
   DeleteRouteTriggerTimeRequest,
-  FieldParam,
+  DeleteDatahubTaskResponse,
   DescribeInstancesRequest,
   InstanceAttributesResponse,
-  TopicParam,
+  DescribeConnectResourceResponse,
   DescribeGroupRequest,
   Filter,
-  GroupOffsetResponse,
+  Connection,
   BatchCreateAclResponse,
   ModifyInstancePreResponse,
   CreateUserRequest,
   RouteResponse,
-  InstanceDetailResponse,
+  DtsModifyConnectParam,
   DeleteRouteRequest,
   CreateCdcClusterRequest,
   DeleteTopicIpWhiteListResponse,
   CreateInstancePreResponse,
   ConnectResourceResourceIdResp,
   CheckCdcClusterRequest,
+  FetchMessageByOffsetRequest,
   DescribeInstancesDetailRequest,
   MongoDBConnectParam,
   SubstrParam,
@@ -181,8 +212,10 @@ import {
   DescribeRouteRequest,
   DateParam,
   ValueParam,
+  DescribeDatahubTasksResponse,
   TopicInSyncReplicaResult,
   SendMessageResponse,
+  DescribeDatahubGroupOffsetsRequest,
   DescribeCkafkaZoneResponse,
   BatchModifyGroupOffsetsRequest,
   TopicAttributesResponse,
@@ -194,11 +227,14 @@ import {
   DescribeGroup,
   ClsParam,
   EventBusParam,
+  DatahubTaskIdRes,
   TopicPartitionDO,
   CreateTopicResp,
   AnalyseParam,
   BatchModifyTopicInfo,
   DescribeRouteResponse,
+  EsModifyConnectParam,
+  ModifyConnectResourceResponse,
   CreateDatahubTaskRequest,
   PostgreSQLParam,
   DescribeTopicDetailRequest,
@@ -214,23 +250,27 @@ import {
   AclRuleInfo,
   Acl,
   TopicRetentionTimeConfigRsp,
+  TopicParam,
   ModifyTopicAttributesRequest,
   SecondaryAnalyseParam,
   CreateInstancePreRequest,
   DeleteTopicIpWhiteListRequest,
+  SaleInfo,
   DeleteTopicResponse,
   CreateDatahubTaskResponse,
   ClickHouseConnectParam,
   DescribeUserRequest,
   MySQLParam,
   DescribeTopicSyncReplicaRequest,
+  ModifyDatahubTaskRequest,
   InstanceDetail,
   InstanceQuotaConfigResp,
   DescribeTopicDetailResponse,
-  SubscribedInfo,
+  MySQLModifyConnectParam,
   SQLServerParam,
   ReplaceParam,
   Price,
+  DescribeConnectResourcesResponse,
 } from "./ckafka_models"
 
 /**
@@ -283,6 +323,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询Datahub连接源
+   */
+  async DescribeConnectResource(
+    req: DescribeConnectResourceRequest,
+    cb?: (error: string, rep: DescribeConnectResourceResponse) => void
+  ): Promise<DescribeConnectResourceResponse> {
+    return this.request("DescribeConnectResource", req, cb)
+  }
+
+  /**
    * 查询订阅某主题消息分组信息
    */
   async DescribeTopicSubscribeGroup(
@@ -300,6 +350,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyInstancePreResponse) => void
   ): Promise<ModifyInstancePreResponse> {
     return this.request("ModifyInstancePre", req, cb)
+  }
+
+  /**
+   * 获取主题列表详情（仅控制台调用）
+   */
+  async DescribeTopicDetail(
+    req: DescribeTopicDetailRequest,
+    cb?: (error: string, rep: DescribeTopicDetailResponse) => void
+  ): Promise<DescribeTopicDetailResponse> {
+    return this.request("DescribeTopicDetail", req, cb)
   }
 
   /**
@@ -353,6 +413,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除Datahub任务
+   */
+  async DeleteDatahubTask(
+    req: DeleteDatahubTaskRequest,
+    cb?: (error: string, rep: DeleteDatahubTaskResponse) => void
+  ): Promise<DeleteDatahubTaskResponse> {
+    return this.request("DeleteDatahubTask", req, cb)
+  }
+
+  /**
    * 枚举消费分组(精简版)
    */
   async DescribeGroup(
@@ -363,13 +433,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 设置Groups 消费分组offset
+   * 修改Datahub任务
    */
-  async ModifyGroupOffsets(
-    req: ModifyGroupOffsetsRequest,
-    cb?: (error: string, rep: ModifyGroupOffsetsResponse) => void
-  ): Promise<ModifyGroupOffsetsResponse> {
-    return this.request("ModifyGroupOffsets", req, cb)
+  async ModifyDatahubTask(
+    req: ModifyDatahubTaskRequest,
+    cb?: (error: string, rep: ModifyDatahubTaskResponse) => void
+  ): Promise<ModifyDatahubTaskResponse> {
+    return this.request("ModifyDatahubTask", req, cb)
+  }
+
+  /**
+   * 查询Datahub任务列表
+   */
+  async DescribeDatahubTasks(
+    req: DescribeDatahubTasksRequest,
+    cb?: (error: string, rep: DescribeDatahubTasksResponse) => void
+  ): Promise<DescribeDatahubTasksResponse> {
+    return this.request("DescribeDatahubTasks", req, cb)
   }
 
   /**
@@ -390,6 +470,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateRouteResponse) => void
   ): Promise<CreateRouteResponse> {
     return this.request("CreateRoute", req, cb)
+  }
+
+  /**
+   * 删除Datahub连接源
+   */
+  async DeleteConnectResource(
+    req: DeleteConnectResourceRequest,
+    cb?: (error: string, rep: DeleteConnectResourceResponse) => void
+  ): Promise<DeleteConnectResourceResponse> {
+    return this.request("DeleteConnectResource", req, cb)
   }
 
   /**
@@ -453,6 +543,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除Datahub主题
+   */
+  async DeleteDatahubTopic(
+    req: DeleteDatahubTopicRequest,
+    cb?: (error: string, rep: DeleteDatahubTopicResponse) => void
+  ): Promise<DeleteDatahubTopicResponse> {
+    return this.request("DeleteDatahubTopic", req, cb)
+  }
+
+  /**
    * 删除主题IP白名单
    */
   async DeleteTopicIpWhiteList(
@@ -463,13 +563,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改密码
+   * 枚举地域,只支持广州地域
    */
-  async ModifyPassword(
-    req: ModifyPasswordRequest,
-    cb?: (error: string, rep: ModifyPasswordResponse) => void
-  ): Promise<ModifyPasswordResponse> {
-    return this.request("ModifyPassword", req, cb)
+  async DescribeRegion(
+    req: DescribeRegionRequest,
+    cb?: (error: string, rep: DescribeRegionResponse) => void
+  ): Promise<DescribeRegionResponse> {
+    return this.request("DescribeRegion", req, cb)
+  }
+
+  /**
+   * 设置Groups 消费分组offset
+   */
+  async ModifyGroupOffsets(
+    req: ModifyGroupOffsetsRequest,
+    cb?: (error: string, rep: ModifyGroupOffsetsResponse) => void
+  ): Promise<ModifyGroupOffsetsResponse> {
+    return this.request("ModifyGroupOffsets", req, cb)
   }
 
   /**
@@ -503,6 +613,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询Datahub任务信息
+   */
+  async DescribeDatahubTask(
+    req: DescribeDatahubTaskRequest,
+    cb?: (error: string, rep: DescribeDatahubTaskResponse) => void
+  ): Promise<DescribeDatahubTaskResponse> {
+    return this.request("DescribeDatahubTask", req, cb)
+  }
+
+  /**
    * 用于查询cdc-ckafka任务状态
    */
   async CheckCdcCluster(
@@ -523,6 +643,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询最新消息列表
+   */
+  async FetchLatestDatahubMessageList(
+    req: FetchLatestDatahubMessageListRequest,
+    cb?: (error: string, rep: FetchLatestDatahubMessageListResponse) => void
+  ): Promise<FetchLatestDatahubMessageListResponse> {
+    return this.request("FetchLatestDatahubMessageList", req, cb)
+  }
+
+  /**
    * 删除用户
    */
   async DeleteUser(
@@ -530,6 +660,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteUserResponse) => void
   ): Promise<DeleteUserResponse> {
     return this.request("DeleteUser", req, cb)
+  }
+
+  /**
+   * 编辑Datahub连接源
+   */
+  async ModifyConnectResource(
+    req: ModifyConnectResourceRequest,
+    cb?: (error: string, rep: ModifyConnectResourceResponse) => void
+  ): Promise<ModifyConnectResourceResponse> {
+    return this.request("ModifyConnectResource", req, cb)
+  }
+
+  /**
+   * 根据指定offset位置的消息
+   */
+  async FetchDatahubMessageByOffset(
+    req: FetchDatahubMessageByOffsetRequest,
+    cb?: (error: string, rep: FetchDatahubMessageByOffsetResponse) => void
+  ): Promise<FetchDatahubMessageByOffsetResponse> {
+    return this.request("FetchDatahubMessageByOffset", req, cb)
   }
 
   /**
@@ -543,13 +693,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取主题列表详情（仅控制台调用）
+   * 获取Datahub消费分组offset
    */
-  async DescribeTopicDetail(
-    req: DescribeTopicDetailRequest,
-    cb?: (error: string, rep: DescribeTopicDetailResponse) => void
-  ): Promise<DescribeTopicDetailResponse> {
-    return this.request("DescribeTopicDetail", req, cb)
+  async DescribeDatahubGroupOffsets(
+    req: DescribeDatahubGroupOffsetsRequest,
+    cb?: (error: string, rep: DescribeDatahubGroupOffsetsResponse) => void
+  ): Promise<DescribeDatahubGroupOffsetsResponse> {
+    return this.request("DescribeDatahubGroupOffsets", req, cb)
   }
 
   /**
@@ -725,13 +875,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 枚举地域,只支持广州地域
+   * 查询Datahub连接源列表
    */
-  async DescribeRegion(
-    req: DescribeRegionRequest,
-    cb?: (error: string, rep: DescribeRegionResponse) => void
-  ): Promise<DescribeRegionResponse> {
-    return this.request("DescribeRegion", req, cb)
+  async DescribeConnectResources(
+    req: DescribeConnectResourcesRequest,
+    cb?: (error: string, rep: DescribeConnectResourcesResponse) => void
+  ): Promise<DescribeConnectResourcesResponse> {
+    return this.request("DescribeConnectResources", req, cb)
   }
 
   /**
@@ -762,5 +912,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteTopicResponse) => void
   ): Promise<DeleteTopicResponse> {
     return this.request("DeleteTopic", req, cb)
+  }
+
+  /**
+   * 修改密码
+   */
+  async ModifyPassword(
+    req: ModifyPasswordRequest,
+    cb?: (error: string, rep: ModifyPasswordResponse) => void
+  ): Promise<ModifyPasswordResponse> {
+    return this.request("ModifyPassword", req, cb)
   }
 }

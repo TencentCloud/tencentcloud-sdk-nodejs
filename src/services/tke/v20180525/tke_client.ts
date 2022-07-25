@@ -63,6 +63,7 @@ import {
   DeletePrometheusTemplateSyncRequest,
   DisableVpcCniNetworkTypeRequest,
   SyncPrometheusTempResponse,
+  CreateEdgeLogConfigRequest,
   CreatePrometheusDashboardResponse,
   DescribeTKEEdgeClusterStatusResponse,
   ModifyClusterAsGroupOptionAttributeRequest,
@@ -73,7 +74,7 @@ import {
   CheckInstancesUpgradeAbleRequest,
   ModifyPrometheusTemplateRequest,
   DeleteEdgeClusterInstancesRequest,
-  DescribeImageCachesRequest,
+  InstallEdgeLogAgentRequest,
   DescribePrometheusAlertRuleRequest,
   DescribeEdgeAvailableExtraArgsRequest,
   ExistedInstance,
@@ -123,6 +124,7 @@ import {
   DescribePrometheusTempSyncRequest,
   DescribeClustersResponse,
   DescribeImagesRequest,
+  UninstallEdgeLogAgentResponse,
   AddVpcCniSubnetsRequest,
   DescribePrometheusAlertHistoryResponse,
   ExistedInstancesPara,
@@ -139,6 +141,7 @@ import {
   DescribeClusterNodePoolDetailResponse,
   DescribeEKSContainerInstanceEventRequest,
   ScaleOutClusterMasterResponse,
+  DescribeImageCachesRequest,
   Toleration,
   CreateEKSContainerInstancesResponse,
   DescribeClusterKubeconfigResponse,
@@ -181,6 +184,7 @@ import {
   Taint,
   ModifyNodePoolInstanceTypesRequest,
   AddClusterCIDRRequest,
+  CreateClusterRequest,
   DescribeEdgeClusterExtraArgsRequest,
   DescribePrometheusGlobalConfigResponse,
   CreatePrometheusClusterAgentResponse,
@@ -227,7 +231,9 @@ import {
   EnableClusterAuditRequest,
   CreateClusterRouteTableRequest,
   DisableClusterAuditResponse,
+  DescribeClusterEndpointsResponse,
   RemoveNodeFromNodePoolRequest,
+  UninstallEdgeLogAgentRequest,
   DescribeClusterLevelChangeRecordsRequest,
   UpdateClusterVersionResponse,
   InstanceUpgradePreCheckResultItem,
@@ -284,7 +290,7 @@ import {
   EnableClusterDeletionProtectionRequest,
   RestartEKSContainerInstancesRequest,
   DescribeClusterLevelAttributeRequest,
-  DisableClusterDeletionProtectionRequest,
+  Exec,
   CreateECMInstancesRequest,
   ClusterCredential,
   DescribePrometheusOverviewsRequest,
@@ -326,6 +332,7 @@ import {
   CreatePrometheusTempRequest,
   CreatePrometheusDashboardRequest,
   DeleteClusterRouteTableResponse,
+  DisableClusterDeletionProtectionRequest,
   DescribeImageCachesResponse,
   PrometheusJobTargets,
   ModifyClusterAsGroupOptionAttributeResponse,
@@ -363,10 +370,11 @@ import {
   CreateTKEEdgeClusterRequest,
   CreateEKSClusterResponse,
   CreateImageCacheResponse,
-  Exec,
+  CreateEdgeLogConfigResponse,
   DescribeAvailableTKEEdgeVersionResponse,
   ModifyPrometheusRecordRuleYamlRequest,
   DeletePrometheusAlertPolicyResponse,
+  InstallEdgeLogAgentResponse,
   EdgeAvailableExtraArgs,
   IPAddress,
   DescribeTKEEdgeClusterCredentialRequest,
@@ -430,7 +438,7 @@ import {
   DescribeVersionsRequest,
   DescribePrometheusTempRequest,
   DeleteClusterRouteTableRequest,
-  CreateClusterRequest,
+  DescribeClusterEndpointsRequest,
   InstanceExtraArgs,
   AcquireClusterAdminRoleRequest,
   DeletePrometheusTemplateResponse,
@@ -526,6 +534,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 在tke@edge集群的边缘节点上安装日志采集组件
+   */
+  async InstallEdgeLogAgent(
+    req: InstallEdgeLogAgentRequest,
+    cb?: (error: string, rep: InstallEdgeLogAgentResponse) => void
+  ): Promise<InstallEdgeLogAgentResponse> {
+    return this.request("InstallEdgeLogAgent", req, cb)
+  }
+
+  /**
    * 修改集群弹性伸缩属性
    */
   async ModifyClusterAsGroupOptionAttribute(
@@ -553,6 +571,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteClusterResponse) => void
   ): Promise<DeleteClusterResponse> {
     return this.request("DeleteCluster", req, cb)
+  }
+
+  /**
+   * 从tke@edge集群边缘节点上卸载日志采集组件
+   */
+  async UninstallEdgeLogAgent(
+    req: UninstallEdgeLogAgentRequest,
+    cb?: (error: string, rep: UninstallEdgeLogAgentResponse) => void
+  ): Promise<UninstallEdgeLogAgentResponse> {
+    return this.request("UninstallEdgeLogAgent", req, cb)
   }
 
   /**
@@ -813,6 +841,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpdateClusterVersionResponse) => void
   ): Promise<UpdateClusterVersionResponse> {
     return this.request("UpdateClusterVersion", req, cb)
+  }
+
+  /**
+   * 以Yaml的方式创建聚合规则
+   */
+  async CreatePrometheusRecordRuleYaml(
+    req: CreatePrometheusRecordRuleYamlRequest,
+    cb?: (error: string, rep: CreatePrometheusRecordRuleYamlResponse) => void
+  ): Promise<CreatePrometheusRecordRuleYamlResponse> {
+    return this.request("CreatePrometheusRecordRuleYaml", req, cb)
   }
 
   /**
@@ -1566,6 +1604,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取集群的访问地址，包括内网地址，外网地址，外网域名，外网访问安全策略
+   */
+  async DescribeClusterEndpoints(
+    req: DescribeClusterEndpointsRequest,
+    cb?: (error: string, rep: DescribeClusterEndpointsResponse) => void
+  ): Promise<DescribeClusterEndpointsResponse> {
+    return this.request("DescribeClusterEndpoints", req, cb)
+  }
+
+  /**
    * 获取2.0实例关联集群列表
    */
   async DescribePrometheusClusterAgents(
@@ -1936,13 +1984,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 以Yaml的方式创建聚合规则
+   * 创建边缘集群日志采集配置
    */
-  async CreatePrometheusRecordRuleYaml(
-    req: CreatePrometheusRecordRuleYamlRequest,
-    cb?: (error: string, rep: CreatePrometheusRecordRuleYamlResponse) => void
-  ): Promise<CreatePrometheusRecordRuleYamlResponse> {
-    return this.request("CreatePrometheusRecordRuleYaml", req, cb)
+  async CreateEdgeLogConfig(
+    req: CreateEdgeLogConfigRequest,
+    cb?: (error: string, rep: CreateEdgeLogConfigResponse) => void
+  ): Promise<CreateEdgeLogConfigResponse> {
+    return this.request("CreateEdgeLogConfig", req, cb)
   }
 
   /**

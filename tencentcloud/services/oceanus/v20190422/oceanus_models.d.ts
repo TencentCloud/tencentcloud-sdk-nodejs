@@ -1,20 +1,7 @@
 /**
- * DescribeResourceConfigs返回参数结构体
+ * 复制作业单条明细结果
  */
-export interface DescribeResourceConfigsResponse {
-    /**
-      * 资源配置描述数组
-      */
-    ResourceConfigSet: Array<ResourceConfigItem>;
-    /**
-      * 资源配置数量
-      */
-    TotalCount: number;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
+export declare type CopyJobResult = null;
 /**
  * CreateResource请求参数结构体
  */
@@ -239,6 +226,14 @@ export interface StopJobDescription {
  */
 export interface CreateFolderRequest {
     /**
+      * 新建文件夹名
+      */
+    FolderName: string;
+    /**
+      * 新建文件夹的父目录ID
+      */
+    ParentId: string;
+    /**
       * 文件夹类型，0是任务文件夹，1是依赖文件夹
       */
     FolderType?: number;
@@ -385,17 +380,21 @@ export interface CreateResourceConfigRequest {
     WorkSpaceId?: string;
 }
 /**
- * 系统配置属性
+ * DescribeSystemResources返回参数结构体
  */
-export interface Property {
+export interface DescribeSystemResourcesResponse {
     /**
-      * 系统配置的Key
+      * 资源详细信息集合
       */
-    Key: string;
+    ResourceSet: Array<SystemResourceItem>;
     /**
-      * 系统配置的Value
+      * 总数量
       */
-    Value: string;
+    TotalCount: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 集群的版本相关信息
@@ -474,11 +473,35 @@ export interface DeleteTableConfigRequest {
 /**
  * CopyJobs请求参数结构体
  */
-export declare type CopyJobsRequest = null;
+export interface CopyJobsRequest {
+    /**
+      * 复制明细列表
+      */
+    JobItems: Array<CopyJobItem>;
+    /**
+      * 工作空间 SerialId
+      */
+    WorkSpaceId?: string;
+}
 /**
  * CopyJobs返回参数结构体
  */
 export interface CopyJobsResponse {
+    /**
+      * 成功条数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SuccessCount: number;
+    /**
+      * 失败条数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FailCount: number;
+    /**
+      * 结果列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CopyJobsResults: Array<CopyJobResult>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -766,6 +789,23 @@ export interface ResourceLocParam {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Region?: string;
+}
+/**
+ * 资源被Job 引用信息
+ */
+export interface ResourceRefJobInfo {
+    /**
+      * Job id
+      */
+    JobId: string;
+    /**
+      * Job配置版本
+      */
+    JobConfigVersion: number;
+    /**
+      * 资源版本
+      */
+    ResourceVersion: number;
 }
 /**
  * DescribeJobConfigs请求参数结构体
@@ -1098,27 +1138,18 @@ export interface DescribeSystemResourcesRequest {
  */
 export interface CreateFolderResponse {
     /**
+      * 新建文件夹的唯一ID
+      */
+    FolderId: string;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
 }
 /**
- * DescribeResources返回参数结构体
+ * 复制作业单条明细
  */
-export interface DescribeResourcesResponse {
-    /**
-      * 资源详细信息集合
-      */
-    ResourceSet: Array<ResourceItem>;
-    /**
-      * 总数量
-      */
-    TotalCount: number;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
+export declare type CopyJobItem = null;
 /**
  * 作业启动详情
  */
@@ -1200,6 +1231,19 @@ export interface DescribeJobConfigsResponse {
     RequestId?: string;
 }
 /**
+ * 系统配置属性
+ */
+export interface Property {
+    /**
+      * 系统配置的Key
+      */
+    Key: string;
+    /**
+      * 系统配置的Value
+      */
+    Value: string;
+}
+/**
  * DeleteResourceConfigs返回参数结构体
  */
 export interface DeleteResourceConfigsResponse {
@@ -1226,13 +1270,13 @@ export interface DescribeResourceRelatedJobsResponse {
     RequestId?: string;
 }
 /**
- * DescribeSystemResources返回参数结构体
+ * DescribeResources返回参数结构体
  */
-export interface DescribeSystemResourcesResponse {
+export interface DescribeResourcesResponse {
     /**
       * 资源详细信息集合
       */
-    ResourceSet: Array<SystemResourceItem>;
+    ResourceSet: Array<ResourceItem>;
     /**
       * 总数量
       */
@@ -1435,21 +1479,21 @@ export interface TriggerJobSavepointRequest {
     WorkSpaceId?: string;
 }
 /**
- * 资源被Job 引用信息
+ * DescribeResourceConfigs返回参数结构体
  */
-export interface ResourceRefJobInfo {
+export interface DescribeResourceConfigsResponse {
     /**
-      * Job id
+      * 资源配置描述数组
       */
-    JobId: string;
+    ResourceConfigSet: Array<ResourceConfigItem>;
     /**
-      * Job配置版本
+      * 资源配置数量
       */
-    JobConfigVersion: number;
+    TotalCount: number;
     /**
-      * 资源版本
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    ResourceVersion: number;
+    RequestId?: string;
 }
 /**
  * 资源引用参数

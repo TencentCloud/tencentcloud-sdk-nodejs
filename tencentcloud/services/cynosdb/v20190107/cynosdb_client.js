@@ -70,6 +70,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBackupConfig", req, cb);
     }
     /**
+     * 查询用户指定产品下的所有参数模板信息
+     */
+    async DescribeParamTemplates(req, cb) {
+        return this.request("DescribeParamTemplates", req, cb);
+    }
+    /**
      * 本接口（DescribeClusterInstanceGrps）用于查询实例组
      */
     async DescribeClusterInstanceGrps(req, cb) {
@@ -82,10 +88,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("OfflineCluster", req, cb);
     }
     /**
-     * 暂停serverless集群
+     * 此接口（ModifyBackupName）用于修改备份文件备注名。
      */
-    async PauseServerless(req, cb) {
-        return this.request("PauseServerless", req, cb);
+    async ModifyBackupName(req, cb) {
+        return this.request("ModifyBackupName", req, cb);
     }
     /**
      * 修改集群名称
@@ -232,10 +238,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstanceSlowQueries", req, cb);
     }
     /**
-     * 此接口（ModifyBackupName）用于修改备份文件备注名。
+     * 查询续费集群价格
      */
-    async ModifyBackupName(req, cb) {
-        return this.request("ModifyBackupName", req, cb);
+    async InquirePriceRenew(req, cb) {
+        return this.request("InquirePriceRenew", req, cb);
     }
     /**
      * 此接口（DescribeBinlogDownloadUrl）用于查询Binlog的下载地址。
@@ -254,6 +260,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeResourcesByDealName(req, cb) {
         return this.request("DescribeResourcesByDealName", req, cb);
+    }
+    /**
+     * 暂停serverless集群
+     */
+    async PauseServerless(req, cb) {
+        return this.request("PauseServerless", req, cb);
     }
     /**
      * 修改集群参数

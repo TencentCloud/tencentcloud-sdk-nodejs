@@ -980,6 +980,26 @@ export interface SyncPrometheusTempResponse {
 }
 
 /**
+ * CreateEdgeLogConfig请求参数结构体
+ */
+export interface CreateEdgeLogConfigRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+
+  /**
+   * 日志采集配置的json表达
+   */
+  LogConfig: string
+
+  /**
+   * CLS日志集ID
+   */
+  LogsetId?: string
+}
+
+/**
  * CreatePrometheusDashboard返回参数结构体
  */
 export interface CreatePrometheusDashboardResponse {
@@ -1181,36 +1201,13 @@ export interface DeleteEdgeClusterInstancesRequest {
 }
 
 /**
- * DescribeImageCaches请求参数结构体
+ * InstallEdgeLogAgent请求参数结构体
  */
-export interface DescribeImageCachesRequest {
+export interface InstallEdgeLogAgentRequest {
   /**
-   * 镜像缓存Id数组
+   * 集群ID
    */
-  ImageCacheIds?: Array<string>
-
-  /**
-   * 镜像缓存名称数组
-   */
-  ImageCacheNames?: Array<string>
-
-  /**
-   * 限定此次返回资源的数量。如果不设定，默认返回20，最大不能超过50
-   */
-  Limit?: number
-
-  /**
-   * 偏移量,默认0
-   */
-  Offset?: number
-
-  /**
-      * 过滤条件，可选条件：
-(1)实例名称
-KeyName: image-cache-name
-类型：String
-      */
-  Filters?: Array<Filter>
+  ClusterId: string
 }
 
 /**
@@ -2377,6 +2374,16 @@ export interface DescribeClustersResponse {
 export type DescribeImagesRequest = null
 
 /**
+ * UninstallEdgeLogAgent返回参数结构体
+ */
+export interface UninstallEdgeLogAgentResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * AddVpcCniSubnets请求参数结构体
  */
 export interface AddVpcCniSubnetsRequest {
@@ -2776,6 +2783,39 @@ export interface ScaleOutClusterMasterResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeImageCaches请求参数结构体
+ */
+export interface DescribeImageCachesRequest {
+  /**
+   * 镜像缓存Id数组
+   */
+  ImageCacheIds?: Array<string>
+
+  /**
+   * 镜像缓存名称数组
+   */
+  ImageCacheNames?: Array<string>
+
+  /**
+   * 限定此次返回资源的数量。如果不设定，默认返回20，最大不能超过50
+   */
+  Limit?: number
+
+  /**
+   * 偏移量,默认0
+   */
+  Offset?: number
+
+  /**
+      * 过滤条件，可选条件：
+(1)实例名称
+KeyName: image-cache-name
+类型：String
+      */
+  Filters?: Array<Filter>
 }
 
 /**
@@ -3902,6 +3942,56 @@ export interface AddClusterCIDRRequest {
    * 是否忽略ClusterCIDR与VPC路由表的冲突
    */
   IgnoreClusterCIDRConflict?: boolean
+}
+
+/**
+ * CreateCluster请求参数结构体
+ */
+export interface CreateClusterRequest {
+  /**
+   * 集群容器网络配置信息
+   */
+  ClusterCIDRSettings: ClusterCIDRSettings
+
+  /**
+   * 集群类型，托管集群：MANAGED_CLUSTER，独立集群：INDEPENDENT_CLUSTER。
+   */
+  ClusterType: string
+
+  /**
+   * CVM创建透传参数，json化字符串格式，详见[CVM创建实例](https://cloud.tencent.com/document/product/213/15730)接口。总机型(包括地域)数量不超过10个，相同机型(地域)购买多台机器可以通过设置参数中RunInstances中InstanceCount来实现。
+   */
+  RunInstancesForNode?: Array<RunInstancesForNode>
+
+  /**
+   * 集群的基本配置信息
+   */
+  ClusterBasicSettings?: ClusterBasicSettings
+
+  /**
+   * 集群高级配置信息
+   */
+  ClusterAdvancedSettings?: ClusterAdvancedSettings
+
+  /**
+   * 节点高级配置信息
+   */
+  InstanceAdvancedSettings?: InstanceAdvancedSettings
+
+  /**
+   * 已存在实例的配置信息。所有实例必须在同一个VPC中，最大数量不超过100，不支持添加竞价实例。
+   */
+  ExistedInstancesForNode?: Array<ExistedInstancesForNode>
+
+  /**
+   * CVM类型和其对应的数据盘挂载配置信息
+   */
+  InstanceDataDiskMountSettings?: Array<InstanceDataDiskMountSetting>
+
+  /**
+   * 需要安装的扩展组件信息
+   */
+  ExtensionAddons?: Array<ExtensionAddon>
 }
 
 /**
@@ -5117,6 +5207,43 @@ export interface DisableClusterAuditResponse {
 }
 
 /**
+ * DescribeClusterEndpoints返回参数结构体
+ */
+export interface DescribeClusterEndpointsResponse {
+  /**
+   * 集群APIServer的CA证书
+   */
+  CertificationAuthority: string
+
+  /**
+   * 集群APIServer的外网访问地址
+   */
+  ClusterExternalEndpoint: string
+
+  /**
+   * 集群APIServer的内网访问地址
+   */
+  ClusterIntranetEndpoint: string
+
+  /**
+      * 集群APIServer的域名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClusterDomain: string
+
+  /**
+      * 集群APIServer的外网访问ACL列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClusterExternalACL: Array<string>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * RemoveNodeFromNodePool请求参数结构体
  */
 export interface RemoveNodeFromNodePoolRequest {
@@ -5134,6 +5261,16 @@ export interface RemoveNodeFromNodePoolRequest {
    * 节点id列表，一次最多支持100台
    */
   InstanceIds: Array<string>
+}
+
+/**
+ * UninstallEdgeLogAgent请求参数结构体
+ */
+export interface UninstallEdgeLogAgentRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
 }
 
 /**
@@ -6280,13 +6417,14 @@ export interface DescribeClusterLevelAttributeRequest {
 }
 
 /**
- * DisableClusterDeletionProtection请求参数结构体
+ * 探针在容器内执行检测命令参数类型
  */
-export interface DisableClusterDeletionProtectionRequest {
+export interface Exec {
   /**
-   * 集群ID
-   */
-  ClusterId: string
+      * 容器内检测的命令
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Commands?: Array<string>
 }
 
 /**
@@ -7248,6 +7386,16 @@ export interface DeleteClusterRouteTableResponse {
 }
 
 /**
+ * DisableClusterDeletionProtection请求参数结构体
+ */
+export interface DisableClusterDeletionProtectionRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+}
+
+/**
  * DescribeImageCaches返回参数结构体
  */
 export interface DescribeImageCachesResponse {
@@ -8172,14 +8320,13 @@ export interface CreateImageCacheResponse {
 }
 
 /**
- * 探针在容器内执行检测命令参数类型
+ * CreateEdgeLogConfig返回参数结构体
  */
-export interface Exec {
+export interface CreateEdgeLogConfigResponse {
   /**
-      * 容器内检测的命令
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Commands?: Array<string>
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -8221,6 +8368,16 @@ export interface ModifyPrometheusRecordRuleYamlRequest {
  * DeletePrometheusAlertPolicy返回参数结构体
  */
 export interface DeletePrometheusAlertPolicyResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * InstallEdgeLogAgent返回参数结构体
+ */
+export interface InstallEdgeLogAgentResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -9631,53 +9788,13 @@ export interface DeleteClusterRouteTableRequest {
 }
 
 /**
- * CreateCluster请求参数结构体
+ * DescribeClusterEndpoints请求参数结构体
  */
-export interface CreateClusterRequest {
+export interface DescribeClusterEndpointsRequest {
   /**
-   * 集群容器网络配置信息
+   * 集群ID
    */
-  ClusterCIDRSettings: ClusterCIDRSettings
-
-  /**
-   * 集群类型，托管集群：MANAGED_CLUSTER，独立集群：INDEPENDENT_CLUSTER。
-   */
-  ClusterType: string
-
-  /**
-   * CVM创建透传参数，json化字符串格式，详见[CVM创建实例](https://cloud.tencent.com/document/product/213/15730)接口。总机型(包括地域)数量不超过10个，相同机型(地域)购买多台机器可以通过设置参数中RunInstances中InstanceCount来实现。
-   */
-  RunInstancesForNode?: Array<RunInstancesForNode>
-
-  /**
-   * 集群的基本配置信息
-   */
-  ClusterBasicSettings?: ClusterBasicSettings
-
-  /**
-   * 集群高级配置信息
-   */
-  ClusterAdvancedSettings?: ClusterAdvancedSettings
-
-  /**
-   * 节点高级配置信息
-   */
-  InstanceAdvancedSettings?: InstanceAdvancedSettings
-
-  /**
-   * 已存在实例的配置信息。所有实例必须在同一个VPC中，最大数量不超过100，不支持添加竞价实例。
-   */
-  ExistedInstancesForNode?: Array<ExistedInstancesForNode>
-
-  /**
-   * CVM类型和其对应的数据盘挂载配置信息
-   */
-  InstanceDataDiskMountSettings?: Array<InstanceDataDiskMountSetting>
-
-  /**
-   * 需要安装的扩展组件信息
-   */
-  ExtensionAddons?: Array<ExtensionAddon>
+  ClusterId: string
 }
 
 /**

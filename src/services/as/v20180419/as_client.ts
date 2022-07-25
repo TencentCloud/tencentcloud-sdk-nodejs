@@ -79,6 +79,7 @@ import {
   ModifyLoadBalancerTargetAttributesResponse,
   ModifyAutoScalingGroupResponse,
   DeleteLaunchConfigurationRequest,
+  InvocationResult,
   ModifyScalingPolicyRequest,
   InstanceMarketOptionsRequest,
   UpgradeLifecycleHookResponse,
