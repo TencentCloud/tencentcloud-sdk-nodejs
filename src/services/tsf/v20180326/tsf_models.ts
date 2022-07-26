@@ -4037,6 +4037,11 @@ export interface DescribeMicroserviceRequest {
    * 可选，根据部署组ID进行过滤
    */
   GroupIds?: Array<string>
+
+  /**
+   * 过滤条件。多个 filter 之间是与关系，单个 filter 多个 value 之间是或关系。filter name 取值有：id（实例id）、name（实例名）、lan-ip（内网ip）、node-ip（所在节点ip）
+   */
+  Filters?: Array<Filter>
 }
 
 /**
@@ -11466,7 +11471,7 @@ export interface DescribeClusterInstancesResponse {
       * 集群机器实例分页信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Result?: TsfPageInstance
+  Result: TsfPageInstance
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

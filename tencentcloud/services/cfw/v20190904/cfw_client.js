@@ -306,7 +306,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteResourceGroup", req, cb);
     }
     /**
-     * 创建防火墙实例
+     * 创建NAT防火墙实例（Region参数必填）
      */
     async CreateNatFwInstance(req, cb) {
         return this.request("CreateNatFwInstance", req, cb);

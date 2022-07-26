@@ -73,7 +73,7 @@ export interface CodeBatch {
       */
     ProductName: string;
     /**
-      * 0
+      * 未使用
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Ext: Ext;
@@ -116,6 +116,18 @@ export interface ModifyCodeBatchRequest {
       * 模板ID
       */
     MpTpl?: string;
+    /**
+      * 商户ID
+      */
+    MerchantId?: string;
+    /**
+      * 商品ID
+      */
+    ProductId?: string;
+    /**
+      * 备注
+      */
+    Remark?: string;
 }
 /**
  * CreateCodeBatch返回参数结构体
@@ -1278,6 +1290,10 @@ export interface CreateCodeBatchRequest {
       * 备注
       */
     Remark?: string;
+    /**
+      * 活动ID
+      */
+    MpTpl?: string;
 }
 /**
  * ModifyCodeBatch返回参数结构体

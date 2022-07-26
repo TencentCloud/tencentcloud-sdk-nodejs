@@ -196,7 +196,7 @@ export declare class Client extends AbstractClient {
      */
     DeleteResourceGroup(req: DeleteResourceGroupRequest, cb?: (error: string, rep: DeleteResourceGroupResponse) => void): Promise<DeleteResourceGroupResponse>;
     /**
-     * 创建防火墙实例
+     * 创建NAT防火墙实例（Region参数必填）
      */
     CreateNatFwInstance(req: CreateNatFwInstanceRequest, cb?: (error: string, rep: CreateNatFwInstanceResponse) => void): Promise<CreateNatFwInstanceResponse>;
     /**

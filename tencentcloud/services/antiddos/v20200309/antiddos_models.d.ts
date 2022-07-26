@@ -938,6 +938,30 @@ export interface L7RuleHealth {
       * 健康检查判定正常状态码，1xx =1, 2xx=2, 3xx=4, 4xx=8,5xx=16，多个状态码值加和
       */
     StatusCode: number;
+    /**
+      * 是否同时下发http和https规则健康检查配置
+      */
+    ProtocolFlag?: number;
+    /**
+      * 被动探测开关，=1表示开启；=0表示关闭
+      */
+    PassiveEnable?: number;
+    /**
+      * 被动探测不健康屏蔽时间
+      */
+    BlockInter?: number;
+    /**
+      * 被动探测不健康统计间隔
+      */
+    FailedCountInter?: number;
+    /**
+      * 被动探测不健康阈值
+      */
+    FailedThreshold?: number;
+    /**
+      * 被动探测判定正常状态码，1xx =1, 2xx=2, 3xx=4, 4xx=8,5xx=16，多个状态码值加和
+      */
+    PassiveStatusCode?: number;
 }
 /**
  * ModifyPacketFilterConfig返回参数结构体
@@ -2153,6 +2177,11 @@ export interface L4RuleSource {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Port?: number;
+    /**
+      * 备份源站，1: 备份源站，0: 普通源站
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Backup?: number;
 }
 /**
  * 协议封禁配置
@@ -2308,6 +2337,11 @@ export interface BGPIPInstance {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     AnycastOutPackRelation: AnycastOutPackRelation;
+    /**
+      * 资源实例版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InstanceVersion: number;
 }
 /**
  * DeleteWaterPrintConfig返回参数结构体

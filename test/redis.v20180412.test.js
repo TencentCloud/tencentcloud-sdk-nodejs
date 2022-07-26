@@ -158,9 +158,9 @@ it("redis.v20180412.DescribeParamTemplateInfo", async function () {
     }
 })
 
-it("redis.v20180412.DescribeInstanceAccount", async function () {
+it("redis.v20180412.DescribeInstanceBackups", async function () {
     try {
-       const data = await client.DescribeInstanceAccount({})
+       const data = await client.DescribeInstanceBackups({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -168,9 +168,9 @@ it("redis.v20180412.DescribeInstanceAccount", async function () {
     }
 })
 
-it("redis.v20180412.DescribeAutoBackupConfig", async function () {
+it("redis.v20180412.DescribeInstanceDTSInfo", async function () {
     try {
-       const data = await client.DescribeAutoBackupConfig({})
+       const data = await client.DescribeInstanceDTSInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -308,9 +308,9 @@ it("redis.v20180412.DisableReplicaReadonly", async function () {
     }
 })
 
-it("redis.v20180412.DescribeInstanceDTSInfo", async function () {
+it("redis.v20180412.DescribeAutoBackupConfig", async function () {
     try {
-       const data = await client.DescribeInstanceDTSInfo({})
+       const data = await client.DescribeAutoBackupConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -348,9 +348,9 @@ it("redis.v20180412.DescribeInstanceMonitorSIP", async function () {
     }
 })
 
-it("redis.v20180412.CreateInstances", async function () {
+it("redis.v20180412.ClearInstance", async function () {
     try {
-       const data = await client.CreateInstances({})
+       const data = await client.ClearInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -428,9 +428,9 @@ it("redis.v20180412.DescribeTaskInfo", async function () {
     }
 })
 
-it("redis.v20180412.AllocateWanAddress", async function () {
+it("redis.v20180412.DescribeBackupUrl", async function () {
     try {
-       const data = await client.AllocateWanAddress({})
+       const data = await client.DescribeBackupUrl({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -478,6 +478,16 @@ it("redis.v20180412.AssociateSecurityGroups", async function () {
     }
 })
 
+it("redis.v20180412.UpgradeProxyVersion", async function () {
+    try {
+       const data = await client.UpgradeProxyVersion({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("redis.v20180412.ModifyInstanceParams", async function () {
     try {
        const data = await client.ModifyInstanceParams({})
@@ -488,9 +498,9 @@ it("redis.v20180412.ModifyInstanceParams", async function () {
     }
 })
 
-it("redis.v20180412.UpgradeProxyVersion", async function () {
+it("redis.v20180412.DescribeInstanceDealDetail", async function () {
     try {
-       const data = await client.UpgradeProxyVersion({})
+       const data = await client.DescribeInstanceDealDetail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -571,6 +581,16 @@ it("redis.v20180412.DescribeInstanceSecurityGroup", async function () {
 it("redis.v20180412.DescribeInstanceMonitorBigKeyTypeDist", async function () {
     try {
        const data = await client.DescribeInstanceMonitorBigKeyTypeDist({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("redis.v20180412.ChangeMasterInstance", async function () {
+    try {
+       const data = await client.ChangeMasterInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -728,9 +748,9 @@ it("redis.v20180412.DescribeInstanceParamRecords", async function () {
     }
 })
 
-it("redis.v20180412.ClearInstance", async function () {
+it("redis.v20180412.CreateInstances", async function () {
     try {
-       const data = await client.ClearInstance({})
+       const data = await client.CreateInstances({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -748,9 +768,9 @@ it("redis.v20180412.DescribeInstanceZoneInfo", async function () {
     }
 })
 
-it("redis.v20180412.DescribeInstanceDealDetail", async function () {
+it("redis.v20180412.AllocateWanAddress", async function () {
     try {
-       const data = await client.DescribeInstanceDealDetail({})
+       const data = await client.AllocateWanAddress({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -768,9 +788,9 @@ it("redis.v20180412.DeleteInstanceAccount", async function () {
     }
 })
 
-it("redis.v20180412.DescribeInstanceBackups", async function () {
+it("redis.v20180412.DescribeInstanceAccount", async function () {
     try {
-       const data = await client.DescribeInstanceBackups({})
+       const data = await client.DescribeInstanceAccount({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -818,9 +838,9 @@ it("redis.v20180412.DescribeInstanceMonitorTookDist", async function () {
     }
 })
 
-it("redis.v20180412.DescribeBackupUrl", async function () {
+it("redis.v20180412.ChangeInstanceRole", async function () {
     try {
-       const data = await client.DescribeBackupUrl({})
+       const data = await client.ChangeInstanceRole({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -1017,7 +1017,7 @@ export interface CreateTCPListenersRequest {
   Ports: Array<number>
 
   /**
-   * 监听器源站调度策略，支持轮询（rr），加权轮询（wrr），最小连接数（lc）。
+   * 监听器源站访问策略，其中：rr表示轮询；wrr表示加权轮询；lc表示最小连接数；lrtt表示最小时延。
    */
   Scheduler: string
 
@@ -1027,7 +1027,7 @@ export interface CreateTCPListenersRequest {
   HealthCheck: number
 
   /**
-   * 监听器对应源站类型，支持IP或者DOMAIN类型。DOMAIN源站类型不支持wrr的源站调度策略。
+   * 监听器绑定源站类型。IP表示IP地址，DOMAIN表示域名。
    */
   RealServerType: string
 
@@ -1476,7 +1476,7 @@ export interface RuleInfo {
   RealServerType: string
 
   /**
-   * 转发源站策略
+   * 监听器源站访问策略，其中：rr表示轮询；wrr表示加权轮询；lc表示最小连接数；lrtt表示最小时延。
    */
   Scheduler: string
 
@@ -1985,12 +1985,12 @@ export interface CreateUDPListenersRequest {
   Ports: Array<number>
 
   /**
-   * 监听器源站调度策略，支持轮询（rr），加权轮询（wrr），最小连接数（lc）
+   * 监听器源站访问策略，其中：rr表示轮询；wrr表示加权轮询；lc表示最小连接数；lrtt表示最小时延。
    */
   Scheduler: string
 
   /**
-   * 监听器对应源站类型，支持IP或者DOMAIN类型
+   * 监听器绑定源站类型。IP表示IP地址，DOMAIN表示域名。
    */
   RealServerType: string
 
@@ -2008,6 +2008,61 @@ export interface CreateUDPListenersRequest {
    * 源站端口列表，该参数仅支持v1版本监听器和通道组监听器
    */
   RealServerPorts?: Array<number>
+
+  /**
+   * 源站健康检查时间间隔，单位：秒。时间间隔取值在[5，300]之间。
+   */
+  DelayLoop?: number
+
+  /**
+   * 源站健康检查响应超时时间，单位：秒。超时时间取值在[2，60]之间。超时时间应小于健康检查时间间隔DelayLoop。
+   */
+  ConnectTimeout?: number
+
+  /**
+   * 健康阈值，表示连续检查成功多少次后认定源站健康。范围为1到10
+   */
+  HealthyThreshold?: number
+
+  /**
+   * 不健康阈值，表示连续检查失败多少次数后认为源站不健康。范围为1到10
+   */
+  UnhealthyThreshold?: number
+
+  /**
+   * 源站是否开启主备模式：1开启，0关闭，DOMAIN类型源站不支持开启
+   */
+  FailoverSwitch?: number
+
+  /**
+   * 源站是否开启健康检查：1开启，0关闭。
+   */
+  HealthCheck?: number
+
+  /**
+   * UDP源站健康类型。PORT表示检查端口，PING表示PING。
+   */
+  CheckType?: string
+
+  /**
+   * UDP源站健康检查探测端口。
+   */
+  CheckPort?: number
+
+  /**
+   * UDP源站健康检查端口探测报文类型：TEXT表示文本。仅在健康检查类型为PORT时使用。
+   */
+  ContextType?: string
+
+  /**
+   * UDP源站健康检查端口探测发送报文。仅在健康检查类型为PORT时使用。
+   */
+  SendContext?: string
+
+  /**
+   * UDP源站健康检查端口探测接收报文。仅在健康检查类型为PORT时使用。
+   */
+  RecvContext?: string
 }
 
 /**
@@ -2025,11 +2080,8 @@ export interface ModifyRuleAttributeRequest {
   RuleId: string
 
   /**
-      * 调度策略，其中：
-rr，轮询；
-wrr，加权轮询；
-lc，最小连接数。
-      */
+   * 监听器源站访问策略，其中：rr表示轮询；wrr表示加权轮询；lc表示最小连接数；lrtt表示最小时延。
+   */
   Scheduler?: string
 
   /**
@@ -2138,11 +2190,8 @@ export interface TCPListener {
   ListenerStatus: number
 
   /**
-      * 监听器源站访问策略，其中：
-rr表示轮询；
-wrr表示加权轮询；
-lc表示最小连接数。
-      */
+   * 监听器源站访问策略，其中：rr表示轮询；wrr表示加权轮询；lc表示最小连接数；lrtt表示最小时延。
+   */
   Scheduler: string
 
   /**
@@ -2561,7 +2610,7 @@ export interface ModifyTCPListenerAttributeRequest {
   ListenerName?: string
 
   /**
-   * 监听器源站调度策略，支持轮询（rr），加权轮询（wrr），最小连接数（lc）。
+   * 监听器源站访问策略，其中：rr表示轮询；wrr表示加权轮询；lc表示最小连接数；lrtt表示最小时延。
    */
   Scheduler?: string
 
@@ -3298,7 +3347,7 @@ export interface CreateRuleRequest {
   RealServerType: string
 
   /**
-   * 规则转发源站调度策略，支持轮询（rr），加权轮询（wrr），最小连接数（lc）。
+   * 监听器源站访问策略，其中：rr表示轮询；wrr表示加权轮询；lc表示最小连接数；lrtt表示最小时延。
    */
   Scheduler: string
 
@@ -4361,6 +4410,11 @@ export interface BindRealServer {
    * 当源站为域名时，域名被解析成一个或者多个IP，该字段表示其中异常的IP列表。状态异常，但该字段为空时，表示域名解析异常。
    */
   DownIPList: Array<string>
+
+  /**
+   * 源站主备角色：master表示主，slave表示备，该参数必须在监听器打开了源站主备模式。
+   */
+  RealServerFailoverRole: string
 }
 
 /**
@@ -4508,9 +4562,64 @@ export interface ModifyUDPListenerAttributeRequest {
   ListenerName?: string
 
   /**
-   * 监听器源站调度策略
+   * 监听器源站访问策略，其中：rr表示轮询；wrr表示加权轮询；lc表示最小连接数；lrtt表示最小时延。
    */
   Scheduler?: string
+
+  /**
+   * 源站健康检查时间间隔，单位：秒。时间间隔取值在[5，300]之间。
+   */
+  DelayLoop?: number
+
+  /**
+   * 源站健康检查响应超时时间，单位：秒。超时时间取值在[2，60]之间。超时时间应小于健康检查时间间隔DelayLoop。
+   */
+  ConnectTimeout?: number
+
+  /**
+   * 健康阈值，表示连续检查成功多少次后认定源站健康。范围为1到10
+   */
+  HealthyThreshold?: number
+
+  /**
+   * 不健康阈值，表示连续检查失败多少次数后认为源站不健康。范围为1到10
+   */
+  UnhealthyThreshold?: number
+
+  /**
+   * 源站是否开启主备模式：1开启，0关闭，DOMAIN类型源站不支持开启
+   */
+  FailoverSwitch?: number
+
+  /**
+   * 源站是否开启健康检查：1开启，0关闭。
+   */
+  HealthCheck?: number
+
+  /**
+   * UDP源站健康类型。PORT表示检查端口，PING表示PING。
+   */
+  CheckType?: string
+
+  /**
+   * UDP源站健康检查探测端口。
+   */
+  CheckPort?: number
+
+  /**
+   * UDP源站健康检查端口探测报文类型：TEXT表示文本。仅在健康检查类型为PORT时使用。
+   */
+  ContextType?: string
+
+  /**
+   * UDP源站健康检查端口探测发送报文。仅在健康检查类型为PORT时使用。
+   */
+  SendContext?: string
+
+  /**
+   * UDP源站健康检查端口探测接收报文。仅在健康检查类型为PORT时使用。
+   */
+  RecvContext?: string
 }
 
 /**
@@ -5543,7 +5652,7 @@ export interface UDPListener {
   ListenerStatus: number
 
   /**
-   * 监听器源站访问策略
+   * 监听器源站访问策略，其中：rr表示轮询；wrr表示加权轮询；lc表示最小连接数；lrtt表示最小时延。
    */
   Scheduler: string
 
@@ -5567,6 +5676,72 @@ export interface UDPListener {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   SessionPersist: number
+
+  /**
+      * 源站健康检查时间间隔，单位：秒。时间间隔取值在[5，300]之间。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DelayLoop: number
+
+  /**
+      * 源站健康检查响应超时时间，单位：秒。超时时间取值在[2，60]之间。超时时间应小于健康检查时间间隔DelayLoop。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ConnectTimeout: number
+
+  /**
+      * 健康阈值，表示连续检查成功多少次后认定源站健康。范围为1到10
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  HealthyThreshold: number
+
+  /**
+      * 不健康阈值，表示连续检查失败多少次数后认为源站不健康。范围为1到10
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UnhealthyThreshold: number
+
+  /**
+      * 源站是否开启主备模式：1开启，0关闭，DOMAIN类型源站不支持开启
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FailoverSwitch: number
+
+  /**
+      * 源站是否开启健康检查：1开启，0关闭。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  HealthCheck: number
+
+  /**
+      * UDP源站健康类型。PORT表示检查端口，PING表示PING。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CheckType: string
+
+  /**
+      * UDP源站健康检查探测端口。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CheckPort: number
+
+  /**
+      * UDP源站健康检查端口探测报文类型：TEXT表示文本。仅在健康检查类型为PORT时使用。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ContextType: string
+
+  /**
+      * UDP源站健康检查端口探测发送报文。仅在健康检查类型为PORT时使用。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SendContext: string
+
+  /**
+      * UDP源站健康检查端口探测接收报文。仅在健康检查类型为PORT时使用。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RecvContext: string
 }
 
 /**
@@ -5839,7 +6014,7 @@ export interface RealServerBindSetReq {
   RealServerWeight?: number
 
   /**
-   * 源站主备角色：master主，slave备，该参数必须在监听器打开了源站主备模式，且监听器类型为TCP监听器
+   * 源站主备角色：master表示主，slave表示备，该参数必须在监听器打开了源站主备模式。
    */
   RealServerFailoverRole?: string
 }

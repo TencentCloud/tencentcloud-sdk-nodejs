@@ -664,7 +664,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建防火墙实例
+   * 创建NAT防火墙实例（Region参数必填）
    */
   async CreateNatFwInstance(
     req: CreateNatFwInstanceRequest,

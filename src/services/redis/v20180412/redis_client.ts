@@ -76,6 +76,7 @@ import {
   CreateParamTemplateResponse,
   InstanceTagInfo,
   DescribeInstanceDTSInfoResponse,
+  ChangeMasterInstanceResponse,
   AddReplicationInstanceResponse,
   DestroyPostpaidInstanceResponse,
   SwitchInstanceVipRequest,
@@ -85,7 +86,7 @@ import {
   RedisCommonInstanceList,
   SourceInfo,
   ModifyDBInstanceSecurityGroupsResponse,
-  DescribeInstanceMonitorHotKeyRequest,
+  ChangeMasterInstanceRequest,
   DescribeInstanceDTSInfoRequest,
   CreateParamTemplateRequest,
   DescribeTendisSlowLogResponse,
@@ -169,7 +170,9 @@ import {
   DescribeAutoBackupConfigRequest,
   DescribeInstanceMonitorSIPResponse,
   DestroyPostpaidInstanceRequest,
+  ChangeInstanceRoleRequest,
   DeleteInstanceAccountRequest,
+  DescribeInstanceMonitorHotKeyRequest,
   UpgradeInstanceResponse,
   ManualBackupInstanceRequest,
   DescribeReplicationGroupResponse,
@@ -217,6 +220,7 @@ import {
   DescribeInstanceMonitorSIPRequest,
   InstanceClusterShard,
   TendisSlowLogDetail,
+  ChangeInstanceRoleResponse,
   UpgradeProxyVersionRequest,
   ZoneCapacityConf,
   UpgradeInstanceRequest,
@@ -380,23 +384,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查看实例子账号信息
+   * 查询 CRS 实例备份列表
    */
-  async DescribeInstanceAccount(
-    req: DescribeInstanceAccountRequest,
-    cb?: (error: string, rep: DescribeInstanceAccountResponse) => void
-  ): Promise<DescribeInstanceAccountResponse> {
-    return this.request("DescribeInstanceAccount", req, cb)
+  async DescribeInstanceBackups(
+    req: DescribeInstanceBackupsRequest,
+    cb?: (error: string, rep: DescribeInstanceBackupsResponse) => void
+  ): Promise<DescribeInstanceBackupsResponse> {
+    return this.request("DescribeInstanceBackups", req, cb)
   }
 
   /**
-   * 获取备份配置
+   * 查询实例DTS信息
    */
-  async DescribeAutoBackupConfig(
-    req: DescribeAutoBackupConfigRequest,
-    cb?: (error: string, rep: DescribeAutoBackupConfigResponse) => void
-  ): Promise<DescribeAutoBackupConfigResponse> {
-    return this.request("DescribeAutoBackupConfig", req, cb)
+  async DescribeInstanceDTSInfo(
+    req: DescribeInstanceDTSInfoRequest,
+    cb?: (error: string, rep: DescribeInstanceDTSInfoResponse) => void
+  ): Promise<DescribeInstanceDTSInfoResponse> {
+    return this.request("DescribeInstanceDTSInfo", req, cb)
   }
 
   /**
@@ -530,13 +534,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询实例DTS信息
+   * 获取备份配置
    */
-  async DescribeInstanceDTSInfo(
-    req: DescribeInstanceDTSInfoRequest,
-    cb?: (error: string, rep: DescribeInstanceDTSInfoResponse) => void
-  ): Promise<DescribeInstanceDTSInfoResponse> {
-    return this.request("DescribeInstanceDTSInfo", req, cb)
+  async DescribeAutoBackupConfig(
+    req: DescribeAutoBackupConfigRequest,
+    cb?: (error: string, rep: DescribeAutoBackupConfigResponse) => void
+  ): Promise<DescribeAutoBackupConfigResponse> {
+    return this.request("DescribeAutoBackupConfig", req, cb)
   }
 
   /**
@@ -570,13 +574,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(CreateInstances)用于创建redis实例。
+   * 清空Redis实例的实例数据。
    */
-  async CreateInstances(
-    req: CreateInstancesRequest,
-    cb?: (error: string, rep: CreateInstancesResponse) => void
-  ): Promise<CreateInstancesResponse> {
-    return this.request("CreateInstances", req, cb)
+  async ClearInstance(
+    req: ClearInstanceRequest,
+    cb?: (error: string, rep: ClearInstanceResponse) => void
+  ): Promise<ClearInstanceResponse> {
+    return this.request("ClearInstance", req, cb)
   }
 
   /**
@@ -650,13 +654,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 开通外网
+   * 查询备份Rdb下载地址(接口灰度中，需要加白名单使用)
    */
-  async AllocateWanAddress(
-    req: AllocateWanAddressRequest,
-    cb?: (error: string, rep: AllocateWanAddressResponse) => void
-  ): Promise<AllocateWanAddressResponse> {
-    return this.request("AllocateWanAddress", req, cb)
+  async DescribeBackupUrl(
+    req: DescribeBackupUrlRequest,
+    cb?: (error: string, rep: DescribeBackupUrlResponse) => void
+  ): Promise<DescribeBackupUrlResponse> {
+    return this.request("DescribeBackupUrl", req, cb)
   }
 
   /**
@@ -700,6 +704,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 实例proxy版本升级
+   */
+  async UpgradeProxyVersion(
+    req: UpgradeProxyVersionRequest,
+    cb?: (error: string, rep: UpgradeProxyVersionResponse) => void
+  ): Promise<UpgradeProxyVersionResponse> {
+    return this.request("UpgradeProxyVersion", req, cb)
+  }
+
+  /**
    * 本接口(ModifyInstanceParams)用于修改实例参数。
    */
   async ModifyInstanceParams(
@@ -710,13 +724,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 实例proxy版本升级
+   * 查询订单信息
    */
-  async UpgradeProxyVersion(
-    req: UpgradeProxyVersionRequest,
-    cb?: (error: string, rep: UpgradeProxyVersionResponse) => void
-  ): Promise<UpgradeProxyVersionResponse> {
-    return this.request("UpgradeProxyVersion", req, cb)
+  async DescribeInstanceDealDetail(
+    req: DescribeInstanceDealDetailRequest,
+    cb?: (error: string, rep: DescribeInstanceDealDetailResponse) => void
+  ): Promise<DescribeInstanceDealDetailResponse> {
+    return this.request("DescribeInstanceDealDetail", req, cb)
   }
 
   /**
@@ -797,6 +811,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeInstanceMonitorBigKeyTypeDistResponse) => void
   ): Promise<DescribeInstanceMonitorBigKeyTypeDistResponse> {
     return this.request("DescribeInstanceMonitorBigKeyTypeDist", req, cb)
+  }
+
+  /**
+   * 复制组实例切主
+   */
+  async ChangeMasterInstance(
+    req: ChangeMasterInstanceRequest,
+    cb?: (error: string, rep: ChangeMasterInstanceResponse) => void
+  ): Promise<ChangeMasterInstanceResponse> {
+    return this.request("ChangeMasterInstance", req, cb)
   }
 
   /**
@@ -950,13 +974,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 清空Redis实例的实例数据。
+   * 本接口(CreateInstances)用于创建redis实例。
    */
-  async ClearInstance(
-    req: ClearInstanceRequest,
-    cb?: (error: string, rep: ClearInstanceResponse) => void
-  ): Promise<ClearInstanceResponse> {
-    return this.request("ClearInstance", req, cb)
+  async CreateInstances(
+    req: CreateInstancesRequest,
+    cb?: (error: string, rep: CreateInstancesResponse) => void
+  ): Promise<CreateInstancesResponse> {
+    return this.request("CreateInstances", req, cb)
   }
 
   /**
@@ -970,13 +994,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询订单信息
+   * 开通外网
    */
-  async DescribeInstanceDealDetail(
-    req: DescribeInstanceDealDetailRequest,
-    cb?: (error: string, rep: DescribeInstanceDealDetailResponse) => void
-  ): Promise<DescribeInstanceDealDetailResponse> {
-    return this.request("DescribeInstanceDealDetail", req, cb)
+  async AllocateWanAddress(
+    req: AllocateWanAddressRequest,
+    cb?: (error: string, rep: AllocateWanAddressResponse) => void
+  ): Promise<AllocateWanAddressResponse> {
+    return this.request("AllocateWanAddress", req, cb)
   }
 
   /**
@@ -990,13 +1014,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询 CRS 实例备份列表
+   * 查看实例子账号信息
    */
-  async DescribeInstanceBackups(
-    req: DescribeInstanceBackupsRequest,
-    cb?: (error: string, rep: DescribeInstanceBackupsResponse) => void
-  ): Promise<DescribeInstanceBackupsResponse> {
-    return this.request("DescribeInstanceBackups", req, cb)
+  async DescribeInstanceAccount(
+    req: DescribeInstanceAccountRequest,
+    cb?: (error: string, rep: DescribeInstanceAccountResponse) => void
+  ): Promise<DescribeInstanceAccountResponse> {
+    return this.request("DescribeInstanceAccount", req, cb)
   }
 
   /**
@@ -1040,12 +1064,12 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询备份Rdb下载地址(接口灰度中，需要加白名单使用)
+   * 复制组实例更换角色
    */
-  async DescribeBackupUrl(
-    req: DescribeBackupUrlRequest,
-    cb?: (error: string, rep: DescribeBackupUrlResponse) => void
-  ): Promise<DescribeBackupUrlResponse> {
-    return this.request("DescribeBackupUrl", req, cb)
+  async ChangeInstanceRole(
+    req: ChangeInstanceRoleRequest,
+    cb?: (error: string, rep: ChangeInstanceRoleResponse) => void
+  ): Promise<ChangeInstanceRoleResponse> {
+    return this.request("ChangeInstanceRole", req, cb)
   }
 }

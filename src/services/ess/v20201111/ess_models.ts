@@ -171,24 +171,24 @@ export interface CreateDocumentResponse {
  */
 export interface StartFlowRequest {
   /**
+   * 调用方用户信息，userId 必填
+   */
+  Operator: UserInfo
+
+  /**
    * 签署流程编号，由CreateFlow接口返回
    */
   FlowId: string
 
   /**
-   * 用户信息
+   * 客户端Token，保持接口幂等性,最大长度64个字符
    */
-  Operator: UserInfo
+  ClientToken?: string
 
   /**
    * 应用相关信息
    */
   Agent?: Agent
-
-  /**
-   * 客户端Token，保持接口幂等性,最大长度64个字符
-   */
-  ClientToken?: string
 }
 
 /**
@@ -206,6 +206,11 @@ export interface CancelFlowResponse {
  */
 export interface CreateDocumentRequest {
   /**
+   * 调用方用户信息，userId 必填
+   */
+  Operator: UserInfo
+
+  /**
    * 签署流程编号,由CreateFlow接口返回
    */
   FlowId: string
@@ -219,16 +224,6 @@ export interface CreateDocumentRequest {
    * 文件名列表,单个文件名最大长度200个字符
    */
   FileNames: Array<string>
-
-  /**
-   * 无
-   */
-  Operator: UserInfo
-
-  /**
-   * 应用相关信息
-   */
-  Agent?: Agent
 
   /**
    * 内容控件信息数组
@@ -245,12 +240,22 @@ export interface CreateDocumentRequest {
    * 客户端Token，保持接口幂等性,最大长度64个字符
    */
   ClientToken?: string
+
+  /**
+   * 应用相关信息
+   */
+  Agent?: Agent
 }
 
 /**
  * CreateFlow请求参数结构体
  */
 export interface CreateFlowRequest {
+  /**
+   * 调用方用户信息，userId 必填
+   */
+  Operator: UserInfo
+
   /**
    * 签署流程名称,最大长度200个字符
    */
@@ -262,33 +267,25 @@ export interface CreateFlowRequest {
   Approvers: Array<FlowCreateApprover>
 
   /**
-   * 操作人信息
+   * 签署流程的类型(如销售合同/入职合同等)，最大长度200个字符
    */
-  Operator: UserInfo
+  FlowType?: string
 
   /**
-   * 应用相关信息
+   * 客户端Token，保持接口幂等性,最大长度64个字符
    */
-  Agent?: Agent
+  ClientToken?: string
 
   /**
-      * 发送类型：
-true：无序签
-false：有序签
-注：默认为false（有序签），请和模板中的配置保持一致
-      */
-  Unordered?: boolean
+   * 暂未开放
+   */
+  CallbackUrl?: string
 
   /**
       * 签署流程的签署截止时间。
 值为unix时间戳,精确到秒,不传默认为当前时间一年后
       */
   DeadLine?: number
-
-  /**
-   * 签署流程的类型(如销售合同/入职合同等)，最大长度200个字符
-   */
-  FlowType?: string
 
   /**
    * 用户自定义字段(需进行base64 encode),回调的时候会进行透传, 长度需要小于20480
@@ -301,9 +298,12 @@ false：有序签
   FlowDescription?: string
 
   /**
-   * 客户端Token，保持接口幂等性,最大长度64个字符
-   */
-  ClientToken?: string
+      * 发送类型：
+true：无序签
+false：有序签
+注：默认为false（有序签），请和模板中的配置保持一致
+      */
+  Unordered?: boolean
 
   /**
    * 合同显示的页卡模板，说明：只支持{合同名称}, {发起方企业}, {发起方姓名}, {签署方N企业}, {签署方N姓名}，且N不能超过签署人的数量，N从1开始
@@ -316,9 +316,9 @@ false：有序签
   RelatedFlowId?: string
 
   /**
-   * 暂未开放
+   * 应用相关信息
    */
-  CallbackUrl?: string
+  Agent?: Agent
 }
 
 /**
@@ -326,22 +326,14 @@ false：有序签
  */
 export interface CreateSchemeUrlRequest {
   /**
-   * 调用方用户信息，参考通用结构
+   * 调用方用户信息，userId 必填
    */
   Operator: UserInfo
 
   /**
-   * 应用相关信息
+   * 企业名称
    */
-  Agent?: Agent
-
-  /**
-      * 链接类型
-HTTP：跳转电子签小程序的http_url，
-APP：第三方APP或小程序跳转电子签小程序的path。
-默认为HTTP类型
-      */
-  EndPoint?: string
+  OrganizationName?: string
 
   /**
    * 姓名,最大长度50个字符
@@ -354,9 +346,12 @@ APP：第三方APP或小程序跳转电子签小程序的path。
   Mobile?: string
 
   /**
-   * 企业名称
-   */
-  OrganizationName?: string
+      * 链接类型
+HTTP：跳转电子签小程序的http_url，
+APP：第三方APP或小程序跳转电子签小程序的path。
+默认为HTTP类型
+      */
+  EndPoint?: string
 
   /**
    * 签署流程编号 (PathType=1时必传)
@@ -372,6 +367,11 @@ APP：第三方APP或小程序跳转电子签小程序的path。
    * 是否自动回跳 true：是， false：否。该参数只针对"APP" 类型的签署链接有效
    */
   AutoJumpBack?: boolean
+
+  /**
+   * 应用相关信息
+   */
+  Agent?: Agent
 }
 
 /**
@@ -471,6 +471,11 @@ false--否，不处理
  */
 export interface CancelFlowRequest {
   /**
+   * 调用方用户信息，userId 必填
+   */
+  Operator: UserInfo
+
+  /**
    * 签署流程id
    */
   FlowId: string
@@ -479,11 +484,6 @@ export interface CancelFlowRequest {
    * 撤销原因，最长200个字符；
    */
   CancelMessage: string
-
-  /**
-   * 操作用户id
-   */
-  Operator: UserInfo
 
   /**
    * 应用相关信息
@@ -770,14 +770,14 @@ export interface CreateFlowByFilesResponse {
  */
 export interface DescribeFlowBriefsRequest {
   /**
+   * 调用方用户信息，userId 必填
+   */
+  Operator: UserInfo
+
+  /**
    * 需要查询的流程ID列表
    */
   FlowIds: Array<string>
-
-  /**
-   * 操作人信息
-   */
-  Operator: UserInfo
 
   /**
    * 应用相关信息
@@ -1155,6 +1155,11 @@ export interface CreateSchemeUrlResponse {
  */
 export interface CreateFlowByFilesRequest {
   /**
+   * 调用方用户信息，userId 必填
+   */
+  Operator: UserInfo
+
+  /**
    * 签署流程名称,最大长度200个字符
    */
   FlowName: string
@@ -1170,14 +1175,9 @@ export interface CreateFlowByFilesRequest {
   FileIds: Array<string>
 
   /**
-   * 调用方用户信息
+   * 签署流程的类型(如销售合同/入职合同等)，最大长度200个字符
    */
-  Operator: UserInfo
-
-  /**
-   * 应用号信息
-   */
-  Agent?: Agent
+  FlowType?: string
 
   /**
       * 经办人内容控件配置。可选类型为：
@@ -1188,6 +1188,23 @@ ATTACHMENT - 附件
 注：默认字体大小为 字号12
       */
   Components?: Array<Component>
+
+  /**
+      * 被抄送人的信息列表。
+注:此功能为白名单功能，若有需要，请联系电子签客服开白使用
+      */
+  CcInfos?: Array<CcInfo>
+
+  /**
+      * 是否需要预览，true：预览模式，false：非预览（默认）；
+预览链接有效期300秒；
+      */
+  NeedPreview?: boolean
+
+  /**
+   * 签署流程描述,最大长度1000个字符
+   */
+  FlowDescription?: string
 
   /**
       * 签署流程的签署截止时间。
@@ -1204,31 +1221,14 @@ false：有序签
   Unordered?: boolean
 
   /**
-      * 是否需要预览，true：预览模式，false：非预览（默认）；
-预览链接有效期300秒；
-      */
-  NeedPreview?: boolean
-
-  /**
-   * 签署流程描述,最大长度1000个字符
-   */
-  FlowDescription?: string
-
-  /**
-   * 签署流程的类型(如销售合同/入职合同等)，最大长度200个字符
-   */
-  FlowType?: string
-
-  /**
-      * 被抄送人的信息列表。
-注:此功能为白名单功能，若有需要，请联系电子签客服开白使用
-      */
-  CcInfos?: Array<CcInfo>
-
-  /**
    * 合同显示的页卡模板，说明：只支持{合同名称}, {发起方企业}, {发起方姓名}, {签署方N企业}, {签署方N姓名}，且N不能超过签署人的数量，N从1开始
    */
   CustomShowMap?: string
+
+  /**
+   * 应用号信息
+   */
+  Agent?: Agent
 }
 
 /**
@@ -1286,19 +1286,9 @@ export interface FormField {
  */
 export interface DescribeFlowTemplatesRequest {
   /**
-   * 操作人信息
+   * 调用方用户信息，userId 必填
    */
   Operator: UserInfo
-
-  /**
-   * 查询偏移位置，默认0
-   */
-  Offset?: number
-
-  /**
-   * 查询个数，默认20，最大100
-   */
-  Limit?: number
 
   /**
    * 搜索条件，具体参考Filter结构体。本接口取值：template-id：按照【 **模板唯一标识** 】进行过滤
@@ -1306,9 +1296,19 @@ export interface DescribeFlowTemplatesRequest {
   Filters?: Array<Filter>
 
   /**
-   * 应用相关信息
+   * 查询个数，默认20，最大100
    */
-  Agent?: Agent
+  Limit?: number
+
+  /**
+   * 查询偏移位置，默认0
+   */
+  Offset?: number
+
+  /**
+   * 查询内容：0-模板列表及详情（默认），1-仅模板列表
+   */
+  ContentType?: number
 
   /**
    * 暂未开放
@@ -1316,9 +1316,9 @@ export interface DescribeFlowTemplatesRequest {
   GenerateSource?: number
 
   /**
-   * 查询内容：0-模板列表及详情（默认），1-仅模板列表
+   * 应用相关信息
    */
-  ContentType?: number
+  Agent?: Agent
 }
 
 /**

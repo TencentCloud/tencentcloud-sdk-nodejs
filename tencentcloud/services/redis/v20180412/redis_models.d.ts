@@ -1262,6 +1262,19 @@ export interface DescribeInstanceDTSInfoResponse {
     RequestId?: string;
 }
 /**
+ * ChangeMasterInstance返回参数结构体
+ */
+export interface ChangeMasterInstanceResponse {
+    /**
+      * 异步流程ID
+      */
+    TaskId: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * AddReplicationInstance返回参数结构体
  */
 export interface AddReplicationInstanceResponse {
@@ -1432,17 +1445,17 @@ export interface ModifyDBInstanceSecurityGroupsResponse {
     RequestId?: string;
 }
 /**
- * DescribeInstanceMonitorHotKey请求参数结构体
+ * ChangeMasterInstance请求参数结构体
  */
-export interface DescribeInstanceMonitorHotKeyRequest {
+export interface ChangeMasterInstanceRequest {
     /**
-      * 实例Id
+      * 复制组ID
+      */
+    GroupId: string;
+    /**
+      * 实例ID
       */
     InstanceId: string;
-    /**
-      * 时间范围：1——实时，2——近30分钟，3——近6小时，4——近24小时
-      */
-    SpanType: number;
 }
 /**
  * DescribeInstanceDTSInfo请求参数结构体
@@ -3158,6 +3171,23 @@ export interface DestroyPostpaidInstanceRequest {
     InstanceId: string;
 }
 /**
+ * ChangeInstanceRole请求参数结构体
+ */
+export interface ChangeInstanceRoleRequest {
+    /**
+      * 复制组ID
+      */
+    GroupId: string;
+    /**
+      * 实例ID
+      */
+    InstanceId: string;
+    /**
+      * 实例角色，rw可读写，r只读
+      */
+    InstanceRole: string;
+}
+/**
  * DeleteInstanceAccount请求参数结构体
  */
 export interface DeleteInstanceAccountRequest {
@@ -3169,6 +3199,19 @@ export interface DeleteInstanceAccountRequest {
       * 子账号名称
       */
     AccountName: string;
+}
+/**
+ * DescribeInstanceMonitorHotKey请求参数结构体
+ */
+export interface DescribeInstanceMonitorHotKeyRequest {
+    /**
+      * 实例Id
+      */
+    InstanceId: string;
+    /**
+      * 时间范围：1——实时，2——近30分钟，3——近6小时，4——近24小时
+      */
+    SpanType: number;
 }
 /**
  * UpgradeInstance返回参数结构体
@@ -4271,6 +4314,19 @@ export interface TendisSlowLogDetail {
       * 节点ID
       */
     Node: string;
+}
+/**
+ * ChangeInstanceRole返回参数结构体
+ */
+export interface ChangeInstanceRoleResponse {
+    /**
+      * 异步流程ID
+      */
+    TaskId: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * UpgradeProxyVersion请求参数结构体

@@ -112,16 +112,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeParamTemplateInfo", req, cb);
     }
     /**
-     * 查看实例子账号信息
+     * 查询 CRS 实例备份列表
      */
-    async DescribeInstanceAccount(req, cb) {
-        return this.request("DescribeInstanceAccount", req, cb);
+    async DescribeInstanceBackups(req, cb) {
+        return this.request("DescribeInstanceBackups", req, cb);
     }
     /**
-     * 获取备份配置
+     * 查询实例DTS信息
      */
-    async DescribeAutoBackupConfig(req, cb) {
-        return this.request("DescribeAutoBackupConfig", req, cb);
+    async DescribeInstanceDTSInfo(req, cb) {
+        return this.request("DescribeInstanceDTSInfo", req, cb);
     }
     /**
      * 查询实例CPU耗时
@@ -202,10 +202,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DisableReplicaReadonly", req, cb);
     }
     /**
-     * 查询实例DTS信息
+     * 获取备份配置
      */
-    async DescribeInstanceDTSInfo(req, cb) {
-        return this.request("DescribeInstanceDTSInfo", req, cb);
+    async DescribeAutoBackupConfig(req, cb) {
+        return this.request("DescribeAutoBackupConfig", req, cb);
     }
     /**
      * 修改实例网络配置
@@ -226,10 +226,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstanceMonitorSIP", req, cb);
     }
     /**
-     * 本接口(CreateInstances)用于创建redis实例。
+     * 清空Redis实例的实例数据。
      */
-    async CreateInstances(req, cb) {
-        return this.request("CreateInstances", req, cb);
+    async ClearInstance(req, cb) {
+        return this.request("ClearInstance", req, cb);
     }
     /**
      * 修改实例子账号
@@ -274,10 +274,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTaskInfo", req, cb);
     }
     /**
-     * 开通外网
+     * 查询备份Rdb下载地址(接口灰度中，需要加白名单使用)
      */
-    async AllocateWanAddress(req, cb) {
-        return this.request("AllocateWanAddress", req, cb);
+    async DescribeBackupUrl(req, cb) {
+        return this.request("DescribeBackupUrl", req, cb);
     }
     /**
      * 本接口（DescribeProxySlowLog）用于查询代理慢查询。
@@ -304,16 +304,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AssociateSecurityGroups", req, cb);
     }
     /**
+     * 实例proxy版本升级
+     */
+    async UpgradeProxyVersion(req, cb) {
+        return this.request("UpgradeProxyVersion", req, cb);
+    }
+    /**
      * 本接口(ModifyInstanceParams)用于修改实例参数。
      */
     async ModifyInstanceParams(req, cb) {
         return this.request("ModifyInstanceParams", req, cb);
     }
     /**
-     * 实例proxy版本升级
+     * 查询订单信息
      */
-    async UpgradeProxyVersion(req, cb) {
-        return this.request("UpgradeProxyVersion", req, cb);
+    async DescribeInstanceDealDetail(req, cb) {
+        return this.request("DescribeInstanceDealDetail", req, cb);
     }
     /**
      * 修改参数模板
@@ -362,6 +368,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeInstanceMonitorBigKeyTypeDist(req, cb) {
         return this.request("DescribeInstanceMonitorBigKeyTypeDist", req, cb);
+    }
+    /**
+     * 复制组实例切主
+     */
+    async ChangeMasterInstance(req, cb) {
+        return this.request("ChangeMasterInstance", req, cb);
     }
     /**
      * 重置密码
@@ -454,10 +466,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstanceParamRecords", req, cb);
     }
     /**
-     * 清空Redis实例的实例数据。
+     * 本接口(CreateInstances)用于创建redis实例。
      */
-    async ClearInstance(req, cb) {
-        return this.request("ClearInstance", req, cb);
+    async CreateInstances(req, cb) {
+        return this.request("CreateInstances", req, cb);
     }
     /**
      * 查询Redis节点详细信息
@@ -466,10 +478,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstanceZoneInfo", req, cb);
     }
     /**
-     * 查询订单信息
+     * 开通外网
      */
-    async DescribeInstanceDealDetail(req, cb) {
-        return this.request("DescribeInstanceDealDetail", req, cb);
+    async AllocateWanAddress(req, cb) {
+        return this.request("AllocateWanAddress", req, cb);
     }
     /**
      * 删除实例子账号
@@ -478,10 +490,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteInstanceAccount", req, cb);
     }
     /**
-     * 查询 CRS 实例备份列表
+     * 查看实例子账号信息
      */
-    async DescribeInstanceBackups(req, cb) {
-        return this.request("DescribeInstanceBackups", req, cb);
+    async DescribeInstanceAccount(req, cb) {
+        return this.request("DescribeInstanceAccount", req, cb);
     }
     /**
      * 本接口(DisassociateSecurityGroups)用于安全组批量解绑实例。
@@ -508,10 +520,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstanceMonitorTookDist", req, cb);
     }
     /**
-     * 查询备份Rdb下载地址(接口灰度中，需要加白名单使用)
+     * 复制组实例更换角色
      */
-    async DescribeBackupUrl(req, cb) {
-        return this.request("DescribeBackupUrl", req, cb);
+    async ChangeInstanceRole(req, cb) {
+        return this.request("ChangeInstanceRole", req, cb);
     }
 }
 exports.Client = Client;

@@ -195,10 +195,16 @@ export interface DescribeInstanceDetailResponse {
   Zone: string
 
   /**
-      * 围笼ID
+      * 金融围笼ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
   FenceId: string
+
+  /**
+      * 所属集群ID(默认集群为空)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClusterId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -231,12 +237,12 @@ export interface DescribeInstanceDetail {
   ProductId: number
 
   /**
-   * 集群类型, 0:公有云, 1:金融围笼
+   * 集群类型, 0:公有云, 1:金融围笼, 2:CDC集群
    */
   Type: number
 
   /**
-   * 主机类型, 0:物理机, 1:cvm本地盘, 2:cvm云盘
+   * 主机类型, 0:物理机, 1:CVM机型, 2:CDC机型
    */
   HostType: number
 
@@ -331,10 +337,16 @@ export interface DescribeInstanceDetail {
   Zone: string
 
   /**
-      * 围笼ID
+      * 金融围笼ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
   FenceId: string
+
+  /**
+      * 所属集群ID(默认集群为空)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClusterId: string
 }
 
 /**
@@ -711,6 +723,11 @@ export interface DBInstanceDetail {
   ShardNum: number
 
   /**
+   * 地域
+   */
+  Region: string
+
+  /**
    * 可用区
    */
   Zone: string
@@ -729,6 +746,11 @@ export interface DBInstanceDetail {
    * DB引擎，MySQL,Percona,MariaDB
    */
   DbEngine: string
+
+  /**
+   * 创建时间
+   */
+  CreateTime: string
 }
 
 /**
@@ -964,6 +986,11 @@ export interface DescribeInstanceListRequest {
    * 按实例状态过滤, -1:已隔离, 0:创建中, 1:运行中, 2:扩容中, 3:删除中
    */
   Status?: Array<number>
+
+  /**
+   * 按所属集群ID过滤
+   */
+  ClusterId?: Array<string>
 }
 
 /**

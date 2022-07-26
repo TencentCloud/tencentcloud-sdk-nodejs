@@ -1902,6 +1902,16 @@ export interface CreateDedicatedClusterDBInstanceRequest {
    * 指定从节点uuid，不填随机分配
    */
   SlaveHostIds?: Array<string>
+
+  /**
+   * 需要回档的源实例ID
+   */
+  RollbackInstanceId?: string
+
+  /**
+   * 回档时间
+   */
+  RollbackTime?: string
 }
 
 /**

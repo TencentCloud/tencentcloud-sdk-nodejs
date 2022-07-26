@@ -20696,6 +20696,11 @@ export interface AmountBeforeTaxResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     AmountBeforeTax: string;
+    /**
+      * 两位精度税前金额
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AmountBeforeTaxWithTwoDigitPrecision: string;
 }
 /**
  * 银企直连-查询单笔支付状态结果
