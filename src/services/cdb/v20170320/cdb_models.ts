@@ -3769,6 +3769,21 @@ export interface DescribeDBInstanceCharsetRequest {
 }
 
 /**
+ * ModifyInstancePasswordComplexity返回参数结构体
+ */
+export interface ModifyInstancePasswordComplexityResponse {
+  /**
+   * 异步任务 ID，可用于查询任务进度。
+   */
+  AsyncRequestId: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 实例所在物理机内存监控信息
  */
 export interface DeviceMemInfo {
@@ -7055,6 +7070,21 @@ export interface DescribeLocalBinlogConfigResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyInstancePasswordComplexity请求参数结构体
+ */
+export interface ModifyInstancePasswordComplexityRequest {
+  /**
+   * 实例短 ID 列表。
+   */
+  InstanceIds: Array<string>
+
+  /**
+   * 要修改的参数列表。每一个元素是 Name 和 CurrentValue 的组合。Name 是参数名，CurrentValue 是要修改成的值。
+   */
+  ParamList?: Array<Parameter>
 }
 
 /**

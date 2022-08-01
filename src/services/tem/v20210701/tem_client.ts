@@ -18,87 +18,96 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  MountedSettingConf,
-  RestartApplicationPodResponse,
-  DeleteApplicationRequest,
   CreateResourceRequest,
-  ResumeDeployApplicationResponse,
-  RestartApplicationResponse,
-  DescribeApplicationsStatusResponse,
-  HealthCheckConfig,
-  TemDeployApplicationDetailInfo,
-  DescribeDeployApplicationDetailRequest,
-  EsInfo,
-  DeployServiceBatchDetail,
+  NamespacePage,
   DescribeApplicationPodsResponse,
+  ResumeDeployApplicationResponse,
+  StorageConf,
+  DeployServicePodDetail,
+  LogOutputConf,
+  DeleteIngressResponse,
+  DeleteApplicationResponse,
+  RollingUpdateApplicationByVersionRequest,
+  CreateCosTokenResponse,
+  RevertDeployApplicationRequest,
+  RollingUpdateApplicationByVersionResponse,
+  StopApplicationRequest,
+  ModifyApplicationInfoRequest,
+  DestroyEnvironmentRequest,
+  CreateEnvironmentResponse,
+  DescribeEnvironmentStatusRequest,
+  RevertDeployApplicationResponse,
+  EsInfo,
+  DescribeApplicationsResponse,
+  IngressInfo,
+  DescribeEnvironmentsRequest,
+  ModifyEnvironmentRequest,
+  CreateEnvironmentRequest,
+  TemDeployApplicationDetailInfo,
+  DescribeEnvironmentStatusResponse,
+  IngressTls,
+  ServicePage,
+  CreateCosTokenRequest,
+  ModifyIngressRequest,
+  EnablePrometheusConf,
+  DescribeIngressesRequest,
+  StorageMountConf,
+  RestartApplicationResponse,
+  DescribeIngressesResponse,
+  DescribeApplicationsStatusRequest,
+  RunVersionPod,
+  CreateResourceResponse,
+  ModifyApplicationInfoResponse,
   RestartApplicationRequest,
+  DestroyEnvironmentResponse,
+  DescribeIngressRequest,
+  StopApplicationResponse,
+  DeployApplicationResponse,
+  RestartApplicationPodResponse,
+  TemEnvironmentStoppingStatus,
+  DeleteApplicationRequest,
+  DescribeApplicationsStatusResponse,
+  DescribeDeployApplicationDetailRequest,
   DeleteIngressRequest,
-  RestartApplicationPodRequest,
   DescribeRelatedIngressesRequest,
-  ModifyEnvironmentResponse,
   CosToken,
   GenerateApplicationPackageDownloadUrlRequest,
-  DeployApplicationRequest,
-  IngressInfo,
-  ModifyIngressResponse,
   DescribeEnvironmentsResponse,
-  ModifyIngressRequest,
-  DescribeApplicationPodsRequest,
-  CreateApplicationRequest,
-  EnablePrometheusConf,
   DescribeRelatedIngressesResponse,
-  DescribeIngressesRequest,
-  DescribeRunPodPage,
-  IngressTls,
-  DeployServicePodDetail,
-  ModifyApplicationReplicasResponse,
-  ModifyApplicationReplicasRequest,
-  LogOutputConf,
-  DescribeIngressesResponse,
-  DeleteIngressResponse,
-  DestroyEnvironmentRequest,
   TemNamespaceInfo,
-  GenerateApplicationPackageDownloadUrlResponse,
-  IngressRuleBackend,
-  DescribeIngressResponse,
-  CreateCosTokenResponse,
+  TemEnvironmentStartingStatus,
+  TemService,
   IngressRule,
-  CronHorizontalAutoscaler,
-  DescribeApplicationsStatusRequest,
-  RollingUpdateApplicationByVersionResponse,
-  RollingUpdateApplicationByVersionRequest,
-  RunVersionPod,
+  RestartApplicationPodRequest,
   DescribeDeployApplicationDetailResponse,
   IngressRuleValue,
-  CreateResourceResponse,
-  ModifyApplicationInfoRequest,
-  ModifyApplicationInfoResponse,
-  DeleteApplicationResponse,
-  IngressRulePath,
-  CreateEnvironmentResponse,
-  NamespacePage,
-  DestroyEnvironmentResponse,
-  CreateApplicationResponse,
-  HorizontalAutoscaler,
-  RevertDeployApplicationRequest,
-  StorageMountConf,
-  ModifyEnvironmentRequest,
-  PortMapping,
+  ResumeDeployApplicationRequest,
+  MountedSettingConf,
+  HealthCheckConfig,
+  DeployServiceBatchDetail,
+  DeployApplicationRequest,
+  ModifyIngressResponse,
+  DescribeApplicationsRequest,
+  DescribeApplicationPodsRequest,
+  CreateApplicationRequest,
+  NamespaceStatusInfo,
+  DescribeRunPodPage,
+  ModifyApplicationReplicasResponse,
   UseDefaultRepoParameters,
-  RevertDeployApplicationResponse,
+  GenerateApplicationPackageDownloadUrlResponse,
+  IngressRuleBackend,
   DeployStrategyConf,
-  StopApplicationRequest,
-  DescribeIngressRequest,
-  CreateCosTokenRequest,
-  DescribeEnvironmentsRequest,
-  StopApplicationResponse,
+  DescribeIngressResponse,
+  IngressRulePath,
+  ServiceVersionBrief,
+  CreateApplicationResponse,
+  CronHorizontalAutoscaler,
+  PortMapping,
+  ModifyEnvironmentResponse,
+  ModifyApplicationReplicasRequest,
   EksService,
   CronHorizontalAutoscalerSchedule,
-  ResumeDeployApplicationRequest,
-  DeployApplicationResponse,
-  StorageConf,
-  ServiceVersionBrief,
-  CreateEnvironmentRequest,
+  HorizontalAutoscaler,
   Pair,
 } from "./tem_models"
 
@@ -152,6 +161,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteApplicationResponse) => void
   ): Promise<DeleteApplicationResponse> {
     return this.request("DeleteApplication", req, cb)
+  }
+
+  /**
+   * 获取环境状态
+   */
+  async DescribeEnvironmentStatus(
+    req: DescribeEnvironmentStatusRequest,
+    cb?: (error: string, rep: DescribeEnvironmentStatusResponse) => void
+  ): Promise<DescribeEnvironmentStatusResponse> {
+    return this.request("DescribeEnvironmentStatus", req, cb)
   }
 
   /**
@@ -225,13 +244,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 重启应用实例
+   * 服务重启
    */
-  async RestartApplicationPod(
-    req: RestartApplicationPodRequest,
-    cb?: (error: string, rep: RestartApplicationPodResponse) => void
-  ): Promise<RestartApplicationPodResponse> {
-    return this.request("RestartApplicationPod", req, cb)
+  async RestartApplication(
+    req: RestartApplicationRequest,
+    cb?: (error: string, rep: RestartApplicationResponse) => void
+  ): Promise<RestartApplicationResponse> {
+    return this.request("RestartApplication", req, cb)
   }
 
   /**
@@ -315,13 +334,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 服务重启
+   * 重启应用实例
    */
-  async RestartApplication(
-    req: RestartApplicationRequest,
-    cb?: (error: string, rep: RestartApplicationResponse) => void
-  ): Promise<RestartApplicationResponse> {
-    return this.request("RestartApplication", req, cb)
+  async RestartApplicationPod(
+    req: RestartApplicationPodRequest,
+    cb?: (error: string, rep: RestartApplicationPodResponse) => void
+  ): Promise<RestartApplicationPodResponse> {
+    return this.request("RestartApplicationPod", req, cb)
   }
 
   /**
@@ -332,6 +351,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RollingUpdateApplicationByVersionResponse) => void
   ): Promise<RollingUpdateApplicationByVersionResponse> {
     return this.request("RollingUpdateApplicationByVersion", req, cb)
+  }
+
+  /**
+   * 获取运行服务列表
+   */
+  async DescribeApplications(
+    req: DescribeApplicationsRequest,
+    cb?: (error: string, rep: DescribeApplicationsResponse) => void
+  ): Promise<DescribeApplicationsResponse> {
+    return this.request("DescribeApplications", req, cb)
   }
 
   /**

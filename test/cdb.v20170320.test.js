@@ -358,6 +358,16 @@ it("cdb.v20170320.ModifyAuditConfig", async function () {
     }
 })
 
+it("cdb.v20170320.ModifyInstancePasswordComplexity", async function () {
+    try {
+       const data = await client.ModifyInstancePasswordComplexity({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdb.v20170320.ModifyTimeWindow", async function () {
     try {
        const data = await client.ModifyTimeWindow({})

@@ -15,7 +15,7 @@ export interface DescribeFlySecMiniAppReportUrlRequest {
       */
     Mode: number;
     /**
-      * 诊断报告类型 0:基础诊断报告, 1:总裁版诊断报告
+      * 诊断报告类型 0:基础诊断报告，1:总裁版诊断报告，2:诊断报告json结果
       */
     ReportType?: number;
 }
@@ -557,7 +557,7 @@ export interface DescribeScanTaskReportUrlRequest {
       */
     Platform: number;
     /**
-      * 报告类型, 0:诊断报告, 1:堆栈报告
+      * 报告类型, 0:诊断报告, 1:堆栈报告(预留), 2:视频证据(预留), 3:报告json结果
       */
     ReportType: number;
     /**

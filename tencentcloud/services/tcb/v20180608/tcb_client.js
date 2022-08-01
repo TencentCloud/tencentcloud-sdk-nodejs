@@ -70,6 +70,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteWxGatewayRoute", req, cb);
     }
     /**
+     * 查询用户活动信息
+     */
+    async DescribeUserActivityInfo(req, cb) {
+        return this.request("DescribeUserActivityInfo", req, cb);
+    }
+    /**
      * 绑定另外一个环境下的网关，callContainer请求可以访问到该网关
      */
     async BindEnvGateway(req, cb) {
@@ -193,10 +199,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ReplaceActivityRecord", req, cb);
     }
     /**
-     * 查询用户活动信息
+     * 获取新套餐列表，含详情，如果传了PackageId，则只获取指定套餐详情
      */
-    async DescribeUserActivityInfo(req, cb) {
-        return this.request("DescribeUserActivityInfo", req, cb);
+    async DescribeBaasPackageList(req, cb) {
+        return this.request("DescribeBaasPackageList", req, cb);
     }
     /**
      * 创建微信云托管

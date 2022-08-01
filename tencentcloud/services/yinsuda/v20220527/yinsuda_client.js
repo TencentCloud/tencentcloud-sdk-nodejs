@@ -28,7 +28,7 @@ class Client extends abstract_client_1.AbstractClient {
         super("yinsuda.tencentcloudapi.com", "2022-05-27", clientConfig);
     }
     /**
-     * 获取推荐歌单列表。
+     * 获取歌单列表。
      */
     async DescribeKTVPlaylists(req, cb) {
         return this.request("DescribeKTVPlaylists", req, cb);

@@ -386,6 +386,11 @@ export interface SparkJobInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     TaskNum: number;
+    /**
+      * 引擎状态：-100（默认：未知状态），-2~11：引擎正常状态；
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DataEngineStatus: number;
 }
 /**
  * DeleteSparkApp请求参数结构体
@@ -1198,13 +1203,21 @@ export interface ListTaskJobLogDetailRequest {
       */
     EndTime: number;
     /**
-      * 分页大小，最大100，配合Context一起使用
+      * 分页大小，最大1000，配合Context一起使用
       */
     Limit: number;
     /**
       * 下一次分页参数，第一次传空
       */
     Context: string;
+    /**
+      * 最近1000条日志是否升序排列，true:升序排序，false:倒序，默认false，倒序排列
+      */
+    Asc?: boolean;
+    /**
+      * 预览日志的通用过滤条件
+      */
+    Filters?: Array<Filter>;
 }
 /**
  * 批量顺序执行任务集合

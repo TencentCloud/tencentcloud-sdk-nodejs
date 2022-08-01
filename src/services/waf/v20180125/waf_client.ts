@@ -19,15 +19,15 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   CreateAccessExportRequest,
-  DescribeWafAutoDenyRulesResponse,
+  CdcCluster,
   DescribeIpHitItemsResponse,
-  DescribeUserClbWafRegionsResponse,
+  DescribeUserCdcClbWafRegionsRequest,
   IpHitItemsData,
   DeleteAttackDownloadRecordResponse,
   DescribeFlowTrendRequest,
   DescribeWafAutoDenyStatusRequest,
   AccessLogItems,
-  AddDomainWhiteRuleResponse,
+  DescribeWafAutoDenyRulesResponse,
   DescribeIpAccessControlResponse,
   DescribeInstancesResponse,
   ModifyWafAutoDenyRulesRequest,
@@ -42,11 +42,12 @@ import {
   GetAttackDownloadRecordsRequest,
   UpsertIpAccessControlRequest,
   DeleteDownloadRecordRequest,
-  AccessRuleInfo,
+  DescribeUserCdcClbWafRegionsResponse,
+  DeleteAccessExportResponse,
   DescribeAccessExportsRequest,
+  DescribeUserClbWafRegionsResponse,
   ModifyWafAutoDenyStatusRequest,
   ModifyAccessPeriodResponse,
-  DeleteAccessExportResponse,
   QPSPackageNew,
   FiltersItemNew,
   DescribeAutoDenyIPResponse,
@@ -59,7 +60,7 @@ import {
   DescribeAccessFastAnalysisRequest,
   DeleteIpAccessControlRequest,
   DeleteDomainWhiteRulesResponse,
-  DownloadAttackRecordInfo,
+  ModifyWafAutoDenyStatusResponse,
   DescribeWafAutoDenyStatusResponse,
   DeleteDomainWhiteRulesRequest,
   DomainPackageNew,
@@ -71,12 +72,14 @@ import {
   PortItem,
   WafThreatenIntelligenceDetails,
   DescribeDomainWhiteRulesRequest,
+  AddDomainWhiteRuleResponse,
   ModifyCustomRuleStatusRequest,
   DeleteDownloadRecordResponse,
   ModifyAccessPeriodRequest,
   InstanceInfo,
   ModifyWafAutoDenyRulesResponse,
   DescribeInstancesRequest,
+  CdcRegion,
   AccessValueInfo,
   DeleteIpAccessControlResponse,
   AccessLogInfo,
@@ -94,6 +97,7 @@ import {
   Strategy,
   AccessFullTextInfo,
   DescribeIpHitItemsRequest,
+  AccessRuleInfo,
   GetAttackDownloadRecordsResponse,
   DeleteAccessExportRequest,
   DescribeUserClbWafRegionsRequest,
@@ -104,7 +108,7 @@ import {
   UpsertIpAccessControlResponse,
   IpHitItem,
   DeleteSessionResponse,
-  ModifyWafAutoDenyStatusResponse,
+  DownloadAttackRecordInfo,
   DescribeWafThreatenIntelligenceRequest,
   DescribeAccessIndexResponse,
   DescribeAccessExportsResponse,
@@ -246,6 +250,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeFlowTrendResponse) => void
   ): Promise<DescribeFlowTrendResponse> {
     return this.request("DescribeFlowTrend", req, cb)
+  }
+
+  /**
+   * 在CDC场景下，负载均衡型WAF的添加、编辑域名配置的时候，需要展示CDC负载均衡型WAF（cdc-clb-waf)支持的地域列表，通过DescribeUserCdcClbWafRegions既可以获得当前对客户已经开放的地域列表
+   */
+  async DescribeUserCdcClbWafRegions(
+    req?: DescribeUserCdcClbWafRegionsRequest,
+    cb?: (error: string, rep: DescribeUserCdcClbWafRegionsResponse) => void
+  ): Promise<DescribeUserCdcClbWafRegionsResponse> {
+    return this.request("DescribeUserCdcClbWafRegions", req, cb)
   }
 
   /**

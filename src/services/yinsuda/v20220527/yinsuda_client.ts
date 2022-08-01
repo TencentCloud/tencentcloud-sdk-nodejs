@@ -47,7 +47,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取推荐歌单列表。
+   * 获取歌单列表。
    */
   async DescribeKTVPlaylists(
     req: DescribeKTVPlaylistsRequest,

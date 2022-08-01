@@ -185,8 +185,10 @@ import {
   ModifyNodePoolInstanceTypesRequest,
   AddClusterCIDRRequest,
   CreateClusterRequest,
+  NodePoolOption,
   DescribeEdgeClusterExtraArgsRequest,
   DescribePrometheusGlobalConfigResponse,
+  DescribeEdgeLogSwitchesResponse,
   CreatePrometheusClusterAgentResponse,
   DescribePrometheusTemplatesResponse,
   UpdateEKSContainerInstanceResponse,
@@ -203,7 +205,7 @@ import {
   DeleteClusterAsGroupsResponse,
   RegionInstance,
   DescribePrometheusConfigRequest,
-  NodePoolOption,
+  DescribeEdgeLogSwitchesRequest,
   DeletePrometheusTemplateRequest,
   DeletePrometheusRecordRuleYamlResponse,
   DescribePrometheusTempSyncResponse,
@@ -794,6 +796,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 将集群内节点移入节点池
+   */
+  async AddNodeToNodePool(
+    req: AddNodeToNodePoolRequest,
+    cb?: (error: string, rep: AddNodeToNodePoolResponse) => void
+  ): Promise<AddNodeToNodePoolResponse> {
+    return this.request("AddNodeToNodePool", req, cb)
+  }
+
+  /**
    * 获取边缘计算外部访问的kubeconfig
    */
   async DescribeTKEEdgeExternalKubeconfig(
@@ -1054,13 +1066,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 将集群内节点移入节点池
+   * 获取事件、审计和日志的状态接口
    */
-  async AddNodeToNodePool(
-    req: AddNodeToNodePoolRequest,
-    cb?: (error: string, rep: AddNodeToNodePoolResponse) => void
-  ): Promise<AddNodeToNodePoolResponse> {
-    return this.request("AddNodeToNodePool", req, cb)
+  async DescribeEdgeLogSwitches(
+    req: DescribeEdgeLogSwitchesRequest,
+    cb?: (error: string, rep: DescribeEdgeLogSwitchesResponse) => void
+  ): Promise<DescribeEdgeLogSwitchesResponse> {
+    return this.request("DescribeEdgeLogSwitches", req, cb)
   }
 
   /**
@@ -1204,13 +1216,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询容器实例中容器日志
+   * 创建镜像缓存的接口。创建过程中，请勿删除EKSCI实例和云盘，否则镜像缓存将创建失败。
    */
-  async DescribeEksContainerInstanceLog(
-    req: DescribeEksContainerInstanceLogRequest,
-    cb?: (error: string, rep: DescribeEksContainerInstanceLogResponse) => void
-  ): Promise<DescribeEksContainerInstanceLogResponse> {
-    return this.request("DescribeEksContainerInstanceLog", req, cb)
+  async CreateImageCache(
+    req: CreateImageCacheRequest,
+    cb?: (error: string, rep: CreateImageCacheResponse) => void
+  ): Promise<CreateImageCacheResponse> {
+    return this.request("CreateImageCache", req, cb)
   }
 
   /**
@@ -1774,13 +1786,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建镜像缓存的接口。创建过程中，请勿删除EKSCI实例和云盘，否则镜像缓存将创建失败。
+   * 查询容器实例中容器日志
    */
-  async CreateImageCache(
-    req: CreateImageCacheRequest,
-    cb?: (error: string, rep: CreateImageCacheResponse) => void
-  ): Promise<CreateImageCacheResponse> {
-    return this.request("CreateImageCache", req, cb)
+  async DescribeEksContainerInstanceLog(
+    req: DescribeEksContainerInstanceLogRequest,
+    cb?: (error: string, rep: DescribeEksContainerInstanceLogResponse) => void
+  ): Promise<DescribeEksContainerInstanceLogResponse> {
+    return this.request("DescribeEksContainerInstanceLog", req, cb)
   }
 
   /**

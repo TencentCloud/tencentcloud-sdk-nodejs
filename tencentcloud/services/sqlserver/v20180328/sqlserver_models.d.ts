@@ -3371,6 +3371,14 @@ export interface DBInstance {
       * 跨地域备份保留天数，则默认7天
       */
     CrossBackupSaveDays: number;
+    /**
+      * 外网地址域名
+      */
+    DnsPodDomain: string;
+    /**
+      * 外网端口号
+      */
+    TgwWanVPort: number;
 }
 /**
  * DescribeProductConfig返回参数结构体

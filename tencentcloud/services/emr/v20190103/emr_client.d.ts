@@ -58,7 +58,7 @@ export declare class Client extends AbstractClient {
      */
     AddUsersForUserManager(req: AddUsersForUserManagerRequest, cb?: (error: string, rep: AddUsersForUserManagerResponse) => void): Promise<AddUsersForUserManagerResponse>;
     /**
-     *  yarn applciation 统计接口查询
+     *  yarn application 统计接口查询
      */
     DescribeEmrApplicationStatics(req: DescribeEmrApplicationStaticsRequest, cb?: (error: string, rep: DescribeEmrApplicationStaticsResponse) => void): Promise<DescribeEmrApplicationStaticsResponse>;
     /**

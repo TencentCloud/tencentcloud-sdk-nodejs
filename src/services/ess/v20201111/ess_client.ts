@@ -31,6 +31,7 @@ import {
   FileUrl,
   DescribeThirdPartyAuthCodeRequest,
   SignQrCode,
+  GetTaskResultApiRequest,
   UploadFilesRequest,
   CancelFlowRequest,
   DescribeFlowBriefsResponse,
@@ -40,8 +41,10 @@ import {
   UploadFilesResponse,
   DescribeThirdPartyAuthCodeResponse,
   CreateFlowByFilesResponse,
+  OrganizationInfo,
   DescribeFlowBriefsRequest,
   Recipient,
+  UserInfo,
   DescribeFileUrlsRequest,
   ApproverInfo,
   Caller,
@@ -49,7 +52,9 @@ import {
   Filter,
   FileInfo,
   CreateMultiFlowSignQRCodeRequest,
+  CreateConvertTaskApiResponse,
   StartFlowResponse,
+  CreateConvertTaskApiRequest,
   CreateSchemeUrlResponse,
   CreateFlowByFilesRequest,
   CancelMultiFlowSignQRCodeResponse,
@@ -57,7 +62,7 @@ import {
   Agent,
   FormField,
   DescribeFlowTemplatesRequest,
-  UserInfo,
+  GetTaskResultApiResponse,
   FlowBrief,
   CcInfo,
 } from "./ess_models"
@@ -180,6 +185,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateSchemeUrlResponse) => void
   ): Promise<CreateSchemeUrlResponse> {
     return this.request("CreateSchemeUrl", req, cb)
+  }
+
+  /**
+   * 查询转换任务状态
+   */
+  async GetTaskResultApi(
+    req: GetTaskResultApiRequest,
+    cb?: (error: string, rep: GetTaskResultApiResponse) => void
+  ): Promise<GetTaskResultApiResponse> {
+    return this.request("GetTaskResultApi", req, cb)
+  }
+
+  /**
+   * 创建文件转换任务
+   */
+  async CreateConvertTaskApi(
+    req: CreateConvertTaskApiRequest,
+    cb?: (error: string, rep: CreateConvertTaskApiResponse) => void
+  ): Promise<CreateConvertTaskApiResponse> {
+    return this.request("CreateConvertTaskApi", req, cb)
   }
 
   /**

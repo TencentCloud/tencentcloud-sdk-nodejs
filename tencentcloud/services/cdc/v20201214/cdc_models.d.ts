@@ -431,6 +431,16 @@ export interface DedicatedClusterOrderItem {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ComputeFormat: string;
+    /**
+      * 规格类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TypeFamily: string;
+    /**
+      * 0未支付，1已支付
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SubOrderPayStatus: number;
 }
 /**
  * CreateSite请求参数结构体
@@ -688,6 +698,21 @@ export interface DedicatedClusterOrder {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     PayStatus: number;
+    /**
+      * 支付方式，一次性、按月、按年
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PayType: string;
+    /**
+      * 购买时长的单位
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TimeUnit: string;
+    /**
+      * 购买时长
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TimeSpan: number;
 }
 /**
  * ModifyDedicatedClusterInfo请求参数结构体

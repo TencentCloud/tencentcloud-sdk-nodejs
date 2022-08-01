@@ -28,6 +28,7 @@ import {
   DescribeEnvLimitRequest,
   DescribeEnvDealRegionResponse,
   DeleteCloudBaseRunServerVersionResponse,
+  RollUpdateCloudBaseRunServerVersionResponse,
   SearchClsLogResponse,
   StandaloneGatewayInfo,
   CloudBaseRunSideSpec,
@@ -38,7 +39,7 @@ import {
   DescribeEndUserLoginStatisticRequest,
   DescribeCloudBaseBuildServiceResponse,
   DescribeEndUsersRequest,
-  DescribeCloudBaseBuildServiceRequest,
+  DescribeCloudBaseRunPodListResponse,
   DescribeCloudBaseRunServerDomainNameResponse,
   LogResObject,
   DestroyStandaloneGatewayRequest,
@@ -46,11 +47,11 @@ import {
   CreateWxCloudBaseRunServerDBClusterResponse,
   ReplaceActivityRecordResponse,
   DescribeSpecialCostItemsRequest,
-  DescribeCloudBaseRunResourceForExtendRequest,
+  CreatePostpayPackageRequest,
   DescribeWxCloudBaseRunSubNetsRequest,
   ModifyEndUserRequest,
   DescribeCurveDataResponse,
-  RollUpdateCloudBaseRunServerVersionResponse,
+  DescribeBaasPackageListRequest,
   ClsInfo,
   DescribeCloudBaseRunOperationTypesRequest,
   DescribeAuthDomainsResponse,
@@ -72,6 +73,7 @@ import {
   DeleteEndUserRequest,
   DescribeHostingDomainTaskRequest,
   FreezeCloudBaseRunServersRequest,
+  BaasPackageInfo,
   DescribeQuotaDataResponse,
   ActivityInfoItem,
   KVPair,
@@ -97,6 +99,7 @@ import {
   DescribeEnvFreeQuotaRequest,
   CloudBaseCapabilities,
   DescribeEndUserLoginStatisticResponse,
+  DescribeExtensionUploadInfoRequest,
   DescribeEnvPostpaidDeductResponse,
   HpaPolicy,
   CloudBaseRunImageSecretInfo,
@@ -130,7 +133,7 @@ import {
   DescribeCloudBaseRunServerDomainNameRequest,
   DescribeCloudBaseRunAllVpcsRequest,
   CreatePostpayPackageResponse,
-  DescribeExtensionUploadInfoRequest,
+  DescribeBaasPackageListResponse,
   ReplaceActivityRecordRequest,
   DeleteWxGatewayRouteResponse,
   CloudBaseRunKVPriority,
@@ -197,8 +200,8 @@ import {
   DescribeEndUserStatisticResponse,
   DescribeSmsQuotasRequest,
   DescribeCloudBaseRunVersionResponse,
-  CreatePostpayPackageRequest,
-  DescribeCloudBaseRunPodListResponse,
+  DescribeCloudBaseRunResourceForExtendRequest,
+  DescribeCloudBaseBuildServiceRequest,
   SearchClsLogRequest,
   CloudBaseCodeRepoDetail,
   CheckTcbServiceRequest,
@@ -308,6 +311,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteWxGatewayRouteResponse) => void
   ): Promise<DeleteWxGatewayRouteResponse> {
     return this.request("DeleteWxGatewayRoute", req, cb)
+  }
+
+  /**
+   * 查询用户活动信息
+   */
+  async DescribeUserActivityInfo(
+    req: DescribeUserActivityInfoRequest,
+    cb?: (error: string, rep: DescribeUserActivityInfoResponse) => void
+  ): Promise<DescribeUserActivityInfoResponse> {
+    return this.request("DescribeUserActivityInfo", req, cb)
   }
 
   /**
@@ -514,13 +527,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询用户活动信息
+   * 获取新套餐列表，含详情，如果传了PackageId，则只获取指定套餐详情
    */
-  async DescribeUserActivityInfo(
-    req: DescribeUserActivityInfoRequest,
-    cb?: (error: string, rep: DescribeUserActivityInfoResponse) => void
-  ): Promise<DescribeUserActivityInfoResponse> {
-    return this.request("DescribeUserActivityInfo", req, cb)
+  async DescribeBaasPackageList(
+    req: DescribeBaasPackageListRequest,
+    cb?: (error: string, rep: DescribeBaasPackageListResponse) => void
+  ): Promise<DescribeBaasPackageListResponse> {
+    return this.request("DescribeBaasPackageList", req, cb)
   }
 
   /**

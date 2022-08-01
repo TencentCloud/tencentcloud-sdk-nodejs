@@ -2386,7 +2386,7 @@ export class Client extends AbstractClient {
    * 本接口（DescribeNetworkAclQuintupleEntries）查询入方向或出方向网络ACL五元组条目列表。
    */
   async DescribeNetworkAclQuintupleEntries(
-    req?: DescribeNetworkAclQuintupleEntriesRequest,
+    req: DescribeNetworkAclQuintupleEntriesRequest,
     cb?: (error: string, rep: DescribeNetworkAclQuintupleEntriesResponse) => void
   ): Promise<DescribeNetworkAclQuintupleEntriesResponse> {
     return this.request("DescribeNetworkAclQuintupleEntries", req, cb)

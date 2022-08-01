@@ -4278,6 +4278,11 @@ global：预热全球节点
 此功能灰度发布中，敬请期待
       */
   DisableRange?: boolean
+
+  /**
+   * 是否对URL进行编码
+   */
+  UrlEncode?: boolean
 }
 
 /**

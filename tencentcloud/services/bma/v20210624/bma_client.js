@@ -34,10 +34,52 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCRWorkInfo", req, cb);
     }
     /**
+     * 申请取证
+     */
+    async ModifyCRObtainStatus(req, cb) {
+        return this.request("ModifyCRObtainStatus", req, cb);
+    }
+    /**
+     * 版权保护-拦截申请接口
+     */
+    async ModifyCRBlockStatus(req, cb) {
+        return this.request("ModifyCRBlockStatus", req, cb);
+    }
+    /**
      * 版权保护-新建发函接口
      */
     async CreateCRRight(req, cb) {
         return this.request("CreateCRRight", req, cb);
+    }
+    /**
+     * 版权保护-查询监测列表接口
+     */
+    async DescribeCRMonitors(req, cb) {
+        return this.request("DescribeCRMonitors", req, cb);
+    }
+    /**
+     * 版权保护-维权申请接口
+     */
+    async ModifyCRRightStatus(req, cb) {
+        return this.request("ModifyCRRightStatus", req, cb);
+    }
+    /**
+     * 更新作品
+     */
+    async UpdateCRWork(req, cb) {
+        return this.request("UpdateCRWork", req, cb);
+    }
+    /**
+     * 品牌经营管家-版权保护模块企业认证接口
+     */
+    async CreateCRCompanyVerify(req, cb) {
+        return this.request("CreateCRCompanyVerify", req, cb);
+    }
+    /**
+     * 版权保护-修改监测状态接口
+     */
+    async ModifyCRMonitor(req, cb) {
+        return this.request("ModifyCRMonitor", req, cb);
     }
     /**
      * 版权保护-新建拦截接口
@@ -46,10 +88,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateCRBlock", req, cb);
     }
     /**
-     * 品牌经营管家-版权保护模块企业认证接口
+     * 版权保护-添加作品接口
      */
-    async CreateCRCompanyVerify(req, cb) {
-        return this.request("CreateCRCompanyVerify", req, cb);
+    async CreateCRWork(req, cb) {
+        return this.request("CreateCRWork", req, cb);
+    }
+    /**
+     * 版权保护-查询作品监测详情接口
+     */
+    async DescribeCRMonitorDetail(req, cb) {
+        return this.request("DescribeCRMonitorDetail", req, cb);
     }
 }
 exports.Client = Client;

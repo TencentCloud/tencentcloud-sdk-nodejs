@@ -208,6 +208,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteEKSCluster", req, cb);
     }
     /**
+     * 将集群内节点移入节点池
+     */
+    async AddNodeToNodePool(req, cb) {
+        return this.request("AddNodeToNodePool", req, cb);
+    }
+    /**
      * 获取边缘计算外部访问的kubeconfig
      */
     async DescribeTKEEdgeExternalKubeconfig(req, cb) {
@@ -364,10 +370,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteEdgeCVMInstances", req, cb);
     }
     /**
-     * 将集群内节点移入节点池
+     * 获取事件、审计和日志的状态接口
      */
-    async AddNodeToNodePool(req, cb) {
-        return this.request("AddNodeToNodePool", req, cb);
+    async DescribeEdgeLogSwitches(req, cb) {
+        return this.request("DescribeEdgeLogSwitches", req, cb);
     }
     /**
      * 查询集群列表
@@ -454,10 +460,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AddClusterCIDR", req, cb);
     }
     /**
-     * 查询容器实例中容器日志
+     * 创建镜像缓存的接口。创建过程中，请勿删除EKSCI实例和云盘，否则镜像缓存将创建失败。
      */
-    async DescribeEksContainerInstanceLog(req, cb) {
-        return this.request("DescribeEksContainerInstanceLog", req, cb);
+    async CreateImageCache(req, cb) {
+        return this.request("CreateImageCache", req, cb);
     }
     /**
      * 更新容器实例
@@ -796,10 +802,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SyncPrometheusTemp", req, cb);
     }
     /**
-     * 创建镜像缓存的接口。创建过程中，请勿删除EKSCI实例和云盘，否则镜像缓存将创建失败。
+     * 查询容器实例中容器日志
      */
-    async CreateImageCache(req, cb) {
-        return this.request("CreateImageCache", req, cb);
+    async DescribeEksContainerInstanceLog(req, cb) {
+        return this.request("DescribeEksContainerInstanceLog", req, cb);
     }
     /**
      * 检查给定节点列表中哪些是可升级的

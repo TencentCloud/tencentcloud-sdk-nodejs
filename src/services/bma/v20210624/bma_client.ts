@@ -18,13 +18,32 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  DescribeCRWorkInfoRequest,
+  Monitor,
   DescribeCRWorkInfoResponse,
-  CreateCRRightRequest,
   CreateCRRightResponse,
-  CreateCRBlockRequest,
-  CreateCRBlockResponse,
+  CreateCRWorkResponse,
+  CreateCRRightRequest,
+  ModifyCRBlockStatusResponse,
+  ModifyCRObtainStatusRequest,
+  DescribeCRWorkInfoRequest,
+  MonitorTort,
+  UpdateCRWorkResponse,
+  DescribeCRMonitorsResponse,
   CreateCRCompanyVerifyResponse,
+  ModifyCRBlockStatusRequest,
+  ModifyCRMonitorRequest,
+  DescribeCRMonitorDetailResponse,
+  CreateCRWorkRequest,
+  Filter,
+  CreateCRBlockResponse,
+  ModifyCRRightStatusRequest,
+  DescribeCRMonitorsRequest,
+  UpdateCRWorkRequest,
+  DescribeCRMonitorDetailRequest,
+  ModifyCRRightStatusResponse,
+  CreateCRBlockRequest,
+  ModifyCRMonitorResponse,
+  ModifyCRObtainStatusResponse,
   CreateCRCompanyVerifyRequest,
 } from "./bma_models"
 
@@ -48,6 +67,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 申请取证
+   */
+  async ModifyCRObtainStatus(
+    req: ModifyCRObtainStatusRequest,
+    cb?: (error: string, rep: ModifyCRObtainStatusResponse) => void
+  ): Promise<ModifyCRObtainStatusResponse> {
+    return this.request("ModifyCRObtainStatus", req, cb)
+  }
+
+  /**
+   * 版权保护-拦截申请接口
+   */
+  async ModifyCRBlockStatus(
+    req: ModifyCRBlockStatusRequest,
+    cb?: (error: string, rep: ModifyCRBlockStatusResponse) => void
+  ): Promise<ModifyCRBlockStatusResponse> {
+    return this.request("ModifyCRBlockStatus", req, cb)
+  }
+
+  /**
    * 版权保护-新建发函接口
    */
   async CreateCRRight(
@@ -55,6 +94,56 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateCRRightResponse) => void
   ): Promise<CreateCRRightResponse> {
     return this.request("CreateCRRight", req, cb)
+  }
+
+  /**
+   * 版权保护-查询监测列表接口
+   */
+  async DescribeCRMonitors(
+    req: DescribeCRMonitorsRequest,
+    cb?: (error: string, rep: DescribeCRMonitorsResponse) => void
+  ): Promise<DescribeCRMonitorsResponse> {
+    return this.request("DescribeCRMonitors", req, cb)
+  }
+
+  /**
+   * 版权保护-维权申请接口
+   */
+  async ModifyCRRightStatus(
+    req: ModifyCRRightStatusRequest,
+    cb?: (error: string, rep: ModifyCRRightStatusResponse) => void
+  ): Promise<ModifyCRRightStatusResponse> {
+    return this.request("ModifyCRRightStatus", req, cb)
+  }
+
+  /**
+   * 更新作品
+   */
+  async UpdateCRWork(
+    req: UpdateCRWorkRequest,
+    cb?: (error: string, rep: UpdateCRWorkResponse) => void
+  ): Promise<UpdateCRWorkResponse> {
+    return this.request("UpdateCRWork", req, cb)
+  }
+
+  /**
+   * 品牌经营管家-版权保护模块企业认证接口
+   */
+  async CreateCRCompanyVerify(
+    req: CreateCRCompanyVerifyRequest,
+    cb?: (error: string, rep: CreateCRCompanyVerifyResponse) => void
+  ): Promise<CreateCRCompanyVerifyResponse> {
+    return this.request("CreateCRCompanyVerify", req, cb)
+  }
+
+  /**
+   * 版权保护-修改监测状态接口
+   */
+  async ModifyCRMonitor(
+    req: ModifyCRMonitorRequest,
+    cb?: (error: string, rep: ModifyCRMonitorResponse) => void
+  ): Promise<ModifyCRMonitorResponse> {
+    return this.request("ModifyCRMonitor", req, cb)
   }
 
   /**
@@ -68,12 +157,22 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 品牌经营管家-版权保护模块企业认证接口
+   * 版权保护-添加作品接口
    */
-  async CreateCRCompanyVerify(
-    req: CreateCRCompanyVerifyRequest,
-    cb?: (error: string, rep: CreateCRCompanyVerifyResponse) => void
-  ): Promise<CreateCRCompanyVerifyResponse> {
-    return this.request("CreateCRCompanyVerify", req, cb)
+  async CreateCRWork(
+    req: CreateCRWorkRequest,
+    cb?: (error: string, rep: CreateCRWorkResponse) => void
+  ): Promise<CreateCRWorkResponse> {
+    return this.request("CreateCRWork", req, cb)
+  }
+
+  /**
+   * 版权保护-查询作品监测详情接口
+   */
+  async DescribeCRMonitorDetail(
+    req: DescribeCRMonitorDetailRequest,
+    cb?: (error: string, rep: DescribeCRMonitorDetailResponse) => void
+  ): Promise<DescribeCRMonitorDetailResponse> {
+    return this.request("DescribeCRMonitorDetail", req, cb)
   }
 }

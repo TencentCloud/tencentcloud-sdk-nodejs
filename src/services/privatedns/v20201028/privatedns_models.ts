@@ -306,6 +306,12 @@ export interface PrivateZoneRecord {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Extra: string
+
+  /**
+      * 0暂停，1启用
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Enabled: number
 }
 
 /**

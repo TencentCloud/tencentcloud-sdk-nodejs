@@ -306,6 +306,33 @@ export interface DeleteCloudBaseRunServerVersionResponse {
 }
 
 /**
+ * RollUpdateCloudBaseRunServerVersion返回参数结构体
+ */
+export interface RollUpdateCloudBaseRunServerVersionResponse {
+  /**
+   * succ为成功
+   */
+  Result: string
+
+  /**
+      * 滚动更新的VersionName
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VersionName: string
+
+  /**
+      * 操作记录id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RunId: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * SearchClsLog返回参数结构体
  */
 export interface SearchClsLogResponse {
@@ -600,33 +627,13 @@ export interface DescribeEndUsersRequest {
 }
 
 /**
- * DescribeCloudBaseBuildService请求参数结构体
+ * DescribeCloudBaseRunPodList返回参数结构体
  */
-export interface DescribeCloudBaseBuildServiceRequest {
+export interface DescribeCloudBaseRunPodListResponse {
   /**
-   * 环境id
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  EnvId: string
-
-  /**
-   * 服务名
-   */
-  ServiceName: string
-
-  /**
-   * build类型,枚举值有: cloudbaserun, framework-ci
-   */
-  CIBusiness?: string
-
-  /**
-   * 服务版本
-   */
-  ServiceVersion?: string
-
-  /**
-   * 文件后缀
-   */
-  Suffix?: string
+  RequestId?: string
 }
 
 /**
@@ -914,13 +921,63 @@ export interface DescribeSpecialCostItemsRequest {
 }
 
 /**
- * DescribeCloudBaseRunResourceForExtend请求参数结构体
+ * CreatePostpayPackage请求参数结构体
  */
-export interface DescribeCloudBaseRunResourceForExtendRequest {
+export interface CreatePostpayPackageRequest {
   /**
-   * 环境ID
+   * 环境ID，需要系统自动创建环境时，此字段不传
    */
-  EnvId: string
+  EnvId?: string
+
+  /**
+   * 微信 AppId，微信必传
+   */
+  WxAppId?: string
+
+  /**
+      * 付费来源
+<li>miniapp</li>
+<li>qcloud</li>
+      */
+  Source?: string
+
+  /**
+   * 用户享有的免费额度级别，目前只能为“basic”，不传该字段或该字段为空，标识不享受免费额度。
+   */
+  FreeQuota?: string
+
+  /**
+      * 环境创建来源，取值：
+<li>miniapp</li>
+<li>qcloud</li>
+用法同CreateEnv接口的Source参数
+和 Channel 参数同时传，或者同时不传；EnvId 为空时必传。
+      */
+  EnvSource?: string
+
+  /**
+   * 环境别名，要以a-z开头，不能包含  a-z,0-9,-  以外的字符
+   */
+  Alias?: string
+
+  /**
+      * 如果envsource为miniapp, channel可以为ide或api;
+如果envsource为qcloud, channel可以为qc_console,cocos, qq, cloudgame,dcloud,serverless_framework
+和 EnvSource 参数同时传，或者同时不传；EnvId 为空时必传。
+      */
+  Channel?: string
+
+  /**
+   * 扩展ID
+   */
+  ExtensionId?: string
+
+  /**
+      * 订单标记。建议使用方统一转大小写之后再判断。
+<li>QuickStart：快速启动来源</li>
+<li>Activity：活动来源</li>
+      */
+  Flag?: string
 }
 
 /**
@@ -1001,30 +1058,54 @@ export interface DescribeCurveDataResponse {
 }
 
 /**
- * RollUpdateCloudBaseRunServerVersion返回参数结构体
+ * DescribeBaasPackageList请求参数结构体
  */
-export interface RollUpdateCloudBaseRunServerVersionResponse {
+export interface DescribeBaasPackageListRequest {
   /**
-   * succ为成功
+   * tcb产品套餐ID，不填拉取全量package信息。
    */
-  Result: string
+  PackageName?: string
 
   /**
-      * 滚动更新的VersionName
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  VersionName: string
-
-  /**
-      * 操作记录id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  RunId: string
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 环境ID
    */
-  RequestId?: string
+  EnvId?: string
+
+  /**
+   * 套餐归属方，填写后只返回对应的套餐 包含miniapp与qcloud两种 默认为miniapp
+   */
+  Source?: string
+
+  /**
+   * 套餐归属环境渠道
+   */
+  EnvChannel?: string
+
+  /**
+      * 拉取套餐用途：
+1）new 新购
+2）modify变配
+3）renew续费
+      */
+  TargetAction?: string
+
+  /**
+      * 预留字段，同一商品会对应多个类型套餐，对指标有不同侧重。
+计算型calculation
+流量型flux
+容量型capactiy
+      */
+  GroupName?: string
+
+  /**
+   * 类型分组过滤。默认为["default"]
+   */
+  PackageTypeList?: Array<string>
+
+  /**
+   * 付费渠道，与回包billTags中的计费参数相关，不填返回默认值。
+   */
+  PaymentChannel?: string
 }
 
 /**
@@ -1656,6 +1737,68 @@ export interface FreezeCloudBaseRunServersRequest {
 }
 
 /**
+ * 新套餐套餐详情
+ */
+export interface BaasPackageInfo {
+  /**
+      * DAU产品套餐ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PackageName: string
+
+  /**
+      * DAU套餐中文名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PackageTitle: string
+
+  /**
+      * 套餐分组
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  GroupName: string
+
+  /**
+      * 套餐分组中文名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  GroupTitle: string
+
+  /**
+      * json格式化计费标签，例如：
+{"pid":2, "cids":{"create": 2, "renew": 2, "modify": 2}, "productCode":"p_tcb_mp", "subProductCode":"sp_tcb_mp_cloudbase_dau"}
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BillTags: string
+
+  /**
+      * json格式化用户资源限制，例如：
+{"Qps":1000,"InvokeNum":{"TimeUnit":"m", "Unit":"万次", "MaxSize": 100},"Capacity":{"TimeUnit":"m", "Unit":"GB", "MaxSize": 100}, "Cdn":{"Flux":{"TimeUnit":"m", "Unit":"GB", "MaxSize": 100}, "BackFlux":{"TimeUnit":"m", "Unit":"GB", "MaxSize": 100}},"Scf":{"Concurrency":1000,"OutFlux":{"TimeUnit":"m", "Unit":"GB", "MaxSize": 100},"MemoryUse":{"TimeUnit":"m", "Unit":"WGBS", "MaxSize": 100000}}}
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ResourceLimit: string
+
+  /**
+      * json格式化高级限制，例如：
+{"CMSEnable":false,"ProvisionedConcurrencyMem":512000, "PictureProcessing":false, "SecurityAudit":false, "RealTimePush":false, "TemplateMessageBatchPush":false, "Payment":false}
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AdvanceLimit: string
+
+  /**
+      * 套餐描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PackageDescription: string
+
+  /**
+      * 是否对外展示
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsExternal: boolean
+}
+
+/**
  * DescribeQuotaData返回参数结构体
  */
 export interface DescribeQuotaDataResponse {
@@ -2171,6 +2314,16 @@ export interface DescribeEndUserLoginStatisticResponse {
 }
 
 /**
+ * DescribeExtensionUploadInfo请求参数结构体
+ */
+export interface DescribeExtensionUploadInfoRequest {
+  /**
+   * 待上传的文件
+   */
+  ExtensionFiles: Array<ExtensionFile>
+}
+
+/**
  * DescribeEnvPostpaidDeduct返回参数结构体
  */
 export interface DescribeEnvPostpaidDeductResponse {
@@ -2631,6 +2784,12 @@ export interface EnvInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   IsDauPackage: boolean
+
+  /**
+      * 套餐类型:空\baas\tcbr
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PackageType: string
 }
 
 /**
@@ -3296,13 +3455,18 @@ export interface CreatePostpayPackageResponse {
 }
 
 /**
- * DescribeExtensionUploadInfo请求参数结构体
+ * DescribeBaasPackageList返回参数结构体
  */
-export interface DescribeExtensionUploadInfoRequest {
+export interface DescribeBaasPackageListResponse {
   /**
-   * 待上传的文件
+   * 套餐列表
    */
-  ExtensionFiles: Array<ExtensionFile>
+  PackageList: Array<BaasPackageInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4949,6 +5113,12 @@ export interface LogServiceInfo {
    * cls日志所属地域
    */
   Region: string
+
+  /**
+      * topic保存时长 默认7天
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Period: number
 }
 
 /**
@@ -5281,73 +5451,43 @@ export interface DescribeCloudBaseRunVersionResponse {
 }
 
 /**
- * CreatePostpayPackage请求参数结构体
+ * DescribeCloudBaseRunResourceForExtend请求参数结构体
  */
-export interface CreatePostpayPackageRequest {
+export interface DescribeCloudBaseRunResourceForExtendRequest {
   /**
-   * 环境ID，需要系统自动创建环境时，此字段不传
+   * 环境ID
    */
-  EnvId?: string
-
-  /**
-   * 微信 AppId，微信必传
-   */
-  WxAppId?: string
-
-  /**
-      * 付费来源
-<li>miniapp</li>
-<li>qcloud</li>
-      */
-  Source?: string
-
-  /**
-   * 用户享有的免费额度级别，目前只能为“basic”，不传该字段或该字段为空，标识不享受免费额度。
-   */
-  FreeQuota?: string
-
-  /**
-      * 环境创建来源，取值：
-<li>miniapp</li>
-<li>qcloud</li>
-用法同CreateEnv接口的Source参数
-和 Channel 参数同时传，或者同时不传；EnvId 为空时必传。
-      */
-  EnvSource?: string
-
-  /**
-   * 环境别名，要以a-z开头，不能包含  a-z,0-9,-  以外的字符
-   */
-  Alias?: string
-
-  /**
-      * 如果envsource为miniapp, channel可以为ide或api;
-如果envsource为qcloud, channel可以为qc_console,cocos, qq, cloudgame,dcloud,serverless_framework
-和 EnvSource 参数同时传，或者同时不传；EnvId 为空时必传。
-      */
-  Channel?: string
-
-  /**
-   * 扩展ID
-   */
-  ExtensionId?: string
-
-  /**
-      * 订单标记。建议使用方统一转大小写之后再判断。
-<li>QuickStart：快速启动来源</li>
-<li>Activity：活动来源</li>
-      */
-  Flag?: string
+  EnvId: string
 }
 
 /**
- * DescribeCloudBaseRunPodList返回参数结构体
+ * DescribeCloudBaseBuildService请求参数结构体
  */
-export interface DescribeCloudBaseRunPodListResponse {
+export interface DescribeCloudBaseBuildServiceRequest {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 环境id
    */
-  RequestId?: string
+  EnvId: string
+
+  /**
+   * 服务名
+   */
+  ServiceName: string
+
+  /**
+   * build类型,枚举值有: cloudbaserun, framework-ci
+   */
+  CIBusiness?: string
+
+  /**
+   * 服务版本
+   */
+  ServiceVersion?: string
+
+  /**
+   * 文件后缀
+   */
+  Suffix?: string
 }
 
 /**

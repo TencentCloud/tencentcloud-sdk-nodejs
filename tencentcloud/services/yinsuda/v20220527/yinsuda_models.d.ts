@@ -54,6 +54,12 @@ export interface DescribeKTVPlaylistsRequest {
       * 用户标识。
       */
     UserId: string;
+    /**
+      * 类型列表，取值有：
+<li>OfficialRec：官方推荐；</li>
+<li>Customize：自定义。</li>
+      */
+    Types?: Array<string>;
 }
 /**
  * DescribeKTVSuggestions返回参数结构体

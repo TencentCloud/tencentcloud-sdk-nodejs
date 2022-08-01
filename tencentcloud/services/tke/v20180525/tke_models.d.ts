@@ -3392,6 +3392,23 @@ export interface CreateClusterRequest {
     ExtensionAddons?: Array<ExtensionAddon>;
 }
 /**
+ * 加入存量节点时的节点池选项
+ */
+export interface NodePoolOption {
+    /**
+      * 是否加入节点池
+      */
+    AddToNodePool?: boolean;
+    /**
+      * 节点池id
+      */
+    NodePoolId?: string;
+    /**
+      * 是否继承节点池相关配置
+      */
+    InheritConfigurationFromNodePool?: boolean;
+}
+/**
  * DescribeEdgeClusterExtraArgs请求参数结构体
  */
 export interface DescribeEdgeClusterExtraArgsRequest {
@@ -3423,6 +3440,20 @@ export interface DescribePrometheusGlobalConfigResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     RawJobs: Array<PrometheusConfigItem>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeEdgeLogSwitches返回参数结构体
+ */
+export interface DescribeEdgeLogSwitchesResponse {
+    /**
+      * 集群日志开关集合
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SwitchSet: Array<string>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3738,21 +3769,13 @@ export interface DescribePrometheusConfigRequest {
     ClusterType: string;
 }
 /**
- * 加入存量节点时的节点池选项
+ * DescribeEdgeLogSwitches请求参数结构体
  */
-export interface NodePoolOption {
+export interface DescribeEdgeLogSwitchesRequest {
     /**
-      * 是否加入节点池
+      * 集群ID列表
       */
-    AddToNodePool?: boolean;
-    /**
-      * 节点池id
-      */
-    NodePoolId?: string;
-    /**
-      * 是否继承节点池相关配置
-      */
-    InheritConfigurationFromNodePool?: boolean;
+    ClusterIds: Array<string>;
 }
 /**
  * DeletePrometheusTemplate请求参数结构体

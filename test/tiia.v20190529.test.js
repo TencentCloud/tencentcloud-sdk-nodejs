@@ -28,16 +28,6 @@ it("tiia.v20190529.CreateImage", async function () {
     }
 })
 
-it("tiia.v20190529.DetectProductBeta", async function () {
-    try {
-       const data = await client.DetectProductBeta({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("tiia.v20190529.DetectLabelPro", async function () {
     try {
        const data = await client.DetectLabelPro({})
@@ -208,9 +198,9 @@ it("tiia.v20190529.DetectEnvelope", async function () {
     }
 })
 
-it("tiia.v20190529.DetectCelebrity", async function () {
+it("tiia.v20190529.DetectProductBeta", async function () {
     try {
-       const data = await client.DetectCelebrity({})
+       const data = await client.DetectProductBeta({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

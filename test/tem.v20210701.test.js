@@ -58,6 +58,16 @@ it("tem.v20210701.DeleteApplication", async function () {
     }
 })
 
+it("tem.v20210701.DescribeEnvironmentStatus", async function () {
+    try {
+       const data = await client.DescribeEnvironmentStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tem.v20210701.DeleteIngress", async function () {
     try {
        const data = await client.DeleteIngress({})
@@ -128,9 +138,9 @@ it("tem.v20210701.DescribeApplicationPods", async function () {
     }
 })
 
-it("tem.v20210701.RestartApplicationPod", async function () {
+it("tem.v20210701.RestartApplication", async function () {
     try {
-       const data = await client.RestartApplicationPod({})
+       const data = await client.RestartApplication({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -218,9 +228,9 @@ it("tem.v20210701.CreateApplication", async function () {
     }
 })
 
-it("tem.v20210701.RestartApplication", async function () {
+it("tem.v20210701.RestartApplicationPod", async function () {
     try {
-       const data = await client.RestartApplication({})
+       const data = await client.RestartApplicationPod({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -231,6 +241,16 @@ it("tem.v20210701.RestartApplication", async function () {
 it("tem.v20210701.RollingUpdateApplicationByVersion", async function () {
     try {
        const data = await client.RollingUpdateApplicationByVersion({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tem.v20210701.DescribeApplications", async function () {
+    try {
+       const data = await client.DescribeApplications({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

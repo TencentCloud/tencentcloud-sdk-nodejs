@@ -1141,6 +1141,12 @@ export interface DescribeZoneDetailsResponse {
   Tags: Array<Tag>
 
   /**
+      * 计费资源
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Resources: Array<Resource>
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -2078,6 +2084,20 @@ export interface Zone {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Tags: Array<Tag>
+
+  /**
+      * 计费资源
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Resources: Array<Resource>
+
+  /**
+      * 是否开启cname加速
+- enabled 开启
+- disabled 关闭
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CnameSpeedUp: string
 }
 
 /**
@@ -7574,6 +7594,61 @@ Targets可为空，不需要填写
 }
 
 /**
+ * 计费资源
+ */
+export interface Resource {
+  /**
+   * 资源 ID
+   */
+  Id: string
+
+  /**
+      * 付费模式
+0 为后付费
+1 为预付费
+      */
+  PayMode: number
+
+  /**
+   * 创建时间
+   */
+  CreateTime: string
+
+  /**
+   * 生效时间
+   */
+  EnableTime: string
+
+  /**
+   * 失效时间
+   */
+  ExpireTime: string
+
+  /**
+   * 套餐状态
+   */
+  Status: string
+
+  /**
+   * 询价参数
+   */
+  Sv: Array<Sv>
+
+  /**
+      * 是否自动续费
+0 表示默认状态
+1 表示自动续费
+2 表示不自动续费
+      */
+  AutoRenewFlag: number
+
+  /**
+   * 套餐关联资源ID
+   */
+  PlanId: string
+}
+
+/**
  * DeleteDnsRecords返回参数结构体
  */
 export interface DeleteDnsRecordsResponse {
@@ -8667,6 +8742,21 @@ export interface DescribeTimingL4DataResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 询价参数
+ */
+export interface Sv {
+  /**
+   * 询价参数 key
+   */
+  Key: string
+
+  /**
+   * 询价参数 value
+   */
+  Value: string
 }
 
 /**

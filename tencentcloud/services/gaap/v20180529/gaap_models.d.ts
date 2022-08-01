@@ -1213,11 +1213,7 @@ export interface CreateProxyGroupRequest {
       */
     PackageType?: string;
     /**
-      * 支持Http3的开关，其中：
-0，表示不需要支持Http3接入；
-1，表示需要支持Http3接入。
-注意：如果开启了Http3的功能，那么该通道组就不再支持TCP/UDP接入的功能。
-该功能的启停无法在通道组创建完毕后再修改。
+      * 该字段已废弃，当IPAddressVersion为IPv4时，所创建的通道组默认支持Http3.0；当为IPv6，默认不支持Http3.0。
       */
     Http3Supported?: number;
 }
@@ -2507,6 +2503,22 @@ CHANGING表示部分部署中。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Http3Supported: number;
+    /**
+      * 特性位图，每个bit位代表一种特性，其中：
+0，表示不支持该特性；
+1，表示支持该特性。
+特性位图含义如下（从右往左）：
+第1个bit，支持4层加速；
+第2个bit，支持7层加速；
+第3个bit，支持Http3接入；
+第4个bit，支持IPv6；
+第5个bit，支持精品BGP接入；
+第6个bit，支持三网接入；
+第7个bit，支持接入段Qos加速。
+注意：此字段可能返回 null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FeatureBitmap: number;
 }
 /**
  * 接口扩展参数
@@ -2734,7 +2746,7 @@ export interface CreateProxyRequest {
       */
     PackageType?: string;
     /**
-      * 支持Http3的开关，其中：0，表示不需要支持Http3接入；1，表示需要支持Http3接入。注意：如果开启了Http3的功能，那么该通道就不再支持TCP/UDP接入的功能。该功能的启停无法在通道创建完毕后再修改。
+      * 该字段已废弃，当IPAddressVersion为IPv4时，所创建的通道默认支持Http3.0；当为IPv6，默认不支持Http3.0。
       */
     Http3Supported?: number;
 }
@@ -3021,6 +3033,22 @@ export interface ProxyGroupDetail {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Http3Supported: number;
+    /**
+      * 特性位图，每个bit位代表一种特性，其中：
+0，表示不支持该特性；
+1，表示支持该特性。
+特性位图含义如下（从右往左）：
+第1个bit，支持4层加速；
+第2个bit，支持7层加速；
+第3个bit，支持Http3接入；
+第4个bit，支持IPv6；
+第5个bit，支持精品BGP接入；
+第6个bit，支持三网接入；
+第7个bit，支持接入段Qos加速。
+注意：此字段可能返回 null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FeatureBitmap: number;
 }
 /**
  * CreateHTTPListener请求参数结构体
@@ -4392,7 +4420,7 @@ export interface CheckProxyCreateRequest {
       */
     PackageType?: string;
     /**
-      * 支持Http3的开关，其中：0，表示不需要支持Http3接入；1，表示需要支持Http3接入。注意：如果开启了Http3的功能，那么该通道就不再支持TCP/UDP接入的功能。该功能的启停无法在通道创建完毕后再修改。
+      * 该字段已废弃，当IPAddressVersion为IPv4时，所创建的通道默认支持Http3.0；当为IPv6，默认不支持Http3.0。
       */
     Http3Supported?: number;
 }
@@ -4688,7 +4716,7 @@ export interface InquiryPriceCreateProxyRequest {
       */
     PackageType?: string;
     /**
-      * 支持Http3的开关，其中：0，表示不需要支持Http3接入；1，表示需要支持Http3接入。注意：如果开启了Http3的功能，那么该通道就不再支持TCP/UDP接入的功能。该功能的启停无法在通道创建完毕后再修改。
+      * 该字段已废弃，当IPAddressVersion为IPv4时，所创建的通道默认支持Http3.0；当为IPv6，默认不支持Http3.0。
       */
     Http3Supported?: number;
 }
@@ -5043,6 +5071,22 @@ CrossBorder表示跨境通道。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     InBanBlacklist: number;
+    /**
+      * 特性位图，每个bit位代表一种特性，其中：
+0，表示不支持该特性；
+1，表示支持该特性。
+特性位图含义如下（从右往左）：
+第1个bit，支持4层加速；
+第2个bit，支持7层加速；
+第3个bit，支持Http3接入；
+第4个bit，支持IPv6；
+第5个bit，支持精品BGP接入；
+第6个bit，支持三网接入；
+第7个bit，支持接入段Qos加速。
+注意：此字段可能返回 null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FeatureBitmap: number;
 }
 /**
  * RemoveRealServers返回参数结构体

@@ -479,7 +479,7 @@ export interface DescribeScanTaskReportUrlRequest {
   TaskType: number
 
   /**
-   * 报告类型, 0:诊断报告, 1:堆栈报告
+   * 报告类型, 0:诊断报告, 1:堆栈报告, 2:视频证据(预留), 3:报告json结果
    */
   ReportType: number
 }
@@ -602,9 +602,19 @@ export interface CreateAppScanTaskResponse {
  */
 export interface DescribeResourceUsageInfoRequest {
   /**
-   * 资源计费项名称
+   * 资源计费项名称(为空时，则根据TaskType和Platform进行查询)
    */
-  PriceName: string
+  PriceName?: string
+
+  /**
+   * 任务类型, 0:基础版, 1:专家版
+   */
+  TaskType?: number
+
+  /**
+   * 应用平台, 0:android
+   */
+  Platform?: number
 }
 
 /**
@@ -617,13 +627,13 @@ export interface DescribeScanTaskReportUrlResponse {
   Result: number
 
   /**
-      * 诊断报告/堆栈信息下载链接
+      * 诊断报告/堆栈信息/报告json结果下载链接
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ReportUrl: string
 
   /**
-      * 诊断报告/堆栈名称
+      * 诊断报告/堆栈/报告json结果的名称
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ReportTitle: string

@@ -102,6 +102,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeFlowTrend", req, cb);
     }
     /**
+     * 在CDC场景下，负载均衡型WAF的添加、编辑域名配置的时候，需要展示CDC负载均衡型WAF（cdc-clb-waf)支持的地域列表，通过DescribeUserCdcClbWafRegions既可以获得当前对客户已经开放的地域列表
+     */
+    async DescribeUserCdcClbWafRegions(req, cb) {
+        return this.request("DescribeUserCdcClbWafRegions", req, cb);
+    }
+    /**
      * 更改某一条规则
      */
     async ModifyDomainWhiteRule(req, cb) {

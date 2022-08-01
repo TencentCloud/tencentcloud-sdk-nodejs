@@ -8,7 +8,7 @@ import { DescribeKTVPlaylistsResponse, SearchKTVMusicsRequest, DescribeKTVPlayli
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
     /**
-     * 获取推荐歌单列表。
+     * 获取歌单列表。
      */
     DescribeKTVPlaylists(req: DescribeKTVPlaylistsRequest, cb?: (error: string, rep: DescribeKTVPlaylistsResponse) => void): Promise<DescribeKTVPlaylistsResponse>;
     /**

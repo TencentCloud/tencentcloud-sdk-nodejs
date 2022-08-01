@@ -526,6 +526,12 @@ export interface GetDetectInfoEnhancedResponse {
   IntentionVerifyData: IntentionVerifyData
 
   /**
+      * 意愿核身问答模式结果。若未使用该意愿核身功能，该字段返回值可以不处理。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IntentionQuestionResult: IntentionQuestionResult
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -564,6 +570,31 @@ export interface PhoneVerificationRequest {
    * 有加密需求的用户，传入CBC加密的初始向量。
    */
   Iv?: string
+}
+
+/**
+ * PhoneVerificationCMCC请求参数结构体
+ */
+export interface PhoneVerificationCMCCRequest {
+  /**
+   * 身份证号
+   */
+  IdCard: string
+
+  /**
+   * 姓名
+   */
+  Name: string
+
+  /**
+   * 手机号
+   */
+  Phone: string
+
+  /**
+   * 敏感数据加密信息。对传入信息（姓名、身份证号、手机号）有加密需求的用户可使用此参数，详情请点击左侧链接。
+   */
+  Encryption?: Encryption
 }
 
 /**
@@ -686,28 +717,46 @@ export interface GetEidTokenRequest {
 }
 
 /**
- * PhoneVerificationCMCC请求参数结构体
+ * 意愿核身问答模式结果
  */
-export interface PhoneVerificationCMCCRequest {
+export interface IntentionQuestionResult {
   /**
-   * 身份证号
-   */
-  IdCard: string
+      * 意愿核身最终结果：
+0：通过，-1：未通过
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FinalResultCode: string
 
   /**
-   * 姓名
-   */
-  Name: string
+      * 视频base64（其中包含全程问题和回答音频，mp4格式）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Video: string
 
   /**
-   * 手机号
-   */
-  Phone: string
+      * 屏幕截图base64列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ScreenShot: Array<string>
 
   /**
-   * 敏感数据加密信息。对传入信息（姓名、身份证号、手机号）有加密需求的用户可使用此参数，详情请点击左侧链接。
-   */
-  Encryption?: Encryption
+      * 和答案匹配结果列表
+0：成功，-1：不匹配
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ResultCode: Array<string>
+
+  /**
+      * 回答问题语音识别结果列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AsrResult: Array<string>
+
+  /**
+      * 答案录音音频
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Audios: Array<string>
 }
 
 /**
@@ -1718,6 +1767,11 @@ Base64编码后的图片数据大小不超过3M，仅支持jpg、png格式。请
    * 意愿核身使用的文案，若未使用意愿核身功能，该字段无需传入。默认为空，最长可接受120的字符串长度。
    */
   IntentionVerifyText?: string
+
+  /**
+   * 意愿核身过程中播报文本/问题、用户朗读/回答的文本，当前支持一个播报文本+回答文本。
+   */
+  IntentionQuestions?: Array<IntentionQuestion>
 }
 
 /**
@@ -2407,13 +2461,32 @@ export interface DetectInfoIdCardData {
   Avatar: string
 
   /**
-      * 开启身份证防翻拍告警功能后才会返回，返回数组中可能出现的告警码如下：
--9102 身份证复印件告警。
--9103 身份证翻拍告警。
--9106 身份证 PS 告警。
+      * 身份证人像面告警码，开启身份证告警功能后才会返回，返回数组中可能出现的告警码如下：
+-9100 身份证有效日期不合法告警，
+-9101 身份证边框不完整告警，
+-9102 身份证复印件告警，
+-9103 身份证翻拍告警，
+-9105 身份证框内遮挡告警，
+-9104 临时身份证告警，
+-9106 身份证 PS 告警，
+-9107 身份证反光告警。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   WarnInfos: Array<number>
+
+  /**
+      * 身份证国徽面告警码，开启身份证告警功能后才会返回，返回数组中可能出现的告警码如下：
+-9100 身份证有效日期不合法告警，
+-9101 身份证边框不完整告警，
+-9102 身份证复印件告警，
+-9103 身份证翻拍告警，
+-9105 身份证框内遮挡告警，
+-9104 临时身份证告警，
+-9106 身份证 PS 告警，
+-9107 身份证反光告警。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BackWarnInfos: Array<number>
 }
 
 /**
@@ -2769,6 +2842,21 @@ export interface GetRealNameAuthResultResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 意愿核身过程中播报的问题文本、用户回答的标准文本。
+ */
+export interface IntentionQuestion {
+  /**
+   * 系统播报的问题文本，问题最大长度为150个字符。
+   */
+  Question: string
+
+  /**
+   * 用户答案的标准文本列表，用于识别用户回答的语音与标准文本是否一致。列表长度最大为50，单个答案长度限制10个字符。
+   */
+  Answers: Array<string>
 }
 
 /**

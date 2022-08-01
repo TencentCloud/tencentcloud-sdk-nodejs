@@ -338,6 +338,27 @@ export interface SignQrCode {
     ExpiredTime: number;
 }
 /**
+ * GetTaskResultApi请求参数结构体
+ */
+export interface GetTaskResultApiRequest {
+    /**
+      * 任务Id
+      */
+    TaskId: string;
+    /**
+      * 企业信息
+      */
+    Organization?: OrganizationInfo;
+    /**
+      * 操作人信息
+      */
+    Operator?: UserInfo;
+    /**
+      * 渠道信息
+      */
+    Agent?: Agent;
+}
+/**
  * UploadFiles请求参数结构体
  */
 export interface UploadFilesRequest {
@@ -416,13 +437,15 @@ export interface DescribeFlowBriefsResponse {
 export interface Component {
     /**
       * 如果是 Component 控件类型，则可选类型为：
-TEXT - 内容文本控件
-DATE - 内容日期控件
-CHECK_BOX - 勾选框控件
+TEXT - 单行文本
+MULTI_LINE_TEXT - 多行文本
+CHECK_BOX - 勾选框
+ATTACHMENT - 附件
+SELECTOR - 选择器
 如果是 SignComponent 控件类型，则可选类型为：
-SIGN_SEAL - 签署印章控件
+SIGN_SEAL - 签署印章控件，静默签署时需要传入印章id作为ComponentValue
 SIGN_DATE - 签署日期控件
-SIGN_SIGNATURE - 手写签名控件
+SIGN_SIGNATURE - 手写签名控件，静默签署时不能使用
       */
     ComponentType: string;
     /**
@@ -478,7 +501,12 @@ ESIGN -- 个人印章类型
       */
     ComponentRecipientId?: string;
     /**
-      * 控件所填写的内容
+      * 控件填充vaule，ComponentType和传入值类型对应关系：
+TEXT - 文本内容
+MULTI_LINE_TEXT - 文本内容
+CHECK_BOX - true/false
+ATTACHMENT - 附件的FileId，需要通过UploadFiles接口上传获取
+SELECTOR - 选项值
       */
     ComponentValue?: string;
     /**
@@ -629,6 +657,31 @@ export interface CreateFlowByFilesResponse {
     RequestId?: string;
 }
 /**
+ * 机构信息
+ */
+export interface OrganizationInfo {
+    /**
+      * 机构在平台的编号
+      */
+    OrganizationId?: string;
+    /**
+      * 用户渠道
+      */
+    Channel?: string;
+    /**
+      * 用户在渠道的机构编号
+      */
+    OrganizationOpenId?: string;
+    /**
+      * 用户真实的IP
+      */
+    ClientIp?: string;
+    /**
+      * 机构的代理IP
+      */
+    ProxyIp?: string;
+}
+/**
  * DescribeFlowBriefs请求参数结构体
  */
 export interface DescribeFlowBriefsRequest {
@@ -701,6 +754,31 @@ export interface Recipient {
       * 附属信息
       */
     RecipientExtra?: string;
+}
+/**
+ * 用户信息
+ */
+export interface UserInfo {
+    /**
+      * 用户在平台的编号
+      */
+    UserId?: string;
+    /**
+      * 用户的来源渠道
+      */
+    Channel?: string;
+    /**
+      * 用户在渠道的编号
+      */
+    OpenId?: string;
+    /**
+      * 用户真实IP
+      */
+    ClientIp?: string;
+    /**
+      * 用户代理IP
+      */
+    ProxyIp?: string;
 }
 /**
  * DescribeFileUrls请求参数结构体
@@ -777,7 +855,7 @@ export interface ApproverInfo {
       */
     ApproverMobile: string;
     /**
-      * 本环节操作人签署控件配置，为企业静默签署时，只允许类型为SIGN_SEAL（印章）和SIGN_DATE（日期）控件，并且传入印章编号。
+      * 本环节操作人签署控件配置
       */
     SignComponents: Array<Component>;
     /**
@@ -925,6 +1003,19 @@ export interface CreateMultiFlowSignQRCodeRequest {
     QrEffectiveDay?: number;
 }
 /**
+ * CreateConvertTaskApi返回参数结构体
+ */
+export interface CreateConvertTaskApiResponse {
+    /**
+      * 转换任务Id
+      */
+    TaskId: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * StartFlow返回参数结构体
  */
 export interface StartFlowResponse {
@@ -936,6 +1027,35 @@ export interface StartFlowResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * CreateConvertTaskApi请求参数结构体
+ */
+export interface CreateConvertTaskApiRequest {
+    /**
+      * 资源Id
+      */
+    ResourceId: string;
+    /**
+      * 资源类型 取值范围doc,docx,html之一
+      */
+    ResourceType: string;
+    /**
+      * 资源名称
+      */
+    ResourceName: string;
+    /**
+      * 无
+      */
+    Organization?: OrganizationInfo;
+    /**
+      * 无
+      */
+    Operator?: UserInfo;
+    /**
+      * 无
+      */
+    Agent?: Agent;
 }
 /**
  * CreateSchemeUrl返回参数结构体
@@ -975,12 +1095,7 @@ export interface CreateFlowByFilesRequest {
       */
     FlowType?: string;
     /**
-      * 经办人内容控件配置。可选类型为：
-TEXT - 内容文本控件
-MULTI_LINE_TEXT - 多行文本控件
-CHECK_BOX - 勾选框控件
-ATTACHMENT - 附件
-注：默认字体大小为 字号12
+      * 经办人内容控件配置
       */
     Components?: Array<Component>;
     /**
@@ -1049,15 +1164,20 @@ export declare type Agent = null;
  */
 export interface FormField {
     /**
-      * 控件填充value
+      * 控件填充value，ComponentType和传入值类型对应关系：
+TEXT - 文本内容
+MULTI_LINE_TEXT - 文本内容
+CHECK_BOX - true/false
+ATTACHMENT - 附件的FileId，需要通过UploadFiles接口上传获取
+SELECTOR - 模板中配置的选项值
       */
     ComponentValue: string;
     /**
-      * 控件id
+      * 控件id，和ComponentName选择一项传入即可
       */
     ComponentId?: string;
     /**
-      * 控件名字，最大长度不超过30字符
+      * 控件名字，最大长度不超过30字符，和ComponentId选择一项传入即可
       */
     ComponentName?: string;
 }
@@ -1095,29 +1215,29 @@ export interface DescribeFlowTemplatesRequest {
     Agent?: Agent;
 }
 /**
- * 用户信息
+ * GetTaskResultApi返回参数结构体
  */
-export interface UserInfo {
+export interface GetTaskResultApiResponse {
     /**
-      * 用户在平台的编号
+      * 任务Id
       */
-    UserId?: string;
+    TaskId: string;
     /**
-      * 用户的来源渠道
+      * 任务状态
       */
-    Channel?: string;
+    TaskStatus: number;
     /**
-      * 用户在渠道的编号
+      * 状态描述
       */
-    OpenId?: string;
+    TaskMessage: string;
     /**
-      * 用户真实IP
+      * 资源Id
       */
-    ClientIp?: string;
+    ResourceId: string;
     /**
-      * 用户代理IP
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    ProxyIp?: string;
+    RequestId?: string;
 }
 /**
  * 流程信息摘要

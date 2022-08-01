@@ -766,7 +766,7 @@ export declare class Client extends AbstractClient {
     /**
      * 本接口（DescribeNetworkAclQuintupleEntries）查询入方向或出方向网络ACL五元组条目列表。
      */
-    DescribeNetworkAclQuintupleEntries(req?: DescribeNetworkAclQuintupleEntriesRequest, cb?: (error: string, rep: DescribeNetworkAclQuintupleEntriesResponse) => void): Promise<DescribeNetworkAclQuintupleEntriesResponse>;
+    DescribeNetworkAclQuintupleEntries(req: DescribeNetworkAclQuintupleEntriesRequest, cb?: (error: string, rep: DescribeNetworkAclQuintupleEntriesResponse) => void): Promise<DescribeNetworkAclQuintupleEntriesResponse>;
     /**
      * 本接口(DeleteNetDetect)用于删除网络探测实例。
      */

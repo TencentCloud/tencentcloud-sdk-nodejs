@@ -1163,7 +1163,8 @@ export interface VehicleLicenseOCRRequest {
 
   /**
       * FRONT 为行驶证主页正面（有红色印章的一面），
-BACK 为行驶证副页正面（有号码号牌的一面）。
+BACK 为行驶证副页正面（有号码号牌的一面），
+DOUBLE 为行驶证主页正面和副页正面。
 默认值为：FRONT。
       */
   CardSide?: string
@@ -2596,13 +2597,13 @@ export interface VehicleLicenseOCRResponse {
       * 行驶证主页正面的识别结果，CardSide 为 FRONT。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  FrontInfo?: TextVehicleFront
+  FrontInfo: TextVehicleFront
 
   /**
       * 行驶证副页正面的识别结果，CardSide 为 BACK。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  BackInfo?: TextVehicleBack
+  BackInfo: TextVehicleBack
 
   /**
       * Code 告警码列表和释义：
@@ -2611,7 +2612,7 @@ export interface VehicleLicenseOCRResponse {
 -9106 ps告警
 注：告警码可以同时存在多个
       */
-  RecognizeWarnCode?: Array<number>
+  RecognizeWarnCode: Array<number>
 
   /**
       * 告警码说明：
@@ -2620,7 +2621,7 @@ WARN_DRIVER_LICENSE_SCREENED_CARD 翻拍件告警
 WARN_DRIVER_LICENSE_PS_CARD ps告警
 注：告警信息可以同时存在多个
       */
-  RecognizeWarnMsg?: Array<string>
+  RecognizeWarnMsg: Array<string>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -6101,7 +6102,7 @@ export interface VatInvoice {
 
   /**
       * 是否作废（红冲）是否作废（红冲）
-Y: 已作废 N：未作废 H：红冲
+Y：已作废，N：未作废，H：红冲，HP：部分红冲，HF：全额红冲
       */
   IsAbandoned: string
 

@@ -32,29 +32,18 @@ export interface CreateAccessExportRequest {
     Order?: string;
 }
 /**
- * DescribeWafAutoDenyRules返回参数结构体
+ * CDC场景下负载均衡WAF的集群信息
  */
-export interface DescribeWafAutoDenyRulesResponse {
+export interface CdcCluster {
     /**
-      * 攻击次数阈值
+      * cdc的集群id
       */
-    AttackThreshold: number;
+    Id: string;
     /**
-      * 攻击时间阈值
+      * cdc的集群名称
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    TimeThreshold: number;
-    /**
-      * 自动封禁时间
-      */
-    DenyTimeThreshold: number;
-    /**
-      * 自动封禁状态
-      */
-    DefenseStatus: number;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    Name: string;
 }
 /**
  * DescribeIpHitItems返回参数结构体
@@ -71,19 +60,9 @@ export interface DescribeIpHitItemsResponse {
     RequestId?: string;
 }
 /**
- * DescribeUserClbWafRegions返回参数结构体
+ * DescribeUserCdcClbWafRegions请求参数结构体
  */
-export interface DescribeUserClbWafRegionsResponse {
-    /**
-      * 地域（标准的ap-格式）列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Data: Array<string>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
+export declare type DescribeUserCdcClbWafRegionsRequest = null;
 /**
  * 封装参数
  */
@@ -138,13 +117,25 @@ export interface AccessLogItems {
     Data: Array<AccessLogItem>;
 }
 /**
- * AddDomainWhiteRule返回参数结构体
+ * DescribeWafAutoDenyRules返回参数结构体
  */
-export interface AddDomainWhiteRuleResponse {
+export interface DescribeWafAutoDenyRulesResponse {
     /**
-      * 规则id
+      * 攻击次数阈值
       */
-    Id?: number;
+    AttackThreshold: number;
+    /**
+      * 攻击时间阈值
+      */
+    TimeThreshold: number;
+    /**
+      * 自动封禁时间
+      */
+    DenyTimeThreshold: number;
+    /**
+      * 自动封禁状态
+      */
+    DefenseStatus: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -328,27 +319,27 @@ export interface DeleteDownloadRecordRequest {
     Flow: string;
 }
 /**
- * DescribeAccessIndex接口的出参数
+ * DescribeUserCdcClbWafRegions返回参数结构体
  */
-export interface AccessRuleInfo {
+export interface DescribeUserCdcClbWafRegionsResponse {
     /**
-      * 全文索引配置
-注意：此字段可能返回 null，表示取不到有效值。
+      * CdcRegion的类型描述
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    FullText: AccessFullTextInfo;
+    Data: Array<CdcRegion>;
     /**
-      * 键值索引配置
-注意：此字段可能返回 null，表示取不到有效值。
-注意：此字段可能返回 null，表示取不到有效值。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    KeyValue: AccessRuleKeyValueInfo;
+    RequestId?: string;
+}
+/**
+ * DeleteAccessExport返回参数结构体
+ */
+export interface DeleteAccessExportResponse {
     /**
-      * 元字段索引配置
-注意：此字段可能返回 null，表示取不到有效值。
-注意：此字段可能返回 null，表示取不到有效值。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Tag: AccessRuleTagInfo;
+    RequestId?: string;
 }
 /**
  * DescribeAccessExports请求参数结构体
@@ -368,6 +359,20 @@ export interface DescribeAccessExportsRequest {
     Limit?: number;
 }
 /**
+ * DescribeUserClbWafRegions返回参数结构体
+ */
+export interface DescribeUserClbWafRegionsResponse {
+    /**
+      * 地域（标准的ap-格式）列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Data: Array<string>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * ModifyWafAutoDenyStatus请求参数结构体
  */
 export interface ModifyWafAutoDenyStatusRequest {
@@ -380,15 +385,6 @@ export interface ModifyWafAutoDenyStatusRequest {
  * ModifyAccessPeriod返回参数结构体
  */
 export interface ModifyAccessPeriodResponse {
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * DeleteAccessExport返回参数结构体
- */
-export interface DeleteAccessExportResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -811,53 +807,17 @@ export interface DeleteDomainWhiteRulesResponse {
     RequestId?: string;
 }
 /**
- * 下载攻击日志记录数据项
+ * ModifyWafAutoDenyStatus返回参数结构体
  */
-export interface DownloadAttackRecordInfo {
+export interface ModifyWafAutoDenyStatusResponse {
     /**
-      * 记录ID
+      * WAF 自动封禁配置项
       */
-    Id: number;
+    WafAutoDenyDetails?: AutoDenyDetail;
     /**
-      * 下载任务名
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    TaskName: string;
-    /**
-      * 任务ID
-      */
-    TaskId: string;
-    /**
-      * 域名
-      */
-    Host: string;
-    /**
-      * 当前下载任务的日志条数
-      */
-    Count: number;
-    /**
-      * 下载任务运行状态：-1-下载超时，0-下载等待，1-下载完成，2-下载失败，4-正在下载
-      */
-    Status: number;
-    /**
-      * 下载文件URL
-      */
-    Url: string;
-    /**
-      * 创建时间
-      */
-    CreateTime: string;
-    /**
-      * 最后更新修改时间
-      */
-    ModifyTime: string;
-    /**
-      * 过期时间
-      */
-    ExpireTime: string;
-    /**
-      * 下载任务需下载的日志总条数
-      */
-    TotalCount: number;
+    RequestId?: string;
 }
 /**
  * DescribeWafAutoDenyStatus返回参数结构体
@@ -1061,6 +1021,19 @@ export interface DescribeDomainWhiteRulesRequest {
     RuleId?: string;
 }
 /**
+ * AddDomainWhiteRule返回参数结构体
+ */
+export interface AddDomainWhiteRuleResponse {
+    /**
+      * 规则id
+      */
+    Id?: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * ModifyCustomRuleStatus请求参数结构体
  */
 export interface ModifyCustomRuleStatusRequest {
@@ -1223,6 +1196,20 @@ export interface DescribeInstancesRequest {
       * 过滤数组
       */
     Filters?: Array<FiltersItemNew>;
+}
+/**
+ * CDC场景下负载均衡WAF的地域信息
+ */
+export interface CdcRegion {
+    /**
+      * 地域
+      */
+    Region: string;
+    /**
+      * 该地域对应的集群信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Clusters: Array<CdcCluster>;
 }
 /**
  * 用于DescribeAccessIndex接口的出参
@@ -1682,6 +1669,29 @@ export interface DescribeIpHitItemsRequest {
     Ip?: string;
 }
 /**
+ * DescribeAccessIndex接口的出参数
+ */
+export interface AccessRuleInfo {
+    /**
+      * 全文索引配置
+注意：此字段可能返回 null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FullText: AccessFullTextInfo;
+    /**
+      * 键值索引配置
+注意：此字段可能返回 null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    KeyValue: AccessRuleKeyValueInfo;
+    /**
+      * 元字段索引配置
+注意：此字段可能返回 null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Tag: AccessRuleTagInfo;
+}
+/**
  * GetAttackDownloadRecords返回参数结构体
  */
 export interface GetAttackDownloadRecordsResponse {
@@ -1838,17 +1848,53 @@ export interface DeleteSessionResponse {
     RequestId?: string;
 }
 /**
- * ModifyWafAutoDenyStatus返回参数结构体
+ * 下载攻击日志记录数据项
  */
-export interface ModifyWafAutoDenyStatusResponse {
+export interface DownloadAttackRecordInfo {
     /**
-      * WAF 自动封禁配置项
+      * 记录ID
       */
-    WafAutoDenyDetails?: AutoDenyDetail;
+    Id: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 下载任务名
       */
-    RequestId?: string;
+    TaskName: string;
+    /**
+      * 任务ID
+      */
+    TaskId: string;
+    /**
+      * 域名
+      */
+    Host: string;
+    /**
+      * 当前下载任务的日志条数
+      */
+    Count: number;
+    /**
+      * 下载任务运行状态：-1-下载超时，0-下载等待，1-下载完成，2-下载失败，4-正在下载
+      */
+    Status: number;
+    /**
+      * 下载文件URL
+      */
+    Url: string;
+    /**
+      * 创建时间
+      */
+    CreateTime: string;
+    /**
+      * 最后更新修改时间
+      */
+    ModifyTime: string;
+    /**
+      * 过期时间
+      */
+    ExpireTime: string;
+    /**
+      * 下载任务需下载的日志总条数
+      */
+    TotalCount: number;
 }
 /**
  * DescribeWafThreatenIntelligence请求参数结构体

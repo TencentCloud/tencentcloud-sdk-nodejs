@@ -88,6 +88,16 @@ it("tcb.v20180608.DeleteWxGatewayRoute", async function () {
     }
 })
 
+it("tcb.v20180608.DescribeUserActivityInfo", async function () {
+    try {
+       const data = await client.DescribeUserActivityInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcb.v20180608.BindEnvGateway", async function () {
     try {
        const data = await client.BindEnvGateway({})
@@ -288,9 +298,9 @@ it("tcb.v20180608.ReplaceActivityRecord", async function () {
     }
 })
 
-it("tcb.v20180608.DescribeUserActivityInfo", async function () {
+it("tcb.v20180608.DescribeBaasPackageList", async function () {
     try {
-       const data = await client.DescribeUserActivityInfo({})
+       const data = await client.DescribeBaasPackageList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

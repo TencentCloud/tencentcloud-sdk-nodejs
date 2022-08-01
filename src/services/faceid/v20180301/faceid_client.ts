@@ -36,11 +36,12 @@ import {
   CheckIdCardInformationResponse,
   GetDetectInfoEnhancedResponse,
   PhoneVerificationRequest,
+  PhoneVerificationCMCCRequest,
   GetEidResultRequest,
   DetectAuthResponse,
   PhoneVerificationResponse,
   GetEidTokenRequest,
-  PhoneVerificationCMCCRequest,
+  IntentionQuestionResult,
   GetWeChatBillDetailsResponse,
   CheckPhoneAndNameResponse,
   BankCard4EVerificationResponse,
@@ -98,6 +99,7 @@ import {
   GetFaceIdResultResponse,
   EncryptedPhoneVerificationRequest,
   GetRealNameAuthResultResponse,
+  IntentionQuestion,
   EncryptedPhoneVerificationResponse,
 } from "./faceid_models"
 

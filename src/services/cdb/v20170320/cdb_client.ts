@@ -177,6 +177,7 @@ import {
   DescribeCloneListResponse,
   StartBatchRollbackRequest,
   DescribeDBInstanceCharsetRequest,
+  ModifyInstancePasswordComplexityResponse,
   DeviceMemInfo,
   UpgradeDBInstanceEngineVersionRequest,
   SlowLogItem,
@@ -293,6 +294,7 @@ import {
   DescribeSupportedPrivilegesResponse,
   StopDBImportJobRequest,
   DescribeLocalBinlogConfigResponse,
+  ModifyInstancePasswordComplexityRequest,
   OpenWanServiceResponse,
   DescribeDBInstanceGTIDRequest,
   ModifyCDBProxyRequest,
@@ -732,6 +734,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyAuditConfigResponse) => void
   ): Promise<ModifyAuditConfigResponse> {
     return this.request("ModifyAuditConfig", req, cb)
+  }
+
+  /**
+   * 本接口(ModifyInstancePasswordComplexity)用于修改云数据库实例的密码复杂度。
+   */
+  async ModifyInstancePasswordComplexity(
+    req: ModifyInstancePasswordComplexityRequest,
+    cb?: (error: string, rep: ModifyInstancePasswordComplexityResponse) => void
+  ): Promise<ModifyInstancePasswordComplexityResponse> {
+    return this.request("ModifyInstancePasswordComplexity", req, cb)
   }
 
   /**

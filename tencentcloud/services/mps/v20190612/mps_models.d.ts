@@ -8421,11 +8421,11 @@ export interface WorkflowTask {
       */
     Status: string;
     /**
-      * 已弃用，请使用各个具体任务的 ErrCode。
+      * 源异常时返回非0错误码，返回0 时请使用各个具体任务的 ErrCode。
       */
     ErrCode: number;
     /**
-      * 已弃用，请使用各个具体任务的 Message。
+      * 源异常时返回对应异常Message，否则请使用各个具体任务的 Message。
       */
     Message: string;
     /**

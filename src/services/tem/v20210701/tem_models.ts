@@ -16,72 +16,6 @@
  */
 
 /**
- * 挂载配置信息
- */
-export interface MountedSettingConf {
-  /**
-   * 配置名称
-   */
-  ConfigDataName: string
-
-  /**
-   * 挂载路径
-   */
-  MountedPath: string
-
-  /**
-   * 配置内容
-   */
-  Data?: Array<Pair>
-
-  /**
-   * 加密配置名称
-   */
-  SecretDataName?: string
-}
-
-/**
- * RestartApplicationPod返回参数结构体
- */
-export interface RestartApplicationPodResponse {
-  /**
-      * 返回结果
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Result: boolean
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DeleteApplication请求参数结构体
- */
-export interface DeleteApplicationRequest {
-  /**
-   * 服务Id
-   */
-  ApplicationId: string
-
-  /**
-   * 环境ID
-   */
-  EnvironmentId: string
-
-  /**
-   * 来源渠道
-   */
-  SourceChannel?: number
-
-  /**
-   * 当服务没有任何运行版本时，是否删除此服务
-   */
-  DeleteApplicationIfNoRunningVersion?: boolean
-}
-
-/**
  * CreateResource请求参数结构体
  */
 export interface CreateResourceRequest {
@@ -117,6 +51,46 @@ export interface CreateResourceRequest {
 }
 
 /**
+ * 命名空间分页
+ */
+export interface NamespacePage {
+  /**
+   * 分页内容
+   */
+  Records: Array<TemNamespaceInfo>
+
+  /**
+   * 总数
+   */
+  Total: number
+
+  /**
+   * 条目数
+   */
+  Size: number
+
+  /**
+   * 页数
+   */
+  Pages: number
+}
+
+/**
+ * DescribeApplicationPods返回参数结构体
+ */
+export interface DescribeApplicationPodsResponse {
+  /**
+   * 返回结果
+   */
+  Result: DescribeRunPodPage
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ResumeDeployApplication返回参数结构体
  */
 export interface ResumeDeployApplicationResponse {
@@ -132,9 +106,116 @@ export interface ResumeDeployApplicationResponse {
 }
 
 /**
- * RestartApplication返回参数结构体
+ * 存储卷配置
  */
-export interface RestartApplicationResponse {
+export interface StorageConf {
+  /**
+   * 存储卷名称
+   */
+  StorageVolName: string
+
+  /**
+   * 存储卷路径
+   */
+  StorageVolPath: string
+
+  /**
+      * 存储卷IP
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  StorageVolIp?: string
+}
+
+/**
+ * 分批发布单批次详情
+ */
+export interface DeployServicePodDetail {
+  /**
+      * pod Id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PodId?: string
+
+  /**
+      * pod状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PodStatus?: Array<string>
+
+  /**
+      * pod版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PodVersion?: string
+
+  /**
+      * pod创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CreateTime?: string
+
+  /**
+      * pod所在可用区
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Zone?: string
+
+  /**
+      * webshell地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Webshell?: string
+}
+
+/**
+ * 日志输出配置
+ */
+export interface LogOutputConf {
+  /**
+   * 日志消费端类型
+   */
+  OutputType: string
+
+  /**
+   * cls日志集
+   */
+  ClsLogsetName?: string
+
+  /**
+   * cls日志主题
+   */
+  ClsLogTopicId?: string
+
+  /**
+   * cls日志集id
+   */
+  ClsLogsetId?: string
+
+  /**
+   * cls日志名称
+   */
+  ClsLogTopicName?: string
+}
+
+/**
+ * DeleteIngress返回参数结构体
+ */
+export interface DeleteIngressResponse {
+  /**
+   * 是否删除成功
+   */
+  Result: boolean
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteApplication返回参数结构体
+ */
+export interface DeleteApplicationResponse {
   /**
    * 返回结果
    */
@@ -147,13 +228,69 @@ export interface RestartApplicationResponse {
 }
 
 /**
- * DescribeApplicationsStatus返回参数结构体
+ * RollingUpdateApplicationByVersion请求参数结构体
  */
-export interface DescribeApplicationsStatusResponse {
+export interface RollingUpdateApplicationByVersionRequest {
   /**
-   * 返回结果
+   * 应用ID
    */
-  Result: Array<ServiceVersionBrief>
+  ApplicationId: string
+
+  /**
+   * 环境ID
+   */
+  EnvironmentId: string
+
+  /**
+   * 更新版本，IMAGE 部署为 tag 值；JAR/WAR 部署 为 Version
+   */
+  DeployVersion: string
+
+  /**
+   * JAR/WAR 包名，仅 JAR/WAR 部署时必填
+   */
+  PackageName?: string
+
+  /**
+   * 请求来源平台，含 IntelliJ，Coding
+   */
+  From?: string
+
+  /**
+   * 部署策略，AUTO 为全自动；BETA 为小批量验证后自动；MANUAL 为全手动；
+   */
+  DeployStrategyType?: string
+
+  /**
+   * 发布批次数
+   */
+  TotalBatchCount?: number
+
+  /**
+   * 批次间隔时间
+   */
+  BatchInterval?: number
+
+  /**
+   * 小批量验证批次的实例数
+   */
+  BetaBatchNum?: number
+
+  /**
+   * 发布过程中保障的最小可用实例数
+   */
+  MinAvailable?: number
+}
+
+/**
+ * CreateCosToken返回参数结构体
+ */
+export interface CreateCosTokenResponse {
+  /**
+      * 成功时为CosToken对象，失败为null
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result: CosToken
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -162,48 +299,353 @@ export interface DescribeApplicationsStatusResponse {
 }
 
 /**
- * 健康检查配置
+ * RevertDeployApplication请求参数结构体
  */
-export interface HealthCheckConfig {
+export interface RevertDeployApplicationRequest {
   /**
-   * 支持的健康检查类型，如 HttpGet，TcpSocket，Exec
+   * 需要回滚的服务id
    */
-  Type: string
+  ApplicationId?: string
 
   /**
-   * 仅当健康检查类型为 HttpGet 时有效，表示协议类型，如 HTTP，HTTPS
+   * 需要回滚的服务所在环境id
    */
-  Protocol?: string
+  EnvironmentId?: string
+}
+
+/**
+ * RollingUpdateApplicationByVersion返回参数结构体
+ */
+export interface RollingUpdateApplicationByVersionResponse {
+  /**
+   * 版本ID
+   */
+  Result: string
 
   /**
-   * 仅当健康检查类型为 HttpGet 时有效，表示请求路径
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Path?: string
+  RequestId?: string
+}
+
+/**
+ * StopApplication请求参数结构体
+ */
+export interface StopApplicationRequest {
+  /**
+   * 服务id
+   */
+  ApplicationId: string
 
   /**
-   * 仅当健康检查类型为 Exec 时有效，表示执行的脚本内容
+   * 来源渠道
    */
-  Exec?: string
+  SourceChannel?: number
 
   /**
-   * 仅当健康检查类型为 HttpGet\TcpSocket 时有效，表示请求路径
+   * 环境ID
    */
-  Port?: number
+  EnvironmentId?: string
+}
+
+/**
+ * ModifyApplicationInfo请求参数结构体
+ */
+export interface ModifyApplicationInfoRequest {
+  /**
+   * 应用ID
+   */
+  ApplicationId: string
 
   /**
-   * 检查延迟开始时间，单位为秒，默认为 0
+   * 描述
    */
-  InitialDelaySeconds?: number
+  Description: string
 
   /**
-   * 超时时间，单位为秒，默认为 1
+   * 来源渠道
    */
-  TimeoutSeconds?: number
+  SourceChannel?: number
 
   /**
-   * 间隔时间，单位为秒，默认为 10
+   * 是否开启调用链,（此参数已弃用）
    */
-  PeriodSeconds?: number
+  EnableTracing?: number
+}
+
+/**
+ * DestroyEnvironment请求参数结构体
+ */
+export interface DestroyEnvironmentRequest {
+  /**
+   * 命名空间ID
+   */
+  EnvironmentId: string
+
+  /**
+   * Namespace
+   */
+  SourceChannel?: number
+}
+
+/**
+ * CreateEnvironment返回参数结构体
+ */
+export interface CreateEnvironmentResponse {
+  /**
+      * 成功时为环境ID，失败为null
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeEnvironmentStatus请求参数结构体
+ */
+export interface DescribeEnvironmentStatusRequest {
+  /**
+   * 命名空间id
+   */
+  EnvironmentIds: Array<string>
+
+  /**
+   * 来源Channel
+   */
+  SourceChannel?: number
+}
+
+/**
+ * RevertDeployApplication返回参数结构体
+ */
+export interface RevertDeployApplicationResponse {
+  /**
+   * 是否成功
+   */
+  Result: boolean
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 弹性伸缩配置
+ */
+export interface EsInfo {
+  /**
+   * 最小实例数
+   */
+  MinAliveInstances: number
+
+  /**
+   * 最大实例数
+   */
+  MaxAliveInstances: number
+
+  /**
+   * 弹性策略,1:cpu，2:内存
+   */
+  EsStrategy: number
+
+  /**
+   * 弹性扩缩容条件值
+   */
+  Threshold: number
+
+  /**
+   * 版本Id
+   */
+  VersionId?: string
+}
+
+/**
+ * DescribeApplications返回参数结构体
+ */
+export interface DescribeApplicationsResponse {
+  /**
+   * 返回结果
+   */
+  Result: ServicePage
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * Ingress 配置
+ */
+export interface IngressInfo {
+  /**
+      * 环境ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EnvironmentId: string
+
+  /**
+   * 环境namespace
+   */
+  ClusterNamespace: string
+
+  /**
+   * ip version
+   */
+  AddressIPVersion: string
+
+  /**
+   * ingress name
+   */
+  IngressName: string
+
+  /**
+   * rules 配置
+   */
+  Rules: Array<IngressRule>
+
+  /**
+      * clb ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClbId?: string
+
+  /**
+      * tls 配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Tls?: Array<IngressTls>
+
+  /**
+      * 环境集群ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClusterId?: string
+
+  /**
+      * clb ip
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Vip?: string
+
+  /**
+      * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CreateTime?: string
+
+  /**
+   * 是否混合 https，默认 false，可选值 true 代表有 https 协议监听
+   */
+  Mixed?: boolean
+
+  /**
+      * 重定向模式，可选值：
+- AUTO（自动重定向http到https）
+- NONE（不使用重定向）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RewriteType?: string
+}
+
+/**
+ * DescribeEnvironments请求参数结构体
+ */
+export interface DescribeEnvironmentsRequest {
+  /**
+   * 分页limit
+   */
+  Limit?: number
+
+  /**
+   * 分页下标
+   */
+  Offset?: number
+
+  /**
+   * 来源source
+   */
+  SourceChannel?: number
+}
+
+/**
+ * ModifyEnvironment请求参数结构体
+ */
+export interface ModifyEnvironmentRequest {
+  /**
+   * 环境id
+   */
+  EnvironmentId: string
+
+  /**
+   * 环境名称
+   */
+  EnvironmentName?: string
+
+  /**
+   * 环境描述
+   */
+  Description?: string
+
+  /**
+   * 私有网络名称
+   */
+  Vpc?: string
+
+  /**
+   * 子网网络
+   */
+  SubnetIds?: Array<string>
+
+  /**
+   * 来源渠道
+   */
+  SourceChannel?: number
+}
+
+/**
+ * CreateEnvironment请求参数结构体
+ */
+export interface CreateEnvironmentRequest {
+  /**
+   * 环境名称
+   */
+  EnvironmentName: string
+
+  /**
+   * 私有网络名称
+   */
+  Vpc: string
+
+  /**
+   * 子网列表
+   */
+  SubnetIds: Array<string>
+
+  /**
+   * 环境描述
+   */
+  Description?: string
+
+  /**
+   * K8s version
+   */
+  K8sVersion?: string
+
+  /**
+   * 来源渠道
+   */
+  SourceChannel?: number
+
+  /**
+   * 是否开启tsw服务
+   */
+  EnableTswTraceService?: boolean
 }
 
 /**
@@ -296,116 +738,296 @@ export interface TemDeployApplicationDetailInfo {
 }
 
 /**
- * DescribeDeployApplicationDetail请求参数结构体
+ * DescribeEnvironmentStatus返回参数结构体
  */
-export interface DescribeDeployApplicationDetailRequest {
+export interface DescribeEnvironmentStatusResponse {
   /**
-   * 服务id
+   * 返回状态列表
    */
-  ApplicationId?: string
+  Result: Array<NamespaceStatusInfo>
 
   /**
-   * 环境id
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ingress tls 配置
+ */
+export interface IngressTls {
+  /**
+   * host 数组, 空数组表示全部域名的默认证书
+   */
+  Hosts: Array<string>
+
+  /**
+   * secret name，如使用证书，则填空字符串
+   */
+  SecretName: string
+
+  /**
+   * SSL Certificate Id
+   */
+  CertificateId?: string
+}
+
+/**
+ * 服务分页
+ */
+export interface ServicePage {
+  /**
+   * 条目
+   */
+  Records: Array<TemService>
+
+  /**
+   * 总数
+   */
+  Total: number
+
+  /**
+   * 条目
+   */
+  Size: number
+
+  /**
+   * 页数
+   */
+  Pages: number
+}
+
+/**
+ * CreateCosToken请求参数结构体
+ */
+export interface CreateCosTokenRequest {
+  /**
+   * 应用ID
+   */
+  ApplicationId: string
+
+  /**
+   * 包名
+   */
+  PkgName: string
+
+  /**
+   * optType 1上传  2查询
+   */
+  OptType: number
+
+  /**
+   * 来源 channel
+   */
+  SourceChannel?: number
+
+  /**
+   * 充当deployVersion入参
+   */
+  TimeVersion?: string
+}
+
+/**
+ * ModifyIngress请求参数结构体
+ */
+export interface ModifyIngressRequest {
+  /**
+   * Ingress 规则配置
+   */
+  Ingress: IngressInfo
+
+  /**
+   * 来源渠道
+   */
+  SourceChannel?: number
+}
+
+/**
+ * 开启prometheus监控配置
+ */
+export interface EnablePrometheusConf {
+  /**
+   * 应用开放的监听端口
+   */
+  Port?: number
+
+  /**
+   * 业务指标暴露的url path
+   */
+  Path?: string
+}
+
+/**
+ * DescribeIngresses请求参数结构体
+ */
+export interface DescribeIngressesRequest {
+  /**
+   * 环境 id
    */
   EnvironmentId?: string
 
   /**
-   * 版本部署id
+   * 环境 namespace
    */
-  VersionId?: string
+  ClusterNamespace?: string
+
+  /**
+   * 来源渠道
+   */
+  SourceChannel?: number
+
+  /**
+   * ingress 规则名列表
+   */
+  IngressNames?: Array<string>
 }
 
 /**
- * 弹性伸缩配置
+ * 数据卷挂载信息
  */
-export interface EsInfo {
+export interface StorageMountConf {
   /**
-   * 最小实例数
+   * 数据卷名
    */
-  MinAliveInstances: number
+  VolumeName: string
 
   /**
-   * 最大实例数
+   * 数据卷绑定路径
    */
-  MaxAliveInstances: number
-
-  /**
-   * 弹性策略,1:cpu，2:内存
-   */
-  EsStrategy: number
-
-  /**
-   * 弹性扩缩容条件值
-   */
-  Threshold: number
-
-  /**
-   * 版本Id
-   */
-  VersionId?: string
+  MountPath: string
 }
 
 /**
- * 分批发布单批次详情
+ * RestartApplication返回参数结构体
  */
-export interface DeployServiceBatchDetail {
-  /**
-      * 旧实例列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  OldPodList?: DeployServicePodDetail
-
-  /**
-      * 新实例列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  NewPodList?: DeployServicePodDetail
-
-  /**
-      * 当前批次状态："WaitForTimeExceed", "WaitForResume", "Deploying", "Finish", "NotStart"
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  BatchStatus?: string
-
-  /**
-      * 该批次预计旧实例数量
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  PodNum?: number
-
-  /**
-      * 批次id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  BatchIndex?: number
-
-  /**
-      * 旧实例列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  OldPods?: Array<DeployServicePodDetail>
-
-  /**
-      * 新实例列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  NewPods?: Array<DeployServicePodDetail>
-
-  /**
-      * =0：手动确认批次；>0：下一批次开始时间戳
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  NextBatchStartTime?: number
-}
-
-/**
- * DescribeApplicationPods返回参数结构体
- */
-export interface DescribeApplicationPodsResponse {
+export interface RestartApplicationResponse {
   /**
    * 返回结果
    */
-  Result: DescribeRunPodPage
+  Result: boolean
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeIngresses返回参数结构体
+ */
+export interface DescribeIngressesResponse {
+  /**
+      * ingress 数组
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result: Array<IngressInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeApplicationsStatus请求参数结构体
+ */
+export interface DescribeApplicationsStatusRequest {
+  /**
+   * 来源渠道
+   */
+  SourceChannel?: number
+
+  /**
+   * 环境ID
+   */
+  EnvironmentId?: string
+}
+
+/**
+ * 应用实例
+ */
+export interface RunVersionPod {
+  /**
+   * shell地址
+   */
+  Webshell: string
+
+  /**
+   * pod的id
+   */
+  PodId: string
+
+  /**
+   * 状态
+   */
+  Status: string
+
+  /**
+   * 创建时间
+   */
+  CreateTime: string
+
+  /**
+   * 实例的ip
+   */
+  PodIp: string
+
+  /**
+      * 可用区
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Zone: string
+
+  /**
+      * 部署版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DeployVersion: string
+
+  /**
+      * 重启次数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RestartCount: number
+
+  /**
+      * pod是否就绪
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Ready: boolean
+
+  /**
+      * 容器状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ContainerState: string
+}
+
+/**
+ * CreateResource返回参数结构体
+ */
+export interface CreateResourceResponse {
+  /**
+      * 成功与否
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result: boolean
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyApplicationInfo返回参数结构体
+ */
+export interface ModifyApplicationInfoResponse {
+  /**
+      * 成功与否
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result: boolean
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -434,6 +1056,169 @@ export interface RestartApplicationRequest {
 }
 
 /**
+ * DestroyEnvironment返回参数结构体
+ */
+export interface DestroyEnvironmentResponse {
+  /**
+   * 返回结果
+   */
+  Result: boolean
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeIngress请求参数结构体
+ */
+export interface DescribeIngressRequest {
+  /**
+   * 环境ID
+   */
+  EnvironmentId: string
+
+  /**
+   * 环境namespace
+   */
+  ClusterNamespace: string
+
+  /**
+   * ingress 规则名
+   */
+  IngressName: string
+
+  /**
+   * 来源渠道
+   */
+  SourceChannel?: number
+}
+
+/**
+ * StopApplication返回参数结构体
+ */
+export interface StopApplicationResponse {
+  /**
+   * 返回结果
+   */
+  Result: boolean
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeployApplication返回参数结构体
+ */
+export interface DeployApplicationResponse {
+  /**
+   * 版本ID（前端可忽略）
+   */
+  Result: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * RestartApplicationPod返回参数结构体
+ */
+export interface RestartApplicationPodResponse {
+  /**
+      * 返回结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result: boolean
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 环境停止进程（只统计由环境停止操作触发的应用数量）
+ */
+export interface TemEnvironmentStoppingStatus {
+  /**
+      * 需要停止的应用数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ApplicationNumNeedToStop?: number
+
+  /**
+      * 已经停止的应用数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  StoppedApplicationNum?: number
+}
+
+/**
+ * DeleteApplication请求参数结构体
+ */
+export interface DeleteApplicationRequest {
+  /**
+   * 服务Id
+   */
+  ApplicationId: string
+
+  /**
+   * 环境ID
+   */
+  EnvironmentId: string
+
+  /**
+   * 来源渠道
+   */
+  SourceChannel?: number
+
+  /**
+   * 当服务没有任何运行版本时，是否删除此服务
+   */
+  DeleteApplicationIfNoRunningVersion?: boolean
+}
+
+/**
+ * DescribeApplicationsStatus返回参数结构体
+ */
+export interface DescribeApplicationsStatusResponse {
+  /**
+   * 返回结果
+   */
+  Result: Array<ServiceVersionBrief>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeDeployApplicationDetail请求参数结构体
+ */
+export interface DescribeDeployApplicationDetailRequest {
+  /**
+   * 服务id
+   */
+  ApplicationId?: string
+
+  /**
+   * 环境id
+   */
+  EnvironmentId?: string
+
+  /**
+   * 版本部署id
+   */
+  VersionId?: string
+}
+
+/**
  * DeleteIngress请求参数结构体
  */
 export interface DeleteIngressRequest {
@@ -451,46 +1236,6 @@ export interface DeleteIngressRequest {
    * ingress 规则名
    */
   IngressName: string
-
-  /**
-   * 来源渠道
-   */
-  SourceChannel?: number
-}
-
-/**
- * RestartApplicationPod请求参数结构体
- */
-export interface RestartApplicationPodRequest {
-  /**
-   * 环境id
-   */
-  EnvironmentId: string
-
-  /**
-   * 应用id
-   */
-  ApplicationId: string
-
-  /**
-   * 名字
-   */
-  PodName: string
-
-  /**
-   * 单页条数
-   */
-  Limit?: number
-
-  /**
-   * 分页下标
-   */
-  Offset?: number
-
-  /**
-   * pod状态
-   */
-  Status?: string
 
   /**
    * 来源渠道
@@ -521,22 +1266,6 @@ export interface DescribeRelatedIngressesRequest {
    * 应用 ID
    */
   ApplicationId?: string
-}
-
-/**
- * ModifyEnvironment返回参数结构体
- */
-export interface ModifyEnvironmentResponse {
-  /**
-      * 成功时为环境ID，失败为null
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Result: boolean
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -612,6 +1341,470 @@ export interface GenerateApplicationPackageDownloadUrlRequest {
    * 来源 channel
    */
   SourceChannel?: number
+}
+
+/**
+ * DescribeEnvironments返回参数结构体
+ */
+export interface DescribeEnvironmentsResponse {
+  /**
+   * 返回结果
+   */
+  Result: NamespacePage
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeRelatedIngresses返回参数结构体
+ */
+export interface DescribeRelatedIngressesResponse {
+  /**
+      * ingress 数组
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result: Array<IngressInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 命名空间对象
+ */
+export interface TemNamespaceInfo {
+  /**
+   * 环境id
+   */
+  EnvironmentId: string
+
+  /**
+   * 渠道
+   */
+  Channel: string
+
+  /**
+   * 环境名称
+   */
+  EnvironmentName: string
+
+  /**
+   * 区域名称
+   */
+  Region: string
+
+  /**
+      * 环境描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Description: string
+
+  /**
+   * 状态,1:已销毁;0:正常
+   */
+  Status: number
+
+  /**
+   * vpc网络
+   */
+  Vpc: string
+
+  /**
+   * 创建时间
+   */
+  CreateDate: string
+
+  /**
+   * 修改时间
+   */
+  ModifyDate: string
+
+  /**
+   * 修改人
+   */
+  Modifier: string
+
+  /**
+   * 创建人
+   */
+  Creator: string
+
+  /**
+   * 应用数
+   */
+  ApplicationNum: number
+
+  /**
+   * 运行实例数
+   */
+  RunInstancesNum: number
+
+  /**
+   * 子网络
+   */
+  SubnetId: string
+
+  /**
+   * 环境集群 status
+   */
+  ClusterStatus: string
+
+  /**
+   * 是否开启tsw
+   */
+  EnableTswTraceService: boolean
+
+  /**
+   * 环境锁，1为上锁，0则为上锁
+   */
+  Locked: number
+}
+
+/**
+ * 环境启动进程（只统计由环境启动操作触发的应用数量）
+ */
+export interface TemEnvironmentStartingStatus {
+  /**
+      * 需要启动的应用数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ApplicationNumNeedToStart?: number
+
+  /**
+      * 已经启动的应用数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  StartedApplicationNum?: number
+}
+
+/**
+ * 服务
+ */
+export interface TemService {
+  /**
+      * 主键
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ApplicationId: string
+
+  /**
+      * 服务名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ApplicationName: string
+
+  /**
+      * 描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Description: string
+
+  /**
+      * 命名空间id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EnvironmentId: string
+
+  /**
+      * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CreateDate: string
+
+  /**
+      * 修改时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ModifyDate: string
+
+  /**
+      * 修改人
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Modifier: string
+
+  /**
+      * 创建者
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Creator: string
+
+  /**
+      * tcr个人版or企业版
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RepoType: number
+
+  /**
+      * 企业版实例id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceId: string
+
+  /**
+      * 镜像仓库名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RepoName: string
+
+  /**
+      * 编程语言
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CodingLanguage: string
+
+  /**
+      * 部署方式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DeployMode: string
+
+  /**
+      * 环境名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EnvironmentName: string
+
+  /**
+      * 服务当前运行环境的实例信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ActiveVersions: Array<ServiceVersionBrief>
+
+  /**
+      * 是否启用链路追踪
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EnableTracing: number
+}
+
+/**
+ * ingress rule 配置
+ */
+export interface IngressRule {
+  /**
+   * ingress rule value
+   */
+  Http: IngressRuleValue
+
+  /**
+      * host 地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Host?: string
+
+  /**
+   * 协议，选项为 http， https，默认为 http
+   */
+  Protocol?: string
+}
+
+/**
+ * RestartApplicationPod请求参数结构体
+ */
+export interface RestartApplicationPodRequest {
+  /**
+   * 环境id
+   */
+  EnvironmentId: string
+
+  /**
+   * 应用id
+   */
+  ApplicationId: string
+
+  /**
+   * 名字
+   */
+  PodName: string
+
+  /**
+   * 单页条数
+   */
+  Limit?: number
+
+  /**
+   * 分页下标
+   */
+  Offset?: number
+
+  /**
+   * pod状态
+   */
+  Status?: string
+
+  /**
+   * 来源渠道
+   */
+  SourceChannel?: number
+}
+
+/**
+ * DescribeDeployApplicationDetail返回参数结构体
+ */
+export interface DescribeDeployApplicationDetailResponse {
+  /**
+   * 分批发布结果详情
+   */
+  Result: TemDeployApplicationDetailInfo
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * Ingress Rule Value 配置
+ */
+export interface IngressRuleValue {
+  /**
+   * rule 整体配置
+   */
+  Paths: Array<IngressRulePath>
+}
+
+/**
+ * ResumeDeployApplication请求参数结构体
+ */
+export interface ResumeDeployApplicationRequest {
+  /**
+   * 需要开始下一批次的服务id
+   */
+  ApplicationId?: string
+
+  /**
+   * 环境id
+   */
+  EnvironmentId?: string
+}
+
+/**
+ * 挂载配置信息
+ */
+export interface MountedSettingConf {
+  /**
+   * 配置名称
+   */
+  ConfigDataName: string
+
+  /**
+   * 挂载路径
+   */
+  MountedPath: string
+
+  /**
+   * 配置内容
+   */
+  Data?: Array<Pair>
+
+  /**
+   * 加密配置名称
+   */
+  SecretDataName?: string
+}
+
+/**
+ * 健康检查配置
+ */
+export interface HealthCheckConfig {
+  /**
+   * 支持的健康检查类型，如 HttpGet，TcpSocket，Exec
+   */
+  Type: string
+
+  /**
+   * 仅当健康检查类型为 HttpGet 时有效，表示协议类型，如 HTTP，HTTPS
+   */
+  Protocol?: string
+
+  /**
+   * 仅当健康检查类型为 HttpGet 时有效，表示请求路径
+   */
+  Path?: string
+
+  /**
+   * 仅当健康检查类型为 Exec 时有效，表示执行的脚本内容
+   */
+  Exec?: string
+
+  /**
+   * 仅当健康检查类型为 HttpGet\TcpSocket 时有效，表示请求路径
+   */
+  Port?: number
+
+  /**
+   * 检查延迟开始时间，单位为秒，默认为 0
+   */
+  InitialDelaySeconds?: number
+
+  /**
+   * 超时时间，单位为秒，默认为 1
+   */
+  TimeoutSeconds?: number
+
+  /**
+   * 间隔时间，单位为秒，默认为 10
+   */
+  PeriodSeconds?: number
+}
+
+/**
+ * 分批发布单批次详情
+ */
+export interface DeployServiceBatchDetail {
+  /**
+      * 旧实例列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OldPodList?: DeployServicePodDetail
+
+  /**
+      * 新实例列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NewPodList?: DeployServicePodDetail
+
+  /**
+      * 当前批次状态："WaitForTimeExceed", "WaitForResume", "Deploying", "Finish", "NotStart"
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BatchStatus?: string
+
+  /**
+      * 该批次预计旧实例数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PodNum?: number
+
+  /**
+      * 批次id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BatchIndex?: number
+
+  /**
+      * 旧实例列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OldPods?: Array<DeployServicePodDetail>
+
+  /**
+      * 新实例列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NewPods?: Array<DeployServicePodDetail>
+
+  /**
+      * =0：手动确认批次；>0：下一批次开始时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NextBatchStartTime?: number
 }
 
 /**
@@ -840,80 +2033,6 @@ export interface DeployApplicationRequest {
 }
 
 /**
- * Ingress 配置
- */
-export interface IngressInfo {
-  /**
-      * 环境ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  EnvironmentId: string
-
-  /**
-   * 环境namespace
-   */
-  ClusterNamespace: string
-
-  /**
-   * ip version
-   */
-  AddressIPVersion: string
-
-  /**
-   * ingress name
-   */
-  IngressName: string
-
-  /**
-   * rules 配置
-   */
-  Rules: Array<IngressRule>
-
-  /**
-      * clb ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ClbId?: string
-
-  /**
-      * tls 配置
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Tls?: Array<IngressTls>
-
-  /**
-      * 环境集群ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ClusterId?: string
-
-  /**
-      * clb ip
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Vip?: string
-
-  /**
-      * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  CreateTime?: string
-
-  /**
-   * 是否混合 https，默认 false，可选值 true 代表有 https 协议监听
-   */
-  Mixed?: boolean
-
-  /**
-      * 重定向模式，可选值：
-- AUTO（自动重定向http到https）
-- NONE（不使用重定向）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  RewriteType?: string
-}
-
-/**
  * ModifyIngress返回参数结构体
  */
 export interface ModifyIngressResponse {
@@ -930,33 +2049,38 @@ export interface ModifyIngressResponse {
 }
 
 /**
- * DescribeEnvironments返回参数结构体
+ * DescribeApplications请求参数结构体
  */
-export interface DescribeEnvironmentsResponse {
+export interface DescribeApplicationsRequest {
   /**
-   * 返回结果
+   * 命名空间ID
    */
-  Result: NamespacePage
+  EnvironmentId?: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 分页Limit
    */
-  RequestId?: string
-}
+  Limit?: number
 
-/**
- * ModifyIngress请求参数结构体
- */
-export interface ModifyIngressRequest {
   /**
-   * Ingress 规则配置
+   * 分页offset
    */
-  Ingress: IngressInfo
+  Offset?: number
 
   /**
    * 来源渠道
    */
   SourceChannel?: number
+
+  /**
+   * 服务id
+   */
+  ApplicationId?: string
+
+  /**
+   * 搜索关键字
+   */
+  Keyword?: string
 }
 
 /**
@@ -1078,59 +2202,40 @@ export interface CreateApplicationRequest {
 }
 
 /**
- * 开启prometheus监控配置
+ * 命名空间状态
  */
-export interface EnablePrometheusConf {
+export interface NamespaceStatusInfo {
   /**
-   * 应用开放的监听端口
+   * 命名空间id
    */
-  Port?: number
+  EnvironmentId: string
 
   /**
-   * 业务指标暴露的url path
+   * 命名空间名称
    */
-  Path?: string
-}
+  EnvironmentName: string
 
-/**
- * DescribeRelatedIngresses返回参数结构体
- */
-export interface DescribeRelatedIngressesResponse {
   /**
-      * ingress 数组
+   * TCB envId | EKS clusterId
+   */
+  ClusterId?: string
+
+  /**
+   * 环境状态
+   */
+  ClusterStatus?: string
+
+  /**
+      * 环境启动状态（不在启动中为null）
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Result: Array<IngressInfo>
+  EnvironmentStartingStatus?: TemEnvironmentStartingStatus
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeIngresses请求参数结构体
- */
-export interface DescribeIngressesRequest {
-  /**
-   * 环境 id
-   */
-  EnvironmentId?: string
-
-  /**
-   * 环境 namespace
-   */
-  ClusterNamespace?: string
-
-  /**
-   * 来源渠道
-   */
-  SourceChannel?: number
-
-  /**
-   * ingress 规则名列表
-   */
-  IngressNames?: Array<string>
+      * 环境停止状态（不在停止中为null）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EnvironmentStoppingStatus?: TemEnvironmentStoppingStatus
 }
 
 /**
@@ -1164,67 +2269,6 @@ export interface DescribeRunPodPage {
 }
 
 /**
- * ingress tls 配置
- */
-export interface IngressTls {
-  /**
-   * host 数组, 空数组表示全部域名的默认证书
-   */
-  Hosts: Array<string>
-
-  /**
-   * secret name，如使用证书，则填空字符串
-   */
-  SecretName: string
-
-  /**
-   * SSL Certificate Id
-   */
-  CertificateId?: string
-}
-
-/**
- * 分批发布单批次详情
- */
-export interface DeployServicePodDetail {
-  /**
-      * pod Id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  PodId?: string
-
-  /**
-      * pod状态
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  PodStatus?: Array<string>
-
-  /**
-      * pod版本
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  PodVersion?: string
-
-  /**
-      * pod创建时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  CreateTime?: string
-
-  /**
-      * pod所在可用区
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Zone?: string
-
-  /**
-      * webshell地址
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Webshell?: string
-}
-
-/**
  * ModifyApplicationReplicas返回参数结构体
  */
 export interface ModifyApplicationReplicasResponse {
@@ -1235,195 +2279,26 @@ export interface ModifyApplicationReplicasResponse {
 }
 
 /**
- * ModifyApplicationReplicas请求参数结构体
+ * 创建应用，创建仓库参数
  */
-export interface ModifyApplicationReplicasRequest {
+export interface UseDefaultRepoParameters {
   /**
-   * 服务id
-   */
-  ApplicationId: string
-
-  /**
-   * 环境ID
-   */
-  EnvironmentId: string
-
-  /**
-   * 实例数量
-   */
-  Replicas: number
-
-  /**
-   * 来源渠道
-   */
-  SourceChannel?: number
-}
-
-/**
- * 日志输出配置
- */
-export interface LogOutputConf {
-  /**
-   * 日志消费端类型
-   */
-  OutputType: string
-
-  /**
-   * cls日志集
-   */
-  ClsLogsetName?: string
-
-  /**
-   * cls日志主题
-   */
-  ClsLogTopicId?: string
-
-  /**
-   * cls日志集id
-   */
-  ClsLogsetId?: string
-
-  /**
-   * cls日志名称
-   */
-  ClsLogTopicName?: string
-}
-
-/**
- * DescribeIngresses返回参数结构体
- */
-export interface DescribeIngressesResponse {
-  /**
-      * ingress 数组
+      * 企业版实例名
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Result: Array<IngressInfo>
+  EnterpriseInstanceName: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DeleteIngress返回参数结构体
- */
-export interface DeleteIngressResponse {
-  /**
-   * 是否删除成功
-   */
-  Result: boolean
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DestroyEnvironment请求参数结构体
- */
-export interface DestroyEnvironmentRequest {
-  /**
-   * 命名空间ID
-   */
-  EnvironmentId: string
-
-  /**
-   * Namespace
-   */
-  SourceChannel?: number
-}
-
-/**
- * 命名空间对象
- */
-export interface TemNamespaceInfo {
-  /**
-   * 环境id
-   */
-  EnvironmentId: string
-
-  /**
-   * 渠道
-   */
-  Channel: string
-
-  /**
-   * 环境名称
-   */
-  EnvironmentName: string
-
-  /**
-   * 区域名称
-   */
-  Region: string
-
-  /**
-      * 环境描述
+      * 企业版收费类型  0 按量收费   1 包年包月
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Description: string
+  EnterpriseInstanceChargeType: number
 
   /**
-   * 状态,1:已销毁;0:正常
-   */
-  Status: number
-
-  /**
-   * vpc网络
-   */
-  Vpc: string
-
-  /**
-   * 创建时间
-   */
-  CreateDate: string
-
-  /**
-   * 修改时间
-   */
-  ModifyDate: string
-
-  /**
-   * 修改人
-   */
-  Modifier: string
-
-  /**
-   * 创建人
-   */
-  Creator: string
-
-  /**
-   * 应用数
-   */
-  ApplicationNum: number
-
-  /**
-   * 运行实例数
-   */
-  RunInstancesNum: number
-
-  /**
-   * 子网络
-   */
-  SubnetId: string
-
-  /**
-   * 环境集群 status
-   */
-  ClusterStatus: string
-
-  /**
-   * 是否开启tsw
-   */
-  EnableTswTraceService: boolean
-
-  /**
-   * 环境锁，1为上锁，0则为上锁
-   */
-  Locked: number
+      * 企业版规格：basic-基础班 ，standard-标准版，premium-高级版
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EnterpriseInstanceType: string
 }
 
 /**
@@ -1455,579 +2330,6 @@ export interface IngressRuleBackend {
    * eks service 端口
    */
   ServicePort: number
-}
-
-/**
- * DescribeIngress返回参数结构体
- */
-export interface DescribeIngressResponse {
-  /**
-   * Ingress 规则配置
-   */
-  Result: IngressInfo
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * CreateCosToken返回参数结构体
- */
-export interface CreateCosTokenResponse {
-  /**
-      * 成功时为CosToken对象，失败为null
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Result: CosToken
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * ingress rule 配置
- */
-export interface IngressRule {
-  /**
-   * ingress rule value
-   */
-  Http: IngressRuleValue
-
-  /**
-      * host 地址
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Host?: string
-
-  /**
-   * 协议，选项为 http， https，默认为 http
-   */
-  Protocol?: string
-}
-
-/**
- * 定时伸缩策略
- */
-export interface CronHorizontalAutoscaler {
-  /**
-   * 定时伸缩策略名称
-   */
-  Name?: string
-
-  /**
-      * 策略周期
-* * *，三个范围，第一个是天，第二个是月，第三个是周，中间用空格隔开
-例子：
-* * * （每天）
-* * 0-3 （每周日到周三）
-1,11,21 * *（每个月1号，11号，21号）
-      */
-  Period?: string
-
-  /**
-   * 定时伸缩策略明细
-   */
-  Schedules?: Array<CronHorizontalAutoscalerSchedule>
-
-  /**
-   * 是否启用
-   */
-  Enabled?: boolean
-
-  /**
-   * 策略优先级，值越大优先级越高，0为最小值
-   */
-  Priority?: number
-}
-
-/**
- * DescribeApplicationsStatus请求参数结构体
- */
-export interface DescribeApplicationsStatusRequest {
-  /**
-   * 来源渠道
-   */
-  SourceChannel?: number
-
-  /**
-   * 环境ID
-   */
-  EnvironmentId?: string
-}
-
-/**
- * RollingUpdateApplicationByVersion返回参数结构体
- */
-export interface RollingUpdateApplicationByVersionResponse {
-  /**
-   * 版本ID
-   */
-  Result: string
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * RollingUpdateApplicationByVersion请求参数结构体
- */
-export interface RollingUpdateApplicationByVersionRequest {
-  /**
-   * 应用ID
-   */
-  ApplicationId: string
-
-  /**
-   * 环境ID
-   */
-  EnvironmentId: string
-
-  /**
-   * 更新版本，IMAGE 部署为 tag 值；JAR/WAR 部署 为 Version
-   */
-  DeployVersion: string
-
-  /**
-   * JAR/WAR 包名，仅 JAR/WAR 部署时必填
-   */
-  PackageName?: string
-
-  /**
-   * 请求来源平台，含 IntelliJ，Coding
-   */
-  From?: string
-
-  /**
-   * 部署策略，AUTO 为全自动；BETA 为小批量验证后自动；MANUAL 为全手动；
-   */
-  DeployStrategyType?: string
-
-  /**
-   * 发布批次数
-   */
-  TotalBatchCount?: number
-
-  /**
-   * 批次间隔时间
-   */
-  BatchInterval?: number
-
-  /**
-   * 小批量验证批次的实例数
-   */
-  BetaBatchNum?: number
-
-  /**
-   * 发布过程中保障的最小可用实例数
-   */
-  MinAvailable?: number
-}
-
-/**
- * 应用实例
- */
-export interface RunVersionPod {
-  /**
-   * shell地址
-   */
-  Webshell: string
-
-  /**
-   * pod的id
-   */
-  PodId: string
-
-  /**
-   * 状态
-   */
-  Status: string
-
-  /**
-   * 创建时间
-   */
-  CreateTime: string
-
-  /**
-   * 实例的ip
-   */
-  PodIp: string
-
-  /**
-      * 可用区
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Zone: string
-
-  /**
-      * 部署版本
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DeployVersion: string
-
-  /**
-      * 重启次数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  RestartCount: number
-
-  /**
-      * pod是否就绪
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Ready: boolean
-
-  /**
-      * 容器状态
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ContainerState: string
-}
-
-/**
- * DescribeDeployApplicationDetail返回参数结构体
- */
-export interface DescribeDeployApplicationDetailResponse {
-  /**
-   * 分批发布结果详情
-   */
-  Result: TemDeployApplicationDetailInfo
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * Ingress Rule Value 配置
- */
-export interface IngressRuleValue {
-  /**
-   * rule 整体配置
-   */
-  Paths: Array<IngressRulePath>
-}
-
-/**
- * CreateResource返回参数结构体
- */
-export interface CreateResourceResponse {
-  /**
-      * 成功与否
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Result: boolean
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * ModifyApplicationInfo请求参数结构体
- */
-export interface ModifyApplicationInfoRequest {
-  /**
-   * 应用ID
-   */
-  ApplicationId: string
-
-  /**
-   * 描述
-   */
-  Description: string
-
-  /**
-   * 来源渠道
-   */
-  SourceChannel?: number
-
-  /**
-   * 是否开启调用链,（此参数已弃用）
-   */
-  EnableTracing?: number
-}
-
-/**
- * ModifyApplicationInfo返回参数结构体
- */
-export interface ModifyApplicationInfoResponse {
-  /**
-      * 成功与否
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Result: boolean
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DeleteApplication返回参数结构体
- */
-export interface DeleteApplicationResponse {
-  /**
-   * 返回结果
-   */
-  Result: boolean
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * Ingress Rule Path 配置
- */
-export interface IngressRulePath {
-  /**
-   * path 信息
-   */
-  Path: string
-
-  /**
-   * backend 配置
-   */
-  Backend: IngressRuleBackend
-}
-
-/**
- * CreateEnvironment返回参数结构体
- */
-export interface CreateEnvironmentResponse {
-  /**
-      * 成功时为环境ID，失败为null
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Result: string
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 命名空间分页
- */
-export interface NamespacePage {
-  /**
-   * 分页内容
-   */
-  Records: Array<TemNamespaceInfo>
-
-  /**
-   * 总数
-   */
-  Total: number
-
-  /**
-   * 条目数
-   */
-  Size: number
-
-  /**
-   * 页数
-   */
-  Pages: number
-}
-
-/**
- * DestroyEnvironment返回参数结构体
- */
-export interface DestroyEnvironmentResponse {
-  /**
-   * 返回结果
-   */
-  Result: boolean
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * CreateApplication返回参数结构体
- */
-export interface CreateApplicationResponse {
-  /**
-   * 服务code
-   */
-  Result: string
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 弹性伸缩策略
- */
-export interface HorizontalAutoscaler {
-  /**
-   * 最小实例数（可以不传）
-   */
-  MinReplicas?: number
-
-  /**
-   * 最大实例数（可以不传）
-   */
-  MaxReplicas?: number
-
-  /**
-   * 指标度量（CPU or MEMORY）
-   */
-  Metrics?: string
-
-  /**
-   * 阈值（百分比）
-   */
-  Threshold?: number
-
-  /**
-   * 是否启用
-   */
-  Enabled?: boolean
-}
-
-/**
- * RevertDeployApplication请求参数结构体
- */
-export interface RevertDeployApplicationRequest {
-  /**
-   * 需要回滚的服务id
-   */
-  ApplicationId?: string
-
-  /**
-   * 需要回滚的服务所在环境id
-   */
-  EnvironmentId?: string
-}
-
-/**
- * 数据卷挂载信息
- */
-export interface StorageMountConf {
-  /**
-   * 数据卷名
-   */
-  VolumeName: string
-
-  /**
-   * 数据卷绑定路径
-   */
-  MountPath: string
-}
-
-/**
- * ModifyEnvironment请求参数结构体
- */
-export interface ModifyEnvironmentRequest {
-  /**
-   * 环境id
-   */
-  EnvironmentId: string
-
-  /**
-   * 环境名称
-   */
-  EnvironmentName?: string
-
-  /**
-   * 环境描述
-   */
-  Description?: string
-
-  /**
-   * 私有网络名称
-   */
-  Vpc?: string
-
-  /**
-   * 子网网络
-   */
-  SubnetIds?: Array<string>
-
-  /**
-   * 来源渠道
-   */
-  SourceChannel?: number
-}
-
-/**
- * 服务端口映射
- */
-export interface PortMapping {
-  /**
-   * 端口
-   */
-  Port: number
-
-  /**
-   * 映射端口
-   */
-  TargetPort: number
-
-  /**
-   * 协议栈 TCP/UDP
-   */
-  Protocol: string
-
-  /**
-   * k8s service名称
-   */
-  ServiceName?: string
-}
-
-/**
- * 创建应用，创建仓库参数
- */
-export interface UseDefaultRepoParameters {
-  /**
-      * 企业版实例名
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  EnterpriseInstanceName: string
-
-  /**
-      * 企业版收费类型  0 按量收费   1 包年包月
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  EnterpriseInstanceChargeType: number
-
-  /**
-      * 企业版规格：basic-基础班 ，standard-标准版，premium-高级版
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  EnterpriseInstanceType: string
-}
-
-/**
- * RevertDeployApplication返回参数结构体
- */
-export interface RevertDeployApplicationResponse {
-  /**
-   * 是否成功
-   */
-  Result: boolean
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -2066,113 +2368,233 @@ export interface DeployStrategyConf {
 }
 
 /**
- * StopApplication请求参数结构体
+ * DescribeIngress返回参数结构体
  */
-export interface StopApplicationRequest {
+export interface DescribeIngressResponse {
   /**
-   * 服务id
+   * Ingress 规则配置
    */
-  ApplicationId: string
+  Result: IngressInfo
 
   /**
-   * 来源渠道
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  SourceChannel?: number
-
-  /**
-   * 环境ID
-   */
-  EnvironmentId?: string
+  RequestId?: string
 }
 
 /**
- * DescribeIngress请求参数结构体
+ * Ingress Rule Path 配置
  */
-export interface DescribeIngressRequest {
+export interface IngressRulePath {
   /**
-   * 环境ID
+   * path 信息
    */
+  Path: string
+
+  /**
+   * backend 配置
+   */
+  Backend: IngressRuleBackend
+}
+
+/**
+ * 服务版本信息列表
+ */
+export interface ServiceVersionBrief {
+  /**
+   * 版本名称
+   */
+  VersionName: string
+
+  /**
+   * 状态
+   */
+  Status: string
+
+  /**
+   * 是否启动弹性 -- 已废弃
+   */
+  EnableEs: number
+
+  /**
+   * 当前实例
+   */
+  CurrentInstances: number
+
+  /**
+   * version的id
+   */
+  VersionId: string
+
+  /**
+      * 日志输出配置 -- 已废弃
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LogOutputConf: LogOutputConf
+
+  /**
+      * 期望实例
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ExpectedInstances: number
+
+  /**
+      * 部署方式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DeployMode: string
+
+  /**
+      * 建构任务ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BuildTaskId: string
+
+  /**
+      * 环境ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
   EnvironmentId: string
 
   /**
-   * 环境namespace
-   */
-  ClusterNamespace: string
+      * 环境name
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EnvironmentName: string
 
   /**
-   * ingress 规则名
-   */
-  IngressName: string
-
-  /**
-   * 来源渠道
-   */
-  SourceChannel?: number
-}
-
-/**
- * CreateCosToken请求参数结构体
- */
-export interface CreateCosTokenRequest {
-  /**
-   * 应用ID
-   */
+      * 服务ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
   ApplicationId: string
 
   /**
-   * 包名
-   */
-  PkgName: string
+      * 服务name
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ApplicationName: string
 
   /**
-   * optType 1上传  2查询
-   */
-  OptType: number
-
-  /**
-   * 来源 channel
-   */
-  SourceChannel?: number
-
-  /**
-   * 充当deployVersion入参
-   */
-  TimeVersion?: string
+      * 是否正在发布中
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UnderDeploying: boolean
 }
 
 /**
- * DescribeEnvironments请求参数结构体
+ * CreateApplication返回参数结构体
  */
-export interface DescribeEnvironmentsRequest {
+export interface CreateApplicationResponse {
   /**
-   * 分页limit
+   * 服务code
    */
-  Limit?: number
+  Result: string
 
   /**
-   * 分页下标
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Offset?: number
-
-  /**
-   * 来源source
-   */
-  SourceChannel?: number
+  RequestId?: string
 }
 
 /**
- * StopApplication返回参数结构体
+ * 定时伸缩策略
  */
-export interface StopApplicationResponse {
+export interface CronHorizontalAutoscaler {
   /**
-   * 返回结果
+   * 定时伸缩策略名称
    */
+  Name?: string
+
+  /**
+      * 策略周期
+* * *，三个范围，第一个是天，第二个是月，第三个是周，中间用空格隔开
+例子：
+* * * （每天）
+* * 0-3 （每周日到周三）
+1,11,21 * *（每个月1号，11号，21号）
+      */
+  Period?: string
+
+  /**
+   * 定时伸缩策略明细
+   */
+  Schedules?: Array<CronHorizontalAutoscalerSchedule>
+
+  /**
+   * 是否启用
+   */
+  Enabled?: boolean
+
+  /**
+   * 策略优先级，值越大优先级越高，0为最小值
+   */
+  Priority?: number
+}
+
+/**
+ * 服务端口映射
+ */
+export interface PortMapping {
+  /**
+   * 端口
+   */
+  Port: number
+
+  /**
+   * 映射端口
+   */
+  TargetPort: number
+
+  /**
+   * 协议栈 TCP/UDP
+   */
+  Protocol: string
+
+  /**
+   * k8s service名称
+   */
+  ServiceName?: string
+}
+
+/**
+ * ModifyEnvironment返回参数结构体
+ */
+export interface ModifyEnvironmentResponse {
+  /**
+      * 成功时为环境ID，失败为null
+注意：此字段可能返回 null，表示取不到有效值。
+      */
   Result: boolean
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyApplicationReplicas请求参数结构体
+ */
+export interface ModifyApplicationReplicasRequest {
+  /**
+   * 服务id
+   */
+  ApplicationId: string
+
+  /**
+   * 环境ID
+   */
+  EnvironmentId: string
+
+  /**
+   * 实例数量
+   */
+  Replicas: number
+
+  /**
+   * 来源渠道
+   */
+  SourceChannel?: number
 }
 
 /**
@@ -2265,178 +2687,33 @@ export interface CronHorizontalAutoscalerSchedule {
 }
 
 /**
- * ResumeDeployApplication请求参数结构体
+ * 弹性伸缩策略
  */
-export interface ResumeDeployApplicationRequest {
+export interface HorizontalAutoscaler {
   /**
-   * 需要开始下一批次的服务id
+   * 最小实例数（可以不传）
    */
-  ApplicationId?: string
+  MinReplicas?: number
 
   /**
-   * 环境id
+   * 最大实例数（可以不传）
    */
-  EnvironmentId?: string
-}
+  MaxReplicas?: number
 
-/**
- * DeployApplication返回参数结构体
- */
-export interface DeployApplicationResponse {
   /**
-   * 版本ID（前端可忽略）
+   * 指标度量（CPU or MEMORY）
    */
-  Result: string
+  Metrics?: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 阈值（百分比）
    */
-  RequestId?: string
-}
+  Threshold?: number
 
-/**
- * 存储卷配置
- */
-export interface StorageConf {
   /**
-   * 存储卷名称
+   * 是否启用
    */
-  StorageVolName: string
-
-  /**
-   * 存储卷路径
-   */
-  StorageVolPath: string
-
-  /**
-      * 存储卷IP
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  StorageVolIp?: string
-}
-
-/**
- * 服务版本信息列表
- */
-export interface ServiceVersionBrief {
-  /**
-   * 版本名称
-   */
-  VersionName: string
-
-  /**
-   * 状态
-   */
-  Status: string
-
-  /**
-   * 是否启动弹性 -- 已废弃
-   */
-  EnableEs: number
-
-  /**
-   * 当前实例
-   */
-  CurrentInstances: number
-
-  /**
-   * version的id
-   */
-  VersionId: string
-
-  /**
-      * 日志输出配置 -- 已废弃
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  LogOutputConf: LogOutputConf
-
-  /**
-      * 期望实例
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ExpectedInstances: number
-
-  /**
-      * 部署方式
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DeployMode: string
-
-  /**
-      * 建构任务ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  BuildTaskId: string
-
-  /**
-      * 环境ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  EnvironmentId: string
-
-  /**
-      * 环境name
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  EnvironmentName: string
-
-  /**
-      * 服务ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ApplicationId: string
-
-  /**
-      * 服务name
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ApplicationName: string
-
-  /**
-      * 是否正在发布中
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  UnderDeploying: boolean
-}
-
-/**
- * CreateEnvironment请求参数结构体
- */
-export interface CreateEnvironmentRequest {
-  /**
-   * 环境名称
-   */
-  EnvironmentName: string
-
-  /**
-   * 私有网络名称
-   */
-  Vpc: string
-
-  /**
-   * 子网列表
-   */
-  SubnetIds: Array<string>
-
-  /**
-   * 环境描述
-   */
-  Description?: string
-
-  /**
-   * K8s version
-   */
-  K8sVersion?: string
-
-  /**
-   * 来源渠道
-   */
-  SourceChannel?: number
-
-  /**
-   * 是否开启tsw服务
-   */
-  EnableTswTraceService?: boolean
+  Enabled?: boolean
 }
 
 /**

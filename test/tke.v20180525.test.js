@@ -318,6 +318,16 @@ it("tke.v20180525.DeleteEKSCluster", async function () {
     }
 })
 
+it("tke.v20180525.AddNodeToNodePool", async function () {
+    try {
+       const data = await client.AddNodeToNodePool({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tke.v20180525.DescribeTKEEdgeExternalKubeconfig", async function () {
     try {
        const data = await client.DescribeTKEEdgeExternalKubeconfig({})
@@ -578,9 +588,9 @@ it("tke.v20180525.DeleteEdgeCVMInstances", async function () {
     }
 })
 
-it("tke.v20180525.AddNodeToNodePool", async function () {
+it("tke.v20180525.DescribeEdgeLogSwitches", async function () {
     try {
-       const data = await client.AddNodeToNodePool({})
+       const data = await client.DescribeEdgeLogSwitches({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -728,9 +738,9 @@ it("tke.v20180525.AddClusterCIDR", async function () {
     }
 })
 
-it("tke.v20180525.DescribeEksContainerInstanceLog", async function () {
+it("tke.v20180525.CreateImageCache", async function () {
     try {
-       const data = await client.DescribeEksContainerInstanceLog({})
+       const data = await client.CreateImageCache({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1298,9 +1308,9 @@ it("tke.v20180525.SyncPrometheusTemp", async function () {
     }
 })
 
-it("tke.v20180525.CreateImageCache", async function () {
+it("tke.v20180525.DescribeEksContainerInstanceLog", async function () {
     try {
-       const data = await client.CreateImageCache({})
+       const data = await client.DescribeEksContainerInstanceLog({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

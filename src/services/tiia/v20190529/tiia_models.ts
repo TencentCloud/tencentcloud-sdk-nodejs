@@ -121,27 +121,6 @@ export interface RecognizeCarProRequest {
 }
 
 /**
- * RecognizeCarPro返回参数结构体
- */
-export interface RecognizeCarProResponse {
-  /**
-   * 汽车的四个矩形顶点坐标，如果图片中存在多辆车，则输出最大车辆的坐标。
-   */
-  CarCoords: Array<Coord>
-
-  /**
-      * 车辆属性识别的结果数组，如果识别到多辆车，则会输出每辆车的top1结果。
-注意：置信度是指车牌信息置信度。
-      */
-  CarTags: Array<CarTagItem>
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * CreateImage请求参数结构体
  */
 export interface CreateImageRequest {
@@ -1059,26 +1038,43 @@ export interface CropImageResponse {
 }
 
 /**
- * DetectCelebrity请求参数结构体
+ * 检测到的单个商品结构体
  */
-export interface DetectCelebrityRequest {
+export interface Product {
   /**
-      * 图片URL地址。 
-图片限制： 
-• 图片格式：PNG、JPG、JPEG。 
-• 图片大小：所下载图片经Base64编码后不超过4M。图片下载时间不超过3秒。 
-建议：
-• 图片像素：大于50*50像素，否则影响识别效果； 
-• 长宽比：长边：短边<5； 
-接口响应时间会受到图片下载时间的影响，建议使用更可靠的存储服务，推荐将图片存储在腾讯云COS。
-      */
-  ImageUrl?: string
+   * 图片中商品的三级分类识别结果，选取所有三级分类中的置信度最大者
+   */
+  Name: string
 
   /**
-   * 图片经过base64编码的内容。最大不超过4M。与ImageUrl同时存在时优先使用ImageUrl字段。
-   **注意：图片需要base64编码，并且要去掉编码头部。**
+   * 三级商品分类对应的一级分类和二级分类，两级之间用“-”（中划线）隔开，例如商品名称是“硬盘”，那么Parents输出为“电脑、办公-电脑配件”
    */
-  ImageBase64?: string
+  Parents: string
+
+  /**
+   * 算法对于Name的置信度，0-100之间，值越高，表示对于Name越确定
+   */
+  Confidence: number
+
+  /**
+   * 商品坐标X轴的最小值
+   */
+  XMin: number
+
+  /**
+   * 商品坐标Y轴的最小值
+   */
+  YMin: number
+
+  /**
+   * 商品坐标X轴的最大值
+   */
+  XMax: number
+
+  /**
+   * 商品坐标Y轴的最大值
+   */
+  YMax: number
 }
 
 /**
@@ -1094,57 +1090,6 @@ export interface Coord {
    * 纵坐标y
    */
   Y: number
-}
-
-/**
- * 公众人物识别人脸信息
- */
-export interface Face {
-  /**
-   * 与图片中人脸最相似的公众人物的名字。
-   */
-  Name: string
-
-  /**
-   * 公众人物身份标签的数组，一个公众人物可能有多个身份标签。
-   */
-  Labels: Array<Labels>
-
-  /**
-   * 对人物的简介。
-   */
-  BasicInfo: string
-
-  /**
-   * 算法对于Name的置信度（图像中人脸与公众人物的相似度），0-100之间，值越高，表示对于Name越确定。
-   */
-  Confidence: number
-
-  /**
-   * 人脸区域左上角横坐标。
-   */
-  X: number
-
-  /**
-   * 人脸区域左上角纵坐标。
-   */
-  Y: number
-
-  /**
-   * 人脸区域宽度。
-   */
-  Width: number
-
-  /**
-   * 人脸区域高度。
-   */
-  Height: number
-
-  /**
-      * 公众人物的唯一编号，可以用于区分同名人物、一个人物不同称呼等情况。唯一编号为8个字符构成的字符串。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ID: string
 }
 
 /**
@@ -1476,84 +1421,24 @@ export interface ImageInfo {
 }
 
 /**
- * 名人识别的标签
+ * RecognizeCarPro返回参数结构体
  */
-export interface Labels {
+export interface RecognizeCarProResponse {
   /**
-      * 公众人物身份标签的一级分类，例如体育明星、娱乐明星等；
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  FirstLabel: string
-
-  /**
-      * 公众人物身份标签的二级分类，例如歌手（对应一级标签为“娱乐明星”）；
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  SecondLabel: string
-}
-
-/**
- * DetectCelebrity返回参数结构体
- */
-export interface DetectCelebrityResponse {
-  /**
-   * 公众人物识别结果数组。如果检测不到人脸，返回为空；最多可以返回10个人脸识别结果。
+   * 汽车的四个矩形顶点坐标，如果图片中存在多辆车，则输出最大车辆的坐标。
    */
-  Faces?: Array<Face>
+  CarCoords: Array<Coord>
 
   /**
-      * 本服务在不同误识率水平下（将图片中的人物识别错误的比例）的推荐阈值，可以用于控制识别结果的精度。 
-FalseRate1Percent, FalseRate5Permil, FalseRate1Permil分别代表误识率在百分之一、千分之五、千分之一情况下的推荐阈值。 
-因为阈值会存在变动，请勿将此处输出的固定值处理，而是每次取值与confidence对比，来判断本次的识别结果是否可信。
- 例如，如果您业务中可以接受的误识率是1%，则可以将所有confidence>=FalseRate1Percent的结论认为是正确的。
-注意：此字段可能返回 null，表示取不到有效值。
+      * 车辆属性识别的结果数组，如果识别到多辆车，则会输出每辆车的top1结果。
+注意：置信度是指车牌信息置信度。
       */
-  Threshold?: Threshold
+  CarTags: Array<CarTagItem>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * 检测到的单个商品结构体
- */
-export interface Product {
-  /**
-   * 图片中商品的三级分类识别结果，选取所有三级分类中的置信度最大者
-   */
-  Name: string
-
-  /**
-   * 三级商品分类对应的一级分类和二级分类，两级之间用“-”（中划线）隔开，例如商品名称是“硬盘”，那么Parents输出为“电脑、办公-电脑配件”
-   */
-  Parents: string
-
-  /**
-   * 算法对于Name的置信度，0-100之间，值越高，表示对于Name越确定
-   */
-  Confidence: number
-
-  /**
-   * 商品坐标X轴的最小值
-   */
-  XMin: number
-
-  /**
-   * 商品坐标Y轴的最小值
-   */
-  YMin: number
-
-  /**
-   * 商品坐标X轴的最大值
-   */
-  XMax: number
-
-  /**
-   * 商品坐标Y轴的最大值
-   */
-  YMax: number
 }
 
 /**
@@ -1634,29 +1519,6 @@ export interface CarTagItem {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ColorConfidence: number
-}
-
-/**
- * 本服务在不同误识率水平下（将图片中的人物识别错误的比例）的推荐阈值，可以用于控制识别结果的精度。
-{FalseRate1Percent, FalseRate5Permil, FalseRate1Permil}分别代表误识率在百分之一、千分之五、千分之一情况下的推荐阈值。
-因为阈值会存在变动，请勿将此处输出的固定值处理，而是每次取值与confidence对比，来判断本次的识别结果是否可信。
-例如，如果您业务中可以接受的误识率是1%，则可以将所有confidence>=FalseRate1Percent的结论认为是正确的。
- */
-export interface Threshold {
-  /**
-   * 误识率在百分之一时的推荐阈值。
-   */
-  FalseRate1Percent: number
-
-  /**
-   * 误识率在千分之五时的推荐阈值。
-   */
-  FalseRate5Permil: number
-
-  /**
-   * 误识率在千分之一时的推荐阈值。
-   */
-  FalseRate1Permil: number
 }
 
 /**

@@ -108,6 +108,26 @@ it("ess.v20201111.CreateSchemeUrl", async function () {
     }
 })
 
+it("ess.v20201111.GetTaskResultApi", async function () {
+    try {
+       const data = await client.GetTaskResultApi({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ess.v20201111.CreateConvertTaskApi", async function () {
+    try {
+       const data = await client.CreateConvertTaskApi({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ess.v20201111.DescribeFlowTemplates", async function () {
     try {
        const data = await client.DescribeFlowTemplates({})

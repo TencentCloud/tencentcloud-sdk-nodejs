@@ -1467,6 +1467,11 @@ export interface ChannelCreateFlowByFilesRequest {
   CustomShowMap?: string
 
   /**
+   * 渠道的业务信息，最大长度1000个字符。发起自动签署时，需设置对应自动签署场景，目前仅支持场景：处方单-E_PRESCRIPTION_AUTO_SIGN
+   */
+  CustomerData?: string
+
+  /**
    * 操作者的信息
    */
   Operator?: UserInfo

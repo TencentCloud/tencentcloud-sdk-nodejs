@@ -2010,9 +2010,17 @@ export interface TdwParam {
       */
     Tid: string;
     /**
-      * 是否为国内站，默认true
+      * 默认true
       */
     IsDomestic?: boolean;
+    /**
+      * TDW地址，默认tl-tdbank-tdmanager.tencent-distribute.com
+      */
+    TdwHost?: string;
+    /**
+      * TDW端口，默认8099
+      */
+    TdwPort?: number;
 }
 /**
  * DescribeCkafkaZone请求参数结构体
@@ -5982,6 +5990,18 @@ export interface MySQLParam {
       * 表与消息间的映射关系
       */
     DataTargetRecordMapping?: Array<RecordMapping>;
+    /**
+      * 事件路由到特定主题的正则表达式，默认为(.*)
+      */
+    TopicRegex?: string;
+    /**
+      * TopicRegex的引用组，指定$1、$2等
+      */
+    TopicReplacement?: string;
+    /**
+      * 格式：库1.表1:字段1,字段2;库2.表2:字段2，表之间;（分号）隔开，字段之间,（逗号）隔开。不指定的表默认取表的主键
+      */
+    KeyColumns?: string;
 }
 /**
  * DescribeTopicSyncReplica请求参数结构体

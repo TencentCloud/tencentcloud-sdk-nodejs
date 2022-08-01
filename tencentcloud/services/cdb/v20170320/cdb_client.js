@@ -241,6 +241,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyAuditConfig", req, cb);
     }
     /**
+     * 本接口(ModifyInstancePasswordComplexity)用于修改云数据库实例的密码复杂度。
+     */
+    async ModifyInstancePasswordComplexity(req, cb) {
+        return this.request("ModifyInstancePasswordComplexity", req, cb);
+    }
+    /**
      * 本接口(ModifyTimeWindow)用于更新云数据库实例的维护时间窗口。
      */
     async ModifyTimeWindow(req, cb) {
