@@ -1,1 +1,1 @@
-export const sdkVersion = "4.0.401"
+export const sdkVersion = "4.0.402"
