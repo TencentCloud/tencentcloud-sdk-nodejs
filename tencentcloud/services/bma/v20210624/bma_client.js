@@ -28,58 +28,16 @@ class Client extends abstract_client_1.AbstractClient {
         super("bma.tencentcloudapi.com", "2021-06-24", clientConfig);
     }
     /**
-     * 查询作品基本信息
-     */
-    async DescribeCRWorkInfo(req, cb) {
-        return this.request("DescribeCRWorkInfo", req, cb);
-    }
-    /**
-     * 申请取证
-     */
-    async ModifyCRObtainStatus(req, cb) {
-        return this.request("ModifyCRObtainStatus", req, cb);
-    }
-    /**
-     * 版权保护-拦截申请接口
-     */
-    async ModifyCRBlockStatus(req, cb) {
-        return this.request("ModifyCRBlockStatus", req, cb);
-    }
-    /**
-     * 版权保护-新建发函接口
-     */
-    async CreateCRRight(req, cb) {
-        return this.request("CreateCRRight", req, cb);
-    }
-    /**
-     * 版权保护-查询监测列表接口
-     */
-    async DescribeCRMonitors(req, cb) {
-        return this.request("DescribeCRMonitors", req, cb);
-    }
-    /**
-     * 版权保护-维权申请接口
-     */
-    async ModifyCRRightStatus(req, cb) {
-        return this.request("ModifyCRRightStatus", req, cb);
-    }
-    /**
      * 更新作品
      */
     async UpdateCRWork(req, cb) {
         return this.request("UpdateCRWork", req, cb);
     }
     /**
-     * 品牌经营管家-版权保护模块企业认证接口
+     * 查询企业信息
      */
-    async CreateCRCompanyVerify(req, cb) {
-        return this.request("CreateCRCompanyVerify", req, cb);
-    }
-    /**
-     * 版权保护-修改监测状态接口
-     */
-    async ModifyCRMonitor(req, cb) {
-        return this.request("ModifyCRMonitor", req, cb);
+    async DescribeBPCompanyInfo(req, cb) {
+        return this.request("DescribeBPCompanyInfo", req, cb);
     }
     /**
      * 版权保护-新建拦截接口
@@ -94,10 +52,112 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateCRWork", req, cb);
     }
     /**
+     * 添加下线工单
+     */
+    async CreateBPOfflineTicket(req, cb) {
+        return this.request("CreateBPOfflineTicket", req, cb);
+    }
+    /**
+     * 申请取证
+     */
+    async ModifyCRObtainStatus(req, cb) {
+        return this.request("ModifyCRObtainStatus", req, cb);
+    }
+    /**
+     * 版权保护-新建发函接口
+     */
+    async CreateCRRight(req, cb) {
+        return this.request("CreateCRRight", req, cb);
+    }
+    /**
+     * 修改下线材料
+     */
+    async ModifyBPOfflineAttachment(req, cb) {
+        return this.request("ModifyBPOfflineAttachment", req, cb);
+    }
+    /**
+     * 版权保护-修改监测状态接口
+     */
+    async ModifyCRMonitor(req, cb) {
+        return this.request("ModifyCRMonitor", req, cb);
+    }
+    /**
      * 版权保护-查询作品监测详情接口
      */
     async DescribeCRMonitorDetail(req, cb) {
         return this.request("DescribeCRMonitorDetail", req, cb);
+    }
+    /**
+     * 添加仿冒链接（举报）
+     */
+    async CreateBPFakeURL(req, cb) {
+        return this.request("CreateBPFakeURL", req, cb);
+    }
+    /**
+     * 版权保护-拦截申请接口
+     */
+    async ModifyCRBlockStatus(req, cb) {
+        return this.request("ModifyCRBlockStatus", req, cb);
+    }
+    /**
+     * 添加误报工单
+     */
+    async CreateBPFalseTicket(req, cb) {
+        return this.request("CreateBPFalseTicket", req, cb);
+    }
+    /**
+     * 添加保护网站
+     */
+    async CreateBPProtectURLs(req, cb) {
+        return this.request("CreateBPProtectURLs", req, cb);
+    }
+    /**
+     * 查询举报列表
+     */
+    async DescribeBPReportFakeURLs(req, cb) {
+        return this.request("DescribeBPReportFakeURLs", req, cb);
+    }
+    /**
+     * 查询作品基本信息
+     */
+    async DescribeCRWorkInfo(req, cb) {
+        return this.request("DescribeCRWorkInfo", req, cb);
+    }
+    /**
+     * 版权保护-查询监测列表接口
+     */
+    async DescribeCRMonitors(req, cb) {
+        return this.request("DescribeCRMonitors", req, cb);
+    }
+    /**
+     * 版权保护-维权申请接口
+     */
+    async ModifyCRRightStatus(req, cb) {
+        return this.request("ModifyCRRightStatus", req, cb);
+    }
+    /**
+     * 添加下线材料
+     */
+    async CreateBPOfflineAttachment(req, cb) {
+        return this.request("CreateBPOfflineAttachment", req, cb);
+    }
+    /**
+     * 查询保护网站
+     */
+    async DescribeBPProtectURLs(req, cb) {
+        return this.request("DescribeBPProtectURLs", req, cb);
+    }
+    /**
+     * 查询仿冒链接
+     */
+    async DescribeBPFakeURLs(req, cb) {
+        return this.request("DescribeBPFakeURLs", req, cb);
+    }
+    /**
+     * 品牌经营管家-版权保护模块企业认证接口
+     */
+    async CreateCRCompanyVerify(req, cb) {
+        return this.request("CreateCRCompanyVerify", req, cb);
     }
 }
 exports.Client = Client;

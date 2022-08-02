@@ -418,7 +418,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建防火墙实例和接入域名
+   * 创建防火墙实例和接入域名（Region参数必填）
    */
   async CreateNatFwInstanceWithDomain(
     req: CreateNatFwInstanceWithDomainRequest,

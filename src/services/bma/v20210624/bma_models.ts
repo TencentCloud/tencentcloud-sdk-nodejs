@@ -16,6 +16,41 @@
  */
 
 /**
+ * 保护网站信息
+ */
+export interface ProtectURLInfo {
+  /**
+   * xxx
+   */
+  ProtectURLId: number
+
+  /**
+   * xxx
+   */
+  ProtectURL: string
+
+  /**
+   * xxx
+   */
+  ProtectWeb: string
+
+  /**
+   * xxx
+   */
+  ProtectURLStatus: number
+
+  /**
+   * xxx
+   */
+  ProtectURLNote: string
+
+  /**
+   * xxx
+   */
+  CreateTime: string
+}
+
+/**
  * 版权保护-监测结果
  */
 export interface Monitor {
@@ -68,6 +103,16 @@ export interface Monitor {
    * xx
    */
   MonitorNote: string
+}
+
+/**
+ * CreateBPFalseTicket返回参数结构体
+ */
+export interface CreateBPFalseTicketResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -226,6 +271,36 @@ export interface CreateCRRightRequest {
 }
 
 /**
+ * CreateBPOfflineTicket返回参数结构体
+ */
+export interface CreateBPOfflineTicketResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeBPFakeURLs请求参数结构体
+ */
+export interface DescribeBPFakeURLsRequest {
+  /**
+   * xxx
+   */
+  Filters?: Array<Filter>
+
+  /**
+   * xxx
+   */
+  PageSize?: number
+
+  /**
+   * xxx
+   */
+  PageNumber?: number
+}
+
+/**
  * ModifyCRBlockStatus返回参数结构体
  */
 export interface ModifyCRBlockStatusResponse {
@@ -261,6 +336,101 @@ export interface ModifyCRObtainStatusRequest {
 }
 
 /**
+ * 举报网址信息
+ */
+export interface ReportFakeURLInfo {
+  /**
+   * xxx
+   */
+  FakeURLId: number
+
+  /**
+   * xxx
+   */
+  DetectTime: string
+
+  /**
+   * xxx
+   */
+  ProtectURL: string
+
+  /**
+   * xxx
+   */
+  ProtectWeb: string
+
+  /**
+   * xxx
+   */
+  FakeURL: string
+
+  /**
+   * xxx
+   */
+  Snapshot: string
+
+  /**
+   * xxx
+   */
+  IP: string
+
+  /**
+   * xxx
+   */
+  IPLoc: string
+
+  /**
+   * xxx
+   */
+  Heat: number
+
+  /**
+   * xxx
+   */
+  Status: number
+
+  /**
+   * xxx
+   */
+  Note: string
+
+  /**
+   * xxx
+   */
+  FakeURLCompany: string
+
+  /**
+   * xxx
+   */
+  FakeURLAttr: string
+
+  /**
+   * xxx
+   */
+  FakeURLName: string
+
+  /**
+   * xxx
+   */
+  FakeURLICP: string
+
+  /**
+   * xxx
+   */
+  FakeURLCreateTime: string
+
+  /**
+   * xxx
+   */
+  FakeURLExpireTime: string
+
+  /**
+   * xxx
+   */
+  BlockTime: string
+}
+
+/**
  * DescribeCRWorkInfo请求参数结构体
  */
 export interface DescribeCRWorkInfoRequest {
@@ -268,6 +438,91 @@ export interface DescribeCRWorkInfoRequest {
    * xxx
    */
   WorkId: number
+}
+
+/**
+ * ModifyBPOfflineAttachment请求参数结构体
+ */
+export interface ModifyBPOfflineAttachmentRequest {
+  /**
+   * xx
+   */
+  LicenseName?: string
+
+  /**
+   * xx
+   */
+  AuthorizationName?: string
+
+  /**
+   * xx
+   */
+  BrandName?: string
+
+  /**
+   * xx
+   */
+  BrandCertificateName?: string
+
+  /**
+   * xx
+   */
+  TransferName?: string
+}
+
+/**
+ * DescribeBPFakeURLs返回参数结构体
+ */
+export interface DescribeBPFakeURLsResponse {
+  /**
+   * xxx
+   */
+  FakeURLInfos: Array<FakeURLInfo>
+
+  /**
+   * xxx
+   */
+  TotalCount: number
+
+  /**
+   * xxx
+   */
+  ExportURL: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateBPOfflineAttachment返回参数结构体
+ */
+export interface CreateBPOfflineAttachmentResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeBPReportFakeURLs请求参数结构体
+ */
+export interface DescribeBPReportFakeURLsRequest {
+  /**
+   * xxx
+   */
+  Filters?: Array<Filter>
+
+  /**
+   * xxx
+   */
+  PageSize?: number
+
+  /**
+   * xxx
+   */
+  PageNumber?: number
 }
 
 /**
@@ -341,18 +596,53 @@ export interface MonitorTort {
 }
 
 /**
- * UpdateCRWork返回参数结构体
+ * CreateBPFakeURL请求参数结构体
  */
-export interface UpdateCRWorkResponse {
+export interface CreateBPFakeURLRequest {
   /**
-   * xx
+   * xxx
    */
-  WorkId: number
+  ProtectURLId?: number
 
   /**
-   * xx
+   * xxx
    */
-  EvidenceId: number
+  FakeURL?: string
+
+  /**
+   * xxx
+   */
+  SnapshotNames?: Array<string>
+
+  /**
+   * xxx
+   */
+  Note?: string
+}
+
+/**
+ * CreateBPProtectURLs返回参数结构体
+ */
+export interface CreateBPProtectURLsResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeBPProtectURLs返回参数结构体
+ */
+export interface DescribeBPProtectURLsResponse {
+  /**
+   * xxx
+   */
+  ProtectURLInfos: Array<ProtectURLInfo>
+
+  /**
+   * xxx
+   */
+  TotalCount: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -393,6 +683,81 @@ export interface CreateCRCompanyVerifyResponse {
    * 认证结果返回
    */
   Note: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateBPOfflineAttachment请求参数结构体
+ */
+export interface CreateBPOfflineAttachmentRequest {
+  /**
+   * xxx
+   */
+  BrandName?: string
+
+  /**
+   * xx
+   */
+  BrandCertificateName?: string
+
+  /**
+   * xx
+   */
+  TransferName?: string
+
+  /**
+   * xx
+   */
+  AuthorizationName?: string
+}
+
+/**
+ * CreateBPProtectURLs请求参数结构体
+ */
+export interface CreateBPProtectURLsRequest {
+  /**
+   * xxx
+   */
+  CompanyName?: string
+
+  /**
+   * xxx
+   */
+  Phone?: string
+
+  /**
+   * xxx
+   */
+  LicenseName?: string
+
+  /**
+   * xxx
+   */
+  ProtectURLs?: Array<string>
+
+  /**
+   * xxx
+   */
+  ProtectWebs?: Array<string>
+}
+
+/**
+ * UpdateCRWork返回参数结构体
+ */
+export interface UpdateCRWorkResponse {
+  /**
+   * xx
+   */
+  WorkId: number
+
+  /**
+   * xx
+   */
+  EvidenceId: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -601,6 +966,31 @@ export interface CreateCRWorkRequest {
 }
 
 /**
+ * DescribeBPCompanyInfo请求参数结构体
+ */
+export type DescribeBPCompanyInfoRequest = null
+
+/**
+ * DescribeBPReportFakeURLs返回参数结构体
+ */
+export interface DescribeBPReportFakeURLsResponse {
+  /**
+   * xxx
+   */
+  ReportFakeURLInfos: Array<ReportFakeURLInfo>
+
+  /**
+   * xxx
+   */
+  TotalCount: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 过滤参数
  */
 export type Filter = null
@@ -686,6 +1076,101 @@ export interface UpdateCRWorkRequest {
 }
 
 /**
+ * 仿冒网站信息
+ */
+export interface FakeURLInfo {
+  /**
+   * xxx
+   */
+  FakeURLId: number
+
+  /**
+   * xxx
+   */
+  ProtectWeb: string
+
+  /**
+   * xxx
+   */
+  DetectTime: string
+
+  /**
+   * xxx
+   */
+  FakeURL: string
+
+  /**
+   * xxx
+   */
+  Snapshot: string
+
+  /**
+   * xxx
+   */
+  IP: string
+
+  /**
+   * xxx
+   */
+  IPLoc: string
+
+  /**
+   * xxx
+   */
+  Heat: number
+
+  /**
+   * xxx
+   */
+  Status: number
+
+  /**
+   * xxx
+   */
+  Note: string
+
+  /**
+   * xxx
+   */
+  FakeURLCompany: string
+
+  /**
+   * xxx
+   */
+  FakeURLAttr: string
+
+  /**
+   * xxx
+   */
+  FakeURLName: string
+
+  /**
+   * xxx
+   */
+  FakeURLICP: string
+
+  /**
+   * xxx
+   */
+  FakeURLCreateTime: string
+
+  /**
+   * xxx
+   */
+  FakeURLExpireTime: string
+}
+
+/**
+ * CreateBPOfflineTicket请求参数结构体
+ */
+export interface CreateBPOfflineTicketRequest {
+  /**
+   * xxx
+   */
+  FakeURLId?: number
+}
+
+/**
  * DescribeCRMonitorDetail请求参数结构体
  */
 export interface DescribeCRMonitorDetailRequest {
@@ -711,9 +1196,119 @@ export interface DescribeCRMonitorDetailRequest {
 }
 
 /**
+ * 商标信息
+ */
+export interface BrandData {
+  /**
+   * xxx
+   */
+  BrandName: string
+
+  /**
+   * xxx
+   */
+  BrandCertificateName: string
+
+  /**
+   * xxx
+   */
+  BrandStatus: number
+
+  /**
+   * xxx
+   */
+  BrandNote: string
+
+  /**
+   * xxx
+   */
+  TransferName: string
+
+  /**
+   * xxx
+   */
+  TransferStatus: number
+
+  /**
+   * xxx
+   */
+  TransferNote: string
+}
+
+/**
  * ModifyCRRightStatus返回参数结构体
  */
 export interface ModifyCRRightStatusResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeBPCompanyInfo返回参数结构体
+ */
+export interface DescribeBPCompanyInfoResponse {
+  /**
+   * xx
+   */
+  CompanyName: string
+
+  /**
+   * xx
+   */
+  Phone: string
+
+  /**
+   * xx
+   */
+  LicenseName: string
+
+  /**
+   * xx
+   */
+  LicenseStatus: number
+
+  /**
+   * xx
+   */
+  LicenseNote: string
+
+  /**
+   * xx
+   */
+  AuthorizationName: string
+
+  /**
+   * xx
+   */
+  AuthorizationStatus: number
+
+  /**
+   * xx
+   */
+  AuthorizationNote: string
+
+  /**
+   * xx
+   */
+  BrandDatas: Array<BrandData>
+
+  /**
+   * xx
+   */
+  CompanyId: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyBPOfflineAttachment返回参数结构体
+ */
+export interface ModifyBPOfflineAttachmentResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -791,6 +1386,26 @@ export interface CreateCRBlockRequest {
 }
 
 /**
+ * CreateBPFakeURL返回参数结构体
+ */
+export interface CreateBPFakeURLResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateBPFalseTicket请求参数结构体
+ */
+export interface CreateBPFalseTicketRequest {
+  /**
+   * xxx
+   */
+  FakeURL?: string
+}
+
+/**
  * ModifyCRMonitor返回参数结构体
  */
 export interface ModifyCRMonitorResponse {
@@ -798,6 +1413,21 @@ export interface ModifyCRMonitorResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeBPProtectURLs请求参数结构体
+ */
+export interface DescribeBPProtectURLsRequest {
+  /**
+   * xxx
+   */
+  PageSize?: number
+
+  /**
+   * xxx
+   */
+  PageNumber?: number
 }
 
 /**

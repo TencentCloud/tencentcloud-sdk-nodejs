@@ -52,6 +52,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdateProbeTaskConfigurationList", req, cb);
     }
     /**
+     * 获取拨测节点
+     */
+    async DescribeNodes(req, cb) {
+        return this.request("DescribeNodes", req, cb);
+    }
+    /**
      * 查询拨测节点
      */
     async DescribeProbeNodes(req, cb) {

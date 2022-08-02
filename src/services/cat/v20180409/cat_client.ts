@@ -18,7 +18,7 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  DescribeProbeNodesResponse,
+  DescribeNodesRequest,
   Label,
   Field,
   KeyValuePair,
@@ -32,17 +32,20 @@ import {
   DescribeDetailedSingleProbeDataResponse,
   SuspendProbeTaskRequest,
   DescribeProbeMetricDataRequest,
-  DescribeProbeTasksRequest,
+  DescribeProbeNodesResponse,
   UpdateProbeTaskConfigurationListRequest,
   CreateProbeTasksRequest,
   ProbeTask,
+  DescribeProbeTasksRequest,
   ResumeProbeTaskResponse,
   DeleteProbeTaskResponse,
   CreateProbeTasksResponse,
   ResumeProbeTaskRequest,
+  NodeDefineExt,
   DescribeProbeNodesRequest,
   NodeDefine,
   Tag,
+  DescribeNodesResponse,
   UpdateProbeTaskConfigurationListResponse,
   DetailedSingleDataDefine,
 } from "./cat_models"
@@ -94,6 +97,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpdateProbeTaskConfigurationListResponse) => void
   ): Promise<UpdateProbeTaskConfigurationListResponse> {
     return this.request("UpdateProbeTaskConfigurationList", req, cb)
+  }
+
+  /**
+   * 获取拨测节点
+   */
+  async DescribeNodes(
+    req: DescribeNodesRequest,
+    cb?: (error: string, rep: DescribeNodesResponse) => void
+  ): Promise<DescribeNodesResponse> {
+    return this.request("DescribeNodes", req, cb)
   }
 
   /**

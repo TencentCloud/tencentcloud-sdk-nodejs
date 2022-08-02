@@ -657,6 +657,10 @@ export interface EnvBaseInfo {
       * 环境类型 tcbr ｜ run
       */
     EnvType: string;
+    /**
+      * 子网id
+      */
+    SubnetIds: string;
 }
 /**
  * 服务基本信息

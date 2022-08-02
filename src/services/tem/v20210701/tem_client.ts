@@ -20,9 +20,10 @@ import { ClientConfig } from "../../../common/interface"
 import {
   CreateResourceRequest,
   NamespacePage,
-  DescribeApplicationPodsResponse,
+  DescribeApplicationInfoResponse,
   ResumeDeployApplicationResponse,
   StorageConf,
+  DescribeApplicationPodsRequest,
   DeployServicePodDetail,
   LogOutputConf,
   DeleteIngressResponse,
@@ -43,10 +44,13 @@ import {
   DescribeEnvironmentsRequest,
   ModifyEnvironmentRequest,
   CreateEnvironmentRequest,
+  NodeInfo,
   TemDeployApplicationDetailInfo,
   DescribeEnvironmentStatusResponse,
   IngressTls,
+  DescribeApplicationPodsResponse,
   ServicePage,
+  TemServiceVersionInfo,
   CreateCosTokenRequest,
   ModifyIngressRequest,
   EnablePrometheusConf,
@@ -88,7 +92,7 @@ import {
   DeployApplicationRequest,
   ModifyIngressResponse,
   DescribeApplicationsRequest,
-  DescribeApplicationPodsRequest,
+  DescribeApplicationInfoRequest,
   CreateApplicationRequest,
   NamespaceStatusInfo,
   DescribeRunPodPage,
@@ -98,6 +102,7 @@ import {
   IngressRuleBackend,
   DeployStrategyConf,
   DescribeIngressResponse,
+  WorkloadInfo,
   IngressRulePath,
   ServiceVersionBrief,
   CreateApplicationResponse,
@@ -231,6 +236,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: StopApplicationResponse) => void
   ): Promise<StopApplicationResponse> {
     return this.request("StopApplication", req, cb)
+  }
+
+  /**
+   * 服务基本信息查看
+   */
+  async DescribeApplicationInfo(
+    req: DescribeApplicationInfoRequest,
+    cb?: (error: string, rep: DescribeApplicationInfoResponse) => void
+  ): Promise<DescribeApplicationInfoResponse> {
+    return this.request("DescribeApplicationInfo", req, cb)
   }
 
   /**

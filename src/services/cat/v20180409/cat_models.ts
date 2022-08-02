@@ -16,19 +16,52 @@
  */
 
 /**
- * DescribeProbeNodes返回参数结构体
+ * DescribeNodes请求参数结构体
  */
-export interface DescribeProbeNodesResponse {
+export interface DescribeNodesRequest {
   /**
-      * 节点列表
-注意：此字段可能返回 null，表示取不到有效值。
+      * 节点类型
+<li> 1 = IDC </li>
+<li> 2 = LastMile </li>
+<li> 3 = Mobile </li>
       */
-  NodeSet: Array<NodeDefine>
+  NodeType?: number
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 节点区域
+<li> 1 = 中国大陆 </li>
+<li> 2 = 港澳台 </li>
+<li> 3 = 海外 </li>
+      */
+  Location?: number
+
+  /**
+   * 是否IPv6
    */
-  RequestId?: string
+  IsIPv6?: boolean
+
+  /**
+   * 名字模糊搜索
+   */
+  NodeName?: string
+
+  /**
+      * 付费模式
+<li>1 = 试用版本</li>
+<li> 2 = 付费版本 </li>
+      */
+  PayMode?: number
+
+  /**
+      * 任务类型
+<li>1 = 页面性能</li>
+<li>2 = 文件上传</li>
+<li>3 = 文件下载</li>
+<li>4 = 端口性能</li>
+<li>5 = 网络质量</li>
+<li>6 = 音视频体验</li>
+      */
+  TaskType?: number
 }
 
 /**
@@ -370,95 +403,19 @@ AnalyzeTaskType_MediaStream：音视频体验
 }
 
 /**
- * DescribeProbeTasks请求参数结构体
+ * DescribeProbeNodes返回参数结构体
  */
-export interface DescribeProbeTasksRequest {
+export interface DescribeProbeNodesResponse {
   /**
-   * 任务 ID  列表
-   */
-  TaskIDs?: Array<string>
-
-  /**
-   * 任务名
-   */
-  TaskName?: string
-
-  /**
-   * 拨测目标
-   */
-  TargetAddress?: string
-
-  /**
-      * 任务状态列表
-<li>1 = 创建中</li>
-<li> 2 = 运行中 </li>
-<li> 3 = 运行异常 </li>
-<li> 4 = 暂停中 </li>
-<li> 5 = 暂停异常 </li>
-<li> 6 = 任务暂停 </li>
-<li> 7 = 任务删除中 </li>
-<li> 8 = 任务删除异常 </li>
-<li> 9 = 任务删除</li>
-<li> 10 = 定时任务暂停中 </li>
+      * 节点列表
+注意：此字段可能返回 null，表示取不到有效值。
       */
-  TaskStatus?: Array<number>
+  NodeSet: Array<NodeDefine>
 
   /**
-   * 偏移量，默认为0
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Offset?: number
-
-  /**
-   * 返回数量，默认为20，最大值为100
-   */
-  Limit?: number
-
-  /**
-      * 付费模式
-<li>1 = 试用版本</li>
-<li> 2 = 付费版本 </li>
-      */
-  PayMode?: number
-
-  /**
-      * 订单状态
-<li>1 = 正常</li>
-<li> 2 = 欠费 </li>
-      */
-  OrderState?: number
-
-  /**
-      * 拨测类型
-<li>1 = 页面浏览</li>
-<li> 2 =文件上传 </li>
-<li> 3 = 文件下载</li>
-<li> 4 = 端口性能 </li>
-<li> 5 = 网络质量 </li>
-<li> 6 =流媒体 </li>
-
-即使拨测只支持页面浏览，网络质量，文件下载
-      */
-  TaskType?: Array<number>
-
-  /**
-   * 节点类型
-   */
-  TaskCategory?: Array<number>
-
-  /**
-   * 排序的列
-   */
-  OrderBy?: string
-
-  /**
-   * 是否正序
-   */
-  Ascend?: boolean
-
-  /**
-   * 资源标签值
-   */
-  TagFilters?: Array<KeyValuePair>
+  RequestId?: string
 }
 
 /**
@@ -644,6 +601,98 @@ export interface ProbeTask {
 }
 
 /**
+ * DescribeProbeTasks请求参数结构体
+ */
+export interface DescribeProbeTasksRequest {
+  /**
+   * 任务 ID  列表
+   */
+  TaskIDs?: Array<string>
+
+  /**
+   * 任务名
+   */
+  TaskName?: string
+
+  /**
+   * 拨测目标
+   */
+  TargetAddress?: string
+
+  /**
+      * 任务状态列表
+<li>1 = 创建中</li>
+<li> 2 = 运行中 </li>
+<li> 3 = 运行异常 </li>
+<li> 4 = 暂停中 </li>
+<li> 5 = 暂停异常 </li>
+<li> 6 = 任务暂停 </li>
+<li> 7 = 任务删除中 </li>
+<li> 8 = 任务删除异常 </li>
+<li> 9 = 任务删除</li>
+<li> 10 = 定时任务暂停中 </li>
+      */
+  TaskStatus?: Array<number>
+
+  /**
+   * 偏移量，默认为0
+   */
+  Offset?: number
+
+  /**
+   * 返回数量，默认为20，最大值为100
+   */
+  Limit?: number
+
+  /**
+      * 付费模式
+<li>1 = 试用版本</li>
+<li> 2 = 付费版本 </li>
+      */
+  PayMode?: number
+
+  /**
+      * 订单状态
+<li>1 = 正常</li>
+<li> 2 = 欠费 </li>
+      */
+  OrderState?: number
+
+  /**
+      * 拨测类型
+<li>1 = 页面浏览</li>
+<li> 2 =文件上传 </li>
+<li> 3 = 文件下载</li>
+<li> 4 = 端口性能 </li>
+<li> 5 = 网络质量 </li>
+<li> 6 =流媒体 </li>
+
+即使拨测只支持页面浏览，网络质量，文件下载
+      */
+  TaskType?: Array<number>
+
+  /**
+   * 节点类型
+   */
+  TaskCategory?: Array<number>
+
+  /**
+   * 排序的列
+   */
+  OrderBy?: string
+
+  /**
+   * 是否正序
+   */
+  Ascend?: boolean
+
+  /**
+   * 资源标签值
+   */
+  TagFilters?: Array<KeyValuePair>
+}
+
+/**
  * ResumeProbeTask返回参数结构体
  */
 export interface ResumeProbeTaskResponse {
@@ -720,6 +769,73 @@ export interface ResumeProbeTaskRequest {
    * 任务 ID
    */
   TaskIds: Array<string>
+}
+
+/**
+ * 探测节点
+ */
+export interface NodeDefineExt {
+  /**
+   * 节点名称
+   */
+  Name: string
+
+  /**
+   * 节点代码
+   */
+  Code: string
+
+  /**
+      * 节点类型
+<li> 1 = IDC </li>
+<li> 2 = LastMile </li>
+<li> 3 = Mobile </li>
+      */
+  Type: number
+
+  /**
+   * 网络服务商
+   */
+  NetService: string
+
+  /**
+   * 区域
+   */
+  District: string
+
+  /**
+   * 城市
+   */
+  City: string
+
+  /**
+      * IP 类型
+<li> 1 = IPv4 </li>
+<li> 2 = IPv6 </li>
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IPType: number
+
+  /**
+      * 区域
+<li> 1 = 中国大陆 </li>
+<li> 2 = 港澳台 </li>
+<li> 3 = 国外 </li>
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Location: number
+
+  /**
+      * 节点类型  如果为base 则为可用性拨测点，为空则为高级拨测点
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CodeType: string
+
+  /**
+      * 节点支持的任务类型。1: 页面性能 2: 文件上传 3: 文件下载 4: 端口性能 5: 网络质量 6: 音视频体验
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TaskTypes: Array<number>
 }
 
 /**
@@ -840,6 +956,22 @@ export interface Tag {
    * value
    */
   TagValue: string
+}
+
+/**
+ * DescribeNodes返回参数结构体
+ */
+export interface DescribeNodesResponse {
+  /**
+      * 节点列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NodeSet: Array<NodeDefineExt>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

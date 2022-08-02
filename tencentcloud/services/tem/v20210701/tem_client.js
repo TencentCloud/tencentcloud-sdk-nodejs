@@ -97,6 +97,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("StopApplication", req, cb);
     }
     /**
+     * 服务基本信息查看
+     */
+    async DescribeApplicationInfo(req, cb) {
+        return this.request("DescribeApplicationInfo", req, cb);
+    }
+    /**
      * 获取应用实例列表
      */
     async DescribeApplicationPods(req, cb) {

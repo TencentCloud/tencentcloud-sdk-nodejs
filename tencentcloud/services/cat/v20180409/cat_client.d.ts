@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeProbeNodesResponse, SuspendProbeTaskResponse, DescribeProbeMetricDataResponse, DescribeDetailedSingleProbeDataRequest, DescribeProbeTasksResponse, DeleteProbeTaskRequest, DescribeDetailedSingleProbeDataResponse, SuspendProbeTaskRequest, DescribeProbeMetricDataRequest, DescribeProbeTasksRequest, UpdateProbeTaskConfigurationListRequest, CreateProbeTasksRequest, ResumeProbeTaskResponse, DeleteProbeTaskResponse, CreateProbeTasksResponse, ResumeProbeTaskRequest, DescribeProbeNodesRequest, UpdateProbeTaskConfigurationListResponse } from "./cat_models";
+import { DescribeNodesRequest, SuspendProbeTaskResponse, DescribeProbeMetricDataResponse, DescribeDetailedSingleProbeDataRequest, DescribeProbeTasksResponse, DeleteProbeTaskRequest, DescribeDetailedSingleProbeDataResponse, SuspendProbeTaskRequest, DescribeProbeMetricDataRequest, DescribeProbeNodesResponse, UpdateProbeTaskConfigurationListRequest, CreateProbeTasksRequest, DescribeProbeTasksRequest, ResumeProbeTaskResponse, DeleteProbeTaskResponse, CreateProbeTasksResponse, ResumeProbeTaskRequest, DescribeProbeNodesRequest, DescribeNodesResponse, UpdateProbeTaskConfigurationListResponse } from "./cat_models";
 /**
  * cat client
  * @class
@@ -23,6 +23,10 @@ export declare class Client extends AbstractClient {
      * 批量更新拨测任务配置
      */
     UpdateProbeTaskConfigurationList(req: UpdateProbeTaskConfigurationListRequest, cb?: (error: string, rep: UpdateProbeTaskConfigurationListResponse) => void): Promise<UpdateProbeTaskConfigurationListResponse>;
+    /**
+     * 获取拨测节点
+     */
+    DescribeNodes(req: DescribeNodesRequest, cb?: (error: string, rep: DescribeNodesResponse) => void): Promise<DescribeNodesResponse>;
     /**
      * 查询拨测节点
      */

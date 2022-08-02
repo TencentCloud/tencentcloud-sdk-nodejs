@@ -156,7 +156,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateDatabaseWhiteListRules", req, cb);
     }
     /**
-     * 创建防火墙实例和接入域名
+     * 创建防火墙实例和接入域名（Region参数必填）
      */
     async CreateNatFwInstanceWithDomain(req, cb) {
         return this.request("CreateNatFwInstanceWithDomain", req, cb);

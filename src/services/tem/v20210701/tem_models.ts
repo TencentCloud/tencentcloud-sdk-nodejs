@@ -76,13 +76,13 @@ export interface NamespacePage {
 }
 
 /**
- * DescribeApplicationPods返回参数结构体
+ * DescribeApplicationInfo返回参数结构体
  */
-export interface DescribeApplicationPodsResponse {
+export interface DescribeApplicationInfoResponse {
   /**
    * 返回结果
    */
-  Result: DescribeRunPodPage
+  Result: TemServiceVersionInfo
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -124,6 +124,49 @@ export interface StorageConf {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   StorageVolIp?: string
+}
+
+/**
+ * DescribeApplicationPods请求参数结构体
+ */
+export interface DescribeApplicationPodsRequest {
+  /**
+   * 环境id
+   */
+  EnvironmentId: string
+
+  /**
+   * 应用id
+   */
+  ApplicationId: string
+
+  /**
+   * 单页条数，默认值20
+   */
+  Limit?: number
+
+  /**
+   * 分页下标，默认值0
+   */
+  Offset?: number
+
+  /**
+      * 实例状态 
+- Running 
+- Pending 
+- Error
+      */
+  Status?: string
+
+  /**
+   * 实例名字
+   */
+  PodName?: string
+
+  /**
+   * 来源渠道
+   */
+  SourceChannel?: number
 }
 
 /**
@@ -649,6 +692,40 @@ export interface CreateEnvironmentRequest {
 }
 
 /**
+ * node信息
+ */
+export interface NodeInfo {
+  /**
+   * node名字
+   */
+  Name: string
+
+  /**
+      * node可用区
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Zone: string
+
+  /**
+      * node子网ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SubnetId: string
+
+  /**
+      * 可用IP数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AvailableIpCount: string
+
+  /**
+      * cidr块
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Cidr: string
+}
+
+/**
  * 分批发布详情
  */
 export interface TemDeployApplicationDetailInfo {
@@ -773,6 +850,21 @@ export interface IngressTls {
 }
 
 /**
+ * DescribeApplicationPods返回参数结构体
+ */
+export interface DescribeApplicationPodsResponse {
+  /**
+   * 返回结果
+   */
+  Result: DescribeRunPodPage
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 服务分页
  */
 export interface ServicePage {
@@ -795,6 +887,423 @@ export interface ServicePage {
    * 页数
    */
   Pages: number
+}
+
+/**
+ * 版本信息
+ */
+export interface TemServiceVersionInfo {
+  /**
+   * 主键
+   */
+  VersionId: string
+
+  /**
+   * 服务id
+   */
+  ApplicationId: boolean
+
+  /**
+   * 部署方式
+   */
+  DeployMode: string
+
+  /**
+   * jdk版本
+   */
+  JdkVersion: string
+
+  /**
+   * 描述
+   */
+  Description: string
+
+  /**
+   * 部署版本
+   */
+  DeployVersion: string
+
+  /**
+   * 发布方式
+   */
+  PublishMode: string
+
+  /**
+   * 启动参数
+   */
+  JvmOpts: string
+
+  /**
+   * 初始实例
+   */
+  InitPodNum: number
+
+  /**
+   * cpu规格
+   */
+  CpuSpec: number
+
+  /**
+   * 内存规格
+   */
+  MemorySpec: number
+
+  /**
+   * 镜像路径
+   */
+  ImgRepo: string
+
+  /**
+   * 镜像名称
+   */
+  ImgName: string
+
+  /**
+   * 镜像版本
+   */
+  ImgVersion: string
+
+  /**
+   * 弹性配置
+   */
+  EsInfo: EsInfo
+
+  /**
+   * 环境配置
+   */
+  EnvConf: Array<Pair>
+
+  /**
+   * 存储配置
+   */
+  StorageConfs: Array<StorageConf>
+
+  /**
+   * 运行状态
+   */
+  Status: string
+
+  /**
+   * 私有网络
+   */
+  Vpc: string
+
+  /**
+   * 子网网络
+   */
+  SubnetId: string
+
+  /**
+   * 创建时间
+   */
+  CreateDate: string
+
+  /**
+   * 修改时间
+   */
+  ModifyDate: string
+
+  /**
+      * 挂载配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  StorageMountConfs: Array<StorageMountConf>
+
+  /**
+      * 版本名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VersionName: string
+
+  /**
+      * 日志输出配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LogOutputConf?: LogOutputConf
+
+  /**
+      * 服务名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ApplicationName?: string
+
+  /**
+      * 服务描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ApplicationDescription?: string
+
+  /**
+      * 环境名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EnvironmentName?: string
+
+  /**
+      * 环境ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EnvironmentId?: string
+
+  /**
+      * 公网地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PublicDomain?: string
+
+  /**
+      * 是否开通公网访问
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EnablePublicAccess?: boolean
+
+  /**
+      * 现有的实例
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CurrentInstances?: number
+
+  /**
+      * 期望的实例
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ExpectedInstances?: number
+
+  /**
+      * 编程语言
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CodingLanguage?: string
+
+  /**
+      * 程序包名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PkgName?: string
+
+  /**
+      * 是否启用弹性伸缩
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EsEnable?: number
+
+  /**
+      * 弹性策略
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EsStrategy?: number
+
+  /**
+      * 镜像tag
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ImageTag?: string
+
+  /**
+      * 是否启用log
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LogEnable?: number
+
+  /**
+      * 最小实例数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MinAliveInstances?: number
+
+  /**
+      * 安全组
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SecurityGroupIds?: Array<string>
+
+  /**
+      * 镜像命令
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ImageCommand?: string
+
+  /**
+      * 镜像命令参数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ImageArgs?: Array<string>
+
+  /**
+      * 是否使用默认注册中心配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UseRegistryDefaultConfig?: boolean
+
+  /**
+      * eks 访问设置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Service?: EksService
+
+  /**
+      * 挂载配置信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SettingConfs?: Array<MountedSettingConf>
+
+  /**
+      * log path数组信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LogConfs?: Array<string>
+
+  /**
+      * 启动后立即执行的脚本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PostStart?: string
+
+  /**
+      * 停止前执行的脚本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PreStop?: string
+
+  /**
+      * 存活探针配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Liveness?: HealthCheckConfig
+
+  /**
+      * 就绪探针配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Readiness?: HealthCheckConfig
+
+  /**
+      * 弹性策略
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  HorizontalAutoscaler?: Array<HorizontalAutoscaler>
+
+  /**
+      * 定时弹性策略
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CronHorizontalAutoscaler?: Array<CronHorizontalAutoscaler>
+
+  /**
+      * 应用实际可用区
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Zones?: Array<string>
+
+  /**
+      * 最新部署时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LastDeployDate?: string
+
+  /**
+      * 最新部署成功时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LastDeploySuccessDate?: string
+
+  /**
+      * 应用所在node信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NodeInfos?: Array<NodeInfo>
+
+  /**
+      * image类型 -0 为demo -1为正常image
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ImageType?: number
+
+  /**
+      * 是否启用调用链组件
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EnableTracing?: number
+
+  /**
+      * 是否开启调用链上报，只有 EnableTracing=1 时生效
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EnableTracingReport?: number
+
+  /**
+      * 镜像类型：0-个人镜像、1-企业镜像、2-公有镜像
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RepoType?: number
+
+  /**
+      * 分批发布子状态：batch_updating、batch_updating_waiting_confirm
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BatchDeployStatus?: string
+
+  /**
+      * APM 资源 ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ApmInstanceId?: string
+
+  /**
+      * 工作负载信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  WorkloadInfo?: WorkloadInfo
+
+  /**
+      * 是否启用应用加速
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SpeedUp?: boolean
+
+  /**
+      * 启动检测探针配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  StartupProbe?: HealthCheckConfig
+
+  /**
+      * 操作系统版本，可选参数：
+- ALPINE
+- CENTOS
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OsFlavour?: string
+
+  /**
+      * 镜像仓库server
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RepoServer?: string
+
+  /**
+      * 是否正在发布中
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UnderDeploying?: boolean
+
+  /**
+      * 是否开启prometheus业务指标监控
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EnablePrometheusConf?: EnablePrometheusConf
+
+  /**
+      * 是否为手动停止
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  StoppedManually?: boolean
+
+  /**
+      * tcr实例ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TcrInstanceId?: string
 }
 
 /**
@@ -2084,46 +2593,23 @@ export interface DescribeApplicationsRequest {
 }
 
 /**
- * DescribeApplicationPods请求参数结构体
+ * DescribeApplicationInfo请求参数结构体
  */
-export interface DescribeApplicationPodsRequest {
+export interface DescribeApplicationInfoRequest {
   /**
-   * 环境id
-   */
-  EnvironmentId: string
-
-  /**
-   * 应用id
+   * 服务版本ID
    */
   ApplicationId: string
-
-  /**
-   * 单页条数，默认值20
-   */
-  Limit?: number
-
-  /**
-   * 分页下标，默认值0
-   */
-  Offset?: number
-
-  /**
-      * 实例状态 
-- Running 
-- Pending 
-- Error
-      */
-  Status?: string
-
-  /**
-   * 实例名字
-   */
-  PodName?: string
 
   /**
    * 来源渠道
    */
   SourceChannel?: number
+
+  /**
+   * 环境ID
+   */
+  EnvironmentId?: string
 }
 
 /**
@@ -2380,6 +2866,23 @@ export interface DescribeIngressResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 工作负载详情
+ */
+export interface WorkloadInfo {
+  /**
+      * 资源 ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClusterId: string
+
+  /**
+      * 应用名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ApplicationName: string
 }
 
 /**

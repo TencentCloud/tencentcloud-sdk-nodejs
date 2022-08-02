@@ -862,11 +862,11 @@ export interface DescribeTKEEdgeClusterStatusResponse {
     /**
       * 集群当前状态
       */
-    Phase?: string;
+    Phase: string;
     /**
       * 集群过程数组
       */
-    Conditions?: Array<ClusterCondition>;
+    Conditions: Array<ClusterCondition>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -6188,11 +6188,11 @@ export interface CheckEdgeClusterCIDRResponse {
 2 vpc 和 podCIDR 冲突
 3 serviceCIDR  和 podCIDR 冲突
       */
-    ConflictCode?: number;
+    ConflictCode: number;
     /**
       * CIDR冲突描述信息。
       */
-    ConflictMsg?: string;
+    ConflictMsg: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -7574,6 +7574,16 @@ export interface EdgeClusterAdvancedSettings {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ExtraArgs?: EdgeClusterExtraArgs;
+    /**
+      * 运行时类型，支持"docker"和"containerd"，默认为docker
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Runtime?: string;
+    /**
+      * 集群kube-proxy转发模式，支持"iptables"和"ipvs"，默认为iptables
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProxyMode?: string;
 }
 /**
  * CreateClusterEndpointVip返回参数结构体
@@ -7838,6 +7848,11 @@ export interface DescribeTKEEdgeScriptResponse {
       * 下载命令
       */
     Command: string;
+    /**
+      * edgectl脚本版本，默认拉取最新版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ScriptVersion: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -8935,6 +8950,10 @@ export interface DescribeTKEEdgeScriptRequest {
       * json格式的节点配置
       */
     Config?: string;
+    /**
+      * 可以下载某个历史版本的edgectl脚本，默认下载最新版本，edgectl版本信息可以在脚本里查看
+      */
+    ScriptVersion?: string;
 }
 /**
  * AddVpcCniSubnets返回参数结构体

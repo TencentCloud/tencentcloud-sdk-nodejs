@@ -94,7 +94,7 @@ export declare class Client extends AbstractClient {
      */
     CreateDatabaseWhiteListRules(req: CreateDatabaseWhiteListRulesRequest, cb?: (error: string, rep: CreateDatabaseWhiteListRulesResponse) => void): Promise<CreateDatabaseWhiteListRulesResponse>;
     /**
-     * 创建防火墙实例和接入域名
+     * 创建防火墙实例和接入域名（Region参数必填）
      */
     CreateNatFwInstanceWithDomain(req: CreateNatFwInstanceWithDomainRequest, cb?: (error: string, rep: CreateNatFwInstanceWithDomainResponse) => void): Promise<CreateNatFwInstanceWithDomainResponse>;
     /**

@@ -128,6 +128,16 @@ it("tem.v20210701.StopApplication", async function () {
     }
 })
 
+it("tem.v20210701.DescribeApplicationInfo", async function () {
+    try {
+       const data = await client.DescribeApplicationInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tem.v20210701.DescribeApplicationPods", async function () {
     try {
        const data = await client.DescribeApplicationPods({})
