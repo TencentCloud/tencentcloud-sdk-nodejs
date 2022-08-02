@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { SyncProxyOrganizationResponse, PrepareFlowsResponse, GetDownloadFlowUrlResponse, DescribeResourceUrlsByFlowsResponse, ChannelCreateMultiFlowSignQRCodeResponse, DescribeTemplatesResponse, OperateChannelTemplateResponse, CreateSignUrlsRequest, ChannelCreateMultiFlowSignQRCodeRequest, DescribeFlowDetailInfoRequest, UploadFilesRequest, DescribeResourceUrlsByFlowsRequest, GetDownloadFlowUrlRequest, CreateConsoleLoginUrlRequest, CreateFlowsByTemplatesResponse, PrepareFlowsRequest, SyncProxyOrganizationOperatorsResponse, CreateSealByImageResponse, DescribeTemplatesRequest, SyncProxyOrganizationOperatorsRequest, CreateConsoleLoginUrlResponse, CreateFlowsByTemplatesRequest, SyncProxyOrganizationRequest, CreateSealByImageRequest, DescribeUsageResponse, CreateSignUrlsResponse, OperateChannelTemplateRequest, ChannelCancelMultiFlowSignQRCodeRequest, DescribeUsageRequest, ChannelCreateFlowByFilesRequest, ChannelCreateFlowByFilesResponse, UploadFilesResponse, ChannelCancelMultiFlowSignQRCodeResponse, DescribeFlowDetailInfoResponse } from "./essbasic_models";
+import { SyncProxyOrganizationResponse, PrepareFlowsResponse, GetDownloadFlowUrlResponse, DescribeResourceUrlsByFlowsResponse, ChannelCreateMultiFlowSignQRCodeResponse, DescribeTemplatesResponse, OperateChannelTemplateResponse, CreateSignUrlsRequest, ChannelCreateMultiFlowSignQRCodeRequest, DescribeFlowDetailInfoRequest, UploadFilesRequest, DescribeResourceUrlsByFlowsRequest, GetDownloadFlowUrlRequest, ChannelCreateBatchCancelFlowUrlResponse, CreateConsoleLoginUrlRequest, CreateFlowsByTemplatesResponse, PrepareFlowsRequest, SyncProxyOrganizationOperatorsResponse, CreateSealByImageResponse, DescribeTemplatesRequest, SyncProxyOrganizationOperatorsRequest, CreateConsoleLoginUrlResponse, CreateFlowsByTemplatesRequest, SyncProxyOrganizationRequest, CreateSealByImageRequest, DescribeUsageResponse, CreateSignUrlsResponse, OperateChannelTemplateRequest, ChannelCancelMultiFlowSignQRCodeRequest, DescribeUsageRequest, ChannelCreateBatchCancelFlowUrlRequest, ChannelCreateFlowByFilesRequest, ChannelCreateFlowByFilesResponse, UploadFilesResponse, ChannelCancelMultiFlowSignQRCodeResponse, DescribeFlowDetailInfoResponse } from "./essbasic_models";
 /**
  * essbasic client
  * @class
@@ -29,6 +29,10 @@ export declare class Client extends AbstractClient {
 对渠道子客进行模板库中模板授权,修改操作
      */
     OperateChannelTemplate(req: OperateChannelTemplateRequest, cb?: (error: string, rep: OperateChannelTemplateResponse) => void): Promise<OperateChannelTemplateResponse>;
+    /**
+     * 此接口（SyncProxyOrganizationOperators）用于同步渠道合作企业经办人列表
+     */
+    SyncProxyOrganizationOperators(req: SyncProxyOrganizationOperatorsRequest, cb?: (error: string, rep: SyncProxyOrganizationOperatorsResponse) => void): Promise<SyncProxyOrganizationOperatorsResponse>;
     /**
      * 此接口（ChannelCreateMultiFlowSignQRCode）用于创建一码多扫签署流程二维码。
 适用的模版仅限于B2C（1、无序签署，2、顺序签署时B静默签署，3、顺序签署时B非首位签署）、单C的模版，且模版中发起方没有填写控件。
@@ -62,9 +66,10 @@ export declare class Client extends AbstractClient {
      */
     CreateConsoleLoginUrl(req: CreateConsoleLoginUrlRequest, cb?: (error: string, rep: CreateConsoleLoginUrlResponse) => void): Promise<CreateConsoleLoginUrlResponse>;
     /**
-     * 此接口（SyncProxyOrganizationOperators）用于同步渠道合作企业经办人列表
+     * 指定需要批量撤回的签署流程Id，获取批量撤销链接
+客户指定需要撤回的签署流程Id，最多100个，超过100不处理；接口调用成功返回批量撤回合同的链接，通过链接跳转到电子签小程序完成批量撤回
      */
-    SyncProxyOrganizationOperators(req: SyncProxyOrganizationOperatorsRequest, cb?: (error: string, rep: SyncProxyOrganizationOperatorsResponse) => void): Promise<SyncProxyOrganizationOperatorsResponse>;
+    ChannelCreateBatchCancelFlowUrl(req: ChannelCreateBatchCancelFlowUrlRequest, cb?: (error: string, rep: ChannelCreateBatchCancelFlowUrlResponse) => void): Promise<ChannelCreateBatchCancelFlowUrlResponse>;
     /**
      * 此接口（DescribeUsage）用于获取渠道所有合作企业流量消耗情况。
  注: 此接口每日限频2次，若要扩大限制次数,请提前与客服经理或邮件至e-contract@tencent.com进行联系。

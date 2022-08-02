@@ -230,6 +230,10 @@ export interface ChannelCreateMultiFlowSignQRCodeResponse {
       */
     QrCode: SignQrCode;
     /**
+      * 签署链接对象
+      */
+    SignUrls: SignUrl;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
@@ -433,6 +437,10 @@ export interface ChannelCreateMultiFlowSignQRCodeRequest {
 回调时机:用户通过签署二维码发起合同时，企业额度不足导致失败
       */
     CallbackUrl?: string;
+    /**
+      * 限制二维码用户条件
+      */
+    ApproverRestrictions?: ApproverRestriction;
     /**
       * 用户信息
       */
@@ -663,6 +671,27 @@ export interface GetDownloadFlowUrlRequest {
     Operator?: UserInfo;
 }
 /**
+ * ChannelCreateBatchCancelFlowUrl返回参数结构体
+ */
+export interface ChannelCreateBatchCancelFlowUrlResponse {
+    /**
+      * 批量撤回url
+      */
+    BatchCancelFlowUrl: string;
+    /**
+      * 签署流程批量撤回失败原因
+      */
+    FailMessages: Array<string>;
+    /**
+      * 签署撤回url过期时间-年月日-时分秒
+      */
+    UrlExpireOn: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 此结构体(FlowDetailInfo)描述的是合同(流程)的详细信息
  */
 export interface FlowDetailInfo {
@@ -823,6 +852,23 @@ export interface CreateSealByImageResponse {
     RequestId?: string;
 }
 /**
+ * 一码多扫签署二维码签署信息
+ */
+export interface SignUrl {
+    /**
+      * 小程序签署链接
+      */
+    AppSignUrl: string;
+    /**
+      * 签署链接有效时间
+      */
+    EffectiveTime: string;
+    /**
+      * 移动端签署链接
+      */
+    HttpSignUrl: string;
+}
+/**
  * 流程对应资源链接信息
  */
 export interface FlowResourceUrlInfo {
@@ -979,7 +1025,7 @@ export interface CreateSealByImageRequest {
  */
 export interface UserInfo {
     /**
-      * 用户在渠道的编号
+      * 用户在渠道的编号，最大64位字符串
       */
     OpenId?: string;
     /**
@@ -1173,6 +1219,44 @@ export interface DescribeUsageRequest {
     Operator?: UserInfo;
 }
 /**
+ * ChannelCreateBatchCancelFlowUrl请求参数结构体
+ */
+export interface ChannelCreateBatchCancelFlowUrlRequest {
+    /**
+      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
+      */
+    Agent: Agent;
+    /**
+      * 签署流程Id数组
+      */
+    FlowIds: Array<string>;
+    /**
+      * 操作人信息
+      */
+    Operator?: UserInfo;
+}
+/**
+ * 指定签署人限制项
+ */
+export interface ApproverRestriction {
+    /**
+      * 指定签署人名字
+      */
+    Name?: string;
+    /**
+      * 指定签署人手机号
+      */
+    Mobile?: string;
+    /**
+      * 指定签署人证件类型
+      */
+    IdCardType?: string;
+    /**
+      * 指定签署人证件号码
+      */
+    IdCardNumber?: string;
+}
+/**
  * ChannelCreateFlowByFiles请求参数结构体
  */
 export interface ChannelCreateFlowByFilesRequest {
@@ -1273,7 +1357,7 @@ export interface Agent {
       */
     AppId: string;
     /**
-      * 渠道/平台合作企业的企业ID
+      * 渠道/平台合作企业的企业ID，最大64位字符串
       */
     ProxyOrganizationOpenId?: string;
     /**
@@ -1285,7 +1369,7 @@ export interface Agent {
       */
     ProxyAppId?: string;
     /**
-      * 腾讯电子签颁发给渠道侧合作企业的企业ID
+      * 内部参数，腾讯电子签颁发给渠道侧合作企业的企业ID，不需要传
       */
     ProxyOrganizationId?: string;
 }

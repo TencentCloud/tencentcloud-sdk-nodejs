@@ -40,12 +40,14 @@ import {
   UploadFile,
   Component,
   GetDownloadFlowUrlRequest,
+  ChannelCreateBatchCancelFlowUrlResponse,
   FlowDetailInfo,
   CreateConsoleLoginUrlRequest,
   CreateFlowsByTemplatesResponse,
   PrepareFlowsRequest,
   SyncProxyOrganizationOperatorsResponse,
   CreateSealByImageResponse,
+  SignUrl,
   FlowResourceUrlInfo,
   DescribeTemplatesRequest,
   SyncProxyOrganizationOperatorsRequest,
@@ -62,6 +64,8 @@ import {
   ChannelCancelMultiFlowSignQRCodeRequest,
   SyncFailReason,
   DescribeUsageRequest,
+  ChannelCreateBatchCancelFlowUrlRequest,
+  ApproverRestriction,
   ChannelCreateFlowByFilesRequest,
   ChannelCreateFlowByFilesResponse,
   UploadFilesResponse,
@@ -128,6 +132,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: OperateChannelTemplateResponse) => void
   ): Promise<OperateChannelTemplateResponse> {
     return this.request("OperateChannelTemplate", req, cb)
+  }
+
+  /**
+   * 此接口（SyncProxyOrganizationOperators）用于同步渠道合作企业经办人列表
+   */
+  async SyncProxyOrganizationOperators(
+    req: SyncProxyOrganizationOperatorsRequest,
+    cb?: (error: string, rep: SyncProxyOrganizationOperatorsResponse) => void
+  ): Promise<SyncProxyOrganizationOperatorsResponse> {
+    return this.request("SyncProxyOrganizationOperators", req, cb)
   }
 
   /**
@@ -205,13 +219,14 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 此接口（SyncProxyOrganizationOperators）用于同步渠道合作企业经办人列表
-   */
-  async SyncProxyOrganizationOperators(
-    req: SyncProxyOrganizationOperatorsRequest,
-    cb?: (error: string, rep: SyncProxyOrganizationOperatorsResponse) => void
-  ): Promise<SyncProxyOrganizationOperatorsResponse> {
-    return this.request("SyncProxyOrganizationOperators", req, cb)
+     * 指定需要批量撤回的签署流程Id，获取批量撤销链接
+客户指定需要撤回的签署流程Id，最多100个，超过100不处理；接口调用成功返回批量撤回合同的链接，通过链接跳转到电子签小程序完成批量撤回
+     */
+  async ChannelCreateBatchCancelFlowUrl(
+    req: ChannelCreateBatchCancelFlowUrlRequest,
+    cb?: (error: string, rep: ChannelCreateBatchCancelFlowUrlResponse) => void
+  ): Promise<ChannelCreateBatchCancelFlowUrlResponse> {
+    return this.request("ChannelCreateBatchCancelFlowUrl", req, cb)
   }
 
   /**

@@ -58,6 +58,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("OperateChannelTemplate", req, cb);
     }
     /**
+     * 此接口（SyncProxyOrganizationOperators）用于同步渠道合作企业经办人列表
+     */
+    async SyncProxyOrganizationOperators(req, cb) {
+        return this.request("SyncProxyOrganizationOperators", req, cb);
+    }
+    /**
      * 此接口（ChannelCreateMultiFlowSignQRCode）用于创建一码多扫签署流程二维码。
 适用的模版仅限于B2C（1、无序签署，2、顺序签署时B静默签署，3、顺序签署时B非首位签署）、单C的模版，且模版中发起方没有填写控件。
      */
@@ -104,10 +110,11 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateConsoleLoginUrl", req, cb);
     }
     /**
-     * 此接口（SyncProxyOrganizationOperators）用于同步渠道合作企业经办人列表
+     * 指定需要批量撤回的签署流程Id，获取批量撤销链接
+客户指定需要撤回的签署流程Id，最多100个，超过100不处理；接口调用成功返回批量撤回合同的链接，通过链接跳转到电子签小程序完成批量撤回
      */
-    async SyncProxyOrganizationOperators(req, cb) {
-        return this.request("SyncProxyOrganizationOperators", req, cb);
+    async ChannelCreateBatchCancelFlowUrl(req, cb) {
+        return this.request("ChannelCreateBatchCancelFlowUrl", req, cb);
     }
     /**
      * 此接口（DescribeUsage）用于获取渠道所有合作企业流量消耗情况。

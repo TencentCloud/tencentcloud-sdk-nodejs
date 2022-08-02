@@ -58,6 +58,16 @@ it("essbasic.v20210526.OperateChannelTemplate", async function () {
     }
 })
 
+it("essbasic.v20210526.SyncProxyOrganizationOperators", async function () {
+    try {
+       const data = await client.SyncProxyOrganizationOperators({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("essbasic.v20210526.ChannelCreateMultiFlowSignQRCode", async function () {
     try {
        const data = await client.ChannelCreateMultiFlowSignQRCode({})
@@ -128,9 +138,9 @@ it("essbasic.v20210526.CreateConsoleLoginUrl", async function () {
     }
 })
 
-it("essbasic.v20210526.SyncProxyOrganizationOperators", async function () {
+it("essbasic.v20210526.ChannelCreateBatchCancelFlowUrl", async function () {
     try {
-       const data = await client.SyncProxyOrganizationOperators({})
+       const data = await client.ChannelCreateBatchCancelFlowUrl({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
