@@ -660,6 +660,11 @@ export interface CreateMultiFlowSignQRCodeResponse {
   QrCode: SignQrCode
 
   /**
+   * 签署链接对象
+   */
+  SignUrls: SignUrl
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -948,6 +953,26 @@ export interface UserInfo {
 }
 
 /**
+ * 一码多扫签署二维码签署信息
+ */
+export interface SignUrl {
+  /**
+   * 小程序签署链接
+   */
+  AppSignUrl: string
+
+  /**
+   * 签署链接有效时间
+   */
+  EffectiveTime: string
+
+  /**
+   * 移动端签署链接
+   */
+  HttpSignUrl: string
+}
+
+/**
  * DescribeFileUrls请求参数结构体
  */
 export interface DescribeFileUrlsRequest {
@@ -1125,18 +1150,43 @@ export interface DescribeFlowTemplatesResponse {
 }
 
 /**
- * 查询过滤条件
+ * CreateBatchCancelFlowUrl返回参数结构体
  */
-export interface Filter {
+export interface CreateBatchCancelFlowUrlResponse {
   /**
-   * 查询过滤条件的Key
+   * 批量撤回签署流程链接
    */
-  Key: string
+  BatchCancelFlowUrl: string
 
   /**
-   * 查询过滤条件的Value列表
+   * 签署流程撤回失败信息
    */
-  Values: Array<string>
+  FailMessages: Array<string>
+
+  /**
+   * 签署连接过期时间字符串：年月日-时分秒
+   */
+  UrlExpireOn: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * StartFlow返回参数结构体
+ */
+export interface StartFlowResponse {
+  /**
+   * 返回描述，START-发起成功， REVIEW-提交审核成功，EXECUTING-已提交发起任务
+   */
+  Status: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1162,6 +1212,21 @@ export interface FileInfo {
    * 文件上传时间，10位时间戳（精确到秒）
    */
   CreatedOn?: number
+}
+
+/**
+ * CreateBatchCancelFlowUrl请求参数结构体
+ */
+export interface CreateBatchCancelFlowUrlRequest {
+  /**
+   * 调用方用户信息，userId 必填
+   */
+  Operator: UserInfo
+
+  /**
+   * 需要执行撤回的签署流程id数组，最多100个
+   */
+  FlowIds: Array<string>
 }
 
 /**
@@ -1210,6 +1275,11 @@ export interface CreateMultiFlowSignQRCodeRequest {
    * 二维码有效天数 默认7天 最高设置不超过90天
    */
   QrEffectiveDay?: number
+
+  /**
+   * 限制二维码用户条件
+   */
+  ApproverRestrictions?: ApproverRestriction
 }
 
 /**
@@ -1228,18 +1298,18 @@ export interface CreateConvertTaskApiResponse {
 }
 
 /**
- * StartFlow返回参数结构体
+ * 查询过滤条件
  */
-export interface StartFlowResponse {
+export interface Filter {
   /**
-   * 返回描述，START-发起成功， REVIEW-提交审核成功，EXECUTING-已提交发起任务
+   * 查询过滤条件的Key
    */
-  Status: string
+  Key: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 查询过滤条件的Value列表
    */
-  RequestId?: string
+  Values: Array<string>
 }
 
 /**
@@ -1366,6 +1436,31 @@ false：有序签
    * 应用号信息
    */
   Agent?: Agent
+}
+
+/**
+ * 指定签署人限制项
+ */
+export interface ApproverRestriction {
+  /**
+   * 指定签署人名字
+   */
+  Name?: string
+
+  /**
+   * 指定签署人手机号
+   */
+  Mobile?: string
+
+  /**
+   * 指定签署人证件类型
+   */
+  IdCardType?: string
+
+  /**
+   * 指定签署人证件号码
+   */
+  IdCardNumber?: string
 }
 
 /**

@@ -388,6 +388,11 @@ export interface DescribeMetricRecordsResponse {
       */
     Records: Array<ApmMetricRecord>;
     /**
+      * 查询指标结果集条数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TotalCount: number;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
@@ -491,6 +496,14 @@ export interface DescribeMetricRecordsRequest {
       * 业务名称（默认值：taw）
       */
     BusinessName?: string;
+    /**
+      * 页码
+      */
+    PageIndex?: number;
+    /**
+      * 页长
+      */
+    PageSize?: number;
 }
 /**
  * DescribeGeneralMetricData请求参数结构体

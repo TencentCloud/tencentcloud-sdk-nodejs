@@ -19,8 +19,11 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   CreateResourceRequest,
+  DescribeConfigDataResponse,
   NamespacePage,
   DescribeApplicationInfoResponse,
+  ModifyIngressResponse,
+  RestartApplicationPodRequest,
   ResumeDeployApplicationResponse,
   StorageConf,
   DescribeApplicationPodsRequest,
@@ -28,6 +31,7 @@ import {
   LogOutputConf,
   DeleteIngressResponse,
   DeleteApplicationResponse,
+  ModifyApplicationAutoscalerResponse,
   RollingUpdateApplicationByVersionRequest,
   CreateCosTokenResponse,
   RevertDeployApplicationRequest,
@@ -49,15 +53,20 @@ import {
   DescribeEnvironmentStatusResponse,
   IngressTls,
   DescribeApplicationPodsResponse,
+  DescribeConfigDataListRequest,
   ServicePage,
   TemServiceVersionInfo,
   CreateCosTokenRequest,
+  ModifyApplicationAutoscalerRequest,
+  DeleteIngressRequest,
   ModifyIngressRequest,
   EnablePrometheusConf,
   DescribeIngressesRequest,
   StorageMountConf,
   RestartApplicationResponse,
   DescribeIngressesResponse,
+  ModifyConfigDataRequest,
+  CreateConfigDataResponse,
   DescribeApplicationsStatusRequest,
   RunVersionPod,
   CreateResourceResponse,
@@ -70,27 +79,40 @@ import {
   RestartApplicationPodResponse,
   TemEnvironmentStoppingStatus,
   DeleteApplicationRequest,
+  CreateApplicationAutoscalerResponse,
+  DeleteApplicationAutoscalerRequest,
+  DescribeApplicationAutoscalerListRequest,
   DescribeApplicationsStatusResponse,
   DescribeDeployApplicationDetailRequest,
-  DeleteIngressRequest,
+  ModifyConfigDataResponse,
   DescribeRelatedIngressesRequest,
   CosToken,
   GenerateApplicationPackageDownloadUrlRequest,
   DescribeEnvironmentsResponse,
+  DeleteApplicationAutoscalerResponse,
   DescribeRelatedIngressesResponse,
   TemNamespaceInfo,
   TemEnvironmentStartingStatus,
   TemService,
   IngressRule,
-  RestartApplicationPodRequest,
+  CronHorizontalAutoscaler,
   DescribeDeployApplicationDetailResponse,
   IngressRuleValue,
+  CreateApplicationAutoscalerRequest,
+  ConfigData,
   ResumeDeployApplicationRequest,
+  DescribeConfigDataRequest,
   MountedSettingConf,
+  DescribeConfigDataListResponse,
   HealthCheckConfig,
   DeployServiceBatchDetail,
+  Autoscaler,
+  CreateConfigDataRequest,
+  DescribeConfigDataListPage,
   DeployApplicationRequest,
-  ModifyIngressResponse,
+  DescribeApplicationAutoscalerListResponse,
+  DestroyConfigDataRequest,
+  DestroyConfigDataResponse,
   DescribeApplicationsRequest,
   DescribeApplicationInfoRequest,
   CreateApplicationRequest,
@@ -106,13 +128,12 @@ import {
   IngressRulePath,
   ServiceVersionBrief,
   CreateApplicationResponse,
-  CronHorizontalAutoscaler,
+  HorizontalAutoscaler,
   PortMapping,
   ModifyEnvironmentResponse,
   ModifyApplicationReplicasRequest,
-  EksService,
   CronHorizontalAutoscalerSchedule,
-  HorizontalAutoscaler,
+  EksService,
   Pair,
 } from "./tem_models"
 
@@ -123,6 +144,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("tem.tencentcloudapi.com", "2021-07-01", clientConfig)
+  }
+
+  /**
+   * 编辑配置
+   */
+  async ModifyConfigData(
+    req: ModifyConfigDataRequest,
+    cb?: (error: string, rep: ModifyConfigDataResponse) => void
+  ): Promise<ModifyConfigDataResponse> {
+    return this.request("ModifyConfigData", req, cb)
   }
 
   /**
@@ -153,6 +184,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyApplicationReplicasResponse) => void
   ): Promise<ModifyApplicationReplicasResponse> {
     return this.request("ModifyApplicationReplicas", req, cb)
+  }
+
+  /**
+   * 创建弹性伸缩策略组合
+   */
+  async CreateApplicationAutoscaler(
+    req: CreateApplicationAutoscalerRequest,
+    cb?: (error: string, rep: CreateApplicationAutoscalerResponse) => void
+  ): Promise<CreateApplicationAutoscalerResponse> {
+    return this.request("CreateApplicationAutoscaler", req, cb)
+  }
+
+  /**
+   * 重启应用实例
+   */
+  async RestartApplicationPod(
+    req: RestartApplicationPodRequest,
+    cb?: (error: string, rep: RestartApplicationPodResponse) => void
+  ): Promise<RestartApplicationPodResponse> {
+    return this.request("RestartApplicationPod", req, cb)
   }
 
   /**
@@ -196,6 +247,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeployApplicationResponse) => void
   ): Promise<DeployApplicationResponse> {
     return this.request("DeployApplication", req, cb)
+  }
+
+  /**
+   * 修改弹性伸缩策略组合
+   */
+  async ModifyApplicationAutoscaler(
+    req: ModifyApplicationAutoscalerRequest,
+    cb?: (error: string, rep: ModifyApplicationAutoscalerResponse) => void
+  ): Promise<ModifyApplicationAutoscalerResponse> {
+    return this.request("ModifyApplicationAutoscaler", req, cb)
   }
 
   /**
@@ -249,6 +310,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建配置
+   */
+  async CreateConfigData(
+    req: CreateConfigDataRequest,
+    cb?: (error: string, rep: CreateConfigDataResponse) => void
+  ): Promise<CreateConfigDataResponse> {
+    return this.request("CreateConfigData", req, cb)
+  }
+
+  /**
    * 获取应用实例列表
    */
   async DescribeApplicationPods(
@@ -259,13 +330,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 服务重启
+   * 删除应用弹性策略组合
    */
-  async RestartApplication(
-    req: RestartApplicationRequest,
-    cb?: (error: string, rep: RestartApplicationResponse) => void
-  ): Promise<RestartApplicationResponse> {
-    return this.request("RestartApplication", req, cb)
+  async DeleteApplicationAutoscaler(
+    req: DeleteApplicationAutoscalerRequest,
+    cb?: (error: string, rep: DeleteApplicationAutoscalerResponse) => void
+  ): Promise<DeleteApplicationAutoscalerResponse> {
+    return this.request("DeleteApplicationAutoscaler", req, cb)
   }
 
   /**
@@ -276,6 +347,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyApplicationInfoResponse) => void
   ): Promise<ModifyApplicationInfoResponse> {
     return this.request("ModifyApplicationInfo", req, cb)
+  }
+
+  /**
+   * 销毁配置
+   */
+  async DestroyConfigData(
+    req: DestroyConfigDataRequest,
+    cb?: (error: string, rep: DestroyConfigDataResponse) => void
+  ): Promise<DestroyConfigDataResponse> {
+    return this.request("DestroyConfigData", req, cb)
   }
 
   /**
@@ -349,13 +430,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 重启应用实例
+   * 服务重启
    */
-  async RestartApplicationPod(
-    req: RestartApplicationPodRequest,
-    cb?: (error: string, rep: RestartApplicationPodResponse) => void
-  ): Promise<RestartApplicationPodResponse> {
-    return this.request("RestartApplicationPod", req, cb)
+  async RestartApplication(
+    req: RestartApplicationRequest,
+    cb?: (error: string, rep: RestartApplicationResponse) => void
+  ): Promise<RestartApplicationResponse> {
+    return this.request("RestartApplication", req, cb)
   }
 
   /**
@@ -399,6 +480,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询配置详情
+   */
+  async DescribeConfigData(
+    req: DescribeConfigDataRequest,
+    cb?: (error: string, rep: DescribeConfigDataResponse) => void
+  ): Promise<DescribeConfigDataResponse> {
+    return this.request("DescribeConfigData", req, cb)
+  }
+
+  /**
    * 绑定云资源
    */
   async CreateResource(
@@ -409,6 +500,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取应用弹性策略组合
+   */
+  async DescribeApplicationAutoscalerList(
+    req: DescribeApplicationAutoscalerListRequest,
+    cb?: (error: string, rep: DescribeApplicationAutoscalerListResponse) => void
+  ): Promise<DescribeApplicationAutoscalerListResponse> {
+    return this.request("DescribeApplicationAutoscalerList", req, cb)
+  }
+
+  /**
    * 销毁命名空间
    */
   async DestroyEnvironment(
@@ -416,5 +517,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DestroyEnvironmentResponse) => void
   ): Promise<DestroyEnvironmentResponse> {
     return this.request("DestroyEnvironment", req, cb)
+  }
+
+  /**
+   * 查询配置列表
+   */
+  async DescribeConfigDataList(
+    req: DescribeConfigDataListRequest,
+    cb?: (error: string, rep: DescribeConfigDataListResponse) => void
+  ): Promise<DescribeConfigDataListResponse> {
+    return this.request("DescribeConfigDataList", req, cb)
   }
 }

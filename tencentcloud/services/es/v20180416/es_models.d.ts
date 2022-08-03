@@ -2265,6 +2265,10 @@ export interface DescribeLogstashInstancesRequest {
       * 排序方式<li>0：升序</li><li>1：降序</li>若传递了orderByKey未传递orderByType, 则默认升序
       */
     OrderByType?: number;
+    /**
+      * VpcId 筛选项
+      */
+    VpcIds?: Array<string>;
 }
 /**
  * 实例专用主节点相关信息

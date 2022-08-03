@@ -28,6 +28,19 @@ export interface CreateResourceRequest {
     ResourceConfig?: string;
 }
 /**
+ * DescribeConfigData返回参数结构体
+ */
+export interface DescribeConfigDataResponse {
+    /**
+      * 配置
+      */
+    Result: ConfigData;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 命名空间分页
  */
 export interface NamespacePage {
@@ -60,6 +73,53 @@ export interface DescribeApplicationInfoResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * ModifyIngress返回参数结构体
+ */
+export interface ModifyIngressResponse {
+    /**
+      * 创建成功
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result: boolean;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * RestartApplicationPod请求参数结构体
+ */
+export interface RestartApplicationPodRequest {
+    /**
+      * 环境id
+      */
+    EnvironmentId: string;
+    /**
+      * 应用id
+      */
+    ApplicationId: string;
+    /**
+      * 名字
+      */
+    PodName: string;
+    /**
+      * 单页条数
+      */
+    Limit?: number;
+    /**
+      * 分页下标
+      */
+    Offset?: number;
+    /**
+      * pod状态
+      */
+    Status?: string;
+    /**
+      * 来源渠道
+      */
+    SourceChannel?: number;
 }
 /**
  * ResumeDeployApplication返回参数结构体
@@ -207,6 +267,20 @@ export interface DeleteIngressResponse {
 export interface DeleteApplicationResponse {
     /**
       * 返回结果
+      */
+    Result: boolean;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ModifyApplicationAutoscaler返回参数结构体
+ */
+export interface ModifyApplicationAutoscalerResponse {
+    /**
+      * 是否成功
+注意：此字段可能返回 null，表示取不到有效值。
       */
     Result: boolean;
     /**
@@ -717,6 +791,27 @@ export interface DescribeApplicationPodsResponse {
     RequestId?: string;
 }
 /**
+ * DescribeConfigDataList请求参数结构体
+ */
+export interface DescribeConfigDataListRequest {
+    /**
+      * 环境 ID
+      */
+    EnvironmentId: string;
+    /**
+      * 来源渠道
+      */
+    SourceChannel?: number;
+    /**
+      * 查询游标
+      */
+    ContinueToken?: string;
+    /**
+      * 分页 limit
+      */
+    Limit?: number;
+}
+/**
  * 服务分页
  */
 export interface ServicePage {
@@ -1108,6 +1203,52 @@ export interface CreateCosTokenRequest {
     TimeVersion?: string;
 }
 /**
+ * ModifyApplicationAutoscaler请求参数结构体
+ */
+export interface ModifyApplicationAutoscalerRequest {
+    /**
+      * 服务id
+      */
+    ApplicationId: string;
+    /**
+      * 环境ID
+      */
+    EnvironmentId: string;
+    /**
+      * 来源渠道
+      */
+    SourceChannel?: number;
+    /**
+      * 弹性伸缩策略ID
+      */
+    AutoscalerId?: string;
+    /**
+      * 弹性伸缩策略
+      */
+    Autoscaler?: Autoscaler;
+}
+/**
+ * DeleteIngress请求参数结构体
+ */
+export interface DeleteIngressRequest {
+    /**
+      * 环境ID
+      */
+    EnvironmentId: string;
+    /**
+      * 环境 namespace
+      */
+    ClusterNamespace: string;
+    /**
+      * ingress 规则名
+      */
+    IngressName: string;
+    /**
+      * 来源渠道
+      */
+    SourceChannel?: number;
+}
+/**
  * ModifyIngress请求参数结构体
  */
 export interface ModifyIngressRequest {
@@ -1189,6 +1330,40 @@ export interface DescribeIngressesResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Result: Array<IngressInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ModifyConfigData请求参数结构体
+ */
+export interface ModifyConfigDataRequest {
+    /**
+      * 环境 ID
+      */
+    EnvironmentId: string;
+    /**
+      * 配置名
+      */
+    Name: string;
+    /**
+      * 来源渠道
+      */
+    SourceChannel?: number;
+    /**
+      * 配置信息
+      */
+    Data?: Array<Pair>;
+}
+/**
+ * CreateConfigData返回参数结构体
+ */
+export interface CreateConfigDataResponse {
+    /**
+      * 创建是否成功
+      */
+    Result: boolean;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1413,6 +1588,58 @@ export interface DeleteApplicationRequest {
     DeleteApplicationIfNoRunningVersion?: boolean;
 }
 /**
+ * CreateApplicationAutoscaler返回参数结构体
+ */
+export interface CreateApplicationAutoscalerResponse {
+    /**
+      * 弹性伸缩策略组合ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DeleteApplicationAutoscaler请求参数结构体
+ */
+export interface DeleteApplicationAutoscalerRequest {
+    /**
+      * 服务id
+      */
+    ApplicationId: string;
+    /**
+      * 环境ID
+      */
+    EnvironmentId: string;
+    /**
+      * 来源渠道
+      */
+    SourceChannel?: number;
+    /**
+      * 弹性伸缩策略ID
+      */
+    AutoscalerId?: string;
+}
+/**
+ * DescribeApplicationAutoscalerList请求参数结构体
+ */
+export interface DescribeApplicationAutoscalerListRequest {
+    /**
+      * 服务id
+      */
+    ApplicationId: string;
+    /**
+      * 环境ID
+      */
+    EnvironmentId: string;
+    /**
+      * 来源渠道
+      */
+    SourceChannel?: number;
+}
+/**
  * DescribeApplicationsStatus返回参数结构体
  */
 export interface DescribeApplicationsStatusResponse {
@@ -1443,25 +1670,17 @@ export interface DescribeDeployApplicationDetailRequest {
     VersionId?: string;
 }
 /**
- * DeleteIngress请求参数结构体
+ * ModifyConfigData返回参数结构体
  */
-export interface DeleteIngressRequest {
+export interface ModifyConfigDataResponse {
     /**
-      * 环境ID
+      * 编辑是否成功
       */
-    EnvironmentId: string;
+    Result: boolean;
     /**
-      * 环境 namespace
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    ClusterNamespace: string;
-    /**
-      * ingress 规则名
-      */
-    IngressName: string;
-    /**
-      * 来源渠道
-      */
-    SourceChannel?: number;
+    RequestId?: string;
 }
 /**
  * DescribeRelatedIngresses请求参数结构体
@@ -1554,6 +1773,20 @@ export interface DescribeEnvironmentsResponse {
       * 返回结果
       */
     Result: NamespacePage;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DeleteApplicationAutoscaler返回参数结构体
+ */
+export interface DeleteApplicationAutoscalerResponse {
+    /**
+      * 是否成功
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result: boolean;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1766,37 +1999,34 @@ export interface IngressRule {
     Protocol?: string;
 }
 /**
- * RestartApplicationPod请求参数结构体
+ * 定时伸缩策略
  */
-export interface RestartApplicationPodRequest {
+export interface CronHorizontalAutoscaler {
     /**
-      * 环境id
+      * 定时伸缩策略名称
       */
-    EnvironmentId: string;
+    Name?: string;
     /**
-      * 应用id
+      * 策略周期
+* * *，三个范围，第一个是天，第二个是月，第三个是周，中间用空格隔开
+例子：
+* * * （每天）
+* * 0-3 （每周日到周三）
+1,11,21 * *（每个月1号，11号，21号）
       */
-    ApplicationId: string;
+    Period?: string;
     /**
-      * 名字
+      * 定时伸缩策略明细
       */
-    PodName: string;
+    Schedules?: Array<CronHorizontalAutoscalerSchedule>;
     /**
-      * 单页条数
+      * 是否启用
       */
-    Limit?: number;
+    Enabled?: boolean;
     /**
-      * 分页下标
+      * 策略优先级，值越大优先级越高，0为最小值
       */
-    Offset?: number;
-    /**
-      * pod状态
-      */
-    Status?: string;
-    /**
-      * 来源渠道
-      */
-    SourceChannel?: number;
+    Priority?: number;
 }
 /**
  * DescribeDeployApplicationDetail返回参数结构体
@@ -1821,6 +2051,48 @@ export interface IngressRuleValue {
     Paths: Array<IngressRulePath>;
 }
 /**
+ * CreateApplicationAutoscaler请求参数结构体
+ */
+export interface CreateApplicationAutoscalerRequest {
+    /**
+      * 服务id
+      */
+    ApplicationId: string;
+    /**
+      * 环境ID
+      */
+    EnvironmentId: string;
+    /**
+      * 来源渠道
+      */
+    SourceChannel?: number;
+    /**
+      * 弹性伸缩策略
+      */
+    Autoscaler?: Autoscaler;
+}
+/**
+ * 配置
+ */
+export interface ConfigData {
+    /**
+      * 配置名称
+      */
+    Name: string;
+    /**
+      * 创建时间
+      */
+    CreateTime: string;
+    /**
+      * 关联的服务列表
+      */
+    RelatedApplications: Array<TemService>;
+    /**
+      * 配置条目
+      */
+    Data: Array<Pair>;
+}
+/**
  * ResumeDeployApplication请求参数结构体
  */
 export interface ResumeDeployApplicationRequest {
@@ -1832,6 +2104,23 @@ export interface ResumeDeployApplicationRequest {
       * 环境id
       */
     EnvironmentId?: string;
+}
+/**
+ * DescribeConfigData请求参数结构体
+ */
+export interface DescribeConfigDataRequest {
+    /**
+      * 环境 ID
+      */
+    EnvironmentId: string;
+    /**
+      * 配置名
+      */
+    Name: string;
+    /**
+      * 来源渠道
+      */
+    SourceChannel?: number;
 }
 /**
  * 挂载配置信息
@@ -1853,6 +2142,19 @@ export interface MountedSettingConf {
       * 加密配置名称
       */
     SecretDataName?: string;
+}
+/**
+ * DescribeConfigDataList返回参数结构体
+ */
+export interface DescribeConfigDataListResponse {
+    /**
+      * 配置列表
+      */
+    Result: DescribeConfigDataListPage;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 健康检查配置
@@ -1935,6 +2237,104 @@ export interface DeployServiceBatchDetail {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     NextBatchStartTime?: number;
+}
+/**
+ * 弹性伸缩策略组合
+ */
+export interface Autoscaler {
+    /**
+      * 弹性伸缩最小实例数
+      */
+    MinReplicas: number;
+    /**
+      * 弹性伸缩最大实例数
+      */
+    MaxReplicas: number;
+    /**
+      * 指标弹性伸缩策略
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    HorizontalAutoscaler?: Array<HorizontalAutoscaler>;
+    /**
+      * 定时弹性伸缩策略
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CronHorizontalAutoscaler?: Array<CronHorizontalAutoscaler>;
+    /**
+      * 弹性伸缩ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AutoscalerId?: string;
+    /**
+      * 弹性伸缩名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AutoscalerName?: string;
+    /**
+      * 弹性伸缩描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Description?: string;
+    /**
+      * 创建日期
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreateDate?: string;
+    /**
+      * 修改时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ModifyDate?: string;
+    /**
+      * 启用时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EnableDate?: string;
+    /**
+      * 是否启用
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Enabled?: boolean;
+}
+/**
+ * CreateConfigData请求参数结构体
+ */
+export interface CreateConfigDataRequest {
+    /**
+      * 环境 ID
+      */
+    EnvironmentId: string;
+    /**
+      * 配置名
+      */
+    Name: string;
+    /**
+      * 来源渠道
+      */
+    SourceChannel?: number;
+    /**
+      * 配置信息
+      */
+    Data?: Array<Pair>;
+}
+/**
+ * 配置信息的分页列表
+ */
+export interface DescribeConfigDataListPage {
+    /**
+      * 记录
+      */
+    Records: Array<ConfigData>;
+    /**
+      * 分页游标，用以查询下一页
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ContinueToken: string;
+    /**
+      * 剩余数目
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RemainingCount: number;
 }
 /**
  * DeployApplication请求参数结构体
@@ -2121,12 +2521,42 @@ export interface DeployApplicationRequest {
     EnableTracing?: number;
 }
 /**
- * ModifyIngress返回参数结构体
+ * DescribeApplicationAutoscalerList返回参数结构体
  */
-export interface ModifyIngressResponse {
+export interface DescribeApplicationAutoscalerListResponse {
     /**
-      * 创建成功
+      * 弹性伸缩策略组合
 注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result: Array<Autoscaler>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DestroyConfigData请求参数结构体
+ */
+export interface DestroyConfigDataRequest {
+    /**
+      * 环境 ID
+      */
+    EnvironmentId: string;
+    /**
+      * 配置名
+      */
+    Name: string;
+    /**
+      * 来源渠道
+      */
+    SourceChannel?: number;
+}
+/**
+ * DestroyConfigData返回参数结构体
+ */
+export interface DestroyConfigDataResponse {
+    /**
+      * 返回结果
       */
     Result: boolean;
     /**
@@ -2508,34 +2938,29 @@ export interface CreateApplicationResponse {
     RequestId?: string;
 }
 /**
- * 定时伸缩策略
+ * 弹性伸缩策略
  */
-export interface CronHorizontalAutoscaler {
+export interface HorizontalAutoscaler {
     /**
-      * 定时伸缩策略名称
+      * 最小实例数（可以不传）
       */
-    Name?: string;
+    MinReplicas?: number;
     /**
-      * 策略周期
-* * *，三个范围，第一个是天，第二个是月，第三个是周，中间用空格隔开
-例子：
-* * * （每天）
-* * 0-3 （每周日到周三）
-1,11,21 * *（每个月1号，11号，21号）
+      * 最大实例数（可以不传）
       */
-    Period?: string;
+    MaxReplicas?: number;
     /**
-      * 定时伸缩策略明细
+      * 指标度量（CPU or MEMORY）
       */
-    Schedules?: Array<CronHorizontalAutoscalerSchedule>;
+    Metrics?: string;
+    /**
+      * 阈值（百分比）
+      */
+    Threshold?: number;
     /**
       * 是否启用
       */
     Enabled?: boolean;
-    /**
-      * 策略优先级，值越大优先级越高，0为最小值
-      */
-    Priority?: number;
 }
 /**
  * 服务端口映射
@@ -2592,6 +3017,22 @@ export interface ModifyApplicationReplicasRequest {
       * 来源渠道
       */
     SourceChannel?: number;
+}
+/**
+ * 定时伸缩策略明细
+ */
+export interface CronHorizontalAutoscalerSchedule {
+    /**
+      * 触发事件，小时分钟，用:分割
+例如
+00:00（零点零分触发）
+      */
+    StartAt: string;
+    /**
+      * 目标实例数（不大于50）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TargetReplicas?: number;
 }
 /**
  * eks service info
@@ -2652,47 +3093,6 @@ export interface EksService {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     PortMappings?: Array<PortMapping>;
-}
-/**
- * 定时伸缩策略明细
- */
-export interface CronHorizontalAutoscalerSchedule {
-    /**
-      * 触发事件，小时分钟，用:分割
-例如
-00:00（零点零分触发）
-      */
-    StartAt: string;
-    /**
-      * 目标实例数（不大于50）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    TargetReplicas?: number;
-}
-/**
- * 弹性伸缩策略
- */
-export interface HorizontalAutoscaler {
-    /**
-      * 最小实例数（可以不传）
-      */
-    MinReplicas?: number;
-    /**
-      * 最大实例数（可以不传）
-      */
-    MaxReplicas?: number;
-    /**
-      * 指标度量（CPU or MEMORY）
-      */
-    Metrics?: string;
-    /**
-      * 阈值（百分比）
-      */
-    Threshold?: number;
-    /**
-      * 是否启用
-      */
-    Enabled?: boolean;
 }
 /**
  * 键值对

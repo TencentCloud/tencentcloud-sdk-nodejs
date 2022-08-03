@@ -28,6 +28,12 @@ class Client extends abstract_client_1.AbstractClient {
         super("tem.tencentcloudapi.com", "2021-07-01", clientConfig);
     }
     /**
+     * 编辑配置
+     */
+    async ModifyConfigData(req, cb) {
+        return this.request("ModifyConfigData", req, cb);
+    }
+    /**
      * 单环境下所有应用状态查看
      */
     async DescribeApplicationsStatus(req, cb) {
@@ -44,6 +50,18 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyApplicationReplicas(req, cb) {
         return this.request("ModifyApplicationReplicas", req, cb);
+    }
+    /**
+     * 创建弹性伸缩策略组合
+     */
+    async CreateApplicationAutoscaler(req, cb) {
+        return this.request("CreateApplicationAutoscaler", req, cb);
+    }
+    /**
+     * 重启应用实例
+     */
+    async RestartApplicationPod(req, cb) {
+        return this.request("RestartApplicationPod", req, cb);
     }
     /**
      * 服务删除
@@ -71,6 +89,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeployApplication(req, cb) {
         return this.request("DeployApplication", req, cb);
+    }
+    /**
+     * 修改弹性伸缩策略组合
+     */
+    async ModifyApplicationAutoscaler(req, cb) {
+        return this.request("ModifyApplicationAutoscaler", req, cb);
     }
     /**
      * 获取分批发布详情
@@ -103,22 +127,34 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeApplicationInfo", req, cb);
     }
     /**
+     * 创建配置
+     */
+    async CreateConfigData(req, cb) {
+        return this.request("CreateConfigData", req, cb);
+    }
+    /**
      * 获取应用实例列表
      */
     async DescribeApplicationPods(req, cb) {
         return this.request("DescribeApplicationPods", req, cb);
     }
     /**
-     * 服务重启
+     * 删除应用弹性策略组合
      */
-    async RestartApplication(req, cb) {
-        return this.request("RestartApplication", req, cb);
+    async DeleteApplicationAutoscaler(req, cb) {
+        return this.request("DeleteApplicationAutoscaler", req, cb);
     }
     /**
      * 修改应用基本信息
      */
     async ModifyApplicationInfo(req, cb) {
         return this.request("ModifyApplicationInfo", req, cb);
+    }
+    /**
+     * 销毁配置
+     */
+    async DestroyConfigData(req, cb) {
+        return this.request("DestroyConfigData", req, cb);
     }
     /**
      * 获取租户环境列表
@@ -163,10 +199,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateApplication", req, cb);
     }
     /**
-     * 重启应用实例
+     * 服务重启
      */
-    async RestartApplicationPod(req, cb) {
-        return this.request("RestartApplicationPod", req, cb);
+    async RestartApplication(req, cb) {
+        return this.request("RestartApplication", req, cb);
     }
     /**
      * 更新应用部署版本
@@ -193,16 +229,34 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeRelatedIngresses", req, cb);
     }
     /**
+     * 查询配置详情
+     */
+    async DescribeConfigData(req, cb) {
+        return this.request("DescribeConfigData", req, cb);
+    }
+    /**
      * 绑定云资源
      */
     async CreateResource(req, cb) {
         return this.request("CreateResource", req, cb);
     }
     /**
+     * 获取应用弹性策略组合
+     */
+    async DescribeApplicationAutoscalerList(req, cb) {
+        return this.request("DescribeApplicationAutoscalerList", req, cb);
+    }
+    /**
      * 销毁命名空间
      */
     async DestroyEnvironment(req, cb) {
         return this.request("DestroyEnvironment", req, cb);
+    }
+    /**
+     * 查询配置列表
+     */
+    async DescribeConfigDataList(req, cb) {
+        return this.request("DescribeConfigDataList", req, cb);
     }
 }
 exports.Client = Client;

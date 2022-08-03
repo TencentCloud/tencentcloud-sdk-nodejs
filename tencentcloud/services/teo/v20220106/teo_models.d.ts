@@ -2321,7 +2321,10 @@ export interface OriginRecord {
     /**
       * 当源站配置类型Type=weight时，表示权重
 取值范围为[1-100]
-源站组内多个源站权重总和应为100
+源站组内多个源站权重总和应为100。
+当源站配置类型Type=proto，表示权重
+取值范围为[1-100]
+源站组内Proto相同的多个源站权重总和应为100。
       */
     Weight: number;
     /**
@@ -2344,6 +2347,11 @@ export interface OriginRecord {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     PrivateParameter?: Array<OriginRecordPrivateParameter>;
+    /**
+      * 当源站配置类型Type=proto时，表示客户端请求协议，取值：http/https
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Proto?: string;
 }
 /**
  * web攻击日志
@@ -3279,15 +3287,15 @@ export interface CreatePrefetchTaskResponse {
  */
 export interface WafRule {
     /**
-      * 黑名单
+      * 黑名单，ID参考接口 DescribeSecurityPolicyManagedRules
       */
     BlockRuleIDs: Array<number>;
     /**
-      * id的开关
+      * 托管规则 开关
       */
     Switch: string;
     /**
-      * 观察模式
+      * 观察模式，ID参考接口 DescribeSecurityPolicyManagedRules
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ObserveRuleIDs?: Array<number>;

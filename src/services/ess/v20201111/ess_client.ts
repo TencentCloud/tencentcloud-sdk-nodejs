@@ -45,18 +45,22 @@ import {
   DescribeFlowBriefsRequest,
   Recipient,
   UserInfo,
+  SignUrl,
   DescribeFileUrlsRequest,
   ApproverInfo,
   Caller,
   DescribeFlowTemplatesResponse,
-  Filter,
+  CreateBatchCancelFlowUrlResponse,
+  StartFlowResponse,
   FileInfo,
+  CreateBatchCancelFlowUrlRequest,
   CreateMultiFlowSignQRCodeRequest,
   CreateConvertTaskApiResponse,
-  StartFlowResponse,
+  Filter,
   CreateConvertTaskApiRequest,
   CreateSchemeUrlResponse,
   CreateFlowByFilesRequest,
+  ApproverRestriction,
   CancelMultiFlowSignQRCodeResponse,
   CreateFlowResponse,
   Agent,
@@ -216,6 +220,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeFlowTemplatesResponse) => void
   ): Promise<DescribeFlowTemplatesResponse> {
     return this.request("DescribeFlowTemplates", req, cb)
+  }
+
+  /**
+     * 电子签企业版：指定需要批量撤回的签署流程Id，获取批量撤销链接
+客户指定需要撤回的签署流程Id，最多100个，超过100不处理；接口调用成功返回批量撤回合同的链接，通过链接跳转到电子签小程序完成批量撤回
+     */
+  async CreateBatchCancelFlowUrl(
+    req: CreateBatchCancelFlowUrlRequest,
+    cb?: (error: string, rep: CreateBatchCancelFlowUrlResponse) => void
+  ): Promise<CreateBatchCancelFlowUrlResponse> {
+    return this.request("CreateBatchCancelFlowUrl", req, cb)
   }
 
   /**

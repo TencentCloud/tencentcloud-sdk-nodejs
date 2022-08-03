@@ -138,6 +138,16 @@ it("ess.v20201111.DescribeFlowTemplates", async function () {
     }
 })
 
+it("ess.v20201111.CreateBatchCancelFlowUrl", async function () {
+    try {
+       const data = await client.CreateBatchCancelFlowUrl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ess.v20201111.DescribeFlowBriefs", async function () {
     try {
        const data = await client.DescribeFlowBriefs({})

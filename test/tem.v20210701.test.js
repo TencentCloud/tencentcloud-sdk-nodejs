@@ -18,6 +18,16 @@ const client = new tencentcloud.tem.v20210701.Client({
 })
 describe("tem.v20210701.test.js", function () {
 
+it("tem.v20210701.ModifyConfigData", async function () {
+    try {
+       const data = await client.ModifyConfigData({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tem.v20210701.DescribeApplicationsStatus", async function () {
     try {
        const data = await client.DescribeApplicationsStatus({})
@@ -41,6 +51,26 @@ it("tem.v20210701.ModifyIngress", async function () {
 it("tem.v20210701.ModifyApplicationReplicas", async function () {
     try {
        const data = await client.ModifyApplicationReplicas({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tem.v20210701.CreateApplicationAutoscaler", async function () {
+    try {
+       const data = await client.CreateApplicationAutoscaler({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tem.v20210701.RestartApplicationPod", async function () {
+    try {
+       const data = await client.RestartApplicationPod({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -81,6 +111,16 @@ it("tem.v20210701.DeleteIngress", async function () {
 it("tem.v20210701.DeployApplication", async function () {
     try {
        const data = await client.DeployApplication({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tem.v20210701.ModifyApplicationAutoscaler", async function () {
+    try {
+       const data = await client.ModifyApplicationAutoscaler({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -138,6 +178,16 @@ it("tem.v20210701.DescribeApplicationInfo", async function () {
     }
 })
 
+it("tem.v20210701.CreateConfigData", async function () {
+    try {
+       const data = await client.CreateConfigData({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tem.v20210701.DescribeApplicationPods", async function () {
     try {
        const data = await client.DescribeApplicationPods({})
@@ -148,9 +198,9 @@ it("tem.v20210701.DescribeApplicationPods", async function () {
     }
 })
 
-it("tem.v20210701.RestartApplication", async function () {
+it("tem.v20210701.DeleteApplicationAutoscaler", async function () {
     try {
-       const data = await client.RestartApplication({})
+       const data = await client.DeleteApplicationAutoscaler({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -161,6 +211,16 @@ it("tem.v20210701.RestartApplication", async function () {
 it("tem.v20210701.ModifyApplicationInfo", async function () {
     try {
        const data = await client.ModifyApplicationInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tem.v20210701.DestroyConfigData", async function () {
+    try {
+       const data = await client.DestroyConfigData({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -238,9 +298,9 @@ it("tem.v20210701.CreateApplication", async function () {
     }
 })
 
-it("tem.v20210701.RestartApplicationPod", async function () {
+it("tem.v20210701.RestartApplication", async function () {
     try {
-       const data = await client.RestartApplicationPod({})
+       const data = await client.RestartApplication({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -288,6 +348,16 @@ it("tem.v20210701.DescribeRelatedIngresses", async function () {
     }
 })
 
+it("tem.v20210701.DescribeConfigData", async function () {
+    try {
+       const data = await client.DescribeConfigData({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tem.v20210701.CreateResource", async function () {
     try {
        const data = await client.CreateResource({})
@@ -298,9 +368,29 @@ it("tem.v20210701.CreateResource", async function () {
     }
 })
 
+it("tem.v20210701.DescribeApplicationAutoscalerList", async function () {
+    try {
+       const data = await client.DescribeApplicationAutoscalerList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tem.v20210701.DestroyEnvironment", async function () {
     try {
        const data = await client.DestroyEnvironment({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tem.v20210701.DescribeConfigDataList", async function () {
+    try {
+       const data = await client.DescribeConfigDataList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
