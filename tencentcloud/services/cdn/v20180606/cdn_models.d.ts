@@ -2141,6 +2141,11 @@ export interface ScdnConfig {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     AdvancedRules?: Array<AdvancedCCRules>;
+    /**
+      * 增强自定义 cc 防护规则， 全局
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    GlobalAdvancedRules?: Array<AdvancedCCRules>;
 }
 /**
  * IP 属性信息
@@ -2864,6 +2869,11 @@ export interface AdvancedCCRules {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Configure?: Array<ScdnSevenLayerRules>;
+    /**
+      * 是否开启改规则 on 开启，off关闭
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Switch?: string;
 }
 /**
  * 路径缓存缓存配置

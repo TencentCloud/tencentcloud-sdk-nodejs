@@ -814,6 +814,11 @@ export interface KeyPointInfo {
    * 人体关键点纵坐标
    */
   Y: number
+
+  /**
+   * 关键点坐标置信度，分数取值在0-1之间，阈值建议为0.25，小于0.25认为在图中无人体关键点。
+   */
+  BodyScore: number
 }
 
 /**
@@ -948,6 +953,13 @@ Url、Image必须提供一个，如果都提供，只使用 Url。
 支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
       */
   Url?: string
+
+  /**
+      * 人体局部关键点识别，开启后对人体局部图（例如部分身体部位）进行关键点识别，输出人体关键点坐标，默认不开启
+
+注意：若开启人体局部图片关键点识别，则BoundBox、Confidence返回为空。
+      */
+  LocalBodySwitch?: boolean
 }
 
 /**

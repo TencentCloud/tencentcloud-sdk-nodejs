@@ -40,6 +40,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeApplicationsStatus", req, cb);
     }
     /**
+     * 查询分页的日志收集配置列表
+     */
+    async DescribePagedLogConfigList(req, cb) {
+        return this.request("DescribePagedLogConfigList", req, cb);
+    }
+    /**
      * 创建或者更新 Ingress 规则
      */
     async ModifyIngress(req, cb) {
@@ -62,6 +68,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async RestartApplicationPod(req, cb) {
         return this.request("RestartApplicationPod", req, cb);
+    }
+    /**
+     * 编辑日志收集配置
+     */
+    async ModifyLogConfig(req, cb) {
+        return this.request("ModifyLogConfig", req, cb);
     }
     /**
      * 服务删除
@@ -115,10 +127,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyEnvironment", req, cb);
     }
     /**
+     * 查询日志收集配置详情
+     */
+    async DescribeLogConfig(req, cb) {
+        return this.request("DescribeLogConfig", req, cb);
+    }
+    /**
      * 服务停止
      */
     async StopApplication(req, cb) {
         return this.request("StopApplication", req, cb);
+    }
+    /**
+     * 创建日志收集配置
+     */
+    async CreateLogConfig(req, cb) {
+        return this.request("CreateLogConfig", req, cb);
     }
     /**
      * 服务基本信息查看
@@ -157,7 +181,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DestroyConfigData", req, cb);
     }
     /**
-     * 获取租户环境列表
+     * 获取环境列表
      */
     async DescribeEnvironments(req, cb) {
         return this.request("DescribeEnvironments", req, cb);
@@ -223,6 +247,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RevertDeployApplication", req, cb);
     }
     /**
+     * 销毁日志收集配置
+     */
+    async DestroyLogConfig(req, cb) {
+        return this.request("DestroyLogConfig", req, cb);
+    }
+    /**
      * 查询应用关联的 Ingress 规则列表
      */
     async DescribeRelatedIngresses(req, cb) {
@@ -247,7 +277,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeApplicationAutoscalerList", req, cb);
     }
     /**
-     * 销毁命名空间
+     * 销毁环境
      */
     async DestroyEnvironment(req, cb) {
         return this.request("DestroyEnvironment", req, cb);

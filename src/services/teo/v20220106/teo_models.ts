@@ -25,6 +25,12 @@ on：开启
 off：关闭
       */
   Switch: string
+
+  /**
+      * 支持的压缩算法列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Algorithms?: Array<string>
 }
 
 /**
@@ -2446,7 +2452,7 @@ export interface WafConfig {
   Mode: string
 
   /**
-   * 门神黑白名单
+   * 托管规则黑白名单
    */
   WafRules: WafRule
 
@@ -6532,7 +6538,7 @@ export interface DeleteZoneRequest {
 }
 
 /**
- * Bot 规则
+ * Bot 规则，下列规则ID可参考接口 DescribeBotManagedRules返回的ID信息
  */
 export interface BotManagedRule {
   /**
@@ -7342,7 +7348,7 @@ export interface DdosAllowBlock {
  */
 export interface DDoSGeoIp {
   /**
-      * 地域信息
+      * 地域信息，ID参考接口DescribeSecurityPolicyRegions
 注意：此字段可能返回 null，表示取不到有效值。
       */
   RegionId?: Array<number>

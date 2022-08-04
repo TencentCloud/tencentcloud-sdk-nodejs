@@ -1598,29 +1598,9 @@ it("cpdp.v20190820.QueryOpenBankDownLoadUrl", async function () {
     }
 })
 
-it("cpdp.v20190820.GetDistributeBillDownloadUrl", async function () {
-    try {
-       const data = await client.GetDistributeBillDownloadUrl({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("cpdp.v20190820.QueryOrderStatus", async function () {
     try {
        const data = await client.QueryOrderStatus({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cpdp.v20190820.QuerySinglePay", async function () {
-    try {
-       const data = await client.QuerySinglePay({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1668,9 +1648,9 @@ it("cpdp.v20190820.GetPayRollAuth", async function () {
     }
 })
 
-it("cpdp.v20190820.CreateSinglePay", async function () {
+it("cpdp.v20190820.GetDistributeBillDownloadUrl", async function () {
     try {
-       const data = await client.CreateSinglePay({})
+       const data = await client.GetDistributeBillDownloadUrl({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

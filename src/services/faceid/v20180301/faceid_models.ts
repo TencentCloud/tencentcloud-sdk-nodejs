@@ -395,9 +395,19 @@ export interface GetEidTokenConfig {
   UseIntentionVerify?: boolean
 
   /**
-   * 意愿核身使用的文案，若未使用意愿核身功能，该字段无需传入。默认为空，最长可接受120的字符串长度。
+   * 意愿核身模式。枚举值：1( 朗读模式)，2（问答模式） 。默认值1
+   */
+  IntentionMode?: string
+
+  /**
+   * 意愿核身朗读模式使用的文案，若未使用意愿核身朗读功能，该字段无需传入。默认为空，最长可接受120的字符串长度。
    */
   IntentionVerifyText?: string
+
+  /**
+   * 意愿核身问答模式的配置列表。当前仅支持一个问答。
+   */
+  IntentionQuestions?: Array<IntentionQuestion>
 }
 
 /**
@@ -607,7 +617,7 @@ export interface GetEidResultRequest {
   EidToken: string
 
   /**
-      * 指定拉取的结果信息，取值（0：全部；1：文本类；2：身份证信息；3：最佳截图信息；5：意愿核身相关结果；）。
+      * 指定拉取的结果信息，取值（0：全部；1：文本类；2：身份证信息；3：最佳截图信息；5：意愿核身朗读模式相关结果；6：意愿核身问答模式相关结果）。
 如 13表示拉取文本类、最佳截图信息。
 默认值：0
       */
@@ -1874,10 +1884,16 @@ export interface GetEidResultResponse {
   EidInfo: EidInfo
 
   /**
-      * 意愿核身相关信息。若未使用意愿核身功能，该字段返回值可以不处理。
+      * 意愿核身朗读模式相关信息。若未使用意愿核身朗读功能，该字段返回值可以不处理。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   IntentionVerifyData: IntentionVerifyData
+
+  /**
+      * 意愿核身问答模式相关信息。若未使用意愿核身问答模式功能，该字段返回值可以不处理。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IntentionQuestionResult: IntentionQuestionResult
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

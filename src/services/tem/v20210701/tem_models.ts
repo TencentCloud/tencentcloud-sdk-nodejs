@@ -162,6 +162,21 @@ export interface RestartApplicationPodRequest {
 }
 
 /**
+ * DestroyLogConfig返回参数结构体
+ */
+export interface DestroyLogConfigResponse {
+  /**
+   * 返回结果
+   */
+  Result: boolean
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ResumeDeployApplication返回参数结构体
  */
 export interface ResumeDeployApplicationResponse {
@@ -429,18 +444,18 @@ export interface CreateCosTokenResponse {
 }
 
 /**
- * RevertDeployApplication请求参数结构体
+ * ModifyLogConfig返回参数结构体
  */
-export interface RevertDeployApplicationRequest {
+export interface ModifyLogConfigResponse {
   /**
-   * 需要回滚的服务id
+   * 编辑是否成功
    */
-  ApplicationId?: string
+  Result: boolean
 
   /**
-   * 需要回滚的服务所在环境id
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  EnvironmentId?: string
+  RequestId?: string
 }
 
 /**
@@ -704,38 +719,104 @@ export interface DescribeEnvironmentsRequest {
 }
 
 /**
- * ModifyEnvironment请求参数结构体
+ * LogConfig 列表结果
  */
-export interface ModifyEnvironmentRequest {
+export interface LogConfigListPage {
   /**
-   * 环境id
+      * 记录
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Records: Array<LogConfig>
+
+  /**
+      * 翻页游标
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ContinueToken: string
+}
+
+/**
+ * 服务版本信息列表
+ */
+export interface ServiceVersionBrief {
+  /**
+   * 版本名称
    */
+  VersionName: string
+
+  /**
+   * 状态
+   */
+  Status: string
+
+  /**
+   * 是否启动弹性 -- 已废弃
+   */
+  EnableEs: number
+
+  /**
+   * 当前实例
+   */
+  CurrentInstances: number
+
+  /**
+   * version的id
+   */
+  VersionId: string
+
+  /**
+      * 日志输出配置 -- 已废弃
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LogOutputConf: LogOutputConf
+
+  /**
+      * 期望实例
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ExpectedInstances: number
+
+  /**
+      * 部署方式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DeployMode: string
+
+  /**
+      * 建构任务ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BuildTaskId: string
+
+  /**
+      * 环境ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
   EnvironmentId: string
 
   /**
-   * 环境名称
-   */
-  EnvironmentName?: string
+      * 环境name
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EnvironmentName: string
 
   /**
-   * 环境描述
-   */
-  Description?: string
+      * 服务ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ApplicationId: string
 
   /**
-   * 私有网络名称
-   */
-  Vpc?: string
+      * 服务name
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ApplicationName: string
 
   /**
-   * 子网网络
-   */
-  SubnetIds?: Array<string>
-
-  /**
-   * 来源渠道
-   */
-  SourceChannel?: number
+      * 是否正在发布中
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UnderDeploying: boolean
 }
 
 /**
@@ -810,6 +891,26 @@ export interface NodeInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Cidr: string
+}
+
+/**
+ * DescribeLogConfig请求参数结构体
+ */
+export interface DescribeLogConfigRequest {
+  /**
+   * 环境 ID
+   */
+  EnvironmentId: string
+
+  /**
+   * 配置名
+   */
+  Name: string
+
+  /**
+   * 应用 ID
+   */
+  ApplicationId?: string
 }
 
 /**
@@ -1419,6 +1520,71 @@ export interface TemServiceVersionInfo {
 }
 
 /**
+ * 端口映射详细信息结构体
+ */
+export interface ServicePortMapping {
+  /**
+      * 服务类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Type?: string
+
+  /**
+      * 服务名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ServiceName?: string
+
+  /**
+      * 集群内访问vip
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClusterIp?: string
+
+  /**
+      * 集群外方位vip
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ExternalIp?: string
+
+  /**
+      * 子网id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SubnetId?: string
+
+  /**
+      * vpc id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VpcId?: string
+
+  /**
+      * LoadBalance Id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LoadBalanceId?: string
+
+  /**
+      * yaml 内容
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Yaml?: string
+
+  /**
+      * 暴露端口列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Ports?: Array<number>
+
+  /**
+      * 端口映射数组
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PortMappingItemList?: Array<ServicePortMappingItem>
+}
+
+/**
  * CreateCosToken请求参数结构体
  */
 export interface CreateCosTokenRequest {
@@ -1479,28 +1645,18 @@ export interface ModifyApplicationAutoscalerRequest {
 }
 
 /**
- * DeleteIngress请求参数结构体
+ * ModifyConfigData返回参数结构体
  */
-export interface DeleteIngressRequest {
+export interface ModifyConfigDataResponse {
   /**
-   * 环境ID
+   * 编辑是否成功
    */
-  EnvironmentId: string
+  Result: boolean
 
   /**
-   * 环境 namespace
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  ClusterNamespace: string
-
-  /**
-   * ingress 规则名
-   */
-  IngressName: string
-
-  /**
-   * 来源渠道
-   */
-  SourceChannel?: number
+  RequestId?: string
 }
 
 /**
@@ -1571,6 +1727,61 @@ export interface StorageMountConf {
    * 数据卷绑定路径
    */
   MountPath: string
+}
+
+/**
+ * CreateLogConfig请求参数结构体
+ */
+export interface CreateLogConfigRequest {
+  /**
+   * 环境 ID
+   */
+  EnvironmentId: string
+
+  /**
+   * 配置名
+   */
+  Name: string
+
+  /**
+   * 收集类型，container_stdout 为标准输出；container_file 为文件；
+   */
+  InputType: string
+
+  /**
+   * 应用 ID
+   */
+  ApplicationId?: string
+
+  /**
+   * 日志集 ID
+   */
+  LogsetId?: string
+
+  /**
+   * 日志主题 ID
+   */
+  TopicId?: string
+
+  /**
+   * 日志提取模式，minimalist_log 为单行全文；multiline_log 为多行全文；
+   */
+  LogType?: string
+
+  /**
+   * 首行正则表达式，当LogType=multiline_log 时生效
+   */
+  BeginningRegex?: string
+
+  /**
+   * 收集文件目录，当 InputType=container_file 时生效
+   */
+  LogPath?: string
+
+  /**
+   * 收集文件名模式，当 InputType=container_file 时生效
+   */
+  FilePattern?: string
 }
 
 /**
@@ -1996,18 +2207,28 @@ export interface DescribeDeployApplicationDetailRequest {
 }
 
 /**
- * ModifyConfigData返回参数结构体
+ * DeleteIngress请求参数结构体
  */
-export interface ModifyConfigDataResponse {
+export interface DeleteIngressRequest {
   /**
-   * 编辑是否成功
+   * 环境ID
    */
-  Result: boolean
+  EnvironmentId: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 环境 namespace
    */
-  RequestId?: string
+  ClusterNamespace: string
+
+  /**
+   * ingress 规则名
+   */
+  IngressName: string
+
+  /**
+   * 来源渠道
+   */
+  SourceChannel?: number
 }
 
 /**
@@ -2246,6 +2467,41 @@ export interface TemNamespaceInfo {
    * 环境锁，1为上锁，0则为上锁
    */
   Locked: number
+}
+
+/**
+ * DescribePagedLogConfigList请求参数结构体
+ */
+export interface DescribePagedLogConfigListRequest {
+  /**
+   * 环境 ID
+   */
+  EnvironmentId: string
+
+  /**
+   * 应用 ID
+   */
+  ApplicationId?: string
+
+  /**
+   * 应用名
+   */
+  ApplicationName?: string
+
+  /**
+   * 规则名
+   */
+  Name?: string
+
+  /**
+   * 分页大小，默认 20
+   */
+  Limit?: number
+
+  /**
+   * 翻页游标
+   */
+  ContinueToken?: string
 }
 
 /**
@@ -2558,6 +2814,21 @@ export interface MountedSettingConf {
 }
 
 /**
+ * CreateLogConfig返回参数结构体
+ */
+export interface CreateLogConfigResponse {
+  /**
+   * 创建是否成功
+   */
+  Result: boolean
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeConfigDataList返回参数结构体
  */
 export interface DescribeConfigDataListResponse {
@@ -2565,6 +2836,21 @@ export interface DescribeConfigDataListResponse {
    * 配置列表
    */
   Result: DescribeConfigDataListPage
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribePagedLogConfigList返回参数结构体
+ */
+export interface DescribePagedLogConfigListResponse {
+  /**
+   * 日志收集配置列表
+   */
+  Result: LogConfigListPage
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3293,6 +3579,59 @@ export interface UseDefaultRepoParameters {
 }
 
 /**
+ * 定时伸缩策略明细
+ */
+export interface CronHorizontalAutoscalerSchedule {
+  /**
+      * 触发事件，小时分钟，用:分割
+例如
+00:00（零点零分触发）
+      */
+  StartAt: string
+
+  /**
+      * 目标实例数（不大于50）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TargetReplicas?: number
+}
+
+/**
+ * ModifyEnvironment请求参数结构体
+ */
+export interface ModifyEnvironmentRequest {
+  /**
+   * 环境id
+   */
+  EnvironmentId: string
+
+  /**
+   * 环境名称
+   */
+  EnvironmentName?: string
+
+  /**
+   * 环境描述
+   */
+  Description?: string
+
+  /**
+   * 私有网络名称
+   */
+  Vpc?: string
+
+  /**
+   * 子网网络
+   */
+  SubnetIds?: Array<string>
+
+  /**
+   * 来源渠道
+   */
+  SourceChannel?: number
+}
+
+/**
  * GenerateApplicationPackageDownloadUrl返回参数结构体
  */
 export interface GenerateApplicationPackageDownloadUrlResponse {
@@ -3406,87 +3745,56 @@ export interface IngressRulePath {
 }
 
 /**
- * 服务版本信息列表
+ * DescribeLogConfig返回参数结构体
  */
-export interface ServiceVersionBrief {
+export interface DescribeLogConfigResponse {
   /**
-   * 版本名称
+   * 配置
    */
-  VersionName: string
+  Result: LogConfig
 
   /**
-   * 状态
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Status: string
+  RequestId?: string
+}
+
+/**
+ * 服务端口映射条目
+ */
+export interface ServicePortMappingItem {
+  /**
+      * 应用访问端口
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Port?: number
 
   /**
-   * 是否启动弹性 -- 已废弃
+      * 应用监听端口
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TargetPort?: number
+
+  /**
+      * 协议类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Protocol?: string
+}
+
+/**
+ * RevertDeployApplication请求参数结构体
+ */
+export interface RevertDeployApplicationRequest {
+  /**
+   * 需要回滚的服务id
    */
-  EnableEs: number
+  ApplicationId?: string
 
   /**
-   * 当前实例
+   * 需要回滚的服务所在环境id
    */
-  CurrentInstances: number
-
-  /**
-   * version的id
-   */
-  VersionId: string
-
-  /**
-      * 日志输出配置 -- 已废弃
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  LogOutputConf: LogOutputConf
-
-  /**
-      * 期望实例
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ExpectedInstances: number
-
-  /**
-      * 部署方式
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DeployMode: string
-
-  /**
-      * 建构任务ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  BuildTaskId: string
-
-  /**
-      * 环境ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  EnvironmentId: string
-
-  /**
-      * 环境name
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  EnvironmentName: string
-
-  /**
-      * 服务ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ApplicationId: string
-
-  /**
-      * 服务name
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ApplicationName: string
-
-  /**
-      * 是否正在发布中
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  UnderDeploying: boolean
+  EnvironmentId?: string
 }
 
 /**
@@ -3601,21 +3909,122 @@ export interface ModifyApplicationReplicasRequest {
 }
 
 /**
- * 定时伸缩策略明细
+ * ModifyLogConfig请求参数结构体
  */
-export interface CronHorizontalAutoscalerSchedule {
+export interface ModifyLogConfigRequest {
   /**
-      * 触发事件，小时分钟，用:分割
-例如
-00:00（零点零分触发）
-      */
-  StartAt: string
+   * 环境 ID
+   */
+  EnvironmentId: string
 
   /**
-      * 目标实例数（不大于50）
+   * 配置名
+   */
+  Name: string
+
+  /**
+   * 日志收集配置信息
+   */
+  Data?: LogConfig
+
+  /**
+   * 应用 ID
+   */
+  ApplicationId?: string
+}
+
+/**
+ * DestroyLogConfig请求参数结构体
+ */
+export interface DestroyLogConfigRequest {
+  /**
+   * 环境 ID
+   */
+  EnvironmentId: string
+
+  /**
+   * 配置名
+   */
+  Name: string
+
+  /**
+   * 应用 ID
+   */
+  ApplicationId?: string
+}
+
+/**
+ * 日志收集配置
+ */
+export interface LogConfig {
+  /**
+   * 名称
+   */
+  Name: string
+
+  /**
+   * 收集类型，container_stdout 为标准输出；container_file 为文件；
+   */
+  InputType: string
+
+  /**
+      * 日志集 ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  TargetReplicas?: number
+  LogsetId: string
+
+  /**
+      * 日志主题 ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TopicId: string
+
+  /**
+   * 日志提取模式，minimalist_log 为单行全文；multiline_log 为多行全文；
+   */
+  LogType: string
+
+  /**
+      * 首行正则表达式，当LogType=multiline_log 时生效
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BeginningRegex: string
+
+  /**
+      * 收集文件目录，当 InputType=container_file 时生效
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LogPath: string
+
+  /**
+      * 收集文件名模式，当 InputType=container_file 时生效
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FilePattern: string
+
+  /**
+      * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CreateDate: string
+
+  /**
+      * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ModifyDate: string
+
+  /**
+      * 应用 ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ApplicationId: string
+
+  /**
+      * 应用名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ApplicationName: string
 }
 
 /**
@@ -3687,6 +4096,36 @@ export interface EksService {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   PortMappings?: Array<PortMapping>
+
+  /**
+      * 每种类型访问配置详情
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ServicePortMappingList?: Array<ServicePortMapping>
+
+  /**
+      * 刷新复写所有类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FlushAll?: boolean
+
+  /**
+      * 1: 下次部署自动注入注册中心信息；0：不注入
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EnableRegistryNextDeploy?: number
+
+  /**
+      * 返回应用id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ApplicationId?: string
+
+  /**
+      * 所有服务IP是否已经ready
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AllIpDone?: boolean
 }
 
 /**

@@ -1358,34 +1358,37 @@ export interface DiskConfig {
   Available?: boolean
 
   /**
-   * 云盘介质类型。取值范围：<br><li>CLOUD_BASIC：表示普通云硬盘<br><li>CLOUD_PREMIUM：表示高性能云硬盘<br><li>CLOUD_SSD：SSD表示SSD云硬盘。
-   */
-  DiskType?: string
-
-  /**
-   * 云盘类型。取值范围：<br><li>SYSTEM_DISK：表示系统盘<br><li>DATA_DISK：表示数据盘。
-   */
-  DiskUsage?: string
-
-  /**
    * 付费模式。取值范围：<br><li>PREPAID：表示预付费，即包年包月<br><li>POSTPAID_BY_HOUR：表示后付费，即按量计费。
    */
   DiskChargeType?: string
 
   /**
-   * 最大可配置云盘大小，单位GB。
-   */
-  MaxDiskSize?: number
-
-  /**
-   * 最小可配置云盘大小，单位GB。
-   */
-  MinDiskSize?: number
-
-  /**
    * 云硬盘所属的[可用区](/document/product/213/15753#ZoneInfo)。
    */
   Zone?: string
+
+  /**
+      * 实例机型系列。详见[实例类型](https://cloud.tencent.com/document/product/213/11518)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceFamily?: string
+
+  /**
+   * 云盘介质类型。取值范围：<br><li>CLOUD_BASIC：表示普通云硬盘<br><li>CLOUD_PREMIUM：表示高性能云硬盘<br><li>CLOUD_SSD：SSD表示SSD云硬盘。
+   */
+  DiskType?: string
+
+  /**
+      * 云盘大小变化的最小步长，单位GB。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  StepSize: number
+
+  /**
+      * 额外的性能区间。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ExtraPerformanceRange: Array<number>
 
   /**
       * 实例机型。
@@ -1394,10 +1397,19 @@ export interface DiskConfig {
   DeviceClass?: string
 
   /**
-      * 实例机型系列。详见[实例类型](https://cloud.tencent.com/document/product/213/11518)
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  InstanceFamily?: string
+   * 云盘类型。取值范围：<br><li>SYSTEM_DISK：表示系统盘<br><li>DATA_DISK：表示数据盘。
+   */
+  DiskUsage?: string
+
+  /**
+   * 最小可配置云盘大小，单位GB。
+   */
+  MinDiskSize?: number
+
+  /**
+   * 最大可配置云盘大小，单位GB。
+   */
+  MaxDiskSize?: number
 }
 
 /**

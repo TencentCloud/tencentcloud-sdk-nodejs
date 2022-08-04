@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CreateResourceRequest, DescribeConfigDataResponse, DescribeApplicationInfoResponse, ModifyIngressResponse, RestartApplicationPodRequest, ResumeDeployApplicationResponse, DescribeApplicationPodsRequest, DeleteIngressResponse, DeleteApplicationResponse, ModifyApplicationAutoscalerResponse, RollingUpdateApplicationByVersionRequest, CreateCosTokenResponse, RevertDeployApplicationRequest, RollingUpdateApplicationByVersionResponse, StopApplicationRequest, ModifyApplicationInfoRequest, DestroyEnvironmentRequest, CreateEnvironmentResponse, DescribeEnvironmentStatusRequest, RevertDeployApplicationResponse, DescribeApplicationsResponse, DescribeEnvironmentsRequest, ModifyEnvironmentRequest, CreateEnvironmentRequest, DescribeEnvironmentStatusResponse, DescribeApplicationPodsResponse, DescribeConfigDataListRequest, CreateCosTokenRequest, ModifyApplicationAutoscalerRequest, DeleteIngressRequest, ModifyIngressRequest, DescribeIngressesRequest, RestartApplicationResponse, DescribeIngressesResponse, ModifyConfigDataRequest, CreateConfigDataResponse, DescribeApplicationsStatusRequest, CreateResourceResponse, ModifyApplicationInfoResponse, RestartApplicationRequest, DestroyEnvironmentResponse, DescribeIngressRequest, StopApplicationResponse, DeployApplicationResponse, RestartApplicationPodResponse, DeleteApplicationRequest, CreateApplicationAutoscalerResponse, DeleteApplicationAutoscalerRequest, DescribeApplicationAutoscalerListRequest, DescribeApplicationsStatusResponse, DescribeDeployApplicationDetailRequest, ModifyConfigDataResponse, DescribeRelatedIngressesRequest, GenerateApplicationPackageDownloadUrlRequest, DescribeEnvironmentsResponse, DeleteApplicationAutoscalerResponse, DescribeRelatedIngressesResponse, DescribeDeployApplicationDetailResponse, CreateApplicationAutoscalerRequest, ResumeDeployApplicationRequest, DescribeConfigDataRequest, DescribeConfigDataListResponse, CreateConfigDataRequest, DeployApplicationRequest, DescribeApplicationAutoscalerListResponse, DestroyConfigDataRequest, DestroyConfigDataResponse, DescribeApplicationsRequest, DescribeApplicationInfoRequest, CreateApplicationRequest, ModifyApplicationReplicasResponse, GenerateApplicationPackageDownloadUrlResponse, DescribeIngressResponse, CreateApplicationResponse, ModifyEnvironmentResponse, ModifyApplicationReplicasRequest } from "./tem_models";
+import { CreateResourceRequest, DescribeConfigDataResponse, DescribeApplicationInfoResponse, ModifyIngressResponse, RestartApplicationPodRequest, DestroyLogConfigResponse, ResumeDeployApplicationResponse, DescribeApplicationPodsRequest, DeleteIngressResponse, DeleteApplicationResponse, ModifyApplicationAutoscalerResponse, RollingUpdateApplicationByVersionRequest, CreateCosTokenResponse, ModifyLogConfigResponse, RollingUpdateApplicationByVersionResponse, StopApplicationRequest, ModifyApplicationInfoRequest, DestroyEnvironmentRequest, CreateEnvironmentResponse, DescribeEnvironmentStatusRequest, RevertDeployApplicationResponse, DescribeApplicationsResponse, DescribeEnvironmentsRequest, CreateEnvironmentRequest, DescribeLogConfigRequest, DescribeEnvironmentStatusResponse, DescribeApplicationPodsResponse, DescribeConfigDataListRequest, CreateCosTokenRequest, ModifyApplicationAutoscalerRequest, ModifyConfigDataResponse, ModifyIngressRequest, DescribeIngressesRequest, CreateLogConfigRequest, RestartApplicationResponse, DescribeIngressesResponse, ModifyConfigDataRequest, CreateConfigDataResponse, DescribeApplicationsStatusRequest, CreateResourceResponse, ModifyApplicationInfoResponse, RestartApplicationRequest, DestroyEnvironmentResponse, DescribeIngressRequest, StopApplicationResponse, DeployApplicationResponse, RestartApplicationPodResponse, DeleteApplicationRequest, CreateApplicationAutoscalerResponse, DeleteApplicationAutoscalerRequest, DescribeApplicationAutoscalerListRequest, DescribeApplicationsStatusResponse, DescribeDeployApplicationDetailRequest, DeleteIngressRequest, DescribeRelatedIngressesRequest, GenerateApplicationPackageDownloadUrlRequest, DescribeEnvironmentsResponse, DeleteApplicationAutoscalerResponse, DescribeRelatedIngressesResponse, DescribePagedLogConfigListRequest, DescribeDeployApplicationDetailResponse, CreateApplicationAutoscalerRequest, ResumeDeployApplicationRequest, DescribeConfigDataRequest, CreateLogConfigResponse, DescribeConfigDataListResponse, DescribePagedLogConfigListResponse, CreateConfigDataRequest, DeployApplicationRequest, DescribeApplicationAutoscalerListResponse, DestroyConfigDataRequest, DestroyConfigDataResponse, DescribeApplicationsRequest, DescribeApplicationInfoRequest, CreateApplicationRequest, ModifyApplicationReplicasResponse, ModifyEnvironmentRequest, GenerateApplicationPackageDownloadUrlResponse, DescribeIngressResponse, DescribeLogConfigResponse, RevertDeployApplicationRequest, CreateApplicationResponse, ModifyEnvironmentResponse, ModifyApplicationReplicasRequest, ModifyLogConfigRequest, DestroyLogConfigRequest } from "./tem_models";
 /**
  * tem client
  * @class
@@ -15,6 +15,10 @@ export declare class Client extends AbstractClient {
      * 单环境下所有应用状态查看
      */
     DescribeApplicationsStatus(req: DescribeApplicationsStatusRequest, cb?: (error: string, rep: DescribeApplicationsStatusResponse) => void): Promise<DescribeApplicationsStatusResponse>;
+    /**
+     * 查询分页的日志收集配置列表
+     */
+    DescribePagedLogConfigList(req: DescribePagedLogConfigListRequest, cb?: (error: string, rep: DescribePagedLogConfigListResponse) => void): Promise<DescribePagedLogConfigListResponse>;
     /**
      * 创建或者更新 Ingress 规则
      */
@@ -31,6 +35,10 @@ export declare class Client extends AbstractClient {
      * 重启应用实例
      */
     RestartApplicationPod(req: RestartApplicationPodRequest, cb?: (error: string, rep: RestartApplicationPodResponse) => void): Promise<RestartApplicationPodResponse>;
+    /**
+     * 编辑日志收集配置
+     */
+    ModifyLogConfig(req: ModifyLogConfigRequest, cb?: (error: string, rep: ModifyLogConfigResponse) => void): Promise<ModifyLogConfigResponse>;
     /**
      * 服务删除
   - 停止当前运行服务
@@ -67,9 +75,17 @@ export declare class Client extends AbstractClient {
      */
     ModifyEnvironment(req: ModifyEnvironmentRequest, cb?: (error: string, rep: ModifyEnvironmentResponse) => void): Promise<ModifyEnvironmentResponse>;
     /**
+     * 查询日志收集配置详情
+     */
+    DescribeLogConfig(req: DescribeLogConfigRequest, cb?: (error: string, rep: DescribeLogConfigResponse) => void): Promise<DescribeLogConfigResponse>;
+    /**
      * 服务停止
      */
     StopApplication(req: StopApplicationRequest, cb?: (error: string, rep: StopApplicationResponse) => void): Promise<StopApplicationResponse>;
+    /**
+     * 创建日志收集配置
+     */
+    CreateLogConfig(req: CreateLogConfigRequest, cb?: (error: string, rep: CreateLogConfigResponse) => void): Promise<CreateLogConfigResponse>;
     /**
      * 服务基本信息查看
      */
@@ -95,7 +111,7 @@ export declare class Client extends AbstractClient {
      */
     DestroyConfigData(req: DestroyConfigDataRequest, cb?: (error: string, rep: DestroyConfigDataResponse) => void): Promise<DestroyConfigDataResponse>;
     /**
-     * 获取租户环境列表
+     * 获取环境列表
      */
     DescribeEnvironments(req: DescribeEnvironmentsRequest, cb?: (error: string, rep: DescribeEnvironmentsResponse) => void): Promise<DescribeEnvironmentsResponse>;
     /**
@@ -139,6 +155,10 @@ export declare class Client extends AbstractClient {
      */
     RevertDeployApplication(req: RevertDeployApplicationRequest, cb?: (error: string, rep: RevertDeployApplicationResponse) => void): Promise<RevertDeployApplicationResponse>;
     /**
+     * 销毁日志收集配置
+     */
+    DestroyLogConfig(req: DestroyLogConfigRequest, cb?: (error: string, rep: DestroyLogConfigResponse) => void): Promise<DestroyLogConfigResponse>;
+    /**
      * 查询应用关联的 Ingress 规则列表
      */
     DescribeRelatedIngresses(req: DescribeRelatedIngressesRequest, cb?: (error: string, rep: DescribeRelatedIngressesResponse) => void): Promise<DescribeRelatedIngressesResponse>;
@@ -155,7 +175,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeApplicationAutoscalerList(req: DescribeApplicationAutoscalerListRequest, cb?: (error: string, rep: DescribeApplicationAutoscalerListResponse) => void): Promise<DescribeApplicationAutoscalerListResponse>;
     /**
-     * 销毁命名空间
+     * 销毁环境
      */
     DestroyEnvironment(req: DestroyEnvironmentRequest, cb?: (error: string, rep: DestroyEnvironmentResponse) => void): Promise<DestroyEnvironmentResponse>;
     /**

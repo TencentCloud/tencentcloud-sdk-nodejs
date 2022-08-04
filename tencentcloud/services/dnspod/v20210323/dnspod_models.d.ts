@@ -1543,6 +1543,10 @@ export interface UserInfo {
       * 用户UIN
       */
     Uin: number;
+    /**
+      * 所属 DNS 服务器
+      */
+    FreeNs: Array<string>;
 }
 /**
  * ModifyRecordBatch返回参数结构体

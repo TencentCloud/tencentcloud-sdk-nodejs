@@ -3912,7 +3912,7 @@ export interface TcrRepositoryInfo {
       */
     Namespace: string;
     /**
-      * 创建时间
+      * 创建时间，格式"2006-01-02 15:04:05.999999999 -0700 MST"
       */
     CreationTime: string;
     /**
@@ -3930,7 +3930,7 @@ export interface TcrRepositoryInfo {
       */
     BriefDescription: string;
     /**
-      * 更新时间
+      * 更新时间，格式"2006-01-02 15:04:05.999999999 -0700 MST"
       */
     UpdateTime: string;
 }

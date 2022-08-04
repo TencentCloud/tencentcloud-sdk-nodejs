@@ -169,11 +169,7 @@ export interface SuspendProbeTaskResponse {
 }
 
 /**
- * type ProbeTaskBasicConfiguration struct {
-	TaskID        TaskID `json:"TaskId" gorm:"column:task_id"`
-	Name          string `json:"Name" binding:"required" gorm:"column:name"`
-	TargetAddress string `json:"TargetAddress" binding:"required" gorm:"column:target_address"`
-}
+ * 拨测任务基础配置
  */
 export interface ProbeTaskBasicConfiguration {
   /**

@@ -981,23 +981,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("QueryOpenBankDownLoadUrl", req, cb);
     }
     /**
-     * 调用该接口返回对账单下载地址，对账单下载URL通过GET方式访问，返回zip包，解压后为csv格式文件。文件首行如下：
-商户号,订单号,支付订单号,分账订单总金额,分账详情（通过|分割每笔明细：商户号1#分账金额1|商户号2#分账金额2）,交易手续费承担方商户号,交易手续费,发起时间,分账状态,结算日期,非交易主体分账金额,商户退款订单号,商户分账单号
-     */
-    async GetDistributeBillDownloadUrl(req, cb) {
-        return this.request("GetDistributeBillDownloadUrl", req, cb);
-    }
-    /**
      * 云支付-查询订单付款状态
      */
     async QueryOrderStatus(req, cb) {
         return this.request("QueryOrderStatus", req, cb);
-    }
-    /**
-     * 银企直连-单笔支付状态查询接口
-     */
-    async QuerySinglePay(req, cb) {
-        return this.request("QuerySinglePay", req, cb);
     }
     /**
      * 跨境-付款人查询
@@ -1024,10 +1011,11 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetPayRollAuth", req, cb);
     }
     /**
-     * 银企直连-单笔支付接口
+     * 调用该接口返回对账单下载地址，对账单下载URL通过GET方式访问，返回zip包，解压后为csv格式文件。文件首行如下：
+商户号,订单号,支付订单号,分账订单总金额,分账详情（通过|分割每笔明细：商户号1#分账金额1|商户号2#分账金额2）,交易手续费承担方商户号,交易手续费,发起时间,分账状态,结算日期,非交易主体分账金额,商户退款订单号,商户分账单号
      */
-    async CreateSinglePay(req, cb) {
-        return this.request("CreateSinglePay", req, cb);
+    async GetDistributeBillDownloadUrl(req, cb) {
+        return this.request("GetDistributeBillDownloadUrl", req, cb);
     }
     /**
      * 会员子账户开立。会员在银行注册，并开立会员子账户，交易网会员代码即会员在平台端系统的会员编号。

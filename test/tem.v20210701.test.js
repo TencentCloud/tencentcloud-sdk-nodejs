@@ -38,6 +38,16 @@ it("tem.v20210701.DescribeApplicationsStatus", async function () {
     }
 })
 
+it("tem.v20210701.DescribePagedLogConfigList", async function () {
+    try {
+       const data = await client.DescribePagedLogConfigList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tem.v20210701.ModifyIngress", async function () {
     try {
        const data = await client.ModifyIngress({})
@@ -71,6 +81,16 @@ it("tem.v20210701.CreateApplicationAutoscaler", async function () {
 it("tem.v20210701.RestartApplicationPod", async function () {
     try {
        const data = await client.RestartApplicationPod({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tem.v20210701.ModifyLogConfig", async function () {
+    try {
+       const data = await client.ModifyLogConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -158,9 +178,29 @@ it("tem.v20210701.ModifyEnvironment", async function () {
     }
 })
 
+it("tem.v20210701.DescribeLogConfig", async function () {
+    try {
+       const data = await client.DescribeLogConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tem.v20210701.StopApplication", async function () {
     try {
        const data = await client.StopApplication({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tem.v20210701.CreateLogConfig", async function () {
+    try {
+       const data = await client.CreateLogConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -331,6 +371,16 @@ it("tem.v20210701.DescribeApplications", async function () {
 it("tem.v20210701.RevertDeployApplication", async function () {
     try {
        const data = await client.RevertDeployApplication({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tem.v20210701.DestroyLogConfig", async function () {
+    try {
+       const data = await client.DestroyLogConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

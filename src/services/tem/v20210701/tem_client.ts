@@ -24,6 +24,7 @@ import {
   DescribeApplicationInfoResponse,
   ModifyIngressResponse,
   RestartApplicationPodRequest,
+  DestroyLogConfigResponse,
   ResumeDeployApplicationResponse,
   StorageConf,
   DescribeApplicationPodsRequest,
@@ -34,7 +35,7 @@ import {
   ModifyApplicationAutoscalerResponse,
   RollingUpdateApplicationByVersionRequest,
   CreateCosTokenResponse,
-  RevertDeployApplicationRequest,
+  ModifyLogConfigResponse,
   RollingUpdateApplicationByVersionResponse,
   StopApplicationRequest,
   ModifyApplicationInfoRequest,
@@ -46,9 +47,11 @@ import {
   DescribeApplicationsResponse,
   IngressInfo,
   DescribeEnvironmentsRequest,
-  ModifyEnvironmentRequest,
+  LogConfigListPage,
+  ServiceVersionBrief,
   CreateEnvironmentRequest,
   NodeInfo,
+  DescribeLogConfigRequest,
   TemDeployApplicationDetailInfo,
   DescribeEnvironmentStatusResponse,
   IngressTls,
@@ -56,13 +59,15 @@ import {
   DescribeConfigDataListRequest,
   ServicePage,
   TemServiceVersionInfo,
+  ServicePortMapping,
   CreateCosTokenRequest,
   ModifyApplicationAutoscalerRequest,
-  DeleteIngressRequest,
+  ModifyConfigDataResponse,
   ModifyIngressRequest,
   EnablePrometheusConf,
   DescribeIngressesRequest,
   StorageMountConf,
+  CreateLogConfigRequest,
   RestartApplicationResponse,
   DescribeIngressesResponse,
   ModifyConfigDataRequest,
@@ -84,7 +89,7 @@ import {
   DescribeApplicationAutoscalerListRequest,
   DescribeApplicationsStatusResponse,
   DescribeDeployApplicationDetailRequest,
-  ModifyConfigDataResponse,
+  DeleteIngressRequest,
   DescribeRelatedIngressesRequest,
   CosToken,
   GenerateApplicationPackageDownloadUrlRequest,
@@ -92,6 +97,7 @@ import {
   DeleteApplicationAutoscalerResponse,
   DescribeRelatedIngressesResponse,
   TemNamespaceInfo,
+  DescribePagedLogConfigListRequest,
   TemEnvironmentStartingStatus,
   TemService,
   IngressRule,
@@ -103,7 +109,9 @@ import {
   ResumeDeployApplicationRequest,
   DescribeConfigDataRequest,
   MountedSettingConf,
+  CreateLogConfigResponse,
   DescribeConfigDataListResponse,
+  DescribePagedLogConfigListResponse,
   HealthCheckConfig,
   DeployServiceBatchDetail,
   Autoscaler,
@@ -120,19 +128,25 @@ import {
   DescribeRunPodPage,
   ModifyApplicationReplicasResponse,
   UseDefaultRepoParameters,
+  CronHorizontalAutoscalerSchedule,
+  ModifyEnvironmentRequest,
   GenerateApplicationPackageDownloadUrlResponse,
   IngressRuleBackend,
   DeployStrategyConf,
   DescribeIngressResponse,
   WorkloadInfo,
   IngressRulePath,
-  ServiceVersionBrief,
+  DescribeLogConfigResponse,
+  ServicePortMappingItem,
+  RevertDeployApplicationRequest,
   CreateApplicationResponse,
   HorizontalAutoscaler,
   PortMapping,
   ModifyEnvironmentResponse,
   ModifyApplicationReplicasRequest,
-  CronHorizontalAutoscalerSchedule,
+  ModifyLogConfigRequest,
+  DestroyLogConfigRequest,
+  LogConfig,
   EksService,
   Pair,
 } from "./tem_models"
@@ -164,6 +178,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeApplicationsStatusResponse) => void
   ): Promise<DescribeApplicationsStatusResponse> {
     return this.request("DescribeApplicationsStatus", req, cb)
+  }
+
+  /**
+   * 查询分页的日志收集配置列表
+   */
+  async DescribePagedLogConfigList(
+    req: DescribePagedLogConfigListRequest,
+    cb?: (error: string, rep: DescribePagedLogConfigListResponse) => void
+  ): Promise<DescribePagedLogConfigListResponse> {
+    return this.request("DescribePagedLogConfigList", req, cb)
   }
 
   /**
@@ -204,6 +228,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RestartApplicationPodResponse) => void
   ): Promise<RestartApplicationPodResponse> {
     return this.request("RestartApplicationPod", req, cb)
+  }
+
+  /**
+   * 编辑日志收集配置
+   */
+  async ModifyLogConfig(
+    req: ModifyLogConfigRequest,
+    cb?: (error: string, rep: ModifyLogConfigResponse) => void
+  ): Promise<ModifyLogConfigResponse> {
+    return this.request("ModifyLogConfig", req, cb)
   }
 
   /**
@@ -290,6 +324,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询日志收集配置详情
+   */
+  async DescribeLogConfig(
+    req: DescribeLogConfigRequest,
+    cb?: (error: string, rep: DescribeLogConfigResponse) => void
+  ): Promise<DescribeLogConfigResponse> {
+    return this.request("DescribeLogConfig", req, cb)
+  }
+
+  /**
    * 服务停止
    */
   async StopApplication(
@@ -297,6 +341,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: StopApplicationResponse) => void
   ): Promise<StopApplicationResponse> {
     return this.request("StopApplication", req, cb)
+  }
+
+  /**
+   * 创建日志收集配置
+   */
+  async CreateLogConfig(
+    req: CreateLogConfigRequest,
+    cb?: (error: string, rep: CreateLogConfigResponse) => void
+  ): Promise<CreateLogConfigResponse> {
+    return this.request("CreateLogConfig", req, cb)
   }
 
   /**
@@ -360,7 +414,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取租户环境列表
+   * 获取环境列表
    */
   async DescribeEnvironments(
     req: DescribeEnvironmentsRequest,
@@ -470,6 +524,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 销毁日志收集配置
+   */
+  async DestroyLogConfig(
+    req: DestroyLogConfigRequest,
+    cb?: (error: string, rep: DestroyLogConfigResponse) => void
+  ): Promise<DestroyLogConfigResponse> {
+    return this.request("DestroyLogConfig", req, cb)
+  }
+
+  /**
    * 查询应用关联的 Ingress 规则列表
    */
   async DescribeRelatedIngresses(
@@ -510,7 +574,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 销毁命名空间
+   * 销毁环境
    */
   async DestroyEnvironment(
     req: DestroyEnvironmentRequest,

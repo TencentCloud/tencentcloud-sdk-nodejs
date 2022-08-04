@@ -1472,19 +1472,6 @@ export interface QueryCloudChannelDataResponse {
     RequestId?: string;
 }
 /**
- * QuerySinglePay返回参数结构体
- */
-export interface QuerySinglePayResponse {
-    /**
-      * 返回结果
-      */
-    Result: QuerySinglePayResult;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
  * UploadExternalAnchorInfo返回参数结构体
  */
 export interface UploadExternalAnchorInfoResponse {
@@ -3670,31 +3657,6 @@ export interface CreateInvoiceV2Response {
     RequestId?: string;
 }
 /**
- * 银企直连-查询单笔支付状态条目
- */
-export interface QuerySinglePayItem {
-    /**
-      * 付款状态（S：支付成功；P：支付处理中；F：支付失败）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    PayStatus: string;
-    /**
-      * 平台信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    PlatformMsg: string;
-    /**
-      * 银行原始返回码
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    BankRetCode: string;
-    /**
-      * 银行原始返回
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    BankRetMsg: string;
-}
-/**
  * QueryInvoiceV2返回参数结构体
  */
 export interface QueryInvoiceV2Response {
@@ -4301,19 +4263,6 @@ export interface RevokeMemberRechargeThirdPayRequest {
     ReservedMsgThree?: string;
     /**
       * STRING(12)，接入环境，默认接入沙箱环境。接入正式环境填"prod"
-      */
-    Profile?: string;
-}
-/**
- * QuerySinglePay请求参数结构体
- */
-export interface QuerySinglePayRequest {
-    /**
-      * 业务流水号
-      */
-    SerialNumber: string;
-    /**
-      * 接入环境。沙箱环境填sandbox
       */
     Profile?: string;
 }
@@ -8993,44 +8942,6 @@ export interface BindRelateAccReUnionPayRequest {
       * STRING(12)，接入环境，默认接入沙箱环境。接入正式环境填"prod"
       */
     Profile?: string;
-}
-/**
- * 银企直连-单笔支付响应结果
- */
-export interface CreateSinglePayResult {
-    /**
-      * 受理状态（S：处理成功；F：处理失败）
-      */
-    HandleStatus: string;
-    /**
-      * 受理状态描述
-      */
-    HandleMsg: string;
-    /**
-      * 业务流水号，历史唯一
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    SerialNo: string;
-    /**
-      * 银行指令流水
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    BankSerialNo: string;
-    /**
-      * 付款状态
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    PayStatus: string;
-    /**
-      * 银行原始返回码
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    BankRetCode: string;
-    /**
-      * 银行原始返回
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    BankRetMsg: string;
 }
 /**
  * QueryAcctInfo返回参数结构体
@@ -15739,19 +15650,6 @@ __test__:测试环境
     Environment?: string;
 }
 /**
- * CreateSinglePay返回参数结构体
- */
-export interface CreateSinglePayResponse {
-    /**
-      * 返回结果
-      */
-    Result: CreateSinglePayResult;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
  * MigrateOrderRefund请求参数结构体
  */
 export interface MigrateOrderRefundRequest {
@@ -18948,34 +18846,6 @@ export interface AddFlexIdInfoResponse {
     RequestId?: string;
 }
 /**
- * RefundOrder返回参数结构体
- */
-export interface RefundOrderResponse {
-    /**
-      * 进件成功后返给商户方的AppId
-      */
-    MerchantAppId: string;
-    /**
-      * 平台流水号。消费订单发起成功后，返回的平台唯一订单号。
-      */
-    OrderNo: string;
-    /**
-      * 订单退款状态。0-退款失败
-1-退款成功
-2-可疑状态
-      */
-    Status: string;
-    /**
-      * 订单退款状态描述
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Description: string;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
  * 银行在途清算结果信息
  */
 export interface ClearItem {
@@ -20703,27 +20573,32 @@ export interface AmountBeforeTaxResult {
     AmountBeforeTaxWithTwoDigitPrecision: string;
 }
 /**
- * 银企直连-查询单笔支付状态结果
+ * RefundOrder返回参数结构体
  */
-export interface QuerySinglePayResult {
+export interface RefundOrderResponse {
     /**
-      * 受理状态（S：处理成功；F：处理失败）
+      * 进件成功后返给商户方的AppId
       */
-    HandleStatus: string;
+    MerchantAppId: string;
     /**
-      * 受理状态描述
+      * 平台流水号。消费订单发起成功后，返回的平台唯一订单号。
+      */
+    OrderNo: string;
+    /**
+      * 订单退款状态。0-退款失败
+1-退款成功
+2-可疑状态
+      */
+    Status: string;
+    /**
+      * 订单退款状态描述
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    HandleMsg: string;
+    Description: string;
     /**
-      * 业务流水号
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    SerialNo: string;
-    /**
-      * 支付明细
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Items: Array<QuerySinglePayItem>;
+    RequestId?: string;
 }
 /**
  * 渠道扩展促销信息
@@ -21104,83 +20979,6 @@ PENDING: 处理中
 READY: 可以下载
       */
     ReceiptStatus: string;
-}
-/**
- * CreateSinglePay请求参数结构体
- */
-export interface CreateSinglePayRequest {
-    /**
-      * 业务流水号，历史唯一
-      */
-    SerialNumber: string;
-    /**
-      * 付方账户号
-      */
-    PayAccountNumber: string;
-    /**
-      * 付方账户名称
-      */
-    PayAccountName: string;
-    /**
-      * 金额
-      */
-    Amount: number;
-    /**
-      * 收方账户号
-      */
-    RecvAccountNumber: string;
-    /**
-      * 收方账户名称
-      */
-    RecvAccountName: string;
-    /**
-      * 付方账户CNAPS号
-      */
-    PayBankCnaps?: string;
-    /**
-      * 付方账户银行大类，PayBankCnaps为空时必传（见常见问题-银企直连银行类型）
-      */
-    PayBankType?: string;
-    /**
-      * 付方账户银行所在省，PayBankCnaps为空时必传（见常见问题-银企直连省份枚举信息）
-      */
-    PayBankProvince?: string;
-    /**
-      * 付方账户银行所在地区，PayBankCnaps为空时必传（见常见问题-银企直连城市枚举信息）
-      */
-    PayBankCity?: string;
-    /**
-      * 收方账户CNAPS号
-      */
-    RecvBankCnaps?: string;
-    /**
-      * 收方账户银行大类，RecvBankCnaps为空时必传（见常见问题-银企直连银行类型）
-      */
-    RecvBankType?: string;
-    /**
-      * 收方账户银行所在省，RecvBankCnaps为空时必传（见常见问题-银企直连省份枚举信息）
-      */
-    RecvBankProvince?: string;
-    /**
-      * 收方账户银行所在地区，RecvBankCnaps为空时必传（见常见问题-银企直连城市枚举信息）
-      */
-    RecvBankCity?: string;
-    /**
-      * 收款方证件类型（见常见问题-银企直连证件类型枚举信息）
-      */
-    RecvCertType?: string;
-    /**
-      * 收款方证件号码
-      */
-    RecvCertNo?: string;
-    /**
-      * 摘要信息
-      */
-    Summary?: string;
-    /**
-      * 接入环境。沙箱环境填sandbox
-      */
-    Profile?: string;
 }
 /**
  * QueryRefund返回参数结构体

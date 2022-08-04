@@ -3468,7 +3468,7 @@ export interface ModifyBackupConfigRequest {
       */
     BackupTimeWindow?: CommonTimeWindow;
     /**
-      * 定期保留开关，off - 不开启定期保留策略，on - 开启定期保留策略，默认为off
+      * 定期保留开关，off - 不开启定期保留策略，on - 开启定期保留策略，默认为off。首次开启定期保留策略时，BackupPeriodSaveDays，BackupPeriodSaveInterval，BackupPeriodSaveCount，StartBackupPeriodSaveDate参数为必填项，否则定期保留策略不会生效
       */
     EnableBackupPeriodSave?: string;
     /**
