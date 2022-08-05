@@ -4930,7 +4930,7 @@ export interface ProxyInfo {
       */
     Bandwidth: number;
     /**
-      * 并发，单位：个/秒。
+      * 并发，单位：万个/秒。
       */
     Concurrent: number;
     /**

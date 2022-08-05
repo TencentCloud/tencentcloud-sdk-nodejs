@@ -297,6 +297,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteLiveWatermark", req, cb);
     }
     /**
+     * 查询绑定证书的域名列表。
+     */
+    async DescribeLiveDomainCertBindings(req, cb) {
+        return this.request("DescribeLiveDomainCertBindings", req, cb);
+    }
+    /**
      * 查询下行播放错误码信息。
      */
     async DescribePlayErrorCodeSumInfoList(req, cb) {
@@ -391,6 +397,13 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
      */
     async DescribeLiveCert(req, cb) {
         return this.request("DescribeLiveCert", req, cb);
+    }
+    /**
+     * 批量绑定证书对应的播放域名，并更新启用状态。
+新建自有证书将自动上传至腾讯云ssl。
+     */
+    async ModifyLiveDomainCertBindings(req, cb) {
+        return this.request("ModifyLiveDomainCertBindings", req, cb);
     }
     /**
      * 根据域名状态、类型等信息查询用户的域名信息。

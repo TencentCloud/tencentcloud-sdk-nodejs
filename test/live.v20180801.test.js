@@ -398,6 +398,16 @@ it("live.v20180801.DeleteLiveWatermark", async function () {
     }
 })
 
+it("live.v20180801.DescribeLiveDomainCertBindings", async function () {
+    try {
+       const data = await client.DescribeLiveDomainCertBindings({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("live.v20180801.DescribePlayErrorCodeSumInfoList", async function () {
     try {
        const data = await client.DescribePlayErrorCodeSumInfoList({})
@@ -521,6 +531,16 @@ it("live.v20180801.CreateLivePullStreamTask", async function () {
 it("live.v20180801.DescribeLiveCert", async function () {
     try {
        const data = await client.DescribeLiveCert({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("live.v20180801.ModifyLiveDomainCertBindings", async function () {
+    try {
+       const data = await client.ModifyLiveDomainCertBindings({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

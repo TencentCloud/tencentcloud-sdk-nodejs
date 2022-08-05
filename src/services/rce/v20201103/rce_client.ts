@@ -18,32 +18,27 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  OutputManageMarketingRisk,
+  WeChatAccountInfo,
   QQAccountInfo,
   ManageMarketingRiskRequest,
   DescribeRiskTrendsRequest,
+  SponsorInfo,
   DescribeRiskAssessmentRequest,
+  OnlineScamInfo,
+  InputManageMarketingRisk,
+  InputFrontRisk,
+  OutputFrontRisk,
+  OtherAccountInfo,
+  DescribeRiskTrendsResponse,
   AccountInfo,
-  OutputFrontRiskValue,
+  ManageMarketingRiskResponse,
+  InputCryptoManageMarketingRisk,
   DescribeRiskAssessmentResponse,
+  OutputFrontRiskValue,
+  InputDetails,
   OutputManageMarketingRiskValue,
   OutputFrontRiskData,
-  OutputFrontRisk,
-  InputFrontRisk,
-  ManageMarketingRiskResponse,
-  InputDetails,
-  WeChatAccountInfo,
-  OutputDescribeRiskModel,
-  OutputManageMarketingRisk,
-  OtherAccountInfo,
-  DescribeRiskModelResponse,
-  InputManageMarketingRisk,
-  InputCryptoManageMarketingRisk,
-  SponsorInfo,
-  OnlineScamInfo,
-  OutputDescribeRiskModelValue,
-  DescribeRiskTrendsResponse,
-  DescribeRiskModelRequest,
-  InputDescribeRiskModelData,
 } from "./rce_models"
 
 /**
@@ -53,16 +48,6 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("rce.tencentcloudapi.com", "2020-11-03", clientConfig)
-  }
-
-  /**
-   * 依托人工智能技术和腾讯丰富的风控实战经验，根据用户提供的数据和业务场景，给客户提供定制化模型服务
-   */
-  async DescribeRiskModel(
-    req: DescribeRiskModelRequest,
-    cb?: (error: string, rep: DescribeRiskModelResponse) => void
-  ): Promise<DescribeRiskModelResponse> {
-    return this.request("DescribeRiskModel", req, cb)
   }
 
   /**

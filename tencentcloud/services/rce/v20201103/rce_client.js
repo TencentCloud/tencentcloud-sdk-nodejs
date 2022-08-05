@@ -28,12 +28,6 @@ class Client extends abstract_client_1.AbstractClient {
         super("rce.tencentcloudapi.com", "2020-11-03", clientConfig);
     }
     /**
-     * 依托人工智能技术和腾讯丰富的风控实战经验，根据用户提供的数据和业务场景，给客户提供定制化模型服务
-     */
-    async DescribeRiskModel(req, cb) {
-        return this.request("DescribeRiskModel", req, cb);
-    }
-    /**
      * 以图表形式展示三种请求状态的趋势变化
      */
     async DescribeRiskTrends(req, cb) {

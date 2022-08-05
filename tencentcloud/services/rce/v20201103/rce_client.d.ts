@@ -1,16 +1,12 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ManageMarketingRiskRequest, DescribeRiskTrendsRequest, DescribeRiskAssessmentRequest, DescribeRiskAssessmentResponse, ManageMarketingRiskResponse, DescribeRiskModelResponse, DescribeRiskTrendsResponse, DescribeRiskModelRequest } from "./rce_models";
+import { ManageMarketingRiskRequest, DescribeRiskTrendsRequest, DescribeRiskAssessmentRequest, DescribeRiskTrendsResponse, ManageMarketingRiskResponse, DescribeRiskAssessmentResponse } from "./rce_models";
 /**
  * rce client
  * @class
  */
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
-    /**
-     * 依托人工智能技术和腾讯丰富的风控实战经验，根据用户提供的数据和业务场景，给客户提供定制化模型服务
-     */
-    DescribeRiskModel(req: DescribeRiskModelRequest, cb?: (error: string, rep: DescribeRiskModelResponse) => void): Promise<DescribeRiskModelResponse>;
     /**
      * 以图表形式展示三种请求状态的趋势变化
      */

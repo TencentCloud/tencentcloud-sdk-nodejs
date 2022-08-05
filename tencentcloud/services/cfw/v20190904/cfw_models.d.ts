@@ -3287,7 +3287,7 @@ export interface DescribeBlockStaticListRequest {
       */
     EndTime: string;
     /**
-      * 类型
+      * 列表类型，只能是下面三种之一：port、address、ip
       */
     QueryType: string;
     /**

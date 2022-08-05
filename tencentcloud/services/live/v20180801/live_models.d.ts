@@ -1447,6 +1447,39 @@ export interface DescribeLiveRecordTemplateRequest {
     TemplateId: number;
 }
 /**
+ * 监控播放数据
+ */
+export interface MonitorStreamPlayInfo {
+    /**
+      * 播放域名。
+      */
+    PlayDomain: string;
+    /**
+      * 流id。
+      */
+    StreamName: string;
+    /**
+      * 播放码率，0表示原始码率。
+      */
+    Rate: number;
+    /**
+      * 播放协议，可选值包括 Unknown，Flv，Hls，Rtmp，Huyap2p。
+      */
+    Protocol: string;
+    /**
+      * 带宽，单位是Mbps。
+      */
+    Bandwidth: number;
+    /**
+      * 在线人数，1分钟采样一个点，统计采样点的tcp链接数目。
+      */
+    Online: number;
+    /**
+      * 请求数。
+      */
+    Request: number;
+}
+/**
  * 查询当前正在推流的信息
  */
 export interface StreamOnlineInfo {
@@ -1986,105 +2019,17 @@ export interface TimeValue {
     Num: number;
 }
 /**
- * ModifyLivePullStreamTask请求参数结构体
+ * ModifyLiveDomainCertBindings返回参数结构体
  */
-export interface ModifyLivePullStreamTaskRequest {
+export interface ModifyLiveDomainCertBindingsResponse {
     /**
-      * 任务Id。
+      * DomainNames 入参中，与证书不匹配的域名列表，将会跳过处理。
       */
-    TaskId: string;
+    MismatchedDomainNames: Array<string>;
     /**
-      * 操作人姓名。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Operator: string;
-    /**
-      * 拉流源url列表。
-SourceType为直播（PullLivePushLive）只可以填1个，
-SourceType为点播（PullVodPushLive）可以填多个，上限30个。
-      */
-    SourceUrls?: Array<string>;
-    /**
-      * 开始时间。
-使用UTC格式时间，
-例如：2019-01-08T10:00:00Z。
-注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
-      */
-    StartTime?: string;
-    /**
-      * 结束时间，注意：
-1. 结束时间必须大于开始时间；
-2. 结束时间和开始时间必须大于当前时间；
-3. 结束时间 和 开始时间 间隔必须小于七天。
-使用UTC格式时间，
-例如：2019-01-08T10:00:00Z。
-注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
-      */
-    EndTime?: string;
-    /**
-      * 点播拉流转推循环次数。
--1：无限循环，直到任务结束。
-0：不循环。
->0：具体循环次数。次数和时间以先结束的为准。
-注意：拉流源为点播，该配置生效。
-      */
-    VodLoopTimes?: number;
-    /**
-      * 点播更新SourceUrls后的播放方式：
-ImmediateNewSource：立即从更新的拉流源开始播放；
-ContinueBreakPoint：从上次断流url源的断点处继续，结束后再使用新的拉流源。
-注意：拉流源为点播，该配置生效。
-      */
-    VodRefreshType?: string;
-    /**
-      * 任务状态：
-enable - 启用，
-pause - 暂停。
-      */
-    Status?: string;
-    /**
-      * 选择需要回调的事件（不填则回调全部）：
-TaskStart：任务启动回调，
-TaskExit：任务停止回调，
-VodSourceFileStart：从点播源文件开始拉流回调，
-VodSourceFileFinish：从点播源文件拉流结束回调，
-ResetTaskConfig：任务更新回调。
-      */
-    CallbackEvents?: Array<string>;
-    /**
-      * 自定义回调地址。
-相关事件会回调到该地址。
-      */
-    CallbackUrl?: string;
-    /**
-      * 指定播放文件索引。
-注意： 从1开始，不大于SourceUrls中文件个数。
-      */
-    FileIndex?: number;
-    /**
-      * 指定播放文件偏移。
-注意：
-1. 单位：秒，配合FileIndex使用。
-      */
-    OffsetTime?: number;
-    /**
-      * 任务备注。
-      */
-    Comment?: string;
-    /**
-      * 备源的类型：
-PullLivePushLive -直播，
-PullVodPushLive -点播。
-注意：
-1. 仅当主源类型为直播源时，备源才会生效。
-2. 主直播源拉流中断时，自动使用备源进行拉流。
-3. 如果备源为点播文件时，则每次轮播完点播文件就检查主源是否恢复，如果主源恢复则自动切回到主源，否则继续拉备源。
-      */
-    BackupSourceType?: string;
-    /**
-      * 备源 URL。
-只允许填一个备源 URL
-      */
-    BackupSourceUrl?: string;
+    RequestId?: string;
 }
 /**
  * 拉流配置。
@@ -2183,6 +2128,35 @@ export interface UpdateLiveWatermarkResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * ModifyLiveDomainCertBindings请求参数结构体
+ */
+export interface ModifyLiveDomainCertBindingsRequest {
+    /**
+      * 要绑定证书的播放域名/状态 信息列表。
+如果CloudCertId和证书公钥私钥对均不传，且域名列表已有绑定规则，只批量更新域名https规则的启用状态，并把未上传至腾讯云ssl的已有自有证书上传。
+      */
+    DomainInfos: Array<LiveCertDomainInfo>;
+    /**
+      * 腾讯云ssl的证书Id。
+见 https://cloud.tencent.com/document/api/400/41665
+      */
+    CloudCertId?: string;
+    /**
+      * 证书公钥。
+CloudCertId和公钥私钥对二选一，若CloudCertId将会舍弃公钥和私钥参数，否则将自动先把公钥私钥对上传至ssl新建证书，并使用上传成功后返回的CloudCertId。
+      */
+    CertificatePublicKey?: string;
+    /**
+      * 证书私钥。
+CloudCertId和公钥私钥对二选一，若传CloudCertId将会舍弃公钥和私钥参数，否则将自动先把公钥私钥对上传至ssl新建证书，并使用上传成功后返回的CloudCertId。
+      */
+    CertificatePrivateKey?: string;
+    /**
+      * 上传至ssl证书中心的备注信息，只有新建证书时有效。传CloudCertId时会忽略。
+      */
+    CertificateAlias?: string;
 }
 /**
  * DescribeRecordTask请求参数结构体
@@ -2295,17 +2269,20 @@ export interface BillAreaInfo {
     Countrys: Array<BillCountryInfo>;
 }
 /**
- * 流维度的播放信息。
+ * 用作批量绑定域名和证书。
  */
-export interface PlayDataInfoByStream {
+export interface LiveCertDomainInfo {
     /**
-      * 流名称。
+      * 域名。
       */
-    StreamName: string;
+    DomainName: string;
     /**
-      * 总流量，单位: MB。
+      * 是否启用域名的https规则。
+1：启用
+0：禁用
+-1：保持不变
       */
-    TotalFlux: number;
+    Status: number;
 }
 /**
  * DescribeVisitTopSumInfoList请求参数结构体
@@ -2391,6 +2368,15 @@ export interface ModifyLivePlayDomainResponse {
  * CancelCommonMixStream返回参数结构体
  */
 export interface CancelCommonMixStreamResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeLiveDomainCertBindings返回参数结构体
+ */
+export interface DescribeLiveDomainCertBindingsResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2602,6 +2588,19 @@ export interface DescribeScreenshotTaskRequest {
       * 翻页标识，分批拉取时使用：当单次请求无法拉取所有数据，接口将会返回 ScrollToken，下一次请求携带该 Token，将会从下一条记录开始获取。
       */
     ScrollToken?: string;
+}
+/**
+ * 流维度的播放信息。
+ */
+export interface PlayDataInfoByStream {
+    /**
+      * 流名称。
+      */
+    StreamName: string;
+    /**
+      * 总流量，单位: MB。
+      */
+    TotalFlux: number;
 }
 /**
  * DescribeCallbackRecordsList请求参数结构体
@@ -4269,37 +4268,105 @@ export interface ModifyLiveTranscodeTemplateResponse {
     RequestId?: string;
 }
 /**
- * 监控播放数据
+ * ModifyLivePullStreamTask请求参数结构体
  */
-export interface MonitorStreamPlayInfo {
+export interface ModifyLivePullStreamTaskRequest {
     /**
-      * 播放域名。
+      * 任务Id。
       */
-    PlayDomain: string;
+    TaskId: string;
     /**
-      * 流id。
+      * 操作人姓名。
       */
-    StreamName: string;
+    Operator: string;
     /**
-      * 播放码率，0表示原始码率。
+      * 拉流源url列表。
+SourceType为直播（PullLivePushLive）只可以填1个，
+SourceType为点播（PullVodPushLive）可以填多个，上限30个。
       */
-    Rate: number;
+    SourceUrls?: Array<string>;
     /**
-      * 播放协议，可选值包括 Unknown，Flv，Hls，Rtmp，Huyap2p。
+      * 开始时间。
+使用UTC格式时间，
+例如：2019-01-08T10:00:00Z。
+注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
       */
-    Protocol: string;
+    StartTime?: string;
     /**
-      * 带宽，单位是Mbps。
+      * 结束时间，注意：
+1. 结束时间必须大于开始时间；
+2. 结束时间和开始时间必须大于当前时间；
+3. 结束时间 和 开始时间 间隔必须小于七天。
+使用UTC格式时间，
+例如：2019-01-08T10:00:00Z。
+注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
       */
-    Bandwidth: number;
+    EndTime?: string;
     /**
-      * 在线人数，1分钟采样一个点，统计采样点的tcp链接数目。
+      * 点播拉流转推循环次数。
+-1：无限循环，直到任务结束。
+0：不循环。
+>0：具体循环次数。次数和时间以先结束的为准。
+注意：拉流源为点播，该配置生效。
       */
-    Online: number;
+    VodLoopTimes?: number;
     /**
-      * 请求数。
+      * 点播更新SourceUrls后的播放方式：
+ImmediateNewSource：立即从更新的拉流源开始播放；
+ContinueBreakPoint：从上次断流url源的断点处继续，结束后再使用新的拉流源。
+注意：拉流源为点播，该配置生效。
       */
-    Request: number;
+    VodRefreshType?: string;
+    /**
+      * 任务状态：
+enable - 启用，
+pause - 暂停。
+      */
+    Status?: string;
+    /**
+      * 选择需要回调的事件（不填则回调全部）：
+TaskStart：任务启动回调，
+TaskExit：任务停止回调，
+VodSourceFileStart：从点播源文件开始拉流回调，
+VodSourceFileFinish：从点播源文件拉流结束回调，
+ResetTaskConfig：任务更新回调。
+      */
+    CallbackEvents?: Array<string>;
+    /**
+      * 自定义回调地址。
+相关事件会回调到该地址。
+      */
+    CallbackUrl?: string;
+    /**
+      * 指定播放文件索引。
+注意： 从1开始，不大于SourceUrls中文件个数。
+      */
+    FileIndex?: number;
+    /**
+      * 指定播放文件偏移。
+注意：
+1. 单位：秒，配合FileIndex使用。
+      */
+    OffsetTime?: number;
+    /**
+      * 任务备注。
+      */
+    Comment?: string;
+    /**
+      * 备源的类型：
+PullLivePushLive -直播，
+PullVodPushLive -点播。
+注意：
+1. 仅当主源类型为直播源时，备源才会生效。
+2. 主直播源拉流中断时，自动使用备源进行拉流。
+3. 如果备源为点播文件时，则每次轮播完点播文件就检查主源是否恢复，如果主源恢复则自动切回到主源，否则继续拉备源。
+      */
+    BackupSourceType?: string;
+    /**
+      * 备源 URL。
+只允许填一个备源 URL
+      */
+    BackupSourceUrl?: string;
 }
 /**
  * DescribePlayErrorCodeSumInfoList请求参数结构体
@@ -4990,6 +5057,23 @@ export interface CreateLiveRecordTemplateResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 某省份某运营商在某段时间内的带宽，流量，请求数和并发数
+ */
+export interface GroupProIspDataInfo {
+    /**
+      * 省份。
+      */
+    ProvinceName: string;
+    /**
+      * 运营商。
+      */
+    IspName: string;
+    /**
+      * 分钟维度的明细数据。
+      */
+    DetailInfoList: Array<CdnPlayStatData>;
 }
 /**
  * 录制模板参数。
@@ -6681,21 +6765,32 @@ export interface ResumeDelayLiveStreamResponse {
     RequestId?: string;
 }
 /**
- * 某省份某运营商在某段时间内的带宽，流量，请求数和并发数
+ * DescribeLiveDomainCertBindings请求参数结构体
  */
-export interface GroupProIspDataInfo {
+export interface DescribeLiveDomainCertBindingsRequest {
     /**
-      * 省份。
+      * 要搜索的域名字符串。
       */
-    ProvinceName: string;
+    DomainSearch?: string;
     /**
-      * 运营商。
+      * 记录行的位置，从0开始。默认0。
       */
-    IspName: string;
+    Offset?: number;
     /**
-      * 分钟维度的明细数据。
+      * 记录行的最大数目。默认50。
+若不传，则最多返回50条数据。
       */
-    DetailInfoList: Array<CdnPlayStatData>;
+    Length?: number;
+    /**
+      * 要查询的单个域名。
+      */
+    DomainName?: string;
+    /**
+      * 可取值：
+ExpireTimeAsc：证书过期时间降序。
+ExpireTimeDesc：证书过期时间升序。
+      */
+    OrderBy?: string;
 }
 /**
  * DeleteLiveDomain返回参数结构体

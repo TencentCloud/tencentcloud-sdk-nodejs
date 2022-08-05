@@ -13190,7 +13190,7 @@ export interface VulInfoList {
   HostCount: number
 
   /**
-   * 漏洞等级 1:低 2:中 3:高 4:提示
+   * 漏洞等级 1:低 2:中 3:高 4:严重
    */
   Level: number
 

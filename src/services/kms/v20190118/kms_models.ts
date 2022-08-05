@@ -77,13 +77,13 @@ export interface DescribeWhiteBoxKeyDetailsResponse {
   /**
    * 白盒密钥信息列表
    */
-  KeyInfos?: Array<WhiteboxKeyInfo>
+  KeyInfos: Array<WhiteboxKeyInfo>
 
   /**
       * key总数量
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -299,7 +299,7 @@ export interface DescribeWhiteBoxKeyResponse {
   /**
    * 白盒密钥信息
    */
-  KeyInfo?: WhiteboxKeyInfo
+  KeyInfo: WhiteboxKeyInfo
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -324,7 +324,7 @@ export interface DescribeWhiteBoxServiceStatusResponse {
   /**
    * 用户的白盒密钥服务是否可用
    */
-  ServiceEnabled?: boolean
+  ServiceEnabled: boolean
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -626,29 +626,29 @@ export interface CreateWhiteBoxKeyResponse {
   /**
    * 用于加密的密钥，base64编码
    */
-  EncryptKey?: string
+  EncryptKey: string
 
   /**
    * 用于解密的密钥，base64编码
    */
-  DecryptKey?: string
+  DecryptKey: string
 
   /**
    * 白盒密钥的全局唯一标识符
    */
-  KeyId?: string
+  KeyId: string
 
   /**
       * 标签操作的返回码. 0: 成功；1: 内部错误；2: 业务处理错误
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  TagCode?: number
+  TagCode: number
 
   /**
       * 标签操作的返回信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  TagMsg?: string
+  TagMsg: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -703,12 +703,12 @@ export interface EncryptByWhiteBoxResponse {
   /**
    * 初始化向量，加密算法会使用到, base64编码。如果由调用方在入参中传入，则原样返回。如果调用方没有传入，则后端服务随机生成，并返回
    */
-  InitializationVector?: string
+  InitializationVector: string
 
   /**
    * 加密后的密文，base64编码
    */
-  CipherText?: string
+  CipherText: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1787,7 +1787,7 @@ export interface DescribeWhiteBoxDecryptKeyResponse {
   /**
    * 白盒解密密钥，base64编码
    */
-  DecryptKey?: string
+  DecryptKey: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1802,7 +1802,7 @@ export interface DescribeWhiteBoxDeviceFingerprintsResponse {
   /**
    * 设备指纹列表
    */
-  DeviceFingerprints?: Array<DeviceFingerprint>
+  DeviceFingerprints: Array<DeviceFingerprint>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

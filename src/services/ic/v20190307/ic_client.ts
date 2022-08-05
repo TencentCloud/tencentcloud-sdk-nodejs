@@ -18,25 +18,28 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  SendMultiSmsResponse,
-  AppInfo,
-  RenewCardsResponse,
-  CardList,
   DescribeCardsResponse,
-  ModifyUserCardRemarkRequest,
   DescribeCardResponse,
   CardInfo,
-  DescribeAppResponse,
-  DescribeCardRequest,
   DescribeAppRequest,
-  SendSmsResponse,
-  ModifyUserCardRemarkResponse,
-  SendSmsRequest,
-  DescribeCardsRequest,
+  ModifyUserCardRemarkRequest,
   SendMultiSmsRequest,
   ResRenew,
+  DescribeSmsResponse,
+  ResSms,
+  DescribeAppResponse,
+  DescribeCardRequest,
+  SendSmsResponse,
+  SendSmsRequest,
   SmsRet,
+  AppInfo,
+  RenewCardsResponse,
   SmsSid,
+  SendMultiSmsResponse,
+  CardList,
+  DescribeSmsRequest,
+  ModifyUserCardRemarkResponse,
+  DescribeCardsRequest,
   RenewCardsRequest,
 } from "./ic_models"
 
@@ -97,6 +100,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyUserCardRemarkResponse) => void
   ): Promise<ModifyUserCardRemarkResponse> {
     return this.request("ModifyUserCardRemark", req, cb)
+  }
+
+  /**
+   * 查询短信列表
+   */
+  async DescribeSms(
+    req: DescribeSmsRequest,
+    cb?: (error: string, rep: DescribeSmsResponse) => void
+  ): Promise<DescribeSmsResponse> {
+    return this.request("DescribeSms", req, cb)
   }
 
   /**

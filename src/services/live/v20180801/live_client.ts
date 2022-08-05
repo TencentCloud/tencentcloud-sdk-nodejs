@@ -83,6 +83,7 @@ import {
   DescribeLiveStreamPushInfoListResponse,
   DescribeLiveDomainCertResponse,
   DescribeLiveRecordTemplateRequest,
+  MonitorStreamPlayInfo,
   StreamOnlineInfo,
   CreateLiveWatermarkRuleResponse,
   ModifyLiveSnapshotTemplateResponse,
@@ -108,21 +109,23 @@ import {
   ForbidLiveStreamRequest,
   DescribeLiveDomainsResponse,
   TimeValue,
-  ModifyLivePullStreamTaskRequest,
+  ModifyLiveDomainCertBindingsResponse,
   PullStreamConfig,
   CreateLiveRecordResponse,
   RuleInfo,
   UpdateLiveWatermarkResponse,
+  ModifyLiveDomainCertBindingsRequest,
   DescribeRecordTaskRequest,
   LivePackageInfo,
   CreateLiveTranscodeTemplateResponse,
   BillAreaInfo,
-  PlayDataInfoByStream,
+  LiveCertDomainInfo,
   DescribeVisitTopSumInfoListRequest,
   DayStreamPlayInfo,
   ModifyPullStreamStatusResponse,
   ModifyLivePlayDomainResponse,
   CancelCommonMixStreamResponse,
+  DescribeLiveDomainCertBindingsResponse,
   DescribeConcurrentRecordStreamNumResponse,
   DescribeLiveTimeShiftBillInfoListRequest,
   RecordTask,
@@ -132,6 +135,7 @@ import {
   DescribeProvinceIspPlayInfoListResponse,
   DescribeLiveRecordTemplatesResponse,
   DescribeScreenshotTaskRequest,
+  PlayDataInfoByStream,
   DescribeCallbackRecordsListRequest,
   DescribeLiveCallbackTemplatesResponse,
   ModifyLivePlayAuthKeyResponse,
@@ -200,7 +204,7 @@ import {
   DescribeCallbackRecordsListResponse,
   PublishTime,
   ModifyLiveTranscodeTemplateResponse,
-  MonitorStreamPlayInfo,
+  ModifyLivePullStreamTaskRequest,
   DescribePlayErrorCodeSumInfoListRequest,
   DescribeLiveTranscodeDetailInfoRequest,
   ModifyLiveDomainRefererResponse,
@@ -233,6 +237,7 @@ import {
   DescribeLiveRecordRulesRequest,
   DescribePlayErrorCodeDetailInfoListResponse,
   CreateLiveRecordTemplateResponse,
+  GroupProIspDataInfo,
   RecordParam,
   DomainDetailInfo,
   HttpStatusInfo,
@@ -307,7 +312,7 @@ import {
   CreateRecordTaskResponse,
   ForbidStreamInfo,
   ResumeDelayLiveStreamResponse,
-  GroupProIspDataInfo,
+  DescribeLiveDomainCertBindingsRequest,
   DeleteLiveDomainResponse,
   CommonMixCropParams,
   CreateLiveRecordTemplateRequest,
@@ -748,6 +753,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询绑定证书的域名列表。
+   */
+  async DescribeLiveDomainCertBindings(
+    req: DescribeLiveDomainCertBindingsRequest,
+    cb?: (error: string, rep: DescribeLiveDomainCertBindingsResponse) => void
+  ): Promise<DescribeLiveDomainCertBindingsResponse> {
+    return this.request("DescribeLiveDomainCertBindings", req, cb)
+  }
+
+  /**
    * 查询下行播放错误码信息。
    */
   async DescribePlayErrorCodeSumInfoList(
@@ -893,6 +908,17 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
     cb?: (error: string, rep: DescribeLiveCertResponse) => void
   ): Promise<DescribeLiveCertResponse> {
     return this.request("DescribeLiveCert", req, cb)
+  }
+
+  /**
+     * 批量绑定证书对应的播放域名，并更新启用状态。
+新建自有证书将自动上传至腾讯云ssl。
+     */
+  async ModifyLiveDomainCertBindings(
+    req: ModifyLiveDomainCertBindingsRequest,
+    cb?: (error: string, rep: ModifyLiveDomainCertBindingsResponse) => void
+  ): Promise<ModifyLiveDomainCertBindingsResponse> {
+    return this.request("ModifyLiveDomainCertBindings", req, cb)
   }
 
   /**

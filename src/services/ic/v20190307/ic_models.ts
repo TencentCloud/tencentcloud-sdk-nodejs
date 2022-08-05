@@ -16,100 +16,6 @@
  */
 
 /**
- * SendMultiSms返回参数结构体
- */
-export interface SendMultiSmsResponse {
-  /**
-      * 短信流水数组
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Data?: Array<SmsRet>
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 物联网卡应用信息详情
- */
-export interface AppInfo {
-  /**
-   * 应用ID
-   */
-  Sdkappid: string
-
-  /**
-   * 应用key
-   */
-  Appkey: string
-
-  /**
-   * 用户appid
-   */
-  CloudAppid: string
-
-  /**
-      * 应用名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Name: string
-
-  /**
-   * 应用描述
-   */
-  Description: string
-
-  /**
-   * 创建时间
-   */
-  CreatedTime: string
-
-  /**
-   * 应用类型
-   */
-  BizType: number
-
-  /**
-   * 用户Uin
-   */
-  Uin: string
-}
-
-/**
- * RenewCards返回参数结构体
- */
-export interface RenewCardsResponse {
-  /**
-      * 续费成功的订单id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Data: ResRenew
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 卡片列表数据
- */
-export interface CardList {
-  /**
-   * 卡片总数
-   */
-  Total: string
-
-  /**
-      * 卡片列表信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  List: Array<CardInfo>
-}
-
-/**
  * DescribeCards返回参数结构体
  */
 export interface DescribeCardsResponse {
@@ -122,26 +28,6 @@ export interface DescribeCardsResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * ModifyUserCardRemark请求参数结构体
- */
-export interface ModifyUserCardRemarkRequest {
-  /**
-   * 应用ID
-   */
-  Sdkappid: number
-
-  /**
-   * 物联卡ICCID
-   */
-  Iccid: string
-
-  /**
-   * 备注信息，限50字
-   */
-  Remark?: string
 }
 
 /**
@@ -325,37 +211,6 @@ export interface CardInfo {
 }
 
 /**
- * DescribeApp返回参数结构体
- */
-export interface DescribeAppResponse {
-  /**
-      * 应用信息详情
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Data: AppInfo
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeCard请求参数结构体
- */
-export interface DescribeCardRequest {
-  /**
-   * 应用ID
-   */
-  Sdkappid: number
-
-  /**
-   * 卡片ID
-   */
-  Iccid: string
-}
-
-/**
  * DescribeApp请求参数结构体
  */
 export interface DescribeAppRequest {
@@ -366,69 +221,23 @@ export interface DescribeAppRequest {
 }
 
 /**
- * SendSms返回参数结构体
+ * ModifyUserCardRemark请求参数结构体
  */
-export interface SendSmsResponse {
-  /**
-      * 短信流水信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Data?: SmsSid
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * ModifyUserCardRemark返回参数结构体
- */
-export interface ModifyUserCardRemarkResponse {
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * SendSms请求参数结构体
- */
-export interface SendSmsRequest {
+export interface ModifyUserCardRemarkRequest {
   /**
    * 应用ID
    */
   Sdkappid: number
 
   /**
-   * 卡片ID
+   * 物联卡ICCID
    */
   Iccid: string
 
   /**
-   * 短信内容长度70限制
+   * 备注信息，限50字
    */
-  Content: string
-}
-
-/**
- * DescribeCards请求参数结构体
- */
-export interface DescribeCardsRequest {
-  /**
-   * 应用ID
-   */
-  Sdkappid: string
-
-  /**
-   * 偏移值
-   */
-  Offset: number
-
-  /**
-   * 列表限制
-   */
-  Limit: number
+  Remark?: string
 }
 
 /**
@@ -463,6 +272,154 @@ export interface ResRenew {
 }
 
 /**
+ * DescribeSms返回参数结构体
+ */
+export interface DescribeSmsResponse {
+  /**
+      * 总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Total?: number
+
+  /**
+      * 短信列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  List?: Array<ResSms>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 查询短信列表
+ */
+export interface ResSms {
+  /**
+      * 卡片ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Iccid: string
+
+  /**
+      * 卡片号码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Msisdn: string
+
+  /**
+      * 应用ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SdkAppid: number
+
+  /**
+      * 短信内容
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Content: string
+
+  /**
+      * 短信类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SmsType: number
+
+  /**
+      * 发送时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SendTime: string
+
+  /**
+      * 推送时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ReportTime: string
+
+  /**
+      * SUCC：成功  FAIL 失败
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Remark: string
+
+  /**
+      * 回执状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Status: number
+}
+
+/**
+ * DescribeApp返回参数结构体
+ */
+export interface DescribeAppResponse {
+  /**
+      * 应用信息详情
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Data: AppInfo
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeCard请求参数结构体
+ */
+export interface DescribeCardRequest {
+  /**
+   * 应用ID
+   */
+  Sdkappid: number
+
+  /**
+   * 卡片ID
+   */
+  Iccid: string
+}
+
+/**
+ * SendSms返回参数结构体
+ */
+export interface SendSmsResponse {
+  /**
+      * 短信流水信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Data?: SmsSid
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * SendSms请求参数结构体
+ */
+export interface SendSmsRequest {
+  /**
+   * 应用ID
+   */
+  Sdkappid: number
+
+  /**
+   * 卡片ID
+   */
+  Iccid: string
+
+  /**
+   * 短信内容长度70限制
+   */
+  Content: string
+}
+
+/**
  * 短信流水信息
  */
 export interface SmsRet {
@@ -488,6 +445,68 @@ export interface SmsRet {
 }
 
 /**
+ * 物联网卡应用信息详情
+ */
+export interface AppInfo {
+  /**
+   * 应用ID
+   */
+  Sdkappid: string
+
+  /**
+   * 应用key
+   */
+  Appkey: string
+
+  /**
+   * 用户appid
+   */
+  CloudAppid: string
+
+  /**
+      * 应用名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Name: string
+
+  /**
+   * 应用描述
+   */
+  Description: string
+
+  /**
+   * 创建时间
+   */
+  CreatedTime: string
+
+  /**
+   * 应用类型
+   */
+  BizType: number
+
+  /**
+   * 用户Uin
+   */
+  Uin: string
+}
+
+/**
+ * RenewCards返回参数结构体
+ */
+export interface RenewCardsResponse {
+  /**
+      * 续费成功的订单id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Data: ResRenew
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 短信流水信息
  */
 export interface SmsSid {
@@ -501,6 +520,113 @@ export interface SmsSid {
    * 信息流水ID
    */
   Sid: string
+}
+
+/**
+ * SendMultiSms返回参数结构体
+ */
+export interface SendMultiSmsResponse {
+  /**
+      * 短信流水数组
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Data?: Array<SmsRet>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 卡片列表数据
+ */
+export interface CardList {
+  /**
+   * 卡片总数
+   */
+  Total: string
+
+  /**
+      * 卡片列表信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  List: Array<CardInfo>
+}
+
+/**
+ * DescribeSms请求参数结构体
+ */
+export interface DescribeSmsRequest {
+  /**
+   * 应用ID
+   */
+  Sdkappid: number
+
+  /**
+   * 卡片ID
+   */
+  Iccid?: string
+
+  /**
+   * 卡片号码
+   */
+  Msisdn?: string
+
+  /**
+   * 短信类型
+   */
+  SmsType?: number
+
+  /**
+   * 开始时间  YYYY-MM-DD HH:mm:ss
+   */
+  BeginTime?: string
+
+  /**
+   * 结束时间  YYYY-MM-DD HH:mm:ss
+   */
+  EndTime?: string
+
+  /**
+   * 偏移量
+   */
+  Offset?: number
+
+  /**
+   * 小于200
+   */
+  Limit?: number
+}
+
+/**
+ * ModifyUserCardRemark返回参数结构体
+ */
+export interface ModifyUserCardRemarkResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeCards请求参数结构体
+ */
+export interface DescribeCardsRequest {
+  /**
+   * 应用ID
+   */
+  Sdkappid: string
+
+  /**
+   * 偏移值
+   */
+  Offset: number
+
+  /**
+   * 列表限制
+   */
+  Limit: number
 }
 
 /**
