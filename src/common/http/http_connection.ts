@@ -67,13 +67,13 @@ export class HttpConnection {
     data: any
     service: string
     action: string
-    region: string
+    region: string | null
     version: string
     secretId: string
     secretKey: string
     multipart?: boolean
     timeout?: number
-    token: string
+    token: string | null
     requestClient: string
     language: string
     headers?: Record<string, string>
@@ -156,7 +156,7 @@ export class HttpConnection {
       secretId,
       secretKey,
       multipart,
-      boundary: form ? form.getBoundary() : undefined,
+      boundary: form ? form.getBoundary() : '',
     })
 
     config.headers["Authorization"] = signature

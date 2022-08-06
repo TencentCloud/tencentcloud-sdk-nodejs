@@ -5,8 +5,8 @@ import { HttpConnection } from "./http/http_connection"
 import TencentCloudSDKHttpException from "./exception/tencent_cloud_sdk_exception"
 import { Response } from "node-fetch"
 
-export type ResponseCallback<TReuslt = any> = (error: string, rep: TReuslt) => void
-export interface RequestOptions extends Pick<ClientProfile["httpProfile"], "headers"> {
+export type ResponseCallback<TReuslt = any, TError = any> = (error: TError, rep: TReuslt) => void
+export interface RequestOptions extends Pick<NonNullable<ClientProfile["httpProfile"]>, "headers"> {
   multipart?: boolean
 }
 
@@ -32,10 +32,10 @@ export class AbstractClient {
   sdkVersion: string
   path: string
   credential: Credential
-  region: string
+  region: string | null
   apiVersion: string
   endpoint: string
-  profile: ClientProfile
+  profile: Required<ClientProfile>
   /**
    * 实例化client对象
    * @param {string} endpoint 接入点域名
@@ -86,7 +86,7 @@ export class AbstractClient {
         },
         profile && profile.httpProfile
       ),
-      language: profile.language,
+      language: profile.language!,
     }
 
     if (this.profile.language && !SUPPORT_LANGUAGE_LIST.includes(this.profile.language)) {
@@ -135,10 +135,10 @@ export class AbstractClient {
     let res
     try {
       res = await HttpConnection.doRequest({
-        method: this.profile.httpProfile.reqMethod,
+        method: this.profile.httpProfile.reqMethod!,
         url: this.profile.httpProfile.protocol + this.endpoint + this.path,
         data: params,
-        timeout: this.profile.httpProfile.reqTimeout * 1000,
+        timeout: this.profile.httpProfile.reqTimeout! * 1000,
         headers: Object.assign({}, this.profile.httpProfile.headers, options.headers),
       })
     } catch (error) {
@@ -158,18 +158,18 @@ export class AbstractClient {
     let res
     try {
       res = await HttpConnection.doRequestWithSign3({
-        method: this.profile.httpProfile.reqMethod,
+        method: this.profile.httpProfile.reqMethod!,
         url: this.profile.httpProfile.protocol + this.endpoint + this.path,
-        secretId: this.credential.secretId,
-        secretKey: this.credential.secretKey,
+        secretId: this.credential.secretId!,
+        secretKey: this.credential.secretKey!,
         region: this.region,
         data: params || "",
         service: this.endpoint.split(".")[0],
         action: action,
         version: this.apiVersion,
         multipart: options && options.multipart,
-        timeout: this.profile.httpProfile.reqTimeout * 1000,
-        token: this.credential.token,
+        timeout: this.profile.httpProfile.reqTimeout! * 1000,
+        token: this.credential.token!,
         requestClient: this.sdkVersion,
         language: this.profile.language,
         headers: Object.assign({}, this.profile.httpProfile.headers, options.headers),
@@ -249,7 +249,7 @@ export class AbstractClient {
     }
     const signStr = this.formatSignString(params)
 
-    params.Signature = Sign.sign(this.credential.secretKey, signStr, this.profile.signMethod)
+    params.Signature = Sign.sign(this.credential.secretKey!, signStr, this.profile.signMethod)
     return params
   }
 
@@ -268,7 +268,7 @@ export class AbstractClient {
       strParam += "&" + keys[k] + "=" + params[keys[k]]
     }
     const strSign =
-      this.profile.httpProfile.reqMethod.toLocaleUpperCase() +
+      this.profile.httpProfile.reqMethod!.toLocaleUpperCase() +
       this.endpoint +
       this.path +
       "?" +
