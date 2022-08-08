@@ -758,6 +758,16 @@ it("cvm.v20170312.DescribeImageQuota", async function () {
     }
 })
 
+it("cvm.v20170312.DescribeChcDeniedActions", async function () {
+    try {
+       const data = await client.DescribeChcDeniedActions({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cvm.v20170312.DescribeAccountQuota", async function () {
     try {
        const data = await client.DescribeAccountQuota({})

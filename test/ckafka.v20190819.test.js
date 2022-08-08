@@ -238,6 +238,16 @@ it("ckafka.v20190819.DescribeUser", async function () {
     }
 })
 
+it("ckafka.v20190819.FetchMessageListByOffset", async function () {
+    try {
+       const data = await client.FetchMessageListByOffset({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ckafka.v20190819.DescribeACL", async function () {
     try {
        const data = await client.DescribeACL({})

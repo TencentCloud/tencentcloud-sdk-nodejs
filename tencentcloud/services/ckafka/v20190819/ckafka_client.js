@@ -160,6 +160,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeUser", req, cb);
     }
     /**
+     * 根据位点查询消息列表
+     */
+    async FetchMessageListByOffset(req, cb) {
+        return this.request("FetchMessageListByOffset", req, cb);
+    }
+    /**
      * 枚举ACL
      */
     async DescribeACL(req, cb) {

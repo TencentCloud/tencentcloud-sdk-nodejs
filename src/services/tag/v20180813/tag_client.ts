@@ -30,7 +30,7 @@ import {
   DescribeResourceTagsByTagKeysRequest,
   ModifyResourceTagsResponse,
   DescribeTagsRequest,
-  DescribeTagKeysResponse,
+  DescribeProjectsRequest,
   DescribeTagValuesRequest,
   DescribeResourcesByTagsUnionRequest,
   DeleteTagsResponse,
@@ -38,7 +38,7 @@ import {
   DescribeTagsResponse,
   DeleteTagsRequest,
   DescribeTagKeysRequest,
-  GetTagsRequest,
+  DescribeProjectsResponse,
   UnTagResourcesRequest,
   DescribeTagsSeqResponse,
   ModifyResourceTagsRequest,
@@ -58,7 +58,9 @@ import {
   DescribeResourceTagsByTagKeysResponse,
   DescribeTagsSeqRequest,
   DescribeTagValuesResponse,
+  ResourceIdTag,
   TagFilter,
+  Project,
   Tag,
   AttachResourcesTagRequest,
   CreateTagResponse,
@@ -68,12 +70,13 @@ import {
   GetResourcesResponse,
   DescribeResourceTagsByResourceIdsSeqResponse,
   DeleteTagResponse,
-  ResourceIdTag,
+  DescribeTagKeysResponse,
   DescribeTagValuesSeqRequest,
   UpdateResourceTagValueRequest,
   TagResourcesResponse,
   CreateTagsRequest,
   CreateTagsResponse,
+  GetTagsRequest,
   DescribeResourcesByTagsRequest,
   TagResourcesRequest,
   DeleteResourceTagRequest,
@@ -314,6 +317,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTagsResponse) => void
   ): Promise<DescribeTagsResponse> {
     return this.request("DescribeTags", req, cb)
+  }
+
+  /**
+   * 获取项目列表
+   */
+  async DescribeProjects(
+    req: DescribeProjectsRequest,
+    cb?: (error: string, rep: DescribeProjectsResponse) => void
+  ): Promise<DescribeProjectsResponse> {
+    return this.request("DescribeProjects", req, cb)
   }
 
   /**

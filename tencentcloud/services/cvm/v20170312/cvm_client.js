@@ -651,6 +651,12 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
         return this.request("DescribeImageQuota", req, cb);
     }
     /**
+     * 查询CHC物理服务器禁止做的操作，返回给用户
+     */
+    async DescribeChcDeniedActions(req, cb) {
+        return this.request("DescribeChcDeniedActions", req, cb);
+    }
+    /**
      * 本接口(DescribeAccountQuota)用于查询用户配额详情。
      */
     async DescribeAccountQuota(req, cb) {

@@ -18,7 +18,6 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  ChargePrepaid,
   InquiryPriceTerminateInstancesResponse,
   LocalDiskType,
   AssociateInstancesKeyPairsResponse,
@@ -35,7 +34,6 @@ import {
   AccountQuota,
   InquiryPriceResetInstancesInternetMaxBandwidthResponse,
   DescribeZonesRequest,
-  InternetBandwidthConfig,
   ModifyKeyPairAttributeRequest,
   AssociateSecurityGroupsRequest,
   PostPaidQuota,
@@ -60,12 +58,13 @@ import {
   InstanceTypeConfigStatus,
   AssociateInstancesKeyPairsRequest,
   DeleteLaunchTemplateResponse,
-  ImportKeyPairResponse,
+  DescribeChcDeniedActionsResponse,
   DescribeInstancesStatusResponse,
   ZoneInfo,
   ModifyLaunchTemplateDefaultVersionResponse,
   LaunchTemplateVersionInfo,
   InquiryPriceModifyInstancesChargeTypeResponse,
+  ImportKeyPairResponse,
   DescribeKeyPairsResponse,
   ResetInstancesPasswordRequest,
   RemoveChcAssistVpcResponse,
@@ -88,6 +87,7 @@ import {
   ModifyImageSharePermissionResponse,
   DescribeInstancesOperationLimitResponse,
   SyncImagesResponse,
+  ModifyChcAttributeRequest,
   DescribeZoneInstanceConfigInfosResponse,
   ModifyInstancesAttributeRequest,
   RenewHostsRequest,
@@ -126,13 +126,14 @@ import {
   DescribeImportImageOsResponse,
   InquirePricePurchaseReservedInstancesOfferingRequest,
   PrePaidQuota,
-  DescribeReservedInstancesOfferingsResponse,
+  DataDisk,
   DescribeKeyPairsRequest,
   OperationCountLimit,
   ReservedInstanceConfigInfoItem,
   LaunchTemplateVersionData,
   DeleteDisasterRecoverGroupsResponse,
   HostItem,
+  OsVersion,
   Externals,
   InquiryPriceModifyInstancesChargeTypeRequest,
   CreateImageRequest,
@@ -143,7 +144,7 @@ import {
   DescribeInstanceVncUrlResponse,
   DescribeReservedInstancesOfferingsRequest,
   ReservedInstanceFamilyItem,
-  ImageQuota,
+  DescribeInternetChargeTypeConfigsRequest,
   DescribeDisasterRecoverGroupsResponse,
   ExportImagesRequest,
   ActionTimer,
@@ -177,7 +178,7 @@ import {
   DescribeDisasterRecoverGroupQuotaRequest,
   StartInstancesResponse,
   ModifyInstancesVpcAttributeRequest,
-  DescribeReservedInstancesRequest,
+  ChargePrepaid,
   DescribeInternetChargeTypeConfigsResponse,
   AccountQuotaOverview,
   RunAutomationServiceEnabled,
@@ -194,7 +195,7 @@ import {
   TagSpecification,
   DescribeHostsRequest,
   DescribeAccountQuotaRequest,
-  ModifyChcAttributeRequest,
+  DescribeReservedInstancesRequest,
   ModifyInstancesRenewFlagResponse,
   DescribeInstancesStatusRequest,
   InquiryPriceResizeInstanceDisksResponse,
@@ -212,17 +213,19 @@ import {
   InquiryPriceResetInstancesTypeResponse,
   ReservedInstancesOffering,
   CreateLaunchTemplateVersionResponse,
-  OsVersion,
+  ImageQuota,
   ModifyImageAttributeResponse,
   InquiryPriceRenewInstancesRequest,
   GPUInfo,
+  DescribeReservedInstancesOfferingsResponse,
   InstanceRefund,
   DescribeInstanceTypeConfigsRequest,
   RegionInfo,
+  DescribeChcDeniedActionsRequest,
   InquiryPriceResetInstancesTypeRequest,
   ModifyLaunchTemplateDefaultVersionRequest,
   StopInstancesRequest,
-  DescribeInternetChargeTypeConfigsRequest,
+  ChcHostDeniedActions,
   DescribeImagesRequest,
   ModifyImageAttributeRequest,
   ResizeInstanceDisksResponse,
@@ -240,7 +243,7 @@ import {
   ProgramFpgaImageRequest,
   DisasterRecoverGroup,
   VirtualPrivateCloud,
-  InstanceChargePrepaid,
+  InternetBandwidthConfig,
   ModifyDisasterRecoverGroupAttributeResponse,
   DescribeInstanceTypeConfigsResponse,
   ResizeInstanceDisksRequest,
@@ -253,7 +256,7 @@ import {
   DisassociateSecurityGroupsResponse,
   Snapshot,
   ModifyInstancesProjectResponse,
-  DataDisk,
+  InstanceChargePrepaid,
   Price,
 } from "./cvm_models"
 
@@ -1183,6 +1186,16 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
     cb?: (error: string, rep: DescribeImageQuotaResponse) => void
   ): Promise<DescribeImageQuotaResponse> {
     return this.request("DescribeImageQuota", req, cb)
+  }
+
+  /**
+   * 查询CHC物理服务器禁止做的操作，返回给用户
+   */
+  async DescribeChcDeniedActions(
+    req: DescribeChcDeniedActionsRequest,
+    cb?: (error: string, rep: DescribeChcDeniedActionsResponse) => void
+  ): Promise<DescribeChcDeniedActionsResponse> {
+    return this.request("DescribeChcDeniedActions", req, cb)
   }
 
   /**

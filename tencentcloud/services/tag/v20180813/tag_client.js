@@ -162,6 +162,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTags", req, cb);
     }
     /**
+     * 获取项目列表
+     */
+    async DescribeProjects(req, cb) {
+        return this.request("DescribeProjects", req, cb);
+    }
+    /**
      * 用于查询已建立的标签列表中的标签键。
 
      */

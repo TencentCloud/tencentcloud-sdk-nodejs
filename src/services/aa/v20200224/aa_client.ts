@@ -17,28 +17,7 @@
  */
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
-import {
-  CrowdAntiRushInfo,
-  QueryActivityAntiRushResponse,
-  OutputActivityAntiRushAdvancedValue,
-  QQAccountInfo,
-  ManageMarketingRiskRequest,
-  OutputManageMarketingRisk,
-  OnlineScamInfo,
-  InputManageMarketingRisk,
-  InputActivityAntiRushAdvanced,
-  OtherAccountInfo,
-  AccountInfo,
-  QueryActivityAntiRushAdvancedResponse,
-  ManageMarketingRiskResponse,
-  WeChatAccountInfo,
-  SponsorInfo,
-  QueryActivityAntiRushRequest,
-  InputDetails,
-  OutputManageMarketingRiskValue,
-  OutputActivityAntiRushAdvanced,
-  QueryActivityAntiRushAdvancedRequest,
-} from "./aa_models"
+import { QueryActivityAntiRushResponse, QueryActivityAntiRushRequest } from "./aa_models"
 
 /**
  * aa client
@@ -57,25 +36,5 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: QueryActivityAntiRushResponse) => void
   ): Promise<QueryActivityAntiRushResponse> {
     return this.request("QueryActivityAntiRush", req, cb)
-  }
-
-  /**
-   * 活动防刷、注册保护、登录保护等营销产品的高级版本
-   */
-  async ManageMarketingRisk(
-    req: ManageMarketingRiskRequest,
-    cb?: (error: string, rep: ManageMarketingRiskResponse) => void
-  ): Promise<ManageMarketingRiskResponse> {
-    return this.request("ManageMarketingRisk", req, cb)
-  }
-
-  /**
-   * 活动防刷高级版，支持对网赚众包、网赚防刷、引流反诈骗场景的检测识别
-   */
-  async QueryActivityAntiRushAdvanced(
-    req: QueryActivityAntiRushAdvancedRequest,
-    cb?: (error: string, rep: QueryActivityAntiRushAdvancedResponse) => void
-  ): Promise<QueryActivityAntiRushAdvancedResponse> {
-    return this.request("QueryActivityAntiRushAdvanced", req, cb)
   }
 }

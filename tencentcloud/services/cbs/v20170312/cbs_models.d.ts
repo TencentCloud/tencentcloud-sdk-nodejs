@@ -480,7 +480,7 @@ export interface DescribeDiskConfigQuotaResponse {
     /**
       * 云盘配置列表。
       */
-    DiskConfigSet?: Array<DiskConfig>;
+    DiskConfigSet: Array<DiskConfig>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1653,33 +1653,33 @@ export interface DescribeDiskConfigQuotaRequest {
       */
     InquiryType: string;
     /**
-      * 查询一个或多个[可用区](/document/product/213/15753#ZoneInfo)下的配置。
-      */
-    Zones?: Array<string>;
-    /**
       * 付费模式。取值范围：<br><li>PREPAID：预付费<br><li>POSTPAID_BY_HOUR：后付费。
       */
     DiskChargeType?: string;
-    /**
-      * 硬盘介质类型。取值范围：<br><li>CLOUD_BASIC：表示普通云硬盘<br><li>CLOUD_PREMIUM：表示高性能云硬盘<br><li>CLOUD_SSD：表示SSD云硬盘<br><li>CLOUD_HSSD：表示增强型SSD云硬盘。
-      */
-    DiskTypes?: Array<string>;
-    /**
-      * 系统盘或数据盘。取值范围：<br><li>SYSTEM_DISK：表示系统盘<br><li>DATA_DISK：表示数据盘。
-      */
-    DiskUsage?: string;
     /**
       * 按照实例机型系列过滤。实例机型系列形如：S1、I1、M1等。详见[实例类型](https://cloud.tencent.com/document/product/213/11518)
       */
     InstanceFamilies?: Array<string>;
     /**
-      * 实例CPU核数。
+      * 硬盘介质类型。取值范围：<br><li>CLOUD_BASIC：表示普通云硬盘<br><li>CLOUD_PREMIUM：表示高性能云硬盘<br><li>CLOUD_SSD：表示SSD云硬盘<br><li>CLOUD_HSSD：表示增强型SSD云硬盘。
       */
-    CPU?: number;
+    DiskTypes?: Array<string>;
+    /**
+      * 查询一个或多个[可用区](/document/product/213/15753#ZoneInfo)下的配置。
+      */
+    Zones?: Array<string>;
     /**
       * 实例内存大小。
       */
     Memory?: number;
+    /**
+      * 系统盘或数据盘。取值范围：<br><li>SYSTEM_DISK：表示系统盘<br><li>DATA_DISK：表示数据盘。
+      */
+    DiskUsage?: string;
+    /**
+      * 实例CPU核数。
+      */
+    CPU?: number;
 }
 /**
  * DescribeDiskAssociatedAutoSnapshotPolicy返回参数结构体

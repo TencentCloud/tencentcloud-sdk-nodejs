@@ -142,13 +142,13 @@ ENTERPRISESERVER-企业静默签;
 }
 
 /**
- * PrepareFlows返回参数结构体
+ * ChannelCreateConvertTaskApi返回参数结构体
  */
-export interface PrepareFlowsResponse {
+export interface ChannelCreateConvertTaskApiResponse {
   /**
-   * 待发起文件确认页
+   * 任务id
    */
-  ConfirmUrl: string
+  TaskId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -157,36 +157,38 @@ export interface PrepareFlowsResponse {
 }
 
 /**
- * 合作企业经办人列表信息
+ * OperateChannelTemplate请求参数结构体
  */
-export interface ProxyOrganizationOperator {
+export interface OperateChannelTemplateRequest {
   /**
-   * 经办人ID（渠道颁发），最大长度64个字符
+   * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
    */
-  Id: string
+  Agent: Agent
 
   /**
-   * 经办人姓名，最大长度50个字符
+   * 操作类型，查询:"SELECT"，删除:"DELETE"，更新:"UPDATE"
    */
-  Name?: string
+  OperateType: string
 
   /**
-      * 经办人身份证件类型
-1.ID_CARD 居民身份证
-2.HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证
-3.HONGKONG_AND_MACAO 港澳居民来往内地通行证
-      */
-  IdCardType?: string
+   * 渠道方模板库模板唯一标识
+   */
+  TemplateId: string
 
   /**
-   * 经办人证件号
+   * 合作企业方第三方机构唯一标识数据，支持多个， 用","进行分隔
    */
-  IdCardNumber?: string
+  ProxyOrganizationOpenIds?: string
 
   /**
-   * 经办人手机号，大陆手机号输入11位，暂不支持海外手机号。
+   * 模板可见性, 全部可见-"all", 部分可见-"part"
    */
-  Mobile?: string
+  AuthTag?: string
+
+  /**
+   * 操作者的信息
+   */
+  Operator?: UserInfo
 }
 
 /**
@@ -427,6 +429,26 @@ export interface OperateChannelTemplateResponse {
 }
 
 /**
+ * CreateSignUrls返回参数结构体
+ */
+export interface CreateSignUrlsResponse {
+  /**
+   * 签署参与者签署H5链接信息数组
+   */
+  SignUrlInfos: Array<SignUrlInfo>
+
+  /**
+   * 生成失败时的错误信息，成功返回”“，顺序和出参SignUrlInfos保持一致
+   */
+  ErrorMessages: Array<string>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateSignUrls请求参数结构体
  */
 export interface CreateSignUrlsRequest {
@@ -586,23 +608,33 @@ export interface DescribeFlowDetailInfoRequest {
 }
 
 /**
- * 一码多扫签署二维码对象
+ * ChannelGetTaskResultApi返回参数结构体
  */
-export interface SignQrCode {
+export interface ChannelGetTaskResultApiResponse {
   /**
-   * 二维码id
+   * 任务Id
    */
-  QrCodeId: string
+  TaskId: string
 
   /**
-   * 二维码url
+   * 任务状态
    */
-  QrCodeUrl: string
+  TaskStatus: number
 
   /**
-   * 二维码过期时间
+   * 状态描述
    */
-  ExpiredTime: number
+  TaskMessage: string
+
+  /**
+   * 资源Id
+   */
+  ResourceId: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -633,22 +665,26 @@ export interface UploadFilesRequest {
 }
 
 /**
- * DescribeResourceUrlsByFlows请求参数结构体
+ * ChannelGetTaskResultApi请求参数结构体
  */
-export interface DescribeResourceUrlsByFlowsRequest {
+export interface ChannelGetTaskResultApiRequest {
   /**
-      * 渠道应用相关信息。
-此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
-      */
+   * 渠道信息
+   */
   Agent: Agent
 
   /**
-   * 查询资源所对应的签署流程Id，最多支持50个。
+   * 任务Id
    */
-  FlowIds?: Array<string>
+  TaskId: string
 
   /**
-   * 操作者的信息
+   * 企业信息
+   */
+  Organization?: OrganizationInfo
+
+  /**
+   * 操作人信息
    */
   Operator?: UserInfo
 }
@@ -690,13 +726,18 @@ export interface Component {
   /**
       * 如果是Component控件类型，则可选的字段为：
 TEXT - 普通文本控件；
-DATE - 普通日期控件；跟TEXT相比会有校验逻辑
-DYNAMIC_TABLE-动态表格控件；
+MULTI_LINE_TEXT - 多行文本控件；
+CHECK_BOX - 勾选框控件；
+FILL_IMAGE - 图片控件；
+DYNAMIC_TABLE - 动态表格控件；
+ATTACHMENT - 附件控件；
+SELECTOR - 选择器控件；
+
 如果是SignComponent控件类型，则可选的字段为
 SIGN_SEAL - 签署印章控件；
 SIGN_DATE - 签署日期控件；
 SIGN_SIGNATURE - 用户签名控件；
-SIGN_PERSONAL_SEAL - 个人签署印章控件；
+SIGN_PERSONAL_SEAL - 个人签署印章控件（使用文件发起暂不支持此类型）；
 
 表单域的控件不能作为印章和签名控件
       */
@@ -761,8 +802,13 @@ TEXT控件可以指定字体
   ComponentExtra?: string
 
   /**
-      * 印章 ID，传参 DEFAULT_COMPANY_SEAL 表示使用默认印章。
-控件填入内容，印章控件里面，如果是手写签名内容为PNG图片格式的base64编码
+      * 控件填充vaule，ComponentType和传入值类型对应关系：
+TEXT - 文本内容
+MULTI_LINE_TEXT - 文本内容
+CHECK_BOX - true/false
+FILL_IMAGE、ATTACHMENT - 附件的FileId，需要通过UploadFiles接口上传获取
+SELECTOR - 选项值
+DYNAMIC_TABLE - 传入json格式的表格内容，具体见数据结构FlowInfo：https://cloud.tencent.com/document/api/1420/61525#FlowInfo
       */
   ComponentValue?: string
 
@@ -812,31 +858,6 @@ export interface GetDownloadFlowUrlRequest {
    * 操作者的信息
    */
   Operator?: UserInfo
-}
-
-/**
- * ChannelCreateBatchCancelFlowUrl返回参数结构体
- */
-export interface ChannelCreateBatchCancelFlowUrlResponse {
-  /**
-   * 批量撤回url
-   */
-  BatchCancelFlowUrl: string
-
-  /**
-   * 签署流程批量撤回失败原因
-   */
-  FailMessages: Array<string>
-
-  /**
-   * 签署撤回url过期时间-年月日-时分秒
-   */
-  UrlExpireOn: string
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -936,6 +957,36 @@ export interface CreateConsoleLoginUrlRequest {
 }
 
 /**
+ * 机构信息
+ */
+export interface OrganizationInfo {
+  /**
+   * 用户在渠道的机构编号
+   */
+  OrganizationOpenId: string
+
+  /**
+   * 用户真实的IP
+   */
+  ClientIp: string
+
+  /**
+   * 机构的代理IP
+   */
+  ProxyIp: string
+
+  /**
+   * 机构在平台的编号
+   */
+  OrganizationId?: string
+
+  /**
+   * 用户渠道
+   */
+  Channel?: string
+}
+
+/**
  * CreateFlowsByTemplates返回参数结构体
  */
 export interface CreateFlowsByTemplatesResponse {
@@ -964,6 +1015,39 @@ export interface CreateFlowsByTemplatesResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 合作企业经办人列表信息
+ */
+export interface ProxyOrganizationOperator {
+  /**
+   * 经办人ID（渠道颁发），最大长度64个字符
+   */
+  Id: string
+
+  /**
+   * 经办人姓名，最大长度50个字符
+   */
+  Name?: string
+
+  /**
+      * 经办人身份证件类型
+1.ID_CARD 居民身份证
+2.HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证
+3.HONGKONG_AND_MACAO 港澳居民来往内地通行证
+      */
+  IdCardType?: string
+
+  /**
+   * 经办人证件号
+   */
+  IdCardNumber?: string
+
+  /**
+   * 经办人手机号，大陆手机号输入11位，暂不支持海外手机号。
+   */
+  Mobile?: string
 }
 
 /**
@@ -1231,33 +1315,23 @@ export interface CreateSealByImageRequest {
 }
 
 /**
- * 接口调用者信息
+ * 一码多扫签署二维码对象
  */
-export interface UserInfo {
+export interface SignQrCode {
   /**
-   * 用户在渠道的编号，最大64位字符串
+   * 二维码id
    */
-  OpenId?: string
+  QrCodeId: string
 
   /**
-   * 用户的来源渠道
+   * 二维码url
    */
-  Channel?: string
+  QrCodeUrl: string
 
   /**
-   * 自定义用户编号
+   * 二维码过期时间
    */
-  CustomUserId?: string
-
-  /**
-   * 用户真实IP
-   */
-  ClientIp?: string
-
-  /**
-   * 用户代理IP
-   */
-  ProxyIp?: string
+  ExpiredTime: number
 }
 
 /**
@@ -1315,18 +1389,23 @@ export interface UsageDetail {
 }
 
 /**
- * CreateSignUrls返回参数结构体
+ * ChannelCreateBatchCancelFlowUrl返回参数结构体
  */
-export interface CreateSignUrlsResponse {
+export interface ChannelCreateBatchCancelFlowUrlResponse {
   /**
-   * 签署参与者签署H5链接信息数组
+   * 批量撤回url
    */
-  SignUrlInfos: Array<SignUrlInfo>
+  BatchCancelFlowUrl: string
 
   /**
-   * 生成失败时的错误信息，成功返回”“，顺序和出参SignUrlInfos保持一致
+   * 签署流程批量撤回失败原因
    */
-  ErrorMessages: Array<string>
+  FailMessages: Array<string>
+
+  /**
+   * 签署撤回url过期时间-年月日-时分秒
+   */
+  UrlExpireOn: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1335,33 +1414,19 @@ export interface CreateSignUrlsResponse {
 }
 
 /**
- * OperateChannelTemplate请求参数结构体
+ * DescribeResourceUrlsByFlows请求参数结构体
  */
-export interface OperateChannelTemplateRequest {
+export interface DescribeResourceUrlsByFlowsRequest {
   /**
-   * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
-   */
+      * 渠道应用相关信息。
+此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
+      */
   Agent: Agent
 
   /**
-   * 操作类型，查询:"SELECT"，删除:"DELETE"，更新:"UPDATE"
+   * 查询资源所对应的签署流程Id，最多支持50个。
    */
-  OperateType: string
-
-  /**
-   * 渠道方模板库模板唯一标识
-   */
-  TemplateId: string
-
-  /**
-   * 合作企业方第三方机构唯一标识数据，支持多个， 用","进行分隔
-   */
-  ProxyOrganizationOpenIds?: string
-
-  /**
-   * 模板可见性, 全部可见-"all", 部分可见-"part"
-   */
-  AuthTag?: string
+  FlowIds?: Array<string>
 
   /**
    * 操作者的信息
@@ -1419,6 +1484,21 @@ export interface SyncFailReason {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Message: string
+}
+
+/**
+ * PrepareFlows返回参数结构体
+ */
+export interface PrepareFlowsResponse {
+  /**
+   * 待发起文件确认页
+   */
+  ConfirmUrl: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1656,8 +1736,14 @@ export interface Agent {
  */
 export interface FormField {
   /**
-   * 表单域或控件的Value
-   */
+      * 控件填充vaule，ComponentType和传入值类型对应关系：
+TEXT - 文本内容
+MULTI_LINE_TEXT - 文本内容
+CHECK_BOX - true/false
+FILL_IMAGE、ATTACHMENT - 附件的FileId，需要通过UploadFiles接口上传获取
+SELECTOR - 选项值
+DYNAMIC_TABLE - 传入json格式的表格内容，具体见数据结构FlowInfo：https://cloud.tencent.com/document/api/1420/61525#FlowInfo
+      */
   ComponentValue: string
 
   /**
@@ -1671,6 +1757,71 @@ export interface FormField {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ComponentName?: string
+}
+
+/**
+ * 接口调用者信息
+ */
+export interface UserInfo {
+  /**
+   * 用户在渠道的编号，最大64位字符串
+   */
+  OpenId?: string
+
+  /**
+   * 用户的来源渠道
+   */
+  Channel?: string
+
+  /**
+   * 自定义用户编号
+   */
+  CustomUserId?: string
+
+  /**
+   * 用户真实IP
+   */
+  ClientIp?: string
+
+  /**
+   * 用户代理IP
+   */
+  ProxyIp?: string
+}
+
+/**
+ * ChannelCreateConvertTaskApi请求参数结构体
+ */
+export interface ChannelCreateConvertTaskApiRequest {
+  /**
+   * 无
+   */
+  Agent: Agent
+
+  /**
+   * 资源Id
+   */
+  ResourceId: string
+
+  /**
+   * 资源类型 取值范围doc,docx,html之一
+   */
+  ResourceType: string
+
+  /**
+   * 资源名称
+   */
+  ResourceName: string
+
+  /**
+   * 无
+   */
+  Organization?: OrganizationInfo
+
+  /**
+   * 无
+   */
+  Operator?: UserInfo
 }
 
 /**

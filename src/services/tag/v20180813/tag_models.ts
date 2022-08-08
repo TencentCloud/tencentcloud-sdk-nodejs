@@ -281,33 +281,23 @@ export interface DescribeTagsRequest {
 }
 
 /**
- * DescribeTagKeys返回参数结构体
+ * DescribeProjects请求参数结构体
  */
-export interface DescribeTagKeysResponse {
+export interface DescribeProjectsRequest {
   /**
-   * 结果总数
+   * 传1拉取所有项目（包括隐藏项目），不传或传0拉取显示项目
    */
-  TotalCount?: number
+  AllList: number
 
   /**
-   * 数据位移偏量
+   * 分页条数，固定值1000。
    */
-  Offset?: number
+  Limit: number
 
   /**
-   * 每页大小
+   * 分页偏移量。
    */
-  Limit?: number
-
-  /**
-   * 标签列表
-   */
-  Tags?: Array<string>
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  Offset: number
 }
 
 /**
@@ -467,27 +457,23 @@ export interface DescribeTagKeysRequest {
 }
 
 /**
- * GetTags请求参数结构体
+ * DescribeProjects返回参数结构体
  */
-export interface GetTagsRequest {
+export interface DescribeProjectsResponse {
   /**
-      * 从上一页的响应中获取的下一页的Token值。
-如果是第一次请求，设置为空。
-      */
-  PaginationToken?: string
+   * 数据总条数
+   */
+  Total: number
 
   /**
-      * 每一页返回的数据最大条数，最大1000。
-缺省值：50。
-      */
-  MaxResults?: number
+   * 项目列表
+   */
+  Projects: Array<Project>
 
   /**
-      * 标签键。
-返回所有标签键列表对应的标签。
-最大长度：20
-      */
-  TagKeys?: Array<string>
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -999,6 +985,23 @@ export interface DescribeTagValuesResponse {
 }
 
 /**
+ * 资源标签键值
+ */
+export interface ResourceIdTag {
+  /**
+      * 资源唯一标识
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ResourceId: string
+
+  /**
+      * 标签键值对
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TagKeyValues: Array<Tag>
+}
+
+/**
  * tag过滤数组多个是与的关系
  */
 export interface TagFilter {
@@ -1011,6 +1014,36 @@ export interface TagFilter {
    * 标签值数组 多个值的话是或的关系
    */
   TagValue?: Array<string>
+}
+
+/**
+ * 项目信息
+ */
+export interface Project {
+  /**
+   * 项目ID
+   */
+  ProjectId: number
+
+  /**
+   * 项目名称
+   */
+  ProjectName: string
+
+  /**
+   * 创建人uin
+   */
+  CreatorUin: number
+
+  /**
+   * 项目描述
+   */
+  ProjectInfo: string
+
+  /**
+   * 创建时间
+   */
+  CreateTime: string
 }
 
 /**
@@ -1181,20 +1214,33 @@ export interface DeleteTagResponse {
 }
 
 /**
- * 资源标签键值
+ * DescribeTagKeys返回参数结构体
  */
-export interface ResourceIdTag {
+export interface DescribeTagKeysResponse {
   /**
-      * 资源唯一标识
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ResourceId: string
+   * 结果总数
+   */
+  TotalCount?: number
 
   /**
-      * 标签键值对
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  TagKeyValues: Array<Tag>
+   * 数据位移偏量
+   */
+  Offset?: number
+
+  /**
+   * 每页大小
+   */
+  Limit?: number
+
+  /**
+   * 标签列表
+   */
+  Tags?: Array<string>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1278,6 +1324,30 @@ export interface CreateTagsResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * GetTags请求参数结构体
+ */
+export interface GetTagsRequest {
+  /**
+      * 从上一页的响应中获取的下一页的Token值。
+如果是第一次请求，设置为空。
+      */
+  PaginationToken?: string
+
+  /**
+      * 每一页返回的数据最大条数，最大1000。
+缺省值：50。
+      */
+  MaxResults?: number
+
+  /**
+      * 标签键。
+返回所有标签键列表对应的标签。
+最大长度：20
+      */
+  TagKeys?: Array<string>
 }
 
 /**

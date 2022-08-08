@@ -1695,32 +1695,76 @@ export interface LogInfo {
     FileSize: number;
 }
 /**
- * AddDelayLiveStream请求参数结构体
+ * 通用混流布局参数。
  */
-export interface AddDelayLiveStreamRequest {
+export interface CommonMixLayoutParams {
     /**
-      * 推流路径，与推流和播放地址中的 AppName 保持一致，默认为 live。
+      * 输入图层。取值范围[1，16]。
+1)背景流（即大主播画面或画布）的 image_layer 填1。
+2)纯音频混流，该参数也需填。
+注意：不同输入，该值不可重复
       */
-    AppName: string;
+    ImageLayer: number;
     /**
-      * 推流域名。
+      * 输入类型。取值范围[0，5]。
+不填默认为0。
+0表示输入流为音视频。
+2表示输入流为图片。
+3表示输入流为画布。
+4表示输入流为音频。
+5表示输入流为纯视频。
       */
-    DomainName: string;
+    InputType?: number;
     /**
-      * 流名称。
+      * 输入画面在输出时的高度。取值范围：
+像素：[0，2000]
+百分比：[0.01，0.99]
+不填默认为输入流的高度。
+使用百分比时，期望输出为（百分比 * 背景高）。
       */
-    StreamName: string;
+    ImageHeight?: number;
     /**
-      * 延播时间，单位：秒，上限：600秒。
+      * 输入画面在输出时的宽度。取值范围：
+像素：[0，2000]
+百分比：[0.01，0.99]
+不填默认为输入流的宽度。
+使用百分比时，期望输出为（百分比 * 背景宽）。
       */
-    DelayTime: number;
+    ImageWidth?: number;
     /**
-      * 延播设置的过期时间。UTC 格式，例如：2018-11-29T19:00:00Z。
-注意：
-1. 默认7天后过期，且最长支持7天内生效。
-2. 北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
+      * 输入在输出画面的X偏移。取值范围：
+像素：[0，2000]
+百分比：[0.01，0.99]
+不填默认为0。
+相对于大主播背景画面左上角的横向偏移。
+使用百分比时，期望输出为（百分比 * 背景宽）。
       */
-    ExpireTime?: string;
+    LocationX?: number;
+    /**
+      * 输入在输出画面的Y偏移。取值范围：
+像素：[0，2000]
+百分比：[0.01，0.99]
+不填默认为0。
+相对于大主播背景画面左上角的纵向偏移。
+使用百分比时，期望输出为（百分比 * 背景宽）
+      */
+    LocationY?: number;
+    /**
+      * 当InputType为3(画布)时，该值表示画布的颜色。
+常用的颜色有：
+红色：0xcc0033。
+黄色：0xcc9900。
+绿色：0xcccc33。
+蓝色：0x99CCFF。
+黑色：0x000000。
+白色：0xFFFFFF。
+灰色：0x999999。
+      */
+    Color?: string;
+    /**
+      * 当InputType为2(图片)时，该值是水印ID。
+      */
+    WatermarkId?: number;
 }
 /**
  * DescribeLiveDomainCert请求参数结构体
@@ -2026,6 +2070,11 @@ export interface ModifyLiveDomainCertBindingsResponse {
       * DomainNames 入参中，与证书不匹配的域名列表，将会跳过处理。
       */
     MismatchedDomainNames: Array<string>;
+    /**
+      * 操作失败的域名及错误码，错误信息，包括MismatchedDomainNames中的域名。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Errors: Array<BatchDomainOperateErrors>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2377,6 +2426,14 @@ export interface CancelCommonMixStreamResponse {
  * DescribeLiveDomainCertBindings返回参数结构体
  */
 export interface DescribeLiveDomainCertBindingsResponse {
+    /**
+      * 有绑定证书的域名信息数组。
+      */
+    LiveDomainCertBindings: Array<LiveDomainCertBindings>;
+    /**
+      * 总的记录行数，便于分页。
+      */
+    TotalNum: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3127,76 +3184,32 @@ export interface PushDataInfo {
     MetaFps: number;
 }
 /**
- * 通用混流布局参数。
+ * AddDelayLiveStream请求参数结构体
  */
-export interface CommonMixLayoutParams {
+export interface AddDelayLiveStreamRequest {
     /**
-      * 输入图层。取值范围[1，16]。
-1)背景流（即大主播画面或画布）的 image_layer 填1。
-2)纯音频混流，该参数也需填。
-注意：不同输入，该值不可重复
+      * 推流路径，与推流和播放地址中的 AppName 保持一致，默认为 live。
       */
-    ImageLayer: number;
+    AppName: string;
     /**
-      * 输入类型。取值范围[0，5]。
-不填默认为0。
-0表示输入流为音视频。
-2表示输入流为图片。
-3表示输入流为画布。
-4表示输入流为音频。
-5表示输入流为纯视频。
+      * 推流域名。
       */
-    InputType?: number;
+    DomainName: string;
     /**
-      * 输入画面在输出时的高度。取值范围：
-像素：[0，2000]
-百分比：[0.01，0.99]
-不填默认为输入流的高度。
-使用百分比时，期望输出为（百分比 * 背景高）。
+      * 流名称。
       */
-    ImageHeight?: number;
+    StreamName: string;
     /**
-      * 输入画面在输出时的宽度。取值范围：
-像素：[0，2000]
-百分比：[0.01，0.99]
-不填默认为输入流的宽度。
-使用百分比时，期望输出为（百分比 * 背景宽）。
+      * 延播时间，单位：秒，上限：600秒。
       */
-    ImageWidth?: number;
+    DelayTime: number;
     /**
-      * 输入在输出画面的X偏移。取值范围：
-像素：[0，2000]
-百分比：[0.01，0.99]
-不填默认为0。
-相对于大主播背景画面左上角的横向偏移。
-使用百分比时，期望输出为（百分比 * 背景宽）。
+      * 延播设置的过期时间。UTC 格式，例如：2018-11-29T19:00:00Z。
+注意：
+1. 默认7天后过期，且最长支持7天内生效。
+2. 北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
       */
-    LocationX?: number;
-    /**
-      * 输入在输出画面的Y偏移。取值范围：
-像素：[0，2000]
-百分比：[0.01，0.99]
-不填默认为0。
-相对于大主播背景画面左上角的纵向偏移。
-使用百分比时，期望输出为（百分比 * 背景宽）
-      */
-    LocationY?: number;
-    /**
-      * 当InputType为3(画布)时，该值表示画布的颜色。
-常用的颜色有：
-红色：0xcc0033。
-黄色：0xcc9900。
-绿色：0xcccc33。
-蓝色：0x99CCFF。
-黑色：0x000000。
-白色：0xFFFFFF。
-灰色：0x999999。
-      */
-    Color?: string;
-    /**
-      * 当InputType为2(图片)时，该值是水印ID。
-      */
-    WatermarkId?: number;
+    ExpireTime?: string;
 }
 /**
  * DescribeGroupProIspPlayInfoList请求参数结构体
@@ -5532,6 +5545,23 @@ export interface PlayAuthKeyInfo {
     AuthBackKey: string;
 }
 /**
+ * 批量操作域名相关接口，若其中个别域名操作失败将会跳过，相应的域名错误信息将统一汇总在此类型中
+ */
+export interface BatchDomainOperateErrors {
+    /**
+      * 操作失败的域名。
+      */
+    DomainName: string;
+    /**
+      * API3.0错误码。
+      */
+    Code: string;
+    /**
+      * API3.0错误信息。
+      */
+    Message: string;
+}
+/**
  * ModifyLiveTranscodeTemplate请求参数结构体
  */
 export interface ModifyLiveTranscodeTemplateRequest {
@@ -6058,6 +6088,48 @@ export interface DescribeLiveSnapshotTemplateRequest {
 调用 [CreateLiveSnapshotTemplate](/document/product/267/32624) 时返回的模板 ID。
       */
     TemplateId: number;
+}
+/**
+ * DescribeLiveDomainCertBindings, DescribeLiveDomainCertBindingsGray接口返回的域名证书信息
+ */
+export interface LiveDomainCertBindings {
+    /**
+      * 域名。
+      */
+    DomainName: string;
+    /**
+      * 证书备注。与CertName同义。
+      */
+    CertificateAlias: string;
+    /**
+      * 证书类型。
+0：自有证书
+1：腾讯云ssl托管证书
+      */
+    CertType: number;
+    /**
+      * https状态。
+1：已开启。
+0：已关闭。
+      */
+    Status: number;
+    /**
+      * 证书过期时间。
+      */
+    CertExpireTime: string;
+    /**
+      * 证书Id。
+      */
+    CertId: number;
+    /**
+      * 腾讯云ssl的证书Id。
+      */
+    CloudCertId: string;
+    /**
+      * 规则最后更新时间。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UpdateTime: string;
 }
 /**
  * CreateCommonMixStream返回参数结构体
@@ -6787,8 +6859,8 @@ export interface DescribeLiveDomainCertBindingsRequest {
     DomainName?: string;
     /**
       * 可取值：
-ExpireTimeAsc：证书过期时间降序。
-ExpireTimeDesc：证书过期时间升序。
+ExpireTimeAsc：证书过期时间升序。
+ExpireTimeDesc：证书过期时间降序。
       */
     OrderBy?: string;
 }

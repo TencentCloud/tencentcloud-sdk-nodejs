@@ -61,13 +61,6 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
         return this.request("StartMCUMixTranscode", req, cb);
     }
     /**
-     * 查询SdkAppId下的房间列表。默认返回10条通话，一次最多返回100条通话。可查询14天内的数据。
-**注意**：该接口只用于历史数据统计或核对数据使用，实时类关键业务逻辑不能使用。
-     */
-    async DescribeRoomInformation(req, cb) {
-        return this.request("DescribeRoomInformation", req, cb);
-    }
-    /**
      * 查询指定时间内的用户列表及用户通话质量数据，可查询14天内数据。DataType 不为null，查询起止时间不超过1个小时，查询用户不超过6个，支持跨天查询。DataType为null时，查询起止时间不超过4个小时， 默认查询6个用户，同时支持每页查询100以内用户个数（PageSize不超过100）。接口用于查询质量问题，不推荐作为计费使用。（同老接口DescribeCallDetail）
 **注意**：该接口只用于历史数据统计或核对数据使用，实时类关键业务逻辑不能使用。
      */
@@ -79,12 +72,6 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
      */
     async StopMCUMixTranscode(req, cb) {
         return this.request("StopMCUMixTranscode", req, cb);
-    }
-    /**
-     * 可查询SdkAppId每天的房间数和用户数，按天统计，可查询最近14天的数据。当天未结束，数据未统计完成，无法查到当天的房间数与用户数
-     */
-    async DescribeHistoryScale(req, cb) {
-        return this.request("DescribeHistoryScale", req, cb);
     }
     /**
      * 如果您需要在 [云端混流转码](https://cloud.tencent.com/document/product/647/16827) 时频繁删除自定义背景图或水印，可通过此接口删除已上传的图片。无需频繁删除图片的场景，建议直接在 [控制台 > 应用管理 > 素材管理](https://cloud.tencent.com/document/product/647/50769) 中操作。
@@ -105,11 +92,10 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
         return this.request("RemoveUser", req, cb);
     }
     /**
-     * 查询指定时间内的用户列表及用户通话质量数据，可查询14天内数据。DataType 不为null，查询起止时间不超过1个小时，查询用户不超过6个，支持跨天查询。DataType为null时，查询起止时间不超过4个小时， 默认查询6个用户，同时支持每页查询100以内用户个数（PageSize不超过100）。接口用于查询质量问题，不推荐作为计费使用。
-**注意**：该接口只用于历史数据统计或核对数据使用，实时类关键业务逻辑不能使用。
+     * 成功开启录制后，可以使用此接口来更新录制任务。仅在录制任务进行时有效，录制退出后更新将会返回错误。更新操作是全量覆盖，并不是增量更新的模式，也就是说每次更新都需要携带全量的信息。
      */
-    async DescribeCallDetail(req, cb) {
-        return this.request("DescribeCallDetail", req, cb);
+    async ModifyCloudRecording(req, cb) {
+        return this.request("ModifyCloudRecording", req, cb);
     }
     /**
      * 查询用户某次通话内的进退房，视频开关等详细事件。可查询14天内数据。（同接口DescribeDetailEvent）
@@ -118,24 +104,18 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
         return this.request("DescribeUserEvent", req, cb);
     }
     /**
-     * 成功开启录制后，可以使用此接口来更新录制任务。仅在录制任务进行时有效，录制退出后更新将会返回错误。更新操作是全量覆盖，并不是增量更新的模式，也就是说每次更新都需要携带全量的信息。
-     */
-    async ModifyCloudRecording(req, cb) {
-        return this.request("ModifyCloudRecording", req, cb);
-    }
-    /**
-     * ###接口说明：
+     * 接口说明：
 启动云端录制功能，完成房间内的音视频录制，并上传到指定的云存储。您可以通过此 API 接口把TRTC 房间中的每一路音视频流做单独的录制有或者多路视频画面混流一路。
 
-###您可以通过此接口实现如下目标：
+您可以通过此接口实现如下目标：
 * 指定订阅流参数（RecordParams）来指定需要录制的主播的黑名单或者白名单。
 * 指定第三方存储的参数（StorageParams）来指定上传到您希望的云存储
 * 指定混流模式下的音视频转码详细参数（MixTranscodeParams），包括视频分辨率、视频码率、视频帧率、以及声音质量等
 * 指定混流模式各路画面的位置和布局或者也可以指定自动模板的方式来配置。
 
-###关键名词：
-* 单流录制：分别录制房间的订阅UserId的音频和视频。录制服务会实时将录制文件（M3U8/TS）上传至云存储。
-* 混流录制：将房间内订阅UserId的音视频混录成一个音视频文件，并将录制文件（M3U8/TS）上传至云存储。
+关键名词：
+* 单流录制：分别录制房间的订阅UserId的音频和视频。录制服务会实时将录制文件上传至云点播存储。
+* 合流录制：将房间内订阅UserId的音视频混录成一个音视频文件，并将录制文件上传至云点播存储。
      */
     async CreateCloudRecording(req, cb) {
         return this.request("CreateCloudRecording", req, cb);
@@ -176,13 +156,6 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
      */
     async StopMCUMixTranscodeByStrRoomId(req, cb) {
         return this.request("StopMCUMixTranscodeByStrRoomId", req, cb);
-    }
-    /**
-     * 查询SdkAppId下任意20条异常体验事件，返回异常体验ID与可能产生异常体验的原因。可查询14天内数据，查询起止时间不超过1个小时。支持跨天查询。
-异常体验ID映射见：https://cloud.tencent.com/document/product/647/44916
-     */
-    async DescribeAbnormalEvent(req, cb) {
-        return this.request("DescribeAbnormalEvent", req, cb);
     }
     /**
      * 接口说明：启动云端混流，并指定混流画面中各路画面的布局位置。
@@ -245,12 +218,13 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
     }
     /**
      * 成功开启录制后，可以使用此接口来查询录制状态。仅在录制任务进行时有效，录制退出后查询将会返回错误。
+录制文件上传到云点播VOD时，StorageFileList中不会返回录制文件信息，请订阅相关录制文件回调事件，获取录制文件信息。
      */
     async DescribeCloudRecording(req, cb) {
         return this.request("DescribeCloudRecording", req, cb);
     }
     /**
-     * 成功开启录制后，可以使用此接口来停止录制任务。仅在录制任务进行时有效，录制退出后更新将会返回错误。停止录制成功后不代表文件全部传输完成，如果未完成后台将会继续上传文件，成功后通过事件回调通知客户文件全部传输完成状态。
+     * 成功开启录制后，可以使用此接口来停止录制任务。停止录制成功后不代表文件全部传输完成，如果未完成后台将会继续上传文件，成功后通过事件回调通知客户文件全部传输完成状态。
      */
     async DeleteCloudRecording(req, cb) {
         return this.request("DeleteCloudRecording", req, cb);
@@ -262,24 +236,11 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
         return this.request("DescribePicture", req, cb);
     }
     /**
-     * 查询用户某次通话内的进退房，视频开关等详细事件。可查询14天内数据。
-     */
-    async DescribeDetailEvent(req, cb) {
-        return this.request("DescribeDetailEvent", req, cb);
-    }
-    /**
      * 查询SdkAppId下任意20条异常体验事件，返回异常体验ID与可能产生异常体验的原因。可查询14天内数据，查询起止时间不超过1个小时。支持跨天查询。（同老接口DescribeAbnormalEvent）
 异常体验ID映射见：https://cloud.tencent.com/document/product/647/44916
      */
     async DescribeUnusualEvent(req, cb) {
         return this.request("DescribeUnusualEvent", req, cb);
-    }
-    /**
-     * 查询指定时间内的用户列表，可查询14天内数据，查询起止时间不超过4小时。默认每页查询6个用户，支持每页最大查询100个用户PageSize不超过100）。
-**注意**：该接口只用于历史数据统计或核对数据使用，实时类关键业务逻辑不能使用。
-     */
-    async DescribeUserInformation(req, cb) {
-        return this.request("DescribeUserInformation", req, cb);
     }
 }
 exports.Client = Client;

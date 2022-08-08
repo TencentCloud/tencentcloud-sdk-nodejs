@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { UnTagResourcesResponse, DetachResourcesTagRequest, GetTagValuesResponse, AttachResourcesTagResponse, GetTagKeysResponse, GetResourcesRequest, DeleteTagRequest, DeleteResourceTagResponse, DescribeResourceTagsByTagKeysRequest, ModifyResourceTagsResponse, DescribeTagsRequest, DescribeTagKeysResponse, DescribeTagValuesRequest, DescribeResourcesByTagsUnionRequest, DeleteTagsResponse, ModifyResourcesTagValueResponse, DescribeTagsResponse, DeleteTagsRequest, DescribeTagKeysRequest, GetTagsRequest, UnTagResourcesRequest, DescribeTagsSeqResponse, ModifyResourceTagsRequest, DescribeResourceTagsResponse, DescribeResourceTagsByResourceIdsRequest, DescribeResourcesByTagsUnionResponse, DescribeResourceTagsByResourceIdsResponse, GetTagsResponse, ModifyResourcesTagValueRequest, GetTagKeysRequest, AddResourceTagResponse, DescribeResourcesByTagsResponse, AddResourceTagRequest, DescribeTagValuesSeqResponse, CreateTagRequest, DescribeResourceTagsByTagKeysResponse, DescribeTagsSeqRequest, DescribeTagValuesResponse, AttachResourcesTagRequest, CreateTagResponse, DetachResourcesTagResponse, GetResourcesResponse, DescribeResourceTagsByResourceIdsSeqResponse, DeleteTagResponse, DescribeTagValuesSeqRequest, UpdateResourceTagValueRequest, TagResourcesResponse, CreateTagsRequest, CreateTagsResponse, DescribeResourcesByTagsRequest, TagResourcesRequest, DeleteResourceTagRequest, UpdateResourceTagValueResponse, DescribeResourceTagsRequest, DescribeResourceTagsByResourceIdsSeqRequest, GetTagValuesRequest } from "./tag_models";
+import { UnTagResourcesResponse, DetachResourcesTagRequest, GetTagValuesResponse, AttachResourcesTagResponse, GetTagKeysResponse, GetResourcesRequest, DeleteTagRequest, DeleteResourceTagResponse, DescribeResourceTagsByTagKeysRequest, ModifyResourceTagsResponse, DescribeTagsRequest, DescribeProjectsRequest, DescribeTagValuesRequest, DescribeResourcesByTagsUnionRequest, DeleteTagsResponse, ModifyResourcesTagValueResponse, DescribeTagsResponse, DeleteTagsRequest, DescribeTagKeysRequest, DescribeProjectsResponse, UnTagResourcesRequest, DescribeTagsSeqResponse, ModifyResourceTagsRequest, DescribeResourceTagsResponse, DescribeResourceTagsByResourceIdsRequest, DescribeResourcesByTagsUnionResponse, DescribeResourceTagsByResourceIdsResponse, GetTagsResponse, ModifyResourcesTagValueRequest, GetTagKeysRequest, AddResourceTagResponse, DescribeResourcesByTagsResponse, AddResourceTagRequest, DescribeTagValuesSeqResponse, CreateTagRequest, DescribeResourceTagsByTagKeysResponse, DescribeTagsSeqRequest, DescribeTagValuesResponse, AttachResourcesTagRequest, CreateTagResponse, DetachResourcesTagResponse, GetResourcesResponse, DescribeResourceTagsByResourceIdsSeqResponse, DeleteTagResponse, DescribeTagKeysResponse, DescribeTagValuesSeqRequest, UpdateResourceTagValueRequest, TagResourcesResponse, CreateTagsRequest, CreateTagsResponse, GetTagsRequest, DescribeResourcesByTagsRequest, TagResourcesRequest, DeleteResourceTagRequest, UpdateResourceTagValueResponse, DescribeResourceTagsRequest, DescribeResourceTagsByResourceIdsSeqRequest, GetTagValuesRequest } from "./tag_models";
 /**
  * tag client
  * @class
@@ -97,6 +97,10 @@ export declare class Client extends AbstractClient {
 
      */
     DescribeTags(req: DescribeTagsRequest, cb?: (error: string, rep: DescribeTagsResponse) => void): Promise<DescribeTagsResponse>;
+    /**
+     * 获取项目列表
+     */
+    DescribeProjects(req: DescribeProjectsRequest, cb?: (error: string, rep: DescribeProjectsResponse) => void): Promise<DescribeProjectsResponse>;
     /**
      * 用于查询已建立的标签列表中的标签键。
 

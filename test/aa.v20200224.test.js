@@ -28,24 +28,4 @@ it("aa.v20200224.QueryActivityAntiRush", async function () {
     }
 })
 
-it("aa.v20200224.ManageMarketingRisk", async function () {
-    try {
-       const data = await client.ManageMarketingRisk({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("aa.v20200224.QueryActivityAntiRushAdvanced", async function () {
-    try {
-       const data = await client.QueryActivityAntiRushAdvanced({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 })

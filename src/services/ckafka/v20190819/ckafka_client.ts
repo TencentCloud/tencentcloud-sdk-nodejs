@@ -58,7 +58,7 @@ import {
   CreateInstancePreResp,
   ModifyDatahubTaskResponse,
   GroupInfoTopics,
-  TopicResult,
+  FetchMessageListByOffsetRequest,
   Region,
   ModifyInstancePreRequest,
   CreateTokenResponse,
@@ -181,6 +181,7 @@ import {
   DescribeTopicAttributesResponse,
   DeleteDatahubTopicResponse,
   DescribeConsumerGroupResponse,
+  FetchMessageListByOffsetResponse,
   MongoDBParam,
   DeleteDatahubTaskRequest,
   DescribeGroupOffsetsRequest,
@@ -237,6 +238,7 @@ import {
   ModifyConnectResourceResponse,
   CreateDatahubTaskRequest,
   PostgreSQLParam,
+  TopicResult,
   DescribeTopicDetailRequest,
   DescribeGroupOffsetsResponse,
   SendMessageRequest,
@@ -500,6 +502,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeUserResponse) => void
   ): Promise<DescribeUserResponse> {
     return this.request("DescribeUser", req, cb)
+  }
+
+  /**
+   * 根据位点查询消息列表
+   */
+  async FetchMessageListByOffset(
+    req: FetchMessageListByOffsetRequest,
+    cb?: (error: string, rep: FetchMessageListByOffsetResponse) => void
+  ): Promise<FetchMessageListByOffsetResponse> {
+    return this.request("FetchMessageListByOffset", req, cb)
   }
 
   /**

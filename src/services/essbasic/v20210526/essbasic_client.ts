@@ -21,8 +21,8 @@ import {
   ResourceUrlInfo,
   SyncProxyOrganizationResponse,
   FlowApproverInfo,
-  PrepareFlowsResponse,
-  ProxyOrganizationOperator,
+  ChannelCreateConvertTaskApiResponse,
+  OperateChannelTemplateRequest,
   TemplateInfo,
   GetDownloadFlowUrlResponse,
   DescribeResourceUrlsByFlowsResponse,
@@ -30,20 +30,22 @@ import {
   Recipient,
   DescribeTemplatesResponse,
   OperateChannelTemplateResponse,
+  CreateSignUrlsResponse,
   CreateSignUrlsRequest,
   ChannelCreateMultiFlowSignQRCodeRequest,
   AuthFailMessage,
   DescribeFlowDetailInfoRequest,
-  SignQrCode,
+  ChannelGetTaskResultApiResponse,
   UploadFilesRequest,
-  DescribeResourceUrlsByFlowsRequest,
+  ChannelGetTaskResultApiRequest,
   UploadFile,
   Component,
   GetDownloadFlowUrlRequest,
-  ChannelCreateBatchCancelFlowUrlResponse,
   FlowDetailInfo,
   CreateConsoleLoginUrlRequest,
+  OrganizationInfo,
   CreateFlowsByTemplatesResponse,
+  ProxyOrganizationOperator,
   PrepareFlowsRequest,
   SyncProxyOrganizationOperatorsResponse,
   CreateSealByImageResponse,
@@ -55,14 +57,15 @@ import {
   CreateFlowsByTemplatesRequest,
   SyncProxyOrganizationRequest,
   CreateSealByImageRequest,
-  UserInfo,
+  SignQrCode,
   DescribeUsageResponse,
   UsageDetail,
-  CreateSignUrlsResponse,
-  OperateChannelTemplateRequest,
+  ChannelCreateBatchCancelFlowUrlResponse,
+  DescribeResourceUrlsByFlowsRequest,
   DownloadFlowInfo,
   ChannelCancelMultiFlowSignQRCodeRequest,
   SyncFailReason,
+  PrepareFlowsResponse,
   DescribeUsageRequest,
   ChannelCreateBatchCancelFlowUrlRequest,
   ApproverRestriction,
@@ -71,6 +74,8 @@ import {
   UploadFilesResponse,
   Agent,
   FormField,
+  UserInfo,
+  ChannelCreateConvertTaskApiRequest,
   FlowApproverDetail,
   FlowInfo,
   SignUrlInfo,
@@ -97,6 +102,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateFlowsByTemplatesResponse) => void
   ): Promise<CreateFlowsByTemplatesResponse> {
     return this.request("CreateFlowsByTemplates", req, cb)
+  }
+
+  /**
+   * 根据签署流程信息批量获取资源下载链接，需合作企业先进行授权
+   */
+  async DescribeResourceUrlsByFlows(
+    req: DescribeResourceUrlsByFlowsRequest,
+    cb?: (error: string, rep: DescribeResourceUrlsByFlowsResponse) => void
+  ): Promise<DescribeResourceUrlsByFlowsResponse> {
+    return this.request("DescribeResourceUrlsByFlows", req, cb)
   }
 
   /**
@@ -231,6 +246,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 渠道创建文件转换任务
+   */
+  async ChannelCreateConvertTaskApi(
+    req: ChannelCreateConvertTaskApiRequest,
+    cb?: (error: string, rep: ChannelCreateConvertTaskApiResponse) => void
+  ): Promise<ChannelCreateConvertTaskApiResponse> {
+    return this.request("ChannelCreateConvertTaskApi", req, cb)
+  }
+
+  /**
      * 此接口（DescribeUsage）用于获取渠道所有合作企业流量消耗情况。
  注: 此接口每日限频2次，若要扩大限制次数,请提前与客服经理或邮件至e-contract@tencent.com进行联系。
      */
@@ -242,13 +267,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 此接口（DescribeFlowDetailInfo）用于查询合同(签署流程)的详细信息。
+   * 渠道版查询转换任务状态
    */
-  async DescribeFlowDetailInfo(
-    req: DescribeFlowDetailInfoRequest,
-    cb?: (error: string, rep: DescribeFlowDetailInfoResponse) => void
-  ): Promise<DescribeFlowDetailInfoResponse> {
-    return this.request("DescribeFlowDetailInfo", req, cb)
+  async ChannelGetTaskResultApi(
+    req: ChannelGetTaskResultApiRequest,
+    cb?: (error: string, rep: ChannelGetTaskResultApiResponse) => void
+  ): Promise<ChannelGetTaskResultApiResponse> {
+    return this.request("ChannelGetTaskResultApi", req, cb)
   }
 
   /**
@@ -262,13 +287,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 根据签署流程信息批量获取资源下载链接，需合作企业先进行授权
+   * 此接口（DescribeFlowDetailInfo）用于查询合同(签署流程)的详细信息。
    */
-  async DescribeResourceUrlsByFlows(
-    req: DescribeResourceUrlsByFlowsRequest,
-    cb?: (error: string, rep: DescribeResourceUrlsByFlowsResponse) => void
-  ): Promise<DescribeResourceUrlsByFlowsResponse> {
-    return this.request("DescribeResourceUrlsByFlows", req, cb)
+  async DescribeFlowDetailInfo(
+    req: DescribeFlowDetailInfoRequest,
+    cb?: (error: string, rep: DescribeFlowDetailInfoResponse) => void
+  ): Promise<DescribeFlowDetailInfoResponse> {
+    return this.request("DescribeFlowDetailInfo", req, cb)
   }
 
   /**

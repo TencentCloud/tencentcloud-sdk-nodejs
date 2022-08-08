@@ -1439,20 +1439,33 @@ export interface GroupInfoTopics {
 }
 
 /**
- * 统一返回的TopicResponse
+ * FetchMessageListByOffset请求参数结构体
  */
-export interface TopicResult {
+export interface FetchMessageListByOffsetRequest {
   /**
-      * 返回的主题信息列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  TopicList: Array<Topic>
+   * 实例Id
+   */
+  InstanceId: string
 
   /**
-      * 符合条件的 topic 数量
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  TotalCount: number
+   * 主题名
+   */
+  Topic: string
+
+  /**
+   * 分区id
+   */
+  Partition: number
+
+  /**
+   * 位点信息
+   */
+  Offset: number
+
+  /**
+   * 最大查询条数，默认20，最大20
+   */
+  SinglePartitionRecordNumber?: number
 }
 
 /**
@@ -4658,6 +4671,21 @@ export interface DescribeConsumerGroupResponse {
 }
 
 /**
+ * FetchMessageListByOffset返回参数结构体
+ */
+export interface FetchMessageListByOffsetResponse {
+  /**
+   * 返回结果。注意，列表中不返回具体的消息内容（key、value），如果需要查询具体消息内容，请使用FetchMessageByOffset接口
+   */
+  Result?: Array<ConsumerRecord>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * MongoDB类型入参
  */
 export interface MongoDBParam {
@@ -6269,6 +6297,23 @@ export interface PostgreSQLParam {
    * 复制存量信息(never增量, initial全量)，默认为initial
    */
   SnapshotMode?: string
+}
+
+/**
+ * 统一返回的TopicResponse
+ */
+export interface TopicResult {
+  /**
+      * 返回的主题信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TopicList: Array<Topic>
+
+  /**
+      * 符合条件的 topic 数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TotalCount: number
 }
 
 /**

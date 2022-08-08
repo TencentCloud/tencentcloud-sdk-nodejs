@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeAbnormalEventResponse, DescribeAbnormalEventRequest, CreatePictureRequest, DescribeHistoryScaleRequest, DescribeCallDetailRequest, RemoveUserByStrRoomIdResponse, StartMCUMixTranscodeRequest, DescribeUserEventRequest, StartMCUMixTranscodeByStrRoomIdRequest, DescribeDetailEventResponse, StopMCUMixTranscodeByStrRoomIdResponse, DescribeCallDetailInfoRequest, DescribeRoomInformationRequest, DescribeUserInfoRequest, DescribeRecordStatisticResponse, StartMCUMixTranscodeByStrRoomIdResponse, DismissRoomByStrRoomIdRequest, DescribeRecordStatisticRequest, DescribeRoomInfoRequest, DescribeCallDetailInfoResponse, DescribeUserInformationRequest, ModifyPictureRequest, DescribeRoomInfoResponse, DescribeUserInfoResponse, ModifyPictureResponse, DescribeScaleInfoResponse, StopMCUMixTranscodeResponse, RemoveUserRequest, DismissRoomRequest, DescribeUnusualEventRequest, DescribeCloudRecordingRequest, StopMCUMixTranscodeRequest, CreateCloudRecordingRequest, DeleteCloudRecordingResponse, StopMCUMixTranscodeByStrRoomIdRequest, DeletePictureResponse, ModifyCloudRecordingRequest, CreateCloudRecordingResponse, StartMCUMixTranscodeResponse, DescribeTrtcMcuTranscodeTimeResponse, DeleteCloudRecordingRequest, DescribePictureRequest, DescribeExternalTrtcMeasureResponse, DescribePictureResponse, DescribeTrtcMcuTranscodeTimeRequest, DescribeDetailEventRequest, DescribeScaleInfoRequest, DismissRoomByStrRoomIdResponse, DescribeUnusualEventResponse, ModifyCloudRecordingResponse, DescribeCloudRecordingResponse, DismissRoomResponse, DescribeUserInformationResponse, DescribeCallDetailResponse, DeletePictureRequest, DescribeRoomInformationResponse, DescribeExternalTrtcMeasureRequest, RemoveUserByStrRoomIdRequest, DescribeUserEventResponse, CreatePictureResponse, RemoveUserResponse, DescribeHistoryScaleResponse } from "./trtc_models";
+import { CreatePictureRequest, RemoveUserByStrRoomIdResponse, StartMCUMixTranscodeRequest, DescribeUserEventRequest, StartMCUMixTranscodeByStrRoomIdRequest, DescribeUserEventResponse, StopMCUMixTranscodeByStrRoomIdResponse, DescribeCallDetailInfoRequest, DescribeUserInfoRequest, DescribeRecordStatisticResponse, StartMCUMixTranscodeByStrRoomIdResponse, DismissRoomByStrRoomIdRequest, DescribeRecordStatisticRequest, DescribeRoomInfoRequest, DescribeCallDetailInfoResponse, ModifyPictureRequest, DescribeRoomInfoResponse, DescribeUserInfoResponse, ModifyPictureResponse, DescribeScaleInfoResponse, StopMCUMixTranscodeResponse, RemoveUserRequest, DismissRoomRequest, DescribeUnusualEventRequest, DescribeCloudRecordingRequest, StopMCUMixTranscodeRequest, CreateCloudRecordingRequest, DeleteCloudRecordingResponse, StopMCUMixTranscodeByStrRoomIdRequest, DeletePictureResponse, ModifyCloudRecordingRequest, CreateCloudRecordingResponse, StartMCUMixTranscodeResponse, DescribeTrtcMcuTranscodeTimeResponse, DeleteCloudRecordingRequest, DescribePictureRequest, DescribeExternalTrtcMeasureResponse, DescribePictureResponse, DescribeTrtcMcuTranscodeTimeRequest, DescribeScaleInfoRequest, DismissRoomByStrRoomIdResponse, DescribeUnusualEventResponse, ModifyCloudRecordingResponse, DescribeCloudRecordingResponse, DismissRoomResponse, DeletePictureRequest, DescribeExternalTrtcMeasureRequest, RemoveUserByStrRoomIdRequest, CreatePictureResponse, RemoveUserResponse } from "./trtc_models";
 /**
  * trtc client
  * @class
@@ -37,11 +37,6 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
      */
     StartMCUMixTranscode(req: StartMCUMixTranscodeRequest, cb?: (error: string, rep: StartMCUMixTranscodeResponse) => void): Promise<StartMCUMixTranscodeResponse>;
     /**
-     * 查询SdkAppId下的房间列表。默认返回10条通话，一次最多返回100条通话。可查询14天内的数据。
-**注意**：该接口只用于历史数据统计或核对数据使用，实时类关键业务逻辑不能使用。
-     */
-    DescribeRoomInformation(req: DescribeRoomInformationRequest, cb?: (error: string, rep: DescribeRoomInformationResponse) => void): Promise<DescribeRoomInformationResponse>;
-    /**
      * 查询指定时间内的用户列表及用户通话质量数据，可查询14天内数据。DataType 不为null，查询起止时间不超过1个小时，查询用户不超过6个，支持跨天查询。DataType为null时，查询起止时间不超过4个小时， 默认查询6个用户，同时支持每页查询100以内用户个数（PageSize不超过100）。接口用于查询质量问题，不推荐作为计费使用。（同老接口DescribeCallDetail）
 **注意**：该接口只用于历史数据统计或核对数据使用，实时类关键业务逻辑不能使用。
      */
@@ -50,10 +45,6 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
      * 接口说明：结束云端混流
      */
     StopMCUMixTranscode(req: StopMCUMixTranscodeRequest, cb?: (error: string, rep: StopMCUMixTranscodeResponse) => void): Promise<StopMCUMixTranscodeResponse>;
-    /**
-     * 可查询SdkAppId每天的房间数和用户数，按天统计，可查询最近14天的数据。当天未结束，数据未统计完成，无法查到当天的房间数与用户数
-     */
-    DescribeHistoryScale(req: DescribeHistoryScaleRequest, cb?: (error: string, rep: DescribeHistoryScaleResponse) => void): Promise<DescribeHistoryScaleResponse>;
     /**
      * 如果您需要在 [云端混流转码](https://cloud.tencent.com/document/product/647/16827) 时频繁删除自定义背景图或水印，可通过此接口删除已上传的图片。无需频繁删除图片的场景，建议直接在 [控制台 > 应用管理 > 素材管理](https://cloud.tencent.com/document/product/647/50769) 中操作。
      */
@@ -67,31 +58,26 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
      */
     RemoveUser(req: RemoveUserRequest, cb?: (error: string, rep: RemoveUserResponse) => void): Promise<RemoveUserResponse>;
     /**
-     * 查询指定时间内的用户列表及用户通话质量数据，可查询14天内数据。DataType 不为null，查询起止时间不超过1个小时，查询用户不超过6个，支持跨天查询。DataType为null时，查询起止时间不超过4个小时， 默认查询6个用户，同时支持每页查询100以内用户个数（PageSize不超过100）。接口用于查询质量问题，不推荐作为计费使用。
-**注意**：该接口只用于历史数据统计或核对数据使用，实时类关键业务逻辑不能使用。
+     * 成功开启录制后，可以使用此接口来更新录制任务。仅在录制任务进行时有效，录制退出后更新将会返回错误。更新操作是全量覆盖，并不是增量更新的模式，也就是说每次更新都需要携带全量的信息。
      */
-    DescribeCallDetail(req: DescribeCallDetailRequest, cb?: (error: string, rep: DescribeCallDetailResponse) => void): Promise<DescribeCallDetailResponse>;
+    ModifyCloudRecording(req: ModifyCloudRecordingRequest, cb?: (error: string, rep: ModifyCloudRecordingResponse) => void): Promise<ModifyCloudRecordingResponse>;
     /**
      * 查询用户某次通话内的进退房，视频开关等详细事件。可查询14天内数据。（同接口DescribeDetailEvent）
      */
     DescribeUserEvent(req: DescribeUserEventRequest, cb?: (error: string, rep: DescribeUserEventResponse) => void): Promise<DescribeUserEventResponse>;
     /**
-     * 成功开启录制后，可以使用此接口来更新录制任务。仅在录制任务进行时有效，录制退出后更新将会返回错误。更新操作是全量覆盖，并不是增量更新的模式，也就是说每次更新都需要携带全量的信息。
-     */
-    ModifyCloudRecording(req: ModifyCloudRecordingRequest, cb?: (error: string, rep: ModifyCloudRecordingResponse) => void): Promise<ModifyCloudRecordingResponse>;
-    /**
-     * ###接口说明：
+     * 接口说明：
 启动云端录制功能，完成房间内的音视频录制，并上传到指定的云存储。您可以通过此 API 接口把TRTC 房间中的每一路音视频流做单独的录制有或者多路视频画面混流一路。
 
-###您可以通过此接口实现如下目标：
+您可以通过此接口实现如下目标：
 * 指定订阅流参数（RecordParams）来指定需要录制的主播的黑名单或者白名单。
 * 指定第三方存储的参数（StorageParams）来指定上传到您希望的云存储
 * 指定混流模式下的音视频转码详细参数（MixTranscodeParams），包括视频分辨率、视频码率、视频帧率、以及声音质量等
 * 指定混流模式各路画面的位置和布局或者也可以指定自动模板的方式来配置。
 
-###关键名词：
-* 单流录制：分别录制房间的订阅UserId的音频和视频。录制服务会实时将录制文件（M3U8/TS）上传至云存储。
-* 混流录制：将房间内订阅UserId的音视频混录成一个音视频文件，并将录制文件（M3U8/TS）上传至云存储。
+关键名词：
+* 单流录制：分别录制房间的订阅UserId的音频和视频。录制服务会实时将录制文件上传至云点播存储。
+* 合流录制：将房间内订阅UserId的音视频混录成一个音视频文件，并将录制文件上传至云点播存储。
      */
     CreateCloudRecording(req: CreateCloudRecordingRequest, cb?: (error: string, rep: CreateCloudRecordingResponse) => void): Promise<CreateCloudRecordingResponse>;
     /**
@@ -119,11 +105,6 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
      * 接口说明：结束云端混流
      */
     StopMCUMixTranscodeByStrRoomId(req: StopMCUMixTranscodeByStrRoomIdRequest, cb?: (error: string, rep: StopMCUMixTranscodeByStrRoomIdResponse) => void): Promise<StopMCUMixTranscodeByStrRoomIdResponse>;
-    /**
-     * 查询SdkAppId下任意20条异常体验事件，返回异常体验ID与可能产生异常体验的原因。可查询14天内数据，查询起止时间不超过1个小时。支持跨天查询。
-异常体验ID映射见：https://cloud.tencent.com/document/product/647/44916
-     */
-    DescribeAbnormalEvent(req: DescribeAbnormalEventRequest, cb?: (error: string, rep: DescribeAbnormalEventResponse) => void): Promise<DescribeAbnormalEventResponse>;
     /**
      * 接口说明：启动云端混流，并指定混流画面中各路画面的布局位置。
 
@@ -175,10 +156,11 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
     DescribeTrtcMcuTranscodeTime(req: DescribeTrtcMcuTranscodeTimeRequest, cb?: (error: string, rep: DescribeTrtcMcuTranscodeTimeResponse) => void): Promise<DescribeTrtcMcuTranscodeTimeResponse>;
     /**
      * 成功开启录制后，可以使用此接口来查询录制状态。仅在录制任务进行时有效，录制退出后查询将会返回错误。
+录制文件上传到云点播VOD时，StorageFileList中不会返回录制文件信息，请订阅相关录制文件回调事件，获取录制文件信息。
      */
     DescribeCloudRecording(req: DescribeCloudRecordingRequest, cb?: (error: string, rep: DescribeCloudRecordingResponse) => void): Promise<DescribeCloudRecordingResponse>;
     /**
-     * 成功开启录制后，可以使用此接口来停止录制任务。仅在录制任务进行时有效，录制退出后更新将会返回错误。停止录制成功后不代表文件全部传输完成，如果未完成后台将会继续上传文件，成功后通过事件回调通知客户文件全部传输完成状态。
+     * 成功开启录制后，可以使用此接口来停止录制任务。停止录制成功后不代表文件全部传输完成，如果未完成后台将会继续上传文件，成功后通过事件回调通知客户文件全部传输完成状态。
      */
     DeleteCloudRecording(req: DeleteCloudRecordingRequest, cb?: (error: string, rep: DeleteCloudRecordingResponse) => void): Promise<DeleteCloudRecordingResponse>;
     /**
@@ -186,17 +168,8 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
      */
     DescribePicture(req: DescribePictureRequest, cb?: (error: string, rep: DescribePictureResponse) => void): Promise<DescribePictureResponse>;
     /**
-     * 查询用户某次通话内的进退房，视频开关等详细事件。可查询14天内数据。
-     */
-    DescribeDetailEvent(req: DescribeDetailEventRequest, cb?: (error: string, rep: DescribeDetailEventResponse) => void): Promise<DescribeDetailEventResponse>;
-    /**
      * 查询SdkAppId下任意20条异常体验事件，返回异常体验ID与可能产生异常体验的原因。可查询14天内数据，查询起止时间不超过1个小时。支持跨天查询。（同老接口DescribeAbnormalEvent）
 异常体验ID映射见：https://cloud.tencent.com/document/product/647/44916
      */
     DescribeUnusualEvent(req: DescribeUnusualEventRequest, cb?: (error: string, rep: DescribeUnusualEventResponse) => void): Promise<DescribeUnusualEventResponse>;
-    /**
-     * 查询指定时间内的用户列表，可查询14天内数据，查询起止时间不超过4小时。默认每页查询6个用户，支持每页最大查询100个用户PageSize不超过100）。
-**注意**：该接口只用于历史数据统计或核对数据使用，实时类关键业务逻辑不能使用。
-     */
-    DescribeUserInformation(req: DescribeUserInformationRequest, cb?: (error: string, rep: DescribeUserInformationResponse) => void): Promise<DescribeUserInformationResponse>;
 }

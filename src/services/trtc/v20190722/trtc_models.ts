@@ -16,52 +16,6 @@
  */
 
 /**
- * DescribeAbnormalEvent返回参数结构体
- */
-export interface DescribeAbnormalEventResponse {
-  /**
-   * 返回的数据总条数
-   */
-  Total: number
-
-  /**
-   * 异常体验列表
-   */
-  AbnormalExperienceList: Array<AbnormalExperience>
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeAbnormalEvent请求参数结构体
- */
-export interface DescribeAbnormalEventRequest {
-  /**
-   * 用户SdkAppId（如：1400xxxxxx）
-   */
-  SdkAppId: string
-
-  /**
-      * 查询开始时间，本地unix时间戳，单位为秒（如：1590065777）
-注意：支持查询14天内的数据
-      */
-  StartTime: number
-
-  /**
-   * 查询结束时间，本地unix时间戳，单位为秒（如：1590065877）注意：与StartTime间隔时间不超过1小时。
-   */
-  EndTime: number
-
-  /**
-   * 房间号，查询房间内任意20条以内异常体验事件
-   */
-  RoomId?: string
-}
-
-/**
  * CreatePicture请求参数结构体
  */
 export interface CreatePictureRequest {
@@ -162,92 +116,6 @@ export interface MixLayout {
    * 下载的url地址， 只支持jpg， png，大小限制不超过5M，宽高比不一致的处理方案同 RenderMode。
    */
   SubBackgroundImage?: string
-}
-
-/**
- * DescribeHistoryScale请求参数结构体
- */
-export interface DescribeHistoryScaleRequest {
-  /**
-   * 用户SdkAppId（如：1400xxxxxx）
-   */
-  SdkAppId: string
-
-  /**
-      * 查询开始时间，本地unix时间戳，单位为秒（如：1590065777）
-注意：支持查询14天内的数据。
-      */
-  StartTime: number
-
-  /**
-      * 查询结束时间，本地unix时间戳，单位为秒（如：1590065877），建议与StartTime间隔时间超过24小时。
-注意：按天统计，结束时间小于前一天，否则查询数据为空（如：需查询20号数据，结束时间需小于20号0点）。
-      */
-  EndTime: number
-}
-
-/**
- * DescribeCallDetail请求参数结构体
- */
-export interface DescribeCallDetailRequest {
-  /**
-   * 通话 ID（唯一标识一次通话）： SdkAppId_RoomId（房间号）_ CreateTime（房间创建时间，unix时间戳，单位为s）例：1400xxxxxx_218695_1590065777。通过 DescribeRoomInfo（查询历史房间列表）接口获取（[查询历史房间列表](https://cloud.tencent.com/document/product/647/44050)）。
-   */
-  CommId: string
-
-  /**
-      * 查询开始时间，本地unix时间戳，单位为秒（如：1590065777），
-注意：支持查询14天内的数据。
-      */
-  StartTime: number
-
-  /**
-      * 查询结束时间，本地unix时间戳，单位为秒（如：1590065877）
-注意：DataType 不为null ，与StartTime间隔时间不超过1小时；DataType 为null，与StartTime间隔时间不超过4小时。
-      */
-  EndTime: number
-
-  /**
-   * 用户SdkAppId（如：1400xxxxxx）。
-   */
-  SdkAppId: string
-
-  /**
-   * 需查询的用户数组，默认不填返回6个用户。
-   */
-  UserIds?: Array<string>
-
-  /**
-      * 需查询的指标，不填则只返回用户列表，填all则返回所有指标。
-appCpu：APP CPU使用率；
-sysCpu：系统 CPU使用率；
-aBit：上/下行音频码率；单位：bps
-aBlock：音频卡顿时长；单位：ms
-bigvBit：上/下行视频码率；单位：bps
-bigvCapFps：视频采集帧率；
-bigvEncFps：视频发送帧率；
-bigvDecFps：渲染帧率；
-bigvBlock：视频卡顿时长；单位：ms
-aLoss：上/下行音频丢包率；
-bigvLoss：上/下行视频丢包率；
-bigvWidth：上/下行分辨率宽；
-bigvHeight：上/下行分辨率高
-      */
-  DataType?: Array<string>
-
-  /**
-      * 当前页数，默认为0，
-注意：PageNumber和PageSize 其中一个不填均默认返回6条数据。
-      */
-  PageNumber?: string
-
-  /**
-      * 每页个数，默认为6，
-范围：[1，100]
-注意：DataType不为null，UserIds长度不能超过6，PageSize最大值不超过6；
-DataType 为null，UserIds长度不超过100，PageSize最大不超过100。
-      */
-  PageSize?: string
 }
 
 /**
@@ -396,9 +264,9 @@ export interface ScaleInfomation {
 }
 
 /**
- * DescribeDetailEvent返回参数结构体
+ * DescribeUserEvent返回参数结构体
  */
-export interface DescribeDetailEventResponse {
+export interface DescribeUserEventResponse {
   /**
    * 返回的事件列表，若没有数据，会返回空数组。
    */
@@ -532,45 +400,6 @@ export interface MixTranscodeParams {
    * 录制音频转码参数，注意如果设置了这个参数，那么里面的字段都是必填的，没有默认值，如果不填这个参数，那么取值为默认值。
    */
   AudioParams?: AudioParams
-}
-
-/**
- * DescribeRoomInformation请求参数结构体
- */
-export interface DescribeRoomInformationRequest {
-  /**
-   * 用户SdkAppId（如：1400xxxxxx）
-   */
-  SdkAppId: string
-
-  /**
-      * 查询开始时间，本地unix时间戳，单位为秒（如：1590065777）
-注意：支持查询14天内的数据
-      */
-  StartTime: number
-
-  /**
-      * 查询结束时间，本地unix时间戳，单位为秒（如：1590065877）
-注意：与StartTime间隔时间不超过24小时。
-      */
-  EndTime: number
-
-  /**
-   * 房间号（如：223)
-   */
-  RoomId?: string
-
-  /**
-      * 当前页数，默认为0，
-注意：PageNumber和PageSize 其中一个不填均默认返回10条数据。
-      */
-  PageNumber?: string
-
-  /**
-      * 每页个数，默认为10，
-范围：[1，100]
-      */
-  PageSize?: string
 }
 
 /**
@@ -960,51 +789,6 @@ export interface DescribeCallDetailInfoResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * DescribeUserInformation请求参数结构体
- */
-export interface DescribeUserInformationRequest {
-  /**
-   * 通话 ID（唯一标识一次通话）： SdkAppId_RoomId（房间号）_ CreateTime（房间创建时间，unix时间戳，单位为s）例：1400xxxxxx_218695_1590065777。通过 DescribeRoomInfo（查询历史房间列表）接口获取（[查询历史房间列表](https://cloud.tencent.com/document/product/647/44050)）。
-   */
-  CommId: string
-
-  /**
-      * 查询开始时间，本地unix时间戳，单位为秒（如：1590065777）
-注意：支持查询14天内的数据
-      */
-  StartTime: number
-
-  /**
-      * 查询结束时间，本地unix时间戳，单位为秒（如：1590065877）
-注意：与StartTime间隔时间不超过4小时。
-      */
-  EndTime: number
-
-  /**
-   * 用户SdkAppId（如：1400xxxxxx）
-   */
-  SdkAppId: string
-
-  /**
-      * 需查询的用户数组，不填默认返回6个用户
-范围：[1，100]。
-      */
-  UserIds?: Array<string>
-
-  /**
-      * 当前页数，默认为0，
-注意：PageNumber和PageSize 其中一个不填均默认返回6条数据。
-      */
-  PageNumber?: string
-
-  /**
-      * 每页个数，默认为6，
-范围：[1，100]。
-      */
-  PageSize?: string
 }
 
 /**
@@ -1683,12 +1467,12 @@ export interface CreateCloudRecordingRequest {
   RoomId: string
 
   /**
-   * 录制服务在TRTC房间使用的[UserId](https://cloud.tencent.com/document/product/647/46351#userid)，注意这个userId不能与其他TRTC或者录制服务等已经使用的UserId重复，建议可以把房间ID作为userId的标识的一部分。
+   * 录制机器人用于进入TRTC房间拉流的[UserId](https://cloud.tencent.com/document/product/647/46351#userid)，注意这个UserId不能与其他TRTC功能或者录制服务等已经使用的UserId重复，建议可以把房间ID作为userId的标识的一部分。
    */
   UserId: string
 
   /**
-   * 云端录制加入房间的用户签名，当前 UserId 对应的验证签名，相当于登录密码，具体计算方法请参考TRTC计算[UserSig](https://cloud.tencent.com/document/product/647/45910#UserSig)的方案。
+   * 录制机器人用于进入TRTC房间拉流的用户签名，当前 UserId 对应的验证签名，相当于登录密码，具体计算方法请参考TRTC计算[UserSig](https://cloud.tencent.com/document/product/647/45910#UserSig)的方案。
    */
   UserSig: string
 
@@ -1698,7 +1482,7 @@ export interface CreateCloudRecordingRequest {
   RecordParams: RecordParams
 
   /**
-   * 云端录制文件上传到云存储的参数。
+   * 云端录制文件上传到云存储的参数(目前只支持使用腾讯云点播作为存储)。
    */
   StorageParams: StorageParams
 
@@ -2043,38 +1827,6 @@ export interface DescribeTrtcMcuTranscodeTimeRequest {
 }
 
 /**
- * DescribeDetailEvent请求参数结构体
- */
-export interface DescribeDetailEventRequest {
-  /**
-   * 通话 ID（唯一标识一次通话）： SdkAppId_RoomId（房间号）_ CreateTime（房间创建时间，unix时间戳，单位为s）例：1400xxxxxx_218695_1590065777。通过 DescribeRoomInfo（查询历史房间列表）接口获取（[查询历史房间列表](https://cloud.tencent.com/document/product/647/44050)）。
-   */
-  CommId: string
-
-  /**
-      * 查询开始时间，本地unix时间戳，单位为秒（如：1590065777）
-注意：支持查询14天内的数据
-      */
-  StartTime: number
-
-  /**
-      * 查询结束时间，本地unix时间戳，单位为秒（如：1590065877）
-注意：查询时间大于房间结束时间，以房间结束时间为准。
-      */
-  EndTime: number
-
-  /**
-   * 用户UserId
-   */
-  UserId: string
-
-  /**
-   * 房间号（如：223）
-   */
-  RoomId: string
-}
-
-/**
  * 用户信息，包括用户进房时间，退房时间等
  */
 export interface UserInformation {
@@ -2243,54 +1995,6 @@ export interface DismissRoomResponse {
 }
 
 /**
- * DescribeUserInformation返回参数结构体
- */
-export interface DescribeUserInformationResponse {
-  /**
-   * 返回的用户总条数
-   */
-  Total: number
-
-  /**
-      * 用户信息列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  UserList: Array<UserInformation>
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeCallDetail返回参数结构体
- */
-export interface DescribeCallDetailResponse {
-  /**
-   * 返回的用户总条数
-   */
-  Total: number
-
-  /**
-      * 用户信息列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  UserList: Array<UserInformation>
-
-  /**
-      * 质量数据
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Data: Array<QualityData>
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DeletePicture请求参数结构体
  */
 export interface DeletePictureRequest {
@@ -2303,26 +2007,6 @@ export interface DeletePictureRequest {
    * 应用id
    */
   SdkAppId: number
-}
-
-/**
- * DescribeRoomInformation返回参数结构体
- */
-export interface DescribeRoomInformationResponse {
-  /**
-   * 返回当页数据总数
-   */
-  Total: number
-
-  /**
-   * 房间信息列表
-   */
-  RoomList: Array<RoomState>
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -2398,21 +2082,6 @@ export interface RecordParams {
    * 输出文件的格式，上传到云点播时此参数无效。0：(默认)输出文件为hls格式。1：输出文件格式为hls+mp4（hls录制完成后转mp4文件）
    */
   OutputFormat?: number
-}
-
-/**
- * DescribeUserEvent返回参数结构体
- */
-export interface DescribeUserEventResponse {
-  /**
-   * 返回的事件列表，若没有数据，会返回空数组。
-   */
-  Data: Array<EventList>
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -2609,27 +2278,6 @@ export interface CreatePictureResponse {
  * RemoveUser返回参数结构体
  */
 export interface RemoveUserResponse {
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeHistoryScale返回参数结构体
- */
-export interface DescribeHistoryScaleResponse {
-  /**
-   * 返回的数据条数
-   */
-  Total: number
-
-  /**
-      * 返回的数据
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ScaleList: Array<ScaleInfomation>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

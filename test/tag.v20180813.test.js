@@ -238,6 +238,16 @@ it("tag.v20180813.DescribeTags", async function () {
     }
 })
 
+it("tag.v20180813.DescribeProjects", async function () {
+    try {
+       const data = await client.DescribeProjects({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tag.v20180813.DescribeTagKeys", async function () {
     try {
        const data = await client.DescribeTagKeys({})

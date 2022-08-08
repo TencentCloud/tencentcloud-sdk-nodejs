@@ -33,17 +33,5 @@ class Client extends abstract_client_1.AbstractClient {
     async QueryActivityAntiRush(req, cb) {
         return this.request("QueryActivityAntiRush", req, cb);
     }
-    /**
-     * 活动防刷、注册保护、登录保护等营销产品的高级版本
-     */
-    async ManageMarketingRisk(req, cb) {
-        return this.request("ManageMarketingRisk", req, cb);
-    }
-    /**
-     * 活动防刷高级版，支持对网赚众包、网赚防刷、引流反诈骗场景的检测识别
-     */
-    async QueryActivityAntiRushAdvanced(req, cb) {
-        return this.request("QueryActivityAntiRushAdvanced", req, cb);
-    }
 }
 exports.Client = Client;
