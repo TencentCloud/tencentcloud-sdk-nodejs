@@ -1223,15 +1223,6 @@ export interface DescribeListPacketFilterConfigResponse {
     RequestId?: string;
 }
 /**
- * DeleteBlackWhiteIpList返回参数结构体
- */
-export interface DeleteBlackWhiteIpListResponse {
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
  * CreateSchedulingDomain请求参数结构体
  */
 export interface CreateSchedulingDomainRequest {
@@ -1361,6 +1352,35 @@ export interface DisassociateDDoSEipAddressResponse {
     RequestId?: string;
 }
 /**
+ * DescribeBgpBizTrend请求参数结构体
+ */
+export interface DescribeBgpBizTrendRequest {
+    /**
+      * 大禹子产品代号（bgp-multip表示高防包）
+      */
+    Business: string;
+    /**
+      * 统计开始时间。 例：“2020-09-22 00:00:00”
+      */
+    StartTime: string;
+    /**
+      * 统计结束时间。 例：“2020-09-22 00:00:00”
+      */
+    EndTime: string;
+    /**
+      * 统计纬度，可取值intraffic, outtraffic, inpkg, outpkg
+      */
+    MetricName: string;
+    /**
+      * 资源实例ID
+      */
+    InstanceId: string;
+    /**
+      * 0表示固定时间，1表示自定义时间
+      */
+    Flag: number;
+}
+/**
  * DeleteCCThresholdPolicy返回参数结构体
  */
 export interface DeleteCCThresholdPolicyResponse {
@@ -1368,23 +1388,6 @@ export interface DeleteCCThresholdPolicyResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
-}
-/**
- * DeleteBlackWhiteIpList请求参数结构体
- */
-export interface DeleteBlackWhiteIpListRequest {
-    /**
-      * 资源实例ID
-      */
-    InstanceId: string;
-    /**
-      * IP列表
-      */
-    IpList: Array<string>;
-    /**
-      * IP类型，取值[black(黑名单IP), white(白名单IP)]
-      */
-    Type: string;
 }
 /**
  * 源站信息
@@ -2130,35 +2133,29 @@ export interface DescribeBasicDeviceStatusResponse {
     RequestId?: string;
 }
 /**
- * 水印防护配置
+ * DescribeBgpBizTrend返回参数结构体
  */
-export interface WaterPrintConfig {
+export interface DescribeBgpBizTrendResponse {
     /**
-      * 水印偏移量，取值范围[0, 100)
+      * 曲线图各个时间点的值
       */
-    Offset: number;
+    DataList: Array<number>;
     /**
-      * 是否开启，取值[
-0（手动开启）
-1（立即运行）
-]
+      * 曲线图取值个数
       */
-    OpenStatus: number;
+    Total: number;
     /**
-      * 水印所属的转发监听器列表
+      * 统计纬度
       */
-    Listeners: Array<ForwardListener>;
+    MetricName: string;
     /**
-      * 水印添加成功后生成的水印密钥列表，一条水印最少1个密钥，最多2个密钥
+      * 返回数组最大值
       */
-    Keys?: Array<WaterPrintKey>;
+    MaxData: number;
     /**
-      * 水印检查模式, 取值[
-checkall（普通模式）
-shortfpcheckall（精简模式）
-]
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Verify?: string;
+    RequestId?: string;
 }
 /**
  * L4规则回源列表
@@ -4149,6 +4146,37 @@ export interface CCThresholdPolicy {
       * 修改时间
       */
     ModifyTime: string;
+}
+/**
+ * 水印防护配置
+ */
+export interface WaterPrintConfig {
+    /**
+      * 水印偏移量，取值范围[0, 100)
+      */
+    Offset: number;
+    /**
+      * 是否开启，取值[
+0（手动开启）
+1（立即运行）
+]
+      */
+    OpenStatus: number;
+    /**
+      * 水印所属的转发监听器列表
+      */
+    Listeners: Array<ForwardListener>;
+    /**
+      * 水印添加成功后生成的水印密钥列表，一条水印最少1个密钥，最多2个密钥
+      */
+    Keys?: Array<WaterPrintKey>;
+    /**
+      * 水印检查模式, 取值[
+checkall（普通模式）
+shortfpcheckall（精简模式）
+]
+      */
+    Verify?: string;
 }
 /**
  * ModifyDomainUsrName返回参数结构体

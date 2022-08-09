@@ -257,6 +257,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateDDoSGeoIPBlockConfig", req, cb);
     }
     /**
+     * 获取高防包流量折线图
+     */
+    async DescribeBgpBizTrend(req, cb) {
+        return this.request("DescribeBgpBizTrend", req, cb);
+    }
+    /**
      * 获取CC频率限制策略列表
      */
     async DescribeCCReqLimitPolicyList(req, cb) {
@@ -286,12 +292,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeListBGPInstances(req, cb) {
         return this.request("DescribeListBGPInstances", req, cb);
-    }
-    /**
-     * 删除DDoS防护的IP黑白名单
-     */
-    async DeleteBlackWhiteIpList(req, cb) {
-        return this.request("DeleteBlackWhiteIpList", req, cb);
     }
     /**
      * 删除DDoS防护的端口acl策略

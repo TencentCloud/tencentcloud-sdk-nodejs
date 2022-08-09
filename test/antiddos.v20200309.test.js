@@ -398,6 +398,16 @@ it("antiddos.v20200309.CreateDDoSGeoIPBlockConfig", async function () {
     }
 })
 
+it("antiddos.v20200309.DescribeBgpBizTrend", async function () {
+    try {
+       const data = await client.DescribeBgpBizTrend({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("antiddos.v20200309.DescribeCCReqLimitPolicyList", async function () {
     try {
        const data = await client.DescribeCCReqLimitPolicyList({})
@@ -441,16 +451,6 @@ it("antiddos.v20200309.CreateDDoSSpeedLimitConfig", async function () {
 it("antiddos.v20200309.DescribeListBGPInstances", async function () {
     try {
        const data = await client.DescribeListBGPInstances({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("antiddos.v20200309.DeleteBlackWhiteIpList", async function () {
-    try {
-       const data = await client.DeleteBlackWhiteIpList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

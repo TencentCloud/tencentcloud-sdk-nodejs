@@ -76,7 +76,6 @@ import {
   DescribeL7RulesBySSLCertIdRequest,
   TagFilter,
   DescribeListPacketFilterConfigResponse,
-  DeleteBlackWhiteIpListResponse,
   CreateSchedulingDomainRequest,
   ModifyPortAclConfigRequest,
   BoundIpInfo,
@@ -84,8 +83,8 @@ import {
   ModifyCCReqLimitPolicyRequest,
   DescribeOverviewDDoSTrendRequest,
   DisassociateDDoSEipAddressResponse,
+  DescribeBgpBizTrendRequest,
   DeleteCCThresholdPolicyResponse,
-  DeleteBlackWhiteIpListRequest,
   SourceServer,
   CCLevelPolicy,
   DescribeOverviewIndexResponse,
@@ -130,7 +129,7 @@ import {
   ModifyL7RulesEdgeRequest,
   DescribeListDDoSGeoIPBlockConfigResponse,
   DescribeBasicDeviceStatusResponse,
-  WaterPrintConfig,
+  DescribeBgpBizTrendResponse,
   L4RuleSource,
   ProtocolBlockConfig,
   DeleteCCPrecisionPolicyRequest,
@@ -223,6 +222,7 @@ import {
   ModifyCCPrecisionPolicyRequest,
   DeleteDDoSBlackWhiteIpListResponse,
   CCThresholdPolicy,
+  WaterPrintConfig,
   ModifyDomainUsrNameResponse,
   DescribeCCTrendResponse,
   CreateSchedulingDomainResponse,
@@ -661,6 +661,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取高防包流量折线图
+   */
+  async DescribeBgpBizTrend(
+    req: DescribeBgpBizTrendRequest,
+    cb?: (error: string, rep: DescribeBgpBizTrendResponse) => void
+  ): Promise<DescribeBgpBizTrendResponse> {
+    return this.request("DescribeBgpBizTrend", req, cb)
+  }
+
+  /**
    * 获取CC频率限制策略列表
    */
   async DescribeCCReqLimitPolicyList(
@@ -709,16 +719,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeListBGPInstancesResponse) => void
   ): Promise<DescribeListBGPInstancesResponse> {
     return this.request("DescribeListBGPInstances", req, cb)
-  }
-
-  /**
-   * 删除DDoS防护的IP黑白名单
-   */
-  async DeleteBlackWhiteIpList(
-    req: DeleteBlackWhiteIpListRequest,
-    cb?: (error: string, rep: DeleteBlackWhiteIpListResponse) => void
-  ): Promise<DeleteBlackWhiteIpListResponse> {
-    return this.request("DeleteBlackWhiteIpList", req, cb)
   }
 
   /**
