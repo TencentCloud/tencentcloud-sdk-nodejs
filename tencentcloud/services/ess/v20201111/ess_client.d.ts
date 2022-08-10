@@ -85,6 +85,7 @@ export declare class Client extends AbstractClient {
     /**
      * 查询流程摘要
 适用场景：可用于主动查询某个合同流程的签署状态信息。可以配合回调通知使用。
+日调用量默认10W
      */
     DescribeFlowBriefs(req: DescribeFlowBriefsRequest, cb?: (error: string, rep: DescribeFlowBriefsResponse) => void): Promise<DescribeFlowBriefsResponse>;
     /**

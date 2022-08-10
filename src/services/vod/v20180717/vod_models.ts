@@ -3504,7 +3504,7 @@ export interface TraceWatermarkInput {
   /**
    * 水印模板 ID。
    */
-  Definition: number
+  Definition?: number
 }
 
 /**
@@ -7130,12 +7130,12 @@ export interface DescribeSuperPlayerConfigsResponse {
   /**
    * 符合过滤条件的记录总数。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 播放器配置数组。
    */
-  PlayerConfigSet?: Array<PlayerConfig>
+  PlayerConfigSet: Array<PlayerConfig>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -8142,6 +8142,14 @@ export interface PlayerConfig {
   Type: string
 
   /**
+      * 播放的音视频类型，可选值有：
+<li>AdaptiveDynamicStream：自适应码流输出；</li>
+<li>Transcode：转码输出；</li>
+<li>Original：原始音视频。</li>
+      */
+  AudioVideoType: string
+
+  /**
       * 播放 DRM 保护的自适应码流开关：
 <li>ON：开启，表示仅播放 DRM  保护的自适应码流输出；</li>
 <li>OFF：关闭，表示播放未加密的自适应码流输出。</li>
@@ -8158,6 +8166,11 @@ export interface PlayerConfig {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   DrmStreamingsInfo: DrmStreamingsInfo
+
+  /**
+   * 允许输出的转码模板 ID。
+   */
+  TranscodeDefinition: number
 
   /**
    * 允许输出的雪碧图模板 ID。
@@ -12783,6 +12796,11 @@ export interface DescribeMediaProcessUsageDataResponse {
  */
 export interface DescribeSuperPlayerConfigsRequest {
   /**
+   * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+   */
+  SubAppId?: number
+
+  /**
    * 播放器配置名字过滤条件，数组长度限制：100。
    */
   Names?: Array<string>
@@ -12803,11 +12821,6 @@ export interface DescribeSuperPlayerConfigsRequest {
 <li>Custom：用户自定义配置。</li>
       */
   Type?: string
-
-  /**
-   * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
-   */
-  SubAppId?: number
 }
 
 /**
@@ -13260,6 +13273,11 @@ export interface ModifySuperPlayerConfigRequest {
   Name: string
 
   /**
+   * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+   */
+  SubAppId?: number
+
+  /**
       * 播放的音视频类型，可选值：
 <li>AdaptiveDynamicStream：自适应码流输出；</li>
 <li>Transcode：转码输出；</li>
@@ -13316,11 +13334,6 @@ export interface ModifySuperPlayerConfigRequest {
    * 模板描述信息，长度限制：256 个字符。
    */
   Comment?: string
-
-  /**
-   * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
-   */
-  SubAppId?: number
 }
 
 /**

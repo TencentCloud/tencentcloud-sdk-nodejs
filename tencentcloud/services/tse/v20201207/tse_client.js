@@ -52,6 +52,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeNacosReplicas", req, cb);
     }
     /**
+     * 获取云原生网关节点列表
+     */
+    async DescribeCloudNativeAPIGatewayNodes(req, cb) {
+        return this.request("DescribeCloudNativeAPIGatewayNodes", req, cb);
+    }
+    /**
      * 查询zookeeper服务接口列表
      */
     async DescribeZookeeperServerInterfaces(req, cb) {

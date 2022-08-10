@@ -54,7 +54,7 @@ export interface Candidate {
   PersonId: string
 
   /**
-   * 人脸ID
+   * 人脸ID，仅在SearchFaces/SearchFacesReturnsByGroup接口返回时有效。人员搜索类接口采用融合特征方式检索，该字段无意义
    */
   FaceId: string
 

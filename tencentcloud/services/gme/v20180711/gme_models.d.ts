@@ -94,6 +94,19 @@ export interface DescribeApplicationDataRequest {
     EndDate: string;
 }
 /**
+ * 用户麦克风状态
+ */
+export interface UserMicStatus {
+    /**
+      * 用户ID
+      */
+    Uid: number;
+    /**
+      * 是否开麦 。1闭麦  2开麦
+      */
+    EnableMic: number;
+}
+/**
  * VoiceFilter请求参数结构体
  */
 export interface VoiceFilterRequest {
@@ -171,6 +184,27 @@ export interface DescribeRealtimeScanConfigResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 语音检测任务列表
+ */
+export interface Task {
+    /**
+      * 数据的唯一ID
+      */
+    DataId: string;
+    /**
+      * 数据文件的url，为 urlencode 编码，流式则为拉流地址
+      */
+    Url: string;
+    /**
+      * gme实时语音房间ID，通过gme实时语音进行语音分析时输入
+      */
+    RoomId?: string;
+    /**
+      * gme实时语音用户ID，通过gme实时语音进行语音分析时输入
+      */
+    OpenId?: string;
 }
 /**
  * 语音消息用量统计信息
@@ -407,6 +441,23 @@ export interface VoiceMessageConf {
     Language?: string;
 }
 /**
+ * ModifyUserMicStatus返回参数结构体
+ */
+export interface ModifyUserMicStatusResponse {
+    /**
+      * 返回结果：0为成功，非0为失败
+      */
+    Result: number;
+    /**
+      * 错误信息
+      */
+    ErrMsg: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 应用统计数据
  */
 export interface ApplicationDataStatistics {
@@ -530,25 +581,21 @@ export interface DescribeApplicationDataResponse {
     RequestId?: string;
 }
 /**
- * 语音检测任务列表
+ * ModifyUserMicStatus请求参数结构体
  */
-export interface Task {
+export interface ModifyUserMicStatusRequest {
     /**
-      * 数据的唯一ID
+      * 应用ID
       */
-    DataId: string;
+    BizId: number;
     /**
-      * 数据文件的url，为 urlencode 编码，流式则为拉流地址
+      * 房间ID
       */
-    Url: string;
+    RoomId: string;
     /**
-      * gme实时语音房间ID，通过gme实时语音进行语音分析时输入
+      * 用户麦克风状态，数组长度不超过20
       */
-    RoomId?: string;
-    /**
-      * gme实时语音用户ID，通过gme实时语音进行语音分析时输入
-      */
-    OpenId?: string;
+    Users: Array<UserMicStatus>;
 }
 /**
  * DeleteScanUser返回参数结构体

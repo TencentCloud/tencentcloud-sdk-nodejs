@@ -440,7 +440,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyVodDomainAccelerateConfig", req, cb);
     }
     /**
-     * 删除超级播放器配置。
+     * 删除播放器配置。
 *注：系统预置播放器配置不允许删除。*
      */
     async DeleteSuperPlayerConfig(req, cb) {
@@ -576,7 +576,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeEventsState", req, cb);
     }
     /**
-     * 创建超级播放器配置，数量上限：100。
+     * 创建播放器配置，数量上限：100。
      */
     async CreateSuperPlayerConfig(req, cb) {
         return this.request("CreateSuperPlayerConfig", req, cb);
@@ -718,7 +718,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifySnapshotByTimeOffsetTemplate", req, cb);
     }
     /**
-     * 修改超级播放器配置。
+     * 修改播放器配置。
      */
     async ModifySuperPlayerConfig(req, cb) {
         return this.request("ModifySuperPlayerConfig", req, cb);
@@ -1025,7 +1025,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ProcessMedia", req, cb);
     }
     /**
-     * 查询超级播放器配置，支持根据条件，分页查询。
+     * 查询播放器配置，支持根据条件，分页查询。
      */
     async DescribeSuperPlayerConfigs(req, cb) {
         return this.request("DescribeSuperPlayerConfigs", req, cb);

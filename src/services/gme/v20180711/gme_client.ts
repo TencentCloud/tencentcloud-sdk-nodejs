@@ -24,9 +24,11 @@ import {
   InOutTimeInfo,
   DescribeScanResultListResponse,
   DescribeApplicationDataRequest,
+  UserMicStatus,
   VoiceFilterRequest,
   CreateScanUserResponse,
   DescribeRealtimeScanConfigResponse,
+  Task,
   VoiceMessageStatisticsItem,
   RoomUser,
   DescribeRoomInfoRequest,
@@ -42,13 +44,14 @@ import {
   AgeDetectTask,
   DescribeAgeDetectTaskResponse,
   VoiceMessageConf,
+  ModifyUserMicStatusResponse,
   ApplicationDataStatistics,
   DeleteScanUserRequest,
   ModifyAppStatusResp,
   DescribeAppStatisticsResponse,
   UpdateScanRoomsResponse,
   DescribeApplicationDataResponse,
-  Task,
+  ModifyUserMicStatusRequest,
   DeleteScanUserResponse,
   UpdateScanUsersResponse,
   VoiceFilterStatisticsItem,
@@ -130,6 +133,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeScanResultListResponse) => void
   ): Promise<DescribeScanResultListResponse> {
     return this.request("DescribeScanResultList", req, cb)
+  }
+
+  /**
+   * 修改用户麦克风状态。
+   */
+  async ModifyUserMicStatus(
+    req: ModifyUserMicStatusRequest,
+    cb?: (error: string, rep: ModifyUserMicStatusResponse) => void
+  ): Promise<ModifyUserMicStatusResponse> {
+    return this.request("ModifyUserMicStatus", req, cb)
   }
 
   /**

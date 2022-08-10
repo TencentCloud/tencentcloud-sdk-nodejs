@@ -40,6 +40,7 @@ import {
   DescribePolicyGroupInfoRequest,
   UpdateAlertRuleStateResponse,
   BindingPolicyTagResponse,
+  MonitorTypeInfo,
   DeleteServiceDiscoveryResponse,
   CreatePrometheusScrapeJobResponse,
   DescribePolicyGroupInfoCallback,

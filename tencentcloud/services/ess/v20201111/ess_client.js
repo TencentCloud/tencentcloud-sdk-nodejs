@@ -131,6 +131,7 @@ class Client extends abstract_client_1.AbstractClient {
     /**
      * 查询流程摘要
 适用场景：可用于主动查询某个合同流程的签署状态信息。可以配合回调通知使用。
+日调用量默认10W
      */
     async DescribeFlowBriefs(req, cb) {
         return this.request("DescribeFlowBriefs", req, cb);

@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeNacosReplicasRequest, DeleteEngineResponse, CreateEngineResponse, DescribeZookeeperReplicasRequest, DeleteEngineRequest, DescribeNacosServerInterfacesRequest, DescribeSREInstanceAccessAddressResponse, DescribeSREInstancesResponse, DescribeNacosReplicasResponse, DescribeZookeeperServerInterfacesResponse, DescribeSREInstancesRequest, DescribeZookeeperReplicasResponse, CreateEngineRequest, DescribeSREInstanceAccessAddressRequest, DescribeNacosServerInterfacesResponse, DescribeZookeeperServerInterfacesRequest } from "./tse_models";
+import { DescribeNacosReplicasRequest, DeleteEngineResponse, CreateEngineResponse, DescribeZookeeperReplicasRequest, DeleteEngineRequest, DescribeCloudNativeAPIGatewayNodesRequest, DescribeNacosServerInterfacesRequest, DescribeSREInstanceAccessAddressResponse, DescribeSREInstancesResponse, DescribeNacosReplicasResponse, DescribeZookeeperServerInterfacesResponse, DescribeSREInstancesRequest, DescribeCloudNativeAPIGatewayNodesResponse, DescribeZookeeperReplicasResponse, CreateEngineRequest, DescribeSREInstanceAccessAddressRequest, DescribeNacosServerInterfacesResponse, DescribeZookeeperServerInterfacesRequest } from "./tse_models";
 /**
  * tse client
  * @class
@@ -23,6 +23,10 @@ export declare class Client extends AbstractClient {
      * 查询Nacos类型引擎实例副本信息
      */
     DescribeNacosReplicas(req: DescribeNacosReplicasRequest, cb?: (error: string, rep: DescribeNacosReplicasResponse) => void): Promise<DescribeNacosReplicasResponse>;
+    /**
+     * 获取云原生网关节点列表
+     */
+    DescribeCloudNativeAPIGatewayNodes(req: DescribeCloudNativeAPIGatewayNodesRequest, cb?: (error: string, rep: DescribeCloudNativeAPIGatewayNodesResponse) => void): Promise<DescribeCloudNativeAPIGatewayNodesResponse>;
     /**
      * 查询zookeeper服务接口列表
      */

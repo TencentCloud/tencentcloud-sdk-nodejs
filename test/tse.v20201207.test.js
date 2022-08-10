@@ -58,6 +58,16 @@ it("tse.v20201207.DescribeNacosReplicas", async function () {
     }
 })
 
+it("tse.v20201207.DescribeCloudNativeAPIGatewayNodes", async function () {
+    try {
+       const data = await client.DescribeCloudNativeAPIGatewayNodes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tse.v20201207.DescribeZookeeperServerInterfaces", async function () {
     try {
        const data = await client.DescribeZookeeperServerInterfaces({})

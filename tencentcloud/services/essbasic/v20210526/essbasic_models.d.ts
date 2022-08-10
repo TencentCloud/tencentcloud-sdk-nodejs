@@ -503,15 +503,27 @@ export interface ChannelGetTaskResultApiResponse {
       */
     TaskId: string;
     /**
-      * 任务状态
+      * 任务状态，需要关注的状态
+0  :NeedTranform   - 任务已提交
+4  :Processing     - 文档转换中
+8  :TaskEnd        - 任务处理完成
+-2 :DownloadFailed - 下载失败
+-6 :ProcessFailed  - 转换失败
+-13:ProcessTimeout - 转换文件超时
       */
     TaskStatus: number;
     /**
-      * 状态描述
+      * 状态描述，需要关注的状态
+NeedTranform   - 任务已提交
+Processing     - 文档转换中
+TaskEnd        - 任务处理完成
+DownloadFailed - 下载失败
+ProcessFailed  - 转换失败
+ProcessTimeout - 转换文件超时
       */
     TaskMessage: string;
     /**
-      * 资源Id
+      * 资源Id，也是FileId，用于文件发起使用
       */
     ResourceId: string;
     /**
@@ -529,7 +541,7 @@ export interface UploadFilesRequest {
     Agent: Agent;
     /**
       * 文件对应业务类型，用于区分文件存储路径：
-1. TEMPLATE - 模板； 文件类型：.pdf
+1. TEMPLATE - 模板； 文件类型：.pdf .doc .docx .html
 2. DOCUMENT - 签署过程及签署后的合同文档/图片控件 文件类型：.pdf/.jpg/.png
       */
     BusinessType: string;
@@ -547,21 +559,21 @@ export interface UploadFilesRequest {
  */
 export interface ChannelGetTaskResultApiRequest {
     /**
-      * 渠道信息
+      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
       */
     Agent: Agent;
     /**
-      * 任务Id
+      * 任务Id，通过ChannelCreateConvertTaskApi接口获得
       */
     TaskId: string;
     /**
-      * 企业信息
-      */
-    Organization?: OrganizationInfo;
-    /**
-      * 操作人信息
+      * 操作者的信息
       */
     Operator?: UserInfo;
+    /**
+      * 暂未开放
+      */
+    Organization?: OrganizationInfo;
 }
 /**
  * 此结构体 (UploadFile) 用于描述多文件上传的文件信息。
@@ -1161,15 +1173,15 @@ export interface UsageDetail {
  */
 export interface ChannelCreateBatchCancelFlowUrlResponse {
     /**
-      * 批量撤回url
+      * 批量撤销url
       */
     BatchCancelFlowUrl: string;
     /**
-      * 签署流程批量撤回失败原因
+      * 签署流程批量撤销失败原因
       */
     FailMessages: Array<string>;
     /**
-      * 签署撤回url过期时间-年月日-时分秒
+      * 签署撤销url过期时间-年月日-时分秒
       */
     UrlExpireOn: string;
     /**
@@ -1500,29 +1512,29 @@ export interface UserInfo {
  */
 export interface ChannelCreateConvertTaskApiRequest {
     /**
-      * 无
+      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
       */
     Agent: Agent;
-    /**
-      * 资源Id
-      */
-    ResourceId: string;
     /**
       * 资源类型 取值范围doc,docx,html之一
       */
     ResourceType: string;
     /**
-      * 资源名称
+      * 资源名称，长度限制为256字符
       */
     ResourceName: string;
     /**
-      * 无
+      * 资源Id，通过UploadFiles获取
       */
-    Organization?: OrganizationInfo;
+    ResourceId: string;
     /**
-      * 无
+      * 操作者信息
       */
     Operator?: UserInfo;
+    /**
+      * 暂未开放
+      */
+    Organization?: OrganizationInfo;
 }
 /**
  * 签署人的流程信息明细

@@ -554,7 +554,7 @@ export interface ListOrganizationNodesResponse {
     /**
       * 企业组织单元列表
       */
-    Nodes?: Array<OrgNode>;
+    Nodes: Array<OrgNode>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

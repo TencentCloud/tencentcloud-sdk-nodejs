@@ -53,6 +53,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeScanResultList", req, cb);
     }
     /**
+     * 修改用户麦克风状态。
+     */
+    async ModifyUserMicStatus(req, cb) {
+        return this.request("ModifyUserMicStatus", req, cb);
+    }
+    /**
      * 本接口用于识别涉黄等违规音频，成功会回调配置在应用的回调地址。回调示例如下：
 {"BizId":0,"FileId":"test_file_id","FileName":"test_file_name","FileUrl":"test_file_url","OpenId":"test_open_id","TimeStamp":"0000-00-00 00:00:00","Data":[{"Type":1,"Word":"xx"}]}
 Type表示过滤类型，1：色情，2：谩骂

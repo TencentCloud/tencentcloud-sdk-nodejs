@@ -599,7 +599,7 @@ export interface CreateTrainingModelRequest {
       */
     ModelOutputPath?: CosPathInfo;
     /**
-      * 模型来源 （JOB/COS/AUTO_ML）
+      * 模型来源 （JOB/COS）
       */
     TrainingModelSource?: string;
     /**
@@ -624,6 +624,10 @@ export interface CreateTrainingModelRequest {
       * 模型格式 （PYTORCH/TORCH_SCRIPT/DETECTRON2/SAVED_MODEL/FROZEN_GRAPH/PMML）
       */
     ModelFormat?: string;
+    /**
+      * 推理镜像ID
+      */
+    ReasoningEnvironmentId?: string;
 }
 /**
  * DescribeTrainingModelVersions返回参数结构体
@@ -1273,6 +1277,10 @@ export interface DeleteTrainingModelRequest {
       * 是否同步清理cos
       */
     EnableDeleteCos?: boolean;
+    /**
+      * 删除模型类型，枚举值：NORMAL 普通，ACCELERATE 加速，不传则删除所有
+      */
+    ModelVersionType?: string;
 }
 /**
  * DeleteTrainingTask返回参数结构体
@@ -1899,6 +1907,11 @@ export interface TrainingTaskDetail {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ResourceGroupName: string;
+    /**
+      * 任务信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Message: string;
 }
 /**
  * DescribeTrainingTasks返回参数结构体
@@ -2159,6 +2172,11 @@ export interface TrainingTaskSetItem {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ImageInfo: ImageInfo;
+    /**
+      * 任务信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Message: string;
 }
 /**
  * 表格数据集表头信息

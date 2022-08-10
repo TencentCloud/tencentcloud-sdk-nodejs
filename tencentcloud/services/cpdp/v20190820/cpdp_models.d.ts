@@ -9618,6 +9618,10 @@ __test__:测试环境
 缺省默认为生产环境
       */
     Environment?: string;
+    /**
+      * 支付结果通知回调地址
+      */
+    NotifyUrl?: string;
 }
 /**
  * 第三方渠道数据信息

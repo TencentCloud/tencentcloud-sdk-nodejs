@@ -454,6 +454,23 @@ export interface BindingPolicyTagResponse {
     RequestId?: string;
 }
 /**
+ * 监控类型详细信息
+ */
+export interface MonitorTypeInfo {
+    /**
+      * 监控类型ID
+      */
+    Id: string;
+    /**
+      * 监控类型
+      */
+    Name: string;
+    /**
+      * 排列顺序
+      */
+    SortId: number;
+}
+/**
  * DeleteServiceDiscovery返回参数结构体
  */
 export interface DeleteServiceDiscoveryResponse {
@@ -2957,6 +2974,10 @@ export interface DescribeMonitorTypesResponse {
       * 监控类型，云产品监控为 MT_QCE
       */
     MonitorTypes: Array<string>;
+    /**
+      * 监控类型详情
+      */
+    MonitorTypeInfos: Array<MonitorTypeInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

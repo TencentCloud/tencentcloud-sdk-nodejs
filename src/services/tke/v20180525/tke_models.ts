@@ -2743,6 +2743,12 @@ export interface EdgeCluster {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   MaxNodePodNum?: number
+
+  /**
+      * 集群高级设置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClusterAdvancedSettings?: EdgeClusterAdvancedSettings
 }
 
 /**

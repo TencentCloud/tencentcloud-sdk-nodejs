@@ -1960,11 +1960,11 @@ export interface DescribeTaskInfoResponse {
     /**
       * 返回任务总数量
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 任务信息列表
       */
-    TaskInfoSet?: Array<TaskInfo>;
+    TaskInfoSet: Array<TaskInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

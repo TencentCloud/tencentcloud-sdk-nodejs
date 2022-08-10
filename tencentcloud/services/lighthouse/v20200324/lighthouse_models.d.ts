@@ -760,19 +760,30 @@ export interface Disk {
       */
     LatestOperationRequestId: string;
     /**
-      * 创建时间
+      * 创建时间。按照 ISO8601 标准表示，并且使用 UTC 时间。
+格式为： YYYY-MM-DDThh:mm:ssZ。
       */
     CreatedTime: string;
     /**
-      * 到期时间
+      * 到期时间。按照 ISO8601 标准表示，并且使用 UTC 时间。
+格式为： YYYY-MM-DDThh:mm:ssZ。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ExpiredTime: string;
     /**
-      * 隔离时间
+      * 隔离时间。按照 ISO8601 标准表示，并且使用 UTC 时间。
+格式为： YYYY-MM-DDThh:mm:ssZ。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     IsolatedTime: string;
+    /**
+      * 云硬盘的已有备份点数量。
+      */
+    DiskBackupCount: number;
+    /**
+      * 云硬盘的备份点配额数量。
+      */
+    DiskBackupQuota: number;
 }
 /**
  * 可用区详细信息
@@ -983,6 +994,33 @@ export interface DescribeInstancesDiskNumRequest {
       * 实例ID列表。
       */
     InstanceIds: Array<string>;
+}
+/**
+ * 计费项目明细。
+ */
+export interface DetailPrice {
+    /**
+      * 描述计费项目名称，目前取值
+<li>"DiskSpace"代表云硬盘空间收费项。</li>
+<li>"DiskBackupQuota"代表云硬盘备份点配额收费项。</li>
+      */
+    PriceName: string;
+    /**
+      * 云硬盘计费项维度单价。
+      */
+    OriginUnitPrice: number;
+    /**
+      * 云硬盘计费项维度总价。
+      */
+    OriginalPrice: number;
+    /**
+      * 云硬盘在计费项维度折扣。
+      */
+    Discount: number;
+    /**
+      * 云硬盘在计费项维度折后总价。
+      */
+    DiscountPrice: number;
 }
 /**
  * DescribeBlueprints请求参数结构体
@@ -1702,6 +1740,10 @@ export interface DiskPrice {
       * 折后总价。
       */
     DiscountPrice: number;
+    /**
+      * 计费项目明细列表。
+      */
+    DetailPrices: Array<DetailPrice>;
 }
 /**
  * DescribeCcnAttachedInstances返回参数结构体

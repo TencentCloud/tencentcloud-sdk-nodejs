@@ -26,6 +26,8 @@ import {
   CreateEngineResponse,
   DescribeZookeeperReplicasRequest,
   DeleteEngineRequest,
+  DescribeCloudNativeAPIGatewayNodesRequest,
+  DescribeCloudNativeAPIGatewayNodesResult,
   ZookeeperReplica,
   DescribeNacosServerInterfacesRequest,
   SREInstance,
@@ -33,17 +35,19 @@ import {
   DescribeSREInstancesResponse,
   ZookeeperServerInterface,
   ServiceGovernanceInfo,
+  CloudNativeAPIGatewayNode,
   DescribeNacosReplicasResponse,
   DescribeZookeeperServerInterfacesResponse,
   BoundK8SInfo,
   DescribeSREInstancesRequest,
+  DescribeCloudNativeAPIGatewayNodesResponse,
   DescribeZookeeperReplicasResponse,
   VpcInfo,
-  Filter,
+  EngineAdmin,
   CreateEngineRequest,
   DescribeSREInstanceAccessAddressRequest,
   DescribeNacosServerInterfacesResponse,
-  EngineAdmin,
+  Filter,
   NacosServerInterface,
   DescribeZookeeperServerInterfacesRequest,
   EnvInfo,
@@ -98,6 +102,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeNacosReplicasResponse) => void
   ): Promise<DescribeNacosReplicasResponse> {
     return this.request("DescribeNacosReplicas", req, cb)
+  }
+
+  /**
+   * 获取云原生网关节点列表
+   */
+  async DescribeCloudNativeAPIGatewayNodes(
+    req: DescribeCloudNativeAPIGatewayNodesRequest,
+    cb?: (error: string, rep: DescribeCloudNativeAPIGatewayNodesResponse) => void
+  ): Promise<DescribeCloudNativeAPIGatewayNodesResponse> {
+    return this.request("DescribeCloudNativeAPIGatewayNodes", req, cb)
   }
 
   /**

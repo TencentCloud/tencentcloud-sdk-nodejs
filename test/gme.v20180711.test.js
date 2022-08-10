@@ -58,6 +58,16 @@ it("gme.v20180711.DescribeScanResultList", async function () {
     }
 })
 
+it("gme.v20180711.ModifyUserMicStatus", async function () {
+    try {
+       const data = await client.ModifyUserMicStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("gme.v20180711.VoiceFilter", async function () {
     try {
        const data = await client.VoiceFilter({})

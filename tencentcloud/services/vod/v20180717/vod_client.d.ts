@@ -322,7 +322,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyVodDomainAccelerateConfig(req: ModifyVodDomainAccelerateConfigRequest, cb?: (error: string, rep: ModifyVodDomainAccelerateConfigResponse) => void): Promise<ModifyVodDomainAccelerateConfigResponse>;
     /**
-     * 删除超级播放器配置。
+     * 删除播放器配置。
 *注：系统预置播放器配置不允许删除。*
      */
     DeleteSuperPlayerConfig(req: DeleteSuperPlayerConfigRequest, cb?: (error: string, rep: DeleteSuperPlayerConfigResponse) => void): Promise<DeleteSuperPlayerConfigResponse>;
@@ -424,7 +424,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeEventsState(req: DescribeEventsStateRequest, cb?: (error: string, rep: DescribeEventsStateResponse) => void): Promise<DescribeEventsStateResponse>;
     /**
-     * 创建超级播放器配置，数量上限：100。
+     * 创建播放器配置，数量上限：100。
      */
     CreateSuperPlayerConfig(req: CreateSuperPlayerConfigRequest, cb?: (error: string, rep: CreateSuperPlayerConfigResponse) => void): Promise<CreateSuperPlayerConfigResponse>;
     /**
@@ -522,7 +522,7 @@ export declare class Client extends AbstractClient {
      */
     ModifySnapshotByTimeOffsetTemplate(req: ModifySnapshotByTimeOffsetTemplateRequest, cb?: (error: string, rep: ModifySnapshotByTimeOffsetTemplateResponse) => void): Promise<ModifySnapshotByTimeOffsetTemplateResponse>;
     /**
-     * 修改超级播放器配置。
+     * 修改播放器配置。
      */
     ModifySuperPlayerConfig(req: ModifySuperPlayerConfigRequest, cb?: (error: string, rep: ModifySuperPlayerConfigResponse) => void): Promise<ModifySuperPlayerConfigResponse>;
     /**
@@ -757,7 +757,7 @@ export declare class Client extends AbstractClient {
      */
     ProcessMedia(req: ProcessMediaRequest, cb?: (error: string, rep: ProcessMediaResponse) => void): Promise<ProcessMediaResponse>;
     /**
-     * 查询超级播放器配置，支持根据条件，分页查询。
+     * 查询播放器配置，支持根据条件，分页查询。
      */
     DescribeSuperPlayerConfigs(req: DescribeSuperPlayerConfigsRequest, cb?: (error: string, rep: DescribeSuperPlayerConfigsResponse) => void): Promise<DescribeSuperPlayerConfigsResponse>;
     /**

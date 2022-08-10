@@ -833,11 +833,11 @@ export interface ModifyBlockIgnoreListRequest {
       */
     IocAction: string;
     /**
-      * 时间格式：yyyy-MM-dd HH:mm:ss
+      * 时间格式：yyyy-MM-dd HH:mm:ss，IocAction 为edit或add时必填
       */
     StartTime?: string;
     /**
-      * 时间格式：yyyy-MM-dd HH:mm:ss
+      * 时间格式：yyyy-MM-dd HH:mm:ss，IocAction 为edit或add时必填
       */
     EndTime?: string;
 }

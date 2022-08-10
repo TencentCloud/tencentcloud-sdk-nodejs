@@ -342,21 +342,21 @@ export interface SignQrCode {
  */
 export interface GetTaskResultApiRequest {
     /**
-      * 任务Id
+      * 任务Id，通过CreateConvertTaskApi得到
       */
     TaskId: string;
-    /**
-      * 企业信息
-      */
-    Organization?: OrganizationInfo;
     /**
       * 操作人信息
       */
     Operator?: UserInfo;
     /**
-      * 渠道信息
+      * 应用号信息
       */
     Agent?: Agent;
+    /**
+      * 暂未开放
+      */
+    Organization?: OrganizationInfo;
 }
 /**
  * UploadFiles请求参数结构体
@@ -364,8 +364,8 @@ export interface GetTaskResultApiRequest {
 export interface UploadFilesRequest {
     /**
       * 文件对应业务类型，用于区分文件存储路径：
-1. TEMPLATE - 模板； 文件类型：.pdf/.html
-2. DOCUMENT - 签署过程及签署后的合同文档 文件类型：.pdf/.html
+1. TEMPLATE - 模板； 文件类型：.pdf .doc .docx .html
+2. DOCUMENT - 签署过程及签署后的合同文档/图片控件 文件类型：.pdf/.jpg/.png
 3. SEAL - 印章； 文件类型：.jpg/.jpeg/.png
       */
     BusinessType: string;
@@ -701,7 +701,7 @@ export interface DescribeFlowBriefsRequest {
       */
     Operator: UserInfo;
     /**
-      * 需要查询的流程ID列表
+      * 需要查询的流程ID列表，限制最大20个
       */
     FlowIds: Array<string>;
     /**
@@ -1099,29 +1099,29 @@ export interface Filter {
  */
 export interface CreateConvertTaskApiRequest {
     /**
-      * 资源Id
-      */
-    ResourceId: string;
-    /**
       * 资源类型 取值范围doc,docx,html之一
       */
     ResourceType: string;
     /**
-      * 资源名称
+      * 资源名称，长度限制为256字符
       */
     ResourceName: string;
     /**
-      * 无
+      * 资源Id，通过UploadFiles获取
       */
-    Organization?: OrganizationInfo;
+    ResourceId: string;
     /**
-      * 无
+      * 操作者信息
       */
     Operator?: UserInfo;
     /**
-      * 无
+      * 应用号信息
       */
     Agent?: Agent;
+    /**
+      * 暂未开放
+      */
+    Organization?: OrganizationInfo;
 }
 /**
  * CreateSchemeUrl返回参数结构体
@@ -1282,7 +1282,7 @@ export interface DescribeFlowTemplatesRequest {
       */
     Filters?: Array<Filter>;
     /**
-      * 查询个数，默认20，最大100
+      * 查询个数，默认20，最大200
       */
     Limit?: number;
     /**
@@ -1311,15 +1311,27 @@ export interface GetTaskResultApiResponse {
       */
     TaskId: string;
     /**
-      * 任务状态
+      * 任务状态，需要关注的状态
+0  :NeedTranform   - 任务已提交
+4  :Processing     - 文档转换中
+8  :TaskEnd        - 任务处理完成
+-2 :DownloadFailed - 下载失败
+-6 :ProcessFailed  - 转换失败
+-13:ProcessTimeout - 转换文件超时
       */
     TaskStatus: number;
     /**
-      * 状态描述
+      * 状态描述，需要关注的状态
+NeedTranform   - 任务已提交
+Processing     - 文档转换中
+TaskEnd        - 任务处理完成
+DownloadFailed - 下载失败
+ProcessFailed  - 转换失败
+ProcessTimeout - 转换文件超时
       */
     TaskMessage: string;
     /**
-      * 资源Id
+      * 资源Id，也是FileId，用于文件发起使用
       */
     ResourceId: string;
     /**

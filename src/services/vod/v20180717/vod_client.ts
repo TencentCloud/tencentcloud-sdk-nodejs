@@ -1232,7 +1232,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除超级播放器配置。
+   * 删除播放器配置。
    *注：系统预置播放器配置不允许删除。*
    */
   async DeleteSuperPlayerConfig(
@@ -1436,7 +1436,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建超级播放器配置，数量上限：100。
+   * 创建播放器配置，数量上限：100。
    */
   async CreateSuperPlayerConfig(
     req: CreateSuperPlayerConfigRequest,
@@ -1666,7 +1666,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改超级播放器配置。
+   * 修改播放器配置。
    */
   async ModifySuperPlayerConfig(
     req: ModifySuperPlayerConfigRequest,
@@ -2117,7 +2117,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询超级播放器配置，支持根据条件，分页查询。
+   * 查询播放器配置，支持根据条件，分页查询。
    */
   async DescribeSuperPlayerConfigs(
     req: DescribeSuperPlayerConfigsRequest,

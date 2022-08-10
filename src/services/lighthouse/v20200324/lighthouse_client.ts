@@ -75,6 +75,7 @@ import {
   TerminateInstancesResponse,
   TrafficPackage,
   DescribeInstancesDiskNumRequest,
+  DetailPrice,
   DescribeBlueprintsRequest,
   InstanceReturnable,
   DescribeInstancesDeniedActionsResponse,

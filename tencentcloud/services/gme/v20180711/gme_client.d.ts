@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ScanVoiceResponse, ModifyAppStatusRequest, DescribeScanResultListResponse, DescribeApplicationDataRequest, VoiceFilterRequest, CreateScanUserResponse, DescribeRealtimeScanConfigResponse, DescribeRoomInfoRequest, UpdateScanRoomsRequest, DescribeFilterResultResponse, DescribeRealtimeScanConfigRequest, DescribeScanResultListRequest, CreateAgeDetectTaskRequest, CreateScanUserRequest, VoiceFilterResponse, DescribeAgeDetectTaskResponse, DeleteScanUserRequest, DescribeAppStatisticsResponse, UpdateScanRoomsResponse, DescribeApplicationDataResponse, DeleteScanUserResponse, UpdateScanUsersResponse, DescribeRoomInfoResponse, DescribeAgeDetectTaskRequest, ModifyRoomInfoRequest, DescribeUserInAndOutTimeResponse, ModifyRoomInfoResponse, DescribeFilterResultListRequest, DescribeFilterResultListResponse, CreateAgeDetectTaskResponse, CreateAppRequest, CreateAppResponse, DescribeAppStatisticsRequest, ModifyAppStatusResponse, ScanVoiceRequest, UpdateScanUsersRequest, DescribeFilterResultRequest, DescribeUserInAndOutTimeRequest } from "./gme_models";
+import { ScanVoiceResponse, ModifyAppStatusRequest, DescribeScanResultListResponse, DescribeApplicationDataRequest, VoiceFilterRequest, CreateScanUserResponse, DescribeRealtimeScanConfigResponse, DescribeRoomInfoRequest, UpdateScanRoomsRequest, DescribeFilterResultResponse, DescribeRealtimeScanConfigRequest, DescribeScanResultListRequest, CreateAgeDetectTaskRequest, CreateScanUserRequest, VoiceFilterResponse, DescribeAgeDetectTaskResponse, ModifyUserMicStatusResponse, DeleteScanUserRequest, DescribeAppStatisticsResponse, UpdateScanRoomsResponse, DescribeApplicationDataResponse, ModifyUserMicStatusRequest, DeleteScanUserResponse, UpdateScanUsersResponse, DescribeRoomInfoResponse, DescribeAgeDetectTaskRequest, ModifyRoomInfoRequest, DescribeUserInAndOutTimeResponse, ModifyRoomInfoResponse, DescribeFilterResultListRequest, DescribeFilterResultListResponse, CreateAgeDetectTaskResponse, CreateAppRequest, CreateAppResponse, DescribeAppStatisticsRequest, ModifyAppStatusResponse, ScanVoiceRequest, UpdateScanUsersRequest, DescribeFilterResultRequest, DescribeUserInAndOutTimeRequest } from "./gme_models";
 /**
  * gme client
  * @class
@@ -24,6 +24,10 @@ export declare class Client extends AbstractClient {
 <p style="color:red">如果在提交语音检测任务时未设置 Callback 字段，则需要通过本接口获取检测结果</p>
      */
     DescribeScanResultList(req: DescribeScanResultListRequest, cb?: (error: string, rep: DescribeScanResultListResponse) => void): Promise<DescribeScanResultListResponse>;
+    /**
+     * 修改用户麦克风状态。
+     */
+    ModifyUserMicStatus(req: ModifyUserMicStatusRequest, cb?: (error: string, rep: ModifyUserMicStatusResponse) => void): Promise<ModifyUserMicStatusResponse>;
     /**
      * 本接口用于识别涉黄等违规音频，成功会回调配置在应用的回调地址。回调示例如下：
 {"BizId":0,"FileId":"test_file_id","FileName":"test_file_name","FileUrl":"test_file_url","OpenId":"test_open_id","TimeStamp":"0000-00-00 00:00:00","Data":[{"Type":1,"Word":"xx"}]}

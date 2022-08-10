@@ -138,6 +138,36 @@ export interface DeleteEngineRequest {
     InstanceId: string;
 }
 /**
+ * DescribeCloudNativeAPIGatewayNodes请求参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewayNodesRequest {
+    /**
+      * 云原生API网关实例ID。
+      */
+    GatewayId: string;
+    /**
+      * 翻页从第几个开始获取
+      */
+    Offset?: number;
+    /**
+      * 翻页获取多少个
+      */
+    Limit?: number;
+}
+/**
+ * 获取网关节点信息
+ */
+export interface DescribeCloudNativeAPIGatewayNodesResult {
+    /**
+      * 获取云原生API网关节点列表响应结果。
+      */
+    TotalCount: number;
+    /**
+      * 云原生API网关节点列表。
+      */
+    NodeList: Array<CloudNativeAPIGatewayNode>;
+}
+/**
  * Zookeeper副本信息
  */
 export interface ZookeeperReplica {
@@ -168,6 +198,11 @@ export interface ZookeeperReplica {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ZoneId: string;
+    /**
+      * 别名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AliasName: string;
 }
 /**
  * DescribeNacosServerInterfaces请求参数结构体
@@ -430,6 +465,19 @@ export interface ServiceGovernanceInfo {
     PgwVpcInfos?: Array<VpcInfo>;
 }
 /**
+ * 云原生API网关节点信息。
+ */
+export interface CloudNativeAPIGatewayNode {
+    /**
+      * 云原生网关节点 id
+      */
+    NodeId: string;
+    /**
+      * 节点 ip
+      */
+    NodeIp: string;
+}
+/**
  * DescribeNacosReplicas返回参数结构体
  */
 export interface DescribeNacosReplicasResponse {
@@ -509,6 +557,19 @@ export interface DescribeSREInstancesRequest {
     QuerySource?: string;
 }
 /**
+ * DescribeCloudNativeAPIGatewayNodes返回参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewayNodesResponse {
+    /**
+      * 获取云原生网关节点列表结果。
+      */
+    Result: DescribeCloudNativeAPIGatewayNodesResult;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeZookeeperReplicas返回参数结构体
  */
 export interface DescribeZookeeperReplicasResponse {
@@ -545,17 +606,21 @@ export interface VpcInfo {
     IntranetAddress?: string;
 }
 /**
- * 查询过滤通用对象
+ * 引擎的初始管理帐号
  */
-export interface Filter {
+export interface EngineAdmin {
     /**
-      * 过滤参数名
+      * 控制台初始用户名
       */
-    Name: string;
+    Name?: string;
     /**
-      * 过滤参数值
+      * 控制台初始密码
       */
-    Values: Array<string>;
+    Password?: string;
+    /**
+      * 引擎接口的管理员 Token
+      */
+    Token?: string;
 }
 /**
  * CreateEngine请求参数结构体
@@ -693,6 +758,10 @@ export interface DescribeSREInstanceAccessAddressRequest {
       * 引擎其他组件名称（pushgateway）
       */
     Workload?: string;
+    /**
+      * 部署地域
+      */
+    EngineRegion?: string;
 }
 /**
  * DescribeNacosServerInterfaces返回参数结构体
@@ -712,21 +781,17 @@ export interface DescribeNacosServerInterfacesResponse {
     RequestId?: string;
 }
 /**
- * 引擎的初始管理帐号
+ * 查询过滤通用对象
  */
-export interface EngineAdmin {
+export interface Filter {
     /**
-      * 控制台初始用户名
+      * 过滤参数名
       */
-    Name?: string;
+    Name: string;
     /**
-      * 控制台初始密码
+      * 过滤参数值
       */
-    Password?: string;
-    /**
-      * 引擎接口的管理员 Token
-      */
-    Token?: string;
+    Values: Array<string>;
 }
 /**
  * nacos服务端接口列表，用于云监控
