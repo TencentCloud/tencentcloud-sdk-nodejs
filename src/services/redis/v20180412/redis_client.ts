@@ -117,6 +117,7 @@ import {
   DescribeInstanceMonitorTopNCmdTookResponse,
   DescribeInstanceMonitorBigKeySizeDistRequest,
   DescribeInstanceAccountRequest,
+  SwitchProxyRequest,
   DescribeInstanceParamRecordsRequest,
   DescribeTaskListRequest,
   ChangeReplicaToMasterResponse,
@@ -150,6 +151,7 @@ import {
   ModifyConnectionConfigRequest,
   InstanceNode,
   TendisNodes,
+  SwitchProxyResponse,
   StartupInstanceResponse,
   DescribeInstanceDTSInstanceInfo,
   TradeDealDetail,
@@ -411,6 +413,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeInstanceMonitorTopNCmdTookResponse) => void
   ): Promise<DescribeInstanceMonitorTopNCmdTookResponse> {
     return this.request("DescribeInstanceMonitorTopNCmdTook", req, cb)
+  }
+
+  /**
+   * Proxy模拟故障接口
+   */
+  async SwitchProxy(
+    req: SwitchProxyRequest,
+    cb?: (error: string, rep: SwitchProxyResponse) => void
+  ): Promise<SwitchProxyResponse> {
+    return this.request("SwitchProxy", req, cb)
   }
 
   /**

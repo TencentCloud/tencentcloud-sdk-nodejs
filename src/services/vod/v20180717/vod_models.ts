@@ -1797,6 +1797,21 @@ export interface CoverConfigureInfo {
 }
 
 /**
+ * DescribeClientUploadAccelerationUsageData返回参数结构体
+ */
+export interface DescribeClientUploadAccelerationUsageDataResponse {
+  /**
+   * 客户端上传加速统计数据。
+   */
+  ClientUploadAccelerationUsageDataSet: Array<StatDataItem>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ComposeMedia请求参数结构体
  */
 export interface ComposeMediaRequest {
@@ -10582,22 +10597,14 @@ export interface TranscodeTaskInput {
   TraceWatermark?: TraceWatermarkInput
 
   /**
-   * 片头片尾列表，支持多片头片尾，最大可支持 10 个。
-   */
-  HeadTailSet?: Array<HeadTailTaskInput>
-
-  /**
    * 马赛克列表，最大可支持 10 张。
    */
   MosaicSet?: Array<MosaicInput>
 
   /**
-      * 转码后视频的终止时间偏移，单位：秒。
-<li>不填或填0，表示转码后的视频持续到原始视频的末尾终止；</li>
-<li>当数值大于0时（假设为 n），表示转码后的视频持续到原始视频第 n 秒时终止；</li>
-<li>当数值小于0时（假设为 -n），表示转码后的视频持续到原始视频结束 n 秒前终止。</li>
-      */
-  EndTimeOffset?: number
+   * 片头片尾列表，支持多片头片尾，最大可支持 10 个。
+   */
+  HeadTailSet?: Array<HeadTailTaskInput>
 
   /**
       * 转码后的视频的起始时间偏移，单位：秒。
@@ -10606,6 +10613,42 @@ export interface TranscodeTaskInput {
 <li>当数值小于0时（假设为 -n），表示转码后的视频从原始视频结束 n 秒前的位置开始。</li>
       */
   StartTimeOffset?: number
+
+  /**
+      * 转码后视频的终止时间偏移，单位：秒。
+<li>不填或填0，表示转码后的视频持续到原始视频的末尾终止；</li>
+<li>当数值大于0时（假设为 n），表示转码后的视频持续到原始视频第 n 秒时终止；</li>
+<li>当数值小于0时（假设为 -n），表示转码后的视频持续到原始视频结束 n 秒前终止。</li>
+      */
+  EndTimeOffset?: number
+}
+
+/**
+ * DescribeClientUploadAccelerationUsageData请求参数结构体
+ */
+export interface DescribeClientUploadAccelerationUsageDataRequest {
+  /**
+   * 起始日期。使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#52)。
+   */
+  StartTime: string
+
+  /**
+   * 结束日期，需大于等于起始日期。使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#52)。
+   */
+  EndTime: string
+
+  /**
+   * <b>点播 [子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+   */
+  SubAppId?: number
+
+  /**
+      * 客户端上传加速类型，取值有：
+<li> AccelerationWithHTTP：HTTP 传输方式的上传加速。</li>
+<li> AccelerationWithQUIC：QUIC 传输方式的上传加速。</li>
+默认查询所有加速类型的用量 。
+      */
+  Type?: string
 }
 
 /**
@@ -11059,6 +11102,7 @@ export interface EventContent {
 <li>WechatPublishComplete：微信发布完成；</li>
 <li>ComposeMediaComplete：制作媒体文件完成；</li>
 <li>WechatMiniProgramPublishComplete：微信小程序发布完成。</li>
+<li>FastClipMediaComplete：快速剪辑完成。</li>
 <b>兼容 2017 版的事件类型：</b>
 <li>TranscodeComplete：视频转码完成；</li>
 <li>ConcatComplete：视频拼接完成；</li>

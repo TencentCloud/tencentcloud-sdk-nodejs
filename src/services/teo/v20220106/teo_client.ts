@@ -306,6 +306,7 @@ import {
   OfflineCache,
   DescribeOriginGroupDetailRequest,
   DescribeDDosAttackEventDetailRequest,
+  SecRuleRelatedInfo,
   DescribeTimingL4DataResponse,
   Sv,
   BotConfig,
@@ -443,7 +444,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询Web托管日志
+   * 查询waf攻击日志
    */
   async DescribeWebManagedRulesLog(
     req: DescribeWebManagedRulesLogRequest,
@@ -483,7 +484,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询web防护数据
+   * 查询CC防护时序数据
    */
   async DescribeWebProtectionData(
     req: DescribeWebProtectionDataRequest,
@@ -623,7 +624,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询Web托管规则Top数据
+   * 查询waf攻击top数据
    */
   async DescribeWebManagedRulesTopData(
     req: DescribeWebManagedRulesTopDataRequest,
@@ -763,7 +764,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询DDos攻击源
+   * 查询DDos攻击源信息
    */
   async DescribeDDosAttackSourceEvent(
     req: DescribeDDosAttackSourceEventRequest,
@@ -883,7 +884,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询DDos攻击数据
+   * 查询DDos攻击时序数据
    */
   async DescribeDDosAttackData(
     req: DescribeDDosAttackDataRequest,
@@ -913,7 +914,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询web防护日志
+   * 查询CC防护日志
    */
   async DescribeWebProtectionLog(
     req: DescribeWebProtectionLogRequest,
@@ -1163,7 +1164,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询Web托管规则数据
+   * 查询waf攻击时序数据
    */
   async DescribeWebManagedRulesData(
     req: DescribeWebManagedRulesDataRequest,

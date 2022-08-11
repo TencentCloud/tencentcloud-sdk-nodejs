@@ -1394,31 +1394,6 @@ export interface SecurityGroup {
 }
 
 /**
- * DescribeBackupAccess返回参数结构体
- */
-export interface DescribeBackupAccessResponse {
-  /**
-   * 实例所属地域
-   */
-  Region?: string
-
-  /**
-   * 备份文件所在存储桶
-   */
-  Bucket?: string
-
-  /**
-   * 备份文件的存储信息
-   */
-  Files?: Array<BackupFile>
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * 分片信息
  */
 export interface ReplicaSetInfo {
@@ -1768,21 +1743,6 @@ export interface ShardInfo {
 }
 
 /**
- * DescribeBackupAccess请求参数结构体
- */
-export interface DescribeBackupAccessRequest {
-  /**
-   * 实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同
-   */
-  InstanceId: string
-
-  /**
-   * 需要获取下载授权的备份文件名
-   */
-  BackupName: string
-}
-
-/**
  * RenameInstance请求参数结构体
  */
 export interface RenameInstanceRequest {
@@ -2040,21 +2000,6 @@ export interface CreateDBInstanceHourRequest {
    * mongos 数量，购买MongoDB 4.2 WiredTiger存储引擎版本的分片集群时必须填写，具体支持的售卖版本请参照查询云数据库的售卖规格（DescribeSpecInfo）返回结果。注：为了保障高可用，最低需要购买3个mongos，上限为32个
    */
   MongosNodeNum?: number
-}
-
-/**
- * 备份文件存储信息
- */
-export interface BackupFile {
-  /**
-   * 备份文件所属的副本集/分片ID
-   */
-  ReplicateSetId: string
-
-  /**
-   * 备份文件保存路径
-   */
-  File: string
 }
 
 /**

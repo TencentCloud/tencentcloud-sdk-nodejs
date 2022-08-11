@@ -100,7 +100,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteApplicationProxy", req, cb);
     }
     /**
-     * 查询Web托管日志
+     * 查询waf攻击日志
      */
     async DescribeWebManagedRulesLog(req, cb) {
         return this.request("DescribeWebManagedRulesLog", req, cb);
@@ -124,7 +124,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyLoadBalancingStatus", req, cb);
     }
     /**
-     * 查询web防护数据
+     * 查询CC防护时序数据
      */
     async DescribeWebProtectionData(req, cb) {
         return this.request("DescribeWebProtectionData", req, cb);
@@ -208,7 +208,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteOriginGroup", req, cb);
     }
     /**
-     * 查询Web托管规则Top数据
+     * 查询waf攻击top数据
      */
     async DescribeWebManagedRulesTopData(req, cb) {
         return this.request("DescribeWebManagedRulesTopData", req, cb);
@@ -292,7 +292,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBotManagedRules", req, cb);
     }
     /**
-     * 查询DDos攻击源
+     * 查询DDos攻击源信息
      */
     async DescribeDDosAttackSourceEvent(req, cb) {
         return this.request("DescribeDDosAttackSourceEvent", req, cb);
@@ -364,7 +364,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeHostsCertificate", req, cb);
     }
     /**
-     * 查询DDos攻击数据
+     * 查询DDos攻击时序数据
      */
     async DescribeDDosAttackData(req, cb) {
         return this.request("DescribeDDosAttackData", req, cb);
@@ -382,7 +382,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeApplicationProxyDetail", req, cb);
     }
     /**
-     * 查询web防护日志
+     * 查询CC防护日志
      */
     async DescribeWebProtectionLog(req, cb) {
         return this.request("DescribeWebProtectionLog", req, cb);
@@ -532,7 +532,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeApplicationProxy", req, cb);
     }
     /**
-     * 查询Web托管规则数据
+     * 查询waf攻击时序数据
      */
     async DescribeWebManagedRulesData(req, cb) {
         return this.request("DescribeWebManagedRulesData", req, cb);

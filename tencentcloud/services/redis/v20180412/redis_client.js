@@ -130,6 +130,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstanceMonitorTopNCmdTook", req, cb);
     }
     /**
+     * Proxy模拟故障接口
+     */
+    async SwitchProxy(req, cb) {
+        return this.request("SwitchProxy", req, cb);
+    }
+    /**
      * 该接口仅支持多AZ实例副本组提主和单AZ副本提主
      */
     async ChangeReplicaToMaster(req, cb) {

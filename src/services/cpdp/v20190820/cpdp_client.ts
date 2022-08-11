@@ -62,6 +62,7 @@ import {
   UnbindOpenBankExternalSubMerchantBankAccountRequest,
   CreateRedInvoiceItem,
   AddMerchantResult,
+  CloudExternalUserInfo,
   QueryOpenBankExternalSubMerchantRegistrationRequest,
   QueryMerchantInfoForManagementResponse,
   CreateTransferBatchResponse,

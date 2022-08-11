@@ -929,7 +929,7 @@ export interface TemServiceVersionInfo {
     /**
       * 服务id
       */
-    ApplicationId: boolean;
+    ApplicationId: string;
     /**
       * 部署方式
       */
@@ -980,6 +980,7 @@ export interface TemServiceVersionInfo {
     ImgVersion: string;
     /**
       * 弹性配置
+注意：此字段可能返回 null，表示取不到有效值。
       */
     EsInfo: EsInfo;
     /**
@@ -1099,7 +1100,7 @@ export interface TemServiceVersionInfo {
       * 最小实例数
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    MinAliveInstances?: number;
+    MinAliveInstances?: string;
     /**
       * 安全组
 注意：此字段可能返回 null，表示取不到有效值。
@@ -1196,7 +1197,7 @@ export interface TemServiceVersionInfo {
       */
     EnableTracing?: number;
     /**
-      * 是否开启调用链上报，只有 EnableTracing=1 时生效
+      * 是否开启调用链上报，只有 EnableTracing=1 时生效（参数已弃用）
 注意：此字段可能返回 null，表示取不到有效值。
       */
     EnableTracingReport?: number;
@@ -1248,7 +1249,7 @@ export interface TemServiceVersionInfo {
       */
     UnderDeploying?: boolean;
     /**
-      * 是否开启prometheus业务指标监控
+      * 监控业务指标监控
 注意：此字段可能返回 null，表示取不到有效值。
       */
     EnablePrometheusConf?: EnablePrometheusConf;
@@ -1262,6 +1263,12 @@ export interface TemServiceVersionInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     TcrInstanceId?: string;
+    /**
+      * 1：开始自动metrics采集（open-telemetry）；
+0：关闭metrics采集；
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EnableMetrics?: number;
 }
 /**
  * 端口映射详细信息结构体
@@ -1993,78 +2000,17 @@ export interface DescribeRelatedIngressesResponse {
     RequestId?: string;
 }
 /**
- * 命名空间对象
+ * DescribeEnvironment请求参数结构体
  */
-export interface TemNamespaceInfo {
+export interface DescribeEnvironmentRequest {
     /**
-      * 环境id
+      * 命名空间id
       */
     EnvironmentId: string;
     /**
-      * 渠道
+      * 来源Channel
       */
-    Channel: string;
-    /**
-      * 环境名称
-      */
-    EnvironmentName: string;
-    /**
-      * 区域名称
-      */
-    Region: string;
-    /**
-      * 环境描述
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Description: string;
-    /**
-      * 状态,1:已销毁;0:正常
-      */
-    Status: number;
-    /**
-      * vpc网络
-      */
-    Vpc: string;
-    /**
-      * 创建时间
-      */
-    CreateDate: string;
-    /**
-      * 修改时间
-      */
-    ModifyDate: string;
-    /**
-      * 修改人
-      */
-    Modifier: string;
-    /**
-      * 创建人
-      */
-    Creator: string;
-    /**
-      * 应用数
-      */
-    ApplicationNum: number;
-    /**
-      * 运行实例数
-      */
-    RunInstancesNum: number;
-    /**
-      * 子网络
-      */
-    SubnetId: string;
-    /**
-      * 环境集群 status
-      */
-    ClusterStatus: string;
-    /**
-      * 是否开启tsw
-      */
-    EnableTswTraceService: boolean;
-    /**
-      * 环境锁，1为上锁，0则为上锁
-      */
-    Locked: number;
+    SourceChannel?: number;
 }
 /**
  * DescribePagedLogConfigList请求参数结构体
@@ -2264,6 +2210,93 @@ export interface IngressRuleValue {
       * rule 整体配置
       */
     Paths: Array<IngressRulePath>;
+}
+/**
+ * DescribeEnvironment返回参数结构体
+ */
+export interface DescribeEnvironmentResponse {
+    /**
+      * 环境信息
+      */
+    Result: NamespaceInfo;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * 命名空间对象
+ */
+export interface TemNamespaceInfo {
+    /**
+      * 环境id
+      */
+    EnvironmentId: string;
+    /**
+      * 渠道
+      */
+    Channel: string;
+    /**
+      * 环境名称
+      */
+    EnvironmentName: string;
+    /**
+      * 区域名称
+      */
+    Region: string;
+    /**
+      * 环境描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Description: string;
+    /**
+      * 状态,1:已销毁;0:正常
+      */
+    Status: number;
+    /**
+      * vpc网络
+      */
+    Vpc: string;
+    /**
+      * 创建时间
+      */
+    CreateDate: string;
+    /**
+      * 修改时间
+      */
+    ModifyDate: string;
+    /**
+      * 修改人
+      */
+    Modifier: string;
+    /**
+      * 创建人
+      */
+    Creator: string;
+    /**
+      * 应用数
+      */
+    ApplicationNum: number;
+    /**
+      * 运行实例数
+      */
+    RunInstancesNum: number;
+    /**
+      * 子网络
+      */
+    SubnetId: string;
+    /**
+      * 环境集群 status
+      */
+    ClusterStatus: string;
+    /**
+      * 是否开启tsw
+      */
+    EnableTswTraceService: boolean;
+    /**
+      * 环境锁，1为上锁，0则为上锁
+      */
+    Locked: number;
 }
 /**
  * CreateApplicationAutoscaler请求参数结构体
@@ -3139,6 +3172,54 @@ export interface IngressRulePath {
       * backend 配置
       */
     Backend: IngressRuleBackend;
+}
+/**
+ * Namespace 基础信息
+ */
+export interface NamespaceInfo {
+    /**
+      * ID 信息
+      */
+    EnvironmentId: string;
+    /**
+      * 名字（已弃用）
+      */
+    NamespaceName: string;
+    /**
+      * 地域
+      */
+    Region: string;
+    /**
+      * vpc id
+      */
+    VpcId: string;
+    /**
+      * subnet id 数组
+      */
+    SubnetIds: Array<string>;
+    /**
+      * 描述
+      */
+    Description: string;
+    /**
+      * 创建时间
+      */
+    CreatedDate: string;
+    /**
+      * 环境名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EnvironmentName: string;
+    /**
+      * APM 资源 ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ApmInstanceId: string;
+    /**
+      * 环境是否上锁，1为上锁，0则未上锁
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Locked: number;
 }
 /**
  * DescribeLogConfig返回参数结构体

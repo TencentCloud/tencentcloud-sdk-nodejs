@@ -194,6 +194,17 @@ export interface ImageVirusInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   FileName: string
+
+  /**
+      * 检测平台
+1: 云查杀引擎
+2: tav
+3: binaryAi
+4: 异常行为
+5: 威胁情报
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CheckPlatform: Array<string>
 }
 
 /**
@@ -7624,6 +7635,11 @@ export interface DescribeAssetImageVirusListExportResponse {
   DownloadUrl: string
 
   /**
+   * 任务ID
+   */
+  JobId: string
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -11804,6 +11820,17 @@ CONTAINER_NOT_FOUND_DEAL_RECOVER:恢复时，容器不存在
   ContainerIsolateOperationSrc: string
 
   /**
+      * 检测平台
+1: 云查杀引擎
+2: tav
+3: binaryAi
+4: 异常行为
+5: 威胁情报
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CheckPlatform: Array<string>
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -12724,6 +12751,23 @@ VALIDATION: 参数非法
 注意：此字段可能返回 null，表示取不到有效值。
       */
   MD5: string
+
+  /**
+      * 风险等级 RISK_CRITICAL, RISK_HIGH, RISK_MEDIUM, RISK_LOW, RISK_NOTICE。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RiskLevel: string
+
+  /**
+      * 检测平台
+1: 云查杀引擎
+2: tav
+3: binaryAi
+4: 异常行为
+5: 威胁情报
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CheckPlatform: Array<string>
 }
 
 /**

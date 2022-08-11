@@ -1,4 +1,17 @@
 /**
+ * CreateCustomization返回参数结构体
+ */
+export interface CreateCustomizationResponse {
+    /**
+      * 模型ID
+      */
+    ModelId: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * ScanVoice返回参数结构体
  */
 export interface ScanVoiceResponse {
@@ -186,25 +199,38 @@ export interface DescribeRealtimeScanConfigResponse {
     RequestId?: string;
 }
 /**
- * 语音检测任务列表
+ * ModifyUserMicStatus请求参数结构体
  */
-export interface Task {
+export interface ModifyUserMicStatusRequest {
     /**
-      * 数据的唯一ID
+      * 应用ID
       */
-    DataId: string;
+    BizId: number;
     /**
-      * 数据文件的url，为 urlencode 编码，流式则为拉流地址
+      * 房间ID
       */
-    Url: string;
+    RoomId: string;
     /**
-      * gme实时语音房间ID，通过gme实时语音进行语音分析时输入
+      * 用户麦克风状态，数组长度不超过20
       */
-    RoomId?: string;
+    Users: Array<UserMicStatus>;
+}
+/**
+ * 语音消息转文本自学习模型配置
+ */
+export interface CustomizationConfigs {
     /**
-      * gme实时语音用户ID，通过gme实时语音进行语音分析时输入
+      * 应用 ID，登录控制台创建应用得到的AppID
       */
-    OpenId?: string;
+    BizId: number;
+    /**
+      * 模型ID
+      */
+    ModelId: string;
+    /**
+      * 模型状态，-1下线状态，1上线状态, 0训练中, -2训练失败
+      */
+    ModelState: number;
 }
 /**
  * 语音消息用量统计信息
@@ -233,6 +259,19 @@ export interface RoomUser {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     StrRoomId: string;
+}
+/**
+ * CreateCustomization请求参数结构体
+ */
+export interface CreateCustomizationRequest {
+    /**
+      * 应用 ID，登录控制台创建应用得到的AppID
+      */
+    BizId: number;
+    /**
+      * 文本文件的下载地址，服务会从该地址下载文件，目前仅支持腾讯云cos
+      */
+    TextUrl: string;
 }
 /**
  * DescribeRoomInfo请求参数结构体
@@ -309,6 +348,23 @@ export interface DescribeScanResultListRequest {
     Limit?: number;
 }
 /**
+ * ModifyCustomizationState返回参数结构体
+ */
+export interface ModifyCustomizationStateResponse {
+    /**
+      * 自学习模型ID
+      */
+    ModelId: string;
+    /**
+      * 返回值。0为成功，非0为失败。
+      */
+    ErrorCode: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * CreateAgeDetectTask请求参数结构体
  */
 export interface CreateAgeDetectTaskRequest {
@@ -357,6 +413,27 @@ export interface RealTimeSpeechStatisticsItem {
     OverseaDuration: number;
 }
 /**
+ * DescribeAppStatistics请求参数结构体
+ */
+export interface DescribeAppStatisticsRequest {
+    /**
+      * GME应用ID
+      */
+    BizId: number;
+    /**
+      * 数据开始时间，东八区时间，格式: 年-月-日，如: 2018-07-13
+      */
+    StartDate: string;
+    /**
+      * 数据结束时间，东八区时间，格式: 年-月-日，如: 2018-07-13
+      */
+    EndDate: string;
+    /**
+      * 要查询的服务列表，取值：RealTimeSpeech/VoiceMessage/VoiceFilter
+      */
+    Services: Array<string>;
+}
+/**
  * CreateScanUser请求参数结构体
  */
 export interface CreateScanUserRequest {
@@ -370,13 +447,42 @@ export interface CreateScanUserRequest {
     UserId?: number;
 }
 /**
- * VoiceFilter返回参数结构体
+ * ModifyCustomizationState请求参数结构体
  */
-export interface VoiceFilterResponse {
+export interface ModifyCustomizationStateRequest {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 自学习模型ID
       */
-    RequestId?: string;
+    ModelId: string;
+    /**
+      * 想要变换的模型状态，-1代表下线，1代表上线
+      */
+    ToState: number;
+    /**
+      * 应用 ID，登录控制台创建应用得到的AppID
+      */
+    BizId: number;
+}
+/**
+ * 语音检测任务列表
+ */
+export interface Task {
+    /**
+      * 数据的唯一ID
+      */
+    DataId: string;
+    /**
+      * 数据文件的url，为 urlencode 编码，流式则为拉流地址
+      */
+    Url: string;
+    /**
+      * gme实时语音房间ID，通过gme实时语音进行语音分析时输入
+      */
+    RoomId?: string;
+    /**
+      * gme实时语音用户ID，通过gme实时语音进行语音分析时输入
+      */
+    OpenId?: string;
 }
 /**
  * 标签列表
@@ -394,17 +500,29 @@ export interface Tag {
     TagValue?: string;
 }
 /**
- * 年龄语音识别子任务
+ * DescribeFilterResultList请求参数结构体
  */
-export interface AgeDetectTask {
+export interface DescribeFilterResultListRequest {
     /**
-      * 数据唯一ID
+      * 应用ID
       */
-    DataId: string;
+    BizId: number;
     /**
-      * 数据文件的url，为 urlencode 编码,音频文件格式支持的类型：.wav、.m4a、.amr、.mp3、.aac、.wma、.ogg
+      * 开始时间，格式为 年-月-日，如: 2018-07-11
       */
-    Url: string;
+    StartDate: string;
+    /**
+      * 结束时间，格式为 年-月-日，如: 2018-07-11
+      */
+    EndDate: string;
+    /**
+      * 偏移量，默认值为0。
+      */
+    Offset?: number;
+    /**
+      * 返回数量，默认值为10，最大值为100。
+      */
+    Limit?: number;
 }
 /**
  * DescribeAgeDetectTask返回参数结构体
@@ -568,6 +686,19 @@ export interface UpdateScanRoomsResponse {
     RequestId?: string;
 }
 /**
+ * UpdateScanUsers返回参数结构体
+ */
+export interface UpdateScanUsersResponse {
+    /**
+      * 返回结果码
+      */
+    ErrorCode: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeApplicationData返回参数结构体
  */
 export interface DescribeApplicationDataResponse {
@@ -581,21 +712,18 @@ export interface DescribeApplicationDataResponse {
     RequestId?: string;
 }
 /**
- * ModifyUserMicStatus请求参数结构体
+ * GetCustomizationList返回参数结构体
  */
-export interface ModifyUserMicStatusRequest {
+export interface GetCustomizationListResponse {
     /**
-      * 应用ID
+      * 语音消息转文本自学习模型配置
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    BizId: number;
+    CustomizationConfigs: Array<CustomizationConfigs>;
     /**
-      * 房间ID
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    RoomId: string;
-    /**
-      * 用户麦克风状态，数组长度不超过20
-      */
-    Users: Array<UserMicStatus>;
+    RequestId?: string;
 }
 /**
  * DeleteScanUser返回参数结构体
@@ -611,17 +739,21 @@ export interface DeleteScanUserResponse {
     RequestId?: string;
 }
 /**
- * UpdateScanUsers返回参数结构体
+ * ModifyCustomization请求参数结构体
  */
-export interface UpdateScanUsersResponse {
+export interface ModifyCustomizationRequest {
     /**
-      * 返回结果码
+      * 应用 ID，登录控制台创建应用得到的AppID
       */
-    ErrorCode: number;
+    BizId: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 文本文件
       */
-    RequestId?: string;
+    TextUrl: string;
+    /**
+      * 要修改的模型ID
+      */
+    ModelId: string;
 }
 /**
  * 语音过滤用量统计数据
@@ -702,23 +834,52 @@ export interface DescribeAgeDetectTaskRequest {
     TaskId: string;
 }
 /**
- * ModifyRoomInfo请求参数结构体
+ * DeleteCustomization返回参数结构体
  */
-export interface ModifyRoomInfoRequest {
+export interface DeleteCustomizationResponse {
     /**
-      * 应用ID，登录[控制台 - 服务管理](https://console.cloud.tencent.com/gamegme)创建应用得到的AppID
+      * 返回值。0为成功，非0为失败。
       */
-    SdkAppId: number;
+    ErrorCode: number;
     /**
-      * 房间id
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    RoomId: number;
+    RequestId?: string;
+}
+/**
+ * VoiceFilter返回参数结构体
+ */
+export interface VoiceFilterResponse {
     /**
-      * 301 启动推流
-302 停止推流
-303 重置RTMP连接
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    OperationType: number;
+    RequestId?: string;
+}
+/**
+ * GetCustomizationList请求参数结构体
+ */
+export interface GetCustomizationListRequest {
+    /**
+      * 应用 ID，登录控制台创建应用得到的AppID
+      */
+    BizId: number;
+}
+/**
+ * ModifyCustomization返回参数结构体
+ */
+export interface ModifyCustomizationResponse {
+    /**
+      * 返回值。0为成功，非0为失败。
+      */
+    ErrorCode: number;
+    /**
+      * 自学习模型ID
+      */
+    ModelId: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeUserInAndOutTime返回参数结构体
@@ -875,29 +1036,36 @@ export interface DescribeScanResult {
     BizId: number;
 }
 /**
- * DescribeFilterResultList请求参数结构体
+ * 年龄语音识别子任务
  */
-export interface DescribeFilterResultListRequest {
+export interface AgeDetectTask {
     /**
-      * 应用ID
+      * 数据唯一ID
       */
-    BizId: number;
+    DataId: string;
     /**
-      * 开始时间，格式为 年-月-日，如: 2018-07-11
+      * 数据文件的url，为 urlencode 编码,音频文件格式支持的类型：.wav、.m4a、.amr、.mp3、.aac、.wma、.ogg
       */
-    StartDate: string;
+    Url: string;
+}
+/**
+ * ModifyRoomInfo请求参数结构体
+ */
+export interface ModifyRoomInfoRequest {
     /**
-      * 结束时间，格式为 年-月-日，如: 2018-07-11
+      * 应用ID，登录[控制台 - 服务管理](https://console.cloud.tencent.com/gamegme)创建应用得到的AppID
       */
-    EndDate: string;
+    SdkAppId: number;
     /**
-      * 偏移量，默认值为0。
+      * 房间id
       */
-    Offset?: number;
+    RoomId: number;
     /**
-      * 返回数量，默认值为10，最大值为100。
+      * 301 启动推流
+302 停止推流
+303 重置RTMP连接
       */
-    Limit?: number;
+    OperationType: number;
 }
 /**
  * 过滤结果
@@ -1057,25 +1225,17 @@ export interface CreateAppResponse {
     RequestId?: string;
 }
 /**
- * DescribeAppStatistics请求参数结构体
+ * DeleteCustomization请求参数结构体
  */
-export interface DescribeAppStatisticsRequest {
+export interface DeleteCustomizationRequest {
     /**
-      * GME应用ID
+      * 要删除的模型ID
+      */
+    ModelId: string;
+    /**
+      * 应用 ID，登录控制台创建应用得到的AppID
       */
     BizId: number;
-    /**
-      * 数据开始时间，东八区时间，格式: 年-月-日，如: 2018-07-13
-      */
-    StartDate: string;
-    /**
-      * 数据结束时间，东八区时间，格式: 年-月-日，如: 2018-07-13
-      */
-    EndDate: string;
-    /**
-      * 要查询的服务列表，取值：RealTimeSpeech/VoiceMessage/VoiceFilter
-      */
-    Services: Array<string>;
 }
 /**
  * 语音检测结果，Code 为 0 时返回

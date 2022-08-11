@@ -56,7 +56,7 @@ export declare class Client extends AbstractClient {
      */
     DeleteApplicationProxy(req: DeleteApplicationProxyRequest, cb?: (error: string, rep: DeleteApplicationProxyResponse) => void): Promise<DeleteApplicationProxyResponse>;
     /**
-     * 查询Web托管日志
+     * 查询waf攻击日志
      */
     DescribeWebManagedRulesLog(req: DescribeWebManagedRulesLogRequest, cb?: (error: string, rep: DescribeWebManagedRulesLogResponse) => void): Promise<DescribeWebManagedRulesLogResponse>;
     /**
@@ -72,7 +72,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyLoadBalancingStatus(req: ModifyLoadBalancingStatusRequest, cb?: (error: string, rep: ModifyLoadBalancingStatusResponse) => void): Promise<ModifyLoadBalancingStatusResponse>;
     /**
-     * 查询web防护数据
+     * 查询CC防护时序数据
      */
     DescribeWebProtectionData(req: DescribeWebProtectionDataRequest, cb?: (error: string, rep: DescribeWebProtectionDataResponse) => void): Promise<DescribeWebProtectionDataResponse>;
     /**
@@ -128,7 +128,7 @@ export declare class Client extends AbstractClient {
      */
     DeleteOriginGroup(req: DeleteOriginGroupRequest, cb?: (error: string, rep: DeleteOriginGroupResponse) => void): Promise<DeleteOriginGroupResponse>;
     /**
-     * 查询Web托管规则Top数据
+     * 查询waf攻击top数据
      */
     DescribeWebManagedRulesTopData(req: DescribeWebManagedRulesTopDataRequest, cb?: (error: string, rep: DescribeWebManagedRulesTopDataResponse) => void): Promise<DescribeWebManagedRulesTopDataResponse>;
     /**
@@ -184,7 +184,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeBotManagedRules(req: DescribeBotManagedRulesRequest, cb?: (error: string, rep: DescribeBotManagedRulesResponse) => void): Promise<DescribeBotManagedRulesResponse>;
     /**
-     * 查询DDos攻击源
+     * 查询DDos攻击源信息
      */
     DescribeDDosAttackSourceEvent(req: DescribeDDosAttackSourceEventRequest, cb?: (error: string, rep: DescribeDDosAttackSourceEventResponse) => void): Promise<DescribeDDosAttackSourceEventResponse>;
     /**
@@ -232,7 +232,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeHostsCertificate(req: DescribeHostsCertificateRequest, cb?: (error: string, rep: DescribeHostsCertificateResponse) => void): Promise<DescribeHostsCertificateResponse>;
     /**
-     * 查询DDos攻击数据
+     * 查询DDos攻击时序数据
      */
     DescribeDDosAttackData(req: DescribeDDosAttackDataRequest, cb?: (error: string, rep: DescribeDDosAttackDataResponse) => void): Promise<DescribeDDosAttackDataResponse>;
     /**
@@ -244,7 +244,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeApplicationProxyDetail(req: DescribeApplicationProxyDetailRequest, cb?: (error: string, rep: DescribeApplicationProxyDetailResponse) => void): Promise<DescribeApplicationProxyDetailResponse>;
     /**
-     * 查询web防护日志
+     * 查询CC防护日志
      */
     DescribeWebProtectionLog(req: DescribeWebProtectionLogRequest, cb?: (error: string, rep: DescribeWebProtectionLogResponse) => void): Promise<DescribeWebProtectionLogResponse>;
     /**
@@ -344,7 +344,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeApplicationProxy(req: DescribeApplicationProxyRequest, cb?: (error: string, rep: DescribeApplicationProxyResponse) => void): Promise<DescribeApplicationProxyResponse>;
     /**
-     * 查询Web托管规则数据
+     * 查询waf攻击时序数据
      */
     DescribeWebManagedRulesData(req: DescribeWebManagedRulesDataRequest, cb?: (error: string, rep: DescribeWebManagedRulesDataResponse) => void): Promise<DescribeWebManagedRulesDataResponse>;
     /**

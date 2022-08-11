@@ -1,22 +1,12 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { RecognizeEffectiveFlowRequest, SendTrafficSecuritySmsMessageRequest, DetectFraudKOLResponse, RecognizeCustomizedAudienceResponse, RecognizeTargetAudienceRequest, RecognizeEffectiveFlowResponse, SendTrafficSecuritySmsMessageResponse, DetectFraudKOLRequest, RecognizeCustomizedAudienceRequest, RecognizeTargetAudienceResponse, RecognizePreciseTargetAudienceRequest, RecognizePreciseTargetAudienceResponse } from "./taf_models";
+import { DetectFraudKOLRequest, RecognizeCustomizedAudienceRequest, RecognizeTargetAudienceRequest, RecognizeTargetAudienceResponse, SendTrafficSecuritySmsMessageRequest, RecognizePreciseTargetAudienceResponse, DetectFraudKOLResponse, RecognizeCustomizedAudienceResponse, SendTrafficSecuritySmsMessageResponse, RecognizePreciseTargetAudienceRequest } from "./taf_models";
 /**
  * taf client
  * @class
  */
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
-    /**
-     * 流量反欺诈-流量验准
-     */
-    RecognizeTargetAudience(req: RecognizeTargetAudienceRequest, cb?: (error: string, rep: RecognizeTargetAudienceResponse) => void): Promise<RecognizeTargetAudienceResponse>;
-    /**
-     * 该服务已不再对外提供能力
-
-筛选敏感易骚扰人群
-     */
-    RecognizeEffectiveFlow(req: RecognizeEffectiveFlowRequest, cb?: (error: string, rep: RecognizeEffectiveFlowResponse) => void): Promise<RecognizeEffectiveFlowResponse>;
     /**
      * 流量反欺诈-流量验准定制版
      */
@@ -29,6 +19,10 @@ export declare class Client extends AbstractClient {
      * 流量反欺诈-流量验准高级版
      */
     RecognizePreciseTargetAudience(req: RecognizePreciseTargetAudienceRequest, cb?: (error: string, rep: RecognizePreciseTargetAudienceResponse) => void): Promise<RecognizePreciseTargetAudienceResponse>;
+    /**
+     * 流量反欺诈-流量验准
+     */
+    RecognizeTargetAudience(req: RecognizeTargetAudienceRequest, cb?: (error: string, rep: RecognizeTargetAudienceResponse) => void): Promise<RecognizeTargetAudienceResponse>;
     /**
      * 流量安选产品，短信发送接口
      */

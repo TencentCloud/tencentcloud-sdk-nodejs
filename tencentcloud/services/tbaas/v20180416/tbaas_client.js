@@ -76,18 +76,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetBcosBlockList", req, cb);
     }
     /**
-     * 获取交易详情
+     * 查询长安链体验网络指定高度区块的交易
      */
-    async GetTransactionDetailForUser(req, cb) {
-        return this.request("GetTransactionDetailForUser", req, cb);
-    }
-    /**
-     * 版本升级
-
-Bcos分页查询当前群组的交易信息列表
-     */
-    async GetTransListHandler(req, cb) {
-        return this.request("GetTransListHandler", req, cb);
+    async QueryChainMakerDemoBlockTransaction(req, cb) {
+        return this.request("QueryChainMakerDemoBlockTransaction", req, cb);
     }
     /**
      * 新增交易
@@ -126,12 +118,10 @@ Bcos分页查询当前群组的交易信息列表
         return this.request("CreateChaincodeAndInstallForUser", req, cb);
     }
     /**
-     * 版本升级
-
-Bcos根据交易哈希查看交易详细信息
+     * 通过交易ID查询长安链体验网络交易
      */
-    async GetTransByHashHandler(req, cb) {
-        return this.request("GetTransByHashHandler", req, cb);
+    async QueryChainMakerDemoTransaction(req, cb) {
+        return this.request("QueryChainMakerDemoTransaction", req, cb);
     }
     /**
      * 获取最新交易列表
@@ -150,20 +140,6 @@ Bcos根据交易哈希查看交易详细信息
      */
     async InvokeChainMakerContract(req, cb) {
         return this.request("InvokeChainMakerContract", req, cb);
-    }
-    /**
-     * 版本升级
-
-Bcos根据块高查询区块信息
-     */
-    async BlockByNumberHandler(req, cb) {
-        return this.request("BlockByNumberHandler", req, cb);
-    }
-    /**
-     * 通过交易ID查询长安链体验网络交易
-     */
-    async QueryChainMakerDemoTransaction(req, cb) {
-        return this.request("QueryChainMakerDemoTransaction", req, cb);
     }
     /**
      * Invoke异步调用结果查询
@@ -202,12 +178,10 @@ Bcos根据块高查询区块信息
         return this.request("QueryChainMakerDemoContract", req, cb);
     }
     /**
-     * 版本升级
-
-动态部署合约
+     * 获取交易详情
      */
-    async DeployDynamicContractHandler(req, cb) {
-        return this.request("DeployDynamicContractHandler", req, cb);
+    async GetTransactionDetailForUser(req, cb) {
+        return this.request("GetTransactionDetailForUser", req, cb);
     }
     /**
      * trustsql服务统一接口
@@ -220,22 +194,6 @@ Bcos根据块高查询区块信息
      */
     async GetBcosTransList(req, cb) {
         return this.request("GetBcosTransList", req, cb);
-    }
-    /**
-     * 版本升级
-
-根据动态部署的合约发送交易
-     */
-    async TransByDynamicContractHandler(req, cb) {
-        return this.request("TransByDynamicContractHandler", req, cb);
-    }
-    /**
-     * 版本升级
-
-Bcos发送交易
-     */
-    async SendTransactionHandler(req, cb) {
-        return this.request("SendTransactionHandler", req, cb);
     }
     /**
      * 调用长安链体验网络合约执行交易
@@ -266,20 +224,6 @@ Bcos发送交易
      */
     async Query(req, cb) {
         return this.request("Query", req, cb);
-    }
-    /**
-     * 查询长安链体验网络指定高度区块的交易
-     */
-    async QueryChainMakerDemoBlockTransaction(req, cb) {
-        return this.request("QueryChainMakerDemoBlockTransaction", req, cb);
-    }
-    /**
-     * 版本升级
-
-Bcos分页查询当前群组下的区块列表
-     */
-    async GetBlockListHandler(req, cb) {
-        return this.request("GetBlockListHandler", req, cb);
     }
 }
 exports.Client = Client;

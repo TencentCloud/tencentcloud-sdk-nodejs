@@ -16,46 +16,6 @@
  */
 
 /**
- * 业务出参
- */
-export interface OutputRecognizeEffectiveFlowValue {
-  /**
-      * 返回标签
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Lable: string
-
-  /**
-      * 返回分值
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Score: number
-}
-
-/**
- * CheckKol
- */
-export interface OutputKolData {
-  /**
-      * 错误码[0:成功；非0：失败的错误码]
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Code: number
-
-  /**
-      * 错误信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Message: string
-
-  /**
-      * 业务返回数据
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Value: Array<OutputKolValue>
-}
-
-/**
  * CheckKol
  */
 export interface InputKolBspData {
@@ -66,13 +26,81 @@ export interface InputKolBspData {
 }
 
 /**
- * RecognizeEffectiveFlow请求参数结构体
+ * 返回结果
  */
-export interface RecognizeEffectiveFlowRequest {
+export interface OutputSendTrafficSecuritySmsMsg {
+  /**
+   * 返回码（0：接口调用成功 非0：接口调用失败）
+   */
+  Code: number
+
+  /**
+      * 返回码对应的信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Message: string
+
+  /**
+      * 发送失败的号码列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Value: Array<string>
+}
+
+/**
+ * DetectFraudKOL请求参数结构体
+ */
+export interface DetectFraudKOLRequest {
+  /**
+   * 业务数据
+   */
+  BspData: InputKolBspData
+
+  /**
+   * 业务加密数据
+   */
+  BusinessEncryptData?: InputBusinessEncryptData
+}
+
+/**
+ * RecognizeCustomizedAudience请求参数结构体
+ */
+export interface RecognizeCustomizedAudienceRequest {
   /**
    * 业务入参
    */
-  BusinessSecurityData: InputRecognizeEffectiveFlow
+  BspData: InputRecognizeTargetAudience
+}
+
+/**
+ * RecognizeTargetAudience请求参数结构体
+ */
+export interface RecognizeTargetAudienceRequest {
+  /**
+   * 业务数据
+   */
+  BspData: InputRecognizeTargetAudience
+
+  /**
+   * 业务加密数据
+   */
+  BusinessEncryptData?: InputBusinessEncryptData
+}
+
+/**
+ * RecognizeTargetAudience返回参数结构体
+ */
+export interface RecognizeTargetAudienceResponse {
+  /**
+      * 回包数据
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Data: OutputRecognizeTargetAudience
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -106,6 +134,44 @@ export interface SendTrafficSecuritySmsMessageRequest {
    * 业务入参
    */
   BspData: InputSendTrafficSecuritySmsMsg
+}
+
+/**
+ * RecognizePreciseTargetAudience返回参数结构体
+ */
+export interface RecognizePreciseTargetAudienceResponse {
+  /**
+      * 回包数据
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Data?: OutputRecognizeTargetAudience
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 流量反欺诈-验准返回值
+ */
+export interface OutputRecognizeTargetAudience {
+  /**
+   * 返回码（0，成功，其他失败）
+   */
+  Code: number
+
+  /**
+      * 返回码对应的信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Message: string
+
+  /**
+      * 返回模型结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Value: Array<OutputRecognizeTargetAudienceValue>
 }
 
 /**
@@ -167,153 +233,6 @@ export interface OutputKolValue {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   EvilPScore: number
-}
-
-/**
- * RecognizeTargetAudience请求参数结构体
- */
-export interface RecognizeTargetAudienceRequest {
-  /**
-   * 业务数据
-   */
-  BspData: InputRecognizeTargetAudience
-
-  /**
-   * 业务加密数据
-   */
-  BusinessEncryptData?: InputBusinessEncryptData
-}
-
-/**
- * 业务入参
- */
-export interface Device {
-  /**
-   * 业务入参id
-   */
-  DeviceId: string
-
-  /**
-   * 业务入参类型
-   */
-  DeviceType: number
-}
-
-/**
- * 返回结果
- */
-export interface OutputSendTrafficSecuritySmsMsg {
-  /**
-   * 返回码（0：接口调用成功 非0：接口调用失败）
-   */
-  Code: number
-
-  /**
-      * 返回码对应的信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Message: string
-
-  /**
-      * 发送失败的号码列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Value: Array<string>
-}
-
-/**
- * RecognizeEffectiveFlow返回参数结构体
- */
-export interface RecognizeEffectiveFlowResponse {
-  /**
-   * 业务出参
-   */
-  Data?: OutputRecognizeEffectiveFlow
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * SendTrafficSecuritySmsMessage返回参数结构体
- */
-export interface SendTrafficSecuritySmsMessageResponse {
-  /**
-      * 返回结果
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Data: OutputSendTrafficSecuritySmsMsg
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DetectFraudKOL请求参数结构体
- */
-export interface DetectFraudKOLRequest {
-  /**
-   * 业务数据
-   */
-  BspData: InputKolBspData
-
-  /**
-   * 业务加密数据
-   */
-  BusinessEncryptData?: InputBusinessEncryptData
-}
-
-/**
- * RecognizeCustomizedAudience请求参数结构体
- */
-export interface RecognizeCustomizedAudienceRequest {
-  /**
-   * 业务入参
-   */
-  BspData: InputRecognizeTargetAudience
-}
-
-/**
- * RecognizeTargetAudience返回参数结构体
- */
-export interface RecognizeTargetAudienceResponse {
-  /**
-      * 回包数据
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Data: OutputRecognizeTargetAudience
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 业务出参
- */
-export interface OutputRecognizeEffectiveFlow {
-  /**
-      * 返回码。0表示成功，非0标识失败错误码
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Code: number
-
-  /**
-      * UTF-8编码，出错消息。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Message: string
-
-  /**
-      * 业务入参
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Value: OutputRecognizeEffectiveFlowValue
 }
 
 /**
@@ -522,6 +441,100 @@ export interface InputRecognizeTargetAudience {
 }
 
 /**
+ * CheckKol
+ */
+export interface OutputKolData {
+  /**
+      * 错误码[0:成功；非0：失败的错误码]
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Code: number
+
+  /**
+      * 错误信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Message: string
+
+  /**
+      * 业务返回数据
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Value: Array<OutputKolValue>
+}
+
+/**
+ * 业务入参
+ */
+export interface Device {
+  /**
+   * 业务入参id
+   */
+  DeviceId: string
+
+  /**
+   * 业务入参类型
+   */
+  DeviceType: number
+}
+
+/**
+ * SendTrafficSecuritySmsMessage返回参数结构体
+ */
+export interface SendTrafficSecuritySmsMessageResponse {
+  /**
+      * 返回结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Data: OutputSendTrafficSecuritySmsMsg
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 业务入参
+ */
+export interface InputSendTrafficSecuritySmsMsg {
+  /**
+   * 投放任务ID
+   */
+  TaskId: string
+
+  /**
+   * 手机号码列表（号码量<=200）
+   */
+  Mobiles: Array<string>
+
+  /**
+   * 是否授权，1：已授权
+   */
+  IsAuthorized?: number
+
+  /**
+   * 加密方式，0：AES加密；1：DES加密
+   */
+  EncryptMethod?: number
+
+  /**
+   * 加密算法中的块处理模式，0：ECB模式；1：CBC模式；2：CTR模式；3：CFB模式；4：OFB模式；
+   */
+  EncryptMode?: number
+
+  /**
+   * 填充模式，0：ZeroPadding；1：PKCS5Padding；2：PKCS7Padding；
+   */
+  PaddingType?: number
+
+  /**
+   * 加密数据
+   */
+  EncryptData?: string
+}
+
+/**
  * RecognizePreciseTargetAudience请求参数结构体
  */
 export interface RecognizePreciseTargetAudienceRequest {
@@ -570,86 +583,3 @@ export interface InputKolDataList {
  * 业务入参
  */
 export type InputBusinessEncryptData = null
-
-/**
- * 接口入参
- */
-export type InputRecognizeEffectiveFlow = null
-
-/**
- * RecognizePreciseTargetAudience返回参数结构体
- */
-export interface RecognizePreciseTargetAudienceResponse {
-  /**
-      * 回包数据
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Data?: OutputRecognizeTargetAudience
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 流量反欺诈-验准返回值
- */
-export interface OutputRecognizeTargetAudience {
-  /**
-   * 返回码（0，成功，其他失败）
-   */
-  Code: number
-
-  /**
-      * 返回码对应的信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Message: string
-
-  /**
-      * 返回模型结果
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Value: Array<OutputRecognizeTargetAudienceValue>
-}
-
-/**
- * 业务入参
- */
-export interface InputSendTrafficSecuritySmsMsg {
-  /**
-   * 投放任务ID
-   */
-  TaskId: string
-
-  /**
-   * 手机号码列表（号码量<=200）
-   */
-  Mobiles: Array<string>
-
-  /**
-   * 是否授权，1：已授权
-   */
-  IsAuthorized?: number
-
-  /**
-   * 加密方式，0：AES加密；1：DES加密
-   */
-  EncryptMethod?: number
-
-  /**
-   * 加密算法中的块处理模式，0：ECB模式；1：CBC模式；2：CTR模式；3：CFB模式；4：OFB模式；
-   */
-  EncryptMode?: number
-
-  /**
-   * 填充模式，0：ZeroPadding；1：PKCS5Padding；2：PKCS7Padding；
-   */
-  PaddingType?: number
-
-  /**
-   * 加密数据
-   */
-  EncryptData?: string
-}

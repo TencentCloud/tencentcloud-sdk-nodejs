@@ -95,6 +95,14 @@ export interface CreateDBInstancesRequest {
       * 新建实例绑定的标签集合
       */
     ResourceTags?: Array<ResourceTag>;
+    /**
+      * 系统字符集排序规则，默认：Chinese_PRC_CI_AS
+      */
+    Collation?: string;
+    /**
+      * 系统时区，默认：China Standard Time
+      */
+    TimeZone?: string;
 }
 /**
  * CloneDB返回参数结构体
@@ -2188,6 +2196,14 @@ export interface CreateReadOnlyDBInstancesRequest {
       * 新建实例绑定的标签集合
       */
     ResourceTags?: Array<ResourceTag>;
+    /**
+      * 系统字符集排序规则，默认：Chinese_PRC_CI_AS
+      */
+    Collation?: string;
+    /**
+      * 系统时区，默认：China Standard Time
+      */
+    TimeZone?: string;
 }
 /**
  * ModifyAccountPrivilege请求参数结构体
@@ -3379,6 +3395,14 @@ export interface DBInstance {
       * 外网端口号
       */
     TgwWanVPort: number;
+    /**
+      * 系统字符集排序规则，默认：Chinese_PRC_CI_AS
+      */
+    Collation: string;
+    /**
+      * 系统时区，默认：China Standard Time
+      */
+    TimeZone: string;
 }
 /**
  * DescribeProductConfig返回参数结构体
@@ -3577,6 +3601,14 @@ export interface CreateBasicDBInstancesRequest {
       * 新建实例绑定的标签集合
       */
     ResourceTags?: Array<ResourceTag>;
+    /**
+      * 系统字符集排序规则，默认：Chinese_PRC_CI_AS
+      */
+    Collation?: string;
+    /**
+      * 系统时区，默认：China Standard Time
+      */
+    TimeZone?: string;
 }
 /**
  * ModifyDBName返回参数结构体

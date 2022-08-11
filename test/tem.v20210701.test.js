@@ -178,6 +178,16 @@ it("tem.v20210701.ModifyEnvironment", async function () {
     }
 })
 
+it("tem.v20210701.DescribeEnvironment", async function () {
+    try {
+       const data = await client.DescribeEnvironment({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tem.v20210701.DescribeLogConfig", async function () {
     try {
        const data = await client.DescribeLogConfig({})

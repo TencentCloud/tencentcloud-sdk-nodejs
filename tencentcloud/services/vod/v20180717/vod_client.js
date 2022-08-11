@@ -179,11 +179,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateAdaptiveDynamicStreamingTemplate", req, cb);
     }
     /**
-     * 本 API 是 [旧版本加密](https://cloud.tencent.com/document/product/266/9638) 中[DescribeDrmDataKey 的 API 2017 接口](https://cloud.tencent.com/document/product/266/9643)的升级版本。
-如果您是新接入点播加密的用户，不要使用该 API。请参考[视频加密综述](https://cloud.tencent.com/document/product/266/45552)使用。
+     * 查询采样截图模板，支持根据条件，分页查询。
      */
-    async DescribeDrmDataKey(req, cb) {
-        return this.request("DescribeDrmDataKey", req, cb);
+    async DescribeSampleSnapshotTemplates(req, cb) {
+        return this.request("DescribeSampleSnapshotTemplates", req, cb);
     }
     /**
      * 删除用户自定义指定时间点截图模板。
@@ -292,10 +291,11 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ExecuteFunction", req, cb);
     }
     /**
-     * 根据转码模板唯一标识，获取转码模板详情列表。返回结果包含符合条件的所有用户自定义模板及[系统预置转码模板](https://cloud.tencent.com/document/product/266/33476#.E9.A2.84.E7.BD.AE.E8.BD.AC.E7.A0.81.E6.A8.A1.E6.9D.BF)。
+     * 该接口用于删除点播加速域名。
+1、域名删除前需要先关闭所有区域的加速。
      */
-    async DescribeTranscodeTemplates(req, cb) {
-        return this.request("DescribeTranscodeTemplates", req, cb);
+    async DeleteVodDomain(req, cb) {
+        return this.request("DeleteVodDomain", req, cb);
     }
     /**
      * 该接口返回查询时间范围内每天使用的视频处理用量信息。
@@ -304,6 +304,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeMediaProcessUsageData(req, cb) {
         return this.request("DescribeMediaProcessUsageData", req, cb);
+    }
+    /**
+     * 根据转码模板唯一标识，获取转码模板详情列表。返回结果包含符合条件的所有用户自定义模板及[系统预置转码模板](https://cloud.tencent.com/document/product/266/33476#.E9.A2.84.E7.BD.AE.E8.BD.AC.E7.A0.81.E6.A8.A1.E6.9D.BF)。
+     */
+    async DescribeTranscodeTemplates(req, cb) {
+        return this.request("DescribeTranscodeTemplates", req, cb);
     }
     /**
      * 该接口可以查询用户已经购买的预付费商品的信息，包括：
@@ -453,11 +459,14 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeProcedureTemplates", req, cb);
     }
     /**
-     * 该接口用于删除点播加速域名。
-1、域名删除前需要先关闭所有区域的加速。
+     * 该接口返回查询时间范围内客户端上传加速统计信息。
+   1. 可以查询最近365天内的客户端上传加速统计数据。
+   2. 查询时间跨度不超过90天。
+   3. 查询时间跨度超过1天的，返回以天为粒度的数据，否则，返回以5分钟为粒度的数据。
+
      */
-    async DeleteVodDomain(req, cb) {
-        return this.request("DeleteVodDomain", req, cb);
+    async DescribeClientUploadAccelerationUsageData(req, cb) {
+        return this.request("DescribeClientUploadAccelerationUsageData", req, cb);
     }
     /**
      * 上传 HLS 视频时，解析索引文件内容，返回待上传的分片文件列表。分片文件路径必须是当前目录或子目录的相对路径，不能是 URL，不能是绝对路径。
@@ -761,10 +770,11 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAdaptiveDynamicStreamingTemplates", req, cb);
     }
     /**
-     * 查询采样截图模板，支持根据条件，分页查询。
+     * 本 API 是 [旧版本加密](https://cloud.tencent.com/document/product/266/9638) 中[DescribeDrmDataKey 的 API 2017 接口](https://cloud.tencent.com/document/product/266/9643)的升级版本。
+如果您是新接入点播加密的用户，不要使用该 API。请参考[视频加密综述](https://cloud.tencent.com/document/product/266/45552)使用。
      */
-    async DescribeSampleSnapshotTemplates(req, cb) {
-        return this.request("DescribeSampleSnapshotTemplates", req, cb);
+    async DescribeDrmDataKey(req, cb) {
+        return this.request("DescribeDrmDataKey", req, cb);
     }
     /**
      * 该接口用于修改关键词的应用场景、标签，关键词本身不可修改，如需修改，可删除重建。

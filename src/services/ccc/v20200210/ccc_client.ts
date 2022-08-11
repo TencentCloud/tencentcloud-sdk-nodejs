@@ -74,8 +74,6 @@ import {
   DescribeTelCallInfoResponse,
   SkillGroupInfoItem,
   StopAutoCalloutTaskResponse,
-  DescribeSeatUserListResponse,
-  DescribeSeatUserListRequest,
   CreateCallOutSessionRequest,
   StaffStatusMetrics,
   BindStaffSkillGroupListResponse,
@@ -353,17 +351,5 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateSDKLoginTokenResponse) => void
   ): Promise<CreateSDKLoginTokenResponse> {
     return this.request("CreateSDKLoginToken", req, cb)
-  }
-
-  /**
-     * 废弃接口下架
-
-获取坐席用户列表（废弃）
-     */
-  async DescribeSeatUserList(
-    req: DescribeSeatUserListRequest,
-    cb?: (error: string, rep: DescribeSeatUserListResponse) => void
-  ): Promise<DescribeSeatUserListResponse> {
-    return this.request("DescribeSeatUserList", req, cb)
   }
 }

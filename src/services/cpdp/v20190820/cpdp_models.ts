@@ -1588,6 +1588,21 @@ export interface AddMerchantResult {
 }
 
 /**
+ * 渠道方用户信息
+ */
+export interface CloudExternalUserInfo {
+  /**
+   * 渠道方用户类型
+   */
+  ExternalUserType?: string
+
+  /**
+   * 渠道方用户ID
+   */
+  ExternalUserId?: string
+}
+
+/**
  * QueryOpenBankExternalSubMerchantRegistration请求参数结构体
  */
 export interface QueryOpenBankExternalSubMerchantRegistrationRequest {
@@ -21801,6 +21816,11 @@ ORDER_RECEIVE_MODE_V_COMBINE - 虚拟合单支付
 若不传入该字段，则会根据是否传入子单来判断是 普通支付 还是 合单支付
       */
   OrderReceiveMode?: string
+
+  /**
+   * 渠道方用户信息列表
+   */
+  ExternalUserInfoList?: Array<CloudExternalUserInfo>
 }
 
 /**

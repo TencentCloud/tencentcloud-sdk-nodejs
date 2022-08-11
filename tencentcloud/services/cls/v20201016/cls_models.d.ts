@@ -967,6 +967,10 @@ export interface ModifyConsumerRequest {
       * CKafka的描述
       */
     Ckafka?: Ckafka;
+    /**
+      * 投递时压缩方式，取值0，2，3。[0:NONE；2:SNAPPY；3:LZ4]
+      */
+    Compression?: number;
 }
 /**
  * CreateIndex返回参数结构体
@@ -1894,6 +1898,11 @@ export interface DescribeConsumerResponse {
       */
     Ckafka: Ckafka;
     /**
+      * 压缩方式[0:NONE；2:SNAPPY；3:LZ4]
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Compression: number;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
@@ -2783,6 +2792,10 @@ export interface CreateConsumerRequest {
       * CKafka的描述
       */
     Ckafka?: Ckafka;
+    /**
+      * 投递时压缩方式，取值0，2，3。[0:NONE；2:SNAPPY；3:LZ4]
+      */
+    Compression?: number;
 }
 /**
  * 告警通知模板类型
@@ -3734,7 +3747,7 @@ export interface ConsumerContent {
       */
     EnableTag: boolean;
     /**
-      * 需要投递的元数据列表，目前仅支持：\_\_SOURCE\_\_，\_\_FILENAME\_\_和\_\_TIMESTAMP\_\_
+      * 需要投递的元数据列表，目前仅支持：\_\_SOURCE\_\_，\_\_FILENAME\_\_，\_\_TIMESTAMP\_\_，\_\_HOSTNAME\_\_和\_\_PKGID\_\_
 注意：此字段可能返回 null，表示取不到有效值。
       */
     MetaFields: Array<string>;

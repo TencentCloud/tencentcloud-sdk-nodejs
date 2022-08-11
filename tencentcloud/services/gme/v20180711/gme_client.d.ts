@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ScanVoiceResponse, ModifyAppStatusRequest, DescribeScanResultListResponse, DescribeApplicationDataRequest, VoiceFilterRequest, CreateScanUserResponse, DescribeRealtimeScanConfigResponse, DescribeRoomInfoRequest, UpdateScanRoomsRequest, DescribeFilterResultResponse, DescribeRealtimeScanConfigRequest, DescribeScanResultListRequest, CreateAgeDetectTaskRequest, CreateScanUserRequest, VoiceFilterResponse, DescribeAgeDetectTaskResponse, ModifyUserMicStatusResponse, DeleteScanUserRequest, DescribeAppStatisticsResponse, UpdateScanRoomsResponse, DescribeApplicationDataResponse, ModifyUserMicStatusRequest, DeleteScanUserResponse, UpdateScanUsersResponse, DescribeRoomInfoResponse, DescribeAgeDetectTaskRequest, ModifyRoomInfoRequest, DescribeUserInAndOutTimeResponse, ModifyRoomInfoResponse, DescribeFilterResultListRequest, DescribeFilterResultListResponse, CreateAgeDetectTaskResponse, CreateAppRequest, CreateAppResponse, DescribeAppStatisticsRequest, ModifyAppStatusResponse, ScanVoiceRequest, UpdateScanUsersRequest, DescribeFilterResultRequest, DescribeUserInAndOutTimeRequest } from "./gme_models";
+import { CreateCustomizationResponse, ScanVoiceResponse, ModifyAppStatusRequest, DescribeScanResultListResponse, DescribeApplicationDataRequest, VoiceFilterRequest, CreateScanUserResponse, DescribeRealtimeScanConfigResponse, ModifyUserMicStatusRequest, CreateCustomizationRequest, DescribeRoomInfoRequest, UpdateScanRoomsRequest, DescribeFilterResultResponse, DescribeRealtimeScanConfigRequest, DescribeScanResultListRequest, ModifyCustomizationStateResponse, CreateAgeDetectTaskRequest, DescribeAppStatisticsRequest, CreateScanUserRequest, ModifyCustomizationStateRequest, DescribeFilterResultListRequest, DescribeAgeDetectTaskResponse, ModifyUserMicStatusResponse, DeleteScanUserRequest, DescribeAppStatisticsResponse, UpdateScanRoomsResponse, UpdateScanUsersResponse, DescribeApplicationDataResponse, GetCustomizationListResponse, DeleteScanUserResponse, ModifyCustomizationRequest, DescribeRoomInfoResponse, DescribeAgeDetectTaskRequest, DeleteCustomizationResponse, VoiceFilterResponse, GetCustomizationListRequest, ModifyCustomizationResponse, DescribeUserInAndOutTimeResponse, ModifyRoomInfoResponse, ModifyRoomInfoRequest, DescribeFilterResultListResponse, CreateAgeDetectTaskResponse, CreateAppRequest, CreateAppResponse, DeleteCustomizationRequest, ModifyAppStatusResponse, ScanVoiceRequest, UpdateScanUsersRequest, DescribeFilterResultRequest, DescribeUserInAndOutTimeRequest } from "./gme_models";
 /**
  * gme client
  * @class
@@ -11,33 +11,6 @@ export declare class Client extends AbstractClient {
      * 根据应用ID和文件ID查询识别结果
      */
     DescribeFilterResult(req: DescribeFilterResultRequest, cb?: (error: string, rep: DescribeFilterResultResponse) => void): Promise<DescribeFilterResultResponse>;
-    /**
-     * 更新自定义送检房间号
-     */
-    UpdateScanRooms(req: UpdateScanRoomsRequest, cb?: (error: string, rep: UpdateScanRoomsResponse) => void): Promise<UpdateScanRoomsResponse>;
-    /**
-     * 本接口(CreateApp)用于创建一个GME应用。
-     */
-    CreateApp(req: CreateAppRequest, cb?: (error: string, rep: CreateAppResponse) => void): Promise<CreateAppResponse>;
-    /**
-     * 本接口(DescribeScanResultList)用于查询语音检测结果，查询任务列表最多支持100个。
-<p style="color:red">如果在提交语音检测任务时未设置 Callback 字段，则需要通过本接口获取检测结果</p>
-     */
-    DescribeScanResultList(req: DescribeScanResultListRequest, cb?: (error: string, rep: DescribeScanResultListResponse) => void): Promise<DescribeScanResultListResponse>;
-    /**
-     * 修改用户麦克风状态。
-     */
-    ModifyUserMicStatus(req: ModifyUserMicStatusRequest, cb?: (error: string, rep: ModifyUserMicStatusResponse) => void): Promise<ModifyUserMicStatusResponse>;
-    /**
-     * 本接口用于识别涉黄等违规音频，成功会回调配置在应用的回调地址。回调示例如下：
-{"BizId":0,"FileId":"test_file_id","FileName":"test_file_name","FileUrl":"test_file_url","OpenId":"test_open_id","TimeStamp":"0000-00-00 00:00:00","Data":[{"Type":1,"Word":"xx"}]}
-Type表示过滤类型，1：色情，2：谩骂
-     */
-    VoiceFilter(req: VoiceFilterRequest, cb?: (error: string, rep: VoiceFilterResponse) => void): Promise<VoiceFilterResponse>;
-    /**
-     * 本接口(DescribeApplicationData)用于获取数据详情信息，最多可拉取最近90天的数据。
-     */
-    DescribeApplicationData(req: DescribeApplicationDataRequest, cb?: (error: string, rep: DescribeApplicationDataResponse) => void): Promise<DescribeApplicationDataResponse>;
     /**
      * 根据日期查询识别结果列表
      */
@@ -51,9 +24,53 @@ Type表示过滤类型，1：色情，2：谩骂
      */
     UpdateScanUsers(req: UpdateScanUsersRequest, cb?: (error: string, rep: UpdateScanUsersResponse) => void): Promise<UpdateScanUsersResponse>;
     /**
-     * 本接口(DescribeAppStatistics)用于获取某个GME应用的用量数据。包括实时语音，语音消息及转文本，语音分析等。最长查询周期为最近30天。
+     * 查询语音消息转文本自学习模型列表
      */
-    DescribeAppStatistics(req: DescribeAppStatisticsRequest, cb?: (error: string, rep: DescribeAppStatisticsResponse) => void): Promise<DescribeAppStatisticsResponse>;
+    GetCustomizationList(req: GetCustomizationListRequest, cb?: (error: string, rep: GetCustomizationListResponse) => void): Promise<GetCustomizationListResponse>;
+    /**
+     * 修改房间信息
+     */
+    ModifyRoomInfo(req: ModifyRoomInfoRequest, cb?: (error: string, rep: ModifyRoomInfoResponse) => void): Promise<ModifyRoomInfoResponse>;
+    /**
+     * 拉取用户在房间得进出时间
+     */
+    DescribeUserInAndOutTime(req: DescribeUserInAndOutTimeRequest, cb?: (error: string, rep: DescribeUserInAndOutTimeResponse) => void): Promise<DescribeUserInAndOutTimeResponse>;
+    /**
+     * 获取房间内用户信息
+     */
+    DescribeRoomInfo(req: DescribeRoomInfoRequest, cb?: (error: string, rep: DescribeRoomInfoResponse) => void): Promise<DescribeRoomInfoResponse>;
+    /**
+     * 更新自定义送检房间号
+     */
+    UpdateScanRooms(req: UpdateScanRoomsRequest, cb?: (error: string, rep: UpdateScanRoomsResponse) => void): Promise<UpdateScanRoomsResponse>;
+    /**
+     * 本接口用于识别涉黄等违规音频，成功会回调配置在应用的回调地址。回调示例如下：
+{"BizId":0,"FileId":"test_file_id","FileName":"test_file_name","FileUrl":"test_file_url","OpenId":"test_open_id","TimeStamp":"0000-00-00 00:00:00","Data":[{"Type":1,"Word":"xx"}]}
+Type表示过滤类型，1：色情，2：谩骂
+     */
+    VoiceFilter(req: VoiceFilterRequest, cb?: (error: string, rep: VoiceFilterResponse) => void): Promise<VoiceFilterResponse>;
+    /**
+     * 用户使用该接口可以创建语音消息转文本自学习模型，以供识别调用
+     */
+    CreateCustomization(req: CreateCustomizationRequest, cb?: (error: string, rep: CreateCustomizationResponse) => void): Promise<CreateCustomizationResponse>;
+    /**
+     * 用于创建年龄语音识别任务的接口，请求频率10次/秒。该接口目前通过白名单开放试用，如有需求，请提交工单申请。
+</br>
+<h4><b>接口功能说明：</b></h4>
+<li>支持对语音文件进行检测，判断是否为未成年人。</li>
+<li>支持批量提交检测子任务。检测子任务列表最多支持100个。</li>
+</br>
+<h4><b>音频文件限制说明：</b></h4>
+<li>音频文件大小限制：10 M</li>
+<li>音频文件时长限制：3分钟</li>
+<li>音频文件格式支持的类型：.wav、.m4a、.amr、.mp3、.aac、.wma、.ogg</li>
+</br>
+     */
+    CreateAgeDetectTask(req: CreateAgeDetectTaskRequest, cb?: (error: string, rep: CreateAgeDetectTaskResponse) => void): Promise<CreateAgeDetectTaskResponse>;
+    /**
+     * 本接口(DescribeApplicationData)用于获取数据详情信息，最多可拉取最近90天的数据。
+     */
+    DescribeApplicationData(req: DescribeApplicationDataRequest, cb?: (error: string, rep: DescribeApplicationDataResponse) => void): Promise<DescribeApplicationDataResponse>;
     /**
      * 本接口(ScanVoice)用于提交语音检测任务，检测任务列表最多支持100个。使用前请您登录[控制台 - 服务配置](https://console.cloud.tencent.com/gamegme/conf)开启语音分析服务。
 </br></br>
@@ -193,43 +210,46 @@ Type表示过滤类型，1：色情，2：谩骂
      */
     ScanVoice(req: ScanVoiceRequest, cb?: (error: string, rep: ScanVoiceResponse) => void): Promise<ScanVoiceResponse>;
     /**
-     * 修改房间信息
-     */
-    ModifyRoomInfo(req: ModifyRoomInfoRequest, cb?: (error: string, rep: ModifyRoomInfoResponse) => void): Promise<ModifyRoomInfoResponse>;
-    /**
      * 新增自定义送检用户
      */
     CreateScanUser(req: CreateScanUserRequest, cb?: (error: string, rep: CreateScanUserResponse) => void): Promise<CreateScanUserResponse>;
     /**
-     * 用于创建年龄语音识别任务的接口，请求频率10次/秒。该接口目前通过白名单开放试用，如有需求，请提交工单申请。
-</br>
-<h4><b>接口功能说明：</b></h4>
-<li>支持对语音文件进行检测，判断是否为未成年人。</li>
-<li>支持批量提交检测子任务。检测子任务列表最多支持100个。</li>
-</br>
-<h4><b>音频文件限制说明：</b></h4>
-<li>音频文件大小限制：10 M</li>
-<li>音频文件时长限制：3分钟</li>
-<li>音频文件格式支持的类型：.wav、.m4a、.amr、.mp3、.aac、.wma、.ogg</li>
-</br>
+     * 本接口(DescribeAppStatistics)用于获取某个GME应用的用量数据。包括实时语音，语音消息及转文本，语音分析等。最长查询周期为最近30天。
      */
-    CreateAgeDetectTask(req: CreateAgeDetectTaskRequest, cb?: (error: string, rep: CreateAgeDetectTaskResponse) => void): Promise<CreateAgeDetectTaskResponse>;
+    DescribeAppStatistics(req: DescribeAppStatisticsRequest, cb?: (error: string, rep: DescribeAppStatisticsResponse) => void): Promise<DescribeAppStatisticsResponse>;
     /**
-     * 本接口(ModifyAppStatus)用于修改应用总开关状态。
+     * 用户通过该接口可以更新语音消息转文本自学习模型。
      */
-    ModifyAppStatus(req: ModifyAppStatusRequest, cb?: (error: string, rep: ModifyAppStatusResponse) => void): Promise<ModifyAppStatusResponse>;
+    ModifyCustomization(req: ModifyCustomizationRequest, cb?: (error: string, rep: ModifyCustomizationResponse) => void): Promise<ModifyCustomizationResponse>;
     /**
      * 获取用户自定义送检信息
      */
     DescribeRealtimeScanConfig(req: DescribeRealtimeScanConfigRequest, cb?: (error: string, rep: DescribeRealtimeScanConfigResponse) => void): Promise<DescribeRealtimeScanConfigResponse>;
     /**
-     * 拉取用户在房间得进出时间
+     * 本接口(CreateApp)用于创建一个GME应用。
      */
-    DescribeUserInAndOutTime(req: DescribeUserInAndOutTimeRequest, cb?: (error: string, rep: DescribeUserInAndOutTimeResponse) => void): Promise<DescribeUserInAndOutTimeResponse>;
+    CreateApp(req: CreateAppRequest, cb?: (error: string, rep: CreateAppResponse) => void): Promise<CreateAppResponse>;
     /**
-     * 获取房间内用户信息
+     * 本接口(DescribeScanResultList)用于查询语音检测结果，查询任务列表最多支持100个。
+<p style="color:red">如果在提交语音检测任务时未设置 Callback 字段，则需要通过本接口获取检测结果</p>
      */
-    DescribeRoomInfo(req: DescribeRoomInfoRequest, cb?: (error: string, rep: DescribeRoomInfoResponse) => void): Promise<DescribeRoomInfoResponse>;
+    DescribeScanResultList(req: DescribeScanResultListRequest, cb?: (error: string, rep: DescribeScanResultListResponse) => void): Promise<DescribeScanResultListResponse>;
+    /**
+     * 通过该接口，用户可以修改语音消息转文本自学习模型状态，上下线自学习模型
+     */
+    ModifyCustomizationState(req: ModifyCustomizationStateRequest, cb?: (error: string, rep: ModifyCustomizationStateResponse) => void): Promise<ModifyCustomizationStateResponse>;
+    /**
+     * 修改用户麦克风状态。
+     */
+    ModifyUserMicStatus(req: ModifyUserMicStatusRequest, cb?: (error: string, rep: ModifyUserMicStatusResponse) => void): Promise<ModifyUserMicStatusResponse>;
+    /**
+     * 用户通过该接口可以删除语音消息转文本自学习模型
+     */
+    DeleteCustomization(req: DeleteCustomizationRequest, cb?: (error: string, rep: DeleteCustomizationResponse) => void): Promise<DeleteCustomizationResponse>;
+    /**
+     * 本接口(ModifyAppStatus)用于修改应用总开关状态。
+     */
+    ModifyAppStatus(req: ModifyAppStatusRequest, cb?: (error: string, rep: ModifyAppStatusResponse) => void): Promise<ModifyAppStatusResponse>;
     /**
      * 查询年龄语音识别任务结果，请求频率10次/秒。该接口目前通过白名单开放试用，如有需求，请提交工单申请。
      */

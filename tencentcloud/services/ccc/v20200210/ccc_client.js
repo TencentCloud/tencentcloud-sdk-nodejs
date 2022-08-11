@@ -177,13 +177,5 @@ class Client extends abstract_client_1.AbstractClient {
     async CreateSDKLoginToken(req, cb) {
         return this.request("CreateSDKLoginToken", req, cb);
     }
-    /**
-     * 废弃接口下架
-
-获取坐席用户列表（废弃）
-     */
-    async DescribeSeatUserList(req, cb) {
-        return this.request("DescribeSeatUserList", req, cb);
-    }
 }
 exports.Client = Client;

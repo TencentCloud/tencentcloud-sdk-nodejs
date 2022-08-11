@@ -98,19 +98,9 @@ it("tbaas.v20180416.GetBcosBlockList", async function () {
     }
 })
 
-it("tbaas.v20180416.GetTransactionDetailForUser", async function () {
+it("tbaas.v20180416.QueryChainMakerDemoBlockTransaction", async function () {
     try {
-       const data = await client.GetTransactionDetailForUser({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tbaas.v20180416.GetTransListHandler", async function () {
-    try {
-       const data = await client.GetTransListHandler({})
+       const data = await client.QueryChainMakerDemoBlockTransaction({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -178,9 +168,9 @@ it("tbaas.v20180416.CreateChaincodeAndInstallForUser", async function () {
     }
 })
 
-it("tbaas.v20180416.GetTransByHashHandler", async function () {
+it("tbaas.v20180416.QueryChainMakerDemoTransaction", async function () {
     try {
-       const data = await client.GetTransByHashHandler({})
+       const data = await client.QueryChainMakerDemoTransaction({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -211,26 +201,6 @@ it("tbaas.v20180416.ApplyUserCert", async function () {
 it("tbaas.v20180416.InvokeChainMakerContract", async function () {
     try {
        const data = await client.InvokeChainMakerContract({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tbaas.v20180416.BlockByNumberHandler", async function () {
-    try {
-       const data = await client.BlockByNumberHandler({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tbaas.v20180416.QueryChainMakerDemoTransaction", async function () {
-    try {
-       const data = await client.QueryChainMakerDemoTransaction({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -298,9 +268,9 @@ it("tbaas.v20180416.QueryChainMakerDemoContract", async function () {
     }
 })
 
-it("tbaas.v20180416.DeployDynamicContractHandler", async function () {
+it("tbaas.v20180416.GetTransactionDetailForUser", async function () {
     try {
-       const data = await client.DeployDynamicContractHandler({})
+       const data = await client.GetTransactionDetailForUser({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -321,26 +291,6 @@ it("tbaas.v20180416.SrvInvoke", async function () {
 it("tbaas.v20180416.GetBcosTransList", async function () {
     try {
        const data = await client.GetBcosTransList({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tbaas.v20180416.TransByDynamicContractHandler", async function () {
-    try {
-       const data = await client.TransByDynamicContractHandler({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tbaas.v20180416.SendTransactionHandler", async function () {
-    try {
-       const data = await client.SendTransactionHandler({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -391,26 +341,6 @@ it("tbaas.v20180416.GetBlockList", async function () {
 it("tbaas.v20180416.Query", async function () {
     try {
        const data = await client.Query({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tbaas.v20180416.QueryChainMakerDemoBlockTransaction", async function () {
-    try {
-       const data = await client.QueryChainMakerDemoBlockTransaction({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tbaas.v20180416.GetBlockListHandler", async function () {
-    try {
-       const data = await client.GetBlockListHandler({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

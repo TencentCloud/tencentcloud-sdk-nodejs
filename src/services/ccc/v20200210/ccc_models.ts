@@ -767,6 +767,16 @@ export interface ModifyStaffRequest {
    * 绑定技能组ID列表
    */
   SkillGroupIds?: Array<number>
+
+  /**
+   * 是否开启手机外呼开关
+   */
+  UseMobileCallOut?: boolean
+
+  /**
+   * 手机接听模式 0 - 关闭 | 1 - 仅离线 | 2 - 始终
+   */
+  UseMobileAccept?: number
 }
 
 /**
@@ -963,6 +973,11 @@ export interface DescribeSkillGroupInfoListRequest {
    * 查询修改时间大于等于ModifiedTime的技能组时使用
    */
   ModifiedTime?: number
+
+  /**
+   * 技能组名称
+   */
+  SkillGroupName?: string
 }
 
 /**
@@ -1790,46 +1805,6 @@ export interface StopAutoCalloutTaskResponse {
 }
 
 /**
- * DescribeSeatUserList返回参数结构体
- */
-export interface DescribeSeatUserListResponse {
-  /**
-   * 此实例的坐席用户总数
-   */
-  TotalCount: number
-
-  /**
-   * 坐席用户信息列表
-   */
-  SeatUsers: Array<SeatUserInfo>
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeSeatUserList请求参数结构体
- */
-export interface DescribeSeatUserListRequest {
-  /**
-   * 实例ID
-   */
-  InstanceId: number
-
-  /**
-   * 偏移量
-   */
-  Offset: number
-
-  /**
-   * 返回数量
-   */
-  Limit: number
-}
-
-/**
  * CreateCallOutSession请求参数结构体
  */
 export interface CreateCallOutSessionRequest {
@@ -1927,6 +1902,16 @@ export interface StaffStatusMetrics {
    * 是否预约示忙
    */
   ReserveNotReady: boolean
+
+  /**
+   * 手机接听模式： 0 - 关闭 | 1 - 仅离线 | 2- 始终
+   */
+  UseMobileAccept: number
+
+  /**
+   * 手机外呼开关
+   */
+  UseMobileCallOut: boolean
 }
 
 /**

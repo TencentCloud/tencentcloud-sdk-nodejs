@@ -96,7 +96,7 @@ import {
   DescribeEnvironmentsResponse,
   DeleteApplicationAutoscalerResponse,
   DescribeRelatedIngressesResponse,
-  TemNamespaceInfo,
+  DescribeEnvironmentRequest,
   DescribePagedLogConfigListRequest,
   TemEnvironmentStartingStatus,
   TemService,
@@ -104,6 +104,8 @@ import {
   CronHorizontalAutoscaler,
   DescribeDeployApplicationDetailResponse,
   IngressRuleValue,
+  DescribeEnvironmentResponse,
+  TemNamespaceInfo,
   CreateApplicationAutoscalerRequest,
   ConfigData,
   ResumeDeployApplicationRequest,
@@ -136,6 +138,7 @@ import {
   DescribeIngressResponse,
   WorkloadInfo,
   IngressRulePath,
+  NamespaceInfo,
   DescribeLogConfigResponse,
   ServicePortMappingItem,
   RevertDeployApplicationRequest,
@@ -321,6 +324,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyEnvironmentResponse) => void
   ): Promise<ModifyEnvironmentResponse> {
     return this.request("ModifyEnvironment", req, cb)
+  }
+
+  /**
+   * 获取环境基础信息
+   */
+  async DescribeEnvironment(
+    req: DescribeEnvironmentRequest,
+    cb?: (error: string, rep: DescribeEnvironmentResponse) => void
+  ): Promise<DescribeEnvironmentResponse> {
+    return this.request("DescribeEnvironment", req, cb)
   }
 
   /**

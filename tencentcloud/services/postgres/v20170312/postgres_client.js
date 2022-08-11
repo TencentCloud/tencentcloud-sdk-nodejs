@@ -76,7 +76,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyDBInstanceParameters", req, cb);
     }
     /**
-     * 本接口 (DestroyDBInstance) 用于彻底下线指定DBInstanceId对应的实例，下线后实例数据将彻底删除，无法找回，只能下线隔离中的实例。
+     * 本接口 (DestroyDBInstance) 用于彻底销毁指定DBInstanceId对应的实例，销毁后实例数据将彻底删除，无法找回，只能销毁隔离中的实例。
      */
     async DestroyDBInstance(req, cb) {
         return this.request("DestroyDBInstance", req, cb);

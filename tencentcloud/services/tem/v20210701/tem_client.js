@@ -127,6 +127,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyEnvironment", req, cb);
     }
     /**
+     * 获取环境基础信息
+     */
+    async DescribeEnvironment(req, cb) {
+        return this.request("DescribeEnvironment", req, cb);
+    }
+    /**
      * 查询日志收集配置详情
      */
     async DescribeLogConfig(req, cb) {

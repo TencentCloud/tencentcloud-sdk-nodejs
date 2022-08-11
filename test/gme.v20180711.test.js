@@ -28,66 +28,6 @@ it("gme.v20180711.DescribeFilterResult", async function () {
     }
 })
 
-it("gme.v20180711.UpdateScanRooms", async function () {
-    try {
-       const data = await client.UpdateScanRooms({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("gme.v20180711.CreateApp", async function () {
-    try {
-       const data = await client.CreateApp({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("gme.v20180711.DescribeScanResultList", async function () {
-    try {
-       const data = await client.DescribeScanResultList({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("gme.v20180711.ModifyUserMicStatus", async function () {
-    try {
-       const data = await client.ModifyUserMicStatus({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("gme.v20180711.VoiceFilter", async function () {
-    try {
-       const data = await client.VoiceFilter({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("gme.v20180711.DescribeApplicationData", async function () {
-    try {
-       const data = await client.DescribeApplicationData({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("gme.v20180711.DescribeFilterResultList", async function () {
     try {
        const data = await client.DescribeFilterResultList({})
@@ -118,19 +58,9 @@ it("gme.v20180711.UpdateScanUsers", async function () {
     }
 })
 
-it("gme.v20180711.DescribeAppStatistics", async function () {
+it("gme.v20180711.GetCustomizationList", async function () {
     try {
-       const data = await client.DescribeAppStatistics({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("gme.v20180711.ScanVoice", async function () {
-    try {
-       const data = await client.ScanVoice({})
+       const data = await client.GetCustomizationList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -141,46 +71,6 @@ it("gme.v20180711.ScanVoice", async function () {
 it("gme.v20180711.ModifyRoomInfo", async function () {
     try {
        const data = await client.ModifyRoomInfo({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("gme.v20180711.CreateScanUser", async function () {
-    try {
-       const data = await client.CreateScanUser({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("gme.v20180711.CreateAgeDetectTask", async function () {
-    try {
-       const data = await client.CreateAgeDetectTask({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("gme.v20180711.ModifyAppStatus", async function () {
-    try {
-       const data = await client.ModifyAppStatus({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("gme.v20180711.DescribeRealtimeScanConfig", async function () {
-    try {
-       const data = await client.DescribeRealtimeScanConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -201,6 +91,166 @@ it("gme.v20180711.DescribeUserInAndOutTime", async function () {
 it("gme.v20180711.DescribeRoomInfo", async function () {
     try {
        const data = await client.DescribeRoomInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gme.v20180711.UpdateScanRooms", async function () {
+    try {
+       const data = await client.UpdateScanRooms({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gme.v20180711.VoiceFilter", async function () {
+    try {
+       const data = await client.VoiceFilter({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gme.v20180711.CreateCustomization", async function () {
+    try {
+       const data = await client.CreateCustomization({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gme.v20180711.CreateAgeDetectTask", async function () {
+    try {
+       const data = await client.CreateAgeDetectTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gme.v20180711.DescribeApplicationData", async function () {
+    try {
+       const data = await client.DescribeApplicationData({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gme.v20180711.ScanVoice", async function () {
+    try {
+       const data = await client.ScanVoice({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gme.v20180711.CreateScanUser", async function () {
+    try {
+       const data = await client.CreateScanUser({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gme.v20180711.DescribeAppStatistics", async function () {
+    try {
+       const data = await client.DescribeAppStatistics({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gme.v20180711.ModifyCustomization", async function () {
+    try {
+       const data = await client.ModifyCustomization({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gme.v20180711.DescribeRealtimeScanConfig", async function () {
+    try {
+       const data = await client.DescribeRealtimeScanConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gme.v20180711.CreateApp", async function () {
+    try {
+       const data = await client.CreateApp({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gme.v20180711.DescribeScanResultList", async function () {
+    try {
+       const data = await client.DescribeScanResultList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gme.v20180711.ModifyCustomizationState", async function () {
+    try {
+       const data = await client.ModifyCustomizationState({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gme.v20180711.ModifyUserMicStatus", async function () {
+    try {
+       const data = await client.ModifyUserMicStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gme.v20180711.DeleteCustomization", async function () {
+    try {
+       const data = await client.DeleteCustomization({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gme.v20180711.ModifyAppStatus", async function () {
+    try {
+       const data = await client.ModifyAppStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

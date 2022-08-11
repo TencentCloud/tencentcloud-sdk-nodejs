@@ -2392,6 +2392,21 @@ export interface DescribeInstanceAccountRequest {
 }
 
 /**
+ * SwitchProxy请求参数结构体
+ */
+export interface SwitchProxyRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+
+  /**
+   * 实例ProxyID
+   */
+  ProxyID?: string
+}
+
+/**
  * DescribeInstanceParamRecords请求参数结构体
  */
 export interface DescribeInstanceParamRecordsRequest {
@@ -3194,6 +3209,16 @@ export interface TendisNodes {
    * 节点角色
    */
   NodeRole: string
+}
+
+/**
+ * SwitchProxy返回参数结构体
+ */
+export interface SwitchProxyResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

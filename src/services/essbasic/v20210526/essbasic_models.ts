@@ -1606,7 +1606,7 @@ export interface ApproverRestriction {
  */
 export interface ChannelCreateFlowByFilesRequest {
   /**
-   * 渠道应用相关信息
+   * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
    */
   Agent?: Agent
 
@@ -1664,6 +1664,11 @@ export interface ChannelCreateFlowByFilesRequest {
    * 渠道的业务信息，最大长度1000个字符。发起自动签署时，需设置对应自动签署场景，目前仅支持场景：处方单-E_PRESCRIPTION_AUTO_SIGN
    */
   CustomerData?: string
+
+  /**
+   * 发起方企业的签署人进行签署操作是否需要企业内部审批。 若设置为true,审核结果需通过接口 ChannelCreateFlowSignReview 通知电子签，审核通过后，发起方企业签署人方可进行签署操作，否则会阻塞其签署操作。  注：企业可以通过此功能与企业内部的审批流程进行关联，支持手动、静默签署合同。
+   */
+  NeedSignReview?: boolean
 
   /**
    * 操作者的信息
@@ -2019,6 +2024,14 @@ export interface FlowInfo {
    * 被抄送人的信息列表，抄送功能暂不开放
    */
   CcInfos?: Array<CcInfo>
+
+  /**
+      * 发起方企业的签署人进行签署操作是否需要企业内部审批。
+若设置为true,审核结果需通过接口 ChannelCreateFlowSignReview 通知电子签，审核通过后，发起方企业签署人方可进行签署操作，否则会阻塞其签署操作。
+
+注：企业可以通过此功能与企业内部的审批流程进行关联，支持手动、静默签署合同。
+      */
+  NeedSignReview?: boolean
 }
 
 /**

@@ -143,6 +143,12 @@ InstanceType 指定单一实例类型，通过设置 InstanceTypes可以指定�
    * CAM角色名称。可通过DescribeRoleList接口返回值中的roleName获取。
    */
   CamRoleName?: string
+
+  /**
+      * 高性能计算集群ID。<br>
+注意：此字段默认为空。
+      */
+  HpcClusterId?: string
 }
 
 /**
@@ -575,6 +581,12 @@ export interface LaunchConfiguration {
 <br><li>AUTOMATIC：自动选择当前可用区下可用的云盘类型
       */
   DiskTypePolicy: string
+
+  /**
+      * 高性能计算集群ID。<br>
+注意：此字段默认为空。
+      */
+  HpcClusterId: string
 }
 
 /**
@@ -1349,6 +1361,12 @@ export interface CreateLaunchConfigurationRequest {
 <br><li>AUTOMATIC：自动选择当前可用的云盘类型
       */
   DiskTypePolicy?: string
+
+  /**
+      * 高性能计算集群ID。<br>
+注意：此字段默认为空。
+      */
+  HpcClusterId?: string
 }
 
 /**

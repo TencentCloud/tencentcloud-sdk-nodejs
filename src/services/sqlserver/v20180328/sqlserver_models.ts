@@ -133,6 +133,16 @@ export interface CreateDBInstancesRequest {
    * 新建实例绑定的标签集合
    */
   ResourceTags?: Array<ResourceTag>
+
+  /**
+   * 系统字符集排序规则，默认：Chinese_PRC_CI_AS
+   */
+  Collation?: string
+
+  /**
+   * 系统时区，默认：China Standard Time
+   */
+  TimeZone?: string
 }
 
 /**
@@ -2626,6 +2636,16 @@ export interface CreateReadOnlyDBInstancesRequest {
    * 新建实例绑定的标签集合
    */
   ResourceTags?: Array<ResourceTag>
+
+  /**
+   * 系统字符集排序规则，默认：Chinese_PRC_CI_AS
+   */
+  Collation?: string
+
+  /**
+   * 系统时区，默认：China Standard Time
+   */
+  TimeZone?: string
 }
 
 /**
@@ -4038,6 +4058,16 @@ export interface DBInstance {
    * 外网端口号
    */
   TgwWanVPort: number
+
+  /**
+   * 系统字符集排序规则，默认：Chinese_PRC_CI_AS
+   */
+  Collation: string
+
+  /**
+   * 系统时区，默认：China Standard Time
+   */
+  TimeZone: string
 }
 
 /**
@@ -4278,6 +4308,16 @@ export interface CreateBasicDBInstancesRequest {
    * 新建实例绑定的标签集合
    */
   ResourceTags?: Array<ResourceTag>
+
+  /**
+   * 系统字符集排序规则，默认：Chinese_PRC_CI_AS
+   */
+  Collation?: string
+
+  /**
+   * 系统时区，默认：China Standard Time
+   */
+  TimeZone?: string
 }
 
 /**

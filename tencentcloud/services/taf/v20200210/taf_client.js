@@ -28,20 +28,6 @@ class Client extends abstract_client_1.AbstractClient {
         super("taf.tencentcloudapi.com", "2020-02-10", clientConfig);
     }
     /**
-     * 流量反欺诈-流量验准
-     */
-    async RecognizeTargetAudience(req, cb) {
-        return this.request("RecognizeTargetAudience", req, cb);
-    }
-    /**
-     * 该服务已不再对外提供能力
-
-筛选敏感易骚扰人群
-     */
-    async RecognizeEffectiveFlow(req, cb) {
-        return this.request("RecognizeEffectiveFlow", req, cb);
-    }
-    /**
      * 流量反欺诈-流量验准定制版
      */
     async RecognizeCustomizedAudience(req, cb) {
@@ -58,6 +44,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async RecognizePreciseTargetAudience(req, cb) {
         return this.request("RecognizePreciseTargetAudience", req, cb);
+    }
+    /**
+     * 流量反欺诈-流量验准
+     */
+    async RecognizeTargetAudience(req, cb) {
+        return this.request("RecognizeTargetAudience", req, cb);
     }
     /**
      * 流量安选产品，短信发送接口

@@ -218,9 +218,9 @@ it("vod.v20180717.CreateAdaptiveDynamicStreamingTemplate", async function () {
     }
 })
 
-it("vod.v20180717.DescribeDrmDataKey", async function () {
+it("vod.v20180717.DescribeSampleSnapshotTemplates", async function () {
     try {
-       const data = await client.DescribeDrmDataKey({})
+       const data = await client.DescribeSampleSnapshotTemplates({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -368,9 +368,9 @@ it("vod.v20180717.ExecuteFunction", async function () {
     }
 })
 
-it("vod.v20180717.DescribeTranscodeTemplates", async function () {
+it("vod.v20180717.DeleteVodDomain", async function () {
     try {
-       const data = await client.DescribeTranscodeTemplates({})
+       const data = await client.DeleteVodDomain({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -381,6 +381,16 @@ it("vod.v20180717.DescribeTranscodeTemplates", async function () {
 it("vod.v20180717.DescribeMediaProcessUsageData", async function () {
     try {
        const data = await client.DescribeMediaProcessUsageData({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vod.v20180717.DescribeTranscodeTemplates", async function () {
+    try {
+       const data = await client.DescribeTranscodeTemplates({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -528,9 +538,9 @@ it("vod.v20180717.DescribeProcedureTemplates", async function () {
     }
 })
 
-it("vod.v20180717.DeleteVodDomain", async function () {
+it("vod.v20180717.DescribeClientUploadAccelerationUsageData", async function () {
     try {
-       const data = await client.DeleteVodDomain({})
+       const data = await client.DescribeClientUploadAccelerationUsageData({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -958,9 +968,9 @@ it("vod.v20180717.DescribeAdaptiveDynamicStreamingTemplates", async function () 
     }
 })
 
-it("vod.v20180717.DescribeSampleSnapshotTemplates", async function () {
+it("vod.v20180717.DescribeDrmDataKey", async function () {
     try {
-       const data = await client.DescribeSampleSnapshotTemplates({})
+       const data = await client.DescribeDrmDataKey({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

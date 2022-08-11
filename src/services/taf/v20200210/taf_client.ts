@@ -18,32 +18,27 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  OutputRecognizeEffectiveFlowValue,
-  OutputKolData,
   InputKolBspData,
-  RecognizeEffectiveFlowRequest,
+  OutputSendTrafficSecuritySmsMsg,
+  DetectFraudKOLRequest,
+  RecognizeCustomizedAudienceRequest,
+  RecognizeTargetAudienceRequest,
+  RecognizeTargetAudienceResponse,
   OutputRecognizeTargetAudienceValue,
   SendTrafficSecuritySmsMessageRequest,
+  RecognizePreciseTargetAudienceResponse,
+  OutputRecognizeTargetAudience,
   DetectFraudKOLResponse,
   RecognizeCustomizedAudienceResponse,
   OutputKolValue,
-  RecognizeTargetAudienceRequest,
-  Device,
-  OutputSendTrafficSecuritySmsMsg,
-  RecognizeEffectiveFlowResponse,
-  SendTrafficSecuritySmsMessageResponse,
-  DetectFraudKOLRequest,
-  RecognizeCustomizedAudienceRequest,
-  RecognizeTargetAudienceResponse,
-  OutputRecognizeEffectiveFlow,
   InputRecognizeTargetAudience,
+  OutputKolData,
+  Device,
+  SendTrafficSecuritySmsMessageResponse,
+  InputSendTrafficSecuritySmsMsg,
   RecognizePreciseTargetAudienceRequest,
   InputKolDataList,
   InputBusinessEncryptData,
-  InputRecognizeEffectiveFlow,
-  RecognizePreciseTargetAudienceResponse,
-  OutputRecognizeTargetAudience,
-  InputSendTrafficSecuritySmsMsg,
 } from "./taf_models"
 
 /**
@@ -53,28 +48,6 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("taf.tencentcloudapi.com", "2020-02-10", clientConfig)
-  }
-
-  /**
-   * 流量反欺诈-流量验准
-   */
-  async RecognizeTargetAudience(
-    req: RecognizeTargetAudienceRequest,
-    cb?: (error: string, rep: RecognizeTargetAudienceResponse) => void
-  ): Promise<RecognizeTargetAudienceResponse> {
-    return this.request("RecognizeTargetAudience", req, cb)
-  }
-
-  /**
-     * 该服务已不再对外提供能力
-
-筛选敏感易骚扰人群
-     */
-  async RecognizeEffectiveFlow(
-    req: RecognizeEffectiveFlowRequest,
-    cb?: (error: string, rep: RecognizeEffectiveFlowResponse) => void
-  ): Promise<RecognizeEffectiveFlowResponse> {
-    return this.request("RecognizeEffectiveFlow", req, cb)
   }
 
   /**
@@ -105,6 +78,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RecognizePreciseTargetAudienceResponse) => void
   ): Promise<RecognizePreciseTargetAudienceResponse> {
     return this.request("RecognizePreciseTargetAudience", req, cb)
+  }
+
+  /**
+   * 流量反欺诈-流量验准
+   */
+  async RecognizeTargetAudience(
+    req: RecognizeTargetAudienceRequest,
+    cb?: (error: string, rep: RecognizeTargetAudienceResponse) => void
+  ): Promise<RecognizeTargetAudienceResponse> {
+    return this.request("RecognizeTargetAudience", req, cb)
   }
 
   /**
