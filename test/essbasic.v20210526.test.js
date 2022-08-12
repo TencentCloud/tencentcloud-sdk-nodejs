@@ -18,6 +18,16 @@ const client = new tencentcloud.essbasic.v20210526.Client({
 })
 describe("essbasic.v20210526.test.js", function () {
 
+it("essbasic.v20210526.UploadFiles", async function () {
+    try {
+       const data = await client.UploadFiles({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("essbasic.v20210526.CreateFlowsByTemplates", async function () {
     try {
        const data = await client.CreateFlowsByTemplates({})
@@ -38,9 +48,9 @@ it("essbasic.v20210526.DescribeResourceUrlsByFlows", async function () {
     }
 })
 
-it("essbasic.v20210526.GetDownloadFlowUrl", async function () {
+it("essbasic.v20210526.ChannelCreateFlowSignReview", async function () {
     try {
-       const data = await client.GetDownloadFlowUrl({})
+       const data = await client.ChannelCreateFlowSignReview({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -208,9 +218,9 @@ it("essbasic.v20210526.DescribeFlowDetailInfo", async function () {
     }
 })
 
-it("essbasic.v20210526.UploadFiles", async function () {
+it("essbasic.v20210526.GetDownloadFlowUrl", async function () {
     try {
-       const data = await client.UploadFiles({})
+       const data = await client.GetDownloadFlowUrl({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

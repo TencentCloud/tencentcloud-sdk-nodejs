@@ -58,6 +58,16 @@ it("tem.v20210701.ModifyIngress", async function () {
     }
 })
 
+it("tem.v20210701.EnableApplicationAutoscaler", async function () {
+    try {
+       const data = await client.EnableApplicationAutoscaler({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tem.v20210701.ModifyApplicationReplicas", async function () {
     try {
        const data = await client.ModifyApplicationReplicas({})
@@ -321,6 +331,16 @@ it("tem.v20210701.GenerateApplicationPackageDownloadUrl", async function () {
 it("tem.v20210701.CreateEnvironment", async function () {
     try {
        const data = await client.CreateEnvironment({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tem.v20210701.DisableApplicationAutoscaler", async function () {
+    try {
+       const data = await client.DisableApplicationAutoscaler({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

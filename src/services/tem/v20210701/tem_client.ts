@@ -28,6 +28,7 @@ import {
   ResumeDeployApplicationResponse,
   StorageConf,
   DescribeApplicationPodsRequest,
+  IngressTls,
   DeployServicePodDetail,
   LogOutputConf,
   DeleteIngressResponse,
@@ -54,9 +55,10 @@ import {
   DescribeLogConfigRequest,
   TemDeployApplicationDetailInfo,
   DescribeEnvironmentStatusResponse,
-  IngressTls,
+  DeployStrategyConf,
   DescribeApplicationPodsResponse,
   DescribeConfigDataListRequest,
+  EnableApplicationAutoscalerResponse,
   ServicePage,
   TemServiceVersionInfo,
   ServicePortMapping,
@@ -78,6 +80,7 @@ import {
   ModifyApplicationInfoResponse,
   RestartApplicationRequest,
   DestroyEnvironmentResponse,
+  DisableApplicationAutoscalerResponse,
   DescribeIngressRequest,
   StopApplicationResponse,
   DeployApplicationResponse,
@@ -90,6 +93,7 @@ import {
   DescribeApplicationsStatusResponse,
   DescribeDeployApplicationDetailRequest,
   DeleteIngressRequest,
+  DisableApplicationAutoscalerRequest,
   DescribeRelatedIngressesRequest,
   CosToken,
   GenerateApplicationPackageDownloadUrlRequest,
@@ -134,7 +138,6 @@ import {
   ModifyEnvironmentRequest,
   GenerateApplicationPackageDownloadUrlResponse,
   IngressRuleBackend,
-  DeployStrategyConf,
   DescribeIngressResponse,
   WorkloadInfo,
   IngressRulePath,
@@ -145,11 +148,12 @@ import {
   CreateApplicationResponse,
   HorizontalAutoscaler,
   PortMapping,
+  LogConfig,
   ModifyEnvironmentResponse,
   ModifyApplicationReplicasRequest,
   ModifyLogConfigRequest,
   DestroyLogConfigRequest,
-  LogConfig,
+  EnableApplicationAutoscalerRequest,
   EksService,
   Pair,
 } from "./tem_models"
@@ -201,6 +205,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyIngressResponse) => void
   ): Promise<ModifyIngressResponse> {
     return this.request("ModifyIngress", req, cb)
+  }
+
+  /**
+   * 启用应用弹性策略组合
+   */
+  async EnableApplicationAutoscaler(
+    req: EnableApplicationAutoscalerRequest,
+    cb?: (error: string, rep: EnableApplicationAutoscalerResponse) => void
+  ): Promise<EnableApplicationAutoscalerResponse> {
+    return this.request("EnableApplicationAutoscaler", req, cb)
   }
 
   /**
@@ -474,6 +488,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateEnvironmentResponse) => void
   ): Promise<CreateEnvironmentResponse> {
     return this.request("CreateEnvironment", req, cb)
+  }
+
+  /**
+   * 关闭应用弹性策略组合
+   */
+  async DisableApplicationAutoscaler(
+    req: DisableApplicationAutoscalerRequest,
+    cb?: (error: string, rep: DisableApplicationAutoscalerResponse) => void
+  ): Promise<DisableApplicationAutoscalerResponse> {
+    return this.request("DisableApplicationAutoscaler", req, cb)
   }
 
   /**

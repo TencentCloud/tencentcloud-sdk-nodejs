@@ -24,6 +24,7 @@ import {
   ChannelCreateConvertTaskApiResponse,
   OperateChannelTemplateRequest,
   TemplateInfo,
+  UploadFilesRequest,
   GetDownloadFlowUrlResponse,
   DescribeResourceUrlsByFlowsResponse,
   ChannelCreateMultiFlowSignQRCodeResponse,
@@ -36,7 +37,7 @@ import {
   AuthFailMessage,
   DescribeFlowDetailInfoRequest,
   ChannelGetTaskResultApiResponse,
-  UploadFilesRequest,
+  ProxyOrganizationOperator,
   ChannelGetTaskResultApiRequest,
   UploadFile,
   Component,
@@ -45,7 +46,7 @@ import {
   CreateConsoleLoginUrlRequest,
   OrganizationInfo,
   CreateFlowsByTemplatesResponse,
-  ProxyOrganizationOperator,
+  ChannelCreateFlowSignReviewRequest,
   PrepareFlowsRequest,
   SyncProxyOrganizationOperatorsResponse,
   CreateSealByImageResponse,
@@ -72,6 +73,7 @@ import {
   ChannelCreateFlowByFilesRequest,
   ChannelCreateFlowByFilesResponse,
   UploadFilesResponse,
+  ChannelCreateFlowSignReviewResponse,
   Agent,
   FormField,
   UserInfo,
@@ -91,6 +93,17 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("essbasic.tencentcloudapi.com", "2021-05-26", clientConfig)
+  }
+
+  /**
+     * 此接口（UploadFiles）用于文件上传。
+调用时需要设置Domain 为 file.ess.tencent.cn
+     */
+  async UploadFiles(
+    req: UploadFilesRequest,
+    cb?: (error: string, rep: UploadFilesResponse) => void
+  ): Promise<UploadFilesResponse> {
+    return this.request("UploadFiles", req, cb)
   }
 
   /**
@@ -115,15 +128,16 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 此接口（GetDownloadFlowUrl）用于创建电子签批量下载地址，让合作企业进入控制台直接下载，支持客户合同（流程）按照自定义文件夹形式 分类下载。
-当前接口限制最多合同（流程）50个.
+     * 提交企业签署流程审批结果
 
+在通过接口(CreateFlowsByTemplates 或者ChannelCreateFlowByFiles)创建签署流程时，若指定了参数 NeedSignReview 为true,则可以调用此接口提交企业内部签署审批结果。
+若签署流程状态正常，且本企业存在签署方未签署，同一签署流程可以多次提交签署审批结果，签署时的最后一个“审批结果”有效。
      */
-  async GetDownloadFlowUrl(
-    req: GetDownloadFlowUrlRequest,
-    cb?: (error: string, rep: GetDownloadFlowUrlResponse) => void
-  ): Promise<GetDownloadFlowUrlResponse> {
-    return this.request("GetDownloadFlowUrl", req, cb)
+  async ChannelCreateFlowSignReview(
+    req: ChannelCreateFlowSignReviewRequest,
+    cb?: (error: string, rep: ChannelCreateFlowSignReviewResponse) => void
+  ): Promise<ChannelCreateFlowSignReviewResponse> {
+    return this.request("ChannelCreateFlowSignReview", req, cb)
   }
 
   /**
@@ -297,13 +311,14 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 此接口（UploadFiles）用于文件上传。
-调用时需要设置Domain 为 file.ess.tencent.cn
+     * 此接口（GetDownloadFlowUrl）用于创建电子签批量下载地址，让合作企业进入控制台直接下载，支持客户合同（流程）按照自定义文件夹形式 分类下载。
+当前接口限制最多合同（流程）50个.
+
      */
-  async UploadFiles(
-    req: UploadFilesRequest,
-    cb?: (error: string, rep: UploadFilesResponse) => void
-  ): Promise<UploadFilesResponse> {
-    return this.request("UploadFiles", req, cb)
+  async GetDownloadFlowUrl(
+    req: GetDownloadFlowUrlRequest,
+    cb?: (error: string, rep: GetDownloadFlowUrlResponse) => void
+  ): Promise<GetDownloadFlowUrlResponse> {
+    return this.request("GetDownloadFlowUrl", req, cb)
   }
 }

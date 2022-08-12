@@ -1,12 +1,17 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { SyncProxyOrganizationResponse, ChannelCreateConvertTaskApiResponse, OperateChannelTemplateRequest, GetDownloadFlowUrlResponse, DescribeResourceUrlsByFlowsResponse, ChannelCreateMultiFlowSignQRCodeResponse, DescribeTemplatesResponse, OperateChannelTemplateResponse, CreateSignUrlsResponse, CreateSignUrlsRequest, ChannelCreateMultiFlowSignQRCodeRequest, DescribeFlowDetailInfoRequest, ChannelGetTaskResultApiResponse, UploadFilesRequest, ChannelGetTaskResultApiRequest, GetDownloadFlowUrlRequest, CreateConsoleLoginUrlRequest, CreateFlowsByTemplatesResponse, PrepareFlowsRequest, SyncProxyOrganizationOperatorsResponse, CreateSealByImageResponse, DescribeTemplatesRequest, SyncProxyOrganizationOperatorsRequest, CreateConsoleLoginUrlResponse, CreateFlowsByTemplatesRequest, SyncProxyOrganizationRequest, CreateSealByImageRequest, DescribeUsageResponse, ChannelCreateBatchCancelFlowUrlResponse, DescribeResourceUrlsByFlowsRequest, ChannelCancelMultiFlowSignQRCodeRequest, PrepareFlowsResponse, DescribeUsageRequest, ChannelCreateBatchCancelFlowUrlRequest, ChannelCreateFlowByFilesRequest, ChannelCreateFlowByFilesResponse, UploadFilesResponse, ChannelCreateConvertTaskApiRequest, ChannelCancelMultiFlowSignQRCodeResponse, DescribeFlowDetailInfoResponse } from "./essbasic_models";
+import { SyncProxyOrganizationResponse, ChannelCreateConvertTaskApiResponse, OperateChannelTemplateRequest, UploadFilesRequest, GetDownloadFlowUrlResponse, DescribeResourceUrlsByFlowsResponse, ChannelCreateMultiFlowSignQRCodeResponse, DescribeTemplatesResponse, OperateChannelTemplateResponse, CreateSignUrlsResponse, CreateSignUrlsRequest, ChannelCreateMultiFlowSignQRCodeRequest, DescribeFlowDetailInfoRequest, ChannelGetTaskResultApiResponse, ChannelGetTaskResultApiRequest, GetDownloadFlowUrlRequest, CreateConsoleLoginUrlRequest, CreateFlowsByTemplatesResponse, ChannelCreateFlowSignReviewRequest, PrepareFlowsRequest, SyncProxyOrganizationOperatorsResponse, CreateSealByImageResponse, DescribeTemplatesRequest, SyncProxyOrganizationOperatorsRequest, CreateConsoleLoginUrlResponse, CreateFlowsByTemplatesRequest, SyncProxyOrganizationRequest, CreateSealByImageRequest, DescribeUsageResponse, ChannelCreateBatchCancelFlowUrlResponse, DescribeResourceUrlsByFlowsRequest, ChannelCancelMultiFlowSignQRCodeRequest, PrepareFlowsResponse, DescribeUsageRequest, ChannelCreateBatchCancelFlowUrlRequest, ChannelCreateFlowByFilesRequest, ChannelCreateFlowByFilesResponse, UploadFilesResponse, ChannelCreateFlowSignReviewResponse, ChannelCreateConvertTaskApiRequest, ChannelCancelMultiFlowSignQRCodeResponse, DescribeFlowDetailInfoResponse } from "./essbasic_models";
 /**
  * essbasic client
  * @class
  */
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
+    /**
+     * 此接口（UploadFiles）用于文件上传。
+调用时需要设置Domain 为 file.ess.tencent.cn
+     */
+    UploadFiles(req: UploadFilesRequest, cb?: (error: string, rep: UploadFilesResponse) => void): Promise<UploadFilesResponse>;
     /**
      * 接口（CreateFlowsByTemplates）用于使用多个模板批量创建签署流程。当前可批量发起合同（签署流程）数量最大为20个。
 
@@ -17,11 +22,12 @@ export declare class Client extends AbstractClient {
      */
     DescribeResourceUrlsByFlows(req: DescribeResourceUrlsByFlowsRequest, cb?: (error: string, rep: DescribeResourceUrlsByFlowsResponse) => void): Promise<DescribeResourceUrlsByFlowsResponse>;
     /**
-     * 此接口（GetDownloadFlowUrl）用于创建电子签批量下载地址，让合作企业进入控制台直接下载，支持客户合同（流程）按照自定义文件夹形式 分类下载。
-当前接口限制最多合同（流程）50个.
+     * 提交企业签署流程审批结果
 
+在通过接口(CreateFlowsByTemplates 或者ChannelCreateFlowByFiles)创建签署流程时，若指定了参数 NeedSignReview 为true,则可以调用此接口提交企业内部签署审批结果。
+若签署流程状态正常，且本企业存在签署方未签署，同一签署流程可以多次提交签署审批结果，签署时的最后一个“审批结果”有效。
      */
-    GetDownloadFlowUrl(req: GetDownloadFlowUrlRequest, cb?: (error: string, rep: GetDownloadFlowUrlResponse) => void): Promise<GetDownloadFlowUrlResponse>;
+    ChannelCreateFlowSignReview(req: ChannelCreateFlowSignReviewRequest, cb?: (error: string, rep: ChannelCreateFlowSignReviewResponse) => void): Promise<ChannelCreateFlowSignReviewResponse>;
     /**
      * 通过此接口（DescribeTemplates）查询该企业在电子签渠道版中配置的有效模板列表
      */
@@ -97,8 +103,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeFlowDetailInfo(req: DescribeFlowDetailInfoRequest, cb?: (error: string, rep: DescribeFlowDetailInfoResponse) => void): Promise<DescribeFlowDetailInfoResponse>;
     /**
-     * 此接口（UploadFiles）用于文件上传。
-调用时需要设置Domain 为 file.ess.tencent.cn
+     * 此接口（GetDownloadFlowUrl）用于创建电子签批量下载地址，让合作企业进入控制台直接下载，支持客户合同（流程）按照自定义文件夹形式 分类下载。
+当前接口限制最多合同（流程）50个.
+
      */
-    UploadFiles(req: UploadFilesRequest, cb?: (error: string, rep: UploadFilesResponse) => void): Promise<UploadFilesResponse>;
+    GetDownloadFlowUrl(req: GetDownloadFlowUrlRequest, cb?: (error: string, rep: GetDownloadFlowUrlResponse) => void): Promise<GetDownloadFlowUrlResponse>;
 }

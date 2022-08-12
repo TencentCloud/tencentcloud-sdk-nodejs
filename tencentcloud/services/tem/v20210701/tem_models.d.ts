@@ -202,6 +202,23 @@ export interface DescribeApplicationPodsRequest {
     SourceChannel?: number;
 }
 /**
+ * ingress tls 配置
+ */
+export interface IngressTls {
+    /**
+      * host 数组, 空数组表示全部域名的默认证书
+      */
+    Hosts: Array<string>;
+    /**
+      * secret name，如使用证书，则填空字符串
+      */
+    SecretName: string;
+    /**
+      * SSL Certificate Id
+      */
+    CertificateId?: string;
+}
+/**
  * 分批发布单批次详情
  */
 export interface DeployServicePodDetail {
@@ -847,21 +864,33 @@ export interface DescribeEnvironmentStatusResponse {
     RequestId?: string;
 }
 /**
- * ingress tls 配置
+ * 分批发布策略配置
  */
-export interface IngressTls {
+export interface DeployStrategyConf {
     /**
-      * host 数组, 空数组表示全部域名的默认证书
+      * 总分批数
       */
-    Hosts: Array<string>;
+    TotalBatchCount?: number;
     /**
-      * secret name，如使用证书，则填空字符串
+      * beta分批实例数
       */
-    SecretName: string;
+    BetaBatchNum?: number;
     /**
-      * SSL Certificate Id
+      * 分批策略：0-全自动，1-全手动，2-beta分批，beta批一定是手动的，3-首次发布
       */
-    CertificateId?: string;
+    DeployStrategyType?: number;
+    /**
+      * 每批暂停间隔
+      */
+    BatchInterval?: number;
+    /**
+      * 最小可用实例数
+      */
+    MinAvailable?: number;
+    /**
+      * 是否强制发布
+      */
+    Force?: boolean;
 }
 /**
  * DescribeApplicationPods返回参数结构体
@@ -896,6 +925,20 @@ export interface DescribeConfigDataListRequest {
       * 分页 limit
       */
     Limit?: number;
+}
+/**
+ * EnableApplicationAutoscaler返回参数结构体
+ */
+export interface EnableApplicationAutoscalerResponse {
+    /**
+      * 是否成功
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result: boolean;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 服务分页
@@ -1676,6 +1719,20 @@ export interface DestroyEnvironmentResponse {
     RequestId?: string;
 }
 /**
+ * DisableApplicationAutoscaler返回参数结构体
+ */
+export interface DisableApplicationAutoscalerResponse {
+    /**
+      * 是否成功
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result: boolean;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeIngress请求参数结构体
  */
 export interface DescribeIngressRequest {
@@ -1874,6 +1931,27 @@ export interface DeleteIngressRequest {
       * 来源渠道
       */
     SourceChannel?: number;
+}
+/**
+ * DisableApplicationAutoscaler请求参数结构体
+ */
+export interface DisableApplicationAutoscalerRequest {
+    /**
+      * 服务id
+      */
+    ApplicationId: string;
+    /**
+      * 环境ID
+      */
+    EnvironmentId: string;
+    /**
+      * 来源渠道
+      */
+    SourceChannel?: number;
+    /**
+      * 弹性伸缩策略ID
+      */
+    AutoscalerId?: string;
 }
 /**
  * DescribeRelatedIngresses请求参数结构体
@@ -2785,14 +2863,19 @@ export interface DeployApplicationRequest {
       */
     OsFlavour?: string;
     /**
-      * 是否开启prometheus 业务指标监控
+      * metrics业务指标监控配置
       */
     EnablePrometheusConf?: EnablePrometheusConf;
     /**
-      * 1：开始apm采集（skywalking）；
+      * 1：开始自动apm采集（skywalking）；
 0：关闭apm采集；
       */
     EnableTracing?: number;
+    /**
+      * 1：开始自动metrics采集（open-telemetry）；
+0：关闭metrics采集；
+      */
+    EnableMetrics?: number;
 }
 /**
  * DescribeApplicationAutoscalerList返回参数结构体
@@ -3104,35 +3187,6 @@ export interface IngressRuleBackend {
     ServicePort: number;
 }
 /**
- * 分批发布策略配置
- */
-export interface DeployStrategyConf {
-    /**
-      * 总分批数
-      */
-    TotalBatchCount?: number;
-    /**
-      * beta分批实例数
-      */
-    BetaBatchNum?: number;
-    /**
-      * 分批策略：0-全自动，1-全手动，2-beta分批，beta批一定是手动的，3-首次发布
-      */
-    DeployStrategyType?: number;
-    /**
-      * 每批暂停间隔
-      */
-    BatchInterval?: number;
-    /**
-      * 最小可用实例数
-      */
-    MinAvailable?: number;
-    /**
-      * 是否强制发布
-      */
-    Force?: boolean;
-}
-/**
  * DescribeIngress返回参数结构体
  */
 export interface DescribeIngressResponse {
@@ -3327,6 +3381,68 @@ export interface PortMapping {
     ServiceName?: string;
 }
 /**
+ * 日志收集配置
+ */
+export interface LogConfig {
+    /**
+      * 名称
+      */
+    Name: string;
+    /**
+      * 收集类型，container_stdout 为标准输出；container_file 为文件；
+      */
+    InputType: string;
+    /**
+      * 日志集 ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LogsetId: string;
+    /**
+      * 日志主题 ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TopicId: string;
+    /**
+      * 日志提取模式，minimalist_log 为单行全文；multiline_log 为多行全文；
+      */
+    LogType: string;
+    /**
+      * 首行正则表达式，当LogType=multiline_log 时生效
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BeginningRegex: string;
+    /**
+      * 收集文件目录，当 InputType=container_file 时生效
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LogPath: string;
+    /**
+      * 收集文件名模式，当 InputType=container_file 时生效
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FilePattern: string;
+    /**
+      * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreateDate: string;
+    /**
+      * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ModifyDate: string;
+    /**
+      * 应用 ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ApplicationId: string;
+    /**
+      * 应用名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ApplicationName: string;
+}
+/**
  * ModifyEnvironment返回参数结构体
  */
 export interface ModifyEnvironmentResponse {
@@ -3400,66 +3516,25 @@ export interface DestroyLogConfigRequest {
     ApplicationId?: string;
 }
 /**
- * 日志收集配置
+ * EnableApplicationAutoscaler请求参数结构体
  */
-export interface LogConfig {
+export interface EnableApplicationAutoscalerRequest {
     /**
-      * 名称
-      */
-    Name: string;
-    /**
-      * 收集类型，container_stdout 为标准输出；container_file 为文件；
-      */
-    InputType: string;
-    /**
-      * 日志集 ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    LogsetId: string;
-    /**
-      * 日志主题 ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    TopicId: string;
-    /**
-      * 日志提取模式，minimalist_log 为单行全文；multiline_log 为多行全文；
-      */
-    LogType: string;
-    /**
-      * 首行正则表达式，当LogType=multiline_log 时生效
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    BeginningRegex: string;
-    /**
-      * 收集文件目录，当 InputType=container_file 时生效
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    LogPath: string;
-    /**
-      * 收集文件名模式，当 InputType=container_file 时生效
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    FilePattern: string;
-    /**
-      * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    CreateDate: string;
-    /**
-      * 更新时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ModifyDate: string;
-    /**
-      * 应用 ID
-注意：此字段可能返回 null，表示取不到有效值。
+      * 服务id
       */
     ApplicationId: string;
     /**
-      * 应用名
-注意：此字段可能返回 null，表示取不到有效值。
+      * 环境ID
       */
-    ApplicationName: string;
+    EnvironmentId: string;
+    /**
+      * 来源渠道
+      */
+    SourceChannel?: number;
+    /**
+      * 弹性伸缩策略ID
+      */
+    AutoscalerId?: string;
 }
 /**
  * eks service info

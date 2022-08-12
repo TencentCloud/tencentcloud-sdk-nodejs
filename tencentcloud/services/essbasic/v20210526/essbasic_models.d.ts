@@ -192,6 +192,29 @@ export interface TemplateInfo {
     CreatedOn: number;
 }
 /**
+ * UploadFiles请求参数结构体
+ */
+export interface UploadFilesRequest {
+    /**
+      * 应用相关信息，若是渠道版调用 appid 和proxyappid 必填
+      */
+    Agent: Agent;
+    /**
+      * 文件对应业务类型，用于区分文件存储路径：
+1. TEMPLATE - 模板； 文件类型：.pdf .doc .docx .html
+2. DOCUMENT - 签署过程及签署后的合同文档/图片控件 文件类型：.pdf/.jpg/.png
+      */
+    BusinessType: string;
+    /**
+      * 上传文件内容数组，最多支持20个文件
+      */
+    FileInfos?: Array<UploadFile>;
+    /**
+      * 操作者的信息
+      */
+    Operator?: UserInfo;
+}
+/**
  * GetDownloadFlowUrl返回参数结构体
  */
 export interface GetDownloadFlowUrlResponse {
@@ -532,27 +555,32 @@ ProcessTimeout - 转换文件超时
     RequestId?: string;
 }
 /**
- * UploadFiles请求参数结构体
+ * 合作企业经办人列表信息
  */
-export interface UploadFilesRequest {
+export interface ProxyOrganizationOperator {
     /**
-      * 应用相关信息，若是渠道版调用 appid 和proxyappid 必填
+      * 经办人ID（渠道颁发），最大长度64个字符
       */
-    Agent: Agent;
+    Id: string;
     /**
-      * 文件对应业务类型，用于区分文件存储路径：
-1. TEMPLATE - 模板； 文件类型：.pdf .doc .docx .html
-2. DOCUMENT - 签署过程及签署后的合同文档/图片控件 文件类型：.pdf/.jpg/.png
+      * 经办人姓名，最大长度50个字符
       */
-    BusinessType: string;
+    Name?: string;
     /**
-      * 上传文件内容数组，最多支持20个文件
+      * 经办人身份证件类型
+1.ID_CARD 居民身份证
+2.HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证
+3.HONGKONG_AND_MACAO 港澳居民来往内地通行证
       */
-    FileInfos?: Array<UploadFile>;
+    IdCardType?: string;
     /**
-      * 操作者的信息
+      * 经办人证件号
       */
-    Operator?: UserInfo;
+    IdCardNumber?: string;
+    /**
+      * 经办人手机号，大陆手机号输入11位，暂不支持海外手机号。
+      */
+    Mobile?: string;
 }
 /**
  * ChannelGetTaskResultApi请求参数结构体
@@ -854,32 +882,28 @@ export interface CreateFlowsByTemplatesResponse {
     RequestId?: string;
 }
 /**
- * 合作企业经办人列表信息
+ * ChannelCreateFlowSignReview请求参数结构体
  */
-export interface ProxyOrganizationOperator {
+export interface ChannelCreateFlowSignReviewRequest {
     /**
-      * 经办人ID（渠道颁发），最大长度64个字符
+      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
       */
-    Id: string;
+    Agent: Agent;
     /**
-      * 经办人姓名，最大长度50个字符
+      * 签署流程编号
       */
-    Name?: string;
+    FlowId: string;
     /**
-      * 经办人身份证件类型
-1.ID_CARD 居民身份证
-2.HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证
-3.HONGKONG_AND_MACAO 港澳居民来往内地通行证
+      * 企业内部审核结果
+PASS: 通过
+REJECT: 拒绝
       */
-    IdCardType?: string;
+    ReviewType: string;
     /**
-      * 经办人证件号
+      * 审核原因
+当ReviewType 是REJECT 时此字段必填,字符串长度不超过200
       */
-    IdCardNumber?: string;
-    /**
-      * 经办人手机号，大陆手机号输入11位，暂不支持海外手机号。
-      */
-    Mobile?: string;
+    ReviewMessage?: string;
 }
 /**
  * PrepareFlows请求参数结构体
@@ -1430,6 +1454,15 @@ export interface UploadFilesResponse {
       * 文件Url
       */
     FileUrls: Array<string>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ChannelCreateFlowSignReview返回参数结构体
+ */
+export interface ChannelCreateFlowSignReviewResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

@@ -52,6 +52,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyIngress", req, cb);
     }
     /**
+     * 启用应用弹性策略组合
+     */
+    async EnableApplicationAutoscaler(req, cb) {
+        return this.request("EnableApplicationAutoscaler", req, cb);
+    }
+    /**
      * 修改应用实例数量
      */
     async ModifyApplicationReplicas(req, cb) {
@@ -215,6 +221,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateEnvironment(req, cb) {
         return this.request("CreateEnvironment", req, cb);
+    }
+    /**
+     * 关闭应用弹性策略组合
+     */
+    async DisableApplicationAutoscaler(req, cb) {
+        return this.request("DisableApplicationAutoscaler", req, cb);
     }
     /**
      * 查询 Ingress 规则列表

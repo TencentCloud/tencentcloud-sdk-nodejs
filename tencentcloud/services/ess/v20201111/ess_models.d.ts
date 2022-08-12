@@ -328,6 +328,19 @@ export interface DescribeThirdPartyAuthCodeRequest {
     AuthCode: string;
 }
 /**
+ * 查询过滤条件
+ */
+export interface Filter {
+    /**
+      * 查询过滤条件的Key
+      */
+    Key: string;
+    /**
+      * 查询过滤条件的Value列表
+      */
+    Values: Array<string>;
+}
+/**
  * 一码多扫签署二维码对象
  */
 export interface SignQrCode {
@@ -926,6 +939,15 @@ HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证(格式同居民身份证)
     PreReadTime?: number;
 }
 /**
+ * CreateFlowSignReview返回参数结构体
+ */
+export interface CreateFlowSignReviewResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 此结构体 (Caller) 用于描述调用方属性。
  */
 export interface Caller {
@@ -1089,17 +1111,32 @@ export interface CreateConvertTaskApiResponse {
     RequestId?: string;
 }
 /**
- * 查询过滤条件
+ * CreateFlowSignReview请求参数结构体
  */
-export interface Filter {
+export interface CreateFlowSignReviewRequest {
     /**
-      * 查询过滤条件的Key
+      * 调用方用户信息，userId 必填
       */
-    Key: string;
+    Operator: UserInfo;
     /**
-      * 查询过滤条件的Value列表
+      * 签署流程编号
       */
-    Values: Array<string>;
+    FlowId: string;
+    /**
+      * 企业内部审核结果
+PASS: 通过
+REJECT: 拒绝
+      */
+    ReviewType: string;
+    /**
+      * 审核原因
+当ReviewType 是REJECT 时此字段必填,字符串长度不超过200
+      */
+    ReviewMessage?: string;
+    /**
+      * 应用相关信息
+      */
+    Agent?: Agent;
 }
 /**
  * CreateConvertTaskApi请求参数结构体

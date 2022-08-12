@@ -18,6 +18,16 @@ const client = new tencentcloud.ess.v20201111.Client({
 })
 describe("ess.v20201111.test.js", function () {
 
+it("ess.v20201111.DescribeFileUrls", async function () {
+    try {
+       const data = await client.DescribeFileUrls({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ess.v20201111.StartFlow", async function () {
     try {
        const data = await client.StartFlow({})
@@ -28,9 +38,9 @@ it("ess.v20201111.StartFlow", async function () {
     }
 })
 
-it("ess.v20201111.CreateMultiFlowSignQRCode", async function () {
+it("ess.v20201111.CreateFlowSignReview", async function () {
     try {
-       const data = await client.CreateMultiFlowSignQRCode({})
+       const data = await client.CreateFlowSignReview({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -58,9 +68,9 @@ it("ess.v20201111.CreateDocument", async function () {
     }
 })
 
-it("ess.v20201111.DescribeFileUrls", async function () {
+it("ess.v20201111.CreateMultiFlowSignQRCode", async function () {
     try {
-       const data = await client.DescribeFileUrls({})
+       const data = await client.CreateMultiFlowSignQRCode({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
