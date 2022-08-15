@@ -949,10 +949,6 @@ export interface ModifyDiskAttributesRequest {
       */
     DiskIds: Array<string>;
     /**
-      * 新的云硬盘项目ID，只支持修改弹性云盘的项目ID。通过[DescribeProject](/document/api/378/4400)接口查询可用项目及其ID。
-      */
-    ProjectId?: number;
-    /**
       * 新的云硬盘名称。
       */
     DiskName?: string;
@@ -960,6 +956,10 @@ export interface ModifyDiskAttributesRequest {
       * 是否为弹性云盘，FALSE表示非弹性云盘，TRUE表示弹性云盘。仅支持非弹性云盘修改为弹性云盘。
       */
     Portable?: boolean;
+    /**
+      * 新的云硬盘项目ID，只支持修改弹性云盘的项目ID。通过[DescribeProject](/document/api/378/4400)接口查询可用项目及其ID。
+      */
+    ProjectId?: number;
     /**
       * 成功挂载到云主机后该云硬盘是否随云主机销毁，TRUE表示随云主机销毁，FALSE表示不随云主机销毁。仅支持按量计费云硬盘数据盘。
       */

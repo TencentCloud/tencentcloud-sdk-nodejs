@@ -1059,6 +1059,15 @@ export interface DescribeClientConnectionsResponse {
     RequestId?: string;
 }
 /**
+ * TerminateDBInstances请求参数结构体
+ */
+export interface TerminateDBInstancesRequest {
+    /**
+      * 实例Id列表
+      */
+    InstanceId: string;
+}
+/**
  * DescribeDBBackups返回参数结构体
  */
 export interface DescribeDBBackupsResponse {
@@ -1444,6 +1453,15 @@ export interface ShardInfo {
       * 分片物理id
       */
     RealReplicaSetId: string;
+}
+/**
+ * TerminateDBInstances返回参数结构体
+ */
+export interface TerminateDBInstancesResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * RenameInstance请求参数结构体

@@ -23,6 +23,7 @@ import {
   DescribeTtsTaskStatusResponse,
   CreateTtsTaskRespData,
   DescribeTtsTaskStatusRespData,
+  Subtitle,
   DescribeTtsTaskStatusRequest,
   CreateTtsTaskRequest,
   TextToVoiceRequest,

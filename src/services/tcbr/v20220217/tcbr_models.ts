@@ -832,6 +832,11 @@ export interface ServerBaseInfo {
    * 更新时间
    */
   UpdateTime: string
+
+  /**
+   * 公网访问类型
+   */
+  AccessTypes: Array<string>
 }
 
 /**

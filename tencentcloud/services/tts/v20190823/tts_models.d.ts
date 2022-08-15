@@ -11,6 +11,10 @@ export interface TextToVoiceResponse {
       */
     SessionId: string;
     /**
+      * 时间戳信息，若未开启时间戳，则返回空数组。
+      */
+    Subtitles: Array<Subtitle>;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
@@ -74,6 +78,31 @@ export interface DescribeTtsTaskStatusRespData {
       * 失败原因说明。
       */
     ErrorMsg: string;
+}
+/**
+ * 时间戳信息。
+ */
+export interface Subtitle {
+    /**
+      * ⽂本信息。
+      */
+    Text: string;
+    /**
+      * ⽂本对应tts语⾳开始时间戳，单位ms。
+      */
+    BeginTime: number;
+    /**
+      * ⽂本对应tts语⾳结束时间戳，单位ms。
+      */
+    EndTime: number;
+    /**
+      * 该字在整句中的开始位置，从0开始。
+      */
+    BeginIndex: number;
+    /**
+      * 该字在整句中的结束位置，从0开始。
+      */
+    EndIndex: number;
 }
 /**
  * DescribeTtsTaskStatus请求参数结构体
@@ -178,4 +207,8 @@ export interface TextToVoiceRequest {
       * 返回音频格式，可取值：wav（默认），mp3，pcm
       */
     Codec?: string;
+    /**
+      * 是否开启时间戳功能，默认为false。
+      */
+    EnableSubtitle?: boolean;
 }

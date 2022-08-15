@@ -155,6 +155,7 @@ import {
   ModifyRepositoryAccessPersonalRequest,
   TagSpecification,
   CreateMultipleSecurityPolicyRequest,
+  KeyValueString,
   DescribeNamespacesRequest,
   DescribeImageLifecycleGlobalPersonalRequest,
   DescribeImageLifecyclePersonalRequest,

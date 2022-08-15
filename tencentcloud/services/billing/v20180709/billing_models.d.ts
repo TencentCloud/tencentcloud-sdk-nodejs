@@ -251,6 +251,10 @@ export interface ProjectSummaryOverviewItem {
       * 原价，单位为元。TotalCost字段自账单3.0（即2021-05）之后开始生效，账单3.0之前返回"-"。合同价的情况下，TotalCost字段与官网价格存在差异，也返回“-”。
       */
     TotalCost: string;
+    /**
+      * 分成金金额
+      */
+    TransferPayAmount: string;
 }
 /**
  * 地域过滤条件
@@ -1037,6 +1041,10 @@ export interface RegionSummaryOverviewItem {
       * 原价，单位为元。TotalCost字段自账单3.0（即2021-05）之后开始生效，账单3.0之前返回"-"。合同价的情况下，TotalCost字段与官网价格存在差异，也返回“-”。
       */
     TotalCost: string;
+    /**
+      * 分成金金额
+      */
+    TransferPayAmount: string;
 }
 /**
  * DescribeCostSummaryByProduct返回参数结构体
@@ -1295,6 +1303,10 @@ export interface BusinessSummaryOverviewItem {
       * 原价，单位为元。TotalCost字段自账单3.0（即2021-05）之后开始生效，账单3.0之前返回"-"。合同价的情况下，TotalCost字段与官网价格存在差异，也返回“-”。
       */
     TotalCost: string;
+    /**
+      * 分成金金额
+      */
+    TransferPayAmount: string;
 }
 /**
  * 账单明细组件对象
@@ -2118,6 +2130,26 @@ export interface TagSummaryOverviewItem {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     TotalCost: string;
+    /**
+      * 现金金额
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CashPayAmount: string;
+    /**
+      * 赠送金金额
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IncentivePayAmount: string;
+    /**
+      * 代金券金额
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VoucherPayAmount: string;
+    /**
+      * 分成金金额
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TransferPayAmount: string;
 }
 /**
  * DescribeCostSummaryByResource返回参数结构体
@@ -2620,6 +2652,10 @@ export interface PayModeSummaryOverviewItem {
       * 原价，单位为元。TotalCost字段自账单3.0（即2021-05）之后开始生效，账单3.0之前返回"-"。合同价的情况下，TotalCost字段与官网价格存在差异，也返回“-”。
       */
     TotalCost: string;
+    /**
+      * 分成金金额
+      */
+    TransferPayAmount: string;
 }
 /**
  * 按产品汇总总费用
@@ -2645,6 +2681,10 @@ export interface BusinessSummaryTotal {
       * 原价，单位为元。TotalCost字段自账单3.0（即2021-05）之后开始生效，账单3.0之前返回"-"。合同价的情况下，TotalCost字段与官网价格存在差异，也返回“-”。
       */
     TotalCost: string;
+    /**
+      * 分成金金额
+      */
+    TransferPayAmount: string;
 }
 /**
  * DescribeCostSummaryByRegion返回参数结构体

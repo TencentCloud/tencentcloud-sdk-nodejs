@@ -140,6 +140,7 @@ import {
   DescribeBotManagedRulesResponse,
   DnsRecord,
   TopDataRecord,
+  Ipv6Access,
   DDoSAntiPly,
   DescribeWebManagedRulesDataRequest,
   DDosAttackSourceEventData,

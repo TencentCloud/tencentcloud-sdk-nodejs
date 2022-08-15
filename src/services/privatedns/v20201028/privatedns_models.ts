@@ -427,6 +427,11 @@ export interface ModifyPrivateZoneRequest {
    * 是否开启子域名递归, ENABLED， DISABLED
    */
   DnsForwardStatus?: string
+
+  /**
+   * 是否开启CNAME加速：ENABLED， DISABLED
+   */
+  CnameSpeedupStatus?: string
 }
 
 /**
@@ -494,7 +499,7 @@ export interface CreatePrivateZoneRequest {
   Remark?: string
 
   /**
-   * 是否开启子域名递归, ENABLED， DISABLED。默认值为DISABLED
+   * 是否开启子域名递归, ENABLED， DISABLED。默认值为ENABLED
    */
   DnsForwardStatus?: string
 
@@ -507,6 +512,11 @@ export interface CreatePrivateZoneRequest {
    * 创建私有域同时绑定关联账号的VPC
    */
   AccountVpcSet?: Array<AccountVpcInfo>
+
+  /**
+   * 是否CNAME加速：ENABLED，DISABLED，默认值为ENABLED
+   */
+  CnameSpeedupStatus?: string
 }
 
 /**
@@ -983,6 +993,11 @@ export interface PrivateZone {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   IsCustomTld: boolean
+
+  /**
+   * CNAME加速状态：开通：ENABLED, 关闭，DISABLED
+   */
+  CnameSpeedupStatus: string
 }
 
 /**

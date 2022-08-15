@@ -18,6 +18,16 @@ const client = new tencentcloud.mongodb.v20190725.Client({
 })
 describe("mongodb.v20190725.test.js", function () {
 
+it("mongodb.v20190725.TerminateDBInstances", async function () {
+    try {
+       const data = await client.TerminateDBInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mongodb.v20190725.DescribeDBInstanceDeal", async function () {
     try {
        const data = await client.DescribeDBInstanceDeal({})

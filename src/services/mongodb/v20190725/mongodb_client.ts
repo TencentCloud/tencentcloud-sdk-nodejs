@@ -61,6 +61,7 @@ import {
   ModifyDBInstanceSecurityGroupRequest,
   DescribeBackupDownloadTaskRequest,
   DescribeClientConnectionsResponse,
+  TerminateDBInstancesRequest,
   DescribeDBBackupsResponse,
   ModifyDBInstanceSecurityGroupResponse,
   DescribeInstanceParamsRequest,
@@ -80,6 +81,7 @@ import {
   DescribeDBBackupsRequest,
   DescribeClientConnectionsRequest,
   ShardInfo,
+  TerminateDBInstancesResponse,
   RenameInstanceRequest,
   RenewDBInstancesResponse,
   InstanceEnumParam,
@@ -113,6 +115,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("mongodb.tencentcloudapi.com", "2019-07-25", clientConfig)
+  }
+
+  /**
+   * 包年包月实例隔离接口
+   */
+  async TerminateDBInstances(
+    req: TerminateDBInstancesRequest,
+    cb?: (error: string, rep: TerminateDBInstancesResponse) => void
+  ): Promise<TerminateDBInstancesResponse> {
+    return this.request("TerminateDBInstances", req, cb)
   }
 
   /**

@@ -1648,7 +1648,7 @@ export interface TcrImageInfo {
   Digest: string
 
   /**
-   * 镜像大小
+   * 镜像体积（单位：字节）
    */
   Size: number
 
@@ -1661,6 +1661,18 @@ export interface TcrImageInfo {
    * 更新时间
    */
   UpdateTime: string
+
+  /**
+      * 制品类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Kind: string
+
+  /**
+      * KMS 签名信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  KmsSignature: string
 }
 
 /**
@@ -2028,6 +2040,12 @@ export interface TcrNamespaceInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   TagSpecification: TagSpecification
+
+  /**
+      * 命名空间元数据
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Metadata: Array<KeyValueString>
 }
 
 /**
@@ -2745,6 +2763,21 @@ export interface CreateMultipleSecurityPolicyRequest {
 }
 
 /**
+ * 通用参数字符串键值对
+ */
+export interface KeyValueString {
+  /**
+   * 键
+   */
+  Key: string
+
+  /**
+   * 值
+   */
+  Value: string
+}
+
+/**
  * DescribeNamespaces请求参数结构体
  */
 export interface DescribeNamespacesRequest {
@@ -2777,6 +2810,11 @@ export interface DescribeNamespacesRequest {
    * 过滤条件
    */
   Filters?: Array<Filter>
+
+  /**
+   * 仅查询启用了 KMS 镜像签名的空间
+   */
+  KmsSignPolicy?: boolean
 }
 
 /**
@@ -4375,6 +4413,11 @@ export interface DescribeImagesRequest {
    * 页数，默认值为1
    */
   Offset?: number
+
+  /**
+   * 指定镜像 Digest 进行查找
+   */
+  Digest?: string
 }
 
 /**

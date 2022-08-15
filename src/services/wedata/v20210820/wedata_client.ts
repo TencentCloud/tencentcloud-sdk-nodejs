@@ -140,8 +140,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建任务（Beta版本）
-   */
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+创建任务
+     */
   async CreateTask(
     req: CreateTaskRequest,
     cb?: (error: string, rep: CreateTaskResponse) => void
@@ -150,8 +151,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 设置任务告警，新建/更新告警信息（最新）（Beta版本）
-   */
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+设置任务告警，新建/更新告警信息（最新）
+     */
   async SetTaskAlarmNew(
     req: SetTaskAlarmNewRequest,
     cb?: (error: string, rep: SetTaskAlarmNewResponse) => void
@@ -170,8 +172,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改任务脚本（Beta版本）
-   */
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+修改任务脚本
+     */
   async ModifyTaskScript(
     req: ModifyTaskScriptRequest,
     cb?: (error: string, rep: ModifyTaskScriptResponse) => void
@@ -180,8 +183,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 提交任务（Beta版本）
-   */
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+提交任务
+     */
   async SubmitTask(
     req: SubmitTaskRequest,
     cb?: (error: string, rep: SubmitTaskResponse) => void
@@ -190,8 +194,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 批量冻结任务（Beta版本）
-   */
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+批量冻结任务
+     */
   async FreezeTasks(
     req: FreezeTasksRequest,
     cb?: (error: string, rep: FreezeTasksResponse) => void
@@ -200,8 +205,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 工作流下所有任务的补录（Beta版本）
-   */
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+工作流下所有任务的补录
+     */
   async MakeUpWorkflowNew(
     req: MakeUpWorkflowNewRequest,
     cb?: (error: string, rep: MakeUpWorkflowNewResponse) => void
@@ -210,8 +216,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 注册事件（Beta版本）
-   */
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+注册事件
+     */
   async RegisterEvent(
     req: RegisterEventRequest,
     cb?: (error: string, rep: RegisterEventResponse) => void
@@ -220,8 +227,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更新任务（Beta版本）
-   */
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+更新任务
+     */
   async ModifyTaskInfo(
     req: ModifyTaskInfoRequest,
     cb?: (error: string, rep: ModifyTaskInfoResponse) => void
@@ -230,8 +238,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 实例批量终止操作（Beta版本）
-   */
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+实例批量终止操作
+     */
   async KillInstances(
     req: KillInstancesRequest,
     cb?: (error: string, rep: KillInstancesResponse) => void
@@ -240,8 +249,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 拉取文件夹下的工作流（Beta版本）
-   */
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+拉取文件夹下的工作流
+     */
   async DescribeFolderWorkflowList(
     req: DescribeFolderWorkflowListRequest,
     cb?: (error: string, rep: DescribeFolderWorkflowListResponse) => void
@@ -250,8 +260,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 实例批量重跑（Beta版本）
-   */
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+实例批量重跑
+     */
   async RerunInstances(
     req: RerunInstancesRequest,
     cb?: (error: string, rep: RerunInstancesResponse) => void
@@ -260,8 +271,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询任务具体详情（Beta版本）
-   */
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+查询任务具体详情
+     */
   async DescribeTaskDetail(
     req: DescribeTaskDetailRequest,
     cb?: (error: string, rep: DescribeTaskDetailResponse) => void
@@ -270,7 +282,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 任务批量补录，调度状态任务才可以补录；（Beta版本）
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+任务批量补录，调度状态任务才可以补录；
+
+
 
      */
   async MakeUpTasksNew(
@@ -281,8 +296,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 基于多个工作流进行批量冻结任务操作（Beta版本）
-   */
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+基于多个工作流进行批量冻结任务操作
+     */
   async FreezeTasksByMultiWorkflow(
     req: FreezeTasksByMultiWorkflowRequest,
     cb?: (error: string, rep: FreezeTasksByMultiWorkflowResponse) => void
@@ -291,8 +307,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取实例日志列表（Beta版本）
-   */
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+获取实例日志列表
+     */
   async DescribeInstanceLogs(
     req: DescribeInstanceLogsRequest,
     cb?: (error: string, rep: DescribeInstanceLogsResponse) => void
@@ -311,7 +328,8 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 批量删除任务，仅对任务状态为”已停止“有效；（Beta版本）
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+批量删除任务，仅对任务状态为”已停止“有效；
 
      */
   async BatchDeleteTasksNew(
@@ -322,8 +340,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除工作流（Beta版本）
-   */
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+删除工作流
+     */
   async DeleteWorkflowNew(
     req: DeleteWorkflowNewRequest,
     cb?: (error: string, rep: DeleteWorkflowNewResponse) => void
@@ -332,8 +351,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更新工作流调度（Beta版本）
-   */
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+更新工作流调度
+     */
   async ModifyWorkflowSchedule(
     req: ModifyWorkflowScheduleRequest,
     cb?: (error: string, rep: ModifyWorkflowScheduleResponse) => void
@@ -342,8 +362,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 根据工作流分页查询任务（Beta版本）
-   */
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+根据工作流分页查询任务
+     */
   async DescribeTasksByPage(
     req: DescribeTasksByPageRequest,
     cb?: (error: string, rep: DescribeTasksByPageResponse) => void
@@ -352,8 +373,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更新工作流（Beta版本）
-   */
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+更新工作流
+     */
   async ModifyWorkflowInfo(
     req: ModifyWorkflowInfoRequest,
     cb?: (error: string, rep: ModifyWorkflowInfoResponse) => void
@@ -362,8 +384,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建文件夹（Beta版本）
-   */
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+创建文件夹
+     */
   async CreateFolder(
     req: CreateFolderRequest,
     cb?: (error: string, rep: CreateFolderResponse) => void
@@ -372,8 +395,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 文件夹更新（Beta版本）
-   */
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+文件夹更新
+     */
   async ModifyFolder(
     req: ModifyFolderRequest,
     cb?: (error: string, rep: ModifyFolderResponse) => void
@@ -382,8 +406,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 拉取文件夹目录（Beta版本）
-   */
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+拉取文件夹目录
+     */
   async DescribeFolderList(
     req: DescribeFolderListRequest,
     cb?: (error: string, rep: DescribeFolderListResponse) => void
@@ -392,8 +417,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除文件夹（Beta版本）
-   */
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+删除文件夹
+     */
   async DeleteFolder(
     req: DeleteFolderRequest,
     cb?: (error: string, rep: DeleteFolderResponse) => void
@@ -402,8 +428,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 注册事件监听器（Beta版本）
-   */
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+注册事件监听器
+     */
   async RegisterEventListener(
     req: RegisterEventListenerRequest,
     cb?: (error: string, rep: RegisterEventListenerResponse) => void
@@ -412,8 +439,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 触发事件（Beta版本）
-   */
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+触发事件
+     */
   async TriggerEvent(
     req: TriggerEventRequest,
     cb?: (error: string, rep: TriggerEventResponse) => void
@@ -422,8 +450,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 添加父任务依赖（Beta版本）
-   */
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+添加父任务依赖
+     */
   async ModifyTaskLinks(
     req: ModifyTaskLinksRequest,
     cb?: (error: string, rep: ModifyTaskLinksResponse) => void
@@ -432,8 +461,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建工作流（Beta版本）
-   */
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+创建工作流
+     */
   async CreateWorkflow(
     req: CreateWorkflowRequest,
     cb?: (error: string, rep: CreateWorkflowResponse) => void
@@ -452,8 +482,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 实例批量置成功（Beta版本）
-   */
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+实例批量置成功
+     */
   async ForceSucInstances(
     req: ForceSucInstancesRequest,
     cb?: (error: string, rep: ForceSucInstancesResponse) => void
@@ -462,8 +493,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 运行任务（Beta版本）
-   */
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+运行任务
+     */
   async RunTask(
     req: RunTaskRequest,
     cb?: (error: string, rep: RunTaskResponse) => void
@@ -472,8 +504,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 根据层级查找上/下游任务节点（Beta版本）
-   */
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+根据层级查找上/下游任务节点
+     */
   async DescribeDependTasksNew(
     req: DescribeDependTasksNewRequest,
     cb?: (error: string, rep: DescribeDependTasksNewResponse) => void
@@ -482,8 +515,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 提交工作流（Beta版本）
-   */
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+提交工作流
+     */
   async SubmitWorkflow(
     req: SubmitWorkflowRequest,
     cb?: (error: string, rep: SubmitWorkflowResponse) => void
@@ -492,8 +526,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询任务脚本（Beta版本）
-   */
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+查询任务脚本
+     */
   async DescribeTaskScript(
     req: DescribeTaskScriptRequest,
     cb?: (error: string, rep: DescribeTaskScriptResponse) => void
@@ -502,8 +537,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 批量修改任务责任人（Beta版本）
-   */
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+批量修改任务责任人
+     */
   async BatchModifyOwnersNew(
     req: BatchModifyOwnersNewRequest,
     cb?: (error: string, rep: BatchModifyOwnersNewResponse) => void
@@ -512,8 +548,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 仅对任务状态为”调度中“和”已暂停“有效，对所选任务的任务实例进行终止，并停止调度（Beta版本）
-   */
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+仅对任务状态为”调度中“和”已暂停“有效，对所选任务的任务实例进行终止，并停止调度
+     */
   async BatchStopTasksNew(
     req: BatchStopTasksNewRequest,
     cb?: (error: string, rep: BatchStopTasksNewResponse) => void

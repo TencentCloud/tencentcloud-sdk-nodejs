@@ -358,6 +358,10 @@ export interface DescribeScenarioWithJobsRequest {
       * 是否需要返回场景的脚本内容
       */
     IgnoreScript?: boolean;
+    /**
+      * 是否需要返回测试数据文件信息
+      */
+    IgnoreDataset?: boolean;
 }
 /**
  * CreateCronJob返回参数结构体

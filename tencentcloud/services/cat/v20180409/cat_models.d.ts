@@ -13,7 +13,7 @@ export interface DescribeNodesRequest {
       * 节点区域
 <li> 1 = 中国大陆 </li>
 <li> 2 = 港澳台 </li>
-<li> 3 = 海外 </li>
+<li> 3 = 境外</li>
       */
     Location?: number;
     /**
@@ -219,9 +219,9 @@ AnalyzeTaskType_MediaStream：音视频体验
     
 这里实际按拨测结果中的地区来填写即可
 
-国内一般是省级单位，如广东、广西、香港特区、新疆；直辖市则填北京、上海
+国内一般是省级单位，如广东、广西、中国香港、新疆；直辖市则填北京、上海
 
-海外一般是国家名，如澳大利亚、新加坡
+境外一般是国家名，如澳大利亚、新加坡
       */
     Districts?: Array<string>;
     /**
@@ -683,7 +683,7 @@ export interface NodeDefineExt {
       * 区域
 <li> 1 = 中国大陆 </li>
 <li> 2 = 港澳台 </li>
-<li> 3 = 国外 </li>
+<li> 3 = 境外 </li>
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Location: number;

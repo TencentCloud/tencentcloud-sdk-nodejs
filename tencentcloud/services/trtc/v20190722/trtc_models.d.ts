@@ -1245,7 +1245,7 @@ export interface CreateCloudRecordingRequest {
     /**
       * TRTC房间号的类型，必须和录制的房间所对应的RoomId类型相同:
 0: 字符串类型的RoomId
-1: 32位整型的RoomId（默认）
+1: 32位整型的RoomId
       */
     RoomIdType?: number;
     /**

@@ -28,6 +28,12 @@ class Client extends abstract_client_1.AbstractClient {
         super("mongodb.tencentcloudapi.com", "2019-07-25", clientConfig);
     }
     /**
+     * 包年包月实例隔离接口
+     */
+    async TerminateDBInstances(req, cb) {
+        return this.request("TerminateDBInstances", req, cb);
+    }
+    /**
      * 本接口（DescribeDBInstanceDeal）用于获取MongoDB购买、续费及变配订单详细。
      */
     async DescribeDBInstanceDeal(req, cb) {

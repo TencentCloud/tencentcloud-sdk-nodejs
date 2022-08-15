@@ -78,21 +78,29 @@ export interface DescribeTasksRequest {
     EndTime?: string;
 }
 /**
- * 用于表示数据存储的相关信息
+ * 音频说话人声纹识别返回结果
  */
-export interface StorageInfo {
+export interface AudioResultDetailSpeakerResult {
     /**
-      * 该字段表示文件访问类型，取值为**URL**（资源链接）和**COS** (腾讯云对象存储)；该字段应当与传入的访问类型相对应，可用于强校验并方便系统快速识别访问地址；若不传入此参数，则默认值为URL，此时系统将自动判定访问地址类型。
+      * 该字段用于返回检测结果需要检测的内容类型。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Type?: string;
+    Label: string;
     /**
-      * 该字段表示文件访问的链接地址，格式为标准URL格式。<br> 备注：当Type为URL时此字段不为空，该参数与BucketInfo参数须传入其中之一
+      * 该字段用于返回呻吟检测的置信度，取值范围：0（置信度最低）-100（置信度最高），越高代表音频越有可能属于说话人声纹。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Url?: string;
+    Score: number;
     /**
-      * 该字段表示文件访问的腾讯云存储桶信息。<br> 备注：当Type为COS时此字段不为空，该参数与Url参数须传入其中之一。
+      * 该字段用于返回对应说话人的片段在音频文件内的开始时间，单位为毫秒。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    BucketInfo?: BucketInfo;
+    StartTime: number;
+    /**
+      * 该字段用于返回对应说话人的片段在音频文件内的结束时间，单位为毫秒。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EndTime: number;
 }
 /**
  * CreateAudioModerationSyncTask请求参数结构体
@@ -107,7 +115,7 @@ export interface CreateAudioModerationSyncTaskRequest {
       */
     DataId: string;
     /**
-      * 音频文件资源格式，当前为mp3，wav，请按照实际文件格式填入
+      * 音频文件资源格式，当前支持格式：wav、mp3、m4a，请按照实际文件格式填入。
       */
     FileFormat: string;
     /**
@@ -116,13 +124,13 @@ export interface CreateAudioModerationSyncTaskRequest {
     Name?: string;
     /**
       * 数据Base64编码，短音频同步接口仅传入可音频内容；
-支持范围：文件大小不能超过5M，时长不可超过60s，码率范围为8-16Kbps；
-支持格式：wav、mp3
+支持范围：文件大小不能超过5M，时长不可超过60s；
+支持格式：wav (PCM编码)、mp3、m4a (采样率：16kHz~48kHz，位深：16bit 小端，声道数：单声道/双声道，建议格式：16kHz/16bit/单声道)。
       */
     FileContent?: string;
     /**
       * 音频资源访问链接，与FileContent参数必须二选一输入；
-支持范围：同FileContent；
+支持范围及格式：同FileContent；
       */
     FileUrl?: string;
 }
@@ -325,6 +333,23 @@ export interface TaskInput {
     Input?: StorageInfo;
 }
 /**
+ * 用于表示数据存储的相关信息
+ */
+export interface StorageInfo {
+    /**
+      * 该字段表示文件访问类型，取值为**URL**（资源链接）和**COS** (腾讯云对象存储)；该字段应当与传入的访问类型相对应，可用于强校验并方便系统快速识别访问地址；若不传入此参数，则默认值为URL，此时系统将自动判定访问地址类型。
+      */
+    Type?: string;
+    /**
+      * 该字段表示文件访问的链接地址，格式为标准URL格式。<br> 备注：当Type为URL时此字段不为空，该参数与BucketInfo参数须传入其中之一
+      */
+    Url?: string;
+    /**
+      * 该字段表示文件访问的腾讯云存储桶信息。<br> 备注：当Type为COS时此字段不为空，该参数与Url参数须传入其中之一。
+      */
+    BucketInfo?: BucketInfo;
+}
+/**
  * DescribeTaskDetail请求参数结构体
  */
 export interface DescribeTaskDetailRequest {
@@ -384,6 +409,27 @@ Block 建议屏蔽；
 注意：此字段可能返回 null，表示取不到有效值。
       */
     MoanResults: Array<MoanResult>;
+    /**
+      * 该字段用于返回当前标签（Lable）下的二级标签。
+注意：此字段可能返回null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SubLabel: string;
+    /**
+      * 该字段用于返回音频小语种检测的详细审核结果。具体结果内容请参见AudioResultDetailLanguageResult数据结构的细节描述。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LanguageResults: Array<AudioResultDetailLanguageResult>;
+    /**
+      * 音频中说话人识别返回结果；
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SpeakerResults: Array<AudioResultDetailSpeakerResult>;
+    /**
+      * 识别类标签结果信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RecognitionResults: Array<RecognitionResult>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

@@ -20,14 +20,16 @@
  */
 export interface Compression {
   /**
-      * 智能压缩配置开关
-on：开启
-off：关闭
+      * 智能压缩配置开关，取值有：
+<li>on：开启；</li>
+<li>off：关闭。</li>
       */
   Switch: string
 
   /**
-      * 支持的压缩算法列表
+      * 支持的压缩算法列表，取值有：
+<li>brotli：brotli算法；</li>
+<li>gzip：gzip算法。</li>
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Algorithms?: Array<string>
@@ -314,24 +316,27 @@ export interface DeleteApplicationProxyResponse {
  */
 export interface Https {
   /**
-      * http2 配置开关
-on：开启
-off：关闭
+      * http2 配置开关，取值有：
+<li>on：开启；</li>
+<li>off：关闭。</li>
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Http2?: string
 
   /**
-      * OCSP 配置开关
-on：开启
-off：关闭
-默认为关闭状态
+      * OCSP 配置开关，取值有：
+<li>on：开启；</li>
+<li>off：关闭。</li>
 注意：此字段可能返回 null，表示取不到有效值。
       */
   OcspStapling?: string
 
   /**
-      * Tls版本设置，支持设置 TLSv1, TLSV1.1, TLSV1.2, TLSv1.3，修改时必须开启连续的版本
+      * Tls版本设置，取值有：
+<li>TLSv1：TLSv1版本；</li>
+<li>TLSV1.1：TLSv1.1版本；</li>
+<li>TLSV1.2：TLSv1.2版本；</li>
+<li>TLSv1.3：TLSv1.3版本。</li>修改时必须开启连续的版本。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   TlsVersion?: Array<string>
@@ -676,7 +681,7 @@ export interface ReclaimZoneResponse {
  */
 export interface DescribeZoneSettingRequest {
   /**
-   * 站点ID
+   * 站点ID。
    */
   ZoneId: string
 }
@@ -903,84 +908,105 @@ export interface ModifyDnssecRequest {
  */
 export interface ModifyZoneSettingRequest {
   /**
-   * 待变更的站点ID
+   * 待变更的站点ID。
    */
   ZoneId: string
 
   /**
-   * 缓存过期时间配置
-   */
+      * 缓存过期时间配置。
+不填写表示保持原有配置。
+      */
   Cache?: CacheConfig
 
   /**
-   * 节点缓存键配置
-   */
+      * 节点缓存键配置。
+不填写表示保持原有配置。
+      */
   CacheKey?: CacheKey
 
   /**
-   * 浏览器缓存配置
-   */
+      * 浏览器缓存配置。
+不填写表示保持原有配置。
+      */
   MaxAge?: MaxAge
 
   /**
-   * 离线缓存
-   */
+      * 离线缓存配置。
+不填写表示保持原有配置。
+      */
   OfflineCache?: OfflineCache
 
   /**
-   * Quic访问
-   */
+      * Quic访问配置。
+不填写表示保持原有配置。
+      */
   Quic?: Quic
 
   /**
-   * POST请求传输配置
-   */
+      * Post请求传输配置。
+不填写表示保持原有配置。
+      */
   PostMaxSize?: PostMaxSize
 
   /**
-   * 智能压缩配置
-   */
+      * 智能压缩配置。
+不填写表示保持原有配置。
+      */
   Compression?: Compression
 
   /**
-   * http2回源配置
-   */
+      * Http2回源配置。
+不填写表示保持原有配置。
+      */
   UpstreamHttp2?: UpstreamHttp2
 
   /**
-   * 访问协议强制https跳转配置
-   */
+      * 访问协议强制Https跳转配置。
+不填写表示保持原有配置。
+      */
   ForceRedirect?: ForceRedirect
 
   /**
-   * Https 加速配置
-   */
+      * Https加速配置。
+不填写表示保持原有配置。
+      */
   Https?: Https
 
   /**
-   * 源站配置
-   */
+      * 源站配置。
+不填写表示保持原有配置。
+      */
   Origin?: Origin
 
   /**
-   * 智能加速配置
-   */
+      * 智能加速配置。
+不填写表示保持原有配置。
+      */
   SmartRouting?: SmartRouting
 
   /**
-   * WebSocket配置
-   */
+      * WebSocket配置。
+不填写表示保持原有配置。
+      */
   WebSocket?: WebSocket
 
   /**
-   * 客户端IP回源请求头配置
-   */
+      * 客户端IP回源请求头配置。
+不填写表示保持原有配置。
+      */
   ClientIpHeader?: ClientIp
 
   /**
-   * 缓存预刷新配置
-   */
+      * 缓存预刷新配置。
+不填写表示保持原有配置。
+      */
   CachePrefresh?: CachePrefresh
+
+  /**
+      * Ipv6访问配置。
+不填写表示保持原有配置。
+      */
+  Ipv6?: Ipv6Access
 }
 
 /**
@@ -1003,7 +1029,7 @@ export interface DdosPacketFilter {
  */
 export interface CreateApplicationProxyResponse {
   /**
-   * 新增的四层代理应用ID
+   * 新增的四层代理应用ID。
    */
   ProxyId: string
 
@@ -1033,9 +1059,9 @@ export interface ImportDnsRecordsRequest {
  */
 export interface CacheConfigNoCache {
   /**
-      * 不缓存配置开关
-on：开启
-off：关闭
+      * 不缓存配置开关，取值有：
+<li>on：开启；</li>
+<li>off：关闭。</li>
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Switch: string
@@ -1273,13 +1299,31 @@ export interface BotLog {
  */
 export interface Origin {
   /**
-      * 回源协议配置
-http：强制 http 回源
-follow：协议跟随回源
-https：强制 https 回源，https 回源时仅支持源站 443 端口
+      * 主源站列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Origins?: Array<string>
+
+  /**
+      * 备源站列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BackupOrigins?: Array<string>
+
+  /**
+      * 回源协议配置，取值有：
+<li>http：强制 http 回源；</li>
+<li>follow：协议跟随回源；</li>
+<li>https：强制 https 回源，https 回源时仅支持源站 443 端口。</li>
 注意：此字段可能返回 null，表示取不到有效值。
       */
   OriginPullProtocol?: string
+
+  /**
+      * OriginType 为对象存储（COS）时，可以指定是否允许访问私有 bucket。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CosPrivateAccess?: string
 }
 
 /**
@@ -1635,24 +1679,30 @@ export interface DDosAttackEventData {
  */
 export interface Hsts {
   /**
-   * 是否开启，on或off。
-   */
+      * 是否开启，取值有：
+<li>on：开启；</li>
+<li>off：关闭。</li>
+      */
   Switch: string
 
   /**
-      * MaxAge数值。
+      * MaxAge数值。单位为秒，最大值为1天。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   MaxAge?: number
 
   /**
-      * 是否包含子域名，on或off。
+      * 是否包含子域名，取值有：
+<li>on：开启；</li>
+<li>off：关闭。</li>
 注意：此字段可能返回 null，表示取不到有效值。
       */
   IncludeSubDomains?: string
 
   /**
-      * 是否预加载，on或off。
+      * 是否开启预加载，取值有：
+<li>on：开启；</li>
+<li>off：关闭。</li>
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Preload?: string
@@ -1931,21 +1981,24 @@ export interface ModifyHostsCertificateRequest {
  */
 export interface ApplicationProxyRule {
   /**
-   * 协议，取值为TCP或者UDP
-   */
+      * 协议，取值有：
+<li>TCP：TCP协议；</li>
+<li>UDP：UDP协议。</li>
+      */
   Proto: string
 
   /**
       * 端口，支持格式：
-80：80端口
-81-90：81至90端口
+单个端口，如：80。
+端口段，如：81-82。表示81，82两个端口。
+注意：一条规则最多可填写20个端口。
       */
   Port: Array<string>
 
   /**
-      * 源站类型，取值：
-custom：手动添加
-origins：源站组
+      * 源站类型，取值有：
+<li>custom：手动添加；</li>
+<li>origins：源站组。</li>
       */
   OriginType: string
 
@@ -1953,44 +2006,42 @@ origins：源站组
       * 源站信息：
 当OriginType=custom时，表示一个或多个源站，如：
 OriginValue=["8.8.8.8:80","9.9.9.9:80"]
-OriginValue=["test.com:80"]
-
-当OriginType=origins时，包含一个元素，表示源站组ID，如：
-OriginValue=["origin-xxx"]
+OriginValue=["test.com:80"]；
+当OriginType=origins时，要求有且仅有一个元素，表示源站组ID，如：
+OriginValue=["origin-537f5b41-162a-11ed-abaa-525400c5da15"]。
       */
   OriginValue: Array<string>
 
   /**
-      * 规则ID
+      * 规则ID。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   RuleId?: string
 
   /**
-      * 状态：
-online：启用
-offline：停用
-progress：部署中
-stopping：停用中
-fail：部署失败/停用失败
+      * 状态，取值有：
+<li>online：启用；</li>
+<li>offline：停用；</li>
+<li>progress：部署中；</li>
+<li>stopping：停用中；</li>
+<li>fail：部署失败/停用失败。</li>
       */
   Status?: string
 
   /**
-      * 传递客户端IP，当Proto=TCP时，取值：
-TOA：TOA
-PPV1: Proxy Protocol传递，协议版本V1
-PPV2: Proxy Protocol传递，协议版本V2
-OFF：不传递
-当Proto=UDP时，取值：
-PPV2: Proxy Protocol传递，协议版本V2
-OFF：不传递
+      * 传递客户端IP，取值有：
+<li>TOA：TOA（仅Proto=TCP时可选）；</li>
+<li>PPV1：Proxy Protocol传递，协议版本V1（仅Proto=TCP时可选）；</li>
+<li>PPV2：Proxy Protocol传递，协议版本V2；</li>
+<li>OFF：不传递。</li>
       */
   ForwardClientIp?: string
 
   /**
-   * 是否开启会话保持
-   */
+      * 是否开启会话保持，取值有：
+<li>true：开启；</li>
+<li>false：关闭。</li>
+      */
   SessionPersist?: boolean
 }
 
@@ -1999,9 +2050,9 @@ OFF：不传递
  */
 export interface SmartRouting {
   /**
-      * 智能加速配置开关
-on：开启
-off：关闭
+      * 智能加速配置开关，取值有：
+<li>on：开启；</li>
+<li>off：关闭。</li>
       */
   Switch: string
 }
@@ -2173,24 +2224,24 @@ online: 启用
  */
 export interface CacheConfigCache {
   /**
-      * 缓存配置开关
-on：开启
-off：关闭
+      * 缓存配置开关，取值有：
+<li>on：开启；</li>
+<li>off：关闭。</li>
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Switch: string
 
   /**
-      * 缓存过期时间设置
-单位为秒，最大可设置为 365 天
+      * 缓存过期时间设置。
+单位为秒，最大可设置为 365 天。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   CacheTime?: number
 
   /**
-      * 是否开启强制缓存
-开启：on
-关闭：off
+      * 是否开启强制缓存，取值有：
+<li>on：开启；</li>
+<li>off：关闭。</li>
 注意：此字段可能返回 null，表示取不到有效值。
       */
   IgnoreCacheControl?: string
@@ -2387,7 +2438,7 @@ export interface AclConfig {
  */
 export interface ModifyZoneSettingResponse {
   /**
-   * 站点ID
+   * 站点ID。
    */
   ZoneId: string
 
@@ -2973,9 +3024,9 @@ export interface DeleteApplicationProxyRuleRequest {
  */
 export interface CacheConfigFollowOrigin {
   /**
-      * 遵循源站配置开关
-on：开启
-off：关闭
+      * 遵循源站配置开关，取值有：
+<li>on：开启；</li>
+<li>off：关闭。</li>
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Switch: string
@@ -3066,33 +3117,28 @@ export interface TopNEntry {
  */
 export interface DescribeApplicationProxyResponse {
   /**
-      * 数据列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 应用代理列表。
+   */
   Data: Array<ApplicationProxy>
 
   /**
-      * 记录总数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 记录总数。
+   */
   TotalCount: number
 
   /**
-      * 字段已废弃
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 字段已废弃。
+   */
   Quota: number
 
   /**
-      * 表示套餐内PlatType为ip的Anycast IP实例数量
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 当ProxyId为空时，表示套餐内PlatType为ip的Anycast IP的实例数量。
+   */
   IpCount: number
 
   /**
-      * 表示套餐内PlatType为domain的CNAME实例数量
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 当ProxyId为空时，表示套餐内PlatType为domain的CNAME的实例数量。
+   */
   DomainCount: number
 
   /**
@@ -3230,12 +3276,14 @@ export interface IdentifyZoneResponse {
  */
 export interface WebSocket {
   /**
-   * WebSocket 超时配置开关, 开关为off时，平台仍支持WebSocket连接，此时超时时间默认为15秒，若需要调整超时时间，将开关置为on.
-   */
+      * WebSocket 超时时间配置开关，取值有：
+<li>on：使用Timeout作为WebSocket超时时间；</li>
+<li>off：平台仍支持WebSocket连接，此时使用系统默认的15秒为超时时间。</li>
+      */
   Switch: string
 
   /**
-   * 设置超时时间，单位为秒，最大超时时间120秒。
+   * 超时时间，单位为秒，最大超时时间120秒。
    */
   Timeout?: number
 }
@@ -3664,6 +3712,18 @@ export interface TopDataRecord {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   DetailData: Array<TopDetailData>
+}
+
+/**
+ * Ipv6访问配置
+ */
+export interface Ipv6Access {
+  /**
+      * Ipv6访问功能配置，取值有：
+<li>on：开启Ipv6访问功能；</li>
+<li>off：关闭Ipv6访问功能。</li>
+      */
+  Switch: string
 }
 
 /**
@@ -4500,16 +4560,16 @@ export interface BotManagedRuleDetail {
  */
 export interface ForceRedirect {
   /**
-      * 访问强制跳转配置开关
-on：开启
-off：关闭
+      * 访问强制跳转配置开关，取值有：
+<li>on：开启；</li>
+<li>off：关闭。</li>
       */
   Switch: string
 
   /**
-      * 重定向状态码
-301
-302
+      * 重定向状态码，取值有：
+<li>301：301跳转；</li>
+<li>302：302跳转。</li>
 注意：此字段可能返回 null，表示取不到有效值。
       */
   RedirectStatusCode?: number
@@ -4520,43 +4580,47 @@ off：关闭
  */
 export interface ModifyApplicationProxyRequest {
   /**
-   * 站点ID
+   * 站点ID。
    */
   ZoneId: string
 
   /**
-   * 代理ID
+   * 代理ID。
    */
   ProxyId: string
 
   /**
-      * 代理名称
-当ProxyType=hostname时，表示域名或者子域名
-当ProxyType=instance时，表示实例名称
+      * 当ProxyType=hostname时，表示域名或子域名；
+当ProxyType=instance时，表示代理名称。
       */
   ProxyName: string
 
   /**
-   * 参数已经废弃
+   * 参数已经废弃。
    */
   ForwardClientIp: string
 
   /**
-   * 参数已经废弃
+   * 参数已经废弃。
    */
   SessionPersist: boolean
 
   /**
-   * 会话保持时间，取值范围：30-3600，单位：秒
+   * 会话保持时间，不填写保持原有配置。取值范围：30-3600，单位：秒。
    */
   SessionPersistTime?: number
 
   /**
-      * 服务类型
-hostname：子域名模式
-instance：实例模式
+      * 四层代理模式，取值有：
+<li>hostname：表示子域名模式；</li>
+<li>instance：表示实例模式。</li>不填写保持原有配置。
       */
   ProxyType?: string
+
+  /**
+   * Ipv6访问配置，不填写保持原有配置。
+   */
+  Ipv6?: Ipv6Access
 }
 
 /**
@@ -4726,12 +4790,14 @@ export interface DescribeDefaultCertificatesResponse {
  */
 export interface CachePrefresh {
   /**
-   * 缓存预刷新配置开关
-   */
+      * 缓存预刷新配置开关，取值有：
+<li>on：开启；</li>
+<li>off：关闭。</li>
+      */
   Switch: string
 
   /**
-      * 缓存预刷新百分比：1-99
+      * 缓存预刷新百分比，取值范围：1-99。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Percent?: number
@@ -5035,19 +5101,25 @@ both：同时被仅DNS和代理加速类型负载均衡使用
  */
 export interface DescribeApplicationProxyRequest {
   /**
-   * 站点ID
+   * 站点ID。
    */
   ZoneId?: string
 
   /**
-   * 分页参数Offset
+   * 分页查询偏移量，默认为0。
    */
   Offset?: number
 
   /**
-   * 分页参数Limit
+   * 分页查询限制数目，默认为10，最大可设置为1000。
    */
   Limit?: number
+
+  /**
+      * 代理ID。
+当ProxyId为空时，表示查询站点下所有应用代理的列表。
+      */
+  ProxyId?: string
 }
 
 /**
@@ -5430,65 +5502,75 @@ export interface TimingDataItem {
  */
 export interface CreateApplicationProxyRequest {
   /**
-   * 站点ID
+   * 站点ID。
    */
   ZoneId: string
 
   /**
-   * 站点名称
+   * 站点名称。
    */
   ZoneName: string
 
   /**
-      * 代理名称
-当ProxyType=hostname时，表示域名或者子域名
-当ProxyType=instance时，表示实例名称
-      */
-  ProxyName: string
-
-  /**
-      * 调度模式：
-ip表示Anycast IP
-domain表示CNAME
-      */
-  PlatType: string
-
-  /**
-   * 0关闭安全，1开启安全
-   */
-  SecurityType: number
-
-  /**
-   * 0关闭加速，1开启加速
-   */
-  AccelerateType: number
-
-  /**
-   * 字段已经移至Rule.ForwardClientIp
-   */
-  ForwardClientIp: string
-
-  /**
-   * 字段已经移至Rule.SessionPersist
-   */
-  SessionPersist: boolean
-
-  /**
-   * 规则详细信息
+   * 规则详细信息。
    */
   Rule: Array<ApplicationProxyRule>
 
   /**
-   * 会话保持时间，取值范围：30-3600，单位：秒
+      * 当ProxyType=hostname时，表示域名或子域名；
+当ProxyType=instance时，表示代理名称。
+      */
+  ProxyName: string
+
+  /**
+      * 调度模式，取值有：
+<li>ip：表示Anycast IP调度；</li>
+<li>domain：表示CNAME调度。</li>
+      */
+  PlatType: string
+
+  /**
+      * 是否开启安全，取值有：
+<li>0：关闭安全；</li>
+<li>1：开启安全。</li>
+      */
+  SecurityType: number
+
+  /**
+      * 是否开启加速，取值有：
+<li>0：关闭加速；</li>
+<li>1：开启加速。</li>
+      */
+  AccelerateType: number
+
+  /**
+   * 字段已经废弃。
    */
+  SessionPersist: boolean
+
+  /**
+   * 字段已经废弃。
+   */
+  ForwardClientIp: string
+
+  /**
+      * 四层代理模式，取值有：
+<li>hostname：表示子域名模式；</li>
+<li>instance：表示实例模式。</li>不填写使用默认值instance。
+      */
+  ProxyType?: string
+
+  /**
+      * 会话保持时间，取值范围：30-3600，单位：秒。
+不填写使用默认值600。
+      */
   SessionPersistTime?: number
 
   /**
-      * 服务类型
-hostname：子域名模式
-instance：实例模式
+      * Ipv6访问配置。
+不填写表示关闭Ipv6访问。
       */
-  ProxyType?: string
+  Ipv6?: Ipv6Access
 }
 
 /**
@@ -5556,14 +5638,14 @@ export interface IntelligenceRule {
  */
 export interface PostMaxSize {
   /**
-      * 是调整POST请求限制，平台默认为32MB。
-关闭：off，
-开启：on。
+      * 是否开启POST请求上传文件限制，平台默认为限制为32MB，取值有：
+<li>on：开启限制；</li>
+<li>off：关闭限制。</li>
       */
   Switch: string
 
   /**
-      * 最大限制，取值在1MB和500MB之间。单位字节
+      * 最大限制，取值在1MB和500MB之间。单位字节。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   MaxSize?: number
@@ -6001,106 +6083,104 @@ export interface WebEventData {
  */
 export interface ApplicationProxy {
   /**
-      * 代理ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 代理ID。
+   */
   ProxyId?: string
 
   /**
-      * 代理名称
-当ProxyType=hostname时，表示域名或者子域名
-当ProxyType=instance时，表示实例名称
+      * 当ProxyType=hostname时，表示域名或子域名；
+当ProxyType=instance时，表示代理名称。
       */
   ProxyName: string
 
   /**
-      * 调度模式：
-ip表示Anycast IP
-domain表示CNAME
+      * 调度模式，取值有：
+<li>ip：表示Anycast IP调度；</li>
+<li>domain：表示CNAME调度。</li>
       */
   PlatType: string
 
   /**
-   * 0关闭安全，1开启安全
-   */
+      * 是否开启安全，取值有：
+<li>0：关闭安全；</li>
+<li>1：开启安全。</li>
+      */
   SecurityType: number
 
   /**
-   * 0关闭加速，1开启加速
-   */
+      * 是否开启加速，取值有：
+<li>0：关闭加速；</li>
+<li>1：开启加速。</li>
+      */
   AccelerateType: number
 
   /**
-   * 字段已经移至Rule.ForwardClientIp
+   * 字段已经废弃。
    */
   ForwardClientIp: string
 
   /**
-   * 字段已经移至Rule.SessionPersist
+   * 字段已经废弃。
    */
   SessionPersist: boolean
 
   /**
-   * 规则列表
+   * 规则列表。
    */
   Rule: Array<ApplicationProxyRule>
 
   /**
-      * 状态：
-online：启用
-offline：停用
-progress：部署中
-stopping：停用中
-fail：部署失败/停用失败
-注意：此字段可能返回 null，表示取不到有效值。
+      * 状态，取值有：
+<li>online：启用；</li>
+<li>offline：停用；</li>
+<li>progress：部署中；</li>
+<li>stopping：停用中；</li>
+<li>fail：部署失败/停用失败。</li>
       */
   Status: string
 
   /**
-      * 调度信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 调度信息。
+   */
   ScheduleValue: Array<string>
 
   /**
-      * 更新时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 更新时间。
+   */
   UpdateTime: string
 
   /**
-      * 站点ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 站点ID。
+   */
   ZoneId: string
 
   /**
-      * 站点名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 站点名称。
+   */
   ZoneName: string
 
   /**
-      * 会话保持时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 会话保持时间。
+   */
   SessionPersistTime: number
 
   /**
-      * 服务类型
-hostname：子域名模式
-instance：实例模式
-注意：此字段可能返回 null，表示取不到有效值。
+      * 四层代理模式，取值有：
+<li>hostname：表示子域名模式；</li>
+<li>instance：表示实例模式。</li>
       */
   ProxyType: string
 
   /**
       * 当ProxyType=hostname时：
-ProxyName为域名，如：test.123.com
-HostId表示该域名，即test.123.com对应的代理加速唯一标识
-注意：此字段可能返回 null，表示取不到有效值。
+表示代理加速唯一标识。
       */
   HostId: string
+
+  /**
+   * Ipv6访问配置。
+   */
+  Ipv6: Ipv6Access
 }
 
 /**
@@ -6108,7 +6188,7 @@ HostId表示该域名，即test.123.com对应的代理加速唯一标识
  */
 export interface ModifyApplicationProxyResponse {
   /**
-   * 代理ID
+   * 代理ID。
    */
   ProxyId: string
 
@@ -6133,21 +6213,23 @@ export interface DescribeDDoSPolicyResponse {
  */
 export interface CacheKey {
   /**
-      * 是否开启全路径缓存
-on：开启全路径缓存（即关闭参数忽略）
-off：关闭全路径缓存（即开启参数忽略）
+      * 是否开启全路径缓存，取值有：
+<li>on：开启全路径缓存（即关闭参数忽略）；</li>
+<li>off：关闭全路径缓存（即开启参数忽略）。</li>
 注意：此字段可能返回 null，表示取不到有效值。
       */
   FullUrlCache?: string
 
   /**
-      * 是否忽略大小写缓存
+      * 是否忽略大小写缓存，取值有：
+<li>on：忽略；</li>
+<li>off：不忽略。</li>
 注意：此字段可能返回 null，表示取不到有效值。
       */
   IgnoreCase?: string
 
   /**
-      * CacheKey中包含请求参数
+      * CacheKey中包含请求参数。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   QueryString?: QueryString
@@ -6250,12 +6332,12 @@ export interface DescribeTimingL7CacheDataResponse {
  */
 export interface DescribeApplicationProxyDetailRequest {
   /**
-   * 站点ID
+   * 站点ID。
    */
   ZoneId: string
 
   /**
-   * 实例ID
+   * 实例ID。
    */
   ProxyId: string
 }
@@ -6456,8 +6538,10 @@ export interface DescribeDDosMajorAttackEventRequest {
  */
 export interface Quic {
   /**
-   * 是否启动Quic配置
-   */
+      * 是否开启Quic配置，取值有：
+<li>on：开启；</li>
+<li>off：关闭。</li>
+      */
   Switch: string
 }
 
@@ -6512,20 +6596,23 @@ export interface DescribeSecurityPolicyResponse {
  */
 export interface QueryString {
   /**
-      * on | off CacheKey是否由QueryString组成
+      * CacheKey是否由QueryString组成，取值有：
+<li>on：是；</li>
+<li>off：否。</li>
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Switch: string
 
   /**
-      * includeCustom:使用部分url参数
-excludeCustom:排除部分url参数
+      * CacheKey使用QueryString的方式，取值有：
+<li>includeCustom：使用部分url参数；</li>
+<li>excludeCustom：排除部分url参数。</li>
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Action?: string
 
   /**
-      * 使用/排除的url参数数组
+      * 使用/排除的url参数数组。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Value?: Array<string>
@@ -6739,17 +6826,20 @@ export interface DescribeDDosAttackEventRequest {
 }
 
 /**
- * 客户端IP头部
+ * 存储客户端请求IP的头部信息配置
  */
 export interface ClientIp {
   /**
-      * 客户端IP头部配置开关
+      * 配置开关，取值有：
+<li>on：开启；</li>
+<li>off：关闭。</li>
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Switch: string
 
   /**
-      * 回源客户端IP请求头名称
+      * 回源时，存放客户端IP的请求头名称。
+为空则使用默认值：X-Forwarded-IP。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   HeaderName?: string
@@ -6803,104 +6893,110 @@ export interface DescribeHostsCertificateResponse {
  */
 export interface DescribeZoneSettingResponse {
   /**
-      * 缓存过期时间配置
+   * 站点ID。
+   */
+  ZoneId: string
+
+  /**
+   * 站点名称。
+   */
+  Zone: string
+
+  /**
+      * 缓存过期时间配置。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Cache: CacheConfig
 
   /**
-      * 节点缓存键配置
+      * 节点缓存键配置。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   CacheKey: CacheKey
 
   /**
-      * 浏览器缓存配置
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  MaxAge: MaxAge
-
-  /**
-      * 离线缓存
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  OfflineCache: OfflineCache
-
-  /**
-      * Quic访问
+      * Quic访问配置。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Quic: Quic
 
   /**
-      * POST请求传输配置
+      * POST请求传输配置。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   PostMaxSize: PostMaxSize
 
   /**
-      * 智能压缩配置
+      * 智能压缩配置。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Compression: Compression
 
   /**
-      * http2回源配置
+      * Http2回源配置。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   UpstreamHttp2: UpstreamHttp2
 
   /**
-      * 访问协议强制https跳转配置
+      * 访问协议强制Https跳转配置。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ForceRedirect: ForceRedirect
 
   /**
-      * Https 加速配置
+      * Https 加速配置。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Https: Https
 
   /**
-      * 源站配置
+      * 源站配置。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Origin: Origin
 
   /**
-      * 动态加速配置
+      * 智能加速配置。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   SmartRouting: SmartRouting
 
   /**
-   * 站点ID
-   */
-  ZoneId: string
+      * 浏览器缓存配置。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MaxAge: MaxAge
 
   /**
-   * 站点域名
-   */
-  Zone: string
+      * 离线缓存配置。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OfflineCache: OfflineCache
 
   /**
-      * WebSocket配置
+      * WebSocket配置。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   WebSocket: WebSocket
 
   /**
-      * 客户端IP回源请求头配置
+      * 客户端IP回源请求头配置。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ClientIpHeader: ClientIp
 
   /**
-      * 缓存预刷新配置
+      * 缓存预刷新配置。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   CachePrefresh: CachePrefresh
+
+  /**
+      * Ipv6访问配置。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Ipv6: Ipv6Access
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -6925,17 +7021,17 @@ smart_status_observe-观察处置
  */
 export interface MaxAge {
   /**
-      * MaxAge 时间设置，单位秒，最大365天
-注意：时间为0，即不缓存。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  MaxAgeTime?: number
-
-  /**
-      * 是否遵循源站，on或off，开启时忽略时间设置。
-注意：此字段可能返回 null，表示取不到有效值。
+      * 是否遵循源站，取值有：
+<li>on：遵循源站，忽略MaxAge 时间设置；</li>
+<li>off：不遵循源站，使用MaxAge 时间设置。</li>
       */
   FollowOrigin?: string
+
+  /**
+      * MaxAge 时间设置，单位秒，最大365天。
+注意：时间为0，即不缓存。
+      */
+  MaxAgeTime?: number
 }
 
 /**
@@ -7049,19 +7145,19 @@ day：天粒度
  */
 export interface CacheConfig {
   /**
-      * 缓存配置
+      * 缓存配置。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Cache?: CacheConfigCache
 
   /**
-      * 不缓存配置
+      * 不缓存配置。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   NoCache?: CacheConfigNoCache
 
   /**
-      * 遵循源站配置
+      * 遵循源站配置。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   FollowOrigin?: CacheConfigFollowOrigin
@@ -8285,95 +8381,102 @@ export interface ModifyZoneCnameSpeedUpRequest {
  */
 export interface DescribeApplicationProxyDetailResponse {
   /**
-   * 实例ID
+   * 实例ID。
    */
   ProxyId: string
 
   /**
-      * 代理名称
-当ProxyType=hostname时，表示域名或者子域名
-当ProxyType=instance时，表示实例名称
+      * 当ProxyType=hostname时，表示域名或子域名；
+当ProxyType=instance时，表示代理名称。
       */
   ProxyName: string
 
   /**
-      * 调度模式：
-ip表示Anycast IP
-domain表示CNAME
+      * 调度模式，取值有：
+<li>ip：表示Anycast IP调度；</li>
+<li>domain：表示CNAME调度。</li>
       */
   PlatType: string
 
   /**
-   * 0关闭安全，1开启安全
-   */
+      * 是否开启安全，取值有：
+<li>0：关闭安全；</li>
+<li>1：开启安全。</li>
+      */
   SecurityType: number
 
   /**
-   * 0关闭加速，1开启加速
-   */
+      * 是否开启加速，取值有：
+<li>0：关闭加速；</li>
+<li>1：开启加速。</li>
+      */
   AccelerateType: number
 
   /**
-   * 字段已经移至Rule.ForwardClientIp
+   * 字段已经废弃。
    */
   ForwardClientIp: string
 
   /**
-   * 字段已经移至Rule.SessionPersist
+   * 字段已经废弃。
    */
   SessionPersist: boolean
 
   /**
-   * 规则列表
+   * 规则列表。
    */
   Rule: Array<ApplicationProxyRule>
 
   /**
-      * 状态：
-online：启用
-offline：停用
-progress：部署中
+      * 状态，取值有：
+<li>online：启用；</li>
+<li>offline：停用；</li>
+<li>progress：部署中。</li>
       */
   Status: string
 
   /**
-   * 调度信息
+   * 调度信息。
    */
   ScheduleValue: Array<string>
 
   /**
-   * 更新时间
+   * 更新时间。
    */
   UpdateTime: string
 
   /**
-   * 站点ID
+   * 站点ID。
    */
   ZoneId: string
 
   /**
-   * 站点名称
+   * 站点名称。
    */
   ZoneName: string
 
   /**
-   * 会话保持时间
+   * 会话保持时间。
    */
   SessionPersistTime: number
 
   /**
-      * 服务类型
-hostname：子域名模式
-instance：实例模式
+      * 四层代理模式，取值有：
+<li>hostname：表示子域名模式；</li>
+<li>instance：表示实例模式。</li>
       */
   ProxyType: string
 
   /**
       * 当ProxyType=hostname时：
-ProxyName为域名，如：test.123.com
-HostId表示该域名，即test.123.com对应的代理加速唯一标识
+表示代理加速唯一标识。
       */
   HostId: string
+
+  /**
+   * IPv6访问配置。
+   */
+  Ipv6: Ipv6Access
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -8824,9 +8927,9 @@ both：同时被仅DNS和代理加速类型负载均衡使用
  */
 export interface UpstreamHttp2 {
   /**
-      * http2回源配置开关
-on：开启
-off：关闭
+      * http2回源配置开关，取值有：
+<li>on：开启；</li>
+<li>off：关闭。</li>
       */
   Switch: string
 }
@@ -8836,7 +8939,9 @@ off：关闭
  */
 export interface OfflineCache {
   /**
-      * on | off, 离线缓存是否开启
+      * 离线缓存是否开启，取值有：
+<li>on：开启；</li>
+<li>off：关闭。</li>
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Switch: string
