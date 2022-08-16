@@ -21,6 +21,7 @@ import {
   PublishMessageRequest,
   UpdateDevicesEnableStateResponse,
   DescribeProductCAResponse,
+  DeleteDeviceShadowResponse,
   UpdateProductPrivateCARequest,
   UnbindDevicesRequest,
   DescribeDeviceResourcesRequest,
@@ -33,6 +34,7 @@ import {
   PayloadLogItem,
   BindProductInfo,
   DescribeDevicesResponse,
+  DeleteDeviceShadowRequest,
   DeleteTopicRuleResponse,
   DescribeProductCARequest,
   DeviceLabel,
@@ -564,6 +566,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: EditFirmwareResponse) => void
   ): Promise<EditFirmwareResponse> {
     return this.request("EditFirmware", req, cb)
+  }
+
+  /**
+   * 本接口（DeleteDeviceShadow）用于删除设备影子
+   */
+  async DeleteDeviceShadow(
+    req: DeleteDeviceShadowRequest,
+    cb?: (error: string, rep: DeleteDeviceShadowResponse) => void
+  ): Promise<DeleteDeviceShadowResponse> {
+    return this.request("DeleteDeviceShadow", req, cb)
   }
 
   /**

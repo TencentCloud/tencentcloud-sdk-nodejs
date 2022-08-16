@@ -133,6 +133,7 @@ import {
   TransformParam,
   DescribeTopicSubscribeGroupRequest,
   DeleteInstancePreResponse,
+  TableMapping,
   DescribeInstanceAttributesRequest,
   TopicInSyncReplicaInfo,
   DeleteConnectResourceResponse,

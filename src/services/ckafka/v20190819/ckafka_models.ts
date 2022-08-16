@@ -1036,6 +1036,12 @@ export interface MySQLConnectParam {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ClusterId?: string
+
+  /**
+      * Mysql 连接源是否为自建集群
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SelfBuilt?: boolean
 }
 
 /**
@@ -3497,6 +3503,31 @@ export interface DeleteInstancePreResponse {
 }
 
 /**
+ * Table、Topic路由
+ */
+export interface TableMapping {
+  /**
+   * 库名
+   */
+  Database: string
+
+  /**
+   * 表名，多个表,（逗号）隔开
+   */
+  Table: string
+
+  /**
+   * Topic名称
+   */
+  Topic: string
+
+  /**
+   * Topic ID
+   */
+  TopicId: string
+}
+
+/**
  * DescribeInstanceAttributes请求参数结构体
  */
 export interface DescribeInstanceAttributesRequest {
@@ -5811,7 +5842,7 @@ export interface KafkaParam {
   /**
    * Topic名称，多个以“,”分隔
    */
-  Topic: string
+  Topic?: string
 
   /**
       * Offset类型，最开始位置earliest，最新位置latest，时间点位置timestamp
@@ -5860,6 +5891,18 @@ export interface KafkaParam {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   QpsLimit?: number
+
+  /**
+      * Table到Topic的路由，「分发到多个topic」开关打开时必传
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TableMappings?: Array<TableMapping>
+
+  /**
+      * 「分发到多个topic」开关，默认为false
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UseTableMapping?: boolean
 }
 
 /**
@@ -6465,6 +6508,12 @@ export interface PostgreSQLConnectParam {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   IsUpdate?: boolean
+
+  /**
+      * PostgreSQL连接源是否为自建集群
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SelfBuilt?: boolean
 }
 
 /**
@@ -7173,6 +7222,26 @@ export interface MySQLParam {
    * 当设置成员参数DropInvalidMessageToCls设置为true时,DropInvalidMessage参数失效
    */
   DropCls?: DropCls
+
+  /**
+   * 输出格式，DEFAULT、CANAL_1、CANAL_2
+   */
+  OutputFormat?: string
+
+  /**
+   * 当Table输入的是前缀时，该项值为true，否则为false
+   */
+  IsTablePrefix?: boolean
+
+  /**
+   * 如果该值为all，则DDL数据以及DML数据也会写入到选中的topic；若该值为dml，则只有DML数据写入到选中的topic
+   */
+  IncludeContentChanges?: string
+
+  /**
+   * 如果该值为true，且MySQL中"binlog_rows_query_log_events"配置项的值为"ON"，则流入到topic的数据包含原SQL语句；若该值为false，流入到topic的数据不包含原SQL语句
+   */
+  IncludeQuery?: boolean
 }
 
 /**

@@ -2013,6 +2013,24 @@ export interface NetAddr {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   NetType: string
+
+  /**
+      * 子网ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UniqSubnetId: string
+
+  /**
+      * 私有网络ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UniqVpcId: string
+
+  /**
+      * 描述信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Description: string
 }
 
 /**

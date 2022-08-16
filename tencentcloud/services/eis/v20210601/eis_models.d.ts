@@ -145,6 +145,17 @@ export interface ListRuntimeDeployedInstancesMCRequest {
       * 1:3.0版本新控制台传1；否则传0
       */
     ApiVersion?: number;
+    /**
+      * -1:不按项目筛选，获取所有
+>=0: 按项目id筛选
+      */
+    GroupId?: number;
+    /**
+      * -2: 不按状态筛选，获取所有
+0: 运行中
+2: 已停止
+      */
+    Status?: number;
 }
 /**
  * ListDeployableRuntimesMC返回参数结构体

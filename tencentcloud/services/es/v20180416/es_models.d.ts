@@ -2101,6 +2101,16 @@ RENEW_FLAG_DEFAULT：不自动续费
 注意：此字段可能返回 null，表示取不到有效值。
       */
     OperationDuration: OperationDuration;
+    /**
+      * web节点列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OptionalWebServiceInfos: Array<OptionalWebServiceInfo>;
+    /**
+      * 自治索引开关
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AutoIndexEnabled: boolean;
 }
 /**
  * DeleteIndex返回参数结构体
@@ -2383,6 +2393,10 @@ export interface UpdateIndexRequest {
       * 集群访问密码
       */
     Password?: string;
+    /**
+      * 是否滚动后备索引
+      */
+    RolloverBackingIndex?: boolean;
 }
 /**
  * UpdateIndex返回参数结构体
@@ -3030,4 +3044,44 @@ export interface RestartLogstashInstanceResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 可选web组件信息
+ */
+export interface OptionalWebServiceInfo {
+    /**
+      * 类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Type: string;
+    /**
+      * 状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Status: number;
+    /**
+      * 公网url
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PublicUrl: string;
+    /**
+      * 内网url
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PrivateUrl: string;
+    /**
+      * 公网访问权限
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PublicAccess: string;
+    /**
+      * 内网访问权限
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PrivateAccess: string;
+    /**
+      * 版本号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Version: string;
 }

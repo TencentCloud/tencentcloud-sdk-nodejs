@@ -2065,6 +2065,11 @@ ItemNames=["姓名","性别"]
    * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。
    */
   PdfPageNumber?: number
+
+  /**
+   * 是否开启全文字段识别，默认值为false，开启后可返回全文字段识别结果。
+   */
+  ReturnFullText?: boolean
 }
 
 /**

@@ -28,6 +28,12 @@ export interface Group {
    * 组名称
    */
   Name: string
+
+  /**
+      * 所属部门信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Department: Department
 }
 
 /**
@@ -115,6 +121,11 @@ export interface ModifyUserRequest {
    * 访问时间段限制， 由0、1组成的字符串，长度168(7 × 24)，代表该用户在一周中允许访问的时间段。字符串中第N个字符代表在一周中的第N个小时， 0 - 代表不允许访问，1 - 代表允许访问
    */
   ValidateTime?: string
+
+  /**
+   * 用户所属部门的ID，如1.2.3
+   */
+  DepartmentId?: string
 }
 
 /**
@@ -135,6 +146,27 @@ export interface DeleteDeviceGroupMembersResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 部门信息
+ */
+export interface Department {
+  /**
+   * 部门ID
+   */
+  Id: string
+
+  /**
+   * 部门名称，1 - 256个字符
+   */
+  Name: string
+
+  /**
+      * 部门管理员账号ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Managers: Array<string>
 }
 
 /**
@@ -230,6 +262,11 @@ export interface DescribeUserGroupsRequest {
    * 每页条目数量，缺省20，最大500
    */
   Limit?: number
+
+  /**
+   * 部门ID，用于过滤属于某个部门的用户组
+   */
+  DepartmentId?: string
 }
 
 /**
@@ -315,6 +352,11 @@ export interface DescribeUserGroupMembersRequest {
    * 每页条目数量，默认20, 最大500
    */
   Limit?: number
+
+  /**
+   * 所属部门ID
+   */
+  DepartmentId?: string
 }
 
 /**
@@ -442,6 +484,11 @@ export interface CreateAclRequest {
 生效、失效时间不填则访问权限长期有效
       */
   ValidateTo?: string
+
+  /**
+   * 访问权限所属部门的ID
+   */
+  DepartmentId?: string
 }
 
 /**
@@ -509,6 +556,18 @@ export interface User {
    * 访问时间段限制， 由0、1组成的字符串，长度168(7 × 24)，代表该用户在一周中允许访问的时间段。字符串中第N个字符代表在一周中的第N个小时， 0 - 代表不允许访问，1 - 代表允许访问
    */
   ValidateTime?: string
+
+  /**
+      * 用户所属部门（用于出参）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Department?: Department
+
+  /**
+      * 用户所属部门（用于入参）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DepartmentId?: string
 }
 
 /**
@@ -595,6 +654,12 @@ export interface Device {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Resource: Resource
+
+  /**
+      * 资产所属部门
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Department: Department
 }
 
 /**
@@ -640,6 +705,11 @@ export interface DescribeAclsRequest {
    * 访问权限状态，1 - 已生效，2 - 未生效，3 - 已过期
    */
   Status?: number
+
+  /**
+   * 部门ID，用于过滤属于某个部门的访问权限
+   */
+  DepartmentId?: string
 }
 
 /**
@@ -865,6 +935,11 @@ export interface CreateDeviceGroupRequest {
    * 资产组名，最大长度32字符
    */
   Name: string
+
+  /**
+   * 资产组所属部门ID，如：1.2.3
+   */
+  DepartmentId?: string
 }
 
 /**
@@ -1057,6 +1132,12 @@ export interface Acl {
    * 访问权限状态，1 - 已生效，2 - 未生效，3 - 已过期
    */
   Status: number
+
+  /**
+      * 所属部门的信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Department: Department
 }
 
 /**
@@ -1112,6 +1193,11 @@ export interface DescribeDevicesRequest {
    * 可提供按照多种类型过滤, 1 - Linux, 2 - Windows, 3 - MySQL, 4 - SQLServer
    */
   KindSet?: Array<number>
+
+  /**
+   * 过滤条件，可按照部门ID进行过滤
+   */
+  DepartmentId?: string
 }
 
 /**
@@ -1137,6 +1223,11 @@ export interface DescribeDeviceGroupsRequest {
    * 每页条目数量，缺省20，最大500
    */
   Limit?: number
+
+  /**
+   * 部门ID，用于过滤属于某个部门的资产组
+   */
+  DepartmentId?: string
 }
 
 /**
@@ -1269,6 +1360,11 @@ export interface ModifyAclRequest {
 生效、失效时间不填则访问权限长期有效
       */
   ValidateTo?: string
+
+  /**
+   * 权限所属部门的ID，如：1.2.3
+   */
+  DepartmentId?: string
 }
 
 /**
@@ -1351,6 +1447,11 @@ export interface CreateUserRequest {
    * 访问时间段限制， 由0、1组成的字符串，长度168(7 × 24)，代表该用户在一周中允许访问的时间段。字符串中第N个字符代表在一周中的第N个小时， 0 - 代表不允许访问，1 - 代表允许访问
    */
   ValidateTime?: string
+
+  /**
+   * 所属部门ID，如：“1.2.3”
+   */
+  DepartmentId?: string
 }
 
 /**
@@ -1442,6 +1543,11 @@ export interface DescribeUsersRequest {
    * 认证方式，0 - 本地, 1 - LDAP, 2 - OAuth, 不传为全部
    */
   AuthTypeSet?: Array<number>
+
+  /**
+   * 部门ID，用于过滤属于某个部门的用户
+   */
+  DepartmentId?: string
 }
 
 /**
@@ -1557,6 +1663,11 @@ export interface DescribeDeviceGroupMembersRequest {
    * 资产类型，1 - Linux，2 - Windows，3 - MySQL，4 - SQLServer
    */
   Kind?: number
+
+  /**
+   * 所属部门ID
+   */
+  DepartmentId?: string
 }
 
 /**
@@ -1577,6 +1688,11 @@ export interface CreateUserGroupRequest {
    * 用户组名，最大长度32字符
    */
   Name: string
+
+  /**
+   * 用户组所属部门的ID，如：1.2.3
+   */
+  DepartmentId?: string
 }
 
 /**

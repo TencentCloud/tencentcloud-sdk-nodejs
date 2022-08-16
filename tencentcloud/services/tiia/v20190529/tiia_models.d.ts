@@ -416,7 +416,7 @@ export interface ObjectInfo {
       */
     Attributes: Array<Attribute>;
     /**
-      * 图像的所有主体区域。
+      * 图像的所有主体区域，置信度，以及主体区域类别ID。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     AllBox: Array<Box>;
@@ -755,6 +755,10 @@ export interface Box {
       * 置信度。
       */
     Score: number;
+    /**
+      * 主体区域类目ID
+      */
+    CategoryId: number;
 }
 /**
  * RecognizeCar请求参数结构体

@@ -6109,11 +6109,11 @@ export interface ProtectMachine {
  */
 export interface DescribeAssetUserInfoRequest {
     /**
-      * 服务器Quuid
+      * 云服务器UUID
       */
     Quuid: string;
     /**
-      * 服务器Uuid
+      * 主机安全UUID
       */
     Uuid: string;
     /**

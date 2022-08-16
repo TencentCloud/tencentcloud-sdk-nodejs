@@ -250,6 +250,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("EditFirmware", req, cb);
     }
     /**
+     * 本接口（DeleteDeviceShadow）用于删除设备影子
+     */
+    async DeleteDeviceShadow(req, cb) {
+        return this.request("DeleteDeviceShadow", req, cb);
+    }
+    /**
      * 本接口（CreateDevice）用于新建一个物联网通信设备。
      */
     async CreateDevice(req, cb) {

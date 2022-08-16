@@ -1365,7 +1365,7 @@ export interface DescribeSocAlertListRequest {
       */
     PageIndex: number;
     /**
-      * 业务场景 参考ScenesType
+      * 1:急需关注 2.重保监控 3.全量告警
       */
     Scenes: number;
     /**

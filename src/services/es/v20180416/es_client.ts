@@ -128,6 +128,7 @@ import {
   UpgradeInstanceRequest,
   DescribeViewsResponse,
   RestartLogstashInstanceResponse,
+  OptionalWebServiceInfo,
 } from "./es_models"
 
 /**

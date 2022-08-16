@@ -228,7 +228,7 @@ export interface ModifyTopicRequest {
       */
     MaxSplitPartitions?: number;
     /**
-      * 生命周期，单位天，可取值范围1~3600。取值为3640时代表永久保存
+      * 生命周期，单位天，标准存储取值范围1~3600，低频存储取值范围7~3600。取值为3640时代表永久保存
       */
     Period?: number;
 }

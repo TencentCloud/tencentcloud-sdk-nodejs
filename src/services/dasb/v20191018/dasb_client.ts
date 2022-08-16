@@ -25,6 +25,7 @@ import {
   ModifyUserRequest,
   DeleteUsersRequest,
   DeleteDeviceGroupMembersResponse,
+  Department,
   AddUserGroupMembersResponse,
   DescribeDasbImageIdsResponse,
   CreateUserResponse,

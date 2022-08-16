@@ -50,6 +50,15 @@ export interface DescribeProductCAResponse {
     RequestId?: string;
 }
 /**
+ * DeleteDeviceShadow返回参数结构体
+ */
+export interface DeleteDeviceShadowResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * UpdateProductPrivateCA请求参数结构体
  */
 export interface UpdateProductPrivateCARequest {
@@ -333,6 +342,19 @@ export interface DescribeDevicesResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DeleteDeviceShadow请求参数结构体
+ */
+export interface DeleteDeviceShadowRequest {
+    /**
+      * 产品ID
+      */
+    ProductId: string;
+    /**
+      * 设备名称
+      */
+    DeviceName: string;
 }
 /**
  * DeleteTopicRule返回参数结构体

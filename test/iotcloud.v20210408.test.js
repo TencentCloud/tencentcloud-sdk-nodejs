@@ -388,6 +388,16 @@ it("iotcloud.v20210408.EditFirmware", async function () {
     }
 })
 
+it("iotcloud.v20210408.DeleteDeviceShadow", async function () {
+    try {
+       const data = await client.DeleteDeviceShadow({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotcloud.v20210408.CreateDevice", async function () {
     try {
        const data = await client.CreateDevice({})
