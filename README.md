@@ -114,7 +114,7 @@ async function main(){
 
 ## 代理
 
-如果是有代理的环境下，需要设置系统环境变量 `https_proxy` ，否则可能无法正常调用，抛出连接超时的异常。
+如果是有代理的环境下，需要设置系统环境变量 `http_proxy` ，否则可能无法正常调用，抛出连接超时的异常。
 
 # 旧版 SDK
 
@@ -142,8 +142,8 @@ async function main(){
   # windows powershell
   $env:NODE_DEBUG='http' ; node app.js
   ```
-  如需要配置代理，请设置环境变量 `https_proxy`，例如：
+  如需要配置代理，请设置环境变量 `http_proxy`，例如：
   ```sh
   # MacOS
-  https_proxy=http://代理地址:代理端口 node app.js
+  http_proxy=http://代理地址:代理端口 node app.js
   ```
