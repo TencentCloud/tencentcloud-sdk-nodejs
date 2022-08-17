@@ -28,16 +28,10 @@ class Client extends abstract_client_1.AbstractClient {
         super("gme.tencentcloudapi.com", "2018-07-11", clientConfig);
     }
     /**
-     * 根据应用ID和文件ID查询识别结果
+     * 获取房间内用户信息
      */
-    async DescribeFilterResult(req, cb) {
-        return this.request("DescribeFilterResult", req, cb);
-    }
-    /**
-     * 根据日期查询识别结果列表
-     */
-    async DescribeFilterResultList(req, cb) {
-        return this.request("DescribeFilterResultList", req, cb);
+    async DescribeRoomInfo(req, cb) {
+        return this.request("DescribeRoomInfo", req, cb);
     }
     /**
      * 删除自定义送检用户
@@ -70,24 +64,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeUserInAndOutTime", req, cb);
     }
     /**
-     * 获取房间内用户信息
+     * 获取用户自定义送检信息
      */
-    async DescribeRoomInfo(req, cb) {
-        return this.request("DescribeRoomInfo", req, cb);
-    }
-    /**
-     * 更新自定义送检房间号
-     */
-    async UpdateScanRooms(req, cb) {
-        return this.request("UpdateScanRooms", req, cb);
-    }
-    /**
-     * 本接口用于识别涉黄等违规音频，成功会回调配置在应用的回调地址。回调示例如下：
-{"BizId":0,"FileId":"test_file_id","FileName":"test_file_name","FileUrl":"test_file_url","OpenId":"test_open_id","TimeStamp":"0000-00-00 00:00:00","Data":[{"Type":1,"Word":"xx"}]}
-Type表示过滤类型，1：色情，2：谩骂
-     */
-    async VoiceFilter(req, cb) {
-        return this.request("VoiceFilter", req, cb);
+    async DescribeRealtimeScanConfig(req, cb) {
+        return this.request("DescribeRealtimeScanConfig", req, cb);
     }
     /**
      * 用户使用该接口可以创建语音消息转文本自学习模型，以供识别调用
@@ -276,10 +256,10 @@ Type表示过滤类型，1：色情，2：谩骂
         return this.request("ModifyCustomization", req, cb);
     }
     /**
-     * 获取用户自定义送检信息
+     * 更新自定义送检房间号
      */
-    async DescribeRealtimeScanConfig(req, cb) {
-        return this.request("DescribeRealtimeScanConfig", req, cb);
+    async UpdateScanRooms(req, cb) {
+        return this.request("UpdateScanRooms", req, cb);
     }
     /**
      * 本接口(CreateApp)用于创建一个GME应用。

@@ -118,6 +118,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeClusterCommonNames", req, cb);
     }
     /**
+     * 获取2.0实例初始化任务状态
+     */
+    async DescribePrometheusInstanceInitStatus(req, cb) {
+        return this.request("DescribePrometheusInstanceInitStatus", req, cb);
+    }
+    /**
      * 开启事件持久化功能
      */
     async EnableEventPersistence(req, cb) {
@@ -208,10 +214,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteEKSCluster", req, cb);
     }
     /**
-     * 将集群内节点移入节点池
+     * 获取事件、审计和日志的状态接口
      */
-    async AddNodeToNodePool(req, cb) {
-        return this.request("AddNodeToNodePool", req, cb);
+    async DescribeEdgeLogSwitches(req, cb) {
+        return this.request("DescribeEdgeLogSwitches", req, cb);
     }
     /**
      * 获取边缘计算外部访问的kubeconfig
@@ -340,10 +346,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeExistedInstances", req, cb);
     }
     /**
-     * 获取2.0实例初始化任务状态
+     * 查询节点池列表
      */
-    async DescribePrometheusInstanceInitStatus(req, cb) {
-        return this.request("DescribePrometheusInstanceInitStatus", req, cb);
+    async DescribeClusterNodePools(req, cb) {
+        return this.request("DescribeClusterNodePools", req, cb);
     }
     /**
      * 获取边缘计算集群的认证信息
@@ -370,10 +376,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteEdgeCVMInstances", req, cb);
     }
     /**
-     * 获取事件、审计和日志的状态接口
+     * 将集群内节点移入节点池
      */
-    async DescribeEdgeLogSwitches(req, cb) {
-        return this.request("DescribeEdgeLogSwitches", req, cb);
+    async AddNodeToNodePool(req, cb) {
+        return this.request("AddNodeToNodePool", req, cb);
     }
     /**
      * 查询集群列表
@@ -500,6 +506,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyNodePoolDesiredCapacityAboutAsg(req, cb) {
         return this.request("ModifyNodePoolDesiredCapacityAboutAsg", req, cb);
+    }
+    /**
+     * 修改集群认证配置
+     */
+    async ModifyClusterAuthenticationOptions(req, cb) {
+        return this.request("ModifyClusterAuthenticationOptions", req, cb);
     }
     /**
      * 创建弹性集群
@@ -700,12 +712,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeClusterSecurity", req, cb);
     }
     /**
-     * 获取集群的访问地址，包括内网地址，外网地址，外网域名，外网访问安全策略
-     */
-    async DescribeClusterEndpoints(req, cb) {
-        return this.request("DescribeClusterEndpoints", req, cb);
-    }
-    /**
      * 获取2.0实例关联集群列表
      */
     async DescribePrometheusClusterAgents(req, cb) {
@@ -748,10 +754,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeECMInstances", req, cb);
     }
     /**
-     * 查询节点池列表
+     * 获取集群的访问地址，包括内网地址，外网地址，外网域名，外网访问安全策略
      */
-    async DescribeClusterNodePools(req, cb) {
-        return this.request("DescribeClusterNodePools", req, cb);
+    async DescribeClusterEndpoints(req, cb) {
+        return this.request("DescribeClusterEndpoints", req, cb);
     }
     /**
      * 与云监控融合的2.0实例关联集群
@@ -778,10 +784,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DisableClusterAudit", req, cb);
     }
     /**
-     * 修改集群认证配置
+     * 创建边缘容器CVM机器
      */
-    async ModifyClusterAuthenticationOptions(req, cb) {
-        return this.request("ModifyClusterAuthenticationOptions", req, cb);
+    async CreateEdgeCVMInstances(req, cb) {
+        return this.request("CreateEdgeCVMInstances", req, cb);
     }
     /**
      * 查询集群路由

@@ -3397,6 +3397,39 @@ export interface CreateClusterRequest {
     ExtensionAddons?: Array<ExtensionAddon>;
 }
 /**
+ * CreateEdgeCVMInstances请求参数结构体
+ */
+export interface CreateEdgeCVMInstancesRequest {
+    /**
+      * 集群id
+      */
+    ClusterID: string;
+    /**
+      * CVM创建透传参数，json化字符串格式，如需要保证扩展集群节点请求幂等性需要在此参数添加ClientToken字段，详见[CVM创建实例](https://cloud.tencent.com/document/product/213/15730)接口。
+      */
+    RunInstancePara: string;
+    /**
+      * CVM所属Region
+      */
+    CvmRegion: string;
+    /**
+      * CVM数量
+      */
+    CvmCount: number;
+    /**
+      * 实例扩展信息
+      */
+    External?: string;
+    /**
+      * 用户自定义脚本
+      */
+    UserScript?: string;
+    /**
+      * 是否开启弹性网卡功能
+      */
+    EnableEni?: boolean;
+}
+/**
  * 加入存量节点时的节点池选项
  */
 export interface NodePoolOption {
@@ -3445,6 +3478,19 @@ export interface DescribePrometheusGlobalConfigResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     RawJobs: Array<PrometheusConfigItem>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * CreateEdgeCVMInstances返回参数结构体
+ */
+export interface CreateEdgeCVMInstancesResponse {
+    /**
+      * cvm id 列表
+      */
+    CvmIdSet: Array<string>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4643,21 +4689,45 @@ CUCC：中国联通
     InternetMaxBandwidthOut?: number;
 }
 /**
- * 某个节点升级前检查结果
+ * DescribeEKSContainerInstances请求参数结构体
  */
-export interface InstanceUpgradePreCheckResult {
+export interface DescribeEKSContainerInstancesRequest {
     /**
-      * 检查是否通过
+      * 限定此次返回资源的数量。如果不设定，默认返回20，最大不能超过100
       */
-    CheckPass: boolean;
+    Limit?: number;
     /**
-      * 检查项数组
+      * 偏移量,默认0
       */
-    Items: Array<InstanceUpgradePreCheckResultItem>;
+    Offset?: number;
     /**
-      * 本节点独立pod列表
+      * 过滤条件，可条件：
+(1)实例名称
+KeyName: eks-ci-name
+类型：String
+
+(2)实例状态
+KeyName: status
+类型：String
+可选值："Pending", "Running", "Succeeded", "Failed"
+
+(3)内网ip
+KeyName: private-ip
+类型：String
+
+(4)EIP地址
+KeyName: eip-address
+类型：String
+
+(5)VpcId
+KeyName: vpc-id
+类型：String
       */
-    SinglePods: Array<string>;
+    Filters?: Array<Filter>;
+    /**
+      * 容器实例 ID 数组
+      */
+    EksCiIds?: Array<string>;
 }
 /**
  * DescribeClusterControllers请求参数结构体
@@ -9022,45 +9092,21 @@ export interface DeletePrometheusRecordRuleYamlRequest {
     Names: Array<string>;
 }
 /**
- * DescribeEKSContainerInstances请求参数结构体
+ * 某个节点升级前检查结果
  */
-export interface DescribeEKSContainerInstancesRequest {
+export interface InstanceUpgradePreCheckResult {
     /**
-      * 限定此次返回资源的数量。如果不设定，默认返回20，最大不能超过100
+      * 检查是否通过
       */
-    Limit?: number;
+    CheckPass: boolean;
     /**
-      * 偏移量,默认0
+      * 检查项数组
       */
-    Offset?: number;
+    Items: Array<InstanceUpgradePreCheckResultItem>;
     /**
-      * 过滤条件，可条件：
-(1)实例名称
-KeyName: eks-ci-name
-类型：String
-
-(2)实例状态
-KeyName: status
-类型：String
-可选值："Pending", "Running", "Succeeded", "Failed"
-
-(3)内网ip
-KeyName: private-ip
-类型：String
-
-(4)EIP地址
-KeyName: eip-address
-类型：String
-
-(5)VpcId
-KeyName: vpc-id
-类型：String
+      * 本节点独立pod列表
       */
-    Filters?: Array<Filter>;
-    /**
-      * 容器实例 ID 数组
-      */
-    EksCiIds?: Array<string>;
+    SinglePods: Array<string>;
 }
 /**
  * ScaleInClusterMaster返回参数结构体

@@ -40,10 +40,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBPCompanyInfo", req, cb);
     }
     /**
-     * 版权保护-新建拦截接口
+     * 品牌经营管家-版权保护个人认证接口
      */
-    async CreateCRBlock(req, cb) {
-        return this.request("CreateCRBlock", req, cb);
+    async CreateCRUserVerify(req, cb) {
+        return this.request("CreateCRUserVerify", req, cb);
     }
     /**
      * 版权保护-添加作品接口
@@ -56,6 +56,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateBPOfflineTicket(req, cb) {
         return this.request("CreateBPOfflineTicket", req, cb);
+    }
+    /**
+     * 版权保护-新建拦截接口
+     */
+    async CreateCRBlock(req, cb) {
+        return this.request("CreateCRBlock", req, cb);
     }
     /**
      * 申请取证

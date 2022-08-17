@@ -140,6 +140,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("PullSmsSendStatusByPhoneNumber", req, cb);
     }
     /**
+     * 短信转化率上报。将已接收到短信的流水号上报到腾讯云短信服务。
+>- 注：当前接口以白名单方式对外开放，如有需要请联系 [腾讯云短信小助手](https://cloud.tencent.com/document/product/382/3773#.E6.8A.80.E6.9C.AF.E4.BA.A4.E6.B5.81) 开通。
+     */
+    async ReportConversion(req, cb) {
+        return this.request("ReportConversion", req, cb);
+    }
+    /**
      * 1. 修改短信正文模板，修改之前请先认真参阅 [腾讯云短信正文模板审核标准](https://cloud.tencent.com/document/product/382/39023)。
 2. ⚠️注意：个人认证用户不支持使用 API 修改短信正文模板，请参阅了解 [实名认证基本介绍](https://cloud.tencent.com/document/product/378/3629)，如果为个人认证请登录 [控制台](https://console.cloud.tencent.com/smsv2) 修改短信正文模板。
 3. 修改短信模板，仅当正文模板为**待审核**或**已拒绝**状态时，才能进行修改，**已审核通过**的正文模板不支持修改。

@@ -38,9 +38,9 @@ it("bma.v20210624.DescribeBPCompanyInfo", async function () {
     }
 })
 
-it("bma.v20210624.CreateCRBlock", async function () {
+it("bma.v20210624.CreateCRUserVerify", async function () {
     try {
-       const data = await client.CreateCRBlock({})
+       const data = await client.CreateCRUserVerify({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -61,6 +61,16 @@ it("bma.v20210624.CreateCRWork", async function () {
 it("bma.v20210624.CreateBPOfflineTicket", async function () {
     try {
        const data = await client.CreateBPOfflineTicket({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bma.v20210624.CreateCRBlock", async function () {
+    try {
+       const data = await client.CreateCRBlock({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

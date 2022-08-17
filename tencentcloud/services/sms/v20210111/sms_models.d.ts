@@ -130,6 +130,19 @@ export interface SmsPackagesStatisticsRequest {
     EndTime: string;
 }
 /**
+ * 转化率上报响应。
+ */
+export interface ReportConversionStatus {
+    /**
+      * 错误码。上报成功返回 ok。
+      */
+    Code: string;
+    /**
+      * 错误码描述。
+      */
+    Message: string;
+}
+/**
  * AddSmsSign请求参数结构体
  */
 export interface AddSmsSignRequest {
@@ -252,6 +265,19 @@ export interface PullSmsSendStatusByPhoneNumberRequest {
       * 拉取截止时间，UNIX 时间戳（时间：秒）。
       */
     EndTime?: number;
+}
+/**
+ * ReportConversion返回参数结构体
+ */
+export interface ReportConversionResponse {
+    /**
+      * 转化率上报响应包体。
+      */
+    ReportConversionStatus: ReportConversionStatus;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * AddSmsTemplate请求参数结构体
@@ -968,6 +994,23 @@ export interface ModifySmsSignResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * ReportConversion请求参数结构体
+ */
+export interface ReportConversionRequest {
+    /**
+      * 短信应用ID。在 [短信控制台](https://console.cloud.tencent.com/smsv2/app-manage)  添加应用后生成的实际 SdkAppId，示例如1400006666。
+      */
+    SmsSdkAppId: string;
+    /**
+      * 发送短信返回的流水号。
+      */
+    SerialNo: string;
+    /**
+      * 用户回填时间，UNIX 时间戳（单位：秒）。
+      */
+    ConversionTime?: number;
 }
 /**
  * 添加签名响应

@@ -51,58 +51,33 @@ export interface ProtectURLInfo {
 }
 
 /**
- * 版权保护-监测结果
+ * CreateCRUserVerify请求参数结构体
  */
-export interface Monitor {
+export interface CreateCRUserVerifyRequest {
   /**
-   * 作品ID
+   * 用户真实姓名
    */
-  WorkId: number
+  UserName: string
 
   /**
-   * 作品名称
+   * 用户身份证ID
    */
-  WorkName: string
+  UserID: string
 
   /**
-   * 作品内容类型 01-视频 02-音频 03-文本 04-图片
+   * 用户手机号码
    */
-  WorkType: string
+  UserPhone: string
 
   /**
-   * 侵权平台数量
+   * 短信验证码
    */
-  TortPlatNum: number
+  VerificationCode: string
 
   /**
-   * 侵权链接数量
+   * xxx
    */
-  TortURLNum: number
-
-  /**
-   * 监测时间
-   */
-  MonitorTime: string
-
-  /**
-   * 0-待监测 1-监测中 2-不监测 3-暂停监测
-   */
-  MonitorStatus: number
-
-  /**
-   * 作品类型
-   */
-  WorkCategory: string
-
-  /**
-   * xx
-   */
-  InsertTime: string
-
-  /**
-   * xx
-   */
-  MonitorNote: string
+  Type?: string
 }
 
 /**
@@ -308,6 +283,61 @@ export interface ModifyCRBlockStatusResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 版权保护-监测结果
+ */
+export interface Monitor {
+  /**
+   * 作品ID
+   */
+  WorkId: number
+
+  /**
+   * 作品名称
+   */
+  WorkName: string
+
+  /**
+   * 作品内容类型 01-视频 02-音频 03-文本 04-图片
+   */
+  WorkType: string
+
+  /**
+   * 侵权平台数量
+   */
+  TortPlatNum: number
+
+  /**
+   * 侵权链接数量
+   */
+  TortURLNum: number
+
+  /**
+   * 监测时间
+   */
+  MonitorTime: string
+
+  /**
+   * 0-待监测 1-监测中 2-不监测 3-暂停监测
+   */
+  MonitorStatus: number
+
+  /**
+   * 作品类型
+   */
+  WorkCategory: string
+
+  /**
+   * xx
+   */
+  InsertTime: string
+
+  /**
+   * xx
+   */
+  MonitorNote: string
 }
 
 /**
@@ -991,6 +1021,31 @@ export interface DescribeBPReportFakeURLsResponse {
 }
 
 /**
+ * DescribeCRMonitorDetail请求参数结构体
+ */
+export interface DescribeCRMonitorDetailRequest {
+  /**
+   * 作品ID
+   */
+  WorkId: number
+
+  /**
+   * 页数
+   */
+  PageSize?: number
+
+  /**
+   * 页码
+   */
+  PageNumber?: number
+
+  /**
+   * x
+   */
+  Filters?: Array<Filter>
+}
+
+/**
  * 过滤参数
  */
 export type Filter = null
@@ -1171,28 +1226,23 @@ export interface CreateBPOfflineTicketRequest {
 }
 
 /**
- * DescribeCRMonitorDetail请求参数结构体
+ * CreateCRUserVerify返回参数结构体
  */
-export interface DescribeCRMonitorDetailRequest {
+export interface CreateCRUserVerifyResponse {
   /**
-   * 作品ID
+   * 认证状态 0-认证成功 1-认证失败
    */
-  WorkId: number
+  Status: number
 
   /**
-   * 页数
+   * 认证结果返回
    */
-  PageSize?: number
+  Note: string
 
   /**
-   * 页码
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  PageNumber?: number
-
-  /**
-   * x
-   */
-  Filters?: Array<Filter>
+  RequestId?: string
 }
 
 /**

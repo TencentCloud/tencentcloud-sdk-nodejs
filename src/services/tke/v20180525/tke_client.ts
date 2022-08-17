@@ -185,9 +185,11 @@ import {
   ModifyNodePoolInstanceTypesRequest,
   AddClusterCIDRRequest,
   CreateClusterRequest,
+  CreateEdgeCVMInstancesRequest,
   NodePoolOption,
   DescribeEdgeClusterExtraArgsRequest,
   DescribePrometheusGlobalConfigResponse,
+  CreateEdgeCVMInstancesResponse,
   DescribeEdgeLogSwitchesResponse,
   CreatePrometheusClusterAgentResponse,
   DescribePrometheusTemplatesResponse,
@@ -245,7 +247,7 @@ import {
   Filter,
   UpdateTKEEdgeClusterResponse,
   EipAttribute,
-  InstanceUpgradePreCheckResult,
+  DescribeEKSContainerInstancesRequest,
   DescribeClusterControllersRequest,
   ModifyPrometheusAlertRuleRequest,
   DescribeClusterSecurityResponse,
@@ -474,7 +476,7 @@ import {
   ExistedInstancesForNode,
   DescribePrometheusOverviewsResponse,
   DeletePrometheusRecordRuleYamlRequest,
-  DescribeEKSContainerInstancesRequest,
+  InstanceUpgradePreCheckResult,
   ScaleInClusterMasterResponse,
   DescribeAvailableClusterVersionResponse,
   DeleteEKSContainerInstancesRequest,
@@ -646,6 +648,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取2.0实例初始化任务状态
+   */
+  async DescribePrometheusInstanceInitStatus(
+    req?: DescribePrometheusInstanceInitStatusRequest,
+    cb?: (error: string, rep: DescribePrometheusInstanceInitStatusResponse) => void
+  ): Promise<DescribePrometheusInstanceInitStatusResponse> {
+    return this.request("DescribePrometheusInstanceInitStatus", req, cb)
+  }
+
+  /**
    * 开启事件持久化功能
    */
   async EnableEventPersistence(
@@ -796,13 +808,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 将集群内节点移入节点池
+   * 获取事件、审计和日志的状态接口
    */
-  async AddNodeToNodePool(
-    req: AddNodeToNodePoolRequest,
-    cb?: (error: string, rep: AddNodeToNodePoolResponse) => void
-  ): Promise<AddNodeToNodePoolResponse> {
-    return this.request("AddNodeToNodePool", req, cb)
+  async DescribeEdgeLogSwitches(
+    req: DescribeEdgeLogSwitchesRequest,
+    cb?: (error: string, rep: DescribeEdgeLogSwitchesResponse) => void
+  ): Promise<DescribeEdgeLogSwitchesResponse> {
+    return this.request("DescribeEdgeLogSwitches", req, cb)
   }
 
   /**
@@ -1016,13 +1028,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取2.0实例初始化任务状态
+   * 查询节点池列表
    */
-  async DescribePrometheusInstanceInitStatus(
-    req?: DescribePrometheusInstanceInitStatusRequest,
-    cb?: (error: string, rep: DescribePrometheusInstanceInitStatusResponse) => void
-  ): Promise<DescribePrometheusInstanceInitStatusResponse> {
-    return this.request("DescribePrometheusInstanceInitStatus", req, cb)
+  async DescribeClusterNodePools(
+    req: DescribeClusterNodePoolsRequest,
+    cb?: (error: string, rep: DescribeClusterNodePoolsResponse) => void
+  ): Promise<DescribeClusterNodePoolsResponse> {
+    return this.request("DescribeClusterNodePools", req, cb)
   }
 
   /**
@@ -1066,13 +1078,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取事件、审计和日志的状态接口
+   * 将集群内节点移入节点池
    */
-  async DescribeEdgeLogSwitches(
-    req: DescribeEdgeLogSwitchesRequest,
-    cb?: (error: string, rep: DescribeEdgeLogSwitchesResponse) => void
-  ): Promise<DescribeEdgeLogSwitchesResponse> {
-    return this.request("DescribeEdgeLogSwitches", req, cb)
+  async AddNodeToNodePool(
+    req: AddNodeToNodePoolRequest,
+    cb?: (error: string, rep: AddNodeToNodePoolResponse) => void
+  ): Promise<AddNodeToNodePoolResponse> {
+    return this.request("AddNodeToNodePool", req, cb)
   }
 
   /**
@@ -1283,6 +1295,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyNodePoolDesiredCapacityAboutAsgResponse) => void
   ): Promise<ModifyNodePoolDesiredCapacityAboutAsgResponse> {
     return this.request("ModifyNodePoolDesiredCapacityAboutAsg", req, cb)
+  }
+
+  /**
+   * 修改集群认证配置
+   */
+  async ModifyClusterAuthenticationOptions(
+    req: ModifyClusterAuthenticationOptionsRequest,
+    cb?: (error: string, rep: ModifyClusterAuthenticationOptionsResponse) => void
+  ): Promise<ModifyClusterAuthenticationOptionsResponse> {
+    return this.request("ModifyClusterAuthenticationOptions", req, cb)
   }
 
   /**
@@ -1616,16 +1638,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取集群的访问地址，包括内网地址，外网地址，外网域名，外网访问安全策略
-   */
-  async DescribeClusterEndpoints(
-    req: DescribeClusterEndpointsRequest,
-    cb?: (error: string, rep: DescribeClusterEndpointsResponse) => void
-  ): Promise<DescribeClusterEndpointsResponse> {
-    return this.request("DescribeClusterEndpoints", req, cb)
-  }
-
-  /**
    * 获取2.0实例关联集群列表
    */
   async DescribePrometheusClusterAgents(
@@ -1696,13 +1708,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询节点池列表
+   * 获取集群的访问地址，包括内网地址，外网地址，外网域名，外网访问安全策略
    */
-  async DescribeClusterNodePools(
-    req: DescribeClusterNodePoolsRequest,
-    cb?: (error: string, rep: DescribeClusterNodePoolsResponse) => void
-  ): Promise<DescribeClusterNodePoolsResponse> {
-    return this.request("DescribeClusterNodePools", req, cb)
+  async DescribeClusterEndpoints(
+    req: DescribeClusterEndpointsRequest,
+    cb?: (error: string, rep: DescribeClusterEndpointsResponse) => void
+  ): Promise<DescribeClusterEndpointsResponse> {
+    return this.request("DescribeClusterEndpoints", req, cb)
   }
 
   /**
@@ -1746,13 +1758,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改集群认证配置
+   * 创建边缘容器CVM机器
    */
-  async ModifyClusterAuthenticationOptions(
-    req: ModifyClusterAuthenticationOptionsRequest,
-    cb?: (error: string, rep: ModifyClusterAuthenticationOptionsResponse) => void
-  ): Promise<ModifyClusterAuthenticationOptionsResponse> {
-    return this.request("ModifyClusterAuthenticationOptions", req, cb)
+  async CreateEdgeCVMInstances(
+    req: CreateEdgeCVMInstancesRequest,
+    cb?: (error: string, rep: CreateEdgeCVMInstancesResponse) => void
+  ): Promise<CreateEdgeCVMInstancesResponse> {
+    return this.request("CreateEdgeCVMInstances", req, cb)
   }
 
   /**

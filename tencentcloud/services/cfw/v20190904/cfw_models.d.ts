@@ -537,7 +537,7 @@ export interface DescribeNatFwVpcDnsLstRequest {
  */
 export interface DescribeCfwEipsRequest {
     /**
-      * 0：cfw新增模式，1：cfw接入模式
+      * 1：cfw接入模式，目前仅支持接入模式实例
       */
     Mode: number;
     /**
@@ -545,7 +545,7 @@ export interface DescribeCfwEipsRequest {
       */
     NatGatewayId: string;
     /**
-      * 防火墙实例id
+      * 防火墙实例id，当前仅支持接入模式的实例
       */
     CfwInstance?: string;
 }

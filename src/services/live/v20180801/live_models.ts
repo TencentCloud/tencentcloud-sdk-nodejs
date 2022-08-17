@@ -469,7 +469,7 @@ ContinueBreakPoint：播放完当前正在播放的点播 url 后再使用新的
 
   /**
       * 完整目标 URL 地址。
-用法注意：如果使用该参数来传完整目标地址，则 DomainName, AppName, StreamName 需要传入空值，任务将会使用该 ToUrl 参数指定的目标地址。
+用法注意：如果使用该参数来传完整目标地址，则 DomainName, AppName, StreamName 需要传入空字符串，任务将会使用该 ToUrl 参数指定的目标地址。
 
 注意：签名时间需要超过任务结束时间，避免因签名过期造成任务失败。
       */
@@ -491,6 +491,15 @@ PullVodPushLive -点播。
 只允许填一个备源 URL
       */
   BackupSourceUrl?: string
+
+  /**
+      * 水印信息列表。
+注意：
+1. 最多支持4个不同位置的水印。
+2. 水印图片 URL 请使用合法外网可访问地址。
+3. 支持的水印图片格式：png，jpg，gif 等。
+      */
+  WatermarkList?: Array<PullPushWatermarkInfo>
 }
 
 /**
@@ -3567,13 +3576,44 @@ export interface DropLiveStreamRequest {
 }
 
 /**
- * StopLiveRecord返回参数结构体
+ * 云转推水印信息。
  */
-export interface StopLiveRecordResponse {
+export interface PullPushWatermarkInfo {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 水印图片 URL。
+URL中禁止包含的字符：
+;(){}$>`#"'|
+      */
+  PictureUrl: string
+
+  /**
+   * 显示位置，X轴偏移，单位是百分比，默认 0。
    */
-  RequestId?: string
+  XPosition: number
+
+  /**
+   * 显示位置，Y轴偏移，单位是百分比，默认 0。
+   */
+  YPosition: number
+
+  /**
+   * 水印宽度，占直播原始画面宽度百分比，建议高宽只设置一项，另外一项会自适应缩放，避免变形。默认原始宽度。
+   */
+  Width: number
+
+  /**
+   * 水印高度，占直播原始画面高度百分比，建议高宽只设置一项，另外一项会自适应缩放，避免变形。默认原始高度。
+   */
+  Height: number
+
+  /**
+      * 水印位置，默认 0。
+0：左上角。
+1：右上角。
+2：右下角。
+3：左下角。
+      */
+  Location: number
 }
 
 /**
@@ -4746,6 +4786,16 @@ export interface DescribeLiveStreamPushInfoListRequest {
 }
 
 /**
+ * StopLiveRecord返回参数结构体
+ */
+export interface StopLiveRecordResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeLiveWatermarks返回参数结构体
  */
 export interface DescribeLiveWatermarksResponse {
@@ -5153,6 +5203,19 @@ PullVodPushLive -点播。
 只允许填一个备源 URL
       */
   BackupSourceUrl?: string
+
+  /**
+      * 水印信息列表。
+注意：
+1. 最多支持4个不同位置的水印。
+2. 水印图片 URL 请使用合法外网可访问地址。
+3. 支持的水印图片格式：png，jpg等。
+4. 轮播任务修改水印后，轮播到下一个文件时新水印生效。
+5. 直播源任务修改水印后，水印立即生效。
+6. 清除水印时，需携带该水印列表参数，内容为空数组。
+7. 暂不支持动图水印。
+      */
+  WatermarkList?: Array<PullPushWatermarkInfo>
 }
 
 /**
@@ -7694,6 +7757,26 @@ pause：暂停中。
    * 任务备注信息。
    */
   Comment: string
+
+  /**
+      * 备源类型：
+PullLivePushLive -直播，
+PullVodPushLive -点播。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BackupSourceType: string
+
+  /**
+      * 备源URL。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BackupSourceUrl: string
+
+  /**
+      * 水印信息列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  WatermarkList: Array<PullPushWatermarkInfo>
 }
 
 /**

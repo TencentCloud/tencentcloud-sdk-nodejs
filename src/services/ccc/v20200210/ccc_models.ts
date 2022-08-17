@@ -1391,7 +1391,7 @@ export interface DescribeStaffInfoListRequest {
   SdkAppId: number
 
   /**
-   * 分页尺寸，上限 100
+   * 分页尺寸，上限 9999
    */
   PageSize: number
 
@@ -1409,6 +1409,11 @@ export interface DescribeStaffInfoListRequest {
    * 查询修改时间大于等于ModifiedTime的坐席时使用
    */
   ModifiedTime?: number
+
+  /**
+   * 技能组ID
+   */
+  SkillGroupId?: number
 }
 
 /**

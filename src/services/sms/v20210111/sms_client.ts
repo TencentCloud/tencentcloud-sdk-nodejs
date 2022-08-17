@@ -23,11 +23,13 @@ import {
   ModifySmsTemplateResponse,
   ModifySmsSignRequest,
   SmsPackagesStatisticsRequest,
+  ReportConversionStatus,
   AddSmsSignRequest,
   AddTemplateStatus,
   DescribeSmsTemplateListResponse,
   DescribePhoneNumberInfoRequest,
   PullSmsSendStatusByPhoneNumberRequest,
+  ReportConversionResponse,
   AddSmsTemplateRequest,
   ModifySmsTemplateRequest,
   PullSmsReplyStatus,
@@ -61,6 +63,7 @@ import {
   DeleteSmsSignRequest,
   PullSmsReplyStatusByPhoneNumberRequest,
   ModifySmsSignResponse,
+  ReportConversionRequest,
   AddSignStatus,
   ModifyTemplateStatus,
   PullSmsSendStatusResponse,
@@ -236,6 +239,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: PullSmsSendStatusByPhoneNumberResponse) => void
   ): Promise<PullSmsSendStatusByPhoneNumberResponse> {
     return this.request("PullSmsSendStatusByPhoneNumber", req, cb)
+  }
+
+  /**
+     * 短信转化率上报。将已接收到短信的流水号上报到腾讯云短信服务。
+>- 注：当前接口以白名单方式对外开放，如有需要请联系 [腾讯云短信小助手](https://cloud.tencent.com/document/product/382/3773#.E6.8A.80.E6.9C.AF.E4.BA.A4.E6.B5.81) 开通。
+     */
+  async ReportConversion(
+    req: ReportConversionRequest,
+    cb?: (error: string, rep: ReportConversionResponse) => void
+  ): Promise<ReportConversionResponse> {
+    return this.request("ReportConversion", req, cb)
   }
 
   /**

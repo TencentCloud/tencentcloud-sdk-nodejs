@@ -430,45 +430,52 @@ export interface ShieldArea {
  */
 export interface DdosRule {
     /**
-      * DDoS防护等级
+      * DDoS防护等级。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     DdosStatusInfo?: DDoSStatusInfo;
     /**
-      * DDoS地域封禁
+      * DDoS地域封禁。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     DdosGeoIp?: DDoSGeoIp;
     /**
-      * DDoS黑白名单
+      * DDoS黑白名单。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     DdosAllowBlock?: DdosAllowBlock;
     /**
-      * DDoS 协议封禁+连接防护
+      * DDoS 协议封禁+连接防护。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     DdosAntiPly?: DDoSAntiPly;
     /**
-      * DDoS特征过滤
+      * DDoS特征过滤。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     DdosPacketFilter?: DdosPacketFilter;
     /**
-      * DDoS端口过滤
+      * DDoS端口过滤。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     DdosAcl?: DdosAcls;
     /**
-      * DDoS开关 on-开启；off-关闭
-注意：此字段可能返回 null，表示取不到有效值。
+      * DDoS开关，取值有:
+<li>on ：开启 ；</li>
+<li>off ：关闭 。</li>
       */
     Switch?: string;
     /**
-      * UDP分片功能是否支持，off-不支持，on-支持
-注意：此字段可能返回 null，表示取不到有效值。
+      * UDP分片功能是否支持，取值有:
+<li>on ：支持 ；</li>
+<li>off ：不支持 。</li>
       */
     UdpShardOpen?: string;
+    /**
+      * DDoS源站访问速率限制。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DdosSpeedLimit?: DdosSpeedLimit;
 }
 /**
  * ModifyLoadBalancingStatus返回参数结构体
@@ -628,31 +635,39 @@ export interface ModifyDnsRecordRequest {
  */
 export interface DDoSAcl {
     /**
-      * 目的端口end
+      * 目的端口结束，取值范围0-65535。
       */
     DportEnd?: number;
     /**
-      * 目的端口start
+      * 目的端口开始，取值范围0-65535。
       */
     DportStart?: number;
     /**
-      * 源端口end
+      * 源端口结束，取值范围0-65535。
       */
     SportEnd?: number;
     /**
-      * 源端口start
+      * 源端口开始，取值范围0-65535。
       */
     SportStart?: number;
     /**
-      * 协议 'tcp', 'udp', 'all'
+      * 协议，取值有：
+<li>tcp ：tcp协议 ；</li>
+<li>udp ：udp协议 ；</li>
+<li>all ：全部协议 。</li>
       */
     Protocol?: string;
     /**
-      * 动作  drop-丢弃,；transmit-放行； forward-继续防护
+      * 执行动作，取值为：
+<li>drop ：丢弃 ；</li>
+<li>transmit ：放行 ；</li>
+<li>forward ：继续防护 。</li>
       */
     Action?: string;
     /**
-      * 是否为系统配置 0-人工配置；1-系统配置
+      * 是否为系统配置，取值为：
+<li>0 ：修改配置 ；</li>
+<li>1 ：系统默认配置 。</li>
       */
     Default?: number;
 }
@@ -847,13 +862,15 @@ export interface ModifyZoneSettingRequest {
  */
 export interface DdosPacketFilter {
     /**
-      * 特征过滤清空标识，off清空处理
-      */
-    Switch?: string;
-    /**
-      * 特征过滤数组
+      * 特征过滤规则数组。
       */
     PacketFilter?: Array<DDoSFeaturesFilter>;
+    /**
+      * 特征过滤清空标识，取值有：
+<li>off ：清空特征过滤规则，无需填写 PacketFilter 参数 ；</li>
+<li>on ：配置特征过滤规则，需填写 PacketFilter 参数。</li>默认值为on。
+      */
+    Switch?: string;
 }
 /**
  * CreateApplicationProxy返回参数结构体
@@ -1512,13 +1529,15 @@ export interface TimingDataRecord {
  */
 export interface DdosAcls {
     /**
-      * 开关 off清空规则标识
-      */
-    Switch?: string;
-    /**
-      * 端口过了详细参数
+      * 端口过滤规则数组。
       */
     Acl?: Array<DDoSAcl>;
+    /**
+      * 清空规则标识，取值有：
+<li>off ：清空端口过滤规则列表，Acl无需填写。 ；</li>
+<li>on ：配置端口过滤规则，需填写Acl参数。</li>默认值为on。
+      */
+    Switch?: string;
 }
 /**
  * DeleteOriginGroup请求参数结构体
@@ -1740,23 +1759,17 @@ export interface SmartRouting {
     Switch: string;
 }
 /**
- * DescribeDnsData返回参数结构体
+ * DDoS端口限速
  */
-export interface DescribeDnsDataResponse {
+export interface DdosSpeedLimit {
     /**
-      * 统计曲线数据
-注意：此字段可能返回 null，表示取不到有效值。
+      * 源站包量限制，支持单位有pps、Kpps、Mpps、Gpps。支持范围1 pps-10000 Gpps。"0 pps"或其他单位数值为0，即不限包。""为不更新。
       */
-    Data: Array<DataItem>;
+    PackageLimit?: string;
     /**
-      * 时间粒度
-注意：此字段可能返回 null，表示取不到有效值。
+      * 源站流量限制，支持单位有bps、Kbps、Mbps、Gbps，支持范围1 bps-10000 Gbps。"0 bps"或其他单位数值为0，即不限流。""为不更新。
       */
-    Interval: string;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    FluxLimit?: string;
 }
 /**
  * 站点信息
@@ -2038,15 +2051,18 @@ export interface CCInterceptEvent {
  */
 export interface DDoSStatusInfo {
     /**
-      * 不支持，填off
+      * 暂不支持，默认值off。
       */
     AiStatus: string;
     /**
-      * 用户appid
+      * 废弃字段。
       */
     Appid: string;
     /**
-      * 策略等级 low, middle, high
+      * 策略等级，取值有:
+<li>low ：宽松 ；</li>
+<li>middle ：适中 ；</li>
+<li>high : 严格。 </li>
       */
     PlyLevel: string;
 }
@@ -3162,60 +3178,71 @@ export interface Ipv6Access {
  */
 export interface DDoSAntiPly {
     /**
-      * tcp协议封禁 on-开；off-关
+      * tcp协议封禁，取值有：
+<li>off ：关闭 ；</li>
+<li>on ：开启 。</li>
       */
     DropTcp: string;
     /**
-      * udp协议封禁 on-开；off-关
+      * udp协议封禁，取值有：
+<li>off ：关闭 ；</li>
+<li>on ：开启 。</li>
       */
     DropUdp: string;
     /**
-      * icmp协议封禁 on-开；off-关
+      * icmp协议封禁，取值有：
+<li>off ：关闭 ；</li>
+<li>on ：开启 。</li>
       */
     DropIcmp: string;
     /**
-      * 其他协议封禁 on-开；off-关
+      * 其他协议封禁，取值有：
+<li>off ：关闭 ；</li>
+<li>on ：开启 。</li>
       */
     DropOther: string;
     /**
-      * 源每秒新建数限制  0-4294967295
+      * 源站每秒新连接限速，取值范围0-4294967295。
       */
     SourceCreateLimit: number;
     /**
-      * 源并发连接控制 0-4294967295
+      * 源站并发连接控制，取值范围0-4294967295。
       */
     SourceConnectLimit: number;
     /**
-      * 目的每秒新建数限制 0-4294967295
+      * 目的端口每秒新连接限速，取值范围0-4294967295。
       */
     DestinationCreateLimit: number;
     /**
-      * 目的端口的并发连接控制 0-4294967295
+      * 目的端口并发连接控制，取值范围0-4294967295。
       */
     DestinationConnectLimit: number;
     /**
-      * 异常连接数阈值  0-4294967295
+      * 每秒异常连接数阈值，取值范围0-4294967295。
       */
     AbnormalConnectNum: number;
     /**
-      * syn占比异常阈值 0-100
+      * 异常syn报文百分比阈值，取值范围0-100。
       */
     AbnormalSynRatio: number;
     /**
-      * syn个数异常阈值 0-65535
+      * 异常syn报文阈值，取值范围0-65535。
       */
     AbnormalSynNum: number;
     /**
-      * 连接超时检测 0-65535
+      * 每秒连接超时检测，取值范围0-65535。
       */
     ConnectTimeout: number;
     /**
-      * 空连接防护开启 0-1
+      * 空连接防护开启，取值有：
+<li>off ：关闭 ；</li>
+<li>on ：开启 。</li>
       */
     EmptyConnectProtect: string;
     /**
-      * UDP分片开关；off-关闭，on-开启
-注意：此字段可能返回 null，表示取不到有效值。
+      * UDP分片开关，取值有：
+<li>off ：关闭 ；</li>
+<li>on ：开启 。</li>
       */
     UdpShard?: string;
 }
@@ -3301,7 +3328,7 @@ export interface DDosAttackSourceEventData {
  */
 export interface ModifyDDoSPolicyResponse {
     /**
-      * 策略组ID
+      * 策略id。
       */
     PolicyId: number;
     /**
@@ -3880,44 +3907,23 @@ export interface ForceRedirect {
     RedirectStatusCode?: number;
 }
 /**
- * ModifyApplicationProxy请求参数结构体
+ * DescribeDnsData返回参数结构体
  */
-export interface ModifyApplicationProxyRequest {
+export interface DescribeDnsDataResponse {
     /**
-      * 站点ID。
+      * 统计曲线数据
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    ZoneId: string;
+    Data: Array<DataItem>;
     /**
-      * 代理ID。
+      * 时间粒度
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    ProxyId: string;
+    Interval: string;
     /**
-      * 当ProxyType=hostname时，表示域名或子域名；
-当ProxyType=instance时，表示代理名称。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    ProxyName: string;
-    /**
-      * 参数已经废弃。
-      */
-    ForwardClientIp: string;
-    /**
-      * 参数已经废弃。
-      */
-    SessionPersist: boolean;
-    /**
-      * 会话保持时间，不填写保持原有配置。取值范围：30-3600，单位：秒。
-      */
-    SessionPersistTime?: number;
-    /**
-      * 四层代理模式，取值有：
-<li>hostname：表示子域名模式；</li>
-<li>instance：表示实例模式。</li>不填写保持原有配置。
-      */
-    ProxyType?: string;
-    /**
-      * Ipv6访问配置，不填写保持原有配置。
-      */
-    Ipv6?: Ipv6Access;
+    RequestId?: string;
 }
 /**
  * ModifyApplicationProxyStatus返回参数结构体
@@ -6171,15 +6177,15 @@ OFF：不传递
  */
 export interface ModifyDDoSPolicyRequest {
     /**
-      * 策略组ID
+      * 策略id。
       */
     PolicyId: number;
     /**
-      * 一级域名
+      * 站点id。
       */
     ZoneId: string;
     /**
-      * DDoS具体防护配置
+      * DDoS防护配置详情。
       */
     DdosRule?: DdosRule;
 }
@@ -6378,28 +6384,30 @@ export interface DeleteDnsRecordsRequest {
  */
 export interface DdosAllowBlock {
     /**
-      * 开关标识防护是否清空
-      */
-    Switch?: string;
-    /**
-      * 黑白名单数组
+      * 黑白名单数组。
       */
     UserAllowBlockIp?: Array<DDoSUserAllowBlockIP>;
+    /**
+      * 开关标识防护是否清空，取值有：
+<li>off ：清空黑白名单列表，UserAllowBlockIp无需填写。 ；</li>
+<li>on ：配置黑白名单，需填写UserAllowBlockIp参数。</li>默认值为on。
+      */
+    Switch?: string;
 }
 /**
  * DDoS地域封禁
  */
 export interface DDoSGeoIp {
     /**
-      * 地域信息，ID参考接口DescribeSecurityPolicyRegions
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    RegionId?: Array<number>;
-    /**
-      * 区域封禁清空标识
-注意：此字段可能返回 null，表示取不到有效值。
+      * 区域封禁清空标识，取值有：
+<li>off ：清空地域封禁列表 ；</li>
+<li>on ：不做处理 。</li>
       */
     Switch?: string;
+    /**
+      * 地域信息，ID参考[DescribeSecurityPolicyRegions](https://tcloud4api.woa.com/document/product/1657/76031?!preview&!document=1)。
+      */
+    RegionId?: Array<number>;
 }
 /**
  * DescribeZoneDDoSPolicy返回参数结构体
@@ -6472,89 +6480,111 @@ export interface DescribeDDosMajorAttackEventResponse {
  */
 export interface DDoSFeaturesFilter {
     /**
-      * 动作 drop-丢弃；transmit-放行；drop_block-丢弃并拉黑；forward-继续防护
+      * 执行动作，取值有：
+<li>drop ：丢弃 ；</li>
+<li>transmit ：放行 ；</li>
+<li>drop_block ：丢弃并拉黑 ；</li>
+<li>forward ：继续防护 。</li>
       */
     Action?: string;
     /**
-      * 深度值1
-      */
-    Depth?: number;
-    /**
-      * 深度值2
-      */
-    Depth2?: number;
-    /**
-      * 目标端口结束
-      */
-    DportEnd?: number;
-    /**
-      * 目标端口开始
-      */
-    DportStart?: number;
-    /**
-      * 取非判断1
-      */
-    IsNot?: number;
-    /**
-      * 取非判断2
-      */
-    IsNot2?: number;
-    /**
-      * 多特征关系（单特征时(none)，第二特征相关配置可不填） none；and；or
-      */
-    MatchLogic?: string;
-    /**
-      * 匹配方式1 pcre-正则匹配, sunday-字符串匹配
-      */
-    MatchType?: string;
-    /**
-      * 匹配方式2 pcre-正则匹配, sunday-字符串匹配
-      */
-    MatchType2?: string;
-    /**
-      * 偏移量1
-      */
-    Offset?: number;
-    /**
-      * 偏移量2
-      */
-    Offset2?: number;
-    /**
-      * 最大包长
-      */
-    PacketMax?: number;
-    /**
-      * 最小包长
-      */
-    PacketMin?: number;
-    /**
-      * 协议 tcp；udp；icmp；all
+      * 协议，取值有：
+<li>tcp ：tcp协议 ；</li>
+<li>udp ：udp协议 ；</li>
+<li>icmp ：icmp协议 ；</li>
+<li>all ：全部协议 。</li>
       */
     Protocol?: string;
     /**
-      * 源端口结束
+      * 目标端口开始，取值范围0-65535。
       */
-    SportEnd?: number;
+    DportStart?: number;
     /**
-      * 源端口开始
+      * 目标端口结束，取值范围0-65535。
+      */
+    DportEnd?: number;
+    /**
+      * 最小包长，取值范围0-1500。
+      */
+    PacketMin?: number;
+    /**
+      * 最大包长，取值范围0-1500。
+      */
+    PacketMax?: number;
+    /**
+      * 源端口开始，取值范围0-65535。
       */
     SportStart?: number;
     /**
-      * 匹配字符串1
+      * 源端口结束，取值范围0-65535。
       */
-    Str?: string;
+    SportEnd?: number;
     /**
-      * 匹配字符串2
+      * 匹配方式1，【特征1】，取值有：
+<li>pcre ：正则匹配 ；</li>
+<li>sunday ：字符串匹配 。</li>默认为空字符串。
       */
-    Str2?: string;
+    MatchType?: string;
     /**
-      * 匹配开始层级，层级参考计算机网络结构 begin_l5, no_match, begin_l3, begin_l4
+      * 取非判断，该参数对MatchType配合使用，【特征1】，取值有：
+<li>0 ：匹配 ；</li>
+<li>1 ：不匹配 。</li>
+      */
+    IsNot?: number;
+    /**
+      * 偏移量1，【特征1】，取值范围0-1500。
+      */
+    Offset?: number;
+    /**
+      * 检测包字符深度，【特征1】，取值范围1-1500。
+      */
+    Depth?: number;
+    /**
+      * 匹配开始层级，层级参考计算机网络结构，取值有：
+<li>begin_l5 ：载荷开始检测 ；</li>
+<li>begin_l4 ：tcp/udp首部开始检测 ；</li>
+<li>begin_l3 ：ip首部开始检测 。</li>
       */
     MatchBegin?: string;
     /**
-      * 匹配开始层级，层级参考计算机网络结构 begin_l5, no_match, begin_l3, begin_l4
+      * 正则或字符串匹配的内容，【特征1】。
+      */
+    Str?: string;
+    /**
+      * 匹配方式2，【特征2】，取值有：
+<li>pcre ：正则匹配 ；</li>
+<li>sunday ：字符串匹配 。</li>默认为空字符串。
+      */
+    MatchType2?: string;
+    /**
+      * 取非判断2，该参数对MatchType2配合使用，【特征2】，取值有：
+<li>0 ：匹配 ；</li>
+<li>1 ：不匹配 。</li>
+      */
+    IsNot2?: number;
+    /**
+      * 偏移量2，【特征2】，取值范围0-1500。
+      */
+    Offset2?: number;
+    /**
+      * 检测包字符深度，【特征2】，取值范围1-1500。
+      */
+    Depth2?: number;
+    /**
+      * 匹配开始层级，层级参考计算机网络结构，取值有：
+<li>begin_l5 ：载荷开始检测 ；</li>
+<li>begin_l4 ：tcp/udp首部开始检测；</li>
+<li>begin_l3 ：ip首部开始检测 。</li>
       */
     MatchBegin2?: string;
+    /**
+      * 正则或字符串匹配的内容，【特征2】。
+      */
+    Str2?: string;
+    /**
+      * 多特征关系，仅配置【特征1】时填 none，存在【特征2】配置可不填。
+      */
+    MatchLogic?: string;
 }
 /**
  * DescribeWebProtectionAttackEvents返回参数结构体
@@ -7208,33 +7238,29 @@ export interface DescribeApplicationProxyDetailResponse {
  */
 export interface DDoSUserAllowBlockIP {
     /**
-      * 用户ip
-注意：此字段可能返回 null，表示取不到有效值。
+      * 客户端IP。
       */
     Ip?: string;
     /**
-      * 掩码
-注意：此字段可能返回 null，表示取不到有效值。
+      * 掩码。
       */
     Mask?: number;
     /**
-      * 类型 block-丢弃；allow-允许
-注意：此字段可能返回 null，表示取不到有效值。
+      * 类型，取值有：
+<li>block ：丢弃 ；</li>
+<li>allow ：允许。</li>
       */
     Type?: string;
     /**
-      * 时间戳
-注意：此字段可能返回 null，表示取不到有效值。
+      * 10位时间戳，例如1199116800。
       */
     UpdateTime?: number;
     /**
-      * 用户ip范围截止
-注意：此字段可能返回 null，表示取不到有效值。
+      * 客户端IP2，设置IP范围时使用，例如 1.1.1.1-1.1.1.2。
       */
     Ip2?: string;
     /**
-      * 掩码截止范围
-注意：此字段可能返回 null，表示取不到有效值。
+      * 掩码2，设置IP网段范围时使用，例如 1.1.1.0/24-1.1.2.0/24。
       */
     Mask2?: number;
 }
@@ -7309,6 +7335,46 @@ export interface DescribeWebProtectionDataResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * ModifyApplicationProxy请求参数结构体
+ */
+export interface ModifyApplicationProxyRequest {
+    /**
+      * 站点ID。
+      */
+    ZoneId: string;
+    /**
+      * 代理ID。
+      */
+    ProxyId: string;
+    /**
+      * 当ProxyType=hostname时，表示域名或子域名；
+当ProxyType=instance时，表示代理名称。
+      */
+    ProxyName: string;
+    /**
+      * 参数已经废弃。
+      */
+    ForwardClientIp: string;
+    /**
+      * 参数已经废弃。
+      */
+    SessionPersist: boolean;
+    /**
+      * 会话保持时间，不填写保持原有配置。取值范围：30-3600，单位：秒。
+      */
+    SessionPersistTime?: number;
+    /**
+      * 四层代理模式，取值有：
+<li>hostname：表示子域名模式；</li>
+<li>instance：表示实例模式。</li>不填写保持原有配置。
+      */
+    ProxyType?: string;
+    /**
+      * Ipv6访问配置，不填写保持原有配置。
+      */
+    Ipv6?: Ipv6Access;
 }
 /**
  * ModifyDnssec返回参数结构体

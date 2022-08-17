@@ -138,6 +138,16 @@ it("sms.v20210111.PullSmsSendStatusByPhoneNumber", async function () {
     }
 })
 
+it("sms.v20210111.ReportConversion", async function () {
+    try {
+       const data = await client.ReportConversion({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("sms.v20210111.ModifySmsTemplate", async function () {
     try {
        const data = await client.ModifySmsTemplate({})

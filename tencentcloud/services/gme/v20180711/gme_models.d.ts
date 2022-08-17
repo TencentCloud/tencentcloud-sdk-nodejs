@@ -120,35 +120,6 @@ export interface UserMicStatus {
     EnableMic: number;
 }
 /**
- * VoiceFilter请求参数结构体
- */
-export interface VoiceFilterRequest {
-    /**
-      * 应用ID，登录[控制台](https://console.cloud.tencent.com/gamegme)创建应用得到的AppID
-      */
-    BizId: number;
-    /**
-      * 文件ID，表示文件唯一ID
-      */
-    FileId: string;
-    /**
-      * 文件名
-      */
-    FileName: string;
-    /**
-      * 文件url，urlencode编码，FileUrl和FileContent二选一
-      */
-    FileUrl?: string;
-    /**
-      * 文件内容，base64编码，FileUrl和FileContent二选一
-      */
-    FileContent?: string;
-    /**
-      * 用户ID
-      */
-    OpenId?: string;
-}
-/**
  * CreateScanUser返回参数结构体
  */
 export interface CreateScanUserResponse {
@@ -308,14 +279,17 @@ export interface UpdateScanRoomsRequest {
     RoomIdRegex?: Array<string>;
 }
 /**
- * DescribeFilterResult返回参数结构体
+ * ModifyCustomization返回参数结构体
  */
-export interface DescribeFilterResultResponse {
+export interface ModifyCustomizationResponse {
     /**
-      * 过滤结果
-注意：此字段可能返回 null，表示取不到有效值。
+      * 返回值。0为成功，非0为失败。
       */
-    Data?: VoiceFilterInfo;
+    ErrorCode: number;
+    /**
+      * 自学习模型ID
+      */
+    ModelId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -498,31 +472,6 @@ export interface Tag {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     TagValue?: string;
-}
-/**
- * DescribeFilterResultList请求参数结构体
- */
-export interface DescribeFilterResultListRequest {
-    /**
-      * 应用ID
-      */
-    BizId: number;
-    /**
-      * 开始时间，格式为 年-月-日，如: 2018-07-11
-      */
-    StartDate: string;
-    /**
-      * 结束时间，格式为 年-月-日，如: 2018-07-11
-      */
-    EndDate: string;
-    /**
-      * 偏移量，默认值为0。
-      */
-    Offset?: number;
-    /**
-      * 返回数量，默认值为10，最大值为100。
-      */
-    Limit?: number;
 }
 /**
  * DescribeAgeDetectTask返回参数结构体
@@ -847,15 +796,6 @@ export interface DeleteCustomizationResponse {
     RequestId?: string;
 }
 /**
- * VoiceFilter返回参数结构体
- */
-export interface VoiceFilterResponse {
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
  * GetCustomizationList请求参数结构体
  */
 export interface GetCustomizationListRequest {
@@ -863,23 +803,6 @@ export interface GetCustomizationListRequest {
       * 应用 ID，登录控制台创建应用得到的AppID
       */
     BizId: number;
-}
-/**
- * ModifyCustomization返回参数结构体
- */
-export interface ModifyCustomizationResponse {
-    /**
-      * 返回值。0为成功，非0为失败。
-      */
-    ErrorCode: number;
-    /**
-      * 自学习模型ID
-      */
-    ModelId: string;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
 }
 /**
  * DescribeUserInAndOutTime返回参数结构体
@@ -897,41 +820,6 @@ export interface DescribeUserInAndOutTimeResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
-}
-/**
- * 语音文件过滤详情
- */
-export interface VoiceFilterInfo {
-    /**
-      * 应用ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    BizId?: number;
-    /**
-      * 文件ID，表示文件唯一ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    FileId: string;
-    /**
-      * 文件名
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    FileName: string;
-    /**
-      * 用户ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    OpenId: string;
-    /**
-      * 数据创建时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Timestamp: string;
-    /**
-      * 过滤结果列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Data: Array<VoiceFilter>;
 }
 /**
  * 年龄语音任务结果
@@ -1049,40 +937,6 @@ export interface AgeDetectTask {
     Url: string;
 }
 /**
- * ModifyRoomInfo请求参数结构体
- */
-export interface ModifyRoomInfoRequest {
-    /**
-      * 应用ID，登录[控制台 - 服务管理](https://console.cloud.tencent.com/gamegme)创建应用得到的AppID
-      */
-    SdkAppId: number;
-    /**
-      * 房间id
-      */
-    RoomId: number;
-    /**
-      * 301 启动推流
-302 停止推流
-303 重置RTMP连接
-      */
-    OperationType: number;
-}
-/**
- * 过滤结果
- */
-export interface VoiceFilter {
-    /**
-      * 过滤类型，1：色情，2：涉毒，3：谩骂
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Type: number;
-    /**
-      * 过滤命中关键词
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Word: string;
-}
-/**
  * 语音检测详情
  */
 export interface ScanDetail {
@@ -1108,23 +962,23 @@ export interface ScanDetail {
     EndTime: number;
 }
 /**
- * DescribeFilterResultList返回参数结构体
+ * ModifyRoomInfo请求参数结构体
  */
-export interface DescribeFilterResultListResponse {
+export interface ModifyRoomInfoRequest {
     /**
-      * 过滤结果总数
-注意：此字段可能返回 null，表示取不到有效值。
+      * 应用ID，登录[控制台 - 服务管理](https://console.cloud.tencent.com/gamegme)创建应用得到的AppID
       */
-    TotalCount?: number;
+    SdkAppId: number;
     /**
-      * 当前分页过滤结果列表
-注意：此字段可能返回 null，表示取不到有效值。
+      * 房间id
       */
-    Data?: Array<VoiceFilterInfo>;
+    RoomId: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 301 启动推流
+302 停止推流
+303 重置RTMP连接
       */
-    RequestId?: string;
+    OperationType: number;
 }
 /**
  * CreateAgeDetectTask返回参数结构体
@@ -1304,37 +1158,6 @@ export interface ModifyAppStatusResponse {
     RequestId?: string;
 }
 /**
- * ScanVoice请求参数结构体
- */
-export interface ScanVoiceRequest {
-    /**
-      * 应用ID，登录[控制台 - 服务管理](https://console.cloud.tencent.com/gamegme)创建应用得到的AppID
-      */
-    BizId: number;
-    /**
-      * 语音检测场景，参数值目前要求为 default。 预留场景设置： 谩骂、色情、广告、违禁等场景，<a href="#Label_Value">具体取值见上述 Label 说明。</a>
-      */
-    Scenes: Array<string>;
-    /**
-      * 是否为直播流。值为 false 时表示普通语音文件检测；为 true 时表示语音流检测。
-      */
-    Live: boolean;
-    /**
-      * 语音检测任务列表，列表最多支持100个检测任务。结构体中包含：
-<li>DataId：数据的唯一ID</li>
-<li>Url：数据文件的url，为 urlencode 编码，流式则为拉流地址</li>
-      */
-    Tasks: Array<Task>;
-    /**
-      * 异步检测结果回调地址，具体见上述<a href="#Callback_Declare">回调相关说明</a>。（说明：该字段为空时，必须通过接口(查询语音检测结果)获取检测结果）。
-      */
-    Callback?: string;
-    /**
-      * 语言，目前jp代表日语
-      */
-    Lang?: string;
-}
-/**
  * 语音过滤服务配置数据
  */
 export interface VoiceFilterConf {
@@ -1374,17 +1197,35 @@ export interface StatisticsItem {
     Data: number;
 }
 /**
- * DescribeFilterResult请求参数结构体
+ * ScanVoice请求参数结构体
  */
-export interface DescribeFilterResultRequest {
+export interface ScanVoiceRequest {
     /**
-      * 应用ID
+      * 应用ID，登录[控制台 - 服务管理](https://console.cloud.tencent.com/gamegme)创建应用得到的AppID
       */
     BizId: number;
     /**
-      * 文件ID
+      * 语音检测场景，参数值目前要求为 default。 预留场景设置： 谩骂、色情、广告、违禁等场景，<a href="#Label_Value">具体取值见上述 Label 说明。</a>
       */
-    FileId: string;
+    Scenes: Array<string>;
+    /**
+      * 是否为直播流。值为 false 时表示普通语音文件检测；为 true 时表示语音流检测。
+      */
+    Live: boolean;
+    /**
+      * 语音检测任务列表，列表最多支持100个检测任务。结构体中包含：
+<li>DataId：数据的唯一ID</li>
+<li>Url：数据文件的url，为 urlencode 编码，流式则为拉流地址</li>
+      */
+    Tasks: Array<Task>;
+    /**
+      * 异步检测结果回调地址，具体见上述<a href="#Callback_Declare">回调相关说明</a>。（说明：该字段为空时，必须通过接口(查询语音检测结果)获取检测结果）。
+      */
+    Callback?: string;
+    /**
+      * 语言，目前jp代表日语
+      */
+    Lang?: string;
 }
 /**
  * DescribeUserInAndOutTime请求参数结构体

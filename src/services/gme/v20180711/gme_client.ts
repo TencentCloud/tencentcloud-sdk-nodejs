@@ -26,7 +26,6 @@ import {
   DescribeScanResultListResponse,
   DescribeApplicationDataRequest,
   UserMicStatus,
-  VoiceFilterRequest,
   CreateScanUserResponse,
   DescribeRealtimeScanConfigResponse,
   ModifyUserMicStatusRequest,
@@ -36,7 +35,7 @@ import {
   CreateCustomizationRequest,
   DescribeRoomInfoRequest,
   UpdateScanRoomsRequest,
-  DescribeFilterResultResponse,
+  ModifyCustomizationResponse,
   DescribeRealtimeScanConfigRequest,
   DescribeScanResultListRequest,
   ModifyCustomizationStateResponse,
@@ -47,7 +46,6 @@ import {
   ModifyCustomizationStateRequest,
   Task,
   Tag,
-  DescribeFilterResultListRequest,
   DescribeAgeDetectTaskResponse,
   VoiceMessageConf,
   ModifyUserMicStatusResponse,
@@ -66,19 +64,14 @@ import {
   DescribeRoomInfoResponse,
   DescribeAgeDetectTaskRequest,
   DeleteCustomizationResponse,
-  VoiceFilterResponse,
   GetCustomizationListRequest,
-  ModifyCustomizationResponse,
   DescribeUserInAndOutTimeResponse,
-  VoiceFilterInfo,
   AgeDetectTaskResult,
   ModifyRoomInfoResponse,
   DescribeScanResult,
   AgeDetectTask,
-  ModifyRoomInfoRequest,
-  VoiceFilter,
   ScanDetail,
-  DescribeFilterResultListResponse,
+  ModifyRoomInfoRequest,
   CreateAgeDetectTaskResponse,
   CreateAppRequest,
   RealtimeSpeechConf,
@@ -88,11 +81,10 @@ import {
   DeleteCustomizationRequest,
   ScanPiece,
   ModifyAppStatusResponse,
-  ScanVoiceRequest,
   VoiceFilterConf,
   UpdateScanUsersRequest,
   StatisticsItem,
-  DescribeFilterResultRequest,
+  ScanVoiceRequest,
   DescribeUserInAndOutTimeRequest,
 } from "./gme_models"
 
@@ -106,23 +98,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 根据应用ID和文件ID查询识别结果
+   * 获取房间内用户信息
    */
-  async DescribeFilterResult(
-    req: DescribeFilterResultRequest,
-    cb?: (error: string, rep: DescribeFilterResultResponse) => void
-  ): Promise<DescribeFilterResultResponse> {
-    return this.request("DescribeFilterResult", req, cb)
-  }
-
-  /**
-   * 根据日期查询识别结果列表
-   */
-  async DescribeFilterResultList(
-    req: DescribeFilterResultListRequest,
-    cb?: (error: string, rep: DescribeFilterResultListResponse) => void
-  ): Promise<DescribeFilterResultListResponse> {
-    return this.request("DescribeFilterResultList", req, cb)
+  async DescribeRoomInfo(
+    req: DescribeRoomInfoRequest,
+    cb?: (error: string, rep: DescribeRoomInfoResponse) => void
+  ): Promise<DescribeRoomInfoResponse> {
+    return this.request("DescribeRoomInfo", req, cb)
   }
 
   /**
@@ -176,35 +158,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取房间内用户信息
+   * 获取用户自定义送检信息
    */
-  async DescribeRoomInfo(
-    req: DescribeRoomInfoRequest,
-    cb?: (error: string, rep: DescribeRoomInfoResponse) => void
-  ): Promise<DescribeRoomInfoResponse> {
-    return this.request("DescribeRoomInfo", req, cb)
-  }
-
-  /**
-   * 更新自定义送检房间号
-   */
-  async UpdateScanRooms(
-    req: UpdateScanRoomsRequest,
-    cb?: (error: string, rep: UpdateScanRoomsResponse) => void
-  ): Promise<UpdateScanRoomsResponse> {
-    return this.request("UpdateScanRooms", req, cb)
-  }
-
-  /**
-     * 本接口用于识别涉黄等违规音频，成功会回调配置在应用的回调地址。回调示例如下：
-{"BizId":0,"FileId":"test_file_id","FileName":"test_file_name","FileUrl":"test_file_url","OpenId":"test_open_id","TimeStamp":"0000-00-00 00:00:00","Data":[{"Type":1,"Word":"xx"}]}
-Type表示过滤类型，1：色情，2：谩骂
-     */
-  async VoiceFilter(
-    req: VoiceFilterRequest,
-    cb?: (error: string, rep: VoiceFilterResponse) => void
-  ): Promise<VoiceFilterResponse> {
-    return this.request("VoiceFilter", req, cb)
+  async DescribeRealtimeScanConfig(
+    req: DescribeRealtimeScanConfigRequest,
+    cb?: (error: string, rep: DescribeRealtimeScanConfigResponse) => void
+  ): Promise<DescribeRealtimeScanConfigResponse> {
+    return this.request("DescribeRealtimeScanConfig", req, cb)
   }
 
   /**
@@ -422,13 +382,13 @@ Type表示过滤类型，1：色情，2：谩骂
   }
 
   /**
-   * 获取用户自定义送检信息
+   * 更新自定义送检房间号
    */
-  async DescribeRealtimeScanConfig(
-    req: DescribeRealtimeScanConfigRequest,
-    cb?: (error: string, rep: DescribeRealtimeScanConfigResponse) => void
-  ): Promise<DescribeRealtimeScanConfigResponse> {
-    return this.request("DescribeRealtimeScanConfig", req, cb)
+  async UpdateScanRooms(
+    req: UpdateScanRoomsRequest,
+    cb?: (error: string, rep: UpdateScanRoomsResponse) => void
+  ): Promise<UpdateScanRoomsResponse> {
+    return this.request("UpdateScanRooms", req, cb)
   }
 
   /**

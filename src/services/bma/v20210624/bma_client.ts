@@ -19,7 +19,7 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   ProtectURLInfo,
-  Monitor,
+  CreateCRUserVerifyRequest,
   CreateBPFalseTicketResponse,
   DescribeCRWorkInfoResponse,
   CreateCRRightResponse,
@@ -28,6 +28,7 @@ import {
   CreateBPOfflineTicketResponse,
   DescribeBPFakeURLsRequest,
   ModifyCRBlockStatusResponse,
+  Monitor,
   ModifyCRObtainStatusRequest,
   ReportFakeURLInfo,
   DescribeCRWorkInfoRequest,
@@ -50,6 +51,7 @@ import {
   CreateCRWorkRequest,
   DescribeBPCompanyInfoRequest,
   DescribeBPReportFakeURLsResponse,
+  DescribeCRMonitorDetailRequest,
   Filter,
   CreateCRBlockResponse,
   ModifyCRRightStatusRequest,
@@ -57,7 +59,7 @@ import {
   UpdateCRWorkRequest,
   FakeURLInfo,
   CreateBPOfflineTicketRequest,
-  DescribeCRMonitorDetailRequest,
+  CreateCRUserVerifyResponse,
   BrandData,
   ModifyCRRightStatusResponse,
   DescribeBPCompanyInfoResponse,
@@ -101,13 +103,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 版权保护-新建拦截接口
+   * 品牌经营管家-版权保护个人认证接口
    */
-  async CreateCRBlock(
-    req: CreateCRBlockRequest,
-    cb?: (error: string, rep: CreateCRBlockResponse) => void
-  ): Promise<CreateCRBlockResponse> {
-    return this.request("CreateCRBlock", req, cb)
+  async CreateCRUserVerify(
+    req: CreateCRUserVerifyRequest,
+    cb?: (error: string, rep: CreateCRUserVerifyResponse) => void
+  ): Promise<CreateCRUserVerifyResponse> {
+    return this.request("CreateCRUserVerify", req, cb)
   }
 
   /**
@@ -128,6 +130,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateBPOfflineTicketResponse) => void
   ): Promise<CreateBPOfflineTicketResponse> {
     return this.request("CreateBPOfflineTicket", req, cb)
+  }
+
+  /**
+   * 版权保护-新建拦截接口
+   */
+  async CreateCRBlock(
+    req: CreateCRBlockRequest,
+    cb?: (error: string, rep: CreateCRBlockResponse) => void
+  ): Promise<CreateCRBlockResponse> {
+    return this.request("CreateCRBlock", req, cb)
   }
 
   /**

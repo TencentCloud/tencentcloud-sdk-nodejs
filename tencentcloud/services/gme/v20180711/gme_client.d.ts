@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CreateCustomizationResponse, ScanVoiceResponse, ModifyAppStatusRequest, DescribeScanResultListResponse, DescribeApplicationDataRequest, VoiceFilterRequest, CreateScanUserResponse, DescribeRealtimeScanConfigResponse, ModifyUserMicStatusRequest, CreateCustomizationRequest, DescribeRoomInfoRequest, UpdateScanRoomsRequest, DescribeFilterResultResponse, DescribeRealtimeScanConfigRequest, DescribeScanResultListRequest, ModifyCustomizationStateResponse, CreateAgeDetectTaskRequest, DescribeAppStatisticsRequest, CreateScanUserRequest, ModifyCustomizationStateRequest, DescribeFilterResultListRequest, DescribeAgeDetectTaskResponse, ModifyUserMicStatusResponse, DeleteScanUserRequest, DescribeAppStatisticsResponse, UpdateScanRoomsResponse, UpdateScanUsersResponse, DescribeApplicationDataResponse, GetCustomizationListResponse, DeleteScanUserResponse, ModifyCustomizationRequest, DescribeRoomInfoResponse, DescribeAgeDetectTaskRequest, DeleteCustomizationResponse, VoiceFilterResponse, GetCustomizationListRequest, ModifyCustomizationResponse, DescribeUserInAndOutTimeResponse, ModifyRoomInfoResponse, ModifyRoomInfoRequest, DescribeFilterResultListResponse, CreateAgeDetectTaskResponse, CreateAppRequest, CreateAppResponse, DeleteCustomizationRequest, ModifyAppStatusResponse, ScanVoiceRequest, UpdateScanUsersRequest, DescribeFilterResultRequest, DescribeUserInAndOutTimeRequest } from "./gme_models";
+import { CreateCustomizationResponse, ScanVoiceResponse, ModifyAppStatusRequest, DescribeScanResultListResponse, DescribeApplicationDataRequest, CreateScanUserResponse, DescribeRealtimeScanConfigResponse, ModifyUserMicStatusRequest, CreateCustomizationRequest, DescribeRoomInfoRequest, UpdateScanRoomsRequest, ModifyCustomizationResponse, DescribeRealtimeScanConfigRequest, DescribeScanResultListRequest, ModifyCustomizationStateResponse, CreateAgeDetectTaskRequest, DescribeAppStatisticsRequest, CreateScanUserRequest, ModifyCustomizationStateRequest, DescribeAgeDetectTaskResponse, ModifyUserMicStatusResponse, DeleteScanUserRequest, DescribeAppStatisticsResponse, UpdateScanRoomsResponse, UpdateScanUsersResponse, DescribeApplicationDataResponse, GetCustomizationListResponse, DeleteScanUserResponse, ModifyCustomizationRequest, DescribeRoomInfoResponse, DescribeAgeDetectTaskRequest, DeleteCustomizationResponse, GetCustomizationListRequest, DescribeUserInAndOutTimeResponse, ModifyRoomInfoResponse, ModifyRoomInfoRequest, CreateAgeDetectTaskResponse, CreateAppRequest, CreateAppResponse, DeleteCustomizationRequest, ModifyAppStatusResponse, UpdateScanUsersRequest, ScanVoiceRequest, DescribeUserInAndOutTimeRequest } from "./gme_models";
 /**
  * gme client
  * @class
@@ -8,13 +8,9 @@ import { CreateCustomizationResponse, ScanVoiceResponse, ModifyAppStatusRequest,
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
     /**
-     * 根据应用ID和文件ID查询识别结果
+     * 获取房间内用户信息
      */
-    DescribeFilterResult(req: DescribeFilterResultRequest, cb?: (error: string, rep: DescribeFilterResultResponse) => void): Promise<DescribeFilterResultResponse>;
-    /**
-     * 根据日期查询识别结果列表
-     */
-    DescribeFilterResultList(req: DescribeFilterResultListRequest, cb?: (error: string, rep: DescribeFilterResultListResponse) => void): Promise<DescribeFilterResultListResponse>;
+    DescribeRoomInfo(req: DescribeRoomInfoRequest, cb?: (error: string, rep: DescribeRoomInfoResponse) => void): Promise<DescribeRoomInfoResponse>;
     /**
      * 删除自定义送检用户
      */
@@ -36,19 +32,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeUserInAndOutTime(req: DescribeUserInAndOutTimeRequest, cb?: (error: string, rep: DescribeUserInAndOutTimeResponse) => void): Promise<DescribeUserInAndOutTimeResponse>;
     /**
-     * 获取房间内用户信息
+     * 获取用户自定义送检信息
      */
-    DescribeRoomInfo(req: DescribeRoomInfoRequest, cb?: (error: string, rep: DescribeRoomInfoResponse) => void): Promise<DescribeRoomInfoResponse>;
-    /**
-     * 更新自定义送检房间号
-     */
-    UpdateScanRooms(req: UpdateScanRoomsRequest, cb?: (error: string, rep: UpdateScanRoomsResponse) => void): Promise<UpdateScanRoomsResponse>;
-    /**
-     * 本接口用于识别涉黄等违规音频，成功会回调配置在应用的回调地址。回调示例如下：
-{"BizId":0,"FileId":"test_file_id","FileName":"test_file_name","FileUrl":"test_file_url","OpenId":"test_open_id","TimeStamp":"0000-00-00 00:00:00","Data":[{"Type":1,"Word":"xx"}]}
-Type表示过滤类型，1：色情，2：谩骂
-     */
-    VoiceFilter(req: VoiceFilterRequest, cb?: (error: string, rep: VoiceFilterResponse) => void): Promise<VoiceFilterResponse>;
+    DescribeRealtimeScanConfig(req: DescribeRealtimeScanConfigRequest, cb?: (error: string, rep: DescribeRealtimeScanConfigResponse) => void): Promise<DescribeRealtimeScanConfigResponse>;
     /**
      * 用户使用该接口可以创建语音消息转文本自学习模型，以供识别调用
      */
@@ -222,9 +208,9 @@ Type表示过滤类型，1：色情，2：谩骂
      */
     ModifyCustomization(req: ModifyCustomizationRequest, cb?: (error: string, rep: ModifyCustomizationResponse) => void): Promise<ModifyCustomizationResponse>;
     /**
-     * 获取用户自定义送检信息
+     * 更新自定义送检房间号
      */
-    DescribeRealtimeScanConfig(req: DescribeRealtimeScanConfigRequest, cb?: (error: string, rep: DescribeRealtimeScanConfigResponse) => void): Promise<DescribeRealtimeScanConfigResponse>;
+    UpdateScanRooms(req: UpdateScanRoomsRequest, cb?: (error: string, rep: UpdateScanRoomsResponse) => void): Promise<UpdateScanRoomsResponse>;
     /**
      * 本接口(CreateApp)用于创建一个GME应用。
      */
