@@ -348,7 +348,7 @@ export interface RebateInfoElem {
  */
 export interface DescribeClientBalanceResponse {
   /**
-   * 账户可用余额，单位分 （可用余额 = 现金余额 - 冻结金额）
+   * 账户可用余额，单位分 （可用余额 = 现金余额 - 冻结金额）  【注：该数据准确性存疑，请切换至DescribeClientBalanceNew取值】
    */
   Balance: number
 
@@ -1019,7 +1019,7 @@ export interface AgentAuditedClient {
   ClientName: string
 
   /**
-   * 认证类型, 0：个人，1：企业；其他：未认证
+   * 认证类型, 0：个人，1：企业；其他：未认证或无效值
    */
   AuthType: string
 
@@ -1415,8 +1415,9 @@ export interface AuditApplyClientResponse {
   AuditResult: string
 
   /**
-   * 关联时间对应的时间戳
-   */
+      * 关联时间对应的时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+      */
   AgentTime: number
 
   /**

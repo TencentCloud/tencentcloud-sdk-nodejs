@@ -1839,6 +1839,10 @@ export interface OpenKafkaConsumerRequest {
       * CLS控制台创建的TopicId
       */
     FromTopicId: string;
+    /**
+      * 压缩方式[0:NONE；2:SNAPPY；3:LZ4]
+      */
+    Compression?: number;
 }
 /**
  * DeleteConfig返回参数结构体

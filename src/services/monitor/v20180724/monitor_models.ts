@@ -16,6 +16,29 @@
  */
 
 /**
+ * UpdateAlertRuleState请求参数结构体
+ */
+export interface UpdateAlertRuleStateRequest {
+  /**
+   * 规则 ID 列表
+   */
+  RuleIds: Array<string>
+
+  /**
+   * Prometheus 实例 ID
+   */
+  InstanceId: string
+
+  /**
+      * 规则状态码，取值如下：
+<li>2=RuleEnabled</li>
+<li>3=RuleDisabled</li>
+默认状态码为 2 启用。
+      */
+  RuleState: number
+}
+
+/**
  * 策略列表详情标签返回体
  */
 export interface TagInstance {
@@ -104,9 +127,24 @@ export interface DescribePolicyConditionListConfigManual {
 }
 
 /**
- * ModifyAlarmPolicyNotice返回参数结构体
+ * InstallPlugins请求参数结构体
  */
-export interface ModifyAlarmPolicyNoticeResponse {
+export interface InstallPluginsRequest {
+  /**
+   * 插件信息
+   */
+  Plugins: Array<GrafanaPlugin>
+
+  /**
+   * 实例 ID
+   */
+  InstanceId: string
+}
+
+/**
+ * UpdateGrafanaEnvironments返回参数结构体
+ */
+export interface UpdateGrafanaEnvironmentsResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -277,6 +315,50 @@ export interface DescribeServiceDiscoveryResponse {
 }
 
 /**
+ * ModifyAlarmNotice返回参数结构体
+ */
+export interface ModifyAlarmNoticeResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpdateServiceDiscovery请求参数结构体
+ */
+export interface UpdateServiceDiscoveryRequest {
+  /**
+   * Prometheus 实例 ID
+   */
+  InstanceId: string
+
+  /**
+   * <li>类型是 TKE，为对应的腾讯云容器服务集群 ID</li>
+   */
+  KubeClusterId: string
+
+  /**
+      * 用户 Kubernetes 集群类型：
+<li> 1 = 容器服务集群(TKE) </li>
+      */
+  KubeType: number
+
+  /**
+      * 服务发现类型，取值如下：
+<li> 1 = ServiceMonitor</li>
+<li> 2 = PodMonitor</li>
+<li> 3 = JobMonitor</li>
+      */
+  Type: number
+
+  /**
+   * 服务发现配置信息
+   */
+  Yaml: string
+}
+
+/**
  * DescribeRecordingRules返回参数结构体
  */
 export interface DescribeRecordingRulesResponse {
@@ -295,6 +377,42 @@ export interface DescribeRecordingRulesResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 指标配置
+ */
+export interface MetricConfig {
+  /**
+   * 允许使用的运算符
+   */
+  Operator: Array<string>
+
+  /**
+   * 允许配置的数据周期，以秒为单位
+   */
+  Period: Array<number>
+
+  /**
+   * 允许配置的持续周期个数
+   */
+  ContinuePeriod: Array<number>
+}
+
+/**
+ * Grafana 插件
+ */
+export interface GrafanaPlugin {
+  /**
+   * Grafana 插件 ID
+   */
+  PluginId: string
+
+  /**
+      * Grafana 插件版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Version: string
 }
 
 /**
@@ -434,6 +552,21 @@ export interface DescribePolicyGroupListResponse {
 }
 
 /**
+ * UpdateGrafanaWhiteList请求参数结构体
+ */
+export interface UpdateGrafanaWhiteListRequest {
+  /**
+   * 实例名
+   */
+  InstanceId: string
+
+  /**
+   * 白名单数组
+   */
+  Whitelist: Array<string>
+}
+
+/**
  * BindingPolicyObject请求参数结构体
  */
 export interface BindingPolicyObjectRequest {
@@ -464,13 +597,28 @@ export interface BindingPolicyObjectRequest {
 }
 
 /**
- * DescribeAlarmNoticeCallbacks请求参数结构体
+ * CreateServiceDiscovery返回参数结构体
  */
-export interface DescribeAlarmNoticeCallbacksRequest {
+export interface CreateServiceDiscoveryResponse {
   /**
-   * 模块名，这里填“monitor”
+   * 创建成功之后，返回对应服务发现信息
    */
-  Module: string
+  ServiceDiscovery?: ServiceDiscoveryItem
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpdateGrafanaWhiteList返回参数结构体
+ */
+export interface UpdateGrafanaWhiteListResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -531,9 +679,9 @@ export interface DescribePolicyGroupInfoRequest {
 }
 
 /**
- * UpdateAlertRuleState返回参数结构体
+ * EnableSSOCamCheck返回参数结构体
  */
-export interface UpdateAlertRuleStateResponse {
+export interface EnableSSOCamCheckResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -613,6 +761,21 @@ export interface DescribePolicyGroupInfoCallback {
    * 用户回调接口验证码
    */
   VerifyCode: string
+}
+
+/**
+ * ModifyGrafanaInstance请求参数结构体
+ */
+export interface ModifyGrafanaInstanceRequest {
+  /**
+   * 实例 ID
+   */
+  InstanceId: string
+
+  /**
+   * 实例名称
+   */
+  InstanceName: string
 }
 
 /**
@@ -718,6 +881,16 @@ export interface CreateAlarmPolicyRequest {
    * 聚合维度列表，指定按哪些维度 key 来做 group by
    */
   GroupBy?: Array<string>
+}
+
+/**
+ * EnableGrafanaSSO返回参数结构体
+ */
+export interface EnableGrafanaSSOResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -972,6 +1145,16 @@ export interface DeleteAlarmPolicyRequest {
    * 告警策略 ID 列表
    */
   PolicyIds: Array<string>
+}
+
+/**
+ * UpdatePrometheusAgentStatus返回参数结构体
+ */
+export interface UpdatePrometheusAgentStatusResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1324,6 +1507,16 @@ export interface DeleteAlertRulesResponse {
 }
 
 /**
+ * DeleteGrafanaNotificationChannel返回参数结构体
+ */
+export interface DeleteGrafanaNotificationChannelResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * GetMonitorData请求参数结构体
  */
 export interface GetMonitorDataRequest {
@@ -1356,6 +1549,16 @@ export interface GetMonitorDataRequest {
    * 结束时间，如2018-09-22T20:51:23+08:00，默认为当前时间。 EndTime不能小于StartTime
    */
   EndTime?: string
+}
+
+/**
+ * CreateSSOAccount返回参数结构体
+ */
+export interface CreateSSOAccountResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1563,23 +1766,58 @@ export interface DescribePolicyConditionListConfigManualPeriod {
 }
 
 /**
- * 指标配置
+ * DescribeGrafanaEnvironments返回参数结构体
  */
-export interface MetricConfig {
+export interface DescribeGrafanaEnvironmentsResponse {
   /**
-   * 允许使用的运算符
+   * 环境变量字符串
    */
-  Operator: Array<string>
+  Envs: string
 
   /**
-   * 允许配置的数据周期，以秒为单位
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Period: Array<number>
+  RequestId?: string
+}
+
+/**
+ * export 集成配置
+ */
+export interface IntegrationConfiguration {
+  /**
+   * 名字
+   */
+  Name: string
 
   /**
-   * 允许配置的持续周期个数
+   * 类型
    */
-  ContinuePeriod: Array<number>
+  Kind: string
+
+  /**
+   * 内容
+   */
+  Content: string
+
+  /**
+   * 状态
+   */
+  Status: number
+
+  /**
+   * 实例类型
+   */
+  Category: string
+
+  /**
+   * 实例描述
+   */
+  InstanceDesc: string
+
+  /**
+   * dashboard 的 URL
+   */
+  GrafanaDashboardURL: string
 }
 
 /**
@@ -1659,6 +1897,47 @@ export interface DescribePolicyConditionListRequest {
 }
 
 /**
+ * 云监控告警通知模板 - 回调通知详情
+ */
+export interface URLNotice {
+  /**
+      * 回调 url（限长256字符）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  URL: string
+
+  /**
+      * 是否通过验证 0=否 1=是
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsValid?: number
+
+  /**
+      * 验证码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ValidationCode?: string
+
+  /**
+      * 通知开始时间 一天开始的秒数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  StartTime?: number
+
+  /**
+      * 通知结束时间 一天开始的秒数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EndTime?: number
+
+  /**
+      * 通知周期 1-7表示周一到周日
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Weekday?: Array<number>
+}
+
+/**
  * DeletePolicyGroup返回参数结构体
  */
 export interface DeletePolicyGroupResponse {
@@ -1690,6 +1969,16 @@ export interface DescribeConditionsTemplateListResponse {
 }
 
 /**
+ * ResumeGrafanaInstance请求参数结构体
+ */
+export interface ResumeGrafanaInstanceRequest {
+  /**
+   * 实例 ID
+   */
+  InstanceId: string
+}
+
+/**
  * DescribeMonitorTypes请求参数结构体
  */
 export interface DescribeMonitorTypesRequest {
@@ -1700,18 +1989,38 @@ export interface DescribeMonitorTypesRequest {
 }
 
 /**
- * DescribeAlarmNotices返回参数结构体
+ * DescribeGrafanaConfig返回参数结构体
  */
-export interface DescribeAlarmNoticesResponse {
+export interface DescribeGrafanaConfigResponse {
   /**
-   * 告警通知模板总数
+   * JSON 编码后的字符串
    */
-  TotalCount: number
+  Config: string
 
   /**
-   * 告警通知模板列表
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Notices: Array<AlarmNotice>
+  RequestId?: string
+}
+
+/**
+ * DeleteGrafanaInstance请求参数结构体
+ */
+export interface DeleteGrafanaInstanceRequest {
+  /**
+   * 实例名数组
+   */
+  InstanceIDs: Array<string>
+}
+
+/**
+ * DescribeGrafanaIntegrations返回参数结构体
+ */
+export interface DescribeGrafanaIntegrationsResponse {
+  /**
+   * 集成数组
+   */
+  IntegrationSet: Array<GrafanaIntegrationConfig>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1740,6 +2049,31 @@ export interface ModifyAlarmPolicyTasksRequest {
 }
 
 /**
+ * Grafana 集成实例配置
+ */
+export interface GrafanaIntegrationConfig {
+  /**
+   * 集成 ID
+   */
+  IntegrationId: string
+
+  /**
+   * 集成类型
+   */
+  Kind: string
+
+  /**
+   * 集成内容
+   */
+  Content: string
+
+  /**
+   * 集成描述
+   */
+  Description: string
+}
+
+/**
  * 维度信息
  */
 export interface DimensionsDesc {
@@ -1747,6 +2081,21 @@ export interface DimensionsDesc {
    * 维度名数组
    */
   Dimensions: Array<string>
+}
+
+/**
+ * DeleteGrafanaIntegration请求参数结构体
+ */
+export interface DeleteGrafanaIntegrationRequest {
+  /**
+   * 实例 ID
+   */
+  InstanceId: string
+
+  /**
+   * 集成 ID
+   */
+  IntegrationId: string
 }
 
 /**
@@ -1785,9 +2134,64 @@ export interface CreatePrometheusMultiTenantInstancePostPayModeResponse {
 }
 
 /**
- * UpdatePrometheusAgentStatus返回参数结构体
+ * Grafana可视化服务 授权账户信息
  */
-export interface UpdatePrometheusAgentStatusResponse {
+export interface GrafanaAccountInfo {
+  /**
+   * 用户账号ID
+   */
+  UserId: string
+
+  /**
+   * 用户权限
+   */
+  Role: Array<GrafanaAccountRole>
+
+  /**
+   * 备注
+   */
+  Notes: string
+
+  /**
+   * 创建时间
+   */
+  CreateAt: string
+}
+
+/**
+ * UpdateGrafanaNotificationChannel请求参数结构体
+ */
+export interface UpdateGrafanaNotificationChannelRequest {
+  /**
+   * 通道 ID
+   */
+  ChannelId: string
+
+  /**
+   * 实例名
+   */
+  InstanceId: string
+
+  /**
+   * 渠道名
+   */
+  ChannelName: string
+
+  /**
+   * 接受告警通道 ID 数组
+   */
+  Receivers: Array<string>
+
+  /**
+   * 额外组织 ID 数组
+   */
+  ExtraOrgIds?: Array<string>
+}
+
+/**
+ * UninstallGrafanaPlugins返回参数结构体
+ */
+export interface UninstallGrafanaPluginsResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1975,6 +2379,16 @@ export interface DescribeBasicAlarmListResponse {
 }
 
 /**
+ * DescribeGrafanaEnvironments请求参数结构体
+ */
+export interface DescribeGrafanaEnvironmentsRequest {
+  /**
+   * 实例名
+   */
+  InstanceId: string
+}
+
+/**
  * DescribeProductList请求参数结构体
  */
 export interface DescribeProductListRequest {
@@ -2012,6 +2426,21 @@ export interface PeriodsSt {
    * 统计方式
    */
   StatType: Array<string>
+}
+
+/**
+ * Grafana可视化服务 账号权限
+ */
+export interface GrafanaAccountRole {
+  /**
+   * 组织
+   */
+  Organization?: string
+
+  /**
+   * 权限
+   */
+  Role?: string
 }
 
 /**
@@ -2240,19 +2669,6 @@ export interface DeleteExporterIntegrationRequest {
   InstanceId: string
 
   /**
-      * Kubernetes 集群类型，取值如下：
-<li> 1= 容器集群(TKE) </li>
-<li> 2=弹性集群<EKS> </li>
-<li> 3= Prometheus管理的弹性集群<MEKS> </li>
-      */
-  KubeType: number
-
-  /**
-   * 集群 ID
-   */
-  ClusterId: string
-
-  /**
    * 类型
    */
   Kind: string
@@ -2261,6 +2677,19 @@ export interface DeleteExporterIntegrationRequest {
    * 名字
    */
   Name: string
+
+  /**
+      * Kubernetes 集群类型，取值如下：
+<li> 1= 容器集群(TKE) </li>
+<li> 2=弹性集群<EKS> </li>
+<li> 3= Prometheus管理的弹性集群<MEKS> </li>
+      */
+  KubeType?: number
+
+  /**
+   * 集群 ID
+   */
+  ClusterId?: string
 }
 
 /**
@@ -2274,38 +2703,18 @@ export interface ModifyAlarmReceiversResponse {
 }
 
 /**
- * Prometheus Agent 管理命令行
+ * EnableGrafanaSSO请求参数结构体
  */
-export interface ManagementCommand {
+export interface EnableGrafanaSSORequest {
   /**
-      * Agent 安装命令
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Install: string
+   * 是否开启 SSO
+   */
+  EnableSSO: boolean
 
   /**
-      * Agent 重启命令
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Restart: string
-
-  /**
-      * Agent 停止命令
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Stop: string
-
-  /**
-      * Agent 状态检测命令
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  StatusCheck: string
-
-  /**
-      * Agent 日志检测命令
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  LogCheck: string
+   * 实例 ID
+   */
+  InstanceId: string
 }
 
 /**
@@ -2466,6 +2875,46 @@ export interface DeleteAlarmNoticesResponse {
 }
 
 /**
+ * DescribeGrafanaNotificationChannels请求参数结构体
+ */
+export interface DescribeGrafanaNotificationChannelsRequest {
+  /**
+   * 实例名
+   */
+  InstanceId: string
+
+  /**
+   * 偏移量
+   */
+  Offset: number
+
+  /**
+   * 查询数量
+   */
+  Limit: number
+
+  /**
+   * 渠道名
+   */
+  ChannelName?: string
+
+  /**
+   * 渠道 ID
+   */
+  ChannelIDs?: Array<string>
+
+  /**
+   * 状态
+   */
+  ChannelState?: number
+}
+
+/**
+ * DescribePluginOverviews请求参数结构体
+ */
+export type DescribePluginOverviewsRequest = null
+
+/**
  * TerminatePrometheusInstances请求参数结构体
  */
 export interface TerminatePrometheusInstancesRequest {
@@ -2476,9 +2925,15 @@ export interface TerminatePrometheusInstancesRequest {
 }
 
 /**
- * UnbindPrometheusManagedGrafana返回参数结构体
+ * DescribeSSOAccount返回参数结构体
  */
-export interface UnbindPrometheusManagedGrafanaResponse {
+export interface DescribeSSOAccountResponse {
+  /**
+      * 授权账号列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AccountSet: Array<GrafanaAccountInfo>
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2505,6 +2960,16 @@ export interface UpdatePrometheusAgentStatusRequest {
 <li> 2= 关闭 </li>
       */
   Status: number
+}
+
+/**
+ * InstallPlugins返回参数结构体
+ */
+export interface InstallPluginsResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2676,18 +3141,38 @@ re=正则匹配
 }
 
 /**
- * CreateServiceDiscovery返回参数结构体
+ * DeleteGrafanaNotificationChannel请求参数结构体
  */
-export interface CreateServiceDiscoveryResponse {
+export interface DeleteGrafanaNotificationChannelRequest {
   /**
-   * 创建成功之后，返回对应服务发现信息
+   * 通道 ID 数组
    */
-  ServiceDiscovery?: ServiceDiscoveryItem
+  ChannelIDs: Array<string>
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 实例名
    */
-  RequestId?: string
+  InstanceId: string
+}
+
+/**
+ * CreateGrafanaIntegration请求参数结构体
+ */
+export interface CreateGrafanaIntegrationRequest {
+  /**
+   * 实例名
+   */
+  InstanceId: string
+
+  /**
+   * 类型
+   */
+  Kind: string
+
+  /**
+   * 配置
+   */
+  Content: string
 }
 
 /**
@@ -2720,12 +3205,12 @@ export interface DescribeExporterIntegrationsRequest {
 <li> 2=弹性集群<EKS> </li>
 <li> 3= Prometheus管理的弹性集群<MEKS> </li>
       */
-  KubeType: number
+  KubeType?: number
 
   /**
    * 集群 ID
    */
-  ClusterId: string
+  ClusterId?: string
 
   /**
    * 类型
@@ -2983,26 +3468,18 @@ export interface Point {
 }
 
 /**
- * UpdateAlertRuleState请求参数结构体
+ * UpdateAlertRule返回参数结构体
  */
-export interface UpdateAlertRuleStateRequest {
+export interface UpdateAlertRuleResponse {
   /**
-   * 规则 ID 列表
+   * 规则 ID
    */
-  RuleIds: Array<string>
+  RuleId: string
 
   /**
-   * Prometheus 实例 ID
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  InstanceId: string
-
-  /**
-      * 规则状态码，取值如下：
-<li>2=RuleEnabled</li>
-<li>3=RuleDisabled</li>
-默认状态码为 2 启用。
-      */
-  RuleState: number
+  RequestId?: string
 }
 
 /**
@@ -3031,67 +3508,43 @@ export interface ModifyPolicyGroupEventCondition {
 }
 
 /**
- * 指标，可用于设置告警、查询数据
+ * CreateGrafanaNotificationChannel请求参数结构体
  */
-export interface Metric {
+export interface CreateGrafanaNotificationChannelRequest {
   /**
-   * 告警策略类型
+   * 实例名
    */
-  Namespace: string
+  InstanceId: string
 
   /**
-   * 指标名
+   * 渠道名
    */
-  MetricName: string
+  ChannelName: string
 
   /**
-   * 指标展示名
+   * 组织 ID
    */
-  Description: string
+  OrgId: number
 
   /**
-   * 最小值
+   * 接受告警通道 ID 数组
    */
-  Min: number
+  Receivers: Array<string>
 
   /**
-   * 最大值
+   * 额外组织 ID 数组
    */
-  Max: number
+  ExtraOrgIds?: Array<string>
+}
 
+/**
+ * ModifyGrafanaInstance返回参数结构体
+ */
+export interface ModifyGrafanaInstanceResponse {
   /**
-   * 维度列表
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Dimensions: Array<string>
-
-  /**
-   * 单位
-   */
-  Unit: string
-
-  /**
-      * 指标配置
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  MetricConfig: MetricConfig
-
-  /**
-      * 是否为高级指标。1是 0否
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  IsAdvanced: number
-
-  /**
-      * 高级指标是否开通。1是 0否
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  IsOpen: number
-
-  /**
-      * 集成中心产品ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ProductId: number
+  RequestId?: string
 }
 
 /**
@@ -3197,6 +3650,31 @@ export interface DescribeBaseMetricsRequest {
    * 可选参数，按照维度过滤
    */
   Dimensions?: Array<string>
+}
+
+/**
+ * CreateSSOAccount请求参数结构体
+ */
+export interface CreateSSOAccountRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+
+  /**
+   * 用户账号ID
+   */
+  UserId: string
+
+  /**
+   * 权限
+   */
+  Role: Array<GrafanaAccountRole>
+
+  /**
+   * 备注
+   */
+  Notes?: string
 }
 
 /**
@@ -3308,6 +3786,16 @@ export interface UpdatePrometheusScrapeJobRequest {
 }
 
 /**
+ * UpdateGrafanaNotificationChannel返回参数结构体
+ */
+export interface UpdateGrafanaNotificationChannelResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 告警策略过滤条件
  */
 export interface AlarmPolicyFilter {
@@ -3322,6 +3810,31 @@ export interface AlarmPolicyFilter {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Dimensions?: string
+}
+
+/**
+ * UpgradeGrafanaInstance请求参数结构体
+ */
+export interface UpgradeGrafanaInstanceRequest {
+  /**
+   * 实例名
+   */
+  InstanceId: string
+
+  /**
+   * 版本别名
+   */
+  Alias: string
+}
+
+/**
+ * DescribeAlarmNoticeCallbacks请求参数结构体
+ */
+export interface DescribeAlarmNoticeCallbacksRequest {
+  /**
+   * 模块名，这里填“monitor”
+   */
+  Module: string
 }
 
 /**
@@ -3391,9 +3904,24 @@ export interface ModifyAlarmPolicyConditionRequest {
 }
 
 /**
- * ModifyAlarmNotice返回参数结构体
+ * DeleteSSOAccount请求参数结构体
  */
-export interface ModifyAlarmNoticeResponse {
+export interface DeleteSSOAccountRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+
+  /**
+   * 用户账号ID
+   */
+  UserId: string
+}
+
+/**
+ * CreateGrafanaIntegration返回参数结构体
+ */
+export interface CreateGrafanaIntegrationResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3416,6 +3944,26 @@ export interface BindPrometheusManagedGrafanaRequest {
 }
 
 /**
+ * ResumeGrafanaInstance返回参数结构体
+ */
+export interface ResumeGrafanaInstanceResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpdateAlertRuleState返回参数结构体
+ */
+export interface UpdateAlertRuleStateResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 实例维度组合数组
  */
 export interface Instance {
@@ -3423,6 +3971,68 @@ export interface Instance {
    * 实例的维度组合
    */
   Dimensions: Array<Dimension>
+}
+
+/**
+ * DescribeProductEventList返回参数结构体
+ */
+export interface DescribeProductEventListResponse {
+  /**
+      * 事件列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Events: Array<DescribeProductEventListEvents>
+
+  /**
+   * 事件统计
+   */
+  OverView: DescribeProductEventListOverView
+
+  /**
+      * 事件总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Total: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateGrafanaInstance请求参数结构体
+ */
+export interface CreateGrafanaInstanceRequest {
+  /**
+   * 实例名
+   */
+  InstanceName: string
+
+  /**
+   * VPC ID
+   */
+  VpcId: string
+
+  /**
+   * 子网 ID 数组
+   */
+  SubnetIds: Array<string>
+
+  /**
+   * Grafana 初始密码
+   */
+  GrafanaInitPassword: string
+
+  /**
+   * 是否启用外网
+   */
+  EnableInternet: boolean
+
+  /**
+   * 标签
+   */
+  TagSpecification?: Array<PrometheusTag>
 }
 
 /**
@@ -3453,93 +4063,13 @@ export interface BindingPolicyObjectDimension {
 }
 
 /**
- * DeletePolicyGroup请求参数结构体
+ * UnbindPrometheusManagedGrafana返回参数结构体
  */
-export interface DeletePolicyGroupRequest {
-  /**
-   * 固定值，为"monitor"
-   */
-  Module: string
-
-  /**
-   * 策略组id
-   */
-  GroupId: Array<number>
-}
-
-/**
- * DescribeAlarmPolicy返回参数结构体
- */
-export interface DescribeAlarmPolicyResponse {
-  /**
-   * 策略详情
-   */
-  Policy?: AlarmPolicy
-
+export interface UnbindPrometheusManagedGrafanaResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * DeleteExporterIntegration返回参数结构体
- */
-export interface DeleteExporterIntegrationResponse {
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * UpdateServiceDiscovery返回参数结构体
- */
-export interface UpdateServiceDiscoveryResponse {
-  /**
-   * 更新成功之后，返回对应服务发现的信息
-   */
-  ServiceDiscovery?: ServiceDiscoveryItem
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeMonitorTypes返回参数结构体
- */
-export interface DescribeMonitorTypesResponse {
-  /**
-   * 监控类型，云产品监控为 MT_QCE
-   */
-  MonitorTypes: Array<string>
-
-  /**
-   * 监控类型详情
-   */
-  MonitorTypeInfos: Array<MonitorTypeInfo>
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 实例对象的维度组合
- */
-export interface Dimension {
-  /**
-   * 实例维度名称
-   */
-  Name: string
-
-  /**
-   * 实例维度值
-   */
-  Value: string
 }
 
 /**
@@ -3676,6 +4206,235 @@ export interface DescribeBasicAlarmListAlarms {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   InstanceGroup: Array<InstanceGroup>
+}
+
+/**
+ * DescribeAlarmPolicy返回参数结构体
+ */
+export interface DescribeAlarmPolicyResponse {
+  /**
+   * 策略详情
+   */
+  Policy?: AlarmPolicy
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteExporterIntegration返回参数结构体
+ */
+export interface DeleteExporterIntegrationResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpdateServiceDiscovery返回参数结构体
+ */
+export interface UpdateServiceDiscoveryResponse {
+  /**
+   * 更新成功之后，返回对应服务发现的信息
+   */
+  ServiceDiscovery?: ServiceDiscoveryItem
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeMonitorTypes返回参数结构体
+ */
+export interface DescribeMonitorTypesResponse {
+  /**
+   * 监控类型，云产品监控为 MT_QCE
+   */
+  MonitorTypes: Array<string>
+
+  /**
+   * 监控类型详情
+   */
+  MonitorTypeInfos: Array<MonitorTypeInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 查询 Grafana 实例时的实例类型
+ */
+export interface GrafanaInstanceInfo {
+  /**
+   * 实例名
+   */
+  InstanceName: string
+
+  /**
+   * 实例 ID
+   */
+  InstanceId: string
+
+  /**
+   * 地域
+   */
+  Region: string
+
+  /**
+   * VPC ID
+   */
+  VpcId: string
+
+  /**
+   * 子网 ID 数组
+   */
+  SubnetIds: Array<string>
+
+  /**
+   * Grafana 内网地址
+   */
+  InternetUrl: string
+
+  /**
+   * Grafana 公网地址
+   */
+  InternalUrl: string
+
+  /**
+   * 创建时间
+   */
+  CreatedAt: string
+
+  /**
+   * 运行状态（1:正在创建；2:运行中；3:异常；4:重启中；5:停机中； 6:已停机； 7: 已删除）
+   */
+  InstanceStatus: number
+
+  /**
+      * 实例的标签
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TagSpecification: Array<PrometheusTag>
+
+  /**
+   * 实例的可用区
+   */
+  Zone: string
+
+  /**
+   * 计费模式（1:包年包月）
+   */
+  InstanceChargeType: number
+
+  /**
+   * VPC 名称
+   */
+  VpcName: string
+
+  /**
+   * 子网名称
+   */
+  SubnetName: string
+
+  /**
+   * 地域 ID
+   */
+  RegionId: number
+
+  /**
+   * 可访问此实例的完整 URL
+   */
+  RootUrl: string
+
+  /**
+   * 是否开启 SSO
+   */
+  EnableSSO: boolean
+
+  /**
+   * 版本号
+   */
+  Version: string
+
+  /**
+   * SSO登录时是否开启cam鉴权
+   */
+  EnableSSOCamCheck: boolean
+}
+
+/**
+ * 实例对象的维度组合
+ */
+export interface Dimension {
+  /**
+   * 实例维度名称
+   */
+  Name: string
+
+  /**
+   * 实例维度值
+   */
+  Value: string
+}
+
+/**
+ * DescribeAccidentEventList接口的出参类型
+ */
+export interface DescribeAccidentEventListAlarms {
+  /**
+      * 事件分类
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BusinessTypeDesc: string
+
+  /**
+      * 事件类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AccidentTypeDesc: string
+
+  /**
+      * 事件分类的ID，1表示服务问题，2表示其他订阅
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BusinessID: number
+
+  /**
+      * 事件状态的ID，0表示已恢复，1表示未恢复
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EventStatus: number
+
+  /**
+      * 影响的对象
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AffectResource: string
+
+  /**
+      * 事件的地域
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Region: string
+
+  /**
+      * 事件发生的时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OccurTime: string
+
+  /**
+      * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UpdateTime: string
 }
 
 /**
@@ -3822,56 +4581,33 @@ export interface MetricObjectMeaning {
 }
 
 /**
- * DescribeAccidentEventList接口的出参类型
+ * DeletePolicyGroup请求参数结构体
  */
-export interface DescribeAccidentEventListAlarms {
+export interface DeletePolicyGroupRequest {
   /**
-      * 事件分类
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  BusinessTypeDesc: string
+   * 固定值，为"monitor"
+   */
+  Module: string
 
   /**
-      * 事件类型
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  AccidentTypeDesc: string
+   * 策略组id
+   */
+  GroupId: Array<number>
+}
+
+/**
+ * EnableSSOCamCheck请求参数结构体
+ */
+export interface EnableSSOCamCheckRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
 
   /**
-      * 事件分类的ID，1表示服务问题，2表示其他订阅
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  BusinessID: number
-
-  /**
-      * 事件状态的ID，0表示已恢复，1表示未恢复
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  EventStatus: number
-
-  /**
-      * 影响的对象
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  AffectResource: string
-
-  /**
-      * 事件的地域
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Region: string
-
-  /**
-      * 事件发生的时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  OccurTime: string
-
-  /**
-      * 更新时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  UpdateTime: string
+   * 是否开启cam鉴权
+   */
+  EnableSSOCamCheck: boolean
 }
 
 /**
@@ -3887,6 +4623,26 @@ export interface ModifyPolicyGroupResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DeleteGrafanaIntegration返回参数结构体
+ */
+export interface DeleteGrafanaIntegrationResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeInstalledPlugins请求参数结构体
+ */
+export interface DescribeInstalledPluginsRequest {
+  /**
+   * 实例 ID
+   */
+  InstanceId: string
 }
 
 /**
@@ -3963,18 +4719,23 @@ export interface Condition {
 }
 
 /**
- * UpdateAlertRule返回参数结构体
+ * DeleteGrafanaInstance返回参数结构体
  */
-export interface UpdateAlertRuleResponse {
-  /**
-   * 规则 ID
-   */
-  RuleId: string
-
+export interface DeleteGrafanaInstanceResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeGrafanaWhiteList请求参数结构体
+ */
+export interface DescribeGrafanaWhiteListRequest {
+  /**
+   * 实例名
+   */
+  InstanceId: string
 }
 
 /**
@@ -4058,6 +4819,16 @@ export interface MetricData {
 }
 
 /**
+ * UpdateGrafanaIntegration返回参数结构体
+ */
+export interface UpdateGrafanaIntegrationResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 告警事件
  */
 export interface AlarmEvent {
@@ -4075,6 +4846,16 @@ export interface AlarmEvent {
    * 告警策略类型
    */
   Namespace: string
+}
+
+/**
+ * ModifyAlarmPolicyNotice返回参数结构体
+ */
+export interface ModifyAlarmPolicyNoticeResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4118,43 +4899,18 @@ export interface BindingPolicyTagRequest {
 }
 
 /**
- * export 集成配置
+ * CreateGrafanaInstance返回参数结构体
  */
-export interface IntegrationConfiguration {
+export interface CreateGrafanaInstanceResponse {
   /**
-   * 名字
+   * 实例名
    */
-  Name: string
+  InstanceId: string
 
   /**
-   * 类型
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Kind: string
-
-  /**
-   * 内容
-   */
-  Content: string
-
-  /**
-   * 状态
-   */
-  Status: number
-
-  /**
-   * 实例类型
-   */
-  Category: string
-
-  /**
-   * 实例描述
-   */
-  InstanceDesc: string
-
-  /**
-   * dashboard 的 URL
-   */
-  GrafanaDashboardURL: string
+  RequestId?: string
 }
 
 /**
@@ -4654,6 +5410,21 @@ export interface PolicyGroup {
 }
 
 /**
+ * DescribeGrafanaNotificationChannels返回参数结构体
+ */
+export interface DescribeGrafanaNotificationChannelsResponse {
+  /**
+   * 告警通道数组
+   */
+  NotificationChannelSet: Array<GrafanaNotificationChannel>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteRecordingRules请求参数结构体
  */
 export interface DeleteRecordingRulesRequest {
@@ -4889,6 +5660,76 @@ export interface DescribePrometheusScrapeJobsResponse {
    * 任务总量
    */
   TotalCount?: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * EnableGrafanaInternet请求参数结构体
+ */
+export interface EnableGrafanaInternetRequest {
+  /**
+   * 实例 ID
+   */
+  InstanceID: string
+
+  /**
+   * 开启或关闭
+   */
+  EnableInternet: boolean
+}
+
+/**
+ * DescribePluginOverviews返回参数结构体
+ */
+export interface DescribePluginOverviewsResponse {
+  /**
+   * 插件列表
+   */
+  PluginSet: Array<GrafanaPlugin>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpdateSSOAccount请求参数结构体
+ */
+export interface UpdateSSOAccountRequest {
+  /**
+   * 示例ID
+   */
+  InstanceId: string
+
+  /**
+   * 用户账号ID
+   */
+  UserId: string
+
+  /**
+   * 权限
+   */
+  Role?: Array<GrafanaAccountRole>
+
+  /**
+   * 备注
+   */
+  Notes?: string
+}
+
+/**
+ * GetPrometheusAgentManagementCommand返回参数结构体
+ */
+export interface GetPrometheusAgentManagementCommandResponse {
+  /**
+   * Agent 管理命令
+   */
+  Command?: ManagementCommand
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -5138,6 +5979,70 @@ export interface DescribePrometheusAgentsResponse {
 }
 
 /**
+ * 指标，可用于设置告警、查询数据
+ */
+export interface Metric {
+  /**
+   * 告警策略类型
+   */
+  Namespace: string
+
+  /**
+   * 指标名
+   */
+  MetricName: string
+
+  /**
+   * 指标展示名
+   */
+  Description: string
+
+  /**
+   * 最小值
+   */
+  Min: number
+
+  /**
+   * 最大值
+   */
+  Max: number
+
+  /**
+   * 维度列表
+   */
+  Dimensions: Array<string>
+
+  /**
+   * 单位
+   */
+  Unit: string
+
+  /**
+      * 指标配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MetricConfig: MetricConfig
+
+  /**
+      * 是否为高级指标。1是 0否
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsAdvanced: number
+
+  /**
+      * 高级指标是否开通。1是 0否
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsOpen: number
+
+  /**
+      * 集成中心产品ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProductId: number
+}
+
+/**
  * DescribeAlarmEvents请求参数结构体
  */
 export interface DescribeAlarmEventsRequest {
@@ -5198,6 +6103,31 @@ export interface DeletePrometheusScrapeJobsRequest {
 }
 
 /**
+ * UpdateGrafanaIntegration请求参数结构体
+ */
+export interface UpdateGrafanaIntegrationRequest {
+  /**
+   * 集成 ID
+   */
+  IntegrationId: string
+
+  /**
+   * 实例 ID
+   */
+  InstanceId: string
+
+  /**
+   * 集成类型
+   */
+  Kind: string
+
+  /**
+   * 集成内容
+   */
+  Content: string
+}
+
+/**
  * UnBindingPolicyObject请求参数结构体
  */
 export interface UnBindingPolicyObjectRequest {
@@ -5228,44 +6158,28 @@ export interface UnBindingPolicyObjectRequest {
 }
 
 /**
- * 云监控告警通知模板 - 回调通知详情
+ * CleanGrafanaInstance返回参数结构体
  */
-export interface URLNotice {
+export interface CleanGrafanaInstanceResponse {
   /**
-      * 回调 url（限长256字符）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  URL: string
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpdateDNSConfig请求参数结构体
+ */
+export interface UpdateDNSConfigRequest {
+  /**
+   * 实例名
+   */
+  InstanceId: string
 
   /**
-      * 是否通过验证 0=否 1=是
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  IsValid?: number
-
-  /**
-      * 验证码
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ValidationCode?: string
-
-  /**
-      * 通知开始时间 一天开始的秒数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  StartTime?: number
-
-  /**
-      * 通知结束时间 一天开始的秒数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  EndTime?: number
-
-  /**
-      * 通知周期 1-7表示周一到周日
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Weekday?: Array<number>
+   * DNS 数组
+   */
+  NameServers: Array<string>
 }
 
 /**
@@ -5323,6 +6237,51 @@ export interface CreateAlertRuleRequest {
 }
 
 /**
+ * DescribeDNSConfig返回参数结构体
+ */
+export interface DescribeDNSConfigResponse {
+  /**
+   * DNS 服务器数组
+   */
+  NameServers: Array<string>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpdateGrafanaConfig请求参数结构体
+ */
+export interface UpdateGrafanaConfigRequest {
+  /**
+   * 无
+   */
+  InstanceId: string
+
+  /**
+   * JSON 编码后的字符串
+   */
+  Config: string
+}
+
+/**
+ * UpdateGrafanaEnvironments请求参数结构体
+ */
+export interface UpdateGrafanaEnvironmentsRequest {
+  /**
+   * 实例名
+   */
+  InstanceId: string
+
+  /**
+   * 环境变量字符串
+   */
+  Envs: string
+}
+
+/**
  * DescribeProductList返回参数结构体
  */
 export interface DescribeProductListResponse {
@@ -5345,30 +6304,23 @@ export interface DescribeProductListResponse {
 }
 
 /**
- * DescribeProductEventList返回参数结构体
+ * DescribeGrafanaIntegrations请求参数结构体
  */
-export interface DescribeProductEventListResponse {
+export interface DescribeGrafanaIntegrationsRequest {
   /**
-      * 事件列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Events: Array<DescribeProductEventListEvents>
-
-  /**
-   * 事件统计
+   * 实例名
    */
-  OverView: DescribeProductEventListOverView
+  InstanceId: string
 
   /**
-      * 事件总数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Total: number
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 集成 ID
    */
-  RequestId?: string
+  IntegrationId?: string
+
+  /**
+   * 类型
+   */
+  Kind?: string
 }
 
 /**
@@ -5736,6 +6688,26 @@ export interface DescribePolicyGroupInfoReceiverInfo {
 }
 
 /**
+ * DescribeAlarmNotices返回参数结构体
+ */
+export interface DescribeAlarmNoticesResponse {
+  /**
+   * 告警通知模板总数
+   */
+  TotalCount: number
+
+  /**
+   * 告警通知模板列表
+   */
+  Notices: Array<AlarmNotice>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeStatisticData返回参数结构体
  */
 export interface DescribeStatisticDataResponse {
@@ -6011,13 +6983,38 @@ export interface DescribeBasicAlarmListRequest {
 }
 
 /**
- * UnBindingAllPolicyObject返回参数结构体
+ * Prometheus Agent 管理命令行
  */
-export interface UnBindingAllPolicyObjectResponse {
+export interface ManagementCommand {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+      * Agent 安装命令
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Install: string
+
+  /**
+      * Agent 重启命令
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Restart: string
+
+  /**
+      * Agent 停止命令
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Stop: string
+
+  /**
+      * Agent 状态检测命令
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  StatusCheck: string
+
+  /**
+      * Agent 日志检测命令
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LogCheck: string
 }
 
 /**
@@ -6073,6 +7070,16 @@ export interface DescribeAlarmNoticesRequest {
    * 根据通知模板 id 过滤，空数组/不传则不过滤
    */
   NoticeIds?: Array<string>
+}
+
+/**
+ * DescribeGrafanaConfig请求参数结构体
+ */
+export interface DescribeGrafanaConfigRequest {
+  /**
+   * 无
+   */
+  InstanceId: string
 }
 
 /**
@@ -6184,6 +7191,41 @@ export interface DescribePolicyGroupListGroup {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   IsUnionRule: number
+}
+
+/**
+ * DescribeGrafanaInstances请求参数结构体
+ */
+export interface DescribeGrafanaInstancesRequest {
+  /**
+   * 查询偏移量
+   */
+  Offset: number
+
+  /**
+   * 查询数量
+   */
+  Limit: number
+
+  /**
+   * 实例 ID 数组
+   */
+  InstanceIds?: Array<string>
+
+  /**
+   * 实例名，支持前缀模糊搜索
+   */
+  InstanceName?: string
+
+  /**
+   * 查询状态
+   */
+  InstanceStatus?: Array<number>
+
+  /**
+   * 标签过滤数组
+   */
+  TagFilters?: Array<PrometheusTag>
 }
 
 /**
@@ -6316,6 +7358,16 @@ export interface MetricDatum {
 }
 
 /**
+ * CreateGrafanaNotificationChannel返回参数结构体
+ */
+export interface CreateGrafanaNotificationChannelResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeAlarmNotice返回参数结构体
  */
 export interface DescribeAlarmNoticeResponse {
@@ -6377,37 +7429,55 @@ export interface DescribeBindingPolicyObjectListInstanceGroup {
 }
 
 /**
- * UpdateServiceDiscovery请求参数结构体
+ * DescribeProductEventList返回的Events里的GroupInfo
  */
-export interface UpdateServiceDiscoveryRequest {
+export interface DescribeProductEventListEventsGroupInfo {
   /**
-   * Prometheus 实例 ID
+      * 策略ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  GroupId: number
+
+  /**
+      * 策略名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  GroupName: string
+}
+
+/**
+ * UninstallGrafanaPlugins请求参数结构体
+ */
+export interface UninstallGrafanaPluginsRequest {
+  /**
+   * 插件 ID 数组
+   */
+  PluginIds: Array<string>
+
+  /**
+   * 实例 ID
    */
   InstanceId: string
+}
 
+/**
+ * CleanGrafanaInstance请求参数结构体
+ */
+export interface CleanGrafanaInstanceRequest {
   /**
-   * <li>类型是 TKE，为对应的腾讯云容器服务集群 ID</li>
+   * 实例名
    */
-  KubeClusterId: string
+  InstanceId: string
+}
 
+/**
+ * UpgradeGrafanaInstance返回参数结构体
+ */
+export interface UpgradeGrafanaInstanceResponse {
   /**
-      * 用户 Kubernetes 集群类型：
-<li> 1 = 容器服务集群(TKE) </li>
-      */
-  KubeType: number
-
-  /**
-      * 服务发现类型，取值如下：
-<li> 1 = ServiceMonitor</li>
-<li> 2 = PodMonitor</li>
-<li> 3 = JobMonitor</li>
-      */
-  Type: number
-
-  /**
-   * 服务发现配置信息
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Yaml: string
+  RequestId?: string
 }
 
 /**
@@ -6421,6 +7491,16 @@ export interface DeleteAlertRulesRequest {
 
   /**
    * Prometheus 实例 ID
+   */
+  InstanceId: string
+}
+
+/**
+ * DescribeSSOAccount请求参数结构体
+ */
+export interface DescribeSSOAccountRequest {
+  /**
+   * 实例ID
    */
   InstanceId: string
 }
@@ -6470,6 +7550,36 @@ export interface UninstallGrafanaDashboardRequest {
 <li>etcd</li>
       */
   IntegrationCodes?: Array<string>
+}
+
+/**
+ * Grafana 告警渠道
+ */
+export interface GrafanaNotificationChannel {
+  /**
+   * 渠道 ID
+   */
+  ChannelId: string
+
+  /**
+   * 渠道名
+   */
+  ChannelName: string
+
+  /**
+   * 告警通道模板 ID 数组
+   */
+  Receivers: Array<string>
+
+  /**
+   * 创建时间
+   */
+  CreatedAt: string
+
+  /**
+   * 更新时间
+   */
+  UpdatedAt: string
 }
 
 /**
@@ -6815,6 +7925,16 @@ export interface CLSNotice {
 }
 
 /**
+ * EnableGrafanaInternet返回参数结构体
+ */
+export interface EnableGrafanaInternetResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 查询策略输出的事件告警条件
  */
 export interface DescribePolicyGroupInfoEventCondition {
@@ -6870,13 +7990,13 @@ export interface ModifyAlarmPolicyStatusResponse {
 }
 
 /**
- * GetPrometheusAgentManagementCommand返回参数结构体
+ * DescribeGrafanaWhiteList返回参数结构体
  */
-export interface GetPrometheusAgentManagementCommandResponse {
+export interface DescribeGrafanaWhiteListResponse {
   /**
-   * Agent 管理命令
+   * 数组
    */
-  Command?: ManagementCommand
+  WhiteList: Array<string>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -6978,6 +8098,26 @@ export interface ModifyPolicyGroupCondition {
    * 规则id，不填表示新增，填写了ruleId表示在已存在的规则基础上进行修改
    */
   RuleId?: number
+}
+
+/**
+ * DescribeDNSConfig请求参数结构体
+ */
+export interface DescribeDNSConfigRequest {
+  /**
+   * 实例名
+   */
+  InstanceId: string
+}
+
+/**
+ * UpdateDNSConfig返回参数结构体
+ */
+export interface UpdateDNSConfigResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -7262,20 +8402,83 @@ export interface DeleteServiceDiscoveryRequest {
 }
 
 /**
- * DescribeProductEventList返回的Events里的GroupInfo
+ * UpdateSSOAccount返回参数结构体
  */
-export interface DescribeProductEventListEventsGroupInfo {
+export interface UpdateSSOAccountResponse {
   /**
-      * 策略ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  GroupId: number
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeInstalledPlugins返回参数结构体
+ */
+export interface DescribeInstalledPluginsResponse {
+  /**
+   * 插件列表
+   */
+  PluginSet: Array<GrafanaPlugin>
 
   /**
-      * 策略名
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  GroupName: string
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpdateGrafanaConfig返回参数结构体
+ */
+export interface UpdateGrafanaConfigResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteSSOAccount返回参数结构体
+ */
+export interface DeleteSSOAccountResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeGrafanaInstances返回参数结构体
+ */
+export interface DescribeGrafanaInstancesResponse {
+  /**
+   * 已废弃，请使用 Instances
+   */
+  InstanceSet: Array<GrafanaInstanceInfo>
+
+  /**
+   * 符合查询条件的实例总数
+   */
+  TotalCount: number
+
+  /**
+   * 实例列表
+   */
+  Instances: Array<GrafanaInstanceInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UnBindingAllPolicyObject返回参数结构体
+ */
+export interface UnBindingAllPolicyObjectResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

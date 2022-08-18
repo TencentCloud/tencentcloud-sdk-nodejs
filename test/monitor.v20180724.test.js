@@ -18,29 +18,9 @@ const client = new tencentcloud.monitor.v20180724.Client({
 })
 describe("monitor.v20180724.test.js", function () {
 
-it("monitor.v20180724.PutMonitorData", async function () {
+it("monitor.v20180724.UpdateGrafanaNotificationChannel", async function () {
     try {
-       const data = await client.PutMonitorData({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("monitor.v20180724.DescribeAlarmPolicies", async function () {
-    try {
-       const data = await client.DescribeAlarmPolicies({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("monitor.v20180724.UnBindingPolicyObject", async function () {
-    try {
-       const data = await client.UnBindingPolicyObject({})
+       const data = await client.UpdateGrafanaNotificationChannel({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -58,9 +38,229 @@ it("monitor.v20180724.CreateAlertRule", async function () {
     }
 })
 
-it("monitor.v20180724.SendCustomAlarmMsg", async function () {
+it("monitor.v20180724.DescribeBindingPolicyObjectList", async function () {
     try {
-       const data = await client.SendCustomAlarmMsg({})
+       const data = await client.DescribeBindingPolicyObjectList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.UpdateAlertRule", async function () {
+    try {
+       const data = await client.UpdateAlertRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.ModifyAlarmReceivers", async function () {
+    try {
+       const data = await client.ModifyAlarmReceivers({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.BindingPolicyObject", async function () {
+    try {
+       const data = await client.BindingPolicyObject({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.CreateGrafanaInstance", async function () {
+    try {
+       const data = await client.CreateGrafanaInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.DescribeBasicAlarmList", async function () {
+    try {
+       const data = await client.DescribeBasicAlarmList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.DescribeProductList", async function () {
+    try {
+       const data = await client.DescribeProductList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.UpdateSSOAccount", async function () {
+    try {
+       const data = await client.UpdateSSOAccount({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.DescribeGrafanaEnvironments", async function () {
+    try {
+       const data = await client.DescribeGrafanaEnvironments({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.UpdateRecordingRule", async function () {
+    try {
+       const data = await client.UpdateRecordingRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.DeleteGrafanaNotificationChannel", async function () {
+    try {
+       const data = await client.DeleteGrafanaNotificationChannel({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.DescribeGrafanaConfig", async function () {
+    try {
+       const data = await client.DescribeGrafanaConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.DeleteAlertRules", async function () {
+    try {
+       const data = await client.DeleteAlertRules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.ModifyAlarmPolicyStatus", async function () {
+    try {
+       const data = await client.ModifyAlarmPolicyStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.DeletePrometheusScrapeJobs", async function () {
+    try {
+       const data = await client.DeletePrometheusScrapeJobs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.EnableGrafanaSSO", async function () {
+    try {
+       const data = await client.EnableGrafanaSSO({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.ModifyAlarmPolicyInfo", async function () {
+    try {
+       const data = await client.ModifyAlarmPolicyInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.DescribeBaseMetrics", async function () {
+    try {
+       const data = await client.DescribeBaseMetrics({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.DescribeAlarmEvents", async function () {
+    try {
+       const data = await client.DescribeAlarmEvents({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.DeleteAlarmNotices", async function () {
+    try {
+       const data = await client.DeleteAlarmNotices({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.ModifyAlarmNotice", async function () {
+    try {
+       const data = await client.ModifyAlarmNotice({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.CreatePrometheusScrapeJob", async function () {
+    try {
+       const data = await client.CreatePrometheusScrapeJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.UnBindingPolicyObject", async function () {
+    try {
+       const data = await client.UnBindingPolicyObject({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -78,9 +278,9 @@ it("monitor.v20180724.DescribeConditionsTemplateList", async function () {
     }
 })
 
-it("monitor.v20180724.DescribeBindingPolicyObjectList", async function () {
+it("monitor.v20180724.DescribePrometheusScrapeJobs", async function () {
     try {
-       const data = await client.DescribeBindingPolicyObjectList({})
+       const data = await client.DescribePrometheusScrapeJobs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -88,9 +288,269 @@ it("monitor.v20180724.DescribeBindingPolicyObjectList", async function () {
     }
 })
 
-it("monitor.v20180724.DescribePrometheusScrapeJobs", async function () {
+it("monitor.v20180724.DeleteServiceDiscovery", async function () {
     try {
-       const data = await client.DescribePrometheusScrapeJobs({})
+       const data = await client.DeleteServiceDiscovery({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.CreatePrometheusMultiTenantInstancePostPayMode", async function () {
+    try {
+       const data = await client.CreatePrometheusMultiTenantInstancePostPayMode({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.UpdateGrafanaEnvironments", async function () {
+    try {
+       const data = await client.UpdateGrafanaEnvironments({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.DescribePolicyConditionList", async function () {
+    try {
+       const data = await client.DescribePolicyConditionList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.ModifyAlarmPolicyCondition", async function () {
+    try {
+       const data = await client.ModifyAlarmPolicyCondition({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.GetPrometheusAgentManagementCommand", async function () {
+    try {
+       const data = await client.GetPrometheusAgentManagementCommand({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.UpdatePrometheusScrapeJob", async function () {
+    try {
+       const data = await client.UpdatePrometheusScrapeJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.UpgradeGrafanaInstance", async function () {
+    try {
+       const data = await client.UpgradeGrafanaInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.DeleteGrafanaIntegration", async function () {
+    try {
+       const data = await client.DeleteGrafanaIntegration({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.BindPrometheusManagedGrafana", async function () {
+    try {
+       const data = await client.BindPrometheusManagedGrafana({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.UnBindingAllPolicyObject", async function () {
+    try {
+       const data = await client.UnBindingAllPolicyObject({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.DeletePolicyGroup", async function () {
+    try {
+       const data = await client.DeletePolicyGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.UpdateServiceDiscovery", async function () {
+    try {
+       const data = await client.UpdateServiceDiscovery({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.DescribeMonitorTypes", async function () {
+    try {
+       const data = await client.DescribeMonitorTypes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.EnableSSOCamCheck", async function () {
+    try {
+       const data = await client.EnableSSOCamCheck({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.InstallPlugins", async function () {
+    try {
+       const data = await client.InstallPlugins({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.CreateExporterIntegration", async function () {
+    try {
+       const data = await client.CreateExporterIntegration({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.DeleteRecordingRules", async function () {
+    try {
+       const data = await client.DeleteRecordingRules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.DescribeProductEventList", async function () {
+    try {
+       const data = await client.DescribeProductEventList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.DescribeAlarmHistories", async function () {
+    try {
+       const data = await client.DescribeAlarmHistories({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.DeleteSSOAccount", async function () {
+    try {
+       const data = await client.DeleteSSOAccount({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.DescribeAlarmNotice", async function () {
+    try {
+       const data = await client.DescribeAlarmNotice({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.CreateGrafanaIntegration", async function () {
+    try {
+       const data = await client.CreateGrafanaIntegration({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.SetDefaultAlarmPolicy", async function () {
+    try {
+       const data = await client.SetDefaultAlarmPolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.DeleteGrafanaInstance", async function () {
+    try {
+       const data = await client.DeleteGrafanaInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.CreateSSOAccount", async function () {
+    try {
+       const data = await client.CreateSSOAccount({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.SendCustomAlarmMsg", async function () {
+    try {
+       const data = await client.SendCustomAlarmMsg({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -108,9 +568,319 @@ it("monitor.v20180724.ModifyAlarmPolicyNotice", async function () {
     }
 })
 
-it("monitor.v20180724.DeleteServiceDiscovery", async function () {
+it("monitor.v20180724.EnableGrafanaInternet", async function () {
     try {
-       const data = await client.DeleteServiceDiscovery({})
+       const data = await client.EnableGrafanaInternet({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.CreateGrafanaNotificationChannel", async function () {
+    try {
+       const data = await client.CreateGrafanaNotificationChannel({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.ModifyGrafanaInstance", async function () {
+    try {
+       const data = await client.ModifyGrafanaInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.ResumeGrafanaInstance", async function () {
+    try {
+       const data = await client.ResumeGrafanaInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.DescribeSSOAccount", async function () {
+    try {
+       const data = await client.DescribeSSOAccount({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.CreateAlarmPolicy", async function () {
+    try {
+       const data = await client.CreateAlarmPolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.CreatePrometheusAgent", async function () {
+    try {
+       const data = await client.CreatePrometheusAgent({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.CreateAlarmNotice", async function () {
+    try {
+       const data = await client.CreateAlarmNotice({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.UpdateAlertRuleState", async function () {
+    try {
+       const data = await client.UpdateAlertRuleState({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.UnbindPrometheusManagedGrafana", async function () {
+    try {
+       const data = await client.UnbindPrometheusManagedGrafana({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.DescribeExporterIntegrations", async function () {
+    try {
+       const data = await client.DescribeExporterIntegrations({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.DescribeInstalledPlugins", async function () {
+    try {
+       const data = await client.DescribeInstalledPlugins({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.UpgradeGrafanaDashboard", async function () {
+    try {
+       const data = await client.UpgradeGrafanaDashboard({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.DescribeAlarmNotices", async function () {
+    try {
+       const data = await client.DescribeAlarmNotices({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.DescribeDNSConfig", async function () {
+    try {
+       const data = await client.DescribeDNSConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.DescribePrometheusInstances", async function () {
+    try {
+       const data = await client.DescribePrometheusInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.DescribeGrafanaInstances", async function () {
+    try {
+       const data = await client.DescribeGrafanaInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.UpdateGrafanaConfig", async function () {
+    try {
+       const data = await client.UpdateGrafanaConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.DescribeGrafanaNotificationChannels", async function () {
+    try {
+       const data = await client.DescribeGrafanaNotificationChannels({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.ModifyPolicyGroup", async function () {
+    try {
+       const data = await client.ModifyPolicyGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.DescribeAccidentEventList", async function () {
+    try {
+       const data = await client.DescribeAccidentEventList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.DescribeAlarmMetrics", async function () {
+    try {
+       const data = await client.DescribeAlarmMetrics({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.ModifyAlarmPolicyTasks", async function () {
+    try {
+       const data = await client.ModifyAlarmPolicyTasks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.DeleteExporterIntegration", async function () {
+    try {
+       const data = await client.DeleteExporterIntegration({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.UpdatePrometheusAgentStatus", async function () {
+    try {
+       const data = await client.UpdatePrometheusAgentStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.CreateRecordingRule", async function () {
+    try {
+       const data = await client.CreateRecordingRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.DescribeAlertRules", async function () {
+    try {
+       const data = await client.DescribeAlertRules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.UpdateGrafanaWhiteList", async function () {
+    try {
+       const data = await client.UpdateGrafanaWhiteList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.DescribePrometheusAgents", async function () {
+    try {
+       const data = await client.DescribePrometheusAgents({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.DescribeAlarmPolicies", async function () {
+    try {
+       const data = await client.DescribeAlarmPolicies({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.DescribeGrafanaWhiteList", async function () {
+    try {
+       const data = await client.DescribeGrafanaWhiteList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.CleanGrafanaInstance", async function () {
+    try {
+       const data = await client.CleanGrafanaInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -168,9 +938,9 @@ it("monitor.v20180724.GetMonitorData", async function () {
     }
 })
 
-it("monitor.v20180724.CreatePrometheusMultiTenantInstancePostPayMode", async function () {
+it("monitor.v20180724.PutMonitorData", async function () {
     try {
-       const data = await client.CreatePrometheusMultiTenantInstancePostPayMode({})
+       const data = await client.PutMonitorData({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -178,9 +948,9 @@ it("monitor.v20180724.CreatePrometheusMultiTenantInstancePostPayMode", async fun
     }
 })
 
-it("monitor.v20180724.DescribePrometheusInstances", async function () {
+it("monitor.v20180724.UpdateDNSConfig", async function () {
     try {
-       const data = await client.DescribePrometheusInstances({})
+       const data = await client.UpdateDNSConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -188,9 +958,9 @@ it("monitor.v20180724.DescribePrometheusInstances", async function () {
     }
 })
 
-it("monitor.v20180724.DescribePolicyConditionList", async function () {
+it("monitor.v20180724.DescribeServiceDiscovery", async function () {
     try {
-       const data = await client.DescribePolicyConditionList({})
+       const data = await client.DescribeServiceDiscovery({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -198,109 +968,9 @@ it("monitor.v20180724.DescribePolicyConditionList", async function () {
     }
 })
 
-it("monitor.v20180724.ModifyAlarmPolicyCondition", async function () {
+it("monitor.v20180724.DescribeGrafanaIntegrations", async function () {
     try {
-       const data = await client.ModifyAlarmPolicyCondition({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("monitor.v20180724.DescribeBasicAlarmList", async function () {
-    try {
-       const data = await client.DescribeBasicAlarmList({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("monitor.v20180724.CreatePrometheusAgent", async function () {
-    try {
-       const data = await client.CreatePrometheusAgent({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("monitor.v20180724.BindingPolicyObject", async function () {
-    try {
-       const data = await client.BindingPolicyObject({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("monitor.v20180724.ModifyAlarmPolicyInfo", async function () {
-    try {
-       const data = await client.ModifyAlarmPolicyInfo({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("monitor.v20180724.CreateAlarmNotice", async function () {
-    try {
-       const data = await client.CreateAlarmNotice({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("monitor.v20180724.UpdateAlertRuleState", async function () {
-    try {
-       const data = await client.UpdateAlertRuleState({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("monitor.v20180724.UpdateExporterIntegration", async function () {
-    try {
-       const data = await client.UpdateExporterIntegration({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("monitor.v20180724.UpdatePrometheusScrapeJob", async function () {
-    try {
-       const data = await client.UpdatePrometheusScrapeJob({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("monitor.v20180724.UnbindPrometheusManagedGrafana", async function () {
-    try {
-       const data = await client.UnbindPrometheusManagedGrafana({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("monitor.v20180724.CreateAlarmPolicy", async function () {
-    try {
-       const data = await client.CreateAlarmPolicy({})
+       const data = await client.DescribeGrafanaIntegrations({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -318,19 +988,9 @@ it("monitor.v20180724.DescribePolicyGroupInfo", async function () {
     }
 })
 
-it("monitor.v20180724.DescribeProductList", async function () {
+it("monitor.v20180724.UpdateExporterIntegration", async function () {
     try {
-       const data = await client.DescribeProductList({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("monitor.v20180724.DescribeExporterIntegrations", async function () {
-    try {
-       const data = await client.DescribeExporterIntegrations({})
+       const data = await client.UpdateExporterIntegration({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -358,49 +1018,9 @@ it("monitor.v20180724.CreateServiceDiscovery", async function () {
     }
 })
 
-it("monitor.v20180724.UnBindingAllPolicyObject", async function () {
-    try {
-       const data = await client.UnBindingAllPolicyObject({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("monitor.v20180724.DescribeStatisticData", async function () {
     try {
        const data = await client.DescribeStatisticData({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("monitor.v20180724.UpgradeGrafanaDashboard", async function () {
-    try {
-       const data = await client.UpgradeGrafanaDashboard({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("monitor.v20180724.BindPrometheusManagedGrafana", async function () {
-    try {
-       const data = await client.BindPrometheusManagedGrafana({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("monitor.v20180724.DescribeAlarmNotices", async function () {
-    try {
-       const data = await client.DescribeAlarmNotices({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -418,29 +1038,9 @@ it("monitor.v20180724.BindingPolicyTag", async function () {
     }
 })
 
-it("monitor.v20180724.ModifyAlarmPolicyStatus", async function () {
-    try {
-       const data = await client.ModifyAlarmPolicyStatus({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("monitor.v20180724.DescribeAlarmNoticeCallbacks", async function () {
     try {
        const data = await client.DescribeAlarmNoticeCallbacks({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("monitor.v20180724.ModifyAlarmReceivers", async function () {
-    try {
-       const data = await client.ModifyAlarmReceivers({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -458,9 +1058,9 @@ it("monitor.v20180724.DestroyPrometheusInstance", async function () {
     }
 })
 
-it("monitor.v20180724.DeletePolicyGroup", async function () {
+it("monitor.v20180724.UninstallGrafanaPlugins", async function () {
     try {
-       const data = await client.DeletePolicyGroup({})
+       const data = await client.UninstallGrafanaPlugins({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -468,69 +1068,9 @@ it("monitor.v20180724.DeletePolicyGroup", async function () {
     }
 })
 
-it("monitor.v20180724.GetPrometheusAgentManagementCommand", async function () {
+it("monitor.v20180724.UpdateGrafanaIntegration", async function () {
     try {
-       const data = await client.GetPrometheusAgentManagementCommand({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("monitor.v20180724.UpdateServiceDiscovery", async function () {
-    try {
-       const data = await client.UpdateServiceDiscovery({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("monitor.v20180724.ModifyAlarmNotice", async function () {
-    try {
-       const data = await client.ModifyAlarmNotice({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("monitor.v20180724.DescribeMonitorTypes", async function () {
-    try {
-       const data = await client.DescribeMonitorTypes({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("monitor.v20180724.UpdateAlertRule", async function () {
-    try {
-       const data = await client.UpdateAlertRule({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("monitor.v20180724.CreateExporterIntegration", async function () {
-    try {
-       const data = await client.CreateExporterIntegration({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("monitor.v20180724.DeleteRecordingRules", async function () {
-    try {
-       const data = await client.DeleteRecordingRules({})
+       const data = await client.UpdateGrafanaIntegration({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -558,79 +1098,9 @@ it("monitor.v20180724.TerminatePrometheusInstances", async function () {
     }
 })
 
-it("monitor.v20180724.DeletePrometheusScrapeJobs", async function () {
+it("monitor.v20180724.DescribePluginOverviews", async function () {
     try {
-       const data = await client.DeletePrometheusScrapeJobs({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("monitor.v20180724.DescribeProductEventList", async function () {
-    try {
-       const data = await client.DescribeProductEventList({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("monitor.v20180724.DescribeAccidentEventList", async function () {
-    try {
-       const data = await client.DescribeAccidentEventList({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("monitor.v20180724.DeleteAlertRules", async function () {
-    try {
-       const data = await client.DeleteAlertRules({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("monitor.v20180724.DescribeAlarmHistories", async function () {
-    try {
-       const data = await client.DescribeAlarmHistories({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("monitor.v20180724.DescribeAlarmMetrics", async function () {
-    try {
-       const data = await client.DescribeAlarmMetrics({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("monitor.v20180724.SetDefaultAlarmPolicy", async function () {
-    try {
-       const data = await client.SetDefaultAlarmPolicy({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("monitor.v20180724.ModifyAlarmPolicyTasks", async function () {
-    try {
-       const data = await client.ModifyAlarmPolicyTasks({})
+       const data = await client.DescribePluginOverviews({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -648,139 +1118,9 @@ it("monitor.v20180724.DescribeRecordingRules", async function () {
     }
 })
 
-it("monitor.v20180724.DeleteExporterIntegration", async function () {
-    try {
-       const data = await client.DeleteExporterIntegration({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("monitor.v20180724.DescribeBaseMetrics", async function () {
-    try {
-       const data = await client.DescribeBaseMetrics({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("monitor.v20180724.DescribeAlarmNotice", async function () {
-    try {
-       const data = await client.DescribeAlarmNotice({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("monitor.v20180724.DescribeAlarmEvents", async function () {
-    try {
-       const data = await client.DescribeAlarmEvents({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("monitor.v20180724.UpdatePrometheusAgentStatus", async function () {
-    try {
-       const data = await client.UpdatePrometheusAgentStatus({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("monitor.v20180724.DeleteAlarmNotices", async function () {
-    try {
-       const data = await client.DeleteAlarmNotices({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("monitor.v20180724.UpdateRecordingRule", async function () {
-    try {
-       const data = await client.UpdateRecordingRule({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("monitor.v20180724.DescribeServiceDiscovery", async function () {
-    try {
-       const data = await client.DescribeServiceDiscovery({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("monitor.v20180724.CreateRecordingRule", async function () {
-    try {
-       const data = await client.CreateRecordingRule({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("monitor.v20180724.ModifyPolicyGroup", async function () {
-    try {
-       const data = await client.ModifyPolicyGroup({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("monitor.v20180724.DescribeAlertRules", async function () {
-    try {
-       const data = await client.DescribeAlertRules({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("monitor.v20180724.DescribeAlarmPolicy", async function () {
     try {
        const data = await client.DescribeAlarmPolicy({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("monitor.v20180724.CreatePrometheusScrapeJob", async function () {
-    try {
-       const data = await client.CreatePrometheusScrapeJob({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("monitor.v20180724.DescribePrometheusAgents", async function () {
-    try {
-       const data = await client.DescribePrometheusAgents({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

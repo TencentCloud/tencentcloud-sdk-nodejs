@@ -7147,6 +7147,18 @@ export interface CreateTKEEdgeClusterRequest {
       * 边缘计算集群公网访问LB信息
       */
     PublicLB?: EdgeClusterPublicLB;
+    /**
+      * 集群的级别
+      */
+    ClusterLevel?: string;
+    /**
+      * 集群是否支持自动升配
+      */
+    AutoUpgradeClusterLevel?: boolean;
+    /**
+      * 集群计费方式
+      */
+    ChargeType?: string;
 }
 /**
  * CreateEKSCluster返回参数结构体

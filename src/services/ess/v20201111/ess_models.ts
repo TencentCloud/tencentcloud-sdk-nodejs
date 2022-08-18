@@ -221,7 +221,7 @@ export interface CreateDocumentRequest {
   TemplateId: string
 
   /**
-   * 文件名列表,单个文件名最大长度200个字符
+   * 文件名列表，单个文件名最大长度200个字符，暂时仅支持单文件发起
    */
   FileNames: Array<string>
 
@@ -1440,7 +1440,7 @@ export interface CreateFlowByFilesRequest {
   Approvers: Array<ApproverInfo>
 
   /**
-   * 签署pdf文件的资源编号列表，通过UploadFiles接口获取
+   * 签署pdf文件的资源编号列表，通过UploadFiles接口获取，暂时仅支持单文件发起
    */
   FileIds: Array<string>
 
