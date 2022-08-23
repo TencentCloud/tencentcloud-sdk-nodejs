@@ -1173,6 +1173,10 @@ export interface UpdateRuleRequest {
       */
     Description?: string;
     /**
+      * 参考：[事件模式](https://cloud.tencent.com/document/product/1359/56084)
+      */
+    EventPattern?: string;
+    /**
       * 事件规则名称，只能包含字母、数字、下划线、连字符，以字母开头，以数字或字母结尾，2~60个字符
       */
     RuleName?: string;

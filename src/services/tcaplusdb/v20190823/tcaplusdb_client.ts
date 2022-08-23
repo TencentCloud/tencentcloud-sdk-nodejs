@@ -107,6 +107,7 @@ import {
   ServerDetailInfo,
   TableInfoNew,
   TaskInfoNew,
+  SyncTableInfo,
   DeleteIdlFilesRequest,
   CreateBackupResponse,
   KeyFile,
@@ -152,6 +153,7 @@ import {
   Filter,
   ModifySnapshotsRequest,
   ImportSnapshotsRequest,
+  SyncTableField,
   ErrorInfo,
   TableGroupInfo,
 } from "./tcaplusdb_models"

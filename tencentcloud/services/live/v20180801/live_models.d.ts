@@ -2322,11 +2322,11 @@ export interface CreateLiveTranscodeTemplateResponse {
  */
 export interface BillAreaInfo {
     /**
-      * 大区名称
+      * 大区名称。
       */
     Name: string;
     /**
-      * 国家明细数据
+      * 国家或地区明细数据。
       */
     Countrys: Array<BillCountryInfo>;
 }
@@ -5344,7 +5344,7 @@ export interface DescribeStreamPlayInfoListRequest {
     StartTime: string;
     /**
       * 结束时间，北京时间，格式为yyyy-mm-dd HH:MM:SS，
-结束时间 和 开始时间跨度不支持超过24小时，支持距当前时间15天内的数据查询。
+结束时间 和 开始时间跨度不支持超过24小时，支持距当前时间一个月内的数据查询。
       */
     EndTime: string;
     /**

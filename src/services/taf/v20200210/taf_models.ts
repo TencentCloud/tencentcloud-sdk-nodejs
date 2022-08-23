@@ -16,51 +16,25 @@
  */
 
 /**
- * CheckKol
+ * SendTrafficSecuritySmsMessage返回参数结构体
  */
-export interface InputKolBspData {
+export interface SendTrafficSecuritySmsMessageResponse {
   /**
-   * BspData
+      * 返回结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Data: OutputSendTrafficSecuritySmsMsg
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  DataList: Array<InputKolDataList>
+  RequestId?: string
 }
 
 /**
- * 返回结果
+ * 业务入参
  */
-export interface OutputSendTrafficSecuritySmsMsg {
-  /**
-   * 返回码（0：接口调用成功 非0：接口调用失败）
-   */
-  Code: number
-
-  /**
-      * 返回码对应的信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Message: string
-
-  /**
-      * 发送失败的号码列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Value: Array<string>
-}
-
-/**
- * DetectFraudKOL请求参数结构体
- */
-export interface DetectFraudKOLRequest {
-  /**
-   * 业务数据
-   */
-  BspData: InputKolBspData
-
-  /**
-   * 业务加密数据
-   */
-  BusinessEncryptData?: InputBusinessEncryptData
-}
+export type InputBusinessEncryptData = null
 
 /**
  * RecognizeCustomizedAudience请求参数结构体
@@ -70,21 +44,6 @@ export interface RecognizeCustomizedAudienceRequest {
    * 业务入参
    */
   BspData: InputRecognizeTargetAudience
-}
-
-/**
- * RecognizeTargetAudience请求参数结构体
- */
-export interface RecognizeTargetAudienceRequest {
-  /**
-   * 业务数据
-   */
-  BspData: InputRecognizeTargetAudience
-
-  /**
-   * 业务加密数据
-   */
-  BusinessEncryptData?: InputBusinessEncryptData
 }
 
 /**
@@ -175,22 +134,6 @@ export interface OutputRecognizeTargetAudience {
 }
 
 /**
- * DetectFraudKOL返回参数结构体
- */
-export interface DetectFraudKOLResponse {
-  /**
-      * 回包数据
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Data: OutputKolData
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * RecognizeCustomizedAudience返回参数结构体
  */
 export interface RecognizeCustomizedAudienceResponse {
@@ -204,35 +147,6 @@ export interface RecognizeCustomizedAudienceResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * CheckKol
- */
-export interface OutputKolValue {
-  /**
-      * KOL账号ID[比如微信公众号ID]
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Id: string
-
-  /**
-      * 是否查得[0：未查得；1：查得]
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  IsCheck: number
-
-  /**
-      * 作弊的可能性[0～100]
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  FraudPScore: number
-
-  /**
-      * 作弊的严重性[0～100]
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  EvilPScore: number
 }
 
 /**
@@ -441,29 +355,6 @@ export interface InputRecognizeTargetAudience {
 }
 
 /**
- * CheckKol
- */
-export interface OutputKolData {
-  /**
-      * 错误码[0:成功；非0：失败的错误码]
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Code: number
-
-  /**
-      * 错误信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Message: string
-
-  /**
-      * 业务返回数据
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Value: Array<OutputKolValue>
-}
-
-/**
  * 业务入参
  */
 export interface Device {
@@ -479,19 +370,50 @@ export interface Device {
 }
 
 /**
- * SendTrafficSecuritySmsMessage返回参数结构体
+ * 返回结果
  */
-export interface SendTrafficSecuritySmsMessageResponse {
+export interface OutputSendTrafficSecuritySmsMsg {
   /**
-      * 返回结果
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Data: OutputSendTrafficSecuritySmsMsg
+   * 返回码（0：接口调用成功 非0：接口调用失败）
+   */
+  Code: number
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 返回码对应的信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Message: string
+
+  /**
+      * 发送失败的号码列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Value: Array<string>
+}
+
+/**
+ * RecognizePreciseTargetAudience请求参数结构体
+ */
+export interface RecognizePreciseTargetAudienceRequest {
+  /**
+   * 业务数据
    */
-  RequestId?: string
+  BspData: InputRecognizeTargetAudience
+}
+
+/**
+ * RecognizeTargetAudience请求参数结构体
+ */
+export interface RecognizeTargetAudienceRequest {
+  /**
+   * 业务数据
+   */
+  BspData: InputRecognizeTargetAudience
+
+  /**
+   * 业务加密数据
+   */
+  BusinessEncryptData?: InputBusinessEncryptData
 }
 
 /**
@@ -533,53 +455,3 @@ export interface InputSendTrafficSecuritySmsMsg {
    */
   EncryptData?: string
 }
-
-/**
- * RecognizePreciseTargetAudience请求参数结构体
- */
-export interface RecognizePreciseTargetAudienceRequest {
-  /**
-   * 业务数据
-   */
-  BspData: InputRecognizeTargetAudience
-}
-
-/**
- * CheckKOL
- */
-export interface InputKolDataList {
-  /**
-   * 账号类型[1：微信；2：qq；3：微博]
-   */
-  Type: number
-
-  /**
-   * KOL账号ID[比如微信公众号ID]
-   */
-  Id: string
-
-  /**
-   * KOL名称
-   */
-  Name: string
-
-  /**
-   * 手机号
-   */
-  Phone?: string
-
-  /**
-   * 代理商名称
-   */
-  AgentInfo?: string
-
-  /**
-   * 是否授权
-   */
-  IsAuthorized?: number
-}
-
-/**
- * 业务入参
- */
-export type InputBusinessEncryptData = null

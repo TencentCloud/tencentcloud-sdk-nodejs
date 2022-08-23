@@ -673,7 +673,7 @@ export interface CreateTrainingModelRequest {
   TrainingJobName?: string
 
   /**
-   * 算法框架 （PYTORCH/TENSORFLOW/DETECTRON2/PMML)
+   * 算法框架 （PYTORCH/TENSORFLOW/DETECTRON2/PMML/MMDETECTION)
    */
   AlgorithmFramework?: string
 
@@ -728,7 +728,7 @@ export interface CreateTrainingModelRequest {
   TrainingPreference?: string
 
   /**
-   * 自动学习任务ID
+   * 自动学习任务ID（已废弃）
    */
   AutoMLTaskId?: string
 

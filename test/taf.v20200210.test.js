@@ -28,16 +28,6 @@ it("taf.v20200210.RecognizeCustomizedAudience", async function () {
     }
 })
 
-it("taf.v20200210.DetectFraudKOL", async function () {
-    try {
-       const data = await client.DetectFraudKOL({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("taf.v20200210.RecognizePreciseTargetAudience", async function () {
     try {
        const data = await client.RecognizePreciseTargetAudience({})

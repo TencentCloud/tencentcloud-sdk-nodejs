@@ -4430,6 +4430,16 @@ export interface EnvBillingInfoItem {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     FreeQuota: string;
+    /**
+      * 是否开启 `超过套餐额度部分转按量付费`
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EnableOverrun: boolean;
+    /**
+      * 环境套餐类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ExtPackageType: string;
 }
 /**
  * DescribeEndUserStatistic返回参数结构体

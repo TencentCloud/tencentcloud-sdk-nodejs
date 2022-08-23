@@ -4415,6 +4415,23 @@ export interface LiveRealTimeClipRequest {
   Procedure?: string
 
   /**
+      * 分类ID，用于对媒体进行分类管理，可通过 [创建分类](/document/product/266/7812) 接口，创建分类，获得分类 ID。
+<li>默认值：0，表示其他分类。</li>
+仅 IsPersistence 为 1 时有效。
+      */
+  ClassId?: number
+
+  /**
+   * 来源上下文，用于透传用户请求信息，[上传完成回调](/document/product/266/7830) 将返回该字段值，最长 250 个字符。仅 IsPersistence 为 1 时有效。
+   */
+  SourceContext?: string
+
+  /**
+   * 会话上下文，用于透传用户请求信息，当指定 Procedure 参数后，[任务流状态变更回调](/document/product/266/9636) 将返回该字段值，最长 1000 个字符。仅 IsPersistence 为 1 时有效。
+   */
+  SessionContext?: string
+
+  /**
    * 是否需要返回剪辑后的视频元信息。0 不需要，1 需要。默认不需要。
    */
   MetaDataRequired?: number
@@ -4423,6 +4440,13 @@ export interface LiveRealTimeClipRequest {
    * 云点播中添加的用于时移播放的域名，必须在云直播已经[关联录制模板和开通时移服务](https://cloud.tencent.com/document/product/266/52220#.E6.AD.A5.E9.AA.A43.EF.BC.9A.E5.85.B3.E8.81.94.E5.BD.95.E5.88.B6.E6.A8.A1.E6.9D.BF.3Ca-id.3D.22step3.22.3E.3C.2Fa.3E)。**如果本接口的首次调用时间在 2021-01-01T00:00:00Z 之后，则此字段为必选字段。**
    */
   Host?: string
+
+  /**
+      * 剪辑的直播流信息：
+<li>默认剪辑直播原始流。</li>
+<li>当StreamInfo中指定的Type为Transcoding，则剪辑TemplateId对应的直播转码流。</li>
+      */
+  StreamInfo?: LiveRealTimeClipStreamInfo
 
   /**
    * 系统保留字段，请勿填写。
@@ -4574,6 +4598,11 @@ export interface SimpleHlsClipResponse {
    * 剪辑固化后的视频的媒体文件的唯一标识。
    */
   FileId: string
+
+  /**
+   * 剪辑固化后的视频任务流 ID。
+   */
+  TaskId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -5002,6 +5031,21 @@ export interface AsrFullTextConfigureInfoForUpdate {
  * DeleteHeadTailTemplate返回参数结构体
  */
 export interface DeleteHeadTailTemplateResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * RemoveWatermark返回参数结构体
+ */
+export interface RemoveWatermarkResponse {
+  /**
+   * 任务 ID 。
+   */
+  TaskId: string
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7013,6 +7057,33 @@ export interface SimpleHlsClipRequest {
    * 是否固化。0 不固化，1 固化。默认不固化。
    */
   IsPersistence?: number
+
+  /**
+   * 剪辑固化后的视频存储过期时间。格式参照 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。填“9999-12-31T23:59:59Z”表示永不过期。过期后该媒体文件及其相关资源（转码结果、雪碧图等）将被永久删除。仅 IsPersistence 为 1 时有效，默认剪辑固化的视频永不过期。
+   */
+  ExpireTime?: string
+
+  /**
+   * 剪辑固化后的视频点播任务流处理，详见[上传指定任务流](https://cloud.tencent.com/document/product/266/9759)。仅 IsPersistence 为 1 时有效。
+   */
+  Procedure?: string
+
+  /**
+      * 分类ID，用于对媒体进行分类管理，可通过 [创建分类](/document/product/266/7812) 接口，创建分类，获得分类 ID。
+<li>默认值：0，表示其他分类。</li>
+仅 IsPersistence 为 1 时有效。
+      */
+  ClassId?: number
+
+  /**
+   * 来源上下文，用于透传用户请求信息，[上传完成回调](/document/product/266/7830) 将返回该字段值，最长 250 个字符。仅 IsPersistence 为 1 时有效。
+   */
+  SourceContext?: string
+
+  /**
+   * 会话上下文，用于透传用户请求信息，当指定 Procedure 参数后，[任务流状态变更回调](/document/product/266/9636) 将返回该字段值，最长 1000 个字符。仅 IsPersistence 为 1 时有效。
+   */
+  SessionContext?: string
 }
 
 /**
@@ -12104,6 +12175,24 @@ export interface AdaptiveDynamicStreamingInfoItem {
 }
 
 /**
+ * 直播即时剪辑流信息
+ */
+export interface LiveRealTimeClipStreamInfo {
+  /**
+      * 直播流类型，可选值：
+<li>Original（原始流，<b>默认值</b>）。</li>
+<li>Transcoding（转码流）。</li>
+      */
+  Type?: string
+
+  /**
+      * 直播转码模板ID。
+<b>当Type值为"Transcoding"时，必须填写。</b>
+      */
+  TemplateId?: number
+}
+
+/**
  * 文本违禁任务控制参数
  */
 export interface ProhibitedOcrReviewTemplateInfo {
@@ -14559,6 +14648,41 @@ export interface FrameTagConfigureInfo {
    * 截帧间隔，单位为秒，当不填时，默认截帧间隔为 1 秒，最小值为 0.5 秒。
    */
   ScreenshotInterval?: number
+}
+
+/**
+ * RemoveWatermark请求参数结构体
+ */
+export interface RemoveWatermarkRequest {
+  /**
+   * 媒体文件 ID 。
+   */
+  FileId: string
+
+  /**
+   * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+   */
+  SubAppId?: number
+
+  /**
+   * 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
+   */
+  SessionId?: string
+
+  /**
+   * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。
+   */
+  SessionContext?: string
+
+  /**
+   * 任务流的优先级，数值越大优先级越高，取值范围是 -10 到 10，不填代表 0。
+   */
+  TasksPriority?: number
+
+  /**
+   * 该字段已无效。
+   */
+  TasksNotifyMode?: string
 }
 
 /**

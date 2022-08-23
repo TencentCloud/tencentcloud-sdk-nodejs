@@ -260,6 +260,11 @@ export interface DescribeInstancesCountRequest {
    * 实例分组ID
    */
   GroupId?: string
+
+  /**
+   * 游戏区域
+   */
+  GameRegion?: string
 }
 
 /**

@@ -837,6 +837,11 @@ export interface ServerBaseInfo {
    * 公网访问类型
    */
   AccessTypes: Array<string>
+
+  /**
+   * 展示自定义域名
+   */
+  CustomDomainNames: Array<string>
 }
 
 /**

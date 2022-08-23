@@ -28,16 +28,16 @@ class Client extends abstract_client_1.AbstractClient {
         super("yinsuda.tencentcloudapi.com", "2022-05-27", clientConfig);
     }
     /**
-     * 获取歌单列表。
-     */
-    async DescribeKTVPlaylists(req, cb) {
-        return this.request("DescribeKTVPlaylists", req, cb);
-    }
-    /**
      * 根据歌单 Id 获取歌单详情。
      */
     async DescribeKTVPlaylistDetail(req, cb) {
         return this.request("DescribeKTVPlaylistDetail", req, cb);
+    }
+    /**
+     * 根据关键词获取联想词列表。
+     */
+    async DescribeKTVSuggestions(req, cb) {
+        return this.request("DescribeKTVSuggestions", req, cb);
     }
     /**
      * 批量获取歌曲详细信息，包括：歌词下载链接、播放凭证、音高数据下载链接信息等。
@@ -46,16 +46,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("BatchDescribeKTVMusicDetails", req, cb);
     }
     /**
+     * 获取歌单列表。
+     */
+    async DescribeKTVPlaylists(req, cb) {
+        return this.request("DescribeKTVPlaylists", req, cb);
+    }
+    /**
+     * 根据输入的规则匹配曲库中的歌曲。
+     */
+    async DescribeKTVMatchMusics(req, cb) {
+        return this.request("DescribeKTVMatchMusics", req, cb);
+    }
+    /**
      * 根据关键词搜索歌曲，返回相关歌曲列表。
      */
     async SearchKTVMusics(req, cb) {
         return this.request("SearchKTVMusics", req, cb);
-    }
-    /**
-     * 根据关键词获取联想词列表。
-     */
-    async DescribeKTVSuggestions(req, cb) {
-        return this.request("DescribeKTVSuggestions", req, cb);
     }
 }
 exports.Client = Client;

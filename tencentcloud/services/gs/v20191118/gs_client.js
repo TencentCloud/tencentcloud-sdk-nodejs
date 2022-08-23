@@ -28,7 +28,7 @@ class Client extends abstract_client_1.AbstractClient {
         super("gs.tencentcloudapi.com", "2019-11-18", clientConfig);
     }
     /**
-     * 获取实例总数和运行数
+     * 获取并发总数和运行数
      */
     async DescribeInstancesCount(req, cb) {
         return this.request("DescribeInstancesCount", req, cb);

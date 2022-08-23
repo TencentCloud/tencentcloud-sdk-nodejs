@@ -589,6 +589,16 @@ export interface DescribeVulInfoCvssResponse {
       */
     DefenseAttackCount: number;
     /**
+      * 全网修复成功次数, 不支持自动修复的漏洞默认返回0
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SuccessFixCount: number;
+    /**
+      * 修复是否支持：0-windows/linux均不支持修复 ;1-windows/linux 均支持修复 ;2-仅linux支持修复;3-仅windows支持修复
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FixSwitch: number;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
@@ -5239,9 +5249,14 @@ export interface Machine {
       */
     KernelVersion: string;
     /**
-      * 防护版本 BASIC_VERSION 基础版, PRO_VERSION 专业版 Flagship 旗舰版.
+      * 防护版本：BASIC_VERSION 基础版， PRO_VERSION 专业版，Flagship 旗舰版，GENERAL_DISCOUNT 普惠版
       */
     ProtectType: string;
+    /**
+      * 云标签信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CloudTags: Array<Tags>;
 }
 /**
  * 授权机器信息
@@ -7374,6 +7389,19 @@ export interface BashRule {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     DealOldEvents: number;
+}
+/**
+ * 平台标签
+ */
+export interface Tags {
+    /**
+      * 标签键
+      */
+    TagKey: string;
+    /**
+      * 标签值
+      */
+    TagValue: string;
 }
 /**
  * CreateSearchLog返回参数结构体
@@ -11231,6 +11259,14 @@ export interface DescribeVulHostCountScanTimeResponse {
       * 运行中的任务号, 没有任务则为0
       */
     TaskId: number;
+    /**
+      * 最后一次修复漏洞的时间
+      */
+    LastFixTime: string;
+    /**
+      * 是否有支持自动修复的漏洞事件
+      */
+    hadAutoFixVul: boolean;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

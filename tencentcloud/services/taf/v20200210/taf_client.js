@@ -34,12 +34,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RecognizeCustomizedAudience", req, cb);
     }
     /**
-     * 流量反欺诈-KOL欺诈识别
-     */
-    async DetectFraudKOL(req, cb) {
-        return this.request("DetectFraudKOL", req, cb);
-    }
-    /**
      * 流量反欺诈-流量验准高级版
      */
     async RecognizePreciseTargetAudience(req, cb) {

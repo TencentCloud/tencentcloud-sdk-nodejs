@@ -46,7 +46,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取实例总数和运行数
+   * 获取并发总数和运行数
    */
   async DescribeInstancesCount(
     req: DescribeInstancesCountRequest,

@@ -8,9 +8,9 @@ import { DescribeClusterEndpointVipStatusRequest, DescribeClusterSecurityRequest
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
     /**
-     * 解除2.0实例的集群关联
+     * 解除TMP实例的集群关联
      */
-    DeletePrometheusClusterAgent(req?: DeletePrometheusClusterAgentRequest, cb?: (error: string, rep: DeletePrometheusClusterAgentResponse) => void): Promise<DeletePrometheusClusterAgentResponse>;
+    DeletePrometheusClusterAgent(req: DeletePrometheusClusterAgentRequest, cb?: (error: string, rep: DeletePrometheusClusterAgentResponse) => void): Promise<DeletePrometheusClusterAgentResponse>;
     /**
      * 创建边缘计算ECM机器
      */

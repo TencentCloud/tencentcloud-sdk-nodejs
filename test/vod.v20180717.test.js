@@ -238,6 +238,16 @@ it("vod.v20180717.DeleteSnapshotByTimeOffsetTemplate", async function () {
     }
 })
 
+it("vod.v20180717.RemoveWatermark", async function () {
+    try {
+       const data = await client.RemoveWatermark({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vod.v20180717.DescribeCdnLogs", async function () {
     try {
        const data = await client.DescribeCdnLogs({})

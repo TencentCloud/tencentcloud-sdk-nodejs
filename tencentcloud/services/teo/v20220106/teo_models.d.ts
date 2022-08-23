@@ -235,6 +235,12 @@ export interface DescribeTopL7CacheDataRequest {
       * 筛选条件
       */
     Filters?: Array<Filter>;
+    /**
+      * 加速区域，取值有：
+<li>mainland：中国大陆境内;</li>
+<li>overseas：全球（不含中国大陆）。</li>
+      */
+    Area?: string;
 }
 /**
  * DeleteApplicationProxy返回参数结构体
@@ -351,15 +357,15 @@ export interface BotLogData {
  */
 export interface DescribeZonesRequest {
     /**
-      * 分页参数，页偏移
+      * 分页查询偏移量。默认值：0，最小值：0。
       */
     Offset?: number;
     /**
-      * 分页参数，每页返回的站点个数
+      * 分页查询限制数目。默认值：1000，最大值：1000。
       */
     Limit?: number;
     /**
-      * 查询条件过滤器，复杂类型
+      * 查询条件过滤器，复杂类型。
       */
     Filters?: Array<ZoneFilter>;
 }
@@ -906,7 +912,6 @@ export interface CacheConfigNoCache {
       * 不缓存配置开关，取值有：
 <li>on：开启；</li>
 <li>off：关闭。</li>
-注意：此字段可能返回 null，表示取不到有效值。
       */
     Switch: string;
 }
@@ -937,12 +942,10 @@ export interface DescribeZoneDetailsResponse {
     Name: string;
     /**
       * 用户当前使用的 NS 列表
-注意：此字段可能返回 null，表示取不到有效值。
       */
     OriginalNameServers: Array<string>;
     /**
       * 腾讯云分配给用户的 NS 列表
-注意：此字段可能返回 null，表示取不到有效值。
       */
     NameServers: Array<string>;
     /**
@@ -964,13 +967,42 @@ export interface DescribeZoneDetailsResponse {
       */
     Paused: boolean;
     /**
-      * 站点创建时间
+      * 是否开启 CNAME 加速
+- enabled：开启
+- disabled：关闭
       */
-    CreatedOn: string;
+    CnameSpeedUp: string;
+    /**
+      * cname切换验证状态
+- finished 切换完成
+- pending 切换验证中
+      */
+    CnameStatus: string;
+    /**
+      * 资源标签
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Tags: Array<Tag>;
+    /**
+      * 站点接入地域，取值为：
+<li> global：全球；</li>
+<li> mainland：中国大陆；</li>
+<li> overseas：境外区域。</li>
+      */
+    Area: string;
+    /**
+      * 计费资源
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Resources: Array<Resource>;
     /**
       * 站点修改时间
       */
     ModifiedOn: string;
+    /**
+      * 站点创建时间
+      */
+    CreatedOn: string;
     /**
       * 用户自定义 NS 信息
 注意：此字段可能返回 null，表示取不到有效值。
@@ -981,29 +1013,6 @@ export interface DescribeZoneDetailsResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     VanityNameServersIps: Array<VanityNameServersIps>;
-    /**
-      * 是否开启 CNAME 加速
-- enabled：开启
-- disabled：关闭
-      */
-    CnameSpeedUp: string;
-    /**
-      * cname切换验证状态
-- finished 切换完成
-- pending 切换验证中
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    CnameStatus: string;
-    /**
-      * 资源标签
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Tags: Array<Tag>;
-    /**
-      * 计费资源
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Resources: Array<Resource>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1361,6 +1370,12 @@ export interface DescribeDDosAttackSourceEventRequest {
 <li>all 。</li>
       */
     ProtocolType?: string;
+    /**
+      * 数据归属地区，取值有：
+<li>overseas ：全球（除中国大陆地区）数据 ；</li>
+<li>mainland ：中国大陆地区数据 。</li>不填默认查询overseas。
+      */
+    Area?: string;
 }
 /**
  * ModifyZone请求参数结构体
@@ -1668,6 +1683,12 @@ export interface L7OfflineLog {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     LogPacketName: string;
+    /**
+      * 加速区域，取值有：
+<li>mainland：中国大陆境内;</li>
+<li>overseas：全球（不含中国大陆）。</li>
+      */
+    Area: string;
 }
 /**
  * ModifyHostsCertificate请求参数结构体
@@ -1720,7 +1741,6 @@ OriginValue=["origin-537f5b41-162a-11ed-abaa-525400c5da15"]。
     OriginValue: Array<string>;
     /**
       * 规则ID。
-注意：此字段可能返回 null，表示取不到有效值。
       */
     RuleId?: string;
     /**
@@ -1776,71 +1796,74 @@ export interface DdosSpeedLimit {
  */
 export interface Zone {
     /**
-      * 站点ID
+      * 站点ID。
       */
     Id: string;
     /**
-      * 站点名称
+      * 站点名称。
       */
     Name: string;
     /**
-      * 站点当前使用的 NS 列表
+      * 站点当前使用的 NS 列表。
       */
     OriginalNameServers: Array<string>;
     /**
-      * 腾讯云分配的 NS 列表
+      * 腾讯云分配的 NS 列表。
       */
     NameServers: Array<string>;
     /**
-      * 站点状态
-- active：NS 已切换
-- pending：NS 未切换
-- moved：NS 已切走
-- deactivated：被封禁
+      * 站点状态，取值有：
+<li> active：NS 已切换； </li>
+<li> pending：NS 未切换；</li>
+<li> moved：NS 已切走；</li>
+<li> deactivated：被封禁。 </li>
       */
     Status: string;
     /**
-      * 站点接入方式
-- full：NS 接入
-- partial：CNAME 接入
+      * 站点接入方式，取值有
+<li> full：NS 接入； </li>
+<li> partial：CNAME 接入。</li>
       */
     Type: string;
     /**
-      * 站点是否关闭
+      * 站点是否关闭。
       */
     Paused: boolean;
     /**
-      * 站点创建时间
+      * 是否开启cname加速，取值有：
+<li> enabled：开启；</li>
+<li> disabled：关闭。</li>
       */
-    CreatedOn: string;
+    CnameSpeedUp: string;
     /**
-      * 站点修改时间
-      */
-    ModifiedOn: string;
-    /**
-      * cname 接入状态
-- finished 站点已验证
-- pending 站点验证中
-注意：此字段可能返回 null，表示取不到有效值。
+      * cname 接入状态，取值有：
+<li> finished：站点已验证；</li>
+<li> pending：站点验证中。</li>
       */
     CnameStatus: string;
     /**
-      * 资源标签
-注意：此字段可能返回 null，表示取不到有效值。
+      * 资源标签列表。
       */
     Tags: Array<Tag>;
     /**
-      * 计费资源
-注意：此字段可能返回 null，表示取不到有效值。
+      * 计费资源列表。
       */
     Resources: Array<Resource>;
     /**
-      * 是否开启cname加速
-- enabled 开启
-- disabled 关闭
-注意：此字段可能返回 null，表示取不到有效值。
+      * 站点创建时间。
       */
-    CnameSpeedUp: string;
+    CreatedOn: string;
+    /**
+      * 站点修改时间。
+      */
+    ModifiedOn: string;
+    /**
+      * 站点接入地域，取值为：
+<li> global：全球；</li>
+<li> mainland：中国大陆；</li>
+<li> overseas：境外区域。</li>
+      */
+    Area: string;
 }
 /**
  * 站点查询过滤条件
@@ -1848,18 +1871,18 @@ export interface Zone {
 export interface ZoneFilter {
     /**
       * 过滤字段名，支持的列表如下：
-- name: 站点名。
-- status: 站点状态
-- tagKey: 标签键
-- tagValue: 标签值
+<li> name：站点名；</li>
+<li> status：站点状态；</li>
+<li> tagKey：标签键；</li>
+<li> tagValue: 标签值。</li>
       */
     Name: string;
     /**
-      * 过滤字段值
+      * 过滤字段值。
       */
     Values: Array<string>;
     /**
-      * 是否启用模糊查询，仅支持过滤字段名为name。模糊查询时，Values长度最大为1
+      * 是否启用模糊查询，仅支持过滤字段名为name。模糊查询时，Values长度最大为1。默认为false。
       */
     Fuzzy?: boolean;
 }
@@ -1899,7 +1922,6 @@ export interface CacheConfigCache {
       * 缓存配置开关，取值有：
 <li>on：开启；</li>
 <li>off：关闭。</li>
-注意：此字段可能返回 null，表示取不到有效值。
       */
     Switch: string;
     /**
@@ -2097,12 +2119,11 @@ export interface ModifyZoneSettingResponse {
  */
 export interface DescribeZonesResponse {
     /**
-      * 符合条件的站点数
+      * 符合条件的站点个数。
       */
     TotalCount: number;
     /**
-      * 站点详细信息列表
-注意：此字段可能返回 null，表示取不到有效值。
+      * 站点详细信息列表。
       */
     Zones: Array<Zone>;
     /**
@@ -2582,7 +2603,6 @@ export interface CacheConfigFollowOrigin {
       * 遵循源站配置开关，取值有：
 <li>on：开启；</li>
 <li>off：关闭。</li>
-注意：此字段可能返回 null，表示取不到有效值。
       */
     Switch: string;
 }
@@ -2639,6 +2659,12 @@ export interface DescribeTopL7AnalysisDataRequest {
       * 筛选条件
       */
     Filters?: Array<Filter>;
+    /**
+      * 加速区域，取值有：
+<li>mainland：中国大陆境内;</li>
+<li>overseas：全球（不含中国大陆）。</li>
+      */
+    Area?: string;
 }
 /**
  * TopN entry
@@ -2734,6 +2760,7 @@ export interface DescribeOverviewL7DataRequest {
 l7Flow_outFlux: 访问流量
 l7Flow_request: 访问请求数
 l7Flow_outBandwidth: 访问带宽
+ l7Flow_hit_outFlux: 缓存命中流量
       */
     MetricNames: Array<string>;
     /**
@@ -2752,6 +2779,12 @@ l7Flow_outBandwidth: 访问带宽
       * 协议类型， 选填{http,http2,https,all}
       */
     Protocol?: string;
+    /**
+      * 加速区域，取值有：
+<li>mainland：中国大陆境内;</li>
+<li>overseas：全球（不含中国大陆）。</li>
+      */
+    Area?: string;
 }
 /**
  * 功能总开关
@@ -3292,6 +3325,12 @@ export interface DescribeWebManagedRulesDataRequest {
 <li>action ：执行动作 。</li>
       */
     QueryCondition?: Array<QueryCondition>;
+    /**
+      * 数据归属地区，取值有：
+<li>overseas ：全球（除中国大陆地区）数据 ；</li>
+<li>mainland ：中国大陆地区数据 。</li>不填默认查询overseas。
+      */
+    Area?: string;
 }
 /**
  * DDos攻击源数据
@@ -3607,6 +3646,12 @@ EO响应：{Key: "cacheType", Value: ["hit"], Operator: "equals"}；
 源站响应：{Key: "cacheType", Value: ["miss", "dynamic"], Operator: "equals"}
       */
     Filters?: Array<Filter>;
+    /**
+      * 加速区域，取值有：
+<li>mainland：中国大陆境内;</li>
+<li>overseas：全球（不含中国大陆）。</li>
+      */
+    Area?: string;
 }
 /**
  * DescribeSecurityPolicyList返回参数结构体
@@ -3780,6 +3825,12 @@ export interface DescribeWebProtectionDataRequest {
 <li>action ：执行动作 。</li>
       */
     QueryCondition?: Array<QueryCondition>;
+    /**
+      * 数据归属地区，取值有：
+<li>overseas ：全球（除中国大陆地区）数据 ；</li>
+<li>mainland ：中国大陆地区数据 。</li>不填默认查询overseas。
+      */
+    Area?: string;
 }
 /**
  * CheckCertificate请求参数结构体
@@ -4481,6 +4532,12 @@ export interface DescribeDDosAttackTopDataRequest {
 <li>all 。</li>
       */
     AttackType?: string;
+    /**
+      * 数据归属地区，取值有：
+<li>overseas ：全球（除中国大陆地区）数据 ；</li>
+<li>mainland ：中国大陆地区数据 。</li>不填默认查询overseas。
+      */
+    Area?: string;
 }
 /**
  * CreateApplicationProxyRule返回参数结构体
@@ -4549,6 +4606,12 @@ export interface DescribeDDosAttackDataRequest {
 <li>day ：1天 。</li>
       */
     Interval?: string;
+    /**
+      * 数据归属地区，取值有：
+<li>overseas ：全球（除中国大陆地区）数据 ；</li>
+<li>mainland ：中国大陆地区数据 。</li>不填默认查询overseas。
+      */
+    Area?: string;
 }
 /**
  * ModifyDnsRecord返回参数结构体
@@ -4679,10 +4742,6 @@ export interface CreateApplicationProxyRequest {
       */
     ZoneName: string;
     /**
-      * 规则详细信息。
-      */
-    Rule: Array<ApplicationProxyRule>;
-    /**
       * 当ProxyType=hostname时，表示域名或子域名；
 当ProxyType=instance时，表示代理名称。
       */
@@ -4713,6 +4772,10 @@ export interface CreateApplicationProxyRequest {
       * 字段已经废弃。
       */
     ForwardClientIp: string;
+    /**
+      * 规则详细信息。
+      */
+    Rule?: Array<ApplicationProxyRule>;
     /**
       * 四层代理模式，取值有：
 <li>hostname：表示子域名模式；</li>
@@ -5110,6 +5173,12 @@ l7Flow_outBandwidth: 访问带宽
       * 筛选条件
       */
     Filters?: Array<Filter>;
+    /**
+      * 加速区域，取值有：
+<li>mainland：中国大陆境内;</li>
+<li>overseas：全球（不含中国大陆）。</li>
+      */
+    Area?: string;
 }
 /**
  * DescribeSecurityPolicyManagedRulesId返回参数结构体
@@ -5249,6 +5318,21 @@ export interface ApplicationProxy {
       * Ipv6访问配置。
       */
     Ipv6: Ipv6Access;
+    /**
+      * 加速区域，取值有：
+<li>mainland：中国大陆境内;</li>
+<li>overseas：全球（不含中国大陆）。</li>
+默认值：overseas
+      */
+    Area: string;
+    /**
+      * 封禁状态，取值有：
+<li>banned：已封禁;</li>
+<li>banning：封禁中；</li>
+<li>recover：已解封；</li>
+<li>recovering：解封禁中。</li>
+      */
+    BanStatus: string;
 }
 /**
  * ModifyApplicationProxy返回参数结构体
@@ -5552,6 +5636,12 @@ export interface DescribeDDosMajorAttackEventRequest {
       * 站点id列表，不填默认选择全部站点。
       */
     ZoneIds?: Array<string>;
+    /**
+      * 数据归属地区，取值有：
+<li>overseas ：全球（除中国大陆地区）数据 ；</li>
+<li>mainland ：中国大陆地区数据 。</li>不填默认查询overseas。
+      */
+    Area?: string;
 }
 /**
  * Quic配置项
@@ -5611,7 +5701,6 @@ export interface QueryString {
       * CacheKey是否由QueryString组成，取值有：
 <li>on：是；</li>
 <li>off：否。</li>
-注意：此字段可能返回 null，表示取不到有效值。
       */
     Switch: string;
     /**
@@ -5802,6 +5891,12 @@ export interface DescribeDDosAttackEventRequest {
 <li>N ：不展示 。</li>默认为Y。
       */
     IsShowDetail?: string;
+    /**
+      * 数据归属地区，取值有：
+<li>overseas ：全球（除中国大陆地区）数据 ；</li>
+<li>mainland ：中国大陆地区数据 。</li>不填默认查询overseas。
+      */
+    Area?: string;
 }
 /**
  * 存储客户端请求IP的头部信息配置
@@ -5811,7 +5906,6 @@ export interface ClientIp {
       * 配置开关，取值有：
 <li>on：开启；</li>
 <li>off：关闭。</li>
-注意：此字段可能返回 null，表示取不到有效值。
       */
     Switch: string;
     /**
@@ -5950,6 +6044,12 @@ export interface DescribeZoneSettingResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Ipv6: Ipv6Access;
+    /**
+      * 站点加速区域信息，取值有：
+<li>mainland：中国境内加速；</li>
+<li>overseas：中国境外加速。</li>
+      */
+    Area: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -6268,6 +6368,12 @@ export interface DescribeWebProtectionLogRequest {
 <li>acl ：自定义规则日志 。</li>不填默认为rate。
       */
     EntityType?: string;
+    /**
+      * 数据归属地区，取值有：
+<li>overseas ：全球（除中国大陆地区）数据 ；</li>
+<li>mainland ：中国大陆地区数据 。</li>不填默认查询overseas。
+      */
+    Area?: string;
 }
 /**
  * 限速拦截日志
@@ -6646,46 +6752,54 @@ Targets可为空，不需要填写
  */
 export interface Resource {
     /**
-      * 资源 ID
+      * 资源 ID。
       */
     Id: string;
     /**
-      * 付费模式
-0 为后付费
-1 为预付费
+      * 付费模式，取值有：
+<li>0：后付费。</li>
       */
     PayMode: number;
     /**
-      * 创建时间
+      * 创建时间。
       */
     CreateTime: string;
     /**
-      * 生效时间
+      * 生效时间。
       */
     EnableTime: string;
     /**
-      * 失效时间
+      * 失效时间。
       */
     ExpireTime: string;
     /**
-      * 套餐状态
+      * 套餐状态，取值有：
+<li>normal：正常；</li>
+<li>isolated：隔离；</li>
+<li>destroyed：销毁。</li>
       */
     Status: string;
     /**
-      * 询价参数
+      * 询价参数。
       */
     Sv: Array<Sv>;
     /**
-      * 是否自动续费
-0 表示默认状态
-1 表示自动续费
-2 表示不自动续费
+      * 是否自动续费，取值有：
+<li>0：默认状态；</li>
+<li>1：自动续费；</li>
+<li>2：不自动续费。</li>
       */
     AutoRenewFlag: number;
     /**
-      * 套餐关联资源ID
+      * 套餐关联资源 ID。
       */
     PlanId: string;
+    /**
+      * 地域，取值有：
+<li>mainland：国内；</li>
+<li>overseas：海外。</li>
+      */
+    Area: string;
 }
 /**
  * DeleteDnsRecords返回参数结构体
@@ -6740,6 +6854,12 @@ export interface DescribeBotLogRequest {
 <li>uri ：统一资源标识符 。</li>
       */
     QueryCondition?: Array<QueryCondition>;
+    /**
+      * 数据归属地区，取值有：
+<li>overseas ：全球（除中国大陆地区）数据 ；</li>
+<li>mainland ：中国大陆地区数据 。</li>不填默认查询overseas。
+      */
+    Area?: string;
 }
 /**
  * DownloadL7Logs返回参数结构体
@@ -6894,6 +7014,12 @@ l4Flow_outFlux: 访问出流量
       * 四层实例列表
       */
     ProxyIds?: Array<string>;
+    /**
+      * 加速区域，取值有：
+<li>mainland：中国大陆境内;</li>
+<li>overseas：全球（不含中国大陆）。</li>
+      */
+    Area?: string;
 }
 /**
  * DescribeHostsSetting请求参数结构体
@@ -7000,6 +7126,12 @@ export interface DescribeWebManagedRulesLogRequest {
 <li>uri ：统一资源标识符 。</li>
       */
     QueryCondition?: Array<QueryCondition>;
+    /**
+      * 数据归属地区，取值有：
+<li>overseas ：全球（除中国大陆地区）数据 ；</li>
+<li>mainland ：中国大陆地区数据 。</li>不填默认查询overseas。
+      */
+    Area?: string;
 }
 /**
  * CreateApplicationProxyRules返回参数结构体
@@ -7074,6 +7206,12 @@ export interface DescribeWebManagedRulesTopDataRequest {
 <li>action ：执行动作 。</li>
       */
     QueryCondition?: Array<QueryCondition>;
+    /**
+      * 数据归属地区，取值有：
+<li>overseas ：全球（除中国大陆地区）数据 ；</li>
+<li>mainland ：中国大陆地区数据 。</li>不填默认查询overseas。
+      */
+    Area?: string;
 }
 /**
  * DescribeIdentification返回参数结构体
@@ -7228,6 +7366,12 @@ export interface DescribeApplicationProxyDetailResponse {
       * IPv6访问配置。
       */
     Ipv6: Ipv6Access;
+    /**
+      * 加速区域，取值有：
+<li>mainland：中国大陆境内;</li>
+<li>overseas：全球（不含中国大陆）。</li>
+      */
+    Area: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -7661,7 +7805,6 @@ export interface OfflineCache {
       * 离线缓存是否开启，取值有：
 <li>on：开启；</li>
 <li>off：关闭。</li>
-注意：此字段可能返回 null，表示取不到有效值。
       */
     Switch: string;
 }
@@ -7686,6 +7829,12 @@ export interface DescribeDDosAttackEventDetailRequest {
       * 事件id。
       */
     EventId: string;
+    /**
+      * 数据归属地区，取值有：
+<li>overseas ：全球（除中国大陆地区）数据 ；</li>
+<li>mainland ：中国大陆地区数据 。</li>不填默认查询overseas。
+      */
+    Area?: string;
 }
 /**
  * 安全规则（cc/waf/bot）相关信息
@@ -7755,11 +7904,11 @@ export interface DescribeTimingL4DataResponse {
  */
 export interface Sv {
     /**
-      * 询价参数 key
+      * 询价参数键。
       */
     Key: string;
     /**
-      * 询价参数 value
+      * 询价参数值。
       */
     Value: string;
 }

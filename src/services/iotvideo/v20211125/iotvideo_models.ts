@@ -3451,6 +3451,12 @@ export interface VideoProduct {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   NetType: string
+
+  /**
+      * 产品品类,113:摄像头,567:儿童手表,595:可视对讲门锁
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CategoryId: number
 }
 
 /**

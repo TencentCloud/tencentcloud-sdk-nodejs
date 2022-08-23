@@ -1995,6 +1995,11 @@ export interface TableInfoNew {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     TxhBackupExpireDay: number;
+    /**
+      * 表格的缓写信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SyncTableInfo: SyncTableInfo;
 }
 /**
  * 任务信息详情
@@ -2040,6 +2045,55 @@ export interface TaskInfoNew {
       * 任务详情
       */
     Content: string;
+}
+/**
+ * TcaplusDB的缓写表信息
+ */
+export interface SyncTableInfo {
+    /**
+      * 目标缓写表的分表数目
+      */
+    TargetTableSplitNum: number;
+    /**
+      * 目标缓写表名前缀
+      */
+    TargetTableNamePrefix: Array<string>;
+    /**
+      * 缓写数据库实例ID
+      */
+    TargetSyncDBInstanceId: string;
+    /**
+      * 缓写表所在数据库名称
+      */
+    TargetDatabaseName: string;
+    /**
+      * 缓写状态，0：创建中，1：进行中，2：关闭，-1：被删除
+      */
+    Status: number;
+    /**
+      * 表格所在集群ID
+      */
+    ClusterId: string;
+    /**
+      * 表格所在表格组ID
+      */
+    TableGroupId: number;
+    /**
+      * 表格名称
+      */
+    TableName: string;
+    /**
+      * 表格ID
+      */
+    TableId: string;
+    /**
+      * TcaplusDB表主键字段到目标缓写表字段的映射
+      */
+    KeyFieldMapping: Array<SyncTableField>;
+    /**
+      * TcaplusDB表字段到目标缓写表字段的映射
+      */
+    ValueFieldMapping: Array<SyncTableField>;
 }
 /**
  * DeleteIdlFiles请求参数结构体
@@ -2989,6 +3043,19 @@ export interface ImportSnapshotsRequest {
       * 如果导入到新表，此为新表的表名，系统会以该名称自动创建一张结构相同的空表
       */
     NewTableName?: string;
+}
+/**
+ * 缓写表字段名称的映射
+ */
+export interface SyncTableField {
+    /**
+      * TcaplusDB表字段名称
+      */
+    SourceName: string;
+    /**
+      * 目标缓写表的字段名称
+      */
+    TargetName: string;
 }
 /**
  * 描述每个实例（应用，大区或表）处理过程中可能出现的错误详情。

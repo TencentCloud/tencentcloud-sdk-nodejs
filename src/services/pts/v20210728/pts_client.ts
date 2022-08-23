@@ -88,6 +88,7 @@ import {
   SampleLog,
   DomainNameConfig,
   DescribeNormalLogsResponse,
+  Notification,
   DescribeSampleBatchQueryRequest,
   RestartCronJobsRequest,
   DeleteScenariosRequest,

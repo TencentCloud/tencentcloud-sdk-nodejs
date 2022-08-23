@@ -18,27 +18,21 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  InputKolBspData,
-  OutputSendTrafficSecuritySmsMsg,
-  DetectFraudKOLRequest,
+  SendTrafficSecuritySmsMessageResponse,
+  InputBusinessEncryptData,
   RecognizeCustomizedAudienceRequest,
-  RecognizeTargetAudienceRequest,
   RecognizeTargetAudienceResponse,
   OutputRecognizeTargetAudienceValue,
   SendTrafficSecuritySmsMessageRequest,
   RecognizePreciseTargetAudienceResponse,
   OutputRecognizeTargetAudience,
-  DetectFraudKOLResponse,
   RecognizeCustomizedAudienceResponse,
-  OutputKolValue,
   InputRecognizeTargetAudience,
-  OutputKolData,
   Device,
-  SendTrafficSecuritySmsMessageResponse,
-  InputSendTrafficSecuritySmsMsg,
+  OutputSendTrafficSecuritySmsMsg,
   RecognizePreciseTargetAudienceRequest,
-  InputKolDataList,
-  InputBusinessEncryptData,
+  RecognizeTargetAudienceRequest,
+  InputSendTrafficSecuritySmsMsg,
 } from "./taf_models"
 
 /**
@@ -58,16 +52,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RecognizeCustomizedAudienceResponse) => void
   ): Promise<RecognizeCustomizedAudienceResponse> {
     return this.request("RecognizeCustomizedAudience", req, cb)
-  }
-
-  /**
-   * 流量反欺诈-KOL欺诈识别
-   */
-  async DetectFraudKOL(
-    req: DetectFraudKOLRequest,
-    cb?: (error: string, rep: DetectFraudKOLResponse) => void
-  ): Promise<DetectFraudKOLResponse> {
-    return this.request("DetectFraudKOL", req, cb)
   }
 
   /**

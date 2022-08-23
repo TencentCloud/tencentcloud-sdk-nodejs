@@ -8,7 +8,7 @@ import { StopPublishStreamResponse, StopGameRequest, SaveGameArchiveResponse, St
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
     /**
-     * 获取实例总数和运行数
+     * 获取并发总数和运行数
      */
     DescribeInstancesCount(req: DescribeInstancesCountRequest, cb?: (error: string, rep: DescribeInstancesCountResponse) => void): Promise<DescribeInstancesCountResponse>;
     /**

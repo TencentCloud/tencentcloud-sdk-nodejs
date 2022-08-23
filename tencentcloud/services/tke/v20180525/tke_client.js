@@ -28,7 +28,7 @@ class Client extends abstract_client_1.AbstractClient {
         super("tke.tencentcloudapi.com", "2018-05-25", clientConfig);
     }
     /**
-     * 解除2.0实例的集群关联
+     * 解除TMP实例的集群关联
      */
     async DeletePrometheusClusterAgent(req, cb) {
         return this.request("DeletePrometheusClusterAgent", req, cb);

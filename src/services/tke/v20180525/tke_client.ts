@@ -189,6 +189,7 @@ import {
   NodePoolOption,
   DescribeEdgeClusterExtraArgsRequest,
   DescribePrometheusGlobalConfigResponse,
+  PrometheusAgentInfo,
   CreateEdgeCVMInstancesResponse,
   DescribeEdgeLogSwitchesResponse,
   CreatePrometheusClusterAgentResponse,
@@ -498,10 +499,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 解除2.0实例的集群关联
+   * 解除TMP实例的集群关联
    */
   async DeletePrometheusClusterAgent(
-    req?: DeletePrometheusClusterAgentRequest,
+    req: DeletePrometheusClusterAgentRequest,
     cb?: (error: string, rep: DeletePrometheusClusterAgentResponse) => void
   ): Promise<DeletePrometheusClusterAgentResponse> {
     return this.request("DeletePrometheusClusterAgent", req, cb)

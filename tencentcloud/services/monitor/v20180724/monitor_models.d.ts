@@ -444,28 +444,62 @@ export interface DescribePolicyGroupListResponse {
       * 策略组列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    GroupList?: Array<DescribePolicyGroupListGroup>;
+    GroupList: Array<DescribePolicyGroupListGroup>;
     /**
       * 策略组总数
       */
-    Total?: number;
+    Total: number;
+    /**
+      * 备注信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Warning: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
 }
 /**
- * UpdateGrafanaWhiteList请求参数结构体
+ * prometheus agent
  */
-export interface UpdateGrafanaWhiteListRequest {
+export interface PrometheusAgent {
     /**
-      * 实例名
+      * Agent 名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Name: string;
+    /**
+      * Agent ID
+      */
+    AgentId: string;
+    /**
+      * 实例 ID
       */
     InstanceId: string;
     /**
-      * 白名单数组
+      * Agent IP
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Whitelist: Array<string>;
+    Ipv4: string;
+    /**
+      * 心跳时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    HeartbeatTime: string;
+    /**
+      * 最近一次错误
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LastError: string;
+    /**
+      * Agent 版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AgentVersion: string;
+    /**
+      * Agent 状态
+      */
+    Status: number;
 }
 /**
  * BindingPolicyObject请求参数结构体
@@ -883,46 +917,17 @@ export interface DescribePolicyGroupInfoResponse {
     RequestId?: string;
 }
 /**
- * prometheus agent
+ * 维度支持的操作符信息
  */
-export interface PrometheusAgent {
+export interface Operator {
     /**
-      * Agent 名
-注意：此字段可能返回 null，表示取不到有效值。
+      * 运算符标识
+      */
+    Id: string;
+    /**
+      * 运算符展示名
       */
     Name: string;
-    /**
-      * Agent ID
-      */
-    AgentId: string;
-    /**
-      * 实例 ID
-      */
-    InstanceId: string;
-    /**
-      * Agent IP
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Ipv4: string;
-    /**
-      * 心跳时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    HeartbeatTime: string;
-    /**
-      * 最近一次错误
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    LastError: string;
-    /**
-      * Agent 版本
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    AgentVersion: string;
-    /**
-      * Agent 状态
-      */
-    Status: number;
 }
 /**
  * ModifyAlarmPolicyNotice请求参数结构体
@@ -1166,27 +1171,58 @@ export interface DescribeBaseMetricsResponse {
     RequestId?: string;
 }
 /**
- * Prometheus 抓取任务
+ * 策略类型的维度信息
  */
-export interface PrometheusScrapeJob {
+export interface DimensionNew {
     /**
-      * 任务名
-注意：此字段可能返回 null，表示取不到有效值。
+      * 维度 key 标示，后台英文名
+      */
+    Key: string;
+    /**
+      * 维度 key 名称，中英文前台展示名
       */
     Name: string;
     /**
-      * Agent ID
+      * 是否必选
       */
-    AgentId: string;
+    IsRequired: boolean;
     /**
-      * 任务 ID
+      * 支持的操作符列表
       */
-    JobId: string;
+    Operators: Array<Operator>;
     /**
-      * 配置
+      * 是否支持多选
+      */
+    IsMultiple: boolean;
+    /**
+      * 创建后是否可以修改
+      */
+    IsMutable: boolean;
+    /**
+      * 是否展示给用户
+      */
+    IsVisible: boolean;
+    /**
+      * 能否用来过滤策略列表
+      */
+    CanFilterPolicy: boolean;
+    /**
+      * 能否用来过滤告警历史
+      */
+    CanFilterHistory: boolean;
+    /**
+      * 能否作为聚合维度
+      */
+    CanGroupBy: boolean;
+    /**
+      * 是否必须作为聚合维度
+      */
+    MustGroupBy: boolean;
+    /**
+      * 前端翻译要替换的 key
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Config: string;
+    ShowValueReplace: string;
 }
 /**
  * CreatePrometheusMultiTenantInstancePostPayMode请求参数结构体
@@ -1261,6 +1297,27 @@ export interface DeleteAlertRulesResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 策略类型信息
+ */
+export interface CommonNamespaceNew {
+    /**
+      * 命名空间标示
+      */
+    Id: string;
+    /**
+      * 命名空间名称
+      */
+    Name: string;
+    /**
+      * 监控类型
+      */
+    MonitorType: string;
+    /**
+      * 维度信息
+      */
+    Dimensions: Array<DimensionNew>;
 }
 /**
  * DeleteGrafanaNotificationChannel返回参数结构体
@@ -1994,12 +2051,17 @@ export interface DescribeBasicAlarmListResponse {
       * 告警列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Alarms?: Array<DescribeBasicAlarmListAlarms>;
+    Alarms: Array<DescribeBasicAlarmListAlarms>;
     /**
       * 总数
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Total?: number;
+    Total: number;
+    /**
+      * 备注信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Warning: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2391,6 +2453,11 @@ export interface DescribeAllNamespacesResponse {
       * 其他告警策略类型，暂不支持
       */
     CustomNamespacesNew: Array<CommonNamespace>;
+    /**
+      * 通用告警策略类型(包括：应用性能监控，前端性能监控，云拨测)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CommonNamespaces: Array<CommonNamespaceNew>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3319,6 +3386,29 @@ export interface DeleteSSOAccountRequest {
       * 用户账号ID
       */
     UserId: string;
+}
+/**
+ * Prometheus 抓取任务
+ */
+export interface PrometheusScrapeJob {
+    /**
+      * 任务名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Name: string;
+    /**
+      * Agent ID
+      */
+    AgentId: string;
+    /**
+      * 任务 ID
+      */
+    JobId: string;
+    /**
+      * 配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Config: string;
 }
 /**
  * CreateGrafanaIntegration返回参数结构体
@@ -6897,6 +6987,19 @@ export interface DescribePolicyConditionListCondition {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     SupportRegions: Array<string>;
+}
+/**
+ * UpdateGrafanaWhiteList请求参数结构体
+ */
+export interface UpdateGrafanaWhiteListRequest {
+    /**
+      * 实例名
+      */
+    InstanceId: string;
+    /**
+      * 白名单数组
+      */
+    Whitelist: Array<string>;
 }
 /**
  * Prometheus 服务响应体

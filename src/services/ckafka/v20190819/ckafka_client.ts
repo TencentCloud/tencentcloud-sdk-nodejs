@@ -212,6 +212,7 @@ import {
   FetchMessageByOffsetResponse,
   CreateConsumerRequest,
   DescribeRouteRequest,
+  RowParam,
   DateParam,
   ValueParam,
   DescribeDatahubTasksResponse,

@@ -384,7 +384,17 @@ export interface DescribeExistedInstancesRequest {
 /**
  * DeletePrometheusClusterAgent请求参数结构体
  */
-export type DeletePrometheusClusterAgentRequest = null
+export interface DeletePrometheusClusterAgentRequest {
+  /**
+   * agent列表
+   */
+  Agents: Array<PrometheusAgentInfo>
+
+  /**
+   * 实例id
+   */
+  InstanceId: string
+}
 
 /**
  * 集群等级变配记录
@@ -4101,6 +4111,26 @@ export interface DescribePrometheusGlobalConfigResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 托管Prometheus agent信息
+ */
+export interface PrometheusAgentInfo {
+  /**
+   * 集群类型
+   */
+  ClusterType: string
+
+  /**
+   * 集群id
+   */
+  ClusterId: string
+
+  /**
+   * 备注
+   */
+  Describe?: string
 }
 
 /**

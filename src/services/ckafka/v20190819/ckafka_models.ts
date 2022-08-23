@@ -221,6 +221,12 @@ export interface PostgreSQLModifyConnectParam {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   IsUpdate?: boolean
+
+  /**
+      * 是否为自建集群
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SelfBuilt?: boolean
 }
 
 /**
@@ -1604,10 +1610,16 @@ export interface TransformsParam {
   SourceType?: string
 
   /**
-      * 输出格式
+      * 输出格式，JSON，ROW，默认为JSON
 注意：此字段可能返回 null，表示取不到有效值。
       */
   OutputFormat?: string
+
+  /**
+      * 输出格式为ROW必填
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RowParam?: RowParam
 }
 
 /**
@@ -4433,6 +4445,11 @@ export interface ModifyInstanceAttributesRequest {
    * 动态硬盘扩容策略配置
    */
   DynamicDiskConfig?: DynamicDiskConfig
+
+  /**
+   * 实例级别单条消息大小（单位byte)
+   */
+  MaxMessageByte?: number
 }
 
 /**
@@ -5588,6 +5605,28 @@ export interface DescribeRouteRequest {
    * 实例唯一id
    */
   InstanceId: string
+}
+
+/**
+ * 数据处理ROW输出格式配置
+ */
+export interface RowParam {
+  /**
+   * 行内容，KEY_VALUE，VALUE
+   */
+  RowContent: string
+
+  /**
+      * key和value间的分隔符
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  KeyValueDelimiter?: string
+
+  /**
+      * 元素建的分隔符
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EntryDelimiter?: string
 }
 
 /**
@@ -7550,6 +7589,12 @@ export interface MySQLModifyConnectParam {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ClusterId?: string
+
+  /**
+      * 是否是自建的集群
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SelfBuilt?: boolean
 }
 
 /**

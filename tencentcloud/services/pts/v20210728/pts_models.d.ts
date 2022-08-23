@@ -631,6 +631,10 @@ export interface UpdateScenarioRequest {
       * 域名解析配置
       */
     DomainNameConfig?: DomainNameConfig;
+    /**
+      * WebHook请求配置
+      */
+    NotificationHooks?: Array<Notification>;
 }
 /**
  * DescribeRegions返回参数结构体
@@ -1671,6 +1675,19 @@ export interface DescribeNormalLogsResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 测试启动前后的消息通知
+ */
+export interface Notification {
+    /**
+      * 发生事件
+      */
+    Events?: Array<string>;
+    /**
+      * webhook的网址
+      */
+    URL?: string;
 }
 /**
  * DescribeSampleBatchQuery请求参数结构体

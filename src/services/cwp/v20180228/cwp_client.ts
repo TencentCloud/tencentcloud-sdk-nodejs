@@ -344,6 +344,7 @@ import {
   AssetWebLocationBaseInfo,
   DescribeMalwareTimingScanSettingRequest,
   BashRule,
+  Tags,
   CreateSearchLogResponse,
   DescribeSecurityTrendsResponse,
   AssetSystemPackageInfo,
