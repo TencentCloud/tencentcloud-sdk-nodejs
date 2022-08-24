@@ -362,6 +362,11 @@ export interface SREInstance {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     IsolateTime: string;
+    /**
+      * 实例地域相关的描述信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RegionInfos: Array<DescribeInstanceRegionInfo>;
 }
 /**
  * DescribeSREInstanceAccessAddress返回参数结构体
@@ -737,6 +742,36 @@ eureka - STANDARD版本
 - 1：自动续费
       */
     PrepaidRenewFlag?: number;
+}
+/**
+ * 实例地域信息描述
+ */
+export interface DescribeInstanceRegionInfo {
+    /**
+      * 引擎部署地域信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EngineRegion: string;
+    /**
+      * 引擎在该地域的副本数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Replica: number;
+    /**
+      * 引擎在该地域的规格id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SpecId: string;
+    /**
+      * 内网的网络信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IntranetVpcInfos: Array<VpcInfo>;
+    /**
+      * 是否开公网
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EnableClientInternet: boolean;
 }
 /**
  * DescribeSREInstanceAccessAddress请求参数结构体

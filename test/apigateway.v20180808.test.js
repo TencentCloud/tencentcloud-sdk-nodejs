@@ -758,6 +758,16 @@ it("apigateway.v20180808.DescribeUpstreamBindApis", async function () {
     }
 })
 
+it("apigateway.v20180808.ImportOpenApi", async function () {
+    try {
+       const data = await client.ImportOpenApi({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("apigateway.v20180808.ModifyService", async function () {
     try {
        const data = await client.ModifyService({})

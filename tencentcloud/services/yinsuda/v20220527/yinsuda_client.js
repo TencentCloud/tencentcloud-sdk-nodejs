@@ -28,10 +28,28 @@ class Client extends abstract_client_1.AbstractClient {
         super("yinsuda.tencentcloudapi.com", "2022-05-27", clientConfig);
     }
     /**
+     * 创建机器人，支持进入 RTC 房间，播放曲库歌曲。
+     */
+    async CreateKTVRobot(req, cb) {
+        return this.request("CreateKTVRobot", req, cb);
+    }
+    /**
+     * 下发操作机器人指令，支持播放、暂停、恢复、歌单设置等操作指令，实现对机器人行为的控制。
+     */
+    async SyncKTVRobotCommand(req, cb) {
+        return this.request("SyncKTVRobotCommand", req, cb);
+    }
+    /**
      * 根据歌单 Id 获取歌单详情。
      */
     async DescribeKTVPlaylistDetail(req, cb) {
         return this.request("DescribeKTVPlaylistDetail", req, cb);
+    }
+    /**
+     * 销毁机器人，机器人退出 RTC 房间。
+     */
+    async DestroyKTVRobot(req, cb) {
+        return this.request("DestroyKTVRobot", req, cb);
     }
     /**
      * 根据关键词获取联想词列表。
@@ -50,6 +68,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeKTVPlaylists(req, cb) {
         return this.request("DescribeKTVPlaylists", req, cb);
+    }
+    /**
+     * 获取机器人列表，支持 Id、状态等过滤条件。
+     */
+    async DescribeKTVRobots(req, cb) {
+        return this.request("DescribeKTVRobots", req, cb);
     }
     /**
      * 根据输入的规则匹配曲库中的歌曲。

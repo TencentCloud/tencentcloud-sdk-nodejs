@@ -20,26 +20,46 @@ import { ClientConfig } from "../../../common/interface"
 import {
   DescribeKTVSuggestionsResponse,
   ChorusClip,
+  JoinRoomInput,
+  DestroyKTVRobotResponse,
   MusicAlbumCoverInfo,
+  CreateKTVRobotRequest,
   KTVSuggestionInfo,
+  SyncKTVRobotCommandRequest,
   DescribeKTVPlaylistDetailRequest,
+  CreateKTVRobotResponse,
   DescribeKTVSuggestionsRequest,
   DescribeKTVMatchMusicsRequest,
   DescribeKTVPlaylistsResponse,
   DescribeKTVPlaylistsRequest,
   DescribeKTVPlaylistDetailResponse,
+  SetDestroyModeCommandInput,
+  SetAudioParamCommandInput,
   KTVMatchMusic,
-  SearchKTVMusicsResponse,
+  TRTCJoinRoomInput,
+  DescribeKTVRobotsResponse,
+  PlayCommandInput,
   BatchDescribeKTVMusicDetailsRequest,
   KTVMusicDetailInfo,
   MusicAlbumInfo,
+  SetPlayModeCommandInput,
+  SyncRobotCommand,
+  SearchKTVMusicsResponse,
+  KTVRobotInfo,
   DescribeKTVMatchMusicsResponse,
   KTVMatchRuleMusicInfo,
+  SetPlaylistCommandInput,
+  SyncKTVRobotCommandResponse,
   BatchDescribeKTVMusicDetailsResponse,
+  KTVMatchRule,
   KTVMusicBaseInfo,
   SearchKTVMusicsRequest,
+  TimeRange,
   KTVPlaylistBaseInfo,
-  KTVMatchRule,
+  SendMessageCommandInput,
+  DestroyKTVRobotRequest,
+  DescribeKTVRobotsRequest,
+  SeekCommandInput,
 } from "./yinsuda_models"
 
 /**
@@ -52,6 +72,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建机器人，支持进入 RTC 房间，播放曲库歌曲。
+   */
+  async CreateKTVRobot(
+    req: CreateKTVRobotRequest,
+    cb?: (error: string, rep: CreateKTVRobotResponse) => void
+  ): Promise<CreateKTVRobotResponse> {
+    return this.request("CreateKTVRobot", req, cb)
+  }
+
+  /**
+   * 下发操作机器人指令，支持播放、暂停、恢复、歌单设置等操作指令，实现对机器人行为的控制。
+   */
+  async SyncKTVRobotCommand(
+    req: SyncKTVRobotCommandRequest,
+    cb?: (error: string, rep: SyncKTVRobotCommandResponse) => void
+  ): Promise<SyncKTVRobotCommandResponse> {
+    return this.request("SyncKTVRobotCommand", req, cb)
+  }
+
+  /**
    * 根据歌单 Id 获取歌单详情。
    */
   async DescribeKTVPlaylistDetail(
@@ -59,6 +99,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeKTVPlaylistDetailResponse) => void
   ): Promise<DescribeKTVPlaylistDetailResponse> {
     return this.request("DescribeKTVPlaylistDetail", req, cb)
+  }
+
+  /**
+   * 销毁机器人，机器人退出 RTC 房间。
+   */
+  async DestroyKTVRobot(
+    req: DestroyKTVRobotRequest,
+    cb?: (error: string, rep: DestroyKTVRobotResponse) => void
+  ): Promise<DestroyKTVRobotResponse> {
+    return this.request("DestroyKTVRobot", req, cb)
   }
 
   /**
@@ -89,6 +139,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeKTVPlaylistsResponse) => void
   ): Promise<DescribeKTVPlaylistsResponse> {
     return this.request("DescribeKTVPlaylists", req, cb)
+  }
+
+  /**
+   * 获取机器人列表，支持 Id、状态等过滤条件。
+   */
+  async DescribeKTVRobots(
+    req: DescribeKTVRobotsRequest,
+    cb?: (error: string, rep: DescribeKTVRobotsResponse) => void
+  ): Promise<DescribeKTVRobotsResponse> {
+    return this.request("DescribeKTVRobots", req, cb)
   }
 
   /**

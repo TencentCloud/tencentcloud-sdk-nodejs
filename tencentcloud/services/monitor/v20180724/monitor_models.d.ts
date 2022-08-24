@@ -1885,7 +1885,7 @@ export interface UpdateGrafanaNotificationChannelRequest {
       */
     ChannelId: string;
     /**
-      * 实例名
+      * 实例 ID
       */
     InstanceId: string;
     /**
@@ -2072,7 +2072,7 @@ export interface DescribeBasicAlarmListResponse {
  */
 export interface DescribeGrafanaEnvironmentsRequest {
     /**
-      * 实例名
+      * 实例 ID
       */
     InstanceId: string;
 }
@@ -2499,7 +2499,7 @@ export interface DeleteAlarmNoticesResponse {
  */
 export interface DescribeGrafanaNotificationChannelsRequest {
     /**
-      * 实例名
+      * 实例 ID
       */
     InstanceId: string;
     /**
@@ -2741,7 +2741,7 @@ export interface DeleteGrafanaNotificationChannelRequest {
  */
 export interface CreateGrafanaIntegrationRequest {
     /**
-      * 实例名
+      * 实例 ID
       */
     InstanceId: string;
     /**
@@ -3043,7 +3043,7 @@ export interface ModifyPolicyGroupEventCondition {
  */
 export interface CreateGrafanaNotificationChannelRequest {
     /**
-      * 实例名
+      * 实例 ID
       */
     InstanceId: string;
     /**
@@ -3301,7 +3301,7 @@ export interface AlarmPolicyFilter {
  */
 export interface UpgradeGrafanaInstanceRequest {
     /**
-      * 实例名
+      * 实例 ID
       */
     InstanceId: string;
     /**
@@ -4100,7 +4100,7 @@ export interface DeleteGrafanaInstanceResponse {
  */
 export interface DescribeGrafanaWhiteListRequest {
     /**
-      * 实例名
+      * 实例 ID
       */
     InstanceId: string;
 }
@@ -5316,7 +5316,7 @@ export interface CleanGrafanaInstanceResponse {
  */
 export interface UpdateDNSConfigRequest {
     /**
-      * 实例名
+      * 实例 ID
       */
     InstanceId: string;
     /**
@@ -5387,7 +5387,7 @@ export interface DescribeDNSConfigResponse {
  */
 export interface UpdateGrafanaConfigRequest {
     /**
-      * 无
+      * 实例 ID
       */
     InstanceId: string;
     /**
@@ -5400,7 +5400,7 @@ export interface UpdateGrafanaConfigRequest {
  */
 export interface UpdateGrafanaEnvironmentsRequest {
     /**
-      * 实例名
+      * 实例 ID
       */
     InstanceId: string;
     /**
@@ -5432,7 +5432,7 @@ export interface DescribeProductListResponse {
  */
 export interface DescribeGrafanaIntegrationsRequest {
     /**
-      * 实例名
+      * 实例 ID
       */
     InstanceId: string;
     /**
@@ -6068,7 +6068,7 @@ export interface DescribeAlarmNoticesRequest {
  */
 export interface DescribeGrafanaConfigRequest {
     /**
-      * 无
+      * 实例 ID
       */
     InstanceId: string;
 }
@@ -6393,7 +6393,7 @@ export interface UninstallGrafanaPluginsRequest {
  */
 export interface CleanGrafanaInstanceRequest {
     /**
-      * 实例名
+      * 实例 ID
       */
     InstanceId: string;
 }
@@ -6935,7 +6935,7 @@ export interface ModifyPolicyGroupCondition {
  */
 export interface DescribeDNSConfigRequest {
     /**
-      * 实例名
+      * 实例 ID
       */
     InstanceId: string;
 }

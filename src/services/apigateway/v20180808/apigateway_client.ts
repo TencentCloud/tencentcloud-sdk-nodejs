@@ -28,6 +28,7 @@ import {
   AttachedApiSummary,
   DescribeUsagePlanRequest,
   DeleteUsagePlanResponse,
+  ImportOpenApiResponse,
   DisableApiKeyResponse,
   DescribeApiResponse,
   UnReleaseServiceRequest,
@@ -39,6 +40,7 @@ import {
   DescribeApiAppBindApisStatusRequest,
   ModifyApiResponse,
   ServiceEnvironmentStrategy,
+  CreateApiRspSet,
   ApiInfo,
   TargetServicesReq,
   DescribeUsagePlansStatusRequest,
@@ -259,6 +261,7 @@ import {
   EnvironmentStrategy,
   InstanceParameterInput,
   DescribeUsagePlanEnvironmentsRequest,
+  ImportOpenApiRequest,
   DescribeServiceReleaseVersionResponse,
   UpstreamNode,
   ApiAppApiInfos,
@@ -1063,6 +1066,16 @@ API 网关的服务创建后，需要发布到某个环境方生效后，使用�
     cb?: (error: string, rep: DescribeUpstreamBindApisResponse) => void
   ): Promise<DescribeUpstreamBindApisResponse> {
     return this.request("DescribeUpstreamBindApis", req, cb)
+  }
+
+  /**
+   * 本接口（ImportOpenApi）用于将OpenAPI规范定义的API导入到API网关。
+   */
+  async ImportOpenApi(
+    req: ImportOpenApiRequest,
+    cb?: (error: string, rep: ImportOpenApiResponse) => void
+  ): Promise<ImportOpenApiResponse> {
+    return this.request("ImportOpenApi", req, cb)
   }
 
   /**

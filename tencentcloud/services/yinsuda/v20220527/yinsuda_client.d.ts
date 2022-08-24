@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeKTVSuggestionsResponse, DescribeKTVPlaylistDetailRequest, DescribeKTVSuggestionsRequest, DescribeKTVMatchMusicsRequest, DescribeKTVPlaylistsResponse, DescribeKTVPlaylistsRequest, DescribeKTVPlaylistDetailResponse, SearchKTVMusicsResponse, BatchDescribeKTVMusicDetailsRequest, DescribeKTVMatchMusicsResponse, BatchDescribeKTVMusicDetailsResponse, SearchKTVMusicsRequest } from "./yinsuda_models";
+import { DescribeKTVSuggestionsResponse, DestroyKTVRobotResponse, CreateKTVRobotRequest, SyncKTVRobotCommandRequest, DescribeKTVPlaylistDetailRequest, CreateKTVRobotResponse, DescribeKTVSuggestionsRequest, DescribeKTVMatchMusicsRequest, DescribeKTVPlaylistsResponse, DescribeKTVPlaylistsRequest, DescribeKTVPlaylistDetailResponse, DescribeKTVRobotsResponse, BatchDescribeKTVMusicDetailsRequest, SearchKTVMusicsResponse, DescribeKTVMatchMusicsResponse, SyncKTVRobotCommandResponse, BatchDescribeKTVMusicDetailsResponse, SearchKTVMusicsRequest, DestroyKTVRobotRequest, DescribeKTVRobotsRequest } from "./yinsuda_models";
 /**
  * yinsuda client
  * @class
@@ -8,9 +8,21 @@ import { DescribeKTVSuggestionsResponse, DescribeKTVPlaylistDetailRequest, Descr
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
     /**
+     * 创建机器人，支持进入 RTC 房间，播放曲库歌曲。
+     */
+    CreateKTVRobot(req: CreateKTVRobotRequest, cb?: (error: string, rep: CreateKTVRobotResponse) => void): Promise<CreateKTVRobotResponse>;
+    /**
+     * 下发操作机器人指令，支持播放、暂停、恢复、歌单设置等操作指令，实现对机器人行为的控制。
+     */
+    SyncKTVRobotCommand(req: SyncKTVRobotCommandRequest, cb?: (error: string, rep: SyncKTVRobotCommandResponse) => void): Promise<SyncKTVRobotCommandResponse>;
+    /**
      * 根据歌单 Id 获取歌单详情。
      */
     DescribeKTVPlaylistDetail(req: DescribeKTVPlaylistDetailRequest, cb?: (error: string, rep: DescribeKTVPlaylistDetailResponse) => void): Promise<DescribeKTVPlaylistDetailResponse>;
+    /**
+     * 销毁机器人，机器人退出 RTC 房间。
+     */
+    DestroyKTVRobot(req: DestroyKTVRobotRequest, cb?: (error: string, rep: DestroyKTVRobotResponse) => void): Promise<DestroyKTVRobotResponse>;
     /**
      * 根据关键词获取联想词列表。
      */
@@ -23,6 +35,10 @@ export declare class Client extends AbstractClient {
      * 获取歌单列表。
      */
     DescribeKTVPlaylists(req: DescribeKTVPlaylistsRequest, cb?: (error: string, rep: DescribeKTVPlaylistsResponse) => void): Promise<DescribeKTVPlaylistsResponse>;
+    /**
+     * 获取机器人列表，支持 Id、状态等过滤条件。
+     */
+    DescribeKTVRobots(req: DescribeKTVRobotsRequest, cb?: (error: string, rep: DescribeKTVRobotsResponse) => void): Promise<DescribeKTVRobotsResponse>;
     /**
      * 根据输入的规则匹配曲库中的歌曲。
      */

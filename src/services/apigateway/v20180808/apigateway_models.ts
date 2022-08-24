@@ -258,6 +258,21 @@ export interface DeleteUsagePlanResponse {
 }
 
 /**
+ * ImportOpenApi返回参数结构体
+ */
+export interface ImportOpenApiResponse {
+  /**
+   * 导入OpenApi返回参数。
+   */
+  Result: CreateApiRspSet
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DisableApiKey返回参数结构体
  */
 export interface DisableApiKeyResponse {
@@ -494,6 +509,21 @@ export interface ServiceEnvironmentStrategy {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   MaxStrategy: number
+}
+
+/**
+ * CreateApiRsp  返回加TotalCount
+ */
+export interface CreateApiRspSet {
+  /**
+   * 个数
+   */
+  TotalCount: number
+
+  /**
+   * 返回的数组
+   */
+  ApiSet: Array<CreateApiRsp>
 }
 
 /**
@@ -6648,6 +6678,31 @@ export interface DescribeUsagePlanEnvironmentsRequest {
    * 偏移量，默认为 0。
    */
   Offset?: number
+}
+
+/**
+ * ImportOpenApi请求参数结构体
+ */
+export interface ImportOpenApiRequest {
+  /**
+   * API所在的服务唯一ID。
+   */
+  ServiceId: string
+
+  /**
+   * openAPI正文内容。
+   */
+  Content: string
+
+  /**
+   * Content格式，只能是YAML或者JSON，默认是YAML。
+   */
+  EncodeType?: string
+
+  /**
+   * Content版本，默认是openAPI，目前只支持openAPI。
+   */
+  ContentVersion?: string
 }
 
 /**

@@ -2209,7 +2209,7 @@ export interface JsonInfo {
       */
     EnableTag: boolean;
     /**
-      * 元数据信息列表, 可选值为 __SOURCE__、__FILENAME__、__TIMESTAMP__。
+      * 元数据信息列表, 可选值为 __SOURCE__、__FILENAME__、__TIMESTAMP__、__HOSTNAME__。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     MetaFields: Array<string>;
@@ -2258,6 +2258,10 @@ export interface CreateShipperRequest {
       * 投递日志的内容格式配置
       */
     Content?: ContentInfo;
+    /**
+      * 投递文件命名配置，0：随机数命名，1：投递时间命名，默认0（随机数命名）
+      */
+    FilenameMode?: number;
 }
 /**
  * CreateTopic返回参数结构体
@@ -2754,6 +2758,10 @@ export interface ModifyShipperRequest {
       * 投递日志的内容格式配置
       */
     Content?: ContentInfo;
+    /**
+      * 投递文件命名配置，0：随机数命名，1：投递时间命名，默认0（随机数命名）
+      */
+    FilenameMode?: number;
 }
 /**
  * DescribeLogContext返回参数结构体

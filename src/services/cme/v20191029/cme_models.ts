@@ -380,6 +380,36 @@ export interface StreamConnectInputInterruptInfo {
 }
 
 /**
+ * 团队信息
+ */
+export interface TeamInfo {
+  /**
+   * 团队 ID。
+   */
+  TeamId: string
+
+  /**
+   * 团队名称。
+   */
+  Name: string
+
+  /**
+   * 团队成员个数
+   */
+  MemberCount?: number
+
+  /**
+   * 团队创建时间，格式按照 ISO 8601 标准表示。
+   */
+  CreateTime?: string
+
+  /**
+   * 团队最后更新时间，格式按照 ISO 8601 标准表示。
+   */
+  UpdateTime: string
+}
+
+/**
  * 分类信息
  */
 export interface ClassInfo {
@@ -395,13 +425,20 @@ export interface ClassInfo {
 }
 
 /**
- * ModifyProject返回参数结构体
+ * 点播转直播输出断流信息。
  */
-export interface ModifyProjectResponse {
+export interface MediaCastDestinationInterruptInfo {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 发生断流的输出源信息。
    */
-  RequestId?: string
+  DestinationInfo: MediaCastDestinationInfo
+
+  /**
+      * 输出源断流原因，取值有：
+<li>SystemError：系统错误；</li>
+<li>Unknown：未知错误。</li>
+      */
+  Reason: string
 }
 
 /**
@@ -637,6 +674,56 @@ export interface SearchMaterialRequest {
 }
 
 /**
+ * 新文件生成事件
+ */
+export interface StorageNewFileCreatedEvent {
+  /**
+   * 云点播文件  Id。
+   */
+  FileId: string
+
+  /**
+   * 媒体 Id。
+   */
+  MaterialId: string
+
+  /**
+   * 操作者 Id。（废弃，请勿使用）
+   */
+  Operator: string
+
+  /**
+      * 操作类型，可取值有：
+<li>Upload：本地上传；</li>
+<li>PullUpload：拉取上传；</li>
+<li>VideoEdit：视频剪辑；</li>
+<li>LiveStreamClip：直播流剪辑；</li>
+<li>LiveStreamRecord：直播流录制。</li>
+      */
+  OperationType: string
+
+  /**
+   * 媒体归属。
+   */
+  Owner: Entity
+
+  /**
+   * 媒体分类路径。
+   */
+  ClassPath: string
+
+  /**
+   * 生成文件的任务 Id。当生成新文件是拉取上传、视频剪辑、直播流剪辑时为任务 Id。
+   */
+  TaskId: string
+
+  /**
+   * 来源上下文信息。视频剪辑生成新文件时此字段为项目 Id；直播流剪辑或者直播流录制生成新文件则为原始流地址。
+   */
+  SourceContext: string
+}
+
+/**
  * DeleteTeam返回参数结构体
  */
 export interface DeleteTeamResponse {
@@ -809,14 +896,20 @@ export interface ProjectInfo {
   StreamConnectProjectInfo: StreamConnectProjectInfo
 
   /**
-   * 项目创建时间，格式按照 ISO 8601 标准表示。
-   */
-  CreateTime: string
+      * 点播转直播项目信息，仅当项目类别取值为 MEDIA_CAST 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MediaCastProjectInfo: MediaCastProjectInfo
 
   /**
    * 项目更新时间，格式按照 ISO 8601 标准表示。
    */
   UpdateTime: string
+
+  /**
+   * 项目创建时间，格式按照 ISO 8601 标准表示。
+   */
+  CreateTime: string
 }
 
 /**
@@ -1161,33 +1254,28 @@ export interface Entity {
 }
 
 /**
- * 团队信息
+ * 点播转直播视频配置
  */
-export interface TeamInfo {
+export interface MediaCastVideoSetting {
   /**
-   * 团队 ID。
+   * 视频宽度，单位：px，默认值为1280。
    */
-  TeamId: string
+  Width: number
 
   /**
-   * 团队名称。
+   * 视频高度，单位：px，默认值为720。支持的视频分辨率最大为1920*1080。
    */
-  Name: string
+  Height: number
 
   /**
-   * 团队成员个数
+   * 视频码率，单位：kbps，默认值为2500。最大值为10000 kbps。
    */
-  MemberCount?: number
+  Bitrate?: number
 
   /**
-   * 团队创建时间，格式按照 ISO 8601 标准表示。
+   * 视频帧率，单位：Hz，默认值为25。最大值为60。
    */
-  CreateTime?: string
-
-  /**
-   * 团队最后更新时间，格式按照 ISO 8601 标准表示。
-   */
-  UpdateTime: string
+  FrameRate?: number
 }
 
 /**
@@ -1498,6 +1586,35 @@ export interface DescribeTasksRequest {
 }
 
 /**
+ *  点播转直播项目状态变更事件。
+ */
+export interface ProjectMediaCastStatusChangedEvent {
+  /**
+   * 项目 Id。
+   */
+  ProjectId: string
+
+  /**
+      * 项目状态，取值有：
+<li>Started：点播转直播开始；</li>
+<li>Stopped：点播转直播结束；</li>
+<li>SourceInterrupted：点播转直播输入断流；</li>
+<li>DestinationInterrupted：点播转直播输出断流。</li>
+      */
+  Status: string
+
+  /**
+   * 点播转直播输入断流信息，仅当 Status 取值 SourceInterrupted 时有效。
+   */
+  SourceInterruptInfo: MediaCastSourceInterruptInfo
+
+  /**
+   * 点播转直播输出断流信息，仅当 Status 取值 DestinationInterrupted 时有效。
+   */
+  DestinationInterruptInfo: MediaCastDestinationInterruptInfo
+}
+
+/**
  * 媒体轨道的片段信息
  */
 export interface MediaTrackItem {
@@ -1533,53 +1650,23 @@ export interface MediaTrackItem {
 }
 
 /**
- * 新文件生成事件
+ * 点播转直播输出信息。
  */
-export interface StorageNewFileCreatedEvent {
+export interface MediaCastDestinationInfo {
   /**
-   * 云点播文件  Id。
+   * 输出源序号。由系统进行分配。
    */
-  FileId: string
+  Index?: number
 
   /**
-   * 媒体 Id。
+   * 输出源的名称。
    */
-  MaterialId: string
+  Name?: string
 
   /**
-   * 操作者 Id。（废弃，请勿使用）
+   * 输出直播流地址。支持的直播流类型为 RTMP 和 SRT。
    */
-  Operator: string
-
-  /**
-      * 操作类型，可取值有：
-<li>Upload：本地上传；</li>
-<li>PullUpload：拉取上传；</li>
-<li>VideoEdit：视频剪辑；</li>
-<li>LiveStreamClip：直播流剪辑；</li>
-<li>LiveStreamRecord：直播流录制。</li>
-      */
-  OperationType: string
-
-  /**
-   * 媒体归属。
-   */
-  Owner: Entity
-
-  /**
-   * 媒体分类路径。
-   */
-  ClassPath: string
-
-  /**
-   * 生成文件的任务 Id。当生成新文件是拉取上传、视频剪辑、直播流剪辑时为任务 Id。
-   */
-  TaskId: string
-
-  /**
-   * 来源上下文信息。视频剪辑生成新文件时此字段为项目 Id；直播流剪辑或者直播流录制生成新文件则为原始流地址。
-   */
-  SourceContext: string
+  PushUrl?: string
 }
 
 /**
@@ -1651,20 +1738,30 @@ export interface WeiboPublishInfo {
 }
 
 /**
- * 用于描述资源
+ * 点播转直播输入源信息。
  */
-export interface Resource {
+export interface MediaCastSourceInfo {
   /**
-      * 类型，取值有：
-<li>MATERIAL：素材。</li>
-<li>CLASS：分类。</li>
+      * 输入源的媒体类型，取值有：
+<li>CME：多媒体创作引擎的媒体文件；</li>
+<li>VOD：云点播的媒资文件。</li>
       */
   Type: string
 
   /**
-   * 资源 Id，当 Type 为 MATERIAL 时，取值为素材 Id；当 Type 为 CLASS 时，取值为分类路径 ClassPath。
+   * 多媒体创作引擎的媒体 ID。当 Type = CME  时必填。
    */
-  Id: string
+  MaterialId?: string
+
+  /**
+   * 云点播媒体文件 ID。当 Type = VOD 时必填。
+   */
+  FileId?: string
+
+  /**
+   * 序号，位于输入源列表中的序号，由系统分配。
+   */
+  Index?: number
 }
 
 /**
@@ -1912,6 +2009,23 @@ export interface DescribeJoinTeamsRequest {
 }
 
 /**
+ * 点播转直播输入断流信息。
+ */
+export interface MediaCastSourceInterruptInfo {
+  /**
+   * 发生断流的输入源信息。
+   */
+  SourceInfo: MediaCastSourceInfo
+
+  /**
+      * 输入源断开原因。取值有：
+<li>SystemError：系统错误；</li>
+<li>Unknown：未知错误。</li>
+      */
+  Reason: string
+}
+
+/**
  * 视频拆条项目的输入信息。
  */
 export interface VideoSegmentationProjectInput {
@@ -1954,6 +2068,16 @@ export interface DeleteMaterialRequest {
    * 操作者。填写用户的 Id，用于标识调用者及校验媒体删除权限。
    */
   Operator?: string
+}
+
+/**
+ * ModifyProject返回参数结构体
+ */
+export interface ModifyProjectResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2271,6 +2395,23 @@ export interface SwitcherPgmOutputConfig {
    * 导播台输出码率， 单位：bit/s。
    */
   BitRate?: number
+}
+
+/**
+ * 用于描述资源
+ */
+export interface Resource {
+  /**
+      * 类型，取值有：
+<li>MATERIAL：素材。</li>
+<li>CLASS：分类。</li>
+      */
+  Type: string
+
+  /**
+   * 资源 Id，当 Type 为 MATERIAL 时，取值为素材 Id；当 Type 为 CLASS 时，取值为分类路径 ClassPath。
+   */
+  Id: string
 }
 
 /**
@@ -3514,6 +3655,48 @@ export interface DeleteTeamMembersRequest {
 }
 
 /**
+ * 点播转直播项目信息。
+ */
+export interface MediaCastProjectInfo {
+  /**
+      * 点播转直播项目状态，取值有：
+<li>Working ：运行中；</li>
+<li>Idle ：空闲。</li>
+      */
+  Status: string
+
+  /**
+   * 输入源列表。
+   */
+  SourceInfos: Array<MediaCastSourceInfo>
+
+  /**
+   * 输出源列表。
+   */
+  DestinationInfos: Array<MediaCastDestinationInfo>
+
+  /**
+   * 输出媒体配置。
+   */
+  OutputMediaSetting: MediaCastOutputMediaSetting
+
+  /**
+   * 播放参数。
+   */
+  PlaySetting: MediaCastPlaySetting
+
+  /**
+   * 项目启动时间。采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   */
+  StartTime: string
+
+  /**
+   * 项目结束时间。采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。如果项目还在运行中，改字段为空。
+   */
+  StopTime: string
+}
+
+/**
  * ExportVideoByTemplate请求参数结构体
  */
 export interface ExportVideoByTemplateRequest {
@@ -3620,7 +3803,8 @@ export interface EventContent {
 <li>Class.Created：分类新增事件；</li>
 <li>Class.Moved：分类移动事件；</li>
 <li>Class.Deleted：分类删除事件；</li>
-<li>Task.VideoExportCompleted：视频导出完成事件。 </li>
+<li>Task.VideoExportCompleted：视频导出完成事件； </li>
+<li>Project.MediaCast.StatusChanged：点播转直播项目状态变更事件。 </li>
       */
   EventType: string
 
@@ -3698,6 +3882,12 @@ export interface EventContent {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   VideoExportCompletedEvent: VideoExportCompletedEvent
+
+  /**
+      * 点播转直播项目状态变更事件。仅当 EventType 为 Project.MediaCast.StatusChanged 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProjectMediaCastStatusChangedEvent: ProjectMediaCastStatusChangedEvent
 }
 
 /**
@@ -3918,6 +4108,21 @@ export interface DescribeLoginStatusResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 播放控制参数。
+ */
+export interface MediaCastPlaySetting {
+  /**
+   * 循环播放次数。LoopCount 和 EndTime 同时只能有一个生效。默认循环播放次数为一次。如果同时设置了 LoopCount 和 EndTime 参数，优先使用 LoopCount 参数。
+   */
+  LoopCount?: number
+
+  /**
+   * 结束时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   */
+  EndTime?: string
 }
 
 /**
@@ -4840,6 +5045,16 @@ export interface ExportVideoByEditorTrackDataResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 点播转直播输出媒体配置。
+ */
+export interface MediaCastOutputMediaSetting {
+  /**
+   * 视频配置。
+   */
+  VideoSetting: MediaCastVideoSetting
 }
 
 /**

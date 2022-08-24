@@ -45,6 +45,7 @@ import {
   VpcInfo,
   EngineAdmin,
   CreateEngineRequest,
+  DescribeInstanceRegionInfo,
   DescribeSREInstanceAccessAddressRequest,
   DescribeNacosServerInterfacesResponse,
   Filter,

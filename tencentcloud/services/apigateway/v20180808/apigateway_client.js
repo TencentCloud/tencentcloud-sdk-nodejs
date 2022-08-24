@@ -487,6 +487,12 @@ API 网关的服务创建后，需要发布到某个环境方生效后，使用�
         return this.request("DescribeUpstreamBindApis", req, cb);
     }
     /**
+     * 本接口（ImportOpenApi）用于将OpenAPI规范定义的API导入到API网关。
+     */
+    async ImportOpenApi(req, cb) {
+        return this.request("ImportOpenApi", req, cb);
+    }
+    /**
      * 本接口（ModifyService）用于修改服务的相关信息。当服务创建后，服务的名称、描述和服务类型均可被修改。
      */
     async ModifyService(req, cb) {

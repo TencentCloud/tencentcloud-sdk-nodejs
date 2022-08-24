@@ -3,7 +3,7 @@
  */
 export interface CreateAppScanTaskRepeatRequest {
     /**
-      * 任务来源, 0:小程序诊断, 1:预留字段(暂未使用), 2:app诊断(android);
+      * 任务来源, 0:小程序诊断, 1:预留字段(暂未使用), 2:app诊断(android), 3:app漏洞扫描;
       */
     Source: number;
     /**
@@ -150,7 +150,7 @@ export interface DescribeResourceUsageInfoResponse {
  */
 export interface DescribeScanTaskListRequest {
     /**
-      * 任务来源, -1:所有, 0:小程序诊断, 1:预留字段(暂未使用), 2:app诊断(android);
+      * 任务来源, -1:所有, 0:小程序诊断, 1:预留字段(暂未使用), 2:app诊断(android), 3:app漏洞扫描;
       */
     Source: number;
     /**
@@ -245,7 +245,7 @@ export interface CreateAppScanTaskRequest {
       */
     TaskType: number;
     /**
-      * 任务来源, 0:小程序诊断, 1:预留字段(暂未使用), 2:app诊断(android);
+      * 任务来源, 0:小程序诊断, 1:预留字段(暂未使用), 2:app诊断(android), 3:app漏洞扫描;
       */
     Source: number;
     /**
@@ -368,7 +368,7 @@ export interface DescribeFileTicketResponse {
  */
 export interface DescribeScanTaskReportUrlRequest {
     /**
-      * 任务来源, 0:小程序诊断, 1:预留字段(暂未使用), 2:app诊断(android);
+      * 任务来源, 0:小程序诊断, 1:预留字段(暂未使用), 2:app诊断(android), 3:app漏洞扫描;
       */
     Source: number;
     /**
@@ -436,7 +436,7 @@ export interface AppTaskData {
  */
 export interface DescribeScanTaskStatusRequest {
     /**
-      * 任务来源, 0:小程序诊断, 1:预留字段(暂未使用), 2:app诊断(android);
+      * 任务来源, 0:小程序诊断, 1:预留字段(暂未使用), 2:app诊断(android), 3:app漏洞扫描;
       */
     Source: number;
     /**
@@ -457,7 +457,7 @@ export interface DescribeScanTaskStatusRequest {
  */
 export interface DescribeFileTicketRequest {
     /**
-      * 任务来源, 0:小程序诊断, 1:预留字段(暂未使用), 2:app诊断(android);
+      * 任务来源, 0:小程序诊断, 1:预留字段(暂未使用), 2:app诊断(android), 3:app漏洞扫描;
       */
     Source: number;
     /**
@@ -488,7 +488,7 @@ export interface CreateAppScanTaskResponse {
  */
 export interface DescribeResourceUsageInfoRequest {
     /**
-      * 资源计费项名称(为空时，则根据TaskType和Platform进行查询)
+      * 资源计费项名称(为空时，则根据Source，TaskType和Platform进行查询)
       */
     PriceName?: string;
     /**
@@ -499,6 +499,10 @@ export interface DescribeResourceUsageInfoRequest {
       * 应用平台, 0:android
       */
     Platform?: number;
+    /**
+      * 任务来源, 0:小程序诊断, 1:预留字段(暂未使用), 2:app诊断(android), 3:app漏洞扫描;
+      */
+    Source?: number;
 }
 /**
  * DescribeScanTaskReportUrl返回参数结构体
@@ -518,6 +522,11 @@ export interface DescribeScanTaskReportUrlResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ReportTitle: string;
+    /**
+      * 诊断json结果内容
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ReportResult: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
