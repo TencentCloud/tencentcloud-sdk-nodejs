@@ -1,12 +1,16 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeUDPListenersRequest, DeleteProxyGroupRequest, DescribeResourcesByTagRequest, DescribeListenerStatisticsRequest, DescribeProxyAndStatisticsListenersResponse, DeleteRuleRequest, DescribeCrossBorderProxiesRequest, BindRuleRealServersRequest, DescribeHTTPSListenersResponse, ModifyProxiesProjectRequest, DescribeCertificateDetailRequest, SetAuthenticationResponse, DescribeProxyGroupStatisticsResponse, DescribeResourcesByTagResponse, ModifyGroupDomainConfigRequest, DescribeHTTPListenersRequest, BindListenerRealServersResponse, DescribeCustomHeaderResponse, ModifyRealServerNameResponse, DescribeGroupDomainConfigResponse, ModifyCertificateResponse, OpenSecurityPolicyRequest, DeleteDomainErrorPageInfoRequest, DescribeListenerRealServersRequest, DescribeProxyGroupStatisticsRequest, DescribeHTTPSListenersRequest, DescribeCountryAreaMappingRequest, CheckProxyCreateResponse, ModifyCertificateRequest, DestroyProxiesRequest, DescribeRulesResponse, DescribeProxiesResponse, CreateRuleResponse, ModifyRealServerNameRequest, ModifyGroupDomainConfigResponse, DeleteProxyGroupResponse, CreateDomainErrorPageInfoResponse, BindListenerRealServersRequest, DeleteDomainErrorPageInfoResponse, DescribeRuleRealServersRequest, DescribeGroupDomainConfigRequest, CreateProxyGroupDomainRequest, CreateTCPListenersRequest, DescribeListenerStatisticsResponse, DescribeProxyGroupDetailsRequest, CloseProxiesRequest, DescribeListenerRealServersResponse, DescribeProxyDetailRequest, DeleteDomainRequest, CreateFirstLinkSessionRequest, ModifyCertificateAttributesResponse, DescribeSecurityPolicyDetailResponse, CreateHTTPListenerResponse, ModifyUDPListenerAttributeResponse, CreateProxyGroupRequest, DescribeTCPListenersResponse, DescribeRulesRequest, DescribeCountryAreaMappingResponse, DescribeCrossBorderProxiesResponse, DescribeRealServersResponse, ModifyHTTPListenerAttributeResponse, DescribeRealServerStatisticsRequest, DeleteFirstLinkSessionRequest, DescribeProxyAndStatisticsListenersRequest, DescribeAccessRegionsResponse, DeleteListenersRequest, DescribeSecurityRulesRequest, DescribeDestRegionsResponse, DescribeDomainErrorPageInfoByIdsResponse, DescribeProxiesRequest, DescribeAccessRegionsByDestRegionResponse, ModifyProxyGroupAttributeResponse, DescribeUDPListenersResponse, CreateUDPListenersRequest, ModifyRuleAttributeRequest, CreateSecurityPolicyResponse, CreateSecurityRulesResponse, DescribeAccessRegionsRequest, CreateCertificateRequest, DescribeCertificatesResponse, DescribeCustomHeaderRequest, DescribeProxyGroupListResponse, DescribeDomainErrorPageInfoRequest, BanAndRecoverProxyRequest, CloseSecurityPolicyRequest, ModifyCertificateAttributesRequest, ModifyProxyConfigurationRequest, CreateSecurityRulesRequest, DescribeCertificatesRequest, DescribeProxiesStatusRequest, ModifyTCPListenerAttributeRequest, DeleteSecurityPolicyResponse, CreateDomainResponse, ModifyProxiesProjectResponse, ModifyDomainRequest, ModifySecurityRuleRequest, CreateCustomHeaderResponse, DescribeAccessRegionsByDestRegionRequest, DescribeRealServersRequest, CreateCustomHeaderRequest, CreateProxyGroupDomainResponse, DescribeDomainErrorPageInfoResponse, DestroyProxiesResponse, DescribeRuleRealServersResponse, BanAndRecoverProxyResponse, DescribeRealServersStatusRequest, ModifyHTTPListenerAttributeRequest, CreateProxyRequest, DeleteCertificateRequest, ModifySecurityRuleResponse, DescribeProxiesStatusResponse, RemoveRealServersRequest, CreateDomainRequest, CreateRuleRequest, DeleteSecurityPolicyRequest, CreateHTTPListenerRequest, CloseSecurityPolicyResponse, DescribeRegionAndPriceResponse, AddRealServersResponse, CloseProxiesResponse, DeleteCertificateResponse, DescribeBlackHeaderResponse, DescribeDestRegionsRequest, ModifyRuleAttributeResponse, CreateTCPListenersResponse, DescribeSecurityPolicyDetailRequest, ModifyDomainResponse, DescribeRulesByRuleIdsResponse, SetAuthenticationRequest, InquiryPriceCreateProxyResponse, DescribeFirstLinkSessionResponse, DescribeHTTPListenersResponse, DescribeRealServerStatisticsResponse, DeleteDomainResponse, DeleteListenersResponse, CreateSecurityPolicyRequest, ModifyHTTPSListenerAttributeResponse, DescribeProxyGroupListRequest, CreateFirstLinkSessionResponse, CreateProxyGroupResponse, CreateHTTPSListenerResponse, DeleteRuleResponse, DescribeFirstLinkSessionRequest, BindRuleRealServersResponse, DescribeGroupAndStatisticsProxyRequest, ModifyUDPListenerAttributeRequest, DeleteSecurityRulesResponse, ModifyTCPListenerAttributeResponse, DescribeProxyDetailResponse, DescribeGroupAndStatisticsProxyResponse, CreateUDPListenersResponse, ModifyHTTPSListenerAttributeRequest, DescribeProxyStatisticsRequest, DescribeTCPListenersRequest, CreateCertificateResponse, DescribeBlackHeaderRequest, DescribeProxyStatisticsResponse, DescribeRealServersStatusResponse, ModifyProxyGroupAttributeRequest, CloseProxyGroupResponse, DeleteFirstLinkSessionResponse, ModifyProxiesAttributeResponse, DescribeDomainErrorPageInfoByIdsRequest, CheckProxyCreateRequest, DescribeRegionAndPriceRequest, AddRealServersRequest, ModifyProxiesAttributeRequest, DescribeSecurityRulesResponse, CreateHTTPSListenerRequest, DeleteSecurityRulesRequest, DescribeCertificateDetailResponse, OpenProxyGroupResponse, CreateProxyResponse, OpenProxiesRequest, InquiryPriceCreateProxyRequest, DescribeProxyGroupDetailsResponse, OpenProxyGroupRequest, RemoveRealServersResponse, DescribeRulesByRuleIdsRequest, OpenSecurityPolicyResponse, CloseProxyGroupRequest, OpenProxiesResponse, ModifyProxyConfigurationResponse, CreateDomainErrorPageInfoRequest } from "./gaap_models";
+import { DisableGlobalDomainRequest, DescribeUDPListenersRequest, DescribeGlobalDomainsRequest, DeleteProxyGroupRequest, OpenSecurityPolicyResponse, ModifyGlobalDomainAttributeRequest, DescribeResourcesByTagRequest, DescribeListenerStatisticsRequest, DescribeProxyAndStatisticsListenersResponse, DeleteRuleRequest, DescribeCrossBorderProxiesRequest, BindRuleRealServersRequest, DescribeHTTPSListenersResponse, ModifyProxiesProjectRequest, DescribeCertificateDetailRequest, SetAuthenticationResponse, DescribeProxyGroupStatisticsResponse, DisableGlobalDomainResponse, DescribeResourcesByTagResponse, ModifyGroupDomainConfigRequest, DescribeHTTPListenersRequest, BindListenerRealServersResponse, DescribeCustomHeaderResponse, ModifyRealServerNameResponse, DescribeGroupDomainConfigResponse, ModifyCertificateResponse, OpenSecurityPolicyRequest, DeleteDomainErrorPageInfoRequest, DescribeListenerRealServersRequest, DescribeProxyGroupStatisticsRequest, DescribeHTTPSListenersRequest, DescribeCountryAreaMappingRequest, CheckProxyCreateResponse, ModifyCertificateRequest, DestroyProxiesRequest, DescribeRulesResponse, DescribeProxiesResponse, CreateRuleResponse, ModifyRealServerNameRequest, ModifyGroupDomainConfigResponse, DeleteProxyGroupResponse, CreateGlobalDomainDnsResponse, CreateDomainErrorPageInfoResponse, BindListenerRealServersRequest, DeleteDomainErrorPageInfoResponse, DescribeRuleRealServersRequest, DescribeGroupDomainConfigRequest, CreateProxyGroupDomainRequest, CreateTCPListenersRequest, DescribeListenerStatisticsResponse, DescribeProxyGroupDetailsRequest, CloseProxiesRequest, DescribeListenerRealServersResponse, DescribeProxyDetailRequest, DeleteDomainRequest, CreateFirstLinkSessionRequest, ModifyCertificateAttributesResponse, DescribeSecurityPolicyDetailResponse, CreateHTTPListenerResponse, DeleteGlobalDomainDnsResponse, CreateProxyGroupRequest, DescribeTCPListenersResponse, DescribeRulesRequest, DescribeCountryAreaMappingResponse, DescribeCrossBorderProxiesResponse, DescribeRealServersResponse, ModifyHTTPListenerAttributeResponse, DescribeRealServerStatisticsRequest, DeleteFirstLinkSessionRequest, ModifyGlobalDomainAttributeResponse, DescribeProxyAndStatisticsListenersRequest, DescribeAccessRegionsResponse, DeleteListenersRequest, DescribeSecurityRulesRequest, DescribeDestRegionsResponse, DescribeDomainErrorPageInfoByIdsResponse, DescribeProxiesRequest, DescribeAccessRegionsByDestRegionResponse, ModifyProxyGroupAttributeResponse, CreateGlobalDomainResponse, DescribeUDPListenersResponse, CreateUDPListenersRequest, CreateGlobalDomainRequest, CreateSecurityPolicyResponse, EnableGlobalDomainResponse, CreateSecurityRulesResponse, DescribeAccessRegionsRequest, CreateCertificateRequest, CreateProxyGroupDomainResponse, DescribeCustomHeaderRequest, DescribeProxyGroupListResponse, DescribeGlobalDomainDnsRequest, DescribeDomainErrorPageInfoRequest, BanAndRecoverProxyRequest, CloseSecurityPolicyRequest, ModifyCertificateAttributesRequest, ModifyGlobalDomainDnsRequest, CreateSecurityRulesRequest, DescribeCertificatesRequest, DescribeProxiesStatusRequest, ModifyTCPListenerAttributeRequest, DeleteSecurityPolicyResponse, CreateDomainResponse, EnableGlobalDomainRequest, ModifyGlobalDomainDnsResponse, ModifyDomainRequest, DeleteGlobalDomainDnsRequest, CreateCustomHeaderResponse, DescribeAccessRegionsByDestRegionRequest, DescribeRealServersRequest, CreateCustomHeaderRequest, DescribeCertificatesResponse, DescribeDomainErrorPageInfoResponse, DestroyProxiesResponse, DescribeRuleRealServersResponse, BanAndRecoverProxyResponse, DescribeRealServersStatusRequest, ModifyHTTPListenerAttributeRequest, CreateProxyRequest, DeleteCertificateRequest, ModifySecurityRuleResponse, DescribeProxiesStatusResponse, RemoveRealServersRequest, CreateDomainRequest, CreateRuleRequest, ModifyProxyConfigurationRequest, CreateGlobalDomainDnsRequest, DeleteSecurityPolicyRequest, CreateHTTPListenerRequest, CloseSecurityPolicyResponse, DescribeRegionAndPriceResponse, AddRealServersResponse, CloseProxiesResponse, DeleteCertificateResponse, DescribeBlackHeaderResponse, DescribeDestRegionsRequest, ModifyRuleAttributeResponse, CreateTCPListenersResponse, DescribeSecurityPolicyDetailRequest, ModifyDomainResponse, DescribeRulesByRuleIdsResponse, SetAuthenticationRequest, InquiryPriceCreateProxyResponse, DescribeFirstLinkSessionResponse, DescribeHTTPListenersResponse, DescribeRealServerStatisticsResponse, DeleteDomainResponse, DeleteListenersResponse, CreateSecurityPolicyRequest, ModifyHTTPSListenerAttributeResponse, DescribeProxyGroupListRequest, CreateFirstLinkSessionResponse, CreateProxyGroupResponse, CreateHTTPSListenerResponse, DeleteRuleResponse, ModifyRuleAttributeRequest, DescribeFirstLinkSessionRequest, BindRuleRealServersResponse, DescribeGlobalDomainDnsResponse, ModifyUDPListenerAttributeResponse, DescribeGroupAndStatisticsProxyRequest, ModifyUDPListenerAttributeRequest, DeleteSecurityRulesResponse, ModifyTCPListenerAttributeResponse, DescribeProxyDetailResponse, DescribeGroupAndStatisticsProxyResponse, CreateUDPListenersResponse, ModifyHTTPSListenerAttributeRequest, DescribeProxyStatisticsRequest, DescribeTCPListenersRequest, CreateCertificateResponse, DescribeBlackHeaderRequest, DescribeProxyStatisticsResponse, DescribeRealServersStatusResponse, ModifyProxyGroupAttributeRequest, ModifyProxiesProjectResponse, CloseProxyGroupResponse, DeleteFirstLinkSessionResponse, ModifyProxiesAttributeResponse, DescribeDomainErrorPageInfoByIdsRequest, CheckProxyCreateRequest, DescribeRegionAndPriceRequest, AddRealServersRequest, ModifyProxiesAttributeRequest, DescribeSecurityRulesResponse, CreateHTTPSListenerRequest, DeleteSecurityRulesRequest, DescribeCertificateDetailResponse, OpenProxyGroupResponse, ModifySecurityRuleRequest, CreateProxyResponse, OpenProxiesRequest, InquiryPriceCreateProxyRequest, DescribeProxyGroupDetailsResponse, OpenProxyGroupRequest, DeleteGlobalDomainRequest, RemoveRealServersResponse, DescribeRulesByRuleIdsRequest, DeleteGlobalDomainResponse, CloseProxyGroupRequest, DescribeGlobalDomainsResponse, OpenProxiesResponse, ModifyProxyConfigurationResponse, CreateDomainErrorPageInfoRequest } from "./gaap_models";
 /**
  * gaap client
  * @class
  */
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
+    /**
+     * 修改域名解析记录
+     */
+    ModifyGlobalDomainDns(req: ModifyGlobalDomainDnsRequest, cb?: (error: string, rep: ModifyGlobalDomainDnsResponse) => void): Promise<ModifyGlobalDomainDnsResponse>;
     /**
      * 本接口（DescribeCertificates）用来查询可以使用的证书列表。
      */
@@ -41,6 +45,14 @@ export declare class Client extends AbstractClient {
      */
     ModifyCertificateAttributes(req: ModifyCertificateAttributesRequest, cb?: (error: string, rep: ModifyCertificateAttributesResponse) => void): Promise<ModifyCertificateAttributesResponse>;
     /**
+     * 查询域名解析列表
+     */
+    DescribeGlobalDomainDns(req: DescribeGlobalDomainDnsRequest, cb?: (error: string, rep: DescribeGlobalDomainDnsResponse) => void): Promise<DescribeGlobalDomainDnsResponse>;
+    /**
+     * 用来创建统一域名
+     */
+    CreateGlobalDomain(req: CreateGlobalDomainRequest, cb?: (error: string, rep: CreateGlobalDomainResponse) => void): Promise<CreateGlobalDomainResponse>;
+    /**
      * 本接口（CreateCustomHeader）用于创建HTTP/HTTPS监听器的自定义header，客户端请求通过访问该监听器时，会将监听器中配置的header信息发送到源站。
      */
     CreateCustomHeader(req: CreateCustomHeaderRequest, cb?: (error: string, rep: CreateCustomHeaderResponse) => void): Promise<CreateCustomHeaderResponse>;
@@ -72,6 +84,10 @@ export declare class Client extends AbstractClient {
      * 本接口（DescribeRuleRealServers）用于查询转发规则相关的源站信息， 包括该规则可绑定的源站信息和已绑定的源站信息。
      */
     DescribeRuleRealServers(req: DescribeRuleRealServersRequest, cb?: (error: string, rep: DescribeRuleRealServersResponse) => void): Promise<DescribeRuleRealServersResponse>;
+    /**
+     * 该接口（DescribeUDPListeners）用于查询单通道或者通道组下的UDP监听器信息
+     */
+    DescribeUDPListeners(req: DescribeUDPListenersRequest, cb?: (error: string, rep: DescribeUDPListenersResponse) => void): Promise<DescribeUDPListenersResponse>;
     /**
      * 本接口（DescribeDestRegions）用于查询源站区域，即源站服务器所在区域。
      */
@@ -142,9 +158,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeProxyAndStatisticsListeners(req: DescribeProxyAndStatisticsListenersRequest, cb?: (error: string, rep: DescribeProxyAndStatisticsListenersResponse) => void): Promise<DescribeProxyAndStatisticsListenersResponse>;
     /**
-     * 该接口（CreateHTTPListener）用于在通道实例下创建HTTP协议类型的监听器。
+     * 修改域名属性
      */
-    CreateHTTPListener(req: CreateHTTPListenerRequest, cb?: (error: string, rep: CreateHTTPListenerResponse) => void): Promise<CreateHTTPListenerResponse>;
+    ModifyGlobalDomainAttribute(req: ModifyGlobalDomainAttributeRequest, cb?: (error: string, rep: ModifyGlobalDomainAttributeResponse) => void): Promise<ModifyGlobalDomainAttributeResponse>;
     /**
      * 本接口（DescribeRulesByRuleIds）用于根据规则ID拉取规则信息列表。支持一个或者多个规则信息的拉取。一次最多支持10个规则信息的拉取。
      */
@@ -162,13 +178,17 @@ export declare class Client extends AbstractClient {
      */
     ModifyTCPListenerAttribute(req: ModifyTCPListenerAttributeRequest, cb?: (error: string, rep: ModifyTCPListenerAttributeResponse) => void): Promise<ModifyTCPListenerAttributeResponse>;
     /**
+     * 该接口（CreateHTTPListener）用于在通道实例下创建HTTP协议类型的监听器。
+     */
+    CreateHTTPListener(req: CreateHTTPListenerRequest, cb?: (error: string, rep: CreateHTTPListenerResponse) => void): Promise<CreateHTTPListenerResponse>;
+    /**
      * 该接口（DescribeRealServerStatistics）用于查询源站健康检查结果的统计数据。源站状态展示位为1：正常或者0：异常。查询的源站需要在监听器或者规则上进行了绑定，查询时需指定绑定的监听器或者规则ID。该接口支持1分钟细粒度的源站状态统计数据展示。
      */
     DescribeRealServerStatistics(req: DescribeRealServerStatisticsRequest, cb?: (error: string, rep: DescribeRealServerStatisticsResponse) => void): Promise<DescribeRealServerStatisticsResponse>;
     /**
-     * 该接口（DescribeUDPListeners）用于查询单通道或者通道组下的UDP监听器信息
+     * 该接口（DescribeHTTPListeners）用来查询HTTP监听器信息。
      */
-    DescribeUDPListeners(req: DescribeUDPListenersRequest, cb?: (error: string, rep: DescribeUDPListenersResponse) => void): Promise<DescribeUDPListenersResponse>;
+    DescribeHTTPListeners(req: DescribeHTTPListenersRequest, cb?: (error: string, rep: DescribeHTTPListenersResponse) => void): Promise<DescribeHTTPListenersResponse>;
     /**
      * 本接口（CreateProxyGroup）用于创建通道组。
      */
@@ -182,9 +202,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeCustomHeader(req?: DescribeCustomHeaderRequest, cb?: (error: string, rep: DescribeCustomHeaderResponse) => void): Promise<DescribeCustomHeaderResponse>;
     /**
-     * 本接口（ModifyProxiesAttribute）用于修改实例的属性（目前只支持修改通道的名称）。
+     * 删除域名的某条解析记录
      */
-    ModifyProxiesAttribute(req: ModifyProxiesAttributeRequest, cb?: (error: string, rep: ModifyProxiesAttributeResponse) => void): Promise<ModifyProxiesAttributeResponse>;
+    DeleteGlobalDomainDns(req: DeleteGlobalDomainDnsRequest, cb?: (error: string, rep: DeleteGlobalDomainDnsResponse) => void): Promise<DeleteGlobalDomainDnsResponse>;
     /**
      * 本接口（DestroyProxies）用于销毁。通道销毁后，不再产生任何费用。
      */
@@ -205,6 +225,10 @@ export declare class Client extends AbstractClient {
      * 删除已添加的源站(服务器)IP或域名
      */
     RemoveRealServers(req: RemoveRealServersRequest, cb?: (error: string, rep: RemoveRealServersResponse) => void): Promise<RemoveRealServersResponse>;
+    /**
+     * 删除统一域名
+     */
+    DeleteGlobalDomain(req: DeleteGlobalDomainRequest, cb?: (error: string, rep: DeleteGlobalDomainResponse) => void): Promise<DeleteGlobalDomainResponse>;
     /**
      * 本接口（DescribeSecurityRules）用于根据安全规则ID查询安全规则详情列表。支持一个或多个安全规则的查询。一次最多支持20个安全规则的查询。
      */
@@ -229,10 +253,6 @@ export declare class Client extends AbstractClient {
      * 该接口（OpenProxies）用于开启一条或者多条通道。
      */
     OpenProxies(req: OpenProxiesRequest, cb?: (error: string, rep: OpenProxiesResponse) => void): Promise<OpenProxiesResponse>;
-    /**
-     * 该接口（DescribeHTTPListeners）用来查询HTTP监听器信息。
-     */
-    DescribeHTTPListeners(req: DescribeHTTPListenersRequest, cb?: (error: string, rep: DescribeHTTPListenersResponse) => void): Promise<DescribeHTTPListenersResponse>;
     /**
      * 本接口（ModifyUDPListenerAttribute）用于修改通道实例下UDP监听器配置，包括监听器名称和调度策略的修改。
      */
@@ -275,9 +295,17 @@ export declare class Client extends AbstractClient {
      */
     DeleteFirstLinkSession(req: DeleteFirstLinkSessionRequest, cb?: (error: string, rep: DeleteFirstLinkSessionResponse) => void): Promise<DeleteFirstLinkSessionResponse>;
     /**
+     * 暂停域名解析
+     */
+    DisableGlobalDomain(req: DisableGlobalDomainRequest, cb?: (error: string, rep: DisableGlobalDomainResponse) => void): Promise<DisableGlobalDomainResponse>;
+    /**
      * 该接口（DescribeRegionAndPrice）用于获取源站区域和带宽梯度价格
      */
     DescribeRegionAndPrice(req: DescribeRegionAndPriceRequest, cb?: (error: string, rep: DescribeRegionAndPriceResponse) => void): Promise<DescribeRegionAndPriceResponse>;
+    /**
+     * 查询域名列表
+     */
+    DescribeGlobalDomains(req: DescribeGlobalDomainsRequest, cb?: (error: string, rep: DescribeGlobalDomainsResponse) => void): Promise<DescribeGlobalDomainsResponse>;
     /**
      * 本接口（DescribeRealServersStatus）用于查询源站是否已被规则或者监听器绑定
      */
@@ -286,6 +314,10 @@ export declare class Client extends AbstractClient {
      * 本接口（DescribeRules）用于查询监听器下的所有规则信息，包括规则域名，路径以及该规则下所绑定的源站列表。当通道版本为3.0时，该接口会返回该域名对应的高级认证配置信息。
      */
     DescribeRules(req: DescribeRulesRequest, cb?: (error: string, rep: DescribeRulesResponse) => void): Promise<DescribeRulesResponse>;
+    /**
+     * 开启域名解析
+     */
+    EnableGlobalDomain(req: EnableGlobalDomainRequest, cb?: (error: string, rep: EnableGlobalDomainResponse) => void): Promise<EnableGlobalDomainResponse>;
     /**
      * 该接口（DescribeListenerRealServers）用于查询TCP/UDP监听器源站列表，包括该监听器已经绑定的源站列表以及可以绑定的源站列表。
      */
@@ -319,6 +351,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeGroupDomainConfig(req: DescribeGroupDomainConfigRequest, cb?: (error: string, rep: DescribeGroupDomainConfigResponse) => void): Promise<DescribeGroupDomainConfigResponse>;
     /**
+     * 本接口（ModifyProxiesAttribute）用于修改实例的属性（目前只支持修改通道的名称）。
+     */
+    ModifyProxiesAttribute(req: ModifyProxiesAttributeRequest, cb?: (error: string, rep: ModifyProxiesAttributeResponse) => void): Promise<ModifyProxiesAttributeResponse>;
+    /**
      * 该接口（ModifyHTTPSListenerAttribute）用于修改HTTPS监听器配置，当前不支持通道组和v1版本通道。
      */
     ModifyHTTPSListenerAttribute(req: ModifyHTTPSListenerAttributeRequest, cb?: (error: string, rep: ModifyHTTPSListenerAttributeResponse) => void): Promise<ModifyHTTPSListenerAttributeResponse>;
@@ -350,6 +386,10 @@ export declare class Client extends AbstractClient {
      * 本接口（InquiryPriceCreateProxy）用于创建加速通道询价。
      */
     InquiryPriceCreateProxy(req: InquiryPriceCreateProxyRequest, cb?: (error: string, rep: InquiryPriceCreateProxyResponse) => void): Promise<InquiryPriceCreateProxyResponse>;
+    /**
+     * 创建域名解析记录
+     */
+    CreateGlobalDomainDns(req: CreateGlobalDomainDnsRequest, cb?: (error: string, rep: CreateGlobalDomainDnsResponse) => void): Promise<CreateGlobalDomainDnsResponse>;
     /**
      * 修改安全策略规则名
      */

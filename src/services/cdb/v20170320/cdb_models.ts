@@ -2623,7 +2623,7 @@ export interface ModifyAccountPasswordResponse {
   /**
    * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。
    */
-  AsyncRequestId?: string
+  AsyncRequestId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4337,7 +4337,7 @@ export interface CreateDBInstanceRequest {
   AutoRenewFlag?: number
 
   /**
-   * 主实例地域信息，购买灾备实例时，该字段必填。
+   * 主实例地域信息，购买灾备、RO实例时，该字段必填。
    */
   MasterRegion?: string
 
@@ -4382,7 +4382,7 @@ export interface CreateDBInstanceRequest {
   ParamTemplateId?: number
 
   /**
-   * 告警策略id数组。
+   * 告警策略id数组。云监控DescribeAlarmPolicy接口返回的OriginId。
    */
   AlarmPolicyList?: Array<number>
 
@@ -5081,7 +5081,7 @@ export interface VerifyRootAccountResponse {
   /**
    * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果
    */
-  AsyncRequestId?: string
+  AsyncRequestId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -7723,7 +7723,7 @@ export interface CreateDBInstanceHourRequest {
   InstanceRole?: string
 
   /**
-   * 主实例的可用区信息，购买灾备实例时必填。
+   * 主实例的可用区信息，购买灾备、RO实例时必填。
    */
   MasterRegion?: string
 
@@ -7808,7 +7808,7 @@ export interface CreateDBInstanceHourRequest {
   ParamTemplateId?: number
 
   /**
-   * 告警策略id数组。
+   * 告警策略id数组。云监控DescribeAlarmPolicy接口返回的OriginId。
    */
   AlarmPolicyList?: Array<number>
 

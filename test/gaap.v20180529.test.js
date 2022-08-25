@@ -18,6 +18,16 @@ const client = new tencentcloud.gaap.v20180529.Client({
 })
 describe("gaap.v20180529.test.js", function () {
 
+it("gaap.v20180529.ModifyGlobalDomainDns", async function () {
+    try {
+       const data = await client.ModifyGlobalDomainDns({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("gaap.v20180529.DescribeCertificates", async function () {
     try {
        const data = await client.DescribeCertificates({})
@@ -98,6 +108,26 @@ it("gaap.v20180529.ModifyCertificateAttributes", async function () {
     }
 })
 
+it("gaap.v20180529.DescribeGlobalDomainDns", async function () {
+    try {
+       const data = await client.DescribeGlobalDomainDns({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gaap.v20180529.CreateGlobalDomain", async function () {
+    try {
+       const data = await client.CreateGlobalDomain({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("gaap.v20180529.CreateCustomHeader", async function () {
     try {
        const data = await client.CreateCustomHeader({})
@@ -171,6 +201,16 @@ it("gaap.v20180529.DescribeProxyDetail", async function () {
 it("gaap.v20180529.DescribeRuleRealServers", async function () {
     try {
        const data = await client.DescribeRuleRealServers({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gaap.v20180529.DescribeUDPListeners", async function () {
+    try {
+       const data = await client.DescribeUDPListeners({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -348,9 +388,9 @@ it("gaap.v20180529.DescribeProxyAndStatisticsListeners", async function () {
     }
 })
 
-it("gaap.v20180529.CreateHTTPListener", async function () {
+it("gaap.v20180529.ModifyGlobalDomainAttribute", async function () {
     try {
-       const data = await client.CreateHTTPListener({})
+       const data = await client.ModifyGlobalDomainAttribute({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -398,6 +438,16 @@ it("gaap.v20180529.ModifyTCPListenerAttribute", async function () {
     }
 })
 
+it("gaap.v20180529.CreateHTTPListener", async function () {
+    try {
+       const data = await client.CreateHTTPListener({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("gaap.v20180529.DescribeRealServerStatistics", async function () {
     try {
        const data = await client.DescribeRealServerStatistics({})
@@ -408,9 +458,9 @@ it("gaap.v20180529.DescribeRealServerStatistics", async function () {
     }
 })
 
-it("gaap.v20180529.DescribeUDPListeners", async function () {
+it("gaap.v20180529.DescribeHTTPListeners", async function () {
     try {
-       const data = await client.DescribeUDPListeners({})
+       const data = await client.DescribeHTTPListeners({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -448,9 +498,9 @@ it("gaap.v20180529.DescribeCustomHeader", async function () {
     }
 })
 
-it("gaap.v20180529.ModifyProxiesAttribute", async function () {
+it("gaap.v20180529.DeleteGlobalDomainDns", async function () {
     try {
-       const data = await client.ModifyProxiesAttribute({})
+       const data = await client.DeleteGlobalDomainDns({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -501,6 +551,16 @@ it("gaap.v20180529.DescribeSecurityPolicyDetail", async function () {
 it("gaap.v20180529.RemoveRealServers", async function () {
     try {
        const data = await client.RemoveRealServers({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gaap.v20180529.DeleteGlobalDomain", async function () {
+    try {
+       const data = await client.DeleteGlobalDomain({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -561,16 +621,6 @@ it("gaap.v20180529.ModifyDomain", async function () {
 it("gaap.v20180529.OpenProxies", async function () {
     try {
        const data = await client.OpenProxies({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("gaap.v20180529.DescribeHTTPListeners", async function () {
-    try {
-       const data = await client.DescribeHTTPListeners({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -678,9 +728,29 @@ it("gaap.v20180529.DeleteFirstLinkSession", async function () {
     }
 })
 
+it("gaap.v20180529.DisableGlobalDomain", async function () {
+    try {
+       const data = await client.DisableGlobalDomain({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("gaap.v20180529.DescribeRegionAndPrice", async function () {
     try {
        const data = await client.DescribeRegionAndPrice({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gaap.v20180529.DescribeGlobalDomains", async function () {
+    try {
+       const data = await client.DescribeGlobalDomains({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -701,6 +771,16 @@ it("gaap.v20180529.DescribeRealServersStatus", async function () {
 it("gaap.v20180529.DescribeRules", async function () {
     try {
        const data = await client.DescribeRules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gaap.v20180529.EnableGlobalDomain", async function () {
+    try {
+       const data = await client.EnableGlobalDomain({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -788,6 +868,16 @@ it("gaap.v20180529.DescribeGroupDomainConfig", async function () {
     }
 })
 
+it("gaap.v20180529.ModifyProxiesAttribute", async function () {
+    try {
+       const data = await client.ModifyProxiesAttribute({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("gaap.v20180529.ModifyHTTPSListenerAttribute", async function () {
     try {
        const data = await client.ModifyHTTPSListenerAttribute({})
@@ -861,6 +951,16 @@ it("gaap.v20180529.ModifyProxyGroupAttribute", async function () {
 it("gaap.v20180529.InquiryPriceCreateProxy", async function () {
     try {
        const data = await client.InquiryPriceCreateProxy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gaap.v20180529.CreateGlobalDomainDns", async function () {
+    try {
+       const data = await client.CreateGlobalDomainDns({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

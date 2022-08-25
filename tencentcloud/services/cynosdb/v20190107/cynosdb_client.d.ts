@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ModifyClusterNameRequest, DescribeRollbackTimeRangeRequest, InquirePriceRenewRequest, DescribeBackupConfigRequest, DescribeAccountsRequest, ModifyMaintainPeriodConfigRequest, DescribeRollbackTimeRangeResponse, ModifyBackupNameResponse, AssociateSecurityGroupsRequest, DescribeBinlogDownloadUrlRequest, CreateAccountsResponse, ModifyInstanceNameRequest, DescribeDBSecurityGroupsResponse, DescribeMaintainPeriodRequest, DescribeBinlogsResponse, DescribeInstancesResponse, ModifyClusterNameResponse, IsolateInstanceResponse, ModifyInstanceNameResponse, DescribeParamTemplatesRequest, PauseServerlessRequest, RevokeAccountPrivilegesResponse, CreateClustersResponse, SetRenewFlagRequest, ActivateInstanceRequest, DescribeAccountAllGrantPrivilegesResponse, DescribeClustersRequest, DescribeInstanceDetailResponse, ModifyDBInstanceSecurityGroupsResponse, DescribeClusterParamLogsResponse, DescribeClusterInstanceGrpsRequest, DescribeResourcesByDealNameResponse, ResumeServerlessResponse, CreateAccountsRequest, IsolateInstanceRequest, ExportInstanceSlowQueriesResponse, DescribeDBSecurityGroupsRequest, RollBackClusterRequest, DescribeClusterDetailRequest, DescribeProjectSecurityGroupsResponse, PauseServerlessResponse, OfflineClusterRequest, DescribeBinlogDownloadUrlResponse, DescribeBackupListRequest, GrantAccountPrivilegesRequest, IsolateClusterResponse, CreateClustersRequest, DescribeClustersResponse, DescribeBackupConfigResponse, ModifyDBInstanceSecurityGroupsRequest, DescribeParamTemplatesResponse, AddInstancesResponse, DescribeProjectSecurityGroupsRequest, ModifyClusterParamResponse, DescribeBackupDownloadUrlRequest, AssociateSecurityGroupsResponse, DescribeResourcesByDealNameRequest, DescribeRollbackTimeValidityResponse, DescribeInstanceSlowQueriesResponse, GrantAccountPrivilegesResponse, DescribeBackupDownloadUrlResponse, ResumeServerlessRequest, InquirePriceCreateRequest, ModifyBackupConfigResponse, DescribeInstanceSpecsRequest, ExportInstanceSlowQueriesRequest, UpgradeInstanceResponse, ModifyAccountParamsRequest, OfflineClusterResponse, RevokeAccountPrivilegesRequest, InquirePriceCreateResponse, SetRenewFlagResponse, DescribeClusterParamLogsRequest, UpgradeInstanceRequest, DescribeMaintainPeriodResponse, DescribeBackupListResponse, RollBackClusterResponse, DescribeBinlogSaveDaysRequest, ModifyBackupConfigRequest, ActivateInstanceResponse, DescribeRollbackTimeValidityRequest, IsolateClusterRequest, DescribeClusterInstanceGrpsResponse, AddInstancesRequest, DescribeInstancesRequest, DescribeInstanceDetailRequest, ModifyMaintainPeriodConfigResponse, DisassociateSecurityGroupsRequest, ModifyBackupNameRequest, DescribeBinlogSaveDaysResponse, ModifyClusterParamRequest, DescribeAccountsResponse, ModifyAccountParamsResponse, OfflineInstanceRequest, DescribeInstanceSpecsResponse, DescribeAccountAllGrantPrivilegesRequest, OfflineInstanceResponse, DescribeClusterDetailResponse, DescribeInstanceSlowQueriesRequest, DescribeBinlogsRequest, DisassociateSecurityGroupsResponse, InquirePriceRenewResponse } from "./cynosdb_models";
+import { RemoveClusterSlaveZoneRequest, ModifyClusterNameRequest, DescribeRollbackTimeRangeRequest, InquirePriceRenewRequest, DescribeBackupConfigRequest, DescribeAccountsRequest, ModifyMaintainPeriodConfigRequest, DescribeRollbackTimeRangeResponse, ModifyBackupNameResponse, SwitchClusterZoneResponse, AssociateSecurityGroupsRequest, DescribeBinlogDownloadUrlRequest, CreateAccountsResponse, ModifyInstanceNameRequest, DescribeDBSecurityGroupsResponse, DescribeMaintainPeriodRequest, DescribeBinlogsResponse, DescribeInstancesResponse, AddClusterSlaveZoneResponse, ModifyClusterNameResponse, DescribeClusterParamsResponse, IsolateInstanceResponse, ModifyInstanceNameResponse, DescribeParamTemplatesRequest, PauseServerlessRequest, RevokeAccountPrivilegesResponse, CreateClustersResponse, SetRenewFlagRequest, ActivateInstanceRequest, AddClusterSlaveZoneRequest, DescribeAccountAllGrantPrivilegesResponse, DescribeClustersRequest, DescribeInstanceDetailResponse, ModifyDBInstanceSecurityGroupsResponse, DescribeClusterParamLogsResponse, DescribeClusterInstanceGrpsRequest, DescribeResourcesByDealNameResponse, ResumeServerlessResponse, CreateAccountsRequest, IsolateInstanceRequest, ExportInstanceSlowQueriesResponse, SwitchClusterZoneRequest, DescribeDBSecurityGroupsRequest, RollBackClusterRequest, DescribeClusterDetailRequest, DescribeProjectSecurityGroupsResponse, RemoveClusterSlaveZoneResponse, PauseServerlessResponse, OfflineClusterRequest, DescribeBinlogDownloadUrlResponse, DescribeBackupListRequest, ModifyClusterSlaveZoneResponse, GrantAccountPrivilegesRequest, CreateClustersRequest, DescribeClustersResponse, DescribeBackupConfigResponse, ModifyDBInstanceSecurityGroupsRequest, DescribeParamTemplatesResponse, AddInstancesResponse, DescribeProjectSecurityGroupsRequest, ModifyClusterParamResponse, DescribeBackupDownloadUrlRequest, AssociateSecurityGroupsResponse, DescribeResourcesByDealNameRequest, DescribeRollbackTimeValidityResponse, DescribeInstanceSlowQueriesResponse, GrantAccountPrivilegesResponse, DescribeBackupDownloadUrlResponse, ResumeServerlessRequest, InquirePriceCreateRequest, ModifyBackupConfigResponse, DescribeInstanceSpecsRequest, ExportInstanceSlowQueriesRequest, UpgradeInstanceResponse, ModifyAccountParamsRequest, IsolateClusterResponse, OfflineClusterResponse, RevokeAccountPrivilegesRequest, InquirePriceCreateResponse, SetRenewFlagResponse, DescribeClusterParamLogsRequest, UpgradeInstanceRequest, DescribeMaintainPeriodResponse, DescribeBackupListResponse, RollBackClusterResponse, DescribeBinlogSaveDaysRequest, ModifyBackupConfigRequest, ActivateInstanceResponse, DescribeRollbackTimeValidityRequest, IsolateClusterRequest, DescribeClusterInstanceGrpsResponse, AddInstancesRequest, ModifyClusterSlaveZoneRequest, DescribeInstancesRequest, DescribeInstanceDetailRequest, ModifyMaintainPeriodConfigResponse, DisassociateSecurityGroupsRequest, ModifyBackupNameRequest, DescribeBinlogSaveDaysResponse, ModifyClusterParamRequest, DescribeAccountsResponse, ModifyAccountParamsResponse, OfflineInstanceRequest, DescribeClusterParamsRequest, DescribeInstanceSpecsResponse, DescribeAccountAllGrantPrivilegesRequest, OfflineInstanceResponse, DescribeClusterDetailResponse, DescribeInstanceSlowQueriesRequest, DescribeBinlogsRequest, DisassociateSecurityGroupsResponse, InquirePriceRenewResponse } from "./cynosdb_models";
 /**
  * cynosdb client
  * @class
@@ -32,13 +32,21 @@ export declare class Client extends AbstractClient {
      */
     DescribeBinlogSaveDays(req: DescribeBinlogSaveDaysRequest, cb?: (error: string, rep: DescribeBinlogSaveDaysResponse) => void): Promise<DescribeBinlogSaveDaysResponse>;
     /**
-     * 获取指定集群的备份配置信息，包括全量备份时间段，备份文件保留时间
+     * 本接口（DescribeInstanceSpecs）用于查询实例规格
      */
-    DescribeBackupConfig(req: DescribeBackupConfigRequest, cb?: (error: string, rep: DescribeBackupConfigResponse) => void): Promise<DescribeBackupConfigResponse>;
+    DescribeInstanceSpecs(req: DescribeInstanceSpecsRequest, cb?: (error: string, rep: DescribeInstanceSpecsResponse) => void): Promise<DescribeInstanceSpecsResponse>;
+    /**
+     * 增加从可用区
+     */
+    AddClusterSlaveZone(req: AddClusterSlaveZoneRequest, cb?: (error: string, rep: AddClusterSlaveZoneResponse) => void): Promise<AddClusterSlaveZoneResponse>;
     /**
      * 查询用户指定产品下的所有参数模板信息
      */
     DescribeParamTemplates(req?: DescribeParamTemplatesRequest, cb?: (error: string, rep: DescribeParamTemplatesResponse) => void): Promise<DescribeParamTemplatesResponse>;
+    /**
+     * SetRenewFlag设置实例的自动续费功能
+     */
+    SetRenewFlag(req: SetRenewFlagRequest, cb?: (error: string, rep: SetRenewFlagResponse) => void): Promise<SetRenewFlagResponse>;
     /**
      * 本接口（DescribeClusterInstanceGrps）用于查询实例组
      */
@@ -88,9 +96,17 @@ export declare class Client extends AbstractClient {
      */
     ModifyMaintainPeriodConfig(req: ModifyMaintainPeriodConfigRequest, cb?: (error: string, rep: ModifyMaintainPeriodConfigResponse) => void): Promise<ModifyMaintainPeriodConfigResponse>;
     /**
+     * 修改从可用区
+     */
+    ModifyClusterSlaveZone(req: ModifyClusterSlaveZoneRequest, cb?: (error: string, rep: ModifyClusterSlaveZoneResponse) => void): Promise<ModifyClusterSlaveZoneResponse>;
+    /**
      * 修改账号参数
      */
     ModifyAccountParams(req: ModifyAccountParamsRequest, cb?: (error: string, rep: ModifyAccountParamsResponse) => void): Promise<ModifyAccountParamsResponse>;
+    /**
+     * 本接口（DescribeClusterParams）用于查询集群参数
+     */
+    DescribeClusterParams(req: DescribeClusterParamsRequest, cb?: (error: string, rep: DescribeClusterParamsResponse) => void): Promise<DescribeClusterParamsResponse>;
     /**
      * 下线实例
      */
@@ -124,9 +140,9 @@ export declare class Client extends AbstractClient {
      */
     AssociateSecurityGroups(req: AssociateSecurityGroupsRequest, cb?: (error: string, rep: AssociateSecurityGroupsResponse) => void): Promise<AssociateSecurityGroupsResponse>;
     /**
-     * SetRenewFlag设置实例的自动续费功能
+     * 删除从可用区
      */
-    SetRenewFlag(req: SetRenewFlagRequest, cb?: (error: string, rep: SetRenewFlagResponse) => void): Promise<SetRenewFlagResponse>;
+    RemoveClusterSlaveZone(req: RemoveClusterSlaveZoneRequest, cb?: (error: string, rep: RemoveClusterSlaveZoneResponse) => void): Promise<RemoveClusterSlaveZoneResponse>;
     /**
      * 显示集群详情
      */
@@ -140,9 +156,9 @@ export declare class Client extends AbstractClient {
      */
     IsolateInstance(req: IsolateInstanceRequest, cb?: (error: string, rep: IsolateInstanceResponse) => void): Promise<IsolateInstanceResponse>;
     /**
-     * 本接口（DescribeInstanceSpecs）用于查询实例规格
+     * 获取指定集群的备份配置信息，包括全量备份时间段，备份文件保留时间
      */
-    DescribeInstanceSpecs(req: DescribeInstanceSpecsRequest, cb?: (error: string, rep: DescribeInstanceSpecsResponse) => void): Promise<DescribeInstanceSpecsResponse>;
+    DescribeBackupConfig(req: DescribeBackupConfigRequest, cb?: (error: string, rep: DescribeBackupConfigResponse) => void): Promise<DescribeBackupConfigResponse>;
     /**
      * 此接口（DescribeInstanceSlowQueries）用于查询实例慢查询日志。
      */
@@ -199,6 +215,10 @@ export declare class Client extends AbstractClient {
      * 此接口（ExportInstanceSlowQueries）用于导出实例慢日志。
      */
     ExportInstanceSlowQueries(req: ExportInstanceSlowQueriesRequest, cb?: (error: string, rep: ExportInstanceSlowQueriesResponse) => void): Promise<ExportInstanceSlowQueriesResponse>;
+    /**
+     * 切换到从可用区
+     */
+    SwitchClusterZone(req: SwitchClusterZoneRequest, cb?: (error: string, rep: SwitchClusterZoneResponse) => void): Promise<SwitchClusterZoneResponse>;
     /**
      * 安全组批量解绑云资源
      */

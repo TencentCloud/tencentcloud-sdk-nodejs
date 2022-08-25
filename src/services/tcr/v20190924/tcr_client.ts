@@ -18,12 +18,13 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  DuplicateImagePersonalRequest,
+  DeleteInstanceCustomizedDomainResponse,
+  ManageImageLifecycleGlobalPersonalResponse,
   ManageExternalEndpointRequest,
   DescribeImagePersonalResponse,
   DescribeUserQuotaPersonalRequest,
   WebhookTarget,
-  DescribeReplicationInstancesResponse,
+  CreateSignatureResponse,
   DescribeReplicationInstanceCreateTasksResponse,
   WebhookTriggerLog,
   AccessVpc,
@@ -33,10 +34,11 @@ import {
   DescribeNamespacesResponse,
   TriggerLogResp,
   DownloadHelmChartRequest,
+  DuplicateImagePersonalRequest,
   RetentionRule,
   CreateInstanceResponse,
   DeleteInstanceTokenRequest,
-  TaskDetail,
+  TagInfoResp,
   ModifyRepositoryRequest,
   RegistryCondition,
   DescribeInternalEndpointDnsStatusRequest,
@@ -46,6 +48,7 @@ import {
   ValidateNamespaceExistPersonalRequest,
   ModifyInstanceRequest,
   RenewInstanceResponse,
+  ManageInternalEndpointRequest,
   CreateImmutableTagRulesRequest,
   DescribeRepositoriesResponse,
   VpcAndDomainInfo,
@@ -53,13 +56,17 @@ import {
   DescribeInstancesResponse,
   CreateReplicationInstanceRequest,
   ModifyInstanceTokenResponse,
-  DescribeApplicationTriggerPersonalRequest,
+  DescribeApplicationTriggerLogPersonalResponse,
   FavorResp,
   DeleteNamespacePersonalRequest,
+  ModifyImmutableTagRulesResponse,
+  Region,
   NamespaceInfo,
+  CreateImageAccelerationServiceResponse,
   CreateMultipleSecurityPolicyResponse,
+  TriggerResp,
   CreateTagRetentionRuleResponse,
-  Limit,
+  DescribeRegionsResponse,
   DescribeChartDownloadInfoResponse,
   DescribeExternalEndpointStatusRequest,
   DeleteRepositoryResponse,
@@ -67,13 +74,16 @@ import {
   DescribeWebhookTriggerLogResponse,
   DownloadHelmChartResponse,
   ManageReplicationRequest,
+  CreateSecurityPoliciesRequest,
   DeleteWebhookTriggerResponse,
   DeleteImageLifecycleGlobalPersonalResponse,
   ModifySecurityPolicyRequest,
   DescribeReplicationInstanceSyncStatusResponse,
-  ModifyImmutableTagRulesResponse,
+  DeleteInstanceCustomizedDomainRequest,
   Tag,
+  Schedule,
   DupImageTagResp,
+  CreateImmutableTagRulesResponse,
   DeleteApplicationTriggerPersonalResponse,
   DescribeRepositoryFilterPersonalRequest,
   DescribeTagRetentionExecutionTaskResponse,
@@ -81,13 +91,15 @@ import {
   DeleteImmutableTagRulesResponse,
   DescribeRepositoryPersonalRequest,
   AutoDelStrategyInfoResp,
-  TriggerResp,
+  ModifyTagRetentionRuleResponse,
   DeleteApplicationTriggerPersonalRequest,
   SearchUserRepositoryResp,
   CreateTagRetentionRuleRequest,
   DuplicateImagePersonalResponse,
   DescribeImageLifecyclePersonalResponse,
   DescribeInstanceStatusResponse,
+  CreateImageAccelerationServiceRequest,
+  DescribeWebhookTriggerResponse,
   ModifyInstanceTokenRequest,
   DeleteImageLifecyclePersonalResponse,
   CreateNamespaceResponse,
@@ -97,20 +109,23 @@ import {
   DescribeSecurityPoliciesResponse,
   DescribeReplicationInstancesRequest,
   CreateImageLifecyclePersonalResponse,
+  DeleteRepositoryTagsRequest,
   RepoIsExistResp,
   TcrImageInfo,
+  RetentionPolicy,
   DescribeImageLifecycleGlobalPersonalResponse,
   CreateNamespacePersonalResponse,
   DescribeReplicationInstanceSyncStatusRequest,
   DeleteInstanceResponse,
+  DescribeInstanceAllRequest,
   DeleteImageLifecycleGlobalPersonalRequest,
   DescribeInstanceStatusRequest,
   ModifyWebhookTriggerRequest,
-  CheckInstanceNameRequest,
+  DeleteReplicationInstanceRequest,
   DeleteNamespaceResponse,
-  TagInfoResp,
+  DeleteNamespacePersonalResponse,
   Favors,
-  CreateWebhookTriggerRequest,
+  CreateSignatureRequest,
   DescribeRepositoryPersonalResponse,
   CreateSecurityPolicyResponse,
   DescribeRepositoriesRequest,
@@ -127,9 +142,10 @@ import {
   DescribeTagRetentionExecutionTaskRequest,
   ReplicationRule,
   RepoInfoResp,
-  DeleteTagRetentionRuleResponse,
+  DeleteRepositoryTagsResponse,
   DeleteMultipleSecurityPolicyRequest,
   DeleteSecurityPolicyResponse,
+  CreateSignaturePolicyResponse,
   DescribeInternalEndpointDnsStatusResponse,
   WebhookTrigger,
   RegistryStatus,
@@ -141,22 +157,27 @@ import {
   DeleteImagePersonalRequest,
   DescribeApplicationTriggerPersonalResponse,
   RetentionTask,
+  DescribeImageAccelerateServiceResponse,
   NamespaceInfoResp,
   CreateRepositoryPersonalRequest,
   DescribeImageFilterPersonalResponse,
   CreateImageLifecyclePersonalRequest,
   DeleteWebhookTriggerRequest,
+  DeleteSignaturePolicyResponse,
   TriggerInvokeResult,
   CreateUserPersonalResponse,
-  DescribeWebhookTriggerResponse,
+  CustomizedDomainInfo,
+  DescribeInstanceCustomizedDomainResponse,
   DescribeImageManifestsRequest,
   RegistryChargePrepaid,
   ModifyNamespaceRequest,
+  DeleteImageRequest,
   ModifyRepositoryAccessPersonalRequest,
   TagSpecification,
   CreateMultipleSecurityPolicyRequest,
   KeyValueString,
   DescribeNamespacesRequest,
+  ModifyRepositoryAccessPersonalResponse,
   DescribeImageLifecycleGlobalPersonalRequest,
   DescribeImageLifecyclePersonalRequest,
   DeleteSecurityPolicyRequest,
@@ -165,11 +186,13 @@ import {
   DescribeInstanceTokenRequest,
   BatchDeleteRepositoryPersonalResponse,
   CreateNamespaceRequest,
+  CreateSecurityPoliciesResponse,
   BatchDeleteRepositoryPersonalRequest,
+  GCJobInfo,
   Registry,
   DescribeChartDownloadInfoRequest,
   ValidateRepositoryExistPersonalResponse,
-  DescribeExternalEndpointStatusResponse,
+  DeleteImageAccelerateServiceRequest,
   CheckInstanceResponse,
   NamespaceIsExistsResp,
   DescribeInstancesRequest,
@@ -184,40 +207,48 @@ import {
   RepoInfo,
   ManageImageLifecycleGlobalPersonalRequest,
   DescribeUserQuotaPersonalResponse,
+  TaskDetail,
   DescribeImagePersonalRequest,
+  DeleteSignaturePolicyRequest,
+  DescribeRepositoryFilterPersonalResponse,
   ModifySecurityPolicyResponse,
   DeleteImageLifecyclePersonalRequest,
   ModifyApplicationTriggerPersonalResponse,
   DeleteInstanceRequest,
   DescribeImageManifestsResponse,
   DescribeNamespacePersonalResponse,
-  DeleteNamespacePersonalResponse,
+  DeleteReplicationInstanceResponse,
+  DescribeWebhookTriggerRequest,
   ImmutableTagRule,
   Header,
-  RetentionPolicy,
+  DescribeReplicationInstancesResponse,
   CreateSecurityPolicyRequest,
-  DeleteImageRequest,
-  DescribeRepositoryOwnerPersonalRequest,
+  CreateWebhookTriggerRequest,
+  DeleteImageAccelerateServiceResponse,
   ModifyRepositoryInfoPersonalRequest,
   DescribeApplicationTriggerLogPersonalRequest,
+  DescribeGCJobsResponse,
   DescribeFavorRepositoryPersonalRequest,
-  DescribeApplicationTriggerLogPersonalResponse,
+  DescribeApplicationTriggerPersonalRequest,
   DeleteMultipleSecurityPolicyResponse,
   ManageInternalEndpointResponse,
   CreateRepositoryPersonalResponse,
-  DescribeRepositoryFilterPersonalResponse,
+  CreateInstanceCustomizedDomainRequest,
   CreateTagRetentionExecutionResponse,
   DescribeFavorRepositoryPersonalResponse,
   CheckInstanceNameResponse,
-  ManageImageLifecycleGlobalPersonalResponse,
+  DeleteTagRetentionRuleResponse,
+  DescribeRepositoryOwnerPersonalRequest,
+  DescribeExternalEndpointStatusResponse,
   DescribeTagRetentionRulesResponse,
-  ModifyRepositoryAccessPersonalResponse,
+  DescribeRegionsRequest,
   ManageExternalEndpointResponse,
   DescribeImmutableTagRulesResponse,
   ModifyApplicationTriggerPersonalRequest,
   CreateReplicationInstanceResponse,
   CreateInstanceTokenRequest,
   ModifyUserPasswordPersonalRequest,
+  CreateInstanceCustomizedDomainResponse,
   PeerReplicationOption,
   DescribeSecurityPoliciesRequest,
   ModifyInstanceResponse,
@@ -229,32 +260,37 @@ import {
   TagInfo,
   CreateRepositoryRequest,
   DeleteImageResponse,
-  DescribeWebhookTriggerRequest,
+  DescribeImageAccelerateServiceRequest,
   DeleteNamespaceRequest,
   BatchDeleteImagePersonalRequest,
   DescribeImagesRequest,
-  ModifyTagRetentionRuleResponse,
+  DescribeGCJobsRequest,
   DescribeTagRetentionExecutionRequest,
   CreateRepositoryResponse,
   DescribeTagRetentionRulesRequest,
+  DescribeInstanceAllResponse,
   RespLimit,
-  CreateImmutableTagRulesResponse,
+  CheckInstanceNameRequest,
+  DescribeInstanceAllNamespacesRequest,
   DescribeInstanceTokenResponse,
+  DescribeInstanceCustomizedDomainRequest,
   SameImagesResp,
   DescribeTagRetentionExecutionResponse,
   CreateNamespacePersonalRequest,
   DeleteImmutableTagRulesRequest,
   CreateWebhookTriggerResponse,
-  ReplicationFilter,
+  CreateSignaturePolicyRequest,
   DeleteTagRetentionRuleRequest,
+  ReplicationFilter,
   TcrRepositoryInfo,
   TcrInstanceToken,
   DeleteRepositoryRequest,
   CreateInternalEndpointDnsResponse,
   CreateTagRetentionExecutionRequest,
   ReplicationLog,
+  DescribeInstanceAllNamespacesResponse,
   CreateApplicationTriggerPersonalResponse,
-  ManageInternalEndpointRequest,
+  Limit,
   BatchDeleteImagePersonalResponse,
   DeleteInternalEndpointDnsResponse,
   DeleteRepositoryPersonalRequest,
@@ -307,6 +343,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeImagePersonalResponse) => void
   ): Promise<DescribeImagePersonalResponse> {
     return this.request("DescribeImagePersonal", req, cb)
+  }
+
+  /**
+   * 删除从实例
+   */
+  async DeleteReplicationInstance(
+    req: DeleteReplicationInstanceRequest,
+    cb?: (error: string, rep: DeleteReplicationInstanceResponse) => void
+  ): Promise<DeleteReplicationInstanceResponse> {
+    return this.request("DeleteReplicationInstance", req, cb)
   }
 
   /**
@@ -380,6 +426,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建自定义域名
+   */
+  async CreateInstanceCustomizedDomain(
+    req: CreateInstanceCustomizedDomainRequest,
+    cb?: (error: string, rep: CreateInstanceCustomizedDomainResponse) => void
+  ): Promise<CreateInstanceCustomizedDomainResponse> {
+    return this.request("CreateInstanceCustomizedDomain", req, cb)
+  }
+
+  /**
    *  删除镜像不可变规则
    */
   async DeleteImmutableTagRules(
@@ -397,6 +453,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteImagePersonalResponse) => void
   ): Promise<DeleteImagePersonalResponse> {
     return this.request("DeleteImagePersonal", req, cb)
+  }
+
+  /**
+   * 创建镜像加速服务
+   */
+  async CreateImageAccelerationService(
+    req: CreateImageAccelerationServiceRequest,
+    cb?: (error: string, rep: CreateImageAccelerationServiceResponse) => void
+  ): Promise<CreateImageAccelerationServiceResponse> {
+    return this.request("CreateImageAccelerationService", req, cb)
   }
 
   /**
@@ -440,13 +506,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于获取个人版仓库中自动清理策略
+   * 删除镜像加速服务
    */
-  async DescribeImageLifecyclePersonal(
-    req: DescribeImageLifecyclePersonalRequest,
-    cb?: (error: string, rep: DescribeImageLifecyclePersonalResponse) => void
-  ): Promise<DescribeImageLifecyclePersonalResponse> {
-    return this.request("DescribeImageLifecyclePersonal", req, cb)
+  async DeleteImageAccelerateService(
+    req: DeleteImageAccelerateServiceRequest,
+    cb?: (error: string, rep: DeleteImageAccelerateServiceResponse) => void
+  ): Promise<DeleteImageAccelerateServiceResponse> {
+    return this.request("DeleteImageAccelerateService", req, cb)
   }
 
   /**
@@ -570,6 +636,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询全部实例信息
+   */
+  async DescribeInstanceAll(
+    req: DescribeInstanceAllRequest,
+    cb?: (error: string, rep: DescribeInstanceAllResponse) => void
+  ): Promise<DescribeInstanceAllResponse> {
+    return this.request("DescribeInstanceAll", req, cb)
+  }
+
+  /**
    * 查询版本保留执行记录
    */
   async DescribeTagRetentionExecution(
@@ -580,13 +656,33 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于个人版镜像仓库中删除
+   * 删除自定义域名
    */
-  async DeleteRepositoryPersonal(
-    req: DeleteRepositoryPersonalRequest,
-    cb?: (error: string, rep: DeleteRepositoryPersonalResponse) => void
-  ): Promise<DeleteRepositoryPersonalResponse> {
-    return this.request("DeleteRepositoryPersonal", req, cb)
+  async DeleteInstanceCustomizedDomain(
+    req: DeleteInstanceCustomizedDomainRequest,
+    cb?: (error: string, rep: DeleteInstanceCustomizedDomainResponse) => void
+  ): Promise<DeleteInstanceCustomizedDomainResponse> {
+    return this.request("DeleteInstanceCustomizedDomain", req, cb)
+  }
+
+  /**
+   * GC 最近10条历史
+   */
+  async DescribeGCJobs(
+    req: DescribeGCJobsRequest,
+    cb?: (error: string, rep: DescribeGCJobsResponse) => void
+  ): Promise<DescribeGCJobsResponse> {
+    return this.request("DescribeGCJobs", req, cb)
+  }
+
+  /**
+   * 查询镜像加速服务状态
+   */
+  async DescribeImageAccelerateService(
+    req: DescribeImageAccelerateServiceRequest,
+    cb?: (error: string, rep: DescribeImageAccelerateServiceResponse) => void
+  ): Promise<DescribeImageAccelerateServiceResponse> {
+    return this.request("DescribeImageAccelerateService", req, cb)
   }
 
   /**
@@ -640,6 +736,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询所有有实例命名空间列表
+   */
+  async DescribeInstanceAllNamespaces(
+    req?: DescribeInstanceAllNamespacesRequest,
+    cb?: (error: string, rep: DescribeInstanceAllNamespacesResponse) => void
+  ): Promise<DescribeInstanceAllNamespacesResponse> {
+    return this.request("DescribeInstanceAllNamespaces", req, cb)
+  }
+
+  /**
    * 查询个人版仓库信息
    */
   async DescribeRepositoryPersonal(
@@ -667,6 +773,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateInstanceResponse) => void
   ): Promise<CreateInstanceResponse> {
     return this.request("CreateInstance", req, cb)
+  }
+
+  /**
+   * 用于在TCR中获取可用区域
+   */
+  async DescribeRegions(
+    req?: DescribeRegionsRequest,
+    cb?: (error: string, rep: DescribeRegionsResponse) => void
+  ): Promise<DescribeRegionsResponse> {
+    return this.request("DescribeRegions", req, cb)
   }
 
   /**
@@ -750,6 +866,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 用于获取个人版仓库中自动清理策略
+   */
+  async DescribeImageLifecyclePersonal(
+    req: DescribeImageLifecyclePersonalRequest,
+    cb?: (error: string, rep: DescribeImageLifecyclePersonalResponse) => void
+  ): Promise<DescribeImageLifecyclePersonalResponse> {
+    return this.request("DescribeImageLifecyclePersonal", req, cb)
+  }
+
+  /**
    * 用于在个人版镜像仓库中，获取满足输入搜索条件的用户镜像仓库
    */
   async DescribeRepositoryFilterPersonal(
@@ -767,6 +893,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateUserPersonalResponse) => void
   ): Promise<CreateUserPersonalResponse> {
     return this.request("CreateUserPersonal", req, cb)
+  }
+
+  /**
+   * 查询实例自定义域名列表
+   */
+  async DescribeInstanceCustomizedDomain(
+    req: DescribeInstanceCustomizedDomainRequest,
+    cb?: (error: string, rep: DescribeInstanceCustomizedDomainResponse) => void
+  ): Promise<DescribeInstanceCustomizedDomainResponse> {
+    return this.request("DescribeInstanceCustomizedDomain", req, cb)
   }
 
   /**
@@ -797,6 +933,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateSecurityPolicyResponse) => void
   ): Promise<CreateSecurityPolicyResponse> {
     return this.request("CreateSecurityPolicy", req, cb)
+  }
+
+  /**
+   * 创建镜像签名策略
+   */
+  async CreateSignaturePolicy(
+    req: CreateSignaturePolicyRequest,
+    cb?: (error: string, rep: CreateSignaturePolicyResponse) => void
+  ): Promise<CreateSignaturePolicyResponse> {
+    return this.request("CreateSignaturePolicy", req, cb)
   }
 
   /**
@@ -847,6 +993,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateImmutableTagRulesResponse) => void
   ): Promise<CreateImmutableTagRulesResponse> {
     return this.request("CreateImmutableTagRules", req, cb)
+  }
+
+  /**
+   * 用于企业版批量删除Repository Tag
+   */
+  async DeleteRepositoryTags(
+    req: DeleteRepositoryTagsRequest,
+    cb?: (error: string, rep: DeleteRepositoryTagsResponse) => void
+  ): Promise<DeleteRepositoryTagsResponse> {
+    return this.request("DeleteRepositoryTags", req, cb)
   }
 
   /**
@@ -960,6 +1116,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建实例公网访问白名单策略
+   */
+  async CreateSecurityPolicies(
+    req: CreateSecurityPoliciesRequest,
+    cb?: (error: string, rep: CreateSecurityPoliciesResponse) => void
+  ): Promise<CreateSecurityPoliciesResponse> {
+    return this.request("CreateSecurityPolicies", req, cb)
+  }
+
+  /**
+   * 为一个镜像版本创建签名
+   */
+  async CreateSignature(
+    req: CreateSignatureRequest,
+    cb?: (error: string, rep: CreateSignatureResponse) => void
+  ): Promise<CreateSignatureResponse> {
+    return this.request("CreateSignature", req, cb)
+  }
+
+  /**
    * 删除tcr内网私有域名解析
    */
   async DeleteInternalEndpointDns(
@@ -1040,6 +1216,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除命名空间加签策略
+   */
+  async DeleteSignaturePolicy(
+    req: DeleteSignaturePolicyRequest,
+    cb?: (error: string, rep: DeleteSignaturePolicyResponse) => void
+  ): Promise<DeleteSignaturePolicyResponse> {
+    return this.request("DeleteSignaturePolicy", req, cb)
+  }
+
+  /**
    * 查询实例信息
    */
   async DescribeInstances(
@@ -1047,6 +1233,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeInstancesResponse) => void
   ): Promise<DescribeInstancesResponse> {
     return this.request("DescribeInstances", req, cb)
+  }
+
+  /**
+   * 用于个人版镜像仓库中删除
+   */
+  async DeleteRepositoryPersonal(
+    req: DeleteRepositoryPersonalRequest,
+    cb?: (error: string, rep: DeleteRepositoryPersonalResponse) => void
+  ): Promise<DeleteRepositoryPersonalResponse> {
+    return this.request("DeleteRepositoryPersonal", req, cb)
   }
 
   /**
@@ -1090,13 +1286,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询实例内网访问VPC链接
+   * 管理实例内网访问VPC链接
    */
-  async DescribeInternalEndpoints(
-    req: DescribeInternalEndpointsRequest,
-    cb?: (error: string, rep: DescribeInternalEndpointsResponse) => void
-  ): Promise<DescribeInternalEndpointsResponse> {
-    return this.request("DescribeInternalEndpoints", req, cb)
+  async ManageInternalEndpoint(
+    req: ManageInternalEndpointRequest,
+    cb?: (error: string, rep: ManageInternalEndpointResponse) => void
+  ): Promise<ManageInternalEndpointResponse> {
+    return this.request("ManageInternalEndpoint", req, cb)
   }
 
   /**
@@ -1160,13 +1356,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 管理实例内网访问VPC链接
+   * 查询实例内网访问VPC链接
    */
-  async ManageInternalEndpoint(
-    req: ManageInternalEndpointRequest,
-    cb?: (error: string, rep: ManageInternalEndpointResponse) => void
-  ): Promise<ManageInternalEndpointResponse> {
-    return this.request("ManageInternalEndpoint", req, cb)
+  async DescribeInternalEndpoints(
+    req: DescribeInternalEndpointsRequest,
+    cb?: (error: string, rep: DescribeInternalEndpointsResponse) => void
+  ): Promise<DescribeInternalEndpointsResponse> {
+    return this.request("DescribeInternalEndpoints", req, cb)
   }
 
   /**

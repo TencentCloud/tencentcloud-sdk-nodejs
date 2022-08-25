@@ -3089,6 +3089,26 @@ export interface ModifyVodDomainAccelerateConfigRequest {
 }
 
 /**
+ * 鉴别涉及令人不适宜的信息的控制参数。
+ */
+export interface PoliticalConfigureInfoForUpdate {
+  /**
+   * 画面鉴别涉及令人不适宜的信息的控制参数。
+   */
+  ImgReviewInfo?: PoliticalImgReviewTemplateInfoForUpdate
+
+  /**
+   * 语音鉴别涉及令人不适宜的信息的控制参数。
+   */
+  AsrReviewInfo?: PoliticalAsrReviewTemplateInfoForUpdate
+
+  /**
+   * 文本鉴别涉及令人不适宜的信息的控制参数。
+   */
+  OcrReviewInfo?: PoliticalOcrReviewTemplateInfoForUpdate
+}
+
+/**
  * 对视频转自适应码流任务结果类型
  */
 export interface MediaProcessTaskAdaptiveDynamicStreamingResult {
@@ -6893,41 +6913,24 @@ export interface EditMediaVideoStream {
 }
 
 /**
- * 图片处理模板， 最多支持三次操作。例如：裁剪-缩略-裁剪。
+ * 视频拆条输出。
  */
-export interface ImageProcessingTemplate {
+export interface AiRecognitionTaskSegmentResultOutput {
   /**
-   * 图片处理模板唯一标识。
-   */
-  Definition: number
-
-  /**
-      * 模板类型，取值范围：
-<li>Preset：系统预置模板；</li>
-<li>Custom：用户自定义模板。</li>
+      * 视频拆条片段列表。
+<font color=red>注意</font> ：该列表最多仅展示前 100 个元素。如希望获得完整结果，请从 SegmentSetFileUrl 对应的文件中获取。
       */
-  Type: string
+  SegmentSet: Array<AiRecognitionTaskSegmentSegmentItem>
 
   /**
-   * 图片处理模板名称。
+   * 视频拆条片段列表文件 URL。文件的内容为 JSON，数据结构与 SegmentSet 字段一致。 （文件不会永久存储，到达SegmentSetFileUrlExpireTime 时间点后文件将被删除）。
    */
-  Name: string
+  SegmentSetFileUrl: string
 
   /**
-   * 模板描述信息。
+   * 视频拆条片段列表文件 URL 失效时间，使用  [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
    */
-  Comment: string
-
-  /**
-      * 图片处理操作数组，操作将以数组顺序执行。
-<li>长度限制：3。</li>
-      */
-  Operations: Array<ImageOperation>
-
-  /**
-   * 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
-   */
-  CreateTime: string
+  SegmentSetFileUrlExpireTime: string
 }
 
 /**
@@ -7618,31 +7621,6 @@ export interface AiRecognitionTaskHeadTailResultOutput {
 }
 
 /**
- * 对视频转自适应码流的输入参数类型
- */
-export interface AdaptiveDynamicStreamingTaskInput {
-  /**
-   * 转自适应码流模板 ID。
-   */
-  Definition: number
-
-  /**
-   * 水印列表，支持多张图片或文字水印，最大可支持 10 张。
-   */
-  WatermarkSet?: Array<WatermarkInput>
-
-  /**
-   * 溯源水印。
-   */
-  TraceWatermark?: TraceWatermarkInput
-
-  /**
-   * 字幕列表，元素为字幕 ID，支持多个字幕，最大可支持16个。
-   */
-  SubtitleSet?: Array<string>
-}
-
-/**
  * ModifyImageSpriteTemplate返回参数结构体
  */
 export interface ModifyImageSpriteTemplateResponse {
@@ -7827,6 +7805,16 @@ FINISH：已完成。
 <li>Rejected：音视频审核未通过。</li>
       */
   PublishResult: string
+}
+
+/**
+ * DescribeDrmKeyProviderInfo请求参数结构体
+ */
+export interface DescribeDrmKeyProviderInfoRequest {
+  /**
+   * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+   */
+  SubAppId?: number
 }
 
 /**
@@ -9626,24 +9614,41 @@ export interface AiRecognitionTaskOcrFullTextSegmentTextItem {
 }
 
 /**
- * 视频拆条输出。
+ * 图片处理模板， 最多支持三次操作。例如：裁剪-缩略-裁剪。
  */
-export interface AiRecognitionTaskSegmentResultOutput {
+export interface ImageProcessingTemplate {
   /**
-      * 视频拆条片段列表。
-<font color=red>注意</font> ：该列表最多仅展示前 100 个元素。如希望获得完整结果，请从 SegmentSetFileUrl 对应的文件中获取。
+   * 图片处理模板唯一标识。
+   */
+  Definition: number
+
+  /**
+      * 模板类型，取值范围：
+<li>Preset：系统预置模板；</li>
+<li>Custom：用户自定义模板。</li>
       */
-  SegmentSet: Array<AiRecognitionTaskSegmentSegmentItem>
+  Type: string
 
   /**
-   * 视频拆条片段列表文件 URL。文件的内容为 JSON，数据结构与 SegmentSet 字段一致。 （文件不会永久存储，到达SegmentSetFileUrlExpireTime 时间点后文件将被删除）。
+   * 图片处理模板名称。
    */
-  SegmentSetFileUrl: string
+  Name: string
 
   /**
-   * 视频拆条片段列表文件 URL 失效时间，使用  [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   * 模板描述信息。
    */
-  SegmentSetFileUrlExpireTime: string
+  Comment: string
+
+  /**
+      * 图片处理操作数组，操作将以数组顺序执行。
+<li>长度限制：3。</li>
+      */
+  Operations: Array<ImageOperation>
+
+  /**
+   * 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   */
+  CreateTime: string
 }
 
 /**
@@ -11803,6 +11808,22 @@ export interface DeleteVodDomainRequest {
 }
 
 /**
+ * DescribeDrmKeyProviderInfo返回参数结构体
+ */
+export interface DescribeDrmKeyProviderInfoResponse {
+  /**
+      * 华曦达（SDMC）相关的 DRM 密钥提供商信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SDMCInfo: SDMCDrmKeyProviderInfo
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateAIRecognitionTemplate请求参数结构体
  */
 export interface CreateAIRecognitionTemplateRequest {
@@ -11974,6 +11995,31 @@ export interface AiReviewPornTaskOutput {
    * 涉及令人反感的信息的嫌疑的视频片段列表文件 URL 失效时间，使用  [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
    */
   SegmentSetFileUrlExpireTime: string
+}
+
+/**
+ * 华曦达（SDMC）相关的 DRM 密钥提供商信息。
+ */
+export interface SDMCDrmKeyProviderInfo {
+  /**
+   * 华曦达分配的用户 ID。最大长度为128个字符。
+   */
+  Uid: string
+
+  /**
+   * 华曦达分配的用户密钥 ID。最大长度为128个字符。
+   */
+  SecretId: string
+
+  /**
+   * 华曦达分配的用户密钥内容。最大长度为128个字符。
+   */
+  SecretKey: string
+
+  /**
+   * 华曦达分配的 FairPlay 证书地址。该地址需使用 HTTPS 协议，最大长度为1024个字符。
+   */
+  FairPlayCertificateUrl: string
 }
 
 /**
@@ -12730,25 +12776,28 @@ export interface DescribeContentReviewTemplatesRequest {
 }
 
 /**
- * 单个图片处理操作。
+ * 对视频转自适应码流的输入参数类型
  */
-export interface ImageOperation {
+export interface AdaptiveDynamicStreamingTaskInput {
   /**
-      * 图片处理类型。可选类型有：
-<li>Scale : 图片缩略处理。</li>
-<li>CenterCut : 图片裁剪处理。</li>
-      */
-  Type: string
+   * 转自适应码流模板 ID。
+   */
+  Definition: number
 
   /**
-   * 图片缩略处理，仅当 Type 为 Scale 时有效。
+   * 水印列表，支持多张图片或文字水印，最大可支持 10 张。
    */
-  Scale?: ImageScale
+  WatermarkSet?: Array<WatermarkInput>
 
   /**
-   * 图片裁剪处理，仅当 Type 为 CenterCut 时有效。
+   * 溯源水印。
    */
-  CenterCut?: ImageCenterCut
+  TraceWatermark?: TraceWatermarkInput
+
+  /**
+   * 字幕列表，元素为字幕 ID，支持多个字幕，最大可支持16个。
+   */
+  SubtitleSet?: Array<string>
 }
 
 /**
@@ -13742,6 +13791,21 @@ export interface MediaVideoStreamItem {
 }
 
 /**
+ * SetDrmKeyProviderInfo请求参数结构体
+ */
+export interface SetDrmKeyProviderInfoRequest {
+  /**
+   * 华曦达（SDMC）相关的 DRM 密钥提供商信息。
+   */
+  SDMCInfo?: SDMCDrmKeyProviderInfo
+
+  /**
+   * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+   */
+  SubAppId?: number
+}
+
+/**
  * 指定时间点截图模板详情
  */
 export interface SnapshotByTimeOffsetTemplate {
@@ -14679,23 +14743,25 @@ export interface UserDefineAsrTextReviewTemplateInfoForUpdate {
 }
 
 /**
- * 鉴别涉及令人不适宜的信息的控制参数。
+ * 单个图片处理操作。
  */
-export interface PoliticalConfigureInfoForUpdate {
+export interface ImageOperation {
   /**
-   * 画面鉴别涉及令人不适宜的信息的控制参数。
-   */
-  ImgReviewInfo?: PoliticalImgReviewTemplateInfoForUpdate
+      * 图片处理类型。可选类型有：
+<li>Scale : 图片缩略处理。</li>
+<li>CenterCut : 图片裁剪处理。</li>
+      */
+  Type: string
 
   /**
-   * 语音鉴别涉及令人不适宜的信息的控制参数。
+   * 图片缩略处理，仅当 Type 为 Scale 时有效。
    */
-  AsrReviewInfo?: PoliticalAsrReviewTemplateInfoForUpdate
+  Scale?: ImageScale
 
   /**
-   * 文本鉴别涉及令人不适宜的信息的控制参数。
+   * 图片裁剪处理，仅当 Type 为 CenterCut 时有效。
    */
-  OcrReviewInfo?: PoliticalOcrReviewTemplateInfoForUpdate
+  CenterCut?: ImageCenterCut
 }
 
 /**
@@ -15608,6 +15674,19 @@ export interface SearchMediaRequest {
 <li> DEEP_ARCHIVE：深度归档存储。</li>
       */
   StorageClasses?: Array<string>
+
+  /**
+      * TRTC 应用 ID 集合。匹配集合中的任意元素。
+<li>数组长度限制：10。</li>
+      */
+  TrtcSdkAppIds?: Array<number>
+
+  /**
+      * TRTC 房间 ID 集合。匹配集合中的任意元素。
+<li>单个房间 ID 长度限制：64个字符；</li>
+<li>数组长度限制：10。</li>
+      */
+  TrtcRoomIds?: Array<string>
 
   /**
       * （不推荐：应使用 Names、NamePrefixes 或 Descriptions 替代）
@@ -16680,6 +16759,16 @@ export interface AiAnalysisTaskCoverInput {
    * 视频智能封面模板 ID。
    */
   Definition: number
+}
+
+/**
+ * SetDrmKeyProviderInfo返回参数结构体
+ */
+export interface SetDrmKeyProviderInfoResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

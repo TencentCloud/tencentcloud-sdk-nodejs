@@ -64,16 +64,28 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBinlogSaveDays", req, cb);
     }
     /**
-     * 获取指定集群的备份配置信息，包括全量备份时间段，备份文件保留时间
+     * 本接口（DescribeInstanceSpecs）用于查询实例规格
      */
-    async DescribeBackupConfig(req, cb) {
-        return this.request("DescribeBackupConfig", req, cb);
+    async DescribeInstanceSpecs(req, cb) {
+        return this.request("DescribeInstanceSpecs", req, cb);
+    }
+    /**
+     * 增加从可用区
+     */
+    async AddClusterSlaveZone(req, cb) {
+        return this.request("AddClusterSlaveZone", req, cb);
     }
     /**
      * 查询用户指定产品下的所有参数模板信息
      */
     async DescribeParamTemplates(req, cb) {
         return this.request("DescribeParamTemplates", req, cb);
+    }
+    /**
+     * SetRenewFlag设置实例的自动续费功能
+     */
+    async SetRenewFlag(req, cb) {
+        return this.request("SetRenewFlag", req, cb);
     }
     /**
      * 本接口（DescribeClusterInstanceGrps）用于查询实例组
@@ -148,10 +160,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyMaintainPeriodConfig", req, cb);
     }
     /**
+     * 修改从可用区
+     */
+    async ModifyClusterSlaveZone(req, cb) {
+        return this.request("ModifyClusterSlaveZone", req, cb);
+    }
+    /**
      * 修改账号参数
      */
     async ModifyAccountParams(req, cb) {
         return this.request("ModifyAccountParams", req, cb);
+    }
+    /**
+     * 本接口（DescribeClusterParams）用于查询集群参数
+     */
+    async DescribeClusterParams(req, cb) {
+        return this.request("DescribeClusterParams", req, cb);
     }
     /**
      * 下线实例
@@ -202,10 +226,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AssociateSecurityGroups", req, cb);
     }
     /**
-     * SetRenewFlag设置实例的自动续费功能
+     * 删除从可用区
      */
-    async SetRenewFlag(req, cb) {
-        return this.request("SetRenewFlag", req, cb);
+    async RemoveClusterSlaveZone(req, cb) {
+        return this.request("RemoveClusterSlaveZone", req, cb);
     }
     /**
      * 显示集群详情
@@ -226,10 +250,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("IsolateInstance", req, cb);
     }
     /**
-     * 本接口（DescribeInstanceSpecs）用于查询实例规格
+     * 获取指定集群的备份配置信息，包括全量备份时间段，备份文件保留时间
      */
-    async DescribeInstanceSpecs(req, cb) {
-        return this.request("DescribeInstanceSpecs", req, cb);
+    async DescribeBackupConfig(req, cb) {
+        return this.request("DescribeBackupConfig", req, cb);
     }
     /**
      * 此接口（DescribeInstanceSlowQueries）用于查询实例慢查询日志。
@@ -314,6 +338,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ExportInstanceSlowQueries(req, cb) {
         return this.request("ExportInstanceSlowQueries", req, cb);
+    }
+    /**
+     * 切换到从可用区
+     */
+    async SwitchClusterZone(req, cb) {
+        return this.request("SwitchClusterZone", req, cb);
     }
     /**
      * 安全组批量解绑云资源

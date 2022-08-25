@@ -468,9 +468,9 @@ it("vod.v20180717.DeleteAIAnalysisTemplate", async function () {
     }
 })
 
-it("vod.v20180717.DescribeMediaInfos", async function () {
+it("vod.v20180717.DescribeDrmKeyProviderInfo", async function () {
     try {
-       const data = await client.DescribeMediaInfos({})
+       const data = await client.DescribeDrmKeyProviderInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1038,6 +1038,16 @@ it("vod.v20180717.CreateWatermarkTemplate", async function () {
     }
 })
 
+it("vod.v20180717.SetDrmKeyProviderInfo", async function () {
+    try {
+       const data = await client.SetDrmKeyProviderInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vod.v20180717.DescribeAIRecognitionTemplates", async function () {
     try {
        const data = await client.DescribeAIRecognitionTemplates({})
@@ -1221,6 +1231,16 @@ it("vod.v20180717.WeChatMiniProgramPublish", async function () {
 it("vod.v20180717.SimpleHlsClip", async function () {
     try {
        const data = await client.SimpleHlsClip({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vod.v20180717.DescribeMediaInfos", async function () {
+    try {
+       const data = await client.DescribeMediaInfos({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

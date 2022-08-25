@@ -58,6 +58,16 @@ it("tcr.v20190924.DescribeImagePersonal", async function () {
     }
 })
 
+it("tcr.v20190924.DeleteReplicationInstance", async function () {
+    try {
+       const data = await client.DeleteReplicationInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcr.v20190924.CreateNamespace", async function () {
     try {
        const data = await client.CreateNamespace({})
@@ -128,6 +138,16 @@ it("tcr.v20190924.ManageImageLifecycleGlobalPersonal", async function () {
     }
 })
 
+it("tcr.v20190924.CreateInstanceCustomizedDomain", async function () {
+    try {
+       const data = await client.CreateInstanceCustomizedDomain({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcr.v20190924.DeleteImmutableTagRules", async function () {
     try {
        const data = await client.DeleteImmutableTagRules({})
@@ -141,6 +161,16 @@ it("tcr.v20190924.DeleteImmutableTagRules", async function () {
 it("tcr.v20190924.DeleteImagePersonal", async function () {
     try {
        const data = await client.DeleteImagePersonal({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcr.v20190924.CreateImageAccelerationService", async function () {
+    try {
+       const data = await client.CreateImageAccelerationService({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -188,9 +218,9 @@ it("tcr.v20190924.DescribeReplicationInstanceCreateTasks", async function () {
     }
 })
 
-it("tcr.v20190924.DescribeImageLifecyclePersonal", async function () {
+it("tcr.v20190924.DeleteImageAccelerateService", async function () {
     try {
-       const data = await client.DescribeImageLifecyclePersonal({})
+       const data = await client.DeleteImageAccelerateService({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -318,6 +348,16 @@ it("tcr.v20190924.DescribeApplicationTriggerPersonal", async function () {
     }
 })
 
+it("tcr.v20190924.DescribeInstanceAll", async function () {
+    try {
+       const data = await client.DescribeInstanceAll({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcr.v20190924.DescribeTagRetentionExecution", async function () {
     try {
        const data = await client.DescribeTagRetentionExecution({})
@@ -328,9 +368,29 @@ it("tcr.v20190924.DescribeTagRetentionExecution", async function () {
     }
 })
 
-it("tcr.v20190924.DeleteRepositoryPersonal", async function () {
+it("tcr.v20190924.DeleteInstanceCustomizedDomain", async function () {
     try {
-       const data = await client.DeleteRepositoryPersonal({})
+       const data = await client.DeleteInstanceCustomizedDomain({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcr.v20190924.DescribeGCJobs", async function () {
+    try {
+       const data = await client.DescribeGCJobs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcr.v20190924.DescribeImageAccelerateService", async function () {
+    try {
+       const data = await client.DescribeImageAccelerateService({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -388,6 +448,16 @@ it("tcr.v20190924.DescribeNamespacePersonal", async function () {
     }
 })
 
+it("tcr.v20190924.DescribeInstanceAllNamespaces", async function () {
+    try {
+       const data = await client.DescribeInstanceAllNamespaces({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcr.v20190924.DescribeRepositoryPersonal", async function () {
     try {
        const data = await client.DescribeRepositoryPersonal({})
@@ -411,6 +481,16 @@ it("tcr.v20190924.RenewInstance", async function () {
 it("tcr.v20190924.CreateInstance", async function () {
     try {
        const data = await client.CreateInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcr.v20190924.DescribeRegions", async function () {
+    try {
+       const data = await client.DescribeRegions({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -498,6 +578,16 @@ it("tcr.v20190924.DeleteMultipleSecurityPolicy", async function () {
     }
 })
 
+it("tcr.v20190924.DescribeImageLifecyclePersonal", async function () {
+    try {
+       const data = await client.DescribeImageLifecyclePersonal({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcr.v20190924.DescribeRepositoryFilterPersonal", async function () {
     try {
        const data = await client.DescribeRepositoryFilterPersonal({})
@@ -511,6 +601,16 @@ it("tcr.v20190924.DescribeRepositoryFilterPersonal", async function () {
 it("tcr.v20190924.CreateUserPersonal", async function () {
     try {
        const data = await client.CreateUserPersonal({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcr.v20190924.DescribeInstanceCustomizedDomain", async function () {
+    try {
+       const data = await client.DescribeInstanceCustomizedDomain({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -541,6 +641,16 @@ it("tcr.v20190924.DescribeImmutableTagRules", async function () {
 it("tcr.v20190924.CreateSecurityPolicy", async function () {
     try {
        const data = await client.CreateSecurityPolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcr.v20190924.CreateSignaturePolicy", async function () {
+    try {
+       const data = await client.CreateSignaturePolicy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -591,6 +701,16 @@ it("tcr.v20190924.DescribeUserQuotaPersonal", async function () {
 it("tcr.v20190924.CreateImmutableTagRules", async function () {
     try {
        const data = await client.CreateImmutableTagRules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcr.v20190924.DeleteRepositoryTags", async function () {
+    try {
+       const data = await client.DeleteRepositoryTags({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -708,6 +828,26 @@ it("tcr.v20190924.DescribeNamespaces", async function () {
     }
 })
 
+it("tcr.v20190924.CreateSecurityPolicies", async function () {
+    try {
+       const data = await client.CreateSecurityPolicies({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcr.v20190924.CreateSignature", async function () {
+    try {
+       const data = await client.CreateSignature({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcr.v20190924.DeleteInternalEndpointDns", async function () {
     try {
        const data = await client.DeleteInternalEndpointDns({})
@@ -788,9 +928,29 @@ it("tcr.v20190924.DeleteNamespace", async function () {
     }
 })
 
+it("tcr.v20190924.DeleteSignaturePolicy", async function () {
+    try {
+       const data = await client.DeleteSignaturePolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcr.v20190924.DescribeInstances", async function () {
     try {
        const data = await client.DescribeInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcr.v20190924.DeleteRepositoryPersonal", async function () {
+    try {
+       const data = await client.DeleteRepositoryPersonal({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -838,9 +998,9 @@ it("tcr.v20190924.DescribeWebhookTrigger", async function () {
     }
 })
 
-it("tcr.v20190924.DescribeInternalEndpoints", async function () {
+it("tcr.v20190924.ManageInternalEndpoint", async function () {
     try {
-       const data = await client.DescribeInternalEndpoints({})
+       const data = await client.ManageInternalEndpoint({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -908,9 +1068,9 @@ it("tcr.v20190924.DescribeExternalEndpointStatus", async function () {
     }
 })
 
-it("tcr.v20190924.ManageInternalEndpoint", async function () {
+it("tcr.v20190924.DescribeInternalEndpoints", async function () {
     try {
-       const data = await client.ManageInternalEndpoint({})
+       const data = await client.DescribeInternalEndpoints({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

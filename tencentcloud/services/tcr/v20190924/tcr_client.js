@@ -52,6 +52,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeImagePersonal", req, cb);
     }
     /**
+     * 删除从实例
+     */
+    async DeleteReplicationInstance(req, cb) {
+        return this.request("DeleteReplicationInstance", req, cb);
+    }
+    /**
      * 用于在企业版中创建命名空间
      */
     async CreateNamespace(req, cb) {
@@ -94,6 +100,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ManageImageLifecycleGlobalPersonal", req, cb);
     }
     /**
+     * 创建自定义域名
+     */
+    async CreateInstanceCustomizedDomain(req, cb) {
+        return this.request("CreateInstanceCustomizedDomain", req, cb);
+    }
+    /**
      *  删除镜像不可变规则
      */
     async DeleteImmutableTagRules(req, cb) {
@@ -104,6 +116,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteImagePersonal(req, cb) {
         return this.request("DeleteImagePersonal", req, cb);
+    }
+    /**
+     * 创建镜像加速服务
+     */
+    async CreateImageAccelerationService(req, cb) {
+        return this.request("CreateImageAccelerationService", req, cb);
     }
     /**
      * 更新触发器
@@ -130,10 +148,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeReplicationInstanceCreateTasks", req, cb);
     }
     /**
-     * 用于获取个人版仓库中自动清理策略
+     * 删除镜像加速服务
      */
-    async DescribeImageLifecyclePersonal(req, cb) {
-        return this.request("DescribeImageLifecyclePersonal", req, cb);
+    async DeleteImageAccelerateService(req, cb) {
+        return this.request("DeleteImageAccelerateService", req, cb);
     }
     /**
      * 查询个人收藏仓库
@@ -208,16 +226,34 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeApplicationTriggerPersonal", req, cb);
     }
     /**
+     * 查询全部实例信息
+     */
+    async DescribeInstanceAll(req, cb) {
+        return this.request("DescribeInstanceAll", req, cb);
+    }
+    /**
      * 查询版本保留执行记录
      */
     async DescribeTagRetentionExecution(req, cb) {
         return this.request("DescribeTagRetentionExecution", req, cb);
     }
     /**
-     * 用于个人版镜像仓库中删除
+     * 删除自定义域名
      */
-    async DeleteRepositoryPersonal(req, cb) {
-        return this.request("DeleteRepositoryPersonal", req, cb);
+    async DeleteInstanceCustomizedDomain(req, cb) {
+        return this.request("DeleteInstanceCustomizedDomain", req, cb);
+    }
+    /**
+     * GC 最近10条历史
+     */
+    async DescribeGCJobs(req, cb) {
+        return this.request("DescribeGCJobs", req, cb);
+    }
+    /**
+     * 查询镜像加速服务状态
+     */
+    async DescribeImageAccelerateService(req, cb) {
+        return this.request("DescribeImageAccelerateService", req, cb);
     }
     /**
      * 用于在个人版镜像仓库中更新容器镜像描述
@@ -250,6 +286,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeNamespacePersonal", req, cb);
     }
     /**
+     * 查询所有有实例命名空间列表
+     */
+    async DescribeInstanceAllNamespaces(req, cb) {
+        return this.request("DescribeInstanceAllNamespaces", req, cb);
+    }
+    /**
      * 查询个人版仓库信息
      */
     async DescribeRepositoryPersonal(req, cb) {
@@ -266,6 +308,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateInstance(req, cb) {
         return this.request("CreateInstance", req, cb);
+    }
+    /**
+     * 用于在TCR中获取可用区域
+     */
+    async DescribeRegions(req, cb) {
+        return this.request("DescribeRegions", req, cb);
     }
     /**
      * 查询实例公网访问白名单策略
@@ -316,6 +364,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteMultipleSecurityPolicy", req, cb);
     }
     /**
+     * 用于获取个人版仓库中自动清理策略
+     */
+    async DescribeImageLifecyclePersonal(req, cb) {
+        return this.request("DescribeImageLifecyclePersonal", req, cb);
+    }
+    /**
      * 用于在个人版镜像仓库中，获取满足输入搜索条件的用户镜像仓库
      */
     async DescribeRepositoryFilterPersonal(req, cb) {
@@ -326,6 +380,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateUserPersonal(req, cb) {
         return this.request("CreateUserPersonal", req, cb);
+    }
+    /**
+     * 查询实例自定义域名列表
+     */
+    async DescribeInstanceCustomizedDomain(req, cb) {
+        return this.request("DescribeInstanceCustomizedDomain", req, cb);
     }
     /**
      * 更新命名空间信息，当前仅支持修改命名空间访问级别
@@ -344,6 +404,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateSecurityPolicy(req, cb) {
         return this.request("CreateSecurityPolicy", req, cb);
+    }
+    /**
+     * 创建镜像签名策略
+     */
+    async CreateSignaturePolicy(req, cb) {
+        return this.request("CreateSignaturePolicy", req, cb);
     }
     /**
      * 删除镜像仓库企业版实例
@@ -374,6 +440,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateImmutableTagRules(req, cb) {
         return this.request("CreateImmutableTagRules", req, cb);
+    }
+    /**
+     * 用于企业版批量删除Repository Tag
+     */
+    async DeleteRepositoryTags(req, cb) {
+        return this.request("DeleteRepositoryTags", req, cb);
     }
     /**
      * 查询长期访问凭证信息
@@ -442,6 +514,18 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeNamespaces", req, cb);
     }
     /**
+     * 创建实例公网访问白名单策略
+     */
+    async CreateSecurityPolicies(req, cb) {
+        return this.request("CreateSecurityPolicies", req, cb);
+    }
+    /**
+     * 为一个镜像版本创建签名
+     */
+    async CreateSignature(req, cb) {
+        return this.request("CreateSignature", req, cb);
+    }
+    /**
      * 删除tcr内网私有域名解析
      */
     async DeleteInternalEndpointDns(req, cb) {
@@ -490,10 +574,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteNamespace", req, cb);
     }
     /**
+     * 删除命名空间加签策略
+     */
+    async DeleteSignaturePolicy(req, cb) {
+        return this.request("DeleteSignaturePolicy", req, cb);
+    }
+    /**
      * 查询实例信息
      */
     async DescribeInstances(req, cb) {
         return this.request("DescribeInstances", req, cb);
+    }
+    /**
+     * 用于个人版镜像仓库中删除
+     */
+    async DeleteRepositoryPersonal(req, cb) {
+        return this.request("DeleteRepositoryPersonal", req, cb);
     }
     /**
      * 用于查询应用更新触发器触发日志
@@ -520,10 +616,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeWebhookTrigger", req, cb);
     }
     /**
-     * 查询实例内网访问VPC链接
+     * 管理实例内网访问VPC链接
      */
-    async DescribeInternalEndpoints(req, cb) {
-        return this.request("DescribeInternalEndpoints", req, cb);
+    async ManageInternalEndpoint(req, cb) {
+        return this.request("ManageInternalEndpoint", req, cb);
     }
     /**
      * 查询实例当前状态以及过程信息
@@ -562,10 +658,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeExternalEndpointStatus", req, cb);
     }
     /**
-     * 管理实例内网访问VPC链接
+     * 查询实例内网访问VPC链接
      */
-    async ManageInternalEndpoint(req, cb) {
-        return this.request("ManageInternalEndpoint", req, cb);
+    async DescribeInternalEndpoints(req, cb) {
+        return this.request("DescribeInternalEndpoints", req, cb);
     }
     /**
      * 批量查询vpc是否已经添加私有域名解析

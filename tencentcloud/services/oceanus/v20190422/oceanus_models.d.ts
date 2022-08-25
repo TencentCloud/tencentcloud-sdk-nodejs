@@ -913,6 +913,15 @@ export interface DeleteJobsResponse {
     RequestId?: string;
 }
 /**
+ * DescribeTreeResources返回参数结构体
+ */
+export interface DescribeTreeResourcesResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * RunJobs返回参数结构体
  */
 export interface RunJobsResponse {
@@ -1822,6 +1831,15 @@ export interface DescribeResourceConfigsRequest {
       * 作业ID
       */
     JobId?: string;
+    /**
+      * 工作空间 SerialId
+      */
+    WorkSpaceId?: string;
+}
+/**
+ * DescribeTreeResources请求参数结构体
+ */
+export interface DescribeTreeResourcesRequest {
     /**
       * 工作空间 SerialId
       */

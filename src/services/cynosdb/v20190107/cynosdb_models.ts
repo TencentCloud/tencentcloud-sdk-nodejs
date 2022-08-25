@@ -16,6 +16,21 @@
  */
 
 /**
+ * RemoveClusterSlaveZone请求参数结构体
+ */
+export interface RemoveClusterSlaveZoneRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+
+  /**
+   * 从可用区
+   */
+  SlaveZone: string
+}
+
+/**
  * ModifyClusterName请求参数结构体
  */
 export interface ModifyClusterNameRequest {
@@ -156,14 +171,19 @@ export interface ModifyMaintainPeriodConfigRequest {
  */
 export interface DescribeRollbackTimeRangeResponse {
   /**
-   * 有效回归时间范围开始时间点
+   * 有效回归时间范围开始时间点（已废弃）
    */
   TimeRangeStart: string
 
   /**
-   * 有效回归时间范围结束时间点
+   * 有效回归时间范围结束时间点（已废弃）
    */
   TimeRangeEnd: string
+
+  /**
+   * 可回档时间范围
+   */
+  RollbackTimeRanges: Array<RollbackTimeRange>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -175,6 +195,21 @@ export interface DescribeRollbackTimeRangeResponse {
  * ModifyBackupName返回参数结构体
  */
 export interface ModifyBackupNameResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * SwitchClusterZone返回参数结构体
+ */
+export interface SwitchClusterZoneResponse {
+  /**
+   * 异步FlowId
+   */
+  FlowId: number
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -368,39 +403,44 @@ export interface ClusterInstanceDetail {
 }
 
 /**
- * 数据库账号信息
+ * AddClusterSlaveZone返回参数结构体
  */
-export interface Account {
+export interface AddClusterSlaveZoneResponse {
   /**
-   * 数据库账号名
+   * 异步FlowId
    */
-  AccountName: string
+  FlowId: number
 
   /**
-   * 数据库账号描述
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Description: string
-
-  /**
-   * 创建时间
-   */
-  CreateTime: string
-
-  /**
-   * 更新时间
-   */
-  UpdateTime: string
-
-  /**
-   * 主机
-   */
-  Host: string
+  RequestId?: string
 }
 
 /**
  * ModifyClusterName返回参数结构体
  */
 export interface ModifyClusterNameResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeClusterParams返回参数结构体
+ */
+export interface DescribeClusterParamsResponse {
+  /**
+   * 参数个数
+   */
+  TotalCount: number
+
+  /**
+   * 实例参数列表
+   */
+  Items: Array<ParamInfo>
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -679,18 +719,18 @@ export interface ActivateInstanceRequest {
 }
 
 /**
- * 回档表信息
+ * AddClusterSlaveZone请求参数结构体
  */
-export interface RollbackTableInfo {
+export interface AddClusterSlaveZoneRequest {
   /**
-   * 旧表名称
+   * 集群ID
    */
-  OldTable: string
+  ClusterId: string
 
   /**
-   * 新表名称
+   * 从可用区
    */
-  NewTable: string
+  SlaveZone: string
 }
 
 /**
@@ -933,6 +973,31 @@ export interface ExportInstanceSlowQueriesResponse {
 }
 
 /**
+ * SwitchClusterZone请求参数结构体
+ */
+export interface SwitchClusterZoneRequest {
+  /**
+   * 集群Id
+   */
+  ClusterId: string
+
+  /**
+   * 当前可用区
+   */
+  OldZone: string
+
+  /**
+   * 要切换到的可用区
+   */
+  NewZone: string
+
+  /**
+   * 维护期间执行-yes,立即执行-no
+   */
+  IsInMaintainPeriod?: string
+}
+
+/**
  * DescribeDBSecurityGroups请求参数结构体
  */
 export interface DescribeDBSecurityGroupsRequest {
@@ -1030,6 +1095,21 @@ export interface DescribeProjectSecurityGroupsResponse {
    * 安全组详情
    */
   Groups: Array<SecurityGroup>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * RemoveClusterSlaveZone返回参数结构体
+ */
+export interface RemoveClusterSlaveZoneResponse {
+  /**
+   * 异步FlowId
+   */
+  FlowId: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1432,6 +1512,21 @@ export interface DbTable {
 }
 
 /**
+ * ModifyClusterSlaveZone返回参数结构体
+ */
+export interface ModifyClusterSlaveZoneResponse {
+  /**
+   * 异步FlowId
+   */
+  FlowId: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * GrantAccountPrivileges请求参数结构体
  */
 export interface GrantAccountPrivilegesRequest {
@@ -1457,25 +1552,33 @@ export interface GrantAccountPrivilegesRequest {
 }
 
 /**
- * IsolateCluster返回参数结构体
+ * Binlog描述
  */
-export interface IsolateClusterResponse {
+export interface BinlogItem {
   /**
-      * 任务流ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  FlowId: number
-
-  /**
-      * 退款订单号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DealNames: Array<string>
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * Binlog文件名称
    */
-  RequestId?: string
+  FileName: string
+
+  /**
+   * 文件大小，单位：字节
+   */
+  FileSize: number
+
+  /**
+   * 事务最早时间
+   */
+  StartTime: string
+
+  /**
+   * 事务最晚时间
+   */
+  FinishTime: string
+
+  /**
+   * Binlog文件ID
+   */
+  BinlogId: number
 }
 
 /**
@@ -1705,6 +1808,21 @@ cpu最大值，可选范围参考DescribeServerlessInstanceSpecs接口返回
 }
 
 /**
+ * 回档表信息
+ */
+export interface RollbackTableInfo {
+  /**
+   * 旧表名称
+   */
+  OldTable: string
+
+  /**
+   * 新表名称
+   */
+  NewTable: string
+}
+
+/**
  * DescribeClusters返回参数结构体
  */
 export interface DescribeClustersResponse {
@@ -1901,6 +2019,67 @@ export interface ParamTemplateListInfo {
 }
 
 /**
+ * 参数信息
+ */
+export interface ParamInfo {
+  /**
+   * 当前值
+   */
+  CurrentValue: string
+
+  /**
+   * 默认值
+   */
+  Default: string
+
+  /**
+      * 参数为enum/string/bool时，可选值列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EnumValue: Array<string>
+
+  /**
+   * 参数类型为float/integer时的最大值
+   */
+  Max: string
+
+  /**
+   * 参数类型为float/integer时的最小值
+   */
+  Min: string
+
+  /**
+   * 参数名称
+   */
+  ParamName: string
+
+  /**
+   * 是否需要重启生效
+   */
+  NeedReboot: number
+
+  /**
+   * 参数类型：integer/float/string/enum/bool
+   */
+  ParamType: string
+
+  /**
+   * 匹配类型，multiVal, regex在参数类型是string时使用
+   */
+  MatchType: string
+
+  /**
+   * 匹配目标值，当multiVal时，各个key用;分割
+   */
+  MatchValue: string
+
+  /**
+   * 参数描述
+   */
+  Description: string
+}
+
+/**
  * DescribeProjectSecurityGroups请求参数结构体
  */
 export interface DescribeProjectSecurityGroupsRequest {
@@ -1978,6 +2157,21 @@ export interface DescribeBackupDownloadUrlRequest {
    * 备份ID
    */
   BackupId: number
+}
+
+/**
+ * 可回档的时间范围
+ */
+export interface RollbackTimeRange {
+  /**
+   * 开始时间
+   */
+  TimeRangeStart: string
+
+  /**
+   * 结束时间
+   */
+  TimeRangeEnd: string
 }
 
 /**
@@ -2523,33 +2717,25 @@ pause
 }
 
 /**
- * Binlog描述
+ * IsolateCluster返回参数结构体
  */
-export interface BinlogItem {
+export interface IsolateClusterResponse {
   /**
-   * Binlog文件名称
-   */
-  FileName: string
+      * 任务流ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FlowId: number
 
   /**
-   * 文件大小，单位：字节
-   */
-  FileSize: number
+      * 退款订单号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DealNames: Array<string>
 
   /**
-   * 事务最早时间
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  StartTime: string
-
-  /**
-   * 事务最晚时间
-   */
-  FinishTime: string
-
-  /**
-   * Binlog文件ID
-   */
-  BinlogId: number
+  RequestId?: string
 }
 
 /**
@@ -2650,6 +2836,36 @@ export interface SetRenewFlagResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 数据库账号信息
+ */
+export interface Account {
+  /**
+   * 数据库账号名
+   */
+  AccountName: string
+
+  /**
+   * 数据库账号描述
+   */
+  Description: string
+
+  /**
+   * 创建时间
+   */
+  CreateTime: string
+
+  /**
+   * 更新时间
+   */
+  UpdateTime: string
+
+  /**
+   * 主机
+   */
+  Host: string
 }
 
 /**
@@ -2961,6 +3177,26 @@ export interface AddInstancesRequest {
    * 交易模式 0-下单并支付 1-下单
    */
   DealMode?: number
+}
+
+/**
+ * ModifyClusterSlaveZone请求参数结构体
+ */
+export interface ModifyClusterSlaveZoneRequest {
+  /**
+   * 集群Id
+   */
+  ClusterId: string
+
+  /**
+   * 旧从可用区
+   */
+  OldSlaveZone: string
+
+  /**
+   * 新从可用区
+   */
+  NewSlaveZone: string
 }
 
 /**
@@ -3532,6 +3768,16 @@ export interface TradePrice {
    * 计费价格单位
    */
   ChargeUnit: string
+}
+
+/**
+ * DescribeClusterParams请求参数结构体
+ */
+export interface DescribeClusterParamsRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
 }
 
 /**

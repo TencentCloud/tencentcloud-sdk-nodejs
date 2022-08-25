@@ -18,10 +18,14 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  DisableGlobalDomainRequest,
   RegionDetail,
   DestAddressInfo,
   DescribeUDPListenersRequest,
+  DescribeGlobalDomainsRequest,
   DeleteProxyGroupRequest,
+  OpenSecurityPolicyResponse,
+  ModifyGlobalDomainAttributeRequest,
   DescribeResourcesByTagRequest,
   DescribeListenerStatisticsRequest,
   DescribeProxyAndStatisticsListenersResponse,
@@ -36,6 +40,7 @@ import {
   TagResourceInfo,
   SetAuthenticationResponse,
   DescribeProxyGroupStatisticsResponse,
+  DisableGlobalDomainResponse,
   DescribeResourcesByTagResponse,
   ModifyGroupDomainConfigRequest,
   BandwidthPriceGradient,
@@ -60,6 +65,7 @@ import {
   ModifyRealServerNameRequest,
   ModifyGroupDomainConfigResponse,
   DeleteProxyGroupResponse,
+  CreateGlobalDomainDnsResponse,
   CreateDomainErrorPageInfoResponse,
   BindListenerRealServersRequest,
   DeleteDomainErrorPageInfoResponse,
@@ -80,7 +86,7 @@ import {
   ModifyCertificateAttributesResponse,
   DescribeSecurityPolicyDetailResponse,
   CreateHTTPListenerResponse,
-  ModifyUDPListenerAttributeResponse,
+  DeleteGlobalDomainDnsResponse,
   CreateProxyGroupRequest,
   RuleInfo,
   RealServerStatus,
@@ -93,42 +99,48 @@ import {
   DescribeRealServerStatisticsRequest,
   DeleteFirstLinkSessionRequest,
   BindRealServerInfo,
+  ModifyGlobalDomainAttributeResponse,
   DescribeProxyAndStatisticsListenersRequest,
   DescribeAccessRegionsResponse,
   DeleteListenersRequest,
   DescribeSecurityRulesRequest,
   DescribeDestRegionsResponse,
+  ProxyAccessInfo,
   DescribeDomainErrorPageInfoByIdsResponse,
   DescribeProxiesRequest,
   DescribeAccessRegionsByDestRegionResponse,
   ModifyProxyGroupAttributeResponse,
+  CreateGlobalDomainResponse,
   ListenerInfo,
   DescribeUDPListenersResponse,
   CreateUDPListenersRequest,
-  ModifyRuleAttributeRequest,
+  CreateGlobalDomainRequest,
   CreateSecurityPolicyResponse,
   TCPListener,
+  EnableGlobalDomainResponse,
   CreateSecurityRulesResponse,
   DescribeAccessRegionsRequest,
   CreateCertificateRequest,
-  DescribeCertificatesResponse,
+  CreateProxyGroupDomainResponse,
   DescribeCustomHeaderRequest,
   DescribeProxyGroupListResponse,
+  DescribeGlobalDomainDnsRequest,
   DescribeDomainErrorPageInfoRequest,
-  HTTPSListener,
+  Domain,
   BanAndRecoverProxyRequest,
   CloseSecurityPolicyRequest,
   ModifyCertificateAttributesRequest,
-  ModifyProxyConfigurationRequest,
+  ModifyGlobalDomainDnsRequest,
   CreateSecurityRulesRequest,
   DescribeCertificatesRequest,
   DescribeProxiesStatusRequest,
   ModifyTCPListenerAttributeRequest,
   DeleteSecurityPolicyResponse,
   CreateDomainResponse,
-  ModifyProxiesProjectResponse,
+  EnableGlobalDomainRequest,
+  ModifyGlobalDomainDnsResponse,
   ModifyDomainRequest,
-  ModifySecurityRuleRequest,
+  DeleteGlobalDomainDnsRequest,
   CreateCustomHeaderResponse,
   DescribeAccessRegionsByDestRegionRequest,
   RealServer,
@@ -137,7 +149,7 @@ import {
   CreateCustomHeaderRequest,
   ProxyGroupInfo,
   Capacity,
-  CreateProxyGroupDomainResponse,
+  DescribeCertificatesResponse,
   Certificate,
   DescribeDomainErrorPageInfoResponse,
   DestroyProxiesResponse,
@@ -152,6 +164,8 @@ import {
   RemoveRealServersRequest,
   CreateDomainRequest,
   CreateRuleRequest,
+  ModifyProxyConfigurationRequest,
+  CreateGlobalDomainDnsRequest,
   ProxySimpleInfo,
   DeleteSecurityPolicyRequest,
   HTTPListener,
@@ -165,6 +179,7 @@ import {
   SecurityPolicyRuleIn,
   DescribeBlackHeaderResponse,
   DescribeDestRegionsRequest,
+  HTTPSListener,
   ModifyRuleAttributeResponse,
   CreateTCPListenersResponse,
   DescribeSecurityPolicyDetailRequest,
@@ -172,6 +187,7 @@ import {
   DescribeRulesByRuleIdsResponse,
   SetAuthenticationRequest,
   DomainAccessRegionDict,
+  GlobalDns,
   InquiryPriceCreateProxyResponse,
   NewRealServer,
   DescribeFirstLinkSessionResponse,
@@ -194,8 +210,11 @@ import {
   CreateProxyGroupResponse,
   CreateHTTPSListenerResponse,
   DeleteRuleResponse,
+  ModifyRuleAttributeRequest,
   DescribeFirstLinkSessionRequest,
   BindRuleRealServersResponse,
+  DescribeGlobalDomainDnsResponse,
+  ModifyUDPListenerAttributeResponse,
   DescribeGroupAndStatisticsProxyRequest,
   SrcAddressInfo,
   ModifyUDPListenerAttributeRequest,
@@ -215,6 +234,7 @@ import {
   DescribeProxyStatisticsResponse,
   DescribeRealServersStatusResponse,
   ModifyProxyGroupAttributeRequest,
+  ModifyProxiesProjectResponse,
   CloseProxyGroupResponse,
   DeleteFirstLinkSessionResponse,
   ModifyProxiesAttributeResponse,
@@ -229,6 +249,7 @@ import {
   DeleteSecurityRulesRequest,
   DescribeCertificateDetailResponse,
   OpenProxyGroupResponse,
+  ModifySecurityRuleRequest,
   NationCountryInnerInfo,
   ProxyIdDict,
   Filter,
@@ -239,12 +260,14 @@ import {
   OpenProxyGroupRequest,
   DeviceInfo,
   UDPListener,
+  DeleteGlobalDomainRequest,
   ProxyInfo,
   RemoveRealServersResponse,
   DescribeRulesByRuleIdsRequest,
-  OpenSecurityPolicyResponse,
+  DeleteGlobalDomainResponse,
   RealServerBindSetReq,
   CloseProxyGroupRequest,
+  DescribeGlobalDomainsResponse,
   OpenProxiesResponse,
   ModifyProxyConfigurationResponse,
   CreateDomainErrorPageInfoRequest,
@@ -257,6 +280,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("gaap.tencentcloudapi.com", "2018-05-29", clientConfig)
+  }
+
+  /**
+   * 修改域名解析记录
+   */
+  async ModifyGlobalDomainDns(
+    req: ModifyGlobalDomainDnsRequest,
+    cb?: (error: string, rep: ModifyGlobalDomainDnsResponse) => void
+  ): Promise<ModifyGlobalDomainDnsResponse> {
+    return this.request("ModifyGlobalDomainDns", req, cb)
   }
 
   /**
@@ -341,6 +374,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询域名解析列表
+   */
+  async DescribeGlobalDomainDns(
+    req: DescribeGlobalDomainDnsRequest,
+    cb?: (error: string, rep: DescribeGlobalDomainDnsResponse) => void
+  ): Promise<DescribeGlobalDomainDnsResponse> {
+    return this.request("DescribeGlobalDomainDns", req, cb)
+  }
+
+  /**
+   * 用来创建统一域名
+   */
+  async CreateGlobalDomain(
+    req: CreateGlobalDomainRequest,
+    cb?: (error: string, rep: CreateGlobalDomainResponse) => void
+  ): Promise<CreateGlobalDomainResponse> {
+    return this.request("CreateGlobalDomain", req, cb)
+  }
+
+  /**
    * 本接口（CreateCustomHeader）用于创建HTTP/HTTPS监听器的自定义header，客户端请求通过访问该监听器时，会将监听器中配置的header信息发送到源站。
    */
   async CreateCustomHeader(
@@ -418,6 +471,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeRuleRealServersResponse) => void
   ): Promise<DescribeRuleRealServersResponse> {
     return this.request("DescribeRuleRealServers", req, cb)
+  }
+
+  /**
+   * 该接口（DescribeUDPListeners）用于查询单通道或者通道组下的UDP监听器信息
+   */
+  async DescribeUDPListeners(
+    req: DescribeUDPListenersRequest,
+    cb?: (error: string, rep: DescribeUDPListenersResponse) => void
+  ): Promise<DescribeUDPListenersResponse> {
+    return this.request("DescribeUDPListeners", req, cb)
   }
 
   /**
@@ -592,13 +655,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 该接口（CreateHTTPListener）用于在通道实例下创建HTTP协议类型的监听器。
+   * 修改域名属性
    */
-  async CreateHTTPListener(
-    req: CreateHTTPListenerRequest,
-    cb?: (error: string, rep: CreateHTTPListenerResponse) => void
-  ): Promise<CreateHTTPListenerResponse> {
-    return this.request("CreateHTTPListener", req, cb)
+  async ModifyGlobalDomainAttribute(
+    req: ModifyGlobalDomainAttributeRequest,
+    cb?: (error: string, rep: ModifyGlobalDomainAttributeResponse) => void
+  ): Promise<ModifyGlobalDomainAttributeResponse> {
+    return this.request("ModifyGlobalDomainAttribute", req, cb)
   }
 
   /**
@@ -642,6 +705,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 该接口（CreateHTTPListener）用于在通道实例下创建HTTP协议类型的监听器。
+   */
+  async CreateHTTPListener(
+    req: CreateHTTPListenerRequest,
+    cb?: (error: string, rep: CreateHTTPListenerResponse) => void
+  ): Promise<CreateHTTPListenerResponse> {
+    return this.request("CreateHTTPListener", req, cb)
+  }
+
+  /**
    * 该接口（DescribeRealServerStatistics）用于查询源站健康检查结果的统计数据。源站状态展示位为1：正常或者0：异常。查询的源站需要在监听器或者规则上进行了绑定，查询时需指定绑定的监听器或者规则ID。该接口支持1分钟细粒度的源站状态统计数据展示。
    */
   async DescribeRealServerStatistics(
@@ -652,13 +725,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 该接口（DescribeUDPListeners）用于查询单通道或者通道组下的UDP监听器信息
+   * 该接口（DescribeHTTPListeners）用来查询HTTP监听器信息。
    */
-  async DescribeUDPListeners(
-    req: DescribeUDPListenersRequest,
-    cb?: (error: string, rep: DescribeUDPListenersResponse) => void
-  ): Promise<DescribeUDPListenersResponse> {
-    return this.request("DescribeUDPListeners", req, cb)
+  async DescribeHTTPListeners(
+    req: DescribeHTTPListenersRequest,
+    cb?: (error: string, rep: DescribeHTTPListenersResponse) => void
+  ): Promise<DescribeHTTPListenersResponse> {
+    return this.request("DescribeHTTPListeners", req, cb)
   }
 
   /**
@@ -692,13 +765,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（ModifyProxiesAttribute）用于修改实例的属性（目前只支持修改通道的名称）。
+   * 删除域名的某条解析记录
    */
-  async ModifyProxiesAttribute(
-    req: ModifyProxiesAttributeRequest,
-    cb?: (error: string, rep: ModifyProxiesAttributeResponse) => void
-  ): Promise<ModifyProxiesAttributeResponse> {
-    return this.request("ModifyProxiesAttribute", req, cb)
+  async DeleteGlobalDomainDns(
+    req: DeleteGlobalDomainDnsRequest,
+    cb?: (error: string, rep: DeleteGlobalDomainDnsResponse) => void
+  ): Promise<DeleteGlobalDomainDnsResponse> {
+    return this.request("DeleteGlobalDomainDns", req, cb)
   }
 
   /**
@@ -749,6 +822,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RemoveRealServersResponse) => void
   ): Promise<RemoveRealServersResponse> {
     return this.request("RemoveRealServers", req, cb)
+  }
+
+  /**
+   * 删除统一域名
+   */
+  async DeleteGlobalDomain(
+    req: DeleteGlobalDomainRequest,
+    cb?: (error: string, rep: DeleteGlobalDomainResponse) => void
+  ): Promise<DeleteGlobalDomainResponse> {
+    return this.request("DeleteGlobalDomain", req, cb)
   }
 
   /**
@@ -809,16 +892,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: OpenProxiesResponse) => void
   ): Promise<OpenProxiesResponse> {
     return this.request("OpenProxies", req, cb)
-  }
-
-  /**
-   * 该接口（DescribeHTTPListeners）用来查询HTTP监听器信息。
-   */
-  async DescribeHTTPListeners(
-    req: DescribeHTTPListenersRequest,
-    cb?: (error: string, rep: DescribeHTTPListenersResponse) => void
-  ): Promise<DescribeHTTPListenersResponse> {
-    return this.request("DescribeHTTPListeners", req, cb)
   }
 
   /**
@@ -923,6 +996,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 暂停域名解析
+   */
+  async DisableGlobalDomain(
+    req: DisableGlobalDomainRequest,
+    cb?: (error: string, rep: DisableGlobalDomainResponse) => void
+  ): Promise<DisableGlobalDomainResponse> {
+    return this.request("DisableGlobalDomain", req, cb)
+  }
+
+  /**
    * 该接口（DescribeRegionAndPrice）用于获取源站区域和带宽梯度价格
    */
   async DescribeRegionAndPrice(
@@ -930,6 +1013,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeRegionAndPriceResponse) => void
   ): Promise<DescribeRegionAndPriceResponse> {
     return this.request("DescribeRegionAndPrice", req, cb)
+  }
+
+  /**
+   * 查询域名列表
+   */
+  async DescribeGlobalDomains(
+    req: DescribeGlobalDomainsRequest,
+    cb?: (error: string, rep: DescribeGlobalDomainsResponse) => void
+  ): Promise<DescribeGlobalDomainsResponse> {
+    return this.request("DescribeGlobalDomains", req, cb)
   }
 
   /**
@@ -950,6 +1043,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeRulesResponse) => void
   ): Promise<DescribeRulesResponse> {
     return this.request("DescribeRules", req, cb)
+  }
+
+  /**
+   * 开启域名解析
+   */
+  async EnableGlobalDomain(
+    req: EnableGlobalDomainRequest,
+    cb?: (error: string, rep: EnableGlobalDomainResponse) => void
+  ): Promise<EnableGlobalDomainResponse> {
+    return this.request("EnableGlobalDomain", req, cb)
   }
 
   /**
@@ -1033,6 +1136,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（ModifyProxiesAttribute）用于修改实例的属性（目前只支持修改通道的名称）。
+   */
+  async ModifyProxiesAttribute(
+    req: ModifyProxiesAttributeRequest,
+    cb?: (error: string, rep: ModifyProxiesAttributeResponse) => void
+  ): Promise<ModifyProxiesAttributeResponse> {
+    return this.request("ModifyProxiesAttribute", req, cb)
+  }
+
+  /**
    * 该接口（ModifyHTTPSListenerAttribute）用于修改HTTPS监听器配置，当前不支持通道组和v1版本通道。
    */
   async ModifyHTTPSListenerAttribute(
@@ -1110,6 +1223,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: InquiryPriceCreateProxyResponse) => void
   ): Promise<InquiryPriceCreateProxyResponse> {
     return this.request("InquiryPriceCreateProxy", req, cb)
+  }
+
+  /**
+   * 创建域名解析记录
+   */
+  async CreateGlobalDomainDns(
+    req: CreateGlobalDomainDnsRequest,
+    cb?: (error: string, rep: CreateGlobalDomainDnsResponse) => void
+  ): Promise<CreateGlobalDomainDnsResponse> {
+    return this.request("CreateGlobalDomainDns", req, cb)
   }
 
   /**

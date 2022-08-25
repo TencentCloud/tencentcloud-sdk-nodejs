@@ -28,6 +28,12 @@ class Client extends abstract_client_1.AbstractClient {
         super("gaap.tencentcloudapi.com", "2018-05-29", clientConfig);
     }
     /**
+     * 修改域名解析记录
+     */
+    async ModifyGlobalDomainDns(req, cb) {
+        return this.request("ModifyGlobalDomainDns", req, cb);
+    }
+    /**
      * 本接口（DescribeCertificates）用来查询可以使用的证书列表。
      */
     async DescribeCertificates(req, cb) {
@@ -77,6 +83,18 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyCertificateAttributes", req, cb);
     }
     /**
+     * 查询域名解析列表
+     */
+    async DescribeGlobalDomainDns(req, cb) {
+        return this.request("DescribeGlobalDomainDns", req, cb);
+    }
+    /**
+     * 用来创建统一域名
+     */
+    async CreateGlobalDomain(req, cb) {
+        return this.request("CreateGlobalDomain", req, cb);
+    }
+    /**
      * 本接口（CreateCustomHeader）用于创建HTTP/HTTPS监听器的自定义header，客户端请求通过访问该监听器时，会将监听器中配置的header信息发送到源站。
      */
     async CreateCustomHeader(req, cb) {
@@ -123,6 +141,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeRuleRealServers(req, cb) {
         return this.request("DescribeRuleRealServers", req, cb);
+    }
+    /**
+     * 该接口（DescribeUDPListeners）用于查询单通道或者通道组下的UDP监听器信息
+     */
+    async DescribeUDPListeners(req, cb) {
+        return this.request("DescribeUDPListeners", req, cb);
     }
     /**
      * 本接口（DescribeDestRegions）用于查询源站区域，即源站服务器所在区域。
@@ -228,10 +252,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeProxyAndStatisticsListeners", req, cb);
     }
     /**
-     * 该接口（CreateHTTPListener）用于在通道实例下创建HTTP协议类型的监听器。
+     * 修改域名属性
      */
-    async CreateHTTPListener(req, cb) {
-        return this.request("CreateHTTPListener", req, cb);
+    async ModifyGlobalDomainAttribute(req, cb) {
+        return this.request("ModifyGlobalDomainAttribute", req, cb);
     }
     /**
      * 本接口（DescribeRulesByRuleIds）用于根据规则ID拉取规则信息列表。支持一个或者多个规则信息的拉取。一次最多支持10个规则信息的拉取。
@@ -258,16 +282,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyTCPListenerAttribute", req, cb);
     }
     /**
+     * 该接口（CreateHTTPListener）用于在通道实例下创建HTTP协议类型的监听器。
+     */
+    async CreateHTTPListener(req, cb) {
+        return this.request("CreateHTTPListener", req, cb);
+    }
+    /**
      * 该接口（DescribeRealServerStatistics）用于查询源站健康检查结果的统计数据。源站状态展示位为1：正常或者0：异常。查询的源站需要在监听器或者规则上进行了绑定，查询时需指定绑定的监听器或者规则ID。该接口支持1分钟细粒度的源站状态统计数据展示。
      */
     async DescribeRealServerStatistics(req, cb) {
         return this.request("DescribeRealServerStatistics", req, cb);
     }
     /**
-     * 该接口（DescribeUDPListeners）用于查询单通道或者通道组下的UDP监听器信息
+     * 该接口（DescribeHTTPListeners）用来查询HTTP监听器信息。
      */
-    async DescribeUDPListeners(req, cb) {
-        return this.request("DescribeUDPListeners", req, cb);
+    async DescribeHTTPListeners(req, cb) {
+        return this.request("DescribeHTTPListeners", req, cb);
     }
     /**
      * 本接口（CreateProxyGroup）用于创建通道组。
@@ -288,10 +318,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCustomHeader", req, cb);
     }
     /**
-     * 本接口（ModifyProxiesAttribute）用于修改实例的属性（目前只支持修改通道的名称）。
+     * 删除域名的某条解析记录
      */
-    async ModifyProxiesAttribute(req, cb) {
-        return this.request("ModifyProxiesAttribute", req, cb);
+    async DeleteGlobalDomainDns(req, cb) {
+        return this.request("DeleteGlobalDomainDns", req, cb);
     }
     /**
      * 本接口（DestroyProxies）用于销毁。通道销毁后，不再产生任何费用。
@@ -322,6 +352,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async RemoveRealServers(req, cb) {
         return this.request("RemoveRealServers", req, cb);
+    }
+    /**
+     * 删除统一域名
+     */
+    async DeleteGlobalDomain(req, cb) {
+        return this.request("DeleteGlobalDomain", req, cb);
     }
     /**
      * 本接口（DescribeSecurityRules）用于根据安全规则ID查询安全规则详情列表。支持一个或多个安全规则的查询。一次最多支持20个安全规则的查询。
@@ -358,12 +394,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async OpenProxies(req, cb) {
         return this.request("OpenProxies", req, cb);
-    }
-    /**
-     * 该接口（DescribeHTTPListeners）用来查询HTTP监听器信息。
-     */
-    async DescribeHTTPListeners(req, cb) {
-        return this.request("DescribeHTTPListeners", req, cb);
     }
     /**
      * 本接口（ModifyUDPListenerAttribute）用于修改通道实例下UDP监听器配置，包括监听器名称和调度策略的修改。
@@ -427,10 +457,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteFirstLinkSession", req, cb);
     }
     /**
+     * 暂停域名解析
+     */
+    async DisableGlobalDomain(req, cb) {
+        return this.request("DisableGlobalDomain", req, cb);
+    }
+    /**
      * 该接口（DescribeRegionAndPrice）用于获取源站区域和带宽梯度价格
      */
     async DescribeRegionAndPrice(req, cb) {
         return this.request("DescribeRegionAndPrice", req, cb);
+    }
+    /**
+     * 查询域名列表
+     */
+    async DescribeGlobalDomains(req, cb) {
+        return this.request("DescribeGlobalDomains", req, cb);
     }
     /**
      * 本接口（DescribeRealServersStatus）用于查询源站是否已被规则或者监听器绑定
@@ -443,6 +485,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeRules(req, cb) {
         return this.request("DescribeRules", req, cb);
+    }
+    /**
+     * 开启域名解析
+     */
+    async EnableGlobalDomain(req, cb) {
+        return this.request("EnableGlobalDomain", req, cb);
     }
     /**
      * 该接口（DescribeListenerRealServers）用于查询TCP/UDP监听器源站列表，包括该监听器已经绑定的源站列表以及可以绑定的源站列表。
@@ -493,6 +541,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeGroupDomainConfig", req, cb);
     }
     /**
+     * 本接口（ModifyProxiesAttribute）用于修改实例的属性（目前只支持修改通道的名称）。
+     */
+    async ModifyProxiesAttribute(req, cb) {
+        return this.request("ModifyProxiesAttribute", req, cb);
+    }
+    /**
      * 该接口（ModifyHTTPSListenerAttribute）用于修改HTTPS监听器配置，当前不支持通道组和v1版本通道。
      */
     async ModifyHTTPSListenerAttribute(req, cb) {
@@ -539,6 +593,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async InquiryPriceCreateProxy(req, cb) {
         return this.request("InquiryPriceCreateProxy", req, cb);
+    }
+    /**
+     * 创建域名解析记录
+     */
+    async CreateGlobalDomainDns(req, cb) {
+        return this.request("CreateGlobalDomainDns", req, cb);
     }
     /**
      * 修改安全策略规则名

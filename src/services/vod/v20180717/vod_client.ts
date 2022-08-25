@@ -133,6 +133,7 @@ import {
   AiSampleFaceInfo,
   MediaImageSpriteItem,
   ModifyVodDomainAccelerateConfigRequest,
+  PoliticalConfigureInfoForUpdate,
   MediaProcessTaskAdaptiveDynamicStreamingResult,
   OcrWordsConfigureInfoForUpdate,
   WatermarkTemplate,
@@ -271,7 +272,7 @@ import {
   MediaProcessTaskTranscodeResult,
   DomainDetailInfo,
   EditMediaVideoStream,
-  ImageProcessingTemplate,
+  AiRecognitionTaskSegmentResultOutput,
   ImageSpriteTaskInput,
   ObjectConfigureInfoForUpdate,
   DeleteMediaRequest,
@@ -299,13 +300,13 @@ import {
   TerrorismOcrReviewTemplateInfoForUpdate,
   DescribeEventsStateResponse,
   AiRecognitionTaskHeadTailResultOutput,
-  AdaptiveDynamicStreamingTaskInput,
   ModifyImageSpriteTemplateResponse,
   MediaProcessTaskCoverBySnapshotResult,
   CreateWatermarkTemplateRequest,
   TerrorismConfigureInfoForUpdate,
   DescribeEventsStateRequest,
   WechatMiniProgramPublishTask,
+  DescribeDrmKeyProviderInfoRequest,
   ModifyDefaultStorageRegionResponse,
   CreateImageProcessingTemplateResponse,
   ComposeMediaTask,
@@ -371,7 +372,7 @@ import {
   AiAnalysisTaskInput,
   ImageSpriteTemplate,
   AiRecognitionTaskOcrFullTextSegmentTextItem,
-  AiRecognitionTaskSegmentResultOutput,
+  ImageProcessingTemplate,
   SegmentConfigureInfo,
   FileDeleteResultItem,
   SnapshotByTimeOffsetTaskInput,
@@ -444,11 +445,13 @@ import {
   AsrFullTextConfigureInfo,
   TerrorismImageResult,
   DeleteVodDomainRequest,
+  DescribeDrmKeyProviderInfoResponse,
   CreateAIRecognitionTemplateRequest,
   DescribeTaskDetailRequest,
   MediaAiAnalysisClassificationItem,
   AiAnalysisTaskFrameTagResult,
   AiReviewPornTaskOutput,
+  SDMCDrmKeyProviderInfo,
   AiRecognitionTaskAsrFullTextResult,
   ImageContentReviewInput,
   PlayStatInfo,
@@ -474,7 +477,7 @@ import {
   VideoTemplateInfoForUpdate,
   CreateContentReviewTemplateRequest,
   DescribeContentReviewTemplatesRequest,
-  ImageOperation,
+  AdaptiveDynamicStreamingTaskInput,
   DescribeImageSpriteTemplatesResponse,
   AiAnalysisTaskFrameTagInput,
   MediaAiAnalysisFrameTagSegmentItem,
@@ -509,6 +512,7 @@ import {
   TaskSimpleInfo,
   DescribeSnapshotByTimeOffsetTemplatesResponse,
   MediaVideoStreamItem,
+  SetDrmKeyProviderInfoRequest,
   SnapshotByTimeOffsetTemplate,
   DeleteSnapshotByTimeOffsetTemplateResponse,
   ProhibitedOcrReviewTemplateInfoForUpdate,
@@ -541,7 +545,7 @@ import {
   DeleteClassRequest,
   DescribeTranscodeTemplatesRequest,
   UserDefineAsrTextReviewTemplateInfoForUpdate,
-  PoliticalConfigureInfoForUpdate,
+  ImageOperation,
   DescribeWatermarkTemplatesResponse,
   WeChatMiniProgramPublishResponse,
   ImageTransform,
@@ -607,6 +611,7 @@ import {
   DescribePersonSamplesRequest,
   AiRecognitionTaskFaceResultItem,
   AiAnalysisTaskCoverInput,
+  SetDrmKeyProviderInfoResponse,
   DescribeStorageDetailsRequest,
   MediaTrack,
   StorageStatData,
@@ -1156,23 +1161,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 1. 该接口可以获取多个媒体文件的多种信息，包括：
-    1. 基础信息（basicInfo）：包括媒体名称、分类、播放地址、封面图片等。
-    2. 元信息（metaData）：包括大小、时长、视频流信息、音频流信息等。
-    3. 转码结果信息（transcodeInfo）：包括该媒体转码生成的各种规格的媒体地址、视频流参数、音频流参数等。
-    4. 转动图结果信息（animatedGraphicsInfo）：对视频转动图（如 gif）后的动图信息。
-    5. 采样截图信息（sampleSnapshotInfo）：对视频采样截图后的截图信息。
-    6. 雪碧图信息（imageSpriteInfo）：对视频截取雪碧图后的雪碧图信息。
-    7. 指定时间点截图信息（snapshotByTimeOffsetInfo）：对视频依照指定时间点截图后，的截图信息。
-    8. 视频打点信息（keyFrameDescInfo）：对视频设置的打点信息。
-    9. 转自适应码流信息（adaptiveDynamicStreamingInfo）：包括规格、加密类型、打包格式等相关信息。
-2. 可以指定回包只返回部分信息。
-     */
-  async DescribeMediaInfos(
-    req: DescribeMediaInfosRequest,
-    cb?: (error: string, rep: DescribeMediaInfosResponse) => void
-  ): Promise<DescribeMediaInfosResponse> {
-    return this.request("DescribeMediaInfos", req, cb)
+   * 查询 DRM 密钥提供商信息。
+   */
+  async DescribeDrmKeyProviderInfo(
+    req: DescribeDrmKeyProviderInfoRequest,
+    cb?: (error: string, rep: DescribeDrmKeyProviderInfoResponse) => void
+  ): Promise<DescribeDrmKeyProviderInfoResponse> {
+    return this.request("DescribeDrmKeyProviderInfo", req, cb)
   }
 
   /**
@@ -1828,6 +1823,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 设置 DRM 密钥提供商信息。
+   */
+  async SetDrmKeyProviderInfo(
+    req: SetDrmKeyProviderInfoRequest,
+    cb?: (error: string, rep: SetDrmKeyProviderInfoResponse) => void
+  ): Promise<SetDrmKeyProviderInfoResponse> {
+    return this.request("SetDrmKeyProviderInfo", req, cb)
+  }
+
+  /**
    * 根据音视频内容识别模板唯一标识，获取音视频内容识别模板详情列表。返回结果包含符合条件的所有用户自定义音视频内容识别模板及[系统预置音视频内容识别模板](https://cloud.tencent.com/document/product/266/33476#.E9.A2.84.E7.BD.AE.E8.A7.86.E9.A2.91.E5.86.85.E5.AE.B9.E8.AF.86.E5.88.AB.E6.A8.A1.E6.9D.BF)。
    */
   async DescribeAIRecognitionTemplates(
@@ -1909,6 +1914,8 @@ export class Client extends AbstractClient {
 - 指定直播推流码集合 StreamIds（见输入参数）筛选直播录制的媒体。
 - 指定视频 ID 集合 Vids （见输入参数）筛选直播录制的媒体。
 - 指定媒体的创建时间范围筛选媒体。
+- 指定 TRTC 应用 ID 集合筛选媒体。
+- 指定 TRTC 房间 ID 集合筛选媒体。
 - （不推荐：应使用 Names、NamePrefixes 或 Descriptions 替代）指定单个文本 Text 对媒体文件名或描述信息进行模糊搜索。
 - （不推荐：应使用 SourceTypes 替代）指定单个媒体文件来源 SourceType 进行搜索。
 - （不推荐：应使用 StreamIds 替代）指定单个推流直播码 StreamId 进行搜索。
@@ -2081,6 +2088,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SimpleHlsClipResponse) => void
   ): Promise<SimpleHlsClipResponse> {
     return this.request("SimpleHlsClip", req, cb)
+  }
+
+  /**
+     * 1. 该接口可以获取多个媒体文件的多种信息，包括：
+    1. 基础信息（basicInfo）：包括媒体名称、分类、播放地址、封面图片等。
+    2. 元信息（metaData）：包括大小、时长、视频流信息、音频流信息等。
+    3. 转码结果信息（transcodeInfo）：包括该媒体转码生成的各种规格的媒体地址、视频流参数、音频流参数等。
+    4. 转动图结果信息（animatedGraphicsInfo）：对视频转动图（如 gif）后的动图信息。
+    5. 采样截图信息（sampleSnapshotInfo）：对视频采样截图后的截图信息。
+    6. 雪碧图信息（imageSpriteInfo）：对视频截取雪碧图后的雪碧图信息。
+    7. 指定时间点截图信息（snapshotByTimeOffsetInfo）：对视频依照指定时间点截图后，的截图信息。
+    8. 视频打点信息（keyFrameDescInfo）：对视频设置的打点信息。
+    9. 转自适应码流信息（adaptiveDynamicStreamingInfo）：包括规格、加密类型、打包格式等相关信息。
+2. 可以指定回包只返回部分信息。
+     */
+  async DescribeMediaInfos(
+    req: DescribeMediaInfosRequest,
+    cb?: (error: string, rep: DescribeMediaInfosResponse) => void
+  ): Promise<DescribeMediaInfosResponse> {
+    return this.request("DescribeMediaInfos", req, cb)
   }
 
   /**

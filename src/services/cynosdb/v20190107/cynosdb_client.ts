@@ -18,6 +18,7 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  RemoveClusterSlaveZoneRequest,
   ModifyClusterNameRequest,
   DescribeRollbackTimeRangeRequest,
   InquirePriceRenewRequest,
@@ -27,6 +28,7 @@ import {
   ModifyMaintainPeriodConfigRequest,
   DescribeRollbackTimeRangeResponse,
   ModifyBackupNameResponse,
+  SwitchClusterZoneResponse,
   AssociateSecurityGroupsRequest,
   DescribeBinlogDownloadUrlRequest,
   CreateAccountsResponse,
@@ -37,8 +39,9 @@ import {
   DescribeBinlogsResponse,
   DescribeInstancesResponse,
   ClusterInstanceDetail,
-  Account,
+  AddClusterSlaveZoneResponse,
   ModifyClusterNameResponse,
+  DescribeClusterParamsResponse,
   IsolateInstanceResponse,
   ModifyInstanceNameResponse,
   DescribeParamTemplatesRequest,
@@ -49,7 +52,7 @@ import {
   CynosdbInstanceGrp,
   SlowQueriesItem,
   ActivateInstanceRequest,
-  RollbackTableInfo,
+  AddClusterSlaveZoneRequest,
   DescribeAccountAllGrantPrivilegesResponse,
   RollbackDatabase,
   DatabasePrivileges,
@@ -63,12 +66,14 @@ import {
   CreateAccountsRequest,
   IsolateInstanceRequest,
   ExportInstanceSlowQueriesResponse,
+  SwitchClusterZoneRequest,
   DescribeDBSecurityGroupsRequest,
   RollBackClusterRequest,
   RollbackTable,
   DescribeClusterDetailRequest,
   Tag,
   DescribeProjectSecurityGroupsResponse,
+  RemoveClusterSlaveZoneResponse,
   PauseServerlessResponse,
   OfflineClusterRequest,
   NewAccount,
@@ -78,9 +83,11 @@ import {
   DescribeBackupListRequest,
   CynosdbInstance,
   DbTable,
+  ModifyClusterSlaveZoneResponse,
   GrantAccountPrivilegesRequest,
-  IsolateClusterResponse,
+  BinlogItem,
   CreateClustersRequest,
+  RollbackTableInfo,
   DescribeClustersResponse,
   QueryFilter,
   DescribeBackupConfigResponse,
@@ -89,10 +96,12 @@ import {
   AddInstancesResponse,
   Addr,
   ParamTemplateListInfo,
+  ParamInfo,
   DescribeProjectSecurityGroupsRequest,
   ModifyClusterParamResponse,
   SecurityGroup,
   DescribeBackupDownloadUrlRequest,
+  RollbackTimeRange,
   NetAddr,
   AssociateSecurityGroupsResponse,
   DescribeResourcesByDealNameRequest,
@@ -109,12 +118,13 @@ import {
   UpgradeInstanceResponse,
   ModifyAccountParamsRequest,
   CynosdbCluster,
-  BinlogItem,
+  IsolateClusterResponse,
   OfflineClusterResponse,
   RevokeAccountPrivilegesRequest,
   InstanceSpec,
   InquirePriceCreateResponse,
   SetRenewFlagResponse,
+  Account,
   DescribeClusterParamLogsRequest,
   UpgradeInstanceRequest,
   DescribeMaintainPeriodResponse,
@@ -127,6 +137,7 @@ import {
   IsolateClusterRequest,
   DescribeClusterInstanceGrpsResponse,
   AddInstancesRequest,
+  ModifyClusterSlaveZoneRequest,
   DescribeInstancesRequest,
   ClusterParamModifyLog,
   CynosdbInstanceDetail,
@@ -141,6 +152,7 @@ import {
   ModifyAccountParamsResponse,
   OfflineInstanceRequest,
   TradePrice,
+  DescribeClusterParamsRequest,
   DescribeInstanceSpecsResponse,
   DescribeAccountAllGrantPrivilegesRequest,
   OfflineInstanceResponse,
@@ -224,13 +236,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取指定集群的备份配置信息，包括全量备份时间段，备份文件保留时间
+   * 本接口（DescribeInstanceSpecs）用于查询实例规格
    */
-  async DescribeBackupConfig(
-    req: DescribeBackupConfigRequest,
-    cb?: (error: string, rep: DescribeBackupConfigResponse) => void
-  ): Promise<DescribeBackupConfigResponse> {
-    return this.request("DescribeBackupConfig", req, cb)
+  async DescribeInstanceSpecs(
+    req: DescribeInstanceSpecsRequest,
+    cb?: (error: string, rep: DescribeInstanceSpecsResponse) => void
+  ): Promise<DescribeInstanceSpecsResponse> {
+    return this.request("DescribeInstanceSpecs", req, cb)
+  }
+
+  /**
+   * 增加从可用区
+   */
+  async AddClusterSlaveZone(
+    req: AddClusterSlaveZoneRequest,
+    cb?: (error: string, rep: AddClusterSlaveZoneResponse) => void
+  ): Promise<AddClusterSlaveZoneResponse> {
+    return this.request("AddClusterSlaveZone", req, cb)
   }
 
   /**
@@ -241,6 +263,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeParamTemplatesResponse) => void
   ): Promise<DescribeParamTemplatesResponse> {
     return this.request("DescribeParamTemplates", req, cb)
+  }
+
+  /**
+   * SetRenewFlag设置实例的自动续费功能
+   */
+  async SetRenewFlag(
+    req: SetRenewFlagRequest,
+    cb?: (error: string, rep: SetRenewFlagResponse) => void
+  ): Promise<SetRenewFlagResponse> {
+    return this.request("SetRenewFlag", req, cb)
   }
 
   /**
@@ -364,6 +396,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改从可用区
+   */
+  async ModifyClusterSlaveZone(
+    req: ModifyClusterSlaveZoneRequest,
+    cb?: (error: string, rep: ModifyClusterSlaveZoneResponse) => void
+  ): Promise<ModifyClusterSlaveZoneResponse> {
+    return this.request("ModifyClusterSlaveZone", req, cb)
+  }
+
+  /**
    * 修改账号参数
    */
   async ModifyAccountParams(
@@ -371,6 +413,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyAccountParamsResponse) => void
   ): Promise<ModifyAccountParamsResponse> {
     return this.request("ModifyAccountParams", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeClusterParams）用于查询集群参数
+   */
+  async DescribeClusterParams(
+    req: DescribeClusterParamsRequest,
+    cb?: (error: string, rep: DescribeClusterParamsResponse) => void
+  ): Promise<DescribeClusterParamsResponse> {
+    return this.request("DescribeClusterParams", req, cb)
   }
 
   /**
@@ -454,13 +506,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * SetRenewFlag设置实例的自动续费功能
+   * 删除从可用区
    */
-  async SetRenewFlag(
-    req: SetRenewFlagRequest,
-    cb?: (error: string, rep: SetRenewFlagResponse) => void
-  ): Promise<SetRenewFlagResponse> {
-    return this.request("SetRenewFlag", req, cb)
+  async RemoveClusterSlaveZone(
+    req: RemoveClusterSlaveZoneRequest,
+    cb?: (error: string, rep: RemoveClusterSlaveZoneResponse) => void
+  ): Promise<RemoveClusterSlaveZoneResponse> {
+    return this.request("RemoveClusterSlaveZone", req, cb)
   }
 
   /**
@@ -494,13 +546,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeInstanceSpecs）用于查询实例规格
+   * 获取指定集群的备份配置信息，包括全量备份时间段，备份文件保留时间
    */
-  async DescribeInstanceSpecs(
-    req: DescribeInstanceSpecsRequest,
-    cb?: (error: string, rep: DescribeInstanceSpecsResponse) => void
-  ): Promise<DescribeInstanceSpecsResponse> {
-    return this.request("DescribeInstanceSpecs", req, cb)
+  async DescribeBackupConfig(
+    req: DescribeBackupConfigRequest,
+    cb?: (error: string, rep: DescribeBackupConfigResponse) => void
+  ): Promise<DescribeBackupConfigResponse> {
+    return this.request("DescribeBackupConfig", req, cb)
   }
 
   /**
@@ -641,6 +693,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ExportInstanceSlowQueriesResponse) => void
   ): Promise<ExportInstanceSlowQueriesResponse> {
     return this.request("ExportInstanceSlowQueries", req, cb)
+  }
+
+  /**
+   * 切换到从可用区
+   */
+  async SwitchClusterZone(
+    req: SwitchClusterZoneRequest,
+    cb?: (error: string, rep: SwitchClusterZoneResponse) => void
+  ): Promise<SwitchClusterZoneResponse> {
+    return this.request("SwitchClusterZone", req, cb)
   }
 
   /**

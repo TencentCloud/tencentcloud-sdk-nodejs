@@ -16,6 +16,16 @@
  */
 
 /**
+ * DisableGlobalDomain请求参数结构体
+ */
+export interface DisableGlobalDomainRequest {
+  /**
+   * 域名ID
+   */
+  DomainId: string
+}
+
+/**
  * 区域信息详情
  */
 export interface RegionDetail {
@@ -119,6 +129,37 @@ export interface DescribeUDPListenersRequest {
 }
 
 /**
+ * DescribeGlobalDomains请求参数结构体
+ */
+export interface DescribeGlobalDomainsRequest {
+  /**
+   * 项目ID
+   */
+  ProjectId: number
+
+  /**
+   * 分页偏移量
+   */
+  Offset: number
+
+  /**
+   * 分页数量限制
+   */
+  Limit: number
+
+  /**
+   * 过滤条件
+   */
+  Filters?: Array<Filter>
+
+  /**
+      * 标签列表，当存在该字段时，拉取对应标签下的资源列表。
+最多支持5个标签，当存在两个或两个以上的标签时，满足其中任意一个标签时，域名会被拉取出来。
+      */
+  TagSet?: Array<TagPair>
+}
+
+/**
  * DeleteProxyGroup请求参数结构体
  */
 export interface DeleteProxyGroupRequest {
@@ -134,6 +175,46 @@ export interface DeleteProxyGroupRequest {
 默认为0，当通道组中存在通道或通道组中存在监听器/规则绑定了源站时，且Force为0时，该操作会返回失败。
       */
   Force?: number
+}
+
+/**
+ * OpenSecurityPolicy返回参数结构体
+ */
+export interface OpenSecurityPolicyResponse {
+  /**
+   * 异步流程ID，可以通过DescribeAsyncTaskStatus接口查询流程运行状态
+   */
+  TaskId: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyGlobalDomainAttribute请求参数结构体
+ */
+export interface ModifyGlobalDomainAttributeRequest {
+  /**
+   * 域名ID
+   */
+  DomainId: string
+
+  /**
+   * 项目ID
+   */
+  ProjectId: number
+
+  /**
+   * 别名
+   */
+  Alias?: string
+
+  /**
+   * 默认入口
+   */
+  DefaultValue?: string
 }
 
 /**
@@ -429,6 +510,16 @@ export interface DescribeProxyGroupStatisticsResponse {
    */
   StatisticsData: Array<MetricStatisticsInfo>
 
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DisableGlobalDomain返回参数结构体
+ */
+export interface DisableGlobalDomainResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -923,6 +1014,16 @@ export interface DeleteProxyGroupResponse {
 }
 
 /**
+ * CreateGlobalDomainDns返回参数结构体
+ */
+export interface CreateGlobalDomainDnsResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateDomainErrorPageInfo返回参数结构体
  */
 export interface CreateDomainErrorPageInfoResponse {
@@ -1388,9 +1489,9 @@ export interface CreateHTTPListenerResponse {
 }
 
 /**
- * ModifyUDPListenerAttribute返回参数结构体
+ * DeleteGlobalDomainDns返回参数结构体
  */
-export interface ModifyUDPListenerAttributeResponse {
+export interface DeleteGlobalDomainDnsResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1723,6 +1824,16 @@ export interface BindRealServerInfo {
 }
 
 /**
+ * ModifyGlobalDomainAttribute返回参数结构体
+ */
+export interface ModifyGlobalDomainAttributeResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeProxyAndStatisticsListeners请求参数结构体
  */
 export interface DescribeProxyAndStatisticsListenersRequest {
@@ -1805,6 +1916,47 @@ export interface DescribeDestRegionsResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 加速通道接入点详细信息(包含id、地域、ip等）
+ */
+export interface ProxyAccessInfo {
+  /**
+      * 地域ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RegionId: string
+
+  /**
+      * 地域名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RegionName: string
+
+  /**
+      * 通道ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProxyId: string
+
+  /**
+      * 通道接入ip
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Vip: string
+
+  /**
+      * 三网通道VIP列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VipList: Array<IPDetail>
+
+  /**
+      * 接入点IDC类型。ec或dc
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SourceRegionIdcType: string
 }
 
 /**
@@ -1915,6 +2067,21 @@ export interface DescribeAccessRegionsByDestRegionResponse {
  * ModifyProxyGroupAttribute返回参数结构体
  */
 export interface ModifyProxyGroupAttributeResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateGlobalDomain返回参数结构体
+ */
+export interface CreateGlobalDomainResponse {
+  /**
+   * 域名ID
+   */
+  DomainId: string
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2062,67 +2229,28 @@ export interface CreateUDPListenersRequest {
 }
 
 /**
- * ModifyRuleAttribute请求参数结构体
+ * CreateGlobalDomain请求参数结构体
  */
-export interface ModifyRuleAttributeRequest {
+export interface CreateGlobalDomainRequest {
   /**
-   * 监听器ID
+   * 域名所属项目ID
    */
-  ListenerId: string
+  ProjectId: number
 
   /**
-   * 转发规则ID
+   * 域名默认入口
    */
-  RuleId: string
+  DefaultValue: string
 
   /**
-   * 监听器源站访问策略，其中：rr表示轮询；wrr表示加权轮询；lc表示最小连接数；lrtt表示最小时延。
+   * 别名
    */
-  Scheduler?: string
+  Alias?: string
 
   /**
-      * 源站健康检查开关，其中：
-1，开启；
-0，关闭。
-      */
-  HealthCheck?: number
-
-  /**
-   * 健康检查配置参数
+   * 标签列表
    */
-  CheckParams?: RuleCheckParams
-
-  /**
-   * 转发规则路径
-   */
-  Path?: string
-
-  /**
-      * 加速通道转发到源站的协议类型，支持：default, HTTP和HTTPS。
-当ForwardProtocol=default时，表示使用对应监听器的ForwardProtocol。
-      */
-  ForwardProtocol?: string
-
-  /**
-      * 回源Host。加速通道转发到源站的请求中携带的host。
-当ForwardHost=default时，使用规则的域名，其他情况为该字段所设置的值。
-      */
-  ForwardHost?: string
-
-  /**
-   * 服务器名称指示（ServerNameIndication，简称SNI）开关。ON表示开启，OFF表示关闭。
-   */
-  ServerNameIndicationSwitch?: string
-
-  /**
-   * 服务器名称指示（ServerNameIndication，简称SNI），当SNI开关打开时，该字段必填。
-   */
-  ServerNameIndication?: string
-
-  /**
-   * HTTP强制跳转HTTPS。输入当前规则对应的域名与地址。
-   */
-  ForcedRedirect?: string
+  TagSet?: Array<TagPair>
 }
 
 /**
@@ -2257,6 +2385,16 @@ export interface TCPListener {
 }
 
 /**
+ * EnableGlobalDomain返回参数结构体
+ */
+export interface EnableGlobalDomainResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateSecurityRules返回参数结构体
  */
 export interface CreateSecurityRulesResponse {
@@ -2309,18 +2447,13 @@ export interface CreateCertificateRequest {
 }
 
 /**
- * DescribeCertificates返回参数结构体
+ * CreateProxyGroupDomain返回参数结构体
  */
-export interface DescribeCertificatesResponse {
+export interface CreateProxyGroupDomainResponse {
   /**
-   * 服务器证书列表，包括证书ID 和证书名称。
+   * 通道组ID。
    */
-  CertificateSet: Array<Certificate>
-
-  /**
-   * 满足查询条件的服务器证书总数量。
-   */
-  TotalCount: number
+  GroupId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2355,6 +2488,16 @@ export interface DescribeProxyGroupListResponse {
 }
 
 /**
+ * DescribeGlobalDomainDns请求参数结构体
+ */
+export interface DescribeGlobalDomainDnsRequest {
+  /**
+   * 域名ID
+   */
+  DomainId: string
+}
+
+/**
  * DescribeDomainErrorPageInfo请求参数结构体
  */
 export interface DescribeDomainErrorPageInfoRequest {
@@ -2370,85 +2513,72 @@ export interface DescribeDomainErrorPageInfoRequest {
 }
 
 /**
- * HTTPS类型监听器信息
+ * 统一域名信息
  */
-export interface HTTPSListener {
+export interface Domain {
   /**
-   * 监听器ID
+   * 域名ID
    */
-  ListenerId: string
+  DomainId: string
 
   /**
-   * 监听器名称
+   * 完整域名记录
    */
-  ListenerName: string
+  FullDomain: string
 
   /**
-   * 监听器端口
+   * 别名
    */
-  Port: number
+  Alias: string
 
   /**
-   * 监听器协议， HTTP表示HTTP，HTTPS表示HTTPS，此结构取值HTTPS
+   * 类型
    */
-  Protocol: string
+  Type: string
 
   /**
-      * 监听器状态，其中：
-0表示运行中；
-1表示创建中；
-2表示销毁中；
-3表示源站调整中；
-4表示配置变更中。
+   * 状态，1表示关闭，0表示开启，2表示关闭中，3表示开启中
+   */
+  Status: number
+
+  /**
+   * 所属项目
+   */
+  ProjectId: number
+
+  /**
+      * 默认入口
+注意：此字段可能返回 null，表示取不到有效值。
       */
-  ListenerStatus: number
+  DefaultValue: string
 
   /**
-   * 监听器服务器SSL证书ID
+   * 通道数量
    */
-  CertificateId: string
+  ProxyCount: number
 
   /**
-   * 监听器后端转发源站协议
-   */
-  ForwardProtocol: string
-
-  /**
-   * 监听器创建时间，Unix时间戳
+   * 创建时间，使用UNIX时间戳
    */
   CreateTime: number
 
   /**
-      * 服务器SSL证书的别名
+      * 更新时间，使用UNIX时间戳
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  CertificateAlias: string
+  UpdateTime: number
 
   /**
-      * 监听器客户端CA证书ID
+      * 标签列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ClientCertificateId: string
+  TagSet: Array<TagPair>
 
   /**
-      * 监听器认证方式。其中，
-0表示单向认证；
-1表示双向认证。
+      * 封禁解封状态：BANNED表示已封禁，RECOVER表示已解封或未封禁，BANNING表示封禁中，RECOVERING表示解封中，BAN_FAILED表示封禁失败，RECOVER_FAILED表示解封失败。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  AuthType: number
-
-  /**
-      * 客户端CA证书别名
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ClientCertificateAlias: string
-
-  /**
-      * 多客户端CA证书别名信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  PolyClientCertificateAliasInfo: Array<CertificateAliasInfo>
+  BanStatus: string
 }
 
 /**
@@ -2487,41 +2617,28 @@ export interface ModifyCertificateAttributesRequest {
 }
 
 /**
- * ModifyProxyConfiguration请求参数结构体
+ * ModifyGlobalDomainDns请求参数结构体
  */
-export interface ModifyProxyConfigurationRequest {
+export interface ModifyGlobalDomainDnsRequest {
   /**
-   * （旧参数，请切换到ProxyId）通道的实例ID。
+   * 解析记录ID
    */
-  InstanceId?: string
+  DnsRecordId: number
 
   /**
-      * 需要调整到的目标带宽，单位：Mbps。
-Bandwidth与Concurrent必须至少设置一个。取值范围根据DescribeAccessRegionsByDestRegion接口获取得到
-      */
-  Bandwidth?: number
-
-  /**
-      * 需要调整到的目标并发值，单位：万。
-Bandwidth与Concurrent必须至少设置一个。取值范围根据DescribeAccessRegionsByDestRegion接口获取得到
-      */
-  Concurrent?: number
-
-  /**
-      * 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。
-更多详细信息请参阅：如何保证幂等性。
-      */
-  ClientToken?: string
-
-  /**
-   * （新参数）通道的实例ID。
+   * 域名ID
    */
-  ProxyId?: string
+  DomainId: string
 
   /**
-   * 计费方式 (0:按带宽计费，1:按流量计费 默认按带宽计费）
+   * 国家ID列表
    */
-  BillingType?: number
+  NationCountryInnerCodes: Array<string>
+
+  /**
+   * 通道ID列表
+   */
+  ProxyIdList: Array<string>
 }
 
 /**
@@ -2662,9 +2779,19 @@ export interface CreateDomainResponse {
 }
 
 /**
- * ModifyProxiesProject返回参数结构体
+ * EnableGlobalDomain请求参数结构体
  */
-export interface ModifyProxiesProjectResponse {
+export interface EnableGlobalDomainRequest {
+  /**
+   * 域名ID
+   */
+  DomainId: string
+}
+
+/**
+ * ModifyGlobalDomainDns返回参数结构体
+ */
+export interface ModifyGlobalDomainDnsResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2716,47 +2843,13 @@ export interface ModifyDomainRequest {
 }
 
 /**
- * ModifySecurityRule请求参数结构体
+ * DeleteGlobalDomainDns请求参数结构体
  */
-export interface ModifySecurityRuleRequest {
+export interface DeleteGlobalDomainDnsRequest {
   /**
-   * 规则ID
+   * 解析记录的ID
    */
-  RuleId: string
-
-  /**
-   * 规则名：不得超过30个字符，超过部分会被截断。
-   */
-  AliasName: string
-
-  /**
-   * 安全策略ID
-   */
-  PolicyId: string
-
-  /**
-   * 安全规则动作
-   */
-  RuleAction?: string
-
-  /**
-   * 规则关联地址，格式需要满足CIDR网络地址规范
-   */
-  SourceCidr?: string
-
-  /**
-   * 协议类型
-   */
-  Protocol?: string
-
-  /**
-      * 端口范围，支持以下格式
-单个端口: 80
-多个端口: 80,443
-连续端口: 3306-20000
-所有端口: ALL
-      */
-  DestPortRange?: string
+  DnsRecordId: number
 }
 
 /**
@@ -2993,13 +3086,18 @@ export interface Capacity {
 }
 
 /**
- * CreateProxyGroupDomain返回参数结构体
+ * DescribeCertificates返回参数结构体
  */
-export interface CreateProxyGroupDomainResponse {
+export interface DescribeCertificatesResponse {
   /**
-   * 通道组ID。
+   * 服务器证书列表，包括证书ID 和证书名称。
    */
-  GroupId: string
+  CertificateSet: Array<Certificate>
+
+  /**
+   * 满足查询条件的服务器证书总数量。
+   */
+  TotalCount: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3402,6 +3500,64 @@ export interface CreateRuleRequest {
 }
 
 /**
+ * ModifyProxyConfiguration请求参数结构体
+ */
+export interface ModifyProxyConfigurationRequest {
+  /**
+   * （旧参数，请切换到ProxyId）通道的实例ID。
+   */
+  InstanceId?: string
+
+  /**
+      * 需要调整到的目标带宽，单位：Mbps。
+Bandwidth与Concurrent必须至少设置一个。取值范围根据DescribeAccessRegionsByDestRegion接口获取得到
+      */
+  Bandwidth?: number
+
+  /**
+      * 需要调整到的目标并发值，单位：万。
+Bandwidth与Concurrent必须至少设置一个。取值范围根据DescribeAccessRegionsByDestRegion接口获取得到
+      */
+  Concurrent?: number
+
+  /**
+      * 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。
+更多详细信息请参阅：如何保证幂等性。
+      */
+  ClientToken?: string
+
+  /**
+   * （新参数）通道的实例ID。
+   */
+  ProxyId?: string
+
+  /**
+   * 计费方式 (0:按带宽计费，1:按流量计费 默认按带宽计费）
+   */
+  BillingType?: number
+}
+
+/**
+ * CreateGlobalDomainDns请求参数结构体
+ */
+export interface CreateGlobalDomainDnsRequest {
+  /**
+   * 域名ID
+   */
+  DomainId: string
+
+  /**
+   * 通道ID列表
+   */
+  ProxyIdList: Array<string>
+
+  /**
+   * 国家ID列表
+   */
+  NationCountryInnerCodes: Array<string>
+}
+
+/**
  * 内部接口使用，返回可以查询统计数据的通道和对应的监听器信息
  */
 export interface ProxySimpleInfo {
@@ -3776,6 +3932,88 @@ export interface DescribeBlackHeaderResponse {
 export type DescribeDestRegionsRequest = null
 
 /**
+ * HTTPS类型监听器信息
+ */
+export interface HTTPSListener {
+  /**
+   * 监听器ID
+   */
+  ListenerId: string
+
+  /**
+   * 监听器名称
+   */
+  ListenerName: string
+
+  /**
+   * 监听器端口
+   */
+  Port: number
+
+  /**
+   * 监听器协议， HTTP表示HTTP，HTTPS表示HTTPS，此结构取值HTTPS
+   */
+  Protocol: string
+
+  /**
+      * 监听器状态，其中：
+0表示运行中；
+1表示创建中；
+2表示销毁中；
+3表示源站调整中；
+4表示配置变更中。
+      */
+  ListenerStatus: number
+
+  /**
+   * 监听器服务器SSL证书ID
+   */
+  CertificateId: string
+
+  /**
+   * 监听器后端转发源站协议
+   */
+  ForwardProtocol: string
+
+  /**
+   * 监听器创建时间，Unix时间戳
+   */
+  CreateTime: number
+
+  /**
+      * 服务器SSL证书的别名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CertificateAlias: string
+
+  /**
+      * 监听器客户端CA证书ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClientCertificateId: string
+
+  /**
+      * 监听器认证方式。其中，
+0表示单向认证；
+1表示双向认证。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AuthType: number
+
+  /**
+      * 客户端CA证书别名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClientCertificateAlias: string
+
+  /**
+      * 多客户端CA证书别名信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PolyClientCertificateAliasInfo: Array<CertificateAliasInfo>
+}
+
+/**
  * ModifyRuleAttribute返回参数结构体
  */
 export interface ModifyRuleAttributeResponse {
@@ -3937,6 +4175,31 @@ export interface DomainAccessRegionDict {
    * 加速区域别名
    */
   RegionName: string
+}
+
+/**
+ * 统一域名解析的DNS记录
+ */
+export interface GlobalDns {
+  /**
+   * 解析记录ID
+   */
+  DnsRecordId: number
+
+  /**
+   * 域名就近接入地域信息列表
+   */
+  CountryAreaList: Array<CountryAreaMap>
+
+  /**
+   * 域名解析对应的通道接入点信息列表
+   */
+  AccessList: Array<ProxyAccessInfo>
+
+  /**
+   * 解析状态：1表示运行中，2表示创建中，3表示修改中，4表示删除中
+   */
+  Status: number
 }
 
 /**
@@ -4523,6 +4786,70 @@ export interface DeleteRuleResponse {
 }
 
 /**
+ * ModifyRuleAttribute请求参数结构体
+ */
+export interface ModifyRuleAttributeRequest {
+  /**
+   * 监听器ID
+   */
+  ListenerId: string
+
+  /**
+   * 转发规则ID
+   */
+  RuleId: string
+
+  /**
+   * 监听器源站访问策略，其中：rr表示轮询；wrr表示加权轮询；lc表示最小连接数；lrtt表示最小时延。
+   */
+  Scheduler?: string
+
+  /**
+      * 源站健康检查开关，其中：
+1，开启；
+0，关闭。
+      */
+  HealthCheck?: number
+
+  /**
+   * 健康检查配置参数
+   */
+  CheckParams?: RuleCheckParams
+
+  /**
+   * 转发规则路径
+   */
+  Path?: string
+
+  /**
+      * 加速通道转发到源站的协议类型，支持：default, HTTP和HTTPS。
+当ForwardProtocol=default时，表示使用对应监听器的ForwardProtocol。
+      */
+  ForwardProtocol?: string
+
+  /**
+      * 回源Host。加速通道转发到源站的请求中携带的host。
+当ForwardHost=default时，使用规则的域名，其他情况为该字段所设置的值。
+      */
+  ForwardHost?: string
+
+  /**
+   * 服务器名称指示（ServerNameIndication，简称SNI）开关。ON表示开启，OFF表示关闭。
+   */
+  ServerNameIndicationSwitch?: string
+
+  /**
+   * 服务器名称指示（ServerNameIndication，简称SNI），当SNI开关打开时，该字段必填。
+   */
+  ServerNameIndication?: string
+
+  /**
+   * HTTP强制跳转HTTPS。输入当前规则对应的域名与地址。
+   */
+  ForcedRedirect?: string
+}
+
+/**
  * DescribeFirstLinkSession请求参数结构体
  */
 export interface DescribeFirstLinkSessionRequest {
@@ -4536,6 +4863,31 @@ export interface DescribeFirstLinkSessionRequest {
  * BindRuleRealServers返回参数结构体
  */
 export interface BindRuleRealServersResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeGlobalDomainDns返回参数结构体
+ */
+export interface DescribeGlobalDomainDnsResponse {
+  /**
+   * DNS解析记录详细信息列表
+   */
+  GlobalDnsList: Array<GlobalDns>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyUDPListenerAttribute返回参数结构体
+ */
+export interface ModifyUDPListenerAttributeResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5119,6 +5471,16 @@ export interface ModifyProxyGroupAttributeRequest {
 }
 
 /**
+ * ModifyProxiesProject返回参数结构体
+ */
+export interface ModifyProxiesProjectResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CloseProxyGroup返回参数结构体
  */
 export interface CloseProxyGroupResponse {
@@ -5429,6 +5791,50 @@ export interface OpenProxyGroupResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifySecurityRule请求参数结构体
+ */
+export interface ModifySecurityRuleRequest {
+  /**
+   * 规则ID
+   */
+  RuleId: string
+
+  /**
+   * 规则名：不得超过30个字符，超过部分会被截断。
+   */
+  AliasName: string
+
+  /**
+   * 安全策略ID
+   */
+  PolicyId: string
+
+  /**
+   * 安全规则动作
+   */
+  RuleAction?: string
+
+  /**
+   * 规则关联地址，格式需要满足CIDR网络地址规范
+   */
+  SourceCidr?: string
+
+  /**
+   * 协议类型
+   */
+  Protocol?: string
+
+  /**
+      * 端口范围，支持以下格式
+单个端口: 80
+多个端口: 80,443
+连续端口: 3306-20000
+所有端口: ALL
+      */
+  DestPortRange?: string
 }
 
 /**
@@ -5775,6 +6181,16 @@ export interface UDPListener {
 }
 
 /**
+ * DeleteGlobalDomain请求参数结构体
+ */
+export interface DeleteGlobalDomainRequest {
+  /**
+   * 域名ID
+   */
+  DomainId: string
+}
+
+/**
  * 通道信息
  */
 export interface ProxyInfo {
@@ -6022,14 +6438,9 @@ export interface DescribeRulesByRuleIdsRequest {
 }
 
 /**
- * OpenSecurityPolicy返回参数结构体
+ * DeleteGlobalDomain返回参数结构体
  */
-export interface OpenSecurityPolicyResponse {
-  /**
-   * 异步流程ID，可以通过DescribeAsyncTaskStatus接口查询流程运行状态
-   */
-  TaskId: string
-
+export interface DeleteGlobalDomainResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6074,6 +6485,26 @@ export interface CloseProxyGroupRequest {
    * 通道组的实例 ID。
    */
   GroupId: string
+}
+
+/**
+ * DescribeGlobalDomains返回参数结构体
+ */
+export interface DescribeGlobalDomainsResponse {
+  /**
+   * 域名信息列表
+   */
+  Domains: Array<Domain>
+
+  /**
+   * 总记录数
+   */
+  TotalCount: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

@@ -34,6 +34,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTreeJobs", req, cb);
     }
     /**
+     * 查询树状结构资源列表
+     */
+    async DescribeTreeResources(req, cb) {
+        return this.request("DescribeTreeResources", req, cb);
+    }
+    /**
      * 单条和批量复制作业
      */
     async CopyJobs(req, cb) {

@@ -59,6 +59,7 @@ import {
   DeleteResourceConfigsRequest,
   DescribeJobSavepointResponse,
   DeleteJobsResponse,
+  DescribeTreeResourcesResponse,
   RunJobsResponse,
   Filter,
   DeleteResourcesRequest,
@@ -88,6 +89,7 @@ import {
   JobV1,
   JobConfig,
   DescribeResourceConfigsRequest,
+  DescribeTreeResourcesRequest,
 } from "./oceanus_models"
 
 /**
@@ -107,6 +109,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTreeJobsResponse) => void
   ): Promise<DescribeTreeJobsResponse> {
     return this.request("DescribeTreeJobs", req, cb)
+  }
+
+  /**
+   * 查询树状结构资源列表
+   */
+  async DescribeTreeResources(
+    req: DescribeTreeResourcesRequest,
+    cb?: (error: string, rep: DescribeTreeResourcesResponse) => void
+  ): Promise<DescribeTreeResourcesResponse> {
+    return this.request("DescribeTreeResources", req, cb)
   }
 
   /**
