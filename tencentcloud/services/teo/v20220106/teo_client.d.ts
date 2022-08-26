@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ModifyDefaultCertificateRequest, DescribeWebManagedRulesTopDataResponse, DescribeOriginGroupResponse, DescribeWebManagedRulesAttackEventsResponse, DescribeTopL7CacheDataRequest, DeleteApplicationProxyResponse, DescribeZonesRequest, ModifyLoadBalancingStatusResponse, DescribePrefetchTasksResponse, DescribeDDosAttackEventResponse, DeleteApplicationProxyRequest, CreateCustomErrorPageResponse, ReclaimZoneResponse, DescribeZoneSettingRequest, ModifyZoneStatusRequest, ModifyDnsRecordRequest, ModifySecurityPolicyRequest, CreateApplicationProxyRulesRequest, ModifyDnssecRequest, ModifyZoneSettingRequest, CreateApplicationProxyResponse, ImportDnsRecordsRequest, ModifyOriginGroupResponse, DescribeZoneDetailsResponse, ModifyZoneStatusResponse, DescribeSecurityPolicyManagedRulesRequest, DescribeSecurityPortraitRulesRequest, ModifySecurityPolicyResponse, ModifyDDoSPolicyHostRequest, DescribeHostsSettingResponse, DescribeSecurityPolicyRegionsResponse, ModifyZoneResponse, DescribeDDosAttackSourceEventRequest, ModifyZoneRequest, DeleteZoneResponse, CreatePurgeTaskResponse, DeleteApplicationProxyRuleResponse, DeleteOriginGroupRequest, ModifyHostsCertificateResponse, CreateDnsRecordRequest, ModifyHostsCertificateRequest, DescribeSecurityPolicyManagedRulesIdRequest, ModifyApplicationProxyStatusRequest, DescribeIdentificationRequest, ModifyLoadBalancingStatusRequest, DescribeDDosAttackTopDataResponse, DescribeCnameStatusResponse, DescribeLoadBalancingRequest, ModifyZoneSettingResponse, DescribeZonesResponse, ScanDnsRecordsResponse, CreateDnsRecordResponse, DescribeWebManagedRulesDataResponse, DescribeWebManagedRulesLogResponse, CreatePrefetchTaskRequest, DeleteApplicationProxyRuleRequest, DescribeTopL7AnalysisDataRequest, DescribeApplicationProxyResponse, CreateLoadBalancingResponse, DescribeTopL7CacheDataResponse, DescribeOverviewL7DataRequest, IdentifyZoneResponse, ModifyLoadBalancingRequest, CreateLoadBalancingRequest, DescribeDnssecRequest, DescribeWebProtectionLogResponse, DescribeLoadBalancingDetailResponse, DescribeBotManagedRulesResponse, DescribeWebManagedRulesDataRequest, ModifyDDoSPolicyResponse, DescribeDnsRecordsRequest, CreatePrefetchTaskResponse, DescribeDefaultCertificatesRequest, DescribeSecurityPolicyRequest, ModifyApplicationProxyRuleResponse, CreateZoneRequest, DescribeTimingL7CacheDataRequest, DescribeSecurityPolicyListResponse, DescribePurgeTasksResponse, CheckCertificateResponse, DownloadL7LogsRequest, DeleteLoadBalancingResponse, DescribeWebProtectionDataRequest, CheckCertificateRequest, DescribeSecurityPortraitRulesResponse, CreateApplicationProxyRuleRequest, DescribeDnsDataResponse, ModifyApplicationProxyStatusResponse, IdentifyZoneRequest, DescribeDnsRecordsResponse, DescribeDefaultCertificatesResponse, DescribeTimingL7AnalysisDataResponse, DescribeWebProtectionAttackEventsRequest, DescribeOverviewL7DataResponse, DescribeHostsCertificateRequest, DescribeSecurityPolicyManagedRulesResponse, DescribeApplicationProxyRequest, ModifyDDoSPolicyHostResponse, ModifyApplicationProxyRuleStatusRequest, ModifyLoadBalancingResponse, DescribeDDosAttackTopDataRequest, CreateApplicationProxyRuleResponse, DescribeDDosAttackDataRequest, ModifyDnsRecordResponse, CreateApplicationProxyRequest, DescribeTopL7AnalysisDataResponse, DescribeWebManagedRulesAttackEventsRequest, DescribeCnameStatusRequest, CreateCustomErrorPageRequest, DescribeDnssecResponse, CreateZoneResponse, DeleteLoadBalancingRequest, DescribeTimingL7AnalysisDataRequest, DescribeSecurityPolicyManagedRulesIdResponse, ModifyApplicationProxyResponse, DescribeDDoSPolicyResponse, ModifyOriginGroupRequest, ModifyApplicationProxyRuleStatusResponse, DescribeSecurityPolicyListRequest, DescribeTimingL7CacheDataResponse, DescribeApplicationProxyDetailRequest, DeleteOriginGroupResponse, DescribeDDosAttackSourceEventResponse, DescribeZoneDetailsRequest, DescribeDDoSPolicyRequest, DescribeDDosMajorAttackEventRequest, CreateOriginGroupResponse, DescribeSecurityPolicyResponse, DescribeSecurityPolicyRegionsRequest, ReclaimZoneRequest, DeleteZoneRequest, ModifyDefaultCertificateResponse, DescribeDDosAttackEventRequest, DescribeHostsCertificateResponse, DescribeZoneSettingResponse, DescribePurgeTasksRequest, DescribeDnsDataRequest, DescribeDDosAttackEventDetailResponse, ModifyApplicationProxyRuleRequest, ModifyDDoSPolicyRequest, ModifyZoneCnameSpeedUpResponse, DescribeWebProtectionLogRequest, DescribePrefetchTasksRequest, DeleteDnsRecordsRequest, DescribeZoneDDoSPolicyResponse, DescribeDDosMajorAttackEventResponse, DescribeWebProtectionAttackEventsResponse, CreatePurgeTaskRequest, DeleteDnsRecordsResponse, DescribeBotLogRequest, DownloadL7LogsResponse, CreateOriginGroupRequest, DescribeTimingL4DataRequest, DescribeHostsSettingRequest, DescribeZoneDDoSPolicyRequest, DescribeDDosAttackDataResponse, DescribeWebManagedRulesLogRequest, CreateApplicationProxyRulesResponse, DescribeWebManagedRulesTopDataRequest, DescribeIdentificationResponse, ModifyZoneCnameSpeedUpRequest, DescribeApplicationProxyDetailResponse, DescribeBotLogResponse, DescribeLoadBalancingResponse, DescribeWebProtectionDataResponse, ModifyApplicationProxyRequest, ModifyDnssecResponse, ScanDnsRecordsRequest, ImportDnsRecordsResponse, DescribeLoadBalancingDetailRequest, DescribeOriginGroupRequest, DescribeOriginGroupDetailResponse, DescribeOriginGroupDetailRequest, DescribeDDosAttackEventDetailRequest, DescribeTimingL4DataResponse, DescribeBotManagedRulesRequest } from "./teo_models";
+import { CreatePlanForZoneResponse, DeleteRulesRequest, ModifyDefaultCertificateRequest, DescribeWebManagedRulesTopDataResponse, DescribeOriginGroupResponse, DescribeWebManagedRulesAttackEventsResponse, DescribeTopL7CacheDataRequest, DeleteApplicationProxyResponse, DescribeZonesRequest, ModifyRuleRequest, ModifyLoadBalancingStatusResponse, DescribePrefetchTasksResponse, DescribeDDosAttackEventResponse, DeleteApplicationProxyRequest, CreateCustomErrorPageResponse, CreateRuleResponse, DescribeZoneSettingRequest, ModifyZoneStatusRequest, ModifyDnsRecordRequest, ModifySecurityPolicyRequest, CreateApplicationProxyRulesRequest, ModifyDnssecRequest, ModifyZoneSettingRequest, CreateApplicationProxyResponse, ImportDnsRecordsRequest, ModifyZoneStatusResponse, DescribeRulesResponse, DescribeZoneDetailsResponse, DescribeAvailablePlansRequest, DescribeSecurityPolicyManagedRulesRequest, DescribeSecurityPortraitRulesRequest, ModifySecurityPolicyResponse, ModifyDDoSPolicyHostRequest, DescribeHostsSettingResponse, DescribeSecurityPolicyRegionsResponse, ModifyZoneResponse, DescribeDDosAttackSourceEventRequest, ModifyZoneRequest, DeleteZoneResponse, CreatePurgeTaskResponse, DeleteApplicationProxyRuleResponse, ModifyRulePriorityResponse, DeleteOriginGroupRequest, ModifyHostsCertificateResponse, CreateDnsRecordRequest, ModifyHostsCertificateRequest, DescribeSecurityPolicyManagedRulesIdRequest, DescribeRulesSettingResponse, DescribeIdentificationRequest, ModifyLoadBalancingStatusRequest, DescribeDDosAttackTopDataResponse, DescribeCnameStatusResponse, DescribeLoadBalancingRequest, ModifyZoneSettingResponse, DescribeZonesResponse, ScanDnsRecordsResponse, CreateDnsRecordResponse, DescribeWebManagedRulesDataResponse, DescribeWebManagedRulesLogResponse, CreatePrefetchTaskRequest, DeleteApplicationProxyRuleRequest, DescribeTopL7AnalysisDataRequest, DescribeApplicationProxyResponse, CreateLoadBalancingResponse, DescribeTopL7CacheDataResponse, DescribeOverviewL7DataRequest, IdentifyZoneResponse, ModifyLoadBalancingRequest, CreateLoadBalancingRequest, DescribeDnssecRequest, DescribeWebProtectionLogResponse, DescribeLoadBalancingDetailResponse, DescribeBotManagedRulesResponse, DescribeWebManagedRulesDataRequest, ModifyDDoSPolicyResponse, DescribeDnsRecordsRequest, CreatePrefetchTaskResponse, DescribeDefaultCertificatesRequest, DescribeSecurityPolicyRequest, ModifyApplicationProxyRuleResponse, CreateZoneRequest, DescribeTimingL7CacheDataRequest, DescribeSecurityPolicyListResponse, DescribePurgeTasksResponse, ModifyRuleResponse, CheckCertificateResponse, DownloadL7LogsRequest, DeleteLoadBalancingResponse, DescribeWebProtectionDataRequest, CheckCertificateRequest, DescribeSecurityPortraitRulesResponse, CreateApplicationProxyRuleRequest, DescribeDnsDataResponse, ModifyApplicationProxyStatusResponse, IdentifyZoneRequest, DescribeDnsRecordsResponse, DescribeDefaultCertificatesResponse, DescribeTimingL7AnalysisDataResponse, DescribeWebProtectionAttackEventsRequest, DescribeOverviewL7DataResponse, DescribeHostsCertificateRequest, DescribeSecurityPolicyManagedRulesResponse, DescribeApplicationProxyRequest, CreateRuleRequest, ModifyDDoSPolicyHostResponse, ModifyApplicationProxyRuleStatusRequest, ModifyLoadBalancingResponse, DescribeDDosAttackTopDataRequest, CreateApplicationProxyRuleResponse, DescribeDDosAttackDataRequest, ModifyDnsRecordResponse, CreatePlanForZoneRequest, CreateApplicationProxyRequest, DescribeTopL7AnalysisDataResponse, ModifyRulePriorityRequest, DescribeWebManagedRulesAttackEventsRequest, DescribeCnameStatusRequest, CreateCustomErrorPageRequest, DescribeDnssecResponse, CreateZoneResponse, DeleteLoadBalancingRequest, DescribeTimingL7AnalysisDataRequest, DescribeSecurityPolicyManagedRulesIdResponse, ModifyApplicationProxyResponse, DescribeDDoSPolicyResponse, ModifyOriginGroupRequest, ModifyApplicationProxyRuleStatusResponse, DescribeSecurityPolicyListRequest, DescribeTimingL7CacheDataResponse, DescribeApplicationProxyDetailRequest, ModifyApplicationProxyStatusRequest, DeleteOriginGroupResponse, DescribeDDosAttackSourceEventResponse, DescribeZoneDetailsRequest, DescribeDDoSPolicyRequest, DescribeDDosMajorAttackEventRequest, CreateOriginGroupResponse, DescribeSecurityPolicyResponse, DescribeSecurityPolicyRegionsRequest, ReclaimZoneRequest, DeleteZoneRequest, ModifyDefaultCertificateResponse, DescribeDDosAttackEventRequest, DescribeHostsCertificateResponse, DescribeZoneSettingResponse, DescribeRulesRequest, DeleteRulesResponse, DescribeDnsDataRequest, DescribeDDosAttackEventDetailResponse, ModifyApplicationProxyRuleRequest, ModifyDDoSPolicyRequest, ModifyZoneCnameSpeedUpResponse, DescribeWebProtectionLogRequest, DescribePrefetchTasksRequest, DescribeRulesSettingRequest, DeleteDnsRecordsRequest, DescribeZoneDDoSPolicyResponse, DescribeDDosMajorAttackEventResponse, ModifyOriginGroupResponse, DescribeWebProtectionAttackEventsResponse, CreatePurgeTaskRequest, DeleteDnsRecordsResponse, DescribeBotLogRequest, DownloadL7LogsResponse, CreateOriginGroupRequest, DescribeTimingL4DataRequest, DescribeHostsSettingRequest, DescribeZoneDDoSPolicyRequest, DescribeDDosAttackDataResponse, DescribeWebManagedRulesLogRequest, ReclaimZoneResponse, CreateApplicationProxyRulesResponse, DescribeWebManagedRulesTopDataRequest, DescribeAvailablePlansResponse, DescribePurgeTasksRequest, DescribeIdentificationResponse, ModifyZoneCnameSpeedUpRequest, DescribeApplicationProxyDetailResponse, DescribeBotLogResponse, DescribeLoadBalancingResponse, DescribeWebProtectionDataResponse, ModifyApplicationProxyRequest, ModifyDnssecResponse, ScanDnsRecordsRequest, ImportDnsRecordsResponse, DescribeLoadBalancingDetailRequest, DescribeOriginGroupRequest, DescribeOriginGroupDetailResponse, DescribeOriginGroupDetailRequest, DescribeDDosAttackEventDetailRequest, DescribeTimingL4DataResponse, DescribeBotManagedRulesRequest } from "./teo_models";
 /**
  * teo client
  * @class
@@ -16,9 +16,9 @@ export declare class Client extends AbstractClient {
      */
     CreatePurgeTask(req: CreatePurgeTaskRequest, cb?: (error: string, rep: CreatePurgeTaskResponse) => void): Promise<CreatePurgeTaskResponse>;
     /**
-     * 查询预热任务状态
+     * 为未购买套餐的站点购买套餐
      */
-    DescribePrefetchTasks(req: DescribePrefetchTasksRequest, cb?: (error: string, rep: DescribePrefetchTasksResponse) => void): Promise<DescribePrefetchTasksResponse>;
+    CreatePlanForZone(req: CreatePlanForZoneRequest, cb?: (error: string, rep: CreatePlanForZoneResponse) => void): Promise<CreatePlanForZoneResponse>;
     /**
      * 查询web防护攻击事件
      */
@@ -124,6 +124,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeSecurityPolicyList(req: DescribeSecurityPolicyListRequest, cb?: (error: string, rep: DescribeSecurityPolicyListResponse) => void): Promise<DescribeSecurityPolicyListResponse>;
     /**
+     * 查询预热任务状态
+     */
+    DescribePrefetchTasks(req: DescribePrefetchTasksRequest, cb?: (error: string, rep: DescribePrefetchTasksResponse) => void): Promise<DescribePrefetchTasksResponse>;
+    /**
      * 源站组删除
      */
     DeleteOriginGroup(req: DeleteOriginGroupRequest, cb?: (error: string, rep: DeleteOriginGroupResponse) => void): Promise<DeleteOriginGroupResponse>;
@@ -156,17 +160,21 @@ export declare class Client extends AbstractClient {
      */
     DeleteLoadBalancing(req: DeleteLoadBalancingRequest, cb?: (error: string, rep: DeleteLoadBalancingResponse) => void): Promise<DeleteLoadBalancingResponse>;
     /**
-     * 四层时序流量数据查询
-     */
-    DescribeTimingL4Data(req: DescribeTimingL4DataRequest, cb?: (error: string, rep: DescribeTimingL4DataResponse) => void): Promise<DescribeTimingL4DataResponse>;
-    /**
      * 七层查询缓存分析top类流量数据
      */
     DescribeTopL7CacheData(req: DescribeTopL7CacheDataRequest, cb?: (error: string, rep: DescribeTopL7CacheDataResponse) => void): Promise<DescribeTopL7CacheDataResponse>;
     /**
+     * 四层时序流量数据查询
+     */
+    DescribeTimingL4Data(req: DescribeTimingL4DataRequest, cb?: (error: string, rep: DescribeTimingL4DataResponse) => void): Promise<DescribeTimingL4DataResponse>;
+    /**
      * 扫描站点历史解析记录
      */
     ScanDnsRecords(req: ScanDnsRecordsRequest, cb?: (error: string, rep: ScanDnsRecordsResponse) => void): Promise<ScanDnsRecordsResponse>;
+    /**
+     * 修改规则引擎规则。
+     */
+    ModifyRule(req: ModifyRuleRequest, cb?: (error: string, rep: ModifyRuleResponse) => void): Promise<ModifyRuleResponse>;
     /**
      * 查询top类流量数据
      */
@@ -179,6 +187,10 @@ export declare class Client extends AbstractClient {
      * 修改Web&Bot安全配置
      */
     ModifySecurityPolicy(req: ModifySecurityPolicyRequest, cb?: (error: string, rep: ModifySecurityPolicyResponse) => void): Promise<ModifySecurityPolicyResponse>;
+    /**
+     * 修改规则引擎规则优先级
+     */
+    ModifyRulePriority(req: ModifyRulePriorityRequest, cb?: (error: string, rep: ModifyRulePriorityResponse) => void): Promise<ModifyRulePriorityResponse>;
     /**
      * 分页查询Bot托管规则
      */
@@ -200,6 +212,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeIdentification(req: DescribeIdentificationRequest, cb?: (error: string, rep: DescribeIdentificationResponse) => void): Promise<DescribeIdentificationResponse>;
     /**
+     * 规则引擎创建规则。
+     */
+    CreateRule(req: CreateRuleRequest, cb?: (error: string, rep: CreateRuleResponse) => void): Promise<CreateRuleResponse>;
+    /**
      * 修改应用代理
      */
     ModifyApplicationProxy(req: ModifyApplicationProxyRequest, cb?: (error: string, rep: ModifyApplicationProxyResponse) => void): Promise<ModifyApplicationProxyResponse>;
@@ -207,6 +223,10 @@ export declare class Client extends AbstractClient {
      * 用于用户接入新的站点
      */
     CreateZone(req: CreateZoneRequest, cb?: (error: string, rep: CreateZoneResponse) => void): Promise<CreateZoneResponse>;
+    /**
+     * 查询当前账户可用套餐信息列表
+     */
+    DescribeAvailablePlans(req?: DescribeAvailablePlansRequest, cb?: (error: string, rep: DescribeAvailablePlansResponse) => void): Promise<DescribeAvailablePlansResponse>;
     /**
      * 查询所有DDoS防护分区
      */
@@ -227,6 +247,10 @@ export declare class Client extends AbstractClient {
      * 获取DNS请求数统计曲线
      */
     DescribeDnsData(req: DescribeDnsDataRequest, cb?: (error: string, rep: DescribeDnsDataResponse) => void): Promise<DescribeDnsDataResponse>;
+    /**
+     * 返回规则引擎可应用匹配请求的设置列表及其详细建议配置信息
+     */
+    DescribeRulesSetting(req?: DescribeRulesSettingRequest, cb?: (error: string, rep: DescribeRulesSettingResponse) => void): Promise<DescribeRulesSettingResponse>;
     /**
      * 查询域名证书列表，支持搜索、分页、排序、过滤。
      */
@@ -252,6 +276,10 @@ export declare class Client extends AbstractClient {
      */
     ModifyZoneStatus(req: ModifyZoneStatusRequest, cb?: (error: string, rep: ModifyZoneStatusResponse) => void): Promise<ModifyZoneStatusResponse>;
     /**
+     * 批量删除规则引擎规则。
+     */
+    DeleteRules(req: DeleteRulesRequest, cb?: (error: string, rep: DeleteRulesResponse) => void): Promise<DeleteRulesResponse>;
+    /**
      * 查询DDoS防护配置详情
      */
     DescribeDDoSPolicy(req: DescribeDDoSPolicyRequest, cb?: (error: string, rep: DescribeDDoSPolicyResponse) => void): Promise<DescribeDDoSPolicyResponse>;
@@ -267,6 +295,10 @@ export declare class Client extends AbstractClient {
      * 查询安全防护配置详情
      */
     DescribeSecurityPolicy(req: DescribeSecurityPolicyRequest, cb?: (error: string, rep: DescribeSecurityPolicyResponse) => void): Promise<DescribeSecurityPolicyResponse>;
+    /**
+     * 查询规则引擎规则。
+     */
+    DescribeRules(req: DescribeRulesRequest, cb?: (error: string, rep: DescribeRulesResponse) => void): Promise<DescribeRulesResponse>;
     /**
      * 创建应用代理
      */

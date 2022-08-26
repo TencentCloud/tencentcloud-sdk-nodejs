@@ -367,6 +367,11 @@ export interface UpdateProbeTaskConfigurationListRequest {
       * 定时任务cron表达式
       */
     Cron?: string;
+    /**
+      * 预付费套餐id
+需要与taskId对应
+      */
+    ResourceIDs?: Array<string>;
 }
 /**
  * CreateProbeTasks请求参数结构体

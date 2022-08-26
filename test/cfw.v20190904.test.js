@@ -578,16 +578,6 @@ it("cfw.v20190904.DescribeCfwEips", async function () {
     }
 })
 
-it("cfw.v20190904.RunSyncAsset", async function () {
-    try {
-       const data = await client.RunSyncAsset({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("cfw.v20190904.ModifyAcRule", async function () {
     try {
        const data = await client.ModifyAcRule({})

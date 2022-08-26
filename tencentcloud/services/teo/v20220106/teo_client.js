@@ -40,10 +40,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreatePurgeTask", req, cb);
     }
     /**
-     * 查询预热任务状态
+     * 为未购买套餐的站点购买套餐
      */
-    async DescribePrefetchTasks(req, cb) {
-        return this.request("DescribePrefetchTasks", req, cb);
+    async CreatePlanForZone(req, cb) {
+        return this.request("CreatePlanForZone", req, cb);
     }
     /**
      * 查询web防护攻击事件
@@ -202,6 +202,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeSecurityPolicyList", req, cb);
     }
     /**
+     * 查询预热任务状态
+     */
+    async DescribePrefetchTasks(req, cb) {
+        return this.request("DescribePrefetchTasks", req, cb);
+    }
+    /**
      * 源站组删除
      */
     async DeleteOriginGroup(req, cb) {
@@ -250,22 +256,28 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteLoadBalancing", req, cb);
     }
     /**
-     * 四层时序流量数据查询
-     */
-    async DescribeTimingL4Data(req, cb) {
-        return this.request("DescribeTimingL4Data", req, cb);
-    }
-    /**
      * 七层查询缓存分析top类流量数据
      */
     async DescribeTopL7CacheData(req, cb) {
         return this.request("DescribeTopL7CacheData", req, cb);
     }
     /**
+     * 四层时序流量数据查询
+     */
+    async DescribeTimingL4Data(req, cb) {
+        return this.request("DescribeTimingL4Data", req, cb);
+    }
+    /**
      * 扫描站点历史解析记录
      */
     async ScanDnsRecords(req, cb) {
         return this.request("ScanDnsRecords", req, cb);
+    }
+    /**
+     * 修改规则引擎规则。
+     */
+    async ModifyRule(req, cb) {
+        return this.request("ModifyRule", req, cb);
     }
     /**
      * 查询top类流量数据
@@ -284,6 +296,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifySecurityPolicy(req, cb) {
         return this.request("ModifySecurityPolicy", req, cb);
+    }
+    /**
+     * 修改规则引擎规则优先级
+     */
+    async ModifyRulePriority(req, cb) {
+        return this.request("ModifyRulePriority", req, cb);
     }
     /**
      * 分页查询Bot托管规则
@@ -316,6 +334,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeIdentification", req, cb);
     }
     /**
+     * 规则引擎创建规则。
+     */
+    async CreateRule(req, cb) {
+        return this.request("CreateRule", req, cb);
+    }
+    /**
      * 修改应用代理
      */
     async ModifyApplicationProxy(req, cb) {
@@ -326,6 +350,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateZone(req, cb) {
         return this.request("CreateZone", req, cb);
+    }
+    /**
+     * 查询当前账户可用套餐信息列表
+     */
+    async DescribeAvailablePlans(req, cb) {
+        return this.request("DescribeAvailablePlans", req, cb);
     }
     /**
      * 查询所有DDoS防护分区
@@ -356,6 +386,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeDnsData(req, cb) {
         return this.request("DescribeDnsData", req, cb);
+    }
+    /**
+     * 返回规则引擎可应用匹配请求的设置列表及其详细建议配置信息
+     */
+    async DescribeRulesSetting(req, cb) {
+        return this.request("DescribeRulesSetting", req, cb);
     }
     /**
      * 查询域名证书列表，支持搜索、分页、排序、过滤。
@@ -394,6 +430,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyZoneStatus", req, cb);
     }
     /**
+     * 批量删除规则引擎规则。
+     */
+    async DeleteRules(req, cb) {
+        return this.request("DeleteRules", req, cb);
+    }
+    /**
      * 查询DDoS防护配置详情
      */
     async DescribeDDoSPolicy(req, cb) {
@@ -416,6 +458,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeSecurityPolicy(req, cb) {
         return this.request("DescribeSecurityPolicy", req, cb);
+    }
+    /**
+     * 查询规则引擎规则。
+     */
+    async DescribeRules(req, cb) {
+        return this.request("DescribeRules", req, cb);
     }
     /**
      * 创建应用代理

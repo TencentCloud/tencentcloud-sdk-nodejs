@@ -372,12 +372,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCfwEips", req, cb);
     }
     /**
-     * 同步资产-互联网&VPC
-     */
-    async RunSyncAsset(req, cb) {
-        return this.request("RunSyncAsset", req, cb);
-    }
-    /**
      * 修改规则
      */
     async ModifyAcRule(req, cb) {

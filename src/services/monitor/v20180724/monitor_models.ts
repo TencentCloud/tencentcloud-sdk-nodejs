@@ -7875,7 +7875,7 @@ export interface GetMonitorDataResponse {
  */
 export interface ReceiverInfo {
   /**
-   * 告警时间段开始时间。范围[0,86400)，作为unix时间戳转成北京时间后去掉日期，例如7200表示"10:0:0"
+   * 告警时间段开始时间。范围[0,86400)，作为 UNIX 时间戳转成北京时间后去掉日期，例如7200表示"10:0:0"
    */
   StartTime: number
 
@@ -7905,7 +7905,7 @@ export interface ReceiverInfo {
   SendFor?: Array<string>
 
   /**
-   * 电话告警接收者uid
+   * 电话告警接收者 UID
    */
   UidList?: Array<number>
 
@@ -7935,12 +7935,12 @@ export interface ReceiverInfo {
   NeedSendNotice?: number
 
   /**
-   * 接收组列表。通过平台接口查询到的接收组id列表
+   * 接收组列表。通过平台接口查询到的接收组 ID 列表
    */
   ReceiverGroupList?: Array<number>
 
   /**
-   * 接收人列表。通过平台接口查询到的接收人id列表
+   * 接收人列表。通过平台接口查询到的接收人 ID 列表
    */
   ReceiverUserList?: Array<number>
 

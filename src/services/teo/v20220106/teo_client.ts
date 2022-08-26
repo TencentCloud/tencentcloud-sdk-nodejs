@@ -18,9 +18,10 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  CreatePlanForZoneResponse,
   Compression,
   WebLogData,
-  HostCertSetting,
+  DeleteRulesRequest,
   ACLUserRule,
   ModifyDefaultCertificateRequest,
   DescribeWebManagedRulesTopDataResponse,
@@ -35,13 +36,15 @@ import {
   DescribeZonesRequest,
   RateLimitTemplate,
   ShieldArea,
+  ServerCertInfo,
+  ModifyRuleRequest,
   DdosRule,
   ModifyLoadBalancingStatusResponse,
   DescribePrefetchTasksResponse,
   DescribeDDosAttackEventResponse,
   DeleteApplicationProxyRequest,
   CreateCustomErrorPageResponse,
-  ReclaimZoneResponse,
+  CreateRuleResponse,
   DescribeZoneSettingRequest,
   ModifyZoneStatusRequest,
   ModifyDnsRecordRequest,
@@ -55,11 +58,12 @@ import {
   CreateApplicationProxyResponse,
   ImportDnsRecordsRequest,
   CacheConfigNoCache,
-  ModifyOriginGroupResponse,
+  ModifyZoneStatusResponse,
+  DescribeRulesResponse,
   DescribeZoneDetailsResponse,
   BotLog,
   Origin,
-  ModifyZoneStatusResponse,
+  DescribeAvailablePlansRequest,
   DescribeSecurityPolicyManagedRulesRequest,
   DescribeSecurityPortraitRulesRequest,
   CertSort,
@@ -74,13 +78,18 @@ import {
   DDosAttackEventData,
   Hsts,
   CreatePurgeTaskResponse,
+  RuleCodeAction,
   DeleteApplicationProxyRuleResponse,
   DDosAttackSourceEvent,
   TimingDataRecord,
+  Zone,
+  ModifyRulePriorityResponse,
   DdosAcls,
   DeleteOriginGroupRequest,
+  RulesSettingAction,
   Tag,
   ModifyHostsCertificateResponse,
+  RateLimitConfig,
   CreateDnsRecordRequest,
   IpTableRule,
   L7OfflineLog,
@@ -88,11 +97,13 @@ import {
   ApplicationProxyRule,
   SmartRouting,
   DdosSpeedLimit,
-  Zone,
-  ZoneFilter,
+  OriginCheckOriginStatus,
+  RuleNormalActionParams,
   DescribeSecurityPolicyManagedRulesIdRequest,
-  ModifyApplicationProxyStatusRequest,
+  DescribeRulesSettingResponse,
   CacheConfigCache,
+  RuleExtraParameter,
+  RuleAction,
   CertFilter,
   DescribeIdentificationRequest,
   ModifyLoadBalancingStatusRequest,
@@ -105,10 +116,12 @@ import {
   ModifyZoneSettingResponse,
   DescribeZonesResponse,
   ScanDnsRecordsResponse,
+  RateLimitTemplateDetail,
   WafConfig,
   CreateDnsRecordResponse,
   CCLog,
-  ServerCertInfo,
+  RuleItem,
+  RuleFilter,
   DDoSConfig,
   DescribeWebManagedRulesDataResponse,
   DescribeWebManagedRulesLogResponse,
@@ -139,7 +152,7 @@ import {
   DDosMajorAttackEventData,
   DescribeBotManagedRulesResponse,
   DnsRecord,
-  TopDataRecord,
+  RuleCodeActionParams,
   Ipv6Access,
   DDoSAntiPly,
   DescribeWebManagedRulesDataRequest,
@@ -150,16 +163,20 @@ import {
   WafRule,
   DescribeDefaultCertificatesRequest,
   GeoIp,
+  RuleChoicePropertiesItem,
   DescribeSecurityPolicyRequest,
   ModifyApplicationProxyRuleResponse,
+  RuleRewriteActionParams,
   DDosAttackEvent,
   FailReason,
+  TopNEntryValue,
   CreateZoneRequest,
-  RateLimitConfig,
+  PlanInfo,
+  VanityNameServersIps,
   DescribeTimingL7CacheDataRequest,
   DescribeSecurityPolicyListResponse,
   DescribePurgeTasksResponse,
-  OriginRecordPrivateParameter,
+  ModifyRuleResponse,
   CheckCertificateResponse,
   DDoSApplication,
   DownloadL7LogsRequest,
@@ -182,12 +199,13 @@ import {
   PortraitManagedRuleDetail,
   BotPortraitRule,
   DescribeWebProtectionAttackEventsRequest,
+  RulesProperties,
   DescribeOverviewL7DataResponse,
   DescribeHostsCertificateRequest,
   DescribeSecurityPolicyManagedRulesResponse,
   OriginGroup,
   DescribeApplicationProxyRequest,
-  TopNEntryValue,
+  CreateRuleRequest,
   ModifyDDoSPolicyHostResponse,
   ModifyApplicationProxyRuleStatusRequest,
   ModifyLoadBalancingResponse,
@@ -196,14 +214,15 @@ import {
   CreateApplicationProxyRuleResponse,
   DescribeDDosAttackDataRequest,
   ModifyDnsRecordResponse,
-  RateLimitTemplateDetail,
+  OriginRecordPrivateParameter,
+  CreatePlanForZoneRequest,
   TimingDataItem,
   CreateApplicationProxyRequest,
   DescribeTopL7AnalysisDataResponse,
   IntelligenceRuleItem,
   IntelligenceRule,
   PostMaxSize,
-  OriginCheckOriginStatus,
+  ModifyRulePriorityRequest,
   ManagedRule,
   Filter,
   DescribeWebManagedRulesAttackEventsRequest,
@@ -227,9 +246,10 @@ import {
   DescribeApplicationProxyDetailRequest,
   RateLimitIntelligence,
   IpTableConfig,
+  ModifyApplicationProxyStatusRequest,
   DeleteOriginGroupResponse,
   Header,
-  VanityNameServersIps,
+  RuleAndConditions,
   DescribeDDosAttackSourceEventResponse,
   DescribeZoneDetailsRequest,
   DescribeDDoSPolicyRequest,
@@ -242,6 +262,7 @@ import {
   DescribeSecurityPolicyRegionsRequest,
   SecEntryValue,
   ReclaimZoneRequest,
+  RuleCondition,
   DeleteZoneRequest,
   BotManagedRule,
   ModifyDefaultCertificateResponse,
@@ -251,8 +272,10 @@ import {
   DescribeHostsCertificateResponse,
   DescribeZoneSettingResponse,
   AiRule,
+  ZoneFilter,
   MaxAge,
-  DescribePurgeTasksRequest,
+  DescribeRulesRequest,
+  DeleteRulesResponse,
   QueryCondition,
   DescribeDnsDataRequest,
   CacheConfig,
@@ -263,14 +286,18 @@ import {
   DescribeWebProtectionLogRequest,
   CCLogData,
   DescribePrefetchTasksRequest,
+  DescribeRulesSettingRequest,
   Task,
   DeleteDnsRecordsRequest,
   DdosAllowBlock,
   DDoSGeoIp,
+  RuleSettingDetail,
+  TopDataRecord,
   DescribeZoneDDoSPolicyResponse,
   CnameStatus,
   DescribeDDosMajorAttackEventResponse,
   DDoSFeaturesFilter,
+  ModifyOriginGroupResponse,
   DescribeWebProtectionAttackEventsResponse,
   CreatePurgeTaskRequest,
   Resource,
@@ -284,13 +311,19 @@ import {
   DescribeZoneDDoSPolicyRequest,
   DescribeDDosAttackDataResponse,
   DescribeWebManagedRulesLogRequest,
+  SecRuleRelatedInfo,
+  ReclaimZoneResponse,
   CreateApplicationProxyRulesResponse,
   DescribeWebManagedRulesTopDataRequest,
+  DescribeAvailablePlansResponse,
+  DescribePurgeTasksRequest,
   DescribeIdentificationResponse,
   DDosMajorAttackEvent,
   ModifyZoneCnameSpeedUpRequest,
   DescribeApplicationProxyDetailResponse,
   DDoSUserAllowBlockIP,
+  RuleRewriteAction,
+  RuleNormalAction,
   DescribeBotLogResponse,
   DescribeLoadBalancingResponse,
   DescribeWebProtectionDataResponse,
@@ -308,7 +341,7 @@ import {
   OfflineCache,
   DescribeOriginGroupDetailRequest,
   DescribeDDosAttackEventDetailRequest,
-  SecRuleRelatedInfo,
+  HostCertSetting,
   DescribeTimingL4DataResponse,
   Sv,
   BotConfig,
@@ -346,13 +379,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询预热任务状态
+   * 为未购买套餐的站点购买套餐
    */
-  async DescribePrefetchTasks(
-    req: DescribePrefetchTasksRequest,
-    cb?: (error: string, rep: DescribePrefetchTasksResponse) => void
-  ): Promise<DescribePrefetchTasksResponse> {
-    return this.request("DescribePrefetchTasks", req, cb)
+  async CreatePlanForZone(
+    req: CreatePlanForZoneRequest,
+    cb?: (error: string, rep: CreatePlanForZoneResponse) => void
+  ): Promise<CreatePlanForZoneResponse> {
+    return this.request("CreatePlanForZone", req, cb)
   }
 
   /**
@@ -616,6 +649,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询预热任务状态
+   */
+  async DescribePrefetchTasks(
+    req: DescribePrefetchTasksRequest,
+    cb?: (error: string, rep: DescribePrefetchTasksResponse) => void
+  ): Promise<DescribePrefetchTasksResponse> {
+    return this.request("DescribePrefetchTasks", req, cb)
+  }
+
+  /**
    * 源站组删除
    */
   async DeleteOriginGroup(
@@ -696,16 +739,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 四层时序流量数据查询
-   */
-  async DescribeTimingL4Data(
-    req: DescribeTimingL4DataRequest,
-    cb?: (error: string, rep: DescribeTimingL4DataResponse) => void
-  ): Promise<DescribeTimingL4DataResponse> {
-    return this.request("DescribeTimingL4Data", req, cb)
-  }
-
-  /**
    * 七层查询缓存分析top类流量数据
    */
   async DescribeTopL7CacheData(
@@ -716,6 +749,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 四层时序流量数据查询
+   */
+  async DescribeTimingL4Data(
+    req: DescribeTimingL4DataRequest,
+    cb?: (error: string, rep: DescribeTimingL4DataResponse) => void
+  ): Promise<DescribeTimingL4DataResponse> {
+    return this.request("DescribeTimingL4Data", req, cb)
+  }
+
+  /**
    * 扫描站点历史解析记录
    */
   async ScanDnsRecords(
@@ -723,6 +766,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ScanDnsRecordsResponse) => void
   ): Promise<ScanDnsRecordsResponse> {
     return this.request("ScanDnsRecords", req, cb)
+  }
+
+  /**
+   * 修改规则引擎规则。
+   */
+  async ModifyRule(
+    req: ModifyRuleRequest,
+    cb?: (error: string, rep: ModifyRuleResponse) => void
+  ): Promise<ModifyRuleResponse> {
+    return this.request("ModifyRule", req, cb)
   }
 
   /**
@@ -753,6 +806,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifySecurityPolicyResponse) => void
   ): Promise<ModifySecurityPolicyResponse> {
     return this.request("ModifySecurityPolicy", req, cb)
+  }
+
+  /**
+   * 修改规则引擎规则优先级
+   */
+  async ModifyRulePriority(
+    req: ModifyRulePriorityRequest,
+    cb?: (error: string, rep: ModifyRulePriorityResponse) => void
+  ): Promise<ModifyRulePriorityResponse> {
+    return this.request("ModifyRulePriority", req, cb)
   }
 
   /**
@@ -806,6 +869,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 规则引擎创建规则。
+   */
+  async CreateRule(
+    req: CreateRuleRequest,
+    cb?: (error: string, rep: CreateRuleResponse) => void
+  ): Promise<CreateRuleResponse> {
+    return this.request("CreateRule", req, cb)
+  }
+
+  /**
    * 修改应用代理
    */
   async ModifyApplicationProxy(
@@ -823,6 +896,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateZoneResponse) => void
   ): Promise<CreateZoneResponse> {
     return this.request("CreateZone", req, cb)
+  }
+
+  /**
+   * 查询当前账户可用套餐信息列表
+   */
+  async DescribeAvailablePlans(
+    req?: DescribeAvailablePlansRequest,
+    cb?: (error: string, rep: DescribeAvailablePlansResponse) => void
+  ): Promise<DescribeAvailablePlansResponse> {
+    return this.request("DescribeAvailablePlans", req, cb)
   }
 
   /**
@@ -873,6 +956,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDnsDataResponse) => void
   ): Promise<DescribeDnsDataResponse> {
     return this.request("DescribeDnsData", req, cb)
+  }
+
+  /**
+   * 返回规则引擎可应用匹配请求的设置列表及其详细建议配置信息
+   */
+  async DescribeRulesSetting(
+    req?: DescribeRulesSettingRequest,
+    cb?: (error: string, rep: DescribeRulesSettingResponse) => void
+  ): Promise<DescribeRulesSettingResponse> {
+    return this.request("DescribeRulesSetting", req, cb)
   }
 
   /**
@@ -936,6 +1029,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 批量删除规则引擎规则。
+   */
+  async DeleteRules(
+    req: DeleteRulesRequest,
+    cb?: (error: string, rep: DeleteRulesResponse) => void
+  ): Promise<DeleteRulesResponse> {
+    return this.request("DeleteRules", req, cb)
+  }
+
+  /**
    * 查询DDoS防护配置详情
    */
   async DescribeDDoSPolicy(
@@ -973,6 +1076,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSecurityPolicyResponse) => void
   ): Promise<DescribeSecurityPolicyResponse> {
     return this.request("DescribeSecurityPolicy", req, cb)
+  }
+
+  /**
+   * 查询规则引擎规则。
+   */
+  async DescribeRules(
+    req: DescribeRulesRequest,
+    cb?: (error: string, rep: DescribeRulesResponse) => void
+  ): Promise<DescribeRulesResponse> {
+    return this.request("DescribeRules", req, cb)
   }
 
   /**

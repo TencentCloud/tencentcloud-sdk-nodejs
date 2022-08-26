@@ -82,7 +82,6 @@ import {
   DescribeSecurityGroupListResponse,
   AssetZone,
   DescribeAddrTemplateListResponse,
-  RunSyncAssetRequest,
   DescribeTLogIpListRequest,
   DescribeNatFwInstancesInfoRequest,
   DescribeTableStatusRequest,
@@ -130,7 +129,6 @@ import {
   InstanceInfo,
   DescribeIPStatusListRequest,
   ModifyNatFwSwitchResponse,
-  RunSyncAssetResponse,
   DescribeBlockByIpTimesListResponse,
   SetNatFwDnatRuleResponse,
   DescribeRuleOverviewRequest,
@@ -771,16 +769,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCfwEipsResponse) => void
   ): Promise<DescribeCfwEipsResponse> {
     return this.request("DescribeCfwEips", req, cb)
-  }
-
-  /**
-   * 同步资产-互联网&VPC
-   */
-  async RunSyncAsset(
-    req: RunSyncAssetRequest,
-    cb?: (error: string, rep: RunSyncAssetResponse) => void
-  ): Promise<RunSyncAssetResponse> {
-    return this.request("RunSyncAsset", req, cb)
   }
 
   /**

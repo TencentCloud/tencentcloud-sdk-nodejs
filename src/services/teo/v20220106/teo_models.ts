@@ -16,6 +16,26 @@
  */
 
 /**
+ * CreatePlanForZone返回参数结构体
+ */
+export interface CreatePlanForZoneResponse {
+  /**
+   * 购买的资源名字列表。
+   */
+  ResourceNames: Array<string>
+
+  /**
+   * 购买的订单号列表。
+   */
+  DealNames: Array<string>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 智能压缩配置
  */
 export interface Compression {
@@ -67,20 +87,18 @@ export interface WebLogData {
 }
 
 /**
- * 域名证书配置
+ * DeleteRules请求参数结构体
  */
-export interface HostCertSetting {
+export interface DeleteRulesRequest {
   /**
-      * 域名
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Host: string
+   * 站点 ID。
+   */
+  ZoneId: string
 
   /**
-      * 服务端证书配置
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  CertInfo: Array<ServerCertInfo>
+   * 指定删除的规则 ID 列表。
+   */
+  RuleIds: Array<string>
 }
 
 /**
@@ -524,6 +542,84 @@ export interface ShieldArea {
 }
 
 /**
+ * https 服务端证书配置
+ */
+export interface ServerCertInfo {
+  /**
+      * 服务器证书 ID, 默认证书ID, 或在 SSL 证书管理进行证书托管时自动生成
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CertId: string
+
+  /**
+      * 证书备注名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Alias?: string
+
+  /**
+      * 证书类型:
+default: 默认证书
+upload:用户上传
+managed:腾讯云托管
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Type?: string
+
+  /**
+      * 证书过期时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ExpireTime?: string
+
+  /**
+      * 证书部署时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DeployTime?: string
+
+  /**
+      * 部署状态:
+processing: 部署中
+deployed: 已部署
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Status?: string
+}
+
+/**
+ * ModifyRule请求参数结构体
+ */
+export interface ModifyRuleRequest {
+  /**
+   * 站点 ID。
+   */
+  ZoneId: string
+
+  /**
+   * 规则名称，字符串名称长度 1~255。
+   */
+  RuleName: string
+
+  /**
+   * 规则内容。
+   */
+  Rules: Array<RuleItem>
+
+  /**
+   * 规则 ID。
+   */
+  RuleId: string
+
+  /**
+      * 规则状态，取值有：
+<li> enable: 启用； </li>
+<li> disable: 未启用。</li>
+      */
+  Status: string
+}
+
+/**
  * Ddos防护配置
  */
 export interface DdosRule {
@@ -677,13 +773,13 @@ export interface CreateCustomErrorPageResponse {
 }
 
 /**
- * ReclaimZone返回参数结构体
+ * CreateRule返回参数结构体
  */
-export interface ReclaimZoneResponse {
+export interface CreateRuleResponse {
   /**
-   * 站点名称
+   * 规则 ID。
    */
-  Name: string
+  RuleId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1092,13 +1188,50 @@ export interface CacheConfigNoCache {
 }
 
 /**
- * ModifyOriginGroup返回参数结构体
+ * ModifyZoneStatus返回参数结构体
  */
-export interface ModifyOriginGroupResponse {
+export interface ModifyZoneStatusResponse {
   /**
-   * 源站组ID
+   * 站点 ID
    */
-  OriginId: string
+  Id: string
+
+  /**
+   * 站点名称
+   */
+  Name: string
+
+  /**
+      * 站点状态
+- false 开启站点
+- true 关闭站点
+      */
+  Paused: boolean
+
+  /**
+   * 更新时间
+   */
+  ModifiedOn: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeRules返回参数结构体
+ */
+export interface DescribeRulesResponse {
+  /**
+   * 站点 ID。
+   */
+  ZoneId: string
+
+  /**
+   * 规则列表，按规则执行顺序从先往后排序。
+   */
+  RuleList: Array<RuleSettingDetail>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1356,36 +1489,9 @@ export interface Origin {
 }
 
 /**
- * ModifyZoneStatus返回参数结构体
+ * DescribeAvailablePlans请求参数结构体
  */
-export interface ModifyZoneStatusResponse {
-  /**
-   * 站点 ID
-   */
-  Id: string
-
-  /**
-   * 站点名称
-   */
-  Name: string
-
-  /**
-      * 站点状态
-- false 开启站点
-- true 关闭站点
-      */
-  Paused: boolean
-
-  /**
-   * 更新时间
-   */
-  ModifiedOn: string
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
+export type DescribeAvailablePlansRequest = null
 
 /**
  * DescribeSecurityPolicyManagedRules请求参数结构体
@@ -1766,6 +1872,21 @@ export interface CreatePurgeTaskResponse {
 }
 
 /**
+ * 规则引擎带有状态码的动作
+ */
+export interface RuleCodeAction {
+  /**
+   * 功能名称，功能名称填写规范可调用接口 [查询规则引擎的设置参数](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) 查看。
+   */
+  Action: string
+
+  /**
+   * 操作参数。
+   */
+  Parameters: Array<RuleCodeActionParams>
+}
+
+/**
  * DeleteApplicationProxyRule返回参数结构体
  */
 export interface DeleteApplicationProxyRuleResponse {
@@ -1826,6 +1947,104 @@ export interface TimingDataRecord {
 }
 
 /**
+ * 站点信息
+ */
+export interface Zone {
+  /**
+   * 站点ID。
+   */
+  Id: string
+
+  /**
+   * 站点名称。
+   */
+  Name: string
+
+  /**
+   * 站点当前使用的 NS 列表。
+   */
+  OriginalNameServers: Array<string>
+
+  /**
+   * 腾讯云分配的 NS 列表。
+   */
+  NameServers: Array<string>
+
+  /**
+      * 站点状态，取值有：
+<li> active：NS 已切换； </li>
+<li> pending：NS 未切换；</li>
+<li> moved：NS 已切走；</li>
+<li> deactivated：被封禁。 </li>
+      */
+  Status: string
+
+  /**
+      * 站点接入方式，取值有
+<li> full：NS 接入； </li>
+<li> partial：CNAME 接入。</li>
+      */
+  Type: string
+
+  /**
+   * 站点是否关闭。
+   */
+  Paused: boolean
+
+  /**
+      * 是否开启cname加速，取值有：
+<li> enabled：开启；</li>
+<li> disabled：关闭。</li>
+      */
+  CnameSpeedUp: string
+
+  /**
+      * cname 接入状态，取值有：
+<li> finished：站点已验证；</li>
+<li> pending：站点验证中。</li>
+      */
+  CnameStatus: string
+
+  /**
+   * 资源标签列表。
+   */
+  Tags: Array<Tag>
+
+  /**
+   * 计费资源列表。
+   */
+  Resources: Array<Resource>
+
+  /**
+   * 站点创建时间。
+   */
+  CreatedOn: string
+
+  /**
+   * 站点修改时间。
+   */
+  ModifiedOn: string
+
+  /**
+      * 站点接入地域，取值为：
+<li> global：全球；</li>
+<li> mainland：中国大陆；</li>
+<li> overseas：境外区域。</li>
+      */
+  Area: string
+}
+
+/**
+ * ModifyRulePriority返回参数结构体
+ */
+export interface ModifyRulePriorityResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ddos端口过滤
  */
 export interface DdosAcls {
@@ -1858,6 +2077,48 @@ export interface DeleteOriginGroupRequest {
 }
 
 /**
+ * 规则引擎可应用于匹配请求的设置列表及其详细信息
+ */
+export interface RulesSettingAction {
+  /**
+      * 功能名称，取值有：
+<li> 访问URL 重写（AccessUrlRedirect）；</li>
+<li> 回源 URL 重写 （UpstreamUrlRedirect）；</li>
+<li> 自定义错误页面
+(ErrorPage)；</li>
+<li> QUIC（QUIC）；</li>
+<li> WebSocket （WebSocket）；</li>
+<li> 视频拖拽（VideoSeek）；</li>
+<li> Token 鉴权（Authentication）；</li>
+<li> 自定义CacheKey（CacheKey）；</li>
+<li> 节点缓存 TTL （Cache）；</li>
+<li> 浏览器缓存 TTL（MaxAge）；</li>
+<li> 离线缓存（OfflineCache）；</li>
+<li> 智能加速（SmartRouting）；</li>
+<li> 分片回源（RangeOriginPull）；</li>
+<li> HTTP/2 回源（UpstreamHttp2）；</li>
+<li> Host Header 重写（HostHeader）；</li>
+<li> 强制 HTTPS（ForceRedirect）；</li>
+<li> 回源 HTTPS（OriginPullProtocol）；</li>
+<li> 缓存预刷新（CachePrefresh）；</li>
+<li> 智能压缩（Compression）；</li>
+<li> 修改 HTTP 请求头（RequestHeader）；</li>
+<li> 修改HTTP响应头（ResponseHeader）;</li>
+<li> 状态码缓存 TTL（StatusCodeCache）;</li>
+<li> Hsts；</li>
+<li> ClientIpHeader；</li>
+<li> TlsVersion；</li>
+<li> OcspStapling。</li>
+      */
+  Action: string
+
+  /**
+   * 参数信息。
+   */
+  Properties: Array<RulesProperties>
+}
+
+/**
  * 标签配置
  */
 export interface Tag {
@@ -1882,6 +2143,33 @@ export interface ModifyHostsCertificateResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * RateLimit配置
+ */
+export interface RateLimitConfig {
+  /**
+   * 开关
+   */
+  Switch: string
+
+  /**
+   * 用户规则
+   */
+  UserRules: Array<RateLimitUserRule>
+
+  /**
+      * 默认模板
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Template?: RateLimitTemplate
+
+  /**
+      * 智能客户端过滤
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Intelligence?: RateLimitIntelligence
 }
 
 /**
@@ -2117,115 +2405,34 @@ export interface DdosSpeedLimit {
 }
 
 /**
- * 站点信息
+ * 源站健康检查，源站状态信息
  */
-export interface Zone {
+export interface OriginCheckOriginStatus {
   /**
-   * 站点ID。
+   * healthy: 健康，unhealthy: 不健康，process: 探测中
    */
-  Id: string
-
-  /**
-   * 站点名称。
-   */
-  Name: string
-
-  /**
-   * 站点当前使用的 NS 列表。
-   */
-  OriginalNameServers: Array<string>
-
-  /**
-   * 腾讯云分配的 NS 列表。
-   */
-  NameServers: Array<string>
-
-  /**
-      * 站点状态，取值有：
-<li> active：NS 已切换； </li>
-<li> pending：NS 未切换；</li>
-<li> moved：NS 已切走；</li>
-<li> deactivated：被封禁。 </li>
-      */
   Status: string
 
   /**
-      * 站点接入方式，取值有
-<li> full：NS 接入； </li>
-<li> partial：CNAME 接入。</li>
+      * host列表，源站组不健康时存在值
+注意：此字段可能返回 null，表示取不到有效值。
       */
-  Type: string
-
-  /**
-   * 站点是否关闭。
-   */
-  Paused: boolean
-
-  /**
-      * 是否开启cname加速，取值有：
-<li> enabled：开启；</li>
-<li> disabled：关闭。</li>
-      */
-  CnameSpeedUp: string
-
-  /**
-      * cname 接入状态，取值有：
-<li> finished：站点已验证；</li>
-<li> pending：站点验证中。</li>
-      */
-  CnameStatus: string
-
-  /**
-   * 资源标签列表。
-   */
-  Tags: Array<Tag>
-
-  /**
-   * 计费资源列表。
-   */
-  Resources: Array<Resource>
-
-  /**
-   * 站点创建时间。
-   */
-  CreatedOn: string
-
-  /**
-   * 站点修改时间。
-   */
-  ModifiedOn: string
-
-  /**
-      * 站点接入地域，取值为：
-<li> global：全球；</li>
-<li> mainland：中国大陆；</li>
-<li> overseas：境外区域。</li>
-      */
-  Area: string
+  Host: Array<string>
 }
 
 /**
- * 站点查询过滤条件
+ * 规则引擎条件常规动作参数
  */
-export interface ZoneFilter {
+export interface RuleNormalActionParams {
   /**
-      * 过滤字段名，支持的列表如下：
-<li> name：站点名；</li>
-<li> status：站点状态；</li>
-<li> tagKey：标签键；</li>
-<li> tagValue: 标签值。</li>
-      */
+   * 参数名称，参数填写规范可调用接口 [查询规则引擎的设置参数](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) 查看。
+   */
   Name: string
 
   /**
-   * 过滤字段值。
+   * 参数值。
    */
   Values: Array<string>
-
-  /**
-   * 是否启用模糊查询，仅支持过滤字段名为name。模糊查询时，Values长度最大为1。默认为false。
-   */
-  Fuzzy?: boolean
 }
 
 /**
@@ -2239,25 +2446,18 @@ export interface DescribeSecurityPolicyManagedRulesIdRequest {
 }
 
 /**
- * ModifyApplicationProxyStatus请求参数结构体
+ * DescribeRulesSetting返回参数结构体
  */
-export interface ModifyApplicationProxyStatusRequest {
+export interface DescribeRulesSettingResponse {
   /**
-   * 站点ID
+   * 规则引擎可应用匹配请求的设置列表及其详细建议配置信息。
    */
-  ZoneId: string
+  Actions: Array<RulesSettingAction>
 
   /**
-   * 代理ID
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  ProxyId: string
-
-  /**
-      * 状态
-offline: 停用
-online: 启用
-      */
-  Status: string
+  RequestId?: string
 }
 
 /**
@@ -2285,6 +2485,81 @@ export interface CacheConfigCache {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   IgnoreCacheControl?: string
+}
+
+/**
+ * 规则引擎参数详情信息，特殊参数类型。
+ */
+export interface RuleExtraParameter {
+  /**
+      * 参数名，取值有：
+<li> Action：修改 HTTP 头部所需参数，RuleAction 选择 RewirteAction；</li>
+<li> StatusCode：状态码相关功能所需参数，RuleAction 选择 CodeAction。</li>
+      */
+  Id: string
+
+  /**
+      * 参数值类型。
+<li> CHOICE：参数值只能在 Values 中选择； </li>
+<li> CUSTOM_NUM：参数值用户自定义，整型类型；</li>
+<li> CUSTOM_STRING：参数值用户自定义，字符串类型。</li>
+      */
+  Type: string
+
+  /**
+      * 可选参数值。
+注意：当 Id 的值为 StatusCode 时数组中的值为整型，填写参数值时请填写字符串的整型数值。
+      */
+  Choices: string
+}
+
+/**
+ * 规则引擎功能项操作，对于一种功能只对应下面三种类型的其中一种，RuleAction 数组中的每一项只能是其中一个类型，更多功能项的填写规范可调用接口 [查询规则引擎的设置参数](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) 查看。
+ */
+export interface RuleAction {
+  /**
+      * 常规功能操作，选择该类型的功能项有：
+<li> 访问URL 重写（AccessUrlRedirect）；</li>
+<li> 回源 URL 重写 （UpstreamUrlRedirect）；</li>
+<li> QUIC（QUIC）；</li>
+<li> WebSocket （WebSocket）；</li>
+<li> 视频拖拽（VideoSeek）；</li>
+<li> Token 鉴权（Authentication）；</li>
+<li> 自定义CacheKey（CacheKey）；</li>
+<li> 节点缓存 TTL （Cache）；</li>
+<li> 浏览器缓存 TTL（MaxAge）；</li>
+<li> 离线缓存（OfflineCache）；</li>
+<li> 智能加速（SmartRouting）；</li>
+<li> 分片回源（RangeOriginPull）；</li>
+<li> HTTP/2 回源（UpstreamHttp2）；</li>
+<li> Host Header 重写（HostHeader）；</li>
+<li> 强制 HTTPS（ForceRedirect）；</li>
+<li> 回源 HTTPS（OriginPullProtocol）；</li>
+<li> 缓存预刷新（CachePrefresh）；</li>
+<li> 智能压缩（Compression）；</li>
+<li> Hsts；</li>
+<li> ClientIpHeader；</li>
+<li> TlsVersion；</li>
+<li> OcspStapling。</li>
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NormalAction?: RuleNormalAction
+
+  /**
+      * 带有请求头/响应头的功能操作，选择该类型的功能项有：
+<li> 修改 HTTP 请求头（RequestHeader）；</li>
+<li> 修改HTTP响应头（ResponseHeader）。</li>
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RewriteAction?: RuleRewriteAction
+
+  /**
+      * 带有状态码的功能操作，选择该类型的功能项有：
+<li> 自定义错误页面（ErrorPage）；</li>
+<li> 状态码缓存 TTL（StatusCodeCache）。</li>
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CodeAction?: RuleCodeAction
 }
 
 /**
@@ -2534,6 +2809,47 @@ export interface ScanDnsRecordsResponse {
 }
 
 /**
+ * 模板当前详细配置
+ */
+export interface RateLimitTemplateDetail {
+  /**
+      * 模板名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Mode?: string
+
+  /**
+      * 唯一id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ID?: number
+
+  /**
+      * 处置动作
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Action?: string
+
+  /**
+      * 惩罚时间，秒
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PunishTime?: number
+
+  /**
+      * 阈值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Threshold?: number
+
+  /**
+      * 统计周期
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Period?: number
+}
+
+/**
  * 门神配置
  */
 export interface WafConfig {
@@ -2730,49 +3046,35 @@ export interface CCLog {
 }
 
 /**
- * https 服务端证书配置
+ * 规则引擎规则项，Conditions 数组内多个项的关系为 或，内层 Conditions 列表内多个项的关系为 且。
  */
-export interface ServerCertInfo {
+export interface RuleItem {
   /**
-      * 服务器证书 ID, 默认证书ID, 或在 SSL 证书管理进行证书托管时自动生成
-注意：此字段可能返回 null，表示取不到有效值。
+      * 执行功能判断条件。
+注意：满足该数组内任意一项条件，功能即可执行。
       */
-  CertId: string
+  Conditions: Array<RuleAndConditions>
 
   /**
-      * 证书备注名
-注意：此字段可能返回 null，表示取不到有效值。
+   * 执行的功能。
+   */
+  Actions: Array<RuleAction>
+}
+
+/**
+ * 规则查询 Filter
+ */
+export interface RuleFilter {
+  /**
+      * 过滤参数，取值有：
+<li> RULE_ID：规则 ID。 </li>
       */
-  Alias?: string
+  Name: string
 
   /**
-      * 证书类型:
-default: 默认证书
-upload:用户上传
-managed:腾讯云托管
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Type?: string
-
-  /**
-      * 证书过期时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ExpireTime?: string
-
-  /**
-      * 证书部署时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DeployTime?: string
-
-  /**
-      * 部署状态:
-processing: 部署中
-deployed: 已部署
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Status?: string
+   * 参数值。
+   */
+  Values: Array<string>
 }
 
 /**
@@ -3755,19 +4057,23 @@ pending: 不生效
 }
 
 /**
- * 七层数据分析类top数据
+ * 规则引擎条件使用StatusCode字段动作参数
  */
-export interface TopDataRecord {
+export interface RuleCodeActionParams {
   /**
-   * 查询维度值
+   * 状态 Code。
    */
-  TypeKey: string
+  StatusCode: number
 
   /**
-      * top数据排行
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DetailData: Array<TopDetailData>
+   * 参数名称，参数填写规范可调用接口 [查询规则引擎的设置参数](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) 查看。
+   */
+  Name: string
+
+  /**
+   * 参数值。
+   */
+  Values: Array<string>
 }
 
 /**
@@ -4105,6 +4411,59 @@ export interface GeoIp {
 }
 
 /**
+ * 规则引擎可应用于匹配请求的设置详细信息，可选参数配置项
+ */
+export interface RuleChoicePropertiesItem {
+  /**
+   * 参数名称。
+   */
+  Name: string
+
+  /**
+      * 参数值类型。
+<li> CHOICE：参数值只能在 ChoicesValue 中选择； </li>
+<li> TOGGLE：参数值为开关类型，可在 ChoicesValue 中选择；</li>
+<li> CUSTOM_NUM：参数值用户自定义，整型类型；</li>
+<li> CUSTOM_STRING：参数值用户自定义，字符串类型。</li>
+      */
+  Type: string
+
+  /**
+      * 参数值的可选值。
+注意：若参数值为用户自定义则该数组为空数组。
+      */
+  ChoicesValue: Array<string>
+
+  /**
+   * 数值参数的最小值，非数值参数或 Min 和 Max 值都为 0 则此项无意义。
+   */
+  Min: number
+
+  /**
+   * 数值参数的最大值，非数值参数或 Min 和 Max 值都为 0 则此项无意义。
+   */
+  Max: number
+
+  /**
+   * 参数值是否支持多选或者填写多个。
+   */
+  IsMultiple: boolean
+
+  /**
+   * 是否允许为空。
+   */
+  IsAllowEmpty: boolean
+
+  /**
+      * 特殊参数。
+<li> 为 NULL：RuleAction 选择 NormalAction；</li>
+<li> 成员参数 Id 为 Action：RuleAction 选择 RewirteAction；</li>
+<li> 成员参数 Id 为 StatusCode：RuleAction 选择 CodeAction。</li>
+      */
+  ExtraParameter: RuleExtraParameter
+}
+
+/**
  * DescribeSecurityPolicy请求参数结构体
  */
 export interface DescribeSecurityPolicyRequest {
@@ -4132,6 +4491,29 @@ export interface ModifyApplicationProxyRuleResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 规则引擎条件 HTTP 请求/响应头操作动作参数。
+ */
+export interface RuleRewriteActionParams {
+  /**
+      * 功能参数名称，参数填写规范可调用接口 [查询规则引擎的设置参数](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) 查看。现在只有三种取值：
+<li> add：添加 HTTP 头部；</li>
+<li> set：重写 HTTP 头部；</li>
+<li> del：删除 HTTP 头部。</li>
+      */
+  Action: string
+
+  /**
+   * 参数名称。
+   */
+  Name: string
+
+  /**
+   * 参数值。
+   */
+  Values: Array<string>
 }
 
 /**
@@ -4210,6 +4592,21 @@ export interface FailReason {
 }
 
 /**
+ * TopN数据Entry
+ */
+export interface TopNEntryValue {
+  /**
+   * 排序实体名。
+   */
+  Name: string
+
+  /**
+   * 排序实体数量。
+   */
+  Count: number
+}
+
+/**
  * CreateZone请求参数结构体
  */
 export interface CreateZoneRequest {
@@ -4237,30 +4634,73 @@ export interface CreateZoneRequest {
 }
 
 /**
- * RateLimit配置
+ * edgeone套餐信息
  */
-export interface RateLimitConfig {
+export interface PlanInfo {
   /**
-   * 开关
-   */
-  Switch: string
-
-  /**
-   * 用户规则
-   */
-  UserRules: Array<RateLimitUserRule>
-
-  /**
-      * 默认模板
-注意：此字段可能返回 null，表示取不到有效值。
+      * 结算货币类型，取值有：
+<li> CNY ：人民币结算； </li>
+<li> USD ：美元结算。</li>
       */
-  Template?: RateLimitTemplate
+  Currency: string
 
   /**
-      * 智能客户端过滤
-注意：此字段可能返回 null，表示取不到有效值。
+   * 套餐所含流量（单位：字节）
+   */
+  Flux: number
+
+  /**
+      * 结算周期，取值有：
+<li> y ：按年结算； </li>
+<li> m ：按月结算；</li>
+<li> h ：按小时结算； </li>
+<li> M ：按分钟结算；</li>
+<li> s ：按秒结算。 </li>
       */
-  Intelligence?: RateLimitIntelligence
+  Frequency: string
+
+  /**
+      * 套餐类型，取值有：
+<li> sta ：全球内容分发网络（不包括中国大陆）标准版套餐； </li>
+<li> sta_with_bot ：全球内容分发网络（不包括中国大陆）标准版套餐附带bot管理；</li>
+<li> sta_cm ：中国大陆内容分发网络标准版套餐； </li>
+<li> sta_cm_with_bot ：中国大陆内容分发网络标准版套餐附带bot管理；</li>
+<li> ent ：全球内容分发网络（不包括中国大陆）企业版套餐； </li>
+<li> ent_with_bot ： 全球内容分发网络（不包括中国大陆）企业版套餐附带bot管理；</li>
+<li> ent_cm ：中国大陆内容分发网络企业版套餐； </li>
+<li> ent_cm_with_bot ：中国大陆内容分发网络企业版套餐附带bot管理。</li>
+      */
+  PlanType: string
+
+  /**
+   * 套餐价格（单位：分）
+   */
+  Price: number
+
+  /**
+   * 套餐所含请求次数（单位：字节）
+   */
+  Request: number
+
+  /**
+   * 套餐所能绑定的站点个数。
+   */
+  SiteNumber: number
+}
+
+/**
+ * 自定义名字服务器 IP 信息
+ */
+export interface VanityNameServersIps {
+  /**
+   * 自定义名字服务器名称
+   */
+  Name: string
+
+  /**
+   * 自定义名字服务器 IPv4 地址
+   */
+  IPv4: string
 }
 
 /**
@@ -4345,20 +4785,18 @@ export interface DescribePurgeTasksResponse {
 }
 
 /**
- * 源站记录私有鉴权参数
+ * ModifyRule返回参数结构体
  */
-export interface OriginRecordPrivateParameter {
+export interface ModifyRuleResponse {
   /**
-      * 私有鉴权参数名称：
-"AccessKeyId"：Access Key ID
-"SecretAccessKey"：Secret Access Key
-      */
-  Name: string
+   * 规则 ID。
+   */
+  RuleId: string
 
   /**
-   * 私有鉴权参数数值
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Value: string
+  RequestId?: string
 }
 
 /**
@@ -5003,6 +5441,64 @@ export interface DescribeWebProtectionAttackEventsRequest {
 }
 
 /**
+ * 规则引擎可应用于匹配请求的设置详细信息。
+ */
+export interface RulesProperties {
+  /**
+   * 值为参数名称。
+   */
+  Name: string
+
+  /**
+   * 数值参数的最小值，非数值参数或 Min 和 Max 值都为 0 则此项无意义。
+   */
+  Min: number
+
+  /**
+      * 参数值的可选值。
+注意：若参数值为用户自定义则该数组为空数组。
+      */
+  ChoicesValue: Array<string>
+
+  /**
+      * 参数值类型。
+<li> CHOICE：参数值只能在 ChoicesValue 中选择； </li>
+<li> TOGGLE：参数值为开关类型，可在 ChoicesValue 中选择；</li>
+<li> OBJECT：参数值为对象类型，ChoiceProperties 为改对象类型关联的属性；</li>
+<li> CUSTOM_NUM：参数值用户自定义，整型类型；</li>
+<li> CUSTOM_STRING：参数值用户自定义，字符串类型。</li>注意：当参数类型为 OBJECT 类型时，请注意参考 [示例2 参数为 OBJECT 类型的创建](https://tcloud4api.woa.com/document/product/1657/79382?!preview&!document=1)
+      */
+  Type: string
+
+  /**
+   * 数值参数的最大值，非数值参数或 Min 和 Max 值都为 0 则此项无意义。
+   */
+  Max: number
+
+  /**
+   * 参数值是否支持多选或者填写多个。
+   */
+  IsMultiple: boolean
+
+  /**
+   * 是否允许为空。
+   */
+  IsAllowEmpty: boolean
+
+  /**
+      * 该参数对应的关联配置参数，属于调用接口的必填参数。
+注意：如果可选参数无特殊新增参数则该数组为空数组。
+      */
+  ChoiceProperties: Array<RuleChoicePropertiesItem>
+
+  /**
+      * <li> 为 NULL：无特殊参数，RuleAction 选择 NormalAction；</li>
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ExtraParameter: RuleExtraParameter
+}
+
+/**
  * DescribeOverviewL7Data返回参数结构体
  */
 export interface DescribeOverviewL7DataResponse {
@@ -5185,18 +5681,30 @@ export interface DescribeApplicationProxyRequest {
 }
 
 /**
- * TopN数据Entry
+ * CreateRule请求参数结构体
  */
-export interface TopNEntryValue {
+export interface CreateRuleRequest {
   /**
-   * 排序实体名。
+   * 站点 ID。
    */
-  Name: string
+  ZoneId: string
 
   /**
-   * 排序实体数量。
+   * 规则名称，名称字符串长度 1～255。
    */
-  Count: number
+  RuleName: string
+
+  /**
+      * 规则状态，取值有：
+<li> enable: 启用； </li>
+<li> disable: 未启用。</li>
+      */
+  Status: string
+
+  /**
+   * 规则内容。
+   */
+  Rules: Array<RuleItem>
 }
 
 /**
@@ -5516,44 +6024,43 @@ export interface ModifyDnsRecordResponse {
 }
 
 /**
- * 模板当前详细配置
+ * 源站记录私有鉴权参数
  */
-export interface RateLimitTemplateDetail {
+export interface OriginRecordPrivateParameter {
   /**
-      * 模板名称
-注意：此字段可能返回 null，表示取不到有效值。
+      * 私有鉴权参数名称：
+"AccessKeyId"：Access Key ID
+"SecretAccessKey"：Secret Access Key
       */
-  Mode?: string
+  Name: string
 
   /**
-      * 唯一id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ID?: number
+   * 私有鉴权参数数值
+   */
+  Value: string
+}
+
+/**
+ * CreatePlanForZone请求参数结构体
+ */
+export interface CreatePlanForZoneRequest {
+  /**
+   * 站点ID。
+   */
+  ZoneId: string
 
   /**
-      * 处置动作
-注意：此字段可能返回 null，表示取不到有效值。
+      * 所要购买套餐的类型，取值有：
+<li> sta: 全球内容分发网络（不包括中国大陆）标准版套餐； </li>
+<li> sta_with_bot: 全球内容分发网络（不包括中国大陆）标准版套餐附带bot管理；</li>
+<li> sta_cm: 中国大陆内容分发网络标准版套餐； </li>
+<li> sta_cm_with_bot: 中国大陆内容分发网络标准版套餐附带bot管理；</li>
+<li> ent: 全球内容分发网络（不包括中国大陆）企业版套餐； </li>
+<li> ent_with_bot: 全球内容分发网络（不包括中国大陆）企业版套餐附带bot管理；</li>
+<li> ent_cm: 中国大陆内容分发网络企业版套餐； </li>
+<li> ent_cm_with_bot: 中国大陆内容分发网络企业版套餐附带bot管理。</li>当前账户可购买套餐类型请以<a href="https://tcloud4api.woa.com/document/product/1657/80124?!preview&!document=1">DescribeAvailablePlans</a>返回为准。
       */
-  Action?: string
-
-  /**
-      * 惩罚时间，秒
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  PunishTime?: number
-
-  /**
-      * 阈值
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Threshold?: number
-
-  /**
-      * 统计周期
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Period?: number
+  PlanType: string
 }
 
 /**
@@ -5728,19 +6235,18 @@ export interface PostMaxSize {
 }
 
 /**
- * 源站健康检查，源站状态信息
+ * ModifyRulePriority请求参数结构体
  */
-export interface OriginCheckOriginStatus {
+export interface ModifyRulePriorityRequest {
   /**
-   * healthy: 健康，unhealthy: 不健康，process: 探测中
+   * 站点 ID。
    */
-  Status: string
+  ZoneId: string
 
   /**
-      * host列表，源站组不健康时存在值
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Host: Array<string>
+   * 规则 ID 的顺序，多条规则执行顺序依次往下。
+   */
+  RuleIds: Array<string>
 }
 
 /**
@@ -6477,6 +6983,28 @@ export interface IpTableConfig {
 }
 
 /**
+ * ModifyApplicationProxyStatus请求参数结构体
+ */
+export interface ModifyApplicationProxyStatusRequest {
+  /**
+   * 站点ID
+   */
+  ZoneId: string
+
+  /**
+   * 代理ID
+   */
+  ProxyId: string
+
+  /**
+      * 状态
+offline: 停用
+online: 启用
+      */
+  Status: string
+}
+
+/**
  * DeleteOriginGroup返回参数结构体
  */
 export interface DeleteOriginGroupResponse {
@@ -6507,18 +7035,13 @@ export interface Header {
 }
 
 /**
- * 自定义名字服务器 IP 信息
+ * 规则引擎条件且关系条件列表
  */
-export interface VanityNameServersIps {
+export interface RuleAndConditions {
   /**
-   * 自定义名字服务器名称
+   * 规则引擎条件，该数组内所有项全部满足即判断该条件满足。
    */
-  Name: string
-
-  /**
-   * 自定义名字服务器 IPv4 地址
-   */
-  IPv4: string
+  Conditions: Array<RuleCondition>
 }
 
 /**
@@ -6772,6 +7295,40 @@ export interface ReclaimZoneRequest {
    * 站点名称
    */
   Name: string
+}
+
+/**
+ * 规则引擎条件参数
+ */
+export interface RuleCondition {
+  /**
+      * 运算符，取值有：
+<li> equal: 等于； </li>
+<li> notequal: 不等于。</li>
+      */
+  Operator: string
+
+  /**
+      * 匹配类型，取值有：
+<li> 全部（站点任意请求）: host。 </li>
+<li> 文件名: filename； </li>
+<li> 文件后缀: extension； </li>
+<li> HOST: host； </li>
+<li> URL Full: full_url，当前站点下完整 URL 路径，必须包含 HTTP 协议，Host 和 路径； </li>
+<li> URL Path: url，当前站点下 URL 路径的请求。 </li>
+      */
+  Target: string
+
+  /**
+      * 对应匹配类型的参数值，对应匹配类型的取值有：
+<li> 文件后缀：jpg、txt等文件后缀；</li>
+<li> 文件名称：例如 foo.jpg 中的 foo；</li>
+<li> 全部（站点任意请求）： all； </li>
+<li> HOST：当前站点下的 host ，例如www.maxx55.com；</li>
+<li> URL Path：当前站点下 URL 路径的请求，例如：/example；</li>
+<li> URL Full：当前站点下完整 URL 请求，必须包含 HTTP 协议，Host 和 路径，例如：https://www.maxx55.cn/example。</li>
+      */
+  Values: Array<string>
 }
 
 /**
@@ -7136,6 +7693,30 @@ smart_status_observe-观察处置
 }
 
 /**
+ * 站点查询过滤条件
+ */
+export interface ZoneFilter {
+  /**
+      * 过滤字段名，支持的列表如下：
+<li> name：站点名；</li>
+<li> status：站点状态；</li>
+<li> tagKey：标签键；</li>
+<li> tagValue: 标签值。</li>
+      */
+  Name: string
+
+  /**
+   * 过滤字段值。
+   */
+  Values: Array<string>
+
+  /**
+   * 是否启用模糊查询，仅支持过滤字段名为name。模糊查询时，Values长度最大为1。默认为false。
+   */
+  Fuzzy?: boolean
+}
+
+/**
  * 浏览器缓存规则配置，用于设置 MaxAge 默认值，默认为关闭状态
  */
 export interface MaxAge {
@@ -7154,59 +7735,28 @@ export interface MaxAge {
 }
 
 /**
- * DescribePurgeTasks请求参数结构体
+ * DescribeRules请求参数结构体
  */
-export interface DescribePurgeTasksRequest {
+export interface DescribeRulesRequest {
   /**
-   * 任务ID
+   * 站点 ID。
    */
-  JobId?: string
+  ZoneId: string
 
   /**
-   * 类型
+   * 过滤参数，不填默认不过滤。
    */
-  Type?: string
+  Filters?: Array<RuleFilter>
+}
 
+/**
+ * DeleteRules返回参数结构体
+ */
+export interface DeleteRulesResponse {
   /**
-   * 查询起始时间
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  StartTime?: string
-
-  /**
-   * 查询结束时间
-   */
-  EndTime?: string
-
-  /**
-   * 查询起始偏移量
-   */
-  Offset?: number
-
-  /**
-   * 查询最大返回的结果条数
-   */
-  Limit?: number
-
-  /**
-      * 查询的状态
-允许的值为：processing、success、failed、timeout、invalid
-      */
-  Statuses?: Array<string>
-
-  /**
-   * zone id
-   */
-  ZoneId?: string
-
-  /**
-   * 查询的域名列表
-   */
-  Domains?: Array<string>
-
-  /**
-   * 查询内容
-   */
-  Target?: string
+  RequestId?: string
 }
 
 /**
@@ -7579,6 +8129,11 @@ export interface DescribePrefetchTasksRequest {
 }
 
 /**
+ * DescribeRulesSetting请求参数结构体
+ */
+export type DescribeRulesSettingRequest = null
+
+/**
  * 内容管理任务结果
  */
 export interface Task {
@@ -7660,6 +8215,54 @@ export interface DDoSGeoIp {
    * 地域信息，ID参考[DescribeSecurityPolicyRegions](https://tcloud4api.woa.com/document/product/1657/76031?!preview&!document=1)。
    */
   RegionId?: Array<number>
+}
+
+/**
+ * 规则引擎规则详情
+ */
+export interface RuleSettingDetail {
+  /**
+   * 规则ID。
+   */
+  RuleId: string
+
+  /**
+   * 规则名称，名称字符串长度 1~255。
+   */
+  RuleName: string
+
+  /**
+      * 规则状态，取值有:
+<li> enable: 启用； </li>
+<li> disable: 未启用。 </li>
+      */
+  Status: string
+
+  /**
+   * 规则内容。
+   */
+  Rules: Array<RuleItem>
+
+  /**
+   * 规则优先级, 值越大优先级越高，最小为 1。
+   */
+  RulePriority: number
+}
+
+/**
+ * 七层数据分析类top数据
+ */
+export interface TopDataRecord {
+  /**
+   * 查询维度值
+   */
+  TypeKey: string
+
+  /**
+      * top数据排行
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DetailData: Array<TopDetailData>
 }
 
 /**
@@ -7869,6 +8472,21 @@ export interface DDoSFeaturesFilter {
    * 多特征关系，仅配置【特征1】时填 none，存在【特征2】配置可不填。
    */
   MatchLogic?: string
+}
+
+/**
+ * ModifyOriginGroup返回参数结构体
+ */
+export interface ModifyOriginGroupResponse {
+  /**
+   * 源站组ID
+   */
+  OriginId: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -8389,6 +9007,68 @@ export interface DescribeWebManagedRulesLogRequest {
 }
 
 /**
+ * 安全规则（cc/waf/bot）相关信息
+ */
+export interface SecRuleRelatedInfo {
+  /**
+   * 规则ID列表（99999为无效id）。
+   */
+  RuleId: number
+
+  /**
+      * 执行动作（处置方式），取值有：
+<li>trans ：通过 ；</li>
+<li>alg ：算法挑战 ；</li>
+<li>drop ：丢弃 ；</li>
+<li>ban ：封禁源ip ；</li>
+<li>redirect ：重定向 ；</li>
+<li>page ：返回指定页面 ；</li>
+<li>monitor ：观察 。</li>
+      */
+  Action: string
+
+  /**
+      * 风险等级（waf日志中独有），取值有：
+<li>high risk ：高危 ；</li>
+<li>middle risk ：中危 ；</li>
+<li>low risk ：低危 ；</li>
+<li>unkonw ：未知 。</li>
+      */
+  RiskLevel: string
+
+  /**
+      * 规则等级，取值有：
+<li>normal  ：正常 。</li>
+      */
+  RuleLevel: string
+
+  /**
+   * 规则描述。
+   */
+  Description: string
+
+  /**
+   * 规则类型名称。
+   */
+  RuleTypeName: string
+}
+
+/**
+ * ReclaimZone返回参数结构体
+ */
+export interface ReclaimZoneResponse {
+  /**
+   * 站点名称
+   */
+  Name: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateApplicationProxyRules返回参数结构体
  */
 export interface CreateApplicationProxyRulesResponse {
@@ -8481,6 +9161,78 @@ export interface DescribeWebManagedRulesTopDataRequest {
 <li>mainland ：中国大陆地区数据 。</li>不填默认查询overseas。
       */
   Area?: string
+}
+
+/**
+ * DescribeAvailablePlans返回参数结构体
+ */
+export interface DescribeAvailablePlansResponse {
+  /**
+      * 当前账户可购买套餐类型及相关信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PlanInfoList: Array<PlanInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribePurgeTasks请求参数结构体
+ */
+export interface DescribePurgeTasksRequest {
+  /**
+   * 任务ID
+   */
+  JobId?: string
+
+  /**
+   * 类型
+   */
+  Type?: string
+
+  /**
+   * 查询起始时间
+   */
+  StartTime?: string
+
+  /**
+   * 查询结束时间
+   */
+  EndTime?: string
+
+  /**
+   * 查询起始偏移量
+   */
+  Offset?: number
+
+  /**
+   * 查询最大返回的结果条数
+   */
+  Limit?: number
+
+  /**
+      * 查询的状态
+允许的值为：processing、success、failed、timeout、invalid
+      */
+  Statuses?: Array<string>
+
+  /**
+   * zone id
+   */
+  ZoneId?: string
+
+  /**
+   * 查询的域名列表
+   */
+  Domains?: Array<string>
+
+  /**
+   * 查询内容
+   */
+  Target?: string
 }
 
 /**
@@ -8713,6 +9465,36 @@ export interface DDoSUserAllowBlockIP {
    * 掩码2，设置IP网段范围时使用，例如 1.1.1.0/24-1.1.2.0/24。
    */
   Mask2?: number
+}
+
+/**
+ * 规则引擎HTTP请求头/响应头类型的动作
+ */
+export interface RuleRewriteAction {
+  /**
+   * 功能名称，功能名称填写规范可调用接口 [查询规则引擎的设置参数](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) 查看。
+   */
+  Action: string
+
+  /**
+   * 参数。
+   */
+  Parameters: Array<RuleRewriteActionParams>
+}
+
+/**
+ * 规则引擎常规类型的动作
+ */
+export interface RuleNormalAction {
+  /**
+   * 功能名称，功能名称填写规范可调用接口 [查询规则引擎的设置参数](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) 查看。
+   */
+  Action: string
+
+  /**
+   * 参数。
+   */
+  Parameters: Array<RuleNormalActionParams>
 }
 
 /**
@@ -9217,50 +9999,20 @@ export interface DescribeDDosAttackEventDetailRequest {
 }
 
 /**
- * 安全规则（cc/waf/bot）相关信息
+ * 域名证书配置
  */
-export interface SecRuleRelatedInfo {
+export interface HostCertSetting {
   /**
-   * 规则ID列表（99999为无效id）。
-   */
-  RuleId: number
-
-  /**
-      * 执行动作（处置方式），取值有：
-<li>trans ：通过 ；</li>
-<li>alg ：算法挑战 ；</li>
-<li>drop ：丢弃 ；</li>
-<li>ban ：封禁源ip ；</li>
-<li>redirect ：重定向 ；</li>
-<li>page ：返回指定页面 ；</li>
-<li>monitor ：观察 。</li>
+      * 域名
+注意：此字段可能返回 null，表示取不到有效值。
       */
-  Action: string
+  Host: string
 
   /**
-      * 风险等级（waf日志中独有），取值有：
-<li>high risk ：高危 ；</li>
-<li>middle risk ：中危 ；</li>
-<li>low risk ：低危 ；</li>
-<li>unkonw ：未知 。</li>
+      * 服务端证书配置
+注意：此字段可能返回 null，表示取不到有效值。
       */
-  RiskLevel: string
-
-  /**
-      * 规则等级，取值有：
-<li>normal  ：正常 。</li>
-      */
-  RuleLevel: string
-
-  /**
-   * 规则描述。
-   */
-  Description: string
-
-  /**
-   * 规则类型名称。
-   */
-  RuleTypeName: string
+  CertInfo: Array<ServerCertInfo>
 }
 
 /**
