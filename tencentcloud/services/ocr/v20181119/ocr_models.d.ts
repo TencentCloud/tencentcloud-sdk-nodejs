@@ -936,6 +936,10 @@ export interface VatInvoiceItem {
       * 税额
       */
     TaxAmount: string;
+    /**
+      * 税收分类编码
+      */
+    TaxClassifyCode: string;
 }
 /**
  * 机动车登记证书识别结果
@@ -1173,6 +1177,10 @@ export interface VehicleInvoiceInfo {
       * 销售电话
       */
     SellerTel: string;
+    /**
+      * 购方身份证
+      */
+    BuyerNo: string;
 }
 /**
  * DriverLicenseOCR请求参数结构体
@@ -5219,6 +5227,14 @@ Y: 有清单 N：无清单
       * 项目明细
       */
     Items: Array<VatInvoiceItem>;
+    /**
+      * 所属税局
+      */
+    TaxBureau: string;
+    /**
+      * 通行费标志:Y、是;N、否
+      */
+    TrafficFreeFlag: string;
 }
 /**
  * HmtResidentPermitOCR返回参数结构体

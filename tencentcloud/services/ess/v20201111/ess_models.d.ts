@@ -29,6 +29,19 @@ export interface CancelMultiFlowSignQRCodeRequest {
     Agent?: Agent;
 }
 /**
+ * CreateFlowEvidenceReport返回参数结构体
+ */
+export interface CreateFlowEvidenceReportResponse {
+    /**
+      * 出证报告 URL（有效期5分钟）
+      */
+    ReportUrl: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeFileUrls返回参数结构体
  */
 export interface DescribeFileUrlsResponse {
@@ -984,6 +997,19 @@ export interface DescribeFlowTemplatesResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * CreateFlowEvidenceReport请求参数结构体
+ */
+export interface CreateFlowEvidenceReportRequest {
+    /**
+      * 调用方用户信息，userId 必填
+      */
+    Operator: UserInfo;
+    /**
+      * 签署流程编号
+      */
+    FlowId: string;
 }
 /**
  * CreateBatchCancelFlowUrl返回参数结构体

@@ -18,69 +18,9 @@ const client = new tencentcloud.essbasic.v20210526.Client({
 })
 describe("essbasic.v20210526.test.js", function () {
 
-it("essbasic.v20210526.UploadFiles", async function () {
-    try {
-       const data = await client.UploadFiles({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("essbasic.v20210526.CreateFlowsByTemplates", async function () {
-    try {
-       const data = await client.CreateFlowsByTemplates({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("essbasic.v20210526.DescribeResourceUrlsByFlows", async function () {
-    try {
-       const data = await client.DescribeResourceUrlsByFlows({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("essbasic.v20210526.ChannelCreateFlowSignReview", async function () {
     try {
        const data = await client.ChannelCreateFlowSignReview({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("essbasic.v20210526.DescribeTemplates", async function () {
-    try {
-       const data = await client.DescribeTemplates({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("essbasic.v20210526.OperateChannelTemplate", async function () {
-    try {
-       const data = await client.OperateChannelTemplate({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("essbasic.v20210526.SyncProxyOrganizationOperators", async function () {
-    try {
-       const data = await client.SyncProxyOrganizationOperators({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -108,26 +48,6 @@ it("essbasic.v20210526.ChannelCreateFlowByFiles", async function () {
     }
 })
 
-it("essbasic.v20210526.PrepareFlows", async function () {
-    try {
-       const data = await client.PrepareFlows({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("essbasic.v20210526.CreateSignUrls", async function () {
-    try {
-       const data = await client.CreateSignUrls({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("essbasic.v20210526.CreateSealByImage", async function () {
     try {
        const data = await client.CreateSealByImage({})
@@ -141,26 +61,6 @@ it("essbasic.v20210526.CreateSealByImage", async function () {
 it("essbasic.v20210526.ChannelCancelMultiFlowSignQRCode", async function () {
     try {
        const data = await client.ChannelCancelMultiFlowSignQRCode({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("essbasic.v20210526.CreateConsoleLoginUrl", async function () {
-    try {
-       const data = await client.CreateConsoleLoginUrl({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("essbasic.v20210526.ChannelCreateBatchCancelFlowUrl", async function () {
-    try {
-       const data = await client.ChannelCreateBatchCancelFlowUrl({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -188,6 +88,46 @@ it("essbasic.v20210526.DescribeUsage", async function () {
     }
 })
 
+it("essbasic.v20210526.CreateFlowsByTemplates", async function () {
+    try {
+       const data = await client.CreateFlowsByTemplates({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("essbasic.v20210526.CreateSignUrls", async function () {
+    try {
+       const data = await client.CreateSignUrls({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("essbasic.v20210526.CreateConsoleLoginUrl", async function () {
+    try {
+       const data = await client.CreateConsoleLoginUrl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("essbasic.v20210526.ChannelCreateBatchCancelFlowUrl", async function () {
+    try {
+       const data = await client.ChannelCreateBatchCancelFlowUrl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("essbasic.v20210526.ChannelGetTaskResultApi", async function () {
     try {
        const data = await client.ChannelGetTaskResultApi({})
@@ -208,9 +148,9 @@ it("essbasic.v20210526.SyncProxyOrganization", async function () {
     }
 })
 
-it("essbasic.v20210526.DescribeFlowDetailInfo", async function () {
+it("essbasic.v20210526.GetDownloadFlowUrl", async function () {
     try {
-       const data = await client.DescribeFlowDetailInfo({})
+       const data = await client.GetDownloadFlowUrl({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -218,9 +158,79 @@ it("essbasic.v20210526.DescribeFlowDetailInfo", async function () {
     }
 })
 
-it("essbasic.v20210526.GetDownloadFlowUrl", async function () {
+it("essbasic.v20210526.PrepareFlows", async function () {
     try {
-       const data = await client.GetDownloadFlowUrl({})
+       const data = await client.PrepareFlows({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("essbasic.v20210526.DescribeResourceUrlsByFlows", async function () {
+    try {
+       const data = await client.DescribeResourceUrlsByFlows({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("essbasic.v20210526.DescribeTemplates", async function () {
+    try {
+       const data = await client.DescribeTemplates({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("essbasic.v20210526.UploadFiles", async function () {
+    try {
+       const data = await client.UploadFiles({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("essbasic.v20210526.CreateChannelFlowEvidenceReport", async function () {
+    try {
+       const data = await client.CreateChannelFlowEvidenceReport({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("essbasic.v20210526.OperateChannelTemplate", async function () {
+    try {
+       const data = await client.OperateChannelTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("essbasic.v20210526.SyncProxyOrganizationOperators", async function () {
+    try {
+       const data = await client.SyncProxyOrganizationOperators({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("essbasic.v20210526.DescribeFlowDetailInfo", async function () {
+    try {
+       const data = await client.DescribeFlowDetailInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -745,68 +745,56 @@ export interface DescribeAssociatedInstanceListResponse {
 }
 
 /**
- * DescribeResourceGroup返回参数结构体
+ * 企业安全组关联实例信息
  */
-export interface DescribeResourceGroupResponse {
+export interface AssociatedInstanceInfo {
   /**
-   * 返回树形结构
-   */
-  Data: string
+      * 实例ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceId: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeNatRuleOverview返回参数结构体
- */
-export interface DescribeNatRuleOverviewResponse {
-  /**
-   * 实例ID
-   */
-  InstanceId?: string
+      * 实例名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceName: string
 
   /**
-   * 实例名称
-   */
-  InstanceName?: string
+      * 实例类型，3是cvm实例,4是clb实例,5是eni实例,6是云数据库
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Type: number
 
   /**
-   * 弹性IP列表
-   */
-  EipList?: Array<string>
+      * 私有网络ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VpcId: string
 
   /**
-   * 端口转发规则数量
-   */
-  DnatNum?: number
+      * 私有网络名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VpcName: string
 
   /**
-   * 访问控制规则总数
-   */
-  TotalNum?: number
+      * 公网IP
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PublicIp: string
 
   /**
-   * 访问控制规则剩余配额
-   */
-  RemainNum?: number
+      * 内网IP
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Ip: string
 
   /**
-   * 阻断规则条数
-   */
-  BlockNum?: number
-
-  /**
-   * 启用规则条数
-   */
-  EnableNum?: number
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+      * 关联安全组数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SecurityGroupCount: number
 }
 
 /**
@@ -2715,27 +2703,6 @@ export interface ModifySequenceRulesResponse {
 }
 
 /**
- * DeleteSecurityGroupAllRule返回参数结构体
- */
-export interface DeleteSecurityGroupAllRuleResponse {
-  /**
-   * 0: 操作成功，非0：操作失败
-   */
-  Status?: number
-
-  /**
-      * 返回数据的json字符串
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Info?: number
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DescribeResourceGroupNew返回参数结构体
  */
 export interface DescribeResourceGroupNewResponse {
@@ -3246,36 +3213,6 @@ export interface DescribeIPStatusListResponse {
 }
 
 /**
- * DescribeNatRuleOverview请求参数结构体
- */
-export interface DescribeNatRuleOverviewRequest {
-  /**
-   * 方向，0：出站，1：入站 默认值：0
-   */
-  Direction?: number
-
-  /**
-      * NAT地域  这个是必填项，填入相关的英文，'ap-beijing-fsi': '北京金融',
-        'ap-beijing': '北京',
-        'ap-changsha-ec': '长沙EC',
-        'ap-chengdu': '成都',
-        'ap-chongqing': '重庆',
-        'ap-fuzhou-ec': '福州EC',
-        'ap-guangzhou-open': '广州Open',
-        'ap-guangzhou': '广州',
-        'ap-hangzhou-ec': '杭州EC',
-        'ap-jinan-ec': '济南EC',
-        'ap-nanjing': '南京',
-        'ap-shanghai-fsi': '上海金融',
-        'ap-shanghai': '上海',
-        'ap-shenzhen-fsi': '深圳金融',
-        'ap-shenzhen': '深圳',
-        'ap-wuhan-ec': '武汉EC'
-      */
-  Area?: string
-}
-
-/**
  * CreateDatabaseWhiteListRules请求参数结构体
  */
 export interface CreateDatabaseWhiteListRulesRequest {
@@ -3283,21 +3220,6 @@ export interface CreateDatabaseWhiteListRulesRequest {
    * 创建白名单数据
    */
   DatabaseWhiteListRuleData: Array<DatabaseWhiteListRuleData>
-}
-
-/**
- * DescribeResourceGroup请求参数结构体
- */
-export interface DescribeResourceGroupRequest {
-  /**
-   * 查询类型 网络结构 vpc，业务识别- resource ，资源标签-tag
-   */
-  QueryType: string
-
-  /**
-   * 资产组id  全部传0
-   */
-  GroupId?: string
 }
 
 /**
@@ -3392,18 +3314,18 @@ export interface NatFwEipsInfo {
 }
 
 /**
- * DeleteSecurityGroupAllRule请求参数结构体
+ * DescribeResourceGroup返回参数结构体
  */
-export interface DeleteSecurityGroupAllRuleRequest {
+export interface DescribeResourceGroupResponse {
   /**
-   * 方向，0：出站，1：入站
+   * 返回树形结构
    */
-  Direction: number
+  Data: string
 
   /**
-   * 腾讯云地域的英文简写
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Area: string
+  RequestId?: string
 }
 
 /**
@@ -4434,56 +4356,18 @@ export interface DnsVpcSwitch {
 }
 
 /**
- * 企业安全组关联实例信息
+ * DescribeResourceGroup请求参数结构体
  */
-export interface AssociatedInstanceInfo {
+export interface DescribeResourceGroupRequest {
   /**
-      * 实例ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  InstanceId: string
+   * 查询类型 网络结构 vpc，业务识别- resource ，资源标签-tag
+   */
+  QueryType: string
 
   /**
-      * 实例名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  InstanceName: string
-
-  /**
-      * 实例类型，3是cvm实例,4是clb实例,5是eni实例,6是云数据库
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Type: number
-
-  /**
-      * 私有网络ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  VpcId: string
-
-  /**
-      * 私有网络名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  VpcName: string
-
-  /**
-      * 公网IP
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  PublicIp: string
-
-  /**
-      * 内网IP
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Ip: string
-
-  /**
-      * 关联安全组数量
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  SecurityGroupCount: number
+   * 资产组id  全部传0
+   */
+  GroupId?: string
 }
 
 /**

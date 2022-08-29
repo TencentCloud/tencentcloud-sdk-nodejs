@@ -28,16 +28,6 @@ it("cfw.v20190904.DescribeNatFwInfoCount", async function () {
     }
 })
 
-it("cfw.v20190904.DescribeNatRuleOverview", async function () {
-    try {
-       const data = await client.DescribeNatRuleOverview({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("cfw.v20190904.StopSecurityGroupRuleDispatch", async function () {
     try {
        const data = await client.StopSecurityGroupRuleDispatch({})
@@ -238,9 +228,9 @@ it("cfw.v20190904.CreateNatFwInstanceWithDomain", async function () {
     }
 })
 
-it("cfw.v20190904.DeleteSecurityGroupAllRule", async function () {
+it("cfw.v20190904.ModifySequenceRules", async function () {
     try {
-       const data = await client.DeleteSecurityGroupAllRule({})
+       const data = await client.ModifySequenceRules({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -438,16 +428,6 @@ it("cfw.v20190904.DescribeUnHandleEventTabList", async function () {
     }
 })
 
-it("cfw.v20190904.SetNatFwEip", async function () {
-    try {
-       const data = await client.SetNatFwEip({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("cfw.v20190904.DescribeSourceAsset", async function () {
     try {
        const data = await client.DescribeSourceAsset({})
@@ -498,9 +478,9 @@ it("cfw.v20190904.ModifyAllRuleStatus", async function () {
     }
 })
 
-it("cfw.v20190904.ModifySequenceRules", async function () {
+it("cfw.v20190904.RemoveAcRule", async function () {
     try {
-       const data = await client.ModifySequenceRules({})
+       const data = await client.RemoveAcRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -508,9 +488,9 @@ it("cfw.v20190904.ModifySequenceRules", async function () {
     }
 })
 
-it("cfw.v20190904.RemoveAcRule", async function () {
+it("cfw.v20190904.SetNatFwEip", async function () {
     try {
-       const data = await client.RemoveAcRule({})
+       const data = await client.SetNatFwEip({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

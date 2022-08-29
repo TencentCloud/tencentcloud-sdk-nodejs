@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CancelMultiFlowSignQRCodeRequest, DescribeFileUrlsResponse, CreateDocumentResponse, StartFlowRequest, CancelFlowResponse, CreateDocumentRequest, CreateFlowRequest, CreateSchemeUrlRequest, DescribeThirdPartyAuthCodeRequest, GetTaskResultApiRequest, UploadFilesRequest, CancelFlowRequest, DescribeFlowBriefsResponse, CreateMultiFlowSignQRCodeResponse, UploadFilesResponse, DescribeThirdPartyAuthCodeResponse, CreateFlowByFilesResponse, DescribeFlowBriefsRequest, DescribeFileUrlsRequest, CreateFlowSignReviewResponse, DescribeFlowTemplatesResponse, CreateBatchCancelFlowUrlResponse, StartFlowResponse, CreateBatchCancelFlowUrlRequest, CreateMultiFlowSignQRCodeRequest, CreateConvertTaskApiResponse, CreateFlowSignReviewRequest, CreateConvertTaskApiRequest, CreateSchemeUrlResponse, CreateFlowByFilesRequest, CancelMultiFlowSignQRCodeResponse, CreateFlowResponse, DescribeFlowTemplatesRequest, GetTaskResultApiResponse } from "./ess_models";
+import { CancelMultiFlowSignQRCodeRequest, CreateFlowEvidenceReportResponse, DescribeFileUrlsResponse, CreateDocumentResponse, StartFlowRequest, CancelFlowResponse, CreateDocumentRequest, CreateFlowRequest, CreateSchemeUrlRequest, DescribeThirdPartyAuthCodeRequest, GetTaskResultApiRequest, UploadFilesRequest, CancelFlowRequest, DescribeFlowBriefsResponse, CreateMultiFlowSignQRCodeResponse, UploadFilesResponse, DescribeThirdPartyAuthCodeResponse, CreateFlowByFilesResponse, DescribeFlowBriefsRequest, DescribeFileUrlsRequest, CreateFlowSignReviewResponse, DescribeFlowTemplatesResponse, CreateFlowEvidenceReportRequest, CreateBatchCancelFlowUrlResponse, StartFlowResponse, CreateBatchCancelFlowUrlRequest, CreateMultiFlowSignQRCodeRequest, CreateConvertTaskApiResponse, CreateFlowSignReviewRequest, CreateConvertTaskApiRequest, CreateSchemeUrlResponse, CreateFlowByFilesRequest, CancelMultiFlowSignQRCodeResponse, CreateFlowResponse, DescribeFlowTemplatesRequest, GetTaskResultApiResponse } from "./ess_models";
 /**
  * ess client
  * @class
@@ -48,6 +48,10 @@ export declare class Client extends AbstractClient {
      * 通过AuthCode查询用户是否实名
      */
     DescribeThirdPartyAuthCode(req: DescribeThirdPartyAuthCodeRequest, cb?: (error: string, rep: DescribeThirdPartyAuthCodeResponse) => void): Promise<DescribeThirdPartyAuthCodeResponse>;
+    /**
+     * 创建出证报告，返回报告 URL
+     */
+    CreateFlowEvidenceReport(req: CreateFlowEvidenceReportRequest, cb?: (error: string, rep: CreateFlowEvidenceReportResponse) => void): Promise<CreateFlowEvidenceReportResponse>;
     /**
      * 创建签署流程
 适用场景：在标准制式的合同场景中，可通过提前预制好模板文件，每次调用模板文件的id，补充合同内容信息及签署信息生成电子合同。

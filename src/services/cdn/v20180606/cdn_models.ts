@@ -9824,7 +9824,6 @@ offline：下线状态
  * https 加速服务端证书配置：
 + 支持使用托管至 SSL 证书管理的证书进行部署
 + 支持上传 PEM 格式的证书进行部署
-注意：上传 PEM 证书时，需要进行 Base 64 编码
  */
 export interface ServerCert {
   /**

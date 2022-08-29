@@ -615,6 +615,26 @@ export interface AuthFailMessage {
 }
 
 /**
+ * CreateChannelFlowEvidenceReport请求参数结构体
+ */
+export interface CreateChannelFlowEvidenceReportRequest {
+  /**
+   * 签署流程编号
+   */
+  FlowId: string
+
+  /**
+   * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填
+   */
+  Agent: Agent
+
+  /**
+   * 操作者的信息
+   */
+  Operator?: UserInfo
+}
+
+/**
  * DescribeFlowDetailInfo请求参数结构体
  */
 export interface DescribeFlowDetailInfoRequest {
@@ -669,6 +689,12 @@ ProcessTimeout - 转换文件超时
    * 资源Id，也是FileId，用于文件发起使用
    */
   ResourceId: string
+
+  /**
+      * 预览文件Url，有效期30分钟
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PreviewUrl: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1055,6 +1081,11 @@ export interface CreateFlowsByTemplatesResponse {
    * 预览模式下返回的预览文件url数组
    */
   PreviewUrls: Array<string>
+
+  /**
+   * 复杂文档合成任务的任务信息数组
+   */
+  TaskInfos: Array<TaskInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1507,6 +1538,21 @@ export interface ChannelCancelMultiFlowSignQRCodeRequest {
    * 用户信息
    */
   Operator?: UserInfo
+}
+
+/**
+ * CreateChannelFlowEvidenceReport返回参数结构体
+ */
+export interface CreateChannelFlowEvidenceReportResponse {
+  /**
+   * 出证报告 URL（有效五分钟）
+   */
+  ReportUrl: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2150,6 +2196,23 @@ PERSON 自然人
 注意：此字段可能返回 null，表示取不到有效值。
       */
   OpenId: string
+}
+
+/**
+ * 复杂文档合成任务的任务信息
+ */
+export interface TaskInfo {
+  /**
+      * 合成任务Id，可以通过 ChannelGetTaskResultApi 接口获取任务信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TaskId: string
+
+  /**
+      * 任务状态：READY - 任务已完成；NOTREADY - 任务未完成；
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TaskStatus: string
 }
 
 /**

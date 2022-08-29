@@ -83,6 +83,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeThirdPartyAuthCode", req, cb);
     }
     /**
+     * 创建出证报告，返回报告 URL
+     */
+    async CreateFlowEvidenceReport(req, cb) {
+        return this.request("CreateFlowEvidenceReport", req, cb);
+    }
+    /**
      * 创建签署流程
 适用场景：在标准制式的合同场景中，可通过提前预制好模板文件，每次调用模板文件的id，补充合同内容信息及签署信息生成电子合同。
 注：该接口是通过模板生成合同流程的前置接口，先创建一个不包含签署文件的流程。配合“创建电子文档”接口和“发起流程”接口使用。

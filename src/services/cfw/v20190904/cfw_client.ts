@@ -45,8 +45,7 @@ import {
   ModifyAllSwitchStatusRequest,
   DescribeUnHandleEventTabListRequest,
   DescribeAssociatedInstanceListResponse,
-  DescribeResourceGroupResponse,
-  DescribeNatRuleOverviewResponse,
+  AssociatedInstanceInfo,
   RemoveAcRuleResponse,
   NatFwInstance,
   DeleteNatFwInstanceRequest,
@@ -119,7 +118,6 @@ import {
   RemoveEnterpriseSecurityGroupRuleResponse,
   ModifyAllVPCSwitchStatusRequest,
   ModifySequenceRulesResponse,
-  DeleteSecurityGroupAllRuleResponse,
   DescribeResourceGroupNewResponse,
   DescribeNatFwInstanceWithRegionResponse,
   DescribeResourceGroupNewRequest,
@@ -140,12 +138,10 @@ import {
   DeleteAllAccessControlRuleResponse,
   ModifyNatFwSwitchRequest,
   DescribeIPStatusListResponse,
-  DescribeNatRuleOverviewRequest,
   CreateDatabaseWhiteListRulesRequest,
-  DescribeResourceGroupRequest,
   NatInstanceInfo,
   NatFwEipsInfo,
-  DeleteSecurityGroupAllRuleRequest,
+  DescribeResourceGroupResponse,
   DescribeTLogIpListResponse,
   StopSecurityGroupRuleDispatchResponse,
   DescribeNatFwInfoCountRequest,
@@ -187,7 +183,7 @@ import {
   ModifySecurityGroupRuleResponse,
   ModifySecurityGroupAllRuleStatusResponse,
   DnsVpcSwitch,
-  AssociatedInstanceInfo,
+  DescribeResourceGroupRequest,
   CreateAcRulesRequest,
   ModifyTableStatusRequest,
   ModifyTableStatusResponse,
@@ -211,16 +207,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeNatFwInfoCountResponse) => void
   ): Promise<DescribeNatFwInfoCountResponse> {
     return this.request("DescribeNatFwInfoCount", req, cb)
-  }
-
-  /**
-   * nat规则列表概况
-   */
-  async DescribeNatRuleOverview(
-    req: DescribeNatRuleOverviewRequest,
-    cb?: (error: string, rep: DescribeNatRuleOverviewResponse) => void
-  ): Promise<DescribeNatRuleOverviewResponse> {
-    return this.request("DescribeNatRuleOverview", req, cb)
   }
 
   /**
@@ -426,13 +412,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除全部规则
+   * 修改规则执行顺序
    */
-  async DeleteSecurityGroupAllRule(
-    req: DeleteSecurityGroupAllRuleRequest,
-    cb?: (error: string, rep: DeleteSecurityGroupAllRuleResponse) => void
-  ): Promise<DeleteSecurityGroupAllRuleResponse> {
-    return this.request("DeleteSecurityGroupAllRule", req, cb)
+  async ModifySequenceRules(
+    req: ModifySequenceRulesRequest,
+    cb?: (error: string, rep: ModifySequenceRulesResponse) => void
+  ): Promise<ModifySequenceRulesResponse> {
+    return this.request("ModifySequenceRules", req, cb)
   }
 
   /**
@@ -631,16 +617,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 设置防火墙实例弹性公网ip，目前仅支持新增模式的防火墙实例
-   */
-  async SetNatFwEip(
-    req: SetNatFwEipRequest,
-    cb?: (error: string, rep: SetNatFwEipResponse) => void
-  ): Promise<SetNatFwEipResponse> {
-    return this.request("SetNatFwEip", req, cb)
-  }
-
-  /**
      * DescribeSourceAsset-查询资产组全部资产信息
 
      */
@@ -692,16 +668,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改规则执行顺序
-   */
-  async ModifySequenceRules(
-    req: ModifySequenceRulesRequest,
-    cb?: (error: string, rep: ModifySequenceRulesResponse) => void
-  ): Promise<ModifySequenceRulesResponse> {
-    return this.request("ModifySequenceRules", req, cb)
-  }
-
-  /**
    * 删除互联网边界规则
    */
   async RemoveAcRule(
@@ -709,6 +675,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RemoveAcRuleResponse) => void
   ): Promise<RemoveAcRuleResponse> {
     return this.request("RemoveAcRule", req, cb)
+  }
+
+  /**
+   * 设置防火墙实例弹性公网ip，目前仅支持新增模式的防火墙实例
+   */
+  async SetNatFwEip(
+    req: SetNatFwEipRequest,
+    cb?: (error: string, rep: SetNatFwEipResponse) => void
+  ): Promise<SetNatFwEipResponse> {
+    return this.request("SetNatFwEip", req, cb)
   }
 
   /**

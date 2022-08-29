@@ -34,12 +34,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeNatFwInfoCount", req, cb);
     }
     /**
-     * nat规则列表概况
-     */
-    async DescribeNatRuleOverview(req, cb) {
-        return this.request("DescribeNatRuleOverview", req, cb);
-    }
-    /**
      * 中止安全组规则下发
      */
     async StopSecurityGroupRuleDispatch(req, cb) {
@@ -162,10 +156,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateNatFwInstanceWithDomain", req, cb);
     }
     /**
-     * 删除全部规则
+     * 修改规则执行顺序
      */
-    async DeleteSecurityGroupAllRule(req, cb) {
-        return this.request("DeleteSecurityGroupAllRule", req, cb);
+    async ModifySequenceRules(req, cb) {
+        return this.request("ModifySequenceRules", req, cb);
     }
     /**
      * 添加互联网边界规则
@@ -287,12 +281,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeUnHandleEventTabList", req, cb);
     }
     /**
-     * 设置防火墙实例弹性公网ip，目前仅支持新增模式的防火墙实例
-     */
-    async SetNatFwEip(req, cb) {
-        return this.request("SetNatFwEip", req, cb);
-    }
-    /**
      * DescribeSourceAsset-查询资产组全部资产信息
 
      */
@@ -324,16 +312,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyAllRuleStatus", req, cb);
     }
     /**
-     * 修改规则执行顺序
-     */
-    async ModifySequenceRules(req, cb) {
-        return this.request("ModifySequenceRules", req, cb);
-    }
-    /**
      * 删除互联网边界规则
      */
     async RemoveAcRule(req, cb) {
         return this.request("RemoveAcRule", req, cb);
+    }
+    /**
+     * 设置防火墙实例弹性公网ip，目前仅支持新增模式的防火墙实例
+     */
+    async SetNatFwEip(req, cb) {
+        return this.request("SetNatFwEip", req, cb);
     }
     /**
      * ModifyBlockTop取消置顶接口

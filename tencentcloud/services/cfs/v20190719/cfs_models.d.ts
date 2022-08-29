@@ -136,7 +136,7 @@ export interface DescribeAvailableZoneInfoResponse {
     /**
       * 各可用区的资源售卖情况以及支持的存储类型、存储协议等信息
       */
-    RegionZones?: Array<AvailableRegion>;
+    RegionZones: Array<AvailableRegion>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -149,15 +149,15 @@ export interface UpdateCfsFileSystemNameResponse {
     /**
       * 用户自定义文件系统名称
       */
-    CreationToken?: string;
+    CreationToken: string;
     /**
       * 文件系统ID
       */
-    FileSystemId?: string;
+    FileSystemId: string;
     /**
       * 用户自定义文件系统名称
       */
-    FsName?: string;
+    FsName: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -196,7 +196,7 @@ export interface DescribeCfsFileSystemClientsResponse {
     /**
       * 客户端列表
       */
-    ClientList?: Array<FileSystemClient>;
+    ClientList: Array<FileSystemClient>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -218,11 +218,11 @@ export interface DescribeMountTargetsResponse {
     /**
       * 挂载点详情
       */
-    MountTargets?: Array<MountInfo>;
+    MountTargets: Array<MountInfo>;
     /**
       * 挂载点数量
       */
-    NumberOfMountTargets?: number;
+    NumberOfMountTargets: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -235,11 +235,11 @@ export interface DeleteCfsRuleResponse {
     /**
       * 规则 ID
       */
-    RuleId?: string;
+    RuleId: string;
     /**
       * 权限组 ID
       */
-    PGroupId?: string;
+    PGroupId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -335,27 +335,27 @@ export interface UpdateCfsRuleResponse {
     /**
       * 权限组 ID
       */
-    PGroupId?: string;
+    PGroupId: string;
     /**
       * 规则 ID
       */
-    RuleId?: string;
+    RuleId: string;
     /**
       * 允许访问的客户端 IP 或者 IP 段
       */
-    AuthClientIp?: string;
+    AuthClientIp: string;
     /**
       * 读写权限
       */
-    RWPermission?: string;
+    RWPermission: string;
     /**
       * 用户权限
       */
-    UserPermission?: string;
+    UserPermission: string;
     /**
       * 优先级
       */
-    Priority?: number;
+    Priority: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -579,11 +579,11 @@ export interface DeleteCfsPGroupResponse {
     /**
       * 权限组 ID
       */
-    PGroupId?: string;
+    PGroupId: string;
     /**
       * 用户 ID
       */
-    AppId?: number;
+    AppId: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -704,23 +704,23 @@ export interface CreateCfsPGroupResponse {
     /**
       * 权限组 ID
       */
-    PGroupId?: string;
+    PGroupId: string;
     /**
       * 权限组名字
       */
-    Name?: string;
+    Name: string;
     /**
       * 权限组描述信息
       */
-    DescInfo?: string;
+    DescInfo: string;
     /**
       * 已经与该权限组绑定的文件系统个数
       */
-    BindCfsNum?: number;
+    BindCfsNum: number;
     /**
       * 权限组创建时间
       */
-    CDate?: string;
+    CDate: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -764,9 +764,9 @@ export interface PGroupInfo {
  */
 export interface SignUpCfsServiceResponse {
     /**
-      * 该用户当前 CFS 服务的状态，none 是未开通，creating 是开通中，created 是已开通
+      * 该用户当前 CFS 服务的状态，creating 是开通中，created 是已开通
       */
-    CfsServiceStatus?: string;
+    CfsServiceStatus: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -792,7 +792,7 @@ export interface DescribeCfsServiceStatusResponse {
     /**
       * 该用户当前 CFS 服务的状态，none 为未开通，creating 为开通中，created 为已开通
       */
-    CfsServiceStatus?: string;
+    CfsServiceStatus: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -805,27 +805,27 @@ export interface CreateCfsRuleResponse {
     /**
       * 规则 ID
       */
-    RuleId?: string;
+    RuleId: string;
     /**
       * 权限组 ID
       */
-    PGroupId?: string;
+    PGroupId: string;
     /**
       * 客户端 IP
       */
-    AuthClientIp?: string;
+    AuthClientIp: string;
     /**
       * 读写权限
       */
-    RWPermission?: string;
+    RWPermission: string;
     /**
       * 用户权限
       */
-    UserPermission?: string;
+    UserPermission: string;
     /**
       * 优先级
       */
-    Priority?: number;
+    Priority: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -934,15 +934,15 @@ export interface UpdateCfsPGroupResponse {
     /**
       * 权限组ID
       */
-    PGroupId?: string;
+    PGroupId: string;
     /**
       * 权限组名称
       */
-    Name?: string;
+    Name: string;
     /**
       * 描述信息
       */
-    DescInfo?: string;
+    DescInfo: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -955,7 +955,7 @@ export interface DescribeCfsRulesResponse {
     /**
       * 权限组规则列表
       */
-    RuleList?: Array<PGroupRuleInfo>;
+    RuleList: Array<PGroupRuleInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -968,11 +968,11 @@ export interface UpdateCfsFileSystemPGroupResponse {
     /**
       * 权限组 ID
       */
-    PGroupId?: string;
+    PGroupId: string;
     /**
       * 文件系统 ID
       */
-    FileSystemId?: string;
+    FileSystemId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

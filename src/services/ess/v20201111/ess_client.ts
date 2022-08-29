@@ -20,6 +20,7 @@ import { ClientConfig } from "../../../common/interface"
 import {
   UploadFile,
   CancelMultiFlowSignQRCodeRequest,
+  CreateFlowEvidenceReportResponse,
   DescribeFileUrlsResponse,
   TemplateInfo,
   CreateDocumentResponse,
@@ -52,6 +53,7 @@ import {
   CreateFlowSignReviewResponse,
   Caller,
   DescribeFlowTemplatesResponse,
+  CreateFlowEvidenceReportRequest,
   CreateBatchCancelFlowUrlResponse,
   StartFlowResponse,
   FileInfo,
@@ -163,6 +165,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeThirdPartyAuthCodeResponse) => void
   ): Promise<DescribeThirdPartyAuthCodeResponse> {
     return this.request("DescribeThirdPartyAuthCode", req, cb)
+  }
+
+  /**
+   * 创建出证报告，返回报告 URL
+   */
+  async CreateFlowEvidenceReport(
+    req: CreateFlowEvidenceReportRequest,
+    cb?: (error: string, rep: CreateFlowEvidenceReportResponse) => void
+  ): Promise<CreateFlowEvidenceReportResponse> {
+    return this.request("CreateFlowEvidenceReport", req, cb)
   }
 
   /**
