@@ -85,6 +85,7 @@ import {
   UpgradeLifecycleHookResponse,
   InstanceTag,
   ModifyLifecycleHookResponse,
+  LifecycleCommand,
   DescribeAutoScalingAdvicesResponse,
   CreateAutoScalingGroupRequest,
   DeleteScheduledActionResponse,

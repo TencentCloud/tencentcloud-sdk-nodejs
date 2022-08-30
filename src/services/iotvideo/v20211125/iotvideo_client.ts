@@ -46,7 +46,7 @@ import {
   ModifyModelDefinitionRequest,
   DescribeBatchsResponse,
   CancelAIModelApplicationRequest,
-  TransferCloudStorageResponse,
+  SDKLogItem,
   DescribeUserRequest,
   DescribeForwardRuleResponse,
   CallDeviceActionSyncRequest,
@@ -105,6 +105,7 @@ import {
   DescribeDeviceCommLogRequest,
   WakeUpDeviceResponse,
   DeleteForwardRuleRequest,
+  DescribeCloudStorageStreamDataResponse,
   UpdateAIModelChannelResponse,
   DeviceUpdateStatus,
   DescribeAIModelUsageResponse,
@@ -166,6 +167,7 @@ import {
   CloudStorageEvent,
   DeviceDataHistoryItem,
   DescribeCloudStorageDateResponse,
+  TransferCloudStorageResponse,
   ModifyDataForwardStatusResponse,
   CloudStorageTimeInfo,
   ModifyDeviceResponse,
@@ -203,7 +205,7 @@ import {
   DescribeCloudStorageResponse,
   ResetCloudStorageRequest,
   DescribeProductResponse,
-  SDKLogItem,
+  DescribeCloudStorageStreamDataRequest,
   DescribeAIModelsResponse,
   InheritCloudStorageUserRequest,
   DescribeAIModelChannelRequest,
@@ -1084,6 +1086,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateTaskFileUrlResponse) => void
   ): Promise<CreateTaskFileUrlResponse> {
     return this.request("CreateTaskFileUrl", req, cb)
+  }
+
+  /**
+   * 获取设备图片流数据
+   */
+  async DescribeCloudStorageStreamData(
+    req: DescribeCloudStorageStreamDataRequest,
+    cb?: (error: string, rep: DescribeCloudStorageStreamDataResponse) => void
+  ): Promise<DescribeCloudStorageStreamDataResponse> {
+    return this.request("DescribeCloudStorageStreamData", req, cb)
   }
 
   /**

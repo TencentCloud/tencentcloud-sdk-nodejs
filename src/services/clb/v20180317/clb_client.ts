@@ -41,7 +41,7 @@ import {
   DescribeRewriteRequest,
   ModifyLoadBalancerAttributesResponse,
   DescribeTargetGroupInstancesRequest,
-  SetCustomizedConfigForLoadBalancerResponse,
+  DescribeIdleLoadBalancersResponse,
   AssociateTargetGroupsRequest,
   DescribeLoadBalancersRequest,
   ClassicalTarget,
@@ -59,6 +59,8 @@ import {
   CrossTargets,
   RuleHealth,
   DescribeExclusiveClustersResponse,
+  ModifyDomainRequest,
+  IdleLoadBalancer,
   RegisterTargetGroupInstancesResponse,
   ClassicalTargetInfo,
   DescribeTargetsRequest,
@@ -117,7 +119,7 @@ import {
   DescribeClusterResourcesRequest,
   ModifyDomainAttributesRequest,
   DescribeClassicalLBHealthStatusRequest,
-  ModifyDomainRequest,
+  DescribeListenersRequest,
   CreateClsLogSetResponse,
   DescribeCrossTargetsRequest,
   LBChargePrepaid,
@@ -156,6 +158,7 @@ import {
   RegisterTargetsResponse,
   DeregisterTargetsFromClassicalLBResponse,
   ClustersZone,
+  SetCustomizedConfigForLoadBalancerResponse,
   DeleteLoadBalancerResponse,
   AutoRewriteResponse,
   DeregisterTargetsResponse,
@@ -206,7 +209,7 @@ import {
   LBItem,
   ModifyTargetGroupAttributeResponse,
   DeleteLoadBalancerListenersResponse,
-  DescribeListenersRequest,
+  DescribeIdleLoadBalancersRequest,
   DeleteLoadBalancerSnatIpsRequest,
   SetLoadBalancerSecurityGroupsRequest,
   DescribeClassicalLBTargetsResponse,
@@ -1015,6 +1018,17 @@ BGP带宽包必须传带宽包id
   }
 
   /**
+     * 用户手动配置原访问地址和重定向地址，系统自动将原访问地址的请求重定向至对应路径的目的地址。同一域名下可以配置多条路径作为重定向策略，实现http/https之间请求的自动跳转。设置重定向时，需满足如下约束条件：若A已经重定向至B，则A不能再重定向至C（除非先删除老的重定向关系，再建立新的重定向关系），B不能重定向至任何其它地址。
+本接口为异步接口，本接口返回成功后需以返回的RequestID为入参，调用DescribeTaskStatus接口查询本次任务是否成功。
+     */
+  async ManualRewrite(
+    req: ManualRewriteRequest,
+    cb?: (error: string, rep: ManualRewriteResponse) => void
+  ): Promise<ManualRewriteResponse> {
+    return this.request("ManualRewrite", req, cb)
+  }
+
+  /**
      * 本接口(CreateLoadBalancer)用来创建负载均衡实例（本接口只支持购买按量计费的负载均衡，包年包月的负载均衡请通过控制台购买）。为了使用负载均衡服务，您必须购买一个或多个负载均衡实例。成功调用该接口后，会返回负载均衡实例的唯一 ID。负载均衡实例的类型分为：公网、内网。详情可参考产品说明中的产品类型。
 注意：(1)指定可用区申请负载均衡、跨zone容灾(仅香港支持)【如果您需要体验该功能，请通过 [工单申请](https://console.cloud.tencent.com/workorder/category)】；(2)目前只有北京、上海、广州支持IPv6；(3)一个账号在每个地域的默认购买配额为：公网100个，内网100个。
 本接口为异步接口，接口成功返回后，可使用 DescribeLoadBalancers 接口查询负载均衡实例的状态（如创建中、正常），以确定是否创建成功。
@@ -1027,13 +1041,12 @@ BGP带宽包必须传带宽包id
   }
 
   /**
-     * 用户手动配置原访问地址和重定向地址，系统自动将原访问地址的请求重定向至对应路径的目的地址。同一域名下可以配置多条路径作为重定向策略，实现http/https之间请求的自动跳转。设置重定向时，需满足如下约束条件：若A已经重定向至B，则A不能再重定向至C（除非先删除老的重定向关系，再建立新的重定向关系），B不能重定向至任何其它地址。
-本接口为异步接口，本接口返回成功后需以返回的RequestID为入参，调用DescribeTaskStatus接口查询本次任务是否成功。
-     */
-  async ManualRewrite(
-    req: ManualRewriteRequest,
-    cb?: (error: string, rep: ManualRewriteResponse) => void
-  ): Promise<ManualRewriteResponse> {
-    return this.request("ManualRewrite", req, cb)
+   * 闲置实例是指创建超过7天后付费实例，且没有创建规则或创建规则没有绑定子机的负载均衡实例。
+   */
+  async DescribeIdleLoadBalancers(
+    req: DescribeIdleLoadBalancersRequest,
+    cb?: (error: string, rep: DescribeIdleLoadBalancersResponse) => void
+  ): Promise<DescribeIdleLoadBalancersResponse> {
+    return this.request("DescribeIdleLoadBalancers", req, cb)
   }
 }

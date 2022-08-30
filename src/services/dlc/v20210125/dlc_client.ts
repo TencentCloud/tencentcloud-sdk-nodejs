@@ -159,6 +159,7 @@ import {
   LockMetaDataRequest,
   DetachUserPolicyResponse,
   DescribeWorkGroupsRequest,
+  TasksOverview,
   CreateTasksResponse,
   CreateSparkAppRequest,
   UnbindWorkGroupsFromUserResponse,

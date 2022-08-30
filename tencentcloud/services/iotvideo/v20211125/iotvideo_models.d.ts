@@ -523,13 +523,29 @@ export interface CancelAIModelApplicationRequest {
     ProductId: string;
 }
 /**
- * TransferCloudStorage返回参数结构体
+ * SDK日志项
  */
-export interface TransferCloudStorageResponse {
+export interface SDKLogItem {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 产品ID
       */
-    RequestId?: string;
+    ProductID: string;
+    /**
+      * 设备名称
+      */
+    DeviceName: string;
+    /**
+      * 日志等级
+      */
+    Level: string;
+    /**
+      * 日志时间
+      */
+    DateTime: string;
+    /**
+      * 日志内容
+      */
+    Content: string;
 }
 /**
  * DescribeUser请求参数结构体
@@ -1686,6 +1702,23 @@ export interface DeleteForwardRuleRequest {
       * 队列名称
       */
     QueueName: string;
+}
+/**
+ * DescribeCloudStorageStreamData返回参数结构体
+ */
+export interface DescribeCloudStorageStreamDataResponse {
+    /**
+      * 图片流视频地址
+      */
+    VideoStream: string;
+    /**
+      * 图片流音频地址
+      */
+    AudioStream: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * UpdateAIModelChannel返回参数结构体
@@ -2963,6 +2996,15 @@ export interface DescribeCloudStorageDateResponse {
     RequestId?: string;
 }
 /**
+ * TransferCloudStorage返回参数结构体
+ */
+export interface TransferCloudStorageResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * ModifyDataForwardStatus返回参数结构体
  */
 export interface ModifyDataForwardStatusResponse {
@@ -3632,29 +3674,21 @@ export interface DescribeProductResponse {
     RequestId?: string;
 }
 /**
- * SDK日志项
+ * DescribeCloudStorageStreamData请求参数结构体
  */
-export interface SDKLogItem {
+export interface DescribeCloudStorageStreamDataRequest {
     /**
       * 产品ID
       */
-    ProductID: string;
+    ProductId: string;
     /**
       * 设备名称
       */
     DeviceName: string;
     /**
-      * 日志等级
+      * 图片流事件开始时间
       */
-    Level: string;
-    /**
-      * 日志时间
-      */
-    DateTime: string;
-    /**
-      * 日志内容
-      */
-    Content: string;
+    StartTime: number;
 }
 /**
  * DescribeAIModels返回参数结构体

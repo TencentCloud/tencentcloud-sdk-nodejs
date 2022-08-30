@@ -532,6 +532,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateTaskFileUrl", req, cb);
     }
     /**
+     * 获取设备图片流数据
+     */
+    async DescribeCloudStorageStreamData(req, cb) {
+        return this.request("DescribeCloudStorageStreamData", req, cb);
+    }
+    /**
      * 本接口（UploadFirmware）用于上传设备固件信息
      */
     async UploadFirmware(req, cb) {

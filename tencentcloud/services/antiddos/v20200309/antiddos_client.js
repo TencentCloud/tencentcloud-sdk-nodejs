@@ -64,6 +64,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDDoSConnectLimitList", req, cb);
     }
     /**
+     * 获取L7转发规则健康检查异常结果
+     */
+    async DescribeNewL7RulesErrHealth(req, cb) {
+        return this.request("DescribeNewL7RulesErrHealth", req, cb);
+    }
+    /**
      * 获取CC四层黑白名单列表
      */
     async DescribeCcBlackWhiteIpList(req, cb) {

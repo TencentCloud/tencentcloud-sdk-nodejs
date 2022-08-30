@@ -9,7 +9,9 @@ export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
     /**
      * 查询SdkAppId下的房间列表。默认返回10条通话，一次最多返回100条通话。可查询14天内的数据。（同老接口DescribeRoomInformation）
-**注意**：该接口只用于历史数据统计或核对数据使用，实时类关键业务逻辑不能使用。
+**注意**：
+1.该接口只用于历史数据统计或核对数据使用，实时类关键业务逻辑不能使用。
+2.该接口目前免费提供中，监控仪表盘商业化计费后该接口需要订阅付费版后方可调用，仪表盘商业化说明请见：https://cloud.tencent.com/document/product/647/77735
      */
     DescribeRoomInfo(req: DescribeRoomInfoRequest, cb?: (error: string, rep: DescribeRoomInfoResponse) => void): Promise<DescribeRoomInfoResponse>;
     /**
@@ -38,7 +40,9 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
     StartMCUMixTranscode(req: StartMCUMixTranscodeRequest, cb?: (error: string, rep: StartMCUMixTranscodeResponse) => void): Promise<StartMCUMixTranscodeResponse>;
     /**
      * 查询指定时间内的用户列表及用户通话质量数据，可查询14天内数据。DataType 不为null，查询起止时间不超过1个小时，查询用户不超过6个，支持跨天查询。DataType为null时，查询起止时间不超过4个小时， 默认查询6个用户，同时支持每页查询100以内用户个数（PageSize不超过100）。接口用于查询质量问题，不推荐作为计费使用。（同老接口DescribeCallDetail）
-**注意**：该接口只用于历史数据统计或核对数据使用，实时类关键业务逻辑不能使用。
+**注意**：
+1.该接口只用于历史数据统计或核对数据使用，实时类关键业务逻辑不能使用。
+2.该接口目前免费提供中，监控仪表盘商业化计费后该接口需要订阅付费版后方可调用，仪表盘商业化说明请见：https://cloud.tencent.com/document/product/647/77735
      */
     DescribeCallDetailInfo(req: DescribeCallDetailInfoRequest, cb?: (error: string, rep: DescribeCallDetailInfoResponse) => void): Promise<DescribeCallDetailInfoResponse>;
     /**
@@ -94,7 +98,9 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
     ModifyPicture(req: ModifyPictureRequest, cb?: (error: string, rep: ModifyPictureResponse) => void): Promise<ModifyPictureResponse>;
     /**
      * 查询指定时间内的用户列表，可查询14天内数据，查询起止时间不超过4小时。默认每页查询6个用户，支持每页最大查询100个用户PageSize不超过100）。（同老接口DescribeUserInformation）
-**注意**：该接口只用于历史数据统计或核对数据使用，实时类关键业务逻辑不能使用。
+**注意**：
+1.该接口只用于历史数据统计或核对数据使用，实时类关键业务逻辑不能使用。
+2.该接口目前免费提供中，监控仪表盘商业化计费后该接口需要订阅付费版后方可调用，仪表盘商业化说明请见：https://cloud.tencent.com/document/product/647/77735
      */
     DescribeUserInfo(req: DescribeUserInfoRequest, cb?: (error: string, rep: DescribeUserInfoResponse) => void): Promise<DescribeUserInfoResponse>;
     /**

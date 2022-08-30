@@ -145,6 +145,10 @@ export interface SubnetInfos {
       * 子网节点名称
       */
     Name: string;
+    /**
+      * 安全组id
+      */
+    SecurityGroups?: Array<string>;
 }
 /**
  * EKS Instnace CBS volume
@@ -1279,6 +1283,27 @@ export interface UpdateEKSContainerInstanceRequest {
     ImageRegistryCredentials?: Array<ImageRegistryCredential>;
 }
 /**
+ * cuDNN的版本信息
+ */
+export interface CUDNN {
+    /**
+      * cuDNN的版本
+      */
+    Version: string;
+    /**
+      * cuDNN的名字
+      */
+    Name: string;
+    /**
+      * cuDNN的Doc名字
+      */
+    DocName?: string;
+    /**
+      * cuDNN的Dev名字
+      */
+    DevName?: string;
+}
+/**
  * GetMostSuitableImageCache返回参数结构体
  */
 export interface GetMostSuitableImageCacheResponse {
@@ -1762,6 +1787,16 @@ export interface UpgradeClusterInstancesResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 自定义驱动信息
+ */
+export interface CustomDriver {
+    /**
+      * 自定义GPU驱动地址链接
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Address?: string;
 }
 /**
  * DescribeClusterAsGroupOption请求参数结构体
@@ -3256,6 +3291,19 @@ export interface UpgradeNodeResetParam {
     SecurityGroupIds?: Array<string>;
 }
 /**
+ * GPU驱动和CUDA的版本信息
+ */
+export interface DriverVersion {
+    /**
+      * GPU驱动或者CUDA的版本
+      */
+    Version: string;
+    /**
+      * GPU驱动或者CUDA的名字
+      */
+    Name: string;
+}
+/**
  * CreateClusterInstances请求参数结构体
  */
 export interface CreateClusterInstancesRequest {
@@ -4543,6 +4591,21 @@ export interface DescribeClusterEndpointsResponse {
       */
     ClusterExternalACL: Array<string>;
     /**
+      * 外网域名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ClusterExternalDomain: string;
+    /**
+      * 内网域名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ClusterIntranetDomain: string;
+    /**
+      * 外网安全组
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SecurityGroup: string;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
@@ -4880,6 +4943,10 @@ export interface ModifyClusterEndpointSPRequest {
       * 安全策略放通单个IP或CIDR(例如: "192.168.1.0/24",默认为拒绝所有)
       */
     SecurityPolicies?: Array<string>;
+    /**
+      * 修改外网访问安全组
+      */
+    SecurityGroup?: string;
 }
 /**
  * DeleteClusterEndpoint返回参数结构体
@@ -6878,6 +6945,11 @@ export interface InstanceAdvancedSettings {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     DesiredPodNumber: number;
+    /**
+      * GPU驱动相关参数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    GPUArgs: GPUArgs;
     /**
       * base64 编码的用户脚本，在初始化节点之前执行，目前只对添加已有节点生效
 注意：此字段可能返回 null，表示取不到有效值。
@@ -9284,6 +9356,35 @@ cluster 集群级别
 注意：此字段可能返回 null，表示取不到有效值。
       */
     AlertDetailRules?: Array<PrometheusAlertRuleDetail>;
+}
+/**
+ * GPU相关的参数，包括驱动版本，CUDA版本，cuDNN版本以及是否开启MIG
+ */
+export interface GPUArgs {
+    /**
+      * 是否启用MIG特性
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MIGEnable?: boolean;
+    /**
+      * GPU驱动版本信息
+      */
+    Driver?: DriverVersion;
+    /**
+      * CUDA版本信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CUDA?: DriverVersion;
+    /**
+      * cuDNN版本信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CUDNN?: CUDNN;
+    /**
+      * 自定义GPU驱动信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CustomDriver?: CustomDriver;
 }
 /**
  * 托管prometheus实例概览

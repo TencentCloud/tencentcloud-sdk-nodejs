@@ -748,6 +748,16 @@ it("clb.v20180317.DeleteRewrite", async function () {
     }
 })
 
+it("clb.v20180317.ManualRewrite", async function () {
+    try {
+       const data = await client.ManualRewrite({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("clb.v20180317.CreateLoadBalancer", async function () {
     try {
        const data = await client.CreateLoadBalancer({})
@@ -758,9 +768,9 @@ it("clb.v20180317.CreateLoadBalancer", async function () {
     }
 })
 
-it("clb.v20180317.ManualRewrite", async function () {
+it("clb.v20180317.DescribeIdleLoadBalancers", async function () {
     try {
-       const data = await client.ManualRewrite({})
+       const data = await client.DescribeIdleLoadBalancers({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

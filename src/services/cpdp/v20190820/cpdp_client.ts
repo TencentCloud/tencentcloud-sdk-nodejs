@@ -146,6 +146,7 @@ import {
   OpenBankSceneInfo,
   ModifyFlexPayeeAccountRightStatusRequest,
   QueryMaliciousRegistrationResponse,
+  OpenBankSettlementRulesInfo,
   RefundCloudOrderResponse,
   QueryPayerinfoResult,
   QueryBankClearRequest,

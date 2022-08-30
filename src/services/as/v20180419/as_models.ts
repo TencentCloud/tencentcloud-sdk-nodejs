@@ -1980,6 +1980,26 @@ export interface ModifyLifecycleHookResponse {
 }
 
 /**
+ * 远程命令执行对象。NotificationTarget和CommandInfo参数互斥，二者不可同时指定。
+ */
+export interface LifecycleCommand {
+  /**
+      * 远程命令ID。若选择执行命令，则此项必填。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CommandId: string
+
+  /**
+      * 自定义参数。字段类型为 json encoded string。如：{"varA": "222"}。
+key为自定义参数名称，value为该参数的默认取值。kv均为字符串型。
+如果未提供该参数取值，将使用 Command 的 DefaultParameters 进行替换。
+自定义参数最多20个。自定义参数名称需符合以下规范：字符数目上限64，可选范围【a-zA-Z0-9-_】。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Parameters?: Array<string>
+}
+
+/**
  * DescribeAutoScalingAdvices返回参数结构体
  */
 export interface DescribeAutoScalingAdvicesResponse {
@@ -2717,6 +2737,11 @@ export interface CreateLifecycleHookRequest {
    * 进行生命周期挂钩的场景类型，取值范围包括NORMAL 和 EXTENSION。说明：设置为EXTENSION值，在AttachInstances、DetachInstances、RemoveInstaces接口时会触发生命周期挂钩操作，值为NORMAL则不会在这些接口中触发生命周期挂钩。
    */
   LifecycleTransitionType?: string
+
+  /**
+   * 远程命令执行对象。NotificationTarget和CommandInfo参数互斥，二者不可同时指定。
+   */
+  LifecycleCommand?: LifecycleCommand
 }
 
 /**
@@ -3174,8 +3199,24 @@ export interface LifecycleActionResultInfo {
   InstanceId: string
 
   /**
-   * 通知的结果，表示通知CMQ是否成功。
+   * 执行活动ID。可通过TAT的[查询执行活动](https://cloud.tencent.com/document/api/1340/52679)API查询具体的执行结果。
    */
+  InvocationId: string
+
+  /**
+      * 命令调用的结果，表示执行TAT命令是否成功。<br>
+<li>SUCCESSFUL 命令调用成功，不代表命令执行成功，执行的具体情况可根据InvocationId进行查询</li>
+<li>FAILED 命令调用失败</li>
+<li>NONE</li>
+      */
+  InvokeCommandResult: string
+
+  /**
+      * 通知的结果，表示通知CMQ/TCMQ是否成功。<br>
+<li>SUCCESSFUL 通知成功</li>
+<li>FAILED 通知失败</li>
+<li>NONE</li>
+      */
   NotificationResult: string
 
   /**
@@ -3184,8 +3225,16 @@ export interface LifecycleActionResultInfo {
   LifecycleActionResult: string
 
   /**
-   * 结果的原因。
-   */
+      * 结果的原因。<br>
+<li>HEARTBEAT_TIMEOUT 由于心跳超时，结果根据DefaultResult设置。</li>
+<li>NOTIFICATION_FAILURE 由于发送通知失败，结果根据DefaultResult设置。</li>
+<li>CALL_INTERFACE 调用了接口CompleteLifecycleAction设置结果。</li>
+<li>ANOTHER_ACTION_ABANDON 另一个生命周期操作的结果已设置为“ABANDON”。</li>
+<li>COMMAND_CALL_FAILURE  由于命令调用失败，结果根据DefaultResult设置。</li>
+<li>COMMAND_EXEC_FINISH  命令执行完成。</li>
+<li>COMMAND_EXEC_FAILURE 由于命令执行失败，结果根据DefaultResult设置。</li>
+<li>COMMAND_EXEC_RESULT_CHECK_FAILURE 由于命令结果检查失败，结果根据DefaultResult设置。</li>
+      */
   ResultReason: string
 }
 
@@ -3345,6 +3394,12 @@ export interface LifecycleHook {
    * 生命周期挂钩适用场景
    */
   LifecycleTransitionType: string
+
+  /**
+      * 远程命令执行对象
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LifecycleCommand: LifecycleCommand
 }
 
 /**

@@ -858,6 +858,16 @@ it("iotvideo.v20211125.CreateTaskFileUrl", async function () {
     }
 })
 
+it("iotvideo.v20211125.DescribeCloudStorageStreamData", async function () {
+    try {
+       const data = await client.DescribeCloudStorageStreamData({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotvideo.v20211125.UploadFirmware", async function () {
     try {
        const data = await client.UploadFirmware({})

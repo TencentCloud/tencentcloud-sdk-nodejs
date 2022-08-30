@@ -2431,6 +2431,11 @@ export interface DescribeInstanceSpecsRequest {
 <li> MYSQL </li>
       */
   DbType: string
+
+  /**
+   * 是否需要返回可用区信息
+   */
+  IncludeZoneStocks?: boolean
 }
 
 /**
@@ -2801,6 +2806,32 @@ export interface InstanceSpec {
    * 实例最小可用存储，单位：GB
    */
   MinStorageSize: number
+
+  /**
+   * 是否有库存
+   */
+  HasStock: boolean
+
+  /**
+   * 机器类型
+   */
+  MachineType: string
+
+  /**
+   * 最大IOPS
+   */
+  MaxIops: number
+
+  /**
+   * 最大IO带宽
+   */
+  MaxIoBandWidth: number
+
+  /**
+      * 地域库存信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ZoneStockInfos: Array<ZoneStockInfo>
 }
 
 /**
@@ -4013,6 +4044,21 @@ export interface DisassociateSecurityGroupsResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 可用区库存信息
+ */
+export interface ZoneStockInfo {
+  /**
+   * 可用区
+   */
+  Zone: string
+
+  /**
+   * 是否有库存
+   */
+  HasStock: boolean
 }
 
 /**

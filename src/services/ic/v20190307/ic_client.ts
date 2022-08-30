@@ -22,9 +22,11 @@ import {
   DescribeCardResponse,
   CardInfo,
   DescribeAppRequest,
+  PayForExtendDataResponse,
   ModifyUserCardRemarkRequest,
   SendMultiSmsRequest,
   ResRenew,
+  ResOrderIds,
   DescribeSmsResponse,
   ResSms,
   DescribeAppResponse,
@@ -34,6 +36,7 @@ import {
   SmsRet,
   AppInfo,
   RenewCardsResponse,
+  PayForExtendDataRequest,
   SmsSid,
   SendMultiSmsResponse,
   CardList,
@@ -110,6 +113,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSmsResponse) => void
   ): Promise<DescribeSmsResponse> {
     return this.request("DescribeSms", req, cb)
+  }
+
+  /**
+   * 购买套外流量包
+   */
+  async PayForExtendData(
+    req: PayForExtendDataRequest,
+    cb?: (error: string, rep: PayForExtendDataResponse) => void
+  ): Promise<PayForExtendDataResponse> {
+    return this.request("PayForExtendData", req, cb)
   }
 
   /**

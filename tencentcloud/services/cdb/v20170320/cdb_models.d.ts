@@ -3762,6 +3762,18 @@ export interface DescribeParamTemplatesRequest {
       * 引擎版本，缺省则查询所有
       */
     EngineVersions?: Array<string>;
+    /**
+      * 引擎类型，缺省则查询所有
+      */
+    EngineTypes?: Array<string>;
+    /**
+      * 模板名称，缺省则查询所有
+      */
+    TemplateNames?: Array<string>;
+    /**
+      * 模板id，缺省则查询所有
+      */
+    TemplateIds?: Array<number>;
 }
 /**
  * DescribeAccountPrivileges返回参数结构体

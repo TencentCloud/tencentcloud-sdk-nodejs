@@ -221,6 +221,21 @@ export interface DescribeAppRequest {
 }
 
 /**
+ * PayForExtendData返回参数结构体
+ */
+export interface PayForExtendDataResponse {
+  /**
+   * 订单号
+   */
+  Data: ResOrderIds
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyUserCardRemark请求参数结构体
  */
 export interface ModifyUserCardRemarkRequest {
@@ -264,6 +279,17 @@ export interface SendMultiSmsRequest {
  * 云api 卡片续费
  */
 export interface ResRenew {
+  /**
+      * 每一张续费卡片的订单ID数组
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OrderIds: Array<string>
+}
+
+/**
+ * 订单ID集合
+ */
+export interface ResOrderIds {
   /**
       * 每一张续费卡片的订单ID数组
 注意：此字段可能返回 null，表示取不到有效值。
@@ -504,6 +530,26 @@ export interface RenewCardsResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * PayForExtendData请求参数结构体
+ */
+export interface PayForExtendDataRequest {
+  /**
+   * 卡片ICCID
+   */
+  Iccid: string
+
+  /**
+   * 套外流量,单位MB
+   */
+  ExtentData: number
+
+  /**
+   * 应用ID
+   */
+  Sdkappid: number
 }
 
 /**

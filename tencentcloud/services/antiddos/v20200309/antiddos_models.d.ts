@@ -2070,6 +2070,23 @@ export interface CreateDDoSSpeedLimitConfigResponse {
     RequestId?: string;
 }
 /**
+ * DescribeNewL7RulesErrHealth返回参数结构体
+ */
+export interface DescribeNewL7RulesErrHealthResponse {
+    /**
+      * 异常规则列表，返回值说明: Key值为规则ID，Value值为异常IP及错误信息，多个IP用","分割
+      */
+    ErrHealths: Array<KeyValue>;
+    /**
+      * 异常规则的总数
+      */
+    Total: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DeletePacketFilterConfig请求参数结构体
  */
 export interface DeletePacketFilterConfigRequest {
@@ -3728,6 +3745,19 @@ export interface DescribeListDDoSAIResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DescribeNewL7RulesErrHealth请求参数结构体
+ */
+export interface DescribeNewL7RulesErrHealthRequest {
+    /**
+      * 大禹子产品代号（bgpip表示高防IP)
+      */
+    Business: string;
+    /**
+      * 规则Id列表
+      */
+    RuleIdList?: Array<string>;
 }
 /**
  * ModifyCCPrecisionPolicy返回参数结构体

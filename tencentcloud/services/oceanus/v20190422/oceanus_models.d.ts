@@ -353,6 +353,10 @@ export interface CreateJobConfigRequest {
       * 日志级别
       */
     LogLevel?: string;
+    /**
+      * Oceanus 平台恢复作业开关 1:开启 -1: 关闭
+      */
+    AutoRecover?: number;
 }
 /**
  * CreateResourceConfig请求参数结构体
@@ -1802,6 +1806,16 @@ export interface JobConfig {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     PythonVersion: string;
+    /**
+      * Oceanus 平台恢复作业开关 1:开启 -1: 关闭
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AutoRecover: number;
+    /**
+      * 日志级别
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LogLevel: string;
 }
 /**
  * DescribeResourceConfigs请求参数结构体

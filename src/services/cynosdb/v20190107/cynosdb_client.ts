@@ -163,6 +163,7 @@ import {
   DescribeBinlogsRequest,
   InputAccount,
   DisassociateSecurityGroupsResponse,
+  ZoneStockInfo,
   InquirePriceRenewResponse,
 } from "./cynosdb_models"
 

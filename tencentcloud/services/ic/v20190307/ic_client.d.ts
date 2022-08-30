@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeCardsResponse, DescribeCardResponse, DescribeAppRequest, ModifyUserCardRemarkRequest, SendMultiSmsRequest, DescribeSmsResponse, DescribeAppResponse, DescribeCardRequest, SendSmsResponse, SendSmsRequest, RenewCardsResponse, SendMultiSmsResponse, DescribeSmsRequest, ModifyUserCardRemarkResponse, DescribeCardsRequest, RenewCardsRequest } from "./ic_models";
+import { DescribeCardsResponse, DescribeCardResponse, DescribeAppRequest, PayForExtendDataResponse, ModifyUserCardRemarkRequest, SendMultiSmsRequest, DescribeSmsResponse, DescribeAppResponse, DescribeCardRequest, SendSmsResponse, SendSmsRequest, RenewCardsResponse, PayForExtendDataRequest, SendMultiSmsResponse, DescribeSmsRequest, ModifyUserCardRemarkResponse, DescribeCardsRequest, RenewCardsRequest } from "./ic_models";
 /**
  * ic client
  * @class
@@ -31,6 +31,10 @@ export declare class Client extends AbstractClient {
      * 查询短信列表
      */
     DescribeSms(req: DescribeSmsRequest, cb?: (error: string, rep: DescribeSmsResponse) => void): Promise<DescribeSmsResponse>;
+    /**
+     * 购买套外流量包
+     */
+    PayForExtendData(req: PayForExtendDataRequest, cb?: (error: string, rep: PayForExtendDataResponse) => void): Promise<PayForExtendDataResponse>;
     /**
      * 批量为卡片续费，此接口建议调用至少间隔10s,如果出现返回deal lock failed相关的错误，请过10s再重试。
 续费的必要条件：

@@ -510,6 +510,11 @@ export interface DescribeTasksResponse {
       */
     TotalCount: number;
     /**
+      * 任务概览信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TasksOverview: TasksOverview;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
@@ -2071,7 +2076,7 @@ export interface CancelTaskRequest {
     TaskId: string;
 }
 /**
- * 任务实例
+ * 任务实例。
  */
 export interface TaskResponseInfo {
     /**
@@ -2087,7 +2092,7 @@ export interface TaskResponseInfo {
       */
     Id: string;
     /**
-      * 计算时长，单位： ms。
+      * 计算耗时，单位： ms
       */
     UsedTime: number;
     /**
@@ -2209,6 +2214,11 @@ export interface TaskResponseInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     UiUrl: string;
+    /**
+      * 任务耗时，单位： ms
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TotalTime: number;
 }
 /**
  * 文本格式
@@ -2545,7 +2555,7 @@ export interface DescribeTaskResultRequest {
       */
     TaskId: string;
     /**
-      * 上一次请求响应返回的分页信息。第一次可以不带，从头开始返回数据，每次返回1000行数据。
+      * 上一次请求响应返回的分页信息。第一次可以不带，从头开始返回数据，每次返回MaxResults字段设置的数据量。
       */
     NextToken?: string;
     /**
@@ -2733,7 +2743,7 @@ export interface CreateWorkGroupResponse {
     RequestId?: string;
 }
 /**
- * 任务结果信息
+ * 任务结果信息。
  */
 export interface TaskResultInfo {
     /**
@@ -2767,7 +2777,7 @@ export interface TaskResultInfo {
       */
     DataAmount: number;
     /**
-      * 任务执行耗时，单位秒
+      * 计算耗时，单位： ms
       */
     UsedTime: number;
     /**
@@ -2812,6 +2822,10 @@ export interface TaskResultInfo {
       * 控制台展示格式。table：表格展示 text：文本展示
       */
     DisplayFormat: string;
+    /**
+      * 任务耗时，单位： ms
+      */
+    TotalTime: number;
 }
 /**
  * DescribeTables请求参数结构体
@@ -3477,6 +3491,27 @@ export interface DescribeWorkGroupsRequest {
       * 排序方式，desc表示正序，asc表示反序， 默认为asc
       */
     Sorting?: string;
+}
+/**
+ * 任务概览
+ */
+export interface TasksOverview {
+    /**
+      * 正在排队的任务个数
+      */
+    TaskQueuedCount: number;
+    /**
+      * 初始化的任务个数
+      */
+    TaskInitCount: number;
+    /**
+      * 正在执行的任务个数
+      */
+    TaskRunningCount: number;
+    /**
+      * 当前时间范围的总任务个数
+      */
+    TotalTaskCount: number;
 }
 /**
  * CreateTasks返回参数结构体

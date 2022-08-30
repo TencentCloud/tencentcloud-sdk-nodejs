@@ -78,6 +78,16 @@ it("ic.v20190307.DescribeSms", async function () {
     }
 })
 
+it("ic.v20190307.PayForExtendData", async function () {
+    try {
+       const data = await client.PayForExtendData({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ic.v20190307.RenewCards", async function () {
     try {
        const data = await client.RenewCards({})

@@ -125,6 +125,7 @@ import {
   CreateCcGeoIPBlockConfigRequest,
   DeletePortAclConfigResponse,
   CreateDDoSSpeedLimitConfigResponse,
+  DescribeNewL7RulesErrHealthResponse,
   DeletePacketFilterConfigRequest,
   ModifyL7RulesEdgeRequest,
   DescribeListDDoSGeoIPBlockConfigResponse,
@@ -203,6 +204,7 @@ import {
   InsL7Rules,
   DescribeCCReqLimitPolicyListResponse,
   DescribeListDDoSAIResponse,
+  DescribeNewL7RulesErrHealthRequest,
   ModifyCCPrecisionPolicyResponse,
   CcGeoIPBlockConfig,
   ModifyDDoSSpeedLimitConfigRequest,
@@ -337,6 +339,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDDoSConnectLimitListResponse) => void
   ): Promise<DescribeDDoSConnectLimitListResponse> {
     return this.request("DescribeDDoSConnectLimitList", req, cb)
+  }
+
+  /**
+   * 获取L7转发规则健康检查异常结果
+   */
+  async DescribeNewL7RulesErrHealth(
+    req: DescribeNewL7RulesErrHealthRequest,
+    cb?: (error: string, rep: DescribeNewL7RulesErrHealthResponse) => void
+  ): Promise<DescribeNewL7RulesErrHealthResponse> {
+    return this.request("DescribeNewL7RulesErrHealth", req, cb)
   }
 
   /**

@@ -629,13 +629,33 @@ export interface CancelAIModelApplicationRequest {
 }
 
 /**
- * TransferCloudStorage返回参数结构体
+ * SDK日志项
  */
-export interface TransferCloudStorageResponse {
+export interface SDKLogItem {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 产品ID
    */
-  RequestId?: string
+  ProductID: string
+
+  /**
+   * 设备名称
+   */
+  DeviceName: string
+
+  /**
+   * 日志等级
+   */
+  Level: string
+
+  /**
+   * 日志时间
+   */
+  DateTime: string
+
+  /**
+   * 日志内容
+   */
+  Content: string
 }
 
 /**
@@ -2004,6 +2024,26 @@ export interface DeleteForwardRuleRequest {
    * 队列名称
    */
   QueueName: string
+}
+
+/**
+ * DescribeCloudStorageStreamData返回参数结构体
+ */
+export interface DescribeCloudStorageStreamDataResponse {
+  /**
+   * 图片流视频地址
+   */
+  VideoStream: string
+
+  /**
+   * 图片流音频地址
+   */
+  AudioStream: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3515,6 +3555,16 @@ export interface DescribeCloudStorageDateResponse {
 }
 
 /**
+ * TransferCloudStorage返回参数结构体
+ */
+export interface TransferCloudStorageResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyDataForwardStatus返回参数结构体
  */
 export interface ModifyDataForwardStatusResponse {
@@ -4302,13 +4352,13 @@ export interface DescribeProductResponse {
 }
 
 /**
- * SDK日志项
+ * DescribeCloudStorageStreamData请求参数结构体
  */
-export interface SDKLogItem {
+export interface DescribeCloudStorageStreamDataRequest {
   /**
    * 产品ID
    */
-  ProductID: string
+  ProductId: string
 
   /**
    * 设备名称
@@ -4316,19 +4366,9 @@ export interface SDKLogItem {
   DeviceName: string
 
   /**
-   * 日志等级
+   * 图片流事件开始时间
    */
-  Level: string
-
-  /**
-   * 日志时间
-   */
-  DateTime: string
-
-  /**
-   * 日志内容
-   */
-  Content: string
+  StartTime: number
 }
 
 /**

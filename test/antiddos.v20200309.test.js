@@ -78,6 +78,16 @@ it("antiddos.v20200309.DescribeDDoSConnectLimitList", async function () {
     }
 })
 
+it("antiddos.v20200309.DescribeNewL7RulesErrHealth", async function () {
+    try {
+       const data = await client.DescribeNewL7RulesErrHealth({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("antiddos.v20200309.DescribeCcBlackWhiteIpList", async function () {
     try {
        const data = await client.DescribeCcBlackWhiteIpList({})

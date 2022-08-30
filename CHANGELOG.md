@@ -1,3 +1,330 @@
+# Release 4.0.429
+
+## DDoS 防护(antiddos) 版本：2020-03-09
+
+### 第 40 次发布
+
+发布时间：2022-08-29 13:11:21
+
+本次发布包含了以下内容：
+
+改善已有的文档。
+
+新增接口：
+
+* [DescribeNewL7RulesErrHealth](https://cloud.tencent.com/document/api/1021/79701)
+
+
+
+## 弹性伸缩(as) 版本：2018-04-19
+
+### 第 55 次发布
+
+发布时间：2022-08-30 06:08:56
+
+本次发布包含了以下内容：
+
+改善已有的文档。
+
+修改接口：
+
+* [CreateLifecycleHook](https://cloud.tencent.com/document/api/377/34454)
+
+	* 新增入参：LifecycleCommand
+
+
+新增数据结构：
+
+* [LifecycleCommand](https://cloud.tencent.com/document/api/377/20453#LifecycleCommand)
+
+修改数据结构：
+
+* [LifecycleActionResultInfo](https://cloud.tencent.com/document/api/377/20453#LifecycleActionResultInfo)
+
+	* 新增成员：InvocationId, InvokeCommandResult
+
+* [LifecycleHook](https://cloud.tencent.com/document/api/377/20453#LifecycleHook)
+
+	* 新增成员：LifecycleCommand
+
+
+
+
+## 云数据库 MySQL(cdb) 版本：2017-03-20
+
+### 第 97 次发布
+
+发布时间：2022-08-30 06:13:27
+
+本次发布包含了以下内容：
+
+改善已有的文档。
+
+修改接口：
+
+* [DescribeParamTemplates](https://cloud.tencent.com/document/api/236/32659)
+
+	* 新增入参：EngineTypes, TemplateNames, TemplateIds
+
+
+
+
+## 消息队列 Ckafka(ckafka) 版本：2019-08-19
+
+### 第 56 次发布
+
+发布时间：2022-08-30 06:16:47
+
+本次发布包含了以下内容：
+
+改善已有的文档。
+
+修改数据结构：
+
+* [ClsParam](https://cloud.tencent.com/document/api/597/40861#ClsParam)
+
+	* 新增成员：TimeField
+
+
+
+
+## 负载均衡(clb) 版本：2018-03-17
+
+### 第 71 次发布
+
+发布时间：2022-08-30 06:17:26
+
+本次发布包含了以下内容：
+
+改善已有的文档。
+
+新增接口：
+
+* [DescribeIdleLoadBalancers](https://cloud.tencent.com/document/api/214/79718)
+
+新增数据结构：
+
+* [IdleLoadBalancer](https://cloud.tencent.com/document/api/214/30694#IdleLoadBalancer)
+
+
+
+## 企业收付平台(cpdp) 版本：2019-08-20
+
+### 第 82 次发布
+
+发布时间：2022-08-30 06:19:38
+
+本次发布包含了以下内容：
+
+改善已有的文档。
+
+修改接口：
+
+* [CreateOpenBankPaymentOrder](https://cloud.tencent.com/document/api/1122/70182)
+
+	* 新增入参：SettlementRulesInfo, ExternalPaymentData
+
+
+新增数据结构：
+
+* [OpenBankSettlementRulesInfo](https://cloud.tencent.com/document/api/1122/40683#OpenBankSettlementRulesInfo)
+
+
+
+## 云原生数据库 TDSQL-C(cynosdb) 版本：2019-01-07
+
+### 第 24 次发布
+
+发布时间：2022-08-30 06:23:54
+
+本次发布包含了以下内容：
+
+改善已有的文档。
+
+修改接口：
+
+* [DescribeInstanceSpecs](https://cloud.tencent.com/document/api/1003/48084)
+
+	* 新增入参：IncludeZoneStocks
+
+
+新增数据结构：
+
+* [ZoneStockInfo](https://cloud.tencent.com/document/api/1003/48097#ZoneStockInfo)
+
+修改数据结构：
+
+* [InstanceSpec](https://cloud.tencent.com/document/api/1003/48097#InstanceSpec)
+
+	* 新增成员：HasStock, MachineType, MaxIops, MaxIoBandWidth, ZoneStockInfos
+
+
+
+
+## 数据湖计算(dlc) 版本：2021-01-25
+
+### 第 31 次发布
+
+发布时间：2022-08-30 06:26:45
+
+本次发布包含了以下内容：
+
+改善已有的文档。
+
+修改接口：
+
+* [DescribeTasks](https://cloud.tencent.com/document/api/1342/53771)
+
+	* 新增出参：TasksOverview
+
+
+新增数据结构：
+
+* [TasksOverview](https://cloud.tencent.com/document/api/1342/53778#TasksOverview)
+
+修改数据结构：
+
+* [TaskResponseInfo](https://cloud.tencent.com/document/api/1342/53778#TaskResponseInfo)
+
+	* 新增成员：TotalTime
+
+* [TaskResultInfo](https://cloud.tencent.com/document/api/1342/53778#TaskResultInfo)
+
+	* 新增成员：TotalTime
+
+
+
+
+## 物联卡(ic) 版本：2019-03-07
+
+### 第 7 次发布
+
+发布时间：2022-08-30 06:33:17
+
+本次发布包含了以下内容：
+
+改善已有的文档。
+
+新增接口：
+
+* [PayForExtendData](https://cloud.tencent.com/document/api/636/79719)
+
+新增数据结构：
+
+* [ResOrderIds](https://cloud.tencent.com/document/api/636/33881#ResOrderIds)
+
+
+
+## 物联网智能视频服务(iotvideo) 版本：2021-11-25
+
+### 第 6 次发布
+
+发布时间：2022-08-30 06:36:25
+
+本次发布包含了以下内容：
+
+改善已有的文档。
+
+新增接口：
+
+* [DescribeCloudStorageStreamData](https://cloud.tencent.com/document/api/1131/79720)
+
+
+
+## 物联网智能视频服务(iotvideo) 版本：2020-12-15
+
+
+
+## 物联网智能视频服务(iotvideo) 版本：2019-11-26
+
+
+
+## 流计算 Oceanus(oceanus) 版本：2019-04-22
+
+### 第 25 次发布
+
+发布时间：2022-08-30 06:43:16
+
+本次发布包含了以下内容：
+
+改善已有的文档。
+
+修改接口：
+
+* [CreateJobConfig](https://cloud.tencent.com/document/api/849/52004)
+
+	* 新增入参：AutoRecover
+
+
+修改数据结构：
+
+* [JobConfig](https://cloud.tencent.com/document/api/849/52010#JobConfig)
+
+	* 新增成员：AutoRecover, LogLevel
+
+
+
+
+## 边缘安全加速平台(teo) 版本：2022-01-06
+
+### 第 23 次发布
+
+发布时间：2022-08-30 06:54:55
+
+本次发布包含了以下内容：
+
+改善已有的文档。
+
+修改接口：
+
+* [DescribeDDoSPolicy](https://cloud.tencent.com/document/api/1552/75110)
+
+	* 新增出参：DdosRule
+
+
+
+
+## 容器服务(tke) 版本：2018-05-25
+
+### 第 119 次发布
+
+发布时间：2022-08-30 06:57:14
+
+本次发布包含了以下内容：
+
+改善已有的文档。
+
+修改接口：
+
+* [DescribeClusterEndpoints](https://cloud.tencent.com/document/api/457/78051)
+
+	* 新增出参：ClusterExternalDomain, ClusterIntranetDomain, SecurityGroup
+
+* [ModifyClusterEndpointSP](https://cloud.tencent.com/document/api/457/39408)
+
+	* 新增入参：SecurityGroup
+
+
+新增数据结构：
+
+* [CUDNN](https://cloud.tencent.com/document/api/457/31866#CUDNN)
+* [CustomDriver](https://cloud.tencent.com/document/api/457/31866#CustomDriver)
+* [DriverVersion](https://cloud.tencent.com/document/api/457/31866#DriverVersion)
+* [GPUArgs](https://cloud.tencent.com/document/api/457/31866#GPUArgs)
+
+修改数据结构：
+
+* [InstanceAdvancedSettings](https://cloud.tencent.com/document/api/457/31866#InstanceAdvancedSettings)
+
+	* 新增成员：GPUArgs
+
+* [SubnetInfos](https://cloud.tencent.com/document/api/457/31866#SubnetInfos)
+
+	* 新增成员：SecurityGroups
+
+
+
+
 # Release 4.0.428
 
 ## 云防火墙(cfw) 版本：2019-09-04

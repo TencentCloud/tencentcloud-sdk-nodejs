@@ -684,13 +684,19 @@ export interface DescribeTargetGroupInstancesRequest {
 }
 
 /**
- * SetCustomizedConfigForLoadBalancer返回参数结构体
+ * DescribeIdleLoadBalancers返回参数结构体
  */
-export interface SetCustomizedConfigForLoadBalancerResponse {
+export interface DescribeIdleLoadBalancersResponse {
   /**
-   * 个性化配置ID，如：pz-1234abcd
+      * 闲置实例列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IdleLoadBalancers: Array<IdleLoadBalancer>
+
+  /**
+   * 所有闲置实例数目
    */
-  ConfigId: string
+  TotalCount: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1188,6 +1194,72 @@ export interface DescribeExclusiveClustersResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyDomain请求参数结构体
+ */
+export interface ModifyDomainRequest {
+  /**
+   * 负载均衡实例 ID。
+   */
+  LoadBalancerId: string
+
+  /**
+   * 负载均衡监听器 ID。
+   */
+  ListenerId: string
+
+  /**
+   * 监听器下的某个旧域名。
+   */
+  Domain: string
+
+  /**
+   * 新域名，	长度限制为：1-120。有三种使用格式：非正则表达式格式，通配符格式，正则表达式格式。非正则表达式格式只能使用字母、数字、‘-’、‘.’。通配符格式的使用 ‘*’ 只能在开头或者结尾。正则表达式以'~'开头。
+   */
+  NewDomain: string
+}
+
+/**
+ * 闲置实例。
+ */
+export interface IdleLoadBalancer {
+  /**
+   * 负载均衡ID
+   */
+  LoadBalancerId: string
+
+  /**
+   * 负载均衡名字
+   */
+  LoadBalancerName: string
+
+  /**
+   * 负载均衡所在地域
+   */
+  Region: string
+
+  /**
+   * 负载均衡的vip
+   */
+  Vip: string
+
+  /**
+   * 闲置原因。NO_RULES：没有规则，NO_RS：有规则没有绑定子机。
+   */
+  IdleReason: string
+
+  /**
+      * 负载均衡实例的状态，包括
+0：创建中，1：正常运行。
+      */
+  Status: number
+
+  /**
+   * 负载均衡类型标识，1：负载均衡，0：传统型负载均衡。
+   */
+  Forward: number
 }
 
 /**
@@ -2629,28 +2701,28 @@ export interface DescribeClassicalLBHealthStatusRequest {
 }
 
 /**
- * ModifyDomain请求参数结构体
+ * DescribeListeners请求参数结构体
  */
-export interface ModifyDomainRequest {
+export interface DescribeListenersRequest {
   /**
    * 负载均衡实例 ID。
    */
   LoadBalancerId: string
 
   /**
-   * 负载均衡监听器 ID。
+   * 要查询的负载均衡监听器 ID 数组，最大为100个。
    */
-  ListenerId: string
+  ListenerIds?: Array<string>
 
   /**
-   * 监听器下的某个旧域名。
+   * 要查询的监听器协议类型，取值 TCP | UDP | HTTP | HTTPS | TCP_SSL。
    */
-  Domain: string
+  Protocol?: string
 
   /**
-   * 新域名，	长度限制为：1-120。有三种使用格式：非正则表达式格式，通配符格式，正则表达式格式。非正则表达式格式只能使用字母、数字、‘-’、‘.’。通配符格式的使用 ‘*’ 只能在开头或者结尾。正则表达式以'~'开头。
+   * 要查询的监听器的端口。
    */
-  NewDomain: string
+  Port?: number
 }
 
 /**
@@ -3623,6 +3695,21 @@ export interface ClustersZone {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   SlaveZone: Array<string>
+}
+
+/**
+ * SetCustomizedConfigForLoadBalancer返回参数结构体
+ */
+export interface SetCustomizedConfigForLoadBalancerResponse {
+  /**
+   * 个性化配置ID，如：pz-1234abcd
+   */
+  ConfigId: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4903,28 +4990,23 @@ export interface DeleteLoadBalancerListenersResponse {
 }
 
 /**
- * DescribeListeners请求参数结构体
+ * DescribeIdleLoadBalancers请求参数结构体
  */
-export interface DescribeListenersRequest {
+export interface DescribeIdleLoadBalancersRequest {
   /**
-   * 负载均衡实例 ID。
+   * 数据偏移量，默认为0。
    */
-  LoadBalancerId: string
+  Offset?: number
 
   /**
-   * 要查询的负载均衡监听器 ID 数组，最大为100个。
+   * 返回负载均衡实例的数量，默认为20，最大值为100。
    */
-  ListenerIds?: Array<string>
+  Limit?: number
 
   /**
-   * 要查询的监听器协议类型，取值 TCP | UDP | HTTP | HTTPS | TCP_SSL。
+   * 负载均衡所在地域。
    */
-  Protocol?: string
-
-  /**
-   * 要查询的监听器的端口。
-   */
-  Port?: number
+  LoadBalancerRegion?: string
 }
 
 /**

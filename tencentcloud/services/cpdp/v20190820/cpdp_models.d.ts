@@ -190,19 +190,19 @@ export interface UnifiedOrderResponse {
     /**
       * 支付金额，单位： 分
       */
-    TotalAmt?: number;
+    TotalAmt: number;
     /**
       * 应用支付订单号
       */
-    OutTradeNo?: string;
+    OutTradeNo: string;
     /**
       * 支付参数透传给聚鑫SDK（原文透传给SDK即可，不需要解码）
       */
-    PayInfo?: string;
+    PayInfo: string;
     /**
       * 聚鑫的交易订单
       */
-    TransactionId?: string;
+    TransactionId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3986,6 +3986,23 @@ export interface QueryMaliciousRegistrationResponse {
     RequestId?: string;
 }
 /**
+ * 云企付-结算规则信息
+ */
+export interface OpenBankSettlementRulesInfo {
+    /**
+      * ONCE：仅单次解冻（默认）
+MULTI：多次解冻
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UnfreezeRule?: string;
+    /**
+      * ONCE：仅单次退款（默认）
+MULTI：多次退款
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RefundRule?: string;
+}
+/**
  * RefundCloudOrder返回参数结构体
  */
 export interface RefundCloudOrderResponse {
@@ -6556,6 +6573,14 @@ __SHARE_BY_API__：后续调用分润接口决定分润金额
       * 分润信息，配合ProfitShareFlag使用。
       */
     ProfitShareInfoList?: Array<OpenBankProfitShareInfo>;
+    /**
+      * 商企付-担保支付（PaymentMode为 FREEZE ）时需设置该参数
+      */
+    SettlementRulesInfo?: OpenBankSettlementRulesInfo;
+    /**
+      * 底层支付渠道特殊字段，若无特殊说明时，可以为空
+      */
+    ExternalPaymentData?: string;
     /**
       * 备注信息。
       */

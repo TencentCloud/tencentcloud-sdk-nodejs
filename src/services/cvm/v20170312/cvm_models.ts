@@ -2682,66 +2682,66 @@ export interface DeleteDisasterRecoverGroupsResponse {
 }
 
 /**
- * cdh实例详细信息
+ * 专用宿主机实例详细信息
  */
 export interface HostItem {
   /**
-   * cdh实例所在的位置。通过该参数可以指定实例所属可用区，所属项目等属性。
+   * 专用宿主机实例所在的位置。通过该参数可以指定实例所属可用区，所属项目等属性。
    */
   Placement?: Placement
 
   /**
-   * cdh实例id
+   * 专用宿主机实例id
    */
   HostId?: string
 
   /**
-   * cdh实例类型
+   * 专用宿主机实例类型
    */
   HostType?: string
 
   /**
-   * cdh实例名称
+   * 专用宿主机实例名称
    */
   HostName?: string
 
   /**
-   * cdh实例付费模式
+   * 专用宿主机实例付费模式
    */
   HostChargeType?: string
 
   /**
-   * cdh实例自动续费标记
+   * 专用宿主机实例自动续费标记
    */
   RenewFlag?: string
 
   /**
-   * cdh实例创建时间
+   * 专用宿主机实例创建时间
    */
   CreatedTime?: string
 
   /**
-   * cdh实例过期时间
+   * 专用宿主机实例过期时间
    */
   ExpiredTime?: string
 
   /**
-   * cdh实例上已创建云子机的实例id列表
+   * 专用宿主机实例上已创建云子机的实例id列表
    */
   InstanceIds?: Array<string>
 
   /**
-   * cdh实例状态
+   * 专用宿主机实例状态
    */
   HostState?: string
 
   /**
-   * cdh实例ip
+   * 专用宿主机实例ip
    */
   HostIp?: string
 
   /**
-   * cdh实例资源信息
+   * 专用宿主机实例资源信息
    */
   HostResource?: HostResource
 
