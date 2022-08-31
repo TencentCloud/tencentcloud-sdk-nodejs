@@ -32,7 +32,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeDDoSConnectLimitList(req: DescribeDDoSConnectLimitListRequest, cb?: (error: string, rep: DescribeDDoSConnectLimitListResponse) => void): Promise<DescribeDDoSConnectLimitListResponse>;
     /**
-     * 获取L7转发规则健康检查异常结果
+     * 获取L7转发规则健康检查异常结果列表
      */
     DescribeNewL7RulesErrHealth(req: DescribeNewL7RulesErrHealthRequest, cb?: (error: string, rep: DescribeNewL7RulesErrHealthResponse) => void): Promise<DescribeNewL7RulesErrHealthResponse>;
     /**

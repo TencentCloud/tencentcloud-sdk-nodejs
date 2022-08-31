@@ -209,6 +209,28 @@ export interface UnifiedOrderResponse {
     RequestId?: string;
 }
 /**
+ * ApplyOpenBankSettleOrder返回参数结构体
+ */
+export interface ApplyOpenBankSettleOrderResponse {
+    /**
+      * 错误码。
+      */
+    ErrCode: string;
+    /**
+      * 错误信息。
+      */
+    ErrMessage: string;
+    /**
+      * 返回结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result: ApplyOpenBankSettleOrderResult;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * CreatePayRollToken返回参数结构体
  */
 export interface CreatePayRollTokenResponse {
@@ -1144,6 +1166,28 @@ export interface QueryOpenBankDownLoadUrlResult {
     HashType: string;
 }
 /**
+ * QueryOpenBankSubMerchantSignOnline返回参数结构体
+ */
+export interface QueryOpenBankSubMerchantSignOnlineResponse {
+    /**
+      * 错误码。
+      */
+    ErrCode: string;
+    /**
+      * 错误信息。
+      */
+    ErrMessage: string;
+    /**
+      * 返回结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result: QueryOpenBankSubMerchantSignOnlineResult;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * BindAccount返回参数结构体
  */
 export interface BindAccountResponse {
@@ -1556,6 +1600,27 @@ export interface QueryCustAcctIdBalanceResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * QueryOpenBankSubMerchantSignOnline请求参数结构体
+ */
+export interface QueryOpenBankSubMerchantSignOnlineRequest {
+    /**
+      * 渠道商户号。外部平台接入云企付平台下发。必填。
+      */
+    ChannelMerchantId: string;
+    /**
+      * 渠道名称。详见附录-枚举类型-ChannelName。
+      */
+    ChannelName: string;
+    /**
+      * 外部子商户ID。
+      */
+    OutSubMerchantId?: string;
+    /**
+      * 渠道子商户ID。
+      */
+    ChannelSubMerchantId?: string;
 }
 /**
  * CreateRedInvoice请求参数结构体
@@ -2187,6 +2252,23 @@ FAIL：转账失败，需要确认失败原因以后，再决定是否重新发�
 示例值：SUCCESS
       */
     DetailStatus: string;
+}
+/**
+ * 子商户查询签约返回结果
+ */
+export interface QueryOpenBankSubMerchantSignOnlineResult {
+    /**
+      * 处理状态
+  SUCCESS：签约成功
+  FAILED：签约失败
+  PROCESSING“签约中
+      */
+    SignStatus: string;
+    /**
+      * 上传返回描述，例如失败原因等
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SignMessage: string;
 }
 /**
  * QueryOrder请求参数结构体
@@ -3026,6 +3108,28 @@ export interface QueryTradeData {
     ServiceTime: string;
 }
 /**
+ * QueryOpenBankSettleOrder返回参数结构体
+ */
+export interface QueryOpenBankSettleOrderResponse {
+    /**
+      * 错误码
+      */
+    ErrCode: string;
+    /**
+      * 错误消息
+      */
+    ErrMessage: string;
+    /**
+      * 返回结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result: QueryOpenBankSettleOrderResult;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * QueryMemberTransactionDetails返回参数结构体
  */
 export interface QueryMemberTransactionDetailsResponse {
@@ -3508,6 +3612,11 @@ OPENBANK_PAYMENT
 注意：此字段可能返回 null，表示取不到有效值。
       */
     FeeRate: number;
+    /**
+      * 分账信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProfitShareRespInfoList: Array<OpenBankProfitShareRespInfo>;
 }
 /**
  * Refund请求参数结构体
@@ -4308,6 +4417,27 @@ export interface ApplyTradeResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * QueryOpenBankSettleOrder请求参数结构体
+ */
+export interface QueryOpenBankSettleOrderRequest {
+    /**
+      * 渠道商户号
+      */
+    ChannelMerchantId: string;
+    /**
+      * 渠道子商户号
+      */
+    ChannelSubMerchantId?: string;
+    /**
+      * 外部结算流水号，与渠道结算流水号二选一
+      */
+    OutSettleId?: string;
+    /**
+      * 渠道结算流水号，与外部结算流水号二选一
+      */
+    ChannelSettleId?: string;
 }
 /**
  * 云企付-支付限制
@@ -9554,6 +9684,30 @@ development: 开发环境
     MidasEnvironment?: string;
 }
 /**
+ * 云企付结算申请结果
+ */
+export interface ApplyOpenBankSettleOrderResult {
+    /**
+      * 外部结算流水号
+      */
+    OutSettleId: string;
+    /**
+      * 渠道结算流水号
+      */
+    ChannelSettleId: string;
+    /**
+      * 退款状态。
+SUCCESS：结算成功；
+FAILED：结算失败；
+PROCESSING：结算中;
+INIT:初始化;
+ACCEPT_FAILED:受理失败,底层银行返回订单不存在
+ACCEPTED：受理成功
+_UNKNOWN：默认未知
+      */
+    SettleStatus: string;
+}
+/**
  * CreateCustAcctId请求参数结构体
  */
 export interface CreateCustAcctIdRequest {
@@ -12286,6 +12440,35 @@ export interface CloudGlobalPayTimeInfo {
     TimeOffset?: number;
 }
 /**
+ * 分账信息结果
+ */
+export interface OpenBankProfitShareRespInfo {
+    /**
+      * 接收方企业ID
+      */
+    RecvId: string;
+    /**
+      * 分润金额（分）
+      */
+    ProfitShareFee: number;
+    /**
+      * 实际分账金额
+      */
+    RealProfitShareFee: number;
+    /**
+      * 分账状态
+      */
+    ProfitShareStatus: string;
+    /**
+      * 分账完成时间
+      */
+    ProfitFinishTime: string;
+    /**
+      * 分账类型
+      */
+    ProfitShareType: number;
+}
+/**
  * QueryCustAcctIdBalance请求参数结构体
  */
 export interface QueryCustAcctIdBalanceRequest {
@@ -12647,6 +12830,59 @@ export interface ApplyDeclareResult {
       * 提交申报材料数据
       */
     Data: ApplyDeclareData;
+}
+/**
+ * 云企付结算查询结果
+ */
+export interface QueryOpenBankSettleOrderResult {
+    /**
+      * 外部结算流水号
+      */
+    OutSettleId: string;
+    /**
+      * 渠道结算流水号
+      */
+    ChannelSettleId: string;
+    /**
+      * 退款状态。
+SUCCESS：结算成功；
+FAILED：结算失败；
+PROCESSING：结算中;
+INIT:初始化;
+ACCEPT_FAILED:受理失败,底层银行返回订单不存在
+ACCEPTED：受理成功
+_UNKNOWN：默认未知
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SettleStatus: string;
+    /**
+      * 结算金额
+      */
+    SettleAmount: number;
+    /**
+      * 结算日期，格式YYYYMMdd
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SettleDate: string;
+    /**
+      * 结算类型（T1/D1）
+      */
+    SettleType: string;
+    /**
+      * 失败原因
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FailReason: string;
+    /**
+      * 完成时间，格式yyyy-MM-dd HH:mm:ss
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TimeFinish: string;
+    /**
+      * 结算手续费
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SettleFee: string;
 }
 /**
  * DistributeAccreditQuery返回参数结构体
@@ -14474,6 +14710,10 @@ __test__:测试环境
 缺省默认为生产环境
       */
     Environment?: string;
+    /**
+      * 姓名
+      */
+    Name?: string;
 }
 /**
  * ModifyMerchant请求参数结构体
@@ -15901,6 +16141,31 @@ export interface QueryExceedingInfoRequest {
       * 分页信息。不填默认Index为1，Count为100。
       */
     PageNumber?: Paging;
+}
+/**
+ * ApplyOpenBankSubMerchantSignOnline请求参数结构体
+ */
+export interface ApplyOpenBankSubMerchantSignOnlineRequest {
+    /**
+      * 渠道商户号。外部平台接入云企付平台下发。必填。
+      */
+    ChannelMerchantId: string;
+    /**
+      * 渠道名称。详见附录-枚举类型-ChannelName。
+      */
+    ChannelName: string;
+    /**
+      * 外部子商户ID。
+      */
+    OutSubMerchantId?: string;
+    /**
+      * 渠道子商户ID。
+      */
+    ChannelSubMerchantId?: string;
+    /**
+      * 签约成功回调地址。
+      */
+    NotifyUrl?: string;
 }
 /**
  * 第三方渠道用户信息
@@ -17511,6 +17776,11 @@ export interface OpenBankQueryRefundOrderResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     RefundMessage: string;
+    /**
+      * 分账信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProfitShareRespInfoList: Array<OpenBankProfitShareRespInfo>;
 }
 /**
  * ApplyOutwardOrder返回参数结构体
@@ -18445,6 +18715,39 @@ __sandbox__:沙箱环境
 _不填默认为生产环境_
       */
     Environment?: string;
+}
+/**
+ * ApplyOpenBankSettleOrder请求参数结构体
+ */
+export interface ApplyOpenBankSettleOrderRequest {
+    /**
+      * 渠道商户号
+      */
+    ChannelMerchantId: string;
+    /**
+      * 外部结算流水号
+      */
+    OutSettleId: string;
+    /**
+      * 结算金额
+      */
+    SettleAmount: number;
+    /**
+      * 渠道名称。详见附录-枚举类型-ChannelName。
+      */
+    ChannelName: string;
+    /**
+      * 渠道子商户号
+      */
+    ChannelSubMerchantId?: string;
+    /**
+      * 结算备注
+      */
+    SettleDetail?: string;
+    /**
+      * 结算成功回调地址
+      */
+    NotifyUrl?: string;
 }
 /**
  * QueryOpenBankSubMerchantCredential请求参数结构体
@@ -20174,6 +20477,28 @@ CREDIT_CARD：信用卡
     BankCardType?: string;
 }
 /**
+ * ApplyOpenBankSubMerchantSignOnline返回参数结构体
+ */
+export interface ApplyOpenBankSubMerchantSignOnlineResponse {
+    /**
+      * 错误码。
+      */
+    ErrCode: string;
+    /**
+      * 错误信息。
+      */
+    ErrMessage: string;
+    /**
+      * 返回结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result: ApplyOpenBankSubMerchantSignOnlineResult;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 交易明细信息
  */
 export interface TransactionItem {
@@ -20919,6 +21244,10 @@ __sandbox__:沙箱环境
 _不填默认为生产环境_
       */
     Environment?: string;
+    /**
+      * 分账信息列表。
+      */
+    ProfitShareInfoList?: Array<OpenBankProfitShareInfo>;
 }
 /**
  * CreateBatchPayment转账明细
@@ -21151,6 +21480,28 @@ export interface QueryMerchantRequest {
       * 进件成功后返给商户方的 AppId
       */
     MerchantAppId: string;
+}
+/**
+ * 子商户在线签约返回结果
+ */
+export interface ApplyOpenBankSubMerchantSignOnlineResult {
+    /**
+      * 处理状态
+  SUCCESS：签约成功
+  FAILED：签约失败
+  PROCESSING“签约中
+      */
+    SignStatus: string;
+    /**
+      * 上传返回描述，例如失败原因等
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SignMessage: string;
+    /**
+      * 第三方渠道返回信息，见渠道特殊说明
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ExternalReturnData: string;
 }
 /**
  * QueryDownloadBillURL返回参数结构体

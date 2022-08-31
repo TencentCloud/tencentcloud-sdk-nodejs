@@ -4756,7 +4756,7 @@ export interface MLIDPassportOCRResponse {
   IssuingCountry: string
 
   /**
-   * 国籍
+   * 国家地区代码
    */
   Nationality: string
 

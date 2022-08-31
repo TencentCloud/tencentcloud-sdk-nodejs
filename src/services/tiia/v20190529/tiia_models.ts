@@ -1275,6 +1275,24 @@ export interface CarPlateContent {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   PlateLocation: Array<Coord>
+
+  /**
+      * 判断车牌是否遮挡。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PlateStatus: string
+
+  /**
+      * 车牌遮挡的置信度，0-100。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PlateStatusConfidence: number
+
+  /**
+      * 车牌角度。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PlateAngle: number
 }
 
 /**
@@ -1532,6 +1550,18 @@ export interface CarTagItem {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ColorConfidence: number
+
+  /**
+      * 车辆朝向，仅车辆识别（增强版）支持
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Orientation: string
+
+  /**
+      * 车辆朝向置信度，0-100，仅车辆识别（增强版）支持
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OrientationConfidence: number
 }
 
 /**

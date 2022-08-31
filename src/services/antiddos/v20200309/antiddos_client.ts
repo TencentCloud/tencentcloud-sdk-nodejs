@@ -342,7 +342,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取L7转发规则健康检查异常结果
+   * 获取L7转发规则健康检查异常结果列表
    */
   async DescribeNewL7RulesErrHealth(
     req: DescribeNewL7RulesErrHealthRequest,

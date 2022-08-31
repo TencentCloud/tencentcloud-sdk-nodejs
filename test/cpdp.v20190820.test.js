@@ -728,6 +728,26 @@ it("cpdp.v20190820.CreatePayMerchant", async function () {
     }
 })
 
+it("cpdp.v20190820.QueryOpenBankSettleOrder", async function () {
+    try {
+       const data = await client.QueryOpenBankSettleOrder({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cpdp.v20190820.QueryBatchPaymentResult", async function () {
+    try {
+       const data = await client.QueryBatchPaymentResult({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cpdp.v20190820.GetPayRollAuthList", async function () {
     try {
        const data = await client.GetPayRollAuthList({})
@@ -781,6 +801,16 @@ it("cpdp.v20190820.UploadExternalAnchorInfo", async function () {
 it("cpdp.v20190820.QueryMemberBind", async function () {
     try {
        const data = await client.QueryMemberBind({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cpdp.v20190820.ApplyOpenBankSubMerchantSignOnline", async function () {
+    try {
+       const data = await client.ApplyOpenBankSubMerchantSignOnline({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1768,9 +1798,9 @@ it("cpdp.v20190820.DistributeQueryReceiver", async function () {
     }
 })
 
-it("cpdp.v20190820.QueryBatchPaymentResult", async function () {
+it("cpdp.v20190820.ApplyOpenBankSettleOrder", async function () {
     try {
-       const data = await client.QueryBatchPaymentResult({})
+       const data = await client.ApplyOpenBankSettleOrder({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1821,6 +1851,16 @@ it("cpdp.v20190820.QueryRefund", async function () {
 it("cpdp.v20190820.DistributeAddReceiver", async function () {
     try {
        const data = await client.DistributeAddReceiver({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cpdp.v20190820.QueryOpenBankSubMerchantSignOnline", async function () {
+    try {
+       const data = await client.QueryOpenBankSubMerchantSignOnline({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

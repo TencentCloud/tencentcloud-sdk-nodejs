@@ -3751,7 +3751,7 @@ export interface DescribeListDDoSAIResponse {
  */
 export interface DescribeNewL7RulesErrHealthRequest {
     /**
-      * 大禹子产品代号（bgpip表示高防IP)
+      * 大禹子产品代号(bgpip表示高防IP)
       */
     Business: string;
     /**

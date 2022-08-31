@@ -454,6 +454,18 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreatePayMerchant", req, cb);
     }
     /**
+     * 云企付结算单查询结果
+     */
+    async QueryOpenBankSettleOrder(req, cb) {
+        return this.request("QueryOpenBankSettleOrder", req, cb);
+    }
+    /**
+     * 灵云-批量转账结果查询
+     */
+    async QueryBatchPaymentResult(req, cb) {
+        return this.request("QueryBatchPaymentResult", req, cb);
+    }
+    /**
      * 务工卡-查询核身记录
      */
     async GetPayRollAuthList(req, cb) {
@@ -489,6 +501,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async QueryMemberBind(req, cb) {
         return this.request("QueryMemberBind", req, cb);
+    }
+    /**
+     * 子商户在线签约
+     */
+    async ApplyOpenBankSubMerchantSignOnline(req, cb) {
+        return this.request("ApplyOpenBankSubMerchantSignOnline", req, cb);
     }
     /**
      * 应用需要先调用本接口生成支付订单号，并将应答的PayInfo透传给聚鑫SDK，拉起客户端（包括微信公众号/微信小程序/客户端App）支付。
@@ -1089,10 +1107,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DistributeQueryReceiver", req, cb);
     }
     /**
-     * 灵云-批量转账结果查询
+     * 云企付结算申请接口
      */
-    async QueryBatchPaymentResult(req, cb) {
-        return this.request("QueryBatchPaymentResult", req, cb);
+    async ApplyOpenBankSettleOrder(req, cb) {
+        return this.request("ApplyOpenBankSettleOrder", req, cb);
     }
     /**
      * 获取单笔代发转账对账单下载URL
@@ -1123,6 +1141,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DistributeAddReceiver(req, cb) {
         return this.request("DistributeAddReceiver", req, cb);
+    }
+    /**
+     * 子商户在线签约查询
+     */
+    async QueryOpenBankSubMerchantSignOnline(req, cb) {
+        return this.request("QueryOpenBankSubMerchantSignOnline", req, cb);
     }
     /**
      * 会员间交易退款

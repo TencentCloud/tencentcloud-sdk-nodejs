@@ -24,6 +24,7 @@ import {
   ApplyPayerInfoResponse,
   RevokeRechargeByThirdPayRequest,
   UnifiedOrderResponse,
+  ApplyOpenBankSettleOrderResponse,
   CreatePayRollTokenResponse,
   ApplyPayerinfoResult,
   FreezeFlexBalanceResult,
@@ -55,6 +56,7 @@ import {
   ApplyOutwardOrderData,
   MerchantPayWayData,
   QueryOpenBankDownLoadUrlResult,
+  QueryOpenBankSubMerchantSignOnlineResponse,
   BindAccountResponse,
   CreateInvoiceResultData,
   CloudClientInfo,
@@ -71,6 +73,7 @@ import {
   QueryCloudChannelDataResponse,
   UploadExternalAnchorInfoResponse,
   QueryCustAcctIdBalanceResponse,
+  QueryOpenBankSubMerchantSignOnlineRequest,
   CreateRedInvoiceRequest,
   QueryAcctInfoListResponse,
   ContractInfo,
@@ -94,6 +97,7 @@ import {
   CreateOpenBankMerchantResponse,
   ApplyDeclareData,
   TransferDetailResponse,
+  QueryOpenBankSubMerchantSignOnlineResult,
   QueryOrderRequest,
   RevokeMemberRechargeThirdPayResponse,
   DistributeAccreditTlinxRequest,
@@ -114,6 +118,7 @@ import {
   QueryMerchantBalanceResponse,
   BindOpenBankExternalSubMerchantBankAccountResponse,
   QueryTradeData,
+  QueryOpenBankSettleOrderResponse,
   QueryMemberTransactionDetailsResponse,
   ApplyFlexPaymentResult,
   FundsTransactionItem,
@@ -159,6 +164,7 @@ import {
   DownloadBillRequest,
   RevokeMemberRechargeThirdPayRequest,
   ApplyTradeResponse,
+  QueryOpenBankSettleOrderRequest,
   OpenBankPayLimitInfo,
   ViewMerchantResult,
   QueryOpenBankSupportBankListRequest,
@@ -292,6 +298,7 @@ import {
   GetPayRollAuthListResponse,
   CreateOpenBankSubMerchantRateConfigureRequest,
   QueryRefundRequest,
+  ApplyOpenBankSettleOrderResult,
   CreateCustAcctIdRequest,
   ApplyFlexPaymentRequest,
   CloudExternalChannelData,
@@ -357,6 +364,7 @@ import {
   FeeRangInfo,
   PayRollAuthResult,
   CloudGlobalPayTimeInfo,
+  OpenBankProfitShareRespInfo,
   QueryCustAcctIdBalanceRequest,
   QueryExternalAccountBookResult,
   ReviseMbrPropertyRequest,
@@ -370,6 +378,7 @@ import {
   QueryFlexOrderSummaryListResponse,
   QueryOpenBankUnbindExternalSubMerchantBankAccountResult,
   ApplyDeclareResult,
+  QueryOpenBankSettleOrderResult,
   DistributeAccreditQueryResponse,
   QueryOpenBankSubMerchantCredentialResponse,
   UnifiedCloudOrderResponse,
@@ -475,6 +484,7 @@ import {
   QueryOpenBankOrderDetailReceiptInfoResponse,
   CreateAnchorRequest,
   QueryExceedingInfoRequest,
+  ApplyOpenBankSubMerchantSignOnlineRequest,
   ExternalContractUserInfo,
   BankBranchInfo,
   ContractUserInfo,
@@ -552,6 +562,7 @@ import {
   CreateOpenBankSubMerchantRateConfigureResponse,
   UnifiedCloudOrderRequest,
   UploadOpenBankSubMerchantCredentialRequest,
+  ApplyOpenBankSettleOrderRequest,
   QueryOpenBankSubMerchantCredentialRequest,
   MerchantRiskInfo,
   QueryShopOpenIdResponse,
@@ -602,6 +613,7 @@ import {
   DistributeMultiApplyResult,
   RefundOrderRequest,
   OpenBankPayerInfo,
+  ApplyOpenBankSubMerchantSignOnlineResponse,
   TransactionItem,
   QueryTransferBatchRequest,
   TransferSinglePayData,
@@ -639,6 +651,7 @@ import {
   TerminateContractResponse,
   QueryOpenBankSubMerchantRateConfigureRequest,
   QueryMerchantRequest,
+  ApplyOpenBankSubMerchantSignOnlineResult,
   QueryDownloadBillURLResponse,
   QueryAnchorContractInfoResponse,
   MerchantClassificationId,
@@ -1368,6 +1381,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 云企付结算单查询结果
+   */
+  async QueryOpenBankSettleOrder(
+    req: QueryOpenBankSettleOrderRequest,
+    cb?: (error: string, rep: QueryOpenBankSettleOrderResponse) => void
+  ): Promise<QueryOpenBankSettleOrderResponse> {
+    return this.request("QueryOpenBankSettleOrder", req, cb)
+  }
+
+  /**
+   * 灵云-批量转账结果查询
+   */
+  async QueryBatchPaymentResult(
+    req: QueryBatchPaymentResultRequest,
+    cb?: (error: string, rep: QueryBatchPaymentResultResponse) => void
+  ): Promise<QueryBatchPaymentResultResponse> {
+    return this.request("QueryBatchPaymentResult", req, cb)
+  }
+
+  /**
    * 务工卡-查询核身记录
    */
   async GetPayRollAuthList(
@@ -1426,6 +1459,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: QueryMemberBindResponse) => void
   ): Promise<QueryMemberBindResponse> {
     return this.request("QueryMemberBind", req, cb)
+  }
+
+  /**
+   * 子商户在线签约
+   */
+  async ApplyOpenBankSubMerchantSignOnline(
+    req: ApplyOpenBankSubMerchantSignOnlineRequest,
+    cb?: (error: string, rep: ApplyOpenBankSubMerchantSignOnlineResponse) => void
+  ): Promise<ApplyOpenBankSubMerchantSignOnlineResponse> {
+    return this.request("ApplyOpenBankSubMerchantSignOnline", req, cb)
   }
 
   /**
@@ -2419,13 +2462,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 灵云-批量转账结果查询
+   * 云企付结算申请接口
    */
-  async QueryBatchPaymentResult(
-    req: QueryBatchPaymentResultRequest,
-    cb?: (error: string, rep: QueryBatchPaymentResultResponse) => void
-  ): Promise<QueryBatchPaymentResultResponse> {
-    return this.request("QueryBatchPaymentResult", req, cb)
+  async ApplyOpenBankSettleOrder(
+    req: ApplyOpenBankSettleOrderRequest,
+    cb?: (error: string, rep: ApplyOpenBankSettleOrderResponse) => void
+  ): Promise<ApplyOpenBankSettleOrderResponse> {
+    return this.request("ApplyOpenBankSettleOrder", req, cb)
   }
 
   /**
@@ -2476,6 +2519,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DistributeAddReceiverResponse) => void
   ): Promise<DistributeAddReceiverResponse> {
     return this.request("DistributeAddReceiver", req, cb)
+  }
+
+  /**
+   * 子商户在线签约查询
+   */
+  async QueryOpenBankSubMerchantSignOnline(
+    req: QueryOpenBankSubMerchantSignOnlineRequest,
+    cb?: (error: string, rep: QueryOpenBankSubMerchantSignOnlineResponse) => void
+  ): Promise<QueryOpenBankSubMerchantSignOnlineResponse> {
+    return this.request("QueryOpenBankSubMerchantSignOnline", req, cb)
   }
 
   /**

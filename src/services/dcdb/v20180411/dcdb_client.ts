@@ -57,7 +57,6 @@ import {
   DatabaseView,
   DescribeDBLogFilesRequest,
   DescribeOrdersResponse,
-  CreateDedicatedClusterDCDBInstanceRequest,
   CreateHourDCDBInstanceRequest,
   ResetAccountPasswordRequest,
   CopyAccountPrivilegesResponse,
@@ -138,7 +137,6 @@ import {
   DescribeFlowRequest,
   CreateDCDBInstanceRequest,
   DescribeDCDBUpgradePriceRequest,
-  CreateDedicatedClusterDCDBInstanceResponse,
   UserTaskInfo,
   DescribeProjectsRequest,
   AddShardConfig,
@@ -289,16 +287,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeOrders）用于查询分布式数据库订单信息。传入订单ID来查询订单关联的分布式数据库实例，和对应的任务流程ID。
-   */
-  async DescribeOrders(
-    req: DescribeOrdersRequest,
-    cb?: (error: string, rep: DescribeOrdersResponse) => void
-  ): Promise<DescribeOrdersResponse> {
-    return this.request("DescribeOrders", req, cb)
-  }
-
-  /**
    * 本接口（DescribeUserTasks）用于拉取用户任务列表
    */
   async DescribeUserTasks(
@@ -379,13 +367,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建独享集群DCDB实例
+   * 本接口（DescribeOrders）用于查询分布式数据库订单信息。传入订单ID来查询订单关联的分布式数据库实例，和对应的任务流程ID。
    */
-  async CreateDedicatedClusterDCDBInstance(
-    req: CreateDedicatedClusterDCDBInstanceRequest,
-    cb?: (error: string, rep: CreateDedicatedClusterDCDBInstanceResponse) => void
-  ): Promise<CreateDedicatedClusterDCDBInstanceResponse> {
-    return this.request("CreateDedicatedClusterDCDBInstance", req, cb)
+  async DescribeOrders(
+    req: DescribeOrdersRequest,
+    cb?: (error: string, rep: DescribeOrdersResponse) => void
+  ): Promise<DescribeOrdersResponse> {
+    return this.request("DescribeOrders", req, cb)
   }
 
   /**

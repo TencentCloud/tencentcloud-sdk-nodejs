@@ -672,7 +672,7 @@ export interface DescribeRoomInfoRequest {
  */
 export interface StorageParams {
   /**
-   * 第三方云存储的账号信息。
+   * 第三方云存储的账号信息（暂不支持）。
    */
   CloudStorage?: CloudStorage
 
@@ -806,27 +806,27 @@ export interface TrtcTimeNewUsage {
   VoiceUserNum: number
 
   /**
-   * 音视频通话时长。单位：秒。
+   * 音视频通话收费时长。单位：秒。
    */
   VideoTime: number
 
   /**
-   * 标清视频通话时长。单位：秒。
+   * 标清视频通话收费时长。单位：秒。
    */
   Class1VideoTime: number
 
   /**
-   * 高清视频通话时长。单位：秒。
+   * 高清视频通话收费时长。单位：秒。
    */
   Class2VideoTime: number
 
   /**
-   * 超高清视频通话时长。单位：秒。
+   * 超高清视频通话收费时长。单位：秒。
    */
   Class3VideoTime: number
 
   /**
-   * 音频通话时长。单位：秒。
+   * 音频通话收费时长。单位：秒。
    */
   AudioTime: number
 
@@ -836,12 +836,12 @@ export interface TrtcTimeNewUsage {
   Bandwidth: number
 
   /**
-   * 2k视频通话时长。单位：秒。
+   * 2k视频通话收费时长。单位：秒。
    */
   Video2KTime: number
 
   /**
-   * 4k视频通话时长。单位：秒。
+   * 4k视频通话收费时长。单位：秒。
    */
   Video4KTime: number
 }

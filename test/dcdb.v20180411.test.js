@@ -118,16 +118,6 @@ it("dcdb.v20180411.ModifyAccountDescription", async function () {
     }
 })
 
-it("dcdb.v20180411.DescribeOrders", async function () {
-    try {
-       const data = await client.DescribeOrders({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("dcdb.v20180411.DescribeUserTasks", async function () {
     try {
        const data = await client.DescribeUserTasks({})
@@ -208,9 +198,9 @@ it("dcdb.v20180411.InitDCDBInstances", async function () {
     }
 })
 
-it("dcdb.v20180411.CreateDedicatedClusterDCDBInstance", async function () {
+it("dcdb.v20180411.DescribeOrders", async function () {
     try {
-       const data = await client.CreateDedicatedClusterDCDBInstance({})
+       const data = await client.DescribeOrders({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
