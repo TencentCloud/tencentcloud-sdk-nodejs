@@ -1665,7 +1665,7 @@ export interface ModifyLifecycleHookResponse {
     RequestId?: string;
 }
 /**
- * 远程命令执行对象。NotificationTarget和CommandInfo参数互斥，二者不可同时指定。
+ * 远程命令执行对象。
  */
 export interface LifecycleCommand {
     /**
@@ -1680,7 +1680,7 @@ key为自定义参数名称，value为该参数的默认取值。kv均为字符�
 自定义参数最多20个。自定义参数名称需符合以下规范：字符数目上限64，可选范围【a-zA-Z0-9-_】。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Parameters?: Array<string>;
+    Parameters?: string;
 }
 /**
  * DescribeAutoScalingAdvices返回参数结构体

@@ -409,9 +409,14 @@ export interface ModifyTraceDataRequest {
   CorpId?: number
 
   /**
-   * [无效] 溯源状态
+   * 溯源状态 0: 无效, 1: 有效
    */
   Status?: number
+
+  /**
+   * 环节数据
+   */
+  PhaseData?: PhaseData
 }
 
 /**
@@ -969,6 +974,12 @@ export interface TraceItem {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Values: Array<string>
+
+  /**
+      * 类型标识
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Key: string
 }
 
 /**
@@ -1125,6 +1136,16 @@ export interface CreateTraceDataRequest {
    * 溯源信息
    */
   TraceItems?: Array<TraceItem>
+
+  /**
+   * 溯源状态 0: 无效, 1: 有效
+   */
+  Status?: number
+
+  /**
+   * 环节数据
+   */
+  PhaseData?: PhaseData
 }
 
 /**
@@ -1695,6 +1716,41 @@ export interface ChainData {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   BlockTime: string
+}
+
+/**
+ * 环节数据
+ */
+export interface PhaseData {
+  /**
+   * 启用头
+   */
+  HeadEnabled?: boolean
+
+  /**
+   * 标题
+   */
+  HeadTitle?: string
+
+  /**
+   * 标识符
+   */
+  Key?: string
+
+  /**
+   * 小程序AppId
+   */
+  AppId?: string
+
+  /**
+   * 小程序AppPath
+   */
+  AppPath?: string
+
+  /**
+   * 小程序名称AppName
+   */
+  AppName?: string
 }
 
 /**

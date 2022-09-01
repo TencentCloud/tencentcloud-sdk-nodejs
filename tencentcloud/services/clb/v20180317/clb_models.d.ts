@@ -298,11 +298,11 @@ export interface DeleteRuleRequest {
       */
     LocationIds?: Array<string>;
     /**
-      * 要删除的转发规则的域名，如果是多域名，可以指定多域名列表中的任意一个。已提供LocationIds参数时本参数不生效。
+      * 要删除的转发规则的域名，如果是多域名，可以指定多域名列表中的任意一个。
       */
     Domain?: string;
     /**
-      * 要删除的转发规则的转发路径，已提供LocationIds参数时本参数不生效。
+      * 要删除的转发规则的转发路径。
       */
     Url?: string;
     /**

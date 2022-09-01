@@ -3110,6 +3110,83 @@ export interface PornAsrReviewTemplateInfoForUpdate {
     ReviewConfidence?: number;
 }
 /**
+ * 音视频审核片段。
+ */
+export interface ReviewAudioVideoSegmentItem {
+    /**
+      * 嫌疑片段起始的偏移时间，单位：秒。
+      */
+    StartTimeOffset: number;
+    /**
+      * 嫌疑片段结束的偏移时间，单位：秒。
+      */
+    EndTimeOffset: number;
+    /**
+      * 嫌疑片段涉及令人反感的信息的分数。
+      */
+    Confidence: number;
+    /**
+      * 嫌疑片段鉴别涉及违规信息的结果建议，取值范围：
+<li>review：疑似违规，建议复审；</li>
+<li>block：确认违规，建议封禁。</li>
+      */
+    Suggestion: string;
+    /**
+      * 嫌疑片段最可能的违规的标签，取值范围：
+<li>Porn：色情；</li>
+<li>Terrorism：暴恐；</li>
+<li>Political：令人不适宜的信息。</li>
+      */
+    Label: string;
+    /**
+      * 当 Form 为 Image 或 Voice 时有效，表示当前标签（Label）下的二级标签。
+当 Form 为 Image 且 Label 为 Porn 时，取值范围：
+<li>porn：色情；</li>
+<li>vulgar：低俗。</li>
+
+当 Form 为 Image 且 Label 为 Terrorism 时，取值范围：
+<li>guns：武器枪支；</li>
+<li>bloody：血腥画面；</li>
+<li>banners：暴恐旗帜；</li>
+<li> scenario：暴恐画面；</li>
+<li>explosion：爆炸火灾。</li>
+
+当 Form 为 Image 且 Label 为 Political 时，取值范围：
+<li>violation_photo：违规图标；</li>
+<li>nation_politician：国家领导人；</li>
+<li>province_politician：省部级领导人；</li>
+<li>county_politician：市/县级领导人；</li>
+<li>sensitive_politician：敏感相关人物；</li>
+<li>foreign_politician：国外政治人物；</li>
+<li>sensitive_entertainment：敏感娱乐明星；</li>
+<li>sensitive_military：敏感军事人物。</li>
+
+当 Form 为 Voice 且 Label 为 Porn 时，取值范围：
+<li>moan：娇喘。</li>
+      */
+    SubLabel: string;
+    /**
+      * 嫌疑片段违禁的形式，取值范围：
+<li>Image：画面上的人物或图标；</li>
+<li>OCR：画面上的文字；</li>
+<li>ASR：语音中的文字；</li>
+<li>Voice：声音。</li>
+      */
+    Form: string;
+    /**
+      * 当 Form 为 Image 或 OCR 时有效，表示嫌疑人物、图标或文字出现的区域坐标 (像素级)，[x1, y1, x2, y2]，即左上角坐标、右下角坐标。
+      */
+    AreaCoordSet: Array<number>;
+    /**
+      * 当 Form 为 OCR 或 ASR 时有效，表示识别出来的 OCR 或 ASR 文本内容。
+      */
+    Text: string;
+    /**
+      * 当 Form 为 OCR 或 ASR 时有效，表示嫌疑片段命中的违规关键词列表。
+      */
+    KeywordSet: Array<string>;
+}
+/**
  * 点播文件视频转动图结果信息
  */
 export interface MediaAnimatedGraphicsInfo {
@@ -5370,6 +5447,46 @@ export interface SearchMediaResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 音视频审核任务的输出。
+ */
+export interface ReviewAudioVideoTaskOutput {
+    /**
+      * 音视频内容审核的结果建议，取值范围：
+<li>pass：建议通过；</li>
+<li>review：建议复审；</li>
+<li>block：建议封禁。</li>
+      */
+    Suggestion: string;
+    /**
+      * 当 Suggestion 为 review 或 block 时有效，表示音视频最可能的违规的标签，取值范围：
+<li>Porn：色情；</li>
+<li>Terrorism：暴恐；</li>
+<li>Political：令人不适宜的信息。</li>
+      */
+    Label: string;
+    /**
+      * 当 Suggestion 为 review 或 block 时有效，表示音视频最可能的违禁的形式，取值范围：
+<li>Image：画面上的人物或图标；</li>
+<li>OCR：画面上的文字；</li>
+<li>ASR：语音中的文字；</li>
+<li>Voice：声音。</li>
+      */
+    Form: string;
+    /**
+      * 有违规信息的嫌疑的视频片段列表。
+<font color=red>注意</font> ：该列表最多仅展示前 10个 元素。如希望获得完整结果，请从 SegmentSetFileUrl 对应的文件中获取。
+      */
+    SegmentSet: Array<ReviewAudioVideoSegmentItem>;
+    /**
+      * 涉及违规信息的嫌疑的视频片段列表文件 URL。文件的内容为 JSON，数据结构与 SegmentSet 字段一致。 （文件不会永久存储，到达SegmentSetFileUrlExpireTime 时间点后文件将被删除）。
+      */
+    SegmentSetFileUrl: string;
+    /**
+      * 涉及违规信息的嫌疑的视频片段列表文件 URL 失效时间，使用  [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+      */
+    SegmentSetFileUrlExpireTime: string;
 }
 /**
  * 智能去除水印任务的输出。
@@ -9707,7 +9824,8 @@ export interface EventContent {
 <li>WechatPublishComplete：微信发布完成；</li>
 <li>ComposeMediaComplete：制作媒体文件完成；</li>
 <li>WechatMiniProgramPublishComplete：微信小程序发布完成。</li>
-<li>FastClipMediaComplete：快速剪辑完成。</li>
+<li>FastClipMediaComplete：快速剪辑完成；</li>
+<li>ReviewAudioVideoComplete：音视频审核完成。</li>
 <b>兼容 2017 版的事件类型：</b>
 <li>TranscodeComplete：视频转码完成；</li>
 <li>ConcatComplete：视频拼接完成；</li>
@@ -9796,6 +9914,11 @@ export interface EventContent {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     RestoreMediaCompleteEvent: RestoreMediaTask;
+    /**
+      * 音视频审核完成事件，当事件类型为 ReviewAudioVideoComplete 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ReviewAudioVideoCompleteEvent: ReviewAudioVideoTask;
 }
 /**
  * 智能精彩片段任务控制参数
@@ -11052,7 +11175,8 @@ export interface DescribeTaskDetailResponse {
 <li>WechatMiniProgramPublish：微信小程序视频发布任务；</li>
 <li>PullUpload：拉取上传媒体文件任务；</li>
 <li>FastClipMedia：快速剪辑任务；</li>
-<li>RemoveWatermarkTask：智能去除水印任务。</li>
+<li>RemoveWatermarkTask：智能去除水印任务；</li>
+<li> ReviewAudioVideo：音视频审核任务。</li>
       */
     TaskType: string;
     /**
@@ -11139,6 +11263,11 @@ export interface DescribeTaskDetailResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     RemoveWatermarkTask: RemoveWatermarkTask;
+    /**
+      * 音视频审核任务信息，仅当 TaskType 为 ReviewAudioVideo，该字段有值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ReviewAudioVideoTask: ReviewAudioVideoTask;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -11769,6 +11898,42 @@ export interface TaskSimpleInfo {
     SessionId: string;
     /**
       * 来源上下文，用于透传用户请求信息。
+      */
+    SessionContext: string;
+}
+/**
+ * 音视频审核任务信息。
+ */
+export interface ReviewAudioVideoTask {
+    /**
+      * 任务 ID。
+      */
+    TaskId: string;
+    /**
+      * 任务状态，取值：
+<li>PROCESSING：处理中；</li>
+<li>FINISH：已完成。</li>
+      */
+    Status: string;
+    /**
+      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/266/50368#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+      */
+    ErrCodeExt: string;
+    /**
+      * 错误信息。
+      */
+    Message: string;
+    /**
+      * 音视频审核任务的输出。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Output: ReviewAudioVideoTaskOutput;
+    /**
+      * 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
+      */
+    SessionId: string;
+    /**
+      * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。
       */
     SessionContext: string;
 }

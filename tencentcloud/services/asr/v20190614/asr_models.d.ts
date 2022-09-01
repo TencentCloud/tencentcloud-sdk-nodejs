@@ -431,11 +431,11 @@ export interface CreateRecTaskRequest {
       */
     FilterDirty?: number;
     /**
-      * 热词表id。如不设置该参数，自动生效默认热词表；如果设置了该参数，那么将生效对应的热词表。
+      * 热词表id。如不设置该参数，自动生效默认热词表；如设置了该参数，那么将生效对应的热词表。
       */
     HotwordId?: string;
     /**
-      * 自学习模型 id。如不设置该参数，自动生效最后一次上线的自学习模型；如果设置了该参数，那么将生效对应的自学习模型。
+      * 自学习模型 id。如设置了该参数，将生效对应的自学习模型。
       */
     CustomizationId?: string;
     /**

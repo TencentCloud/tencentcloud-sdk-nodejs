@@ -82,6 +82,7 @@ import {
   DescribeTraceCodesRequest,
   ModifyTraceCodeResponse,
   ChainData,
+  PhaseData,
   DeleteMerchantRequest,
   ModifyTraceDataResponse,
 } from "./trp_models"

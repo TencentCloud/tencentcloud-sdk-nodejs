@@ -4037,6 +4037,11 @@ export interface Cluster {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     QGPUShareEnable: boolean;
+    /**
+      * 运行时版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RuntimeVersion: string;
 }
 /**
  * DescribeClusterEndpointStatus返回参数结构体
