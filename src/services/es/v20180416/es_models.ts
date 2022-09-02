@@ -1997,6 +1997,11 @@ export interface CreateInstanceRequest {
    * 可维护时间段
    */
   OperationDuration?: OperationDuration
+
+  /**
+   * 是否开启存算分离
+   */
+  EnableHybridStorage?: boolean
 }
 
 /**
@@ -2539,6 +2544,12 @@ RENEW_FLAG_DEFAULT：不自动续费
 注意：此字段可能返回 null，表示取不到有效值。
       */
   AutoIndexEnabled: boolean
+
+  /**
+      * 是否支持存储计算分离
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EnableHybridStorage: boolean
 }
 
 /**

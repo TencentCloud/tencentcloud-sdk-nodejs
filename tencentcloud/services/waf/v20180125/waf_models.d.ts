@@ -1077,95 +1077,29 @@ export interface ModifyAccessPeriodRequest {
     TopicId: string;
 }
 /**
- * 一个实例的详细信息
+ * bot的qps详情
  */
-export interface InstanceInfo {
-    /**
-      * id
-      */
-    InstanceId: string;
-    /**
-      * name
-      */
-    InstanceName: string;
+export interface BotQPS {
     /**
       * 资源id
       */
     ResourceIds: string;
     /**
-      * 地域
-      */
-    Region: string;
-    /**
-      * 付费模式
-      */
-    PayMode: number;
-    /**
-      * 自动续费
-      */
-    RenewFlag: number;
-    /**
-      * 弹性计费
-      */
-    Mode: number;
-    /**
-      * 套餐版本
-      */
-    Level: number;
-    /**
-      * 过期时间
+      * 有效时间
       */
     ValidTime: string;
     /**
-      * 开始时间
+      * 资源数量
       */
-    BeginTime: string;
+    Count: number;
     /**
-      * 已用
+      * 资源所在地区
       */
-    DomainCount: number;
+    Region: string;
     /**
-      * 上限
+      * 使用qps的最大值
       */
-    SubDomainLimit: number;
-    /**
-      * 已用
-      */
-    MainDomainCount: number;
-    /**
-      * 上限
-      */
-    MainDomainLimit: number;
-    /**
-      * 峰值
-      */
-    MaxQPS: number;
-    /**
-      * qps套餐
-      */
-    QPS: QPSPackageNew;
-    /**
-      * 域名套餐
-      */
-    DomainPkg: DomainPackageNew;
-    /**
-      * 用户appid
-      */
-    AppId: number;
-    /**
-      * clb或saas
-      */
-    Edition: string;
-    /**
-      * 业务安全包
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    FraudPkg?: FraudPkg;
-    /**
-      * Bot资源包
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    BotPkg?: BotPkg;
+    MaxBotQPS: number;
 }
 /**
  * ModifyWafAutoDenyRules返回参数结构体
@@ -1301,6 +1235,102 @@ export interface AccessLogInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     LogJson: string;
+}
+/**
+ * 一个实例的详细信息
+ */
+export interface InstanceInfo {
+    /**
+      * id
+      */
+    InstanceId: string;
+    /**
+      * name
+      */
+    InstanceName: string;
+    /**
+      * 资源id
+      */
+    ResourceIds: string;
+    /**
+      * 地域
+      */
+    Region: string;
+    /**
+      * 付费模式
+      */
+    PayMode: number;
+    /**
+      * 自动续费
+      */
+    RenewFlag: number;
+    /**
+      * 弹性计费
+      */
+    Mode: number;
+    /**
+      * 套餐版本
+      */
+    Level: number;
+    /**
+      * 过期时间
+      */
+    ValidTime: string;
+    /**
+      * 开始时间
+      */
+    BeginTime: string;
+    /**
+      * 已用
+      */
+    DomainCount: number;
+    /**
+      * 上限
+      */
+    SubDomainLimit: number;
+    /**
+      * 已用
+      */
+    MainDomainCount: number;
+    /**
+      * 上限
+      */
+    MainDomainLimit: number;
+    /**
+      * 峰值
+      */
+    MaxQPS: number;
+    /**
+      * qps套餐
+      */
+    QPS: QPSPackageNew;
+    /**
+      * 域名套餐
+      */
+    DomainPkg: DomainPackageNew;
+    /**
+      * 用户appid
+      */
+    AppId: number;
+    /**
+      * clb或saas
+      */
+    Edition: string;
+    /**
+      * 业务安全包
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FraudPkg?: FraudPkg;
+    /**
+      * Bot资源包
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BotPkg?: BotPkg;
+    /**
+      * bot的qps详情
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BotQPS?: BotQPS;
 }
 /**
  * 用于 DescribeAccessIndex 的出参
@@ -2079,6 +2109,11 @@ export interface BotPkg {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     UsedNum?: number;
+    /**
+      * 子产品code
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Type?: string;
 }
 /**
  * ModifyWafThreatenIntelligence返回参数结构体

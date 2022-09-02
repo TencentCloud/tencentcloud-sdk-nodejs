@@ -1569,6 +1569,11 @@ export interface CreateCodeBatchRequest {
    * 活动ID
    */
   MpTpl?: string
+
+  /**
+   * 克隆批次ID
+   */
+  CloneId?: string
 }
 
 /**

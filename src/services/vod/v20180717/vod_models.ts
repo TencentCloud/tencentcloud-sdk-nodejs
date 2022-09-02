@@ -3838,6 +3838,15 @@ export interface ProductInstance {
 <li>Denied：不可退款。</li>
       */
   RefundStatus: string
+
+  /**
+      * 自动续费状态，取值有：
+<li>Never：不自动续费。</li>
+<li>Expire：到期自动续费。</li>
+<li>ExpireOrUseOut：到期或用完自动续费。</li>
+<li>NotSupport：不支持。</li>
+      */
+  RenewStatus: string
 }
 
 /**

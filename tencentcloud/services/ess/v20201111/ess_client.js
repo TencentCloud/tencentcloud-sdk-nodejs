@@ -35,6 +35,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeFileUrls", req, cb);
     }
     /**
+     * 查询合同详情
+适用场景：可用于主动查询某个合同详情信息。
+     */
+    async DescribeFlowInfo(req, cb) {
+        return this.request("DescribeFlowInfo", req, cb);
+    }
+    /**
      * 此接口用于发起流程
 适用场景：见创建签署流程接口。
 注：该接口是“创建电子文档”接口的后置接口，用于激活包含完整合同信息（模板及内容信息）的流程。激活后的流程就是一份待签署的电子合同。
@@ -97,6 +104,15 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateFlow", req, cb);
     }
     /**
+     * 此接口（CreateFlowByFiles）用来通过上传后的pdf资源编号来创建待签署的合同流程。
+适用场景1：适用非制式的合同文件签署。一般开发者自己有完整的签署文件，可以通过该接口传入完整的PDF文件及流程信息生成待签署的合同流程。
+适用场景2：可通过该接口传入制式合同文件，同时在指定位置添加签署控件。可以起到接口创建临时模板的效果。如果是标准的制式文件，建议使用模板功能生成模板ID进行合同流程的生成。
+注意事项：该接口需要依赖“多文件上传”接口生成pdf资源编号（FileIds）进行使用。
+     */
+    async CreateFlowByFiles(req, cb) {
+        return this.request("CreateFlowByFiles", req, cb);
+    }
+    /**
      * 此接口（CancelMultiFlowSignQRCode）用于取消一码多扫二维码。该接口对传入的二维码ID，若还在有效期内，可以提前失效。
      */
     async CancelMultiFlowSignQRCode(req, cb) {
@@ -153,13 +169,14 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeFlowBriefs", req, cb);
     }
     /**
-     * 此接口（CreateFlowByFiles）用来通过上传后的pdf资源编号来创建待签署的合同流程。
-适用场景1：适用非制式的合同文件签署。一般开发者自己有完整的签署文件，可以通过该接口传入完整的PDF文件及流程信息生成待签署的合同流程。
-适用场景2：可通过该接口传入制式合同文件，同时在指定位置添加签署控件。可以起到接口创建临时模板的效果。如果是标准的制式文件，建议使用模板功能生成模板ID进行合同流程的生成。
-注意事项：该接口需要依赖“多文件上传”接口生成pdf资源编号（FileIds）进行使用。
+     * 补充签署流程本企业签署人信息
+适用场景：在通过模版或者文件发起合同时，若未指定本企业签署人信息，则流程发起后，可以调用此接口补充签署人。
+同一签署人可以补充多个员工作为候选签署人,最终签署人取决于谁先领取合同完成签署。
+
+注：目前暂时只支持补充来源于企业微信的员工作为候选签署人
      */
-    async CreateFlowByFiles(req, cb) {
-        return this.request("CreateFlowByFiles", req, cb);
+    async CreateFlowApprovers(req, cb) {
+        return this.request("CreateFlowApprovers", req, cb);
     }
     /**
      * 此接口（UploadFiles）用于文件上传。

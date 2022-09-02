@@ -1347,17 +1347,21 @@ export interface UpgradeLifecycleHookRequest {
       */
     HeartbeatTimeout?: number;
     /**
-      * 弹性伸缩向通知目标发送的附加信息，默认值为空字符串""
+      * 弹性伸缩向通知目标发送的附加信息，配置通知时使用，默认值为空字符串""
       */
     NotificationMetadata?: string;
     /**
-      * 通知目标
+      * 通知目标。NotificationTarget和LifecycleCommand参数互斥，二者不可同时指定。
       */
     NotificationTarget?: NotificationTarget;
     /**
       * 进行生命周期挂钩的场景类型，取值范围包括NORMAL 和 EXTENSION。说明：设置为EXTENSION值，在AttachInstances、DetachInstances、RemoveInstaces接口时会触发生命周期挂钩操作，值为NORMAL则不会在这些接口中触发生命周期挂钩。
       */
     LifecycleTransitionType?: string;
+    /**
+      * 远程命令执行对象。NotificationTarget和LifecycleCommand参数互斥，二者不可同时指定。
+      */
+    LifecycleCommand?: LifecycleCommand;
 }
 /**
  * DetachLoadBalancers返回参数结构体
@@ -2297,11 +2301,11 @@ export interface CreateLifecycleHookRequest {
       */
     HeartbeatTimeout?: number;
     /**
-      * 弹性伸缩向通知目标发送的附加信息，默认值为空字符串""。最大长度不能超过1024个字节。
+      * 弹性伸缩向通知目标发送的附加信息，配置通知时使用,默认值为空字符串""。最大长度不能超过1024个字节。
       */
     NotificationMetadata?: string;
     /**
-      * 通知目标
+      * 通知目标。NotificationTarget和LifecycleCommand参数互斥，二者不可同时指定。
       */
     NotificationTarget?: NotificationTarget;
     /**
@@ -2309,7 +2313,7 @@ export interface CreateLifecycleHookRequest {
       */
     LifecycleTransitionType?: string;
     /**
-      * 远程命令执行对象。NotificationTarget和CommandInfo参数互斥，二者不可同时指定。
+      * 远程命令执行对象。NotificationTarget和LifecycleCommand参数互斥，二者不可同时指定。
       */
     LifecycleCommand?: LifecycleCommand;
 }
@@ -2402,6 +2406,10 @@ export interface ModifyLifecycleHookRequest {
       * 通知目标信息。
       */
     NotificationTarget?: NotificationTarget;
+    /**
+      * 远程命令执行对象。
+      */
+    LifecycleCommand?: LifecycleCommand;
 }
 /**
  * CompleteLifecycleAction返回参数结构体
@@ -2716,7 +2724,7 @@ export interface LifecycleActionResultInfo {
       */
     InvokeCommandResult: string;
     /**
-      * 通知的结果，表示通知CMQ/TCMQ是否成功。<br>
+      * 通知的结果，表示通知CMQ/TDMQ是否成功。<br>
 <li>SUCCESSFUL 通知成功</li>
 <li>FAILED 通知失败</li>
 <li>NONE</li>

@@ -7177,6 +7177,16 @@ export interface PrometheusInstancesItem {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     GrafanaInstanceId: string;
+    /**
+      * 告警规则限制
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AlertRuleLimit: number;
+    /**
+      * 预聚合规则限制
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RecordingRuleLimit: number;
 }
 /**
  * DeleteServiceDiscovery请求参数结构体

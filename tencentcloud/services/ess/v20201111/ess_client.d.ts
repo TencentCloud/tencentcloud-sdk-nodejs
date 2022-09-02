@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CancelMultiFlowSignQRCodeRequest, CreateFlowEvidenceReportResponse, DescribeFileUrlsResponse, CreateDocumentResponse, StartFlowRequest, CancelFlowResponse, CreateDocumentRequest, CreateFlowRequest, CreateSchemeUrlRequest, DescribeThirdPartyAuthCodeRequest, GetTaskResultApiRequest, UploadFilesRequest, CancelFlowRequest, DescribeFlowBriefsResponse, CreateMultiFlowSignQRCodeResponse, UploadFilesResponse, DescribeThirdPartyAuthCodeResponse, CreateFlowByFilesResponse, DescribeFlowBriefsRequest, DescribeFileUrlsRequest, CreateFlowSignReviewResponse, DescribeFlowTemplatesResponse, CreateFlowEvidenceReportRequest, CreateBatchCancelFlowUrlResponse, StartFlowResponse, CreateBatchCancelFlowUrlRequest, CreateMultiFlowSignQRCodeRequest, CreateConvertTaskApiResponse, CreateFlowSignReviewRequest, CreateConvertTaskApiRequest, CreateSchemeUrlResponse, CreateFlowByFilesRequest, CancelMultiFlowSignQRCodeResponse, CreateFlowResponse, DescribeFlowTemplatesRequest, GetTaskResultApiResponse } from "./ess_models";
+import { CancelMultiFlowSignQRCodeRequest, CreateFlowEvidenceReportResponse, DescribeFileUrlsResponse, CreateDocumentResponse, StartFlowRequest, CancelFlowResponse, CreateDocumentRequest, CreateFlowRequest, CreateSchemeUrlRequest, DescribeThirdPartyAuthCodeRequest, CreateFlowApproversResponse, DescribeFlowInfoRequest, CancelFlowRequest, DescribeFlowBriefsResponse, CreateMultiFlowSignQRCodeResponse, UploadFilesResponse, DescribeThirdPartyAuthCodeResponse, CreateFlowByFilesResponse, DescribeFlowBriefsRequest, DescribeFileUrlsRequest, CreateFlowSignReviewResponse, DescribeFlowTemplatesResponse, CreateFlowEvidenceReportRequest, CreateBatchCancelFlowUrlResponse, UploadFilesRequest, StartFlowResponse, GetTaskResultApiRequest, CreateBatchCancelFlowUrlRequest, CreateMultiFlowSignQRCodeRequest, CreateConvertTaskApiResponse, CreateFlowSignReviewRequest, CreateConvertTaskApiRequest, DescribeFlowInfoResponse, CreateSchemeUrlResponse, CreateFlowByFilesRequest, CancelMultiFlowSignQRCodeResponse, CreateFlowResponse, DescribeFlowTemplatesRequest, GetTaskResultApiResponse, CreateFlowApproversRequest } from "./ess_models";
 /**
  * ess client
  * @class
@@ -12,6 +12,11 @@ export declare class Client extends AbstractClient {
 适用场景：通过传参合同流程编号，下载对应的合同PDF文件流到本地。
      */
     DescribeFileUrls(req: DescribeFileUrlsRequest, cb?: (error: string, rep: DescribeFileUrlsResponse) => void): Promise<DescribeFileUrlsResponse>;
+    /**
+     * 查询合同详情
+适用场景：可用于主动查询某个合同详情信息。
+     */
+    DescribeFlowInfo(req: DescribeFlowInfoRequest, cb?: (error: string, rep: DescribeFlowInfoResponse) => void): Promise<DescribeFlowInfoResponse>;
     /**
      * 此接口用于发起流程
 适用场景：见创建签署流程接口。
@@ -59,6 +64,13 @@ export declare class Client extends AbstractClient {
      */
     CreateFlow(req: CreateFlowRequest, cb?: (error: string, rep: CreateFlowResponse) => void): Promise<CreateFlowResponse>;
     /**
+     * 此接口（CreateFlowByFiles）用来通过上传后的pdf资源编号来创建待签署的合同流程。
+适用场景1：适用非制式的合同文件签署。一般开发者自己有完整的签署文件，可以通过该接口传入完整的PDF文件及流程信息生成待签署的合同流程。
+适用场景2：可通过该接口传入制式合同文件，同时在指定位置添加签署控件。可以起到接口创建临时模板的效果。如果是标准的制式文件，建议使用模板功能生成模板ID进行合同流程的生成。
+注意事项：该接口需要依赖“多文件上传”接口生成pdf资源编号（FileIds）进行使用。
+     */
+    CreateFlowByFiles(req: CreateFlowByFilesRequest, cb?: (error: string, rep: CreateFlowByFilesResponse) => void): Promise<CreateFlowByFilesResponse>;
+    /**
      * 此接口（CancelMultiFlowSignQRCode）用于取消一码多扫二维码。该接口对传入的二维码ID，若还在有效期内，可以提前失效。
      */
     CancelMultiFlowSignQRCode(req: CancelMultiFlowSignQRCodeRequest, cb?: (error: string, rep: CancelMultiFlowSignQRCodeResponse) => void): Promise<CancelMultiFlowSignQRCodeResponse>;
@@ -101,12 +113,13 @@ export declare class Client extends AbstractClient {
      */
     DescribeFlowBriefs(req: DescribeFlowBriefsRequest, cb?: (error: string, rep: DescribeFlowBriefsResponse) => void): Promise<DescribeFlowBriefsResponse>;
     /**
-     * 此接口（CreateFlowByFiles）用来通过上传后的pdf资源编号来创建待签署的合同流程。
-适用场景1：适用非制式的合同文件签署。一般开发者自己有完整的签署文件，可以通过该接口传入完整的PDF文件及流程信息生成待签署的合同流程。
-适用场景2：可通过该接口传入制式合同文件，同时在指定位置添加签署控件。可以起到接口创建临时模板的效果。如果是标准的制式文件，建议使用模板功能生成模板ID进行合同流程的生成。
-注意事项：该接口需要依赖“多文件上传”接口生成pdf资源编号（FileIds）进行使用。
+     * 补充签署流程本企业签署人信息
+适用场景：在通过模版或者文件发起合同时，若未指定本企业签署人信息，则流程发起后，可以调用此接口补充签署人。
+同一签署人可以补充多个员工作为候选签署人,最终签署人取决于谁先领取合同完成签署。
+
+注：目前暂时只支持补充来源于企业微信的员工作为候选签署人
      */
-    CreateFlowByFiles(req: CreateFlowByFilesRequest, cb?: (error: string, rep: CreateFlowByFilesResponse) => void): Promise<CreateFlowByFilesResponse>;
+    CreateFlowApprovers(req: CreateFlowApproversRequest, cb?: (error: string, rep: CreateFlowApproversResponse) => void): Promise<CreateFlowApproversResponse>;
     /**
      * 此接口（UploadFiles）用于文件上传。
 适用场景：用于生成pdf资源编号（FileIds）来配合“用PDF创建流程”接口使用，使用场景可详见“用PDF创建流程”接口说明。

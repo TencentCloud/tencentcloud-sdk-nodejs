@@ -371,64 +371,26 @@ export interface SignQrCode {
     ExpiredTime: number;
 }
 /**
- * GetTaskResultApi请求参数结构体
+ * CreateFlowApprovers返回参数结构体
  */
-export interface GetTaskResultApiRequest {
+export interface CreateFlowApproversResponse {
     /**
-      * 任务Id，通过CreateConvertTaskApi得到
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    TaskId: string;
-    /**
-      * 操作人信息
-      */
-    Operator?: UserInfo;
-    /**
-      * 应用号信息
-      */
-    Agent?: Agent;
-    /**
-      * 暂未开放
-      */
-    Organization?: OrganizationInfo;
+    RequestId?: string;
 }
 /**
- * UploadFiles请求参数结构体
+ * DescribeFlowInfo请求参数结构体
  */
-export interface UploadFilesRequest {
+export interface DescribeFlowInfoRequest {
     /**
-      * 文件对应业务类型，用于区分文件存储路径：
-1. TEMPLATE - 模板； 文件类型：.pdf .doc .docx .html
-2. DOCUMENT - 签署过程及签署后的合同文档/图片控件 文件类型：.pdf/.jpg/.png
-3. SEAL - 印章； 文件类型：.jpg/.jpeg/.png
+      * 需要查询的流程ID列表，限制最大100个
       */
-    BusinessType: string;
+    FlowIds: Array<string>;
     /**
-      * 调用方信息
+      * 调用方用户信息
       */
-    Caller?: Caller;
-    /**
-      * 上传文件内容数组，最多支持20个文件
-      */
-    FileInfos?: Array<UploadFile>;
-    /**
-      * 上传文件链接数组，最多支持20个URL
-      */
-    FileUrls?: string;
-    /**
-      * 此参数只对 PDF 文件有效。是否将pdf灰色矩阵置白
-true--是，处理置白
-false--否，不处理
-      */
-    CoverRect?: boolean;
-    /**
-      * 文件类型， 默认通过文件内容解析得到文件类型，客户可以显示的说明上传文件的类型。
-如：PDF 表示上传的文件 xxx.pdf的文件类型是 PDF
-      */
-    FileType?: string;
-    /**
-      * 用户自定义ID数组，与上传文件一一对应
-      */
-    CustomIds?: Array<string>;
+    Operator?: UserInfo;
 }
 /**
  * CancelFlow请求参数结构体
@@ -644,13 +606,21 @@ HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证(格式同居民身份证)
       */
     PreReadTime?: number;
     /**
-      * 签署方经办人的用户ID,和签署方经办人姓名+手机号+证件必须有一个
+      * 签署方经办人的用户ID,和签署方经办人姓名+手机号+证件必须有一个。非企微场景不使用此字段
       */
     UserId?: string;
     /**
       * 当前只支持true，默认为true
       */
     Required?: boolean;
+    /**
+      * 签署人用户来源,企微侧用户请传入：WEWORKAPP
+      */
+    ApproverSource?: string;
+    /**
+      * 客户自定义签署人标识，64位长度，保证唯一。非企微场景不使用此字段
+      */
+    CustomApproverTag?: string;
 }
 /**
  * UploadFiles返回参数结构体
@@ -681,6 +651,46 @@ export interface DescribeThirdPartyAuthCodeResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 此结构体(FlowDetailInfo)描述的是合同(流程)的详细信息
+ */
+export interface FlowDetailInfo {
+    /**
+      * 合同(流程)的Id
+      */
+    FlowId: string;
+    /**
+      * 合同(流程)的名字
+      */
+    FlowName: string;
+    /**
+      * 合同(流程)的类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FlowType: string;
+    /**
+      * 合同(流程)的状态
+      */
+    FlowStatus: number;
+    /**
+      * 合同(流程)的信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FlowMessage: string;
+    /**
+      * 流程的描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FlowDescription: string;
+    /**
+      * 合同(流程)的创建时间戳
+      */
+    CreatedOn: number;
+    /**
+      * 合同(流程)的签署人数组
+      */
+    FlowApproverInfos: Array<FlowApproverDetail>;
 }
 /**
  * CreateFlowByFiles返回参数结构体
@@ -825,6 +835,25 @@ export interface UserInfo {
     ProxyIp?: string;
 }
 /**
+ * 补充签署人信息
+ */
+export interface FillApproverInfo {
+    /**
+      * 签署人签署Id
+      */
+    RecipientId: string;
+    /**
+      * 签署人来源
+WEWORKAPP: 企业微信
+      */
+    ApproverSource: string;
+    /**
+      * 企业自定义账号Id
+WEWORKAPP场景下指企业自有应用获取企微明文的userid
+      */
+    CustomUserId: string;
+}
+/**
  * 一码多扫签署二维码签署信息
  */
 export interface SignUrl {
@@ -950,6 +979,18 @@ HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证(格式同居民身份证)
       * 合同的强制预览时间：3~300s，未指定则按合同页数计算
       */
     PreReadTime?: number;
+    /**
+      * 签署人userId，非企微场景不使用此字段
+      */
+    UserId?: string;
+    /**
+      * 签署人用户来源,企微侧用户请传入：WEWORKAPP
+      */
+    ApproverSource?: string;
+    /**
+      * 客户自定义签署人标识，64位长度，保证唯一，非企微场景不使用此字段
+      */
+    CustomApproverTag?: string;
 }
 /**
  * CreateFlowSignReview返回参数结构体
@@ -1033,6 +1074,45 @@ export interface CreateBatchCancelFlowUrlResponse {
     RequestId?: string;
 }
 /**
+ * UploadFiles请求参数结构体
+ */
+export interface UploadFilesRequest {
+    /**
+      * 文件对应业务类型，用于区分文件存储路径：
+1. TEMPLATE - 模板； 文件类型：.pdf .doc .docx .html
+2. DOCUMENT - 签署过程及签署后的合同文档/图片控件 文件类型：.pdf/.jpg/.png
+3. SEAL - 印章； 文件类型：.jpg/.jpeg/.png
+      */
+    BusinessType: string;
+    /**
+      * 调用方信息
+      */
+    Caller?: Caller;
+    /**
+      * 上传文件内容数组，最多支持20个文件
+      */
+    FileInfos?: Array<UploadFile>;
+    /**
+      * 上传文件链接数组，最多支持20个URL
+      */
+    FileUrls?: string;
+    /**
+      * 此参数只对 PDF 文件有效。是否将pdf灰色矩阵置白
+true--是，处理置白
+false--否，不处理
+      */
+    CoverRect?: boolean;
+    /**
+      * 文件类型， 默认通过文件内容解析得到文件类型，客户可以显示的说明上传文件的类型。
+如：PDF 表示上传的文件 xxx.pdf的文件类型是 PDF
+      */
+    FileType?: string;
+    /**
+      * 用户自定义ID数组，与上传文件一一对应
+      */
+    CustomIds?: Array<string>;
+}
+/**
  * StartFlow返回参数结构体
  */
 export interface StartFlowResponse {
@@ -1044,6 +1124,27 @@ export interface StartFlowResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * GetTaskResultApi请求参数结构体
+ */
+export interface GetTaskResultApiRequest {
+    /**
+      * 任务Id，通过CreateConvertTaskApi得到
+      */
+    TaskId: string;
+    /**
+      * 操作人信息
+      */
+    Operator?: UserInfo;
+    /**
+      * 应用号信息
+      */
+    Agent?: Agent;
+    /**
+      * 暂未开放
+      */
+    Organization?: OrganizationInfo;
 }
 /**
  * 二期接口返回的模板中文件的信息结构
@@ -1192,6 +1293,19 @@ export interface CreateConvertTaskApiRequest {
       * 暂未开放
       */
     Organization?: OrganizationInfo;
+}
+/**
+ * DescribeFlowInfo返回参数结构体
+ */
+export interface DescribeFlowInfoResponse {
+    /**
+      * 签署流程信息
+      */
+    FlowDetailInfos: Array<FlowDetailInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * CreateSchemeUrl返回参数结构体
@@ -1347,6 +1461,70 @@ DYNAMIC_TABLE - 传入json格式的表格内容，具体见数据结构FlowInfo�
     ComponentName?: string;
 }
 /**
+ * 签署人详情信息
+ */
+export interface FlowApproverDetail {
+    /**
+      * 签署人信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ApproveMessage?: string;
+    /**
+      * 签署人名字
+      */
+    ApproveName: string;
+    /**
+      * 签署人的状态
+      */
+    ApproveStatus: number;
+    /**
+      * 模板配置时候的签署人id,与控件绑定
+      */
+    ReceiptId: string;
+    /**
+      * 客户自定义userId
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CustomUserId: string;
+    /**
+      * 签署人手机号
+      */
+    Mobile: string;
+    /**
+      * 签署顺序
+      */
+    SignOrder: number;
+    /**
+      * 签署人签署时间
+      */
+    ApproveTime: number;
+    /**
+      * 参与者类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ApproveType: string;
+    /**
+      * 签署人侧用户来源
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ApproverSource: string;
+    /**
+      * 客户自定义签署人标识
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CustomApproverTag: string;
+    /**
+      * 签署人企业Id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OrganizationId: string;
+    /**
+      * 签署人企业名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OrganizationName: string;
+}
+/**
  * DescribeFlowTemplates请求参数结构体
  */
 export interface DescribeFlowTemplatesRequest {
@@ -1415,6 +1593,23 @@ ProcessTimeout - 转换文件超时
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * CreateFlowApprovers请求参数结构体
+ */
+export interface CreateFlowApproversRequest {
+    /**
+      * 调用方用户信息，userId 必填
+      */
+    Operator: UserInfo;
+    /**
+      * 签署流程编号
+      */
+    FlowId: string;
+    /**
+      * 补充签署人信息
+      */
+    Approvers: Array<FillApproverInfo>;
 }
 /**
  * 流程信息摘要

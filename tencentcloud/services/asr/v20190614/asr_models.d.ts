@@ -171,7 +171,7 @@ export interface DescribeTaskStatusResponse {
  */
 export interface SentenceRecognitionRequest {
     /**
-      * 腾讯云项目 ID，可填 0，总长度不超过 1024 字节。
+      * 腾讯云项目 ID，废弃参数，默认填写0即可。
       */
     ProjectId: number;
     /**
@@ -189,7 +189,6 @@ export interface SentenceRecognitionRequest {
 • 16k_ca：16k 粤语；
 • 16k_ja：16k 日语；
 • 16k_zh_medical：16k 医疗；
-• 16k_zh_dialect：多方言，支持23种方言。
       */
     EngSerViceType: string;
     /**
@@ -201,7 +200,7 @@ export interface SentenceRecognitionRequest {
       */
     VoiceFormat: string;
     /**
-      * 用户端对此任务的唯一标识，用户自助生成，用于用户查找识别结果。
+      * 用户端对此任务的唯一标识。废弃参数，忽略即可。
       */
     UsrAudioKey: string;
     /**
@@ -217,9 +216,9 @@ export interface SentenceRecognitionRequest {
       */
     DataLen?: number;
     /**
-      * 热词id。用于调用对应的热词表，如果在调用语音识别服务时，不进行单独的热词id设置，自动生效默认热词；如果进行了单独的热词id设置，那么将生效单独设置的热词id。
+      * 是否显示词级别时间戳。0：不显示；1：显示，不包含标点时间戳，2：显示，包含标点时间戳。默认值为 0。
       */
-    HotwordId?: string;
+    WordInfo?: number;
     /**
       * 是否过滤脏词（目前支持中文普通话引擎）。0：不过滤脏词；1：过滤脏词；2：将脏词替换为 * 。默认值为 0。
       */
@@ -237,9 +236,13 @@ export interface SentenceRecognitionRequest {
       */
     ConvertNumMode?: number;
     /**
-      * 是否显示词级别时间戳。0：不显示；1：显示，不包含标点时间戳，2：显示，包含标点时间戳。默认值为 0。
+      * 热词id。用于调用对应的热词表，如果在调用语音识别服务时，不进行单独的热词id设置，自动生效默认热词；如果进行了单独的热词id设置，那么将生效单独设置的热词id。
       */
-    WordInfo?: number;
+    HotwordId?: string;
+    /**
+      * 自学习模型 id。如设置了该参数，将生效对应的自学习模型。
+      */
+    CustomizationId?: string;
 }
 /**
  * CloseAsyncRecognitionTask返回参数结构体
@@ -381,7 +384,6 @@ export interface CreateRecTaskRequest {
 • 16k_en_edu 英文教育；
 • 16k_zh_medical  医疗；
 • 16k_th 泰语；
-• 16k_zh_dialect：多方言，支持23种方言。
       */
     EngineModelType: string;
     /**

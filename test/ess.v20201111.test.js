@@ -28,6 +28,16 @@ it("ess.v20201111.DescribeFileUrls", async function () {
     }
 })
 
+it("ess.v20201111.DescribeFlowInfo", async function () {
+    try {
+       const data = await client.DescribeFlowInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ess.v20201111.StartFlow", async function () {
     try {
        const data = await client.StartFlow({})
@@ -108,6 +118,16 @@ it("ess.v20201111.CreateFlow", async function () {
     }
 })
 
+it("ess.v20201111.CreateFlowByFiles", async function () {
+    try {
+       const data = await client.CreateFlowByFiles({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ess.v20201111.CancelMultiFlowSignQRCode", async function () {
     try {
        const data = await client.CancelMultiFlowSignQRCode({})
@@ -178,9 +198,9 @@ it("ess.v20201111.DescribeFlowBriefs", async function () {
     }
 })
 
-it("ess.v20201111.CreateFlowByFiles", async function () {
+it("ess.v20201111.CreateFlowApprovers", async function () {
     try {
-       const data = await client.CreateFlowByFiles({})
+       const data = await client.CreateFlowApprovers({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

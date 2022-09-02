@@ -2347,7 +2347,7 @@ export interface InquirePriceCreateRequest {
   Zone: string
 
   /**
-   * 购买商品数量
+   * 购买计算节点个数
    */
   GoodsNum: number
 
