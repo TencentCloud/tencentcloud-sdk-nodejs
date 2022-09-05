@@ -16,6 +16,28 @@ export interface CreatePlanForZoneResponse {
     RequestId?: string;
 }
 /**
+ * 拦截页面的配置信息
+ */
+export interface DropPageDetail {
+    /**
+      * 拦截页面的唯一Id。系统默认包含一个自带拦截页面，Id值为0。
+该Id可通过创建拦截页面接口进行上传获取。如传入0，代表使用系统默认拦截页面
+      */
+    PageId: number;
+    /**
+      * 拦截页面的HTTP状态码。状态码范围是 100 - 600。
+      */
+    StatusCode: number;
+    /**
+      * 页面的元信息，文件名或url。
+      */
+    Name?: string;
+    /**
+      * 页面的类型。
+      */
+    Type?: string;
+}
+/**
  * 智能压缩配置
  */
 export interface Compression {
@@ -77,62 +99,74 @@ export interface DeleteRulesRequest {
  */
 export interface ACLUserRule {
     /**
-      * 规则名
+      * 规则名。
       */
     RuleName: string;
     /**
-      * 动作
+      * 处罚动作。
+1. trans 放行
+2. drop 拦截
+3. monitor 观察
+4. ban IP封禁
+5. redirect 重定向
+6. page 指定页面
+7. alg Javascript挑战
       */
     Action: string;
     /**
-      * 状态
+      * 规则状态。
+1. on 规则生效
+2. off 规则失效
       */
     RuleStatus: string;
     /**
-      * ACL规则
+      * ACL规则。
       */
     Conditions: Array<ACLCondition>;
     /**
-      * 规则优先级
+      * 规则优先级，0-100。
       */
     RulePriority: number;
     /**
-      * 规则id
+      * 规则id。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     RuleID?: number;
     /**
-      * 更新时间
+      * 更新时间。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     UpdateTime?: string;
     /**
-      * ip封禁的惩罚时间
+      * ip封禁的惩罚时间，0-2天
 注意：此字段可能返回 null，表示取不到有效值。
       */
     PunishTime?: number;
     /**
-      * ip封禁的惩罚时间单位
+      * ip封禁的惩罚时间单位。
+1. second 秒
+2. 分钟 minutes
+3. hour 小时
 注意：此字段可能返回 null，表示取不到有效值。
       */
     PunishTimeUnit?: string;
     /**
-      * 自定义返回页面的名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Name?: string;
-    /**
-      * 自定义返回页面的实例id
+      * 自定义返回页面的实例id。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     PageId?: number;
     /**
-      * 重定向时候的地址，必须为本用户接入的站点子域名
+      * 自定义返回页面的名称。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Name?: string;
+    /**
+      * 重定向时候的地址，必须为本用户接入的站点子域名。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     RedirectUrl?: string;
     /**
-      * 重定向时候的返回码
+      * 重定向时候的返回码。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ResponseCode?: number;
@@ -389,12 +423,18 @@ export interface DescribeZonesRequest {
  */
 export interface RateLimitTemplate {
     /**
-      * 模板名称
+      * 模板等级名称。
+1. sup_loose 自适应 - 超级宽松
+2. loose     自适应 - 宽松
+3. emergency 自适应 - 紧急
+4. normal    自适应 - 适中
+5. strict    固定阈值 - 严格
+6. close     关闭 - 仅精准速率限制生效
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Mode?: string;
     /**
-      * 模板值详情
+      * 模板值详情。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Detail?: RateLimitTemplateDetail;
@@ -667,19 +707,117 @@ export interface DescribeZoneSettingRequest {
     ZoneId: string;
 }
 /**
- * ModifyZoneStatus请求参数结构体
+ * 例外规则生效的具体条件
  */
-export interface ModifyZoneStatusRequest {
+export interface ExceptUserRuleCondition {
     /**
-      * 站点 ID
+      * 匹配项。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Id: string;
+    MatchFrom?: string;
     /**
-      * 站点状态
-- false 开启站点
-- true 关闭站点
+      * 匹配项的参数。当 MatchFrom 为 header 时，可以填入 header 的 key 作为参数。
       */
-    Paused: boolean;
+    MatchParam?: string;
+    /**
+      * 匹配操作符。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Operator?: string;
+    /**
+      * 匹配值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MatchContent?: string;
+}
+/**
+ * ModifyZoneSetting请求参数结构体
+ */
+export interface ModifyZoneSettingRequest {
+    /**
+      * 待变更的站点ID。
+      */
+    ZoneId: string;
+    /**
+      * 缓存过期时间配置。
+不填写表示保持原有配置。
+      */
+    Cache?: CacheConfig;
+    /**
+      * 节点缓存键配置。
+不填写表示保持原有配置。
+      */
+    CacheKey?: CacheKey;
+    /**
+      * 浏览器缓存配置。
+不填写表示保持原有配置。
+      */
+    MaxAge?: MaxAge;
+    /**
+      * 离线缓存配置。
+不填写表示保持原有配置。
+      */
+    OfflineCache?: OfflineCache;
+    /**
+      * Quic访问配置。
+不填写表示保持原有配置。
+      */
+    Quic?: Quic;
+    /**
+      * Post请求传输配置。
+不填写表示保持原有配置。
+      */
+    PostMaxSize?: PostMaxSize;
+    /**
+      * 智能压缩配置。
+不填写表示保持原有配置。
+      */
+    Compression?: Compression;
+    /**
+      * Http2回源配置。
+不填写表示保持原有配置。
+      */
+    UpstreamHttp2?: UpstreamHttp2;
+    /**
+      * 访问协议强制Https跳转配置。
+不填写表示保持原有配置。
+      */
+    ForceRedirect?: ForceRedirect;
+    /**
+      * Https加速配置。
+不填写表示保持原有配置。
+      */
+    Https?: Https;
+    /**
+      * 源站配置。
+不填写表示保持原有配置。
+      */
+    Origin?: Origin;
+    /**
+      * 智能加速配置。
+不填写表示保持原有配置。
+      */
+    SmartRouting?: SmartRouting;
+    /**
+      * WebSocket配置。
+不填写表示保持原有配置。
+      */
+    WebSocket?: WebSocket;
+    /**
+      * 客户端IP回源请求头配置。
+不填写表示保持原有配置。
+      */
+    ClientIpHeader?: ClientIp;
+    /**
+      * 缓存预刷新配置。
+不填写表示保持原有配置。
+      */
+    CachePrefresh?: CachePrefresh;
+    /**
+      * Ipv6访问配置。
+不填写表示保持原有配置。
+      */
+    Ipv6?: Ipv6Access;
 }
 /**
  * ModifyDnsRecord请求参数结构体
@@ -857,93 +995,17 @@ export interface ModifyDnssecRequest {
     Status: string;
 }
 /**
- * ModifyZoneSetting请求参数结构体
+ * ModifyApplicationProxy返回参数结构体
  */
-export interface ModifyZoneSettingRequest {
+export interface ModifyApplicationProxyResponse {
     /**
-      * 待变更的站点ID。
+      * 代理ID。
       */
-    ZoneId: string;
+    ProxyId: string;
     /**
-      * 缓存过期时间配置。
-不填写表示保持原有配置。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Cache?: CacheConfig;
-    /**
-      * 节点缓存键配置。
-不填写表示保持原有配置。
-      */
-    CacheKey?: CacheKey;
-    /**
-      * 浏览器缓存配置。
-不填写表示保持原有配置。
-      */
-    MaxAge?: MaxAge;
-    /**
-      * 离线缓存配置。
-不填写表示保持原有配置。
-      */
-    OfflineCache?: OfflineCache;
-    /**
-      * Quic访问配置。
-不填写表示保持原有配置。
-      */
-    Quic?: Quic;
-    /**
-      * Post请求传输配置。
-不填写表示保持原有配置。
-      */
-    PostMaxSize?: PostMaxSize;
-    /**
-      * 智能压缩配置。
-不填写表示保持原有配置。
-      */
-    Compression?: Compression;
-    /**
-      * Http2回源配置。
-不填写表示保持原有配置。
-      */
-    UpstreamHttp2?: UpstreamHttp2;
-    /**
-      * 访问协议强制Https跳转配置。
-不填写表示保持原有配置。
-      */
-    ForceRedirect?: ForceRedirect;
-    /**
-      * Https加速配置。
-不填写表示保持原有配置。
-      */
-    Https?: Https;
-    /**
-      * 源站配置。
-不填写表示保持原有配置。
-      */
-    Origin?: Origin;
-    /**
-      * 智能加速配置。
-不填写表示保持原有配置。
-      */
-    SmartRouting?: SmartRouting;
-    /**
-      * WebSocket配置。
-不填写表示保持原有配置。
-      */
-    WebSocket?: WebSocket;
-    /**
-      * 客户端IP回源请求头配置。
-不填写表示保持原有配置。
-      */
-    ClientIpHeader?: ClientIp;
-    /**
-      * 缓存预刷新配置。
-不填写表示保持原有配置。
-      */
-    CachePrefresh?: CachePrefresh;
-    /**
-      * Ipv6访问配置。
-不填写表示保持原有配置。
-      */
-    Ipv6?: Ipv6Access;
+    RequestId?: string;
 }
 /**
  * ddos特征过滤
@@ -1221,6 +1283,19 @@ export interface BotLog {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Label: string;
+}
+/**
+ * 例外规则的生效范围
+ */
+export interface ExceptUserRuleScope {
+    /**
+      * 生效的模块
+
+1. waf Waf防护
+2. bot Bot防护
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Modules?: Array<string>;
 }
 /**
  * 源站配置。
@@ -1822,20 +1897,22 @@ export interface ModifyHostsCertificateResponse {
  */
 export interface RateLimitConfig {
     /**
-      * 开关
+      * 开关。
+1. on 开启RateLimit；
+2. off 关闭RateLimit
       */
     Switch: string;
     /**
-      * 用户规则
+      * 速率限制-用户规则列表。
       */
     UserRules: Array<RateLimitUserRule>;
     /**
-      * 默认模板
+      * 速率限制模板功能。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Template?: RateLimitTemplate;
     /**
-      * 智能客户端过滤
+      * 智能客户端过滤。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Intelligence?: RateLimitIntelligence;
@@ -1874,31 +1951,38 @@ export interface CreateDnsRecordRequest {
     Priority?: number;
 }
 /**
- * IP黑白名单详细规则
+ * 详细规则。
  */
 export interface IpTableRule {
     /**
-      * 动作: drop拦截，trans放行，monitor观察
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Action?: string;
-    /**
-      * 根据类型匹配：ip(根据ip), area(根据区域)
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    MatchFrom?: string;
-    /**
-      * 匹配内容
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    MatchContent?: string;
-    /**
-      * 规则id
+      * 规则ID。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     RuleID?: number;
     /**
-      * 更新时间
+      * 处置动作。
+1. drop 拦截
+2. trans放行
+3. monitor观察
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Action?: string;
+    /**
+      * 类型匹配。
+1. ip 根据ip
+2. area 根据区域
+3. ua 根据User-Agent
+4. referer 根据Referer
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MatchFrom?: string;
+    /**
+      * 匹配内容。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MatchContent?: string;
+    /**
+      * 更新时间。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     UpdateTime?: string;
@@ -2338,11 +2422,13 @@ export interface DDoSStatusInfo {
  */
 export interface AclConfig {
     /**
-      * 开关
+      * 开关。
+1. on 开启
+2. off 关闭
       */
     Switch: string;
     /**
-      * ACL用户规则
+      * 自定义-用户规则。
       */
     UserRules: Array<ACLUserRule>;
 }
@@ -2396,62 +2482,77 @@ export interface ScanDnsRecordsResponse {
     RequestId?: string;
 }
 /**
- * 模板当前详细配置
+ * 模板当前详细配置。
  */
 export interface RateLimitTemplateDetail {
     /**
-      * 模板名称
+      * 模板等级名称。
+1. sup_loose 自适应 - 超级宽松
+2. loose     自适应 - 宽松
+3. emergency 自适应 - 紧急
+4. normal    自适应 - 适中
+5. strict    固定阈值 - 严格
+6. close     关闭 - 仅精准速率限制生效
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Mode?: string;
     /**
-      * 唯一id
+      * 唯一id。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ID?: number;
     /**
-      * 处置动作
+      * 处置动作。模板阀值触发后的处罚行为。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Action?: string;
     /**
-      * 惩罚时间，秒
+      * 惩罚时间，单位是秒。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     PunishTime?: number;
     /**
-      * 阈值
+      * 阈值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Threshold?: number;
     /**
-      * 统计周期
+      * 统计周期。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Period?: number;
 }
 /**
- * 门神配置
+ * Waf配置。
  */
 export interface WafConfig {
     /**
-      * 开关
+      * WafConfig开关，取值有：
+<li> on：开启；</li>
+<li> off：关闭。</li>开关仅与配置是否生效有关，即使为off（关闭），也可以正常修改配置的内容。
       */
     Switch: string;
     /**
-      * 防护级别，loose/normal/strict/stricter/custom
+      * 防护级别，取值有：
+<li> loose：宽松；</li>
+<li> normal：正常；</li>
+<li> strict：严格；</li>
+<li> stricter：超严格；</li>
+<li> custom：自定义。</li>
       */
     Level: string;
     /**
-      * 模式 block-阻断；observe-观察模式；close-关闭
+      * 全局WAF模式，取值有：
+<li> block：阻断（全局阻断，但可对详细规则配置观察）；</li>
+<li> observe：观察（无论详细规则配置什么，都为观察）。</li>
       */
     Mode: string;
     /**
-      * 托管规则黑白名单
+      * 托管规则详细配置。
       */
     WafRules: WafRule;
     /**
-      * AI规则引擎防护
+      * AI规则引擎防护配置。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     AiRule?: AiRule;
@@ -3059,7 +3160,9 @@ l7Flow_outBandwidth: 访问带宽
  */
 export interface SwitchConfig {
     /**
-      * Web类型的安全总开关：Web基础防护，自定义规则，速率限制
+      * Web类型的安全总开关生效范围，Waf，自定义规则，速率限制。
+1. on 开启
+2. off 关闭
       */
     WebSwitch: string;
 }
@@ -3286,44 +3389,54 @@ proxied: 开启代理
     RequestId?: string;
 }
 /**
- * 安全配置
+ * 安全配置。
  */
 export interface SecurityConfig {
     /**
-      * 门神配置
+      * 托管规则。如果为null，默认使用历史配置。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     WafConfig?: WafConfig;
     /**
-      * RateLimit配置
+      * 速率限制。如果为null，默认使用历史配置。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     RateLimitConfig?: RateLimitConfig;
     /**
-      * DDoS配置
+      * DDoS配置。如果为null，默认使用历史配置。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     DdosConfig?: DDoSConfig;
     /**
-      * ACL配置
+      * 自定义规则。如果为null，默认使用历史配置。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     AclConfig?: AclConfig;
     /**
-      * Bot配置
+      * Bot配置。如果为null，默认使用历史配置。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     BotConfig?: BotConfig;
     /**
-      * 总开关
+      * 七层防护总开关。如果为null，默认使用历史配置。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     SwitchConfig?: SwitchConfig;
     /**
-      * IP黑白名单
+      * 基础访问管控。如果为null，默认使用历史配置。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     IpTableConfig?: IpTableConfig;
+    /**
+      * 例外规则配置。如果为null，默认使用历史配置。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ExceptConfig?: ExceptConfig;
+    /**
+      * 自定义拦截页面配置。如果为null，默认使用历史配置。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DropPageConfig?: DropPageConfig;
 }
 /**
  * 主攻击对象Data
@@ -3702,15 +3815,15 @@ export interface CreatePrefetchTaskResponse {
  */
 export interface WafRule {
     /**
-      * 黑名单，ID参考接口 DescribeSecurityPolicyManagedRules
-      */
-    BlockRuleIDs: Array<number>;
-    /**
-      * 托管规则 开关
+      * 托管规则开关。 on为开启
       */
     Switch: string;
     /**
-      * 观察模式，ID参考接口 DescribeSecurityPolicyManagedRules
+      * 黑名单ID列表，将规则ID加入本参数列表中代表该ID关闭，即该规则ID不再生效。ID参考接口 [DescribeSecurityPolicyManagedRules](https://tcloud4api.woa.com/document/product/1657/76030?!preview&!document=1)。
+      */
+    BlockRuleIDs: Array<number>;
+    /**
+      * 观察模式ID列表，将规则ID加入本参数列表中代表该ID使用观察模式生效，即该规则ID进入观察模式。ID参考接口 [DescribeSecurityPolicyManagedRules](https://tcloud4api.woa.com/document/product/1657/76030?!preview&!document=1)。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ObserveRuleIDs?: Array<number>;
@@ -4412,53 +4525,61 @@ offline：已关闭
  */
 export interface RateLimitUserRule {
     /**
-      * RateLimit统计阈值
+      * RateLimit统计阈值，单位是次，取值范围0-4294967294。
       */
     Threshold: number;
     /**
-      * RateLimit统计时间
+      * RateLimit统计时间，取值范围 10/20/30/40/50/60 单位是秒。
       */
     Period: number;
     /**
-      * 规则名
+      * 规则名，只能以英文字符，数字，下划线组合，且不能以下划线开头。
       */
     RuleName: string;
     /**
-      * 动作：monitor(观察), drop(拦截)
+      * 处置动作。
+1. monitor(观察)；
+2. drop(拦截)；
+3. alg(Javascript挑战)
       */
     Action: string;
     /**
-      * 惩罚时长
+      * 惩罚时长，0-100。
       */
     PunishTime: number;
     /**
-      * 处罚时长单位，second
+      * 处罚时长单位。
+1. second 秒;
+2. minutes 分钟
+3. hour 小时
       */
     PunishTimeUnit: string;
     /**
-      * 规则状态
+      * 规则状态。
+1. on 生效
+2. off 不生效
       */
     RuleStatus: string;
     /**
-      * 规则
+      * 规则。
       */
     Conditions: Array<ACLCondition>;
     /**
-      * 规则权重
+      * 规则权重，取值范围0-100。
       */
     RulePriority: number;
     /**
-      * 规则id
+      * 规则id。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     RuleID?: number;
     /**
-      * 过滤词
+      * 过滤词。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     FreqFields?: Array<string>;
     /**
-      * 更新时间
+      * 更新时间.
 注意：此字段可能返回 null，表示取不到有效值。
       */
     UpdateTime?: string;
@@ -4571,35 +4692,47 @@ export interface PortraitManagedRuleDetail {
  */
 export interface BotPortraitRule {
     /**
-      * 本规则的id
+      * 本功能的开关。
+1. on 开启
+2. off 关闭
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Switch?: string;
+    /**
+      * 本规则的ID。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     RuleID?: number;
     /**
-      * JS挑战的规则ID
+      * JS挑战的规则ID。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     AlgManagedIds?: Array<number>;
     /**
-      * 数字验证码的规则ID
+      * 数字验证码的规则ID。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     CapManagedIds?: Array<number>;
     /**
-      * 观察的规则ID
+      * 观察的规则ID。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     MonManagedIds?: Array<number>;
     /**
-      * 拦截的规则ID
+      * 拦截的规则ID。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     DropManagedIds?: Array<number>;
     /**
-      * 本功能的开关
+      * 保留。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Switch?: string;
+    ManagedIds?: Array<number>;
+    /**
+      * 保留。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TransManagedIds?: Array<number>;
 }
 /**
  * DescribeWebProtectionAttackEvents请求参数结构体
@@ -4984,6 +5117,54 @@ export interface DescribeDDosAttackTopDataRequest {
     Area?: string;
 }
 /**
+ * 例外规则的配置，包含生效的条件，生效的范围
+ */
+export interface ExceptUserRule {
+    /**
+      * 规则ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RuleID?: number;
+    /**
+      * 规则名称。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RuleName?: string;
+    /**
+      * 规则的处置方式。
+1. skip 跳过
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Action?: string;
+    /**
+      * 规则生效状态。
+1. on 生效
+2. off 失效
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RuleStatus?: string;
+    /**
+      * 更新时间。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UpdateTime?: string;
+    /**
+      * 匹配条件。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Conditions?: Array<ExceptUserRuleCondition>;
+    /**
+      * 规则生效的范围。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Scope?: ExceptUserRuleScope;
+    /**
+      * 优先级。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RulePriority?: number;
+}
+/**
  * CreateApplicationProxyRule返回参数结构体
  */
 export interface CreateApplicationProxyRuleResponse {
@@ -5265,12 +5446,21 @@ export interface DescribeTopL7AnalysisDataResponse {
  */
 export interface IntelligenceRuleItem {
     /**
-      * 恶意BOT
+      * 智能分析标签。
+1. evil_bot 恶意
+2. suspect_bot 疑似恶意
+3. good_bot 好的
+4. normal 正常
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Label?: string;
     /**
-      * 动作
+      * 触发智能分析标签对应的处置方式。
+1. drop 拦截
+2. trans 放行
+3. monitor 监控
+4. alg Javascript挑战
+5. captcha 数字验证码
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Action?: string;
@@ -5280,12 +5470,14 @@ export interface IntelligenceRuleItem {
  */
 export interface IntelligenceRule {
     /**
-      * 开关
+      * 开关。
+1. on 开启
+2. off 关闭
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Switch?: string;
     /**
-      * 规则详情
+      * 规则详情。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Items?: Array<IntelligenceRuleItem>;
@@ -5779,17 +5971,21 @@ export interface ApplicationProxy {
     BanStatus: string;
 }
 /**
- * ModifyApplicationProxy返回参数结构体
+ * 例外规则，用于配置需要跳过特定场景的规则
  */
-export interface ModifyApplicationProxyResponse {
+export interface ExceptConfig {
     /**
-      * 代理ID。
+      * 开关。
+1. on 开启
+2. off 关闭
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    ProxyId: string;
+    Switch?: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 例外规则详情。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    RequestId?: string;
+    UserRules?: Array<ExceptUserRule>;
 }
 /**
  * DescribeDDoSPolicy返回参数结构体
@@ -5925,27 +6121,33 @@ export interface DescribeApplicationProxyDetailRequest {
  */
 export interface RateLimitIntelligence {
     /**
-      * 功能开关
+      * 功能开关。
+1. on 开启
+2. off 关闭
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Switch?: string;
     /**
-      * 执行动作 monitor(观察), alg(挑战)
+      * 执行动作
+1. monitor(观察)
+2. alg(挑战)
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Action?: string;
 }
 /**
- * IP黑白名单及IP区域控制配置
+ * 基础管控规则配置。
  */
 export interface IpTableConfig {
     /**
-      * 开关
+      * 开关。
+1. on 开启
+2. off 关闭
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Switch?: string;
     /**
-      * []
+      * 基础管控规则。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Rules?: Array<IpTableRule>;
@@ -6003,6 +6205,27 @@ export interface RuleAndConditions {
       * 规则引擎条件，该数组内所有项全部满足即判断该条件满足。
       */
     Conditions: Array<RuleCondition>;
+}
+/**
+ * 拦截页面的总体配置，用于配置各个模块的拦截后行为。
+ */
+export interface DropPageConfig {
+    /**
+      * 配置开关。
+1. on 开启
+2. off 关闭
+      */
+    Switch: string;
+    /**
+      * Waf(托管规则)模块的拦截页面配置。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Waf: DropPageDetail;
+    /**
+      * 自定义页面的拦截页面配置。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Acl: DropPageDetail;
 }
 /**
  * DescribeDDosAttackSourceEvent返回参数结构体
@@ -6063,6 +6286,21 @@ export interface SecEntry {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Value: Array<SecEntryValue>;
+}
+/**
+ * ModifyZoneStatus请求参数结构体
+ */
+export interface ModifyZoneStatusRequest {
+    /**
+      * 站点 ID
+      */
+    Id: string;
+    /**
+      * 站点状态
+- false 开启站点
+- true 关闭站点
+      */
+    Paused: boolean;
 }
 /**
  * DescribeDDosMajorAttackEvent请求参数结构体
@@ -6267,73 +6505,77 @@ export interface DeleteZoneRequest {
  */
 export interface BotManagedRule {
     /**
-      * 想开启的规则id
+      * 本规则的ID。
+      */
+    RuleID: number;
+    /**
+      * 老版本的通用规则ID。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ManagedIds: Array<number>;
     /**
-      * 本规则的id
-      */
-    RuleID: number;
-    /**
-      * drop/trans/monitor/alg
+      * 触发规则后的处置方式。
+1. drop 拦截
+2. trans 放行
+3. monitor 观察
+4. alg Javascript挑战
       */
     Action?: string;
     /**
-      * ip封禁的惩罚时间
+      * 封禁的惩罚时间。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     PunishTime?: number;
     /**
-      * 单位
+      * 封禁的惩罚时间单位。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     PunishTimeUnit?: string;
     /**
-      * 自定义返回页面的名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Name?: string;
-    /**
-      * 自定义返回页面的实例id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    PageId?: number;
-    /**
-      * 重定向时候的地址，必须为本用户接入的站点子域名，使用URLENCODE
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    RedirectUrl?: string;
-    /**
-      * 重定向时候的返回码
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ResponseCode?: number;
-    /**
-      * 放行的规则ID
+      * 放行的规则ID。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     TransManagedIds?: Array<number>;
     /**
-      * JS挑战的规则ID
+      * JS挑战的规则ID。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     AlgManagedIds?: Array<number>;
     /**
-      * 数字验证码的规则ID
+      * 数字验证码的规则ID。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     CapManagedIds?: Array<number>;
     /**
-      * 观察的规则ID
+      * 观察的规则ID。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     MonManagedIds?: Array<number>;
     /**
-      * 拦截的规则ID
+      * 拦截的规则ID。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     DropManagedIds?: Array<number>;
+    /**
+      * 自定义返回页面的实例id。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PageId?: number;
+    /**
+      * 自定义返回页面的名称。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Name?: string;
+    /**
+      * 重定向时候的地址，必须为本用户接入的站点子域名，使用URLENCODE。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RedirectUrl?: string;
+    /**
+      * 重定向时候的返回码。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ResponseCode?: number;
 }
 /**
  * ModifyDefaultCertificate返回参数结构体
@@ -6554,8 +6796,10 @@ export interface DescribeZoneSettingResponse {
  */
 export interface AiRule {
     /**
-      * smart_status_close-关闭；smart_status_open-拦截处置；
-smart_status_observe-观察处置
+      * AI规则引擎状态，取值有：
+<li> smart_status_close：关闭；</li>
+<li> smart_status_open：拦截处置；</li>
+<li> smart_status_observe：观察处置。</li>
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Mode?: string;
@@ -8580,27 +8824,29 @@ export interface Sv {
  */
 export interface BotConfig {
     /**
-      * bot开关
+      * 开关。
+1. on 开启
+2. off 关闭
       */
     Switch?: string;
     /**
-      * 预置规则
+      * 通用详细基础规则。
       */
     ManagedRule?: BotManagedRule;
     /**
-      * 保留
+      * ua基础规则。
       */
     UaBotRule?: BotManagedRule;
     /**
-      * 保留
+      * isp基础规则。
       */
     IspBotRule?: BotManagedRule;
     /**
-      * 用户画像规则
+      * 用户画像规则。
       */
     PortraitRule?: BotPortraitRule;
     /**
-      * Bot智能分析
+      * Bot智能分析。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     IntelligenceRule?: IntelligenceRule;

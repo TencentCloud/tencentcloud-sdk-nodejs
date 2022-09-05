@@ -482,7 +482,7 @@ export interface DescribeProjectsResponse {
 export interface UnTagResourcesRequest {
   /**
       * 资源六段式列表。腾讯云使用资源六段式描述一个资源。可参考[访问管理](https://cloud.tencent.com/document/product/598/67350)-概览-接口列表-资源六段式信息
-例如：ResourceList.1 = qcs::${ServiceType}:${Region}:${Account}:${ResourcePreifx}/${ResourceId}。
+例如：ResourceList.1 = qcs::${ServiceType}:${Region}:uin/${Account}:${ResourcePrefix}/${ResourceId}。
 N取值范围：0~9
       */
   ResourceList: Array<string>
@@ -1401,7 +1401,7 @@ export interface DescribeResourcesByTagsRequest {
 export interface TagResourcesRequest {
   /**
       * 资源六段式列表。腾讯云使用资源六段式描述一个资源。可参考[访问管理](https://cloud.tencent.com/document/product/598/67350)-概览-接口列表-资源六段式信息
-例如：ResourceList.1 = qcs::${ServiceType}:${Region}:${Account}:${ResourcePreifx}/${ResourceId}。
+例如：ResourceList.1 = qcs::${ServiceType}:${Region}:uin/${Account}:${ResourcePrefix}/${ResourceId}。
 N取值范围：0~9
       */
   ResourceList: Array<string>

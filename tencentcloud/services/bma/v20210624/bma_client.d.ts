@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CreateCRUserVerifyRequest, CreateBPFalseTicketResponse, DescribeCRWorkInfoResponse, CreateCRRightResponse, CreateCRWorkResponse, CreateCRRightRequest, CreateBPOfflineTicketResponse, DescribeBPFakeURLsRequest, ModifyCRBlockStatusResponse, ModifyCRObtainStatusRequest, DescribeCRWorkInfoRequest, ModifyBPOfflineAttachmentRequest, DescribeBPFakeURLsResponse, CreateBPOfflineAttachmentResponse, DescribeBPReportFakeURLsRequest, CreateBPFakeURLRequest, CreateBPProtectURLsResponse, DescribeBPProtectURLsResponse, DescribeCRMonitorsResponse, CreateCRCompanyVerifyResponse, CreateBPOfflineAttachmentRequest, CreateBPProtectURLsRequest, UpdateCRWorkResponse, ModifyCRBlockStatusRequest, ModifyCRMonitorRequest, DescribeCRMonitorDetailResponse, CreateCRWorkRequest, DescribeBPCompanyInfoRequest, DescribeBPReportFakeURLsResponse, DescribeCRMonitorDetailRequest, CreateCRBlockResponse, ModifyCRRightStatusRequest, DescribeCRMonitorsRequest, UpdateCRWorkRequest, CreateBPOfflineTicketRequest, CreateCRUserVerifyResponse, ModifyCRRightStatusResponse, DescribeBPCompanyInfoResponse, ModifyBPOfflineAttachmentResponse, CreateCRBlockRequest, CreateBPFakeURLResponse, CreateBPFalseTicketRequest, ModifyCRMonitorResponse, DescribeBPProtectURLsRequest, ModifyCRObtainStatusResponse, CreateCRCompanyVerifyRequest } from "./bma_models";
+import { ModifyCRWhiteListRequest, CreateCRUserVerifyRequest, CreateBPFalseTicketResponse, CreateCRRightFileRequest, CreateCRRightResponse, CreateCRWorkResponse, CreateCRRightRequest, CreateBPOfflineTicketResponse, CreateCRTortRequest, UpdateCRWorkRequest, DescribeBPFakeURLsRequest, ModifyCRBlockStatusResponse, ModifyCRObtainStatusRequest, DescribeCRWorkInfoRequest, ModifyBPOfflineAttachmentRequest, DescribeBPFakeURLsResponse, CreateBPOfflineAttachmentResponse, DescribeBPReportFakeURLsRequest, CreateBPFakeURLRequest, CreateBPProtectURLsResponse, DescribeBPProtectURLsResponse, DescribeCRMonitorsResponse, CreateCRCompanyVerifyResponse, CreateBPOfflineAttachmentRequest, CreateBPProtectURLsRequest, UpdateCRWorkResponse, ModifyCRBlockStatusRequest, ModifyCRMonitorRequest, DescribeCRMonitorDetailResponse, CreateCRWorkRequest, DescribeBPCompanyInfoRequest, DescribeBPReportFakeURLsResponse, DescribeCRMonitorDetailRequest, CreateCRBlockResponse, ModifyCRRightStatusRequest, DescribeCRMonitorsRequest, DescribeCRWorkInfoResponse, CreateCRRightFileResponse, ModifyCRWhiteListResponse, CreateBPOfflineTicketRequest, CreateCRUserVerifyResponse, ModifyCRRightStatusResponse, DescribeBPCompanyInfoResponse, ModifyBPOfflineAttachmentResponse, CreateCRBlockRequest, CreateBPFakeURLResponse, CreateCRTortResponse, CreateBPFalseTicketRequest, ModifyCRMonitorResponse, DescribeBPProtectURLsRequest, ModifyCRObtainStatusResponse, CreateCRCompanyVerifyRequest } from "./bma_models";
 /**
  * bma client
  * @class
@@ -56,6 +56,14 @@ export declare class Client extends AbstractClient {
      */
     CreateBPFakeURL(req: CreateBPFakeURLRequest, cb?: (error: string, rep: CreateBPFakeURLResponse) => void): Promise<CreateBPFakeURLResponse>;
     /**
+     * 新增权属文件
+     */
+    CreateCRRightFile(req: CreateCRRightFileRequest, cb?: (error: string, rep: CreateCRRightFileResponse) => void): Promise<CreateCRRightFileResponse>;
+    /**
+     * 版权保护-白名单修改接口
+     */
+    ModifyCRWhiteList(req: ModifyCRWhiteListRequest, cb?: (error: string, rep: ModifyCRWhiteListResponse) => void): Promise<ModifyCRWhiteListResponse>;
+    /**
      * 版权保护-拦截申请接口
      */
     ModifyCRBlockStatus(req: ModifyCRBlockStatusRequest, cb?: (error: string, rep: ModifyCRBlockStatusResponse) => void): Promise<ModifyCRBlockStatusResponse>;
@@ -71,6 +79,10 @@ export declare class Client extends AbstractClient {
      * 查询举报列表
      */
     DescribeBPReportFakeURLs(req: DescribeBPReportFakeURLsRequest, cb?: (error: string, rep: DescribeBPReportFakeURLsResponse) => void): Promise<DescribeBPReportFakeURLsResponse>;
+    /**
+     * 查询仿冒链接
+     */
+    DescribeBPFakeURLs(req: DescribeBPFakeURLsRequest, cb?: (error: string, rep: DescribeBPFakeURLsResponse) => void): Promise<DescribeBPFakeURLsResponse>;
     /**
      * 查询作品基本信息
      */
@@ -92,9 +104,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeBPProtectURLs(req: DescribeBPProtectURLsRequest, cb?: (error: string, rep: DescribeBPProtectURLsResponse) => void): Promise<DescribeBPProtectURLsResponse>;
     /**
-     * 查询仿冒链接
+     * 举报侵权链接
      */
-    DescribeBPFakeURLs(req: DescribeBPFakeURLsRequest, cb?: (error: string, rep: DescribeBPFakeURLsResponse) => void): Promise<DescribeBPFakeURLsResponse>;
+    CreateCRTort(req: CreateCRTortRequest, cb?: (error: string, rep: CreateCRTortResponse) => void): Promise<CreateCRTortResponse>;
     /**
      * 品牌经营管家-版权保护模块企业认证接口
      */

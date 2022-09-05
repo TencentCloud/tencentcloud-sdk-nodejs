@@ -19,13 +19,16 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   ProtectURLInfo,
+  ModifyCRWhiteListRequest,
   CreateCRUserVerifyRequest,
   CreateBPFalseTicketResponse,
-  DescribeCRWorkInfoResponse,
+  CreateCRRightFileRequest,
   CreateCRRightResponse,
   CreateCRWorkResponse,
   CreateCRRightRequest,
   CreateBPOfflineTicketResponse,
+  CreateCRTortRequest,
+  UpdateCRWorkRequest,
   DescribeBPFakeURLsRequest,
   ModifyCRBlockStatusResponse,
   Monitor,
@@ -56,7 +59,9 @@ import {
   CreateCRBlockResponse,
   ModifyCRRightStatusRequest,
   DescribeCRMonitorsRequest,
-  UpdateCRWorkRequest,
+  DescribeCRWorkInfoResponse,
+  CreateCRRightFileResponse,
+  ModifyCRWhiteListResponse,
   FakeURLInfo,
   CreateBPOfflineTicketRequest,
   CreateCRUserVerifyResponse,
@@ -66,8 +71,10 @@ import {
   ModifyBPOfflineAttachmentResponse,
   CreateCRBlockRequest,
   CreateBPFakeURLResponse,
+  CreateCRTortResponse,
   CreateBPFalseTicketRequest,
   ModifyCRMonitorResponse,
+  File,
   DescribeBPProtectURLsRequest,
   ModifyCRObtainStatusResponse,
   CreateCRCompanyVerifyRequest,
@@ -203,6 +210,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 新增权属文件
+   */
+  async CreateCRRightFile(
+    req: CreateCRRightFileRequest,
+    cb?: (error: string, rep: CreateCRRightFileResponse) => void
+  ): Promise<CreateCRRightFileResponse> {
+    return this.request("CreateCRRightFile", req, cb)
+  }
+
+  /**
+   * 版权保护-白名单修改接口
+   */
+  async ModifyCRWhiteList(
+    req: ModifyCRWhiteListRequest,
+    cb?: (error: string, rep: ModifyCRWhiteListResponse) => void
+  ): Promise<ModifyCRWhiteListResponse> {
+    return this.request("ModifyCRWhiteList", req, cb)
+  }
+
+  /**
    * 版权保护-拦截申请接口
    */
   async ModifyCRBlockStatus(
@@ -240,6 +267,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeBPReportFakeURLsResponse) => void
   ): Promise<DescribeBPReportFakeURLsResponse> {
     return this.request("DescribeBPReportFakeURLs", req, cb)
+  }
+
+  /**
+   * 查询仿冒链接
+   */
+  async DescribeBPFakeURLs(
+    req: DescribeBPFakeURLsRequest,
+    cb?: (error: string, rep: DescribeBPFakeURLsResponse) => void
+  ): Promise<DescribeBPFakeURLsResponse> {
+    return this.request("DescribeBPFakeURLs", req, cb)
   }
 
   /**
@@ -293,13 +330,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询仿冒链接
+   * 举报侵权链接
    */
-  async DescribeBPFakeURLs(
-    req: DescribeBPFakeURLsRequest,
-    cb?: (error: string, rep: DescribeBPFakeURLsResponse) => void
-  ): Promise<DescribeBPFakeURLsResponse> {
-    return this.request("DescribeBPFakeURLs", req, cb)
+  async CreateCRTort(
+    req: CreateCRTortRequest,
+    cb?: (error: string, rep: CreateCRTortResponse) => void
+  ): Promise<CreateCRTortResponse> {
+    return this.request("CreateCRTort", req, cb)
   }
 
   /**

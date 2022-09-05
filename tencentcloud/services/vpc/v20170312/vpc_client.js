@@ -1616,6 +1616,12 @@ LimitTypes取值范围：
         return this.request("CreateVpnGateway", req, cb);
     }
     /**
+     * 本接口 (DescribeTrafficPackages)  用于查询共享流量包详细信息，包括共享流量包唯一标识ID，名称，流量使用信息等
+     */
+    async DescribeTrafficPackages(req, cb) {
+        return this.request("DescribeTrafficPackages", req, cb);
+    }
+    /**
      * 本接口（DescribeSecurityGroupPolicies）用于查询安全组规则。
      */
     async DescribeSecurityGroupPolicies(req, cb) {

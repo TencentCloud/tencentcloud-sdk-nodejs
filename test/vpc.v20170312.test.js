@@ -2318,6 +2318,16 @@ it("vpc.v20170312.CreateVpnGateway", async function () {
     }
 })
 
+it("vpc.v20170312.DescribeTrafficPackages", async function () {
+    try {
+       const data = await client.DescribeTrafficPackages({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.DescribeSecurityGroupPolicies", async function () {
     try {
        const data = await client.DescribeSecurityGroupPolicies({})

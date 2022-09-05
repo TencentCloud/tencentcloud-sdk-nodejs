@@ -202,6 +202,7 @@ import {
   CreateVpnConnectionRequest,
   CcnRoute,
   ModifyIpv6AddressesAttributeResponse,
+  DescribeTrafficPackagesRequest,
   DeleteSecurityGroupPoliciesRequest,
   VpnConnection,
   DescribeCcnsRequest,
@@ -241,6 +242,7 @@ import {
   AssociateDhcpIpWithAddressIpRequest,
   ReplaceRoutesRequest,
   CreateCustomerGatewayResponse,
+  TrafficPackage,
   WithdrawNotifyRoutesRequest,
   DeleteServiceTemplateGroupResponse,
   DisassociateAddressRequest,
@@ -449,6 +451,7 @@ import {
   InquirePriceCreateDirectConnectGatewayRequest,
   AttachNetworkInterfaceResponse,
   DisassociateNatGatewayAddressRequest,
+  DescribeTrafficPackagesResponse,
   DescribeServiceTemplatesResponse,
   DescribeRouteTablesRequest,
   ResetAttachCcnInstancesRequest,
@@ -3214,6 +3217,16 @@ LimitTypes取值范围：
     cb?: (error: string, rep: CreateVpnGatewayResponse) => void
   ): Promise<CreateVpnGatewayResponse> {
     return this.request("CreateVpnGateway", req, cb)
+  }
+
+  /**
+   * 本接口 (DescribeTrafficPackages)  用于查询共享流量包详细信息，包括共享流量包唯一标识ID，名称，流量使用信息等
+   */
+  async DescribeTrafficPackages(
+    req: DescribeTrafficPackagesRequest,
+    cb?: (error: string, rep: DescribeTrafficPackagesResponse) => void
+  ): Promise<DescribeTrafficPackagesResponse> {
+    return this.request("DescribeTrafficPackages", req, cb)
   }
 
   /**

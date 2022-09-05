@@ -3424,6 +3424,30 @@ export interface ModifyIpv6AddressesAttributeResponse {
     RequestId?: string;
 }
 /**
+ * DescribeTrafficPackages请求参数结构体
+ */
+export interface DescribeTrafficPackagesRequest {
+    /**
+      * 共享流量包ID，支持批量
+      */
+    TrafficPackageIds?: Array<string>;
+    /**
+      * 每次请求的`Filters`的上限为10。参数不支持同时指定`TrafficPackageIds`和`Filters`。详细的过滤条件如下：
+<li> traffic-package_id - String - 是否必填：否 - （过滤条件）按照共享流量包的唯一标识ID过滤。</li>
+<li> traffic-package-name - String - 是否必填：否 - （过滤条件）按照共享流量包名称过滤。不支持模糊过滤。</li>
+<li> status - String - 是否必填：否 - （过滤条件）按照共享流量包状态过滤。可选状态：[AVAILABLE|EXPIRED|EXHAUSTED]</li>
+      */
+    Filters?: Array<Filter>;
+    /**
+      * 分页参数
+      */
+    Offset?: number;
+    /**
+      * 分页参数
+      */
+    Limit?: number;
+}
+/**
  * DeleteSecurityGroupPolicies请求参数结构体
  */
 export interface DeleteSecurityGroupPoliciesRequest {
@@ -4266,6 +4290,53 @@ export interface CreateCustomerGatewayResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 流量包信息描述类型
+ */
+export interface TrafficPackage {
+    /**
+      * 流量包唯一ID
+      */
+    TrafficPackageId: string;
+    /**
+      * 流量包名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TrafficPackageName: string;
+    /**
+      * 流量包总量，单位GB
+      */
+    TotalAmount: number;
+    /**
+      * 流量包剩余量，单位GB
+      */
+    RemainingAmount: number;
+    /**
+      * 流量包状态，可能的值有: AVAILABLE-可用状态， EXPIRED-已过期， EXHAUSTED-已用完， REFUNDED-已退还， DELETED-已删除
+      */
+    Status: string;
+    /**
+      * 流量包创建时间
+      */
+    CreatedTime: string;
+    /**
+      * 流量包截止时间
+      */
+    Deadline: string;
+    /**
+      * 已使用的流量，单位GB
+      */
+    UsedAmount: number;
+    /**
+      * 流量包标签
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TagSet: Array<Tag>;
+    /**
+      * 区分闲时流量包与全时流量包
+      */
+    DeductType: string;
 }
 /**
  * WithdrawNotifyRoutes请求参数结构体
@@ -8309,6 +8380,23 @@ export interface DisassociateNatGatewayAddressRequest {
       * 待解绑NAT网关的弹性IP数组。
       */
     PublicIpAddresses: Array<string>;
+}
+/**
+ * DescribeTrafficPackages返回参数结构体
+ */
+export interface DescribeTrafficPackagesResponse {
+    /**
+      * 按照条件查询出来的流量包数量
+      */
+    TotalCount: number;
+    /**
+      * 流量包信息
+      */
+    TrafficPackageSet: Array<TrafficPackage>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeServiceTemplates返回参数结构体

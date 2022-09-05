@@ -138,6 +138,26 @@ it("bma.v20210624.CreateBPFakeURL", async function () {
     }
 })
 
+it("bma.v20210624.CreateCRRightFile", async function () {
+    try {
+       const data = await client.CreateCRRightFile({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bma.v20210624.ModifyCRWhiteList", async function () {
+    try {
+       const data = await client.ModifyCRWhiteList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("bma.v20210624.ModifyCRBlockStatus", async function () {
     try {
        const data = await client.ModifyCRBlockStatus({})
@@ -171,6 +191,16 @@ it("bma.v20210624.CreateBPProtectURLs", async function () {
 it("bma.v20210624.DescribeBPReportFakeURLs", async function () {
     try {
        const data = await client.DescribeBPReportFakeURLs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bma.v20210624.DescribeBPFakeURLs", async function () {
+    try {
+       const data = await client.DescribeBPFakeURLs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -228,9 +258,9 @@ it("bma.v20210624.DescribeBPProtectURLs", async function () {
     }
 })
 
-it("bma.v20210624.DescribeBPFakeURLs", async function () {
+it("bma.v20210624.CreateCRTort", async function () {
     try {
-       const data = await client.DescribeBPFakeURLs({})
+       const data = await client.CreateCRTort({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

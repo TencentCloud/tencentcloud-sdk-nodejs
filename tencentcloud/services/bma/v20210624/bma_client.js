@@ -100,6 +100,18 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateBPFakeURL", req, cb);
     }
     /**
+     * 新增权属文件
+     */
+    async CreateCRRightFile(req, cb) {
+        return this.request("CreateCRRightFile", req, cb);
+    }
+    /**
+     * 版权保护-白名单修改接口
+     */
+    async ModifyCRWhiteList(req, cb) {
+        return this.request("ModifyCRWhiteList", req, cb);
+    }
+    /**
      * 版权保护-拦截申请接口
      */
     async ModifyCRBlockStatus(req, cb) {
@@ -122,6 +134,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeBPReportFakeURLs(req, cb) {
         return this.request("DescribeBPReportFakeURLs", req, cb);
+    }
+    /**
+     * 查询仿冒链接
+     */
+    async DescribeBPFakeURLs(req, cb) {
+        return this.request("DescribeBPFakeURLs", req, cb);
     }
     /**
      * 查询作品基本信息
@@ -154,10 +172,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBPProtectURLs", req, cb);
     }
     /**
-     * 查询仿冒链接
+     * 举报侵权链接
      */
-    async DescribeBPFakeURLs(req, cb) {
-        return this.request("DescribeBPFakeURLs", req, cb);
+    async CreateCRTort(req, cb) {
+        return this.request("CreateCRTort", req, cb);
     }
     /**
      * 品牌经营管家-版权保护模块企业认证接口

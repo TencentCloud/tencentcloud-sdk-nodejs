@@ -51,6 +51,46 @@ export interface ProtectURLInfo {
 }
 
 /**
+ * ModifyCRWhiteList请求参数结构体
+ */
+export interface ModifyCRWhiteListRequest {
+  /**
+   * 白名单ID
+   */
+  WhiteListId?: number
+
+  /**
+   * 平台名称
+   */
+  PlatForm?: string
+
+  /**
+   * 平台站点链接
+   */
+  PlatUrl?: string
+
+  /**
+   * 作者ID
+   */
+  AuthorId?: string
+
+  /**
+   * 作品ID
+   */
+  WorksId?: number
+
+  /**
+   * xxx
+   */
+  WorkId?: number
+
+  /**
+   * xxx
+   */
+  WhiteSites?: string
+}
+
+/**
  * CreateCRUserVerify请求参数结构体
  */
 export interface CreateCRUserVerifyRequest {
@@ -91,38 +131,18 @@ export interface CreateBPFalseTicketResponse {
 }
 
 /**
- * DescribeCRWorkInfo返回参数结构体
+ * CreateCRRightFile请求参数结构体
  */
-export interface DescribeCRWorkInfoResponse {
+export interface CreateCRRightFileRequest {
   /**
-   * x
+   * xxx
    */
-  WorkName: string
+  WorkId: number
 
   /**
-   * x
+   * xxx
    */
-  MonitorStatus: number
-
-  /**
-   * x
-   */
-  AuthStatus: number
-
-  /**
-   * x
-   */
-  CommStatus: number
-
-  /**
-   * x
-   */
-  IsProducer: number
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  FileList: Array<File>
 }
 
 /**
@@ -253,6 +273,56 @@ export interface CreateBPOfflineTicketResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreateCRTort请求参数结构体
+ */
+export interface CreateCRTortRequest {
+  /**
+   * xx
+   */
+  WorkId: number
+
+  /**
+   * xx
+   */
+  TortURL: string
+
+  /**
+   * xx
+   */
+  TortPlat?: string
+
+  /**
+   * xx
+   */
+  TortTitle?: string
+}
+
+/**
+ * UpdateCRWork请求参数结构体
+ */
+export interface UpdateCRWorkRequest {
+  /**
+   * xx
+   */
+  WorkId: number
+
+  /**
+   * xx
+   */
+  ContentType?: string
+
+  /**
+   * xx
+   */
+  Content?: string
+
+  /**
+   * xx
+   */
+  CertType?: string
 }
 
 /**
@@ -820,9 +890,14 @@ export interface ModifyCRMonitorRequest {
   WorkId: number
 
   /**
-   * 监测状态 1-开启监测 2-关闭监测 默认为1
+   * 监测状态 1-开启监测 2-关闭监测
    */
   MonitorStatus: string
+
+  /**
+   * 默认不停止，支持续期
+   */
+  MonitorEnd?: string
 }
 
 /**
@@ -1106,28 +1181,63 @@ export interface DescribeCRMonitorsRequest {
 }
 
 /**
- * UpdateCRWork请求参数结构体
+ * DescribeCRWorkInfo返回参数结构体
  */
-export interface UpdateCRWorkRequest {
+export interface DescribeCRWorkInfoResponse {
   /**
-   * xx
+   * x
    */
-  WorkId: number
+  WorkName: string
 
   /**
-   * xx
+   * x
    */
-  ContentType?: string
+  MonitorStatus: number
 
   /**
-   * xx
+   * x
    */
-  Content?: string
+  AuthStatus: number
 
   /**
-   * xx
+   * x
    */
-  CertType?: string
+  CommStatus: number
+
+  /**
+   * x
+   */
+  IsProducer: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateCRRightFile返回参数结构体
+ */
+export interface CreateCRRightFileResponse {
+  /**
+   * xxx
+   */
+  FileIds: Array<number>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyCRWhiteList返回参数结构体
+ */
+export interface ModifyCRWhiteListResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1446,6 +1556,51 @@ export interface CreateBPFakeURLResponse {
 }
 
 /**
+ * CreateCRTort返回参数结构体
+ */
+export interface CreateCRTortResponse {
+  /**
+   * xx
+   */
+  WorkId: number
+
+  /**
+   * xx
+   */
+  TortId: number
+
+  /**
+   * xx
+   */
+  TortTitle: string
+
+  /**
+   * xx
+   */
+  TortPlat: string
+
+  /**
+   * xx
+   */
+  TortURL: string
+
+  /**
+   * xx
+   */
+  TortDomain: string
+
+  /**
+   * xx
+   */
+  TortBodyName: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateBPFalseTicket请求参数结构体
  */
 export interface CreateBPFalseTicketRequest {
@@ -1463,6 +1618,31 @@ export interface ModifyCRMonitorResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 权属文件列表
+ */
+export interface File {
+  /**
+   * xxx
+   */
+  FileUrl: string
+
+  /**
+   * xxx
+   */
+  FileType: number
+
+  /**
+   * xxx
+   */
+  ValidStartDate: string
+
+  /**
+   * xxx
+   */
+  ValidEndDate: string
 }
 
 /**

@@ -3557,6 +3557,8 @@ SUCCESS：支付成功
 CLOSED：关单
 PAY_FAIL：支付失败
 REVOKE：退票
+PART_REFUND：部分退款
+FULL_REFUND：全部退款
       */
     OrderStatus: string;
     /**
@@ -7390,6 +7392,23 @@ development: 开发环境
       * 公司信息
       */
     OrganizationInfo?: OrganizationInfo;
+    /**
+      * 子商户证件类型
+1 - 身份证
+3 - 回乡证
+4 - 中国护照
+5 - 台胞证
+19 - 外国护照
+52 - 组织机构代码证
+68 - 营业执照
+73 - 统一社会信用代码
+      */
+    SubMerchantIdType?: string;
+    /**
+      * 子商户证件号码
+<敏感信息>加密详见<a href="https://cloud.tencent.com/document/product/1122/48979" target="_blank">《商户端接口敏感信息加密说明》</a>
+      */
+    SubMerchantIdCode?: string;
 }
 /**
  * CreateAgentTaxPaymentInfos请求参数结构体
