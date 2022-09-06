@@ -2488,26 +2488,6 @@ export interface DeletePacketFilterConfigRequest {
 }
 
 /**
- * ModifyL7RulesEdge请求参数结构体
- */
-export interface ModifyL7RulesEdgeRequest {
-  /**
-   * 大禹子产品代号（edge表示边界防护产品）
-   */
-  Business: string
-
-  /**
-   * 资源ID
-   */
-  Id: string
-
-  /**
-   * 规则
-   */
-  Rule: L7RuleEntry
-}
-
-/**
  * DescribeListDDoSGeoIPBlockConfig返回参数结构体
  */
 export interface DescribeListDDoSGeoIPBlockConfigResponse {
@@ -3954,21 +3934,6 @@ export interface DescribeCCPrecisionPlyListRequest {
    * 协议，普通高防IP要传该字段
    */
   Protocol?: string
-}
-
-/**
- * ModifyL7RulesEdge返回参数结构体
- */
-export interface ModifyL7RulesEdgeResponse {
-  /**
-   * 成功码
-   */
-  Success: SuccessCode
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**

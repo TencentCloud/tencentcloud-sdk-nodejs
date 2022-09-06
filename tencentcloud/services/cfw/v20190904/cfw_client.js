@@ -235,12 +235,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyNatFwVpcDnsSwitch", req, cb);
     }
     /**
-     * 单个修改VPC火墙开关
-     */
-    async ModifyVPCSwitchStatus(req, cb) {
-        return this.request("ModifyVPCSwitchStatus", req, cb);
-    }
-    /**
      * VPC防火墙一键开关
      */
     async ModifyAllVPCSwitchStatus(req, cb) {

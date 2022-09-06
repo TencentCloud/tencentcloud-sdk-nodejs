@@ -420,12 +420,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDDoSTrend", req, cb);
     }
     /**
-     * 修改边界防护L7转发规则
-     */
-    async ModifyL7RulesEdge(req, cb) {
-        return this.request("ModifyL7RulesEdge", req, cb);
-    }
-    /**
      * 设置DDoS防护的AI防护开关
      */
     async CreateDDoSAI(req, cb) {

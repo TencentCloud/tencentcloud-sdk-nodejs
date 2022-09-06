@@ -811,11 +811,11 @@ export interface DescribeUserInAndOutTimeResponse {
     /**
       * 用户在房间得进出时间列表
       */
-    InOutList?: Array<InOutTimeInfo>;
+    InOutList: Array<InOutTimeInfo>;
     /**
       * 用户在房间中总时长
       */
-    Duration?: number;
+    Duration: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1243,4 +1243,12 @@ export interface DescribeUserInAndOutTimeRequest {
       * 用户ID
       */
     UserId: number;
+    /**
+      * 字符串类型用户ID
+      */
+    UserIdStr?: string;
+    /**
+      * 字符串类型房间ID
+      */
+    RoomIdStr?: string;
 }

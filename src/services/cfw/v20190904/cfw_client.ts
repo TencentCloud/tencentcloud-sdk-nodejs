@@ -114,7 +114,6 @@ import {
   RemoveEnterpriseSecurityGroupRuleRequest,
   DeleteResourceGroupRequest,
   DescribeBlockByIpTimesListRequest,
-  ModifyVPCSwitchStatusResponse,
   RemoveEnterpriseSecurityGroupRuleResponse,
   ModifyAllVPCSwitchStatusRequest,
   ModifySequenceRulesResponse,
@@ -177,7 +176,6 @@ import {
   ModifyAssetScanResponse,
   ModifyAcRuleRequest,
   DescribeNatFwInstancesInfoResponse,
-  ModifyVPCSwitchStatusRequest,
   ModifyBlockIgnoreListResponse,
   DescribeNatFwInstanceResponse,
   ModifySecurityGroupRuleResponse,
@@ -540,16 +538,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyNatFwVpcDnsSwitchResponse) => void
   ): Promise<ModifyNatFwVpcDnsSwitchResponse> {
     return this.request("ModifyNatFwVpcDnsSwitch", req, cb)
-  }
-
-  /**
-   * 单个修改VPC火墙开关
-   */
-  async ModifyVPCSwitchStatus(
-    req: ModifyVPCSwitchStatusRequest,
-    cb?: (error: string, rep: ModifyVPCSwitchStatusResponse) => void
-  ): Promise<ModifyVPCSwitchStatusResponse> {
-    return this.request("ModifyVPCSwitchStatus", req, cb)
   }
 
   /**

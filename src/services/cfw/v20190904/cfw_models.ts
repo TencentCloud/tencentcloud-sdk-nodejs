@@ -282,7 +282,7 @@ vendor：云厂商
 当SourceType为net时，SourceContent为源IP地址或者CIDR地址。
 例如：1.1.1.0/24
 
-当SourceType为template时，SourceContent为源地址模板名称。
+当SourceType为template时，SourceContent为源地址模板id。
 
 当SourceType为location时，SourceContent为源区域。
 例如["BJ11", "ZB"]
@@ -311,7 +311,7 @@ domain: 域名或者ip
 当DestType为net时，DestContent为源IP地址或者CIDR地址。
 例如：1.1.1.0/24
 
-当DestType为template时，DestContent为源地址模板名称。
+当DestType为template时，DestContent为源地址模板id。
 
 当DestType为location时，DestContent为源区域。
 例如["BJ11", "ZB"]
@@ -2630,27 +2630,6 @@ export interface DescribeBlockByIpTimesListRequest {
 }
 
 /**
- * ModifyVPCSwitchStatus返回参数结构体
- */
-export interface ModifyVPCSwitchStatusResponse {
-  /**
-      * 接口返回信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ReturnMsg: string
-
-  /**
-   * 接口返回错误码，0请求成功  非0失败
-   */
-  ReturnCode: number
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * RemoveEnterpriseSecurityGroupRule返回参数结构体
  */
 export interface RemoveEnterpriseSecurityGroupRuleResponse {
@@ -4252,21 +4231,6 @@ export interface DescribeNatFwInstancesInfoResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * ModifyVPCSwitchStatus请求参数结构体
- */
-export interface ModifyVPCSwitchStatusRequest {
-  /**
-   * 公网IP
-   */
-  FirewallVpcId: string
-
-  /**
-   * 状态值，0: 关闭 ,1:开启
-   */
-  Status: number
 }
 
 /**

@@ -127,7 +127,6 @@ import {
   CreateDDoSSpeedLimitConfigResponse,
   DescribeNewL7RulesErrHealthResponse,
   DeletePacketFilterConfigRequest,
-  ModifyL7RulesEdgeRequest,
   DescribeListDDoSGeoIPBlockConfigResponse,
   DescribeBasicDeviceStatusResponse,
   DescribeBgpBizTrendResponse,
@@ -183,7 +182,6 @@ import {
   ModifyDDoSBlackWhiteIpListResponse,
   CCReqLimitPolicy,
   DescribeCCPrecisionPlyListRequest,
-  ModifyL7RulesEdgeResponse,
   ProtocolPort,
   DescribeCCLevelListRequest,
   ModifyCCThresholdPolicyRequest,
@@ -931,16 +929,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDDoSTrendResponse) => void
   ): Promise<DescribeDDoSTrendResponse> {
     return this.request("DescribeDDoSTrend", req, cb)
-  }
-
-  /**
-   * 修改边界防护L7转发规则
-   */
-  async ModifyL7RulesEdge(
-    req: ModifyL7RulesEdgeRequest,
-    cb?: (error: string, rep: ModifyL7RulesEdgeResponse) => void
-  ): Promise<ModifyL7RulesEdgeResponse> {
-    return this.request("ModifyL7RulesEdge", req, cb)
   }
 
   /**

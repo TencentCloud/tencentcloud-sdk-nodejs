@@ -1362,6 +1362,10 @@ export interface GetMonitorDataRequest {
  */
 export interface CreateSSOAccountResponse {
     /**
+      * 已添加的用户 UIN
+      */
+    UserId: string;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
@@ -2573,6 +2577,11 @@ export interface UpdatePrometheusAgentStatusRequest {
  * InstallPlugins返回参数结构体
  */
 export interface InstallPluginsResponse {
+    /**
+      * 已安装插件 ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PluginIds: Array<string>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4024,6 +4033,10 @@ export interface DescribeInstalledPluginsRequest {
       * 实例 ID
       */
     InstanceId: string;
+    /**
+      * 按插件 ID 过滤
+      */
+    PluginId?: string;
 }
 /**
  * DescribeAlarmMetrics返回参数结构体
@@ -6310,6 +6323,11 @@ export interface MetricDatum {
  */
 export interface CreateGrafanaNotificationChannelResponse {
     /**
+      * 通道 ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ChannelId: string;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
@@ -6432,6 +6450,10 @@ export interface DescribeSSOAccountRequest {
       * 实例ID
       */
     InstanceId: string;
+    /**
+      * 按账号 UIN 进行过滤
+      */
+    UserId?: string;
 }
 /**
  * DescribeAlarmNotice请求参数结构体
@@ -6500,6 +6522,20 @@ export interface GrafanaNotificationChannel {
       * 更新时间
       */
     UpdatedAt: string;
+    /**
+      * 默认生效组织
+      */
+    OrgId: string;
+    /**
+      * 额外生效组织
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ExtraOrgIds: Array<string>;
+    /**
+      * 生效组织
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OrgIds: string;
 }
 /**
  * CreatePrometheusAgent请求参数结构体

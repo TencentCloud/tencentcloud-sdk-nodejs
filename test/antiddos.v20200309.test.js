@@ -668,16 +668,6 @@ it("antiddos.v20200309.DescribeDDoSTrend", async function () {
     }
 })
 
-it("antiddos.v20200309.ModifyL7RulesEdge", async function () {
-    try {
-       const data = await client.ModifyL7RulesEdge({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("antiddos.v20200309.CreateDDoSAI", async function () {
     try {
        const data = await client.CreateDDoSAI({})

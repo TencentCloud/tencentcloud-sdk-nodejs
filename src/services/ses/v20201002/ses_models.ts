@@ -21,8 +21,8 @@
 export interface BatchSendEmailRequest {
   /**
       * 发信邮件地址。请填写发件人邮箱地址，例如：noreply@mail.qcloud.com。如需填写发件人说明，请按照
-发信人 <邮件地址> 的方式填写，例如：
-腾讯云团队 <noreply@mail.qcloud.com>
+发信人 &lt;邮件地址&gt; 的方式填写，例如：
+腾讯云团队 &lt;noreply@mail.qcloud.com&gt;
       */
   FromEmailAddress: string
 
@@ -258,7 +258,7 @@ export interface Attachment {
   FileName: string
 
   /**
-   * base64之后的附件内容，您可以发送的附件大小上限为4 MB。 注意：腾讯云api目前要求请求包大小不得超过8 MB。如果您要发送多个附件，那么这些附件的总大小不能超过8 MB。
+   * Base64之后的附件内容，你可以发送的附件大小上限为4M。注意：腾讯云接口请求最大支持 8M 的请求包，附件内容经过 Base64 预期扩大1.5倍。应该控制所有附件的总大小最大在 4M 以内，整体请求超出 8M 接口会返回错误。
    */
   Content: string
 }
@@ -352,7 +352,7 @@ export interface SendEmailRequest {
   ReplyToAddresses?: string
 
   /**
-   * 使用模板发送时，填写的模板相关参数
+   * 使用模板发送时，填写的模板相关参数。因 Simple 已经废除使用，Template 为必填项
    */
   Template?: Template
 
@@ -362,7 +362,7 @@ export interface SendEmailRequest {
   Simple?: Simple
 
   /**
-   * 需要发送附件时，填写附件相关参数。
+   * 需要发送附件时，填写附件相关参数。腾讯云接口请求最大支持 8M 的请求包，附件内容经过 Base64 预期扩大1.5倍，应该控制所有附件的总大小最大在 4M 以内，整体请求超出 8M 时接口会返回错误
    */
   Attachments?: Array<Attachment>
 
@@ -822,12 +822,14 @@ export interface SendEmailStatus {
 1005: 内部系统异常
 1006: 触发频率控制，短时间内对同一地址发送过多邮件
 1007: 邮件地址在黑名单中
+1008: 域名被收件人拒收
 1009: 内部系统异常
 1010: 超出了每日发送限制
 1011: 无发送自定义内容权限，必须使用模板
+1013: 域名被收件人取消订阅
 2001: 找不到相关记录
 3007: 模板ID无效或者不可用
-3008: 模板状态异常
+3008: 被收信域名临时封禁
 3009: 无权限使用该模板
 3010: TemplateData字段格式不正确 
 3014: 发件域名没有经过认证，无法发送
@@ -920,7 +922,7 @@ export interface ReceiverInputData {
 
   /**
       * 模板中的变量参数，请使用json.dump将json对象格式化为string类型。该对象是一组键值对，每个Key代表模板中的一个变量，模板中的变量使用{{键}}表示，相应的值在发送时会被替换为{{值}}。
-注意：参数值不能是html等复杂类型的数据。
+注意：参数值不能是html等复杂类型的数据。TemplateData (整个 JSON 结构) 总长度限制为 800 bytes。
       */
   TemplateData: string
 }
@@ -1315,7 +1317,7 @@ export interface CreateReceiverDetailWithDataRequest {
   ReceiverId: number
 
   /**
-   * 收信人邮箱以及模板参数，数组形式
+   * 收信人邮箱以及模板参数，数组形式。收件人个数限制20000个以内。
    */
   Datas: Array<ReceiverInputData>
 }

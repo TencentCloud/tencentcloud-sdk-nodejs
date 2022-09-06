@@ -900,6 +900,10 @@ export interface AutoCalloutTaskCalleeInfo {
       * 呼叫状态 0初始 1已接听 2未接听 3呼叫中 4待重试
       */
     State: number;
+    /**
+      * 会话ID列表
+      */
+    Sessions: Array<string>;
 }
 /**
  * DescribePSTNActiveSessionList返回参数结构体

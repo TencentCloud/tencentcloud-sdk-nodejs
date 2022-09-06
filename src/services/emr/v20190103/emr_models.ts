@@ -52,7 +52,7 @@ POSTPAID_BY_HOUR 按量计费，默认方式。
   LoginSettings: LoginSettings
 
   /**
-   * 实例标签。
+   * 实例标签，示例：["{\"TagKey\":\"test-tag1\",\"TagValue\":\"001\"}","{\"TagKey\":\"test-tag2\",\"TagValue\":\"002\"}"]。
    */
   TagSpecification: Array<string>
 
@@ -248,8 +248,7 @@ export interface Step {
   /**
       * 执行失败策略。
 1. TERMINATE_CLUSTER 执行失败时退出并销毁集群。
-2. CANCEL_AND_WAIT 执行失败时阻塞等待。
-3. CONTINUE 执行失败时跳过并执行后续步骤。
+2. CONTINUE 执行失败时跳过并执行后续步骤。
       */
   ActionOnFailure: string
 
@@ -1253,6 +1252,12 @@ export interface JobResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   JobState: string
+
+  /**
+      * YARN任务ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ApplicationId?: string
 }
 
 /**
@@ -2282,6 +2287,16 @@ export interface DescribeClusterNodesRequest {
    * 支持搜索的字段
    */
   SearchFields?: Array<SearchItem>
+
+  /**
+   * 无
+   */
+  OrderField?: string
+
+  /**
+   * 无
+   */
+  Asc?: number
 }
 
 /**
@@ -4126,6 +4141,30 @@ export interface NodeHardwareInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Clients: string
+
+  /**
+      * 系统当前时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CurrentTime: string
+
+  /**
+      * 是否用于联邦
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsFederation: number
+
+  /**
+      * 设备名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DeviceName: string
+
+  /**
+      * 服务
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ServiceClient: string
 }
 
 /**

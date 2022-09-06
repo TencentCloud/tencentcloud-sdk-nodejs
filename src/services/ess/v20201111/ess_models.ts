@@ -811,8 +811,14 @@ export interface FlowDetailInfo {
   FlowType: string
 
   /**
-   * 合同(流程)的状态
-   */
+      * 合同(流程)的状态
+1：未签署
+2：部分签署
+3：已退回
+4：完成签署
+5：已过期
+6：已取消
+      */
   FlowStatus: number
 
   /**
@@ -1316,7 +1322,7 @@ export interface UploadFilesRequest {
   FileInfos?: Array<UploadFile>
 
   /**
-   * 上传文件链接数组，最多支持20个URL
+   * 不再使用，上传文件链接数组，最多支持20个URL
    */
   FileUrls?: string
 
@@ -1766,8 +1772,18 @@ export interface FlowApproverDetail {
   ApproveName: string
 
   /**
-   * 签署人的状态
-   */
+      * 签署人的状态
+0：还没有发起
+1：流程中 没有开始处理
+2：待处理
+3：签署态
+4：拒绝态
+5：过期没人处理
+6：取消态
+7：还没有预发起
+8：待填写
+9：因为各种原因而终止
+      */
   ApproveStatus: number
 
   /**
