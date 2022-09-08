@@ -45,6 +45,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RenewDisk", req, cb);
     }
     /**
+     * 本接口（ApplyDiskBackup）用于回滚备份点到原云硬盘。
+
+* 仅支持回滚到原云硬盘上。对于数据盘备份点，如果您需要复制备份点数据到其它云硬盘上，请先使用 CreateSnapshot 将备份点转换为快照，然后使用 CreateDisks 接口创建新的弹性云硬盘，将快照数据复制到新购云硬盘上。
+* 用于回滚的备份点必须处于NORMAL状态。备份点状态可以通过DescribeDiskBackups接口查询，见输出参数中BackupState字段解释。
+* 如果是弹性云硬盘，则云硬盘必须处于未挂载状态，云硬盘挂载状态可以通过DescribeDisks接口查询，见Attached字段解释；如果是随实例一起购买的非弹性云硬盘，则实例必须处于关机状态，实例状态可以通过DescribeInstancesStatus接口查询。
+     */
+    async ApplyDiskBackup(req, cb) {
+        return this.request("ApplyDiskBackup", req, cb);
+    }
+    /**
      * 本接口（CopySnapshotCrossRegions）用于快照跨地域复制。
 
 * 本接口为异步接口，当跨地域复制的请求下发成功后会返回一个新的快照ID，此时快照未立即复制到目标地域，可请求目标地域的[DescribeSnapshots](/document/product/362/15647)接口查询新快照的状态，判断是否复制完成。如果快照的状态为“NORMAL”，表示快照复制完成。
@@ -101,6 +111,18 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyDisksRenewFlag", req, cb);
     }
     /**
+     * 本接口（InquirePricePriceModifyDiskBackupQuota）用于修改云硬盘备份点配额询价。
+     */
+    async InquirePriceModifyDiskBackupQuota(req, cb) {
+        return this.request("InquirePriceModifyDiskBackupQuota", req, cb);
+    }
+    /**
+     * 批量删除指定的云硬盘备份点。
+     */
+    async DeleteDiskBackups(req, cb) {
+        return this.request("DeleteDiskBackups", req, cb);
+    }
+    /**
      * 本接口（ModifyAutoSnapshotPolicyAttribute）用于修改定期快照策略属性。
 
 * 可通过该接口修改定期快照策略的执行策略、名称、是否激活等属性。
@@ -118,6 +140,15 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("InquiryPriceCreateDisks", req, cb);
     }
     /**
+     * 本接口（DescribeDiskBackups）用于查询备份点的详细信息。
+
+根据备份点ID、创建备份点的云硬盘ID、创建备份点的云硬盘类型等对结果进行过滤，不同条件之间为与(AND)的关系，过滤信息详细请见过滤器Filter。
+如果参数为空，返回当前用户一定数量（Limit所指定的数量，默认为20）的备份点列表。
+     */
+    async DescribeDiskBackups(req, cb) {
+        return this.request("DescribeDiskBackups", req, cb);
+    }
+    /**
      * 查询云盘操作日志功能已迁移至LookUpEvents接口（https://cloud.tencent.com/document/product/629/12359），本接口（DescribeDiskOperationLogs）即将下线，后续不再提供调用，请知悉。
      */
     async DescribeDiskOperationLogs(req, cb) {
@@ -132,13 +163,14 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteAutoSnapshotPolicies", req, cb);
     }
     /**
-     * 本接口（CreateAutoSnapshotPolicy）用于创建定期快照策略。
-
-* 每个地域可创建的定期快照策略数量限制请参考文档[定期快照](/document/product/362/8191)。
-* 每个地域可创建的快照有数量和容量的限制，具体请见腾讯云控制台快照页面提示，如果快照超配额，定期快照创建会失败。
+     * 重新初始化云硬盘至云硬盘初始创建时的状态。使用云硬盘的重新初始化功能时需要注意以下4点：
+1. 如果云硬盘是由快照创建的，则重新初始化会通过此快照重新回滚此云硬盘，即将云硬盘恢复为与快照一致的状态；
+2. 如果云硬盘不是通过快照创建的，则重新初始化会清空此云硬盘的数据；请在重新初始化云硬盘前检查并备份必要的数据；
+3. 当前仅未挂载的、非共享属性的数据盘云硬盘支持重新初始化；
+4. 当创建此云硬盘的原始快照被删除时，不再支持重新初始化此云硬盘。
      */
-    async CreateAutoSnapshotPolicy(req, cb) {
-        return this.request("CreateAutoSnapshotPolicy", req, cb);
+    async InitializeDisks(req, cb) {
+        return this.request("InitializeDisks", req, cb);
     }
     /**
      * 本接口（DescribeDisks）用于查询云硬盘列表。
@@ -148,6 +180,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeDisks(req, cb) {
         return this.request("DescribeDisks", req, cb);
+    }
+    /**
+     * 此接口 (ModifyDiskBackupQuota) 用于修改云硬盘备份点配额。
+     */
+    async ModifyDiskBackupQuota(req, cb) {
+        return this.request("ModifyDiskBackupQuota", req, cb);
     }
     /**
      * 本接口（CreateDisks）用于创建云硬盘。
@@ -216,14 +254,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeSnapshotSharePermission", req, cb);
     }
     /**
-     * 重新初始化云硬盘至云硬盘初始创建时的状态。使用云硬盘的重新初始化功能时需要注意以下4点：
-1. 如果云硬盘是由快照创建的，则重新初始化会通过此快照重新回滚此云硬盘，即将云硬盘恢复为与快照一致的状态；
-2. 如果云硬盘不是通过快照创建的，则重新初始化会清空此云硬盘的数据；请在重新初始化云硬盘前检查并备份必要的数据；
-3. 当前仅未挂载的、非共享属性的数据盘云硬盘支持重新初始化；
-4. 当创建此云硬盘的原始快照被删除时，不再支持重新初始化此云硬盘。
+     * 本接口（CreateAutoSnapshotPolicy）用于创建定期快照策略。
+
+* 每个地域可创建的定期快照策略数量限制请参考文档[定期快照](/document/product/362/8191)。
+* 每个地域可创建的快照有数量和容量的限制，具体请见腾讯云控制台快照页面提示，如果快照超配额，定期快照创建会失败。
      */
-    async InitializeDisks(req, cb) {
-        return this.request("InitializeDisks", req, cb);
+    async CreateAutoSnapshotPolicy(req, cb) {
+        return this.request("CreateAutoSnapshotPolicy", req, cb);
     }
     /**
      * 接口请求域名： cbs.tencentcloudapi.com 。
@@ -304,14 +341,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifySnapshotsSharePermission", req, cb);
     }
     /**
-     * 本接口（CreateSnapshot）用于对指定云盘创建快照。
+     * 本接口（DetachDisks）用于卸载云硬盘。
 
-* 只有具有快照能力的云硬盘才能创建快照。云硬盘是否具有快照能力可由[DescribeDisks](/document/product/362/16315)接口查询，见SnapshotAbility字段。
-* 可创建快照数量限制见[产品使用限制](https://cloud.tencent.com/doc/product/362/5145)。
-* 当前支持将备份点转化为普通快照，转化之后可能会收取快照使用费用，备份点不保留，其占用的备份点配额也将被释放。
+* 支持批量操作，卸载挂载在同一主机上的多块云盘。如果多块云盘中存在不允许卸载的云盘，则操作不执行，返回特定的错误码。
+* 本接口为异步接口，当请求成功返回时，云盘并未立即从主机卸载，可通过接口[DescribeDisks](/document/product/362/16315)来查询对应云盘的状态，如果云盘的状态由“ATTACHED”变为“UNATTACHED”，则为卸载成功。
      */
-    async CreateSnapshot(req, cb) {
-        return this.request("CreateSnapshot", req, cb);
+    async DetachDisks(req, cb) {
+        return this.request("DetachDisks", req, cb);
     }
     /**
      * 获取快照概览信息
@@ -329,13 +365,14 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ResizeDisk", req, cb);
     }
     /**
-     * 本接口（DetachDisks）用于卸载云硬盘。
+     * 本接口（CreateSnapshot）用于对指定云盘创建快照。
 
-* 支持批量操作，卸载挂载在同一主机上的多块云盘。如果多块云盘中存在不允许卸载的云盘，则操作不执行，返回特定的错误码。
-* 本接口为异步接口，当请求成功返回时，云盘并未立即从主机卸载，可通过接口[DescribeDisks](/document/product/362/16315)来查询对应云盘的状态，如果云盘的状态由“ATTACHED”变为“UNATTACHED”，则为卸载成功。
+* 只有具有快照能力的云硬盘才能创建快照。云硬盘是否具有快照能力可由[DescribeDisks](/document/product/362/16315)接口查询，见SnapshotAbility字段。
+* 可创建快照数量限制见[产品使用限制](https://cloud.tencent.com/doc/product/362/5145)。
+* 当前支持将备份点转化为普通快照，转化之后可能会收取快照使用费用，备份点不保留，其占用的备份点配额也将被释放。
      */
-    async DetachDisks(req, cb) {
-        return this.request("DetachDisks", req, cb);
+    async CreateSnapshot(req, cb) {
+        return this.request("CreateSnapshot", req, cb);
     }
     /**
      * 本接口（InquiryPriceRenewDisks）用于续费云硬盘询价。

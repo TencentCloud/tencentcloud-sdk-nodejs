@@ -113,6 +113,121 @@ export interface TaskDetail {
 }
 
 /**
+ * 可用区售卖配置
+ */
+export interface CdbZoneSellConf {
+  /**
+   * 可用区状态。可能的返回值为：1-上线；3-停售；4-不展示
+   */
+  Status: number
+
+  /**
+   * 可用区中文名称
+   */
+  ZoneName: string
+
+  /**
+   * 实例类型是否为自定义类型
+   */
+  IsCustom: boolean
+
+  /**
+   * 是否支持灾备
+   */
+  IsSupportDr: boolean
+
+  /**
+   * 是否支持私有网络
+   */
+  IsSupportVpc: boolean
+
+  /**
+   * 小时计费实例最大售卖数量
+   */
+  HourInstanceSaleMaxNum: number
+
+  /**
+   * 是否为默认可用区
+   */
+  IsDefaultZone: boolean
+
+  /**
+   * 是否为黑石区
+   */
+  IsBm: boolean
+
+  /**
+   * 支持的付费类型。可能的返回值为：0-包年包月；1-小时计费；2-后付费
+   */
+  PayType: Array<string>
+
+  /**
+   * 数据复制类型。0-异步复制；1-半同步复制；2-强同步复制
+   */
+  ProtectMode: Array<string>
+
+  /**
+   * 可用区名称
+   */
+  Zone: string
+
+  /**
+   * 多可用区信息
+   */
+  ZoneConf: ZoneConf
+
+  /**
+   * 可支持的灾备可用区信息
+   */
+  DrZone: Array<string>
+
+  /**
+   * 是否支持跨可用区只读
+   */
+  IsSupportRemoteRo: boolean
+
+  /**
+   * 可支持的跨可用区只读区信息
+   */
+  RemoteRoZone: Array<string>
+
+  /**
+   * 独享型可用区状态。可能的返回值为：1-上线；3-停售；4-不展示
+   */
+  ExClusterStatus: number
+
+  /**
+   * 独享型可支持的跨可用区只读区信息
+   */
+  ExClusterRemoteRoZone: Array<string>
+
+  /**
+   * 独享型多可用区信息
+   */
+  ExClusterZoneConf: ZoneConf
+
+  /**
+   * 售卖实例类型数组，其中configIds的值与configs结构体中的id一一对应。
+   */
+  SellType: Array<CdbSellType>
+
+  /**
+   * 可用区id
+   */
+  ZoneId: number
+
+  /**
+   * 是否支持ipv6
+   */
+  IsSupportIpv6: boolean
+
+  /**
+   * 可支持的售卖数据库引擎类型
+   */
+  EngineType: Array<string>
+}
+
+/**
  * CreateDBImportJob请求参数结构体
  */
 export interface CreateDBImportJobRequest {
@@ -758,6 +873,36 @@ export interface TableName {
 }
 
 /**
+ * 地域售卖配置
+ */
+export interface CdbRegionSellConf {
+  /**
+   * 地域中文名称
+   */
+  RegionName: string
+
+  /**
+   * 所属大区
+   */
+  Area: string
+
+  /**
+   * 是否为默认地域
+   */
+  IsDefaultRegion: number
+
+  /**
+   * 地域名称
+   */
+  Region: string
+
+  /**
+   * 地域的可用区售卖配置
+   */
+  RegionConfig: Array<CdbZoneSellConf>
+}
+
+/**
  * DeleteAccounts返回参数结构体
  */
 export interface DeleteAccountsResponse {
@@ -1313,6 +1458,21 @@ export interface DescribeBackupTablesRequest {
    * 分页大小，最小值为1，最大值为2000。
    */
   Limit?: number
+}
+
+/**
+ * DescribeCdbZoneConfig返回参数结构体
+ */
+export interface DescribeCdbZoneConfigResponse {
+  /**
+   * 售卖规格和地域信息集合
+   */
+  DataResult: CdbZoneDataResult
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3354,6 +3514,11 @@ export interface CreateCloneInstanceResponse {
 }
 
 /**
+ * DescribeCdbZoneConfig请求参数结构体
+ */
+export type DescribeCdbZoneConfigRequest = null
+
+/**
  *  CPU负载
  */
 export interface DeviceCpuInfo {
@@ -4976,14 +5141,19 @@ export interface ModifyNameOrDescByDpIdResponse {
  */
 export interface DescribeDBPriceResponse {
   /**
-   * 实例价格，单位：分（人民币）。
+   * 实例价格，单位：分。
    */
   Price: number
 
   /**
-   * 实例原价，单位：分（人民币）。
+   * 实例原价，单位：分。
    */
   OriginalPrice: number
+
+  /**
+   * 货币单位。CNY-人民币，USD-美元。
+   */
+  Currency: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -6195,6 +6365,18 @@ export interface InstanceInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   TagList: Array<TagInfoItem>
+
+  /**
+      * 引擎类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EngineType: string
+
+  /**
+      * 最大延迟阈值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MaxDelayTime: number
 }
 
 /**
@@ -7028,6 +7210,67 @@ export interface DescribeAccountPrivilegesRequest {
 }
 
 /**
+ * 售卖配置详情
+ */
+export interface CdbSellConfig {
+  /**
+   * 内存大小，单位为MB
+   */
+  Memory: number
+
+  /**
+   * CPU核心数
+   */
+  Cpu: number
+
+  /**
+   * 磁盘最小规格，单位为GB
+   */
+  VolumeMin: number
+
+  /**
+   * 磁盘最大规格，单位为GB
+   */
+  VolumeMax: number
+
+  /**
+   * 磁盘步长，单位为GB
+   */
+  VolumeStep: number
+
+  /**
+   * 每秒IO数量
+   */
+  Iops: number
+
+  /**
+   * 应用场景描述
+   */
+  Info: string
+
+  /**
+   * 状态值，0 表示该规格对外售卖
+   */
+  Status: number
+
+  /**
+      * 实例类型，可能的取值范围有：UNIVERSAL (通用型), EXCLUSIVE (独享型), BASIC (基础型)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DeviceType: string
+
+  /**
+   * 引擎类型描述，可能的取值范围有：Innodb，RocksDB
+   */
+  EngineType: string
+
+  /**
+   * 售卖规格Id
+   */
+  Id: number
+}
+
+/**
  * DescribeSupportedPrivileges返回参数结构体
  */
 export interface DescribeSupportedPrivilegesResponse {
@@ -7595,6 +7838,26 @@ export interface DeleteDeployGroupsResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 售卖实例类型
+ */
+export interface CdbSellType {
+  /**
+   * 售卖实例名称
+   */
+  TypeName: string
+
+  /**
+   * 引擎版本号
+   */
+  EngineVersion: Array<string>
+
+  /**
+   * 售卖规格Id
+   */
+  ConfigIds: Array<number>
 }
 
 /**
@@ -8531,6 +8794,11 @@ export interface DescribeDBPriceRequest {
    * 续费询价实例ID。如需查询实例续费价格，填写InstanceId和Period即可。
    */
   InstanceId?: string
+
+  /**
+   * 按量计费阶梯。仅PayType=HOUR_PAID有效，支持值包括：1，2，3。阶梯时长见https://cloud.tencent.com/document/product/236/18335。
+   */
+  Ladder?: number
 }
 
 /**
@@ -8556,6 +8824,21 @@ export interface OpenDBInstanceGTIDRequest {
    * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
    */
   InstanceId: string
+}
+
+/**
+ * 各地域可售卖的规格配置
+ */
+export interface CdbZoneDataResult {
+  /**
+   * 售卖规格所有集合
+   */
+  Configs: Array<CdbSellConfig>
+
+  /**
+   * 售卖地域可用区集合
+   */
+  Regions: Array<CdbRegionSellConf>
 }
 
 /**

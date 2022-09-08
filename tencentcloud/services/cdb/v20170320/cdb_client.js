@@ -104,6 +104,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyDBInstanceName", req, cb);
     }
     /**
+     * 本接口(DescribeCdbZoneConfig)用于查询云数据库各地域可售卖的规格配置。
+     */
+    async DescribeCdbZoneConfig(req, cb) {
+        return this.request("DescribeCdbZoneConfig", req, cb);
+    }
+    /**
      * 本接口(StopRollback) 用于撤销实例正在进行的回档任务，该接口返回一个异步任务id。 撤销结果可以通过 DescribeAsyncRequestInfo 查询任务的执行情况。
      */
     async StopRollback(req, cb) {

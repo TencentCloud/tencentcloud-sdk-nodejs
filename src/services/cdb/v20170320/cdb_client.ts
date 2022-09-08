@@ -20,6 +20,7 @@ import { ClientConfig } from "../../../common/interface"
 import {
   SellType,
   TaskDetail,
+  CdbZoneSellConf,
   CreateDBImportJobRequest,
   DescribeDatabasesRequest,
   RWInfo,
@@ -42,6 +43,7 @@ import {
   DescribeParamTemplateInfoRequest,
   DescribeDBInstancesRequest,
   TableName,
+  CdbRegionSellConf,
   DeleteAccountsResponse,
   RollbackTableName,
   CloseWanServiceRequest,
@@ -70,6 +72,7 @@ import {
   Rule,
   AuditPolicy,
   DescribeBackupTablesRequest,
+  DescribeCdbZoneConfigResponse,
   DescribeTablesRequest,
   UpgradeDBInstanceRequest,
   ModifyParamTemplateRequest,
@@ -152,6 +155,7 @@ import {
   DescribeProjectSecurityGroupsRequest,
   StopReplicationRequest,
   CreateCloneInstanceResponse,
+  DescribeCdbZoneConfigRequest,
   DeviceCpuInfo,
   DescribeAsyncRequestInfoRequest,
   BalanceRoGroupLoadRequest,
@@ -291,6 +295,7 @@ import {
   SwitchForUpgradeResponse,
   DescribeCDBProxyRequest,
   DescribeAccountPrivilegesRequest,
+  CdbSellConfig,
   DescribeSupportedPrivilegesResponse,
   StopDBImportJobRequest,
   DescribeLocalBinlogConfigResponse,
@@ -320,6 +325,7 @@ import {
   ModifyAccountMaxUserConnectionsRequest,
   ProxyGroup,
   DeleteDeployGroupsResponse,
+  CdbSellType,
   DescribeTasksRequest,
   DescribeRollbackTaskDetailResponse,
   CreateDBInstanceHourRequest,
@@ -349,6 +355,7 @@ import {
   DescribeDBPriceRequest,
   CreateBackupResponse,
   OpenDBInstanceGTIDRequest,
+  CdbZoneDataResult,
   SqlFileInfo,
   RoGroupAttr,
   UpgradeCDBProxyVersionResponse,
@@ -509,6 +516,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyDBInstanceNameResponse) => void
   ): Promise<ModifyDBInstanceNameResponse> {
     return this.request("ModifyDBInstanceName", req, cb)
+  }
+
+  /**
+   * 本接口(DescribeCdbZoneConfig)用于查询云数据库各地域可售卖的规格配置。
+   */
+  async DescribeCdbZoneConfig(
+    req?: DescribeCdbZoneConfigRequest,
+    cb?: (error: string, rep: DescribeCdbZoneConfigResponse) => void
+  ): Promise<DescribeCdbZoneConfigResponse> {
+    return this.request("DescribeCdbZoneConfig", req, cb)
   }
 
   /**

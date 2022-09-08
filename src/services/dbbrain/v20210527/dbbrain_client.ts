@@ -76,6 +76,7 @@ import {
   DescribeSqlFiltersResponse,
   CreateDBDiagReportUrlRequest,
   DescribeSecurityAuditLogExportTasksResponse,
+  DescribeRedisTopKeyPrefixListRequest,
   DescribeSqlTemplateResponse,
   HealthScoreInfo,
   DescribeTopSpaceTableTimeSeriesResponse,
@@ -116,12 +117,14 @@ import {
   CreateProxySessionKillTaskResponse,
   DescribeSlowLogTimeSeriesStatsResponse,
   MonitorFloatMetric,
+  DescribeRedisTopKeyPrefixListResponse,
   DescribeAllUserGroupResponse,
   ModifyDiagDBInstanceConfResponse,
   DescribeUserSqlAdviceResponse,
   DescribeDBSpaceStatusResponse,
   SQLFilter,
   GroupItem,
+  RedisPreKeySpaceData,
   DescribeTopSpaceTableTimeSeriesRequest,
   DescribeDBDiagReportTasksRequest,
   MonitorMetricSeriesData,
@@ -358,6 +361,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 更改实例限流任务状态，目前仅用于终止限流。
+   */
+  async ModifySqlFilters(
+    req: ModifySqlFiltersRequest,
+    cb?: (error: string, rep: ModifySqlFiltersResponse) => void
+  ): Promise<ModifySqlFiltersResponse> {
+    return this.request("ModifySqlFilters", req, cb)
+  }
+
+  /**
    * 查询redis实例大key列表。
    */
   async DescribeRedisTopBigKeys(
@@ -408,13 +421,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更改实例限流任务状态，目前仅用于终止限流。
+   * 查询redis实例top key前缀列表。
    */
-  async ModifySqlFilters(
-    req: ModifySqlFiltersRequest,
-    cb?: (error: string, rep: ModifySqlFiltersResponse) => void
-  ): Promise<ModifySqlFiltersResponse> {
-    return this.request("ModifySqlFilters", req, cb)
+  async DescribeRedisTopKeyPrefixList(
+    req: DescribeRedisTopKeyPrefixListRequest,
+    cb?: (error: string, rep: DescribeRedisTopKeyPrefixListResponse) => void
+  ): Promise<DescribeRedisTopKeyPrefixListResponse> {
+    return this.request("DescribeRedisTopKeyPrefixList", req, cb)
   }
 
   /**

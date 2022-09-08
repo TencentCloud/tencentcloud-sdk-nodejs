@@ -141,6 +141,15 @@ export interface UserDefineOcrTextReviewTemplateInfoForUpdate {
     ReviewConfidence?: number;
 }
 /**
+ * 音视频审核任务的输入。
+ */
+export interface ReviewAudioVideoTaskInput {
+    /**
+      * 媒体文件 ID。
+      */
+    FileId: string;
+}
+/**
  * DescribeAllClass请求参数结构体
  */
 export interface DescribeAllClassRequest {
@@ -2220,6 +2229,35 @@ export interface RemoveWatermarkTask {
       * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。
       */
     SessionContext: string;
+}
+/**
+ * ReviewAudioVideo请求参数结构体
+ */
+export interface ReviewAudioVideoRequest {
+    /**
+      * 媒体文件 ID，即该文件在云点播上的全局唯一标识符，在上传成功后由云点播后台分配。可以在 [视频上传完成事件通知](/document/product/266/7830) 或 [云点播控制台](https://console.cloud.tencent.com/vod/media) 获取该字段。
+      */
+    FileId: string;
+    /**
+      * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+      */
+    SubAppId?: number;
+    /**
+      * 任务流的优先级，数值越大优先级越高，取值范围是 -10 到 10，不填代表 0。
+      */
+    TasksPriority?: number;
+    /**
+      * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。
+      */
+    SessionContext?: string;
+    /**
+      * 用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
+      */
+    SessionId?: string;
+    /**
+      * 保留字段，特殊用途时使用。
+      */
+    ExtInfo?: string;
 }
 /**
  * 存储地域信息
@@ -11932,6 +11970,11 @@ export interface ReviewAudioVideoTask {
       */
     Message: string;
     /**
+      * 音视频审核任务的输入。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Input: ReviewAudioVideoTaskInput;
+    /**
       * 音视频审核任务的输出。
 注意：此字段可能返回 null，表示取不到有效值。
       */
@@ -12724,6 +12767,19 @@ export interface DrmStreamingsInfoForUpdate {
       * 保护类型为 FairPlay 的转自适应码流模板 ID。
       */
     FairPlayDefinition?: number;
+}
+/**
+ * ReviewAudioVideo返回参数结构体
+ */
+export interface ReviewAudioVideoResponse {
+    /**
+      * 任务 ID
+      */
+    TaskId: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DeleteClass请求参数结构体

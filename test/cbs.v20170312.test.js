@@ -38,6 +38,16 @@ it("cbs.v20170312.RenewDisk", async function () {
     }
 })
 
+it("cbs.v20170312.ApplyDiskBackup", async function () {
+    try {
+       const data = await client.ApplyDiskBackup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cbs.v20170312.CopySnapshotCrossRegions", async function () {
     try {
        const data = await client.CopySnapshotCrossRegions({})
@@ -108,6 +118,26 @@ it("cbs.v20170312.ModifyDisksRenewFlag", async function () {
     }
 })
 
+it("cbs.v20170312.InquirePriceModifyDiskBackupQuota", async function () {
+    try {
+       const data = await client.InquirePriceModifyDiskBackupQuota({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cbs.v20170312.DeleteDiskBackups", async function () {
+    try {
+       const data = await client.DeleteDiskBackups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cbs.v20170312.ModifyAutoSnapshotPolicyAttribute", async function () {
     try {
        const data = await client.ModifyAutoSnapshotPolicyAttribute({})
@@ -121,6 +151,16 @@ it("cbs.v20170312.ModifyAutoSnapshotPolicyAttribute", async function () {
 it("cbs.v20170312.InquiryPriceCreateDisks", async function () {
     try {
        const data = await client.InquiryPriceCreateDisks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cbs.v20170312.DescribeDiskBackups", async function () {
+    try {
+       const data = await client.DescribeDiskBackups({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -148,9 +188,9 @@ it("cbs.v20170312.DeleteAutoSnapshotPolicies", async function () {
     }
 })
 
-it("cbs.v20170312.CreateAutoSnapshotPolicy", async function () {
+it("cbs.v20170312.InitializeDisks", async function () {
     try {
-       const data = await client.CreateAutoSnapshotPolicy({})
+       const data = await client.InitializeDisks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -161,6 +201,16 @@ it("cbs.v20170312.CreateAutoSnapshotPolicy", async function () {
 it("cbs.v20170312.DescribeDisks", async function () {
     try {
        const data = await client.DescribeDisks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cbs.v20170312.ModifyDiskBackupQuota", async function () {
+    try {
+       const data = await client.ModifyDiskBackupQuota({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -248,9 +298,9 @@ it("cbs.v20170312.DescribeSnapshotSharePermission", async function () {
     }
 })
 
-it("cbs.v20170312.InitializeDisks", async function () {
+it("cbs.v20170312.CreateAutoSnapshotPolicy", async function () {
     try {
-       const data = await client.InitializeDisks({})
+       const data = await client.CreateAutoSnapshotPolicy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -338,9 +388,9 @@ it("cbs.v20170312.ModifySnapshotsSharePermission", async function () {
     }
 })
 
-it("cbs.v20170312.CreateSnapshot", async function () {
+it("cbs.v20170312.DetachDisks", async function () {
     try {
-       const data = await client.CreateSnapshot({})
+       const data = await client.DetachDisks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -368,9 +418,9 @@ it("cbs.v20170312.ResizeDisk", async function () {
     }
 })
 
-it("cbs.v20170312.DetachDisks", async function () {
+it("cbs.v20170312.CreateSnapshot", async function () {
     try {
-       const data = await client.DetachDisks({})
+       const data = await client.CreateSnapshot({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

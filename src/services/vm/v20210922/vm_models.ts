@@ -636,6 +636,23 @@ export interface TaskFilter {
 }
 
 /**
+ * 识别类标签结果信息
+ */
+export interface RecognitionResult {
+  /**
+      * 可能的取值有：Teenager 、Gender
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Label: string
+
+  /**
+      * 识别标签列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Tags: Array<Tag>
+}
+
+/**
  * CancelTask返回参数结构体
  */
 export interface CancelTaskResponse {
@@ -697,82 +714,83 @@ export interface AudioResultDetailTextResult {
  */
 export interface AudioResult {
   /**
-      * 是否命中
-0 未命中
-1 命中
+      * 该字段用于返回审核内容是否命中审核模型；取值：0（**未命中**）、1（**命中**）。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   HitFlag: number
 
   /**
-      * 命中的标签
-Porn 色情
-Polity 政治
-Illegal 违法
-Abuse 谩骂
-Terror 暴恐
-Ad 广告
-Moan 呻吟
+      * 该字段用于返回检测结果所对应的恶意标签。<br>返回值：**Normal**：正常，**Porn**：色情，**Abuse**：谩骂，**Ad**：广告，**Custom**：自定义违规；以及其他令人反感、不安全或不适宜的内容类型。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Label: string
 
   /**
-      * 审核建议，可选值：
-Pass 通过，
-Review 建议人审，
-Block 确认违规
+      * 该字段用于返回后续操作建议。当您获取到判定结果后，返回值表示具体的后续建议操作。<br>
+返回值：**Block**：建议屏蔽，**Review** ：建议人工复审，**Pass**：建议通过
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Suggestion: string
 
   /**
-      * 得分，0-100
+      * 该字段用于返回当前标签下的置信度，取值范围：0（**置信度最低**）-100（**置信度最高** ），越高代表文本越有可能属于当前返回的标签；如：*色情 99*，则表明该文本非常有可能属于色情内容。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Score: number
 
   /**
-      * 音频ASR文本
+      * 该字段用于返回音频文件经ASR识别后的文本信息。最长可识别**5小时**的音频文件，若超出时长限制，接口将会报错。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Text: string
 
   /**
-      * 音频片段存储URL，有效期为1天
+      * 该字段用于返回音频片段存储的链接地址，该地址有效期为1天。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Url: string
 
   /**
-      * 音频时长
+      * 该字段用于返回音频文件的时长，单位为毫秒。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Duration: string
 
   /**
-      * 拓展字段
+      * 该字段用于返回输入参数中的额外附加信息（Extra），如未配置则默认返回值为空。<br>备注：不同客户或Biztype下返回信息不同，如需配置该字段请提交工单咨询或联系售后专员处理。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Extra: string
 
   /**
-      * 文本审核结果
+      * 该字段用于返回音频文件经ASR识别后产生的文本的详细审核结果。具体结果内容请参见AudioResultDetailLanguageResult数据结构的细节描述。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   TextResults: Array<AudioResultDetailTextResult>
 
   /**
-      * 音频呻吟审核结果
+      * 该字段用于返回音频文件呻吟检测的详细审核结果。具体结果内容请参见AudioResultDetailMoanResult数据结构的细节描述。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   MoanResults: Array<AudioResultDetailMoanResult>
 
   /**
-      * 音频语种检测结果
+      * 该字段用于返回音频小语种检测的详细审核结果。具体结果内容请参见AudioResultDetailLanguageResult数据结构的细节描述。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   LanguageResults: Array<AudioResultDetailLanguageResult>
+
+  /**
+      * 该字段用于返回当前标签（Lable）下的二级标签。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SubLabel: string
+
+  /**
+      * 识别类标签结果信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RecognitionResults: Array<RecognitionResult>
 }
 
 /**
@@ -780,30 +798,40 @@ Block 确认违规
  */
 export interface AudioResultDetailMoanResult {
   /**
-      * 固定为Moan
+      * 该字段用于返回检测结果需要检测的内容类型，此处固定为**Moan**（呻吟）以调用呻吟检测功能。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Label: string
 
   /**
-   * 分数
+   * 该字段用于返回呻吟检测的置信度，取值范围：0（**置信度最低**）-100（**置信度最高**），越高代表音频越有可能属于呻吟内容。
    */
   Score: number
 
   /**
-   * 开始时间
+   * 该字段用于返回对应呻吟标签的片段在音频文件内的开始时间，单位为毫秒。
    */
   StartTime: number
 
   /**
-   * 结束时间
+   * 该字段用于返回对应呻吟标签的片段在音频文件内的结束时间，单位为毫秒。
    */
   EndTime: number
 
   /**
-   * 子标签码
+   * *内测中，敬请期待*
    */
   SubLabelCode: string
+
+  /**
+   * 该字段用于返回当前标签（Lable）下的二级标签。
+   */
+  SubLabel: string
+
+  /**
+   * 该字段用于返回基于恶意标签的后续操作建议。当您获取到判定结果后，返回值表示系统推荐的后续操作；建议您按照业务所需，对不同违规类型与建议值进行处理。<br>返回值：**Block**：建议屏蔽，**Review** ：建议人工复审，**Pass**：建议通过
+   */
+  Suggestion: string
 }
 
 /**
@@ -907,6 +935,37 @@ export interface MediaInfo {
    * 高，单位为像素
    */
   Height: number
+}
+
+/**
+ * 音频切片识别标签
+ */
+export interface Tag {
+  /**
+      * 根据Label字段确定具体名称：
+当Label 为Teenager 时 Name可能取值有：Teenager 
+当Label 为Gender 时 Name可能取值有：Male 、Female
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Name: string
+
+  /**
+      * 置信分：0～100，数值越大表示置信度越高
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Score: number
+
+  /**
+      * 识别开始偏移时间，单位：毫秒
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  StartTime: number
+
+  /**
+      * 识别结束偏移时间，单位：毫秒
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EndTime: number
 }
 
 /**

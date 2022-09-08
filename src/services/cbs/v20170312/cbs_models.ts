@@ -16,6 +16,52 @@
  */
 
 /**
+ * 快照操作日志。
+ */
+export interface SnapshotOperationLog {
+  /**
+      * 操作者的UIN。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Operator: string
+
+  /**
+      * 操作类型。取值范围：
+SNAP_OPERATION_DELETE：删除快照
+SNAP_OPERATION_ROLLBACK：回滚快照
+SNAP_OPERATION_MODIFY：修改快照属性
+SNAP_OPERATION_CREATE：创建快照
+SNAP_OPERATION_COPY：跨地域复制快照
+ASP_OPERATION_CREATE_SNAP：由定期快照策略创建快照
+ASP_OPERATION_DELETE_SNAP：由定期快照策略删除快照
+      */
+  Operation: string
+
+  /**
+   * 操作的快照ID。
+   */
+  SnapshotId: string
+
+  /**
+      * 操作的状态。取值范围：
+SUCCESS :表示操作成功 
+FAILED :表示操作失败 
+PROCESSING :表示操作中。
+      */
+  OperationState: string
+
+  /**
+   * 开始时间。
+   */
+  StartTime: string
+
+  /**
+   * 结束时间。
+   */
+  EndTime: string
+}
+
+/**
  * ModifyDiskExtraPerformance请求参数结构体
  */
 export interface ModifyDiskExtraPerformanceRequest {
@@ -38,6 +84,43 @@ export interface ModifyDiskAttributesResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeDiskBackups请求参数结构体
+ */
+export interface DescribeDiskBackupsRequest {
+  /**
+   * 要查询备份点的ID列表。参数不支持同时指定 DiskBackupIds 和 Filters。
+   */
+  DiskBackupIds?: Array<string>
+
+  /**
+      * 过滤条件，参数不支持同时指定 DiskBackupIds 和 Filters。过滤条件：<br><li>disk-backup-id - Array of String - 是否必填：否 -（过滤条件）按照备份点的ID过滤。备份点ID形如：dbp-11112222。
+<br><li>disk-id - Array of String - 是否必填：否 -（过滤条件）按照创建备份点的云硬盘ID过滤。
+<br><li>disk-usage - Array of String - 是否必填：否 -（过滤条件）按创建备份点的云硬盘类型过滤。 (SYSTEM_DISK：代表系统盘 | DATA_DISK：代表数据盘。)
+      */
+  Filters?: Array<Filter>
+
+  /**
+   * 偏移量，默认为0。关于`Offset`的更进一步介绍请参考API[简介](/document/product/362/15633)中的相关小节。
+   */
+  Offset?: number
+
+  /**
+   * 返回数量，默认为20，最大值为100。关于`Limit`的更进一步介绍请参考 API [简介](/document/product/362/15633)中的相关小节。
+   */
+  Limit?: number
+
+  /**
+   * 输出云硬盘备份点列表的排列顺序。取值范围：<br><li>ASC：升序排列<br><li>DESC：降序排列。
+   */
+  Order?: string
+
+  /**
+   * 云硬盘备份点列表排序的依据字段。取值范围：<br><li>CREATE_TIME：依据云硬盘备份点的创建时间排序<br>默认按创建时间排序。
+   */
+  OrderField?: string
 }
 
 /**
@@ -160,6 +243,21 @@ export interface ModifyAutoSnapshotPolicyAttributeResponse {
 }
 
 /**
+ * ModifyDiskBackupQuota请求参数结构体
+ */
+export interface ModifyDiskBackupQuotaRequest {
+  /**
+   * 云硬盘ID。
+   */
+  DiskId: string
+
+  /**
+   * 调整之后的云硬盘备份点配额。
+   */
+  DiskBackupQuota: number
+}
+
+/**
  * InquiryPriceCreateDisks返回参数结构体
  */
 export interface InquiryPriceCreateDisksResponse {
@@ -250,9 +348,29 @@ export interface ModifySnapshotsSharePermissionResponse {
 }
 
 /**
+ * DeleteDiskBackups请求参数结构体
+ */
+export interface DeleteDiskBackupsRequest {
+  /**
+   * 待删除的云硬盘备份点ID。
+   */
+  DiskBackupIds: Array<string>
+}
+
+/**
  * InitializeDisks返回参数结构体
  */
 export interface InitializeDisksResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteDiskBackups返回参数结构体
+ */
+export interface DeleteDiskBackupsResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -285,49 +403,23 @@ export interface DescribeDiskStoragePoolRequest {
 }
 
 /**
- * 快照操作日志。
+ * DescribeDiskBackups返回参数结构体
  */
-export interface SnapshotOperationLog {
+export interface DescribeDiskBackupsResponse {
   /**
-      * 操作者的UIN。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Operator: string
-
-  /**
-      * 操作类型。取值范围：
-SNAP_OPERATION_DELETE：删除快照
-SNAP_OPERATION_ROLLBACK：回滚快照
-SNAP_OPERATION_MODIFY：修改快照属性
-SNAP_OPERATION_CREATE：创建快照
-SNAP_OPERATION_COPY：跨地域复制快照
-ASP_OPERATION_CREATE_SNAP：由定期快照策略创建快照
-ASP_OPERATION_DELETE_SNAP：由定期快照策略删除快照
-      */
-  Operation: string
-
-  /**
-   * 操作的快照ID。
+   * 符合条件的云硬盘备份点数量。
    */
-  SnapshotId: string
+  TotalCount: number
 
   /**
-      * 操作的状态。取值范围：
-SUCCESS :表示操作成功 
-FAILED :表示操作失败 
-PROCESSING :表示操作中。
-      */
-  OperationState: string
-
-  /**
-   * 开始时间。
+   * 云硬盘备份点的详细信息列表。
    */
-  StartTime: string
+  DiskBackupSet: Array<DiskBackup>
 
   /**
-   * 结束时间。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  EndTime: string
+  RequestId?: string
 }
 
 /**
@@ -586,6 +678,16 @@ export interface DescribeDiskConfigQuotaResponse {
    */
   DiskConfigSet: Array<DiskConfig>
 
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ApplyDiskBackup返回参数结构体
+ */
+export interface ApplyDiskBackupResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -941,23 +1043,13 @@ export interface DescribeSnapshotSharePermissionResponse {
 }
 
 /**
- * CopySnapshotCrossRegions请求参数结构体
+ * ModifyDiskBackupQuota返回参数结构体
  */
-export interface CopySnapshotCrossRegionsRequest {
+export interface ModifyDiskBackupQuotaResponse {
   /**
-   * 快照需要复制到的目标地域，各地域的标准取值可通过接口[DescribeRegions](https://cloud.tencent.com/document/product/213/9456)查询，且只能传入支持快照的地域。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  DestinationRegions: Array<string>
-
-  /**
-   * 需要跨地域复制的源快照ID，可通过[DescribeSnapshots](/document/product/362/15647)查询。
-   */
-  SnapshotId?: string
-
-  /**
-   * 新复制快照的名称，如果不传，则默认取值为“Copied 源快照ID from 地域名”。
-   */
-  SnapshotName?: string
+  RequestId?: string
 }
 
 /**
@@ -993,6 +1085,21 @@ export interface DescribeSnapshotSharePermissionRequest {
    * 要查询快照的ID。可通过[DescribeSnapshots](https://cloud.tencent.com/document/api/362/15647)查询获取。
    */
   SnapshotId: string
+}
+
+/**
+ * InquirePriceModifyDiskBackupQuota请求参数结构体
+ */
+export interface InquirePriceModifyDiskBackupQuotaRequest {
+  /**
+   * 云硬盘ID， 通过DescribeDisks（查询云硬盘信息）接口查询。
+   */
+  DiskId: string
+
+  /**
+   * 修改后的云硬盘备份点配额，即云盘可以拥有的备份点数量，单位为个。
+   */
+  DiskBackupQuota: number
 }
 
 /**
@@ -1129,6 +1236,16 @@ export interface ModifyDisksRenewFlagRequest {
 }
 
 /**
+ * ModifySnapshotAttribute返回参数结构体
+ */
+export interface ModifySnapshotAttributeResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyDiskAttributes请求参数结构体
  */
 export interface ModifyDiskAttributesRequest {
@@ -1256,6 +1373,21 @@ export interface ResizeDiskRequest {
    * 云硬盘扩容后的大小，单位为GB，必须大于当前云硬盘大小。云盘大小取值范围参见云硬盘[产品分类](/document/product/362/2353)的说明。
    */
   DiskSize: number
+}
+
+/**
+ * ApplyDiskBackup请求参数结构体
+ */
+export interface ApplyDiskBackupRequest {
+  /**
+   * 云硬盘备份点ID，可通过 DescribeDiskBackups 查询。
+   */
+  DiskBackupId: string
+
+  /**
+   * 云硬盘备份点原云硬盘ID，可通过DescribeDisks接口查询。
+   */
+  DiskId: string
 }
 
 /**
@@ -1410,6 +1542,21 @@ export interface DiskConfig {
    * 最大可配置云盘大小，单位GB。
    */
   MaxDiskSize?: number
+}
+
+/**
+ * InquirePriceModifyDiskBackupQuota返回参数结构体
+ */
+export interface InquirePriceModifyDiskBackupQuotaResponse {
+  /**
+   * 描述了修改云硬盘备份点之后的云盘价格。
+   */
+  DiskPrice: Price
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1751,6 +1898,56 @@ export interface DescribeDiskOperationLogsRequest {
 }
 
 /**
+ * 云硬盘备份点。
+ */
+export interface DiskBackup {
+  /**
+   * 云硬盘备份点的ID。
+   */
+  DiskBackupId: string
+
+  /**
+   * 云硬盘备份点关联的云硬盘ID。
+   */
+  DiskId: string
+
+  /**
+   * 云硬盘大小，单位GB。
+   */
+  DiskSize: number
+
+  /**
+   * 云硬盘类型。取值范围：<br><li>SYSTEM_DISK：系统盘<br><li>DATA_DISK：数据盘。
+   */
+  DiskUsage: string
+
+  /**
+   * 备份点名称。
+   */
+  DiskBackupName: string
+
+  /**
+   * 云硬盘备份点状态。取值范围：<br><li>NORMAL：正常<br><li>CREATING：创建中<br><li>ROLLBACKING：回滚中
+   */
+  DiskBackupState: string
+
+  /**
+   * 云硬盘创建进度百分比。
+   */
+  Percent: number
+
+  /**
+   * 云硬盘备份点的创建时间。
+   */
+  CreateTime: string
+
+  /**
+   * 云盘是否为加密盘。取值范围：<br><li>false:表示非加密盘<br><li>true:表示加密盘。
+   */
+  Encrypt: boolean
+}
+
+/**
  * DescribeDisks请求参数结构体
  */
 export interface DescribeDisksRequest {
@@ -1866,62 +2063,13 @@ export interface Policy {
 }
 
 /**
- * 描述预付费或后付费云盘的价格。
+ * ModifyDiskExtraPerformance返回参数结构体
  */
-export interface Price {
+export interface ModifyDiskExtraPerformanceResponse {
   /**
-      * 后付费云盘折扣单价，单位：元。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  UnitPriceDiscount: number
-
-  /**
-      * 预付费云盘预支费用的折扣价，单位：元。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DiscountPrice?: number
-
-  /**
-      * 后付费云盘原单价，单位：元。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  UnitPrice: number
-
-  /**
-      * 高精度后付费云盘原单价, 单位：元
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  UnitPriceHigh: string
-
-  /**
-      * 高精度预付费云盘预支费用的原价, 单位：元	。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  OriginalPriceHigh: string
-
-  /**
-      * 预付费云盘预支费用的原价，单位：元。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  OriginalPrice?: number
-
-  /**
-      * 高精度预付费云盘预支费用的折扣价, 单位：元
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DiscountPriceHigh: string
-
-  /**
-      * 高精度后付费云盘折扣单价, 单位：元
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  UnitPriceDiscountHigh: string
-
-  /**
-      * 后付费云盘的计价单元，取值范围：<br><li>HOUR：表示后付费云盘的计价单元是按小时计算。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ChargeUnit: string
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2075,13 +2223,23 @@ export interface AutoMountConfiguration {
 }
 
 /**
- * ModifySnapshotAttribute返回参数结构体
+ * CopySnapshotCrossRegions请求参数结构体
  */
-export interface ModifySnapshotAttributeResponse {
+export interface CopySnapshotCrossRegionsRequest {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 快照需要复制到的目标地域，各地域的标准取值可通过接口[DescribeRegions](https://cloud.tencent.com/document/product/213/9456)查询，且只能传入支持快照的地域。
    */
-  RequestId?: string
+  DestinationRegions: Array<string>
+
+  /**
+   * 需要跨地域复制的源快照ID，可通过[DescribeSnapshots](/document/product/362/15647)查询。
+   */
+  SnapshotId?: string
+
+  /**
+   * 新复制快照的名称，如果不传，则默认取值为“Copied 源快照ID from 地域名”。
+   */
+  SnapshotName?: string
 }
 
 /**
@@ -2287,13 +2445,62 @@ export interface CreateAutoSnapshotPolicyRequest {
 }
 
 /**
- * ModifyDiskExtraPerformance返回参数结构体
+ * 描述预付费或后付费云盘的价格。
  */
-export interface ModifyDiskExtraPerformanceResponse {
+export interface Price {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+      * 后付费云盘折扣单价，单位：元。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UnitPriceDiscount: number
+
+  /**
+      * 预付费云盘预支费用的折扣价，单位：元。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DiscountPrice?: number
+
+  /**
+      * 后付费云盘原单价，单位：元。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UnitPrice: number
+
+  /**
+      * 高精度后付费云盘原单价, 单位：元
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UnitPriceHigh: string
+
+  /**
+      * 高精度预付费云盘预支费用的原价, 单位：元	。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OriginalPriceHigh: string
+
+  /**
+      * 预付费云盘预支费用的原价，单位：元。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OriginalPrice?: number
+
+  /**
+      * 高精度预付费云盘预支费用的折扣价, 单位：元
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DiscountPriceHigh: string
+
+  /**
+      * 高精度后付费云盘折扣单价, 单位：元
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UnitPriceDiscountHigh: string
+
+  /**
+      * 后付费云盘的计价单元，取值范围：<br><li>HOUR：表示后付费云盘的计价单元是按小时计算。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ChargeUnit: string
 }
 
 /**

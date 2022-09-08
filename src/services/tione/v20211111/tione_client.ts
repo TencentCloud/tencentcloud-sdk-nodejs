@@ -18,9 +18,10 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  ModelInfo,
   DescribeLogsRequest,
-  DeleteTrainingModelVersionResponse,
-  PointInfo,
+  DescribeDatasetDetailUnstructuredRequest,
+  BatchTaskDetail,
   StartTrainingTaskRequest,
   DescribeDatasetDetailStructuredResponse,
   DescribeBillingResourceGroupsRequest,
@@ -29,55 +30,70 @@ import {
   SpecUnit,
   CreateDatasetResponse,
   DescribeTrainingTasksRequest,
-  DescribeDatasetDetailUnstructuredRequest,
+  DescribeBatchTaskRequest,
+  DeleteTrainingModelVersionResponse,
   CosPathInfo,
   DescribeBillingResourceGroupsResponse,
   SpecPrice,
   DescribeTrainingMetricsRequest,
   DescribeTrainingTaskPodsRequest,
-  DescribeTrainingModelVersionRequest,
+  CreateBatchTaskRequest,
   DescribeLatestTrainingMetricsResponse,
   DescribeDatasetDetailUnstructuredResponse,
   FilterLabelInfo,
   CFSConfig,
   PushTrainingMetricsRequest,
   InferTemplate,
-  FrameworkVersion,
+  StopBatchTaskRequest,
+  DeleteTrainingModelResponse,
   DataPoint,
   CreateTrainingModelRequest,
-  DescribeTrainingModelVersionsResponse,
+  SchemaInfo,
   StartCmdInfo,
+  DeleteBatchTaskRequest,
   DescribeTrainingModelsResponse,
+  DescribeBatchTaskInstancesResponse,
   ResourceConfigInfo,
+  Spec,
   TrainingMetric,
   Tag,
   DescribeDatasetsRequest,
-  DeleteTrainingModelResponse,
+  FrameworkVersion,
   DescribeInferTemplatesResponse,
+  DescribeBillingSpecsRequest,
   DescribeInferTemplatesRequest,
+  DescribeBatchTaskInstancesRequest,
   GpuDetail,
   DescribeTrainingFrameworksRequest,
+  DescribeBatchTasksResponse,
   DetectionLabelInfo,
   InferTemplateGroup,
   DatasetInfo,
   TagFilter,
+  BatchTaskSetItem,
   ImageInfo,
   CreateTrainingTaskResponse,
   CreateTrainingTaskRequest,
   DescribeDatasetsResponse,
   DescribeBillingSpecsPriceRequest,
   Instance,
-  DeleteTrainingModelRequest,
+  DescribeBillingSpecsResponse,
   DeleteTrainingTaskResponse,
+  BatchTaskInstance,
+  CreateBatchTaskResponse,
   DatasetGroup,
+  DataSetConfig,
   TrainingDataPoint,
   DescribeLatestTrainingMetricsRequest,
   ResourceInfo,
   GroupResource,
-  DataSetConfig,
+  DeleteTrainingModelRequest,
   DeleteTrainingTaskRequest,
   Filter,
+  DeleteBatchTaskResponse,
+  DescribeBatchTasksRequest,
   CreateDatasetRequest,
+  StopBatchTaskResponse,
   TrainingModelDTO,
   CustomTrainingData,
   RowItem,
@@ -89,16 +105,18 @@ import {
   CustomTrainingPoint,
   TrainingTaskDetail,
   DescribeTrainingTasksResponse,
+  CronInfo,
   FrameworkInfo,
   DescribeLogsResponse,
   TrainingModelVersionDTO,
   DescribeTrainingTaskRequest,
   RowValue,
   TrainingTaskSetItem,
-  SchemaInfo,
+  DescribeTrainingModelVersionsResponse,
   DeleteDatasetRequest,
   CustomTrainingMetric,
   DataConfig,
+  DescribeTrainingModelVersionRequest,
   PushTrainingMetricsResponse,
   StopTrainingTaskResponse,
   HDFSConfig,
@@ -106,8 +124,10 @@ import {
   DescribeTrainingTaskPodsResponse,
   OcrLabelInfo,
   DescribeTrainingModelsRequest,
+  PointInfo,
   ResourceGroup,
   DescribeTrainingTaskResponse,
+  DescribeBatchTaskResponse,
   MetricData,
   DeleteTrainingModelVersionRequest,
   DescribeBillingSpecsPriceResponse,
@@ -134,6 +154,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTrainingModelVersionResponse) => void
   ): Promise<DescribeTrainingModelVersionResponse> {
     return this.request("DescribeTrainingModelVersion", req, cb)
+  }
+
+  /**
+   * 删除跑批任务
+   */
+  async DeleteBatchTask(
+    req: DeleteBatchTaskRequest,
+    cb?: (error: string, rep: DeleteBatchTaskResponse) => void
+  ): Promise<DeleteBatchTaskResponse> {
+    return this.request("DeleteBatchTask", req, cb)
+  }
+
+  /**
+   * 本接口(DescribeBillingSpecs)用于查询计费项列表
+   */
+  async DescribeBillingSpecs(
+    req: DescribeBillingSpecsRequest,
+    cb?: (error: string, rep: DescribeBillingSpecsResponse) => void
+  ): Promise<DescribeBillingSpecsResponse> {
+    return this.request("DescribeBillingSpecs", req, cb)
   }
 
   /**
@@ -197,6 +237,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 停止跑批任务
+   */
+  async StopBatchTask(
+    req: StopBatchTaskRequest,
+    cb?: (error: string, rep: StopBatchTaskResponse) => void
+  ): Promise<StopBatchTaskResponse> {
+    return this.request("StopBatchTask", req, cb)
+  }
+
+  /**
    * 查询非结构化数据集详情
    */
   async DescribeDatasetDetailUnstructured(
@@ -247,6 +297,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询跑批实例列表
+   */
+  async DescribeBatchTaskInstances(
+    req: DescribeBatchTaskInstancesRequest,
+    cb?: (error: string, rep: DescribeBatchTaskInstancesResponse) => void
+  ): Promise<DescribeBatchTaskInstancesResponse> {
+    return this.request("DescribeBatchTaskInstances", req, cb)
+  }
+
+  /**
+   * 停止模型训练任务
+   */
+  async StopTrainingTask(
+    req: StopTrainingTaskRequest,
+    cb?: (error: string, rep: StopTrainingTaskResponse) => void
+  ): Promise<StopTrainingTaskResponse> {
+    return this.request("StopTrainingTask", req, cb)
+  }
+
+  /**
    * 启动模型训练任务
    */
   async StartTrainingTask(
@@ -277,13 +347,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 停止模型训练任务
+   * 批量预测任务列表信息
    */
-  async StopTrainingTask(
-    req: StopTrainingTaskRequest,
-    cb?: (error: string, rep: StopTrainingTaskResponse) => void
-  ): Promise<StopTrainingTaskResponse> {
-    return this.request("StopTrainingTask", req, cb)
+  async DescribeBatchTasks(
+    req: DescribeBatchTasksRequest,
+    cb?: (error: string, rep: DescribeBatchTasksResponse) => void
+  ): Promise<DescribeBatchTasksResponse> {
+    return this.request("DescribeBatchTasks", req, cb)
   }
 
   /**
@@ -337,6 +407,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建跑批任务
+   */
+  async CreateBatchTask(
+    req: CreateBatchTaskRequest,
+    cb?: (error: string, rep: CreateBatchTaskResponse) => void
+  ): Promise<CreateBatchTaskResponse> {
+    return this.request("CreateBatchTask", req, cb)
+  }
+
+  /**
    * 删除训练任务
    */
   async DeleteTrainingTask(
@@ -344,6 +424,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteTrainingTaskResponse) => void
   ): Promise<DeleteTrainingTaskResponse> {
     return this.request("DeleteTrainingTask", req, cb)
+  }
+
+  /**
+   * 查询跑批任务
+   */
+  async DescribeBatchTask(
+    req: DescribeBatchTaskRequest,
+    cb?: (error: string, rep: DescribeBatchTaskResponse) => void
+  ): Promise<DescribeBatchTaskResponse> {
+    return this.request("DescribeBatchTask", req, cb)
   }
 
   /**

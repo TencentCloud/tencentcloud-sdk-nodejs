@@ -538,6 +538,16 @@ it("vod.v20180717.DeleteSuperPlayerConfig", async function () {
     }
 })
 
+it("vod.v20180717.ReviewAudioVideo", async function () {
+    try {
+       const data = await client.ReviewAudioVideo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vod.v20180717.DescribeProcedureTemplates", async function () {
     try {
        const data = await client.DescribeProcedureTemplates({})

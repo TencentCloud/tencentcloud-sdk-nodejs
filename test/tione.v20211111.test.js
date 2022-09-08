@@ -28,6 +28,26 @@ it("tione.v20211111.DescribeTrainingModelVersion", async function () {
     }
 })
 
+it("tione.v20211111.DeleteBatchTask", async function () {
+    try {
+       const data = await client.DeleteBatchTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tione.v20211111.DescribeBillingSpecs", async function () {
+    try {
+       const data = await client.DescribeBillingSpecs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tione.v20211111.DeleteDataset", async function () {
     try {
        const data = await client.DeleteDataset({})
@@ -88,6 +108,16 @@ it("tione.v20211111.CreateTrainingTask", async function () {
     }
 })
 
+it("tione.v20211111.StopBatchTask", async function () {
+    try {
+       const data = await client.StopBatchTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tione.v20211111.DescribeDatasetDetailUnstructured", async function () {
     try {
        const data = await client.DescribeDatasetDetailUnstructured({})
@@ -138,6 +168,26 @@ it("tione.v20211111.DeleteTrainingModel", async function () {
     }
 })
 
+it("tione.v20211111.DescribeBatchTaskInstances", async function () {
+    try {
+       const data = await client.DescribeBatchTaskInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tione.v20211111.StopTrainingTask", async function () {
+    try {
+       const data = await client.StopTrainingTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tione.v20211111.StartTrainingTask", async function () {
     try {
        const data = await client.StartTrainingTask({})
@@ -168,9 +218,9 @@ it("tione.v20211111.PushTrainingMetrics", async function () {
     }
 })
 
-it("tione.v20211111.StopTrainingTask", async function () {
+it("tione.v20211111.DescribeBatchTasks", async function () {
     try {
-       const data = await client.StopTrainingTask({})
+       const data = await client.DescribeBatchTasks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -228,9 +278,29 @@ it("tione.v20211111.DescribeTrainingTask", async function () {
     }
 })
 
+it("tione.v20211111.CreateBatchTask", async function () {
+    try {
+       const data = await client.CreateBatchTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tione.v20211111.DeleteTrainingTask", async function () {
     try {
        const data = await client.DeleteTrainingTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tione.v20211111.DescribeBatchTask", async function () {
+    try {
+       const data = await client.DescribeBatchTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

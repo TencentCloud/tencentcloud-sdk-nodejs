@@ -2258,9 +2258,14 @@ export interface UpdateGrafanaNotificationChannelRequest {
   Receivers: Array<string>
 
   /**
-   * 额外组织 ID 数组
+   * 已废弃，请使用 OrganizationIds
    */
   ExtraOrgIds?: Array<string>
+
+  /**
+   * 生效的组织 ID 数组
+   */
+  OrganizationIds?: Array<string>
 }
 
 /**
@@ -3615,7 +3620,7 @@ export interface CreateGrafanaNotificationChannelRequest {
   ChannelName: string
 
   /**
-   * 组织 ID
+   * 默认为1，已废弃，请使用 OrganizationIds
    */
   OrgId: number
 
@@ -3625,9 +3630,14 @@ export interface CreateGrafanaNotificationChannelRequest {
   Receivers: Array<string>
 
   /**
-   * 额外组织 ID 数组
+   * 额外组织 ID 数组，已废弃，请使用 OrganizationIds
    */
   ExtraOrgIds?: Array<string>
+
+  /**
+   * 生效的所有组织 ID 数组，默认为 ["1"]
+   */
+  OrganizationIds?: Array<string>
 }
 
 /**
@@ -4042,6 +4052,12 @@ export interface PrometheusScrapeJob {
  * CreateGrafanaIntegration返回参数结构体
  */
 export interface CreateGrafanaIntegrationResponse {
+  /**
+      * 集成 ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IntegrationId: string
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7724,21 +7740,27 @@ export interface GrafanaNotificationChannel {
   UpdatedAt: string
 
   /**
-   * 默认生效组织
+   * 默认生效组织，已废弃，请使用 OrganizationIds
    */
   OrgId: string
 
   /**
-      * 额外生效组织
+      * 额外生效组织，已废弃，请使用 OrganizationIds
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ExtraOrgIds: Array<string>
 
   /**
-      * 生效组织
+      * 生效组织，已废弃，请使用 OrganizationIds
 注意：此字段可能返回 null，表示取不到有效值。
       */
   OrgIds: string
+
+  /**
+      * 告警渠道的所有生效组织
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OrganizationIds: string
 }
 
 /**

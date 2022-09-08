@@ -38,9 +38,9 @@ it("cynosdb.v20190107.DescribeBackupList", async function () {
     }
 })
 
-it("cynosdb.v20190107.DescribeAccountAllGrantPrivileges", async function () {
+it("cynosdb.v20190107.RevokeAccountPrivileges", async function () {
     try {
-       const data = await client.DescribeAccountAllGrantPrivileges({})
+       const data = await client.RevokeAccountPrivileges({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -158,16 +158,6 @@ it("cynosdb.v20190107.ModifyClusterName", async function () {
     }
 })
 
-it("cynosdb.v20190107.RevokeAccountPrivileges", async function () {
-    try {
-       const data = await client.RevokeAccountPrivileges({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("cynosdb.v20190107.DescribeInstanceDetail", async function () {
     try {
        const data = await client.DescribeInstanceDetail({})
@@ -261,6 +251,16 @@ it("cynosdb.v20190107.ModifyAccountParams", async function () {
 it("cynosdb.v20190107.DescribeClusterParams", async function () {
     try {
        const data = await client.DescribeClusterParams({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.CreateBackup", async function () {
+    try {
+       const data = await client.CreateBackup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -398,9 +398,9 @@ it("cynosdb.v20190107.DescribeBackupConfig", async function () {
     }
 })
 
-it("cynosdb.v20190107.DescribeInstanceSlowQueries", async function () {
+it("cynosdb.v20190107.DescribeAccountAllGrantPrivileges", async function () {
     try {
-       const data = await client.DescribeInstanceSlowQueries({})
+       const data = await client.DescribeAccountAllGrantPrivileges({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -508,6 +508,16 @@ it("cynosdb.v20190107.CreateAccounts", async function () {
     }
 })
 
+it("cynosdb.v20190107.ModifyClusterStorage", async function () {
+    try {
+       const data = await client.ModifyClusterStorage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cynosdb.v20190107.ActivateInstance", async function () {
     try {
        const data = await client.ActivateInstance({})
@@ -551,6 +561,16 @@ it("cynosdb.v20190107.SwitchClusterZone", async function () {
 it("cynosdb.v20190107.DisassociateSecurityGroups", async function () {
     try {
        const data = await client.DisassociateSecurityGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.DescribeInstanceSlowQueries", async function () {
+    try {
+       const data = await client.DescribeInstanceSlowQueries({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -138,6 +138,16 @@ it("cdb.v20170320.ModifyDBInstanceName", async function () {
     }
 })
 
+it("cdb.v20170320.DescribeCdbZoneConfig", async function () {
+    try {
+       const data = await client.DescribeCdbZoneConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdb.v20170320.StopRollback", async function () {
     try {
        const data = await client.StopRollback({})

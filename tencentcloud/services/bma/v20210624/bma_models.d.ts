@@ -875,6 +875,10 @@ export interface CreateCRWorkRequest {
       * x
       */
     Content?: string;
+    /**
+      * x
+      */
+    MonitorEndTime?: string;
 }
 /**
  * DescribeBPCompanyInfo请求参数结构体

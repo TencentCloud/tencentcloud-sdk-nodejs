@@ -418,6 +418,11 @@ export interface Certificates {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     IsSM: boolean;
+    /**
+      * 证书算法
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EncryptAlgorithm: string;
 }
 /**
  * 获取证书列表（DescribeCertificates）返回参数键为 Certificates 数组下，key为CertificateExtra 的内容。
@@ -1170,6 +1175,11 @@ export interface DescribeCertificateDetailResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     EncryptCertFingerprint: string;
+    /**
+      * 证书算法
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EncryptAlgorithm: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

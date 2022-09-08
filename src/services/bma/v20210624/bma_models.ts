@@ -1068,6 +1068,11 @@ export interface CreateCRWorkRequest {
    * x
    */
   Content?: string
+
+  /**
+   * x
+   */
+  MonitorEndTime?: string
 }
 
 /**

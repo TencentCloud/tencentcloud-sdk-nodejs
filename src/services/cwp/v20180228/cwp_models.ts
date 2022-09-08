@@ -817,6 +817,16 @@ export interface MalWareList {
    * 木马文件是否存在 0:不存在，1:存在
    */
   FileExists: number
+
+  /**
+   * cvm quuid
+   */
+  Quuid: string
+
+  /**
+   * 木马样本md5
+   */
+  MD5: string
 }
 
 /**
@@ -3037,6 +3047,7 @@ Other 混合云专区
 <li>Os -String 是否必填: 否 - 操作系统( DescribeMachineOsList 接口 值 )
 每个过滤条件只支持一个值，暂不支持多个值“或”关系查询
 <li>Quuid - String - 是否必填: 否 - 云服务器uuid  最大100条.</li>
+<li>AddedOnTheFifteen- String 是否必填: 否 - 是否只查询15天内新增的主机( 1：是) </li>
       */
   Filters?: Array<Filter>
 
@@ -6241,6 +6252,12 @@ export interface Machine {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   CloudTags: Array<Tags>
+
+  /**
+      * 是否15天内新增的主机 0：非15天内新增的主机，1：15天内增加的主机
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsAddedOnTheFifteen: number
 }
 
 /**
@@ -14250,6 +14267,12 @@ export interface DescribeGeneralStatResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ProtectDays: number
+
+  /**
+      * 15天内新增的主机数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AddedOnTheFifteen: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

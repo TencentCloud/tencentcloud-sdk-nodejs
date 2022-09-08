@@ -159,6 +159,27 @@ export interface ModifyBackupNameResponse {
     RequestId?: string;
 }
 /**
+ * ModifyClusterStorage请求参数结构体
+ */
+export interface ModifyClusterStorageRequest {
+    /**
+      * 集群ID
+      */
+    ClusterId: string;
+    /**
+      * 集群新存储大小（单位G）
+      */
+    NewStorageLimit: number;
+    /**
+      * 集群原存储大小（单位G）
+      */
+    OldStorageLimit: number;
+    /**
+      * 交易模式 0-下单并支付 1-下单
+      */
+    DealMode?: number;
+}
+/**
  * SwitchClusterZone返回参数结构体
  */
 export interface SwitchClusterZoneResponse {
@@ -597,6 +618,21 @@ export interface ActivateInstanceRequest {
     InstanceIdList: Array<string>;
 }
 /**
+ * 数据库表信息
+ */
+export interface DatabaseTables {
+    /**
+      * 数据库名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Database?: string;
+    /**
+      * 表名称列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Tables?: Array<string>;
+}
+/**
  * AddClusterSlaveZone请求参数结构体
  */
 export interface AddClusterSlaveZoneRequest {
@@ -696,6 +732,30 @@ export interface DescribeClustersRequest {
       * 搜索条件，若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。
       */
     Filters?: Array<QueryFilter>;
+}
+/**
+ * ModifyClusterStorage返回参数结构体
+ */
+export interface ModifyClusterStorageResponse {
+    /**
+      * 冻结流水ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TranId: string;
+    /**
+      * 大订单号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BigDealIds: Array<string>;
+    /**
+      * 订单号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DealNames: Array<string>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeInstanceDetail返回参数结构体
@@ -1887,6 +1947,19 @@ export interface DescribeResourcesByDealNameRequest {
     DealNames?: Array<string>;
 }
 /**
+ * CreateBackup返回参数结构体
+ */
+export interface CreateBackupResponse {
+    /**
+      * 异步任务流ID
+      */
+    FlowId: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeRollbackTimeValidity返回参数结构体
  */
 export interface DescribeRollbackTimeValidityResponse {
@@ -2426,6 +2499,31 @@ export interface Account {
       * 主机
       */
     Host: string;
+}
+/**
+ * CreateBackup请求参数结构体
+ */
+export interface CreateBackupRequest {
+    /**
+      * 集群ID
+      */
+    ClusterId: string;
+    /**
+      * 备份类型, 可选值：logic，逻辑备份；snapshot，物理备份
+      */
+    BackupType?: string;
+    /**
+      * 备份的库, 只在 BackupType 为 logic 时有效
+      */
+    BackupDatabases?: Array<string>;
+    /**
+      * 备份的表, 只在 BackupType 为 logic 时有效
+      */
+    BackupTables?: Array<DatabaseTables>;
+    /**
+      * 备注名
+      */
+    BackupName?: string;
 }
 /**
  * DescribeClusterParamLogs请求参数结构体

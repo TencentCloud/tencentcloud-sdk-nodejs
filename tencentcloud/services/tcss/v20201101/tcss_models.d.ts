@@ -6643,6 +6643,11 @@ RESULT_PASSED: 通过
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ImageTag: string;
+    /**
+      * 检查项验证信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VerifyInfo: string;
 }
 /**
  * DescribeVirusMonitorSetting请求参数结构体
@@ -8027,6 +8032,11 @@ RESULT_FAILED: 未通过
 注意：此字段可能返回 null，表示取不到有效值。
       */
     LastCheckTime: string;
+    /**
+      * 验证信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VerifyInfo: string;
 }
 /**
  * InitializeUserComplianceEnvironment请求参数结构体

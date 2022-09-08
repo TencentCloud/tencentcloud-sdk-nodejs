@@ -40,10 +40,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBackupList", req, cb);
     }
     /**
-     * 账号所有权限
+     * 批量回收账号权限
      */
-    async DescribeAccountAllGrantPrivileges(req, cb) {
-        return this.request("DescribeAccountAllGrantPrivileges", req, cb);
+    async RevokeAccountPrivileges(req, cb) {
+        return this.request("RevokeAccountPrivileges", req, cb);
     }
     /**
      * 本接口（RollBackCluster）用于回档集群
@@ -112,12 +112,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyClusterName", req, cb);
     }
     /**
-     * 批量回收账号权限
-     */
-    async RevokeAccountPrivileges(req, cb) {
-        return this.request("RevokeAccountPrivileges", req, cb);
-    }
-    /**
      * 本接口(DescribeInstanceDetail)用于查询实例详情。
      */
     async DescribeInstanceDetail(req, cb) {
@@ -176,6 +170,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeClusterParams(req, cb) {
         return this.request("DescribeClusterParams", req, cb);
+    }
+    /**
+     * 为集群创建手动备份
+     */
+    async CreateBackup(req, cb) {
+        return this.request("CreateBackup", req, cb);
     }
     /**
      * 下线实例
@@ -256,10 +256,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBackupConfig", req, cb);
     }
     /**
-     * 此接口（DescribeInstanceSlowQueries）用于查询实例慢查询日志。
+     * 账号所有权限
      */
-    async DescribeInstanceSlowQueries(req, cb) {
-        return this.request("DescribeInstanceSlowQueries", req, cb);
+    async DescribeAccountAllGrantPrivileges(req, cb) {
+        return this.request("DescribeAccountAllGrantPrivileges", req, cb);
     }
     /**
      * 查询续费集群价格
@@ -322,6 +322,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateAccounts", req, cb);
     }
     /**
+     * 升级预付费存储
+     */
+    async ModifyClusterStorage(req, cb) {
+        return this.request("ModifyClusterStorage", req, cb);
+    }
+    /**
      * 本接口(ActivateInstance)用于恢复已隔离的实例访问。
      */
     async ActivateInstance(req, cb) {
@@ -350,6 +356,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DisassociateSecurityGroups(req, cb) {
         return this.request("DisassociateSecurityGroups", req, cb);
+    }
+    /**
+     * 此接口（DescribeInstanceSlowQueries）用于查询实例慢查询日志。
+     */
+    async DescribeInstanceSlowQueries(req, cb) {
+        return this.request("DescribeInstanceSlowQueries", req, cb);
     }
     /**
      * 指定时间和集群查询是否可回滚

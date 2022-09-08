@@ -3431,6 +3431,21 @@ export interface DeployApplicationRequest {
 0：关闭metrics采集；
       */
   EnableMetrics?: number
+
+  /**
+   * 镜像部署时，选择的tcr实例id
+   */
+  TcrInstanceId?: string
+
+  /**
+   * 镜像部署时，选择的镜像服务器地址
+   */
+  RepoServer?: string
+
+  /**
+   * 镜像部署时，仓库类型：0：个人仓库；1：企业版；2：公共仓库；3：tem托管仓库；4：demo仓库
+   */
+  RepoType?: number
 }
 
 /**

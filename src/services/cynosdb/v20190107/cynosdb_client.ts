@@ -28,6 +28,7 @@ import {
   ModifyMaintainPeriodConfigRequest,
   DescribeRollbackTimeRangeResponse,
   ModifyBackupNameResponse,
+  ModifyClusterStorageRequest,
   SwitchClusterZoneResponse,
   AssociateSecurityGroupsRequest,
   DescribeBinlogDownloadUrlRequest,
@@ -52,11 +53,13 @@ import {
   CynosdbInstanceGrp,
   SlowQueriesItem,
   ActivateInstanceRequest,
+  DatabaseTables,
   AddClusterSlaveZoneRequest,
   DescribeAccountAllGrantPrivilegesResponse,
   RollbackDatabase,
   DatabasePrivileges,
   DescribeClustersRequest,
+  ModifyClusterStorageResponse,
   DescribeInstanceDetailResponse,
   ModifyDBInstanceSecurityGroupsResponse,
   DescribeClusterParamLogsResponse,
@@ -105,6 +108,7 @@ import {
   NetAddr,
   AssociateSecurityGroupsResponse,
   DescribeResourcesByDealNameRequest,
+  CreateBackupResponse,
   DescribeRollbackTimeValidityResponse,
   DescribeInstanceSlowQueriesResponse,
   GrantAccountPrivilegesResponse,
@@ -125,6 +129,7 @@ import {
   InquirePriceCreateResponse,
   SetRenewFlagResponse,
   Account,
+  CreateBackupRequest,
   DescribeClusterParamLogsRequest,
   UpgradeInstanceRequest,
   DescribeMaintainPeriodResponse,
@@ -197,13 +202,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 账号所有权限
+   * 批量回收账号权限
    */
-  async DescribeAccountAllGrantPrivileges(
-    req: DescribeAccountAllGrantPrivilegesRequest,
-    cb?: (error: string, rep: DescribeAccountAllGrantPrivilegesResponse) => void
-  ): Promise<DescribeAccountAllGrantPrivilegesResponse> {
-    return this.request("DescribeAccountAllGrantPrivileges", req, cb)
+  async RevokeAccountPrivileges(
+    req: RevokeAccountPrivilegesRequest,
+    cb?: (error: string, rep: RevokeAccountPrivilegesResponse) => void
+  ): Promise<RevokeAccountPrivilegesResponse> {
+    return this.request("RevokeAccountPrivileges", req, cb)
   }
 
   /**
@@ -317,16 +322,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 批量回收账号权限
-   */
-  async RevokeAccountPrivileges(
-    req: RevokeAccountPrivilegesRequest,
-    cb?: (error: string, rep: RevokeAccountPrivilegesResponse) => void
-  ): Promise<RevokeAccountPrivilegesResponse> {
-    return this.request("RevokeAccountPrivileges", req, cb)
-  }
-
-  /**
    * 本接口(DescribeInstanceDetail)用于查询实例详情。
    */
   async DescribeInstanceDetail(
@@ -424,6 +419,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeClusterParamsResponse) => void
   ): Promise<DescribeClusterParamsResponse> {
     return this.request("DescribeClusterParams", req, cb)
+  }
+
+  /**
+   * 为集群创建手动备份
+   */
+  async CreateBackup(
+    req: CreateBackupRequest,
+    cb?: (error: string, rep: CreateBackupResponse) => void
+  ): Promise<CreateBackupResponse> {
+    return this.request("CreateBackup", req, cb)
   }
 
   /**
@@ -557,13 +562,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 此接口（DescribeInstanceSlowQueries）用于查询实例慢查询日志。
+   * 账号所有权限
    */
-  async DescribeInstanceSlowQueries(
-    req: DescribeInstanceSlowQueriesRequest,
-    cb?: (error: string, rep: DescribeInstanceSlowQueriesResponse) => void
-  ): Promise<DescribeInstanceSlowQueriesResponse> {
-    return this.request("DescribeInstanceSlowQueries", req, cb)
+  async DescribeAccountAllGrantPrivileges(
+    req: DescribeAccountAllGrantPrivilegesRequest,
+    cb?: (error: string, rep: DescribeAccountAllGrantPrivilegesResponse) => void
+  ): Promise<DescribeAccountAllGrantPrivilegesResponse> {
+    return this.request("DescribeAccountAllGrantPrivileges", req, cb)
   }
 
   /**
@@ -667,6 +672,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 升级预付费存储
+   */
+  async ModifyClusterStorage(
+    req: ModifyClusterStorageRequest,
+    cb?: (error: string, rep: ModifyClusterStorageResponse) => void
+  ): Promise<ModifyClusterStorageResponse> {
+    return this.request("ModifyClusterStorage", req, cb)
+  }
+
+  /**
    * 本接口(ActivateInstance)用于恢复已隔离的实例访问。
    */
   async ActivateInstance(
@@ -714,6 +729,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DisassociateSecurityGroupsResponse) => void
   ): Promise<DisassociateSecurityGroupsResponse> {
     return this.request("DisassociateSecurityGroups", req, cb)
+  }
+
+  /**
+   * 此接口（DescribeInstanceSlowQueries）用于查询实例慢查询日志。
+   */
+  async DescribeInstanceSlowQueries(
+    req: DescribeInstanceSlowQueriesRequest,
+    cb?: (error: string, rep: DescribeInstanceSlowQueriesResponse) => void
+  ): Promise<DescribeInstanceSlowQueriesResponse> {
+    return this.request("DescribeInstanceSlowQueries", req, cb)
   }
 
   /**

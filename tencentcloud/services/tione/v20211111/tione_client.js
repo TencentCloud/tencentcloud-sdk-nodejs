@@ -34,6 +34,18 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTrainingModelVersion", req, cb);
     }
     /**
+     * 删除跑批任务
+     */
+    async DeleteBatchTask(req, cb) {
+        return this.request("DeleteBatchTask", req, cb);
+    }
+    /**
+     * 本接口(DescribeBillingSpecs)用于查询计费项列表
+     */
+    async DescribeBillingSpecs(req, cb) {
+        return this.request("DescribeBillingSpecs", req, cb);
+    }
+    /**
      * 删除数据集
      */
     async DeleteDataset(req, cb) {
@@ -70,6 +82,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateTrainingTask", req, cb);
     }
     /**
+     * 停止跑批任务
+     */
+    async StopBatchTask(req, cb) {
+        return this.request("StopBatchTask", req, cb);
+    }
+    /**
      * 查询非结构化数据集详情
      */
     async DescribeDatasetDetailUnstructured(req, cb) {
@@ -100,6 +118,18 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteTrainingModel", req, cb);
     }
     /**
+     * 查询跑批实例列表
+     */
+    async DescribeBatchTaskInstances(req, cb) {
+        return this.request("DescribeBatchTaskInstances", req, cb);
+    }
+    /**
+     * 停止模型训练任务
+     */
+    async StopTrainingTask(req, cb) {
+        return this.request("StopTrainingTask", req, cb);
+    }
+    /**
      * 启动模型训练任务
      */
     async StartTrainingTask(req, cb) {
@@ -118,10 +148,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("PushTrainingMetrics", req, cb);
     }
     /**
-     * 停止模型训练任务
+     * 批量预测任务列表信息
      */
-    async StopTrainingTask(req, cb) {
-        return this.request("StopTrainingTask", req, cb);
+    async DescribeBatchTasks(req, cb) {
+        return this.request("DescribeBatchTasks", req, cb);
     }
     /**
      * 模型版本列表
@@ -154,10 +184,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTrainingTask", req, cb);
     }
     /**
+     * 创建跑批任务
+     */
+    async CreateBatchTask(req, cb) {
+        return this.request("CreateBatchTask", req, cb);
+    }
+    /**
      * 删除训练任务
      */
     async DeleteTrainingTask(req, cb) {
         return this.request("DeleteTrainingTask", req, cb);
+    }
+    /**
+     * 查询跑批任务
+     */
+    async DescribeBatchTask(req, cb) {
+        return this.request("DescribeBatchTask", req, cb);
     }
     /**
      * 查询最近上报的训练自定义指标

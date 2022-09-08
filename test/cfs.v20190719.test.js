@@ -18,9 +18,39 @@ const client = new tencentcloud.cfs.v20190719.Client({
 })
 describe("cfs.v20190719.test.js", function () {
 
-it("cfs.v20190719.CreateCfsFileSystem", async function () {
+it("cfs.v20190719.DescribeCfsRules", async function () {
     try {
-       const data = await client.CreateCfsFileSystem({})
+       const data = await client.DescribeCfsRules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfs.v20190719.UpdateCfsFileSystemPGroup", async function () {
+    try {
+       const data = await client.UpdateCfsFileSystemPGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfs.v20190719.SignUpCfsService", async function () {
+    try {
+       const data = await client.SignUpCfsService({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfs.v20190719.DeleteCfsSnapshot", async function () {
+    try {
+       const data = await client.DeleteCfsSnapshot({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -38,9 +68,9 @@ it("cfs.v20190719.DescribeCfsPGroups", async function () {
     }
 })
 
-it("cfs.v20190719.DescribeCfsRules", async function () {
+it("cfs.v20190719.DescribeAutoSnapshotPolicies", async function () {
     try {
-       const data = await client.DescribeCfsRules({})
+       const data = await client.DescribeAutoSnapshotPolicies({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -48,9 +78,39 @@ it("cfs.v20190719.DescribeCfsRules", async function () {
     }
 })
 
-it("cfs.v20190719.UpdateCfsFileSystemPGroup", async function () {
+it("cfs.v20190719.BindAutoSnapshotPolicy", async function () {
     try {
-       const data = await client.UpdateCfsFileSystemPGroup({})
+       const data = await client.BindAutoSnapshotPolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfs.v20190719.DeleteCfsPGroup", async function () {
+    try {
+       const data = await client.DeleteCfsPGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfs.v20190719.DescribeCfsFileSystemClients", async function () {
+    try {
+       const data = await client.DescribeCfsFileSystemClients({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfs.v20190719.DescribeCfsServiceStatus", async function () {
+    try {
+       const data = await client.DescribeCfsServiceStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -78,16 +138,6 @@ it("cfs.v20190719.UpdateCfsFileSystemName", async function () {
     }
 })
 
-it("cfs.v20190719.DeleteCfsFileSystem", async function () {
-    try {
-       const data = await client.DeleteCfsFileSystem({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("cfs.v20190719.UpdateCfsFileSystemSizeLimit", async function () {
     try {
        const data = await client.UpdateCfsFileSystemSizeLimit({})
@@ -98,9 +148,9 @@ it("cfs.v20190719.UpdateCfsFileSystemSizeLimit", async function () {
     }
 })
 
-it("cfs.v20190719.CreateCfsPGroup", async function () {
+it("cfs.v20190719.DeleteCfsFileSystem", async function () {
     try {
-       const data = await client.CreateCfsPGroup({})
+       const data = await client.DeleteCfsFileSystem({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -108,9 +158,9 @@ it("cfs.v20190719.CreateCfsPGroup", async function () {
     }
 })
 
-it("cfs.v20190719.UpdateCfsRule", async function () {
+it("cfs.v20190719.CreateCfsFileSystem", async function () {
     try {
-       const data = await client.UpdateCfsRule({})
+       const data = await client.CreateCfsFileSystem({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -118,9 +168,29 @@ it("cfs.v20190719.UpdateCfsRule", async function () {
     }
 })
 
-it("cfs.v20190719.DescribeCfsServiceStatus", async function () {
+it("cfs.v20190719.UpdateCfsSnapshotAttribute", async function () {
     try {
-       const data = await client.DescribeCfsServiceStatus({})
+       const data = await client.UpdateCfsSnapshotAttribute({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfs.v20190719.DescribeCfsSnapshotOverview", async function () {
+    try {
+       const data = await client.DescribeCfsSnapshotOverview({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfs.v20190719.UpdateAutoSnapshotPolicy", async function () {
+    try {
+       const data = await client.UpdateAutoSnapshotPolicy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -138,29 +208,9 @@ it("cfs.v20190719.DescribeCfsFileSystems", async function () {
     }
 })
 
-it("cfs.v20190719.SignUpCfsService", async function () {
+it("cfs.v20190719.DescribeCfsSnapshots", async function () {
     try {
-       const data = await client.SignUpCfsService({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cfs.v20190719.CreateCfsRule", async function () {
-    try {
-       const data = await client.CreateCfsRule({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cfs.v20190719.DeleteCfsPGroup", async function () {
-    try {
-       const data = await client.DeleteCfsPGroup({})
+       const data = await client.DescribeCfsSnapshots({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -178,16 +228,6 @@ it("cfs.v20190719.DescribeMountTargets", async function () {
     }
 })
 
-it("cfs.v20190719.UpdateCfsPGroup", async function () {
-    try {
-       const data = await client.UpdateCfsPGroup({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("cfs.v20190719.DeleteCfsRule", async function () {
     try {
        const data = await client.DeleteCfsRule({})
@@ -198,9 +238,9 @@ it("cfs.v20190719.DeleteCfsRule", async function () {
     }
 })
 
-it("cfs.v20190719.DescribeCfsFileSystemClients", async function () {
+it("cfs.v20190719.DeleteMountTarget", async function () {
     try {
-       const data = await client.DescribeCfsFileSystemClients({})
+       const data = await client.DeleteMountTarget({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -208,9 +248,89 @@ it("cfs.v20190719.DescribeCfsFileSystemClients", async function () {
     }
 })
 
-it("cfs.v20190719.DeleteMountTarget", async function () {
+it("cfs.v20190719.CreateAutoSnapshotPolicy", async function () {
     try {
-       const data = await client.DeleteMountTarget({})
+       const data = await client.CreateAutoSnapshotPolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfs.v20190719.CreateCfsPGroup", async function () {
+    try {
+       const data = await client.CreateCfsPGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfs.v20190719.DeleteAutoSnapshotPolicy", async function () {
+    try {
+       const data = await client.DeleteAutoSnapshotPolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfs.v20190719.CreateCfsSnapshot", async function () {
+    try {
+       const data = await client.CreateCfsSnapshot({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfs.v20190719.UnbindAutoSnapshotPolicy", async function () {
+    try {
+       const data = await client.UnbindAutoSnapshotPolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfs.v20190719.DescribeSnapshotOperationLogs", async function () {
+    try {
+       const data = await client.DescribeSnapshotOperationLogs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfs.v20190719.CreateCfsRule", async function () {
+    try {
+       const data = await client.CreateCfsRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfs.v20190719.UpdateCfsRule", async function () {
+    try {
+       const data = await client.UpdateCfsRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfs.v20190719.UpdateCfsPGroup", async function () {
+    try {
+       const data = await client.UpdateCfsPGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

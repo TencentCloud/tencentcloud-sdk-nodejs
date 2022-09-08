@@ -4368,6 +4368,10 @@ export interface UpdateTKEEdgeClusterRequest {
       * 边缘计算集群的GridDaemon部署信息
       */
     GridDaemon?: string;
+    /**
+      * 边缘集群开启自动升配
+      */
+    AutoUpgradeClusterLevel?: boolean;
 }
 /**
  * DescribeTKEEdgeExternalKubeconfig返回参数结构体

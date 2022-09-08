@@ -28,18 +28,6 @@ class Client extends abstract_client_1.AbstractClient {
         super("cfs.tencentcloudapi.com", "2019-07-19", clientConfig);
     }
     /**
-     * 用于添加新文件系统
-     */
-    async CreateCfsFileSystem(req, cb) {
-        return this.request("CreateCfsFileSystem", req, cb);
-    }
-    /**
-     * 本接口（DescribeCfsPGroups）用于查询权限组列表。
-     */
-    async DescribeCfsPGroups(req, cb) {
-        return this.request("DescribeCfsPGroups", req, cb);
-    }
-    /**
      * 本接口（DescribeCfsRules）用于查询权限组规则列表。
      */
     async DescribeCfsRules(req, cb) {
@@ -50,6 +38,54 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async UpdateCfsFileSystemPGroup(req, cb) {
         return this.request("UpdateCfsFileSystemPGroup", req, cb);
+    }
+    /**
+     * 本接口（SignUpCfsService）用于开通CFS服务。
+     */
+    async SignUpCfsService(req, cb) {
+        return this.request("SignUpCfsService", req, cb);
+    }
+    /**
+     * 删除文件系统快照
+     */
+    async DeleteCfsSnapshot(req, cb) {
+        return this.request("DeleteCfsSnapshot", req, cb);
+    }
+    /**
+     * 本接口（DescribeCfsPGroups）用于查询权限组列表。
+     */
+    async DescribeCfsPGroups(req, cb) {
+        return this.request("DescribeCfsPGroups", req, cb);
+    }
+    /**
+     * 查询文件系统快照d定期策略列表信息
+     */
+    async DescribeAutoSnapshotPolicies(req, cb) {
+        return this.request("DescribeAutoSnapshotPolicies", req, cb);
+    }
+    /**
+     * 文件系统绑定快照策略，可以同时绑定多个fs，一个fs 只能跟一个策略绑定
+     */
+    async BindAutoSnapshotPolicy(req, cb) {
+        return this.request("BindAutoSnapshotPolicy", req, cb);
+    }
+    /**
+     * 本接口（DeleteCfsPGroup）用于删除权限组。
+     */
+    async DeleteCfsPGroup(req, cb) {
+        return this.request("DeleteCfsPGroup", req, cb);
+    }
+    /**
+     * 查询挂载该文件系统的客户端。此功能需要客户端安装CFS监控插件。
+     */
+    async DescribeCfsFileSystemClients(req, cb) {
+        return this.request("DescribeCfsFileSystemClients", req, cb);
+    }
+    /**
+     * 本接口（DescribeCfsServiceStatus）用于查询用户使用CFS的服务状态。
+     */
+    async DescribeCfsServiceStatus(req, cb) {
+        return this.request("DescribeCfsServiceStatus", req, cb);
     }
     /**
      * 本接口（DescribeAvailableZoneInfo）用于查询区域的可用情况。
@@ -64,34 +100,40 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdateCfsFileSystemName", req, cb);
     }
     /**
-     * 用于删除文件系统
-     */
-    async DeleteCfsFileSystem(req, cb) {
-        return this.request("DeleteCfsFileSystem", req, cb);
-    }
-    /**
      * 本接口（UpdateCfsFileSystemSizeLimit）用于更新文件系统存储容量限制。
      */
     async UpdateCfsFileSystemSizeLimit(req, cb) {
         return this.request("UpdateCfsFileSystemSizeLimit", req, cb);
     }
     /**
-     * 本接口（CreateCfsPGroup）用于创建权限组
+     * 用于删除文件系统
      */
-    async CreateCfsPGroup(req, cb) {
-        return this.request("CreateCfsPGroup", req, cb);
+    async DeleteCfsFileSystem(req, cb) {
+        return this.request("DeleteCfsFileSystem", req, cb);
     }
     /**
-     * 本接口（UpdateCfsRule）用于更新权限规则。
+     * 用于添加新文件系统
      */
-    async UpdateCfsRule(req, cb) {
-        return this.request("UpdateCfsRule", req, cb);
+    async CreateCfsFileSystem(req, cb) {
+        return this.request("CreateCfsFileSystem", req, cb);
     }
     /**
-     * 本接口（DescribeCfsServiceStatus）用于查询用户使用CFS的服务状态。
+     * 更新文件系统快照名称及保留时长
      */
-    async DescribeCfsServiceStatus(req, cb) {
-        return this.request("DescribeCfsServiceStatus", req, cb);
+    async UpdateCfsSnapshotAttribute(req, cb) {
+        return this.request("UpdateCfsSnapshotAttribute", req, cb);
+    }
+    /**
+     * 文件系统快照概览
+     */
+    async DescribeCfsSnapshotOverview(req, cb) {
+        return this.request("DescribeCfsSnapshotOverview", req, cb);
+    }
+    /**
+     * 更新定期自动快照策略
+     */
+    async UpdateAutoSnapshotPolicy(req, cb) {
+        return this.request("UpdateAutoSnapshotPolicy", req, cb);
     }
     /**
      * 本接口（DescribeCfsFileSystems）用于查询文件系统
@@ -100,22 +142,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCfsFileSystems", req, cb);
     }
     /**
-     * 本接口（SignUpCfsService）用于开通CFS服务。
+     * 查询文件系统快照列表
      */
-    async SignUpCfsService(req, cb) {
-        return this.request("SignUpCfsService", req, cb);
-    }
-    /**
-     * 本接口（CreateCfsRule）用于创建权限组规则。
-     */
-    async CreateCfsRule(req, cb) {
-        return this.request("CreateCfsRule", req, cb);
-    }
-    /**
-     * 本接口（DeleteCfsPGroup）用于删除权限组。
-     */
-    async DeleteCfsPGroup(req, cb) {
-        return this.request("DeleteCfsPGroup", req, cb);
+    async DescribeCfsSnapshots(req, cb) {
+        return this.request("DescribeCfsSnapshots", req, cb);
     }
     /**
      * 本接口（DescribeMountTargets）用于查询文件系统挂载点信息
@@ -124,28 +154,70 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeMountTargets", req, cb);
     }
     /**
-     * 本接口（UpdateCfsPGroup）更新权限组信息。
-     */
-    async UpdateCfsPGroup(req, cb) {
-        return this.request("UpdateCfsPGroup", req, cb);
-    }
-    /**
      * 本接口（DeleteCfsRule）用于删除权限组规则。
      */
     async DeleteCfsRule(req, cb) {
         return this.request("DeleteCfsRule", req, cb);
     }
     /**
-     * 查询挂载该文件系统的客户端。此功能需要客户端安装CFS监控插件。
-     */
-    async DescribeCfsFileSystemClients(req, cb) {
-        return this.request("DescribeCfsFileSystemClients", req, cb);
-    }
-    /**
      * 本接口（DeleteMountTarget）用于删除挂载点
      */
     async DeleteMountTarget(req, cb) {
         return this.request("DeleteMountTarget", req, cb);
+    }
+    /**
+     * 创建定期快照策略
+     */
+    async CreateAutoSnapshotPolicy(req, cb) {
+        return this.request("CreateAutoSnapshotPolicy", req, cb);
+    }
+    /**
+     * 本接口（CreateCfsPGroup）用于创建权限组
+     */
+    async CreateCfsPGroup(req, cb) {
+        return this.request("CreateCfsPGroup", req, cb);
+    }
+    /**
+     * 删除快照定期策略
+     */
+    async DeleteAutoSnapshotPolicy(req, cb) {
+        return this.request("DeleteAutoSnapshotPolicy", req, cb);
+    }
+    /**
+     * 创建文件系统快照
+     */
+    async CreateCfsSnapshot(req, cb) {
+        return this.request("CreateCfsSnapshot", req, cb);
+    }
+    /**
+     * 解除文件系统绑定的快照策略
+     */
+    async UnbindAutoSnapshotPolicy(req, cb) {
+        return this.request("UnbindAutoSnapshotPolicy", req, cb);
+    }
+    /**
+     * 查询快照操作日志
+     */
+    async DescribeSnapshotOperationLogs(req, cb) {
+        return this.request("DescribeSnapshotOperationLogs", req, cb);
+    }
+    /**
+     * 本接口（CreateCfsRule）用于创建权限组规则。
+     */
+    async CreateCfsRule(req, cb) {
+        return this.request("CreateCfsRule", req, cb);
+    }
+    /**
+     * 本接口（UpdateCfsRule）用于更新权限规则。
+     */
+    async UpdateCfsRule(req, cb) {
+        return this.request("UpdateCfsRule", req, cb);
+    }
+    /**
+     * 本接口（UpdateCfsPGroup）更新权限组信息。
+     */
+    async UpdateCfsPGroup(req, cb) {
+        return this.request("UpdateCfsPGroup", req, cb);
     }
 }
 exports.Client = Client;

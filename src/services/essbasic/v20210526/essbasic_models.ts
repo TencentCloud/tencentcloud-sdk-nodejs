@@ -1255,6 +1255,16 @@ export interface DescribeTemplatesRequest {
    * 操作者的信息
    */
   Operator?: UserInfo
+
+  /**
+   * 是否返回所有组件信息
+   */
+  QueryAllComponents?: boolean
+
+  /**
+   * 模糊搜索模版名称
+   */
+  TemplateName?: string
 }
 
 /**

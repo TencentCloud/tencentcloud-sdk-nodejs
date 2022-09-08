@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ModifyDiskExtraPerformanceRequest, ModifyDiskAttributesResponse, DescribeSnapshotOperationLogsRequest, CopySnapshotCrossRegionsResponse, ModifyAutoSnapshotPolicyAttributeResponse, InquiryPriceCreateDisksResponse, BindAutoSnapshotPolicyRequest, CreateSnapshotResponse, DescribeAutoSnapshotPoliciesRequest, ModifySnapshotsSharePermissionResponse, InitializeDisksResponse, DescribeDiskStoragePoolRequest, RenewDiskRequest, InquirePriceModifyDiskExtraPerformanceResponse, CreateDisksRequest, AttachDisksRequest, DescribeDiskAssociatedAutoSnapshotPolicyRequest, DescribeSnapshotsRequest, ModifyAutoSnapshotPolicyAttributeRequest, DescribeDiskConfigQuotaResponse, InquiryPriceResizeDiskResponse, ResizeDiskResponse, TerminateDisksResponse, ApplySnapshotResponse, DetachDisksRequest, ModifyDisksChargeTypeResponse, CreateSnapshotRequest, DescribeInstancesDiskNumRequest, DescribeSnapshotSharePermissionResponse, CopySnapshotCrossRegionsRequest, InquiryPriceRenewDisksRequest, DescribeSnapshotSharePermissionRequest, DescribeSnapshotOperationLogsResponse, DeleteSnapshotsRequest, ModifyDisksRenewFlagResponse, DeleteAutoSnapshotPoliciesResponse, DescribeDisksResponse, DeleteSnapshotsResponse, ModifyDisksRenewFlagRequest, ModifyDiskAttributesRequest, GetSnapOverviewRequest, TerminateDisksRequest, DescribeInstancesDiskNumResponse, DescribeDiskOperationLogsResponse, ResizeDiskRequest, ModifyDisksChargeTypeRequest, InitializeDisksRequest, CreateAutoSnapshotPolicyResponse, ModifySnapshotAttributeRequest, UnbindAutoSnapshotPolicyRequest, DeleteAutoSnapshotPoliciesRequest, InquiryPriceCreateDisksRequest, DescribeSnapshotsResponse, CreateDisksResponse, AttachDisksResponse, ModifySnapshotsSharePermissionRequest, BindAutoSnapshotPolicyResponse, DescribeDiskOperationLogsRequest, DescribeDisksRequest, DetachDisksResponse, InquiryPriceRenewDisksResponse, DescribeDiskStoragePoolResponse, InquirePriceModifyDiskExtraPerformanceRequest, InquiryPriceResizeDiskRequest, DescribeDiskConfigQuotaRequest, DescribeDiskAssociatedAutoSnapshotPolicyResponse, GetSnapOverviewResponse, ModifySnapshotAttributeResponse, RenewDiskResponse, DescribeAutoSnapshotPoliciesResponse, UnbindAutoSnapshotPolicyResponse, CreateAutoSnapshotPolicyRequest, ModifyDiskExtraPerformanceResponse, ApplySnapshotRequest } from "./cbs_models";
+import { ModifyDiskExtraPerformanceRequest, ModifyDiskAttributesResponse, DescribeDiskBackupsRequest, DescribeSnapshotOperationLogsRequest, CopySnapshotCrossRegionsResponse, ModifyAutoSnapshotPolicyAttributeResponse, ModifyDiskBackupQuotaRequest, InquiryPriceCreateDisksResponse, BindAutoSnapshotPolicyRequest, CreateSnapshotResponse, DescribeAutoSnapshotPoliciesRequest, ModifySnapshotsSharePermissionResponse, DeleteDiskBackupsRequest, InitializeDisksResponse, DeleteDiskBackupsResponse, DescribeDiskStoragePoolRequest, DescribeDiskBackupsResponse, RenewDiskRequest, InquirePriceModifyDiskExtraPerformanceResponse, CreateDisksRequest, AttachDisksRequest, DescribeDiskAssociatedAutoSnapshotPolicyRequest, DescribeSnapshotsRequest, ModifyAutoSnapshotPolicyAttributeRequest, DescribeDiskConfigQuotaResponse, ApplyDiskBackupResponse, InquiryPriceResizeDiskResponse, ResizeDiskResponse, TerminateDisksResponse, ApplySnapshotResponse, DetachDisksRequest, ModifyDisksChargeTypeResponse, CreateSnapshotRequest, DescribeInstancesDiskNumRequest, DescribeSnapshotSharePermissionResponse, ModifyDiskBackupQuotaResponse, InquiryPriceRenewDisksRequest, DescribeSnapshotSharePermissionRequest, InquirePriceModifyDiskBackupQuotaRequest, DescribeSnapshotOperationLogsResponse, DeleteSnapshotsRequest, ModifyDisksRenewFlagResponse, DeleteAutoSnapshotPoliciesResponse, DescribeDisksResponse, DeleteSnapshotsResponse, ModifyDisksRenewFlagRequest, ModifySnapshotAttributeResponse, ModifyDiskAttributesRequest, GetSnapOverviewRequest, TerminateDisksRequest, DescribeInstancesDiskNumResponse, DescribeDiskOperationLogsResponse, ResizeDiskRequest, ApplyDiskBackupRequest, ModifyDisksChargeTypeRequest, InitializeDisksRequest, CreateAutoSnapshotPolicyResponse, ModifySnapshotAttributeRequest, UnbindAutoSnapshotPolicyRequest, InquirePriceModifyDiskBackupQuotaResponse, DeleteAutoSnapshotPoliciesRequest, InquiryPriceCreateDisksRequest, DescribeSnapshotsResponse, CreateDisksResponse, AttachDisksResponse, ModifySnapshotsSharePermissionRequest, BindAutoSnapshotPolicyResponse, DescribeDiskOperationLogsRequest, DescribeDisksRequest, DetachDisksResponse, InquiryPriceRenewDisksResponse, DescribeDiskStoragePoolResponse, ModifyDiskExtraPerformanceResponse, InquirePriceModifyDiskExtraPerformanceRequest, InquiryPriceResizeDiskRequest, DescribeDiskConfigQuotaRequest, DescribeDiskAssociatedAutoSnapshotPolicyResponse, GetSnapOverviewResponse, CopySnapshotCrossRegionsRequest, RenewDiskResponse, DescribeAutoSnapshotPoliciesResponse, UnbindAutoSnapshotPolicyResponse, CreateAutoSnapshotPolicyRequest, ApplySnapshotRequest } from "./cbs_models";
 /**
  * cbs client
  * @class
@@ -20,6 +20,14 @@ export declare class Client extends AbstractClient {
 * 支持与挂载实例一起续费的场景，需要在[DiskChargePrepaid](/document/product/362/15669#DiskChargePrepaid)参数中指定CurInstanceDeadline，此时会按对齐到子机续费后的到期时间来续费。
      */
     RenewDisk(req: RenewDiskRequest, cb?: (error: string, rep: RenewDiskResponse) => void): Promise<RenewDiskResponse>;
+    /**
+     * 本接口（ApplyDiskBackup）用于回滚备份点到原云硬盘。
+
+* 仅支持回滚到原云硬盘上。对于数据盘备份点，如果您需要复制备份点数据到其它云硬盘上，请先使用 CreateSnapshot 将备份点转换为快照，然后使用 CreateDisks 接口创建新的弹性云硬盘，将快照数据复制到新购云硬盘上。
+* 用于回滚的备份点必须处于NORMAL状态。备份点状态可以通过DescribeDiskBackups接口查询，见输出参数中BackupState字段解释。
+* 如果是弹性云硬盘，则云硬盘必须处于未挂载状态，云硬盘挂载状态可以通过DescribeDisks接口查询，见Attached字段解释；如果是随实例一起购买的非弹性云硬盘，则实例必须处于关机状态，实例状态可以通过DescribeInstancesStatus接口查询。
+     */
+    ApplyDiskBackup(req: ApplyDiskBackupRequest, cb?: (error: string, rep: ApplyDiskBackupResponse) => void): Promise<ApplyDiskBackupResponse>;
     /**
      * 本接口（CopySnapshotCrossRegions）用于快照跨地域复制。
 
@@ -63,6 +71,14 @@ export declare class Client extends AbstractClient {
      */
     ModifyDisksRenewFlag(req: ModifyDisksRenewFlagRequest, cb?: (error: string, rep: ModifyDisksRenewFlagResponse) => void): Promise<ModifyDisksRenewFlagResponse>;
     /**
+     * 本接口（InquirePricePriceModifyDiskBackupQuota）用于修改云硬盘备份点配额询价。
+     */
+    InquirePriceModifyDiskBackupQuota(req: InquirePriceModifyDiskBackupQuotaRequest, cb?: (error: string, rep: InquirePriceModifyDiskBackupQuotaResponse) => void): Promise<InquirePriceModifyDiskBackupQuotaResponse>;
+    /**
+     * 批量删除指定的云硬盘备份点。
+     */
+    DeleteDiskBackups(req: DeleteDiskBackupsRequest, cb?: (error: string, rep: DeleteDiskBackupsResponse) => void): Promise<DeleteDiskBackupsResponse>;
+    /**
      * 本接口（ModifyAutoSnapshotPolicyAttribute）用于修改定期快照策略属性。
 
 * 可通过该接口修改定期快照策略的执行策略、名称、是否激活等属性。
@@ -76,6 +92,13 @@ export declare class Client extends AbstractClient {
      */
     InquiryPriceCreateDisks(req: InquiryPriceCreateDisksRequest, cb?: (error: string, rep: InquiryPriceCreateDisksResponse) => void): Promise<InquiryPriceCreateDisksResponse>;
     /**
+     * 本接口（DescribeDiskBackups）用于查询备份点的详细信息。
+
+根据备份点ID、创建备份点的云硬盘ID、创建备份点的云硬盘类型等对结果进行过滤，不同条件之间为与(AND)的关系，过滤信息详细请见过滤器Filter。
+如果参数为空，返回当前用户一定数量（Limit所指定的数量，默认为20）的备份点列表。
+     */
+    DescribeDiskBackups(req: DescribeDiskBackupsRequest, cb?: (error: string, rep: DescribeDiskBackupsResponse) => void): Promise<DescribeDiskBackupsResponse>;
+    /**
      * 查询云盘操作日志功能已迁移至LookUpEvents接口（https://cloud.tencent.com/document/product/629/12359），本接口（DescribeDiskOperationLogs）即将下线，后续不再提供调用，请知悉。
      */
     DescribeDiskOperationLogs(req: DescribeDiskOperationLogsRequest, cb?: (error: string, rep: DescribeDiskOperationLogsResponse) => void): Promise<DescribeDiskOperationLogsResponse>;
@@ -86,12 +109,13 @@ export declare class Client extends AbstractClient {
      */
     DeleteAutoSnapshotPolicies(req: DeleteAutoSnapshotPoliciesRequest, cb?: (error: string, rep: DeleteAutoSnapshotPoliciesResponse) => void): Promise<DeleteAutoSnapshotPoliciesResponse>;
     /**
-     * 本接口（CreateAutoSnapshotPolicy）用于创建定期快照策略。
-
-* 每个地域可创建的定期快照策略数量限制请参考文档[定期快照](/document/product/362/8191)。
-* 每个地域可创建的快照有数量和容量的限制，具体请见腾讯云控制台快照页面提示，如果快照超配额，定期快照创建会失败。
+     * 重新初始化云硬盘至云硬盘初始创建时的状态。使用云硬盘的重新初始化功能时需要注意以下4点：
+1. 如果云硬盘是由快照创建的，则重新初始化会通过此快照重新回滚此云硬盘，即将云硬盘恢复为与快照一致的状态；
+2. 如果云硬盘不是通过快照创建的，则重新初始化会清空此云硬盘的数据；请在重新初始化云硬盘前检查并备份必要的数据；
+3. 当前仅未挂载的、非共享属性的数据盘云硬盘支持重新初始化；
+4. 当创建此云硬盘的原始快照被删除时，不再支持重新初始化此云硬盘。
      */
-    CreateAutoSnapshotPolicy(req: CreateAutoSnapshotPolicyRequest, cb?: (error: string, rep: CreateAutoSnapshotPolicyResponse) => void): Promise<CreateAutoSnapshotPolicyResponse>;
+    InitializeDisks(req: InitializeDisksRequest, cb?: (error: string, rep: InitializeDisksResponse) => void): Promise<InitializeDisksResponse>;
     /**
      * 本接口（DescribeDisks）用于查询云硬盘列表。
 
@@ -99,6 +123,10 @@ export declare class Client extends AbstractClient {
 * 如果参数为空，返回当前用户一定数量（`Limit`所指定的数量，默认为20）的云硬盘列表。
      */
     DescribeDisks(req: DescribeDisksRequest, cb?: (error: string, rep: DescribeDisksResponse) => void): Promise<DescribeDisksResponse>;
+    /**
+     * 此接口 (ModifyDiskBackupQuota) 用于修改云硬盘备份点配额。
+     */
+    ModifyDiskBackupQuota(req: ModifyDiskBackupQuotaRequest, cb?: (error: string, rep: ModifyDiskBackupQuotaResponse) => void): Promise<ModifyDiskBackupQuotaResponse>;
     /**
      * 本接口（CreateDisks）用于创建云硬盘。
 
@@ -150,13 +178,12 @@ export declare class Client extends AbstractClient {
      */
     DescribeSnapshotSharePermission(req: DescribeSnapshotSharePermissionRequest, cb?: (error: string, rep: DescribeSnapshotSharePermissionResponse) => void): Promise<DescribeSnapshotSharePermissionResponse>;
     /**
-     * 重新初始化云硬盘至云硬盘初始创建时的状态。使用云硬盘的重新初始化功能时需要注意以下4点：
-1. 如果云硬盘是由快照创建的，则重新初始化会通过此快照重新回滚此云硬盘，即将云硬盘恢复为与快照一致的状态；
-2. 如果云硬盘不是通过快照创建的，则重新初始化会清空此云硬盘的数据；请在重新初始化云硬盘前检查并备份必要的数据；
-3. 当前仅未挂载的、非共享属性的数据盘云硬盘支持重新初始化；
-4. 当创建此云硬盘的原始快照被删除时，不再支持重新初始化此云硬盘。
+     * 本接口（CreateAutoSnapshotPolicy）用于创建定期快照策略。
+
+* 每个地域可创建的定期快照策略数量限制请参考文档[定期快照](/document/product/362/8191)。
+* 每个地域可创建的快照有数量和容量的限制，具体请见腾讯云控制台快照页面提示，如果快照超配额，定期快照创建会失败。
      */
-    InitializeDisks(req: InitializeDisksRequest, cb?: (error: string, rep: InitializeDisksResponse) => void): Promise<InitializeDisksResponse>;
+    CreateAutoSnapshotPolicy(req: CreateAutoSnapshotPolicyRequest, cb?: (error: string, rep: CreateAutoSnapshotPolicyResponse) => void): Promise<CreateAutoSnapshotPolicyResponse>;
     /**
      * 接口请求域名： cbs.tencentcloudapi.com 。
 
@@ -220,13 +247,12 @@ export declare class Client extends AbstractClient {
      */
     ModifySnapshotsSharePermission(req: ModifySnapshotsSharePermissionRequest, cb?: (error: string, rep: ModifySnapshotsSharePermissionResponse) => void): Promise<ModifySnapshotsSharePermissionResponse>;
     /**
-     * 本接口（CreateSnapshot）用于对指定云盘创建快照。
+     * 本接口（DetachDisks）用于卸载云硬盘。
 
-* 只有具有快照能力的云硬盘才能创建快照。云硬盘是否具有快照能力可由[DescribeDisks](/document/product/362/16315)接口查询，见SnapshotAbility字段。
-* 可创建快照数量限制见[产品使用限制](https://cloud.tencent.com/doc/product/362/5145)。
-* 当前支持将备份点转化为普通快照，转化之后可能会收取快照使用费用，备份点不保留，其占用的备份点配额也将被释放。
+* 支持批量操作，卸载挂载在同一主机上的多块云盘。如果多块云盘中存在不允许卸载的云盘，则操作不执行，返回特定的错误码。
+* 本接口为异步接口，当请求成功返回时，云盘并未立即从主机卸载，可通过接口[DescribeDisks](/document/product/362/16315)来查询对应云盘的状态，如果云盘的状态由“ATTACHED”变为“UNATTACHED”，则为卸载成功。
      */
-    CreateSnapshot(req: CreateSnapshotRequest, cb?: (error: string, rep: CreateSnapshotResponse) => void): Promise<CreateSnapshotResponse>;
+    DetachDisks(req: DetachDisksRequest, cb?: (error: string, rep: DetachDisksResponse) => void): Promise<DetachDisksResponse>;
     /**
      * 获取快照概览信息
      */
@@ -239,12 +265,13 @@ export declare class Client extends AbstractClient {
      */
     ResizeDisk(req: ResizeDiskRequest, cb?: (error: string, rep: ResizeDiskResponse) => void): Promise<ResizeDiskResponse>;
     /**
-     * 本接口（DetachDisks）用于卸载云硬盘。
+     * 本接口（CreateSnapshot）用于对指定云盘创建快照。
 
-* 支持批量操作，卸载挂载在同一主机上的多块云盘。如果多块云盘中存在不允许卸载的云盘，则操作不执行，返回特定的错误码。
-* 本接口为异步接口，当请求成功返回时，云盘并未立即从主机卸载，可通过接口[DescribeDisks](/document/product/362/16315)来查询对应云盘的状态，如果云盘的状态由“ATTACHED”变为“UNATTACHED”，则为卸载成功。
+* 只有具有快照能力的云硬盘才能创建快照。云硬盘是否具有快照能力可由[DescribeDisks](/document/product/362/16315)接口查询，见SnapshotAbility字段。
+* 可创建快照数量限制见[产品使用限制](https://cloud.tencent.com/doc/product/362/5145)。
+* 当前支持将备份点转化为普通快照，转化之后可能会收取快照使用费用，备份点不保留，其占用的备份点配额也将被释放。
      */
-    DetachDisks(req: DetachDisksRequest, cb?: (error: string, rep: DetachDisksResponse) => void): Promise<DetachDisksResponse>;
+    CreateSnapshot(req: CreateSnapshotRequest, cb?: (error: string, rep: CreateSnapshotResponse) => void): Promise<CreateSnapshotResponse>;
     /**
      * 本接口（InquiryPriceRenewDisks）用于续费云硬盘询价。
 

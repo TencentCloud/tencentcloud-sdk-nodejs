@@ -16,6 +16,54 @@
  */
 
 /**
+ * 模型描述信息
+ */
+export interface ModelInfo {
+  /**
+      * 模型版本id, DescribeTrainingModelVersion查询模型接口时的id
+自动学习类型的模型填写自动学习的任务id
+      */
+  ModelVersionId: string
+
+  /**
+   * 模型id
+   */
+  ModelId?: string
+
+  /**
+   * 模型名
+   */
+  ModelName?: string
+
+  /**
+   * 模型版本
+   */
+  ModelVersion?: string
+
+  /**
+   * 模型来源
+   */
+  ModelSource?: string
+
+  /**
+   * cos路径信息
+   */
+  CosPathInfo?: CosPathInfo
+
+  /**
+      * 模型对应的算法框架，预留
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AlgorithmFramework?: string
+
+  /**
+      * 默认为 NORMAL, 已加速模型: ACCELERATE, 自动学习模型 AUTO_ML
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ModelType?: string
+}
+
+/**
  * DescribeLogs请求参数结构体
  */
 export interface DescribeLogsRequest {
@@ -70,30 +118,220 @@ export interface DescribeLogsRequest {
 }
 
 /**
- * DeleteTrainingModelVersion返回参数结构体
+ * DescribeDatasetDetailUnstructured请求参数结构体
  */
-export interface DeleteTrainingModelVersionResponse {
+export interface DescribeDatasetDetailUnstructuredRequest {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 数据集ID
    */
-  RequestId?: string
+  DatasetId?: string
+
+  /**
+   * 偏移量
+   */
+  Offset?: number
+
+  /**
+   * 返回个数，默认20，目前最大支持2000条数据
+   */
+  Limit?: number
+
+  /**
+   * 标签过滤参数，对应标签值
+   */
+  LabelList?: Array<string>
+
+  /**
+      * 标注状态过滤参数:
+STATUS_ANNOTATED，已标注
+STATUS_NON_ANNOTATED，未标注
+STATUS_ALL，全部
+默认为STATUS_ALL
+      */
+  AnnotationStatus?: string
+
+  /**
+   * 数据集ID列表
+   */
+  DatasetIds?: Array<string>
 }
 
 /**
- * 点信息描述
+ * 跑批任务详情
  */
-export interface PointInfo {
+export interface BatchTaskDetail {
   /**
-      * X坐标值
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  X: number
+   * 跑批任务ID
+   */
+  BatchTaskId: string
 
   /**
-      * Y坐标值
+   * 跑批任务名称
+   */
+  BatchTaskName: string
+
+  /**
+   * 主账号uin
+   */
+  Uin: string
+
+  /**
+   * 子账号uin
+   */
+  SubUin: string
+
+  /**
+   * 地域
+   */
+  Region: string
+
+  /**
+   * 计费模式
+   */
+  ChargeType: string
+
+  /**
+      * 预付费专用资源组id
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Y: number
+  ResourceGroupId: string
+
+  /**
+      * 预付费专用资源组名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ResourceGroupName: string
+
+  /**
+   * 资源配置
+   */
+  ResourceConfigInfo: ResourceConfigInfo
+
+  /**
+      * 标签
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Tags: Array<Tag>
+
+  /**
+      * 服务对应的模型信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ModelInfo: ModelInfo
+
+  /**
+      * 自定义镜像信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ImageInfo: ImageInfo
+
+  /**
+      * 代码包
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CodePackagePath: CosPathInfo
+
+  /**
+      * 启动命令
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  StartCmd: string
+
+  /**
+      * 输入数据配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DataConfigs: Array<DataConfig>
+
+  /**
+   * 输出数据配置
+   */
+  Outputs: Array<DataConfig>
+
+  /**
+   * 是否上报日志
+   */
+  LogEnable: boolean
+
+  /**
+      * 日志配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LogConfig: LogConfig
+
+  /**
+      * vpc id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VpcId: string
+
+  /**
+      * 子网id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SubnetId: string
+
+  /**
+   * 任务状态
+   */
+  Status: string
+
+  /**
+      * 运行时长
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RuntimeInSeconds: number
+
+  /**
+   * 创建时间
+   */
+  CreateTime: string
+
+  /**
+   * 更新时间
+   */
+  UpdateTime: string
+
+  /**
+      * 任务开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  StartTime: string
+
+  /**
+      * 任务结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EndTime: string
+
+  /**
+   * 计费状态，eg：BILLING计费中，ARREARS_STOP欠费停止，NOT_BILLING不在计费中
+   */
+  ChargeStatus: string
+
+  /**
+      * 最近一次实例ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LatestInstanceId: string
+
+  /**
+      * 备注
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Remark: string
+
+  /**
+      * 失败原因
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FailureReason: string
+
+  /**
+      * 计费金额信息，eg：2.00元/小时 (for后付费)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BillingInfo: string
 }
 
 /**
@@ -298,42 +536,23 @@ CHARGE_STATUS（计费状态）：NOT_BILLING（未开始计费）/ BILLING（�
 }
 
 /**
- * DescribeDatasetDetailUnstructured请求参数结构体
+ * DescribeBatchTask请求参数结构体
  */
-export interface DescribeDatasetDetailUnstructuredRequest {
+export interface DescribeBatchTaskRequest {
   /**
-   * 数据集ID
+   * 跑批任务ID
    */
-  DatasetId?: string
+  BatchTaskId: string
+}
 
+/**
+ * DeleteTrainingModelVersion返回参数结构体
+ */
+export interface DeleteTrainingModelVersionResponse {
   /**
-   * 偏移量
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Offset?: number
-
-  /**
-   * 返回个数，默认20，目前最大支持2000条数据
-   */
-  Limit?: number
-
-  /**
-   * 标签过滤参数，对应标签值
-   */
-  LabelList?: Array<string>
-
-  /**
-      * 标注状态过滤参数:
-STATUS_ANNOTATED，已标注
-STATUS_NON_ANNOTATED，未标注
-STATUS_ALL，全部
-默认为STATUS_ALL
-      */
-  AnnotationStatus?: string
-
-  /**
-   * 数据集ID列表
-   */
-  DatasetIds?: Array<string>
+  RequestId?: string
 }
 
 /**
@@ -421,13 +640,98 @@ export interface DescribeTrainingTaskPodsRequest {
 }
 
 /**
- * DescribeTrainingModelVersion请求参数结构体
+ * CreateBatchTask请求参数结构体
  */
-export interface DescribeTrainingModelVersionRequest {
+export interface CreateBatchTaskRequest {
   /**
-   * 模型版本ID
+   * 跑批任务名称，不超过60个字符，仅支持中英文、数字、下划线"_"、短横"-"，只能以中英文、数字开头
    */
-  TrainingModelVersionId: string
+  BatchTaskName: string
+
+  /**
+   * 计费模式，eg：PREPAID预付费，即包年包月；POSTPAID_BY_HOUR按小时后付费
+   */
+  ChargeType: string
+
+  /**
+   * 资源配置
+   */
+  ResourceConfigInfo: ResourceConfigInfo
+
+  /**
+   * 结果输出
+   */
+  Outputs: Array<DataConfig>
+
+  /**
+   * 是否上报日志
+   */
+  LogEnable: boolean
+
+  /**
+   * 工作类型 1:单次 2:周期
+   */
+  JobType?: number
+
+  /**
+   * 任务周期描述
+   */
+  CronInfo?: CronInfo
+
+  /**
+   * 预付费专用资源组
+   */
+  ResourceGroupId?: string
+
+  /**
+   * 标签配置
+   */
+  Tags?: Array<Tag>
+
+  /**
+   * 服务对应的模型信息，有模型文件时需要填写
+   */
+  ModelInfo?: ModelInfo
+
+  /**
+   * 自定义镜像信息
+   */
+  ImageInfo?: ImageInfo
+
+  /**
+   * 代码包
+   */
+  CodePackage?: CosPathInfo
+
+  /**
+   * 启动命令
+   */
+  StartCmd?: string
+
+  /**
+   * 数据配置
+   */
+  DataConfigs?: Array<DataConfig>
+
+  /**
+   * 日志配置
+   */
+  LogConfig?: LogConfig
+
+  /**
+   * VPC Id
+   */
+  VpcId?: string
+
+  /**
+   * 子网Id
+   */
+  SubnetId?: string
+
+  /**
+   * 备注
+   */
+  Remark?: string
 }
 
 /**
@@ -609,18 +913,23 @@ export interface InferTemplate {
 }
 
 /**
- * 框架版本以及对应的训练模式
+ * StopBatchTask请求参数结构体
  */
-export interface FrameworkVersion {
+export interface StopBatchTaskRequest {
   /**
-   * 框架版本
+   * 跑批任务ID
    */
-  Version: string
+  BatchTaskId: string
+}
 
+/**
+ * DeleteTrainingModel返回参数结构体
+ */
+export interface DeleteTrainingModelResponse {
   /**
-   * 训练模式
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  TrainingModes: Array<string>
+  RequestId?: string
 }
 
 /**
@@ -643,8 +952,11 @@ export interface DataPoint {
  */
 export interface CreateTrainingModelRequest {
   /**
-   * 导入方式（MODEL/VERSION）
-   */
+      * 导入方式
+MODEL：导入新模型
+VERSION：导入新版本
+EXIST：导入现有版本
+      */
   ImportMethod: string
 
   /**
@@ -753,21 +1065,36 @@ export interface CreateTrainingModelRequest {
    * 推理镜像ID
    */
   ReasoningEnvironmentId?: string
+
+  /**
+   * 模型自动清理开关(true/false)，当前版本仅支持SAVED_MODEL格式模型
+   */
+  AutoClean?: string
+
+  /**
+   * 模型数量保留上限(默认值为24个，上限为24，下限为1，步长为1)
+   */
+  MaxReservedModels?: number
+
+  /**
+   * 模型清理周期(默认值为1分钟，上限为1440，下限为1分钟，步长为1)
+   */
+  ModelCleanPeriod?: number
 }
 
 /**
- * DescribeTrainingModelVersions返回参数结构体
+ * 表格数据集表头信息
  */
-export interface DescribeTrainingModelVersionsResponse {
+export interface SchemaInfo {
   /**
-   * 模型版本列表
+   * 长度30字符内
    */
-  TrainingModelVersions: Array<TrainingModelVersionDTO>
+  Name: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 数据类型
    */
-  RequestId?: string
+  Type: string
 }
 
 /**
@@ -791,6 +1118,16 @@ export interface StartCmdInfo {
 }
 
 /**
+ * DeleteBatchTask请求参数结构体
+ */
+export interface DeleteBatchTaskRequest {
+  /**
+   * 跑批任务ID
+   */
+  BatchTaskId: string
+}
+
+/**
  * DescribeTrainingModels返回参数结构体
  */
 export interface DescribeTrainingModelsResponse {
@@ -803,6 +1140,22 @@ export interface DescribeTrainingModelsResponse {
    * 模型总数
    */
   TotalCount: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeBatchTaskInstances返回参数结构体
+ */
+export interface DescribeBatchTaskInstancesResponse {
+  /**
+      * 实例集
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BatchInstances: Array<BatchTaskInstance>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -887,6 +1240,26 @@ TI.GN7.20XLARGE320.POST: 80C32
 80C32
       */
   InstanceTypeAlias?: string
+}
+
+/**
+ * 计费项内容
+ */
+export interface Spec {
+  /**
+   * 计费项标签
+   */
+  SpecId: string
+
+  /**
+   * 计费项名称
+   */
+  SpecName: string
+
+  /**
+   * 计费项显示名称
+   */
+  SpecAlias: string
 }
 
 /**
@@ -983,13 +1356,18 @@ DatasetScope，数据集范围，SCOPE_DATASET_PRIVATE或SCOPE_DATASET_PUBLIC
 }
 
 /**
- * DeleteTrainingModel返回参数结构体
+ * 框架版本以及对应的训练模式
  */
-export interface DeleteTrainingModelResponse {
+export interface FrameworkVersion {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 框架版本
    */
-  RequestId?: string
+  Version: string
+
+  /**
+   * 训练模式
+   */
+  TrainingModes: Array<string>
 }
 
 /**
@@ -1009,9 +1387,39 @@ export interface DescribeInferTemplatesResponse {
 }
 
 /**
+ * DescribeBillingSpecs请求参数结构体
+ */
+export interface DescribeBillingSpecsRequest {
+  /**
+   * 枚举值：TRAIN、NOTEBOOK、INFERENCE
+   */
+  TaskType: string
+
+  /**
+   * 付费模式：POSTPAID_BY_HOUR后付费、PREPAID预付费
+   */
+  ChargeType: string
+
+  /**
+   * 资源类型：CALC 计算资源、CPU CPU资源、GPU GPU资源、CBS云硬盘
+   */
+  ResourceType?: string
+}
+
+/**
  * DescribeInferTemplates请求参数结构体
  */
 export type DescribeInferTemplatesRequest = null
+
+/**
+ * DescribeBatchTaskInstances请求参数结构体
+ */
+export interface DescribeBatchTaskInstancesRequest {
+  /**
+   * 跑批任务id
+   */
+  BatchTaskId: string
+}
 
 /**
  * gpu 详情
@@ -1034,6 +1442,27 @@ export interface GpuDetail {
  * DescribeTrainingFrameworks请求参数结构体
  */
 export type DescribeTrainingFrameworksRequest = null
+
+/**
+ * DescribeBatchTasks返回参数结构体
+ */
+export interface DescribeBatchTasksResponse {
+  /**
+   * 数量
+   */
+  TotalCount: number
+
+  /**
+      * 任务集
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BatchTaskSet: Array<BatchTaskSetItem>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
 
 /**
  * 图像检测参数信息
@@ -1237,6 +1666,114 @@ export interface TagFilter {
    * 多个标签值
    */
   TagValues?: Array<string>
+}
+
+/**
+ * 出参类型
+ */
+export interface BatchTaskSetItem {
+  /**
+   * 跑批任务ID
+   */
+  BatchTaskId: string
+
+  /**
+   * 跑批任务名称
+   */
+  BatchTaskName: string
+
+  /**
+      * 模型信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ModelInfo: ModelInfo
+
+  /**
+   * 镜像信息
+   */
+  ImageInfo: ImageInfo
+
+  /**
+   * 计费模式
+   */
+  ChargeType: string
+
+  /**
+   * 计费状态，eg：BILLING计费中，ARREARS_STOP欠费停止，NOT_BILLING不在计费中
+   */
+  ChargeStatus: string
+
+  /**
+      * 预付费专用资源组
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ResourceGroupId: string
+
+  /**
+   * 资源配置
+   */
+  ResourceConfigInfo: ResourceConfigInfo
+
+  /**
+      * 标签配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Tags: Array<Tag>
+
+  /**
+   * 任务状态
+   */
+  Status: string
+
+  /**
+      * 运行时长
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RuntimeInSeconds: number
+
+  /**
+   * 创建时间
+   */
+  CreateTime: string
+
+  /**
+      * 开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  StartTime: string
+
+  /**
+      * 结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EndTime: string
+
+  /**
+      * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UpdateTime: string
+
+  /**
+   * 输出
+   */
+  Outputs: Array<DataConfig>
+
+  /**
+      * 预付费专用资源组名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ResourceGroupName: string
+
+  /**
+   * 失败原因
+   */
+  FailureReason: string
+
+  /**
+   * 计费金额信息，eg：2.00元/小时 (for后付费)
+   */
+  BillingInfo: string
 }
 
 /**
@@ -1501,29 +2038,72 @@ DISABLE_NOTIFY_AND_MANUAL_RENEW：手动续费(取消自动续费)且到期不�
 }
 
 /**
- * DeleteTrainingModel请求参数结构体
+ * DescribeBillingSpecs返回参数结构体
  */
-export interface DeleteTrainingModelRequest {
+export interface DescribeBillingSpecsResponse {
   /**
-   * 模型ID
+   * 计费项列表
    */
-  TrainingModelId: string
+  Specs: Array<Spec>
 
   /**
-   * 是否同步清理cos
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  EnableDeleteCos?: boolean
-
-  /**
-   * 删除模型类型，枚举值：NORMAL 普通，ACCELERATE 加速，不传则删除所有
-   */
-  ModelVersionType?: string
+  RequestId?: string
 }
 
 /**
  * DeleteTrainingTask返回参数结构体
  */
 export interface DeleteTrainingTaskResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 批处理任务实例
+ */
+export interface BatchTaskInstance {
+  /**
+   * 任务实例id
+   */
+  BatchTaskInstanceId: string
+
+  /**
+      * 开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  StartTime: string
+
+  /**
+      * 结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EndTime: string
+
+  /**
+   * 任务状态
+   */
+  Status: string
+
+  /**
+      * 运行时长
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RuntimeInSeconds: number
+}
+
+/**
+ * CreateBatchTask返回参数结构体
+ */
+export interface CreateBatchTaskResponse {
+  /**
+   * 跑批任务ID
+   */
+  BatchTaskId: string
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1674,6 +2254,16 @@ export interface DatasetGroup {
 }
 
 /**
+ * 数据集结构体
+ */
+export interface DataSetConfig {
+  /**
+   * 数据集ID
+   */
+  Id: string
+}
+
+/**
  * 训练数据
  */
 export type TrainingDataPoint = null
@@ -1756,13 +2346,23 @@ export interface GroupResource {
 }
 
 /**
- * 数据集结构体
+ * DeleteTrainingModel请求参数结构体
  */
-export interface DataSetConfig {
+export interface DeleteTrainingModelRequest {
   /**
-   * 数据集ID
+   * 模型ID
    */
-  Id: string
+  TrainingModelId: string
+
+  /**
+   * 是否同步清理cos
+   */
+  EnableDeleteCos?: boolean
+
+  /**
+   * 删除模型类型，枚举值：NORMAL 普通，ACCELERATE 加速，不传则删除所有
+   */
+  ModelVersionType?: string
 }
 
 /**
@@ -1798,6 +2398,58 @@ export interface Filter {
    * 是否开启模糊匹配
    */
   Fuzzy?: boolean
+}
+
+/**
+ * DeleteBatchTask返回参数结构体
+ */
+export interface DeleteBatchTaskResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeBatchTasks请求参数结构体
+ */
+export interface DescribeBatchTasksRequest {
+  /**
+      * 过滤器，eg：[{ "Name": "Id", "Values": ["train-23091792777383936"] }]
+
+取值范围：
+Name（名称）：task1
+Id（task ID）：train-23091792777383936
+Status（状态）：STARTING / RUNNING / STOPPING / STOPPED / FAILED / SUCCEED / SUBMIT_FAILED
+ChargeType（计费类型）：PREPAID（预付费）/ POSTPAID_BY_HOUR（后付费）
+CHARGE_STATUS（计费状态）：NOT_BILLING（未开始计费）/ BILLING（计费中）/ ARREARS_STOP（欠费停止）
+      */
+  Filters?: Array<Filter>
+
+  /**
+   * 标签过滤器，eg：[{ "TagKey": "TagKeyA", "TagValue": ["TagValueA"] }]
+   */
+  TagFilters?: Array<TagFilter>
+
+  /**
+   * 偏移量，默认为0
+   */
+  Offset?: number
+
+  /**
+   * 返回数量，默认为10，最大为50
+   */
+  Limit?: number
+
+  /**
+   * 输出列表的排列顺序。取值范围：ASC（升序排列）/ DESC（降序排列），默认为DESC
+   */
+  Order?: string
+
+  /**
+   * 排序的依据字段， 取值范围 "CreateTime" "UpdateTime"
+   */
+  OrderField?: string
 }
 
 /**
@@ -1867,6 +2519,16 @@ ANNOTATION_FORMAT_FILE，文件目录结构
    * 数据是否存在表头
    */
   IsSchemaExisted?: boolean
+}
+
+/**
+ * StopBatchTask返回参数结构体
+ */
+export interface StopBatchTaskResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2285,6 +2947,28 @@ export interface DescribeTrainingTasksResponse {
 }
 
 /**
+ * 跑批任务周期描述
+ */
+export interface CronInfo {
+  /**
+   * cron配置
+   */
+  CronConfig: string
+
+  /**
+      * 周期开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  StartTime?: string
+
+  /**
+      * 周期结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EndTime?: string
+}
+
+/**
  * 框架信息列表
  */
 export interface FrameworkInfo {
@@ -2428,6 +3112,42 @@ export interface TrainingModelVersionDTO {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   TrainingModelFormat: string
+
+  /**
+      * 模型版本类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VersionType: string
+
+  /**
+      * GPU类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  GPUType: string
+
+  /**
+      * 模型自动清理开关
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AutoClean: string
+
+  /**
+      * 模型清理周期
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ModelCleanPeriod: number
+
+  /**
+      * 模型数量保留上限
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MaxReservedModels: number
+
+  /**
+      * 模型热更新目录
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ModelHotUpdatePath: CosPathInfo
 }
 
 /**
@@ -2583,18 +3303,18 @@ export interface TrainingTaskSetItem {
 }
 
 /**
- * 表格数据集表头信息
+ * DescribeTrainingModelVersions返回参数结构体
  */
-export interface SchemaInfo {
+export interface DescribeTrainingModelVersionsResponse {
   /**
-   * 长度30字符内
+   * 模型版本列表
    */
-  Name: string
+  TrainingModelVersions: Array<TrainingModelVersionDTO>
 
   /**
-   * 数据类型
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Type: string
+  RequestId?: string
 }
 
 /**
@@ -2638,7 +3358,7 @@ export interface DataConfig {
   MappingPath: string
 
   /**
-      * DATASET、COS、CFS、HDFS
+      * DATASET、COS、CFS、HDFS、WEDATA_HDFS
 注意：此字段可能返回 null，表示取不到有效值。
       */
   DataSourceType: string
@@ -2666,6 +3386,16 @@ export interface DataConfig {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   HDFSSource: HDFSConfig
+}
+
+/**
+ * DescribeTrainingModelVersion请求参数结构体
+ */
+export interface DescribeTrainingModelVersionRequest {
+  /**
+   * 模型版本ID
+   */
+  TrainingModelVersionId: string
 }
 
 /**
@@ -2844,6 +3574,23 @@ Filter.Fuzzy取值：true/false，是否支持模糊匹配
 }
 
 /**
+ * 点信息描述
+ */
+export interface PointInfo {
+  /**
+      * X坐标值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  X: number
+
+  /**
+      * Y坐标值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Y: number
+}
+
+/**
  * 资源组
  */
 export interface ResourceGroup {
@@ -2900,6 +3647,22 @@ export interface DescribeTrainingTaskResponse {
    * 训练任务详情
    */
   TrainingTaskDetail: TrainingTaskDetail
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeBatchTask返回参数结构体
+ */
+export interface DescribeBatchTaskResponse {
+  /**
+      * 跑批任务详情
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BatchTaskDetail: BatchTaskDetail
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

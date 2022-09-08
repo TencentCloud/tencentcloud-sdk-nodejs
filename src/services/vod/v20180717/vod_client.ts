@@ -24,6 +24,7 @@ import {
   CreateStorageRegionRequest,
   AiRecognitionTaskAsrFullTextSegmentItem,
   UserDefineOcrTextReviewTemplateInfoForUpdate,
+  ReviewAudioVideoTaskInput,
   DescribeAllClassRequest,
   WeChatMiniProgramPublishRequest,
   AiAnalysisTaskClassificationInput,
@@ -109,6 +110,7 @@ import {
   DescribeMediaProcessUsageDataRequest,
   CreatePersonSampleRequest,
   RemoveWatermarkTask,
+  ReviewAudioVideoRequest,
   StorageRegionInfo,
   MediaTransitionItem,
   MediaAiAnalysisCoverItem,
@@ -545,6 +547,7 @@ import {
   AiContentReviewResult,
   TerrorismImgReviewTemplateInfo,
   DrmStreamingsInfoForUpdate,
+  ReviewAudioVideoResponse,
   DeleteClassRequest,
   DescribeTranscodeTemplatesRequest,
   UserDefineAsrTextReviewTemplateInfoForUpdate,
@@ -1269,6 +1272,19 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteSuperPlayerConfigResponse) => void
   ): Promise<DeleteSuperPlayerConfigResponse> {
     return this.request("DeleteSuperPlayerConfig", req, cb)
+  }
+
+  /**
+     * 对点播中的音视频媒体发起审核任务，智能检测视频画面、画面中的文字、语音中的文字出现的违规内容。
+
+如使用事件通知，事件通知的类型为 [任务流状态变更](https://cloud.tencent.com/document/product/266/9636)。
+
+     */
+  async ReviewAudioVideo(
+    req: ReviewAudioVideoRequest,
+    cb?: (error: string, rep: ReviewAudioVideoResponse) => void
+  ): Promise<ReviewAudioVideoResponse> {
+    return this.request("ReviewAudioVideo", req, cb)
   }
 
   /**

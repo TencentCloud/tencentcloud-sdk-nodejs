@@ -26,68 +26,73 @@ export interface DeleteCfsFileSystemResponse {
 }
 
 /**
- * 版本控制-可用区数组
+ * 快照信息
  */
-export interface AvailableZone {
+export interface SnapshotInfo {
   /**
-   * 可用区名称
+   * 创建快照时间
    */
-  Zone: string
+  CreationTime: string
 
   /**
-   * 可用区ID
+   * 快照名称
    */
-  ZoneId: number
+  SnapshotName: string
 
   /**
-   * 可用区中文名称
+   * 快照ID
    */
-  ZoneCnName: string
+  SnapshotId: string
 
   /**
-   * Type数组
+   * 快照状态
    */
-  Types: Array<AvailableType>
+  Status: string
 
   /**
-   * 可用区中英文名称
+   * 地域名称
    */
-  ZoneName: string
-}
-
-/**
- * UpdateCfsRule请求参数结构体
- */
-export interface UpdateCfsRuleRequest {
-  /**
-   * 权限组 ID
-   */
-  PGroupId: string
+  RegionName: string
 
   /**
-   * 规则 ID
+   * 文件系统ID
    */
-  RuleId: string
+  FileSystemId: string
 
   /**
-   * 可以填写单个 IP 或者单个网段，例如 10.1.10.11 或者 10.10.1.0/24。默认来访地址为*表示允许所有。同时需要注意，此处需填写 CVM 的内网 IP。
+   * 快照大小
    */
-  AuthClientIp?: string
+  Size: number
 
   /**
-   * 读写权限, 值为RO、RW；其中 RO 为只读，RW 为读写，不填默认为只读
+   * 保留时长天
    */
-  RWPermission?: string
+  AliveDay: number
 
   /**
-   * 用户权限，值为all_squash、no_all_squash、root_squash、no_root_squash。其中all_squash为所有访问用户都会被映射为匿名用户或用户组；no_all_squash为访问用户会先与本机用户匹配，匹配失败后再映射为匿名用户或用户组；root_squash为将来访的root用户映射为匿名用户或用户组；no_root_squash为来访的root用户保持root帐号权限。不填默认为root_squash。
+   * 快照进度
    */
-  UserPermission?: string
+  Percent: number
 
   /**
-   * 规则优先级，参数范围1-100。 其中 1 为最高，100为最低
+   * 帐号ID
    */
-  Priority?: number
+  AppId: number
+
+  /**
+   * 快照删除时间
+   */
+  DeleteTime: string
+
+  /**
+   * 文件系统名称
+   */
+  FsName: string
+
+  /**
+   * 快照标签
+   */
+  Tags: Array<TagInfo>
 }
 
 /**
@@ -156,6 +161,111 @@ export interface CreateCfsRuleRequest {
 }
 
 /**
+ * 文件系统基本信息
+ */
+export interface FileSystemInfo {
+  /**
+   * 创建时间
+   */
+  CreationTime: string
+
+  /**
+   * 用户自定义名称
+   */
+  CreationToken: string
+
+  /**
+   * 文件系统 ID
+   */
+  FileSystemId: string
+
+  /**
+   * 文件系统状态
+   */
+  LifeCycleState: string
+
+  /**
+   * 文件系统已使用容量
+   */
+  SizeByte: number
+
+  /**
+   * 文件系统最大空间限制
+   */
+  SizeLimit: number
+
+  /**
+   * 区域 ID
+   */
+  ZoneId: number
+
+  /**
+   * 区域名称
+   */
+  Zone: string
+
+  /**
+   * 文件系统协议类型
+   */
+  Protocol: string
+
+  /**
+   * 文件系统存储类型
+   */
+  StorageType: string
+
+  /**
+   * 文件系统绑定的预付费存储包
+   */
+  StorageResourcePkg: string
+
+  /**
+   * 文件系统绑定的预付费带宽包（暂未支持）
+   */
+  BandwidthResourcePkg: string
+
+  /**
+   * 文件系统绑定权限组信息
+   */
+  PGroup: PGroup
+
+  /**
+   * 用户自定义名称
+   */
+  FsName: string
+
+  /**
+   * 文件系统是否加密
+   */
+  Encrypted: boolean
+
+  /**
+   * 加密所使用的密钥，可以为密钥的 ID 或者 ARN
+   */
+  KmsKeyId: string
+
+  /**
+   * 应用ID
+   */
+  AppId: number
+
+  /**
+   * 文件系统吞吐上限，吞吐上限是根据文件系统当前已使用存储量、绑定的存储资源包以及吞吐资源包一同确定
+   */
+  BandwidthLimit: number
+
+  /**
+   * 文件系统总容量
+   */
+  Capacity: number
+
+  /**
+   * 文件系统标签列表
+   */
+  Tags: Array<TagInfo>
+}
+
+/**
  * 文件系统绑定权限组信息
  */
 export interface PGroup {
@@ -186,28 +296,23 @@ export interface DescribeAvailableZoneInfoResponse {
 }
 
 /**
- * UpdateCfsFileSystemName返回参数结构体
+ * 文件系统快照统计
  */
-export interface UpdateCfsFileSystemNameResponse {
+export interface SnapshotStatistics {
   /**
-   * 用户自定义文件系统名称
+   * 地域
    */
-  CreationToken: string
+  Region: string
 
   /**
-   * 文件系统ID
+   * 快照总个数
    */
-  FileSystemId: string
+  SnapshotNumber: number
 
   /**
-   * 用户自定义文件系统名称
+   * 快照总容量
    */
-  FsName: string
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  SnapshotSize: number
 }
 
 /**
@@ -223,6 +328,21 @@ export interface UpdateCfsFileSystemNameRequest {
    * 用户自定义文件系统名称
    */
   FsName?: string
+}
+
+/**
+ * DeleteCfsSnapshot返回参数结构体
+ */
+export interface DeleteCfsSnapshotResponse {
+  /**
+   * 文件系统ID
+   */
+  SnapshotId: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -256,9 +376,49 @@ export interface DescribeCfsFileSystemClientsResponse {
 }
 
 /**
- * DeleteMountTarget返回参数结构体
+ * 快照操作日志
  */
-export interface DeleteMountTargetResponse {
+export interface SnapshotOperateLog {
+  /**
+   * 操作类型
+   */
+  Action: string
+
+  /**
+   * 操作时间
+   */
+  ActionTime: string
+
+  /**
+   * 操作名称
+   */
+  ActionName: string
+
+  /**
+   * 操作者
+   */
+  Operator: string
+
+  /**
+   * 结果
+   */
+  Result: number
+}
+
+/**
+ * DescribeSnapshotOperationLogs返回参数结构体
+ */
+export interface DescribeSnapshotOperationLogsResponse {
+  /**
+   * 快照ID
+   */
+  SnapshotId: string
+
+  /**
+   * 操作日志
+   */
+  SnapshotOperates: Array<SnapshotOperateLog>
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -266,23 +426,93 @@ export interface DeleteMountTargetResponse {
 }
 
 /**
- * DescribeMountTargets返回参数结构体
+ * UpdateCfsRule请求参数结构体
  */
-export interface DescribeMountTargetsResponse {
+export interface UpdateCfsRuleRequest {
   /**
-   * 挂载点详情
+   * 权限组 ID
    */
-  MountTargets: Array<MountInfo>
+  PGroupId: string
 
   /**
-   * 挂载点数量
+   * 规则 ID
    */
-  NumberOfMountTargets: number
+  RuleId: string
+
+  /**
+   * 可以填写单个 IP 或者单个网段，例如 10.1.10.11 或者 10.10.1.0/24。默认来访地址为*表示允许所有。同时需要注意，此处需填写 CVM 的内网 IP。
+   */
+  AuthClientIp?: string
+
+  /**
+   * 读写权限, 值为RO、RW；其中 RO 为只读，RW 为读写，不填默认为只读
+   */
+  RWPermission?: string
+
+  /**
+   * 用户权限，值为all_squash、no_all_squash、root_squash、no_root_squash。其中all_squash为所有访问用户都会被映射为匿名用户或用户组；no_all_squash为访问用户会先与本机用户匹配，匹配失败后再映射为匿名用户或用户组；root_squash为将来访的root用户映射为匿名用户或用户组；no_root_squash为来访的root用户保持root帐号权限。不填默认为root_squash。
+   */
+  UserPermission?: string
+
+  /**
+   * 规则优先级，参数范围1-100。 其中 1 为最高，100为最低
+   */
+  Priority?: number
+}
+
+/**
+ * DeleteAutoSnapshotPolicy返回参数结构体
+ */
+export interface DeleteAutoSnapshotPolicyResponse {
+  /**
+   * 快照策略ID
+   */
+  AutoSnapshotPolicyId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreateCfsSnapshot请求参数结构体
+ */
+export interface CreateCfsSnapshotRequest {
+  /**
+   * 文件系统id
+   */
+  FileSystemId: string
+
+  /**
+   * 快照名称
+   */
+  SnapshotName?: string
+
+  /**
+   * 快照标签
+   */
+  ResourceTags?: Array<TagInfo>
+}
+
+/**
+ * DescribeSnapshotOperationLogs请求参数结构体
+ */
+export interface DescribeSnapshotOperationLogsRequest {
+  /**
+   * 文件系统快照ID
+   */
+  SnapshotId: string
+
+  /**
+   * 起始时间
+   */
+  StartTime: string
+
+  /**
+   * 结束时间
+   */
+  EndTime: string
 }
 
 /**
@@ -306,6 +536,21 @@ export interface DeleteCfsRuleResponse {
 }
 
 /**
+ * DescribeCfsSnapshotOverview返回参数结构体
+ */
+export interface DescribeCfsSnapshotOverviewResponse {
+  /**
+   * 统计信息
+   */
+  StatisticsList: Array<SnapshotStatistics>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteCfsRule请求参数结构体
  */
 export interface DeleteCfsRuleRequest {
@@ -318,6 +563,16 @@ export interface DeleteCfsRuleRequest {
    * 规则 ID
    */
   RuleId: string
+}
+
+/**
+ * DeleteMountTarget返回参数结构体
+ */
+export interface DeleteMountTargetResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -501,6 +756,26 @@ export interface DescribeCfsFileSystemsResponse {
 }
 
 /**
+ * DescribeAutoSnapshotPolicies返回参数结构体
+ */
+export interface DescribeAutoSnapshotPoliciesResponse {
+  /**
+   * 快照策略总个数
+   */
+  TotalCount: number
+
+  /**
+   * 快照策略信息
+   */
+  AutoSnapshotPolicies: Array<AutoSnapshotPolicyInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateCfsFileSystem返回参数结构体
  */
 export interface CreateCfsFileSystemResponse {
@@ -551,129 +826,39 @@ export interface CreateCfsFileSystemResponse {
 }
 
 /**
- * 文件系统基本信息
+ * DescribeMountTargets返回参数结构体
  */
-export interface FileSystemInfo {
+export interface DescribeMountTargetsResponse {
   /**
-   * 创建时间
+   * 挂载点详情
    */
-  CreationTime: string
+  MountTargets: Array<MountInfo>
 
   /**
-   * 用户自定义名称
+   * 挂载点数量
    */
-  CreationToken: string
+  NumberOfMountTargets: number
 
   /**
-   * 文件系统 ID
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  FileSystemId: string
-
-  /**
-   * 文件系统状态
-   */
-  LifeCycleState: string
-
-  /**
-   * 文件系统已使用容量
-   */
-  SizeByte: number
-
-  /**
-   * 文件系统最大空间限制
-   */
-  SizeLimit: number
-
-  /**
-   * 区域 ID
-   */
-  ZoneId: number
-
-  /**
-   * 区域名称
-   */
-  Zone: string
-
-  /**
-   * 文件系统协议类型
-   */
-  Protocol: string
-
-  /**
-   * 文件系统存储类型
-   */
-  StorageType: string
-
-  /**
-   * 文件系统绑定的预付费存储包
-   */
-  StorageResourcePkg: string
-
-  /**
-   * 文件系统绑定的预付费带宽包（暂未支持）
-   */
-  BandwidthResourcePkg: string
-
-  /**
-   * 文件系统绑定权限组信息
-   */
-  PGroup: PGroup
-
-  /**
-   * 用户自定义名称
-   */
-  FsName: string
-
-  /**
-   * 文件系统是否加密
-   */
-  Encrypted: boolean
-
-  /**
-   * 加密所使用的密钥，可以为密钥的 ID 或者 ARN
-   */
-  KmsKeyId: string
-
-  /**
-   * 应用ID
-   */
-  AppId: number
-
-  /**
-   * 文件系统吞吐上限，吞吐上限是根据文件系统当前已使用存储量、绑定的存储资源包以及吞吐资源包一同确定
-   */
-  BandwidthLimit: number
-
-  /**
-   * 文件系统总容量
-   */
-  Capacity: number
-
-  /**
-   * 文件系统标签列表
-   */
-  Tags: Array<TagInfo>
+  RequestId?: string
 }
 
 /**
- * Tag信息单元
+ * BindAutoSnapshotPolicy请求参数结构体
  */
-export interface TagInfo {
+export interface BindAutoSnapshotPolicyRequest {
   /**
-   * 标签键
+   * 快照策略ID
    */
-  TagKey: string
+  AutoSnapshotPolicyId: string
 
   /**
-   * 标签值
+   * 文件系统列表
    */
-  TagValue: string
+  FileSystemIds: string
 }
-
-/**
- * DescribeCfsPGroups请求参数结构体
- */
-export type DescribeCfsPGroupsRequest = null
 
 /**
  * DescribeCfsFileSystemClients请求参数结构体
@@ -683,6 +868,51 @@ export interface DescribeCfsFileSystemClientsRequest {
    * 文件系统 ID。
    */
   FileSystemId: string
+}
+
+/**
+ * DeleteCfsSnapshot请求参数结构体
+ */
+export interface DeleteCfsSnapshotRequest {
+  /**
+   * 文件系统快照id
+   */
+  SnapshotId: string
+}
+
+/**
+ * DescribeCfsPGroups请求参数结构体
+ */
+export type DescribeCfsPGroupsRequest = null
+
+/**
+ * 版本控制-可用区数组
+ */
+export interface AvailableZone {
+  /**
+   * 可用区名称
+   */
+  Zone: string
+
+  /**
+   * 可用区ID
+   */
+  ZoneId: number
+
+  /**
+   * 可用区中文名称
+   */
+  ZoneCnName: string
+
+  /**
+   * Type数组
+   */
+  Types: Array<AvailableType>
+
+  /**
+   * 可用区中英文名称
+   */
+  ZoneName: string
 }
 
 /**
@@ -721,9 +951,24 @@ export interface DeleteCfsPGroupResponse {
 }
 
 /**
- * UpdateCfsFileSystemSizeLimit返回参数结构体
+ * DescribeCfsSnapshots返回参数结构体
  */
-export interface UpdateCfsFileSystemSizeLimitResponse {
+export interface DescribeCfsSnapshotsResponse {
+  /**
+   * 总个数
+   */
+  TotalCount: number
+
+  /**
+   * 快照信息描述
+   */
+  Snapshots: Array<SnapshotInfo>
+
+  /**
+   * 快照列表快照汇总
+   */
+  TotalSize: number
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -731,9 +976,49 @@ export interface UpdateCfsFileSystemSizeLimitResponse {
 }
 
 /**
- * DescribeAvailableZoneInfo请求参数结构体
+ * DescribeAutoSnapshotPolicies请求参数结构体
  */
-export type DescribeAvailableZoneInfoRequest = null
+export interface DescribeAutoSnapshotPoliciesRequest {
+  /**
+   * 快照策略ID
+   */
+  AutoSnapshotPolicyId?: string
+
+  /**
+   * 分页码
+   */
+  Offset?: number
+
+  /**
+   * 页面长
+   */
+  Limit?: number
+
+  /**
+   * 过滤条件
+   */
+  Filters?: Array<Filter>
+
+  /**
+   * 升序，降序
+   */
+  Order?: string
+
+  /**
+   * 排序字段
+   */
+  OrderField?: string
+}
+
+/**
+ * DeleteCfsFileSystem请求参数结构体
+ */
+export interface DeleteCfsFileSystemRequest {
+  /**
+   * 文件系统 ID。说明，进行删除文件系统操作前需要先调用 DeleteMountTarget 接口删除该文件系统的挂载点，否则会删除失败。
+   */
+  FileSystemId: string
+}
 
 /**
  * 版本控制-区域数组
@@ -763,6 +1048,26 @@ export interface AvailableRegion {
    * 区域中文名称，如“广州”
    */
   RegionCnName: string
+}
+
+/**
+ * UpdateCfsSnapshotAttribute请求参数结构体
+ */
+export interface UpdateCfsSnapshotAttributeRequest {
+  /**
+   * 文件系统快照ID
+   */
+  SnapshotId: string
+
+  /**
+   * 文件系统快照名称
+   */
+  SnapshotName?: string
+
+  /**
+   * 文件系统快照保留天数
+   */
+  AliveDays?: number
 }
 
 /**
@@ -886,14 +1191,134 @@ export interface CreateCfsPGroupResponse {
 }
 
 /**
- * SignUpCfsService请求参数结构体
+ * UpdateCfsFileSystemPGroup请求参数结构体
  */
-export type SignUpCfsServiceRequest = null
+export interface UpdateCfsFileSystemPGroupRequest {
+  /**
+   * 权限组 ID
+   */
+  PGroupId: string
+
+  /**
+   * 文件系统 ID
+   */
+  FileSystemId: string
+}
+
+/**
+ * 权限组规则列表
+ */
+export interface PGroupRuleInfo {
+  /**
+   * 规则ID
+   */
+  RuleId: string
+
+  /**
+   * 允许访问的客户端IP
+   */
+  AuthClientIp: string
+
+  /**
+   * 读写权限, ro为只读，rw为读写
+   */
+  RWPermission: string
+
+  /**
+   * 用户权限。其中all_squash为所有访问用户都会被映射为匿名用户或用户组；no_all_squash为访问用户会先与本机用户匹配，匹配失败后再映射为匿名用户或用户组；root_squash为将来访的root用户映射为匿名用户或用户组；no_root_squash为来访的root用户保持root帐号权限。
+   */
+  UserPermission: string
+
+  /**
+   * 规则优先级，1-100。 其中 1 为最高，100为最低
+   */
+  Priority: number
+}
+
+/**
+ * UpdateCfsFileSystemName返回参数结构体
+ */
+export interface UpdateCfsFileSystemNameResponse {
+  /**
+   * 用户自定义文件系统名称
+   */
+  CreationToken: string
+
+  /**
+   * 文件系统ID
+   */
+  FileSystemId: string
+
+  /**
+   * 用户自定义文件系统名称
+   */
+  FsName: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
 
 /**
  * DescribeCfsServiceStatus请求参数结构体
  */
 export type DescribeCfsServiceStatusRequest = null
+
+/**
+ * UpdateCfsSnapshotAttribute返回参数结构体
+ */
+export interface UpdateCfsSnapshotAttributeResponse {
+  /**
+   * 文件系统快照ID
+   */
+  SnapshotId: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 绑定快照策略的文件系统信息
+ */
+export interface FileSystemByPolicy {
+  /**
+   * 文件系统名称
+   */
+  CreationToken: string
+
+  /**
+   * 文件系统ID
+   */
+  FileSystemId: string
+
+  /**
+   * 文件系统大小
+   */
+  SizeByte: number
+
+  /**
+   * 存储类型
+   */
+  StorageType: string
+
+  /**
+   * 快照总大小
+   */
+  TotalSnapshotSize: number
+
+  /**
+   * 文件系统创建时间
+   */
+  CreationTime: string
+
+  /**
+   * 文件系统所在区ID
+   */
+  ZoneId: number
+}
 
 /**
  * 权限组数组
@@ -926,6 +1351,36 @@ export interface PGroupInfo {
 }
 
 /**
+ * 条件过滤
+ */
+export interface Filter {
+  /**
+   * 值
+   */
+  Values: Array<string>
+
+  /**
+   * 名称
+   */
+  Name: string
+}
+
+/**
+ * UnbindAutoSnapshotPolicy请求参数结构体
+ */
+export interface UnbindAutoSnapshotPolicyRequest {
+  /**
+   * 需要解绑的文件系统ID列表，用"," 分割
+   */
+  FileSystemIds: string
+
+  /**
+   * 解绑的快照ID
+   */
+  AutoSnapshotPolicyId: string
+}
+
+/**
  * SignUpCfsService返回参数结构体
  */
 export interface SignUpCfsServiceResponse {
@@ -941,18 +1396,73 @@ export interface SignUpCfsServiceResponse {
 }
 
 /**
- * UpdateCfsFileSystemPGroup请求参数结构体
+ * 快照策略信息
  */
-export interface UpdateCfsFileSystemPGroupRequest {
+export interface AutoSnapshotPolicyInfo {
   /**
-   * 权限组 ID
+   * 快照策略ID
    */
-  PGroupId: string
+  AutoSnapshotPolicyId: string
 
   /**
-   * 文件系统 ID
+   * 快照策略ID
    */
-  FileSystemId: string
+  PolicyName: string
+
+  /**
+   * 快照策略创建时间
+   */
+  CreationTime: string
+
+  /**
+   * 关联的文件系统个数
+   */
+  FileSystemNums: number
+
+  /**
+   * 快照定期备份在一星期哪一天
+   */
+  DayOfWeek: string
+
+  /**
+   * 快照定期备份在一天的哪一小时
+   */
+  Hour: string
+
+  /**
+   * 是否激活定期快照功能
+   */
+  IsActivated: number
+
+  /**
+   * 下一次触发快照时间
+   */
+  NextActiveTime: string
+
+  /**
+   * 快照策略状态
+   */
+  Status: string
+
+  /**
+   * 帐号ID
+   */
+  AppId: number
+
+  /**
+   * 保留时间
+   */
+  AliveDays: number
+
+  /**
+   * 地域
+   */
+  RegionName: string
+
+  /**
+   * 文件系统信息
+   */
+  FileSystems: Array<FileSystemByPolicy>
 }
 
 /**
@@ -1011,6 +1521,56 @@ export interface CreateCfsRuleResponse {
 }
 
 /**
+ * CreateAutoSnapshotPolicy返回参数结构体
+ */
+export interface CreateAutoSnapshotPolicyResponse {
+  /**
+   * 快照策略ID
+   */
+  AutoSnapshotPolicyId: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpdateCfsFileSystemPGroup返回参数结构体
+ */
+export interface UpdateCfsFileSystemPGroupResponse {
+  /**
+   * 权限组 ID
+   */
+  PGroupId: string
+
+  /**
+   * 文件系统 ID
+   */
+  FileSystemId: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * Tag信息单元
+ */
+export interface TagInfo {
+  /**
+   * 标签键
+   */
+  TagKey: string
+
+  /**
+   * 标签值
+   */
+  TagValue: string
+}
+
+/**
  * 版本控制-协议详情
 
  */
@@ -1037,33 +1597,68 @@ export interface DescribeCfsRulesRequest {
 }
 
 /**
- * 权限组规则列表
+ * BindAutoSnapshotPolicy返回参数结构体
  */
-export interface PGroupRuleInfo {
+export interface BindAutoSnapshotPolicyResponse {
   /**
-   * 规则ID
+   * 快照策略ID
    */
-  RuleId: string
+  AutoSnapshotPolicyId: string
 
   /**
-   * 允许访问的客户端IP
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  AuthClientIp: string
+  RequestId?: string
+}
+
+/**
+ * DescribeCfsSnapshots请求参数结构体
+ */
+export interface DescribeCfsSnapshotsRequest {
+  /**
+   * 文件系统ID
+   */
+  FileSystemId?: string
 
   /**
-   * 读写权限, ro为只读，rw为读写
+   * 快照ID
    */
-  RWPermission: string
+  SnapshotId?: string
 
   /**
-   * 用户权限。其中all_squash为所有访问用户都会被映射为匿名用户或用户组；no_all_squash为访问用户会先与本机用户匹配，匹配失败后再映射为匿名用户或用户组；root_squash为将来访的root用户映射为匿名用户或用户组；no_root_squash为来访的root用户保持root帐号权限。
+   * 分页起始位置
    */
-  UserPermission: string
+  Offset?: number
 
   /**
-   * 规则优先级，1-100。 其中 1 为最高，100为最低
+   * 页面长度
    */
-  Priority: number
+  Limit?: number
+
+  /**
+   * 过滤条件
+   */
+  Filters?: Array<Filter>
+
+  /**
+   * 排序取值
+   */
+  OrderField?: string
+
+  /**
+   * 排序 升序或者降序
+   */
+  Order?: string
+}
+
+/**
+ * UpdateCfsFileSystemSizeLimit返回参数结构体
+ */
+export interface UpdateCfsFileSystemSizeLimitResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1075,6 +1670,46 @@ export interface DeleteCfsPGroupRequest {
    */
   PGroupId: string
 }
+
+/**
+ * UpdateAutoSnapshotPolicy请求参数结构体
+ */
+export interface UpdateAutoSnapshotPolicyRequest {
+  /**
+   * 快照策略ID
+   */
+  AutoSnapshotPolicyId: string
+
+  /**
+   * 快照策略名称
+   */
+  PolicyName?: string
+
+  /**
+   * 快照定期备份在一星期哪一天
+   */
+  DayOfWeek?: string
+
+  /**
+   * 快照定期备份在一天的哪一小时
+   */
+  Hour?: string
+
+  /**
+   * 快照保留日期
+   */
+  AliveDays?: number
+
+  /**
+   * 是否激活定期快照功能
+   */
+  IsActivated?: number
+}
+
+/**
+ * DescribeCfsSnapshotOverview请求参数结构体
+ */
+export type DescribeCfsSnapshotOverviewRequest = null
 
 /**
  * 版本控制-类型数组
@@ -1097,6 +1732,21 @@ export interface AvailableType {
 }
 
 /**
+ * UnbindAutoSnapshotPolicy返回参数结构体
+ */
+export interface UnbindAutoSnapshotPolicyResponse {
+  /**
+   * 快照策略ID
+   */
+  AutoSnapshotPolicyId: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * UpdateCfsFileSystemSizeLimit请求参数结构体
  */
 export interface UpdateCfsFileSystemSizeLimitRequest {
@@ -1112,14 +1762,9 @@ export interface UpdateCfsFileSystemSizeLimitRequest {
 }
 
 /**
- * DeleteCfsFileSystem请求参数结构体
+ * DescribeAvailableZoneInfo请求参数结构体
  */
-export interface DeleteCfsFileSystemRequest {
-  /**
-   * 文件系统 ID。说明，进行删除文件系统操作前需要先调用 DeleteMountTarget 接口删除该文件系统的挂载点，否则会删除失败。
-   */
-  FileSystemId: string
-}
+export type DescribeAvailableZoneInfoRequest = null
 
 /**
  * UpdateCfsPGroup返回参数结构体
@@ -1162,18 +1807,68 @@ export interface DescribeCfsRulesResponse {
 }
 
 /**
- * UpdateCfsFileSystemPGroup返回参数结构体
+ * SignUpCfsService请求参数结构体
  */
-export interface UpdateCfsFileSystemPGroupResponse {
+export type SignUpCfsServiceRequest = null
+
+/**
+ * DeleteAutoSnapshotPolicy请求参数结构体
+ */
+export interface DeleteAutoSnapshotPolicyRequest {
   /**
-   * 权限组 ID
+   * 快照策略ID
    */
-  PGroupId: string
+  AutoSnapshotPolicyId: string
+}
+
+/**
+ * CreateAutoSnapshotPolicy请求参数结构体
+ */
+export interface CreateAutoSnapshotPolicyRequest {
+  /**
+   * 快照重复日期，星期一到星期日
+   */
+  DayOfWeek: string
 
   /**
-   * 文件系统 ID
+   * 快照重复时间点
    */
-  FileSystemId: string
+  Hour: string
+
+  /**
+   * 策略名称
+   */
+  PolicyName?: string
+
+  /**
+   * 快照保留时长
+   */
+  AliveDays?: number
+}
+
+/**
+ * UpdateAutoSnapshotPolicy返回参数结构体
+ */
+export interface UpdateAutoSnapshotPolicyResponse {
+  /**
+   * 快照策略ID
+   */
+  AutoSnapshotPolicyId: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateCfsSnapshot返回参数结构体
+ */
+export interface CreateCfsSnapshotResponse {
+  /**
+   * 文件系统快照id
+   */
+  SnapshotId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

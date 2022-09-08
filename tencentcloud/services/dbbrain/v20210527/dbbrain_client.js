@@ -154,6 +154,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteSecurityAuditLogExportTasks", req, cb);
     }
     /**
+     * 更改实例限流任务状态，目前仅用于终止限流。
+     */
+    async ModifySqlFilters(req, cb) {
+        return this.request("ModifySqlFilters", req, cb);
+    }
+    /**
      * 查询redis实例大key列表。
      */
     async DescribeRedisTopBigKeys(req, cb) {
@@ -184,10 +190,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDBDiagHistory", req, cb);
     }
     /**
-     * 更改实例限流任务状态，目前仅用于终止限流。
+     * 查询redis实例top key前缀列表。
      */
-    async ModifySqlFilters(req, cb) {
-        return this.request("ModifySqlFilters", req, cb);
+    async DescribeRedisTopKeyPrefixList(req, cb) {
+        return this.request("DescribeRedisTopKeyPrefixList", req, cb);
     }
     /**
      * 创建健康报告，并可以选择是否发送邮件。

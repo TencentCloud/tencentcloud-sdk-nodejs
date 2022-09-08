@@ -19,56 +19,86 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   DeleteCfsFileSystemResponse,
-  AvailableZone,
-  UpdateCfsRuleRequest,
+  SnapshotInfo,
   DescribeCfsFileSystemsRequest,
   DeleteMountTargetRequest,
   CreateCfsRuleRequest,
+  FileSystemInfo,
   PGroup,
   DescribeAvailableZoneInfoResponse,
-  UpdateCfsFileSystemNameResponse,
+  SnapshotStatistics,
   UpdateCfsFileSystemNameRequest,
+  DeleteCfsSnapshotResponse,
   DescribeCfsPGroupsResponse,
   DescribeCfsFileSystemClientsResponse,
-  DeleteMountTargetResponse,
-  DescribeMountTargetsResponse,
+  SnapshotOperateLog,
+  DescribeSnapshotOperationLogsResponse,
+  UpdateCfsRuleRequest,
+  DeleteAutoSnapshotPolicyResponse,
+  CreateCfsSnapshotRequest,
+  DescribeSnapshotOperationLogsRequest,
   DeleteCfsRuleResponse,
+  DescribeCfsSnapshotOverviewResponse,
   DeleteCfsRuleRequest,
+  DeleteMountTargetResponse,
   UpdateCfsPGroupRequest,
   MountInfo,
   UpdateCfsRuleResponse,
   FileSystemClient,
   DescribeCfsFileSystemsResponse,
+  DescribeAutoSnapshotPoliciesResponse,
   CreateCfsFileSystemResponse,
-  FileSystemInfo,
-  TagInfo,
-  DescribeCfsPGroupsRequest,
+  DescribeMountTargetsResponse,
+  BindAutoSnapshotPolicyRequest,
   DescribeCfsFileSystemClientsRequest,
+  DeleteCfsSnapshotRequest,
+  DescribeCfsPGroupsRequest,
+  AvailableZone,
   CreateCfsPGroupRequest,
   DeleteCfsPGroupResponse,
-  UpdateCfsFileSystemSizeLimitResponse,
-  DescribeAvailableZoneInfoRequest,
+  DescribeCfsSnapshotsResponse,
+  DescribeAutoSnapshotPoliciesRequest,
+  DeleteCfsFileSystemRequest,
   AvailableRegion,
+  UpdateCfsSnapshotAttributeRequest,
   CreateCfsFileSystemRequest,
   DescribeMountTargetsRequest,
   CreateCfsPGroupResponse,
-  SignUpCfsServiceRequest,
-  DescribeCfsServiceStatusRequest,
-  PGroupInfo,
-  SignUpCfsServiceResponse,
   UpdateCfsFileSystemPGroupRequest,
+  PGroupRuleInfo,
+  UpdateCfsFileSystemNameResponse,
+  DescribeCfsServiceStatusRequest,
+  UpdateCfsSnapshotAttributeResponse,
+  FileSystemByPolicy,
+  PGroupInfo,
+  Filter,
+  UnbindAutoSnapshotPolicyRequest,
+  SignUpCfsServiceResponse,
+  AutoSnapshotPolicyInfo,
   DescribeCfsServiceStatusResponse,
   CreateCfsRuleResponse,
+  CreateAutoSnapshotPolicyResponse,
+  UpdateCfsFileSystemPGroupResponse,
+  TagInfo,
   AvailableProtoStatus,
   DescribeCfsRulesRequest,
-  PGroupRuleInfo,
+  BindAutoSnapshotPolicyResponse,
+  DescribeCfsSnapshotsRequest,
+  UpdateCfsFileSystemSizeLimitResponse,
   DeleteCfsPGroupRequest,
+  UpdateAutoSnapshotPolicyRequest,
+  DescribeCfsSnapshotOverviewRequest,
   AvailableType,
+  UnbindAutoSnapshotPolicyResponse,
   UpdateCfsFileSystemSizeLimitRequest,
-  DeleteCfsFileSystemRequest,
+  DescribeAvailableZoneInfoRequest,
   UpdateCfsPGroupResponse,
   DescribeCfsRulesResponse,
-  UpdateCfsFileSystemPGroupResponse,
+  SignUpCfsServiceRequest,
+  DeleteAutoSnapshotPolicyRequest,
+  CreateAutoSnapshotPolicyRequest,
+  UpdateAutoSnapshotPolicyResponse,
+  CreateCfsSnapshotResponse,
 } from "./cfs_models"
 
 /**
@@ -78,26 +108,6 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("cfs.tencentcloudapi.com", "2019-07-19", clientConfig)
-  }
-
-  /**
-   * 用于添加新文件系统
-   */
-  async CreateCfsFileSystem(
-    req: CreateCfsFileSystemRequest,
-    cb?: (error: string, rep: CreateCfsFileSystemResponse) => void
-  ): Promise<CreateCfsFileSystemResponse> {
-    return this.request("CreateCfsFileSystem", req, cb)
-  }
-
-  /**
-   * 本接口（DescribeCfsPGroups）用于查询权限组列表。
-   */
-  async DescribeCfsPGroups(
-    req?: DescribeCfsPGroupsRequest,
-    cb?: (error: string, rep: DescribeCfsPGroupsResponse) => void
-  ): Promise<DescribeCfsPGroupsResponse> {
-    return this.request("DescribeCfsPGroups", req, cb)
   }
 
   /**
@@ -121,6 +131,86 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（SignUpCfsService）用于开通CFS服务。
+   */
+  async SignUpCfsService(
+    req?: SignUpCfsServiceRequest,
+    cb?: (error: string, rep: SignUpCfsServiceResponse) => void
+  ): Promise<SignUpCfsServiceResponse> {
+    return this.request("SignUpCfsService", req, cb)
+  }
+
+  /**
+   * 删除文件系统快照
+   */
+  async DeleteCfsSnapshot(
+    req: DeleteCfsSnapshotRequest,
+    cb?: (error: string, rep: DeleteCfsSnapshotResponse) => void
+  ): Promise<DeleteCfsSnapshotResponse> {
+    return this.request("DeleteCfsSnapshot", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeCfsPGroups）用于查询权限组列表。
+   */
+  async DescribeCfsPGroups(
+    req?: DescribeCfsPGroupsRequest,
+    cb?: (error: string, rep: DescribeCfsPGroupsResponse) => void
+  ): Promise<DescribeCfsPGroupsResponse> {
+    return this.request("DescribeCfsPGroups", req, cb)
+  }
+
+  /**
+   * 查询文件系统快照d定期策略列表信息
+   */
+  async DescribeAutoSnapshotPolicies(
+    req: DescribeAutoSnapshotPoliciesRequest,
+    cb?: (error: string, rep: DescribeAutoSnapshotPoliciesResponse) => void
+  ): Promise<DescribeAutoSnapshotPoliciesResponse> {
+    return this.request("DescribeAutoSnapshotPolicies", req, cb)
+  }
+
+  /**
+   * 文件系统绑定快照策略，可以同时绑定多个fs，一个fs 只能跟一个策略绑定
+   */
+  async BindAutoSnapshotPolicy(
+    req: BindAutoSnapshotPolicyRequest,
+    cb?: (error: string, rep: BindAutoSnapshotPolicyResponse) => void
+  ): Promise<BindAutoSnapshotPolicyResponse> {
+    return this.request("BindAutoSnapshotPolicy", req, cb)
+  }
+
+  /**
+   * 本接口（DeleteCfsPGroup）用于删除权限组。
+   */
+  async DeleteCfsPGroup(
+    req: DeleteCfsPGroupRequest,
+    cb?: (error: string, rep: DeleteCfsPGroupResponse) => void
+  ): Promise<DeleteCfsPGroupResponse> {
+    return this.request("DeleteCfsPGroup", req, cb)
+  }
+
+  /**
+   * 查询挂载该文件系统的客户端。此功能需要客户端安装CFS监控插件。
+   */
+  async DescribeCfsFileSystemClients(
+    req: DescribeCfsFileSystemClientsRequest,
+    cb?: (error: string, rep: DescribeCfsFileSystemClientsResponse) => void
+  ): Promise<DescribeCfsFileSystemClientsResponse> {
+    return this.request("DescribeCfsFileSystemClients", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeCfsServiceStatus）用于查询用户使用CFS的服务状态。
+   */
+  async DescribeCfsServiceStatus(
+    req?: DescribeCfsServiceStatusRequest,
+    cb?: (error: string, rep: DescribeCfsServiceStatusResponse) => void
+  ): Promise<DescribeCfsServiceStatusResponse> {
+    return this.request("DescribeCfsServiceStatus", req, cb)
+  }
+
+  /**
    * 本接口（DescribeAvailableZoneInfo）用于查询区域的可用情况。
    */
   async DescribeAvailableZoneInfo(
@@ -141,16 +231,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于删除文件系统
-   */
-  async DeleteCfsFileSystem(
-    req: DeleteCfsFileSystemRequest,
-    cb?: (error: string, rep: DeleteCfsFileSystemResponse) => void
-  ): Promise<DeleteCfsFileSystemResponse> {
-    return this.request("DeleteCfsFileSystem", req, cb)
-  }
-
-  /**
    * 本接口（UpdateCfsFileSystemSizeLimit）用于更新文件系统存储容量限制。
    */
   async UpdateCfsFileSystemSizeLimit(
@@ -161,33 +241,53 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（CreateCfsPGroup）用于创建权限组
+   * 用于删除文件系统
    */
-  async CreateCfsPGroup(
-    req: CreateCfsPGroupRequest,
-    cb?: (error: string, rep: CreateCfsPGroupResponse) => void
-  ): Promise<CreateCfsPGroupResponse> {
-    return this.request("CreateCfsPGroup", req, cb)
+  async DeleteCfsFileSystem(
+    req: DeleteCfsFileSystemRequest,
+    cb?: (error: string, rep: DeleteCfsFileSystemResponse) => void
+  ): Promise<DeleteCfsFileSystemResponse> {
+    return this.request("DeleteCfsFileSystem", req, cb)
   }
 
   /**
-   * 本接口（UpdateCfsRule）用于更新权限规则。
+   * 用于添加新文件系统
    */
-  async UpdateCfsRule(
-    req: UpdateCfsRuleRequest,
-    cb?: (error: string, rep: UpdateCfsRuleResponse) => void
-  ): Promise<UpdateCfsRuleResponse> {
-    return this.request("UpdateCfsRule", req, cb)
+  async CreateCfsFileSystem(
+    req: CreateCfsFileSystemRequest,
+    cb?: (error: string, rep: CreateCfsFileSystemResponse) => void
+  ): Promise<CreateCfsFileSystemResponse> {
+    return this.request("CreateCfsFileSystem", req, cb)
   }
 
   /**
-   * 本接口（DescribeCfsServiceStatus）用于查询用户使用CFS的服务状态。
+   * 更新文件系统快照名称及保留时长
    */
-  async DescribeCfsServiceStatus(
-    req?: DescribeCfsServiceStatusRequest,
-    cb?: (error: string, rep: DescribeCfsServiceStatusResponse) => void
-  ): Promise<DescribeCfsServiceStatusResponse> {
-    return this.request("DescribeCfsServiceStatus", req, cb)
+  async UpdateCfsSnapshotAttribute(
+    req: UpdateCfsSnapshotAttributeRequest,
+    cb?: (error: string, rep: UpdateCfsSnapshotAttributeResponse) => void
+  ): Promise<UpdateCfsSnapshotAttributeResponse> {
+    return this.request("UpdateCfsSnapshotAttribute", req, cb)
+  }
+
+  /**
+   * 文件系统快照概览
+   */
+  async DescribeCfsSnapshotOverview(
+    req?: DescribeCfsSnapshotOverviewRequest,
+    cb?: (error: string, rep: DescribeCfsSnapshotOverviewResponse) => void
+  ): Promise<DescribeCfsSnapshotOverviewResponse> {
+    return this.request("DescribeCfsSnapshotOverview", req, cb)
+  }
+
+  /**
+   * 更新定期自动快照策略
+   */
+  async UpdateAutoSnapshotPolicy(
+    req: UpdateAutoSnapshotPolicyRequest,
+    cb?: (error: string, rep: UpdateAutoSnapshotPolicyResponse) => void
+  ): Promise<UpdateAutoSnapshotPolicyResponse> {
+    return this.request("UpdateAutoSnapshotPolicy", req, cb)
   }
 
   /**
@@ -201,33 +301,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（SignUpCfsService）用于开通CFS服务。
+   * 查询文件系统快照列表
    */
-  async SignUpCfsService(
-    req?: SignUpCfsServiceRequest,
-    cb?: (error: string, rep: SignUpCfsServiceResponse) => void
-  ): Promise<SignUpCfsServiceResponse> {
-    return this.request("SignUpCfsService", req, cb)
-  }
-
-  /**
-   * 本接口（CreateCfsRule）用于创建权限组规则。
-   */
-  async CreateCfsRule(
-    req: CreateCfsRuleRequest,
-    cb?: (error: string, rep: CreateCfsRuleResponse) => void
-  ): Promise<CreateCfsRuleResponse> {
-    return this.request("CreateCfsRule", req, cb)
-  }
-
-  /**
-   * 本接口（DeleteCfsPGroup）用于删除权限组。
-   */
-  async DeleteCfsPGroup(
-    req: DeleteCfsPGroupRequest,
-    cb?: (error: string, rep: DeleteCfsPGroupResponse) => void
-  ): Promise<DeleteCfsPGroupResponse> {
-    return this.request("DeleteCfsPGroup", req, cb)
+  async DescribeCfsSnapshots(
+    req: DescribeCfsSnapshotsRequest,
+    cb?: (error: string, rep: DescribeCfsSnapshotsResponse) => void
+  ): Promise<DescribeCfsSnapshotsResponse> {
+    return this.request("DescribeCfsSnapshots", req, cb)
   }
 
   /**
@@ -241,16 +321,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（UpdateCfsPGroup）更新权限组信息。
-   */
-  async UpdateCfsPGroup(
-    req: UpdateCfsPGroupRequest,
-    cb?: (error: string, rep: UpdateCfsPGroupResponse) => void
-  ): Promise<UpdateCfsPGroupResponse> {
-    return this.request("UpdateCfsPGroup", req, cb)
-  }
-
-  /**
    * 本接口（DeleteCfsRule）用于删除权限组规则。
    */
   async DeleteCfsRule(
@@ -261,16 +331,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询挂载该文件系统的客户端。此功能需要客户端安装CFS监控插件。
-   */
-  async DescribeCfsFileSystemClients(
-    req: DescribeCfsFileSystemClientsRequest,
-    cb?: (error: string, rep: DescribeCfsFileSystemClientsResponse) => void
-  ): Promise<DescribeCfsFileSystemClientsResponse> {
-    return this.request("DescribeCfsFileSystemClients", req, cb)
-  }
-
-  /**
    * 本接口（DeleteMountTarget）用于删除挂载点
    */
   async DeleteMountTarget(
@@ -278,5 +338,95 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteMountTargetResponse) => void
   ): Promise<DeleteMountTargetResponse> {
     return this.request("DeleteMountTarget", req, cb)
+  }
+
+  /**
+   * 创建定期快照策略
+   */
+  async CreateAutoSnapshotPolicy(
+    req: CreateAutoSnapshotPolicyRequest,
+    cb?: (error: string, rep: CreateAutoSnapshotPolicyResponse) => void
+  ): Promise<CreateAutoSnapshotPolicyResponse> {
+    return this.request("CreateAutoSnapshotPolicy", req, cb)
+  }
+
+  /**
+   * 本接口（CreateCfsPGroup）用于创建权限组
+   */
+  async CreateCfsPGroup(
+    req: CreateCfsPGroupRequest,
+    cb?: (error: string, rep: CreateCfsPGroupResponse) => void
+  ): Promise<CreateCfsPGroupResponse> {
+    return this.request("CreateCfsPGroup", req, cb)
+  }
+
+  /**
+   * 删除快照定期策略
+   */
+  async DeleteAutoSnapshotPolicy(
+    req: DeleteAutoSnapshotPolicyRequest,
+    cb?: (error: string, rep: DeleteAutoSnapshotPolicyResponse) => void
+  ): Promise<DeleteAutoSnapshotPolicyResponse> {
+    return this.request("DeleteAutoSnapshotPolicy", req, cb)
+  }
+
+  /**
+   * 创建文件系统快照
+   */
+  async CreateCfsSnapshot(
+    req: CreateCfsSnapshotRequest,
+    cb?: (error: string, rep: CreateCfsSnapshotResponse) => void
+  ): Promise<CreateCfsSnapshotResponse> {
+    return this.request("CreateCfsSnapshot", req, cb)
+  }
+
+  /**
+   * 解除文件系统绑定的快照策略
+   */
+  async UnbindAutoSnapshotPolicy(
+    req: UnbindAutoSnapshotPolicyRequest,
+    cb?: (error: string, rep: UnbindAutoSnapshotPolicyResponse) => void
+  ): Promise<UnbindAutoSnapshotPolicyResponse> {
+    return this.request("UnbindAutoSnapshotPolicy", req, cb)
+  }
+
+  /**
+   * 查询快照操作日志
+   */
+  async DescribeSnapshotOperationLogs(
+    req: DescribeSnapshotOperationLogsRequest,
+    cb?: (error: string, rep: DescribeSnapshotOperationLogsResponse) => void
+  ): Promise<DescribeSnapshotOperationLogsResponse> {
+    return this.request("DescribeSnapshotOperationLogs", req, cb)
+  }
+
+  /**
+   * 本接口（CreateCfsRule）用于创建权限组规则。
+   */
+  async CreateCfsRule(
+    req: CreateCfsRuleRequest,
+    cb?: (error: string, rep: CreateCfsRuleResponse) => void
+  ): Promise<CreateCfsRuleResponse> {
+    return this.request("CreateCfsRule", req, cb)
+  }
+
+  /**
+   * 本接口（UpdateCfsRule）用于更新权限规则。
+   */
+  async UpdateCfsRule(
+    req: UpdateCfsRuleRequest,
+    cb?: (error: string, rep: UpdateCfsRuleResponse) => void
+  ): Promise<UpdateCfsRuleResponse> {
+    return this.request("UpdateCfsRule", req, cb)
+  }
+
+  /**
+   * 本接口（UpdateCfsPGroup）更新权限组信息。
+   */
+  async UpdateCfsPGroup(
+    req: UpdateCfsPGroupRequest,
+    cb?: (error: string, rep: UpdateCfsPGroupResponse) => void
+  ): Promise<UpdateCfsPGroupResponse> {
+    return this.request("UpdateCfsPGroup", req, cb)
   }
 }

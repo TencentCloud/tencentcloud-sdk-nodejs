@@ -3268,6 +3268,24 @@ export interface NatInstanceInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Status: number
+
+  /**
+      * 地域区域信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RegionDetail: string
+
+  /**
+      * 实例所在可用区
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ZoneZh: string
+
+  /**
+      * 实例所在可用区
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ZoneZhBak: string
 }
 
 /**

@@ -1362,6 +1362,27 @@ export interface DescribeSecurityAuditLogExportTasksResponse {
     RequestId?: string;
 }
 /**
+ * DescribeRedisTopKeyPrefixList请求参数结构体
+ */
+export interface DescribeRedisTopKeyPrefixListRequest {
+    /**
+      * 实例ID。
+      */
+    InstanceId: string;
+    /**
+      * 查询日期，如2021-05-27，最早可为前30天的日期。
+      */
+    Date: string;
+    /**
+      * 服务产品类型，支持值包括 "redis" - 云数据库 Redis。
+      */
+    Product: string;
+    /**
+      * 查询数目，默认为20，最大值为100。
+      */
+    Limit?: number;
+}
+/**
  * DescribeSqlTemplate返回参数结构体
  */
 export interface DescribeSqlTemplateResponse {
@@ -2280,6 +2301,23 @@ export interface MonitorFloatMetric {
     Values: Array<number>;
 }
 /**
+ * DescribeRedisTopKeyPrefixList返回参数结构体
+ */
+export interface DescribeRedisTopKeyPrefixListResponse {
+    /**
+      * top key前缀列表。
+      */
+    Items: Array<RedisPreKeySpaceData>;
+    /**
+      * 采集时间戳（秒）。
+      */
+    Timestamp: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeAllUserGroup返回参数结构体
  */
 export interface DescribeAllUserGroupResponse {
@@ -2433,6 +2471,35 @@ export interface GroupItem {
       * 组成员数量。
       */
     MemberCount: number;
+}
+/**
+ * redis key前缀空间信息
+ */
+export interface RedisPreKeySpaceData {
+    /**
+      * 平均元素长度。
+      */
+    AveElementSize: number;
+    /**
+      * 总占用内存（Byte）。
+      */
+    Length: number;
+    /**
+      * key前缀。
+      */
+    KeyPreIndex: string;
+    /**
+      * 元素数量。
+      */
+    ItemCount: number;
+    /**
+      * key个数。
+      */
+    Count: number;
+    /**
+      * 最大元素长度。
+      */
+    MaxElementSize: number;
 }
 /**
  * DescribeTopSpaceTableTimeSeries请求参数结构体
