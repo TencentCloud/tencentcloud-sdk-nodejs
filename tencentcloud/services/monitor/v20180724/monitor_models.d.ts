@@ -1806,6 +1806,11 @@ export interface GrafanaIntegrationConfig {
       * 集成描述
       */
     Description: string;
+    /**
+      * Grafana 跳转地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    GrafanaURL: string;
 }
 /**
  * 维度信息
@@ -1879,6 +1884,15 @@ export interface GrafanaAccountInfo {
       * 创建时间
       */
     CreateAt: string;
+    /**
+      * 实例 ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InstanceId: string;
+    /**
+      * 用户主账号 UIN
+      */
+    Uin: string;
 }
 /**
  * UpdateGrafanaNotificationChannel请求参数结构体
@@ -2494,6 +2508,36 @@ export interface ModifyPrometheusInstanceAttributesResponse {
     RequestId?: string;
 }
 /**
+ * Grafana 告警渠道
+ */
+export interface GrafanaChannel {
+    /**
+      * 渠道 ID
+      */
+    ChannelId: string;
+    /**
+      * 渠道名
+      */
+    ChannelName: string;
+    /**
+      * 告警通道模板 ID 数组
+      */
+    Receivers: Array<string>;
+    /**
+      * 创建时间
+      */
+    CreatedAt: string;
+    /**
+      * 更新时间
+      */
+    UpdatedAt: string;
+    /**
+      * 告警渠道的所有生效组织
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OrganizationIds: Array<string>;
+}
+/**
  * DeleteAlarmNotices返回参数结构体
  */
 export interface DeleteAlarmNoticesResponse {
@@ -3004,18 +3048,41 @@ export interface DescribeBindingPolicyObjectListInstance {
     Region: string;
 }
 /**
- * 监控数据点
+ * 修改告警策略组传入的指标阈值条件
  */
-export interface Point {
+export interface ModifyPolicyGroupCondition {
     /**
-      * 该监控数据点生成的时间点
+      * 指标id
       */
-    Timestamp: number;
+    MetricId: number;
     /**
-      * 监控数据点的值
-注意：此字段可能返回 null，表示取不到有效值。
+      * 比较类型，1表示大于，2表示大于等于，3表示小于，4表示小于等于，5表示相等，6表示不相等
       */
-    Value: number;
+    CalcType: number;
+    /**
+      * 检测阈值
+      */
+    CalcValue: string;
+    /**
+      * 检测指标的数据周期
+      */
+    CalcPeriod: number;
+    /**
+      * 持续周期个数
+      */
+    ContinuePeriod: number;
+    /**
+      * 告警发送收敛类型。0连续告警，1指数告警
+      */
+    AlarmNotifyType: number;
+    /**
+      * 告警发送周期单位秒。<0 不触发, 0 只触发一次, >0 每隔triggerTime秒触发一次
+      */
+    AlarmNotifyPeriod: number;
+    /**
+      * 规则id，不填表示新增，填写了ruleId表示在已存在的规则基础上进行修改
+      */
+    RuleId?: number;
 }
 /**
  * UpdateAlertRule返回参数结构体
@@ -3678,6 +3745,19 @@ export interface DescribeBasicAlarmListAlarms {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     InstanceGroup: Array<InstanceGroup>;
+}
+/**
+ * DescribeGrafanaChannels返回参数结构体
+ */
+export interface DescribeGrafanaChannelsResponse {
+    /**
+      * 告警通道数组
+      */
+    NotificationChannelSet: Array<GrafanaChannel>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeAlarmPolicy返回参数结构体
@@ -5847,7 +5927,7 @@ export interface RecordingRuleSet {
       */
     RuleState: number;
     /**
-      * 规则名称
+      * 分组名称
       */
     Name: string;
     /**
@@ -5866,6 +5946,11 @@ export interface RecordingRuleSet {
       * 规则最近更新时间
       */
     UpdatedAt: string;
+    /**
+      * 规则名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RuleName: string;
 }
 /**
  * CreateExporterIntegration返回参数结构体
@@ -5881,25 +5966,33 @@ export interface CreateExporterIntegrationResponse {
     RequestId?: string;
 }
 /**
- * DescribePolicyConditionList.EventMetric
+ * DescribeGrafanaChannels请求参数结构体
  */
-export interface DescribePolicyConditionListEventMetric {
+export interface DescribeGrafanaChannelsRequest {
     /**
-      * 事件id
+      * 实例 ID
       */
-    EventId: number;
+    InstanceId: string;
     /**
-      * 事件名称
+      * 偏移量
       */
-    EventShowName: string;
+    Offset: number;
     /**
-      * 是否需要恢复
+      * 查询数量
       */
-    NeedRecovered: boolean;
+    Limit: number;
     /**
-      * 事件类型，预留字段，当前固定取值为2
+      * 渠道名
       */
-    Type: number;
+    ChannelName?: string;
+    /**
+      * 渠道 ID
+      */
+    ChannelIds?: Array<string>;
+    /**
+      * 状态
+      */
+    ChannelState?: number;
 }
 /**
  * DescribePolicyGroupList请求参数结构体
@@ -6909,6 +7002,15 @@ export interface DescribeGrafanaWhiteListResponse {
     RequestId?: string;
 }
 /**
+ * UpdateSSOAccount返回参数结构体
+ */
+export interface UpdateSSOAccountResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * UpdateRecordingRule请求参数结构体
  */
 export interface UpdateRecordingRuleRequest {
@@ -6953,41 +7055,25 @@ export interface AlarmPolicyCondition {
     Rules: Array<AlarmPolicyRule>;
 }
 /**
- * 修改告警策略组传入的指标阈值条件
+ * DescribePolicyConditionList.EventMetric
  */
-export interface ModifyPolicyGroupCondition {
+export interface DescribePolicyConditionListEventMetric {
     /**
-      * 指标id
+      * 事件id
       */
-    MetricId: number;
+    EventId: number;
     /**
-      * 比较类型，1表示大于，2表示大于等于，3表示小于，4表示小于等于，5表示相等，6表示不相等
+      * 事件名称
       */
-    CalcType: number;
+    EventShowName: string;
     /**
-      * 检测阈值
+      * 是否需要恢复
       */
-    CalcValue: string;
+    NeedRecovered: boolean;
     /**
-      * 检测指标的数据周期
+      * 事件类型，预留字段，当前固定取值为2
       */
-    CalcPeriod: number;
-    /**
-      * 持续周期个数
-      */
-    ContinuePeriod: number;
-    /**
-      * 告警发送收敛类型。0连续告警，1指数告警
-      */
-    AlarmNotifyType: number;
-    /**
-      * 告警发送周期单位秒。<0 不触发, 0 只触发一次, >0 每隔triggerTime秒触发一次
-      */
-    AlarmNotifyPeriod: number;
-    /**
-      * 规则id，不填表示新增，填写了ruleId表示在已存在的规则基础上进行修改
-      */
-    RuleId?: number;
+    Type: number;
 }
 /**
  * DescribeDNSConfig请求参数结构体
@@ -7272,13 +7358,18 @@ export interface DeleteServiceDiscoveryRequest {
     Yaml: string;
 }
 /**
- * UpdateSSOAccount返回参数结构体
+ * 监控数据点
  */
-export interface UpdateSSOAccountResponse {
+export interface Point {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 该监控数据点生成的时间点
       */
-    RequestId?: string;
+    Timestamp: number;
+    /**
+      * 监控数据点的值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Value: number;
 }
 /**
  * DescribeInstalledPlugins返回参数结构体

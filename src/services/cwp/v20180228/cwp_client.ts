@@ -45,6 +45,7 @@ import {
   ModifyWebPageProtectSettingResponse,
   DescribeVulInfoCvssResponse,
   DescribeBaselineStrategyDetailRequest,
+  ModifyLicenseBindsRequest,
   MalWareList,
   DescribeAssetUserInfoResponse,
   Tag,
@@ -56,6 +57,7 @@ import {
   DescribeBaselineBasicInfoRequest,
   DescribeProVersionInfoRequest,
   DescribeVulCountByDatesRequest,
+  CreateLicenseOrderResponse,
   DescribeBaselineStrategyListResponse,
   DefendAttackLog,
   DescribeAssetEnvListResponse,
@@ -73,6 +75,7 @@ import {
   DescribeComponentStatisticsResponse,
   DescribeMachineRegionsRequest,
   DescribeSearchExportListResponse,
+  DescribeVulLevelCountResponse,
   BruteAttackRule,
   DescribeAvailableExpertServiceDetailRequest,
   DescribeServerRelatedDirInfoResponse,
@@ -86,6 +89,8 @@ import {
   OsName,
   DescribeTagMachinesRequest,
   AssetKeyVal,
+  DescribeLicenseListResponse,
+  LicenseUnBindRsp,
   ModifyAutoOpenProVersionConfigRequest,
   DeletePrivilegeEventsRequest,
   ExportAttackLogsRequest,
@@ -132,10 +137,13 @@ import {
   DescribeAssetWebServiceProcessListResponse,
   IgnoreImpactedHostsRequest,
   AssetUserDetail,
+  ModifyOrderAttributeResponse,
   DescribeMachinesRequest,
   DescribeVulEffectHostListRequest,
+  ExportLicenseDetailRequest,
   AssetWebAppPluginInfo,
   DeletePrivilegeRulesRequest,
+  DescribeLicenseBindScheduleResponse,
   DescribeMalwareInfoRequest,
   DescribeVersionStatisticsRequest,
   ExportPrivilegeEventsResponse,
@@ -146,21 +154,23 @@ import {
   DescribeLogStorageStatisticRequest,
   DescribeAssetRecentMachineInfoRequest,
   CheckBashRuleParamsResponse,
+  DeleteLicenseRecordRequest,
   ExportBaselineListRequest,
   DeleteProtectDirRequest,
   ExportIgnoreBaselineRuleResponse,
   BruteAttackRuleList,
   DescribeBanStatusResponse,
   DescribeVulListRequest,
-  VulDetailInfo,
+  DescribeLicenseBindListResponse,
   DescribeServersAndRiskAndFirstInfoResponse,
   AssetAppBaseInfo,
   DescribePrivilegeRulesRequest,
+  ModifyOrderAttributeRequest,
   MonthInspectionReport,
   DescribeAssetSystemPackageListResponse,
   DescribeAssetMachineListResponse,
   DescribeWebPageGeneralizeRequest,
-  AssetDiskPartitionInfo,
+  DescribeBaselineDetailRequest,
   ModifyWarningSettingRequest,
   DescribeMalwareRiskWarningRequest,
   DescribeAssetInfoRequest,
@@ -179,6 +189,7 @@ import {
   ExportBruteAttacksRequest,
   DeleteMachineResponse,
   ScanVulRequest,
+  DescribeBruteAttackListResponse,
   RecoverMalwaresRequest,
   TagMachine,
   DescribeAssetCoreModuleInfoResponse,
@@ -205,6 +216,7 @@ import {
   CreateEmergencyVulScanResponse,
   DescribeAssetCoreModuleInfoRequest,
   DescribeIndexListResponse,
+  DescribeTagMachinesResponse,
   ModifyWebPageProtectDirRequest,
   DescribeWebPageGeneralizeResponse,
   DescribeBanWhiteListResponse,
@@ -217,11 +229,11 @@ import {
   DeleteTagsResponse,
   DescribeSecurityEventsCntRequest,
   AssetUserBaseInfo,
-  DescribeMachineOsListResponse,
+  LicenseBindTaskDetail,
   ExportMaliciousRequestsResponse,
   EffectiveMachineInfo,
   DescribeVulCountByDatesResponse,
-  DescribeTagMachinesResponse,
+  DescribeMachineOsListResponse,
   DescribeIndexListRequest,
   ProtectDirInfo,
   DeleteBashRulesRequest,
@@ -246,6 +258,8 @@ import {
   Machine,
   ProtectMachineInfo,
   DescribeMalwareFileRequest,
+  DescribeLicenseListRequest,
+  ModifyLicenseUnBindsRequest,
   DeleteMaliciousRequestsRequest,
   DescribeBanWhiteListRequest,
   DescribeWebPageServiceInfoResponse,
@@ -261,8 +275,10 @@ import {
   DescribeAssetWebLocationInfoResponse,
   ModifyBruteAttackRulesRequest,
   ExportVulListRequest,
+  CreateLicenseOrderRequest,
   DescribeBaselineScanScheduleRequest,
   DescribeEmergencyVulListResponse,
+  DestroyOrderResponse,
   DescribeAssetUserListResponse,
   StandardModeConfig,
   BashEvent,
@@ -294,7 +310,7 @@ import {
   DescribeScanTaskStatusRequest,
   ExportIgnoreBaselineRuleRequest,
   DeleteMachineTagRequest,
-  DescribeBaselineDetailRequest,
+  AssetDiskPartitionInfo,
   ZoneInfo,
   BaselineRuleInfo,
   DescribeExportMachinesResponse,
@@ -351,6 +367,7 @@ import {
   DescribeEmergencyVulListRequest,
   DescribeSecurityDynamicsResponse,
   DeleteReverseShellEventsResponse,
+  LicenseBindDetail,
   AssetWebServiceBaseInfo,
   DescribeProVersionStatusResponse,
   DescribeScanTaskDetailsResponse,
@@ -362,6 +379,7 @@ import {
   ModifyWarningSettingResponse,
   LoginWhiteCombinedInfo,
   DescribeMalwareInfoResponse,
+  VulDetailInfo,
   DescribeAssetJarInfoRequest,
   DescribePrivilegeEventsRequest,
   BaselineInfo,
@@ -371,7 +389,7 @@ import {
   EventStat,
   DeleteLoginWhiteListRequest,
   DeleteWebPageEventLogResponse,
-  DescribeVulLevelCountResponse,
+  DescribeLicenseBindScheduleRequest,
   DescribeVersionStatisticsResponse,
   DescribeBruteAttackRulesRequest,
   DescribeProcessStatisticsResponse,
@@ -395,6 +413,7 @@ import {
   DescribeHostLoginListRequest,
   SecurityTrend,
   DescribeAssetWebServiceProcessListRequest,
+  LicenseDetail,
   PrivilegeRule,
   ExportVulDetectionExcelRequest,
   CreateEmergencyVulScanRequest,
@@ -405,6 +424,7 @@ import {
   DescribeBanStatusRequest,
   DescribeAssetRecentMachineInfoResponse,
   DescribeMalWareListResponse,
+  ModifyLicenseUnBindsResponse,
   DescribeAssetPortInfoListResponse,
   DescribeProtectDirListResponse,
   DescribeMaliciousRequestWhiteListResponse,
@@ -414,6 +434,7 @@ import {
   DescribeMachineOsListRequest,
   DescribeMalwareRiskWarningResponse,
   DescribeBashRulesRequest,
+  ExportLicenseDetailResponse,
   BaselineBasicInfo,
   DescribeBanModeResponse,
   DescribeImportMachineInfoResponse,
@@ -451,13 +472,14 @@ import {
   ExportVulDetectionReportResponse,
   DescribeScanScheduleRequest,
   EditBashRulesRequest,
-  DescribeBruteAttackListResponse,
+  DescribeLicenseGeneralResponse,
   ScanVulSettingRequest,
   ExportScanTaskDetailsRequest,
   ExportBaselineListResponse,
   DescribeBruteAttackRulesResponse,
   ModifyBanModeResponse,
   BaselineRuleTopInfo,
+  DeleteLicenseRecordResponse,
   AssetProcessBaseInfo,
   DeleteBruteAttacksRequest,
   DescribeAssetCoreModuleListResponse,
@@ -483,6 +505,7 @@ import {
   ModifyBanModeRequest,
   BanWhiteListDetail,
   DescribeMachineRegionsResponse,
+  DestroyOrderRequest,
   AssetWebAppBaseInfo,
   AssetCoreModuleParam,
   DeleteBashEventsRequest,
@@ -495,8 +518,10 @@ import {
   DeleteAttackLogsRequest,
   DescribeBaselineStrategyDetailResponse,
   DescribeBaselineListRequest,
+  ModifyLicenseBindsResponse,
   DescribeBaselineTopRequest,
   DescribeAssetAppProcessListRequest,
+  DescribeLicenseBindListRequest,
   Filter,
   DescribeAccountStatisticsRequest,
   ExportBruteAttacksResponse,
@@ -509,6 +534,7 @@ import {
   ModifyWebPageProtectDirResponse,
   DescribeAssetWebAppListRequest,
   ExpertServiceOrderInfo,
+  DescribeLicenseGeneralRequest,
   AccountStatistics,
   AssetUserKeyInfo,
   DescribeMachinesResponse,
@@ -633,6 +659,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAttackLogsResponse) => void
   ): Promise<DescribeAttackLogsResponse> {
     return this.request("DescribeAttackLogs", req, cb)
+  }
+
+  /**
+   * 获取漏洞列表数据
+   */
+  async DescribeVulList(
+    req: DescribeVulListRequest,
+    cb?: (error: string, rep: DescribeVulListResponse) => void
+  ): Promise<DescribeVulListResponse> {
+    return this.request("DescribeVulList", req, cb)
   }
 
   /**
@@ -1066,13 +1102,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 导出资产管理内核模块列表
+   * DestroyOrder  该接口可以对资源销毁.
    */
-  async ExportAssetCoreModuleList(
-    req: ExportAssetCoreModuleListRequest,
-    cb?: (error: string, rep: ExportAssetCoreModuleListResponse) => void
-  ): Promise<ExportAssetCoreModuleListResponse> {
-    return this.request("ExportAssetCoreModuleList", req, cb)
+  async DestroyOrder(
+    req: DestroyOrderRequest,
+    cb?: (error: string, rep: DestroyOrderResponse) => void
+  ): Promise<DestroyOrderResponse> {
+    return this.request("DestroyOrder", req, cb)
   }
 
   /**
@@ -1336,6 +1372,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 对授权管理-订单列表内已过期的订单进行删除.(删除后的订单不在统计范畴内)
+   */
+  async DeleteLicenseRecord(
+    req: DeleteLicenseRecordRequest,
+    cb?: (error: string, rep: DeleteLicenseRecordResponse) => void
+  ): Promise<DeleteLicenseRecordResponse> {
+    return this.request("DeleteLicenseRecord", req, cb)
+  }
+
+  /**
    * 本接口 (DescribeSecurityDynamics) 用于获取安全事件动态消息数据。
    */
   async DescribeSecurityDynamics(
@@ -1396,13 +1442,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 根据任务id导出指定扫描任务详情
+   * 导出资产管理内核模块列表
    */
-  async ExportScanTaskDetails(
-    req: ExportScanTaskDetailsRequest,
-    cb?: (error: string, rep: ExportScanTaskDetailsResponse) => void
-  ): Promise<ExportScanTaskDetailsResponse> {
-    return this.request("ExportScanTaskDetails", req, cb)
+  async ExportAssetCoreModuleList(
+    req: ExportAssetCoreModuleListRequest,
+    cb?: (error: string, rep: ExportAssetCoreModuleListResponse) => void
+  ): Promise<ExportAssetCoreModuleListResponse> {
+    return this.request("ExportAssetCoreModuleList", req, cb)
   }
 
   /**
@@ -1606,6 +1652,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 根据任务id导出指定扫描任务详情
+   */
+  async ExportScanTaskDetails(
+    req: ExportScanTaskDetailsRequest,
+    cb?: (error: string, rep: ExportScanTaskDetailsResponse) => void
+  ): Promise<ExportScanTaskDetailsResponse> {
+    return this.request("ExportScanTaskDetails", req, cb)
+  }
+
+  /**
    * 查询恶意请求白名单列表
    */
   async DescribeMaliciousRequestWhiteList(
@@ -1643,6 +1699,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAssetWebLocationInfoResponse) => void
   ): Promise<DescribeAssetWebLocationInfoResponse> {
     return this.request("DescribeAssetWebLocationInfo", req, cb)
+  }
+
+  /**
+   * 本接口（UntrustMalwares）用于取消信任木马文件。
+   */
+  async UntrustMalwares(
+    req: UntrustMalwaresRequest,
+    cb?: (error: string, rep: UntrustMalwaresResponse) => void
+  ): Promise<UntrustMalwaresResponse> {
+    return this.request("UntrustMalwares", req, cb)
   }
 
   /**
@@ -1723,6 +1789,29 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeScanTaskStatusResponse) => void
   ): Promise<DescribeScanTaskStatusResponse> {
     return this.request("DescribeScanTaskStatus", req, cb)
+  }
+
+  /**
+     * CreateLicenseOrder 该接口可以创建专业版/旗舰版订单
+支持预付费后付费创建
+后付费订单直接闯将成功
+预付费订单仅下单不支付,需要调用计费支付接口进行支付
+     */
+  async CreateLicenseOrder(
+    req: CreateLicenseOrderRequest,
+    cb?: (error: string, rep: CreateLicenseOrderResponse) => void
+  ): Promise<CreateLicenseOrderResponse> {
+    return this.request("CreateLicenseOrder", req, cb)
+  }
+
+  /**
+   * 导出授权列表对应的绑定信息
+   */
+  async ExportLicenseDetail(
+    req: ExportLicenseDetailRequest,
+    cb?: (error: string, rep: ExportLicenseDetailResponse) => void
+  ): Promise<ExportLicenseDetailResponse> {
+    return this.request("ExportLicenseDetail", req, cb)
   }
 
   /**
@@ -1856,6 +1945,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 根据策略id查询基线检测项TOP
+   */
+  async DescribeBaselineTop(
+    req: DescribeBaselineTopRequest,
+    cb?: (error: string, rep: DescribeBaselineTopResponse) => void
+  ): Promise<DescribeBaselineTopResponse> {
+    return this.request("DescribeBaselineTop", req, cb)
+  }
+
+  /**
    * 本接口 (DescribeProcessStatistics) 用于获取进程统计列表数据。
    */
   async DescribeProcessStatistics(
@@ -1886,13 +1985,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 根据策略id查询基线检测项TOP
+   * 获取软件关联进程列表
    */
-  async DescribeBaselineTop(
-    req: DescribeBaselineTopRequest,
-    cb?: (error: string, rep: DescribeBaselineTopResponse) => void
-  ): Promise<DescribeBaselineTopResponse> {
-    return this.request("DescribeBaselineTop", req, cb)
+  async DescribeAssetAppProcessList(
+    req: DescribeAssetAppProcessListRequest,
+    cb?: (error: string, rep: DescribeAssetAppProcessListResponse) => void
+  ): Promise<DescribeAssetAppProcessListResponse> {
+    return this.request("DescribeAssetAppProcessList", req, cb)
   }
 
   /**
@@ -2016,6 +2115,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 设置中心-授权管理 对某个授权批量绑定机器
+   */
+  async ModifyLicenseBinds(
+    req: ModifyLicenseBindsRequest,
+    cb?: (error: string, rep: ModifyLicenseBindsResponse) => void
+  ): Promise<ModifyLicenseBindsResponse> {
+    return this.request("ModifyLicenseBinds", req, cb)
+  }
+
+  /**
    * 查询资产管理环境变量列表
    */
   async DescribeAssetEnvList(
@@ -2126,6 +2235,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询授权绑定任务的进度
+   */
+  async DescribeLicenseBindSchedule(
+    req: DescribeLicenseBindScheduleRequest,
+    cb?: (error: string, rep: DescribeLicenseBindScheduleResponse) => void
+  ): Promise<DescribeLicenseBindScheduleResponse> {
+    return this.request("DescribeLicenseBindSchedule", req, cb)
+  }
+
+  /**
    * 根据基线id查询基线详情接口
    */
   async DescribeBaselineDetail(
@@ -2206,13 +2325,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（UntrustMalwares）用于取消信任木马文件。
+   * 设置中心-授权管理 对某个授权批量解绑机器
    */
-  async UntrustMalwares(
-    req: UntrustMalwaresRequest,
-    cb?: (error: string, rep: UntrustMalwaresResponse) => void
-  ): Promise<UntrustMalwaresResponse> {
-    return this.request("UntrustMalwares", req, cb)
+  async ModifyLicenseUnBinds(
+    req: ModifyLicenseUnBindsRequest,
+    cb?: (error: string, rep: ModifyLicenseUnBindsResponse) => void
+  ): Promise<ModifyLicenseUnBindsResponse> {
+    return this.request("ModifyLicenseUnBinds", req, cb)
+  }
+
+  /**
+   * 切换高危命令规则状态
+   */
+  async SwitchBashRules(
+    req: SwitchBashRulesRequest,
+    cb?: (error: string, rep: SwitchBashRulesResponse) => void
+  ): Promise<SwitchBashRulesResponse> {
+    return this.request("SwitchBashRules", req, cb)
   }
 
   /**
@@ -2286,13 +2415,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取漏洞列表数据
+   * 授权管理-授权概览信息
    */
-  async DescribeVulList(
-    req: DescribeVulListRequest,
-    cb?: (error: string, rep: DescribeVulListResponse) => void
-  ): Promise<DescribeVulListResponse> {
-    return this.request("DescribeVulList", req, cb)
+  async DescribeLicenseGeneral(
+    req?: DescribeLicenseGeneralRequest,
+    cb?: (error: string, rep: DescribeLicenseGeneralResponse) => void
+  ): Promise<DescribeLicenseGeneralResponse> {
+    return this.request("DescribeLicenseGeneral", req, cb)
+  }
+
+  /**
+   * 该接口可以获取设置中心-授权管理,某个授权下已绑定的授权机器列表
+   */
+  async DescribeLicenseBindList(
+    req: DescribeLicenseBindListRequest,
+    cb?: (error: string, rep: DescribeLicenseBindListResponse) => void
+  ): Promise<DescribeLicenseBindListResponse> {
+    return this.request("DescribeLicenseBindList", req, cb)
   }
 
   /**
@@ -2313,16 +2452,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeGeneralStatResponse) => void
   ): Promise<DescribeGeneralStatResponse> {
     return this.request("DescribeGeneralStat", req, cb)
-  }
-
-  /**
-   * 获取软件关联进程列表
-   */
-  async DescribeAssetAppProcessList(
-    req: DescribeAssetAppProcessListRequest,
-    cb?: (error: string, rep: DescribeAssetAppProcessListResponse) => void
-  ): Promise<DescribeAssetAppProcessListResponse> {
-    return this.request("DescribeAssetAppProcessList", req, cb)
   }
 
   /**
@@ -2426,13 +2555,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 切换高危命令规则状态
+   * 对订单属性编辑
    */
-  async SwitchBashRules(
-    req: SwitchBashRulesRequest,
-    cb?: (error: string, rep: SwitchBashRulesResponse) => void
-  ): Promise<SwitchBashRulesResponse> {
-    return this.request("SwitchBashRules", req, cb)
+  async ModifyOrderAttribute(
+    req: ModifyOrderAttributeRequest,
+    cb?: (error: string, rep: ModifyOrderAttributeResponse) => void
+  ): Promise<ModifyOrderAttributeResponse> {
+    return this.request("ModifyOrderAttribute", req, cb)
   }
 
   /**
@@ -2613,6 +2742,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeWebPageEventListResponse) => void
   ): Promise<DescribeWebPageEventListResponse> {
     return this.request("DescribeWebPageEventList", req, cb)
+  }
+
+  /**
+   * 获取用户所有授权订单信息
+   */
+  async DescribeLicenseList(
+    req: DescribeLicenseListRequest,
+    cb?: (error: string, rep: DescribeLicenseListResponse) => void
+  ): Promise<DescribeLicenseListResponse> {
+    return this.request("DescribeLicenseList", req, cb)
   }
 
   /**

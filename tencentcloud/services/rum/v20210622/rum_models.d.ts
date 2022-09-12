@@ -1633,6 +1633,18 @@ export interface RumAreaInfo {
       * 片区Key
       */
     AreaKey: string;
+    /**
+      * 地域码表 id
+      */
+    AreaRegionID: string;
+    /**
+      * 地域码表 code 如 ap-xxx（xxx 为地域词）
+      */
+    AreaRegionCode: string;
+    /**
+      * 地域缩写
+      */
+    AreaAbbr: string;
 }
 /**
  * DescribeDataSetUrlStatistics请求参数结构体

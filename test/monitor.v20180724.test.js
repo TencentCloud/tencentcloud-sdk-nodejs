@@ -368,6 +368,16 @@ it("monitor.v20180724.UpgradeGrafanaInstance", async function () {
     }
 })
 
+it("monitor.v20180724.DescribeGrafanaChannels", async function () {
+    try {
+       const data = await client.DescribeGrafanaChannels({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("monitor.v20180724.DeleteGrafanaIntegration", async function () {
     try {
        const data = await client.DeleteGrafanaIntegration({})

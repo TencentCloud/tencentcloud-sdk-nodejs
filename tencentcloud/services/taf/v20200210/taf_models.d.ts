@@ -1,18 +1,4 @@
 /**
- * SendTrafficSecuritySmsMessage返回参数结构体
- */
-export interface SendTrafficSecuritySmsMessageResponse {
-    /**
-      * 返回结果
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Data: OutputSendTrafficSecuritySmsMsg;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
  * 业务入参
  */
 export declare type InputBusinessEncryptData = null;
@@ -58,29 +44,6 @@ export interface OutputRecognizeTargetAudienceValue {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Score: number;
-}
-/**
- * SendTrafficSecuritySmsMessage请求参数结构体
- */
-export interface SendTrafficSecuritySmsMessageRequest {
-    /**
-      * 业务入参
-      */
-    BspData: InputSendTrafficSecuritySmsMsg;
-}
-/**
- * RecognizePreciseTargetAudience返回参数结构体
- */
-export interface RecognizePreciseTargetAudienceResponse {
-    /**
-      * 回包数据
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Data?: OutputRecognizeTargetAudience;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
 }
 /**
  * 流量反欺诈-验准返回值
@@ -294,25 +257,6 @@ export interface Device {
     DeviceType: number;
 }
 /**
- * 返回结果
- */
-export interface OutputSendTrafficSecuritySmsMsg {
-    /**
-      * 返回码（0：接口调用成功 非0：接口调用失败）
-      */
-    Code: number;
-    /**
-      * 返回码对应的信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Message: string;
-    /**
-      * 发送失败的号码列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Value: Array<string>;
-}
-/**
  * RecognizePreciseTargetAudience请求参数结构体
  */
 export interface RecognizePreciseTargetAudienceRequest {
@@ -335,35 +279,16 @@ export interface RecognizeTargetAudienceRequest {
     BusinessEncryptData?: InputBusinessEncryptData;
 }
 /**
- * 业务入参
+ * RecognizePreciseTargetAudience返回参数结构体
  */
-export interface InputSendTrafficSecuritySmsMsg {
+export interface RecognizePreciseTargetAudienceResponse {
     /**
-      * 投放任务ID
+      * 回包数据
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    TaskId: string;
+    Data?: OutputRecognizeTargetAudience;
     /**
-      * 手机号码列表（号码量<=200）
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Mobiles: Array<string>;
-    /**
-      * 是否授权，1：已授权
-      */
-    IsAuthorized?: number;
-    /**
-      * 加密方式，0：AES加密；1：DES加密
-      */
-    EncryptMethod?: number;
-    /**
-      * 加密算法中的块处理模式，0：ECB模式；1：CBC模式；2：CTR模式；3：CFB模式；4：OFB模式；
-      */
-    EncryptMode?: number;
-    /**
-      * 填充模式，0：ZeroPadding；1：PKCS5Padding；2：PKCS7Padding；
-      */
-    PaddingType?: number;
-    /**
-      * 加密数据
-      */
-    EncryptData?: string;
+    RequestId?: string;
 }

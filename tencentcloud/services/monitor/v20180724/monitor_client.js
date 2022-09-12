@@ -244,6 +244,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpgradeGrafanaInstance", req, cb);
     }
     /**
+     * 列出 Grafana 所有告警通道
+     */
+    async DescribeGrafanaChannels(req, cb) {
+        return this.request("DescribeGrafanaChannels", req, cb);
+    }
+    /**
      * 删除 Grafana 集成配置
      */
     async DeleteGrafanaIntegration(req, cb) {

@@ -98,6 +98,16 @@ it("cwp.v20180228.DescribeAttackLogs", async function () {
     }
 })
 
+it("cwp.v20180228.DescribeVulList", async function () {
+    try {
+       const data = await client.DescribeVulList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cwp.v20180228.DescribeSearchExportList", async function () {
     try {
        const data = await client.DescribeSearchExportList({})
@@ -528,9 +538,9 @@ it("cwp.v20180228.ExportVulDetectionExcel", async function () {
     }
 })
 
-it("cwp.v20180228.ExportAssetCoreModuleList", async function () {
+it("cwp.v20180228.DestroyOrder", async function () {
     try {
-       const data = await client.ExportAssetCoreModuleList({})
+       const data = await client.DestroyOrder({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -798,6 +808,16 @@ it("cwp.v20180228.ScanAsset", async function () {
     }
 })
 
+it("cwp.v20180228.DeleteLicenseRecord", async function () {
+    try {
+       const data = await client.DeleteLicenseRecord({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cwp.v20180228.DescribeSecurityDynamics", async function () {
     try {
        const data = await client.DescribeSecurityDynamics({})
@@ -858,9 +878,9 @@ it("cwp.v20180228.DeletePrivilegeRules", async function () {
     }
 })
 
-it("cwp.v20180228.ExportScanTaskDetails", async function () {
+it("cwp.v20180228.ExportAssetCoreModuleList", async function () {
     try {
-       const data = await client.ExportScanTaskDetails({})
+       const data = await client.ExportAssetCoreModuleList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1068,6 +1088,16 @@ it("cwp.v20180228.ModifyWebPageProtectDir", async function () {
     }
 })
 
+it("cwp.v20180228.ExportScanTaskDetails", async function () {
+    try {
+       const data = await client.ExportScanTaskDetails({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cwp.v20180228.DescribeMaliciousRequestWhiteList", async function () {
     try {
        const data = await client.DescribeMaliciousRequestWhiteList({})
@@ -1101,6 +1131,16 @@ it("cwp.v20180228.DescribeBaselineStrategyDetail", async function () {
 it("cwp.v20180228.DescribeAssetWebLocationInfo", async function () {
     try {
        const data = await client.DescribeAssetWebLocationInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cwp.v20180228.UntrustMalwares", async function () {
+    try {
+       const data = await client.UntrustMalwares({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1181,6 +1221,26 @@ it("cwp.v20180228.DescribeVulEffectHostList", async function () {
 it("cwp.v20180228.DescribeScanTaskStatus", async function () {
     try {
        const data = await client.DescribeScanTaskStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cwp.v20180228.CreateLicenseOrder", async function () {
+    try {
+       const data = await client.CreateLicenseOrder({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cwp.v20180228.ExportLicenseDetail", async function () {
+    try {
+       const data = await client.ExportLicenseDetail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1318,6 +1378,16 @@ it("cwp.v20180228.DescribeLoginWhiteCombinedList", async function () {
     }
 })
 
+it("cwp.v20180228.DescribeBaselineTop", async function () {
+    try {
+       const data = await client.DescribeBaselineTop({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cwp.v20180228.DescribeProcessStatistics", async function () {
     try {
        const data = await client.DescribeProcessStatistics({})
@@ -1348,9 +1418,9 @@ it("cwp.v20180228.DescribeAssetWebLocationList", async function () {
     }
 })
 
-it("cwp.v20180228.DescribeBaselineTop", async function () {
+it("cwp.v20180228.DescribeAssetAppProcessList", async function () {
     try {
-       const data = await client.DescribeBaselineTop({})
+       const data = await client.DescribeAssetAppProcessList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1478,6 +1548,16 @@ it("cwp.v20180228.DescribeBruteAttackRules", async function () {
     }
 })
 
+it("cwp.v20180228.ModifyLicenseBinds", async function () {
+    try {
+       const data = await client.ModifyLicenseBinds({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cwp.v20180228.DescribeAssetEnvList", async function () {
     try {
        const data = await client.DescribeAssetEnvList({})
@@ -1588,6 +1668,16 @@ it("cwp.v20180228.DescribeIgnoreBaselineRule", async function () {
     }
 })
 
+it("cwp.v20180228.DescribeLicenseBindSchedule", async function () {
+    try {
+       const data = await client.DescribeLicenseBindSchedule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cwp.v20180228.DescribeBaselineDetail", async function () {
     try {
        const data = await client.DescribeBaselineDetail({})
@@ -1668,9 +1758,19 @@ it("cwp.v20180228.DescribeVulHostTop", async function () {
     }
 })
 
-it("cwp.v20180228.UntrustMalwares", async function () {
+it("cwp.v20180228.ModifyLicenseUnBinds", async function () {
     try {
-       const data = await client.UntrustMalwares({})
+       const data = await client.ModifyLicenseUnBinds({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cwp.v20180228.SwitchBashRules", async function () {
+    try {
+       const data = await client.SwitchBashRules({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1748,9 +1848,19 @@ it("cwp.v20180228.ModifyMalwareTimingScanSettings", async function () {
     }
 })
 
-it("cwp.v20180228.DescribeVulList", async function () {
+it("cwp.v20180228.DescribeLicenseGeneral", async function () {
     try {
-       const data = await client.DescribeVulList({})
+       const data = await client.DescribeLicenseGeneral({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cwp.v20180228.DescribeLicenseBindList", async function () {
+    try {
+       const data = await client.DescribeLicenseBindList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1771,16 +1881,6 @@ it("cwp.v20180228.DescribeAssetCoreModuleInfo", async function () {
 it("cwp.v20180228.DescribeGeneralStat", async function () {
     try {
        const data = await client.DescribeGeneralStat({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cwp.v20180228.DescribeAssetAppProcessList", async function () {
-    try {
-       const data = await client.DescribeAssetAppProcessList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1888,9 +1988,9 @@ it("cwp.v20180228.DescribeWebPageServiceInfo", async function () {
     }
 })
 
-it("cwp.v20180228.SwitchBashRules", async function () {
+it("cwp.v20180228.ModifyOrderAttribute", async function () {
     try {
-       const data = await client.SwitchBashRules({})
+       const data = await client.ModifyOrderAttribute({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2071,6 +2171,16 @@ it("cwp.v20180228.ExportVulDetectionReport", async function () {
 it("cwp.v20180228.DescribeWebPageEventList", async function () {
     try {
        const data = await client.DescribeWebPageEventList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cwp.v20180228.DescribeLicenseList", async function () {
+    try {
+       const data = await client.DescribeLicenseList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

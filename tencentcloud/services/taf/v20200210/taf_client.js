@@ -45,11 +45,5 @@ class Client extends abstract_client_1.AbstractClient {
     async RecognizeTargetAudience(req, cb) {
         return this.request("RecognizeTargetAudience", req, cb);
     }
-    /**
-     * 流量安选产品，短信发送接口
-     */
-    async SendTrafficSecuritySmsMessage(req, cb) {
-        return this.request("SendTrafficSecuritySmsMessage", req, cb);
-    }
 }
 exports.Client = Client;

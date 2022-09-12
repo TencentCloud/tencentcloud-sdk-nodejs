@@ -54,7 +54,8 @@ export declare class Client extends AbstractClient {
      */
     DescribeThirdPartyAuthCode(req: DescribeThirdPartyAuthCodeRequest, cb?: (error: string, rep: DescribeThirdPartyAuthCodeResponse) => void): Promise<DescribeThirdPartyAuthCodeResponse>;
     /**
-     * 创建出证报告，返回报告 URL
+     * 【描述】：创建出证报告，返回报告 URL
+【注意】：此接口需要通过添加白名单获取调用权限，请联系运营人员加白
      */
     CreateFlowEvidenceReport(req: CreateFlowEvidenceReportRequest, cb?: (error: string, rep: CreateFlowEvidenceReportResponse) => void): Promise<CreateFlowEvidenceReportResponse>;
     /**

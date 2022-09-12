@@ -252,14 +252,9 @@ export interface DeleteBashEventsResponse {
  */
 export interface DescribeAssetProcessInfoListRequest {
   /**
-   * 需要返回的数量，默认为10，最大值为100
+   * 查询指定Quuid主机的信息
    */
-  Limit?: number
-
-  /**
-   * 偏移量，默认为0。
-   */
-  Offset?: number
+  Quuid?: string
 
   /**
       * 过滤条件。
@@ -285,9 +280,14 @@ export interface DescribeAssetProcessInfoListRequest {
   Filters?: Array<Filter>
 
   /**
-   * 查询指定Quuid主机的信息
+   * 需要返回的数量，默认为10，最大值为100
    */
-  Quuid?: string
+  Limit?: number
+
+  /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
 
   /**
    * 排序方式，asc升序 或 desc降序
@@ -295,7 +295,7 @@ export interface DescribeAssetProcessInfoListRequest {
   Order?: string
 
   /**
-   * 排序方式：StartTime
+   * 排序方式：[FirstTime|StartTime]
    */
   By?: string
 }
@@ -363,14 +363,9 @@ export interface AssetNetworkCardInfo {
  */
 export interface DescribeAssetWebFrameListRequest {
   /**
-   * 需要返回的数量，默认为10，最大值为100
+   * 查询指定Quuid主机的信息
    */
-  Limit?: number
-
-  /**
-   * 偏移量，默认为0。
-   */
-  Offset?: number
+  Quuid?: string
 
   /**
       * 过滤条件。
@@ -396,19 +391,24 @@ export interface DescribeAssetWebFrameListRequest {
   Filters?: Array<Filter>
 
   /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
+
+  /**
+   * 需要返回的数量，默认为10，最大值为100
+   */
+  Limit?: number
+
+  /**
    * 排序方式，asc升序 或 desc降序
    */
   Order?: string
 
   /**
-   * 可选排序：JarCount
+   * 可选排序：[FirstTime|JarCount]
    */
   By?: string
-
-  /**
-   * 查询指定Quuid主机的信息
-   */
-  Quuid?: string
 }
 
 /**
@@ -731,6 +731,31 @@ export interface DescribeBaselineStrategyDetailRequest {
 }
 
 /**
+ * ModifyLicenseBinds请求参数结构体
+ */
+export interface ModifyLicenseBindsRequest {
+  /**
+   * 资源ID
+   */
+  ResourceId: string
+
+  /**
+   * 授权类型
+   */
+  LicenseType: number
+
+  /**
+   * 是否全部机器(当全部机器数大于当前订单可用授权数时,多余机器会被跳过)
+   */
+  IsAll?: boolean
+
+  /**
+   * 需要绑定的机器quuid列表, 当IsAll = false 时必填,反之忽略该参数. 最大长度=2000
+   */
+  QuuidList?: Array<string>
+}
+
+/**
  * 木马列表集合
  */
 export interface MalWareList {
@@ -995,6 +1020,31 @@ export interface DescribeVulCountByDatesRequest {
    * 是否为应急漏洞筛选  是: yes
    */
   IfEmergency?: string
+}
+
+/**
+ * CreateLicenseOrder返回参数结构体
+ */
+export interface CreateLicenseOrderResponse {
+  /**
+   * 订单号列表
+   */
+  DealNames: Array<string>
+
+  /**
+   * 资源ID列表,预付费订单该字段空值
+   */
+  ResourceIds: Array<string>
+
+  /**
+   * 大订单号 , 后付费该字段空值
+   */
+  BigDealId: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1498,6 +1548,16 @@ export interface DescribeWebPageEventListRequest {
  */
 export interface ExportAssetCoreModuleListRequest {
   /**
+   * 服务器Uuid
+   */
+  Uuid?: string
+
+  /**
+   * 服务器Quuid
+   */
+  Quuid?: string
+
+  /**
       * 过滤条件。
 <li>Name- string - 是否必填：否 - 包名</li>
 <li>User- string - 是否必填：否 - 用户</li>
@@ -1510,19 +1570,9 @@ export interface ExportAssetCoreModuleListRequest {
   Order?: string
 
   /**
-   * 排序依据:Size,ProcessCount,ModuleCount
+   * 排序依据[FirstTime|Size|ProcessCount|ModuleCount]
    */
   By?: string
-
-  /**
-   * 服务器Uuid
-   */
-  Uuid?: string
-
-  /**
-   * 服务器Quuid
-   */
-  Quuid?: string
 }
 
 /**
@@ -1563,6 +1613,22 @@ export interface DescribeSearchExportListResponse {
    * 下载地址
    */
   DownloadUrl: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeVulLevelCount返回参数结构体
+ */
+export interface DescribeVulLevelCountResponse {
+  /**
+      * 统计结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VulLevelList: Array<VulLevelInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1836,6 +1902,47 @@ export interface AssetKeyVal {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Desc: string
+
+  /**
+      * 今日新增数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NewCount: number
+}
+
+/**
+ * DescribeLicenseList返回参数结构体
+ */
+export interface DescribeLicenseListResponse {
+  /**
+   * 总条数
+   */
+  TotalCount: number
+
+  /**
+   * 授权数列表信息
+   */
+  List: Array<LicenseDetail>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 授权解绑信息
+ */
+export interface LicenseUnBindRsp {
+  /**
+   * QUUID 云服务器uuid,轻量服务器uuid,边缘计算 uuid
+   */
+  Quuid: string
+
+  /**
+   * 失败原因
+   */
+  ErrMsg: string
 }
 
 /**
@@ -2096,14 +2203,14 @@ export interface DeleteMalwaresResponse {
  */
 export interface DescribeAssetInitServiceListRequest {
   /**
-   * 需要返回的数量，默认为10，最大值为100
+   * 服务器Uuid
    */
-  Limit?: number
+  Uuid?: string
 
   /**
-   * 偏移量，默认为0。
+   * 服务器Quuid
    */
-  Offset?: number
+  Quuid?: string
 
   /**
       * 过滤条件。
@@ -2130,14 +2237,24 @@ export interface DescribeAssetInitServiceListRequest {
   Filters?: Array<AssetFilters>
 
   /**
-   * 服务器Uuid
+   * 偏移量，默认为0。
    */
-  Uuid?: string
+  Offset?: number
 
   /**
-   * 服务器Quuid
+   * 需要返回的数量，默认为10，最大值为100
    */
-  Quuid?: string
+  Limit?: number
+
+  /**
+   * 排序方式，asc升序 或 desc降序
+   */
+  Order?: string
+
+  /**
+   * 排序方式：[FirstTime]
+   */
+  By?: string
 }
 
 /**
@@ -3010,6 +3127,16 @@ export interface AssetUserDetail {
 }
 
 /**
+ * ModifyOrderAttribute返回参数结构体
+ */
+export interface ModifyOrderAttributeResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeMachines请求参数结构体
  */
 export interface DescribeMachinesRequest {
@@ -3089,6 +3216,33 @@ export interface DescribeVulEffectHostListRequest {
 }
 
 /**
+ * ExportLicenseDetail请求参数结构体
+ */
+export interface ExportLicenseDetailRequest {
+  /**
+      * 多个条件筛选时 LicenseStatus,DeadlineStatus,ResourceId,Keywords 取交集
+<li> LicenseType  授权类型, 0 专业版-按量计费, 1专业版-包年包月 , 2 旗舰版-包年包月</li>
+<li>ResourceId 资源ID</li>
+      */
+  Filters?: Array<Filters>
+
+  /**
+   * 是否导出全部授权详情
+   */
+  IsHistory?: boolean
+
+  /**
+   * 标签筛选,平台标签能力,这里传入 标签键,标签值作为一个对象
+   */
+  Tags?: Array<Tags>
+
+  /**
+   * 导出月份, 该参数仅在IsHistory 时可选.
+   */
+  ExportMonth?: string
+}
+
+/**
  * 资产管理Web应用插件详情
  */
 export interface AssetWebAppPluginInfo {
@@ -3121,6 +3275,31 @@ export interface DeletePrivilegeRulesRequest {
    * ID数组，最大100条。
    */
   Ids: Array<number>
+}
+
+/**
+ * DescribeLicenseBindSchedule返回参数结构体
+ */
+export interface DescribeLicenseBindScheduleResponse {
+  /**
+   * 进度
+   */
+  Schedule: number
+
+  /**
+   * 绑定任务详情
+   */
+  List: Array<LicenseBindTaskDetail>
+
+  /**
+   * 总条数
+   */
+  TotalCount: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3370,6 +3549,26 @@ export interface CheckBashRuleParamsResponse {
 }
 
 /**
+ * DeleteLicenseRecord请求参数结构体
+ */
+export interface DeleteLicenseRecordRequest {
+  /**
+   * 授权ID ,可以用授权订单列表获取.
+   */
+  LicenseId: number
+
+  /**
+   * 授权类型
+   */
+  LicenseType: number
+
+  /**
+   * 资源ID
+   */
+  ResourceId: string
+}
+
+/**
  * ExportBaselineList请求参数结构体
  */
 export interface ExportBaselineListRequest {
@@ -3507,63 +3706,23 @@ export interface DescribeVulListRequest {
 }
 
 /**
- * 漏洞详细信息
+ * DescribeLicenseBindList返回参数结构体
  */
-export interface VulDetailInfo {
+export interface DescribeLicenseBindListResponse {
   /**
-   * 漏洞ID
+   * 总条数
    */
-  VulId: number
+  TotalCount: number
 
   /**
-   * 漏洞级别
+   * 绑定机器列表信息
    */
-  Level: number
+  List: Array<LicenseBindDetail>
 
   /**
-   * 漏洞名称
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Name: string
-
-  /**
-   * cve编号
-   */
-  CveId: string
-
-  /**
-   * 1: web-cms漏洞 2:应用漏洞  4: Linux软件漏洞 5: Windows系统漏洞 0= 应急漏洞
-   */
-  VulCategory: number
-
-  /**
-   * 漏洞描述
-   */
-  Descript: string
-
-  /**
-   * 修复建议
-   */
-  Fix: string
-
-  /**
-   * 参考链接
-   */
-  Reference: string
-
-  /**
-   * CVSS评分
-   */
-  CvssScore: number
-
-  /**
-   * CVSS详情
-   */
-  Cvss: string
-
-  /**
-   * 发布时间
-   */
-  PublishTime: string
+  RequestId?: string
 }
 
 /**
@@ -3611,14 +3770,14 @@ export interface AssetAppBaseInfo {
   MachineIp: string
 
   /**
+   * 主机名称
+   */
+  MachineName: string
+
+  /**
    * 主机外网IP
    */
   MachineWanIp: string
-
-  /**
-   * 主机Quuid
-   */
-  Quuid: string
 
   /**
    * 主机Uuid
@@ -3626,9 +3785,9 @@ export interface AssetAppBaseInfo {
   Uuid: string
 
   /**
-   * 操作系统信息
+   * 主机Quuid
    */
-  OsInfo: string
+  Quuid: string
 
   /**
    * 主机业务组ID
@@ -3665,9 +3824,9 @@ export interface AssetAppBaseInfo {
   BinPath: string
 
   /**
-   * 配置文件路径
+   * 操作系统信息
    */
-  ConfigPath: string
+  OsInfo: string
 
   /**
    * 关联进程数
@@ -3685,10 +3844,26 @@ export interface AssetAppBaseInfo {
   Version: string
 
   /**
+   * 配置文件路径
+   */
+  ConfigPath: string
+
+  /**
+   * 首次采集时间
+   */
+  FirstTime: string
+
+  /**
       * 数据更新时间
 注意：此字段可能返回 null，表示取不到有效值。
       */
   UpdateTime: string
+
+  /**
+      * 是否新增[0:否|1:是]
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsNew: number
 }
 
 /**
@@ -3710,6 +3885,31 @@ export interface DescribePrivilegeRulesRequest {
 <li>Keywords - String - 是否必填：否 - 关键字(进程名称)</li>
       */
   Filters?: Array<Filter>
+}
+
+/**
+ * ModifyOrderAttribute请求参数结构体
+ */
+export interface ModifyOrderAttributeRequest {
+  /**
+   * 授权类型 0 专业版-按量计费, 1专业版-包年包月 , 2 旗舰版-包年包月
+   */
+  LicenseType: number
+
+  /**
+   * 资源ID
+   */
+  ResourceId: string
+
+  /**
+   * 可编辑的属性名称 ,当前支持的有: alias 资源别名
+   */
+  AttrName: string
+
+  /**
+   * 属性值
+   */
+  AttrValue: string
 }
 
 /**
@@ -3780,38 +3980,13 @@ export interface DescribeAssetMachineListResponse {
 export type DescribeWebPageGeneralizeRequest = null
 
 /**
- * 资产管理磁盘分区信息
+ * DescribeBaselineDetail请求参数结构体
  */
-export interface AssetDiskPartitionInfo {
+export interface DescribeBaselineDetailRequest {
   /**
-   * 分区名
+   * 基线id
    */
-  Name: string
-
-  /**
-   * 分区大小：单位G
-   */
-  Size: number
-
-  /**
-   * 分区使用率
-   */
-  Percent: number
-
-  /**
-   * 文件系统类型
-   */
-  Type: string
-
-  /**
-   * 挂载目录
-   */
-  Path: string
-
-  /**
-   * 已使用空间：单位G
-   */
-  Used: number
+  BaselineId: number
 }
 
 /**
@@ -3865,14 +4040,9 @@ export interface UntrustMalwaresRequest {
  */
 export interface DescribeAssetAppListRequest {
   /**
-   * 需要返回的数量，默认为10，最大值为100
+   * 查询指定Quuid主机的信息
    */
-  Limit?: number
-
-  /**
-   * 偏移量，默认为0。
-   */
-  Offset?: number
+  Quuid?: string
 
   /**
       * 过滤条件。
@@ -3894,9 +4064,14 @@ export interface DescribeAssetAppListRequest {
   Filters?: Array<AssetFilters>
 
   /**
-   * 排序方式：ProcessCount
+   * 需要返回的数量，默认为10，最大值为100
    */
-  By?: string
+  Limit?: number
+
+  /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
 
   /**
    * 排序方式，asc升序 或 desc降序
@@ -3904,9 +4079,9 @@ export interface DescribeAssetAppListRequest {
   Order?: string
 
   /**
-   * 查询指定Quuid主机的信息
+   * 排序方式：[FirstTime|ProcessCount]
    */
-  Quuid?: string
+  By?: string
 }
 
 /**
@@ -4167,6 +4342,28 @@ export interface ScanVulRequest {
 }
 
 /**
+ * DescribeBruteAttackList返回参数结构体
+ */
+export interface DescribeBruteAttackListResponse {
+  /**
+      * 总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TotalCount: number
+
+  /**
+      * 密码破解列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BruteAttackList: Array<BruteAttackInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * RecoverMalwares请求参数结构体
  */
 export interface RecoverMalwaresRequest {
@@ -4236,14 +4433,14 @@ export interface DescribeAssetCoreModuleInfoResponse {
  */
 export interface DescribeAssetEnvListRequest {
   /**
-   * 需要返回的数量，默认为10，最大值为100
+   * 服务器Uuid
    */
-  Limit?: number
+  Uuid?: string
 
   /**
-   * 偏移量，默认为0。
+   * 服务器Quuid
    */
-  Offset?: number
+  Quuid?: string
 
   /**
    * 该字段已废弃，由Filters代替
@@ -4259,14 +4456,24 @@ export interface DescribeAssetEnvListRequest {
   Filters?: Array<AssetFilters>
 
   /**
-   * 服务器Uuid
+   * 偏移量，默认为0。
    */
-  Uuid?: string
+  Offset?: number
 
   /**
-   * 服务器Quuid
+   * 需要返回的数量，默认为10，最大值为100
    */
-  Quuid?: string
+  Limit?: number
+
+  /**
+   * 排序方式，asc升序 或 desc降序
+   */
+  Order?: string
+
+  /**
+   * 排序方式：[FirstTime]
+   */
+  By?: string
 }
 
 /**
@@ -4369,6 +4576,16 @@ export interface AssetMachineBaseInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   UpdateTime: string
+
+  /**
+   * 是否新增[0:否|1:是]
+   */
+  IsNew: number
+
+  /**
+   * 首次采集时间
+   */
+  FirstTime: string
 }
 
 /**
@@ -4468,14 +4685,14 @@ export interface DescribeAssetWebLocationListResponse {
  */
 export interface DescribeAssetJarListRequest {
   /**
-   * 需要返回的数量，默认为10，最大值为100
+   * 服务器Uuid
    */
-  Limit?: number
+  Uuid?: string
 
   /**
-   * 偏移量，默认为0。
+   * 服务器Quuid
    */
-  Offset?: number
+  Quuid?: string
 
   /**
       * 过滤条件。
@@ -4491,14 +4708,24 @@ export interface DescribeAssetJarListRequest {
   Filters?: Array<AssetFilters>
 
   /**
-   * 服务器Uuid
+   * 偏移量，默认为0。
    */
-  Uuid?: string
+  Offset?: number
 
   /**
-   * 服务器Quuid
+   * 需要返回的数量，默认为10，最大值为100
    */
-  Quuid?: string
+  Limit?: number
+
+  /**
+   * 排序方式，asc升序 或 desc降序
+   */
+  Order?: string
+
+  /**
+   * 排序方式：[FirstTime]
+   */
+  By?: string
 }
 
 /**
@@ -5000,6 +5227,21 @@ export interface AssetDatabaseBaseInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   UpdateTime: string
+
+  /**
+   * 首次采集时间
+   */
+  FirstTime: string
+
+  /**
+   * 是否新增[0:否|1:是]
+   */
+  IsNew: number
+
+  /**
+   * 主机名称
+   */
+  MachineName: string
 }
 
 /**
@@ -5104,6 +5346,21 @@ export interface DescribeIndexListResponse {
    * ES 索引信息
    */
   Data: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeTagMachines返回参数结构体
+ */
+export interface DescribeTagMachinesResponse {
+  /**
+   * 列表数据
+   */
+  List: Array<TagMachine>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -5515,21 +5772,36 @@ export interface AssetUserBaseInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   UpdateTime: string
+
+  /**
+   * 首次采集时间
+   */
+  FirstTime: string
+
+  /**
+   * 是否新增[0:否|1:是]
+   */
+  IsNew: number
 }
 
 /**
- * DescribeMachineOsList返回参数结构体
+ * 授权绑定任务详情
  */
-export interface DescribeMachineOsListResponse {
+export interface LicenseBindTaskDetail {
   /**
-   * 操作系统列表
+   * 云服务器UUID
    */
-  List: Array<OsName>
+  Quuid: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 错误信息
    */
-  RequestId?: string
+  ErrMsg: string
+
+  /**
+   * 0 执行中, 1 成功,2失败
+   */
+  Status: number
 }
 
 /**
@@ -5639,13 +5911,13 @@ export interface DescribeVulCountByDatesResponse {
 }
 
 /**
- * DescribeTagMachines返回参数结构体
+ * DescribeMachineOsList返回参数结构体
  */
-export interface DescribeTagMachinesResponse {
+export interface DescribeMachineOsListResponse {
   /**
-   * 列表数据
+   * 操作系统列表
    */
-  List: Array<TagMachine>
+  List: Array<OsName>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -6296,6 +6568,65 @@ export interface DescribeMalwareFileRequest {
 }
 
 /**
+ * DescribeLicenseList请求参数结构体
+ */
+export interface DescribeLicenseListRequest {
+  /**
+      * 多个条件筛选时 LicenseStatus,DeadlineStatus,ResourceId,Keywords 取交集
+<li> LicenseStatus 授权状态信息,0 未使用,1 部分使用, 2 已用完, 3 不可用  4 可使用</li>
+<li> BuyTime 购买时间</li>
+<li> LicenseType  授权类型, 0 专业版-按量计费, 1专业版-包年包月 , 2 旗舰版-包年包月</li>
+<li>DeadlineStatus 到期状态 NotExpired 未过期, Expire 已过期(包含已销毁) NearExpiry 即将到期</li>
+<li>ResourceId 资源ID</li>
+<li>Keywords IP筛选</li>
+<li>PayMode 付费模式 0 按量计费 , 1 包年包月</li>
+<li>OrderStatus 订单状态 1 正常 2 隔离 3 销毁</li>
+      */
+  Filters?: Array<Filters>
+
+  /**
+   * 限制条数,默认10.
+   */
+  Limit?: number
+
+  /**
+   * 偏移量,默认0.
+   */
+  Offset?: number
+
+  /**
+   * 标签筛选,平台标签能力,这里传入 标签键,标签值作为一个对象
+   */
+  Tags?: Array<Tags>
+}
+
+/**
+ * ModifyLicenseUnBinds请求参数结构体
+ */
+export interface ModifyLicenseUnBindsRequest {
+  /**
+   * 资源ID
+   */
+  ResourceId: string
+
+  /**
+   * 授权类型
+   */
+  LicenseType: number
+
+  /**
+   * 是否全部机器(当全部机器数大于当前订单可用授权数时,多余机器会被跳过)
+   */
+  IsAll?: boolean
+
+  /**
+      * 需要绑定的机器quuid列表, 当IsAll = false 时必填,反之忽略该参数.
+最大长度=100
+      */
+  QuuidList?: Array<string>
+}
+
+/**
  * DeleteMaliciousRequests请求参数结构体
  */
 export interface DeleteMaliciousRequestsRequest {
@@ -6532,6 +6863,56 @@ export interface DescribeAssetInfoResponse {
   WebLocationCount: number
 
   /**
+   * 账号今日新增
+   */
+  AccountNewCount: number
+
+  /**
+   * 端口今日新增
+   */
+  PortNewCount: number
+
+  /**
+   * 进程今日新增
+   */
+  ProcessNewCount: number
+
+  /**
+   * 软件今日新增
+   */
+  SoftwareNewCount: number
+
+  /**
+   * 数据库今日新增
+   */
+  DatabaseNewCount: number
+
+  /**
+   * Web应用今日新增
+   */
+  WebAppNewCount: number
+
+  /**
+   * Web框架今日新增
+   */
+  WebFrameNewCount: number
+
+  /**
+   * Web服务今日新增
+   */
+  WebServiceNewCount: number
+
+  /**
+   * Web站点今日新增
+   */
+  WebLocationNewCount: number
+
+  /**
+   * 主机今日新增
+   */
+  MachineNewCount: number
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -6647,6 +7028,16 @@ export interface AssetWebFrameBaseInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   UpdateTime: string
+
+  /**
+   * 首次采集时间
+   */
+  FirstTime: string
+
+  /**
+   * 是否新增[0:否|1:是]
+   */
+  IsNew: number
 }
 
 /**
@@ -6706,6 +7097,57 @@ export interface ExportVulListRequest {
 }
 
 /**
+ * CreateLicenseOrder请求参数结构体
+ */
+export interface CreateLicenseOrderRequest {
+  /**
+   * 标签数组, 空则表示不需要绑定标签
+   */
+  Tags?: Array<Tags>
+
+  /**
+      * 授权类型, 0 专业版-按量计费, 1专业版-包年包月 , 2 旗舰版-包年包月
+默认为0
+      */
+  LicenseType?: number
+
+  /**
+      * 授权数量 , 需要购买的数量.
+默认为1
+      */
+  LicenseNum?: number
+
+  /**
+      * 购买订单地域,这里仅支持 1 广州,9 新加坡. 推荐选择广州. 新加坡地域为白名单用户购买.
+默认为1
+      */
+  RegionId?: number
+
+  /**
+      * 项目ID .
+默认为0
+      */
+  ProjectId?: number
+
+  /**
+      * 购买时间长度,默认1 , 可选值为1,2,3,4,5,6,7,8,9,10,11,12,24,36
+该参数仅包年包月生效
+      */
+  TimeSpan?: number
+
+  /**
+      * 是否自动续费, 默认不自动续费.
+该参数仅包年包月生效
+      */
+  AutoRenewFlag?: boolean
+
+  /**
+   * 自动防护授权配置值, 不空则表示开启
+   */
+  AutoProtectOpenConfig?: string
+}
+
+/**
  * DescribeBaselineScanSchedule请求参数结构体
  */
 export interface DescribeBaselineScanScheduleRequest {
@@ -6737,6 +7179,16 @@ export interface DescribeEmergencyVulListResponse {
       */
   ExistsRisk: boolean
 
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DestroyOrder返回参数结构体
+ */
+export interface DestroyOrderResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7214,6 +7666,11 @@ export interface ComponentStatistics {
  */
 export interface ExportAssetWebServiceInfoListRequest {
   /**
+   * 查询指定Quuid主机的信息
+   */
+  Quuid?: string
+
+  /**
       * 过滤条件。
 <li>User- string - 是否必填：否 - 运行用户</li>
 <li>Name- string - 是否必填：否 - Web服务名：
@@ -7237,14 +7694,9 @@ export interface ExportAssetWebServiceInfoListRequest {
   Order?: string
 
   /**
-   * 可选排序：ProcessCount
+   * 可选排序：[FirstTime|ProcessCount]
    */
   By?: string
-
-  /**
-   * 查询指定Quuid主机的信息
-   */
-  Quuid?: string
 }
 
 /**
@@ -7628,13 +8080,38 @@ export interface DeleteMachineTagRequest {
 }
 
 /**
- * DescribeBaselineDetail请求参数结构体
+ * 资产管理磁盘分区信息
  */
-export interface DescribeBaselineDetailRequest {
+export interface AssetDiskPartitionInfo {
   /**
-   * 基线id
+   * 分区名
    */
-  BaselineId: number
+  Name: string
+
+  /**
+   * 分区大小：单位G
+   */
+  Size: number
+
+  /**
+   * 分区使用率
+   */
+  Percent: number
+
+  /**
+   * 文件系统类型
+   */
+  Type: string
+
+  /**
+   * 挂载目录
+   */
+  Path: string
+
+  /**
+   * 已使用空间：单位G
+   */
+  Used: number
 }
 
 /**
@@ -8692,6 +9169,17 @@ export interface AssetWebLocationBaseInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   UpdateTime: string
+
+  /**
+   * 首次采集时间
+   */
+  FirstTime: string
+
+  /**
+      * 是否新增[0:否|1:是]
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsNew: number
 }
 
 /**
@@ -8921,6 +9409,16 @@ export interface AssetSystemPackageInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   UpdateTime: string
+
+  /**
+   * 首次采集时间
+   */
+  FirstTime: string
+
+  /**
+   * 是否新增[0:否|1:是]
+   */
+  IsNew: number
 }
 
 /**
@@ -8986,6 +9484,56 @@ export interface DeleteReverseShellEventsResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 授权绑定详情信息
+ */
+export interface LicenseBindDetail {
+  /**
+   * 机器别名
+   */
+  MachineName: string
+
+  /**
+   * 机器公网IP
+   */
+  MachineWanIp: string
+
+  /**
+   * 机器内网IP
+   */
+  MachineIp: string
+
+  /**
+   * 云服务器UUID
+   */
+  Quuid: string
+
+  /**
+   * 云镜客户端UUID
+   */
+  Uuid: string
+
+  /**
+   * 标签信息
+   */
+  Tags: Array<string>
+
+  /**
+   * 云镜客户端状态,OFFLINE 离线,ONLINE 在线,UNINSTALL 未安装
+   */
+  AgentStatus: string
+
+  /**
+   * 是否允许解绑,false 不允许解绑
+   */
+  IsUnBind: boolean
+
+  /**
+   * 是否允许换绑,false 不允许换绑
+   */
+  IsSwitchBind: boolean
 }
 
 /**
@@ -9083,6 +9631,16 @@ export interface AssetWebServiceBaseInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   UpdateTime: string
+
+  /**
+   * 首次采集时间
+   */
+  FirstTime: string
+
+  /**
+   * 是否新增[0:否|1:是]
+   */
+  IsNew: number
 }
 
 /**
@@ -9287,6 +9845,21 @@ export interface AssetInitServiceBaseInfo {
    * 数据更新时间
    */
   UpdateTime: string
+
+  /**
+   * 首次采集时间
+   */
+  FirstTime: string
+
+  /**
+   * 是否新增[0:否|1:是]
+   */
+  IsNew: number
+
+  /**
+   * 服务器外网IP
+   */
+  MachineWanIp: string
 }
 
 /**
@@ -9439,6 +10012,66 @@ export interface DescribeMalwareInfoResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 漏洞详细信息
+ */
+export interface VulDetailInfo {
+  /**
+   * 漏洞ID
+   */
+  VulId: number
+
+  /**
+   * 漏洞级别
+   */
+  Level: number
+
+  /**
+   * 漏洞名称
+   */
+  Name: string
+
+  /**
+   * cve编号
+   */
+  CveId: string
+
+  /**
+   * 1: web-cms漏洞 2:应用漏洞  4: Linux软件漏洞 5: Windows系统漏洞 0= 应急漏洞
+   */
+  VulCategory: number
+
+  /**
+   * 漏洞描述
+   */
+  Descript: string
+
+  /**
+   * 修复建议
+   */
+  Fix: string
+
+  /**
+   * 参考链接
+   */
+  Reference: string
+
+  /**
+   * CVSS评分
+   */
+  CvssScore: number
+
+  /**
+   * CVSS详情
+   */
+  Cvss: string
+
+  /**
+   * 发布时间
+   */
+  PublishTime: string
 }
 
 /**
@@ -9627,19 +10260,29 @@ export interface DeleteWebPageEventLogResponse {
 }
 
 /**
- * DescribeVulLevelCount返回参数结构体
+ * DescribeLicenseBindSchedule请求参数结构体
  */
-export interface DescribeVulLevelCountResponse {
+export interface DescribeLicenseBindScheduleRequest {
   /**
-      * 统计结果
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  VulLevelList: Array<VulLevelInfo>
+   * 任务ID
+   */
+  TaskId: number
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 限制条数,默认10.
    */
-  RequestId?: string
+  Limit?: number
+
+  /**
+   * 偏移量,默认0
+   */
+  Offset?: number
+
+  /**
+      * 过滤参数
+Status 绑定进度状态 0 进行中 1 已完成 2 失败
+      */
+  Filters?: Array<Filter>
 }
 
 /**
@@ -9998,6 +10641,21 @@ export interface AssetPlanTask {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   UpdateTime: string
+
+  /**
+   * 首次采集时间
+   */
+  FirstTime: string
+
+  /**
+   * 是否新增[0:否|1:是]
+   */
+  IsNew: number
+
+  /**
+   * 服务器外网IP
+   */
+  MachineWanIp: string
 }
 
 /**
@@ -10280,6 +10938,88 @@ export interface DescribeAssetWebServiceProcessListRequest {
 }
 
 /**
+ * 授权订单列表对象
+ */
+export interface LicenseDetail {
+  /**
+   * 授权ID
+   */
+  LicenseId: number
+
+  /**
+   * 授权类型,0 专业版-按量计费, 1专业版-包年包月 , 2 旗舰版-包年包月
+   */
+  LicenseType: number
+
+  /**
+      * 授权状态 0 未使用,1 部分使用, 2 已用完, 3 不可用
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LicenseStatus: number
+
+  /**
+   * 总授权数
+   */
+  LicenseCnt: number
+
+  /**
+   * 已使用授权数
+   */
+  UsedLicenseCnt: number
+
+  /**
+   * 订单状态 1 正常 2隔离, 3销毁
+   */
+  OrderStatus: number
+
+  /**
+   * 截止日期
+   */
+  Deadline: string
+
+  /**
+   * 订单资源ID
+   */
+  ResourceId: string
+
+  /**
+   * 0 初始化,1 自动续费,2 不自动续费
+   */
+  AutoRenewFlag: number
+
+  /**
+   * 项目ID
+   */
+  ProjectId: number
+
+  /**
+   * 任务ID ,默认0 ,查询绑定进度用
+   */
+  TaskId: number
+
+  /**
+   * 购买时间
+   */
+  BuyTime: string
+
+  /**
+   * 是否试用订单.
+   */
+  SourceType: number
+
+  /**
+   * 资源别名
+   */
+  Alias: string
+
+  /**
+      * 平台标签
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Tags: Array<Tags>
+}
+
+/**
  * 本地提权规则
  */
 export interface PrivilegeRule {
@@ -10538,6 +11278,22 @@ export interface DescribeMalWareListResponse {
 }
 
 /**
+ * ModifyLicenseUnBinds返回参数结构体
+ */
+export interface ModifyLicenseUnBindsResponse {
+  /**
+      * 只有解绑失败的才有该值.
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ErrMsg: Array<LicenseUnBindRsp>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeAssetPortInfoList返回参数结构体
  */
 export interface DescribeAssetPortInfoListResponse {
@@ -10707,6 +11463,26 @@ export interface DescribeBashRulesRequest {
 <li>Keywords - String - 是否必填：否 - 关键字(规则名称)</li>
       */
   Filters?: Array<Filter>
+}
+
+/**
+ * ExportLicenseDetail返回参数结构体
+ */
+export interface ExportLicenseDetailResponse {
+  /**
+   * 下载地址,该字段废弃
+   */
+  DownloadUrl: string
+
+  /**
+   * 任务ID,可通过任务ID去查下载任务
+   */
+  TaskId: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -10904,14 +11680,9 @@ export interface DescribeSecurityEventStatResponse {
  */
 export interface DescribeAssetDatabaseListRequest {
   /**
-   * 需要返回的数量，默认为10，最大值为100
+   * 查询指定Quuid主机的信息
    */
-  Limit?: number
-
-  /**
-   * 偏移量，默认为0。
-   */
-  Offset?: number
+  Quuid?: string
 
   /**
       * 过滤条件。
@@ -10938,9 +11709,24 @@ export interface DescribeAssetDatabaseListRequest {
   Filters?: Array<AssetFilters>
 
   /**
-   * 查询指定Quuid主机的信息
+   * 偏移量，默认为0。
    */
-  Quuid?: string
+  Offset?: number
+
+  /**
+   * 需要返回的数量，默认为10，最大值为100
+   */
+  Limit?: number
+
+  /**
+   * 排序方式，asc升序 或 desc降序
+   */
+  Order?: string
+
+  /**
+   * 排序方式：[FirstTime]
+   */
+  By?: string
 }
 
 /**
@@ -10957,16 +11743,6 @@ export interface ModifyWebPageProtectSwitchResponse {
  * DescribeAssetMachineList请求参数结构体
  */
 export interface DescribeAssetMachineListRequest {
-  /**
-   * 需要返回的数量，默认为10，最大值为100
-   */
-  Limit?: number
-
-  /**
-   * 偏移量，默认为0。
-   */
-  Offset?: number
-
   /**
       * 过滤条件。
 <li>IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选</li>
@@ -10988,14 +11764,24 @@ export interface DescribeAssetMachineListRequest {
   Filters?: Array<Filter>
 
   /**
-   * 可选排序：PartitionCount
+   * 需要返回的数量，默认为10，最大值为100
    */
-  By?: string
+  Limit?: number
+
+  /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
 
   /**
    * 排序方式，asc升序 或 desc降序
    */
   Order?: string
+
+  /**
+   * 可选排序[FirstTime|PartitionCount]
+   */
+  By?: string
 }
 
 /**
@@ -11185,6 +11971,21 @@ export interface AssetCoreModuleBaseInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   UpdateTime: string
+
+  /**
+   * 首次采集时间
+   */
+  FirstTime: string
+
+  /**
+   * 是否新增[0:否|1:是]
+   */
+  IsNew: number
+
+  /**
+   * 服务器外网IP
+   */
+  MachineWanIp: string
 }
 
 /**
@@ -11462,14 +12263,9 @@ export interface DescribeWebPageProtectStatResponse {
  */
 export interface DescribeAssetPortInfoListRequest {
   /**
-   * 需要返回的数量，默认为10，最大值为100
+   * 查询指定Quuid主机的信息
    */
-  Limit?: number
-
-  /**
-   * 偏移量，默认为0。
-   */
-  Offset?: number
+  Quuid?: string
 
   /**
       * 过滤条件。
@@ -11489,19 +12285,24 @@ export interface DescribeAssetPortInfoListRequest {
   Filters?: Array<Filter>
 
   /**
+   * 需要返回的数量，默认为10，最大值为100
+   */
+  Limit?: number
+
+  /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
+
+  /**
    * 排序方式，asc升序 或 desc降序
    */
   Order?: string
 
   /**
-   * 排序方式：StartTime
+   * 排序方式：[FirstTime|StartTime]
    */
   By?: string
-
-  /**
-   * 查询指定Quuid主机的信息
-   */
-  Quuid?: string
 }
 
 /**
@@ -11934,20 +12735,83 @@ export interface EditBashRulesRequest {
 }
 
 /**
- * DescribeBruteAttackList返回参数结构体
+ * DescribeLicenseGeneral返回参数结构体
  */
-export interface DescribeBruteAttackListResponse {
+export interface DescribeLicenseGeneralResponse {
   /**
-      * 总数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  TotalCount: number
+   * 总授权数 (包含隔离,过期等不可用状态)
+   */
+  LicenseCnt: number
 
   /**
-      * 密码破解列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  BruteAttackList: Array<BruteAttackInfo>
+   * 可用授权数
+   */
+  AvailableLicenseCnt: number
+
+  /**
+   * 可用专业版授权数(包含后付费).
+   */
+  AvailableProVersionLicenseCnt: number
+
+  /**
+   * 可用旗舰版授权数
+   */
+  AvailableFlagshipVersionLicenseCnt: number
+
+  /**
+   * 即将到期授权数 (15天内到期的)
+   */
+  NearExpiryLicenseCnt: number
+
+  /**
+   * 已到期授权数(不包含已删除的记录)
+   */
+  ExpireLicenseCnt: number
+
+  /**
+   * 自动升级开关状态,默认 false,  ture 开启, false 关闭
+   */
+  AutoOpenStatus: boolean
+
+  /**
+   * PROVERSION_POSTPAY 专业版-后付费, PROVERSION_PREPAY 专业版-预付费, FLAGSHIP_PREPAY 旗舰版-预付费
+   */
+  ProtectType: string
+
+  /**
+   * 历史是否开通过自动升级开关
+   */
+  IsOpenStatusHistory: boolean
+
+  /**
+   * 已使用授权数
+   */
+  UsedLicenseCnt: number
+
+  /**
+   * 未到期授权数
+   */
+  NotExpiredLicenseCnt: number
+
+  /**
+   * 旗舰版总授权数(有效订单)
+   */
+  FlagshipVersionLicenseCnt: number
+
+  /**
+   * 专业版总授权数(有效订单)
+   */
+  ProVersionLicenseCnt: number
+
+  /**
+   * 普惠版总授权数(有效订单的授权数)
+   */
+  CwpVersionLicenseCnt: number
+
+  /**
+   * 可用惠普版授权数
+   */
+  AvailableLHLicenseCnt: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -12096,6 +12960,16 @@ export interface BaselineRuleTopInfo {
 }
 
 /**
+ * DeleteLicenseRecord返回参数结构体
+ */
+export interface DeleteLicenseRecordResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 资源管理进程基本信息
  */
 export interface AssetProcessBaseInfo {
@@ -12230,6 +13104,16 @@ export interface AssetProcessBaseInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   UpdateTime: string
+
+  /**
+   * 首次采集时间
+   */
+  FirstTime: string
+
+  /**
+   * 是否新增[0:否|1:是]
+   */
+  IsNew: number
 }
 
 /**
@@ -12476,6 +13360,21 @@ export interface AssetEnvBaseInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   UpdateTime: string
+
+  /**
+   * 首次采集时间
+   */
+  FirstTime: string
+
+  /**
+   * 是否新增[0:否|1:是]
+   */
+  IsNew: number
+
+  /**
+   * 服务器外网IP
+   */
+  MachineWanIp: string
 }
 
 /**
@@ -12719,14 +13618,14 @@ export interface DeleteReverseShellRulesResponse {
  */
 export interface DescribeAssetPlanTaskListRequest {
   /**
-   * 需要返回的数量，默认为10，最大值为100
+   * 服务器Uuid
    */
-  Limit?: number
+  Uuid?: string
 
   /**
-   * 偏移量，默认为0。
+   * 服务器Quuid
    */
-  Offset?: number
+  Quuid?: string
 
   /**
       * 过滤条件。
@@ -12737,14 +13636,24 @@ export interface DescribeAssetPlanTaskListRequest {
   Filters?: Array<AssetFilters>
 
   /**
-   * 服务器Uuid
+   * 偏移量，默认为0。
    */
-  Uuid?: string
+  Offset?: number
 
   /**
-   * 服务器Quuid
+   * 需要返回的数量，默认为10，最大值为100
    */
-  Quuid?: string
+  Limit?: number
+
+  /**
+   * 排序方式，asc升序 或 desc降序
+   */
+  Order?: string
+
+  /**
+   * 排序方式：[FirstTime]
+   */
+  By?: string
 }
 
 /**
@@ -12993,6 +13902,21 @@ export interface DescribeMachineRegionsResponse {
 }
 
 /**
+ * DestroyOrder请求参数结构体
+ */
+export interface DestroyOrderRequest {
+  /**
+   * 资源ID
+   */
+  ResourceId: string
+
+  /**
+   * 授权类型 0 专业版-按量计费, 1专业版-包年包月 , 2 旗舰版-包年包月
+   */
+  LicenseType: number
+}
+
+/**
  * 资源管理Web应用列表信息
  */
 export interface AssetWebAppBaseInfo {
@@ -13087,6 +14011,16 @@ export interface AssetWebAppBaseInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   UpdateTime: string
+
+  /**
+   * 首次采集时间
+   */
+  FirstTime: string
+
+  /**
+   * 是否新增[0:否|1:是]
+   */
+  IsNew: number
 }
 
 /**
@@ -13183,6 +14117,21 @@ export interface AssetJarBaseInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   UpdateTime: string
+
+  /**
+   * 首次采集时间
+   */
+  FirstTime: string
+
+  /**
+   * 是否新增[0:否|1:是]
+   */
+  IsNew: number
+
+  /**
+   * 服务器外网IP
+   */
+  MachineWanIp: string
 }
 
 /**
@@ -13401,14 +14350,14 @@ export interface DescribeVulHostCountScanTimeResponse {
  */
 export interface DescribeAssetCoreModuleListRequest {
   /**
-   * 需要返回的数量，默认为10，最大值为100
+   * 服务器Uuid
    */
-  Limit?: number
+  Uuid?: string
 
   /**
-   * 偏移量，默认为0。
+   * 服务器Quuid
    */
-  Offset?: number
+  Quuid?: string
 
   /**
       * 过滤条件。
@@ -13419,24 +14368,24 @@ export interface DescribeAssetCoreModuleListRequest {
   Filters?: Array<AssetFilters>
 
   /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
+
+  /**
+   * 需要返回的数量，默认为10，最大值为100
+   */
+  Limit?: number
+
+  /**
    * 排序方式，asc升序 或 desc降序
    */
   Order?: string
 
   /**
-   * 排序依据:Size,ProcessCount,ModuleCount
+   * 排序依据[Size|FirstTime|ProcessCount|ModuleCount]
    */
   By?: string
-
-  /**
-   * 服务器Uuid
-   */
-  Uuid?: string
-
-  /**
-   * 服务器Quuid
-   */
-  Quuid?: string
 }
 
 /**
@@ -13551,6 +14500,21 @@ export interface DescribeBaselineListRequest {
 }
 
 /**
+ * ModifyLicenseBinds返回参数结构体
+ */
+export interface ModifyLicenseBindsResponse {
+  /**
+   * 任务ID
+   */
+  TaskId: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeBaselineTop请求参数结构体
  */
 export interface DescribeBaselineTopRequest {
@@ -13593,6 +14557,41 @@ export interface DescribeAssetAppProcessListRequest {
    * 需要返回的数量，默认为10，最大值为100
    */
   Limit?: number
+}
+
+/**
+ * DescribeLicenseBindList请求参数结构体
+ */
+export interface DescribeLicenseBindListRequest {
+  /**
+   * 授权ID
+   */
+  LicenseId: number
+
+  /**
+   * 授权类型
+   */
+  LicenseType: number
+
+  /**
+   * 资源ID
+   */
+  ResourceId: string
+
+  /**
+   * <li>Keywords 机器别名/公私IP 模糊查询</li>
+   */
+  Filters?: Array<Filters>
+
+  /**
+   * 限制条数,默认10.
+   */
+  Limit?: number
+
+  /**
+   * 偏移量,默认0.
+   */
+  Offset?: number
 }
 
 /**
@@ -13830,14 +14829,9 @@ export interface ModifyWebPageProtectDirResponse {
  */
 export interface DescribeAssetWebAppListRequest {
   /**
-   * 需要返回的数量，默认为10，最大值为100
+   * 查询指定Quuid主机的信息
    */
-  Limit?: number
-
-  /**
-   * 偏移量，默认为0。
-   */
-  Offset?: number
+  Quuid?: string
 
   /**
       * 过滤条件。
@@ -13861,19 +14855,24 @@ export interface DescribeAssetWebAppListRequest {
   Filters?: Array<Filter>
 
   /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
+
+  /**
+   * 需要返回的数量，默认为10，最大值为100
+   */
+  Limit?: number
+
+  /**
    * 排序方式，asc升序 或 desc降序
    */
   Order?: string
 
   /**
-   * 可选排序：PluginCount
+   * 可选排序：[FirstTime|PluginCount]
    */
   By?: string
-
-  /**
-   * 查询指定Quuid主机的信息
-   */
-  Quuid?: string
 }
 
 /**
@@ -13915,6 +14914,11 @@ export interface ExpertServiceOrderInfo {
    */
   Status: number
 }
+
+/**
+ * DescribeLicenseGeneral请求参数结构体
+ */
+export type DescribeLicenseGeneralRequest = null
 
 /**
  * 帐号统计数据。
@@ -13976,14 +14980,9 @@ export interface DescribeMachinesResponse {
  */
 export interface DescribeAssetWebLocationListRequest {
   /**
-   * 需要返回的数量，默认为10，最大值为100
+   * 查询指定Quuid主机的信息
    */
-  Limit?: number
-
-  /**
-   * 偏移量，默认为0。
-   */
-  Offset?: number
+  Quuid?: string
 
   /**
       * 过滤条件。
@@ -14009,19 +15008,24 @@ export interface DescribeAssetWebLocationListRequest {
   Filters?: Array<Filter>
 
   /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
+
+  /**
+   * 需要返回的数量，默认为10，最大值为100
+   */
+  Limit?: number
+
+  /**
    * 排序方式，asc升序 或 desc降序
    */
   Order?: string
 
   /**
-   * 可选排序：PathCount
+   * 可选排序：[FirstTime|PathCount]
    */
   By?: string
-
-  /**
-   * 查询指定Quuid主机的信息
-   */
-  Quuid?: string
 }
 
 /**
@@ -14668,6 +15672,16 @@ export interface AssetPortBaseInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   UpdateTime: string
+
+  /**
+   * 首次采集时间
+   */
+  FirstTime: string
+
+  /**
+   * 是否新增[0:否|1:是]
+   */
+  IsNew: number
 }
 
 /**
@@ -14737,14 +15751,9 @@ export interface DescribeAssetWebFrameListResponse {
  */
 export interface DescribeAssetUserListRequest {
   /**
-   * 需要返回的数量，默认为10，最大值为100
+   * 查询指定Quuid主机的信息
    */
-  Limit?: number
-
-  /**
-   * 偏移量，默认为0。
-   */
-  Offset?: number
+  Quuid?: string
 
   /**
       * 过滤条件。
@@ -14770,23 +15779,25 @@ export interface DescribeAssetUserListRequest {
   Filters?: Array<Filter>
 
   /**
+   * 需要返回的数量，默认为10，最大值为100
+   */
+  Limit?: number
+
+  /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
+
+  /**
    * 排序方式，asc升序 或 desc降序
    */
   Order?: string
 
   /**
-      * 可选排序：
-LoginTime
-PasswordChangeTime
-PasswordDuaTime
+      * 可选排序：[FirstTime|LoginTime|PasswordChangeTime|PasswordDuaTime]
 PasswordLockDays
       */
   By?: string
-
-  /**
-   * 查询指定Quuid主机的信息
-   */
-  Quuid?: string
 }
 
 /**
@@ -14814,16 +15825,6 @@ export interface DescribeAssetSystemPackageListRequest {
   Quuid: string
 
   /**
-   * 需要返回的数量，默认为10，最大值为100
-   */
-  Limit?: number
-
-  /**
-   * 偏移量，默认为0。
-   */
-  Offset?: number
-
-  /**
       * 过滤条件。
 <li>Name - String - 是否必填：否 - 包 名</li>
 <li>StartTime - String - 是否必填：否 - 安装开始时间</li>
@@ -14837,12 +15838,22 @@ export interface DescribeAssetSystemPackageListRequest {
   Filters?: Array<Filter>
 
   /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
+
+  /**
+   * 需要返回的数量，默认为10，最大值为100
+   */
+  Limit?: number
+
+  /**
    * 排序方式，asc-升序 或 desc-降序。默认：desc-降序
    */
   Order?: string
 
   /**
-   * 排序方式可选：InstallTime 安装时间
+   * 排序方式可选：[FistTime|InstallTime:安装时间]
    */
   By?: string
 }
@@ -14895,15 +15906,9 @@ export interface Filters {
  */
 export interface DescribeAssetWebServiceInfoListRequest {
   /**
-   * 需要返回的数量，默认为10，最大值为100
+   * 查询指定Quuid主机的信息
    */
-  Limit?: number
-
-  /**
-      * 偏移量，默认为0。
-<li>IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选</li>
-      */
-  Offset?: number
+  Quuid?: string
 
   /**
       * 过滤条件。
@@ -14925,19 +15930,25 @@ export interface DescribeAssetWebServiceInfoListRequest {
   Filters?: Array<AssetFilters>
 
   /**
+      * 偏移量，默认为0。
+<li>IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选</li>
+      */
+  Offset?: number
+
+  /**
+   * 需要返回的数量，默认为10，最大值为100
+   */
+  Limit?: number
+
+  /**
    * 排序方式，asc升序 或 desc降序
    */
   Order?: string
 
   /**
-   * 可选排序：ProcessCount
+   * 可选排序：[FirstTime|ProcessCount]
    */
   By?: string
-
-  /**
-   * 查询指定Quuid主机的信息
-   */
-  Quuid?: string
 }
 
 /**

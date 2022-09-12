@@ -590,45 +590,51 @@ export interface ShieldArea {
  */
 export interface ServerCertInfo {
   /**
-      * 服务器证书 ID, 默认证书ID, 或在 SSL 证书管理进行证书托管时自动生成
+      * 服务器证书 ID。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   CertId: string
 
   /**
-      * 证书备注名
+      * 证书备注名。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Alias?: string
 
   /**
-      * 证书类型:
-default: 默认证书
-upload:用户上传
-managed:腾讯云托管
+      * 证书类型，取值有：
+<li>default: 默认证书;</li>
+<li>upload:用户上传;</li>
+<li>managed:腾讯云托管。</li>
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Type?: string
 
   /**
-      * 证书过期时间
+      * 证书过期时间。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ExpireTime?: string
 
   /**
-      * 证书部署时间
+      * 证书部署时间。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   DeployTime?: string
 
   /**
-      * 部署状态:
-processing: 部署中
-deployed: 已部署
+      * 部署状态，取值有：
+<li>processing: 部署中;</li>
+<li>deployed: 已部署。</li>
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Status?: string
+
+  /**
+      * 证书算法。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SignAlgo?: string
 }
 
 /**

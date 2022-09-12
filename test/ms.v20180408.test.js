@@ -128,6 +128,16 @@ it("ms.v20180408.DescribeShieldInstances", async function () {
     }
 })
 
+it("ms.v20180408.DescribeScanInstances", async function () {
+    try {
+       const data = await client.DescribeScanInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ms.v20180408.DescribeUrlDetectionResult", async function () {
     try {
        const data = await client.DescribeUrlDetectionResult({})
@@ -158,9 +168,9 @@ it("ms.v20180408.DescribeUserBaseInfoInstance", async function () {
     }
 })
 
-it("ms.v20180408.DescribeScanInstances", async function () {
+it("ms.v20180408.DescribeApkDetectionResult", async function () {
     try {
-       const data = await client.DescribeScanInstances({})
+       const data = await client.DescribeApkDetectionResult({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

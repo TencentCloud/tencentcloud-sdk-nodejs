@@ -615,6 +615,27 @@ export interface AppInfo {
     AppName?: string;
 }
 /**
+ * DescribeShieldPlanInstance返回参数结构体
+ */
+export interface DescribeShieldPlanInstanceResponse {
+    /**
+      * 绑定资源信息
+      */
+    BindInfo: BindInfo;
+    /**
+      * 加固策略信息
+      */
+    ShieldPlanInfo: ShieldPlanInfo;
+    /**
+      * 加固资源信息
+      */
+    ResourceServiceInfo: ResourceServiceInfo;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 提交app加固的服务信息
  */
 export interface ServiceInfo {
@@ -645,27 +666,6 @@ export interface SoInfo {
     SoFileNames: Array<string>;
 }
 /**
- * DescribeShieldPlanInstance返回参数结构体
- */
-export interface DescribeShieldPlanInstanceResponse {
-    /**
-      * 绑定资源信息
-      */
-    BindInfo: BindInfo;
-    /**
-      * 加固策略信息
-      */
-    ShieldPlanInfo: ShieldPlanInfo;
-    /**
-      * 加固资源信息
-      */
-    ResourceServiceInfo: ResourceServiceInfo;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
  * 安全扫描敏感词
  */
 export interface ScanSensitiveInfo {
@@ -681,6 +681,135 @@ export interface ScanSensitiveInfo {
       * 文件sha1值
       */
     FileSha: string;
+}
+/**
+ * APK检测服务：广告插件结果结构体
+ */
+export interface PluginListItem {
+    /**
+      * 数字类型，分别为 1-通知栏广告，2-积分墙广告，3-banner广告，4- 悬浮窗图标广告，5-精品推荐列表广告, 6-插播广告
+      */
+    PluginType: string;
+    /**
+      * 广告插件名称
+      */
+    PluginName: string;
+    /**
+      * 广告插件描述
+      */
+    PluginDesc: string;
+}
+/**
+ * DescribeApkDetectionResult请求参数结构体
+ */
+export interface DescribeApkDetectionResultRequest {
+    /**
+      * 软件包的下载链接
+      */
+    ApkUrl: string;
+    /**
+      * 软件包的md5值，具有唯一性。腾讯APK云检测服务会根据md5值来判断该包是否为库中已收集的样本，已存在，则返回检测结果，反之，需要一定时间检测该样本。
+      */
+    ApkMd5: string;
+}
+/**
+ * APK检测服务参数返回具体信息
+ */
+export interface ResultListItem {
+    /**
+      * banner广告软件标记，分别为-1-不确定，0-否，1-是
+      */
+    Banner: string;
+    /**
+      * 精品推荐列表广告标记，分别为-1-不确定，0-否，1-是
+      */
+    BoutiqueRecommand: string;
+    /**
+      * 悬浮窗图标广告标记,分别为-1-不确定，0-否，1-是
+      */
+    FloatWindows: string;
+    /**
+      * 积分墙广告软件标记，分别为 -1 -不确定，0-否，1-是
+      */
+    IntegralWall: string;
+    /**
+      * 安装包的md5
+      */
+    Md5: string;
+    /**
+      * 通知栏广告软件标记，分别为-1-不确定，0-否，1-是
+      */
+    NotifyBar: string;
+    /**
+      * 1表示官方，0表示非官方
+      */
+    Official: string;
+    /**
+      * 广告插件结果列表
+      */
+    PluginList: Array<PluginListItem>;
+    /**
+      * 非广告插件结果列表(SDK、风险插件等)
+      */
+    OptPluginList: Array<OptPluginListItem>;
+    /**
+      * 数字类型，分别为0-未知， 1-安全软件，2-风险软件，3-病毒软件
+      */
+    SafeType: string;
+    /**
+      * Session id，合作方可以用来区分回调数据，需要唯一。
+      */
+    Sid: string;
+    /**
+      * 安装包名称
+      */
+    SoftName: string;
+    /**
+      * 插播广告软件标记，取值：-1 不确定，0否， 1 是
+      */
+    Spot: string;
+    /**
+      * 病毒名称，utf8编码
+      */
+    VirusName: string;
+    /**
+      * 病毒描述，utf8编码
+      */
+    VirusDesc: string;
+    /**
+      * 二次打包状态：0-表示默认；1-表示二次
+      */
+    RepackageStatus: string;
+    /**
+      * 应用错误码：0、1-表示正常；
+
+2表示System Error(engine analysis error).
+
+3表示App analysis error, please confirm it.
+
+4表示App have not cert, please confirm it.
+
+5表示App size is zero, please confirm it.
+
+6表示App have not package name, please confirm it.
+
+7表示App build time is empty, please confirm it.
+
+8表示App have not valid cert, please confirm it.
+
+99表示Other error.
+
+1000表示App downloadlink download fail, please confirm it.
+
+1001表示APP md5 different between real md5, please confirm it.
+
+1002表示App md5 uncollect, please offer downloadlink.
+      */
+    Errno: string;
+    /**
+      * 对应errno的错误信息描述
+      */
+    ErrMsg: string;
 }
 /**
  * 资源服务信息
@@ -865,14 +994,9 @@ export interface ShieldInfo {
     ServiceEdition: string;
 }
 /**
- * 安全扫描系统权限信息
+ * DescribeUserBaseInfoInstance请求参数结构体
  */
-export interface ScanPermissionList {
-    /**
-      * 系统权限信息
-      */
-    PermissionList: Array<ScanPermissionInfo>;
-}
+export declare type DescribeUserBaseInfoInstanceRequest = null;
 /**
  * CreateResourceInstances返回参数结构体
  */
@@ -988,9 +1112,26 @@ export interface DescribeScanInstancesRequest {
     OrderDirection?: string;
 }
 /**
- * DescribeUserBaseInfoInstance请求参数结构体
+ * DescribeApkDetectionResult返回参数结构体
  */
-export declare type DescribeUserBaseInfoInstanceRequest = null;
+export interface DescribeApkDetectionResultResponse {
+    /**
+      * 响应结果，ok表示正常，error表示错误
+      */
+    Result: string;
+    /**
+      * Result为error错误时的原因说明
+      */
+    Reason: string;
+    /**
+      * APK检测结果数组
+      */
+    ResultList: Array<ResultListItem>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
 /**
  * DescribeResourceInstances返回参数结构体
  */
@@ -1252,6 +1393,32 @@ export interface BindInfo {
       * app的包名
       */
     AppPkgName: string;
+}
+/**
+ * 安全扫描系统权限信息
+ */
+export interface ScanPermissionList {
+    /**
+      * 系统权限信息
+      */
+    PermissionList: Array<ScanPermissionInfo>;
+}
+/**
+ * APK检测服务：非广告插件结果列表(SDK、风险插件等)
+ */
+export interface OptPluginListItem {
+    /**
+      * 非广告类型
+      */
+    PluginType: string;
+    /**
+      * 非广告插件名称
+      */
+    PluginName: string;
+    /**
+      * 非广告插件描述
+      */
+    PluginDesc: string;
 }
 /**
  * DeleteScanInstances请求参数结构体

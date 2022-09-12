@@ -25,6 +25,7 @@ import {
   OperateChannelTemplateRequest,
   TemplateInfo,
   UploadFilesRequest,
+  ChannelBatchCancelFlowsResponse,
   GetDownloadFlowUrlResponse,
   DescribeResourceUrlsByFlowsResponse,
   ChannelCreateMultiFlowSignQRCodeResponse,
@@ -38,21 +39,24 @@ import {
   CreateChannelFlowEvidenceReportRequest,
   DescribeFlowDetailInfoRequest,
   ChannelGetTaskResultApiResponse,
+  UploadFile,
   ProxyOrganizationOperator,
   ChannelGetTaskResultApiRequest,
-  UploadFile,
+  SignUrlInfo,
   Component,
   GetDownloadFlowUrlRequest,
+  ChannelBatchCancelFlowsRequest,
   FlowDetailInfo,
   CreateConsoleLoginUrlRequest,
   OrganizationInfo,
   CreateFlowsByTemplatesResponse,
   ChannelCreateFlowSignReviewRequest,
-  PrepareFlowsRequest,
+  DescribeUsageResponse,
   SyncProxyOrganizationOperatorsResponse,
   CreateSealByImageResponse,
   SignUrl,
   FlowResourceUrlInfo,
+  FlowFileInfo,
   DescribeTemplatesRequest,
   SyncProxyOrganizationOperatorsRequest,
   CreateConsoleLoginUrlResponse,
@@ -60,7 +64,8 @@ import {
   SyncProxyOrganizationRequest,
   CreateSealByImageRequest,
   SignQrCode,
-  DescribeUsageResponse,
+  ChannelCreateFlowGroupByFilesResponse,
+  PrepareFlowsRequest,
   UsageDetail,
   ChannelCreateBatchCancelFlowUrlResponse,
   DescribeResourceUrlsByFlowsRequest,
@@ -82,7 +87,7 @@ import {
   ChannelCreateConvertTaskApiRequest,
   FlowApproverDetail,
   FlowInfo,
-  SignUrlInfo,
+  ChannelCreateFlowGroupByFilesRequest,
   TaskInfo,
   CcInfo,
   ChannelCancelMultiFlowSignQRCodeResponse,
@@ -249,6 +254,27 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 此接口（SyncProxyOrganizationOperators）用于同步渠道合作企业经办人列表
+   */
+  async SyncProxyOrganizationOperators(
+    req: SyncProxyOrganizationOperatorsRequest,
+    cb?: (error: string, rep: SyncProxyOrganizationOperatorsResponse) => void
+  ): Promise<SyncProxyOrganizationOperatorsResponse> {
+    return this.request("SyncProxyOrganizationOperators", req, cb)
+  }
+
+  /**
+     * 指定需要批量撤销的签署流程Id，批量撤销合同
+客户指定需要撤销的签署流程Id，最多100个，超过100不处理；接口失败后返回错误信息
+     */
+  async ChannelBatchCancelFlows(
+    req: ChannelBatchCancelFlowsRequest,
+    cb?: (error: string, rep: ChannelBatchCancelFlowsResponse) => void
+  ): Promise<ChannelBatchCancelFlowsResponse> {
+    return this.request("ChannelBatchCancelFlows", req, cb)
+  }
+
+  /**
      * 该接口 (PrepareFlows) 用于创建待发起文件
 用户通过该接口进入签署流程发起的确认页面，进行发起信息二次确认， 如果确认则进行正常发起。
 目前该接口只支持B2C，不建议使用。
@@ -292,8 +318,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建出证报告，返回报告 URL
-   */
+     * 【描述】：创建出证报告，返回报告 URL
+【注意】：此接口需要通过添加白名单获取调用权限，请联系运营人员加白
+     */
   async CreateChannelFlowEvidenceReport(
     req: CreateChannelFlowEvidenceReportRequest,
     cb?: (error: string, rep: CreateChannelFlowEvidenceReportResponse) => void
@@ -316,13 +343,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 此接口（SyncProxyOrganizationOperators）用于同步渠道合作企业经办人列表
+   * 接口（ChannelCreateFlowGroupByFiles）用于通过多文件创建合同组签署流程。
    */
-  async SyncProxyOrganizationOperators(
-    req: SyncProxyOrganizationOperatorsRequest,
-    cb?: (error: string, rep: SyncProxyOrganizationOperatorsResponse) => void
-  ): Promise<SyncProxyOrganizationOperatorsResponse> {
-    return this.request("SyncProxyOrganizationOperators", req, cb)
+  async ChannelCreateFlowGroupByFiles(
+    req: ChannelCreateFlowGroupByFilesRequest,
+    cb?: (error: string, rep: ChannelCreateFlowGroupByFilesResponse) => void
+  ): Promise<ChannelCreateFlowGroupByFilesResponse> {
+    return this.request("ChannelCreateFlowGroupByFiles", req, cb)
   }
 
   /**

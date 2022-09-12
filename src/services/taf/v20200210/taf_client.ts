@@ -18,21 +18,17 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  SendTrafficSecuritySmsMessageResponse,
   InputBusinessEncryptData,
   RecognizeCustomizedAudienceRequest,
   RecognizeTargetAudienceResponse,
   OutputRecognizeTargetAudienceValue,
-  SendTrafficSecuritySmsMessageRequest,
-  RecognizePreciseTargetAudienceResponse,
   OutputRecognizeTargetAudience,
   RecognizeCustomizedAudienceResponse,
   InputRecognizeTargetAudience,
   Device,
-  OutputSendTrafficSecuritySmsMsg,
   RecognizePreciseTargetAudienceRequest,
   RecognizeTargetAudienceRequest,
-  InputSendTrafficSecuritySmsMsg,
+  RecognizePreciseTargetAudienceResponse,
 } from "./taf_models"
 
 /**
@@ -72,15 +68,5 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RecognizeTargetAudienceResponse) => void
   ): Promise<RecognizeTargetAudienceResponse> {
     return this.request("RecognizeTargetAudience", req, cb)
-  }
-
-  /**
-   * 流量安选产品，短信发送接口
-   */
-  async SendTrafficSecuritySmsMessage(
-    req: SendTrafficSecuritySmsMessageRequest,
-    cb?: (error: string, rep: SendTrafficSecuritySmsMessageResponse) => void
-  ): Promise<SendTrafficSecuritySmsMessageResponse> {
-    return this.request("SendTrafficSecuritySmsMessage", req, cb)
   }
 }

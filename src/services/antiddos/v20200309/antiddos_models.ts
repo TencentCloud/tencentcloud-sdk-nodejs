@@ -5347,6 +5347,11 @@ export interface BGPInstance {
    * 新版本1ip高防包
    */
   IpCountNewFlag: number
+
+  /**
+   * 攻击封堵套餐标记
+   */
+  VitalityVersion: number
 }
 
 /**

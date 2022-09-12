@@ -132,6 +132,7 @@ import {
   DescribeAllNamespacesResponse,
   GetPrometheusAgentManagementCommandRequest,
   ModifyPrometheusInstanceAttributesResponse,
+  GrafanaChannel,
   DeleteAlarmNoticesResponse,
   DescribeGrafanaNotificationChannelsRequest,
   DescribePluginOverviewsRequest,
@@ -156,7 +157,7 @@ import {
   UnbindPrometheusManagedGrafanaRequest,
   TemplateGroup,
   DescribeBindingPolicyObjectListInstance,
-  Point,
+  ModifyPolicyGroupCondition,
   UpdateAlertRuleResponse,
   ModifyPolicyGroupEventCondition,
   CreateGrafanaNotificationChannelRequest,
@@ -187,6 +188,7 @@ import {
   BindingPolicyObjectDimension,
   UnbindPrometheusManagedGrafanaResponse,
   DescribeBasicAlarmListAlarms,
+  DescribeGrafanaChannelsResponse,
   DescribeAlarmPolicyResponse,
   DeleteExporterIntegrationResponse,
   UpdateServiceDiscoveryResponse,
@@ -275,7 +277,7 @@ import {
   CreatePrometheusScrapeJobRequest,
   RecordingRuleSet,
   CreateExporterIntegrationResponse,
-  DescribePolicyConditionListEventMetric,
+  DescribeGrafanaChannelsRequest,
   DescribePolicyGroupListRequest,
   DescribeBasicAlarmListRequest,
   ManagementCommand,
@@ -313,16 +315,17 @@ import {
   PrometheusRuleKV,
   ModifyAlarmPolicyStatusResponse,
   DescribeGrafanaWhiteListResponse,
+  UpdateSSOAccountResponse,
   UpdateRecordingRuleRequest,
   AlarmPolicyCondition,
-  ModifyPolicyGroupCondition,
+  DescribePolicyConditionListEventMetric,
   DescribeDNSConfigRequest,
   UpdateDNSConfigResponse,
   DescribePolicyConditionListCondition,
   UpdateGrafanaWhiteListRequest,
   PrometheusInstancesItem,
   DeleteServiceDiscoveryRequest,
-  UpdateSSOAccountResponse,
+  Point,
   DescribeInstalledPluginsResponse,
   UpdateGrafanaConfigResponse,
   DeleteSSOAccountResponse,
@@ -699,6 +702,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpgradeGrafanaInstanceResponse) => void
   ): Promise<UpgradeGrafanaInstanceResponse> {
     return this.request("UpgradeGrafanaInstance", req, cb)
+  }
+
+  /**
+   * 列出 Grafana 所有告警通道
+   */
+  async DescribeGrafanaChannels(
+    req: DescribeGrafanaChannelsRequest,
+    cb?: (error: string, rep: DescribeGrafanaChannelsResponse) => void
+  ): Promise<DescribeGrafanaChannelsResponse> {
+    return this.request("DescribeGrafanaChannels", req, cb)
   }
 
   /**

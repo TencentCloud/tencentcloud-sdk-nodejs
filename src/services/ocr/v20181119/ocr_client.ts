@@ -94,7 +94,7 @@ import {
   GeneralBasicOCRResponse,
   RecognizeThaiIDCardOCRResponse,
   CellContent,
-  RecognizePhilippinesDrivingLicenseOCRResponse,
+  RecognizeMedicalInvoiceOCRResponse,
   MixedInvoiceOCRResponse,
   ClassifyDetectOCRResponse,
   VatInvoiceVerifyNewRequest,
@@ -106,6 +106,7 @@ import {
   TollInvoiceOCRRequest,
   LicensePlateOCRResponse,
   HKIDCardOCRResponse,
+  MedicalInvoiceInfo,
   VatInvoiceGoodsInfo,
   PermitOCRRequest,
   InvoiceGeneralOCRResponse,
@@ -143,6 +144,7 @@ import {
   VerifyEnterpriseFourFactorsRequest,
   RecognizeIndonesiaIDCardOCRRequest,
   ShipInvoiceInfo,
+  Polygon,
   GeneralAccurateOCRRequest,
   OrgCodeCertOCRRequest,
   FlightInvoiceOCRResponse,
@@ -168,6 +170,7 @@ import {
   BankSlipOCRResponse,
   PassInvoiceInfo,
   QuestionObj,
+  VehicleRegCertOCRResponse,
   VinOCRResponse,
   EduPaperOCRRequest,
   FormulaOCRRequest,
@@ -183,10 +186,10 @@ import {
   ResidenceBookletOCRResponse,
   CarInvoiceOCRResponse,
   GeneralFastOCRRequest,
-  Polygon,
+  MedicalInvoiceItem,
   ShipInvoiceOCRResponse,
   InsuranceBillInfo,
-  VehicleRegCertOCRResponse,
+  RecognizeMedicalInvoiceOCRRequest,
   ClassifyDetectInfo,
   GeneralEfficientOCRResponse,
   ShipInvoiceOCRRequest,
@@ -229,6 +232,7 @@ import {
   QuotaInvoiceOCRRequest,
   BankCardOCRResponse,
   BusinessCardOCRRequest,
+  RecognizePhilippinesDrivingLicenseOCRResponse,
   FinanBillOCRRequest,
   VerifyEnterpriseFourFactorsResponse,
   GeneralFastOCRResponse,
@@ -640,6 +644,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: InvoiceGeneralOCRResponse) => void
   ): Promise<InvoiceGeneralOCRResponse> {
     return this.request("InvoiceGeneralOCR", req, cb)
+  }
+
+  /**
+     * 医疗发票识别目前支持全国统一门诊发票、全国统一住院发票、以及部分地方的门诊和住院发票的识别。
+
+     */
+  async RecognizeMedicalInvoiceOCR(
+    req: RecognizeMedicalInvoiceOCRRequest,
+    cb?: (error: string, rep: RecognizeMedicalInvoiceOCRResponse) => void
+  ): Promise<RecognizeMedicalInvoiceOCRResponse> {
+    return this.request("RecognizeMedicalInvoiceOCR", req, cb)
   }
 
   /**

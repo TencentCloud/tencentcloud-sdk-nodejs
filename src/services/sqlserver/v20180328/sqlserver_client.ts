@@ -29,14 +29,17 @@ import {
   DescribeAccountsRequest,
   DescribeMaintenanceSpanResponse,
   CreatePublishSubscribeRequest,
+  CreateBusinessIntelligenceFileRequest,
   CreateMigrationResponse,
   QueryMigrationCheckProcessRequest,
   DeleteBackupMigrationRequest,
   DatabaseTuple,
   RegionInfo,
   ModifyBackupNameResponse,
+  DeleteBusinessIntelligenceFileRequest,
   DeletePublishSubscribeRequest,
   ModifyMaintenanceSpanRequest,
+  CreateBusinessDBInstancesResponse,
   AssociateSecurityGroupsRequest,
   DatabaseTupleStatus,
   StartBackupMigrationResponse,
@@ -47,14 +50,17 @@ import {
   MigrateDetail,
   CreateIncrementalMigrationRequest,
   RunMigrationRequest,
-  RunMigrationResponse,
+  DescribeDBInstanceInterResponse,
+  CreateBusinessIntelligenceFileResponse,
+  OpenInterCommunicationRequest,
   DescribeProductConfigRequest,
   ModifyPublishSubscribeNameResponse,
-  DescribeCrossRegionZoneRequest,
+  CreateAccountRequest,
   ParamRecord,
   RollbackInstanceResponse,
   DeleteIncrementalMigrationRequest,
   DBRemark,
+  CloseInterCommunicationRequest,
   MigrateDB,
   RestartDBInstanceRequest,
   DescribeReadOnlyGroupListResponse,
@@ -65,12 +71,13 @@ import {
   DescribeInstanceParamRecordsResponse,
   DescribeIncrementalMigrationRequest,
   DescribeReadOnlyGroupByReadOnlyInstanceResponse,
-  RestoreInstanceResponse,
+  DeleteBusinessIntelligenceFileResponse,
   SecurityGroupPolicy,
   StepDetail,
   ParameterDetail,
-  ModifyMaintenanceSpanResponse,
+  DescribeBusinessIntelligenceFileResponse,
   ZoneInfo,
+  ModifyMaintenanceSpanResponse,
   InquiryPriceCreateDBInstancesRequest,
   RenewPostpaidDBInstanceRequest,
   CrossRegionStatus,
@@ -79,6 +86,7 @@ import {
   MigrationDetail,
   DescribeBackupByFlowIdResponse,
   RecycleDBInstanceRequest,
+  BusinessIntelligenceFile,
   CompleteMigrationResponse,
   ResetAccountPasswordResponse,
   StartMigrationCheckResponse,
@@ -86,6 +94,7 @@ import {
   SpecInfo,
   DescribeOrdersResponse,
   InquiryPriceCreateDBInstancesResponse,
+  OpenInterCommunicationResponse,
   CompleteMigrationRequest,
   ModifyAccountPrivilegeResponse,
   RemoveBackupsRequest,
@@ -129,6 +138,7 @@ import {
   CompleteExpansionRequest,
   ModifyDatabaseMdfRequest,
   DeleteIncrementalMigrationResponse,
+  ModifyDatabaseCTResponse,
   DescribeRegionsRequest,
   DescribeMaintenanceSpanRequest,
   AccountPrivilege,
@@ -153,6 +163,7 @@ import {
   InquiryPriceUpgradeDBInstanceRequest,
   ModifyDBRemarkRequest,
   ReadOnlyInstanceWeightPair,
+  DescribeBusinessIntelligenceFileRequest,
   ModifyDBInstanceNameRequest,
   AccountPassword,
   DescribeSlowlogsRequest,
@@ -166,19 +177,21 @@ import {
   InquiryPriceRenewDBInstanceRequest,
   StartIncrementalMigrationResponse,
   TerminateDBInstanceResponse,
-  ModifyDatabaseCTResponse,
+  InterInstanceFlow,
   DbRollbackTimeInfo,
   ModifyDBInstanceNetworkResponse,
   AssociateSecurityGroupsResponse,
   AccountDetail,
   ModifyDatabaseMdfResponse,
   CreateBackupResponse,
-  DBInstance,
+  DescribeBackupMigrationResponse,
   DescribeProductConfigResponse,
   DescribeRollbackTimeRequest,
   DescribeUploadBackupInfoResponse,
   CreateMigrationRequest,
+  DescribeDBInstanceInterRequest,
   StartMigrationCheckRequest,
+  InterInstance,
   CreateBasicDBInstancesRequest,
   ModifyDBNameResponse,
   CosUploadBackupFile,
@@ -192,11 +205,13 @@ import {
   ModifyDBInstanceNameResponse,
   CreateIncrementalMigrationResponse,
   MigrationAction,
+  RunMigrationResponse,
   AccountPrivilegeModifyInfo,
-  DescribeBackupMigrationResponse,
+  DBInstance,
   AccountCreateInfo,
   RenewDBInstanceResponse,
   DBPrivilege,
+  FileAction,
   DescribeOrdersRequest,
   DescribeReadOnlyGroupDetailsResponse,
   DescribeBackupsResponse,
@@ -218,6 +233,7 @@ import {
   InquiryPriceUpgradeDBInstanceResponse,
   CloneDBRequest,
   DescribeMigrationDetailResponse,
+  UpgradeDBInstanceResponse,
   ModifyMigrationRequest,
   CrossBackupAddr,
   Parameter,
@@ -226,11 +242,12 @@ import {
   RenewPostpaidDBInstanceResponse,
   DescribeBackupUploadSizeRequest,
   UpgradeDBInstanceRequest,
-  CreateAccountRequest,
+  DescribeCrossRegionZoneRequest,
   DeleteDBResponse,
   CreateDBResponse,
+  CloseInterCommunicationResponse,
   RestartDBInstanceResponse,
-  InquiryPriceRenewDBInstanceResponse,
+  CreateBusinessDBInstancesRequest,
   DescribeDBInstancesResponse,
   DescribeSlowlogsResponse,
   DBDetail,
@@ -248,8 +265,9 @@ import {
   DescribeUploadBackupInfoRequest,
   DescribeAccountsResponse,
   DeleteDBInstanceResponse,
-  UpgradeDBInstanceResponse,
+  RestoreInstanceResponse,
   DescribeBackupCommandResponse,
+  InquiryPriceRenewDBInstanceResponse,
   StartBackupMigrationRequest,
   DescribePublishSubscribeResponse,
   DescribeReadOnlyGroupListRequest,
@@ -543,6 +561,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（CreateBusinessDBInstances）用于创建商业智能服务实例。
+   */
+  async CreateBusinessDBInstances(
+    req: CreateBusinessDBInstancesRequest,
+    cb?: (error: string, rep: CreateBusinessDBInstancesResponse) => void
+  ): Promise<CreateBusinessDBInstancesResponse> {
+    return this.request("CreateBusinessDBInstances", req, cb)
+  }
+
+  /**
    * 本接口（ModifyDBName）用于更新数据库名。
    */
   async ModifyDBName(
@@ -653,6 +681,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（RunMigration）用于启动迁移任务，开始迁移
+   */
+  async RunMigration(
+    req: RunMigrationRequest,
+    cb?: (error: string, rep: RunMigrationResponse) => void
+  ): Promise<RunMigrationResponse> {
+    return this.request("RunMigration", req, cb)
+  }
+
+  /**
    * 本接口(DescribeProjectSecurityGroups)用于查询项目的安全组详情。
    */
   async DescribeProjectSecurityGroups(
@@ -750,6 +788,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeInstanceParamRecordsResponse) => void
   ): Promise<DescribeInstanceParamRecordsResponse> {
     return this.request("DescribeInstanceParamRecords", req, cb)
+  }
+
+  /**
+   * 本接口（CreateBusinessIntelligenceFile）用于添加商业智能服务文件。
+   */
+  async CreateBusinessIntelligenceFile(
+    req: CreateBusinessIntelligenceFileRequest,
+    cb?: (error: string, rep: CreateBusinessIntelligenceFileResponse) => void
+  ): Promise<CreateBusinessIntelligenceFileResponse> {
+    return this.request("CreateBusinessIntelligenceFile", req, cb)
   }
 
   /**
@@ -875,6 +923,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（DeleteBusinessIntelligenceFile）用于删除商业智能文件。
+   */
+  async DeleteBusinessIntelligenceFile(
+    req: DeleteBusinessIntelligenceFileRequest,
+    cb?: (error: string, rep: DeleteBusinessIntelligenceFileResponse) => void
+  ): Promise<DeleteBusinessIntelligenceFileResponse> {
+    return this.request("DeleteBusinessIntelligenceFile", req, cb)
+  }
+
+  /**
    * 本接口（CreateBackupMigration）用于创建备份导入任务。
    */
   async CreateBackupMigration(
@@ -895,6 +953,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（DescribeBusinessIntelligenceFile）用于查询商业智能服务需要的文件。
+   */
+  async DescribeBusinessIntelligenceFile(
+    req: DescribeBusinessIntelligenceFileRequest,
+    cb?: (error: string, rep: DescribeBusinessIntelligenceFileResponse) => void
+  ): Promise<DescribeBusinessIntelligenceFileResponse> {
+    return this.request("DescribeBusinessIntelligenceFile", req, cb)
+  }
+
+  /**
    * 本接口(AssociateSecurityGroups)用于安全组批量绑定实例。
    */
   async AssociateSecurityGroups(
@@ -902,6 +970,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AssociateSecurityGroupsResponse) => void
   ): Promise<AssociateSecurityGroupsResponse> {
     return this.request("AssociateSecurityGroups", req, cb)
+  }
+
+  /**
+   * 本接口（OpenInterCommunication）用于打开实例的互通，实例互通可以实现商业智能服务相互联通。
+   */
+  async OpenInterCommunication(
+    req: OpenInterCommunicationRequest,
+    cb?: (error: string, rep: OpenInterCommunicationResponse) => void
+  ): Promise<OpenInterCommunicationResponse> {
+    return this.request("OpenInterCommunication", req, cb)
   }
 
   /**
@@ -985,13 +1063,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（RunMigration）用于启动迁移任务，开始迁移
+   * 本接口（DescribeDBInstanceInter）用于查询互通实例的信息。
    */
-  async RunMigration(
-    req: RunMigrationRequest,
-    cb?: (error: string, rep: RunMigrationResponse) => void
-  ): Promise<RunMigrationResponse> {
-    return this.request("RunMigration", req, cb)
+  async DescribeDBInstanceInter(
+    req: DescribeDBInstanceInterRequest,
+    cb?: (error: string, rep: DescribeDBInstanceInterResponse) => void
+  ): Promise<DescribeDBInstanceInterResponse> {
+    return this.request("DescribeDBInstanceInter", req, cb)
   }
 
   /**
@@ -1002,6 +1080,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateReadOnlyDBInstancesResponse) => void
   ): Promise<CreateReadOnlyDBInstancesResponse> {
     return this.request("CreateReadOnlyDBInstances", req, cb)
+  }
+
+  /**
+   * 本接口（CloseInterCommunication）用于关闭实例互通。
+   */
+  async CloseInterCommunication(
+    req: CloseInterCommunicationRequest,
+    cb?: (error: string, rep: CloseInterCommunicationResponse) => void
+  ): Promise<CloseInterCommunicationResponse> {
+    return this.request("CloseInterCommunication", req, cb)
   }
 
   /**

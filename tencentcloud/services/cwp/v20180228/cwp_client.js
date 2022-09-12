@@ -76,6 +76,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAttackLogs", req, cb);
     }
     /**
+     * 获取漏洞列表数据
+     */
+    async DescribeVulList(req, cb) {
+        return this.request("DescribeVulList", req, cb);
+    }
+    /**
      * 导出ES查询文档列表
      */
     async DescribeSearchExportList(req, cb) {
@@ -334,10 +340,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ExportVulDetectionExcel", req, cb);
     }
     /**
-     * 导出资产管理内核模块列表
+     * DestroyOrder  该接口可以对资源销毁.
      */
-    async ExportAssetCoreModuleList(req, cb) {
-        return this.request("ExportAssetCoreModuleList", req, cb);
+    async DestroyOrder(req, cb) {
+        return this.request("DestroyOrder", req, cb);
     }
     /**
      * 同步资产扫描信息
@@ -496,6 +502,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ScanAsset", req, cb);
     }
     /**
+     * 对授权管理-订单列表内已过期的订单进行删除.(删除后的订单不在统计范畴内)
+     */
+    async DeleteLicenseRecord(req, cb) {
+        return this.request("DeleteLicenseRecord", req, cb);
+    }
+    /**
      * 本接口 (DescribeSecurityDynamics) 用于获取安全事件动态消息数据。
      */
     async DescribeSecurityDynamics(req, cb) {
@@ -532,10 +544,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeletePrivilegeRules", req, cb);
     }
     /**
-     * 根据任务id导出指定扫描任务详情
+     * 导出资产管理内核模块列表
      */
-    async ExportScanTaskDetails(req, cb) {
-        return this.request("ExportScanTaskDetails", req, cb);
+    async ExportAssetCoreModuleList(req, cb) {
+        return this.request("ExportAssetCoreModuleList", req, cb);
     }
     /**
      * 漏洞数量等级分布统计
@@ -658,6 +670,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyWebPageProtectDir", req, cb);
     }
     /**
+     * 根据任务id导出指定扫描任务详情
+     */
+    async ExportScanTaskDetails(req, cb) {
+        return this.request("ExportScanTaskDetails", req, cb);
+    }
+    /**
      * 查询恶意请求白名单列表
      */
     async DescribeMaliciousRequestWhiteList(req, cb) {
@@ -680,6 +698,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeAssetWebLocationInfo(req, cb) {
         return this.request("DescribeAssetWebLocationInfo", req, cb);
+    }
+    /**
+     * 本接口（UntrustMalwares）用于取消信任木马文件。
+     */
+    async UntrustMalwares(req, cb) {
+        return this.request("UntrustMalwares", req, cb);
     }
     /**
      * 网页防篡改防护目录列表
@@ -728,6 +752,21 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeScanTaskStatus(req, cb) {
         return this.request("DescribeScanTaskStatus", req, cb);
+    }
+    /**
+     * CreateLicenseOrder 该接口可以创建专业版/旗舰版订单
+支持预付费后付费创建
+后付费订单直接闯将成功
+预付费订单仅下单不支付,需要调用计费支付接口进行支付
+     */
+    async CreateLicenseOrder(req, cb) {
+        return this.request("CreateLicenseOrder", req, cb);
+    }
+    /**
+     * 导出授权列表对应的绑定信息
+     */
+    async ExportLicenseDetail(req, cb) {
+        return this.request("ExportLicenseDetail", req, cb);
     }
     /**
      * 获取快速检索列表
@@ -808,6 +847,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeLoginWhiteCombinedList", req, cb);
     }
     /**
+     * 根据策略id查询基线检测项TOP
+     */
+    async DescribeBaselineTop(req, cb) {
+        return this.request("DescribeBaselineTop", req, cb);
+    }
+    /**
      * 本接口 (DescribeProcessStatistics) 用于获取进程统计列表数据。
      */
     async DescribeProcessStatistics(req, cb) {
@@ -826,10 +871,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAssetWebLocationList", req, cb);
     }
     /**
-     * 根据策略id查询基线检测项TOP
+     * 获取软件关联进程列表
      */
-    async DescribeBaselineTop(req, cb) {
-        return this.request("DescribeBaselineTop", req, cb);
+    async DescribeAssetAppProcessList(req, cb) {
+        return this.request("DescribeAssetAppProcessList", req, cb);
     }
     /**
      * 删除高危命令规则
@@ -904,6 +949,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBruteAttackRules", req, cb);
     }
     /**
+     * 设置中心-授权管理 对某个授权批量绑定机器
+     */
+    async ModifyLicenseBinds(req, cb) {
+        return this.request("ModifyLicenseBinds", req, cb);
+    }
+    /**
      * 查询资产管理环境变量列表
      */
     async DescribeAssetEnvList(req, cb) {
@@ -970,6 +1021,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeIgnoreBaselineRule", req, cb);
     }
     /**
+     * 查询授权绑定任务的进度
+     */
+    async DescribeLicenseBindSchedule(req, cb) {
+        return this.request("DescribeLicenseBindSchedule", req, cb);
+    }
+    /**
      * 根据基线id查询基线详情接口
      */
     async DescribeBaselineDetail(req, cb) {
@@ -1018,10 +1075,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeVulHostTop", req, cb);
     }
     /**
-     * 本接口（UntrustMalwares）用于取消信任木马文件。
+     * 设置中心-授权管理 对某个授权批量解绑机器
      */
-    async UntrustMalwares(req, cb) {
-        return this.request("UntrustMalwares", req, cb);
+    async ModifyLicenseUnBinds(req, cb) {
+        return this.request("ModifyLicenseUnBinds", req, cb);
+    }
+    /**
+     * 切换高危命令规则状态
+     */
+    async SwitchBashRules(req, cb) {
+        return this.request("SwitchBashRules", req, cb);
     }
     /**
      * 获取资产管理Web框架列表
@@ -1066,10 +1129,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyMalwareTimingScanSettings", req, cb);
     }
     /**
-     * 获取漏洞列表数据
+     * 授权管理-授权概览信息
      */
-    async DescribeVulList(req, cb) {
-        return this.request("DescribeVulList", req, cb);
+    async DescribeLicenseGeneral(req, cb) {
+        return this.request("DescribeLicenseGeneral", req, cb);
+    }
+    /**
+     * 该接口可以获取设置中心-授权管理,某个授权下已绑定的授权机器列表
+     */
+    async DescribeLicenseBindList(req, cb) {
+        return this.request("DescribeLicenseBindList", req, cb);
     }
     /**
      * 获取内核模块详情
@@ -1082,12 +1151,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeGeneralStat(req, cb) {
         return this.request("DescribeGeneralStat", req, cb);
-    }
-    /**
-     * 获取软件关联进程列表
-     */
-    async DescribeAssetAppProcessList(req, cb) {
-        return this.request("DescribeAssetAppProcessList", req, cb);
     }
     /**
      * 获取资产管理数据库详情
@@ -1150,10 +1213,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeWebPageServiceInfo", req, cb);
     }
     /**
-     * 切换高危命令规则状态
+     * 对订单属性编辑
      */
-    async SwitchBashRules(req, cb) {
-        return this.request("SwitchBashRules", req, cb);
+    async ModifyOrderAttribute(req, cb) {
+        return this.request("ModifyOrderAttribute", req, cb);
     }
     /**
      * 获取所有主机标签
@@ -1262,6 +1325,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeWebPageEventList(req, cb) {
         return this.request("DescribeWebPageEventList", req, cb);
+    }
+    /**
+     * 获取用户所有授权订单信息
+     */
+    async DescribeLicenseList(req, cb) {
+        return this.request("DescribeLicenseList", req, cb);
     }
     /**
      * 获取木马文件下载地址

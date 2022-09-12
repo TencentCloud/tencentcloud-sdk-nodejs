@@ -90,6 +90,7 @@ import {
   ModifyAllSwitchStatusResponse,
   NewModeItems,
   DescribeNatFwInfoCountResponse,
+  DescribeDefenseSwitchRequest,
   SecurityGroupListData,
   CreateNatFwInstanceWithDomainResponse,
   RemoveAcRuleRequest,
@@ -129,6 +130,7 @@ import {
   DescribeBlockByIpTimesListResponse,
   SetNatFwDnatRuleResponse,
   DescribeRuleOverviewRequest,
+  DescribeDefenseSwitchResponse,
   DescribeAcListsRequest,
   DescribeVpcRuleOverviewRequest,
   UnHandleEvent,
@@ -507,6 +509,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeIPStatusListResponse) => void
   ): Promise<DescribeIPStatusListResponse> {
     return this.request("DescribeIPStatusList", req, cb)
+  }
+
+  /**
+   * 获取入侵防御按钮列表
+   */
+  async DescribeDefenseSwitch(
+    req?: DescribeDefenseSwitchRequest,
+    cb?: (error: string, rep: DescribeDefenseSwitchResponse) => void
+  ): Promise<DescribeDefenseSwitchResponse> {
+    return this.request("DescribeDefenseSwitch", req, cb)
   }
 
   /**

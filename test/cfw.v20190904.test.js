@@ -328,6 +328,16 @@ it("cfw.v20190904.DescribeIPStatusList", async function () {
     }
 })
 
+it("cfw.v20190904.DescribeDefenseSwitch", async function () {
+    try {
+       const data = await client.DescribeDefenseSwitch({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfw.v20190904.DescribeTLogInfo", async function () {
     try {
        const data = await client.DescribeTLogInfo({})

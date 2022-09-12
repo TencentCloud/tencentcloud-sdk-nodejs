@@ -158,6 +158,26 @@ it("essbasic.v20210526.GetDownloadFlowUrl", async function () {
     }
 })
 
+it("essbasic.v20210526.SyncProxyOrganizationOperators", async function () {
+    try {
+       const data = await client.SyncProxyOrganizationOperators({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("essbasic.v20210526.ChannelBatchCancelFlows", async function () {
+    try {
+       const data = await client.ChannelBatchCancelFlows({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("essbasic.v20210526.PrepareFlows", async function () {
     try {
        const data = await client.PrepareFlows({})
@@ -218,9 +238,9 @@ it("essbasic.v20210526.OperateChannelTemplate", async function () {
     }
 })
 
-it("essbasic.v20210526.SyncProxyOrganizationOperators", async function () {
+it("essbasic.v20210526.ChannelCreateFlowGroupByFiles", async function () {
     try {
-       const data = await client.SyncProxyOrganizationOperators({})
+       const data = await client.ChannelCreateFlowGroupByFiles({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

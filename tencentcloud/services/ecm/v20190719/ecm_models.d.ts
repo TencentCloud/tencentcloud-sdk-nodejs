@@ -4982,6 +4982,14 @@ export interface DescribePriceRunInstanceRequest {
       * 数据盘信息
       */
     DataDisk?: Array<DataDisk>;
+    /**
+      * 实例计费类型。其中：
+0，按资源维度后付费，计算当日用量峰值，例如CPU，内存，硬盘等，仅适用于非GNR系列机型；
+1，按小时后付费，单价：xx元/实例/小时，仅适用于GNR机型，如需开通该计费方式请提工单申请；
+2，按月后付费，单价：xx元/实例/月，仅适用于GNR机型；
+该字段不填时，非GNR机型会默认选择0；GNR机型默认选择2。
+      */
+    InstanceChargeType?: number;
 }
 /**
  * DescribeTargets返回参数结构体

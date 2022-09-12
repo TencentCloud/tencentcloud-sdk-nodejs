@@ -213,6 +213,27 @@ export interface VoiceMessageStatisticsItem {
     Dau: number;
 }
 /**
+ * DeleteRoomMember请求参数结构体
+ */
+export interface DeleteRoomMemberRequest {
+    /**
+      * 要操作的房间id
+      */
+    RoomId: string;
+    /**
+      * 要剔除的用户列表
+      */
+    Uids: Array<string>;
+    /**
+      * 剔除类型 1-删除房间 2-剔除用户
+      */
+    DeleteType: number;
+    /**
+      * 应用id
+      */
+    BizId: number;
+}
+/**
  * 房间内用户信息
  */
 export interface RoomUser {
@@ -495,17 +516,18 @@ Age ：子任务完成后的结果，0:成年人，1:未成年人，100:未知�
     RequestId?: string;
 }
 /**
- * 离线语音服务配置数据
+ * GetCustomizationList返回参数结构体
  */
-export interface VoiceMessageConf {
+export interface GetCustomizationListResponse {
     /**
-      * 离线语音服务开关，取值：open/close
+      * 语音消息转文本自学习模型配置
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Status?: string;
+    CustomizationConfigs: Array<CustomizationConfigs>;
     /**
-      * 离线语音支持语种，取值： all-全部，cnen-中英文。默认为中英文
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Language?: string;
+    RequestId?: string;
 }
 /**
  * ModifyUserMicStatus返回参数结构体
@@ -661,14 +683,13 @@ export interface DescribeApplicationDataResponse {
     RequestId?: string;
 }
 /**
- * GetCustomizationList返回参数结构体
+ * DeleteRoomMember返回参数结构体
  */
-export interface GetCustomizationListResponse {
+export interface DeleteRoomMemberResponse {
     /**
-      * 语音消息转文本自学习模型配置
-注意：此字段可能返回 null，表示取不到有效值。
+      * 剔除房间或成员的操作结果
       */
-    CustomizationConfigs: Array<CustomizationConfigs>;
+    DeleteResult: DeleteResult;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -703,6 +724,19 @@ export interface ModifyCustomizationRequest {
       * 要修改的模型ID
       */
     ModelId: string;
+}
+/**
+ * 离线语音服务配置数据
+ */
+export interface VoiceMessageConf {
+    /**
+      * 离线语音服务开关，取值：open/close
+      */
+    Status?: string;
+    /**
+      * 离线语音支持语种，取值： all-全部，cnen-中英文。默认为中英文
+      */
+    Language?: string;
 }
 /**
  * 语音过滤用量统计数据
@@ -820,6 +854,19 @@ export interface DescribeUserInAndOutTimeResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 剔除房间操作结果
+ */
+export interface DeleteResult {
+    /**
+      * 错误码，0-剔除成功 其他-剔除失败
+      */
+    Code: number;
+    /**
+      * 错误描述
+      */
+    ErrorMsg: string;
 }
 /**
  * 年龄语音任务结果

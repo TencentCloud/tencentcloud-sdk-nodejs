@@ -318,6 +318,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("InvoiceGeneralOCR", req, cb);
     }
     /**
+     * 医疗发票识别目前支持全国统一门诊发票、全国统一住院发票、以及部分地方的门诊和住院发票的识别。
+
+     */
+    async RecognizeMedicalInvoiceOCR(req, cb) {
+        return this.request("RecognizeMedicalInvoiceOCR", req, cb);
+    }
+    /**
      * 本接口支持网约车行程单关键字段的识别，包括行程起止日期、上车时间、起点、终点、里程、金额等字段。
      */
     async RecognizeOnlineTaxiItineraryOCR(req, cb) {

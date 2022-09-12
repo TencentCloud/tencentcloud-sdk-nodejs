@@ -1631,6 +1631,10 @@ export interface DescribeNatFwInfoCountResponse {
     RequestId?: string;
 }
 /**
+ * DescribeDefenseSwitch请求参数结构体
+ */
+export declare type DescribeDefenseSwitchRequest = null;
+/**
  * 安全组列表数据
  */
 export interface SecurityGroupListData {
@@ -2066,7 +2070,7 @@ export interface NatFwFilter {
  */
 export interface ScanResultInfo {
     /**
-      * 暴漏漏洞数量
+      * 暴露漏洞数量
       */
     LeakNum: number;
     /**
@@ -2074,7 +2078,7 @@ export interface ScanResultInfo {
       */
     IPNum: number;
     /**
-      * 暴漏端口数量
+      * 暴露端口数量
       */
     PortNum: number;
     /**
@@ -2493,6 +2497,43 @@ export interface DescribeRuleOverviewRequest {
       * 方向，0：出站，1：入站
       */
     Direction?: number;
+}
+/**
+ * DescribeDefenseSwitch返回参数结构体
+ */
+export interface DescribeDefenseSwitchResponse {
+    /**
+      * 基础防御开关
+      */
+    BasicRuleSwitch: number;
+    /**
+      * 安全基线开关
+      */
+    BaselineAllSwitch: number;
+    /**
+      * 威胁情报开关
+      */
+    TiSwitch: number;
+    /**
+      * 虚拟补丁开关
+      */
+    VirtualPatchSwitch: number;
+    /**
+      * 是否历史开启
+      */
+    HistoryOpen: number;
+    /**
+      * 状态值，0：查询成功，非0：查询失败
+      */
+    ReturnCode: number;
+    /**
+      * 状态信息，success：查询成功，fail：查询失败
+      */
+    ReturnMsg: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeAcLists请求参数结构体

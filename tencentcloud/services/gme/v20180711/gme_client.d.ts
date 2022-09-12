@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CreateCustomizationResponse, ScanVoiceResponse, ModifyAppStatusRequest, DescribeScanResultListResponse, DescribeApplicationDataRequest, CreateScanUserResponse, DescribeRealtimeScanConfigResponse, ModifyUserMicStatusRequest, CreateCustomizationRequest, DescribeRoomInfoRequest, UpdateScanRoomsRequest, ModifyCustomizationResponse, DescribeRealtimeScanConfigRequest, DescribeScanResultListRequest, ModifyCustomizationStateResponse, CreateAgeDetectTaskRequest, DescribeAppStatisticsRequest, CreateScanUserRequest, ModifyCustomizationStateRequest, DescribeAgeDetectTaskResponse, ModifyUserMicStatusResponse, DeleteScanUserRequest, DescribeAppStatisticsResponse, UpdateScanRoomsResponse, UpdateScanUsersResponse, DescribeApplicationDataResponse, GetCustomizationListResponse, DeleteScanUserResponse, ModifyCustomizationRequest, DescribeRoomInfoResponse, DescribeAgeDetectTaskRequest, DeleteCustomizationResponse, GetCustomizationListRequest, DescribeUserInAndOutTimeResponse, ModifyRoomInfoResponse, ModifyRoomInfoRequest, CreateAgeDetectTaskResponse, CreateAppRequest, CreateAppResponse, DeleteCustomizationRequest, ModifyAppStatusResponse, UpdateScanUsersRequest, ScanVoiceRequest, DescribeUserInAndOutTimeRequest } from "./gme_models";
+import { CreateCustomizationResponse, ScanVoiceResponse, ModifyAppStatusRequest, DescribeScanResultListResponse, DescribeApplicationDataRequest, CreateScanUserResponse, DescribeRealtimeScanConfigResponse, ModifyUserMicStatusRequest, DeleteRoomMemberRequest, CreateCustomizationRequest, DescribeRoomInfoRequest, UpdateScanRoomsRequest, ModifyCustomizationResponse, DescribeRealtimeScanConfigRequest, DescribeScanResultListRequest, ModifyCustomizationStateResponse, CreateAgeDetectTaskRequest, DescribeAppStatisticsRequest, CreateScanUserRequest, ModifyCustomizationStateRequest, DescribeAgeDetectTaskResponse, GetCustomizationListResponse, ModifyUserMicStatusResponse, DeleteScanUserRequest, DescribeAppStatisticsResponse, UpdateScanRoomsResponse, UpdateScanUsersResponse, DescribeApplicationDataResponse, DeleteRoomMemberResponse, DeleteScanUserResponse, ModifyCustomizationRequest, DescribeRoomInfoResponse, DescribeAgeDetectTaskRequest, DeleteCustomizationResponse, GetCustomizationListRequest, DescribeUserInAndOutTimeResponse, ModifyRoomInfoResponse, ModifyRoomInfoRequest, CreateAgeDetectTaskResponse, CreateAppRequest, CreateAppResponse, DeleteCustomizationRequest, ModifyAppStatusResponse, UpdateScanUsersRequest, ScanVoiceRequest, DescribeUserInAndOutTimeRequest } from "./gme_models";
 /**
  * gme client
  * @class
@@ -53,6 +53,10 @@ export declare class Client extends AbstractClient {
 </br>
      */
     CreateAgeDetectTask(req: CreateAgeDetectTaskRequest, cb?: (error: string, rep: CreateAgeDetectTaskResponse) => void): Promise<CreateAgeDetectTaskResponse>;
+    /**
+     * 本接口(DeleteRoomMember)用户删除房间或者剔除房间内用户
+     */
+    DeleteRoomMember(req: DeleteRoomMemberRequest, cb?: (error: string, rep: DeleteRoomMemberResponse) => void): Promise<DeleteRoomMemberResponse>;
     /**
      * 本接口(DescribeApplicationData)用于获取数据详情信息，最多可拉取最近90天的数据。
      */

@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CreateShieldPlanInstanceResponse, CreateResourceInstancesRequest, DescribeShieldInstancesResponse, DescribeShieldResultRequest, CreateShieldInstanceRequest, CreateCosSecKeyInstanceRequest, DescribeScanResultsResponse, CreateScanInstancesRequest, DescribeUserBaseInfoInstanceResponse, CreateShieldPlanInstanceRequest, CreateBindInstanceRequest, CreateShieldInstanceResponse, DeleteShieldInstancesRequest, DescribeShieldInstancesRequest, CreateScanInstancesResponse, DescribeScanInstancesResponse, DescribeUrlDetectionResultRequest, DescribeShieldPlanInstanceResponse, DescribeResourceInstancesRequest, DescribeUrlDetectionResultResponse, DescribeShieldPlanInstanceRequest, CreateResourceInstancesResponse, DeleteScanInstancesResponse, DeleteShieldInstancesResponse, DescribeScanInstancesRequest, DescribeUserBaseInfoInstanceRequest, DescribeResourceInstancesResponse, DescribeScanResultsRequest, CreateCosSecKeyInstanceResponse, DescribeShieldResultResponse, CreateBindInstanceResponse, DeleteScanInstancesRequest } from "./ms_models";
+import { CreateShieldPlanInstanceResponse, CreateResourceInstancesRequest, DescribeShieldInstancesResponse, DescribeShieldResultRequest, CreateShieldInstanceRequest, CreateCosSecKeyInstanceRequest, DescribeScanResultsResponse, CreateScanInstancesRequest, DescribeUserBaseInfoInstanceResponse, CreateShieldPlanInstanceRequest, CreateBindInstanceRequest, CreateShieldInstanceResponse, DeleteShieldInstancesRequest, DescribeShieldInstancesRequest, CreateScanInstancesResponse, DescribeScanInstancesResponse, DescribeUrlDetectionResultRequest, DescribeShieldPlanInstanceResponse, DescribeApkDetectionResultRequest, DescribeResourceInstancesRequest, DescribeUrlDetectionResultResponse, DescribeShieldPlanInstanceRequest, DescribeUserBaseInfoInstanceRequest, CreateResourceInstancesResponse, DeleteScanInstancesResponse, DeleteShieldInstancesResponse, DescribeScanInstancesRequest, DescribeApkDetectionResultResponse, DescribeResourceInstancesResponse, DescribeScanResultsRequest, CreateCosSecKeyInstanceResponse, DescribeShieldResultResponse, CreateBindInstanceResponse, DeleteScanInstancesRequest } from "./ms_models";
 /**
  * ms client
  * @class
@@ -54,6 +54,11 @@ export declare class Client extends AbstractClient {
      */
     DescribeShieldInstances(req: DescribeShieldInstancesRequest, cb?: (error: string, rep: DescribeShieldInstancesResponse) => void): Promise<DescribeShieldInstancesResponse>;
     /**
+     * 本接口用于查看app列表。
+可以通过指定任务唯一标识ItemId来查询指定app的详细信息，或通过设定过滤器来查询满足过滤条件的app的详细信息。 指定偏移(Offset)和限制(Limit)来选择结果中的一部分，默认返回满足条件的前20个app信息。
+     */
+    DescribeScanInstances(req: DescribeScanInstancesRequest, cb?: (error: string, rep: DescribeScanInstancesResponse) => void): Promise<DescribeScanInstancesResponse>;
+    /**
      * 移动安全-网址检测服务
      */
     DescribeUrlDetectionResult(req: DescribeUrlDetectionResultRequest, cb?: (error: string, rep: DescribeUrlDetectionResultResponse) => void): Promise<DescribeUrlDetectionResultResponse>;
@@ -66,10 +71,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeUserBaseInfoInstance(req?: DescribeUserBaseInfoInstanceRequest, cb?: (error: string, rep: DescribeUserBaseInfoInstanceResponse) => void): Promise<DescribeUserBaseInfoInstanceResponse>;
     /**
-     * 本接口用于查看app列表。
-可以通过指定任务唯一标识ItemId来查询指定app的详细信息，或通过设定过滤器来查询满足过滤条件的app的详细信息。 指定偏移(Offset)和限制(Limit)来选择结果中的一部分，默认返回满足条件的前20个app信息。
+     * 该接口采用同步模式请求腾讯APK云检测服务，即时返回检测数据，需要用户用轮询的方式调用本接口来进行样本送检并获取检测结果(每隔60s发送一次请求，传相同的参数，重试30次)，一般情况下0.5h内会出检测结果，最长时间是3h。当Result为ok并且ResultList数组非空有值时，代表检测完毕，若长时间获取不到检测结果，请联系客服。
      */
-    DescribeScanInstances(req: DescribeScanInstancesRequest, cb?: (error: string, rep: DescribeScanInstancesResponse) => void): Promise<DescribeScanInstancesResponse>;
+    DescribeApkDetectionResult(req: DescribeApkDetectionResultRequest, cb?: (error: string, rep: DescribeApkDetectionResultResponse) => void): Promise<DescribeApkDetectionResultResponse>;
     /**
      * 删除一个或者多个app加固信息
      */

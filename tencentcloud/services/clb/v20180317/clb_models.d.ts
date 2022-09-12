@@ -1924,6 +1924,10 @@ export interface CreateTopicRequest {
       * 日志集的保存周期，单位：天，默认30天。
       */
     Period?: number;
+    /**
+      * 日志主题的存储类型，可选值 HOT（标准存储），COLD（低频存储）；默认为HOT。
+      */
+    StorageType?: string;
 }
 /**
  * DeleteListener请求参数结构体

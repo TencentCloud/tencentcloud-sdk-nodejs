@@ -46,24 +46,27 @@ import {
   DescribeUrlDetectionResultRequest,
   VulInfo,
   AppInfo,
+  DescribeShieldPlanInstanceResponse,
   ServiceInfo,
   SoInfo,
-  DescribeShieldPlanInstanceResponse,
   ScanSensitiveInfo,
+  PluginListItem,
+  DescribeApkDetectionResultRequest,
+  ResultListItem,
   ResourceServiceInfo,
   DescribeResourceInstancesRequest,
   AdInfo,
   DescribeUrlDetectionResultResponse,
   DescribeShieldPlanInstanceRequest,
   ShieldInfo,
-  ScanPermissionList,
+  DescribeUserBaseInfoInstanceRequest,
   CreateResourceInstancesResponse,
   AppDetailInfo,
   DeleteScanInstancesResponse,
   Filter,
   DeleteShieldInstancesResponse,
   DescribeScanInstancesRequest,
-  DescribeUserBaseInfoInstanceRequest,
+  DescribeApkDetectionResultResponse,
   DescribeResourceInstancesResponse,
   DescribeScanResultsRequest,
   CreateCosSecKeyInstanceResponse,
@@ -74,6 +77,8 @@ import {
   CreateBindInstanceResponse,
   VulList,
   BindInfo,
+  ScanPermissionList,
+  OptPluginListItem,
   DeleteScanInstancesRequest,
 } from "./ms_models"
 
@@ -199,6 +204,17 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 本接口用于查看app列表。
+可以通过指定任务唯一标识ItemId来查询指定app的详细信息，或通过设定过滤器来查询满足过滤条件的app的详细信息。 指定偏移(Offset)和限制(Limit)来选择结果中的一部分，默认返回满足条件的前20个app信息。
+     */
+  async DescribeScanInstances(
+    req: DescribeScanInstancesRequest,
+    cb?: (error: string, rep: DescribeScanInstancesResponse) => void
+  ): Promise<DescribeScanInstancesResponse> {
+    return this.request("DescribeScanInstances", req, cb)
+  }
+
+  /**
    * 移动安全-网址检测服务
    */
   async DescribeUrlDetectionResult(
@@ -229,14 +245,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口用于查看app列表。
-可以通过指定任务唯一标识ItemId来查询指定app的详细信息，或通过设定过滤器来查询满足过滤条件的app的详细信息。 指定偏移(Offset)和限制(Limit)来选择结果中的一部分，默认返回满足条件的前20个app信息。
-     */
-  async DescribeScanInstances(
-    req: DescribeScanInstancesRequest,
-    cb?: (error: string, rep: DescribeScanInstancesResponse) => void
-  ): Promise<DescribeScanInstancesResponse> {
-    return this.request("DescribeScanInstances", req, cb)
+   * 该接口采用同步模式请求腾讯APK云检测服务，即时返回检测数据，需要用户用轮询的方式调用本接口来进行样本送检并获取检测结果(每隔60s发送一次请求，传相同的参数，重试30次)，一般情况下0.5h内会出检测结果，最长时间是3h。当Result为ok并且ResultList数组非空有值时，代表检测完毕，若长时间获取不到检测结果，请联系客服。
+   */
+  async DescribeApkDetectionResult(
+    req: DescribeApkDetectionResultRequest,
+    cb?: (error: string, rep: DescribeApkDetectionResultResponse) => void
+  ): Promise<DescribeApkDetectionResultResponse> {
+    return this.request("DescribeApkDetectionResult", req, cb)
   }
 
   /**

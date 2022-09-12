@@ -288,6 +288,16 @@ it("sqlserver.v20180328.DeleteDBInstance", async function () {
     }
 })
 
+it("sqlserver.v20180328.CreateBusinessDBInstances", async function () {
+    try {
+       const data = await client.CreateBusinessDBInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("sqlserver.v20180328.ModifyDBName", async function () {
     try {
        const data = await client.ModifyDBName({})
@@ -398,6 +408,16 @@ it("sqlserver.v20180328.ModifyDatabaseCDC", async function () {
     }
 })
 
+it("sqlserver.v20180328.RunMigration", async function () {
+    try {
+       const data = await client.RunMigration({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("sqlserver.v20180328.DescribeProjectSecurityGroups", async function () {
     try {
        const data = await client.DescribeProjectSecurityGroups({})
@@ -491,6 +511,16 @@ it("sqlserver.v20180328.RestoreInstance", async function () {
 it("sqlserver.v20180328.DescribeInstanceParamRecords", async function () {
     try {
        const data = await client.DescribeInstanceParamRecords({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("sqlserver.v20180328.CreateBusinessIntelligenceFile", async function () {
+    try {
+       const data = await client.CreateBusinessIntelligenceFile({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -618,6 +648,16 @@ it("sqlserver.v20180328.CreateMigration", async function () {
     }
 })
 
+it("sqlserver.v20180328.DeleteBusinessIntelligenceFile", async function () {
+    try {
+       const data = await client.DeleteBusinessIntelligenceFile({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("sqlserver.v20180328.CreateBackupMigration", async function () {
     try {
        const data = await client.CreateBackupMigration({})
@@ -638,9 +678,29 @@ it("sqlserver.v20180328.DescribeDBInstances", async function () {
     }
 })
 
+it("sqlserver.v20180328.DescribeBusinessIntelligenceFile", async function () {
+    try {
+       const data = await client.DescribeBusinessIntelligenceFile({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("sqlserver.v20180328.AssociateSecurityGroups", async function () {
     try {
        const data = await client.AssociateSecurityGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("sqlserver.v20180328.OpenInterCommunication", async function () {
+    try {
+       const data = await client.OpenInterCommunication({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -728,9 +788,9 @@ it("sqlserver.v20180328.DescribeMigrationDatabases", async function () {
     }
 })
 
-it("sqlserver.v20180328.RunMigration", async function () {
+it("sqlserver.v20180328.DescribeDBInstanceInter", async function () {
     try {
-       const data = await client.RunMigration({})
+       const data = await client.DescribeDBInstanceInter({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -741,6 +801,16 @@ it("sqlserver.v20180328.RunMigration", async function () {
 it("sqlserver.v20180328.CreateReadOnlyDBInstances", async function () {
     try {
        const data = await client.CreateReadOnlyDBInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("sqlserver.v20180328.CloseInterCommunication", async function () {
+    try {
+       const data = await client.CloseInterCommunication({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

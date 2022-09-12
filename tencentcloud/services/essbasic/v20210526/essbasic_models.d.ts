@@ -215,6 +215,19 @@ export interface UploadFilesRequest {
     Operator?: UserInfo;
 }
 /**
+ * ChannelBatchCancelFlows返回参数结构体
+ */
+export interface ChannelBatchCancelFlowsResponse {
+    /**
+      * 签署流程批量撤销失败原因，错误信息与流程Id一一对应，如果部分流程不可撤销，不会返回错误信息，只会撤销可撤销流程
+      */
+    FailMessages: Array<string>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * GetDownloadFlowUrl返回参数结构体
  */
 export interface GetDownloadFlowUrlResponse {
@@ -393,9 +406,9 @@ export interface CreateSignUrlsRequest {
       */
     Agent: Agent;
     /**
-      * 签署流程编号数组，最多支持100个。
+      * 签署流程编号数组，最多支持100个。(备注：该参数和合同组编号必须二选一)
       */
-    FlowIds: Array<string>;
+    FlowIds?: Array<string>;
     /**
       * 签署链接类型：“WEIXINAPP”-直接跳小程序；“CHANNEL”-跳转H5页面；“APP”-第三方APP或小程序跳转电子签小程序；默认“WEIXINAPP”类型，即跳转至小程序；
       */
@@ -442,6 +455,10 @@ GenerateType为"PERSON"或"FOLLOWER"时必填
       * 操作者的信息
       */
     Operator?: UserInfo;
+    /**
+      * 合同组编号(备注：该参数和合同(流程)编号数组必须二选一)
+      */
+    FlowGroupId?: string;
 }
 /**
  * ChannelCreateMultiFlowSignQRCode请求参数结构体
@@ -527,12 +544,17 @@ export interface DescribeFlowDetailInfoRequest {
     Agent: Agent;
     /**
       * 合同(流程)编号数组，最多支持100个。
+（备注：该参数和合同组编号必须二选一）
       */
-    FlowIds: Array<string>;
+    FlowIds?: Array<string>;
     /**
       * 操作者的信息
       */
     Operator?: UserInfo;
+    /**
+      * 合同组编号（备注：该参数和合同(流程)编号数组必须二选一）
+      */
+    FlowGroupId?: string;
 }
 /**
  * ChannelGetTaskResultApi返回参数结构体
@@ -575,6 +597,19 @@ ProcessTimeout - 转换文件超时
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 此结构体 (UploadFile) 用于描述多文件上传的文件信息。
+ */
+export interface UploadFile {
+    /**
+      * Base64编码后的文件内容
+      */
+    FileBody: string;
+    /**
+      * 文件名
+      */
+    FileName?: string;
 }
 /**
  * 合作企业经办人列表信息
@@ -626,17 +661,76 @@ export interface ChannelGetTaskResultApiRequest {
     Organization?: OrganizationInfo;
 }
 /**
- * 此结构体 (UploadFile) 用于描述多文件上传的文件信息。
+ * 签署链接内容
  */
-export interface UploadFile {
+export interface SignUrlInfo {
     /**
-      * Base64编码后的文件内容
+      * 签署链接
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    FileBody: string;
+    SignUrl: string;
     /**
-      * 文件名
+      * 链接失效时间,默认30分钟
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    FileName?: string;
+    Deadline: number;
+    /**
+      * 当流程为顺序签署此参数有效时，数字越小优先级越高，暂不支持并行签署 可选
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SignOrder: number;
+    /**
+      * 签署人编号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SignId: string;
+    /**
+      * 自定义用户编号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CustomUserId: string;
+    /**
+      * 用户姓名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Name: string;
+    /**
+      * 用户手机号码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Mobile: string;
+    /**
+      * 签署参与者机构名字
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OrganizationName: string;
+    /**
+      * 参与者类型:
+ORGANIZATION 企业经办人
+PERSON 自然人
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ApproverType: string;
+    /**
+      * 经办人身份证号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IdCardNumber: string;
+    /**
+      * 签署链接对应流程Id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FlowId: string;
+    /**
+      * 企业经办人 用户在渠道的编号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OpenId: string;
+    /**
+      * 合同组签署链接对应的合同组id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FlowGroupId: string;
 }
 /**
  * 此结构体 (Component) 用于描述控件属性。
@@ -770,6 +864,23 @@ export interface GetDownloadFlowUrlRequest {
     DownLoadFlows?: Array<DownloadFlowInfo>;
     /**
       * 操作者的信息
+      */
+    Operator?: UserInfo;
+}
+/**
+ * ChannelBatchCancelFlows请求参数结构体
+ */
+export interface ChannelBatchCancelFlowsRequest {
+    /**
+      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
+      */
+    Agent: Agent;
+    /**
+      * 签署流程Id数组，最多100个，超过100不处理
+      */
+    FlowIds: Array<string>;
+    /**
+      * 操作人信息
       */
     Operator?: UserInfo;
 }
@@ -932,25 +1043,22 @@ REJECT: 拒绝
     ReviewMessage?: string;
 }
 /**
- * PrepareFlows请求参数结构体
+ * DescribeUsage返回参数结构体
  */
-export interface PrepareFlowsRequest {
+export interface DescribeUsageResponse {
     /**
-      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
+      * 用量明细条数
       */
-    Agent: Agent;
+    Total: number;
     /**
-      * 多个合同（签署流程）信息，最大支持20个签署流程。
+      * 用量明细
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    FlowInfos: Array<FlowInfo>;
+    Details: Array<UsageDetail>;
     /**
-      * 操作完成后的跳转地址，最大长度200
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    JumpUrl: string;
-    /**
-      * 操作者的信息
-      */
-    Operator?: UserInfo;
+    RequestId?: string;
 }
 /**
  * SyncProxyOrganizationOperators返回参数结构体
@@ -1017,6 +1125,55 @@ export interface FlowResourceUrlInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ResourceUrlInfos: Array<ResourceUrlInfo>;
+}
+/**
+ * 合同组中每个子合同的发起信息
+ */
+export interface FlowFileInfo {
+    /**
+      * 签署文件资源Id列表，目前仅支持单个文件
+      */
+    FileIds: Array<string>;
+    /**
+      * 签署流程名称，长度不超过200个字符
+      */
+    FlowName: string;
+    /**
+      * 签署流程签约方列表，最多不超过5个参与方
+      */
+    FlowApprovers: Array<FlowApproverInfo>;
+    /**
+      * 签署流程截止时间，十位数时间戳，最大值为33162419560，即3020年
+      */
+    Deadline?: number;
+    /**
+      * 签署流程的描述，长度不超过1000个字符
+      */
+    FlowDescription?: string;
+    /**
+      * 签署流程的类型，长度不超过255个字符
+      */
+    FlowType?: string;
+    /**
+      * 签署流程回调地址，长度不超过255个字符
+      */
+    CallbackUrl?: string;
+    /**
+      * 渠道的业务信息，最大长度1000个字符。发起自动签署时，需设置对应自动签署场景，目前仅支持场景：处方单-E_PRESCRIPTION_AUTO_SIGN
+      */
+    CustomerData?: string;
+    /**
+      * 合同签署顺序类型(无序签,顺序签)，默认为false，即有序签署
+      */
+    Unordered?: boolean;
+    /**
+      * 合同显示的页卡模板，说明：只支持{合同名称}, {发起方企业}, {发起方姓名}, {签署方N企业}, {签署方N姓名}，且N不能超过签署人的数量，N从1开始
+      */
+    CustomShowMap?: string;
+    /**
+      * 本企业(发起方企业)是否需要签署审批
+      */
+    NeedSignReview?: boolean;
 }
 /**
  * DescribeTemplates请求参数结构体
@@ -1181,22 +1338,44 @@ export interface SignQrCode {
     ExpiredTime: number;
 }
 /**
- * DescribeUsage返回参数结构体
+ * ChannelCreateFlowGroupByFiles返回参数结构体
  */
-export interface DescribeUsageResponse {
+export interface ChannelCreateFlowGroupByFilesResponse {
     /**
-      * 用量明细条数
-      */
-    Total: number;
-    /**
-      * 用量明细
+      * 合同组ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Details: Array<UsageDetail>;
+    FlowGroupId: string;
+    /**
+      * 子合同ID列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FlowIds: Array<string>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * PrepareFlows请求参数结构体
+ */
+export interface PrepareFlowsRequest {
+    /**
+      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
+      */
+    Agent: Agent;
+    /**
+      * 多个合同（签署流程）信息，最大支持20个签署流程。
+      */
+    FlowInfos: Array<FlowInfo>;
+    /**
+      * 操作完成后的跳转地址，最大长度200
+      */
+    JumpUrl: string;
+    /**
+      * 操作者的信息
+      */
+    Operator?: UserInfo;
 }
 /**
  * 用量明细
@@ -1792,71 +1971,25 @@ export interface FlowInfo {
     NeedSignReview?: boolean;
 }
 /**
- * 签署链接内容
+ * ChannelCreateFlowGroupByFiles请求参数结构体
  */
-export interface SignUrlInfo {
+export interface ChannelCreateFlowGroupByFilesRequest {
     /**
-      * 签署链接
-注意：此字段可能返回 null，表示取不到有效值。
+      * 每个子合同的发起所需的信息，数量限制2-100
       */
-    SignUrl: string;
+    FlowFileInfos: Array<FlowFileInfo>;
     /**
-      * 链接失效时间,默认30分钟
-注意：此字段可能返回 null，表示取不到有效值。
+      * 合同组名称，长度不超过200个字符
       */
-    Deadline: number;
+    FlowGroupName: string;
     /**
-      * 当流程为顺序签署此参数有效时，数字越小优先级越高，暂不支持并行签署 可选
-注意：此字段可能返回 null，表示取不到有效值。
+      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
       */
-    SignOrder: number;
+    Agent?: Agent;
     /**
-      * 签署人编号
-注意：此字段可能返回 null，表示取不到有效值。
+      * 操作者的信息
       */
-    SignId: string;
-    /**
-      * 自定义用户编号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    CustomUserId: string;
-    /**
-      * 用户姓名
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Name: string;
-    /**
-      * 用户手机号码
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Mobile: string;
-    /**
-      * 签署参与者机构名字
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    OrganizationName: string;
-    /**
-      * 参与者类型:
-ORGANIZATION 企业经办人
-PERSON 自然人
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ApproverType: string;
-    /**
-      * 经办人身份证号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    IdCardNumber: string;
-    /**
-      * 签署链接对应流程Id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    FlowId: string;
-    /**
-      * 企业经办人 用户在渠道的编号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    OpenId: string;
+    Operator?: UserInfo;
 }
 /**
  * 复杂文档合成任务的任务信息
@@ -1908,6 +2041,16 @@ export interface DescribeFlowDetailInfoResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     FlowInfo: Array<FlowDetailInfo>;
+    /**
+      * 合同组编号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FlowGroupId: string;
+    /**
+      * 合同组名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FlowGroupName: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

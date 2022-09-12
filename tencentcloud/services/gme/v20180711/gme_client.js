@@ -92,6 +92,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateAgeDetectTask", req, cb);
     }
     /**
+     * 本接口(DeleteRoomMember)用户删除房间或者剔除房间内用户
+     */
+    async DeleteRoomMember(req, cb) {
+        return this.request("DeleteRoomMember", req, cb);
+    }
+    /**
      * 本接口(DescribeApplicationData)用于获取数据详情信息，最多可拉取最近90天的数据。
      */
     async DescribeApplicationData(req, cb) {

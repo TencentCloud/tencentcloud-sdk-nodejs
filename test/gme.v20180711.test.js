@@ -108,6 +108,16 @@ it("gme.v20180711.CreateAgeDetectTask", async function () {
     }
 })
 
+it("gme.v20180711.DeleteRoomMember", async function () {
+    try {
+       const data = await client.DeleteRoomMember({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("gme.v20180711.DescribeApplicationData", async function () {
     try {
        const data = await client.DescribeApplicationData({})

@@ -2247,7 +2247,7 @@ export interface ReviewAudioVideoRequest {
       */
     TasksPriority?: number;
     /**
-      * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。
+      * 来源上下文，用于透传用户请求信息，音视频审核完成回调将返回该字段值，最长 1000 个字符。
       */
     SessionContext?: string;
     /**
@@ -11984,7 +11984,7 @@ export interface ReviewAudioVideoTask {
       */
     SessionId: string;
     /**
-      * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。
+      * 来源上下文，用于透传用户请求信息，音视频审核完成回调将返回该字段值，最长 1000 个字符。
       */
     SessionContext: string;
 }

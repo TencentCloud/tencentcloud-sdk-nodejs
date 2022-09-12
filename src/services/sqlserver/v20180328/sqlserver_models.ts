@@ -366,6 +366,31 @@ export interface CreatePublishSubscribeRequest {
 }
 
 /**
+ * CreateBusinessIntelligenceFile请求参数结构体
+ */
+export interface CreateBusinessIntelligenceFileRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+
+  /**
+   * COS_URL
+   */
+  FileURL: string
+
+  /**
+   * 文件类型 FLAT-作为数据源的平面文件， SSIS-ssis项目包
+   */
+  FileType: string
+
+  /**
+   * 备注
+   */
+  Remark?: string
+}
+
+/**
  * CreateMigration返回参数结构体
  */
 export interface CreateMigrationResponse {
@@ -456,6 +481,21 @@ export interface ModifyBackupNameResponse {
 }
 
 /**
+ * DeleteBusinessIntelligenceFile请求参数结构体
+ */
+export interface DeleteBusinessIntelligenceFileRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+
+  /**
+   * 文件名称集合
+   */
+  FileNameSet: Array<string>
+}
+
+/**
  * DeletePublishSubscribe请求参数结构体
  */
 export interface DeletePublishSubscribeRequest {
@@ -493,6 +533,21 @@ export interface ModifyMaintenanceSpanRequest {
    * 每天可维护的持续时间，单位是h，例如：1 表示从可维护的开始时间起持续1小时，本参数不填，则不修改此值。
    */
   Span?: number
+}
+
+/**
+ * CreateBusinessDBInstances返回参数结构体
+ */
+export interface CreateBusinessDBInstancesResponse {
+  /**
+   * 订单名称
+   */
+  DealName: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -676,18 +731,48 @@ export interface RunMigrationRequest {
 }
 
 /**
- * RunMigration返回参数结构体
+ * DescribeDBInstanceInter返回参数结构体
  */
-export interface RunMigrationResponse {
+export interface DescribeDBInstanceInterResponse {
   /**
-   * 迁移流程启动后，返回流程ID
+   * 互通组内总条数
    */
-  FlowId: number
+  TotalCount: number
+
+  /**
+   * 互通组内实例信息详情
+   */
+  InterInstanceSet: Array<InterInstance>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreateBusinessIntelligenceFile返回参数结构体
+ */
+export interface CreateBusinessIntelligenceFileResponse {
+  /**
+   * 文件名称
+   */
+  FileTaskId: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * OpenInterCommunication请求参数结构体
+ */
+export interface OpenInterCommunicationRequest {
+  /**
+   * 打开互通组的实例ID集合
+   */
+  InstanceIdSet: Array<string>
 }
 
 /**
@@ -716,13 +801,18 @@ export interface ModifyPublishSubscribeNameResponse {
 }
 
 /**
- * DescribeCrossRegionZone请求参数结构体
+ * CreateAccount请求参数结构体
  */
-export interface DescribeCrossRegionZoneRequest {
+export interface CreateAccountRequest {
   /**
-   * 实例ID，格式如：mssql-3l3fgqn7
+   * 数据库实例ID，形如mssql-njj2mtpl
    */
   InstanceId: string
+
+  /**
+   * 数据库实例账户信息
+   */
+  Accounts: Array<AccountCreateInfo>
 }
 
 /**
@@ -808,6 +898,16 @@ export interface DBRemark {
    * 备注信息
    */
   Remark: string
+}
+
+/**
+ * CloseInterCommunication请求参数结构体
+ */
+export interface CloseInterCommunicationRequest {
+  /**
+   * 关闭互通的实例ID集合
+   */
+  InstanceIdSet: Array<string>
 }
 
 /**
@@ -1111,14 +1211,9 @@ export interface DescribeReadOnlyGroupByReadOnlyInstanceResponse {
 }
 
 /**
- * RestoreInstance返回参数结构体
+ * DeleteBusinessIntelligenceFile返回参数结构体
  */
-export interface RestoreInstanceResponse {
-  /**
-   * 异步流程任务ID，使用FlowId调用DescribeFlowStatus接口获取任务执行状态
-   */
-  FlowId: number
-
+export interface DeleteBusinessIntelligenceFileResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1231,9 +1326,19 @@ export interface ParameterDetail {
 }
 
 /**
- * ModifyMaintenanceSpan返回参数结构体
+ * DescribeBusinessIntelligenceFile返回参数结构体
  */
-export interface ModifyMaintenanceSpanResponse {
+export interface DescribeBusinessIntelligenceFileResponse {
+  /**
+   * 文件部署任务总数
+   */
+  TotalCount: number
+
+  /**
+   * 文件部署任务集合
+   */
+  BackupMigrationSet: Array<BusinessIntelligenceFile>
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1268,6 +1373,16 @@ export interface ZoneInfo {
    * 当前可用区与规格下，可售卖的数据库版本，形如2008R2（表示SQL Server 2008 R2）。其可选值有2008R2（表示SQL Server 2008 R2），2012SP3（表示SQL Server 2012），2016SP1（表示SQL Server 2016 SP1）
    */
   Version: string
+}
+
+/**
+ * ModifyMaintenanceSpan返回参数结构体
+ */
+export interface ModifyMaintenanceSpanResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1579,6 +1694,81 @@ export interface RecycleDBInstanceRequest {
 }
 
 /**
+ * 商业智能服务文件类型
+ */
+export interface BusinessIntelligenceFile {
+  /**
+   * 文件名称
+   */
+  FileName: string
+
+  /**
+   * 文件类型
+   */
+  FileType: string
+
+  /**
+   * 文件的COS_URL
+   */
+  FileURL: string
+
+  /**
+   * 文件在服务器上的路径
+   */
+  FilePath: string
+
+  /**
+   * 文件大小，单位时Byte
+   */
+  FileSize: number
+
+  /**
+   * 文件md5值
+   */
+  FileMd5: string
+
+  /**
+   * 部署文件状态 1-初始化待部署 2-部署中 3-部署成功 4-部署失败
+   */
+  Status: number
+
+  /**
+   * 备注信息
+   */
+  Remark: string
+
+  /**
+   * 文件创建时间
+   */
+  CreateTime: string
+
+  /**
+   * 文件部署开始时间
+   */
+  StartTime: string
+
+  /**
+   * 文件部署结束时间
+   */
+  EndTime: string
+
+  /**
+   * 报错信息返回
+   */
+  Message: string
+
+  /**
+   * 商业智能实例ID
+   */
+  InstanceId: string
+
+  /**
+   * 动作相关信息
+   */
+  Action: FileAction
+}
+
+/**
  * CompleteMigration返回参数结构体
  */
 export interface CompleteMigrationResponse {
@@ -1812,6 +2002,21 @@ export interface InquiryPriceCreateDBInstancesResponse {
    * 实际需要支付的价格，其值除以100表示多少钱。例如10010表示100.10元
    */
   Price: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * OpenInterCommunication返回参数结构体
+ */
+export interface OpenInterCommunicationResponse {
+  /**
+   * 实例和异步流程ID
+   */
+  InterInstanceFlowSet: Array<InterInstanceFlow>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2884,6 +3089,21 @@ export interface DeleteIncrementalMigrationResponse {
 }
 
 /**
+ * ModifyDatabaseCT返回参数结构体
+ */
+export interface ModifyDatabaseCTResponse {
+  /**
+   * 流程ID
+   */
+  FlowId: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeRegions请求参数结构体
  */
 export type DescribeRegionsRequest = null
@@ -3404,6 +3624,51 @@ export interface ReadOnlyInstanceWeightPair {
 }
 
 /**
+ * DescribeBusinessIntelligenceFile请求参数结构体
+ */
+export interface DescribeBusinessIntelligenceFileRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+
+  /**
+   * 文件名称
+   */
+  FileName?: string
+
+  /**
+   * 迁移任务状态集合,1-初始化待部署 2-部署中 3-部署成功 4-部署失败
+   */
+  StatusSet?: Array<number>
+
+  /**
+   * 文件类型 FLAT-平面文件，SSIS商业智能服务项目文件
+   */
+  FileType?: string
+
+  /**
+   * 分页，页大小，范围1-100
+   */
+  Limit?: number
+
+  /**
+   * 分页,页数，默认0
+   */
+  Offset?: number
+
+  /**
+   * 排序字段，可选值file_name,create_time,start_time
+   */
+  OrderBy?: string
+
+  /**
+   * 排序方式，desc,asc
+   */
+  OrderByType?: string
+}
+
+/**
  * ModifyDBInstanceName请求参数结构体
  */
 export interface ModifyDBInstanceNameRequest {
@@ -3659,18 +3924,18 @@ export interface TerminateDBInstanceResponse {
 }
 
 /**
- * ModifyDatabaseCT返回参数结构体
+ * 实例开通或者关闭互通组后的状态
  */
-export interface ModifyDatabaseCTResponse {
+export interface InterInstanceFlow {
   /**
-   * 流程ID
+   * 实例ID，例如：mssql-sdf32n1d
    */
-  FlowId: number
+  InstanceId: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 实例开通或者关闭互通组的流程ID，FlowId小于0-开通或者关闭失败，反之则成功。
    */
-  RequestId?: string
+  FlowId: number
 }
 
 /**
@@ -3809,265 +4074,23 @@ export interface CreateBackupResponse {
 }
 
 /**
- * 实例详细信息
+ * DescribeBackupMigration返回参数结构体
  */
-export interface DBInstance {
+export interface DescribeBackupMigrationResponse {
   /**
-   * 实例ID
+   * 迁移任务总数
    */
-  InstanceId: string
+  TotalCount: number
 
   /**
-   * 实例名称
+   * 迁移任务集合
    */
-  Name: string
+  BackupMigrationSet: Array<Migration>
 
   /**
-   * 实例所在项目ID
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  ProjectId: number
-
-  /**
-   * 实例所在地域ID
-   */
-  RegionId: number
-
-  /**
-   * 实例所在可用区ID
-   */
-  ZoneId: number
-
-  /**
-   * 实例所在私有网络ID，基础网络时为 0
-   */
-  VpcId: number
-
-  /**
-   * 实例所在私有网络子网ID，基础网络时为 0
-   */
-  SubnetId: number
-
-  /**
-   * 实例状态。取值范围： <li>1：申请中</li> <li>2：运行中</li> <li>3：受限运行中 (主备切换中)</li> <li>4：已隔离</li> <li>5：回收中</li> <li>6：已回收</li> <li>7：任务执行中 (实例做备份、回档等操作)</li> <li>8：已下线</li> <li>9：实例扩容中</li> <li>10：实例迁移中</li> <li>11：只读</li> <li>12：重启中</li>  <li>13：实例修改中且待切换</li> <li>14：订阅发布创建中</li> <li>15：订阅发布修改中</li> <li>16：实例修改中且切换中</li> <li>17：创建RO副本中</li>
-   */
-  Status: number
-
-  /**
-   * 实例访问IP
-   */
-  Vip: string
-
-  /**
-   * 实例访问端口
-   */
-  Vport: number
-
-  /**
-   * 实例创建时间
-   */
-  CreateTime: string
-
-  /**
-   * 实例更新时间
-   */
-  UpdateTime: string
-
-  /**
-   * 实例计费开始时间
-   */
-  StartTime: string
-
-  /**
-   * 实例计费结束时间
-   */
-  EndTime: string
-
-  /**
-   * 实例隔离时间
-   */
-  IsolateTime: string
-
-  /**
-   * 实例内存大小，单位G
-   */
-  Memory: number
-
-  /**
-   * 实例已经使用存储空间大小，单位G
-   */
-  UsedStorage: number
-
-  /**
-   * 实例存储空间大小，单位G
-   */
-  Storage: number
-
-  /**
-   * 实例版本
-   */
-  VersionName: string
-
-  /**
-   * 实例续费标记，0-正常续费，1-自动续费，2-到期不续费
-   */
-  RenewFlag: number
-
-  /**
-   * 实例高可用， 1-双机高可用，2-单机，3-跨可用区，4-集群跨可用区，5-集群，9-自研机房
-   */
-  Model: number
-
-  /**
-   * 实例所在地域名称，如 ap-guangzhou
-   */
-  Region: string
-
-  /**
-   * 实例所在可用区名称，如 ap-guangzhou-1
-   */
-  Zone: string
-
-  /**
-   * 备份时间点
-   */
-  BackupTime: string
-
-  /**
-   * 实例付费模式， 0-按量计费，1-包年包月
-   */
-  PayMode: number
-
-  /**
-   * 实例唯一UID
-   */
-  Uid: string
-
-  /**
-   * 实例cpu核心数
-   */
-  Cpu: number
-
-  /**
-   * 实例版本代号
-   */
-  Version: string
-
-  /**
-   * 物理机代号
-   */
-  Type: string
-
-  /**
-   * 计费ID
-   */
-  Pid: number
-
-  /**
-   * 实例所属VPC的唯一字符串ID，格式如：vpc-xxx，基础网络时为空字符串
-   */
-  UniqVpcId: string
-
-  /**
-   * 实例所属子网的唯一字符串ID，格式如： subnet-xxx，基础网络时为空字符串
-   */
-  UniqSubnetId: string
-
-  /**
-      * 实例隔离操作
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  IsolateOperator: string
-
-  /**
-      * 发布订阅标识，SUB-订阅实例，PUB-发布实例，空值-没有发布订阅的普通实例
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  SubFlag: string
-
-  /**
-      * 只读标识，RO-只读实例，MASTER-有RO实例的主实例，空值-没有只读组的非RO实例
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ROFlag: string
-
-  /**
-      * 容灾类型，MIRROR-镜像，ALWAYSON-AlwaysOn, SINGLE-单例
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  HAFlag: string
-
-  /**
-      * 实例绑定的标签列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ResourceTags: Array<ResourceTag>
-
-  /**
-      * 备份模式，master_pkg-主节点打包备份(默认) ；master_no_pkg-主节点不打包备份；slave_pkg-从节点打包备份(always on集群有效)；slave_no_pkg-从节点不打包备份(always on集群有效)；只读副本对该值无效。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  BackupModel: string
-
-  /**
-      * 实例备份信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  InstanceNote: string
-
-  /**
-   * 备份周期
-   */
-  BackupCycle: Array<number>
-
-  /**
-   * 备份周期类型，[daily、weekly、monthly]
-   */
-  BackupCycleType: string
-
-  /**
-   * 数据(日志)备份保留时间
-   */
-  BackupSaveDays: number
-
-  /**
-   * 实例类型 HA-高可用 RO-只读实例 SI-基础版 BI-商业智能服务
-   */
-  InstanceType: string
-
-  /**
-   * 跨地域备份目的地域，如果为空，则表示未开启跨地域备份
-   */
-  CrossRegions: Array<string>
-
-  /**
-   * 跨地域备份状态 enable-开启，disable-关闭
-   */
-  CrossBackupEnabled: string
-
-  /**
-   * 跨地域备份保留天数，则默认7天
-   */
-  CrossBackupSaveDays: number
-
-  /**
-   * 外网地址域名
-   */
-  DnsPodDomain: string
-
-  /**
-   * 外网端口号
-   */
-  TgwWanVPort: number
-
-  /**
-   * 系统字符集排序规则，默认：Chinese_PRC_CI_AS
-   */
-  Collation: string
-
-  /**
-   * 系统时区，默认：China Standard Time
-   */
-  TimeZone: string
+  RequestId?: string
 }
 
 /**
@@ -4196,6 +4219,41 @@ export interface CreateMigrationRequest {
 }
 
 /**
+ * DescribeDBInstanceInter请求参数结构体
+ */
+export interface DescribeDBInstanceInterRequest {
+  /**
+   * 分页，页大小，范围是1-100
+   */
+  Limit: number
+
+  /**
+   * 按照实例ID筛选
+   */
+  InstanceId?: string
+
+  /**
+   * 按照状态筛选 1-互通ip prot打开中；2-互通ip prot已经打开；3-加入到互通组中；4-已加入到互通组；5-互通ip prot回收中；6-互通ip prot已回收；7-从互通组移除中；8-已从互通组中移除
+   */
+  Status?: number
+
+  /**
+   * 实例版本代号列表
+   */
+  VersionSet?: Array<string>
+
+  /**
+   * 实例所在可用区，格式如：ap-guangzhou-2
+   */
+  Zone?: string
+
+  /**
+   * 分页，页数，默认是0
+   */
+  Offset?: number
+}
+
+/**
  * StartMigrationCheck请求参数结构体
  */
 export interface StartMigrationCheckRequest {
@@ -4203,6 +4261,66 @@ export interface StartMigrationCheckRequest {
    * 迁移任务id
    */
   MigrateId: number
+}
+
+/**
+ * 互通组内实例信息详情
+ */
+export interface InterInstance {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+
+  /**
+   * 实例互通IP，用于加入互通组后访问
+   */
+  InterVip: string
+
+  /**
+   * 实例互通端口，用于加入互通组后访问
+   */
+  InterPort: number
+
+  /**
+   * 实例互通状态，1 -互通ipprot打开中 2 -互通ipprot已经打开 3 -已经打开互通ip的实例加入到互通组中 4 -已经打开互通ip的实例已加入到互通组 5 -互通ipprot回收中 6 -互通ipprot已回收 7 -已回收的实例从互通组中移除中 8 -已回收的实例从互通组中已经移除
+   */
+  Status: number
+
+  /**
+   * 实例所在地域名称，如 ap-guangzhou
+   */
+  Region: string
+
+  /**
+   * 实例所在可用区名称，如 ap-guangzhou-1
+   */
+  Zone: string
+
+  /**
+   * 实例版本代号
+   */
+  Version: string
+
+  /**
+   * 实例版本
+   */
+  VersionName: string
+
+  /**
+   * 实例名称
+   */
+  Name: string
+
+  /**
+   * 实例访问IP
+   */
+  Vip: string
+
+  /**
+   * 实例访问端口
+   */
+  Vport: number
 }
 
 /**
@@ -4691,6 +4809,21 @@ export interface MigrationAction {
 }
 
 /**
+ * RunMigration返回参数结构体
+ */
+export interface RunMigrationResponse {
+  /**
+   * 迁移流程启动后，返回流程ID
+   */
+  FlowId: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 数据库账号权限变更信息
  */
 export interface AccountPrivilegeModifyInfo {
@@ -4711,23 +4844,265 @@ export interface AccountPrivilegeModifyInfo {
 }
 
 /**
- * DescribeBackupMigration返回参数结构体
+ * 实例详细信息
  */
-export interface DescribeBackupMigrationResponse {
+export interface DBInstance {
   /**
-   * 迁移任务总数
+   * 实例ID
    */
-  TotalCount: number
+  InstanceId: string
 
   /**
-   * 迁移任务集合
+   * 实例名称
    */
-  BackupMigrationSet: Array<Migration>
+  Name: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 实例所在项目ID
    */
-  RequestId?: string
+  ProjectId: number
+
+  /**
+   * 实例所在地域ID
+   */
+  RegionId: number
+
+  /**
+   * 实例所在可用区ID
+   */
+  ZoneId: number
+
+  /**
+   * 实例所在私有网络ID，基础网络时为 0
+   */
+  VpcId: number
+
+  /**
+   * 实例所在私有网络子网ID，基础网络时为 0
+   */
+  SubnetId: number
+
+  /**
+   * 实例状态。取值范围： <li>1：申请中</li> <li>2：运行中</li> <li>3：受限运行中 (主备切换中)</li> <li>4：已隔离</li> <li>5：回收中</li> <li>6：已回收</li> <li>7：任务执行中 (实例做备份、回档等操作)</li> <li>8：已下线</li> <li>9：实例扩容中</li> <li>10：实例迁移中</li> <li>11：只读</li> <li>12：重启中</li>  <li>13：实例修改中且待切换</li> <li>14：订阅发布创建中</li> <li>15：订阅发布修改中</li> <li>16：实例修改中且切换中</li> <li>17：创建RO副本中</li>
+   */
+  Status: number
+
+  /**
+   * 实例访问IP
+   */
+  Vip: string
+
+  /**
+   * 实例访问端口
+   */
+  Vport: number
+
+  /**
+   * 实例创建时间
+   */
+  CreateTime: string
+
+  /**
+   * 实例更新时间
+   */
+  UpdateTime: string
+
+  /**
+   * 实例计费开始时间
+   */
+  StartTime: string
+
+  /**
+   * 实例计费结束时间
+   */
+  EndTime: string
+
+  /**
+   * 实例隔离时间
+   */
+  IsolateTime: string
+
+  /**
+   * 实例内存大小，单位G
+   */
+  Memory: number
+
+  /**
+   * 实例已经使用存储空间大小，单位G
+   */
+  UsedStorage: number
+
+  /**
+   * 实例存储空间大小，单位G
+   */
+  Storage: number
+
+  /**
+   * 实例版本
+   */
+  VersionName: string
+
+  /**
+   * 实例续费标记，0-正常续费，1-自动续费，2-到期不续费
+   */
+  RenewFlag: number
+
+  /**
+   * 实例高可用， 1-双机高可用，2-单机，3-跨可用区，4-集群跨可用区，5-集群，9-自研机房
+   */
+  Model: number
+
+  /**
+   * 实例所在地域名称，如 ap-guangzhou
+   */
+  Region: string
+
+  /**
+   * 实例所在可用区名称，如 ap-guangzhou-1
+   */
+  Zone: string
+
+  /**
+   * 备份时间点
+   */
+  BackupTime: string
+
+  /**
+   * 实例付费模式， 0-按量计费，1-包年包月
+   */
+  PayMode: number
+
+  /**
+   * 实例唯一UID
+   */
+  Uid: string
+
+  /**
+   * 实例cpu核心数
+   */
+  Cpu: number
+
+  /**
+   * 实例版本代号
+   */
+  Version: string
+
+  /**
+   * 物理机代号
+   */
+  Type: string
+
+  /**
+   * 计费ID
+   */
+  Pid: number
+
+  /**
+   * 实例所属VPC的唯一字符串ID，格式如：vpc-xxx，基础网络时为空字符串
+   */
+  UniqVpcId: string
+
+  /**
+   * 实例所属子网的唯一字符串ID，格式如： subnet-xxx，基础网络时为空字符串
+   */
+  UniqSubnetId: string
+
+  /**
+      * 实例隔离操作
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsolateOperator: string
+
+  /**
+      * 发布订阅标识，SUB-订阅实例，PUB-发布实例，空值-没有发布订阅的普通实例
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SubFlag: string
+
+  /**
+      * 只读标识，RO-只读实例，MASTER-有RO实例的主实例，空值-没有只读组的非RO实例
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ROFlag: string
+
+  /**
+      * 容灾类型，MIRROR-镜像，ALWAYSON-AlwaysOn, SINGLE-单例
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  HAFlag: string
+
+  /**
+      * 实例绑定的标签列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ResourceTags: Array<ResourceTag>
+
+  /**
+      * 备份模式，master_pkg-主节点打包备份(默认) ；master_no_pkg-主节点不打包备份；slave_pkg-从节点打包备份(always on集群有效)；slave_no_pkg-从节点不打包备份(always on集群有效)；只读副本对该值无效。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BackupModel: string
+
+  /**
+      * 实例备份信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceNote: string
+
+  /**
+   * 备份周期
+   */
+  BackupCycle: Array<number>
+
+  /**
+   * 备份周期类型，[daily、weekly、monthly]
+   */
+  BackupCycleType: string
+
+  /**
+   * 数据(日志)备份保留时间
+   */
+  BackupSaveDays: number
+
+  /**
+   * 实例类型 HA-高可用 RO-只读实例 SI-基础版 BI-商业智能服务
+   */
+  InstanceType: string
+
+  /**
+   * 跨地域备份目的地域，如果为空，则表示未开启跨地域备份
+   */
+  CrossRegions: Array<string>
+
+  /**
+   * 跨地域备份状态 enable-开启，disable-关闭
+   */
+  CrossBackupEnabled: string
+
+  /**
+   * 跨地域备份保留天数，则默认7天
+   */
+  CrossBackupSaveDays: number
+
+  /**
+   * 外网地址域名
+   */
+  DnsPodDomain: string
+
+  /**
+   * 外网端口号
+   */
+  TgwWanVPort: number
+
+  /**
+   * 系统字符集排序规则，默认：Chinese_PRC_CI_AS
+   */
+  Collation: string
+
+  /**
+   * 系统时区，默认：China Standard Time
+   */
+  TimeZone: string
 }
 
 /**
@@ -4793,6 +5168,21 @@ export interface DBPrivilege {
    * 数据库权限，ReadWrite表示可读写，ReadOnly表示只读
    */
   Privilege: string
+}
+
+/**
+ * 允许动作信息
+ */
+export interface FileAction {
+  /**
+   * 支持的所有操作，值包括：view(查看列表) remark(修改备注)，deploy(部署)，delete(删除文件)
+   */
+  AllAction: Array<string>
+
+  /**
+   * 当前状态允许的操作，AllAction的子集,为空表示禁止所有操作
+   */
+  AllowedAction: Array<string>
 }
 
 /**
@@ -5296,6 +5686,21 @@ export interface DescribeMigrationDetailResponse {
 }
 
 /**
+ * UpgradeDBInstance返回参数结构体
+ */
+export interface UpgradeDBInstanceResponse {
+  /**
+   * 订单名称
+   */
+  DealName: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyMigration请求参数结构体
  */
 export interface ModifyMigrationRequest {
@@ -5481,18 +5886,13 @@ export interface UpgradeDBInstanceRequest {
 }
 
 /**
- * CreateAccount请求参数结构体
+ * DescribeCrossRegionZone请求参数结构体
  */
-export interface CreateAccountRequest {
+export interface DescribeCrossRegionZoneRequest {
   /**
-   * 数据库实例ID，形如mssql-njj2mtpl
+   * 实例ID，格式如：mssql-3l3fgqn7
    */
   InstanceId: string
-
-  /**
-   * 数据库实例账户信息
-   */
-  Accounts: Array<AccountCreateInfo>
 }
 
 /**
@@ -5526,6 +5926,21 @@ export interface CreateDBResponse {
 }
 
 /**
+ * CloseInterCommunication返回参数结构体
+ */
+export interface CloseInterCommunicationResponse {
+  /**
+   * 实例和异步流程ID
+   */
+  InterInstanceFlowSet: Array<InterInstanceFlow>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * RestartDBInstance返回参数结构体
  */
 export interface RestartDBInstanceResponse {
@@ -5541,23 +5956,83 @@ export interface RestartDBInstanceResponse {
 }
 
 /**
- * InquiryPriceRenewDBInstance返回参数结构体
+ * CreateBusinessDBInstances请求参数结构体
  */
-export interface InquiryPriceRenewDBInstanceResponse {
+export interface CreateBusinessDBInstancesRequest {
   /**
-   * 未打折的原价，其值除以100表示最终的价格。例如10094表示100.94元
+   * 实例可用区，类似ap-guangzhou-1（广州一区）；实例可售卖区域可以通过接口DescribeZones获取
    */
-  OriginalPrice: number
+  Zone: string
 
   /**
-   * 实际需要支付价格，其值除以100表示最终的价格。例如10094表示100.94元
+   * 实例内存大小，单位GB
    */
-  Price: number
+  Memory: number
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 实例磁盘大小，单位GB
    */
-  RequestId?: string
+  Storage: number
+
+  /**
+   * 预购买实例的CPU核心数
+   */
+  Cpu: number
+
+  /**
+   * 购买实例的宿主机类型，CLOUD_PREMIUM-虚拟机高性能云盘，CLOUD_SSD-虚拟机SSD云盘
+   */
+  MachineType: string
+
+  /**
+   * 项目ID
+   */
+  ProjectId?: number
+
+  /**
+   * 本次购买几个实例，默认值为1
+   */
+  GoodsNum?: number
+
+  /**
+   * VPC子网ID，形如subnet-bdoe83fa；SubnetId和VpcId需同时设置或者同时不设置
+   */
+  SubnetId?: string
+
+  /**
+   * VPC网络ID，形如vpc-dsp338hz；SubnetId和VpcId需同时设置或者同时不设置
+   */
+  VpcId?: string
+
+  /**
+   * 商业智能服务器版本，目前只支持：201603（SQL Server 2016 Integration Services），201703（SQL Server 2017 Integration Services），201903（SQL Server 2019 Integration Services）版本。每个地域支持售卖的版本不同，可通过DescribeProductConfig接口来拉取每个地域可售卖的版本信息。不填，默认为版本201903。
+   */
+  DBVersion?: string
+
+  /**
+   * 安全组列表，填写形如sg-xxx的安全组ID
+   */
+  SecurityGroupList?: Array<string>
+
+  /**
+   * 可维护时间窗配置，以周为单位，表示周几允许维护，1-7分别代表周一到周末
+   */
+  Weekly?: Array<number>
+
+  /**
+   * 可维护时间窗配置，每天可维护的开始时间
+   */
+  StartTime?: string
+
+  /**
+   * 可维护时间窗配置，持续时间，单位：小时
+   */
+  Span?: number
+
+  /**
+   * 新建实例绑定的标签集合
+   */
+  ResourceTags?: Array<ResourceTag>
 }
 
 /**
@@ -5942,13 +6417,13 @@ export interface DeleteDBInstanceResponse {
 }
 
 /**
- * UpgradeDBInstance返回参数结构体
+ * RestoreInstance返回参数结构体
  */
-export interface UpgradeDBInstanceResponse {
+export interface RestoreInstanceResponse {
   /**
-   * 订单名称
+   * 异步流程任务ID，使用FlowId调用DescribeFlowStatus接口获取任务执行状态
    */
-  DealName: string
+  FlowId: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -5964,6 +6439,26 @@ export interface DescribeBackupCommandResponse {
    * 创建备份命令
    */
   Command: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * InquiryPriceRenewDBInstance返回参数结构体
+ */
+export interface InquiryPriceRenewDBInstanceResponse {
+  /**
+   * 未打折的原价，其值除以100表示最终的价格。例如10094表示100.94元
+   */
+  OriginalPrice: number
+
+  /**
+   * 实际需要支付价格，其值除以100表示最终的价格。例如10094表示100.94元
+   */
+  Price: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

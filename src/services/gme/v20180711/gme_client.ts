@@ -31,6 +31,7 @@ import {
   ModifyUserMicStatusRequest,
   CustomizationConfigs,
   VoiceMessageStatisticsItem,
+  DeleteRoomMemberRequest,
   RoomUser,
   CreateCustomizationRequest,
   DescribeRoomInfoRequest,
@@ -47,7 +48,7 @@ import {
   Task,
   Tag,
   DescribeAgeDetectTaskResponse,
-  VoiceMessageConf,
+  GetCustomizationListResponse,
   ModifyUserMicStatusResponse,
   ApplicationDataStatistics,
   DeleteScanUserRequest,
@@ -56,9 +57,10 @@ import {
   UpdateScanRoomsResponse,
   UpdateScanUsersResponse,
   DescribeApplicationDataResponse,
-  GetCustomizationListResponse,
+  DeleteRoomMemberResponse,
   DeleteScanUserResponse,
   ModifyCustomizationRequest,
+  VoiceMessageConf,
   VoiceFilterStatisticsItem,
   CreateAppResp,
   DescribeRoomInfoResponse,
@@ -66,6 +68,7 @@ import {
   DeleteCustomizationResponse,
   GetCustomizationListRequest,
   DescribeUserInAndOutTimeResponse,
+  DeleteResult,
   AgeDetectTaskResult,
   ModifyRoomInfoResponse,
   DescribeScanResult,
@@ -195,6 +198,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateAgeDetectTaskResponse) => void
   ): Promise<CreateAgeDetectTaskResponse> {
     return this.request("CreateAgeDetectTask", req, cb)
+  }
+
+  /**
+   * 本接口(DeleteRoomMember)用户删除房间或者剔除房间内用户
+   */
+  async DeleteRoomMember(
+    req: DeleteRoomMemberRequest,
+    cb?: (error: string, rep: DeleteRoomMemberResponse) => void
+  ): Promise<DeleteRoomMemberResponse> {
+    return this.request("DeleteRoomMember", req, cb)
   }
 
   /**
