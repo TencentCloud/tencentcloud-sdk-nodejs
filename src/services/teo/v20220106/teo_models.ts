@@ -3660,42 +3660,50 @@ export interface DescribeTopL7CacheDataResponse {
  */
 export interface DescribeOverviewL7DataRequest {
   /**
-   * RFC3339格式，客户端时间
+   * 开始时间。
    */
   StartTime: string
 
   /**
-   * RFC3339格式，客户端时间
+   * 结束时间。
    */
   EndTime: string
 
   /**
-      * 指标列表，支持的指标
-l7Flow_outFlux: 访问流量
-l7Flow_request: 访问请求数
-l7Flow_outBandwidth: 访问带宽
- l7Flow_hit_outFlux: 缓存命中流量
+      * 查询的指标，取值有：
+<li>l7Flow_outFlux: 访问流量；</li>
+<li>l7Flow_request: 访问请求数；</li>
+<li>l7Flow_outBandwidth: 访问带宽；</li>
+<li>l7Flow_hit_outFlux: 缓存命中流量。</li>
       */
   MetricNames: Array<string>
 
   /**
-   * 时间间隔，选填{min, 5min, hour, day, week}
-   */
+      * 查询时间粒度，取值有：
+<li>min ：1分钟 ；</li>
+<li>5min ：5分钟 ；</li>
+<li>hour ：1小时 ；</li>
+<li>day ：1天 。</li>
+      */
   Interval: string
 
   /**
-   * ZoneId列表，仅在zone/domain维度下查询时该参数有效
+   * 查询的站点集合，不填默认查询所有站点。
    */
   ZoneIds?: Array<string>
 
   /**
-   * Domain列表，仅在domain维度下查询时该参数有效
+   * 查询的域名集合，不填默认查询所有子域名。
    */
   Domains?: Array<string>
 
   /**
-   * 协议类型， 选填{http,http2,https,all}
-   */
+      * 查询的协议类型，取值有：
+<li>http: http协议；</li>
+<li>https: https协议；</li>
+<li>http2: http2协议；</li>
+<li>all:  所有协议。</li>不填默认为: all，表示查询所有协议。
+      */
   Protocol?: string
 
   /**
@@ -3704,6 +3712,13 @@ l7Flow_outBandwidth: 访问带宽
 <li>overseas：全球（不含中国大陆）。</li>
       */
   Area?: string
+
+  /**
+      * 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：
+<li>tagKey<br>   按照【<strong>标签Key</strong>】进行过滤。<br>   类型：String<br>   必选：否
+<li>tagValue<br>   按照【<strong>标签Value</strong>】进行过滤。<br>   类型：String<br>   必选：否
+      */
+  Filters?: Array<QueryCondition>
 }
 
 /**
@@ -5656,17 +5671,17 @@ export interface RulesProperties {
  */
 export interface DescribeOverviewL7DataResponse {
   /**
-   * 查询维度
+   * 查询维度。
    */
   Type: string
 
   /**
-   * 时间间隔
+   * 查询时间间隔。
    */
   Interval: string
 
   /**
-   * 详细数据
+   * 七层监控类时序流量数据列表。
    */
   Data: Array<TimingDataRecord>
 
@@ -8046,17 +8061,25 @@ export interface DeleteRulesResponse {
  */
 export interface QueryCondition {
   /**
-   * 维度
+   * 筛选条件的key。
    */
   Key: string
 
   /**
-   * 操作符
-   */
+      * 查询条件操作符，操作类型有：
+<li>equals: 等于；</li>
+<li>notEquals: 不等于；</li>
+<li>include: 包含；</li>
+<li>notInclude: 不包含; </li>
+<li>startWith: 开始于；</li>
+<li>notStartWith: 不开始于；</li>
+<li>endWith: 结尾是；</li>
+<li>notEndWith: 不结尾是。</li>
+      */
   Operator: string
 
   /**
-   * 维度值
+   * 筛选条件的值。
    */
   Value: Array<string>
 }

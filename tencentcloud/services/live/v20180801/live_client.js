@@ -833,6 +833,12 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
         return this.request("CreatePullStreamConfig", req, cb);
     }
     /**
+     * 查询转码任务数。
+     */
+    async DescribeTranscodeTaskNum(req, cb) {
+        return this.request("DescribeTranscodeTaskNum", req, cb);
+    }
+    /**
      * 查询所有实时流的推流信息，包括客户端IP，服务端IP，帧率，码率，域名，开始推流时间。
      */
     async DescribeLiveStreamPushInfoList(req, cb) {

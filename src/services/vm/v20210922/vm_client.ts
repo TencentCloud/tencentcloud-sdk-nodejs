@@ -39,6 +39,7 @@ import {
   RecognitionResult,
   CancelTaskResponse,
   AudioResultDetailTextResult,
+  RcbAsr,
   AudioResult,
   AudioResultDetailMoanResult,
   TaskData,

@@ -5010,6 +5010,12 @@ export interface NatGateway {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ExclusiveGatewayBandwidth: number
+
+  /**
+      * NAT网关是否被封禁。“NORMAL”：未被封禁，“RESTRICTED”：已被封禁。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RestrictState: string
 }
 
 /**
@@ -14323,9 +14329,8 @@ LOCAL_GATEWAY：本地网关。
   GatewayType: string
 
   /**
-      * 下一跳地址，这里只需要指定不同下一跳类型的网关ID，系统会自动匹配到下一跳地址。
-特别注意：当 GatewayType 为 EIP 时，GatewayId 固定值 '0'
-      */
+   * 下一跳地址，这里只需要指定不同下一跳类型的网关ID，系统会自动匹配到下一跳地址。
+   */
   GatewayId: string
 
   /**

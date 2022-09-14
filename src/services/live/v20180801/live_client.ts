@@ -92,6 +92,7 @@ import {
   DescribeDeliverBandwidthListRequest,
   DescribeScreenshotTaskResponse,
   AddLiveWatermarkRequest,
+  TranscodeTaskNum,
   BillCountryInfo,
   ModifyLivePlayDomainRequest,
   DeleteLiveRecordTemplateResponse,
@@ -233,6 +234,7 @@ import {
   ModifyLiveRecordTemplateResponse,
   CommonMixControlParams,
   ModifyLiveRecordTemplateRequest,
+  DescribeTranscodeTaskNumResponse,
   DescribeAreaBillBandwidthAndFluxListResponse,
   ForbidLiveDomainRequest,
   DescribeLiveRecordRulesRequest,
@@ -309,6 +311,7 @@ import {
   DelayInfo,
   DescribeLiveStreamEventListResponse,
   DescribePullStreamConfigsResponse,
+  DescribeTranscodeTaskNumRequest,
   DescribeLiveCallbackRulesResponse,
   DescribeLiveTranscodeTotalInfoRequest,
   StopScreenshotTaskResponse,
@@ -1605,6 +1608,16 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
     cb?: (error: string, rep: CreatePullStreamConfigResponse) => void
   ): Promise<CreatePullStreamConfigResponse> {
     return this.request("CreatePullStreamConfig", req, cb)
+  }
+
+  /**
+   * 查询转码任务数。
+   */
+  async DescribeTranscodeTaskNum(
+    req: DescribeTranscodeTaskNumRequest,
+    cb?: (error: string, rep: DescribeTranscodeTaskNumResponse) => void
+  ): Promise<DescribeTranscodeTaskNumResponse> {
+    return this.request("DescribeTranscodeTaskNum", req, cb)
   }
 
   /**

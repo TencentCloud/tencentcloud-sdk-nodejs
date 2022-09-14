@@ -1,4 +1,17 @@
 /**
+ * GetDevice返回参数结构体
+ */
+export interface GetDeviceResponse {
+    /**
+      * 设备详细信息
+      */
+    DeviceDetails: DeviceDetails;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 接口能力扩展，用于填充电信的加速Token，并为未来参数提供兼容空间
  */
 export interface Capacity {
@@ -12,15 +25,6 @@ export interface Capacity {
     Province?: string;
 }
 /**
- * DescribeQos请求参数结构体
- */
-export interface DescribeQosRequest {
-    /**
-      * 单次加速唯一 Id
-      */
-    SessionId: string;
-}
-/**
  * 移动网络加速目标地址结构体
  */
 export interface DestAddressInfo {
@@ -30,25 +34,92 @@ export interface DestAddressInfo {
     DestIp: Array<string>;
 }
 /**
- * 测速数据
+ * DeleteQos请求参数结构体
  */
-export interface NetworkData {
+export interface DeleteQosRequest {
     /**
-      * 时延数组，最大长度30
+      * 单次加速唯一 Id
       */
-    RTT: Array<number>;
+    SessionId: string;
+}
+/**
+ * 设备网络状态信息
+ */
+export interface DeviceNetInfo {
     /**
-      * 丢包率
+      * 网络类型：
+0:数据
+1:Wi-Fi
+2:有线
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Loss: number;
+    Type: number;
     /**
-      * 抖动
+      * 启用/禁用
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Jitter: number;
+    DataEnable: boolean;
     /**
-      * 10位秒级时间戳
+      * 上行限速
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Timestamp: number;
+    UploadLimit: string;
+    /**
+      * 下行限速
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DownloadLimit: string;
+    /**
+      * 接收实时速率
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DataRx: number;
+    /**
+      * 发送实时速率
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DataTx: number;
+    /**
+      * 运营商类型：
+1: 中国移动；
+2: 中国电信;
+3: 中国联通
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Vendor: number;
+    /**
+      * 连接状态：
+0:无连接
+1:连接中
+2:已连接
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    State: number;
+    /**
+      * 公网IP
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PublicIp: string;
+    /**
+      * 信号强度/单位：dbm
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SignalStrength: number;
+    /**
+      * 数据网络类型：
+-1 ：无效值
+2：2G
+3：3G
+4：4G
+5：5G
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Rat: number;
+    /**
+      * 网卡名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NetInfoName: string;
 }
 /**
  * 移动网络加速源地址结构体
@@ -68,103 +139,31 @@ export interface SrcAddressInfo {
     SrcIpv6?: string;
 }
 /**
- * DeleteQos请求参数结构体
+ * 更新设备网络状态信息
  */
-export interface DeleteQosRequest {
+export interface UpdateNetInfo {
     /**
-      * 单次加速唯一 Id
+      * 网络类型：
+0:数据
+1:Wi-Fi
       */
-    SessionId: string;
-}
-/**
- * 设备信息结构体
- */
-export interface DeviceInfo {
+    Type?: number;
     /**
-      * 运营商
-1：移动
-2：电信
-3：联通
-4：广电
-99：其他
+      * 启用/禁用
       */
-    Vendor?: number;
+    DataEnable?: boolean;
     /**
-      * 设备操作系统：
-1：Android
-2： IOS
-99：其他
+      * 上行限速：bit
       */
-    OS?: number;
+    UploadLimit?: number;
     /**
-      * 设备唯一标识
-IOS 填写 IDFV
-Android 填写 IMEI
+      * 下行限速：bit
       */
-    DeviceId?: string;
+    DownloadLimit?: number;
     /**
-      * 用户手机号码
+      * 网卡名
       */
-    PhoneNum?: string;
-    /**
-      * 无线信息
-1：4G
-2：5G
-3：WIFI
-99：其他
-      */
-    Wireless?: number;
-}
-/**
- * 用户期望门限
- */
-export interface ExpectedThreshold {
-    /**
-      * 期望发起加速的时延阈值
-      */
-    RTT: number;
-    /**
-      * 期望发起加速的丢包率阈值
-      */
-    Loss: number;
-    /**
-      * 期望发起加速的抖动阈值
-      */
-    Jitter: number;
-}
-/**
- * DeleteQos返回参数结构体
- */
-export interface DeleteQosResponse {
-    /**
-      * 单次加速唯一 Id
-      */
-    SessionId: string;
-    /**
-      * 本次加速会话持续时间（单位秒）
-      */
-    Duration: number;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * 加速策略关键数据
- */
-export interface Context {
-    /**
-      * 测速数据
-      */
-    NetworkData?: NetworkData;
-    /**
-      * 用户期望最低门限
-      */
-    ExpectedLowThreshold?: ExpectedThreshold;
-    /**
-      * 用户期望最高门限
-      */
-    ExpectedHighThreshold?: ExpectedThreshold;
+    NetInfoName?: string;
 }
 /**
  * CreateQos返回参数结构体
@@ -216,6 +215,38 @@ export interface DescribeQosResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DeleteDevice请求参数结构体
+ */
+export interface DeleteDeviceRequest {
+    /**
+      * 删除设备的唯一ID
+      */
+    DeviceId: string;
+}
+/**
+ * UpdateDevice返回参数结构体
+ */
+export interface UpdateDeviceResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * 设备详细信息
+ */
+export interface DeviceDetails {
+    /**
+      * 设备基本信息
+      */
+    DeviceBaseInfo: DeviceBaseInfo;
+    /**
+      * 设备网络信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DeviceNetInfo: Array<DeviceNetInfo>;
 }
 /**
  * CreateQos请求参数结构体
@@ -273,4 +304,296 @@ BU4M：带宽型保障 + 上行带宽保障4Mbps
       * 签名
       */
     Extern?: string;
+}
+/**
+ * GetStatisticData请求参数结构体
+ */
+export interface GetStatisticDataRequest {
+    /**
+      * 设备ID，设备ID="-1"获取所有设备流量统计
+      */
+    DeviceId: string;
+    /**
+      * 统计开始时间，单位：s
+      */
+    BeginTime: number;
+    /**
+      * 统计结束时间，单位：s
+      */
+    EndTime: number;
+    /**
+      * 聚合粒度：
+1:按小时统计
+2:按天统计
+      */
+    TimeGranularity: number;
+}
+/**
+ * UpdateDevice请求参数结构体
+ */
+export interface UpdateDeviceRequest {
+    /**
+      * 设备id
+      */
+    DeviceId: string;
+    /**
+      * 设备名称
+      */
+    DeviceName?: string;
+    /**
+      * 设备备注
+      */
+    Remark?: string;
+    /**
+      * 更新设备网络信息
+      */
+    UpdateNetInfo?: Array<UpdateNetInfo>;
+}
+/**
+ * 设备的基本信息
+ */
+export interface DeviceBaseInfo {
+    /**
+      * 设备唯一ID
+      */
+    DeviceId: string;
+    /**
+      * 设备名称
+      */
+    DeviceName: string;
+    /**
+      * 设备创建的时间，单位：ms
+      */
+    CreateTime: string;
+    /**
+      * 设备最后在线时间，单位：ms
+      */
+    LastTime: string;
+    /**
+      * 设备的备注
+      */
+    Remark: string;
+}
+/**
+ * 用户期望门限
+ */
+export interface ExpectedThreshold {
+    /**
+      * 期望发起加速的时延阈值
+      */
+    RTT: number;
+    /**
+      * 期望发起加速的丢包率阈值
+      */
+    Loss: number;
+    /**
+      * 期望发起加速的抖动阈值
+      */
+    Jitter: number;
+}
+/**
+ * DeleteQos返回参数结构体
+ */
+export interface DeleteQosResponse {
+    /**
+      * 单次加速唯一 Id
+      */
+    SessionId: string;
+    /**
+      * 本次加速会话持续时间（单位秒）
+      */
+    Duration: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * 加速策略关键数据
+ */
+export interface Context {
+    /**
+      * 测速数据
+      */
+    NetworkData?: NetworkData;
+    /**
+      * 用户期望最低门限
+      */
+    ExpectedLowThreshold?: ExpectedThreshold;
+    /**
+      * 用户期望最高门限
+      */
+    ExpectedHighThreshold?: ExpectedThreshold;
+}
+/**
+ * AddDevice返回参数结构体
+ */
+export interface AddDeviceResponse {
+    /**
+      * 后台生成的base64字符串密钥
+      */
+    DataKey: string;
+    /**
+      * 设备ID
+      */
+    DeviceId: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * GetDevice请求参数结构体
+ */
+export interface GetDeviceRequest {
+    /**
+      * 搜索指定设备的id
+      */
+    DeviceId: string;
+}
+/**
+ * GetDevices返回参数结构体
+ */
+export interface GetDevicesResponse {
+    /**
+      * 设备信息列表
+      */
+    DeviceInfos: Array<DeviceBaseInfo>;
+    /**
+      * 设备总记录条数
+      */
+    Length: number;
+    /**
+      * 总页数
+      */
+    TotalPage: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeQos请求参数结构体
+ */
+export interface DescribeQosRequest {
+    /**
+      * 单次加速唯一 Id
+      */
+    SessionId: string;
+}
+/**
+ * 测速数据
+ */
+export interface NetworkData {
+    /**
+      * 时延数组，最大长度30
+      */
+    RTT: Array<number>;
+    /**
+      * 丢包率
+      */
+    Loss: number;
+    /**
+      * 抖动
+      */
+    Jitter: number;
+    /**
+      * 10位秒级时间戳
+      */
+    Timestamp: number;
+}
+/**
+ * DeleteDevice返回参数结构体
+ */
+export interface DeleteDeviceResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * GetStatisticData返回参数结构体
+ */
+export interface GetStatisticDataResponse {
+    /**
+      * 文件地址url
+      */
+    FilePath: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * 设备信息结构体
+ */
+export interface DeviceInfo {
+    /**
+      * 运营商
+1：移动
+2：电信
+3：联通
+4：广电
+99：其他
+      */
+    Vendor?: number;
+    /**
+      * 设备操作系统：
+1：Android
+2： IOS
+99：其他
+      */
+    OS?: number;
+    /**
+      * 设备唯一标识
+IOS 填写 IDFV
+Android 填写 IMEI
+      */
+    DeviceId?: string;
+    /**
+      * 用户手机号码
+      */
+    PhoneNum?: string;
+    /**
+      * 无线信息
+1：4G
+2：5G
+3：WIFI
+99：其他
+      */
+    Wireless?: number;
+}
+/**
+ * GetDevices请求参数结构体
+ */
+export interface GetDevicesRequest {
+    /**
+      * 每页显示记录数，PageSize、PageNumber值均为-1 时，按照1页无限制条数匹配所有设备
+      */
+    PageSize: number;
+    /**
+      * 当前查看页码，PageSize、PageNumber值均为-1 时，按照1页无限制条数匹配所有设备
+      */
+    PageNumber: number;
+    /**
+      * 搜索设备的关键字（ID或者设备名），为空时匹配所有设备
+      */
+    Keyword?: string;
+}
+/**
+ * AddDevice请求参数结构体
+ */
+export interface AddDeviceRequest {
+    /**
+      * 新建设备的名称
+      */
+    DeviceName: string;
+    /**
+      * 新建设备的备注
+      */
+    Remark?: string;
+    /**
+      * 新建设备的base64密钥字符串，非必选，如果不填写则由系统自动生成
+      */
+    DataKey?: string;
 }

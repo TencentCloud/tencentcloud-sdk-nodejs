@@ -1242,32 +1242,32 @@ export interface NewAccount {
  */
 export interface BackupFileInfo {
   /**
-   * 快照文件ID，用于回滚
+   * 快照文件ID，已废弃，请使用BackupId
    */
   SnapshotId: number
 
   /**
-   * 快照文件名
+   * 备份文件名
    */
   FileName: string
 
   /**
-   * 快照文件大小
+   * 备份文件大小
    */
   FileSize: number
 
   /**
-   * 快照备份开始时间
+   * 备份开始时间
    */
   StartTime: string
 
   /**
-   * 快照备份完成时间
+   * 备份完成时间
    */
   FinishTime: string
 
   /**
-   * 备份类型：snapshot，快照备份；timepoint，时间点备份
+   * 备份类型：snapshot，快照备份；logic，逻辑备份
    */
   BackupType: string
 
@@ -1285,6 +1285,24 @@ export interface BackupFileInfo {
    * 备份文件时间
    */
   SnapshotTime: string
+
+  /**
+      * 备份ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BackupId: number
+
+  /**
+      * 快照类型，可选值：full，全量；increment，增量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SnapShotType: string
+
+  /**
+      * 备份文件备注
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BackupName: string
 }
 
 /**
@@ -1332,20 +1350,60 @@ export interface DescribeBackupListRequest {
   ClusterId: string
 
   /**
-   * 备份文件列表偏移
+   * 备份文件列表大小，取值范围(0,100]
    */
-  Limit: number
+  Limit?: number
 
   /**
-   * 备份文件列表起始
+   * 备份文件列表偏移，取值范围[0,INF)
    */
-  Offset: number
+  Offset?: number
 
   /**
       * 数据库类型，取值范围: 
 <li> MYSQL </li>
       */
   DbType?: string
+
+  /**
+   * 备份ID
+   */
+  BackupIds?: Array<number>
+
+  /**
+   * 备份类型，可选值：snapshot，快照备份； logic，逻辑备份
+   */
+  BackupType?: string
+
+  /**
+   * 备份方式，可选值：auto，自动备份；manual，手动备
+   */
+  BackupMethod?: string
+
+  /**
+   * 快照类型，可选值：full，全量；increment，增量
+   */
+  SnapShotType?: string
+
+  /**
+   * 备份开始时间
+   */
+  StartTime?: string
+
+  /**
+   * 备份结束时间
+   */
+  EndTime?: string
+
+  /**
+   * 备份文件名，模糊查询
+   */
+  FileNames?: Array<string>
+
+  /**
+   * 备份备注名，模糊查询
+   */
+  BackupNames?: Array<string>
 }
 
 /**

@@ -2690,7 +2690,7 @@ export interface QueryOpenBankSubMerchantSignOnlineResult {
       * 处理状态
   SUCCESS：签约成功
   FAILED：签约失败
-  PROCESSING“签约中
+  PROCESSING：签约中
       */
   SignStatus: string
 
@@ -25553,7 +25553,7 @@ export interface ApplyOpenBankSubMerchantSignOnlineResult {
       * 处理状态
   SUCCESS：签约成功
   FAILED：签约失败
-  PROCESSING“签约中
+  PROCESSING：签约中
       */
   SignStatus: string
 

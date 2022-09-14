@@ -1188,6 +1188,16 @@ it("live.v20180801.CreatePullStreamConfig", async function () {
     }
 })
 
+it("live.v20180801.DescribeTranscodeTaskNum", async function () {
+    try {
+       const data = await client.DescribeTranscodeTaskNum({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("live.v20180801.DescribeLiveStreamPushInfoList", async function () {
     try {
        const data = await client.DescribeLiveStreamPushInfoList({})

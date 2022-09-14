@@ -18,9 +18,9 @@ const client = new tencentcloud.mna.v20210119.Client({
 })
 describe("mna.v20210119.test.js", function () {
 
-it("mna.v20210119.DeleteQos", async function () {
+it("mna.v20210119.GetStatisticData", async function () {
     try {
-       const data = await client.DeleteQos({})
+       const data = await client.GetStatisticData({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -28,9 +28,19 @@ it("mna.v20210119.DeleteQos", async function () {
     }
 })
 
-it("mna.v20210119.CreateQos", async function () {
+it("mna.v20210119.UpdateDevice", async function () {
     try {
-       const data = await client.CreateQos({})
+       const data = await client.UpdateDevice({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mna.v20210119.AddDevice", async function () {
+    try {
+       const data = await client.AddDevice({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -41,6 +51,56 @@ it("mna.v20210119.CreateQos", async function () {
 it("mna.v20210119.DescribeQos", async function () {
     try {
        const data = await client.DescribeQos({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mna.v20210119.GetDevices", async function () {
+    try {
+       const data = await client.GetDevices({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mna.v20210119.DeleteDevice", async function () {
+    try {
+       const data = await client.DeleteDevice({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mna.v20210119.DeleteQos", async function () {
+    try {
+       const data = await client.DeleteQos({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mna.v20210119.GetDevice", async function () {
+    try {
+       const data = await client.GetDevice({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mna.v20210119.CreateQos", async function () {
+    try {
+       const data = await client.CreateQos({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

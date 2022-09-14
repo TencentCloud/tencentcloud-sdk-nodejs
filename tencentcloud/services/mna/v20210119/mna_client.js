@@ -28,22 +28,58 @@ class Client extends abstract_client_1.AbstractClient {
         super("mna.tencentcloudapi.com", "2021-01-19", clientConfig);
     }
     /**
-     * 移动网络停止Qos加速过程
+     * 在用量统计页面下载流量数据
      */
-    async DeleteQos(req, cb) {
-        return this.request("DeleteQos", req, cb);
+    async GetStatisticData(req, cb) {
+        return this.request("GetStatisticData", req, cb);
     }
     /**
-     * 移动网络发起Qos加速过程
+     * 更新设备信息
      */
-    async CreateQos(req, cb) {
-        return this.request("CreateQos", req, cb);
+    async UpdateDevice(req, cb) {
+        return this.request("UpdateDevice", req, cb);
+    }
+    /**
+     * 新建设备记录
+     */
+    async AddDevice(req, cb) {
+        return this.request("AddDevice", req, cb);
     }
     /**
      * 获取Qos加速状态
      */
     async DescribeQos(req, cb) {
         return this.request("DescribeQos", req, cb);
+    }
+    /**
+     * 获取设备信息列表
+     */
+    async GetDevices(req, cb) {
+        return this.request("GetDevices", req, cb);
+    }
+    /**
+     * 删除设备信息
+     */
+    async DeleteDevice(req, cb) {
+        return this.request("DeleteDevice", req, cb);
+    }
+    /**
+     * 移动网络停止Qos加速过程
+     */
+    async DeleteQos(req, cb) {
+        return this.request("DeleteQos", req, cb);
+    }
+    /**
+     * 通过指定设备的ID查找设备详细信息
+     */
+    async GetDevice(req, cb) {
+        return this.request("GetDevice", req, cb);
+    }
+    /**
+     * 移动网络发起Qos加速过程
+     */
+    async CreateQos(req, cb) {
+        return this.request("CreateQos", req, cb);
     }
 }
 exports.Client = Client;

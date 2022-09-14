@@ -88,7 +88,7 @@ export declare class Client extends AbstractClient {
      */
     CreatePrefetchTask(req: CreatePrefetchTaskRequest, cb?: (error: string, rep: CreatePrefetchTaskResponse) => void): Promise<CreatePrefetchTaskResponse>;
     /**
-     * 查询七层监控类时序流量数据
+     * 本接口（DescribeOverviewL7Data）用于查询七层监控类时序流量数据。
      */
     DescribeOverviewL7Data(req: DescribeOverviewL7DataRequest, cb?: (error: string, rep: DescribeOverviewL7DataResponse) => void): Promise<DescribeOverviewL7DataResponse>;
     /**

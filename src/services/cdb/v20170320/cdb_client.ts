@@ -18,7 +18,6 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  SellType,
   TaskDetail,
   CdbZoneSellConf,
   CreateDBImportJobRequest,
@@ -77,7 +76,6 @@ import {
   UpgradeDBInstanceRequest,
   ModifyParamTemplateRequest,
   StartReplicationResponse,
-  ZoneSellConf,
   ModifyCDBProxyVipVPortRequest,
   DescribeBinlogBackupOverviewResponse,
   InitDBInstancesRequest,
@@ -102,7 +100,7 @@ import {
   ReleaseResult,
   ProxyGroups,
   AuditRule,
-  RegionSellConf,
+  DescribeBinlogsRequest,
   RollbackDBName,
   CreateAuditRuleResponse,
   DescribeDBInstanceInfoResponse,
@@ -120,7 +118,6 @@ import {
   DescribeDBInstanceGTIDResponse,
   DeleteParamTemplateRequest,
   DrInfo,
-  DescribeBinlogsRequest,
   ModifyBackupDownloadRestrictionRequest,
   CreateParamTemplateResponse,
   ModifyAccountPasswordResponse,
@@ -214,7 +211,6 @@ import {
   Inbound,
   CreateAccountsResponse,
   CreateDeployGroupResponse,
-  SellConfig,
   MasterInfo,
   ResetRootAccountResponse,
   ProxyNodeInfo,
@@ -290,7 +286,6 @@ import {
   DescribeDataBackupOverviewRequest,
   DescribeDBInstanceInfoRequest,
   BackupLimitVpcItem,
-  DescribeDBZoneConfigResponse,
   ModifyDBInstanceProjectRequest,
   SwitchForUpgradeResponse,
   DescribeCDBProxyRequest,
@@ -319,7 +314,6 @@ import {
   DescribeTasksResponse,
   DescribeAuditPoliciesResponse,
   IsolateDBInstanceResponse,
-  DescribeDBZoneConfigRequest,
   ModifyAccountDescriptionResponse,
   CommonTimeWindow,
   ModifyAccountMaxUserConnectionsRequest,
@@ -1270,16 +1264,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAsyncRequestInfoResponse) => void
   ): Promise<DescribeAsyncRequestInfoResponse> {
     return this.request("DescribeAsyncRequestInfo", req, cb)
-  }
-
-  /**
-   * 本接口(DescribeDBZoneConfig)用于查询可创建的云数据库各地域可售卖的规格配置。
-   */
-  async DescribeDBZoneConfig(
-    req?: DescribeDBZoneConfigRequest,
-    cb?: (error: string, rep: DescribeDBZoneConfigResponse) => void
-  ): Promise<DescribeDBZoneConfigResponse> {
-    return this.request("DescribeDBZoneConfig", req, cb)
   }
 
   /**

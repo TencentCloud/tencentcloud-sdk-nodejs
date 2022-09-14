@@ -566,12 +566,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAsyncRequestInfo", req, cb);
     }
     /**
-     * 本接口(DescribeDBZoneConfig)用于查询可创建的云数据库各地域可售卖的规格配置。
-     */
-    async DescribeDBZoneConfig(req, cb) {
-        return this.request("DescribeDBZoneConfig", req, cb);
-    }
-    /**
      * 本接口(DescribeDBInstanceRebootTime)用于查询云数据库实例重启预计所需的时间。
      */
     async DescribeDBInstanceRebootTime(req, cb) {

@@ -2657,6 +2657,12 @@ export interface TaskResponseInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   TotalTime: number
+
+  /**
+      * spark app job执行task的程序入口参数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CmdArgs: string
 }
 
 /**

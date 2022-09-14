@@ -1638,6 +1638,23 @@ URL中禁止包含的字符：
     Height?: number;
 }
 /**
+ * 转码任务数。
+ */
+export interface TranscodeTaskNum {
+    /**
+      * 时间点。
+      */
+    Time: string;
+    /**
+      * 码率。
+      */
+    CodeRate: number;
+    /**
+      * 任务数。
+      */
+    Num: number;
+}
+/**
  * 海外分区直播带宽出参国家带宽信息
  */
 export interface BillCountryInfo {
@@ -5076,6 +5093,19 @@ export interface ModifyLiveRecordTemplateRequest {
     FlvSpecialParam?: FlvSpecialParam;
 }
 /**
+ * DescribeTranscodeTaskNum返回参数结构体
+ */
+export interface DescribeTranscodeTaskNumResponse {
+    /**
+      * 任务数列表。
+      */
+    DataInfoList: Array<TranscodeTaskNum>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeAreaBillBandwidthAndFluxList返回参数结构体
  */
 export interface DescribeAreaBillBandwidthAndFluxListResponse {
@@ -6814,6 +6844,23 @@ export interface DescribePullStreamConfigsResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DescribeTranscodeTaskNum请求参数结构体
+ */
+export interface DescribeTranscodeTaskNumRequest {
+    /**
+      * 起始时间，格式：yyyy-mm-dd HH:MM:SS。
+      */
+    StartTime: string;
+    /**
+      * 结束时间，格式：yyyy-mm-dd HH:MM:SS。
+      */
+    EndTime: string;
+    /**
+      * 推流域名列表，不填表示总体数据。
+      */
+    PushDomains?: Array<string>;
 }
 /**
  * DescribeLiveCallbackRules返回参数结构体

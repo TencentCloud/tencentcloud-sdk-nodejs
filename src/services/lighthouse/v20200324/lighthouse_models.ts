@@ -1259,6 +1259,9 @@ export interface DescribeBlueprintsRequest {
 <li>blueprint-state</li>按照【镜像状态】进行过滤。
 类型：String
 必选：否
+<li>scene-id</li>按照【使用场景Id】进行过滤。
+类型：String
+必选：否
 
 每次请求的 Filters 的上限为 10，Filter.Values 的上限为 5。参数不支持同时指定 BlueprintIds 和 Filters 。
       */
@@ -2202,6 +2205,22 @@ export interface Blueprint {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ImageId: string
+
+  /**
+   * 官方网站Url。
+   */
+  CommunityUrl: string
+
+  /**
+   * 指导文章Url。
+   */
+  GuideUrl: string
+
+  /**
+      * 镜像关联使用场景Id列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SceneIdSet: Array<string>
 }
 
 /**

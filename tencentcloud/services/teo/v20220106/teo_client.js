@@ -148,7 +148,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreatePrefetchTask", req, cb);
     }
     /**
-     * 查询七层监控类时序流量数据
+     * 本接口（DescribeOverviewL7Data）用于查询七层监控类时序流量数据。
      */
     async DescribeOverviewL7Data(req, cb) {
         return this.request("DescribeOverviewL7Data", req, cb);

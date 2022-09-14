@@ -1,21 +1,4 @@
 /**
- * 售卖实例类型
- */
-export interface SellType {
-    /**
-      * 售卖实例名称
-      */
-    TypeName: string;
-    /**
-      * 内核版本号
-      */
-    EngineVersion: Array<string>;
-    /**
-      * 售卖规格详细配置
-      */
-    Configs: Array<SellConfig>;
-}
-/**
  * 实例任务详情
  */
 export interface TaskDetail {
@@ -425,27 +408,35 @@ export interface DescribeDataBackupOverviewResponse {
     /**
       * 当前地域的数据备份总容量（包含自动备份和手动备份，单位为字节）。
       */
-    DataBackupVolume?: number;
+    DataBackupVolume: number;
     /**
       * 当前地域的数据备份总个数。
       */
-    DataBackupCount?: number;
+    DataBackupCount: number;
     /**
       * 当前地域的自动备份总容量。
       */
-    AutoBackupVolume?: number;
+    AutoBackupVolume: number;
     /**
       * 当前地域的自动备份总个数。
       */
-    AutoBackupCount?: number;
+    AutoBackupCount: number;
     /**
       * 当前地域的手动备份总容量。
       */
-    ManualBackupVolume?: number;
+    ManualBackupVolume: number;
     /**
       * 当前地域的手动备份总个数。
       */
-    ManualBackupCount?: number;
+    ManualBackupCount: number;
+    /**
+      * 当前地域异地备份总容量。
+      */
+    RemoteBackupVolume: number;
+    /**
+      * 当前地域异地备份总个数。
+      */
+    RemoteBackupCount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1363,90 +1354,6 @@ export interface StartReplicationResponse {
     RequestId?: string;
 }
 /**
- * 可用区售卖配置
- */
-export interface ZoneSellConf {
-    /**
-      * 可用区状态。可能的返回值为：1-上线；3-停售；4-不展示
-      */
-    Status: number;
-    /**
-      * 可用区中文名称
-      */
-    ZoneName: string;
-    /**
-      * 实例类型是否为自定义类型
-      */
-    IsCustom: boolean;
-    /**
-      * 是否支持灾备
-      */
-    IsSupportDr: boolean;
-    /**
-      * 是否支持私有网络
-      */
-    IsSupportVpc: boolean;
-    /**
-      * 小时计费实例最大售卖数量
-      */
-    HourInstanceSaleMaxNum: number;
-    /**
-      * 是否为默认可用区
-      */
-    IsDefaultZone: boolean;
-    /**
-      * 是否为黑石区
-      */
-    IsBm: boolean;
-    /**
-      * 支持的付费类型。可能的返回值为：0-包年包月；1-小时计费；2-后付费
-      */
-    PayType: Array<string>;
-    /**
-      * 数据复制类型。0-异步复制；1-半同步复制；2-强同步复制
-      */
-    ProtectMode: Array<string>;
-    /**
-      * 可用区名称
-      */
-    Zone: string;
-    /**
-      * 售卖实例类型数组
-      */
-    SellType: Array<SellType>;
-    /**
-      * 多可用区信息
-      */
-    ZoneConf: ZoneConf;
-    /**
-      * 可支持的灾备可用区信息
-      */
-    DrZone: Array<string>;
-    /**
-      * 是否支持跨可用区只读
-      */
-    IsSupportRemoteRo: boolean;
-    /**
-      * 可支持的跨可用区只读区信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    RemoteRoZone: Array<string>;
-    /**
-      * 独享型可用区状态。可能的返回值为：1-上线；3-停售；4-不展示
-      */
-    ExClusterStatus: number;
-    /**
-      * 独享型可支持的跨可用区只读区信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ExClusterRemoteRoZone: Array<string>;
-    /**
-      * 独享型多可用区信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ExClusterZoneConf: ZoneConf;
-}
-/**
  * ModifyCDBProxyVipVPort请求参数结构体
  */
 export interface ModifyCDBProxyVipVPortRequest {
@@ -1480,13 +1387,21 @@ export interface ModifyCDBProxyVipVPortRequest {
  */
 export interface DescribeBinlogBackupOverviewResponse {
     /**
-      * 总的日志备份容量（单位为字节）。
+      * 总的日志备份容量，包含异地日志备份（单位为字节）。
       */
-    BinlogBackupVolume?: number;
+    BinlogBackupVolume: number;
     /**
-      * 总的日志备份个数。
+      * 总的日志备份个数，包含异地日志备份。
       */
-    BinlogBackupCount?: number;
+    BinlogBackupCount: number;
+    /**
+      * 异地日志备份容量（单位为字节）。
+      */
+    RemoteBinlogVolume: number;
+    /**
+      * 异地日志备份个数。
+      */
+    RemoteBinlogCount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1899,29 +1814,21 @@ export interface AuditRule {
     AuditAll: boolean;
 }
 /**
- * 地域售卖配置
+ * DescribeBinlogs请求参数结构体
  */
-export interface RegionSellConf {
+export interface DescribeBinlogsRequest {
     /**
-      * 地域中文名称
+      * 实例 ID，格式如：cdb-c1nl9rpv。与云数据库控制台页面中显示的实例 ID 相同。
       */
-    RegionName: string;
+    InstanceId: string;
     /**
-      * 所属大区
+      * 偏移量，最小值为0。
       */
-    Area: string;
+    Offset?: number;
     /**
-      * 是否为默认地域
+      * 分页大小，默认值为20，最小值为1，最大值为100。
       */
-    IsDefaultRegion: number;
-    /**
-      * 地域名称
-      */
-    Region: string;
-    /**
-      * 可用区售卖配置
-      */
-    ZonesConf: Array<ZoneSellConf>;
+    Limit?: number;
 }
 /**
  * 用于回档的数据库名
@@ -2275,23 +2182,6 @@ export interface DrInfo {
       * 实例类型
       */
     InstanceType: number;
-}
-/**
- * DescribeBinlogs请求参数结构体
- */
-export interface DescribeBinlogsRequest {
-    /**
-      * 实例 ID，格式如：cdb-c1nl9rpv。与云数据库控制台页面中显示的实例 ID 相同。
-      */
-    InstanceId: string;
-    /**
-      * 偏移量，最小值为0。
-      */
-    Offset?: number;
-    /**
-      * 分页大小，默认值为20，最小值为1，最大值为100。
-      */
-    Limit?: number;
 }
 /**
  * ModifyBackupDownloadRestriction请求参数结构体
@@ -4103,82 +3993,6 @@ export interface CreateDeployGroupResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
-}
-/**
- * 售卖配置详情
- */
-export interface SellConfig {
-    /**
-      * 设备类型（废弃）
-      */
-    Device?: string;
-    /**
-      * 售卖规格描述（废弃）
-      */
-    Type: string;
-    /**
-      * 实例类型（废弃）
-      */
-    CdbType: string;
-    /**
-      * 内存大小，单位为MB
-      */
-    Memory: number;
-    /**
-      * CPU核心数
-      */
-    Cpu: number;
-    /**
-      * 磁盘最小规格，单位为GB
-      */
-    VolumeMin: number;
-    /**
-      * 磁盘最大规格，单位为GB
-      */
-    VolumeMax: number;
-    /**
-      * 磁盘步长，单位为GB
-      */
-    VolumeStep: number;
-    /**
-      * 链接数
-      */
-    Connection: number;
-    /**
-      * 每秒查询数量
-      */
-    Qps: number;
-    /**
-      * 每秒IO数量
-      */
-    Iops: number;
-    /**
-      * 应用场景描述
-      */
-    Info: string;
-    /**
-      * 状态值，0 表示该规格对外售卖
-      */
-    Status: number;
-    /**
-      * 标签值（废弃）
-      */
-    Tag: number;
-    /**
-      * 实例类型，可能的取值范围有：UNIVERSAL (通用型), EXCLUSIVE (独享型), BASIC (基础型)
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    DeviceType: string;
-    /**
-      * 实例类型描述，可能的取值范围有：通用型， 独享型， 基础型
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    DeviceTypeName: string;
-    /**
-      * 引擎类型描述，可能的取值范围有：Innodb，RocksDB
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    EngineType: string;
 }
 /**
  * 主实例信息
@@ -5998,23 +5812,6 @@ export interface BackupLimitVpcItem {
     VpcList: Array<string>;
 }
 /**
- * DescribeDBZoneConfig返回参数结构体
- */
-export interface DescribeDBZoneConfigResponse {
-    /**
-      * 可售卖地域配置数量
-      */
-    TotalCount?: number;
-    /**
-      * 可售卖地域配置详情
-      */
-    Items?: Array<RegionSellConf>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
  * ModifyDBInstanceProject请求参数结构体
  */
 export interface ModifyDBInstanceProjectRequest {
@@ -6499,10 +6296,6 @@ export interface IsolateDBInstanceResponse {
       */
     RequestId?: string;
 }
-/**
- * DescribeDBZoneConfig请求参数结构体
- */
-export declare type DescribeDBZoneConfigRequest = null;
 /**
  * ModifyAccountDescription返回参数结构体
  */

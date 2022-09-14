@@ -18,19 +18,35 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  GetDeviceResponse,
   Capacity,
-  DescribeQosRequest,
   DestAddressInfo,
-  NetworkData,
-  SrcAddressInfo,
   DeleteQosRequest,
-  DeviceInfo,
+  DeviceNetInfo,
+  SrcAddressInfo,
+  UpdateNetInfo,
+  CreateQosResponse,
+  DescribeQosResponse,
+  DeleteDeviceRequest,
+  UpdateDeviceResponse,
+  DeviceDetails,
+  CreateQosRequest,
+  GetStatisticDataRequest,
+  UpdateDeviceRequest,
+  DeviceBaseInfo,
   ExpectedThreshold,
   DeleteQosResponse,
   Context,
-  CreateQosResponse,
-  DescribeQosResponse,
-  CreateQosRequest,
+  AddDeviceResponse,
+  GetDeviceRequest,
+  GetDevicesResponse,
+  DescribeQosRequest,
+  NetworkData,
+  DeleteDeviceResponse,
+  GetStatisticDataResponse,
+  DeviceInfo,
+  GetDevicesRequest,
+  AddDeviceRequest,
 } from "./mna_models"
 
 /**
@@ -40,6 +56,66 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("mna.tencentcloudapi.com", "2021-01-19", clientConfig)
+  }
+
+  /**
+   * 在用量统计页面下载流量数据
+   */
+  async GetStatisticData(
+    req: GetStatisticDataRequest,
+    cb?: (error: string, rep: GetStatisticDataResponse) => void
+  ): Promise<GetStatisticDataResponse> {
+    return this.request("GetStatisticData", req, cb)
+  }
+
+  /**
+   * 更新设备信息
+   */
+  async UpdateDevice(
+    req: UpdateDeviceRequest,
+    cb?: (error: string, rep: UpdateDeviceResponse) => void
+  ): Promise<UpdateDeviceResponse> {
+    return this.request("UpdateDevice", req, cb)
+  }
+
+  /**
+   * 新建设备记录
+   */
+  async AddDevice(
+    req: AddDeviceRequest,
+    cb?: (error: string, rep: AddDeviceResponse) => void
+  ): Promise<AddDeviceResponse> {
+    return this.request("AddDevice", req, cb)
+  }
+
+  /**
+   * 获取Qos加速状态
+   */
+  async DescribeQos(
+    req: DescribeQosRequest,
+    cb?: (error: string, rep: DescribeQosResponse) => void
+  ): Promise<DescribeQosResponse> {
+    return this.request("DescribeQos", req, cb)
+  }
+
+  /**
+   * 获取设备信息列表
+   */
+  async GetDevices(
+    req: GetDevicesRequest,
+    cb?: (error: string, rep: GetDevicesResponse) => void
+  ): Promise<GetDevicesResponse> {
+    return this.request("GetDevices", req, cb)
+  }
+
+  /**
+   * 删除设备信息
+   */
+  async DeleteDevice(
+    req: DeleteDeviceRequest,
+    cb?: (error: string, rep: DeleteDeviceResponse) => void
+  ): Promise<DeleteDeviceResponse> {
+    return this.request("DeleteDevice", req, cb)
   }
 
   /**
@@ -53,6 +129,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 通过指定设备的ID查找设备详细信息
+   */
+  async GetDevice(
+    req: GetDeviceRequest,
+    cb?: (error: string, rep: GetDeviceResponse) => void
+  ): Promise<GetDeviceResponse> {
+    return this.request("GetDevice", req, cb)
+  }
+
+  /**
    * 移动网络发起Qos加速过程
    */
   async CreateQos(
@@ -60,15 +146,5 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateQosResponse) => void
   ): Promise<CreateQosResponse> {
     return this.request("CreateQos", req, cb)
-  }
-
-  /**
-   * 获取Qos加速状态
-   */
-  async DescribeQos(
-    req: DescribeQosRequest,
-    cb?: (error: string, rep: DescribeQosResponse) => void
-  ): Promise<DescribeQosResponse> {
-    return this.request("DescribeQos", req, cb)
   }
 }

@@ -1215,6 +1215,91 @@ export interface DescribeCRWorkInfoResponse {
   IsProducer: number
 
   /**
+   * xxx
+   */
+  EvidenceStatus: number
+
+  /**
+   * xxx
+   */
+  WorkCategory: string
+
+  /**
+   * xxx
+   */
+  IsOriginal: string
+
+  /**
+   * xxx
+   */
+  IsRelease: string
+
+  /**
+   * xxx
+   */
+  ProducerName: string
+
+  /**
+   * xxx
+   */
+  ProduceTime: string
+
+  /**
+   * xxx
+   */
+  WhiteLists: Array<string>
+
+  /**
+   * xxx
+   */
+  WorkDesc: string
+
+  /**
+   * xxx
+   */
+  Authorization: string
+
+  /**
+   * xxx
+   */
+  AuthorizationStartTime: string
+
+  /**
+   * xxx
+   */
+  AuthorizationEndTime: string
+
+  /**
+   * xxx
+   */
+  Commission: string
+
+  /**
+   * xxx
+   */
+  CommissionStartTime: string
+
+  /**
+   * xxx
+   */
+  CommissionEndTime: string
+
+  /**
+   * xxx
+   */
+  EvidenceUrl: string
+
+  /**
+   * xxx
+   */
+  EvidenceStartTime: string
+
+  /**
+   * xxx
+   */
+  EvidenceEndTime: string
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
