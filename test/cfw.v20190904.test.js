@@ -128,16 +128,6 @@ it("cfw.v20190904.ModifyResourceGroup", async function () {
     }
 })
 
-it("cfw.v20190904.CreateSecurityGroupApiRules", async function () {
-    try {
-       const data = await client.CreateSecurityGroupApiRules({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("cfw.v20190904.DescribeResourceGroupNew", async function () {
     try {
        const data = await client.DescribeResourceGroupNew({})
@@ -268,19 +258,9 @@ it("cfw.v20190904.CreateAcRules", async function () {
     }
 })
 
-it("cfw.v20190904.ModifySecurityGroupAllRuleStatus", async function () {
+it("cfw.v20190904.DeleteNatFwInstance", async function () {
     try {
-       const data = await client.ModifySecurityGroupAllRuleStatus({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cfw.v20190904.DescribeAcLists", async function () {
-    try {
-       const data = await client.DescribeAcLists({})
+       const data = await client.DeleteNatFwInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -618,19 +598,9 @@ it("cfw.v20190904.ModifySecurityGroupItemRuleStatus", async function () {
     }
 })
 
-it("cfw.v20190904.ModifyAllSwitchStatus", async function () {
+it("cfw.v20190904.DescribeAcLists", async function () {
     try {
-       const data = await client.ModifyAllSwitchStatus({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cfw.v20190904.DeleteNatFwInstance", async function () {
-    try {
-       const data = await client.DeleteNatFwInstance({})
+       const data = await client.DescribeAcLists({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -641,16 +611,6 @@ it("cfw.v20190904.DeleteNatFwInstance", async function () {
 it("cfw.v20190904.ModifyPublicIPSwitchStatus", async function () {
     try {
        const data = await client.ModifyPublicIPSwitchStatus({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cfw.v20190904.DescribeSyncAssetStatus", async function () {
-    try {
-       const data = await client.DescribeSyncAssetStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -678,29 +638,9 @@ it("cfw.v20190904.DescribeBlockByIpTimesList", async function () {
     }
 })
 
-it("cfw.v20190904.DescribeAddrTemplateList", async function () {
-    try {
-       const data = await client.DescribeAddrTemplateList({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("cfw.v20190904.DescribeBlockStaticList", async function () {
     try {
        const data = await client.DescribeBlockStaticList({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cfw.v20190904.ModifyItemSwitchStatus", async function () {
-    try {
-       const data = await client.ModifyItemSwitchStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

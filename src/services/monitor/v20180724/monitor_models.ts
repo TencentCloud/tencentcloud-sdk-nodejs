@@ -1305,6 +1305,11 @@ export interface DescribeConditionsTemplateListRequest {
    * 指定按更新时间的排序方式，asc=升序, desc=降序
    */
   UpdateTimeOrder?: string
+
+  /**
+   * 指定按绑定策略数目的排序方式，asc=升序, desc=降序
+   */
+  PolicyCountOrder?: string
 }
 
 /**
@@ -4925,7 +4930,7 @@ export interface Condition {
   CalcValue: string
 
   /**
-      * 持续时间
+      * 持续时间，单位秒
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ContinueTime: string
@@ -4954,6 +4959,22 @@ export interface Condition {
    * 指标单位
    */
   Unit: string
+
+  /**
+   * 是否为高级指标，0：否；1：是
+   */
+  IsAdvanced: number
+
+  /**
+   * 是否开通高级指标，0：否；1：是
+   */
+  IsOpen: number
+
+  /**
+      * 产品ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProductId: string
 }
 
 /**

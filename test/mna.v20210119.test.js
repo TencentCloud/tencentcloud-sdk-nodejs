@@ -58,6 +58,16 @@ it("mna.v20210119.DescribeQos", async function () {
     }
 })
 
+it("mna.v20210119.GetFlowStatistic", async function () {
+    try {
+       const data = await client.GetFlowStatistic({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mna.v20210119.GetDevices", async function () {
     try {
        const data = await client.GetDevices({})

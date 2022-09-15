@@ -96,12 +96,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyResourceGroup", req, cb);
     }
     /**
-     * 创建安全组API规则
-     */
-    async CreateSecurityGroupApiRules(req, cb) {
-        return this.request("CreateSecurityGroupApiRules", req, cb);
-    }
-    /**
      * DescribeResourceGroupNew资产中心资产树信息
      */
     async DescribeResourceGroupNew(req, cb) {
@@ -180,16 +174,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateAcRules", req, cb);
     }
     /**
-     * 启用停用全部规则
+     * 销毁防火墙实例
      */
-    async ModifySecurityGroupAllRuleStatus(req, cb) {
-        return this.request("ModifySecurityGroupAllRuleStatus", req, cb);
-    }
-    /**
-     * 访问控制列表
-     */
-    async DescribeAcLists(req, cb) {
-        return this.request("DescribeAcLists", req, cb);
+    async DeleteNatFwInstance(req, cb) {
+        return this.request("DeleteNatFwInstance", req, cb);
     }
     /**
      * 创建企业安全组规则
@@ -397,28 +385,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifySecurityGroupItemRuleStatus", req, cb);
     }
     /**
-     * 一键开启和关闭
+     * 访问控制列表
      */
-    async ModifyAllSwitchStatus(req, cb) {
-        return this.request("ModifyAllSwitchStatus", req, cb);
-    }
-    /**
-     * 销毁防火墙实例
-     */
-    async DeleteNatFwInstance(req, cb) {
-        return this.request("DeleteNatFwInstance", req, cb);
+    async DescribeAcLists(req, cb) {
+        return this.request("DescribeAcLists", req, cb);
     }
     /**
      * 单个修改互联网边界防火墙开关
      */
     async ModifyPublicIPSwitchStatus(req, cb) {
         return this.request("ModifyPublicIPSwitchStatus", req, cb);
-    }
-    /**
-     * 同步资产状态查询-互联网&VPC
-     */
-    async DescribeSyncAssetStatus(req, cb) {
-        return this.request("DescribeSyncAssetStatus", req, cb);
     }
     /**
      * 防火墙垂直扩容
@@ -434,23 +410,11 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBlockByIpTimesList", req, cb);
     }
     /**
-     * 获取地址模板列表
-     */
-    async DescribeAddrTemplateList(req, cb) {
-        return this.request("DescribeAddrTemplateList", req, cb);
-    }
-    /**
      * DescribeBlockStaticList 告警中心柱形图
 
      */
     async DescribeBlockStaticList(req, cb) {
         return this.request("DescribeBlockStaticList", req, cb);
-    }
-    /**
-     * 修改单个防火墙开关
-     */
-    async ModifyItemSwitchStatus(req, cb) {
-        return this.request("ModifyItemSwitchStatus", req, cb);
     }
 }
 exports.Client = Client;

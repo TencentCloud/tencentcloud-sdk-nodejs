@@ -32,23 +32,21 @@ import {
   IPDefendStatus,
   SecurityGroupRule,
   ModifyNatFwVpcDnsSwitchRequest,
-  SecurityGroupApiRuleData,
   DeleteNatFwInstanceResponse,
   DeleteAllAccessControlRuleRequest,
   ModifySecurityGroupRuleRequest,
   ModifyAllVPCSwitchStatusResponse,
   VpcZoneData,
-  CreateSecurityGroupRulesResponse,
+  DatabaseWhiteListRuleData,
   DescribeNatFwVpcDnsLstRequest,
   DescribeCfwEipsRequest,
   DescribeTLogInfoResponse,
-  ModifyAllSwitchStatusRequest,
   DescribeUnHandleEventTabListRequest,
   DescribeAssociatedInstanceListResponse,
   AssociatedInstanceInfo,
   RemoveAcRuleResponse,
   NatFwInstance,
-  DeleteNatFwInstanceRequest,
+  CreateSecurityGroupRulesResponse,
   ExpandCfwVerticalRequest,
   ModifyAllPublicIPSwitchStatusResponse,
   DeleteVpcInstanceResponse,
@@ -56,45 +54,37 @@ import {
   ModifyBlockIgnoreListRequest,
   AddEnterpriseSecurityGroupRulesRequest,
   DeleteSecurityGroupRuleResponse,
-  ModifySecurityGroupAllRuleStatusRequest,
   ModifySequenceRulesRequest,
-  DescribeAddrTemplateListRequest,
   CreateNatFwInstanceRequest,
   ModifySecurityGroupItemRuleStatusResponse,
   DescribeEnterpriseSecurityGroupRuleResponse,
   VpcDnsInfo,
   DescribeEnterpriseSecurityGroupRuleRequest,
-  ModifyItemSwitchStatusResponse,
   ModifyNatFwReSelectResponse,
-  DeleteSecurityGroupRuleRequest,
+  DescribeSwitchListsRequest,
   SetNatFwEipRequest,
   SetNatFwEipResponse,
   AcListsData,
   ModifyPublicIPSwitchStatusRequest,
   SequenceData,
-  CreateSecurityGroupApiRulesResponse,
-  ModifySecurityGroupItemRuleStatusRequest,
   DescribeSourceAssetRequest,
   SecurityGroupOrderIndexData,
   DescribeSourceAssetResponse,
   DescribeTLogInfoRequest,
   DescribeSecurityGroupListResponse,
   AssetZone,
-  DescribeAddrTemplateListResponse,
   DescribeTLogIpListRequest,
   DescribeNatFwInstancesInfoRequest,
   DescribeTableStatusRequest,
   DescribeSecurityGroupListRequest,
   ModifyResourceGroupRequest,
   CreateNatFwInstanceResponse,
-  ModifyAllSwitchStatusResponse,
   NewModeItems,
   DescribeNatFwInfoCountResponse,
   DescribeDefenseSwitchRequest,
   SecurityGroupListData,
   CreateNatFwInstanceWithDomainResponse,
   RemoveAcRuleRequest,
-  DatabaseWhiteListRuleData,
   ModifyAllRuleStatusRequest,
   RuleInfoData,
   DescribeAcListsResponse,
@@ -116,7 +106,6 @@ import {
   DeleteResourceGroupRequest,
   DescribeBlockByIpTimesListRequest,
   RemoveEnterpriseSecurityGroupRuleResponse,
-  ModifyAllVPCSwitchStatusRequest,
   ModifySequenceRulesResponse,
   DescribeResourceGroupNewResponse,
   DescribeNatFwInstanceWithRegionResponse,
@@ -149,14 +138,13 @@ import {
   AddAcRuleResponse,
   ModifyNatFwReSelectRequest,
   SetNatFwDnatRuleRequest,
-  DescribeSyncAssetStatusResponse,
+  ModifyAllVPCSwitchStatusRequest,
   SecurityGroupBothWayInfo,
   ModifyAllRuleStatusResponse,
   StopSecurityGroupRuleDispatchRequest,
   DescribeGuideScanInfoRequest,
   ModifyBlockTopResponse,
-  TemplateListInfo,
-  CreateSecurityGroupApiRulesRequest,
+  DeleteNatFwInstanceRequest,
   DescribeNatFwVpcDnsLstResponse,
   CreateChooseVpcsRequest,
   ExpandCfwVerticalResponse,
@@ -167,12 +155,11 @@ import {
   SwitchListsData,
   CreateNatFwInstanceWithDomainRequest,
   DescribeSwitchListsResponse,
-  DescribeSyncAssetStatusRequest,
   DescribeCfwEipsResponse,
   ModifyResourceGroupResponse,
   DeleteResourceGroupResponse,
-  DescribeSwitchListsRequest,
-  ModifyItemSwitchStatusRequest,
+  DeleteSecurityGroupRuleRequest,
+  ModifySecurityGroupItemRuleStatusRequest,
   ModifyRunSyncAssetRequest,
   CreateAcRulesResponse,
   ModifyAssetScanResponse,
@@ -181,7 +168,6 @@ import {
   ModifyBlockIgnoreListResponse,
   DescribeNatFwInstanceResponse,
   ModifySecurityGroupRuleResponse,
-  ModifySecurityGroupAllRuleStatusResponse,
   DnsVpcSwitch,
   DescribeResourceGroupRequest,
   CreateAcRulesRequest,
@@ -309,16 +295,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyResourceGroupResponse) => void
   ): Promise<ModifyResourceGroupResponse> {
     return this.request("ModifyResourceGroup", req, cb)
-  }
-
-  /**
-   * 创建安全组API规则
-   */
-  async CreateSecurityGroupApiRules(
-    req: CreateSecurityGroupApiRulesRequest,
-    cb?: (error: string, rep: CreateSecurityGroupApiRulesResponse) => void
-  ): Promise<CreateSecurityGroupApiRulesResponse> {
-    return this.request("CreateSecurityGroupApiRules", req, cb)
   }
 
   /**
@@ -452,23 +428,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 启用停用全部规则
+   * 销毁防火墙实例
    */
-  async ModifySecurityGroupAllRuleStatus(
-    req: ModifySecurityGroupAllRuleStatusRequest,
-    cb?: (error: string, rep: ModifySecurityGroupAllRuleStatusResponse) => void
-  ): Promise<ModifySecurityGroupAllRuleStatusResponse> {
-    return this.request("ModifySecurityGroupAllRuleStatus", req, cb)
-  }
-
-  /**
-   * 访问控制列表
-   */
-  async DescribeAcLists(
-    req: DescribeAcListsRequest,
-    cb?: (error: string, rep: DescribeAcListsResponse) => void
-  ): Promise<DescribeAcListsResponse> {
-    return this.request("DescribeAcLists", req, cb)
+  async DeleteNatFwInstance(
+    req: DeleteNatFwInstanceRequest,
+    cb?: (error: string, rep: DeleteNatFwInstanceResponse) => void
+  ): Promise<DeleteNatFwInstanceResponse> {
+    return this.request("DeleteNatFwInstance", req, cb)
   }
 
   /**
@@ -809,23 +775,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 一键开启和关闭
+   * 访问控制列表
    */
-  async ModifyAllSwitchStatus(
-    req: ModifyAllSwitchStatusRequest,
-    cb?: (error: string, rep: ModifyAllSwitchStatusResponse) => void
-  ): Promise<ModifyAllSwitchStatusResponse> {
-    return this.request("ModifyAllSwitchStatus", req, cb)
-  }
-
-  /**
-   * 销毁防火墙实例
-   */
-  async DeleteNatFwInstance(
-    req: DeleteNatFwInstanceRequest,
-    cb?: (error: string, rep: DeleteNatFwInstanceResponse) => void
-  ): Promise<DeleteNatFwInstanceResponse> {
-    return this.request("DeleteNatFwInstance", req, cb)
+  async DescribeAcLists(
+    req: DescribeAcListsRequest,
+    cb?: (error: string, rep: DescribeAcListsResponse) => void
+  ): Promise<DescribeAcListsResponse> {
+    return this.request("DescribeAcLists", req, cb)
   }
 
   /**
@@ -836,16 +792,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyPublicIPSwitchStatusResponse) => void
   ): Promise<ModifyPublicIPSwitchStatusResponse> {
     return this.request("ModifyPublicIPSwitchStatus", req, cb)
-  }
-
-  /**
-   * 同步资产状态查询-互联网&VPC
-   */
-  async DescribeSyncAssetStatus(
-    req: DescribeSyncAssetStatusRequest,
-    cb?: (error: string, rep: DescribeSyncAssetStatusResponse) => void
-  ): Promise<DescribeSyncAssetStatusResponse> {
-    return this.request("DescribeSyncAssetStatus", req, cb)
   }
 
   /**
@@ -870,16 +816,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取地址模板列表
-   */
-  async DescribeAddrTemplateList(
-    req: DescribeAddrTemplateListRequest,
-    cb?: (error: string, rep: DescribeAddrTemplateListResponse) => void
-  ): Promise<DescribeAddrTemplateListResponse> {
-    return this.request("DescribeAddrTemplateList", req, cb)
-  }
-
-  /**
      * DescribeBlockStaticList 告警中心柱形图
 
      */
@@ -888,15 +824,5 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeBlockStaticListResponse) => void
   ): Promise<DescribeBlockStaticListResponse> {
     return this.request("DescribeBlockStaticList", req, cb)
-  }
-
-  /**
-   * 修改单个防火墙开关
-   */
-  async ModifyItemSwitchStatus(
-    req: ModifyItemSwitchStatusRequest,
-    cb?: (error: string, rep: ModifyItemSwitchStatusResponse) => void
-  ): Promise<ModifyItemSwitchStatusResponse> {
-    return this.request("ModifyItemSwitchStatus", req, cb)
   }
 }

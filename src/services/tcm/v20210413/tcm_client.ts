@@ -46,6 +46,7 @@ import {
   Filter,
   PrometheusConfig,
   ExtensiveCluster,
+  SmartDNSConfig,
   IstioConfig,
   CLS,
   TracingConfig,

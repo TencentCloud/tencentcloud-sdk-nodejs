@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { GetDeviceResponse, DeleteQosRequest, CreateQosResponse, DescribeQosResponse, DeleteDeviceRequest, UpdateDeviceResponse, CreateQosRequest, GetStatisticDataRequest, UpdateDeviceRequest, DeleteQosResponse, AddDeviceResponse, GetDeviceRequest, GetDevicesResponse, DescribeQosRequest, DeleteDeviceResponse, GetStatisticDataResponse, GetDevicesRequest, AddDeviceRequest } from "./mna_models";
+import { GetDeviceResponse, GetFlowStatisticResponse, GetFlowStatisticRequest, DeleteQosRequest, CreateQosResponse, DescribeQosResponse, DeleteDeviceRequest, UpdateDeviceResponse, CreateQosRequest, GetStatisticDataRequest, UpdateDeviceRequest, DeleteQosResponse, AddDeviceResponse, GetDeviceRequest, GetDevicesResponse, DescribeQosRequest, DeleteDeviceResponse, GetStatisticDataResponse, GetDevicesRequest, AddDeviceRequest } from "./mna_models";
 /**
  * mna client
  * @class
@@ -23,6 +23,10 @@ export declare class Client extends AbstractClient {
      * 获取Qos加速状态
      */
     DescribeQos(req: DescribeQosRequest, cb?: (error: string, rep: DescribeQosResponse) => void): Promise<DescribeQosResponse>;
+    /**
+     * 获取指定设备Id，指定时间点数据流量使用情况
+     */
+    GetFlowStatistic(req: GetFlowStatisticRequest, cb?: (error: string, rep: GetFlowStatisticResponse) => void): Promise<GetFlowStatisticResponse>;
     /**
      * 获取设备信息列表
      */

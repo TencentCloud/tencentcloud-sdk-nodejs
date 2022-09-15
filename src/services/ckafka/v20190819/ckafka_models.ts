@@ -6956,7 +6956,7 @@ export interface CreateInstancePreRequest {
   InstanceName: string
 
   /**
-   * 可用区
+   * 可用区，购买多可用区实例时，填写ZoneIds.N字段中的任意一个值
    */
   ZoneId: number
 
@@ -7037,7 +7037,7 @@ export interface CreateInstancePreRequest {
   MultiZoneFlag?: boolean
 
   /**
-   * 可用区列表
+   * 可用区列表，购买多可用区实例时为必填项
    */
   ZoneIds?: Array<number>
 }

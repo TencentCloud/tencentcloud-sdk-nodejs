@@ -377,6 +377,11 @@ export interface UpsertIpAccessControlRequest {
    * clb-waf或者sparta-waf
    */
   Edition?: string
+
+  /**
+   * 是否为多域名黑白名单
+   */
+  SourceType?: string
 }
 
 /**
@@ -871,6 +876,26 @@ export interface AddSpartaProtectionRequest {
    * src权重
    */
   Weights?: Array<number>
+
+  /**
+   * 是否开启主动健康检测，1表示开启，0表示不开启
+   */
+  ActiveCheck?: number
+
+  /**
+   * TLS版本信息
+   */
+  TLSVersion?: number
+
+  /**
+   * 加密套件信息
+   */
+  Ciphers?: Array<number>
+
+  /**
+   * 0:不支持选择：默认模版  1:通用型模版 2:安全型模版 3:自定义模版
+   */
+  CipherTemplate?: number
 }
 
 /**
@@ -956,6 +981,11 @@ export interface DeleteIpAccessControlRequest {
    * 删除对应的域名下的所有黑/白IP名额单
    */
   DeleteAll?: boolean
+
+  /**
+   * 是否为多域名黑白名单
+   */
+  SourceType?: string
 }
 
 /**
@@ -1594,6 +1624,12 @@ export interface InstanceInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   BotQPS?: BotQPS
+
+  /**
+      * qps弹性计费上限
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ElasticBilling?: number
 }
 
 /**

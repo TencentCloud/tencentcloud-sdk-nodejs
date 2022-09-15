@@ -468,56 +468,6 @@ export interface ModifyNatFwVpcDnsSwitchRequest {
 }
 
 /**
- * 添加安全组Api规则对象
- */
-export interface SecurityGroupApiRuleData {
-  /**
-   * 访问源，入站时为Ip/Cidr，默认为0.0.0.0/0； 出站时当RuleType为1时，支持内网Ip/Cidr, 当RuleType为2时，填实例ID
-   */
-  SourceId: string
-
-  /**
-   * 访问目的，出站时为Ip/Cidr，默认为0.0.0.0/0；入站时当RuleType为1时，支持内网Ip/Cidr, 当RuleType为2时，填实例ID
-   */
-  TargetId: string
-
-  /**
-   * 协议，支持ANY/TCP/UDP/ICMP
-   */
-  Protocol: string
-
-  /**
-   * 端口, 当Protocol为ANY或ICMP时，Port为-1/-1
-   */
-  Port: string
-
-  /**
-   * 策略, 1：阻断，2：放行
-   */
-  Strategy: string
-
-  /**
-   * 描述
-   */
-  Detail: string
-
-  /**
-   * 规则类型，1：VpcId+Ip/Cidr, 2: 实例ID，入站时为访问目的类型，出站时为访问源类型
-   */
-  RuleType: number
-
-  /**
-   * 执行顺序，中间插入必传，前插、后插非必传
-   */
-  OrderIndex?: number
-
-  /**
-   * 私有网络ID，当RuleType为1时必传
-   */
-  VpcId?: string
-}
-
-/**
  * DeleteNatFwInstance返回参数结构体
  */
 export interface DeleteNatFwInstanceResponse {
@@ -598,18 +548,73 @@ export interface VpcZoneData {
 }
 
 /**
- * CreateSecurityGroupRules返回参数结构体
+ * 数据库白名单规则数据
  */
-export interface CreateSecurityGroupRulesResponse {
+export interface DatabaseWhiteListRuleData {
   /**
-   * 状态值，0：添加成功，非0：添加失败
+   * 访问源
    */
-  Status: number
+  SourceIp: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 访问源类型，1 ip；6 实例；100 资源分组
    */
-  RequestId?: string
+  SourceType: number
+
+  /**
+   * 访问目的
+   */
+  TargetIp: string
+
+  /**
+   * 访问目的类型，1 ip；6 实例；100 资源分组
+   */
+  TargetType: number
+
+  /**
+   * 规则描述
+   */
+  Detail: string
+
+  /**
+   * 是否地域规则，0不是 1是
+   */
+  IsRegionRule: number
+
+  /**
+   * 是否云厂商规则，0不是 1 时
+   */
+  IsCloudRule: number
+
+  /**
+   * 是否启用，0 不启用，1启用
+   */
+  Enable: number
+
+  /**
+   * 地域码1
+   */
+  FirstLevelRegionCode?: number
+
+  /**
+   * 地域码2
+   */
+  SecondLevelRegionCode?: number
+
+  /**
+   * 地域名称1
+   */
+  FirstLevelRegionName?: string
+
+  /**
+   * 地域名称2
+   */
+  SecondLevelRegionName?: string
+
+  /**
+   * 云厂商码
+   */
+  CloudCode?: string
 }
 
 /**
@@ -670,36 +675,6 @@ export interface DescribeTLogInfoResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * ModifyAllSwitchStatus请求参数结构体
- */
-export interface ModifyAllSwitchStatusRequest {
-  /**
-   * 状态，0：关闭，1：开启
-   */
-  Status: number
-
-  /**
-   * 0: 互联网边界防火墙开关，1：vpc防火墙开关
-   */
-  Type?: number
-
-  /**
-   * 选中的防火墙开关Id
-   */
-  Ids?: Array<string>
-
-  /**
-   * NAT开关切换类型，1,单个子网，2，同开同关，3，全部
-   */
-  ChangeType?: number
-
-  /**
-   * NAT实例所在地域
-   */
-  Area?: string
 }
 
 /**
@@ -864,13 +839,18 @@ export interface NatFwInstance {
 }
 
 /**
- * DeleteNatFwInstance请求参数结构体
+ * CreateSecurityGroupRules返回参数结构体
  */
-export interface DeleteNatFwInstanceRequest {
+export interface CreateSecurityGroupRulesResponse {
   /**
-   * 防火墙实例id
+   * 状态值，0：添加成功，非0：添加失败
    */
-  CfwInstance: string
+  Status: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1037,31 +1017,6 @@ export interface DeleteSecurityGroupRuleResponse {
 }
 
 /**
- * ModifySecurityGroupAllRuleStatus请求参数结构体
- */
-export interface ModifySecurityGroupAllRuleStatusRequest {
-  /**
-   * 列表规则状态，0：全部停用，1：全部启用
-   */
-  Status: number
-
-  /**
-   * 方向，0：出站，1：入站
-   */
-  Direction?: number
-
-  /**
-   * Edge ID值
-   */
-  EdgeId?: string
-
-  /**
-   * NAT地域, 腾讯云地域的英文简写
-   */
-  Area?: string
-}
-
-/**
  * ModifySequenceRules请求参数结构体
  */
 export interface ModifySequenceRulesRequest {
@@ -1084,36 +1039,6 @@ export interface ModifySequenceRulesRequest {
    * 方向，0：出向，1：入向
    */
   Direction?: number
-}
-
-/**
- * DescribeAddrTemplateList请求参数结构体
- */
-export interface DescribeAddrTemplateListRequest {
-  /**
-   * 偏移量，分页用
-   */
-  Offset?: number
-
-  /**
-   * 条数，分页用
-   */
-  Limit?: number
-
-  /**
-   * 排序字段，取值 'UpdateTime' | 'RulesNum'
-   */
-  By?: string
-
-  /**
-   * 排序，取值 'asc'|'desc'
-   */
-  Order?: string
-
-  /**
-   * 搜索值
-   */
-  SearchValue?: string
 }
 
 /**
@@ -1332,21 +1257,6 @@ true为启用，false为不启用
 }
 
 /**
- * ModifyItemSwitchStatus返回参数结构体
- */
-export interface ModifyItemSwitchStatusResponse {
-  /**
-   * 修改成功与否状态值 0：修改成功，非 0：修改失败
-   */
-  Status?: number
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * ModifyNatFwReSelect返回参数结构体
  */
 export interface ModifyNatFwReSelectResponse {
@@ -1357,28 +1267,48 @@ export interface ModifyNatFwReSelectResponse {
 }
 
 /**
- * DeleteSecurityGroupRule请求参数结构体
+ * DescribeSwitchLists请求参数结构体
  */
-export interface DeleteSecurityGroupRuleRequest {
+export interface DescribeSwitchListsRequest {
   /**
-   * 所需要删除规则的ID
+   * 防火墙状态  0: 关闭，1：开启
    */
-  Id: number
+  Status?: number
 
   /**
-   * 腾讯云地域的英文简写
+   * 资产类型 CVM/NAT/VPN/CLB/其它
    */
-  Area: string
+  Type?: string
 
   /**
-   * 方向，0：出站，1：入站
+   * 地域 上海/重庆/广州，等等
    */
-  Direction: number
+  Area?: string
 
   /**
-   * 是否删除反向规则，0：否，1：是
+   * 搜索值  例子："{"common":"106.54.189.45"}"
    */
-  IsDelReverse?: number
+  SearchValue?: string
+
+  /**
+   * 条数  默认值:10
+   */
+  Limit?: number
+
+  /**
+   * 偏移值 默认值: 0
+   */
+  Offset?: number
+
+  /**
+   * 排序，desc：降序，asc：升序
+   */
+  Order?: string
+
+  /**
+   * 排序字段 PortTimes(风险端口数)
+   */
+  By?: string
 }
 
 /**
@@ -1506,41 +1436,6 @@ export interface SequenceData {
    * 修改后执行顺序
    */
   NewOrderIndex: number
-}
-
-/**
- * CreateSecurityGroupApiRules返回参数结构体
- */
-export interface CreateSecurityGroupApiRulesResponse {
-  /**
-   * 状态值，0:添加成功，非0：添加失败
-   */
-  Status: number
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * ModifySecurityGroupItemRuleStatus请求参数结构体
- */
-export interface ModifySecurityGroupItemRuleStatusRequest {
-  /**
-   * 方向，0：出站，1：入站，默认1
-   */
-  Direction: number
-
-  /**
-   * 是否开关开启，0：未开启，1：开启
-   */
-  Status: number
-
-  /**
-   * 更改的企业安全组规则的执行顺序
-   */
-  RuleSequence: number
 }
 
 /**
@@ -1690,31 +1585,6 @@ export interface AssetZone {
 }
 
 /**
- * DescribeAddrTemplateList返回参数结构体
- */
-export interface DescribeAddrTemplateListResponse {
-  /**
-   * 模板总数
-   */
-  Total: number
-
-  /**
-   * 模板列表数据
-   */
-  Data: Array<TemplateListInfo>
-
-  /**
-   * 模板名称列表
-   */
-  NameList: Array<string>
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DescribeTLogIpList请求参数结构体
  */
 export interface DescribeTLogIpListRequest {
@@ -1857,21 +1727,6 @@ export interface CreateNatFwInstanceResponse {
    * 防火墙实例id
    */
   CfwInsId: string
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * ModifyAllSwitchStatus返回参数结构体
- */
-export interface ModifyAllSwitchStatusResponse {
-  /**
-   * 修改成功与否的状态值 0：修改成功，非 0：修改失败
-   */
-  Status?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2090,76 +1945,6 @@ export interface RemoveAcRuleRequest {
    * 规则的uuid，可通过查询规则列表获取
    */
   RuleUuid: number
-}
-
-/**
- * 数据库白名单规则数据
- */
-export interface DatabaseWhiteListRuleData {
-  /**
-   * 访问源
-   */
-  SourceIp: string
-
-  /**
-   * 访问源类型，1 ip；6 实例；100 资源分组
-   */
-  SourceType: number
-
-  /**
-   * 访问目的
-   */
-  TargetIp: string
-
-  /**
-   * 访问目的类型，1 ip；6 实例；100 资源分组
-   */
-  TargetType: number
-
-  /**
-   * 规则描述
-   */
-  Detail: string
-
-  /**
-   * 是否地域规则，0不是 1是
-   */
-  IsRegionRule: number
-
-  /**
-   * 是否云厂商规则，0不是 1 时
-   */
-  IsCloudRule: number
-
-  /**
-   * 是否启用，0 不启用，1启用
-   */
-  Enable: number
-
-  /**
-   * 地域码1
-   */
-  FirstLevelRegionCode?: number
-
-  /**
-   * 地域码2
-   */
-  SecondLevelRegionCode?: number
-
-  /**
-   * 地域名称1
-   */
-  FirstLevelRegionName?: string
-
-  /**
-   * 地域名称2
-   */
-  SecondLevelRegionName?: string
-
-  /**
-   * 云厂商码
-   */
-  CloudCode?: string
 }
 
 /**
@@ -2653,21 +2438,6 @@ export interface RemoveEnterpriseSecurityGroupRuleResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * ModifyAllVPCSwitchStatus请求参数结构体
- */
-export interface ModifyAllVPCSwitchStatusRequest {
-  /**
-   * 状态，0：关闭，1：开启
-   */
-  Status: number
-
-  /**
-   * 选中的防火墙开关Id
-   */
-  FireWallVpcIds?: Array<string>
 }
 
 /**
@@ -3497,18 +3267,18 @@ export interface SetNatFwDnatRuleRequest {
 }
 
 /**
- * DescribeSyncAssetStatus返回参数结构体
+ * ModifyAllVPCSwitchStatus请求参数结构体
  */
-export interface DescribeSyncAssetStatusResponse {
+export interface ModifyAllVPCSwitchStatusRequest {
   /**
-   * 1-更新中 2-更新完成 3、4-更新失败
+   * 状态，0：关闭，1：开启
    */
-  Status?: number
+  Status: number
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 选中的防火墙开关Id
    */
-  RequestId?: string
+  FireWallVpcIds?: Array<string>
 }
 
 /**
@@ -3688,81 +3458,13 @@ export interface ModifyBlockTopResponse {
 }
 
 /**
- * 地址模版列表数据
+ * DeleteNatFwInstance请求参数结构体
  */
-export interface TemplateListInfo {
+export interface DeleteNatFwInstanceRequest {
   /**
-      * 模版ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Uuid: string
-
-  /**
-      * 模版名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Name: string
-
-  /**
-      * 描述
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Detail: string
-
-  /**
-      * IP模版
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  IpString: string
-
-  /**
-      * 插入时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  InsertTime: string
-
-  /**
-      * 修改时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  UpdateTime: string
-
-  /**
-      * 模版类型
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Type: number
-
-  /**
-      * 关联规则条数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  RulesNum: number
-}
-
-/**
- * CreateSecurityGroupApiRules请求参数结构体
- */
-export interface CreateSecurityGroupApiRulesRequest {
-  /**
-   * 创建规则数据
+   * 防火墙实例id
    */
-  Data: Array<SecurityGroupApiRuleData>
-
-  /**
-   * 方向，0：出站，1：入站
-   */
-  Direction: number
-
-  /**
-   * 插入类型，0：后插，1：前插，2：中插
-   */
-  Type?: number
-
-  /**
-   * 腾讯云地域的英文简写
-   */
-  Area?: string
+  CfwInstance: string
 }
 
 /**
@@ -4087,16 +3789,6 @@ export interface DescribeSwitchListsResponse {
 }
 
 /**
- * DescribeSyncAssetStatus请求参数结构体
- */
-export interface DescribeSyncAssetStatusRequest {
-  /**
-   * 0: 互联网防火墙开关，1：vpc 防火墙开关
-   */
-  Type?: number
-}
-
-/**
  * DescribeCfwEips返回参数结构体
  */
 export interface DescribeCfwEipsResponse {
@@ -4132,68 +3824,48 @@ export interface DeleteResourceGroupResponse {
 }
 
 /**
- * DescribeSwitchLists请求参数结构体
+ * DeleteSecurityGroupRule请求参数结构体
  */
-export interface DescribeSwitchListsRequest {
+export interface DeleteSecurityGroupRuleRequest {
   /**
-   * 防火墙状态  0: 关闭，1：开启
-   */
-  Status?: number
-
-  /**
-   * 资产类型 CVM/NAT/VPN/CLB/其它
-   */
-  Type?: string
-
-  /**
-   * 地域 上海/重庆/广州，等等
-   */
-  Area?: string
-
-  /**
-   * 搜索值  例子："{"common":"106.54.189.45"}"
-   */
-  SearchValue?: string
-
-  /**
-   * 条数  默认值:10
-   */
-  Limit?: number
-
-  /**
-   * 偏移值 默认值: 0
-   */
-  Offset?: number
-
-  /**
-   * 排序，desc：降序，asc：升序
-   */
-  Order?: string
-
-  /**
-   * 排序字段 PortTimes(风险端口数)
-   */
-  By?: string
-}
-
-/**
- * ModifyItemSwitchStatus请求参数结构体
- */
-export interface ModifyItemSwitchStatusRequest {
-  /**
-   * id值
+   * 所需要删除规则的ID
    */
   Id: number
 
   /**
-   * 状态值，0: 关闭 ,1:开启
+   * 腾讯云地域的英文简写
+   */
+  Area: string
+
+  /**
+   * 方向，0：出站，1：入站
+   */
+  Direction: number
+
+  /**
+   * 是否删除反向规则，0：否，1：是
+   */
+  IsDelReverse?: number
+}
+
+/**
+ * ModifySecurityGroupItemRuleStatus请求参数结构体
+ */
+export interface ModifySecurityGroupItemRuleStatusRequest {
+  /**
+   * 方向，0：出站，1：入站，默认1
+   */
+  Direction: number
+
+  /**
+   * 是否开关开启，0：未开启，1：开启
    */
   Status: number
 
   /**
-   * 0: 互联网边界边界防火墙开关，1：vpc防火墙开关
+   * 更改的企业安全组规则的执行顺序
    */
-  Type?: number
+  RuleSequence: number
 }
 
 /**
@@ -4349,22 +4021,6 @@ export interface ModifySecurityGroupRuleResponse {
    * 编辑后新生成规则的Id
    */
   NewRuleId: number
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * ModifySecurityGroupAllRuleStatus返回参数结构体
- */
-export interface ModifySecurityGroupAllRuleStatusResponse {
-  /**
-      * 0: 修改成功, 其他: 修改失败
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Status: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

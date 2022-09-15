@@ -3019,6 +3019,11 @@ export interface EditMediaOutputConfig {
    * 封装格式，可选值：mp4、hls、mov、flv、avi。默认是 mp4。
    */
   Container?: string
+
+  /**
+   * 剪辑模式，可选值 normal、fast。默认是精确剪辑 normal
+   */
+  Type?: string
 }
 
 /**

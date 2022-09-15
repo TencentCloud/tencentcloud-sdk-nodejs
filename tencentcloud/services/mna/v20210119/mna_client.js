@@ -52,6 +52,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeQos", req, cb);
     }
     /**
+     * 获取指定设备Id，指定时间点数据流量使用情况
+     */
+    async GetFlowStatistic(req, cb) {
+        return this.request("GetFlowStatistic", req, cb);
+    }
+    /**
      * 获取设备信息列表
      */
     async GetDevices(req, cb) {

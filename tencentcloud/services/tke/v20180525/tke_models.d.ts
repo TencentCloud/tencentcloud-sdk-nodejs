@@ -4372,6 +4372,10 @@ export interface UpdateTKEEdgeClusterRequest {
       * 边缘集群开启自动升配
       */
     AutoUpgradeClusterLevel?: boolean;
+    /**
+      * 边缘集群的集群规模
+      */
+    ClusterLevel?: string;
 }
 /**
  * DescribeTKEEdgeExternalKubeconfig返回参数结构体

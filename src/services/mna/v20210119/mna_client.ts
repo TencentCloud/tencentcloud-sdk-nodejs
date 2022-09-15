@@ -19,10 +19,13 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   GetDeviceResponse,
+  GetFlowStatisticResponse,
   Capacity,
+  GetFlowStatisticRequest,
   DestAddressInfo,
   DeleteQosRequest,
   DeviceNetInfo,
+  NetDetails,
   SrcAddressInfo,
   UpdateNetInfo,
   CreateQosResponse,
@@ -96,6 +99,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeQosResponse) => void
   ): Promise<DescribeQosResponse> {
     return this.request("DescribeQos", req, cb)
+  }
+
+  /**
+   * 获取指定设备Id，指定时间点数据流量使用情况
+   */
+  async GetFlowStatistic(
+    req: GetFlowStatisticRequest,
+    cb?: (error: string, rep: GetFlowStatisticResponse) => void
+  ): Promise<GetFlowStatisticResponse> {
+    return this.request("GetFlowStatistic", req, cb)
   }
 
   /**

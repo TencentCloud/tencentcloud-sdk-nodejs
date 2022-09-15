@@ -707,6 +707,23 @@ export interface ExtensiveCluster {
 }
 
 /**
+ * 智能DNS配置
+ */
+export interface SmartDNSConfig {
+  /**
+      * 开启DNS代理
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IstioMetaDNSCapture?: boolean
+
+  /**
+      * 开启自动地址分配
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IstioMetaDNSAutoAllocate?: boolean
+}
+
+/**
  * Istio配置
  */
 export interface IstioConfig {
@@ -725,6 +742,24 @@ export interface IstioConfig {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   DisablePolicyChecks?: boolean
+
+  /**
+      * 支持HTTP1.0协议
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EnablePilotHTTP?: boolean
+
+  /**
+      * 禁用HTTP重试策略
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DisableHTTPRetry?: boolean
+
+  /**
+      * SmartDNS策略
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SmartDNS?: SmartDNSConfig
 }
 
 /**
@@ -745,6 +780,11 @@ export interface CLS {
    * 日志主题
    */
   Topic?: string
+
+  /**
+   * 是否删除
+   */
+  NeedDelete?: boolean
 }
 
 /**

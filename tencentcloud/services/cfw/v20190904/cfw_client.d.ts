@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeVpcRuleOverviewResponse, DescribeNatFwInstanceRequest, ModifyNatFwVpcDnsSwitchResponse, DescribeNatFwInstanceWithRegionRequest, DescribeRuleOverviewResponse, ModifyPublicIPSwitchStatusResponse, ModifyAcRuleResponse, DescribeTableStatusResponse, AddAcRuleRequest, ModifyNatFwVpcDnsSwitchRequest, DeleteNatFwInstanceResponse, DeleteAllAccessControlRuleRequest, ModifySecurityGroupRuleRequest, ModifyAllVPCSwitchStatusResponse, CreateSecurityGroupRulesResponse, DescribeNatFwVpcDnsLstRequest, DescribeCfwEipsRequest, DescribeTLogInfoResponse, ModifyAllSwitchStatusRequest, DescribeUnHandleEventTabListRequest, DescribeAssociatedInstanceListResponse, RemoveAcRuleResponse, DeleteNatFwInstanceRequest, ExpandCfwVerticalRequest, ModifyAllPublicIPSwitchStatusResponse, DeleteVpcInstanceResponse, ModifyAssetScanRequest, ModifyBlockIgnoreListRequest, AddEnterpriseSecurityGroupRulesRequest, DeleteSecurityGroupRuleResponse, ModifySecurityGroupAllRuleStatusRequest, ModifySequenceRulesRequest, DescribeAddrTemplateListRequest, CreateNatFwInstanceRequest, ModifySecurityGroupItemRuleStatusResponse, DescribeEnterpriseSecurityGroupRuleResponse, DescribeEnterpriseSecurityGroupRuleRequest, ModifyItemSwitchStatusResponse, ModifyNatFwReSelectResponse, DeleteSecurityGroupRuleRequest, SetNatFwEipRequest, SetNatFwEipResponse, ModifyPublicIPSwitchStatusRequest, CreateSecurityGroupApiRulesResponse, ModifySecurityGroupItemRuleStatusRequest, DescribeSourceAssetRequest, DescribeSourceAssetResponse, DescribeTLogInfoRequest, DescribeSecurityGroupListResponse, DescribeAddrTemplateListResponse, DescribeTLogIpListRequest, DescribeNatFwInstancesInfoRequest, DescribeTableStatusRequest, DescribeSecurityGroupListRequest, ModifyResourceGroupRequest, CreateNatFwInstanceResponse, ModifyAllSwitchStatusResponse, DescribeNatFwInfoCountResponse, DescribeDefenseSwitchRequest, CreateNatFwInstanceWithDomainResponse, RemoveAcRuleRequest, ModifyAllRuleStatusRequest, DescribeAcListsResponse, ModifyAllPublicIPSwitchStatusRequest, DescribeBlockStaticListResponse, ModifySecurityGroupSequenceRulesRequest, CreateDatabaseWhiteListRulesResponse, CreateChooseVpcsResponse, DescribeUnHandleEventTabListResponse, ModifyRunSyncAssetResponse, ModifySecurityGroupSequenceRulesResponse, AddEnterpriseSecurityGroupRulesResponse, RemoveEnterpriseSecurityGroupRuleRequest, DeleteResourceGroupRequest, DescribeBlockByIpTimesListRequest, RemoveEnterpriseSecurityGroupRuleResponse, ModifyAllVPCSwitchStatusRequest, ModifySequenceRulesResponse, DescribeResourceGroupNewResponse, DescribeNatFwInstanceWithRegionResponse, DescribeResourceGroupNewRequest, ModifyBlockTopRequest, DeleteAcRuleResponse, DescribeIPStatusListRequest, ModifyNatFwSwitchResponse, DescribeBlockByIpTimesListResponse, SetNatFwDnatRuleResponse, DescribeRuleOverviewRequest, DescribeDefenseSwitchResponse, DescribeAcListsRequest, DescribeVpcRuleOverviewRequest, DescribeAssociatedInstanceListRequest, DeleteAcRuleRequest, DeleteAllAccessControlRuleResponse, ModifyNatFwSwitchRequest, DescribeIPStatusListResponse, CreateDatabaseWhiteListRulesRequest, DescribeResourceGroupResponse, DescribeTLogIpListResponse, StopSecurityGroupRuleDispatchResponse, DescribeNatFwInfoCountRequest, AddAcRuleResponse, ModifyNatFwReSelectRequest, SetNatFwDnatRuleRequest, DescribeSyncAssetStatusResponse, ModifyAllRuleStatusResponse, StopSecurityGroupRuleDispatchRequest, DescribeGuideScanInfoRequest, ModifyBlockTopResponse, CreateSecurityGroupApiRulesRequest, DescribeNatFwVpcDnsLstResponse, CreateChooseVpcsRequest, ExpandCfwVerticalResponse, DescribeBlockStaticListRequest, CreateSecurityGroupRulesRequest, DeleteVpcInstanceRequest, CreateNatFwInstanceWithDomainRequest, DescribeSwitchListsResponse, DescribeSyncAssetStatusRequest, DescribeCfwEipsResponse, ModifyResourceGroupResponse, DeleteResourceGroupResponse, DescribeSwitchListsRequest, ModifyItemSwitchStatusRequest, ModifyRunSyncAssetRequest, CreateAcRulesResponse, ModifyAssetScanResponse, ModifyAcRuleRequest, DescribeNatFwInstancesInfoResponse, ModifyBlockIgnoreListResponse, DescribeNatFwInstanceResponse, ModifySecurityGroupRuleResponse, ModifySecurityGroupAllRuleStatusResponse, DescribeResourceGroupRequest, CreateAcRulesRequest, ModifyTableStatusRequest, ModifyTableStatusResponse, DescribeGuideScanInfoResponse } from "./cfw_models";
+import { DescribeVpcRuleOverviewResponse, DescribeNatFwInstanceRequest, ModifyNatFwVpcDnsSwitchResponse, DescribeNatFwInstanceWithRegionRequest, DescribeRuleOverviewResponse, ModifyPublicIPSwitchStatusResponse, ModifyAcRuleResponse, DescribeTableStatusResponse, AddAcRuleRequest, ModifyNatFwVpcDnsSwitchRequest, DeleteNatFwInstanceResponse, DeleteAllAccessControlRuleRequest, ModifySecurityGroupRuleRequest, ModifyAllVPCSwitchStatusResponse, DescribeNatFwVpcDnsLstRequest, DescribeCfwEipsRequest, DescribeTLogInfoResponse, DescribeUnHandleEventTabListRequest, DescribeAssociatedInstanceListResponse, RemoveAcRuleResponse, CreateSecurityGroupRulesResponse, ExpandCfwVerticalRequest, ModifyAllPublicIPSwitchStatusResponse, DeleteVpcInstanceResponse, ModifyAssetScanRequest, ModifyBlockIgnoreListRequest, AddEnterpriseSecurityGroupRulesRequest, DeleteSecurityGroupRuleResponse, ModifySequenceRulesRequest, CreateNatFwInstanceRequest, ModifySecurityGroupItemRuleStatusResponse, DescribeEnterpriseSecurityGroupRuleResponse, DescribeEnterpriseSecurityGroupRuleRequest, ModifyNatFwReSelectResponse, DescribeSwitchListsRequest, SetNatFwEipRequest, SetNatFwEipResponse, ModifyPublicIPSwitchStatusRequest, DescribeSourceAssetRequest, DescribeSourceAssetResponse, DescribeTLogInfoRequest, DescribeSecurityGroupListResponse, DescribeTLogIpListRequest, DescribeNatFwInstancesInfoRequest, DescribeTableStatusRequest, DescribeSecurityGroupListRequest, ModifyResourceGroupRequest, CreateNatFwInstanceResponse, DescribeNatFwInfoCountResponse, DescribeDefenseSwitchRequest, CreateNatFwInstanceWithDomainResponse, RemoveAcRuleRequest, ModifyAllRuleStatusRequest, DescribeAcListsResponse, ModifyAllPublicIPSwitchStatusRequest, DescribeBlockStaticListResponse, ModifySecurityGroupSequenceRulesRequest, CreateDatabaseWhiteListRulesResponse, CreateChooseVpcsResponse, DescribeUnHandleEventTabListResponse, ModifyRunSyncAssetResponse, ModifySecurityGroupSequenceRulesResponse, AddEnterpriseSecurityGroupRulesResponse, RemoveEnterpriseSecurityGroupRuleRequest, DeleteResourceGroupRequest, DescribeBlockByIpTimesListRequest, RemoveEnterpriseSecurityGroupRuleResponse, ModifySequenceRulesResponse, DescribeResourceGroupNewResponse, DescribeNatFwInstanceWithRegionResponse, DescribeResourceGroupNewRequest, ModifyBlockTopRequest, DeleteAcRuleResponse, DescribeIPStatusListRequest, ModifyNatFwSwitchResponse, DescribeBlockByIpTimesListResponse, SetNatFwDnatRuleResponse, DescribeRuleOverviewRequest, DescribeDefenseSwitchResponse, DescribeAcListsRequest, DescribeVpcRuleOverviewRequest, DescribeAssociatedInstanceListRequest, DeleteAcRuleRequest, DeleteAllAccessControlRuleResponse, ModifyNatFwSwitchRequest, DescribeIPStatusListResponse, CreateDatabaseWhiteListRulesRequest, DescribeResourceGroupResponse, DescribeTLogIpListResponse, StopSecurityGroupRuleDispatchResponse, DescribeNatFwInfoCountRequest, AddAcRuleResponse, ModifyNatFwReSelectRequest, SetNatFwDnatRuleRequest, ModifyAllVPCSwitchStatusRequest, ModifyAllRuleStatusResponse, StopSecurityGroupRuleDispatchRequest, DescribeGuideScanInfoRequest, ModifyBlockTopResponse, DeleteNatFwInstanceRequest, DescribeNatFwVpcDnsLstResponse, CreateChooseVpcsRequest, ExpandCfwVerticalResponse, DescribeBlockStaticListRequest, CreateSecurityGroupRulesRequest, DeleteVpcInstanceRequest, CreateNatFwInstanceWithDomainRequest, DescribeSwitchListsResponse, DescribeCfwEipsResponse, ModifyResourceGroupResponse, DeleteResourceGroupResponse, DeleteSecurityGroupRuleRequest, ModifySecurityGroupItemRuleStatusRequest, ModifyRunSyncAssetRequest, CreateAcRulesResponse, ModifyAssetScanResponse, ModifyAcRuleRequest, DescribeNatFwInstancesInfoResponse, ModifyBlockIgnoreListResponse, DescribeNatFwInstanceResponse, ModifySecurityGroupRuleResponse, DescribeResourceGroupRequest, CreateAcRulesRequest, ModifyTableStatusRequest, ModifyTableStatusResponse, DescribeGuideScanInfoResponse } from "./cfw_models";
 /**
  * cfw client
  * @class
@@ -54,10 +54,6 @@ export declare class Client extends AbstractClient {
      */
     ModifyResourceGroup(req: ModifyResourceGroupRequest, cb?: (error: string, rep: ModifyResourceGroupResponse) => void): Promise<ModifyResourceGroupResponse>;
     /**
-     * 创建安全组API规则
-     */
-    CreateSecurityGroupApiRules(req: CreateSecurityGroupApiRulesRequest, cb?: (error: string, rep: CreateSecurityGroupApiRulesResponse) => void): Promise<CreateSecurityGroupApiRulesResponse>;
-    /**
      * DescribeResourceGroupNew资产中心资产树信息
      */
     DescribeResourceGroupNew(req: DescribeResourceGroupNewRequest, cb?: (error: string, rep: DescribeResourceGroupNewResponse) => void): Promise<DescribeResourceGroupNewResponse>;
@@ -110,13 +106,9 @@ export declare class Client extends AbstractClient {
      */
     CreateAcRules(req: CreateAcRulesRequest, cb?: (error: string, rep: CreateAcRulesResponse) => void): Promise<CreateAcRulesResponse>;
     /**
-     * 启用停用全部规则
+     * 销毁防火墙实例
      */
-    ModifySecurityGroupAllRuleStatus(req: ModifySecurityGroupAllRuleStatusRequest, cb?: (error: string, rep: ModifySecurityGroupAllRuleStatusResponse) => void): Promise<ModifySecurityGroupAllRuleStatusResponse>;
-    /**
-     * 访问控制列表
-     */
-    DescribeAcLists(req: DescribeAcListsRequest, cb?: (error: string, rep: DescribeAcListsResponse) => void): Promise<DescribeAcListsResponse>;
+    DeleteNatFwInstance(req: DeleteNatFwInstanceRequest, cb?: (error: string, rep: DeleteNatFwInstanceResponse) => void): Promise<DeleteNatFwInstanceResponse>;
     /**
      * 创建企业安全组规则
      */
@@ -257,21 +249,13 @@ export declare class Client extends AbstractClient {
      */
     ModifySecurityGroupItemRuleStatus(req: ModifySecurityGroupItemRuleStatusRequest, cb?: (error: string, rep: ModifySecurityGroupItemRuleStatusResponse) => void): Promise<ModifySecurityGroupItemRuleStatusResponse>;
     /**
-     * 一键开启和关闭
+     * 访问控制列表
      */
-    ModifyAllSwitchStatus(req: ModifyAllSwitchStatusRequest, cb?: (error: string, rep: ModifyAllSwitchStatusResponse) => void): Promise<ModifyAllSwitchStatusResponse>;
-    /**
-     * 销毁防火墙实例
-     */
-    DeleteNatFwInstance(req: DeleteNatFwInstanceRequest, cb?: (error: string, rep: DeleteNatFwInstanceResponse) => void): Promise<DeleteNatFwInstanceResponse>;
+    DescribeAcLists(req: DescribeAcListsRequest, cb?: (error: string, rep: DescribeAcListsResponse) => void): Promise<DescribeAcListsResponse>;
     /**
      * 单个修改互联网边界防火墙开关
      */
     ModifyPublicIPSwitchStatus(req: ModifyPublicIPSwitchStatusRequest, cb?: (error: string, rep: ModifyPublicIPSwitchStatusResponse) => void): Promise<ModifyPublicIPSwitchStatusResponse>;
-    /**
-     * 同步资产状态查询-互联网&VPC
-     */
-    DescribeSyncAssetStatus(req: DescribeSyncAssetStatusRequest, cb?: (error: string, rep: DescribeSyncAssetStatusResponse) => void): Promise<DescribeSyncAssetStatusResponse>;
     /**
      * 防火墙垂直扩容
      */
@@ -282,16 +266,8 @@ export declare class Client extends AbstractClient {
      */
     DescribeBlockByIpTimesList(req: DescribeBlockByIpTimesListRequest, cb?: (error: string, rep: DescribeBlockByIpTimesListResponse) => void): Promise<DescribeBlockByIpTimesListResponse>;
     /**
-     * 获取地址模板列表
-     */
-    DescribeAddrTemplateList(req: DescribeAddrTemplateListRequest, cb?: (error: string, rep: DescribeAddrTemplateListResponse) => void): Promise<DescribeAddrTemplateListResponse>;
-    /**
      * DescribeBlockStaticList 告警中心柱形图
 
      */
     DescribeBlockStaticList(req: DescribeBlockStaticListRequest, cb?: (error: string, rep: DescribeBlockStaticListResponse) => void): Promise<DescribeBlockStaticListResponse>;
-    /**
-     * 修改单个防火墙开关
-     */
-    ModifyItemSwitchStatus(req: ModifyItemSwitchStatusRequest, cb?: (error: string, rep: ModifyItemSwitchStatusResponse) => void): Promise<ModifyItemSwitchStatusResponse>;
 }

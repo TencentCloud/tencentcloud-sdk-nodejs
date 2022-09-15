@@ -31,6 +31,36 @@ export interface GetDeviceResponse {
 }
 
 /**
+ * GetFlowStatistic返回参数结构体
+ */
+export interface GetFlowStatisticResponse {
+  /**
+   * 流量详细信息
+   */
+  NetDetails: Array<NetDetails>
+
+  /**
+   * 查找时间段流量使用最大值（单位：bit）
+   */
+  MaxValue: number
+
+  /**
+   * 查找时间段流量使用平均值（单位：bit）
+   */
+  AvgValue: number
+
+  /**
+   * 查找时间段流量使用总量（单位：bit）
+   */
+  TotalValue: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 接口能力扩展，用于填充电信的加速Token，并为未来参数提供兼容空间
  */
 export interface Capacity {
@@ -43,6 +73,36 @@ export interface Capacity {
    * 终端所处在的省份，建议不填写由服务端自动获取，若需填写请填写带有省、市、自治区、特别行政区等后缀的省份中文全称
    */
   Province?: string
+}
+
+/**
+ * GetFlowStatistic请求参数结构体
+ */
+export interface GetFlowStatisticRequest {
+  /**
+   * 设备ID，ID="-1"时默认查找所有设备
+   */
+  DeviceId: string
+
+  /**
+   * 开始查找时间
+   */
+  BeginTime: number
+
+  /**
+   * 截止时间
+   */
+  EndTime: number
+
+  /**
+   * 流量种类（1：上行流量，2：下行流量）
+   */
+  Type: number
+
+  /**
+   * 时间粒度（1：按小时统计，2：按天统计）
+   */
+  TimeGranularity: number
 }
 
 /**
@@ -154,6 +214,21 @@ export interface DeviceNetInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   NetInfoName: string
+}
+
+/**
+ * 网络详细信息
+ */
+export interface NetDetails {
+  /**
+   * 时间点，单位：s
+   */
+  Time: string
+
+  /**
+   * 流量值（bit）
+   */
+  Current: number
 }
 
 /**
