@@ -35,6 +35,7 @@ import {
   SignQrCode,
   CreateFlowApproversResponse,
   DescribeFlowInfoRequest,
+  RegisterInfo,
   CancelFlowRequest,
   DescribeFlowBriefsResponse,
   Component,

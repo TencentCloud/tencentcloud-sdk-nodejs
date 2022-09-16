@@ -16,6 +16,25 @@
  */
 
 /**
+ * 节拍信息。
+ */
+export interface KTVBPMInfo {
+  /**
+      * 节拍类型，取值有：
+<li>Slow：慢；</li>
+<li>Middle：中等；</li>
+<li>Fast：快；</li>
+<li>Unknown：未知。</li>
+      */
+  Type: string
+
+  /**
+   * BPM 值。
+   */
+  Value: number
+}
+
+/**
  * DescribeKTVSuggestions返回参数结构体
  */
 export interface DescribeKTVSuggestionsResponse {
@@ -31,18 +50,18 @@ export interface DescribeKTVSuggestionsResponse {
 }
 
 /**
- * 副歌片段信息。
+ * 歌曲信息匹配。
  */
-export interface ChorusClip {
+export interface KTVMatchRuleMusicInfo {
   /**
-   * 开始时间，单位：毫秒。
+   * 歌曲名称。
    */
-  StartTime: number
+  MusicName: string
 
   /**
-   * 结束时间，单位：毫秒。
+   * 歌手列表。
    */
-  EndTime: number
+  SingerSet: Array<string>
 }
 
 /**
@@ -389,13 +408,23 @@ export interface DescribeKTVRobotsResponse {
 }
 
 /**
- * 播放指令输入参数
+ * 标签分组信息。
  */
-export interface PlayCommandInput {
+export interface KTVTagGroupInfo {
   /**
-   * 歌曲位置索引。
+   * 分组 Id。
    */
-  Index: number
+  GroupId: string
+
+  /**
+   * 分组名。
+   */
+  Name: string
+
+  /**
+   * 标签列表。
+   */
+  TagInfoSet: Array<KTVTagInfo>
 }
 
 /**
@@ -456,6 +485,47 @@ export interface KTVMusicDetailInfo {
    * 歌曲流派列表。
    */
   GenreSet: Array<string>
+
+  /**
+      * 节拍信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BPMInfo: KTVBPMInfo
+}
+
+/**
+ * DescribeKTVMusicsByTag返回参数结构体
+ */
+export interface DescribeKTVMusicsByTagResponse {
+  /**
+   * 歌曲信息列表。
+   */
+  KTVMusicInfoSet: Array<KTVMusicBaseInfo>
+
+  /**
+   * 滚动标记，用于设置下次请求的 ScrollToken 参数。
+   */
+  ScrollToken: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 标签信息。
+ */
+export interface KTVTagInfo {
+  /**
+   * 标签 Id。
+   */
+  TagId: string
+
+  /**
+   * 标签名称。
+   */
+  Name: string
 }
 
 /**
@@ -641,18 +711,33 @@ export interface DescribeKTVMatchMusicsResponse {
 }
 
 /**
- * 歌曲信息匹配。
+ * DescribeKTVTags返回参数结构体
  */
-export interface KTVMatchRuleMusicInfo {
+export interface DescribeKTVTagsResponse {
   /**
-   * 歌曲名称。
+   * 标签分组列表。
    */
-  MusicName: string
+  TagGroupInfoSet: Array<KTVTagGroupInfo>
 
   /**
-   * 歌手列表。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  SingerSet: Array<string>
+  RequestId?: string
+}
+
+/**
+ * 副歌片段信息。
+ */
+export interface ChorusClip {
+  /**
+   * 开始时间，单位：毫秒。
+   */
+  StartTime: number
+
+  /**
+   * 结束时间，单位：毫秒。
+   */
+  EndTime: number
 }
 
 /**
@@ -784,6 +869,43 @@ export interface KTVMusicBaseInfo {
 }
 
 /**
+ * DescribeKTVMusicsByTag请求参数结构体
+ */
+export interface DescribeKTVMusicsByTagRequest {
+  /**
+   * 应用名称。
+   */
+  AppName: string
+
+  /**
+   * 用户标识。
+   */
+  UserId: string
+
+  /**
+   * 标签 Id。
+   */
+  TagId: string
+
+  /**
+   * 滚动标记。
+   */
+  ScrollToken?: string
+
+  /**
+   * 返回条数限制，默认 20，最大 50。
+   */
+  Limit?: number
+
+  /**
+      * 权益过滤，取值有：
+<li>Play：可播；</li>
+<li>Sing：可唱。</li>
+      */
+  RightFilters?: Array<string>
+}
+
+/**
  * SearchKTVMusics请求参数结构体
  */
 export interface SearchKTVMusicsRequest {
@@ -818,6 +940,16 @@ export interface SearchKTVMusicsRequest {
 <li>Sing：可唱。</li>
       */
   RightFilters?: Array<string>
+}
+
+/**
+ * 播放指令输入参数
+ */
+export interface PlayCommandInput {
+  /**
+   * 歌曲位置索引。
+   */
+  Index: number
 }
 
 /**
@@ -929,6 +1061,21 @@ export interface DescribeKTVRobotsRequest {
    * 分页返回的起始偏移量，默认值：10。
    */
   Limit?: number
+}
+
+/**
+ * DescribeKTVTags请求参数结构体
+ */
+export interface DescribeKTVTagsRequest {
+  /**
+   * 应用名称。
+   */
+  AppName: string
+
+  /**
+   * 用户标识。
+   */
+  UserId: string
 }
 
 /**

@@ -108,9 +108,9 @@ it("live.v20180801.DescribeLiveStreamEventList", async function () {
     }
 })
 
-it("live.v20180801.DescribePullStreamConfigs", async function () {
+it("live.v20180801.CreateCommonMixStream", async function () {
     try {
-       const data = await client.DescribePullStreamConfigs({})
+       const data = await client.CreateCommonMixStream({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -221,6 +221,16 @@ it("live.v20180801.CreateScreenshotTask", async function () {
 it("live.v20180801.DescribeLiveRecordTemplates", async function () {
     try {
        const data = await client.DescribeLiveRecordTemplates({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("live.v20180801.AuthenticateDomainOwner", async function () {
+    try {
+       const data = await client.AuthenticateDomainOwner({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -378,9 +388,9 @@ it("live.v20180801.StopScreenshotTask", async function () {
     }
 })
 
-it("live.v20180801.CreateCommonMixStream", async function () {
+it("live.v20180801.DescribePullStreamConfigs", async function () {
     try {
-       const data = await client.CreateCommonMixStream({})
+       const data = await client.DescribePullStreamConfigs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -215,6 +215,12 @@ export interface LogstashInstanceInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ExtendedFiles: Array<LogstashExtendedFile>
+
+  /**
+      * 可维护时间段
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OperationDuration: OperationDuration
 }
 
 /**
@@ -1080,6 +1086,11 @@ export interface UpdateLogstashInstanceRequest {
    * 节点磁盘容量
    */
   DiskSize?: number
+
+  /**
+   * 可维护时间段
+   */
+  OperationDuration?: OperationDurationUpdated
 }
 
 /**
@@ -2092,6 +2103,11 @@ export interface CreateLogstashInstanceRequest {
    * 标签信息列表
    */
   TagList?: Array<TagInfo>
+
+  /**
+   * 可维护时间段
+   */
+  OperationDuration?: OperationDuration
 }
 
 /**

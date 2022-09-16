@@ -484,6 +484,21 @@ export interface DescribeFlowInfoRequest {
 }
 
 /**
+ * 发起流程快速注册相关信息
+ */
+export interface RegisterInfo {
+  /**
+   * 法人姓名
+   */
+  LegalName: string
+
+  /**
+   * 社会统一信用代码
+   */
+  Uscc: string
+}
+
+/**
  * CancelFlow请求参数结构体
  */
 export interface CancelFlowRequest {
@@ -678,7 +693,7 @@ export interface FlowCreateApprover {
 0：企业
 1：个人
 3：企业静默签署
-注：类型为3（企业静默签署）时，此接口会默认完成该签署方的签署。
+注：类型为3（企业静默签署）时，此接口会默认完成该签署方的签署。静默签署仅进行盖章操作，不能自动签名。
       */
   ApproverType: number
 
@@ -753,6 +768,11 @@ HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证(格式同居民身份证)
    * 客户自定义签署人标识，64位长度，保证唯一。非企微场景不使用此字段
    */
   CustomApproverTag?: string
+
+  /**
+   * 快速注册相关信息，目前暂未开放！
+   */
+  RegisterInfo?: RegisterInfo
 }
 
 /**
@@ -849,12 +869,16 @@ export interface FlowDetailInfo {
  */
 export interface CreateFlowByFilesResponse {
   /**
-   * 签署流程编号
-   */
+      * 签署流程编号。
+
+注：如入参 是否需要预览 NeedPreview 设置为 true，不会正式发起合同，此处不会有值返回；如入参 是否需要预览 NeedPreview 设置为 false，此处会正常返回签署流程编号 FlowId。
+      */
   FlowId: string
 
   /**
-      * 合同预览链接
+      * 合同预览链接。
+
+注：如入参 是否需要预览 NeedPreview 设置为 true，会开启“预览模式”，此处会返回预览链接；如入参 是否需要预览 NeedPreview 设置为 false，此处不会有值返回。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   PreviewUrl: string
@@ -1131,7 +1155,7 @@ export interface ApproverInfo {
 0：企业
 1：个人
 3：企业静默签署
-注：类型为3（企业静默签署）时，此接口会默认完成该签署方的签署。
+注：类型为3（企业静默签署）时，此接口会默认完成该签署方的签署。静默签署仅进行盖章操作，不能自动签名。
       */
   ApproverType: number
 
@@ -1634,6 +1658,8 @@ export interface CreateFlowByFilesRequest {
   /**
       * 是否需要预览，true：预览模式，false：非预览（默认）；
 预览链接有效期300秒；
+
+注：如果使用“预览模式”，出参会返回合同预览链接 PreviewUrl，不会正式发起合同，且出参不会返回签署流程编号 FlowId；如果使用“非预览”，则会正常返回签署流程编号 FlowId，不会生成合同预览链接 PreviewUrl。
       */
   NeedPreview?: boolean
 
@@ -1662,8 +1688,8 @@ false：有序签
   CustomShowMap?: string
 
   /**
-      * 发起方企业的签署人进行签署操作是否需要企业内部审批。
-若设置为true,审核结果需通过接口 CreateFlowSignReview 通知电子签，审核通过后，发起方企业签署人方可进行签署操作，否则会阻塞其签署操作。
+      * 发起方企业的签署人进行签署操作是否需要企业内部审批。使用此功能需要发起方企业有参与签署。
+若设置为true，审核结果需通过接口 CreateFlowSignReview 通知电子签，审核通过后，发起方企业签署人方可进行签署操作，否则会阻塞其签署操作。
 
 注：企业可以通过此功能与企业内部的审批流程进行关联，支持手动、静默签署合同。
       */

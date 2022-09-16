@@ -308,18 +308,52 @@ export interface ResumeDelayLiveStreamRequest {
 }
 
 /**
- * DescribeLiveWatermarkRules返回参数结构体
+ * DescribeLiveStreamPublishedList请求参数结构体
  */
-export interface DescribeLiveWatermarkRulesResponse {
+export interface DescribeLiveStreamPublishedListRequest {
   /**
-   * 水印规则列表。
+   * 您的推流域名。
    */
-  Rules: Array<RuleInfo>
+  DomainName: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 结束时间。
+UTC 格式，例如：2016-06-30T19:00:00Z。
+不超过当前时间。
+注意：EndTime和StartTime相差不可超过30天。
+      */
+  EndTime: string
+
+  /**
+      * 起始时间。 
+UTC 格式，例如：2016-06-29T19:00:00Z。
+最长支持查询60天内数据。
+      */
+  StartTime: string
+
+  /**
+   * 推流路径，与推流和播放地址中的 AppName 保持一致，默认为 live。不支持模糊匹配。
    */
-  RequestId?: string
+  AppName?: string
+
+  /**
+      * 取得第几页。
+默认值：1。
+      */
+  PageNum?: number
+
+  /**
+      * 分页大小。
+最大值：100。
+取值范围：10~100 之前的任意整数。
+默认值：10。
+      */
+  PageSize?: number
+
+  /**
+   * 流名称，支持模糊匹配。
+   */
+  StreamName?: string
 }
 
 /**
@@ -1483,52 +1517,33 @@ export interface DescribeLiveDomainRequest {
 }
 
 /**
- * DescribeLiveStreamPublishedList请求参数结构体
+ * AuthenticateDomainOwner返回参数结构体
  */
-export interface DescribeLiveStreamPublishedListRequest {
+export interface AuthenticateDomainOwnerResponse {
   /**
-   * 您的推流域名。
+      * 验证内容。
+VerifyType 传 dnsCheck 时，为要配的 TXT 记录值。
+VerifyType 传 fileCheck 时，为文件内容。
+      */
+  Content: string
+
+  /**
+      * 域名验证状态。
+>=0 为已验证归属。
+<0 未验证归属权。
+      */
+  Status: number
+
+  /**
+      * DomainName 对应的主域名。
+同一主域名下的所有域名只需成功验证一次，后续均无需再验证。
+      */
+  MainDomain: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  DomainName: string
-
-  /**
-      * 结束时间。
-UTC 格式，例如：2016-06-30T19:00:00Z。
-不超过当前时间。
-注意：EndTime和StartTime相差不可超过30天。
-      */
-  EndTime: string
-
-  /**
-      * 起始时间。 
-UTC 格式，例如：2016-06-29T19:00:00Z。
-最长支持查询60天内数据。
-      */
-  StartTime: string
-
-  /**
-   * 推流路径，与推流和播放地址中的 AppName 保持一致，默认为 live。不支持模糊匹配。
-   */
-  AppName?: string
-
-  /**
-      * 取得第几页。
-默认值：1。
-      */
-  PageNum?: number
-
-  /**
-      * 分页大小。
-最大值：100。
-取值范围：10~100 之前的任意整数。
-默认值：10。
-      */
-  PageSize?: number
-
-  /**
-   * 流名称，支持模糊匹配。
-   */
-  StreamName?: string
+  RequestId?: string
 }
 
 /**
@@ -3081,18 +3096,13 @@ export interface WatermarkInfo {
 }
 
 /**
- * DescribeProvinceIspPlayInfoList返回参数结构体
+ * DescribeLiveWatermarkRules返回参数结构体
  */
-export interface DescribeProvinceIspPlayInfoListResponse {
+export interface DescribeLiveWatermarkRulesResponse {
   /**
-   * 播放信息列表。
+   * 水印规则列表。
    */
-  DataInfoList: Array<PlayStatInfo>
-
-  /**
-   * 统计的类型，和输入参数保持一致。
-   */
-  StatType: string
+  Rules: Array<RuleInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3637,6 +3647,26 @@ URL中禁止包含的字符：
 }
 
 /**
+ * DescribeProvinceIspPlayInfoList返回参数结构体
+ */
+export interface DescribeProvinceIspPlayInfoListResponse {
+  /**
+   * 播放信息列表。
+   */
+  DataInfoList: Array<PlayStatInfo>
+
+  /**
+   * 统计的类型，和输入参数保持一致。
+   */
+  StatType: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateCommonMixStream请求参数结构体
  */
 export interface CreateCommonMixStreamRequest {
@@ -4083,6 +4113,16 @@ export interface AddLiveDomainRequest {
 默认值： 0。
       */
   IsMiniProgramLive?: number
+
+  /**
+      * 域名归属校验类型。
+可取值（与 AuthenticateDomainOwner 接口的 VerifyType 参数一致。）：
+dnsCheck ：立即验证配置 dns 的解析记录是否与待验证内容一致，成功则保存记录。
+fileCheck ：立即验证 web 文件是否与待验证内容一致，成功则保存记录。
+dbCheck :  检查是否已经验证成功过。
+若不传默认为 dbCheck 。
+      */
+  VerifyOwnerType?: string
 }
 
 /**
@@ -4502,6 +4542,24 @@ export interface DeleteLivePullStreamTaskResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * AuthenticateDomainOwner请求参数结构体
+ */
+export interface AuthenticateDomainOwnerRequest {
+  /**
+   * 要验证的域名。
+   */
+  DomainName: string
+
+  /**
+      * 验证类型。可取值：
+dnsCheck ：立即验证配置 dns 的解析记录是否与待验证内容一致，成功则保存记录。
+fileCheck ：立即验证 web 文件是否与待验证内容一致，成功则保存记录。
+dbCheck :  检查是否已经验证成功过。
+      */
+  VerifyType: string
 }
 
 /**

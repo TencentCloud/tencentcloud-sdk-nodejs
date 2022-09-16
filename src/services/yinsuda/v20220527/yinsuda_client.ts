@@ -18,8 +18,9 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  KTVBPMInfo,
   DescribeKTVSuggestionsResponse,
-  ChorusClip,
+  KTVMatchRuleMusicInfo,
   JoinRoomInput,
   DestroyKTVRobotResponse,
   MusicAlbumCoverInfo,
@@ -38,27 +39,33 @@ import {
   KTVMatchMusic,
   TRTCJoinRoomInput,
   DescribeKTVRobotsResponse,
-  PlayCommandInput,
+  KTVTagGroupInfo,
   BatchDescribeKTVMusicDetailsRequest,
   KTVMusicDetailInfo,
+  DescribeKTVMusicsByTagResponse,
+  KTVTagInfo,
   MusicAlbumInfo,
   SetPlayModeCommandInput,
   SyncRobotCommand,
   SearchKTVMusicsResponse,
   KTVRobotInfo,
   DescribeKTVMatchMusicsResponse,
-  KTVMatchRuleMusicInfo,
+  DescribeKTVTagsResponse,
+  ChorusClip,
   SetPlaylistCommandInput,
   SyncKTVRobotCommandResponse,
   BatchDescribeKTVMusicDetailsResponse,
   KTVMatchRule,
   KTVMusicBaseInfo,
+  DescribeKTVMusicsByTagRequest,
   SearchKTVMusicsRequest,
+  PlayCommandInput,
   TimeRange,
   KTVPlaylistBaseInfo,
   SendMessageCommandInput,
   DestroyKTVRobotRequest,
   DescribeKTVRobotsRequest,
+  DescribeKTVTagsRequest,
   SeekCommandInput,
 } from "./yinsuda_models"
 
@@ -89,6 +96,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SyncKTVRobotCommandResponse) => void
   ): Promise<SyncKTVRobotCommandResponse> {
     return this.request("SyncKTVRobotCommand", req, cb)
+  }
+
+  /**
+   * 获取标签分组及分组下的标签列表信息。
+   */
+  async DescribeKTVTags(
+    req: DescribeKTVTagsRequest,
+    cb?: (error: string, rep: DescribeKTVTagsResponse) => void
+  ): Promise<DescribeKTVTagsResponse> {
+    return this.request("DescribeKTVTags", req, cb)
   }
 
   /**
@@ -169,5 +186,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SearchKTVMusicsResponse) => void
   ): Promise<SearchKTVMusicsResponse> {
     return this.request("SearchKTVMusics", req, cb)
+  }
+
+  /**
+   * 通过标签过滤歌曲列表。
+   */
+  async DescribeKTVMusicsByTag(
+    req: DescribeKTVMusicsByTagRequest,
+    cb?: (error: string, rep: DescribeKTVMusicsByTagResponse) => void
+  ): Promise<DescribeKTVMusicsByTagResponse> {
+    return this.request("DescribeKTVMusicsByTag", req, cb)
   }
 }

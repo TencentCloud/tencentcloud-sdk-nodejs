@@ -369,6 +369,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeVpcEndPointService", req, cb);
     }
     /**
+     * 查询跨境带宽监控数据，该接口特提供给联通使用
+     */
+    async DescribeCrossBorderFlowMonitor(req, cb) {
+        return this.request("DescribeCrossBorderFlowMonitor", req, cb);
+    }
+    /**
      * 本接口（EnableRoutes）用于启用已禁用的子网路由。<br />
 本接口会校验启用后，是否与已有路由冲突，如果冲突，则无法启用，失败处理。路由冲突时，需要先禁用与之冲突的路由，才能启用该路由。
      */

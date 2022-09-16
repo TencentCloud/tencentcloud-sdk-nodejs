@@ -46,6 +46,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyDefaultStorageRegion", req, cb);
     }
     /**
+     * 用于提取溯源水印。
+     */
+    async ExtractTraceWatermark(req, cb) {
+        return this.request("ExtractTraceWatermark", req, cb);
+    }
+    /**
      * 对视频进行编辑（剪辑、拼接等），生成一个新的点播视频。编辑的功能包括：
 
 1. 对点播中的一个文件进行剪辑，生成一个新的视频；

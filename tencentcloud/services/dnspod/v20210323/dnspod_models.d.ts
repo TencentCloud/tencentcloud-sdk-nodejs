@@ -417,18 +417,9 @@ export interface CreateDomainBatchRequest {
     RecordValue?: string;
 }
 /**
- * DescribeDomainShareInfo请求参数结构体
+ * DescribeDomainGroupList请求参数结构体
  */
-export interface DescribeDomainShareInfoRequest {
-    /**
-      * 域名
-      */
-    Domain: string;
-    /**
-      * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
-      */
-    DomainId?: number;
-}
+export declare type DescribeDomainGroupListRequest = null;
 /**
  * 域名列表元素
  */
@@ -1103,6 +1094,27 @@ export interface DescribeDomainRequest {
     DomainId?: number;
 }
 /**
+ * 域名分组列表
+ */
+export interface GroupInfo {
+    /**
+      * 分组ID
+      */
+    GroupId: number;
+    /**
+      * 分组名称
+      */
+    GroupName: string;
+    /**
+      * 分组类型
+      */
+    GroupType: string;
+    /**
+      * 该分组中域名个数
+      */
+    Size: number;
+}
+/**
  * ModifyRecordStatus请求参数结构体
  */
 export interface ModifyRecordStatusRequest {
@@ -1669,6 +1681,19 @@ export interface CreateDomainBatchResponse {
       * 批量任务的ID
       */
     JobId: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeDomainGroupList返回参数结构体
+ */
+export interface DescribeDomainGroupListResponse {
+    /**
+      * 分组列表
+      */
+    GroupList: Array<GroupInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2326,6 +2351,19 @@ export interface LockInfo {
       * 域名自动解锁日期
       */
     LockEnd: string;
+}
+/**
+ * DescribeDomainShareInfo请求参数结构体
+ */
+export interface DescribeDomainShareInfoRequest {
+    /**
+      * 域名
+      */
+    Domain: string;
+    /**
+      * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+      */
+    DomainId?: number;
 }
 /**
  * DescribeBatchTask返回参数结构体

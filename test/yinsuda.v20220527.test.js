@@ -38,6 +38,16 @@ it("yinsuda.v20220527.SyncKTVRobotCommand", async function () {
     }
 })
 
+it("yinsuda.v20220527.DescribeKTVTags", async function () {
+    try {
+       const data = await client.DescribeKTVTags({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("yinsuda.v20220527.DescribeKTVPlaylistDetail", async function () {
     try {
        const data = await client.DescribeKTVPlaylistDetail({})
@@ -111,6 +121,16 @@ it("yinsuda.v20220527.DescribeKTVMatchMusics", async function () {
 it("yinsuda.v20220527.SearchKTVMusics", async function () {
     try {
        const data = await client.SearchKTVMusics({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("yinsuda.v20220527.DescribeKTVMusicsByTag", async function () {
+    try {
+       const data = await client.DescribeKTVMusicsByTag({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

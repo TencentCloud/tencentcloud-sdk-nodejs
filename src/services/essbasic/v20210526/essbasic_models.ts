@@ -1123,12 +1123,12 @@ export interface CreateConsoleLoginUrlRequest {
   Agent: Agent
 
   /**
-   * 渠道侧合作企业名称，最大长度64个字符
+   * 渠道子客企业名称，最大长度64个字符
    */
   ProxyOrganizationName: string
 
   /**
-   * 渠道侧合作企业经办人的姓名，最大长度50个字符
+   * 渠道子客企业经办人的姓名，最大长度50个字符
    */
   ProxyOperatorName?: string
 
@@ -1143,7 +1143,7 @@ export interface CreateConsoleLoginUrlRequest {
   ModuleId?: string
 
   /**
-   * 渠道侧合作企业统一社会信用代码，最大长度200个字符
+   * 渠道子客企业统一社会信用代码，最大长度200个字符
    */
   UniformSocialCreditCode?: string
 
@@ -1484,14 +1484,13 @@ export interface SyncProxyOrganizationOperatorsRequest {
  */
 export interface CreateConsoleLoginUrlResponse {
   /**
-   * 控制台url，此链接5分钟内有效，且只能访问一次
+   * 子客Web控制台url，此链接5分钟内有效，且只能访问一次
    */
   ConsoleUrl: string
 
   /**
-      * 渠道合作企业是否认证开通腾讯电子签。
-当渠道合作企业未完成认证开通腾讯电子签,建议先调用同步企业信息(SyncProxyOrganization)和同步经办人信息(SyncProxyOrganizationOperators)接口成功后再跳转到登录页面。
-      */
+   * 渠道子客企业是否已开通腾讯电子签。
+   */
   IsActivated: boolean
 
   /**

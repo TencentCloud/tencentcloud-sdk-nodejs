@@ -40,6 +40,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SyncKTVRobotCommand", req, cb);
     }
     /**
+     * 获取标签分组及分组下的标签列表信息。
+     */
+    async DescribeKTVTags(req, cb) {
+        return this.request("DescribeKTVTags", req, cb);
+    }
+    /**
      * 根据歌单 Id 获取歌单详情。
      */
     async DescribeKTVPlaylistDetail(req, cb) {
@@ -86,6 +92,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async SearchKTVMusics(req, cb) {
         return this.request("SearchKTVMusics", req, cb);
+    }
+    /**
+     * 通过标签过滤歌曲列表。
+     */
+    async DescribeKTVMusicsByTag(req, cb) {
+        return this.request("DescribeKTVMusicsByTag", req, cb);
     }
 }
 exports.Client = Client;

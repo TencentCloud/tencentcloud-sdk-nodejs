@@ -33,7 +33,7 @@ import {
   DescribeRecordLineListResponse,
   DomainInfo,
   CreateDomainBatchRequest,
-  DescribeDomainShareInfoRequest,
+  DescribeDomainGroupListRequest,
   DomainListItem,
   DescribeRecordTypeResponse,
   ModifyDomainRemarkResponse,
@@ -63,6 +63,7 @@ import {
   DescribeSubdomainAnalyticsRequest,
   DeleteRecordRequest,
   DescribeDomainRequest,
+  GroupInfo,
   ModifyRecordStatusRequest,
   CreateRecordResponse,
   DescribeRecordResponse,
@@ -84,6 +85,7 @@ import {
   DescribeRecordTypeRequest,
   RecordListItem,
   CreateDomainBatchResponse,
+  DescribeDomainGroupListResponse,
   ModifyDomainOwnerResponse,
   SubdomainAnalyticsInfo,
   ModifyRecordBatchDetail,
@@ -121,6 +123,7 @@ import {
   CreateDealResponse,
   ModifyVasAutoRenewStatusRequest,
   LockInfo,
+  DescribeDomainShareInfoRequest,
   DescribeBatchTaskResponse,
   DescribeDomainAnalyticsRequest,
   ModifyDynamicDNSResponse,
@@ -143,6 +146,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeRecordListResponse) => void
   ): Promise<DescribeRecordListResponse> {
     return this.request("DescribeRecordList", req, cb)
+  }
+
+  /**
+   * 获取域名分组列表
+   */
+  async DescribeDomainGroupList(
+    req?: DescribeDomainGroupListRequest,
+    cb?: (error: string, rep: DescribeDomainGroupListResponse) => void
+  ): Promise<DescribeDomainGroupListResponse> {
+    return this.request("DescribeDomainGroupList", req, cb)
   }
 
   /**

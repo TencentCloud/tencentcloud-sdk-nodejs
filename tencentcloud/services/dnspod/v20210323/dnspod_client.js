@@ -34,6 +34,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeRecordList", req, cb);
     }
     /**
+     * 获取域名分组列表
+     */
+    async DescribeDomainGroupList(req, cb) {
+        return this.request("DescribeDomainGroupList", req, cb);
+    }
+    /**
      * 获取域名权限
      */
     async DescribeDomainPurview(req, cb) {

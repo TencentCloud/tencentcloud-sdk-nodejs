@@ -8100,6 +8100,39 @@ export interface AddressChargePrepaid {
     AutoRenewFlag?: number;
 }
 /**
+ * DescribeCrossBorderFlowMonitor请求参数结构体
+ */
+export interface DescribeCrossBorderFlowMonitorRequest {
+    /**
+      * 源地域
+      */
+    SourceRegion: string;
+    /**
+      * 目的地域
+      */
+    DestinationRegion: string;
+    /**
+      * 云联网Id
+      */
+    CcnId: string;
+    /**
+      * 云联网所属账号
+      */
+    CcnUin: string;
+    /**
+      * 时间粒度
+      */
+    Period: number;
+    /**
+      * 开始时间
+      */
+    StartTime: string;
+    /**
+      * 结束时间
+      */
+    EndTime: string;
+}
+/**
  * DescribeVpnGatewayRoutes返回参数结构体
  */
 export interface DescribeVpnGatewayRoutesResponse {
@@ -9520,6 +9553,27 @@ export interface ModifyVpnGatewayRoutesResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 跨境带宽监控数据
+ */
+export interface CrossBorderFlowMonitorData {
+    /**
+      * 入带宽
+      */
+    InBandwidth: Array<number>;
+    /**
+      * 出带宽
+      */
+    OutBandwidth: Array<number>;
+    /**
+      * 入包
+      */
+    InPkg: Array<number>;
+    /**
+      * 出包
+      */
+    OutPkg: Array<number>;
 }
 /**
  * ModifyRouteTableAttribute返回参数结构体
@@ -12284,6 +12338,20 @@ export interface ModifySubnetAttributeRequest {
  * ModifyVpcEndPointServiceWhiteList返回参数结构体
  */
 export interface ModifyVpcEndPointServiceWhiteListResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeCrossBorderFlowMonitor返回参数结构体
+ */
+export interface DescribeCrossBorderFlowMonitorResponse {
+    /**
+      * 云联网跨境带宽监控数据
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CrossBorderFlowMonitorData: Array<CrossBorderFlowMonitorData>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

@@ -45,12 +45,12 @@ export interface UpgradeSmallVersionRequest {
  */
 export interface ModifyInstanceParamsResponse {
   /**
-   * 修改是否成功。
+   * 修改是否成功。修改成功为true，失败为false。
    */
   Changed: boolean
 
   /**
-   * 任务ID
+   * 任务ID。
    */
   TaskId: number
 
@@ -4424,12 +4424,12 @@ export interface UpgradeSmallVersionResponse {
  */
 export interface ModifyInstanceParamsRequest {
   /**
-   * 实例ID
+   * 实例ID。
    */
   InstanceId: string
 
   /**
-   * 实例修改的参数列表
+   * 实例修改的参数列表。
    */
   InstanceParams: Array<InstanceParam>
 }
@@ -5457,12 +5457,12 @@ export interface DescribeInstanceMonitorHotKeyResponse {
  */
 export interface InstanceParam {
   /**
-   * 设置参数的名字
+   * 设置参数的名称。例如timeout。
    */
   Key: string
 
   /**
-   * 设置参数的值
+   * 设置参数名称对应的运行值。例如timeout对应运行值可设置为120， 单位为秒（s）。指当客户端连接闲置时间达到120 s时，将关闭连接。
    */
   Value: string
 }

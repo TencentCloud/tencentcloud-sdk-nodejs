@@ -200,7 +200,7 @@ export declare class Client extends AbstractClient {
      */
     UpgradeProxyVersion(req: UpgradeProxyVersionRequest, cb?: (error: string, rep: UpgradeProxyVersionResponse) => void): Promise<UpgradeProxyVersionResponse>;
     /**
-     * 本接口(ModifyInstanceParams)用于修改实例参数。
+     * 本接口(ModifyInstanceParams)用于修改Redis实例的参数配置。
      */
     ModifyInstanceParams(req: ModifyInstanceParamsRequest, cb?: (error: string, rep: ModifyInstanceParamsResponse) => void): Promise<ModifyInstanceParamsResponse>;
     /**

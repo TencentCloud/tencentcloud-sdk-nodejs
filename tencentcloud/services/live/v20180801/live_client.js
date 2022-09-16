@@ -106,10 +106,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeLiveStreamEventList", req, cb);
     }
     /**
-     * 查询直播拉流配置。
+     * 该接口用来创建通用混流。用法与旧接口 mix_streamv2.start_mix_stream_advanced 基本一致。
+注意：当前最多支持16路混流。
+最佳实践：https://cloud.tencent.com/document/product/267/45566
      */
-    async DescribePullStreamConfigs(req, cb) {
-        return this.request("DescribePullStreamConfigs", req, cb);
+    async CreateCommonMixStream(req, cb) {
+        return this.request("CreateCommonMixStream", req, cb);
     }
     /**
      * 查询某段时间内5分钟粒度的各播放http状态码的个数。
@@ -184,6 +186,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeLiveRecordTemplates(req, cb) {
         return this.request("DescribeLiveRecordTemplates", req, cb);
+    }
+    /**
+     * 验证用户是否拥有特定直播域名。
+     */
+    async AuthenticateDomainOwner(req, cb) {
+        return this.request("AuthenticateDomainOwner", req, cb);
     }
     /**
      * 查询某时间段top n的域名或流id信息（暂支持top 1000）。
@@ -283,12 +291,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("StopScreenshotTask", req, cb);
     }
     /**
-     * 该接口用来创建通用混流。用法与旧接口 mix_streamv2.start_mix_stream_advanced 基本一致。
-注意：当前最多支持16路混流。
-最佳实践：https://cloud.tencent.com/document/product/267/45566
+     * 查询直播拉流配置。
      */
-    async CreateCommonMixStream(req, cb) {
-        return this.request("CreateCommonMixStream", req, cb);
+    async DescribePullStreamConfigs(req, cb) {
+        return this.request("DescribePullStreamConfigs", req, cb);
     }
     /**
      * 删除水印。

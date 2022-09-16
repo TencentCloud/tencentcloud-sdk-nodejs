@@ -316,7 +316,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpgradeProxyVersion", req, cb);
     }
     /**
-     * 本接口(ModifyInstanceParams)用于修改实例参数。
+     * 本接口(ModifyInstanceParams)用于修改Redis实例的参数配置。
      */
     async ModifyInstanceParams(req, cb) {
         return this.request("ModifyInstanceParams", req, cb);

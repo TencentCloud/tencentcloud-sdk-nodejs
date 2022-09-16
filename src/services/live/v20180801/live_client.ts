@@ -34,7 +34,7 @@ import {
   CreateScreenshotTaskResponse,
   DeleteLiveCallbackRuleResponse,
   ResumeDelayLiveStreamRequest,
-  DescribeLiveWatermarkRulesResponse,
+  DescribeLiveStreamPublishedListRequest,
   DescribeLiveCallbackTemplateResponse,
   CreateLivePullStreamTaskRequest,
   DeleteLiveSnapshotTemplateRequest,
@@ -74,7 +74,7 @@ import {
   DescribeLiveSnapshotRulesResponse,
   DescribeLiveTranscodeDetailInfoResponse,
   DescribeLiveDomainRequest,
-  DescribeLiveStreamPublishedListRequest,
+  AuthenticateDomainOwnerResponse,
   DeleteLiveTranscodeRuleRequest,
   DescribePushBandwidthAndFluxListRequest,
   CreateLiveRecordRuleRequest,
@@ -133,7 +133,7 @@ import {
   DescribeLiveCertsResponse,
   CommonMixInputParam,
   WatermarkInfo,
-  DescribeProvinceIspPlayInfoListResponse,
+  DescribeLiveWatermarkRulesResponse,
   DescribeLiveRecordTemplatesResponse,
   DescribeScreenshotTaskRequest,
   PlayDataInfoByStream,
@@ -155,6 +155,7 @@ import {
   DescribeLiveWatermarkRulesRequest,
   DropLiveStreamRequest,
   PullPushWatermarkInfo,
+  DescribeProvinceIspPlayInfoListResponse,
   CreateCommonMixStreamRequest,
   RefererAuthConfig,
   ProIspPlaySumInfo,
@@ -182,6 +183,7 @@ import {
   DescribeProvinceIspPlayInfoListRequest,
   DescribeLivePlayAuthKeyRequest,
   DeleteLivePullStreamTaskResponse,
+  AuthenticateDomainOwnerRequest,
   DescribeLiveForbidStreamListResponse,
   DescribeStreamPushInfoListRequest,
   DescribeLivePullStreamTasksResponse,
@@ -452,13 +454,15 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询直播拉流配置。
-   */
-  async DescribePullStreamConfigs(
-    req: DescribePullStreamConfigsRequest,
-    cb?: (error: string, rep: DescribePullStreamConfigsResponse) => void
-  ): Promise<DescribePullStreamConfigsResponse> {
-    return this.request("DescribePullStreamConfigs", req, cb)
+     * 该接口用来创建通用混流。用法与旧接口 mix_streamv2.start_mix_stream_advanced 基本一致。
+注意：当前最多支持16路混流。
+最佳实践：https://cloud.tencent.com/document/product/267/45566
+     */
+  async CreateCommonMixStream(
+    req: CreateCommonMixStreamRequest,
+    cb?: (error: string, rep: CreateCommonMixStreamResponse) => void
+  ): Promise<CreateCommonMixStreamResponse> {
+    return this.request("CreateCommonMixStream", req, cb)
   }
 
   /**
@@ -577,6 +581,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeLiveRecordTemplatesResponse) => void
   ): Promise<DescribeLiveRecordTemplatesResponse> {
     return this.request("DescribeLiveRecordTemplates", req, cb)
+  }
+
+  /**
+   * 验证用户是否拥有特定直播域名。
+   */
+  async AuthenticateDomainOwner(
+    req: AuthenticateDomainOwnerRequest,
+    cb?: (error: string, rep: AuthenticateDomainOwnerResponse) => void
+  ): Promise<AuthenticateDomainOwnerResponse> {
+    return this.request("AuthenticateDomainOwner", req, cb)
   }
 
   /**
@@ -737,15 +751,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 该接口用来创建通用混流。用法与旧接口 mix_streamv2.start_mix_stream_advanced 基本一致。
-注意：当前最多支持16路混流。
-最佳实践：https://cloud.tencent.com/document/product/267/45566
-     */
-  async CreateCommonMixStream(
-    req: CreateCommonMixStreamRequest,
-    cb?: (error: string, rep: CreateCommonMixStreamResponse) => void
-  ): Promise<CreateCommonMixStreamResponse> {
-    return this.request("CreateCommonMixStream", req, cb)
+   * 查询直播拉流配置。
+   */
+  async DescribePullStreamConfigs(
+    req: DescribePullStreamConfigsRequest,
+    cb?: (error: string, rep: DescribePullStreamConfigsResponse) => void
+  ): Promise<DescribePullStreamConfigsResponse> {
+    return this.request("DescribePullStreamConfigs", req, cb)
   }
 
   /**

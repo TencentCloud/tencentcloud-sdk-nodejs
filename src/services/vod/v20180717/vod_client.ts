@@ -67,6 +67,7 @@ import {
   DeleteContentReviewTemplateRequest,
   AiReviewPoliticalTaskInput,
   AudioTransform,
+  ModifySuperPlayerConfigRequest,
   ResetProcedureTemplateRequest,
   ContentReviewOcrResult,
   ComposeMediaResponse,
@@ -203,6 +204,7 @@ import {
   ConcatFileInfo2017,
   ContentReviewResult,
   MediaProcessTaskImageSpriteResult,
+  ReduceMediaBitrateTask,
   DescribeMediaInfosResponse,
   DeleteProcedureTemplateResponse,
   DescribeAdaptiveDynamicStreamingTemplatesResponse,
@@ -276,6 +278,7 @@ import {
   MediaProcessTaskTranscodeResult,
   DomainDetailInfo,
   EditMediaVideoStream,
+  ExtractTraceWatermarkTask,
   AiRecognitionTaskSegmentResultOutput,
   ImageSpriteTaskInput,
   ObjectConfigureInfoForUpdate,
@@ -305,6 +308,7 @@ import {
   DescribeEventsStateResponse,
   AiRecognitionTaskHeadTailResultOutput,
   ModifyImageSpriteTemplateResponse,
+  ExtractTraceWatermarkTaskOutput,
   MediaProcessTaskCoverBySnapshotResult,
   CreateWatermarkTemplateRequest,
   TerrorismConfigureInfoForUpdate,
@@ -343,6 +347,7 @@ import {
   SplitMediaRequest,
   AiReviewTerrorismOcrTaskOutput,
   AiAnalysisResult,
+  ReduceMediaBitrateAdaptiveDynamicStreamingResult,
   ImageWatermarkInputForUpdate,
   DescribeAIAnalysisTemplatesRequest,
   MediaTranscodeInfo,
@@ -437,6 +442,7 @@ import {
   HighlightsConfigureInfoForUpdate,
   AiRecognitionTaskObjectResult,
   UserDefineConfigureInfoForUpdate,
+  ExtractTraceWatermarkTaskInput,
   AiReviewPoliticalAsrTaskOutput,
   OutputAudioStream,
   ModifyClassRequest,
@@ -450,6 +456,7 @@ import {
   TerrorismImageResult,
   DeleteVodDomainRequest,
   DescribeDrmKeyProviderInfoResponse,
+  ExtractTraceWatermarkResponse,
   CreateAIRecognitionTemplateRequest,
   DescribeTaskDetailRequest,
   MediaAiAnalysisClassificationItem,
@@ -497,6 +504,7 @@ import {
   DomainHTTPSConfig,
   DescribeMediaProcessUsageDataResponse,
   DescribeSuperPlayerConfigsRequest,
+  ReduceMediaBitrateMediaProcessTaskResult,
   HeadTailTaskInput,
   SplitMediaOutputConfig,
   CreateVodDomainResponse,
@@ -512,7 +520,7 @@ import {
   DescribeStorageRegionsResponse,
   ModifySnapshotByTimeOffsetTemplateRequest,
   ProcedureTask,
-  ModifySuperPlayerConfigRequest,
+  ExtractTraceWatermarkRequest,
   TaskSimpleInfo,
   ReviewAudioVideoTask,
   DescribeSnapshotByTimeOffsetTemplatesResponse,
@@ -632,6 +640,7 @@ import {
   FrameTagConfigureInfoForUpdate,
   CreateImageSpriteTemplateResponse,
   DescribeAIRecognitionTemplatesRequest,
+  ReduceMediaBitrateTranscodeResult,
   EditMediaTEHDConfig,
   AiRecognitionResult,
 } from "./vod_models"
@@ -673,6 +682,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyDefaultStorageRegionResponse) => void
   ): Promise<ModifyDefaultStorageRegionResponse> {
     return this.request("ModifyDefaultStorageRegion", req, cb)
+  }
+
+  /**
+   * 用于提取溯源水印。
+   */
+  async ExtractTraceWatermark(
+    req: ExtractTraceWatermarkRequest,
+    cb?: (error: string, rep: ExtractTraceWatermarkResponse) => void
+  ): Promise<ExtractTraceWatermarkResponse> {
+    return this.request("ExtractTraceWatermark", req, cb)
   }
 
   /**

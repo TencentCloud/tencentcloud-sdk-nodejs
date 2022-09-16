@@ -48,6 +48,16 @@ it("vod.v20180717.ModifyDefaultStorageRegion", async function () {
     }
 })
 
+it("vod.v20180717.ExtractTraceWatermark", async function () {
+    try {
+       const data = await client.ExtractTraceWatermark({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vod.v20180717.EditMedia", async function () {
     try {
        const data = await client.EditMedia({})

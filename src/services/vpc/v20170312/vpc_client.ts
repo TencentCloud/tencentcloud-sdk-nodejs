@@ -431,6 +431,7 @@ import {
   ResetVpnGatewayInternetMaxBandwidthResponse,
   LockCcnBandwidthsRequest,
   AddressChargePrepaid,
+  DescribeCrossBorderFlowMonitorRequest,
   DescribeVpnGatewayRoutesResponse,
   DescribeNetworkAclsResponse,
   DeleteFlowLogResponse,
@@ -512,6 +513,7 @@ import {
   DescribeIp6TranslatorsResponse,
   CreateSecurityGroupPoliciesRequest,
   ModifyVpnGatewayRoutesResponse,
+  CrossBorderFlowMonitorData,
   ModifyRouteTableAttributeResponse,
   DescribeSecurityGroupReferencesResponse,
   AddIp6RulesResponse,
@@ -687,6 +689,7 @@ import {
   EnableVpnGatewaySslClientCertResponse,
   ModifySubnetAttributeRequest,
   ModifyVpcEndPointServiceWhiteListResponse,
+  DescribeCrossBorderFlowMonitorResponse,
   DescribeBandwidthPackageQuotaRequest,
   DeleteVpcResponse,
   InstanceChargePrepaid,
@@ -1262,6 +1265,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeVpcEndPointServiceResponse) => void
   ): Promise<DescribeVpcEndPointServiceResponse> {
     return this.request("DescribeVpcEndPointService", req, cb)
+  }
+
+  /**
+   * 查询跨境带宽监控数据，该接口特提供给联通使用
+   */
+  async DescribeCrossBorderFlowMonitor(
+    req: DescribeCrossBorderFlowMonitorRequest,
+    cb?: (error: string, rep: DescribeCrossBorderFlowMonitorResponse) => void
+  ): Promise<DescribeCrossBorderFlowMonitorResponse> {
+    return this.request("DescribeCrossBorderFlowMonitor", req, cb)
   }
 
   /**

@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeKTVSuggestionsResponse, DestroyKTVRobotResponse, CreateKTVRobotRequest, SyncKTVRobotCommandRequest, DescribeKTVPlaylistDetailRequest, CreateKTVRobotResponse, DescribeKTVSuggestionsRequest, DescribeKTVMatchMusicsRequest, DescribeKTVPlaylistsResponse, DescribeKTVPlaylistsRequest, DescribeKTVPlaylistDetailResponse, DescribeKTVRobotsResponse, BatchDescribeKTVMusicDetailsRequest, SearchKTVMusicsResponse, DescribeKTVMatchMusicsResponse, SyncKTVRobotCommandResponse, BatchDescribeKTVMusicDetailsResponse, SearchKTVMusicsRequest, DestroyKTVRobotRequest, DescribeKTVRobotsRequest } from "./yinsuda_models";
+import { DescribeKTVSuggestionsResponse, DestroyKTVRobotResponse, CreateKTVRobotRequest, SyncKTVRobotCommandRequest, DescribeKTVPlaylistDetailRequest, CreateKTVRobotResponse, DescribeKTVSuggestionsRequest, DescribeKTVMatchMusicsRequest, DescribeKTVPlaylistsResponse, DescribeKTVPlaylistsRequest, DescribeKTVPlaylistDetailResponse, DescribeKTVRobotsResponse, BatchDescribeKTVMusicDetailsRequest, DescribeKTVMusicsByTagResponse, SearchKTVMusicsResponse, DescribeKTVMatchMusicsResponse, DescribeKTVTagsResponse, SyncKTVRobotCommandResponse, BatchDescribeKTVMusicDetailsResponse, DescribeKTVMusicsByTagRequest, SearchKTVMusicsRequest, DestroyKTVRobotRequest, DescribeKTVRobotsRequest, DescribeKTVTagsRequest } from "./yinsuda_models";
 /**
  * yinsuda client
  * @class
@@ -15,6 +15,10 @@ export declare class Client extends AbstractClient {
      * 下发操作机器人指令，支持播放、暂停、恢复、歌单设置等操作指令，实现对机器人行为的控制。
      */
     SyncKTVRobotCommand(req: SyncKTVRobotCommandRequest, cb?: (error: string, rep: SyncKTVRobotCommandResponse) => void): Promise<SyncKTVRobotCommandResponse>;
+    /**
+     * 获取标签分组及分组下的标签列表信息。
+     */
+    DescribeKTVTags(req: DescribeKTVTagsRequest, cb?: (error: string, rep: DescribeKTVTagsResponse) => void): Promise<DescribeKTVTagsResponse>;
     /**
      * 根据歌单 Id 获取歌单详情。
      */
@@ -47,4 +51,8 @@ export declare class Client extends AbstractClient {
      * 根据关键词搜索歌曲，返回相关歌曲列表。
      */
     SearchKTVMusics(req: SearchKTVMusicsRequest, cb?: (error: string, rep: SearchKTVMusicsResponse) => void): Promise<SearchKTVMusicsResponse>;
+    /**
+     * 通过标签过滤歌曲列表。
+     */
+    DescribeKTVMusicsByTag(req: DescribeKTVMusicsByTagRequest, cb?: (error: string, rep: DescribeKTVMusicsByTagResponse) => void): Promise<DescribeKTVMusicsByTagResponse>;
 }

@@ -507,7 +507,7 @@ export interface CreateProbeTasksRequest {
   PluginSource?: string
 
   /**
-   * 客户度ID
+   * 客户端ID
    */
   ClientNum?: string
 }

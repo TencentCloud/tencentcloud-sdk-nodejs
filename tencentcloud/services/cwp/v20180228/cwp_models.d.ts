@@ -10761,7 +10761,7 @@ export interface DescribeLicenseGeneralResponse {
       */
     ExpireLicenseCnt: number;
     /**
-      * 自动升级开关状态,默认 false,  ture 开启, false 关闭
+      * 自动升级开关状态,默认 false,  true 开启, false 关闭
       */
     AutoOpenStatus: boolean;
     /**

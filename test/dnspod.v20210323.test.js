@@ -28,6 +28,16 @@ it("dnspod.v20210323.DescribeRecordList", async function () {
     }
 })
 
+it("dnspod.v20210323.DescribeDomainGroupList", async function () {
+    try {
+       const data = await client.DescribeDomainGroupList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dnspod.v20210323.DescribeDomainPurview", async function () {
     try {
        const data = await client.DescribeDomainPurview({})
