@@ -433,6 +433,15 @@ export interface DescribeDatahubGroupOffsetsResponse {
     RequestId?: string;
 }
 /**
+ * 值支持一拆多，即将一个值拆为一个数组
+ */
+export interface SplitParam {
+    /**
+      * 分隔符
+      */
+    Regex: string;
+}
+/**
  * 用户组实体
  */
 export interface ConsumerGroup {
@@ -509,7 +518,7 @@ export interface DescribeConnectResourceResp {
       */
     StepList: Array<string>;
     /**
-      * MySQL配置，Type为MYSQL时返回
+      * MySQL配置，Type为MYSQL或TDSQL_C_MYSQL时返回
 注意：此字段可能返回 null，表示取不到有效值。
       */
     MySQLConnectParam: MySQLConnectParam;
@@ -538,6 +547,21 @@ export interface DescribeConnectResourceResp {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ClickHouseConnectParam: ClickHouseConnectParam;
+    /**
+      * MariaDB配置，Type为MARIADB时返回
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MariaDBConnectParam: MariaDBConnectParam;
+    /**
+      * SQLServer配置，Type为SQLSERVER时返回
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SQLServerConnectParam: SQLServerConnectParam;
+    /**
+      * Ctsdb配置，Type为CTSDB时返回
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CtsdbConnectParam: CtsdbConnectParam;
 }
 /**
  * AuthorizeToken返回参数结构体
@@ -714,15 +738,30 @@ export interface DescribeConnectResource {
       */
     ClickHouseConnectParam: ClickHouseConnectParam;
     /**
-      * MySQL配置，Type为MYSQL时必填
+      * MySQL配置，Type为MYSQL或TDSQL_C_MYSQL时返回
 注意：此字段可能返回 null，表示取不到有效值。
       */
     MySQLConnectParam: MySQLConnectParam;
     /**
-      * PostgreSQL配置，Type为POSTGRESQL或TDSQL_C_POSTGRESQL时必填
+      * PostgreSQL配置，Type为POSTGRESQL或TDSQL_C_POSTGRESQL时返回
 注意：此字段可能返回 null，表示取不到有效值。
       */
     PostgreSQLConnectParam: PostgreSQLConnectParam;
+    /**
+      * MariaDB配置，Type为MARIADB时返回
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MariaDBConnectParam: MariaDBConnectParam;
+    /**
+      * SQLServer配置，Type为SQLSERVER时返回
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SQLServerConnectParam: SQLServerConnectParam;
+    /**
+      * Ctsdb配置，Type为CTSDB时返回
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CtsdbConnectParam: CtsdbConnectParam;
 }
 /**
  * Dts类型入参
@@ -967,6 +1006,39 @@ export interface DeleteTopicRequest {
     TopicName: string;
 }
 /**
+ * DescribeDatahubTasks请求参数结构体
+ */
+export interface DescribeDatahubTasksRequest {
+    /**
+      * 返回数量，默认为20，最大值为100
+      */
+    Limit?: number;
+    /**
+      * 分页偏移量，默认为0
+      */
+    Offset?: number;
+    /**
+      * 过滤条件，按照 TaskName 过滤，支持模糊查询
+      */
+    SearchWord?: string;
+    /**
+      * 转储的目标类型
+      */
+    TargetType?: string;
+    /**
+      * 任务类型，SOURCE数据接入，SINK数据流出
+      */
+    TaskType?: string;
+    /**
+      * 转储的源类型
+      */
+    SourceType?: string;
+    /**
+      * 转储的资源
+      */
+    Resource?: string;
+}
+/**
  * DescribeInstances返回参数结构体
  */
 export interface DescribeInstancesResponse {
@@ -1057,6 +1129,11 @@ export interface DatahubResource {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     SQLServerParam?: SQLServerParam;
+    /**
+      * Ctsdb配置，Type为CTSDB时必填
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CtsdbParam?: CtsdbParam;
 }
 /**
  * BatchModifyTopicAttributes返回参数结构体
@@ -1352,6 +1429,11 @@ export interface TransformsParam {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     RowParam?: RowParam;
+    /**
+      * 是否保留数据源Topic元数据信息（源Topic、Partition、Offset），默认为false
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    KeepMetadata?: boolean;
 }
 /**
  * ClickHouse修改连接源参数
@@ -1580,35 +1662,37 @@ export interface CheckCdcClusterResponse {
     RequestId?: string;
 }
 /**
- * DescribeDatahubTasks请求参数结构体
+ * Ctsdb连接源参数(更新)
  */
-export interface DescribeDatahubTasksRequest {
+export interface CtsdbModifyConnectParam {
     /**
-      * 返回数量，默认为20，最大值为100
+      * Ctsdb的连接port
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Limit?: number;
+    Port?: number;
     /**
-      * 分页偏移量，默认为0
+      * Ctsdb连接源的实例vip
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Offset?: number;
+    ServiceVip?: string;
     /**
-      * 过滤条件，按照 TaskName 过滤，支持模糊查询
+      * Ctsdb连接源的vpcId
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    SearchWord?: string;
+    UniqVpcId?: string;
     /**
-      * 转储的目标类型
+      * Ctsdb连接源的用户名
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    TargetType?: string;
+    UserName?: string;
     /**
-      * 任务类型，SOURCE数据接入，SINK数据流出
+      * Ctsdb连接源的密码
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    TaskType?: string;
+    Password?: string;
     /**
-      * 转储的源类型
-      */
-    SourceType?: string;
-    /**
-      * 转储的资源
+      * Ctsdb连接源的实例资源
+注意：此字段可能返回 null，表示取不到有效值。
       */
     Resource?: string;
 }
@@ -1840,6 +1924,10 @@ export interface ModifyConnectResourceRequest {
       * SQLServer配置，Type为SQLSERVER时必填
       */
     SQLServerConnectParam?: SQLServerModifyConnectParam;
+    /**
+      * Ctsdb配置，Type为CTSDB
+      */
+    CtsdbConnectParam?: CtsdbModifyConnectParam;
 }
 /**
  * ModifyInstanceAttributes返回参数结构体
@@ -2046,6 +2134,43 @@ export interface TdwParam {
       * TDW端口，默认8099
       */
     TdwPort?: number;
+}
+/**
+ * ModifyGroupOffsets请求参数结构体
+ */
+export interface ModifyGroupOffsetsRequest {
+    /**
+      * kafka实例id
+      */
+    InstanceId: string;
+    /**
+      * kafka 消费分组
+      */
+    Group: string;
+    /**
+      * 重置offset的策略，入参含义 0. 对齐shift-by参数，代表把offset向前或向后移动shift条 1. 对齐参考(by-duration,to-datetime,to-earliest,to-latest),代表把offset移动到指定timestamp的位置 2. 对齐参考(to-offset)，代表把offset移动到指定的offset位置
+      */
+    Strategy: number;
+    /**
+      * 表示需要重置的topics， 不填表示全部
+      */
+    Topics?: Array<string>;
+    /**
+      * 当strategy为0时，必须包含该字段，可以大于零代表会把offset向后移动shift条，小于零则将offset向前回溯shift条数。正确重置后新的offset应该是(old_offset + shift)，需要注意的是如果新的offset小于partition的earliest则会设置为earliest，如果大于partition 的latest则会设置为latest
+      */
+    Shift?: number;
+    /**
+      * 单位ms。当strategy为1时，必须包含该字段，其中-2表示重置offset到最开始的位置，-1表示重置到最新的位置(相当于清空)，其它值则代表指定的时间，会获取topic中指定时间的offset然后进行重置，需要注意的时，如果指定的时间不存在消息，则获取最末尾的offset。
+      */
+    ShiftTimestamp?: number;
+    /**
+      * 需要重新设置的offset位置。当strategy为2，必须包含该字段。
+      */
+    Offset?: number;
+    /**
+      * 需要重新设置的partition的列表，如果没有指定Topics参数。则重置全部topics的对应的Partition列表里的partition。指定Topics时则重置指定的topic列表的对应的Partitions列表的partition。
+      */
+    Partitions?: Array<number>;
 }
 /**
  * DescribeCkafkaZone请求参数结构体
@@ -2540,6 +2665,30 @@ export interface MariaDBParam {
       * 复制存量信息(schema_only不复制, initial全量)，默认位initial
       */
     SnapshotMode?: string;
+    /**
+      * 格式：库1.表1:字段1,字段2;库2.表2:字段2，表之间;（分号）隔开，字段之间,（逗号）隔开。不指定的表默认取表的主键
+      */
+    KeyColumns?: string;
+    /**
+      * 当Table输入的是前缀时，该项值为true，否则为false
+      */
+    IsTablePrefix?: boolean;
+    /**
+      * 输出格式，DEFAULT、CANAL_1、CANAL_2
+      */
+    OutputFormat?: string;
+    /**
+      * 如果该值为all，则DDL数据以及DML数据也会写入到选中的topic；若该值为dml，则只有DML数据写入到选中的topic
+      */
+    IncludeContentChanges?: string;
+    /**
+      * 如果该值为true，且MySQL中"binlog_rows_query_log_events"配置项的值为"ON"，则流入到topic的数据包含原SQL语句；若该值为false，流入到topic的数据不包含原SQL语句
+      */
+    IncludeQuery?: boolean;
+    /**
+      * 如果该值为 true，则消息中会携带消息结构体对应的schema，如果该值为false则不会携带
+      */
+    RecordWithSchema?: boolean;
 }
 /**
  * 路由实体对象
@@ -3650,6 +3799,41 @@ export interface ClickHouseSchema {
       * 列项是否允许为空
       */
     AllowNull: boolean;
+}
+/**
+ * Ctsdb连接源参数
+ */
+export interface CtsdbConnectParam {
+    /**
+      * Ctsdb的连接port
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Port?: number;
+    /**
+      * Ctsdb连接源的实例vip
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ServiceVip?: string;
+    /**
+      * Ctsdb连接源的vpcId
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UniqVpcId?: string;
+    /**
+      * Ctsdb连接源的用户名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UserName?: string;
+    /**
+      * Ctsdb连接源的密码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Password?: string;
+    /**
+      * Ctsdb连接源的实例资源
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Resource?: string;
 }
 /**
  * ModifyPassword请求参数结构体
@@ -4772,7 +4956,7 @@ export interface DateParam {
  */
 export interface ValueParam {
     /**
-      * 处理模式，REPLACE替换，SUBSTR截取，DATE日期转换，TRIM去除前后空格，REGEX_REPLACE正则替换
+      * 处理模式，REPLACE替换，SUBSTR截取，DATE日期转换，TRIM去除前后空格，REGEX_REPLACE正则替换，URL_DECODE，LOWERCASE转换为小写
       */
     Type: string;
     /**
@@ -4795,6 +4979,21 @@ export interface ValueParam {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     RegexReplace?: RegexReplaceParam;
+    /**
+      * 值支持一拆多，TYPE=SPLIT时必传
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Split?: SplitParam;
+    /**
+      * key-value二次解析，TYPE=KV时必传
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    KV?: KVParam;
+    /**
+      * 处理结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result?: string;
 }
 /**
  * DescribeDatahubTasks返回参数结构体
@@ -5408,6 +5607,18 @@ export interface PostgreSQLParam {
       * 是否抛弃解析失败的消息，默认为true
       */
     DropInvalidMessage?: boolean;
+    /**
+      * 输入的table是否为正则表达式
+      */
+    IsTableRegular?: boolean;
+    /**
+      * 格式：库1.表1:字段1,字段2;库2.表2:字段2，表之间;（分号）隔开，字段之间,（逗号）隔开。不指定的表默认取表的主键
+      */
+    KeyColumns?: string;
+    /**
+      * 如果该值为 true，则消息中会携带消息结构体对应的schema，如果该值为false则不会携带
+      */
+    RecordWithSchema?: boolean;
 }
 /**
  * 统一返回的TopicResponse
@@ -5461,6 +5672,19 @@ export interface DescribeGroupOffsetsResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * Ctsdb类型入参
+ */
+export interface CtsdbParam {
+    /**
+      * 连接管理实例资源
+      */
+    Resource?: string;
+    /**
+      * Ctsdb的metric
+      */
+    CtsdbMetric?: string;
 }
 /**
  * SendMessage请求参数结构体
@@ -5558,41 +5782,22 @@ export interface PostgreSQLConnectParam {
     SelfBuilt?: boolean;
 }
 /**
- * ModifyGroupOffsets请求参数结构体
+ * key-value二次解析
  */
-export interface ModifyGroupOffsetsRequest {
+export interface KVParam {
     /**
-      * kafka实例id
+      * 分隔符
       */
-    InstanceId: string;
+    Delimiter: string;
     /**
-      * kafka 消费分组
+      * key-value二次解析分隔符
       */
-    Group: string;
+    Regex: string;
     /**
-      * 重置offset的策略，入参含义 0. 对齐shift-by参数，代表把offset向前或向后移动shift条 1. 对齐参考(by-duration,to-datetime,to-earliest,to-latest),代表把offset移动到指定timestamp的位置 2. 对齐参考(to-offset)，代表把offset移动到指定的offset位置
+      * 保留源Key，默认为false不保留
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Strategy: number;
-    /**
-      * 表示需要重置的topics， 不填表示全部
-      */
-    Topics?: Array<string>;
-    /**
-      * 当strategy为0时，必须包含该字段，可以大于零代表会把offset向后移动shift条，小于零则将offset向前回溯shift条数。正确重置后新的offset应该是(old_offset + shift)，需要注意的是如果新的offset小于partition的earliest则会设置为earliest，如果大于partition 的latest则会设置为latest
-      */
-    Shift?: number;
-    /**
-      * 单位ms。当strategy为1时，必须包含该字段，其中-2表示重置offset到最开始的位置，-1表示重置到最新的位置(相当于清空)，其它值则代表指定的时间，会获取topic中指定时间的offset然后进行重置，需要注意的时，如果指定的时间不存在消息，则获取最末尾的offset。
-      */
-    ShiftTimestamp?: number;
-    /**
-      * 需要重新设置的offset位置。当strategy为2，必须包含该字段。
-      */
-    Offset?: number;
-    /**
-      * 需要重新设置的partition的列表，如果没有指定Topics参数。则重置全部topics的对应的Partition列表里的partition。指定Topics时则重置指定的topic列表的对应的Partitions列表的partition。
-      */
-    Partitions?: Array<number>;
+    KeepOriginalKey?: string;
 }
 /**
  * BatchModifyTopicAttributes请求参数结构体

@@ -751,6 +751,11 @@ export interface MetricData {
       * 表数据
       */
     DataSet: Array<DatePoint>;
+    /**
+      * 查询范围内的请求总量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MetricCount: number;
 }
 /**
  * DescribePrivateDNSAccountList请求参数结构体

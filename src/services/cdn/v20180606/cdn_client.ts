@@ -103,6 +103,7 @@ import {
   OfflineCache,
   TopDataMore,
   DiagnoseList,
+  HTTPHeader,
   IpFilterPathRule,
   ReportData,
   AdvanceHttps,

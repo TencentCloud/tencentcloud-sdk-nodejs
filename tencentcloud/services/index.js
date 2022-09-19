@@ -108,6 +108,8 @@ var cloudaudit_1 = require("./cloudaudit");
 Object.defineProperty(exports, "cloudaudit", { enumerable: true, get: function () { return cloudaudit_1.cloudaudit; } });
 var cloudhsm_1 = require("./cloudhsm");
 Object.defineProperty(exports, "cloudhsm", { enumerable: true, get: function () { return cloudhsm_1.cloudhsm; } });
+var cloudstudio_1 = require("./cloudstudio");
+Object.defineProperty(exports, "cloudstudio", { enumerable: true, get: function () { return cloudstudio_1.cloudstudio; } });
 var cls_1 = require("./cls");
 Object.defineProperty(exports, "cls", { enumerable: true, get: function () { return cls_1.cls; } });
 var cme_1 = require("./cme");

@@ -505,7 +505,12 @@ export interface CreateSignUrlsRequest {
   FlowIds?: Array<string>
 
   /**
-   * 签署链接类型：“WEIXINAPP”-直接跳小程序；“CHANNEL”-跳转H5页面；“APP”-第三方APP或小程序跳转电子签小程序；默认“WEIXINAPP”类型，即跳转至小程序；
+   * 合同组编号(备注：该参数和合同(流程)编号数组必须二选一)
+   */
+  FlowGroupId?: string
+
+  /**
+   * 签署链接类型：“WEIXINAPP”-短链直接跳小程序；“CHANNEL”-跳转H5页面；“APP”-第三方APP或小程序跳转电子签小程序；"LONGURL2WEIXINAPP"-长链接跳转小程序；默认“WEIXINAPP”类型，即跳转至小程序；
    */
   Endpoint?: string
 
@@ -559,11 +564,6 @@ GenerateType为"PERSON"或"FOLLOWER"时必填
    * 操作者的信息
    */
   Operator?: UserInfo
-
-  /**
-   * 合同组编号(备注：该参数和合同(流程)编号数组必须二选一)
-   */
-  FlowGroupId?: string
 }
 
 /**
@@ -1429,12 +1429,12 @@ export interface DescribeTemplatesRequest {
   ContentType?: number
 
   /**
-   * 查询个数，默认20，最大100
+   * 查询个数，默认20，最大100；在查询列表的时候有效
    */
   Limit?: number
 
   /**
-   * 查询偏移位置，默认0
+   * 查询偏移位置，默认0；在查询列表的时候有效
    */
   Offset?: number
 
@@ -1449,7 +1449,7 @@ export interface DescribeTemplatesRequest {
   QueryAllComponents?: boolean
 
   /**
-   * 模糊搜索模版名称
+   * 模糊搜索模板名称
    */
   TemplateName?: string
 }

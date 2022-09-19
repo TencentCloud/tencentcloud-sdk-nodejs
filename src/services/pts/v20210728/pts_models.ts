@@ -278,6 +278,24 @@ export interface AlertChannelRecord {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   UpdatedAt?: string
+
+  /**
+      * App ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AppId?: number
+
+  /**
+      * 主账号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Uin?: string
+
+  /**
+      * 子账号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SubAccountUin?: string
 }
 
 /**
@@ -1186,6 +1204,24 @@ export interface CronJob {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   JobOwner: string
+
+  /**
+      * App ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AppId: number
+
+  /**
+      * 主账号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Uin: string
+
+  /**
+      * 子账号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SubAccountUin: string
 }
 
 /**
@@ -1425,6 +1461,48 @@ JobSelectClusterException:19,JobCreateTaskException:20,JobSyncTaskException:21
 注意：此字段可能返回 null，表示取不到有效值。
       */
   CronId?: string
+
+  /**
+      * 场景类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Type?: string
+
+  /**
+      * 域名绑定配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DomainNameConfig?: DomainNameConfig
+
+  /**
+      * false
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Debug?: boolean
+
+  /**
+      * 中断原因
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AbortReason?: number
+
+  /**
+      * 任务的创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CreatedAt?: string
+
+  /**
+      * 项目ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProjectId?: string
+
+  /**
+      * 通知事件回调
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NotificationHooks?: Array<NotificationHook>
 }
 
 /**
@@ -1773,6 +1851,48 @@ export interface AlertRecord {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   JobId?: string
+
+  /**
+      * App ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AppId?: number
+
+  /**
+      * 主账号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Uin?: string
+
+  /**
+      * 子账号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SubAccountUin?: string
+
+  /**
+      * 场景名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ScenarioName?: string
+
+  /**
+      * 告警对象
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Target?: string
+
+  /**
+      * 告警规则 ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  JobSLAId?: string
+
+  /**
+      * 告警规则描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  JobSLADescription?: string
 }
 
 /**
@@ -2259,8 +2379,9 @@ export interface DescribeAvailableMetricsResponse {
  */
 export interface DescribeMetricLabelWithValuesResponse {
   /**
-   * 指标所有的label和values数组
-   */
+      * 指标所有的label和values数组
+注意：此字段可能返回 null，表示取不到有效值。
+      */
   MetricLabelWithValuesSet: Array<MetricLabelWithValues>
 
   /**
@@ -2752,6 +2873,21 @@ export interface RequestSummary {
    * 请求错误率
    */
   ErrorPercentage: number
+
+  /**
+   * 请求p99耗时，单位秒
+   */
+  P99: number
+
+  /**
+   * 响应状态码
+   */
+  Status: string
+
+  /**
+   * 响应详情
+   */
+  Result: string
 }
 
 /**
@@ -3343,6 +3479,12 @@ export interface Scenario {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   DomainNameConfig: DomainNameConfig
+
+  /**
+      * 通知事件回调
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NotificationHooks: Array<NotificationHook>
 }
 
 /**
@@ -3651,6 +3793,23 @@ export interface CheckSummary {
 }
 
 /**
+ * 事件通知回调
+ */
+export interface NotificationHook {
+  /**
+      * 通知事件
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Events?: Array<string>
+
+  /**
+      * 回调 URL
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  URL?: string
+}
+
+/**
  * DescribeJobs返回参数结构体
  */
 export interface DescribeJobsResponse {
@@ -3890,6 +4049,18 @@ export interface File {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Status: number
+
+  /**
+      * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CreatedAt: string
+
+  /**
+      * 项目 ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProjectId: string
 }
 
 /**

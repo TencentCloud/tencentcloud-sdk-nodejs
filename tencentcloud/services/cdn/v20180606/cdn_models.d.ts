@@ -2256,6 +2256,19 @@ export interface DiagnoseList {
     CreateTime: string;
 }
 /**
+ * HTTP 请求头
+ */
+export interface HTTPHeader {
+    /**
+      * 请求头名称
+      */
+    Name: string;
+    /**
+      * 请求头值
+      */
+    Value: string;
+}
+/**
  * IP黑白名单分路径配置
  */
 export interface IpFilterPathRule {
@@ -3682,6 +3695,10 @@ global：预热全球节点
 此功能灰度发布中，敬请期待
       */
     DisableRange?: boolean;
+    /**
+      * 自定义 HTTP 请求头。最多定义 20 个，Name 长度不超过 128 字节，Value 长度不超过 1024 字节
+      */
+    Headers?: Array<HTTPHeader>;
     /**
       * 是否对URL进行编码
       */

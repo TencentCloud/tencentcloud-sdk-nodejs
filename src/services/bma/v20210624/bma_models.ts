@@ -1005,7 +1005,7 @@ export interface CreateCRWorkRequest {
   IsMonitor?: string
 
   /**
-   * 是否启用存证0：不启用 1：启用 默认为1
+   * 是否启用存证0：不存证  2：存证 默认为0
    */
   IsCert?: string
 
@@ -1025,52 +1025,52 @@ export interface CreateCRWorkRequest {
   ProduceType?: string
 
   /**
-   * xxx
+   * 白名单
    */
   WhiteLists?: Array<string>
 
   /**
-   * x
+   * 作品ID
    */
   WorkId?: number
 
   /**
-   * xx
+   * 著作权人姓名
    */
   ProducerName?: string
 
   /**
-   * xx
+   * 作者
    */
   Nickname?: string
 
   /**
-   * x
+   * 授权书
    */
   Authorization?: string
 
   /**
-   * x
+   * 授权书开始时间
    */
   AuthorizationStartTime?: string
 
   /**
-   * x
+   * 授权书结束时间
    */
   AuthorizationEndTime?: string
 
   /**
-   * x
+   * 内容格式
    */
   ContentType?: string
 
   /**
-   * x
+   * 文件内容
    */
   Content?: string
 
   /**
-   * x
+   * 监测结束时间
    */
   MonitorEndTime?: string
 }

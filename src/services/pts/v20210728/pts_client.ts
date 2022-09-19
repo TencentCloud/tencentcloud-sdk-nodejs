@@ -142,6 +142,7 @@ import {
   CreateScenarioResponse,
   AbortJobRequest,
   CheckSummary,
+  NotificationHook,
   DescribeJobsResponse,
   GenerateTmpKeyRequest,
   DescribeSampleBatchQueryResponse,

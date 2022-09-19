@@ -26,7 +26,7 @@ export declare class Client extends AbstractClient {
     /**
      * 提交企业签署流程审批结果
 适用场景:
-在通过接口(CreateFlow 或者CreateFlowByFiles)创建签署流程时，若指定了参数 NeedSignReview 为true,则可以调用此接口提交企业内部签署审批结果。
+在通过接口(CreateFlow 或者CreateFlowByFiles)创建签署流程时，若指定了参数 NeedSignReview 为true，且发起方企业作为签署方参与了流程签署，则可以调用此接口提交企业内部签署审批结果。
 若签署流程状态正常，且本企业存在签署方未签署，同一签署流程可以多次提交签署审批结果，签署时的最后一个“审批结果”有效。
 
      */
@@ -115,7 +115,7 @@ export declare class Client extends AbstractClient {
     DescribeFlowBriefs(req: DescribeFlowBriefsRequest, cb?: (error: string, rep: DescribeFlowBriefsResponse) => void): Promise<DescribeFlowBriefsResponse>;
     /**
      * 补充签署流程本企业签署人信息
-适用场景：在通过模版或者文件发起合同时，若未指定本企业签署人信息，则流程发起后，可以调用此接口补充签署人。
+适用场景：在通过模板或者文件发起合同时，若未指定本企业签署人信息，则流程发起后，可以调用此接口补充签署人。
 同一签署人可以补充多个员工作为候选签署人,最终签署人取决于谁先领取合同完成签署。
 
 注：目前暂时只支持补充来源于企业微信的员工作为候选签署人
