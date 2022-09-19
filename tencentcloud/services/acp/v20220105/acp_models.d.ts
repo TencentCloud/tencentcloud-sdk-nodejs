@@ -42,6 +42,14 @@ export interface CreateAppScanTaskRepeatRequest {
       * 隐私申明文件名称
       */
     PrivacyTextName?: string;
+    /**
+      * 软件Sha1值(PrivacyTextMD5不为空时必填)
+      */
+    AppSha1?: string;
+    /**
+      * 隐私申明文本md5(AppSha1不为空时必填)
+      */
+    PrivacyTextMD5?: string;
 }
 /**
  * DescribeScanTaskList返回参数结构体
@@ -257,7 +265,7 @@ export interface CreateAppScanTaskRequest {
       */
     AppPackage?: string;
     /**
-      * App名称
+      * App名称(任务来源为2时必填)
       */
     AppName?: string;
     /**
@@ -308,6 +316,14 @@ export interface CreateAppScanTaskRequest {
       * 隐私申明文件名称
       */
     PrivacyTextName?: string;
+    /**
+      * 软件Sha1值(PrivacyTextMD5不为空时必填)
+      */
+    AppSha1?: string;
+    /**
+      * 隐私申明文本md5(AppSha1不为空时必填)
+      */
+    PrivacyTextMD5?: string;
 }
 /**
  * DescribeScanTaskStatus返回参数结构体
