@@ -70,12 +70,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateChooseVpcs", req, cb);
     }
     /**
-     * vpc规则列表概况
-     */
-    async DescribeVpcRuleOverview(req, cb) {
-        return this.request("DescribeVpcRuleOverview", req, cb);
-    }
-    /**
      * GetNatFwInstanceWithRegion 获取租户新增运维的NAT实例，带上地域
      */
     async DescribeNatFwInstanceWithRegion(req, cb) {

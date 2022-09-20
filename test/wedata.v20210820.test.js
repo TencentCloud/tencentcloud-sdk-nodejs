@@ -98,9 +98,29 @@ it("wedata.v20210820.RegisterEvent", async function () {
     }
 })
 
+it("wedata.v20210820.ModifyDataSource", async function () {
+    try {
+       const data = await client.ModifyDataSource({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20210820.ModifyTaskInfo", async function () {
     try {
        const data = await client.ModifyTaskInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20210820.DeleteDataSources", async function () {
+    try {
+       const data = await client.DeleteDataSources({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -188,6 +208,16 @@ it("wedata.v20210820.DescribeRelatedInstances", async function () {
     }
 })
 
+it("wedata.v20210820.DescribeDatasource", async function () {
+    try {
+       const data = await client.DescribeDatasource({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20210820.BatchDeleteTasksNew", async function () {
     try {
        const data = await client.BatchDeleteTasksNew({})
@@ -248,6 +278,16 @@ it("wedata.v20210820.CreateFolder", async function () {
     }
 })
 
+it("wedata.v20210820.ModifyTaskLinks", async function () {
+    try {
+       const data = await client.ModifyTaskLinks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20210820.ModifyFolder", async function () {
     try {
        const data = await client.ModifyFolder({})
@@ -298,9 +338,9 @@ it("wedata.v20210820.TriggerEvent", async function () {
     }
 })
 
-it("wedata.v20210820.ModifyTaskLinks", async function () {
+it("wedata.v20210820.CreateDataSource", async function () {
     try {
-       const data = await client.ModifyTaskLinks({})
+       const data = await client.CreateDataSource({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

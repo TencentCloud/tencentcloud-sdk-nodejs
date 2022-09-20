@@ -8540,7 +8540,7 @@ export interface DescribeDBPriceRequest {
   Cpu?: number
 
   /**
-   * 续费询价实例ID。如需查询实例续费价格，填写InstanceId和Period即可。
+   * 询价续费实例ID。如需查询实例续费价格，填写InstanceId和Period即可。
    */
   InstanceId?: string
 

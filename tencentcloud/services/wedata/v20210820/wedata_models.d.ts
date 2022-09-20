@@ -192,58 +192,23 @@ export interface DescribeInstanceLogsRequest {
     CurRunDate: string;
 }
 /**
- * 工作流信息
+ * 操作结果
  */
-export interface Workflow {
+export interface BatchReturn {
     /**
-      * 工作流id
+      * 执行结果
       */
-    WorkflowId: string;
+    Result: boolean;
     /**
-      * 责任人
+      * 执行情况备注
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Owner: string;
+    ErrorDesc: string;
     /**
-      * 责任人Id
+      * 执行情况id
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    OwnerId: string;
-    /**
-      * 项目id
-      */
-    ProjectId: string;
-    /**
-      * 项目标识
-      */
-    ProjectIdent: string;
-    /**
-      * 项目名称
-      */
-    ProjectName: string;
-    /**
-      * 备注
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    WorkflowDesc: string;
-    /**
-      * 工作流名称
-      */
-    WorkflowName: string;
-    /**
-      * 所属文件夹id
-      */
-    FolderId: string;
-    /**
-      * 工作流所属用户分组id 若有多个,分号隔开: a;b;c
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    UserGroupId: string;
-    /**
-      * 工作流所属用户分组名称  若有多个,分号隔开: a;b;c
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    UserGroupName: string;
+    ErrorId: string;
 }
 /**
  * ModifyTaskScript请求参数结构体
@@ -265,6 +230,79 @@ export interface ModifyTaskScriptRequest {
       * 集成任务脚本配置
       */
     IntegrationNodeDetails?: Array<IntegrationNodeDetail>;
+}
+/**
+ * CreateDataSource请求参数结构体
+ */
+export interface CreateDataSourceRequest {
+    /**
+      * 数据源名称，在相同SpaceName下，数据源名称不能为空
+      */
+    Name: string;
+    /**
+      * 数据源类别：绑定引擎、绑定数据库
+      */
+    Category: string;
+    /**
+      * 数据源类型:枚举值
+      */
+    Type: string;
+    /**
+      * 归属项目ID
+      */
+    OwnerProjectId: string;
+    /**
+      * 归属项目Name
+      */
+    OwnerProjectName: string;
+    /**
+      * 归属项目Name中文
+      */
+    OwnerProjectIdent: string;
+    /**
+      * 业务侧数据源的配置信息扩展
+      */
+    BizParams?: string;
+    /**
+      * 数据源的配置信息，以JSON KV存储，根据每个数据源类型不同，而KV存储信息不同
+      */
+    Params?: string;
+    /**
+      * 数据源描述信息
+      */
+    Description?: string;
+    /**
+      * 数据源展示名，为了可视化查看
+      */
+    Display?: string;
+    /**
+      * 若数据源列表为绑定数据库，则为db名称
+      */
+    DatabaseName?: string;
+    /**
+      * 数据源引擎的实例ID，如CDB实例ID
+      */
+    Instance?: string;
+    /**
+      * 数据源数据源的可见性，1为可见、0为不可见。默认为1
+      */
+    Status?: number;
+    /**
+      * 数据源所属的业务空间名称
+      */
+    ClusterId?: string;
+    /**
+      * 是否采集
+      */
+    Collect?: string;
+    /**
+      * cos桶信息
+      */
+    COSBucket?: string;
+    /**
+      * cos region
+      */
+    COSRegion?: string;
 }
 /**
  * 集成节点schema映射
@@ -1184,6 +1222,60 @@ export interface CreateFolderResponse {
     RequestId?: string;
 }
 /**
+ * 工作流信息
+ */
+export interface Workflow {
+    /**
+      * 工作流id
+      */
+    WorkflowId: string;
+    /**
+      * 责任人
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Owner: string;
+    /**
+      * 责任人Id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OwnerId: string;
+    /**
+      * 项目id
+      */
+    ProjectId: string;
+    /**
+      * 项目标识
+      */
+    ProjectIdent: string;
+    /**
+      * 项目名称
+      */
+    ProjectName: string;
+    /**
+      * 备注
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    WorkflowDesc: string;
+    /**
+      * 工作流名称
+      */
+    WorkflowName: string;
+    /**
+      * 所属文件夹id
+      */
+    FolderId: string;
+    /**
+      * 工作流所属用户分组id 若有多个,分号隔开: a;b;c
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UserGroupId: string;
+    /**
+      * 工作流所属用户分组名称  若有多个,分号隔开: a;b;c
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UserGroupName: string;
+}
+/**
  * DescribeFolderWorkflowList请求参数结构体
  */
 export interface DescribeFolderWorkflowListRequest {
@@ -1207,6 +1299,20 @@ export interface DescribeFolderWorkflowListRequest {
       * 页大小，默认10
       */
     PageSize?: number;
+}
+/**
+ * ModifyDataSource返回参数结构体
+ */
+export interface ModifyDataSourceResponse {
+    /**
+      * 是否成功
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Data: boolean;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeFolderList请求参数结构体
@@ -1537,6 +1643,15 @@ export interface CanvasInfo {
     LinksList: Array<TaskLinkInfo>;
 }
 /**
+ * DescribeDatasource请求参数结构体
+ */
+export interface DescribeDatasourceRequest {
+    /**
+      * 对象唯一ID
+      */
+    Id: number;
+}
+/**
  * DeleteWorkflowNew请求参数结构体
  */
 export interface DeleteWorkflowNewRequest {
@@ -1828,6 +1943,20 @@ export interface DescribeTasksByPageResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Data: TaskInfoDataPage;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * CreateDataSource返回参数结构体
+ */
+export interface CreateDataSourceResponse {
+    /**
+      * 主键ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Data: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2346,6 +2475,83 @@ export interface BatchResult {
     Total: number;
 }
 /**
+ * ModifyDataSource请求参数结构体
+ */
+export interface ModifyDataSourceRequest {
+    /**
+      * 数据源名称，在相同SpaceName下，数据源名称不能为空
+      */
+    Name: string;
+    /**
+      * 数据源类别：绑定引擎、绑定数据库
+      */
+    Category: string;
+    /**
+      * 数据源类型:枚举值
+      */
+    Type: string;
+    /**
+      * 数据源ID
+      */
+    ID?: number;
+    /**
+      * 业务侧数据源的配置信息扩展
+      */
+    BizParams?: string;
+    /**
+      * 数据源的配置信息，以JSON KV存储，根据每个数据源类型不同，而KV存储信息不同
+      */
+    Params?: string;
+    /**
+      * 数据源描述信息
+      */
+    Description?: string;
+    /**
+      * 数据源展示名，为了可视化查看
+      */
+    Display?: string;
+    /**
+      * 若数据源列表为绑定数据库，则为db名称
+      */
+    DatabaseName?: string;
+    /**
+      * 数据源引擎的实例ID，如CDB实例ID
+      */
+    Instance?: string;
+    /**
+      * 数据源数据源的可见性，1为可见、0为不可见。默认为1
+      */
+    Status?: number;
+    /**
+      * 数据源所属的业务空间名称
+      */
+    ClusterId?: string;
+    /**
+      * 是否采集
+      */
+    Collect?: string;
+    /**
+      * 项目id
+      */
+    OwnerProjectId?: string;
+    /**
+      * 项目名称
+      */
+    OwnerProjectName?: string;
+    /**
+      * 项目中文名
+      */
+    OwnerProjectIdent?: string;
+    /**
+      * cos bucket
+      */
+    COSBucket?: string;
+    /**
+      * cos region
+      */
+    COSRegion?: string;
+}
+/**
  * DescribeTaskInstances返回参数结构体
  */
 export interface DescribeTaskInstancesResponse {
@@ -2480,23 +2686,154 @@ export interface ModifyTaskInfoRequest {
     DependencyConfigDTOs?: Array<DependencyConfig>;
 }
 /**
- * 操作结果
+ * 数据源对象
  */
-export interface BatchReturn {
+export interface DataSourceInfo {
     /**
-      * 执行结果
-      */
-    Result: boolean;
-    /**
-      * 执行情况备注
+      * 若数据源列表为绑定数据库，则为db名称
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ErrorDesc: string;
+    DatabaseName: string;
     /**
-      * 执行情况id
+      * 数据源描述信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ErrorId: string;
+    Description: string;
+    /**
+      * 数据源ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ID: number;
+    /**
+      * 数据源引擎的实例ID，如CDB实例ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Instance: string;
+    /**
+      * 数据源名称，在相同SpaceName下，数据源名称不能为空
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Name: string;
+    /**
+      * 数据源引擎所属区域
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Region: string;
+    /**
+      * 数据源类型:枚举值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Type: string;
+    /**
+      * 数据源所属的集群id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ClusterId: string;
+    /**
+      * 应用ID AppId
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AppId: number;
+    /**
+      * 业务侧数据源的配置信息扩展
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BizParams: string;
+    /**
+      * 数据源类别：绑定引擎、绑定数据库
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Category: string;
+    /**
+      * 数据源展示名，为了可视化查看
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Display: string;
+    /**
+      * 数据源责任人账号ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OwnerAccount: string;
+    /**
+      * 数据源的配置信息，以JSON KV存储，根据每个数据源类型不同，而KV存储信息不同
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Params: string;
+    /**
+      * 数据源数据源的可见性，1为可见、0为不可见。默认为1
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Status: number;
+    /**
+      * 数据源责任人账号名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OwnerAccountName: string;
+    /**
+      * 集群名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ClusterName: string;
+    /**
+      * 归属项目ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OwnerProjectId: string;
+    /**
+      * 归属项目Name
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OwnerProjectName: string;
+    /**
+      * 归属项目标识
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OwnerProjectIdent: string;
+    /**
+      * 授权项目
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AuthorityProjectName: string;
+    /**
+      * 授权用户
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AuthorityUserName: string;
+    /**
+      * 是否有编辑权限
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Edit: boolean;
+    /**
+      * 是否有授权权限
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Author: boolean;
+    /**
+      * 是否有转交权限
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Deliver: boolean;
+    /**
+      * 数据源状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DataSourceStatus: string;
+    /**
+      * 时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreateTime: number;
+    /**
+      * Params json字符串
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ParamsString: string;
+    /**
+      * BizParams json字符串
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BizParamsString: string;
 }
 /**
  * DescribeTaskDetail请求参数结构体
@@ -2537,6 +2874,34 @@ export interface CreateWorkflowResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Data: CommonId;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeDatasource返回参数结构体
+ */
+export interface DescribeDatasourceResponse {
+    /**
+      * 数据源对象
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Data: DataSourceInfo;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DeleteDataSources返回参数结构体
+ */
+export interface DeleteDataSourcesResponse {
+    /**
+      * 是否删除成功
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Data: boolean;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2621,6 +2986,15 @@ export interface RecordField {
       * 字段值
       */
     Value: string;
+}
+/**
+ * DeleteDataSources请求参数结构体
+ */
+export interface DeleteDataSourcesRequest {
+    /**
+      * id列表
+      */
+    Ids: Array<number>;
 }
 /**
  * ModifyWorkflowInfo返回参数结构体

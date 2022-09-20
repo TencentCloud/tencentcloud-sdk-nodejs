@@ -16,34 +16,6 @@
  */
 
 /**
- * DescribeVpcRuleOverview返回参数结构体
- */
-export interface DescribeVpcRuleOverviewResponse {
-  /**
-      * 阻断策略规则数量
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  StrategyNum: number
-
-  /**
-      * 启用规则数量
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  StartRuleNum: number
-
-  /**
-      * 规则总量
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Total: number
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DescribeNatFwInstance请求参数结构体
  */
 export type DescribeNatFwInstanceRequest = null
@@ -354,18 +326,28 @@ true为启用，false为不启用
 }
 
 /**
- * ip防护状态
+ * DescribeTLogInfo请求参数结构体
  */
-export interface IPDefendStatus {
+export interface DescribeTLogInfoRequest {
   /**
-   * ip地址
+   * 开始时间
    */
-  IP: string
+  StartTime: string
 
   /**
-   * 防护状态   1:防护打开; -1:地址错误; 其他:未防护
+   * 结束时间
    */
-  Status: number
+  EndTime: string
+
+  /**
+   * 类型 1 告警 2阻断
+   */
+  QueryType: string
+
+  /**
+   * 查询条件
+   */
+  SearchValue?: string
 }
 
 /**
@@ -1514,28 +1496,18 @@ export interface DescribeSourceAssetResponse {
 }
 
 /**
- * DescribeTLogInfo请求参数结构体
+ * ip防护状态
  */
-export interface DescribeTLogInfoRequest {
+export interface IPDefendStatus {
   /**
-   * 开始时间
+   * ip地址
    */
-  StartTime: string
+  IP: string
 
   /**
-   * 结束时间
+   * 防护状态   1:防护打开; -1:地址错误; 其他:未防护
    */
-  EndTime: string
-
-  /**
-   * 类型 1 告警 2阻断
-   */
-  QueryType: string
-
-  /**
-   * 查询条件
-   */
-  SearchValue?: string
+  Status: number
 }
 
 /**
@@ -2827,16 +2799,6 @@ export interface DescribeAcListsRequest {
    * 实例ID
    */
   InstanceId?: string
-}
-
-/**
- * DescribeVpcRuleOverview请求参数结构体
- */
-export interface DescribeVpcRuleOverviewRequest {
-  /**
-   * EdgeId值两个vpc间的边id  不是必填项可以为空，就是所有vpc间的访问控制规则
-   */
-  EdgeId: string
 }
 
 /**

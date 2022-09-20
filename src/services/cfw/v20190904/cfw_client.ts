@@ -18,7 +18,6 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  DescribeVpcRuleOverviewResponse,
   DescribeNatFwInstanceRequest,
   ModifyNatFwVpcDnsSwitchResponse,
   DescribeNatFwInstanceWithRegionRequest,
@@ -29,7 +28,7 @@ import {
   ModifyAcRuleResponse,
   DescribeTableStatusResponse,
   AddAcRuleRequest,
-  IPDefendStatus,
+  DescribeTLogInfoRequest,
   SecurityGroupRule,
   ModifyNatFwVpcDnsSwitchRequest,
   DeleteNatFwInstanceResponse,
@@ -70,7 +69,7 @@ import {
   DescribeSourceAssetRequest,
   SecurityGroupOrderIndexData,
   DescribeSourceAssetResponse,
-  DescribeTLogInfoRequest,
+  IPDefendStatus,
   DescribeSecurityGroupListResponse,
   AssetZone,
   DescribeTLogIpListRequest,
@@ -121,7 +120,6 @@ import {
   DescribeRuleOverviewRequest,
   DescribeDefenseSwitchResponse,
   DescribeAcListsRequest,
-  DescribeVpcRuleOverviewRequest,
   UnHandleEvent,
   DescribeAssociatedInstanceListRequest,
   DeleteAcRuleRequest,
@@ -253,16 +251,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateChooseVpcsResponse) => void
   ): Promise<CreateChooseVpcsResponse> {
     return this.request("CreateChooseVpcs", req, cb)
-  }
-
-  /**
-   * vpc规则列表概况
-   */
-  async DescribeVpcRuleOverview(
-    req: DescribeVpcRuleOverviewRequest,
-    cb?: (error: string, rep: DescribeVpcRuleOverviewResponse) => void
-  ): Promise<DescribeVpcRuleOverviewResponse> {
-    return this.request("DescribeVpcRuleOverview", req, cb)
   }
 
   /**

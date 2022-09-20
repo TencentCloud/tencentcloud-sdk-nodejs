@@ -28,8 +28,9 @@ import {
   DescribeDependTasksNewRequest,
   OperateResult,
   DescribeInstanceLogsRequest,
-  Workflow,
+  BatchReturn,
   ModifyTaskScriptRequest,
+  CreateDataSourceRequest,
   IntegrationNodeSchemaMapping,
   DeleteWorkflowNewResponse,
   TaskInfoData,
@@ -67,7 +68,9 @@ import {
   GeneralTaskParam,
   RegisterEventListenerResponse,
   CreateFolderResponse,
+  Workflow,
   DescribeFolderWorkflowListRequest,
+  ModifyDataSourceResponse,
   DescribeFolderListRequest,
   TriggerEventRequest,
   ModifyTaskInfoResponse,
@@ -82,6 +85,7 @@ import {
   RegisterEventRequest,
   BatchModifyOwnersNewResponse,
   CanvasInfo,
+  DescribeDatasourceRequest,
   DeleteWorkflowNewRequest,
   FreezeTasksByMultiWorkflowRequest,
   InstanceInfo,
@@ -92,6 +96,7 @@ import {
   DescribeTaskInstancesRequest,
   TaskInstanceInfo,
   DescribeTasksByPageResponse,
+  CreateDataSourceResponse,
   DescribeFolderListResponse,
   DescribeProjectRequest,
   TaskCanvasInfo,
@@ -110,16 +115,20 @@ import {
   FreezeTasksResponse,
   CreateTaskResponse,
   BatchResult,
+  ModifyDataSourceRequest,
   DescribeTaskInstancesResponse,
   ModifyTaskInfoRequest,
-  BatchReturn,
+  DataSourceInfo,
   DescribeTaskDetailRequest,
   SetTaskAlarmNewResponse,
   CreateWorkflowResponse,
+  DescribeDatasourceResponse,
+  DeleteDataSourcesResponse,
   RegisterEventListenerRequest,
   ModifyTaskLinksRequest,
   ModifyWorkflowScheduleResponse,
   RecordField,
+  DeleteDataSourcesRequest,
   ModifyWorkflowInfoResponse,
   OrderField,
   DescribeRelatedInstancesResponse,
@@ -228,6 +237,17 @@ export class Client extends AbstractClient {
 
   /**
      * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+修改数据源
+     */
+  async ModifyDataSource(
+    req: ModifyDataSourceRequest,
+    cb?: (error: string, rep: ModifyDataSourceResponse) => void
+  ): Promise<ModifyDataSourceResponse> {
+    return this.request("ModifyDataSource", req, cb)
+  }
+
+  /**
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
 更新任务
      */
   async ModifyTaskInfo(
@@ -235,6 +255,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyTaskInfoResponse) => void
   ): Promise<ModifyTaskInfoResponse> {
     return this.request("ModifyTaskInfo", req, cb)
+  }
+
+  /**
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+删除数据源
+     */
+  async DeleteDataSources(
+    req: DeleteDataSourcesRequest,
+    cb?: (error: string, rep: DeleteDataSourcesResponse) => void
+  ): Promise<DeleteDataSourcesResponse> {
+    return this.request("DeleteDataSources", req, cb)
   }
 
   /**
@@ -329,6 +360,17 @@ export class Client extends AbstractClient {
 
   /**
      * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+数据源详情
+     */
+  async DescribeDatasource(
+    req: DescribeDatasourceRequest,
+    cb?: (error: string, rep: DescribeDatasourceResponse) => void
+  ): Promise<DescribeDatasourceResponse> {
+    return this.request("DescribeDatasource", req, cb)
+  }
+
+  /**
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
 批量删除任务，仅对任务状态为”已停止“有效；
 
      */
@@ -396,6 +438,17 @@ export class Client extends AbstractClient {
 
   /**
      * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+添加父任务依赖
+     */
+  async ModifyTaskLinks(
+    req: ModifyTaskLinksRequest,
+    cb?: (error: string, rep: ModifyTaskLinksResponse) => void
+  ): Promise<ModifyTaskLinksResponse> {
+    return this.request("ModifyTaskLinks", req, cb)
+  }
+
+  /**
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
 文件夹更新
      */
   async ModifyFolder(
@@ -451,13 +504,13 @@ export class Client extends AbstractClient {
 
   /**
      * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-添加父任务依赖
+创建数据源
      */
-  async ModifyTaskLinks(
-    req: ModifyTaskLinksRequest,
-    cb?: (error: string, rep: ModifyTaskLinksResponse) => void
-  ): Promise<ModifyTaskLinksResponse> {
-    return this.request("ModifyTaskLinks", req, cb)
+  async CreateDataSource(
+    req: CreateDataSourceRequest,
+    cb?: (error: string, rep: CreateDataSourceResponse) => void
+  ): Promise<CreateDataSourceResponse> {
+    return this.request("CreateDataSource", req, cb)
   }
 
   /**

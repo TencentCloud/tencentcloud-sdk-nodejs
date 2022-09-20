@@ -84,10 +84,24 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+修改数据源
+     */
+    async ModifyDataSource(req, cb) {
+        return this.request("ModifyDataSource", req, cb);
+    }
+    /**
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
 更新任务
      */
     async ModifyTaskInfo(req, cb) {
         return this.request("ModifyTaskInfo", req, cb);
+    }
+    /**
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+删除数据源
+     */
+    async DeleteDataSources(req, cb) {
+        return this.request("DeleteDataSources", req, cb);
     }
     /**
      * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
@@ -149,6 +163,13 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+数据源详情
+     */
+    async DescribeDatasource(req, cb) {
+        return this.request("DescribeDatasource", req, cb);
+    }
+    /**
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
 批量删除任务，仅对任务状态为”已停止“有效；
 
      */
@@ -192,6 +213,13 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+添加父任务依赖
+     */
+    async ModifyTaskLinks(req, cb) {
+        return this.request("ModifyTaskLinks", req, cb);
+    }
+    /**
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
 文件夹更新
      */
     async ModifyFolder(req, cb) {
@@ -227,10 +255,10 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-添加父任务依赖
+创建数据源
      */
-    async ModifyTaskLinks(req, cb) {
-        return this.request("ModifyTaskLinks", req, cb);
+    async CreateDataSource(req, cb) {
+        return this.request("CreateDataSource", req, cb);
     }
     /**
      * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
