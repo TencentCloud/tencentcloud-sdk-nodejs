@@ -28,6 +28,12 @@ class Client extends abstract_client_1.AbstractClient {
         super("ess.tencentcloudapi.com", "2020-11-11", clientConfig);
     }
     /**
+     * 验证合同文件
+     */
+    async VerifyPdf(req, cb) {
+        return this.request("VerifyPdf", req, cb);
+    }
+    /**
      * 查询文件下载URL
 适用场景：通过传参合同流程编号，下载对应的合同PDF文件流到本地。
      */

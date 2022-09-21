@@ -99,7 +99,10 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 指定需要批量撤销的签署流程Id，获取批量撤销链接
-客户指定需要撤销的签署流程Id，最多100个，超过100不处理；接口调用成功返回批量撤销合同的链接，通过链接跳转到电子签小程序完成批量撤销
+客户指定需要撤销的签署流程Id，最多100个，超过100不处理；
+接口调用成功返回批量撤销合同的链接，通过链接跳转到电子签小程序完成批量撤销;
+注意:
+能撤回合同的只能是合同的发起人或者发起企业的超管、法人
      */
     async ChannelCreateBatchCancelFlowUrl(req, cb) {
         return this.request("ChannelCreateBatchCancelFlowUrl", req, cb);
@@ -111,10 +114,17 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ChannelGetTaskResultApi", req, cb);
     }
     /**
-     * 此接口（SyncProxyOrganization）用于同步渠道子客企业信息，主要是子客企业的营业执照，便于子客企业开通过程中不用手动上传。若有需要调用此接口，需要在创建控制链接CreateConsoleLoginUrl之后即刻进行调用。
+     * 【描述】：创建出证报告，返回报告 URL
+【注意】：此接口需要通过添加白名单获取调用权限，请联系运营人员加白
      */
-    async SyncProxyOrganization(req, cb) {
-        return this.request("SyncProxyOrganization", req, cb);
+    async CreateChannelFlowEvidenceReport(req, cb) {
+        return this.request("CreateChannelFlowEvidenceReport", req, cb);
+    }
+    /**
+     * 合同文件验签
+     */
+    async ChannelVerifyPdf(req, cb) {
+        return this.request("ChannelVerifyPdf", req, cb);
     }
     /**
      * 此接口（GetDownloadFlowUrl）用于创建电子签批量下载地址，让合作企业进入控制台直接下载，支持客户合同（流程）按照自定义文件夹形式 分类下载。
@@ -134,6 +144,8 @@ class Client extends abstract_client_1.AbstractClient {
     /**
      * 指定需要批量撤销的签署流程Id，批量撤销合同
 客户指定需要撤销的签署流程Id，最多100个，超过100不处理；接口失败后返回错误信息
+注意:
+能撤回合同的只能是合同的发起人或者发起企业的超管、法人
      */
     async ChannelBatchCancelFlows(req, cb) {
         return this.request("ChannelBatchCancelFlows", req, cb);
@@ -166,11 +178,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UploadFiles", req, cb);
     }
     /**
-     * 【描述】：创建出证报告，返回报告 URL
-【注意】：此接口需要通过添加白名单获取调用权限，请联系运营人员加白
+     * 此接口（SyncProxyOrganization）用于同步渠道子客企业信息，主要是子客企业的营业执照，便于子客企业开通过程中不用手动上传。若有需要调用此接口，需要在创建控制链接CreateConsoleLoginUrl之后即刻进行调用。
      */
-    async CreateChannelFlowEvidenceReport(req, cb) {
-        return this.request("CreateChannelFlowEvidenceReport", req, cb);
+    async SyncProxyOrganization(req, cb) {
+        return this.request("SyncProxyOrganization", req, cb);
     }
     /**
      * 此接口（OperateChannelTemplate）用于渠道侧将模板库中的模板对合作企业进行查询和设置, 其中包括可见性的修改以及对合作企业的设置.

@@ -1,12 +1,16 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CancelMultiFlowSignQRCodeRequest, CreateFlowEvidenceReportResponse, DescribeFileUrlsResponse, CreateDocumentResponse, StartFlowRequest, CancelFlowResponse, CreateDocumentRequest, CreateFlowRequest, CreateSchemeUrlRequest, DescribeThirdPartyAuthCodeRequest, CreateFlowApproversResponse, DescribeFlowInfoRequest, CancelFlowRequest, DescribeFlowBriefsResponse, CreateMultiFlowSignQRCodeResponse, UploadFilesResponse, DescribeThirdPartyAuthCodeResponse, CreateFlowByFilesResponse, DescribeFlowBriefsRequest, DescribeFileUrlsRequest, CreateFlowSignReviewResponse, DescribeFlowTemplatesResponse, CreateFlowEvidenceReportRequest, CreateBatchCancelFlowUrlResponse, UploadFilesRequest, StartFlowResponse, GetTaskResultApiRequest, CreateBatchCancelFlowUrlRequest, CreateMultiFlowSignQRCodeRequest, CreateConvertTaskApiResponse, CreateFlowSignReviewRequest, CreateConvertTaskApiRequest, DescribeFlowInfoResponse, CreateSchemeUrlResponse, CreateFlowByFilesRequest, CancelMultiFlowSignQRCodeResponse, CreateFlowResponse, DescribeFlowTemplatesRequest, GetTaskResultApiResponse, CreateFlowApproversRequest } from "./ess_models";
+import { CancelMultiFlowSignQRCodeRequest, CreateFlowEvidenceReportResponse, DescribeFileUrlsResponse, CreateDocumentResponse, StartFlowRequest, CancelFlowResponse, CreateDocumentRequest, CreateFlowRequest, CreateSchemeUrlRequest, DescribeThirdPartyAuthCodeRequest, CreateFlowApproversResponse, DescribeFlowInfoRequest, CancelFlowRequest, DescribeFlowBriefsResponse, CreateMultiFlowSignQRCodeResponse, UploadFilesResponse, DescribeThirdPartyAuthCodeResponse, CreateFlowByFilesResponse, DescribeFlowBriefsRequest, VerifyPdfRequest, VerifyPdfResponse, DescribeFileUrlsRequest, CreateFlowSignReviewResponse, DescribeFlowTemplatesResponse, CreateFlowEvidenceReportRequest, CreateBatchCancelFlowUrlResponse, UploadFilesRequest, StartFlowResponse, GetTaskResultApiRequest, CreateBatchCancelFlowUrlRequest, CreateMultiFlowSignQRCodeRequest, CreateConvertTaskApiResponse, CreateFlowSignReviewRequest, CreateConvertTaskApiRequest, DescribeFlowInfoResponse, CreateSchemeUrlResponse, CreateFlowByFilesRequest, CancelMultiFlowSignQRCodeResponse, CreateFlowResponse, DescribeFlowTemplatesRequest, GetTaskResultApiResponse, CreateFlowApproversRequest } from "./ess_models";
 /**
  * ess client
  * @class
  */
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
+    /**
+     * 验证合同文件
+     */
+    VerifyPdf(req: VerifyPdfRequest, cb?: (error: string, rep: VerifyPdfResponse) => void): Promise<VerifyPdfResponse>;
     /**
      * 查询文件下载URL
 适用场景：通过传参合同流程编号，下载对应的合同PDF文件流到本地。

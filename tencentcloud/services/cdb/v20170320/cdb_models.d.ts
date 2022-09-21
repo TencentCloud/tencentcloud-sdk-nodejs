@@ -549,6 +549,10 @@ export interface CreateParamTemplateRequest {
       * 默认参数模板类型。支持值包括："HIGH_STABILITY" - 高稳定模板，"HIGH_PERFORMANCE" - 高性能模板。
       */
     TemplateType?: string;
+    /**
+      * 实例引擎类型，默认为"InnoDB"，支持值包括："InnoDB"，"RocksDB"。
+      */
+    EngineType?: string;
 }
 /**
  * 代理实例信息
@@ -3341,7 +3345,7 @@ export interface DescribeDBInstancesResponse {
       */
     TotalCount: number;
     /**
-      * 实例详细信息。
+      * 实例详细信息列表。
       */
     Items: Array<InstanceInfo>;
     /**

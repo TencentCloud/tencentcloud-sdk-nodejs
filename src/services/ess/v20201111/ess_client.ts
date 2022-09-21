@@ -48,14 +48,17 @@ import {
   OrganizationInfo,
   DescribeFlowBriefsRequest,
   Recipient,
+  VerifyPdfRequest,
   UserInfo,
   FillApproverInfo,
   SignUrl,
+  VerifyPdfResponse,
   DescribeFileUrlsRequest,
   ApproverInfo,
   CreateFlowSignReviewResponse,
   Caller,
   DescribeFlowTemplatesResponse,
+  PdfVerifyResult,
   CreateFlowEvidenceReportRequest,
   CreateBatchCancelFlowUrlResponse,
   UploadFilesRequest,
@@ -90,6 +93,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("ess.tencentcloudapi.com", "2020-11-11", clientConfig)
+  }
+
+  /**
+   * 验证合同文件
+   */
+  async VerifyPdf(
+    req: VerifyPdfRequest,
+    cb?: (error: string, rep: VerifyPdfResponse) => void
+  ): Promise<VerifyPdfResponse> {
+    return this.request("VerifyPdf", req, cb)
   }
 
   /**

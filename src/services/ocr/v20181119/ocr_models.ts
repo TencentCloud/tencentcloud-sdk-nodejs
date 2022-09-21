@@ -1049,29 +1049,64 @@ export interface TextFormula {
 }
 
 /**
- * MLIDCardOCR请求参数结构体
+ * HmtResidentPermitOCR返回参数结构体
  */
-export interface MLIDCardOCRRequest {
+export interface HmtResidentPermitOCRResponse {
   /**
-      * 图片的 Base64 值。
-支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
-      */
-  ImageBase64?: string
-
-  /**
-      * 图片的 Url 地址。( 中国地区之外不支持这个字段 )
-支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
-图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
-非腾讯云存储的 Url 速度和稳定性可能受一定影响。
-      */
-  ImageUrl?: string
-
-  /**
-   * 是否返回图片，默认false
+   * 证件姓名
    */
-  RetImage?: boolean
+  Name: string
+
+  /**
+   * 性别
+   */
+  Sex: string
+
+  /**
+   * 出生日期
+   */
+  Birth: string
+
+  /**
+   * 地址
+   */
+  Address: string
+
+  /**
+   * 身份证号
+   */
+  IdCardNo: string
+
+  /**
+      * 0-正面
+1-反面
+      */
+  CardType: number
+
+  /**
+   * 证件有效期限
+   */
+  ValidDate: string
+
+  /**
+   * 签发机关
+   */
+  Authority: string
+
+  /**
+   * 签发次数
+   */
+  VisaNum: string
+
+  /**
+   * 通行证号码
+   */
+  PassNo: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1181,23 +1216,47 @@ DOUBLE 为行驶证主页正面和副页正面。
 }
 
 /**
- * EnterpriseLicenseOCR返回参数结构体
+ * ImageEnhancement请求参数结构体
  */
-export interface EnterpriseLicenseOCRResponse {
+export interface ImageEnhancementRequest {
   /**
-   * 企业证照识别结果，具体内容请点击左侧链接。
-   */
-  EnterpriseLicenseInfos: Array<EnterpriseLicenseInfo>
+      * 图片的 Base64 值。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
+图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+      */
+  ImageBase64?: string
 
   /**
-   * 图片旋转角度（角度制），文本的水平方向为0°，顺时针为正，逆时针为负。
-   */
-  Angle: number
+      * 图片的 Url 地址。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
+图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
+非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+      */
+  ImageUrl?: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+      * 默认为空，ReturnImage的取值以及含义如下：
+“preprocess”: 返回预处理后的图片数据
+“origin”：返回原图片数据
+" ":不返回图片数据
+      */
+  ReturnImage?: string
+
+  /**
+      * 默认值为1，指定图像增强方法：
+1：切边增强
+2：弯曲矫正
+202：黑白模式
+204：提亮模式
+205：灰度模式
+207：省墨模式
+208：文字锐化（适合非彩色图片）
+301：去摩尔纹
+302：去除阴影
+      */
+  TaskType?: number
 }
 
 /**
@@ -3426,6 +3485,28 @@ export interface UsedVehicleInvoiceInfo {
 }
 
 /**
+ * ImageEnhancement返回参数结构体
+ */
+export interface ImageEnhancementResponse {
+  /**
+      * 图片数据标识：
+“origin”：原图
+“preprocess”:预处理后的图
+      */
+  ImageTag: string
+
+  /**
+   * 图片数据，返回预处理后图像或原图像base64字符
+   */
+  Image: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 图片大小
  */
 export interface QrcodeImgSize {
@@ -4365,6 +4446,33 @@ export interface GeneralAccurateOCRRequest {
  * OrgCodeCertOCR请求参数结构体
  */
 export interface OrgCodeCertOCRRequest {
+  /**
+      * 图片的 Base64 值。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
+图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+      */
+  ImageBase64?: string
+
+  /**
+      * 图片的 Url 地址。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
+图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
+非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+      */
+  ImageUrl?: string
+}
+
+/**
+ * MixedInvoiceDetect请求参数结构体
+ */
+export interface MixedInvoiceDetectRequest {
+  /**
+   * 是否需要返回裁剪后的图片。
+   */
+  ReturnImage: boolean
+
   /**
       * 图片的 Base64 值。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
@@ -6200,64 +6308,29 @@ Y: 有清单 N：无清单
 }
 
 /**
- * HmtResidentPermitOCR返回参数结构体
+ * MLIDCardOCR请求参数结构体
  */
-export interface HmtResidentPermitOCRResponse {
+export interface MLIDCardOCRRequest {
   /**
-   * 证件姓名
-   */
-  Name: string
-
-  /**
-   * 性别
-   */
-  Sex: string
-
-  /**
-   * 出生日期
-   */
-  Birth: string
-
-  /**
-   * 地址
-   */
-  Address: string
-
-  /**
-   * 身份证号
-   */
-  IdCardNo: string
-
-  /**
-      * 0-正面
-1-反面
+      * 图片的 Base64 值。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
       */
-  CardType: number
+  ImageBase64?: string
 
   /**
-   * 证件有效期限
-   */
-  ValidDate: string
+      * 图片的 Url 地址。( 中国地区之外不支持这个字段 )
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
+图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
+非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+      */
+  ImageUrl?: string
 
   /**
-   * 签发机关
+   * 是否返回图片，默认false
    */
-  Authority: string
-
-  /**
-   * 签发次数
-   */
-  VisaNum: string
-
-  /**
-   * 通行证号码
-   */
-  PassNo: string
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  RetImage?: boolean
 }
 
 /**
@@ -6745,30 +6818,23 @@ Config = {"CropIdCard":true,"CropPortrait":true}
 }
 
 /**
- * MixedInvoiceDetect请求参数结构体
+ * EnterpriseLicenseOCR返回参数结构体
  */
-export interface MixedInvoiceDetectRequest {
+export interface EnterpriseLicenseOCRResponse {
   /**
-   * 是否需要返回裁剪后的图片。
+   * 企业证照识别结果，具体内容请点击左侧链接。
    */
-  ReturnImage: boolean
+  EnterpriseLicenseInfos: Array<EnterpriseLicenseInfo>
 
   /**
-      * 图片的 Base64 值。
-支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
-图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
-      */
-  ImageBase64?: string
+   * 图片旋转角度（角度制），文本的水平方向为0°，顺时针为正，逆时针为负。
+   */
+  Angle: number
 
   /**
-      * 图片的 Url 地址。
-支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
-图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
-非腾讯云存储的 Url 速度和稳定性可能受一定影响。
-      */
-  ImageUrl?: string
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

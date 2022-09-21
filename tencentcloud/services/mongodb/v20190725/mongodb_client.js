@@ -191,6 +191,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AssignProject", req, cb);
     }
     /**
+     * 本接口(DescribeAccountUsers)用于获取当前实例的全部账号列表。
+     */
+    async DescribeAccountUsers(req, cb) {
+        return this.request("DescribeAccountUsers", req, cb);
+    }
+    /**
      * 本接口(RenameInstance)用于修改云数据库实例的名称。
      */
     async RenameInstance(req, cb) {

@@ -19,13 +19,65 @@ export interface ResourceUrlInfo {
     Type: string;
 }
 /**
- * SyncProxyOrganization返回参数结构体
+ * 合同文件验签单个结果结构体
  */
-export interface SyncProxyOrganizationResponse {
+export interface PdfVerifyResult {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 验签结果
       */
-    RequestId?: string;
+    VerifyResult: number;
+    /**
+      * 签署平台
+      */
+    SignPlatform: string;
+    /**
+      * 签署人名称
+      */
+    SignerName: string;
+    /**
+      * 签署时间
+      */
+    SignTime: number;
+    /**
+      * 签名算法
+      */
+    SignAlgorithm: string;
+    /**
+      * 签名证书序列号
+      */
+    CertSn: string;
+    /**
+      * 证书起始时间
+      */
+    CertNotBefore: number;
+    /**
+      * 证书过期时间
+      */
+    CertNotAfter: number;
+    /**
+      * 签名类型
+      */
+    SignType: number;
+    /**
+      * 签名域横坐标
+      */
+    ComponentPosX: number;
+    /**
+      * 签名域纵坐标
+      */
+    ComponentPosY: number;
+    /**
+      * 签名域宽度
+      */
+    ComponentWidth: number;
+    /**
+      * 签名域高度
+      */
+    ComponentHeight: number;
+    /**
+      * 签名域所在页码
+      */
+    ComponentPage: number;
 }
 /**
  * 创建签署流程签署人入参
@@ -213,6 +265,15 @@ export interface UploadFilesRequest {
       * 操作者的信息
       */
     Operator?: UserInfo;
+}
+/**
+ * SyncProxyOrganization返回参数结构体
+ */
+export interface SyncProxyOrganizationResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * ChannelBatchCancelFlows返回参数结构体
@@ -661,6 +722,24 @@ export interface ChannelGetTaskResultApiRequest {
     Organization?: OrganizationInfo;
 }
 /**
+ * ChannelVerifyPdf返回参数结构体
+ */
+export interface ChannelVerifyPdfResponse {
+    /**
+      * 验签结果，1-文件未被篡改，全部签名在腾讯电子签完成； 2-文件未被篡改，部分签名在腾讯电子签完成；3-文件被篡改；4-异常：文件内没有签名域；5-异常：文件签名格式错误
+      */
+    VerifyResult: number;
+    /**
+      * 验签结果详情,内部状态1-验签成功，在电子签签署；2-验签成功，在其他平台签署；3-验签失败；4-pdf文件没有签名域
+；5-文件签名格式错误
+      */
+    PdfVerifyResults: Array<PdfVerifyResult>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 签署链接内容
  */
 export interface SignUrlInfo {
@@ -1095,21 +1174,21 @@ export interface CreateSealByImageResponse {
     RequestId?: string;
 }
 /**
- * 一码多扫签署二维码签署信息
+ * ChannelVerifyPdf请求参数结构体
  */
-export interface SignUrl {
+export interface ChannelVerifyPdfRequest {
     /**
-      * 小程序签署链接
+      * 合同Id，流程Id
       */
-    AppSignUrl: string;
+    FlowId: string;
     /**
-      * 签署链接有效时间
+      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
       */
-    EffectiveTime: string;
+    Agent?: Agent;
     /**
-      * 移动端签署链接
+      * 操作者的信息
       */
-    HttpSignUrl: string;
+    Operator?: UserInfo;
 }
 /**
  * 流程对应资源链接信息
@@ -1335,6 +1414,23 @@ export interface SignQrCode {
       * 二维码过期时间
       */
     ExpiredTime: number;
+}
+/**
+ * 一码多扫签署二维码签署信息
+ */
+export interface SignUrl {
+    /**
+      * 小程序签署链接
+      */
+    AppSignUrl: string;
+    /**
+      * 签署链接有效时间
+      */
+    EffectiveTime: string;
+    /**
+      * 移动端签署链接
+      */
+    HttpSignUrl: string;
 }
 /**
  * ChannelCreateFlowGroupByFiles返回参数结构体

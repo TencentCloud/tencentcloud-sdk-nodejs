@@ -19,12 +19,13 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   ResourceUrlInfo,
-  SyncProxyOrganizationResponse,
+  PdfVerifyResult,
   FlowApproverInfo,
   ChannelCreateConvertTaskApiResponse,
   OperateChannelTemplateRequest,
   TemplateInfo,
   UploadFilesRequest,
+  SyncProxyOrganizationResponse,
   ChannelBatchCancelFlowsResponse,
   GetDownloadFlowUrlResponse,
   DescribeResourceUrlsByFlowsResponse,
@@ -42,6 +43,7 @@ import {
   UploadFile,
   ProxyOrganizationOperator,
   ChannelGetTaskResultApiRequest,
+  ChannelVerifyPdfResponse,
   SignUrlInfo,
   Component,
   GetDownloadFlowUrlRequest,
@@ -54,7 +56,7 @@ import {
   DescribeUsageResponse,
   SyncProxyOrganizationOperatorsResponse,
   CreateSealByImageResponse,
-  SignUrl,
+  ChannelVerifyPdfRequest,
   FlowResourceUrlInfo,
   FlowFileInfo,
   DescribeTemplatesRequest,
@@ -64,6 +66,7 @@ import {
   SyncProxyOrganizationRequest,
   CreateSealByImageRequest,
   SignQrCode,
+  SignUrl,
   ChannelCreateFlowGroupByFilesResponse,
   PrepareFlowsRequest,
   UsageDetail,
@@ -215,7 +218,10 @@ export class Client extends AbstractClient {
 
   /**
      * 指定需要批量撤销的签署流程Id，获取批量撤销链接
-客户指定需要撤销的签署流程Id，最多100个，超过100不处理；接口调用成功返回批量撤销合同的链接，通过链接跳转到电子签小程序完成批量撤销
+客户指定需要撤销的签署流程Id，最多100个，超过100不处理；
+接口调用成功返回批量撤销合同的链接，通过链接跳转到电子签小程序完成批量撤销;
+注意:
+能撤回合同的只能是合同的发起人或者发起企业的超管、法人
      */
   async ChannelCreateBatchCancelFlowUrl(
     req: ChannelCreateBatchCancelFlowUrlRequest,
@@ -235,13 +241,24 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 此接口（SyncProxyOrganization）用于同步渠道子客企业信息，主要是子客企业的营业执照，便于子客企业开通过程中不用手动上传。若有需要调用此接口，需要在创建控制链接CreateConsoleLoginUrl之后即刻进行调用。
+     * 【描述】：创建出证报告，返回报告 URL
+【注意】：此接口需要通过添加白名单获取调用权限，请联系运营人员加白
+     */
+  async CreateChannelFlowEvidenceReport(
+    req: CreateChannelFlowEvidenceReportRequest,
+    cb?: (error: string, rep: CreateChannelFlowEvidenceReportResponse) => void
+  ): Promise<CreateChannelFlowEvidenceReportResponse> {
+    return this.request("CreateChannelFlowEvidenceReport", req, cb)
+  }
+
+  /**
+   * 合同文件验签
    */
-  async SyncProxyOrganization(
-    req: SyncProxyOrganizationRequest,
-    cb?: (error: string, rep: SyncProxyOrganizationResponse) => void
-  ): Promise<SyncProxyOrganizationResponse> {
-    return this.request("SyncProxyOrganization", req, cb)
+  async ChannelVerifyPdf(
+    req: ChannelVerifyPdfRequest,
+    cb?: (error: string, rep: ChannelVerifyPdfResponse) => void
+  ): Promise<ChannelVerifyPdfResponse> {
+    return this.request("ChannelVerifyPdf", req, cb)
   }
 
   /**
@@ -270,6 +287,8 @@ export class Client extends AbstractClient {
   /**
      * 指定需要批量撤销的签署流程Id，批量撤销合同
 客户指定需要撤销的签署流程Id，最多100个，超过100不处理；接口失败后返回错误信息
+注意:
+能撤回合同的只能是合同的发起人或者发起企业的超管、法人
      */
   async ChannelBatchCancelFlows(
     req: ChannelBatchCancelFlowsRequest,
@@ -322,14 +341,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 【描述】：创建出证报告，返回报告 URL
-【注意】：此接口需要通过添加白名单获取调用权限，请联系运营人员加白
-     */
-  async CreateChannelFlowEvidenceReport(
-    req: CreateChannelFlowEvidenceReportRequest,
-    cb?: (error: string, rep: CreateChannelFlowEvidenceReportResponse) => void
-  ): Promise<CreateChannelFlowEvidenceReportResponse> {
-    return this.request("CreateChannelFlowEvidenceReport", req, cb)
+   * 此接口（SyncProxyOrganization）用于同步渠道子客企业信息，主要是子客企业的营业执照，便于子客企业开通过程中不用手动上传。若有需要调用此接口，需要在创建控制链接CreateConsoleLoginUrl之后即刻进行调用。
+   */
+  async SyncProxyOrganization(
+    req: SyncProxyOrganizationRequest,
+    cb?: (error: string, rep: SyncProxyOrganizationResponse) => void
+  ): Promise<SyncProxyOrganizationResponse> {
+    return this.request("SyncProxyOrganization", req, cb)
   }
 
   /**

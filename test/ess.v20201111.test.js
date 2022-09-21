@@ -18,6 +18,16 @@ const client = new tencentcloud.ess.v20201111.Client({
 })
 describe("ess.v20201111.test.js", function () {
 
+it("ess.v20201111.VerifyPdf", async function () {
+    try {
+       const data = await client.VerifyPdf({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ess.v20201111.DescribeFileUrls", async function () {
     try {
        const data = await client.DescribeFileUrls({})

@@ -2529,14 +2529,10 @@ export interface CreateProductRequest {
   ProductVaildYears: number
 
   /**
-   * 设备功能码 ypsxth音频双向通话 spdxth视频单向通话 sxysp双向音视频
-   */
+      * 设备功能码 ypsxth音频双向通话 spdxth视频单向通话 sxysp双向音视频
+注意：此字段只支持创建'摄像头'和'儿童手表'，摄像头传["ypsxth","spdxth"]，儿童手表传["ypsxth","spdxth","sxysp"]，创建其它品类的产品需要传递CategoryId字段，通过云api调用此接口时，如果传了CategoryId字段，将忽略Features字段,但Features仍需传值(可传任意字符串数组)
+      */
   Features: Array<string>
-
-  /**
-   * 设备操作系统，通用设备填default
-   */
-  ChipOs: string
 
   /**
    * 芯片厂商id，通用设备填default
@@ -2554,9 +2550,20 @@ export interface CreateProductRequest {
   ProductDescription: string
 
   /**
+   * 设备操作系统，通用设备填default
+   */
+  ChipOs: string
+
+  /**
    * 认证方式 只支持取值为2 psk认证
    */
   EncryptionType?: number
+
+  /**
+      * 产品品类id,113:摄像头,567:儿童手表,595:可视对讲门锁
+注意：通过云api调用此接口时，如果传了CategoryId字段，将忽略Features字段,但Features仍需传值(可传任意字符串数组)
+      */
+  CategoryId?: number
 
   /**
    * 连接类型，wifi表示WIFI连接，cellular表示4G连接
@@ -3497,6 +3504,12 @@ export interface VideoProduct {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   CategoryId: number
+
+  /**
+      * 产品有效年限
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProductVaildYears: number
 }
 
 /**

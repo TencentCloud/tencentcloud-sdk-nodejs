@@ -38,9 +38,9 @@ it("ocr.v20181119.VerifyBasicBizLicense", async function () {
     }
 })
 
-it("ocr.v20181119.VatInvoiceVerify", async function () {
+it("ocr.v20181119.ImageEnhancement", async function () {
     try {
-       const data = await client.VatInvoiceVerify({})
+       const data = await client.ImageEnhancement({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -261,6 +261,16 @@ it("ocr.v20181119.GeneralHandwritingOCR", async function () {
 it("ocr.v20181119.WaybillOCR", async function () {
     try {
        const data = await client.WaybillOCR({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ocr.v20181119.VatInvoiceVerify", async function () {
+    try {
+       const data = await client.VatInvoiceVerify({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

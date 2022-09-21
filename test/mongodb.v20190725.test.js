@@ -288,6 +288,16 @@ it("mongodb.v20190725.AssignProject", async function () {
     }
 })
 
+it("mongodb.v20190725.DescribeAccountUsers", async function () {
+    try {
+       const data = await client.DescribeAccountUsers({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mongodb.v20190725.RenameInstance", async function () {
     try {
        const data = await client.RenameInstance({})

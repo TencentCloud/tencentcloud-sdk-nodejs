@@ -21,6 +21,7 @@ import {
   DescribeSpecInfoRequest,
   CreateDBInstanceRequest,
   DescribeCurrentOpResponse,
+  DescribeAccountUsersRequest,
   CreateBackupDBInstanceResponse,
   DBInstancePrice,
   KillOpsRequest,
@@ -59,11 +60,13 @@ import {
   CreateDBInstanceResponse,
   InstanceTextParam,
   ModifyDBInstanceSecurityGroupRequest,
+  DescribeAccountUsersResponse,
   DescribeBackupDownloadTaskRequest,
   DescribeClientConnectionsResponse,
   TerminateDBInstancesRequest,
   DescribeDBBackupsResponse,
   ModifyDBInstanceSecurityGroupResponse,
+  UserInfo,
   DescribeInstanceParamsRequest,
   InquirePriceCreateDBInstancesResponse,
   DescribeSecurityGroupResponse,
@@ -386,6 +389,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AssignProjectResponse) => void
   ): Promise<AssignProjectResponse> {
     return this.request("AssignProject", req, cb)
+  }
+
+  /**
+   * 本接口(DescribeAccountUsers)用于获取当前实例的全部账号列表。
+   */
+  async DescribeAccountUsers(
+    req: DescribeAccountUsersRequest,
+    cb?: (error: string, rep: DescribeAccountUsersResponse) => void
+  ): Promise<DescribeAccountUsersResponse> {
+    return this.request("DescribeAccountUsers", req, cb)
   }
 
   /**

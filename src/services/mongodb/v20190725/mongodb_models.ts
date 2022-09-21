@@ -181,6 +181,16 @@ export interface DescribeCurrentOpResponse {
 }
 
 /**
+ * DescribeAccountUsers请求参数结构体
+ */
+export interface DescribeAccountUsersRequest {
+  /**
+   * 实例ID。
+   */
+  InstanceId: string
+}
+
+/**
  * CreateBackupDBInstance返回参数结构体
  */
 export interface CreateBackupDBInstanceResponse {
@@ -1215,6 +1225,21 @@ export interface ModifyDBInstanceSecurityGroupRequest {
 }
 
 /**
+ * DescribeAccountUsers返回参数结构体
+ */
+export interface DescribeAccountUsersResponse {
+  /**
+   * 实例账号列表。
+   */
+  Users: Array<UserInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeBackupDownloadTask请求参数结构体
  */
 export interface DescribeBackupDownloadTaskRequest {
@@ -1322,6 +1347,36 @@ export interface ModifyDBInstanceSecurityGroupResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 账户基本信息
+ */
+export interface UserInfo {
+  /**
+   * 账号名。
+   */
+  UserName: string
+
+  /**
+   * 账号权限详情。
+   */
+  AuthRole: Array<Auth>
+
+  /**
+   * 账号创建时间。
+   */
+  CreateTime: string
+
+  /**
+   * 账号更新时间。
+   */
+  UpdateTime: string
+
+  /**
+   * 备注信息。
+   */
+  UserDesc: string
 }
 
 /**

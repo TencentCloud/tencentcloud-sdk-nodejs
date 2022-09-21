@@ -542,7 +542,7 @@ export interface PhoneNumBuyInfo {
   EndTime: number
 
   /**
-   * 号码状态，1正常|2停用
+   * 号码状态，1正常|2欠费停用|4管理员停用|5违规停用
    */
   State: number
 }
