@@ -2890,6 +2890,12 @@ export interface DescribeDatahubTaskRes {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ErrorMessage: string
+
+  /**
+      * 任务标签列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Tags: Array<Tag>
 }
 
 /**
@@ -2905,6 +2911,59 @@ export interface CreatePartitionResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * MongoDB连接源参数
+ */
+export interface MongoDBConnectParam {
+  /**
+      * MongoDB的连接port
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Port: number
+
+  /**
+      * MongoDB连接源的用户名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UserName: string
+
+  /**
+      * MongoDB连接源的密码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Password: string
+
+  /**
+      * MongoDB连接源的实例资源
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Resource: string
+
+  /**
+      * MongoDB连接源是否为自建集群
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SelfBuilt: boolean
+
+  /**
+      * MongoDB连接源的实例vip，当为腾讯云实例时，必填
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ServiceVip?: string
+
+  /**
+      * MongoDB连接源的vpcId，当为腾讯云实例时，必填
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UniqVpcId?: string
+
+  /**
+      * 是否更新到关联的Datahub任务
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsUpdate?: boolean
 }
 
 /**
@@ -5710,56 +5769,18 @@ export interface DescribeInstancesDetailRequest {
 }
 
 /**
- * MongoDB连接源参数
+ * 数据处理——Value处理参数——Jsonpath替换参数
  */
-export interface MongoDBConnectParam {
+export interface JsonPathReplaceParam {
   /**
-      * MongoDB的连接port
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Port: number
+   * 被替换值，Jsonpath表达式
+   */
+  OldValue: string
 
   /**
-      * MongoDB连接源的用户名
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  UserName: string
-
-  /**
-      * MongoDB连接源的密码
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Password: string
-
-  /**
-      * MongoDB连接源的实例资源
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Resource: string
-
-  /**
-      * MongoDB连接源是否为自建集群
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  SelfBuilt: boolean
-
-  /**
-      * MongoDB连接源的实例vip，当为腾讯云实例时，必填
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ServiceVip?: string
-
-  /**
-      * MongoDB连接源的vpcId，当为腾讯云实例时，必填
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  UniqVpcId?: string
-
-  /**
-      * 是否更新到关联的Datahub任务
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  IsUpdate?: boolean
+   * 替换值，Jsonpath表达式或字符串
+   */
+  NewValue: string
 }
 
 /**
@@ -5921,6 +5942,12 @@ export interface ValueParam {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Result?: string
+
+  /**
+      * JsonPath替换，TYPE=JSON_PATH_REPLACE时必传
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  JsonPathReplace?: JsonPathReplaceParam
 }
 
 /**
@@ -6593,6 +6620,11 @@ export interface CreateDatahubTaskRequest {
    * 任务ID
    */
   TaskId?: string
+
+  /**
+   * 标签列表
+   */
+  Tags?: Array<Tag>
 }
 
 /**

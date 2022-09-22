@@ -108,6 +108,16 @@ it("wedata.v20210820.ModifyDataSource", async function () {
     }
 })
 
+it("wedata.v20210820.DescribeDataSourceList", async function () {
+    try {
+       const data = await client.DescribeDataSourceList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20210820.ModifyTaskInfo", async function () {
     try {
        const data = await client.ModifyTaskInfo({})
@@ -181,6 +191,16 @@ it("wedata.v20210820.MakeUpTasksNew", async function () {
 it("wedata.v20210820.FreezeTasksByMultiWorkflow", async function () {
     try {
        const data = await client.FreezeTasksByMultiWorkflow({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20210820.DescribeDataSourceWithoutInfo", async function () {
+    try {
+       const data = await client.DescribeDataSourceWithoutInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

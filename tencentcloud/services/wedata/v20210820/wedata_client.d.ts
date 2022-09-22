@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { SubmitTaskResponse, ModifyFolderRequest, DeleteFolderResponse, RunTaskRequest, MakeUpTasksNewResponse, DescribeTaskDetailResponse, DescribeDependTasksNewRequest, DescribeInstanceLogsRequest, ModifyTaskScriptRequest, CreateDataSourceRequest, DeleteWorkflowNewResponse, DescribeInstanceLogsResponse, MakeUpWorkflowNewResponse, BatchDeleteTasksNewResponse, ModifyTaskLinksResponse, KillInstancesResponse, SetTaskAlarmNewRequest, ModifyTaskScriptResponse, SubmitWorkflowResponse, SubmitTaskRequest, DescribeProjectResponse, BatchDeleteTasksNewRequest, DescribeFolderWorkflowListResponse, CreateFolderRequest, DeleteFolderRequest, DescribeTaskScriptRequest, RegisterEventResponse, FreezeTasksByMultiWorkflowResponse, CreateWorkflowRequest, CreateTaskRequest, KillInstancesRequest, RegisterEventListenerResponse, CreateFolderResponse, DescribeFolderWorkflowListRequest, ModifyDataSourceResponse, DescribeFolderListRequest, TriggerEventRequest, ModifyTaskInfoResponse, SubmitWorkflowRequest, RerunInstancesResponse, FreezeTasksRequest, BatchStopTasksNewRequest, ForceSucInstancesRequest, ModifyWorkflowScheduleRequest, RegisterEventRequest, BatchModifyOwnersNewResponse, DescribeDatasourceRequest, DeleteWorkflowNewRequest, FreezeTasksByMultiWorkflowRequest, MakeUpWorkflowNewRequest, BatchStopTasksNewResponse, TriggerEventResponse, DescribeTaskInstancesRequest, DescribeTasksByPageResponse, CreateDataSourceResponse, DescribeFolderListResponse, DescribeProjectRequest, ModifyWorkflowInfoRequest, ModifyFolderResponse, DescribeTaskScriptResponse, RunTaskResponse, DescribeDependTasksNewResponse, DescribeRelatedInstancesRequest, BatchModifyOwnersNewRequest, FreezeTasksResponse, CreateTaskResponse, ModifyDataSourceRequest, DescribeTaskInstancesResponse, ModifyTaskInfoRequest, DescribeTaskDetailRequest, SetTaskAlarmNewResponse, CreateWorkflowResponse, DescribeDatasourceResponse, DeleteDataSourcesResponse, RegisterEventListenerRequest, ModifyTaskLinksRequest, ModifyWorkflowScheduleResponse, DeleteDataSourcesRequest, ModifyWorkflowInfoResponse, DescribeRelatedInstancesResponse, RerunInstancesRequest, MakeUpTasksNewRequest, ForceSucInstancesResponse, DescribeTasksByPageRequest } from "./wedata_models";
+import { SubmitTaskResponse, ModifyFolderRequest, DeleteFolderResponse, RunTaskRequest, MakeUpTasksNewResponse, DescribeTaskDetailResponse, DescribeDependTasksNewRequest, DescribeInstanceLogsRequest, ModifyTaskScriptRequest, CreateDataSourceRequest, DeleteWorkflowNewResponse, DescribeInstanceLogsResponse, MakeUpWorkflowNewResponse, BatchDeleteTasksNewResponse, ModifyTaskLinksResponse, KillInstancesResponse, SetTaskAlarmNewRequest, ModifyTaskScriptResponse, SubmitWorkflowResponse, SubmitTaskRequest, DescribeProjectResponse, BatchDeleteTasksNewRequest, DescribeFolderWorkflowListResponse, CreateFolderRequest, DeleteFolderRequest, DescribeTaskScriptRequest, ModifyWorkflowInfoRequest, FreezeTasksByMultiWorkflowResponse, DescribeDataSourceListRequest, CreateWorkflowRequest, CreateTaskRequest, KillInstancesRequest, RegisterEventListenerResponse, CreateFolderResponse, DescribeFolderWorkflowListRequest, ModifyDataSourceResponse, DescribeFolderListRequest, TriggerEventRequest, ModifyTaskInfoResponse, SubmitWorkflowRequest, RerunInstancesResponse, BatchStopTasksNewRequest, ForceSucInstancesRequest, ModifyWorkflowScheduleRequest, RegisterEventRequest, BatchModifyOwnersNewResponse, DescribeDataSourceWithoutInfoRequest, DescribeDatasourceRequest, DeleteWorkflowNewRequest, FreezeTasksByMultiWorkflowRequest, MakeUpWorkflowNewRequest, BatchStopTasksNewResponse, TriggerEventResponse, DescribeTaskInstancesRequest, DescribeTasksByPageResponse, CreateDataSourceResponse, DescribeDataSourceListResponse, DescribeDataSourceWithoutInfoResponse, DescribeFolderListResponse, DescribeProjectRequest, FreezeTasksRequest, ModifyFolderResponse, DescribeTaskScriptResponse, RunTaskResponse, DescribeDependTasksNewResponse, DescribeRelatedInstancesRequest, BatchModifyOwnersNewRequest, FreezeTasksResponse, CreateTaskResponse, ModifyDataSourceRequest, DescribeTaskInstancesResponse, ModifyTaskInfoRequest, DescribeTaskDetailRequest, SetTaskAlarmNewResponse, CreateWorkflowResponse, DescribeDatasourceResponse, DeleteDataSourcesResponse, RegisterEventListenerRequest, ModifyTaskLinksRequest, ModifyWorkflowScheduleResponse, DeleteDataSourcesRequest, ModifyWorkflowInfoResponse, DescribeRelatedInstancesResponse, RerunInstancesRequest, MakeUpTasksNewRequest, RegisterEventResponse, ForceSucInstancesResponse, DescribeTasksByPageRequest } from "./wedata_models";
 /**
  * wedata client
  * @class
@@ -53,6 +53,11 @@ export declare class Client extends AbstractClient {
     ModifyDataSource(req: ModifyDataSourceRequest, cb?: (error: string, rep: ModifyDataSourceResponse) => void): Promise<ModifyDataSourceResponse>;
     /**
      * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+数据源详情
+     */
+    DescribeDataSourceList(req: DescribeDataSourceListRequest, cb?: (error: string, rep: DescribeDataSourceListResponse) => void): Promise<DescribeDataSourceListResponse>;
+    /**
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
 更新任务
      */
     ModifyTaskInfo(req: ModifyTaskInfoRequest, cb?: (error: string, rep: ModifyTaskInfoResponse) => void): Promise<ModifyTaskInfoResponse>;
@@ -94,6 +99,11 @@ export declare class Client extends AbstractClient {
 基于多个工作流进行批量冻结任务操作
      */
     FreezeTasksByMultiWorkflow(req: FreezeTasksByMultiWorkflowRequest, cb?: (error: string, rep: FreezeTasksByMultiWorkflowResponse) => void): Promise<FreezeTasksByMultiWorkflowResponse>;
+    /**
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+数据源列表
+     */
+    DescribeDataSourceWithoutInfo(req: DescribeDataSourceWithoutInfoRequest, cb?: (error: string, rep: DescribeDataSourceWithoutInfoResponse) => void): Promise<DescribeDataSourceWithoutInfoResponse>;
     /**
      * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
 获取实例日志列表

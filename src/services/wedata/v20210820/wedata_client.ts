@@ -49,6 +49,7 @@ import {
   SubmitTaskRequest,
   DescribeProjectResponse,
   InstanceLog,
+  DataSourceInfoPage,
   BatchDeleteTasksNewRequest,
   DescribeFolderWorkflowListResponse,
   CreateFolderRequest,
@@ -56,10 +57,11 @@ import {
   DeleteFolderRequest,
   DescribeTaskScriptRequest,
   DescribeTaskInstancesData,
-  RegisterEventResponse,
+  DescribeFolderWorkflowListData,
+  ModifyWorkflowInfoRequest,
   FreezeTasksByMultiWorkflowResponse,
   DependencyConfig,
-  DescribeFolderWorkflowListData,
+  DescribeDataSourceListRequest,
   CreateWorkflowRequest,
   SimpleTaskInfo,
   CreateTaskRequest,
@@ -77,13 +79,14 @@ import {
   SubmitWorkflowRequest,
   RerunInstancesResponse,
   ParamInfo,
-  FreezeTasksRequest,
+  TaskLinkInfo,
   IntegrationNodeDetail,
   BatchStopTasksNewRequest,
   ForceSucInstancesRequest,
   ModifyWorkflowScheduleRequest,
   RegisterEventRequest,
   BatchModifyOwnersNewResponse,
+  DescribeDataSourceWithoutInfoRequest,
   CanvasInfo,
   DescribeDatasourceRequest,
   DeleteWorkflowNewRequest,
@@ -95,15 +98,17 @@ import {
   TriggerEventResponse,
   DescribeTaskInstancesRequest,
   TaskInstanceInfo,
+  Filter,
   DescribeTasksByPageResponse,
   CreateDataSourceResponse,
+  DescribeDataSourceListResponse,
+  DescribeDataSourceWithoutInfoResponse,
   DescribeFolderListResponse,
   DescribeProjectRequest,
   TaskCanvasInfo,
-  TaskLinkInfo,
   DescribeFolderListData,
   TaskExtInfo,
-  ModifyWorkflowInfoRequest,
+  FreezeTasksRequest,
   SubmitWorkflow,
   ModifyFolderResponse,
   DescribeTaskScriptResponse,
@@ -135,6 +140,7 @@ import {
   RerunInstancesRequest,
   MakeUpTasksNewRequest,
   TaskScriptContent,
+  RegisterEventResponse,
   ForceSucInstancesResponse,
   DescribeTasksByPageRequest,
 } from "./wedata_models"
@@ -248,6 +254,17 @@ export class Client extends AbstractClient {
 
   /**
      * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+数据源详情
+     */
+  async DescribeDataSourceList(
+    req: DescribeDataSourceListRequest,
+    cb?: (error: string, rep: DescribeDataSourceListResponse) => void
+  ): Promise<DescribeDataSourceListResponse> {
+    return this.request("DescribeDataSourceList", req, cb)
+  }
+
+  /**
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
 更新任务
      */
   async ModifyTaskInfo(
@@ -335,6 +352,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: FreezeTasksByMultiWorkflowResponse) => void
   ): Promise<FreezeTasksByMultiWorkflowResponse> {
     return this.request("FreezeTasksByMultiWorkflow", req, cb)
+  }
+
+  /**
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+数据源列表
+     */
+  async DescribeDataSourceWithoutInfo(
+    req: DescribeDataSourceWithoutInfoRequest,
+    cb?: (error: string, rep: DescribeDataSourceWithoutInfoResponse) => void
+  ): Promise<DescribeDataSourceWithoutInfoResponse> {
+    return this.request("DescribeDataSourceWithoutInfo", req, cb)
   }
 
   /**

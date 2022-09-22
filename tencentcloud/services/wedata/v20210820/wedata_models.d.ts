@@ -897,6 +897,36 @@ export interface InstanceLog {
     CostTime: number;
 }
 /**
+ * 查询数据源分页列表
+ */
+export interface DataSourceInfoPage {
+    /**
+      * 分页页码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PageNumber: number;
+    /**
+      * 分页大小
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PageSize: number;
+    /**
+      * 数据源列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Rows: Array<DataSourceInfo>;
+    /**
+      * 总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TotalCount: number;
+    /**
+      * 总分页页码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TotalPageNumber: number;
+}
+/**
  * BatchDeleteTasksNew请求参数结构体
  */
 export interface BatchDeleteTasksNewRequest {
@@ -1019,18 +1049,74 @@ export interface DescribeTaskInstancesData {
     PageSize: number;
 }
 /**
- * RegisterEvent返回参数结构体
+ * 文件夹分页信息
  */
-export interface RegisterEventResponse {
+export interface DescribeFolderWorkflowListData {
     /**
-      * 成功或者失败
-注意：此字段可能返回 null，表示取不到有效值。
+      * 工作流信息列表
       */
-    Data: BatchReturn;
+    Items: Array<Workflow>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 总条数
       */
-    RequestId?: string;
+    TotalCount: number;
+    /**
+      * 页号
+      */
+    PageNumber: number;
+    /**
+      * 页大小
+      */
+    PageSize: number;
+}
+/**
+ * ModifyWorkflowInfo请求参数结构体
+ */
+export interface ModifyWorkflowInfoRequest {
+    /**
+      * 项目Id
+      */
+    ProjectId: string;
+    /**
+      * 工作流id
+      */
+    WorkflowId: string;
+    /**
+      * 责任人
+      */
+    Owner?: string;
+    /**
+      * 责任人id
+      */
+    OwnerId?: string;
+    /**
+      * 备注
+      */
+    WorkflowDesc?: string;
+    /**
+      * 工作流名称
+      */
+    WorkflowName?: string;
+    /**
+      * 所属文件夹id
+      */
+    FolderId?: string;
+    /**
+      * 工作流所属用户分组id  若有多个,分号隔开: a;b;c
+      */
+    UserGroupId?: string;
+    /**
+      * 工作流所属用户分组名称  若有多个,分号隔开: a;b;c
+      */
+    UserGroupName?: string;
+    /**
+      * 工作流参数列表
+      */
+    WorkflowParams?: Array<ParamInfo>;
+    /**
+      * 用于配置优化参数（线程、内存、CPU核数等），仅作用于Spark SQL节点。多个参数用英文分号分隔。
+      */
+    GeneralTaskParams?: Array<GeneralTaskParam>;
 }
 /**
  * FreezeTasksByMultiWorkflow返回参数结构体
@@ -1074,25 +1160,25 @@ export interface DependencyConfig {
     SonTask?: TaskInnerInfo;
 }
 /**
- * 文件夹分页信息
+ * DescribeDataSourceList请求参数结构体
  */
-export interface DescribeFolderWorkflowListData {
+export interface DescribeDataSourceListRequest {
     /**
-      * 工作流信息列表
+      * 页码
       */
-    Items: Array<Workflow>;
+    PageNumber?: number;
     /**
-      * 总条数
+      * 返回数量
       */
-    TotalCount: number;
+    PageSize?: number;
     /**
-      * 页号
+      * 排序配置
       */
-    PageNumber: number;
+    OrderFields?: Array<OrderField>;
     /**
-      * 页大小
+      * 可选过滤条件，Filter可选配置(参考): "Name": { "type": "string", "description": "数据源名称" }, "Type": { "type": "string", "description": "类型" }, "ClusterId": { "type": "string", "description": "集群id" }, "CategoryId": { "type": "string", "description": "分类，项目或空间id" }
       */
-    PageSize: number;
+    Filters?: Array<Filter>;
 }
 /**
  * CreateWorkflow请求参数结构体
@@ -1421,17 +1507,25 @@ export interface ParamInfo {
     ParamValue: string;
 }
 /**
- * FreezeTasks请求参数结构体
+ * 任务依赖的边信息
  */
-export interface FreezeTasksRequest {
+export interface TaskLinkInfo {
     /**
-      * 任务列表
+      * 下游任务id
       */
-    Tasks: Array<SimpleTaskInfo>;
+    TaskTo: string;
     /**
-      * 任务操作是否消息通知下游任务责任人
+      * 上游任务id
       */
-    OperateIsInform: boolean;
+    TaskFrom: string;
+    /**
+      * 依赖边类型 1、“real_real”表示任务->任务；2、"virtual_real" 跨工作流任务->任务
+      */
+    LinkType: string;
+    /**
+      * 依赖边id
+      */
+    LinkId: string;
 }
 /**
  * 集成节点详情
@@ -1628,6 +1722,19 @@ export interface BatchModifyOwnersNewResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DescribeDataSourceWithoutInfo请求参数结构体
+ */
+export interface DescribeDataSourceWithoutInfoRequest {
+    /**
+      * 1
+      */
+    OrderFields?: Array<OrderField>;
+    /**
+      * 1
+      */
+    Filters?: Array<Filter>;
 }
 /**
  * 画布所需的信息
@@ -1935,6 +2042,19 @@ export interface TaskInstanceInfo {
     CostTime: string;
 }
 /**
+ * 通用过滤器
+ */
+export interface Filter {
+    /**
+      * 过滤字段名称
+      */
+    Name?: string;
+    /**
+      * 过滤值列表
+      */
+    Values?: Array<string>;
+}
+/**
  * DescribeTasksByPage返回参数结构体
  */
 export interface DescribeTasksByPageResponse {
@@ -1957,6 +2077,34 @@ export interface CreateDataSourceResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Data: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeDataSourceList返回参数结构体
+ */
+export interface DescribeDataSourceListResponse {
+    /**
+      * 数据源列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Data: DataSourceInfoPage;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeDataSourceWithoutInfo返回参数结构体
+ */
+export interface DescribeDataSourceWithoutInfoResponse {
+    /**
+      * 1
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Data: Array<DataSourceInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2175,27 +2323,6 @@ export interface TaskCanvasInfo {
     DelayTime: number;
 }
 /**
- * 任务依赖的边信息
- */
-export interface TaskLinkInfo {
-    /**
-      * 下游任务id
-      */
-    TaskTo: string;
-    /**
-      * 上游任务id
-      */
-    TaskFrom: string;
-    /**
-      * 依赖边类型 1、“real_real”表示任务->任务；2、"virtual_real" 跨工作流任务->任务
-      */
-    LinkType: string;
-    /**
-      * 依赖边id
-      */
-    LinkId: string;
-}
-/**
  * 文件夹分页信息
  */
 export interface DescribeFolderListData {
@@ -2230,53 +2357,17 @@ export interface TaskExtInfo {
     Value?: string;
 }
 /**
- * ModifyWorkflowInfo请求参数结构体
+ * FreezeTasks请求参数结构体
  */
-export interface ModifyWorkflowInfoRequest {
+export interface FreezeTasksRequest {
     /**
-      * 项目Id
+      * 任务列表
       */
-    ProjectId: string;
+    Tasks: Array<SimpleTaskInfo>;
     /**
-      * 工作流id
+      * 任务操作是否消息通知下游任务责任人
       */
-    WorkflowId: string;
-    /**
-      * 责任人
-      */
-    Owner?: string;
-    /**
-      * 责任人id
-      */
-    OwnerId?: string;
-    /**
-      * 备注
-      */
-    WorkflowDesc?: string;
-    /**
-      * 工作流名称
-      */
-    WorkflowName?: string;
-    /**
-      * 所属文件夹id
-      */
-    FolderId?: string;
-    /**
-      * 工作流所属用户分组id  若有多个,分号隔开: a;b;c
-      */
-    UserGroupId?: string;
-    /**
-      * 工作流所属用户分组名称  若有多个,分号隔开: a;b;c
-      */
-    UserGroupName?: string;
-    /**
-      * 工作流参数列表
-      */
-    WorkflowParams?: Array<ParamInfo>;
-    /**
-      * 用于配置优化参数（线程、内存、CPU核数等），仅作用于Spark SQL节点。多个参数用英文分号分隔。
-      */
-    GeneralTaskParams?: Array<GeneralTaskParam>;
+    OperateIsInform: boolean;
 }
 /**
  * 提交工作流实体
@@ -3106,6 +3197,20 @@ export interface TaskScriptContent {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ScriptContent: string;
+}
+/**
+ * RegisterEvent返回参数结构体
+ */
+export interface RegisterEventResponse {
+    /**
+      * 成功或者失败
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Data: BatchReturn;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * ForceSucInstances返回参数结构体

@@ -329,7 +329,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("BatchCreateAcl", req, cb);
     }
     /**
-     * 创建Datahub转储任务
+     * 创建DIP转储任务
      */
     async CreateDatahubTask(req, cb) {
         return this.request("CreateDatahubTask", req, cb);

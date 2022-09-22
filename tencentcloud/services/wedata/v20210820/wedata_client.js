@@ -91,6 +91,13 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+数据源详情
+     */
+    async DescribeDataSourceList(req, cb) {
+        return this.request("DescribeDataSourceList", req, cb);
+    }
+    /**
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
 更新任务
      */
     async ModifyTaskInfo(req, cb) {
@@ -147,6 +154,13 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async FreezeTasksByMultiWorkflow(req, cb) {
         return this.request("FreezeTasksByMultiWorkflow", req, cb);
+    }
+    /**
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+数据源列表
+     */
+    async DescribeDataSourceWithoutInfo(req, cb) {
+        return this.request("DescribeDataSourceWithoutInfo", req, cb);
     }
     /**
      * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>

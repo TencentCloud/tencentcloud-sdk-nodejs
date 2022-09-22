@@ -1086,7 +1086,7 @@ export interface DescribeClientConnectionsResponse {
  */
 export interface TerminateDBInstancesRequest {
     /**
-      * 实例Id列表
+      * 指定预隔离实例ID。格式如：cmgo-p8vnipr5。
       */
     InstanceId: string;
 }

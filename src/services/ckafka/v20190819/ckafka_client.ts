@@ -110,6 +110,7 @@ import {
   CreateUserResponse,
   DescribeDatahubTaskRes,
   CreatePartitionResponse,
+  MongoDBConnectParam,
   ClusterInfo,
   DeleteGroupRequest,
   DescribeConsumerGroupRequest,
@@ -211,7 +212,7 @@ import {
   CheckCdcClusterRequest,
   FetchMessageByOffsetRequest,
   DescribeInstancesDetailRequest,
-  MongoDBConnectParam,
+  JsonPathReplaceParam,
   SubstrParam,
   FetchMessageByOffsetResponse,
   CreateConsumerRequest,
@@ -793,7 +794,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建Datahub转储任务
+   * 创建DIP转储任务
    */
   async CreateDatahubTask(
     req: CreateDatahubTaskRequest,

@@ -273,7 +273,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 图像增强
+   * 文本图像增强是面向文档类图片提供的图像增强处理能力，包括切边增强、图像矫正、阴影去除、摩尔纹去除等；可以有效优化文档类的图片质量，提升文字的清晰度。
    */
   async ImageEnhancement(
     req: ImageEnhancementRequest,

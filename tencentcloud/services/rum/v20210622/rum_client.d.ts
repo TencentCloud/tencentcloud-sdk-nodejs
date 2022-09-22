@@ -32,7 +32,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeDataLogUrlStatistics(req: DescribeDataLogUrlStatisticsRequest, cb?: (error: string, rep: DescribeDataLogUrlStatisticsResponse) => void): Promise<DescribeDataLogUrlStatisticsResponse>;
     /**
-     * 获取DescribeDataFetchProject信息
+     * 获取DescribeDataFetchProject信息。已下线，请使用DescribeDataFetchUrl
      */
     DescribeDataFetchProject(req: DescribeDataFetchProjectRequest, cb?: (error: string, rep: DescribeDataFetchProjectResponse) => void): Promise<DescribeDataFetchProjectResponse>;
     /**

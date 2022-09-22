@@ -136,6 +136,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UnbindStaffSkillGroupList", req, cb);
     }
     /**
+     * 停用号码
+     */
+    async DisableCCCPhoneNumber(req, cb) {
+        return this.request("DisableCCCPhoneNumber", req, cb);
+    }
+    /**
      * 获取坐席实时状态统计指标
      */
     async DescribeStaffStatusMetrics(req, cb) {

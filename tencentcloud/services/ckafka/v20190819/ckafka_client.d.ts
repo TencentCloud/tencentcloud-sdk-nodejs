@@ -209,7 +209,7 @@ export declare class Client extends AbstractClient {
      */
     BatchCreateAcl(req: BatchCreateAclRequest, cb?: (error: string, rep: BatchCreateAclResponse) => void): Promise<BatchCreateAclResponse>;
     /**
-     * 创建Datahub转储任务
+     * 创建DIP转储任务
      */
     CreateDatahubTask(req: CreateDatahubTaskRequest, cb?: (error: string, rep: CreateDatahubTaskResponse) => void): Promise<CreateDatahubTaskResponse>;
     /**

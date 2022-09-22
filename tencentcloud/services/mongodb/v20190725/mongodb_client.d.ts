@@ -8,7 +8,7 @@ import { DescribeSpecInfoRequest, CreateDBInstanceRequest, DescribeCurrentOpResp
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
     /**
-     * 包年包月实例隔离接口
+     * 本接口（TerminateDBInstances）可将包年包月实例退还隔离。
      */
     TerminateDBInstances(req: TerminateDBInstancesRequest, cb?: (error: string, rep: TerminateDBInstancesResponse) => void): Promise<TerminateDBInstancesResponse>;
     /**

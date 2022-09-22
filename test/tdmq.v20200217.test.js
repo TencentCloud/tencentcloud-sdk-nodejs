@@ -598,6 +598,16 @@ it("tdmq.v20200217.DescribeAMQPRouteRelations", async function () {
     }
 })
 
+it("tdmq.v20200217.DescribeRocketMQVipInstances", async function () {
+    try {
+       const data = await client.DescribeRocketMQVipInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tdmq.v20200217.DescribeAMQPClusters", async function () {
     try {
        const data = await client.DescribeAMQPClusters({})

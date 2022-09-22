@@ -37,6 +37,7 @@ import {
   BindCluster,
   ModifyClusterResponse,
   RocketMQClusterRecentStats,
+  RocketMQVipInstance,
   DescribeCmqQueuesResponse,
   DescribeAllTenantsResponse,
   DescribeNamespaceBundlesOptResponse,
@@ -172,6 +173,7 @@ import {
   DescribeAMQPRouteRelationsResponse,
   DeleteTopicsResponse,
   CreateAMQPClusterResponse,
+  DescribeRocketMQVipInstancesRequest,
   DeleteAMQPExchangeRequest,
   DeleteRocketMQClusterResponse,
   CreateCmqTopicResponse,
@@ -250,6 +252,7 @@ import {
   SendCmqMsgRequest,
   ModifyCmqQueueAttributeRequest,
   ModifyRocketMQGroupResponse,
+  DescribeRocketMQVipInstancesResponse,
   AMQPClusterDetail,
   DescribeClusterDetailResponse,
   SendMessagesRequest,
@@ -845,6 +848,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAMQPRouteRelationsResponse) => void
   ): Promise<DescribeAMQPRouteRelationsResponse> {
     return this.request("DescribeAMQPRouteRelations", req, cb)
+  }
+
+  /**
+   * 查询用户已购的RocketMQ专享实例列表
+   */
+  async DescribeRocketMQVipInstances(
+    req: DescribeRocketMQVipInstancesRequest,
+    cb?: (error: string, rep: DescribeRocketMQVipInstancesResponse) => void
+  ): Promise<DescribeRocketMQVipInstancesResponse> {
+    return this.request("DescribeRocketMQVipInstances", req, cb)
   }
 
   /**

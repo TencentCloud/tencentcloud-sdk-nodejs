@@ -198,6 +198,16 @@ it("ccc.v20200210.UnbindStaffSkillGroupList", async function () {
     }
 })
 
+it("ccc.v20200210.DisableCCCPhoneNumber", async function () {
+    try {
+       const data = await client.DisableCCCPhoneNumber({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ccc.v20200210.DescribeStaffStatusMetrics", async function () {
     try {
        const data = await client.DescribeStaffStatusMetrics({})

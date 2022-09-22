@@ -452,6 +452,15 @@ export interface PhoneNumBuyInfo {
     State: number;
 }
 /**
+ * DisableCCCPhoneNumber返回参数结构体
+ */
+export interface DisableCCCPhoneNumberResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * CreateCCCSkillGroup请求参数结构体
  */
 export interface CreateCCCSkillGroupRequest {
@@ -990,6 +999,23 @@ export interface IMCdrInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     SkillGroupName: string;
+}
+/**
+ * DisableCCCPhoneNumber请求参数结构体
+ */
+export interface DisableCCCPhoneNumberRequest {
+    /**
+      * TCCC 实例应用 ID
+      */
+    SdkAppId: number;
+    /**
+      * 号码列表，0086开头
+      */
+    PhoneNumbers: Array<string>;
+    /**
+      * 停用开关，0启用 1停用
+      */
+    Disabled: number;
 }
 /**
  * 坐席购买信息

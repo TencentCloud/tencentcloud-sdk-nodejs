@@ -719,7 +719,7 @@ export interface AssociateTargetGroupsRequest {
  */
 export interface DescribeLoadBalancersRequest {
   /**
-   * 负载均衡实例ID。
+   * 负载均衡实例ID。实例ID数量上限为20个。
    */
   LoadBalancerIds?: Array<string>
 

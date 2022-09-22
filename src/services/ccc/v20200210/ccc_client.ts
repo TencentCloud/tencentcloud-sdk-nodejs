@@ -32,6 +32,7 @@ import {
   TelCdrInfo,
   CreateUserSigRequest,
   PhoneNumBuyInfo,
+  DisableCCCPhoneNumberResponse,
   CreateCCCSkillGroupRequest,
   DescribeIMCdrsRequest,
   DescribeAutoCalloutTaskResponse,
@@ -57,6 +58,7 @@ import {
   DescribePSTNActiveSessionListResponse,
   CreateCallOutSessionResponse,
   IMCdrInfo,
+  DisableCCCPhoneNumberRequest,
   StaffBuyInfo,
   DescribeProtectedTelCdrResponse,
   DescribeAutoCalloutTasksRequest,
@@ -281,6 +283,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UnbindStaffSkillGroupListResponse) => void
   ): Promise<UnbindStaffSkillGroupListResponse> {
     return this.request("UnbindStaffSkillGroupList", req, cb)
+  }
+
+  /**
+   * 停用号码
+   */
+  async DisableCCCPhoneNumber(
+    req: DisableCCCPhoneNumberRequest,
+    cb?: (error: string, rep: DisableCCCPhoneNumberResponse) => void
+  ): Promise<DisableCCCPhoneNumberResponse> {
+    return this.request("DisableCCCPhoneNumber", req, cb)
   }
 
   /**

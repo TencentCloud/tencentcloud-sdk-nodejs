@@ -64,7 +64,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDataLogUrlStatistics", req, cb);
     }
     /**
-     * 获取DescribeDataFetchProject信息
+     * 获取DescribeDataFetchProject信息。已下线，请使用DescribeDataFetchUrl
      */
     async DescribeDataFetchProject(req, cb) {
         return this.request("DescribeDataFetchProject", req, cb);

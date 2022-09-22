@@ -376,6 +376,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAMQPRouteRelations", req, cb);
     }
     /**
+     * 查询用户已购的RocketMQ专享实例列表
+     */
+    async DescribeRocketMQVipInstances(req, cb) {
+        return this.request("DescribeRocketMQVipInstances", req, cb);
+    }
+    /**
      * 获取amqp集群列表
      */
     async DescribeAMQPClusters(req, cb) {
