@@ -190,7 +190,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyDBInstanceName", req, cb);
     }
     /**
-     * 本接口（InquiryPriceUpgradeDBInstance）用于查询升级实例的价格。
+     * 本接口（InquiryPriceUpgradeDBInstance）用于查询升级实例的价格。只支持按量计费实例。
      */
     async InquiryPriceUpgradeDBInstance(req, cb) {
         return this.request("InquiryPriceUpgradeDBInstance", req, cb);

@@ -457,7 +457,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（InquiryPriceUpgradeDBInstance）用于查询升级实例的价格。
+   * 本接口（InquiryPriceUpgradeDBInstance）用于查询升级实例的价格。只支持按量计费实例。
    */
   async InquiryPriceUpgradeDBInstance(
     req: InquiryPriceUpgradeDBInstanceRequest,

@@ -562,6 +562,11 @@ export interface DescribeConnectResourceResp {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     CtsdbConnectParam: CtsdbConnectParam;
+    /**
+      * Doris 配置，Type 为 DORIS 时返回
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DorisConnectParam: DorisConnectParam;
 }
 /**
  * AuthorizeToken返回参数结构体
@@ -762,6 +767,11 @@ export interface DescribeConnectResource {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     CtsdbConnectParam: CtsdbConnectParam;
+    /**
+      * Doris 配置，Type 为 DORIS 时返回
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DorisConnectParam: DorisConnectParam;
 }
 /**
  * Dts类型入参
@@ -1735,22 +1745,54 @@ export interface DynamicDiskConfig {
     MaxDiskSpace?: number;
 }
 /**
- * 操作型结果返回值
+ * Doris 连接源参数
  */
-export interface JgwOperateResponse {
+export interface DorisConnectParam {
     /**
-      * 返回的code，0为正常，非0为错误
-      */
-    ReturnCode: string;
-    /**
-      * 成功消息
-      */
-    ReturnMessage: string;
-    /**
-      * 操作型返回的Data数据,可能有flowId等
+      * Doris jdbc 负载均衡连接 port，通常映射到 fe 的 9030 端口
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Data: OperateResponseData;
+    Port: number;
+    /**
+      * Doris 连接源的用户名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UserName: string;
+    /**
+      * Doris 连接源的密码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Password: string;
+    /**
+      * Doris 连接源的实例资源
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Resource: string;
+    /**
+      * Doris 连接源的实例vip，当为腾讯云实例时，必填
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ServiceVip?: string;
+    /**
+      * Doris 连接源的vpcId，当为腾讯云实例时，必填
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UniqVpcId?: string;
+    /**
+      * 是否更新到关联的Datahub任务
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IsUpdate?: boolean;
+    /**
+      * Doris 连接源是否为自建集群
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SelfBuilt?: boolean;
+    /**
+      * Doris 的 http 负载均衡连接 port，通常映射到 be 的 8040 端口
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BePort?: number;
 }
 /**
  * zone信息实体
@@ -2694,6 +2736,10 @@ export interface CreateConnectResourceRequest {
       * SQLServer配置，Type为SQLSERVER时必填
       */
     SQLServerConnectParam?: SQLServerConnectParam;
+    /**
+      * Doris 配置，Type为 DORIS 时必填
+      */
+    DorisConnectParam?: DorisConnectParam;
 }
 /**
  * MariaDB类型入参
@@ -5289,6 +5335,24 @@ export interface InstanceResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     TotalCount: number;
+}
+/**
+ * 操作型结果返回值
+ */
+export interface JgwOperateResponse {
+    /**
+      * 返回的code，0为正常，非0为错误
+      */
+    ReturnCode: string;
+    /**
+      * 成功消息
+      */
+    ReturnMessage: string;
+    /**
+      * 操作型返回的Data数据,可能有flowId等
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Data: OperateResponseData;
 }
 /**
  * DescribeGroup返回实体

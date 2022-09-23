@@ -7463,6 +7463,25 @@ export interface ModifyLiveSnapshotTemplateRequest {
   TemplateId: number
 
   /**
+   * Cos 应用 ID。
+   **注：此参数现在须必选。**
+   */
+  CosAppId: number
+
+  /**
+      * Cos Bucket名称。
+注：CosBucket参数值不能包含-[appid] 部分。
+**注：此参数现在须必选。**
+      */
+  CosBucket: string
+
+  /**
+   * Cos 地域。
+   **注：此参数现在须必选。**
+   */
+  CosRegion: string
+
+  /**
       * 模板名称。
 长度上限：255字节。
       */
@@ -7496,22 +7515,6 @@ export interface ModifyLiveSnapshotTemplateRequest {
 1：开启。
       */
   PornFlag?: number
-
-  /**
-   * Cos 应用 ID。
-   */
-  CosAppId?: number
-
-  /**
-      * Cos Bucket名称。
-注：CosBucket参数值不能包含-[appid] 部分。
-      */
-  CosBucket?: string
-
-  /**
-   * Cos 地域。
-   */
-  CosRegion?: string
 
   /**
    * Cos Bucket文件夹前缀。

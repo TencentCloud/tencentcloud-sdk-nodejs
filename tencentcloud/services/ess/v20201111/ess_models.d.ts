@@ -607,7 +607,7 @@ HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证(格式同居民身份证)
       */
     VerifyChannel?: Array<string>;
     /**
-      * 是否发送短信，sms--短信通知，none--不通知，默认为sms
+      * 是否发送短信，sms--短信通知，none--不通知，默认为sms；发起方=签署方时不发送短信
       */
     NotifyType?: string;
     /**

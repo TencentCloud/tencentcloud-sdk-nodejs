@@ -1209,11 +1209,11 @@ export interface DetachRolePolicyRequest {
       */
     PolicyId?: number;
     /**
-      * 角色ID，用于指定角色，入参 AttachRoleId 与 AttachRoleName 二选一
+      * 角色ID，用于指定角色，入参 DetachRoleId 与 DetachRoleName 二选一
       */
     DetachRoleId?: string;
     /**
-      * 角色名称，用于指定角色，入参 AttachRoleId 与 AttachRoleName 二选一
+      * 角色名称，用于指定角色，入参 DetachRoleId 与 DetachRoleName 二选一
       */
     DetachRoleName?: string;
     /**

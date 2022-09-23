@@ -106,6 +106,11 @@ export interface DescribeOrganizationResponse {
       */
     IsAssignManager: boolean;
     /**
+      * 是否主体管理员 true-是、false-否
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IsAuthManager: boolean;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
@@ -348,7 +353,7 @@ export interface DescribeOrganizationRequest {
       */
     Lang?: string;
     /**
-      * 产品简称（查询是否集团服务委派管理员必须）
+      * 产品简称（查询是否集团服务委派管理员必填）
       */
     Product?: string;
 }
