@@ -535,6 +535,10 @@ export interface PrometheusStatus {
     Type: string;
 }
 /**
+ * 负载均衡跨域设置
+ */
+export declare type CrossRegionConfig = null;
+/**
  * 键值对过滤器，用于条件过滤查询。例如过滤ID、名称等
  */
 export interface Filter {
@@ -1010,4 +1014,9 @@ OPEN：公网属性， INTERNAL：内网属性。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ExtensiveClusters?: ExtensiveClusters;
+    /**
+      * 负载均衡跨地域配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CrossRegionConfig?: CrossRegionConfig;
 }

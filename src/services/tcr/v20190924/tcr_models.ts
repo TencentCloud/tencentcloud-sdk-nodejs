@@ -1668,12 +1668,12 @@ export interface DescribeWebhookTriggerResponse {
   /**
    * 触发器总数
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 触发器列表
    */
-  Triggers?: Array<WebhookTrigger>
+  Triggers: Array<WebhookTrigger>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -5211,7 +5211,7 @@ export interface CreateWebhookTriggerResponse {
   /**
    * 新建的触发器
    */
-  Trigger?: WebhookTrigger
+  Trigger: WebhookTrigger
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

@@ -1540,12 +1540,12 @@ export interface DescribeTemplatesRequest {
   Operator?: UserInfo
 
   /**
-   * 是否返回所有组件信息
+   * 是否返回所有组件信息。默认false，只返回发起方控件；true，返回所有签署方控件
    */
   QueryAllComponents?: boolean
 
   /**
-   * 模糊搜索模板名称
+   * 模糊搜索模板名称，最大长度200
    */
   TemplateName?: string
 }

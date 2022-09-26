@@ -43,6 +43,7 @@ import {
   DescribeMeshRequest,
   ActiveOperation,
   PrometheusStatus,
+  CrossRegionConfig,
   Filter,
   PrometheusConfig,
   ExtensiveCluster,

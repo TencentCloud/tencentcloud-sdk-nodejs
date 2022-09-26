@@ -837,6 +837,16 @@ export interface TaskListItem {
       * 任务更新时间
       */
     TaskUpdateTime: string;
+    /**
+      * 0--未开始，1--进行中，2--已完成
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TaskPreCheckStatus: number;
+    /**
+      * 环境检查是否通过
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TaskPreCheckSuccess: boolean;
 }
 /**
  * ExecuteTaskInstance返回参数结构体

@@ -558,6 +558,26 @@ export interface DescribePolicyGroupListResponse {
 }
 
 /**
+ * 日志告警检索条件结构体
+ */
+export interface LogFilterInfo {
+  /**
+   * 字段名
+   */
+  Key: string
+
+  /**
+   * 比较符号
+   */
+  Operator: string
+
+  /**
+   * 字段值
+   */
+  Value: string
+}
+
+/**
  * prometheus agent
  */
 export interface PrometheusAgent {
@@ -922,6 +942,16 @@ export interface CreateAlarmPolicyRequest {
    * 聚合维度列表，指定按哪些维度 key 来做 group by
    */
   GroupBy?: Array<string>
+
+  /**
+   * 模版绑定的标签
+   */
+  Tags?: Array<Tag>
+
+  /**
+   * 日志告警信息
+   */
+  LogAlarmReqInfo?: LogAlarmReq
 }
 
 /**
@@ -1371,6 +1401,21 @@ export interface CreatePolicyGroupResponse {
    * 创建成功的策略组Id
    */
   GroupId?: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpdateServiceDiscovery返回参数结构体
+ */
+export interface UpdateServiceDiscoveryResponse {
+  /**
+   * 更新成功之后，返回对应服务发现的信息
+   */
+  ServiceDiscovery?: ServiceDiscoveryItem
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2765,6 +2810,18 @@ export interface AlarmPolicy {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   AdvancedMetricNumber: number
+
+  /**
+      * 策略是否是全部对象策略
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsBindAll: number
+
+  /**
+      * 策略标签
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Tags: Array<Tag>
 }
 
 /**
@@ -3294,6 +3351,18 @@ re=正则匹配
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ProductId?: string
+
+  /**
+      * 最大值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ValueMax?: number
+
+  /**
+      * 最小值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ValueMin?: number
 }
 
 /**
@@ -4091,6 +4160,11 @@ export interface ModifyAlarmPolicyConditionRequest {
    * 聚合维度列表，指定按哪些维度 key 来做 group by
    */
   GroupBy?: Array<string>
+
+  /**
+   * 日志告警创建请求参数信息
+   */
+  LogAlarmReqInfo?: LogAlarmReq
 }
 
 /**
@@ -4453,7 +4527,7 @@ export interface DescribeAlarmPolicyResponse {
   /**
    * 策略详情
    */
-  Policy?: AlarmPolicy
+  Policy: AlarmPolicy
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4472,18 +4546,28 @@ export interface DeleteExporterIntegrationResponse {
 }
 
 /**
- * UpdateServiceDiscovery返回参数结构体
+ * 日志告警请求信息
  */
-export interface UpdateServiceDiscoveryResponse {
+export interface LogAlarmReq {
   /**
-   * 更新成功之后，返回对应服务发现的信息
+   * apm实例id
    */
-  ServiceDiscovery?: ServiceDiscoveryItem
+  InstanceId: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 检索条件信息
    */
-  RequestId?: string
+  Filter: Array<LogFilterInfo>
+
+  /**
+   * 告警合并开启/暂停
+   */
+  AlarmMerge: string
+
+  /**
+   * 告警合并时间
+   */
+  AlarmMergeTime: string
 }
 
 /**
@@ -5881,6 +5965,21 @@ export interface DescribeAlarmPoliciesRequest {
    * 根据一键告警策略筛选 不传展示全部策略 ONECLICK=展示一键告警策略 NOT_ONECLICK=展示非一键告警策略
    */
   OneClickPolicyType?: Array<string>
+
+  /**
+   * 根据全部对象过滤，1代表需要过滤掉全部对象，0则无需过滤
+   */
+  NotBindAll?: number
+
+  /**
+   * 根据实例对象过滤，1代表需要过滤掉有实例对象，0则无需过滤
+   */
+  NotInstanceGroup?: number
+
+  /**
+   * 策略根据标签过滤
+   */
+  Tags?: Array<Tag>
 }
 
 /**
@@ -6134,6 +6233,12 @@ export interface AlarmNotice {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   CLSNotices: Array<CLSNotice>
+
+  /**
+      * 通知模版绑定的标签
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Tags: Array<Tag>
 }
 
 /**
@@ -7351,6 +7456,11 @@ export interface DescribeAlarmNoticesRequest {
    * 根据通知模板 id 过滤，空数组/不传则不过滤
    */
   NoticeIds?: Array<string>
+
+  /**
+   * 模版根据标签过滤
+   */
+  Tags?: Array<Tag>
 }
 
 /**
@@ -7798,6 +7908,21 @@ export interface DescribeSSOAccountRequest {
 }
 
 /**
+ * 标签
+ */
+export interface Tag {
+  /**
+   * 标签key
+   */
+  Key: string
+
+  /**
+   * 标签value
+   */
+  Value: string
+}
+
+/**
  * DescribeAlarmNotice请求参数结构体
  */
 export interface DescribeAlarmNoticeRequest {
@@ -7975,6 +8100,11 @@ export interface CreateAlarmNoticeRequest {
    * 推送CLS日志服务的操作 最多1个
    */
   CLSNotices?: Array<CLSNotice>
+
+  /**
+   * 模版绑定的标签
+   */
+  Tags?: Array<Tag>
 }
 
 /**

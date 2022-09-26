@@ -181,6 +181,7 @@ export { tcss } from "./tcss";
 export { tdcpg } from "./tdcpg";
 export { tdid } from "./tdid";
 export { tdmq } from "./tdmq";
+export { tds } from "./tds";
 export { tem } from "./tem";
 export { teo } from "./teo";
 export { thpc } from "./thpc";

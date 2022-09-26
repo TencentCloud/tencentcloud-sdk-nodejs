@@ -7419,7 +7419,7 @@ export interface AutoUpgradeClusterLevel {
  */
 export interface CreateEKSClusterRequest {
     /**
-      * k8s版本号。可为1.14.4, 1.12.8。
+      * k8s版本号。可为1.18.4 1.20.6。
       */
     K8SVersion: string;
     /**
@@ -7439,7 +7439,7 @@ export interface CreateEKSClusterRequest {
       */
     ClusterDesc?: string;
     /**
-      * Serivce 所在子网Id
+      * Service CIDR 或 Serivce 所在子网Id
       */
     ServiceSubnetId?: string;
     /**
