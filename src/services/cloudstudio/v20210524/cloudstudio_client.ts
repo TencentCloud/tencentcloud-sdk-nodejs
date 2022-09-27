@@ -114,7 +114,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 快速开始, 基于模版创建工作空间
+   * 快速开始, 基于模板创建工作空间
    */
   async CreateWorkspaceByTemplate(
     req: CreateWorkspaceByTemplateRequest,
@@ -124,7 +124,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改模版默认代码仓库
+   * 修改模板默认代码仓库
    */
   async ModifyCustomizeTemplateVersionControl(
     req: ModifyCustomizeTemplateVersionControlRequest,
@@ -255,7 +255,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 云主机方式创建工作空间
+   * 云服务器方式创建工作空间
    */
   async CreateWorkspaceByAgent(
     req: CreateWorkspaceByAgentRequest,
@@ -275,7 +275,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取所有模版列表
+   * 获取所有模板列表
    */
   async DescribeCustomizeTemplates(
     req: DescribeCustomizeTemplatesRequest,

@@ -1456,6 +1456,11 @@ export interface Cluster {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     PayMode: number;
+    /**
+      * 前端区分 集群是否需要2CU逻辑 因为历史集群 变配不需要, default 1  新集群都需要
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IsNeedManageNode: number;
 }
 /**
  * DescribeClusters返回参数结构体

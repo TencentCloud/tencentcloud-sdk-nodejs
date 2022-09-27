@@ -40,6 +40,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeApplicationsStatus", req, cb);
     }
     /**
+     * 查询应用访问方式列表
+     */
+    async DescribeApplicationServiceList(req, cb) {
+        return this.request("DescribeApplicationServiceList", req, cb);
+    }
+    /**
      * 查询分页的日志收集配置列表
      */
     async DescribePagedLogConfigList(req, cb) {
@@ -97,6 +103,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeEnvironmentStatus", req, cb);
     }
     /**
+     * 开始下一批次发布
+     */
+    async ResumeDeployApplication(req, cb) {
+        return this.request("ResumeDeployApplication", req, cb);
+    }
+    /**
      * 删除 Ingress 规则
      */
     async DeleteIngress(req, cb) {
@@ -121,10 +133,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDeployApplicationDetail", req, cb);
     }
     /**
-     * 开始下一批次发布
+     * 修改服务访问方式列表
      */
-    async ResumeDeployApplication(req, cb) {
-        return this.request("ResumeDeployApplication", req, cb);
+    async ModifyApplicationService(req, cb) {
+        return this.request("ModifyApplicationService", req, cb);
     }
     /**
      * 编辑环境
@@ -155,6 +167,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateLogConfig(req, cb) {
         return this.request("CreateLogConfig", req, cb);
+    }
+    /**
+     * 新增访问方式
+     */
+    async CreateApplicationService(req, cb) {
+        return this.request("CreateApplicationService", req, cb);
     }
     /**
      * 服务基本信息查看
@@ -209,6 +227,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeIngress(req, cb) {
         return this.request("DescribeIngress", req, cb);
+    }
+    /**
+     * 删除一条访问方式
+     */
+    async DeleteApplicationService(req, cb) {
+        return this.request("DeleteApplicationService", req, cb);
     }
     /**
      * 生成应用程序包预签名下载链接

@@ -918,9 +918,9 @@ it("cpdp.v20190820.QueryShopOpenId", async function () {
     }
 })
 
-it("cpdp.v20190820.QueryOpenBankPaymentOrder", async function () {
+it("cpdp.v20190820.QueryFinancialDataUrl", async function () {
     try {
-       const data = await client.QueryOpenBankPaymentOrder({})
+       const data = await client.QueryFinancialDataUrl({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1358,9 +1358,9 @@ it("cpdp.v20190820.ApplyPayerInfo", async function () {
     }
 })
 
-it("cpdp.v20190820.UploadFile", async function () {
+it("cpdp.v20190820.QueryOpenBankPaymentOrder", async function () {
     try {
-       const data = await client.UploadFile({})
+       const data = await client.QueryOpenBankPaymentOrder({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1691,6 +1691,16 @@ it("cpdp.v20190820.GetDistributeBillDownloadUrl", async function () {
 it("cpdp.v20190820.CreateCustAcctId", async function () {
     try {
        const data = await client.CreateCustAcctId({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cpdp.v20190820.UploadFile", async function () {
+    try {
+       const data = await client.UploadFile({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -89,6 +89,27 @@ export interface ModifyIngressResponse {
     RequestId?: string;
 }
 /**
+ * DeleteApplicationService请求参数结构体
+ */
+export interface DeleteApplicationServiceRequest {
+    /**
+      * 服务id
+      */
+    ApplicationId?: string;
+    /**
+      * 来源渠道
+      */
+    SourceChannel?: number;
+    /**
+      * 环境ID
+      */
+    EnvironmentId?: string;
+    /**
+      * 访问方式服务名
+      */
+    ServiceName?: string;
+}
+/**
  * RestartApplicationPod请求参数结构体
  */
 export interface RestartApplicationPodRequest {
@@ -495,29 +516,33 @@ export interface RevertDeployApplicationResponse {
     RequestId?: string;
 }
 /**
- * 弹性伸缩配置
+ * 分批发布策略配置
  */
-export interface EsInfo {
+export interface DeployStrategyConf {
     /**
-      * 最小实例数
+      * 总分批数
       */
-    MinAliveInstances: number;
+    TotalBatchCount?: number;
     /**
-      * 最大实例数
+      * beta分批实例数
       */
-    MaxAliveInstances: number;
+    BetaBatchNum?: number;
     /**
-      * 弹性策略,1:cpu，2:内存
+      * 分批策略：0-全自动，1-全手动，2-beta分批，beta批一定是手动的，3-首次发布
       */
-    EsStrategy: number;
+    DeployStrategyType?: number;
     /**
-      * 弹性扩缩容条件值
+      * 每批暂停间隔
       */
-    Threshold: number;
+    BatchInterval?: number;
     /**
-      * 版本Id
+      * 最小可用实例数
       */
-    VersionId?: string;
+    MinAvailable?: number;
+    /**
+      * 是否强制发布
+      */
+    Force?: boolean;
 }
 /**
  * DescribeApplications返回参数结构体
@@ -533,66 +558,29 @@ export interface DescribeApplicationsResponse {
     RequestId?: string;
 }
 /**
- * Ingress 配置
+ * CreateCosToken请求参数结构体
  */
-export interface IngressInfo {
+export interface CreateCosTokenRequest {
     /**
-      * 环境ID
-注意：此字段可能返回 null，表示取不到有效值。
+      * 应用ID
       */
-    EnvironmentId: string;
+    ApplicationId: string;
     /**
-      * 环境namespace
+      * 包名
       */
-    ClusterNamespace: string;
+    PkgName: string;
     /**
-      * ip version
+      * optType 1上传  2查询
       */
-    AddressIPVersion: string;
+    OptType: number;
     /**
-      * ingress name
+      * 来源 channel
       */
-    IngressName: string;
+    SourceChannel?: number;
     /**
-      * rules 配置
+      * 充当deployVersion入参
       */
-    Rules: Array<IngressRule>;
-    /**
-      * clb ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ClbId?: string;
-    /**
-      * tls 配置
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Tls?: Array<IngressTls>;
-    /**
-      * 环境集群ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ClusterId?: string;
-    /**
-      * clb ip
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Vip?: string;
-    /**
-      * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    CreateTime?: string;
-    /**
-      * 是否混合 https，默认 false，可选值 true 代表有 https 协议监听
-      */
-    Mixed?: boolean;
-    /**
-      * 重定向模式，可选值：
-- AUTO（自动重定向http到https）
-- NONE（不使用重定向）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    RewriteType?: string;
+    TimeVersion?: string;
 }
 /**
  * DescribeEnvironments请求参数结构体
@@ -759,6 +747,19 @@ export interface NodeInfo {
     Cidr: string;
 }
 /**
+ * DescribeApplicationServiceList返回参数结构体
+ */
+export interface DescribeApplicationServiceListResponse {
+    /**
+      * 应用 EKS Service 列表
+      */
+    Result: EksService;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeLogConfig请求参数结构体
  */
 export interface DescribeLogConfigRequest {
@@ -864,33 +865,29 @@ export interface DescribeEnvironmentStatusResponse {
     RequestId?: string;
 }
 /**
- * 分批发布策略配置
+ * 弹性伸缩配置
  */
-export interface DeployStrategyConf {
+export interface EsInfo {
     /**
-      * 总分批数
+      * 最小实例数
       */
-    TotalBatchCount?: number;
+    MinAliveInstances: number;
     /**
-      * beta分批实例数
+      * 最大实例数
       */
-    BetaBatchNum?: number;
+    MaxAliveInstances: number;
     /**
-      * 分批策略：0-全自动，1-全手动，2-beta分批，beta批一定是手动的，3-首次发布
+      * 弹性策略,1:cpu，2:内存
       */
-    DeployStrategyType?: number;
+    EsStrategy: number;
     /**
-      * 每批暂停间隔
+      * 弹性扩缩容条件值
       */
-    BatchInterval?: number;
+    Threshold: number;
     /**
-      * 最小可用实例数
+      * 版本Id
       */
-    MinAvailable?: number;
-    /**
-      * 是否强制发布
-      */
-    Force?: boolean;
+    VersionId?: string;
 }
 /**
  * DescribeApplicationPods返回参数结构体
@@ -1369,29 +1366,66 @@ export interface ServicePortMapping {
     PortMappingItemList?: Array<ServicePortMappingItem>;
 }
 /**
- * CreateCosToken请求参数结构体
+ * Ingress 配置
  */
-export interface CreateCosTokenRequest {
+export interface IngressInfo {
     /**
-      * 应用ID
+      * 环境ID
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    ApplicationId: string;
+    EnvironmentId: string;
     /**
-      * 包名
+      * 环境namespace
       */
-    PkgName: string;
+    ClusterNamespace: string;
     /**
-      * optType 1上传  2查询
+      * ip version
       */
-    OptType: number;
+    AddressIPVersion: string;
     /**
-      * 来源 channel
+      * ingress name
       */
-    SourceChannel?: number;
+    IngressName: string;
     /**
-      * 充当deployVersion入参
+      * rules 配置
       */
-    TimeVersion?: string;
+    Rules: Array<IngressRule>;
+    /**
+      * clb ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ClbId?: string;
+    /**
+      * tls 配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Tls?: Array<IngressTls>;
+    /**
+      * 环境集群ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ClusterId?: string;
+    /**
+      * clb ip
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Vip?: string;
+    /**
+      * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreateTime?: string;
+    /**
+      * 是否混合 https，默认 false，可选值 true 代表有 https 协议监听
+      */
+    Mixed?: boolean;
+    /**
+      * 重定向模式，可选值：
+- AUTO（自动重定向http到https）
+- NONE（不使用重定向）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RewriteType?: string;
 }
 /**
  * ModifyApplicationAutoscaler请求参数结构体
@@ -1609,6 +1643,19 @@ export interface DescribeApplicationsStatusRequest {
       * 环境ID
       */
     EnvironmentId?: string;
+}
+/**
+ * DescribeIngress返回参数结构体
+ */
+export interface DescribeIngressResponse {
+    /**
+      * Ingress 规则配置
+      */
+    Result: IngressInfo;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 应用实例
@@ -2268,6 +2315,23 @@ export interface CronHorizontalAutoscaler {
     Priority?: number;
 }
 /**
+ * DescribeApplicationServiceList请求参数结构体
+ */
+export interface DescribeApplicationServiceListRequest {
+    /**
+      * namespace id
+      */
+    EnvironmentId: string;
+    /**
+      * 服务ID
+      */
+    ApplicationId: string;
+    /**
+      * xx
+      */
+    SourceChannel?: number;
+}
+/**
  * DescribeDeployApplicationDetail返回参数结构体
  */
 export interface DescribeDeployApplicationDetailResponse {
@@ -2398,6 +2462,20 @@ export interface CreateApplicationAutoscalerRequest {
     Autoscaler?: Autoscaler;
 }
 /**
+ * DeleteApplicationService返回参数结构体
+ */
+export interface DeleteApplicationServiceResponse {
+    /**
+      * 是否成功
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result: boolean;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 配置
  */
 export interface ConfigData {
@@ -2494,6 +2572,31 @@ export interface DescribeConfigDataListResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * ModifyApplicationService请求参数结构体
+ */
+export interface ModifyApplicationServiceRequest {
+    /**
+      * 服务id
+      */
+    ApplicationId: string;
+    /**
+      * 环境ID
+      */
+    EnvironmentId: string;
+    /**
+      * 来源渠道
+      */
+    SourceChannel?: number;
+    /**
+      * 全量访问方式设置
+      */
+    Service?: EksService;
+    /**
+      * 单条访问方式设置
+      */
+    Data?: ServicePortMapping;
 }
 /**
  * DescribePagedLogConfigList返回参数结构体
@@ -3098,6 +3201,27 @@ export interface DescribeRunPodPage {
     PodList: Array<RunVersionPod>;
 }
 /**
+ * CreateApplicationService请求参数结构体
+ */
+export interface CreateApplicationServiceRequest {
+    /**
+      * 服务id
+      */
+    ApplicationId: string;
+    /**
+      * 环境ID
+      */
+    EnvironmentId: string;
+    /**
+      * 来源渠道
+      */
+    SourceChannel?: number;
+    /**
+      * 访问方式详情
+      */
+    Service?: ServicePortMapping;
+}
+/**
  * ModifyApplicationReplicas返回参数结构体
  */
 export interface ModifyApplicationReplicasResponse {
@@ -3199,13 +3323,14 @@ export interface IngressRuleBackend {
     ServicePort: number;
 }
 /**
- * DescribeIngress返回参数结构体
+ * CreateApplicationService返回参数结构体
  */
-export interface DescribeIngressResponse {
+export interface CreateApplicationServiceResponse {
     /**
-      * Ingress 规则配置
+      * 是否成功
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result: IngressInfo;
+    Result: boolean;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3370,6 +3495,20 @@ export interface HorizontalAutoscaler {
       * 是否启用
       */
     Enabled?: boolean;
+}
+/**
+ * ModifyApplicationService返回参数结构体
+ */
+export interface ModifyApplicationServiceResponse {
+    /**
+      * 是否成功
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result: boolean;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 服务端口映射

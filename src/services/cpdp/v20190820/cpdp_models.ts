@@ -3422,6 +3422,12 @@ FAILED:已失败
    * 外部用户ID
    */
   OutUserId: string
+
+  /**
+      * 渠道支付订单号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ChannelOrderId: string
 }
 
 /**
@@ -3452,6 +3458,26 @@ export interface DistributeAddReceiverRequest {
    * 沙箱环境填sandbox，正式环境不填
    */
   Profile?: string
+}
+
+/**
+ * QueryFinancialDataUrl请求参数结构体
+ */
+export interface QueryFinancialDataUrlRequest {
+  /**
+   * 数据查询范围:结束时间
+   */
+  EndTime: string
+
+  /**
+   * 数据查询范围:开始时间
+   */
+  StartTime: string
+
+  /**
+   * 数据类型：ADDED_INVOICE_REPORT  增值税开票数据，NATURAL_FINANCE_REPORT 自然人金融数据
+   */
+  DataType: string
 }
 
 /**
@@ -12539,6 +12565,28 @@ export interface CloudSubOrderReturn {
    * 微信子商户号
    */
   WxSubMchId: string
+}
+
+/**
+ * QueryFinancialDataUrl返回参数结构体
+ */
+export interface QueryFinancialDataUrlResponse {
+  /**
+      * 下载链接
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CosUrl: string
+
+  /**
+      * 过期时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ExpireTime: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

@@ -188,14 +188,19 @@ export interface DescribeCloudNativeAPIGatewayNodesRequest {
   GatewayId: string
 
   /**
-   * 翻页从第几个开始获取
+   * 实例分组id
    */
-  Offset?: number
+  GroupId?: string
 
   /**
    * 翻页获取多少个
    */
   Limit?: number
+
+  /**
+   * 翻页从第几个开始获取
+   */
+  Offset?: number
 }
 
 /**

@@ -165,7 +165,7 @@ export interface ModifyCustomizeTemplateVersionControlRequest {
   CloudStudioSessionTeam: string
 
   /**
-   * 模版ID
+   * 模板ID
    */
   TemplateId: number
 
@@ -1298,17 +1298,17 @@ export interface AgentSpaceDTO {
   ImageName: string
 
   /**
-   * 云主机登录名称
+   * 云服务器登录名称
    */
   RemoteUser: string
 
   /**
-   * 云主机登录地址
+   * 云服务器登录地址
    */
   RemoteHost: string
 
   /**
-   * 云主机登录端口
+   * 云服务器登录端口
    */
   RemotePort: string
 
@@ -1353,7 +1353,7 @@ export interface CreateWorkspaceByTemplateRequest {
   CloudStudioSessionTeam: string
 
   /**
-   * 模版ID
+   * 模板ID
    */
   TemplateId: number
 }

@@ -23,6 +23,7 @@ import {
   NamespacePage,
   DescribeApplicationInfoResponse,
   ModifyIngressResponse,
+  DeleteApplicationServiceRequest,
   RestartApplicationPodRequest,
   DestroyLogConfigResponse,
   ResumeDeployApplicationResponse,
@@ -44,25 +45,26 @@ import {
   CreateEnvironmentResponse,
   DescribeEnvironmentStatusRequest,
   RevertDeployApplicationResponse,
-  EsInfo,
+  DeployStrategyConf,
   DescribeApplicationsResponse,
-  IngressInfo,
+  CreateCosTokenRequest,
   DescribeEnvironmentsRequest,
   LogConfigListPage,
   ServiceVersionBrief,
   CreateEnvironmentRequest,
   NodeInfo,
+  DescribeApplicationServiceListResponse,
   DescribeLogConfigRequest,
   TemDeployApplicationDetailInfo,
   DescribeEnvironmentStatusResponse,
-  DeployStrategyConf,
+  EsInfo,
   DescribeApplicationPodsResponse,
   DescribeConfigDataListRequest,
   EnableApplicationAutoscalerResponse,
   ServicePage,
   TemServiceVersionInfo,
   ServicePortMapping,
-  CreateCosTokenRequest,
+  IngressInfo,
   ModifyApplicationAutoscalerRequest,
   ModifyConfigDataResponse,
   ModifyIngressRequest,
@@ -75,6 +77,7 @@ import {
   ModifyConfigDataRequest,
   CreateConfigDataResponse,
   DescribeApplicationsStatusRequest,
+  DescribeIngressResponse,
   RunVersionPod,
   CreateResourceResponse,
   ModifyApplicationInfoResponse,
@@ -106,17 +109,20 @@ import {
   TemService,
   IngressRule,
   CronHorizontalAutoscaler,
+  DescribeApplicationServiceListRequest,
   DescribeDeployApplicationDetailResponse,
   IngressRuleValue,
   DescribeEnvironmentResponse,
   TemNamespaceInfo,
   CreateApplicationAutoscalerRequest,
+  DeleteApplicationServiceResponse,
   ConfigData,
   ResumeDeployApplicationRequest,
   DescribeConfigDataRequest,
   MountedSettingConf,
   CreateLogConfigResponse,
   DescribeConfigDataListResponse,
+  ModifyApplicationServiceRequest,
   DescribePagedLogConfigListResponse,
   HealthCheckConfig,
   DeployServiceBatchDetail,
@@ -132,13 +138,14 @@ import {
   CreateApplicationRequest,
   NamespaceStatusInfo,
   DescribeRunPodPage,
+  CreateApplicationServiceRequest,
   ModifyApplicationReplicasResponse,
   UseDefaultRepoParameters,
   CronHorizontalAutoscalerSchedule,
   ModifyEnvironmentRequest,
   GenerateApplicationPackageDownloadUrlResponse,
   IngressRuleBackend,
-  DescribeIngressResponse,
+  CreateApplicationServiceResponse,
   WorkloadInfo,
   IngressRulePath,
   NamespaceInfo,
@@ -147,6 +154,7 @@ import {
   RevertDeployApplicationRequest,
   CreateApplicationResponse,
   HorizontalAutoscaler,
+  ModifyApplicationServiceResponse,
   PortMapping,
   LogConfig,
   ModifyEnvironmentResponse,
@@ -185,6 +193,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeApplicationsStatusResponse) => void
   ): Promise<DescribeApplicationsStatusResponse> {
     return this.request("DescribeApplicationsStatus", req, cb)
+  }
+
+  /**
+   * 查询应用访问方式列表
+   */
+  async DescribeApplicationServiceList(
+    req: DescribeApplicationServiceListRequest,
+    cb?: (error: string, rep: DescribeApplicationServiceListResponse) => void
+  ): Promise<DescribeApplicationServiceListResponse> {
+    return this.request("DescribeApplicationServiceList", req, cb)
   }
 
   /**
@@ -281,6 +299,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 开始下一批次发布
+   */
+  async ResumeDeployApplication(
+    req: ResumeDeployApplicationRequest,
+    cb?: (error: string, rep: ResumeDeployApplicationResponse) => void
+  ): Promise<ResumeDeployApplicationResponse> {
+    return this.request("ResumeDeployApplication", req, cb)
+  }
+
+  /**
    * 删除 Ingress 规则
    */
   async DeleteIngress(
@@ -321,13 +349,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 开始下一批次发布
+   * 修改服务访问方式列表
    */
-  async ResumeDeployApplication(
-    req: ResumeDeployApplicationRequest,
-    cb?: (error: string, rep: ResumeDeployApplicationResponse) => void
-  ): Promise<ResumeDeployApplicationResponse> {
-    return this.request("ResumeDeployApplication", req, cb)
+  async ModifyApplicationService(
+    req: ModifyApplicationServiceRequest,
+    cb?: (error: string, rep: ModifyApplicationServiceResponse) => void
+  ): Promise<ModifyApplicationServiceResponse> {
+    return this.request("ModifyApplicationService", req, cb)
   }
 
   /**
@@ -378,6 +406,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateLogConfigResponse) => void
   ): Promise<CreateLogConfigResponse> {
     return this.request("CreateLogConfig", req, cb)
+  }
+
+  /**
+   * 新增访问方式
+   */
+  async CreateApplicationService(
+    req: CreateApplicationServiceRequest,
+    cb?: (error: string, rep: CreateApplicationServiceResponse) => void
+  ): Promise<CreateApplicationServiceResponse> {
+    return this.request("CreateApplicationService", req, cb)
   }
 
   /**
@@ -468,6 +506,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeIngressResponse) => void
   ): Promise<DescribeIngressResponse> {
     return this.request("DescribeIngress", req, cb)
+  }
+
+  /**
+   * 删除一条访问方式
+   */
+  async DeleteApplicationService(
+    req: DeleteApplicationServiceRequest,
+    cb?: (error: string, rep: DeleteApplicationServiceResponse) => void
+  ): Promise<DeleteApplicationServiceResponse> {
+    return this.request("DeleteApplicationService", req, cb)
   }
 
   /**

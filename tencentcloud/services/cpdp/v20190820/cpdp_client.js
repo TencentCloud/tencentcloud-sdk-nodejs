@@ -569,10 +569,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("QueryShopOpenId", req, cb);
     }
     /**
-     * 云企付-查询订单支付结果
+     * 财税-查询金融数据文件下载链接
      */
-    async QueryOpenBankPaymentOrder(req, cb) {
-        return this.request("QueryOpenBankPaymentOrder", req, cb);
+    async QueryFinancialDataUrl(req, cb) {
+        return this.request("QueryFinancialDataUrl", req, cb);
     }
     /**
      * 商户恶意注册接口
@@ -837,10 +837,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ApplyPayerInfo", req, cb);
     }
     /**
-     * 直播平台-文件上传
+     * 云企付-查询订单支付结果
      */
-    async UploadFile(req, cb) {
-        return this.request("UploadFile", req, cb);
+    async QueryOpenBankPaymentOrder(req, cb) {
+        return this.request("QueryOpenBankPaymentOrder", req, cb);
     }
     /**
      * 跨境-提交贸易材料。通过提交贸易材料接口可为对接方累计贸易额度，在额度范围内可发起汇兑汇出交易。
@@ -1041,6 +1041,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateCustAcctId(req, cb) {
         return this.request("CreateCustAcctId", req, cb);
+    }
+    /**
+     * 直播平台-文件上传
+     */
+    async UploadFile(req, cb) {
+        return this.request("UploadFile", req, cb);
     }
     /**
      * 通过此接口关闭此前已创建的订单，关闭后，用户将无法继续付款。仅能关闭创建后未支付的订单

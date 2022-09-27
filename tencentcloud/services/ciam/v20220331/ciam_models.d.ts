@@ -42,6 +42,26 @@ export interface UpdateUserRequest {
       * 自定义属性
       */
     CustomizationAttributes?: Array<MemberMap>;
+    /**
+      * 索引字段1
+      */
+    IndexedAttribute1?: string;
+    /**
+      * 索引字段2
+      */
+    IndexedAttribute2?: string;
+    /**
+      * 索引字段3
+      */
+    IndexedAttribute3?: string;
+    /**
+      * 索引字段4
+      */
+    IndexedAttribute4?: string;
+    /**
+      * 索引字段5
+      */
+    IndexedAttribute5?: string;
 }
 /**
  * DescribeUserById请求参数结构体
@@ -134,6 +154,10 @@ export interface DescribeUserRequest {
       * 是否返回明文
       */
     Original?: boolean;
+    /**
+      * 排序设置
+      */
+    Sort?: Sort;
 }
 /**
  * DeleteUsers请求参数结构体
@@ -262,6 +286,26 @@ export interface ImportUser {
       * 密码加密方式（SHA1;BCRYPT）
       */
     PasswordEncryptTypeEnum?: string;
+    /**
+      * 索引字段1
+      */
+    IndexedAttribute1?: string;
+    /**
+      * 索引字段2
+      */
+    IndexedAttribute2?: string;
+    /**
+      * 索引字段3
+      */
+    IndexedAttribute3?: string;
+    /**
+      * 索引字段4
+      */
+    IndexedAttribute4?: string;
+    /**
+      * 索引字段5
+      */
+    IndexedAttribute5?: string;
 }
 /**
  * UpdateUserStatus返回参数结构体
@@ -423,7 +467,6 @@ export interface Job {
     /**
       * 任务的数据类型
 
-<li> **JSON** </li>  JSON
 <li> **NDJSON** </li>  New-line Delimited JSON
 <li> **CSV** </li>  Comma-Separated Values
 注意：此字段可能返回 null，表示取不到有效值。
@@ -456,7 +499,6 @@ export interface CreateFileExportUserJobRequest {
     /**
       * 导出的数据类型
 
-<li> **JSON** </li>  JSON
 <li> **NDJSON** </li>  New-line Delimited JSON
 <li> **CSV** </li>  Comma-Separated Values
       */
@@ -653,6 +695,44 @@ export interface User {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     LockTime: number;
+    /**
+      * 索引字段1
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IndexedAttribute1: string;
+    /**
+      * 索引字段2
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IndexedAttribute2: string;
+    /**
+      * 索引字段3
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IndexedAttribute3: string;
+    /**
+      * 索引字段4
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IndexedAttribute4: string;
+    /**
+      * 索引字段5
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IndexedAttribute5: string;
+}
+/**
+ * 查询用户排序
+ */
+export interface Sort {
+    /**
+      * 排序字段的key，参考自定义属性
+      */
+    PropertyKey?: string;
+    /**
+      * 升序或者降序，ASC/DESC
+      */
+    Order?: string;
 }
 /**
  * 分页对象
@@ -825,6 +905,26 @@ export interface CreateUserRequest {
       * 自定义属性
       */
     CustomizationAttributes?: Array<MemberMap>;
+    /**
+      * 索引字段1
+      */
+    IndexedAttribute1?: string;
+    /**
+      * 索引字段2
+      */
+    IndexedAttribute2?: string;
+    /**
+      * 索引字段3
+      */
+    IndexedAttribute3?: string;
+    /**
+      * 索引字段4
+      */
+    IndexedAttribute4?: string;
+    /**
+      * 索引字段5
+      */
+    IndexedAttribute5?: string;
 }
 /**
  * 密码盐
@@ -977,6 +1077,10 @@ export interface QueryUserFilter {
       * 逻辑值，等于true，不等于false
       */
     Logic?: boolean;
+    /**
+      * 操作逻辑符（支持> < = >= <=  != between）
+      */
+    OperateLogic?: string;
 }
 /**
  * DescribeUser返回参数结构体

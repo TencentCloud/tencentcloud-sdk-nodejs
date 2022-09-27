@@ -38,6 +38,7 @@ import {
   Job,
   CreateFileExportUserJobRequest,
   User,
+  Sort,
   Pageable,
   ResetPasswordResponse,
   UpdateUserResponse,

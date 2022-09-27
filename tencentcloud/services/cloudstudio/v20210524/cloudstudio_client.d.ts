@@ -20,11 +20,11 @@ export declare class Client extends AbstractClient {
      */
     CreateWorkspaceByVersionControl(req: CreateWorkspaceByVersionControlRequest, cb?: (error: string, rep: CreateWorkspaceByVersionControlResponse) => void): Promise<CreateWorkspaceByVersionControlResponse>;
     /**
-     * 快速开始, 基于模版创建工作空间
+     * 快速开始, 基于模板创建工作空间
      */
     CreateWorkspaceByTemplate(req: CreateWorkspaceByTemplateRequest, cb?: (error: string, rep: CreateWorkspaceByTemplateResponse) => void): Promise<CreateWorkspaceByTemplateResponse>;
     /**
-     * 修改模版默认代码仓库
+     * 修改模板默认代码仓库
      */
     ModifyCustomizeTemplateVersionControl(req: ModifyCustomizeTemplateVersionControlRequest, cb?: (error: string, rep: ModifyCustomizeTemplateVersionControlResponse) => void): Promise<ModifyCustomizeTemplateVersionControlResponse>;
     /**
@@ -77,7 +77,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyWorkspaceAttributes(req: ModifyWorkspaceAttributesRequest, cb?: (error: string, rep: ModifyWorkspaceAttributesResponse) => void): Promise<ModifyWorkspaceAttributesResponse>;
     /**
-     * 云主机方式创建工作空间
+     * 云服务器方式创建工作空间
      */
     CreateWorkspaceByAgent(req: CreateWorkspaceByAgentRequest, cb?: (error: string, rep: CreateWorkspaceByAgentResponse) => void): Promise<CreateWorkspaceByAgentResponse>;
     /**
@@ -85,7 +85,7 @@ export declare class Client extends AbstractClient {
      */
     CreateCustomizeTemplates(req: CreateCustomizeTemplatesRequest, cb?: (error: string, rep: CreateCustomizeTemplatesResponse) => void): Promise<CreateCustomizeTemplatesResponse>;
     /**
-     * 获取所有模版列表
+     * 获取所有模板列表
      */
     DescribeCustomizeTemplates(req: DescribeCustomizeTemplatesRequest, cb?: (error: string, rep: DescribeCustomizeTemplatesResponse) => void): Promise<DescribeCustomizeTemplatesResponse>;
 }

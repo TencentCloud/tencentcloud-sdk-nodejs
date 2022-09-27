@@ -38,6 +38,16 @@ it("tem.v20210701.DescribeApplicationsStatus", async function () {
     }
 })
 
+it("tem.v20210701.DescribeApplicationServiceList", async function () {
+    try {
+       const data = await client.DescribeApplicationServiceList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tem.v20210701.DescribePagedLogConfigList", async function () {
     try {
        const data = await client.DescribePagedLogConfigList({})
@@ -128,6 +138,16 @@ it("tem.v20210701.DescribeEnvironmentStatus", async function () {
     }
 })
 
+it("tem.v20210701.ResumeDeployApplication", async function () {
+    try {
+       const data = await client.ResumeDeployApplication({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tem.v20210701.DeleteIngress", async function () {
     try {
        const data = await client.DeleteIngress({})
@@ -168,9 +188,9 @@ it("tem.v20210701.DescribeDeployApplicationDetail", async function () {
     }
 })
 
-it("tem.v20210701.ResumeDeployApplication", async function () {
+it("tem.v20210701.ModifyApplicationService", async function () {
     try {
-       const data = await client.ResumeDeployApplication({})
+       const data = await client.ModifyApplicationService({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -221,6 +241,16 @@ it("tem.v20210701.StopApplication", async function () {
 it("tem.v20210701.CreateLogConfig", async function () {
     try {
        const data = await client.CreateLogConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tem.v20210701.CreateApplicationService", async function () {
+    try {
+       const data = await client.CreateApplicationService({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -311,6 +341,16 @@ it("tem.v20210701.CreateCosToken", async function () {
 it("tem.v20210701.DescribeIngress", async function () {
     try {
        const data = await client.DescribeIngress({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tem.v20210701.DeleteApplicationService", async function () {
+    try {
+       const data = await client.DeleteApplicationService({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

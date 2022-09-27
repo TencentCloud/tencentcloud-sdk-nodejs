@@ -4192,7 +4192,7 @@ export interface DescribeTopicRequest {
   Offset?: number
 
   /**
-   * 返回数量，不填则默认为10，最大值为50
+   * 返回数量，不填则默认为20，最大值为50
    */
   Limit?: number
 

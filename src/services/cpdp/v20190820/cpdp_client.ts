@@ -111,6 +111,7 @@ import {
   CreateOpenBankVerificationOrderResponse,
   PaymentOrderResult,
   DistributeAddReceiverRequest,
+  QueryFinancialDataUrlRequest,
   QueryExchangerateData,
   WithdrawBill,
   QueryOpenBankDailyReceiptDownloadUrlResponse,
@@ -316,6 +317,7 @@ import {
   ViewContractRequest,
   QueryBankTransactionDetailsRequest,
   CloudSubOrderReturn,
+  QueryFinancialDataUrlResponse,
   QueryExchangeRateRequest,
   OrderSummaryResult,
   QueryBillDownloadURLRequest,
@@ -1572,13 +1574,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 云企付-查询订单支付结果
+   * 财税-查询金融数据文件下载链接
    */
-  async QueryOpenBankPaymentOrder(
-    req: QueryOpenBankPaymentOrderRequest,
-    cb?: (error: string, rep: QueryOpenBankPaymentOrderResponse) => void
-  ): Promise<QueryOpenBankPaymentOrderResponse> {
-    return this.request("QueryOpenBankPaymentOrder", req, cb)
+  async QueryFinancialDataUrl(
+    req: QueryFinancialDataUrlRequest,
+    cb?: (error: string, rep: QueryFinancialDataUrlResponse) => void
+  ): Promise<QueryFinancialDataUrlResponse> {
+    return this.request("QueryFinancialDataUrl", req, cb)
   }
 
   /**
@@ -2016,13 +2018,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 直播平台-文件上传
+   * 云企付-查询订单支付结果
    */
-  async UploadFile(
-    req: UploadFileRequest,
-    cb?: (error: string, rep: UploadFileResponse) => void
-  ): Promise<UploadFileResponse> {
-    return this.request("UploadFile", req, cb)
+  async QueryOpenBankPaymentOrder(
+    req: QueryOpenBankPaymentOrderRequest,
+    cb?: (error: string, rep: QueryOpenBankPaymentOrderResponse) => void
+  ): Promise<QueryOpenBankPaymentOrderResponse> {
+    return this.request("QueryOpenBankPaymentOrder", req, cb)
   }
 
   /**
@@ -2355,6 +2357,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateCustAcctIdResponse) => void
   ): Promise<CreateCustAcctIdResponse> {
     return this.request("CreateCustAcctId", req, cb)
+  }
+
+  /**
+   * 直播平台-文件上传
+   */
+  async UploadFile(
+    req: UploadFileRequest,
+    cb?: (error: string, rep: UploadFileResponse) => void
+  ): Promise<UploadFileResponse> {
+    return this.request("UploadFile", req, cb)
   }
 
   /**

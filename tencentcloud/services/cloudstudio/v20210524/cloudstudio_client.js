@@ -46,13 +46,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateWorkspaceByVersionControl", req, cb);
     }
     /**
-     * 快速开始, 基于模版创建工作空间
+     * 快速开始, 基于模板创建工作空间
      */
     async CreateWorkspaceByTemplate(req, cb) {
         return this.request("CreateWorkspaceByTemplate", req, cb);
     }
     /**
-     * 修改模版默认代码仓库
+     * 修改模板默认代码仓库
      */
     async ModifyCustomizeTemplateVersionControl(req, cb) {
         return this.request("ModifyCustomizeTemplateVersionControl", req, cb);
@@ -131,7 +131,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyWorkspaceAttributes", req, cb);
     }
     /**
-     * 云主机方式创建工作空间
+     * 云服务器方式创建工作空间
      */
     async CreateWorkspaceByAgent(req, cb) {
         return this.request("CreateWorkspaceByAgent", req, cb);
@@ -143,7 +143,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateCustomizeTemplates", req, cb);
     }
     /**
-     * 获取所有模版列表
+     * 获取所有模板列表
      */
     async DescribeCustomizeTemplates(req, cb) {
         return this.request("DescribeCustomizeTemplates", req, cb);

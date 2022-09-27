@@ -2959,7 +2959,6 @@ export interface HKIDCardOCRResponse {
 -9102：证照复印件告警
 -9103：证照翻拍告警
 -9104：证照PS告警
--9105：证照防伪告警
       */
   WarningCode: Array<number>
 
@@ -4857,7 +4856,7 @@ export interface MLIDPassportOCRResponse {
   /**
       * 告警码
 -9103	证照翻拍告警
--9102	证照复印件告警
+-9102	证照复印件告警（包括黑白复印件、彩色复印件）
 -9106       证件遮挡告警
       */
   Warn: Array<number>
