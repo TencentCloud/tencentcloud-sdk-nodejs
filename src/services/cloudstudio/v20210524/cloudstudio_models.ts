@@ -1279,7 +1279,7 @@ export interface RemoveWorkspaceResponse {
 }
 
 /**
- * 云主机创建工作空间DTO
+ * 云服务器创建工作空间 DTO
  */
 export interface AgentSpaceDTO {
   /**

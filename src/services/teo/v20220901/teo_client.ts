@@ -37,7 +37,6 @@ import {
   RuleExtraParameter,
   ClsLogTopicInfo,
   WafConfig,
-  DescribeHostCertificatesResponse,
   CreatePrefetchTaskRequest,
   DescribeApplicationProxiesResponse,
   DescribeTopL7AnalysisDataRequest,
@@ -59,6 +58,7 @@ import {
   CachePrefresh,
   DescribeWebProtectionClientIpListResponse,
   DescribeTimingL7AnalysisDataResponse,
+  OriginGroupCondition,
   BotPortraitRule,
   DDoSRule,
   RulesProperties,
@@ -161,6 +161,7 @@ import {
   ServerCertInfo,
   DescribeZonesRequest,
   OriginRecord,
+  AdvancedOriginGroup,
   CreateLoadBalancingResponse,
   DeleteLogTopicTaskRequest,
   VanityNameServers,
@@ -245,9 +246,10 @@ import {
   AclConfig,
   DescribeSpeedTestingDetailsResponse,
   WafGroupDetail,
+  ClientIpCountry,
   LoadBalancing,
   DeleteApplicationProxyRuleRequest,
-  HostsCertificate,
+  FileAscriptionInfo,
   DescribeDDoSBlockListResponse,
   DescribeTopL7CacheDataResponse,
   SpeedTestingStatus,
@@ -261,7 +263,6 @@ import {
   DescribeSecurityGroupManagedRulesRequest,
   ModifyApplicationProxyStatusRequest,
   CreateZoneRequest,
-  DescribeHostCertificatesRequest,
   AscriptionInfo,
   DescribeBotDataResponse,
   DescribeLogSetsResponse,
@@ -294,13 +295,13 @@ import {
   ZoneSetting,
   RuleAndConditions,
   DropPageConfig,
+  PartialModule,
   ModifyApplicationProxyRuleStatusRequest,
   AccelerateType,
   ModifyDefaultCertificateResponse,
   DescribeSecurityGroupManagedRulesResponse,
   FollowOrigin,
   DescribeSpeedTestingDetailsRequest,
-  Sort,
   CreateLogTopicTaskRequest,
   QueryCondition,
   RuleRewriteActionParams,
@@ -310,7 +311,6 @@ import {
   DDoSGeoIp,
   ModifyHostsCertificateRequest,
   DDoSMajorAttackEvent,
-  HostCertInfo,
   DescribeTopL7AnalysisDataResponse,
   ClientIpHeader,
   Resource,
@@ -321,6 +321,7 @@ import {
   OriginGroup,
   DescribeWebManagedRulesHitRuleDetailResponse,
   WebLogs,
+  SkipCondition,
   DnssecInfo,
   UpstreamHttp2,
   BotConfig,
@@ -1066,16 +1067,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTimingL7AnalysisDataResponse) => void
   ): Promise<DescribeTimingL7AnalysisDataResponse> {
     return this.request("DescribeTimingL7AnalysisData", req, cb)
-  }
-
-  /**
-   * 查询域名证书列表，支持搜索、分页、排序、过滤。
-   */
-  async DescribeHostCertificates(
-    req: DescribeHostCertificatesRequest,
-    cb?: (error: string, rep: DescribeHostCertificatesResponse) => void
-  ): Promise<DescribeHostCertificatesResponse> {
-    return this.request("DescribeHostCertificates", req, cb)
   }
 
   /**

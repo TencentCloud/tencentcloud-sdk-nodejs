@@ -499,6 +499,12 @@ export interface ClsLogTopicInfo {
 <li>overseas：全球（不含中国大陆）。</li>
       */
     Area: string;
+    /**
+      * 推送任务类型，取值有：
+<li>cls：推送到cls；</li>
+<li>custom_endpoint：推送到自定义接口。</li>
+      */
+    LogSetType: string;
 }
 /**
  * Waf配置。
@@ -533,24 +539,6 @@ export interface WafConfig {
       * AI规则引擎防护配置。如果为null，默认使用历史配置。
       */
     AiRule?: AiRule;
-}
-/**
- * DescribeHostCertificates返回参数结构体
- */
-export interface DescribeHostCertificatesResponse {
-    /**
-      * 总数，用于分页查询。
-      */
-    TotalCount: number;
-    /**
-      * 域名证书配置列表。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    HostCertificates: Array<HostsCertificate>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
 }
 /**
  * CreatePrefetchTask请求参数结构体
@@ -704,9 +692,13 @@ export interface SwitchConfig {
  */
 export interface IdentifyZoneResponse {
     /**
-      * 站点归属信息。
+      * 站点归属校验：Dns校验信息。
       */
     Ascription: AscriptionInfo;
+    /**
+      * 站点归属权校验：文件校验信息。
+      */
+    FileAscription: FileAscriptionInfo;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1071,6 +1063,26 @@ export interface DescribeTimingL7AnalysisDataResponse {
     RequestId?: string;
 }
 /**
+ * 回源配置的条件参数
+ */
+export interface OriginGroupCondition {
+    /**
+      * 匹配类型，取值有：
+<li>url：当前站点下匹配URL路径的请求，例如：/example 或 /example/foo.jpg。支持*表示通配符，支持?表示匹配一个字符。
+</li>
+      */
+    Target: string;
+    /**
+      * 运算符，取值有：
+<li>equal：等于。</li>
+      */
+    Operator: string;
+    /**
+      * 对应匹配类型的取值。
+      */
+    Values: Array<string>;
+}
+/**
  * bot 用户画像规则
  */
 export interface BotPortraitRule {
@@ -1233,33 +1245,29 @@ export interface ModifyDDoSPolicyHostResponse {
     RequestId?: string;
 }
 /**
- * 例外规则的配置，包含生效的条件，生效的范围
+ * 例外规则的配置，包含生效的条件，生效的范围。
  */
 export interface ExceptUserRule {
     /**
-      * 规则名称。
-注意：此字段可能返回 null，表示取不到有效值。
+      * 规则名称，不可使用中文。
       */
     RuleName: string;
     /**
       * 规则的处置方式，当前仅支持skip：跳过全部托管规则。
-注意：此字段可能返回 null，表示取不到有效值。
       */
     Action: string;
     /**
       * 规则生效状态，取值有：
 <li>on：生效；</li>
 <li>off：失效。</li>
-注意：此字段可能返回 null，表示取不到有效值。
       */
     RuleStatus: string;
     /**
-      * 规则ID。仅出参使用。
-注意：此字段可能返回 null，表示取不到有效值。
+      * 规则ID。仅出参使用。默认由底层生成。
       */
     RuleID?: number;
     /**
-      * 更新时间。仅出参使用
+      * 更新时间，如果为null，默认由底层按当前时间生成。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     UpdateTime?: string;
@@ -1274,8 +1282,7 @@ export interface ExceptUserRule {
       */
     ExceptUserRuleScope?: ExceptUserRuleScope;
     /**
-      * 优先级，取值范围0-100。
-注意：此字段可能返回 null，表示取不到有效值。
+      * 优先级，取值范围0-100。如果为null，默认由底层设置为0。
       */
     RulePriority?: number;
 }
@@ -1696,7 +1703,7 @@ export interface DescribeZonesResponse {
  */
 export interface Header {
     /**
-      * HTTP头部。
+      * HTTP头部名称。
       */
     Name: string;
     /**
@@ -2057,6 +2064,10 @@ export interface CreateOriginGroupRequest {
       * 源站记录信息。
       */
     OriginRecords: Array<OriginRecord>;
+    /**
+      * 回源Host，仅当OriginType=self时可以设置。
+      */
+    HostHeader?: string;
 }
 /**
  * Top类数据记录
@@ -2102,6 +2113,17 @@ export interface ModifyLoadBalancingRequest {
 取值范围60-86400，单位：秒，不填写使用默认值：600。
       */
     TTL?: number;
+    /**
+      * 回源类型，取值有：
+<li>normal：主备回源；</li>
+<li>advanced：高级回源配置（仅当Type=proxied时可以使用）。</li>不填写表示使用主备回源。
+      */
+    OriginType?: string;
+    /**
+      * 高级回源配置，当OriginType=advanced时有效。
+不填写表示不使用高级回源配置。
+      */
+    AdvancedOriginGroups?: Array<AdvancedOriginGroup>;
 }
 /**
  * DescribeWebManagedRulesLog请求参数结构体
@@ -2308,8 +2330,9 @@ export interface DefaultServerCertInfo {
     SubjectAltName?: Array<string>;
     /**
       * 部署状态，取值有：
-<li>processing: 部署中;</li>
-<li>deployed: 已部署。</li>
+<li>processing: 部署中；</li>
+<li>deployed: 已部署；</li>
+<li>failed: 部署失败。</li>
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Status?: string;
@@ -2318,6 +2341,11 @@ export interface DefaultServerCertInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Message?: string;
+    /**
+      * 证书算法。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SignAlgo?: string;
 }
 /**
  * 离线缓存是否开启
@@ -2416,7 +2444,7 @@ export interface DeleteRulesRequest {
     RuleIds: Array<string>;
 }
 /**
- * 例外规则生效的具体条件
+ * 例外规则生效的具体条件。
  */
 export interface ExceptUserRuleCondition {
     /**
@@ -2432,11 +2460,10 @@ export interface ExceptUserRuleCondition {
 <li>method：请求方式；</li>
 <li>header：请求头部；</li>
 <li>sip_proto：网络层协议。</li>
-注意：此字段可能返回 null，表示取不到有效值。
       */
     MatchFrom?: string;
     /**
-      * 匹配项的参数。当 MatchFrom 为 header 时，可以填入 header 的 key 作为参数。
+      * 匹配项的参数。仅当 MatchFrom 为 header 时，可以使用本参数，值可填入 header 的 key 作为参数。
       */
     MatchParam?: string;
     /**
@@ -2457,12 +2484,10 @@ export interface ExceptUserRuleCondition {
 <li>match_prefix：前缀匹配；</li>
 <li>match_suffix：后缀匹配；</li>
 <li>wildcard：通配符。</li>
-注意：此字段可能返回 null，表示取不到有效值。
       */
     Operator?: string;
     /**
       * 匹配值。
-注意：此字段可能返回 null，表示取不到有效值。
       */
     MatchContent?: string;
 }
@@ -3288,13 +3313,13 @@ export interface Zone {
       */
     Paused: boolean;
     /**
-      * 是否开启cname加速，取值有：
+      * 是否开启 CNAME 加速，取值有：
 <li> enabled：开启；</li>
 <li> disabled：关闭。</li>
       */
     CnameSpeedUp: string;
     /**
-      * cname 接入状态，取值有：
+      * CNAME 接入状态，取值有：
 <li> finished：站点已验证；</li>
 <li> pending：站点验证中。</li>
       */
@@ -3535,7 +3560,7 @@ export interface DescribeZonesRequest {
     Limit?: number;
     /**
       * 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：
-<li>zone-name<br>   按照【<strong>站点名称</strong>】进行过滤。<br>   类型：String<br>   必选：否<li>zone-id<br>   按照【<strong>站点ID</strong>】进行过滤。站点ID形如：zone-xxx。<br>   类型：String<br>   必选：否<li>status<br>   按照【<strong>站点状态</strong>】进行过滤。<br>   类型：String<br>   必选：否<li>tag-key<br>   按照【<strong>标签键</strong>】进行过滤。<br>   类型：String<br>   必选：否<li>tag-value<br>   按照【<strong>标签值</strong>】进行过滤。<br>   类型：String<br>   必选：否<li>Fuzzy<br>   按照【<strong>是否模糊查询</strong>】进行过滤。仅支持过滤字段名为zone-name。模糊查询时，Values长度最小为1。<br>   类型：Boolean<br>   必选：否<br>   默认值：false
+<li>zone-name<br>   按照【<strong>站点名称</strong>】进行过滤。<br>   类型：String<br>   必选：否</li><li>zone-id<br>   按照【<strong>站点ID</strong>】进行过滤。站点ID形如：zone-xxx。<br>   类型：String<br>   必选：否</li><li>status<br>   按照【<strong>站点状态</strong>】进行过滤。<br>   类型：String<br>   必选：否</li><li>tag-key<br>   按照【<strong>标签键</strong>】进行过滤。<br>   类型：String<br>   必选：否</li><li>tag-value<br>   按照【<strong>标签值</strong>】进行过滤。<br>   类型：String<br>   必选：否</li><li>Fuzzy<br>   按照【<strong>是否模糊查询</strong>】进行过滤。仅支持过滤字段名为zone-name。模糊查询时，Values长度最小为1。<br>   类型：Boolean<br>   必选：否<br>   默认值：false</li>
       */
     Filters?: Array<AdvancedFilter>;
 }
@@ -3592,6 +3617,23 @@ export interface OriginRecord {
     PrivateParameters?: Array<PrivateParameter>;
 }
 /**
+ * 高级回源配置
+ */
+export interface AdvancedOriginGroup {
+    /**
+      * 高级回源配置的匹配条件。其中相同的Target只能出现一次。
+      */
+    OriginGroupConditions: Array<OriginGroupCondition>;
+    /**
+      * 主源站组ID。
+      */
+    OriginGroupId: string;
+    /**
+      * 备用源站组ID。
+      */
+    BackupOriginGroupId?: string;
+}
+/**
  * CreateLoadBalancing返回参数结构体
  */
 export interface CreateLoadBalancingResponse {
@@ -3613,9 +3655,9 @@ export interface DeleteLogTopicTaskRequest {
       */
     TopicId: string;
     /**
-      * 推送任务所属日志集地域。
+      * 推送任务所属日志集地域，此字段仅用于CLS推送任务。
       */
-    LogSetRegion: string;
+    LogSetRegion?: string;
 }
 /**
  * 自定义 nameservers
@@ -4134,6 +4176,11 @@ export interface DetailHost {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Ipv6: Ipv6;
+    /**
+      * 回源时是否携带客户端IP所属地域信息的配置。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ClientIpCountry: ClientIpCountry;
 }
 /**
  * DescribeSpeedTestingMetricData请求参数结构体
@@ -4455,7 +4502,7 @@ export interface SpeedTestingMetricData {
 export interface DescribeIdentificationsRequest {
     /**
       * 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：
-<li>zone-name<br>   按照【<strong>站点名称</strong>】进行过滤。<br>   类型：String<br>   必选：是
+<li>zone-name<br>   按照【<strong>站点名称</strong>】进行过滤。<br>   类型：String<br>   必选：是</li>
       */
     Filters: Array<Filter>;
     /**
@@ -4566,7 +4613,7 @@ export interface DescribePurgeTasksRequest {
     Limit?: number;
     /**
       * 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：
-<li>job-id<br>   按照【<strong>任务ID</strong>】进行过滤。job-id形如：1379afjk91u32h，暂不支持多值。<br>   类型：String<br>   必选：否<br>   模糊查询：不支持。<li>target<br>   按照【<strong>目标资源信息</strong>】进行过滤。target形如：http://www.qq.com/1.txt，暂不支持多值。<br>   类型：String<br>   必选：否<br>   模糊查询：不支持。<li>domains<br>   按照【<strong>域名</strong>】进行过滤。domains形如：www.qq.com。<br>   类型：String<br>   必选：否<br>   模糊查询：不支持。<li>statuses<br>   按照【<strong>任务状态</strong>】进行过滤。<br>   必选：否<br>   模糊查询：不支持。<br>   可选项：<br>   processing：处理中<br>   success：成功<br>   failed：失败<br>   timeout：超时<li>type<br>   按照【<strong>清除缓存类型</strong>】进行过滤，暂不支持多值。<br>   类型：String<br>   必选：否<br>   模糊查询：不支持。<br>   可选项：<br>   purge_url：URL<br>   purge_prefix：前缀<br>   purge_all：全部缓存内容<br>   purge_host：Hostname
+<li>job-id<br>   按照【<strong>任务ID</strong>】进行过滤。job-id形如：1379afjk91u32h，暂不支持多值。<br>   类型：String<br>   必选：否<br>   模糊查询：不支持。</li><li>target<br>   按照【<strong>目标资源信息</strong>】进行过滤。target形如：http://www.qq.com/1.txt，暂不支持多值。<br>   类型：String<br>   必选：否<br>   模糊查询：不支持。</li><li>domains<br>   按照【<strong>域名</strong>】进行过滤。domains形如：www.qq.com。<br>   类型：String<br>   必选：否<br>   模糊查询：不支持。</li><li>statuses<br>   按照【<strong>任务状态</strong>】进行过滤。<br>   必选：否<br>   模糊查询：不支持。<br>   可选项：<br>   processing：处理中<br>   success：成功<br>   failed：失败<br>   timeout：超时</li><li>type<br>   按照【<strong>清除缓存类型</strong>】进行过滤，暂不支持多值。<br>   类型：String<br>   必选：否<br>   模糊查询：不支持。<br>   可选项：<br>   purge_url：URL<br>   purge_prefix：前缀<br>   purge_all：全部缓存内容<br>   purge_host：Hostname</li>
       */
     Filters?: Array<AdvancedFilter>;
 }
@@ -5128,14 +5175,33 @@ export interface ModifyOriginGroupResponse {
     RequestId?: string;
 }
 /**
- * 例外规则的生效范围
+ * 例外规则的生效范围。
  */
 export interface ExceptUserRuleScope {
     /**
-      * 生效的模块。当前仅支持waf：托管规则。
+      * 例外规则类型。其中complete模式代表全量数据进行例外，partial模式代表可选择指定模块指定字段进行例外，该字段取值有：
+<li>complete：完全跳过模式；</li>
+<li>partial：部分跳过模式。</li>
+      */
+    Type?: string;
+    /**
+      * 生效的模块，该字段取值有：
+<li>waf：托管规则；</li>
+<li>cc：速率限制规则；</li>
+<li>bot：Bot防护。</li>
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Modules?: Array<string>;
+    /**
+      * 跳过部分规则ID的例外规则详情。如果为null，默认使用历史配置。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PartialModules?: Array<PartialModule>;
+    /**
+      * 跳过具体字段不去扫描的例外规则详情。如果为null，默认使用历史配置。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SkipConditions?: Array<SkipCondition>;
 }
 /**
  * DescribeSecurityPortraitRules请求参数结构体
@@ -5555,6 +5621,22 @@ export interface WafGroupDetail {
     Action: string;
 }
 /**
+ * 回源时携带客户端IP所属地域信息，值的格式为ISO-3166-1两位字母代码。
+ */
+export interface ClientIpCountry {
+    /**
+      * 配置开关，取值有：
+<li>on：开启；</li>
+<li>off：关闭。</li>
+      */
+    Switch: string;
+    /**
+      * 存放客户端IP所属地域信息的请求头名称，当Switch=on时有效。
+为空则使用默认值：EO-Client-IPCountry。
+      */
+    HeaderName?: string;
+}
+/**
  * 负载均衡信息
  */
 export interface LoadBalancing {
@@ -5602,6 +5684,17 @@ export interface LoadBalancing {
       * 更新时间。
       */
     UpdateTime: string;
+    /**
+      * 回源类型，取值有：
+<li>normal：主备回源；</li>
+<li>advanced：高级回源配置。</li>
+      */
+    OriginType: string;
+    /**
+      * 高级回源配置，当OriginType=advanced时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AdvancedOriginGroups: Array<AdvancedOriginGroup>;
 }
 /**
  * DeleteApplicationProxyRule请求参数结构体
@@ -5621,19 +5714,17 @@ export interface DeleteApplicationProxyRuleRequest {
     RuleId: string;
 }
 /**
- * 域名证书配置
+ * 站点归属权校验——文件校验信息。
  */
-export interface HostsCertificate {
+export interface FileAscriptionInfo {
     /**
-      * 域名。
-注意：此字段可能返回 null，表示取不到有效值。
+      * 文件校验目录。
       */
-    Host: string;
+    IdentifyPath: string;
     /**
-      * 服务端证书配置。
-注意：此字段可能返回 null，表示取不到有效值。
+      * 文件校验内容。
       */
-    HostCertInfo: HostCertInfo;
+    IdentifyContent: string;
 }
 /**
  * DescribeDDoSBlockList返回参数结构体
@@ -5751,6 +5842,16 @@ export interface CreateLoadBalancingRequest {
 取值范围60-86400，单位：秒，不填写使用默认值：600。
       */
     TTL?: number;
+    /**
+      * 回源类型，取值有：
+<li>normal：主备回源；</li>
+<li>advanced：高级回源配置（仅当Type=proxied时可以使用）。</li>为空表示使用主备回源。
+      */
+    OriginType?: string;
+    /**
+      * 高级回源配置，当OriginType=advanced时有效。
+      */
+    AdvancedOriginGroups?: Array<AdvancedOriginGroup>;
 }
 /**
  * DescribeDnssec请求参数结构体
@@ -5965,31 +6066,6 @@ export interface CreateZoneRequest {
       * 资源标签。
       */
     Tags?: Array<Tag>;
-}
-/**
- * DescribeHostCertificates请求参数结构体
- */
-export interface DescribeHostCertificatesRequest {
-    /**
-      * 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：
-<li>zone-id<br>   按照【<strong>站点ID</strong>】进行过滤。站点ID形如：zone-xxx。<br>   类型：String<br>   必选：是<li>host<br>   按照【<strong>域名名称</strong>】进行过滤。<br>   类型：String<br>   必选：否<li>cert-id<br>   按照【<strong>证书ID</strong>】进行过滤。<br>   类型：String<br>   必选：否<li>cert-alias<br>   按照【<strong>证书名称</strong>】进行过滤。<br>   类型：String<br>   必选：否<li>cert-type<br>   按照【<strong>证书类型</strong>】进行过滤。<br>   类型：String<br>   必选：否
-      */
-    Filters: Array<AdvancedFilter>;
-    /**
-      * 分页查询偏移量，默认为 0。
-      */
-    Offset?: number;
-    /**
-      * 分页查询限制数目，默认为 100，最大可设置为 1000。
-      */
-    Limit?: number;
-    /**
-      * 排序方式。详细排序条件如下：
-<li>create-time：域名创建时间；</li>
-<li>cert-expire-time：证书过期时间；</li>
-<li>cert-deploy-time：证书部署时间。</li>
-      */
-    Sort?: Sort;
 }
 /**
  * 站点归属信息
@@ -6234,7 +6310,7 @@ export interface DescribeApplicationProxiesRequest {
       */
     Limit?: number;
     /**
-      * 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：<li>proxy-id<br>   按照【<strong>代理ID</strong>】进行过滤。代理ID形如：proxy-ev2sawbwfd。<br>   类型：String<br>   必选：否<li>zone-id<br>   按照【<strong>站点ID</strong>】进行过滤。站点ID形如：zone-vawer2vadg。<br>   类型：String<br>   必选：否
+      * 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：<li>proxy-id<br>   按照【<strong>代理ID</strong>】进行过滤。代理ID形如：proxy-ev2sawbwfd。<br>   类型：String<br>   必选：否</li><li>zone-id<br>   按照【<strong>站点ID</strong>】进行过滤。站点ID形如：zone-vawer2vadg。<br>   类型：String<br>   必选：否</li>
       */
     Filters?: Array<Filter>;
 }
@@ -6849,6 +6925,11 @@ export interface ZoneSetting {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Https: Https;
+    /**
+      * 回源时是否携带客户端IP所属地域信息的配置。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ClientIpCountry: ClientIpCountry;
 }
 /**
  * 规则引擎条件且关系条件列表
@@ -6879,6 +6960,21 @@ export interface DropPageConfig {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     AclDropPageDetail?: DropPageDetail;
+}
+/**
+ * 例外规则的详细模块配置。
+ */
+export interface PartialModule {
+    /**
+      * 模块名称，取值为：
+<li>waf：托管规则。</li>
+      */
+    Module?: string;
+    /**
+      * 模块下的需要例外的具体规则ID列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Include?: Array<number>;
 }
 /**
  * ModifyApplicationProxyRuleStatus请求参数结构体
@@ -6965,22 +7061,6 @@ export interface DescribeSpeedTestingDetailsRequest {
     ZoneId?: string;
 }
 /**
- * 查询结果排序条件。
- */
-export interface Sort {
-    /**
-      * 排序字段，当前支持：
-createTime，域名创建时间
-certExpireTime，证书过期时间
-certDeployTime,  证书部署时间
-      */
-    Key: string;
-    /**
-      * asc/desc，默认desc。
-      */
-    Sequence?: string;
-}
-/**
  * CreateLogTopicTask请求参数结构体
  */
 export interface CreateLogTopicTaskRequest {
@@ -7047,10 +7127,10 @@ export interface QueryCondition {
 <li>notEquals: 不等于；</li>
 <li>include: 包含；</li>
 <li>notInclude: 不包含; </li>
-<li>startWith: 开始于；</li>
-<li>notStartWith: 不开始于；</li>
-<li>endWith: 结尾是；</li>
-<li>notEndWith: 不结尾是。</li>
+<li>startWith: 开始的值是value；</li>
+<li>notStartWith: 不以value的值开始；</li>
+<li>endWith: 结尾是value值；</li>
+<li>notEndWith: 不以value的值结尾。</li>
       */
     Operator: string;
     /**
@@ -7206,51 +7286,6 @@ export interface DDoSMajorAttackEvent {
     AttackTime: number;
 }
 /**
- * https 服务端证书配置
- */
-export interface HostCertInfo {
-    /**
-      * 服务器证书 ID。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    CertId: string;
-    /**
-      * 证书备注名。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Alias?: string;
-    /**
-      * 证书类型，取值有：
-<li>default：默认证书；</lil>
-<li>upload：用户上传；</li>
-<li>managed:腾讯云托管。</li>
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Type?: string;
-    /**
-      * 证书过期时间。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ExpireTime?: string;
-    /**
-      * 证书部署时间。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    DeployTime?: string;
-    /**
-      * 签名算法。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    SignAlgo?: string;
-    /**
-      * 证书状态，取值有：
-<li>deployed：已部署;</li>
-<li>process：部署中。</li>
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Status?: string;
-}
-/**
  * DescribeTopL7AnalysisData返回参数结构体
  */
 export interface DescribeTopL7AnalysisDataResponse {
@@ -7357,7 +7392,7 @@ export interface DescribeHostsSettingRequest {
     Limit?: number;
     /**
       * 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：
-<li>host<br>   按照【<strong>域名</strong>】进行过滤。<br>   类型：string<br>   必选：否
+<li>host<br>   按照【<strong>域名</strong>】进行过滤。<br>   类型：string<br>   必选：否</li>
       */
     Filters?: Array<Filter>;
 }
@@ -7445,6 +7480,11 @@ export interface OriginGroup {
       * 源站组更新时间。
       */
     UpdateTime: string;
+    /**
+      * 当OriginType=self时，表示回源Host。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    HostHeader: string;
 }
 /**
  * DescribeWebManagedRulesHitRuleDetail返回参数结构体
@@ -7511,6 +7551,54 @@ export interface WebLogs {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ReqMethod: string;
+}
+/**
+ * 例外规则的跳过匹配条件，即在例外时根据本匹配条件，略过指定字段及内容。
+ */
+export interface SkipCondition {
+    /**
+      * 例外跳过类型，取值为：
+<li>header_fields：HTTP请求Header；</li>
+<li>cookie：HTTP请求Cookie；</li>
+<li>query_string：HTTP请求URL中的Query参数；</li>
+<li>uri：HTTP请求URI；</li>
+<li>body_raw：HTTP请求Body；</li>
+<li>body_json： JSON格式的HTTP Body。</li>
+      */
+    Type: string;
+    /**
+      * 选择跳过的字段，取值为：
+<li>args：uri 下选择 query 参数: ?name1=jack&age=12；</li>
+<li>path：uri 下选择部分路径：/path/to/resource.jpg；</li>
+<li>full：uri 下选择完整路径：example.com/path/to/resource.jpg?name1=jack&age=12；</li>
+<li>upload_filename：分段文件名，即分段传输文件时；</li>
+<li>keys：所有的Key；</li>
+<li>values：匹配Key对应的值；</li>
+<li>key_value：匹配Key及匹配Value。</li>
+      */
+    Selector: string;
+    /**
+      * 匹配Key所使用的匹配方式，取值为：
+<li>equal：精准匹配，等于；</li>
+<li>wildcard：通配符匹配，支持 * 通配。</li>
+      */
+    MatchFromType?: string;
+    /**
+      * 匹配Key的值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MatchFrom?: Array<string>;
+    /**
+      * 匹配Content所使用的匹配方式，取值为：
+<li>equal：精准匹配，等于；</li>
+<li>wildcard：通配符匹配，支持 * 通配。</li>
+      */
+    MatchContentType?: string;
+    /**
+      * 匹配Value的值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MatchContent?: Array<string>;
 }
 /**
  * DNSSEC 相关信息
@@ -7885,6 +7973,11 @@ export interface ModifyZoneSettingRequest {
 不填写表示保持原有配置。
       */
     Ipv6?: Ipv6;
+    /**
+      * 回源时是否携带客户端IP所属地域信息的配置。
+不填写表示保持原有配置。
+      */
+    ClientIpCountry?: ClientIpCountry;
 }
 /**
  * DDoS端口过滤
@@ -8685,7 +8778,7 @@ export interface DescribePrefetchTasksRequest {
     Limit?: number;
     /**
       * 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：
-<li>zone-id<br>   按照【<strong>站点 ID</strong>】进行过滤。zone-id形如：zone-1379afjk91u32h，暂不支持多值。<br>   类型：String<br>   必选：否。<br>   模糊查询：不支持。<li>job-id<br>   按照【<strong>任务ID</strong>】进行过滤。job-id形如：1379afjk91u32h，暂不支持多值。<br>   类型：String<br>   必选：否。<br>   模糊查询：不支持。<li>target<br>   按照【<strong>目标资源信息</strong>】进行过滤。target形如：http://www.qq.com/1.txt，暂不支持多值。<br>   类型：String<br>   必选：否。<br>   模糊查询：不支持。<li>domains<br>   按照【<strong>域名</strong>】进行过滤。domains形如：www.qq.com。<br>   类型：String<br>   必选：否。<br>   模糊查询：不支持。<li>statuses<br>   按照【<strong>任务状态</strong>】进行过滤。<br>   必选：否<br>   模糊查询：不支持。<br>   可选项：<br>   processing：处理中<br>   success：成功<br>   failed：失败<br>   timeout：超时
+<li>zone-id<br>   按照【<strong>站点 ID</strong>】进行过滤。zone-id形如：zone-1379afjk91u32h，暂不支持多值。<br>   类型：String<br>   必选：否。<br>   模糊查询：不支持。</li><li>job-id<br>   按照【<strong>任务ID</strong>】进行过滤。job-id形如：1379afjk91u32h，暂不支持多值。<br>   类型：String<br>   必选：否。<br>   模糊查询：不支持。</li><li>target<br>   按照【<strong>目标资源信息</strong>】进行过滤。target形如：http://www.qq.com/1.txt，暂不支持多值。<br>   类型：String<br>   必选：否。<br>   模糊查询：不支持。</li><li>domains<br>   按照【<strong>域名</strong>】进行过滤。domains形如：www.qq.com。<br>   类型：String<br>   必选：否。<br>   模糊查询：不支持。</li><li>statuses<br>   按照【<strong>任务状态</strong>】进行过滤。<br>   必选：否<br>   模糊查询：不支持。<br>   可选项：<br>   processing：处理中<br>   success：成功<br>   failed：失败<br>   timeout：超时</li>
       */
     Filters?: Array<AdvancedFilter>;
 }
@@ -8974,7 +9067,7 @@ export interface Identification {
       */
     Status: string;
     /**
-      * 站点归属信息。
+      * 站点归属权校验：Dns校验信息。
       */
     Ascription: AscriptionInfo;
     /**
@@ -8982,6 +9075,10 @@ export interface Identification {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     OriginalNameServers: Array<string>;
+    /**
+      * 站点归属权校验：文件校验信息。
+      */
+    FileAscription: FileAscriptionInfo;
 }
 /**
  * ModifyAlarmConfig请求参数结构体
@@ -9204,6 +9301,11 @@ export interface ModifyOriginGroupRequest {
       * 源站记录信息。
       */
     OriginRecords: Array<OriginRecord>;
+    /**
+      * 回源Host，仅当OriginType=self时可以设置。
+不填写，表示使用已有配置。
+      */
+    HostHeader?: string;
 }
 /**
  * DescribeAddableEntityList请求参数结构体

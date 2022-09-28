@@ -412,12 +412,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTimingL7AnalysisData", req, cb);
     }
     /**
-     * 查询域名证书列表，支持搜索、分页、排序、过滤。
-     */
-    async DescribeHostCertificates(req, cb) {
-        return this.request("DescribeHostCertificates", req, cb);
-    }
-    /**
      * 查询应用代理列表。
      */
     async DescribeApplicationProxies(req, cb) {
