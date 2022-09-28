@@ -68,6 +68,7 @@ import {
   ModifyApplicationAutoscalerRequest,
   ModifyConfigDataResponse,
   ModifyIngressRequest,
+  Tag,
   EnablePrometheusConf,
   DescribeIngressesRequest,
   StorageMountConf,

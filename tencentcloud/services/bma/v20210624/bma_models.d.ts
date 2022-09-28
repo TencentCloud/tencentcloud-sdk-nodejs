@@ -205,6 +205,18 @@ export interface CreateCRRightRequest {
       * x
       */
     IsProducer?: string;
+    /**
+      * x
+      */
+    EvidenceFileUrl?: string;
+    /**
+      * x
+      */
+    EvidenceValidStartDate?: string;
+    /**
+      * x
+      */
+    EvidenceValidEndDate?: string;
 }
 /**
  * CreateBPOfflineTicket返回参数结构体
@@ -563,6 +575,54 @@ export interface MonitorTort {
       * 1
       */
     WorkTitle: string;
+    /**
+      * 1
+      */
+    TortSite: string;
+    /**
+      * 1
+      */
+    ICP: string;
+    /**
+      * 1
+      */
+    RightNote: string;
+    /**
+      * 1
+      */
+    ObtainType: number;
+    /**
+      * 1
+      */
+    BlockNote: string;
+    /**
+      * 1
+      */
+    WorkId: number;
+    /**
+      * 1
+      */
+    WorkName: string;
+    /**
+      * 1
+      */
+    AuthStatus: number;
+    /**
+      * 1
+      */
+    CommStatus: number;
+    /**
+      * 1
+      */
+    EvidenceStatus: number;
+    /**
+      * 1
+      */
+    IsProducer: number;
+    /**
+      * 1
+      */
+    IsOverseas: number;
 }
 /**
  * CreateBPFakeURL请求参数结构体
@@ -879,6 +939,14 @@ export interface CreateCRWorkRequest {
       * 监测结束时间
       */
     MonitorEndTime?: string;
+    /**
+      * 申请人ID
+      */
+    ApplierId?: string;
+    /**
+      * 申请人姓名
+      */
+    ApplierName?: string;
 }
 /**
  * DescribeBPCompanyInfo请求参数结构体
@@ -1343,6 +1411,18 @@ export interface CreateCRBlockRequest {
       * x
       */
     IsProducer?: string;
+    /**
+      * x
+      */
+    EvidenceFileUrl?: string;
+    /**
+      * x
+      */
+    EvidenceValidStartDate?: string;
+    /**
+      * x
+      */
+    EvidenceValidEndDate?: string;
 }
 /**
  * CreateBPFakeURL返回参数结构体

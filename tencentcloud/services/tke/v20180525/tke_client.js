@@ -172,7 +172,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTKEEdgeScript", req, cb);
     }
     /**
-     * 边缘计算支持的k8s版本
+     * 边缘计算支持版本和k8s版本
      */
     async DescribeAvailableTKEEdgeVersion(req, cb) {
         return this.request("DescribeAvailableTKEEdgeVersion", req, cb);

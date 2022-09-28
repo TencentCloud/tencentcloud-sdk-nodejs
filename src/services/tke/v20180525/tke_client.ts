@@ -743,10 +743,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 边缘计算支持的k8s版本
+   * 边缘计算支持版本和k8s版本
    */
   async DescribeAvailableTKEEdgeVersion(
-    req?: DescribeAvailableTKEEdgeVersionRequest,
+    req: DescribeAvailableTKEEdgeVersionRequest,
     cb?: (error: string, rep: DescribeAvailableTKEEdgeVersionResponse) => void
   ): Promise<DescribeAvailableTKEEdgeVersionResponse> {
     return this.request("DescribeAvailableTKEEdgeVersion", req, cb)

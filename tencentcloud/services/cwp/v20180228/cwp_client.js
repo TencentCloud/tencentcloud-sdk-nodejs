@@ -756,7 +756,7 @@ class Client extends abstract_client_1.AbstractClient {
     /**
      * CreateLicenseOrder 该接口可以创建专业版/旗舰版订单
 支持预付费后付费创建
-后付费订单直接闯将成功
+后付费订单直接创建成功
 预付费订单仅下单不支付,需要调用计费支付接口进行支付
      */
     async CreateLicenseOrder(req, cb) {
@@ -959,12 +959,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeAssetEnvList(req, cb) {
         return this.request("DescribeAssetEnvList", req, cb);
-    }
-    /**
-     * 获取ES查询文档列表
-     */
-    async DescribeESHits(req, cb) {
-        return this.request("DescribeESHits", req, cb);
     }
     /**
      * 创建应急漏洞扫描任务

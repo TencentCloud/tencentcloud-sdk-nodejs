@@ -3429,6 +3429,11 @@ export interface UpdateInstanceRequest {
    * 可维护时间段
    */
   OperationDuration?: OperationDurationUpdated
+
+  /**
+   * 是否开启Altering 外网告警输出
+   */
+  KibanaAlteringPublicAccess?: string
 }
 
 /**
@@ -3644,6 +3649,11 @@ export interface UpgradeInstanceRequest {
    * 升级版本前是否对集群进行备份，默认不备份
    */
   CosBackup?: boolean
+
+  /**
+   * 滚动模式时，是否跳过检查，进行强制重启。默认值为false
+   */
+  SkipCheckForceRestart?: boolean
 }
 
 /**

@@ -2746,26 +2746,6 @@ export interface ExportMalwaresResponse {
 export type DescribeScanVulSettingRequest = null
 
 /**
- * DescribeESHits请求参数结构体
- */
-export interface DescribeESHitsRequest {
-  /**
-   * ES查询条件JSON
-   */
-  Query: string
-
-  /**
-   * 偏移量，默认为0。
-   */
-  Offset?: number
-
-  /**
-   * 返回数量，最大值为100。
-   */
-  Limit?: number
-}
-
-/**
  * DescribeAssetPlanTaskList返回参数结构体
  */
 export interface DescribeAssetPlanTaskListResponse {
@@ -4197,13 +4177,18 @@ export interface DeleteMaliciousRequestsResponse {
 }
 
 /**
- * DescribeESHits返回参数结构体
+ * ExportBruteAttacks返回参数结构体
  */
-export interface DescribeESHitsResponse {
+export interface ExportBruteAttacksResponse {
   /**
-   * ES查询结果JSON
+   * 导出文件下载链接地址。
    */
-  Data: string
+  DownloadUrl: string
+
+  /**
+   * 导出任务ID
+   */
+  TaskId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -5354,21 +5339,6 @@ export interface DescribeIndexListResponse {
 }
 
 /**
- * DescribeTagMachines返回参数结构体
- */
-export interface DescribeTagMachinesResponse {
-  /**
-   * 列表数据
-   */
-  List: Array<TagMachine>
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * ModifyWebPageProtectDir请求参数结构体
  */
 export interface ModifyWebPageProtectDirRequest {
@@ -5785,6 +5755,21 @@ export interface AssetUserBaseInfo {
 }
 
 /**
+ * DescribeMachineOsList返回参数结构体
+ */
+export interface DescribeMachineOsListResponse {
+  /**
+   * 操作系统列表
+   */
+  List: Array<OsName>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 授权绑定任务详情
  */
 export interface LicenseBindTaskDetail {
@@ -5911,13 +5896,13 @@ export interface DescribeVulCountByDatesResponse {
 }
 
 /**
- * DescribeMachineOsList返回参数结构体
+ * DescribeTagMachines返回参数结构体
  */
-export interface DescribeMachineOsListResponse {
+export interface DescribeTagMachinesResponse {
   /**
-   * 操作系统列表
+   * 列表数据
    */
-  List: Array<OsName>
+  List: Array<TagMachine>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -14640,26 +14625,6 @@ export interface DescribeAccountStatisticsRequest {
 <li>Username - String - 是否必填：否 - 帐号用户名</li>
       */
   Filters?: Array<Filter>
-}
-
-/**
- * ExportBruteAttacks返回参数结构体
- */
-export interface ExportBruteAttacksResponse {
-  /**
-   * 导出文件下载链接地址。
-   */
-  DownloadUrl: string
-
-  /**
-   * 导出任务ID
-   */
-  TaskId: string
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**

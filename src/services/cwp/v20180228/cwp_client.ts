@@ -122,7 +122,6 @@ import {
   ExportVulDetectionReportRequest,
   ExportMalwaresResponse,
   DescribeScanVulSettingRequest,
-  DescribeESHitsRequest,
   DescribeAssetPlanTaskListResponse,
   DescribeBaselineRuleRequest,
   DescribeHistoryAccountsRequest,
@@ -184,7 +183,7 @@ import {
   ScanAssetRequest,
   DescribeBaselineRuleResponse,
   DeleteMaliciousRequestsResponse,
-  DescribeESHitsResponse,
+  ExportBruteAttacksResponse,
   ProtectDirRelatedServer,
   ExportBruteAttacksRequest,
   DeleteMachineResponse,
@@ -216,7 +215,6 @@ import {
   CreateEmergencyVulScanResponse,
   DescribeAssetCoreModuleInfoRequest,
   DescribeIndexListResponse,
-  DescribeTagMachinesResponse,
   ModifyWebPageProtectDirRequest,
   DescribeWebPageGeneralizeResponse,
   DescribeBanWhiteListResponse,
@@ -229,11 +227,12 @@ import {
   DeleteTagsResponse,
   DescribeSecurityEventsCntRequest,
   AssetUserBaseInfo,
+  DescribeMachineOsListResponse,
   LicenseBindTaskDetail,
   ExportMaliciousRequestsResponse,
   EffectiveMachineInfo,
   DescribeVulCountByDatesResponse,
-  DescribeMachineOsListResponse,
+  DescribeTagMachinesResponse,
   DescribeIndexListRequest,
   ProtectDirInfo,
   DeleteBashRulesRequest,
@@ -524,7 +523,6 @@ import {
   DescribeLicenseBindListRequest,
   Filter,
   DescribeAccountStatisticsRequest,
-  ExportBruteAttacksResponse,
   SecurityButlerInfo,
   DescribeSaveOrUpdateWarningsRequest,
   DescribeAssetProcessInfoListResponse,
@@ -1794,7 +1792,7 @@ export class Client extends AbstractClient {
   /**
      * CreateLicenseOrder 该接口可以创建专业版/旗舰版订单
 支持预付费后付费创建
-后付费订单直接闯将成功
+后付费订单直接创建成功
 预付费订单仅下单不支付,需要调用计费支付接口进行支付
      */
   async CreateLicenseOrder(
@@ -2132,16 +2130,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAssetEnvListResponse) => void
   ): Promise<DescribeAssetEnvListResponse> {
     return this.request("DescribeAssetEnvList", req, cb)
-  }
-
-  /**
-   * 获取ES查询文档列表
-   */
-  async DescribeESHits(
-    req: DescribeESHitsRequest,
-    cb?: (error: string, rep: DescribeESHitsResponse) => void
-  ): Promise<DescribeESHitsResponse> {
-    return this.request("DescribeESHits", req, cb)
   }
 
   /**

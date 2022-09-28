@@ -104,9 +104,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeTKEEdgeScript(req: DescribeTKEEdgeScriptRequest, cb?: (error: string, rep: DescribeTKEEdgeScriptResponse) => void): Promise<DescribeTKEEdgeScriptResponse>;
     /**
-     * 边缘计算支持的k8s版本
+     * 边缘计算支持版本和k8s版本
      */
-    DescribeAvailableTKEEdgeVersion(req?: DescribeAvailableTKEEdgeVersionRequest, cb?: (error: string, rep: DescribeAvailableTKEEdgeVersionResponse) => void): Promise<DescribeAvailableTKEEdgeVersionResponse>;
+    DescribeAvailableTKEEdgeVersion(req: DescribeAvailableTKEEdgeVersionRequest, cb?: (error: string, rep: DescribeAvailableTKEEdgeVersionResponse) => void): Promise<DescribeAvailableTKEEdgeVersionResponse>;
     /**
      * 查询边缘集群列表
      */

@@ -88,6 +88,12 @@ export interface NamespacePage {
    * 页数
    */
   Pages: number
+
+  /**
+      * 当前条目
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Current: number
 }
 
 /**
@@ -1774,6 +1780,23 @@ export interface ModifyIngressRequest {
 }
 
 /**
+ * 标签
+ */
+export interface Tag {
+  /**
+      * 标签键
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TagKey?: string
+
+  /**
+      * 标签值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TagValue?: string
+}
+
+/**
  * 开启prometheus监控配置
  */
 export interface EnablePrometheusConf {
@@ -2906,6 +2929,36 @@ export interface TemNamespaceInfo {
    * 环境锁，1为上锁，0则为上锁
    */
   Locked: number
+
+  /**
+      * 用户AppId
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AppId: string
+
+  /**
+      * 用户Uin
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Uin: string
+
+  /**
+      * 用户SubAccountUin
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SubAccountUin: string
+
+  /**
+      * 集群ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClusterId: string
+
+  /**
+      * 标签
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Tags: Array<Tag>
 }
 
 /**

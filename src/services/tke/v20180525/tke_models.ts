@@ -3294,7 +3294,12 @@ export interface DescribeTKEEdgeClustersResponse {
 /**
  * DescribeAvailableTKEEdgeVersion请求参数结构体
  */
-export type DescribeAvailableTKEEdgeVersionRequest = null
+export interface DescribeAvailableTKEEdgeVersionRequest {
+  /**
+   * 填写ClusterId获取当前集群各个组件版本和最新版本
+   */
+  ClusterId?: string
+}
 
 /**
  * DeleteClusterAsGroups请求参数结构体
@@ -8545,6 +8550,16 @@ export interface CreateTKEEdgeClusterRequest {
    * 集群计费方式
    */
   ChargeType?: string
+
+  /**
+   * 边缘集群版本，此版本区别于k8s版本，是整个集群各组件版本集合
+   */
+  EdgeVersion?: string
+
+  /**
+   * 边缘组件镜像仓库前缀
+   */
+  RegistryPrefix?: string
 }
 
 /**
@@ -8594,7 +8609,19 @@ export interface DescribeAvailableTKEEdgeVersionResponse {
   /**
    * 版本列表
    */
-  Versions?: Array<string>
+  Versions: Array<string>
+
+  /**
+      * 边缘集群最新版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EdgeVersionLatest: string
+
+  /**
+      * 边缘集群当前版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EdgeVersionCurrent: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
