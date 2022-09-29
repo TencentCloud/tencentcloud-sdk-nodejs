@@ -244,27 +244,29 @@ export interface TemplateInfo {
     CreatedOn: number;
 }
 /**
- * UploadFiles请求参数结构体
+ * ChannelDescribeEmployees请求参数结构体
  */
-export interface UploadFilesRequest {
+export interface ChannelDescribeEmployeesRequest {
     /**
-      * 应用相关信息，若是渠道版调用 appid 和proxyappid 必填
+      * 返回最大数量，最大为20
       */
-    Agent: Agent;
+    Limit: number;
     /**
-      * 文件对应业务类型，用于区分文件存储路径：
-1. TEMPLATE - 模板； 文件类型：.pdf .doc .docx .html
-2. DOCUMENT - 签署过程及签署后的合同文档/图片控件 文件类型：.pdf/.jpg/.png
+      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
       */
-    BusinessType: string;
-    /**
-      * 上传文件内容数组，最多支持20个文件
-      */
-    FileInfos?: Array<UploadFile>;
+    Agent?: Agent;
     /**
       * 操作者的信息
       */
     Operator?: UserInfo;
+    /**
+      * 查询过滤实名用户，key为Status，Values为["IsVerified"]
+      */
+    Filters?: Array<Filter>;
+    /**
+      * 偏移量，默认为0，最大为20000
+      */
+    Offset?: number;
 }
 /**
  * SyncProxyOrganization返回参数结构体
@@ -296,6 +298,31 @@ export interface GetDownloadFlowUrlResponse {
       * 合同（流程）下载地址
       */
     DownLoadUrl: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeTemplates返回参数结构体
+ */
+export interface DescribeTemplatesResponse {
+    /**
+      * 模板详情
+      */
+    Templates: Array<TemplateInfo>;
+    /**
+      * 查询总数
+      */
+    TotalCount: number;
+    /**
+      * 查询数量
+      */
+    Limit: number;
+    /**
+      * 查询起始偏移
+      */
+    Offset: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -378,29 +405,19 @@ export interface Recipient {
     IsPromoter?: boolean;
 }
 /**
- * DescribeTemplates返回参数结构体
+ * 渠道版员工部门信息
  */
-export interface DescribeTemplatesResponse {
+export interface Department {
     /**
-      * 模板详情
+      * 部门id
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Templates: Array<TemplateInfo>;
+    DepartmentId: string;
     /**
-      * 查询总数
+      * 部门名称
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    TotalCount: number;
-    /**
-      * 查询数量
-      */
-    Limit: number;
-    /**
-      * 查询起始偏移
-      */
-    Offset: number;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    DepartmentName: string;
 }
 /**
  * OperateChannelTemplate返回参数结构体
@@ -440,6 +457,21 @@ export interface OperateChannelTemplateResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 渠道版员工角色信息
+ */
+export interface StaffRole {
+    /**
+      * 角色id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RoleId: string;
+    /**
+      * 角色名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RoleName: string;
 }
 /**
  * CreateSignUrls返回参数结构体
@@ -1005,6 +1037,21 @@ export interface FlowDetailInfo {
     FlowApproverInfos: Array<FlowApproverDetail>;
 }
 /**
+ * 同步经办人失败原因
+ */
+export interface SyncFailReason {
+    /**
+      * 经办人Id
+      */
+    Id: string;
+    /**
+      * 失败原因
+例如：Id不符合规范、证件号码不合法等
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Message: string;
+}
+/**
  * CreateConsoleLoginUrl请求参数结构体
  */
 export interface CreateConsoleLoginUrlRequest {
@@ -1352,6 +1399,19 @@ export interface CreateFlowsByTemplatesRequest {
     Operator?: UserInfo;
 }
 /**
+ * 此结构体 (Filter) 用于描述查询过滤条件。
+ */
+export interface Filter {
+    /**
+      * 查询过滤条件的Key
+      */
+    Key: string;
+    /**
+      * 查询过滤条件的Value列表
+      */
+    Values: Array<string>;
+}
+/**
  * SyncProxyOrganization请求参数结构体
  */
 export interface SyncProxyOrganizationRequest {
@@ -1583,21 +1643,6 @@ export interface CreateChannelFlowEvidenceReportResponse {
     RequestId?: string;
 }
 /**
- * 同步经办人失败原因
- */
-export interface SyncFailReason {
-    /**
-      * 经办人Id
-      */
-    Id: string;
-    /**
-      * 失败原因
-例如：Id不符合规范、证件号码不合法等
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Message: string;
-}
-/**
  * PrepareFlows返回参数结构体
  */
 export interface PrepareFlowsResponse {
@@ -1609,6 +1654,48 @@ export interface PrepareFlowsResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * ChannelDescribeEmployees返回参数结构体
+ */
+export interface ChannelDescribeEmployeesResponse {
+    /**
+      * 员工数据列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Employees: Array<Staff>;
+    /**
+      * 偏移量，默认为0，最大为20000
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Offset: number;
+    /**
+      * 返回最大数量，最大为20
+      */
+    Limit: number;
+    /**
+      * 符合条件的员工数量
+      */
+    TotalCount: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * 复杂文档合成任务的任务信息
+ */
+export interface TaskInfo {
+    /**
+      * 合成任务Id，可以通过 ChannelGetTaskResultApi 接口获取任务信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TaskId: string;
+    /**
+      * 任务状态：READY - 任务已完成；NOTREADY - 任务未完成；
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TaskStatus: string;
 }
 /**
  * DescribeUsage请求参数结构体
@@ -2087,19 +2174,76 @@ export interface ChannelCreateFlowGroupByFilesRequest {
     Operator?: UserInfo;
 }
 /**
- * 复杂文档合成任务的任务信息
+ * UploadFiles请求参数结构体
  */
-export interface TaskInfo {
+export interface UploadFilesRequest {
     /**
-      * 合成任务Id，可以通过 ChannelGetTaskResultApi 接口获取任务信息
+      * 应用相关信息，若是渠道版调用 appid 和proxyappid 必填
+      */
+    Agent: Agent;
+    /**
+      * 文件对应业务类型，用于区分文件存储路径：
+1. TEMPLATE - 模板； 文件类型：.pdf .doc .docx .html
+2. DOCUMENT - 签署过程及签署后的合同文档/图片控件 文件类型：.pdf/.jpg/.png
+      */
+    BusinessType: string;
+    /**
+      * 上传文件内容数组，最多支持20个文件
+      */
+    FileInfos?: Array<UploadFile>;
+    /**
+      * 操作者的信息
+      */
+    Operator?: UserInfo;
+}
+/**
+ * 企业员工信息
+ */
+export interface Staff {
+    /**
+      * 员工在电子签平台的id
+      */
+    UserId: string;
+    /**
+      * 显示的员工名
+      */
+    DisplayName: string;
+    /**
+      * 员工手机号
+      */
+    Mobile: string;
+    /**
+      * 员工邮箱
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    TaskId: string;
+    Email: string;
     /**
-      * 任务状态：READY - 任务已完成；NOTREADY - 任务未完成；
+      * 员工在第三方平台id
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    TaskStatus: string;
+    OpenId: string;
+    /**
+      * 员工角色
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Roles: Array<StaffRole>;
+    /**
+      * 员工部门
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Department: Department;
+    /**
+      * 员工是否实名
+      */
+    Verified: boolean;
+    /**
+      * 员工创建时间戳
+      */
+    CreatedOn: number;
+    /**
+      * 员工实名时间戳
+      */
+    VerifiedOn: number;
 }
 /**
  * 抄送信息

@@ -1523,7 +1523,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建集群访问端口(独立集群开启内网/外网访问，托管集群支持开启内网访问)
+   * 创建集群访问端口
    */
   async CreateClusterEndpoint(
     req: CreateClusterEndpointRequest,
@@ -1903,7 +1903,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除集群访问端口(独立集群开启内网/外网访问，托管集群支持开启内网访问)
+   * 删除集群访问端口
    */
   async DeleteClusterEndpoint(
     req: DeleteClusterEndpointRequest,

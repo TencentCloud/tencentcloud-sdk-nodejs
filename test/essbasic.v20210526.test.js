@@ -178,6 +178,16 @@ it("essbasic.v20210526.SyncProxyOrganizationOperators", async function () {
     }
 })
 
+it("essbasic.v20210526.ChannelDescribeEmployees", async function () {
+    try {
+       const data = await client.ChannelDescribeEmployees({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("essbasic.v20210526.ChannelBatchCancelFlows", async function () {
     try {
        const data = await client.ChannelBatchCancelFlows({})

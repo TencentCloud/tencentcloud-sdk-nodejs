@@ -114,8 +114,8 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ChannelGetTaskResultApi", req, cb);
     }
     /**
-     * 【描述】：创建出证报告，返回报告 URL
-【注意】：此接口需要通过添加白名单获取调用权限，请联系运营人员加白
+     * 创建出证报告，返回报告 URL。此接口暂为开放，有问题请联系运营人员。
+
      */
     async CreateChannelFlowEvidenceReport(req, cb) {
         return this.request("CreateChannelFlowEvidenceReport", req, cb);
@@ -140,6 +140,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async SyncProxyOrganizationOperators(req, cb) {
         return this.request("SyncProxyOrganizationOperators", req, cb);
+    }
+    /**
+     * 查询企业员工
+     */
+    async ChannelDescribeEmployees(req, cb) {
+        return this.request("ChannelDescribeEmployees", req, cb);
     }
     /**
      * 指定需要批量撤销的签署流程Id，批量撤销合同

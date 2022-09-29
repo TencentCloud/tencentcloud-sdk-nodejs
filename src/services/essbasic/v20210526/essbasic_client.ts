@@ -24,15 +24,17 @@ import {
   ChannelCreateConvertTaskApiResponse,
   OperateChannelTemplateRequest,
   TemplateInfo,
-  UploadFilesRequest,
+  ChannelDescribeEmployeesRequest,
   SyncProxyOrganizationResponse,
   ChannelBatchCancelFlowsResponse,
   GetDownloadFlowUrlResponse,
+  DescribeTemplatesResponse,
   DescribeResourceUrlsByFlowsResponse,
   ChannelCreateMultiFlowSignQRCodeResponse,
   Recipient,
-  DescribeTemplatesResponse,
+  Department,
   OperateChannelTemplateResponse,
+  StaffRole,
   CreateSignUrlsResponse,
   CreateSignUrlsRequest,
   ChannelCreateMultiFlowSignQRCodeRequest,
@@ -49,6 +51,7 @@ import {
   GetDownloadFlowUrlRequest,
   ChannelBatchCancelFlowsRequest,
   FlowDetailInfo,
+  SyncFailReason,
   CreateConsoleLoginUrlRequest,
   OrganizationInfo,
   CreateFlowsByTemplatesResponse,
@@ -63,6 +66,7 @@ import {
   SyncProxyOrganizationOperatorsRequest,
   CreateConsoleLoginUrlResponse,
   CreateFlowsByTemplatesRequest,
+  Filter,
   SyncProxyOrganizationRequest,
   CreateSealByImageRequest,
   SignQrCode,
@@ -75,8 +79,9 @@ import {
   DownloadFlowInfo,
   ChannelCancelMultiFlowSignQRCodeRequest,
   CreateChannelFlowEvidenceReportResponse,
-  SyncFailReason,
   PrepareFlowsResponse,
+  ChannelDescribeEmployeesResponse,
+  TaskInfo,
   DescribeUsageRequest,
   ChannelCreateBatchCancelFlowUrlRequest,
   ApproverRestriction,
@@ -91,7 +96,8 @@ import {
   FlowApproverDetail,
   FlowInfo,
   ChannelCreateFlowGroupByFilesRequest,
-  TaskInfo,
+  UploadFilesRequest,
+  Staff,
   CcInfo,
   ChannelCancelMultiFlowSignQRCodeResponse,
   DescribeFlowDetailInfoResponse,
@@ -241,8 +247,8 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 【描述】：创建出证报告，返回报告 URL
-【注意】：此接口需要通过添加白名单获取调用权限，请联系运营人员加白
+     * 创建出证报告，返回报告 URL。此接口暂为开放，有问题请联系运营人员。
+
      */
   async CreateChannelFlowEvidenceReport(
     req: CreateChannelFlowEvidenceReportRequest,
@@ -282,6 +288,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SyncProxyOrganizationOperatorsResponse) => void
   ): Promise<SyncProxyOrganizationOperatorsResponse> {
     return this.request("SyncProxyOrganizationOperators", req, cb)
+  }
+
+  /**
+   * 查询企业员工
+   */
+  async ChannelDescribeEmployees(
+    req: ChannelDescribeEmployeesRequest,
+    cb?: (error: string, rep: ChannelDescribeEmployeesResponse) => void
+  ): Promise<ChannelDescribeEmployeesResponse> {
+    return this.request("ChannelDescribeEmployees", req, cb)
   }
 
   /**

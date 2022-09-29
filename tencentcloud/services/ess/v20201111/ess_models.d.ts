@@ -1,15 +1,59 @@
 /**
- * 此结构体 (UploadFile) 用于描述多文件上传的文件信息。
+ * 合同文件验签单个结果结构体
  */
-export interface UploadFile {
+export interface PdfVerifyResult {
     /**
-      * Base64编码后的文件内容
+      * 验签结果
       */
-    FileBody: string;
+    VerifyResult: number;
     /**
-      * 文件名，最大长度不超过200字符
+      * 签署平台
       */
-    FileName?: string;
+    SignPlatform: string;
+    /**
+      * 签署人名称
+      */
+    SignerName: string;
+    /**
+      * 签署时间
+      */
+    SignTime: number;
+    /**
+      * 签名算法
+      */
+    SignAlgorithm: string;
+    /**
+      * 签名证书序列号
+      */
+    CertSn: string;
+    /**
+      * 证书起始时间
+      */
+    CertNotBefore: number;
+    /**
+      * 证书过期时间
+      */
+    CertNotAfter: number;
+    /**
+      * 签名域横坐标
+      */
+    ComponentPosX: number;
+    /**
+      * 签名域纵坐标
+      */
+    ComponentPosY: number;
+    /**
+      * 签名域宽度
+      */
+    ComponentWidth: number;
+    /**
+      * 签名域高度
+      */
+    ComponentHeight: number;
+    /**
+      * 签名域所在页码
+      */
+    ComponentPage: number;
 }
 /**
  * CancelMultiFlowSignQRCode请求参数结构体
@@ -136,6 +180,27 @@ export interface CreateDocumentResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DescribeIntegrationEmployees请求参数结构体
+ */
+export interface DescribeIntegrationEmployeesRequest {
+    /**
+      * 操作人信息，userId必填
+      */
+    Operator: UserInfo;
+    /**
+      * 返回最大数量，最大为20
+      */
+    Limit: number;
+    /**
+      * 查询过滤实名用户，key为Status，Values为["IsVerified"]
+      */
+    Filters?: Array<Filter>;
+    /**
+      * 偏移量，默认为0，最大为20000
+      */
+    Offset?: number;
 }
 /**
  * StartFlow请求参数结构体
@@ -274,6 +339,19 @@ false：有序签
     Agent?: Agent;
 }
 /**
+ * 集成版员工部门信息
+ */
+export interface Department {
+    /**
+      * 部门id
+      */
+    DepartmentId: string;
+    /**
+      * 部门名称
+      */
+    DepartmentName: string;
+}
+/**
  * CreateSchemeUrl请求参数结构体
  */
 export interface CreateSchemeUrlRequest {
@@ -318,6 +396,30 @@ APP：第三方APP或小程序跳转电子签小程序的path。
     Agent?: Agent;
 }
 /**
+ * 删除员工结果
+ */
+export interface DeleteStaffsResult {
+    /**
+      * 删除员工的成功数据
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SuccessEmployeeData: Array<SuccessDeleteStaffData>;
+    /**
+      * 删除员工的失败数据
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FailedEmployeeData: Array<FailedDeleteStaffData>;
+}
+/**
+ * DescribeThirdPartyAuthCode请求参数结构体
+ */
+export interface DescribeThirdPartyAuthCodeRequest {
+    /**
+      * 电子签小程序跳转客户小程序时携带的授权查看码
+      */
+    AuthCode: string;
+}
+/**
  * 下载文件的URL信息
  */
 export interface FileUrl {
@@ -332,13 +434,17 @@ export interface FileUrl {
     Option: string;
 }
 /**
- * DescribeThirdPartyAuthCode请求参数结构体
+ * DeleteIntegrationEmployees返回参数结构体
  */
-export interface DescribeThirdPartyAuthCodeRequest {
+export interface DeleteIntegrationEmployeesResponse {
     /**
-      * 电子签小程序跳转客户小程序时携带的授权查看码
+      * 员工删除数据
       */
-    AuthCode: string;
+    DeleteEmployeeResult: DeleteStaffsResult;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 查询过滤条件
@@ -354,21 +460,44 @@ export interface Filter {
     Values: Array<string>;
 }
 /**
- * 一码多扫签署二维码对象
+ * DeleteIntegrationEmployees请求参数结构体
  */
-export interface SignQrCode {
+export interface DeleteIntegrationEmployeesRequest {
     /**
-      * 二维码id
+      * 操作人信息，userId必填
       */
-    QrCodeId: string;
+    Operator: UserInfo;
     /**
-      * 二维码url
+      * 待移除员工的信息，userId和openId二选一，必填一个
       */
-    QrCodeUrl: string;
+    Employees: Array<Staff>;
+}
+/**
+ * DescribeIntegrationEmployees返回参数结构体
+ */
+export interface DescribeIntegrationEmployeesResponse {
     /**
-      * 二维码过期时间
+      * 员工数据列表
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    ExpiredTime: number;
+    Employees: Array<Staff>;
+    /**
+      * 偏移量，默认为0，最大为20000
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Offset: number;
+    /**
+      * 返回最大数量，最大为20
+      */
+    Limit: number;
+    /**
+      * 符合条件的员工数量
+      */
+    TotalCount: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * CreateFlowApprovers返回参数结构体
@@ -657,6 +786,19 @@ export interface UploadFilesResponse {
     RequestId?: string;
 }
 /**
+ * CreateIntegrationEmployees返回参数结构体
+ */
+export interface CreateIntegrationEmployeesResponse {
+    /**
+      * 创建员工的结果
+      */
+    CreateEmployeeResult: CreateStaffResult;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeThirdPartyAuthCode返回参数结构体
  */
 export interface DescribeThirdPartyAuthCodeResponse {
@@ -716,6 +858,19 @@ export interface FlowDetailInfo {
     FlowApproverInfos: Array<FlowApproverDetail>;
 }
 /**
+ * 此结构体 (UploadFile) 用于描述多文件上传的文件信息。
+ */
+export interface UploadFile {
+    /**
+      * Base64编码后的文件内容
+      */
+    FileBody: string;
+    /**
+      * 文件名，最大长度不超过200字符
+      */
+    FileName?: string;
+}
+/**
  * CreateFlowByFiles返回参数结构体
  */
 export interface CreateFlowByFilesResponse {
@@ -738,29 +893,21 @@ export interface CreateFlowByFilesResponse {
     RequestId?: string;
 }
 /**
- * 机构信息
+ * 创建员工的失败数据
  */
-export interface OrganizationInfo {
+export interface FailedCreateStaffData {
     /**
-      * 机构在平台的编号
+      * 员工名
       */
-    OrganizationId?: string;
+    DisplayName: string;
     /**
-      * 用户渠道
+      * 员工手机号
       */
-    Channel?: string;
+    Mobile: string;
     /**
-      * 用户在渠道的机构编号
+      * 失败原因
       */
-    OrganizationOpenId?: string;
-    /**
-      * 用户真实的IP
-      */
-    ClientIp?: string;
-    /**
-      * 机构的代理IP
-      */
-    ProxyIp?: string;
+    Reason: string;
 }
 /**
  * DescribeFlowBriefs请求参数结构体
@@ -778,6 +925,23 @@ export interface DescribeFlowBriefsRequest {
       * 应用相关信息
       */
     Agent?: Agent;
+}
+/**
+ * 创建员工的成功数据
+ */
+export interface SuccessCreateStaffData {
+    /**
+      * 员工名
+      */
+    DisplayName: string;
+    /**
+      * 员工手机号
+      */
+    Mobile: string;
+    /**
+      * 员工在电子签平台的id
+      */
+    UserId: string;
 }
 /**
  * 签署参与者信息
@@ -929,58 +1093,17 @@ export interface VerifyPdfResponse {
     RequestId?: string;
 }
 /**
- * DescribeFileUrls请求参数结构体
+ * CreateIntegrationEmployees请求参数结构体
  */
-export interface DescribeFileUrlsRequest {
+export interface CreateIntegrationEmployeesRequest {
     /**
-      * 文件对应的业务类型，目前支持：
-- 模板 "TEMPLATE"
-- 文档 "DOCUMENT"
-- 印章  “SEAL”
-- 流程 "FLOW"
-      */
-    BusinessType: string;
-    /**
-      * 业务编号的数组，如模板编号、文档编号、印章编号
-最大支持20个资源
-      */
-    BusinessIds: Array<string>;
-    /**
-      * 操作者信息
+      * 操作人信息，userId必填
       */
     Operator: UserInfo;
     /**
-      * 应用相关信息
+      * 待创建员工的信息，Mobile和DisplayName必填
       */
-    Agent?: Agent;
-    /**
-      * 下载后的文件命名，只有fileType为zip的时候生效
-      */
-    FileName?: string;
-    /**
-      * 文件类型，"JPG", "PDF","ZIP"等
-      */
-    FileType?: string;
-    /**
-      * 指定资源起始偏移量，默认0
-      */
-    Offset?: number;
-    /**
-      * 指定资源数量，查询全部资源则传入-1
-      */
-    Limit?: number;
-    /**
-      * 下载url过期时间，单位秒。0: 按默认值5分钟，允许范围：1s~24x60x60s(1天)
-      */
-    UrlTtl?: number;
-    /**
-      * 暂不开放
-      */
-    Scene?: string;
-    /**
-      * 暂不开放
-      */
-    CcToken?: string;
+    Employees: Array<Staff>;
 }
 /**
  * 参与者信息
@@ -1098,61 +1221,23 @@ export interface DescribeFlowTemplatesResponse {
     RequestId?: string;
 }
 /**
- * 合同文件验签单个结果结构体
+ * 删除员工失败数据
  */
-export interface PdfVerifyResult {
+export interface FailedDeleteStaffData {
     /**
-      * 验签结果
+      * 员工在电子签的userId
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    VerifyResult: number;
+    UserId: string;
     /**
-      * 签署平台
+      * 员工在第三方平台的openId
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    SignPlatform: string;
+    OpenId: string;
     /**
-      * 签署人名称
+      * 失败原因
       */
-    SignerName: string;
-    /**
-      * 签署时间
-      */
-    SignTime: number;
-    /**
-      * 签名算法
-      */
-    SignAlgorithm: string;
-    /**
-      * 签名证书序列号
-      */
-    CertSn: string;
-    /**
-      * 证书起始时间
-      */
-    CertNotBefore: number;
-    /**
-      * 证书过期时间
-      */
-    CertNotAfter: number;
-    /**
-      * 签名域横坐标
-      */
-    ComponentPosX: number;
-    /**
-      * 签名域纵坐标
-      */
-    ComponentPosY: number;
-    /**
-      * 签名域宽度
-      */
-    ComponentWidth: number;
-    /**
-      * 签名域高度
-      */
-    ComponentHeight: number;
-    /**
-      * 签名域所在页码
-      */
-    ComponentPage: number;
+    Reason: string;
 }
 /**
  * CreateFlowEvidenceReport请求参数结构体
@@ -1187,6 +1272,21 @@ export interface CreateBatchCancelFlowUrlResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 创建员工的结果
+ */
+export interface CreateStaffResult {
+    /**
+      * 创建员工的成功列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SuccessEmployeeData: Array<SuccessCreateStaffData>;
+    /**
+      * 创建员工的失败列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FailedEmployeeData: Array<FailedCreateStaffData>;
 }
 /**
  * UploadFiles请求参数结构体
@@ -1226,6 +1326,117 @@ false--否，不处理
       * 用户自定义ID数组，与上传文件一一对应
       */
     CustomIds?: Array<string>;
+}
+/**
+ * 一码多扫签署二维码对象
+ */
+export interface SignQrCode {
+    /**
+      * 二维码id
+      */
+    QrCodeId: string;
+    /**
+      * 二维码url
+      */
+    QrCodeUrl: string;
+    /**
+      * 二维码过期时间
+      */
+    ExpiredTime: number;
+}
+/**
+ * 集成版企业角色信息
+ */
+export interface StaffRole {
+    /**
+      * 角色id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RoleId: string;
+    /**
+      * 角色名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RoleName: string;
+}
+/**
+ * DescribeFileUrls请求参数结构体
+ */
+export interface DescribeFileUrlsRequest {
+    /**
+      * 文件对应的业务类型，目前支持：
+- 模板 "TEMPLATE"
+- 文档 "DOCUMENT"
+- 印章  “SEAL”
+- 流程 "FLOW"
+      */
+    BusinessType: string;
+    /**
+      * 业务编号的数组，如模板编号、文档编号、印章编号
+最大支持20个资源
+      */
+    BusinessIds: Array<string>;
+    /**
+      * 操作者信息
+      */
+    Operator: UserInfo;
+    /**
+      * 应用相关信息
+      */
+    Agent?: Agent;
+    /**
+      * 下载后的文件命名，只有fileType为zip的时候生效
+      */
+    FileName?: string;
+    /**
+      * 文件类型，"JPG", "PDF","ZIP"等
+      */
+    FileType?: string;
+    /**
+      * 指定资源起始偏移量，默认0
+      */
+    Offset?: number;
+    /**
+      * 指定资源数量，查询全部资源则传入-1
+      */
+    Limit?: number;
+    /**
+      * 下载url过期时间，单位秒。0: 按默认值5分钟，允许范围：1s~24x60x60s(1天)
+      */
+    UrlTtl?: number;
+    /**
+      * 暂不开放
+      */
+    Scene?: string;
+    /**
+      * 暂不开放
+      */
+    CcToken?: string;
+}
+/**
+ * 机构信息
+ */
+export interface OrganizationInfo {
+    /**
+      * 机构在平台的编号
+      */
+    OrganizationId?: string;
+    /**
+      * 用户渠道
+      */
+    Channel?: string;
+    /**
+      * 用户在渠道的机构编号
+      */
+    OrganizationOpenId?: string;
+    /**
+      * 用户真实的IP
+      */
+    ClientIp?: string;
+    /**
+      * 机构的代理IP
+      */
+    ProxyIp?: string;
 }
 /**
  * StartFlow返回参数结构体
@@ -1294,6 +1505,23 @@ export interface CreateBatchCancelFlowUrlRequest {
       * 需要执行撤回的签署流程id数组，最多100个
       */
     FlowIds: Array<string>;
+}
+/**
+ * 删除员工的成功数据
+ */
+export interface SuccessDeleteStaffData {
+    /**
+      * 员工名
+      */
+    DisplayName: string;
+    /**
+      * 员工手机号
+      */
+    Mobile: string;
+    /**
+      * 员工在电子签平台的id
+      */
+    UserId: string;
 }
 /**
  * CreateMultiFlowSignQRCode请求参数结构体
@@ -1794,4 +2022,54 @@ export interface CcInfo {
       * 被抄送人手机号
       */
     Mobile?: string;
+}
+/**
+ * 企业员工信息
+ */
+export interface Staff {
+    /**
+      * 用户在电子签平台的id
+      */
+    UserId?: string;
+    /**
+      * 显示的用户名/昵称
+      */
+    DisplayName?: string;
+    /**
+      * 用户手机号
+      */
+    Mobile?: string;
+    /**
+      * 用户邮箱
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Email?: string;
+    /**
+      * 用户在第三方平台id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OpenId?: string;
+    /**
+      * 员工角色
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Roles?: Array<StaffRole>;
+    /**
+      * 员工部门
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Department?: Department;
+    /**
+      * 员工是否实名
+      */
+    Verified?: boolean;
+    /**
+      * 员工创建时间戳
+      */
+    CreatedOn?: number;
+    /**
+      * 员工实名时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VerifiedOn?: number;
 }

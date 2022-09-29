@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ChannelCreateConvertTaskApiResponse, OperateChannelTemplateRequest, UploadFilesRequest, SyncProxyOrganizationResponse, ChannelBatchCancelFlowsResponse, GetDownloadFlowUrlResponse, DescribeResourceUrlsByFlowsResponse, ChannelCreateMultiFlowSignQRCodeResponse, DescribeTemplatesResponse, OperateChannelTemplateResponse, CreateSignUrlsResponse, CreateSignUrlsRequest, ChannelCreateMultiFlowSignQRCodeRequest, CreateChannelFlowEvidenceReportRequest, DescribeFlowDetailInfoRequest, ChannelGetTaskResultApiResponse, ChannelGetTaskResultApiRequest, ChannelVerifyPdfResponse, GetDownloadFlowUrlRequest, ChannelBatchCancelFlowsRequest, CreateConsoleLoginUrlRequest, CreateFlowsByTemplatesResponse, ChannelCreateFlowSignReviewRequest, DescribeUsageResponse, SyncProxyOrganizationOperatorsResponse, CreateSealByImageResponse, ChannelVerifyPdfRequest, DescribeTemplatesRequest, SyncProxyOrganizationOperatorsRequest, CreateConsoleLoginUrlResponse, CreateFlowsByTemplatesRequest, SyncProxyOrganizationRequest, CreateSealByImageRequest, ChannelCreateFlowGroupByFilesResponse, PrepareFlowsRequest, ChannelCreateBatchCancelFlowUrlResponse, DescribeResourceUrlsByFlowsRequest, ChannelCancelMultiFlowSignQRCodeRequest, CreateChannelFlowEvidenceReportResponse, PrepareFlowsResponse, DescribeUsageRequest, ChannelCreateBatchCancelFlowUrlRequest, ChannelCreateFlowByFilesRequest, ChannelCreateFlowByFilesResponse, UploadFilesResponse, ChannelCreateFlowSignReviewResponse, ChannelCreateConvertTaskApiRequest, ChannelCreateFlowGroupByFilesRequest, ChannelCancelMultiFlowSignQRCodeResponse, DescribeFlowDetailInfoResponse } from "./essbasic_models";
+import { ChannelCreateConvertTaskApiResponse, OperateChannelTemplateRequest, ChannelDescribeEmployeesRequest, SyncProxyOrganizationResponse, ChannelBatchCancelFlowsResponse, GetDownloadFlowUrlResponse, DescribeTemplatesResponse, DescribeResourceUrlsByFlowsResponse, ChannelCreateMultiFlowSignQRCodeResponse, OperateChannelTemplateResponse, CreateSignUrlsResponse, CreateSignUrlsRequest, ChannelCreateMultiFlowSignQRCodeRequest, CreateChannelFlowEvidenceReportRequest, DescribeFlowDetailInfoRequest, ChannelGetTaskResultApiResponse, ChannelGetTaskResultApiRequest, ChannelVerifyPdfResponse, GetDownloadFlowUrlRequest, ChannelBatchCancelFlowsRequest, CreateConsoleLoginUrlRequest, CreateFlowsByTemplatesResponse, ChannelCreateFlowSignReviewRequest, DescribeUsageResponse, SyncProxyOrganizationOperatorsResponse, CreateSealByImageResponse, ChannelVerifyPdfRequest, DescribeTemplatesRequest, SyncProxyOrganizationOperatorsRequest, CreateConsoleLoginUrlResponse, CreateFlowsByTemplatesRequest, SyncProxyOrganizationRequest, CreateSealByImageRequest, ChannelCreateFlowGroupByFilesResponse, PrepareFlowsRequest, ChannelCreateBatchCancelFlowUrlResponse, DescribeResourceUrlsByFlowsRequest, ChannelCancelMultiFlowSignQRCodeRequest, CreateChannelFlowEvidenceReportResponse, PrepareFlowsResponse, ChannelDescribeEmployeesResponse, DescribeUsageRequest, ChannelCreateBatchCancelFlowUrlRequest, ChannelCreateFlowByFilesRequest, ChannelCreateFlowByFilesResponse, UploadFilesResponse, ChannelCreateFlowSignReviewResponse, ChannelCreateConvertTaskApiRequest, ChannelCreateFlowGroupByFilesRequest, UploadFilesRequest, ChannelCancelMultiFlowSignQRCodeResponse, DescribeFlowDetailInfoResponse } from "./essbasic_models";
 /**
  * essbasic client
  * @class
@@ -70,8 +70,8 @@ export declare class Client extends AbstractClient {
      */
     ChannelGetTaskResultApi(req: ChannelGetTaskResultApiRequest, cb?: (error: string, rep: ChannelGetTaskResultApiResponse) => void): Promise<ChannelGetTaskResultApiResponse>;
     /**
-     * 【描述】：创建出证报告，返回报告 URL
-【注意】：此接口需要通过添加白名单获取调用权限，请联系运营人员加白
+     * 创建出证报告，返回报告 URL。此接口暂为开放，有问题请联系运营人员。
+
      */
     CreateChannelFlowEvidenceReport(req: CreateChannelFlowEvidenceReportRequest, cb?: (error: string, rep: CreateChannelFlowEvidenceReportResponse) => void): Promise<CreateChannelFlowEvidenceReportResponse>;
     /**
@@ -89,6 +89,10 @@ export declare class Client extends AbstractClient {
 若经办人信息有误，或者需要修改，也可以先将之前的经办人做离职操作，然后重新使用控制台链接CreateConsoleLoginUrl让经办人重新实名。
      */
     SyncProxyOrganizationOperators(req: SyncProxyOrganizationOperatorsRequest, cb?: (error: string, rep: SyncProxyOrganizationOperatorsResponse) => void): Promise<SyncProxyOrganizationOperatorsResponse>;
+    /**
+     * 查询企业员工
+     */
+    ChannelDescribeEmployees(req: ChannelDescribeEmployeesRequest, cb?: (error: string, rep: ChannelDescribeEmployeesResponse) => void): Promise<ChannelDescribeEmployeesResponse>;
     /**
      * 指定需要批量撤销的签署流程Id，批量撤销合同
 客户指定需要撤销的签署流程Id，最多100个，超过100不处理；接口失败后返回错误信息

@@ -233,7 +233,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteAlarmNotice", req, cb);
     }
     /**
-     * 本接口用于构建直方图
+     * 本接口用于构建日志数量直方图
      */
     async DescribeLogHistogram(req, cb) {
         return this.request("DescribeLogHistogram", req, cb);

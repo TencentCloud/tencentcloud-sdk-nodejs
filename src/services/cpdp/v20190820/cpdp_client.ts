@@ -1383,7 +1383,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 云企付结算单查询结果
+   * 云企付-结算单查询结果
    */
   async QueryOpenBankSettleOrder(
     req: QueryOpenBankSettleOrderRequest,
@@ -2474,7 +2474,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 云企付结算申请接口
+   * 云企付-结算申请接口
    */
   async ApplyOpenBankSettleOrder(
     req: ApplyOpenBankSettleOrderRequest,

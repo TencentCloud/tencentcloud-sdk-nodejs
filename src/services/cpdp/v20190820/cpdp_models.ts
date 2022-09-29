@@ -537,12 +537,12 @@ export interface QueryOpenBankPaymentOrderRequest {
   ChannelMerchantId: string
 
   /**
-   * 外部商户订单号。与ChannelOrderId不能同时为空。
+   * 外部商户订单号。与ChannelOrderId不能同时为空。若传空串即表示忽略该参数。
    */
   OutOrderId: string
 
   /**
-   * 云平台订单号。与OutOrderId不能同时为空。
+   * 云平台订单号。与OutOrderId不能同时为空。若调用下单接口时，发生异常，无法取到ChannelOrderId，传空串即可
    */
   ChannelOrderId: string
 

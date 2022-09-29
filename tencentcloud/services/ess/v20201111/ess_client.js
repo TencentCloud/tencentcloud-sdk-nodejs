@@ -28,10 +28,27 @@ class Client extends abstract_client_1.AbstractClient {
         super("ess.tencentcloudapi.com", "2020-11-11", clientConfig);
     }
     /**
-     * 验证合同文件
+     * 此接口用于发起流程
+适用场景：见创建签署流程接口。
+注：该接口是“创建电子文档”接口的后置接口，用于激活包含完整合同信息（模板及内容信息）的流程。激活后的流程就是一份待签署的电子合同。
      */
-    async VerifyPdf(req, cb) {
-        return this.request("VerifyPdf", req, cb);
+    async StartFlow(req, cb) {
+        return this.request("StartFlow", req, cb);
+    }
+    /**
+     * 用于撤销签署流程
+适用场景：如果某个合同流程当前至少还有一方没有签署，则可通过该接口取消该合同流程。常用于合同发错、内容填错，需要及时撤销的场景。
+注：如果合同流程中的参与方均已签署完毕，则无法通过该接口撤销合同。
+     */
+    async CancelFlow(req, cb) {
+        return this.request("CancelFlow", req, cb);
+    }
+    /**
+     * 二期接口-查询模板
+适用场景：当模板较多或模板中的控件较多时，可以通过查询模板接口更方便的获取自己主体下的模板列表，以及每个模板内的控件信息。该接口常用来配合“创建电子文档”接口作为前置的接口使用。
+     */
+    async DescribeFlowTemplates(req, cb) {
+        return this.request("DescribeFlowTemplates", req, cb);
     }
     /**
      * 查询文件下载URL
@@ -41,19 +58,27 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeFileUrls", req, cb);
     }
     /**
-     * 查询合同详情
-适用场景：可用于主动查询某个合同详情信息。
+     * 验证合同文件
      */
-    async DescribeFlowInfo(req, cb) {
-        return this.request("DescribeFlowInfo", req, cb);
+    async VerifyPdf(req, cb) {
+        return this.request("VerifyPdf", req, cb);
     }
     /**
-     * 此接口用于发起流程
-适用场景：见创建签署流程接口。
-注：该接口是“创建电子文档”接口的后置接口，用于激活包含完整合同信息（模板及内容信息）的流程。激活后的流程就是一份待签署的电子合同。
+     * 电子签企业版：指定需要批量撤回的签署流程Id，获取批量撤销链接
+客户指定需要撤回的签署流程Id，最多100个，超过100不处理；接口调用成功返回批量撤回合同的链接，通过链接跳转到电子签小程序完成批量撤回
      */
-    async StartFlow(req, cb) {
-        return this.request("StartFlow", req, cb);
+    async CreateBatchCancelFlowUrl(req, cb) {
+        return this.request("CreateBatchCancelFlowUrl", req, cb);
+    }
+    /**
+     * 补充签署流程本企业签署人信息
+适用场景：在通过模板或者文件发起合同时，若未指定本企业签署人信息，则流程发起后，可以调用此接口补充签署人。
+同一签署人可以补充多个员工作为候选签署人,最终签署人取决于谁先领取合同完成签署。
+
+注：目前暂时只支持补充来源于企业微信的员工作为候选签署人
+     */
+    async CreateFlowApprovers(req, cb) {
+        return this.request("CreateFlowApprovers", req, cb);
     }
     /**
      * 提交企业签署流程审批结果
@@ -66,14 +91,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateFlowSignReview", req, cb);
     }
     /**
-     * 用于撤销签署流程
-适用场景：如果某个合同流程当前至少还有一方没有签署，则可通过该接口取消该合同流程。常用于合同发错、内容填错，需要及时撤销的场景。
-注：如果合同流程中的参与方均已签署完毕，则无法通过该接口撤销合同。
-     */
-    async CancelFlow(req, cb) {
-        return this.request("CancelFlow", req, cb);
-    }
-    /**
      * 创建签署流程电子文档
 适用场景：见创建签署流程接口。
 注：该接口需要给对应的流程指定一个模板id，并且填充该模板中需要补充的信息。是“发起流程”接口的前置接口。
@@ -82,18 +99,11 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateDocument", req, cb);
     }
     /**
-     * 此接口（CreateMultiFlowSignQRCode）用于创建一码多扫流程签署二维码。
-适用场景：无需填写签署人信息，可通过模板id生成签署二维码，签署人可通过扫描二维码补充签署信息进行实名签署。常用于提前不知道签署人的身份信息场景，例如：劳务工招工、大批量员工入职等场景。
-适用的模板仅限于B2C（1、无序签署，2、顺序签署时B静默签署，3、顺序签署时B非首位签署）、单C的模板，且模板中发起方没有填写控件。
+     * 查询合同详情
+适用场景：可用于主动查询某个合同详情信息。
      */
-    async CreateMultiFlowSignQRCode(req, cb) {
-        return this.request("CreateMultiFlowSignQRCode", req, cb);
-    }
-    /**
-     * 通过AuthCode查询用户是否实名
-     */
-    async DescribeThirdPartyAuthCode(req, cb) {
-        return this.request("DescribeThirdPartyAuthCode", req, cb);
+    async DescribeFlowInfo(req, cb) {
+        return this.request("DescribeFlowInfo", req, cb);
     }
     /**
      * 【描述】：创建出证报告，返回报告 URL
@@ -120,10 +130,64 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateFlowByFiles", req, cb);
     }
     /**
+     * 此接口（CreateMultiFlowSignQRCode）用于创建一码多扫流程签署二维码。
+适用场景：无需填写签署人信息，可通过模板id生成签署二维码，签署人可通过扫描二维码补充签署信息进行实名签署。常用于提前不知道签署人的身份信息场景，例如：劳务工招工、大批量员工入职等场景。
+适用的模板仅限于B2C（1、无序签署，2、顺序签署时B静默签署，3、顺序签署时B非首位签署）、单C的模板，且模板中发起方没有填写控件。
+     */
+    async CreateMultiFlowSignQRCode(req, cb) {
+        return this.request("CreateMultiFlowSignQRCode", req, cb);
+    }
+    /**
+     * 查询转换任务状态
+     */
+    async GetTaskResultApi(req, cb) {
+        return this.request("GetTaskResultApi", req, cb);
+    }
+    /**
      * 此接口（CancelMultiFlowSignQRCode）用于取消一码多扫二维码。该接口对传入的二维码ID，若还在有效期内，可以提前失效。
      */
     async CancelMultiFlowSignQRCode(req, cb) {
         return this.request("CancelMultiFlowSignQRCode", req, cb);
+    }
+    /**
+     * 查询员工信息，每次返回的数据量最大为20
+     */
+    async DescribeIntegrationEmployees(req, cb) {
+        return this.request("DescribeIntegrationEmployees", req, cb);
+    }
+    /**
+     * 创建文件转换任务
+     */
+    async CreateConvertTaskApi(req, cb) {
+        return this.request("CreateConvertTaskApi", req, cb);
+    }
+    /**
+     * 查询流程摘要
+适用场景：可用于主动查询某个合同流程的签署状态信息。可以配合回调通知使用。
+日调用量默认10W
+     */
+    async DescribeFlowBriefs(req, cb) {
+        return this.request("DescribeFlowBriefs", req, cb);
+    }
+    /**
+     * 此接口（UploadFiles）用于文件上传。
+适用场景：用于生成pdf资源编号（FileIds）来配合“用PDF创建流程”接口使用，使用场景可详见“用PDF创建流程”接口说明。
+调用时需要设置Domain 为 file.ess.tencent.cn，设置Version为2020-12-22
+     */
+    async UploadFiles(req, cb) {
+        return this.request("UploadFiles", req, cb);
+    }
+    /**
+     * 通过AuthCode查询用户是否实名
+     */
+    async DescribeThirdPartyAuthCode(req, cb) {
+        return this.request("DescribeThirdPartyAuthCode", req, cb);
+    }
+    /**
+     * 移除员工
+     */
+    async DeleteIntegrationEmployees(req, cb) {
+        return this.request("DeleteIntegrationEmployees", req, cb);
     }
     /**
      * 获取小程序跳转链接
@@ -142,56 +206,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateSchemeUrl", req, cb);
     }
     /**
-     * 查询转换任务状态
+     * 创建员工
      */
-    async GetTaskResultApi(req, cb) {
-        return this.request("GetTaskResultApi", req, cb);
-    }
-    /**
-     * 创建文件转换任务
-     */
-    async CreateConvertTaskApi(req, cb) {
-        return this.request("CreateConvertTaskApi", req, cb);
-    }
-    /**
-     * 二期接口-查询模板
-适用场景：当模板较多或模板中的控件较多时，可以通过查询模板接口更方便的获取自己主体下的模板列表，以及每个模板内的控件信息。该接口常用来配合“创建电子文档”接口作为前置的接口使用。
-     */
-    async DescribeFlowTemplates(req, cb) {
-        return this.request("DescribeFlowTemplates", req, cb);
-    }
-    /**
-     * 电子签企业版：指定需要批量撤回的签署流程Id，获取批量撤销链接
-客户指定需要撤回的签署流程Id，最多100个，超过100不处理；接口调用成功返回批量撤回合同的链接，通过链接跳转到电子签小程序完成批量撤回
-     */
-    async CreateBatchCancelFlowUrl(req, cb) {
-        return this.request("CreateBatchCancelFlowUrl", req, cb);
-    }
-    /**
-     * 查询流程摘要
-适用场景：可用于主动查询某个合同流程的签署状态信息。可以配合回调通知使用。
-日调用量默认10W
-     */
-    async DescribeFlowBriefs(req, cb) {
-        return this.request("DescribeFlowBriefs", req, cb);
-    }
-    /**
-     * 补充签署流程本企业签署人信息
-适用场景：在通过模板或者文件发起合同时，若未指定本企业签署人信息，则流程发起后，可以调用此接口补充签署人。
-同一签署人可以补充多个员工作为候选签署人,最终签署人取决于谁先领取合同完成签署。
-
-注：目前暂时只支持补充来源于企业微信的员工作为候选签署人
-     */
-    async CreateFlowApprovers(req, cb) {
-        return this.request("CreateFlowApprovers", req, cb);
-    }
-    /**
-     * 此接口（UploadFiles）用于文件上传。
-适用场景：用于生成pdf资源编号（FileIds）来配合“用PDF创建流程”接口使用，使用场景可详见“用PDF创建流程”接口说明。
-调用时需要设置Domain 为 file.ess.tencent.cn，设置Version为2020-12-22
-     */
-    async UploadFiles(req, cb) {
-        return this.request("UploadFiles", req, cb);
+    async CreateIntegrationEmployees(req, cb) {
+        return this.request("CreateIntegrationEmployees", req, cb);
     }
 }
 exports.Client = Client;

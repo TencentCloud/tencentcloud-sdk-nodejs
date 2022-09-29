@@ -542,7 +542,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口用于构建直方图
+   * 本接口用于构建日志数量直方图
    */
   async DescribeLogHistogram(
     req: DescribeLogHistogramRequest,

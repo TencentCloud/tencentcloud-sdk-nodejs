@@ -416,7 +416,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeClusterLevelChangeRecords(req: DescribeClusterLevelChangeRecordsRequest, cb?: (error: string, rep: DescribeClusterLevelChangeRecordsResponse) => void): Promise<DescribeClusterLevelChangeRecordsResponse>;
     /**
-     * 创建集群访问端口(独立集群开启内网/外网访问，托管集群支持开启内网访问)
+     * 创建集群访问端口
      */
     CreateClusterEndpoint(req: CreateClusterEndpointRequest, cb?: (error: string, rep: CreateClusterEndpointResponse) => void): Promise<CreateClusterEndpointResponse>;
     /**
@@ -568,7 +568,7 @@ export declare class Client extends AbstractClient {
      */
     DisableEventPersistence(req: DisableEventPersistenceRequest, cb?: (error: string, rep: DisableEventPersistenceResponse) => void): Promise<DisableEventPersistenceResponse>;
     /**
-     * 删除集群访问端口(独立集群开启内网/外网访问，托管集群支持开启内网访问)
+     * 删除集群访问端口
      */
     DeleteClusterEndpoint(req: DeleteClusterEndpointRequest, cb?: (error: string, rep: DeleteClusterEndpointResponse) => void): Promise<DeleteClusterEndpointResponse>;
     /**

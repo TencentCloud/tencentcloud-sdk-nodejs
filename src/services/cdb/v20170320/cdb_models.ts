@@ -635,6 +635,16 @@ export interface ModifyInstanceParamRequest {
    * 执行参数调整任务的方式，默认为 0。支持值包括：0 - 立刻执行，1 - 时间窗执行；当该值为 1 时，每次只能传一个实例（InstanceIds数量为1）
    */
   WaitSwitch?: number
+
+  /**
+   * 参数是否同步到主实例下的只读实例。true 为不同步，false 为同步。默认为 false。
+   */
+  NotSyncRo?: boolean
+
+  /**
+   * 参数是否同步到主实例下的灾备实例。true 为不同步，false 为同步。默认为 false。
+   */
+  NotSyncDr?: boolean
 }
 
 /**
@@ -8432,7 +8442,7 @@ export interface ModifyInstanceParamResponse {
   /**
    * 异步任务 ID，可用于查询任务进度。
    */
-  AsyncRequestId?: string
+  AsyncRequestId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

@@ -978,6 +978,16 @@ it("vpc.v20170312.RenewVpnGateway", async function () {
     }
 })
 
+it("vpc.v20170312.SetVpnGatewaysRenewFlag", async function () {
+    try {
+       const data = await client.SetVpnGatewaysRenewFlag({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.DescribeDhcpIps", async function () {
     try {
        const data = await client.DescribeDhcpIps({})

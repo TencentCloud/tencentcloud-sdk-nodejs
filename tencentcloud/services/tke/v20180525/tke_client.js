@@ -640,7 +640,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeClusterLevelChangeRecords", req, cb);
     }
     /**
-     * 创建集群访问端口(独立集群开启内网/外网访问，托管集群支持开启内网访问)
+     * 创建集群访问端口
      */
     async CreateClusterEndpoint(req, cb) {
         return this.request("CreateClusterEndpoint", req, cb);
@@ -868,7 +868,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DisableEventPersistence", req, cb);
     }
     /**
-     * 删除集群访问端口(独立集群开启内网/外网访问，托管集群支持开启内网访问)
+     * 删除集群访问端口
      */
     async DeleteClusterEndpoint(req, cb) {
         return this.request("DeleteClusterEndpoint", req, cb);

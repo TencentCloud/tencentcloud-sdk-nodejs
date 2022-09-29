@@ -145,7 +145,7 @@ export declare class Client extends AbstractClient {
      */
     DeleteAlarmNotice(req: DeleteAlarmNoticeRequest, cb?: (error: string, rep: DeleteAlarmNoticeResponse) => void): Promise<DeleteAlarmNoticeResponse>;
     /**
-     * 本接口用于构建直方图
+     * 本接口用于构建日志数量直方图
      */
     DescribeLogHistogram(req: DescribeLogHistogramRequest, cb?: (error: string, rep: DescribeLogHistogramResponse) => void): Promise<DescribeLogHistogramResponse>;
     /**

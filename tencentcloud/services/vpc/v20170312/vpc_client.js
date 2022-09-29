@@ -668,6 +668,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RenewVpnGateway", req, cb);
     }
     /**
+     * 设置VPNGW续费标记
+     */
+    async SetVpnGatewaysRenewFlag(req, cb) {
+        return this.request("SetVpnGatewaysRenewFlag", req, cb);
+    }
+    /**
      * 本接口（DescribeDhcpIps）用于查询DhcpIp列表
      */
     async DescribeDhcpIps(req, cb) {

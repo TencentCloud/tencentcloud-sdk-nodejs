@@ -454,7 +454,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreatePayMerchant", req, cb);
     }
     /**
-     * 云企付结算单查询结果
+     * 云企付-结算单查询结果
      */
     async QueryOpenBankSettleOrder(req, cb) {
         return this.request("QueryOpenBankSettleOrder", req, cb);
@@ -1113,7 +1113,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DistributeQueryReceiver", req, cb);
     }
     /**
-     * 云企付结算申请接口
+     * 云企付-结算申请接口
      */
     async ApplyOpenBankSettleOrder(req, cb) {
         return this.request("ApplyOpenBankSettleOrder", req, cb);

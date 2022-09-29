@@ -1094,7 +1094,7 @@ export interface DetachLoadBalancersRequest {
   LoadBalancerIds?: Array<string>
 
   /**
-   * 应用型负载均衡器标识信息列表，列表长度上限为50，LoadBalancerIds 和 ForwardLoadBalancerIdentifications二者同时最多只能指定一个
+   * 应用型负载均衡器标识信息列表，列表长度上限为100，LoadBalancerIds 和 ForwardLoadBalancerIdentifications二者同时最多只能指定一个
    */
   ForwardLoadBalancerIdentifications?: Array<ForwardLoadBalancerIdentification>
 }
@@ -1142,7 +1142,7 @@ export interface ModifyLoadBalancersRequest {
   LoadBalancerIds?: Array<string>
 
   /**
-   * 应用型负载均衡器列表，目前长度上限为50，LoadBalancerIds 和 ForwardLoadBalancers 二者同时最多只能指定一个
+   * 应用型负载均衡器列表，目前长度上限为100，LoadBalancerIds 和 ForwardLoadBalancers 二者同时最多只能指定一个
    */
   ForwardLoadBalancers?: Array<ForwardLoadBalancer>
 
@@ -2069,7 +2069,7 @@ export interface CreateAutoScalingGroupRequest {
   ProjectId?: number
 
   /**
-   * 应用型负载均衡器列表，目前长度上限为50，LoadBalancerIds 和 ForwardLoadBalancers 二者同时最多只能指定一个
+   * 应用型负载均衡器列表，目前长度上限为100，LoadBalancerIds 和 ForwardLoadBalancers 二者同时最多只能指定一个
    */
   ForwardLoadBalancers?: Array<ForwardLoadBalancer>
 
@@ -3179,7 +3179,7 @@ export interface ModifyLoadBalancerTargetAttributesRequest {
   AutoScalingGroupId: string
 
   /**
-   * 需修改目标规则属性的应用型负载均衡器列表，列表长度上限为50
+   * 需修改目标规则属性的应用型负载均衡器列表，列表长度上限为100
    */
   ForwardLoadBalancers: Array<ForwardLoadBalancer>
 }
@@ -3558,7 +3558,7 @@ export interface AttachLoadBalancersRequest {
   LoadBalancerIds?: Array<string>
 
   /**
-   * 应用型负载均衡器列表，每个伸缩组绑定应用型负载均衡器数量上限为50，LoadBalancerIds 和 ForwardLoadBalancers 二者同时最多只能指定一个
+   * 应用型负载均衡器列表，每个伸缩组绑定应用型负载均衡器数量上限为100，LoadBalancerIds 和 ForwardLoadBalancers 二者同时最多只能指定一个
    */
   ForwardLoadBalancers?: Array<ForwardLoadBalancer>
 }

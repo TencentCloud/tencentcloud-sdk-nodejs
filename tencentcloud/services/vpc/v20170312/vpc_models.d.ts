@@ -464,6 +464,24 @@ export interface ModifyIp6RuleResponse {
     RequestId?: string;
 }
 /**
+ * SetVpnGatewaysRenewFlag请求参数结构体
+ */
+export interface SetVpnGatewaysRenewFlagRequest {
+    /**
+      * VPNGW字符型ID列表
+      */
+    VpnGatewayIds: Array<string>;
+    /**
+      * 自动续费标记[0, 1, 2]
+0表示默认状态(初始状态)， 1表示自动续费，2表示明确不自动续费
+      */
+    AutoRenewFlag: number;
+    /**
+      * VPNGW类型['IPSEC', 'SSL']
+      */
+    Type?: string;
+}
+/**
  * ModifyCcnRegionBandwidthLimitsType返回参数结构体
  */
 export interface ModifyCcnRegionBandwidthLimitsTypeResponse {
@@ -9154,6 +9172,15 @@ export interface ModifyNetworkAclAttributeRequest {
       * 网络ACL名称，最大长度不能超过60个字节。
       */
     NetworkAclName: string;
+}
+/**
+ * SetVpnGatewaysRenewFlag返回参数结构体
+ */
+export interface SetVpnGatewaysRenewFlagResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DeleteVpnGateway返回参数结构体

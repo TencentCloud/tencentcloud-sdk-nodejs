@@ -292,7 +292,7 @@ export declare class Client extends AbstractClient {
      */
     CreatePayMerchant(req: CreatePayMerchantRequest, cb?: (error: string, rep: CreatePayMerchantResponse) => void): Promise<CreatePayMerchantResponse>;
     /**
-     * 云企付结算单查询结果
+     * 云企付-结算单查询结果
      */
     QueryOpenBankSettleOrder(req: QueryOpenBankSettleOrderRequest, cb?: (error: string, rep: QueryOpenBankSettleOrderResponse) => void): Promise<QueryOpenBankSettleOrderResponse>;
     /**
@@ -735,7 +735,7 @@ export declare class Client extends AbstractClient {
      */
     DistributeQueryReceiver(req: DistributeQueryReceiverRequest, cb?: (error: string, rep: DistributeQueryReceiverResponse) => void): Promise<DistributeQueryReceiverResponse>;
     /**
-     * 云企付结算申请接口
+     * 云企付-结算申请接口
      */
     ApplyOpenBankSettleOrder(req: ApplyOpenBankSettleOrderRequest, cb?: (error: string, rep: ApplyOpenBankSettleOrderResponse) => void): Promise<ApplyOpenBankSettleOrderResponse>;
     /**

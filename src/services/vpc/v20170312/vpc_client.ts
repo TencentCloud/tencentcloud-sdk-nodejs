@@ -42,6 +42,7 @@ import {
   DisableCcnRoutesRequest,
   ModifyNatGatewayDestinationIpPortTranslationNatRuleResponse,
   ModifyIp6RuleResponse,
+  SetVpnGatewaysRenewFlagRequest,
   ModifyCcnRegionBandwidthLimitsTypeResponse,
   DescribeVpnGatewaysResponse,
   ModifyNetworkAclQuintupleEntriesRequest,
@@ -498,6 +499,7 @@ import {
   DisassociateDhcpIpWithAddressIpResponse,
   CreateVpcEndPointServiceResponse,
   ModifyNetworkAclAttributeRequest,
+  SetVpnGatewaysRenewFlagResponse,
   DeleteVpnGatewayResponse,
   DescribeHaVipsRequest,
   UnassignPrivateIpAddressesResponse,
@@ -1736,6 +1738,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RenewVpnGatewayResponse) => void
   ): Promise<RenewVpnGatewayResponse> {
     return this.request("RenewVpnGateway", req, cb)
+  }
+
+  /**
+   * 设置VPNGW续费标记
+   */
+  async SetVpnGatewaysRenewFlag(
+    req: SetVpnGatewaysRenewFlagRequest,
+    cb?: (error: string, rep: SetVpnGatewaysRenewFlagResponse) => void
+  ): Promise<SetVpnGatewaysRenewFlagResponse> {
+    return this.request("SetVpnGatewaysRenewFlag", req, cb)
   }
 
   /**
