@@ -113,6 +113,33 @@ export interface StatusNode {
 }
 
 /**
+ * 云函数SCF
+ */
+export interface Scf {
+  /**
+   * Scf函数地域id
+   */
+  ScfRegion: string
+
+  /**
+   * Scf函数地域
+   */
+  ScfRegionName: string
+
+  /**
+      * Scf函数名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ScfName?: string
+
+  /**
+      * Scf函数入参
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Params?: Array<ScfParam>
+}
+
+/**
  * 审批意见
  */
 export interface ApproveOpinion {
@@ -173,6 +200,12 @@ export interface ApproveUser {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Nick?: string
+
+  /**
+      * 动态获取Scf
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Scf?: Scf
 }
 
 /**
@@ -265,6 +298,32 @@ export interface OutApproveBpaasApplicationRequest {
    * 审批意见
    */
   Msg?: string
+}
+
+/**
+ * Scf函数入参
+ */
+export interface ScfParam {
+  /**
+   * 参数Key
+   */
+  Key: string
+
+  /**
+   * 参数类型 1用户输入 2预设参数 3表单参数
+   */
+  Type: number
+
+  /**
+   * 参数值
+   */
+  Values: Array<string>
+
+  /**
+      * 参数描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Name?: string
 }
 
 /**

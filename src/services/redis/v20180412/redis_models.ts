@@ -636,12 +636,12 @@ export interface RenewInstanceResponse {
  */
 export interface DescribeSlowLogResponse {
   /**
-   * 慢查询总数
+   * 慢查询总数。
    */
   TotalCount: number
 
   /**
-   * 慢查询详情
+   * 慢查询详情。
    */
   InstanceSlowlogDetail: Array<InstanceSlowlogDetail>
 
@@ -3722,34 +3722,39 @@ export interface ModfiyInstancePasswordRequest {
  */
 export interface DescribeSlowLogRequest {
   /**
-   * 实例Id
+   * 实例Id。
    */
   InstanceId: string
 
   /**
-   * 开始时间
+   * 开始时间。
    */
   BeginTime: string
 
   /**
-   * 结束时间
+   * 结束时间。
    */
   EndTime: string
 
   /**
-   * 慢查询阈值（单位：微秒）
+   * 慢查询平均执行时间阈值（单位：微秒）。
    */
   MinQueryTime?: number
 
   /**
-   * 页面大小
+   * 每个页面展示的慢查询条数，默认值为20。
    */
   Limit?: number
 
   /**
-   * 偏移量，取Limit整数倍
+   * 慢查询条数的偏移量，取Limit整数倍。
    */
   Offset?: number
+
+  /**
+   * 节点所属角色。<ul><li>master：主节点。</li><li>slave：从节点。</li></ul>
+   */
+  Role?: string
 }
 
 /**

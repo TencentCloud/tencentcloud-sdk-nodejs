@@ -44,7 +44,7 @@ export declare class Client extends AbstractClient {
      */
     ReleaseWanAddress(req: ReleaseWanAddressRequest, cb?: (error: string, rep: ReleaseWanAddressResponse) => void): Promise<ReleaseWanAddressResponse>;
     /**
-     * 查询实例慢查询记录
+     * 本接口（DescribeSlowLog）查询实例慢查询记录。
      */
     DescribeSlowLog(req: DescribeSlowLogRequest, cb?: (error: string, rep: DescribeSlowLogResponse) => void): Promise<DescribeSlowLogResponse>;
     /**

@@ -82,7 +82,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ReleaseWanAddress", req, cb);
     }
     /**
-     * 查询实例慢查询记录
+     * 本接口（DescribeSlowLog）查询实例慢查询记录。
      */
     async DescribeSlowLog(req, cb) {
         return this.request("DescribeSlowLog", req, cb);

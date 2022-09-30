@@ -336,7 +336,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询实例慢查询记录
+   * 本接口（DescribeSlowLog）查询实例慢查询记录。
    */
   async DescribeSlowLog(
     req: DescribeSlowLogRequest,

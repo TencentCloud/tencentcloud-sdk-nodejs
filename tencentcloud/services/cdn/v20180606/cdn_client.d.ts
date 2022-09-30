@@ -12,7 +12,7 @@ export declare class Client extends AbstractClient {
      */
     AddCLSTopicDomains(req: AddCLSTopicDomainsRequest, cb?: (error: string, rep: AddCLSTopicDomainsResponse) => void): Promise<AddCLSTopicDomainsResponse>;
     /**
-     * DescribeIpStatus 用于查询域名所在加速平台的边缘节点、回源节点明细。注意事项：边缘节点（edge）尚未全量开放，未在内测名单中的账号不支持调用。
+     * DescribeIpStatus 用于查询域名所在加速平台的边缘节点、回源节点明细。注意事项：暂不支持查询边缘节点信息。
 
 >?  若您的业务已迁移至 CDN 控制台，请参考<a href="https://cloud.tencent.com/document/api/228/41954"> CDN 接口文档</a>，使用  CDN 相关API 进行操作。
      */

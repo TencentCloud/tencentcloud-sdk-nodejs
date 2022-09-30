@@ -19,12 +19,14 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   StatusNode,
+  Scf,
   ApproveOpinion,
   OutApproveBpaasApplicationResponse,
   GetBpaasApproveDetailRequest,
   ApproveUser,
   GetBpaasApproveDetailResponse,
   OutApproveBpaasApplicationRequest,
+  ScfParam,
   ApplyParam,
 } from "./bpaas_models"
 

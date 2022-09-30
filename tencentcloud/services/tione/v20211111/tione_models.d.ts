@@ -115,6 +115,10 @@ STATUS_ALL，全部
       * 数据集ID列表
       */
     DatasetIds?: Array<string>;
+    /**
+      * 要筛选的文本分类场景标签信息
+      */
+    TextClassificationLabels?: Array<TextLabelDistributionInfo>;
 }
 /**
  * 跑批任务详情
@@ -649,6 +653,11 @@ export interface DescribeDatasetDetailUnstructuredResponse {
       */
     FilterLabelList: Array<FilterLabelInfo>;
     /**
+      * 数据文本行，默认返回前1000行
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RowTexts: Array<string>;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
@@ -721,6 +730,26 @@ STRUCTURE：智能结构化
 注意：此字段可能返回 null，表示取不到有效值。
       */
     OcrLabels: Array<OcrLabelInfo>;
+    /**
+      * OCR场景标签信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OcrLabelInfo: string;
+    /**
+      * 文本分类场景标签结果，内容是json结构
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TextClassificationLabelList: string;
+    /**
+      * 文本内容，返回50字符
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RowText: string;
+    /**
+      * 文本内容是否完全返回
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ContentOmit: boolean;
 }
 /**
  * CFS存储的配置
@@ -1055,6 +1084,21 @@ export interface Spec {
       * 计费项显示名称
       */
     SpecAlias: string;
+}
+/**
+ * 文本标签
+ */
+export interface TextLabelDistributionInfo {
+    /**
+      * 文本分类题目名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Theme?: string;
+    /**
+      * 一级标签分布
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ClassLabelList?: Array<TextLabelDistributionDetailInfoFirstClass>;
 }
 /**
  * 训练指标
@@ -1403,6 +1447,31 @@ export interface TagFilter {
     TagValues?: Array<string>;
 }
 /**
+ * 二级标签
+ */
+export interface TextLabelDistributionDetailInfoSecondClass {
+    /**
+      * 标签名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LabelValue?: string;
+    /**
+      * 标签个数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LabelCount?: number;
+    /**
+      * 标签占比
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LabelPercentage?: number;
+    /**
+      * 子标签分布
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ChildLabelList?: Array<TextLabelDistributionDetailInfoThirdClass>;
+}
+/**
  * 出参类型
  */
 export interface BatchTaskSetItem {
@@ -1734,6 +1803,26 @@ export interface DeleteTrainingTaskResponse {
     RequestId?: string;
 }
 /**
+ * 五级标签
+ */
+export interface TextLabelDistributionDetailInfoFifthClass {
+    /**
+      * 标签名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LabelValue?: string;
+    /**
+      * 标签个数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LabelCount?: number;
+    /**
+      * 标签占比
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LabelPercentage?: number;
+}
+/**
  * 批处理任务实例
  */
 export interface BatchTaskInstance {
@@ -1904,6 +1993,31 @@ export interface DataSetConfig {
     Id: string;
 }
 /**
+ * 四级标签
+ */
+export interface TextLabelDistributionDetailInfoFourthClass {
+    /**
+      * 标签名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LabelValue?: string;
+    /**
+      * 标签个数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LabelCount?: number;
+    /**
+      * 标签占比
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LabelPercentage?: number;
+    /**
+      * 子标签分布
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ChildLabelList?: Array<TextLabelDistributionDetailInfoFifthClass>;
+}
+/**
  * 训练数据
  */
 export declare type TrainingDataPoint = null;
@@ -1990,6 +2104,31 @@ export interface DeleteTrainingModelRequest {
       * 删除模型类型，枚举值：NORMAL 普通，ACCELERATE 加速，不传则删除所有
       */
     ModelVersionType?: string;
+}
+/**
+ * 三级标签
+ */
+export interface TextLabelDistributionDetailInfoThirdClass {
+    /**
+      * 标签名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LabelValue?: string;
+    /**
+      * 标签个数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LabelCount?: number;
+    /**
+      * 标签占比
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LabelPercentage?: number;
+    /**
+      * 子标签分布
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ChildLabelList?: Array<TextLabelDistributionDetailInfoFourthClass>;
 }
 /**
  * DeleteTrainingTask请求参数结构体
@@ -2124,6 +2263,10 @@ ANNOTATION_FORMAT_FILE，文件目录结构
       * 数据是否存在表头
       */
     IsSchemaExisted?: boolean;
+    /**
+      * 导入文件粒度，按行或者按文件
+      */
+    ContentType?: string;
 }
 /**
  * StopBatchTask返回参数结构体
@@ -3176,6 +3319,31 @@ export interface DescribeTrainingModelVersionResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 一级标签
+ */
+export interface TextLabelDistributionDetailInfoFirstClass {
+    /**
+      * 标签名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LabelValue?: string;
+    /**
+      * 标签个数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LabelCount?: number;
+    /**
+      * 标签占比
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LabelPercentage?: number;
+    /**
+      * 子标签分布
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ChildLabelList?: Array<TextLabelDistributionDetailInfoSecondClass>;
 }
 /**
  * StopTrainingTask请求参数结构体

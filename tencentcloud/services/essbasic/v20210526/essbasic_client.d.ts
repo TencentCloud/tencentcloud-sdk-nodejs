@@ -70,7 +70,7 @@ export declare class Client extends AbstractClient {
      */
     ChannelGetTaskResultApi(req: ChannelGetTaskResultApiRequest, cb?: (error: string, rep: ChannelGetTaskResultApiResponse) => void): Promise<ChannelGetTaskResultApiResponse>;
     /**
-     * 创建出证报告，返回报告 URL。此接口暂为开放，有问题请联系运营人员。
+     * 创建出证报告，返回报告 URL。此接口暂未开放，有问题请联系运营人员。
 
      */
     CreateChannelFlowEvidenceReport(req: CreateChannelFlowEvidenceReportRequest, cb?: (error: string, rep: CreateChannelFlowEvidenceReportResponse) => void): Promise<CreateChannelFlowEvidenceReportResponse>;
