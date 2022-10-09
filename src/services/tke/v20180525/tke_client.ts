@@ -33,6 +33,7 @@ import {
   DescribePrometheusInstancesOverviewRequest,
   ServiceAccountAuthenticationOptions,
   DescribeEdgeClusterInstancesResponse,
+  DescribeEdgeClusterUpgradeInfoRequest,
   RunInstancesForNode,
   DisableVpcCniNetworkTypeResponse,
   DescribeClusterControllersResponse,
@@ -107,6 +108,7 @@ import {
   DescribePrometheusRecordRulesRequest,
   DescribeTKEEdgeClusterStatusRequest,
   AcquireClusterAdminRoleResponse,
+  UpdateEdgeClusterVersionRequest,
   GetTkeAppChartListResponse,
   DescribePrometheusTemplateSyncRequest,
   UpgradeAbleInstancesItem,
@@ -146,6 +148,7 @@ import {
   DescribeImageCachesRequest,
   Toleration,
   CreateEKSContainerInstancesResponse,
+  DeleteEdgeCVMInstancesResponse,
   DescribeClusterKubeconfigResponse,
   DescribeClusterCommonNamesRequest,
   NfsVolume,
@@ -364,6 +367,7 @@ import {
   CreateEKSContainerInstancesRequest,
   DescribeTKEEdgeClusterCredentialResponse,
   InstanceAdvancedSettings,
+  UpdateEdgeClusterVersionResponse,
   ModifyClusterAsGroupAttributeRequest,
   DescribeClusterAsGroupsResponse,
   DescribePrometheusConfigResponse,
@@ -431,7 +435,7 @@ import {
   ModifyNodePoolDesiredCapacityAboutAsgRequest,
   DeleteClusterRouteResponse,
   DeletePrometheusConfigRequest,
-  DeleteEdgeCVMInstancesResponse,
+  DescribeEdgeClusterUpgradeInfoResponse,
   ModifyClusterNodePoolResponse,
   PrometheusAlertPolicyItem,
   ModifyPrometheusAgentExternalLabelsRequest,
@@ -820,6 +824,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeEdgeLogSwitchesResponse) => void
   ): Promise<DescribeEdgeLogSwitchesResponse> {
     return this.request("DescribeEdgeLogSwitches", req, cb)
+  }
+
+  /**
+   * 升级边缘集群组件到指定版本，此版本为TKEEdge专用版本。
+   */
+  async UpdateEdgeClusterVersion(
+    req: UpdateEdgeClusterVersionRequest,
+    cb?: (error: string, rep: UpdateEdgeClusterVersionResponse) => void
+  ): Promise<UpdateEdgeClusterVersionResponse> {
+    return this.request("UpdateEdgeClusterVersion", req, cb)
   }
 
   /**
@@ -1950,6 +1964,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeClusterKubeconfigResponse) => void
   ): Promise<DescribeClusterKubeconfigResponse> {
     return this.request("DescribeClusterKubeconfig", req, cb)
+  }
+
+  /**
+   * 可以查询边缘集群升级信息，包含可以升级的组件，当前升级状态和升级错误信息
+   */
+  async DescribeEdgeClusterUpgradeInfo(
+    req: DescribeEdgeClusterUpgradeInfoRequest,
+    cb?: (error: string, rep: DescribeEdgeClusterUpgradeInfoResponse) => void
+  ): Promise<DescribeEdgeClusterUpgradeInfoResponse> {
+    return this.request("DescribeEdgeClusterUpgradeInfo", req, cb)
   }
 
   /**

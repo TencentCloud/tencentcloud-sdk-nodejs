@@ -2059,7 +2059,7 @@ export interface DescribeCcnAttachedInstancesRequest {
   OrderField?: string
 
   /**
-   * 排序方法。顺序：`ASC`，倒序：`DESC`。
+   * 排序方法。升序：`ASC`，倒序：`DESC`。
    */
   OrderDirection?: string
 }
@@ -4258,7 +4258,7 @@ export interface DescribeCcnsRequest {
   OrderField?: string
 
   /**
-   * 排序方法。顺序：`ASC`，倒序：`DESC`。
+   * 排序方法。升序：`ASC`，倒序：`DESC`。
    */
   OrderDirection?: string
 }

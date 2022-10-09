@@ -297,6 +297,21 @@ export interface DescribeEdgeClusterInstancesResponse {
 }
 
 /**
+ * DescribeEdgeClusterUpgradeInfo请求参数结构体
+ */
+export interface DescribeEdgeClusterUpgradeInfoRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+
+  /**
+   * 要升级到的TKEEdge版本
+   */
+  EdgeVersion: string
+}
+
+/**
  * 不同角色的节点配置参数
  */
 export interface RunInstancesForNode {
@@ -2048,6 +2063,31 @@ export interface AcquireClusterAdminRoleResponse {
 }
 
 /**
+ * UpdateEdgeClusterVersion请求参数结构体
+ */
+export interface UpdateEdgeClusterVersionRequest {
+  /**
+   * 集群 Id
+   */
+  ClusterId: string
+
+  /**
+   * 需要升级到的版本
+   */
+  EdgeVersion: string
+
+  /**
+   * 自定义边缘组件镜像仓库前缀
+   */
+  RegistryPrefix?: string
+
+  /**
+   * 是否跳过预检查阶段
+   */
+  SkipPreCheck?: boolean
+}
+
+/**
  * GetTkeAppChartList返回参数结构体
  */
 export interface GetTkeAppChartListResponse {
@@ -2904,6 +2944,16 @@ export interface CreateEKSContainerInstancesResponse {
    */
   EksCiIds: Array<string>
 
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteEdgeCVMInstances返回参数结构体
+ */
+export interface DeleteEdgeCVMInstancesResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8198,6 +8248,16 @@ export interface InstanceAdvancedSettings {
 }
 
 /**
+ * UpdateEdgeClusterVersion返回参数结构体
+ */
+export interface UpdateEdgeClusterVersionResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyClusterAsGroupAttribute请求参数结构体
  */
 export interface ModifyClusterAsGroupAttributeRequest {
@@ -9790,9 +9850,39 @@ export interface DeletePrometheusConfigRequest {
 }
 
 /**
- * DeleteEdgeCVMInstances返回参数结构体
+ * DescribeEdgeClusterUpgradeInfo返回参数结构体
  */
-export interface DeleteEdgeCVMInstancesResponse {
+export interface DescribeEdgeClusterUpgradeInfoResponse {
+  /**
+      * 可升级的集群组件和
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ComponentVersion: string
+
+  /**
+      * 边缘集群当前版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EdgeVersionCurrent: string
+
+  /**
+      * 边缘组件镜像仓库地址前缀，包含域名和命名空间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RegistryPrefix: string
+
+  /**
+      * 集群升级状态，可能值：running、updating、failed
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClusterUpgradeStatus: string
+
+  /**
+      * 集群升级中状态或者失败原因
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClusterUpgradeStatusReason: string
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

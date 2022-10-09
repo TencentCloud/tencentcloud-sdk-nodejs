@@ -1398,9 +1398,9 @@ it("cwp.v20180228.DescribeProcessStatistics", async function () {
     }
 })
 
-it("cwp.v20180228.DescribeMalwareInfo", async function () {
+it("cwp.v20180228.DescribeAssetHostTotalCount", async function () {
     try {
-       const data = await client.DescribeMalwareInfo({})
+       const data = await client.DescribeAssetHostTotalCount({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1608,6 +1608,16 @@ it("cwp.v20180228.DescribeMachineInfo", async function () {
     }
 })
 
+it("cwp.v20180228.SwitchBashRules", async function () {
+    try {
+       const data = await client.SwitchBashRules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cwp.v20180228.DescribeBanWhiteList", async function () {
     try {
        const data = await client.DescribeBanWhiteList({})
@@ -1758,9 +1768,9 @@ it("cwp.v20180228.ModifyLicenseUnBinds", async function () {
     }
 })
 
-it("cwp.v20180228.SwitchBashRules", async function () {
+it("cwp.v20180228.DescribeMalwareInfo", async function () {
     try {
-       const data = await client.SwitchBashRules({})
+       const data = await client.DescribeMalwareInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

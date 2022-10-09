@@ -37,6 +37,7 @@ import {
   RuleExtraParameter,
   ClsLogTopicInfo,
   WafConfig,
+  CreateAliasDomainRequest,
   CreatePrefetchTaskRequest,
   DescribeApplicationProxiesResponse,
   DescribeTopL7AnalysisDataRequest,
@@ -48,6 +49,7 @@ import {
   BotManagedRuleDetail,
   DescribeDDoSAttackSourceEventResponse,
   DDoSAntiPly,
+  DescribeAliasDomainsResponse,
   PlanInfo,
   DescribeTimingL7CacheDataRequest,
   DescribeSecurityPolicyListResponse,
@@ -127,6 +129,7 @@ import {
   ModifyRuleRequest,
   DescribePrefetchTasksResponse,
   DescribeWebManagedRulesHitRuleDetailRequest,
+  DescribeBotClientIpListResponse,
   ModifySecurityWafGroupPolicyRequest,
   DescribeZoneSettingRequest,
   ModifySecurityPolicyRequest,
@@ -138,13 +141,15 @@ import {
   DistrictStatistics,
   CreateIpTableListRequest,
   ModifyDDoSPolicyHostRequest,
+  DeleteAliasDomainRequest,
   DescribeIdentificationsResponse,
   CreatePurgeTaskResponse,
   DeleteApplicationProxyRuleResponse,
+  ReclaimAliasDomainRequest,
   CreateSecurityDropPageRequest,
   ExceptConfig,
   DeleteOriginGroupRequest,
-  DescribeWebProtectionHitRuleDetailResponse,
+  DetailHost,
   AclCondition,
   PortraitManagedRuleDetail,
   L7OfflineLog,
@@ -179,8 +184,9 @@ import {
   DescribeAddableEntityListResponse,
   Cache,
   DescribeBotHitRuleDetailRequest,
-  DetailHost,
+  DescribeWebProtectionHitRuleDetailResponse,
   DescribeSpeedTestingMetricDataRequest,
+  ModifyLogTopicTaskResponse,
   RuleCondition,
   DescribeOverviewL7DataResponse,
   DescribeSecurityPolicyRequest,
@@ -200,6 +206,7 @@ import {
   CreateLogSetRequest,
   CreateIpTableListResponse,
   NormalAction,
+  TopDetailData,
   DescribeZoneSettingResponse,
   DDoSAllowBlock,
   DescribePurgeTasksRequest,
@@ -223,11 +230,13 @@ import {
   DescribeDDoSAttackEventDetailResponse,
   SingleTypeValue,
   CreateCredentialResponse,
+  DescribeAliasDomainsRequest,
   SwitchLogTopicTaskRequest,
   DeleteApplicationProxyRequest,
   ModifyZoneStatusRequest,
   ModifyOriginGroupResponse,
   ExceptUserRuleScope,
+  ModifyAliasDomainRequest,
   DescribeSecurityPortraitRulesRequest,
   ReclaimZoneResponse,
   DescribeSecurityPolicyRegionsResponse,
@@ -237,7 +246,7 @@ import {
   CreateDnsRecordRequest,
   WafRule,
   ModifyApplicationProxyRequest,
-  ModifyLogTopicTaskResponse,
+  ModifyAliasDomainStatusRequest,
   RulesSettingAction,
   Ipv6,
   ModifyAlarmDefaultThresholdRequest,
@@ -246,6 +255,7 @@ import {
   AclConfig,
   DescribeSpeedTestingDetailsResponse,
   WafGroupDetail,
+  CreateAliasDomainResponse,
   ClientIpCountry,
   LoadBalancing,
   DeleteApplicationProxyRuleRequest,
@@ -257,6 +267,7 @@ import {
   DescribeDnssecRequest,
   RuleChoicePropertiesItem,
   ModifyAlarmConfigResponse,
+  ModifyAliasDomainStatusResponse,
   DescribeTimingL7AnalysisDataRequest,
   NoCache,
   GeoIp,
@@ -305,7 +316,7 @@ import {
   CreateLogTopicTaskRequest,
   QueryCondition,
   RuleRewriteActionParams,
-  DescribeBotClientIpListResponse,
+  ModifyAliasDomainResponse,
   DeleteDnsRecordsRequest,
   DescribeBotLogRequest,
   DDoSGeoIp,
@@ -324,6 +335,8 @@ import {
   SkipCondition,
   DnssecInfo,
   UpstreamHttp2,
+  ReclaimAliasDomainResponse,
+  DeleteAliasDomainResponse,
   BotConfig,
   CreateReplayTaskResponse,
   SingleDataRecord,
@@ -345,7 +358,7 @@ import {
   DDoSAclRule,
   DescribeBotTopDataResponse,
   DescribeBotClientIpListRequest,
-  RewriteAction,
+  AliasDomain,
   IpTableRule,
   DescribeDDoSAttackTopDataRequest,
   Quic,
@@ -358,7 +371,7 @@ import {
   DnsData,
   DescribeWebManagedRulesLogResponse,
   AclUserRule,
-  TopDetailData,
+  RewriteAction,
   DescribeOverviewL7DataRequest,
   WebSocket,
   DescribeWebProtectionTopDataRequest,
@@ -690,6 +703,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 当客户取回站定的同时会取回此站点下关联的别称域名，此时入参为ZoneId；当客户接入站点发现已被别称域名接入时通过验证之后可取回域名，此时入参为ZoneName。
+   */
+  async ReclaimAliasDomain(
+    req: ReclaimAliasDomainRequest,
+    cb?: (error: string, rep: ReclaimAliasDomainResponse) => void
+  ): Promise<ReclaimAliasDomainResponse> {
+    return this.request("ReclaimAliasDomain", req, cb)
+  }
+
+  /**
    * 本接口（ModifyAlarmConfig）用于修改用户告警配置。
    */
   async ModifyAlarmConfig(
@@ -720,13 +743,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeLogTopicTaskDetail）用于获取日志推送任务详细信息。
+   * 删除别称域名。
    */
-  async DescribeLogTopicTaskDetail(
-    req: DescribeLogTopicTaskDetailRequest,
-    cb?: (error: string, rep: DescribeLogTopicTaskDetailResponse) => void
-  ): Promise<DescribeLogTopicTaskDetailResponse> {
-    return this.request("DescribeLogTopicTaskDetail", req, cb)
+  async DeleteAliasDomain(
+    req: DeleteAliasDomainRequest,
+    cb?: (error: string, rep: DeleteAliasDomainResponse) => void
+  ): Promise<DeleteAliasDomainResponse> {
+    return this.request("DeleteAliasDomain", req, cb)
   }
 
   /**
@@ -950,6 +973,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建别称域名。
+   */
+  async CreateAliasDomain(
+    req: CreateAliasDomainRequest,
+    cb?: (error: string, rep: CreateAliasDomainResponse) => void
+  ): Promise<CreateAliasDomainResponse> {
+    return this.request("CreateAliasDomain", req, cb)
+  }
+
+  /**
    * 本接口（DescribeWebProtectionHitRuleDetail）用于查询CC防护命中规则详情列表。
    */
   async DescribeWebProtectionHitRuleDetail(
@@ -957,6 +990,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeWebProtectionHitRuleDetailResponse) => void
   ): Promise<DescribeWebProtectionHitRuleDetailResponse> {
     return this.request("DescribeWebProtectionHitRuleDetail", req, cb)
+  }
+
+  /**
+   * 修改别称域名状态。
+   */
+  async ModifyAliasDomainStatus(
+    req: ModifyAliasDomainStatusRequest,
+    cb?: (error: string, rep: ModifyAliasDomainStatusResponse) => void
+  ): Promise<ModifyAliasDomainStatusResponse> {
+    return this.request("ModifyAliasDomainStatus", req, cb)
   }
 
   /**
@@ -1017,6 +1060,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifySecurityPolicyResponse) => void
   ): Promise<ModifySecurityPolicyResponse> {
     return this.request("ModifySecurityPolicy", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeLogTopicTaskDetail）用于获取日志推送任务详细信息。
+   */
+  async DescribeLogTopicTaskDetail(
+    req: DescribeLogTopicTaskDetailRequest,
+    cb?: (error: string, rep: DescribeLogTopicTaskDetailResponse) => void
+  ): Promise<DescribeLogTopicTaskDetailResponse> {
+    return this.request("DescribeLogTopicTaskDetail", req, cb)
   }
 
   /**
@@ -1370,6 +1423,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改别称域名。
+   */
+  async ModifyAliasDomain(
+    req: ModifyAliasDomainRequest,
+    cb?: (error: string, rep: ModifyAliasDomainResponse) => void
+  ): Promise<ModifyAliasDomainResponse> {
+    return this.request("ModifyAliasDomain", req, cb)
+  }
+
+  /**
    * 用于查询 DNSSEC 相关信息
    */
   async DescribeDnssec(
@@ -1597,6 +1660,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeWebManagedRulesDataResponse) => void
   ): Promise<DescribeWebManagedRulesDataResponse> {
     return this.request("DescribeWebManagedRulesData", req, cb)
+  }
+
+  /**
+   * 查询别称域名信息列表。
+   */
+  async DescribeAliasDomains(
+    req: DescribeAliasDomainsRequest,
+    cb?: (error: string, rep: DescribeAliasDomainsResponse) => void
+  ): Promise<DescribeAliasDomainsResponse> {
+    return this.request("DescribeAliasDomains", req, cb)
   }
 
   /**

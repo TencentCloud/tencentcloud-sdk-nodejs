@@ -108,7 +108,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeBackupDownloadTask(req: DescribeBackupDownloadTaskRequest, cb?: (error: string, rep: DescribeBackupDownloadTaskResponse) => void): Promise<DescribeBackupDownloadTaskResponse>;
     /**
-     * 本接口用于创建数据库实例询价。本接口参数中必须传入region参数，否则无法通过校验。本接口仅允许针对购买限制范围内的实例配置进行询价。
+     * 本接口（InquirePriceCreateDBInstances）用于创建数据库实例询价。本接口参数中必须传入region参数，否则无法通过校验。本接口仅允许针对购买限制范围内的实例配置进行询价。
      */
     InquirePriceCreateDBInstances(req: InquirePriceCreateDBInstancesRequest, cb?: (error: string, rep: InquirePriceCreateDBInstancesResponse) => void): Promise<InquirePriceCreateDBInstancesResponse>;
     /**

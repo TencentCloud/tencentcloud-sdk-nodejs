@@ -296,15 +296,15 @@ TypeId为标准架构时，MemSize是实例总内存容量；TypeId为集群架�
  */
 export interface CreateReplicationGroupRequest {
     /**
-      * 实例ID
+      * 指定复制组中的主实例ID。
       */
     InstanceId: string;
     /**
-      * 复制组名称
+      * 复制组名称。
       */
     GroupName?: string;
     /**
-      * 备注信息
+      * 备注信息。
       */
     Remark?: string;
 }
@@ -329,6 +329,19 @@ export interface DescribeInstanceZoneInfoRequest {
       * 实例Id，如：crs-6ubhgouj
       */
     InstanceId?: string;
+}
+/**
+ * ModifyConnectionConfig返回参数结构体
+ */
+export interface ModifyConnectionConfigResponse {
+    /**
+      * 任务ID
+      */
+    TaskId: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * ModifyNetworkConfig返回参数结构体
@@ -1279,7 +1292,7 @@ export interface ChangeMasterInstanceResponse {
  */
 export interface AddReplicationInstanceResponse {
     /**
-      * 异步流程ID
+      * 异步流程ID。
       */
     TaskId: number;
     /**
@@ -1825,11 +1838,12 @@ export interface InstanceIntegerParam {
  */
 export interface UpgradeVersionToMultiAvailabilityZonesRequest {
     /**
-      * 实例ID
+      * 实例ID。
       */
     InstanceId: string;
     /**
-      * 是否升级proxy和redis内核版本，升级后可支持就近接入
+      * 升级多可用区之后是否支持就近访问功能。
+<ul><li>true：支持就近访问功能。升级过程，需同时升级 Proxy 版本和 Redis 内核小版本，涉及数据搬迁，可能会长达数小时。</li><li>false：无需支持就近访问功能。升级多可用区仅涉及管理元数据迁移，对服务没有影响，升级过程通常在3分钟内完成。</li></ul>
       */
     UpgradeProxyAndRedisServer?: boolean;
 }
@@ -1977,6 +1991,15 @@ export interface DescribeInstanceMonitorTopNCmdTookResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * CloseSSL请求参数结构体
+ */
+export interface CloseSSLRequest {
+    /**
+      * 实例ID。
+      */
+    InstanceId: string;
 }
 /**
  * DescribeInstanceMonitorBigKeySizeDist请求参数结构体
@@ -3560,11 +3583,11 @@ export interface InquiryPriceRenewInstanceRequest {
     InstanceId: string;
 }
 /**
- * ModifyConnectionConfig返回参数结构体
+ * CloseSSL返回参数结构体
  */
-export interface ModifyConnectionConfigResponse {
+export interface CloseSSLResponse {
     /**
-      * 任务ID
+      * 任务ID。
       */
     TaskId: number;
     /**
@@ -3590,7 +3613,7 @@ export interface ModifyMaintenanceWindowResponse {
  */
 export interface CreateReplicationGroupResponse {
     /**
-      * 异步流程ID
+      * 异步流程ID。
       */
     TaskId: number;
     /**
@@ -3731,6 +3754,15 @@ export interface ModifyInstanceParamsRequest {
     InstanceParams: Array<InstanceParam>;
 }
 /**
+ * OpenSSL请求参数结构体
+ */
+export interface OpenSSLRequest {
+    /**
+      * 实例ID。
+      */
+    InstanceId: string;
+}
+/**
  * 备份文件下载信息
  */
 export interface BackupDownloadInfo {
@@ -3803,15 +3835,15 @@ export interface DescribeMaintenanceWindowRequest {
  */
 export interface AddReplicationInstanceRequest {
     /**
-      * 复制组ID
+      * 复制组ID。
       */
     GroupId: string;
     /**
-      * 实例ID
+      * 实例ID。
       */
     InstanceId: string;
     /**
-      * 实例角色，rw可读写，r只读
+      * 给复制组添加的实例分配角色。<ul><li>rw：可读写。</li><li>r：只读。</li></ul>
       */
     InstanceRole: string;
 }
@@ -4315,6 +4347,19 @@ export interface InstanceClusterShard {
       * 服务状态：0-down；1-on
       */
     Connected: number;
+}
+/**
+ * OpenSSL返回参数结构体
+ */
+export interface OpenSSLResponse {
+    /**
+      * 任务ID。
+      */
+    TaskId: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * Tendis慢查询详情

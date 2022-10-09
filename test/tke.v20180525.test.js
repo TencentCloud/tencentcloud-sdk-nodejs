@@ -338,6 +338,16 @@ it("tke.v20180525.DescribeEdgeLogSwitches", async function () {
     }
 })
 
+it("tke.v20180525.UpdateEdgeClusterVersion", async function () {
+    try {
+       const data = await client.UpdateEdgeClusterVersion({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tke.v20180525.DescribeTKEEdgeExternalKubeconfig", async function () {
     try {
        const data = await client.DescribeTKEEdgeExternalKubeconfig({})
@@ -1461,6 +1471,16 @@ it("tke.v20180525.CreateClusterNodePoolFromExistingAsg", async function () {
 it("tke.v20180525.DescribeClusterKubeconfig", async function () {
     try {
        const data = await client.DescribeClusterKubeconfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20180525.DescribeEdgeClusterUpgradeInfo", async function () {
+    try {
+       const data = await client.DescribeEdgeClusterUpgradeInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

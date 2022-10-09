@@ -504,38 +504,48 @@ export interface DescribeCaptchaDataSumResponse {
   /**
    * 请求总量
    */
-  GetSum?: number
+  GetSum: number
 
   /**
    * 请求验证成功量
    */
-  VfySuccSum?: number
+  VfySuccSum: number
 
   /**
    * 请求验证量
    */
-  VfySum?: number
+  VfySum: number
 
   /**
    * 拦截攻击量
    */
-  AttackSum?: number
+  AttackSum: number
 
   /**
       * 返回信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  CaptchaMsg?: string
+  CaptchaMsg: string
 
   /**
    * 成功返回0  其它失败
    */
-  CaptchaCode?: number
+  CaptchaCode: number
 
   /**
-   * 票据校验量
+   * 票据校验总量
    */
-  CheckTicketSum?: number
+  CheckTicketSum: number
+
+  /**
+   * 票据验证通过量
+   */
+  TicketThroughputSum: number
+
+  /**
+   * 票据验证拦截量
+   */
+  TicketInterceptSum: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

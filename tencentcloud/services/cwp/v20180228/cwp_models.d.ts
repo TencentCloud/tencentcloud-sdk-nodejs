@@ -3939,6 +3939,34 @@ export interface DescribeAssetWebLocationListResponse {
     RequestId?: string;
 }
 /**
+ * DescribeAssetHostTotalCount返回参数结构体
+ */
+export interface DescribeAssetHostTotalCountResponse {
+    /**
+      * 各项资源数量
+system : 资源监控
+account: 账号
+port: 端口
+process: 进程
+app: 应用软件
+database:数据库
+webapp: Web应用
+webframe: Web框架
+webservice: Web服务
+weblocation: Web站点
+systempackage: 系统安装包
+jar: jar包
+initservice:启动服务
+env: 环境变量
+coremodule: 内核模块
+      */
+    Types: Array<AssetKeyVal>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeAssetJarList请求参数结构体
  */
 export interface DescribeAssetJarListRequest {
@@ -4496,6 +4524,19 @@ export interface DescribeIndexListResponse {
     RequestId?: string;
 }
 /**
+ * DescribeTagMachines返回参数结构体
+ */
+export interface DescribeTagMachinesResponse {
+    /**
+      * 列表数据
+      */
+    List: Array<TagMachine>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * ModifyWebPageProtectDir请求参数结构体
  */
 export interface ModifyWebPageProtectDirRequest {
@@ -4843,19 +4884,6 @@ export interface AssetUserBaseInfo {
     IsNew: number;
 }
 /**
- * DescribeMachineOsList返回参数结构体
- */
-export interface DescribeMachineOsListResponse {
-    /**
-      * 操作系统列表
-      */
-    List: Array<OsName>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
  * 授权绑定任务详情
  */
 export interface LicenseBindTaskDetail {
@@ -4963,13 +4991,13 @@ export interface DescribeVulCountByDatesResponse {
     RequestId?: string;
 }
 /**
- * DescribeTagMachines返回参数结构体
+ * DescribeMachineOsList返回参数结构体
  */
-export interface DescribeTagMachinesResponse {
+export interface DescribeMachineOsListResponse {
     /**
-      * 列表数据
+      * 操作系统列表
       */
-    List: Array<TagMachine>;
+    List: Array<OsName>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -5725,89 +5753,9 @@ export interface DescribeProcessStatisticsRequest {
     Filters?: Array<Filter>;
 }
 /**
- * DescribeAssetInfo返回参数结构体
+ * CreateScanMalwareSetting返回参数结构体
  */
-export interface DescribeAssetInfoResponse {
-    /**
-      * 主机数
-      */
-    MachineCount: number;
-    /**
-      * 账号数
-      */
-    AccountCount: number;
-    /**
-      * 端口数
-      */
-    PortCount: number;
-    /**
-      * 进程数
-      */
-    ProcessCount: number;
-    /**
-      * 软件数
-      */
-    SoftwareCount: number;
-    /**
-      * 数据库数
-      */
-    DatabaseCount: number;
-    /**
-      * Web应用数
-      */
-    WebAppCount: number;
-    /**
-      * Web框架数
-      */
-    WebFrameCount: number;
-    /**
-      * Web服务数
-      */
-    WebServiceCount: number;
-    /**
-      * Web站点数
-      */
-    WebLocationCount: number;
-    /**
-      * 账号今日新增
-      */
-    AccountNewCount: number;
-    /**
-      * 端口今日新增
-      */
-    PortNewCount: number;
-    /**
-      * 进程今日新增
-      */
-    ProcessNewCount: number;
-    /**
-      * 软件今日新增
-      */
-    SoftwareNewCount: number;
-    /**
-      * 数据库今日新增
-      */
-    DatabaseNewCount: number;
-    /**
-      * Web应用今日新增
-      */
-    WebAppNewCount: number;
-    /**
-      * Web框架今日新增
-      */
-    WebFrameNewCount: number;
-    /**
-      * Web服务今日新增
-      */
-    WebServiceNewCount: number;
-    /**
-      * Web站点今日新增
-      */
-    WebLocationNewCount: number;
-    /**
-      * 主机今日新增
-      */
-    MachineNewCount: number;
+export interface CreateScanMalwareSettingResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -10407,9 +10355,89 @@ export interface DescribeExportMachinesRequest {
     ProjectIds?: Array<number>;
 }
 /**
- * CreateScanMalwareSetting返回参数结构体
+ * DescribeAssetInfo返回参数结构体
  */
-export interface CreateScanMalwareSettingResponse {
+export interface DescribeAssetInfoResponse {
+    /**
+      * 主机数
+      */
+    MachineCount: number;
+    /**
+      * 账号数
+      */
+    AccountCount: number;
+    /**
+      * 端口数
+      */
+    PortCount: number;
+    /**
+      * 进程数
+      */
+    ProcessCount: number;
+    /**
+      * 软件数
+      */
+    SoftwareCount: number;
+    /**
+      * 数据库数
+      */
+    DatabaseCount: number;
+    /**
+      * Web应用数
+      */
+    WebAppCount: number;
+    /**
+      * Web框架数
+      */
+    WebFrameCount: number;
+    /**
+      * Web服务数
+      */
+    WebServiceCount: number;
+    /**
+      * Web站点数
+      */
+    WebLocationCount: number;
+    /**
+      * 账号今日新增
+      */
+    AccountNewCount: number;
+    /**
+      * 端口今日新增
+      */
+    PortNewCount: number;
+    /**
+      * 进程今日新增
+      */
+    ProcessNewCount: number;
+    /**
+      * 软件今日新增
+      */
+    SoftwareNewCount: number;
+    /**
+      * 数据库今日新增
+      */
+    DatabaseNewCount: number;
+    /**
+      * Web应用今日新增
+      */
+    WebAppNewCount: number;
+    /**
+      * Web框架今日新增
+      */
+    WebFrameNewCount: number;
+    /**
+      * Web服务今日新增
+      */
+    WebServiceNewCount: number;
+    /**
+      * Web站点今日新增
+      */
+    WebLocationNewCount: number;
+    /**
+      * 主机今日新增
+      */
+    MachineNewCount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -12627,6 +12655,19 @@ export interface DescribeAssetWebLocationListRequest {
       * 可选排序：[FirstTime|PathCount]
       */
     By?: string;
+}
+/**
+ * DescribeAssetHostTotalCount请求参数结构体
+ */
+export interface DescribeAssetHostTotalCountRequest {
+    /**
+      * 主机Uuid
+      */
+    Uuid: string;
+    /**
+      * 主机Quuid
+      */
+    Quuid: string;
 }
 /**
  * DescribeVulLevelCount请求参数结构体

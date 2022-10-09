@@ -201,6 +201,7 @@ import {
   DescribeBashEventsRequest,
   DeleteMachineRequest,
   DescribeAssetWebLocationListResponse,
+  DescribeAssetHostTotalCountResponse,
   DescribeAssetJarListRequest,
   PrivilegeEscalationProcess,
   DescribeProtectNetListResponse,
@@ -215,6 +216,7 @@ import {
   CreateEmergencyVulScanResponse,
   DescribeAssetCoreModuleInfoRequest,
   DescribeIndexListResponse,
+  DescribeTagMachinesResponse,
   ModifyWebPageProtectDirRequest,
   DescribeWebPageGeneralizeResponse,
   DescribeBanWhiteListResponse,
@@ -227,12 +229,11 @@ import {
   DeleteTagsResponse,
   DescribeSecurityEventsCntRequest,
   AssetUserBaseInfo,
-  DescribeMachineOsListResponse,
   LicenseBindTaskDetail,
   ExportMaliciousRequestsResponse,
   EffectiveMachineInfo,
   DescribeVulCountByDatesResponse,
-  DescribeTagMachinesResponse,
+  DescribeMachineOsListResponse,
   DescribeIndexListRequest,
   ProtectDirInfo,
   DeleteBashRulesRequest,
@@ -266,7 +267,7 @@ import {
   ProtectEventLists,
   SwitchBashRulesRequest,
   DescribeProcessStatisticsRequest,
-  DescribeAssetInfoResponse,
+  CreateScanMalwareSettingResponse,
   MalwareRisk,
   ExportProtectDirListResponse,
   AssetWebFrameBaseInfo,
@@ -457,7 +458,7 @@ import {
   DescribeAssetPortInfoListRequest,
   VulLevelCountInfo,
   DescribeExportMachinesRequest,
-  CreateScanMalwareSettingResponse,
+  DescribeAssetInfoResponse,
   WarningObject,
   RiskDnsList,
   DeleteMalwareScanTaskRequest,
@@ -537,6 +538,7 @@ import {
   AssetUserKeyInfo,
   DescribeMachinesResponse,
   DescribeAssetWebLocationListRequest,
+  DescribeAssetHostTotalCountRequest,
   DescribeVulLevelCountRequest,
   DeleteWebPageEventLogRequest,
   DescribeProVersionStatusRequest,
@@ -1963,13 +1965,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查看恶意文件详情
+   * 获取主机所有资源数量
    */
-  async DescribeMalwareInfo(
-    req: DescribeMalwareInfoRequest,
-    cb?: (error: string, rep: DescribeMalwareInfoResponse) => void
-  ): Promise<DescribeMalwareInfoResponse> {
-    return this.request("DescribeMalwareInfo", req, cb)
+  async DescribeAssetHostTotalCount(
+    req: DescribeAssetHostTotalCountRequest,
+    cb?: (error: string, rep: DescribeAssetHostTotalCountResponse) => void
+  ): Promise<DescribeAssetHostTotalCountResponse> {
+    return this.request("DescribeAssetHostTotalCount", req, cb)
   }
 
   /**
@@ -2173,6 +2175,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 切换高危命令规则状态
+   */
+  async SwitchBashRules(
+    req: SwitchBashRulesRequest,
+    cb?: (error: string, rep: SwitchBashRulesResponse) => void
+  ): Promise<SwitchBashRulesResponse> {
+    return this.request("SwitchBashRules", req, cb)
+  }
+
+  /**
    * 获取阻断白名单列表
    */
   async DescribeBanWhiteList(
@@ -2323,13 +2335,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 切换高危命令规则状态
+   * 查看恶意文件详情
    */
-  async SwitchBashRules(
-    req: SwitchBashRulesRequest,
-    cb?: (error: string, rep: SwitchBashRulesResponse) => void
-  ): Promise<SwitchBashRulesResponse> {
-    return this.request("SwitchBashRules", req, cb)
+  async DescribeMalwareInfo(
+    req: DescribeMalwareInfoRequest,
+    cb?: (error: string, rep: DescribeMalwareInfoResponse) => void
+  ): Promise<DescribeMalwareInfoResponse> {
+    return this.request("DescribeMalwareInfo", req, cb)
   }
 
   /**

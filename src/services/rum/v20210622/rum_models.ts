@@ -395,27 +395,27 @@ export interface ModifyInstanceRequest {
  */
 export interface DescribeLogListRequest {
   /**
-   * 排序方式  desc  asc
+   * 排序方式  desc  asc（必填）
    */
   Sort: string
 
   /**
-   * searchlog  histogram
+   * searchlog  histogram（必填）
    */
   ActionType: string
 
   /**
-   * 项目ID
+   * 项目ID（必填）
    */
   ID: number
 
   /**
-   * 开始时间
+   * 开始时间（必填）
    */
   StartTime?: string
 
   /**
-   * 单次查询返回的原始日志条数，最大值为100
+   * 单次查询返回的原始日志条数，最大值为100（必填）
    */
   Limit?: number
 
@@ -425,12 +425,12 @@ export interface DescribeLogListRequest {
   Context?: string
 
   /**
-   * 查询语句，参考控制台请求参数，语句长度最大为4096
+   * 查询语句，参考控制台请求参数，语句长度最大为4096（必填）
    */
   Query?: string
 
   /**
-   * 结束时间
+   * 结束时间（必填）
    */
   EndTime?: string
 }
@@ -1294,6 +1294,11 @@ export interface DescribeDataPerformancePageRequest {
    * 环境变量
    */
   Env?: string
+
+  /**
+   * 网络状态
+   */
+  NetStatus?: string
 }
 
 /**
@@ -1444,6 +1449,11 @@ export interface DescribeDataFetchUrlRequest {
    * retcode
    */
   Ret?: string
+
+  /**
+   * 网络状态
+   */
+  NetStatus?: string
 }
 
 /**

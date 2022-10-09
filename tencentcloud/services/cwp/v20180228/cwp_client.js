@@ -859,10 +859,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeProcessStatistics", req, cb);
     }
     /**
-     * 查看恶意文件详情
+     * 获取主机所有资源数量
      */
-    async DescribeMalwareInfo(req, cb) {
-        return this.request("DescribeMalwareInfo", req, cb);
+    async DescribeAssetHostTotalCount(req, cb) {
+        return this.request("DescribeAssetHostTotalCount", req, cb);
     }
     /**
      * 获取Web站点列表
@@ -985,6 +985,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeMachineInfo", req, cb);
     }
     /**
+     * 切换高危命令规则状态
+     */
+    async SwitchBashRules(req, cb) {
+        return this.request("SwitchBashRules", req, cb);
+    }
+    /**
      * 获取阻断白名单列表
      */
     async DescribeBanWhiteList(req, cb) {
@@ -1075,10 +1081,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyLicenseUnBinds", req, cb);
     }
     /**
-     * 切换高危命令规则状态
+     * 查看恶意文件详情
      */
-    async SwitchBashRules(req, cb) {
-        return this.request("SwitchBashRules", req, cb);
+    async DescribeMalwareInfo(req, cb) {
+        return this.request("DescribeMalwareInfo", req, cb);
     }
     /**
      * 获取资产管理Web框架列表

@@ -220,6 +220,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeEdgeLogSwitches", req, cb);
     }
     /**
+     * 升级边缘集群组件到指定版本，此版本为TKEEdge专用版本。
+     */
+    async UpdateEdgeClusterVersion(req, cb) {
+        return this.request("UpdateEdgeClusterVersion", req, cb);
+    }
+    /**
      * 获取边缘计算外部访问的kubeconfig
      */
     async DescribeTKEEdgeExternalKubeconfig(req, cb) {
@@ -896,6 +902,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeClusterKubeconfig(req, cb) {
         return this.request("DescribeClusterKubeconfig", req, cb);
+    }
+    /**
+     * 可以查询边缘集群升级信息，包含可以升级的组件，当前升级状态和升级错误信息
+     */
+    async DescribeEdgeClusterUpgradeInfo(req, cb) {
+        return this.request("DescribeEdgeClusterUpgradeInfo", req, cb);
     }
     /**
      * 拉取Prometheus配置
