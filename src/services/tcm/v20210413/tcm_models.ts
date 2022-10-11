@@ -180,6 +180,16 @@ export interface AutoInjectionNamespaceState {
 }
 
 /**
+ * ModifyMesh返回参数结构体
+ */
+export interface ModifyMeshResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * IngressGateway状态
  */
 export interface IngressGatewayStatus {
@@ -210,23 +220,18 @@ export interface ResourceMetricSource {
 }
 
 /**
- * DescribeMeshList请求参数结构体
+ * CreateMesh返回参数结构体
  */
-export interface DescribeMeshListRequest {
+export interface CreateMeshResponse {
   /**
-   * 过滤条件
+   * 创建的Mesh的Id
    */
-  Filters?: Array<Filter>
+  MeshId: string
 
   /**
-   * 分页限制
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Limit?: number
-
-  /**
-   * 分页偏移
-   */
-  Offset?: number
+  RequestId?: string
 }
 
 /**
@@ -340,6 +345,45 @@ export interface EgressGateway {
 }
 
 /**
+ * Istio配置
+ */
+export interface IstioConfig {
+  /**
+   * 外部流量策略
+   */
+  OutboundTrafficPolicy: string
+
+  /**
+   * 调用链配置（Deprecated，请使用 MeshConfig.Tracing 进行配置）
+   */
+  Tracing?: TracingConfig
+
+  /**
+      * 禁用策略检查功能
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DisablePolicyChecks?: boolean
+
+  /**
+      * 支持HTTP1.0协议
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EnablePilotHTTP?: boolean
+
+  /**
+      * 禁用HTTP重试策略
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DisableHTTPRetry?: boolean
+
+  /**
+      * SmartDNS策略
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SmartDNS?: SmartDNSConfig
+}
+
+/**
  * Mesh信息
  */
 export interface Mesh {
@@ -448,6 +492,16 @@ export interface GrafanaInfo {
 }
 
 /**
+ * DeleteMesh返回参数结构体
+ */
+export interface DeleteMeshResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * Mesh当前状态
  */
 export interface MeshStatus {
@@ -518,6 +572,36 @@ export interface InjectConfig {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   HoldProxyUntilApplicationEnds?: boolean
+}
+
+/**
+ * DeleteMesh请求参数结构体
+ */
+export interface DeleteMeshRequest {
+  /**
+   * 需要删除的MeshId
+   */
+  MeshId: string
+
+  /**
+   * CLS组件是否被删除
+   */
+  NeedDeleteCLS?: boolean
+
+  /**
+   * TMP组件是否被删除
+   */
+  NeedDeleteTMP?: boolean
+
+  /**
+   * APM组件是否被删除
+   */
+  NeedDeleteAPM?: boolean
+
+  /**
+   * Grafana组件是否被删除
+   */
+  NeedDeleteGrafana?: boolean
 }
 
 /**
@@ -594,6 +678,42 @@ export interface ActiveOperation {
 - INSTALL_MESH: 安装网格
       */
   Type: string
+}
+
+/**
+ * CreateMesh请求参数结构体
+ */
+export interface CreateMeshRequest {
+  /**
+   * Mesh名称
+   */
+  DisplayName: string
+
+  /**
+   * Mesh版本
+   */
+  MeshVersion: string
+
+  /**
+      * Mesh类型，取值范围：
+- HOSTED：托管网格
+      */
+  Type: string
+
+  /**
+   * Mesh配置
+   */
+  Config: MeshConfig
+
+  /**
+   * 关联集群
+   */
+  ClusterList?: Array<Cluster>
+
+  /**
+   * 标签列表
+   */
+  TagList?: Array<Tag>
 }
 
 /**
@@ -729,42 +849,23 @@ export interface SmartDNSConfig {
 }
 
 /**
- * Istio配置
+ * DescribeMeshList请求参数结构体
  */
-export interface IstioConfig {
+export interface DescribeMeshListRequest {
   /**
-   * 外部流量策略
+   * 过滤条件
    */
-  OutboundTrafficPolicy: string
+  Filters?: Array<Filter>
 
   /**
-   * 调用链配置（Deprecated，请使用 MeshConfig.Tracing 进行配置）
+   * 分页限制
    */
-  Tracing?: TracingConfig
+  Limit?: number
 
   /**
-      * 禁用策略检查功能
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DisablePolicyChecks?: boolean
-
-  /**
-      * 支持HTTP1.0协议
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  EnablePilotHTTP?: boolean
-
-  /**
-      * 禁用HTTP重试策略
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DisableHTTPRetry?: boolean
-
-  /**
-      * SmartDNS策略
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  SmartDNS?: SmartDNSConfig
+   * 分页偏移
+   */
+  Offset?: number
 }
 
 /**
@@ -903,6 +1004,31 @@ export interface SelectedItems {
    * ingress gw的名称列表
    */
   Gateways?: Array<string>
+}
+
+/**
+ * ModifyMesh请求参数结构体
+ */
+export interface ModifyMeshRequest {
+  /**
+   * 需要修改的网格Id
+   */
+  MeshId: string
+
+  /**
+   * 修改的网格名称
+   */
+  DisplayName?: string
+
+  /**
+   * 修改的网格配置
+   */
+  Config?: MeshConfig
+
+  /**
+   * 修改的集群配置
+   */
+  ClusterList?: Array<Cluster>
 }
 
 /**

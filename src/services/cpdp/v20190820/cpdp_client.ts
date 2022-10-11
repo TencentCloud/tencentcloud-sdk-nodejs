@@ -20,6 +20,7 @@ import { ClientConfig } from "../../../common/interface"
 import {
   QueryFlexPaymentOrderStatusRequest,
   QueryAcctBindingRequest,
+  QueryCompanyTitleResponse,
   ReviseMbrPropertyResponse,
   ApplyPayerInfoResponse,
   RevokeRechargeByThirdPayRequest,
@@ -208,6 +209,7 @@ import {
   CreateRedInvoiceResultV2,
   QueryAnchorContractInfoRequest,
   CreateRedInvoiceResult,
+  CompanyTitleResult,
   CreateOpenBankPaymentOrderRequest,
   QueryOpenBankOrderDetailReceiptInfoResult,
   QueryReconciliationDocumentRequest,
@@ -335,6 +337,7 @@ import {
   CreateMerchantResponse,
   CreateSinglePaymentResponse,
   CloseOpenBankPaymentOrderRequest,
+  QueryCompanyTitleRequest,
   GetPayRollAuthRequest,
   ViewContractResult,
   QueryAcctItem,
@@ -2305,6 +2308,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: QueryPayerInfoResponse) => void
   ): Promise<QueryPayerInfoResponse> {
     return this.request("QueryPayerInfo", req, cb)
+  }
+
+  /**
+   * 智慧零售-查询公司抬头
+   */
+  async QueryCompanyTitle(
+    req: QueryCompanyTitleRequest,
+    cb?: (error: string, rep: QueryCompanyTitleResponse) => void
+  ): Promise<QueryCompanyTitleResponse> {
+    return this.request("QueryCompanyTitle", req, cb)
   }
 
   /**

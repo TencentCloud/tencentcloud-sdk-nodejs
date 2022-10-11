@@ -28,16 +28,34 @@ class Client extends abstract_client_1.AbstractClient {
         super("tcm.tencentcloudapi.com", "2021-04-13", clientConfig);
     }
     /**
-     * 查询网格列表
+     * 删除网格
      */
-    async DescribeMeshList(req, cb) {
-        return this.request("DescribeMeshList", req, cb);
+    async DeleteMesh(req, cb) {
+        return this.request("DeleteMesh", req, cb);
+    }
+    /**
+     * 创建网格
+     */
+    async CreateMesh(req, cb) {
+        return this.request("CreateMesh", req, cb);
+    }
+    /**
+     * 修改网格
+     */
+    async ModifyMesh(req, cb) {
+        return this.request("ModifyMesh", req, cb);
     }
     /**
      * 查询网格详情
      */
     async DescribeMesh(req, cb) {
         return this.request("DescribeMesh", req, cb);
+    }
+    /**
+     * 查询网格列表
+     */
+    async DescribeMeshList(req, cb) {
+        return this.request("DescribeMeshList", req, cb);
     }
 }
 exports.Client = Client;

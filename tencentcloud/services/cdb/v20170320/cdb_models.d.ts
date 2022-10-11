@@ -430,13 +430,21 @@ export interface DescribeDataBackupOverviewResponse {
       */
     ManualBackupCount: number;
     /**
-      * 当前地域异地备份总容量。
+      * 异地备份总容量。
       */
     RemoteBackupVolume: number;
     /**
-      * 当前地域异地备份总个数。
+      * 异地备份总个数。
       */
     RemoteBackupCount: number;
+    /**
+      * 当前地域归档备份总容量。
+      */
+    DataBackupArchiveVolume: number;
+    /**
+      * 当前地域归档备份总个数。
+      */
+    DataBackupArchiveCount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -561,6 +569,15 @@ export interface CreateParamTemplateRequest {
       * 实例引擎类型，默认为"InnoDB"，支持值包括："InnoDB"，"RocksDB"。
       */
     EngineType?: string;
+}
+/**
+ * DescribeSupportedPrivileges请求参数结构体
+ */
+export interface DescribeSupportedPrivilegesRequest {
+    /**
+      * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
+      */
+    InstanceId: string;
 }
 /**
  * 代理实例信息
@@ -1415,6 +1432,14 @@ export interface DescribeBinlogBackupOverviewResponse {
       */
     RemoteBinlogCount: number;
     /**
+      * 归档日志备份容量（单位为字节）。
+      */
+    BinlogArchiveVolume: number;
+    /**
+      * 归档日志备份个数。
+      */
+    BinlogArchiveCount: number;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
@@ -1992,11 +2017,11 @@ export interface DescribeBinlogsResponse {
     /**
       * 符合查询条件的日志文件总数。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 符合查询条件的二进制日志文件详情。
       */
-    Items?: Array<BinlogInfo>;
+    Items: Array<BinlogInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2291,6 +2316,26 @@ export interface BinlogInfo {
       * binlog 文件截止时间
       */
     BinlogFinishTime: string;
+    /**
+      * 本地binlog文件所在地域
+      */
+    Region: string;
+    /**
+      * 备份任务状态。可能的值有 "SUCCESS": 备份成功， "FAILED": 备份失败， "RUNNING": 备份进行中。
+      */
+    Status: string;
+    /**
+      * binlog异地备份详细信息
+      */
+    RemoteInfo: Array<RemoteBackupInfo>;
+    /**
+      * 存储方式，0-常规存储，1-归档存储，默认为0
+      */
+    CosStorageType: number;
+    /**
+      * 实例 ID，格式如：cdb-c1nl9rpv。与云数据库控制台页面中显示的实例 ID 相同。
+      */
+    InstanceId: string;
 }
 /**
  * DescribeErrorLogData返回参数结构体
@@ -2541,13 +2586,33 @@ export interface DescribeDBSwitchRecordsRequest {
     Limit?: number;
 }
 /**
- * DescribeSupportedPrivileges请求参数结构体
+ * 异地备份信息
  */
-export interface DescribeSupportedPrivilegesRequest {
+export interface RemoteBackupInfo {
     /**
-      * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
+      * 异地备份子任务的ID
       */
-    InstanceId: string;
+    SubBackupId: Array<number>;
+    /**
+      * 异地备份所在地域
+      */
+    Region: string;
+    /**
+      * 备份任务状态。可能的值有 "SUCCESS": 备份成功， "FAILED": 备份失败， "RUNNING": 备份进行中。
+      */
+    Status: string;
+    /**
+      * 异地备份任务的开始时间
+      */
+    StartTime: string;
+    /**
+      * 异地备份任务的结束时间
+      */
+    FinishTime: string;
+    /**
+      * 下载地址
+      */
+    Url: string;
 }
 /**
  * DescribeAsyncRequestInfo返回参数结构体
@@ -2618,11 +2683,11 @@ export interface DescribeBackupsResponse {
     /**
       * 符合查询条件的实例总数。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 符合查询条件的备份信息详情。
       */
-    Items?: Array<BackupInfo>;
+    Items: Array<BackupInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2762,6 +2827,22 @@ export interface DescribeBackupConfigResponse {
       * 定期保留策略周期起始日期，格式：YYYY-MM-dd HH:mm:ss
       */
     StartBackupPeriodSaveDate: string;
+    /**
+      * 是否开启数据备份归档策略，off-关闭，on-打开，默认为off
+      */
+    EnableBackupArchive: string;
+    /**
+      * 数据备份归档起始天数，数据备份达到归档起始天数时进行归档，最小为180天，不得大于数据备份保留天数
+      */
+    BackupArchiveDays: number;
+    /**
+      * 是否开启日志备份归档策略，off-关闭，on-打开，默认为off
+      */
+    EnableBinlogArchive: string;
+    /**
+      * 日志备份归档起始天数，日志备份达到归档起始天数时进行归档，最小为180天，不得大于日志备份保留天数
+      */
+    BinlogArchiveDays: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2925,6 +3006,16 @@ export interface DescribeBackupOverviewResponse {
       * 用户在当前地域获得的赠送备份容量。
       */
     FreeVolume: number;
+    /**
+      * 用户在当前地域的异地备份总容量。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RemoteBackupVolume: number;
+    /**
+      * 归档备份容量，包含数据备份以及日志备份。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BackupArchiveVolume: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3528,6 +3619,22 @@ export interface ModifyBackupConfigRequest {
       * 定期保留策略周期起始日期，格式：YYYY-MM-dd HH:mm:ss
       */
     StartBackupPeriodSaveDate?: string;
+    /**
+      * 是否开启数据备份归档策略，off-关闭，on-打开，默认为off
+      */
+    EnableBackupArchive?: string;
+    /**
+      * 数据备份归档起始天数，数据备份达到归档起始天数时进行归档，最小为180天，不得大于数据备份保留天数
+      */
+    BackupArchiveDays?: number;
+    /**
+      * 日志备份归档起始天数，日志备份达到归档起始天数时进行归档，最小为180天，不得大于日志备份保留天数
+      */
+    BinlogArchiveDays?: number;
+    /**
+      * 是否开启日志备份归档策略，off-关闭，on-打开，默认为off
+      */
+    EnableBinlogArchive?: string;
 }
 /**
  * DisassociateSecurityGroups返回参数结构体
@@ -4648,6 +4755,22 @@ export interface BackupInfo {
       * 备份保留类型，save_mode_regular - 常规保存备份，save_mode_period - 定期保存备份
       */
     SaveMode: string;
+    /**
+      * 本地备份所在地域
+      */
+    Region: string;
+    /**
+      * 异地备份详细信息
+      */
+    RemoteInfo: Array<RemoteBackupInfo>;
+    /**
+      * 存储方式，0-常规存储，1-归档存储，默认为0
+      */
+    CosStorageType: number;
+    /**
+      * 实例 ID，格式如：cdb-c1nl9rpv。与云数据库控制台页面中显示的实例 ID 相同。
+      */
+    InstanceId: string;
 }
 /**
  * CloseWanService返回参数结构体

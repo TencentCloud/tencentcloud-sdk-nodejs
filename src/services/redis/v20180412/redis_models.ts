@@ -536,7 +536,7 @@ export interface Inbound {
  */
 export interface AssociateSecurityGroupsRequest {
   /**
-   * 数据库引擎名称：mariadb,cdb,cynosdb,dcdb,redis,mongodb 等。
+   * 数据库引擎名称，本接口取值：redis。
    */
   Product: string
 
@@ -741,17 +741,17 @@ export interface DescribeCommonDBInstancesRequest {
  */
 export interface DescribeDBSecurityGroupsResponse {
   /**
-   * 安全组规则
+   * 安全组规则。
    */
   Groups: Array<SecurityGroup>
 
   /**
-   * 安全组生效内网地址
+   * 安全组生效内网地址。
    */
   VIP: string
 
   /**
-   * 安全组生效内网端口
+   * 安全组生效内网端口。
    */
   VPort: string
 
@@ -2747,17 +2747,17 @@ export interface CleanUpInstanceResponse {
  */
 export interface ModifyDBInstanceSecurityGroupsRequest {
   /**
-   * 数据库引擎名称：mariadb,cdb,cynosdb,dcdb,redis,mongodb 等。
+   * 数据库引擎名称，本接口取值：redis。
    */
   Product: string
 
   /**
-   * 要修改的安全组ID列表，一个或者多个安全组Id组成的数组。
+   * 要修改的安全组 ID 列表，一个或者多个安全组 ID 组成的数组。
    */
   SecurityGroupIds: Array<string>
 
   /**
-   * 实例ID，格式如：cdb-c1nl9rpv或者cdbro-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同
+   * 实例 ID，格式如：cdb-c1nl9rpv或者cdbro-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
    */
   InstanceId: string
 }
@@ -4902,17 +4902,17 @@ export interface DescribeInstanceParamsResponse {
  */
 export interface DisassociateSecurityGroupsRequest {
   /**
-   * 数据库引擎名称：mariadb,cdb,cynosdb,dcdb,redis,mongodb 等。
+   * 数据库引擎名称，本接口取值：redis。
    */
   Product: string
 
   /**
-   * 安全组Id。
+   * 安全组 ID。
    */
   SecurityGroupId: string
 
   /**
-   * 实例ID列表，一个或者多个实例Id组成的数组。
+   * 实例ID列表，一个或者多个实例 ID 组成的数组。
    */
   InstanceIds: Array<string>
 }

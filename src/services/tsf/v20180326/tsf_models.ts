@@ -2106,6 +2106,21 @@ false：操作失败。
 }
 
 /**
+ * 部署javaagent的类型、版本信息
+ */
+export interface AgentProfile {
+  /**
+   * Agent类型
+   */
+  AgentType?: string
+
+  /**
+   * Agent版本号
+   */
+  AgentVersion?: string
+}
+
+/**
  * StopGroup请求参数结构体
  */
 export interface StopGroupRequest {
@@ -3509,6 +3524,16 @@ export interface DeployContainerGroupRequest {
    * 是否清除数据卷信息，默认false
    */
   VolumeClean?: boolean
+
+  /**
+   * javaagent信息: SERVICE_AGENT/OT_AGENT
+   */
+  AgentProfileList?: Array<AgentProfile>
+
+  /**
+   * 预热配置信息
+   */
+  WarmupSetting?: WarmupSetting
 }
 
 /**
@@ -4810,7 +4835,7 @@ export interface DescribeGroupResponse {
       * 虚拟机部署组详情
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Result?: VmGroup
+  Result: VmGroup
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -7568,6 +7593,16 @@ export interface DeployGroupRequest {
    * JDK版本: 8或11 (openJDK只支持8)
    */
   JdkVersion?: string
+
+  /**
+   * 部署agent的类型、版本
+   */
+  AgentProfileList?: Array<AgentProfile>
+
+  /**
+   * 预热参数配置
+   */
+  WarmupSetting?: WarmupSetting
 }
 
 /**
@@ -8370,6 +8405,18 @@ export interface VmGroup {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Alias: string
+
+  /**
+      * javaagent信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AgentProfileList: Array<AgentProfile>
+
+  /**
+      * 预热属性配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  WarmupSetting: WarmupSetting
 }
 
 /**
@@ -12921,6 +12968,31 @@ export interface DescribeConfigsRequest {
 }
 
 /**
+ * 预热配置
+ */
+export interface WarmupSetting {
+  /**
+   * 是否开启预热
+   */
+  Enabled?: boolean
+
+  /**
+   * 预热时间
+   */
+  WarmupTime?: number
+
+  /**
+   * 预热曲率，取值 1~5
+   */
+  Curvature?: number
+
+  /**
+   * 是否开启预热保护，在开启保护的情况下，超过 50% 的节点处于预热中，则会中止预热
+   */
+  EnabledProtection?: boolean
+}
+
+/**
  * EnableUnitRoute请求参数结构体
  */
 export interface EnableUnitRouteRequest {
@@ -14281,6 +14353,7 @@ export interface DeployContainerGroupResponse {
       * 部署容器应用是否成功。
 true：成功。
 false：失败。
+注意：此字段可能返回 null，表示取不到有效值。
       */
   Result: boolean
 

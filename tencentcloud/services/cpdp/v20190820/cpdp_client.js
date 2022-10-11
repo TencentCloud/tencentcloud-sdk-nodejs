@@ -1011,6 +1011,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("QueryPayerInfo", req, cb);
     }
     /**
+     * 智慧零售-查询公司抬头
+     */
+    async QueryCompanyTitle(req, cb) {
+        return this.request("QueryCompanyTitle", req, cb);
+    }
+    /**
      * 商户提现
      */
     async ApplyWithdrawal(req, cb) {

@@ -18,9 +18,29 @@ const client = new tencentcloud.tcm.v20210413.Client({
 })
 describe("tcm.v20210413.test.js", function () {
 
-it("tcm.v20210413.DescribeMeshList", async function () {
+it("tcm.v20210413.DeleteMesh", async function () {
     try {
-       const data = await client.DescribeMeshList({})
+       const data = await client.DeleteMesh({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcm.v20210413.CreateMesh", async function () {
+    try {
+       const data = await client.CreateMesh({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcm.v20210413.ModifyMesh", async function () {
+    try {
+       const data = await client.ModifyMesh({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -31,6 +51,16 @@ it("tcm.v20210413.DescribeMeshList", async function () {
 it("tcm.v20210413.DescribeMesh", async function () {
     try {
        const data = await client.DescribeMesh({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcm.v20210413.DescribeMeshList", async function () {
+    try {
+       const data = await client.DescribeMeshList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

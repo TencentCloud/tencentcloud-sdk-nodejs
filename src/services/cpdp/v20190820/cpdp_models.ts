@@ -82,6 +82,32 @@ development: 开发环境
 }
 
 /**
+ * QueryCompanyTitle返回参数结构体
+ */
+export interface QueryCompanyTitleResponse {
+  /**
+   * 错误码
+   */
+  ErrCode: string
+
+  /**
+   * 错误消息
+   */
+  ErrMessage: string
+
+  /**
+      * 公司抬头结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result: Array<CompanyTitleResult>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ReviseMbrProperty返回参数结构体
  */
 export interface ReviseMbrPropertyResponse {
@@ -7920,6 +7946,47 @@ export interface CreateRedInvoiceResult {
 }
 
 /**
+ * 公司抬头结果
+ */
+export interface CompanyTitleResult {
+  /**
+      * 公司银行账号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CompanyBankAccount: string
+
+  /**
+      * 公司地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CompanyAddress: string
+
+  /**
+      * 公司税号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CompanyTaxpayerNum: string
+
+  /**
+      * 公司名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CompanyName: string
+
+  /**
+      * 公司银行名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CompanyBankName: string
+
+  /**
+      * 公司电话
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CompanyPhone: string
+}
+
+/**
  * CreateOpenBankPaymentOrder请求参数结构体
  */
 export interface CreateOpenBankPaymentOrderRequest {
@@ -13137,6 +13204,31 @@ export interface CloseOpenBankPaymentOrderRequest {
    * 接入环境。沙箱环境填 sandbox。缺省默认调用生产环境
    */
   Environment?: string
+}
+
+/**
+ * QueryCompanyTitle请求参数结构体
+ */
+export interface QueryCompanyTitleRequest {
+  /**
+   * 公司抬头关键字
+   */
+  CompanyTitleKeyword: string
+
+  /**
+   * 开票平台ID。0：高灯，1：票易通
+   */
+  InvoicePlatformId: number
+
+  /**
+   * 销方纳税人识别号
+   */
+  SellerTaxpayerNum: string
+
+  /**
+   * 接入环境。沙箱环境填sandbox。
+   */
+  Profile?: string
 }
 
 /**
