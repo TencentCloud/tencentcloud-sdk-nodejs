@@ -6,8 +6,12 @@ import TencentCloudSDKHttpException from "./exception/tencent_cloud_sdk_exceptio
 import { Response } from "node-fetch"
 
 export type ResponseCallback<TReuslt = any> = (error: string, rep: TReuslt) => void
-export interface RequestOptions extends Pick<ClientProfile["httpProfile"], "headers"> {
+export interface RequestOptions extends Partial<Pick<ClientProfile["httpProfile"], "headers">> {
   multipart?: boolean
+  /**
+   * 中止请求信号
+   */
+  signal?: AbortSignal
 }
 
 interface RequestData {
@@ -140,6 +144,9 @@ export class AbstractClient {
         data: params,
         timeout: this.profile.httpProfile.reqTimeout * 1000,
         headers: Object.assign({}, this.profile.httpProfile.headers, options.headers),
+        agent: this.profile.httpProfile.agent,
+        proxy: this.profile.httpProfile.proxy,
+        signal: options.signal
       })
     } catch (error) {
       throw new TencentCloudSDKHttpException(error.message)
@@ -173,6 +180,9 @@ export class AbstractClient {
         requestClient: this.sdkVersion,
         language: this.profile.language,
         headers: Object.assign({}, this.profile.httpProfile.headers, options.headers),
+        agent: this.profile.httpProfile.agent,
+        proxy: this.profile.httpProfile.proxy,
+        signal: options.signal
       })
     } catch (e) {
       throw new TencentCloudSDKHttpException(e.message)
