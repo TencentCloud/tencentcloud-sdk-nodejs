@@ -1,12 +1,19 @@
 import fetch, { RequestInit, Response } from "node-fetch"
 import HttpsProxyAgent = require("https-proxy-agent")
 
-export default function (url: string, options: RequestInit): Promise<Response> {
-  const instanceOptions = options || {}
+export interface FetchOptions extends Omit<RequestInit, 'signal'> {
+  proxy?: string
+  headers: Record<string, string>
+  // node-fetch中的signal声明与ts自带的有点冲突，以ts的为准
+  signal: AbortSignal
+}
+export default function (url: string, options: FetchOptions): Promise<Response> {
+  const instanceOptions = options || {} as FetchOptions
 
-  if (!options.agent && process.env.http_proxy) {
-    instanceOptions.agent = new (HttpsProxyAgent as any)(process.env.http_proxy)
+  const proxy = options.proxy || process.env.http_proxy
+  if (!options.agent && proxy) {
+    instanceOptions.agent = new (HttpsProxyAgent as any)(proxy)
   }
 
-  return fetch(url, instanceOptions)
+  return fetch(url, instanceOptions as any)
 }

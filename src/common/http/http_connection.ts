@@ -4,9 +4,9 @@ import * as isStream from "is-stream"
 import * as getStream from "get-stream"
 import * as FormData from "form-data"
 import Sign from "../sign"
-import fetch from "./fetch"
-import { Response } from "node-fetch"
-
+import fetch, { FetchOptions } from "./fetch"
+import { Response, RequestInit } from "node-fetch"
+import { Agent } from "http"
 /**
  * @inner
  */
@@ -17,24 +17,26 @@ export class HttpConnection {
     data,
     timeout,
     headers = {},
+    agent,
+    proxy,
+    signal
   }: {
     method: string
     url: string
     data: any
     timeout: number
     headers?: Record<string, string>
+    agent?: Agent
+    proxy?: string
+    signal?: AbortSignal
   }): Promise<Response> {
-    const config: {
-      method: string
-      timeout: number
-      headers: {
-        [key: string]: string
-      }
-      body?: string
-    } = {
+    const config: FetchOptions = {
       method: method,
       headers: Object.assign({}, headers),
       timeout,
+      agent,
+      proxy,
+      signal
     }
     if (method === "GET") {
       url += "?" + QueryString.stringify(data)
@@ -61,6 +63,9 @@ export class HttpConnection {
     requestClient,
     language,
     headers = {},
+    agent,
+    proxy,
+    signal
   }: {
     method: string
     url: string
@@ -77,6 +82,9 @@ export class HttpConnection {
     requestClient: string
     language: string
     headers?: Record<string, string>
+    agent?: Agent
+    proxy?: string
+    signal?: AbortSignal
   }): Promise<Response> {
     // data 中可能带有 readStream，由于需要计算整个 body 的 hash，
     // 所以这里把 readStream 转为 Buffer
@@ -98,14 +106,7 @@ export class HttpConnection {
     if (method === "POST") {
       payload = data
     }
-    const config: {
-      method: string
-      timeout: number
-      headers: {
-        [key: string]: any
-      }
-      body?: any
-    } = {
+    const config: FetchOptions = {
       method,
       timeout,
       headers: Object.assign({}, headers, {
@@ -117,6 +118,9 @@ export class HttpConnection {
         "X-TC-Token": token,
         "X-TC-RequestClient": requestClient,
       }),
+      agent,
+      proxy,
+      signal
     }
 
     if (token === null) {
