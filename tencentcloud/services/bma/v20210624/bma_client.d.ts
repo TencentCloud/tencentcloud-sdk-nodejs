@@ -16,11 +16,11 @@ export declare class Client extends AbstractClient {
      */
     DescribeBPCompanyInfo(req?: DescribeBPCompanyInfoRequest, cb?: (error: string, rep: DescribeBPCompanyInfoResponse) => void): Promise<DescribeBPCompanyInfoResponse>;
     /**
-     * 品牌经营管家-版权保护个人认证接口
+     * 本接口用于个人认证，新接入用户必须认证后才可以进行后续操作（个人认证和企业认证二选一），只需认证一次即可
      */
     CreateCRUserVerify(req: CreateCRUserVerifyRequest, cb?: (error: string, rep: CreateCRUserVerifyResponse) => void): Promise<CreateCRUserVerifyResponse>;
     /**
-     * 版权保护-添加作品接口
+     * 新建作品
      */
     CreateCRWork(req: CreateCRWorkRequest, cb?: (error: string, rep: CreateCRWorkResponse) => void): Promise<CreateCRWorkResponse>;
     /**
@@ -28,11 +28,12 @@ export declare class Client extends AbstractClient {
      */
     CreateBPOfflineTicket(req: CreateBPOfflineTicketRequest, cb?: (error: string, rep: CreateBPOfflineTicketResponse) => void): Promise<CreateBPOfflineTicketResponse>;
     /**
-     * 版权保护-新建拦截接口
+     * 新建拦截
+
      */
     CreateCRBlock(req: CreateCRBlockRequest, cb?: (error: string, rep: CreateCRBlockResponse) => void): Promise<CreateCRBlockResponse>;
     /**
-     * 申请取证
+     * 取证申请
      */
     ModifyCRObtainStatus(req: ModifyCRObtainStatusRequest, cb?: (error: string, rep: ModifyCRObtainStatusResponse) => void): Promise<ModifyCRObtainStatusResponse>;
     /**
@@ -44,7 +45,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyBPOfflineAttachment(req: ModifyBPOfflineAttachmentRequest, cb?: (error: string, rep: ModifyBPOfflineAttachmentResponse) => void): Promise<ModifyBPOfflineAttachmentResponse>;
     /**
-     * 版权保护-修改监测状态接口
+     * 开启/关闭监测
      */
     ModifyCRMonitor(req: ModifyCRMonitorRequest, cb?: (error: string, rep: ModifyCRMonitorResponse) => void): Promise<ModifyCRMonitorResponse>;
     /**
@@ -56,15 +57,15 @@ export declare class Client extends AbstractClient {
      */
     CreateBPFakeURL(req: CreateBPFakeURLRequest, cb?: (error: string, rep: CreateBPFakeURLResponse) => void): Promise<CreateBPFakeURLResponse>;
     /**
-     * 新增权属文件
+     * 权属文件添加
      */
     CreateCRRightFile(req: CreateCRRightFileRequest, cb?: (error: string, rep: CreateCRRightFileResponse) => void): Promise<CreateCRRightFileResponse>;
     /**
-     * 版权保护-白名单修改接口
+     * 修改白名单列表
      */
     ModifyCRWhiteList(req: ModifyCRWhiteListRequest, cb?: (error: string, rep: ModifyCRWhiteListResponse) => void): Promise<ModifyCRWhiteListResponse>;
     /**
-     * 版权保护-拦截申请接口
+     * 拦截申请
      */
     ModifyCRBlockStatus(req: ModifyCRBlockStatusRequest, cb?: (error: string, rep: ModifyCRBlockStatusResponse) => void): Promise<ModifyCRBlockStatusResponse>;
     /**
@@ -92,7 +93,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeCRMonitors(req: DescribeCRMonitorsRequest, cb?: (error: string, rep: DescribeCRMonitorsResponse) => void): Promise<DescribeCRMonitorsResponse>;
     /**
-     * 版权保护-维权申请接口
+     * 发函申请
      */
     ModifyCRRightStatus(req: ModifyCRRightStatusRequest, cb?: (error: string, rep: ModifyCRRightStatusResponse) => void): Promise<ModifyCRRightStatusResponse>;
     /**
@@ -108,7 +109,7 @@ export declare class Client extends AbstractClient {
      */
     CreateCRTort(req: CreateCRTortRequest, cb?: (error: string, rep: CreateCRTortResponse) => void): Promise<CreateCRTortResponse>;
     /**
-     * 品牌经营管家-版权保护模块企业认证接口
+     * 本接口用于企业认证，新接入用户必须认证后才可以进行后续操作（个人认证和企业认证二选一），只需认证一次即可
      */
     CreateCRCompanyVerify(req: CreateCRCompanyVerifyRequest, cb?: (error: string, rep: CreateCRCompanyVerifyResponse) => void): Promise<CreateCRCompanyVerifyResponse>;
 }

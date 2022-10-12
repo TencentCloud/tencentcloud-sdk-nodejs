@@ -308,6 +308,16 @@ it("wedata.v20210820.ModifyTaskLinks", async function () {
     }
 })
 
+it("wedata.v20210820.CreateCustomFunction", async function () {
+    try {
+       const data = await client.CreateCustomFunction({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20210820.ModifyFolder", async function () {
     try {
        const data = await client.ModifyFolder({})

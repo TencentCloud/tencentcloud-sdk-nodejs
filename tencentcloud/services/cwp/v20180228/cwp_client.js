@@ -172,6 +172,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeletePrivilegeEvents", req, cb);
     }
     /**
+     * 入侵检测，获取恶意请求列表
+     */
+    async DescribeRiskDnsList(req, cb) {
+        return this.request("DescribeRiskDnsList", req, cb);
+    }
+    /**
      * 导出网络攻击日志
      */
     async ExportAttackLogs(req, cb) {
@@ -244,10 +250,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeReverseShellRules", req, cb);
     }
     /**
-     * 用于异步导出数据量大的日志文件
+     * 获取基线项检测结果列表
      */
-    async ExportTasks(req, cb) {
-        return this.request("ExportTasks", req, cb);
+    async DescribeBaselineItemList(req, cb) {
+        return this.request("DescribeBaselineItemList", req, cb);
     }
     /**
      * 根据检测项id导出忽略检测项影响主机列表
@@ -1009,6 +1015,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAttackVulTypeList", req, cb);
     }
     /**
+     * 同步基线检测进度概要
+     */
+    async SyncBaselineDetectSummary(req, cb) {
+        return this.request("SyncBaselineDetectSummary", req, cb);
+    }
+    /**
      * 获取异地登录白名单列表
      */
     async DescribeLoginWhiteList(req, cb) {
@@ -1033,10 +1045,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBaselineDetail", req, cb);
     }
     /**
-     * 入侵检测，获取恶意请求列表
+     * 获取基线检测项的列表
      */
-    async DescribeRiskDnsList(req, cb) {
-        return this.request("DescribeRiskDnsList", req, cb);
+    async DescribeBaselineItemDetectList(req, cb) {
+        return this.request("DescribeBaselineItemDetectList", req, cb);
     }
     /**
      * 网站防篡改-查询动态防护信息
@@ -1309,6 +1321,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeMachines", req, cb);
     }
     /**
+     * 用于异步导出数据量大的日志文件
+     */
+    async ExportTasks(req, cb) {
+        return this.request("ExportTasks", req, cb);
+    }
+    /**
      * 查询资产管理Web服务列表
      */
     async DescribeAssetWebServiceInfoList(req, cb) {
@@ -1343,6 +1361,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeUndoVulCounts(req, cb) {
         return this.request("DescribeUndoVulCounts", req, cb);
+    }
+    /**
+     * 检测基线
+     */
+    async StartBaselineDetect(req, cb) {
+        return this.request("StartBaselineDetect", req, cb);
     }
 }
 exports.Client = Client;

@@ -40,6 +40,7 @@ import {
   DescribeBaselineHostTopResponse,
   DeleteBashRulesResponse,
   ExportVulListResponse,
+  AssetMachineBaseInfo,
   DescribeHistoryServiceResponse,
   BaselineEffectHost,
   ModifyWebPageProtectSettingResponse,
@@ -49,6 +50,7 @@ import {
   MalWareList,
   DescribeAssetUserInfoResponse,
   Tag,
+  DescribeServersAndRiskAndFirstInfoResponse,
   ExportAttackLogsResponse,
   DescribeBaselineEffectHostListResponse,
   TrustMalwaresRequest,
@@ -60,7 +62,7 @@ import {
   CreateLicenseOrderResponse,
   DescribeBaselineStrategyListResponse,
   DefendAttackLog,
-  DescribeAssetEnvListResponse,
+  BaselineRuleTopInfo,
   DescribeAttackLogInfoResponse,
   DescribePrivilegeEventsResponse,
   DescribeOverviewStatisticsResponse,
@@ -122,6 +124,7 @@ import {
   ExportVulDetectionReportRequest,
   ExportMalwaresResponse,
   DescribeScanVulSettingRequest,
+  StartBaselineDetectRequest,
   DescribeAssetPlanTaskListResponse,
   DescribeBaselineRuleRequest,
   DescribeHistoryAccountsRequest,
@@ -132,7 +135,7 @@ import {
   DescribeStrategyExistResponse,
   DeleteReverseShellEventsRequest,
   DescribeBanRegionsRequest,
-  DescribeServersAndRiskAndFirstInfoRequest,
+  DescribeMachineOsListResponse,
   DescribeAssetWebServiceProcessListResponse,
   IgnoreImpactedHostsRequest,
   AssetUserDetail,
@@ -161,7 +164,7 @@ import {
   DescribeBanStatusResponse,
   DescribeVulListRequest,
   DescribeLicenseBindListResponse,
-  DescribeServersAndRiskAndFirstInfoResponse,
+  BaselineInfo,
   AssetAppBaseInfo,
   DescribePrivilegeRulesRequest,
   ModifyOrderAttributeRequest,
@@ -195,7 +198,7 @@ import {
   DescribeAssetEnvListRequest,
   StopNoticeBanTipsRequest,
   DescribeScanMalwareScheduleRequest,
-  AssetMachineBaseInfo,
+  BaselineDetectParam,
   DescribeBashEventsResponse,
   UpdateMachineTagsResponse,
   DescribeBashEventsRequest,
@@ -233,7 +236,7 @@ import {
   ExportMaliciousRequestsResponse,
   EffectiveMachineInfo,
   DescribeVulCountByDatesResponse,
-  DescribeMachineOsListResponse,
+  DescribeServersAndRiskAndFirstInfoRequest,
   DescribeIndexListRequest,
   ProtectDirInfo,
   DeleteBashRulesRequest,
@@ -321,6 +324,7 @@ import {
   ModifyBanStatusRequest,
   DescribeWebPageServiceInfoRequest,
   DescribeLogStorageStatisticResponse,
+  BaselineItemDetect,
   DescribeEmergencyResponseListRequest,
   DescribeScanStateResponse,
   EditTagsRequest,
@@ -343,6 +347,7 @@ import {
   VulHostTopInfo,
   DescribeImportMachineInfoRequest,
   VulLevelInfo,
+  StartBaselineDetectResponse,
   ProtectStat,
   DescribeVulEffectHostListResponse,
   SwitchBashRulesResponse,
@@ -382,7 +387,7 @@ import {
   VulDetailInfo,
   DescribeAssetJarInfoRequest,
   DescribePrivilegeEventsRequest,
-  BaselineInfo,
+  DescribeAssetEnvListResponse,
   DescribeVulHostCountScanTimeRequest,
   ExportScanTaskDetailsResponse,
   ExportBashEventsResponse,
@@ -421,8 +426,10 @@ import {
   ModifyAutoOpenProVersionConfigResponse,
   ExportBaselineEffectHostListRequest,
   AssetCoreModuleDetail,
+  DescribeBaselineItemDetectListRequest,
   DescribeBanStatusRequest,
   DescribeAssetRecentMachineInfoResponse,
+  BaselineItem,
   DescribeMalWareListResponse,
   ModifyLicenseUnBindsResponse,
   DescribeAssetPortInfoListResponse,
@@ -478,27 +485,30 @@ import {
   ExportBaselineListResponse,
   DescribeBruteAttackRulesResponse,
   ModifyBanModeResponse,
-  BaselineRuleTopInfo,
   DeleteLicenseRecordResponse,
   AssetProcessBaseInfo,
   DeleteBruteAttacksRequest,
   DescribeAssetCoreModuleListResponse,
+  DescribeBaselineItemListRequest,
   DescribeLoginWhiteCombinedListResponse,
   ExportVulDetectionExcelResponse,
   DescribeWarningListResponse,
   CreateSearchTemplateRequest,
   DeleteTagsRequest,
   DescribeScanStateRequest,
+  SyncBaselineDetectSummaryResponse,
   ModifyMalwareTimingScanSettingsRequest,
   AssetEnvBaseInfo,
   DescribeMachineListResponse,
   MalwareInfo,
   Place,
+  SyncBaselineDetectSummaryRequest,
   DescribeExpertServiceOrderListResponse,
   DeleteReverseShellRulesResponse,
   DescribeAssetPlanTaskListRequest,
   DescribeScanTaskDetailsRequest,
   DescribeProtectDirRelatedServerRequest,
+  DescribeBaselineItemListResponse,
   DescribeSearchLogsResponse,
   SecurityEventInfo,
   DescribeBaselineAnalysisDataResponse,
@@ -554,6 +564,7 @@ import {
   DescribeSecurityEventsCntResponse,
   WarningInfoObj,
   UpdateMachineTagsRequest,
+  DescribeBaselineItemDetectListResponse,
   UpdateBaselineStrategyRequest,
   DescribeHostLoginListResponse,
   DescribeBaselineAnalysisDataRequest,
@@ -822,6 +833,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 入侵检测，获取恶意请求列表
+   */
+  async DescribeRiskDnsList(
+    req: DescribeRiskDnsListRequest,
+    cb?: (error: string, rep: DescribeRiskDnsListResponse) => void
+  ): Promise<DescribeRiskDnsListResponse> {
+    return this.request("DescribeRiskDnsList", req, cb)
+  }
+
+  /**
    * 导出网络攻击日志
    */
   async ExportAttackLogs(
@@ -942,13 +963,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于异步导出数据量大的日志文件
+   * 获取基线项检测结果列表
    */
-  async ExportTasks(
-    req: ExportTasksRequest,
-    cb?: (error: string, rep: ExportTasksResponse) => void
-  ): Promise<ExportTasksResponse> {
-    return this.request("ExportTasks", req, cb)
+  async DescribeBaselineItemList(
+    req: DescribeBaselineItemListRequest,
+    cb?: (error: string, rep: DescribeBaselineItemListResponse) => void
+  ): Promise<DescribeBaselineItemListResponse> {
+    return this.request("DescribeBaselineItemList", req, cb)
   }
 
   /**
@@ -2215,6 +2236,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 同步基线检测进度概要
+   */
+  async SyncBaselineDetectSummary(
+    req?: SyncBaselineDetectSummaryRequest,
+    cb?: (error: string, rep: SyncBaselineDetectSummaryResponse) => void
+  ): Promise<SyncBaselineDetectSummaryResponse> {
+    return this.request("SyncBaselineDetectSummary", req, cb)
+  }
+
+  /**
    * 获取异地登录白名单列表
    */
   async DescribeLoginWhiteList(
@@ -2255,13 +2286,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 入侵检测，获取恶意请求列表
+   * 获取基线检测项的列表
    */
-  async DescribeRiskDnsList(
-    req: DescribeRiskDnsListRequest,
-    cb?: (error: string, rep: DescribeRiskDnsListResponse) => void
-  ): Promise<DescribeRiskDnsListResponse> {
-    return this.request("DescribeRiskDnsList", req, cb)
+  async DescribeBaselineItemDetectList(
+    req: DescribeBaselineItemDetectListRequest,
+    cb?: (error: string, rep: DescribeBaselineItemDetectListResponse) => void
+  ): Promise<DescribeBaselineItemDetectListResponse> {
+    return this.request("DescribeBaselineItemDetectList", req, cb)
   }
 
   /**
@@ -2715,6 +2746,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 用于异步导出数据量大的日志文件
+   */
+  async ExportTasks(
+    req: ExportTasksRequest,
+    cb?: (error: string, rep: ExportTasksResponse) => void
+  ): Promise<ExportTasksResponse> {
+    return this.request("ExportTasks", req, cb)
+  }
+
+  /**
    * 查询资产管理Web服务列表
    */
   async DescribeAssetWebServiceInfoList(
@@ -2772,5 +2813,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeUndoVulCountsResponse) => void
   ): Promise<DescribeUndoVulCountsResponse> {
     return this.request("DescribeUndoVulCounts", req, cb)
+  }
+
+  /**
+   * 检测基线
+   */
+  async StartBaselineDetect(
+    req: StartBaselineDetectRequest,
+    cb?: (error: string, rep: StartBaselineDetectResponse) => void
+  ): Promise<StartBaselineDetectResponse> {
+    return this.request("StartBaselineDetect", req, cb)
   }
 }

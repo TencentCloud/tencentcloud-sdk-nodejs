@@ -233,6 +233,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyTaskLinks", req, cb);
     }
     /**
+     *  创建用户自定义函数
+     */
+    async CreateCustomFunction(req, cb) {
+        return this.request("CreateCustomFunction", req, cb);
+    }
+    /**
      * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
 文件夹更新
      */

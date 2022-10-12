@@ -263,7 +263,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstancesOperationLimit", req, cb);
     }
     /**
-     * 本接口(DescribeRegions)用于查询地域信息。因平台策略原因，该接口暂时停止更新，为确保您正常调用，可切换至新链接：https://cloud.tencent.com/document/product/1278/55255。
+     * 本接口(DescribeRegions)用于查询地域信息。因平台策略原因，该接口暂时停止更新，为确保您正常调用，可切换至新链接：https://cloud.tencent.com/document/product/1596/77929。
      */
     async DescribeRegions(req, cb) {
         return this.request("DescribeRegions", req, cb);

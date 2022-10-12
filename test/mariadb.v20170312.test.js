@@ -68,16 +68,6 @@ it("mariadb.v20170312.DescribeDatabaseObjects", async function () {
     }
 })
 
-it("mariadb.v20170312.KillSession", async function () {
-    try {
-       const data = await client.KillSession({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("mariadb.v20170312.ModifyBackupTime", async function () {
     try {
        const data = await client.ModifyBackupTime({})
@@ -188,9 +178,9 @@ it("mariadb.v20170312.ModifyDBParameters", async function () {
     }
 })
 
-it("mariadb.v20170312.DescribeSqlLogs", async function () {
+it("mariadb.v20170312.ModifyLogFileRetentionPeriod", async function () {
     try {
-       const data = await client.DescribeSqlLogs({})
+       const data = await client.ModifyLogFileRetentionPeriod({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -198,9 +188,9 @@ it("mariadb.v20170312.DescribeSqlLogs", async function () {
     }
 })
 
-it("mariadb.v20170312.DescribeDBPerformanceDetails", async function () {
+it("mariadb.v20170312.DescribeDBSlowLogs", async function () {
     try {
-       const data = await client.DescribeDBPerformanceDetails({})
+       const data = await client.DescribeDBSlowLogs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -288,9 +278,9 @@ it("mariadb.v20170312.ModifyDBInstancesProject", async function () {
     }
 })
 
-it("mariadb.v20170312.DescribeDBSlowLogs", async function () {
+it("mariadb.v20170312.KillSession", async function () {
     try {
-       const data = await client.DescribeDBSlowLogs({})
+       const data = await client.KillSession({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -618,16 +608,6 @@ it("mariadb.v20170312.UpgradeDBInstance", async function () {
     }
 })
 
-it("mariadb.v20170312.DescribeDBPerformance", async function () {
-    try {
-       const data = await client.DescribeDBPerformance({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("mariadb.v20170312.DescribeLogFileRetentionPeriod", async function () {
     try {
        const data = await client.DescribeLogFileRetentionPeriod({})
@@ -651,16 +631,6 @@ it("mariadb.v20170312.DescribeDBResourceUsage", async function () {
 it("mariadb.v20170312.DisassociateSecurityGroups", async function () {
     try {
        const data = await client.DisassociateSecurityGroups({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("mariadb.v20170312.ModifyLogFileRetentionPeriod", async function () {
-    try {
-       const data = await client.ModifyLogFileRetentionPeriod({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

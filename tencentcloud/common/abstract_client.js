@@ -88,6 +88,9 @@ class AbstractClient {
                 data: params,
                 timeout: this.profile.httpProfile.reqTimeout * 1000,
                 headers: Object.assign({}, this.profile.httpProfile.headers, options.headers),
+                agent: this.profile.httpProfile.agent,
+                proxy: this.profile.httpProfile.proxy,
+                signal: options.signal
             });
         }
         catch (error) {
@@ -117,6 +120,9 @@ class AbstractClient {
                 requestClient: this.sdkVersion,
                 language: this.profile.language,
                 headers: Object.assign({}, this.profile.httpProfile.headers, options.headers),
+                agent: this.profile.httpProfile.agent,
+                proxy: this.profile.httpProfile.proxy,
+                signal: options.signal
             });
         }
         catch (e) {

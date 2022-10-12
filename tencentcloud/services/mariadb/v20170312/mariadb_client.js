@@ -59,12 +59,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDatabaseObjects", req, cb);
     }
     /**
-     * 本接口（KillSession）用于杀死指定会话。
-     */
-    async KillSession(req, cb) {
-        return this.request("KillSession", req, cb);
-    }
-    /**
      * 本接口（ModifyBackupTime）用于设置云数据库实例的备份时间。后台系统将根据此配置定期进行实例备份。
      */
     async ModifyBackupTime(req, cb) {
@@ -133,16 +127,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyDBParameters", req, cb);
     }
     /**
-     * 本接口（DescribeSqlLogs）用于获取实例SQL日志。
+     * 本接口(ModifyLogFileRetentionPeriod)用于修改数据库备份日志保存天数。
      */
-    async DescribeSqlLogs(req, cb) {
-        return this.request("DescribeSqlLogs", req, cb);
+    async ModifyLogFileRetentionPeriod(req, cb) {
+        return this.request("ModifyLogFileRetentionPeriod", req, cb);
     }
     /**
-     * 本接口(DescribeDBPerformanceDetails)用于查看实例性能数据详情。
+     * 本接口(DescribeDBSlowLogs)用于查询慢查询日志列表。
      */
-    async DescribeDBPerformanceDetails(req, cb) {
-        return this.request("DescribeDBPerformanceDetails", req, cb);
+    async DescribeDBSlowLogs(req, cb) {
+        return this.request("DescribeDBSlowLogs", req, cb);
     }
     /**
      * 本接口（DescribeFlow）用于查询流程状态。
@@ -193,10 +187,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyDBInstancesProject", req, cb);
     }
     /**
-     * 本接口(DescribeDBSlowLogs)用于查询慢查询日志列表。
+     * 本接口（KillSession）用于杀死指定会话。
      */
-    async DescribeDBSlowLogs(req, cb) {
-        return this.request("DescribeDBSlowLogs", req, cb);
+    async KillSession(req, cb) {
+        return this.request("KillSession", req, cb);
     }
     /**
      * 本接口(DescribeDBLogFiles)用于获取数据库的各种日志列表，包括冷备、binlog、errlog和slowlog。
@@ -404,12 +398,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpgradeDBInstance", req, cb);
     }
     /**
-     * 本接口(DescribeDBPerformance)用于查看数据库实例当前性能数据。
-     */
-    async DescribeDBPerformance(req, cb) {
-        return this.request("DescribeDBPerformance", req, cb);
-    }
-    /**
      * 本接口(DescribeLogFileRetentionPeriod)用于查看数据库备份日志的备份天数的设置情况。
      */
     async DescribeLogFileRetentionPeriod(req, cb) {
@@ -426,12 +414,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DisassociateSecurityGroups(req, cb) {
         return this.request("DisassociateSecurityGroups", req, cb);
-    }
-    /**
-     * 本接口(ModifyLogFileRetentionPeriod)用于修改数据库备份日志保存天数。
-     */
-    async ModifyLogFileRetentionPeriod(req, cb) {
-        return this.request("ModifyLogFileRetentionPeriod", req, cb);
     }
 }
 exports.Client = Client;

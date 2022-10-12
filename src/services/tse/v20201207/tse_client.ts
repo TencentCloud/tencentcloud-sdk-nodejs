@@ -20,7 +20,9 @@ import { ClientConfig } from "../../../common/interface"
 import {
   NacosReplica,
   DescribeNacosReplicasRequest,
+  UpdateEngineInternetAccessRequest,
   ApolloEnvParam,
+  UpdateEngineInternetAccessResponse,
   KVPair,
   DeleteEngineResponse,
   CreateEngineResponse,
@@ -123,6 +125,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeZookeeperServerInterfacesResponse) => void
   ): Promise<DescribeZookeeperServerInterfacesResponse> {
     return this.request("DescribeZookeeperServerInterfaces", req, cb)
+  }
+
+  /**
+   * 修改引擎公网访问配置
+   */
+  async UpdateEngineInternetAccess(
+    req: UpdateEngineInternetAccessRequest,
+    cb?: (error: string, rep: UpdateEngineInternetAccessResponse) => void
+  ): Promise<UpdateEngineInternetAccessResponse> {
+    return this.request("UpdateEngineInternetAccess", req, cb)
   }
 
   /**

@@ -489,6 +489,108 @@ export interface ExportVulListResponse {
 }
 
 /**
+ * 资产指纹中服务器列表的基本信息
+ */
+export interface AssetMachineBaseInfo {
+  /**
+   * 服务器Quuid
+   */
+  Quuid: string
+
+  /**
+   * 服务器uuid
+   */
+  Uuid: string
+
+  /**
+   * 服务器内网IP
+   */
+  MachineIp: string
+
+  /**
+   * 服务器名称
+   */
+  MachineName: string
+
+  /**
+   * 操作系统名称
+   */
+  OsInfo: string
+
+  /**
+   * CPU信息
+   */
+  Cpu: string
+
+  /**
+   * 内存容量：单位G
+   */
+  MemSize: number
+
+  /**
+   * 内存使用率百分比
+   */
+  MemLoad: string
+
+  /**
+   * 硬盘容量：单位G
+   */
+  DiskSize: number
+
+  /**
+   * 硬盘使用率百分比
+   */
+  DiskLoad: string
+
+  /**
+   * 分区数
+   */
+  PartitionCount: number
+
+  /**
+   * 主机外网IP
+   */
+  MachineWanIp: string
+
+  /**
+   * 业务组ID
+   */
+  ProjectId: number
+
+  /**
+   * Cpu数量
+   */
+  CpuSize: number
+
+  /**
+   * Cpu使用率百分比
+   */
+  CpuLoad: string
+
+  /**
+      * 标签
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Tag: Array<MachineTag>
+
+  /**
+      * 数据更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UpdateTime: string
+
+  /**
+   * 是否新增[0:否|1:是]
+   */
+  IsNew: number
+
+  /**
+   * 首次采集时间
+   */
+  FirstTime: string
+}
+
+/**
  * DescribeHistoryService返回参数结构体
  */
 export interface DescribeHistoryServiceResponse {
@@ -890,6 +992,41 @@ export interface Tag {
 }
 
 /**
+ * DescribeServersAndRiskAndFirstInfo返回参数结构体
+ */
+export interface DescribeServersAndRiskAndFirstInfoResponse {
+  /**
+   * 风险文件数
+   */
+  RiskFileCount: number
+
+  /**
+   * 今日新增风险文件数
+   */
+  AddRiskFileCount: number
+
+  /**
+   * 受影响服务器台数
+   */
+  ServersCount: number
+
+  /**
+   * 是否试用：true-是，false-否
+   */
+  IsFirstCheck: boolean
+
+  /**
+   * 木马最近检测时间
+   */
+  ScanTime: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ExportAttackLogs返回参数结构体
  */
 export interface ExportAttackLogsResponse {
@@ -1145,24 +1282,32 @@ export interface DefendAttackLog {
 }
 
 /**
- * DescribeAssetEnvList返回参数结构体
+ * 基线检测项TOP信息
  */
-export interface DescribeAssetEnvListResponse {
+export interface BaselineRuleTopInfo {
   /**
-      * 列表
+      * 基线检测项名
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Envs: Array<AssetEnvBaseInfo>
+  RuleName: string
 
   /**
-   * 总数量
-   */
-  Total: number
+      * 检测项危害等级
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Level: number
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+      * 事件总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EventCount: number
+
+  /**
+      * 检测项id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RuleId: number
 }
 
 /**
@@ -2746,6 +2891,16 @@ export interface ExportMalwaresResponse {
 export type DescribeScanVulSettingRequest = null
 
 /**
+ * StartBaselineDetect请求参数结构体
+ */
+export interface StartBaselineDetectRequest {
+  /**
+   * 基线检测参数
+   */
+  Param: BaselineDetectParam
+}
+
+/**
  * DescribeAssetPlanTaskList返回参数结构体
  */
 export interface DescribeAssetPlanTaskListResponse {
@@ -2919,9 +3074,19 @@ export interface DescribeBanRegionsRequest {
 }
 
 /**
- * DescribeServersAndRiskAndFirstInfo请求参数结构体
+ * DescribeMachineOsList返回参数结构体
  */
-export type DescribeServersAndRiskAndFirstInfoRequest = null
+export interface DescribeMachineOsListResponse {
+  /**
+   * 操作系统列表
+   */
+  List: Array<OsName>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
 
 /**
  * DescribeAssetWebServiceProcessList返回参数结构体
@@ -3706,38 +3871,62 @@ export interface DescribeLicenseBindListResponse {
 }
 
 /**
- * DescribeServersAndRiskAndFirstInfo返回参数结构体
+ * 基线信息
  */
-export interface DescribeServersAndRiskAndFirstInfoResponse {
+export interface BaselineInfo {
   /**
-   * 风险文件数
-   */
-  RiskFileCount: number
+      * 基线名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Name: string
 
   /**
-   * 今日新增风险文件数
-   */
-  AddRiskFileCount: number
+      * 危害等级：1-低危；2-中危；3-高危；4-严重
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Level: number
 
   /**
-   * 受影响服务器台数
-   */
-  ServersCount: number
+      * 检测项数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RuleCount: number
 
   /**
-   * 是否试用：true-是，false-否
-   */
-  IsFirstCheck: boolean
+      * 影响服务器数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  HostCount: number
 
   /**
-   * 木马最近检测时间
-   */
-  ScanTime: string
+      * 通过状态:0:未通过,1:已通过
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Status: number
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+      * 基线id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CategoryId: number
+
+  /**
+      * 最后检测时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LastScanTime: string
+
+  /**
+      * 检测中状态: 5
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MaxStatus: number
+
+  /**
+      * 基线风险项
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BaselineFailCount: number
 }
 
 /**
@@ -4472,105 +4661,28 @@ export type StopNoticeBanTipsRequest = null
 export type DescribeScanMalwareScheduleRequest = null
 
 /**
- * 资产指纹中服务器列表的基本信息
+ * 基线扫描参数
  */
-export interface AssetMachineBaseInfo {
+export interface BaselineDetectParam {
   /**
-   * 服务器Quuid
+   * 检测的策略集合
    */
-  Quuid: string
+  PolicyIds?: Array<number>
 
   /**
-   * 服务器uuid
+   * 检测的规则集合
    */
-  Uuid: string
+  RuleIds?: Array<number>
 
   /**
-   * 服务器内网IP
+   * 检测项集合
    */
-  MachineIp: string
+  ItemIds?: Array<number>
 
   /**
-   * 服务器名称
+   * 检测的主机ID集合
    */
-  MachineName: string
-
-  /**
-   * 操作系统名称
-   */
-  OsInfo: string
-
-  /**
-   * CPU信息
-   */
-  Cpu: string
-
-  /**
-   * 内存容量：单位G
-   */
-  MemSize: number
-
-  /**
-   * 内存使用率百分比
-   */
-  MemLoad: string
-
-  /**
-   * 硬盘容量：单位G
-   */
-  DiskSize: number
-
-  /**
-   * 硬盘使用率百分比
-   */
-  DiskLoad: string
-
-  /**
-   * 分区数
-   */
-  PartitionCount: number
-
-  /**
-   * 主机外网IP
-   */
-  MachineWanIp: string
-
-  /**
-   * 业务组ID
-   */
-  ProjectId: number
-
-  /**
-   * Cpu数量
-   */
-  CpuSize: number
-
-  /**
-   * Cpu使用率百分比
-   */
-  CpuLoad: string
-
-  /**
-      * 标签
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Tag: Array<MachineTag>
-
-  /**
-      * 数据更新时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  UpdateTime: string
-
-  /**
-   * 是否新增[0:否|1:是]
-   */
-  IsNew: number
-
-  /**
-   * 首次采集时间
-   */
-  FirstTime: string
+  HostIds?: Array<string>
 }
 
 /**
@@ -5926,19 +6038,9 @@ export interface DescribeVulCountByDatesResponse {
 }
 
 /**
- * DescribeMachineOsList返回参数结构体
+ * DescribeServersAndRiskAndFirstInfo请求参数结构体
  */
-export interface DescribeMachineOsListResponse {
-  /**
-   * 操作系统列表
-   */
-  List: Array<OsName>
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
+export type DescribeServersAndRiskAndFirstInfoRequest = null
 
 /**
  * DescribeIndexList请求参数结构体
@@ -8222,6 +8324,95 @@ export interface DescribeLogStorageStatisticResponse {
 }
 
 /**
+ * 基线检测项
+ */
+export interface BaselineItemDetect {
+  /**
+      * 项Id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ItemId: number
+
+  /**
+      * 项名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ItemName: string
+
+  /**
+      * 项描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ItemDesc: string
+
+  /**
+      * 修复方法
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FixMethod: string
+
+  /**
+      * 所属规则
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RuleName: string
+
+  /**
+      * 0:未通过 1:忽略 3:通过 5:检测中
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DetectStatus: number
+
+  /**
+      * 风险等级
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Level: number
+
+  /**
+      * 影响服务器数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  HostCount: number
+
+  /**
+      * 首次检测时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FirstTime: string
+
+  /**
+      * 最后检测时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LastTime: string
+
+  /**
+      * 检测结果,Json字符串
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DetectResult: string
+
+  /**
+      * 所属规则ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RuleId: number
+
+  /**
+      * 通过的服务器数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PassedHostCount: number
+
+  /**
+      * 未通过的服务器数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NotPassedHostCount: number
+}
+
+/**
  * DescribeEmergencyResponseList请求参数结构体
  */
 export interface DescribeEmergencyResponseListRequest {
@@ -8774,6 +8965,21 @@ export interface VulLevelInfo {
    * 数量
    */
   Count: number
+}
+
+/**
+ * StartBaselineDetect返回参数结构体
+ */
+export interface StartBaselineDetectResponse {
+  /**
+   * 扫描任务ID
+   */
+  TaskId: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -10041,62 +10247,24 @@ export interface DescribePrivilegeEventsRequest {
 }
 
 /**
- * 基线信息
+ * DescribeAssetEnvList返回参数结构体
  */
-export interface BaselineInfo {
+export interface DescribeAssetEnvListResponse {
   /**
-      * 基线名
+      * 列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Name: string
+  Envs: Array<AssetEnvBaseInfo>
 
   /**
-      * 危害等级：1-低危；2-中危；3-高危；4-严重
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Level: number
+   * 总数量
+   */
+  Total: number
 
   /**
-      * 检测项数量
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  RuleCount: number
-
-  /**
-      * 影响服务器数量
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  HostCount: number
-
-  /**
-      * 通过状态:0:未通过,1:已通过
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Status: number
-
-  /**
-      * 基线id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  CategoryId: number
-
-  /**
-      * 最后检测时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  LastScanTime: string
-
-  /**
-      * 检测中状态: 5
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  MaxStatus: number
-
-  /**
-      * 基线风险项
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  BaselineFailCount: number
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -11133,6 +11301,43 @@ export interface AssetCoreModuleDetail {
 }
 
 /**
+ * DescribeBaselineItemDetectList请求参数结构体
+ */
+export interface DescribeBaselineItemDetectListRequest {
+  /**
+      * <li>HostId - string - 是否必填：否 - 主机Id</li>
+<li>RuleId - int64 - 是否必填：否 - 规则Id</li>
+<li>PolicyId - int64 - 是否必填：否 - 规则Id</li>
+<li>ItemName - string - 是否必填：否 - 项名称</li>
+<li>DetectStatus - int - 是否必填：否 - 检测状态</li>
+<li>Level - int - 是否必填：否 - 风险等级</li>
+<li>StartTime - string - 是否必填：否 - 开时时间</li>
+<li>EndTime - string - 是否必填：否 - 结束时间</li>
+      */
+  Filters?: Array<Filter>
+
+  /**
+   * 限制条数,默认10,最大100
+   */
+  Limit?: number
+
+  /**
+   * 偏移量,默认0
+   */
+  Offset?: number
+
+  /**
+   * 排序方式: [ASC:升序|DESC:降序]
+   */
+  Order?: string
+
+  /**
+   * 可选排序列: [HostCount|FirstTime|LastTime]
+   */
+  By?: string
+}
+
+/**
  * DescribeBanStatus请求参数结构体
  */
 export type DescribeBanStatusRequest = null
@@ -11169,6 +11374,107 @@ export interface DescribeAssetRecentMachineInfoResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 基线项
+ */
+export interface BaselineItem {
+  /**
+   * 项Id
+   */
+  ItemId: number
+
+  /**
+   * 项名称
+   */
+  ItemName: string
+
+  /**
+   * 检测项分类
+   */
+  CategoryId: number
+
+  /**
+   * 项描述
+   */
+  ItemDesc: string
+
+  /**
+   * 修复方法
+   */
+  FixMethod: string
+
+  /**
+   * 所属规则
+   */
+  RuleName: string
+
+  /**
+      * 检测结果描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DetectResultDesc: string
+
+  /**
+      * 危险等级
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Level: number
+
+  /**
+      * 检测状态：0 未通过，1：忽略，3：通过，5：检测中
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DetectStatus: number
+
+  /**
+      * 主机ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  HostId: string
+
+  /**
+      * 主机名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  HostName: string
+
+  /**
+      * 主机IP
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  HostIp: string
+
+  /**
+      * 外网IP
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  WanIp: string
+
+  /**
+      * 第一次出现时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FirstTime: string
+
+  /**
+      * 最近出现时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LastTime: string
+
+  /**
+      * 是否可以修复
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CanBeFixed: number
+
+  /**
+      * 主机安全uuid
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Uuid: string
 }
 
 /**
@@ -12946,35 +13252,6 @@ export interface ModifyBanModeResponse {
 }
 
 /**
- * 基线检测项TOP信息
- */
-export interface BaselineRuleTopInfo {
-  /**
-      * 基线检测项名
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  RuleName: string
-
-  /**
-      * 检测项危害等级
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Level: number
-
-  /**
-      * 事件总数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  EventCount: number
-
-  /**
-      * 检测项id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  RuleId: number
-}
-
-/**
  * DeleteLicenseRecord返回参数结构体
  */
 export interface DeleteLicenseRecordResponse {
@@ -13163,6 +13440,46 @@ export interface DescribeAssetCoreModuleListResponse {
 }
 
 /**
+ * DescribeBaselineItemList请求参数结构体
+ */
+export interface DescribeBaselineItemListRequest {
+  /**
+      * <li>PolicyId - int64 - 是否必填：否 - 策略Id</li>
+<li>RuleId - int64 - 是否必填：否 - 规则Id</li>
+<li>HostId - string - 是否必填：否 - 主机Id</li>
+<li>HostName - string - 是否必填：否 - 主机名</li>
+<li>HostIp - string - 是否必填：否 - 主机IP</li>
+<li>ItemId - String - 是否必填：否 - 检测项Id</li>
+<li>ItemName - String - 是否必填：否 - 项名称</li>
+<li>DetectStatus - int - 是否必填：否 - 检测状态[0:未通过|3:通过|5:检测中]</li>
+<li>Level - int - 是否必填：否 - 风险等级</li>
+<li>StartTime - string - 是否必填：否 - 开时时间</li>
+<li>EndTime - string - 是否必填：否 - 结束时间</li>
+      */
+  Filters?: Array<Filter>
+
+  /**
+   * 限制条数,默认10,最大100
+   */
+  Limit?: number
+
+  /**
+   * 偏移量,默认0
+   */
+  Offset?: number
+
+  /**
+   * 排序方式: [ASC:升序|DESC:降序]
+   */
+  Order?: string
+
+  /**
+   * 可选排序列
+   */
+  By?: string
+}
+
+/**
  * DescribeLoginWhiteCombinedList返回参数结构体
  */
 export interface DescribeLoginWhiteCombinedListResponse {
@@ -13252,6 +13569,56 @@ export interface DescribeScanStateRequest {
 <li>StrategyId 基线策略ID ,仅ModuleType 为 Baseline 时需要<li/>
       */
   Filters?: Array<Filters>
+}
+
+/**
+ * SyncBaselineDetectSummary返回参数结构体
+ */
+export interface SyncBaselineDetectSummaryResponse {
+  /**
+   * 处理进度
+   */
+  ProgressRate: number
+
+  /**
+   * 未通过策略总数
+   */
+  NotPassPolicyCount: number
+
+  /**
+   * 主机总数
+   */
+  HostCount: number
+
+  /**
+   * 开始时间
+   */
+  StartTime: string
+
+  /**
+   * 结束时间
+   */
+  EndTime: string
+
+  /**
+   * 1:即将进行首次扫描   0:已经扫描过了
+   */
+  WillFirstScan: number
+
+  /**
+   * 正在检测的任务ID
+   */
+  DetectingTaskIds: Array<number>
+
+  /**
+   * 扫描中剩余时间(分钟)
+   */
+  LeftMins: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -13599,6 +13966,11 @@ export interface Place {
 }
 
 /**
+ * SyncBaselineDetectSummary请求参数结构体
+ */
+export type SyncBaselineDetectSummaryRequest = null
+
+/**
  * DescribeExpertServiceOrderList返回参数结构体
  */
 export interface DescribeExpertServiceOrderListResponse {
@@ -13734,6 +14106,26 @@ export interface DescribeProtectDirRelatedServerRequest {
    * 排序值
    */
   By?: string
+}
+
+/**
+ * DescribeBaselineItemList返回参数结构体
+ */
+export interface DescribeBaselineItemListResponse {
+  /**
+   * 无
+   */
+  List: Array<BaselineItem>
+
+  /**
+   * 总数
+   */
+  Total: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -15469,6 +15861,26 @@ export interface UpdateMachineTagsRequest {
    * 标签ID，该操作会覆盖原有的标签列表
    */
   TagIds?: Array<number>
+}
+
+/**
+ * DescribeBaselineItemDetectList返回参数结构体
+ */
+export interface DescribeBaselineItemDetectListResponse {
+  /**
+   * 总数
+   */
+  Total: number
+
+  /**
+   * 无
+   */
+  List: Array<BaselineItemDetect>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

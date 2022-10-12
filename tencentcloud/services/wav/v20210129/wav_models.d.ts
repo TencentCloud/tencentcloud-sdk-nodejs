@@ -1493,6 +1493,11 @@ export interface ClueInfoDetail {
       * 标签
       */
     TagList: Array<string>;
+    /**
+      * 客户姓名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UserName: string;
 }
 /**
  * QueryDealerInfoList请求参数结构体

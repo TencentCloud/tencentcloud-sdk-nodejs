@@ -12,11 +12,14 @@ const fetch_1 = require("./fetch");
  * @inner
  */
 class HttpConnection {
-    static async doRequest({ method, url, data, timeout, headers = {}, }) {
+    static async doRequest({ method, url, data, timeout, headers = {}, agent, proxy, signal }) {
         const config = {
             method: method,
             headers: Object.assign({}, headers),
             timeout,
+            agent,
+            proxy,
+            signal
         };
         if (method === "GET") {
             url += "?" + QueryString.stringify(data);
@@ -27,7 +30,7 @@ class HttpConnection {
         }
         return await fetch_1.default(url, config);
     }
-    static async doRequestWithSign3({ method, url, data, service, action, region, version, secretId, secretKey, multipart = false, timeout = 60000, token, requestClient, language, headers = {}, }) {
+    static async doRequestWithSign3({ method, url, data, service, action, region, version, secretId, secretKey, multipart = false, timeout = 60000, token, requestClient, language, headers = {}, agent, proxy, signal }) {
         // data 中可能带有 readStream，由于需要计算整个 body 的 hash，
         // 所以这里把 readStream 转为 Buffer
         // eslint-disable-next-line @typescript-eslint/no-use-before-define
@@ -57,6 +60,9 @@ class HttpConnection {
                 "X-TC-Token": token,
                 "X-TC-RequestClient": requestClient,
             }),
+            agent,
+            proxy,
+            signal
         };
         if (token === null) {
             delete config.headers["X-TC-Token"];

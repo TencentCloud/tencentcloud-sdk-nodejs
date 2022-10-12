@@ -1,4 +1,4 @@
-import { Agent } from 'http'
+import { Agent } from "http"
 /**
  * 初始化client对象参数类型
  */
@@ -68,7 +68,7 @@ export interface ClientProfile {
     headers?: Record<string, string>
     /**
      * 高级请求代理，例如 new HttpsProxyAgent("http://127.0.0.1:8899")
-     * 
+     *
      * 优先级高于 proxy 配置
      */
     agent?: Agent

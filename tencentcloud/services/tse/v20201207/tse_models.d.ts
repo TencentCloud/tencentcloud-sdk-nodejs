@@ -48,6 +48,23 @@ export interface DescribeNacosReplicasRequest {
     Offset?: number;
 }
 /**
+ * UpdateEngineInternetAccess请求参数结构体
+ */
+export interface UpdateEngineInternetAccessRequest {
+    /**
+      * 引擎ID
+      */
+    InstanceId: string;
+    /**
+      * 引擎类型
+      */
+    EngineType: string;
+    /**
+      * 是否开启客户端公网访问，true开 false关
+      */
+    EnableClientInternetAccess?: boolean;
+}
+/**
  * Apollo 环境配置参数
  */
 export interface ApolloEnvParam {
@@ -75,6 +92,15 @@ export interface ApolloEnvParam {
       * 子网 ID。在 VPC 的子网内分配一个 IP 作为 ConfigServer 的访问地址
       */
     SubnetId: string;
+}
+/**
+ * UpdateEngineInternetAccess返回参数结构体
+ */
+export interface UpdateEngineInternetAccessResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 键值对

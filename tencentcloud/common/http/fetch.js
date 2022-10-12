@@ -4,8 +4,9 @@ const node_fetch_1 = require("node-fetch");
 const HttpsProxyAgent = require("https-proxy-agent");
 function default_1(url, options) {
     const instanceOptions = options || {};
-    if (!options.agent && process.env.http_proxy) {
-        instanceOptions.agent = new HttpsProxyAgent(process.env.http_proxy);
+    const proxy = options.proxy || process.env.http_proxy;
+    if (!options.agent && proxy) {
+        instanceOptions.agent = new HttpsProxyAgent(proxy);
     }
     return node_fetch_1.default(url, instanceOptions);
 }

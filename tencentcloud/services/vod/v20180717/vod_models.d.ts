@@ -5097,6 +5097,13 @@ export interface VideoTemplateInfo {
 默认值：OFF。
       */
     PreserveHDRSwitch?: string;
+    /**
+      * 编码标签，仅当视频流的编码格式为 H.265 编码时有效，可选值：
+<li>hvc1 表示 hvc1 标签；</li>
+<li>hev1 表示 hev1 标签。 </li>
+默认值：hvc1。
+      */
+    CodecTag?: string;
 }
 /**
  * 文本鉴别涉及令人不适宜的信息的任务控制参数
@@ -11292,6 +11299,13 @@ export interface VideoTemplateInfoForUpdate {
 <li>OFF: 无论原始文件是 HDR 还是 SDR，转码输出均为 SDR。</li>
       */
     PreserveHDRSwitch?: string;
+    /**
+      * 编码标签，仅当视频流的编码格式为 H.265 编码时有效，可选值：
+<li>hvc1 表示 hvc1 标签；</li>
+<li>hev1 表示 hev1 标签。 </li>
+默认值：hvc1。
+      */
+    CodecTag?: string;
 }
 /**
  * CreateContentReviewTemplate请求参数结构体

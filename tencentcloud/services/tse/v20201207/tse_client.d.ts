@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeNacosReplicasRequest, DeleteEngineResponse, CreateEngineResponse, DescribeZookeeperReplicasRequest, DeleteEngineRequest, DescribeCloudNativeAPIGatewayNodesRequest, DescribeNacosServerInterfacesRequest, DescribeSREInstanceAccessAddressResponse, DescribeSREInstancesResponse, DescribeNacosReplicasResponse, DescribeZookeeperServerInterfacesResponse, DescribeSREInstancesRequest, DescribeCloudNativeAPIGatewayNodesResponse, DescribeZookeeperReplicasResponse, CreateEngineRequest, DescribeSREInstanceAccessAddressRequest, DescribeNacosServerInterfacesResponse, DescribeZookeeperServerInterfacesRequest } from "./tse_models";
+import { DescribeNacosReplicasRequest, UpdateEngineInternetAccessRequest, UpdateEngineInternetAccessResponse, DeleteEngineResponse, CreateEngineResponse, DescribeZookeeperReplicasRequest, DeleteEngineRequest, DescribeCloudNativeAPIGatewayNodesRequest, DescribeNacosServerInterfacesRequest, DescribeSREInstanceAccessAddressResponse, DescribeSREInstancesResponse, DescribeNacosReplicasResponse, DescribeZookeeperServerInterfacesResponse, DescribeSREInstancesRequest, DescribeCloudNativeAPIGatewayNodesResponse, DescribeZookeeperReplicasResponse, CreateEngineRequest, DescribeSREInstanceAccessAddressRequest, DescribeNacosServerInterfacesResponse, DescribeZookeeperServerInterfacesRequest } from "./tse_models";
 /**
  * tse client
  * @class
@@ -31,6 +31,10 @@ export declare class Client extends AbstractClient {
      * 查询zookeeper服务接口列表
      */
     DescribeZookeeperServerInterfaces(req: DescribeZookeeperServerInterfacesRequest, cb?: (error: string, rep: DescribeZookeeperServerInterfacesResponse) => void): Promise<DescribeZookeeperServerInterfacesResponse>;
+    /**
+     * 修改引擎公网访问配置
+     */
+    UpdateEngineInternetAccess(req: UpdateEngineInternetAccessRequest, cb?: (error: string, rep: UpdateEngineInternetAccessResponse) => void): Promise<UpdateEngineInternetAccessResponse>;
     /**
      * 创建引擎实例
      */

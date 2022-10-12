@@ -44,11 +44,11 @@ import {
   DescribeDBSlowLogsRequest,
   CreateAccountRequest,
   InitDBInstancesResponse,
-  DescribeLogFileRetentionPeriodRequest,
+  DescribeDBParametersResponse,
   IsolateHourDBInstanceRequest,
   ResourceUsageMonitorSet,
   ModifyLogFileRetentionPeriodRequest,
-  PerformanceMonitorSet,
+  DescribeLogFileRetentionPeriodRequest,
   DescribeFlowResponse,
   CloneAccountResponse,
   ZoneChooseInfo,
@@ -81,9 +81,7 @@ import {
   TablePrivilege,
   DescribeProjectSecurityGroupsResponse,
   DatabaseFunction,
-  DescribeSqlLogsRequest,
   ResetAccountPasswordResponse,
-  DescribeDBInstanceSpecsRequest,
   DescribePriceRequest,
   CreateDBInstanceResponse,
   ModifyRealServerAccessStrategyRequest,
@@ -93,7 +91,7 @@ import {
   DestroyDBInstanceRequest,
   DatabaseTable,
   Deal,
-  DescribeDBPerformanceDetailsRequest,
+  GrantAccountPrivilegesRequest,
   CreateDedicatedClusterDBInstanceRequest,
   SwitchDBInstanceHARequest,
   DBParamValue,
@@ -135,7 +133,6 @@ import {
   FunctionPrivilege,
   ModifyAccountDescriptionRequest,
   KillSessionResponse,
-  GrantAccountPrivilegesRequest,
   DescribeBackupTimeResponse,
   ActivateHourDBInstanceRequest,
   RenewDBInstanceResponse,
@@ -146,12 +143,10 @@ import {
   DescribeDBLogFilesResponse,
   CloseDBExtranetAccessRequest,
   ResourceTag,
-  DescribeSqlLogsResponse,
   DescribeDcnDetailResponse,
   InstanceSpec,
   DescribeFlowRequest,
   ModifyAccountPrivilegesRequest,
-  DescribeDBPerformanceResponse,
   DatabaseProcedure,
   ModifyDBSyncModeRequest,
   ActivateHourDBInstanceResponse,
@@ -171,12 +166,10 @@ import {
   CreateHourDBInstanceRequest,
   DescribeDatabaseTableResponse,
   DescribeAccountPrivilegesRequest,
-  DescribeDBPerformanceDetailsResponse,
-  SqlLogItem,
   DescribeAccountsResponse,
   DescribeDBSlowLogsResponse,
   UpgradeDBInstanceResponse,
-  DescribeDBParametersResponse,
+  DescribeDBInstanceSpecsRequest,
   ModifyDBInstancesProjectRequest,
   FlushBinlogRequest,
   DestroyDBInstanceResponse,
@@ -184,7 +177,6 @@ import {
   DescribeInstanceNodeInfoResponse,
   ModifyLogFileRetentionPeriodResponse,
   DisassociateSecurityGroupsResponse,
-  DescribeDBPerformanceRequest,
   DeleteAccountResponse,
 } from "./mariadb_models"
 
@@ -246,16 +238,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDatabaseObjectsResponse) => void
   ): Promise<DescribeDatabaseObjectsResponse> {
     return this.request("DescribeDatabaseObjects", req, cb)
-  }
-
-  /**
-   * 本接口（KillSession）用于杀死指定会话。
-   */
-  async KillSession(
-    req: KillSessionRequest,
-    cb?: (error: string, rep: KillSessionResponse) => void
-  ): Promise<KillSessionResponse> {
-    return this.request("KillSession", req, cb)
   }
 
   /**
@@ -371,23 +353,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeSqlLogs）用于获取实例SQL日志。
+   * 本接口(ModifyLogFileRetentionPeriod)用于修改数据库备份日志保存天数。
    */
-  async DescribeSqlLogs(
-    req: DescribeSqlLogsRequest,
-    cb?: (error: string, rep: DescribeSqlLogsResponse) => void
-  ): Promise<DescribeSqlLogsResponse> {
-    return this.request("DescribeSqlLogs", req, cb)
+  async ModifyLogFileRetentionPeriod(
+    req: ModifyLogFileRetentionPeriodRequest,
+    cb?: (error: string, rep: ModifyLogFileRetentionPeriodResponse) => void
+  ): Promise<ModifyLogFileRetentionPeriodResponse> {
+    return this.request("ModifyLogFileRetentionPeriod", req, cb)
   }
 
   /**
-   * 本接口(DescribeDBPerformanceDetails)用于查看实例性能数据详情。
+   * 本接口(DescribeDBSlowLogs)用于查询慢查询日志列表。
    */
-  async DescribeDBPerformanceDetails(
-    req: DescribeDBPerformanceDetailsRequest,
-    cb?: (error: string, rep: DescribeDBPerformanceDetailsResponse) => void
-  ): Promise<DescribeDBPerformanceDetailsResponse> {
-    return this.request("DescribeDBPerformanceDetails", req, cb)
+  async DescribeDBSlowLogs(
+    req: DescribeDBSlowLogsRequest,
+    cb?: (error: string, rep: DescribeDBSlowLogsResponse) => void
+  ): Promise<DescribeDBSlowLogsResponse> {
+    return this.request("DescribeDBSlowLogs", req, cb)
   }
 
   /**
@@ -471,13 +453,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(DescribeDBSlowLogs)用于查询慢查询日志列表。
+   * 本接口（KillSession）用于杀死指定会话。
    */
-  async DescribeDBSlowLogs(
-    req: DescribeDBSlowLogsRequest,
-    cb?: (error: string, rep: DescribeDBSlowLogsResponse) => void
-  ): Promise<DescribeDBSlowLogsResponse> {
-    return this.request("DescribeDBSlowLogs", req, cb)
+  async KillSession(
+    req: KillSessionRequest,
+    cb?: (error: string, rep: KillSessionResponse) => void
+  ): Promise<KillSessionResponse> {
+    return this.request("KillSession", req, cb)
   }
 
   /**
@@ -814,16 +796,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(DescribeDBPerformance)用于查看数据库实例当前性能数据。
-   */
-  async DescribeDBPerformance(
-    req: DescribeDBPerformanceRequest,
-    cb?: (error: string, rep: DescribeDBPerformanceResponse) => void
-  ): Promise<DescribeDBPerformanceResponse> {
-    return this.request("DescribeDBPerformance", req, cb)
-  }
-
-  /**
    * 本接口(DescribeLogFileRetentionPeriod)用于查看数据库备份日志的备份天数的设置情况。
    */
   async DescribeLogFileRetentionPeriod(
@@ -851,15 +823,5 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DisassociateSecurityGroupsResponse) => void
   ): Promise<DisassociateSecurityGroupsResponse> {
     return this.request("DisassociateSecurityGroups", req, cb)
-  }
-
-  /**
-   * 本接口(ModifyLogFileRetentionPeriod)用于修改数据库备份日志保存天数。
-   */
-  async ModifyLogFileRetentionPeriod(
-    req: ModifyLogFileRetentionPeriodRequest,
-    cb?: (error: string, rep: ModifyLogFileRetentionPeriodResponse) => void
-  ): Promise<ModifyLogFileRetentionPeriodResponse> {
-    return this.request("ModifyLogFileRetentionPeriod", req, cb)
   }
 }

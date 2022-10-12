@@ -64,6 +64,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeZookeeperServerInterfaces", req, cb);
     }
     /**
+     * 修改引擎公网访问配置
+     */
+    async UpdateEngineInternetAccess(req, cb) {
+        return this.request("UpdateEngineInternetAccess", req, cb);
+    }
+    /**
      * 创建引擎实例
      */
     async CreateEngine(req, cb) {

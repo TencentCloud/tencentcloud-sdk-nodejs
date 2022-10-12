@@ -857,6 +857,32 @@ export interface ModifyTaskLinksResponse {
 }
 
 /**
+ * DescribeDatasource返回参数结构体
+ */
+export interface DescribeDatasourceResponse {
+  /**
+      * 数据源对象
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Data: DataSourceInfo
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeDatasource请求参数结构体
+ */
+export interface DescribeDatasourceRequest {
+  /**
+   * 对象唯一ID
+   */
+  Id: number
+}
+
+/**
  * 集成节点映射
  */
 export interface IntegrationNodeMapping {
@@ -887,38 +913,6 @@ export interface IntegrationNodeMapping {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ExtConfig?: Array<RecordField>
-}
-
-/**
- * 集成节点schema
- */
-export interface IntegrationNodeSchema {
-  /**
-   * schema id
-   */
-  Id: string
-
-  /**
-   * schema名称
-   */
-  Name: string
-
-  /**
-   * schema类型
-   */
-  Type: string
-
-  /**
-      * schema值
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Value?: string
-
-  /**
-      * schema拓展属性
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Properties?: Array<RecordField>
 }
 
 /**
@@ -2092,13 +2086,35 @@ export interface CanvasInfo {
 }
 
 /**
- * DescribeDatasource请求参数结构体
+ * 集成节点schema
  */
-export interface DescribeDatasourceRequest {
+export interface IntegrationNodeSchema {
   /**
-   * 对象唯一ID
+   * schema id
    */
-  Id: number
+  Id: string
+
+  /**
+   * schema名称
+   */
+  Name: string
+
+  /**
+   * schema类型
+   */
+  Type: string
+
+  /**
+      * schema值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Value?: string
+
+  /**
+      * schema拓展属性
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Properties?: Array<RecordField>
 }
 
 /**
@@ -3140,6 +3156,28 @@ export interface ModifyDataSourceRequest {
 }
 
 /**
+ * CreateCustomFunction返回参数结构体
+ */
+export interface CreateCustomFunctionResponse {
+  /**
+      * 函数唯一标识
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FunctionId: string
+
+  /**
+      * 无
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ErrorMessage: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeTaskInstances返回参数结构体
  */
 export interface DescribeTaskInstancesResponse {
@@ -3535,19 +3573,38 @@ export interface CreateWorkflowResponse {
 }
 
 /**
- * DescribeDatasource返回参数结构体
+ * CreateCustomFunction请求参数结构体
  */
-export interface DescribeDatasourceResponse {
+export interface CreateCustomFunctionRequest {
   /**
-      * 数据源对象
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Data: DataSourceInfo
+   * 类型：HIVE、SPARK
+   */
+  Type: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 分类：窗口函数、聚合函数、日期函数......
    */
-  RequestId?: string
+  Kind: string
+
+  /**
+   * 函数名称
+   */
+  Name: string
+
+  /**
+   * 集群实例引擎 ID
+   */
+  ClusterIdentifier: string
+
+  /**
+   * 数据库名称
+   */
+  DbName?: string
+
+  /**
+   * 项目ID
+   */
+  ProjectId?: string
 }
 
 /**

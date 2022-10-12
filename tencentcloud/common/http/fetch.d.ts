@@ -1,2 +1,7 @@
 import { RequestInit, Response } from "node-fetch";
-export default function (url: string, options: RequestInit): Promise<Response>;
+export interface FetchOptions extends Omit<RequestInit, 'signal'> {
+    proxy?: string;
+    headers: Record<string, string>;
+    signal: AbortSignal;
+}
+export default function (url: string, options: FetchOptions): Promise<Response>;

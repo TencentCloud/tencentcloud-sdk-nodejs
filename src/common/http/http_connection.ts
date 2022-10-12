@@ -19,7 +19,7 @@ export class HttpConnection {
     headers = {},
     agent,
     proxy,
-    signal
+    signal,
   }: {
     method: string
     url: string
@@ -36,7 +36,7 @@ export class HttpConnection {
       timeout,
       agent,
       proxy,
-      signal
+      signal,
     }
     if (method === "GET") {
       url += "?" + QueryString.stringify(data)
@@ -65,7 +65,7 @@ export class HttpConnection {
     headers = {},
     agent,
     proxy,
-    signal
+    signal,
   }: {
     method: string
     url: string
@@ -120,7 +120,7 @@ export class HttpConnection {
       }),
       agent,
       proxy,
-      signal
+      signal,
     }
 
     if (token === null) {

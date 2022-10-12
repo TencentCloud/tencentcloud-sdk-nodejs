@@ -1,3 +1,5 @@
+/// <reference types="node" />
+import { Agent } from 'http';
 /**
  * 初始化client对象参数类型
  */
@@ -64,6 +66,16 @@ export interface ClientProfile {
          * 非必选
          */
         headers?: Record<string, string>;
+        /**
+         * 高级请求代理，例如 new HttpsProxyAgent("http://127.0.0.1:8899")
+         *
+         * 优先级高于 proxy 配置
+         */
+        agent?: Agent;
+        /**
+         * http请求代理，例如 "http://127.0.0.1:8899"
+         */
+        proxy?: string;
     };
     /**
      * api请求时附带的 language 字段

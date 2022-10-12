@@ -39,8 +39,9 @@ import {
   TaskInnerInfo,
   BatchDeleteTasksNewResponse,
   ModifyTaskLinksResponse,
+  DescribeDatasourceResponse,
+  DescribeDatasourceRequest,
   IntegrationNodeMapping,
-  IntegrationNodeSchema,
   KillInstancesResponse,
   SetTaskAlarmNewRequest,
   CommonContent,
@@ -88,7 +89,7 @@ import {
   BatchModifyOwnersNewResponse,
   DescribeDataSourceWithoutInfoRequest,
   CanvasInfo,
-  DescribeDatasourceRequest,
+  IntegrationNodeSchema,
   DeleteWorkflowNewRequest,
   FreezeTasksByMultiWorkflowRequest,
   InstanceInfo,
@@ -121,13 +122,14 @@ import {
   CreateTaskResponse,
   BatchResult,
   ModifyDataSourceRequest,
+  CreateCustomFunctionResponse,
   DescribeTaskInstancesResponse,
   ModifyTaskInfoRequest,
   DataSourceInfo,
   DescribeTaskDetailRequest,
   SetTaskAlarmNewResponse,
   CreateWorkflowResponse,
-  DescribeDatasourceResponse,
+  CreateCustomFunctionRequest,
   DeleteDataSourcesResponse,
   RegisterEventListenerRequest,
   ModifyTaskLinksRequest,
@@ -473,6 +475,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyTaskLinksResponse) => void
   ): Promise<ModifyTaskLinksResponse> {
     return this.request("ModifyTaskLinks", req, cb)
+  }
+
+  /**
+   *  创建用户自定义函数
+   */
+  async CreateCustomFunction(
+    req: CreateCustomFunctionRequest,
+    cb?: (error: string, rep: CreateCustomFunctionResponse) => void
+  ): Promise<CreateCustomFunctionResponse> {
+    return this.request("CreateCustomFunction", req, cb)
   }
 
   /**

@@ -556,13 +556,21 @@ export interface InitDBInstancesResponse {
     RequestId?: string;
 }
 /**
- * DescribeLogFileRetentionPeriod请求参数结构体
+ * DescribeDBParameters返回参数结构体
  */
-export interface DescribeLogFileRetentionPeriodRequest {
+export interface DescribeDBParametersResponse {
     /**
       * 实例 ID，形如：tdsql-ow728lmc。
       */
     InstanceId: string;
+    /**
+      * 请求DB的当前参数值
+      */
+    Params: Array<ParamDesc>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * IsolateHourDBInstance请求参数结构体
@@ -608,49 +616,13 @@ export interface ModifyLogFileRetentionPeriodRequest {
     Days: number;
 }
 /**
- * DB性能监控指标集合
+ * DescribeLogFileRetentionPeriod请求参数结构体
  */
-export interface PerformanceMonitorSet {
+export interface DescribeLogFileRetentionPeriodRequest {
     /**
-      * 更新操作数UPDATE
+      * 实例 ID，形如：tdsql-ow728lmc。
       */
-    UpdateTotal: MonitorData;
-    /**
-      * 磁盘每秒IO次数
-      */
-    DiskIops: MonitorData;
-    /**
-      * 活跃连接数
-      */
-    ConnActive: MonitorData;
-    /**
-      * 缓存命中率
-      */
-    MemHitRate: MonitorData;
-    /**
-      * 主备延迟
-      */
-    SlaveDelay: MonitorData;
-    /**
-      * 查询操作数SELECT
-      */
-    SelectTotal: MonitorData;
-    /**
-      * 慢查询数
-      */
-    LongQuery: MonitorData;
-    /**
-      * 删除操作数DELETE
-      */
-    DeleteTotal: MonitorData;
-    /**
-      * 插入操作数INSERT
-      */
-    InsertTotal: MonitorData;
-    /**
-      * 是否发生主备切换，1为发生，0否
-      */
-    IsMasterSwitched: MonitorData;
+    InstanceId: string;
 }
 /**
  * DescribeFlow返回参数结构体
@@ -1290,23 +1262,6 @@ export interface DatabaseFunction {
     Func: string;
 }
 /**
- * DescribeSqlLogs请求参数结构体
- */
-export interface DescribeSqlLogsRequest {
-    /**
-      * 实例 ID，形如：tdsql-ow728lmc，可以通过 DescribeDBInstances 查询实例详情获得。
-      */
-    InstanceId: string;
-    /**
-      * SQL日志偏移。
-      */
-    Offset?: number;
-    /**
-      * 拉取数量（0-10000，为0时拉取总数信息）。
-      */
-    Limit?: number;
-}
-/**
  * ResetAccountPassword返回参数结构体
  */
 export interface ResetAccountPasswordResponse {
@@ -1315,10 +1270,6 @@ export interface ResetAccountPasswordResponse {
       */
     RequestId?: string;
 }
-/**
- * DescribeDBInstanceSpecs请求参数结构体
- */
-export declare type DescribeDBInstanceSpecsRequest = null;
 /**
  * DescribePrice请求参数结构体
  */
@@ -1471,25 +1422,45 @@ export interface Deal {
     PayMode: number;
 }
 /**
- * DescribeDBPerformanceDetails请求参数结构体
+ * GrantAccountPrivileges请求参数结构体
  */
-export interface DescribeDBPerformanceDetailsRequest {
+export interface GrantAccountPrivilegesRequest {
     /**
-      * 实例 ID，形如：tdsql-ow728lmc。
+      * 实例 ID，形如：tdsql-ow728lmc，可以通过 DescribeDBInstances 查询实例详情获得。
       */
     InstanceId: string;
     /**
-      * 开始日期，格式yyyy-mm-dd
+      * 登录用户名。
       */
-    StartTime: string;
+    UserName: string;
     /**
-      * 结束日期，格式yyyy-mm-dd
+      * 用户允许的访问 host，用户名+host唯一确定一个账号。
       */
-    EndTime: string;
+    Host: string;
     /**
-      * 拉取的指标名，支持的值为：long_query,select_total,update_total,insert_total,delete_total,mem_hit_rate,disk_iops,conn_active,is_master_switched,slave_delay
+      * 数据库名。如果为 \*，表示设置全局权限（即 \*.\*），此时忽略 Type 和 Object 参数。当DbName不为\*时，需要传入参 Type。
       */
-    MetricName?: string;
+    DbName: string;
+    /**
+      * 全局权限： SELECT，INSERT，UPDATE，DELETE，CREATE，DROP，REFERENCES，INDEX，ALTER，CREATE TEMPORARY TABLES，LOCK TABLES，EXECUTE，CREATE VIEW，SHOW VIEW，CREATE ROUTINE，ALTER ROUTINE，EVENT，TRIGGER，SHOW DATABASES，REPLICATION CLIENT，REPLICATION SLAVE
+库权限： SELECT，INSERT，UPDATE，DELETE，CREATE，DROP，REFERENCES，INDEX，ALTER，CREATE TEMPORARY TABLES，LOCK TABLES，EXECUTE，CREATE VIEW，SHOW VIEW，CREATE ROUTINE，ALTER ROUTINE，EVENT，TRIGGER
+表/视图权限： SELECT，INSERT，UPDATE，DELETE，CREATE，DROP，REFERENCES，INDEX，ALTER，CREATE VIEW，SHOW VIEW，TRIGGER
+存储过程/函数权限： ALTER ROUTINE，EXECUTE
+字段权限： INSERT，REFERENCES，SELECT，UPDATE
+      */
+    Privileges: Array<string>;
+    /**
+      * 类型,可以填入 table 、 view 、 proc 、 func 和 \*。当 DbName 为具体数据库名，Type为 \* 时，表示设置该数据库权限（即db.\*），此时忽略 Object 参数
+      */
+    Type?: string;
+    /**
+      * 具体的 Type 的名称，例如 Type 为 table 时就是具体的表名。DbName 和 Type 都为具体名称，则 Object 表示具体对象名，不能为 \* 或者为空
+      */
+    Object?: string;
+    /**
+      * 当 Type=table 时，ColName 为 \* 表示对表授权，如果为具体字段名，表示对字段授权
+      */
+    ColName?: string;
 }
 /**
  * CreateDedicatedClusterDBInstance请求参数结构体
@@ -2471,47 +2442,6 @@ export interface KillSessionResponse {
     RequestId?: string;
 }
 /**
- * GrantAccountPrivileges请求参数结构体
- */
-export interface GrantAccountPrivilegesRequest {
-    /**
-      * 实例 ID，形如：tdsql-ow728lmc，可以通过 DescribeDBInstances 查询实例详情获得。
-      */
-    InstanceId: string;
-    /**
-      * 登录用户名。
-      */
-    UserName: string;
-    /**
-      * 用户允许的访问 host，用户名+host唯一确定一个账号。
-      */
-    Host: string;
-    /**
-      * 数据库名。如果为 \*，表示设置全局权限（即 \*.\*），此时忽略 Type 和 Object 参数。当DbName不为\*时，需要传入参 Type。
-      */
-    DbName: string;
-    /**
-      * 全局权限： SELECT，INSERT，UPDATE，DELETE，CREATE，DROP，REFERENCES，INDEX，ALTER，CREATE TEMPORARY TABLES，LOCK TABLES，EXECUTE，CREATE VIEW，SHOW VIEW，CREATE ROUTINE，ALTER ROUTINE，EVENT，TRIGGER，SHOW DATABASES，REPLICATION CLIENT，REPLICATION SLAVE
-库权限： SELECT，INSERT，UPDATE，DELETE，CREATE，DROP，REFERENCES，INDEX，ALTER，CREATE TEMPORARY TABLES，LOCK TABLES，EXECUTE，CREATE VIEW，SHOW VIEW，CREATE ROUTINE，ALTER ROUTINE，EVENT，TRIGGER
-表/视图权限： SELECT，INSERT，UPDATE，DELETE，CREATE，DROP，REFERENCES，INDEX，ALTER，CREATE VIEW，SHOW VIEW，TRIGGER
-存储过程/函数权限： ALTER ROUTINE，EXECUTE
-字段权限： INSERT，REFERENCES，SELECT，UPDATE
-      */
-    Privileges: Array<string>;
-    /**
-      * 类型,可以填入 table 、 view 、 proc 、 func 和 \*。当 DbName 为具体数据库名，Type为 \* 时，表示设置该数据库权限（即db.\*），此时忽略 Object 参数
-      */
-    Type?: string;
-    /**
-      * 具体的 Type 的名称，例如 Type 为 table 时就是具体的表名。DbName 和 Type 都为具体名称，则 Object 表示具体对象名，不能为 \* 或者为空
-      */
-    Object?: string;
-    /**
-      * 当 Type=table 时，ColName 为 \* 表示对表授权，如果为具体字段名，表示对字段授权
-      */
-    ColName?: string;
-}
-/**
  * DescribeBackupTime返回参数结构体
  */
 export interface DescribeBackupTimeResponse {
@@ -2672,39 +2602,6 @@ export interface ResourceTag {
     TagValue: string;
 }
 /**
- * DescribeSqlLogs返回参数结构体
- */
-export interface DescribeSqlLogsResponse {
-    /**
-      * 当前消息队列中的sql日志条目数。
-      */
-    TotalCount: number;
-    /**
-      * 消息队列中的sql日志起始偏移。
-      */
-    StartOffset: number;
-    /**
-      * 消息队列中的sql日志结束偏移。
-      */
-    EndOffset: number;
-    /**
-      * 返回的第一条sql日志的偏移。
-      */
-    Offset: number;
-    /**
-      * 返回的sql日志数量。
-      */
-    Count: number;
-    /**
-      * Sql日志列表。
-      */
-    SqlItems: Array<SqlLogItem>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
  * DescribeDcnDetail返回参数结构体
  */
 export interface DescribeDcnDetailResponse {
@@ -2786,55 +2683,6 @@ export interface ModifyAccountPrivilegesRequest {
 注意，不传该参数表示保留现有权限，如需清除，请在复杂类型Privileges字段传空数组。
       */
     ProcedurePrivileges?: Array<ProcedurePrivilege>;
-}
-/**
- * DescribeDBPerformance返回参数结构体
- */
-export interface DescribeDBPerformanceResponse {
-    /**
-      * 慢查询数
-      */
-    LongQuery: MonitorData;
-    /**
-      * 查询操作数SELECT
-      */
-    SelectTotal: MonitorData;
-    /**
-      * 更新操作数UPDATE
-      */
-    UpdateTotal: MonitorData;
-    /**
-      * 插入操作数INSERT
-      */
-    InsertTotal: MonitorData;
-    /**
-      * 删除操作数DELETE
-      */
-    DeleteTotal: MonitorData;
-    /**
-      * 缓存命中率
-      */
-    MemHitRate: MonitorData;
-    /**
-      * 磁盘每秒IO次数
-      */
-    DiskIops: MonitorData;
-    /**
-      * 活跃连接数
-      */
-    ConnActive: MonitorData;
-    /**
-      * 是否发生主备切换，1为发生，0否
-      */
-    IsMasterSwitched: MonitorData;
-    /**
-      * 主备延迟
-      */
-    SlaveDelay: MonitorData;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
 }
 /**
  * 数据库存储过程信息
@@ -3287,74 +3135,6 @@ export interface DescribeAccountPrivilegesRequest {
     ColName?: string;
 }
 /**
- * DescribeDBPerformanceDetails返回参数结构体
- */
-export interface DescribeDBPerformanceDetailsResponse {
-    /**
-      * 主节点性能监控数据
-      */
-    Master: PerformanceMonitorSet;
-    /**
-      * 备机1性能监控数据
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Slave1: PerformanceMonitorSet;
-    /**
-      * 备机2性能监控数据，如果实例是一主一从，则没有该字段
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Slave2: PerformanceMonitorSet;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * 描述一条sql日志的详细信息。
- */
-export interface SqlLogItem {
-    /**
-      * 本条日志在消息队列中的偏移量。
-      */
-    Offset: number;
-    /**
-      * 执行本条sql的用户。
-      */
-    User: string;
-    /**
-      * 执行本条sql的客户端IP+端口。
-      */
-    Client: string;
-    /**
-      * 数据库名称。
-      */
-    DbName: string;
-    /**
-      * 执行的sql语句。
-      */
-    Sql: string;
-    /**
-      * 返回的数据行数。
-      */
-    SelectRowNum: number;
-    /**
-      * 影响行数。
-      */
-    AffectRowNum: number;
-    /**
-      * Sql执行时间戳。
-      */
-    Timestamp: number;
-    /**
-      * Sql耗时，单位为毫秒。
-      */
-    TimeCostMs: number;
-    /**
-      * Sql返回码，0为成功。
-      */
-    ResultCode: number;
-}
-/**
  * DescribeAccounts返回参数结构体
  */
 export interface DescribeAccountsResponse {
@@ -3415,22 +3195,9 @@ export interface UpgradeDBInstanceResponse {
     RequestId?: string;
 }
 /**
- * DescribeDBParameters返回参数结构体
+ * DescribeDBInstanceSpecs请求参数结构体
  */
-export interface DescribeDBParametersResponse {
-    /**
-      * 实例 ID，形如：tdsql-ow728lmc。
-      */
-    InstanceId: string;
-    /**
-      * 请求DB的当前参数值
-      */
-    Params: Array<ParamDesc>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
+export declare type DescribeDBInstanceSpecsRequest = null;
 /**
  * ModifyDBInstancesProject请求参数结构体
  */
@@ -3521,27 +3288,6 @@ export interface DisassociateSecurityGroupsResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
-}
-/**
- * DescribeDBPerformance请求参数结构体
- */
-export interface DescribeDBPerformanceRequest {
-    /**
-      * 实例 ID，形如：tdsql-ow728lmc。
-      */
-    InstanceId: string;
-    /**
-      * 开始日期，格式yyyy-mm-dd
-      */
-    StartTime: string;
-    /**
-      * 结束日期，格式yyyy-mm-dd
-      */
-    EndTime: string;
-    /**
-      * 拉取的指标名，支持的值为：long_query,select_total,update_total,insert_total,delete_total,mem_hit_rate,disk_iops,conn_active,is_master_switched,slave_delay
-      */
-    MetricName?: string;
 }
 /**
  * DeleteAccount返回参数结构体

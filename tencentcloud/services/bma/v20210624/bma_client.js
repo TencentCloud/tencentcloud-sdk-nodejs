@@ -40,13 +40,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBPCompanyInfo", req, cb);
     }
     /**
-     * 品牌经营管家-版权保护个人认证接口
+     * 本接口用于个人认证，新接入用户必须认证后才可以进行后续操作（个人认证和企业认证二选一），只需认证一次即可
      */
     async CreateCRUserVerify(req, cb) {
         return this.request("CreateCRUserVerify", req, cb);
     }
     /**
-     * 版权保护-添加作品接口
+     * 新建作品
      */
     async CreateCRWork(req, cb) {
         return this.request("CreateCRWork", req, cb);
@@ -58,13 +58,14 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateBPOfflineTicket", req, cb);
     }
     /**
-     * 版权保护-新建拦截接口
+     * 新建拦截
+
      */
     async CreateCRBlock(req, cb) {
         return this.request("CreateCRBlock", req, cb);
     }
     /**
-     * 申请取证
+     * 取证申请
      */
     async ModifyCRObtainStatus(req, cb) {
         return this.request("ModifyCRObtainStatus", req, cb);
@@ -82,7 +83,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyBPOfflineAttachment", req, cb);
     }
     /**
-     * 版权保护-修改监测状态接口
+     * 开启/关闭监测
      */
     async ModifyCRMonitor(req, cb) {
         return this.request("ModifyCRMonitor", req, cb);
@@ -100,19 +101,19 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateBPFakeURL", req, cb);
     }
     /**
-     * 新增权属文件
+     * 权属文件添加
      */
     async CreateCRRightFile(req, cb) {
         return this.request("CreateCRRightFile", req, cb);
     }
     /**
-     * 版权保护-白名单修改接口
+     * 修改白名单列表
      */
     async ModifyCRWhiteList(req, cb) {
         return this.request("ModifyCRWhiteList", req, cb);
     }
     /**
-     * 版权保护-拦截申请接口
+     * 拦截申请
      */
     async ModifyCRBlockStatus(req, cb) {
         return this.request("ModifyCRBlockStatus", req, cb);
@@ -154,7 +155,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCRMonitors", req, cb);
     }
     /**
-     * 版权保护-维权申请接口
+     * 发函申请
      */
     async ModifyCRRightStatus(req, cb) {
         return this.request("ModifyCRRightStatus", req, cb);
@@ -178,7 +179,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateCRTort", req, cb);
     }
     /**
-     * 品牌经营管家-版权保护模块企业认证接口
+     * 本接口用于企业认证，新接入用户必须认证后才可以进行后续操作（个人认证和企业认证二选一），只需认证一次即可
      */
     async CreateCRCompanyVerify(req, cb) {
         return this.request("CreateCRCompanyVerify", req, cb);

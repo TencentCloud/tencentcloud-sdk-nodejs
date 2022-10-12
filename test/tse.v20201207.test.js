@@ -78,6 +78,16 @@ it("tse.v20201207.DescribeZookeeperServerInterfaces", async function () {
     }
 })
 
+it("tse.v20201207.UpdateEngineInternetAccess", async function () {
+    try {
+       const data = await client.UpdateEngineInternetAccess({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tse.v20201207.CreateEngine", async function () {
     try {
        const data = await client.CreateEngine({})

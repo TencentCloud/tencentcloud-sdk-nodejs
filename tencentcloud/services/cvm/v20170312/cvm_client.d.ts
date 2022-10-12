@@ -183,7 +183,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeInstancesOperationLimit(req: DescribeInstancesOperationLimitRequest, cb?: (error: string, rep: DescribeInstancesOperationLimitResponse) => void): Promise<DescribeInstancesOperationLimitResponse>;
     /**
-     * 本接口(DescribeRegions)用于查询地域信息。因平台策略原因，该接口暂时停止更新，为确保您正常调用，可切换至新链接：https://cloud.tencent.com/document/product/1278/55255。
+     * 本接口(DescribeRegions)用于查询地域信息。因平台策略原因，该接口暂时停止更新，为确保您正常调用，可切换至新链接：https://cloud.tencent.com/document/product/1596/77929。
      */
     DescribeRegions(req?: DescribeRegionsRequest, cb?: (error: string, rep: DescribeRegionsResponse) => void): Promise<DescribeRegionsResponse>;
     /**

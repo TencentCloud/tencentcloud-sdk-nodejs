@@ -55,37 +55,37 @@ export interface ProtectURLInfo {
  */
 export interface ModifyCRWhiteListRequest {
   /**
-   * 白名单ID
+   * 该字段已废弃，白名单ID
    */
   WhiteListId?: number
 
   /**
-   * 平台名称
+   * 该字段已废弃，平台名称
    */
   PlatForm?: string
 
   /**
-   * 平台站点链接
+   * 该字段已废弃，平台站点链接
    */
   PlatUrl?: string
 
   /**
-   * 作者ID
+   * 该字段已废弃，作者ID
    */
   AuthorId?: string
 
   /**
-   * 作品ID
+   * 该字段已废弃，作品ID
    */
   WorksId?: number
 
   /**
-   * xxx
+   * 作品ID
    */
   WorkId?: number
 
   /**
-   * xxx
+   * 白名单列表，以\n分割
    */
   WhiteSites?: string
 }
@@ -100,7 +100,7 @@ export interface CreateCRUserVerifyRequest {
   UserName: string
 
   /**
-   * 用户身份证ID
+   * 用户身份证号
    */
   UserID: string
 
@@ -110,12 +110,12 @@ export interface CreateCRUserVerifyRequest {
   UserPhone: string
 
   /**
-   * 短信验证码
+   * 短信验证码，接口接入可以置空
    */
-  VerificationCode: string
+  VerificationCode?: string
 
   /**
-   * xxx
+   * 字段已废弃，认证类型
    */
   Type?: string
 }
@@ -135,12 +135,12 @@ export interface CreateBPFalseTicketResponse {
  */
 export interface CreateCRRightFileRequest {
   /**
-   * xxx
+   * 作品ID
    */
   WorkId: number
 
   /**
-   * xxx
+   * 权属文件列表
    */
   FileList: Array<File>
 }
@@ -155,7 +155,7 @@ export interface CreateCRRightResponse {
   TortId: number
 
   /**
-   * xxx
+   * 该字段已废弃
    */
   TortNum: string
 
@@ -170,12 +170,12 @@ export interface CreateCRRightResponse {
  */
 export interface CreateCRWorkResponse {
   /**
-   * 作品ID
+   * 作品ID，一个作品对应唯一的workid
    */
   WorkId: number
 
   /**
-   * x
+   * 存证ID，忽略该字段
    */
   EvidenceId: number
 
@@ -190,7 +190,7 @@ export interface CreateCRWorkResponse {
  */
 export interface CreateCRRightRequest {
   /**
-   * 已存证的作品ID
+   * 作品ID
    */
   WorkId: number
 
@@ -215,67 +215,67 @@ export interface CreateCRRightRequest {
   RightUrl?: string
 
   /**
-   * x
+   * 授权书下载地址
    */
   FileUrl?: string
 
   /**
-   * x
+   * 授权书生效日期
    */
   ValidStartDate?: string
 
   /**
-   * x
+   * 授权书截止日期
    */
   ValidEndDate?: string
 
   /**
-   * x
+   * 委托书下载地址
    */
   CommFileUrl?: string
 
   /**
-   * x
+   * 委托书生效日期
    */
   CommValidStartDate?: string
 
   /**
-   * x
+   * 委托书截止日期
    */
   CommValidEndDate?: string
 
   /**
-   * x
+   * 主页下载地址
    */
   HomeFileUrl?: string
 
   /**
-   * x
+   * 主页生效日期
    */
   HomeValidStartDate?: string
 
   /**
-   * x
+   * 主页截止日期
    */
   HomeValidEndDate?: string
 
   /**
-   * x
+   * 是否著作权人：0-否 1-是
    */
   IsProducer?: string
 
   /**
-   * x
+   * 存证证书下载地址
    */
   EvidenceFileUrl?: string
 
   /**
-   * x
+   * 存证证书生效日期
    */
   EvidenceValidStartDate?: string
 
   /**
-   * x
+   * 存证证书截止日期
    */
   EvidenceValidEndDate?: string
 }
@@ -295,22 +295,22 @@ export interface CreateBPOfflineTicketResponse {
  */
 export interface CreateCRTortRequest {
   /**
-   * xx
+   * 作品ID
    */
   WorkId: number
 
   /**
-   * xx
+   * 侵权网址
    */
   TortURL: string
 
   /**
-   * xx
+   * 侵权平台
    */
   TortPlat?: string
 
   /**
-   * xx
+   * 侵权标题
    */
   TortTitle?: string
 }
@@ -320,22 +320,22 @@ export interface CreateCRTortRequest {
  */
 export interface UpdateCRWorkRequest {
   /**
-   * xx
+   * 作品ID
    */
   WorkId: number
 
   /**
-   * xx
+   * 文件的扩展名，比如txt，docx
    */
   ContentType?: string
 
   /**
-   * xx
+   * 内容的base64编码
    */
   Content?: string
 
   /**
-   * xx
+   * 本次存证类型：0-不存证 1-存当前文件 2-存历史全量文件
    */
   CertType?: string
 }
@@ -415,12 +415,12 @@ export interface Monitor {
   WorkCategory: string
 
   /**
-   * xx
+   * 新增时间
    */
   InsertTime: string
 
   /**
-   * xx
+   * 监测状态说明
    */
   MonitorNote: string
 }
@@ -430,22 +430,22 @@ export interface Monitor {
  */
 export interface ModifyCRObtainStatusRequest {
   /**
-   * xxx
+   * 侵权ID
    */
   TortId: number
 
   /**
-   * xxx
+   * 取证类型：1-网页取证 2-过程取证
    */
   ObtainType: number
 
   /**
-   * xxx
+   * 过程取证的取证时长，单位分钟，范围0-120
    */
   ObtainDuration: number
 
   /**
-   * xxx
+   * 结果回调地址
    */
   ObtainUrl?: string
 }
@@ -550,7 +550,7 @@ export interface ReportFakeURLInfo {
  */
 export interface DescribeCRWorkInfoRequest {
   /**
-   * xxx
+   * 作品ID
    */
   WorkId: number
 }
@@ -675,97 +675,97 @@ export interface MonitorTort {
   Author: string
 
   /**
-   * xxx
+   * 发现时间
    */
   DetectTime: string
 
   /**
-   * 1
+   * 取证状态
    */
   ObtainStatus: number
 
   /**
-   * 1
+   * 维权状态
    */
   RightStatus: number
 
   /**
-   * 1
+   * 拦截状态
    */
   BlockStatus: number
 
   /**
-   * 1
+   * 侵权编号
    */
   TortNum: string
 
   /**
-   * 1
+   * 取证状态说明
    */
   ObtainNote: string
 
   /**
-   * 1
+   * 作品标题
    */
   WorkTitle: string
 
   /**
-   * 1
+   * 侵权站点
    */
   TortSite: string
 
   /**
-   * 1
+   * ICP备案信息
    */
   ICP: string
 
   /**
-   * 1
+   * 维权状态说明
    */
   RightNote: string
 
   /**
-   * 1
+   * 取证类型
    */
   ObtainType: number
 
   /**
-   * 1
+   * 拦截状态说明
    */
   BlockNote: string
 
   /**
-   * 1
+   * 作品ID
    */
   WorkId: number
 
   /**
-   * 1
+   * 作品名称
    */
   WorkName: string
 
   /**
-   * 1
+   * 授权书状态
    */
   AuthStatus: number
 
   /**
-   * 1
+   * 委托书状态
    */
   CommStatus: number
 
   /**
-   * 1
+   * 存证证书状态
    */
   EvidenceStatus: number
 
   /**
-   * 1
+   * 是否著作权人
    */
   IsProducer: number
 
   /**
-   * 1
+   * 是否海外网址
    */
   IsOverseas: number
 }
@@ -850,12 +850,12 @@ export interface DescribeCRMonitorsResponse {
  */
 export interface CreateCRCompanyVerifyResponse {
   /**
-   * 认证状态 0-认证成功 1-认证失败
+   * 认证状态：0-认证成功 1-认证失败
    */
   Status: number
 
   /**
-   * 认证结果返回
+   * 认证状态说明，包括认证失败的原因
    */
   Note: string
 
@@ -925,12 +925,12 @@ export interface CreateBPProtectURLsRequest {
  */
 export interface UpdateCRWorkResponse {
   /**
-   * xx
+   * 作品ID
    */
   WorkId: number
 
   /**
-   * xx
+   * 存证ID
    */
   EvidenceId: number
 
@@ -965,12 +965,12 @@ export interface ModifyCRMonitorRequest {
   WorkId: number
 
   /**
-   * 监测状态 1-开启监测 2-关闭监测
+   * 监测状态：1-开启监测 2-关闭监测
    */
   MonitorStatus: string
 
   /**
-   * 默认不停止，支持续期
+   * 监测截止时间
    */
   MonitorEnd?: string
 }
@@ -980,7 +980,7 @@ export interface ModifyCRMonitorRequest {
  */
 export interface DescribeCRMonitorDetailResponse {
   /**
-   * MonitorTort数组
+   * 侵权数组
    */
   Torts: Array<MonitorTort>
 
@@ -990,7 +990,7 @@ export interface DescribeCRMonitorDetailResponse {
   TotalCount: number
 
   /**
-   * x
+   * 监测状态
    */
   MonitorStatus: number
 
@@ -1025,27 +1025,27 @@ export interface CreateCRWorkRequest {
   WorkSign?: string
 
   /**
-   * 作品图片
+   * 字段已废弃，作品图片
    */
   WorkPic?: string
 
   /**
-   * 创作描述
+   * 作品描述
    */
   WorkDesc?: string
 
   /**
-   * 是否原创 0:否 1:是
+   * 是否原创：0-否 1-是
    */
   IsOriginal?: string
 
   /**
-   * 是否发布 0：未发布 1：已发布
+   * 是否发布：0-未发布 1-已发布
    */
   IsRelease?: string
 
   /**
-   * 著作权人ID
+   * 字段已废弃，著作权人ID
    */
   ProducerID?: number
 
@@ -1055,32 +1055,32 @@ export interface CreateCRWorkRequest {
   ProduceTime?: string
 
   /**
-   * 样品文件路径
+   * 字段已废弃
    */
   SampleContentURL?: string
 
   /**
-   * 样本下载Url
+   * 作品下载地址
    */
   SampleDownloadURL?: string
 
   /**
-   * 授予类型
-   */
-  GrantType?: string
-
-  /**
-   * 作品发布Url
+   * 作品在线地址
    */
   SamplePublicURL?: string
 
   /**
-   * 是否启用监测 0：不启用 1：启用 默认为0
+   * 字段已废弃，授予类型
+   */
+  GrantType?: string
+
+  /**
+   * 是否监测：0-不监测 1-监测
    */
   IsMonitor?: string
 
   /**
-   * 是否启用存证0：不存证  2：存证 默认为0
+   * 是否存证：0-不存证  2-存证 注意是2
    */
   IsCert?: string
 
@@ -1095,17 +1095,17 @@ export interface CreateCRWorkRequest {
   MonitorUrl?: string
 
   /**
-   * 创作性质（原创,改编,翻译,汇编,注释,整理,其他)
+   * 字段已废弃，创作性质
    */
   ProduceType?: string
 
   /**
-   * 白名单
+   * 白名单列表
    */
   WhiteLists?: Array<string>
 
   /**
-   * 作品ID
+   * 作品ID，忽略该字段
    */
   WorkId?: number
 
@@ -1115,12 +1115,12 @@ export interface CreateCRWorkRequest {
   ProducerName?: string
 
   /**
-   * 作者
+   * 作者，小说类型必填
    */
   Nickname?: string
 
   /**
-   * 授权书
+   * 授权书下载地址
    */
   Authorization?: string
 
@@ -1135,12 +1135,12 @@ export interface CreateCRWorkRequest {
   AuthorizationEndTime?: string
 
   /**
-   * 内容格式
+   * 内容格式，支持txt、doc等，表示Content的具体格式
    */
   ContentType?: string
 
   /**
-   * 文件内容
+   * 文件内容base64编码，该字段仅在无法提供下载链接时使用
    */
   Content?: string
 
@@ -1150,12 +1150,12 @@ export interface CreateCRWorkRequest {
   MonitorEndTime?: string
 
   /**
-   * 申请人ID
+   * 申请人ID，用于存证和取证
    */
   ApplierId?: string
 
   /**
-   * 申请人姓名
+   * 申请人姓名，用于存证和取证
    */
   ApplierName?: string
 }
@@ -1205,7 +1205,7 @@ export interface DescribeCRMonitorDetailRequest {
   PageNumber?: number
 
   /**
-   * x
+   * 过滤参数
    */
   Filters?: Array<Filter>
 }
@@ -1225,7 +1225,7 @@ export interface CreateCRBlockResponse {
   TortId: number
 
   /**
-   * xxx
+   * 该字段已废弃
    */
   TortNum: string
 
@@ -1275,112 +1275,112 @@ export interface DescribeCRMonitorsRequest {
  */
 export interface DescribeCRWorkInfoResponse {
   /**
-   * x
+   * 作品名称
    */
   WorkName: string
 
   /**
-   * x
+   * 监测状态
    */
   MonitorStatus: number
 
   /**
-   * x
+   * 授权文件状态
    */
   AuthStatus: number
 
   /**
-   * x
+   * 委托书状态
    */
   CommStatus: number
 
   /**
-   * x
+   * 是否著作权人
    */
   IsProducer: number
 
   /**
-   * xxx
+   * 存证证书状态
    */
   EvidenceStatus: number
 
   /**
-   * xxx
+   * 作品类型
    */
   WorkCategory: string
 
   /**
-   * xxx
+   * 是否原创
    */
   IsOriginal: string
 
   /**
-   * xxx
+   * 是否已发表
    */
   IsRelease: string
 
   /**
-   * xxx
+   * 著作权人姓名
    */
   ProducerName: string
 
   /**
-   * xxx
+   * 发表时间
    */
   ProduceTime: string
 
   /**
-   * xxx
+   * 白名单
    */
   WhiteLists: Array<string>
 
   /**
-   * xxx
+   * 作品描述
    */
   WorkDesc: string
 
   /**
-   * xxx
+   * 授权书
    */
   Authorization: string
 
   /**
-   * xxx
+   * 授权书生效日期
    */
   AuthorizationStartTime: string
 
   /**
-   * xxx
+   * 授权书截止日期
    */
   AuthorizationEndTime: string
 
   /**
-   * xxx
+   * 委托书
    */
   Commission: string
 
   /**
-   * xxx
+   * 委托书生效日期
    */
   CommissionStartTime: string
 
   /**
-   * xxx
+   * 委托书截止日期
    */
   CommissionEndTime: string
 
   /**
-   * xxx
+   * 存证证书
    */
   EvidenceUrl: string
 
   /**
-   * xxx
+   * 存证证书生效日期
    */
   EvidenceStartTime: string
 
   /**
-   * xxx
+   * 存证证书截止日期
    */
   EvidenceEndTime: string
 
@@ -1395,7 +1395,7 @@ export interface DescribeCRWorkInfoResponse {
  */
 export interface CreateCRRightFileResponse {
   /**
-   * xxx
+   * 权属文件Id，按提交顺序排序
    */
   FileIds: Array<number>
 
@@ -1515,12 +1515,12 @@ export interface CreateBPOfflineTicketRequest {
  */
 export interface CreateCRUserVerifyResponse {
   /**
-   * 认证状态 0-认证成功 1-认证失败
+   * 认证状态：0-认证成功 1-认证失败
    */
   Status: number
 
   /**
-   * 认证结果返回
+   * 认证状态说明，包括认证失败原因等
    */
   Note: string
 
@@ -1655,7 +1655,7 @@ export interface ModifyBPOfflineAttachmentResponse {
  */
 export interface CreateCRBlockRequest {
   /**
-   * 已存证的作品ID
+   * 作品ID
    */
   WorkId: number
 
@@ -1680,57 +1680,57 @@ export interface CreateCRBlockRequest {
   BlockUrl?: string
 
   /**
-   * x
+   * 授权书下载地址
    */
   FileUrl?: string
 
   /**
-   * x
+   * 授权书生效日期
    */
   ValidStartDate?: string
 
   /**
-   * x
+   * 授权书截止日期
    */
   ValidEndDate?: string
 
   /**
-   * xx
+   * 侵权截图
    */
   TortPic?: string
 
   /**
-   * x
+   * 委托书下载地址
    */
   CommFileUrl?: string
 
   /**
-   * x
+   * 委托书生效日期
    */
   CommValidStartDate?: string
 
   /**
-   * x
+   * 委托书截止日期
    */
   CommValidEndDate?: string
 
   /**
-   * x
+   * 是否著作权人：0-否 1-是
    */
   IsProducer?: string
 
   /**
-   * x
+   * 存证证书下载地址
    */
   EvidenceFileUrl?: string
 
   /**
-   * x
+   * 存证证书生效日期
    */
   EvidenceValidStartDate?: string
 
   /**
-   * x
+   * 存证证书截止日期
    */
   EvidenceValidEndDate?: string
 }
@@ -1750,37 +1750,37 @@ export interface CreateBPFakeURLResponse {
  */
 export interface CreateCRTortResponse {
   /**
-   * xx
+   * 作品ID
    */
   WorkId: number
 
   /**
-   * xx
+   * 侵权ID
    */
   TortId: number
 
   /**
-   * xx
+   * 侵权标题
    */
   TortTitle: string
 
   /**
-   * xx
+   * 侵权平台
    */
   TortPlat: string
 
   /**
-   * xx
+   * 侵权网址
    */
   TortURL: string
 
   /**
-   * xx
+   * 侵权域名
    */
   TortDomain: string
 
   /**
-   * xx
+   * 侵权主体
    */
   TortBodyName: string
 
@@ -1870,11 +1870,6 @@ export interface CreateCRCompanyVerifyRequest {
   CompanyName: string
 
   /**
-   * 企业认证号码类型 1：社会信用代码 2：组织机构代码 3：企业工商注册码 4：其他 默认为1
-   */
-  CompanyIDType?: string
-
-  /**
    * 企业证件号码
    */
   CompanyID?: string
@@ -1885,22 +1880,27 @@ export interface CreateCRCompanyVerifyRequest {
   CompanyLegalName?: string
 
   /**
-   * 管理员名称
+   * 联系人姓名
    */
   ManagerName?: string
 
   /**
-   * 管理员手机号
+   * 联系人手机号
    */
   ManagerPhone?: string
 
   /**
-   * 手机验证码
+   * 手机验证码，接口接入可以置空
    */
   VerificationCode?: string
 
   /**
-   * xxx
+   * 字段已废弃，企业认证号码类型 1：社会信用代码 2：组织机构代码 3：企业工商注册码 4：其他 默认为1
+   */
+  CompanyIDType?: string
+
+  /**
+   * 字段已废弃，认证类型
    */
   Type?: string
 }
