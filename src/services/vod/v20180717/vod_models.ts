@@ -14346,6 +14346,11 @@ export interface MediaVideoStreamItem {
    * 帧率，单位：hz。
    */
   Fps: number
+
+  /**
+   * 编码标签，仅当 Codec 为 hevc 时有效。
+   */
+  CodecTag: string
 }
 
 /**

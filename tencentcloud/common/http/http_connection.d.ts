@@ -5,7 +5,7 @@ import { Agent } from "http";
  * @inner
  */
 export declare class HttpConnection {
-    static doRequest({ method, url, data, timeout, headers, agent, proxy, signal }: {
+    static doRequest({ method, url, data, timeout, headers, agent, proxy, signal, }: {
         method: string;
         url: string;
         data: any;
@@ -15,7 +15,7 @@ export declare class HttpConnection {
         proxy?: string;
         signal?: AbortSignal;
     }): Promise<Response>;
-    static doRequestWithSign3({ method, url, data, service, action, region, version, secretId, secretKey, multipart, timeout, token, requestClient, language, headers, agent, proxy, signal }: {
+    static doRequestWithSign3({ method, url, data, service, action, region, version, secretId, secretKey, multipart, timeout, token, requestClient, language, headers, agent, proxy, signal, }: {
         method: string;
         url: string;
         data: any;

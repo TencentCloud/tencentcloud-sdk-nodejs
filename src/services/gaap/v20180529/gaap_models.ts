@@ -2382,6 +2382,18 @@ export interface TCPListener {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   SessionPersist: number
+
+  /**
+      * 监听器的通道ID，如果监听器属于通道组，则为null
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProxyId: string
+
+  /**
+      * 监听器的通道组ID，如果监听器属于通道，则为null
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  GroupId: string
 }
 
 /**
@@ -3625,6 +3637,18 @@ export interface HTTPListener {
 4表示配置变更中。
       */
   ListenerStatus: number
+
+  /**
+      * 监听器的通道ID，如果监听器属于通道组，则为null
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProxyId: string
+
+  /**
+      * 监听器的通道组ID，如果监听器属于通道，则为null
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  GroupId: string
 }
 
 /**
@@ -4020,6 +4044,18 @@ export interface HTTPSListener {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Http3Supported: number
+
+  /**
+      * 监听器的通道ID，如果监听器属于通道组，则为null
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProxyId: string
+
+  /**
+      * 监听器的通道组ID，如果监听器属于通道，则为null
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  GroupId: string
 }
 
 /**
@@ -6187,6 +6223,18 @@ export interface UDPListener {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   RecvContext: string
+
+  /**
+      * 监听器的通道ID，如果监听器属于通道组，则为null
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProxyId: string
+
+  /**
+      * 监听器的通道组ID，如果监听器属于通道，则为null
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  GroupId: string
 }
 
 /**

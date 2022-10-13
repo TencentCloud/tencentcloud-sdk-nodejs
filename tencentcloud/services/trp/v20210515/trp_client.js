@@ -190,7 +190,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeMerchants", req, cb);
     }
     /**
-     * 生成码包
+     * 生成普通码包
      */
     async CreateCodePack(req, cb) {
         return this.request("CreateCodePack", req, cb);

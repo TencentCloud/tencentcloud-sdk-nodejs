@@ -1,5 +1,5 @@
 /// <reference types="node" />
-import { Agent } from 'http';
+import { Agent } from "http";
 /**
  * 初始化client对象参数类型
  */

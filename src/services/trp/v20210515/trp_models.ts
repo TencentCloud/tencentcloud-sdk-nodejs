@@ -114,6 +114,12 @@ export interface CodeBatch {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   TplName?: string
+
+  /**
+      * 调度任务
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Job?: Job
 }
 
 /**
@@ -311,6 +317,16 @@ export interface ModifyMerchantRequest {
    * 企业ID
    */
   CorpId?: number
+
+  /**
+   * 码包来源 0:自建, 1:第三码包，暂不支持修改
+   */
+  CodeType?: number
+
+  /**
+   * 码包前缀地址 第三方码包时必填
+   */
+  CodeUrl?: string
 }
 
 /**
@@ -505,6 +521,17 @@ export interface Merchant {
    * 商户码规则
    */
   CodeRule: string
+
+  /**
+   * 码来源类型 0: 安心平台 1: 第三方码
+   */
+  CodeType: number
+
+  /**
+      * 第三方码域名前缀
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CodeUrl: string
 }
 
 /**
@@ -629,82 +656,6 @@ export interface DescribeCodeBatchByIdResponse {
 }
 
 /**
- * 溯源码
- */
-export interface TraceCode {
-  /**
-   * 码
-   */
-  Code: string
-
-  /**
-   * 企业ID
-   */
-  CorpId: number
-
-  /**
-   * 包ID
-   */
-  PackId: string
-
-  /**
-   * 批次ID
-   */
-  BatchId: string
-
-  /**
-   * 所属商户ID
-   */
-  MerchantId: string
-
-  /**
-   * 产品ID
-   */
-  ProductId: string
-
-  /**
-   * 状态
-   */
-  Status: number
-
-  /**
-   * 创建时间
-   */
-  CreateTime: string
-
-  /**
-   * 修改时间
-   */
-  UpdateTime: string
-
-  /**
-   * 商户名称
-   */
-  MerchantName: string
-
-  /**
-   * 产品名称
-   */
-  ProductName: string
-}
-
-/**
- * DeleteTraceData返回参数结构体
- */
-export interface DeleteTraceDataResponse {
-  /**
-      * 溯源id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  TraceId: string
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * ModifyProduct请求参数结构体
  */
 export interface ModifyProductRequest {
@@ -742,6 +693,37 @@ export interface ModifyProductRequest {
    * 预留字段
    */
   Ext?: Ext
+}
+
+/**
+ * DeleteTraceData返回参数结构体
+ */
+export interface DeleteTraceDataResponse {
+  /**
+      * 溯源id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TraceId: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 通用调度任务
+ */
+export interface Job {
+  /**
+   * 调度ID
+   */
+  JobId: number
+
+  /**
+   * 执行状态 init:初始化, pending: 执行中, done: 执行成功, error: 执行失败
+   */
+  Status: string
 }
 
 /**
@@ -980,6 +962,12 @@ export interface TraceItem {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Key: string
+
+  /**
+      * 扩展字段
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Ext: string
 }
 
 /**
@@ -1025,6 +1013,11 @@ export interface DescribeMerchantsRequest {
    * 企业ID
    */
   CorpId?: number
+
+  /**
+   * 码来源类型 0:自建, 1:第三方
+   */
+  CodeType?: number
 }
 
 /**
@@ -1166,6 +1159,16 @@ export interface CreateMerchantRequest {
    * 企业ID
    */
   CorpId?: number
+
+  /**
+   * 码包来源 0:自建, 1:第三发
+   */
+  CodeType?: number
+
+  /**
+   * 码包前缀地址 第三方码包时必填
+   */
+  CodeUrl?: string
 }
 
 /**
@@ -1330,7 +1333,7 @@ export interface DescribeProductByIdResponse {
 }
 
 /**
- * 数组
+ * 层级码配置
  */
 export interface PackSpec {
   /**
@@ -1347,6 +1350,12 @@ export interface PackSpec {
    * 数量
    */
   Amount: number
+
+  /**
+      * 码规则ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CustomId?: string
 }
 
 /**
@@ -1688,6 +1697,66 @@ export interface DescribeTraceCodesRequest {
    * 企业ID
    */
   CorpId?: number
+}
+
+/**
+ * 溯源码
+ */
+export interface TraceCode {
+  /**
+   * 码
+   */
+  Code: string
+
+  /**
+   * 企业ID
+   */
+  CorpId: number
+
+  /**
+   * 包ID
+   */
+  PackId: string
+
+  /**
+   * 批次ID
+   */
+  BatchId: string
+
+  /**
+   * 所属商户ID
+   */
+  MerchantId: string
+
+  /**
+   * 产品ID
+   */
+  ProductId: string
+
+  /**
+   * 状态
+   */
+  Status: number
+
+  /**
+   * 创建时间
+   */
+  CreateTime: string
+
+  /**
+   * 修改时间
+   */
+  UpdateTime: string
+
+  /**
+   * 商户名称
+   */
+  MerchantName: string
+
+  /**
+   * 产品名称
+   */
+  ProductName: string
 }
 
 /**

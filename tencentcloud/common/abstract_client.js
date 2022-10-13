@@ -90,7 +90,7 @@ class AbstractClient {
                 headers: Object.assign({}, this.profile.httpProfile.headers, options.headers),
                 agent: this.profile.httpProfile.agent,
                 proxy: this.profile.httpProfile.proxy,
-                signal: options.signal
+                signal: options.signal,
             });
         }
         catch (error) {
@@ -122,7 +122,7 @@ class AbstractClient {
                 headers: Object.assign({}, this.profile.httpProfile.headers, options.headers),
                 agent: this.profile.httpProfile.agent,
                 proxy: this.profile.httpProfile.proxy,
-                signal: options.signal
+                signal: options.signal,
             });
         }
         catch (e) {

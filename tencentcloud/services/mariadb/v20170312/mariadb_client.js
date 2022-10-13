@@ -102,12 +102,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBackupTime", req, cb);
     }
     /**
-     * 本接口(DescribeDBResourceUsageDetails)用于查看数据库实例当前性能数据。
-     */
-    async DescribeDBResourceUsageDetails(req, cb) {
-        return this.request("DescribeDBResourceUsageDetails", req, cb);
-    }
-    /**
      * 解隔离后付费实例
      */
     async ActivateHourDBInstance(req, cb) {
@@ -402,12 +396,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeLogFileRetentionPeriod(req, cb) {
         return this.request("DescribeLogFileRetentionPeriod", req, cb);
-    }
-    /**
-     * 本接口(DescribeDBResourceUsage)用于查看数据库实例资源的使用情况。
-     */
-    async DescribeDBResourceUsage(req, cb) {
-        return this.request("DescribeDBResourceUsage", req, cb);
     }
     /**
      * 本接口(DisassociateSecurityGroups)用于安全组批量解绑实例。

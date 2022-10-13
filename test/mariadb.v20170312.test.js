@@ -138,16 +138,6 @@ it("mariadb.v20170312.DescribeBackupTime", async function () {
     }
 })
 
-it("mariadb.v20170312.DescribeDBResourceUsageDetails", async function () {
-    try {
-       const data = await client.DescribeDBResourceUsageDetails({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("mariadb.v20170312.ActivateHourDBInstance", async function () {
     try {
        const data = await client.ActivateHourDBInstance({})
@@ -611,16 +601,6 @@ it("mariadb.v20170312.UpgradeDBInstance", async function () {
 it("mariadb.v20170312.DescribeLogFileRetentionPeriod", async function () {
     try {
        const data = await client.DescribeLogFileRetentionPeriod({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("mariadb.v20170312.DescribeDBResourceUsage", async function () {
-    try {
-       const data = await client.DescribeDBResourceUsage({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

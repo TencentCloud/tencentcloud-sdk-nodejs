@@ -24,9 +24,8 @@ import {
   DescribeAccountPrivilegesResponse,
   DescribeDatabasesRequest,
   ParamDesc,
-  DescribeDBResourceUsageRequest,
+  DescribeDBParametersRequest,
   DescribeAccountsRequest,
-  ProcedurePrivilege,
   DescribeRenewalPriceResponse,
   CreateDedicatedClusterDBInstanceResponse,
   DestroyHourDBInstanceRequest,
@@ -36,7 +35,6 @@ import {
   DescribeDBSecurityGroupsResponse,
   CancelDcnJobResponse,
   DescribeFileDownloadUrlRequest,
-  DescribeDBResourceUsageDetailsResponse,
   DescribeDBInstanceSpecsResponse,
   DestroyHourDBInstanceResponse,
   Account,
@@ -46,21 +44,18 @@ import {
   InitDBInstancesResponse,
   DescribeDBParametersResponse,
   IsolateHourDBInstanceRequest,
-  ResourceUsageMonitorSet,
   ModifyLogFileRetentionPeriodRequest,
   DescribeLogFileRetentionPeriodRequest,
   DescribeFlowResponse,
   CloneAccountResponse,
   ZoneChooseInfo,
   ModifyAccountDescriptionResponse,
-  DescribeDBParametersRequest,
   ParamConstraint,
   ModifyDBInstancesProjectResponse,
   DBBackupTimeConfig,
   ModifyBackupTimeRequest,
   DatabaseView,
   DescribeDBLogFilesRequest,
-  DescribeRenewalPriceRequest,
   NodeInfo,
   DescribeOrdersResponse,
   ModifySyncTaskAttributeResponse,
@@ -139,7 +134,6 @@ import {
   DescribeDatabasesResponse,
   ViewPrivileges,
   DescribeOrdersRequest,
-  MonitorData,
   DescribeDBLogFilesResponse,
   CloseDBExtranetAccessRequest,
   ResourceTag,
@@ -157,10 +151,10 @@ import {
   RegionInfo,
   DescribeDBInstancesResponse,
   ConstraintRange,
-  DescribeDBResourceUsageResponse,
+  DescribeRenewalPriceRequest,
   LogFileInfo,
   RestartDBInstancesRequest,
-  DescribeDBResourceUsageDetailsRequest,
+  ProcedurePrivilege,
   DisassociateSecurityGroupsRequest,
   DBAccount,
   CreateHourDBInstanceRequest,
@@ -309,16 +303,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeBackupTimeResponse) => void
   ): Promise<DescribeBackupTimeResponse> {
     return this.request("DescribeBackupTime", req, cb)
-  }
-
-  /**
-   * 本接口(DescribeDBResourceUsageDetails)用于查看数据库实例当前性能数据。
-   */
-  async DescribeDBResourceUsageDetails(
-    req: DescribeDBResourceUsageDetailsRequest,
-    cb?: (error: string, rep: DescribeDBResourceUsageDetailsResponse) => void
-  ): Promise<DescribeDBResourceUsageDetailsResponse> {
-    return this.request("DescribeDBResourceUsageDetails", req, cb)
   }
 
   /**
@@ -803,16 +787,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeLogFileRetentionPeriodResponse) => void
   ): Promise<DescribeLogFileRetentionPeriodResponse> {
     return this.request("DescribeLogFileRetentionPeriod", req, cb)
-  }
-
-  /**
-   * 本接口(DescribeDBResourceUsage)用于查看数据库实例资源的使用情况。
-   */
-  async DescribeDBResourceUsage(
-    req: DescribeDBResourceUsageRequest,
-    cb?: (error: string, rep: DescribeDBResourceUsageResponse) => void
-  ): Promise<DescribeDBResourceUsageResponse> {
-    return this.request("DescribeDBResourceUsage", req, cb)
   }
 
   /**

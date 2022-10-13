@@ -39,9 +39,9 @@ import {
   DescribeCodeBatchsRequest,
   DescribeProductsRequest,
   DescribeCodeBatchByIdResponse,
-  TraceCode,
-  DeleteTraceDataResponse,
   ModifyProductRequest,
+  DeleteTraceDataResponse,
+  Job,
   CreateCodePackResponse,
   DescribeMerchantsResponse,
   DescribeTraceDataListRequest,
@@ -80,6 +80,7 @@ import {
   ModifyCodeBatchResponse,
   Product,
   DescribeTraceCodesRequest,
+  TraceCode,
   ModifyTraceCodeResponse,
   ChainData,
   PhaseData,
@@ -367,7 +368,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 生成码包
+   * 生成普通码包
    */
   async CreateCodePack(
     req: CreateCodePackRequest,

@@ -2454,23 +2454,23 @@ export interface ModifyParamTemplateResponse {
  */
 export interface DescribeProjectSecurityGroupsRequest {
     /**
-      * 数据库引擎名称：mariadb,cdb,cynosdb,dcdb,redis,mongodb
+      * 数据库引擎名称，本接口取值：redis。
       */
     Product: string;
     /**
-      * 项目Id。
+      * 项目 ID。
       */
     ProjectId: number;
     /**
-      * 偏移量。
+      * 偏移量，取值为Limit的整数倍。
       */
     Offset?: number;
     /**
-      * 拉取数量限制，默认20
+      * 拉取数量限制，默认 20。
       */
     Limit?: number;
     /**
-      * 搜索条件，支持安全组id或者安全组名称。
+      * 搜索条件，支持安全组 ID 或者安全组名称。
       */
     SearchKey?: string;
 }

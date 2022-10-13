@@ -246,28 +246,13 @@ true:需要重启
 }
 
 /**
- * DescribeDBResourceUsage请求参数结构体
+ * DescribeDBParameters请求参数结构体
  */
-export interface DescribeDBResourceUsageRequest {
+export interface DescribeDBParametersRequest {
   /**
    * 实例 ID，形如：tdsql-ow728lmc。
    */
   InstanceId: string
-
-  /**
-   * 开始日期，格式yyyy-mm-dd
-   */
-  StartTime: string
-
-  /**
-   * 结束日期，格式yyyy-mm-dd
-   */
-  EndTime: string
-
-  /**
-   * 拉取的指标名称，支持的值为：data_disk_available,binlog_disk_available,mem_available,cpu_usage_rate
-   */
-  MetricName?: string
 }
 
 /**
@@ -278,26 +263,6 @@ export interface DescribeAccountsRequest {
    * 实例ID，形如：tdsql-ow728lmc，可以通过 DescribeDBInstances 查询实例详情获得。
    */
   InstanceId: string
-}
-
-/**
- * 存储过程权限信息
- */
-export interface ProcedurePrivilege {
-  /**
-   * 数据库名
-   */
-  Database: string
-
-  /**
-   * 数据库存储过程名
-   */
-  Procedure: string
-
-  /**
-   * 权限信息
-   */
-  Privileges: Array<string>
 }
 
 /**
@@ -462,33 +427,6 @@ export interface DescribeFileDownloadUrlRequest {
    * 不带签名的文件路径
    */
   FilePath: string
-}
-
-/**
- * DescribeDBResourceUsageDetails返回参数结构体
- */
-export interface DescribeDBResourceUsageDetailsResponse {
-  /**
-   * 主节点资源使用情况监控数据
-   */
-  Master: ResourceUsageMonitorSet
-
-  /**
-      * 备机1资源使用情况监控数据
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Slave1: ResourceUsageMonitorSet
-
-  /**
-      * 备机2资源使用情况监控数据
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Slave2: ResourceUsageMonitorSet
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -707,31 +645,6 @@ export interface IsolateHourDBInstanceRequest {
 }
 
 /**
- * DB资源使用情况监控指标集合
- */
-export interface ResourceUsageMonitorSet {
-  /**
-   * binlog日志磁盘可用空间,单位GB
-   */
-  BinlogDiskAvailable: MonitorData
-
-  /**
-   * CPU利用率
-   */
-  CpuUsageRate: MonitorData
-
-  /**
-   * 内存可用空间,单位GB
-   */
-  MemAvailable: MonitorData
-
-  /**
-   * 磁盘可用空间,单位GB
-   */
-  DataDiskAvailable: MonitorData
-}
-
-/**
  * ModifyLogFileRetentionPeriod请求参数结构体
  */
 export interface ModifyLogFileRetentionPeriodRequest {
@@ -809,16 +722,6 @@ export interface ModifyAccountDescriptionResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * DescribeDBParameters请求参数结构体
- */
-export interface DescribeDBParametersRequest {
-  /**
-   * 实例 ID，形如：tdsql-ow728lmc。
-   */
-  InstanceId: string
 }
 
 /**
@@ -920,21 +823,6 @@ export interface DescribeDBLogFilesRequest {
    * 请求日志类型，取值只能为1、2、3或者4。1-binlog，2-冷备，3-errlog，4-slowlog。
    */
   Type: number
-}
-
-/**
- * DescribeRenewalPrice请求参数结构体
- */
-export interface DescribeRenewalPriceRequest {
-  /**
-   * 待续费的实例ID。形如：tdsql-ow728lmc，可以通过 DescribeDBInstances 查询实例详情获得。
-   */
-  InstanceId: string
-
-  /**
-   * 续费时长，单位：月。不传则默认为1个月。
-   */
-  Period?: number
 }
 
 /**
@@ -3014,26 +2902,6 @@ export interface DescribeOrdersRequest {
 }
 
 /**
- * 监控数据
- */
-export interface MonitorData {
-  /**
-   * 起始时间，形如 2018-03-24 23:59:59
-   */
-  StartTime: string
-
-  /**
-   * 结束时间，形如 2018-03-24 23:59:59
-   */
-  EndTime: string
-
-  /**
-   * 监控数据
-   */
-  Data: Array<number>
-}
-
-/**
  * DescribeDBLogFiles返回参数结构体
  */
 export interface DescribeDBLogFilesResponse {
@@ -3409,33 +3277,18 @@ export interface ConstraintRange {
 }
 
 /**
- * DescribeDBResourceUsage返回参数结构体
+ * DescribeRenewalPrice请求参数结构体
  */
-export interface DescribeDBResourceUsageResponse {
+export interface DescribeRenewalPriceRequest {
   /**
-   * binlog日志磁盘可用空间,单位GB
+   * 待续费的实例ID。形如：tdsql-ow728lmc，可以通过 DescribeDBInstances 查询实例详情获得。
    */
-  BinlogDiskAvailable: MonitorData
+  InstanceId: string
 
   /**
-   * 磁盘可用空间,单位GB
+   * 续费时长，单位：月。不传则默认为1个月。
    */
-  DataDiskAvailable: MonitorData
-
-  /**
-   * CPU利用率
-   */
-  CpuUsageRate: MonitorData
-
-  /**
-   * 内存可用空间,单位GB
-   */
-  MemAvailable: MonitorData
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  Period?: number
 }
 
 /**
@@ -3479,28 +3332,23 @@ export interface RestartDBInstancesRequest {
 }
 
 /**
- * DescribeDBResourceUsageDetails请求参数结构体
+ * 存储过程权限信息
  */
-export interface DescribeDBResourceUsageDetailsRequest {
+export interface ProcedurePrivilege {
   /**
-   * 实例 ID，形如：tdsql-ow728lmc。
+   * 数据库名
    */
-  InstanceId: string
+  Database: string
 
   /**
-   * 开始日期，格式yyyy-mm-dd
+   * 数据库存储过程名
    */
-  StartTime: string
+  Procedure: string
 
   /**
-   * 结束日期，格式yyyy-mm-dd
+   * 权限信息
    */
-  EndTime: string
-
-  /**
-   * 拉取的指标名称，支持的值为：data_disk_available,binlog_disk_available,mem_available,cpu_usage_rate
-   */
-  MetricName?: string
+  Privileges: Array<string>
 }
 
 /**
