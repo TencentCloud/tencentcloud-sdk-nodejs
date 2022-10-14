@@ -153,6 +153,7 @@ import {
   User,
   DescribeUserResponse,
   DtsConnectParam,
+  DorisModifyConnectParam,
   DescribeGroupInfoResponse,
   AppIdResponse,
   DescribeTopicRequest,

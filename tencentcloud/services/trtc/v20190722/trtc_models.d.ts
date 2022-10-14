@@ -32,6 +32,24 @@ export interface CreatePictureRequest {
     YPosition: number;
 }
 /**
+ * DescribeRelayUsage请求参数结构体
+ */
+export interface DescribeRelayUsageRequest {
+    /**
+      * 查询开始时间，格式为YYYY-MM-DD。
+      */
+    StartTime: string;
+    /**
+      * 查询结束时间，格式为YYYY-MM-DD。
+单次查询统计区间最多不能超过31天。
+      */
+    EndTime: string;
+    /**
+      * TRTC的SdkAppId，和房间所对应的SdkAppId相同。如果没有这个参数，返回用户下全部实时音视频应用的汇总。
+      */
+    SdkAppId?: number;
+}
+/**
  * 用户自定义混流布局参数列表。
  */
 export interface MixLayout {
@@ -446,6 +464,23 @@ export interface CloudStorage {
     FileNamePrefix?: Array<string>;
 }
 /**
+ * DescribeTrtcUsage返回参数结构体
+ */
+export interface DescribeTrtcUsageResponse {
+    /**
+      * 用量类型，与UsageValue中各个位置的值对应。
+      */
+    UsageKey: Array<string>;
+    /**
+      * 各个时间点用量明细。
+      */
+    UsageList: Array<TrtcUsage>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 返回的质量数据，时间:值
  */
 export interface TimeValue {
@@ -702,6 +737,24 @@ export interface TrtcTimeNewUsage {
     Video4KTime: number;
 }
 /**
+ * DescribeMixTranscodingUsage请求参数结构体
+ */
+export interface DescribeMixTranscodingUsageRequest {
+    /**
+      * 查询开始时间，格式为YYYY-MM-DD。
+      */
+    StartTime: string;
+    /**
+      * 查询结束时间，格式为YYYY-MM-DD。
+单次查询统计区间最多不能超过31天。
+      */
+    EndTime: string;
+    /**
+      * TRTC的SdkAppId，和房间所对应的SdkAppId相同。如果没有这个参数，返回用户下全部实时音视频应用的汇总。
+      */
+    SdkAppId?: number;
+}
+/**
  * ModifyPicture请求参数结构体
  */
 export interface ModifyPictureRequest {
@@ -819,6 +872,24 @@ export interface EventList {
     PeerId: string;
 }
 /**
+ * DescribeTrtcUsage请求参数结构体
+ */
+export interface DescribeTrtcUsageRequest {
+    /**
+      * 查询开始时间，格式为YYYY-MM-DD。
+      */
+    StartTime: string;
+    /**
+      * 查询结束时间，格式为YYYY-MM-DD。
+单次查询统计区间最多不能超过31天。
+      */
+    EndTime: string;
+    /**
+      * TRTC的SdkAppId，和房间所对应的SdkAppId相同。如果没有这个参数，返回用户下全部实时音视频应用的汇总。
+      */
+    SdkAppId?: number;
+}
+/**
  * DescribeRoomInfo返回参数结构体
  */
 export interface DescribeRoomInfoResponse {
@@ -860,6 +931,10 @@ export interface SdkAppIdTrtcMcuTranscodeTimeUsage {
       * 视频时长-全高清FHD，单位：秒。
       */
     VideoTimeFhd: number;
+    /**
+      * 带宽，单位：Mbps。
+      */
+    Flux: number;
 }
 /**
  * DescribeUserInfo返回参数结构体
@@ -880,6 +955,53 @@ export interface DescribeUserInfoResponse {
     RequestId?: string;
 }
 /**
+ * 实时音视频用量在某一时间段的统计信息。
+ */
+export interface TrtcUsage {
+    /**
+      * 时间点，格式为YYYY-MM-DD HH:mm:ss。多天查询时，HH:mm:ss为00:00:00。
+      */
+    TimeKey: string;
+    /**
+      * 用量数组。每个数值含义与UsageKey对应。单位：分钟。
+      */
+    UsageValue: Array<number>;
+}
+/**
+ * DescribeRelayUsage返回参数结构体
+ */
+export interface DescribeRelayUsageResponse {
+    /**
+      * 用量类型，与UsageValue中各个位置的值对应。
+      */
+    UsageKey: Array<string>;
+    /**
+      * 各个时间点用量明细。
+      */
+    UsageList: Array<TrtcUsage>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeRecordingUsage返回参数结构体
+ */
+export interface DescribeRecordingUsageResponse {
+    /**
+      * 用量类型，与UsageValue中各个位置的值对应。
+      */
+    UsageKey: Array<string>;
+    /**
+      * 各个时间点用量明细。
+      */
+    UsageList: Array<TrtcUsage>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * ModifyPicture返回参数结构体
  */
 export interface ModifyPictureResponse {
@@ -887,6 +1009,28 @@ export interface ModifyPictureResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DescribeRecordingUsage请求参数结构体
+ */
+export interface DescribeRecordingUsageRequest {
+    /**
+      * 查询开始时间，格式为YYYY-MM-DD。
+      */
+    StartTime: string;
+    /**
+      * 查询结束时间，格式为YYYY-MM-DD。
+单次查询统计区间最多不能超过31天。
+      */
+    EndTime: string;
+    /**
+      * 查询单流录制或合流录制，值为"single"或"multi"。
+      */
+    MixType: string;
+    /**
+      * TRTC的SdkAppId，和房间所对应的SdkAppId相同。如果没有这个参数，返回用户下全部实时音视频应用的汇总。
+      */
+    SdkAppId?: number;
 }
 /**
  * 云端录制查询接口，录制文件的信息
@@ -1010,6 +1154,23 @@ export interface MixLayoutParams {
  * StopMCUMixTranscode返回参数结构体
  */
 export interface StopMCUMixTranscodeResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeMixTranscodingUsage返回参数结构体
+ */
+export interface DescribeMixTranscodingUsageResponse {
+    /**
+      * 用量类型，与UsageValue中各个位置的值对应。
+      */
+    UsageKey: Array<string>;
+    /**
+      * 各个时间点用量明细。
+      */
+    UsageList: Array<TrtcUsage>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

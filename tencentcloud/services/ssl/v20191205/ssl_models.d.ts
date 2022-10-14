@@ -837,6 +837,10 @@ export interface ApplyCertificateRequest {
       * 原证书 ID，用于重新申请。
       */
     OldCertificateId?: string;
+    /**
+      * 权益包ID，用于免费证书扩容包使用
+      */
+    PackageId?: string;
 }
 /**
  * ReplaceCertificate请求参数结构体

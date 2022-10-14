@@ -271,7 +271,7 @@ export interface CreateClusterRequest {
       */
     SubnetId: string;
     /**
-      * 集群付费模式
+      * 实例付费模式
  - PREPAID：预付费，即包年包月
  - POSTPAID_BY_HOUR：按小时后付费
       */
@@ -319,6 +319,17 @@ export interface CreateClusterRequest {
 注：该参数和DBVersion、DBMajorVersion只能传递一个，且需要传递一个。
       */
     DBKernelVersion?: string;
+    /**
+      * 存储付费模式
+ - PREPAID：预付费，即包年包月
+ - POSTPAID_BY_HOUR：按小时后付费
+默认为POSTPAID_BY_HOUR，实例付费模式为按小时付费时，存储付费模式不支持包年包月
+      */
+    StoragePayMode?: string;
+    /**
+      * 存储最大使用量，单位GB。取值参考文档【购买指南】。存储使用预付费模式时必须设置，存储使用按小时后付费时不可设置
+      */
+    Storage?: number;
 }
 /**
  * DeleteClusterInstances请求参数结构体
@@ -1018,6 +1029,13 @@ export interface Cluster {
       * TDSQL-C PostgreSQL 内核版本号
       */
     DBKernelVersion: string;
+    /**
+      * 存储付费模式
+ - PREPAID：预付费，即包年包月
+ - POSTPAID_BY_HOUR：按小时后付费
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    StoragePayMode: string;
 }
 /**
  * DescribeClusters返回参数结构体

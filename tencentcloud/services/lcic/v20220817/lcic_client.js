@@ -28,6 +28,12 @@ class Client extends abstract_client_1.AbstractClient {
         super("lcic.tencentcloudapi.com", "2022-08-17", clientConfig);
     }
     /**
+     * 创建房间内可以使用的文档。
+     */
+    async CreateDocument(req, cb) {
+        return this.request("CreateDocument", req, cb);
+    }
+    /**
      * 获取用户信息
      */
     async DescribeUser(req, cb) {
@@ -56,6 +62,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateSupervisor(req, cb) {
         return this.request("CreateSupervisor", req, cb);
+    }
+    /**
+     * 设置应用的自定义内容，包括应用图标，自定义的代码等。如果已存在，则为更新。更新js、css内容后，要生效也需要调用该接口
+     */
+    async SetAppCustomContent(req, cb) {
+        return this.request("SetAppCustomContent", req, cb);
     }
     /**
      * 获取房间信息

@@ -20,32 +20,32 @@
  */
 export interface ProtectURLInfo {
   /**
-   * xxx
+   * 保护网站ID
    */
   ProtectURLId: number
 
   /**
-   * xxx
+   * 保护网站
    */
   ProtectURL: string
 
   /**
-   * xxx
+   * 保护网站名称
    */
   ProtectWeb: string
 
   /**
-   * xxx
+   * 保护网站审核状态 1-审核中 2-审核不通过 3-审核通过
    */
   ProtectURLStatus: number
 
   /**
-   * xxx
+   * 网站审核不通过原因
    */
   ProtectURLNote: string
 
   /**
-   * xxx
+   * 创建时间
    */
   CreateTime: string
 }
@@ -325,7 +325,7 @@ export interface UpdateCRWorkRequest {
   WorkId: number
 
   /**
-   * 文件的扩展名，比如txt，docx
+   * 文件的扩展名，例如txt，docx
    */
   ContentType?: string
 
@@ -345,17 +345,17 @@ export interface UpdateCRWorkRequest {
  */
 export interface DescribeBPFakeURLsRequest {
   /**
-   * xxx
+   * 过滤条件
    */
   Filters?: Array<Filter>
 
   /**
-   * xxx
+   * 页数
    */
   PageSize?: number
 
   /**
-   * xxx
+   * 页码
    */
   PageNumber?: number
 }
@@ -445,7 +445,7 @@ export interface ModifyCRObtainStatusRequest {
   ObtainDuration: number
 
   /**
-   * 结果回调地址
+   * 取证结果回调地址
    */
   ObtainUrl?: string
 }
@@ -455,92 +455,92 @@ export interface ModifyCRObtainStatusRequest {
  */
 export interface ReportFakeURLInfo {
   /**
-   * xxx
+   * 仿冒网址ID
    */
   FakeURLId: number
 
   /**
-   * xxx
+   * 检测时间
    */
   DetectTime: string
 
   /**
-   * xxx
+   * 保护网站
    */
   ProtectURL: string
 
   /**
-   * xxx
+   * 保护网站名称
    */
   ProtectWeb: string
 
   /**
-   * xxx
+   * 仿冒网址
    */
   FakeURL: string
 
   /**
-   * xxx
+   * 截图
    */
   Snapshot: string
 
   /**
-   * xxx
+   * IP地址
    */
   IP: string
 
   /**
-   * xxx
+   * IP地理位置
    */
   IPLoc: string
 
   /**
-   * xxx
+   * 热度
    */
   Heat: number
 
   /**
-   * xxx
+   * 网站状态
    */
   Status: number
 
   /**
-   * xxx
+   * 网站不处理原因
    */
   Note: string
 
   /**
-   * xxx
+   * 仿冒网站的企业名称
    */
   FakeURLCompany: string
 
   /**
-   * xxx
+   * 仿冒网站的网站性质
    */
   FakeURLAttr: string
 
   /**
-   * xxx
+   * 仿冒网站的网站名称
    */
   FakeURLName: string
 
   /**
-   * xxx
+   * 仿冒网站的备案
    */
   FakeURLICP: string
 
   /**
-   * xxx
+   * 仿冒网站创建时间
    */
   FakeURLCreateTime: string
 
   /**
-   * xxx
+   * 仿冒网站过期时间
    */
   FakeURLExpireTime: string
 
   /**
-   * xxx
+   * 协查处置时间
    */
   BlockTime: string
 }
@@ -560,27 +560,27 @@ export interface DescribeCRWorkInfoRequest {
  */
 export interface ModifyBPOfflineAttachmentRequest {
   /**
-   * xx
+   * 营业执照
    */
   LicenseName?: string
 
   /**
-   * xx
+   * 授权书
    */
   AuthorizationName?: string
 
   /**
-   * xx
+   * 商标名称
    */
   BrandName?: string
 
   /**
-   * xx
+   * 商标证明
    */
   BrandCertificateName?: string
 
   /**
-   * xx
+   * 商标转让证明
    */
   TransferName?: string
 }
@@ -625,17 +625,17 @@ export interface CreateBPOfflineAttachmentResponse {
  */
 export interface DescribeBPReportFakeURLsRequest {
   /**
-   * xxx
+   * 过滤条件
    */
   Filters?: Array<Filter>
 
   /**
-   * xxx
+   * 页数
    */
   PageSize?: number
 
   /**
-   * xxx
+   * 页码
    */
   PageNumber?: number
 }
@@ -765,7 +765,7 @@ export interface MonitorTort {
   IsProducer: number
 
   /**
-   * 是否海外网址
+   * 是否境外网址
    */
   IsOverseas: number
 }
@@ -775,22 +775,22 @@ export interface MonitorTort {
  */
 export interface CreateBPFakeURLRequest {
   /**
-   * xxx
+   * 保护网址ID
    */
   ProtectURLId?: number
 
   /**
-   * xxx
+   * 仿冒网址
    */
   FakeURL?: string
 
   /**
-   * xxx
+   * 截图
    */
   SnapshotNames?: Array<string>
 
   /**
-   * xxx
+   * 举报说明
    */
   Note?: string
 }
@@ -870,22 +870,22 @@ export interface CreateCRCompanyVerifyResponse {
  */
 export interface CreateBPOfflineAttachmentRequest {
   /**
-   * xxx
+   * 品牌名字
    */
   BrandName?: string
 
   /**
-   * xx
+   * 商标证明
    */
   BrandCertificateName?: string
 
   /**
-   * xx
+   * 商标转让证明
    */
   TransferName?: string
 
   /**
-   * xx
+   * 授权书
    */
   AuthorizationName?: string
 }
@@ -895,27 +895,27 @@ export interface CreateBPOfflineAttachmentRequest {
  */
 export interface CreateBPProtectURLsRequest {
   /**
-   * xxx
+   * 企业名称
    */
   CompanyName?: string
 
   /**
-   * xxx
+   * 电话号码
    */
   Phone?: string
 
   /**
-   * xxx
+   * 营业执照
    */
   LicenseName?: string
 
   /**
-   * xxx
+   * 保护网站
    */
   ProtectURLs?: Array<string>
 
   /**
-   * xxx
+   * 网站名称
    */
   ProtectWebs?: Array<string>
 }
@@ -1420,82 +1420,82 @@ export interface ModifyCRWhiteListResponse {
  */
 export interface FakeURLInfo {
   /**
-   * xxx
+   * 仿冒网址ID
    */
   FakeURLId: number
 
   /**
-   * xxx
+   * 保护网站
    */
   ProtectWeb: string
 
   /**
-   * xxx
+   * 检测时间
    */
   DetectTime: string
 
   /**
-   * xxx
+   * 仿冒网址
    */
   FakeURL: string
 
   /**
-   * xxx
+   * 截图
    */
   Snapshot: string
 
   /**
-   * xxx
+   * IP地址
    */
   IP: string
 
   /**
-   * xxx
+   * IP地理位置
    */
   IPLoc: string
 
   /**
-   * xxx
+   * 热度
    */
   Heat: number
 
   /**
-   * xxx
+   * 网址状态
    */
   Status: number
 
   /**
-   * xxx
+   * 备注
    */
   Note: string
 
   /**
-   * xxx
+   * 仿冒网站所属单位
    */
   FakeURLCompany: string
 
   /**
-   * xxx
+   * 仿冒网站性质
    */
   FakeURLAttr: string
 
   /**
-   * xxx
+   * 仿冒网站名称
    */
   FakeURLName: string
 
   /**
-   * xxx
+   * 仿冒网站备案号
    */
   FakeURLICP: string
 
   /**
-   * xxx
+   * 仿冒网站创建时间
    */
   FakeURLCreateTime: string
 
   /**
-   * xxx
+   * 仿冒网站过期时间
    */
   FakeURLExpireTime: string
 }
@@ -1505,7 +1505,7 @@ export interface FakeURLInfo {
  */
 export interface CreateBPOfflineTicketRequest {
   /**
-   * xxx
+   * 仿冒网址ID
    */
   FakeURLId?: number
 }
@@ -1535,37 +1535,37 @@ export interface CreateCRUserVerifyResponse {
  */
 export interface BrandData {
   /**
-   * xxx
+   * 商标名称
    */
   BrandName: string
 
   /**
-   * xxx
+   * 商标证明
    */
   BrandCertificateName: string
 
   /**
-   * xxx
+   * 商标审核状态 1-审核中 2-审核未通过 3-审核通过
    */
   BrandStatus: number
 
   /**
-   * xxx
+   * 审核说明
    */
   BrandNote: string
 
   /**
-   * xxx
+   * 商标转让证明
    */
   TransferName: string
 
   /**
-   * xxx
+   * 商标转让证明审核状态
    */
   TransferStatus: number
 
   /**
-   * xxx
+   * 审核说明 1-审核中 2-审核未通过 3-审核通过
    */
   TransferNote: string
 }
@@ -1585,52 +1585,52 @@ export interface ModifyCRRightStatusResponse {
  */
 export interface DescribeBPCompanyInfoResponse {
   /**
-   * xx
+   * 企业名称
    */
   CompanyName: string
 
   /**
-   * xx
+   * 电话号码
    */
   Phone: string
 
   /**
-   * xx
+   * 营业执照
    */
   LicenseName: string
 
   /**
-   * xx
+   * 营业执照审核状态 1-审核中 2-审核未通过，3、审核通过
    */
   LicenseStatus: number
 
   /**
-   * xx
+   * 营业执照备注
    */
   LicenseNote: string
 
   /**
-   * xx
+   * 授权书
    */
   AuthorizationName: string
 
   /**
-   * xx
+   * 授权书审核状态
    */
   AuthorizationStatus: number
 
   /**
-   * xx
+   * 授权书备注
    */
   AuthorizationNote: string
 
   /**
-   * xx
+   * 品牌信息
    */
   BrandDatas: Array<BrandData>
 
   /**
-   * xx
+   * 企业ID
    */
   CompanyId: number
 
@@ -1795,7 +1795,7 @@ export interface CreateCRTortResponse {
  */
 export interface CreateBPFalseTicketRequest {
   /**
-   * xxx
+   * 仿冒网址
    */
   FakeURL?: string
 }
@@ -1815,22 +1815,22 @@ export interface ModifyCRMonitorResponse {
  */
 export interface File {
   /**
-   * xxx
+   * 文件下载地址
    */
   FileUrl: string
 
   /**
-   * xxx
+   * 文件类型 1-委托书 2-授权书 5-存证证书 11-营业执照
    */
   FileType: number
 
   /**
-   * xxx
+   * 文件有效开始日期
    */
   ValidStartDate: string
 
   /**
-   * xxx
+   * 文件有效截止日期
    */
   ValidEndDate: string
 }
@@ -1840,12 +1840,12 @@ export interface File {
  */
 export interface DescribeBPProtectURLsRequest {
   /**
-   * xxx
+   * 页数
    */
   PageSize?: number
 
   /**
-   * xxx
+   * 页码
    */
   PageNumber?: number
 }

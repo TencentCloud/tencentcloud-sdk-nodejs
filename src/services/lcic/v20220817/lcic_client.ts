@@ -19,19 +19,24 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   CreateRoomRequest,
+  SetAppCustomContentRequest,
   CreateSupervisorRequest,
   DescribeRoomResponse,
   RegisterUserRequest,
   LoginOriginIdRequest,
   DescribeUserRequest,
   RegisterUserResponse,
+  CreateDocumentResponse,
   LoginUserRequest,
   CreateSupervisorResponse,
+  CreateDocumentRequest,
   CreateRoomResponse,
   DescribeUserResponse,
+  SetAppCustomContentResponse,
   DescribeRoomRequest,
   LoginOriginIdResponse,
   LoginUserResponse,
+  AppCustomContent,
 } from "./lcic_models"
 
 /**
@@ -41,6 +46,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("lcic.tencentcloudapi.com", "2022-08-17", clientConfig)
+  }
+
+  /**
+   * 创建房间内可以使用的文档。
+   */
+  async CreateDocument(
+    req: CreateDocumentRequest,
+    cb?: (error: string, rep: CreateDocumentResponse) => void
+  ): Promise<CreateDocumentResponse> {
+    return this.request("CreateDocument", req, cb)
   }
 
   /**
@@ -91,6 +106,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateSupervisorResponse) => void
   ): Promise<CreateSupervisorResponse> {
     return this.request("CreateSupervisor", req, cb)
+  }
+
+  /**
+   * 设置应用的自定义内容，包括应用图标，自定义的代码等。如果已存在，则为更新。更新js、css内容后，要生效也需要调用该接口
+   */
+  async SetAppCustomContent(
+    req: SetAppCustomContentRequest,
+    cb?: (error: string, rep: SetAppCustomContentResponse) => void
+  ): Promise<SetAppCustomContentResponse> {
+    return this.request("SetAppCustomContent", req, cb)
   }
 
   /**

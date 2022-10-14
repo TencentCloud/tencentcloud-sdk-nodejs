@@ -2351,6 +2351,11 @@ export interface ModifyConnectResourceRequest {
    * Ctsdb配置，Type为CTSDB
    */
   CtsdbConnectParam?: CtsdbModifyConnectParam
+
+  /**
+   * Doris配置，Type为DORIS
+   */
+  DorisConnectParam?: DorisModifyConnectParam
 }
 
 /**
@@ -4138,6 +4143,65 @@ export interface DtsConnectParam {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   IsUpdate?: boolean
+}
+
+/**
+ * Doris 连接源修改参数
+ */
+export interface DorisModifyConnectParam {
+  /**
+      * Doris 连接源的实例资源
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Resource: string
+
+  /**
+      * Doris jdbc 负载均衡连接 port，通常映射到 fe 的 9030 端口
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Port?: number
+
+  /**
+      * Doris 连接源的实例vip，当为腾讯云实例时，必填
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ServiceVip?: string
+
+  /**
+      * Doris 连接源的vpcId，当为腾讯云实例时，必填
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UniqVpcId?: string
+
+  /**
+      * Doris 连接源的用户名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UserName?: string
+
+  /**
+      * Doris 连接源的密码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Password?: string
+
+  /**
+      * 是否更新到关联的Datahub任务
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsUpdate?: boolean
+
+  /**
+      * Doris 连接源是否为自建集群
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SelfBuilt?: boolean
+
+  /**
+      * Doris 的 http 负载均衡连接 port，通常映射到 be 的 8040 端口
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BePort?: number
 }
 
 /**

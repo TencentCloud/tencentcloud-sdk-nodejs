@@ -1993,6 +1993,11 @@ export interface QueryFilter {
    * 搜索字段
    */
   Name?: string
+
+  /**
+   * 操作符
+   */
+  Operator?: string
 }
 
 /**

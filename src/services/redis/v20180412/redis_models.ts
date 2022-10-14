@@ -3978,265 +3978,301 @@ export interface ModfiyInstancePasswordResponse {
  */
 export interface InstanceSet {
   /**
-   * 实例名称
+   * 实例名称。
    */
   InstanceName: string
 
   /**
-   * 实例Id
+   * 实例Id。
    */
   InstanceId: string
 
   /**
-   * 用户的Appid
+   * 用户的Appid。
    */
   Appid: number
 
   /**
-   * 项目Id
+   * 项目Id。
    */
   ProjectId: number
 
   /**
-   * 地域id 1--广州 4--上海 5-- 中国香港 6--多伦多 7--上海金融 8--北京 9-- 新加坡 11--深圳金融 15--美西（硅谷）16--成都 17--德国 18--韩国 19--重庆 21--印度 22--美东（弗吉尼亚）23--泰国 24--俄罗斯 25--日本
+   * 地域id 。1--广州 4--上海 5-- 中国香港 6--多伦多 7--上海金融 8--北京 9-- 新加坡 11--深圳金融 15--美西（硅谷）16--成都 17--德国 18--韩国 19--重庆 21--印度 22--美东（弗吉尼亚）23--泰国 24--俄罗斯 25--日本
    */
   RegionId: number
 
   /**
-   * 区域id
+   * 区域id。
    */
   ZoneId: number
 
   /**
-   * vpc网络id 如：75101
+   * vpc网络id，例如75101。
    */
   VpcId: number
 
   /**
-   * vpc网络下子网id 如：46315
+   * vpc网络下子网id 如：46315。
    */
   SubnetId: number
 
   /**
-   * 实例当前状态，0：待初始化；1：实例在流程中；2：实例运行中；-2：实例已隔离；-3：实例待删除
+   * 实例当前状态。<ul><li>0：待初始化。</li><li>1：实例在流程中。</li><li>2：实例运行中。</li><li>-2：实例已隔离。</li><li>-3：实例待删除。</li></ul>
    */
   Status: number
 
   /**
-   * 实例vip
+   * 实例vip。
    */
   WanIp: string
 
   /**
-   * 实例端口号
+   * 实例端口号。
    */
   Port: number
 
   /**
-   * 实例创建时间
+   * 实例创建时间。
    */
   Createtime: string
 
   /**
-   * 实例容量大小，单位：MB
+   * 实例容量大小，单位：MB。
    */
   Size: number
 
   /**
-   * 该字段已废弃
+   * 该字段已废弃。
    */
   SizeUsed: number
 
   /**
-   * 实例类型：1 – Redis2.8内存版（集群架构），2 – Redis2.8内存版（标准架构），3 – CKV 3.2内存版(标准架构)，4 – CKV 3.2内存版(集群架构)，5 – Redis2.8内存版（单机），6 – Redis4.0内存版（标准架构），7 – Redis4.0内存版（集群架构），8 – Redis5.0内存版（标准架构），9 – Redis5.0内存版（集群架构）
+   * 实例类型：<ul><li>1：Redis2.8内存版（集群架构）。</li><li>2：Redis2.8内存版（标准架构）。</li><li>3：CKV 3.2内存版(标准架构)。</li><li>4：CKV 3.2内存版(集群架构)。</li><li>5：Redis2.8内存版（单机）。</li></li><li>6：Redis4.0内存版（标准架构）。</li></li><li>7：Redis4.0内存版（集群架构）。</li></li><li>8：Redis5.0内存版（标准架构）。</li></li><li>9：Redis5.0内存版（集群架构）。</li></ul>
    */
   Type: number
 
   /**
-   * 实例是否设置自动续费标识，1：设置自动续费；0：未设置自动续费
+   * 实例是否设置自动续费标识。<ul><li>1：设置自动续费。</li><li>0：未设置自动续费。</li></ul>
    */
   AutoRenewFlag: number
 
   /**
-   * 实例到期时间
+   * 实例到期时间。
    */
   DeadlineTime: string
 
   /**
-   * 引擎：社区版Redis、腾讯云CKV
+   * 引擎：社区版Redis、腾讯云CKV。
    */
   Engine: string
 
   /**
-   * 产品类型：standalone – 标准版，cluster – 集群版
+   * 产品类型。<ul><li>standalone：标准版。</li><li>cluster ：集群版。</li></ul>
    */
   ProductType: string
 
   /**
-   * vpc网络id 如：vpc-fk33jsf43kgv
+   * vpc网络id，例如vpc-fk33jsf43kgv。
    */
   UniqVpcId: string
 
   /**
-   * vpc网络下子网id 如：subnet-fd3j6l35mm0
+   * vpc网络下子网id，例如：subnet-fd3j6l35mm0。
    */
   UniqSubnetId: string
 
   /**
-   * 计费模式：0-按量计费，1-包年包月
+   * 计费模式。<ul><li>0：按量计费。</li><li>1：包年包月。</li></ul>
    */
   BillingMode: number
 
   /**
-   * 实例运行状态描述：如”实例运行中“
+   * 实例运行状态描述：如”实例运行中“。
    */
   InstanceTitle: string
 
   /**
-   * 计划下线时间
+   * 计划下线时间。
    */
   OfflineTime: string
 
   /**
-   * 流程中的实例，返回子状态
+   * 流程中的实例，返回子状态。
    */
   SubStatus: number
 
   /**
-   * 反亲和性标签
+   * 反亲和性标签。
    */
   Tags: Array<string>
 
   /**
-   * 实例节点信息
+   * 实例节点信息。
    */
   InstanceNode: Array<InstanceNode>
 
   /**
-   * 分片大小
+   * 分片大小。
    */
   RedisShardSize: number
 
   /**
-   * 分片数量
+   * 分片数量。
    */
   RedisShardNum: number
 
   /**
-   * 副本数量
+   * 副本数量。
    */
   RedisReplicasNum: number
 
   /**
-   * 计费Id
+   * 计费Id。
    */
   PriceId: number
 
   /**
-   * 隔离时间
+   * 隔离时间。
    */
   CloseTime: string
 
   /**
-   * 从节点读取权重
+   * 从节点读取权重。
    */
   SlaveReadWeight: number
 
   /**
-      * 实例关联的标签信息
+      * 实例关联的标签信息。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   InstanceTags: Array<InstanceTagInfo>
 
   /**
-      * 项目名称
+      * 项目名称。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ProjectName: string
 
   /**
-      * 是否为免密实例，true-免密实例；false-非免密实例
+      * 是否为免密实例。<ul><li>true：免密实例。</li><li>false：非免密实例。</li></ul>
 注意：此字段可能返回 null，表示取不到有效值。
       */
   NoAuth: boolean
 
   /**
-      * 客户端连接数
+      * 客户端连接数。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ClientLimit: number
 
   /**
-      * DTS状态（内部参数，用户可忽略）
+      * DTS状态（内部参数，用户可忽略）。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   DtsStatus: number
 
   /**
-      * 分片带宽上限，单位MB
+      * 分片带宽上限，单位MB。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   NetLimit: number
 
   /**
-      * 免密实例标识（内部参数，用户可忽略）
+      * 免密实例标识（内部参数，用户可忽略）。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   PasswordFree: number
 
   /**
-      * 实例只读标识（内部参数，用户可忽略）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ReadOnly: number
-
-  /**
-      * 内部参数，用户可忽略
+      * 内部参数，用户可忽略。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Vip6: string
 
   /**
-      * 内部参数，用户可忽略
+      * 实例只读标识（内部参数，用户可忽略）。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ReadOnly: number
+
+  /**
+      * 内部参数，用户可忽略。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   RemainBandwidthDuration: string
 
   /**
-      * Tendis实例的磁盘大小
+      * Redis实例请忽略该参数。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   DiskSize: number
 
   /**
-      * 监控版本: 1m-分钟粒度监控，5s-5秒粒度监控
+      * 监控版本。<ul><li>1m：分钟粒度监控。</li><li>5s：5秒粒度监控。</li></ul>
 注意：此字段可能返回 null，表示取不到有效值。
       */
   MonitorVersion: string
 
   /**
-      * 客户端最大连接数可设置的最小值
+      * 客户端最大连接数可设置的最小值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ClientLimitMin: number
 
   /**
-      * 客户端最大连接数可设置的最大值
+      * 客户端最大连接数可设置的最大值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ClientLimitMax: number
 
   /**
-      * 实例的节点详细信息
+      * 实例的节点详细信息。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   NodeSet: Array<RedisNodeInfo>
 
   /**
-      * 实例所在的地域信息，比如ap-guangzhou
+      * 实例所在的地域信息，比如ap-guangzhou。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Region: string
+
+  /**
+      * 外网地址。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  WanAddress: string
+
+  /**
+      * 北极星服务地址。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PolarisServer: string
+
+  /**
+      * 实例当前Proxy版本。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CurrentProxyVersion: string
+
+  /**
+      * 实例当前Cache小版本。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CurrentRedisVersion: string
+
+  /**
+      * 实例可升级Proxy版本。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UpgradeProxyVersion: string
+
+  /**
+      * 实例可升级Cache小版本。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UpgradeRedisVersion: string
 }
 
 /**

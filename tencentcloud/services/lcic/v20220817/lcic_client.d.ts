@@ -1,12 +1,16 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CreateRoomRequest, CreateSupervisorRequest, DescribeRoomResponse, RegisterUserRequest, LoginOriginIdRequest, DescribeUserRequest, RegisterUserResponse, LoginUserRequest, CreateSupervisorResponse, CreateRoomResponse, DescribeUserResponse, DescribeRoomRequest, LoginOriginIdResponse, LoginUserResponse } from "./lcic_models";
+import { CreateRoomRequest, SetAppCustomContentRequest, CreateSupervisorRequest, DescribeRoomResponse, RegisterUserRequest, LoginOriginIdRequest, DescribeUserRequest, RegisterUserResponse, CreateDocumentResponse, LoginUserRequest, CreateSupervisorResponse, CreateDocumentRequest, CreateRoomResponse, DescribeUserResponse, SetAppCustomContentResponse, DescribeRoomRequest, LoginOriginIdResponse, LoginUserResponse } from "./lcic_models";
 /**
  * lcic client
  * @class
  */
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
+    /**
+     * 创建房间内可以使用的文档。
+     */
+    CreateDocument(req: CreateDocumentRequest, cb?: (error: string, rep: CreateDocumentResponse) => void): Promise<CreateDocumentResponse>;
     /**
      * 获取用户信息
      */
@@ -27,6 +31,10 @@ export declare class Client extends AbstractClient {
      * 创建巡课
      */
     CreateSupervisor(req?: CreateSupervisorRequest, cb?: (error: string, rep: CreateSupervisorResponse) => void): Promise<CreateSupervisorResponse>;
+    /**
+     * 设置应用的自定义内容，包括应用图标，自定义的代码等。如果已存在，则为更新。更新js、css内容后，要生效也需要调用该接口
+     */
+    SetAppCustomContent(req: SetAppCustomContentRequest, cb?: (error: string, rep: SetAppCustomContentResponse) => void): Promise<SetAppCustomContentResponse>;
     /**
      * 获取房间信息
      */

@@ -5771,7 +5771,7 @@ export interface MediaSubtitleInput {
       */
     Content: string;
     /**
-      * 字幕的唯一标识。长度不能超过16个字符，可以使用大小写字母、数字、下划线（_）或横杠（-）。不能与媒资文件中现有字幕的唯一标识重复。
+      * 字幕的唯一标识。长度不能超过16个字符，可以使用大小写字母、数字、下划线（_）或横杠（-）。不能与媒体文件中现有字幕的唯一标识重复。
       */
     Id?: string;
 }
@@ -6664,7 +6664,7 @@ export interface DescribeStorageDataRequest {
     SubAppId?: number;
 }
 /**
- * 即时剪辑后媒资的片段信息。
+ * 即时剪辑后媒体的片段信息。
  */
 export interface LiveRealTimeClipMediaSegmentInfo {
     /**

@@ -2247,22 +2247,46 @@ export interface CopySnapshotCrossRegionsRequest {
  */
 export interface PrepayPrice {
   /**
-      * 预付费云盘或快照预支费用的原价，单位：元。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  OriginalPrice: number
-
-  /**
       * 预付费云盘或快照预支费用的折扣价，单位：元。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   DiscountPrice: number
 
   /**
+      * 后付费云盘的计价单元，取值范围：<br><li>HOUR：表示后付费云盘的计价单元是按小时计算。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ChargeUnit: string
+
+  /**
+      * 高精度后付费云盘原单价, 单位：元
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UnitPriceHigh: string
+
+  /**
       * 高精度预付费云盘或快照预支费用的原价，单位：元
 注意：此字段可能返回 null，表示取不到有效值。
       */
   OriginalPriceHigh: string
+
+  /**
+      * 预付费云盘或快照预支费用的原价，单位：元。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OriginalPrice: number
+
+  /**
+      * 后付费云盘折扣单价，单位：元。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UnitPriceDiscount: number
+
+  /**
+      * 高精度后付费云盘折扣单价, 单位：元
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UnitPriceDiscountHigh: string
 
   /**
       * 高精度预付费云盘或快照预支费用的折扣价，单位：元
@@ -2275,30 +2299,6 @@ export interface PrepayPrice {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   UnitPrice: number
-
-  /**
-      * 后付费云盘的计价单元，取值范围：<br><li>HOUR：表示后付费云盘的计价单元是按小时计算。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ChargeUnit: string
-
-  /**
-      * 后付费云盘折扣单价，单位：元。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  UnitPriceDiscount: number
-
-  /**
-      * 高精度后付费云盘原单价, 单位：元
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  UnitPriceHigh: string
-
-  /**
-      * 高精度后付费云盘折扣单价, 单位：元
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  UnitPriceDiscountHigh: string
 }
 
 /**

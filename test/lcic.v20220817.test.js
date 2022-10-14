@@ -18,6 +18,16 @@ const client = new tencentcloud.lcic.v20220817.Client({
 })
 describe("lcic.v20220817.test.js", function () {
 
+it("lcic.v20220817.CreateDocument", async function () {
+    try {
+       const data = await client.CreateDocument({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lcic.v20220817.DescribeUser", async function () {
     try {
        const data = await client.DescribeUser({})
@@ -61,6 +71,16 @@ it("lcic.v20220817.LoginUser", async function () {
 it("lcic.v20220817.CreateSupervisor", async function () {
     try {
        const data = await client.CreateSupervisor({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lcic.v20220817.SetAppCustomContent", async function () {
+    try {
+       const data = await client.SetAppCustomContent({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

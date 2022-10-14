@@ -13681,6 +13681,16 @@ export interface CreateSinglePaymentData {
       * 平台交易流水号，唯一
       */
     TradeSerialNo: string;
+    /**
+      * 代理商ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AgentId: string;
+    /**
+      * 代理商名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AgentName: string;
 }
 /**
  * CheckAmount返回参数结构体
@@ -21080,6 +21090,21 @@ export interface CreateOpenBankOrderRechargeResult {
       * 外部商户订单号，只能是数字、大小写字母，且在同一个接入平台下唯一。
       */
     OutOrderId: string;
+    /**
+      * 充值状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DealStatus: string;
+    /**
+      * 充值返回描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DealMessage: string;
+    /**
+      * PC web端跳转链接
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PcWebUrl: string;
 }
 /**
  * 税前金额结果

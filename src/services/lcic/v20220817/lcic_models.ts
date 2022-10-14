@@ -98,6 +98,21 @@ coteaching 双师
 }
 
 /**
+ * SetAppCustomContent请求参数结构体
+ */
+export interface SetAppCustomContentRequest {
+  /**
+   * 自定义内容。
+   */
+  CustomContent: Array<AppCustomContent>
+
+  /**
+   * 应用ID。
+   */
+  SdkAppId: number
+}
+
+/**
  * CreateSupervisor请求参数结构体
  */
 export type CreateSupervisorRequest = null
@@ -256,6 +271,21 @@ export interface RegisterUserResponse {
 }
 
 /**
+ * CreateDocument返回参数结构体
+ */
+export interface CreateDocumentResponse {
+  /**
+   * 文档ID。
+   */
+  DocumentId: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * LoginUser请求参数结构体
  */
 export interface LoginUserRequest {
@@ -273,6 +303,57 @@ export interface CreateSupervisorResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreateDocument请求参数结构体
+ */
+export interface CreateDocumentRequest {
+  /**
+   * 低代码互动课堂的SdkAppId。
+   */
+  SdkAppId: number
+
+  /**
+   * 文档地址。
+   */
+  DocumentUrl: string
+
+  /**
+   * 文档名称。
+   */
+  DocumentName: string
+
+  /**
+   * 文档所有者的Id
+   */
+  Owner: string
+
+  /**
+      * 转码类型，可以有如下取值：
+0 无需转码（默认）
+1 需要转码的文档，ppt，pptx，pdf，doc，docx
+2 需要转码的视频，mp4，3pg，mpeg，avi，flv，wmv，rm，h264等
+2 需要转码的音频，mp3，wav，wma，aac，flac，opus
+      */
+  TranscodeType?: number
+
+  /**
+      * 权限，可以有如下取值：
+0 私有文档（默认）
+1 公共文档
+      */
+  Permission?: number
+
+  /**
+   * 文档后缀名。
+   */
+  DocumentType?: string
+
+  /**
+   * 文档大小，单位 字节
+   */
+  DocumentSize?: number
 }
 
 /**
@@ -314,6 +395,16 @@ export interface DescribeUserResponse {
    */
   Avatar: string
 
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * SetAppCustomContent返回参数结构体
+ */
+export interface SetAppCustomContentResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -368,4 +459,34 @@ export interface LoginUserResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 应用自定义内容
+ */
+export interface AppCustomContent {
+  /**
+   * 场景参数，一个应用下可以设置多个不同场景。
+   */
+  Scene: string
+
+  /**
+   * logo地址。
+   */
+  LogoUrl?: string
+
+  /**
+   * 主页地址，可设置用于跳转。
+   */
+  HomeUrl?: string
+
+  /**
+   * 自定义的js。
+   */
+  JsUrl?: string
+
+  /**
+   * 自定义的css。
+   */
+  CssUrl?: string
 }
