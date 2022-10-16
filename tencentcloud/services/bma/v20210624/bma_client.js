@@ -83,6 +83,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyBPOfflineAttachment", req, cb);
     }
     /**
+     * 版权保护-新建取证接口
+     */
+    async CreateCRObtain(req, cb) {
+        return this.request("CreateCRObtain", req, cb);
+    }
+    /**
      * 开启/关闭监测
      */
     async ModifyCRMonitor(req, cb) {

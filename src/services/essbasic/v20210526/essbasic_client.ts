@@ -39,7 +39,6 @@ import {
   CreateSignUrlsRequest,
   ChannelCreateMultiFlowSignQRCodeRequest,
   AuthFailMessage,
-  CreateChannelFlowEvidenceReportRequest,
   DescribeFlowDetailInfoRequest,
   ChannelGetTaskResultApiResponse,
   UploadFile,
@@ -78,7 +77,6 @@ import {
   DescribeResourceUrlsByFlowsRequest,
   DownloadFlowInfo,
   ChannelCancelMultiFlowSignQRCodeRequest,
-  CreateChannelFlowEvidenceReportResponse,
   PrepareFlowsResponse,
   ChannelDescribeEmployeesResponse,
   TaskInfo,
@@ -247,14 +245,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 创建出证报告，返回报告 URL。此接口暂未开放，有问题请联系运营人员。
-
-     */
-  async CreateChannelFlowEvidenceReport(
-    req: CreateChannelFlowEvidenceReportRequest,
-    cb?: (error: string, rep: CreateChannelFlowEvidenceReportResponse) => void
-  ): Promise<CreateChannelFlowEvidenceReportResponse> {
-    return this.request("CreateChannelFlowEvidenceReport", req, cb)
+   * 此接口（SyncProxyOrganization）用于同步渠道子客企业信息，主要是子客企业的营业执照，便于子客企业开通过程中不用手动上传。若有需要调用此接口，需要在创建控制链接CreateConsoleLoginUrl之后即刻进行调用。
+   */
+  async SyncProxyOrganization(
+    req: SyncProxyOrganizationRequest,
+    cb?: (error: string, rep: SyncProxyOrganizationResponse) => void
+  ): Promise<SyncProxyOrganizationResponse> {
+    return this.request("SyncProxyOrganization", req, cb)
   }
 
   /**
@@ -354,16 +351,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UploadFilesResponse) => void
   ): Promise<UploadFilesResponse> {
     return this.request("UploadFiles", req, cb)
-  }
-
-  /**
-   * 此接口（SyncProxyOrganization）用于同步渠道子客企业信息，主要是子客企业的营业执照，便于子客企业开通过程中不用手动上传。若有需要调用此接口，需要在创建控制链接CreateConsoleLoginUrl之后即刻进行调用。
-   */
-  async SyncProxyOrganization(
-    req: SyncProxyOrganizationRequest,
-    cb?: (error: string, rep: SyncProxyOrganizationResponse) => void
-  ): Promise<SyncProxyOrganizationResponse> {
-    return this.request("SyncProxyOrganization", req, cb)
   }
 
   /**

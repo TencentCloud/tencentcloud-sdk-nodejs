@@ -873,16 +873,6 @@ export interface DescribeDatasourceResponse {
 }
 
 /**
- * DescribeDatasource请求参数结构体
- */
-export interface DescribeDatasourceRequest {
-  /**
-   * 对象唯一ID
-   */
-  Id: number
-}
-
-/**
  * 集成节点映射
  */
 export interface IntegrationNodeMapping {
@@ -916,6 +906,38 @@ export interface IntegrationNodeMapping {
 }
 
 /**
+ * 集成节点schema
+ */
+export interface IntegrationNodeSchema {
+  /**
+   * schema id
+   */
+  Id: string
+
+  /**
+   * schema名称
+   */
+  Name: string
+
+  /**
+   * schema类型
+   */
+  Type: string
+
+  /**
+      * schema值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Value?: string
+
+  /**
+      * schema拓展属性
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Properties?: Array<RecordField>
+}
+
+/**
  * KillInstances返回参数结构体
  */
 export interface KillInstancesResponse {
@@ -943,6 +965,26 @@ export interface SetTaskAlarmNewRequest {
    * 项目Id
    */
   ProjectId: string
+}
+
+/**
+ * 函数类型或函数分类
+ */
+export interface FunctionTypeOrKind {
+  /**
+   * 无
+   */
+  Name: string
+
+  /**
+   * 无
+   */
+  ZhName: string
+
+  /**
+   * 无
+   */
+  EnName: string
 }
 
 /**
@@ -1110,6 +1152,11 @@ export interface DataSourceInfoPage {
 }
 
 /**
+ * DescribeFunctionTypes请求参数结构体
+ */
+export type DescribeFunctionTypesRequest = null
+
+/**
  * BatchDeleteTasksNew请求参数结构体
  */
 export interface BatchDeleteTasksNewRequest {
@@ -1137,6 +1184,34 @@ false:  不通知下游任务责任人
 }
 
 /**
+ * 提交工作流实体
+ */
+export interface SubmitWorkflow {
+  /**
+      * 被提交的任务id集合
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TaskIds: Array<string>
+
+  /**
+   * 执行结果
+   */
+  Result: boolean
+
+  /**
+      * 执行情况备注
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ErrorDesc: string
+
+  /**
+      * 执行情况id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ErrorId: string
+}
+
+/**
  * DescribeFolderWorkflowList返回参数结构体
  */
 export interface DescribeFolderWorkflowListResponse {
@@ -1145,6 +1220,21 @@ export interface DescribeFolderWorkflowListResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Data: DescribeFolderWorkflowListData
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyFolder返回参数结构体
+ */
+export interface ModifyFolderResponse {
+  /**
+   * true代表成功，false代表失败
+   */
+  Data: boolean
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1170,6 +1260,21 @@ export interface CreateFolderRequest {
    * 父文件夹ID
    */
   ParentsFolderId?: string
+}
+
+/**
+ * DeleteCustomFunction请求参数结构体
+ */
+export interface DeleteCustomFunctionRequest {
+  /**
+   * 集群实例 ID
+   */
+  ClusterIdentifier: string
+
+  /**
+   * 函数 ID
+   */
+  FunctionId: string
 }
 
 /**
@@ -1278,63 +1383,30 @@ export interface DescribeFolderWorkflowListData {
 }
 
 /**
- * ModifyWorkflowInfo请求参数结构体
+ * DescribeFunctionKinds请求参数结构体
  */
-export interface ModifyWorkflowInfoRequest {
+export type DescribeFunctionKindsRequest = null
+
+/**
+ * DescribeFunctionKinds返回参数结构体
+ */
+export interface DescribeFunctionKindsResponse {
   /**
-   * 项目Id
-   */
-  ProjectId: string
+      * 无
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Kinds: Array<FunctionTypeOrKind>
 
   /**
-   * 工作流id
-   */
-  WorkflowId: string
+      * 无
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ErrorMessage: string
 
   /**
-   * 责任人
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Owner?: string
-
-  /**
-   * 责任人id
-   */
-  OwnerId?: string
-
-  /**
-   * 备注
-   */
-  WorkflowDesc?: string
-
-  /**
-   * 工作流名称
-   */
-  WorkflowName?: string
-
-  /**
-   * 所属文件夹id
-   */
-  FolderId?: string
-
-  /**
-   * 工作流所属用户分组id  若有多个,分号隔开: a;b;c
-   */
-  UserGroupId?: string
-
-  /**
-   * 工作流所属用户分组名称  若有多个,分号隔开: a;b;c
-   */
-  UserGroupName?: string
-
-  /**
-   * 工作流参数列表
-   */
-  WorkflowParams?: Array<ParamInfo>
-
-  /**
-   * 用于配置优化参数（线程、内存、CPU核数等），仅作用于Spark SQL节点。多个参数用英文分号分隔。
-   */
-  GeneralTaskParams?: Array<GeneralTaskParam>
+  RequestId?: string
 }
 
 /**
@@ -1345,6 +1417,28 @@ export interface FreezeTasksByMultiWorkflowResponse {
    * 操作结果
    */
   Data: OperateResult
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * SaveCustomFunction返回参数结构体
+ */
+export interface SaveCustomFunctionResponse {
+  /**
+      * 函数唯一标识
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FunctionId: string
+
+  /**
+      * 无
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ErrorMessage: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1511,6 +1605,21 @@ export interface KillInstancesRequest {
 }
 
 /**
+ * ModifyTaskInfo返回参数结构体
+ */
+export interface ModifyTaskInfoResponse {
+  /**
+   * 执行结果
+   */
+  Data: boolean
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * Spark SQL配置参数
  */
 export interface GeneralTaskParam {
@@ -1624,6 +1733,66 @@ export interface Workflow {
 }
 
 /**
+ * ModifyWorkflowInfo请求参数结构体
+ */
+export interface ModifyWorkflowInfoRequest {
+  /**
+   * 项目Id
+   */
+  ProjectId: string
+
+  /**
+   * 工作流id
+   */
+  WorkflowId: string
+
+  /**
+   * 责任人
+   */
+  Owner?: string
+
+  /**
+   * 责任人id
+   */
+  OwnerId?: string
+
+  /**
+   * 备注
+   */
+  WorkflowDesc?: string
+
+  /**
+   * 工作流名称
+   */
+  WorkflowName?: string
+
+  /**
+   * 所属文件夹id
+   */
+  FolderId?: string
+
+  /**
+   * 工作流所属用户分组id  若有多个,分号隔开: a;b;c
+   */
+  UserGroupId?: string
+
+  /**
+   * 工作流所属用户分组名称  若有多个,分号隔开: a;b;c
+   */
+  UserGroupName?: string
+
+  /**
+   * 工作流参数列表
+   */
+  WorkflowParams?: Array<ParamInfo>
+
+  /**
+   * 用于配置优化参数（线程、内存、CPU核数等），仅作用于Spark SQL节点。多个参数用英文分号分隔。
+   */
+  GeneralTaskParams?: Array<GeneralTaskParam>
+}
+
+/**
  * DescribeFolderWorkflowList请求参数结构体
  */
 export interface DescribeFolderWorkflowListRequest {
@@ -1670,33 +1839,18 @@ export interface ModifyDataSourceResponse {
 }
 
 /**
- * DescribeFolderList请求参数结构体
+ * BatchStopTasksNew请求参数结构体
  */
-export interface DescribeFolderListRequest {
+export interface BatchStopTasksNewRequest {
+  /**
+   * 批量停止任务的TaskId
+   */
+  TaskIdList: Array<string>
+
   /**
    * 项目Id
    */
   ProjectId: string
-
-  /**
-   * 文件夹ID
-   */
-  ParentsFolderId: string
-
-  /**
-   * 关键字
-   */
-  KeyWords?: string
-
-  /**
-   * 页码，默认1
-   */
-  PageNumber?: number
-
-  /**
-   * 页大小，默认10
-   */
-  PageSize?: number
 }
 
 /**
@@ -1725,13 +1879,20 @@ export interface TriggerEventRequest {
 }
 
 /**
- * ModifyTaskInfo返回参数结构体
+ * DescribeFunctionTypes返回参数结构体
  */
-export interface ModifyTaskInfoResponse {
+export interface DescribeFunctionTypesResponse {
   /**
-   * 执行结果
-   */
-  Data: boolean
+      * 无
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Types: Array<FunctionTypeOrKind>
+
+  /**
+      * 无
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ErrorMessage: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1881,18 +2042,58 @@ export interface IntegrationNodeDetail {
 }
 
 /**
- * BatchStopTasksNew请求参数结构体
+ * SaveCustomFunction请求参数结构体
  */
-export interface BatchStopTasksNewRequest {
+export interface SaveCustomFunctionRequest {
   /**
-   * 批量停止任务的TaskId
+   * 函数唯一标识
    */
-  TaskIdList: Array<string>
+  FunctionId: string
 
   /**
-   * 项目Id
+   * 分类：窗口函数、聚合函数、日期函数......
    */
-  ProjectId: string
+  Kind: string
+
+  /**
+   * 集群引擎实例
+   */
+  ClusterIdentifier: string
+
+  /**
+   * 类名
+   */
+  ClassName: string
+
+  /**
+   * 资源列表
+   */
+  ResourceList: Array<FunctionResource>
+
+  /**
+   * 函数说明
+   */
+  Description: string
+
+  /**
+   * 用法
+   */
+  Usage: string
+
+  /**
+   * 参数说明
+   */
+  ParamDesc: string
+
+  /**
+   * 返回值说明
+   */
+  ReturnDesc: string
+
+  /**
+   * 示例
+   */
+  Example: string
 }
 
 /**
@@ -2086,35 +2287,13 @@ export interface CanvasInfo {
 }
 
 /**
- * 集成节点schema
+ * DescribeDatasource请求参数结构体
  */
-export interface IntegrationNodeSchema {
+export interface DescribeDatasourceRequest {
   /**
-   * schema id
+   * 对象唯一ID
    */
-  Id: string
-
-  /**
-   * schema名称
-   */
-  Name: string
-
-  /**
-   * schema类型
-   */
-  Type: string
-
-  /**
-      * schema值
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Value?: string
-
-  /**
-      * schema拓展属性
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Properties?: Array<RecordField>
+  Id: number
 }
 
 /**
@@ -2485,6 +2664,40 @@ export interface DescribeTasksByPageResponse {
 }
 
 /**
+ * 函数资源信息
+ */
+export interface FunctionResource {
+  /**
+      * 资源路径
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Path: string
+
+  /**
+      * 无
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Name: string
+
+  /**
+   * 资源唯一标识
+   */
+  Id?: string
+
+  /**
+      * 资源 MD5 值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Md5?: string
+
+  /**
+      * 默认是 hdfs
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Type?: string
+}
+
+/**
  * CreateDataSource返回参数结构体
  */
 export interface CreateDataSourceResponse {
@@ -2831,46 +3044,55 @@ export interface FreezeTasksRequest {
 }
 
 /**
- * 提交工作流实体
+ * DeleteCustomFunction返回参数结构体
  */
-export interface SubmitWorkflow {
+export interface DeleteCustomFunctionResponse {
   /**
-      * 被提交的任务id集合
+      * 函数 ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  TaskIds: Array<string>
+  FunctionId: string
 
   /**
-   * 执行结果
-   */
-  Result: boolean
-
-  /**
-      * 执行情况备注
+      * 无
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ErrorDesc: string
-
-  /**
-      * 执行情况id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ErrorId: string
-}
-
-/**
- * ModifyFolder返回参数结构体
- */
-export interface ModifyFolderResponse {
-  /**
-   * true代表成功，false代表失败
-   */
-  Data: boolean
+  ErrorMessage: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeFolderList请求参数结构体
+ */
+export interface DescribeFolderListRequest {
+  /**
+   * 项目Id
+   */
+  ProjectId: string
+
+  /**
+   * 文件夹ID
+   */
+  ParentsFolderId: string
+
+  /**
+   * 关键字
+   */
+  KeyWords?: string
+
+  /**
+   * 页码，默认1
+   */
+  PageNumber?: number
+
+  /**
+   * 页大小，默认10
+   */
+  PageSize?: number
 }
 
 /**
@@ -2920,38 +3142,82 @@ export interface DescribeDependTasksNewResponse {
 }
 
 /**
- * DescribeRelatedInstances请求参数结构体
+ * SubmitCustomFunction返回参数结构体
  */
-export interface DescribeRelatedInstancesRequest {
+export interface SubmitCustomFunctionResponse {
   /**
-   * 项目id
-   */
-  ProjectId: string
+      * 函数唯一标识
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FunctionId: string
 
   /**
-   * 数据时间，格式yyyy-MM-dd HH:mm:ss
-   */
-  CurRunDate: string
+      * 无
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ErrorMessage: string
 
   /**
-   * 任务id
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  TaskId: number
+  RequestId?: string
+}
+
+/**
+ * DescribeTaskInstances返回参数结构体
+ */
+export interface DescribeTaskInstancesResponse {
+  /**
+   * 无
+   */
+  Data: DescribeTaskInstancesData
 
   /**
-   * 距离当前任务的层级距离，-1表示取父节点，1表示子节点
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Depth: number
+  RequestId?: string
+}
+
+/**
+ * 函数提交版本信息
+ */
+export interface FunctionVersion {
+  /**
+   * 版本号：V0 V1 V2
+   */
+  Tag: string
 
   /**
-   * 页号，默认为1
+   * 提交人 ID
    */
-  PageNumber?: number
+  UserId: string
 
   /**
-   * 页大小，默认为10，最大不超过200
+   * 变更类型：ADD、MODIFY
    */
-  PageSize?: number
+  Type: string
+
+  /**
+   * 备注
+   */
+  Comment: string
+
+  /**
+   * 提交时间: UTC 秒数
+   */
+  Timestamp: string
+
+  /**
+      * 提交人名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UserName: string
+
+  /**
+      * 版本内容：json string 格式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Content: string
 }
 
 /**
@@ -3170,21 +3436,6 @@ export interface CreateCustomFunctionResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ErrorMessage: string
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeTaskInstances返回参数结构体
- */
-export interface DescribeTaskInstancesResponse {
-  /**
-   * 无
-   */
-  Data: DescribeTaskInstancesData
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3729,6 +3980,66 @@ export interface DeleteDataSourcesRequest {
 }
 
 /**
+ * DescribeRelatedInstances请求参数结构体
+ */
+export interface DescribeRelatedInstancesRequest {
+  /**
+   * 项目id
+   */
+  ProjectId: string
+
+  /**
+   * 数据时间，格式yyyy-MM-dd HH:mm:ss
+   */
+  CurRunDate: string
+
+  /**
+   * 任务id
+   */
+  TaskId: number
+
+  /**
+   * 距离当前任务的层级距离，-1表示取父节点，1表示子节点
+   */
+  Depth: number
+
+  /**
+   * 页号，默认为1
+   */
+  PageNumber?: number
+
+  /**
+   * 页大小，默认为10，最大不超过200
+   */
+  PageSize?: number
+}
+
+/**
+ * DescribeOrganizationalFunctions请求参数结构体
+ */
+export interface DescribeOrganizationalFunctionsRequest {
+  /**
+   * 场景类型：开发、使用
+   */
+  Type: string
+
+  /**
+   * 项目 ID
+   */
+  ProjectId: string
+
+  /**
+   * 函数名称
+   */
+  Name?: string
+
+  /**
+   * 展示名称
+   */
+  DisplayName?: string
+}
+
+/**
  * ModifyWorkflowInfo返回参数结构体
  */
 export interface ModifyWorkflowInfoResponse {
@@ -3741,6 +4052,133 @@ export interface ModifyWorkflowInfoResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 包含层级信息的函数
+ */
+export interface OrganizationalFunction {
+  /**
+   * 名称
+   */
+  Name: string
+
+  /**
+   * 展示名称
+   */
+  DisplayName: string
+
+  /**
+   * 层级路径
+   */
+  LayerPath: string
+
+  /**
+   * 上级层级路径
+   */
+  ParentLayerPath: string
+
+  /**
+      * 函数类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Type: string
+
+  /**
+      * 函数分类：窗口函数、聚合函数、日期函数......
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Kind: string
+
+  /**
+      * 函数种类：系统函数、自定义函数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Category: string
+
+  /**
+      * 函数状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Status: string
+
+  /**
+      * 函数说明
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Description: string
+
+  /**
+      * 函数用法
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Usage: string
+
+  /**
+      * 函数参数说明
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ParamDesc: string
+
+  /**
+      * 函数返回值说明
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ReturnDesc: string
+
+  /**
+      * 函数示例
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Example: string
+
+  /**
+      * 集群实例引擎 ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClusterIdentifier: string
+
+  /**
+      * 函数 ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FuncId: string
+
+  /**
+      * 函数类名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClassName: string
+
+  /**
+      * 函数资源列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ResourceList: Array<FunctionVersion>
+
+  /**
+      * 操作人 ID 列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OperatorUserIds: Array<number>
+
+  /**
+      * 公有云 Owner ID 列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OwnerUserIds: Array<number>
+
+  /**
+      * 数据库名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DbName: string
+
+  /**
+      * 提交失败错误信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SubmitErrorMsg: string
 }
 
 /**
@@ -3891,6 +4329,28 @@ export interface ForceSucInstancesResponse {
 }
 
 /**
+ * DescribeOrganizationalFunctions返回参数结构体
+ */
+export interface DescribeOrganizationalFunctionsResponse {
+  /**
+      * 无
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Content: Array<OrganizationalFunction>
+
+  /**
+      * 无
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ErrorMessage: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeTasksByPage请求参数结构体
  */
 export interface DescribeTasksByPageRequest {
@@ -3913,4 +4373,24 @@ export interface DescribeTasksByPageRequest {
    * 页大小，默认10
    */
   PageSize?: number
+}
+
+/**
+ * SubmitCustomFunction请求参数结构体
+ */
+export interface SubmitCustomFunctionRequest {
+  /**
+   * 函数唯一标识
+   */
+  FunctionId: string
+
+  /**
+   * 集群实例 ID
+   */
+  ClusterIdentifier: string
+
+  /**
+   * 备注信息
+   */
+  Comment: string
 }

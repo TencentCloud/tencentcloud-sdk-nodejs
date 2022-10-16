@@ -49,6 +49,13 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+删除数据源
+     */
+    async DeleteDataSources(req, cb) {
+        return this.request("DeleteDataSources", req, cb);
+    }
+    /**
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
 修改任务脚本
      */
     async ModifyTaskScript(req, cb) {
@@ -104,11 +111,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyTaskInfo", req, cb);
     }
     /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-删除数据源
+     * 删除用户自定义函数
      */
-    async DeleteDataSources(req, cb) {
-        return this.request("DeleteDataSources", req, cb);
+    async DeleteCustomFunction(req, cb) {
+        return this.request("DeleteCustomFunction", req, cb);
     }
     /**
      * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
@@ -150,6 +156,13 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+文件夹更新
+     */
+    async ModifyFolder(req, cb) {
+        return this.request("ModifyFolder", req, cb);
+    }
+    /**
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
 基于多个工作流进行批量冻结任务操作
      */
     async FreezeTasksByMultiWorkflow(req, cb) {
@@ -177,10 +190,16 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-数据源详情
+仅对任务状态为”调度中“和”已暂停“有效，对所选任务的任务实例进行终止，并停止调度
      */
-    async DescribeDatasource(req, cb) {
-        return this.request("DescribeDatasource", req, cb);
+    async BatchStopTasksNew(req, cb) {
+        return this.request("BatchStopTasksNew", req, cb);
+    }
+    /**
+     * 提交自定义函数
+     */
+    async SubmitCustomFunction(req, cb) {
+        return this.request("SubmitCustomFunction", req, cb);
     }
     /**
      * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
@@ -239,11 +258,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateCustomFunction", req, cb);
     }
     /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-文件夹更新
+     * 查询函数类型
      */
-    async ModifyFolder(req, cb) {
-        return this.request("ModifyFolder", req, cb);
+    async DescribeFunctionTypes(req, cb) {
+        return this.request("DescribeFunctionTypes", req, cb);
     }
     /**
      * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
@@ -265,6 +283,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async RegisterEventListener(req, cb) {
         return this.request("RegisterEventListener", req, cb);
+    }
+    /**
+     * 查询函数分类
+     */
+    async DescribeFunctionKinds(req, cb) {
+        return this.request("DescribeFunctionKinds", req, cb);
     }
     /**
      * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
@@ -308,11 +332,24 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RunTask", req, cb);
     }
     /**
+     * 保存用户自定义函数
+     */
+    async SaveCustomFunction(req, cb) {
+        return this.request("SaveCustomFunction", req, cb);
+    }
+    /**
      * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
 根据层级查找上/下游任务节点
      */
     async DescribeDependTasksNew(req, cb) {
         return this.request("DescribeDependTasksNew", req, cb);
+    }
+    /**
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+数据源详情
+     */
+    async DescribeDatasource(req, cb) {
+        return this.request("DescribeDatasource", req, cb);
     }
     /**
      * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
@@ -336,11 +373,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("BatchModifyOwnersNew", req, cb);
     }
     /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-仅对任务状态为”调度中“和”已暂停“有效，对所选任务的任务实例进行终止，并停止调度
+     * 查询全量函数
      */
-    async BatchStopTasksNew(req, cb) {
-        return this.request("BatchStopTasksNew", req, cb);
+    async DescribeOrganizationalFunctions(req, cb) {
+        return this.request("DescribeOrganizationalFunctions", req, cb);
     }
 }
 exports.Client = Client;

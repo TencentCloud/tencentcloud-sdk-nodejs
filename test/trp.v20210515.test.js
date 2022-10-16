@@ -28,6 +28,16 @@ it("trp.v20210515.DescribeTraceCodeById", async function () {
     }
 })
 
+it("trp.v20210515.DescribeCustomRules", async function () {
+    try {
+       const data = await client.DescribeCustomRules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("trp.v20210515.ModifyTraceDataRanks", async function () {
     try {
        const data = await client.ModifyTraceDataRanks({})
@@ -38,9 +48,19 @@ it("trp.v20210515.ModifyTraceDataRanks", async function () {
     }
 })
 
-it("trp.v20210515.ModifyProduct", async function () {
+it("trp.v20210515.DescribeCustomRuleById", async function () {
     try {
-       const data = await client.ModifyProduct({})
+       const data = await client.DescribeCustomRuleById({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("trp.v20210515.CreateTraceCodesAsync", async function () {
+    try {
+       const data = await client.CreateTraceCodesAsync({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -108,9 +128,39 @@ it("trp.v20210515.DescribeProducts", async function () {
     }
 })
 
+it("trp.v20210515.ModifyCustomRule", async function () {
+    try {
+       const data = await client.ModifyCustomRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("trp.v20210515.ModifyTraceData", async function () {
     try {
        const data = await client.ModifyTraceData({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("trp.v20210515.ModifyProduct", async function () {
+    try {
+       const data = await client.ModifyProduct({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("trp.v20210515.ModifyCustomRuleStatus", async function () {
+    try {
+       const data = await client.ModifyCustomRuleStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -158,6 +208,16 @@ it("trp.v20210515.CreateTraceChain", async function () {
     }
 })
 
+it("trp.v20210515.CreateCustomPack", async function () {
+    try {
+       const data = await client.CreateCustomPack({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("trp.v20210515.DeleteMerchant", async function () {
     try {
        const data = await client.DeleteMerchant({})
@@ -168,9 +228,39 @@ it("trp.v20210515.DeleteMerchant", async function () {
     }
 })
 
+it("trp.v20210515.DescribeCodePackStatus", async function () {
+    try {
+       const data = await client.DescribeCodePackStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("trp.v20210515.DescribeCodeBatchs", async function () {
     try {
        const data = await client.DescribeCodeBatchs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("trp.v20210515.CreateCustomRule", async function () {
+    try {
+       const data = await client.CreateCustomRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("trp.v20210515.DescribeCodePackUrl", async function () {
+    try {
+       const data = await client.DescribeCodePackUrl({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -208,9 +298,9 @@ it("trp.v20210515.DeleteCodeBatch", async function () {
     }
 })
 
-it("trp.v20210515.DescribeTraceDataList", async function () {
+it("trp.v20210515.DeleteTraceData", async function () {
     try {
-       const data = await client.DescribeTraceDataList({})
+       const data = await client.DeleteTraceData({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -238,9 +328,9 @@ it("trp.v20210515.CreateMerchant", async function () {
     }
 })
 
-it("trp.v20210515.DeleteTraceData", async function () {
+it("trp.v20210515.DescribeTraceDataList", async function () {
     try {
-       const data = await client.DeleteTraceData({})
+       const data = await client.DescribeTraceDataList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -291,6 +381,16 @@ it("trp.v20210515.DescribeMerchants", async function () {
 it("trp.v20210515.CreateCodePack", async function () {
     try {
        const data = await client.CreateCodePack({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("trp.v20210515.DescribeJobFileUrl", async function () {
+    try {
+       const data = await client.DescribeJobFileUrl({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

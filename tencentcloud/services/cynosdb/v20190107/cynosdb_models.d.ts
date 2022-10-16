@@ -51,34 +51,44 @@ export interface InquirePriceRenewRequest {
     TimeUnit: string;
 }
 /**
- * 任务信息
+ * DescribeAuditLogs请求参数结构体
  */
-export interface ObjectTask {
+export interface DescribeAuditLogsRequest {
     /**
-      * 任务自增ID
-注意：此字段可能返回 null，表示取不到有效值。
+      * 实例ID
       */
-    TaskId?: number;
+    InstanceId: string;
     /**
-      * 任务类型
-注意：此字段可能返回 null，表示取不到有效值。
+      * 开始时间，格式为："2017-07-12 10:29:20"。
       */
-    TaskType?: string;
+    StartTime: string;
     /**
-      * 任务状态
-注意：此字段可能返回 null，表示取不到有效值。
+      * 结束时间，格式为："2017-07-12 10:29:20"。
       */
-    TaskStatus?: string;
+    EndTime: string;
     /**
-      * 任务ID（集群ID|实例组ID|实例ID）
-注意：此字段可能返回 null，表示取不到有效值。
+      * 排序方式。支持值包括："ASC" - 升序，"DESC" - 降序。
       */
-    ObjectId?: string;
+    Order?: string;
     /**
-      * 任务类型
-注意：此字段可能返回 null，表示取不到有效值。
+      * 排序字段。支持值包括：
+"timestamp" - 时间戳；
+"affectRows" - 影响行数；
+"execTime" - 执行时间。
       */
-    ObjectType?: string;
+    OrderBy?: string;
+    /**
+      * 过滤条件。可按设置的过滤条件过滤日志。
+      */
+    Filter?: AuditLogFilter;
+    /**
+      * 分页参数，单次返回的数据条数。默认值为100，最大值为100。
+      */
+    Limit?: number;
+    /**
+      * 分页偏移量。
+      */
+    Offset?: number;
 }
 /**
  * DescribeBackupConfig请求参数结构体
@@ -178,6 +188,23 @@ export interface ModifyClusterStorageRequest {
       * 交易模式 0-下单并支付 1-下单
       */
     DealMode?: number;
+}
+/**
+ * DescribeAuditLogFiles返回参数结构体
+ */
+export interface DescribeAuditLogFilesResponse {
+    /**
+      * 符合条件的审计日志文件个数。
+      */
+    TotalCount: number;
+    /**
+      * 审计日志文件详情。
+      */
+    Items: Array<AuditLogFile>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * SwitchClusterZone返回参数结构体
@@ -409,18 +436,76 @@ export interface IsolateInstanceResponse {
     RequestId?: string;
 }
 /**
- * ModifyInstanceName返回参数结构体
+ * 审计日志过滤条件。查询审计日志时，用户过滤返回的审计日志。
  */
-export interface ModifyInstanceNameResponse {
+export interface AuditLogFilter {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 客户端地址。
       */
-    RequestId?: string;
+    Host?: Array<string>;
+    /**
+      * 用户名。
+      */
+    User?: Array<string>;
+    /**
+      * 数据库名称。
+      */
+    DBName?: Array<string>;
+    /**
+      * 表名称。
+      */
+    TableName?: Array<string>;
+    /**
+      * 审计策略名称。
+      */
+    PolicyName?: Array<string>;
+    /**
+      * SQL 语句。支持模糊匹配。
+      */
+    Sql?: string;
+    /**
+      * SQL 类型。目前支持："SELECT", "INSERT", "UPDATE", "DELETE", "CREATE", "DROP", "ALTER", "SET", "REPLACE", "EXECUTE"。
+      */
+    SqlType?: string;
+    /**
+      * 执行时间。单位为：ms。表示筛选执行时间大于该值的审计日志。
+      */
+    ExecTime?: number;
+    /**
+      * 影响行数。表示筛选影响行数大于该值的审计日志。
+      */
+    AffectRows?: number;
+    /**
+      * SQL 类型。支持多个类型同时查询。目前支持："SELECT", "INSERT", "UPDATE", "DELETE", "CREATE", "DROP", "ALTER", "SET", "REPLACE", "EXECUTE"。
+      */
+    SqlTypes?: Array<string>;
+    /**
+      * SQL 语句。支持传递多个sql语句。
+      */
+    Sqls?: Array<string>;
 }
 /**
  * DescribeParamTemplates请求参数结构体
  */
 export declare type DescribeParamTemplatesRequest = null;
+/**
+ * DescribeAuditLogs返回参数结构体
+ */
+export interface DescribeAuditLogsResponse {
+    /**
+      * 符合条件的审计日志条数。
+      */
+    TotalCount: number;
+    /**
+      * 审计日志详情。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Items: Array<AuditLog>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
 /**
  * PauseServerless请求参数结构体
  */
@@ -433,6 +518,36 @@ export interface PauseServerlessRequest {
       * 是否强制暂停，忽略当前的用户链接  0:不强制  1:强制， 默认为1
       */
     ForcePause?: number;
+}
+/**
+ * 任务信息
+ */
+export interface ObjectTask {
+    /**
+      * 任务自增ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TaskId?: number;
+    /**
+      * 任务类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TaskType?: string;
+    /**
+      * 任务状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TaskStatus?: string;
+    /**
+      * 任务ID（集群ID|实例组ID|实例ID）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ObjectId?: string;
+    /**
+      * 任务类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ObjectType?: string;
 }
 /**
  * RevokeAccountPrivileges返回参数结构体
@@ -780,6 +895,15 @@ export interface ModifyDBInstanceSecurityGroupsResponse {
     RequestId?: string;
 }
 /**
+ * DeleteAuditLogFile返回参数结构体
+ */
+export interface DeleteAuditLogFileResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeClusterParamLogs返回参数结构体
  */
 export interface DescribeClusterParamLogsResponse {
@@ -846,21 +970,39 @@ export interface CreateAccountsRequest {
     Accounts: Array<NewAccount>;
 }
 /**
- * IsolateInstance请求参数结构体
+ * 审计日志文件
  */
-export interface IsolateInstanceRequest {
+export interface AuditLogFile {
     /**
-      * 集群ID
+      * 审计日志文件名称
       */
-    ClusterId: string;
+    FileName: string;
     /**
-      * 实例ID数组
+      * 审计日志文件创建时间。格式为 : "2019-03-20 17:09:13"。
       */
-    InstanceIdList: Array<string>;
+    CreateTime: string;
     /**
-      * 该参数已废弃
+      * 文件状态值。可能返回的值为：
+"creating" - 生成中;
+"failed" - 创建失败;
+"success" - 已生成;
       */
-    DbType?: string;
+    Status: string;
+    /**
+      * 文件大小，单位为 KB。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FileSize: number;
+    /**
+      * 审计日志下载地址。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DownloadUrl: string;
+    /**
+      * 错误信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ErrMsg: string;
 }
 /**
  * ExportInstanceSlowQueries返回参数结构体
@@ -939,6 +1081,43 @@ export interface RollBackClusterRequest {
     RollbackTables?: Array<RollbackTable>;
 }
 /**
+ * UpgradeInstance请求参数结构体
+ */
+export interface UpgradeInstanceRequest {
+    /**
+      * 实例ID
+      */
+    InstanceId: string;
+    /**
+      * 数据库CPU
+      */
+    Cpu: number;
+    /**
+      * 数据库内存，单位GB
+      */
+    Memory: number;
+    /**
+      * 升级类型：upgradeImmediate，upgradeInMaintain
+      */
+    UpgradeType: string;
+    /**
+      * 该参数已废弃
+      */
+    StorageLimit?: number;
+    /**
+      * 是否自动选择代金券 1是 0否 默认为0
+      */
+    AutoVoucher?: number;
+    /**
+      * 该参数已废弃
+      */
+    DbType?: string;
+    /**
+      * 交易模式 0-下单并支付 1-下单
+      */
+    DealMode?: number;
+}
+/**
  * 回档数据库及表
  */
 export interface RollbackTable {
@@ -994,6 +1173,19 @@ export interface RemoveClusterSlaveZoneResponse {
       * 异步FlowId
       */
     FlowId: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * CreateAuditLogFile返回参数结构体
+ */
+export interface CreateAuditLogFileResponse {
+    /**
+      * 审计日志文件名称。
+      */
+    FileName: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2053,13 +2245,52 @@ export interface DescribeInstanceSlowQueriesResponse {
     RequestId?: string;
 }
 /**
- * GrantAccountPrivileges返回参数结构体
+ * DescribeInstances请求参数结构体
  */
-export interface GrantAccountPrivilegesResponse {
+export interface DescribeInstancesRequest {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 返回数量，默认为 20，最大值为 100
       */
-    RequestId?: string;
+    Limit?: number;
+    /**
+      * 记录偏移量，默认值为0
+      */
+    Offset?: number;
+    /**
+      * 排序字段，取值范围：
+<li> CREATETIME：创建时间</li>
+<li> PERIODENDTIME：过期时间</li>
+      */
+    OrderBy?: string;
+    /**
+      * 排序类型，取值范围：
+<li> ASC：升序排序 </li>
+<li> DESC：降序排序 </li>
+      */
+    OrderByType?: string;
+    /**
+      * 搜索条件，若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。
+      */
+    Filters?: Array<QueryFilter>;
+    /**
+      * 引擎类型：目前支持“MYSQL”， “POSTGRESQL”
+      */
+    DbType?: string;
+    /**
+      * 实例状态, 可选值:
+creating 创建中
+running 运行中
+isolating 隔离中
+isolated 已隔离
+activating 恢复中
+offlining 下线中
+offlined 已下线
+      */
+    Status?: string;
+    /**
+      * 实例id列表
+      */
+    InstanceIds?: Array<string>;
 }
 /**
  * DescribeBackupDownloadUrl返回参数结构体
@@ -2514,6 +2745,23 @@ export interface InquirePriceCreateResponse {
     RequestId?: string;
 }
 /**
+ * IsolateInstance请求参数结构体
+ */
+export interface IsolateInstanceRequest {
+    /**
+      * 集群ID
+      */
+    ClusterId: string;
+    /**
+      * 实例ID数组
+      */
+    InstanceIdList: Array<string>;
+    /**
+      * 该参数已废弃
+      */
+    DbType?: string;
+}
+/**
  * SetRenewFlag返回参数结构体
  */
 export interface SetRenewFlagResponse {
@@ -2594,41 +2842,41 @@ export interface DescribeClusterParamLogsRequest {
     Offset?: number;
 }
 /**
- * UpgradeInstance请求参数结构体
+ * 安全组规则
  */
-export interface UpgradeInstanceRequest {
+export interface PolicyRule {
     /**
-      * 实例ID
+      * 策略，ACCEPT或者DROP
       */
-    InstanceId: string;
+    Action: string;
     /**
-      * 数据库CPU
+      * 来源Ip或Ip段，例如192.168.0.0/16
       */
-    Cpu: number;
+    CidrIp: string;
     /**
-      * 数据库内存，单位GB
+      * 端口
       */
-    Memory: number;
+    PortRange: string;
     /**
-      * 升级类型：upgradeImmediate，upgradeInMaintain
+      * 网络协议，支持udp、tcp等
       */
-    UpgradeType: string;
+    IpProtocol: string;
     /**
-      * 该参数已废弃
+      * 协议端口ID或者协议端口组ID。
       */
-    StorageLimit?: number;
+    ServiceModule: string;
     /**
-      * 是否自动选择代金券 1是 0否 默认为0
+      * IP地址ID或者ID地址组ID。
       */
-    AutoVoucher?: number;
+    AddressModule: string;
     /**
-      * 该参数已废弃
+      * id
       */
-    DbType?: string;
+    Id: string;
     /**
-      * 交易模式 0-下单并支付 1-下单
+      * 描述
       */
-    DealMode?: number;
+    Desc: string;
 }
 /**
  * DescribeMaintainPeriod返回参数结构体
@@ -2750,34 +2998,49 @@ export interface DescribeRollbackTimeValidityRequest {
     ExpectTimeThresh: number;
 }
 /**
- * IsolateCluster请求参数结构体
+ * CreateAuditLogFile请求参数结构体
  */
-export interface IsolateClusterRequest {
+export interface CreateAuditLogFileRequest {
     /**
-      * 集群ID
+      * 实例ID
       */
-    ClusterId: string;
+    InstanceId: string;
     /**
-      * 该参数已废用
+      * 开始时间，格式为："2017-07-12 10:29:20"。
       */
-    DbType?: string;
+    StartTime: string;
+    /**
+      * 结束时间，格式为："2017-07-12 10:29:20"。
+      */
+    EndTime: string;
+    /**
+      * 排序方式。支持值包括："ASC" - 升序，"DESC" - 降序。
+      */
+    Order?: string;
+    /**
+      * 排序字段。支持值包括：
+"timestamp" - 时间戳；
+"affectRows" - 影响行数；
+"execTime" - 执行时间。
+      */
+    OrderBy?: string;
+    /**
+      * 过滤条件。可按设置的过滤条件过滤日志。
+      */
+    Filter?: AuditLogFilter;
 }
 /**
- * DescribeClusterInstanceGrps返回参数结构体
+ * DeleteAuditLogFile请求参数结构体
  */
-export interface DescribeClusterInstanceGrpsResponse {
+export interface DeleteAuditLogFileRequest {
     /**
-      * 实例组个数
+      * 实例ID
       */
-    TotalCount: number;
+    InstanceId: string;
     /**
-      * 实例组列表
+      * 审计日志文件名称。
       */
-    InstanceGrpInfoList: Array<CynosdbInstanceGrp>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    FileName: string;
 }
 /**
  * AddInstances请求参数结构体
@@ -2855,52 +3118,13 @@ export interface ModifyClusterSlaveZoneRequest {
     NewSlaveZone: string;
 }
 /**
- * DescribeInstances请求参数结构体
+ * GrantAccountPrivileges返回参数结构体
  */
-export interface DescribeInstancesRequest {
+export interface GrantAccountPrivilegesResponse {
     /**
-      * 返回数量，默认为 20，最大值为 100
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Limit?: number;
-    /**
-      * 记录偏移量，默认值为0
-      */
-    Offset?: number;
-    /**
-      * 排序字段，取值范围：
-<li> CREATETIME：创建时间</li>
-<li> PERIODENDTIME：过期时间</li>
-      */
-    OrderBy?: string;
-    /**
-      * 排序类型，取值范围：
-<li> ASC：升序排序 </li>
-<li> DESC：降序排序 </li>
-      */
-    OrderByType?: string;
-    /**
-      * 搜索条件，若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。
-      */
-    Filters?: Array<QueryFilter>;
-    /**
-      * 引擎类型：目前支持“MYSQL”， “POSTGRESQL”
-      */
-    DbType?: string;
-    /**
-      * 实例状态, 可选值:
-creating 创建中
-running 运行中
-isolating 隔离中
-isolated 已隔离
-activating 恢复中
-offlining 下线中
-offlined 已下线
-      */
-    Status?: string;
-    /**
-      * 实例id列表
-      */
-    InstanceIds?: Array<string>;
+    RequestId?: string;
 }
 /**
  * 参数修改记录
@@ -2930,6 +3154,51 @@ export interface ClusterParamModifyLog {
       * 更新时间
       */
     UpdateTime: string;
+}
+/**
+ * DescribeInstanceSlowQueries请求参数结构体
+ */
+export interface DescribeInstanceSlowQueriesRequest {
+    /**
+      * 实例ID
+      */
+    InstanceId: string;
+    /**
+      * 事务开始最早时间
+      */
+    StartTime?: string;
+    /**
+      * 事务开始最晚时间
+      */
+    EndTime?: string;
+    /**
+      * 限制条数
+      */
+    Limit?: number;
+    /**
+      * 偏移量
+      */
+    Offset?: number;
+    /**
+      * 用户名
+      */
+    Username?: string;
+    /**
+      * 客户端host
+      */
+    Host?: string;
+    /**
+      * 数据库名
+      */
+    Database?: string;
+    /**
+      * 排序字段，可选值：QueryTime,LockTime,RowsExamined,RowsSent
+      */
+    OrderBy?: string;
+    /**
+      * 排序类型，可选值：asc,desc
+      */
+    OrderByType?: string;
 }
 /**
  * 实例详情
@@ -3232,6 +3501,15 @@ export interface ModifyBackupNameRequest {
     BackupName: string;
 }
 /**
+ * ModifyInstanceName返回参数结构体
+ */
+export interface ModifyInstanceNameResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeBinlogSaveDays返回参数结构体
  */
 export interface DescribeBinlogSaveDaysResponse {
@@ -3339,6 +3617,67 @@ export interface DescribeClusterParamsRequest {
     ClusterId: string;
 }
 /**
+ * 审计日志详细信息
+ */
+export interface AuditLog {
+    /**
+      * 影响行数。
+      */
+    AffectRows: number;
+    /**
+      * 错误码。
+      */
+    ErrCode: number;
+    /**
+      * SQL类型。
+      */
+    SqlType: string;
+    /**
+      * 表名称。
+      */
+    TableName: string;
+    /**
+      * 实例名称。
+      */
+    InstanceName: string;
+    /**
+      * 审计策略名称。
+      */
+    PolicyName: string;
+    /**
+      * 数据库名称。
+      */
+    DBName: string;
+    /**
+      * SQL语句。
+      */
+    Sql: string;
+    /**
+      * 客户端地址。
+      */
+    Host: string;
+    /**
+      * 用户名。
+      */
+    User: string;
+    /**
+      * 执行时间。
+      */
+    ExecTime: number;
+    /**
+      * 时间戳。
+      */
+    Timestamp: string;
+    /**
+      * 发送行数。
+      */
+    SentRows: number;
+    /**
+      * 执行线程ID。
+      */
+    ThreadId: number;
+}
+/**
  * DescribeInstanceSpecs返回参数结构体
  */
 export interface DescribeInstanceSpecsResponse {
@@ -3395,41 +3734,38 @@ export interface ParamItem {
     OldValue: string;
 }
 /**
- * 安全组规则
+ * IsolateCluster请求参数结构体
  */
-export interface PolicyRule {
+export interface IsolateClusterRequest {
     /**
-      * 策略，ACCEPT或者DROP
+      * 集群ID
       */
-    Action: string;
+    ClusterId: string;
     /**
-      * 来源Ip或Ip段，例如192.168.0.0/16
+      * 该参数已废用
       */
-    CidrIp: string;
+    DbType?: string;
+}
+/**
+ * DescribeAuditLogFiles请求参数结构体
+ */
+export interface DescribeAuditLogFilesRequest {
     /**
-      * 端口
+      * 实例ID
       */
-    PortRange: string;
+    InstanceId: string;
     /**
-      * 网络协议，支持udp、tcp等
+      * 分页大小参数。默认值为 20，最小值为 1，最大值为 100。
       */
-    IpProtocol: string;
+    Limit?: number;
     /**
-      * 协议端口ID或者协议端口组ID。
+      * 分页偏移量。
       */
-    ServiceModule: string;
+    Offset?: number;
     /**
-      * IP地址ID或者ID地址组ID。
+      * 审计日志文件名。
       */
-    AddressModule: string;
-    /**
-      * id
-      */
-    Id: string;
-    /**
-      * 描述
-      */
-    Desc: string;
+    FileName?: string;
 }
 /**
  * DescribeClusterDetail返回参数结构体
@@ -3445,49 +3781,21 @@ export interface DescribeClusterDetailResponse {
     RequestId?: string;
 }
 /**
- * DescribeInstanceSlowQueries请求参数结构体
+ * DescribeClusterInstanceGrps返回参数结构体
  */
-export interface DescribeInstanceSlowQueriesRequest {
+export interface DescribeClusterInstanceGrpsResponse {
     /**
-      * 实例ID
+      * 实例组个数
       */
-    InstanceId: string;
+    TotalCount: number;
     /**
-      * 事务开始最早时间
+      * 实例组列表
       */
-    StartTime?: string;
+    InstanceGrpInfoList: Array<CynosdbInstanceGrp>;
     /**
-      * 事务开始最晚时间
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    EndTime?: string;
-    /**
-      * 限制条数
-      */
-    Limit?: number;
-    /**
-      * 偏移量
-      */
-    Offset?: number;
-    /**
-      * 用户名
-      */
-    Username?: string;
-    /**
-      * 客户端host
-      */
-    Host?: string;
-    /**
-      * 数据库名
-      */
-    Database?: string;
-    /**
-      * 排序字段，可选值：QueryTime,LockTime,RowsExamined,RowsSent
-      */
-    OrderBy?: string;
-    /**
-      * 排序类型，可选值：asc,desc
-      */
-    OrderByType?: string;
+    RequestId?: string;
 }
 /**
  * DescribeBinlogs请求参数结构体

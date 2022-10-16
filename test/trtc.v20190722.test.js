@@ -38,6 +38,16 @@ it("trtc.v20190722.DescribeTrtcUsage", async function () {
     }
 })
 
+it("trtc.v20190722.StartPublishCdnStream", async function () {
+    try {
+       const data = await client.StartPublishCdnStream({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("trtc.v20190722.DescribeCallDetailInfo", async function () {
     try {
        const data = await client.DescribeCallDetailInfo({})
@@ -278,6 +288,16 @@ it("trtc.v20190722.ModifyPicture", async function () {
     }
 })
 
+it("trtc.v20190722.UpdatePublishCdnStream", async function () {
+    try {
+       const data = await client.UpdatePublishCdnStream({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("trtc.v20190722.DeleteCloudRecording", async function () {
     try {
        const data = await client.DeleteCloudRecording({})
@@ -291,6 +311,16 @@ it("trtc.v20190722.DeleteCloudRecording", async function () {
 it("trtc.v20190722.DescribePicture", async function () {
     try {
        const data = await client.DescribePicture({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("trtc.v20190722.StopPublishCdnStream", async function () {
+    try {
+       const data = await client.StopPublishCdnStream({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

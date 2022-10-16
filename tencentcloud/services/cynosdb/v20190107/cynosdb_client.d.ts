@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { RemoveClusterSlaveZoneRequest, ModifyClusterNameRequest, DescribeRollbackTimeRangeRequest, InquirePriceRenewRequest, DescribeBackupConfigRequest, DescribeAccountsRequest, ModifyMaintainPeriodConfigRequest, DescribeRollbackTimeRangeResponse, ModifyBackupNameResponse, ModifyClusterStorageRequest, SwitchClusterZoneResponse, AssociateSecurityGroupsRequest, DescribeBinlogDownloadUrlRequest, CreateAccountsResponse, ModifyInstanceNameRequest, DescribeDBSecurityGroupsResponse, DescribeMaintainPeriodRequest, DescribeBinlogsResponse, DescribeInstancesResponse, AddClusterSlaveZoneResponse, ModifyClusterNameResponse, DescribeClusterParamsResponse, IsolateInstanceResponse, ModifyInstanceNameResponse, DescribeParamTemplatesRequest, PauseServerlessRequest, RevokeAccountPrivilegesResponse, CreateClustersResponse, SetRenewFlagRequest, ActivateInstanceRequest, AddClusterSlaveZoneRequest, DescribeAccountAllGrantPrivilegesResponse, DescribeClustersRequest, ModifyClusterStorageResponse, DescribeInstanceDetailResponse, ModifyDBInstanceSecurityGroupsResponse, DescribeClusterParamLogsResponse, DescribeClusterInstanceGrpsRequest, DescribeResourcesByDealNameResponse, ResumeServerlessResponse, CreateAccountsRequest, IsolateInstanceRequest, ExportInstanceSlowQueriesResponse, SwitchClusterZoneRequest, DescribeDBSecurityGroupsRequest, RollBackClusterRequest, DescribeClusterDetailRequest, DescribeProjectSecurityGroupsResponse, RemoveClusterSlaveZoneResponse, PauseServerlessResponse, OfflineClusterRequest, DescribeBinlogDownloadUrlResponse, DescribeBackupListRequest, ModifyClusterSlaveZoneResponse, GrantAccountPrivilegesRequest, CreateClustersRequest, DescribeClustersResponse, DescribeBackupConfigResponse, ModifyDBInstanceSecurityGroupsRequest, DescribeParamTemplatesResponse, AddInstancesResponse, DescribeProjectSecurityGroupsRequest, ModifyClusterParamResponse, DescribeBackupDownloadUrlRequest, AssociateSecurityGroupsResponse, DescribeResourcesByDealNameRequest, CreateBackupResponse, DescribeRollbackTimeValidityResponse, DescribeInstanceSlowQueriesResponse, GrantAccountPrivilegesResponse, DescribeBackupDownloadUrlResponse, ResumeServerlessRequest, InquirePriceCreateRequest, ModifyBackupConfigResponse, DescribeInstanceSpecsRequest, ExportInstanceSlowQueriesRequest, UpgradeInstanceResponse, ModifyAccountParamsRequest, IsolateClusterResponse, OfflineClusterResponse, RevokeAccountPrivilegesRequest, InquirePriceCreateResponse, SetRenewFlagResponse, CreateBackupRequest, DescribeClusterParamLogsRequest, UpgradeInstanceRequest, DescribeMaintainPeriodResponse, DescribeBackupListResponse, RollBackClusterResponse, DescribeBinlogSaveDaysRequest, ModifyBackupConfigRequest, ActivateInstanceResponse, DescribeRollbackTimeValidityRequest, IsolateClusterRequest, DescribeClusterInstanceGrpsResponse, AddInstancesRequest, ModifyClusterSlaveZoneRequest, DescribeInstancesRequest, DescribeInstanceDetailRequest, ModifyMaintainPeriodConfigResponse, DisassociateSecurityGroupsRequest, ModifyBackupNameRequest, DescribeBinlogSaveDaysResponse, ModifyClusterParamRequest, DescribeAccountsResponse, ModifyAccountParamsResponse, OfflineInstanceRequest, DescribeClusterParamsRequest, DescribeInstanceSpecsResponse, DescribeAccountAllGrantPrivilegesRequest, OfflineInstanceResponse, DescribeClusterDetailResponse, DescribeInstanceSlowQueriesRequest, DescribeBinlogsRequest, DisassociateSecurityGroupsResponse, InquirePriceRenewResponse } from "./cynosdb_models";
+import { RemoveClusterSlaveZoneRequest, ModifyClusterNameRequest, DescribeRollbackTimeRangeRequest, InquirePriceRenewRequest, DescribeAuditLogsRequest, DescribeBackupConfigRequest, DescribeAccountsRequest, ModifyMaintainPeriodConfigRequest, DescribeRollbackTimeRangeResponse, ModifyBackupNameResponse, ModifyClusterStorageRequest, DescribeAuditLogFilesResponse, SwitchClusterZoneResponse, AssociateSecurityGroupsRequest, DescribeBinlogDownloadUrlRequest, CreateAccountsResponse, ModifyInstanceNameRequest, DescribeDBSecurityGroupsResponse, DescribeMaintainPeriodRequest, DescribeBinlogsResponse, DescribeInstancesResponse, AddClusterSlaveZoneResponse, ModifyClusterNameResponse, DescribeClusterParamsResponse, IsolateInstanceResponse, DescribeParamTemplatesRequest, DescribeAuditLogsResponse, PauseServerlessRequest, RevokeAccountPrivilegesResponse, CreateClustersResponse, SetRenewFlagRequest, ActivateInstanceRequest, AddClusterSlaveZoneRequest, DescribeAccountAllGrantPrivilegesResponse, DescribeClustersRequest, ModifyClusterStorageResponse, DescribeInstanceDetailResponse, ModifyDBInstanceSecurityGroupsResponse, DeleteAuditLogFileResponse, DescribeClusterParamLogsResponse, DescribeClusterInstanceGrpsRequest, DescribeResourcesByDealNameResponse, ResumeServerlessResponse, CreateAccountsRequest, ExportInstanceSlowQueriesResponse, SwitchClusterZoneRequest, DescribeDBSecurityGroupsRequest, RollBackClusterRequest, UpgradeInstanceRequest, DescribeClusterDetailRequest, DescribeProjectSecurityGroupsResponse, RemoveClusterSlaveZoneResponse, CreateAuditLogFileResponse, PauseServerlessResponse, OfflineClusterRequest, DescribeBinlogDownloadUrlResponse, DescribeBackupListRequest, ModifyClusterSlaveZoneResponse, GrantAccountPrivilegesRequest, CreateClustersRequest, DescribeClustersResponse, DescribeBackupConfigResponse, ModifyDBInstanceSecurityGroupsRequest, DescribeParamTemplatesResponse, AddInstancesResponse, DescribeProjectSecurityGroupsRequest, ModifyClusterParamResponse, DescribeBackupDownloadUrlRequest, AssociateSecurityGroupsResponse, DescribeResourcesByDealNameRequest, CreateBackupResponse, DescribeRollbackTimeValidityResponse, DescribeInstanceSlowQueriesResponse, DescribeInstancesRequest, DescribeBackupDownloadUrlResponse, ResumeServerlessRequest, InquirePriceCreateRequest, ModifyBackupConfigResponse, DescribeInstanceSpecsRequest, ExportInstanceSlowQueriesRequest, UpgradeInstanceResponse, ModifyAccountParamsRequest, IsolateClusterResponse, OfflineClusterResponse, RevokeAccountPrivilegesRequest, InquirePriceCreateResponse, IsolateInstanceRequest, SetRenewFlagResponse, CreateBackupRequest, DescribeClusterParamLogsRequest, DescribeMaintainPeriodResponse, DescribeBackupListResponse, RollBackClusterResponse, DescribeBinlogSaveDaysRequest, ModifyBackupConfigRequest, ActivateInstanceResponse, DescribeRollbackTimeValidityRequest, CreateAuditLogFileRequest, DeleteAuditLogFileRequest, AddInstancesRequest, ModifyClusterSlaveZoneRequest, GrantAccountPrivilegesResponse, DescribeInstanceSlowQueriesRequest, DescribeInstanceDetailRequest, ModifyMaintainPeriodConfigResponse, DisassociateSecurityGroupsRequest, ModifyBackupNameRequest, ModifyInstanceNameResponse, DescribeBinlogSaveDaysResponse, ModifyClusterParamRequest, DescribeAccountsResponse, ModifyAccountParamsResponse, OfflineInstanceRequest, DescribeClusterParamsRequest, DescribeInstanceSpecsResponse, DescribeAccountAllGrantPrivilegesRequest, OfflineInstanceResponse, IsolateClusterRequest, DescribeAuditLogFilesRequest, DescribeClusterDetailResponse, DescribeClusterInstanceGrpsResponse, DescribeBinlogsRequest, DisassociateSecurityGroupsResponse, InquirePriceRenewResponse } from "./cynosdb_models";
 /**
  * cynosdb client
  * @class
@@ -60,9 +60,9 @@ export declare class Client extends AbstractClient {
      */
     ModifyBackupName(req: ModifyBackupNameRequest, cb?: (error: string, rep: ModifyBackupNameResponse) => void): Promise<ModifyBackupNameResponse>;
     /**
-     * 修改集群名称
+     * 本接口(DeleteAuditLogFile)用于删除云数据库实例的审计日志文件。
      */
-    ModifyClusterName(req: ModifyClusterNameRequest, cb?: (error: string, rep: ModifyClusterNameResponse) => void): Promise<ModifyClusterNameResponse>;
+    DeleteAuditLogFile(req: DeleteAuditLogFileRequest, cb?: (error: string, rep: DeleteAuditLogFileResponse) => void): Promise<DeleteAuditLogFileResponse>;
     /**
      * 本接口(DescribeInstanceDetail)用于查询实例详情。
      */
@@ -91,6 +91,10 @@ export declare class Client extends AbstractClient {
      * 修改维护时间配置
      */
     ModifyMaintainPeriodConfig(req: ModifyMaintainPeriodConfigRequest, cb?: (error: string, rep: ModifyMaintainPeriodConfigResponse) => void): Promise<ModifyMaintainPeriodConfigResponse>;
+    /**
+     * 本接口(DescribeAuditLogs)用于查询数据库审计日志。
+     */
+    DescribeAuditLogs(req: DescribeAuditLogsRequest, cb?: (error: string, rep: DescribeAuditLogsResponse) => void): Promise<DescribeAuditLogsResponse>;
     /**
      * 修改从可用区
      */
@@ -124,6 +128,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeClusters(req: DescribeClustersRequest, cb?: (error: string, rep: DescribeClustersResponse) => void): Promise<DescribeClustersResponse>;
     /**
+     * 本接口(CreateAuditLogFile)用于创建云数据库实例的审计日志文件。
+     */
+    CreateAuditLogFile(req: CreateAuditLogFileRequest, cb?: (error: string, rep: CreateAuditLogFileResponse) => void): Promise<CreateAuditLogFileResponse>;
+    /**
      * 隔离集群
      */
     IsolateCluster(req: IsolateClusterRequest, cb?: (error: string, rep: IsolateClusterResponse) => void): Promise<IsolateClusterResponse>;
@@ -143,6 +151,10 @@ export declare class Client extends AbstractClient {
      * 删除从可用区
      */
     RemoveClusterSlaveZone(req: RemoveClusterSlaveZoneRequest, cb?: (error: string, rep: RemoveClusterSlaveZoneResponse) => void): Promise<RemoveClusterSlaveZoneResponse>;
+    /**
+     * 修改集群名称
+     */
+    ModifyClusterName(req: ModifyClusterNameRequest, cb?: (error: string, rep: ModifyClusterNameResponse) => void): Promise<ModifyClusterNameResponse>;
     /**
      * 显示集群详情
      */
@@ -215,6 +227,10 @@ export declare class Client extends AbstractClient {
      * 查询实例安全组信息
      */
     DescribeDBSecurityGroups(req: DescribeDBSecurityGroupsRequest, cb?: (error: string, rep: DescribeDBSecurityGroupsResponse) => void): Promise<DescribeDBSecurityGroupsResponse>;
+    /**
+     * 本接口(DescribeAuditLogFiles)用于查询云数据库实例的审计日志文件。
+     */
+    DescribeAuditLogFiles(req: DescribeAuditLogFilesRequest, cb?: (error: string, rep: DescribeAuditLogFilesResponse) => void): Promise<DescribeAuditLogFilesResponse>;
     /**
      * 此接口（ExportInstanceSlowQueries）用于导出实例慢日志。
      */

@@ -611,23 +611,6 @@ export interface AuthFailMessage {
     Message: string;
 }
 /**
- * CreateChannelFlowEvidenceReport请求参数结构体
- */
-export interface CreateChannelFlowEvidenceReportRequest {
-    /**
-      * 签署流程编号
-      */
-    FlowId: string;
-    /**
-      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填
-      */
-    Agent: Agent;
-    /**
-      * 操作者的信息
-      */
-    Operator?: UserInfo;
-}
-/**
  * DescribeFlowDetailInfo请求参数结构体
  */
 export interface DescribeFlowDetailInfoRequest {
@@ -1628,19 +1611,6 @@ export interface ChannelCancelMultiFlowSignQRCodeRequest {
       * 用户信息
       */
     Operator?: UserInfo;
-}
-/**
- * CreateChannelFlowEvidenceReport返回参数结构体
- */
-export interface CreateChannelFlowEvidenceReportResponse {
-    /**
-      * 出证报告 URL（有效五分钟）
-      */
-    ReportUrl: string;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
 }
 /**
  * PrepareFlows返回参数结构体

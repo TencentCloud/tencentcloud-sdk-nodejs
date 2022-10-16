@@ -19,73 +19,95 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   CodeBatch,
-  DeleteProductRequest,
-  ModifyCodeBatchRequest,
-  CreateCodeBatchResponse,
-  DescribeProductByIdRequest,
-  ModifyTraceDataRanksRequest,
-  CreateTraceCodesResponse,
-  DescribeTraceCodesResponse,
-  DeleteTraceDataRequest,
-  ModifyMerchantRequest,
-  ModifyProductResponse,
-  ModifyTraceDataRequest,
-  CreateMerchantResponse,
-  DescribeMerchantByIdRequest,
-  ModifyTraceDataRanksResponse,
-  Merchant,
-  CreateTraceCodesRequest,
-  DeleteProductResponse,
-  DescribeCodeBatchsRequest,
   DescribeProductsRequest,
-  DescribeCodeBatchByIdResponse,
+  ModifyProductResponse,
   ModifyProductRequest,
-  DeleteTraceDataResponse,
-  Job,
-  CreateCodePackResponse,
-  DescribeMerchantsResponse,
-  DescribeTraceDataListRequest,
-  DescribeMerchantByIdResponse,
-  ModifyMerchantResponse,
-  DeleteMerchantResponse,
-  DescribeCodesByPackResponse,
-  DeleteCodeBatchResponse,
-  DescribeTraceDataListResponse,
-  CreateTraceChainRequest,
-  TraceItem,
+  ModifyCustomRuleRequest,
+  CodePart,
   DeleteCodeBatchRequest,
-  Ext,
   DescribeMerchantsRequest,
-  CodeItem,
   ModifyTraceCodeRequest,
-  CreateProductResponse,
-  CreateTraceDataResponse,
-  CreateTraceDataRequest,
+  DescribeCustomRulesResponse,
   CreateMerchantRequest,
-  DescribeCodeBatchsResponse,
   DescribeCodeBatchByIdRequest,
   DescribeTraceCodeByIdResponse,
-  DescribeCodePacksResponse,
-  TraceData,
-  DescribeProductByIdResponse,
-  PackSpec,
-  DescribeCodesByPackRequest,
-  DescribeCodePacksRequest,
+  CustomRule,
   DescribeProductsResponse,
-  CreateProductRequest,
+  CreateCodeBatchResponse,
+  DescribeTraceDataListResponse,
+  DescribeTraceCodesRequest,
+  CreateTraceCodesAsyncRequest,
+  ModifyTraceDataResponse,
+  DeleteProductRequest,
   CreateTraceChainResponse,
-  DescribeTraceCodeByIdRequest,
+  CreateCustomRuleRequest,
+  DescribeCodePackStatusRequest,
+  ModifyTraceDataRequest,
+  DescribeCodeBatchsRequest,
+  ModifyTraceDataRanksResponse,
+  CreateTraceCodesRequest,
+  DescribeCodeBatchByIdResponse,
+  DescribeCodePackStatusResponse,
+  Job,
+  TraceData,
+  PackSpec,
+  ModifyCustomRuleResponse,
+  ModifyMerchantResponse,
+  DeleteProductResponse,
+  DescribeCodesByPackResponse,
+  CreateTraceDataRequest,
+  Ext,
+  CreateProductResponse,
+  CreateCustomPackRequest,
   CreateCodePackRequest,
   CreateCodeBatchRequest,
-  ModifyCodeBatchResponse,
-  Product,
-  DescribeTraceCodesRequest,
-  TraceCode,
-  ModifyTraceCodeResponse,
+  TraceItem,
+  DescribeCustomRuleByIdRequest,
   ChainData,
   PhaseData,
+  ModifyCustomRuleStatusResponse,
+  CreateCustomPackResponse,
+  ModifyMerchantRequest,
+  DescribeCodePackUrlRequest,
+  ModifyTraceDataRanksRequest,
+  DeleteTraceDataResponse,
+  ModifyCustomRuleStatusRequest,
+  CreateCodePackResponse,
+  DescribeMerchantByIdResponse,
+  CodeItem,
+  CreateTraceDataResponse,
+  DescribeCustomRuleByIdResponse,
+  DescribeCodeBatchsResponse,
+  CreateCustomRuleResponse,
+  DescribeCodePacksResponse,
+  DescribeCodesByPackRequest,
+  DescribeJobFileUrlRequest,
+  CreateTraceCodesAsyncResponse,
+  DescribeCustomRulesRequest,
+  CreateProductRequest,
+  ModifyCodeBatchRequest,
+  DescribeProductByIdRequest,
+  DescribeTraceCodesResponse,
+  CreateTraceCodesResponse,
+  DeleteTraceDataRequest,
+  Merchant,
+  Product,
+  TraceCode,
+  CreateMerchantResponse,
+  DescribeMerchantsResponse,
+  DescribeTraceDataListRequest,
+  DeleteMerchantResponse,
+  DeleteCodeBatchResponse,
+  CreateTraceChainRequest,
+  DescribeMerchantByIdRequest,
+  DescribeProductByIdResponse,
+  DescribeCodePacksRequest,
+  DescribeJobFileUrlResponse,
+  DescribeTraceCodeByIdRequest,
   DeleteMerchantRequest,
-  ModifyTraceDataResponse,
+  ModifyTraceCodeResponse,
+  DescribeCodePackUrlResponse,
+  ModifyCodeBatchResponse,
 } from "./trp_models"
 
 /**
@@ -108,6 +130,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查自定义码规则列表
+   */
+  async DescribeCustomRules(
+    req: DescribeCustomRulesRequest,
+    cb?: (error: string, rep: DescribeCustomRulesResponse) => void
+  ): Promise<DescribeCustomRulesResponse> {
+    return this.request("DescribeCustomRules", req, cb)
+  }
+
+  /**
    * 修改溯源信息的排序
    */
   async ModifyTraceDataRanks(
@@ -118,13 +150,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 编辑商品
+   * 查自定义码规则
    */
-  async ModifyProduct(
-    req: ModifyProductRequest,
-    cb?: (error: string, rep: ModifyProductResponse) => void
-  ): Promise<ModifyProductResponse> {
-    return this.request("ModifyProduct", req, cb)
+  async DescribeCustomRuleById(
+    req: DescribeCustomRuleByIdRequest,
+    cb?: (error: string, rep: DescribeCustomRuleByIdResponse) => void
+  ): Promise<DescribeCustomRuleByIdResponse> {
+    return this.request("DescribeCustomRuleById", req, cb)
+  }
+
+  /**
+   * 异步导入激活码包，如果是第三方码包，需要域名跟配置的匹配
+   */
+  async CreateTraceCodesAsync(
+    req: CreateTraceCodesAsyncRequest,
+    cb?: (error: string, rep: CreateTraceCodesAsyncResponse) => void
+  ): Promise<CreateTraceCodesAsyncResponse> {
+    return this.request("CreateTraceCodesAsync", req, cb)
   }
 
   /**
@@ -188,6 +230,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改自定义码规则
+   */
+  async ModifyCustomRule(
+    req: ModifyCustomRuleRequest,
+    cb?: (error: string, rep: ModifyCustomRuleResponse) => void
+  ): Promise<ModifyCustomRuleResponse> {
+    return this.request("ModifyCustomRule", req, cb)
+  }
+
+  /**
    * 修改溯源信息
    */
   async ModifyTraceData(
@@ -195,6 +247,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyTraceDataResponse) => void
   ): Promise<ModifyTraceDataResponse> {
     return this.request("ModifyTraceData", req, cb)
+  }
+
+  /**
+   * 编辑商品
+   */
+  async ModifyProduct(
+    req: ModifyProductRequest,
+    cb?: (error: string, rep: ModifyProductResponse) => void
+  ): Promise<ModifyProductResponse> {
+    return this.request("ModifyProduct", req, cb)
+  }
+
+  /**
+   * 更新自定义码规则状态
+   */
+  async ModifyCustomRuleStatus(
+    req: ModifyCustomRuleStatusRequest,
+    cb?: (error: string, rep: ModifyCustomRuleStatusResponse) => void
+  ): Promise<ModifyCustomRuleStatusResponse> {
+    return this.request("ModifyCustomRuleStatus", req, cb)
   }
 
   /**
@@ -238,6 +310,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 生成自定义码包
+   */
+  async CreateCustomPack(
+    req: CreateCustomPackRequest,
+    cb?: (error: string, rep: CreateCustomPackResponse) => void
+  ): Promise<CreateCustomPackResponse> {
+    return this.request("CreateCustomPack", req, cb)
+  }
+
+  /**
    * 删除商户
    */
   async DeleteMerchant(
@@ -248,6 +330,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询码包状态
+   */
+  async DescribeCodePackStatus(
+    req: DescribeCodePackStatusRequest,
+    cb?: (error: string, rep: DescribeCodePackStatusResponse) => void
+  ): Promise<DescribeCodePackStatusResponse> {
+    return this.request("DescribeCodePackStatus", req, cb)
+  }
+
+  /**
    * 查询批次列表
    */
   async DescribeCodeBatchs(
@@ -255,6 +347,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCodeBatchsResponse) => void
   ): Promise<DescribeCodeBatchsResponse> {
     return this.request("DescribeCodeBatchs", req, cb)
+  }
+
+  /**
+   * 新建自定义码规则
+   */
+  async CreateCustomRule(
+    req: CreateCustomRuleRequest,
+    cb?: (error: string, rep: CreateCustomRuleResponse) => void
+  ): Promise<CreateCustomRuleResponse> {
+    return this.request("CreateCustomRule", req, cb)
+  }
+
+  /**
+   * 查询码包地址
+   */
+  async DescribeCodePackUrl(
+    req: DescribeCodePackUrlRequest,
+    cb?: (error: string, rep: DescribeCodePackUrlResponse) => void
+  ): Promise<DescribeCodePackUrlResponse> {
+    return this.request("DescribeCodePackUrl", req, cb)
   }
 
   /**
@@ -288,13 +400,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询溯源信息，通常溯源信息跟生产批次绑定，即一个批次的所有溯源信息都是一样的
+   * 删除溯源信息，如果已经上链则不可删除
    */
-  async DescribeTraceDataList(
-    req: DescribeTraceDataListRequest,
-    cb?: (error: string, rep: DescribeTraceDataListResponse) => void
-  ): Promise<DescribeTraceDataListResponse> {
-    return this.request("DescribeTraceDataList", req, cb)
+  async DeleteTraceData(
+    req: DeleteTraceDataRequest,
+    cb?: (error: string, rep: DeleteTraceDataResponse) => void
+  ): Promise<DeleteTraceDataResponse> {
+    return this.request("DeleteTraceData", req, cb)
   }
 
   /**
@@ -318,13 +430,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除溯源信息，如果已经上链则不可删除
+   * 查询溯源信息，通常溯源信息跟生产批次绑定，即一个批次的所有溯源信息都是一样的
    */
-  async DeleteTraceData(
-    req: DeleteTraceDataRequest,
-    cb?: (error: string, rep: DeleteTraceDataResponse) => void
-  ): Promise<DeleteTraceDataResponse> {
-    return this.request("DeleteTraceData", req, cb)
+  async DescribeTraceDataList(
+    req: DescribeTraceDataListRequest,
+    cb?: (error: string, rep: DescribeTraceDataListResponse) => void
+  ): Promise<DescribeTraceDataListResponse> {
+    return this.request("DescribeTraceDataList", req, cb)
   }
 
   /**
@@ -375,5 +487,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateCodePackResponse) => void
   ): Promise<CreateCodePackResponse> {
     return this.request("CreateCodePack", req, cb)
+  }
+
+  /**
+   * 获取异步任务的输出地址
+   */
+  async DescribeJobFileUrl(
+    req: DescribeJobFileUrlRequest,
+    cb?: (error: string, rep: DescribeJobFileUrlResponse) => void
+  ): Promise<DescribeJobFileUrlResponse> {
+    return this.request("DescribeJobFileUrl", req, cb)
   }
 }

@@ -48,6 +48,16 @@ it("wedata.v20210820.DescribeTaskInstances", async function () {
     }
 })
 
+it("wedata.v20210820.DeleteDataSources", async function () {
+    try {
+       const data = await client.DeleteDataSources({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20210820.ModifyTaskScript", async function () {
     try {
        const data = await client.ModifyTaskScript({})
@@ -128,9 +138,9 @@ it("wedata.v20210820.ModifyTaskInfo", async function () {
     }
 })
 
-it("wedata.v20210820.DeleteDataSources", async function () {
+it("wedata.v20210820.DeleteCustomFunction", async function () {
     try {
-       const data = await client.DeleteDataSources({})
+       const data = await client.DeleteCustomFunction({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -188,6 +198,16 @@ it("wedata.v20210820.MakeUpTasksNew", async function () {
     }
 })
 
+it("wedata.v20210820.ModifyFolder", async function () {
+    try {
+       const data = await client.ModifyFolder({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20210820.FreezeTasksByMultiWorkflow", async function () {
     try {
        const data = await client.FreezeTasksByMultiWorkflow({})
@@ -228,9 +248,19 @@ it("wedata.v20210820.DescribeRelatedInstances", async function () {
     }
 })
 
-it("wedata.v20210820.DescribeDatasource", async function () {
+it("wedata.v20210820.BatchStopTasksNew", async function () {
     try {
-       const data = await client.DescribeDatasource({})
+       const data = await client.BatchStopTasksNew({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20210820.SubmitCustomFunction", async function () {
+    try {
+       const data = await client.SubmitCustomFunction({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -318,9 +348,9 @@ it("wedata.v20210820.CreateCustomFunction", async function () {
     }
 })
 
-it("wedata.v20210820.ModifyFolder", async function () {
+it("wedata.v20210820.DescribeFunctionTypes", async function () {
     try {
-       const data = await client.ModifyFolder({})
+       const data = await client.DescribeFunctionTypes({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -351,6 +381,16 @@ it("wedata.v20210820.DeleteFolder", async function () {
 it("wedata.v20210820.RegisterEventListener", async function () {
     try {
        const data = await client.RegisterEventListener({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20210820.DescribeFunctionKinds", async function () {
+    try {
+       const data = await client.DescribeFunctionKinds({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -418,9 +458,29 @@ it("wedata.v20210820.RunTask", async function () {
     }
 })
 
+it("wedata.v20210820.SaveCustomFunction", async function () {
+    try {
+       const data = await client.SaveCustomFunction({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20210820.DescribeDependTasksNew", async function () {
     try {
        const data = await client.DescribeDependTasksNew({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20210820.DescribeDatasource", async function () {
+    try {
+       const data = await client.DescribeDatasource({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -458,9 +518,9 @@ it("wedata.v20210820.BatchModifyOwnersNew", async function () {
     }
 })
 
-it("wedata.v20210820.BatchStopTasksNew", async function () {
+it("wedata.v20210820.DescribeOrganizationalFunctions", async function () {
     try {
-       const data = await client.BatchStopTasksNew({})
+       const data = await client.DescribeOrganizationalFunctions({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

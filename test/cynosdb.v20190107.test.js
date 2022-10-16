@@ -148,9 +148,9 @@ it("cynosdb.v20190107.ModifyBackupName", async function () {
     }
 })
 
-it("cynosdb.v20190107.ModifyClusterName", async function () {
+it("cynosdb.v20190107.DeleteAuditLogFile", async function () {
     try {
-       const data = await client.ModifyClusterName({})
+       const data = await client.DeleteAuditLogFile({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -221,6 +221,16 @@ it("cynosdb.v20190107.DescribeClusterParamLogs", async function () {
 it("cynosdb.v20190107.ModifyMaintainPeriodConfig", async function () {
     try {
        const data = await client.ModifyMaintainPeriodConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.DescribeAuditLogs", async function () {
+    try {
+       const data = await client.DescribeAuditLogs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -308,6 +318,16 @@ it("cynosdb.v20190107.DescribeClusters", async function () {
     }
 })
 
+it("cynosdb.v20190107.CreateAuditLogFile", async function () {
+    try {
+       const data = await client.CreateAuditLogFile({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cynosdb.v20190107.IsolateCluster", async function () {
     try {
        const data = await client.IsolateCluster({})
@@ -351,6 +371,16 @@ it("cynosdb.v20190107.AssociateSecurityGroups", async function () {
 it("cynosdb.v20190107.RemoveClusterSlaveZone", async function () {
     try {
        const data = await client.RemoveClusterSlaveZone({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.ModifyClusterName", async function () {
+    try {
+       const data = await client.ModifyClusterName({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -531,6 +561,16 @@ it("cynosdb.v20190107.ActivateInstance", async function () {
 it("cynosdb.v20190107.DescribeDBSecurityGroups", async function () {
     try {
        const data = await client.DescribeDBSecurityGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.DescribeAuditLogFiles", async function () {
+    try {
+       const data = await client.DescribeAuditLogFiles({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -108,6 +108,16 @@ it("bma.v20210624.ModifyBPOfflineAttachment", async function () {
     }
 })
 
+it("bma.v20210624.CreateCRObtain", async function () {
+    try {
+       const data = await client.CreateCRObtain({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("bma.v20210624.ModifyCRMonitor", async function () {
     try {
        const data = await client.ModifyCRMonitor({})

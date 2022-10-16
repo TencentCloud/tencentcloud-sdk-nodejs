@@ -814,7 +814,7 @@ export interface CreateSubscriptionRequest {
       */
     TopicName: string;
     /**
-      * 订阅者名称，不支持中字以及除了短线和下划线外的特殊字符且不超过150个字符。
+      * 订阅者名称，不超过128个字符。
       */
     SubscriptionName: string;
     /**

@@ -28,37 +28,21 @@ export interface ProtectURLInfo {
     CreateTime: string;
 }
 /**
- * ModifyCRWhiteList请求参数结构体
+ * CreateCRObtain返回参数结构体
  */
-export interface ModifyCRWhiteListRequest {
+export interface CreateCRObtainResponse {
     /**
-      * 该字段已废弃，白名单ID
+      * 侵权ID
       */
-    WhiteListId?: number;
+    TortId: number;
     /**
-      * 该字段已废弃，平台名称
+      * xxx
       */
-    PlatForm?: string;
+    TortNum: string;
     /**
-      * 该字段已废弃，平台站点链接
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    PlatUrl?: string;
-    /**
-      * 该字段已废弃，作者ID
-      */
-    AuthorId?: string;
-    /**
-      * 该字段已废弃，作品ID
-      */
-    WorksId?: number;
-    /**
-      * 作品ID
-      */
-    WorkId?: number;
-    /**
-      * 白名单列表，以\n分割
-      */
-    WhiteSites?: string;
+    RequestId?: string;
 }
 /**
  * CreateCRUserVerify请求参数结构体
@@ -477,15 +461,15 @@ export interface ModifyBPOfflineAttachmentRequest {
  */
 export interface DescribeBPFakeURLsResponse {
     /**
-      * xxx
+      * 仿冒网址列表
       */
     FakeURLInfos: Array<FakeURLInfo>;
     /**
-      * xxx
+      * 总量
       */
     TotalCount: number;
     /**
-      * xxx
+      * 导出量
       */
     ExportURL: string;
     /**
@@ -646,6 +630,23 @@ export interface CreateBPFakeURLRequest {
     Note?: string;
 }
 /**
+ * UpdateCRWork返回参数结构体
+ */
+export interface UpdateCRWorkResponse {
+    /**
+      * 作品ID
+      */
+    WorkId: number;
+    /**
+      * 存证ID
+      */
+    EvidenceId: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * CreateBPProtectURLs返回参数结构体
  */
 export interface CreateBPProtectURLsResponse {
@@ -659,11 +660,11 @@ export interface CreateBPProtectURLsResponse {
  */
 export interface DescribeBPProtectURLsResponse {
     /**
-      * xxx
+      * 保护网址列表
       */
     ProtectURLInfos: Array<ProtectURLInfo>;
     /**
-      * xxx
+      * 总量
       */
     TotalCount: number;
     /**
@@ -752,21 +753,45 @@ export interface CreateBPProtectURLsRequest {
     ProtectWebs?: Array<string>;
 }
 /**
- * UpdateCRWork返回参数结构体
+ * CreateCRObtain请求参数结构体
  */
-export interface UpdateCRWorkResponse {
+export interface CreateCRObtainRequest {
     /**
-      * 作品ID
+      * 已存证的作品ID
       */
     WorkId: number;
     /**
-      * 存证ID
+      * 侵权链接
       */
-    EvidenceId: number;
+    TortUrl: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 取证类型 1-网页取证 2-过程取证
       */
-    RequestId?: string;
+    ObtainType: number;
+    /**
+      * 侵权标题
+      */
+    WorkTitle?: string;
+    /**
+      * 侵权平台
+      */
+    TortPlat?: string;
+    /**
+      * 过程取证的取证时长 6-300分钟
+      */
+    ObtainDuration?: number;
+    /**
+      * 取证回调地址
+      */
+    ObtainUrl?: string;
+    /**
+      * xxx
+      */
+    WorkCategory?: string;
+    /**
+      * xxx
+      */
+    WorkType?: string;
 }
 /**
  * ModifyCRBlockStatus请求参数结构体
@@ -957,11 +982,11 @@ export declare type DescribeBPCompanyInfoRequest = null;
  */
 export interface DescribeBPReportFakeURLsResponse {
     /**
-      * xxx
+      * 举报网站列表
       */
     ReportFakeURLInfos: Array<ReportFakeURLInfo>;
     /**
-      * xxx
+      * 总量
       */
     TotalCount: number;
     /**
@@ -1530,6 +1555,39 @@ export interface ModifyCRObtainStatusResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * ModifyCRWhiteList请求参数结构体
+ */
+export interface ModifyCRWhiteListRequest {
+    /**
+      * 该字段已废弃，白名单ID
+      */
+    WhiteListId?: number;
+    /**
+      * 该字段已废弃，平台名称
+      */
+    PlatForm?: string;
+    /**
+      * 该字段已废弃，平台站点链接
+      */
+    PlatUrl?: string;
+    /**
+      * 该字段已废弃，作者ID
+      */
+    AuthorId?: string;
+    /**
+      * 该字段已废弃，作品ID
+      */
+    WorksId?: number;
+    /**
+      * 作品ID
+      */
+    WorkId?: number;
+    /**
+      * 白名单列表，以\n分割
+      */
+    WhiteSites?: string;
 }
 /**
  * CreateCRCompanyVerify请求参数结构体

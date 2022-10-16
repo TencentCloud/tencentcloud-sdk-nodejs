@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ChannelCreateConvertTaskApiResponse, OperateChannelTemplateRequest, ChannelDescribeEmployeesRequest, SyncProxyOrganizationResponse, ChannelBatchCancelFlowsResponse, GetDownloadFlowUrlResponse, DescribeTemplatesResponse, DescribeResourceUrlsByFlowsResponse, ChannelCreateMultiFlowSignQRCodeResponse, OperateChannelTemplateResponse, CreateSignUrlsResponse, CreateSignUrlsRequest, ChannelCreateMultiFlowSignQRCodeRequest, CreateChannelFlowEvidenceReportRequest, DescribeFlowDetailInfoRequest, ChannelGetTaskResultApiResponse, ChannelGetTaskResultApiRequest, ChannelVerifyPdfResponse, GetDownloadFlowUrlRequest, ChannelBatchCancelFlowsRequest, CreateConsoleLoginUrlRequest, CreateFlowsByTemplatesResponse, ChannelCreateFlowSignReviewRequest, DescribeUsageResponse, SyncProxyOrganizationOperatorsResponse, CreateSealByImageResponse, ChannelVerifyPdfRequest, DescribeTemplatesRequest, SyncProxyOrganizationOperatorsRequest, CreateConsoleLoginUrlResponse, CreateFlowsByTemplatesRequest, SyncProxyOrganizationRequest, CreateSealByImageRequest, ChannelCreateFlowGroupByFilesResponse, PrepareFlowsRequest, ChannelCreateBatchCancelFlowUrlResponse, DescribeResourceUrlsByFlowsRequest, ChannelCancelMultiFlowSignQRCodeRequest, CreateChannelFlowEvidenceReportResponse, PrepareFlowsResponse, ChannelDescribeEmployeesResponse, DescribeUsageRequest, ChannelCreateBatchCancelFlowUrlRequest, ChannelCreateFlowByFilesRequest, ChannelCreateFlowByFilesResponse, UploadFilesResponse, ChannelCreateFlowSignReviewResponse, ChannelCreateConvertTaskApiRequest, ChannelCreateFlowGroupByFilesRequest, UploadFilesRequest, ChannelCancelMultiFlowSignQRCodeResponse, DescribeFlowDetailInfoResponse } from "./essbasic_models";
+import { ChannelCreateConvertTaskApiResponse, OperateChannelTemplateRequest, ChannelDescribeEmployeesRequest, SyncProxyOrganizationResponse, ChannelBatchCancelFlowsResponse, GetDownloadFlowUrlResponse, DescribeTemplatesResponse, DescribeResourceUrlsByFlowsResponse, ChannelCreateMultiFlowSignQRCodeResponse, OperateChannelTemplateResponse, CreateSignUrlsResponse, CreateSignUrlsRequest, ChannelCreateMultiFlowSignQRCodeRequest, DescribeFlowDetailInfoRequest, ChannelGetTaskResultApiResponse, ChannelGetTaskResultApiRequest, ChannelVerifyPdfResponse, GetDownloadFlowUrlRequest, ChannelBatchCancelFlowsRequest, CreateConsoleLoginUrlRequest, CreateFlowsByTemplatesResponse, ChannelCreateFlowSignReviewRequest, DescribeUsageResponse, SyncProxyOrganizationOperatorsResponse, CreateSealByImageResponse, ChannelVerifyPdfRequest, DescribeTemplatesRequest, SyncProxyOrganizationOperatorsRequest, CreateConsoleLoginUrlResponse, CreateFlowsByTemplatesRequest, SyncProxyOrganizationRequest, CreateSealByImageRequest, ChannelCreateFlowGroupByFilesResponse, PrepareFlowsRequest, ChannelCreateBatchCancelFlowUrlResponse, DescribeResourceUrlsByFlowsRequest, ChannelCancelMultiFlowSignQRCodeRequest, PrepareFlowsResponse, ChannelDescribeEmployeesResponse, DescribeUsageRequest, ChannelCreateBatchCancelFlowUrlRequest, ChannelCreateFlowByFilesRequest, ChannelCreateFlowByFilesResponse, UploadFilesResponse, ChannelCreateFlowSignReviewResponse, ChannelCreateConvertTaskApiRequest, ChannelCreateFlowGroupByFilesRequest, UploadFilesRequest, ChannelCancelMultiFlowSignQRCodeResponse, DescribeFlowDetailInfoResponse } from "./essbasic_models";
 /**
  * essbasic client
  * @class
@@ -70,10 +70,9 @@ export declare class Client extends AbstractClient {
      */
     ChannelGetTaskResultApi(req: ChannelGetTaskResultApiRequest, cb?: (error: string, rep: ChannelGetTaskResultApiResponse) => void): Promise<ChannelGetTaskResultApiResponse>;
     /**
-     * 创建出证报告，返回报告 URL。此接口暂未开放，有问题请联系运营人员。
-
+     * 此接口（SyncProxyOrganization）用于同步渠道子客企业信息，主要是子客企业的营业执照，便于子客企业开通过程中不用手动上传。若有需要调用此接口，需要在创建控制链接CreateConsoleLoginUrl之后即刻进行调用。
      */
-    CreateChannelFlowEvidenceReport(req: CreateChannelFlowEvidenceReportRequest, cb?: (error: string, rep: CreateChannelFlowEvidenceReportResponse) => void): Promise<CreateChannelFlowEvidenceReportResponse>;
+    SyncProxyOrganization(req: SyncProxyOrganizationRequest, cb?: (error: string, rep: SyncProxyOrganizationResponse) => void): Promise<SyncProxyOrganizationResponse>;
     /**
      * 合同文件验签
      */
@@ -119,10 +118,6 @@ export declare class Client extends AbstractClient {
 调用时需要设置Domain 为 file.ess.tencent.cn
      */
     UploadFiles(req: UploadFilesRequest, cb?: (error: string, rep: UploadFilesResponse) => void): Promise<UploadFilesResponse>;
-    /**
-     * 此接口（SyncProxyOrganization）用于同步渠道子客企业信息，主要是子客企业的营业执照，便于子客企业开通过程中不用手动上传。若有需要调用此接口，需要在创建控制链接CreateConsoleLoginUrl之后即刻进行调用。
-     */
-    SyncProxyOrganization(req: SyncProxyOrganizationRequest, cb?: (error: string, rep: SyncProxyOrganizationResponse) => void): Promise<SyncProxyOrganizationResponse>;
     /**
      * 此接口（OperateChannelTemplate）用于渠道侧将模板库中的模板对合作企业进行查询和设置, 其中包括可见性的修改以及对合作企业的设置.
 1、同步标识=select时：

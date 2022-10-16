@@ -106,10 +106,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyBackupName", req, cb);
     }
     /**
-     * 修改集群名称
+     * 本接口(DeleteAuditLogFile)用于删除云数据库实例的审计日志文件。
      */
-    async ModifyClusterName(req, cb) {
-        return this.request("ModifyClusterName", req, cb);
+    async DeleteAuditLogFile(req, cb) {
+        return this.request("DeleteAuditLogFile", req, cb);
     }
     /**
      * 本接口(DescribeInstanceDetail)用于查询实例详情。
@@ -152,6 +152,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyMaintainPeriodConfig(req, cb) {
         return this.request("ModifyMaintainPeriodConfig", req, cb);
+    }
+    /**
+     * 本接口(DescribeAuditLogs)用于查询数据库审计日志。
+     */
+    async DescribeAuditLogs(req, cb) {
+        return this.request("DescribeAuditLogs", req, cb);
     }
     /**
      * 修改从可用区
@@ -202,6 +208,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeClusters", req, cb);
     }
     /**
+     * 本接口(CreateAuditLogFile)用于创建云数据库实例的审计日志文件。
+     */
+    async CreateAuditLogFile(req, cb) {
+        return this.request("CreateAuditLogFile", req, cb);
+    }
+    /**
      * 隔离集群
      */
     async IsolateCluster(req, cb) {
@@ -230,6 +242,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async RemoveClusterSlaveZone(req, cb) {
         return this.request("RemoveClusterSlaveZone", req, cb);
+    }
+    /**
+     * 修改集群名称
+     */
+    async ModifyClusterName(req, cb) {
+        return this.request("ModifyClusterName", req, cb);
     }
     /**
      * 显示集群详情
@@ -338,6 +356,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeDBSecurityGroups(req, cb) {
         return this.request("DescribeDBSecurityGroups", req, cb);
+    }
+    /**
+     * 本接口(DescribeAuditLogFiles)用于查询云数据库实例的审计日志文件。
+     */
+    async DescribeAuditLogFiles(req, cb) {
+        return this.request("DescribeAuditLogFiles", req, cb);
     }
     /**
      * 此接口（ExportInstanceSlowQueries）用于导出实例慢日志。

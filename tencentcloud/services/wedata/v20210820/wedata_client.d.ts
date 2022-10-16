@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { SubmitTaskResponse, ModifyFolderRequest, DeleteFolderResponse, RunTaskRequest, MakeUpTasksNewResponse, DescribeTaskDetailResponse, DescribeDependTasksNewRequest, DescribeInstanceLogsRequest, ModifyTaskScriptRequest, CreateDataSourceRequest, DeleteWorkflowNewResponse, DescribeInstanceLogsResponse, MakeUpWorkflowNewResponse, BatchDeleteTasksNewResponse, ModifyTaskLinksResponse, DescribeDatasourceResponse, DescribeDatasourceRequest, KillInstancesResponse, SetTaskAlarmNewRequest, ModifyTaskScriptResponse, SubmitWorkflowResponse, SubmitTaskRequest, DescribeProjectResponse, BatchDeleteTasksNewRequest, DescribeFolderWorkflowListResponse, CreateFolderRequest, DeleteFolderRequest, DescribeTaskScriptRequest, ModifyWorkflowInfoRequest, FreezeTasksByMultiWorkflowResponse, DescribeDataSourceListRequest, CreateWorkflowRequest, CreateTaskRequest, KillInstancesRequest, RegisterEventListenerResponse, CreateFolderResponse, DescribeFolderWorkflowListRequest, ModifyDataSourceResponse, DescribeFolderListRequest, TriggerEventRequest, ModifyTaskInfoResponse, SubmitWorkflowRequest, RerunInstancesResponse, BatchStopTasksNewRequest, ForceSucInstancesRequest, ModifyWorkflowScheduleRequest, RegisterEventRequest, BatchModifyOwnersNewResponse, DescribeDataSourceWithoutInfoRequest, DeleteWorkflowNewRequest, FreezeTasksByMultiWorkflowRequest, MakeUpWorkflowNewRequest, BatchStopTasksNewResponse, TriggerEventResponse, DescribeTaskInstancesRequest, DescribeTasksByPageResponse, CreateDataSourceResponse, DescribeDataSourceListResponse, DescribeDataSourceWithoutInfoResponse, DescribeFolderListResponse, DescribeProjectRequest, FreezeTasksRequest, ModifyFolderResponse, DescribeTaskScriptResponse, RunTaskResponse, DescribeDependTasksNewResponse, DescribeRelatedInstancesRequest, BatchModifyOwnersNewRequest, FreezeTasksResponse, CreateTaskResponse, ModifyDataSourceRequest, CreateCustomFunctionResponse, DescribeTaskInstancesResponse, ModifyTaskInfoRequest, DescribeTaskDetailRequest, SetTaskAlarmNewResponse, CreateWorkflowResponse, CreateCustomFunctionRequest, DeleteDataSourcesResponse, RegisterEventListenerRequest, ModifyTaskLinksRequest, ModifyWorkflowScheduleResponse, DeleteDataSourcesRequest, ModifyWorkflowInfoResponse, DescribeRelatedInstancesResponse, RerunInstancesRequest, MakeUpTasksNewRequest, RegisterEventResponse, ForceSucInstancesResponse, DescribeTasksByPageRequest } from "./wedata_models";
+import { SubmitTaskResponse, ModifyFolderRequest, DeleteFolderResponse, RunTaskRequest, MakeUpTasksNewResponse, DescribeTaskDetailResponse, DescribeDependTasksNewRequest, DescribeInstanceLogsRequest, ModifyTaskScriptRequest, CreateDataSourceRequest, DeleteWorkflowNewResponse, DescribeInstanceLogsResponse, MakeUpWorkflowNewResponse, BatchDeleteTasksNewResponse, ModifyTaskLinksResponse, DescribeDatasourceResponse, KillInstancesResponse, SetTaskAlarmNewRequest, ModifyTaskScriptResponse, SubmitWorkflowResponse, SubmitTaskRequest, DescribeProjectResponse, DescribeFunctionTypesRequest, BatchDeleteTasksNewRequest, DescribeFolderWorkflowListResponse, ModifyFolderResponse, CreateFolderRequest, DeleteCustomFunctionRequest, DeleteFolderRequest, DescribeTaskScriptRequest, DescribeFunctionKindsRequest, DescribeFunctionKindsResponse, FreezeTasksByMultiWorkflowResponse, SaveCustomFunctionResponse, DescribeDataSourceListRequest, CreateWorkflowRequest, CreateTaskRequest, KillInstancesRequest, ModifyTaskInfoResponse, RegisterEventListenerResponse, CreateFolderResponse, ModifyWorkflowInfoRequest, DescribeFolderWorkflowListRequest, ModifyDataSourceResponse, BatchStopTasksNewRequest, TriggerEventRequest, DescribeFunctionTypesResponse, SubmitWorkflowRequest, RerunInstancesResponse, SaveCustomFunctionRequest, ForceSucInstancesRequest, ModifyWorkflowScheduleRequest, RegisterEventRequest, BatchModifyOwnersNewResponse, DescribeDataSourceWithoutInfoRequest, DescribeDatasourceRequest, DeleteWorkflowNewRequest, FreezeTasksByMultiWorkflowRequest, MakeUpWorkflowNewRequest, BatchStopTasksNewResponse, TriggerEventResponse, DescribeTaskInstancesRequest, DescribeTasksByPageResponse, CreateDataSourceResponse, DescribeDataSourceListResponse, DescribeDataSourceWithoutInfoResponse, DescribeFolderListResponse, DescribeProjectRequest, FreezeTasksRequest, DeleteCustomFunctionResponse, DescribeFolderListRequest, DescribeTaskScriptResponse, RunTaskResponse, DescribeDependTasksNewResponse, SubmitCustomFunctionResponse, DescribeTaskInstancesResponse, BatchModifyOwnersNewRequest, FreezeTasksResponse, CreateTaskResponse, ModifyDataSourceRequest, CreateCustomFunctionResponse, ModifyTaskInfoRequest, DescribeTaskDetailRequest, SetTaskAlarmNewResponse, CreateWorkflowResponse, CreateCustomFunctionRequest, DeleteDataSourcesResponse, RegisterEventListenerRequest, ModifyTaskLinksRequest, ModifyWorkflowScheduleResponse, DeleteDataSourcesRequest, DescribeRelatedInstancesRequest, DescribeOrganizationalFunctionsRequest, ModifyWorkflowInfoResponse, DescribeRelatedInstancesResponse, RerunInstancesRequest, MakeUpTasksNewRequest, RegisterEventResponse, ForceSucInstancesResponse, DescribeOrganizationalFunctionsResponse, DescribeTasksByPageRequest, SubmitCustomFunctionRequest } from "./wedata_models";
 /**
  * wedata client
  * @class
@@ -21,6 +21,11 @@ export declare class Client extends AbstractClient {
      * 查询任务实例列表
      */
     DescribeTaskInstances(req: DescribeTaskInstancesRequest, cb?: (error: string, rep: DescribeTaskInstancesResponse) => void): Promise<DescribeTaskInstancesResponse>;
+    /**
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+删除数据源
+     */
+    DeleteDataSources(req: DeleteDataSourcesRequest, cb?: (error: string, rep: DeleteDataSourcesResponse) => void): Promise<DeleteDataSourcesResponse>;
     /**
      * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
 修改任务脚本
@@ -62,10 +67,9 @@ export declare class Client extends AbstractClient {
      */
     ModifyTaskInfo(req: ModifyTaskInfoRequest, cb?: (error: string, rep: ModifyTaskInfoResponse) => void): Promise<ModifyTaskInfoResponse>;
     /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-删除数据源
+     * 删除用户自定义函数
      */
-    DeleteDataSources(req: DeleteDataSourcesRequest, cb?: (error: string, rep: DeleteDataSourcesResponse) => void): Promise<DeleteDataSourcesResponse>;
+    DeleteCustomFunction(req: DeleteCustomFunctionRequest, cb?: (error: string, rep: DeleteCustomFunctionResponse) => void): Promise<DeleteCustomFunctionResponse>;
     /**
      * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
 实例批量终止操作
@@ -96,6 +100,11 @@ export declare class Client extends AbstractClient {
     MakeUpTasksNew(req: MakeUpTasksNewRequest, cb?: (error: string, rep: MakeUpTasksNewResponse) => void): Promise<MakeUpTasksNewResponse>;
     /**
      * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+文件夹更新
+     */
+    ModifyFolder(req: ModifyFolderRequest, cb?: (error: string, rep: ModifyFolderResponse) => void): Promise<ModifyFolderResponse>;
+    /**
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
 基于多个工作流进行批量冻结任务操作
      */
     FreezeTasksByMultiWorkflow(req: FreezeTasksByMultiWorkflowRequest, cb?: (error: string, rep: FreezeTasksByMultiWorkflowResponse) => void): Promise<FreezeTasksByMultiWorkflowResponse>;
@@ -115,9 +124,13 @@ export declare class Client extends AbstractClient {
     DescribeRelatedInstances(req: DescribeRelatedInstancesRequest, cb?: (error: string, rep: DescribeRelatedInstancesResponse) => void): Promise<DescribeRelatedInstancesResponse>;
     /**
      * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-数据源详情
+仅对任务状态为”调度中“和”已暂停“有效，对所选任务的任务实例进行终止，并停止调度
      */
-    DescribeDatasource(req: DescribeDatasourceRequest, cb?: (error: string, rep: DescribeDatasourceResponse) => void): Promise<DescribeDatasourceResponse>;
+    BatchStopTasksNew(req: BatchStopTasksNewRequest, cb?: (error: string, rep: BatchStopTasksNewResponse) => void): Promise<BatchStopTasksNewResponse>;
+    /**
+     * 提交自定义函数
+     */
+    SubmitCustomFunction(req: SubmitCustomFunctionRequest, cb?: (error: string, rep: SubmitCustomFunctionResponse) => void): Promise<SubmitCustomFunctionResponse>;
     /**
      * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
 批量删除任务，仅对任务状态为”已停止“有效；
@@ -159,10 +172,9 @@ export declare class Client extends AbstractClient {
      */
     CreateCustomFunction(req: CreateCustomFunctionRequest, cb?: (error: string, rep: CreateCustomFunctionResponse) => void): Promise<CreateCustomFunctionResponse>;
     /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-文件夹更新
+     * 查询函数类型
      */
-    ModifyFolder(req: ModifyFolderRequest, cb?: (error: string, rep: ModifyFolderResponse) => void): Promise<ModifyFolderResponse>;
+    DescribeFunctionTypes(req?: DescribeFunctionTypesRequest, cb?: (error: string, rep: DescribeFunctionTypesResponse) => void): Promise<DescribeFunctionTypesResponse>;
     /**
      * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
 拉取文件夹目录
@@ -178,6 +190,10 @@ export declare class Client extends AbstractClient {
 注册事件监听器
      */
     RegisterEventListener(req: RegisterEventListenerRequest, cb?: (error: string, rep: RegisterEventListenerResponse) => void): Promise<RegisterEventListenerResponse>;
+    /**
+     * 查询函数分类
+     */
+    DescribeFunctionKinds(req?: DescribeFunctionKindsRequest, cb?: (error: string, rep: DescribeFunctionKindsResponse) => void): Promise<DescribeFunctionKindsResponse>;
     /**
      * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
 触发事件
@@ -208,10 +224,19 @@ export declare class Client extends AbstractClient {
      */
     RunTask(req: RunTaskRequest, cb?: (error: string, rep: RunTaskResponse) => void): Promise<RunTaskResponse>;
     /**
+     * 保存用户自定义函数
+     */
+    SaveCustomFunction(req: SaveCustomFunctionRequest, cb?: (error: string, rep: SaveCustomFunctionResponse) => void): Promise<SaveCustomFunctionResponse>;
+    /**
      * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
 根据层级查找上/下游任务节点
      */
     DescribeDependTasksNew(req: DescribeDependTasksNewRequest, cb?: (error: string, rep: DescribeDependTasksNewResponse) => void): Promise<DescribeDependTasksNewResponse>;
+    /**
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+数据源详情
+     */
+    DescribeDatasource(req: DescribeDatasourceRequest, cb?: (error: string, rep: DescribeDatasourceResponse) => void): Promise<DescribeDatasourceResponse>;
     /**
      * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
 提交工作流
@@ -228,8 +253,7 @@ export declare class Client extends AbstractClient {
      */
     BatchModifyOwnersNew(req: BatchModifyOwnersNewRequest, cb?: (error: string, rep: BatchModifyOwnersNewResponse) => void): Promise<BatchModifyOwnersNewResponse>;
     /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-仅对任务状态为”调度中“和”已暂停“有效，对所选任务的任务实例进行终止，并停止调度
+     * 查询全量函数
      */
-    BatchStopTasksNew(req: BatchStopTasksNewRequest, cb?: (error: string, rep: BatchStopTasksNewResponse) => void): Promise<BatchStopTasksNewResponse>;
+    DescribeOrganizationalFunctions(req: DescribeOrganizationalFunctionsRequest, cb?: (error: string, rep: DescribeOrganizationalFunctionsResponse) => void): Promise<DescribeOrganizationalFunctionsResponse>;
 }

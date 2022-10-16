@@ -22,13 +22,14 @@ import {
   ModifyClusterNameRequest,
   DescribeRollbackTimeRangeRequest,
   InquirePriceRenewRequest,
-  ObjectTask,
+  DescribeAuditLogsRequest,
   DescribeBackupConfigRequest,
   DescribeAccountsRequest,
   ModifyMaintainPeriodConfigRequest,
   DescribeRollbackTimeRangeResponse,
   ModifyBackupNameResponse,
   ModifyClusterStorageRequest,
+  DescribeAuditLogFilesResponse,
   SwitchClusterZoneResponse,
   AssociateSecurityGroupsRequest,
   DescribeBinlogDownloadUrlRequest,
@@ -44,9 +45,11 @@ import {
   ModifyClusterNameResponse,
   DescribeClusterParamsResponse,
   IsolateInstanceResponse,
-  ModifyInstanceNameResponse,
+  AuditLogFilter,
   DescribeParamTemplatesRequest,
+  DescribeAuditLogsResponse,
   PauseServerlessRequest,
+  ObjectTask,
   RevokeAccountPrivilegesResponse,
   CreateClustersResponse,
   SetRenewFlagRequest,
@@ -62,21 +65,24 @@ import {
   ModifyClusterStorageResponse,
   DescribeInstanceDetailResponse,
   ModifyDBInstanceSecurityGroupsResponse,
+  DeleteAuditLogFileResponse,
   DescribeClusterParamLogsResponse,
   DescribeClusterInstanceGrpsRequest,
   DescribeResourcesByDealNameResponse,
   ResumeServerlessResponse,
   CreateAccountsRequest,
-  IsolateInstanceRequest,
+  AuditLogFile,
   ExportInstanceSlowQueriesResponse,
   SwitchClusterZoneRequest,
   DescribeDBSecurityGroupsRequest,
   RollBackClusterRequest,
+  UpgradeInstanceRequest,
   RollbackTable,
   DescribeClusterDetailRequest,
   Tag,
   DescribeProjectSecurityGroupsResponse,
   RemoveClusterSlaveZoneResponse,
+  CreateAuditLogFileResponse,
   PauseServerlessResponse,
   OfflineClusterRequest,
   NewAccount,
@@ -111,7 +117,7 @@ import {
   CreateBackupResponse,
   DescribeRollbackTimeValidityResponse,
   DescribeInstanceSlowQueriesResponse,
-  GrantAccountPrivilegesResponse,
+  DescribeInstancesRequest,
   DescribeBackupDownloadUrlResponse,
   ResumeServerlessRequest,
   InquirePriceCreateRequest,
@@ -127,11 +133,12 @@ import {
   RevokeAccountPrivilegesRequest,
   InstanceSpec,
   InquirePriceCreateResponse,
+  IsolateInstanceRequest,
   SetRenewFlagResponse,
   Account,
   CreateBackupRequest,
   DescribeClusterParamLogsRequest,
-  UpgradeInstanceRequest,
+  PolicyRule,
   DescribeMaintainPeriodResponse,
   DescribeBackupListResponse,
   RollBackClusterResponse,
@@ -139,18 +146,20 @@ import {
   ModifyBackupConfigRequest,
   ActivateInstanceResponse,
   DescribeRollbackTimeValidityRequest,
-  IsolateClusterRequest,
-  DescribeClusterInstanceGrpsResponse,
+  CreateAuditLogFileRequest,
+  DeleteAuditLogFileRequest,
   AddInstancesRequest,
   ModifyClusterSlaveZoneRequest,
-  DescribeInstancesRequest,
+  GrantAccountPrivilegesResponse,
   ClusterParamModifyLog,
+  DescribeInstanceSlowQueriesRequest,
   CynosdbInstanceDetail,
   CynosdbClusterDetail,
   DescribeInstanceDetailRequest,
   ModifyMaintainPeriodConfigResponse,
   DisassociateSecurityGroupsRequest,
   ModifyBackupNameRequest,
+  ModifyInstanceNameResponse,
   DescribeBinlogSaveDaysResponse,
   ModifyClusterParamRequest,
   DescribeAccountsResponse,
@@ -158,13 +167,15 @@ import {
   OfflineInstanceRequest,
   TradePrice,
   DescribeClusterParamsRequest,
+  AuditLog,
   DescribeInstanceSpecsResponse,
   DescribeAccountAllGrantPrivilegesRequest,
   OfflineInstanceResponse,
   ParamItem,
-  PolicyRule,
+  IsolateClusterRequest,
+  DescribeAuditLogFilesRequest,
   DescribeClusterDetailResponse,
-  DescribeInstanceSlowQueriesRequest,
+  DescribeClusterInstanceGrpsResponse,
   DescribeBinlogsRequest,
   InputAccount,
   DisassociateSecurityGroupsResponse,
@@ -312,13 +323,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改集群名称
+   * 本接口(DeleteAuditLogFile)用于删除云数据库实例的审计日志文件。
    */
-  async ModifyClusterName(
-    req: ModifyClusterNameRequest,
-    cb?: (error: string, rep: ModifyClusterNameResponse) => void
-  ): Promise<ModifyClusterNameResponse> {
-    return this.request("ModifyClusterName", req, cb)
+  async DeleteAuditLogFile(
+    req: DeleteAuditLogFileRequest,
+    cb?: (error: string, rep: DeleteAuditLogFileResponse) => void
+  ): Promise<DeleteAuditLogFileResponse> {
+    return this.request("DeleteAuditLogFile", req, cb)
   }
 
   /**
@@ -389,6 +400,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyMaintainPeriodConfigResponse) => void
   ): Promise<ModifyMaintainPeriodConfigResponse> {
     return this.request("ModifyMaintainPeriodConfig", req, cb)
+  }
+
+  /**
+   * 本接口(DescribeAuditLogs)用于查询数据库审计日志。
+   */
+  async DescribeAuditLogs(
+    req: DescribeAuditLogsRequest,
+    cb?: (error: string, rep: DescribeAuditLogsResponse) => void
+  ): Promise<DescribeAuditLogsResponse> {
+    return this.request("DescribeAuditLogs", req, cb)
   }
 
   /**
@@ -472,6 +493,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口(CreateAuditLogFile)用于创建云数据库实例的审计日志文件。
+   */
+  async CreateAuditLogFile(
+    req: CreateAuditLogFileRequest,
+    cb?: (error: string, rep: CreateAuditLogFileResponse) => void
+  ): Promise<CreateAuditLogFileResponse> {
+    return this.request("CreateAuditLogFile", req, cb)
+  }
+
+  /**
    * 隔离集群
    */
   async IsolateCluster(
@@ -519,6 +550,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RemoveClusterSlaveZoneResponse) => void
   ): Promise<RemoveClusterSlaveZoneResponse> {
     return this.request("RemoveClusterSlaveZone", req, cb)
+  }
+
+  /**
+   * 修改集群名称
+   */
+  async ModifyClusterName(
+    req: ModifyClusterNameRequest,
+    cb?: (error: string, rep: ModifyClusterNameResponse) => void
+  ): Promise<ModifyClusterNameResponse> {
+    return this.request("ModifyClusterName", req, cb)
   }
 
   /**
@@ -699,6 +740,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDBSecurityGroupsResponse) => void
   ): Promise<DescribeDBSecurityGroupsResponse> {
     return this.request("DescribeDBSecurityGroups", req, cb)
+  }
+
+  /**
+   * 本接口(DescribeAuditLogFiles)用于查询云数据库实例的审计日志文件。
+   */
+  async DescribeAuditLogFiles(
+    req: DescribeAuditLogFilesRequest,
+    cb?: (error: string, rep: DescribeAuditLogFilesResponse) => void
+  ): Promise<DescribeAuditLogFilesResponse> {
+    return this.request("DescribeAuditLogFiles", req, cb)
   }
 
   /**

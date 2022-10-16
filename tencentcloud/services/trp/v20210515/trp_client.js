@@ -34,16 +34,28 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTraceCodeById", req, cb);
     }
     /**
+     * 查自定义码规则列表
+     */
+    async DescribeCustomRules(req, cb) {
+        return this.request("DescribeCustomRules", req, cb);
+    }
+    /**
      * 修改溯源信息的排序
      */
     async ModifyTraceDataRanks(req, cb) {
         return this.request("ModifyTraceDataRanks", req, cb);
     }
     /**
-     * 编辑商品
+     * 查自定义码规则
      */
-    async ModifyProduct(req, cb) {
-        return this.request("ModifyProduct", req, cb);
+    async DescribeCustomRuleById(req, cb) {
+        return this.request("DescribeCustomRuleById", req, cb);
+    }
+    /**
+     * 异步导入激活码包，如果是第三方码包，需要域名跟配置的匹配
+     */
+    async CreateTraceCodesAsync(req, cb) {
+        return this.request("CreateTraceCodesAsync", req, cb);
     }
     /**
      * 查询批次信息
@@ -82,10 +94,28 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeProducts", req, cb);
     }
     /**
+     * 修改自定义码规则
+     */
+    async ModifyCustomRule(req, cb) {
+        return this.request("ModifyCustomRule", req, cb);
+    }
+    /**
      * 修改溯源信息
      */
     async ModifyTraceData(req, cb) {
         return this.request("ModifyTraceData", req, cb);
+    }
+    /**
+     * 编辑商品
+     */
+    async ModifyProduct(req, cb) {
+        return this.request("ModifyProduct", req, cb);
+    }
+    /**
+     * 更新自定义码规则状态
+     */
+    async ModifyCustomRuleStatus(req, cb) {
+        return this.request("ModifyCustomRuleStatus", req, cb);
     }
     /**
      * 查询商品信息
@@ -112,16 +142,40 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateTraceChain", req, cb);
     }
     /**
+     * 生成自定义码包
+     */
+    async CreateCustomPack(req, cb) {
+        return this.request("CreateCustomPack", req, cb);
+    }
+    /**
      * 删除商户
      */
     async DeleteMerchant(req, cb) {
         return this.request("DeleteMerchant", req, cb);
     }
     /**
+     * 查询码包状态
+     */
+    async DescribeCodePackStatus(req, cb) {
+        return this.request("DescribeCodePackStatus", req, cb);
+    }
+    /**
      * 查询批次列表
      */
     async DescribeCodeBatchs(req, cb) {
         return this.request("DescribeCodeBatchs", req, cb);
+    }
+    /**
+     * 新建自定义码规则
+     */
+    async CreateCustomRule(req, cb) {
+        return this.request("CreateCustomRule", req, cb);
+    }
+    /**
+     * 查询码包地址
+     */
+    async DescribeCodePackUrl(req, cb) {
+        return this.request("DescribeCodePackUrl", req, cb);
     }
     /**
      * 编辑商户
@@ -142,10 +196,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteCodeBatch", req, cb);
     }
     /**
-     * 查询溯源信息，通常溯源信息跟生产批次绑定，即一个批次的所有溯源信息都是一样的
+     * 删除溯源信息，如果已经上链则不可删除
      */
-    async DescribeTraceDataList(req, cb) {
-        return this.request("DescribeTraceDataList", req, cb);
+    async DeleteTraceData(req, cb) {
+        return this.request("DeleteTraceData", req, cb);
     }
     /**
      * 新增溯源信息
@@ -160,10 +214,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateMerchant", req, cb);
     }
     /**
-     * 删除溯源信息，如果已经上链则不可删除
+     * 查询溯源信息，通常溯源信息跟生产批次绑定，即一个批次的所有溯源信息都是一样的
      */
-    async DeleteTraceData(req, cb) {
-        return this.request("DeleteTraceData", req, cb);
+    async DescribeTraceDataList(req, cb) {
+        return this.request("DescribeTraceDataList", req, cb);
     }
     /**
      * 冻结或者激活二维码，所属的批次的冻结状态优先级大于单个二维码的状态，即如果批次是冻结的，那么该批次下二维码的状态都是冻结的
@@ -194,6 +248,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateCodePack(req, cb) {
         return this.request("CreateCodePack", req, cb);
+    }
+    /**
+     * 获取异步任务的输出地址
+     */
+    async DescribeJobFileUrl(req, cb) {
+        return this.request("DescribeJobFileUrl", req, cb);
     }
 }
 exports.Client = Client;

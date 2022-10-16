@@ -114,11 +114,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ChannelGetTaskResultApi", req, cb);
     }
     /**
-     * 创建出证报告，返回报告 URL。此接口暂未开放，有问题请联系运营人员。
-
+     * 此接口（SyncProxyOrganization）用于同步渠道子客企业信息，主要是子客企业的营业执照，便于子客企业开通过程中不用手动上传。若有需要调用此接口，需要在创建控制链接CreateConsoleLoginUrl之后即刻进行调用。
      */
-    async CreateChannelFlowEvidenceReport(req, cb) {
-        return this.request("CreateChannelFlowEvidenceReport", req, cb);
+    async SyncProxyOrganization(req, cb) {
+        return this.request("SyncProxyOrganization", req, cb);
     }
     /**
      * 合同文件验签
@@ -182,12 +181,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async UploadFiles(req, cb) {
         return this.request("UploadFiles", req, cb);
-    }
-    /**
-     * 此接口（SyncProxyOrganization）用于同步渠道子客企业信息，主要是子客企业的营业执照，便于子客企业开通过程中不用手动上传。若有需要调用此接口，需要在创建控制链接CreateConsoleLoginUrl之后即刻进行调用。
-     */
-    async SyncProxyOrganization(req, cb) {
-        return this.request("SyncProxyOrganization", req, cb);
     }
     /**
      * 此接口（OperateChannelTemplate）用于渠道侧将模板库中的模板对合作企业进行查询和设置, 其中包括可见性的修改以及对合作企业的设置.

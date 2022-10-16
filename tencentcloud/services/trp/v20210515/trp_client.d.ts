@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DeleteProductRequest, ModifyCodeBatchRequest, CreateCodeBatchResponse, DescribeProductByIdRequest, ModifyTraceDataRanksRequest, CreateTraceCodesResponse, DescribeTraceCodesResponse, DeleteTraceDataRequest, ModifyMerchantRequest, ModifyProductResponse, ModifyTraceDataRequest, CreateMerchantResponse, DescribeMerchantByIdRequest, ModifyTraceDataRanksResponse, CreateTraceCodesRequest, DeleteProductResponse, DescribeCodeBatchsRequest, DescribeProductsRequest, DescribeCodeBatchByIdResponse, ModifyProductRequest, DeleteTraceDataResponse, CreateCodePackResponse, DescribeMerchantsResponse, DescribeTraceDataListRequest, DescribeMerchantByIdResponse, ModifyMerchantResponse, DeleteMerchantResponse, DescribeCodesByPackResponse, DeleteCodeBatchResponse, DescribeTraceDataListResponse, CreateTraceChainRequest, DeleteCodeBatchRequest, DescribeMerchantsRequest, ModifyTraceCodeRequest, CreateProductResponse, CreateTraceDataResponse, CreateTraceDataRequest, CreateMerchantRequest, DescribeCodeBatchsResponse, DescribeCodeBatchByIdRequest, DescribeTraceCodeByIdResponse, DescribeCodePacksResponse, DescribeProductByIdResponse, DescribeCodesByPackRequest, DescribeCodePacksRequest, DescribeProductsResponse, CreateProductRequest, CreateTraceChainResponse, DescribeTraceCodeByIdRequest, CreateCodePackRequest, CreateCodeBatchRequest, ModifyCodeBatchResponse, DescribeTraceCodesRequest, ModifyTraceCodeResponse, DeleteMerchantRequest, ModifyTraceDataResponse } from "./trp_models";
+import { DescribeProductsRequest, ModifyProductResponse, ModifyProductRequest, ModifyCustomRuleRequest, DeleteCodeBatchRequest, DescribeMerchantsRequest, ModifyTraceCodeRequest, DescribeCustomRulesResponse, CreateMerchantRequest, DescribeCodeBatchByIdRequest, DescribeTraceCodeByIdResponse, DescribeProductsResponse, CreateCodeBatchResponse, DescribeTraceDataListResponse, DescribeTraceCodesRequest, CreateTraceCodesAsyncRequest, ModifyTraceDataResponse, DeleteProductRequest, CreateTraceChainResponse, CreateCustomRuleRequest, DescribeCodePackStatusRequest, ModifyTraceDataRequest, DescribeCodeBatchsRequest, ModifyTraceDataRanksResponse, CreateTraceCodesRequest, DescribeCodeBatchByIdResponse, DescribeCodePackStatusResponse, ModifyCustomRuleResponse, ModifyMerchantResponse, DeleteProductResponse, DescribeCodesByPackResponse, CreateTraceDataRequest, CreateProductResponse, CreateCustomPackRequest, CreateCodePackRequest, CreateCodeBatchRequest, DescribeCustomRuleByIdRequest, ModifyCustomRuleStatusResponse, CreateCustomPackResponse, ModifyMerchantRequest, DescribeCodePackUrlRequest, ModifyTraceDataRanksRequest, DeleteTraceDataResponse, ModifyCustomRuleStatusRequest, CreateCodePackResponse, DescribeMerchantByIdResponse, CreateTraceDataResponse, DescribeCustomRuleByIdResponse, DescribeCodeBatchsResponse, CreateCustomRuleResponse, DescribeCodePacksResponse, DescribeCodesByPackRequest, DescribeJobFileUrlRequest, CreateTraceCodesAsyncResponse, DescribeCustomRulesRequest, CreateProductRequest, ModifyCodeBatchRequest, DescribeProductByIdRequest, DescribeTraceCodesResponse, CreateTraceCodesResponse, DeleteTraceDataRequest, CreateMerchantResponse, DescribeMerchantsResponse, DescribeTraceDataListRequest, DeleteMerchantResponse, DeleteCodeBatchResponse, CreateTraceChainRequest, DescribeMerchantByIdRequest, DescribeProductByIdResponse, DescribeCodePacksRequest, DescribeJobFileUrlResponse, DescribeTraceCodeByIdRequest, DeleteMerchantRequest, ModifyTraceCodeResponse, DescribeCodePackUrlResponse, ModifyCodeBatchResponse } from "./trp_models";
 /**
  * trp client
  * @class
@@ -12,13 +12,21 @@ export declare class Client extends AbstractClient {
      */
     DescribeTraceCodeById(req: DescribeTraceCodeByIdRequest, cb?: (error: string, rep: DescribeTraceCodeByIdResponse) => void): Promise<DescribeTraceCodeByIdResponse>;
     /**
+     * 查自定义码规则列表
+     */
+    DescribeCustomRules(req: DescribeCustomRulesRequest, cb?: (error: string, rep: DescribeCustomRulesResponse) => void): Promise<DescribeCustomRulesResponse>;
+    /**
      * 修改溯源信息的排序
      */
     ModifyTraceDataRanks(req: ModifyTraceDataRanksRequest, cb?: (error: string, rep: ModifyTraceDataRanksResponse) => void): Promise<ModifyTraceDataRanksResponse>;
     /**
-     * 编辑商品
+     * 查自定义码规则
      */
-    ModifyProduct(req: ModifyProductRequest, cb?: (error: string, rep: ModifyProductResponse) => void): Promise<ModifyProductResponse>;
+    DescribeCustomRuleById(req: DescribeCustomRuleByIdRequest, cb?: (error: string, rep: DescribeCustomRuleByIdResponse) => void): Promise<DescribeCustomRuleByIdResponse>;
+    /**
+     * 异步导入激活码包，如果是第三方码包，需要域名跟配置的匹配
+     */
+    CreateTraceCodesAsync(req: CreateTraceCodesAsyncRequest, cb?: (error: string, rep: CreateTraceCodesAsyncResponse) => void): Promise<CreateTraceCodesAsyncResponse>;
     /**
      * 查询批次信息
      */
@@ -44,9 +52,21 @@ export declare class Client extends AbstractClient {
      */
     DescribeProducts(req: DescribeProductsRequest, cb?: (error: string, rep: DescribeProductsResponse) => void): Promise<DescribeProductsResponse>;
     /**
+     * 修改自定义码规则
+     */
+    ModifyCustomRule(req: ModifyCustomRuleRequest, cb?: (error: string, rep: ModifyCustomRuleResponse) => void): Promise<ModifyCustomRuleResponse>;
+    /**
      * 修改溯源信息
      */
     ModifyTraceData(req: ModifyTraceDataRequest, cb?: (error: string, rep: ModifyTraceDataResponse) => void): Promise<ModifyTraceDataResponse>;
+    /**
+     * 编辑商品
+     */
+    ModifyProduct(req: ModifyProductRequest, cb?: (error: string, rep: ModifyProductResponse) => void): Promise<ModifyProductResponse>;
+    /**
+     * 更新自定义码规则状态
+     */
+    ModifyCustomRuleStatus(req: ModifyCustomRuleStatusRequest, cb?: (error: string, rep: ModifyCustomRuleStatusResponse) => void): Promise<ModifyCustomRuleStatusResponse>;
     /**
      * 查询商品信息
      */
@@ -64,13 +84,29 @@ export declare class Client extends AbstractClient {
      */
     CreateTraceChain(req: CreateTraceChainRequest, cb?: (error: string, rep: CreateTraceChainResponse) => void): Promise<CreateTraceChainResponse>;
     /**
+     * 生成自定义码包
+     */
+    CreateCustomPack(req: CreateCustomPackRequest, cb?: (error: string, rep: CreateCustomPackResponse) => void): Promise<CreateCustomPackResponse>;
+    /**
      * 删除商户
      */
     DeleteMerchant(req: DeleteMerchantRequest, cb?: (error: string, rep: DeleteMerchantResponse) => void): Promise<DeleteMerchantResponse>;
     /**
+     * 查询码包状态
+     */
+    DescribeCodePackStatus(req: DescribeCodePackStatusRequest, cb?: (error: string, rep: DescribeCodePackStatusResponse) => void): Promise<DescribeCodePackStatusResponse>;
+    /**
      * 查询批次列表
      */
     DescribeCodeBatchs(req: DescribeCodeBatchsRequest, cb?: (error: string, rep: DescribeCodeBatchsResponse) => void): Promise<DescribeCodeBatchsResponse>;
+    /**
+     * 新建自定义码规则
+     */
+    CreateCustomRule(req: CreateCustomRuleRequest, cb?: (error: string, rep: CreateCustomRuleResponse) => void): Promise<CreateCustomRuleResponse>;
+    /**
+     * 查询码包地址
+     */
+    DescribeCodePackUrl(req: DescribeCodePackUrlRequest, cb?: (error: string, rep: DescribeCodePackUrlResponse) => void): Promise<DescribeCodePackUrlResponse>;
     /**
      * 编辑商户
      */
@@ -84,9 +120,9 @@ export declare class Client extends AbstractClient {
      */
     DeleteCodeBatch(req: DeleteCodeBatchRequest, cb?: (error: string, rep: DeleteCodeBatchResponse) => void): Promise<DeleteCodeBatchResponse>;
     /**
-     * 查询溯源信息，通常溯源信息跟生产批次绑定，即一个批次的所有溯源信息都是一样的
+     * 删除溯源信息，如果已经上链则不可删除
      */
-    DescribeTraceDataList(req: DescribeTraceDataListRequest, cb?: (error: string, rep: DescribeTraceDataListResponse) => void): Promise<DescribeTraceDataListResponse>;
+    DeleteTraceData(req: DeleteTraceDataRequest, cb?: (error: string, rep: DeleteTraceDataResponse) => void): Promise<DeleteTraceDataResponse>;
     /**
      * 新增溯源信息
      */
@@ -96,9 +132,9 @@ export declare class Client extends AbstractClient {
      */
     CreateMerchant(req: CreateMerchantRequest, cb?: (error: string, rep: CreateMerchantResponse) => void): Promise<CreateMerchantResponse>;
     /**
-     * 删除溯源信息，如果已经上链则不可删除
+     * 查询溯源信息，通常溯源信息跟生产批次绑定，即一个批次的所有溯源信息都是一样的
      */
-    DeleteTraceData(req: DeleteTraceDataRequest, cb?: (error: string, rep: DeleteTraceDataResponse) => void): Promise<DeleteTraceDataResponse>;
+    DescribeTraceDataList(req: DescribeTraceDataListRequest, cb?: (error: string, rep: DescribeTraceDataListResponse) => void): Promise<DescribeTraceDataListResponse>;
     /**
      * 冻结或者激活二维码，所属的批次的冻结状态优先级大于单个二维码的状态，即如果批次是冻结的，那么该批次下二维码的状态都是冻结的
      */
@@ -119,4 +155,8 @@ export declare class Client extends AbstractClient {
      * 生成普通码包
      */
     CreateCodePack(req: CreateCodePackRequest, cb?: (error: string, rep: CreateCodePackResponse) => void): Promise<CreateCodePackResponse>;
+    /**
+     * 获取异步任务的输出地址
+     */
+    DescribeJobFileUrl(req: DescribeJobFileUrlRequest, cb?: (error: string, rep: DescribeJobFileUrlResponse) => void): Promise<DescribeJobFileUrlResponse>;
 }

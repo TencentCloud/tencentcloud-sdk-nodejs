@@ -34,6 +34,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetLiveCode", req, cb);
     }
     /**
+     * 传入视频和照片地址，先判断视频中是否为真人，判断为真人后，再判断该视频中的人与上传照片是否属于同一个人。
+     */
+    async VideoLivenessCompare(req, cb) {
+        return this.request("VideoLivenessCompare", req, cb);
+    }
+    /**
      * 使用动作活体检测模式前，需调用本接口获取动作顺序。
      */
     async GetActionSequence(req, cb) {
@@ -56,6 +62,13 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CheckEidTokenStatus(req, cb) {
         return this.request("CheckEidTokenStatus", req, cb);
+    }
+    /**
+     * 生成一个临时的UploadUrl用于上传资源文件，客户需要使用HTTP PUT方法上传，上传完成后将ResourceUrl传给TargetAction对应接口完成资源传递（具体字段由使用场景确定）。
+数据存储于Region参数对应地域的腾讯云COS Bucket，存储有效期2小时。
+     */
+    async CreateUploadUrl(req, cb) {
+        return this.request("CreateUploadUrl", req, cb);
     }
     /**
      * 本接口用于输入银行卡号、姓名、开户证件号、开户手机号，校验信息的真实性和一致性。
@@ -89,16 +102,41 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CheckPhoneAndName", req, cb);
     }
     /**
+     * 每次调用活体服务前，需要先调用本接口获取Token，需要保存此Token用来发起核验流程，并且在核验完成后获取结果信息。
+     */
+    async ApplyLivenessToken(req, cb) {
+        return this.request("ApplyLivenessToken", req, cb);
+    }
+    /**
      * 本接口用于银行卡号、姓名、开户证件号信息的真实性和一致性。
      */
     async BankCardVerification(req, cb) {
         return this.request("BankCardVerification", req, cb);
     }
     /**
+     * 每次调用Web核验服务前，需要先调用本接口获取Token，需要保存此Token用来发起核验流程，并且在核验完成后获取结果信息。
+     */
+    async ApplySdkVerificationToken(req, cb) {
+        return this.request("ApplySdkVerificationToken", req, cb);
+    }
+    /**
      * 传入视频和照片，先判断视频中是否为真人，判断为真人后，再判断该视频中的人与上传照片是否属于同一个人。
      */
     async LivenessCompare(req, cb) {
         return this.request("LivenessCompare", req, cb);
+    }
+    /**
+     * 根据活体比对（光线）SDK采集的机器信息生成适合的光线序列，将光线序列传入SDK后开启核身。
+SDK生成的数据内容必须存储在腾讯云COS，COS Bucket所在的Region需要和本接口请求的Region保持一致，推荐使用生成上传链接接口来完成资源传递。
+     */
+    async GenerateReflectSequence(req, cb) {
+        return this.request("GenerateReflectSequence", req, cb);
+    }
+    /**
+     * 完成Sdk核验流程后，用核验令牌（Token）调用本接口查询对应核验结果信息。Token申请后三天内有效，可多次调用。
+     */
+    async GetSdkVerificationResult(req, cb) {
+        return this.request("GetSdkVerificationResult", req, cb);
     }
     /**
      * 该接口仅限微信公众号中使用，传入姓名和身份证号获取回调URL，在微信公众号中打开验证姓名和身份证号与微信实名的信息是否一致。
@@ -132,10 +170,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetEidToken", req, cb);
     }
     /**
-     * 本接口用于校验手机号、姓名和身份证号的真实性和一致性。支持的手机号段详情请查阅<a href="https://cloud.tencent.com/document/product/1007/46063">运营商类</a>文档。
+     * 完成Web核验流程后，用核验令牌（BizToken）调用本接口查询对应核验结果信息。BizToken申请后三天内（3\*24\*3,600秒）有效，可多次调用。
      */
-    async PhoneVerification(req, cb) {
-        return this.request("PhoneVerification", req, cb);
+    async GetWebVerificationResult(req, cb) {
+        return this.request("GetWebVerificationResult", req, cb);
     }
     /**
      * 本接口用于验证手机号的状态，您可以输入手机号进行查询。
@@ -154,6 +192,13 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async MinorsVerification(req, cb) {
         return this.request("MinorsVerification", req, cb);
+    }
+    /**
+     * 使用活体比对（光线）SDK生成的数据包检测活体，并和传入的图片进行比对。
+图片和SDK生成的数据内容必须存储在腾讯云COS，COS Bucket所在的Region需要和本接口请求的Region保持一致，推荐使用生成上传链接接口来完成资源传递。
+     */
+    async DetectReflectLivenessAndCompare(req, cb) {
+        return this.request("DetectReflectLivenessAndCompare", req, cb);
     }
     /**
      * 本接口用于校验姓名、身份证号、身份证有效期的真实性和一致性。
@@ -216,6 +261,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CheckBankCardInformation", req, cb);
     }
     /**
+     * 每次调用Web核验服务前，需要先调用本接口获取BizToken，需要保存此BizToken用来发起核验流程，并且在核验完成后获取结果信息。
+     */
+    async ApplyWebVerificationToken(req, cb) {
+        return this.request("ApplyWebVerificationToken", req, cb);
+    }
+    /**
      * 完成验证后，用BizToken调用本接口获取结果信息，BizToken生成后三天内（3\*24\*3,600秒）可多次拉取。
      */
     async GetDetectInfo(req, cb) {
@@ -228,6 +279,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("BankCard2EVerification", req, cb);
     }
     /**
+     * 本接口用于校验手机号、姓名和身份证号的真实性和一致性。支持的手机号段详情请查阅<a href="https://cloud.tencent.com/document/product/1007/46063">运营商类</a>文档。
+     */
+    async PhoneVerification(req, cb) {
+        return this.request("PhoneVerification", req, cb);
+    }
+    /**
      * 本接口用于校验中国电信手机号、姓名和身份证号的真实性和一致性。中国电信支持的手机号段详情请查阅<a href="https://cloud.tencent.com/document/product/1007/46063">运营商类</a>文档。
      */
     async PhoneVerificationCTCC(req, cb) {
@@ -238,6 +295,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async GetRealNameAuthResult(req, cb) {
         return this.request("GetRealNameAuthResult", req, cb);
+    }
+    /**
+     * 完成活体检测流程后，用核验令牌（SdkToken）调用本接口查询对应核验结果信息。Token申请后2小时内有效，可多次调用。
+     */
+    async GetLivenessResult(req, cb) {
+        return this.request("GetLivenessResult", req, cb);
     }
 }
 exports.Client = Client;
