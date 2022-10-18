@@ -231,7 +231,7 @@ export interface TemplateInfo {
       */
     TemplateType: number;
     /**
-      * 是否是发起人
+      * 是否是发起人 ,已弃用
       */
     IsPromoter: boolean;
     /**
@@ -256,10 +256,6 @@ export interface ChannelDescribeEmployeesRequest {
       */
     Agent?: Agent;
     /**
-      * 操作者的信息
-      */
-    Operator?: UserInfo;
-    /**
       * 查询过滤实名用户，key为Status，Values为["IsVerified"]
       */
     Filters?: Array<Filter>;
@@ -267,6 +263,10 @@ export interface ChannelDescribeEmployeesRequest {
       * 偏移量，默认为0，最大为20000
       */
     Offset?: number;
+    /**
+      * 操作者的信息
+      */
+    Operator?: UserInfo;
 }
 /**
  * SyncProxyOrganization返回参数结构体
@@ -872,6 +872,10 @@ SIGN_PERSONAL_SEAL - 个人签署印章控件（使用文件发起暂不支持�
       */
     ComponentRequired?: boolean;
     /**
+      * 控件关联的签署方id
+      */
+    ComponentRecipientId?: string;
+    /**
       * 控件所属文件的序号 (文档中文件的排列序号，从0开始)
       */
     FileIndex?: number;
@@ -1293,7 +1297,7 @@ export interface DescribeTemplatesRequest {
       */
     Agent: Agent;
     /**
-      * 模板唯一标识
+      * 模板唯一标识，查询单个模版时使用
       */
     TemplateId?: string;
     /**
@@ -1309,10 +1313,6 @@ export interface DescribeTemplatesRequest {
       */
     Offset?: number;
     /**
-      * 操作者的信息
-      */
-    Operator?: UserInfo;
-    /**
       * 是否返回所有组件信息。默认false，只返回发起方控件；true，返回所有签署方控件
       */
     QueryAllComponents?: boolean;
@@ -1320,6 +1320,10 @@ export interface DescribeTemplatesRequest {
       * 模糊搜索模板名称，最大长度200
       */
     TemplateName?: string;
+    /**
+      * 操作者的信息
+      */
+    Operator?: UserInfo;
 }
 /**
  * SyncProxyOrganizationOperators请求参数结构体
@@ -1821,7 +1825,7 @@ export interface ChannelCreateFlowByFilesResponse {
  */
 export interface UploadFilesResponse {
     /**
-      * 文件id数组，有效期一个小时
+      * 文件id数组，有效期一个小时；有效期内此文件id可以反复使用
       */
     FileIds: Array<string>;
     /**

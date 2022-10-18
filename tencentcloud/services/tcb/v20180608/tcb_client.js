@@ -52,6 +52,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("EstablishWxGatewayRoute", req, cb);
     }
     /**
+     * 修改日志主题
+     */
+    async ModifyClsTopic(req, cb) {
+        return this.request("ModifyClsTopic", req, cb);
+    }
+    /**
      * 本接口（DestroyStandaloneGateway）用于销毁小租户网关。
      */
     async DestroyStandaloneGateway(req, cb) {

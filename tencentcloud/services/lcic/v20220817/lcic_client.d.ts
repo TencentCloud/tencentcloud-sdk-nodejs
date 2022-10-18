@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CreateRoomRequest, RegisterUserResponse, DeleteRoomRequest, CreateSupervisorRequest, DescribeRoomResponse, RegisterUserRequest, LoginOriginIdRequest, DescribeUserRequest, DeleteRoomResponse, CreateDocumentResponse, LoginUserRequest, CreateSupervisorResponse, SetAppCustomContentResponse, CreateDocumentRequest, CreateRoomResponse, DescribeUserResponse, SetAppCustomContentRequest, DescribeRoomRequest, LoginOriginIdResponse, LoginUserResponse } from "./lcic_models";
+import { CreateRoomRequest, SetAppCustomContentRequest, UnbindDocumentFromRoomResponse, DescribeUserRequest, CreateDocumentResponse, DescribeRoomStatisticsRequest, BindDocumentToRoomRequest, CreateDocumentRequest, SetAppCustomContentResponse, LoginOriginIdResponse, LoginUserResponse, DescribeRoomResponse, DeleteRoomResponse, DescribeRoomStatisticsResponse, CreateSupervisorResponse, DeleteRoomRequest, RegisterUserResponse, ModifyAppResponse, ModifyAppRequest, CreateSupervisorRequest, UnbindDocumentFromRoomRequest, LoginOriginIdRequest, RegisterUserRequest, LoginUserRequest, BindDocumentToRoomResponse, CreateRoomResponse, DescribeUserResponse, DescribeRoomRequest } from "./lcic_models";
 /**
  * lcic client
  * @class
@@ -16,17 +16,33 @@ export declare class Client extends AbstractClient {
      */
     SetAppCustomContent(req: SetAppCustomContentRequest, cb?: (error: string, rep: SetAppCustomContentResponse) => void): Promise<SetAppCustomContentResponse>;
     /**
-     * 获取用户信息
+     * 获取房间统计信息，仅可在房间结束后调用。
      */
-    DescribeUser(req: DescribeUserRequest, cb?: (error: string, rep: DescribeUserResponse) => void): Promise<DescribeUserResponse>;
+    DescribeRoomStatistics(req: DescribeRoomStatisticsRequest, cb?: (error: string, rep: DescribeRoomStatisticsResponse) => void): Promise<DescribeRoomStatisticsResponse>;
+    /**
+     * 删除房间
+     */
+    DeleteRoom(req: DeleteRoomRequest, cb?: (error: string, rep: DeleteRoomResponse) => void): Promise<DeleteRoomResponse>;
+    /**
+     * 文档从房间解绑
+     */
+    UnbindDocumentFromRoom(req: UnbindDocumentFromRoomRequest, cb?: (error: string, rep: UnbindDocumentFromRoomResponse) => void): Promise<UnbindDocumentFromRoomResponse>;
+    /**
+     * 绑定文档到房间
+     */
+    BindDocumentToRoom(req: BindDocumentToRoomRequest, cb?: (error: string, rep: BindDocumentToRoomResponse) => void): Promise<BindDocumentToRoomResponse>;
     /**
      * 使用源账号登录，源账号为注册时填入的originId
      */
     LoginOriginId(req: LoginOriginIdRequest, cb?: (error: string, rep: LoginOriginIdResponse) => void): Promise<LoginOriginIdResponse>;
     /**
-     * 删除房间
+     * 获取用户信息
      */
-    DeleteRoom(req: DeleteRoomRequest, cb?: (error: string, rep: DeleteRoomResponse) => void): Promise<DeleteRoomResponse>;
+    DescribeUser(req: DescribeUserRequest, cb?: (error: string, rep: DescribeUserResponse) => void): Promise<DescribeUserResponse>;
+    /**
+     * 修改应用
+     */
+    ModifyApp(req: ModifyAppRequest, cb?: (error: string, rep: ModifyAppResponse) => void): Promise<ModifyAppResponse>;
     /**
      * 登录
      */

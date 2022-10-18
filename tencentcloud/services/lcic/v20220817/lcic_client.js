@@ -40,10 +40,28 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SetAppCustomContent", req, cb);
     }
     /**
-     * 获取用户信息
+     * 获取房间统计信息，仅可在房间结束后调用。
      */
-    async DescribeUser(req, cb) {
-        return this.request("DescribeUser", req, cb);
+    async DescribeRoomStatistics(req, cb) {
+        return this.request("DescribeRoomStatistics", req, cb);
+    }
+    /**
+     * 删除房间
+     */
+    async DeleteRoom(req, cb) {
+        return this.request("DeleteRoom", req, cb);
+    }
+    /**
+     * 文档从房间解绑
+     */
+    async UnbindDocumentFromRoom(req, cb) {
+        return this.request("UnbindDocumentFromRoom", req, cb);
+    }
+    /**
+     * 绑定文档到房间
+     */
+    async BindDocumentToRoom(req, cb) {
+        return this.request("BindDocumentToRoom", req, cb);
     }
     /**
      * 使用源账号登录，源账号为注册时填入的originId
@@ -52,10 +70,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("LoginOriginId", req, cb);
     }
     /**
-     * 删除房间
+     * 获取用户信息
      */
-    async DeleteRoom(req, cb) {
-        return this.request("DeleteRoom", req, cb);
+    async DescribeUser(req, cb) {
+        return this.request("DescribeUser", req, cb);
+    }
+    /**
+     * 修改应用
+     */
+    async ModifyApp(req, cb) {
+        return this.request("ModifyApp", req, cb);
     }
     /**
      * 登录

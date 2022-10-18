@@ -668,6 +668,16 @@ it("cpdp.v20190820.CreatePayRollPreOrder", async function () {
     }
 })
 
+it("cpdp.v20190820.CreateOpenBankGlobalPaymentOrder", async function () {
+    try {
+       const data = await client.CreateOpenBankGlobalPaymentOrder({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cpdp.v20190820.AddContract", async function () {
     try {
        const data = await client.AddContract({})

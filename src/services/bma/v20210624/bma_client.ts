@@ -54,6 +54,7 @@ import {
   DescribeCRMonitorDetailResponse,
   CreateCRWorkRequest,
   DescribeBPCompanyInfoRequest,
+  DescribeCRObtainDetailRequest,
   DescribeBPReportFakeURLsResponse,
   DescribeCRMonitorDetailRequest,
   Filter,
@@ -61,6 +62,7 @@ import {
   ModifyCRRightStatusRequest,
   DescribeCRMonitorsRequest,
   DescribeCRWorkInfoResponse,
+  DescribeCRObtainDetailResponse,
   CreateCRRightFileResponse,
   ModifyCRWhiteListResponse,
   FakeURLInfo,
@@ -142,7 +144,17 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 新建拦截
+   * 查询取证详情
+   */
+  async DescribeCRObtainDetail(
+    req: DescribeCRObtainDetailRequest,
+    cb?: (error: string, rep: DescribeCRObtainDetailResponse) => void
+  ): Promise<DescribeCRObtainDetailResponse> {
+    return this.request("DescribeCRObtainDetail", req, cb)
+  }
+
+  /**
+     * 新建协查处置
 
      */
   async CreateCRBlock(
@@ -243,7 +255,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 拦截申请
+   * 协查处置申请
    */
   async ModifyCRBlockStatus(
     req: ModifyCRBlockStatusRequest,

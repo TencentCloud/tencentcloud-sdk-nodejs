@@ -68,6 +68,16 @@ it("bma.v20210624.CreateBPOfflineTicket", async function () {
     }
 })
 
+it("bma.v20210624.DescribeCRObtainDetail", async function () {
+    try {
+       const data = await client.DescribeCRObtainDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("bma.v20210624.CreateCRBlock", async function () {
     try {
        const data = await client.CreateCRBlock({})

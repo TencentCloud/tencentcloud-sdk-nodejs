@@ -30,6 +30,7 @@ import {
   DeleteCloudBaseRunServerVersionResponse,
   RollUpdateCloudBaseRunServerVersionResponse,
   SearchClsLogResponse,
+  ModifyClsTopicResponse,
   StandaloneGatewayInfo,
   CloudBaseRunSideSpec,
   CommonServiceAPIResponse,
@@ -56,6 +57,7 @@ import {
   DescribeCloudBaseRunOperationTypesRequest,
   DescribeAuthDomainsResponse,
   DescribeCloudBaseRunOneClickTaskExternalRequest,
+  ModifyClsTopicRequest,
   DescribeStandaloneGatewayResponse,
   DescribeWxCloudBaseRunEnvsResponse,
   CreateHostingDomainRequest,
@@ -281,6 +283,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: EstablishWxGatewayRouteResponse) => void
   ): Promise<EstablishWxGatewayRouteResponse> {
     return this.request("EstablishWxGatewayRoute", req, cb)
+  }
+
+  /**
+   * 修改日志主题
+   */
+  async ModifyClsTopic(
+    req: ModifyClsTopicRequest,
+    cb?: (error: string, rep: ModifyClsTopicResponse) => void
+  ): Promise<ModifyClsTopicResponse> {
+    return this.request("ModifyClsTopic", req, cb)
   }
 
   /**

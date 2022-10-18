@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeCaptchaOperDataResponse, DescribeCaptchaMiniOperDataResponse, GetTotalTicketStatisticsRequest, DescribeCaptchaMiniDataSumResponse, UpdateCaptchaAppIdInfoRequest, DescribeCaptchaUserAllAppIdRequest, GetTotalTicketStatisticsResponse, DescribeCaptchaMiniDataResponse, UpdateCaptchaAppIdInfoResponse, DescribeCaptchaMiniRiskResultRequest, DescribeCaptchaDataSumResponse, DescribeCaptchaTicketDataRequest, DescribeCaptchaMiniDataSumRequest, DescribeCaptchaOperDataRequest, DescribeCaptchaDataSumRequest, DescribeCaptchaMiniRiskResultResponse, DescribeCaptchaDataResponse, DescribeCaptchaResultRequest, DescribeCaptchaResultResponse, DescribeCaptchaMiniOperDataRequest, DescribeCaptchaAppIdInfoRequest, DescribeCaptchaAppIdInfoResponse, DescribeCaptchaUserAllAppIdResponse, DescribeCaptchaDataRequest, DescribeCaptchaMiniResultRequest, DescribeCaptchaTicketDataResponse, DescribeCaptchaMiniResultResponse, DescribeCaptchaMiniDataRequest } from "./captcha_models";
+import { DescribeCaptchaOperDataResponse, DescribeCaptchaMiniOperDataResponse, GetTotalTicketStatisticsRequest, DescribeCaptchaMiniDataSumResponse, UpdateCaptchaAppIdInfoRequest, DescribeCaptchaUserAllAppIdRequest, GetTotalTicketStatisticsResponse, DescribeCaptchaMiniDataResponse, DescribeCaptchaMiniRiskResultRequest, UpdateCaptchaAppIdInfoResponse, DescribeCaptchaDataSumResponse, DescribeCaptchaTicketDataRequest, DescribeCaptchaResultResponse, DescribeCaptchaMiniDataSumRequest, DescribeCaptchaOperDataRequest, DescribeCaptchaDataSumRequest, DescribeCaptchaMiniRiskResultResponse, DescribeCaptchaDataResponse, DescribeCaptchaResultRequest, DescribeCaptchaMiniOperDataRequest, DescribeCaptchaAppIdInfoRequest, DescribeCaptchaAppIdInfoResponse, DescribeCaptchaUserAllAppIdResponse, DescribeCaptchaDataRequest, DescribeCaptchaMiniResultRequest, DescribeCaptchaTicketDataResponse, DescribeCaptchaMiniResultResponse, DescribeCaptchaMiniDataRequest } from "./captcha_models";
 /**
  * captcha client
  * @class
@@ -50,7 +50,7 @@ export declare class Client extends AbstractClient {
     /**
      * 查询所有验证的统计数据，包括：总票据校验量、总票据校验通过量、总票据校验拦截量。
      */
-    GetTotalTicketStatistics(req?: GetTotalTicketStatisticsRequest, cb?: (error: string, rep: GetTotalTicketStatisticsResponse) => void): Promise<GetTotalTicketStatisticsResponse>;
+    GetTotalTicketStatistics(req: GetTotalTicketStatisticsRequest, cb?: (error: string, rep: GetTotalTicketStatisticsResponse) => void): Promise<GetTotalTicketStatisticsResponse>;
     /**
      * 安全验证码获取用户注册所有APPId和应用名称
      */

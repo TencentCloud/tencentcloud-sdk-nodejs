@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CreateCRObtainResponse, CreateCRUserVerifyRequest, CreateBPFalseTicketResponse, CreateCRRightFileRequest, CreateCRRightResponse, CreateCRWorkResponse, CreateCRRightRequest, CreateBPOfflineTicketResponse, CreateCRTortRequest, UpdateCRWorkRequest, DescribeBPFakeURLsRequest, ModifyCRBlockStatusResponse, ModifyCRObtainStatusRequest, DescribeCRWorkInfoRequest, ModifyBPOfflineAttachmentRequest, DescribeBPFakeURLsResponse, CreateBPOfflineAttachmentResponse, DescribeBPReportFakeURLsRequest, CreateBPFakeURLRequest, UpdateCRWorkResponse, CreateBPProtectURLsResponse, DescribeBPProtectURLsResponse, DescribeCRMonitorsResponse, CreateCRCompanyVerifyResponse, CreateBPOfflineAttachmentRequest, CreateBPProtectURLsRequest, CreateCRObtainRequest, ModifyCRBlockStatusRequest, ModifyCRMonitorRequest, DescribeCRMonitorDetailResponse, CreateCRWorkRequest, DescribeBPCompanyInfoRequest, DescribeBPReportFakeURLsResponse, DescribeCRMonitorDetailRequest, CreateCRBlockResponse, ModifyCRRightStatusRequest, DescribeCRMonitorsRequest, DescribeCRWorkInfoResponse, CreateCRRightFileResponse, ModifyCRWhiteListResponse, CreateBPOfflineTicketRequest, CreateCRUserVerifyResponse, ModifyCRRightStatusResponse, DescribeBPCompanyInfoResponse, ModifyBPOfflineAttachmentResponse, CreateCRBlockRequest, CreateBPFakeURLResponse, CreateCRTortResponse, CreateBPFalseTicketRequest, ModifyCRMonitorResponse, DescribeBPProtectURLsRequest, ModifyCRObtainStatusResponse, ModifyCRWhiteListRequest, CreateCRCompanyVerifyRequest } from "./bma_models";
+import { CreateCRObtainResponse, CreateCRUserVerifyRequest, CreateBPFalseTicketResponse, CreateCRRightFileRequest, CreateCRRightResponse, CreateCRWorkResponse, CreateCRRightRequest, CreateBPOfflineTicketResponse, CreateCRTortRequest, UpdateCRWorkRequest, DescribeBPFakeURLsRequest, ModifyCRBlockStatusResponse, ModifyCRObtainStatusRequest, DescribeCRWorkInfoRequest, ModifyBPOfflineAttachmentRequest, DescribeBPFakeURLsResponse, CreateBPOfflineAttachmentResponse, DescribeBPReportFakeURLsRequest, CreateBPFakeURLRequest, UpdateCRWorkResponse, CreateBPProtectURLsResponse, DescribeBPProtectURLsResponse, DescribeCRMonitorsResponse, CreateCRCompanyVerifyResponse, CreateBPOfflineAttachmentRequest, CreateBPProtectURLsRequest, CreateCRObtainRequest, ModifyCRBlockStatusRequest, ModifyCRMonitorRequest, DescribeCRMonitorDetailResponse, CreateCRWorkRequest, DescribeBPCompanyInfoRequest, DescribeCRObtainDetailRequest, DescribeBPReportFakeURLsResponse, DescribeCRMonitorDetailRequest, CreateCRBlockResponse, ModifyCRRightStatusRequest, DescribeCRMonitorsRequest, DescribeCRWorkInfoResponse, DescribeCRObtainDetailResponse, CreateCRRightFileResponse, ModifyCRWhiteListResponse, CreateBPOfflineTicketRequest, CreateCRUserVerifyResponse, ModifyCRRightStatusResponse, DescribeBPCompanyInfoResponse, ModifyBPOfflineAttachmentResponse, CreateCRBlockRequest, CreateBPFakeURLResponse, CreateCRTortResponse, CreateBPFalseTicketRequest, ModifyCRMonitorResponse, DescribeBPProtectURLsRequest, ModifyCRObtainStatusResponse, ModifyCRWhiteListRequest, CreateCRCompanyVerifyRequest } from "./bma_models";
 /**
  * bma client
  * @class
@@ -28,7 +28,11 @@ export declare class Client extends AbstractClient {
      */
     CreateBPOfflineTicket(req: CreateBPOfflineTicketRequest, cb?: (error: string, rep: CreateBPOfflineTicketResponse) => void): Promise<CreateBPOfflineTicketResponse>;
     /**
-     * 新建拦截
+     * 查询取证详情
+     */
+    DescribeCRObtainDetail(req: DescribeCRObtainDetailRequest, cb?: (error: string, rep: DescribeCRObtainDetailResponse) => void): Promise<DescribeCRObtainDetailResponse>;
+    /**
+     * 新建协查处置
 
      */
     CreateCRBlock(req: CreateCRBlockRequest, cb?: (error: string, rep: CreateCRBlockResponse) => void): Promise<CreateCRBlockResponse>;
@@ -69,7 +73,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyCRWhiteList(req: ModifyCRWhiteListRequest, cb?: (error: string, rep: ModifyCRWhiteListResponse) => void): Promise<ModifyCRWhiteListResponse>;
     /**
-     * 拦截申请
+     * 协查处置申请
      */
     ModifyCRBlockStatus(req: ModifyCRBlockStatusRequest, cb?: (error: string, rep: ModifyCRBlockStatusResponse) => void): Promise<ModifyCRBlockStatusResponse>;
     /**

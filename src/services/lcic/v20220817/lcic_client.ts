@@ -19,26 +19,35 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   CreateRoomRequest,
-  RegisterUserResponse,
-  DeleteRoomRequest,
-  CreateSupervisorRequest,
-  DescribeRoomResponse,
-  RegisterUserRequest,
-  LoginOriginIdRequest,
-  DescribeUserRequest,
-  DeleteRoomResponse,
-  CreateDocumentResponse,
-  LoginUserRequest,
-  CreateSupervisorResponse,
-  SetAppCustomContentResponse,
-  CreateDocumentRequest,
-  CreateRoomResponse,
-  DescribeUserResponse,
   SetAppCustomContentRequest,
-  DescribeRoomRequest,
+  UnbindDocumentFromRoomResponse,
+  DescribeUserRequest,
+  CreateDocumentResponse,
+  DescribeRoomStatisticsRequest,
+  BindDocumentToRoomRequest,
+  CreateDocumentRequest,
+  SetAppCustomContentResponse,
   LoginOriginIdResponse,
   LoginUserResponse,
+  DescribeRoomResponse,
+  DeleteRoomResponse,
   AppCustomContent,
+  DescribeRoomStatisticsResponse,
+  CreateSupervisorResponse,
+  DeleteRoomRequest,
+  RegisterUserResponse,
+  ModifyAppResponse,
+  MemberRecord,
+  ModifyAppRequest,
+  CreateSupervisorRequest,
+  UnbindDocumentFromRoomRequest,
+  LoginOriginIdRequest,
+  RegisterUserRequest,
+  LoginUserRequest,
+  BindDocumentToRoomResponse,
+  CreateRoomResponse,
+  DescribeUserResponse,
+  DescribeRoomRequest,
 } from "./lcic_models"
 
 /**
@@ -71,13 +80,43 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取用户信息
+   * 获取房间统计信息，仅可在房间结束后调用。
    */
-  async DescribeUser(
-    req: DescribeUserRequest,
-    cb?: (error: string, rep: DescribeUserResponse) => void
-  ): Promise<DescribeUserResponse> {
-    return this.request("DescribeUser", req, cb)
+  async DescribeRoomStatistics(
+    req: DescribeRoomStatisticsRequest,
+    cb?: (error: string, rep: DescribeRoomStatisticsResponse) => void
+  ): Promise<DescribeRoomStatisticsResponse> {
+    return this.request("DescribeRoomStatistics", req, cb)
+  }
+
+  /**
+   * 删除房间
+   */
+  async DeleteRoom(
+    req: DeleteRoomRequest,
+    cb?: (error: string, rep: DeleteRoomResponse) => void
+  ): Promise<DeleteRoomResponse> {
+    return this.request("DeleteRoom", req, cb)
+  }
+
+  /**
+   * 文档从房间解绑
+   */
+  async UnbindDocumentFromRoom(
+    req: UnbindDocumentFromRoomRequest,
+    cb?: (error: string, rep: UnbindDocumentFromRoomResponse) => void
+  ): Promise<UnbindDocumentFromRoomResponse> {
+    return this.request("UnbindDocumentFromRoom", req, cb)
+  }
+
+  /**
+   * 绑定文档到房间
+   */
+  async BindDocumentToRoom(
+    req: BindDocumentToRoomRequest,
+    cb?: (error: string, rep: BindDocumentToRoomResponse) => void
+  ): Promise<BindDocumentToRoomResponse> {
+    return this.request("BindDocumentToRoom", req, cb)
   }
 
   /**
@@ -91,13 +130,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除房间
+   * 获取用户信息
    */
-  async DeleteRoom(
-    req: DeleteRoomRequest,
-    cb?: (error: string, rep: DeleteRoomResponse) => void
-  ): Promise<DeleteRoomResponse> {
-    return this.request("DeleteRoom", req, cb)
+  async DescribeUser(
+    req: DescribeUserRequest,
+    cb?: (error: string, rep: DescribeUserResponse) => void
+  ): Promise<DescribeUserResponse> {
+    return this.request("DescribeUser", req, cb)
+  }
+
+  /**
+   * 修改应用
+   */
+  async ModifyApp(
+    req: ModifyAppRequest,
+    cb?: (error: string, rep: ModifyAppResponse) => void
+  ): Promise<ModifyAppResponse> {
+    return this.request("ModifyApp", req, cb)
   }
 
   /**

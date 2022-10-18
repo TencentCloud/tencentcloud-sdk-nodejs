@@ -418,6 +418,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreatePayRollPreOrder", req, cb);
     }
     /**
+     * 云企付-跨境支付下单
+     */
+    async CreateOpenBankGlobalPaymentOrder(req, cb) {
+        return this.request("CreateOpenBankGlobalPaymentOrder", req, cb);
+    }
+    /**
      * 云支付-添加合同接口
      */
     async AddContract(req, cb) {

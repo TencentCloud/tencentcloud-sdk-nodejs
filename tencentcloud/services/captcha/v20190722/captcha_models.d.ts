@@ -81,7 +81,23 @@ export interface DescribeCaptchaMiniOperDataResponse {
 /**
  * GetTotalTicketStatistics请求参数结构体
  */
-export declare type GetTotalTicketStatisticsRequest = null;
+export interface GetTotalTicketStatisticsRequest {
+    /**
+      * 开始时间
+      */
+    StartTimeStr: string;
+    /**
+      * 结束时间
+      */
+    EndTimeStr: string;
+    /**
+      * 查询粒度
+分钟：“1”
+小时：“2”
+天：“3”
+      */
+    Dimension: string;
+}
 /**
  * DescribeCaptchaMiniDataSum返回参数结构体
  */
@@ -306,9 +322,43 @@ export declare type DescribeCaptchaUserAllAppIdRequest = null;
  */
 export interface GetTotalTicketStatisticsResponse {
     /**
+      * 返回数据
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Data: CaptchaStatisticObj;
+    /**
+      * 返回码
+      */
+    CaptchaCode: number;
+    /**
+      * 返回信息
+      */
+    CaptchaMsg: string;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 验证码票据校验趋势obj
+ */
+export interface TicketCheckTrendObj {
+    /**
+      * 时间参数
+      */
+    Ftime: string;
+    /**
+      * 票据校验量
+      */
+    TicketCount: number;
+    /**
+      * 票据通过量
+      */
+    TicketThroughput: number;
+    /**
+      * 票据拦截量
+      */
+    TicketIntercept: number;
 }
 /**
  * DescribeCaptchaMiniData返回参数结构体
@@ -334,22 +384,25 @@ export interface DescribeCaptchaMiniDataResponse {
     RequestId?: string;
 }
 /**
- * UpdateCaptchaAppIdInfo返回参数结构体
+ * 拦截率趋势obj
  */
-export interface UpdateCaptchaAppIdInfoResponse {
+export interface InterceptPerTrendObj {
     /**
-      * 返回码 0 成功，其它失败
+      * 时间参数
       */
-    CaptchaCode?: number;
+    Ftime: string;
     /**
-      * 返回操作信息
-注意：此字段可能返回 null，表示取不到有效值。
+      * 拦截率
       */
-    CaptchaMsg?: string;
+    RequestInterceptPer: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 答案拦截率
       */
-    RequestId?: string;
+    AnswerInterceptPer: number;
+    /**
+      * 策略拦截率
+      */
+    PolicyInterceptPer: number;
 }
 /**
  * DescribeCaptchaMiniRiskResult请求参数结构体
@@ -399,6 +452,24 @@ export interface DescribeCaptchaMiniRiskResultRequest {
       * 用户操作来源的微信开放账号
       */
     WeChatOpenId?: string;
+}
+/**
+ * UpdateCaptchaAppIdInfo返回参数结构体
+ */
+export interface UpdateCaptchaAppIdInfoResponse {
+    /**
+      * 返回码 0 成功，其它失败
+      */
+    CaptchaCode?: number;
+    /**
+      * 返回操作信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CaptchaMsg?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 用户注册的APPID和应用名称对象
@@ -468,6 +539,19 @@ export interface DescribeCaptchaDataSumResponse {
     RequestId?: string;
 }
 /**
+ * DescribeCaptchaTicketData 返回的数据结构
+ */
+export interface TicketThroughUnit {
+    /**
+      * 时间
+      */
+    DateKey: string;
+    /**
+      * 票据验证的通过量
+      */
+    Through: number;
+}
+/**
  * DescribeCaptchaTicketData请求参数结构体
  */
 export interface DescribeCaptchaTicketDataRequest {
@@ -483,6 +567,43 @@ export interface DescribeCaptchaTicketDataRequest {
       * 查询结束时间 例如：20220314
       */
     End?: number;
+}
+/**
+ * DescribeCaptchaResult返回参数结构体
+ */
+export interface DescribeCaptchaResultResponse {
+    /**
+      * 1 OK 验证通过
+7 captcha no match 传入的Randstr不合法，请检查Randstr是否与前端返回的Randstr一致
+8 ticket expired 传入的Ticket已过期（Ticket有效期5分钟），请重新生成Ticket、Randstr进行校验
+9 ticket reused 传入的Ticket被重复使用，请重新生成Ticket、Randstr进行校验
+15 decrypt fail 传入的Ticket不合法，请检查Ticket是否与前端返回的Ticket一致
+16 appid-ticket mismatch 传入的CaptchaAppId错误，请检查CaptchaAppId是否与前端传入的CaptchaAppId一致，并且保障CaptchaAppId是从验证码控制台【验证管理】->【基础配置】中获取
+21 diff 票据校验异常，可能的原因是（1）若Ticket包含terror前缀，一般是由于用户网络较差，导致前端自动容灾，而生成了容灾票据，业务侧可根据需要进行跳过或二次处理。（2）若Ticket不包含terror前缀，则是由于验证码风控系统发现请求有安全风险，业务侧可根据需要进行拦截。
+100 appid-secretkey-ticket mismatch 参数校验错误，（1）请检查CaptchaAppId与AppSecretKey是否正确，CaptchaAppId、AppSecretKey需要在验证码控制台【验证管理】>【基础配置】中获取（2）请检查传入的Ticket是否由传入的CaptchaAppId生成
+      */
+    CaptchaCode: number;
+    /**
+      * 状态描述及验证错误信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CaptchaMsg: string;
+    /**
+      * 无感验证模式下，该参数返回验证结果：
+EvilLevel=0 请求无恶意
+EvilLevel=100 请求有恶意
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EvilLevel: number;
+    /**
+      * 前端获取验证码时间，时间戳格式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    GetCaptchaTime: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeCaptchaMiniDataSum请求参数结构体
@@ -617,17 +738,29 @@ export interface CaptchaQueryData {
     Date: string;
 }
 /**
- * DescribeCaptchaTicketData 返回的数据结构
+ * 验证码请求趋势图obj
  */
-export interface TicketThroughUnit {
+export interface RequestTrendObj {
     /**
-      * 时间
+      * 时间参数
       */
-    DateKey: string;
+    Ftime: string;
     /**
-      * 票据验证的通过量
+      * 请求量
       */
-    Through: number;
+    RequestAction: number;
+    /**
+      * 验证量
+      */
+    RequestVerify: number;
+    /**
+      * 通过量
+      */
+    RequestThroughput: number;
+    /**
+      * 拦截量
+      */
+    RequestIntercept: number;
 }
 /**
  * DescribeCaptchaData返回参数结构体
@@ -702,41 +835,52 @@ export interface DescribeCaptchaResultRequest {
     NeedGetCaptchaTime?: number;
 }
 /**
- * DescribeCaptchaResult返回参数结构体
+ * 验证码统计图Obj
  */
-export interface DescribeCaptchaResultResponse {
+export interface CaptchaStatisticObj {
     /**
-      * 1 OK 验证通过
-7 captcha no match 传入的Randstr不合法，请检查Randstr是否与前端返回的Randstr一致
-8 ticket expired 传入的Ticket已过期（Ticket有效期5分钟），请重新生成Ticket、Randstr进行校验
-9 ticket reused 传入的Ticket被重复使用，请重新生成Ticket、Randstr进行校验
-15 decrypt fail 传入的Ticket不合法，请检查Ticket是否与前端返回的Ticket一致
-16 appid-ticket mismatch 传入的CaptchaAppId错误，请检查CaptchaAppId是否与前端传入的CaptchaAppId一致，并且保障CaptchaAppId是从验证码控制台【验证管理】->【基础配置】中获取
-21 diff 票据校验异常，可能的原因是（1）若Ticket包含terror前缀，一般是由于用户网络较差，导致前端自动容灾，而生成了容灾票据，业务侧可根据需要进行跳过或二次处理。（2）若Ticket不包含terror前缀，则是由于验证码风控系统发现请求有安全风险，业务侧可根据需要进行拦截。
-100 appid-secretkey-ticket mismatch 参数校验错误，（1）请检查CaptchaAppId与AppSecretKey是否正确，CaptchaAppId、AppSecretKey需要在验证码控制台【验证管理】>【基础配置】中获取（2）请检查传入的Ticket是否由传入的CaptchaAppId生成
+      * 请求总量
       */
-    CaptchaCode: number;
+    ActionTotal: number;
     /**
-      * 状态描述及验证错误信息
+      * 验证总量
+      */
+    VerifyTotal: number;
+    /**
+      * 验证通过总量
+      */
+    VerifyThroughTotal: number;
+    /**
+      * 验证拦截总量
+      */
+    VerifyInterceptTotal: number;
+    /**
+      * 票据校验总量
+      */
+    TicketTotal: number;
+    /**
+      * 票据通过总量
+      */
+    TicketThroughTotal: number;
+    /**
+      * 票据拦截总量
+      */
+    TicketInterceptTotal: number;
+    /**
+      * 请求趋势图
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    CaptchaMsg: string;
+    RequestTrend: Array<RequestTrendObj>;
     /**
-      * 无感验证模式下，该参数返回验证结果：
-EvilLevel=0 请求无恶意
-EvilLevel=100 请求有恶意
+      * 拦截率趋势图
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    EvilLevel: number;
+    InterceptPerTrend: Array<InterceptPerTrendObj>;
     /**
-      * 前端获取验证码时间，时间戳格式
+      * 票据校验趋势图
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    GetCaptchaTime: number;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    TicketCheckTrend: Array<TicketCheckTrendObj>;
 }
 /**
  * 操作数据查询方法DescribeCaptchaOperData 的返回结果，安全验证码加载耗时type = 1

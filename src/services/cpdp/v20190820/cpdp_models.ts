@@ -9099,32 +9099,6 @@ export interface QueryMerchantBalanceRequest {
 }
 
 /**
- * ApplyFlexSettlement返回参数结构体
- */
-export interface ApplyFlexSettlementResponse {
-  /**
-   * 错误码。SUCCESS为成功，其他为失败
-   */
-  ErrCode: string
-
-  /**
-   * 错误消息
-   */
-  ErrMessage: string
-
-  /**
-      * 返回结果
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Result: ApplyFlexSettlementResult
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * 查询汇出结果
  */
 export interface QueryOutwardOrderResult {
@@ -10071,6 +10045,57 @@ export interface QueryFlexFreezeOrderListResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 云企付-邮寄信息
+ */
+export interface OpenBankShippingInfo {
+  /**
+   * 收货人名字
+   */
+  FirstName?: string
+
+  /**
+   * 收货人姓氏
+   */
+  LastName?: string
+
+  /**
+   * 收货地址1
+   */
+  AddressOne?: string
+
+  /**
+   * 收货地址2
+   */
+  AddressTwo?: string
+
+  /**
+   * 收货地址所在城市
+   */
+  City?: string
+
+  /**
+      * 收货地址所在州，当国家是美国或加拿大时，使用ISO-3166-2:US或ISO -3166-2:CA 中该
+国家地区编码标准中的两位字母编码
+      */
+  State?: string
+
+  /**
+   * 使用ISO-3166-1标准中的两位字母编码
+   */
+  Country?: string
+
+  /**
+   * 收货地址邮编
+   */
+  ZipCode?: string
+
+  /**
+   * 收货联系电话
+   */
+  Phone?: string
 }
 
 /**
@@ -11810,6 +11835,56 @@ __test__:测试环境
    * 支付结果通知回调地址
    */
   NotifyUrl?: string
+}
+
+/**
+ * 云企付-账单信息
+ */
+export interface OpenBankBillingInfo {
+  /**
+   * 账单人名字
+   */
+  FirstName?: string
+
+  /**
+   * 账单人姓氏
+   */
+  LastName?: string
+
+  /**
+   * 账单地址1
+   */
+  AddressOne?: string
+
+  /**
+   * 账单地址1
+   */
+  AddressTwo?: string
+
+  /**
+   * 账单地址所在城市
+   */
+  City?: string
+
+  /**
+   * 账单地址所在州/省，当国家是美国或加拿大时，使用ISO-3166-2:US或ISO -3166-2:CA 中该国家地区编 码标准中的两位字母编码。
+   */
+  State?: string
+
+  /**
+   * 账单地址所在国家，使用ISO-3166-1标准中的两位字母编码。
+   */
+  Country?: string
+
+  /**
+   * 账单地址邮编
+   */
+  ZipCode?: string
+
+  /**
+   * 账单人手机号
+   */
+  Phone?: string
 }
 
 /**
@@ -13953,24 +14028,24 @@ development: 开发环境
 }
 
 /**
- * QueryAssignment返回参数结构体
+ * ApplyFlexSettlement返回参数结构体
  */
-export interface QueryAssignmentResponse {
+export interface ApplyFlexSettlementResponse {
   /**
-   * 错误码。响应成功："SUCCESS"，其他为不成功。
+   * 错误码。SUCCESS为成功，其他为失败
    */
   ErrCode: string
 
   /**
-   * 响应消息
+   * 错误消息
    */
-  ErrMsg: string
+  ErrMessage: string
 
   /**
-      * 返回响应
+      * 返回结果
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Result: AssignmentData
+  Result: ApplyFlexSettlementResult
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -15970,6 +16045,31 @@ export interface OpenBankGoodsInfo {
    * 业务类型。汇付渠道必填，汇付渠道传入固定值100099。
    */
   GoodsBizType?: string
+
+  /**
+   * 商品编号。
+   */
+  Sku?: string
+
+  /**
+   * 商品单价。
+   */
+  Price?: string
+
+  /**
+   * 商品数量
+   */
+  Quantity?: string
+
+  /**
+   * 商品图片url
+   */
+  ProductImage?: string
+
+  /**
+   * 商品链接url
+   */
+  ProductUrl?: string
 }
 
 /**
@@ -17250,6 +17350,86 @@ export interface TranItem {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Mobile: string
+}
+
+/**
+ * CreateOpenBankGlobalPaymentOrder请求参数结构体
+ */
+export interface CreateOpenBankGlobalPaymentOrderRequest {
+  /**
+   * 渠道商户号
+   */
+  ChannelMerchantId: string
+
+  /**
+   * 渠道名称
+   */
+  ChannelName: string
+
+  /**
+   * 付款方式
+   */
+  PayType: string
+
+  /**
+   * 外部商户订单号,只能是数字、大小写字母，且在同一个接入平台下唯一
+   */
+  OutOrderId: string
+
+  /**
+   * 付款金额，单位分
+   */
+  TotalAmount: number
+
+  /**
+   * 支付币种，参考附录：货币代码
+   */
+  Currency: string
+
+  /**
+   * 渠道子商户号
+   */
+  ChannelSubMerchantId?: string
+
+  /**
+   * 支付成功回调地址。
+   */
+  NotifyUrl?: string
+
+  /**
+   * 前端跳转地址。通联支付成功后，支付网关跳回商户的地址
+   */
+  FrontUrl?: string
+
+  /**
+   * 网站语言。收银台显示语言，见附录网站语言
+   */
+  FrontLanguage?: string
+
+  /**
+   * 付款备注
+   */
+  Remark?: string
+
+  /**
+   * 第三方拓展信息信息
+   */
+  ExternalPaymentData?: string
+
+  /**
+   * 商品信息
+   */
+  GoodsInfos?: Array<OpenBankGoodsInfo>
+
+  /**
+   * 邮寄信息
+   */
+  ShippingInfo?: OpenBankShippingInfo
+
+  /**
+   * 账单信息
+   */
+  BillingInfo?: OpenBankBillingInfo
 }
 
 /**
@@ -19104,6 +19284,59 @@ _不填默认为生产环境_
 }
 
 /**
+ * 云企付-下单跳转参数，用于小程序前端跳转
+ */
+export interface OpenBankOrderRedirectInfo {
+  /**
+      * 生成二维码，引导用户扫码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  QRCodeUrl: string
+
+  /**
+      * 二维码凭证
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  QRCodeKey: string
+
+  /**
+      * 跳转 URL,用于客户端跳转，订单未支付时返回该参数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Url: string
+
+  /**
+      * 跳转凭证过期时间,yyyy-MM-dd HH:mm:ss
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ExpireTime: string
+
+  /**
+      * 小程序 appid
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MpAppId: string
+
+  /**
+      * 小程序路径
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MpPath: string
+
+  /**
+      * 小程序原始 id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MpUserName: string
+
+  /**
+      * 网银支付提交页面信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FormInfo: OpenBankFormInfo
+}
+
+/**
  * QueryFlexAmountBeforeTax请求参数结构体
  */
 export interface QueryFlexAmountBeforeTaxRequest {
@@ -19954,6 +20187,33 @@ export interface DownloadOrgFileRequest {
    * 沙箱环境填sandbox，正式环境不填
    */
   Profile?: string
+}
+
+/**
+ * CreateOpenBankGlobalPaymentOrder返回参数结构体
+ */
+export interface CreateOpenBankGlobalPaymentOrderResponse {
+  /**
+   * 业务系统返回码，SUCCESS表示成功，其他表示失败。
+   */
+  ErrCode: string
+
+  /**
+      * 业务系统返回消息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ErrMessage: string
+
+  /**
+      * 统一下单响应对象。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result: CreateOpenBankUnifiedOrderPaymentResult
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -20857,6 +21117,45 @@ export interface QueryMemberTransactionRequest {
    * STRING(12)，接入环境，默认接入沙箱环境。接入正式环境填"prod"
    */
   Profile?: string
+}
+
+/**
+ * 云企付-支付下单返回响应
+ */
+export interface CreateOpenBankUnifiedOrderPaymentResult {
+  /**
+   * 云企付平台订单号。
+   */
+  ChannelOrderId: string
+
+  /**
+      * 第三方支付平台返回支付订单号。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ThirdPayOrderId: string
+
+  /**
+      * 跳转参数渠道为TENPAY，付款方式为EBANK_PAYMENT时必选。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RedirectInfo: OpenBankOrderRedirectInfo
+
+  /**
+   * 外部商户订单号，只能是数字、大小写字母，且在同一个接入平台下唯一。
+   */
+  OutOrderId: string
+
+  /**
+      * 渠道扩展支付信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PayInfo: string
+
+  /**
+      * 渠道扩展支付信息类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PayInfoType: string
 }
 
 /**
@@ -23279,6 +23578,32 @@ export interface UploadFileResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   FilePath: string
+}
+
+/**
+ * QueryAssignment返回参数结构体
+ */
+export interface QueryAssignmentResponse {
+  /**
+   * 错误码。响应成功："SUCCESS"，其他为不成功。
+   */
+  ErrCode: string
+
+  /**
+   * 响应消息
+   */
+  ErrMsg: string
+
+  /**
+      * 返回响应
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result: AssignmentData
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

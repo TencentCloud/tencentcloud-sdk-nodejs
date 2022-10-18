@@ -68,9 +68,139 @@ coteaching 双师
     RecordLayout?: number;
 }
 /**
- * RegisterUser返回参数结构体
+ * SetAppCustomContent请求参数结构体
  */
-export interface RegisterUserResponse {
+export interface SetAppCustomContentRequest {
+    /**
+      * 自定义内容。
+      */
+    CustomContent: Array<AppCustomContent>;
+    /**
+      * 应用ID。
+      */
+    SdkAppId: number;
+}
+/**
+ * UnbindDocumentFromRoom返回参数结构体
+ */
+export interface UnbindDocumentFromRoomResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeUser请求参数结构体
+ */
+export interface DescribeUserRequest {
+    /**
+      * 用户Id。
+      */
+    UserId: string;
+}
+/**
+ * CreateDocument返回参数结构体
+ */
+export interface CreateDocumentResponse {
+    /**
+      * 文档ID。
+      */
+    DocumentId: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeRoomStatistics请求参数结构体
+ */
+export interface DescribeRoomStatisticsRequest {
+    /**
+      * 房间Id。
+      */
+    RoomId: number;
+    /**
+      * 分页查询当前页数，从1开始递增。
+      */
+    Page: number;
+    /**
+      * 每页数据量，最大1000。
+      */
+    Limit: number;
+}
+/**
+ * BindDocumentToRoom请求参数结构体
+ */
+export interface BindDocumentToRoomRequest {
+    /**
+      * 房间ID。
+      */
+    RoomId: number;
+    /**
+      * 文档ID。
+      */
+    DocumentId: string;
+    /**
+      * 绑定类型。后台可透传到客户端，默认为0。客户端可以根据这个字段实现业务逻辑。
+      */
+    BindType?: number;
+}
+/**
+ * CreateDocument请求参数结构体
+ */
+export interface CreateDocumentRequest {
+    /**
+      * 低代码互动课堂的SdkAppId。
+      */
+    SdkAppId: number;
+    /**
+      * 文档地址。
+      */
+    DocumentUrl: string;
+    /**
+      * 文档名称。
+      */
+    DocumentName: string;
+    /**
+      * 文档所有者的Id
+      */
+    Owner: string;
+    /**
+      * 转码类型，可以有如下取值：
+0 无需转码（默认）
+1 需要转码的文档，ppt，pptx，pdf，doc，docx
+2 需要转码的视频，mp4，3pg，mpeg，avi，flv，wmv，rm，h264等
+2 需要转码的音频，mp3，wav，wma，aac，flac，opus
+      */
+    TranscodeType?: number;
+    /**
+      * 权限，可以有如下取值：
+0 私有文档（默认）
+1 公共文档
+      */
+    Permission?: number;
+    /**
+      * 文档后缀名。
+      */
+    DocumentType?: string;
+    /**
+      * 文档大小，单位 字节
+      */
+    DocumentSize?: number;
+}
+/**
+ * SetAppCustomContent返回参数结构体
+ */
+export interface SetAppCustomContentResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * LoginOriginId返回参数结构体
+ */
+export interface LoginOriginIdResponse {
     /**
       * 用户Id。
       */
@@ -85,18 +215,22 @@ export interface RegisterUserResponse {
     RequestId?: string;
 }
 /**
- * DeleteRoom请求参数结构体
+ * LoginUser返回参数结构体
  */
-export interface DeleteRoomRequest {
+export interface LoginUserResponse {
     /**
-      * 房间ID。
+      * 用户Id。
       */
-    RoomId: number;
+    UserId: string;
+    /**
+      * 登录/注册成功后返回登录态token。有效期7天。
+      */
+    Token: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
-/**
- * CreateSupervisor请求参数结构体
- */
-export declare type CreateSupervisorRequest = null;
 /**
  * DescribeRoom返回参数结构体
  */
@@ -163,9 +297,209 @@ coteaching 双师
       */
     Assistants: Array<string>;
     /**
+      * 录制地址。仅在房间结束后存在。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RecordUrl: string;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DeleteRoom返回参数结构体
+ */
+export interface DeleteRoomResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * 应用自定义内容
+ */
+export interface AppCustomContent {
+    /**
+      * 场景参数，一个应用下可以设置多个不同场景。
+      */
+    Scene: string;
+    /**
+      * logo地址。
+      */
+    LogoUrl?: string;
+    /**
+      * 主页地址，可设置用于跳转。
+      */
+    HomeUrl?: string;
+    /**
+      * 自定义的js。
+      */
+    JsUrl?: string;
+    /**
+      * 自定义的css。
+      */
+    CssUrl?: string;
+}
+/**
+ * DescribeRoomStatistics返回参数结构体
+ */
+export interface DescribeRoomStatisticsResponse {
+    /**
+      * 峰值在线成员人数。
+      */
+    PeakMemberNumber: number;
+    /**
+      * 累计在线人数。
+      */
+    MemberNumber: number;
+    /**
+      * 记录总数。包含进入房间或者应到未到的。
+      */
+    Total: number;
+    /**
+      * 成员记录列表。
+      */
+    MemberRecords: Array<MemberRecord>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * CreateSupervisor返回参数结构体
+ */
+export interface CreateSupervisorResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DeleteRoom请求参数结构体
+ */
+export interface DeleteRoomRequest {
+    /**
+      * 房间ID。
+      */
+    RoomId: number;
+}
+/**
+ * RegisterUser返回参数结构体
+ */
+export interface RegisterUserResponse {
+    /**
+      * 用户Id。
+      */
+    UserId: string;
+    /**
+      * 登录/注册成功后返回登录态token。有效期7天。
+      */
+    Token: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ModifyApp返回参数结构体
+ */
+export interface ModifyAppResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * 成员记录信息。
+ */
+export interface MemberRecord {
+    /**
+      * 用户ID。
+      */
+    UserId: string;
+    /**
+      * 用户名称。
+      */
+    UserName: string;
+    /**
+      * 在线时长，单位秒。
+      */
+    PresentTime: number;
+    /**
+      * 是否开启摄像头。
+      */
+    Camera: number;
+    /**
+      * 是否开启麦克风。
+      */
+    Mic: number;
+    /**
+      * 是否禁言。
+      */
+    Silence: number;
+    /**
+      * 回答问题数量。
+      */
+    AnswerQuestions: number;
+    /**
+      * 举手数量。
+      */
+    HandUps: number;
+    /**
+      * 首次进入房间的unix时间戳。
+      */
+    FirstJoinTimestamp: number;
+    /**
+      * 最后一次退出房间的unix时间戳。
+      */
+    LastQuitTimestamp: number;
+    /**
+      * 奖励次数。
+      */
+    Rewords: number;
+}
+/**
+ * ModifyApp请求参数结构体
+ */
+export interface ModifyAppRequest {
+    /**
+      * 低代码互动课堂的SdkAppId。
+      */
+    SdkAppId: number;
+    /**
+      * 回调地址。
+      */
+    Callback?: string;
+}
+/**
+ * CreateSupervisor请求参数结构体
+ */
+export declare type CreateSupervisorRequest = null;
+/**
+ * UnbindDocumentFromRoom请求参数结构体
+ */
+export interface UnbindDocumentFromRoomRequest {
+    /**
+      * 房间ID。
+      */
+    RoomId: number;
+    /**
+      * 文档ID。
+      */
+    DocumentId: string;
+}
+/**
+ * LoginOriginId请求参数结构体
+ */
+export interface LoginOriginIdRequest {
+    /**
+      * 低代码互动课堂的SdkAppId。
+      */
+    SdkAppId: number;
+    /**
+      * 用户在客户系统的Id，需要在同一应用下唯一。
+      */
+    OriginId: string;
 }
 /**
  * RegisterUser请求参数结构体
@@ -189,50 +523,6 @@ export interface RegisterUserRequest {
     Avatar?: string;
 }
 /**
- * LoginOriginId请求参数结构体
- */
-export interface LoginOriginIdRequest {
-    /**
-      * 低代码互动课堂的SdkAppId。
-      */
-    SdkAppId: number;
-    /**
-      * 用户在客户系统的Id，需要在同一应用下唯一。
-      */
-    OriginId: string;
-}
-/**
- * DescribeUser请求参数结构体
- */
-export interface DescribeUserRequest {
-    /**
-      * 用户Id。
-      */
-    UserId: string;
-}
-/**
- * DeleteRoom返回参数结构体
- */
-export interface DeleteRoomResponse {
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * CreateDocument返回参数结构体
- */
-export interface CreateDocumentResponse {
-    /**
-      * 文档ID。
-      */
-    DocumentId: string;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
  * LoginUser请求参数结构体
  */
 export interface LoginUserRequest {
@@ -242,65 +532,13 @@ export interface LoginUserRequest {
     UserId: string;
 }
 /**
- * CreateSupervisor返回参数结构体
+ * BindDocumentToRoom返回参数结构体
  */
-export interface CreateSupervisorResponse {
+export interface BindDocumentToRoomResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
-}
-/**
- * SetAppCustomContent返回参数结构体
- */
-export interface SetAppCustomContentResponse {
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * CreateDocument请求参数结构体
- */
-export interface CreateDocumentRequest {
-    /**
-      * 低代码互动课堂的SdkAppId。
-      */
-    SdkAppId: number;
-    /**
-      * 文档地址。
-      */
-    DocumentUrl: string;
-    /**
-      * 文档名称。
-      */
-    DocumentName: string;
-    /**
-      * 文档所有者的Id
-      */
-    Owner: string;
-    /**
-      * 转码类型，可以有如下取值：
-0 无需转码（默认）
-1 需要转码的文档，ppt，pptx，pdf，doc，docx
-2 需要转码的视频，mp4，3pg，mpeg，avi，flv，wmv，rm，h264等
-2 需要转码的音频，mp3，wav，wma，aac，flac，opus
-      */
-    TranscodeType?: number;
-    /**
-      * 权限，可以有如下取值：
-0 私有文档（默认）
-1 公共文档
-      */
-    Permission?: number;
-    /**
-      * 文档后缀名。
-      */
-    DocumentType?: string;
-    /**
-      * 文档大小，单位 字节
-      */
-    DocumentSize?: number;
 }
 /**
  * CreateRoom返回参数结构体
@@ -341,19 +579,6 @@ export interface DescribeUserResponse {
     RequestId?: string;
 }
 /**
- * SetAppCustomContent请求参数结构体
- */
-export interface SetAppCustomContentRequest {
-    /**
-      * 自定义内容。
-      */
-    CustomContent: Array<AppCustomContent>;
-    /**
-      * 应用ID。
-      */
-    SdkAppId: number;
-}
-/**
  * DescribeRoom请求参数结构体
  */
 export interface DescribeRoomRequest {
@@ -361,63 +586,4 @@ export interface DescribeRoomRequest {
       * 房间Id。
       */
     RoomId: number;
-}
-/**
- * LoginOriginId返回参数结构体
- */
-export interface LoginOriginIdResponse {
-    /**
-      * 用户Id。
-      */
-    UserId: string;
-    /**
-      * 登录/注册成功后返回登录态token。有效期7天。
-      */
-    Token: string;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * LoginUser返回参数结构体
- */
-export interface LoginUserResponse {
-    /**
-      * 用户Id。
-      */
-    UserId: string;
-    /**
-      * 登录/注册成功后返回登录态token。有效期7天。
-      */
-    Token: string;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * 应用自定义内容
- */
-export interface AppCustomContent {
-    /**
-      * 场景参数，一个应用下可以设置多个不同场景。
-      */
-    Scene: string;
-    /**
-      * logo地址。
-      */
-    LogoUrl?: string;
-    /**
-      * 主页地址，可设置用于跳转。
-      */
-    HomeUrl?: string;
-    /**
-      * 自定义的js。
-      */
-    JsUrl?: string;
-    /**
-      * 自定义的css。
-      */
-    CssUrl?: string;
 }

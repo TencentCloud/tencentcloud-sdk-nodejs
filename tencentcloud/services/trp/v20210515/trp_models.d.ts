@@ -244,12 +244,12 @@ export interface CodePack {
       */
     UpdateTime: string;
     /**
-      * 状态
+      * 制码状态 init: 初始化, pending: 执行中, done: 完成, error: 失败
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Status: string;
     /**
-      * 记录
+      * 执行日志
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Log: string;
@@ -279,12 +279,12 @@ export interface CodePack {
       */
     Cipher: number;
     /**
-      * 文字码地址
+      * [弃用] 文字码地址，通过另一个接口查
 注意：此字段可能返回 null，表示取不到有效值。
       */
     TextUrl: string;
     /**
-      * 二维码地址
+      * [弃用] 二维码地址，通过另一个接口查
 注意：此字段可能返回 null，表示取不到有效值。
       */
     PackUrl: string;
@@ -1846,7 +1846,7 @@ export interface DescribeTmpTokenRequest {
  */
 export interface TraceCode {
     /**
-      * 码
+      * 二维码
       */
     Code: string;
     /**
@@ -1854,7 +1854,7 @@ export interface TraceCode {
       */
     CorpId: number;
     /**
-      * 包ID
+      * 码包ID
       */
     PackId: string;
     /**
@@ -1870,7 +1870,7 @@ export interface TraceCode {
       */
     ProductId: string;
     /**
-      * 状态
+      * 码状态 0: 冻结 1: 激活
       */
     Status: number;
     /**

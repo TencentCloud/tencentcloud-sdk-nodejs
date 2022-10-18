@@ -39,6 +39,29 @@ export interface UpdateAlertRuleStateRequest {
 }
 
 /**
+ * 告警分级阈值配置
+ */
+export interface AlarmHierarchicalValue {
+  /**
+      * 提醒等级阈值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Remind?: string
+
+  /**
+      * 警告等级阈值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Warn?: string
+
+  /**
+      * 严重等级阈值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Serious?: string
+}
+
+/**
  * 策略列表详情标签返回体
  */
 export interface TagInstance {
@@ -3363,6 +3386,12 @@ re=正则匹配
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ValueMin?: number
+
+  /**
+      * 告警分级阈值配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  HierarchicalValue?: AlarmHierarchicalValue
 }
 
 /**

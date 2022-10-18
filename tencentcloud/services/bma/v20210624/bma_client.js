@@ -58,7 +58,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateBPOfflineTicket", req, cb);
     }
     /**
-     * 新建拦截
+     * 查询取证详情
+     */
+    async DescribeCRObtainDetail(req, cb) {
+        return this.request("DescribeCRObtainDetail", req, cb);
+    }
+    /**
+     * 新建协查处置
 
      */
     async CreateCRBlock(req, cb) {
@@ -119,7 +125,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyCRWhiteList", req, cb);
     }
     /**
-     * 拦截申请
+     * 协查处置申请
      */
     async ModifyCRBlockStatus(req, cb) {
         return this.request("ModifyCRBlockStatus", req, cb);

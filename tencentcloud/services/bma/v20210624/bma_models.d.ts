@@ -333,7 +333,7 @@ export interface ModifyCRObtainStatusRequest {
       */
     TortId: number;
     /**
-      * 取证类型：1-网页取证 2-过程取证
+      * 取证类型：1-网页取证 2-过程取证(暂不提供)
       */
     ObtainType: number;
     /**
@@ -978,6 +978,15 @@ export interface CreateCRWorkRequest {
  */
 export declare type DescribeBPCompanyInfoRequest = null;
 /**
+ * DescribeCRObtainDetail请求参数结构体
+ */
+export interface DescribeCRObtainDetailRequest {
+    /**
+      * 侵权ID
+      */
+    TortId: number;
+}
+/**
  * DescribeBPReportFakeURLs返回参数结构体
  */
 export interface DescribeBPReportFakeURLsResponse {
@@ -1158,6 +1167,75 @@ export interface DescribeCRWorkInfoResponse {
       * 存证证书截止日期
       */
     EvidenceEndTime: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeCRObtainDetail返回参数结构体
+ */
+export interface DescribeCRObtainDetailResponse {
+    /**
+      * 作品名称
+      */
+    WorkName: string;
+    /**
+      * 侵权链接
+      */
+    TortURL: string;
+    /**
+      * 取证时间
+      */
+    ObtainTime: string;
+    /**
+      * 取证类型
+      */
+    ObtainType: string;
+    /**
+      * 取证号
+      */
+    ObtainNum: string;
+    /**
+      * 证据地址
+      */
+    DepositFile: string;
+    /**
+      * 公证信息地址
+      */
+    DepositCert: string;
+    /**
+      * 内容类型
+      */
+    WorkType: string;
+    /**
+      * 作品类型
+      */
+    WorkCategory: string;
+    /**
+      * 侵权ID
+      */
+    TortId: number;
+    /**
+      * 侵权编号
+      */
+    TortNum: string;
+    /**
+      * 取证状态
+      */
+    ObtainStatus: number;
+    /**
+      * 取证状态说明
+      */
+    ObtainNote: string;
+    /**
+      * 取证时长
+      */
+    ObtainDuration: string;
+    /**
+      * 取证名称
+      */
+    ObtainName: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

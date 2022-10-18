@@ -19,6 +19,7 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   UpdateAlertRuleStateRequest,
+  AlarmHierarchicalValue,
   TagInstance,
   DescribePolicyConditionListConfigManual,
   InstallPluginsRequest,

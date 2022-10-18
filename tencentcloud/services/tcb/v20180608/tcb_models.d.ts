@@ -280,6 +280,15 @@ export interface SearchClsLogResponse {
     RequestId?: string;
 }
 /**
+ * ModifyClsTopic返回参数结构体
+ */
+export interface ModifyClsTopicResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 独立网关信息
  */
 export interface StandaloneGatewayInfo {
@@ -977,6 +986,19 @@ export interface DescribeCloudBaseRunOneClickTaskExternalRequest {
       * 外部任务Id 最长64字节
       */
     ExternalId: string;
+}
+/**
+ * ModifyClsTopic请求参数结构体
+ */
+export interface ModifyClsTopicRequest {
+    /**
+      * 环境ID
+      */
+    EnvId: string;
+    /**
+      * 日志生命周期，单位天，可取值范围1~3600，取值为3640时代表永久保存
+      */
+    Period?: number;
 }
 /**
  * DescribeStandaloneGateway返回参数结构体

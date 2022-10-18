@@ -233,7 +233,6 @@ import {
   OpenBankRefundOrderApplyResult,
   CreatePayRollPreOrderWithAuthRequest,
   QueryMerchantBalanceRequest,
-  ApplyFlexSettlementResponse,
   QueryOutwardOrderResult,
   QueryPayerInfoRequest,
   QuerySingleTransactionStatusRequest,
@@ -258,6 +257,7 @@ import {
   QueryCloudOrderResponse,
   CreateOpenBankVerificationOrderRequest,
   QueryFlexFreezeOrderListResponse,
+  OpenBankShippingInfo,
   PayeeTaxTemplateInfo,
   UnifiedOrderInSubOrderList,
   QueryItem,
@@ -304,6 +304,7 @@ import {
   ApplyOpenBankSettleOrderResult,
   CreateCustAcctIdRequest,
   ApplyFlexPaymentRequest,
+  OpenBankBillingInfo,
   CloudExternalChannelData,
   SyncContractDataRequest,
   DistributeApplyResponse,
@@ -346,7 +347,7 @@ import {
   QueryContractRelateShopResult,
   QueryOpenBankSubMerchantCredentialResult,
   ApplyWithdrawalRequest,
-  QueryAssignmentResponse,
+  ApplyFlexSettlementResponse,
   QuerySinglePaymentResultResponse,
   QueryMemberBindResponse,
   QueryMemberBindRequest,
@@ -433,6 +434,7 @@ import {
   QueryAcctInfoRequest,
   DescribeChargeDetailResponse,
   TranItem,
+  CreateOpenBankGlobalPaymentOrderRequest,
   DistributeQueryReceiverResponse,
   QueryFlexFreezeOrderListRequest,
   QueryTransferResultRequest,
@@ -481,6 +483,7 @@ import {
   PaymentOrderStatusResult,
   TransferSinglePayRequest,
   QueryOpenBankVerificationOrderRequest,
+  OpenBankOrderRedirectInfo,
   QueryFlexAmountBeforeTaxRequest,
   MigrateOrderRefundRequest,
   QueryOpenBankBankAccountBalanceResult,
@@ -508,6 +511,7 @@ import {
   CreateRedInvoiceResultData,
   ResponseQueryContract,
   DownloadOrgFileRequest,
+  CreateOpenBankGlobalPaymentOrderResponse,
   ContractSyncInfo,
   Order,
   QueryAgentStatementsRequest,
@@ -533,6 +537,7 @@ import {
   QueryOpenBankVerificationResult,
   WithdrawItem,
   QueryMemberTransactionRequest,
+  CreateOpenBankUnifiedOrderPaymentResult,
   QueryCityCodeRequest,
   OpenBankFormInfo,
   CreateOrderRequest,
@@ -592,6 +597,7 @@ import {
   AddContractResult,
   QueryBillDownloadURLResponse,
   UploadFileResult,
+  QueryAssignmentResponse,
   DescribeChargeDetailRequest,
   PayOrderResult,
   CreateCloudSubMerchantRequest,
@@ -1323,6 +1329,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreatePayRollPreOrderResponse) => void
   ): Promise<CreatePayRollPreOrderResponse> {
     return this.request("CreatePayRollPreOrder", req, cb)
+  }
+
+  /**
+   * 云企付-跨境支付下单
+   */
+  async CreateOpenBankGlobalPaymentOrder(
+    req: CreateOpenBankGlobalPaymentOrderRequest,
+    cb?: (error: string, rep: CreateOpenBankGlobalPaymentOrderResponse) => void
+  ): Promise<CreateOpenBankGlobalPaymentOrderResponse> {
+    return this.request("CreateOpenBankGlobalPaymentOrder", req, cb)
   }
 
   /**

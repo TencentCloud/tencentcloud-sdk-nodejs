@@ -30,12 +30,16 @@ import {
   TicketInterceptUnit,
   DescribeCaptchaUserAllAppIdRequest,
   GetTotalTicketStatisticsResponse,
+  TicketCheckTrendObj,
   DescribeCaptchaMiniDataResponse,
-  UpdateCaptchaAppIdInfoResponse,
+  InterceptPerTrendObj,
   DescribeCaptchaMiniRiskResultRequest,
+  UpdateCaptchaAppIdInfoResponse,
   CaptchaUserAllAppId,
   DescribeCaptchaDataSumResponse,
+  TicketThroughUnit,
   DescribeCaptchaTicketDataRequest,
+  DescribeCaptchaResultResponse,
   DescribeCaptchaMiniDataSumRequest,
   CaptchaOperDataTryTimesUnit,
   DescribeCaptchaOperDataRequest,
@@ -43,10 +47,10 @@ import {
   DescribeCaptchaMiniRiskResultResponse,
   TicketAmountUnit,
   CaptchaQueryData,
-  TicketThroughUnit,
+  RequestTrendObj,
   DescribeCaptchaDataResponse,
   DescribeCaptchaResultRequest,
-  DescribeCaptchaResultResponse,
+  CaptchaStatisticObj,
   CaptchaOperDataLoadTimeUnit,
   DescribeCaptchaMiniOperDataRequest,
   DescribeCaptchaAppIdInfoRequest,
@@ -173,7 +177,7 @@ export class Client extends AbstractClient {
    * 查询所有验证的统计数据，包括：总票据校验量、总票据校验通过量、总票据校验拦截量。
    */
   async GetTotalTicketStatistics(
-    req?: GetTotalTicketStatisticsRequest,
+    req: GetTotalTicketStatisticsRequest,
     cb?: (error: string, rep: GetTotalTicketStatisticsResponse) => void
   ): Promise<GetTotalTicketStatisticsResponse> {
     return this.request("GetTotalTicketStatistics", req, cb)
