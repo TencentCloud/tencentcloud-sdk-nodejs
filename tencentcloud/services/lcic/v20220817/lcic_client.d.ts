@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CreateRoomRequest, SetAppCustomContentRequest, CreateSupervisorRequest, DescribeRoomResponse, RegisterUserRequest, LoginOriginIdRequest, DescribeUserRequest, RegisterUserResponse, CreateDocumentResponse, LoginUserRequest, CreateSupervisorResponse, CreateDocumentRequest, CreateRoomResponse, DescribeUserResponse, SetAppCustomContentResponse, DescribeRoomRequest, LoginOriginIdResponse, LoginUserResponse } from "./lcic_models";
+import { CreateRoomRequest, RegisterUserResponse, DeleteRoomRequest, CreateSupervisorRequest, DescribeRoomResponse, RegisterUserRequest, LoginOriginIdRequest, DescribeUserRequest, DeleteRoomResponse, CreateDocumentResponse, LoginUserRequest, CreateSupervisorResponse, SetAppCustomContentResponse, CreateDocumentRequest, CreateRoomResponse, DescribeUserResponse, SetAppCustomContentRequest, DescribeRoomRequest, LoginOriginIdResponse, LoginUserResponse } from "./lcic_models";
 /**
  * lcic client
  * @class
@@ -12,6 +12,10 @@ export declare class Client extends AbstractClient {
      */
     CreateDocument(req: CreateDocumentRequest, cb?: (error: string, rep: CreateDocumentResponse) => void): Promise<CreateDocumentResponse>;
     /**
+     * 设置应用的自定义内容，包括应用图标，自定义的代码等。如果已存在，则为更新。更新js、css内容后，要生效也需要调用该接口
+     */
+    SetAppCustomContent(req: SetAppCustomContentRequest, cb?: (error: string, rep: SetAppCustomContentResponse) => void): Promise<SetAppCustomContentResponse>;
+    /**
      * 获取用户信息
      */
     DescribeUser(req: DescribeUserRequest, cb?: (error: string, rep: DescribeUserResponse) => void): Promise<DescribeUserResponse>;
@@ -20,9 +24,9 @@ export declare class Client extends AbstractClient {
      */
     LoginOriginId(req: LoginOriginIdRequest, cb?: (error: string, rep: LoginOriginIdResponse) => void): Promise<LoginOriginIdResponse>;
     /**
-     * 注册用户
+     * 删除房间
      */
-    RegisterUser(req: RegisterUserRequest, cb?: (error: string, rep: RegisterUserResponse) => void): Promise<RegisterUserResponse>;
+    DeleteRoom(req: DeleteRoomRequest, cb?: (error: string, rep: DeleteRoomResponse) => void): Promise<DeleteRoomResponse>;
     /**
      * 登录
      */
@@ -32,9 +36,9 @@ export declare class Client extends AbstractClient {
      */
     CreateSupervisor(req?: CreateSupervisorRequest, cb?: (error: string, rep: CreateSupervisorResponse) => void): Promise<CreateSupervisorResponse>;
     /**
-     * 设置应用的自定义内容，包括应用图标，自定义的代码等。如果已存在，则为更新。更新js、css内容后，要生效也需要调用该接口
+     * 注册用户
      */
-    SetAppCustomContent(req: SetAppCustomContentRequest, cb?: (error: string, rep: SetAppCustomContentResponse) => void): Promise<SetAppCustomContentResponse>;
+    RegisterUser(req: RegisterUserRequest, cb?: (error: string, rep: RegisterUserResponse) => void): Promise<RegisterUserResponse>;
     /**
      * 获取房间信息
      */

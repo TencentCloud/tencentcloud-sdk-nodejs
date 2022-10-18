@@ -28,6 +28,16 @@ it("lcic.v20220817.CreateDocument", async function () {
     }
 })
 
+it("lcic.v20220817.SetAppCustomContent", async function () {
+    try {
+       const data = await client.SetAppCustomContent({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lcic.v20220817.DescribeUser", async function () {
     try {
        const data = await client.DescribeUser({})
@@ -48,9 +58,9 @@ it("lcic.v20220817.LoginOriginId", async function () {
     }
 })
 
-it("lcic.v20220817.RegisterUser", async function () {
+it("lcic.v20220817.DeleteRoom", async function () {
     try {
-       const data = await client.RegisterUser({})
+       const data = await client.DeleteRoom({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -78,9 +88,9 @@ it("lcic.v20220817.CreateSupervisor", async function () {
     }
 })
 
-it("lcic.v20220817.SetAppCustomContent", async function () {
+it("lcic.v20220817.RegisterUser", async function () {
     try {
-       const data = await client.SetAppCustomContent({})
+       const data = await client.RegisterUser({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

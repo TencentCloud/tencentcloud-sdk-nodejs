@@ -34,6 +34,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateDocument", req, cb);
     }
     /**
+     * 设置应用的自定义内容，包括应用图标，自定义的代码等。如果已存在，则为更新。更新js、css内容后，要生效也需要调用该接口
+     */
+    async SetAppCustomContent(req, cb) {
+        return this.request("SetAppCustomContent", req, cb);
+    }
+    /**
      * 获取用户信息
      */
     async DescribeUser(req, cb) {
@@ -46,10 +52,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("LoginOriginId", req, cb);
     }
     /**
-     * 注册用户
+     * 删除房间
      */
-    async RegisterUser(req, cb) {
-        return this.request("RegisterUser", req, cb);
+    async DeleteRoom(req, cb) {
+        return this.request("DeleteRoom", req, cb);
     }
     /**
      * 登录
@@ -64,10 +70,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateSupervisor", req, cb);
     }
     /**
-     * 设置应用的自定义内容，包括应用图标，自定义的代码等。如果已存在，则为更新。更新js、css内容后，要生效也需要调用该接口
+     * 注册用户
      */
-    async SetAppCustomContent(req, cb) {
-        return this.request("SetAppCustomContent", req, cb);
+    async RegisterUser(req, cb) {
+        return this.request("RegisterUser", req, cb);
     }
     /**
      * 获取房间信息

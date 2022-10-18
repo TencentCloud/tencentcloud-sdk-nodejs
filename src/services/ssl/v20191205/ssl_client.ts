@@ -28,6 +28,7 @@ import {
   CommitCertificateInformationRequest,
   DownloadCertificateResponse,
   ReplaceCertificateResponse,
+  PackageInfo,
   SubmitAuditManagerResponse,
   DownloadCertificateRequest,
   CancelCertificateOrderRequest,
@@ -40,6 +41,7 @@ import {
   DescribeCertificateResponse,
   HostCertificateResponse,
   UploadConfirmLetterRequest,
+  PackageTransferOutInfo,
   OperationLog,
   VerifyManagerResponse,
   DescribeCertificateDetailRequest,
@@ -74,14 +76,16 @@ import {
   UploadConfirmLetterResponse,
   DeleteManagerResponse,
   VerifyManagerRequest,
-  RevokeDomainValidateAuths,
   UploadCertificateResponse,
+  RevokeDomainValidateAuths,
+  DescribePackagesRequest,
   CheckCertificateChainRequest,
   ModifyCertificateAliasResponse,
   DescribeManagerDetailResponse,
   ManagerStatusInfo,
   SubmitCertificateInformationRequest,
   DescribeCertificatesRequest,
+  DescribePackagesResponse,
   DescribeManagersRequest,
   CompleteCertificateResponse,
   SubmitCertificateInformationResponse,
@@ -106,6 +110,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCertificatesResponse) => void
   ): Promise<DescribeCertificatesResponse> {
     return this.request("DescribeCertificates", req, cb)
+  }
+
+  /**
+   * 获得权益包列表
+   */
+  async DescribePackages(
+    req: DescribePackagesRequest,
+    cb?: (error: string, rep: DescribePackagesResponse) => void
+  ): Promise<DescribePackagesResponse> {
+    return this.request("DescribePackages", req, cb)
   }
 
   /**

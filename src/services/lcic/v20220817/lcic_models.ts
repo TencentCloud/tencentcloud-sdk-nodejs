@@ -98,18 +98,33 @@ coteaching 双师
 }
 
 /**
- * SetAppCustomContent请求参数结构体
+ * RegisterUser返回参数结构体
  */
-export interface SetAppCustomContentRequest {
+export interface RegisterUserResponse {
   /**
-   * 自定义内容。
+   * 用户Id。
    */
-  CustomContent: Array<AppCustomContent>
+  UserId: string
 
   /**
-   * 应用ID。
+   * 登录/注册成功后返回登录态token。有效期7天。
    */
-  SdkAppId: number
+  Token: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteRoom请求参数结构体
+ */
+export interface DeleteRoomRequest {
+  /**
+   * 房间ID。
+   */
+  RoomId: number
 }
 
 /**
@@ -251,19 +266,9 @@ export interface DescribeUserRequest {
 }
 
 /**
- * RegisterUser返回参数结构体
+ * DeleteRoom返回参数结构体
  */
-export interface RegisterUserResponse {
-  /**
-   * 用户Id。
-   */
-  UserId: string
-
-  /**
-   * 登录/注册成功后返回登录态token。有效期7天。
-   */
-  Token: string
-
+export interface DeleteRoomResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -299,6 +304,16 @@ export interface LoginUserRequest {
  * CreateSupervisor返回参数结构体
  */
 export interface CreateSupervisorResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * SetAppCustomContent返回参数结构体
+ */
+export interface SetAppCustomContentResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -402,13 +417,18 @@ export interface DescribeUserResponse {
 }
 
 /**
- * SetAppCustomContent返回参数结构体
+ * SetAppCustomContent请求参数结构体
  */
-export interface SetAppCustomContentResponse {
+export interface SetAppCustomContentRequest {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 自定义内容。
    */
-  RequestId?: string
+  CustomContent: Array<AppCustomContent>
+
+  /**
+   * 应用ID。
+   */
+  SdkAppId: number
 }
 
 /**

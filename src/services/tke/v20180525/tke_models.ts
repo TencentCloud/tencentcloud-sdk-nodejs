@@ -4072,6 +4072,29 @@ export interface AddClusterCIDRRequest {
 }
 
 /**
+ * OIDC认证相关配置
+ */
+export interface OIDCConfigAuthenticationOptions {
+  /**
+      * 创建身份提供商
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AutoCreateOIDCConfig?: boolean
+
+  /**
+      * 创建身份提供商的ClientId
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AutoCreateClientId?: Array<string>
+
+  /**
+      * 创建PodIdentityWebhook组件
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AutoInstallPodIdentityWebhookAddon?: boolean
+}
+
+/**
  * CreateCluster请求参数结构体
  */
 export interface CreateClusterRequest {
@@ -7275,6 +7298,12 @@ export interface DescribeClusterAuthenticationOptionsResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   LatestOperationState: string
+
+  /**
+      * OIDC认证配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OIDCConfig: OIDCConfigAuthenticationOptions
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -10634,6 +10663,11 @@ export interface ModifyClusterAuthenticationOptionsRequest {
    * ServiceAccount认证配置
    */
   ServiceAccounts?: ServiceAccountAuthenticationOptions
+
+  /**
+   * OIDC认证配置
+   */
+  OIDCConfig?: OIDCConfigAuthenticationOptions
 }
 
 /**

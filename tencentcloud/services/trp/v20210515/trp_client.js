@@ -124,6 +124,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeProductById", req, cb);
     }
     /**
+     * 查询临时Token，主要用于上传接口
+     */
+    async DescribeTmpToken(req, cb) {
+        return this.request("DescribeTmpToken", req, cb);
+    }
+    /**
      * 批量导入二维码，只支持平台发的码
      */
     async CreateTraceCodes(req, cb) {

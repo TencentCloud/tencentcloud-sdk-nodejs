@@ -178,6 +178,16 @@ it("trp.v20210515.DescribeProductById", async function () {
     }
 })
 
+it("trp.v20210515.DescribeTmpToken", async function () {
+    try {
+       const data = await client.DescribeTmpToken({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("trp.v20210515.CreateTraceCodes", async function () {
     try {
        const data = await client.CreateTraceCodes({})

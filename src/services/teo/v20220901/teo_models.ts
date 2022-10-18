@@ -7601,7 +7601,7 @@ export interface DescribeWebManagedRulesDataResponse {
  */
 export interface DescribeApplicationProxiesRequest {
   /**
-   * 分页查询偏移量，默认为0。
+   * 分页查询偏移量。默认为0。
    */
   Offset?: number
 

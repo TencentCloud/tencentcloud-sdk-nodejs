@@ -110,6 +110,11 @@ export interface DescribeCaptchaMiniOperDataResponse {
 }
 
 /**
+ * GetTotalTicketStatistics请求参数结构体
+ */
+export type GetTotalTicketStatisticsRequest = null
+
+/**
  * DescribeCaptchaMiniDataSum返回参数结构体
  */
 export interface DescribeCaptchaMiniDataSumResponse {
@@ -363,6 +368,16 @@ export interface TicketInterceptUnit {
  * DescribeCaptchaUserAllAppId请求参数结构体
  */
 export type DescribeCaptchaUserAllAppIdRequest = null
+
+/**
+ * GetTotalTicketStatistics返回参数结构体
+ */
+export interface GetTotalTicketStatisticsResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
 
 /**
  * DescribeCaptchaMiniData返回参数结构体

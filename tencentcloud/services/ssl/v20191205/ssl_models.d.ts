@@ -205,6 +205,57 @@ export interface ReplaceCertificateResponse {
     RequestId?: string;
 }
 /**
+ * 权益包基本信息
+ */
+export interface PackageInfo {
+    /**
+      * 权益包ID。
+      */
+    PackageId: string;
+    /**
+      * 权益包内权益点总量。
+      */
+    Total: number;
+    /**
+      * 权益包内权益点余量。
+      */
+    Balance: number;
+    /**
+      * 权益包名称。
+      */
+    Type: string;
+    /**
+      * 权益点是转入时，来源信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SourceUin: number;
+    /**
+      * 权益点状态。
+      */
+    Status: string;
+    /**
+      * 过期时间。
+      */
+    ExpireTime: string;
+    /**
+      * 更新时间。
+      */
+    UpdateTime: string;
+    /**
+      * 生成时间。
+      */
+    CreateTime: string;
+    /**
+      * 来源类型。
+      */
+    SourceType: string;
+    /**
+      * 转移信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TransferOutInfos: Array<PackageTransferOutInfo>;
+}
+/**
  * SubmitAuditManager返回参数结构体
  */
 export interface SubmitAuditManagerResponse {
@@ -718,6 +769,54 @@ export interface UploadConfirmLetterRequest {
       * base64编码后的证书确认函文件，格式应为jpg、jpeg、png、pdf，大小应在1kb与1.4M之间。
       */
     ConfirmLetter: string;
+}
+/**
+ * 权益包转出详情
+ */
+export interface PackageTransferOutInfo {
+    /**
+      * 权益包ID。
+      */
+    PackageId: string;
+    /**
+      * 转移码。
+      */
+    TransferCode: string;
+    /**
+      * 本次转移点数。
+      */
+    TransferCount: number;
+    /**
+      * 转入的PackageID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ReceivePackageId: string;
+    /**
+      * 本次转移过期时间。
+      */
+    ExpireTime: string;
+    /**
+      * 本次转移生成时间。
+      */
+    CreateTime: string;
+    /**
+      * 本次转移更新时间。
+      */
+    UpdateTime: string;
+    /**
+      * 转移状态。
+      */
+    TransferStatus: string;
+    /**
+      * 接收者uin。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ReceiverUin: number;
+    /**
+      * 接收时间。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ReceiveTime: string;
 }
 /**
  * 证书操作日志。
@@ -1531,6 +1630,19 @@ export interface VerifyManagerRequest {
     ManagerId: number;
 }
 /**
+ * UploadCertificate返回参数结构体
+ */
+export interface UploadCertificateResponse {
+    /**
+      * 证书 ID。
+      */
+    CertificateId: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 返回参数键为 RevokeDomainValidateAuths 的内容。
  */
 export interface RevokeDomainValidateAuths {
@@ -1556,17 +1668,37 @@ export interface RevokeDomainValidateAuths {
     DomainValidateAuthDomain: string;
 }
 /**
- * UploadCertificate返回参数结构体
+ * DescribePackages请求参数结构体
  */
-export interface UploadCertificateResponse {
+export interface DescribePackagesRequest {
     /**
-      * 证书 ID。
+      * 偏移量，默认0。
       */
-    CertificateId: string;
+    Offset?: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 限制数目，默认20。
       */
-    RequestId?: string;
+    Limit?: number;
+    /**
+      * 按状态筛选。
+      */
+    Status?: string;
+    /**
+      * 按过期时间升序或降序排列。
+      */
+    ExpireTime?: string;
+    /**
+      * 按权益包ID搜索。
+      */
+    PackageId?: string;
+    /**
+      * 按权益包类型搜索。
+      */
+    Type?: string;
+    /**
+      * 子产品编号
+      */
+    Pid?: number;
 }
 /**
  * CheckCertificateChain请求参数结构体
@@ -1838,6 +1970,27 @@ export interface DescribeCertificatesRequest {
       * 是否筛选国密证书。1:筛选  0:不筛选
       */
     IsSM?: number;
+}
+/**
+ * DescribePackages返回参数结构体
+ */
+export interface DescribePackagesResponse {
+    /**
+      * 权益包列表。
+      */
+    Packages: Array<PackageInfo>;
+    /**
+      * 总条数。
+      */
+    TotalCount: number;
+    /**
+      * 权益点总余额。
+      */
+    TotalBalance: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeManagers请求参数结构体

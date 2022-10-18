@@ -24,6 +24,7 @@ import {
   ModifyProductRequest,
   ModifyCustomRuleRequest,
   CodePart,
+  CodePack,
   DeleteCodeBatchRequest,
   DescribeMerchantsRequest,
   ModifyTraceCodeRequest,
@@ -68,6 +69,7 @@ import {
   ModifyCustomRuleStatusResponse,
   CreateCustomPackResponse,
   ModifyMerchantRequest,
+  DescribeTmpTokenResponse,
   DescribeCodePackUrlRequest,
   ModifyTraceDataRanksRequest,
   DeleteTraceDataResponse,
@@ -92,6 +94,7 @@ import {
   DeleteTraceDataRequest,
   Merchant,
   Product,
+  DescribeTmpTokenRequest,
   TraceCode,
   CreateMerchantResponse,
   DescribeMerchantsResponse,
@@ -277,6 +280,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeProductByIdResponse) => void
   ): Promise<DescribeProductByIdResponse> {
     return this.request("DescribeProductById", req, cb)
+  }
+
+  /**
+   * 查询临时Token，主要用于上传接口
+   */
+  async DescribeTmpToken(
+    req: DescribeTmpTokenRequest,
+    cb?: (error: string, rep: DescribeTmpTokenResponse) => void
+  ): Promise<DescribeTmpTokenResponse> {
+    return this.request("DescribeTmpToken", req, cb)
   }
 
   /**

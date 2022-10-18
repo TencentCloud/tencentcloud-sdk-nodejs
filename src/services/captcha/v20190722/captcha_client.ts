@@ -22,12 +22,14 @@ import {
   CaptchaOperDataInterceptUnit,
   CaptchaOperDataTryTimesDistributeUnit,
   DescribeCaptchaMiniOperDataResponse,
+  GetTotalTicketStatisticsRequest,
   DescribeCaptchaMiniDataSumResponse,
   UpdateCaptchaAppIdInfoRequest,
   OutputManageMarketingRiskValue,
   CaptchaOperDataRes,
   TicketInterceptUnit,
   DescribeCaptchaUserAllAppIdRequest,
+  GetTotalTicketStatisticsResponse,
   DescribeCaptchaMiniDataResponse,
   UpdateCaptchaAppIdInfoResponse,
   DescribeCaptchaMiniRiskResultRequest,
@@ -165,6 +167,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpdateCaptchaAppIdInfoResponse) => void
   ): Promise<UpdateCaptchaAppIdInfoResponse> {
     return this.request("UpdateCaptchaAppIdInfo", req, cb)
+  }
+
+  /**
+   * 查询所有验证的统计数据，包括：总票据校验量、总票据校验通过量、总票据校验拦截量。
+   */
+  async GetTotalTicketStatistics(
+    req?: GetTotalTicketStatisticsRequest,
+    cb?: (error: string, rep: GetTotalTicketStatisticsResponse) => void
+  ): Promise<GetTotalTicketStatisticsResponse> {
+    return this.request("GetTotalTicketStatistics", req, cb)
   }
 
   /**

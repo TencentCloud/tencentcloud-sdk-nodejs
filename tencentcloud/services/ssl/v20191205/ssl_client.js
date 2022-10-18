@@ -34,6 +34,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCertificates", req, cb);
     }
     /**
+     * 获得权益包列表
+     */
+    async DescribePackages(req, cb) {
+        return this.request("DescribePackages", req, cb);
+    }
+    /**
      * 本接口（UploadRevokeLetter）用于上传证书吊销确认函。
      */
     async UploadRevokeLetter(req, cb) {

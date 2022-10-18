@@ -19,20 +19,22 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   CreateRoomRequest,
-  SetAppCustomContentRequest,
+  RegisterUserResponse,
+  DeleteRoomRequest,
   CreateSupervisorRequest,
   DescribeRoomResponse,
   RegisterUserRequest,
   LoginOriginIdRequest,
   DescribeUserRequest,
-  RegisterUserResponse,
+  DeleteRoomResponse,
   CreateDocumentResponse,
   LoginUserRequest,
   CreateSupervisorResponse,
+  SetAppCustomContentResponse,
   CreateDocumentRequest,
   CreateRoomResponse,
   DescribeUserResponse,
-  SetAppCustomContentResponse,
+  SetAppCustomContentRequest,
   DescribeRoomRequest,
   LoginOriginIdResponse,
   LoginUserResponse,
@@ -59,6 +61,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 设置应用的自定义内容，包括应用图标，自定义的代码等。如果已存在，则为更新。更新js、css内容后，要生效也需要调用该接口
+   */
+  async SetAppCustomContent(
+    req: SetAppCustomContentRequest,
+    cb?: (error: string, rep: SetAppCustomContentResponse) => void
+  ): Promise<SetAppCustomContentResponse> {
+    return this.request("SetAppCustomContent", req, cb)
+  }
+
+  /**
    * 获取用户信息
    */
   async DescribeUser(
@@ -79,13 +91,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 注册用户
+   * 删除房间
    */
-  async RegisterUser(
-    req: RegisterUserRequest,
-    cb?: (error: string, rep: RegisterUserResponse) => void
-  ): Promise<RegisterUserResponse> {
-    return this.request("RegisterUser", req, cb)
+  async DeleteRoom(
+    req: DeleteRoomRequest,
+    cb?: (error: string, rep: DeleteRoomResponse) => void
+  ): Promise<DeleteRoomResponse> {
+    return this.request("DeleteRoom", req, cb)
   }
 
   /**
@@ -109,13 +121,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 设置应用的自定义内容，包括应用图标，自定义的代码等。如果已存在，则为更新。更新js、css内容后，要生效也需要调用该接口
+   * 注册用户
    */
-  async SetAppCustomContent(
-    req: SetAppCustomContentRequest,
-    cb?: (error: string, rep: SetAppCustomContentResponse) => void
-  ): Promise<SetAppCustomContentResponse> {
-    return this.request("SetAppCustomContent", req, cb)
+  async RegisterUser(
+    req: RegisterUserRequest,
+    cb?: (error: string, rep: RegisterUserResponse) => void
+  ): Promise<RegisterUserResponse> {
+    return this.request("RegisterUser", req, cb)
   }
 
   /**

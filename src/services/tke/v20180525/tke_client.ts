@@ -190,6 +190,7 @@ import {
   Taint,
   ModifyNodePoolInstanceTypesRequest,
   AddClusterCIDRRequest,
+  OIDCConfigAuthenticationOptions,
   CreateClusterRequest,
   CreateEdgeCVMInstancesRequest,
   NodePoolOption,

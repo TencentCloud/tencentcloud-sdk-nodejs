@@ -118,6 +118,16 @@ it("captcha.v20190722.UpdateCaptchaAppIdInfo", async function () {
     }
 })
 
+it("captcha.v20190722.GetTotalTicketStatistics", async function () {
+    try {
+       const data = await client.GetTotalTicketStatistics({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("captcha.v20190722.DescribeCaptchaUserAllAppId", async function () {
     try {
        const data = await client.DescribeCaptchaUserAllAppId({})

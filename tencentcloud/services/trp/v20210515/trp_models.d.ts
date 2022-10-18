@@ -13,7 +13,7 @@ export interface CodeBatch {
       */
     CorpId: number;
     /**
-      * 码
+      * 批次编码(未使用)
 注意：此字段可能返回 null，表示取不到有效值。
       */
     BatchCode: string;
@@ -48,7 +48,7 @@ export interface CodeBatch {
       */
     MpTpl: string;
     /**
-      * 状态
+      * 批次状态 0: 未激活 1: 已激活 -1: 已冻结
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Status: number;
@@ -213,6 +213,111 @@ export interface CodePart {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Ext: string;
+}
+/**
+ * 码包类型
+ */
+export interface CodePack {
+    /**
+      * 码id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PackId: string;
+    /**
+      * 企业id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CorpId: number;
+    /**
+      * 商户id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MerchantId: string;
+    /**
+      * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreateTime: string;
+    /**
+      * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UpdateTime: string;
+    /**
+      * 状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Status: string;
+    /**
+      * 记录
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Log: string;
+    /**
+      * 创建人
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreateUser: string;
+    /**
+      * 码数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Amount: number;
+    /**
+      * 码长度
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CodeLength: number;
+    /**
+      * 码类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CodeType: string;
+    /**
+      * 是否暗码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Cipher: number;
+    /**
+      * 文字码地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TextUrl: string;
+    /**
+      * 二维码地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PackUrl: string;
+    /**
+      * 商户名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MerchantName: string;
+    /**
+      * 码规则类型 0: 默认, 1: 自定义
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RuleType: number;
+    /**
+      * 自定义码规则ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CustomId: string;
+    /**
+      * 码包类型 0: 普通码包 1: 层级码包
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PackType: number;
+    /**
+      * 生码层级
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PackLevel: number;
+    /**
+      * 层级码配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PackSpec: Array<PackSpec>;
 }
 /**
  * DeleteCodeBatch请求参数结构体
@@ -706,6 +811,11 @@ export interface DescribeCodeBatchByIdResponse {
  */
 export interface DescribeCodePackStatusResponse {
     /**
+      * 码包状态 init: 初始化, pending: 执行中, done: 完成, error: 失败
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Status: string;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
@@ -738,17 +848,17 @@ export interface TraceData {
       */
     CorpId: number;
     /**
-      * 0
+      * 码类型 0: 批次, 1: 码, 2: 生产任务
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Type: number;
     /**
-      * 码
+      * 码值，跟码类型一一对应
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Code: string;
     /**
-      * 排序
+      * 排序，在Phase相同情况下，值越小排名靠前
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Rank: number;
@@ -788,10 +898,20 @@ export interface TraceData {
       */
     ChainTime: string;
     /**
-      * 无
+      * 上链数据
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ChainData: ChainData;
+    /**
+      * 溯源阶段配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PhaseData: PhaseData;
+    /**
+      * 溯源阶段状态 0: 无效, 1: 有效
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Status: number;
 }
 /**
  * 层级码配置
@@ -814,6 +934,11 @@ export interface PackSpec {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     CustomId?: string;
+    /**
+      * 码段配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CodeParts?: Array<CodePart>;
 }
 /**
  * ModifyCustomRule返回参数结构体
@@ -963,13 +1088,17 @@ export interface CreateCustomPackRequest {
       */
     PackLevel?: number;
     /**
-      * 层级码包规则 [{ Level, Rate, Amount, CustomId }]
+      * 层级码包规则
       */
     PackSpec?: Array<PackSpec>;
     /**
-      * 码规则ID,  普通码包时必填
+      * 码规则ID,  和CodeParts二选一必填
       */
     CustomId?: string;
+    /**
+      * 码段配置，和CustomId二选一必填
+      */
+    CodeParts?: Array<CodePart>;
 }
 /**
  * CreateCodePack请求参数结构体
@@ -1209,6 +1338,20 @@ export interface ModifyMerchantRequest {
     CodeUrl?: string;
 }
 /**
+ * DescribeTmpToken返回参数结构体
+ */
+export interface DescribeTmpTokenResponse {
+    /**
+      * 临时token
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Token: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeCodePackUrl请求参数结构体
  */
 export interface DescribeCodePackUrlRequest {
@@ -1369,6 +1512,16 @@ export interface CreateCustomRuleResponse {
  * DescribeCodePacks返回参数结构体
  */
 export interface DescribeCodePacksResponse {
+    /**
+      * 码列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CodePacks: Array<CodePack>;
+    /**
+      * 总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TotalCount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1680,6 +1833,15 @@ export interface Product {
     MerchantName: string;
 }
 /**
+ * DescribeTmpToken请求参数结构体
+ */
+export interface DescribeTmpTokenRequest {
+    /**
+      * 企业ID
+      */
+    CorpId?: number;
+}
+/**
  * 溯源码
  */
 export interface TraceCode {
@@ -1887,6 +2049,11 @@ export interface DescribeCodePacksRequest {
  */
 export interface DescribeJobFileUrlResponse {
     /**
+      * 码包地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Url: string;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
@@ -1935,6 +2102,16 @@ export interface DescribeCodePackUrlResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Url: string;
+    /**
+      * 图片码包地址，可能为空
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ImgUrl: string;
+    /**
+      * 文字码包Key，用于上传导入
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FileKey: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

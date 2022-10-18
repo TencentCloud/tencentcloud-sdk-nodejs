@@ -88,6 +88,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdateCaptchaAppIdInfo", req, cb);
     }
     /**
+     * 查询所有验证的统计数据，包括：总票据校验量、总票据校验通过量、总票据校验拦截量。
+     */
+    async GetTotalTicketStatistics(req, cb) {
+        return this.request("GetTotalTicketStatistics", req, cb);
+    }
+    /**
      * 安全验证码获取用户注册所有APPId和应用名称
      */
     async DescribeCaptchaUserAllAppId(req, cb) {
