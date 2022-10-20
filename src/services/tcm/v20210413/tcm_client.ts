@@ -25,10 +25,13 @@ import {
   LoadBalancerStatus,
   DescribeMeshResponse,
   AutoInjectionNamespaceState,
+  UnlinkClusterResponse,
+  LinkClusterListResponse,
   ModifyMeshResponse,
   IngressGatewayStatus,
   ResourceMetricSource,
   CreateMeshResponse,
+  LinkClusterListRequest,
   ClusterConfig,
   MetricSpec,
   WorkloadConfig,
@@ -54,6 +57,7 @@ import {
   ExtensiveCluster,
   SmartDNSConfig,
   DescribeMeshListRequest,
+  UnlinkClusterRequest,
   CLS,
   TracingConfig,
   IngressGateway,
@@ -92,13 +96,33 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建网格
+   * 关联集群
    */
-  async CreateMesh(
-    req: CreateMeshRequest,
-    cb?: (error: string, rep: CreateMeshResponse) => void
-  ): Promise<CreateMeshResponse> {
-    return this.request("CreateMesh", req, cb)
+  async LinkClusterList(
+    req: LinkClusterListRequest,
+    cb?: (error: string, rep: LinkClusterListResponse) => void
+  ): Promise<LinkClusterListResponse> {
+    return this.request("LinkClusterList", req, cb)
+  }
+
+  /**
+   * 查询网格列表
+   */
+  async DescribeMeshList(
+    req: DescribeMeshListRequest,
+    cb?: (error: string, rep: DescribeMeshListResponse) => void
+  ): Promise<DescribeMeshListResponse> {
+    return this.request("DescribeMeshList", req, cb)
+  }
+
+  /**
+   * 解关联集群
+   */
+  async UnlinkCluster(
+    req: UnlinkClusterRequest,
+    cb?: (error: string, rep: UnlinkClusterResponse) => void
+  ): Promise<UnlinkClusterResponse> {
+    return this.request("UnlinkCluster", req, cb)
   }
 
   /**
@@ -112,6 +136,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建网格
+   */
+  async CreateMesh(
+    req: CreateMeshRequest,
+    cb?: (error: string, rep: CreateMeshResponse) => void
+  ): Promise<CreateMeshResponse> {
+    return this.request("CreateMesh", req, cb)
+  }
+
+  /**
    * 查询网格详情
    */
   async DescribeMesh(
@@ -119,15 +153,5 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeMeshResponse) => void
   ): Promise<DescribeMeshResponse> {
     return this.request("DescribeMesh", req, cb)
-  }
-
-  /**
-   * 查询网格列表
-   */
-  async DescribeMeshList(
-    req: DescribeMeshListRequest,
-    cb?: (error: string, rep: DescribeMeshListResponse) => void
-  ): Promise<DescribeMeshListResponse> {
-    return this.request("DescribeMeshList", req, cb)
   }
 }

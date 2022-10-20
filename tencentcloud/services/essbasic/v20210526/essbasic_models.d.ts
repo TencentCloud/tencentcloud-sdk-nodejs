@@ -80,7 +80,17 @@ export interface PdfVerifyResult {
     ComponentPage: number;
 }
 /**
- * 创建签署流程签署人入参
+ * 创建签署流程签署人入参。
+
+其中签署方FlowApproverInfo需要传递的参数
+非单C、单B、B2C合同，ApproverType、RecipientId（模版发起合同时）必传，建议都传。其他身份标识
+1-个人：Name、Mobile必传
+2-渠道子客企业指定经办人：OpenId必传，OrgName必传、OrgOpenId必传；
+3-渠道合作企业不指定经办人：（暂不支持）
+4-非渠道合作企业：Name、Mobile必传，OrgName必传，且NotChannelOrganization=True。
+
+RecipientId参数：
+从DescribeTemplates接口中，可以得到模版下的签署方Recipient列表，根据模版自定义的Rolename在此结构体中确定其RecipientId
  */
 export interface FlowApproverInfo {
     /**
@@ -512,7 +522,7 @@ export interface CreateSignUrlsRequest {
     Endpoint?: string;
     /**
       * 签署链接生成类型，默认是 "ALL"；
-"ALL"：全部签署方签署链接；
+"ALL"：全部签署方签署链接，此时不会给自动签署的签署方创建签署链接；
 "CHANNEL"：渠道合作企业；
 "NOT_CHANNEL"：非渠道合作企业；
 "PERSON"：个人；
@@ -583,19 +593,23 @@ export interface ChannelCreateMultiFlowSignQRCodeRequest {
       */
     QrEffectiveDay?: number;
     /**
+      * 限制二维码用户条件
+      */
+    Restrictions?: Array<ApproverRestriction>;
+    /**
       * 回调地址，最大长度1000个字符
 不传默认使用渠道应用号配置的回调地址
 回调时机:用户通过签署二维码发起合同时，企业额度不足导致失败
       */
     CallbackUrl?: string;
     /**
-      * 限制二维码用户条件
-      */
-    ApproverRestrictions?: ApproverRestriction;
-    /**
       * 用户信息
       */
     Operator?: UserInfo;
+    /**
+      * 限制二维码用户条件（已弃用）
+      */
+    ApproverRestrictions?: ApproverRestriction;
 }
 /**
  * 授权出错信息
@@ -829,6 +843,12 @@ PERSON 自然人
 /**
  * 此结构体 (Component) 用于描述控件属性。
 
+在通过文件发起合同时，对应的component有三种定位方式
+1. 绝对定位方式
+2. 表单域(FIELD)定位方式
+3. 关键字(KEYWORD)定位方式
+可以参考官网说明
+https://cloud.tencent.com/document/product/1323/78346#component-.E4.B8.89.E7.A7.8D.E5.AE.9A.E4.BD.8D.E6.96.B9.E5.BC.8F.E8.AF.B4.E6.98.8E
  */
 export interface Component {
     /**
@@ -911,7 +931,10 @@ KEYWORD - 关键字
     /**
       * 参数控件样式，json格式表述
 不同类型的控件会有部分非通用参数
-TEXT控件可以指定字体
+TEXT/MULTI_LINE_TEXT控件可以指定
+1 Font：目前只支持黑体、宋体
+2 FontSize： 范围12-72
+3 FontAlign： Left/Right/Center，左对齐/居中/右对齐
 例如：{"FontSize":12}
       */
     ComponentExtra?: string;
@@ -1351,11 +1374,13 @@ export interface SyncProxyOrganizationOperatorsRequest {
  */
 export interface CreateConsoleLoginUrlResponse {
     /**
-      * 子客Web控制台url，此链接5分钟内有效，且只能访问一次
+      * 子客Web控制台url，此链接5分钟内有效，且只能访问一次。同时需要注意：
+1. 此链接仅单次有效，使用后需要再次创建新的链接（部分聊天软件，如企业微信默认会对链接进行解析，此时需要使用类似“代码片段”的方式或者放到txt文件里发送链接）；
+2. 创建的链接应避免被转义，如：&被转义为\u0026；如使用Postman请求后，请选择响应类型为 JSON，否则链接将被转义
       */
     ConsoleUrl: string;
     /**
-      * 渠道子客企业是否已开通腾讯电子签。
+      * 渠道子客企业是否已开通腾讯电子签
       */
     IsActivated: boolean;
     /**
@@ -1376,7 +1401,7 @@ export interface CreateFlowsByTemplatesRequest {
       */
     FlowInfos: Array<FlowInfo>;
     /**
-      * 是否为预览模式；默认为false，即非预览模式，此时发起合同并返回FlowIds；若为预览模式，则返回PreviewUrls；
+      * 是否为预览模式；默认为false，即非预览模式，此时发起合同并返回FlowIds；若为预览模式，不会发起合同，会返回PreviewUrls（此Url返回的是PDF文件流 ）；
 预览链接有效期300秒；
       */
     NeedPreview?: boolean;
@@ -1578,7 +1603,7 @@ export interface DescribeResourceUrlsByFlowsRequest {
       */
     Agent: Agent;
     /**
-      * 查询资源所对应的签署流程Id，最多支持50个。
+      * 查询资源所对应的签署流程Id，最多支持50个
       */
     FlowIds?: Array<string>;
     /**

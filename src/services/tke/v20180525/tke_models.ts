@@ -1473,6 +1473,27 @@ export interface PrometheusInstancesOverview {
  */
 export interface DescribePrometheusInstanceInitStatusResponse {
   /**
+      * 实例初始化状态，取值：
+uninitialized 未初始化 
+initializing 初始化中
+running 初始化完成，运行中
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Status: string
+
+  /**
+      * 初始化任务步骤
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Steps: Array<TaskStepInfo>
+
+  /**
+      * 实例eks集群ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EksClusterId: string
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -7344,7 +7365,12 @@ export interface AddClusterCIDRResponse {
 /**
  * DescribePrometheusInstanceInitStatus请求参数结构体
  */
-export type DescribePrometheusInstanceInitStatusRequest = null
+export interface DescribePrometheusInstanceInitStatusRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+}
 
 /**
  * DescribeClusterLevelAttribute返回参数结构体
@@ -11269,4 +11295,14 @@ export interface ScaleInMaster {
 /**
  * RunPrometheusInstance请求参数结构体
  */
-export type RunPrometheusInstanceRequest = null
+export interface RunPrometheusInstanceRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+
+  /**
+   * 子网ID，默认使用实例所用子网初始化，也可通过该参数传递新的子网ID初始化
+   */
+  SubnetId?: string
+}

@@ -76,6 +76,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("FreezeTasks", req, cb);
     }
     /**
+     * 资源管理删除资源
+     */
+    async DeleteResource(req, cb) {
+        return this.request("DeleteResource", req, cb);
+    }
+    /**
      * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
 工作流下所有任务的补录
      */
@@ -138,6 +144,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RerunInstances", req, cb);
     }
     /**
+     * 获取资源管理目录树
+     */
+    async DescribeResourceManagePathTrees(req, cb) {
+        return this.request("DescribeResourceManagePathTrees", req, cb);
+    }
+    /**
      * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
 查询任务具体详情
      */
@@ -190,16 +202,17 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-仅对任务状态为”调度中“和”已暂停“有效，对所选任务的任务实例进行终止，并停止调度
+查询任务脚本
      */
-    async BatchStopTasksNew(req, cb) {
-        return this.request("BatchStopTasksNew", req, cb);
+    async DescribeTaskScript(req, cb) {
+        return this.request("DescribeTaskScript", req, cb);
     }
     /**
-     * 提交自定义函数
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+数据源详情
      */
-    async SubmitCustomFunction(req, cb) {
-        return this.request("SubmitCustomFunction", req, cb);
+    async DescribeDatasource(req, cb) {
+        return this.request("DescribeDatasource", req, cb);
     }
     /**
      * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
@@ -338,6 +351,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SaveCustomFunction", req, cb);
     }
     /**
+     * 资源管理需要先将资源上传到cos中，然后调用该接口，将cos资源绑定到wedata
+     */
+    async CreateOrUpdateResource(req, cb) {
+        return this.request("CreateOrUpdateResource", req, cb);
+    }
+    /**
      * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
 根据层级查找上/下游任务节点
      */
@@ -345,11 +364,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDependTasksNew", req, cb);
     }
     /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-数据源详情
+     * 提交自定义函数
      */
-    async DescribeDatasource(req, cb) {
-        return this.request("DescribeDatasource", req, cb);
+    async SubmitCustomFunction(req, cb) {
+        return this.request("SubmitCustomFunction", req, cb);
     }
     /**
      * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
@@ -359,11 +377,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SubmitWorkflow", req, cb);
     }
     /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-查询任务脚本
+     * 查询全量函数
      */
-    async DescribeTaskScript(req, cb) {
-        return this.request("DescribeTaskScript", req, cb);
+    async DescribeOrganizationalFunctions(req, cb) {
+        return this.request("DescribeOrganizationalFunctions", req, cb);
     }
     /**
      * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
@@ -373,10 +390,11 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("BatchModifyOwnersNew", req, cb);
     }
     /**
-     * 查询全量函数
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+仅对任务状态为”调度中“和”已暂停“有效，对所选任务的任务实例进行终止，并停止调度
      */
-    async DescribeOrganizationalFunctions(req, cb) {
-        return this.request("DescribeOrganizationalFunctions", req, cb);
+    async BatchStopTasksNew(req, cb) {
+        return this.request("BatchStopTasksNew", req, cb);
     }
 }
 exports.Client = Client;

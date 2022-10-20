@@ -34,6 +34,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdateCRWork", req, cb);
     }
     /**
+     * 新建过程取证码
+     */
+    async CreateCRDesktopCode(req, cb) {
+        return this.request("CreateCRDesktopCode", req, cb);
+    }
+    /**
      * 查询企业信息
      */
     async DescribeBPCompanyInfo(req, cb) {

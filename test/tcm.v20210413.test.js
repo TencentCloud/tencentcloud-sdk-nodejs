@@ -28,9 +28,29 @@ it("tcm.v20210413.DeleteMesh", async function () {
     }
 })
 
-it("tcm.v20210413.CreateMesh", async function () {
+it("tcm.v20210413.LinkClusterList", async function () {
     try {
-       const data = await client.CreateMesh({})
+       const data = await client.LinkClusterList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcm.v20210413.DescribeMeshList", async function () {
+    try {
+       const data = await client.DescribeMeshList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcm.v20210413.UnlinkCluster", async function () {
+    try {
+       const data = await client.UnlinkCluster({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -48,9 +68,9 @@ it("tcm.v20210413.ModifyMesh", async function () {
     }
 })
 
-it("tcm.v20210413.DescribeMesh", async function () {
+it("tcm.v20210413.CreateMesh", async function () {
     try {
-       const data = await client.DescribeMesh({})
+       const data = await client.CreateMesh({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -58,9 +78,9 @@ it("tcm.v20210413.DescribeMesh", async function () {
     }
 })
 
-it("tcm.v20210413.DescribeMeshList", async function () {
+it("tcm.v20210413.DescribeMesh", async function () {
     try {
-       const data = await client.DescribeMeshList({})
+       const data = await client.DescribeMesh({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

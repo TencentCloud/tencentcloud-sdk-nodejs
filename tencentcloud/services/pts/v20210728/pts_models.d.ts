@@ -184,6 +184,11 @@ export interface Concurrency {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     MaxRequestsPerSecond?: number;
+    /**
+      * 优雅终止任务的等待时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    GracefulStopSeconds?: number;
 }
 /**
  * 告警通知接收组
@@ -734,6 +739,11 @@ export interface CustomSample {
       * 指标对应的单位，当前单位有：s,bytes,bytes/s,reqs,reqs/s,checks,checks/s,iters,iters/s,VUs, %
       */
     Unit: string;
+    /**
+      * 指标序列名字
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Name: string;
 }
 /**
  * CreateProject请求参数结构体
@@ -1622,6 +1632,11 @@ export interface RequestsPerSecond {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     TargetRequestsPerSecond?: number;
+    /**
+      * 优雅关停的等待时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    GracefulStopSeconds?: number;
 }
 /**
  * DescribeRegions请求参数结构体
@@ -3415,6 +3430,21 @@ export interface File {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ProjectId: string;
+    /**
+      * 用户账号的 App ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AppID: number;
+    /**
+      * 用户主账号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Uin: string;
+    /**
+      * 用户子账号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SubAccountUin: string;
 }
 /**
  * DeleteAlertChannel请求参数结构体

@@ -166,7 +166,7 @@ False --  表示仅仅清理此凭据中存储的SSH密钥信息，不在CVM进�
  */
 export interface CreateSecretRequest {
     /**
-      * 凭据名称，同一region内不可重复，最长128字节，使用字母、数字或者 - _ 的组合，第一个字符必须为字母或者数字。
+      * 凭据名称，同一region内不可重复，最长128字节，使用字母、数字或者 - _ 的组合，第一个字符必须为字母或者数字。一旦创建不可修改。
       */
     SecretName: string;
     /**

@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CreatePictureRequest, DescribeRelayUsageRequest, RemoveUserByStrRoomIdResponse, DescribeUserEventRequest, StopPublishCdnStreamResponse, DescribeUserEventResponse, StopMCUMixTranscodeByStrRoomIdResponse, DescribeCallDetailInfoRequest, DescribeUserInfoRequest, DescribeRecordStatisticResponse, StartMCUMixTranscodeByStrRoomIdResponse, DescribeTrtcUsageResponse, DismissRoomByStrRoomIdRequest, DescribeRecordStatisticRequest, DescribeRoomInfoRequest, DescribeCallDetailInfoResponse, DescribeMixTranscodingUsageRequest, ModifyPictureRequest, DescribeTrtcUsageRequest, DescribeRoomInfoResponse, UpdatePublishCdnStreamRequest, DescribeUserInfoResponse, StartMCUMixTranscodeRequest, StartPublishCdnStreamResponse, DescribeRelayUsageResponse, DescribeRecordingUsageResponse, StopMCUMixTranscodeRequest, ModifyPictureResponse, DescribeRecordingUsageRequest, DescribeScaleInfoResponse, StopMCUMixTranscodeResponse, DescribeMixTranscodingUsageResponse, RemoveUserRequest, DismissRoomRequest, DescribeUnusualEventRequest, DescribeCloudRecordingRequest, CreateCloudRecordingRequest, DeleteCloudRecordingResponse, StopMCUMixTranscodeByStrRoomIdRequest, StopPublishCdnStreamRequest, DeletePictureResponse, ModifyCloudRecordingRequest, StartPublishCdnStreamRequest, CreateCloudRecordingResponse, StartMCUMixTranscodeResponse, DescribeTrtcMcuTranscodeTimeResponse, DeleteCloudRecordingRequest, DescribePictureRequest, DescribeExternalTrtcMeasureResponse, DescribePictureResponse, DescribeTrtcMcuTranscodeTimeRequest, DescribeScaleInfoRequest, DismissRoomByStrRoomIdResponse, DescribeUnusualEventResponse, ModifyCloudRecordingResponse, StartMCUMixTranscodeByStrRoomIdRequest, DescribeCloudRecordingResponse, DismissRoomResponse, DeletePictureRequest, DescribeExternalTrtcMeasureRequest, UpdatePublishCdnStreamResponse, RemoveUserByStrRoomIdRequest, CreatePictureResponse, RemoveUserResponse } from "./trtc_models";
+import { CreatePictureRequest, DescribeRelayUsageRequest, RemoveUserByStrRoomIdResponse, StartMCUMixTranscodeRequest, DescribeUserEventRequest, StartMCUMixTranscodeByStrRoomIdRequest, DescribeUserEventResponse, StopMCUMixTranscodeByStrRoomIdResponse, DescribeCallDetailInfoRequest, DescribeUserInfoRequest, DescribeRecordStatisticResponse, StartMCUMixTranscodeByStrRoomIdResponse, DescribeTrtcUsageResponse, DismissRoomByStrRoomIdRequest, DescribeRecordStatisticRequest, DescribeRoomInfoRequest, DescribeCallDetailInfoResponse, DescribeMixTranscodingUsageRequest, ModifyPictureRequest, DescribeTrtcUsageRequest, DescribeRoomInfoResponse, DescribeUserInfoResponse, DescribeRelayUsageResponse, DescribeRecordingUsageResponse, ModifyPictureResponse, DescribeRecordingUsageRequest, DescribeScaleInfoResponse, StopMCUMixTranscodeResponse, DescribeMixTranscodingUsageResponse, RemoveUserRequest, DismissRoomRequest, DescribeUnusualEventRequest, DescribeCloudRecordingRequest, StopMCUMixTranscodeRequest, CreateCloudRecordingRequest, DeleteCloudRecordingResponse, StopMCUMixTranscodeByStrRoomIdRequest, DeletePictureResponse, ModifyCloudRecordingRequest, CreateCloudRecordingResponse, StartMCUMixTranscodeResponse, DescribeTrtcMcuTranscodeTimeResponse, DeleteCloudRecordingRequest, DescribePictureRequest, DescribeExternalTrtcMeasureResponse, DescribePictureResponse, DescribeTrtcMcuTranscodeTimeRequest, DescribeScaleInfoRequest, DismissRoomByStrRoomIdResponse, DescribeUnusualEventResponse, ModifyCloudRecordingResponse, DescribeCloudRecordingResponse, DismissRoomResponse, DeletePictureRequest, DescribeExternalTrtcMeasureRequest, RemoveUserByStrRoomIdRequest, CreatePictureResponse, RemoveUserResponse } from "./trtc_models";
 /**
  * trtc client
  * @class
@@ -23,29 +23,6 @@ export declare class Client extends AbstractClient {
 - 默认接口请求频率限制：5次/秒。
      */
     DescribeTrtcUsage(req: DescribeTrtcUsageRequest, cb?: (error: string, rep: DescribeTrtcUsageResponse) => void): Promise<DescribeTrtcUsageResponse>;
-    /**
-     * 接口说明：启动旁路以及混流转推任务。TRTC 的房间中可能会同时存在多路音视频流，您可以通过此API接口，实现以下几种效果：
-1、支持将单个主播的音视频流发布（也称作“转推”）到直播CDN上，请参考示例2（发起单流音视频旁路转推）和示例3（发起单流纯音频旁路转推）。
-2、支持将同个房间多个主播或者不同房间多个主播的音视频混合成1路后再发布到直播CDN上，您可以通过AudioParams.SubscribeAudioList和VideoParams.LayoutParams调整参与混音的用户列表以及指定各路混流画面的布局位置。请参考示例1（发起混流转推）。
-3、支持预先设置一个房间的混流模板，将该房间中的多个音视频混合成1路发布到直播CDN，腾讯云后台实时监控TRTC房间中的主播变化，自动按照混流模板调整布局。目前已经支持了如下几种混流预设模板：
-     - 悬浮模板：第一个进入房间的用户的视频画面会铺满整个屏幕，其他用户的视频画面从左下角依次水平排列，显示为小画面，最多4行，每行4个，小画面悬浮于大画面之上。最多支持1个大画面和15个小画面。
-     - 九宫格模板：所有用户的视频画面大小一致，平分整个屏幕，人数越多，每个画面的尺寸越小，最多支持16个画面。
-     - 屏幕分享模板：适合视频会议和在线教育场景的布局，屏幕分享（或者主讲的摄像头）始终占据屏幕左侧的大画面位置，其他用户依次垂直排列于右侧，最多两列，每列最多8个小画面。最多支持1个大画面和15个小画面。若上行分辨率宽高比与画面输出宽高比不一致时，左侧大画面为了保持内容的完整性采用缩放方式处理，右侧小画面采用裁剪方式处理。
-4、支持同时将音视频流发布到最多10个直播CDN上。您可以通过PublishCdnParams.PublishCdnUrl指定转推CDN的url，如果您想转推到腾讯云CDN，PublishCdnParams.IsTencentCdn填为1。
-5、支持通过配置服务端回调，实时将转推状态以HTTP/HTTPS POST 请求发送给您的服务器，如果您需要接入转推事件回调，请联系腾讯云技术支持。
-注意：
-1、**混流转码为收费功能，调用接口将产生云端混流转码费用，详见[云端混流转推计费说明](https://intl.cloud.tencent.com/zh/document/product/647/47631)。**
-2、**转推非腾讯云CDN将产生云端转推费用，详见[云端混流转推计费说明](https://intl.cloud.tencent.com/zh/document/product/647/47631)。**
-
-其他使用说明如下：
-1、使用混流转推接口时，您需要先调用启动转推任务接口（StartPublishCdnStream），获取启动转推任务响应中的任务ID标识（TaskId）。后续传入任务ID标识（TaskId）来更新转推任务（UpdatePublishCdnStream）和停止转推任务（StopPublishCdnStream）。
-2、为了确保转推链接的稳定，同一个转推任务不支持纯音频、音视频、纯视频之间的切换。
-3、为了确保转推链接的稳定，更新转推任务接口（UpdatePublishCdnStream）不支持时更改视频参数（codec）和音频参数（codec、采样率、码率、声道数）。
-4、发起单流旁路任务时，AudioParams和VideoParams都填写表示音视频旁路，如果仅填写AudioParams表示纯音频旁路，任务进行过程中不支持纯音频到音视频的切换。音视频旁路时，VideoParams中的Width、Height、Fps、BitRate、Gop需要按照真实上行参数填写。
-5、更新转推任务（UpdatePublishCdnStream）必须携带SequenceNumber参数，用于防止请求乱序。客户保证对同一个任务更新时的SequenceNumber参数递增：腾讯云返回InternalError错误码时，需重试请求（不换SequenceNumber）；腾讯云返回FailedOperation.OutdateRequest过期错误码时，无需处理即可。
-6、您可以在主播进房前，提前创建转推任务，结束转推任务时需要主动调用停止接口。如果您没有调用停止转推任务接口时，腾讯云后台会按照所有参与混流的用户没有任何数据上行的时间算起，直到超过启动转推任务时设置的超时时间（AgentParams.MaxIdleTime）为止，自动停止混流转推任务。
-     */
-    StartPublishCdnStream(req: StartPublishCdnStreamRequest, cb?: (error: string, rep: StartPublishCdnStreamResponse) => void): Promise<StartPublishCdnStreamResponse>;
     /**
      * 查询指定时间内的用户列表及用户通话质量数据，可查询14天内数据。DataType 不为null，查询起止时间不超过1个小时，查询用户不超过6个，支持跨天查询。DataType为null时，查询起止时间不超过4个小时， 默认查询6个用户，同时支持每页查询100以内用户个数（PageSize不超过100）。接口用于查询质量问题，不推荐作为计费使用。（同老接口DescribeCallDetail）
 **注意**：
@@ -141,7 +118,8 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
      */
     CreateCloudRecording(req: CreateCloudRecordingRequest, cb?: (error: string, rep: CreateCloudRecordingResponse) => void): Promise<CreateCloudRecordingResponse>;
     /**
-     * 获取Trtc的用量统计数据。走计费渠道二期 只允许查两天的数据
+     * 获取Trtc的用量统计数据。走计费渠道二期 只允许查两天的数据。
+当前接口已不再更新维护，请使用新版音视频用量接口：DescribeTrtcUsage （https://cloud.tencent.com/document/product/647/81425）
      */
     DescribeExternalTrtcMeasure(req: DescribeExternalTrtcMeasureRequest, cb?: (error: string, rep: DescribeExternalTrtcMeasureResponse) => void): Promise<DescribeExternalTrtcMeasureResponse>;
     /**
@@ -225,10 +203,6 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
      */
     ModifyPicture(req: ModifyPictureRequest, cb?: (error: string, rep: ModifyPictureResponse) => void): Promise<ModifyPictureResponse>;
     /**
-     * 更新转推任务。
-     */
-    UpdatePublishCdnStream(req: UpdatePublishCdnStreamRequest, cb?: (error: string, rep: UpdatePublishCdnStreamResponse) => void): Promise<UpdatePublishCdnStreamResponse>;
-    /**
      * 成功开启录制后，可以使用此接口来停止录制任务。停止录制成功后不代表文件全部传输完成，如果未完成后台将会继续上传文件，成功后通过事件回调通知客户文件全部传输完成状态。
      */
     DeleteCloudRecording(req: DeleteCloudRecordingRequest, cb?: (error: string, rep: DeleteCloudRecordingResponse) => void): Promise<DeleteCloudRecordingResponse>;
@@ -236,10 +210,6 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
      * 如果您需要在 [云端混流转码](https://cloud.tencent.com/document/product/647/16827) 时频繁查找自定义背景图或水印信息，可通过此接口查找已上传的图片信息。无需频繁查找图片信息的场景，建议直接在 [控制台 > 应用管理 > 素材管理](https://cloud.tencent.com/document/product/647/50769) 中查看。
      */
     DescribePicture(req: DescribePictureRequest, cb?: (error: string, rep: DescribePictureResponse) => void): Promise<DescribePictureResponse>;
-    /**
-     * 停止转推任务。
-     */
-    StopPublishCdnStream(req: StopPublishCdnStreamRequest, cb?: (error: string, rep: StopPublishCdnStreamResponse) => void): Promise<StopPublishCdnStreamResponse>;
     /**
      * 查询SdkAppId下任意20条异常体验事件，返回异常体验ID与可能产生异常体验的原因。可查询14天内数据，查询起止时间不超过1个小时。支持跨天查询。（同老接口DescribeAbnormalEvent）
 异常体验ID映射见：https://cloud.tencent.com/document/product/647/44916

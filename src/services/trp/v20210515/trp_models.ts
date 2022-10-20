@@ -839,7 +839,7 @@ export interface ModifyTraceDataRequest {
   Rank?: number
 
   /**
-   * [无效] 溯源阶段 0:商品 1:通用 2:物流
+   * [无效] 溯源阶段 0:商品 1:通用 2:生产溯源 3:销售溯源
    */
   Phase?: number
 
@@ -1041,19 +1041,19 @@ export interface TraceData {
   Rank: number
 
   /**
-      * 溯源阶段 0:商品 1:通用 2:物流
+      * 溯源阶段 0:商品 1:通用 2:生产溯源 3:销售溯源
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Phase: number
 
   /**
-      * 环节名称
+      * 溯源环节名称
 注意：此字段可能返回 null，表示取不到有效值。
       */
   PhaseName: string
 
   /**
-      * 时间
+      * 溯源时间
 注意：此字段可能返回 null，表示取不到有效值。
       */
   TraceTime: string
@@ -1217,7 +1217,7 @@ export interface CreateTraceDataRequest {
   TaskId?: string
 
   /**
-   * 溯源阶段 0:商品 1:通用 2:内部溯源 3:外部溯源
+   * 溯源阶段 0:商品 1:通用 2:生产溯源 3:销售溯源
    */
   Phase?: number
 

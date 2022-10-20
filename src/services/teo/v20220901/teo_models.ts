@@ -1583,6 +1583,22 @@ export interface SecEntry {
 }
 
 /**
+ * 嵌套规则信息。
+ */
+export interface SubRule {
+  /**
+      * 执行功能判断条件。
+注意：满足该数组内任意一项条件，功能即可执行。
+      */
+  Conditions: Array<RuleAndConditions>
+
+  /**
+   * 执行的功能。
+   */
+  Actions: Array<Action>
+}
+
+/**
  * DDoS特征过滤
  */
 export interface DDoSPacketFilter {
@@ -1634,15 +1650,20 @@ export interface Sv {
  */
 export interface Rule {
   /**
+   * 执行的功能。
+   */
+  Actions: Array<Action>
+
+  /**
       * 执行功能判断条件。
 注意：满足该数组内任意一项条件，功能即可执行。
       */
   Conditions: Array<RuleAndConditions>
 
   /**
-   * 执行的功能。
+   * 嵌套规则。
    */
-  Actions: Array<Action>
+  SubRules?: Array<SubRuleItem>
 }
 
 /**
@@ -3094,6 +3115,11 @@ export interface ModifyRuleRequest {
 <li> disable: 未启用。</li>
       */
   Status: string
+
+  /**
+   * 规则标签。
+   */
+  Tags?: Array<string>
 }
 
 /**
@@ -4869,6 +4895,11 @@ export interface RuleItem {
    * 规则优先级, 值越大优先级越高，最小为 1。
    */
   RulePriority: number
+
+  /**
+   * 规则标签。
+   */
+  Tags: Array<string>
 }
 
 /**
@@ -6727,6 +6758,21 @@ export interface AclConfig {
 }
 
 /**
+ * 规则引擎嵌套规则
+ */
+export interface SubRuleItem {
+  /**
+   * 嵌套规则信息。
+   */
+  Rules: Array<SubRule>
+
+  /**
+   * 规则标签。
+   */
+  Tags?: Array<string>
+}
+
+/**
  * DescribeSpeedTestingDetails返回参数结构体
  */
 export interface DescribeSpeedTestingDetailsResponse {
@@ -7720,6 +7766,11 @@ export interface CreateRuleRequest {
    * 规则内容。
    */
   Rules: Array<Rule>
+
+  /**
+   * 规则标签。
+   */
+  Tags?: Array<string>
 }
 
 /**
@@ -7989,8 +8040,9 @@ export interface Action {
 <li> Hsts；</li>
 <li> ClientIpHeader；</li>
 <li> TlsVersion；</li>
-<li> OcspStapling。</li>
-<li> HTTP/2 访问（Http2）。</li>
+<li> OcspStapling；</li>
+<li> HTTP/2 访问（Http2）；</li>
+<li> 回源跟随重定向(UpstreamFollowRedirect)。</li>
 注意：此字段可能返回 null，表示取不到有效值。
       */
   NormalAction?: NormalAction
@@ -8474,6 +8526,18 @@ export interface FollowOrigin {
 <li>off：关闭。</li>
       */
   Switch: string
+
+  /**
+      * 源站未返回 Cache-Control 头时, 设置默认的缓存时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DefaultCacheTime?: number
+
+  /**
+      * 源站未返回 Cache-Control 头时, 设置缓存/不缓存
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DefaultCache?: string
 }
 
 /**

@@ -22,13 +22,14 @@ import {
   ModifyFolderRequest,
   AlarmInfo,
   DeleteFolderResponse,
+  DescribeResourceManagePathTreesResponse,
   RunTaskRequest,
   MakeUpTasksNewResponse,
   DescribeTaskDetailResponse,
   DescribeDependTasksNewRequest,
   OperateResult,
   DescribeInstanceLogsRequest,
-  BatchReturn,
+  CreateOrUpdateResourceResponse,
   ModifyTaskScriptRequest,
   CreateDataSourceRequest,
   IntegrationNodeSchemaMapping,
@@ -41,12 +42,14 @@ import {
   ModifyTaskLinksResponse,
   DescribeDatasourceResponse,
   IntegrationNodeMapping,
-  IntegrationNodeSchema,
+  DescribeDatasourceRequest,
   KillInstancesResponse,
   SetTaskAlarmNewRequest,
   FunctionTypeOrKind,
-  CommonContent,
+  DeleteResourceRequest,
+  CreateWorkflowRequest,
   ModifyTaskScriptResponse,
+  DeleteResourceResponse,
   SubmitWorkflowResponse,
   SubmitTaskRequest,
   DescribeProjectResponse,
@@ -55,6 +58,7 @@ import {
   DescribeFunctionTypesRequest,
   BatchDeleteTasksNewRequest,
   SubmitWorkflow,
+  BatchReturn,
   DescribeFolderWorkflowListResponse,
   ModifyFolderResponse,
   CreateFolderRequest,
@@ -70,7 +74,7 @@ import {
   SaveCustomFunctionResponse,
   DependencyConfig,
   DescribeDataSourceListRequest,
-  CreateWorkflowRequest,
+  CommonContent,
   SimpleTaskInfo,
   CreateTaskRequest,
   BatchOperateResult,
@@ -79,6 +83,7 @@ import {
   GeneralTaskParam,
   RegisterEventListenerResponse,
   CreateFolderResponse,
+  UserFileDTO,
   Workflow,
   ModifyWorkflowInfoRequest,
   DescribeFolderWorkflowListRequest,
@@ -86,6 +91,7 @@ import {
   BatchStopTasksNewRequest,
   TriggerEventRequest,
   DescribeFunctionTypesResponse,
+  ResourcePathTree,
   SubmitWorkflowRequest,
   RerunInstancesResponse,
   ParamInfo,
@@ -98,7 +104,7 @@ import {
   BatchModifyOwnersNewResponse,
   DescribeDataSourceWithoutInfoRequest,
   CanvasInfo,
-  DescribeDatasourceRequest,
+  IntegrationNodeSchema,
   DeleteWorkflowNewRequest,
   FreezeTasksByMultiWorkflowRequest,
   InstanceInfo,
@@ -108,6 +114,7 @@ import {
   TriggerEventResponse,
   DescribeTaskInstancesRequest,
   TaskInstanceInfo,
+  DescribeResourceManagePathTreesRequest,
   Filter,
   DescribeTasksByPageResponse,
   FunctionResource,
@@ -153,6 +160,7 @@ import {
   OrganizationalFunction,
   OrderField,
   DescribeRelatedInstancesResponse,
+  CreateOrUpdateResourceRequest,
   RerunInstancesRequest,
   MakeUpTasksNewRequest,
   TaskScriptContent,
@@ -246,6 +254,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: FreezeTasksResponse) => void
   ): Promise<FreezeTasksResponse> {
     return this.request("FreezeTasks", req, cb)
+  }
+
+  /**
+   * 资源管理删除资源
+   */
+  async DeleteResource(
+    req: DeleteResourceRequest,
+    cb?: (error: string, rep: DeleteResourceResponse) => void
+  ): Promise<DeleteResourceResponse> {
+    return this.request("DeleteResource", req, cb)
   }
 
   /**
@@ -347,6 +365,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取资源管理目录树
+   */
+  async DescribeResourceManagePathTrees(
+    req: DescribeResourceManagePathTreesRequest,
+    cb?: (error: string, rep: DescribeResourceManagePathTreesResponse) => void
+  ): Promise<DescribeResourceManagePathTreesResponse> {
+    return this.request("DescribeResourceManagePathTrees", req, cb)
+  }
+
+  /**
      * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
 查询任务具体详情
      */
@@ -427,23 +455,24 @@ export class Client extends AbstractClient {
 
   /**
      * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-仅对任务状态为”调度中“和”已暂停“有效，对所选任务的任务实例进行终止，并停止调度
+查询任务脚本
      */
-  async BatchStopTasksNew(
-    req: BatchStopTasksNewRequest,
-    cb?: (error: string, rep: BatchStopTasksNewResponse) => void
-  ): Promise<BatchStopTasksNewResponse> {
-    return this.request("BatchStopTasksNew", req, cb)
+  async DescribeTaskScript(
+    req: DescribeTaskScriptRequest,
+    cb?: (error: string, rep: DescribeTaskScriptResponse) => void
+  ): Promise<DescribeTaskScriptResponse> {
+    return this.request("DescribeTaskScript", req, cb)
   }
 
   /**
-   * 提交自定义函数
-   */
-  async SubmitCustomFunction(
-    req: SubmitCustomFunctionRequest,
-    cb?: (error: string, rep: SubmitCustomFunctionResponse) => void
-  ): Promise<SubmitCustomFunctionResponse> {
-    return this.request("SubmitCustomFunction", req, cb)
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+数据源详情
+     */
+  async DescribeDatasource(
+    req: DescribeDatasourceRequest,
+    cb?: (error: string, rep: DescribeDatasourceResponse) => void
+  ): Promise<DescribeDatasourceResponse> {
+    return this.request("DescribeDatasource", req, cb)
   }
 
   /**
@@ -663,6 +692,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 资源管理需要先将资源上传到cos中，然后调用该接口，将cos资源绑定到wedata
+   */
+  async CreateOrUpdateResource(
+    req: CreateOrUpdateResourceRequest,
+    cb?: (error: string, rep: CreateOrUpdateResourceResponse) => void
+  ): Promise<CreateOrUpdateResourceResponse> {
+    return this.request("CreateOrUpdateResource", req, cb)
+  }
+
+  /**
      * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
 根据层级查找上/下游任务节点
      */
@@ -674,14 +713,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-数据源详情
-     */
-  async DescribeDatasource(
-    req: DescribeDatasourceRequest,
-    cb?: (error: string, rep: DescribeDatasourceResponse) => void
-  ): Promise<DescribeDatasourceResponse> {
-    return this.request("DescribeDatasource", req, cb)
+   * 提交自定义函数
+   */
+  async SubmitCustomFunction(
+    req: SubmitCustomFunctionRequest,
+    cb?: (error: string, rep: SubmitCustomFunctionResponse) => void
+  ): Promise<SubmitCustomFunctionResponse> {
+    return this.request("SubmitCustomFunction", req, cb)
   }
 
   /**
@@ -696,14 +734,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-查询任务脚本
-     */
-  async DescribeTaskScript(
-    req: DescribeTaskScriptRequest,
-    cb?: (error: string, rep: DescribeTaskScriptResponse) => void
-  ): Promise<DescribeTaskScriptResponse> {
-    return this.request("DescribeTaskScript", req, cb)
+   * 查询全量函数
+   */
+  async DescribeOrganizationalFunctions(
+    req: DescribeOrganizationalFunctionsRequest,
+    cb?: (error: string, rep: DescribeOrganizationalFunctionsResponse) => void
+  ): Promise<DescribeOrganizationalFunctionsResponse> {
+    return this.request("DescribeOrganizationalFunctions", req, cb)
   }
 
   /**
@@ -718,12 +755,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询全量函数
-   */
-  async DescribeOrganizationalFunctions(
-    req: DescribeOrganizationalFunctionsRequest,
-    cb?: (error: string, rep: DescribeOrganizationalFunctionsResponse) => void
-  ): Promise<DescribeOrganizationalFunctionsResponse> {
-    return this.request("DescribeOrganizationalFunctions", req, cb)
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+仅对任务状态为”调度中“和”已暂停“有效，对所选任务的任务实例进行终止，并停止调度
+     */
+  async BatchStopTasksNew(
+    req: BatchStopTasksNewRequest,
+    cb?: (error: string, rep: BatchStopTasksNewResponse) => void
+  ): Promise<BatchStopTasksNewResponse> {
+    return this.request("BatchStopTasksNew", req, cb)
   }
 }

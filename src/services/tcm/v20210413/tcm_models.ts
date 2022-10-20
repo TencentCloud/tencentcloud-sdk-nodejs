@@ -180,6 +180,26 @@ export interface AutoInjectionNamespaceState {
 }
 
 /**
+ * UnlinkCluster返回参数结构体
+ */
+export interface UnlinkClusterResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * LinkClusterList返回参数结构体
+ */
+export interface LinkClusterListResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyMesh返回参数结构体
  */
 export interface ModifyMeshResponse {
@@ -232,6 +252,21 @@ export interface CreateMeshResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * LinkClusterList请求参数结构体
+ */
+export interface LinkClusterListRequest {
+  /**
+   * 网格Id
+   */
+  MeshId: string
+
+  /**
+   * 关联集群
+   */
+  ClusterList: Array<Cluster>
 }
 
 /**
@@ -866,6 +901,21 @@ export interface DescribeMeshListRequest {
    * 分页偏移
    */
   Offset?: number
+}
+
+/**
+ * UnlinkCluster请求参数结构体
+ */
+export interface UnlinkClusterRequest {
+  /**
+   * 网格Id
+   */
+  MeshId: string
+
+  /**
+   * 取消关联的集群Id
+   */
+  ClusterId?: string
 }
 
 /**

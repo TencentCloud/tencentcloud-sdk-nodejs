@@ -28,6 +28,16 @@ it("bma.v20210624.UpdateCRWork", async function () {
     }
 })
 
+it("bma.v20210624.CreateCRDesktopCode", async function () {
+    try {
+       const data = await client.CreateCRDesktopCode({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("bma.v20210624.DescribeBPCompanyInfo", async function () {
     try {
        const data = await client.DescribeBPCompanyInfo({})

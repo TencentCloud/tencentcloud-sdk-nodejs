@@ -34,10 +34,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteMesh", req, cb);
     }
     /**
-     * 创建网格
+     * 关联集群
      */
-    async CreateMesh(req, cb) {
-        return this.request("CreateMesh", req, cb);
+    async LinkClusterList(req, cb) {
+        return this.request("LinkClusterList", req, cb);
+    }
+    /**
+     * 查询网格列表
+     */
+    async DescribeMeshList(req, cb) {
+        return this.request("DescribeMeshList", req, cb);
+    }
+    /**
+     * 解关联集群
+     */
+    async UnlinkCluster(req, cb) {
+        return this.request("UnlinkCluster", req, cb);
     }
     /**
      * 修改网格
@@ -46,16 +58,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyMesh", req, cb);
     }
     /**
+     * 创建网格
+     */
+    async CreateMesh(req, cb) {
+        return this.request("CreateMesh", req, cb);
+    }
+    /**
      * 查询网格详情
      */
     async DescribeMesh(req, cb) {
         return this.request("DescribeMesh", req, cb);
-    }
-    /**
-     * 查询网格列表
-     */
-    async DescribeMeshList(req, cb) {
-        return this.request("DescribeMeshList", req, cb);
     }
 }
 exports.Client = Client;

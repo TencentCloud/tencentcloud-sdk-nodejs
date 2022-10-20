@@ -6517,6 +6517,10 @@ export interface MySQLParam {
       * 如果该值为 true，则消息中会携带消息结构体对应的schema，如果该值为false则不会携带
       */
     RecordWithSchema?: boolean;
+    /**
+      * 存放信令表的数据库名称
+      */
+    SignalDatabase?: string;
 }
 /**
  * DescribeTopicSyncReplica请求参数结构体

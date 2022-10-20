@@ -126,6 +126,22 @@ export interface DeleteFolderResponse {
 }
 
 /**
+ * DescribeResourceManagePathTrees返回参数结构体
+ */
+export interface DescribeResourceManagePathTreesResponse {
+  /**
+      * 响应数据
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Data: Array<ResourcePathTree>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * RunTask请求参数结构体
  */
 export interface RunTaskRequest {
@@ -244,25 +260,19 @@ export interface DescribeInstanceLogsRequest {
 }
 
 /**
- * 操作结果
+ * CreateOrUpdateResource返回参数结构体
  */
-export interface BatchReturn {
+export interface CreateOrUpdateResourceResponse {
   /**
-   * 执行结果
+      * 响应数据
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Data: Array<UserFileDTO>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Result: boolean
-
-  /**
-      * 执行情况备注
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ErrorDesc: string
-
-  /**
-      * 执行情况id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ErrorId: string
+  RequestId?: string
 }
 
 /**
@@ -906,35 +916,13 @@ export interface IntegrationNodeMapping {
 }
 
 /**
- * 集成节点schema
+ * DescribeDatasource请求参数结构体
  */
-export interface IntegrationNodeSchema {
+export interface DescribeDatasourceRequest {
   /**
-   * schema id
+   * 对象唯一ID
    */
-  Id: string
-
-  /**
-   * schema名称
-   */
-  Name: string
-
-  /**
-   * schema类型
-   */
-  Type: string
-
-  /**
-      * schema值
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Value?: string
-
-  /**
-      * schema拓展属性
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Properties?: Array<RecordField>
+  Id: number
 }
 
 /**
@@ -988,14 +976,38 @@ export interface FunctionTypeOrKind {
 }
 
 /**
- * 内容详情
+ * DeleteResource请求参数结构体
  */
-export interface CommonContent {
+export interface DeleteResourceRequest {
   /**
-      * 详情内容
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Content: string
+   * 项目ID
+   */
+  ProjectId?: string
+
+  /**
+   * 资源ID
+   */
+  ResourceId?: string
+}
+
+/**
+ * CreateWorkflow请求参数结构体
+ */
+export interface CreateWorkflowRequest {
+  /**
+   * 项目Id
+   */
+  ProjectId: string
+
+  /**
+   * 工作流名称
+   */
+  WorkflowName?: string
+
+  /**
+   * 所属文件夹id
+   */
+  FolderId?: string
 }
 
 /**
@@ -1007,6 +1019,22 @@ export interface ModifyTaskScriptResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Data: CommonContent
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteResource返回参数结构体
+ */
+export interface DeleteResourceResponse {
+  /**
+      * 是否成功
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Data: boolean
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1193,6 +1221,28 @@ export interface SubmitWorkflow {
       */
   TaskIds: Array<string>
 
+  /**
+   * 执行结果
+   */
+  Result: boolean
+
+  /**
+      * 执行情况备注
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ErrorDesc: string
+
+  /**
+      * 执行情况id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ErrorId: string
+}
+
+/**
+ * 操作结果
+ */
+export interface BatchReturn {
   /**
    * 执行结果
    */
@@ -1505,23 +1555,14 @@ export interface DescribeDataSourceListRequest {
 }
 
 /**
- * CreateWorkflow请求参数结构体
+ * 内容详情
  */
-export interface CreateWorkflowRequest {
+export interface CommonContent {
   /**
-   * 项目Id
-   */
-  ProjectId: string
-
-  /**
-   * 工作流名称
-   */
-  WorkflowName?: string
-
-  /**
-   * 所属文件夹id
-   */
-  FolderId?: string
+      * 详情内容
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Content: string
 }
 
 /**
@@ -1665,6 +1706,125 @@ export interface CreateFolderResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 用户文件信息
+ */
+export interface UserFileDTO {
+  /**
+      * 资源ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ResourceId: string
+
+  /**
+      * 文件名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FileName: string
+
+  /**
+      * 文件类型，如 jar zip 等
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FileExtensionType: string
+
+  /**
+      * 文件上传类型，资源管理为 resource
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FileUploadType: string
+
+  /**
+      * 文件MD5值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Md5Value: string
+
+  /**
+      * 创建时间，秒级别的时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CreateTime: number
+
+  /**
+      * 更新时间，秒级别的时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UpdateTime: number
+
+  /**
+      * 文件大小，单位为字节
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Size: number
+
+  /**
+      * 本地路径
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LocalPath: string
+
+  /**
+      * 本地临时路径
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LocalTmpPath: string
+
+  /**
+      * 远程路径
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RemotePath: string
+
+  /**
+      * 文件拥有者名字
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OwnerName: string
+
+  /**
+      * 文件拥有者uin
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Owner: string
+
+  /**
+      * 文件深度
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PathDepth: string
+
+  /**
+      * 项目ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProjectId: string
+
+  /**
+      * 附加信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ExtraInfo: string
+
+  /**
+      * 本地临时压缩文件绝对路径
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ZipPath: string
+
+  /**
+      * 文件所属存储桶
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Bucket: string
+
+  /**
+      * 文件所属存储桶的地域
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Region: string
 }
 
 /**
@@ -1898,6 +2058,107 @@ export interface DescribeFunctionTypesResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 资源管理目录树节点
+ */
+export interface ResourcePathTree {
+  /**
+      * 资源名字
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Name: string
+
+  /**
+      * 是否为叶子节点
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsLeaf: boolean
+
+  /**
+      * 资源ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ResourceId: string
+
+  /**
+      * 本地路径
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LocalPath: string
+
+  /**
+      * 远程路径
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RemotePath: string
+
+  /**
+      * 文件类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FileExtensionType: string
+
+  /**
+      * 文件大小
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Size: number
+
+  /**
+      * 文件MD5值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Md5Value: string
+
+  /**
+      * 文件拥有者名字
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OwnerName: string
+
+  /**
+      * 更新人
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UpdateUser: string
+
+  /**
+      * 文件更新人uin
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UpdateUserId: string
+
+  /**
+      * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CreateTime: number
+
+  /**
+      * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UpdateTime: number
+
+  /**
+      * Cos存储桶名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CosBucket: string
+
+  /**
+      * Cos地域
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CosRegion: string
+
+  /**
+      * 额外信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ExtraInfo: string
 }
 
 /**
@@ -2287,13 +2548,35 @@ export interface CanvasInfo {
 }
 
 /**
- * DescribeDatasource请求参数结构体
+ * 集成节点schema
  */
-export interface DescribeDatasourceRequest {
+export interface IntegrationNodeSchema {
   /**
-   * 对象唯一ID
+   * schema id
    */
-  Id: number
+  Id: string
+
+  /**
+   * schema名称
+   */
+  Name: string
+
+  /**
+   * schema类型
+   */
+  Type: string
+
+  /**
+      * schema值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Value?: string
+
+  /**
+      * schema拓展属性
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Properties?: Array<RecordField>
 }
 
 /**
@@ -2630,6 +2913,36 @@ export interface TaskInstanceInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   CostTime: string
+}
+
+/**
+ * DescribeResourceManagePathTrees请求参数结构体
+ */
+export interface DescribeResourceManagePathTreesRequest {
+  /**
+   * 项目ID
+   */
+  ProjectId?: string
+
+  /**
+   * 名字，供搜索
+   */
+  Name?: string
+
+  /**
+   * 文件类型
+   */
+  FileType?: string
+
+  /**
+   * 文件路径
+   */
+  FilePath?: string
+
+  /**
+   * 文件夹类型
+   */
+  DirType?: string
 }
 
 /**
@@ -4209,6 +4522,46 @@ export interface DescribeRelatedInstancesResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreateOrUpdateResource请求参数结构体
+ */
+export interface CreateOrUpdateResourceRequest {
+  /**
+   * 项目ID
+   */
+  ProjectId?: string
+
+  /**
+   * 文件名
+   */
+  Files?: Array<string>
+
+  /**
+   * 文件所属路径，资源管理根路径为 /datastudio/resouce
+   */
+  FilePath?: string
+
+  /**
+   * cos存储桶名字
+   */
+  CosBucketName?: string
+
+  /**
+   * cos所属地域
+   */
+  CosRegion?: string
+
+  /**
+   * 是否为新文件，新增为 true，更新为 false
+   */
+  NewFile?: boolean
+
+  /**
+   * 文件大小
+   */
+  FilesSize?: Array<string>
 }
 
 /**

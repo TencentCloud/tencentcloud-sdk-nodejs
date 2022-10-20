@@ -70,7 +70,7 @@ export declare class Client extends AbstractClient {
     /**
      * 获取2.0实例初始化任务状态
      */
-    DescribePrometheusInstanceInitStatus(req?: DescribePrometheusInstanceInitStatusRequest, cb?: (error: string, rep: DescribePrometheusInstanceInitStatusResponse) => void): Promise<DescribePrometheusInstanceInitStatusResponse>;
+    DescribePrometheusInstanceInitStatus(req: DescribePrometheusInstanceInitStatusRequest, cb?: (error: string, rep: DescribePrometheusInstanceInitStatusResponse) => void): Promise<DescribePrometheusInstanceInitStatusResponse>;
     /**
      * 开启事件持久化功能
      */
@@ -676,9 +676,9 @@ export declare class Client extends AbstractClient {
      */
     CreatePrometheusConfig(req: CreatePrometheusConfigRequest, cb?: (error: string, rep: CreatePrometheusConfigResponse) => void): Promise<CreatePrometheusConfigResponse>;
     /**
-     * 初始化与云监控融合的2.0版本实例，开启集成中心时调用
+     * 初始化TMP实例，开启集成中心时调用
      */
-    RunPrometheusInstance(req?: RunPrometheusInstanceRequest, cb?: (error: string, rep: RunPrometheusInstanceResponse) => void): Promise<RunPrometheusInstanceResponse>;
+    RunPrometheusInstance(req: RunPrometheusInstanceRequest, cb?: (error: string, rep: RunPrometheusInstanceResponse) => void): Promise<RunPrometheusInstanceResponse>;
     /**
      * 修改弹性集群名称等属性
      */

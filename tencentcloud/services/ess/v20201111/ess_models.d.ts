@@ -651,6 +651,7 @@ CHECK_BOX - true/false
 FILL_IMAGE、ATTACHMENT - 附件的FileId，需要通过UploadFiles接口上传获取
 SELECTOR - 选项值
 DYNAMIC_TABLE - 传入json格式的表格内容，具体见数据结构FlowInfo：https://cloud.tencent.com/document/api/1420/61525#FlowInfo
+SIGN_SEAL - 印章Id，于控制台查询获取
       */
     ComponentValue?: string;
     /**
@@ -1528,6 +1529,10 @@ export interface SuccessDeleteStaffData {
  */
 export interface CreateMultiFlowSignQRCodeRequest {
     /**
+      * 用户信息
+      */
+    Operator: UserInfo;
+    /**
       * 模板ID
       */
     TemplateId: string;
@@ -1535,20 +1540,6 @@ export interface CreateMultiFlowSignQRCodeRequest {
       * 签署流程名称，最大长度不超过200字符
       */
     FlowName: string;
-    /**
-      * 用户信息
-      */
-    Operator: UserInfo;
-    /**
-      * 应用信息
-      */
-    Agent?: Agent;
-    /**
-      * 回调地址,最大长度1000字符串
-回调时机：
-用户通过签署二维码发起签署流程时，企业额度不足导致失败
-      */
-    CallbackUrl?: string;
     /**
       * 最大可发起签署流程份数，默认5份
 发起流程数量超过此上限后二维码自动失效
@@ -1564,6 +1555,20 @@ export interface CreateMultiFlowSignQRCodeRequest {
     QrEffectiveDay?: number;
     /**
       * 限制二维码用户条件
+      */
+    Restrictions?: Array<ApproverRestriction>;
+    /**
+      * 回调地址,最大长度1000字符串
+回调时机：
+用户通过签署二维码发起签署流程时，企业额度不足导致失败
+      */
+    CallbackUrl?: string;
+    /**
+      * 应用信息
+      */
+    Agent?: Agent;
+    /**
+      * 限制二维码用户条件（已弃用）
       */
     ApproverRestrictions?: ApproverRestriction;
 }

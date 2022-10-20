@@ -39,6 +39,7 @@ import {
   DescribeBPFakeURLsResponse,
   CreateBPOfflineAttachmentResponse,
   DescribeBPReportFakeURLsRequest,
+  DescribeCRMonitorDetailResponse,
   MonitorTort,
   CreateBPFakeURLRequest,
   UpdateCRWorkResponse,
@@ -47,11 +48,12 @@ import {
   DescribeCRMonitorsResponse,
   CreateCRCompanyVerifyResponse,
   CreateBPOfflineAttachmentRequest,
+  CreateCRDesktopCodeResponse,
   CreateBPProtectURLsRequest,
   CreateCRObtainRequest,
   ModifyCRBlockStatusRequest,
   ModifyCRMonitorRequest,
-  DescribeCRMonitorDetailResponse,
+  CreateCRDesktopCodeRequest,
   CreateCRWorkRequest,
   DescribeBPCompanyInfoRequest,
   DescribeCRObtainDetailRequest,
@@ -101,6 +103,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpdateCRWorkResponse) => void
   ): Promise<UpdateCRWorkResponse> {
     return this.request("UpdateCRWork", req, cb)
+  }
+
+  /**
+   * 新建过程取证码
+   */
+  async CreateCRDesktopCode(
+    req: CreateCRDesktopCodeRequest,
+    cb?: (error: string, rep: CreateCRDesktopCodeResponse) => void
+  ): Promise<CreateCRDesktopCodeResponse> {
+    return this.request("CreateCRDesktopCode", req, cb)
   }
 
   /**

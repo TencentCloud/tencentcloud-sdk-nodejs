@@ -1030,7 +1030,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreatePrometheusConfig", req, cb);
     }
     /**
-     * 初始化与云监控融合的2.0版本实例，开启集成中心时调用
+     * 初始化TMP实例，开启集成中心时调用
      */
     async RunPrometheusInstance(req, cb) {
         return this.request("RunPrometheusInstance", req, cb);

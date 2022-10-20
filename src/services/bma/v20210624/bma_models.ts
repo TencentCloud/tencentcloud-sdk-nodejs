@@ -621,6 +621,31 @@ export interface DescribeBPReportFakeURLsRequest {
 }
 
 /**
+ * DescribeCRMonitorDetail返回参数结构体
+ */
+export interface DescribeCRMonitorDetailResponse {
+  /**
+   * 侵权数组
+   */
+  Torts: Array<MonitorTort>
+
+  /**
+   * 总记录数
+   */
+  TotalCount: number
+
+  /**
+   * 监测状态
+   */
+  MonitorStatus: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 监测侵权信息详情
  */
 export interface MonitorTort {
@@ -891,6 +916,16 @@ export interface CreateBPOfflineAttachmentRequest {
 }
 
 /**
+ * CreateCRDesktopCode返回参数结构体
+ */
+export interface CreateCRDesktopCodeResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateBPProtectURLs请求参数结构体
  */
 export interface CreateBPProtectURLsRequest {
@@ -1006,28 +1041,18 @@ export interface ModifyCRMonitorRequest {
 }
 
 /**
- * DescribeCRMonitorDetail返回参数结构体
+ * CreateCRDesktopCode请求参数结构体
  */
-export interface DescribeCRMonitorDetailResponse {
+export interface CreateCRDesktopCodeRequest {
   /**
-   * 侵权数组
+   * xxx
    */
-  Torts: Array<MonitorTort>
+  TortId: number
 
   /**
-   * 总记录数
+   * xxx
    */
-  TotalCount: number
-
-  /**
-   * 监测状态
-   */
-  MonitorStatus: number
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  DesktopCode: string
 }
 
 /**

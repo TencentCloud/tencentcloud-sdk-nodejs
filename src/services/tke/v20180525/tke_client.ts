@@ -661,7 +661,7 @@ export class Client extends AbstractClient {
    * 获取2.0实例初始化任务状态
    */
   async DescribePrometheusInstanceInitStatus(
-    req?: DescribePrometheusInstanceInitStatusRequest,
+    req: DescribePrometheusInstanceInitStatusRequest,
     cb?: (error: string, rep: DescribePrometheusInstanceInitStatusResponse) => void
   ): Promise<DescribePrometheusInstanceInitStatusResponse> {
     return this.request("DescribePrometheusInstanceInitStatus", req, cb)
@@ -2178,10 +2178,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 初始化与云监控融合的2.0版本实例，开启集成中心时调用
+   * 初始化TMP实例，开启集成中心时调用
    */
   async RunPrometheusInstance(
-    req?: RunPrometheusInstanceRequest,
+    req: RunPrometheusInstanceRequest,
     cb?: (error: string, rep: RunPrometheusInstanceResponse) => void
   ): Promise<RunPrometheusInstanceResponse> {
     return this.request("RunPrometheusInstance", req, cb)

@@ -14645,6 +14645,13 @@ export interface CreateOpenBankGlobalPaymentOrderRequest {
       * 账单信息
       */
     BillingInfo?: OpenBankBillingInfo;
+    /**
+      * 环境类型
+__release__:生产环境
+__sandbox__:沙箱环境
+缺省默认为生产环境
+      */
+    Environment?: string;
 }
 /**
  * DistributeQueryReceiver返回参数结构体
