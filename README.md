@@ -51,6 +51,7 @@ const client = new CvmClient({
     httpProfile: {
       reqMethod: "POST", // 请求方法
       reqTimeout: 30, // 请求超时时间，默认60s
+      // proxy: "http://127.0.0.1:8899" // http请求代理
     },
   },
 })
@@ -90,6 +91,7 @@ const client = new CvmClient({
     httpProfile: {
       reqMethod: "POST", // 请求方法
       reqTimeout: 30, // 请求超时时间，默认60s
+      // proxy: "http://127.0.0.1:8899" // http请求代理
     },
   },
 })
@@ -114,14 +116,14 @@ async function main(){
 
 ## 代理
 
-如果是有代理的环境下，需要设置系统环境变量 `http_proxy` ，否则可能无法正常调用，抛出连接超时的异常。
+如果是有代理的环境下，需要配置代理，请在创建Client时传入 [profile.httpProfile.proxy](https://github.com/TencentCloud/tencentcloud-sdk-nodejs/blob/master/src/common/interface.ts#L78) 参数，或设置系统环境变量 `http_proxy` ，否则可能无法正常调用，抛出连接超时的异常。
 
 # 旧版 SDK
 
 我们推荐使用新版 NODEJS SDK，如果一定要用旧版 SDK，请前往[github 仓库](https://github.com/CFETeam/qcloudapi-sdk)下载。
 
 # 常见问题
-- webpack打包出错
+- webpack打包出错/浏览器报错
 
   请**务必不要**将此sdk直接用于web前端(包括小程序等)，暴露密钥在这些环境非常不安全。
 
@@ -129,7 +131,7 @@ async function main(){
 
 - `The "original" argument must be of type Function.`
 
-  通常是因为nodejs版本低于 `v10` ，请再次确认执行环境。
+  通常是因为nodejs版本低于 `v10` ，或处于非node环境，请再次确认执行环境。
 
 - 请求不通
 
@@ -142,7 +144,7 @@ async function main(){
   # windows powershell
   $env:NODE_DEBUG='http' ; node app.js
   ```
-  如需要配置代理，请设置环境变量 `http_proxy`，例如：
+  如需要配置代理，请查阅 [代理](#代理)，或设置环境变量 `http_proxy`，例如：
   ```sh
   # MacOS
   http_proxy=http://代理地址:代理端口 node app.js
