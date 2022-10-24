@@ -208,6 +208,16 @@ it("cwp.v20180228.DescribeServerRelatedDirInfo", async function () {
     }
 })
 
+it("cwp.v20180228.StopBaselineDetect", async function () {
+    try {
+       const data = await client.StopBaselineDetect({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cwp.v20180228.CreateBaselineStrategy", async function () {
     try {
        const data = await client.CreateBaselineStrategy({})
@@ -301,6 +311,16 @@ it("cwp.v20180228.DescribeExpertServiceList", async function () {
 it("cwp.v20180228.DescribeBaselineList", async function () {
     try {
        const data = await client.DescribeBaselineList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cwp.v20180228.DeleteScanTask", async function () {
+    try {
+       const data = await client.DeleteScanTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -918,6 +938,16 @@ it("cwp.v20180228.DeleteMalwares", async function () {
     }
 })
 
+it("cwp.v20180228.ExportTasks", async function () {
+    try {
+       const data = await client.ExportTasks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cwp.v20180228.DescribeMachineList", async function () {
     try {
        const data = await client.DescribeMachineList({})
@@ -1138,6 +1168,16 @@ it("cwp.v20180228.DescribeBaselineStrategyDetail", async function () {
     }
 })
 
+it("cwp.v20180228.ModifyBaselinePolicy", async function () {
+    try {
+       const data = await client.ModifyBaselinePolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cwp.v20180228.DescribeAssetWebLocationInfo", async function () {
     try {
        const data = await client.DescribeAssetWebLocationInfo({})
@@ -1151,6 +1191,16 @@ it("cwp.v20180228.DescribeAssetWebLocationInfo", async function () {
 it("cwp.v20180228.UntrustMalwares", async function () {
     try {
        const data = await client.UntrustMalwares({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cwp.v20180228.DescribeBaselinePolicyList", async function () {
+    try {
+       const data = await client.DescribeBaselinePolicyList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1221,6 +1271,16 @@ it("cwp.v20180228.DescribeAssetDatabaseList", async function () {
 it("cwp.v20180228.DescribeVulEffectHostList", async function () {
     try {
        const data = await client.DescribeVulEffectHostList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cwp.v20180228.DeleteBaselinePolicy", async function () {
+    try {
+       const data = await client.DeleteBaselinePolicy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1628,6 +1688,16 @@ it("cwp.v20180228.SwitchBashRules", async function () {
     }
 })
 
+it("cwp.v20180228.DescribeMachineOsList", async function () {
+    try {
+       const data = await client.DescribeMachineOsList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cwp.v20180228.DescribeBanWhiteList", async function () {
     try {
        const data = await client.DescribeBanWhiteList({})
@@ -1818,9 +1888,9 @@ it("cwp.v20180228.DescribeBanRegions", async function () {
     }
 })
 
-it("cwp.v20180228.DescribeMachineOsList", async function () {
+it("cwp.v20180228.DescribeJavaMemShellList", async function () {
     try {
-       const data = await client.DescribeMachineOsList({})
+       const data = await client.DescribeJavaMemShellList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2168,9 +2238,9 @@ it("cwp.v20180228.DescribeMachines", async function () {
     }
 })
 
-it("cwp.v20180228.ExportTasks", async function () {
+it("cwp.v20180228.DescribeBaselineHostDetectList", async function () {
     try {
-       const data = await client.ExportTasks({})
+       const data = await client.DescribeBaselineHostDetectList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

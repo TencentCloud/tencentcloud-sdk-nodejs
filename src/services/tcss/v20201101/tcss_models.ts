@@ -748,24 +748,58 @@ export interface ModifyAssetImageScanStopResponse {
 }
 
 /**
- * DescribeComplianceScanFailedAssetList返回参数结构体
+ * AddAssetImageRegistryRegistryDetail请求参数结构体
  */
-export interface DescribeComplianceScanFailedAssetListResponse {
+export interface AddAssetImageRegistryRegistryDetailRequest {
   /**
-   * 返回检测失败的资产的总数。
+   * 仓库名
    */
-  TotalCount: number
+  Name: string
 
   /**
-      * 返回各类检测失败的资产的汇总信息的列表。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ScanFailedAssetList: Array<ComplianceScanFailedAsset>
+   * 用户名
+   */
+  Username: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 密码
    */
-  RequestId?: string
+  Password: string
+
+  /**
+   * 仓库url
+   */
+  Url: string
+
+  /**
+   * 仓库类型，列表：harbor
+   */
+  RegistryType: string
+
+  /**
+   * 网络类型，列表：public（公网）
+   */
+  NetType: string
+
+  /**
+   * 仓库版本
+   */
+  RegistryVersion?: string
+
+  /**
+   * 区域，列表：default（默认）
+   */
+  RegistryRegion?: string
+
+  /**
+   * 限速
+   */
+  SpeedLimit?: number
+
+  /**
+   * 安全模式（证书校验）：0（默认） 非安全模式（跳过证书校验）：1
+   */
+  Insecure?: number
 }
 
 /**
@@ -3745,29 +3779,44 @@ export interface DescribeVirusAutoIsolateSampleDetailRequest {
 }
 
 /**
- * DescribeESHits请求参数结构体
+ * DescribeAssetImageVirusList返回参数结构体
  */
-export interface DescribeESHitsRequest {
+export interface DescribeAssetImageVirusListResponse {
   /**
-   * ES查询条件JSON
+   * 镜像病毒列表
    */
-  Query: string
+  List: Array<ImageVirusInfo>
 
   /**
-   * 偏移量，默认为0。
+   * 总数量
    */
-  Offset?: number
+  TotalCount: number
 
   /**
-   * 返回数量，最大值为100。
+      * 病毒扫描状态
+0:未扫描
+1:扫描中
+2:扫描完成
+3:扫描出错
+4:扫描取消
+      */
+  VirusScanStatus: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Limit?: number
+  RequestId?: string
 }
 
 /**
- * DescribeImageRiskSummary请求参数结构体
+ * DeleteComplianceAssetPolicySetFromWhitelist返回参数结构体
  */
-export type DescribeImageRiskSummaryRequest = null
+export interface DeleteComplianceAssetPolicySetFromWhitelistResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
 
 /**
  * DescribeSecLogJoinTypeList返回参数结构体
@@ -3930,6 +3979,26 @@ export interface DescribeIndexListResponse {
 }
 
 /**
+ * ModifyVulDefenceSetting请求参数结构体
+ */
+export interface ModifyVulDefenceSettingRequest {
+  /**
+   * 是否开启:0: 关闭 1:开启
+   */
+  IsEnabled: number
+
+  /**
+   * 漏洞防御主机范围:0：自选 1: 全部主机。IsEnabled为1时必填
+   */
+  Scope?: number
+
+  /**
+   * 自选漏洞防御主机,Scope为0时必填
+   */
+  HostIDs?: Array<string>
+}
+
+/**
  * DescribeAssetSummary返回参数结构体
  */
 export interface DescribeAssetSummaryResponse {
@@ -4040,13 +4109,18 @@ export interface DescribeAssetSummaryResponse {
 }
 
 /**
- * DescribeAccessControlRuleDetail返回参数结构体
+ * CreateNetworkFirewallClusterRefresh返回参数结构体
  */
-export interface DescribeAccessControlRuleDetailResponse {
+export interface CreateNetworkFirewallClusterRefreshResponse {
   /**
-   * 运行时策略详细信息
+   * 返回创建的集群检查任务的ID，为0表示创建失败。
    */
-  RuleDetail: AccessControlRuleInfo
+  TaskId: number
+
+  /**
+   * 创建检查任务的结果，"Succ"为成功，"Failed"为失败
+   */
+  Result: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4464,33 +4538,23 @@ export interface DescribeAssetImageBindRuleInfoResponse {
 }
 
 /**
- * DescribeAssetImageVirusList返回参数结构体
+ * DescribeESHits请求参数结构体
  */
-export interface DescribeAssetImageVirusListResponse {
+export interface DescribeESHitsRequest {
   /**
-   * 镜像病毒列表
+   * ES查询条件JSON
    */
-  List: Array<ImageVirusInfo>
+  Query: string
 
   /**
-   * 总数量
+   * 偏移量，默认为0。
    */
-  TotalCount: number
+  Offset?: number
 
   /**
-      * 病毒扫描状态
-0:未扫描
-1:扫描中
-2:扫描完成
-3:扫描出错
-4:扫描取消
-      */
-  VirusScanStatus: number
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 返回数量，最大值为100。
    */
-  RequestId?: string
+  Limit?: number
 }
 
 /**
@@ -4614,6 +4678,16 @@ export interface DescribeTcssSummaryResponse {
 }
 
 /**
+ * DeleteRiskSyscallEvents请求参数结构体
+ */
+export interface DeleteRiskSyscallEventsRequest {
+  /**
+   * 事件ids
+   */
+  EventIdSet: Array<string>
+}
+
+/**
  * DescribeAssetContainerList请求参数结构体
  */
 export interface DescribeAssetContainerListRequest {
@@ -4664,6 +4738,11 @@ export interface DescribeEscapeSafeStateResponse {
    */
   RequestId?: string
 }
+
+/**
+ * DescribeImageRiskSummary请求参数结构体
+ */
+export type DescribeImageRiskSummaryRequest = null
 
 /**
  * CreateDefenceVulExportJob返回参数结构体
@@ -5293,6 +5372,16 @@ export interface ImageHost {
 }
 
 /**
+ * AddComplianceAssetPolicySetToWhitelist返回参数结构体
+ */
+export interface AddComplianceAssetPolicySetToWhitelistResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeUnauthorizedCoresTendency返回参数结构体
  */
 export interface DescribeUnauthorizedCoresTendencyResponse {
@@ -5847,6 +5936,16 @@ export interface DescribeReverseShellWhiteListDetailRequest {
 }
 
 /**
+ * AddCompliancePolicyAssetSetToWhitelist返回参数结构体
+ */
+export interface AddCompliancePolicyAssetSetToWhitelistResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeVulContainerList返回参数结构体
  */
 export interface DescribeVulContainerListResponse {
@@ -6066,58 +6165,24 @@ export interface ClusterInfoItem {
 }
 
 /**
- * AddAssetImageRegistryRegistryDetail请求参数结构体
+ * DescribeComplianceScanFailedAssetList返回参数结构体
  */
-export interface AddAssetImageRegistryRegistryDetailRequest {
+export interface DescribeComplianceScanFailedAssetListResponse {
   /**
-   * 仓库名
+   * 返回检测失败的资产的总数。
    */
-  Name: string
+  TotalCount: number
 
   /**
-   * 用户名
-   */
-  Username: string
+      * 返回各类检测失败的资产的汇总信息的列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ScanFailedAssetList: Array<ComplianceScanFailedAsset>
 
   /**
-   * 密码
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Password: string
-
-  /**
-   * 仓库url
-   */
-  Url: string
-
-  /**
-   * 仓库类型，列表：harbor
-   */
-  RegistryType: string
-
-  /**
-   * 网络类型，列表：public（公网）
-   */
-  NetType: string
-
-  /**
-   * 仓库版本
-   */
-  RegistryVersion?: string
-
-  /**
-   * 区域，列表：default（默认）
-   */
-  RegistryRegion?: string
-
-  /**
-   * 限速
-   */
-  SpeedLimit?: number
-
-  /**
-   * 安全模式（证书校验）：0（默认） 非安全模式（跳过证书校验）：1
-   */
-  Insecure?: number
+  RequestId?: string
 }
 
 /**
@@ -6138,6 +6203,21 @@ export interface DeleteMachineResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * AddCompliancePolicyAssetSetToWhitelist请求参数结构体
+ */
+export interface AddCompliancePolicyAssetSetToWhitelistRequest {
+  /**
+   * 检查项ID
+   */
+  CustomerPolicyItemId: number
+
+  /**
+   * 需要忽略指定检查项内的资产ID列表
+   */
+  CustomerAssetItemIdSet?: Array<number>
 }
 
 /**
@@ -7278,48 +7358,33 @@ export interface ModifyAccessControlStatusResponse {
 }
 
 /**
- * 容器网络信息
+ * DeleteReverseShellWhiteLists请求参数结构体
  */
-export interface ContainerNetwork {
+export interface DeleteReverseShellWhiteListsRequest {
   /**
-   * endpoint id
+   * 白名单ids
    */
-  EndpointID: string
+  WhiteListIdSet: Array<string>
+}
+
+/**
+ * DescribeEmergencyVulList返回参数结构体
+ */
+export interface DescribeEmergencyVulListResponse {
+  /**
+   * 漏洞总数
+   */
+  TotalCount: number
 
   /**
-   * 模式:bridge
+   * 漏洞列表
    */
-  Mode: string
+  List: Array<EmergencyVulInfo>
 
   /**
-   * 网络名称
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Name: string
-
-  /**
-   * 网络ID
-   */
-  NetworkID: string
-
-  /**
-   * 网关
-   */
-  Gateway: string
-
-  /**
-   * IPV4地址
-   */
-  Ipv4: string
-
-  /**
-   * IPV6地址
-   */
-  Ipv6: string
-
-  /**
-   * MAC 地址
-   */
-  MAC: string
+  RequestId?: string
 }
 
 /**
@@ -9446,85 +9511,23 @@ export interface ReverseShellEventDescription {
 }
 
 /**
- * 容器安全镜像病毒信息
+ * DescribeImageRegistryNamespaceList返回参数结构体
  */
-export interface ImageVirusInfo {
+export interface DescribeImageRegistryNamespaceListResponse {
   /**
-      * 路径
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Path: string
+   * 可返回的项目空间的总量。
+   */
+  TotalCount: number
 
   /**
-      * 风险等级
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  RiskLevel: number
+   * 返回的项目空间列表
+   */
+  NamespaceList: Array<string>
 
   /**
-      * 病毒名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  VirusName: string
-
-  /**
-      * 标签
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Tags: Array<string>
-
-  /**
-      * 描述
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Desc: string
-
-  /**
-      * 修护建议
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Solution: string
-
-  /**
-      * 大小
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Size: number
-
-  /**
-      * 首次发现时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  FirstScanTime: string
-
-  /**
-      * 最近扫描时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  LatestScanTime: string
-
-  /**
-      * 文件md5
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Md5: string
-
-  /**
-      * 文件名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  FileName: string
-
-  /**
-      * 检测平台
-1: 云查杀引擎
-2: tav
-3: binaryAi
-4: 异常行为
-5: 威胁情报
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  CheckPlatform: Array<string>
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -9558,13 +9561,13 @@ export interface VulAffectedImageInfo {
 }
 
 /**
- * DescribeVirusSampleDownloadUrl请求参数结构体
+ * DeleteCompliancePolicyAssetSetFromWhitelist返回参数结构体
  */
-export interface DescribeVirusSampleDownloadUrlRequest {
+export interface DeleteCompliancePolicyAssetSetFromWhitelistResponse {
   /**
-   * 木马id
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  ID: string
+  RequestId?: string
 }
 
 /**
@@ -10193,18 +10196,38 @@ export interface DescribeVirusEventTendencyRequest {
 }
 
 /**
- * DescribeEmergencyVulList返回参数结构体
+ * DescribeContainerSecEventSummary返回参数结构体
  */
-export interface DescribeEmergencyVulListResponse {
+export interface DescribeContainerSecEventSummaryResponse {
   /**
-   * 漏洞总数
+   * 未处理逃逸事件
    */
-  TotalCount: number
+  UnhandledEscapeCnt: number
 
   /**
-   * 漏洞列表
+   * 未处理反弹shell事件
    */
-  List: Array<EmergencyVulInfo>
+  UnhandledReverseShellCnt: number
+
+  /**
+   * 未处理高危系统调用
+   */
+  UnhandledRiskSyscallCnt: number
+
+  /**
+   * 未处理异常进程
+   */
+  UnhandledAbnormalProcessCnt: number
+
+  /**
+   * 未处理文件篡改
+   */
+  UnhandledFileCnt: number
+
+  /**
+   * 未处理木马事件
+   */
+  UnhandledVirusEventCnt: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -11334,18 +11357,13 @@ export interface DescribeVirusScanSettingResponse {
 }
 
 /**
- * CreateNetworkFirewallClusterRefresh返回参数结构体
+ * DescribeAccessControlRuleDetail返回参数结构体
  */
-export interface CreateNetworkFirewallClusterRefreshResponse {
+export interface DescribeAccessControlRuleDetailResponse {
   /**
-   * 返回创建的集群检查任务的ID，为0表示创建失败。
+   * 运行时策略详细信息
    */
-  TaskId: number
-
-  /**
-   * 创建检查任务的结果，"Succ"为成功，"Failed"为失败
-   */
-  Result: string
+  RuleDetail: AccessControlRuleInfo
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -12834,13 +12852,18 @@ export interface DescribeImageRiskTendencyResponse {
 }
 
 /**
- * DescribeVirusAutoIsolateSampleDownloadURL请求参数结构体
+ * 检查项+资产ids 的集合单元
  */
-export interface DescribeVirusAutoIsolateSampleDownloadURLRequest {
+export interface CompliancePolicyAssetSetItem {
   /**
-   * 样本Md5值
+   * 检查项ID
    */
-  MD5: string
+  CustomerPolicyItemId: number
+
+  /**
+   * 需要忽略指定检查项内的资产ID列表，为空表示所有
+   */
+  CustomerAssetItemIdSet?: Array<number>
 }
 
 /**
@@ -14825,6 +14848,16 @@ export interface DeleteSearchTemplateResponse {
 }
 
 /**
+ * AddComplianceAssetPolicySetToWhitelist请求参数结构体
+ */
+export interface AddComplianceAssetPolicySetToWhitelistRequest {
+  /**
+   * 资产ID+检查项IDs. 列表
+   */
+  AssetPolicySetList: Array<ComplianceAssetPolicySetItem>
+}
+
+/**
  * DescribeVirusAutoIsolateSampleDownloadURL返回参数结构体
  */
 export interface DescribeVirusAutoIsolateSampleDownloadURLResponse {
@@ -14920,23 +14953,85 @@ export interface ComplianceFilters {
 }
 
 /**
- * ModifyVulDefenceSetting请求参数结构体
+ * 容器安全镜像病毒信息
  */
-export interface ModifyVulDefenceSettingRequest {
+export interface ImageVirusInfo {
   /**
-   * 是否开启:0: 关闭 1:开启
-   */
-  IsEnabled: number
+      * 路径
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Path: string
 
   /**
-   * 漏洞防御主机范围:0：自选 1: 全部主机。IsEnabled为1时必填
-   */
-  Scope?: number
+      * 风险等级
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RiskLevel: number
 
   /**
-   * 自选漏洞防御主机,Scope为0时必填
-   */
-  HostIDs?: Array<string>
+      * 病毒名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VirusName: string
+
+  /**
+      * 标签
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Tags: Array<string>
+
+  /**
+      * 描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Desc: string
+
+  /**
+      * 修护建议
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Solution: string
+
+  /**
+      * 大小
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Size: number
+
+  /**
+      * 首次发现时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FirstScanTime: string
+
+  /**
+      * 最近扫描时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LatestScanTime: string
+
+  /**
+      * 文件md5
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Md5: string
+
+  /**
+      * 文件名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FileName: string
+
+  /**
+      * 检测平台
+1: 云查杀引擎
+2: tav
+3: binaryAi
+4: 异常行为
+5: 威胁情报
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CheckPlatform: Array<string>
 }
 
 /**
@@ -15404,13 +15499,48 @@ export interface DescribeAssetImageRegistryAssetStatusResponse {
 }
 
 /**
- * DeleteReverseShellWhiteLists请求参数结构体
+ * 容器网络信息
  */
-export interface DeleteReverseShellWhiteListsRequest {
+export interface ContainerNetwork {
   /**
-   * 白名单ids
+   * endpoint id
    */
-  WhiteListIdSet: Array<string>
+  EndpointID: string
+
+  /**
+   * 模式:bridge
+   */
+  Mode: string
+
+  /**
+   * 网络名称
+   */
+  Name: string
+
+  /**
+   * 网络ID
+   */
+  NetworkID: string
+
+  /**
+   * 网关
+   */
+  Gateway: string
+
+  /**
+   * IPV4地址
+   */
+  Ipv4: string
+
+  /**
+   * IPV6地址
+   */
+  Ipv6: string
+
+  /**
+   * MAC 地址
+   */
+  MAC: string
 }
 
 /**
@@ -15496,6 +15626,16 @@ export interface AddEditRiskSyscallWhiteListResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeVirusAutoIsolateSampleDownloadURL请求参数结构体
+ */
+export interface DescribeVirusAutoIsolateSampleDownloadURLRequest {
+  /**
+   * 样本Md5值
+   */
+  MD5: string
 }
 
 /**
@@ -16016,13 +16156,13 @@ export interface DescribeSupportDefenceVulRequest {
 }
 
 /**
- * DeleteRiskSyscallEvents请求参数结构体
+ * DeleteCompliancePolicyAssetSetFromWhitelist请求参数结构体
  */
-export interface DeleteRiskSyscallEventsRequest {
+export interface DeleteCompliancePolicyAssetSetFromWhitelistRequest {
   /**
-   * 事件ids
+   * （检查项ID+资产ID列表）的列表
    */
-  EventIdSet: Array<string>
+  PolicyAssetSetList: Array<CompliancePolicyAssetSetItem>
 }
 
 /**
@@ -16547,6 +16687,16 @@ Source 镜像来源，LOCAL:本地镜像，REGISTRY:仓库镜像
 }
 
 /**
+ * DescribeVirusSampleDownloadUrl请求参数结构体
+ */
+export interface DescribeVirusSampleDownloadUrlRequest {
+  /**
+   * 木马id
+   */
+  ID: string
+}
+
+/**
  * AddAndPublishNetworkFirewallPolicyYamlDetail返回参数结构体
  */
 export interface AddAndPublishNetworkFirewallPolicyYamlDetailResponse {
@@ -16743,6 +16893,26 @@ export interface DescribeAssetImageRegistryRiskInfoListRequest {
 }
 
 /**
+ * DescribeImageRegistryNamespaceList请求参数结构体
+ */
+export interface DescribeImageRegistryNamespaceListRequest {
+  /**
+   * 本次查询的起始偏移量，默认为0。
+   */
+  Offset?: number
+
+  /**
+   * 本次查询的数据量，默认为10，最大值为100。
+   */
+  Limit?: number
+
+  /**
+   * 查询的过滤条件。Name字段可取值"Namespace"。
+   */
+  Filters?: Array<AssetFilters>
+}
+
+/**
  * DescribeAssetImageRegistryScanStatusOneKey请求参数结构体
  */
 export interface DescribeAssetImageRegistryScanStatusOneKeyRequest {
@@ -16887,6 +17057,21 @@ export interface DescribeImageAutoAuthorizedLogListResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DeleteComplianceAssetPolicySetFromWhitelist请求参数结构体
+ */
+export interface DeleteComplianceAssetPolicySetFromWhitelistRequest {
+  /**
+   * 资产ID
+   */
+  AssetItemId: number
+
+  /**
+   * 需要忽略指定资产内的检查项ID列表
+   */
+  CustomerPolicyItemIdSet?: Array<number>
 }
 
 /**
@@ -17252,22 +17437,6 @@ export interface AddEditAbnormalProcessRuleRequest {
    * 仅在加白的时候带上
    */
   EventId?: string
-}
-
-/**
- * DescribeAssetImageRegistryVulListExport返回参数结构体
- */
-export interface DescribeAssetImageRegistryVulListExportResponse {
-  /**
-      * excel文件下载地址
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DownloadUrl: string
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -17657,6 +17826,21 @@ export interface AddCompliancePolicyItemToWhitelistResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 资产+检查项ids 集合单元
+ */
+export interface ComplianceAssetPolicySetItem {
+  /**
+   * 资产ID
+   */
+  CustomerAssetItemId: number
+
+  /**
+   * 需要忽略指定资产内的检查项ID列表，为空表示所有
+   */
+  CustomerPolicyItemIdSet?: Array<number>
 }
 
 /**
@@ -19650,38 +19834,14 @@ export interface SearchTemplate {
 }
 
 /**
- * DescribeContainerSecEventSummary返回参数结构体
+ * DescribeAssetImageRegistryVulListExport返回参数结构体
  */
-export interface DescribeContainerSecEventSummaryResponse {
+export interface DescribeAssetImageRegistryVulListExportResponse {
   /**
-   * 未处理逃逸事件
-   */
-  UnhandledEscapeCnt: number
-
-  /**
-   * 未处理反弹shell事件
-   */
-  UnhandledReverseShellCnt: number
-
-  /**
-   * 未处理高危系统调用
-   */
-  UnhandledRiskSyscallCnt: number
-
-  /**
-   * 未处理异常进程
-   */
-  UnhandledAbnormalProcessCnt: number
-
-  /**
-   * 未处理文件篡改
-   */
-  UnhandledFileCnt: number
-
-  /**
-   * 未处理木马事件
-   */
-  UnhandledVirusEventCnt: number
+      * excel文件下载地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DownloadUrl: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

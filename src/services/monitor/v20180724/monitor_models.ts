@@ -975,6 +975,16 @@ export interface CreateAlarmPolicyRequest {
    * 日志告警信息
    */
   LogAlarmReqInfo?: LogAlarmReq
+
+  /**
+   * 告警分级通知规则配置
+   */
+  HierarchicalNotices?: Array<AlarmHierarchicalNotice>
+
+  /**
+   * 迁移策略专用字段，0-走鉴权逻辑，1-跳过鉴权逻辑
+   */
+  MigrateFlag?: number
 }
 
 /**
@@ -4280,13 +4290,20 @@ export interface ResumeGrafanaInstanceResponse {
 }
 
 /**
- * UpdateAlertRuleState返回参数结构体
+ * 通知模版ID及通知等级列表，["Remind","Serious"]表示该通知模板仅接收提醒和严重类别的告警
  */
-export interface UpdateAlertRuleStateResponse {
+export interface AlarmHierarchicalNotice {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+      * 通知模板ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NoticeId?: string
+
+  /**
+      * 通知等级列表，["Remind","Serious"]表示该通知模板仅接收提醒和严重类别的告警
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Classification?: Array<string>
 }
 
 /**
@@ -4359,6 +4376,16 @@ export interface CreateGrafanaInstanceRequest {
    * 标签
    */
   TagSpecification?: Array<PrometheusTag>
+}
+
+/**
+ * UpdateAlertRuleState返回参数结构体
+ */
+export interface UpdateAlertRuleStateResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

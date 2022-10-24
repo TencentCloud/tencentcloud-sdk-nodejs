@@ -46,6 +46,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateCluster", req, cb);
     }
     /**
+     * 本接口(SetAutoScalingConfiguration)用于为集群设置集群弹性伸缩配置信息。
+     */
+    async SetAutoScalingConfiguration(req, cb) {
+        return this.request("SetAutoScalingConfiguration", req, cb);
+    }
+    /**
      * 本接口(AddNodes)用于添加一个或者多个计算节点或者登录节点到指定集群。
      */
     async AddNodes(req, cb) {

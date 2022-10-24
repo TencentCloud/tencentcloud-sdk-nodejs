@@ -172,6 +172,18 @@ export interface IngressGatewayStatus {
       * 负载均衡实例状态
       */
     LoadBalancer: LoadBalancerStatus;
+    /**
+      * ingress gateway 当前的版本
+      */
+    CurrentVersion: string;
+    /**
+      * ingress gateway 目标的版本
+      */
+    DesiredVersion: string;
+    /**
+      * ingress gateway的状态，取值running, upgrading, rollbacking
+      */
+    State: string;
 }
 /**
  * ResourceMetricSource 定义了如何根据已知类型的资源指标进行扩缩容
@@ -308,6 +320,10 @@ export interface EgressGateway {
       * 工作负载配置
       */
     Workload?: WorkloadConfig;
+    /**
+      * 工作负载的状态
+      */
+    Status?: EgressGatewayStatus;
 }
 /**
  * Istio配置
@@ -405,6 +421,10 @@ export interface Mesh {
       * Mesh详细状态
       */
     Status: MeshStatus;
+    /**
+      * 标签列表
+      */
+    TagList: Array<Tag>;
 }
 /**
  * Grafana信息
@@ -849,6 +869,23 @@ export interface IngressGateway {
       * 负载均衡实例ID，使用已有 CLB 时返回
       */
     LoadBalancerId?: string;
+}
+/**
+ * egress gateway 的状态
+ */
+export interface EgressGatewayStatus {
+    /**
+      * egress gateway的当前版本
+      */
+    CurrentVersion: string;
+    /**
+      * egress gateway的目标版本
+      */
+    DesiredVersion: string;
+    /**
+      * egress gateway的状态，取值：running，upgrading，rollbacking
+      */
+    State: string;
 }
 /**
  * 内网独占集群配置列表

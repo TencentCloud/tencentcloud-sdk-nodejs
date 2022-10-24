@@ -318,6 +318,16 @@ it("tcss.v20201101.DescribeVirusAutoIsolateSampleDownloadURL", async function ()
     }
 })
 
+it("tcss.v20201101.DescribeImageRegistryNamespaceList", async function () {
+    try {
+       const data = await client.DescribeImageRegistryNamespaceList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcss.v20201101.DescribeScanIgnoreVulList", async function () {
     try {
        const data = await client.DescribeScanIgnoreVulList({})
@@ -451,6 +461,16 @@ it("tcss.v20201101.DescribeAssetImageRegistryVirusListExport", async function ()
 it("tcss.v20201101.ConfirmNetworkFirewallPolicy", async function () {
     try {
        const data = await client.ConfirmNetworkFirewallPolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcss.v20201101.DeleteComplianceAssetPolicySetFromWhitelist", async function () {
+    try {
+       const data = await client.DeleteComplianceAssetPolicySetFromWhitelist({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -988,6 +1008,16 @@ it("tcss.v20201101.DescribeRiskSyscallEvents", async function () {
     }
 })
 
+it("tcss.v20201101.AddComplianceAssetPolicySetToWhitelist", async function () {
+    try {
+       const data = await client.AddComplianceAssetPolicySetToWhitelist({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcss.v20201101.ModifySecLogJoinObjects", async function () {
     try {
        const data = await client.ModifySecLogJoinObjects({})
@@ -1338,6 +1368,16 @@ it("tcss.v20201101.CreateImageExportJob", async function () {
     }
 })
 
+it("tcss.v20201101.DescribeVulSummary", async function () {
+    try {
+       const data = await client.DescribeVulSummary({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcss.v20201101.DescribeVirusList", async function () {
     try {
        const data = await client.DescribeVirusList({})
@@ -1491,6 +1531,16 @@ it("tcss.v20201101.DeleteRiskSyscallEvents", async function () {
 it("tcss.v20201101.DescribeAffectedWorkloadList", async function () {
     try {
        const data = await client.DescribeAffectedWorkloadList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcss.v20201101.AddCompliancePolicyAssetSetToWhitelist", async function () {
+    try {
+       const data = await client.AddCompliancePolicyAssetSetToWhitelist({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -3018,9 +3068,9 @@ it("tcss.v20201101.DescribeVirusScanTaskStatus", async function () {
     }
 })
 
-it("tcss.v20201101.DescribeVulSummary", async function () {
+it("tcss.v20201101.DescribeSecEventsTendency", async function () {
     try {
-       const data = await client.DescribeVulSummary({})
+       const data = await client.DescribeSecEventsTendency({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -3048,9 +3098,9 @@ it("tcss.v20201101.ModifySecLogDeliveryKafkaSetting", async function () {
     }
 })
 
-it("tcss.v20201101.DescribeSecEventsTendency", async function () {
+it("tcss.v20201101.DeleteCompliancePolicyAssetSetFromWhitelist", async function () {
     try {
-       const data = await client.DescribeSecEventsTendency({})
+       const data = await client.DeleteCompliancePolicyAssetSetFromWhitelist({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

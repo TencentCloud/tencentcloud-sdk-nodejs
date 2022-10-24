@@ -208,6 +208,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeVirusAutoIsolateSampleDownloadURL", req, cb);
     }
     /**
+     * 查询用户镜像仓库下的项目名称列表
+     */
+    async DescribeImageRegistryNamespaceList(req, cb) {
+        return this.request("DescribeImageRegistryNamespaceList", req, cb);
+    }
+    /**
      * 查询扫描忽略的漏洞列表
      */
     async DescribeScanIgnoreVulList(req, cb) {
@@ -290,6 +296,13 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ConfirmNetworkFirewallPolicy(req, cb) {
         return this.request("ConfirmNetworkFirewallPolicy", req, cb);
+    }
+    /**
+     * 移除安全合规忽略(资产+检测项)列表，不显示指定的检查项包含的资产内容
+参考的AddCompliancePolicyAssetSetToWhitelist，除输入字段外，其它应该是一致的，如果有不同可能是定义的不对
+     */
+    async DeleteComplianceAssetPolicySetFromWhitelist(req, cb) {
+        return this.request("DeleteComplianceAssetPolicySetFromWhitelist", req, cb);
     }
     /**
      * 查询本地镜像组件列表
@@ -610,6 +623,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeRiskSyscallEvents", req, cb);
     }
     /**
+     * 新增安全合规忽略(资产+检测项列表)列表，不显示指定的检查项包含的资产内容
+参考的AddCompliancePolicyItemToWhitelist，除输入字段外，其它应该是一致的，如果有不同可能是定义的不对
+     */
+    async AddComplianceAssetPolicySetToWhitelist(req, cb) {
+        return this.request("AddComplianceAssetPolicySetToWhitelist", req, cb);
+    }
+    /**
      * 修改安全日志接入对象
      */
     async ModifySecLogJoinObjects(req, cb) {
@@ -820,6 +840,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateImageExportJob", req, cb);
     }
     /**
+     * 查询漏洞风险统计概览
+     */
+    async DescribeVulSummary(req, cb) {
+        return this.request("DescribeVulSummary", req, cb);
+    }
+    /**
      * 查询运行时文件查杀事件列表
      */
     async DescribeVirusList(req, cb) {
@@ -914,6 +940,13 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeAffectedWorkloadList(req, cb) {
         return this.request("DescribeAffectedWorkloadList", req, cb);
+    }
+    /**
+     * 新增安全合规忽略(检测项+资产)列表，不显示指定的检查项包含的资产内容
+参考的AddCompliancePolicyItemToWhitelist，除输入字段外，其它应该是一致的，如果有不同可能是定义的不对
+     */
+    async AddCompliancePolicyAssetSetToWhitelist(req, cb) {
+        return this.request("AddCompliancePolicyAssetSetToWhitelist", req, cb);
     }
     /**
      * 删除运行异常进程策略
@@ -1828,10 +1861,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeVirusScanTaskStatus", req, cb);
     }
     /**
-     * 查询漏洞风险统计概览
+     * 查询容器运行时安全事件趋势
      */
-    async DescribeVulSummary(req, cb) {
-        return this.request("DescribeVulSummary", req, cb);
+    async DescribeSecEventsTendency(req, cb) {
+        return this.request("DescribeSecEventsTendency", req, cb);
     }
     /**
      * 查询镜像详细信息
@@ -1846,10 +1879,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifySecLogDeliveryKafkaSetting", req, cb);
     }
     /**
-     * 查询容器运行时安全事件趋势
+     * 新增安全合规忽略(检测项+资产)列表，不显示指定的检查项包含的资产内容
      */
-    async DescribeSecEventsTendency(req, cb) {
-        return this.request("DescribeSecEventsTendency", req, cb);
+    async DeleteCompliancePolicyAssetSetFromWhitelist(req, cb) {
+        return this.request("DeleteCompliancePolicyAssetSetFromWhitelist", req, cb);
     }
     /**
      * 查询漏洞防御设置信息

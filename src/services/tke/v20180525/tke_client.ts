@@ -1658,7 +1658,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取2.0实例关联集群列表
+   * 获取TMP实例关联集群列表
    */
   async DescribePrometheusClusterAgents(
     req: DescribePrometheusClusterAgentsRequest,

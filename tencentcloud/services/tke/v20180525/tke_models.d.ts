@@ -2433,6 +2433,11 @@ export interface EdgeCluster {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ClusterAdvancedSettings?: EdgeClusterAdvancedSettings;
+    /**
+      * 边缘容器集群级别
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Level?: string;
 }
 /**
  * DescribeClusterNodePoolDetail返回参数结构体
@@ -8869,6 +8874,21 @@ abnormal = 异常
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ExternalLabels: Array<Label>;
+    /**
+      * 集群所在地域
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Region: string;
+    /**
+      * 集群所在VPC ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VpcId: string;
+    /**
+      * 记录关联等操作的失败信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FailedReason: string;
 }
 /**
  * app所支持的chart

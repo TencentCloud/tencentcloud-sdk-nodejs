@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeClustersRequest, DeleteNodesResponse, DeleteClusterResponse, CreateClusterRequest, CreateClusterResponse, BindAutoScalingGroupResponse, DeleteClusterRequest, AddNodesRequest, BindAutoScalingGroupRequest, DeleteNodesRequest, DescribeClustersResponse, AddNodesResponse } from "./thpc_models";
+import { DescribeClustersRequest, SetAutoScalingConfigurationRequest, DeleteNodesResponse, DeleteClusterResponse, SetAutoScalingConfigurationResponse, CreateClusterRequest, CreateClusterResponse, BindAutoScalingGroupResponse, DeleteClusterRequest, AddNodesRequest, BindAutoScalingGroupRequest, DeleteNodesRequest, DescribeClustersResponse, AddNodesResponse } from "./thpc_models";
 /**
  * thpc client
  * @class
@@ -19,6 +19,10 @@ export declare class Client extends AbstractClient {
      * 本接口 (CreateCluster) 用于创建并启动集群。
      */
     CreateCluster(req: CreateClusterRequest, cb?: (error: string, rep: CreateClusterResponse) => void): Promise<CreateClusterResponse>;
+    /**
+     * 本接口(SetAutoScalingConfiguration)用于为集群设置集群弹性伸缩配置信息。
+     */
+    SetAutoScalingConfiguration(req: SetAutoScalingConfigurationRequest, cb?: (error: string, rep: SetAutoScalingConfigurationResponse) => void): Promise<SetAutoScalingConfigurationResponse>;
     /**
      * 本接口(AddNodes)用于添加一个或者多个计算节点或者登录节点到指定集群。
      */

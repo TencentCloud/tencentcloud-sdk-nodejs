@@ -61,6 +61,7 @@ import {
   CLS,
   TracingConfig,
   IngressGateway,
+  EgressGatewayStatus,
   ExtensiveClusters,
   SelectedItems,
   ModifyMeshRequest,

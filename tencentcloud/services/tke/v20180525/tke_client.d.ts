@@ -468,7 +468,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeClusterSecurity(req: DescribeClusterSecurityRequest, cb?: (error: string, rep: DescribeClusterSecurityResponse) => void): Promise<DescribeClusterSecurityResponse>;
     /**
-     * 获取2.0实例关联集群列表
+     * 获取TMP实例关联集群列表
      */
     DescribePrometheusClusterAgents(req: DescribePrometheusClusterAgentsRequest, cb?: (error: string, rep: DescribePrometheusClusterAgentsResponse) => void): Promise<DescribePrometheusClusterAgentsResponse>;
     /**

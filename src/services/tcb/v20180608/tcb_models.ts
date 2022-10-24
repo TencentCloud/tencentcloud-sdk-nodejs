@@ -2110,6 +2110,13 @@ export interface CreateWxCloudBaseRunServerDBClusterRequest {
    * mysql内核版本，支持5.7,8.0
    */
   DbVersion?: string
+
+  /**
+      * 0: 非大小写敏感
+1: 大小写敏感
+默认 0
+      */
+  LowerCaseTableName?: string
 }
 
 /**

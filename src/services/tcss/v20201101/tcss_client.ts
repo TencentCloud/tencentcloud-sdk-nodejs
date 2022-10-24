@@ -50,7 +50,7 @@ import {
   DescribeAssetImageDetailRequest,
   VulIgnoreLocalImage,
   ModifyAssetImageScanStopResponse,
-  DescribeComplianceScanFailedAssetListResponse,
+  AddAssetImageRegistryRegistryDetailRequest,
   AddIgnoreVulResponse,
   DescribeNetworkFirewallClusterRefreshStatusRequest,
   DescribeAssetImageRegistryVirusListExportResponse,
@@ -160,16 +160,17 @@ import {
   DescribeAbnormalProcessRulesRequest,
   DescribeAssetImageRegistryListResponse,
   DescribeVirusAutoIsolateSampleDetailRequest,
-  DescribeESHitsRequest,
-  DescribeImageRiskSummaryRequest,
+  DescribeAssetImageVirusListResponse,
+  DeleteComplianceAssetPolicySetFromWhitelistResponse,
   DescribeSecLogJoinTypeListResponse,
   DescribeAssetSyncLastTimeResponse,
   CreateAssetImageScanSettingRequest,
   EscapeWhiteListInfo,
   CreateNetworkFirewallUndoPublishResponse,
   DescribeIndexListResponse,
+  ModifyVulDefenceSettingRequest,
   DescribeAssetSummaryResponse,
-  DescribeAccessControlRuleDetailResponse,
+  CreateNetworkFirewallClusterRefreshResponse,
   CreateComponentExportJobResponse,
   DescribeReverseShellWhiteListsResponse,
   DescribeVulContainerListRequest,
@@ -185,10 +186,12 @@ import {
   DescribeSecLogCleanSettingInfoResponse,
   UpdateNetworkFirewallPolicyYamlDetailResponse,
   DescribeAssetImageBindRuleInfoResponse,
-  DescribeAssetImageVirusListResponse,
+  DescribeESHitsRequest,
   DescribeTcssSummaryResponse,
+  DeleteRiskSyscallEventsRequest,
   DescribeAssetContainerListRequest,
   DescribeEscapeSafeStateResponse,
+  DescribeImageRiskSummaryRequest,
   CreateDefenceVulExportJobResponse,
   AbnormalProcessRuleInfo,
   ScanComplianceAssetsByPolicyItemResponse,
@@ -217,6 +220,7 @@ import {
   ModifyEscapeEventStatusRequest,
   ImagesBindRuleInfo,
   ImageHost,
+  AddComplianceAssetPolicySetToWhitelistResponse,
   DescribeUnauthorizedCoresTendencyResponse,
   DescribeNetworkFirewallPolicyStatusResponse,
   DescribeAssetContainerListResponse,
@@ -240,15 +244,17 @@ import {
   AddAndPublishNetworkFirewallPolicyDetailResponse,
   DescribeSearchExportListRequest,
   DescribeReverseShellWhiteListDetailRequest,
+  AddCompliancePolicyAssetSetToWhitelistResponse,
   DescribeVulContainerListResponse,
   ModifyVulDefenceEventStatusResponse,
   DescribeEscapeEventInfoResponse,
   DescribeESHitsResponse,
   DescribeImageRegistryTimingScanTaskResponse,
   ClusterInfoItem,
-  AddAssetImageRegistryRegistryDetailRequest,
+  DescribeComplianceScanFailedAssetListResponse,
   ModifyReverseShellStatusResponse,
   DeleteMachineResponse,
+  AddCompliancePolicyAssetSetToWhitelistRequest,
   DescribeEscapeWhiteListResponse,
   DescribeAssetImageHostListRequest,
   AbnormalProcessEventInfo,
@@ -288,7 +294,8 @@ import {
   DescribeRiskListRequest,
   VulDefenceHost,
   ModifyAccessControlStatusResponse,
-  ContainerNetwork,
+  DeleteReverseShellWhiteListsRequest,
+  DescribeEmergencyVulListResponse,
   DescribeAssetAppServiceListRequest,
   ModifyImageAuthorizedResponse,
   NetworkClusterInfoItem,
@@ -367,9 +374,9 @@ import {
   DescribeAbnormalProcessEventsResponse,
   InitializeUserComplianceEnvironmentResponse,
   ReverseShellEventDescription,
-  ImageVirusInfo,
+  DescribeImageRegistryNamespaceListResponse,
   VulAffectedImageInfo,
-  DescribeVirusSampleDownloadUrlRequest,
+  DeleteCompliancePolicyAssetSetFromWhitelistResponse,
   DescribeVirusTaskListResponse,
   DescribeAssetHostDetailResponse,
   CKafkaInstanceInfo,
@@ -395,7 +402,7 @@ import {
   DescribeVulDefenceEventDetailRequest,
   DescribeVirusAutoIsolateSampleListResponse,
   DescribeVirusEventTendencyRequest,
-  DescribeEmergencyVulListResponse,
+  DescribeContainerSecEventSummaryResponse,
   StopVirusScanTaskRequest,
   DescribeAssetContainerDetailRequest,
   ModifyAccessControlStatusRequest,
@@ -433,7 +440,7 @@ import {
   DescribeVulImageListResponse,
   DescribeSecLogDeliveryKafkaOptionsRequest,
   DescribeVirusScanSettingResponse,
-  CreateNetworkFirewallClusterRefreshResponse,
+  DescribeAccessControlRuleDetailResponse,
   CreateNetworkFirewallPublishRequest,
   CreateHostExportJobResponse,
   DescribeNetworkFirewallPolicyDiscoverRequest,
@@ -488,7 +495,7 @@ import {
   DescribeNetworkFirewallClusterListResponse,
   EscapeEventTendencyInfo,
   DescribeImageRiskTendencyResponse,
-  DescribeVirusAutoIsolateSampleDownloadURLRequest,
+  CompliancePolicyAssetSetItem,
   SyncAssetImageRegistryAssetRequest,
   DescribeComplianceScanFailedAssetListRequest,
   DescribeSearchLogsRequest,
@@ -553,13 +560,14 @@ import {
   ConfirmNetworkFirewallPolicyRequest,
   ContainerMount,
   DeleteSearchTemplateResponse,
+  AddComplianceAssetPolicySetToWhitelistRequest,
   DescribeVirusAutoIsolateSampleDownloadURLResponse,
   DescribeSecLogVasInfoRequest,
   DescribeNetworkFirewallPolicyDiscoverResponse,
   DescribeAssetImageSimpleListResponse,
   DescribeComplianceAssetPolicyItemListResponse,
   ComplianceFilters,
-  ModifyVulDefenceSettingRequest,
+  ImageVirusInfo,
   ModifyEscapeWhiteListResponse,
   NetworkClusterNamespaceLabelInfo,
   ImagesInfo,
@@ -573,10 +581,11 @@ import {
   CreateImageExportJobResponse,
   DescribeAffectedNodeListRequest,
   DescribeAssetImageRegistryAssetStatusResponse,
-  DeleteReverseShellWhiteListsRequest,
+  ContainerNetwork,
   DescribeSecLogDeliveryKafkaSettingResponse,
   CreateHostExportJobRequest,
   AddEditRiskSyscallWhiteListResponse,
+  DescribeVirusAutoIsolateSampleDownloadURLRequest,
   ModifyAbnormalProcessStatusRequest,
   DescribeVulDetailRequest,
   CreateEscapeWhiteListExportJobRequest,
@@ -594,7 +603,7 @@ import {
   ModifyContainerNetStatusResponse,
   DescribeEscapeEventDetailRequest,
   DescribeSupportDefenceVulRequest,
-  DeleteRiskSyscallEventsRequest,
+  DeleteCompliancePolicyAssetSetFromWhitelistRequest,
   DescribeVirusSummaryRequest,
   DescribeNetworkFirewallPolicyYamlDetailRequest,
   ModifySecLogJoinStateRequest,
@@ -620,6 +629,7 @@ import {
   AutoAuthorizedRuleHostInfo,
   CreateExportComplianceStatusListJobRequest,
   DescribeImageAutoAuthorizedTaskListRequest,
+  DescribeVirusSampleDownloadUrlRequest,
   AddAndPublishNetworkFirewallPolicyYamlDetailResponse,
   AddAndPublishNetworkFirewallPolicyDetailRequest,
   DescribeEscapeEventInfoRequest,
@@ -627,6 +637,7 @@ import {
   DescribeRiskSyscallEventsExportResponse,
   DescribeUnfinishRefreshTaskRequest,
   DescribeAssetImageRegistryRiskInfoListRequest,
+  DescribeImageRegistryNamespaceListRequest,
   DescribeAssetImageRegistryScanStatusOneKeyRequest,
   ModifyAccessControlRuleStatusRequest,
   DescribeVulScanAuthorizedImageSummaryRequest,
@@ -636,6 +647,7 @@ import {
   CkafkaRouteInfo,
   ComponentsInfo,
   DescribeImageAutoAuthorizedLogListResponse,
+  DeleteComplianceAssetPolicySetFromWhitelistRequest,
   DeleteRiskSyscallWhiteListsResponse,
   DescribeAssetImageVirusListRequest,
   DescribeAssetImageScanSettingResponse,
@@ -650,7 +662,6 @@ import {
   CreateSearchTemplateRequest,
   DescribeEscapeEventsExportRequest,
   AddEditAbnormalProcessRuleRequest,
-  DescribeAssetImageRegistryVulListExportResponse,
   CheckRepeatAssetImageRegistryRequest,
   AffectedNodeItem,
   CreateCheckComponentRequest,
@@ -662,6 +673,7 @@ import {
   DescribeVulIgnoreLocalImageListResponse,
   DescribeAssetImageRegistryDetailResponse,
   AddCompliancePolicyItemToWhitelistResponse,
+  ComplianceAssetPolicySetItem,
   DescribeAccessControlRulesRequest,
   StopVirusScanTaskResponse,
   DescribeVulDefenceEventTendencyResponse,
@@ -733,7 +745,7 @@ import {
   DescribeComplianceAssetPolicyItemListRequest,
   DescribeABTestConfigResponse,
   SearchTemplate,
-  DescribeContainerSecEventSummaryResponse,
+  DescribeAssetImageRegistryVulListExportResponse,
   ProcessDetailBaseInfo,
   DescribeAssetHostListRequest,
   CreateVulDefenceHostExportJobRequest,
@@ -1078,6 +1090,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询用户镜像仓库下的项目名称列表
+   */
+  async DescribeImageRegistryNamespaceList(
+    req: DescribeImageRegistryNamespaceListRequest,
+    cb?: (error: string, rep: DescribeImageRegistryNamespaceListResponse) => void
+  ): Promise<DescribeImageRegistryNamespaceListResponse> {
+    return this.request("DescribeImageRegistryNamespaceList", req, cb)
+  }
+
+  /**
    * 查询扫描忽略的漏洞列表
    */
   async DescribeScanIgnoreVulList(
@@ -1215,6 +1237,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ConfirmNetworkFirewallPolicyResponse) => void
   ): Promise<ConfirmNetworkFirewallPolicyResponse> {
     return this.request("ConfirmNetworkFirewallPolicy", req, cb)
+  }
+
+  /**
+     * 移除安全合规忽略(资产+检测项)列表，不显示指定的检查项包含的资产内容
+参考的AddCompliancePolicyAssetSetToWhitelist，除输入字段外，其它应该是一致的，如果有不同可能是定义的不对
+     */
+  async DeleteComplianceAssetPolicySetFromWhitelist(
+    req: DeleteComplianceAssetPolicySetFromWhitelistRequest,
+    cb?: (error: string, rep: DeleteComplianceAssetPolicySetFromWhitelistResponse) => void
+  ): Promise<DeleteComplianceAssetPolicySetFromWhitelistResponse> {
+    return this.request("DeleteComplianceAssetPolicySetFromWhitelist", req, cb)
   }
 
   /**
@@ -1748,6 +1781,17 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 新增安全合规忽略(资产+检测项列表)列表，不显示指定的检查项包含的资产内容
+参考的AddCompliancePolicyItemToWhitelist，除输入字段外，其它应该是一致的，如果有不同可能是定义的不对
+     */
+  async AddComplianceAssetPolicySetToWhitelist(
+    req: AddComplianceAssetPolicySetToWhitelistRequest,
+    cb?: (error: string, rep: AddComplianceAssetPolicySetToWhitelistResponse) => void
+  ): Promise<AddComplianceAssetPolicySetToWhitelistResponse> {
+    return this.request("AddComplianceAssetPolicySetToWhitelist", req, cb)
+  }
+
+  /**
    * 修改安全日志接入对象
    */
   async ModifySecLogJoinObjects(
@@ -2098,6 +2142,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询漏洞风险统计概览
+   */
+  async DescribeVulSummary(
+    req: DescribeVulSummaryRequest,
+    cb?: (error: string, rep: DescribeVulSummaryResponse) => void
+  ): Promise<DescribeVulSummaryResponse> {
+    return this.request("DescribeVulSummary", req, cb)
+  }
+
+  /**
    * 查询运行时文件查杀事件列表
    */
   async DescribeVirusList(
@@ -2255,6 +2309,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAffectedWorkloadListResponse) => void
   ): Promise<DescribeAffectedWorkloadListResponse> {
     return this.request("DescribeAffectedWorkloadList", req, cb)
+  }
+
+  /**
+     * 新增安全合规忽略(检测项+资产)列表，不显示指定的检查项包含的资产内容
+参考的AddCompliancePolicyItemToWhitelist，除输入字段外，其它应该是一致的，如果有不同可能是定义的不对
+     */
+  async AddCompliancePolicyAssetSetToWhitelist(
+    req: AddCompliancePolicyAssetSetToWhitelistRequest,
+    cb?: (error: string, rep: AddCompliancePolicyAssetSetToWhitelistResponse) => void
+  ): Promise<AddCompliancePolicyAssetSetToWhitelistResponse> {
+    return this.request("AddCompliancePolicyAssetSetToWhitelist", req, cb)
   }
 
   /**
@@ -3778,13 +3843,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询漏洞风险统计概览
+   * 查询容器运行时安全事件趋势
    */
-  async DescribeVulSummary(
-    req: DescribeVulSummaryRequest,
-    cb?: (error: string, rep: DescribeVulSummaryResponse) => void
-  ): Promise<DescribeVulSummaryResponse> {
-    return this.request("DescribeVulSummary", req, cb)
+  async DescribeSecEventsTendency(
+    req: DescribeSecEventsTendencyRequest,
+    cb?: (error: string, rep: DescribeSecEventsTendencyResponse) => void
+  ): Promise<DescribeSecEventsTendencyResponse> {
+    return this.request("DescribeSecEventsTendency", req, cb)
   }
 
   /**
@@ -3808,13 +3873,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询容器运行时安全事件趋势
+   * 新增安全合规忽略(检测项+资产)列表，不显示指定的检查项包含的资产内容
    */
-  async DescribeSecEventsTendency(
-    req: DescribeSecEventsTendencyRequest,
-    cb?: (error: string, rep: DescribeSecEventsTendencyResponse) => void
-  ): Promise<DescribeSecEventsTendencyResponse> {
-    return this.request("DescribeSecEventsTendency", req, cb)
+  async DeleteCompliancePolicyAssetSetFromWhitelist(
+    req: DeleteCompliancePolicyAssetSetFromWhitelistRequest,
+    cb?: (error: string, rep: DeleteCompliancePolicyAssetSetFromWhitelistResponse) => void
+  ): Promise<DeleteCompliancePolicyAssetSetFromWhitelistResponse> {
+    return this.request("DeleteCompliancePolicyAssetSetFromWhitelist", req, cb)
   }
 
   /**

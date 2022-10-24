@@ -20,12 +20,16 @@ import { ClientConfig } from "../../../common/interface"
 import {
   ClusterOverview,
   DescribeClustersRequest,
+  SetAutoScalingConfigurationRequest,
   LoginSettings,
   DeleteNodesResponse,
   DeleteClusterResponse,
-  InternetAccessible,
+  ExpansionNodeConfig,
+  QueueConfig,
+  LoginNodeOverview,
   CFSOption,
   LoginNode,
+  SetAutoScalingConfigurationResponse,
   CreateClusterRequest,
   Tag,
   CreateClusterResponse,
@@ -41,7 +45,7 @@ import {
   BindAutoScalingGroupRequest,
   VirtualPrivateCloud,
   StorageOption,
-  LoginNodeOverview,
+  InternetAccessible,
   ComputeNode,
   DeleteNodesRequest,
   DescribeClustersResponse,
@@ -87,6 +91,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateClusterResponse) => void
   ): Promise<CreateClusterResponse> {
     return this.request("CreateCluster", req, cb)
+  }
+
+  /**
+   * 本接口(SetAutoScalingConfiguration)用于为集群设置集群弹性伸缩配置信息。
+   */
+  async SetAutoScalingConfiguration(
+    req: SetAutoScalingConfigurationRequest,
+    cb?: (error: string, rep: SetAutoScalingConfigurationResponse) => void
+  ): Promise<SetAutoScalingConfigurationResponse> {
+    return this.request("SetAutoScalingConfiguration", req, cb)
   }
 
   /**

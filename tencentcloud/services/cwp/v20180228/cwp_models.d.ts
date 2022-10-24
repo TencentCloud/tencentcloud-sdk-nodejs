@@ -1676,17 +1676,21 @@ export interface ScanVulResponse {
  */
 export declare type DescribeOverviewStatisticsRequest = null;
 /**
- * 操作系统名称
+ * DeleteScanTask请求参数结构体
  */
-export interface OsName {
+export interface DeleteScanTaskRequest {
     /**
-      * 系统名称
+      * 任务Id
       */
-    Name: string;
+    TaskId: number;
     /**
-      * 操作系统类型枚举值
+      * 模块类型 当前提供 Malware 木马 , Vul 漏洞 , Baseline 基线
       */
-    MachineOSType: number;
+    ModuleType: string;
+    /**
+      * 自选服务器时生效，主机quuid的string数组
+      */
+    QuuidList?: Array<string>;
 }
 /**
  * DescribeTagMachines请求参数结构体
@@ -1732,6 +1736,24 @@ export interface DescribeLicenseListResponse {
       * 授权数列表信息
       */
     List: Array<LicenseDetail>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeJavaMemShellList返回参数结构体
+ */
+export interface DescribeJavaMemShellListResponse {
+    /**
+      * 事件列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    List: Array<JavaMemShellInfo>;
+    /**
+      * 总数
+      */
+    TotalCount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2585,13 +2607,17 @@ export interface DeleteReverseShellEventsRequest {
     Ids: Array<number>;
 }
 /**
- * DescribeBanRegions请求参数结构体
+ * DescribeSearchLogs返回参数结构体
  */
-export interface DescribeBanRegionsRequest {
+export interface DescribeSearchLogsResponse {
     /**
-      * 阻断模式，STANDARD_MODE：标准阻断，DEEP_MODE：深度阻断
+      * 历史搜索记录 保留最新的10条
       */
-    Mode: string;
+    Data: Array<string>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeMachineOsList返回参数结构体
@@ -2964,6 +2990,15 @@ export interface UsualPlace {
     CityId: number;
 }
 /**
+ * ModifyBaselinePolicy返回参数结构体
+ */
+export interface ModifyBaselinePolicyResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeReverseShellEvents请求参数结构体
  */
 export interface DescribeReverseShellEventsRequest {
@@ -3083,17 +3118,30 @@ export declare type DescribeAttackVulTypeListRequest = null;
  */
 export declare type DescribeLogStorageStatisticRequest = null;
 /**
- * DescribeAssetRecentMachineInfo请求参数结构体
+ * DeleteBaselinePolicy请求参数结构体
  */
-export interface DescribeAssetRecentMachineInfoRequest {
+export interface DeleteBaselinePolicyRequest {
     /**
-      * 开始时间，如：2020-09-22
+      * 策略Id
       */
-    BeginDate: string;
+    PolicyIds: Array<number>;
+}
+/**
+ * DescribeBaselinePolicyList返回参数结构体
+ */
+export interface DescribeBaselinePolicyListResponse {
     /**
-      * 结束时间，如：2020-09-22
+      * 无
       */
-    EndDate: string;
+    List: Array<BaselinePolicy>;
+    /**
+      * 总数
+      */
+    Total: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * CheckBashRuleParams返回参数结构体
@@ -3442,21 +3490,47 @@ export interface ModifyOrderAttributeRequest {
     AttrValue: string;
 }
 /**
- * 专家服务-月巡检报告
+ * java内存马事件信息
  */
-export interface MonthInspectionReport {
+export interface JavaMemShellInfo {
     /**
-      * 巡检报告名称
+      * 事件ID
       */
-    ReportName: string;
+    Id: number;
     /**
-      * 巡检报告下载地址
+      * 服务器名称
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    ReportPath: string;
+    Alias: string;
     /**
-      * 巡检报告更新时间
+      * 服务器IP
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    ModifyTime: string;
+    HostIp: string;
+    /**
+      * 内存马类型  0:Filter型 1:Listener型 2:Servlet型 3:Interceptors型 4:Agent型 5:其他
+      */
+    Type: number;
+    /**
+      * 说明
+      */
+    Description: string;
+    /**
+      * 首次发现时间
+      */
+    CreateTime: string;
+    /**
+      * 最近检测时间
+      */
+    RecentFoundTime: string;
+    /**
+      * 处理状态  0 -- 待处理 1 -- 已加白 2 -- 已删除 3 - 已忽略  4 - 已手动处理
+      */
+    Status: number;
+    /**
+      * 服务器quuid
+      */
+    Quuid: string;
 }
 /**
  * DescribeAssetSystemPackageList返回参数结构体
@@ -3673,6 +3747,15 @@ export interface DescribeBaselineRuleResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ShowRuleRemark: boolean;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * StopBaselineDetect返回参数结构体
+ */
+export interface StopBaselineDetectResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -5809,6 +5892,80 @@ export interface ProtectEventLists {
     FileType: number;
 }
 /**
+ * 基线策略信息
+ */
+export interface BaselinePolicy {
+    /**
+      * 策略名称,长度不超过128英文字符
+      */
+    PolicyName: string;
+    /**
+      * 检测间隔[1:1天|3:3天|5:5天|7:7天]
+      */
+    DetectInterval: number;
+    /**
+      * 检测时间
+      */
+    DetectTime: string;
+    /**
+      * 是否开启[0:未开启|1:开启]
+      */
+    IsEnabled: number;
+    /**
+      * 资产类型[0:所有专业版旗舰版|1:id|2:ip]
+      */
+    AssetType: number;
+    /**
+      * 策略Id
+      */
+    PolicyId?: number;
+    /**
+      * 关联基线项数目
+      */
+    RuleCount?: number;
+    /**
+      * 关联基线项数目
+      */
+    ItemCount?: number;
+    /**
+      * 关联基线主机数目
+      */
+    HostCount?: number;
+    /**
+      * 规则Id
+      */
+    RuleIds?: Array<number>;
+    /**
+      * 主机Id
+      */
+    HostIds?: Array<string>;
+    /**
+      * 主机Ip
+      */
+    HostIps?: Array<string>;
+    /**
+      * 是否是系统默认
+      */
+    IsDefault?: number;
+}
+/**
+ * DescribeJavaMemShellList请求参数结构体
+ */
+export interface DescribeJavaMemShellListRequest {
+    /**
+      * 过滤条件：Keywords: ip或者主机名模糊查询, Type，Status精确匹配，CreateBeginTime，CreateEndTime时间段
+      */
+    Filters?: Array<Filters>;
+    /**
+      * 偏移量，默认为0。
+      */
+    Offset?: number;
+    /**
+      * 需要返回的数量，默认为10，最大值为100
+      */
+    Limit?: number;
+}
+/**
  * SwitchBashRules请求参数结构体
  */
 export interface SwitchBashRulesRequest {
@@ -6335,6 +6492,23 @@ export interface DescribeAssetDatabaseInfoResponse {
     RequestId?: string;
 }
 /**
+ * 专家服务-月巡检报告
+ */
+export interface MonthInspectionReport {
+    /**
+      * 巡检报告名称
+      */
+    ReportName: string;
+    /**
+      * 巡检报告下载地址
+      */
+    ReportPath: string;
+    /**
+      * 巡检报告更新时间
+      */
+    ModifyTime: string;
+}
+/**
  * SetBashEventsStatus请求参数结构体
  */
 export interface SetBashEventsStatusRequest {
@@ -6601,6 +6775,15 @@ export interface DescribeMalwareFileResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * StopBaselineDetect请求参数结构体
+ */
+export interface StopBaselineDetectRequest {
+    /**
+      * 取消任务ID集合
+      */
+    TaskIds: Array<number>;
 }
 /**
  * 任务扫描状态列表
@@ -7002,6 +7185,19 @@ export interface ModifyBanStatusRequest {
     Status: number;
 }
 /**
+ * 操作系统名称
+ */
+export interface OsName {
+    /**
+      * 系统名称
+      */
+    Name: string;
+    /**
+      * 操作系统类型枚举值
+      */
+    MachineOSType: number;
+}
+/**
  * DescribeWebPageServiceInfo请求参数结构体
  */
 export declare type DescribeWebPageServiceInfoRequest = null;
@@ -7167,6 +7363,56 @@ export interface DescribeScanStateResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 基线主机检测
+ */
+export interface BaselineHostDetect {
+    /**
+      * 主机Id
+      */
+    HostId: string;
+    /**
+      * 内网Ip
+      */
+    HostIp: string;
+    /**
+      * 主机名称
+      */
+    HostName: string;
+    /**
+      * 外网Ip
+      */
+    WanIp: string;
+    /**
+      * 0:未通过 1:忽略 3:通过 5:检测中
+      */
+    DetectStatus: number;
+    /**
+      * 检测通过数
+      */
+    PassedItemCount: number;
+    /**
+      * 关联检测项数
+      */
+    ItemCount: number;
+    /**
+      * 检测未通过数
+      */
+    NotPassedItemCount: number;
+    /**
+      * 首次检测时间
+      */
+    FirstTime: string;
+    /**
+      * 最后检测时间
+      */
+    LastTime: string;
+    /**
+      * 主机安全UUID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Uuid: string;
 }
 /**
  * EditTags请求参数结构体
@@ -7373,6 +7619,19 @@ export interface ExportIgnoreRuleEffectHostListResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DescribeAssetRecentMachineInfo请求参数结构体
+ */
+export interface DescribeAssetRecentMachineInfoRequest {
+    /**
+      * 开始时间，如：2020-09-22
+      */
+    BeginDate: string;
+    /**
+      * 结束时间，如：2020-09-22
+      */
+    EndDate: string;
 }
 /**
  * DescribeAssetWebAppPluginList请求参数结构体
@@ -9060,6 +9319,15 @@ export interface AssetPlanTask {
     MachineWanIp: string;
 }
 /**
+ * DeleteBaselinePolicy返回参数结构体
+ */
+export interface DeleteBaselinePolicyResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 账号变更历史数据。
  */
 export interface HistoryAccount {
@@ -9762,6 +10030,31 @@ export interface DescribeMaliciousRequestWhiteListResponse {
     RequestId?: string;
 }
 /**
+ * DescribeBaselinePolicyList请求参数结构体
+ */
+export interface DescribeBaselinePolicyListRequest {
+    /**
+      * <li>PolicyName - String - 是否必填：否 - 策略名称</li>
+      */
+    Filters?: Array<Filter>;
+    /**
+      * 限制条数,默认10,最大100
+      */
+    Limit?: number;
+    /**
+      * 偏移量,默认0
+      */
+    Offset?: number;
+    /**
+      * 排序方式: [ASC:升序|DESC:降序]
+      */
+    Order?: string;
+    /**
+      * 可选排序列: [RuleCount|ItemCount|HostCount]
+      */
+    By?: string;
+}
+/**
  * DeleteBruteAttacks返回参数结构体
  */
 export interface DeleteBruteAttacksResponse {
@@ -10399,113 +10692,79 @@ export interface DescribeReverseShellEventsResponse {
     RequestId?: string;
 }
 /**
- * 密码破解列表实体
+ * DescribeSecurityEventsCnt返回参数结构体
  */
-export interface BruteAttackInfo {
+export interface DescribeSecurityEventsCntResponse {
     /**
-      * 唯一Id
+      * 木马文件相关风险事件
       */
-    Id: number;
+    Malware: SecurityEventInfo;
     /**
-      * 云镜客户端唯一标识UUID
+      * 登录审计相关风险事件
+      */
+    HostLogin: SecurityEventInfo;
+    /**
+      * 密码破解相关风险事件
+      */
+    BruteAttack: SecurityEventInfo;
+    /**
+      * 恶意请求相关风险事件
+      */
+    RiskDns: SecurityEventInfo;
+    /**
+      * 高危命令相关风险事件
+      */
+    Bash: SecurityEventInfo;
+    /**
+      * 本地提权相关风险事件
+      */
+    PrivilegeRules: SecurityEventInfo;
+    /**
+      * 反弹Shell相关风险事件
+      */
+    ReverseShell: SecurityEventInfo;
+    /**
+      * 应用漏洞风险事件
+      */
+    SysVul: SecurityEventInfo;
+    /**
+      * Web应用漏洞相关风险事件
+      */
+    WebVul: SecurityEventInfo;
+    /**
+      * 应急漏洞相关风险事件
+      */
+    EmergencyVul: SecurityEventInfo;
+    /**
+      * 安全基线相关风险事件
+      */
+    BaseLine: SecurityEventInfo;
+    /**
+      * 攻击检测相关风险事件
+      */
+    AttackLogs: SecurityEventInfo;
+    /**
+      * 受影响机器数
+      */
+    EffectMachineCount: number;
+    /**
+      * 所有事件总数
+      */
+    EventsCount: number;
+    /**
+      * window 系统漏洞事件总数
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Uuid: string;
+    WindowVul: SecurityEventInfo;
     /**
-      * 主机ip
+      * linux系统漏洞事件总数
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    MachineIp: string;
+    LinuxVul: SecurityEventInfo;
     /**
-      * 主机名
-注意：此字段可能返回 null，表示取不到有效值。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    MachineName: string;
-    /**
-      * 用户名
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    UserName: string;
-    /**
-      * 来源ip
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    SrcIp: string;
-    /**
-      * SUCCESS：破解成功；FAILED：破解失败
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Status: string;
-    /**
-      * 国家id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Country: number;
-    /**
-      * 城市id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    City: number;
-    /**
-      * 省份id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Province: number;
-    /**
-      * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    CreateTime: string;
-    /**
-      * 阻断状态：1-阻断成功；非1-阻断失败
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    BanStatus: number;
-    /**
-      * 事件类型：200-暴力破解事件，300-暴力破解成功事件（页面展示），400-暴力破解不存在的帐号事件
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    EventType: number;
-    /**
-      * 发生次数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Count: number;
-    /**
-      * 机器UUID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Quuid: string;
-    /**
-      * 是否为专业版（true/false）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    IsProVersion: boolean;
-    /**
-      * 被攻击的服务的用户名
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Protocol: string;
-    /**
-      * 端口
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Port: number;
-    /**
-      * 最近攻击时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ModifyTime: string;
-    /**
-      * 实例ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    InstanceId: string;
-    /**
-      * 0：待处理，1：忽略，5：已处理，6：加入白名单
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    DataStatus: number;
+    RequestId?: string;
 }
 /**
  * DescribeWebPageProtectStat返回参数结构体
@@ -11901,17 +12160,13 @@ export interface DescribeBaselineItemListResponse {
     RequestId?: string;
 }
 /**
- * DescribeSearchLogs返回参数结构体
+ * DescribeBanRegions请求参数结构体
  */
-export interface DescribeSearchLogsResponse {
+export interface DescribeBanRegionsRequest {
     /**
-      * 历史搜索记录 保留最新的10条
+      * 阻断模式，STANDARD_MODE：标准阻断，DEEP_MODE：深度阻断
       */
-    Data: Array<string>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    Mode: string;
 }
 /**
  * 安全事件统计列表
@@ -12017,6 +12272,15 @@ export interface BanWhiteListDetail {
       * 机器名称
       */
     MachineName: string;
+}
+/**
+ * DeleteScanTask返回参数结构体
+ */
+export interface DeleteScanTaskResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeMachineRegions返回参数结构体
@@ -12719,6 +12983,23 @@ export interface SecurityButlerInfo {
     RiskCount: number;
 }
 /**
+ * DescribeBaselineHostDetectList返回参数结构体
+ */
+export interface DescribeBaselineHostDetectListResponse {
+    /**
+      * 无
+      */
+    List: Array<BaselineHostDetect>;
+    /**
+      * 总数
+      */
+    Total: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeSaveOrUpdateWarnings请求参数结构体
  */
 export interface DescribeSaveOrUpdateWarningsRequest {
@@ -13234,79 +13515,113 @@ export interface DeleteMachineTagResponse {
     RequestId?: string;
 }
 /**
- * DescribeSecurityEventsCnt返回参数结构体
+ * 密码破解列表实体
  */
-export interface DescribeSecurityEventsCntResponse {
+export interface BruteAttackInfo {
     /**
-      * 木马文件相关风险事件
+      * 唯一Id
       */
-    Malware: SecurityEventInfo;
+    Id: number;
     /**
-      * 登录审计相关风险事件
-      */
-    HostLogin: SecurityEventInfo;
-    /**
-      * 密码破解相关风险事件
-      */
-    BruteAttack: SecurityEventInfo;
-    /**
-      * 恶意请求相关风险事件
-      */
-    RiskDns: SecurityEventInfo;
-    /**
-      * 高危命令相关风险事件
-      */
-    Bash: SecurityEventInfo;
-    /**
-      * 本地提权相关风险事件
-      */
-    PrivilegeRules: SecurityEventInfo;
-    /**
-      * 反弹Shell相关风险事件
-      */
-    ReverseShell: SecurityEventInfo;
-    /**
-      * 应用漏洞风险事件
-      */
-    SysVul: SecurityEventInfo;
-    /**
-      * Web应用漏洞相关风险事件
-      */
-    WebVul: SecurityEventInfo;
-    /**
-      * 应急漏洞相关风险事件
-      */
-    EmergencyVul: SecurityEventInfo;
-    /**
-      * 安全基线相关风险事件
-      */
-    BaseLine: SecurityEventInfo;
-    /**
-      * 攻击检测相关风险事件
-      */
-    AttackLogs: SecurityEventInfo;
-    /**
-      * 受影响机器数
-      */
-    EffectMachineCount: number;
-    /**
-      * 所有事件总数
-      */
-    EventsCount: number;
-    /**
-      * window 系统漏洞事件总数
+      * 云镜客户端唯一标识UUID
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    WindowVul: SecurityEventInfo;
+    Uuid: string;
     /**
-      * linux系统漏洞事件总数
+      * 主机ip
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    LinuxVul: SecurityEventInfo;
+    MachineIp: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 主机名
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    RequestId?: string;
+    MachineName: string;
+    /**
+      * 用户名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UserName: string;
+    /**
+      * 来源ip
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SrcIp: string;
+    /**
+      * SUCCESS：破解成功；FAILED：破解失败
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Status: string;
+    /**
+      * 国家id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Country: number;
+    /**
+      * 城市id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    City: number;
+    /**
+      * 省份id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Province: number;
+    /**
+      * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreateTime: string;
+    /**
+      * 阻断状态：1-阻断成功；非1-阻断失败
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BanStatus: number;
+    /**
+      * 事件类型：200-暴力破解事件，300-暴力破解成功事件（页面展示），400-暴力破解不存在的帐号事件
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EventType: number;
+    /**
+      * 发生次数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Count: number;
+    /**
+      * 机器UUID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Quuid: string;
+    /**
+      * 是否为专业版（true/false）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IsProVersion: boolean;
+    /**
+      * 被攻击的服务的用户名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Protocol: string;
+    /**
+      * 端口
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Port: number;
+    /**
+      * 最近攻击时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ModifyTime: string;
+    /**
+      * 实例ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InstanceId: string;
+    /**
+      * 0：待处理，1：忽略，5：已处理，6：加入白名单
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DataStatus: number;
 }
 /**
  * 告警设置列表
@@ -13597,6 +13912,58 @@ export interface DescribeAssetInitServiceListResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * ModifyBaselinePolicy请求参数结构体
+ */
+export interface ModifyBaselinePolicyRequest {
+    /**
+      * 无
+      */
+    Data: BaselinePolicy;
+    /**
+      * <li>RuleName - String - 是否必填：否 - 规则名称</li>
+<li>CategoryId - int64 - 是否必填：否 自定义筛选为-1 - 规则分类</li>
+<li>RuleType - int - 是否必填：否 0:系统 1:自定义 - 规则类型</li>
+      */
+    Filters?: Array<Filter>;
+    /**
+      * 是否按照过滤的全选
+      */
+    SelectAll?: number;
+}
+/**
+ * DescribeBaselineHostDetectList请求参数结构体
+ */
+export interface DescribeBaselineHostDetectListRequest {
+    /**
+      * <li>PolicyId - int64 - 是否必填：否 - 策略Id</li>
+<li>HostName - string - 是否必填：否 - 主机名称</i>
+<li>HostIp - string - 是否必填：否 - 主机Ip</i>
+<li>ItemId - int64 - 是否必填：否 - 项Id</i>
+<li>RuleId - int64 - 是否必填：否 - 规则Id</li>
+<li>DetectStatus - int - 是否必填：否 - 检测状态</li>
+<li>Level - int - 是否必填：否 - 风险等级</li>
+<li>StartTime - string - 是否必填：否 - 开时时间</li>
+<li>EndTime - string - 是否必填：否 - 结束时间</li>
+      */
+    Filters?: Array<Filter>;
+    /**
+      * 限制条数,默认10,最大100
+      */
+    Limit?: number;
+    /**
+      * 偏移量,默认0
+      */
+    Offset?: number;
+    /**
+      * 排序方式: [ASC:升序|DESC:降序]
+      */
+    Order?: string;
+    /**
+      * 可选排序列: [LastTime|ItemCount|PassedItemCount|NotPassedItemCount|FirstTime]
+      */
+    By?: string;
 }
 /**
  * DescribeAssetWebFrameList返回参数结构体

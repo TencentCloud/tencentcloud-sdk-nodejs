@@ -142,6 +142,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeServerRelatedDirInfo", req, cb);
     }
     /**
+     * 停止基线检测
+     */
+    async StopBaselineDetect(req, cb) {
+        return this.request("StopBaselineDetect", req, cb);
+    }
+    /**
      * 根据策略信息创建基线策略
      */
     async CreateBaselineStrategy(req, cb) {
@@ -200,6 +206,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeBaselineList(req, cb) {
         return this.request("DescribeBaselineList", req, cb);
+    }
+    /**
+     * DeleteScanTask 该接口可以对指定类型的扫描任务进行停止扫描;
+     */
+    async DeleteScanTask(req, cb) {
+        return this.request("DeleteScanTask", req, cb);
     }
     /**
      * 根据Ids删除高危命令事件
@@ -568,6 +580,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteMalwares", req, cb);
     }
     /**
+     * 用于异步导出数据量大的日志文件
+     */
+    async ExportTasks(req, cb) {
+        return this.request("ExportTasks", req, cb);
+    }
+    /**
      * 用于网页防篡改获取区域主机列表。
      */
     async DescribeMachineList(req, cb) {
@@ -700,6 +718,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBaselineStrategyDetail", req, cb);
     }
     /**
+     * 更改基线策略设置
+     */
+    async ModifyBaselinePolicy(req, cb) {
+        return this.request("ModifyBaselinePolicy", req, cb);
+    }
+    /**
      * 获取Web站点详情
      */
     async DescribeAssetWebLocationInfo(req, cb) {
@@ -710,6 +734,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async UntrustMalwares(req, cb) {
         return this.request("UntrustMalwares", req, cb);
+    }
+    /**
+     * 获取基线策略列表
+     */
+    async DescribeBaselinePolicyList(req, cb) {
+        return this.request("DescribeBaselinePolicyList", req, cb);
     }
     /**
      * 网页防篡改防护目录列表
@@ -752,6 +782,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeVulEffectHostList(req, cb) {
         return this.request("DescribeVulEffectHostList", req, cb);
+    }
+    /**
+     * 删除基线策略配置
+     */
+    async DeleteBaselinePolicy(req, cb) {
+        return this.request("DeleteBaselinePolicy", req, cb);
     }
     /**
      * DescribeScanTaskStatus 查询机器扫描状态列表用于过滤筛选
@@ -997,6 +1033,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SwitchBashRules", req, cb);
     }
     /**
+     * 查询可筛选操作系统列表.
+     */
+    async DescribeMachineOsList(req, cb) {
+        return this.request("DescribeMachineOsList", req, cb);
+    }
+    /**
      * 获取阻断白名单列表
      */
     async DescribeBanWhiteList(req, cb) {
@@ -1111,10 +1153,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBanRegions", req, cb);
     }
     /**
-     * 查询可筛选操作系统列表.
+     * 查询java内存马事件列表
      */
-    async DescribeMachineOsList(req, cb) {
-        return this.request("DescribeMachineOsList", req, cb);
+    async DescribeJavaMemShellList(req, cb) {
+        return this.request("DescribeJavaMemShellList", req, cb);
     }
     /**
      * 漏洞详情，带CVSS版本
@@ -1321,10 +1363,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeMachines", req, cb);
     }
     /**
-     * 用于异步导出数据量大的日志文件
+     * 获取基线检测主机列表
      */
-    async ExportTasks(req, cb) {
-        return this.request("ExportTasks", req, cb);
+    async DescribeBaselineHostDetectList(req, cb) {
+        return this.request("DescribeBaselineHostDetectList", req, cb);
     }
     /**
      * 查询资产管理Web服务列表

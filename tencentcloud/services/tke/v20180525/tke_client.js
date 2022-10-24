@@ -718,7 +718,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeClusterSecurity", req, cb);
     }
     /**
-     * 获取2.0实例关联集群列表
+     * 获取TMP实例关联集群列表
      */
     async DescribePrometheusClusterAgents(req, cb) {
         return this.request("DescribePrometheusClusterAgents", req, cb);

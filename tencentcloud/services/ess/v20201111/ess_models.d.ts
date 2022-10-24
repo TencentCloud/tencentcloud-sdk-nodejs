@@ -745,7 +745,7 @@ HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证(格式同居民身份证)
       */
     IsFullText?: boolean;
     /**
-      * 签署前置条件：阅读时长限制，默认为不需要
+      * 签署前置条件：阅读时长限制，单位秒，默认为不需要
       */
     PreReadTime?: number;
     /**

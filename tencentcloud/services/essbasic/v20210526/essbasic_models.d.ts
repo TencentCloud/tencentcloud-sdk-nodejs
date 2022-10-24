@@ -773,12 +773,12 @@ export interface ChannelVerifyPdfResponse {
  */
 export interface SignUrlInfo {
     /**
-      * 签署链接
+      * 签署链接，过期时间为30天
 注意：此字段可能返回 null，表示取不到有效值。
       */
     SignUrl: string;
     /**
-      * 链接失效时间,默认30分钟
+      * 合同过期时间
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Deadline: number;

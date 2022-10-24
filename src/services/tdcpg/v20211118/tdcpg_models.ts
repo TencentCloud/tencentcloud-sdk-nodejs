@@ -1349,6 +1349,19 @@ export interface CloneClusterToPointInTimeRequest {
    * 是否自动续费，0-不 1-是。默认为0，只有当PayMode为PREPAID时生效。
    */
   AutoRenewFlag?: number
+
+  /**
+      * 存储付费模式
+ - PREPAID：预付费，即包年包月
+ - POSTPAID_BY_HOUR：按小时后付费
+默认为POSTPAID_BY_HOUR，实例付费模式为按小时付费时，存储付费模式不支持包年包月
+      */
+  StoragePayMode?: string
+
+  /**
+   * 存储最大使用量，单位GB。取值参考文档【购买指南】。存储使用预付费模式时必须设置，存储使用按小时后付费时不可设置
+   */
+  Storage?: number
 }
 
 /**
