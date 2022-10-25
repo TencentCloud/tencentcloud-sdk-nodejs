@@ -533,6 +533,12 @@ export interface DescribeSREInstanceAccessAddressResponse {
   ConsoleInternetBandWidth: number
 
   /**
+      * 北极星限流server节点接入IP
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LimiterAddressInfos: Array<PolarisLimiterAddress>
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -607,6 +613,11 @@ export interface ServiceGovernanceInfo {
    * 服务治理pushgateway引擎绑定的网络信息
    */
   PgwVpcInfos?: Array<VpcInfo>
+
+  /**
+   * 服务治理限流server引擎绑定的网络信息
+   */
+  LimiterVpcInfos?: Array<VpcInfo>
 }
 
 /**
@@ -795,6 +806,17 @@ export interface EngineAdmin {
 }
 
 /**
+ * 查询Limiter的接入地址
+ */
+export interface PolarisLimiterAddress {
+  /**
+      * VPC接入IP列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IntranetAddress: string
+}
+
+/**
  * CreateEngine请求参数结构体
  */
 export interface CreateEngineRequest {
@@ -980,7 +1002,7 @@ export interface DescribeSREInstanceAccessAddressRequest {
   SubnetId?: string
 
   /**
-   * 引擎其他组件名称（pushgateway）
+   * 引擎其他组件名称（pushgateway、polaris-limiter）
    */
   Workload?: string
 

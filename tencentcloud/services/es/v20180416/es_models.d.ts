@@ -784,6 +784,11 @@ export interface NodeInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     MemSize?: number;
+    /**
+      * /
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DiskEnhance?: number;
 }
 /**
  * DescribeIndexMeta返回参数结构体
@@ -1683,6 +1688,10 @@ export interface CreateInstanceRequest {
       * 是否开启存算分离
       */
     EnableHybridStorage?: boolean;
+    /**
+      * 是否开启essd 增强型云盘
+      */
+    DiskEnhance?: number;
 }
 /**
  * CreateLogstashInstance请求参数结构体
@@ -1807,7 +1816,7 @@ export interface InstanceInfo {
       */
     SubnetUid: string;
     /**
-      * 实例状态，0:处理中,1:正常,-1停止,-2:销毁中,-3:已销毁
+      * 实例状态，0:处理中,1:正常,-1停止,-2:销毁中,-3:已销毁, 2:创建集群时初始化中
       */
     Status: number;
     /**
@@ -2138,6 +2147,16 @@ RENEW_FLAG_DEFAULT：不自动续费
 注意：此字段可能返回 null，表示取不到有效值。
       */
     EnableHybridStorage: boolean;
+    /**
+      * 流程进度
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProcessPercent: number;
+    /**
+      * Kibana的altering外网告警策略<li>OPEN：开启</li><li>CLOSE：关闭
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    KibanaAlteringPublicAccess: string;
 }
 /**
  * DeleteIndex返回参数结构体

@@ -162,7 +162,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AddEnterpriseSecurityGroupRules", req, cb);
     }
     /**
-     * 创建规则
+     * 创建访问控制规则
      */
     async CreateAcRules(req, cb) {
         return this.request("CreateAcRules", req, cb);

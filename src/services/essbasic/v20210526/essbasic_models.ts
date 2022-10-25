@@ -851,36 +851,63 @@ export interface UploadFile {
 }
 
 /**
- * 合作企业经办人列表信息
+ * 合同组中每个子合同的发起信息
  */
-export interface ProxyOrganizationOperator {
+export interface FlowFileInfo {
   /**
-   * 经办人ID（渠道颁发），最大长度64个字符
+   * 签署文件资源Id列表，目前仅支持单个文件
    */
-  Id: string
+  FileIds: Array<string>
 
   /**
-   * 经办人姓名，最大长度50个字符
+   * 签署流程名称，长度不超过200个字符
    */
-  Name?: string
+  FlowName: string
 
   /**
-      * 经办人身份证件类型
-1.ID_CARD 居民身份证
-2.HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证
-3.HONGKONG_AND_MACAO 港澳居民来往内地通行证
-      */
-  IdCardType?: string
+   * 签署流程签约方列表，最多不超过5个参与方
+   */
+  FlowApprovers: Array<FlowApproverInfo>
 
   /**
-   * 经办人证件号
+   * 签署流程截止时间，十位数时间戳，最大值为33162419560，即3020年
    */
-  IdCardNumber?: string
+  Deadline?: number
 
   /**
-   * 经办人手机号，大陆手机号输入11位，暂不支持海外手机号。
+   * 签署流程的描述，长度不超过1000个字符
    */
-  Mobile?: string
+  FlowDescription?: string
+
+  /**
+   * 签署流程的类型，长度不超过255个字符
+   */
+  FlowType?: string
+
+  /**
+   * 签署流程回调地址，长度不超过255个字符
+   */
+  CallbackUrl?: string
+
+  /**
+   * 渠道的业务信息，最大长度1000个字符。发起自动签署时，需设置对应自动签署场景，目前仅支持场景：处方单-E_PRESCRIPTION_AUTO_SIGN
+   */
+  CustomerData?: string
+
+  /**
+   * 合同签署顺序类型(无序签,顺序签)，默认为false，即有序签署
+   */
+  Unordered?: boolean
+
+  /**
+   * 合同显示的页卡模板，说明：只支持{合同名称}, {发起方企业}, {发起方姓名}, {签署方N企业}, {签署方N姓名}，且N不能超过签署人的数量，N从1开始
+   */
+  CustomShowMap?: string
+
+  /**
+   * 本企业(发起方企业)是否需要签署审批
+   */
+  NeedSignReview?: boolean
 }
 
 /**
@@ -1199,6 +1226,20 @@ export interface ChannelBatchCancelFlowsRequest {
   FlowIds: Array<string>
 
   /**
+   * 撤销理由
+   */
+  CancelMessage?: string
+
+  /**
+      * 撤销理由自定义格式；选项：
+0 默认格式
+1 只保留身份信息：展示为【发起方】
+2 保留身份信息+企业名称：展示为【发起方xxx公司】
+3 保留身份信息+企业名称+经办人名称：展示为【发起方xxxx公司-经办人姓名】
+      */
+  CancelMessageFormat?: number
+
+  /**
    * 操作人信息
    */
   Operator?: UserInfo
@@ -1433,6 +1474,39 @@ export interface DescribeUsageResponse {
 }
 
 /**
+ * 合作企业经办人列表信息
+ */
+export interface ProxyOrganizationOperator {
+  /**
+   * 经办人ID（渠道颁发），最大长度64个字符
+   */
+  Id: string
+
+  /**
+   * 经办人姓名，最大长度50个字符
+   */
+  Name?: string
+
+  /**
+      * 经办人身份证件类型
+1.ID_CARD 居民身份证
+2.HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证
+3.HONGKONG_AND_MACAO 港澳居民来往内地通行证
+      */
+  IdCardType?: string
+
+  /**
+   * 经办人证件号
+   */
+  IdCardNumber?: string
+
+  /**
+   * 经办人手机号，大陆手机号输入11位，暂不支持海外手机号。
+   */
+  Mobile?: string
+}
+
+/**
  * SyncProxyOrganizationOperators返回参数结构体
  */
 export interface SyncProxyOrganizationOperatorsResponse {
@@ -1492,6 +1566,27 @@ export interface ChannelVerifyPdfRequest {
 }
 
 /**
+ * DescribeResourceUrlsByFlows请求参数结构体
+ */
+export interface DescribeResourceUrlsByFlowsRequest {
+  /**
+      * 渠道应用相关信息。
+此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
+      */
+  Agent: Agent
+
+  /**
+   * 查询资源所对应的签署流程Id，最多支持50个
+   */
+  FlowIds?: Array<string>
+
+  /**
+   * 操作者的信息
+   */
+  Operator?: UserInfo
+}
+
+/**
  * 流程对应资源链接信息
  */
 export interface FlowResourceUrlInfo {
@@ -1509,63 +1604,37 @@ export interface FlowResourceUrlInfo {
 }
 
 /**
- * 合同组中每个子合同的发起信息
+ * ChannelCancelFlow请求参数结构体
  */
-export interface FlowFileInfo {
+export interface ChannelCancelFlowRequest {
   /**
-   * 签署文件资源Id列表，目前仅支持单个文件
+   * 签署流程编号
    */
-  FileIds: Array<string>
+  FlowId: string
 
   /**
-   * 签署流程名称，长度不超过200个字符
+   * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
    */
-  FlowName: string
+  Agent?: Agent
 
   /**
-   * 签署流程签约方列表，最多不超过5个参与方
+   * 撤回原因，最大不超过200字符
    */
-  FlowApprovers: Array<FlowApproverInfo>
+  CancelMessage?: string
 
   /**
-   * 签署流程截止时间，十位数时间戳，最大值为33162419560，即3020年
+   * 操作者的信息
    */
-  Deadline?: number
+  Operator?: UserInfo
 
   /**
-   * 签署流程的描述，长度不超过1000个字符
-   */
-  FlowDescription?: string
-
-  /**
-   * 签署流程的类型，长度不超过255个字符
-   */
-  FlowType?: string
-
-  /**
-   * 签署流程回调地址，长度不超过255个字符
-   */
-  CallbackUrl?: string
-
-  /**
-   * 渠道的业务信息，最大长度1000个字符。发起自动签署时，需设置对应自动签署场景，目前仅支持场景：处方单-E_PRESCRIPTION_AUTO_SIGN
-   */
-  CustomerData?: string
-
-  /**
-   * 合同签署顺序类型(无序签,顺序签)，默认为false，即有序签署
-   */
-  Unordered?: boolean
-
-  /**
-   * 合同显示的页卡模板，说明：只支持{合同名称}, {发起方企业}, {发起方姓名}, {签署方N企业}, {签署方N姓名}，且N不能超过签署人的数量，N从1开始
-   */
-  CustomShowMap?: string
-
-  /**
-   * 本企业(发起方企业)是否需要签署审批
-   */
-  NeedSignReview?: boolean
+      * 撤销理由自定义格式；选项：
+0 默认格式
+1 只保留身份信息：展示为【发起方】
+2 保留身份信息+企业名称：展示为【发起方xxx公司】
+3 保留身份信息+企业名称+经办人名称：展示为【发起方xxxx公司-经办人姓名】
+      */
+  CancelMessageFormat?: number
 }
 
 /**
@@ -1578,7 +1647,7 @@ export interface DescribeTemplatesRequest {
   Agent: Agent
 
   /**
-   * 模板唯一标识，查询单个模版时使用
+   * 模板唯一标识，查询单个模板时使用
    */
   TemplateId?: string
 
@@ -1903,24 +1972,13 @@ export interface ChannelCreateBatchCancelFlowUrlResponse {
 }
 
 /**
- * DescribeResourceUrlsByFlows请求参数结构体
+ * ChannelCancelFlow返回参数结构体
  */
-export interface DescribeResourceUrlsByFlowsRequest {
+export interface ChannelCancelFlowResponse {
   /**
-      * 渠道应用相关信息。
-此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
-      */
-  Agent: Agent
-
-  /**
-   * 查询资源所对应的签署流程Id，最多支持50个
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  FlowIds?: Array<string>
-
-  /**
-   * 操作者的信息
-   */
-  Operator?: UserInfo
+  RequestId?: string
 }
 
 /**

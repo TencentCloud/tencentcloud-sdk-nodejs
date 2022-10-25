@@ -98,7 +98,7 @@ export declare class Client extends AbstractClient {
      */
     AddEnterpriseSecurityGroupRules(req: AddEnterpriseSecurityGroupRulesRequest, cb?: (error: string, rep: AddEnterpriseSecurityGroupRulesResponse) => void): Promise<AddEnterpriseSecurityGroupRulesResponse>;
     /**
-     * 创建规则
+     * 创建访问控制规则
      */
     CreateAcRules(req: CreateAcRulesRequest, cb?: (error: string, rep: CreateAcRulesResponse) => void): Promise<CreateAcRulesResponse>;
     /**

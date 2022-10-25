@@ -3514,7 +3514,7 @@ export interface NodeHardwareInfo {
       */
     CurrentTime: string;
     /**
-      * 是否用于联邦
+      * 是否用于联邦 ,1是，0否
 注意：此字段可能返回 null，表示取不到有效值。
       */
     IsFederation: number;

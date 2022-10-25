@@ -161,6 +161,19 @@ export interface DestroyLogConfigResponse {
     RequestId?: string;
 }
 /**
+ * 查询过滤器
+ */
+export interface QueryFilter {
+    /**
+      * 查询字段名称
+      */
+    Name?: string;
+    /**
+      * 查询字段值
+      */
+    Value?: Array<string>;
+}
+/**
  * ResumeDeployApplication返回参数结构体
  */
 export interface ResumeDeployApplicationResponse {
@@ -278,6 +291,11 @@ export interface DeployServicePodDetail {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Webshell?: string;
+    /**
+      * 状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Status?: string;
 }
 /**
  * 日志输出配置
@@ -603,6 +621,10 @@ export interface DescribeEnvironmentsRequest {
       * 来源source
       */
     SourceChannel?: number;
+    /**
+      * 查询过滤器
+      */
+    Filters?: Array<QueryFilter>;
 }
 /**
  * LogConfig 列表结果
@@ -688,6 +710,36 @@ export interface ServiceVersionBrief {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     UnderDeploying: boolean;
+    /**
+      * 分批次部署状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BatchDeployStatus: string;
+    /**
+      * 可用区
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Zones: Array<string>;
+    /**
+      * 节点信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NodeInfos: Array<NodeInfo>;
+    /**
+      * 实例信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PodList: DescribeRunPodPage;
+    /**
+      * 工作负载信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    WorkloadInfo: WorkloadInfo;
+    /**
+      * 创建日期
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreateDate: string;
 }
 /**
  * CreateEnvironment请求参数结构体
@@ -721,6 +773,10 @@ export interface CreateEnvironmentRequest {
       * 是否开启tsw服务
       */
     EnableTswTraceService?: boolean;
+    /**
+      * 标签
+      */
+    Tags?: Array<Tag>;
 }
 /**
  * node信息
@@ -962,6 +1018,11 @@ export interface ServicePage {
       * 页数
       */
     Pages: number;
+    /**
+      * 当前条数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Current?: number;
 }
 /**
  * 版本信息
@@ -1314,6 +1375,71 @@ export interface TemServiceVersionInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     EnableMetrics?: number;
+    /**
+      * 用户AppId
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AppId?: string;
+    /**
+      * 用户SubAccountUin
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SubAccountUin?: string;
+    /**
+      * 用户Uin
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Uin?: string;
+    /**
+      * 地域
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Region?: string;
+    /**
+      * 应用分组ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    GroupId?: string;
+    /**
+      * 是否启用注册中心
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EnableRegistry?: number;
+    /**
+      * 弹性伸缩数组
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AutoscalerList?: Array<Autoscaler>;
+    /**
+      * 修改人
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Modifier?: string;
+    /**
+      * 创建人
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Creator?: string;
+    /**
+      * 部署策略
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DeployStrategyConf?: DeployStrategyConf;
+    /**
+      * 实例列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PodList?: DescribeRunPodPage;
+    /**
+      * 发布时配置是否有修改
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ConfEdited?: boolean;
+    /**
+      * 标签
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Tags?: Array<Tag>;
 }
 /**
  * 端口映射详细信息结构体
@@ -1726,6 +1852,36 @@ export interface RunVersionPod {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ContainerState: string;
+    /**
+      * 实例所在节点信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NodeInfo: NodeInfo;
+    /**
+      * 启动时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    StartTime: string;
+    /**
+      * 是否健康
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Unhealthy: boolean;
+    /**
+      * 不健康时的提示信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UnhealthyWarningMsg: string;
+    /**
+      * 版本ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VersionId: string;
+    /**
+      * 应用名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ApplicationName: string;
 }
 /**
  * CreateResource返回参数结构体
@@ -2285,6 +2441,11 @@ export interface TemService {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     EnableTracing: number;
+    /**
+      * 标签
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Tags: Array<Tag>;
 }
 /**
  * ingress rule 配置
@@ -3109,6 +3270,10 @@ export interface DescribeApplicationsRequest {
       * 搜索关键字
       */
     Keyword?: string;
+    /**
+      * 查询过滤器
+      */
+    Filters?: Array<QueryFilter>;
 }
 /**
  * DescribeApplicationInfo请求参数结构体
@@ -3188,6 +3353,10 @@ export interface CreateApplicationRequest {
       * 使用默认镜像服务额外参数
       */
     UseDefaultImageServiceParameters?: UseDefaultRepoParameters;
+    /**
+      * 标签
+      */
+    Tags?: Array<Tag>;
 }
 /**
  * 命名空间状态
@@ -3270,6 +3439,11 @@ export interface CreateApplicationServiceRequest {
  * ModifyApplicationReplicas返回参数结构体
  */
 export interface ModifyApplicationReplicasResponse {
+    /**
+      * 是否成功
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result: boolean;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3395,6 +3569,41 @@ export interface WorkloadInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ApplicationName: string;
+    /**
+      * 版本名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VersionName: string;
+    /**
+      * Ready实例数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ReadyReplicas: number;
+    /**
+      * 实例数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Replicas: number;
+    /**
+      * Updated实例数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UpdatedReplicas: number;
+    /**
+      * UpdatedReady实例数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UpdatedReadyReplicas: number;
+    /**
+      * 更新版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UpdateRevision: string;
+    /**
+      * 当前版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CurrentRevision: string;
 }
 /**
  * Ingress Rule Path 配置
@@ -3456,6 +3665,11 @@ export interface NamespaceInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Locked: number;
+    /**
+      * 标签
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Tags: Array<Tag>;
 }
 /**
  * DescribeLogConfig返回参数结构体

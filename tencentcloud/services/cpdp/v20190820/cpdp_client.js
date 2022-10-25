@@ -286,6 +286,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("QueryInvoice", req, cb);
     }
     /**
+     * 云企付-绑定分账收款方
+     */
+    async BindOpenBankProfitSharePayee(req, cb) {
+        return this.request("BindOpenBankProfitSharePayee", req, cb);
+    }
+    /**
      * 灵云V2-收款用户信息查询
      */
     async QueryFlexPayeeInfo(req, cb) {
@@ -1117,6 +1123,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async UploadOpenBankSubMerchantCredential(req, cb) {
         return this.request("UploadOpenBankSubMerchantCredential", req, cb);
+    }
+    /**
+     * 云企付-绑定分账收款方查询
+     */
+    async QueryOpenBankProfitSharePayee(req, cb) {
+        return this.request("QueryOpenBankProfitSharePayee", req, cb);
     }
     /**
      * 云支付-查询已添加分账接收方接口

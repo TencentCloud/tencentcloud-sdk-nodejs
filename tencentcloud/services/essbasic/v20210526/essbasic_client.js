@@ -75,6 +75,15 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeUsage", req, cb);
     }
     /**
+     * 渠道版撤销签署流程接口
+注意:
+能撤回合同的只能是合同的发起人或者发起企业的超管、法人
+
+     */
+    async ChannelCancelFlow(req, cb) {
+        return this.request("ChannelCancelFlow", req, cb);
+    }
+    /**
      * 接口（CreateFlowsByTemplates）用于使用多个模板批量创建签署流程。当前可批量发起合同（签署流程）数量最大为20个。
 合同发起人必须在电子签已经进行实名。
      */
@@ -187,7 +196,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeResourceUrlsByFlows", req, cb);
     }
     /**
-     * 通过此接口（DescribeTemplates）查询该子客企业在电子签拥有的的有效模板，不包括渠道模版
+     * 通过此接口（DescribeTemplates）查询该子客企业在电子签拥有的有效模板，不包括渠道模板
      */
     async DescribeTemplates(req, cb) {
         return this.request("DescribeTemplates", req, cb);

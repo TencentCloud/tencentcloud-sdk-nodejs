@@ -11288,7 +11288,12 @@ export interface DescribeVulImageListResponse {
 /**
  * DescribeSecLogDeliveryKafkaOptions请求参数结构体
  */
-export type DescribeSecLogDeliveryKafkaOptionsRequest = null
+export interface DescribeSecLogDeliveryKafkaOptionsRequest {
+  /**
+   * 地域，若为空则返回所有可选地域
+   */
+  RegionID?: string
+}
 
 /**
  * DescribeVirusScanSetting返回参数结构体
@@ -12461,13 +12466,13 @@ export interface VirusAutoIsolateSampleInfo {
 }
 
 /**
- * StopVulScanTask返回参数结构体
+ * DescribeExportJobDownloadURL请求参数结构体
  */
-export interface StopVulScanTaskResponse {
+export interface DescribeExportJobDownloadURLRequest {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 任务ID
    */
-  RequestId?: string
+  JobID: string
 }
 
 /**
@@ -13062,11 +13067,6 @@ export interface DescribeVulDefenceHostResponse {
  */
 export interface CreateImageExportJobRequest {
   /**
-   * 导出字段
-   */
-  ExportField: Array<string>
-
-  /**
       * 过滤条件。
 <li>ImageName- String - 是否必填：否 - 镜像名称筛选，</li>
 <li>ScanStatus - String - 是否必填：否 - 镜像扫描状态notScan，scanning，scanned，scanErr</li>
@@ -13094,6 +13094,11 @@ export interface CreateImageExportJobRequest {
    * 排序方式 asc,desc
    */
   Order?: string
+
+  /**
+   * 导出字段
+   */
+  ExportField?: Array<string>
 }
 
 /**
@@ -14490,6 +14495,12 @@ RESULT_FAILED: 未通过
    * 所属的合规标准的ID
    */
   BenchmarkStandardId: number
+
+  /**
+      * 检测项适用的版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ApplicableVersion: string
 }
 
 /**
@@ -15035,6 +15046,16 @@ export interface ImageVirusInfo {
 }
 
 /**
+ * StopVulScanTask返回参数结构体
+ */
+export interface StopVulScanTaskResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyEscapeWhiteList返回参数结构体
  */
 export interface ModifyEscapeWhiteListResponse {
@@ -15310,6 +15331,11 @@ export interface ModifySecLogDeliveryKafkaSettingRequest {
    * kafka版本号
    */
   KafkaVersion?: string
+
+  /**
+   * 地域ID
+   */
+  RegionID?: string
 }
 
 /**
@@ -15576,6 +15602,12 @@ export interface DescribeSecLogDeliveryKafkaSettingResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   User: string
+
+  /**
+      * 地域ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RegionID: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -16163,6 +16195,40 @@ export interface DeleteCompliancePolicyAssetSetFromWhitelistRequest {
    * （检查项ID+资产ID列表）的列表
    */
   PolicyAssetSetList: Array<CompliancePolicyAssetSetItem>
+}
+
+/**
+ * DescribeExportJobManageList请求参数结构体
+ */
+export interface DescribeExportJobManageListRequest {
+  /**
+      * 过滤条件。
+<li>ExportStatus- string -是否必填: 否 - 导出状态 RUNNING: 导出中 SUCCESS:导出完成 FAILURE:失败
+<li>ExportSource- string -是否必填: 否 - 导出来源 LocalImage: 本地镜像
+</li>
+      */
+  Filters?: Array<RunTimeFilters>
+
+  /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
+
+  /**
+   * 需要返回的数量，默认为10，最大值为100
+   */
+  Limit?: number
+
+  /**
+   * 排序方式
+   */
+  Order?: string
+
+  /**
+      * 排序字段
+InsertTime: 创建时间
+      */
+  By?: string
 }
 
 /**
@@ -16824,6 +16890,26 @@ export interface UpdateAndPublishNetworkFirewallPolicyYamlDetailResponse {
 }
 
 /**
+ * DescribeExportJobManageList返回参数结构体
+ */
+export interface DescribeExportJobManageListResponse {
+  /**
+   * 总数
+   */
+  TotalCount: number
+
+  /**
+   * 任务列表
+   */
+  List: Array<ExportJobInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeRiskSyscallEventsExport返回参数结构体
  */
 export interface DescribeRiskSyscallEventsExportResponse {
@@ -17275,6 +17361,51 @@ export interface DescribeAbnormalProcessEventsExportResponse {
 }
 
 /**
+ * 导出任务详情
+ */
+export interface ExportJobInfo {
+  /**
+   * 任务ID
+   */
+  JobID: string
+
+  /**
+   * 任务名称
+   */
+  JobName: string
+
+  /**
+   * 来源
+   */
+  Source: string
+
+  /**
+   * 导出状态
+   */
+  ExportStatus: string
+
+  /**
+   * 导出进度
+   */
+  ExportProgress: number
+
+  /**
+   * 失败原因
+   */
+  FailureMsg: string
+
+  /**
+   * 超时时间
+   */
+  Timeout: string
+
+  /**
+   * 插入时间
+   */
+  InsertTime: string
+}
+
+/**
  * DescribeContainerAssetSummary返回参数结构体
  */
 export interface DescribeContainerAssetSummaryResponse {
@@ -17573,6 +17704,21 @@ export interface SwitchImageAutoAuthorizedRuleRequest {
  * DescribeImageAuthorizedInfo请求参数结构体
  */
 export type DescribeImageAuthorizedInfoRequest = null
+
+/**
+ * DescribeExportJobDownloadURL返回参数结构体
+ */
+export interface DescribeExportJobDownloadURLResponse {
+  /**
+   * 下载链接
+   */
+  DownloadURL: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
 
 /**
  * DescribeAssetImageRegistryRiskInfoList返回参数结构体
@@ -20744,6 +20890,16 @@ export interface FileAttributeInfo {
    * 最近被篡改文件创建时间
    */
   LatestTamperedFileMTime: string
+
+  /**
+   * 新文件内容
+   */
+  NewFile: string
+
+  /**
+   * 新旧文件的差异
+   */
+  FileDiff: string
 }
 
 /**
@@ -21167,6 +21323,11 @@ export interface DescribeSecLogDeliveryKafkaOptionsResponse {
    * 实例列表
    */
   InstanceList: Array<CKafkaInstanceInfo>
+
+  /**
+   * 地域列表
+   */
+  RegionList: Array<RegionInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

@@ -28,27 +28,27 @@ export interface DescribeRuleOverviewResponse {
       * 规则总数
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    AllTotal?: number;
+    AllTotal: number;
     /**
       * 阻断策略规则数量
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    StrategyNum?: number;
+    StrategyNum: number;
     /**
       * 启用规则数量
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    StartRuleNum?: number;
+    StartRuleNum: number;
     /**
       * 停用规则数量
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    StopRuleNum?: number;
+    StopRuleNum: number;
     /**
       * 剩余配额
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    RemainingNum?: number;
+    RemainingNum: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -138,12 +138,12 @@ export interface ModifyAcRuleResponse {
     /**
       * 状态值，0:操作成功，非0：操作失败
       */
-    Status?: number;
+    Status: number;
     /**
       * 返回多余的信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Info?: string;
+    Info: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -157,7 +157,7 @@ export interface DescribeTableStatusResponse {
       * 0：正常，其它：不正常
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Status?: number;
+    Status: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -574,12 +574,12 @@ export interface DescribeAssociatedInstanceListResponse {
       * 实例数量
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Total?: number;
+    Total: number;
     /**
       * 实例列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Data?: Array<AssociatedInstanceInfo>;
+    Data: Array<AssociatedInstanceInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2038,7 +2038,7 @@ export interface ModifySequenceRulesResponse {
       * 0: 修改成功, 非0: 修改失败
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Status?: number;
+    Status: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3136,25 +3136,25 @@ export interface DescribeSwitchListsResponse {
     /**
       * 总条数
       */
-    Total?: number;
+    Total: number;
     /**
       * 列表数据
       */
-    Data?: Array<SwitchListsData>;
+    Data: Array<SwitchListsData>;
     /**
       * 区域列表
       */
-    AreaLists?: Array<string>;
+    AreaLists: Array<string>;
     /**
       * 打开个数
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    OnNum?: number;
+    OnNum: number;
     /**
       * 关闭个数
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    OffNum?: number;
+    OffNum: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3245,12 +3245,12 @@ export interface CreateAcRulesResponse {
     /**
       * 状态值，0:操作成功
       */
-    Status?: number;
+    Status: number;
     /**
       * 返回多余的信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Info?: string;
+    Info: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3458,7 +3458,7 @@ export interface ModifyTableStatusResponse {
       * 0：正常，-1：不正常
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Status?: number;
+    Status: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

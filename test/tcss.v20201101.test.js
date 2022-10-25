@@ -1368,9 +1368,9 @@ it("tcss.v20201101.CreateImageExportJob", async function () {
     }
 })
 
-it("tcss.v20201101.DescribeVulSummary", async function () {
+it("tcss.v20201101.DescribeSecLogDeliveryClsSetting", async function () {
     try {
-       const data = await client.DescribeVulSummary({})
+       const data = await client.DescribeSecLogDeliveryClsSetting({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1561,6 +1561,16 @@ it("tcss.v20201101.DeleteAbnormalProcessRules", async function () {
 it("tcss.v20201101.DescribeVulDetail", async function () {
     try {
        const data = await client.DescribeVulDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcss.v20201101.DescribeExportJobManageList", async function () {
+    try {
+       const data = await client.DescribeExportJobManageList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2578,9 +2588,9 @@ it("tcss.v20201101.ModifySecLogCleanSettingInfo", async function () {
     }
 })
 
-it("tcss.v20201101.DescribeSecLogDeliveryClsSetting", async function () {
+it("tcss.v20201101.DescribeExportJobDownloadURL", async function () {
     try {
-       const data = await client.DescribeSecLogDeliveryClsSetting({})
+       const data = await client.DescribeExportJobDownloadURL({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2611,6 +2621,16 @@ it("tcss.v20201101.DescribeRiskList", async function () {
 it("tcss.v20201101.DescribeEscapeEventInfo", async function () {
     try {
        const data = await client.DescribeEscapeEventInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcss.v20201101.DescribeVulSummary", async function () {
+    try {
+       const data = await client.DescribeVulSummary({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

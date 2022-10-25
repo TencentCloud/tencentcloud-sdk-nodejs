@@ -3763,6 +3763,11 @@ export interface ServerCertInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     SignAlgo?: string;
+    /**
+      * 证书归属域名名称。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CommonName?: string;
 }
 /**
  * DescribeZones请求参数结构体
@@ -3778,7 +3783,7 @@ export interface DescribeZonesRequest {
     Limit?: number;
     /**
       * 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：
-<li>zone-name<br>   按照【<strong>站点名称</strong>】进行过滤。<br>   类型：String<br>   必选：否</li><li>zone-id<br>   按照【<strong>站点ID</strong>】进行过滤。站点ID形如：zone-xxx。<br>   类型：String<br>   必选：否</li><li>status<br>   按照【<strong>站点状态</strong>】进行过滤。<br>   类型：String<br>   必选：否</li><li>tag-key<br>   按照【<strong>标签键</strong>】进行过滤。<br>   类型：String<br>   必选：否</li><li>tag-value<br>   按照【<strong>标签值</strong>】进行过滤。<br>   类型：String<br>   必选：否</li><li>Fuzzy<br>   按照【<strong>是否模糊查询</strong>】进行过滤。仅支持过滤字段名为zone-name。模糊查询时，Values长度最小为1。<br>   类型：Boolean<br>   必选：否<br>   默认值：false</li>
+<li>zone-name<br>   按照【<strong>站点名称</strong>】进行过滤。<br>   类型：String<br>   必选：否</li><li>zone-id<br>   按照【<strong>站点ID</strong>】进行过滤。站点ID形如：zone-xxx。<br>   类型：String<br>   必选：否</li><li>status<br>   按照【<strong>站点状态</strong>】进行过滤。<br>   类型：String<br>   必选：否</li><li>tag-key<br>   按照【<strong>标签键</strong>】进行过滤。<br>   类型：String<br>   必选：否</li><li>tag-value<br>   按照【<strong>标签值</strong>】进行过滤。<br>   类型：String<br>   必选：否</li>模糊查询时仅支持过滤字段名为zone-name。
       */
     Filters?: Array<AdvancedFilter>;
 }
@@ -5297,12 +5302,12 @@ export interface DescribeAliasDomainsRequest {
       */
     Offset?: number;
     /**
-      * 分页查询限制数目。默认值：20，最大值：100。
+      * 分页查询限制数目。默认值：20，最大值：1000。
       */
     Limit?: number;
     /**
       * 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：
-<li>target-name<br>   按照【<strong>目标域名名称</strong>】进行过滤。<br>   类型：String<br>   必选：否</li><li>alias-id<br>   按照【<strong>别称域名ID</strong>】进行过滤。<br>   类型：String<br>   必选：否</li><li>alias-name<br>   按照【<strong>别称域名名称</strong>】进行过滤。<br>   类型：String<br>   必选：否</li><li>Fuzzy<br>   按照【<strong>是否模糊查询</strong>】进行过滤。仅支持过滤字段名为alias-name。模糊查询时，Values长度最小为1。<br>   类型：Boolean<br>   必选：否<br>   默认值：false</li>
+<li>target-name<br>   按照【<strong>目标域名名称</strong>】进行过滤。<br>   类型：String<br>   必选：否</li><li>alias-id<br>   按照【<strong>别称域名ID</strong>】进行过滤。<br>   类型：String<br>   必选：否</li><li>alias-name<br>   按照【<strong>别称域名名称</strong>】进行过滤。<br>   类型：String<br>   必选：否</li>模糊查询时仅支持过滤字段名为alias-name。
       */
     Filters?: Array<AdvancedFilter>;
 }
@@ -8109,6 +8114,13 @@ export interface Https {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     CertInfo?: Array<ServerCertInfo>;
+    /**
+      * 申请类型，取值有：
+<li>apply：托管EdgeOne；</li>
+<li>none：不托管EdgeOne。</li>不填，默认取值为none。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ApplyType?: string;
 }
 /**
  * DescribeBotManagedRules返回参数结构体
@@ -8541,13 +8553,23 @@ export interface AliasDomain {
     /**
       * 别称域名状态，取值有：
 <li> active：已生效； </li>
-<li> pending：未生效；</li>
-<li> not_filed：未备案；</li>
+<li> pending：部署中；</li>
 <li> conflict：被找回。 </li>
 <li> stop：已停用；</li>
 <li> deleted：已删除。 </li>
       */
     Status: string;
+    /**
+      * 封禁模式，取值有：
+<li> 0：未封禁； </li>
+<li> 11：合规封禁；</li>
+<li> 14：未备案封禁。</li>
+      */
+    ForbidMode: number;
+    /**
+      * 目标域名是否被封禁。
+      */
+    TargetForbid: boolean;
     /**
       * 别称域名创建时间。
       */

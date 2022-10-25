@@ -830,6 +830,7 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
     }
     /**
      * 创建临时拉流转推任务，目前限制添加10条任务。
+该接口已下线,请使用新接口 CreateLivePullStreamTask。
 
 注意：该接口用于创建临时拉流转推任务，
 拉流源地址即 FromUrl 可以是腾讯或非腾讯数据源，

@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ChannelCreateConvertTaskApiResponse, OperateChannelTemplateRequest, ChannelDescribeEmployeesRequest, SyncProxyOrganizationResponse, ChannelBatchCancelFlowsResponse, GetDownloadFlowUrlResponse, DescribeTemplatesResponse, DescribeResourceUrlsByFlowsResponse, ChannelCreateMultiFlowSignQRCodeResponse, OperateChannelTemplateResponse, CreateSignUrlsResponse, CreateSignUrlsRequest, ChannelCreateMultiFlowSignQRCodeRequest, DescribeFlowDetailInfoRequest, ChannelGetTaskResultApiResponse, ChannelGetTaskResultApiRequest, ChannelVerifyPdfResponse, GetDownloadFlowUrlRequest, ChannelBatchCancelFlowsRequest, CreateConsoleLoginUrlRequest, CreateFlowsByTemplatesResponse, ChannelCreateFlowSignReviewRequest, DescribeUsageResponse, SyncProxyOrganizationOperatorsResponse, CreateSealByImageResponse, ChannelVerifyPdfRequest, DescribeTemplatesRequest, SyncProxyOrganizationOperatorsRequest, CreateConsoleLoginUrlResponse, CreateFlowsByTemplatesRequest, SyncProxyOrganizationRequest, CreateSealByImageRequest, ChannelCreateFlowGroupByFilesResponse, PrepareFlowsRequest, ChannelCreateBatchCancelFlowUrlResponse, DescribeResourceUrlsByFlowsRequest, ChannelCancelMultiFlowSignQRCodeRequest, PrepareFlowsResponse, ChannelDescribeEmployeesResponse, DescribeUsageRequest, ChannelCreateBatchCancelFlowUrlRequest, ChannelCreateFlowByFilesRequest, ChannelCreateFlowByFilesResponse, UploadFilesResponse, ChannelCreateFlowSignReviewResponse, ChannelCreateConvertTaskApiRequest, ChannelCreateFlowGroupByFilesRequest, UploadFilesRequest, ChannelCancelMultiFlowSignQRCodeResponse, DescribeFlowDetailInfoResponse } from "./essbasic_models";
+import { ChannelCreateConvertTaskApiResponse, OperateChannelTemplateRequest, ChannelDescribeEmployeesRequest, SyncProxyOrganizationResponse, ChannelBatchCancelFlowsResponse, GetDownloadFlowUrlResponse, DescribeTemplatesResponse, DescribeResourceUrlsByFlowsResponse, ChannelCreateMultiFlowSignQRCodeResponse, OperateChannelTemplateResponse, CreateSignUrlsResponse, CreateSignUrlsRequest, ChannelCreateMultiFlowSignQRCodeRequest, DescribeFlowDetailInfoRequest, ChannelGetTaskResultApiResponse, ChannelGetTaskResultApiRequest, ChannelVerifyPdfResponse, GetDownloadFlowUrlRequest, ChannelBatchCancelFlowsRequest, CreateConsoleLoginUrlRequest, CreateFlowsByTemplatesResponse, ChannelCreateFlowSignReviewRequest, DescribeUsageResponse, SyncProxyOrganizationOperatorsResponse, CreateSealByImageResponse, ChannelVerifyPdfRequest, DescribeResourceUrlsByFlowsRequest, ChannelCancelFlowRequest, DescribeTemplatesRequest, SyncProxyOrganizationOperatorsRequest, CreateConsoleLoginUrlResponse, CreateFlowsByTemplatesRequest, SyncProxyOrganizationRequest, CreateSealByImageRequest, ChannelCreateFlowGroupByFilesResponse, PrepareFlowsRequest, ChannelCreateBatchCancelFlowUrlResponse, ChannelCancelFlowResponse, ChannelCancelMultiFlowSignQRCodeRequest, PrepareFlowsResponse, ChannelDescribeEmployeesResponse, DescribeUsageRequest, ChannelCreateBatchCancelFlowUrlRequest, ChannelCreateFlowByFilesRequest, ChannelCreateFlowByFilesResponse, UploadFilesResponse, ChannelCreateFlowSignReviewResponse, ChannelCreateConvertTaskApiRequest, ChannelCreateFlowGroupByFilesRequest, UploadFilesRequest, ChannelCancelMultiFlowSignQRCodeResponse, DescribeFlowDetailInfoResponse } from "./essbasic_models";
 /**
  * essbasic client
  * @class
@@ -40,6 +40,13 @@ export declare class Client extends AbstractClient {
  注: 此接口每日限频2次，若要扩大限制次数,请提前与客服经理或邮件至e-contract@tencent.com进行联系。
      */
     DescribeUsage(req: DescribeUsageRequest, cb?: (error: string, rep: DescribeUsageResponse) => void): Promise<DescribeUsageResponse>;
+    /**
+     * 渠道版撤销签署流程接口
+注意:
+能撤回合同的只能是合同的发起人或者发起企业的超管、法人
+
+     */
+    ChannelCancelFlow(req: ChannelCancelFlowRequest, cb?: (error: string, rep: ChannelCancelFlowResponse) => void): Promise<ChannelCancelFlowResponse>;
     /**
      * 接口（CreateFlowsByTemplates）用于使用多个模板批量创建签署流程。当前可批量发起合同（签署流程）数量最大为20个。
 合同发起人必须在电子签已经进行实名。
@@ -127,7 +134,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeResourceUrlsByFlows(req: DescribeResourceUrlsByFlowsRequest, cb?: (error: string, rep: DescribeResourceUrlsByFlowsResponse) => void): Promise<DescribeResourceUrlsByFlowsResponse>;
     /**
-     * 通过此接口（DescribeTemplates）查询该子客企业在电子签拥有的的有效模板，不包括渠道模版
+     * 通过此接口（DescribeTemplates）查询该子客企业在电子签拥有的有效模板，不包括渠道模板
      */
     DescribeTemplates(req: DescribeTemplatesRequest, cb?: (error: string, rep: DescribeTemplatesResponse) => void): Promise<DescribeTemplatesResponse>;
     /**

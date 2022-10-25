@@ -400,6 +400,12 @@ export interface BindProductInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   DevStatus: string
+
+  /**
+      * 产品拥有者名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProductOwnerName: string
 }
 
 /**
@@ -3237,6 +3243,11 @@ export interface DescribeBindedProductsRequest {
    * 分页大小
    */
   Limit: number
+
+  /**
+   * 是否跨账号绑定产品
+   */
+  ProductSource?: number
 }
 
 /**
@@ -3726,6 +3737,18 @@ export interface DescribeDeviceBindGatewayResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   GatewayName: string
+
+  /**
+      * 设备对应产品所属的主账号名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  GatewayProductOwnerName: string
+
+  /**
+      * 设备对应产品所属的主账号 UIN
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  GatewayProductOwnerUin: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4270,6 +4293,11 @@ export interface DescribeGatewaySubProductsRequest {
    * 项目Id
    */
   ProjectId?: string
+
+  /**
+   * 是否跨账号产品
+   */
+  ProductSource?: number
 }
 
 /**

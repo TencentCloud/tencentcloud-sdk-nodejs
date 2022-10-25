@@ -5335,6 +5335,16 @@ export interface KafkaParam {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     UseTableMapping?: boolean;
+    /**
+      * 使用的Topic是否需要自动创建（目前只支持SOURCE流入任务，如果不使用分发到多个topic，需要在Topic字段填写需要自动创建的topic名）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UseAutoCreateTopic?: boolean;
+    /**
+      * 写入Topic时是否进行压缩，不开启填"none"，开启的话，可选择"gzip", "snappy", "lz4"中的一个进行填写。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CompressionType?: string;
 }
 /**
  * 数据处理——Value处理参数——正则替换参数
@@ -5717,7 +5727,7 @@ export interface PostgreSQLParam {
       */
     Database: string;
     /**
-      * PostgreSQL的数据表名称，"*"为所监听的所有数据库中的非系统表，可以","间隔，监听多个数据表，但数据表需要以"数据库名.数据表名"的格式进行填写
+      * PostgreSQL的数据表名称，"*"为所监听的所有数据库中的非系统表，可以","间隔，监听多个数据表，但数据表需要以"Schema名.数据表名"的格式进行填写，需要填入正则表达式时，格式为"Schema名\\.数据表名"
       */
     Table: string;
     /**
@@ -6122,6 +6132,16 @@ export interface TopicParam {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     TopicId?: string;
+    /**
+      * 写入Topic时是否进行压缩，不开启填"none"，开启的话，可选择"gzip", "snappy", "lz4"中的一个进行填写。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CompressionType?: string;
+    /**
+      * 使用的Topic是否需要自动创建（目前只支持SOURCE流入任务）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UseAutoCreateTopic?: boolean;
 }
 /**
  * ModifyTopicAttributes请求参数结构体
@@ -6430,7 +6450,7 @@ export interface MySQLParam {
       */
     Database: string;
     /**
-      * MySQL的数据表名称，"*"为所监听的所有数据库中的非系统表，可以","间隔，监听多个数据表，但数据表需要以"数据库名.数据表名"的格式进行填写
+      * MySQL的数据表名称，"*"为所监听的所有数据库中的非系统表，可以","间隔，监听多个数据表，但数据表需要以"数据库名.数据表名"的格式进行填写，需要填入正则表达式时，格式为"数据库名\\.数据表名"
       */
     Table: string;
     /**
@@ -6521,6 +6541,10 @@ export interface MySQLParam {
       * 存放信令表的数据库名称
       */
     SignalDatabase?: string;
+    /**
+      * 输入的table是否为正则表达式，如果该选项以及IsTablePrefix同时为true，该选项的判断优先级高于IsTablePrefix
+      */
+    IsTableRegular?: boolean;
 }
 /**
  * DescribeTopicSyncReplica请求参数结构体

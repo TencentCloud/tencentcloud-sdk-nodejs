@@ -46,6 +46,7 @@ import {
   DescribeZookeeperReplicasResponse,
   VpcInfo,
   EngineAdmin,
+  PolarisLimiterAddress,
   CreateEngineRequest,
   DescribeInstanceRegionInfo,
   DescribeSREInstanceAccessAddressRequest,

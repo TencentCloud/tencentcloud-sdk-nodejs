@@ -840,10 +840,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateImageExportJob", req, cb);
     }
     /**
-     * 查询漏洞风险统计概览
+     * 查询安全日志投递Cls配置
      */
-    async DescribeVulSummary(req, cb) {
-        return this.request("DescribeVulSummary", req, cb);
+    async DescribeSecLogDeliveryClsSetting(req, cb) {
+        return this.request("DescribeSecLogDeliveryClsSetting", req, cb);
     }
     /**
      * 查询运行时文件查杀事件列表
@@ -959,6 +959,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeVulDetail(req, cb) {
         return this.request("DescribeVulDetail", req, cb);
+    }
+    /**
+     * 查询导出任务管理列表
+     */
+    async DescribeExportJobManageList(req, cb) {
+        return this.request("DescribeExportJobManageList", req, cb);
     }
     /**
      * 创建漏洞扫描任务
@@ -1567,10 +1573,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifySecLogCleanSettingInfo", req, cb);
     }
     /**
-     * 查询安全日志投递Cls配置
+     * 查询导出任务下载URL
      */
-    async DescribeSecLogDeliveryClsSetting(req, cb) {
-        return this.request("DescribeSecLogDeliveryClsSetting", req, cb);
+    async DescribeExportJobDownloadURL(req, cb) {
+        return this.request("DescribeExportJobDownloadURL", req, cb);
     }
     /**
      * 镜像仓库查询镜像漏洞列表
@@ -1589,6 +1595,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeEscapeEventInfo(req, cb) {
         return this.request("DescribeEscapeEventInfo", req, cb);
+    }
+    /**
+     * 查询漏洞风险统计概览
+     */
+    async DescribeVulSummary(req, cb) {
+        return this.request("DescribeVulSummary", req, cb);
     }
     /**
      * 查询自动授权规则授权范围主机信息

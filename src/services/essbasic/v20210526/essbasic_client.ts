@@ -42,7 +42,7 @@ import {
   DescribeFlowDetailInfoRequest,
   ChannelGetTaskResultApiResponse,
   UploadFile,
-  ProxyOrganizationOperator,
+  FlowFileInfo,
   ChannelGetTaskResultApiRequest,
   ChannelVerifyPdfResponse,
   SignUrlInfo,
@@ -56,11 +56,13 @@ import {
   CreateFlowsByTemplatesResponse,
   ChannelCreateFlowSignReviewRequest,
   DescribeUsageResponse,
+  ProxyOrganizationOperator,
   SyncProxyOrganizationOperatorsResponse,
   CreateSealByImageResponse,
   ChannelVerifyPdfRequest,
+  DescribeResourceUrlsByFlowsRequest,
   FlowResourceUrlInfo,
-  FlowFileInfo,
+  ChannelCancelFlowRequest,
   DescribeTemplatesRequest,
   SyncProxyOrganizationOperatorsRequest,
   CreateConsoleLoginUrlResponse,
@@ -74,7 +76,7 @@ import {
   PrepareFlowsRequest,
   UsageDetail,
   ChannelCreateBatchCancelFlowUrlResponse,
-  DescribeResourceUrlsByFlowsRequest,
+  ChannelCancelFlowResponse,
   DownloadFlowInfo,
   ChannelCancelMultiFlowSignQRCodeRequest,
   PrepareFlowsResponse,
@@ -183,6 +185,19 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeUsageResponse) => void
   ): Promise<DescribeUsageResponse> {
     return this.request("DescribeUsage", req, cb)
+  }
+
+  /**
+     * 渠道版撤销签署流程接口
+注意:
+能撤回合同的只能是合同的发起人或者发起企业的超管、法人
+
+     */
+  async ChannelCancelFlow(
+    req: ChannelCancelFlowRequest,
+    cb?: (error: string, rep: ChannelCancelFlowResponse) => void
+  ): Promise<ChannelCancelFlowResponse> {
+    return this.request("ChannelCancelFlow", req, cb)
   }
 
   /**
@@ -350,7 +365,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 通过此接口（DescribeTemplates）查询该子客企业在电子签拥有的的有效模板，不包括渠道模版
+   * 通过此接口（DescribeTemplates）查询该子客企业在电子签拥有的有效模板，不包括渠道模板
    */
   async DescribeTemplates(
     req: DescribeTemplatesRequest,

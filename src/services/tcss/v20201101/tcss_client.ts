@@ -476,7 +476,7 @@ import {
   DescribeAssetImageVirusListExportResponse,
   SecTendencyEventInfo,
   VirusAutoIsolateSampleInfo,
-  StopVulScanTaskResponse,
+  DescribeExportJobDownloadURLRequest,
   DescribeImageAutoAuthorizedRuleRequest,
   DescribeVulIgnoreRegistryImageListResponse,
   UpdateAndPublishNetworkFirewallPolicyDetailRequest,
@@ -568,6 +568,7 @@ import {
   DescribeComplianceAssetPolicyItemListResponse,
   ComplianceFilters,
   ImageVirusInfo,
+  StopVulScanTaskResponse,
   ModifyEscapeWhiteListResponse,
   NetworkClusterNamespaceLabelInfo,
   ImagesInfo,
@@ -604,6 +605,7 @@ import {
   DescribeEscapeEventDetailRequest,
   DescribeSupportDefenceVulRequest,
   DeleteCompliancePolicyAssetSetFromWhitelistRequest,
+  DescribeExportJobManageListRequest,
   DescribeVirusSummaryRequest,
   DescribeNetworkFirewallPolicyYamlDetailRequest,
   ModifySecLogJoinStateRequest,
@@ -634,6 +636,7 @@ import {
   AddAndPublishNetworkFirewallPolicyDetailRequest,
   DescribeEscapeEventInfoRequest,
   UpdateAndPublishNetworkFirewallPolicyYamlDetailResponse,
+  DescribeExportJobManageListResponse,
   DescribeRiskSyscallEventsExportResponse,
   DescribeUnfinishRefreshTaskRequest,
   DescribeAssetImageRegistryRiskInfoListRequest,
@@ -657,6 +660,7 @@ import {
   DescribeAccessControlRulesExportResponse,
   ModifyAbnormalProcessStatusResponse,
   DescribeAbnormalProcessEventsExportResponse,
+  ExportJobInfo,
   DescribeContainerAssetSummaryResponse,
   CreateAssetImageScanTaskRequest,
   CreateSearchTemplateRequest,
@@ -669,6 +673,7 @@ import {
   DeleteRiskSyscallWhiteListsRequest,
   SwitchImageAutoAuthorizedRuleRequest,
   DescribeImageAuthorizedInfoRequest,
+  DescribeExportJobDownloadURLResponse,
   DescribeAssetImageRegistryRiskInfoListResponse,
   DescribeVulIgnoreLocalImageListResponse,
   DescribeAssetImageRegistryDetailResponse,
@@ -1213,7 +1218,7 @@ export class Client extends AbstractClient {
    * 查询安全日志投递kafka可选项
    */
   async DescribeSecLogDeliveryKafkaOptions(
-    req?: DescribeSecLogDeliveryKafkaOptionsRequest,
+    req: DescribeSecLogDeliveryKafkaOptionsRequest,
     cb?: (error: string, rep: DescribeSecLogDeliveryKafkaOptionsResponse) => void
   ): Promise<DescribeSecLogDeliveryKafkaOptionsResponse> {
     return this.request("DescribeSecLogDeliveryKafkaOptions", req, cb)
@@ -2142,13 +2147,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询漏洞风险统计概览
+   * 查询安全日志投递Cls配置
    */
-  async DescribeVulSummary(
-    req: DescribeVulSummaryRequest,
-    cb?: (error: string, rep: DescribeVulSummaryResponse) => void
-  ): Promise<DescribeVulSummaryResponse> {
-    return this.request("DescribeVulSummary", req, cb)
+  async DescribeSecLogDeliveryClsSetting(
+    req?: DescribeSecLogDeliveryClsSettingRequest,
+    cb?: (error: string, rep: DescribeSecLogDeliveryClsSettingResponse) => void
+  ): Promise<DescribeSecLogDeliveryClsSettingResponse> {
+    return this.request("DescribeSecLogDeliveryClsSetting", req, cb)
   }
 
   /**
@@ -2340,6 +2345,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeVulDetailResponse) => void
   ): Promise<DescribeVulDetailResponse> {
     return this.request("DescribeVulDetail", req, cb)
+  }
+
+  /**
+   * 查询导出任务管理列表
+   */
+  async DescribeExportJobManageList(
+    req: DescribeExportJobManageListRequest,
+    cb?: (error: string, rep: DescribeExportJobManageListResponse) => void
+  ): Promise<DescribeExportJobManageListResponse> {
+    return this.request("DescribeExportJobManageList", req, cb)
   }
 
   /**
@@ -3353,13 +3368,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询安全日志投递Cls配置
+   * 查询导出任务下载URL
    */
-  async DescribeSecLogDeliveryClsSetting(
-    req?: DescribeSecLogDeliveryClsSettingRequest,
-    cb?: (error: string, rep: DescribeSecLogDeliveryClsSettingResponse) => void
-  ): Promise<DescribeSecLogDeliveryClsSettingResponse> {
-    return this.request("DescribeSecLogDeliveryClsSetting", req, cb)
+  async DescribeExportJobDownloadURL(
+    req: DescribeExportJobDownloadURLRequest,
+    cb?: (error: string, rep: DescribeExportJobDownloadURLResponse) => void
+  ): Promise<DescribeExportJobDownloadURLResponse> {
+    return this.request("DescribeExportJobDownloadURL", req, cb)
   }
 
   /**
@@ -3390,6 +3405,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeEscapeEventInfoResponse) => void
   ): Promise<DescribeEscapeEventInfoResponse> {
     return this.request("DescribeEscapeEventInfo", req, cb)
+  }
+
+  /**
+   * 查询漏洞风险统计概览
+   */
+  async DescribeVulSummary(
+    req: DescribeVulSummaryRequest,
+    cb?: (error: string, rep: DescribeVulSummaryResponse) => void
+  ): Promise<DescribeVulSummaryResponse> {
+    return this.request("DescribeVulSummary", req, cb)
   }
 
   /**

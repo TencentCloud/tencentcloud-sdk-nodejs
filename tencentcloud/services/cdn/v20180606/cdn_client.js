@@ -249,7 +249,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateScdnLogTask", req, cb);
     }
     /**
-     * DescribeImageConfig 用于获取域名图片优化的当前配置，支持Webp、TPG 和 Guetzli。
+     * DescribeImageConfig 用于获取域名图片优化的当前配置，支持Webp、TPG、 Guetzli 和 Avif。
      */
     async DescribeImageConfig(req, cb) {
         return this.request("DescribeImageConfig", req, cb);
@@ -413,7 +413,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateScdnDomain", req, cb);
     }
     /**
-     * UpdateImageConfig 用于更新控制台图片优化的相关配置，支持Webp、TPG 和 Guetzli。
+     * UpdateImageConfig 用于更新控制台图片优化的相关配置，支持Webp、TPG、 Guetzli 和 Avif。
      */
     async UpdateImageConfig(req, cb) {
         return this.request("UpdateImageConfig", req, cb);

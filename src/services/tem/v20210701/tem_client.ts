@@ -26,6 +26,7 @@ import {
   DeleteApplicationServiceRequest,
   RestartApplicationPodRequest,
   DestroyLogConfigResponse,
+  QueryFilter,
   ResumeDeployApplicationResponse,
   StorageConf,
   DescribeApplicationPodsRequest,

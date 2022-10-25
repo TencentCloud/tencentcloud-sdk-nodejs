@@ -448,6 +448,16 @@ it("cpdp.v20190820.QueryInvoice", async function () {
     }
 })
 
+it("cpdp.v20190820.BindOpenBankProfitSharePayee", async function () {
+    try {
+       const data = await client.BindOpenBankProfitSharePayee({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cpdp.v20190820.QueryFlexPayeeInfo", async function () {
     try {
        const data = await client.QueryFlexPayeeInfo({})
@@ -1811,6 +1821,16 @@ it("cpdp.v20190820.QueryMemberTransaction", async function () {
 it("cpdp.v20190820.UploadOpenBankSubMerchantCredential", async function () {
     try {
        const data = await client.UploadOpenBankSubMerchantCredential({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cpdp.v20190820.QueryOpenBankProfitSharePayee", async function () {
+    try {
+       const data = await client.QueryOpenBankProfitSharePayee({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

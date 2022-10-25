@@ -406,7 +406,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建规则
+   * 创建访问控制规则
    */
   async CreateAcRules(
     req: CreateAcRulesRequest,

@@ -23,7 +23,7 @@ import {
   QueryCompanyTitleResponse,
   ReviseMbrPropertyResponse,
   ApplyPayerInfoResponse,
-  RevokeRechargeByThirdPayRequest,
+  QueryOpenBankProfitSharePayeeResult,
   UnifiedOrderResponse,
   ApplyOpenBankSettleOrderResponse,
   CreatePayRollTokenResponse,
@@ -67,6 +67,7 @@ import {
   AddMerchantResult,
   CloudExternalUserInfo,
   QueryOpenBankExternalSubMerchantRegistrationRequest,
+  RevokeRechargeByThirdPayRequest,
   QueryMerchantInfoForManagementResponse,
   CreateTransferBatchResponse,
   BindAccountRequest,
@@ -124,6 +125,7 @@ import {
   QueryMemberTransactionDetailsResponse,
   ApplyFlexPaymentResult,
   FundsTransactionItem,
+  BindOpenBankProfitSharePayeeRequest,
   AddMerchantResponse,
   QueryFlexSettlementOrderListRequest,
   RefundCloudOrderRequest,
@@ -173,6 +175,7 @@ import {
   QueryFlexPayeeAccountBalanceRequest,
   ContractOrderRequest,
   QueryContractPayFeeResponse,
+  BindOpenBankProfitSharePayeeResponse,
   BindRelateAcctSmallAmountResponse,
   PayeeAccountBalanceResult,
   OpenBankStoreInfo,
@@ -180,6 +183,7 @@ import {
   FreezeOrderResult,
   PayeeTaxInfo,
   QueryTransferDetailResponse,
+  OldSubRefund,
   QueryTransferBatchResponse,
   QueryDeclareData,
   QueryContractPayFeeRequest,
@@ -363,7 +367,9 @@ import {
   DistributeAccreditResult,
   ViewShopResponse,
   ApplyTradeRequest,
+  QueryOpenBankProfitSharePayeeResponse,
   QueryExchangeRateResponse,
+  OldAttachmentInfo,
   QuerySmallAmountTransferRequest,
   SupportBankInfo,
   ModifyMntMbrBindRelateAcctBankCodeRequest,
@@ -442,6 +448,7 @@ import {
   QueryReconciliationFileApplyInfoResult,
   ApplyReconciliationFileResult,
   QueryOpenBankExternalSubMerchantBankAccountResponse,
+  OpenBankProfitSharePayeeInfo,
   CreateRedInvoiceV2Request,
   ApplyOpenBankOrderDetailReceiptResponse,
   QueryMerchantClassificationRequest,
@@ -455,6 +462,7 @@ import {
   OrderItem,
   PayeeAccountInfos,
   RefundMemberTransactionRequest,
+  BindOpenBankProfitSharePayeeResult,
   CreateCloudSubMerchantResponse,
   QueryFundsTransactionDetailsRequest,
   QueryOpenBankRefundOrderResponse,
@@ -523,6 +531,7 @@ import {
   QueryFlexPaymentOrderListResponse,
   CloudStoreInfo,
   ContractOrderResponse,
+  OldChannelExternalUserInfo,
   QueryInvoiceResponse,
   UploadTaxPaymentRequest,
   QueryFlexPayeeAccountListRequest,
@@ -533,6 +542,7 @@ import {
   QueryMemberTransactionDetailsResult,
   CreateMerchantResult,
   RefundResponse,
+  QueryOpenBankProfitSharePayeeRequest,
   CreateTransferBatchRequest,
   QueryOpenBankVerificationResult,
   WithdrawItem,
@@ -1109,6 +1119,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: QueryInvoiceResponse) => void
   ): Promise<QueryInvoiceResponse> {
     return this.request("QueryInvoice", req, cb)
+  }
+
+  /**
+   * 云企付-绑定分账收款方
+   */
+  async BindOpenBankProfitSharePayee(
+    req: BindOpenBankProfitSharePayeeRequest,
+    cb?: (error: string, rep: BindOpenBankProfitSharePayeeResponse) => void
+  ): Promise<BindOpenBankProfitSharePayeeResponse> {
+    return this.request("BindOpenBankProfitSharePayee", req, cb)
   }
 
   /**
@@ -2490,6 +2510,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UploadOpenBankSubMerchantCredentialResponse) => void
   ): Promise<UploadOpenBankSubMerchantCredentialResponse> {
     return this.request("UploadOpenBankSubMerchantCredential", req, cb)
+  }
+
+  /**
+   * 云企付-绑定分账收款方查询
+   */
+  async QueryOpenBankProfitSharePayee(
+    req: QueryOpenBankProfitSharePayeeRequest,
+    cb?: (error: string, rep: QueryOpenBankProfitSharePayeeResponse) => void
+  ): Promise<QueryOpenBankProfitSharePayeeResponse> {
+    return this.request("QueryOpenBankProfitSharePayee", req, cb)
   }
 
   /**

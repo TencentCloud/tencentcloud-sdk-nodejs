@@ -95,8 +95,9 @@ DefenceMode映射如下：
  */
 export interface DescribeCdnDomainLogsResponse {
   /**
-   * 日志包下载链接
-   */
+      * 日志包下载链接。
+下载内容是gz后缀的压缩包，解压后是无扩展名的文本文件。
+      */
   DomainLogs: Array<DomainLog>
 
   /**
@@ -175,6 +176,12 @@ export interface ImageOptimization {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   GuetzliAdapter: GuetzliAdapter
+
+  /**
+      * AvifAdapter配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AvifAdapter: AvifAdapter
 }
 
 /**
@@ -216,8 +223,8 @@ global：同时获取境内、境外加速日志包下载链接（分开打包�
   Area?: string
 
   /**
-      * 指定下载日志的类型。
-access：获取访问日志
+      * 指定下载日志的类型，目前仅支持访问日志（access）。
+access：访问日志
       */
   LogType?: string
 }
@@ -2280,6 +2287,12 @@ off：关闭
 注意：此字段可能返回 null，表示取不到有效值。
       */
   MaxAgeRules?: Array<MaxAgeRule>
+
+  /**
+      * MaxAge 状态码相关规则
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MaxAgeCodeRule?: MaxAgeCodeRule
 }
 
 /**
@@ -2784,29 +2797,14 @@ export interface DescribePurgeQuotaResponse {
 }
 
 /**
- * DescribeTrafficPackages请求参数结构体
+ * 图片优化-AvifAdapter配置
  */
-export interface DescribeTrafficPackagesRequest {
+export interface AvifAdapter {
   /**
-   * 分页查询起始地址，默认 0
-   */
-  Offset?: number
-
-  /**
-   * 分页查询记录个数，默认100，最大1000
-   */
-  Limit?: number
-
-  /**
-      * 流量包排序方式，支持以下值：
-expireTimeDesc：默认值，按过期时间倒序
-expireTimeAsc：按过期时间正序
-createTimeDesc：按创建时间倒序
-createTimeAsc：按创建时间正序
-status：按状态排序，正常抵扣>未生效>已用尽>已过期
-channel：按来源排序，主动购买>自动续订>CDN赠送
+      * 开关，"on/off"
+注意：此字段可能返回 null，表示取不到有效值。
       */
-  SortBy?: string
+  Switch?: string
 }
 
 /**
@@ -4633,6 +4631,11 @@ export interface UpdateImageConfigRequest {
    * GuetzliAdapter配置项
    */
   GuetzliAdapter?: GuetzliAdapter
+
+  /**
+   * AvifAdapter配置项
+   */
+  AvifAdapter?: AvifAdapter
 }
 
 /**
@@ -5316,6 +5319,12 @@ export interface DescribeImageConfigResponse {
   GuetzliAdapter: GuetzliAdapter
 
   /**
+      * AvifAdapter配置项
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AvifAdapter: AvifAdapter
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -5514,6 +5523,22 @@ export interface CreateClsLogTopicResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * MaxAge 状态码相关规则配置
+ */
+export interface MaxAgeCodeRule {
+  /**
+      * 处理动作
+clear：清除 cache-control 头部
+      */
+  Action: string
+
+  /**
+   * 指定HTTP状态码生效，当前仅支持填写"400-599"
+   */
+  StatusCodes: Array<string>
 }
 
 /**
@@ -6096,6 +6121,32 @@ export interface Ipv6 {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Switch: string
+}
+
+/**
+ * DescribeTrafficPackages请求参数结构体
+ */
+export interface DescribeTrafficPackagesRequest {
+  /**
+   * 分页查询起始地址，默认 0
+   */
+  Offset?: number
+
+  /**
+   * 分页查询记录个数，默认100，最大1000
+   */
+  Limit?: number
+
+  /**
+      * 流量包排序方式，支持以下值：
+expireTimeDesc：默认值，按过期时间倒序
+expireTimeAsc：按过期时间正序
+createTimeDesc：按创建时间倒序
+createTimeAsc：按创建时间正序
+status：按状态排序，正常抵扣>未生效>已用尽>已过期
+channel：按来源排序，主动购买>自动续订>CDN赠送
+      */
+  SortBy?: string
 }
 
 /**

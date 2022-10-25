@@ -108,7 +108,7 @@ import {
   ReportData,
   AdvanceHttps,
   DescribePurgeQuotaResponse,
-  DescribeTrafficPackagesRequest,
+  AvifAdapter,
   RemoteAuthenticationRule,
   PurgePathCacheResponse,
   DescribeTopDataRequest,
@@ -201,6 +201,7 @@ import {
   DescribePushQuotaResponse,
   Authentication,
   CreateClsLogTopicResponse,
+  MaxAgeCodeRule,
   ScdnAclRule,
   DomainFilter,
   DescribePurgeQuotaRequest,
@@ -221,6 +222,7 @@ import {
   DescribeReportDataResponse,
   ListClsTopicDomainsResponse,
   Ipv6,
+  DescribeTrafficPackagesRequest,
   ManageClsTopicDomainsResponse,
   OverseaConfig,
   AdvancedCache,
@@ -730,7 +732,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * DescribeImageConfig 用于获取域名图片优化的当前配置，支持Webp、TPG 和 Guetzli。
+   * DescribeImageConfig 用于获取域名图片优化的当前配置，支持Webp、TPG、 Guetzli 和 Avif。
    */
   async DescribeImageConfig(
     req: DescribeImageConfigRequest,
@@ -986,7 +988,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * UpdateImageConfig 用于更新控制台图片优化的相关配置，支持Webp、TPG 和 Guetzli。
+   * UpdateImageConfig 用于更新控制台图片优化的相关配置，支持Webp、TPG、 Guetzli 和 Avif。
    */
   async UpdateImageConfig(
     req: UpdateImageConfigRequest,
