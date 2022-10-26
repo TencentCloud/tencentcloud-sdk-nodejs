@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { IsolateHourDBInstanceResponse, CreateDBInstanceRequest, DescribeAccountPrivilegesResponse, DescribeDatabasesRequest, DescribeDBParametersRequest, DescribeAccountsRequest, DescribeRenewalPriceResponse, CreateDedicatedClusterDBInstanceResponse, DestroyHourDBInstanceRequest, AssociateSecurityGroupsRequest, DescribeUpgradePriceRequest, FlushBinlogResponse, DescribeDBSecurityGroupsResponse, CancelDcnJobResponse, DescribeFileDownloadUrlRequest, DescribeDBInstanceSpecsResponse, DestroyHourDBInstanceResponse, DescribeProjectSecurityGroupsRequest, DescribeDBSlowLogsRequest, CreateAccountRequest, InitDBInstancesResponse, DescribeDBParametersResponse, IsolateHourDBInstanceRequest, ModifyLogFileRetentionPeriodRequest, DescribeLogFileRetentionPeriodRequest, DescribeFlowResponse, CloneAccountResponse, ModifyAccountDescriptionResponse, ModifyDBInstancesProjectResponse, ModifyBackupTimeRequest, DescribeDBLogFilesRequest, DescribeOrdersResponse, ModifySyncTaskAttributeResponse, ResetAccountPasswordRequest, CopyAccountPrivilegesResponse, ModifyRealServerAccessStrategyResponse, CloneAccountRequest, DescribeDatabaseObjectsRequest, DescribeDBInstancesRequest, DescribeDBSecurityGroupsRequest, SwitchDBInstanceHAResponse, DescribeSaleInfoRequest, RenewDBInstanceRequest, CreateTmpInstancesRequest, DescribeProjectSecurityGroupsResponse, ResetAccountPasswordResponse, DescribePriceRequest, CreateDBInstanceResponse, ModifyRealServerAccessStrategyRequest, DescribeBackupTimeRequest, RestartDBInstancesResponse, DescribeSaleInfoResponse, DestroyDBInstanceRequest, GrantAccountPrivilegesRequest, CreateDedicatedClusterDBInstanceRequest, SwitchDBInstanceHARequest, ModifyDBParametersRequest, ModifyDBInstanceSecurityGroupsRequest, DescribeDcnDetailRequest, DescribeFileDownloadUrlResponse, ModifyDBParametersResponse, CopyAccountPrivilegesRequest, DescribeDatabaseTableRequest, OpenDBExtranetAccessResponse, KillSessionRequest, DescribeDatabaseObjectsResponse, ModifyDBInstanceNameRequest, DeleteAccountRequest, CreateTmpInstancesResponse, UpgradeDBInstanceRequest, ModifySyncTaskAttributeRequest, DescribeUpgradePriceResponse, AssociateSecurityGroupsResponse, DescribePriceResponse, InitDBInstancesRequest, ModifyAccountPrivilegesResponse, ModifyBackupTimeResponse, GrantAccountPrivilegesResponse, CancelDcnJobRequest, OpenDBExtranetAccessRequest, ModifyDBInstanceSecurityGroupsResponse, ModifyDBInstanceNameResponse, CloseDBExtranetAccessResponse, ModifyAccountDescriptionRequest, KillSessionResponse, DescribeBackupTimeResponse, ActivateHourDBInstanceRequest, RenewDBInstanceResponse, DescribeDatabasesResponse, DescribeOrdersRequest, DescribeDBLogFilesResponse, CloseDBExtranetAccessRequest, DescribeDcnDetailResponse, DescribeFlowRequest, ModifyAccountPrivilegesRequest, ModifyDBSyncModeRequest, ActivateHourDBInstanceResponse, DescribeInstanceNodeInfoRequest, CreateHourDBInstanceResponse, CreateAccountResponse, DescribeLogFileRetentionPeriodResponse, DescribeDBInstancesResponse, DescribeRenewalPriceRequest, RestartDBInstancesRequest, DisassociateSecurityGroupsRequest, CreateHourDBInstanceRequest, DescribeDatabaseTableResponse, DescribeAccountPrivilegesRequest, DescribeAccountsResponse, DescribeDBSlowLogsResponse, UpgradeDBInstanceResponse, DescribeDBInstanceSpecsRequest, ModifyDBInstancesProjectRequest, FlushBinlogRequest, DestroyDBInstanceResponse, ModifyDBSyncModeResponse, DescribeInstanceNodeInfoResponse, ModifyLogFileRetentionPeriodResponse, DisassociateSecurityGroupsResponse, DeleteAccountResponse } from "./mariadb_models";
+import { IsolateHourDBInstanceResponse, CreateDBInstanceRequest, DescribeAccountPrivilegesResponse, DescribeDatabasesRequest, DescribeDBParametersRequest, DescribeAccountsRequest, DescribeRenewalPriceResponse, ModifyInstanceNetworkResponse, CreateDedicatedClusterDBInstanceResponse, ModifyInstanceVportResponse, DestroyHourDBInstanceRequest, ModifyInstanceVipResponse, AssociateSecurityGroupsRequest, DescribeUpgradePriceRequest, FlushBinlogResponse, DescribeDBSecurityGroupsResponse, CancelDcnJobResponse, DescribeFileDownloadUrlRequest, DescribeDBInstanceSpecsResponse, DestroyHourDBInstanceResponse, DescribeProjectSecurityGroupsRequest, DescribeDBSlowLogsRequest, CreateAccountRequest, InitDBInstancesResponse, DescribeDBParametersResponse, IsolateHourDBInstanceRequest, ModifyLogFileRetentionPeriodRequest, DescribeLogFileRetentionPeriodRequest, DescribeFlowResponse, CloneAccountResponse, ModifyAccountDescriptionResponse, ModifyDBInstancesProjectResponse, ModifyBackupTimeRequest, DescribeDBLogFilesRequest, DescribeOrdersResponse, ModifySyncTaskAttributeResponse, ResetAccountPasswordRequest, CopyAccountPrivilegesResponse, ModifyRealServerAccessStrategyResponse, CloneAccountRequest, DescribeDatabaseObjectsRequest, DescribeDBInstancesRequest, DescribeDBSecurityGroupsRequest, SwitchDBInstanceHAResponse, DescribeSaleInfoRequest, RenewDBInstanceRequest, CreateTmpInstancesRequest, DescribeProjectSecurityGroupsResponse, ResetAccountPasswordResponse, DescribePriceRequest, CreateDBInstanceResponse, ModifyRealServerAccessStrategyRequest, DescribeBackupTimeRequest, RestartDBInstancesResponse, DescribeSaleInfoResponse, DestroyDBInstanceRequest, GrantAccountPrivilegesRequest, CreateDedicatedClusterDBInstanceRequest, SwitchDBInstanceHARequest, ModifyDBParametersRequest, ModifyDBInstanceSecurityGroupsRequest, DescribeDcnDetailRequest, DescribeFileDownloadUrlResponse, ModifyDBParametersResponse, CopyAccountPrivilegesRequest, DescribeDatabaseTableRequest, OpenDBExtranetAccessResponse, KillSessionRequest, DescribeDatabaseObjectsResponse, ModifyDBInstanceNameRequest, DeleteAccountRequest, CreateTmpInstancesResponse, UpgradeDBInstanceRequest, ModifySyncTaskAttributeRequest, DescribeUpgradePriceResponse, AssociateSecurityGroupsResponse, DescribePriceResponse, InitDBInstancesRequest, ModifyAccountPrivilegesResponse, ModifyBackupTimeResponse, GrantAccountPrivilegesResponse, CancelDcnJobRequest, ModifyInstanceVipRequest, OpenDBExtranetAccessRequest, ModifyDBInstanceSecurityGroupsResponse, ModifyDBInstanceNameResponse, CloseDBExtranetAccessResponse, ModifyAccountDescriptionRequest, KillSessionResponse, DescribeBackupTimeResponse, ActivateHourDBInstanceRequest, RenewDBInstanceResponse, DescribeDatabasesResponse, DescribeOrdersRequest, DescribeDBLogFilesResponse, CloseDBExtranetAccessRequest, DescribeDcnDetailResponse, DescribeFlowRequest, ModifyAccountPrivilegesRequest, ModifyDBSyncModeRequest, ActivateHourDBInstanceResponse, DescribeInstanceNodeInfoRequest, CreateHourDBInstanceResponse, CreateAccountResponse, DescribeLogFileRetentionPeriodResponse, ModifyInstanceNetworkRequest, DescribeDBInstancesResponse, DescribeRenewalPriceRequest, RestartDBInstancesRequest, DisassociateSecurityGroupsRequest, CreateHourDBInstanceRequest, DescribeDatabaseTableResponse, DescribeAccountPrivilegesRequest, DescribeAccountsResponse, DescribeDBSlowLogsResponse, UpgradeDBInstanceResponse, DescribeDBInstanceSpecsRequest, ModifyDBInstancesProjectRequest, FlushBinlogRequest, DestroyDBInstanceResponse, ModifyDBSyncModeResponse, DescribeInstanceNodeInfoResponse, ModifyLogFileRetentionPeriodResponse, DisassociateSecurityGroupsResponse, ModifyInstanceVportRequest, DeleteAccountResponse } from "./mariadb_models";
 /**
  * mariadb client
  * @class
@@ -99,6 +99,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeOrders(req: DescribeOrdersRequest, cb?: (error: string, rep: DescribeOrdersResponse) => void): Promise<DescribeOrdersResponse>;
     /**
+     * 本接口 (ModifySyncTaskAttribute) 用于修改同步任务的属性（目前只支持修改任务名称）
+     */
+    ModifySyncTaskAttribute(req: ModifySyncTaskAttributeRequest, cb?: (error: string, rep: ModifySyncTaskAttributeResponse) => void): Promise<ModifySyncTaskAttributeResponse>;
+    /**
      * 本接口（DeleteAccount）用于删除云数据库账号。用户名+host唯一确定一个账号。
      */
     DeleteAccount(req: DeleteAccountRequest, cb?: (error: string, rep: DeleteAccountResponse) => void): Promise<DeleteAccountResponse>;
@@ -110,6 +114,10 @@ export declare class Client extends AbstractClient {
      * 本接口（ModifyDBInstancesProject）用于修改云数据库实例所属项目。
      */
     ModifyDBInstancesProject(req: ModifyDBInstancesProjectRequest, cb?: (error: string, rep: ModifyDBInstancesProjectResponse) => void): Promise<ModifyDBInstancesProjectResponse>;
+    /**
+     * 本接口（ModifyInstanceVip）用于修改实例VIP
+     */
+    ModifyInstanceVip(req: ModifyInstanceVipRequest, cb?: (error: string, rep: ModifyInstanceVipResponse) => void): Promise<ModifyInstanceVipResponse>;
     /**
      * 本接口（KillSession）用于杀死指定会话。
      */
@@ -128,9 +136,9 @@ export declare class Client extends AbstractClient {
      */
     ModifyRealServerAccessStrategy(req: ModifyRealServerAccessStrategyRequest, cb?: (error: string, rep: ModifyRealServerAccessStrategyResponse) => void): Promise<ModifyRealServerAccessStrategyResponse>;
     /**
-     * 本接口 (ModifySyncTaskAttribute) 用于修改同步任务的属性（目前只支持修改任务名称）
+     * 本接口（ModifyInstanceNetwork）用于修改实例所属网络
      */
-    ModifySyncTaskAttribute(req: ModifySyncTaskAttributeRequest, cb?: (error: string, rep: ModifySyncTaskAttributeResponse) => void): Promise<ModifySyncTaskAttributeResponse>;
+    ModifyInstanceNetwork(req: ModifyInstanceNetworkRequest, cb?: (error: string, rep: ModifyInstanceNetworkResponse) => void): Promise<ModifyInstanceNetworkResponse>;
     /**
      * 本接口（DestroyHourDBInstance）用于销毁按量计费实例。
      */
@@ -235,6 +243,10 @@ export declare class Client extends AbstractClient {
      * 本接口（DescribePrice）用于在购买实例前，查询实例的价格。
      */
     DescribePrice(req: DescribePriceRequest, cb?: (error: string, rep: DescribePriceResponse) => void): Promise<DescribePriceResponse>;
+    /**
+     * 本接口（ModifyInstanceVport）用于修改实例VPORT
+     */
+    ModifyInstanceVport(req: ModifyInstanceVportRequest, cb?: (error: string, rep: ModifyInstanceVportResponse) => void): Promise<ModifyInstanceVportResponse>;
     /**
      * 本接口（DescribeDBSecurityGroups）用于查询实例安全组信息
      */

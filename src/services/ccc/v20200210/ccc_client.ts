@@ -76,6 +76,7 @@ import {
   DescribeTelCallInfoResponse,
   SkillGroupInfoItem,
   StopAutoCalloutTaskResponse,
+  Variable,
   CreateCallOutSessionRequest,
   StaffStatusMetrics,
   BindStaffSkillGroupListResponse,

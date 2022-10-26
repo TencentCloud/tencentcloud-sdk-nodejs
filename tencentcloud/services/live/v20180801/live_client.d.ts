@@ -108,7 +108,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeTopClientIpSumInfoList(req: DescribeTopClientIpSumInfoListRequest, cb?: (error: string, rep: DescribeTopClientIpSumInfoListResponse) => void): Promise<DescribeTopClientIpSumInfoListResponse>;
     /**
-     * 修改直播拉流配置的状态。
+     * 修改直播拉流配置的状态。该接口已下线,请使用新接口 ModifyLivePullStreamTask。
      */
     ModifyPullStreamStatus(req: ModifyPullStreamStatusRequest, cb?: (error: string, rep: ModifyPullStreamStatusResponse) => void): Promise<ModifyPullStreamStatusResponse>;
     /**
@@ -159,7 +159,7 @@ export declare class Client extends AbstractClient {
      */
     DeleteLiveCallbackRule(req: DeleteLiveCallbackRuleRequest, cb?: (error: string, rep: DeleteLiveCallbackRuleResponse) => void): Promise<DeleteLiveCallbackRuleResponse>;
     /**
-     * 更新拉流配置。
+     * 更新拉流配置。该接口为已下线接口，请使用新接口 ModifyLivePullStreamTask。
      */
     ModifyPullStreamConfig(req: ModifyPullStreamConfigRequest, cb?: (error: string, rep: ModifyPullStreamConfigResponse) => void): Promise<ModifyPullStreamConfigResponse>;
     /**
@@ -185,7 +185,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeLivePushAuthKey(req: DescribeLivePushAuthKeyRequest, cb?: (error: string, rep: DescribeLivePushAuthKeyResponse) => void): Promise<DescribeLivePushAuthKeyResponse>;
     /**
-     * 删除直播拉流配置。
+     * 删除直播拉流配置。该接口已下线,请使用新接口 DeleteLivePullStreamTask。
      */
     DeletePullStreamConfig(req: DeletePullStreamConfigRequest, cb?: (error: string, rep: DeletePullStreamConfigResponse) => void): Promise<DeletePullStreamConfigResponse>;
     /**
@@ -197,7 +197,7 @@ export declare class Client extends AbstractClient {
      */
     StopScreenshotTask(req: StopScreenshotTaskRequest, cb?: (error: string, rep: StopScreenshotTaskResponse) => void): Promise<StopScreenshotTaskResponse>;
     /**
-     * 查询直播拉流配置。
+     * 查询直播拉流配置。该接口已下线,请使用新接口 DescribeLivePullStreamTasks。
      */
     DescribePullStreamConfigs(req: DescribePullStreamConfigsRequest, cb?: (error: string, rep: DescribePullStreamConfigsResponse) => void): Promise<DescribePullStreamConfigsResponse>;
     /**

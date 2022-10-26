@@ -138,9 +138,9 @@ it("tag.v20180813.DescribeResourceTags", async function () {
     }
 })
 
-it("tag.v20180813.GetTagKeys", async function () {
+it("tag.v20180813.AddProject", async function () {
     try {
-       const data = await client.GetTagKeys({})
+       const data = await client.AddProject({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -298,9 +298,29 @@ it("tag.v20180813.DescribeResourcesByTagsUnion", async function () {
     }
 })
 
+it("tag.v20180813.UpdateProject", async function () {
+    try {
+       const data = await client.UpdateProject({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tag.v20180813.ModifyResourceTags", async function () {
     try {
        const data = await client.ModifyResourceTags({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tag.v20180813.GetTagKeys", async function () {
+    try {
+       const data = await client.GetTagKeys({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -682,6 +682,16 @@ export interface DescribeListBGPInstancesRequest {
   FilterEnterpriseFlag?: number
 
   /**
+   * 轻量版搜索
+   */
+  FilterLightFlag?: number
+
+  /**
+   * 定制版搜索
+   */
+  FilterChannelFlag?: number
+
+  /**
    * 标签搜索
    */
   FilterTag?: TagFilter

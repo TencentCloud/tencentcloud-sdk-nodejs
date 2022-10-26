@@ -27,8 +27,11 @@ import {
   DescribeDBParametersRequest,
   DescribeAccountsRequest,
   DescribeRenewalPriceResponse,
+  ModifyInstanceNetworkResponse,
   CreateDedicatedClusterDBInstanceResponse,
+  ModifyInstanceVportResponse,
   DestroyHourDBInstanceRequest,
+  ModifyInstanceVipResponse,
   AssociateSecurityGroupsRequest,
   DescribeUpgradePriceRequest,
   FlushBinlogResponse,
@@ -120,6 +123,7 @@ import {
   Database,
   GrantAccountPrivilegesResponse,
   CancelDcnJobRequest,
+  ModifyInstanceVipRequest,
   OpenDBExtranetAccessRequest,
   DatabasePrivilege,
   ModifyDBInstanceSecurityGroupsResponse,
@@ -149,6 +153,7 @@ import {
   CreateAccountResponse,
   DescribeLogFileRetentionPeriodResponse,
   RegionInfo,
+  ModifyInstanceNetworkRequest,
   DescribeDBInstancesResponse,
   ConstraintRange,
   DescribeRenewalPriceRequest,
@@ -171,6 +176,7 @@ import {
   DescribeInstanceNodeInfoResponse,
   ModifyLogFileRetentionPeriodResponse,
   DisassociateSecurityGroupsResponse,
+  ModifyInstanceVportRequest,
   DeleteAccountResponse,
 } from "./mariadb_models"
 
@@ -407,6 +413,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口 (ModifySyncTaskAttribute) 用于修改同步任务的属性（目前只支持修改任务名称）
+   */
+  async ModifySyncTaskAttribute(
+    req: ModifySyncTaskAttributeRequest,
+    cb?: (error: string, rep: ModifySyncTaskAttributeResponse) => void
+  ): Promise<ModifySyncTaskAttributeResponse> {
+    return this.request("ModifySyncTaskAttribute", req, cb)
+  }
+
+  /**
    * 本接口（DeleteAccount）用于删除云数据库账号。用户名+host唯一确定一个账号。
    */
   async DeleteAccount(
@@ -434,6 +450,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyDBInstancesProjectResponse) => void
   ): Promise<ModifyDBInstancesProjectResponse> {
     return this.request("ModifyDBInstancesProject", req, cb)
+  }
+
+  /**
+   * 本接口（ModifyInstanceVip）用于修改实例VIP
+   */
+  async ModifyInstanceVip(
+    req: ModifyInstanceVipRequest,
+    cb?: (error: string, rep: ModifyInstanceVipResponse) => void
+  ): Promise<ModifyInstanceVipResponse> {
+    return this.request("ModifyInstanceVip", req, cb)
   }
 
   /**
@@ -472,13 +498,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口 (ModifySyncTaskAttribute) 用于修改同步任务的属性（目前只支持修改任务名称）
+   * 本接口（ModifyInstanceNetwork）用于修改实例所属网络
    */
-  async ModifySyncTaskAttribute(
-    req: ModifySyncTaskAttributeRequest,
-    cb?: (error: string, rep: ModifySyncTaskAttributeResponse) => void
-  ): Promise<ModifySyncTaskAttributeResponse> {
-    return this.request("ModifySyncTaskAttribute", req, cb)
+  async ModifyInstanceNetwork(
+    req: ModifyInstanceNetworkRequest,
+    cb?: (error: string, rep: ModifyInstanceNetworkResponse) => void
+  ): Promise<ModifyInstanceNetworkResponse> {
+    return this.request("ModifyInstanceNetwork", req, cb)
   }
 
   /**
@@ -727,6 +753,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribePriceResponse) => void
   ): Promise<DescribePriceResponse> {
     return this.request("DescribePrice", req, cb)
+  }
+
+  /**
+   * 本接口（ModifyInstanceVport）用于修改实例VPORT
+   */
+  async ModifyInstanceVport(
+    req: ModifyInstanceVportRequest,
+    cb?: (error: string, rep: ModifyInstanceVportResponse) => void
+  ): Promise<ModifyInstanceVportResponse> {
+    return this.request("ModifyInstanceVport", req, cb)
   }
 
   /**

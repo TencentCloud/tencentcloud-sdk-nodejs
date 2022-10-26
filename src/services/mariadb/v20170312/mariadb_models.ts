@@ -286,6 +286,21 @@ export interface DescribeRenewalPriceResponse {
 }
 
 /**
+ * ModifyInstanceNetwork返回参数结构体
+ */
+export interface ModifyInstanceNetworkResponse {
+  /**
+   * 异步任务ID，根据此FlowId通过DescribeFlow接口查询任务进行状态
+   */
+  FlowId: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateDedicatedClusterDBInstance返回参数结构体
  */
 export interface CreateDedicatedClusterDBInstanceResponse {
@@ -306,6 +321,16 @@ export interface CreateDedicatedClusterDBInstanceResponse {
 }
 
 /**
+ * ModifyInstanceVport返回参数结构体
+ */
+export interface ModifyInstanceVportResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DestroyHourDBInstance请求参数结构体
  */
 export interface DestroyHourDBInstanceRequest {
@@ -313,6 +338,21 @@ export interface DestroyHourDBInstanceRequest {
    * 实例 ID，格式如：tdsql-avw0207d，与云数据库控制台页面中显示的实例 ID 相同。
    */
   InstanceId: string
+}
+
+/**
+ * ModifyInstanceVip返回参数结构体
+ */
+export interface ModifyInstanceVipResponse {
+  /**
+   * 异步任务流程ID
+   */
+  FlowId: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2675,6 +2715,31 @@ export interface CancelDcnJobRequest {
 }
 
 /**
+ * ModifyInstanceVip请求参数结构体
+ */
+export interface ModifyInstanceVipRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+
+  /**
+   * 实例VIP
+   */
+  Vip: string
+
+  /**
+   * IPv6标志
+   */
+  Ipv6Flag?: number
+
+  /**
+   * VIP保留时长，单位小时，取值范围（0~168），0表示立即释放，有一分钟释放延迟。不传此参数，默认24小时释放VIP。
+   */
+  VipReleaseDelay?: number
+}
+
+/**
  * OpenDBExtranetAccess请求参数结构体
  */
 export interface OpenDBExtranetAccessRequest {
@@ -3242,6 +3307,41 @@ export interface RegionInfo {
 }
 
 /**
+ * ModifyInstanceNetwork请求参数结构体
+ */
+export interface ModifyInstanceNetworkRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+
+  /**
+   * 希望转到的VPC网络的VpcId
+   */
+  VpcId: string
+
+  /**
+   * 希望转到的VPC网络的子网ID
+   */
+  SubnetId: string
+
+  /**
+   * 如果需要指定VIP，填上该字段
+   */
+  Vip?: string
+
+  /**
+   * 如果需要指定VIPv6，填上该字段
+   */
+  Vipv6?: string
+
+  /**
+   * VIP保留时长，单位小时，取值范围（0~168），0表示立即释放，有一分钟释放延迟。不传此参数，默认24小时释放VIP。
+   */
+  VipReleaseDelay?: number
+}
+
+/**
  * DescribeDBInstances返回参数结构体
  */
 export interface DescribeDBInstancesResponse {
@@ -3764,6 +3864,21 @@ export interface DisassociateSecurityGroupsResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyInstanceVport请求参数结构体
+ */
+export interface ModifyInstanceVportRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+
+  /**
+   * 实例VPORT
+   */
+  Vport: number
 }
 
 /**

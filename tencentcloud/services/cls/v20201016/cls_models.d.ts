@@ -3353,6 +3353,14 @@ export interface SearchLogRequest {
 两种返回方式在编码格式上有少量区别，建议使用true
       */
     UseNewAnalysis?: boolean;
+    /**
+      * 执行统计分析（Query中包含SQL）时，是否对原始日志先进行采样，再进行统计分析。
+0：自动采样;
+0～1：按指定采样率采样，例如0.02;
+1：不采样，即精确分析
+默认值为1
+      */
+    SamplingRate?: number;
 }
 /**
  * CreateMachineGroup请求参数结构体

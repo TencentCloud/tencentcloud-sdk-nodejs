@@ -117,6 +117,10 @@ export interface CreateAutoCalloutTaskRequest {
       * 最大尝试次数
       */
     Tries?: number;
+    /**
+      * 自定义变量（仅高级版支持）
+      */
+    Variables?: Array<Variable>;
 }
 /**
  * CreateSDKLoginToken返回参数结构体
@@ -1541,6 +1545,19 @@ export interface StopAutoCalloutTaskResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 变量
+ */
+export interface Variable {
+    /**
+      * 变量名
+      */
+    Key: string;
+    /**
+      * 变量值
+      */
+    Value: string;
 }
 /**
  * CreateCallOutSession请求参数结构体

@@ -615,11 +615,11 @@ OPEN：公网属性， INTERNAL：内网属性。
       */
     LoadBalancerVips?: Array<string>;
     /**
-      * 负载均衡绑定的后端服务的外网 IP。
+      * 负载均衡绑定的后端服务的外网 IP，只支持查询云服务器的公网 IP。
       */
     BackendPublicIps?: Array<string>;
     /**
-      * 负载均衡绑定的后端服务的内网 IP。
+      * 负载均衡绑定的后端服务的内网 IP，只支持查询云服务器的内网 IP。
       */
     BackendPrivateIps?: Array<string>;
     /**

@@ -23,7 +23,7 @@ import {
   DetachResourcesTagRequest,
   GetTagValuesResponse,
   AttachResourcesTagResponse,
-  GetTagKeysResponse,
+  AddProjectResponse,
   GetResourcesRequest,
   DeleteTagRequest,
   DeleteResourceTagResponse,
@@ -32,6 +32,7 @@ import {
   DescribeTagsRequest,
   DescribeProjectsRequest,
   DescribeTagValuesRequest,
+  UpdateProjectRequest,
   DescribeResourcesByTagsUnionRequest,
   DeleteTagsResponse,
   ModifyResourcesTagValueResponse,
@@ -49,7 +50,7 @@ import {
   GetTagsResponse,
   ModifyResourcesTagValueRequest,
   TagResource,
-  GetTagKeysRequest,
+  AddProjectRequest,
   AddResourceTagResponse,
   DescribeResourcesByTagsResponse,
   AddResourceTagRequest,
@@ -66,6 +67,7 @@ import {
   CreateTagResponse,
   FailedResource,
   ResourceTagMapping,
+  GetTagKeysRequest,
   DetachResourcesTagResponse,
   GetResourcesResponse,
   DescribeResourceTagsByResourceIdsSeqResponse,
@@ -73,6 +75,7 @@ import {
   DescribeTagKeysResponse,
   DescribeTagValuesSeqRequest,
   UpdateResourceTagValueRequest,
+  GetTagKeysResponse,
   TagResourcesResponse,
   CreateTagsRequest,
   CreateTagsResponse,
@@ -83,6 +86,7 @@ import {
   UpdateResourceTagValueResponse,
   TagKeyObject,
   DescribeResourceTagsRequest,
+  UpdateProjectResponse,
   DescribeResourceTagsByResourceIdsSeqRequest,
   GetTagValuesRequest,
   ResourceTag,
@@ -218,13 +222,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询标签键列表。
+   * 创建项目
    */
-  async GetTagKeys(
-    req: GetTagKeysRequest,
-    cb?: (error: string, rep: GetTagKeysResponse) => void
-  ): Promise<GetTagKeysResponse> {
-    return this.request("GetTagKeys", req, cb)
+  async AddProject(
+    req: AddProjectRequest,
+    cb?: (error: string, rep: AddProjectResponse) => void
+  ): Promise<AddProjectResponse> {
+    return this.request("AddProject", req, cb)
   }
 
   /**
@@ -381,6 +385,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改项目
+   */
+  async UpdateProject(
+    req: UpdateProjectRequest,
+    cb?: (error: string, rep: UpdateProjectResponse) => void
+  ): Promise<UpdateProjectResponse> {
+    return this.request("UpdateProject", req, cb)
+  }
+
+  /**
    * 本接口用于修改资源关联的所有标签
    */
   async ModifyResourceTags(
@@ -388,5 +402,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyResourceTagsResponse) => void
   ): Promise<ModifyResourceTagsResponse> {
     return this.request("ModifyResourceTags", req, cb)
+  }
+
+  /**
+   * 查询标签键列表。
+   */
+  async GetTagKeys(
+    req: GetTagKeysRequest,
+    cb?: (error: string, rep: GetTagKeysResponse) => void
+  ): Promise<GetTagKeysResponse> {
+    return this.request("GetTagKeys", req, cb)
   }
 }

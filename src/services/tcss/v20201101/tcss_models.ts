@@ -5111,9 +5111,9 @@ export interface DescribeVirusAutoIsolateSampleListRequest {
 
   /**
       * 过滤条件。
-<li>MD5- String - 是否必填：否 - md5 /li>
-<li>AutoIsolateSwitch- String - 是否必填：否 - 自动隔离开关 /li>
-<li>VirusName- String - 是否必填：否 - 病毒名 /li>
+<li>MD5- String - 是否必填：否 - md5 </li>
+<li>AutoIsolateSwitch- String - 是否必填：否 - 自动隔离开关 </li>
+<li>VirusName- String - 是否必填：否 - 病毒名 </li>
       */
   Filters?: Array<RunTimeFilters>
 
@@ -15761,10 +15761,10 @@ bash: "container_bash",
 
   /**
       * 过滤条件。
-<li>Status- String - 是否必填：否 - 主机状态 /li>
-<li>HostIP- String - 是否必填：否 - 主机内网IP /li>
-<li>PublicIP- String - 是否必填：否 - 主机外网IP /li>
-<li>HostName- String - 是否必填：否 - 主机名称 /li>
+<li>Status- String - 是否必填：否 - 主机状态 </li>
+<li>HostIP- String - 是否必填：否 - 主机内网IP </li>
+<li>PublicIP- String - 是否必填：否 - 主机外网IP </li>
+<li>HostName- String - 是否必填：否 - 主机名称 </li>
       */
   Filters?: Array<RunTimeFilters>
 

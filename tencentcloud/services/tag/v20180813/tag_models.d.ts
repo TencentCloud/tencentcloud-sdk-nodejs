@@ -82,17 +82,17 @@ export interface AttachResourcesTagResponse {
     RequestId?: string;
 }
 /**
- * GetTagKeys返回参数结构体
+ * AddProject返回参数结构体
  */
-export interface GetTagKeysResponse {
+export interface AddProjectResponse {
     /**
-      * 获取的下一页的Token值
+      * 项目Id
       */
-    PaginationToken: string;
+    ProjectId?: number;
     /**
-      * 标签键信息。
+      * 是否为新项目
       */
-    TagKeys: Array<string>;
+    IsNew?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -261,6 +261,27 @@ export interface DescribeTagValuesRequest {
       * 每页大小，默认为 15
       */
     Limit?: number;
+}
+/**
+ * UpdateProject请求参数结构体
+ */
+export interface UpdateProjectRequest {
+    /**
+      * 项目ID
+      */
+    ProjectId: number;
+    /**
+      * 项目名称
+      */
+    ProjectName?: string;
+    /**
+      * 禁用项目，1，禁用，0，启用
+      */
+    Disable?: number;
+    /**
+      * 备注
+      */
+    Info?: string;
 }
 /**
  * DescribeResourcesByTagsUnion请求参数结构体
@@ -630,19 +651,17 @@ export interface TagResource {
     ServiceType: string;
 }
 /**
- * GetTagKeys请求参数结构体
+ * AddProject请求参数结构体
  */
-export interface GetTagKeysRequest {
+export interface AddProjectRequest {
     /**
-      * 从上一页的响应中获取的下一页的Token值。
-如果是第一次请求，设置为空。
+      * 项目名称
       */
-    PaginationToken?: string;
+    ProjectName: string;
     /**
-      * 每一页返回的数据最大条数，最大1000。
-缺省值：50。
+      * 项目描述
       */
-    MaxResults?: number;
+    Info?: string;
 }
 /**
  * AddResourceTag返回参数结构体
@@ -954,6 +973,21 @@ export interface ResourceTagMapping {
     Tags: Array<Tag>;
 }
 /**
+ * GetTagKeys请求参数结构体
+ */
+export interface GetTagKeysRequest {
+    /**
+      * 从上一页的响应中获取的下一页的Token值。
+如果是第一次请求，设置为空。
+      */
+    PaginationToken?: string;
+    /**
+      * 每一页返回的数据最大条数，最大1000。
+缺省值：50。
+      */
+    MaxResults?: number;
+}
+/**
  * DetachResourcesTag返回参数结构体
  */
 export interface DetachResourcesTagResponse {
@@ -1075,6 +1109,23 @@ export interface UpdateResourceTagValueRequest {
       * [ 资源六段式描述 ](https://cloud.tencent.com/document/product/598/10606)
       */
     Resource: string;
+}
+/**
+ * GetTagKeys返回参数结构体
+ */
+export interface GetTagKeysResponse {
+    /**
+      * 获取的下一页的Token值
+      */
+    PaginationToken: string;
+    /**
+      * 标签键信息。
+      */
+    TagKeys: Array<string>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * TagResources返回参数结构体
@@ -1254,6 +1305,15 @@ export interface DescribeResourceTagsRequest {
       * 是否是cos的资源（0或者1），输入的ResourceId为cos资源时必填
       */
     CosResourceId?: number;
+}
+/**
+ * UpdateProject返回参数结构体
+ */
+export interface UpdateProjectResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeResourceTagsByResourceIdsSeq请求参数结构体

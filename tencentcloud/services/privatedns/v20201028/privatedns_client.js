@@ -88,6 +88,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreatePrivateZoneRecord", req, cb);
     }
     /**
+     * 修改解析记录状态
+     */
+    async ModifyRecordsStatus(req, cb) {
+        return this.request("ModifyRecordsStatus", req, cb);
+    }
+    /**
      * 创建私有域
      */
     async CreatePrivateZone(req, cb) {

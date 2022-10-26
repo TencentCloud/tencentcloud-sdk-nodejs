@@ -1293,6 +1293,12 @@ export interface PersonInfo {
    * 人物出现信息
    */
   AppearInfo: AppearInfo
+
+  /**
+      * 人脸在图片中的位置，仅在图片标签任务有效
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AppearRect: Rectf
 }
 
 /**

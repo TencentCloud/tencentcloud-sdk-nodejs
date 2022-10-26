@@ -100,10 +100,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeResourceTags", req, cb);
     }
     /**
-     * 查询标签键列表。
+     * 创建项目
      */
-    async GetTagKeys(req, cb) {
-        return this.request("GetTagKeys", req, cb);
+    async AddProject(req, cb) {
+        return this.request("AddProject", req, cb);
     }
     /**
      * 用于查询已建立的标签列表。
@@ -199,10 +199,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeResourcesByTagsUnion", req, cb);
     }
     /**
+     * 修改项目
+     */
+    async UpdateProject(req, cb) {
+        return this.request("UpdateProject", req, cb);
+    }
+    /**
      * 本接口用于修改资源关联的所有标签
      */
     async ModifyResourceTags(req, cb) {
         return this.request("ModifyResourceTags", req, cb);
+    }
+    /**
+     * 查询标签键列表。
+     */
+    async GetTagKeys(req, cb) {
+        return this.request("GetTagKeys", req, cb);
     }
 }
 exports.Client = Client;

@@ -118,6 +118,16 @@ it("privatedns.v20201028.CreatePrivateZoneRecord", async function () {
     }
 })
 
+it("privatedns.v20201028.ModifyRecordsStatus", async function () {
+    try {
+       const data = await client.ModifyRecordsStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("privatedns.v20201028.CreatePrivateZone", async function () {
     try {
        const data = await client.CreatePrivateZone({})

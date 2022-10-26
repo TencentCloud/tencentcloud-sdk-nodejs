@@ -9492,6 +9492,10 @@ export interface DescribeMalwareTimingScanSettingResponse {
       */
     EngineType: number;
     /**
+      * 启发引擎 0 关闭 1开启
+      */
+    EnableInspiredEngine: number;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
@@ -11798,6 +11802,10 @@ export interface ModifyMalwareTimingScanSettingsRequest {
       * 1标准模式（只报严重、高危）、2增强模式（报严重、高危、中危）、3严格模式（报严重、高、中、低、提示）
       */
     EngineType?: number;
+    /**
+      * 启发引擎开关 0 关闭 1开启
+      */
+    EnableInspiredEngine?: number;
 }
 /**
  * 资产管理环境变量列表

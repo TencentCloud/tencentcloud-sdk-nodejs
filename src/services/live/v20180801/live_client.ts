@@ -548,7 +548,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改直播拉流配置的状态。
+   * 修改直播拉流配置的状态。该接口已下线,请使用新接口 ModifyLivePullStreamTask。
    */
   async ModifyPullStreamStatus(
     req: ModifyPullStreamStatusRequest,
@@ -665,7 +665,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更新拉流配置。
+   * 更新拉流配置。该接口为已下线接口，请使用新接口 ModifyLivePullStreamTask。
    */
   async ModifyPullStreamConfig(
     req: ModifyPullStreamConfigRequest,
@@ -721,7 +721,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除直播拉流配置。
+   * 删除直播拉流配置。该接口已下线,请使用新接口 DeleteLivePullStreamTask。
    */
   async DeletePullStreamConfig(
     req: DeletePullStreamConfigRequest,
@@ -751,7 +751,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询直播拉流配置。
+   * 查询直播拉流配置。该接口已下线,请使用新接口 DescribeLivePullStreamTasks。
    */
   async DescribePullStreamConfigs(
     req: DescribePullStreamConfigsRequest,

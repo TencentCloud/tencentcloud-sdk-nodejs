@@ -164,7 +164,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTopClientIpSumInfoList", req, cb);
     }
     /**
-     * 修改直播拉流配置的状态。
+     * 修改直播拉流配置的状态。该接口已下线,请使用新接口 ModifyLivePullStreamTask。
      */
     async ModifyPullStreamStatus(req, cb) {
         return this.request("ModifyPullStreamStatus", req, cb);
@@ -237,7 +237,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteLiveCallbackRule", req, cb);
     }
     /**
-     * 更新拉流配置。
+     * 更新拉流配置。该接口为已下线接口，请使用新接口 ModifyLivePullStreamTask。
      */
     async ModifyPullStreamConfig(req, cb) {
         return this.request("ModifyPullStreamConfig", req, cb);
@@ -273,7 +273,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeLivePushAuthKey", req, cb);
     }
     /**
-     * 删除直播拉流配置。
+     * 删除直播拉流配置。该接口已下线,请使用新接口 DeleteLivePullStreamTask。
      */
     async DeletePullStreamConfig(req, cb) {
         return this.request("DeletePullStreamConfig", req, cb);
@@ -291,7 +291,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("StopScreenshotTask", req, cb);
     }
     /**
-     * 查询直播拉流配置。
+     * 查询直播拉流配置。该接口已下线,请使用新接口 DescribeLivePullStreamTasks。
      */
     async DescribePullStreamConfigs(req, cb) {
         return this.request("DescribePullStreamConfigs", req, cb);

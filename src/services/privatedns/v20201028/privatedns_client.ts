@@ -28,6 +28,7 @@ import {
   DescribePrivateZoneListResponse,
   AccountVpcInfoOutput,
   DescribePrivateZoneRequest,
+  ModifyRecordsStatusResponse,
   DatePoint,
   DescribeAccountVpcListResponse,
   DescribePrivateZoneServiceRequest,
@@ -62,6 +63,7 @@ import {
   DeletePrivateZoneRecordRequest,
   Filter,
   DeletePrivateZoneResponse,
+  ModifyRecordsStatusRequest,
   CreatePrivateDNSAccountRequest,
   MetricData,
   DescribePrivateDNSAccountListRequest,
@@ -182,6 +184,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreatePrivateZoneRecordResponse) => void
   ): Promise<CreatePrivateZoneRecordResponse> {
     return this.request("CreatePrivateZoneRecord", req, cb)
+  }
+
+  /**
+   * 修改解析记录状态
+   */
+  async ModifyRecordsStatus(
+    req: ModifyRecordsStatusRequest,
+    cb?: (error: string, rep: ModifyRecordsStatusResponse) => void
+  ): Promise<ModifyRecordsStatusResponse> {
+    return this.request("ModifyRecordsStatus", req, cb)
   }
 
   /**

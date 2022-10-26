@@ -1185,6 +1185,11 @@ export interface CycleEmailParam {
    * 任务周期 小时维度
    */
   IntervalTime: number
+
+  /**
+   * 是否终止周期，用于任务更新 0否1是
+   */
+  TermCycle?: number
 }
 
 /**

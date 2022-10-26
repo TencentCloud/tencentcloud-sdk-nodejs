@@ -201,6 +201,31 @@ export interface DescribePrivateZoneRequest {
 }
 
 /**
+ * ModifyRecordsStatus返回参数结构体
+ */
+export interface ModifyRecordsStatusResponse {
+  /**
+   * 私有域ID
+   */
+  ZoneId: string
+
+  /**
+   * 解析记录ID列表
+   */
+  RecordIds: Array<number>
+
+  /**
+   * enabled：生效，disabled：失效
+   */
+  Status: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 时间统计值
  */
 export interface DatePoint {
@@ -870,6 +895,26 @@ export interface DeletePrivateZoneResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyRecordsStatus请求参数结构体
+ */
+export interface ModifyRecordsStatusRequest {
+  /**
+   * 私有域ID
+   */
+  ZoneId: string
+
+  /**
+   * 解析记录ID列表
+   */
+  RecordIds: Array<number>
+
+  /**
+   * enabled：生效，disabled：失效
+   */
+  Status: string
 }
 
 /**

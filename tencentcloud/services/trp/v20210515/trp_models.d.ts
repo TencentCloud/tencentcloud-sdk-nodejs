@@ -1166,11 +1166,11 @@ export interface CreateCodeBatchRequest {
       */
     Remark?: string;
     /**
-      * 活动ID
+      * 模版ID，或者活动ID
       */
     MpTpl?: string;
     /**
-      * 克隆批次ID
+      * 克隆批次ID，同时会复制溯源信息
       */
     CloneId?: string;
 }
@@ -1650,7 +1650,7 @@ export interface ModifyCodeBatchRequest {
       */
     Status?: number;
     /**
-      * 模板ID
+      * 模版ID，或者活动ID
       */
     MpTpl?: string;
     /**

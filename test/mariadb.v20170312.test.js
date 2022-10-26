@@ -238,6 +238,16 @@ it("mariadb.v20170312.DescribeOrders", async function () {
     }
 })
 
+it("mariadb.v20170312.ModifySyncTaskAttribute", async function () {
+    try {
+       const data = await client.ModifySyncTaskAttribute({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mariadb.v20170312.DeleteAccount", async function () {
     try {
        const data = await client.DeleteAccount({})
@@ -261,6 +271,16 @@ it("mariadb.v20170312.DescribeDBParameters", async function () {
 it("mariadb.v20170312.ModifyDBInstancesProject", async function () {
     try {
        const data = await client.ModifyDBInstancesProject({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mariadb.v20170312.ModifyInstanceVip", async function () {
+    try {
+       const data = await client.ModifyInstanceVip({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -298,9 +318,9 @@ it("mariadb.v20170312.ModifyRealServerAccessStrategy", async function () {
     }
 })
 
-it("mariadb.v20170312.ModifySyncTaskAttribute", async function () {
+it("mariadb.v20170312.ModifyInstanceNetwork", async function () {
     try {
-       const data = await client.ModifySyncTaskAttribute({})
+       const data = await client.ModifyInstanceNetwork({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -541,6 +561,16 @@ it("mariadb.v20170312.DescribeDatabases", async function () {
 it("mariadb.v20170312.DescribePrice", async function () {
     try {
        const data = await client.DescribePrice({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mariadb.v20170312.ModifyInstanceVport", async function () {
+    try {
+       const data = await client.ModifyInstanceVport({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -3170,25 +3170,18 @@ _不填默认为生产环境_
 }
 
 /**
- * 支付方式费率及自定义表单项
+ * 渠道透传字段
  */
-export interface QueryContractPayFeeResult {
+export interface CloudExternalAttachmentData {
   /**
-      * pay支付方式json数据
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Pay: PayDataResult
-
-  /**
-   * 合同扩展自定义字段
+   * 渠道名
    */
-  ExtraInput?: Array<string>
+  ChannelName: string
 
   /**
-      * pay_fee支付方式行业分类费率json数据
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  PayFee: Array<PayFeeDataResult>
+   * 渠道透传字段，由各个渠道自行定义
+   */
+  AttachmentData: string
 }
 
 /**
@@ -3841,31 +3834,25 @@ export interface QueryOpenBankSettleOrderResponse {
 }
 
 /**
- * QueryMemberTransactionDetails返回参数结构体
+ * 支付方式费率及自定义表单项
  */
-export interface QueryMemberTransactionDetailsResponse {
+export interface QueryContractPayFeeResult {
   /**
-      * 错误码。
-__SUCCESS__: 成功
-__其他__: 见附录-错误码表
-      */
-  ErrCode: string
-
-  /**
-   * 错误消息。
-   */
-  ErrMessage: string
-
-  /**
-      * 返回结果。
+      * pay支付方式json数据
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Result: QueryMemberTransactionDetailsResult
+  Pay: PayDataResult
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 合同扩展自定义字段
    */
-  RequestId?: string
+  ExtraInput?: Array<string>
+
+  /**
+      * pay_fee支付方式行业分类费率json数据
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PayFee: Array<PayFeeDataResult>
 }
 
 /**
@@ -11438,6 +11425,11 @@ export interface CloudSubOrder {
 通过该字段可以实现渠道方的优惠抵扣补贴等营销功能。
       */
   AttachmentInfoList?: Array<CloudAttachmentInfo>
+
+  /**
+   * 渠道透传数据列表。
+   */
+  ExternalAttachmentDataList?: Array<CloudExternalAttachmentData>
 }
 
 /**
@@ -18209,6 +18201,34 @@ export interface CreateOrderResponse {
 }
 
 /**
+ * QueryMemberTransactionDetails返回参数结构体
+ */
+export interface QueryMemberTransactionDetailsResponse {
+  /**
+      * 错误码。
+__SUCCESS__: 成功
+__其他__: 见附录-错误码表
+      */
+  ErrCode: string
+
+  /**
+   * 错误消息。
+   */
+  ErrMessage: string
+
+  /**
+      * 返回结果。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result: QueryMemberTransactionDetailsResult
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 分账订单信息
  */
 export interface MultiApplyOrder {
@@ -23152,6 +23172,11 @@ ORDER_RECEIVE_MODE_V_COMBINE - 虚拟合单支付
    * 渠道方用户信息列表
    */
   ExternalUserInfoList?: Array<CloudExternalUserInfo>
+
+  /**
+   * 渠道透传数据列表
+   */
+  ExternalAttachmentDataList?: Array<CloudExternalAttachmentData>
 }
 
 /**
