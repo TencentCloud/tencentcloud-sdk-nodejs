@@ -18,13 +18,15 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  DescribeResultDownloadResponse,
   DescribeTaskResultResponse,
   AlterDMSTableResponse,
   DescribeDatabasesRequest,
   WorkGroupMessage,
   DeleteUserRequest,
   ListTaskJobLogDetailResponse,
-  DescribeSparkAppJobRequest,
+  Asset,
+  CreateResultDownloadResponse,
   CreateDMSDatabaseResponse,
   CreateStoreLocationResponse,
   ReportHeartbeatMetaDataRequest,
@@ -56,7 +58,7 @@ import {
   AlterDMSPartitionRequest,
   ViewBaseInfo,
   CheckLockMetaDataRequest,
-  Asset,
+  DescribeSparkAppJobRequest,
   CreateDatabaseResponse,
   DescribeTasksRequest,
   CreateSparkAppTaskRequest,
@@ -119,7 +121,7 @@ import {
   DescribeTaskResultRequest,
   Filter,
   DescribeUsersResponse,
-  DescribeScriptsResponse,
+  DataFormat,
   ViewResponseInfo,
   CreateUserRequest,
   ModifyWorkGroupRequest,
@@ -133,6 +135,7 @@ import {
   DescribeTablesRequest,
   DescribeDatabasesResponse,
   DMSTableInfo,
+  AttachUserPolicyResponse,
   DMSPartition,
   DatabaseInfo,
   DescribeDMSPartitionsResponse,
@@ -173,14 +176,15 @@ import {
   SQLTask,
   UserMessage,
   Property,
-  AttachUserPolicyResponse,
+  CreateResultDownloadRequest,
   CreateDMSDatabaseRequest,
   DetachWorkGroupPolicyRequest,
   DescribeDMSTableRequest,
   DescribeViewsResponse,
-  DataFormat,
+  DescribeScriptsResponse,
   DatabaseResponseInfo,
   DMSColumn,
+  DescribeResultDownloadRequest,
 } from "./dlc_models"
 
 /**
@@ -363,6 +367,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询具体的spark应用
+   */
+  async DescribeSparkAppJob(
+    req: DescribeSparkAppJobRequest,
+    cb?: (error: string, rep: DescribeSparkAppJobResponse) => void
+  ): Promise<DescribeSparkAppJobResponse> {
+    return this.request("DescribeSparkAppJob", req, cb)
+  }
+
+  /**
    * 删除工作组
    */
   async DeleteWorkGroup(
@@ -380,6 +394,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UnlockMetaDataResponse) => void
   ): Promise<UnlockMetaDataResponse> {
     return this.request("UnlockMetaData", req, cb)
+  }
+
+  /**
+   * 查询结果下载任务
+   */
+  async DescribeResultDownload(
+    req: DescribeResultDownloadRequest,
+    cb?: (error: string, rep: DescribeResultDownloadResponse) => void
+  ): Promise<DescribeResultDownloadResponse> {
+    return this.request("DescribeResultDownload", req, cb)
   }
 
   /**
@@ -733,13 +757,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询具体的spark应用
+   * 创建查询结果下载任务
    */
-  async DescribeSparkAppJob(
-    req: DescribeSparkAppJobRequest,
-    cb?: (error: string, rep: DescribeSparkAppJobResponse) => void
-  ): Promise<DescribeSparkAppJobResponse> {
-    return this.request("DescribeSparkAppJob", req, cb)
+  async CreateResultDownload(
+    req: CreateResultDownloadRequest,
+    cb?: (error: string, rep: CreateResultDownloadResponse) => void
+  ): Promise<CreateResultDownloadResponse> {
+    return this.request("CreateResultDownload", req, cb)
   }
 
   /**

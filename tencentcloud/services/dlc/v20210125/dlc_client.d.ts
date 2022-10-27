@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeTaskResultResponse, AlterDMSTableResponse, DescribeDatabasesRequest, DeleteUserRequest, ListTaskJobLogDetailResponse, DescribeSparkAppJobRequest, CreateDMSDatabaseResponse, CreateStoreLocationResponse, ReportHeartbeatMetaDataRequest, DescribeDMSDatabaseResponse, DropDMSDatabaseRequest, CreateScriptResponse, CreateTasksInOrderResponse, DescribeTablesResponse, DeleteSparkAppRequest, ModifyUserResponse, DeleteScriptResponse, DetachUserPolicyRequest, DescribeSparkAppTasksResponse, DescribeTasksResponse, DescribeDMSTableResponse, DropDMSPartitionsRequest, CreateTasksInOrderRequest, AddDMSPartitionsResponse, DetachWorkGroupPolicyResponse, ModifySparkAppRequest, CreateDatabaseRequest, DescribeDMSTablesResponse, AlterDMSPartitionRequest, CheckLockMetaDataRequest, CreateDatabaseResponse, DescribeTasksRequest, CreateSparkAppTaskRequest, DeleteWorkGroupRequest, UnlockMetaDataRequest, AttachUserPolicyRequest, ListTaskJobLogDetailRequest, AttachWorkGroupPolicyRequest, CreateUserResponse, DeleteUserResponse, CreateStoreLocationRequest, DescribeDMSPartitionsRequest, DescribeSparkAppJobsRequest, CreateDMSTableResponse, CreateTaskRequest, ModifySparkAppResponse, CreateTableRequest, DescribeWorkGroupsResponse, CreateImportTaskRequest, DescribeScriptsRequest, DescribeSparkAppJobResponse, DeleteUsersFromWorkGroupResponse, AddUsersToWorkGroupRequest, DescribeStoreLocationRequest, AddUsersToWorkGroupResponse, CreateExportTaskRequest, ReportHeartbeatMetaDataResponse, CreateDMSTableRequest, DropDMSTableRequest, AttachWorkGroupPolicyResponse, ModifyWorkGroupResponse, DescribeDMSTablesRequest, ModifyUserRequest, CreateSparkAppTaskResponse, CancelTaskRequest, BindWorkGroupsToUserResponse, DescribeStoreLocationResponse, DeleteScriptRequest, AddDMSPartitionsRequest, AlterDMSTableRequest, CreateImportTaskResponse, CreateTableResponse, CreateScriptRequest, BindWorkGroupsToUserRequest, DescribeTaskResultRequest, DescribeUsersResponse, DescribeScriptsResponse, CreateUserRequest, ModifyWorkGroupRequest, CancelTaskResponse, UnlockMetaDataResponse, DeleteWorkGroupResponse, DropDMSTableResponse, CreateWorkGroupResponse, DescribeTablesRequest, DescribeDatabasesResponse, DescribeDMSPartitionsResponse, CreateExportTaskResponse, UnbindWorkGroupsFromUserRequest, DescribeDMSDatabaseRequest, DescribeTableRequest, DropDMSDatabaseResponse, DescribeUsersRequest, DeleteUsersFromWorkGroupRequest, CreateSparkAppResponse, CreateTaskResponse, DeleteSparkAppResponse, AlterDMSPartitionResponse, CreateTasksRequest, DescribeTableResponse, DescribeSparkAppJobsResponse, DescribeViewsRequest, LockMetaDataRequest, DetachUserPolicyResponse, DescribeWorkGroupsRequest, CreateTasksResponse, CreateSparkAppRequest, UnbindWorkGroupsFromUserResponse, DropDMSPartitionsResponse, AlterDMSDatabaseResponse, CreateWorkGroupRequest, DescribeSparkAppTasksRequest, LockMetaDataResponse, CheckLockMetaDataResponse, AlterDMSDatabaseRequest, AttachUserPolicyResponse, CreateDMSDatabaseRequest, DetachWorkGroupPolicyRequest, DescribeDMSTableRequest, DescribeViewsResponse } from "./dlc_models";
+import { DescribeResultDownloadResponse, DescribeTaskResultResponse, AlterDMSTableResponse, DescribeDatabasesRequest, DeleteUserRequest, ListTaskJobLogDetailResponse, CreateResultDownloadResponse, CreateDMSDatabaseResponse, CreateStoreLocationResponse, ReportHeartbeatMetaDataRequest, DescribeDMSDatabaseResponse, DropDMSDatabaseRequest, CreateScriptResponse, CreateTasksInOrderResponse, DescribeTablesResponse, DeleteSparkAppRequest, ModifyUserResponse, DeleteScriptResponse, DetachUserPolicyRequest, DescribeSparkAppTasksResponse, DescribeTasksResponse, DescribeDMSTableResponse, DropDMSPartitionsRequest, CreateTasksInOrderRequest, AddDMSPartitionsResponse, DetachWorkGroupPolicyResponse, ModifySparkAppRequest, CreateDatabaseRequest, DescribeDMSTablesResponse, AlterDMSPartitionRequest, CheckLockMetaDataRequest, DescribeSparkAppJobRequest, CreateDatabaseResponse, DescribeTasksRequest, CreateSparkAppTaskRequest, DeleteWorkGroupRequest, UnlockMetaDataRequest, AttachUserPolicyRequest, ListTaskJobLogDetailRequest, AttachWorkGroupPolicyRequest, CreateUserResponse, DeleteUserResponse, CreateStoreLocationRequest, DescribeDMSPartitionsRequest, DescribeSparkAppJobsRequest, CreateDMSTableResponse, CreateTaskRequest, ModifySparkAppResponse, CreateTableRequest, DescribeWorkGroupsResponse, CreateImportTaskRequest, DescribeScriptsRequest, DescribeSparkAppJobResponse, DeleteUsersFromWorkGroupResponse, AddUsersToWorkGroupRequest, DescribeStoreLocationRequest, AddUsersToWorkGroupResponse, CreateExportTaskRequest, ReportHeartbeatMetaDataResponse, CreateDMSTableRequest, DropDMSTableRequest, AttachWorkGroupPolicyResponse, ModifyWorkGroupResponse, DescribeDMSTablesRequest, ModifyUserRequest, CreateSparkAppTaskResponse, CancelTaskRequest, BindWorkGroupsToUserResponse, DescribeStoreLocationResponse, DeleteScriptRequest, AddDMSPartitionsRequest, AlterDMSTableRequest, CreateImportTaskResponse, CreateTableResponse, CreateScriptRequest, BindWorkGroupsToUserRequest, DescribeTaskResultRequest, DescribeUsersResponse, CreateUserRequest, ModifyWorkGroupRequest, CancelTaskResponse, UnlockMetaDataResponse, DeleteWorkGroupResponse, DropDMSTableResponse, CreateWorkGroupResponse, DescribeTablesRequest, DescribeDatabasesResponse, AttachUserPolicyResponse, DescribeDMSPartitionsResponse, CreateExportTaskResponse, UnbindWorkGroupsFromUserRequest, DescribeDMSDatabaseRequest, DescribeTableRequest, DropDMSDatabaseResponse, DescribeUsersRequest, DeleteUsersFromWorkGroupRequest, CreateSparkAppResponse, CreateTaskResponse, DeleteSparkAppResponse, AlterDMSPartitionResponse, CreateTasksRequest, DescribeTableResponse, DescribeSparkAppJobsResponse, DescribeViewsRequest, LockMetaDataRequest, DetachUserPolicyResponse, DescribeWorkGroupsRequest, CreateTasksResponse, CreateSparkAppRequest, UnbindWorkGroupsFromUserResponse, DropDMSPartitionsResponse, AlterDMSDatabaseResponse, CreateWorkGroupRequest, DescribeSparkAppTasksRequest, LockMetaDataResponse, CheckLockMetaDataResponse, AlterDMSDatabaseRequest, CreateResultDownloadRequest, CreateDMSDatabaseRequest, DetachWorkGroupPolicyRequest, DescribeDMSTableRequest, DescribeViewsResponse, DescribeScriptsResponse, DescribeResultDownloadRequest } from "./dlc_models";
 /**
  * dlc client
  * @class
@@ -76,6 +76,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeScripts(req: DescribeScriptsRequest, cb?: (error: string, rep: DescribeScriptsResponse) => void): Promise<DescribeScriptsResponse>;
     /**
+     * 查询具体的spark应用
+     */
+    DescribeSparkAppJob(req: DescribeSparkAppJobRequest, cb?: (error: string, rep: DescribeSparkAppJobResponse) => void): Promise<DescribeSparkAppJobResponse>;
+    /**
      * 删除工作组
      */
     DeleteWorkGroup(req: DeleteWorkGroupRequest, cb?: (error: string, rep: DeleteWorkGroupResponse) => void): Promise<DeleteWorkGroupResponse>;
@@ -83,6 +87,10 @@ export declare class Client extends AbstractClient {
      * 元数据解锁
      */
     UnlockMetaData(req: UnlockMetaDataRequest, cb?: (error: string, rep: UnlockMetaDataResponse) => void): Promise<UnlockMetaDataResponse>;
+    /**
+     * 查询结果下载任务
+     */
+    DescribeResultDownload(req: DescribeResultDownloadRequest, cb?: (error: string, rep: DescribeResultDownloadResponse) => void): Promise<DescribeResultDownloadResponse>;
     /**
      * 该接口（CreateStoreLocation）新增或覆盖计算结果存储位置。
      */
@@ -224,9 +232,9 @@ export declare class Client extends AbstractClient {
      */
     CreateDMSTable(req: CreateDMSTableRequest, cb?: (error: string, rep: CreateDMSTableResponse) => void): Promise<CreateDMSTableResponse>;
     /**
-     * 查询具体的spark应用
+     * 创建查询结果下载任务
      */
-    DescribeSparkAppJob(req: DescribeSparkAppJobRequest, cb?: (error: string, rep: DescribeSparkAppJobResponse) => void): Promise<DescribeSparkAppJobResponse>;
+    CreateResultDownload(req: CreateResultDownloadRequest, cb?: (error: string, rep: CreateResultDownloadResponse) => void): Promise<CreateResultDownloadResponse>;
     /**
      * 查询spark应用的运行任务实例列表
      */

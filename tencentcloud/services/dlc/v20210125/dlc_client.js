@@ -130,6 +130,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeScripts", req, cb);
     }
     /**
+     * 查询具体的spark应用
+     */
+    async DescribeSparkAppJob(req, cb) {
+        return this.request("DescribeSparkAppJob", req, cb);
+    }
+    /**
      * 删除工作组
      */
     async DeleteWorkGroup(req, cb) {
@@ -140,6 +146,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async UnlockMetaData(req, cb) {
         return this.request("UnlockMetaData", req, cb);
+    }
+    /**
+     * 查询结果下载任务
+     */
+    async DescribeResultDownload(req, cb) {
+        return this.request("DescribeResultDownload", req, cb);
     }
     /**
      * 该接口（CreateStoreLocation）新增或覆盖计算结果存储位置。
@@ -352,10 +364,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateDMSTable", req, cb);
     }
     /**
-     * 查询具体的spark应用
+     * 创建查询结果下载任务
      */
-    async DescribeSparkAppJob(req, cb) {
-        return this.request("DescribeSparkAppJob", req, cb);
+    async CreateResultDownload(req, cb) {
+        return this.request("CreateResultDownload", req, cb);
     }
     /**
      * 查询spark应用的运行任务实例列表

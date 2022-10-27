@@ -1,4 +1,42 @@
 /**
+ * DescribeResultDownload返回参数结构体
+ */
+export interface DescribeResultDownloadResponse {
+    /**
+      * 下载文件路径
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Path: string;
+    /**
+      * 任务状态 init | queue | format | compress | success|  timeout | error
+      */
+    Status: string;
+    /**
+      * 任务异常原因
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Reason: string;
+    /**
+      * 临时AK
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SecretId: string;
+    /**
+      * 临时SK
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SecretKey: string;
+    /**
+      * 临时Token
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Token: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeTaskResult返回参数结构体
  */
 export interface DescribeTaskResultResponse {
@@ -110,17 +148,82 @@ export interface ListTaskJobLogDetailResponse {
     RequestId?: string;
 }
 /**
- * DescribeSparkAppJob请求参数结构体
+ * 元数据基本对象
  */
-export interface DescribeSparkAppJobRequest {
+export interface Asset {
     /**
-      * spark作业Id，与JobName同时存在时，JobName无效
+      * 主键
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    JobId?: string;
+    Id?: number;
     /**
-      * spark作业名
+      * 名称
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    JobName?: string;
+    Name?: string;
+    /**
+      * 对象GUID值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Guid?: string;
+    /**
+      * 数据目录
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Catalog?: string;
+    /**
+      * 描述信息
+      */
+    Description?: string;
+    /**
+      * 对象owner
+      */
+    Owner?: string;
+    /**
+      * 对象owner账户
+      */
+    OwnerAccount?: string;
+    /**
+      * 权限
+      */
+    PermValues?: Array<KVPair>;
+    /**
+      * 附加属性
+      */
+    Params?: Array<KVPair>;
+    /**
+      * 附加业务属性
+      */
+    BizParams?: Array<KVPair>;
+    /**
+      * 数据版本
+      */
+    DataVersion?: number;
+    /**
+      * 创建时间
+      */
+    CreateTime?: string;
+    /**
+      * 修改时间
+      */
+    ModifiedTime?: string;
+    /**
+      * 数据源主键
+      */
+    DatasourceId?: number;
+}
+/**
+ * CreateResultDownload返回参数结构体
+ */
+export interface CreateResultDownloadResponse {
+    /**
+      * 下载任务Id
+      */
+    DownloadId: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * CreateDMSDatabase返回参数结构体
@@ -966,69 +1069,17 @@ export interface CheckLockMetaDataRequest {
     ElapsedMs?: number;
 }
 /**
- * 元数据基本对象
+ * DescribeSparkAppJob请求参数结构体
  */
-export interface Asset {
+export interface DescribeSparkAppJobRequest {
     /**
-      * 主键
-注意：此字段可能返回 null，表示取不到有效值。
+      * spark作业Id，与JobName同时存在时，JobName无效
       */
-    Id?: number;
+    JobId?: string;
     /**
-      * 名称
-注意：此字段可能返回 null，表示取不到有效值。
+      * spark作业名
       */
-    Name?: string;
-    /**
-      * 对象GUID值
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Guid?: string;
-    /**
-      * 数据目录
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Catalog?: string;
-    /**
-      * 描述信息
-      */
-    Description?: string;
-    /**
-      * 对象owner
-      */
-    Owner?: string;
-    /**
-      * 对象owner账户
-      */
-    OwnerAccount?: string;
-    /**
-      * 权限
-      */
-    PermValues?: Array<KVPair>;
-    /**
-      * 附加属性
-      */
-    Params?: Array<KVPair>;
-    /**
-      * 附加业务属性
-      */
-    BizParams?: Array<KVPair>;
-    /**
-      * 数据版本
-      */
-    DataVersion?: number;
-    /**
-      * 创建时间
-      */
-    CreateTime?: string;
-    /**
-      * 修改时间
-      */
-    ModifiedTime?: string;
-    /**
-      * 数据源主键
-      */
-    DatasourceId?: number;
+    JobName?: string;
 }
 /**
  * CreateDatabase返回参数结构体
@@ -2599,22 +2650,39 @@ export interface DescribeUsersResponse {
     RequestId?: string;
 }
 /**
- * DescribeScripts返回参数结构体
+ * 数据表数据格式。
  */
-export interface DescribeScriptsResponse {
+export interface DataFormat {
     /**
-      * Script列表
+      * 文本格式，TextFile。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Scripts: Array<Script>;
+    TextFile: TextFile;
     /**
-      * 实例总数
+      * 文本格式，CSV。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    TotalCount: number;
+    CSV: CSV;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 文本格式，Json。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    RequestId?: string;
+    Json: Other;
+    /**
+      * Parquet格式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Parquet: Other;
+    /**
+      * ORC格式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ORC: Other;
+    /**
+      * AVRO格式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AVRO: Other;
 }
 /**
  * 查询视图信息对象
@@ -2914,6 +2982,15 @@ export interface DMSTableInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Asset: Asset;
+}
+/**
+ * AttachUserPolicy返回参数结构体
+ */
+export interface AttachUserPolicyResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 迁移元数据分区对象
@@ -3825,13 +3902,21 @@ export interface Property {
     Value: string;
 }
 /**
- * AttachUserPolicy返回参数结构体
+ * CreateResultDownload请求参数结构体
  */
-export interface AttachUserPolicyResponse {
+export interface CreateResultDownloadRequest {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 查询结果任务Id
       */
-    RequestId?: string;
+    TaskId: string;
+    /**
+      * 下载格式
+      */
+    Format: string;
+    /**
+      * 是否重新生成下载文件，仅当之前任务为 Timout | Error 时有效
+      */
+    Force?: boolean;
 }
 /**
  * CreateDMSDatabase请求参数结构体
@@ -3918,39 +4003,22 @@ export interface DescribeViewsResponse {
     RequestId?: string;
 }
 /**
- * 数据表数据格式。
+ * DescribeScripts返回参数结构体
  */
-export interface DataFormat {
+export interface DescribeScriptsResponse {
     /**
-      * 文本格式，TextFile。
+      * Script列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    TextFile: TextFile;
+    Scripts: Array<Script>;
     /**
-      * 文本格式，CSV。
-注意：此字段可能返回 null，表示取不到有效值。
+      * 实例总数
       */
-    CSV: CSV;
+    TotalCount: number;
     /**
-      * 文本格式，Json。
-注意：此字段可能返回 null，表示取不到有效值。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Json: Other;
-    /**
-      * Parquet格式
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Parquet: Other;
-    /**
-      * ORC格式
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ORC: Other;
-    /**
-      * AVRO格式
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    AVRO: Other;
+    RequestId?: string;
 }
 /**
  * 数据库对象
@@ -4035,4 +4103,13 @@ export interface DMSColumn {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     IsPartition?: boolean;
+}
+/**
+ * DescribeResultDownload请求参数结构体
+ */
+export interface DescribeResultDownloadRequest {
+    /**
+      * 查询任务Id
+      */
+    DownloadId: string;
 }

@@ -188,6 +188,16 @@ it("dlc.v20210125.DescribeScripts", async function () {
     }
 })
 
+it("dlc.v20210125.DescribeSparkAppJob", async function () {
+    try {
+       const data = await client.DescribeSparkAppJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.DeleteWorkGroup", async function () {
     try {
        const data = await client.DeleteWorkGroup({})
@@ -201,6 +211,16 @@ it("dlc.v20210125.DeleteWorkGroup", async function () {
 it("dlc.v20210125.UnlockMetaData", async function () {
     try {
        const data = await client.UnlockMetaData({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.DescribeResultDownload", async function () {
+    try {
+       const data = await client.DescribeResultDownload({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -558,9 +578,9 @@ it("dlc.v20210125.CreateDMSTable", async function () {
     }
 })
 
-it("dlc.v20210125.DescribeSparkAppJob", async function () {
+it("dlc.v20210125.CreateResultDownload", async function () {
     try {
-       const data = await client.DescribeSparkAppJob({})
+       const data = await client.CreateResultDownload({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
