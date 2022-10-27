@@ -83,7 +83,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 【该接口将逐步下线，请切换使用升级版本DescribeAgentSelfPayDealsV2】可以查询代理商下指定客户的自付订单
+   * 【该接口已下线，请切换使用升级版本DescribeAgentSelfPayDealsV2】可以查询代理商下指定客户的自付订单
    */
   async DescribeAgentSelfPayDeals(
     req: DescribeAgentSelfPayDealsRequest,
@@ -93,7 +93,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 【该接口将逐步下线，请切换使用升级版本DescribeAgentDealsByCache】代理商拉取缓存的全量客户订单
+   * 【该接口已下线，请使用升级版本DescribeAgentDealsByCache】代理商拉取缓存的全量客户订单
    */
   async DescribeAgentDealsCache(
     req: DescribeAgentDealsCacheRequest,
@@ -153,7 +153,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 代理商可查询自己名下全部返佣信息
+   * 【该接口已下线，请切换使用升级版本DescribeRebateInfosNew】代理商可查询自己名下全部返佣信息
    */
   async DescribeRebateInfos(
     req: DescribeRebateInfosRequest,
@@ -193,7 +193,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 【该接口将逐步下线，请切换使用升级版本DescribeAgentPayDealsV2】可以查询代理商代付的所有订单
+   * 【该接口已下线，请切换使用升级版本DescribeAgentPayDealsV2】可以查询代理商代付的所有订单
    */
   async DescribeAgentPayDeals(
     req: DescribeAgentPayDealsRequest,

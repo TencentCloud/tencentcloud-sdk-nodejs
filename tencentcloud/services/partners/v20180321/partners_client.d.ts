@@ -8,11 +8,11 @@ import { DescribeAgentDealsCacheRequest, DescribeSalesmansRequest, DescribeAgent
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
     /**
-     * 【该接口将逐步下线，请切换使用升级版本DescribeAgentSelfPayDealsV2】可以查询代理商下指定客户的自付订单
+     * 【该接口已下线，请切换使用升级版本DescribeAgentSelfPayDealsV2】可以查询代理商下指定客户的自付订单
      */
     DescribeAgentSelfPayDeals(req: DescribeAgentSelfPayDealsRequest, cb?: (error: string, rep: DescribeAgentSelfPayDealsResponse) => void): Promise<DescribeAgentSelfPayDealsResponse>;
     /**
-     * 【该接口将逐步下线，请切换使用升级版本DescribeAgentDealsByCache】代理商拉取缓存的全量客户订单
+     * 【该接口已下线，请使用升级版本DescribeAgentDealsByCache】代理商拉取缓存的全量客户订单
      */
     DescribeAgentDealsCache(req: DescribeAgentDealsCacheRequest, cb?: (error: string, rep: DescribeAgentDealsCacheResponse) => void): Promise<DescribeAgentDealsCacheResponse>;
     /**
@@ -36,7 +36,7 @@ export declare class Client extends AbstractClient {
      */
     AgentTransferMoney(req: AgentTransferMoneyRequest, cb?: (error: string, rep: AgentTransferMoneyResponse) => void): Promise<AgentTransferMoneyResponse>;
     /**
-     * 代理商可查询自己名下全部返佣信息
+     * 【该接口已下线，请切换使用升级版本DescribeRebateInfosNew】代理商可查询自己名下全部返佣信息
      */
     DescribeRebateInfos(req: DescribeRebateInfosRequest, cb?: (error: string, rep: DescribeRebateInfosResponse) => void): Promise<DescribeRebateInfosResponse>;
     /**
@@ -52,7 +52,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeClientBalanceNew(req: DescribeClientBalanceNewRequest, cb?: (error: string, rep: DescribeClientBalanceNewResponse) => void): Promise<DescribeClientBalanceNewResponse>;
     /**
-     * 【该接口将逐步下线，请切换使用升级版本DescribeAgentPayDealsV2】可以查询代理商代付的所有订单
+     * 【该接口已下线，请切换使用升级版本DescribeAgentPayDealsV2】可以查询代理商代付的所有订单
      */
     DescribeAgentPayDeals(req: DescribeAgentPayDealsRequest, cb?: (error: string, rep: DescribeAgentPayDealsResponse) => void): Promise<DescribeAgentPayDealsResponse>;
     /**

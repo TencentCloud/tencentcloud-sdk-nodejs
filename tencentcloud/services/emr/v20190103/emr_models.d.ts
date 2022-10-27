@@ -668,6 +668,10 @@ export interface ScaleOutInstanceRequest {
       * 预设配置组
       */
     ScaleOutServiceConfAssign?: string;
+    /**
+      * 0表示关闭自动续费，1表示开启自动续费
+      */
+    AutoRenew?: number;
 }
 /**
  * 获取CVM配额
@@ -861,6 +865,11 @@ export interface EmrListInstance {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     IsMultiZoneCluster: boolean;
+    /**
+      * 是否手戳集群
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IsHandsCluster: boolean;
 }
 /**
  * ModifyResourceScheduleConfig返回参数结构体

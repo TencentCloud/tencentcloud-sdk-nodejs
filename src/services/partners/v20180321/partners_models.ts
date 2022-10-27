@@ -88,17 +88,17 @@ export interface DescribeAgentDealsCacheRequest {
   Offset: number
 
   /**
-   * 限制数目
+   * 限制数目 最大200
    */
   Limit: number
 
   /**
-   * 下单时间范围起始点
+   * 下单时间范围起始点【请保持时间范围最大90天】
    */
   CreatTimeRangeStart?: string
 
   /**
-   * 下单时间范围终止点
+   * 下单时间范围终止点【请保持时间范围最大90天】
    */
   CreatTimeRangeEnd?: string
 
@@ -438,7 +438,7 @@ export interface DescribeAgentPayDealsV2Request {
   Offset: number
 
   /**
-   * 限制数目
+   * 限制数目 最大100
    */
   Limit: number
 
@@ -615,7 +615,7 @@ export interface DescribeAgentPayDealsRequest {
   Offset: number
 
   /**
-   * 限制数目
+   * 限制数目 最大100
    */
   Limit: number
 
@@ -929,7 +929,7 @@ export interface DescribeAgentSelfPayDealsV2Request {
   Offset: number
 
   /**
-   * 限制数目
+   * 限制数目 最大100
    */
   Limit: number
 
@@ -1157,17 +1157,17 @@ export interface DescribeAgentDealsByCacheRequest {
   Offset: number
 
   /**
-   * 限制数目
+   * 限制数目 最大200
    */
   Limit: number
 
   /**
-   * 下单时间范围起始点
+   * 下单时间范围起始点【请保持时间范围最大90天】
    */
   CreatTimeRangeStart?: string
 
   /**
-   * 下单时间范围终止点
+   * 下单时间范围终止点【请保持时间范围最大90天】
    */
   CreatTimeRangeEnd?: string
 
@@ -1217,7 +1217,7 @@ export interface DescribeAgentSelfPayDealsRequest {
   Offset: number
 
   /**
-   * 限制数目
+   * 限制数目 最大100
    */
   Limit: number
 

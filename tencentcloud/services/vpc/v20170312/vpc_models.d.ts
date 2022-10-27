@@ -2812,11 +2812,11 @@ export interface NetworkInterface {
     /**
       * 弹性网卡实例ID，例如：eni-f1xjkw1b。
       */
-    NetworkInterfaceId: string;
+    NetworkInterfaceId?: string;
     /**
       * 弹性网卡名称。
       */
-    NetworkInterfaceName: string;
+    NetworkInterfaceName?: string;
     /**
       * 弹性网卡描述。
       */
@@ -2824,11 +2824,11 @@ export interface NetworkInterface {
     /**
       * 子网实例ID。
       */
-    SubnetId: string;
+    SubnetId?: string;
     /**
       * VPC实例ID。
       */
-    VpcId: string;
+    VpcId?: string;
     /**
       * 绑定的安全组。
       */
@@ -2840,7 +2840,7 @@ export interface NetworkInterface {
     /**
       * MAC地址。
       */
-    MacAddress: string;
+    MacAddress?: string;
     /**
       * 弹性网卡状态：
 <li>`PENDING`：创建中</li>
@@ -2849,11 +2849,11 @@ export interface NetworkInterface {
 <li>`DETACHING`：解绑中</li>
 <li>`DELETING`：删除中</li>
       */
-    State: string;
+    State?: string;
     /**
       * 内网IP信息。
       */
-    PrivateIpAddressSet: Array<PrivateIpAddressSpecification>;
+    PrivateIpAddressSet?: Array<PrivateIpAddressSpecification>;
     /**
       * 绑定的云服务器对象。
 注意：此字段可能返回 null，表示取不到有效值。
@@ -2870,30 +2870,35 @@ export interface NetworkInterface {
     /**
       * `IPv6`地址列表。
       */
-    Ipv6AddressSet: Array<Ipv6Address>;
+    Ipv6AddressSet?: Array<Ipv6Address>;
     /**
       * 标签键值对。
       */
-    TagSet: Array<Tag>;
+    TagSet?: Array<Tag>;
     /**
       * 网卡类型。0 - 弹性网卡；1 - evm弹性网卡。
       */
-    EniType: number;
+    EniType?: number;
     /**
       * 网卡绑定的子机类型：cvm，eks。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Business: string;
+    Business?: string;
     /**
       * 网卡所关联的CDC实例ID。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    CdcId: string;
+    CdcId?: string;
     /**
       * 弹性网卡类型：0:标准型/1:扩展型。默认值为0。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    AttachType: number;
+    AttachType?: number;
+    /**
+      * 用于保留网卡主IP的资源ID用于保留网卡主IP的资源ID。用于删除网卡时作为入参数。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ResourceId?: string;
 }
 /**
  * TransformAddress请求参数结构体

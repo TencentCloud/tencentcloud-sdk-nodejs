@@ -1283,9 +1283,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除播放器配置。
-   *注：系统预置播放器配置不允许删除。*
-   */
+     * 该 API 已经<font color='red'>不再维护</font>，新版播放器签名不再使用播放器配置模板，详细请参考 [播放器签名](https://cloud.tencent.com/document/product/266/45554)。
+删除播放器配置。  
+*注：系统预置播放器配置不允许删除。*
+     */
   async DeleteSuperPlayerConfig(
     req: DeleteSuperPlayerConfigRequest,
     cb?: (error: string, rep: DeleteSuperPlayerConfigResponse) => void
@@ -1503,8 +1504,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建播放器配置，数量上限：100。
-   */
+     * 该 API 已经<font color='red'>不再维护</font>，新版播放器签名不再使用播放器配置模板，详细请参考 [播放器签名](https://cloud.tencent.com/document/product/266/45554)。
+创建播放器配置，数量上限：100。
+     */
   async CreateSuperPlayerConfig(
     req: CreateSuperPlayerConfigRequest,
     cb?: (error: string, rep: CreateSuperPlayerConfigResponse) => void
@@ -1733,8 +1735,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改播放器配置。
-   */
+     * 该 API 已经<font color='red'>不再维护</font>，新版播放器签名不再使用播放器配置模板，详细请参考 [播放器签名](https://cloud.tencent.com/document/product/266/45554)。
+修改播放器配置。
+     */
   async ModifySuperPlayerConfig(
     req: ModifySuperPlayerConfigRequest,
     cb?: (error: string, rep: ModifySuperPlayerConfigResponse) => void
@@ -2217,8 +2220,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询播放器配置，支持根据条件，分页查询。
-   */
+     * 该 API 已经<font color='red'>不再维护</font>，新版播放器签名不再使用播放器配置模板，详细请参考 [播放器签名](https://cloud.tencent.com/document/product/266/45554)。
+查询播放器配置，支持根据条件，分页查询。
+     */
   async DescribeSuperPlayerConfigs(
     req: DescribeSuperPlayerConfigsRequest,
     cb?: (error: string, rep: DescribeSuperPlayerConfigsResponse) => void

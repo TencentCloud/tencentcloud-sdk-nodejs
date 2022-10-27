@@ -1069,6 +1069,15 @@ export interface WorkSpaceClusterItem {
       * 绑定状态  2 绑定 1  解除绑定
       */
     Status: number;
+    /**
+      * 项目ID
+      */
+    ProjectId: number;
+    /**
+      * 项目ID string类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProjectIdStr: string;
 }
 /**
  * StopJobs返回参数结构体

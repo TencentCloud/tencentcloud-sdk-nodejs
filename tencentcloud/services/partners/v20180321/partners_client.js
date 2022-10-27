@@ -28,13 +28,13 @@ class Client extends abstract_client_1.AbstractClient {
         super("partners.tencentcloudapi.com", "2018-03-21", clientConfig);
     }
     /**
-     * 【该接口将逐步下线，请切换使用升级版本DescribeAgentSelfPayDealsV2】可以查询代理商下指定客户的自付订单
+     * 【该接口已下线，请切换使用升级版本DescribeAgentSelfPayDealsV2】可以查询代理商下指定客户的自付订单
      */
     async DescribeAgentSelfPayDeals(req, cb) {
         return this.request("DescribeAgentSelfPayDeals", req, cb);
     }
     /**
-     * 【该接口将逐步下线，请切换使用升级版本DescribeAgentDealsByCache】代理商拉取缓存的全量客户订单
+     * 【该接口已下线，请使用升级版本DescribeAgentDealsByCache】代理商拉取缓存的全量客户订单
      */
     async DescribeAgentDealsCache(req, cb) {
         return this.request("DescribeAgentDealsCache", req, cb);
@@ -70,7 +70,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AgentTransferMoney", req, cb);
     }
     /**
-     * 代理商可查询自己名下全部返佣信息
+     * 【该接口已下线，请切换使用升级版本DescribeRebateInfosNew】代理商可查询自己名下全部返佣信息
      */
     async DescribeRebateInfos(req, cb) {
         return this.request("DescribeRebateInfos", req, cb);
@@ -94,7 +94,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeClientBalanceNew", req, cb);
     }
     /**
-     * 【该接口将逐步下线，请切换使用升级版本DescribeAgentPayDealsV2】可以查询代理商代付的所有订单
+     * 【该接口已下线，请切换使用升级版本DescribeAgentPayDealsV2】可以查询代理商代付的所有订单
      */
     async DescribeAgentPayDeals(req, cb) {
         return this.request("DescribeAgentPayDeals", req, cb);

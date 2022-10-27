@@ -324,7 +324,8 @@ export declare class Client extends AbstractClient {
      */
     ModifyVodDomainAccelerateConfig(req: ModifyVodDomainAccelerateConfigRequest, cb?: (error: string, rep: ModifyVodDomainAccelerateConfigResponse) => void): Promise<ModifyVodDomainAccelerateConfigResponse>;
     /**
-     * 删除播放器配置。
+     * 该 API 已经<font color='red'>不再维护</font>，新版播放器签名不再使用播放器配置模板，详细请参考 [播放器签名](https://cloud.tencent.com/document/product/266/45554)。
+删除播放器配置。
 *注：系统预置播放器配置不允许删除。*
      */
     DeleteSuperPlayerConfig(req: DeleteSuperPlayerConfigRequest, cb?: (error: string, rep: DeleteSuperPlayerConfigResponse) => void): Promise<DeleteSuperPlayerConfigResponse>;
@@ -436,7 +437,8 @@ export declare class Client extends AbstractClient {
      */
     DescribeEventsState(req: DescribeEventsStateRequest, cb?: (error: string, rep: DescribeEventsStateResponse) => void): Promise<DescribeEventsStateResponse>;
     /**
-     * 创建播放器配置，数量上限：100。
+     * 该 API 已经<font color='red'>不再维护</font>，新版播放器签名不再使用播放器配置模板，详细请参考 [播放器签名](https://cloud.tencent.com/document/product/266/45554)。
+创建播放器配置，数量上限：100。
      */
     CreateSuperPlayerConfig(req: CreateSuperPlayerConfigRequest, cb?: (error: string, rep: CreateSuperPlayerConfigResponse) => void): Promise<CreateSuperPlayerConfigResponse>;
     /**
@@ -534,7 +536,8 @@ export declare class Client extends AbstractClient {
      */
     ModifySnapshotByTimeOffsetTemplate(req: ModifySnapshotByTimeOffsetTemplateRequest, cb?: (error: string, rep: ModifySnapshotByTimeOffsetTemplateResponse) => void): Promise<ModifySnapshotByTimeOffsetTemplateResponse>;
     /**
-     * 修改播放器配置。
+     * 该 API 已经<font color='red'>不再维护</font>，新版播放器签名不再使用播放器配置模板，详细请参考 [播放器签名](https://cloud.tencent.com/document/product/266/45554)。
+修改播放器配置。
      */
     ModifySuperPlayerConfig(req: ModifySuperPlayerConfigRequest, cb?: (error: string, rep: ModifySuperPlayerConfigResponse) => void): Promise<ModifySuperPlayerConfigResponse>;
     /**
@@ -790,7 +793,8 @@ export declare class Client extends AbstractClient {
      */
     ProcessMedia(req: ProcessMediaRequest, cb?: (error: string, rep: ProcessMediaResponse) => void): Promise<ProcessMediaResponse>;
     /**
-     * 查询播放器配置，支持根据条件，分页查询。
+     * 该 API 已经<font color='red'>不再维护</font>，新版播放器签名不再使用播放器配置模板，详细请参考 [播放器签名](https://cloud.tencent.com/document/product/266/45554)。
+查询播放器配置，支持根据条件，分页查询。
      */
     DescribeSuperPlayerConfigs(req: DescribeSuperPlayerConfigsRequest, cb?: (error: string, rep: DescribeSuperPlayerConfigsResponse) => void): Promise<DescribeSuperPlayerConfigsResponse>;
     /**

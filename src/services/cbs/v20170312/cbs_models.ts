@@ -1365,14 +1365,14 @@ export interface DescribeDiskOperationLogsResponse {
  */
 export interface ResizeDiskRequest {
   /**
-   * 云硬盘ID， 通过[DescribeDisks](/document/product/362/16315)接口查询。
-   */
-  DiskId: string
-
-  /**
    * 云硬盘扩容后的大小，单位为GB，必须大于当前云硬盘大小。云盘大小取值范围参见云硬盘[产品分类](/document/product/362/2353)的说明。
    */
   DiskSize: number
+
+  /**
+   * 云硬盘ID， 通过[DescribeDisks](/document/product/362/16315)接口查询。
+   */
+  DiskId: string
 }
 
 /**

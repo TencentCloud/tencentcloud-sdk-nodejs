@@ -50,6 +50,10 @@ export interface ClusterOverview {
       * 登录节点数量。
       */
     LoginNodeCount: number;
+    /**
+      * 集群所属私有网络ID。
+      */
+    VpcId: string;
 }
 /**
  * DescribeClusters请求参数结构体
