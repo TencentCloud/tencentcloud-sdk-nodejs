@@ -28,34 +28,10 @@ class Client extends abstract_client_1.AbstractClient {
         super("partners.tencentcloudapi.com", "2018-03-21", clientConfig);
     }
     /**
-     * 【该接口已下线，请切换使用升级版本DescribeAgentSelfPayDealsV2】可以查询代理商下指定客户的自付订单
-     */
-    async DescribeAgentSelfPayDeals(req, cb) {
-        return this.request("DescribeAgentSelfPayDeals", req, cb);
-    }
-    /**
      * 【该接口已下线，请使用升级版本DescribeAgentDealsByCache】代理商拉取缓存的全量客户订单
      */
     async DescribeAgentDealsCache(req, cb) {
         return this.request("DescribeAgentDealsCache", req, cb);
-    }
-    /**
-     * 代理商可以对名下客户添加备注、修改备注
-     */
-    async ModifyClientRemark(req, cb) {
-        return this.request("ModifyClientRemark", req, cb);
-    }
-    /**
-     * 查询代理商名下指定代客的自付订单
-     */
-    async DescribeAgentSelfPayDealsV2(req, cb) {
-        return this.request("DescribeAgentSelfPayDealsV2", req, cb);
-    }
-    /**
-     * 代理商支付订单接口，支持自付/代付
-     */
-    async AgentPayDeals(req, cb) {
-        return this.request("AgentPayDeals", req, cb);
     }
     /**
      * 代理商可查询自己及名下代客所有业务明细
@@ -76,40 +52,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeRebateInfos", req, cb);
     }
     /**
-     * 代理商查询名下业务员列表信息
-     */
-    async DescribeSalesmans(req, cb) {
-        return this.request("DescribeSalesmans", req, cb);
-    }
-    /**
      * 合作伙伴为客户消除强代付关系
      */
     async RemovePayRelationForClient(req, cb) {
         return this.request("RemovePayRelationForClient", req, cb);
     }
     /**
-     * 为合作伙伴提供查询客户余额能力。调用者必须是合作伙伴，只能查询自己名下客户余额
+     * 代理商可以对名下客户添加备注、修改备注
      */
-    async DescribeClientBalanceNew(req, cb) {
-        return this.request("DescribeClientBalanceNew", req, cb);
-    }
-    /**
-     * 【该接口已下线，请切换使用升级版本DescribeAgentPayDealsV2】可以查询代理商代付的所有订单
-     */
-    async DescribeAgentPayDeals(req, cb) {
-        return this.request("DescribeAgentPayDeals", req, cb);
-    }
-    /**
-     * 代理商名下客户解绑记录查询接口
-     */
-    async DescribeUnbindClientList(req, cb) {
-        return this.request("DescribeUnbindClientList", req, cb);
-    }
-    /**
-     * 代理商可查询自己名下待审核客户列表
-     */
-    async DescribeAgentClients(req, cb) {
-        return this.request("DescribeAgentClients", req, cb);
+    async ModifyClientRemark(req, cb) {
+        return this.request("ModifyClientRemark", req, cb);
     }
     /**
      * 【该接口将逐步下线，请切换使用升级版本DescribeClientBalanceNew】为合作伙伴提供查询客户余额能力。调用者必须是合作伙伴，只能查询自己名下客户余额.
@@ -118,10 +70,40 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeClientBalance", req, cb);
     }
     /**
+     * 为合作伙伴提供查询客户余额能力。调用者必须是合作伙伴，只能查询自己名下客户余额
+     */
+    async DescribeClientBalanceNew(req, cb) {
+        return this.request("DescribeClientBalanceNew", req, cb);
+    }
+    /**
      * 传入代客uin，查客户级别，客户审核状态，客户实名认证状态
      */
     async DescribeAgentClientGrade(req, cb) {
         return this.request("DescribeAgentClientGrade", req, cb);
+    }
+    /**
+     * 代理商名下客户解绑记录查询接口
+     */
+    async DescribeUnbindClientList(req, cb) {
+        return this.request("DescribeUnbindClientList", req, cb);
+    }
+    /**
+     * 代理商支付订单接口，支持自付/代付
+     */
+    async AgentPayDeals(req, cb) {
+        return this.request("AgentPayDeals", req, cb);
+    }
+    /**
+     * 代理商查询名下业务员列表信息
+     */
+    async DescribeSalesmans(req, cb) {
+        return this.request("DescribeSalesmans", req, cb);
+    }
+    /**
+     * 【该接口已下线，请切换使用升级版本DescribeAgentPayDealsV2】可以查询代理商代付的所有订单
+     */
+    async DescribeAgentPayDeals(req, cb) {
+        return this.request("DescribeAgentPayDeals", req, cb);
     }
     /**
      * 可以查询代理商代付的所有订单
@@ -136,10 +118,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAgentAuditedClients", req, cb);
     }
     /**
-     * 合作伙伴为客户创建强代付关系
+     * 查询代理商名下指定代客的自付订单
      */
-    async CreatePayRelationForClient(req, cb) {
-        return this.request("CreatePayRelationForClient", req, cb);
+    async DescribeAgentSelfPayDealsV2(req, cb) {
+        return this.request("DescribeAgentSelfPayDealsV2", req, cb);
     }
     /**
      * 代理商可以审核其名下申请中代客
@@ -152,6 +134,30 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeAgentDealsByCache(req, cb) {
         return this.request("DescribeAgentDealsByCache", req, cb);
+    }
+    /**
+     * 【该接口已下线，请切换使用升级版本DescribeAgentSelfPayDealsV2】可以查询代理商下指定客户的自付订单
+     */
+    async DescribeAgentSelfPayDeals(req, cb) {
+        return this.request("DescribeAgentSelfPayDeals", req, cb);
+    }
+    /**
+     * 代理商可查询自己名下全部返佣信息
+     */
+    async DescribeRebateInfosNew(req, cb) {
+        return this.request("DescribeRebateInfosNew", req, cb);
+    }
+    /**
+     * 代理商可查询自己名下待审核客户列表
+     */
+    async DescribeAgentClients(req, cb) {
+        return this.request("DescribeAgentClients", req, cb);
+    }
+    /**
+     * 合作伙伴为客户创建强代付关系
+     */
+    async CreatePayRelationForClient(req, cb) {
+        return this.request("CreatePayRelationForClient", req, cb);
     }
 }
 exports.Client = Client;

@@ -259,6 +259,31 @@ export interface DescribeDCDBPriceResponse {
 }
 
 /**
+ * ModifyInstanceVport返回参数结构体
+ */
+export interface ModifyInstanceVportResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyInstanceVip返回参数结构体
+ */
+export interface ModifyInstanceVipResponse {
+  /**
+   * 异步任务流程ID
+   */
+  FlowId: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * AssociateSecurityGroups请求参数结构体
  */
 export interface AssociateSecurityGroupsRequest {
@@ -972,18 +997,18 @@ export interface DescribeDCDBRenewalPriceRequest {
 }
 
 /**
- * 修改参数结果
+ * ModifyInstanceNetwork返回参数结构体
  */
-export interface ParamModifyResult {
+export interface ModifyInstanceNetworkResponse {
   /**
-   * 修改参数名字
+   * 异步任务ID，根据此FlowId通过DescribeFlow接口查询任务进行状态
    */
-  Param: string
+  FlowId: number
 
   /**
-   * 参数修改结果。0表示修改成功；-1表示修改失败；-2表示该参数值非法
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Code: number
+  RequestId?: string
 }
 
 /**
@@ -1072,6 +1097,21 @@ export interface SwitchDBInstanceHAResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 修改参数结果
+ */
+export interface ParamModifyResult {
+  /**
+   * 修改参数名字
+   */
+  Param: string
+
+  /**
+   * 参数修改结果。0表示修改成功；-1表示修改失败；-2表示该参数值非法
+   */
+  Code: number
 }
 
 /**
@@ -2458,6 +2498,31 @@ export interface ShardInfo {
 }
 
 /**
+ * ModifyInstanceVip请求参数结构体
+ */
+export interface ModifyInstanceVipRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+
+  /**
+   * 实例VIP
+   */
+  Vip: string
+
+  /**
+   * IPv6标志
+   */
+  Ipv6Flag?: number
+
+  /**
+   * VIP保留时长，单位小时，取值范围（0~168），0表示立即释放，有一分钟释放延迟。不传此参数，默认24小时释放VIP。
+   */
+  VipReleaseDelay?: number
+}
+
+/**
  * OpenDBExtranetAccess请求参数结构体
  */
 export interface OpenDBExtranetAccessRequest {
@@ -3369,6 +3434,41 @@ export interface UpgradeDCDBInstanceRequest {
 }
 
 /**
+ * ModifyInstanceNetwork请求参数结构体
+ */
+export interface ModifyInstanceNetworkRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+
+  /**
+   * 希望转到的VPC网络的VpcId
+   */
+  VpcId: string
+
+  /**
+   * 希望转到的VPC网络的子网ID
+   */
+  SubnetId: string
+
+  /**
+   * 如果需要指定VIP，填上该字段
+   */
+  Vip?: string
+
+  /**
+   * 如果需要指定VIPv6，填上该字段
+   */
+  Vipv6?: string
+
+  /**
+   * VIP保留时长，单位小时，取值范围（0~168），0表示立即释放，有一分钟释放延迟。不传此参数，默认24小时释放VIP。
+   */
+  VipReleaseDelay?: number
+}
+
+/**
  * DestroyHourDCDBInstance返回参数结构体
  */
 export interface DestroyHourDCDBInstanceResponse {
@@ -3838,6 +3938,21 @@ export interface Project {
    * 描述信息
    */
   Info: string
+}
+
+/**
+ * ModifyInstanceVport请求参数结构体
+ */
+export interface ModifyInstanceVportRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+
+  /**
+   * 实例VPORT
+   */
+  Vport: number
 }
 
 /**

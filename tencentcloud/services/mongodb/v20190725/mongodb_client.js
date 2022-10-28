@@ -34,6 +34,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("TerminateDBInstances", req, cb);
     }
     /**
+     * 本接口用于查询节点的属性，包括节点所在可用区、节点名称、地址、角色、状态、主从延迟、优先级、投票权、标签等属性。
+     */
+    async DescribeDBInstanceNodeProperty(req, cb) {
+        return this.request("DescribeDBInstanceNodeProperty", req, cb);
+    }
+    /**
      * 本接口（DescribeDBInstanceDeal）用于获取MongoDB购买、续费及变配订单详细。
      */
     async DescribeDBInstanceDeal(req, cb) {

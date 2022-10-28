@@ -1325,6 +1325,11 @@ export interface DeleteCustomFunctionRequest {
    * 函数 ID
    */
   FunctionId: string
+
+  /**
+   * 项目ID，必须填
+   */
+  ProjectId?: string
 }
 
 /**
@@ -4746,4 +4751,9 @@ export interface SubmitCustomFunctionRequest {
    * 备注信息
    */
   Comment: string
+
+  /**
+   * 项目ID
+   */
+  ProjectId?: string
 }

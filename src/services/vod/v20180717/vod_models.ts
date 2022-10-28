@@ -316,6 +316,14 @@ export interface CreateTranscodeTemplateRequest {
    * 极速高清转码参数。
    */
   TEHDConfig?: TEHDConfig
+
+  /**
+      * 切片类型，当 Container 为 hls 时有效，可选值：
+<li>ts：ts 切片；</li>
+<li>fmp4：fmp4 切片。</li>
+默认值：ts。
+      */
+  SegmentType?: string
 }
 
 /**
@@ -613,6 +621,11 @@ export interface AdaptiveDynamicStreamingTemplate {
    * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
    */
   UpdateTime: string
+
+  /**
+   * 切片类型，仅当 Format 为 HLS 时有效。
+   */
+  SegmentType: string
 }
 
 /**
@@ -2145,6 +2158,14 @@ export interface CreateAdaptiveDynamicStreamingTemplateRequest {
    * 模板描述信息，长度限制：256 个字符。
    */
   Comment?: string
+
+  /**
+      * 切片类型，当 Format 为 HLS 时有效，可选值：
+<li>ts：ts 切片；</li>
+<li>fmp4：fmp4 切片。</li>
+默认值：ts。
+      */
+  SegmentType?: string
 }
 
 /**
@@ -2311,6 +2332,13 @@ export interface ModifyTranscodeTemplateRequest {
    * 极速高清转码参数。
    */
   TEHDConfig?: TEHDConfigForUpdate
+
+  /**
+      * 切片类型，当 Container 为 hls 时有效，可选值：
+<li>ts：ts 切片；</li>
+<li>fmp4：fmp4 切片。</li>
+      */
+  SegmentType?: string
 }
 
 /**
@@ -6335,6 +6363,13 @@ export interface ModifyAdaptiveDynamicStreamingTemplateRequest {
    * 模板描述信息，长度限制：256 个字符。
    */
   Comment?: string
+
+  /**
+      * 切片类型，当 Format 为 HLS 时有效，可选值：
+<li>ts：ts 切片；</li>
+<li>fmp4：fmp4 切片。</li>
+      */
+  SegmentType?: string
 }
 
 /**
@@ -10643,6 +10678,11 @@ export interface TranscodeTemplate {
    * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
    */
   UpdateTime: string
+
+  /**
+   * 切片类型，仅当 Container 为 hls 时有效。
+   */
+  SegmentType: string
 }
 
 /**
@@ -11605,6 +11645,7 @@ export interface StatDataItem {
 <li>转码时长的数据，单位是秒。</li>
 <li>流量数据，单位是字节。</li>
 <li>带宽数据，单位是比特每秒。</li>
+<li>直播剪辑数据，单位是秒。</li>
       */
   Value: number
 }

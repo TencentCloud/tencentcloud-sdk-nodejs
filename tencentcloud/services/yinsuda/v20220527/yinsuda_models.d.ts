@@ -218,6 +218,10 @@ export interface DescribeKTVPlaylistsResponse {
       */
     PlaylistBaseInfoSet: Array<KTVPlaylistBaseInfo>;
     /**
+      * 歌单总数。
+      */
+    TotalCount: number;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
@@ -238,8 +242,17 @@ export interface DescribeKTVPlaylistsRequest {
       * 类型列表，取值有：
 <li>OfficialRec：官方推荐；</li>
 <li>Customize：自定义。</li>
+默认值为 OfficialRec。
       */
     Types?: Array<string>;
+    /**
+      * 分页返回的起始偏移量，默认值：0。将返回第 Offset 到第 Offset+Limit-1 条。
+      */
+    Offset?: number;
+    /**
+      * 分页返回的记录条数，默认值：20，最大值：50。
+      */
+    Limit?: number;
 }
 /**
  * DescribeKTVPlaylistDetail返回参数结构体

@@ -22,7 +22,9 @@ import {
   DescribeAgentDealsCacheRequest,
   DescribeSalesmansRequest,
   DescribeAgentAuditedClientsRequest,
+  DescribeRebateInfosNewRequest,
   RemovePayRelationForClientRequest,
+  DescribeRebateInfosNewResponse,
   AgentPayDealsRequest,
   DescribeAgentClientGradeResponse,
   DescribeAgentDealsByCacheResponse,
@@ -70,6 +72,7 @@ import {
   DealGoodsPriceNewElem,
   DescribeRebateInfosResponse,
   DescribeAgentClientGradeRequest,
+  RebateInfoElemNew,
   DescribeClientBalanceNewResponse,
 } from "./partners_models"
 
@@ -83,16 +86,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 【该接口已下线，请切换使用升级版本DescribeAgentSelfPayDealsV2】可以查询代理商下指定客户的自付订单
-   */
-  async DescribeAgentSelfPayDeals(
-    req: DescribeAgentSelfPayDealsRequest,
-    cb?: (error: string, rep: DescribeAgentSelfPayDealsResponse) => void
-  ): Promise<DescribeAgentSelfPayDealsResponse> {
-    return this.request("DescribeAgentSelfPayDeals", req, cb)
-  }
-
-  /**
    * 【该接口已下线，请使用升级版本DescribeAgentDealsByCache】代理商拉取缓存的全量客户订单
    */
   async DescribeAgentDealsCache(
@@ -100,36 +93,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAgentDealsCacheResponse) => void
   ): Promise<DescribeAgentDealsCacheResponse> {
     return this.request("DescribeAgentDealsCache", req, cb)
-  }
-
-  /**
-   * 代理商可以对名下客户添加备注、修改备注
-   */
-  async ModifyClientRemark(
-    req: ModifyClientRemarkRequest,
-    cb?: (error: string, rep: ModifyClientRemarkResponse) => void
-  ): Promise<ModifyClientRemarkResponse> {
-    return this.request("ModifyClientRemark", req, cb)
-  }
-
-  /**
-   * 查询代理商名下指定代客的自付订单
-   */
-  async DescribeAgentSelfPayDealsV2(
-    req: DescribeAgentSelfPayDealsV2Request,
-    cb?: (error: string, rep: DescribeAgentSelfPayDealsV2Response) => void
-  ): Promise<DescribeAgentSelfPayDealsV2Response> {
-    return this.request("DescribeAgentSelfPayDealsV2", req, cb)
-  }
-
-  /**
-   * 代理商支付订单接口，支持自付/代付
-   */
-  async AgentPayDeals(
-    req: AgentPayDealsRequest,
-    cb?: (error: string, rep: AgentPayDealsResponse) => void
-  ): Promise<AgentPayDealsResponse> {
-    return this.request("AgentPayDeals", req, cb)
   }
 
   /**
@@ -163,16 +126,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 代理商查询名下业务员列表信息
-   */
-  async DescribeSalesmans(
-    req: DescribeSalesmansRequest,
-    cb?: (error: string, rep: DescribeSalesmansResponse) => void
-  ): Promise<DescribeSalesmansResponse> {
-    return this.request("DescribeSalesmans", req, cb)
-  }
-
-  /**
    * 合作伙伴为客户消除强代付关系
    */
   async RemovePayRelationForClient(
@@ -183,43 +136,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 为合作伙伴提供查询客户余额能力。调用者必须是合作伙伴，只能查询自己名下客户余额
+   * 代理商可以对名下客户添加备注、修改备注
    */
-  async DescribeClientBalanceNew(
-    req: DescribeClientBalanceNewRequest,
-    cb?: (error: string, rep: DescribeClientBalanceNewResponse) => void
-  ): Promise<DescribeClientBalanceNewResponse> {
-    return this.request("DescribeClientBalanceNew", req, cb)
-  }
-
-  /**
-   * 【该接口已下线，请切换使用升级版本DescribeAgentPayDealsV2】可以查询代理商代付的所有订单
-   */
-  async DescribeAgentPayDeals(
-    req: DescribeAgentPayDealsRequest,
-    cb?: (error: string, rep: DescribeAgentPayDealsResponse) => void
-  ): Promise<DescribeAgentPayDealsResponse> {
-    return this.request("DescribeAgentPayDeals", req, cb)
-  }
-
-  /**
-   * 代理商名下客户解绑记录查询接口
-   */
-  async DescribeUnbindClientList(
-    req: DescribeUnbindClientListRequest,
-    cb?: (error: string, rep: DescribeUnbindClientListResponse) => void
-  ): Promise<DescribeUnbindClientListResponse> {
-    return this.request("DescribeUnbindClientList", req, cb)
-  }
-
-  /**
-   * 代理商可查询自己名下待审核客户列表
-   */
-  async DescribeAgentClients(
-    req: DescribeAgentClientsRequest,
-    cb?: (error: string, rep: DescribeAgentClientsResponse) => void
-  ): Promise<DescribeAgentClientsResponse> {
-    return this.request("DescribeAgentClients", req, cb)
+  async ModifyClientRemark(
+    req: ModifyClientRemarkRequest,
+    cb?: (error: string, rep: ModifyClientRemarkResponse) => void
+  ): Promise<ModifyClientRemarkResponse> {
+    return this.request("ModifyClientRemark", req, cb)
   }
 
   /**
@@ -233,6 +156,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 为合作伙伴提供查询客户余额能力。调用者必须是合作伙伴，只能查询自己名下客户余额
+   */
+  async DescribeClientBalanceNew(
+    req: DescribeClientBalanceNewRequest,
+    cb?: (error: string, rep: DescribeClientBalanceNewResponse) => void
+  ): Promise<DescribeClientBalanceNewResponse> {
+    return this.request("DescribeClientBalanceNew", req, cb)
+  }
+
+  /**
    * 传入代客uin，查客户级别，客户审核状态，客户实名认证状态
    */
   async DescribeAgentClientGrade(
@@ -240,6 +173,46 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAgentClientGradeResponse) => void
   ): Promise<DescribeAgentClientGradeResponse> {
     return this.request("DescribeAgentClientGrade", req, cb)
+  }
+
+  /**
+   * 代理商名下客户解绑记录查询接口
+   */
+  async DescribeUnbindClientList(
+    req: DescribeUnbindClientListRequest,
+    cb?: (error: string, rep: DescribeUnbindClientListResponse) => void
+  ): Promise<DescribeUnbindClientListResponse> {
+    return this.request("DescribeUnbindClientList", req, cb)
+  }
+
+  /**
+   * 代理商支付订单接口，支持自付/代付
+   */
+  async AgentPayDeals(
+    req: AgentPayDealsRequest,
+    cb?: (error: string, rep: AgentPayDealsResponse) => void
+  ): Promise<AgentPayDealsResponse> {
+    return this.request("AgentPayDeals", req, cb)
+  }
+
+  /**
+   * 代理商查询名下业务员列表信息
+   */
+  async DescribeSalesmans(
+    req: DescribeSalesmansRequest,
+    cb?: (error: string, rep: DescribeSalesmansResponse) => void
+  ): Promise<DescribeSalesmansResponse> {
+    return this.request("DescribeSalesmans", req, cb)
+  }
+
+  /**
+   * 【该接口已下线，请切换使用升级版本DescribeAgentPayDealsV2】可以查询代理商代付的所有订单
+   */
+  async DescribeAgentPayDeals(
+    req: DescribeAgentPayDealsRequest,
+    cb?: (error: string, rep: DescribeAgentPayDealsResponse) => void
+  ): Promise<DescribeAgentPayDealsResponse> {
+    return this.request("DescribeAgentPayDeals", req, cb)
   }
 
   /**
@@ -263,13 +236,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 合作伙伴为客户创建强代付关系
+   * 查询代理商名下指定代客的自付订单
    */
-  async CreatePayRelationForClient(
-    req: CreatePayRelationForClientRequest,
-    cb?: (error: string, rep: CreatePayRelationForClientResponse) => void
-  ): Promise<CreatePayRelationForClientResponse> {
-    return this.request("CreatePayRelationForClient", req, cb)
+  async DescribeAgentSelfPayDealsV2(
+    req: DescribeAgentSelfPayDealsV2Request,
+    cb?: (error: string, rep: DescribeAgentSelfPayDealsV2Response) => void
+  ): Promise<DescribeAgentSelfPayDealsV2Response> {
+    return this.request("DescribeAgentSelfPayDealsV2", req, cb)
   }
 
   /**
@@ -290,5 +263,45 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAgentDealsByCacheResponse) => void
   ): Promise<DescribeAgentDealsByCacheResponse> {
     return this.request("DescribeAgentDealsByCache", req, cb)
+  }
+
+  /**
+   * 【该接口已下线，请切换使用升级版本DescribeAgentSelfPayDealsV2】可以查询代理商下指定客户的自付订单
+   */
+  async DescribeAgentSelfPayDeals(
+    req: DescribeAgentSelfPayDealsRequest,
+    cb?: (error: string, rep: DescribeAgentSelfPayDealsResponse) => void
+  ): Promise<DescribeAgentSelfPayDealsResponse> {
+    return this.request("DescribeAgentSelfPayDeals", req, cb)
+  }
+
+  /**
+   * 代理商可查询自己名下全部返佣信息
+   */
+  async DescribeRebateInfosNew(
+    req: DescribeRebateInfosNewRequest,
+    cb?: (error: string, rep: DescribeRebateInfosNewResponse) => void
+  ): Promise<DescribeRebateInfosNewResponse> {
+    return this.request("DescribeRebateInfosNew", req, cb)
+  }
+
+  /**
+   * 代理商可查询自己名下待审核客户列表
+   */
+  async DescribeAgentClients(
+    req: DescribeAgentClientsRequest,
+    cb?: (error: string, rep: DescribeAgentClientsResponse) => void
+  ): Promise<DescribeAgentClientsResponse> {
+    return this.request("DescribeAgentClients", req, cb)
+  }
+
+  /**
+   * 合作伙伴为客户创建强代付关系
+   */
+  async CreatePayRelationForClient(
+    req: CreatePayRelationForClientRequest,
+    cb?: (error: string, rep: CreatePayRelationForClientResponse) => void
+  ): Promise<CreatePayRelationForClientResponse> {
+    return this.request("CreatePayRelationForClient", req, cb)
   }
 }

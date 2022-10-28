@@ -4013,7 +4013,7 @@ topspeed_H265：极速高清-H265。
   Bitrate: number
 
   /**
-   * 类型，包含：转码（Transcode），混流（MixStream），水印（WaterMark）。
+   * 类型，包含：转码（Transcode），混流（MixStream），水印（WaterMark），快直播（Webrtc）。
    */
   Type: string
 
@@ -4026,6 +4026,13 @@ topspeed_H265：极速高清-H265。
    * 分辨率。
    */
   Resolution: string
+
+  /**
+      * 地域：
+Mainland：国内。
+Overseas：海外。
+      */
+  MainlandOrOversea: string
 }
 
 /**

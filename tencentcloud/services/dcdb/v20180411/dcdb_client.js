@@ -175,6 +175,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyDBInstancesProject", req, cb);
     }
     /**
+     * 本接口（ModifyInstanceVip）用于修改实例Vip
+     */
+    async ModifyInstanceVip(req, cb) {
+        return this.request("ModifyInstanceVip", req, cb);
+    }
+    /**
      * 本接口（DescribeSqlLogs）用于获取实例SQL日志。
      */
     async DescribeSqlLogs(req, cb) {
@@ -215,6 +221,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateAccount(req, cb) {
         return this.request("CreateAccount", req, cb);
+    }
+    /**
+     * 本接口（ModifyInstanceNetwork）用于修改实例所属网络。
+     */
+    async ModifyInstanceNetwork(req, cb) {
+        return this.request("ModifyInstanceNetwork", req, cb);
     }
     /**
      * 本接口（KillSession）用于杀死指定会话。
@@ -313,6 +325,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DestroyHourDCDBInstance(req, cb) {
         return this.request("DestroyHourDCDBInstance", req, cb);
+    }
+    /**
+     * 本接口（ModifyInstanceVport）用于修改实例VPORT
+     */
+    async ModifyInstanceVport(req, cb) {
+        return this.request("ModifyInstanceVport", req, cb);
     }
     /**
      * 本接口（DescribeDBSecurityGroups）用于查询实例安全组信息

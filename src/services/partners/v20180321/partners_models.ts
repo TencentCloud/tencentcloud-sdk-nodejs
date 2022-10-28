@@ -229,6 +229,26 @@ export interface DescribeAgentAuditedClientsRequest {
 }
 
 /**
+ * DescribeRebateInfosNew请求参数结构体
+ */
+export interface DescribeRebateInfosNewRequest {
+  /**
+   * 返佣月份，如2018-02
+   */
+  RebateMonth?: string
+
+  /**
+   * 偏移量
+   */
+  Offset?: number
+
+  /**
+   * 限制数目
+   */
+  Limit?: number
+}
+
+/**
  * RemovePayRelationForClient请求参数结构体
  */
 export interface RemovePayRelationForClientRequest {
@@ -236,6 +256,26 @@ export interface RemovePayRelationForClientRequest {
    * 客户账号ID
    */
   ClientUin: string
+}
+
+/**
+ * DescribeRebateInfosNew返回参数结构体
+ */
+export interface DescribeRebateInfosNewResponse {
+  /**
+   * 返佣信息列表
+   */
+  RebateInfoSet: Array<RebateInfoElemNew>
+
+  /**
+   * 符合查询条件返佣信息数目
+   */
+  TotalCount: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1743,6 +1783,41 @@ export interface DescribeAgentClientGradeRequest {
    * 代客uin
    */
   ClientUin: string
+}
+
+/**
+ * 返佣信息定义
+ */
+export interface RebateInfoElemNew {
+  /**
+   * 代理商账号ID
+   */
+  Uin: string
+
+  /**
+   * 返佣月份，如2018-02
+   */
+  RebateMonth: string
+
+  /**
+   * 返佣金额，单位分
+   */
+  Amt: number
+
+  /**
+   * 月度业绩，单位分
+   */
+  MonthSales: number
+
+  /**
+   * 季度业绩，单位分
+   */
+  QuarterSales: number
+
+  /**
+   * NORMAL(正常)/HAS_OVERDUE_BILL(欠费)/NO_CONTRACT(缺合同)
+   */
+  ExceptionFlag: string
 }
 
 /**

@@ -250,7 +250,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateScanUser", req, cb);
     }
     /**
-     * 本接口(DescribeAppStatistics)用于获取某个GME应用的用量数据。包括实时语音，语音消息及转文本，语音分析等。最长查询周期为最近30天。
+     * 本接口(DescribeAppStatistics)用于获取某个GME应用的用量数据。包括实时语音，语音消息及转文本，语音分析等。最长查询周期为最近60天。
      */
     async DescribeAppStatistics(req, cb) {
         return this.request("DescribeAppStatistics", req, cb);

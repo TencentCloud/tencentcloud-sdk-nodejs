@@ -31,6 +31,8 @@ import {
   ModifyRealServerAccessStrategyResponse,
   ActiveHourDCDBInstanceResponse,
   DescribeDCDBPriceResponse,
+  ModifyInstanceVportResponse,
+  ModifyInstanceVipResponse,
   AssociateSecurityGroupsRequest,
   TerminateDedicatedDBInstanceResponse,
   FlushBinlogResponse,
@@ -62,11 +64,12 @@ import {
   CopyAccountPrivilegesResponse,
   CloneAccountRequest,
   DescribeDCDBRenewalPriceRequest,
-  ParamModifyResult,
+  ModifyInstanceNetworkResponse,
   DescribeDBSecurityGroupsRequest,
   DatabaseProcedure,
   DescribeDCDBPriceRequest,
   SwitchDBInstanceHAResponse,
+  ParamModifyResult,
   DescribeProjectSecurityGroupsResponse,
   DatabaseFunction,
   DescribeSqlLogsRequest,
@@ -116,6 +119,7 @@ import {
   CancelDcnJobRequest,
   IsolateHourDCDBInstanceResponse,
   ShardInfo,
+  ModifyInstanceVipRequest,
   OpenDBExtranetAccessRequest,
   DescribeDCDBSaleInfoResponse,
   ModifyDBInstancesProjectRequest,
@@ -146,6 +150,7 @@ import {
   RegionInfo,
   DescribeDatabaseObjectsRequest,
   UpgradeDCDBInstanceRequest,
+  ModifyInstanceNetworkRequest,
   DestroyHourDCDBInstanceResponse,
   ConstraintRange,
   LogFileInfo,
@@ -159,6 +164,7 @@ import {
   DescribeDBSlowLogsResponse,
   DescribeDCDBInstancesRequest,
   Project,
+  ModifyInstanceVportRequest,
   ModifyDBInstanceSecurityGroupsResponse,
   DestroyHourDCDBInstanceRequest,
   FlushBinlogRequest,
@@ -417,6 +423,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（ModifyInstanceVip）用于修改实例Vip
+   */
+  async ModifyInstanceVip(
+    req: ModifyInstanceVipRequest,
+    cb?: (error: string, rep: ModifyInstanceVipResponse) => void
+  ): Promise<ModifyInstanceVipResponse> {
+    return this.request("ModifyInstanceVip", req, cb)
+  }
+
+  /**
    * 本接口（DescribeSqlLogs）用于获取实例SQL日志。
    */
   async DescribeSqlLogs(
@@ -484,6 +500,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateAccountResponse) => void
   ): Promise<CreateAccountResponse> {
     return this.request("CreateAccount", req, cb)
+  }
+
+  /**
+   * 本接口（ModifyInstanceNetwork）用于修改实例所属网络。
+   */
+  async ModifyInstanceNetwork(
+    req: ModifyInstanceNetworkRequest,
+    cb?: (error: string, rep: ModifyInstanceNetworkResponse) => void
+  ): Promise<ModifyInstanceNetworkResponse> {
+    return this.request("ModifyInstanceNetwork", req, cb)
   }
 
   /**
@@ -646,6 +672,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DestroyHourDCDBInstanceResponse) => void
   ): Promise<DestroyHourDCDBInstanceResponse> {
     return this.request("DestroyHourDCDBInstance", req, cb)
+  }
+
+  /**
+   * 本接口（ModifyInstanceVport）用于修改实例VPORT
+   */
+  async ModifyInstanceVport(
+    req: ModifyInstanceVportRequest,
+    cb?: (error: string, rep: ModifyInstanceVportResponse) => void
+  ): Promise<ModifyInstanceVportResponse> {
+    return this.request("ModifyInstanceVport", req, cb)
   }
 
   /**

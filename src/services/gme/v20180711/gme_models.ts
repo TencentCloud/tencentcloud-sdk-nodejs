@@ -72,6 +72,30 @@ export interface AppStatisticsItem {
    * 统计时间
    */
   Date: string
+
+  /**
+      * 录音转文本用量统计数据
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AudioTextStatisticsItem: AudioTextStatisticsItem
+
+  /**
+      * 流式转文本用量数据
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  StreamTextStatisticsItem: StreamTextStatisticsItem
+
+  /**
+      * 海外转文本用量数据
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OverseaTextStatisticsItem: OverseaTextStatisticsItem
+
+  /**
+      * 实时语音转文本用量数据
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RealtimeTextStatisticsItem: RealtimeTextStatisticsItem
 }
 
 /**
@@ -348,6 +372,17 @@ export interface DescribeRoomInfoRequest {
 }
 
 /**
+ * 流式转文本用量数据
+ */
+export interface StreamTextStatisticsItem {
+  /**
+      * 统计值，单位：秒
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Data: number
+}
+
+/**
  * UpdateScanRooms请求参数结构体
  */
 export interface UpdateScanRoomsRequest {
@@ -514,7 +549,7 @@ export interface DescribeAppStatisticsRequest {
   EndDate: string
 
   /**
-   * 要查询的服务列表，取值：RealTimeSpeech/VoiceMessage/VoiceFilter
+   * 要查询的服务列表，取值：RealTimeSpeech/VoiceMessage/VoiceFilter/SpeechToText
    */
   Services: Array<string>
 }
@@ -637,23 +672,14 @@ export interface GetCustomizationListResponse {
 }
 
 /**
- * ModifyUserMicStatus返回参数结构体
+ * 录音转文本用量统计数据
  */
-export interface ModifyUserMicStatusResponse {
+export interface AudioTextStatisticsItem {
   /**
-   * 返回结果：0为成功，非0为失败
-   */
-  Result: number
-
-  /**
-   * 错误信息
-   */
-  ErrMsg: string
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+      * 统计值，单位：秒
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Data: number
 }
 
 /**
@@ -887,7 +913,7 @@ export interface VoiceMessageConf {
  */
 export interface VoiceFilterStatisticsItem {
   /**
-   * 语音过滤总时长
+   * 语音过滤总时长，单位为min
    */
   Duration: number
 }
@@ -990,6 +1016,26 @@ export interface DeleteCustomizationResponse {
 }
 
 /**
+ * ModifyUserMicStatus返回参数结构体
+ */
+export interface ModifyUserMicStatusResponse {
+  /**
+   * 返回结果：0为成功，非0为失败
+   */
+  Result: number
+
+  /**
+   * 错误信息
+   */
+  ErrMsg: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * GetCustomizationList请求参数结构体
  */
 export interface GetCustomizationListRequest {
@@ -1017,6 +1063,26 @@ export interface DescribeUserInAndOutTimeResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * UpdateScanUsers请求参数结构体
+ */
+export interface UpdateScanUsersRequest {
+  /**
+   * 应用ID
+   */
+  BizId: number
+
+  /**
+   * 需要送检的所有用户号。多个用户号之间用","分隔。示例："0001,0002,0003"
+   */
+  UserIdString?: string
+
+  /**
+   * 符合此正则表达式规则的用户号将被送检。示例：["^6.*"] 表示所有以6开头的用户号将被送检
+   */
+  UserIdRegex?: Array<string>
 }
 
 /**
@@ -1339,6 +1405,17 @@ export interface CreateAppResponse {
 }
 
 /**
+ * 海外转文本用量数据
+ */
+export interface OverseaTextStatisticsItem {
+  /**
+      * 统计值，单位：秒
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Data: number
+}
+
+/**
  * DeleteCustomization请求参数结构体
  */
 export interface DeleteCustomizationRequest {
@@ -1442,23 +1519,14 @@ export interface VoiceFilterConf {
 }
 
 /**
- * UpdateScanUsers请求参数结构体
+ * 实时语音转文本用量数据
  */
-export interface UpdateScanUsersRequest {
+export interface RealtimeTextStatisticsItem {
   /**
-   * 应用ID
-   */
-  BizId: number
-
-  /**
-   * 需要送检的所有用户号。多个用户号之间用","分隔。示例："0001,0002,0003"
-   */
-  UserIdString?: string
-
-  /**
-   * 符合此正则表达式规则的用户号将被送检。示例：["^6.*"] 表示所有以6开头的用户号将被送检
-   */
-  UserIdRegex?: Array<string>
+      * 统计值，单位：秒
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Data: number
 }
 
 /**

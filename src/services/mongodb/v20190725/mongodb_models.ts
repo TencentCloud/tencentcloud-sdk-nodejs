@@ -572,6 +572,48 @@ export interface CreateDBInstanceHourResponse {
 }
 
 /**
+ * DescribeDBInstanceNodeProperty请求参数结构体
+ */
+export interface DescribeDBInstanceNodePropertyRequest {
+  /**
+   * 实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同。
+   */
+  InstanceId: string
+
+  /**
+   * 节点ID。
+   */
+  NodeIds?: Array<string>
+
+  /**
+      * 节点角色。可选值包括：
+<ul><li>PRIMARY：主节点。</li><li>SECONDARY：从节点。</li><li>READONLY：只读节点。</li><li>ARBITER：仲裁节点。</li></ul>
+      */
+  Roles?: Array<string>
+
+  /**
+   * 该参数指定节点是否为Hidden节点，默认为false。
+   */
+  OnlyHidden?: boolean
+
+  /**
+   * 该参数指定选举新主节点的优先级。其取值范围为[0,100]，数值越高，优先级越高。
+   */
+  Priority?: number
+
+  /**
+      * 该参数指定节点投票权。
+<ul><li>1：具有投票权。</li><li>0：无投票权。</li></ul>
+      */
+  Votes?: number
+
+  /**
+   * 节点标签。
+   */
+  Tags?: Array<NodeTag>
+}
+
+/**
  * 需要终止的操作
  */
 export interface Operation {
@@ -1390,6 +1432,23 @@ export interface DescribeInstanceParamsRequest {
 }
 
 /**
+ * 节点Tag
+ */
+export interface NodeTag {
+  /**
+      * 节点Tag key
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TagKey?: string
+
+  /**
+      * 节点Tag Value
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TagValue?: string
+}
+
+/**
  * InquirePriceCreateDBInstances返回参数结构体
  */
 export interface InquirePriceCreateDBInstancesResponse {
@@ -1505,6 +1564,17 @@ export interface ClientConnection {
 }
 
 /**
+ * 副本集信息
+ */
+export interface ReplicateSetInfo {
+  /**
+      * 节点属性
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Nodes: Array<NodeProperty>
+}
+
+/**
  * DescribeDBInstanceDeal请求参数结构体
  */
 export interface DescribeDBInstanceDealRequest {
@@ -1604,6 +1674,27 @@ export interface SecurityGroupBound {
    * 描述
    */
   Desc: string
+}
+
+/**
+ * DescribeDBInstanceNodeProperty返回参数结构体
+ */
+export interface DescribeDBInstanceNodePropertyResponse {
+  /**
+      * Mongos节点属性。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Mongos: Array<NodeProperty>
+
+  /**
+   * 副本集节点信息。
+   */
+  ReplicateSets: Array<ReplicateSetInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1936,6 +2027,77 @@ export interface SetAccountUserPrivilegeRequest {
    * 权限信息
    */
   AuthRole: Array<Auth>
+}
+
+/**
+ * 节点属性
+ */
+export interface NodeProperty {
+  /**
+      * 节点所在的可用区。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Zone: string
+
+  /**
+      * 节点名称。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NodeName: string
+
+  /**
+      * 节点访问地址。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Address: string
+
+  /**
+      * 角色。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Role: string
+
+  /**
+      * 是否为Hidden节点
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Hidden: boolean
+
+  /**
+      * 节点状态，包括：ORMAL/STARTUP/RECOVERING/STARTUP2/UNKNOWN/DOWN/ROLLBACK/REMOVED等。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Status: string
+
+  /**
+      * 主从延迟，单位秒。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SlaveDelay: number
+
+  /**
+      * 节点优先级。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Priority: number
+
+  /**
+      * 节点投票权。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Votes: number
+
+  /**
+      * 节点标签。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Tags: Array<NodeTag>
+
+  /**
+      * 副本集Id。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ReplicateSetId: string
 }
 
 /**

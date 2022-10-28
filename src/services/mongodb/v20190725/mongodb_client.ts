@@ -41,6 +41,7 @@ import {
   SetAccountUserPrivilegeResponse,
   ModifyDBInstanceNetworkAddressRequest,
   CreateDBInstanceHourResponse,
+  DescribeDBInstanceNodePropertyRequest,
   Operation,
   SpecItem,
   ModifyDBInstanceNetworkAddressResponse,
@@ -68,17 +69,20 @@ import {
   ModifyDBInstanceSecurityGroupResponse,
   UserInfo,
   DescribeInstanceParamsRequest,
+  NodeTag,
   InquirePriceCreateDBInstancesResponse,
   DescribeSecurityGroupResponse,
   SecurityGroup,
   ReplicaSetInfo,
   ResetDBInstancePasswordResponse,
   ClientConnection,
+  ReplicateSetInfo,
   DescribeDBInstanceDealRequest,
   DescribeAsyncRequestInfoRequest,
   CreateBackupDownloadTaskRequest,
   InquirePriceModifyDBInstanceSpecResponse,
   SecurityGroupBound,
+  DescribeDBInstanceNodePropertyResponse,
   DescribeCurrentOpRequest,
   BackupDownloadTask,
   DescribeDBBackupsRequest,
@@ -91,6 +95,7 @@ import {
   RenameInstanceResponse,
   CreateBackupDBInstanceRequest,
   SetAccountUserPrivilegeRequest,
+  NodeProperty,
   KillOpsResponse,
   IsolateDBInstanceRequest,
   CreateDBInstanceHourRequest,
@@ -128,6 +133,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: TerminateDBInstancesResponse) => void
   ): Promise<TerminateDBInstancesResponse> {
     return this.request("TerminateDBInstances", req, cb)
+  }
+
+  /**
+   * 本接口用于查询节点的属性，包括节点所在可用区、节点名称、地址、角色、状态、主从延迟、优先级、投票权、标签等属性。
+   */
+  async DescribeDBInstanceNodeProperty(
+    req: DescribeDBInstanceNodePropertyRequest,
+    cb?: (error: string, rep: DescribeDBInstanceNodePropertyResponse) => void
+  ): Promise<DescribeDBInstanceNodePropertyResponse> {
+    return this.request("DescribeDBInstanceNodeProperty", req, cb)
   }
 
   /**

@@ -58,6 +58,14 @@ export interface BankSlipOCRRequest {
 建议图片存储于腾讯云，可保障更高的下载速度和稳定性。
       */
     ImageUrl?: string;
+    /**
+      * 是否开启PDF识别，默认值为true，开启后可同时支持图片和PDF的识别。
+      */
+    IsPdf?: boolean;
+    /**
+      * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。
+      */
+    PdfPageNumber?: number;
 }
 /**
  * BusinessCardOCR返回参数结构体
@@ -175,6 +183,14 @@ export interface CarInvoiceOCRRequest {
 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
       */
     ImageUrl?: string;
+    /**
+      * 是否开启PDF识别，默认值为true，开启后可同时支持图片和PDF的识别。
+      */
+    IsPdf?: boolean;
+    /**
+      * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。
+      */
+    PdfPageNumber?: number;
 }
 /**
  * 混贴票据单张发票识别信息
@@ -257,6 +273,14 @@ export interface TrainTicketOCRRequest {
 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
       */
     ImageUrl?: string;
+    /**
+      * 是否开启PDF识别，默认值为true，开启后可同时支持图片和PDF的识别。
+      */
+    IsPdf?: boolean;
+    /**
+      * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。
+      */
+    PdfPageNumber?: number;
 }
 /**
  * EstateCertOCR返回参数结构体
@@ -334,6 +358,14 @@ export interface FlightInvoiceOCRRequest {
 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
       */
     ImageUrl?: string;
+    /**
+      * 是否开启PDF识别，默认值为true，开启后可同时支持图片和PDF的识别。
+      */
+    IsPdf?: boolean;
+    /**
+      * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。
+      */
+    PdfPageNumber?: number;
 }
 /**
  * RecognizePhilippinesDrivingLicenseOCR请求参数结构体
@@ -804,6 +836,14 @@ export interface InvoiceGeneralOCRRequest {
 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
       */
     ImageUrl?: string;
+    /**
+      * 是否开启PDF识别，默认值为true，开启后可同时支持图片和PDF的识别。
+      */
+    IsPdf?: boolean;
+    /**
+      * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。
+      */
+    PdfPageNumber?: number;
 }
 /**
  * 矩形坐标
@@ -2410,6 +2450,14 @@ export interface TollInvoiceOCRRequest {
 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
       */
     ImageUrl?: string;
+    /**
+      * 是否开启PDF识别，默认值为true，开启后可同时支持图片和PDF的识别。
+      */
+    IsPdf?: boolean;
+    /**
+      * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。
+      */
+    PdfPageNumber?: number;
 }
 /**
  * LicensePlateOCR返回参数结构体
@@ -2639,6 +2687,14 @@ export interface TaxiInvoiceOCRRequest {
 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
       */
     ImageUrl?: string;
+    /**
+      * 是否开启PDF识别，默认值为true，开启后可同时支持图片和PDF的识别。
+      */
+    IsPdf?: boolean;
+    /**
+      * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。
+      */
+    PdfPageNumber?: number;
 }
 /**
  * PropOwnerCertOCR请求参数结构体
@@ -3808,6 +3864,14 @@ export interface MixedInvoiceDetectRequest {
 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
       */
     ImageUrl?: string;
+    /**
+      * 是否开启PDF识别，默认值为true，开启后可同时支持图片和PDF的识别。
+      */
+    IsPdf?: boolean;
+    /**
+      * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。
+      */
+    PdfPageNumber?: number;
 }
 /**
  * FlightInvoiceOCR返回参数结构体
@@ -4175,6 +4239,14 @@ export interface VatRollInvoiceOCRRequest {
 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
       */
     ImageUrl?: string;
+    /**
+      * 是否开启PDF识别，默认值为true，开启后可同时支持图片和PDF的识别。
+      */
+    IsPdf?: boolean;
+    /**
+      * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。
+      */
+    PdfPageNumber?: number;
 }
 /**
  * 表格标题
@@ -4469,6 +4541,14 @@ export interface DutyPaidProofOCRRequest {
 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
       */
     ImageUrl?: string;
+    /**
+      * 是否开启PDF识别，默认值为true，开启后可同时支持图片和PDF的识别。
+      */
+    IsPdf?: boolean;
+    /**
+      * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。
+      */
+    PdfPageNumber?: number;
 }
 /**
  * RecognizeHealthCodeOCR返回参数结构体
@@ -4649,6 +4729,8 @@ export interface MixedInvoiceOCRRequest {
 13：过路过桥费发票
 15：非税发票
 16：全电发票
+----------------------
+-1：其他发票,（仅返回，本参数不支持传入-1，请在ReturnOther中控制是否返回）
       */
     Types?: Array<number>;
     /**
@@ -4657,6 +4739,14 @@ Yes：识别其他类型发票
 No：不识别其他类型发票
       */
     ReturnOther?: string;
+    /**
+      * 是否开启PDF识别，默认值为true，开启后可同时支持图片和PDF的识别。
+      */
+    IsPdf?: boolean;
+    /**
+      * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。
+      */
+    PdfPageNumber?: number;
 }
 /**
  * 表格内容检测
@@ -4937,6 +5027,14 @@ export interface RecognizeMedicalInvoiceOCRRequest {
       * 是否需要返回识别出的文本行在旋转纠正之后的图像中的四点坐标，默认不返回
       */
     ReturnCoord?: boolean;
+    /**
+      * 是否开启PDF识别，默认值为true，开启后可同时支持图片和PDF的识别。
+      */
+    IsPdf?: boolean;
+    /**
+      * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。
+      */
+    PdfPageNumber?: number;
 }
 /**
  * 卡证智能分类结果
@@ -4992,6 +5090,14 @@ export interface ShipInvoiceOCRRequest {
 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
       */
     ImageUrl?: string;
+    /**
+      * 是否开启PDF识别，默认值为true，开启后可同时支持图片和PDF的识别。
+      */
+    IsPdf?: boolean;
+    /**
+      * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。
+      */
+    PdfPageNumber?: number;
 }
 /**
  * SealOCR请求参数结构体
@@ -5412,6 +5518,14 @@ export interface BusInvoiceOCRRequest {
 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
       */
     ImageUrl?: string;
+    /**
+      * 是否开启PDF识别，默认值为true，开启后可同时支持图片和PDF的识别。
+      */
+    IsPdf?: boolean;
+    /**
+      * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。
+      */
+    PdfPageNumber?: number;
 }
 /**
  * QuotaInvoiceOCR返回参数结构体
@@ -5830,6 +5944,14 @@ export interface WaybillOCRRequest {
       * 预检测开关，当待识别运单占整个输入图像的比例较小时，建议打开预检测开关。默认值为false。
       */
     EnablePreDetect?: boolean;
+    /**
+      * 是否开启PDF识别，默认值为true，开启后可同时支持图片和PDF的识别。
+      */
+    IsPdf?: boolean;
+    /**
+      * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。
+      */
+    PdfPageNumber?: number;
 }
 /**
  * VinOCR请求参数结构体
@@ -6131,6 +6253,14 @@ export interface QuotaInvoiceOCRRequest {
 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
       */
     ImageUrl?: string;
+    /**
+      * 是否开启PDF识别，默认值为true，开启后可同时支持图片和PDF的识别。
+      */
+    IsPdf?: boolean;
+    /**
+      * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。
+      */
+    PdfPageNumber?: number;
 }
 /**
  * BankCardOCR返回参数结构体

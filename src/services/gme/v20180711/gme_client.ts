@@ -35,6 +35,7 @@ import {
   RoomUser,
   CreateCustomizationRequest,
   DescribeRoomInfoRequest,
+  StreamTextStatisticsItem,
   UpdateScanRoomsRequest,
   ModifyCustomizationResponse,
   DescribeRealtimeScanConfigRequest,
@@ -49,7 +50,7 @@ import {
   Tag,
   DescribeAgeDetectTaskResponse,
   GetCustomizationListResponse,
-  ModifyUserMicStatusResponse,
+  AudioTextStatisticsItem,
   ApplicationDataStatistics,
   DeleteScanUserRequest,
   ModifyAppStatusResp,
@@ -66,8 +67,10 @@ import {
   DescribeRoomInfoResponse,
   DescribeAgeDetectTaskRequest,
   DeleteCustomizationResponse,
+  ModifyUserMicStatusResponse,
   GetCustomizationListRequest,
   DescribeUserInAndOutTimeResponse,
+  UpdateScanUsersRequest,
   DeleteResult,
   AgeDetectTaskResult,
   ModifyRoomInfoResponse,
@@ -81,11 +84,12 @@ import {
   DescribeAppStatisticsResp,
   ScanVoiceResult,
   CreateAppResponse,
+  OverseaTextStatisticsItem,
   DeleteCustomizationRequest,
   ScanPiece,
   ModifyAppStatusResponse,
   VoiceFilterConf,
-  UpdateScanUsersRequest,
+  RealtimeTextStatisticsItem,
   StatisticsItem,
   ScanVoiceRequest,
   DescribeUserInAndOutTimeRequest,
@@ -375,7 +379,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(DescribeAppStatistics)用于获取某个GME应用的用量数据。包括实时语音，语音消息及转文本，语音分析等。最长查询周期为最近30天。
+   * 本接口(DescribeAppStatistics)用于获取某个GME应用的用量数据。包括实时语音，语音消息及转文本，语音分析等。最长查询周期为最近60天。
    */
   async DescribeAppStatistics(
     req: DescribeAppStatisticsRequest,

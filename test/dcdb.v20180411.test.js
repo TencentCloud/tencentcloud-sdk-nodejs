@@ -248,6 +248,16 @@ it("dcdb.v20180411.ModifyDBInstancesProject", async function () {
     }
 })
 
+it("dcdb.v20180411.ModifyInstanceVip", async function () {
+    try {
+       const data = await client.ModifyInstanceVip({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dcdb.v20180411.DescribeSqlLogs", async function () {
     try {
        const data = await client.DescribeSqlLogs({})
@@ -311,6 +321,16 @@ it("dcdb.v20180411.AssociateSecurityGroups", async function () {
 it("dcdb.v20180411.CreateAccount", async function () {
     try {
        const data = await client.CreateAccount({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dcdb.v20180411.ModifyInstanceNetwork", async function () {
+    try {
+       const data = await client.ModifyInstanceNetwork({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -471,6 +491,16 @@ it("dcdb.v20180411.CreateDCDBInstance", async function () {
 it("dcdb.v20180411.DestroyHourDCDBInstance", async function () {
     try {
        const data = await client.DestroyHourDCDBInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dcdb.v20180411.ModifyInstanceVport", async function () {
+    try {
+       const data = await client.ModifyInstanceVport({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
