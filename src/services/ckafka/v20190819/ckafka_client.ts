@@ -40,6 +40,7 @@ import {
   DescribeConnectResourceResp,
   AuthorizeTokenResponse,
   DescribeDatahubTaskRequest,
+  UrlDecodeParam,
   FetchLatestDatahubMessageListResponse,
   EsParam,
   DescribeConnectResource,

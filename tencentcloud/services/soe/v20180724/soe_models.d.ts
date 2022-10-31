@@ -26,6 +26,21 @@ export interface SentenceInfo {
       * 建议评分，取值范围[0,100]，评分方式为建议评分 = 准确度（PronAccuracyfloat）* 完整度（PronCompletionfloat）*（2 - 完整度（PronCompletionfloat）），如若评分策略不符合请参考Words数组中的详细分数自定义评分逻辑。
       */
     SuggestedScore: number;
+    /**
+      * 匹配候选文本的序号，在句子多分支、情景对 话、段落模式下表示匹配到的文本序号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RefTextId: number;
+    /**
+      * 主题词命中标志，0表示没命中，1表示命中
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    KeyWordHits: Array<number>;
+    /**
+      * 负向主题词命中标志，0表示没命中，1表示命中
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UnKeyWordHits: Array<number>;
 }
 /**
  * InitOralProcess请求参数结构体
@@ -110,6 +125,10 @@ ServerType不填默认为0
 2：音素注册模式（提工单注册需要使用音素的单词）。
       */
     TextMode?: number;
+    /**
+      * 主题词和关键词
+      */
+    Keyword?: string;
 }
 /**
  * 评测关键词
@@ -274,6 +293,21 @@ export interface TransmitOralProcessResponse {
       */
     SuggestedScore: number;
     /**
+      * 匹配候选文本的序号，在句子多分支、情景对 话、段落模式下表示匹配到的文本序号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RefTextId: number;
+    /**
+      * 主题词命中标志，0表示没命中，1表示命中
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    KeyWordHits: Array<number>;
+    /**
+      * 负向主题词命中标志，0表示没命中，1表示命中
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UnKeyWordHits: Array<number>;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
@@ -385,6 +419,11 @@ export interface WordRsp {
       * 参考词，目前为保留字段。
       */
     ReferenceWord: string;
+    /**
+      * 主题词命中标志，0表示没命中，1表示命中
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    KeywordTag: number;
 }
 /**
  * 关键词得分
@@ -526,6 +565,10 @@ ServerType不填默认为0
 2：音素注册模式（提工单注册需要使用音素的单词）。
       */
     TextMode?: number;
+    /**
+      * 主题词和关键词
+      */
+    Keyword?: string;
 }
 /**
  * TransmitOralProcessWithInit返回参数结构体
@@ -567,6 +610,21 @@ export interface TransmitOralProcessWithInitResponse {
       * 建议评分，取值范围[0,100]，评分方式为建议评分 = 准确度（PronAccuracy）× 完整度（PronCompletion）×（2 - 完整度（PronCompletion）），如若评分策略不符合请参考Words数组中的详细分数自定义评分逻辑。
       */
     SuggestedScore: number;
+    /**
+      * 匹配候选文本的序号，在句子多分支、情景对 话、段落模式下表示匹配到的文本序号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RefTextId: number;
+    /**
+      * 主题词命中标志，0表示没命中，1表示命中
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    KeyWordHits: Array<number>;
+    /**
+      * 负向主题词命中标志，0表示没命中，1表示命中
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UnKeyWordHits: Array<number>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

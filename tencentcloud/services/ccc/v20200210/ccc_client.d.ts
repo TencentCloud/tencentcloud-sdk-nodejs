@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { StopAutoCalloutTaskRequest, BindStaffSkillGroupListRequest, DescribePSTNActiveSessionListRequest, UnbindStaffSkillGroupListRequest, CreateAutoCalloutTaskRequest, CreateSDKLoginTokenResponse, DescribeCallInMetricsResponse, DescribeStaffInfoListResponse, CreateAutoCalloutTaskResponse, CreateUserSigRequest, DisableCCCPhoneNumberResponse, CreateCCCSkillGroupRequest, DescribeIMCdrsRequest, DescribeAutoCalloutTaskResponse, DescribeStaffStatusMetricsRequest, DescribeAutoCalloutTaskRequest, CreateUserSigResponse, ModifyStaffRequest, DeleteStaffRequest, CreateCCCSkillGroupResponse, DescribeTelSessionRequest, DescribeCCCBuyInfoListRequest, DeleteStaffResponse, DescribeSkillGroupInfoListRequest, CreateStaffRequest, DescribeChatMessagesResponse, DescribePSTNActiveSessionListResponse, CreateCallOutSessionResponse, DisableCCCPhoneNumberRequest, DescribeProtectedTelCdrResponse, DescribeAutoCalloutTasksRequest, DescribeChatMessagesRequest, DescribeTelSessionResponse, DescribeStaffInfoListRequest, ModifyStaffResponse, DescribeTelCdrResponse, DescribeStaffStatusMetricsResponse, DescribeTelCallInfoResponse, StopAutoCalloutTaskResponse, CreateCallOutSessionRequest, BindStaffSkillGroupListResponse, DescribeAutoCalloutTasksResponse, DescribeTelCdrRequest, DescribeProtectedTelCdrRequest, CreateSDKLoginTokenRequest, DescribeTelCallInfoRequest, DescribeCCCBuyInfoListResponse, UnbindStaffSkillGroupListResponse, DescribeCallInMetricsRequest, CreateStaffResponse, DescribeSkillGroupInfoListResponse, DescribeIMCdrsResponse } from "./ccc_models";
+import { DescribeExtensionRequest, StopAutoCalloutTaskRequest, CreateSDKLoginTokenResponse, ModifyStaffRequest, DeleteStaffResponse, DisableCCCPhoneNumberResponse, DescribeProtectedTelCdrResponse, DescribeAutoCalloutTaskRequest, CreateUserSigResponse, DescribeIMCdrsResponse, CreateCallOutSessionResponse, DisableCCCPhoneNumberRequest, DescribeExtensionsResponse, DeleteExtensionRequest, DescribeTelCallInfoResponse, DescribeTelCdrRequest, DescribeAutoCalloutTasksResponse, ModifyExtensionResponse, CreateStaffResponse, DescribeSkillGroupInfoListResponse, UnbindStaffSkillGroupListResponse, DescribeStaffInfoListResponse, CreateAutoCalloutTaskRequest, CreateExtensionResponse, CreateUserSigRequest, CreateCCCSkillGroupRequest, DescribeAutoCalloutTaskResponse, CreateCCCSkillGroupResponse, DescribeTelSessionRequest, DescribeIMCdrsRequest, DescribeSkillGroupInfoListRequest, DescribeStaffInfoListRequest, ResetExtensionPasswordResponse, ModifyExtensionRequest, CreateAutoCalloutTaskResponse, DeleteStaffRequest, DescribeCCCBuyInfoListRequest, DescribeTelCallInfoRequest, CreateExtensionRequest, UnbindStaffSkillGroupListRequest, StopAutoCalloutTaskResponse, BindStaffSkillGroupListResponse, DescribeCCCBuyInfoListResponse, DeleteExtensionResponse, BindStaffSkillGroupListRequest, DescribePSTNActiveSessionListRequest, DescribeCallInMetricsResponse, DescribeTelCdrResponse, DescribeStaffStatusMetricsRequest, ResetExtensionPasswordRequest, CreateStaffRequest, DescribeChatMessagesResponse, DescribePSTNActiveSessionListResponse, DescribeAutoCalloutTasksRequest, DescribeChatMessagesRequest, DescribeTelSessionResponse, ModifyStaffResponse, DescribeStaffStatusMetricsResponse, CreateCallOutSessionRequest, DescribeExtensionsRequest, DescribeProtectedTelCdrRequest, CreateSDKLoginTokenRequest, DescribeCallInMetricsRequest, DescribeExtensionResponse } from "./ccc_models";
 /**
  * ccc client
  * @class
@@ -8,9 +8,13 @@ import { StopAutoCalloutTaskRequest, BindStaffSkillGroupListRequest, DescribePST
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
     /**
-     * 修改客服账号
+     * 查询话机列表信息
      */
-    ModifyStaff(req: ModifyStaffRequest, cb?: (error: string, rep: ModifyStaffResponse) => void): Promise<ModifyStaffResponse>;
+    DescribeExtensions(req: DescribeExtensionsRequest, cb?: (error: string, rep: DescribeExtensionsResponse) => void): Promise<DescribeExtensionsResponse>;
+    /**
+     * 创建话机账号
+     */
+    CreateExtension(req: CreateExtensionRequest, cb?: (error: string, rep: CreateExtensionResponse) => void): Promise<CreateExtensionResponse>;
     /**
      * 获取坐席信息列表
      */
@@ -19,6 +23,10 @@ export declare class Client extends AbstractClient {
      * 获取当前正在通话的会话列表
      */
     DescribePSTNActiveSessionList(req: DescribePSTNActiveSessionListRequest, cb?: (error: string, rep: DescribePSTNActiveSessionListResponse) => void): Promise<DescribePSTNActiveSessionListResponse>;
+    /**
+     * 删除话机账号
+     */
+    DeleteExtension(req: DeleteExtensionRequest, cb?: (error: string, rep: DeleteExtensionResponse) => void): Promise<DeleteExtensionResponse>;
     /**
      * 绑定坐席所属技能组
      */
@@ -36,13 +44,25 @@ export declare class Client extends AbstractClient {
      */
     DeleteStaff(req: DeleteStaffRequest, cb?: (error: string, rep: DeleteStaffResponse) => void): Promise<DeleteStaffResponse>;
     /**
+     * 修改客服账号
+     */
+    ModifyStaff(req: ModifyStaffRequest, cb?: (error: string, rep: ModifyStaffResponse) => void): Promise<ModifyStaffResponse>;
+    /**
      * 批量查询自动任务外呼
      */
     DescribeAutoCalloutTasks(req: DescribeAutoCalloutTasksRequest, cb?: (error: string, rep: DescribeAutoCalloutTasksResponse) => void): Promise<DescribeAutoCalloutTasksResponse>;
     /**
-     * 创建客服账号。
+     * 重置话机注册密码
      */
-    CreateStaff(req: CreateStaffRequest, cb?: (error: string, rep: CreateStaffResponse) => void): Promise<CreateStaffResponse>;
+    ResetExtensionPassword(req: ResetExtensionPasswordRequest, cb?: (error: string, rep: ResetExtensionPasswordResponse) => void): Promise<ResetExtensionPasswordResponse>;
+    /**
+     * 按实例获取电话消耗统计
+     */
+    DescribeTelCallInfo(req: DescribeTelCallInfoRequest, cb?: (error: string, rep: DescribeTelCallInfoResponse) => void): Promise<DescribeTelCallInfoResponse>;
+    /**
+     * 获取话机信息
+     */
+    DescribeExtension(req: DescribeExtensionRequest, cb?: (error: string, rep: DescribeExtensionResponse) => void): Promise<DescribeExtensionResponse>;
     /**
      * 获取 PSTN 会话信息
      */
@@ -88,13 +108,17 @@ export declare class Client extends AbstractClient {
      */
     DescribeStaffStatusMetrics(req: DescribeStaffStatusMetricsRequest, cb?: (error: string, rep: DescribeStaffStatusMetricsResponse) => void): Promise<DescribeStaffStatusMetricsResponse>;
     /**
-     * 按实例获取电话消耗统计
+     * 创建客服账号。
      */
-    DescribeTelCallInfo(req: DescribeTelCallInfoRequest, cb?: (error: string, rep: DescribeTelCallInfoResponse) => void): Promise<DescribeTelCallInfoResponse>;
+    CreateStaff(req: CreateStaffRequest, cb?: (error: string, rep: CreateStaffResponse) => void): Promise<CreateStaffResponse>;
     /**
      * 创建自动外呼任务
      */
     CreateAutoCalloutTask(req: CreateAutoCalloutTaskRequest, cb?: (error: string, rep: CreateAutoCalloutTaskResponse) => void): Promise<CreateAutoCalloutTaskResponse>;
+    /**
+     * 修改话机账号(绑定技能组、绑定坐席账号)
+     */
+    ModifyExtension(req: ModifyExtensionRequest, cb?: (error: string, rep: ModifyExtensionResponse) => void): Promise<ModifyExtensionResponse>;
     /**
      * 创建用户数据签名
      */

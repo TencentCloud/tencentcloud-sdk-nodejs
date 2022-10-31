@@ -18,83 +18,96 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  DescribeExtensionRequest,
   StopAutoCalloutTaskRequest,
-  BindStaffSkillGroupListRequest,
-  DescribePSTNActiveSessionListRequest,
-  UnbindStaffSkillGroupListRequest,
-  IVRKeyPressedElement,
-  CreateAutoCalloutTaskRequest,
   CreateSDKLoginTokenResponse,
-  DescribeCallInMetricsResponse,
-  CallInSkillGroupMetrics,
-  DescribeStaffInfoListResponse,
-  CreateAutoCalloutTaskResponse,
-  TelCdrInfo,
-  CreateUserSigRequest,
-  PhoneNumBuyInfo,
-  DisableCCCPhoneNumberResponse,
-  CreateCCCSkillGroupRequest,
-  DescribeIMCdrsRequest,
-  DescribeAutoCalloutTaskResponse,
-  DescribeStaffStatusMetricsRequest,
-  DescribeAutoCalloutTaskRequest,
-  SkillGroupItem,
-  CreateUserSigResponse,
   ModifyStaffRequest,
-  DeleteStaffRequest,
+  DeleteStaffResponse,
+  DisableCCCPhoneNumberResponse,
+  DescribeProtectedTelCdrResponse,
+  DescribeAutoCalloutTaskRequest,
+  CreateUserSigResponse,
+  DescribeIMCdrsResponse,
+  CreateCallOutSessionResponse,
+  DisableCCCPhoneNumberRequest,
+  ServeParticipant,
+  DescribeExtensionsResponse,
+  DeleteExtensionRequest,
+  DescribeTelCallInfoResponse,
+  StaffStatusMetrics,
+  DescribeTelCdrRequest,
+  DescribeAutoCalloutTasksResponse,
+  PackageBuyInfo,
+  ModifyExtensionResponse,
+  SeatUserInfo,
+  CreateStaffResponse,
+  DescribeSkillGroupInfoListResponse,
+  UnbindStaffSkillGroupListResponse,
+  DescribeStaffInfoListResponse,
+  CreateAutoCalloutTaskRequest,
+  CallInSkillGroupMetrics,
+  CreateExtensionResponse,
+  CreateUserSigRequest,
+  CreateCCCSkillGroupRequest,
+  DescribeAutoCalloutTaskResponse,
   CreateCCCSkillGroupResponse,
   DescribeTelSessionRequest,
+  DescribeIMCdrsRequest,
+  DescribeSkillGroupInfoListRequest,
+  AutoCalloutTaskCalleeInfo,
+  ErrStaffItem,
+  PSTNSession,
+  DescribeStaffInfoListRequest,
+  AutoCalloutTaskInfo,
+  SkillGroupInfoItem,
+  ResetExtensionPasswordResponse,
+  ModifyExtensionRequest,
+  PSTNSessionInfo,
+  Message,
+  ExtensionInfo,
+  IVRKeyPressedElement,
+  StaffInfo,
+  CreateAutoCalloutTaskResponse,
+  TelCdrInfo,
+  DeleteStaffRequest,
   CallInMetrics,
   DescribeCCCBuyInfoListRequest,
-  DeleteStaffResponse,
-  ErrStaffItem,
+  DescribeTelCallInfoRequest,
+  Variable,
+  CallInNumberMetrics,
+  CreateExtensionRequest,
+  UnbindStaffSkillGroupListRequest,
+  StopAutoCalloutTaskResponse,
+  BindStaffSkillGroupListResponse,
+  MessageBody,
+  PhoneNumBuyInfo,
+  DescribeCCCBuyInfoListResponse,
+  DeleteExtensionResponse,
+  BindStaffSkillGroupListRequest,
+  DescribePSTNActiveSessionListRequest,
+  DescribeCallInMetricsResponse,
+  DescribeTelCdrResponse,
+  DescribeStaffStatusMetricsRequest,
+  ResetExtensionPasswordRequest,
   StaffStatusExtra,
-  DescribeSkillGroupInfoListRequest,
   CreateStaffRequest,
   DescribeChatMessagesResponse,
   SdkAppIdBuyInfo,
-  CallInNumberMetrics,
-  AutoCalloutTaskCalleeInfo,
   DescribePSTNActiveSessionListResponse,
-  CreateCallOutSessionResponse,
   IMCdrInfo,
-  DisableCCCPhoneNumberRequest,
-  StaffBuyInfo,
-  DescribeProtectedTelCdrResponse,
   DescribeAutoCalloutTasksRequest,
   DescribeChatMessagesRequest,
-  PSTNSession,
   DescribeTelSessionResponse,
-  DescribeStaffInfoListRequest,
-  AutoCalloutTaskInfo,
-  StaffInfo,
-  PSTNSessionInfo,
   ModifyStaffResponse,
-  ServeParticipant,
-  DescribeTelCdrResponse,
   DescribeStaffStatusMetricsResponse,
-  DescribeTelCallInfoResponse,
-  SkillGroupInfoItem,
-  StopAutoCalloutTaskResponse,
-  Variable,
   CreateCallOutSessionRequest,
-  StaffStatusMetrics,
-  BindStaffSkillGroupListResponse,
-  DescribeAutoCalloutTasksResponse,
-  PackageBuyInfo,
-  DescribeTelCdrRequest,
+  SkillGroupItem,
+  DescribeExtensionsRequest,
   DescribeProtectedTelCdrRequest,
-  MessageBody,
   CreateSDKLoginTokenRequest,
-  DescribeTelCallInfoRequest,
-  DescribeCCCBuyInfoListResponse,
-  UnbindStaffSkillGroupListResponse,
-  SeatUserInfo,
+  StaffBuyInfo,
   DescribeCallInMetricsRequest,
-  CreateStaffResponse,
-  Message,
-  DescribeSkillGroupInfoListResponse,
-  DescribeIMCdrsResponse,
+  DescribeExtensionResponse,
 } from "./ccc_models"
 
 /**
@@ -107,13 +120,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改客服账号
+   * 查询话机列表信息
    */
-  async ModifyStaff(
-    req: ModifyStaffRequest,
-    cb?: (error: string, rep: ModifyStaffResponse) => void
-  ): Promise<ModifyStaffResponse> {
-    return this.request("ModifyStaff", req, cb)
+  async DescribeExtensions(
+    req: DescribeExtensionsRequest,
+    cb?: (error: string, rep: DescribeExtensionsResponse) => void
+  ): Promise<DescribeExtensionsResponse> {
+    return this.request("DescribeExtensions", req, cb)
+  }
+
+  /**
+   * 创建话机账号
+   */
+  async CreateExtension(
+    req: CreateExtensionRequest,
+    cb?: (error: string, rep: CreateExtensionResponse) => void
+  ): Promise<CreateExtensionResponse> {
+    return this.request("CreateExtension", req, cb)
   }
 
   /**
@@ -134,6 +157,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribePSTNActiveSessionListResponse) => void
   ): Promise<DescribePSTNActiveSessionListResponse> {
     return this.request("DescribePSTNActiveSessionList", req, cb)
+  }
+
+  /**
+   * 删除话机账号
+   */
+  async DeleteExtension(
+    req: DeleteExtensionRequest,
+    cb?: (error: string, rep: DeleteExtensionResponse) => void
+  ): Promise<DeleteExtensionResponse> {
+    return this.request("DeleteExtension", req, cb)
   }
 
   /**
@@ -177,6 +210,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改客服账号
+   */
+  async ModifyStaff(
+    req: ModifyStaffRequest,
+    cb?: (error: string, rep: ModifyStaffResponse) => void
+  ): Promise<ModifyStaffResponse> {
+    return this.request("ModifyStaff", req, cb)
+  }
+
+  /**
    * 批量查询自动任务外呼
    */
   async DescribeAutoCalloutTasks(
@@ -187,13 +230,33 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建客服账号。
+   * 重置话机注册密码
    */
-  async CreateStaff(
-    req: CreateStaffRequest,
-    cb?: (error: string, rep: CreateStaffResponse) => void
-  ): Promise<CreateStaffResponse> {
-    return this.request("CreateStaff", req, cb)
+  async ResetExtensionPassword(
+    req: ResetExtensionPasswordRequest,
+    cb?: (error: string, rep: ResetExtensionPasswordResponse) => void
+  ): Promise<ResetExtensionPasswordResponse> {
+    return this.request("ResetExtensionPassword", req, cb)
+  }
+
+  /**
+   * 按实例获取电话消耗统计
+   */
+  async DescribeTelCallInfo(
+    req: DescribeTelCallInfoRequest,
+    cb?: (error: string, rep: DescribeTelCallInfoResponse) => void
+  ): Promise<DescribeTelCallInfoResponse> {
+    return this.request("DescribeTelCallInfo", req, cb)
+  }
+
+  /**
+   * 获取话机信息
+   */
+  async DescribeExtension(
+    req: DescribeExtensionRequest,
+    cb?: (error: string, rep: DescribeExtensionResponse) => void
+  ): Promise<DescribeExtensionResponse> {
+    return this.request("DescribeExtension", req, cb)
   }
 
   /**
@@ -307,13 +370,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 按实例获取电话消耗统计
+   * 创建客服账号。
    */
-  async DescribeTelCallInfo(
-    req: DescribeTelCallInfoRequest,
-    cb?: (error: string, rep: DescribeTelCallInfoResponse) => void
-  ): Promise<DescribeTelCallInfoResponse> {
-    return this.request("DescribeTelCallInfo", req, cb)
+  async CreateStaff(
+    req: CreateStaffRequest,
+    cb?: (error: string, rep: CreateStaffResponse) => void
+  ): Promise<CreateStaffResponse> {
+    return this.request("CreateStaff", req, cb)
   }
 
   /**
@@ -324,6 +387,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateAutoCalloutTaskResponse) => void
   ): Promise<CreateAutoCalloutTaskResponse> {
     return this.request("CreateAutoCalloutTask", req, cb)
+  }
+
+  /**
+   * 修改话机账号(绑定技能组、绑定坐席账号)
+   */
+  async ModifyExtension(
+    req: ModifyExtensionRequest,
+    cb?: (error: string, rep: ModifyExtensionResponse) => void
+  ): Promise<ModifyExtensionResponse> {
+    return this.request("ModifyExtension", req, cb)
   }
 
   /**

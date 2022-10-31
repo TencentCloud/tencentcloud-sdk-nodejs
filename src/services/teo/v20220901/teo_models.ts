@@ -1866,26 +1866,23 @@ export interface CreateApplicationProxyRuleRequest {
   Proto: string
 
   /**
-      * 源站类型，取值有：
-<li>custom：手动添加；</li>
-<li>origins：源站组。</li>
+      * 端口，支持格式：
+<li>80：80端口；</li>
+<li>81-90：81至90端口。</li>
       */
   Port: Array<string>
 
   /**
-      * 源站类型，取值：
-custom：手动添加
-origins：源站组
+      * 源站类型，取值有：
+<li>custom：手动添加；</li>
+<li>origins：源站组。</li>
       */
   OriginType: string
 
   /**
       * 源站信息：
-当OriginType=custom时，表示一个或多个源站，如：
-OriginValue=["8.8.8.8:80","9.9.9.9:80"]
-OriginValue=["test.com:80"]；
-当OriginType=origins时，要求有且仅有一个元素，表示源站组ID，如：
-OriginValue=["origin-537f5b41-162a-11ed-abaa-525400c5da15"]。
+<li>当 OriginType 为 custom 时，表示一个或多个源站，如`["8.8.8.8","9.9.9.9"]` 或 `OriginValue=["test.com"]`；</li>
+<li>当 OriginType 为 origins 时，要求有且仅有一个元素，表示源站组ID，如`["origin-537f5b41-162a-11ed-abaa-525400c5da15"]`。</li>
       */
   OriginValue: Array<string>
 
@@ -1904,6 +1901,13 @@ OriginValue=["origin-537f5b41-162a-11ed-abaa-525400c5da15"]。
 <li>false：关闭。</li>默认值：false。
       */
   SessionPersist?: boolean
+
+  /**
+      * 源站端口，支持格式：
+<li>单端口：80；</li>
+<li>端口段：81-90，81至90端口。</li>
+      */
+  OriginPort?: string
 }
 
 /**
@@ -4007,8 +4011,8 @@ export interface ApplicationProxyRule {
 
   /**
       * 端口，支持格式：
-单个端口，如：80。
-端口段，如：81-82。表示81，82两个端口。
+<li>单个端口，如：80。</li>
+<li>端口段，如：81-82。表示81，82两个端口。</li>
 注意：一条规则最多可填写20个端口。
       */
   Port: Array<string>
@@ -4022,11 +4026,8 @@ export interface ApplicationProxyRule {
 
   /**
       * 源站信息：
-当OriginType=custom时，表示一个或多个源站，如：
-OriginValue=["8.8.8.8:80","9.9.9.9:80"]
-OriginValue=["test.com:80"]；
-当OriginType=origins时，要求有且仅有一个元素，表示源站组ID，如：
-OriginValue=["origin-537f5b41-162a-11ed-abaa-525400c5da15"]。
+<li>当 OriginType 为 custom 时，表示一个或多个源站，如`["8.8.8.8","9.9.9.9"]` 或 `OriginValue=["test.com"]`；</li>
+<li>当 OriginType 为 origins 时，要求有且仅有一个元素，表示源站组ID，如`["origin-537f5b41-162a-11ed-abaa-525400c5da15"]`。</li>
       */
   OriginValue: Array<string>
 
@@ -4060,6 +4061,13 @@ OriginValue=["origin-537f5b41-162a-11ed-abaa-525400c5da15"]。
 <li>false：关闭。</li>默认值：false。
       */
   SessionPersist?: boolean
+
+  /**
+      * 源站端口，支持格式：
+<li>单端口，如：80。</li>
+<li>端口段：81-82，表示81，82两个端口。</li>
+      */
+  OriginPort?: string
 }
 
 /**
@@ -6693,8 +6701,8 @@ export interface ModifyApplicationProxyRuleRequest {
 
   /**
       * 端口，支持格式：
-80：80端口
-81-90：81至90端口。不填保持原有值。
+<li>80：80端口；</li>
+<li>81-90：81至90端口。</li>
       */
   Port: Array<string>
 
@@ -6707,11 +6715,9 @@ export interface ModifyApplicationProxyRuleRequest {
 
   /**
       * 源站信息：
-当OriginType=custom时，表示一个或多个源站，如：
-OriginValue=["8.8.8.8:80","9.9.9.9:80"]
-OriginValue=["test.com:80"]；
-当OriginType=origins时，要求有且仅有一个元素，表示源站组ID，如：
-OriginValue=["origin-537f5b41-162a-11ed-abaa-525400c5da15"]。
+<li>当 OriginType 为 custom 时，表示一个或多个源站，如`["8.8.8.8","9.9.9.9"]` 或 `OriginValue=["test.com"]`；</li>
+<li>当 OriginType 为 origins 时，要求有且仅有一个元素，表示源站组ID，如`["origin-537f5b41-162a-11ed-abaa-525400c5da15"]`。</li>
+
 不填保持原有值。
       */
   OriginValue?: Array<string>
@@ -6728,9 +6734,16 @@ OriginValue=["origin-537f5b41-162a-11ed-abaa-525400c5da15"]。
   /**
       * 是否开启会话保持，取值有：
 <li>true：开启；</li>
-<li>false：关闭。</li>不填保持原有值。
+<li>false：关闭。</li>不填为false。
       */
   SessionPersist?: boolean
+
+  /**
+      * 源站端口，支持格式：
+<li>单端口：80；</li>
+<li>端口段：81-90，81至90端口。</li>
+      */
+  OriginPort?: string
 }
 
 /**

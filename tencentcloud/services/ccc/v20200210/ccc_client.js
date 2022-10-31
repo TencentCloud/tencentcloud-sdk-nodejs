@@ -28,10 +28,16 @@ class Client extends abstract_client_1.AbstractClient {
         super("ccc.tencentcloudapi.com", "2020-02-10", clientConfig);
     }
     /**
-     * 修改客服账号
+     * 查询话机列表信息
      */
-    async ModifyStaff(req, cb) {
-        return this.request("ModifyStaff", req, cb);
+    async DescribeExtensions(req, cb) {
+        return this.request("DescribeExtensions", req, cb);
+    }
+    /**
+     * 创建话机账号
+     */
+    async CreateExtension(req, cb) {
+        return this.request("CreateExtension", req, cb);
     }
     /**
      * 获取坐席信息列表
@@ -44,6 +50,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribePSTNActiveSessionList(req, cb) {
         return this.request("DescribePSTNActiveSessionList", req, cb);
+    }
+    /**
+     * 删除话机账号
+     */
+    async DeleteExtension(req, cb) {
+        return this.request("DeleteExtension", req, cb);
     }
     /**
      * 绑定坐席所属技能组
@@ -70,16 +82,34 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteStaff", req, cb);
     }
     /**
+     * 修改客服账号
+     */
+    async ModifyStaff(req, cb) {
+        return this.request("ModifyStaff", req, cb);
+    }
+    /**
      * 批量查询自动任务外呼
      */
     async DescribeAutoCalloutTasks(req, cb) {
         return this.request("DescribeAutoCalloutTasks", req, cb);
     }
     /**
-     * 创建客服账号。
+     * 重置话机注册密码
      */
-    async CreateStaff(req, cb) {
-        return this.request("CreateStaff", req, cb);
+    async ResetExtensionPassword(req, cb) {
+        return this.request("ResetExtensionPassword", req, cb);
+    }
+    /**
+     * 按实例获取电话消耗统计
+     */
+    async DescribeTelCallInfo(req, cb) {
+        return this.request("DescribeTelCallInfo", req, cb);
+    }
+    /**
+     * 获取话机信息
+     */
+    async DescribeExtension(req, cb) {
+        return this.request("DescribeExtension", req, cb);
     }
     /**
      * 获取 PSTN 会话信息
@@ -148,16 +178,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeStaffStatusMetrics", req, cb);
     }
     /**
-     * 按实例获取电话消耗统计
+     * 创建客服账号。
      */
-    async DescribeTelCallInfo(req, cb) {
-        return this.request("DescribeTelCallInfo", req, cb);
+    async CreateStaff(req, cb) {
+        return this.request("CreateStaff", req, cb);
     }
     /**
      * 创建自动外呼任务
      */
     async CreateAutoCalloutTask(req, cb) {
         return this.request("CreateAutoCalloutTask", req, cb);
+    }
+    /**
+     * 修改话机账号(绑定技能组、绑定坐席账号)
+     */
+    async ModifyExtension(req, cb) {
+        return this.request("ModifyExtension", req, cb);
     }
     /**
      * 创建用户数据签名

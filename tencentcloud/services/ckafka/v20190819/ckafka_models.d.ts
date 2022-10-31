@@ -592,6 +592,16 @@ export interface DescribeDatahubTaskRequest {
     TaskId: string;
 }
 /**
+ * Url解析
+ */
+export interface UrlDecodeParam {
+    /**
+      * 编码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CharsetName?: string;
+}
+/**
  * FetchLatestDatahubMessageList返回参数结构体
  */
 export interface FetchLatestDatahubMessageListResponse {
@@ -5117,6 +5127,11 @@ export interface ValueParam {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     JsonPathReplace?: JsonPathReplaceParam;
+    /**
+      * Url解析
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UrlDecode?: UrlDecodeParam;
 }
 /**
  * DescribeDatahubTasks返回参数结构体

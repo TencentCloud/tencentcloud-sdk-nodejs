@@ -1,4 +1,17 @@
 /**
+ * DescribeExtension请求参数结构体
+ */
+export interface DescribeExtensionRequest {
+    /**
+      * TCCC 实例应用 ID
+      */
+    SdkAppId: number;
+    /**
+      * 分机号
+      */
+    ExtensionId: string;
+}
+/**
  * StopAutoCalloutTask请求参数结构体
  */
 export interface StopAutoCalloutTaskRequest {
@@ -12,70 +25,569 @@ export interface StopAutoCalloutTaskRequest {
     TaskId: number;
 }
 /**
- * BindStaffSkillGroupList请求参数结构体
+ * CreateSDKLoginToken返回参数结构体
  */
-export interface BindStaffSkillGroupListRequest {
+export interface CreateSDKLoginTokenResponse {
+    /**
+      * SDK 登录 Token。
+      */
+    Token: string;
+    /**
+      * 过期时间戳，Unix 时间戳。
+      */
+    ExpiredTime: number;
+    /**
+      * SDK 加载路径会随着 SDK 的发布而变动。
+      */
+    SdkURL: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ModifyStaff请求参数结构体
+ */
+export interface ModifyStaffRequest {
+    /**
+      * 应用ID
+      */
+    SdkAppId: number;
+    /**
+      * 坐席账户
+      */
+    Email: string;
+    /**
+      * 坐席名称
+      */
+    Name?: string;
+    /**
+      * 坐席手机号（带0086前缀,示例：008618011111111）
+      */
+    Phone?: string;
+    /**
+      * 坐席昵称
+      */
+    Nick?: string;
+    /**
+      * 绑定技能组ID列表
+      */
+    SkillGroupIds?: Array<number>;
+    /**
+      * 是否开启手机外呼开关
+      */
+    UseMobileCallOut?: boolean;
+    /**
+      * 手机接听模式 0 - 关闭 | 1 - 仅离线 | 2 - 始终
+      */
+    UseMobileAccept?: number;
+}
+/**
+ * DeleteStaff返回参数结构体
+ */
+export interface DeleteStaffResponse {
+    /**
+      * 无法删除的状态为在线的客服列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OnlineStaffList: Array<string>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DisableCCCPhoneNumber返回参数结构体
+ */
+export interface DisableCCCPhoneNumberResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeProtectedTelCdr返回参数结构体
+ */
+export interface DescribeProtectedTelCdrResponse {
+    /**
+      * 话单记录总数
+      */
+    TotalCount: number;
+    /**
+      * 话单记录
+      */
+    TelCdrs: Array<TelCdrInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeAutoCalloutTask请求参数结构体
+ */
+export interface DescribeAutoCalloutTaskRequest {
     /**
       * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
       */
     SdkAppId: number;
+    /**
+      * 任务Id
+      */
+    TaskId: number;
+}
+/**
+ * CreateUserSig返回参数结构体
+ */
+export interface CreateUserSigResponse {
+    /**
+      * 签名结果
+      */
+    UserSig: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeIMCdrs返回参数结构体
+ */
+export interface DescribeIMCdrsResponse {
+    /**
+      * 总记录数
+      */
+    TotalCount: number;
+    /**
+      * 服务记录列表
+      */
+    IMCdrs: Array<IMCdrInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * CreateCallOutSession返回参数结构体
+ */
+export interface CreateCallOutSessionResponse {
+    /**
+      * 新创建的会话 ID
+      */
+    SessionId: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DisableCCCPhoneNumber请求参数结构体
+ */
+export interface DisableCCCPhoneNumberRequest {
+    /**
+      * TCCC 实例应用 ID
+      */
+    SdkAppId: number;
+    /**
+      * 号码列表，0086开头
+      */
+    PhoneNumbers: Array<string>;
+    /**
+      * 停用开关，0启用 1停用
+      */
+    Disabled: number;
+}
+/**
+ * 参与者信息
+ */
+export interface ServeParticipant {
+    /**
+      * 坐席邮箱
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Mail: string;
+    /**
+      * 坐席电话
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Phone: string;
+    /**
+      * 振铃时间戳，Unix 秒级时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RingTimestamp: number;
+    /**
+      * 接听时间戳，Unix 秒级时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AcceptTimestamp: number;
+    /**
+      * 结束时间戳，Unix 秒级时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EndedTimestamp: number;
+    /**
+      * 录音 ID，能够索引到坐席侧的录音
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RecordId: string;
+    /**
+      * 参与者类型，"staffSeat", "outboundSeat", "staffPhoneSeat"
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Type: string;
+    /**
+      * 转接来源坐席信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TransferFrom: string;
+    /**
+      * 转接去向坐席信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TransferTo: string;
+    /**
+      * 转接去向参与者类型，取值与 Type 一致
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TransferToType: string;
+    /**
+      * 技能组 ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SkillGroupId: number;
+    /**
+      * 结束状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EndStatusString: string;
+    /**
+      * 录音 URL
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RecordURL: string;
+    /**
+      * 参与者序号，从 0 开始
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Sequence: number;
+    /**
+      * 开始时间戳，Unix 秒级时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    StartTimestamp: number;
+    /**
+      * 技能组名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SkillGroupName: string;
+    /**
+      * 录音转存第三方COS地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CustomRecordURL: string;
+}
+/**
+ * DescribeExtensions返回参数结构体
+ */
+export interface DescribeExtensionsResponse {
+    /**
+      * 查询总数
+      */
+    Total: number;
+    /**
+      * 话机信息列表
+      */
+    ExtensionList: Array<ExtensionInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DeleteExtension请求参数结构体
+ */
+export interface DeleteExtensionRequest {
+    /**
+      * TCCC 实例应用 ID
+      */
+    SdkAppId: number;
+    /**
+      * 分机号
+      */
+    ExtensionId: string;
+}
+/**
+ * DescribeTelCallInfo返回参数结构体
+ */
+export interface DescribeTelCallInfoResponse {
+    /**
+      * 呼出套餐包消耗分钟数
+      */
+    TelCallOutCount: number;
+    /**
+      * 呼入套餐包消耗分钟数
+      */
+    TelCallInCount: number;
+    /**
+      * 坐席使用统计个数
+      */
+    SeatUsedCount: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * 坐席状态相关信息
+ */
+export interface StaffStatusMetrics {
     /**
       * 坐席邮箱
       */
-    StaffEmail: string;
+    Email: string;
     /**
-      * 绑定技能组列表
+      * 坐席状态 free 示闲 | busy 忙碌 | rest 小休 | notReady 示忙 | afterCallWork 话后调整 | offline 离线
       */
-    SkillGroupList: Array<number>;
+    Status: string;
+    /**
+      * 坐席状态补充信息
+      */
+    StatusExtra: StaffStatusExtra;
+    /**
+      * 当天在线总时长
+      */
+    OnlineDuration: number;
+    /**
+      * 当天示闲总时长
+      */
+    FreeDuration: number;
+    /**
+      * 当天忙碌总时长
+      */
+    BusyDuration: number;
+    /**
+      * 当天示忙总时长
+      */
+    NotReadyDuration: number;
+    /**
+      * 当天小休总时长
+      */
+    RestDuration: number;
+    /**
+      * 当天话后调整总时长
+      */
+    AfterCallWorkDuration: number;
+    /**
+      * 小休原因
+      */
+    Reason: string;
+    /**
+      * 是否预约小休
+      */
+    ReserveRest: boolean;
+    /**
+      * 是否预约示忙
+      */
+    ReserveNotReady: boolean;
+    /**
+      * 手机接听模式： 0 - 关闭 | 1 - 仅离线 | 2- 始终
+      */
+    UseMobileAccept: number;
+    /**
+      * 手机外呼开关
+      */
+    UseMobileCallOut: boolean;
 }
 /**
- * DescribePSTNActiveSessionList请求参数结构体
+ * DescribeTelCdr请求参数结构体
  */
-export interface DescribePSTNActiveSessionListRequest {
+export interface DescribeTelCdrRequest {
+    /**
+      * 起始时间戳，Unix 秒级时间戳
+      */
+    StartTimeStamp: number;
+    /**
+      * 结束时间戳，Unix 秒级时间戳
+      */
+    EndTimeStamp: number;
+    /**
+      * 实例 ID（废弃）
+      */
+    InstanceId?: number;
+    /**
+      * 返回数据条数，上限（废弃）
+      */
+    Limit?: number;
+    /**
+      * 偏移（废弃）
+      */
+    Offset?: number;
     /**
       * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
       */
-    SdkAppId: number;
+    SdkAppId?: number;
     /**
-      * 数据偏移
+      * 分页尺寸（必填），上限 100
       */
-    Offset: number;
+    PageSize?: number;
     /**
-      * 返回的数据条数，最大 25
+      * 分页页码（必填），从 0 开始
       */
-    Limit: number;
+    PageNumber?: number;
+    /**
+      * 按手机号筛选
+      */
+    Phones?: Array<string>;
+    /**
+      * 按SessionId筛选
+      */
+    SessionIds?: Array<string>;
 }
 /**
- * UnbindStaffSkillGroupList请求参数结构体
+ * DescribeAutoCalloutTasks返回参数结构体
  */
-export interface UnbindStaffSkillGroupListRequest {
+export interface DescribeAutoCalloutTasksResponse {
     /**
-      * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
+      * 总数
       */
-    SdkAppId: number;
+    TotalCount: number;
     /**
-      * 客服邮箱
+      * 任务列表
       */
-    StaffEmail: string;
+    Tasks: Array<AutoCalloutTaskInfo>;
     /**
-      * 解绑技能组列表
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    SkillGroupList: Array<number>;
+    RequestId?: string;
 }
 /**
- * ivr 按键信息
+ * 套餐包购买信息
  */
-export interface IVRKeyPressedElement {
+export interface PackageBuyInfo {
     /**
-      * 按键
+      * 套餐包Id
+      */
+    PackageId: string;
+    /**
+      * 套餐包类型，0-外呼套餐包|1-400呼入套餐包
+      */
+    Type: number;
+    /**
+      * 套餐包总量
+      */
+    CapacitySize: number;
+    /**
+      * 套餐包剩余量
+      */
+    CapacityRemain: number;
+    /**
+      * 购买时间戳
+      */
+    BuyTime: number;
+    /**
+      * 截至时间戳
+      */
+    EndTime: number;
+}
+/**
+ * ModifyExtension返回参数结构体
+ */
+export interface ModifyExtensionResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * 坐席用户信息
+ */
+export interface SeatUserInfo {
+    /**
+      * 坐席名称
+      */
+    Name?: string;
+    /**
+      * 坐席邮箱
+      */
+    Mail?: string;
+    /**
+      * 坐席电话号码（带0086前缀）
+      */
+    Phone?: string;
+    /**
+      * 坐席昵称
+      */
+    Nick?: string;
+    /**
+      * 用户ID
+      */
+    UserId?: string;
+    /**
+      * 坐席关联的技能组列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Key: string;
+    SkillGroupNameList?: Array<string>;
     /**
-      * 按键关联的标签
+      * 工号
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Label: string;
+    StaffNumber?: string;
+}
+/**
+ * CreateStaff返回参数结构体
+ */
+export interface CreateStaffResponse {
+    /**
+      * 错误坐席列表及错误信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ErrorStaffList: Array<ErrStaffItem>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeSkillGroupInfoList返回参数结构体
+ */
+export interface DescribeSkillGroupInfoListResponse {
+    /**
+      * 技能组总数
+      */
+    TotalCount: number;
+    /**
+      * 技能组信息列表
+      */
+    SkillGroupList: Array<SkillGroupInfoItem>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * UnbindStaffSkillGroupList返回参数结构体
+ */
+export interface UnbindStaffSkillGroupListResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeStaffInfoList返回参数结构体
+ */
+export interface DescribeStaffInfoListResponse {
+    /**
+      * 坐席用户总数
+      */
+    TotalCount: number;
+    /**
+      * 坐席用户信息列表
+      */
+    StaffList: Array<StaffInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * CreateAutoCalloutTask请求参数结构体
@@ -123,54 +635,6 @@ export interface CreateAutoCalloutTaskRequest {
     Variables?: Array<Variable>;
 }
 /**
- * CreateSDKLoginToken返回参数结构体
- */
-export interface CreateSDKLoginTokenResponse {
-    /**
-      * SDK 登录 Token。
-      */
-    Token: string;
-    /**
-      * 过期时间戳，Unix 时间戳。
-      */
-    ExpiredTime: number;
-    /**
-      * SDK 加载路径会随着 SDK 的发布而变动。
-      */
-    SdkURL: string;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * DescribeCallInMetrics返回参数结构体
- */
-export interface DescribeCallInMetricsResponse {
-    /**
-      * 时间戳
-      */
-    Timestamp: number;
-    /**
-      * 总体指标
-      */
-    TotalMetrics: CallInMetrics;
-    /**
-      * 线路维度指标
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    NumberMetrics: Array<CallInNumberMetrics>;
-    /**
-      * 技能组维度指标
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    SkillGroupMetrics: Array<CallInSkillGroupMetrics>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
  * 呼入技能组相关指标
  */
 export interface CallInSkillGroupMetrics {
@@ -188,21 +652,604 @@ export interface CallInSkillGroupMetrics {
     Name: string;
 }
 /**
- * DescribeStaffInfoList返回参数结构体
+ * CreateExtension返回参数结构体
  */
-export interface DescribeStaffInfoListResponse {
-    /**
-      * 坐席用户总数
-      */
-    TotalCount: number;
-    /**
-      * 坐席用户信息列表
-      */
-    StaffList: Array<StaffInfo>;
+export interface CreateExtensionResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * CreateUserSig请求参数结构体
+ */
+export interface CreateUserSigRequest {
+    /**
+      * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
+      */
+    SdkAppId: number;
+    /**
+      * 用户 ID
+      */
+    Uid: string;
+    /**
+      * 有效期，单位秒，不超过 1 小时
+      */
+    ExpiredTime: number;
+    /**
+      * 用户签名数据
+      */
+    ClientData?: string;
+}
+/**
+ * CreateCCCSkillGroup请求参数结构体
+ */
+export interface CreateCCCSkillGroupRequest {
+    /**
+      * 应用 ID（必填）
+      */
+    SdkAppId: number;
+    /**
+      * 技能组名称
+      */
+    SkillGroupName: string;
+    /**
+      * 技能组类型0-电话，1-在线，3-音频，4-视频
+      */
+    SkillGroupType: number;
+    /**
+      * 技能组接待人数上限（该技能组中1个座席可接待的人数上限）默认为1。1、若技能组类型为在线，则接待上限可设置为1及以上
+2、若技能组类型为电话、音频、视频，则接待上线必须只能为1
+      */
+    MaxConcurrency?: number;
+}
+/**
+ * DescribeAutoCalloutTask返回参数结构体
+ */
+export interface DescribeAutoCalloutTaskResponse {
+    /**
+      * 任务名
+      */
+    Name: string;
+    /**
+      * 任务描述
+      */
+    Description: string;
+    /**
+      * 任务起始时间戳
+      */
+    NotBefore: number;
+    /**
+      * 任务结束时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NotAfter: number;
+    /**
+      * 主叫列表
+      */
+    Callers: Array<string>;
+    /**
+      * 被叫信息列表
+      */
+    Callees: Array<AutoCalloutTaskCalleeInfo>;
+    /**
+      * 任务使用的IvrId
+      */
+    IvrId: number;
+    /**
+      * 任务状态 0初始 1运行中 2已完成 3结束中 4已终止
+      */
+    State: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * CreateCCCSkillGroup返回参数结构体
+ */
+export interface CreateCCCSkillGroupResponse {
+    /**
+      * 技能组ID
+      */
+    SkillGroupId: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeTelSession请求参数结构体
+ */
+export interface DescribeTelSessionRequest {
+    /**
+      * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
+      */
+    SdkAppId: number;
+    /**
+      * 会话 ID
+      */
+    SessionId: string;
+}
+/**
+ * DescribeIMCdrs请求参数结构体
+ */
+export interface DescribeIMCdrsRequest {
+    /**
+      * 起始时间
+      */
+    StartTimestamp: number;
+    /**
+      * 结束时间
+      */
+    EndTimestamp: number;
+    /**
+      * 实例 ID（废弃）
+      */
+    InstanceId?: number;
+    /**
+      * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
+      */
+    SdkAppId?: number;
+    /**
+      * 返回记录条数 最大为100默认20
+      */
+    Limit?: number;
+    /**
+      * 返回记录偏移 默认为0
+      */
+    Offset?: number;
+    /**
+      * 1为全媒体，2为文本客服，不填则查询全部
+      */
+    Type?: number;
+}
+/**
+ * DescribeSkillGroupInfoList请求参数结构体
+ */
+export interface DescribeSkillGroupInfoListRequest {
+    /**
+      * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
+      */
+    SdkAppId: number;
+    /**
+      * 分页尺寸，上限 100
+      */
+    PageSize: number;
+    /**
+      * 分页页码，从 0 开始
+      */
+    PageNumber: number;
+    /**
+      * 技能组ID，查询单个技能组时使用
+      */
+    SkillGroupId?: number;
+    /**
+      * 查询修改时间大于等于ModifiedTime的技能组时使用
+      */
+    ModifiedTime?: number;
+    /**
+      * 技能组名称
+      */
+    SkillGroupName?: string;
+}
+/**
+ * 外呼任务被叫信息
+ */
+export interface AutoCalloutTaskCalleeInfo {
+    /**
+      * 被叫号码
+      */
+    Callee: string;
+    /**
+      * 呼叫状态 0初始 1已接听 2未接听 3呼叫中 4待重试
+      */
+    State: number;
+    /**
+      * 会话ID列表
+      */
+    Sessions: Array<string>;
+}
+/**
+ * 批量添加客服时，返回出错客服的像个信息
+ */
+export interface ErrStaffItem {
+    /**
+      * 坐席邮箱地址
+      */
+    StaffEmail: string;
+    /**
+      * 错误码
+      */
+    Code: string;
+    /**
+      * 错误描述
+      */
+    Message: string;
+}
+/**
+ * PSTN 会话类型。
+ */
+export interface PSTNSession {
+    /**
+      * 会话 ID
+      */
+    SessionID: string;
+    /**
+      * 会话临时房间 ID
+      */
+    RoomID: string;
+    /**
+      * 主叫
+      */
+    Caller: string;
+    /**
+      * 被叫
+      */
+    Callee: string;
+    /**
+      * 开始时间，Unix 时间戳
+      */
+    StartTimestamp: number;
+    /**
+      * 振铃时间，Unix 时间戳
+      */
+    RingTimestamp: number;
+    /**
+      * 接听时间，Unix 时间戳
+      */
+    AcceptTimestamp: number;
+    /**
+      * 坐席邮箱
+      */
+    StaffEmail: string;
+    /**
+      * 坐席工号
+      */
+    StaffNumber: string;
+    /**
+      * 会话状态
+ringing 振铃中
+seatJoining  等待坐席接听
+inProgress 进行中
+finished 已完成
+      */
+    SessionStatus: string;
+    /**
+      * 会话呼叫方向， 0 呼入 | 1 - 呼出
+      */
+    Direction: number;
+    /**
+      * 转外线使用的号码（转外线主叫）
+      */
+    OutBoundCaller: string;
+    /**
+      * 转外线被叫
+      */
+    OutBoundCallee: string;
+    /**
+      * 主叫号码保护ID，开启号码保护映射功能时有效，且Caller字段置空
+      */
+    ProtectedCaller: string;
+    /**
+      * 被叫号码保护ID，开启号码保护映射功能时有效，且Callee字段置空
+      */
+    ProtectedCallee: string;
+}
+/**
+ * DescribeStaffInfoList请求参数结构体
+ */
+export interface DescribeStaffInfoListRequest {
+    /**
+      * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
+      */
+    SdkAppId: number;
+    /**
+      * 分页尺寸，上限 9999
+      */
+    PageSize: number;
+    /**
+      * 分页页码，从 0 开始
+      */
+    PageNumber: number;
+    /**
+      * 坐席账号，查询单个坐席时使用
+      */
+    StaffMail?: string;
+    /**
+      * 查询修改时间大于等于ModifiedTime的坐席时使用
+      */
+    ModifiedTime?: number;
+    /**
+      * 技能组ID
+      */
+    SkillGroupId?: number;
+}
+/**
+ * 自动外呼任务列表项
+ */
+export interface AutoCalloutTaskInfo {
+    /**
+      * 任务名
+      */
+    Name: string;
+    /**
+      * 被叫数量
+      */
+    CalleeCount: number;
+    /**
+      * 主叫号码列表
+      */
+    Callers: Array<string>;
+    /**
+      * 起始时间戳
+      */
+    NotBefore: number;
+    /**
+      * 结束时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NotAfter: number;
+    /**
+      * 任务使用的IvrId
+      */
+    IvrId: number;
+    /**
+      * 任务状态0初始 1运行中 2已完成 3结束中 4已结束
+      */
+    State: number;
+    /**
+      * 任务Id
+      */
+    TaskId: number;
+}
+/**
+ * 技能组信息
+ */
+export interface SkillGroupInfoItem {
+    /**
+      * 技能组ID
+      */
+    SkillGroupId: number;
+    /**
+      * 技能组名称
+      */
+    SkillGroupName: string;
+    /**
+      * 类型：IM、TEL、ALL（全媒体）
+      */
+    Type: string;
+    /**
+      * 会话分配策略
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RoutePolicy: string;
+    /**
+      * 会话分配是否优先上次服务坐席
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UsingLastSeat: number;
+    /**
+      * 单客服最大并发数（电话类型默认1）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MaxConcurrency: number;
+    /**
+      * 最后修改时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LastModifyTimestamp: number;
+}
+/**
+ * ResetExtensionPassword返回参数结构体
+ */
+export interface ResetExtensionPasswordResponse {
+    /**
+      * 重置后密码
+      */
+    Password: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ModifyExtension请求参数结构体
+ */
+export interface ModifyExtensionRequest {
+    /**
+      * TCCC 实例应用 ID
+      */
+    SdkAppId: number;
+    /**
+      * 分机号
+      */
+    ExtensionId: string;
+    /**
+      * 分机名称
+      */
+    ExtensionName?: string;
+    /**
+      * 所属技能组列表
+      */
+    SkillGroupIds?: Array<number>;
+    /**
+      * 绑定坐席邮箱账号
+      */
+    Relation?: string;
+}
+/**
+ * PSTN 会话信息
+ */
+export interface PSTNSessionInfo {
+    /**
+      * 会话 ID
+      */
+    SessionID: string;
+    /**
+      * 会话临时房间 ID
+      */
+    RoomID: string;
+    /**
+      * 主叫
+      */
+    Caller: string;
+    /**
+      * 被叫
+      */
+    Callee: string;
+    /**
+      * 开始时间，Unix 时间戳
+      */
+    StartTimestamp: string;
+    /**
+      * 接听时间，Unix 时间戳
+      */
+    AcceptTimestamp: string;
+    /**
+      * 坐席邮箱
+      */
+    StaffEmail: string;
+    /**
+      * 坐席工号
+      */
+    StaffNumber: string;
+    /**
+      * 坐席状态 inProgress 进行中
+      */
+    SessionStatus: string;
+    /**
+      * 会话呼叫方向， 0 呼入 | 1 - 呼出
+      */
+    Direction: number;
+    /**
+      * 振铃时间，Unix 时间戳
+      */
+    RingTimestamp: number;
+    /**
+      * 主叫号码保护ID，开启号码保护映射功能时有效，且Caller字段置空
+      */
+    ProtectedCaller: string;
+    /**
+      * 被叫号码保护ID，开启号码保护映射功能时有效，且Callee字段置空
+      */
+    ProtectedCallee: string;
+}
+/**
+ * 单条消息
+ */
+export interface Message {
+    /**
+      * 消息类型
+      */
+    Type: string;
+    /**
+      * 消息内容
+      */
+    Content: string;
+}
+/**
+ * 话机信息
+ */
+export interface ExtensionInfo {
+    /**
+      * 实例ID
+      */
+    SdkAppId: number;
+    /**
+      * 分机全名
+      */
+    FullExtensionId: string;
+    /**
+      * 分机号
+      */
+    ExtensionId: string;
+    /**
+      * 所属技能组列表
+      */
+    SkillGroupId: string;
+    /**
+      * 分机名称
+      */
+    ExtensionName: string;
+    /**
+      * 创建时间
+      */
+    CreateTime: number;
+    /**
+      * 最后修改时间
+      */
+    ModifyTime: number;
+    /**
+      * 话机状态(0 离线、100 空闲、200忙碌）
+      */
+    Status: number;
+    /**
+      * 是否注册
+      */
+    Register: boolean;
+    /**
+      * 绑定坐席邮箱
+      */
+    Relation: string;
+    /**
+      * 绑定坐席名称
+      */
+    RelationName: string;
+}
+/**
+ * ivr 按键信息
+ */
+export interface IVRKeyPressedElement {
+    /**
+      * 按键
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Key: string;
+    /**
+      * 按键关联的标签
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Label: string;
+}
+/**
+ * 带有技能组优先级的坐席信息
+ */
+export interface StaffInfo {
+    /**
+      * 坐席名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Name: string;
+    /**
+      * 坐席邮箱
+      */
+    Mail: string;
+    /**
+      * 坐席电话号码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Phone: string;
+    /**
+      * 坐席昵称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Nick: string;
+    /**
+      * 坐席工号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    StaffNumber: string;
+    /**
+      * 所属技能组列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SkillGroupList: Array<SkillGroupItem>;
+    /**
+      * 最后修改时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LastModifyTimestamp: number;
 }
 /**
  * CreateAutoCalloutTask返回参数结构体
@@ -406,259 +1453,6 @@ notInService       不在服务区
     CustomRecordURL: string;
 }
 /**
- * CreateUserSig请求参数结构体
- */
-export interface CreateUserSigRequest {
-    /**
-      * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
-      */
-    SdkAppId: number;
-    /**
-      * 用户 ID
-      */
-    Uid: string;
-    /**
-      * 有效期，单位秒，不超过 1 小时
-      */
-    ExpiredTime: number;
-    /**
-      * 用户签名数据
-      */
-    ClientData?: string;
-}
-/**
- * 号码购买信息
- */
-export interface PhoneNumBuyInfo {
-    /**
-      * 电话号码
-      */
-    PhoneNum: string;
-    /**
-      * 号码类型，0-固话|1-虚商号码|2-运营商号码|3-400号码
-      */
-    Type: number;
-    /**
-      * 号码呼叫类型，1-呼入|2-呼出|3-呼入呼出
-      */
-    CallType: number;
-    /**
-      * 购买时间戳
-      */
-    BuyTime: number;
-    /**
-      * 截至时间戳
-      */
-    EndTime: number;
-    /**
-      * 号码状态，1正常|2欠费停用|4管理员停用|5违规停用
-      */
-    State: number;
-}
-/**
- * DisableCCCPhoneNumber返回参数结构体
- */
-export interface DisableCCCPhoneNumberResponse {
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * CreateCCCSkillGroup请求参数结构体
- */
-export interface CreateCCCSkillGroupRequest {
-    /**
-      * 应用 ID（必填）
-      */
-    SdkAppId: number;
-    /**
-      * 技能组名称
-      */
-    SkillGroupName: string;
-    /**
-      * 技能组类型0-电话，1-在线，3-音频，4-视频
-      */
-    SkillGroupType: number;
-    /**
-      * 技能组接待人数上限（该技能组中1个座席可接待的人数上限）默认为1。1、若技能组类型为在线，则接待上限可设置为1及以上
-2、若技能组类型为电话、音频、视频，则接待上线必须只能为1
-      */
-    MaxConcurrency?: number;
-}
-/**
- * DescribeIMCdrs请求参数结构体
- */
-export interface DescribeIMCdrsRequest {
-    /**
-      * 起始时间
-      */
-    StartTimestamp: number;
-    /**
-      * 结束时间
-      */
-    EndTimestamp: number;
-    /**
-      * 实例 ID（废弃）
-      */
-    InstanceId?: number;
-    /**
-      * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
-      */
-    SdkAppId?: number;
-    /**
-      * 返回记录条数 最大为100默认20
-      */
-    Limit?: number;
-    /**
-      * 返回记录偏移 默认为0
-      */
-    Offset?: number;
-    /**
-      * 1为全媒体，2为文本客服，不填则查询全部
-      */
-    Type?: number;
-}
-/**
- * DescribeAutoCalloutTask返回参数结构体
- */
-export interface DescribeAutoCalloutTaskResponse {
-    /**
-      * 任务名
-      */
-    Name: string;
-    /**
-      * 任务描述
-      */
-    Description: string;
-    /**
-      * 任务起始时间戳
-      */
-    NotBefore: number;
-    /**
-      * 任务结束时间戳
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    NotAfter: number;
-    /**
-      * 主叫列表
-      */
-    Callers: Array<string>;
-    /**
-      * 被叫信息列表
-      */
-    Callees: Array<AutoCalloutTaskCalleeInfo>;
-    /**
-      * 任务使用的IvrId
-      */
-    IvrId: number;
-    /**
-      * 任务状态 0初始 1运行中 2已完成 3结束中 4已终止
-      */
-    State: number;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * DescribeStaffStatusMetrics请求参数结构体
- */
-export interface DescribeStaffStatusMetricsRequest {
-    /**
-      * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
-      */
-    SdkAppId: number;
-    /**
-      * 筛选坐席列表，默认不传返回全部坐席信息
-      */
-    StaffList?: Array<string>;
-}
-/**
- * DescribeAutoCalloutTask请求参数结构体
- */
-export interface DescribeAutoCalloutTaskRequest {
-    /**
-      * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
-      */
-    SdkAppId: number;
-    /**
-      * 任务Id
-      */
-    TaskId: number;
-}
-/**
- * 技能组信息
- */
-export interface SkillGroupItem {
-    /**
-      * 技能组ID
-      */
-    SkillGroupId: number;
-    /**
-      * 技能组名称
-      */
-    SkillGroupName: string;
-    /**
-      * 优先级
-      */
-    Priority: number;
-    /**
-      * 类型：IM、TEL、ALL（全媒体）
-      */
-    Type: string;
-}
-/**
- * CreateUserSig返回参数结构体
- */
-export interface CreateUserSigResponse {
-    /**
-      * 签名结果
-      */
-    UserSig: string;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * ModifyStaff请求参数结构体
- */
-export interface ModifyStaffRequest {
-    /**
-      * 应用ID
-      */
-    SdkAppId: number;
-    /**
-      * 坐席账户
-      */
-    Email: string;
-    /**
-      * 坐席名称
-      */
-    Name?: string;
-    /**
-      * 坐席手机号（带0086前缀,示例：008618011111111）
-      */
-    Phone?: string;
-    /**
-      * 坐席昵称
-      */
-    Nick?: string;
-    /**
-      * 绑定技能组ID列表
-      */
-    SkillGroupIds?: Array<number>;
-    /**
-      * 是否开启手机外呼开关
-      */
-    UseMobileCallOut?: boolean;
-    /**
-      * 手机接听模式 0 - 关闭 | 1 - 仅离线 | 2 - 始终
-      */
-    UseMobileAccept?: number;
-}
-/**
  * DeleteStaff请求参数结构体
  */
 export interface DeleteStaffRequest {
@@ -670,32 +1464,6 @@ export interface DeleteStaffRequest {
       * 待删除客服邮箱列表
       */
     StaffList: Array<string>;
-}
-/**
- * CreateCCCSkillGroup返回参数结构体
- */
-export interface CreateCCCSkillGroupResponse {
-    /**
-      * 技能组ID
-      */
-    SkillGroupId: number;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * DescribeTelSession请求参数结构体
- */
-export interface DescribeTelSessionRequest {
-    /**
-      * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
-      */
-    SdkAppId: number;
-    /**
-      * 会话 ID
-      */
-    SessionId: string;
 }
 /**
  * 呼入实时指标
@@ -756,35 +1524,283 @@ export interface DescribeCCCBuyInfoListRequest {
     SdkAppIds?: Array<number>;
 }
 /**
- * DeleteStaff返回参数结构体
+ * DescribeTelCallInfo请求参数结构体
  */
-export interface DeleteStaffResponse {
+export interface DescribeTelCallInfoRequest {
     /**
-      * 无法删除的状态为在线的客服列表
-注意：此字段可能返回 null，表示取不到有效值。
+      * 起始时间戳，Unix 时间戳
       */
-    OnlineStaffList: Array<string>;
+    StartTimeStamp: number;
+    /**
+      * 结束时间戳，Unix 时间戳，查询时间范围最大为90天
+      */
+    EndTimeStamp: number;
+    /**
+      * 应用ID列表，多个ID时，返回值为多个ID使用总和
+      */
+    SdkAppIdList: Array<number>;
+}
+/**
+ * 变量
+ */
+export interface Variable {
+    /**
+      * 变量名
+      */
+    Key: string;
+    /**
+      * 变量值
+      */
+    Value: string;
+}
+/**
+ * 呼入线路维度相关指标
+ */
+export interface CallInNumberMetrics {
+    /**
+      * 线路号码
+      */
+    Number: string;
+    /**
+      * 线路相关指标
+      */
+    Metrics: CallInMetrics;
+    /**
+      * 所属技能组相关指标
+      */
+    SkillGroupMetrics: Array<CallInSkillGroupMetrics>;
+}
+/**
+ * CreateExtension请求参数结构体
+ */
+export interface CreateExtensionRequest {
+    /**
+      * TCCC 实例应用 ID
+      */
+    SdkAppId: number;
+    /**
+      * 分机号
+      */
+    ExtensionId: string;
+    /**
+      * 分机名称
+      */
+    ExtensionName: string;
+}
+/**
+ * UnbindStaffSkillGroupList请求参数结构体
+ */
+export interface UnbindStaffSkillGroupListRequest {
+    /**
+      * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
+      */
+    SdkAppId: number;
+    /**
+      * 客服邮箱
+      */
+    StaffEmail: string;
+    /**
+      * 解绑技能组列表
+      */
+    SkillGroupList: Array<number>;
+}
+/**
+ * StopAutoCalloutTask返回参数结构体
+ */
+export interface StopAutoCalloutTaskResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
 }
 /**
- * 批量添加客服时，返回出错客服的像个信息
+ * BindStaffSkillGroupList返回参数结构体
  */
-export interface ErrStaffItem {
+export interface BindStaffSkillGroupListResponse {
     /**
-      * 坐席邮箱地址
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * 聊天消息
+ */
+export interface MessageBody {
+    /**
+      * 消息时间戳
+      */
+    Timestamp: number;
+    /**
+      * 发消息的用户ID
+      */
+    From: string;
+    /**
+      * 消息列表
+      */
+    Messages: Array<Message>;
+}
+/**
+ * 号码购买信息
+ */
+export interface PhoneNumBuyInfo {
+    /**
+      * 电话号码
+      */
+    PhoneNum: string;
+    /**
+      * 号码类型，0-固话|1-虚商号码|2-运营商号码|3-400号码
+      */
+    Type: number;
+    /**
+      * 号码呼叫类型，1-呼入|2-呼出|3-呼入呼出
+      */
+    CallType: number;
+    /**
+      * 购买时间戳
+      */
+    BuyTime: number;
+    /**
+      * 截至时间戳
+      */
+    EndTime: number;
+    /**
+      * 号码状态，1正常|2欠费停用|4管理员停用|5违规停用
+      */
+    State: number;
+}
+/**
+ * DescribeCCCBuyInfoList返回参数结构体
+ */
+export interface DescribeCCCBuyInfoListResponse {
+    /**
+      * 应用总数
+      */
+    TotalCount: number;
+    /**
+      * 应用购买信息列表
+      */
+    SdkAppIdBuyList: Array<SdkAppIdBuyInfo>;
+    /**
+      * 套餐包购买信息列表
+      */
+    PackageBuyList: Array<PackageBuyInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DeleteExtension返回参数结构体
+ */
+export interface DeleteExtensionResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * BindStaffSkillGroupList请求参数结构体
+ */
+export interface BindStaffSkillGroupListRequest {
+    /**
+      * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
+      */
+    SdkAppId: number;
+    /**
+      * 坐席邮箱
       */
     StaffEmail: string;
     /**
-      * 错误码
+      * 绑定技能组列表
       */
-    Code: string;
+    SkillGroupList: Array<number>;
+}
+/**
+ * DescribePSTNActiveSessionList请求参数结构体
+ */
+export interface DescribePSTNActiveSessionListRequest {
     /**
-      * 错误描述
+      * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
       */
-    Message: string;
+    SdkAppId: number;
+    /**
+      * 数据偏移
+      */
+    Offset: number;
+    /**
+      * 返回的数据条数，最大 25
+      */
+    Limit: number;
+}
+/**
+ * DescribeCallInMetrics返回参数结构体
+ */
+export interface DescribeCallInMetricsResponse {
+    /**
+      * 时间戳
+      */
+    Timestamp: number;
+    /**
+      * 总体指标
+      */
+    TotalMetrics: CallInMetrics;
+    /**
+      * 线路维度指标
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NumberMetrics: Array<CallInNumberMetrics>;
+    /**
+      * 技能组维度指标
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SkillGroupMetrics: Array<CallInSkillGroupMetrics>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeTelCdr返回参数结构体
+ */
+export interface DescribeTelCdrResponse {
+    /**
+      * 话单记录总数
+      */
+    TotalCount: number;
+    /**
+      * 话单记录
+      */
+    TelCdrs: Array<TelCdrInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeStaffStatusMetrics请求参数结构体
+ */
+export interface DescribeStaffStatusMetricsRequest {
+    /**
+      * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
+      */
+    SdkAppId: number;
+    /**
+      * 筛选坐席列表，默认不传返回全部坐席信息
+      */
+    StaffList?: Array<string>;
+}
+/**
+ * ResetExtensionPassword请求参数结构体
+ */
+export interface ResetExtensionPasswordRequest {
+    /**
+      * TCCC 实例应用 ID
+      */
+    SdkAppId: number;
+    /**
+      * 分机号
+      */
+    ExtensionId: string;
 }
 /**
  * 坐席状态补充信息
@@ -798,35 +1814,6 @@ export interface StaffStatusExtra {
       * in - 呼入 | out - 呼出
       */
     Direct: string;
-}
-/**
- * DescribeSkillGroupInfoList请求参数结构体
- */
-export interface DescribeSkillGroupInfoListRequest {
-    /**
-      * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
-      */
-    SdkAppId: number;
-    /**
-      * 分页尺寸，上限 100
-      */
-    PageSize: number;
-    /**
-      * 分页页码，从 0 开始
-      */
-    PageNumber: number;
-    /**
-      * 技能组ID，查询单个技能组时使用
-      */
-    SkillGroupId?: number;
-    /**
-      * 查询修改时间大于等于ModifiedTime的技能组时使用
-      */
-    ModifiedTime?: number;
-    /**
-      * 技能组名称
-      */
-    SkillGroupName?: string;
 }
 /**
  * CreateStaff请求参数结构体
@@ -885,40 +1872,6 @@ export interface SdkAppIdBuyInfo {
     PhoneNumBuyList: Array<PhoneNumBuyInfo>;
 }
 /**
- * 呼入线路维度相关指标
- */
-export interface CallInNumberMetrics {
-    /**
-      * 线路号码
-      */
-    Number: string;
-    /**
-      * 线路相关指标
-      */
-    Metrics: CallInMetrics;
-    /**
-      * 所属技能组相关指标
-      */
-    SkillGroupMetrics: Array<CallInSkillGroupMetrics>;
-}
-/**
- * 外呼任务被叫信息
- */
-export interface AutoCalloutTaskCalleeInfo {
-    /**
-      * 被叫号码
-      */
-    Callee: string;
-    /**
-      * 呼叫状态 0初始 1已接听 2未接听 3呼叫中 4待重试
-      */
-    State: number;
-    /**
-      * 会话ID列表
-      */
-    Sessions: Array<string>;
-}
-/**
  * DescribePSTNActiveSessionList返回参数结构体
  */
 export interface DescribePSTNActiveSessionListResponse {
@@ -930,19 +1883,6 @@ export interface DescribePSTNActiveSessionListResponse {
       * 列表内容
       */
     Sessions: Array<PSTNSessionInfo>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * CreateCallOutSession返回参数结构体
- */
-export interface CreateCallOutSessionResponse {
-    /**
-      * 新创建的会话 ID
-      */
-    SessionId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1005,57 +1945,6 @@ export interface IMCdrInfo {
     SkillGroupName: string;
 }
 /**
- * DisableCCCPhoneNumber请求参数结构体
- */
-export interface DisableCCCPhoneNumberRequest {
-    /**
-      * TCCC 实例应用 ID
-      */
-    SdkAppId: number;
-    /**
-      * 号码列表，0086开头
-      */
-    PhoneNumbers: Array<string>;
-    /**
-      * 停用开关，0启用 1停用
-      */
-    Disabled: number;
-}
-/**
- * 坐席购买信息
- */
-export interface StaffBuyInfo {
-    /**
-      * 购买坐席数量
-      */
-    Num: number;
-    /**
-      * 购买时间戳
-      */
-    BuyTime: number;
-    /**
-      * 截至时间戳
-      */
-    EndTime: number;
-}
-/**
- * DescribeProtectedTelCdr返回参数结构体
- */
-export interface DescribeProtectedTelCdrResponse {
-    /**
-      * 话单记录总数
-      */
-    TotalCount: number;
-    /**
-      * 话单记录
-      */
-    TelCdrs: Array<TelCdrInfo>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
  * DescribeAutoCalloutTasks请求参数结构体
  */
 export interface DescribeAutoCalloutTasksRequest {
@@ -1106,75 +1995,6 @@ export interface DescribeChatMessagesRequest {
     SessionId?: string;
 }
 /**
- * PSTN 会话类型。
- */
-export interface PSTNSession {
-    /**
-      * 会话 ID
-      */
-    SessionID: string;
-    /**
-      * 会话临时房间 ID
-      */
-    RoomID: string;
-    /**
-      * 主叫
-      */
-    Caller: string;
-    /**
-      * 被叫
-      */
-    Callee: string;
-    /**
-      * 开始时间，Unix 时间戳
-      */
-    StartTimestamp: number;
-    /**
-      * 振铃时间，Unix 时间戳
-      */
-    RingTimestamp: number;
-    /**
-      * 接听时间，Unix 时间戳
-      */
-    AcceptTimestamp: number;
-    /**
-      * 坐席邮箱
-      */
-    StaffEmail: string;
-    /**
-      * 坐席工号
-      */
-    StaffNumber: string;
-    /**
-      * 会话状态
-ringing 振铃中
-seatJoining  等待坐席接听
-inProgress 进行中
-finished 已完成
-      */
-    SessionStatus: string;
-    /**
-      * 会话呼叫方向， 0 呼入 | 1 - 呼出
-      */
-    Direction: number;
-    /**
-      * 转外线使用的号码（转外线主叫）
-      */
-    OutBoundCaller: string;
-    /**
-      * 转外线被叫
-      */
-    OutBoundCallee: string;
-    /**
-      * 主叫号码保护ID，开启号码保护映射功能时有效，且Caller字段置空
-      */
-    ProtectedCaller: string;
-    /**
-      * 被叫号码保护ID，开启号码保护映射功能时有效，且Callee字段置空
-      */
-    ProtectedCallee: string;
-}
-/**
  * DescribeTelSession返回参数结构体
  */
 export interface DescribeTelSessionResponse {
@@ -1188,279 +2008,9 @@ export interface DescribeTelSessionResponse {
     RequestId?: string;
 }
 /**
- * DescribeStaffInfoList请求参数结构体
- */
-export interface DescribeStaffInfoListRequest {
-    /**
-      * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
-      */
-    SdkAppId: number;
-    /**
-      * 分页尺寸，上限 9999
-      */
-    PageSize: number;
-    /**
-      * 分页页码，从 0 开始
-      */
-    PageNumber: number;
-    /**
-      * 坐席账号，查询单个坐席时使用
-      */
-    StaffMail?: string;
-    /**
-      * 查询修改时间大于等于ModifiedTime的坐席时使用
-      */
-    ModifiedTime?: number;
-    /**
-      * 技能组ID
-      */
-    SkillGroupId?: number;
-}
-/**
- * 自动外呼任务列表项
- */
-export interface AutoCalloutTaskInfo {
-    /**
-      * 任务名
-      */
-    Name: string;
-    /**
-      * 被叫数量
-      */
-    CalleeCount: number;
-    /**
-      * 主叫号码列表
-      */
-    Callers: Array<string>;
-    /**
-      * 起始时间戳
-      */
-    NotBefore: number;
-    /**
-      * 结束时间戳
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    NotAfter: number;
-    /**
-      * 任务使用的IvrId
-      */
-    IvrId: number;
-    /**
-      * 任务状态0初始 1运行中 2已完成 3结束中 4已结束
-      */
-    State: number;
-    /**
-      * 任务Id
-      */
-    TaskId: number;
-}
-/**
- * 带有技能组优先级的坐席信息
- */
-export interface StaffInfo {
-    /**
-      * 坐席名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Name: string;
-    /**
-      * 坐席邮箱
-      */
-    Mail: string;
-    /**
-      * 坐席电话号码
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Phone: string;
-    /**
-      * 坐席昵称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Nick: string;
-    /**
-      * 坐席工号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    StaffNumber: string;
-    /**
-      * 所属技能组列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    SkillGroupList: Array<SkillGroupItem>;
-    /**
-      * 最后修改时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    LastModifyTimestamp: number;
-}
-/**
- * PSTN 会话信息
- */
-export interface PSTNSessionInfo {
-    /**
-      * 会话 ID
-      */
-    SessionID: string;
-    /**
-      * 会话临时房间 ID
-      */
-    RoomID: string;
-    /**
-      * 主叫
-      */
-    Caller: string;
-    /**
-      * 被叫
-      */
-    Callee: string;
-    /**
-      * 开始时间，Unix 时间戳
-      */
-    StartTimestamp: string;
-    /**
-      * 接听时间，Unix 时间戳
-      */
-    AcceptTimestamp: string;
-    /**
-      * 坐席邮箱
-      */
-    StaffEmail: string;
-    /**
-      * 坐席工号
-      */
-    StaffNumber: string;
-    /**
-      * 坐席状态 inProgress 进行中
-      */
-    SessionStatus: string;
-    /**
-      * 会话呼叫方向， 0 呼入 | 1 - 呼出
-      */
-    Direction: number;
-    /**
-      * 振铃时间，Unix 时间戳
-      */
-    RingTimestamp: number;
-    /**
-      * 主叫号码保护ID，开启号码保护映射功能时有效，且Caller字段置空
-      */
-    ProtectedCaller: string;
-    /**
-      * 被叫号码保护ID，开启号码保护映射功能时有效，且Callee字段置空
-      */
-    ProtectedCallee: string;
-}
-/**
  * ModifyStaff返回参数结构体
  */
 export interface ModifyStaffResponse {
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * 参与者信息
- */
-export interface ServeParticipant {
-    /**
-      * 坐席邮箱
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Mail: string;
-    /**
-      * 坐席电话
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Phone: string;
-    /**
-      * 振铃时间戳，Unix 秒级时间戳
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    RingTimestamp: number;
-    /**
-      * 接听时间戳，Unix 秒级时间戳
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    AcceptTimestamp: number;
-    /**
-      * 结束时间戳，Unix 秒级时间戳
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    EndedTimestamp: number;
-    /**
-      * 录音 ID，能够索引到坐席侧的录音
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    RecordId: string;
-    /**
-      * 参与者类型，"staffSeat", "outboundSeat", "staffPhoneSeat"
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Type: string;
-    /**
-      * 转接来源坐席信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    TransferFrom: string;
-    /**
-      * 转接去向坐席信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    TransferTo: string;
-    /**
-      * 转接去向参与者类型，取值与 Type 一致
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    TransferToType: string;
-    /**
-      * 技能组 ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    SkillGroupId: number;
-    /**
-      * 结束状态
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    EndStatusString: string;
-    /**
-      * 录音 URL
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    RecordURL: string;
-    /**
-      * 参与者序号，从 0 开始
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Sequence: number;
-    /**
-      * 开始时间戳，Unix 秒级时间戳
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    StartTimestamp: number;
-    /**
-      * 技能组名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    SkillGroupName: string;
-    /**
-      * 录音转存第三方COS地址
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    CustomRecordURL: string;
-}
-/**
- * DescribeTelCdr返回参数结构体
- */
-export interface DescribeTelCdrResponse {
-    /**
-      * 话单记录总数
-      */
-    TotalCount: number;
-    /**
-      * 话单记录
-      */
-    TelCdrs: Array<TelCdrInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1478,86 +2028,6 @@ export interface DescribeStaffStatusMetricsResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
-}
-/**
- * DescribeTelCallInfo返回参数结构体
- */
-export interface DescribeTelCallInfoResponse {
-    /**
-      * 呼出套餐包消耗分钟数
-      */
-    TelCallOutCount: number;
-    /**
-      * 呼入套餐包消耗分钟数
-      */
-    TelCallInCount: number;
-    /**
-      * 坐席使用统计个数
-      */
-    SeatUsedCount: number;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * 技能组信息
- */
-export interface SkillGroupInfoItem {
-    /**
-      * 技能组ID
-      */
-    SkillGroupId: number;
-    /**
-      * 技能组名称
-      */
-    SkillGroupName: string;
-    /**
-      * 类型：IM、TEL、ALL（全媒体）
-      */
-    Type: string;
-    /**
-      * 会话分配策略
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    RoutePolicy: string;
-    /**
-      * 会话分配是否优先上次服务坐席
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    UsingLastSeat: number;
-    /**
-      * 单客服最大并发数（电话类型默认1）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    MaxConcurrency: number;
-    /**
-      * 最后修改时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    LastModifyTimestamp: number;
-}
-/**
- * StopAutoCalloutTask返回参数结构体
- */
-export interface StopAutoCalloutTaskResponse {
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * 变量
- */
-export interface Variable {
-    /**
-      * 变量名
-      */
-    Key: string;
-    /**
-      * 变量值
-      */
-    Value: string;
 }
 /**
  * CreateCallOutSession请求参数结构体
@@ -1589,165 +2059,54 @@ export interface CreateCallOutSessionRequest {
     Uui?: string;
 }
 /**
- * 坐席状态相关信息
+ * 技能组信息
  */
-export interface StaffStatusMetrics {
+export interface SkillGroupItem {
     /**
-      * 坐席邮箱
+      * 技能组ID
       */
-    Email: string;
+    SkillGroupId: number;
     /**
-      * 坐席状态 free 示闲 | busy 忙碌 | rest 小休 | notReady 示忙 | afterCallWork 话后调整 | offline 离线
+      * 技能组名称
       */
-    Status: string;
+    SkillGroupName: string;
     /**
-      * 坐席状态补充信息
+      * 优先级
       */
-    StatusExtra: StaffStatusExtra;
+    Priority: number;
     /**
-      * 当天在线总时长
+      * 类型：IM、TEL、ALL（全媒体）
       */
-    OnlineDuration: number;
-    /**
-      * 当天示闲总时长
-      */
-    FreeDuration: number;
-    /**
-      * 当天忙碌总时长
-      */
-    BusyDuration: number;
-    /**
-      * 当天示忙总时长
-      */
-    NotReadyDuration: number;
-    /**
-      * 当天小休总时长
-      */
-    RestDuration: number;
-    /**
-      * 当天话后调整总时长
-      */
-    AfterCallWorkDuration: number;
-    /**
-      * 小休原因
-      */
-    Reason: string;
-    /**
-      * 是否预约小休
-      */
-    ReserveRest: boolean;
-    /**
-      * 是否预约示忙
-      */
-    ReserveNotReady: boolean;
-    /**
-      * 手机接听模式： 0 - 关闭 | 1 - 仅离线 | 2- 始终
-      */
-    UseMobileAccept: number;
-    /**
-      * 手机外呼开关
-      */
-    UseMobileCallOut: boolean;
+    Type: string;
 }
 /**
- * BindStaffSkillGroupList返回参数结构体
+ * DescribeExtensions请求参数结构体
  */
-export interface BindStaffSkillGroupListResponse {
+export interface DescribeExtensionsRequest {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * TCCC 实例应用 ID
       */
-    RequestId?: string;
-}
-/**
- * DescribeAutoCalloutTasks返回参数结构体
- */
-export interface DescribeAutoCalloutTasksResponse {
+    SdkAppId: number;
     /**
-      * 总数
+      * 分页页号（从0开始）
       */
-    TotalCount: number;
+    PageNumber: number;
     /**
-      * 任务列表
+      * 筛选分机号列表
       */
-    Tasks: Array<AutoCalloutTaskInfo>;
+    ExtensionIds?: Array<string>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * 套餐包购买信息
- */
-export interface PackageBuyInfo {
-    /**
-      * 套餐包Id
-      */
-    PackageId: string;
-    /**
-      * 套餐包类型，0-外呼套餐包|1-400呼入套餐包
-      */
-    Type: number;
-    /**
-      * 套餐包总量
-      */
-    CapacitySize: number;
-    /**
-      * 套餐包剩余量
-      */
-    CapacityRemain: number;
-    /**
-      * 购买时间戳
-      */
-    BuyTime: number;
-    /**
-      * 截至时间戳
-      */
-    EndTime: number;
-}
-/**
- * DescribeTelCdr请求参数结构体
- */
-export interface DescribeTelCdrRequest {
-    /**
-      * 起始时间戳，Unix 秒级时间戳
-      */
-    StartTimeStamp: number;
-    /**
-      * 结束时间戳，Unix 秒级时间戳
-      */
-    EndTimeStamp: number;
-    /**
-      * 实例 ID（废弃）
-      */
-    InstanceId?: number;
-    /**
-      * 返回数据条数，上限（废弃）
-      */
-    Limit?: number;
-    /**
-      * 偏移（废弃）
-      */
-    Offset?: number;
-    /**
-      * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
-      */
-    SdkAppId?: number;
-    /**
-      * 分页尺寸（必填），上限 100
+      * 分页大小
       */
     PageSize?: number;
     /**
-      * 分页页码（必填），从 0 开始
+      * 模糊查询字段（模糊查询分机号、分机名称、坐席邮箱、坐席名称）
       */
-    PageNumber?: number;
+    FuzzingKeyWord?: string;
     /**
-      * 按手机号筛选
+      * 是否需要返回话机当前状态
       */
-    Phones?: Array<string>;
-    /**
-      * 按SessionId筛选
-      */
-    SessionIds?: Array<string>;
+    IsNeedStatus?: boolean;
 }
 /**
  * DescribeProtectedTelCdr请求参数结构体
@@ -1775,23 +2134,6 @@ export interface DescribeProtectedTelCdrRequest {
     PageNumber: number;
 }
 /**
- * 聊天消息
- */
-export interface MessageBody {
-    /**
-      * 消息时间戳
-      */
-    Timestamp: number;
-    /**
-      * 发消息的用户ID
-      */
-    From: string;
-    /**
-      * 消息列表
-      */
-    Messages: Array<Message>;
-}
-/**
  * CreateSDKLoginToken请求参数结构体
  */
 export interface CreateSDKLoginTokenRequest {
@@ -1805,86 +2147,21 @@ export interface CreateSDKLoginTokenRequest {
     SeatUserId: string;
 }
 /**
- * DescribeTelCallInfo请求参数结构体
+ * 坐席购买信息
  */
-export interface DescribeTelCallInfoRequest {
+export interface StaffBuyInfo {
     /**
-      * 起始时间戳，Unix 时间戳
+      * 购买坐席数量
       */
-    StartTimeStamp: number;
+    Num: number;
     /**
-      * 结束时间戳，Unix 时间戳，查询时间范围最大为90天
+      * 购买时间戳
       */
-    EndTimeStamp: number;
+    BuyTime: number;
     /**
-      * 应用ID列表，多个ID时，返回值为多个ID使用总和
+      * 截至时间戳
       */
-    SdkAppIdList: Array<number>;
-}
-/**
- * DescribeCCCBuyInfoList返回参数结构体
- */
-export interface DescribeCCCBuyInfoListResponse {
-    /**
-      * 应用总数
-      */
-    TotalCount: number;
-    /**
-      * 应用购买信息列表
-      */
-    SdkAppIdBuyList: Array<SdkAppIdBuyInfo>;
-    /**
-      * 套餐包购买信息列表
-      */
-    PackageBuyList: Array<PackageBuyInfo>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * UnbindStaffSkillGroupList返回参数结构体
- */
-export interface UnbindStaffSkillGroupListResponse {
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * 坐席用户信息
- */
-export interface SeatUserInfo {
-    /**
-      * 坐席名称
-      */
-    Name?: string;
-    /**
-      * 坐席邮箱
-      */
-    Mail?: string;
-    /**
-      * 坐席电话号码（带0086前缀）
-      */
-    Phone?: string;
-    /**
-      * 坐席昵称
-      */
-    Nick?: string;
-    /**
-      * 用户ID
-      */
-    UserId?: string;
-    /**
-      * 坐席关联的技能组列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    SkillGroupNameList?: Array<string>;
-    /**
-      * 工号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    StaffNumber?: string;
+    EndTime: number;
 }
 /**
  * DescribeCallInMetrics请求参数结构体
@@ -1904,61 +2181,29 @@ export interface DescribeCallInMetricsRequest {
     EnabledNumber?: boolean;
 }
 /**
- * CreateStaff返回参数结构体
+ * DescribeExtension返回参数结构体
  */
-export interface CreateStaffResponse {
+export interface DescribeExtensionResponse {
     /**
-      * 错误坐席列表及错误信息
-注意：此字段可能返回 null，表示取不到有效值。
+      * 分机号
       */
-    ErrorStaffList: Array<ErrStaffItem>;
+    ExtensionId: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 域名
       */
-    RequestId?: string;
-}
-/**
- * 单条消息
- */
-export interface Message {
+    ExtensionDomain: string;
     /**
-      * 消息类型
+      * 注册密码
       */
-    Type: string;
+    Password: string;
     /**
-      * 消息内容
+      * 代理服务器地址
       */
-    Content: string;
-}
-/**
- * DescribeSkillGroupInfoList返回参数结构体
- */
-export interface DescribeSkillGroupInfoListResponse {
+    OutboundProxy: string;
     /**
-      * 技能组总数
+      * 传输协议
       */
-    TotalCount: number;
-    /**
-      * 技能组信息列表
-      */
-    SkillGroupList: Array<SkillGroupInfoItem>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * DescribeIMCdrs返回参数结构体
- */
-export interface DescribeIMCdrsResponse {
-    /**
-      * 总记录数
-      */
-    TotalCount: number;
-    /**
-      * 服务记录列表
-      */
-    IMCdrs: Array<IMCdrInfo>;
+    Transport: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

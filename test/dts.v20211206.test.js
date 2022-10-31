@@ -1,7 +1,7 @@
 
 const expect = require("chai").expect
 const tencentcloud = require("../../tencentcloud-sdk-nodejs")
-const client = new tencentcloud.ccc.v20200210.Client({
+const client = new tencentcloud.dts.v20211206.Client({
   credential: {
     secretId: process.env.secretId,
     secretKey: process.env.secretKey,
@@ -16,11 +16,11 @@ const client = new tencentcloud.ccc.v20200210.Client({
     },
   },
 })
-describe("ccc.v20200210.test.js", function () {
+describe("dts.v20211206.test.js", function () {
 
-it("ccc.v20200210.DescribeExtensions", async function () {
+it("dts.v20211206.ModifyMigrationJob", async function () {
     try {
-       const data = await client.DescribeExtensions({})
+       const data = await client.ModifyMigrationJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -28,9 +28,9 @@ it("ccc.v20200210.DescribeExtensions", async function () {
     }
 })
 
-it("ccc.v20200210.CreateExtension", async function () {
+it("dts.v20211206.DescribeSyncJobs", async function () {
     try {
-       const data = await client.CreateExtension({})
+       const data = await client.DescribeSyncJobs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -38,9 +38,9 @@ it("ccc.v20200210.CreateExtension", async function () {
     }
 })
 
-it("ccc.v20200210.DescribeStaffInfoList", async function () {
+it("dts.v20211206.CreateMigrationService", async function () {
     try {
-       const data = await client.DescribeStaffInfoList({})
+       const data = await client.CreateMigrationService({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -48,9 +48,9 @@ it("ccc.v20200210.DescribeStaffInfoList", async function () {
     }
 })
 
-it("ccc.v20200210.DescribePSTNActiveSessionList", async function () {
+it("dts.v20211206.ModifyCompareTask", async function () {
     try {
-       const data = await client.DescribePSTNActiveSessionList({})
+       const data = await client.ModifyCompareTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -58,9 +58,9 @@ it("ccc.v20200210.DescribePSTNActiveSessionList", async function () {
     }
 })
 
-it("ccc.v20200210.DeleteExtension", async function () {
+it("dts.v20211206.StopCompare", async function () {
     try {
-       const data = await client.DeleteExtension({})
+       const data = await client.StopCompare({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -68,9 +68,9 @@ it("ccc.v20200210.DeleteExtension", async function () {
     }
 })
 
-it("ccc.v20200210.BindStaffSkillGroupList", async function () {
+it("dts.v20211206.CreateSyncJob", async function () {
     try {
-       const data = await client.BindStaffSkillGroupList({})
+       const data = await client.CreateSyncJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -78,9 +78,9 @@ it("ccc.v20200210.BindStaffSkillGroupList", async function () {
     }
 })
 
-it("ccc.v20200210.DescribeChatMessages", async function () {
+it("dts.v20211206.DeleteCompareTask", async function () {
     try {
-       const data = await client.DescribeChatMessages({})
+       const data = await client.DeleteCompareTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -88,9 +88,9 @@ it("ccc.v20200210.DescribeChatMessages", async function () {
     }
 })
 
-it("ccc.v20200210.DescribeIMCdrs", async function () {
+it("dts.v20211206.StartSyncJob", async function () {
     try {
-       const data = await client.DescribeIMCdrs({})
+       const data = await client.StartSyncJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -98,9 +98,9 @@ it("ccc.v20200210.DescribeIMCdrs", async function () {
     }
 })
 
-it("ccc.v20200210.DeleteStaff", async function () {
+it("dts.v20211206.StopSyncJob", async function () {
     try {
-       const data = await client.DeleteStaff({})
+       const data = await client.StopSyncJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -108,9 +108,9 @@ it("ccc.v20200210.DeleteStaff", async function () {
     }
 })
 
-it("ccc.v20200210.ModifyStaff", async function () {
+it("dts.v20211206.CreateCheckSyncJob", async function () {
     try {
-       const data = await client.ModifyStaff({})
+       const data = await client.CreateCheckSyncJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -118,9 +118,9 @@ it("ccc.v20200210.ModifyStaff", async function () {
     }
 })
 
-it("ccc.v20200210.DescribeAutoCalloutTasks", async function () {
+it("dts.v20211206.DescribeCompareReport", async function () {
     try {
-       const data = await client.DescribeAutoCalloutTasks({})
+       const data = await client.DescribeCompareReport({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -128,9 +128,9 @@ it("ccc.v20200210.DescribeAutoCalloutTasks", async function () {
     }
 })
 
-it("ccc.v20200210.ResetExtensionPassword", async function () {
+it("dts.v20211206.ConfigureSyncJob", async function () {
     try {
-       const data = await client.ResetExtensionPassword({})
+       const data = await client.ConfigureSyncJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -138,9 +138,9 @@ it("ccc.v20200210.ResetExtensionPassword", async function () {
     }
 })
 
-it("ccc.v20200210.DescribeTelCallInfo", async function () {
+it("dts.v20211206.ResizeSyncJob", async function () {
     try {
-       const data = await client.DescribeTelCallInfo({})
+       const data = await client.ResizeSyncJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -148,9 +148,9 @@ it("ccc.v20200210.DescribeTelCallInfo", async function () {
     }
 })
 
-it("ccc.v20200210.DescribeExtension", async function () {
+it("dts.v20211206.StartCompare", async function () {
     try {
-       const data = await client.DescribeExtension({})
+       const data = await client.StartCompare({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -158,9 +158,9 @@ it("ccc.v20200210.DescribeExtension", async function () {
     }
 })
 
-it("ccc.v20200210.DescribeTelSession", async function () {
+it("dts.v20211206.ResumeMigrateJob", async function () {
     try {
-       const data = await client.DescribeTelSession({})
+       const data = await client.ResumeMigrateJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -168,9 +168,9 @@ it("ccc.v20200210.DescribeTelSession", async function () {
     }
 })
 
-it("ccc.v20200210.CreateCallOutSession", async function () {
+it("dts.v20211206.StopMigrateJob", async function () {
     try {
-       const data = await client.CreateCallOutSession({})
+       const data = await client.StopMigrateJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -178,9 +178,9 @@ it("ccc.v20200210.CreateCallOutSession", async function () {
     }
 })
 
-it("ccc.v20200210.DescribeAutoCalloutTask", async function () {
+it("dts.v20211206.DestroySyncJob", async function () {
     try {
-       const data = await client.DescribeAutoCalloutTask({})
+       const data = await client.DestroySyncJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -188,9 +188,9 @@ it("ccc.v20200210.DescribeAutoCalloutTask", async function () {
     }
 })
 
-it("ccc.v20200210.DescribeTelCdr", async function () {
+it("dts.v20211206.DescribeMigrateDBInstances", async function () {
     try {
-       const data = await client.DescribeTelCdr({})
+       const data = await client.DescribeMigrateDBInstances({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -198,9 +198,9 @@ it("ccc.v20200210.DescribeTelCdr", async function () {
     }
 })
 
-it("ccc.v20200210.DescribeSkillGroupInfoList", async function () {
+it("dts.v20211206.CreateMigrateCheckJob", async function () {
     try {
-       const data = await client.DescribeSkillGroupInfoList({})
+       const data = await client.CreateMigrateCheckJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -208,9 +208,9 @@ it("ccc.v20200210.DescribeSkillGroupInfoList", async function () {
     }
 })
 
-it("ccc.v20200210.StopAutoCalloutTask", async function () {
+it("dts.v20211206.DescribeCheckSyncJobResult", async function () {
     try {
-       const data = await client.StopAutoCalloutTask({})
+       const data = await client.DescribeCheckSyncJobResult({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -218,9 +218,9 @@ it("ccc.v20200210.StopAutoCalloutTask", async function () {
     }
 })
 
-it("ccc.v20200210.DescribeCCCBuyInfoList", async function () {
+it("dts.v20211206.DescribeCompareTasks", async function () {
     try {
-       const data = await client.DescribeCCCBuyInfoList({})
+       const data = await client.DescribeCompareTasks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -228,9 +228,9 @@ it("ccc.v20200210.DescribeCCCBuyInfoList", async function () {
     }
 })
 
-it("ccc.v20200210.CreateCCCSkillGroup", async function () {
+it("dts.v20211206.DescribeMigrationJobs", async function () {
     try {
-       const data = await client.CreateCCCSkillGroup({})
+       const data = await client.DescribeMigrationJobs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -238,9 +238,9 @@ it("ccc.v20200210.CreateCCCSkillGroup", async function () {
     }
 })
 
-it("ccc.v20200210.UnbindStaffSkillGroupList", async function () {
+it("dts.v20211206.RecoverMigrateJob", async function () {
     try {
-       const data = await client.UnbindStaffSkillGroupList({})
+       const data = await client.RecoverMigrateJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -248,9 +248,9 @@ it("ccc.v20200210.UnbindStaffSkillGroupList", async function () {
     }
 })
 
-it("ccc.v20200210.DisableCCCPhoneNumber", async function () {
+it("dts.v20211206.RecoverSyncJob", async function () {
     try {
-       const data = await client.DisableCCCPhoneNumber({})
+       const data = await client.RecoverSyncJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -258,9 +258,9 @@ it("ccc.v20200210.DisableCCCPhoneNumber", async function () {
     }
 })
 
-it("ccc.v20200210.DescribeStaffStatusMetrics", async function () {
+it("dts.v20211206.CreateCompareTask", async function () {
     try {
-       const data = await client.DescribeStaffStatusMetrics({})
+       const data = await client.CreateCompareTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -268,9 +268,9 @@ it("ccc.v20200210.DescribeStaffStatusMetrics", async function () {
     }
 })
 
-it("ccc.v20200210.CreateStaff", async function () {
+it("dts.v20211206.DestroyMigrateJob", async function () {
     try {
-       const data = await client.CreateStaff({})
+       const data = await client.DestroyMigrateJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -278,9 +278,9 @@ it("ccc.v20200210.CreateStaff", async function () {
     }
 })
 
-it("ccc.v20200210.CreateAutoCalloutTask", async function () {
+it("dts.v20211206.DescribeMigrationDetail", async function () {
     try {
-       const data = await client.CreateAutoCalloutTask({})
+       const data = await client.DescribeMigrationDetail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -288,9 +288,9 @@ it("ccc.v20200210.CreateAutoCalloutTask", async function () {
     }
 })
 
-it("ccc.v20200210.ModifyExtension", async function () {
+it("dts.v20211206.ResumeSyncJob", async function () {
     try {
-       const data = await client.ModifyExtension({})
+       const data = await client.ResumeSyncJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -298,9 +298,9 @@ it("ccc.v20200210.ModifyExtension", async function () {
     }
 })
 
-it("ccc.v20200210.CreateUserSig", async function () {
+it("dts.v20211206.DescribeMigrationCheckJob", async function () {
     try {
-       const data = await client.CreateUserSig({})
+       const data = await client.DescribeMigrationCheckJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -308,9 +308,9 @@ it("ccc.v20200210.CreateUserSig", async function () {
     }
 })
 
-it("ccc.v20200210.DescribeProtectedTelCdr", async function () {
+it("dts.v20211206.StartMigrateJob", async function () {
     try {
-       const data = await client.DescribeProtectedTelCdr({})
+       const data = await client.StartMigrateJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -318,9 +318,9 @@ it("ccc.v20200210.DescribeProtectedTelCdr", async function () {
     }
 })
 
-it("ccc.v20200210.DescribeCallInMetrics", async function () {
+it("dts.v20211206.ModifyMigrateJobSpec", async function () {
     try {
-       const data = await client.DescribeCallInMetrics({})
+       const data = await client.ModifyMigrateJobSpec({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -328,9 +328,49 @@ it("ccc.v20200210.DescribeCallInMetrics", async function () {
     }
 })
 
-it("ccc.v20200210.CreateSDKLoginToken", async function () {
+it("dts.v20211206.IsolateMigrateJob", async function () {
     try {
-       const data = await client.CreateSDKLoginToken({})
+       const data = await client.IsolateMigrateJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dts.v20211206.ModifyCompareTaskName", async function () {
+    try {
+       const data = await client.ModifyCompareTaskName({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dts.v20211206.CompleteMigrateJob", async function () {
+    try {
+       const data = await client.CompleteMigrateJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dts.v20211206.ModifyMigrateName", async function () {
+    try {
+       const data = await client.ModifyMigrateName({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dts.v20211206.IsolateSyncJob", async function () {
+    try {
+       const data = await client.IsolateSyncJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
