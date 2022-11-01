@@ -180,9 +180,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeNamespacePersonal(req: DescribeNamespacePersonalRequest, cb?: (error: string, rep: DescribeNamespacePersonalResponse) => void): Promise<DescribeNamespacePersonalResponse>;
     /**
-     * 查询所有有实例命名空间列表
+     * 查询所有实例命名空间列表
      */
-    DescribeInstanceAllNamespaces(req?: DescribeInstanceAllNamespacesRequest, cb?: (error: string, rep: DescribeInstanceAllNamespacesResponse) => void): Promise<DescribeInstanceAllNamespacesResponse>;
+    DescribeInstanceAllNamespaces(req: DescribeInstanceAllNamespacesRequest, cb?: (error: string, rep: DescribeInstanceAllNamespacesResponse) => void): Promise<DescribeInstanceAllNamespacesResponse>;
     /**
      * 查询个人版仓库信息
      */

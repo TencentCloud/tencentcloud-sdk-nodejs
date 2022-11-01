@@ -76,6 +76,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCaptchaMiniDataSum", req, cb);
     }
     /**
+     * 查询单个验证的统计数据，包括：票据校验量、票据校验通过量、票据校验拦截量。
+     */
+    async GetTicketStatistics(req, cb) {
+        return this.request("GetTicketStatistics", req, cb);
+    }
+    /**
      * 核查验证码票据结果(小程序插件)
      */
     async DescribeCaptchaMiniResult(req, cb) {

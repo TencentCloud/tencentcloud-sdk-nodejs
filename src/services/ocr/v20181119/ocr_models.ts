@@ -2666,6 +2666,22 @@ export interface VatInvoiceVerifyNewRequest {
    * 不含税金额，增值税专用发票、增值税电子专用发票、机动车销售统一发票、二手车销售统一发票、区块链发票时必填; 全电发票为价税合计(含税金额)
    */
   Amount?: string
+
+  /**
+      * 地区编码，通用机打电子发票时必填。
+广东:4400，浙江:3300
+      */
+  RegionCode?: string
+
+  /**
+   * 销方税号，通用机打电子发票必填
+   */
+  SellerTaxCode?: string
+
+  /**
+   * 是否开启通用机打电子发票，默认为关闭。
+   */
+  EnableCommonElectronic?: boolean
 }
 
 /**
@@ -6375,7 +6391,8 @@ export interface VatInvoice {
 11：增值税普通发票（卷式），
 14：增值税电子（通行费）发票，
 15：二手车销售统一发票，
-32：深圳区块链发票
+32：深圳区块链发票，
+102：通用机打电子发票
       */
   Type: string
 

@@ -119,7 +119,7 @@ export interface CreateFlowRequest {
       */
     DeadLine?: number;
     /**
-      * 用户自定义字段(需进行base64 encode),回调的时候会进行透传, 长度需要小于20480
+      * 用户自定义字段，回调的时候会进行透传，长度需要小于20480
       */
     UserData?: string;
     /**
@@ -1196,6 +1196,10 @@ HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证(格式同居民身份证)
       * 客户自定义签署人标识，64位长度，保证唯一，非企微场景不使用此字段
       */
     CustomApproverTag?: string;
+    /**
+      * 签署人个性化能力值
+      */
+    ApproverOption?: ApproverOption;
 }
 /**
  * CreateFlowSignReview返回参数结构体
@@ -1317,9 +1321,9 @@ export interface CreateStaffResult {
  */
 export interface UploadFilesRequest {
     /**
-      * 文件对应业务类型，用于区分文件存储路径：
-1. TEMPLATE - 模板； 文件类型：.pdf .doc .docx .html
-2. DOCUMENT - 签署过程及签署后的合同文档/图片控件 文件类型：.pdf/.jpg/.png
+      * 文件对应业务类型
+1. TEMPLATE - 模板； 文件类型：.pdf/.doc/.docx/.html
+2. DOCUMENT - 签署过程及签署后的合同文档/图片控件 文件类型：.pdf/.doc/.docx/.jpg/.png/.xls.xlsx/.html
 3. SEAL - 印章； 文件类型：.jpg/.jpeg/.png
       */
     BusinessType: string;
@@ -1641,7 +1645,7 @@ REJECT: 拒绝
  */
 export interface CreateConvertTaskApiRequest {
     /**
-      * 资源类型 取值范围doc,docx,html之一
+      * 资源类型 取值范围doc,docx,html,excel之一
       */
     ResourceType: string;
     /**
@@ -1758,6 +1762,10 @@ false：有序签
 注：企业可以通过此功能与企业内部的审批流程进行关联，支持手动、静默签署合同。
       */
     NeedSignReview?: boolean;
+    /**
+      * 用户自定义字段，回调的时候会进行透传，长度需要小于20480
+      */
+    UserData?: string;
     /**
       * 应用号信息
       */

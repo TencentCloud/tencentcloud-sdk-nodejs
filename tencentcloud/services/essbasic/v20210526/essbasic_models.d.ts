@@ -899,6 +899,8 @@ export interface Component {
     /**
       * 控件编号
 
+CreateFlowByTemplates发起合同时优先以ComponentId（不为空）填充；否则以ComponentName填充
+
 注：
 当GenerateMode=3时，通过"^"来决定是否使用关键字整词匹配能力。
 例：
@@ -1232,6 +1234,7 @@ export interface ChannelCreateFlowSignReviewRequest {
       * 企业内部审核结果
 PASS: 通过
 REJECT: 拒绝
+SIGN_REJECT:拒签(流程结束)
       */
     ReviewType: string;
     /**
@@ -2034,7 +2037,7 @@ export interface ChannelCreateConvertTaskApiRequest {
       */
     Agent: Agent;
     /**
-      * 资源类型 取值范围doc,docx,html之一
+      * 资源类型 取值范围doc,docx,html,excel之一
       */
     ResourceType: string;
     /**
@@ -2254,9 +2257,9 @@ export interface UploadFilesRequest {
       */
     Agent: Agent;
     /**
-      * 文件对应业务类型，用于区分文件存储路径：
-1. TEMPLATE - 模板； 文件类型：.pdf .doc .docx .html
-2. DOCUMENT - 签署过程及签署后的合同文档/图片控件 文件类型：.pdf/.jpg/.png
+      * 文件对应业务类型
+1. TEMPLATE - 模板； 文件类型：.pdf/.doc/.docx/.html
+2. DOCUMENT - 签署过程及签署后的合同文档/图片控件 文件类型：.pdf/.doc/.docx/.jpg/.png/.xls.xlsx/.html
       */
     BusinessType: string;
     /**

@@ -124,6 +124,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCertificateDetail", req, cb);
     }
     /**
+     * 修改忽略证书到期通知。打开或关闭证书到期通知。
+     */
+    async ModifyCertificatesExpiringNotificationSwitch(req, cb) {
+        return this.request("ModifyCertificatesExpiringNotificationSwitch", req, cb);
+    }
+    /**
      * 查询管理人详情
      */
     async DescribeManagerDetail(req, cb) {

@@ -368,6 +368,31 @@ export interface CaptchaOperDataRes {
 }
 
 /**
+ * GetTicketStatistics请求参数结构体
+ */
+export interface GetTicketStatisticsRequest {
+  /**
+   * 验证码appid
+   */
+  CaptchaAppId: string
+
+  /**
+   * 开始时间字符串
+   */
+  StartTimeStr: string
+
+  /**
+   * 结束时间字符串
+   */
+  EndTimeStr: string
+
+  /**
+   * 查询粒度
+   */
+  Dimension: string
+}
+
+/**
  * DescribeCaptchaTicketData 返回的数据结构
  */
 export interface TicketInterceptUnit {
@@ -845,6 +870,32 @@ export interface DescribeCaptchaMiniRiskResultResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ManageMarketingRiskValue: OutputManageMarketingRiskValue
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * GetTicketStatistics返回参数结构体
+ */
+export interface GetTicketStatisticsResponse {
+  /**
+      * 查询后数据块
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Data: CaptchaStatisticObj
+
+  /**
+   * 验证码返回码
+   */
+  CaptchaCode: number
+
+  /**
+   * 验证码返回信息
+   */
+  CaptchaMsg: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

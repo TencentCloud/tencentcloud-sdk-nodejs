@@ -16,6 +16,164 @@
  */
 
 /**
+ * CreateModelService请求参数结构体
+ */
+export interface CreateModelServiceRequest {
+  /**
+   * 镜像信息，配置服务运行所需的镜像地址等信息
+   */
+  ImageInfo: ImageInfo
+
+  /**
+   * 新增版本时需要填写
+   */
+  ServiceGroupId?: string
+
+  /**
+   * 不超过60个字，仅支持英文、数字、下划线"_"、短横"-"，只能以英文、数字开头
+   */
+  ServiceGroupName?: string
+
+  /**
+   * 模型服务的描述
+   */
+  ServiceDescription?: string
+
+  /**
+   * 付费模式,有 PREPAID 、 POSTPAID_BY_HOUR 和 HYBRID_PAID 三种
+   */
+  ChargeType?: string
+
+  /**
+   * 预付费模式下所属的资源组id，同服务组下唯一
+   */
+  ResourceGroupId?: string
+
+  /**
+   * 模型信息，需要挂载模型时填写
+   */
+  ModelInfo?: ModelInfo
+
+  /**
+   * 环境变量，可选参数，用于配置容器中的环境变量
+   */
+  Env?: Array<EnvVar>
+
+  /**
+   * 资源描述，指定预付费模式下的cpu,mem,gpu等信息，后付费无需填写
+   */
+  Resources?: ResourceInfo
+
+  /**
+      * 使用DescribeBillingSpecs接口返回的规格列表中的值，或者参考实例列表:
+TI.S.MEDIUM.POST	2C4G
+TI.S.LARGE.POST	4C8G
+TI.S.2XLARGE16.POST	8C16G
+TI.S.2XLARGE32.POST	8C32G
+TI.S.4XLARGE32.POST	16C32G
+TI.S.4XLARGE64.POST	16C64G
+TI.S.6XLARGE48.POST	24C48G
+TI.S.6XLARGE96.POST	24C96G
+TI.S.8XLARGE64.POST	32C64G
+TI.S.8XLARGE128.POST 32C128G
+TI.GN7.LARGE20.POST	4C20G T4*1/4
+TI.GN7.2XLARGE40.POST	10C40G T4*1/2
+TI.GN7.2XLARGE32.POST	8C32G T4*1
+TI.GN7.5XLARGE80.POST	20C80G T4*1
+TI.GN7.8XLARGE128.POST	32C128G T4*1
+TI.GN7.10XLARGE160.POST	40C160G T4*2
+TI.GN7.20XLARGE320.POST	80C320G T4*4
+      */
+  InstanceType?: string
+
+  /**
+   * 扩缩容类型 支持：自动 - "AUTO", 手动 - "MANUAL",默认为MANUAL
+   */
+  ScaleMode?: string
+
+  /**
+      * 实例数量, 不同计费模式和调节模式下对应关系如下
+PREPAID 和 POSTPAID_BY_HOUR:
+手动调节模式下对应 实例数量
+自动调节模式下对应 基于时间的默认策略的实例数量
+HYBRID_PAID:
+后付费实例手动调节模式下对应 实例数量
+后付费实例自动调节模式下对应 时间策略的默认策略的实例数量
+      */
+  Replicas?: number
+
+  /**
+   * 自动伸缩信息
+   */
+  HorizontalPodAutoscaler?: HorizontalPodAutoscaler
+
+  /**
+   * 是否开启日志投递，开启后需填写配置投递到指定cls
+   */
+  LogEnable?: boolean
+
+  /**
+   * 日志配置，需要投递服务日志到指定cls时填写
+   */
+  LogConfig?: LogConfig
+
+  /**
+   * 是否开启接口鉴权，开启后自动生成token信息，访问需要token鉴权
+   */
+  AuthorizationEnable?: boolean
+
+  /**
+   * 腾讯云标签
+   */
+  Tags?: Array<Tag>
+
+  /**
+   * 是否新增版本
+   */
+  NewVersion?: boolean
+
+  /**
+   * 定时任务配置，使用定时策略时填写
+   */
+  CronScaleJobs?: Array<CronScaleJob>
+
+  /**
+   * 自动伸缩策略配置 HPA : 通过HPA进行弹性伸缩 CRON 通过定时任务进行伸缩
+   */
+  ScaleStrategy?: string
+
+  /**
+   * 计费模式[HYBRID_PAID]时生效, 用于标识混合计费模式下的预付费实例数
+   */
+  HybridBillingPrepaidReplicas?: number
+
+  /**
+   * [AUTO_ML 自动学习，自动学习正式发布 AUTO_ML_FORMAL, DEFAULT 默认]
+   */
+  CreateSource?: string
+
+  /**
+   * 是否开启模型的热更新。默认不开启
+   */
+  ModelHotUpdateEnable?: boolean
+
+  /**
+   * 定时停止配置
+   */
+  ScheduledAction?: ScheduledAction
+
+  /**
+   * 挂载配置，目前只支持CFS
+   */
+  VolumeMount?: VolumeMount
+
+  /**
+   * 服务限速限流相关配置
+   */
+  ServiceLimit?: ServiceLimit
+}
+
+/**
  * 模型描述信息
  */
 export interface ModelInfo {
@@ -118,47 +276,13 @@ export interface DescribeLogsRequest {
 }
 
 /**
- * DescribeDatasetDetailUnstructured请求参数结构体
+ * DeleteTrainingModelVersion返回参数结构体
  */
-export interface DescribeDatasetDetailUnstructuredRequest {
+export interface DeleteTrainingModelVersionResponse {
   /**
-   * 数据集ID
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  DatasetId?: string
-
-  /**
-   * 偏移量
-   */
-  Offset?: number
-
-  /**
-   * 返回个数，默认20，目前最大支持2000条数据
-   */
-  Limit?: number
-
-  /**
-   * 标签过滤参数，对应标签值
-   */
-  LabelList?: Array<string>
-
-  /**
-      * 标注状态过滤参数:
-STATUS_ANNOTATED，已标注
-STATUS_NON_ANNOTATED，未标注
-STATUS_ALL，全部
-默认为STATUS_ALL
-      */
-  AnnotationStatus?: string
-
-  /**
-   * 数据集ID列表
-   */
-  DatasetIds?: Array<string>
-
-  /**
-   * 要筛选的文本分类场景标签信息
-   */
-  TextClassificationLabels?: Array<TextLabelDistributionInfo>
+  RequestId?: string
 }
 
 /**
@@ -384,6 +508,22 @@ export interface DescribeDatasetDetailStructuredResponse {
 }
 
 /**
+ * ModifyServiceGroupWeights返回参数结构体
+ */
+export interface ModifyServiceGroupWeightsResponse {
+  /**
+      * 更新权重后的服务组信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ServiceGroup: ServiceGroup
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeBillingResourceGroups请求参数结构体
  */
 export interface DescribeBillingResourceGroupsRequest {
@@ -445,6 +585,40 @@ export interface DescribeTrainingFrameworksResponse {
 }
 
 /**
+ * 训练指标
+ */
+export interface TrainingMetric {
+  /**
+   * 指标名
+   */
+  MetricName: string
+
+  /**
+      * 数据值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Values: Array<TrainingDataPoint>
+
+  /**
+      * 上报的Epoch. 可能为空
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Epochs: Array<TrainingDataPoint>
+
+  /**
+      * 上报的Step. 可能为空
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Steps: Array<TrainingDataPoint>
+
+  /**
+      * 上报的TotalSteps. 可能为空
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TotalSteps: Array<TrainingDataPoint>
+}
+
+/**
  * DescribeTrainingModelVersions请求参数结构体
  */
 export interface DescribeTrainingModelVersionsRequest {
@@ -496,6 +670,179 @@ export interface CreateDatasetResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 描述在线服务
+ */
+export interface Service {
+  /**
+   * 服务组id
+   */
+  ServiceGroupId: string
+
+  /**
+   * 服务id
+   */
+  ServiceId: string
+
+  /**
+   * 服务组名
+   */
+  ServiceGroupName: string
+
+  /**
+      * 服务描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ServiceDescription: string
+
+  /**
+      * 集群id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClusterId: string
+
+  /**
+      * 地域
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Region: string
+
+  /**
+      * 命名空间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Namespace: string
+
+  /**
+      * 付费类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ChargeType: string
+
+  /**
+      * 后付费资源组id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ResourceGroupId: string
+
+  /**
+      * 创建者
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CreatedBy: string
+
+  /**
+      * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CreateTime: string
+
+  /**
+      * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UpdateTime: string
+
+  /**
+      * 主账号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Uin: string
+
+  /**
+      * 子账号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SubUin: string
+
+  /**
+      * app_id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AppId: number
+
+  /**
+      * 版本号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Version: string
+
+  /**
+      * 服务组下服务的最高版本号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LatestVersion: string
+
+  /**
+      * 服务的详细信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ServiceInfo: ServiceInfo
+
+  /**
+      * 服务的业务状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BusinessStatus: string
+
+  /**
+      * 服务的创建来源 AUTO_ML,DEFAULT
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CreateSource: string
+
+  /**
+      * 费用信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BillingInfo: string
+
+  /**
+      * 服务状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Status: string
+
+  /**
+      * 模型权重
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Weight: number
+
+  /**
+      * 服务所在的 ingress 的 name
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IngressName: string
+
+  /**
+      * 服务限速限流相关配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ServiceLimit: ServiceLimit
+
+  /**
+      * 定时停止的配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ScheduledAction: ScheduledAction
+}
+
+/**
+ * ModifyServiceGroupWeights请求参数结构体
+ */
+export interface ModifyServiceGroupWeightsRequest {
+  /**
+   * 服务组id
+   */
+  ServiceGroupId: string
+
+  /**
+   * 权重设置
+   */
+  Weights: Array<WeightEntry>
 }
 
 /**
@@ -551,13 +898,119 @@ export interface DescribeBatchTaskRequest {
 }
 
 /**
- * DeleteTrainingModelVersion返回参数结构体
+ * DescribeDatasetDetailUnstructured请求参数结构体
  */
-export interface DeleteTrainingModelVersionResponse {
+export interface DescribeDatasetDetailUnstructuredRequest {
+  /**
+   * 数据集ID
+   */
+  DatasetId?: string
+
+  /**
+   * 偏移量
+   */
+  Offset?: number
+
+  /**
+   * 返回个数，默认20，目前最大支持2000条数据
+   */
+  Limit?: number
+
+  /**
+   * 标签过滤参数，对应标签值
+   */
+  LabelList?: Array<string>
+
+  /**
+      * 标注状态过滤参数:
+STATUS_ANNOTATED，已标注
+STATUS_NON_ANNOTATED，未标注
+STATUS_ALL，全部
+默认为STATUS_ALL
+      */
+  AnnotationStatus?: string
+
+  /**
+   * 数据集ID列表
+   */
+  DatasetIds?: Array<string>
+
+  /**
+   * 要筛选的文本分类场景标签信息
+   */
+  TextClassificationLabels?: Array<TextLabelDistributionInfo>
+}
+
+/**
+ * 外部挂载信息
+ */
+export interface VolumeMount {
+  /**
+   * cfs的配置信息
+   */
+  CFSConfig: CFSConfig
+
+  /**
+   * 挂载源类型
+   */
+  VolumeSourceType?: string
+}
+
+/**
+ * StopBatchTask返回参数结构体
+ */
+export interface StopBatchTaskResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 服务的调用信息，服务组下唯一
+ */
+export interface ServiceCallInfo {
+  /**
+      * 服务组id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ServiceGroupId: string
+
+  /**
+      * 内网http调用地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InnerHttpAddr: string
+
+  /**
+      * 内网https调用地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InnerHttpsAddr: string
+
+  /**
+      * 内网http调用地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OuterHttpAddr: string
+
+  /**
+      * 内网https调用地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OuterHttpsAddr: string
+
+  /**
+      * 调用key
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AppKey: string
+
+  /**
+      * 调用secret
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AppSecret: string
 }
 
 /**
@@ -908,6 +1361,51 @@ STRUCTURE：智能结构化
 }
 
 /**
+ * 工作负载的状态
+ */
+export interface WorkloadStatus {
+  /**
+   * 当前实例数
+   */
+  Replicas: number
+
+  /**
+   * 更新的实例数
+   */
+  UpdatedReplicas: number
+
+  /**
+   * 就绪的实例数
+   */
+  ReadyReplicas: number
+
+  /**
+   * 可用的实例数
+   */
+  AvailableReplicas: number
+
+  /**
+   * 不可用的实例数
+   */
+  UnavailableReplicas: number
+
+  /**
+      * Normal	正常运行中
+Abnormal	服务异常，例如容器启动失败等
+Waiting	服务等待中，例如容器下载镜像过程等
+Stopped   已停止 
+Pending 启动中
+Stopping 停止中
+      */
+  Status: string
+
+  /**
+   * 工作负载的状况信息
+   */
+  StatefulSetCondition?: Array<StatefulSetCondition>
+}
+
+/**
  * CFS存储的配置
  */
 export interface CFSConfig {
@@ -923,13 +1421,80 @@ export interface CFSConfig {
 }
 
 /**
- * PushTrainingMetrics请求参数结构体
+ * 接口描述信息
  */
-export interface PushTrainingMetricsRequest {
+export interface APIConfigDetail {
   /**
-   * 指标数据
-   */
-  Data?: Array<MetricData>
+      * 接口id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Id: string
+
+  /**
+      * 接口所属服务组id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ServiceGroupId: string
+
+  /**
+      * 接口描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Description: string
+
+  /**
+      * 相对路径
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RelativeUrl: string
+
+  /**
+      * 服务类型 HTTP HTTPS
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ServiceType: string
+
+  /**
+      * GET POST
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  HttpMethod: string
+
+  /**
+      * 请求示例
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  HttpInputExample: string
+
+  /**
+      * 回包示例
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  HttpOutputExample: string
+
+  /**
+      * 更新成员
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UpdatedBy: string
+
+  /**
+      * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UpdatedAt: string
+
+  /**
+      * 主账号uin
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Uin: string
+
+  /**
+      * 子账号subuin
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SubUin: string
 }
 
 /**
@@ -958,13 +1523,33 @@ export interface StopBatchTaskRequest {
 }
 
 /**
- * DeleteTrainingModel返回参数结构体
+ * 框架版本以及对应的训练模式
  */
-export interface DeleteTrainingModelResponse {
+export interface FrameworkVersion {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 框架版本
    */
-  RequestId?: string
+  Version: string
+
+  /**
+   * 训练模式
+   */
+  TrainingModes: Array<string>
+
+  /**
+   * 框架运行环境
+   */
+  Environment?: string
+}
+
+/**
+ * DescribeModelServiceCallInfo请求参数结构体
+ */
+export interface DescribeModelServiceCallInfoRequest {
+  /**
+   * 服务组id
+   */
+  ServiceGroupId: string
 }
 
 /**
@@ -980,6 +1565,21 @@ export interface DataPoint {
    * 值
    */
   Value: number
+}
+
+/**
+ * Tag过滤参数
+ */
+export interface TagFilter {
+  /**
+   * 标签键
+   */
+  TagKey?: string
+
+  /**
+   * 多个标签值
+   */
+  TagValues?: Array<string>
 }
 
 /**
@@ -1153,6 +1753,57 @@ export interface StartCmdInfo {
 }
 
 /**
+ * DescribeAPIConfigs请求参数结构体
+ */
+export interface DescribeAPIConfigsRequest {
+  /**
+   * 偏移量，默认为0
+   */
+  Offset?: number
+
+  /**
+   * 返回数量，默认为20，最大值为100
+   */
+  Limit?: number
+
+  /**
+   * 输出列表的排列顺序。取值范围：ASC：升序排列 DESC：降序排列
+   */
+  Order?: string
+
+  /**
+   * 排序的依据字段， 取值范围 "CreateTime" "UpdateTime"
+   */
+  OrderField?: string
+
+  /**
+      * 分页参数，支持的分页过滤Name包括：
+["ClusterId", "ServiceId", "ServiceGroupName", "ServiceGroupId"]
+      */
+  Filters?: Array<Filter>
+}
+
+/**
+ * DescribeBillingSpecs请求参数结构体
+ */
+export interface DescribeBillingSpecsRequest {
+  /**
+   * 枚举值：TRAIN、NOTEBOOK、INFERENCE
+   */
+  TaskType: string
+
+  /**
+   * 付费模式：POSTPAID_BY_HOUR后付费、PREPAID预付费
+   */
+  ChargeType: string
+
+  /**
+   * 资源类型：CALC 计算资源、CPU CPU资源、GPU GPU资源、CBS云硬盘
+   */
+  ResourceType?: string
+}
+
+/**
  * DeleteBatchTask请求参数结构体
  */
 export interface DeleteBatchTaskRequest {
@@ -1191,6 +1842,21 @@ export interface DescribeBatchTaskInstancesResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   BatchInstances: Array<BatchTaskInstance>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeBillingSpecs返回参数结构体
+ */
+export interface DescribeBillingSpecsResponse {
+  /**
+   * 计费项列表
+   */
+  Specs: Array<Spec>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1315,37 +1981,87 @@ export interface TextLabelDistributionInfo {
 }
 
 /**
- * 训练指标
+ * 键值对
  */
-export interface TrainingMetric {
+export interface Option {
   /**
    * 指标名
    */
-  MetricName: string
+  Name: string
 
   /**
-      * 数据值
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Values: Array<TrainingDataPoint>
+   * 指标值
+   */
+  Value: number
+}
+
+/**
+ * 资源组
+ */
+export interface ResourceGroup {
+  /**
+   * 资源组id
+   */
+  ResourceGroupId: string
 
   /**
-      * 上报的Epoch. 可能为空
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Epochs: Array<TrainingDataPoint>
+   * 资源组名称
+   */
+  ResourceGroupName: string
 
   /**
-      * 上报的Step. 可能为空
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Steps: Array<TrainingDataPoint>
+   * 可用节点个数(运行中的节点)
+   */
+  FreeInstance: number
 
   /**
-      * 上报的TotalSteps. 可能为空
+   * 总节点个数(所有节点)
+   */
+  TotalInstance: number
+
+  /**
+      * 资资源组已用的资源
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  TotalSteps: Array<TrainingDataPoint>
+  UsedResource: GroupResource
+
+  /**
+      * 资源组总资源
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TotalResource: GroupResource
+
+  /**
+      * 节点信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceSet: Array<Instance>
+
+  /**
+      * 标签列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TagSet: Array<Tag>
+}
+
+/**
+ * DescribeBatchTaskInstances请求参数结构体
+ */
+export interface DescribeBatchTaskInstancesRequest {
+  /**
+   * 跑批任务id
+   */
+  BatchTaskId: string
+}
+
+/**
+ * DescribeModelServiceHistory请求参数结构体
+ */
+export interface DescribeModelServiceHistoryRequest {
+  /**
+   * 服务Id
+   */
+  ServiceId: string
 }
 
 /**
@@ -1408,18 +2124,13 @@ DatasetScope，数据集范围，SCOPE_DATASET_PRIVATE或SCOPE_DATASET_PUBLIC
 }
 
 /**
- * 框架版本以及对应的训练模式
+ * DeleteTrainingModel返回参数结构体
  */
-export interface FrameworkVersion {
+export interface DeleteTrainingModelResponse {
   /**
-   * 框架版本
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Version: string
-
-  /**
-   * 训练模式
-   */
-  TrainingModes: Array<string>
+  RequestId?: string
 }
 
 /**
@@ -1439,23 +2150,60 @@ export interface DescribeInferTemplatesResponse {
 }
 
 /**
- * DescribeBillingSpecs请求参数结构体
+ * DescribeModelServiceGroups返回参数结构体
  */
-export interface DescribeBillingSpecsRequest {
+export interface DescribeModelServiceGroupsResponse {
   /**
-   * 枚举值：TRAIN、NOTEBOOK、INFERENCE
-   */
-  TaskType: string
+      * 推理服务组数量。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TotalCount: number
 
   /**
-   * 付费模式：POSTPAID_BY_HOUR后付费、PREPAID预付费
-   */
-  ChargeType: string
+      * 服务组信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ServiceGroups: Array<ServiceGroup>
 
   /**
-   * 资源类型：CALC 计算资源、CPU CPU资源、GPU GPU资源、CBS云硬盘
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  ResourceType?: string
+  RequestId?: string
+}
+
+/**
+ * 服务的调用信息，服务组下唯一
+ */
+export interface InferGatewayCallInfo {
+  /**
+      * 内网http调用地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VpcHttpAddr: string
+
+  /**
+      * 内网https调用地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VpcHttpsAddr: string
+
+  /**
+      * 内网grpc调用地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VpcGrpcTlsAddr: string
+
+  /**
+      * 可访问的vpcid
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VpcId: string
+
+  /**
+      * 后端ip对应的子网
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SubnetId: string
 }
 
 /**
@@ -1464,13 +2212,13 @@ export interface DescribeBillingSpecsRequest {
 export type DescribeInferTemplatesRequest = null
 
 /**
- * DescribeBatchTaskInstances请求参数结构体
+ * DeleteModelServiceGroup返回参数结构体
  */
-export interface DescribeBatchTaskInstancesRequest {
+export interface DeleteModelServiceGroupResponse {
   /**
-   * 跑批任务id
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  BatchTaskId: string
+  RequestId?: string
 }
 
 /**
@@ -1517,26 +2265,43 @@ export interface DescribeBatchTasksResponse {
 }
 
 /**
- * 图像检测参数信息
+ * 定时扩缩任务
  */
-export interface DetectionLabelInfo {
+export interface CronScaleJob {
   /**
-      * 点坐标列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Points: Array<PointInfo>
+   * Cron表达式，标识任务的执行时间，精确到分钟级
+   */
+  Schedule: string
 
   /**
-      * 标签
+      * 定时任务名
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Labels: Array<string>
+  Name?: string
 
   /**
-      * 类别
+      * 目标实例数
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  FrameType: string
+  TargetReplicas?: number
+
+  /**
+      * 目标min
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MinReplicas?: number
+
+  /**
+      * 目标max
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MaxReplicas?: number
+
+  /**
+      * 例外时间，Cron表达式，在对应时间内不执行任务。最多支持3条。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ExcludeDates?: Array<string>
 }
 
 /**
@@ -1566,6 +2331,16 @@ export interface InferTemplateGroup {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   InferTemplates: Array<InferTemplate>
+}
+
+/**
+ * DescribeModelServiceHotUpdated返回参数结构体
+ */
+export interface DescribeModelServiceHotUpdatedResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1706,18 +2481,62 @@ export interface DatasetInfo {
 }
 
 /**
- * Tag过滤参数
+ * 图像检测参数信息
  */
-export interface TagFilter {
+export interface DetectionLabelInfo {
   /**
-   * 标签键
-   */
-  TagKey?: string
+      * 点坐标列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Points: Array<PointInfo>
 
   /**
-   * 多个标签值
+      * 标签
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Labels: Array<string>
+
+  /**
+      * 类别
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FrameType: string
+}
+
+/**
+ * DescribeModelServiceGroups请求参数结构体
+ */
+export interface DescribeModelServiceGroupsRequest {
+  /**
+   * 偏移量，默认为0
    */
-  TagValues?: Array<string>
+  Offset?: number
+
+  /**
+   * 返回数量，默认为20，最大值为100
+   */
+  Limit?: number
+
+  /**
+   * 输出列表的排列顺序。取值范围：ASC：升序排列 DESC：降序排列
+   */
+  Order?: string
+
+  /**
+   * 排序的依据字段， 取值范围 "CreateTime" "UpdateTime"
+   */
+  OrderField?: string
+
+  /**
+      * 分页参数，支持的分页过滤Name包括：
+["ClusterId", "ServiceId", "ServiceGroupName", "ServiceGroupId","Status","CreatedBy","ModelVersionId"]
+      */
+  Filters?: Array<Filter>
+
+  /**
+   * 标签过滤参数
+   */
+  TagFilters?: Array<TagFilter>
 }
 
 /**
@@ -1885,6 +2704,136 @@ export interface ImageInfo {
 }
 
 /**
+ * 推理服务在集群中的信息
+ */
+export interface ServiceInfo {
+  /**
+      * 期望运行的Pod数量，停止状态是0
+不同计费模式和调节模式下对应关系如下
+PREPAID 和 POSTPAID_BY_HOUR:
+手动调节模式下对应 实例数量
+自动调节模式下对应 基于时间的默认策略的实例数量
+HYBRID_PAID:
+后付费实例手动调节模式下对应 实例数量
+后付费实例自动调节模式下对应 时间策略的默认策略的实例数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Replicas: number
+
+  /**
+      * 镜像信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ImageInfo: ImageInfo
+
+  /**
+      * 环境变量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Env: Array<EnvVar>
+
+  /**
+      * 资源信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Resources: ResourceInfo
+
+  /**
+      * 后付费实例对应的机型规格
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceType: string
+
+  /**
+      * 模型信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ModelInfo: ModelInfo
+
+  /**
+      * 是否启用日志
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LogEnable: boolean
+
+  /**
+      * 日志配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LogConfig: LogConfig
+
+  /**
+      * 是否开启鉴权
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AuthorizationEnable: boolean
+
+  /**
+      * hpa配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  HorizontalPodAutoscaler: HorizontalPodAutoscaler
+
+  /**
+      * 服务的状态描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Status: WorkloadStatus
+
+  /**
+      * 权重
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Weight: number
+
+  /**
+      * 实例列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PodList: Array<string>
+
+  /**
+      * 资源总量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ResourceTotal: ResourceInfo
+
+  /**
+      * 历史实例数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OldReplicas: number
+
+  /**
+      * 计费模式[HYBRID_PAID]时生效, 用于标识混合计费模式下的预付费实例数, 若不填则默认为1
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  HybridBillingPrepaidReplicas: number
+
+  /**
+      * 历史 HYBRID_PAID 时的实例数，用户恢复服务
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OldHybridBillingPrepaidReplicas: number
+
+  /**
+      * 是否开启模型的热更新。默认不开启
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ModelHotUpdateEnable: boolean
+}
+
+/**
+ * DescribeModelService请求参数结构体
+ */
+export interface DescribeModelServiceRequest {
+  /**
+   * 服务id
+   */
+  ServiceId: string
+}
+
+/**
  * CreateTrainingTask返回参数结构体
  */
 export interface CreateTrainingTaskResponse {
@@ -1900,6 +2849,26 @@ export interface CreateTrainingTaskResponse {
 }
 
 /**
+ * DeleteModelService请求参数结构体
+ */
+export interface DeleteModelServiceRequest {
+  /**
+   * 服务id
+   */
+  ServiceId: string
+}
+
+/**
+ * DescribeModelServiceGroup请求参数结构体
+ */
+export interface DescribeModelServiceGroupRequest {
+  /**
+   * 无
+   */
+  ServiceGroupId: string
+}
+
+/**
  * CreateTrainingTask请求参数结构体
  */
 export interface CreateTrainingTaskRequest {
@@ -1907,11 +2876,6 @@ export interface CreateTrainingTaskRequest {
    * 训练任务名称，不超过60个字符，仅支持中英文、数字、下划线"_"、短横"-"，只能以中英文、数字开头
    */
   Name: string
-
-  /**
-   * 训练模式，通过DescribeTrainingFrameworks接口查询，eg：PS_WORKER、DDP、MPI、HOROVOD
-   */
-  TrainingMode: string
 
   /**
    * 计费模式，eg：PREPAID预付费，即包年包月；POSTPAID_BY_HOUR按小时后付费
@@ -1929,6 +2893,11 @@ export interface CreateTrainingTaskRequest {
   CodePackagePath: CosPathInfo
 
   /**
+   * 训练模式，通过DescribeTrainingFrameworks接口查询，eg：PS_WORKER、DDP、MPI、HOROVOD
+   */
+  TrainingMode: string
+
+  /**
    * COS训练输出路径
    */
   Output: CosPathInfo
@@ -1944,9 +2913,14 @@ export interface CreateTrainingTaskRequest {
   FrameworkName?: string
 
   /**
-   * 训练框架版本，通过DescribeTrainingFrameworks接口查询，eg：tf1.15-py3.7-cpu、torch1.9-py3.8-cuda11.1-gpu
+   * 训练框架版本，通过DescribeTrainingFrameworks接口查询，eg：1.15、1.9
    */
   FrameworkVersion?: string
+
+  /**
+   * 训练框架环境，通过DescribeTrainingFrameworks接口查询，eg：tf1.15-py3.7-cpu、torch1.9-py3.8-cuda11.1-gpu
+   */
+  FrameworkEnvironment?: string
 
   /**
    * 预付费专用资源组ID，通过DescribeBillingResourceGroups接口查询
@@ -1967,11 +2941,6 @@ export interface CreateTrainingTaskRequest {
    * 启动命令信息，默认为sh start.sh
    */
   StartCmdInfo?: StartCmdInfo
-
-  /**
-   * 数据来源，eg：DATASET、COS、CFS、HDFS
-   */
-  DataSource?: string
 
   /**
    * 数据配置
@@ -2002,6 +2971,61 @@ export interface CreateTrainingTaskRequest {
    * 备注，最多500个字
    */
   Remark?: string
+
+  /**
+   * 数据来源，eg：DATASET、COS、CFS、HDFS
+   */
+  DataSource?: string
+}
+
+/**
+ * 实例状况
+ */
+export interface StatefulSetCondition {
+  /**
+      * 信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Message: string
+
+  /**
+      * 原因
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Reason: string
+
+  /**
+      * Status of the condition, one of True, False, Unknown.
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Status: string
+
+  /**
+      * 类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Type: string
+
+  /**
+      * 上次更新的时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LastTransitionTime: string
+}
+
+/**
+ * DescribeModelService返回参数结构体
+ */
+export interface DescribeModelServiceResponse {
+  /**
+   * 服务信息
+   */
+  Service: Service
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2119,18 +3143,39 @@ DISABLE_NOTIFY_AND_MANUAL_RENEW：手动续费(取消自动续费)且到期不�
 }
 
 /**
- * DescribeBillingSpecs返回参数结构体
+ * DescribeModelServices请求参数结构体
  */
-export interface DescribeBillingSpecsResponse {
+export interface DescribeModelServicesRequest {
   /**
-   * 计费项列表
+   * 偏移量，默认为0
    */
-  Specs: Array<Spec>
+  Offset?: number
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 返回数量，默认为20，最大值为20
    */
-  RequestId?: string
+  Limit?: number
+
+  /**
+   * 输出列表的排列顺序。取值范围：ASC：升序排列 DESC：降序排列
+   */
+  Order?: string
+
+  /**
+   * 排序的依据字段， 取值范围 "CreateTime" "UpdateTime"
+   */
+  OrderField?: string
+
+  /**
+      * 分页参数，支持的分页过滤Name包括：
+["ClusterId", "ServiceId", "ServiceGroupName", "ServiceGroupId","Status","CreatedBy","ModelId"]
+      */
+  Filters?: Array<Filter>
+
+  /**
+   * 标签过滤参数
+   */
+  TagFilters?: Array<TagFilter>
 }
 
 /**
@@ -2358,13 +3403,49 @@ export interface DatasetGroup {
 }
 
 /**
- * 数据集结构体
+ * DescribeTrainingModels请求参数结构体
  */
-export interface DataSetConfig {
+export interface DescribeTrainingModelsRequest {
   /**
-   * 数据集ID
+      * 过滤器
+Filter.Name: 枚举值:
+    keyword (模型名称)
+    TrainingModelId (模型ID)
+    ModelVersionType (模型版本类型) 其值Filter.Values支持: NORMAL(通用) ACCELERATE (加速)
+    TrainingModelSource (模型来源)  其值Filter.Values支持： JOB/COS/AUTO_ML
+    AlgorithmFramework (算法框架) 其值Filter.Values支持：TENSORFLOW/PYTORCH/DETECTRON2
+    ModelFormat（模型格式）其值Filter.Values支持：
+TORCH_SCRIPT/PYTORCH/DETECTRON2/SAVED_MODEL/FROZEN_GRAPH/PMML
+Filter.Values: 当长度为1时，支持模糊查询; 不为1时，精确查询
+每次请求的Filters的上限为10，Filter.Values的上限为100
+Filter.Fuzzy取值：true/false，是否支持模糊匹配
+      */
+  Filters?: Array<Filter>
+
+  /**
+   * 排序字段，默认CreateTime
    */
-  Id: string
+  OrderField?: string
+
+  /**
+   * 排序方式，ASC/DESC，默认DESC
+   */
+  Order?: string
+
+  /**
+   * 偏移量
+   */
+  Offset?: number
+
+  /**
+   * 返回结果数量
+   */
+  Limit?: number
+
+  /**
+   * 标签过滤
+   */
+  TagFilters?: Array<TagFilter>
 }
 
 /**
@@ -2437,7 +3518,7 @@ Gpu=100表示使用了“一张”gpu卡, 但此处的“一张”卡有可能�
   Gpu?: number
 
   /**
-      * Gpu卡型号 T4或者V100
+      * Gpu卡型号 T4或者V100。仅展示当前 GPU 卡型号，若存在多类型同时使用，则参考 RealGpuDetailSet 的值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   GpuType?: string
@@ -2449,6 +3530,12 @@ RealGpu=100表示实际使用了一张gpu卡, 对应实际的实例机型, 有�
 注意：此字段可能返回 null，表示取不到有效值。
       */
   RealGpu?: number
+
+  /**
+      * 创建或更新时无需填写，仅展示需要关注。详细的GPU使用信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RealGpuDetailSet?: Array<GpuDetail>
 }
 
 /**
@@ -2479,52 +3566,50 @@ export interface GroupResource {
 }
 
 /**
- * DeleteTrainingModel请求参数结构体
+ * DescribeModelServiceCallInfo返回参数结构体
  */
-export interface DeleteTrainingModelRequest {
+export interface DescribeModelServiceCallInfoResponse {
   /**
-   * 模型ID
-   */
-  TrainingModelId: string
+      * 服务调用信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ServiceCallInfo: ServiceCallInfo
 
   /**
-   * 是否同步清理cos
-   */
-  EnableDeleteCos?: boolean
+      * 升级网关调用信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InferGatewayCallInfo: InferGatewayCallInfo
 
   /**
-   * 删除模型类型，枚举值：NORMAL 普通，ACCELERATE 加速，不传则删除所有
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  ModelVersionType?: string
+  RequestId?: string
 }
 
 /**
- * 三级标签
+ * 数据集结构体
  */
-export interface TextLabelDistributionDetailInfoThirdClass {
+export interface DataSetConfig {
   /**
-      * 标签名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  LabelValue?: string
+   * 数据集ID
+   */
+  Id: string
+}
+
+/**
+ * 定时的事务和行为
+ */
+export interface ScheduledAction {
+  /**
+   * 是否要定时停止服务，true or false。true 则 ScheduleStopTime 必填， false 则 ScheduleStopTime 不生效
+   */
+  ScheduleStop?: boolean
 
   /**
-      * 标签个数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  LabelCount?: number
-
-  /**
-      * 标签占比
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  LabelPercentage?: number
-
-  /**
-      * 子标签分布
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ChildLabelList?: Array<TextLabelDistributionDetailInfoFourthClass>
+   * 要执行定时停止的时间，格式：“2022-01-26 19:46:22”
+   */
+  ScheduleStopTime?: string
 }
 
 /**
@@ -2535,6 +3620,28 @@ export interface DeleteTrainingTaskRequest {
    * 训练任务ID
    */
   Id: string
+}
+
+/**
+ * DescribeModelServiceHistory返回参数结构体
+ */
+export interface DescribeModelServiceHistoryResponse {
+  /**
+      * 历史版本总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TotalCount: number
+
+  /**
+      * 服务版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ServiceHistory: Array<ServiceHistory>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2689,13 +3796,131 @@ ANNOTATION_FORMAT_FILE，文件目录结构
 }
 
 /**
- * StopBatchTask返回参数结构体
+ * CreateModelService返回参数结构体
  */
-export interface StopBatchTaskResponse {
+export interface CreateModelServiceResponse {
+  /**
+      * 生成的模型服务
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Service: Service
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 在线服务一个服务组的信息
+ */
+export interface ServiceGroup {
+  /**
+   * 服务组id
+   */
+  ServiceGroupId: string
+
+  /**
+   * 服务组名
+   */
+  ServiceGroupName: string
+
+  /**
+   * 创建者
+   */
+  CreatedBy: string
+
+  /**
+   * 创建时间
+   */
+  CreateTime: string
+
+  /**
+   * 更新时间
+   */
+  UpdateTime: string
+
+  /**
+   * 主账号
+   */
+  Uin: string
+
+  /**
+      * 服务组下服务总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ServiceCount: number
+
+  /**
+      * 服务组下在运行的服务数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RunningServiceCount: number
+
+  /**
+      * 服务描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Services: Array<Service>
+
+  /**
+      * 服务组状态，与服务一致
+ CREATING 创建中
+     CREATE_FAILED 创建失败
+     Normal	正常运行中
+     Stopped  已停止
+     Stopping 停止中
+     Abnormal 异常
+     Pending 启动中
+     Waiting 就绪中
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Status: string
+
+  /**
+      * 服务组标签
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Tags: Array<Tag>
+
+  /**
+      * 服务组下最高版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LatestVersion: string
+
+  /**
+      * 服务的业务状态
+CREATING 创建中
+     CREATE_FAILED 创建失败
+     ARREARS_STOP 因欠费被强制停止
+     BILLING 计费中
+     WHITELIST_USING 白名单试用中
+     WHITELIST_STOP 白名单额度不足
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BusinessStatus: string
+
+  /**
+      * 服务的计费信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BillingInfo: string
+
+  /**
+      * 服务的创建来源
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CreateSource: string
+
+  /**
+      * 服务组的权重更新状态 
+UPDATING 更新中
+     UPDATED 更新成功
+     UPDATE_FAILED 更新失败
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  WeightUpdateStatus: string
 }
 
 /**
@@ -2723,6 +3948,66 @@ export interface TrainingModelDTO {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   CreateTime: string
+}
+
+/**
+ * 服务的限流限速等配置
+ */
+export interface ServiceLimit {
+  /**
+   * 是否开启实例层面限流限速，true or false。true 则 InstanceRpsLimit 必填， false 则 InstanceRpsLimit 不生效
+   */
+  EnableInstanceRpsLimit?: boolean
+
+  /**
+   * 每个服务实例的 request per second 限速, 0 为不限流
+   */
+  InstanceRpsLimit?: number
+}
+
+/**
+ * DescribeModelServiceGroup返回参数结构体
+ */
+export interface DescribeModelServiceGroupResponse {
+  /**
+      * 服务组信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ServiceGroup: ServiceGroup
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 三级标签
+ */
+export interface TextLabelDistributionDetailInfoThirdClass {
+  /**
+      * 标签名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LabelValue?: string
+
+  /**
+      * 标签个数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LabelCount?: number
+
+  /**
+      * 标签占比
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LabelPercentage?: number
+
+  /**
+      * 子标签分布
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ChildLabelList?: Array<TextLabelDistributionDetailInfoFourthClass>
 }
 
 /**
@@ -2803,6 +4088,28 @@ export interface LogIdentity {
 }
 
 /**
+ * DescribeAPIConfigs返回参数结构体
+ */
+export interface DescribeAPIConfigsResponse {
+  /**
+      * 接口数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TotalCount: number
+
+  /**
+      * 接口详情
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Details: Array<APIConfigDetail>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeDatasetDetailStructured请求参数结构体
  */
 export interface DescribeDatasetDetailStructuredRequest {
@@ -2867,6 +4174,29 @@ export interface DeleteDatasetResponse {
 }
 
 /**
+ * hpa的描述
+ */
+export interface HorizontalPodAutoscaler {
+  /**
+      * 最小实例数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MinReplicas: number
+
+  /**
+      * 最大实例数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MaxReplicas: number
+
+  /**
+      * 扩缩容指标
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  HpaMetrics: Array<Option>
+}
+
+/**
  * 自定义训练指标数据点
  */
 export interface CustomTrainingPoint {
@@ -2879,6 +4209,41 @@ export interface CustomTrainingPoint {
    * Y值
    */
   YValue?: number
+}
+
+/**
+ * 服务历史版本
+ */
+export interface ServiceHistory {
+  /**
+      * 版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Revision: string
+
+  /**
+      * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UpdateTime: string
+
+  /**
+      * 镜像
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Image: string
+
+  /**
+      * 模型文件
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ModelFile: string
+
+  /**
+      * 原始数据
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RawData: string
 }
 
 /**
@@ -2923,10 +4288,10 @@ export interface TrainingTaskDetail {
   FrameworkVersion: string
 
   /**
-      * 训练模式，eg：PS_WORKER、DDP、MPI、HOROVOD
+      * 框架运行环境
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  TrainingMode: string
+  FrameworkEnvironment: string
 
   /**
    * 计费模式
@@ -2951,10 +4316,10 @@ export interface TrainingTaskDetail {
   Tags: Array<Tag>
 
   /**
-      * 自定义镜像信息
+      * 训练模式，eg：PS_WORKER、DDP、MPI、HOROVOD
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ImageInfo: ImageInfo
+  TrainingMode: string
 
   /**
    * 代码包
@@ -3013,9 +4378,10 @@ export interface TrainingTaskDetail {
   SubnetId: string
 
   /**
-   * 任务状态
-   */
-  Status: string
+      * 自定义镜像信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ImageInfo: ImageInfo
 
   /**
       * 运行时长
@@ -3091,6 +4457,11 @@ export interface TrainingTaskDetail {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Message: string
+
+  /**
+   * 任务状态
+   */
+  Status: string
 }
 
 /**
@@ -3170,6 +4541,16 @@ export interface DescribeLogsResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DeleteModelServiceGroup请求参数结构体
+ */
+export interface DeleteModelServiceGroupRequest {
+  /**
+   * 服务id
+   */
+  ServiceGroupId: string
 }
 
 /**
@@ -3318,6 +4699,16 @@ export interface TrainingModelVersionDTO {
 }
 
 /**
+ * PushTrainingMetrics请求参数结构体
+ */
+export interface PushTrainingMetricsRequest {
+  /**
+   * 指标数据
+   */
+  Data?: Array<MetricData>
+}
+
+/**
  * DescribeTrainingTask请求参数结构体
  */
 export interface DescribeTrainingTaskRequest {
@@ -3370,10 +4761,10 @@ export interface TrainingTaskSetItem {
   FrameworkVersion: string
 
   /**
-      * 训练模式eg：PS_WORKER、DDP、MPI、HOROVOD
+      * 框架运行环境
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  TrainingMode: string
+  FrameworkEnvironment: string
 
   /**
    * 计费模式
@@ -3397,10 +4788,10 @@ export interface TrainingTaskSetItem {
   ResourceConfigInfos: Array<ResourceConfigInfo>
 
   /**
-      * 标签配置
+      * 训练模式eg：PS_WORKER、DDP、MPI、HOROVOD
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Tags: Array<Tag>
+  TrainingMode: string
 
   /**
    * 任务状态
@@ -3467,6 +4858,12 @@ export interface TrainingTaskSetItem {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Message: string
+
+  /**
+      * 标签配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Tags: Array<Tag>
 }
 
 /**
@@ -3566,6 +4963,21 @@ export interface DescribeTrainingModelVersionRequest {
 }
 
 /**
+ * 服务的权重
+ */
+export interface WeightEntry {
+  /**
+   * 服务id
+   */
+  ServiceId: string
+
+  /**
+   * 流量权重值，同 ServiceGroup 下 总和应为 100
+   */
+  Weight: number
+}
+
+/**
  * PushTrainingMetrics返回参数结构体
  */
 export interface PushTrainingMetricsResponse {
@@ -3643,6 +5055,23 @@ export interface DescribeTrainingTaskPodsResponse {
 }
 
 /**
+ * 环境变量
+ */
+export interface EnvVar {
+  /**
+      * 环境变量key
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Name?: string
+
+  /**
+      * 环境变量value
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Value?: string
+}
+
+/**
  * OCR场景标签列表
  */
 export interface OcrLabelInfo {
@@ -3695,49 +5124,23 @@ DIRECTION_HORIZONTAL
 }
 
 /**
- * DescribeTrainingModels请求参数结构体
+ * DeleteTrainingModel请求参数结构体
  */
-export interface DescribeTrainingModelsRequest {
+export interface DeleteTrainingModelRequest {
   /**
-      * 过滤器
-Filter.Name: 枚举值:
-    keyword (模型名称)
-    TrainingModelId (模型ID)
-    ModelVersionType (模型版本类型) 其值Filter.Values支持: NORMAL(通用) ACCELERATE (加速)
-    TrainingModelSource (模型来源)  其值Filter.Values支持： JOB/COS/AUTO_ML
-    AlgorithmFramework (算法框架) 其值Filter.Values支持：TENSORFLOW/PYTORCH/DETECTRON2
-    ModelFormat（模型格式）其值Filter.Values支持：
-TORCH_SCRIPT/PYTORCH/DETECTRON2/SAVED_MODEL/FROZEN_GRAPH/PMML
-Filter.Values: 当长度为1时，支持模糊查询; 不为1时，精确查询
-每次请求的Filters的上限为10，Filter.Values的上限为100
-Filter.Fuzzy取值：true/false，是否支持模糊匹配
-      */
-  Filters?: Array<Filter>
+   * 模型ID
+   */
+  TrainingModelId: string
 
   /**
-   * 排序字段，默认CreateTime
+   * 是否同步清理cos
    */
-  OrderField?: string
+  EnableDeleteCos?: boolean
 
   /**
-   * 排序方式，ASC/DESC，默认DESC
+   * 删除模型类型，枚举值：NORMAL 普通，ACCELERATE 加速，不传则删除所有
    */
-  Order?: string
-
-  /**
-   * 偏移量
-   */
-  Offset?: number
-
-  /**
-   * 返回结果数量
-   */
-  Limit?: number
-
-  /**
-   * 标签过滤
-   */
-  TagFilters?: Array<TagFilter>
+  ModelVersionType?: string
 }
 
 /**
@@ -3758,52 +5161,23 @@ export interface PointInfo {
 }
 
 /**
- * 资源组
+ * DescribeModelServiceHotUpdated请求参数结构体
  */
-export interface ResourceGroup {
+export interface DescribeModelServiceHotUpdatedRequest {
   /**
-   * 资源组id
+   * 镜像信息，配置服务运行所需的镜像地址等信息
    */
-  ResourceGroupId: string
+  ImageInfo: ImageInfo
 
   /**
-   * 资源组名称
+   * 模型信息，需要挂载模型时填写
    */
-  ResourceGroupName: string
+  ModelInfo?: ModelInfo
 
   /**
-   * 可用节点个数(运行中的节点)
+   * 挂载信息
    */
-  FreeInstance: number
-
-  /**
-   * 总节点个数(所有节点)
-   */
-  TotalInstance: number
-
-  /**
-      * 资资源组已用的资源
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  UsedResource: GroupResource
-
-  /**
-      * 资源组总资源
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  TotalResource: GroupResource
-
-  /**
-      * 节点信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  InstanceSet: Array<Instance>
-
-  /**
-      * 标签列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  TagSet: Array<Tag>
+  VolumeMount?: VolumeMount
 }
 
 /**
@@ -3831,6 +5205,16 @@ export interface DescribeBatchTaskResponse {
       */
   BatchTaskDetail: BatchTaskDetail
 
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteModelService返回参数结构体
+ */
+export interface DeleteModelServiceResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3955,6 +5339,28 @@ export interface TextLabelDistributionDetailInfoFirstClass {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ChildLabelList?: Array<TextLabelDistributionDetailInfoSecondClass>
+}
+
+/**
+ * DescribeModelServices返回参数结构体
+ */
+export interface DescribeModelServicesResponse {
+  /**
+      * 服务数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TotalCount: number
+
+  /**
+      * 无
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Services: Array<Service>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

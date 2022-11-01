@@ -4331,7 +4331,16 @@ export interface CheckInstanceNameRequest {
 /**
  * DescribeInstanceAllNamespaces请求参数结构体
  */
-export declare type DescribeInstanceAllNamespacesRequest = null;
+export interface DescribeInstanceAllNamespacesRequest {
+    /**
+      * 每页个数
+      */
+    Limit?: number;
+    /**
+      * 起始偏移位置
+      */
+    Offset?: number;
+}
 /**
  * DescribeInstanceToken返回参数结构体
  */

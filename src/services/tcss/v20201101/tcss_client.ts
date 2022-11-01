@@ -114,7 +114,7 @@ import {
   ImageSimpleInfo,
   DescribeComplianceAssetDetailInfoRequest,
   NetworkPeer,
-  DeleteSearchTemplateRequest,
+  DescribeESAggregationsResponse,
   CreateExportComplianceStatusListJobResponse,
   DescribeAssetAppServiceListResponse,
   DescribeAssetSyncLastTimeRequest,
@@ -195,6 +195,7 @@ import {
   CreateDefenceVulExportJobResponse,
   AbnormalProcessRuleInfo,
   ScanComplianceAssetsByPolicyItemResponse,
+  CreateRiskDnsEventExportJobRequest,
   ComplianceWhitelistItem,
   DescribeAssetPortListRequest,
   DescribeComplianceTaskPolicyItemSummaryListResponse,
@@ -278,7 +279,7 @@ import {
   DescribeAutoAuthorizedRuleHostResponse,
   DeleteIgnoreVulResponse,
   ModifyAssetImageRegistryScanStopOneKeyRequest,
-  DescribeESAggregationsResponse,
+  DeleteSearchTemplateRequest,
   SwitchImageAutoAuthorizedRuleResponse,
   DescribeExportJobResultRequest,
   DescribeNetworkFirewallNamespaceLabelListRequest,
@@ -768,6 +769,7 @@ import {
   AddEditReverseShellWhiteListRequest,
   VulIgnoreRegistryImage,
   DescribeVirusTaskListRequest,
+  CreateRiskDnsEventExportJobResponse,
   DescribeAssetImageRegistryVirusListExportRequest,
   DescribeWebVulListResponse,
   DescribeVulScanInfoResponse,
@@ -2446,6 +2448,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyRiskSyscallStatusResponse) => void
   ): Promise<ModifyRiskSyscallStatusResponse> {
     return this.request("ModifyRiskSyscallStatus", req, cb)
+  }
+
+  /**
+   * 创建恶意请求事件导出任务
+   */
+  async CreateRiskDnsEventExportJob(
+    req: CreateRiskDnsEventExportJobRequest,
+    cb?: (error: string, rep: CreateRiskDnsEventExportJobResponse) => void
+  ): Promise<CreateRiskDnsEventExportJobResponse> {
+    return this.request("CreateRiskDnsEventExportJob", req, cb)
   }
 
   /**

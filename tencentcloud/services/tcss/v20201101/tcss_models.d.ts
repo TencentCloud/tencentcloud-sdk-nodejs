@@ -2043,13 +2043,17 @@ ip类型：IPBlock，代表只有IPBlock有值
     IPBlock?: string;
 }
 /**
- * DeleteSearchTemplate请求参数结构体
+ * DescribeESAggregations返回参数结构体
  */
-export interface DeleteSearchTemplateRequest {
+export interface DescribeESAggregationsResponse {
     /**
-      * 模板ID
+      * ES聚合结果JSON
       */
-    Id: number;
+    Data: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * CreateExportComplianceStatusListJob返回参数结构体
@@ -4075,6 +4079,45 @@ export interface ScanComplianceAssetsByPolicyItemResponse {
     RequestId?: string;
 }
 /**
+ * CreateRiskDnsEventExportJob请求参数结构体
+ */
+export interface CreateRiskDnsEventExportJobRequest {
+    /**
+      * 过滤条件。
+<li>EventStatus- String - 是否必填：否 - 事件状态，待处理：EVENT_UNDEAL，EVENT_DEALED：已处理，已忽略：EVENT_IGNORE， EVENT_ADD_WHITE：已加白</li>
+<li>ContainerStatus- String - 是否必填：否 - 容器运行状态筛选，已创建：CREATED,正常运行：RUNNING, 暂定运行：PAUSED, 停止运行：	STOPPED，重启中：RESTARTING, 迁移中：REMOVING, 销毁：DESTROYED </li>
+<li>ContainerNetStatus- String -是否必填: 否 -  容器网络状态筛选 未隔离：NORMAL，已隔离：ISOLATED，隔离失败：ISOLATE_FAILED，解除隔离失败：RESTORE_FAILED，解除隔离中：RESTORING，隔离中：ISOLATING</li>
+<li>EventType - String -是否必填: 否 -  事件类型，恶意域名请求：DOMAIN，恶意IP请求：IP</li>
+<li>TimeRange- String -是否必填: 否 -  时间范围，第一个值表示开始时间，第二个值表示结束时间 </li>
+<li>RiskDns- string - 是否必填：否 - 恶意域名。</li>
+<li>RiskIP- string - 是否必填：否 - 恶意IP。</li>
+<li>ContainerName- string - 是否必填：否 - 容器名称。</li>
+<li>ContainerID- string - 是否必填：否 - 容器ID。</li>
+<li>ImageName- string - 是否必填：否 - 镜像名称。</li>
+<li>ImageID- string - 是否必填：否 - 镜像ID。</li>
+<li>HostName- string - 是否必填：否 - 主机名称。</li>
+<li>HostIP- string - 是否必填：否 - 内网IP。</li>
+<li>PublicIP- string - 是否必填：否 - 外网IP。</li>
+      */
+    Filters?: Array<RunTimeFilters>;
+    /**
+      * 需要返回的数量，最大值为100000
+      */
+    Limit?: number;
+    /**
+      * 偏移量，默认为0。
+      */
+    Offset?: number;
+    /**
+      * 排序方式：asc/desc
+      */
+    Order?: string;
+    /**
+      * 排序字段：事件数量：EventCount
+      */
+    By?: string;
+}
+/**
  * 表示一条白名单记录。
  */
 export interface ComplianceWhitelistItem {
@@ -5895,17 +5938,13 @@ export interface ModifyAssetImageRegistryScanStopOneKeyRequest {
     Id?: Array<number>;
 }
 /**
- * DescribeESAggregations返回参数结构体
+ * DeleteSearchTemplate请求参数结构体
  */
-export interface DescribeESAggregationsResponse {
+export interface DeleteSearchTemplateRequest {
     /**
-      * ES聚合结果JSON
+      * 模板ID
       */
-    Data: string;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    Id: number;
 }
 /**
  * SwitchImageAutoAuthorizedRule返回参数结构体
@@ -17555,6 +17594,19 @@ export interface DescribeVirusTaskListRequest {
       * 排序方式
       */
     Order?: string;
+}
+/**
+ * CreateRiskDnsEventExportJob返回参数结构体
+ */
+export interface CreateRiskDnsEventExportJobResponse {
+    /**
+      * 导出任务ID，前端拿着任务ID查询任务进度
+      */
+    JobId: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeAssetImageRegistryVirusListExport请求参数结构体

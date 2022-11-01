@@ -178,6 +178,16 @@ it("ssl.v20191205.DescribeCertificateDetail", async function () {
     }
 })
 
+it("ssl.v20191205.ModifyCertificatesExpiringNotificationSwitch", async function () {
+    try {
+       const data = await client.ModifyCertificatesExpiringNotificationSwitch({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ssl.v20191205.DescribeManagerDetail", async function () {
     try {
        const data = await client.DescribeManagerDetail({})

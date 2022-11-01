@@ -120,6 +120,15 @@ export interface LoadBalancerStatus {
     LoadBalancerVip: string;
 }
 /**
+ * ModifyTracingConfig返回参数结构体
+ */
+export interface ModifyTracingConfigResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeMesh返回参数结构体
  */
 export interface DescribeMeshResponse {
@@ -962,6 +971,31 @@ export interface SelectedItems {
       * ingress gw的名称列表
       */
     Gateways?: Array<string>;
+}
+/**
+ * ModifyTracingConfig请求参数结构体
+ */
+export interface ModifyTracingConfigRequest {
+    /**
+      * mesh名字
+      */
+    MeshId: string;
+    /**
+      * 是否启用调用跟踪
+      */
+    Enable?: boolean;
+    /**
+      * 腾讯云 APM 服务相关参数
+      */
+    APM?: APM;
+    /**
+      * 调用跟踪采样值
+      */
+    Sampling?: number;
+    /**
+      * 调用追踪Zipkin相关配置
+      */
+    Zipkin?: TracingZipkin;
 }
 /**
  * ModifyMesh请求参数结构体

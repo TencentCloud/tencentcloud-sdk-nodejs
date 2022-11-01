@@ -24,6 +24,7 @@ import {
   MeshConfig,
   UnlinkPrometheusResponse,
   LoadBalancerStatus,
+  ModifyTracingConfigResponse,
   DescribeMeshResponse,
   PodsMetricSource,
   AutoInjectionNamespaceState,
@@ -68,6 +69,7 @@ import {
   EgressGatewayStatus,
   ExtensiveClusters,
   SelectedItems,
+  ModifyTracingConfigRequest,
   ModifyMeshRequest,
   Cluster,
   Tag,
@@ -141,13 +143,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 解除关联Prometheus
+   * 修改 Tracing 配置
    */
-  async UnlinkPrometheus(
-    req: UnlinkPrometheusRequest,
-    cb?: (error: string, rep: UnlinkPrometheusResponse) => void
-  ): Promise<UnlinkPrometheusResponse> {
-    return this.request("UnlinkPrometheus", req, cb)
+  async ModifyTracingConfig(
+    req: ModifyTracingConfigRequest,
+    cb?: (error: string, rep: ModifyTracingConfigResponse) => void
+  ): Promise<ModifyTracingConfigResponse> {
+    return this.request("ModifyTracingConfig", req, cb)
   }
 
   /**
@@ -178,5 +180,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeMeshResponse) => void
   ): Promise<DescribeMeshResponse> {
     return this.request("DescribeMesh", req, cb)
+  }
+
+  /**
+   * 解除关联Prometheus
+   */
+  async UnlinkPrometheus(
+    req: UnlinkPrometheusRequest,
+    cb?: (error: string, rep: UnlinkPrometheusResponse) => void
+  ): Promise<UnlinkPrometheusResponse> {
+    return this.request("UnlinkPrometheus", req, cb)
   }
 }

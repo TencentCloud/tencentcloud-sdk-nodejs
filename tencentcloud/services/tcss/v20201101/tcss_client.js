@@ -1021,6 +1021,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyRiskSyscallStatus", req, cb);
     }
     /**
+     * 创建恶意请求事件导出任务
+     */
+    async CreateRiskDnsEventExportJob(req, cb) {
+        return this.request("CreateRiskDnsEventExportJob", req, cb);
+    }
+    /**
      * 查询漏洞防御攻击事件趋势
      */
     async DescribeVulDefenceEventTendency(req, cb) {

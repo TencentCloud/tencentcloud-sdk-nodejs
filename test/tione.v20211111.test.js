@@ -48,9 +48,9 @@ it("tione.v20211111.DescribeBillingSpecs", async function () {
     }
 })
 
-it("tione.v20211111.DeleteDataset", async function () {
+it("tione.v20211111.CreateTrainingModel", async function () {
     try {
-       const data = await client.DeleteDataset({})
+       const data = await client.CreateTrainingModel({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -68,9 +68,29 @@ it("tione.v20211111.DescribeBillingSpecsPrice", async function () {
     }
 })
 
+it("tione.v20211111.DescribeModelServiceCallInfo", async function () {
+    try {
+       const data = await client.DescribeModelServiceCallInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tione.v20211111.DescribeTrainingTasks", async function () {
     try {
        const data = await client.DescribeTrainingTasks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tione.v20211111.DescribeModelService", async function () {
+    try {
+       const data = await client.DescribeModelService({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -88,9 +108,9 @@ it("tione.v20211111.DescribeTrainingFrameworks", async function () {
     }
 })
 
-it("tione.v20211111.CreateTrainingModel", async function () {
+it("tione.v20211111.DeleteDataset", async function () {
     try {
-       const data = await client.CreateTrainingModel({})
+       const data = await client.DeleteDataset({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -148,6 +168,16 @@ it("tione.v20211111.DescribeTrainingTaskPods", async function () {
     }
 })
 
+it("tione.v20211111.DescribeModelServiceHotUpdated", async function () {
+    try {
+       const data = await client.DescribeModelServiceHotUpdated({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tione.v20211111.DescribeTrainingMetrics", async function () {
     try {
        const data = await client.DescribeTrainingMetrics({})
@@ -161,6 +191,26 @@ it("tione.v20211111.DescribeTrainingMetrics", async function () {
 it("tione.v20211111.DeleteTrainingModel", async function () {
     try {
        const data = await client.DeleteTrainingModel({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tione.v20211111.ModifyServiceGroupWeights", async function () {
+    try {
+       const data = await client.ModifyServiceGroupWeights({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tione.v20211111.CreateDataset", async function () {
+    try {
+       const data = await client.CreateDataset({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -198,9 +248,29 @@ it("tione.v20211111.StartTrainingTask", async function () {
     }
 })
 
-it("tione.v20211111.CreateDataset", async function () {
+it("tione.v20211111.DescribeModelServiceGroup", async function () {
     try {
-       const data = await client.CreateDataset({})
+       const data = await client.DescribeModelServiceGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tione.v20211111.DescribeAPIConfigs", async function () {
+    try {
+       const data = await client.DescribeAPIConfigs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tione.v20211111.DeleteModelServiceGroup", async function () {
+    try {
+       const data = await client.DeleteModelServiceGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -238,6 +308,16 @@ it("tione.v20211111.DescribeTrainingModelVersions", async function () {
     }
 })
 
+it("tione.v20211111.CreateModelService", async function () {
+    try {
+       const data = await client.CreateModelService({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tione.v20211111.DescribeDatasetDetailStructured", async function () {
     try {
        const data = await client.DescribeDatasetDetailStructured({})
@@ -258,9 +338,29 @@ it("tione.v20211111.DescribeLogs", async function () {
     }
 })
 
+it("tione.v20211111.DeleteModelService", async function () {
+    try {
+       const data = await client.DeleteModelService({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tione.v20211111.DescribeDatasets", async function () {
     try {
        const data = await client.DescribeDatasets({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tione.v20211111.DescribeModelServices", async function () {
+    try {
+       const data = await client.DescribeModelServices({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -318,6 +418,16 @@ it("tione.v20211111.DescribeLatestTrainingMetrics", async function () {
     }
 })
 
+it("tione.v20211111.DescribeModelServiceHistory", async function () {
+    try {
+       const data = await client.DescribeModelServiceHistory({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tione.v20211111.DeleteTrainingModelVersion", async function () {
     try {
        const data = await client.DeleteTrainingModelVersion({})
@@ -341,6 +451,16 @@ it("tione.v20211111.DescribeBillingResourceGroups", async function () {
 it("tione.v20211111.DescribeInferTemplates", async function () {
     try {
        const data = await client.DescribeInferTemplates({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tione.v20211111.DescribeModelServiceGroups", async function () {
+    try {
+       const data = await client.DescribeModelServiceGroups({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

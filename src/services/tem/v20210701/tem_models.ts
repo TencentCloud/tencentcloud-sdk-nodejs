@@ -894,6 +894,65 @@ export interface ServiceVersionBrief {
 }
 
 /**
+ * 日志采集的导出规则配置
+ */
+export interface LogConfigExtractRule {
+  /**
+      * 首行正则表达式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BeginningRegex?: string
+
+  /**
+      * 提取结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Keys?: Array<string>
+
+  /**
+      * 过滤键
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FilterKeys?: Array<string>
+
+  /**
+      * 过滤值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FilterRegex?: Array<string>
+
+  /**
+      * 日志正则表达式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LogRegex?: string
+
+  /**
+      * 时间字段
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TimeKey?: string
+
+  /**
+      * 时间格式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TimeFormat?: string
+
+  /**
+      * 是否上传解析失败日志
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UnMatchUpload?: string
+
+  /**
+      * 解析失败日志的键名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UnMatchedKey?: string
+}
+
+/**
  * CreateEnvironment请求参数结构体
  */
 export interface CreateEnvironmentRequest {
@@ -2055,6 +2114,11 @@ export interface CreateLogConfigRequest {
    * 收集文件名模式，当 InputType=container_file 时生效
    */
   FilePattern?: string
+
+  /**
+   * 导出规则
+   */
+  ExtractRule?: LogConfigExtractRule
 }
 
 /**
@@ -4541,12 +4605,12 @@ export interface LogConfig {
   TopicId: string
 
   /**
-   * 日志提取模式，minimalist_log 为单行全文；multiline_log 为多行全文；
+   * 日志提取模式，minimalist_log 为单行全文；multiline_log 为多行全文；  fullregex_log 为单行正则； multiline_fullregex_log 为多行正则； json_log 为 json；
    */
   LogType: string
 
   /**
-      * 首行正则表达式，当LogType=multiline_log 时生效
+      * 首行正则表达式，当 LogType 为多行全文、多行正则时生效
 注意：此字段可能返回 null，表示取不到有效值。
       */
   BeginningRegex: string
@@ -4586,6 +4650,12 @@ export interface LogConfig {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ApplicationName: string
+
+  /**
+      * 导出规则
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ExtractRule: LogConfigExtractRule
 }
 
 /**

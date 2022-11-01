@@ -25,6 +25,7 @@ import {
   DeleteCertificateRequest,
   DescribeCertificateOperateLogsResponse,
   ModifyCertificateAliasRequest,
+  ModifyCertificatesExpiringNotificationSwitchResponse,
   CommitCertificateInformationRequest,
   DownloadCertificateResponse,
   ReplaceCertificateResponse,
@@ -67,6 +68,7 @@ import {
   DescribeManagerDetailRequest,
   DvAuthDetail,
   ProjectInfo,
+  ModifyCertificatesExpiringNotificationSwitchRequest,
   DescribeDeployedResourcesResponse,
   DescribeCertificateOperateLogsRequest,
   CancelCertificateOrderResponse,
@@ -260,6 +262,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCertificateDetailResponse) => void
   ): Promise<DescribeCertificateDetailResponse> {
     return this.request("DescribeCertificateDetail", req, cb)
+  }
+
+  /**
+   * 修改忽略证书到期通知。打开或关闭证书到期通知。
+   */
+  async ModifyCertificatesExpiringNotificationSwitch(
+    req: ModifyCertificatesExpiringNotificationSwitchRequest,
+    cb?: (error: string, rep: ModifyCertificatesExpiringNotificationSwitchResponse) => void
+  ): Promise<ModifyCertificatesExpiringNotificationSwitchResponse> {
+    return this.request("ModifyCertificatesExpiringNotificationSwitch", req, cb)
   }
 
   /**

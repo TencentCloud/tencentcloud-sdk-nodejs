@@ -164,6 +164,19 @@ export interface ModifyCertificateAliasRequest {
     Alias?: string;
 }
 /**
+ * ModifyCertificatesExpiringNotificationSwitch返回参数结构体
+ */
+export interface ModifyCertificatesExpiringNotificationSwitchResponse {
+    /**
+      * 证书ID列表
+      */
+    CertificateIds: Array<string>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * CommitCertificateInformation请求参数结构体
  */
 export interface CommitCertificateInformationRequest {
@@ -1489,6 +1502,19 @@ export interface ProjectInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ProjectId: string;
+}
+/**
+ * ModifyCertificatesExpiringNotificationSwitch请求参数结构体
+ */
+export interface ModifyCertificatesExpiringNotificationSwitchRequest {
+    /**
+      * 证书ID列表。最多50个
+      */
+    CertificateIds: Array<string>;
+    /**
+      * 0:不忽略通知。1:忽略通知
+      */
+    SwitchStatus: number;
 }
 /**
  * DescribeDeployedResources返回参数结构体

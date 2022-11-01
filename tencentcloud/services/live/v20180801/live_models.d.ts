@@ -4839,11 +4839,11 @@ export interface DescribeLogDownloadListResponse {
     /**
       * 日志信息列表。
       */
-    LogInfoList?: Array<LogInfo>;
+    LogInfoList: Array<LogInfo>;
     /**
       * 总条数。
       */
-    TotalNum?: number;
+    TotalNum: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

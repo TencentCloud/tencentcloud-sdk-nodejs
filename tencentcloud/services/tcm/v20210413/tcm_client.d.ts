@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { UnlinkPrometheusResponse, DescribeMeshResponse, UnlinkClusterResponse, LinkClusterListResponse, ModifyMeshResponse, CreateMeshResponse, LinkClusterListRequest, UnlinkPrometheusRequest, LinkPrometheusRequest, DeleteMeshResponse, DeleteMeshRequest, LinkPrometheusResponse, DescribeMeshRequest, CreateMeshRequest, DescribeMeshListRequest, UnlinkClusterRequest, ModifyMeshRequest, DescribeMeshListResponse } from "./tcm_models";
+import { UnlinkPrometheusResponse, ModifyTracingConfigResponse, DescribeMeshResponse, UnlinkClusterResponse, LinkClusterListResponse, ModifyMeshResponse, CreateMeshResponse, LinkClusterListRequest, UnlinkPrometheusRequest, LinkPrometheusRequest, DeleteMeshResponse, DeleteMeshRequest, LinkPrometheusResponse, DescribeMeshRequest, CreateMeshRequest, DescribeMeshListRequest, UnlinkClusterRequest, ModifyTracingConfigRequest, ModifyMeshRequest, DescribeMeshListResponse } from "./tcm_models";
 /**
  * tcm client
  * @class
@@ -28,9 +28,9 @@ export declare class Client extends AbstractClient {
      */
     UnlinkCluster(req: UnlinkClusterRequest, cb?: (error: string, rep: UnlinkClusterResponse) => void): Promise<UnlinkClusterResponse>;
     /**
-     * 解除关联Prometheus
+     * 修改 Tracing 配置
      */
-    UnlinkPrometheus(req: UnlinkPrometheusRequest, cb?: (error: string, rep: UnlinkPrometheusResponse) => void): Promise<UnlinkPrometheusResponse>;
+    ModifyTracingConfig(req: ModifyTracingConfigRequest, cb?: (error: string, rep: ModifyTracingConfigResponse) => void): Promise<ModifyTracingConfigResponse>;
     /**
      * 修改网格
      */
@@ -43,4 +43,8 @@ export declare class Client extends AbstractClient {
      * 查询网格详情
      */
     DescribeMesh(req: DescribeMeshRequest, cb?: (error: string, rep: DescribeMeshResponse) => void): Promise<DescribeMeshResponse>;
+    /**
+     * 解除关联Prometheus
+     */
+    UnlinkPrometheus(req: UnlinkPrometheusRequest, cb?: (error: string, rep: UnlinkPrometheusResponse) => void): Promise<UnlinkPrometheusResponse>;
 }

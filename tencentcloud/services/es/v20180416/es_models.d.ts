@@ -2517,6 +2517,11 @@ export interface IndexPolicyField {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     FrozenMinAge?: string;
+    /**
+      * /
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ColdAction?: string;
 }
 /**
  * UpdateJdk请求参数结构体

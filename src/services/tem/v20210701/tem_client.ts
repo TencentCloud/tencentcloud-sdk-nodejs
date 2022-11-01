@@ -52,6 +52,7 @@ import {
   DescribeEnvironmentsRequest,
   LogConfigListPage,
   ServiceVersionBrief,
+  LogConfigExtractRule,
   CreateEnvironmentRequest,
   NodeInfo,
   DescribeApplicationServiceListResponse,

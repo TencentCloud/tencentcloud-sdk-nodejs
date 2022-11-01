@@ -68,9 +68,9 @@ it("tcm.v20210413.UnlinkCluster", async function () {
     }
 })
 
-it("tcm.v20210413.UnlinkPrometheus", async function () {
+it("tcm.v20210413.ModifyTracingConfig", async function () {
     try {
-       const data = await client.UnlinkPrometheus({})
+       const data = await client.ModifyTracingConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -101,6 +101,16 @@ it("tcm.v20210413.CreateMesh", async function () {
 it("tcm.v20210413.DescribeMesh", async function () {
     try {
        const data = await client.DescribeMesh({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcm.v20210413.UnlinkPrometheus", async function () {
+    try {
+       const data = await client.UnlinkPrometheus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

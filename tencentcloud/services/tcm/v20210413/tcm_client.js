@@ -58,10 +58,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UnlinkCluster", req, cb);
     }
     /**
-     * 解除关联Prometheus
+     * 修改 Tracing 配置
      */
-    async UnlinkPrometheus(req, cb) {
-        return this.request("UnlinkPrometheus", req, cb);
+    async ModifyTracingConfig(req, cb) {
+        return this.request("ModifyTracingConfig", req, cb);
     }
     /**
      * 修改网格
@@ -80,6 +80,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeMesh(req, cb) {
         return this.request("DescribeMesh", req, cb);
+    }
+    /**
+     * 解除关联Prometheus
+     */
+    async UnlinkPrometheus(req, cb) {
+        return this.request("UnlinkPrometheus", req, cb);
     }
 }
 exports.Client = Client;

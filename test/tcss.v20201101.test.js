@@ -1668,6 +1668,16 @@ it("tcss.v20201101.ModifyRiskSyscallStatus", async function () {
     }
 })
 
+it("tcss.v20201101.CreateRiskDnsEventExportJob", async function () {
+    try {
+       const data = await client.CreateRiskDnsEventExportJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcss.v20201101.DescribeVulDefenceEventTendency", async function () {
     try {
        const data = await client.DescribeVulDefenceEventTendency({})

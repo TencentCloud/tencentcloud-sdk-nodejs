@@ -221,6 +221,11 @@ export interface CreateOrganizationMemberRequest {
    * 管理身份
    */
   IdentityRoleID?: Array<number>
+
+  /**
+   * 主体关系ID
+   */
+  AuthRelationId?: number
 }
 
 /**

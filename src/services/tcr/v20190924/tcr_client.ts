@@ -736,10 +736,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询所有有实例命名空间列表
+   * 查询所有实例命名空间列表
    */
   async DescribeInstanceAllNamespaces(
-    req?: DescribeInstanceAllNamespacesRequest,
+    req: DescribeInstanceAllNamespacesRequest,
     cb?: (error: string, rep: DescribeInstanceAllNamespacesResponse) => void
   ): Promise<DescribeInstanceAllNamespacesResponse> {
     return this.request("DescribeInstanceAllNamespaces", req, cb)

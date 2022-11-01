@@ -286,7 +286,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeNamespacePersonal", req, cb);
     }
     /**
-     * 查询所有有实例命名空间列表
+     * 查询所有实例命名空间列表
      */
     async DescribeInstanceAllNamespaces(req, cb) {
         return this.request("DescribeInstanceAllNamespaces", req, cb);
