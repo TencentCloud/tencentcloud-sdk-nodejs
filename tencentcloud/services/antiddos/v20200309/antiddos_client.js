@@ -40,6 +40,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyDDoSBlackWhiteIpList", req, cb);
     }
     /**
+     * 查询账号维度待处理风险信息，包括是否为付费用户，查询攻击中、封堵中、过期资源数量等
+     */
+    async DescribePendingRiskInfo(req, cb) {
+        return this.request("DescribePendingRiskInfo", req, cb);
+    }
+    /**
      * 查询与证书ID对于域名匹配的七层规则
      */
     async DescribeL7RulesBySSLCertId(req, cb) {

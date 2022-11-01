@@ -318,9 +318,9 @@ it("teo.v20220901.CreatePrefetchTask", async function () {
     }
 })
 
-it("teo.v20220901.DeleteAliasDomain", async function () {
+it("teo.v20220901.DescribeLogTopicTaskDetail", async function () {
     try {
-       const data = await client.DeleteAliasDomain({})
+       const data = await client.DescribeLogTopicTaskDetail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -548,29 +548,9 @@ it("teo.v20220901.DescribeBotData", async function () {
     }
 })
 
-it("teo.v20220901.CreateAliasDomain", async function () {
-    try {
-       const data = await client.CreateAliasDomain({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("teo.v20220901.DescribeWebProtectionHitRuleDetail", async function () {
     try {
        const data = await client.DescribeWebProtectionHitRuleDetail({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("teo.v20220901.ModifyAliasDomainStatus", async function () {
-    try {
-       const data = await client.ModifyAliasDomainStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -631,16 +611,6 @@ it("teo.v20220901.DeleteDnsRecords", async function () {
 it("teo.v20220901.ModifySecurityPolicy", async function () {
     try {
        const data = await client.ModifySecurityPolicy({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("teo.v20220901.DescribeLogTopicTaskDetail", async function () {
-    try {
-       const data = await client.DescribeLogTopicTaskDetail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -998,16 +968,6 @@ it("teo.v20220901.SwitchLogTopicTask", async function () {
     }
 })
 
-it("teo.v20220901.ModifyAliasDomain", async function () {
-    try {
-       const data = await client.ModifyAliasDomain({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("teo.v20220901.DescribeDnssec", async function () {
     try {
        const data = await client.DescribeDnssec({})
@@ -1231,16 +1191,6 @@ it("teo.v20220901.DescribeWebProtectionTopData", async function () {
 it("teo.v20220901.DescribeWebManagedRulesData", async function () {
     try {
        const data = await client.DescribeWebManagedRulesData({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("teo.v20220901.DescribeAliasDomains", async function () {
-    try {
-       const data = await client.DescribeAliasDomains({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

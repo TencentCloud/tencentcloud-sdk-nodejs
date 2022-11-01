@@ -38,6 +38,16 @@ it("tcm.v20210413.LinkClusterList", async function () {
     }
 })
 
+it("tcm.v20210413.LinkPrometheus", async function () {
+    try {
+       const data = await client.LinkPrometheus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcm.v20210413.DescribeMeshList", async function () {
     try {
        const data = await client.DescribeMeshList({})
@@ -51,6 +61,16 @@ it("tcm.v20210413.DescribeMeshList", async function () {
 it("tcm.v20210413.UnlinkCluster", async function () {
     try {
        const data = await client.UnlinkCluster({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcm.v20210413.UnlinkPrometheus", async function () {
+    try {
+       const data = await client.UnlinkPrometheus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

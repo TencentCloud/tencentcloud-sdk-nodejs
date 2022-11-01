@@ -626,6 +626,7 @@ import {
   CreateNetworkFirewallPublishResponse,
   DescribeVirusScanSettingRequest,
   CreateClusterCheckTaskRequest,
+  RaspInfo,
   DescribeNetworkFirewallClusterListRequest,
   CreateVulDefenceEventExportJobResponse,
   AutoAuthorizedRuleHostInfo,

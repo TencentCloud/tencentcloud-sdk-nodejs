@@ -8659,6 +8659,15 @@ export interface DescribeContainerSecEventSummaryResponse {
       */
     UnhandledVirusEventCnt: number;
     /**
+      * 未处理恶意外连事件
+      */
+    UnhandledMaliciousConnectionEventCnt: number;
+    /**
+      * 未处理k8sApi事件
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UnhandledK8sApiEventCnt: number;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
@@ -10530,6 +10539,8 @@ ET_REVERSE_SHELL: 反弹shell
 ET_RISK_SYSCALL:高危系统调用
 ET_ABNORMAL_PROCESS: 异常进程
 ET_ACCESS_CONTROL 文件篡改
+ET_VIRUS 木马事件
+ET_MALICIOUS_CONNECTION 恶意外连事件
       */
     EventType: string;
 }
@@ -11661,6 +11672,11 @@ export interface VulDefenceEventDetail {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     JNDIUrl: string;
+    /**
+      * rasp detail
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RaspDetail: Array<RaspInfo>;
 }
 /**
  * UpdateNetworkFirewallPolicyYamlDetail请求参数结构体
@@ -14050,6 +14066,19 @@ export interface CreateClusterCheckTaskRequest {
       * 指定要扫描的集群信息
       */
     ClusterCheckTaskList: Array<ClusterCheckTaskItem>;
+}
+/**
+ * 漏洞防御插件 rasp信息
+ */
+export interface RaspInfo {
+    /**
+      * rasp名称
+      */
+    Name: string;
+    /**
+      * rasp  描述
+      */
+    Value: string;
 }
 /**
  * DescribeNetworkFirewallClusterList请求参数结构体

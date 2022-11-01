@@ -131,6 +131,7 @@ import {
   DescribeBasicDeviceStatusResponse,
   DescribeBgpBizTrendResponse,
   L4RuleSource,
+  DescribePendingRiskInfoResponse,
   ProtocolBlockConfig,
   DeleteCCPrecisionPolicyRequest,
   BGPIPInstance,
@@ -162,7 +163,7 @@ import {
   DescribeCcBlackWhiteIpListRequest,
   DescribeListListenerResponse,
   DeletePortAclConfigRequest,
-  ProtectThresholdRelation,
+  DescribePendingRiskInfoRequest,
   CreatePortAclConfigResponse,
   ModifyDDoSLevelResponse,
   CreateL7RuleCertsResponse,
@@ -170,6 +171,7 @@ import {
   ConnectLimitConfig,
   DDoSSpeedLimitConfig,
   AnycastOutPackRelation,
+  ProtectThresholdRelation,
   DescribeListProtectThresholdConfigResponse,
   CertIdInsL7Rules,
   IpSegment,
@@ -297,6 +299,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyDDoSBlackWhiteIpListResponse) => void
   ): Promise<ModifyDDoSBlackWhiteIpListResponse> {
     return this.request("ModifyDDoSBlackWhiteIpList", req, cb)
+  }
+
+  /**
+   * 查询账号维度待处理风险信息，包括是否为付费用户，查询攻击中、封堵中、过期资源数量等
+   */
+  async DescribePendingRiskInfo(
+    req?: DescribePendingRiskInfoRequest,
+    cb?: (error: string, rep: DescribePendingRiskInfoResponse) => void
+  ): Promise<DescribePendingRiskInfoResponse> {
+    return this.request("DescribePendingRiskInfo", req, cb)
   }
 
   /**

@@ -22,8 +22,10 @@ import {
   CustomPromConfig,
   Service,
   MeshConfig,
+  UnlinkPrometheusResponse,
   LoadBalancerStatus,
   DescribeMeshResponse,
+  PodsMetricSource,
   AutoInjectionNamespaceState,
   UnlinkClusterResponse,
   LinkClusterListResponse,
@@ -33,18 +35,20 @@ import {
   CreateMeshResponse,
   LinkClusterListRequest,
   ClusterConfig,
+  UnlinkPrometheusRequest,
   MetricSpec,
   WorkloadConfig,
   EgressGateway,
   IstioConfig,
   Mesh,
+  LinkPrometheusRequest,
   GrafanaInfo,
   DeleteMeshResponse,
   MeshStatus,
   IstiodConfig,
   InjectConfig,
   DeleteMeshRequest,
-  PodsMetricSource,
+  LinkPrometheusResponse,
   Resource,
   DeployConfig,
   DescribeMeshRequest,
@@ -107,6 +111,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 关联Prometheus
+   */
+  async LinkPrometheus(
+    req: LinkPrometheusRequest,
+    cb?: (error: string, rep: LinkPrometheusResponse) => void
+  ): Promise<LinkPrometheusResponse> {
+    return this.request("LinkPrometheus", req, cb)
+  }
+
+  /**
    * 查询网格列表
    */
   async DescribeMeshList(
@@ -124,6 +138,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UnlinkClusterResponse) => void
   ): Promise<UnlinkClusterResponse> {
     return this.request("UnlinkCluster", req, cb)
+  }
+
+  /**
+   * 解除关联Prometheus
+   */
+  async UnlinkPrometheus(
+    req: UnlinkPrometheusRequest,
+    cb?: (error: string, rep: UnlinkPrometheusResponse) => void
+  ): Promise<UnlinkPrometheusResponse> {
+    return this.request("UnlinkPrometheus", req, cb)
   }
 
   /**

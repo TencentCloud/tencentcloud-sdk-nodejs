@@ -79,6 +79,7 @@ import {
   UpgradeInstanceRequest,
   RollbackTable,
   DescribeClusterDetailRequest,
+  DeleteBackupResponse,
   Tag,
   DescribeProjectSecurityGroupsResponse,
   RemoveClusterSlaveZoneResponse,
@@ -111,6 +112,7 @@ import {
   SecurityGroup,
   DescribeBackupDownloadUrlRequest,
   RollbackTimeRange,
+  OfflineInstanceRequest,
   NetAddr,
   AssociateSecurityGroupsResponse,
   DescribeResourcesByDealNameRequest,
@@ -164,7 +166,7 @@ import {
   ModifyClusterParamRequest,
   DescribeAccountsResponse,
   ModifyAccountParamsResponse,
-  OfflineInstanceRequest,
+  DeleteBackupRequest,
   TradePrice,
   DescribeClusterParamsRequest,
   AuditLog,
@@ -283,13 +285,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * SetRenewFlag设置实例的自动续费功能
+   * 为集群删除手动备份，无法删除自动备份
    */
-  async SetRenewFlag(
-    req: SetRenewFlagRequest,
-    cb?: (error: string, rep: SetRenewFlagResponse) => void
-  ): Promise<SetRenewFlagResponse> {
-    return this.request("SetRenewFlag", req, cb)
+  async DeleteBackup(
+    req: DeleteBackupRequest,
+    cb?: (error: string, rep: DeleteBackupResponse) => void
+  ): Promise<DeleteBackupResponse> {
+    return this.request("DeleteBackup", req, cb)
   }
 
   /**
@@ -310,6 +312,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: OfflineClusterResponse) => void
   ): Promise<OfflineClusterResponse> {
     return this.request("OfflineCluster", req, cb)
+  }
+
+  /**
+   * SetRenewFlag设置实例的自动续费功能
+   */
+  async SetRenewFlag(
+    req: SetRenewFlagRequest,
+    cb?: (error: string, rep: SetRenewFlagResponse) => void
+  ): Promise<SetRenewFlagResponse> {
+    return this.request("SetRenewFlag", req, cb)
   }
 
   /**

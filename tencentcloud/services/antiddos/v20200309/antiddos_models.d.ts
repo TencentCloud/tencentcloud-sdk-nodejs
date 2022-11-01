@@ -2189,6 +2189,35 @@ export interface L4RuleSource {
     Backup?: number;
 }
 /**
+ * DescribePendingRiskInfo返回参数结构体
+ */
+export interface DescribePendingRiskInfoResponse {
+    /**
+      * 是否为付费用户
+      */
+    IsPaidUsr: boolean;
+    /**
+      * 攻击中的资源数量
+      */
+    AttackingCount: number;
+    /**
+      * 封堵中的资源数量
+      */
+    BlockingCount: number;
+    /**
+      * 已过期的资源数量
+      */
+    ExpiredCount: number;
+    /**
+      * 所有待处理风险事件总数
+      */
+    Total: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 协议封禁配置
  */
 export interface ProtocolBlockConfig {
@@ -2874,48 +2903,9 @@ export interface DeletePortAclConfigRequest {
     AclConfig: AclConfig;
 }
 /**
- * 防护阈值配置相关信息
+ * DescribePendingRiskInfo请求参数结构体
  */
-export interface ProtectThresholdRelation {
-    /**
-      * DDoS防护等级，取值[
-low(宽松)
-middle(适中)
-high(严格)
-]
-      */
-    DDoSLevel: string;
-    /**
-      * DDoS清洗阈值，单位Mbps
-      */
-    DDoSThreshold: number;
-    /**
-      * DDoS的AI防护开关，取值[
-on(开启)
-off(关闭)
-]
-      */
-    DDoSAI: string;
-    /**
-      * CC清洗开关，取值[
-0(关闭)
-1(开启)
-]
-      */
-    CCEnable: number;
-    /**
-      * CC清洗阈值，单位QPS
-      */
-    CCThreshold: number;
-    /**
-      * 所属的资源实例
-      */
-    InstanceDetailList: Array<InstanceRelation>;
-    /**
-      * 域名与协议纬度的防护阈值
-      */
-    ListenerCcThresholdList: Array<ListenerCcThreholdConfig>;
-}
+export declare type DescribePendingRiskInfoRequest = null;
 /**
  * CreatePortAclConfig返回参数结构体
  */
@@ -3088,6 +3078,49 @@ export interface AnycastOutPackRelation {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     CurDeadline: string;
+}
+/**
+ * 防护阈值配置相关信息
+ */
+export interface ProtectThresholdRelation {
+    /**
+      * DDoS防护等级，取值[
+low(宽松)
+middle(适中)
+high(严格)
+]
+      */
+    DDoSLevel: string;
+    /**
+      * DDoS清洗阈值，单位Mbps
+      */
+    DDoSThreshold: number;
+    /**
+      * DDoS的AI防护开关，取值[
+on(开启)
+off(关闭)
+]
+      */
+    DDoSAI: string;
+    /**
+      * CC清洗开关，取值[
+0(关闭)
+1(开启)
+]
+      */
+    CCEnable: number;
+    /**
+      * CC清洗阈值，单位QPS
+      */
+    CCThreshold: number;
+    /**
+      * 所属的资源实例
+      */
+    InstanceDetailList: Array<InstanceRelation>;
+    /**
+      * 域名与协议纬度的防护阈值
+      */
+    ListenerCcThresholdList: Array<ListenerCcThreholdConfig>;
 }
 /**
  * DescribeListProtectThresholdConfig返回参数结构体

@@ -38,8 +38,10 @@ import {
   ModifyClusterResponse,
   RocketMQClusterRecentStats,
   RocketMQVipInstance,
+  RabbitMQVipInstance,
   DescribeCmqQueuesResponse,
   DescribeAllTenantsResponse,
+  DescribeRabbitMQNodeListRequest,
   DescribeNamespaceBundlesOptResponse,
   DescribeBindVpcsResponse,
   RewindCmqQueueResponse,
@@ -110,12 +112,14 @@ import {
   DescribeRocketMQClusterRequest,
   DeleteRocketMQTopicResponse,
   ModifyCmqTopicAttributeRequest,
+  DescribeRabbitMQVipInstancesResponse,
   DeleteRolesRequest,
   ModifyRocketMQTopicResponse,
   CreateCmqSubscribeResponse,
   DescribeCmqDeadLetterSourceQueuesRequest,
   DescribeSubscriptionsResponse,
   ModifyRoleRequest,
+  DescribeRabbitMQNodeListResponse,
   SendMessagesResponse,
   ReceiveMessageRequest,
   CreateTopicRequest,
@@ -246,6 +250,7 @@ import {
   PublishCmqMsgRequest,
   UnbindCmqDeadLetterRequest,
   CreateAMQPRouteRelationRequest,
+  RabbitMQPrivateNode,
   DeleteCmqSubscribeResponse,
   DescribePublisherSummaryRequest,
   DeleteSubscriptionsRequest,
@@ -253,6 +258,7 @@ import {
   ModifyCmqQueueAttributeRequest,
   ModifyRocketMQGroupResponse,
   DescribeRocketMQVipInstancesResponse,
+  DescribeRabbitMQVipInstancesRequest,
   AMQPClusterDetail,
   DescribeClusterDetailResponse,
   SendMessagesRequest,
@@ -378,6 +384,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteRocketMQGroupResponse) => void
   ): Promise<DeleteRocketMQGroupResponse> {
     return this.request("DeleteRocketMQGroup", req, cb)
+  }
+
+  /**
+   * 查询用户已购的RabbitMQ专享实例列表
+   */
+  async DescribeRabbitMQVipInstances(
+    req: DescribeRabbitMQVipInstancesRequest,
+    cb?: (error: string, rep: DescribeRabbitMQVipInstancesResponse) => void
+  ): Promise<DescribeRabbitMQVipInstancesResponse> {
+    return this.request("DescribeRabbitMQVipInstances", req, cb)
   }
 
   /**
@@ -788,6 +804,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ResetMsgSubOffsetByTimestampResponse) => void
   ): Promise<ResetMsgSubOffsetByTimestampResponse> {
     return this.request("ResetMsgSubOffsetByTimestamp", req, cb)
+  }
+
+  /**
+   * RabbitMQ专享版查询节点列表
+   */
+  async DescribeRabbitMQNodeList(
+    req: DescribeRabbitMQNodeListRequest,
+    cb?: (error: string, rep: DescribeRabbitMQNodeListResponse) => void
+  ): Promise<DescribeRabbitMQNodeListResponse> {
+    return this.request("DescribeRabbitMQNodeList", req, cb)
   }
 
   /**

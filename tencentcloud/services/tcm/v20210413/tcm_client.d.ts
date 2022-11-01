@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeMeshResponse, UnlinkClusterResponse, LinkClusterListResponse, ModifyMeshResponse, CreateMeshResponse, LinkClusterListRequest, DeleteMeshResponse, DeleteMeshRequest, DescribeMeshRequest, CreateMeshRequest, DescribeMeshListRequest, UnlinkClusterRequest, ModifyMeshRequest, DescribeMeshListResponse } from "./tcm_models";
+import { UnlinkPrometheusResponse, DescribeMeshResponse, UnlinkClusterResponse, LinkClusterListResponse, ModifyMeshResponse, CreateMeshResponse, LinkClusterListRequest, UnlinkPrometheusRequest, LinkPrometheusRequest, DeleteMeshResponse, DeleteMeshRequest, LinkPrometheusResponse, DescribeMeshRequest, CreateMeshRequest, DescribeMeshListRequest, UnlinkClusterRequest, ModifyMeshRequest, DescribeMeshListResponse } from "./tcm_models";
 /**
  * tcm client
  * @class
@@ -16,6 +16,10 @@ export declare class Client extends AbstractClient {
      */
     LinkClusterList(req: LinkClusterListRequest, cb?: (error: string, rep: LinkClusterListResponse) => void): Promise<LinkClusterListResponse>;
     /**
+     * 关联Prometheus
+     */
+    LinkPrometheus(req: LinkPrometheusRequest, cb?: (error: string, rep: LinkPrometheusResponse) => void): Promise<LinkPrometheusResponse>;
+    /**
      * 查询网格列表
      */
     DescribeMeshList(req: DescribeMeshListRequest, cb?: (error: string, rep: DescribeMeshListResponse) => void): Promise<DescribeMeshListResponse>;
@@ -23,6 +27,10 @@ export declare class Client extends AbstractClient {
      * 解关联集群
      */
     UnlinkCluster(req: UnlinkClusterRequest, cb?: (error: string, rep: UnlinkClusterResponse) => void): Promise<UnlinkClusterResponse>;
+    /**
+     * 解除关联Prometheus
+     */
+    UnlinkPrometheus(req: UnlinkPrometheusRequest, cb?: (error: string, rep: UnlinkPrometheusResponse) => void): Promise<UnlinkPrometheusResponse>;
     /**
      * 修改网格
      */

@@ -94,6 +94,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteRocketMQGroup", req, cb);
     }
     /**
+     * 查询用户已购的RabbitMQ专享实例列表
+     */
+    async DescribeRabbitMQVipInstances(req, cb) {
+        return this.request("DescribeRabbitMQVipInstances", req, cb);
+    }
+    /**
      * 回溯cmq队列
      */
     async RewindCmqQueue(req, cb) {
@@ -338,6 +344,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ResetMsgSubOffsetByTimestamp(req, cb) {
         return this.request("ResetMsgSubOffsetByTimestamp", req, cb);
+    }
+    /**
+     * RabbitMQ专享版查询节点列表
+     */
+    async DescribeRabbitMQNodeList(req, cb) {
+        return this.request("DescribeRabbitMQNodeList", req, cb);
     }
     /**
      * 获取租户VPC绑定关系

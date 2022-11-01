@@ -75,12 +75,12 @@ export interface EnableKeyRotationRequest {
  */
 export interface DescribeWhiteBoxKeyDetailsResponse {
   /**
-   * 白盒密钥信息列表
+   * 白盒密钥信息列表。
    */
   KeyInfos: Array<WhiteboxKeyInfo>
 
   /**
-      * key总数量
+      * 白盒密钥总数。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   TotalCount: number
@@ -1185,7 +1185,7 @@ export interface GetServiceStatusResponse {
   UserLevel: number
 
   /**
-      * 旗舰版到期时间
+      * 旗舰版到期时间（Epoch Unix Timestamp）。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ProExpireTime: number

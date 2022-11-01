@@ -129,6 +129,16 @@ export interface MeshConfig {
 }
 
 /**
+ * UnlinkPrometheus返回参数结构体
+ */
+export interface UnlinkPrometheusResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 负载均衡状态信息
  */
 export interface LoadBalancerStatus {
@@ -161,6 +171,21 @@ export interface DescribeMeshResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * PodsMetricSource 定义了如何根据特定指标进行扩缩容
+ */
+export interface PodsMetricSource {
+  /**
+   * 指标名
+   */
+  MetricName: string
+
+  /**
+   * 目标值
+   */
+  TargetAverageValue: string
 }
 
 /**
@@ -318,6 +343,16 @@ export interface ClusterConfig {
    * 自动注入命名空间状态列表
    */
   AutoInjectionNamespaceStateList?: Array<AutoInjectionNamespaceState>
+}
+
+/**
+ * UnlinkPrometheus请求参数结构体
+ */
+export interface UnlinkPrometheusRequest {
+  /**
+   * 网格ID
+   */
+  MeshID: string
 }
 
 /**
@@ -519,6 +554,21 @@ export interface Mesh {
 }
 
 /**
+ * LinkPrometheus请求参数结构体
+ */
+export interface LinkPrometheusRequest {
+  /**
+   * 网格ID
+   */
+  MeshID: string
+
+  /**
+   * 配置
+   */
+  Prometheus: PrometheusConfig
+}
+
+/**
  * Grafana信息
  */
 export interface GrafanaInfo {
@@ -665,18 +715,13 @@ export interface DeleteMeshRequest {
 }
 
 /**
- * PodsMetricSource 定义了如何根据特定指标进行扩缩容
+ * LinkPrometheus返回参数结构体
  */
-export interface PodsMetricSource {
+export interface LinkPrometheusResponse {
   /**
-   * 指标名
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  MetricName: string
-
-  /**
-   * 目标值
-   */
-  TargetAverageValue: string
+  RequestId?: string
 }
 
 /**

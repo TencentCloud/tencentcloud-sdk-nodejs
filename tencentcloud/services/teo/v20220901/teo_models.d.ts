@@ -543,34 +543,6 @@ export interface WafConfig {
     AiRule?: AiRule;
 }
 /**
- * CreateAliasDomain请求参数结构体
- */
-export interface CreateAliasDomainRequest {
-    /**
-      * 站点 ID。
-      */
-    ZoneId: string;
-    /**
-      * 别称域名名称。
-      */
-    AliasName: string;
-    /**
-      * 目标域名名称。
-      */
-    TargetName: string;
-    /**
-      * 证书配置，取值有：
-<li> none：不配置；</li>
-<li> hosting：SSL托管证书；</li>
-<li> apply：申请免费证书。</li>
-      */
-    CertType: string;
-    /**
-      * 选择托管证书时需填入相应证书 ID。
-      */
-    CertId?: Array<string>;
-}
-/**
  * CreatePrefetchTask请求参数结构体
  */
 export interface CreatePrefetchTaskRequest {
@@ -862,23 +834,6 @@ export interface DDoSAntiPly {
 <li>on ：开启 。</li>
       */
     UdpShard?: string;
-}
-/**
- * DescribeAliasDomains返回参数结构体
- */
-export interface DescribeAliasDomainsResponse {
-    /**
-      * 符合条件的别称域名个数。
-      */
-    TotalCount: number;
-    /**
-      * 别称域名详细信息列表。
-      */
-    AliasDomains: Array<AliasDomain>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
 }
 /**
  * edgeone套餐信息
@@ -2744,24 +2699,6 @@ export interface DescribeWebManagedRulesHitRuleDetailRequest {
     Area?: string;
 }
 /**
- * DescribeBotClientIpList返回参数结构体
- */
-export interface DescribeBotClientIpListResponse {
-    /**
-      * 客户端Ip相关数据列表。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Data: Array<SecClientIp>;
-    /**
-      * 查询结果的总条数。
-      */
-    TotalCount: number;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
  * ModifySecurityWafGroupPolicy请求参数结构体
  */
 export interface ModifySecurityWafGroupPolicyRequest {
@@ -3052,20 +2989,6 @@ export interface ModifyDDoSPolicyHostRequest {
     SecurityType: string;
 }
 /**
- * DeleteAliasDomain请求参数结构体
- */
-export interface DeleteAliasDomainRequest {
-    /**
-      * 站点 ID。
-      */
-    ZoneId: string;
-    /**
-      * 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：
-<li>target-name<br>   按照【<strong>目标域名名称</strong>】进行过滤。<br>   类型：String<br>   必选：否<li>alias-id<br>   按照【<strong>别称域名ID</strong>】进行过滤。<br>   类型：String<br>   必选：否<li>alias-name<br>   按照【<strong>别称域名名称</strong>】进行过滤。<br>   类型：String<br>   必选：否</li>
-      */
-    Filters?: Array<Filter>;
-}
-/**
  * DescribeIdentifications返回参数结构体
  */
 export interface DescribeIdentificationsResponse {
@@ -3185,120 +3108,22 @@ export interface DeleteOriginGroupRequest {
     OriginGroupId: string;
 }
 /**
- * 域名配置信息
+ * DescribeWebProtectionHitRuleDetail返回参数结构体
  */
-export interface DetailHost {
+export interface DescribeWebProtectionHitRuleDetailResponse {
     /**
-      * 站点ID。
-      */
-    ZoneId: string;
-    /**
-      * 加速服务状态，取值为：
-<li> process：部署中；</li>
-<li> online：已启动；</li>
-<li> offline：已关闭。</li>
-      */
-    Status: string;
-    /**
-      * 域名。
-      */
-    Host: string;
-    /**
-      * 站点名称。
-      */
-    ZoneName: string;
-    /**
-      * 分配的Cname域名
-      */
-    Cname: string;
-    /**
-      * 资源ID。
-      */
-    Id: string;
-    /**
-      * 实例ID。
-      */
-    InstanceId: string;
-    /**
-      * 锁状态。
-      */
-    Lock: number;
-    /**
-      * 域名状态类型。
-      */
-    Mode: number;
-    /**
-      * 域名加速地域，取值有：
-<li> global：全球；</li>
-<li> mainland：中国大陆；</li>
-<li> overseas：境外区域。</li>
-      */
-    Area: string;
-    /**
-      * 加速类型配置项。
+      * cc防护命中规则列表。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    AccelerateType: AccelerateType;
+    Data: Array<SecHitRuleInfo>;
     /**
-      * Https配置项。
-注意：此字段可能返回 null，表示取不到有效值。
+      * 查询结果的总条数。
       */
-    Https: Https;
+    TotalCount: number;
     /**
-      * 缓存配置项。
-注意：此字段可能返回 null，表示取不到有效值。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    CacheConfig: CacheConfig;
-    /**
-      * 源站配置项。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Origin: Origin;
-    /**
-      * 安全类型。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    SecurityType: SecurityType;
-    /**
-      * 缓存键配置项。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    CacheKey: CacheKey;
-    /**
-      * 智能压缩配置项。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Compression: Compression;
-    /**
-      * Waf防护配置项。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Waf: Waf;
-    /**
-      * CC防护配置项。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    CC: CC;
-    /**
-      * DDoS防护配置。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    DDoS: DDoS;
-    /**
-      * 智能路由配置项。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    SmartRouting: SmartRouting;
-    /**
-      * Ipv6访问配置项。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Ipv6: Ipv6;
-    /**
-      * 回源时是否携带客户端IP所属地域信息的配置。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ClientIpCountry: ClientIpCountry;
+    RequestId?: string;
 }
 /**
  * 精准防护条件
@@ -4300,22 +4125,120 @@ export interface DescribeBotHitRuleDetailRequest {
     Area?: string;
 }
 /**
- * DescribeWebProtectionHitRuleDetail返回参数结构体
+ * 域名配置信息
  */
-export interface DescribeWebProtectionHitRuleDetailResponse {
+export interface DetailHost {
     /**
-      * cc防护命中规则列表。
+      * 站点ID。
+      */
+    ZoneId: string;
+    /**
+      * 加速服务状态，取值为：
+<li> process：部署中；</li>
+<li> online：已启动；</li>
+<li> offline：已关闭。</li>
+      */
+    Status: string;
+    /**
+      * 域名。
+      */
+    Host: string;
+    /**
+      * 站点名称。
+      */
+    ZoneName: string;
+    /**
+      * 分配的Cname域名
+      */
+    Cname: string;
+    /**
+      * 资源ID。
+      */
+    Id: string;
+    /**
+      * 实例ID。
+      */
+    InstanceId: string;
+    /**
+      * 锁状态。
+      */
+    Lock: number;
+    /**
+      * 域名状态类型。
+      */
+    Mode: number;
+    /**
+      * 域名加速地域，取值有：
+<li> global：全球；</li>
+<li> mainland：中国大陆；</li>
+<li> overseas：境外区域。</li>
+      */
+    Area: string;
+    /**
+      * 加速类型配置项。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Data: Array<SecHitRuleInfo>;
+    AccelerateType: AccelerateType;
     /**
-      * 查询结果的总条数。
+      * Https配置项。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    TotalCount: number;
+    Https: Https;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 缓存配置项。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    RequestId?: string;
+    CacheConfig: CacheConfig;
+    /**
+      * 源站配置项。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Origin: Origin;
+    /**
+      * 安全类型。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SecurityType: SecurityType;
+    /**
+      * 缓存键配置项。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CacheKey: CacheKey;
+    /**
+      * 智能压缩配置项。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Compression: Compression;
+    /**
+      * Waf防护配置项。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Waf: Waf;
+    /**
+      * CC防护配置项。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CC: CC;
+    /**
+      * DDoS防护配置。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DDoS: DDoS;
+    /**
+      * 智能路由配置项。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SmartRouting: SmartRouting;
+    /**
+      * Ipv6访问配置项。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Ipv6: Ipv6;
+    /**
+      * 回源时是否携带客户端IP所属地域信息的配置。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ClientIpCountry: ClientIpCountry;
 }
 /**
  * DescribeSpeedTestingMetricData请求参数结构体
@@ -4325,15 +4248,6 @@ export interface DescribeSpeedTestingMetricDataRequest {
       * 站点ID。
       */
     ZoneId: string;
-}
-/**
- * ModifyLogTopicTask返回参数结构体
- */
-export interface ModifyLogTopicTaskResponse {
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
 }
 /**
  * 规则引擎条件参数
@@ -4717,19 +4631,6 @@ export interface NormalAction {
       * 参数。
       */
     Parameters: Array<RuleNormalActionParams>;
-}
-/**
- * Top数据的详细信息
- */
-export interface TopDetailData {
-    /**
-      * 字段名。
-      */
-    Key: string;
-    /**
-      * 字段值。
-      */
-    Value: number;
 }
 /**
  * DescribeZoneSetting返回参数结构体
@@ -5296,28 +5197,6 @@ export interface CreateCredentialResponse {
     RequestId?: string;
 }
 /**
- * DescribeAliasDomains请求参数结构体
- */
-export interface DescribeAliasDomainsRequest {
-    /**
-      * 站点 ID。不填时返回该AppID下所有别称域名信息列表。
-      */
-    ZoneId?: string;
-    /**
-      * 分页查询偏移量。默认值：0。
-      */
-    Offset?: number;
-    /**
-      * 分页查询限制数目。默认值：20，最大值：1000。
-      */
-    Limit?: number;
-    /**
-      * 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：
-<li>target-name<br>   按照【<strong>目标域名名称</strong>】进行过滤。<br>   类型：String<br>   必选：否</li><li>alias-id<br>   按照【<strong>别称域名ID</strong>】进行过滤。<br>   类型：String<br>   必选：否</li><li>alias-name<br>   按照【<strong>别称域名名称</strong>】进行过滤。<br>   类型：String<br>   必选：否</li>模糊查询时仅支持过滤字段名为alias-name。
-      */
-    Filters?: Array<AdvancedFilter>;
-}
-/**
  * SwitchLogTopicTask请求参数结构体
  */
 export interface SwitchLogTopicTaskRequest {
@@ -5397,34 +5276,6 @@ export interface ExceptUserRuleScope {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     SkipConditions?: Array<SkipCondition>;
-}
-/**
- * ModifyAliasDomain请求参数结构体
- */
-export interface ModifyAliasDomainRequest {
-    /**
-      * 站点 ID。
-      */
-    ZoneId: string;
-    /**
-      * 别称域名 ID。
-      */
-    AliasId: string;
-    /**
-      * 目标域名名称。
-      */
-    TargetName: string;
-    /**
-      * 证书配置，取值有：
-<li> none：不配置；</li>
-<li> hosting：SSL托管证书；</li>
-<li> apply：申请免费证书。</li>
-      */
-    CertType: string;
-    /**
-      * 选择托管证书时填入相应证书 ID。
-      */
-    CertId?: Array<string>;
 }
 /**
  * DescribeSecurityPortraitRules请求参数结构体
@@ -5634,24 +5485,13 @@ export interface ModifyApplicationProxyRequest {
     Ipv6?: Ipv6;
 }
 /**
- * ModifyAliasDomainStatus请求参数结构体
+ * ModifyLogTopicTask返回参数结构体
  */
-export interface ModifyAliasDomainStatusRequest {
+export interface ModifyLogTopicTaskResponse {
     /**
-      * 站点 ID。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    ZoneId: string;
-    /**
-      * 别称域名状态，取值有：
-<li> false：开启别称域名；</li>
-<li> true：关闭别称域名。</li>
-      */
-    Paused: boolean;
-    /**
-      * 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：
-<li>target-name<br>   按照【<strong>目标域名名称</strong>】进行过滤。<br>   类型：String<br>   必选：否<li>alias-id<br>   按照【<strong>别称域名ID</strong>】进行过滤。<br>   类型：String<br>   必选：否<li>alias-name<br>   按照【<strong>别称域名名称</strong>】进行过滤。<br>   类型：String<br>   必选：否</li>
-      */
-    Filters?: Array<Filter>;
+    RequestId?: string;
 }
 /**
  * 规则引擎可应用于匹配请求的设置列表及其详细信息
@@ -5870,19 +5710,6 @@ export interface WafGroupDetail {
       * 动作。
       */
     Action: string;
-}
-/**
- * CreateAliasDomain返回参数结构体
- */
-export interface CreateAliasDomainResponse {
-    /**
-      * 别称域名 ID。
-      */
-    AliasId: string;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
 }
 /**
  * 回源时携带客户端IP所属地域信息，值的格式为ISO-3166-1两位字母代码。
@@ -6175,15 +6002,6 @@ export interface RuleChoicePropertiesItem {
  * ModifyAlarmConfig返回参数结构体
  */
 export interface ModifyAlarmConfigResponse {
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * ModifyAliasDomainStatus返回参数结构体
- */
-export interface ModifyAliasDomainStatusResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -7455,9 +7273,18 @@ export interface RuleRewriteActionParams {
     Values: Array<string>;
 }
 /**
- * ModifyAliasDomain返回参数结构体
+ * DescribeBotClientIpList返回参数结构体
  */
-export interface ModifyAliasDomainResponse {
+export interface DescribeBotClientIpListResponse {
+    /**
+      * 客户端Ip相关数据列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Data: Array<SecClientIp>;
+    /**
+      * 查询结果的总条数。
+      */
+    TotalCount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -7949,15 +7776,6 @@ export interface UpstreamHttp2 {
  * ReclaimAliasDomain返回参数结构体
  */
 export interface ReclaimAliasDomainResponse {
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * DeleteAliasDomain返回参数结构体
- */
-export interface DeleteAliasDomainResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -8541,53 +8359,17 @@ export interface DescribeBotClientIpListRequest {
     Area?: string;
 }
 /**
- * 别称域名信息。
+ * 规则引擎HTTP请求头/响应头类型的动作
  */
-export interface AliasDomain {
+export interface RewriteAction {
     /**
-      * 别称域名 ID。
+      * 功能名称，功能名称填写规范可调用接口 [查询规则引擎的设置参数](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) 查看。
       */
-    AliasId: string;
+    Action: string;
     /**
-      * 别称域名名称。
+      * 参数。
       */
-    AliasName: string;
-    /**
-      * 站点 ID。
-      */
-    ZoneId: string;
-    /**
-      * 目标域名名称。
-      */
-    TargetName: string;
-    /**
-      * 别称域名状态，取值有：
-<li> active：已生效； </li>
-<li> pending：部署中；</li>
-<li> conflict：被找回。 </li>
-<li> stop：已停用；</li>
-<li> deleted：已删除。 </li>
-      */
-    Status: string;
-    /**
-      * 封禁模式，取值有：
-<li> 0：未封禁； </li>
-<li> 11：合规封禁；</li>
-<li> 14：未备案封禁。</li>
-      */
-    ForbidMode: number;
-    /**
-      * 目标域名是否被封禁。
-      */
-    TargetForbid: boolean;
-    /**
-      * 别称域名创建时间。
-      */
-    CreatedOn: string;
-    /**
-      * 别称域名修改时间。
-      */
-    ModifiedOn: string;
+    Parameters: Array<RuleRewriteActionParams>;
 }
 /**
  * IP黑白名单详细规则
@@ -8893,17 +8675,17 @@ export interface AclUserRule {
     ResponseCode?: number;
 }
 /**
- * 规则引擎HTTP请求头/响应头类型的动作
+ * Top数据的详细信息
  */
-export interface RewriteAction {
+export interface TopDetailData {
     /**
-      * 功能名称，功能名称填写规范可调用接口 [查询规则引擎的设置参数](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) 查看。
+      * 字段名。
       */
-    Action: string;
+    Key: string;
     /**
-      * 参数。
+      * 字段值。
       */
-    Parameters: Array<RuleRewriteActionParams>;
+    Value: number;
 }
 /**
  * DescribeOverviewL7Data请求参数结构体

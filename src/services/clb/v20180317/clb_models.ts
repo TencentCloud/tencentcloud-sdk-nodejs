@@ -527,6 +527,21 @@ export interface DescribeLoadBalancerTrafficResponse {
 }
 
 /**
+ * CLB监听器或规则绑定的多证书信息
+ */
+export interface MultiCertInfo {
+  /**
+   * 认证类型，UNIDIRECTIONAL：单向认证，MUTUAL：双向认证
+   */
+  SSLMode: string
+
+  /**
+   * 监听器或规则证书列表，单双向认证，多本服务端证书算法类型不能重复;若SSLMode为双向认证，证书列表必须包含一本ca证书。
+   */
+  CertList: Array<CertInfo>
+}
+
+/**
  * ModifyRule请求参数结构体
  */
 export interface ModifyRuleRequest {
@@ -2070,7 +2085,7 @@ export interface ModifyListenerRequest {
   HealthCheck?: HealthCheck
 
   /**
-   * 证书相关信息，此参数仅适用于HTTPS/TCP_SSL监听器。
+   * 证书相关信息，此参数仅适用于HTTPS/TCP_SSL监听器；此参数和MultiCertInfo不能同时传入。
    */
   Certificate?: CertificateInput
 
@@ -2104,6 +2119,11 @@ export interface ModifyListenerRequest {
    * 会话保持类型。NORMAL表示默认会话保持类型。QUIC_CID表示根据Quic Connection ID做会话保持。QUIC_CID只支持UDP协议。
    */
   SessionType?: string
+
+  /**
+   * 证书信息，支持同时传入不同算法类型的多本服务端证书；此参数仅适用于未开启SNI特性的HTTPS监听器。此参数和Certificate不能同时传入。
+   */
+  MultiCertInfo?: MultiCertInfo
 }
 
 /**
@@ -2531,6 +2551,21 @@ export interface DescribeResourcesResponse {
 }
 
 /**
+ * ModifyTargetGroupInstancesWeight请求参数结构体
+ */
+export interface ModifyTargetGroupInstancesWeightRequest {
+  /**
+   * 目标组ID。
+   */
+  TargetGroupId: string
+
+  /**
+   * 待修改权重的服务器数组。
+   */
+  TargetGroupInstances: Array<TargetGroupInstance>
+}
+
+/**
  * ManualRewrite返回参数结构体
  */
 export interface ManualRewriteResponse {
@@ -2665,7 +2700,7 @@ export interface ModifyDomainAttributesRequest {
   NewDomain?: string
 
   /**
-   * 域名相关的证书信息，注意，仅对启用SNI的监听器适用。
+   * 域名相关的证书信息，注意，仅对启用SNI的监听器适用，不可和MultiCertInfo 同时传入。
    */
   Certificate?: CertificateInput
 
@@ -2688,6 +2723,11 @@ export interface ModifyDomainAttributesRequest {
    * 要修改的新域名列表。NewDomain和NewDomains只能传一个。
    */
   NewDomains?: Array<string>
+
+  /**
+   * 域名相关的证书信息，注意，仅对启用SNI的监听器适用；支持同时传入多本算法类型不同的服务器证书，不可和MultiCertInfo 同时传入。
+   */
+  MultiCertInfo?: MultiCertInfo
 }
 
 /**
@@ -3367,28 +3407,28 @@ export interface DescribeTargetHealthResponse {
 }
 
 /**
- * DescribeTargetGroupInstances返回参数结构体
+ * 证书信息
  */
-export interface DescribeTargetGroupInstancesResponse {
+export interface CertInfo {
   /**
-   * 本次查询的结果数量。
+   * 证书 ID，如果不填写此项则必须上传证书内容，包括CertName, CertContent，若为服务端证书必须包含CertKey。
    */
-  TotalCount: number
+  CertId?: string
 
   /**
-   * 绑定的服务器信息。
+   * 上传证书的名称，如果没有 CertId，则此项必传。
    */
-  TargetGroupInstanceSet: Array<TargetGroupBackend>
+  CertName?: string
 
   /**
-   * 实际统计数量，不受Limit、Offset、CAM的影响。
+   * 上传证书的公钥，如果没有 CertId，则此项必传。
    */
-  RealCount: number
+  CertContent?: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 上传服务端证书的私钥，如果没有 CertId，则此项必传。
    */
-  RequestId?: string
+  CertKey?: string
 }
 
 /**
@@ -3526,7 +3566,7 @@ export interface CreateListenerRequest {
   HealthCheck?: HealthCheck
 
   /**
-   * 证书相关信息，此参数仅适用于TCP_SSL监听器和未开启SNI特性的HTTPS监听器。
+   * 证书相关信息，此参数仅适用于TCP_SSL监听器和未开启SNI特性的HTTPS监听器。此参数和MultiCertInfo不能同时传入。
    */
   Certificate?: CertificateInput
 
@@ -3570,6 +3610,11 @@ export interface CreateListenerRequest {
    * 解绑后端目标时，是否发RST给客户端，此参数仅适用于TCP监听器。
    */
   DeregisterTargetRst?: boolean
+
+  /**
+   * 证书信息，支持同时传入不同算法类型的多本服务端证书；此参数仅适用于未开启SNI特性的HTTPS监听器。此参数和Certificate不能同时传入。
+   */
+  MultiCertInfo?: MultiCertInfo
 }
 
 /**
@@ -4506,18 +4551,28 @@ export interface CreateLoadBalancerSnatIpsRequest {
 }
 
 /**
- * ModifyTargetGroupInstancesWeight请求参数结构体
+ * DescribeTargetGroupInstances返回参数结构体
  */
-export interface ModifyTargetGroupInstancesWeightRequest {
+export interface DescribeTargetGroupInstancesResponse {
   /**
-   * 目标组ID。
+   * 本次查询的结果数量。
    */
-  TargetGroupId: string
+  TotalCount: number
 
   /**
-   * 待修改权重的服务器数组。
+   * 绑定的服务器信息。
    */
-  TargetGroupInstances: Array<TargetGroupInstance>
+  TargetGroupInstanceSet: Array<TargetGroupBackend>
+
+  /**
+   * 实际统计数量，不受Limit、Offset、CAM的影响。
+   */
+  RealCount: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4638,7 +4693,7 @@ export interface RuleInput {
   HealthCheck?: HealthCheck
 
   /**
-   * 证书信息
+   * 证书信息；此参数和MultiCertInfo不能同时传入。
    */
   Certificate?: CertificateInput
 
@@ -4687,6 +4742,11 @@ export interface RuleInput {
    * 转发规则的域名列表。每个域名的长度限制为：1~80。Domain和Domains只需要传一个，单域名规则传Domain，多域名规则传Domains。
    */
   Domains?: Array<string>
+
+  /**
+   * 证书信息，支持同时传入不同算法类型的多本服务端证书；此参数和Certificate不能同时传入。
+   */
+  MultiCertInfo?: MultiCertInfo
 }
 
 /**

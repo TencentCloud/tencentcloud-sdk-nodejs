@@ -40,6 +40,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("LinkClusterList", req, cb);
     }
     /**
+     * 关联Prometheus
+     */
+    async LinkPrometheus(req, cb) {
+        return this.request("LinkPrometheus", req, cb);
+    }
+    /**
      * 查询网格列表
      */
     async DescribeMeshList(req, cb) {
@@ -50,6 +56,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async UnlinkCluster(req, cb) {
         return this.request("UnlinkCluster", req, cb);
+    }
+    /**
+     * 解除关联Prometheus
+     */
+    async UnlinkPrometheus(req, cb) {
+        return this.request("UnlinkPrometheus", req, cb);
     }
     /**
      * 修改网格

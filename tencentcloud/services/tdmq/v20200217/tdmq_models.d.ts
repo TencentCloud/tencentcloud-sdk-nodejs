@@ -474,6 +474,69 @@ export interface RocketMQVipInstance {
     SpecName: string;
 }
 /**
+ * RabbitMQ专享实例信息
+ */
+export interface RabbitMQVipInstance {
+    /**
+      * 实例id
+      */
+    InstanceId: string;
+    /**
+      * 实例名称
+      */
+    InstanceName: string;
+    /**
+      * 实例版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InstanceVersion: string;
+    /**
+      * 实例状态，0表示创建中，1表示正常，2表示隔离中，3表示已销毁，4 - 异常, 5 - 发货失败
+      */
+    Status: number;
+    /**
+      * 节点数量
+      */
+    NodeCount: number;
+    /**
+      * 实例配置规格名称
+      */
+    ConfigDisplay: string;
+    /**
+      * 峰值TPS
+      */
+    MaxTps: number;
+    /**
+      * 峰值带宽，Mbps为单位
+      */
+    MaxBandWidth: number;
+    /**
+      * 存储容量，GB为单位
+      */
+    MaxStorage: number;
+    /**
+      * 实例到期时间，毫秒为单位
+      */
+    ExpireTime: number;
+    /**
+      * 自动续费标记，0表示默认状态(用户未设置，即初始状态即手动续费)， 1表示自动续费，2表示明确不自动续费(用户设置)
+      */
+    AutoRenewFlag: number;
+    /**
+      * 0-后付费，1-预付费
+      */
+    PayMode: number;
+    /**
+      * 备注信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Remark: string;
+    /**
+      * 实例配置ID
+      */
+    SpecName: string;
+}
+/**
  * DescribeCmqQueues返回参数结构体
  */
 export interface DescribeCmqQueuesResponse {
@@ -507,6 +570,23 @@ export interface DescribeAllTenantsResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DescribeRabbitMQNodeList请求参数结构体
+ */
+export interface DescribeRabbitMQNodeListRequest {
+    /**
+      * 不适用，默认参数
+      */
+    InstanceId: string;
+    /**
+      * 偏移量
+      */
+    Offset?: number;
+    /**
+      * 一页限制
+      */
+    Limit?: number;
 }
 /**
  * DescribeNamespaceBundlesOpt返回参数结构体
@@ -2242,6 +2322,23 @@ export interface ModifyCmqTopicAttributeRequest {
     Trace?: boolean;
 }
 /**
+ * DescribeRabbitMQVipInstances返回参数结构体
+ */
+export interface DescribeRabbitMQVipInstancesResponse {
+    /**
+      * 未分页的总数目
+      */
+    TotalCount: number;
+    /**
+      * 实例信息列表
+      */
+    Instances: Array<RabbitMQVipInstance>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DeleteRoles请求参数结构体
  */
 export interface DeleteRolesRequest {
@@ -2330,6 +2427,24 @@ export interface ModifyRoleRequest {
       * 必填字段，集群Id
       */
     ClusterId?: string;
+}
+/**
+ * DescribeRabbitMQNodeList返回参数结构体
+ */
+export interface DescribeRabbitMQNodeListResponse {
+    /**
+      * 集群列表数量
+      */
+    TotalCount: number;
+    /**
+      * 集群列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NodeList: Array<RabbitMQPrivateNode>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * SendMessages返回参数结构体
@@ -5278,6 +5393,16 @@ export interface CreateAMQPRouteRelationRequest {
     RoutingKey?: string;
 }
 /**
+ * RabbitMQ节点信息
+ */
+export interface RabbitMQPrivateNode {
+    /**
+      * 节点名字
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NodeName: string;
+}
+/**
  * DeleteCmqSubscribe返回参数结构体
  */
 export interface DeleteCmqSubscribeResponse {
@@ -5435,6 +5560,23 @@ export interface DescribeRocketMQVipInstancesResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DescribeRabbitMQVipInstances请求参数结构体
+ */
+export interface DescribeRabbitMQVipInstancesRequest {
+    /**
+      * 查询条件过滤器
+      */
+    Filters?: Array<Filter>;
+    /**
+      * 查询数目上限，默认20
+      */
+    Limit?: number;
+    /**
+      * 查询起始位置
+      */
+    Offset?: number;
 }
 /**
  * 租户AMQP集群详细信息

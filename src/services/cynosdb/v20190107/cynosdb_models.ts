@@ -1358,6 +1358,16 @@ export interface DescribeClusterDetailRequest {
 }
 
 /**
+ * DeleteBackup返回参数结构体
+ */
+export interface DeleteBackupResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 集群绑定的标签信息，包含标签键TagKey和标签值TagValue
  */
 export interface Tag {
@@ -2535,6 +2545,21 @@ export interface RollbackTimeRange {
    * 结束时间
    */
   TimeRangeEnd: string
+}
+
+/**
+ * OfflineInstance请求参数结构体
+ */
+export interface OfflineInstanceRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+
+  /**
+   * 实例ID数组
+   */
+  InstanceIdList: Array<string>
 }
 
 /**
@@ -4259,18 +4284,18 @@ export interface ModifyAccountParamsResponse {
 }
 
 /**
- * OfflineInstance请求参数结构体
+ * DeleteBackup请求参数结构体
  */
-export interface OfflineInstanceRequest {
+export interface DeleteBackupRequest {
   /**
    * 集群ID
    */
   ClusterId: string
 
   /**
-   * 实例ID数组
+   * 备份文件ID
    */
-  InstanceIdList: Array<string>
+  SnapshotIdList: Array<number>
 }
 
 /**

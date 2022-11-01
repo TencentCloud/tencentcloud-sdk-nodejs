@@ -79,12 +79,12 @@ export interface Subnet {
  */
 export interface DescribeSubnetRequest {
   /**
-   * 返回数量。
+   * 返回数量。Limit需要在[1, 100]之间。
    */
   Limit: number
 
   /**
-   * 偏移量。
+   * 偏移量。偏移量最小为0。
    */
   Offset: number
 
@@ -338,13 +338,13 @@ export interface DescribeUsgRuleResponse {
       * 安全组详情
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  SgRules?: Array<UsgRuleDetail>
+  SgRules: Array<UsgRuleDetail>
 
   /**
       * 安全组详情数量
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -432,7 +432,7 @@ export interface ResourceInfo {
   ZoneId: number
 
   /**
-      * 过期时间
+      * 过期时间（Epoch Unix Timestamp）
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ExpireTime: number
@@ -509,12 +509,12 @@ export interface ResourceInfo {
  */
 export interface DescribeVpcRequest {
   /**
-   * 返回偏移量。
+   * 返回偏移量。Offset最小为0。
    */
   Offset: number
 
   /**
-   * 返回数量。
+   * 返回数量。Limit需要在[1, 100]之间。
    */
   Limit: number
 
@@ -628,7 +628,7 @@ export interface DescribeVsmAttributesResponse {
   ZoneId: number
 
   /**
-   * 过期时间
+   * 资源过期时间，以时间戳形式展示。
    */
   ExpireTime: number
 

@@ -1078,6 +1078,12 @@ export interface TopicInfo {
   Index: boolean
 
   /**
+      * 云产品标识，日志主题由其它云产品创建时，该字段会显示云产品名称，例如CDN、TKE
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AssumerName: string
+
+  /**
    * 创建时间
    */
   CreateTime: string
@@ -1116,6 +1122,18 @@ export interface TopicInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Period: number
+
+  /**
+      * 云产品二级标识，日志主题由其它云产品创建时，该字段会显示云产品名称及其日志类型的二级分类，例如TKE-Audit、TKE-Event。部分云产品仅有云产品标识(AssumerName)，无该字段。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SubAssumerName: string
+
+  /**
+      * 日志主题描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Describes: string
 }
 
 /**
@@ -2371,6 +2389,12 @@ export interface LogsetInfo {
   CreateTime: string
 
   /**
+      * 云产品标识，日志集由其它云产品创建时，该字段会显示云产品名称，例如CDN、TKE
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AssumerName: string
+
+  /**
       * 日志集绑定的标签
 注意：此字段可能返回 null，表示取不到有效值。
       */
@@ -2382,7 +2406,7 @@ export interface LogsetInfo {
   TopicCount: number
 
   /**
-   * 若AssumerUin非空，则表示创建该日志集的服务方角色
+   * 若AssumerName非空，则表示创建该日志集的服务方角色
    */
   RoleName: string
 }

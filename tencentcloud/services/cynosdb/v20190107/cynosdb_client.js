@@ -82,10 +82,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeParamTemplates", req, cb);
     }
     /**
-     * SetRenewFlag设置实例的自动续费功能
+     * 为集群删除手动备份，无法删除自动备份
      */
-    async SetRenewFlag(req, cb) {
-        return this.request("SetRenewFlag", req, cb);
+    async DeleteBackup(req, cb) {
+        return this.request("DeleteBackup", req, cb);
     }
     /**
      * 本接口（DescribeClusterInstanceGrps）用于查询实例组
@@ -98,6 +98,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async OfflineCluster(req, cb) {
         return this.request("OfflineCluster", req, cb);
+    }
+    /**
+     * SetRenewFlag设置实例的自动续费功能
+     */
+    async SetRenewFlag(req, cb) {
+        return this.request("SetRenewFlag", req, cb);
     }
     /**
      * 此接口（ModifyBackupName）用于修改备份文件备注名。

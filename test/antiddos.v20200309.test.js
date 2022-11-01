@@ -38,6 +38,16 @@ it("antiddos.v20200309.ModifyDDoSBlackWhiteIpList", async function () {
     }
 })
 
+it("antiddos.v20200309.DescribePendingRiskInfo", async function () {
+    try {
+       const data = await client.DescribePendingRiskInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("antiddos.v20200309.DescribeL7RulesBySSLCertId", async function () {
     try {
        const data = await client.DescribeL7RulesBySSLCertId({})

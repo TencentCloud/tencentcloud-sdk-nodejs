@@ -128,6 +128,16 @@ it("tdmq.v20200217.DeleteRocketMQGroup", async function () {
     }
 })
 
+it("tdmq.v20200217.DescribeRabbitMQVipInstances", async function () {
+    try {
+       const data = await client.DescribeRabbitMQVipInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tdmq.v20200217.RewindCmqQueue", async function () {
     try {
        const data = await client.RewindCmqQueue({})
@@ -531,6 +541,16 @@ it("tdmq.v20200217.DeleteEnvironmentRoles", async function () {
 it("tdmq.v20200217.ResetMsgSubOffsetByTimestamp", async function () {
     try {
        const data = await client.ResetMsgSubOffsetByTimestamp({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tdmq.v20200217.DescribeRabbitMQNodeList", async function () {
+    try {
+       const data = await client.DescribeRabbitMQNodeList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

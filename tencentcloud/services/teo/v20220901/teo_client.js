@@ -208,10 +208,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreatePrefetchTask", req, cb);
     }
     /**
-     * 删除别称域名。
+     * 本接口（DescribeLogTopicTaskDetail）用于获取日志推送任务详细信息。
      */
-    async DeleteAliasDomain(req, cb) {
-        return this.request("DeleteAliasDomain", req, cb);
+    async DescribeLogTopicTaskDetail(req, cb) {
+        return this.request("DescribeLogTopicTaskDetail", req, cb);
     }
     /**
      * 本接口（DescribeOverviewL7Data）用于查询七层监控类时序流量数据。
@@ -346,22 +346,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBotData", req, cb);
     }
     /**
-     * 创建别称域名。
-     */
-    async CreateAliasDomain(req, cb) {
-        return this.request("CreateAliasDomain", req, cb);
-    }
-    /**
      * 本接口（DescribeWebProtectionHitRuleDetail）用于查询CC防护命中规则详情列表。
      */
     async DescribeWebProtectionHitRuleDetail(req, cb) {
         return this.request("DescribeWebProtectionHitRuleDetail", req, cb);
-    }
-    /**
-     * 修改别称域名状态。
-     */
-    async ModifyAliasDomainStatus(req, cb) {
-        return this.request("ModifyAliasDomainStatus", req, cb);
     }
     /**
      * 本接口（DescribeTopL7CacheData）用于查询七层缓存分析topN流量数据。
@@ -398,12 +386,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifySecurityPolicy(req, cb) {
         return this.request("ModifySecurityPolicy", req, cb);
-    }
-    /**
-     * 本接口（DescribeLogTopicTaskDetail）用于获取日志推送任务详细信息。
-     */
-    async DescribeLogTopicTaskDetail(req, cb) {
-        return this.request("DescribeLogTopicTaskDetail", req, cb);
     }
     /**
      * 修改规则引擎规则优先级
@@ -616,12 +598,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SwitchLogTopicTask", req, cb);
     }
     /**
-     * 修改别称域名。
-     */
-    async ModifyAliasDomain(req, cb) {
-        return this.request("ModifyAliasDomain", req, cb);
-    }
-    /**
      * 用于查询 DNSSEC 相关信息
      */
     async DescribeDnssec(req, cb) {
@@ -758,12 +734,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeWebManagedRulesData(req, cb) {
         return this.request("DescribeWebManagedRulesData", req, cb);
-    }
-    /**
-     * 查询别称域名信息列表。
-     */
-    async DescribeAliasDomains(req, cb) {
-        return this.request("DescribeAliasDomains", req, cb);
     }
     /**
      * 获取计费数据。

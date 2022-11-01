@@ -108,9 +108,9 @@ it("cynosdb.v20190107.DescribeParamTemplates", async function () {
     }
 })
 
-it("cynosdb.v20190107.SetRenewFlag", async function () {
+it("cynosdb.v20190107.DeleteBackup", async function () {
     try {
-       const data = await client.SetRenewFlag({})
+       const data = await client.DeleteBackup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -131,6 +131,16 @@ it("cynosdb.v20190107.DescribeClusterInstanceGrps", async function () {
 it("cynosdb.v20190107.OfflineCluster", async function () {
     try {
        const data = await client.OfflineCluster({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.SetRenewFlag", async function () {
+    try {
+       const data = await client.SetRenewFlag({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
