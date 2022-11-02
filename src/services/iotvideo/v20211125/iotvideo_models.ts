@@ -133,6 +133,11 @@ lye1y30d：低功耗事件30天年套餐。
    * 如果当前设备已开启云存套餐，Override=1会使用新套餐覆盖原有套餐。不传此参数则默认为0。
    */
   Override?: number
+
+  /**
+   * 套餐列表顺序：PackageQueue=front会立即使用新购买的套餐，新购套餐结束后，列表中下一个未过期的套餐继续生效；PackageQueue=end会等设备当前所有已购买套餐过期后才会生效新购套餐。与Override参数不能同时使用。
+   */
+  PackageQueue?: string
 }
 
 /**

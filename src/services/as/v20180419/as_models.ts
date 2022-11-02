@@ -2546,7 +2546,7 @@ export interface DescribeAutoScalingInstancesResponse {
 }
 
 /**
- * 描述了实例的增强服务启用情况与其设置，如云安全，云监控等实例 Agent。
+ * 描述了实例的增强服务启用情况与其设置，如云安全，云监控，自动化助手等实例 Agent。
  */
 export interface EnhancedService {
   /**
@@ -2558,6 +2558,22 @@ export interface EnhancedService {
    * 开启云监控服务。若不指定该参数，则默认开启云监控服务。
    */
   MonitorService?: RunMonitorServiceEnabled
+
+  /**
+   * 开启自动化助手服务。若不指定该参数，则默认逻辑与CVM保持一致。注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AutomationService?: Array<RunAutomationServiceEnabled>
+}
+
+/**
+ * 描述了 “自动化助手” 服务相关的信息
+ */
+export interface RunAutomationServiceEnabled {
+  /**
+      * 是否开启[自动化助手](https://cloud.tencent.com/document/product/1340)服务。取值范围：<br><li>TRUE：表示开启自动化助手服务<br><li>FALSE：表示不开启自动化助手服务
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Enabled?: boolean
 }
 
 /**

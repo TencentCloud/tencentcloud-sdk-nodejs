@@ -5356,7 +5356,7 @@ export interface KafkaParam {
       */
     UseAutoCreateTopic?: boolean;
     /**
-      * 写入Topic时是否进行压缩，不开启填"none"，开启的话，可选择"gzip", "snappy", "lz4"中的一个进行填写。
+      * 写入Topic时是否进行压缩，不开启填"none"，开启的话，填写"open"。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     CompressionType?: string;

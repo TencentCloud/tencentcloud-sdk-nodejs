@@ -114,6 +114,20 @@ export interface DescribeProductsRequest {
     CorpId?: number;
 }
 /**
+ * CreateCorporationOrder返回参数结构体
+ */
+export interface CreateCorporationOrderResponse {
+    /**
+      * 企业ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CorpId: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * ModifyProduct返回参数结构体
  */
 export interface ModifyProductResponse {
@@ -1697,6 +1711,47 @@ export interface DescribeTraceCodesResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * CreateCorporationOrder请求参数结构体
+ */
+export interface CreateCorporationOrderRequest {
+    /**
+      * 企业名称
+      */
+    CorpName: string;
+    /**
+      * 所有者ID
+      */
+    Owner: string;
+    /**
+      * 溯源码额度
+      */
+    CodeQuota: number;
+    /**
+      * 额度过期时间
+      */
+    ExpireTime: string;
+    /**
+      * 金额
+      */
+    Amount: number;
+    /**
+      * 企业ID
+      */
+    CorpId?: number;
+    /**
+      * 联系人
+      */
+    ContactPerson?: string;
+    /**
+      * 联系电话
+      */
+    ContactNumber?: string;
+    /**
+      * 备注
+      */
+    Remark?: string;
 }
 /**
  * CreateTraceCodes返回参数结构体

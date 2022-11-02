@@ -376,7 +376,7 @@ export interface CreateClusterRequest {
   ComputeNodeCount?: number
 
   /**
-   * 调度器类型。<br><li>SGE：SGE调度器。<br><li>SLURM：SLURM调度器。
+   * 调度器类型。默认取值：SLURM。<br><li>SGE：SGE调度器。<br><li>SLURM：SLURM调度器。
    */
   SchedulerType?: string
 
@@ -415,7 +415,7 @@ false（默认）：发送正常请求，通过检查后直接创建实例
   DryRun?: boolean
 
   /**
-      * 域名字服务类型。默认值：NIS
+      * 域名字服务类型。默认取值：NIS。
 <li>NIS：NIS域名字服务。
       */
   AccountType?: string

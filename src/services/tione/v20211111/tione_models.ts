@@ -3607,7 +3607,7 @@ export interface ScheduledAction {
   ScheduleStop?: boolean
 
   /**
-   * 要执行定时停止的时间，格式：“2022-01-26 19:46:22”
+   * 要执行定时停止的时间，格式：“2022-01-26T19:46:22+08:00”
    */
   ScheduleStopTime?: string
 }

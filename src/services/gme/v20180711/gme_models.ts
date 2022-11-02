@@ -1126,28 +1126,6 @@ export interface AgeDetectTaskResult {
 }
 
 /**
- * ModifyRoomInfo返回参数结构体
- */
-export interface ModifyRoomInfoResponse {
-  /**
-      * 操作结果, 0成功, 非0失败
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Result: number
-
-  /**
-      * 错误信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ErrMsg: string
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * 语音检测结果返回
  */
 export interface DescribeScanResult {
@@ -1265,28 +1243,6 @@ export interface ScanDetail {
    * 关键字在音频的结束时间，从0开始的偏移量,，单位为毫秒
    */
   EndTime: number
-}
-
-/**
- * ModifyRoomInfo请求参数结构体
- */
-export interface ModifyRoomInfoRequest {
-  /**
-   * 应用ID，登录[控制台 - 服务管理](https://console.cloud.tencent.com/gamegme)创建应用得到的AppID
-   */
-  SdkAppId: number
-
-  /**
-   * 房间id
-   */
-  RoomId: number
-
-  /**
-      * 301 启动推流
-302 停止推流
-303 重置RTMP连接
-      */
-  OperationType: number
 }
 
 /**

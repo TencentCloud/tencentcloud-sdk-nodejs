@@ -52,12 +52,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetCustomizationList", req, cb);
     }
     /**
-     * 修改房间信息
-     */
-    async ModifyRoomInfo(req, cb) {
-        return this.request("ModifyRoomInfo", req, cb);
-    }
-    /**
      * 拉取用户在房间得进出时间
      */
     async DescribeUserInAndOutTime(req, cb) {

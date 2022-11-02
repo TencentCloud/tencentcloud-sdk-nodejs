@@ -161,6 +161,10 @@ export interface OverrideTranscodeParameter {
       * 极速高清转码参数。
       */
     TEHDConfig?: TEHDConfigForUpdate;
+    /**
+      * 字幕流配置参数。
+      */
+    SubtitleTemplate?: SubtitleTemplate;
 }
 /**
  * 智能分类任务输入类型
@@ -622,7 +626,7 @@ export interface ModifySampleSnapshotTemplateRequest {
       */
     SampleInterval?: number;
     /**
-      * 图片格式，取值为 jpg 和 png。
+      * 图片格式，取值为 jpg、png、webp。
       */
     Format?: string;
     /**
@@ -883,6 +887,10 @@ export interface CreateImageSpriteTemplateRequest {
       * 模板描述信息，长度限制：256 个字符。
       */
     Comment?: string;
+    /**
+      * 图片格式，取值为 jpg、png、webp。默认为 jpg。
+      */
+    Format?: string;
 }
 /**
  * 指定时间点截图信息
@@ -1738,13 +1746,23 @@ export interface TagConfigureInfo {
     Switch: string;
 }
 /**
- * 文本关键词识别输出。
+ * DescribeWordSamples返回参数结构体
  */
-export interface AiRecognitionTaskOcrWordsResultOutput {
+export interface DescribeWordSamplesResponse {
     /**
-      * 文本关键词识别结果集。
+      * 符合条件的记录总数。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    ResultSet: Array<AiRecognitionTaskOcrWordsResultItem>;
+    TotalCount?: number;
+    /**
+      * 关键词信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    WordSet?: Array<AiSampleWord>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * AI 样本管理，人脸信息。
@@ -1890,23 +1908,13 @@ export interface UserDefineAsrTextReviewTemplateInfo {
     ReviewConfidence?: number;
 }
 /**
- * DescribeWordSamples返回参数结构体
+ * 文本关键词识别输出。
  */
-export interface DescribeWordSamplesResponse {
+export interface AiRecognitionTaskOcrWordsResultOutput {
     /**
-      * 符合条件的记录总数。
-注意：此字段可能返回 null，表示取不到有效值。
+      * 文本关键词识别结果集。
       */
-    TotalCount?: number;
-    /**
-      * 关键词信息。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    WordSet?: Array<AiSampleWord>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    ResultSet: Array<AiRecognitionTaskOcrWordsResultItem>;
 }
 /**
  * 智能按帧标签结果信息
@@ -3442,8 +3450,11 @@ export interface ProcessMediaRequest {
     SessionContext?: string;
     /**
       * 编排ID。
-注意1：对于OutputStorage、OutputDir，如果编排任务里没有配置，将采用请求里对应参数。
-注意2：对于TaskNotifyConfig，如果编排任务里没有配置，将采用请求里对应的参数。
+注意1：对于OutputStorage、OutputDir参数：
+<li>当服务编排中子任务节点配置了OutputStorage、OutputDir时，该子任务节点中配置的输出作为子任务的输出。</li>
+<li>当服务编排中子任务节点没有配置OutputStorage、OutputDir时，若创建任务接口（ProcessMedia）有输出，将覆盖原有编排的默认输出。</li>
+注意2：对于TaskNotifyConfig参数，若创建任务接口（ProcessMedia）有设置，将覆盖原有编排的默认回调。
+
 注意3：编排的 Trigger 只是用来自动化触发场景，在手动发起的请求中已经配置的 Trigger 无意义。
       */
     ScheduleId?: number;
@@ -3507,6 +3518,15 @@ export interface MediaProcessTaskSnapshotByTimeOffsetResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Output: MediaSnapshotByTimeOffsetItem;
+}
+/**
+ * 翻译的输入。
+ */
+export interface AiRecognitionTaskTransTextResultInput {
+    /**
+      * 翻译模板 ID。
+      */
+    Definition: number;
 }
 /**
  * 综合增强配置
@@ -4965,6 +4985,10 @@ export interface ImageSpriteTemplate {
       * 模板描述信息。
       */
     Comment: string;
+    /**
+      * 图片格式。
+      */
+    Format: string;
 }
 /**
  * 文本全文识别片段。
@@ -5226,6 +5250,10 @@ export interface AiRecognitionTaskAsrWordsSegmentItem {
       */
     Confidence: number;
 }
+/**
+ * 字幕流配置参数。
+ */
+export declare type SubtitleTemplate = null;
 /**
  * 鉴黄任务控制参数。
  */
@@ -6275,6 +6303,31 @@ export interface DeleteWordSamplesResponse {
     RequestId?: string;
 }
 /**
+ * 直播实时翻译结果
+ */
+export interface LiveStreamTransTextRecognitionResult {
+    /**
+      * 识别文本。
+      */
+    Text: string;
+    /**
+      * 翻译片段起始的 PTS 时间，单位：秒。
+      */
+    StartPtsTime: number;
+    /**
+      * 翻译片段终止的 PTS 时间，单位：秒。
+      */
+    EndPtsTime: number;
+    /**
+      * 翻译片段置信度。取值：0~100。
+      */
+    Confidence: number;
+    /**
+      * 翻译文本。
+      */
+    Trans: string;
+}
+/**
  * 媒体处理任务中的水印参数类型
  */
 export interface WatermarkInput {
@@ -6887,6 +6940,7 @@ export interface LiveStreamAiRecognitionResultItem {
 <li>OcrWordsRecognition：文本关键词识别，</li>
 <li>AsrFullTextRecognition：语音全文识别，</li>
 <li>OcrFullTextRecognition：文本全文识别。</li>
+<li>TransTextRecognition：语音翻译。</li>
       */
     Type: string;
     /**
@@ -6914,6 +6968,10 @@ AsrFullTextRecognition 时有效。
 OcrFullTextRecognition 时有效。
       */
     OcrFullTextRecognitionResultSet: Array<LiveStreamOcrFullTextRecognitionResult>;
+    /**
+      * 翻译结果，当Type 为 TransTextRecognition 时有效。
+      */
+    TransTextRecognitionResultSet: Array<LiveStreamTransTextRecognitionResult>;
 }
 /**
  * DeleteImageSpriteTemplate请求参数结构体
@@ -7105,6 +7163,23 @@ PicUrlExpireTime 时间点后图片将被删除）。
     PicUrlExpireTime: string;
 }
 /**
+ * 翻译结果。
+ */
+export interface AiRecognitionTaskTransTextResultOutput {
+    /**
+      * 翻译片段列表。
+      */
+    SegmentSet: Array<AiRecognitionTaskTransTextSegmentItem>;
+    /**
+      * 字幕文件地址。
+      */
+    SubtitlePath: string;
+    /**
+      * 字幕文件存储位置。
+      */
+    OutputStorage: TaskOutputStorage;
+}
+/**
  * ModifySnapshotByTimeOffsetTemplate请求参数结构体
  */
 export interface ModifySnapshotByTimeOffsetTemplateRequest {
@@ -7142,7 +7217,7 @@ export interface ModifySnapshotByTimeOffsetTemplateRequest {
       */
     ResolutionAdaptive?: string;
     /**
-      * 图片格式，取值可以为 jpg 和 png。
+      * 图片格式，取值可以为 jpg、png、webp。
       */
     Format?: string;
     /**
@@ -7686,6 +7761,10 @@ export interface ModifyImageSpriteTemplateRequest {
       * 模板描述信息，长度限制：256 个字符。
       */
     Comment?: string;
+    /**
+      * 图片格式，取值可以为 jpg、png、webp。
+      */
+    Format?: string;
 }
 /**
  * 内容审核 Ocr 文字鉴违禁任务输入参数类型
@@ -8295,7 +8374,7 @@ export interface CreateSnapshotByTimeOffsetTemplateRequest {
       */
     ResolutionAdaptive?: string;
     /**
-      * 图片格式，取值可以为 jpg 和 png。默认为 jpg。
+      * 图片格式，取值可以为 jpg、png、webp。默认为 jpg。
       */
     Format?: string;
     /**
@@ -8397,7 +8476,7 @@ export interface CreateSampleSnapshotTemplateRequest {
       */
     ResolutionAdaptive?: string;
     /**
-      * 图片格式，取值为 jpg 和 png。默认为 jpg。
+      * 图片格式，取值为 jpg、png、webp。默认为 jpg。
       */
     Format?: string;
     /**
@@ -9046,6 +9125,36 @@ export interface AiAnalysisTaskCoverInput {
     Definition: number;
 }
 /**
+ * 翻译结果。
+ */
+export interface AiRecognitionTaskTransTextResult {
+    /**
+      * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
+      */
+    Status: string;
+    /**
+      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+      */
+    ErrCodeExt: string;
+    /**
+      * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
+      */
+    ErrCode: number;
+    /**
+      * 错误信息。
+      */
+    Message: string;
+    /**
+      * 翻译任务输入信息。
+      */
+    Input: AiRecognitionTaskTransTextResultInput;
+    /**
+      * 翻译任务输出信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Output: AiRecognitionTaskTransTextResultOutput;
+}
+/**
  * 编辑视频任务的输出
  */
 export interface EditMediaTaskOutput {
@@ -9143,6 +9252,31 @@ export interface DescribeAIRecognitionTemplatesRequest {
     Type?: string;
 }
 /**
+ * 翻译片段。
+ */
+export interface AiRecognitionTaskTransTextSegmentItem {
+    /**
+      * 识别片段置信度。取值：0~100。
+      */
+    Confidence: number;
+    /**
+      * 识别片段起始的偏移时间，单位：秒。
+      */
+    StartTimeOffset: number;
+    /**
+      * 识别片段终止的偏移时间，单位：秒。
+      */
+    EndTimeOffset: number;
+    /**
+      * 识别文本。
+      */
+    Text: string;
+    /**
+      * 翻译文本。
+      */
+    Trans: string;
+}
+/**
  * ModifyWatermarkTemplate返回参数结构体
  */
 export interface ModifyWatermarkTemplateResponse {
@@ -9166,6 +9300,7 @@ export interface AiRecognitionResult {
 <li>OcrWordsRecognition：文本关键词识别，</li>
 <li>AsrFullTextRecognition：语音全文识别，</li>
 <li>OcrFullTextRecognition：文本全文识别。</li>
+<li>TransTextRecognition：语音翻译。</li>
       */
     Type: string;
     /**
@@ -9198,4 +9333,10 @@ export interface AiRecognitionResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     OcrFullTextTask: AiRecognitionTaskOcrFullTextResult;
+    /**
+      * 翻译结果，当 Type 为
+ TransTextRecognition 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TransTextTask: AiRecognitionTaskTransTextResult;
 }

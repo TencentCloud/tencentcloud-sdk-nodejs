@@ -340,7 +340,7 @@ export interface DescribeLogListRequest {
       */
     Context?: string;
     /**
-      * 查询语句，参考控制台请求参数，语句长度最大为4096（必填）
+      * 查询语句，参考控制台请求参数，语句长度最大为4096（必填）例："id:120001 AND type:\"log\""
       */
     Query?: string;
     /**

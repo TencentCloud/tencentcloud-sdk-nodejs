@@ -1198,6 +1198,11 @@ export interface DescribeDevicesRequest {
    * 过滤条件，可按照部门ID进行过滤
    */
   DepartmentId?: string
+
+  /**
+   * 过滤条件，可按照标签键、标签进行过滤。如果同时指定标签键和标签过滤条件，它们之间为“AND”的关系
+   */
+  TagFilters?: Array<TagFilter>
 }
 
 /**
@@ -1455,6 +1460,21 @@ export interface CreateUserRequest {
 }
 
 /**
+ * 资产标签
+ */
+export interface TagFilter {
+  /**
+   * 标签键
+   */
+  TagKey: string
+
+  /**
+   * 标签值
+   */
+  TagValue?: Array<string>
+}
+
+/**
  * DeleteUsers返回参数结构体
  */
 export interface DeleteUsersResponse {
@@ -1668,6 +1688,11 @@ export interface DescribeDeviceGroupMembersRequest {
    * 所属部门ID
    */
   DepartmentId?: string
+
+  /**
+   * 过滤条件，可按照标签键、标签进行过滤。如果同时指定标签键和标签过滤条件，它们之间为“AND”的关系
+   */
+  TagFilters?: Array<TagFilter>
 }
 
 /**

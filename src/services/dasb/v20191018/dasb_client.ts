@@ -60,6 +60,7 @@ import {
   DescribeResourcesRequest,
   BindDeviceResourceResponse,
   CreateUserRequest,
+  TagFilter,
   DeleteUsersResponse,
   DescribeDeviceGroupsResponse,
   DescribeResourcesResponse,

@@ -228,6 +228,16 @@ it("trp.v20210515.CreateCustomPack", async function () {
     }
 })
 
+it("trp.v20210515.CreateCorporationOrder", async function () {
+    try {
+       const data = await client.CreateCorporationOrder({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("trp.v20210515.DeleteMerchant", async function () {
     try {
        const data = await client.DeleteMerchant({})

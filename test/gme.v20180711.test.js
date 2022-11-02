@@ -58,16 +58,6 @@ it("gme.v20180711.GetCustomizationList", async function () {
     }
 })
 
-it("gme.v20180711.ModifyRoomInfo", async function () {
-    try {
-       const data = await client.ModifyRoomInfo({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("gme.v20180711.DescribeUserInAndOutTime", async function () {
     try {
        const data = await client.DescribeUserInAndOutTime({})

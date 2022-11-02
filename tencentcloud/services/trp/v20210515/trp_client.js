@@ -154,6 +154,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateCustomPack", req, cb);
     }
     /**
+     * 以订单方式新建企业信息/配额信息
+     */
+    async CreateCorporationOrder(req, cb) {
+        return this.request("CreateCorporationOrder", req, cb);
+    }
+    /**
      * 删除商户
      */
     async DeleteMerchant(req, cb) {

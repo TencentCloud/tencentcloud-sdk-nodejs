@@ -20,6 +20,7 @@ import { ClientConfig } from "../../../common/interface"
 import {
   CodeBatch,
   DescribeProductsRequest,
+  CreateCorporationOrderResponse,
   ModifyProductResponse,
   ModifyProductRequest,
   ModifyCustomRuleRequest,
@@ -90,6 +91,7 @@ import {
   ModifyCodeBatchRequest,
   DescribeProductByIdRequest,
   DescribeTraceCodesResponse,
+  CreateCorporationOrderRequest,
   CreateTraceCodesResponse,
   DeleteTraceDataRequest,
   Merchant,
@@ -330,6 +332,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateCustomPackResponse) => void
   ): Promise<CreateCustomPackResponse> {
     return this.request("CreateCustomPack", req, cb)
+  }
+
+  /**
+   * 以订单方式新建企业信息/配额信息
+   */
+  async CreateCorporationOrder(
+    req: CreateCorporationOrderRequest,
+    cb?: (error: string, rep: CreateCorporationOrderResponse) => void
+  ): Promise<CreateCorporationOrderResponse> {
+    return this.request("CreateCorporationOrder", req, cb)
   }
 
   /**

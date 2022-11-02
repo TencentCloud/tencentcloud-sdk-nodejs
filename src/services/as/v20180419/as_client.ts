@@ -100,6 +100,7 @@ import {
   Instance,
   DescribeAutoScalingInstancesResponse,
   EnhancedService,
+  RunAutomationServiceEnabled,
   DeleteLaunchConfigurationResponse,
   DescribeScheduledActionsRequest,
   RunSecurityServiceEnabled,

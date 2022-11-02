@@ -73,11 +73,9 @@ import {
   UpdateScanUsersRequest,
   DeleteResult,
   AgeDetectTaskResult,
-  ModifyRoomInfoResponse,
   DescribeScanResult,
   AgeDetectTask,
   ScanDetail,
-  ModifyRoomInfoRequest,
   CreateAgeDetectTaskResponse,
   CreateAppRequest,
   RealtimeSpeechConf,
@@ -142,16 +140,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetCustomizationListResponse) => void
   ): Promise<GetCustomizationListResponse> {
     return this.request("GetCustomizationList", req, cb)
-  }
-
-  /**
-   * 修改房间信息
-   */
-  async ModifyRoomInfo(
-    req: ModifyRoomInfoRequest,
-    cb?: (error: string, rep: ModifyRoomInfoResponse) => void
-  ): Promise<ModifyRoomInfoResponse> {
-    return this.request("ModifyRoomInfo", req, cb)
   }
 
   /**
