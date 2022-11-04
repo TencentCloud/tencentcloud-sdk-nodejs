@@ -49,6 +49,7 @@ import {
   ModifyDBInstanceNameResponse,
   DescribeFlowResponse,
   CloneAccountResponse,
+  IsolateDedicatedDBInstanceRequest,
   ModifyAccountDescriptionResponse,
   DestroyDCDBInstanceRequest,
   OpenDBExtranetAccessResponse,
@@ -147,6 +148,7 @@ import {
   ModifyDBSyncModeRequest,
   DescribeProjectsResponse,
   CreateAccountResponse,
+  IsolateDedicatedDBInstanceResponse,
   RegionInfo,
   DescribeDatabaseObjectsRequest,
   UpgradeDCDBInstanceRequest,
@@ -370,6 +372,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: InitDCDBInstancesResponse) => void
   ): Promise<InitDCDBInstancesResponse> {
     return this.request("InitDCDBInstances", req, cb)
+  }
+
+  /**
+   * 本接口（IsolateDedicatedDBInstance）用于隔离独享云数据库实例。
+   */
+  async IsolateDedicatedDBInstance(
+    req: IsolateDedicatedDBInstanceRequest,
+    cb?: (error: string, rep: IsolateDedicatedDBInstanceResponse) => void
+  ): Promise<IsolateDedicatedDBInstanceResponse> {
+    return this.request("IsolateDedicatedDBInstance", req, cb)
   }
 
   /**

@@ -2546,7 +2546,7 @@ export interface DescribeAutoScalingInstancesResponse {
 }
 
 /**
- * 描述了实例的增强服务启用情况与其设置，如云安全，云监控，自动化助手等实例 Agent。
+ * 描述了实例的增强服务启用情况与其设置，如云安全，云监控等实例 Agent。
  */
 export interface EnhancedService {
   /**
@@ -2560,7 +2560,7 @@ export interface EnhancedService {
   MonitorService?: RunMonitorServiceEnabled
 
   /**
-   * 开启自动化助手服务。若不指定该参数，则默认逻辑与CVM保持一致。注意：此字段可能返回 null，表示取不到有效值。
+   * 该参数已废弃，查询时会返回空值，请勿使用。
    */
   AutomationService?: Array<RunAutomationServiceEnabled>
 }

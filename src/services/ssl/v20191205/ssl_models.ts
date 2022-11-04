@@ -2334,7 +2334,7 @@ export interface DescribeCertificatesRequest {
   Offset?: number
 
   /**
-   * 每页数量，默认20。
+   * 每页数量，默认20。最大1000
    */
   Limit?: number
 

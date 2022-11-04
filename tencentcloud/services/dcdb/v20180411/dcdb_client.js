@@ -145,6 +145,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("InitDCDBInstances", req, cb);
     }
     /**
+     * 本接口（IsolateDedicatedDBInstance）用于隔离独享云数据库实例。
+     */
+    async IsolateDedicatedDBInstance(req, cb) {
+        return this.request("IsolateDedicatedDBInstance", req, cb);
+    }
+    /**
      * 本接口（DescribeOrders）用于查询分布式数据库订单信息。传入订单ID来查询订单关联的分布式数据库实例，和对应的任务流程ID。
      */
     async DescribeOrders(req, cb) {

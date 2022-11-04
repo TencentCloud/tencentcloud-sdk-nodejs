@@ -195,6 +195,15 @@ export interface DeleteUserResponse {
     RequestId?: string;
 }
 /**
+ * TagRole返回参数结构体
+ */
+export interface TagRoleResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * GetRole请求参数结构体
  */
 export interface GetRoleRequest {
@@ -505,9 +514,9 @@ export interface DescribeRoleListRequest {
  */
 export declare type DescribeUserSAMLConfigRequest = null;
 /**
- * TagRole返回参数结构体
+ * DeleteAccessKey返回参数结构体
  */
-export interface TagRoleResponse {
+export interface DeleteAccessKeyResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -679,21 +688,18 @@ export interface DeleteUserPermissionsBoundaryRequest {
  */
 export declare type ListSAMLProvidersRequest = null;
 /**
- * ListGroups请求参数结构体
+ * CreateAccessKey返回参数结构体
  */
-export interface ListGroupsRequest {
+export interface CreateAccessKeyResponse {
     /**
-      * 页码。默认为1。
+      * 访问密钥
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Page?: number;
+    AccessKey: AccessKeyDetail;
     /**
-      * 每页数量。默认为20。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Rp?: number;
-    /**
-      * 按用户组名称匹配。
-      */
-    Keyword?: string;
+    RequestId?: string;
 }
 /**
  * DeletePolicyVersion返回参数结构体
@@ -703,6 +709,15 @@ export interface DeletePolicyVersionResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * CreateAccessKey请求参数结构体
+ */
+export interface CreateAccessKeyRequest {
+    /**
+      * 指定用户Uin，不填默认为当前用户创建访问密钥
+      */
+    TargetUin?: number;
 }
 /**
  * GetRolePermissionBoundary返回参数结构体
@@ -838,6 +853,40 @@ IsAttached: 当需要查询标记实体是否已经关联策略时不为null。0
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DeleteAccessKey请求参数结构体
+ */
+export interface DeleteAccessKeyRequest {
+    /**
+      * 指定需要删除的AccessKeyId
+      */
+    AccessKeyId: string;
+    /**
+      * 指定用户Uin，不填默认为当前用户删除访问密钥
+      */
+    TargetUin?: number;
+}
+/**
+ * 访问密钥
+ */
+export interface AccessKeyDetail {
+    /**
+      * 访问密钥标识
+      */
+    AccessKeyId: string;
+    /**
+      * 访问密钥（密钥仅创建时可见，请妥善保存）
+      */
+    SecretAccessKey: string;
+    /**
+      * 密钥状态，激活（Active）或未激活（Inactive）
+      */
+    Status: string;
+    /**
+      * 创建时间
+      */
+    CreateTime: string;
 }
 /**
  * 企业微信子用户
@@ -1075,6 +1124,15 @@ export interface SecretIdLastUsed {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     LastUsedDate: string;
+}
+/**
+ * UpdateAccessKey返回参数结构体
+ */
+export interface UpdateAccessKeyResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * CreateUserOIDCConfig返回参数结构体
@@ -1694,6 +1752,23 @@ export interface UpdateSAMLProviderResponse {
     RequestId?: string;
 }
 /**
+ * UpdateAccessKey请求参数结构体
+ */
+export interface UpdateAccessKeyRequest {
+    /**
+      * 指定需要更新的AccessKeyId
+      */
+    AccessKeyId: string;
+    /**
+      * 密钥状态，激活（Active）或未激活（Inactive）
+      */
+    Status: string;
+    /**
+      * 指定用户Uin，不填默认为当前用户更新访问密钥
+      */
+    TargetUin?: number;
+}
+/**
  * UpdateUser请求参数结构体
  */
 export interface UpdateUserRequest {
@@ -2065,13 +2140,17 @@ export interface UpdateOIDCConfigResponse {
     RequestId?: string;
 }
 /**
- * DeleteSAMLProvider请求参数结构体
+ * AttachGroupPolicy请求参数结构体
  */
-export interface DeleteSAMLProviderRequest {
+export interface AttachGroupPolicyRequest {
     /**
-      * SAML身份提供商名称
+      * 策略 id
       */
-    Name: string;
+    PolicyId: number;
+    /**
+      * 用户组 id
+      */
+    AttachGroupId: number;
 }
 /**
  * DeleteSAMLProvider返回参数结构体
@@ -2447,17 +2526,13 @@ export interface ListGrantServiceAccessNode {
     Policy: Array<ListGrantServiceAccessPolicy>;
 }
 /**
- * AttachGroupPolicy请求参数结构体
+ * DeleteSAMLProvider请求参数结构体
  */
-export interface AttachGroupPolicyRequest {
+export interface DeleteSAMLProviderRequest {
     /**
-      * 策略 id
+      * SAML身份提供商名称
       */
-    PolicyId: number;
-    /**
-      * 用户组 id
-      */
-    AttachGroupId: number;
+    Name: string;
 }
 /**
  * UpdateOIDCConfig请求参数结构体
@@ -2547,6 +2622,23 @@ export interface DescribeSafeAuthFlagIntlResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * ListGroups请求参数结构体
+ */
+export interface ListGroupsRequest {
+    /**
+      * 页码。默认为1。
+      */
+    Page?: number;
+    /**
+      * 每页数量。默认为20。
+      */
+    Rp?: number;
+    /**
+      * 按用户组名称匹配。
+      */
+    Keyword?: string;
 }
 /**
  * ListPolicyVersions返回参数结构体

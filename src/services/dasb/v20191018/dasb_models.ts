@@ -254,7 +254,7 @@ export interface DescribeUserGroupsRequest {
   Name?: string
 
   /**
-   * 分页偏移位置
+   * 分页偏移位置，默认值为0
    */
   Offset?: number
 
@@ -344,7 +344,7 @@ export interface DescribeUserGroupMembersRequest {
   Name?: string
 
   /**
-   * 分页偏移位置
+   * 分页偏移位置，默认值为0
    */
   Offset?: number
 
@@ -677,7 +677,7 @@ export interface DescribeAclsRequest {
   Name?: string
 
   /**
-   * 分页偏移位置
+   * 分页偏移位置，默认值为0
    */
   Offset?: number
 
@@ -1170,7 +1170,7 @@ export interface DescribeDevicesRequest {
   Kind?: number
 
   /**
-   * 分页，偏移位置
+   * 分页偏移位置，默认值为0
    */
   Offset?: number
 
@@ -1220,7 +1220,7 @@ export interface DescribeDeviceGroupsRequest {
   Name?: string
 
   /**
-   * 分页偏移位置
+   * 分页偏移位置，默认值为0
    */
   Offset?: number
 
@@ -1534,7 +1534,7 @@ export interface DescribeUsersRequest {
   Name?: string
 
   /**
-   * 分页，偏移位置
+   * 分页偏移位置，默认值为0
    */
   Offset?: number
 
@@ -1670,7 +1670,7 @@ export interface DescribeDeviceGroupMembersRequest {
   Name?: string
 
   /**
-   * 分页偏移位置
+   * 分页偏移位置，默认值为0
    */
   Offset?: number
 

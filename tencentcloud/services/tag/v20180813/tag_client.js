@@ -28,7 +28,7 @@ class Client extends abstract_client_1.AbstractClient {
         super("tag.tencentcloudapi.com", "2018-08-13", clientConfig);
     }
     /**
-     * 本接口用于删除一对标签键和标签值
+     * 本接口用于批量删除标签键和标签值。
      */
     async DeleteTags(req, cb) {
         return this.request("DeleteTags", req, cb);

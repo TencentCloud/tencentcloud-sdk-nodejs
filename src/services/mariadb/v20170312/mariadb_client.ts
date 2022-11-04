@@ -52,6 +52,7 @@ import {
   DescribeFlowResponse,
   CloneAccountResponse,
   ZoneChooseInfo,
+  IsolateDedicatedDBInstanceRequest,
   ModifyAccountDescriptionResponse,
   ParamConstraint,
   ModifyDBInstancesProjectResponse,
@@ -151,6 +152,7 @@ import {
   DescribeInstanceNodeInfoRequest,
   CreateHourDBInstanceResponse,
   CreateAccountResponse,
+  IsolateDedicatedDBInstanceResponse,
   DescribeLogFileRetentionPeriodResponse,
   RegionInfo,
   ModifyInstanceNetworkRequest,
@@ -393,13 +395,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（RestartDBInstances）用于重启数据库实例
+   * 本接口（IsolateDedicatedDBInstance）用于隔离独享云数据库实例。
    */
-  async RestartDBInstances(
-    req: RestartDBInstancesRequest,
-    cb?: (error: string, rep: RestartDBInstancesResponse) => void
-  ): Promise<RestartDBInstancesResponse> {
-    return this.request("RestartDBInstances", req, cb)
+  async IsolateDedicatedDBInstance(
+    req: IsolateDedicatedDBInstanceRequest,
+    cb?: (error: string, rep: IsolateDedicatedDBInstanceResponse) => void
+  ): Promise<IsolateDedicatedDBInstanceResponse> {
+    return this.request("IsolateDedicatedDBInstance", req, cb)
   }
 
   /**
@@ -450,6 +452,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyDBInstancesProjectResponse) => void
   ): Promise<ModifyDBInstancesProjectResponse> {
     return this.request("ModifyDBInstancesProject", req, cb)
+  }
+
+  /**
+   * 本接口（RestartDBInstances）用于重启数据库实例
+   */
+  async RestartDBInstances(
+    req: RestartDBInstancesRequest,
+    cb?: (error: string, rep: RestartDBInstancesResponse) => void
+  ): Promise<RestartDBInstancesResponse> {
+    return this.request("RestartDBInstances", req, cb)
   }
 
   /**

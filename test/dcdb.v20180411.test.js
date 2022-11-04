@@ -198,6 +198,16 @@ it("dcdb.v20180411.InitDCDBInstances", async function () {
     }
 })
 
+it("dcdb.v20180411.IsolateDedicatedDBInstance", async function () {
+    try {
+       const data = await client.IsolateDedicatedDBInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dcdb.v20180411.DescribeOrders", async function () {
     try {
        const data = await client.DescribeOrders({})

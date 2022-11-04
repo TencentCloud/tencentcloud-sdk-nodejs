@@ -4213,8 +4213,10 @@ export interface ModifyResourcePoolsRequest {
   InstanceId: string
 
   /**
-   * 标识是fair还是capacity
-   */
+      * 取值范围：
+<li>fair:代表公平调度标识</li>
+<li>capacity:代表容量调度标识</li>
+      */
   Key: string
 }
 

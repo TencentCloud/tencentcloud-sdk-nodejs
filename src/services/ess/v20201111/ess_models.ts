@@ -1662,32 +1662,27 @@ export interface StaffRole {
  */
 export interface DescribeFileUrlsRequest {
   /**
+   * 调用方用户信息，UserId 必填
+   */
+  Operator: UserInfo
+
+  /**
       * 文件对应的业务类型，目前支持：
+- 流程 "FLOW"，如需下载合同文件请选择此项
 - 模板 "TEMPLATE"
 - 文档 "DOCUMENT"
 - 印章  “SEAL”
-- 流程 "FLOW"
       */
   BusinessType: string
 
   /**
-      * 业务编号的数组，如模板编号、文档编号、印章编号
+      * 业务编号的数组，如流程编号、模板编号、文档编号、印章编号。如需下载合同文件请传入FlowId
 最大支持20个资源
       */
   BusinessIds: Array<string>
 
   /**
-   * 操作者信息
-   */
-  Operator: UserInfo
-
-  /**
-   * 应用相关信息
-   */
-  Agent?: Agent
-
-  /**
-   * 下载后的文件命名，只有fileType为zip的时候生效
+   * 下载后的文件命名，只有FileType为zip的时候生效
    */
   FileName?: string
 
@@ -1714,12 +1709,17 @@ export interface DescribeFileUrlsRequest {
   /**
    * 暂不开放
    */
-  Scene?: string
+  CcToken?: string
 
   /**
    * 暂不开放
    */
-  CcToken?: string
+  Scene?: string
+
+  /**
+   * 应用相关信息
+   */
+  Agent?: Agent
 }
 
 /**
@@ -2112,6 +2112,14 @@ false：有序签
    * 应用号信息
    */
   Agent?: Agent
+
+  /**
+      * 签署人校验方式
+VerifyCheck: 人脸识别（默认）
+MobileCheck：手机号验证
+参数说明：可选人脸识别或手机号验证两种方式，若选择后者，未实名个人签署方在签署合同时，无需经过实名认证和意愿确认两次人脸识别，该能力仅适用于个人签署方。
+      */
+  ApproverVerifyType?: string
 }
 
 /**

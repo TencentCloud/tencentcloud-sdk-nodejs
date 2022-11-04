@@ -637,6 +637,16 @@ export interface CloneAccountResponse {
 }
 
 /**
+ * IsolateDedicatedDBInstance请求参数结构体
+ */
+export interface IsolateDedicatedDBInstanceRequest {
+  /**
+   * 实例 Id，形如：dcdbt-ow728lmc。
+   */
+  InstanceId: string
+}
+
+/**
  * ModifyAccountDescription返回参数结构体
  */
 export interface ModifyAccountDescriptionResponse {
@@ -2364,6 +2374,11 @@ export interface ZonesInfo {
    * 可用区中文名
    */
   ZoneName: string
+
+  /**
+   * 是否在售
+   */
+  OnSale: boolean
 }
 
 /**
@@ -3334,6 +3349,16 @@ export interface CreateAccountResponse {
    */
   ReadOnly: number
 
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * IsolateDedicatedDBInstance返回参数结构体
+ */
+export interface IsolateDedicatedDBInstanceResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

@@ -50,6 +50,20 @@ export interface DescribeRelayUsageRequest {
     SdkAppId?: number;
 }
 /**
+ * DescribeTRTCMarketQualityMetricData返回参数结构体
+ */
+export interface DescribeTRTCMarketQualityMetricDataResponse {
+    /**
+      * TRTC监控数据出参
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Data: TRTCDataResp;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 用户自定义混流布局参数列表。
  */
 export interface MixLayout {
@@ -223,6 +237,27 @@ export interface ScaleInfomation {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     RoomNumbers: number;
+}
+/**
+ * DescribeTRTCRealTimeScaleMetricData请求参数结构体
+ */
+export interface DescribeTRTCRealTimeScaleMetricDataRequest {
+    /**
+      * 用户SdkAppId（如：1400xxxxxx）
+      */
+    SdkAppId: string;
+    /**
+      * 开始时间，unix时间戳，单位：秒（查询时间范围根据监控仪表盘功能版本而定，基础版可查近3小时，进阶版可查近12小时）
+      */
+    StartTime: number;
+    /**
+      * 结束时间，unix时间戳，单位：秒
+      */
+    EndTime: number;
+    /**
+      * 房间ID
+      */
+    RoomId?: string;
 }
 /**
  * DescribeUserEvent返回参数结构体
@@ -505,6 +540,29 @@ export interface DismissRoomByStrRoomIdRequest {
       * 房间号。
       */
     RoomId: string;
+}
+/**
+ * DescribeTRTCMarketQualityMetricData请求参数结构体
+ */
+export interface DescribeTRTCMarketQualityMetricDataRequest {
+    /**
+      * 用户SdkAppId（如：1400xxxxxx）
+      */
+    SdkAppId: string;
+    /**
+      * 查询开始时间，格式为YYYY-MM-DD。（查询时间范围根据监控仪表盘功能版本而定，【基础版】可查近30天，【进阶版】可查近60天）
+      */
+    StartTime: string;
+    /**
+      * 查询结束时间，格式为YYYY-MM-DD。
+      */
+    EndTime: string;
+    /**
+      * 返回数据的粒度，支持设为以下值：
+d：按天。此时返回查询时间范围内 UTC 时间为零点的数据。
+h：按小时。此时返回查询时间范围内 UTC 时间为整小时的数据。
+      */
+    Period: string;
 }
 /**
  * 事件信息，包括，事件时间戳，事件ID,
@@ -907,6 +965,27 @@ export interface DescribeRoomInfoResponse {
     RequestId?: string;
 }
 /**
+ * DescribeTRTCRealTimeQualityMetricData请求参数结构体
+ */
+export interface DescribeTRTCRealTimeQualityMetricDataRequest {
+    /**
+      * 用户SdkAppId（如：1400xxxxxx）
+      */
+    SdkAppId: string;
+    /**
+      * 开始时间，unix时间戳，单位：秒（查询时间范围根据监控仪表盘功能版本而定，基础版可查近3小时，进阶版可查近12小时）
+      */
+    StartTime: number;
+    /**
+      * 结束时间，unix时间戳，单位：秒
+      */
+    EndTime: number;
+    /**
+      * 房间ID
+      */
+    RoomId?: string;
+}
+/**
  * 查询旁路转码计费时长。
 查询时间小于等于1天时，返回每5分钟粒度的数据；查询时间大于1天时，返回按天汇总的数据。
  */
@@ -955,6 +1034,20 @@ export interface DescribeUserInfoResponse {
     RequestId?: string;
 }
 /**
+ * DescribeTRTCRealTimeScaleMetricData返回参数结构体
+ */
+export interface DescribeTRTCRealTimeScaleMetricDataResponse {
+    /**
+      * TRTC监控数据出参
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Data: TRTCDataResp;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 实时音视频用量在某一时间段的统计信息。
  */
 export interface TrtcUsage {
@@ -966,6 +1059,29 @@ export interface TrtcUsage {
       * 用量数组。每个数值含义与UsageKey对应。单位：分钟。
       */
     UsageValue: Array<number>;
+}
+/**
+ * DescribeTRTCMarketScaleMetricData请求参数结构体
+ */
+export interface DescribeTRTCMarketScaleMetricDataRequest {
+    /**
+      * 用户SdkAppId
+      */
+    SdkAppId: string;
+    /**
+      * 查询开始时间，格式为YYYY-MM-DD。（查询时间范围根据监控仪表盘功能版本而定，【基础版】可查近30天，【进阶版】可查近60天）
+      */
+    StartTime: string;
+    /**
+      * 查询结束时间，格式为YYYY-MM-DD。
+      */
+    EndTime: string;
+    /**
+      * 返回数据的粒度，支持设为以下值：
+d：按天。此时返回查询时间范围内 UTC 时间为零点的数据。
+h：按小时。此时返回查询时间范围内 UTC 时间为整小时的数据。
+      */
+    Period: string;
 }
 /**
  * DescribeRelayUsage返回参数结构体
@@ -1177,6 +1293,19 @@ export interface DescribeMixTranscodingUsageResponse {
     RequestId?: string;
 }
 /**
+ * SdkAppId级别录制时长数据。
+ */
+export interface SdkAppIdRecordUsage {
+    /**
+      * SdkAppId的值。
+      */
+    SdkAppId: string;
+    /**
+      * 统计的时间点数据。
+      */
+    Usages: Array<RecordUsage>;
+}
+/**
  * SdkAppId级别实时音视频的用量数据
  */
 export interface SdkAppIdNewTrtcTimeUsage {
@@ -1308,6 +1437,20 @@ export interface StopMCUMixTranscodeRequest {
       * 房间号。
       */
     RoomId: number;
+}
+/**
+ * DescribeTRTCRealTimeQualityMetricData返回参数结构体
+ */
+export interface DescribeTRTCRealTimeQualityMetricDataResponse {
+    /**
+      * TRTC监控数据出参
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Data: TRTCDataResp;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * MCU混流布局参数
@@ -1642,6 +1785,26 @@ export interface DescribePictureRequest {
     PageNo?: number;
 }
 /**
+ * TRTC数据大盘/实时监控 API接口数据出参
+ */
+export interface TRTCDataResp {
+    /**
+      * StatementID值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    StatementID: number;
+    /**
+      * Series数据
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Series: Array<SeriesInfo>;
+    /**
+      * Total值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Total: number;
+}
+/**
  * DescribeExternalTrtcMeasure返回参数结构体
  */
 export interface DescribeExternalTrtcMeasureResponse {
@@ -1923,17 +2086,18 @@ export interface RecordParams {
     AvMerge?: number;
 }
 /**
- * SdkAppId级别录制时长数据。
+ * DescribeTRTCMarketScaleMetricData返回参数结构体
  */
-export interface SdkAppIdRecordUsage {
+export interface DescribeTRTCMarketScaleMetricDataResponse {
     /**
-      * SdkAppId的值。
+      * TRTC监控数据出参
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    SdkAppId: string;
+    Data: TRTCDataResp;
     /**
-      * 统计的时间点数据。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Usages: Array<RecordUsage>;
+    RequestId?: string;
 }
 /**
  * 自定义模板中有效，指定用户视频在混合画面中的位置。
@@ -2001,6 +2165,21 @@ export interface AudioParams {
       * 音频码率: 取值范围[32000, 128000] ，单位bps，默认64000bps。
       */
     BitRate: number;
+}
+/**
+ * SeriesInfo类型
+ */
+export interface SeriesInfo {
+    /**
+      * 数据列
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Columns: Array<string>;
+    /**
+      * 数据值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Values: Array<number>;
 }
 /**
  * 第三方CDN转推参数

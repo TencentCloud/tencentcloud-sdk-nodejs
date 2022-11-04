@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CreatePictureRequest, DescribeRelayUsageRequest, RemoveUserByStrRoomIdResponse, StartMCUMixTranscodeRequest, DescribeUserEventRequest, StartMCUMixTranscodeByStrRoomIdRequest, DescribeUserEventResponse, StopMCUMixTranscodeByStrRoomIdResponse, DescribeCallDetailInfoRequest, DescribeUserInfoRequest, DescribeRecordStatisticResponse, StartMCUMixTranscodeByStrRoomIdResponse, DescribeTrtcUsageResponse, DismissRoomByStrRoomIdRequest, DescribeRecordStatisticRequest, DescribeRoomInfoRequest, DescribeCallDetailInfoResponse, DescribeMixTranscodingUsageRequest, ModifyPictureRequest, DescribeTrtcUsageRequest, DescribeRoomInfoResponse, DescribeUserInfoResponse, DescribeRelayUsageResponse, DescribeRecordingUsageResponse, ModifyPictureResponse, DescribeRecordingUsageRequest, DescribeScaleInfoResponse, StopMCUMixTranscodeResponse, DescribeMixTranscodingUsageResponse, RemoveUserRequest, DismissRoomRequest, DescribeUnusualEventRequest, DescribeCloudRecordingRequest, StopMCUMixTranscodeRequest, CreateCloudRecordingRequest, DeleteCloudRecordingResponse, StopMCUMixTranscodeByStrRoomIdRequest, DeletePictureResponse, ModifyCloudRecordingRequest, CreateCloudRecordingResponse, StartMCUMixTranscodeResponse, DescribeTrtcMcuTranscodeTimeResponse, DeleteCloudRecordingRequest, DescribePictureRequest, DescribeExternalTrtcMeasureResponse, DescribePictureResponse, DescribeTrtcMcuTranscodeTimeRequest, DescribeScaleInfoRequest, DismissRoomByStrRoomIdResponse, DescribeUnusualEventResponse, ModifyCloudRecordingResponse, DescribeCloudRecordingResponse, DismissRoomResponse, DeletePictureRequest, DescribeExternalTrtcMeasureRequest, RemoveUserByStrRoomIdRequest, CreatePictureResponse, RemoveUserResponse } from "./trtc_models";
+import { CreatePictureRequest, DescribeRelayUsageRequest, DescribeTRTCMarketQualityMetricDataResponse, RemoveUserByStrRoomIdResponse, StartMCUMixTranscodeRequest, DescribeUserEventRequest, StartMCUMixTranscodeByStrRoomIdRequest, DescribeTRTCRealTimeScaleMetricDataRequest, DescribeUserEventResponse, StopMCUMixTranscodeByStrRoomIdResponse, DescribeCallDetailInfoRequest, DescribeUserInfoRequest, DescribeRecordStatisticResponse, StartMCUMixTranscodeByStrRoomIdResponse, DescribeTrtcUsageResponse, DismissRoomByStrRoomIdRequest, DescribeTRTCMarketQualityMetricDataRequest, DescribeRecordStatisticRequest, DescribeRoomInfoRequest, DescribeCallDetailInfoResponse, DescribeMixTranscodingUsageRequest, ModifyPictureRequest, DescribeTrtcUsageRequest, DescribeRoomInfoResponse, DescribeTRTCRealTimeQualityMetricDataRequest, DescribeUserInfoResponse, DescribeTRTCRealTimeScaleMetricDataResponse, DescribeTRTCMarketScaleMetricDataRequest, DescribeRelayUsageResponse, DescribeRecordingUsageResponse, ModifyPictureResponse, DescribeRecordingUsageRequest, DescribeScaleInfoResponse, StopMCUMixTranscodeResponse, DescribeMixTranscodingUsageResponse, RemoveUserRequest, DismissRoomRequest, DescribeUnusualEventRequest, DescribeCloudRecordingRequest, StopMCUMixTranscodeRequest, DescribeTRTCRealTimeQualityMetricDataResponse, CreateCloudRecordingRequest, DeleteCloudRecordingResponse, StopMCUMixTranscodeByStrRoomIdRequest, DeletePictureResponse, ModifyCloudRecordingRequest, CreateCloudRecordingResponse, StartMCUMixTranscodeResponse, DescribeTrtcMcuTranscodeTimeResponse, DeleteCloudRecordingRequest, DescribePictureRequest, DescribeExternalTrtcMeasureResponse, DescribePictureResponse, DescribeTrtcMcuTranscodeTimeRequest, DescribeScaleInfoRequest, DismissRoomByStrRoomIdResponse, DescribeUnusualEventResponse, ModifyCloudRecordingResponse, DescribeCloudRecordingResponse, DismissRoomResponse, DeletePictureRequest, DescribeExternalTrtcMeasureRequest, RemoveUserByStrRoomIdRequest, DescribeTRTCMarketScaleMetricDataResponse, CreatePictureResponse, RemoveUserResponse } from "./trtc_models";
 /**
  * trtc client
  * @class
@@ -24,6 +24,18 @@ export declare class Client extends AbstractClient {
      */
     DescribeTrtcUsage(req: DescribeTrtcUsageRequest, cb?: (error: string, rep: DescribeTrtcUsageResponse) => void): Promise<DescribeTrtcUsageResponse>;
     /**
+     * 查询TRTC监控仪表盘-数据大盘质量指标（包括下列指标）
+joinSuccessRate：加入频道成功率。
+joinSuccessIn5sRate：5s内加入频道成功率。
+audioFreezeRate：音频卡顿率。
+videoFreezeRate：视频卡顿率。
+networkDelay ：网络延迟率。
+注意：
+1.调用接口需开通监控仪表盘【基础版】和【进阶版】，监控仪表盘【免费版】不支持调用，监控仪表盘版本功能和计费说明：https://cloud.tencent.com/document/product/647/81331。
+2、查询时间范围根据监控仪表盘功能版本而定，【基础版】可查近30天，【进阶版】可查近60天。
+     */
+    DescribeTRTCMarketQualityMetricData(req: DescribeTRTCMarketQualityMetricDataRequest, cb?: (error: string, rep: DescribeTRTCMarketQualityMetricDataResponse) => void): Promise<DescribeTRTCMarketQualityMetricDataResponse>;
+    /**
      * 查询指定时间内的用户列表及用户通话质量数据，可查询14天内数据。DataType 不为null，查询起止时间不超过1个小时，查询用户不超过6个，支持跨天查询。DataType为null时，查询起止时间不超过4个小时， 默认查询6个用户，同时支持每页查询100以内用户个数（PageSize不超过100）。接口用于查询质量问题，不推荐作为计费使用。（同老接口DescribeCallDetail）
 **注意**：
 1.该接口只用于历史数据统计或核对数据使用，实时类关键业务逻辑不能使用。
@@ -34,6 +46,17 @@ export declare class Client extends AbstractClient {
      * 接口说明：结束云端混流
      */
     StopMCUMixTranscode(req: StopMCUMixTranscodeRequest, cb?: (error: string, rep: StopMCUMixTranscodeResponse) => void): Promise<StopMCUMixTranscodeResponse>;
+    /**
+     * 查询TRTC监控仪表盘-数据大盘规模指标（会返回通话人数，通话房间数，峰值同时在线人数，峰值同时在线频道数）
+userCount：通话人数，
+roomCount：通话房间数，从有用户加入频道到所有用户离开频道计为一个通话频道。
+peakCurrentChannels：峰值同时在线频道数。
+peakCurrentUsers：峰值同时在线人数。
+注意：
+1.调用接口需开通监控仪表盘【基础版】和【进阶版】，监控仪表盘【免费版】不支持调用，监控仪表盘版本功能和计费说明：https://cloud.tencent.com/document/product/647/81331。
+2、查询时间范围根据监控仪表盘功能版本而定，【基础版】可查近30天，【进阶版】可查近60天。
+     */
+    DescribeTRTCMarketScaleMetricData(req: DescribeTRTCMarketScaleMetricDataRequest, cb?: (error: string, rep: DescribeTRTCMarketScaleMetricDataResponse) => void): Promise<DescribeTRTCMarketScaleMetricDataResponse>;
     /**
      * 接口说明：启动云端混流，并指定混流画面中各路画面的布局位置。
 
@@ -62,6 +85,15 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
      * 如果您需要在 [云端混流转码](https://cloud.tencent.com/document/product/647/16827) 时频繁删除自定义背景图或水印，可通过此接口删除已上传的图片。无需频繁删除图片的场景，建议直接在 [控制台 > 应用管理 > 素材管理](https://cloud.tencent.com/document/product/647/50769) 中操作。
      */
     DeletePicture(req: DeletePictureRequest, cb?: (error: string, rep: DeletePictureResponse) => void): Promise<DeletePictureResponse>;
+    /**
+     * 查询TRTC监控仪表盘-实时监控质量指标（会返回下列指标）
+-视频卡顿率
+-音频卡顿率
+注意：
+1.调用接口需开通监控仪表盘【基础版】和【进阶版】，监控仪表盘【免费版】不支持调用，监控仪表盘版本功能和计费说明：https://cloud.tencent.com/document/product/647/81331。
+2、查询时间范围根据监控仪表盘功能版本而定，基础版可查近3小时，进阶版可查近12小时。
+     */
+    DescribeTRTCRealTimeQualityMetricData(req: DescribeTRTCRealTimeQualityMetricDataRequest, cb?: (error: string, rep: DescribeTRTCRealTimeQualityMetricDataResponse) => void): Promise<DescribeTRTCRealTimeQualityMetricDataResponse>;
     /**
      * 如果您需要在 [云端混流转码](https://cloud.tencent.com/document/product/647/16827) 时频繁新增自定义背景图或水印，可通过此接口上传新的图片素材。无需频繁新增图片的场景，建议直接在 [控制台 > 应用管理 > 素材管理](https://cloud.tencent.com/document/product/647/50769) 中操作。
      */
@@ -215,4 +247,13 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
 异常体验ID映射见：https://cloud.tencent.com/document/product/647/44916
      */
     DescribeUnusualEvent(req: DescribeUnusualEventRequest, cb?: (error: string, rep: DescribeUnusualEventResponse) => void): Promise<DescribeUnusualEventResponse>;
+    /**
+     * 查询TRTC监控仪表盘-实时监控规模指标（会返回下列指标）
+-userCount（在线用户数）
+-roomCount（在线房间数）
+注意：
+1.调用接口需开通监控仪表盘【基础版】和【进阶版】，监控仪表盘【免费版】不支持调用，监控仪表盘版本功能和计费说明：https://cloud.tencent.com/document/product/647/81331。
+2、查询时间范围根据监控仪表盘功能版本而定，基础版可查近3小时，进阶版可查近12小时。
+     */
+    DescribeTRTCRealTimeScaleMetricData(req: DescribeTRTCRealTimeScaleMetricDataRequest, cb?: (error: string, rep: DescribeTRTCRealTimeScaleMetricDataResponse) => void): Promise<DescribeTRTCRealTimeScaleMetricDataResponse>;
 }

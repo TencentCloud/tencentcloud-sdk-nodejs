@@ -737,7 +737,7 @@ export interface MalWareList {
       */
     VirusName: string;
     /**
-      * 状态；4-:待处理，5-已信任，6-已隔离，8-文件已删除
+      * 状态；4-:待处理，5-已信任，6-已隔离，8-文件已删除, 14:已处理
       */
     Status: number;
     /**
@@ -9429,6 +9429,10 @@ export interface CreateScanMalwareSettingRequest {
       * 1标准模式（只报严重、高危）、2增强模式（报严重、高危、中危）、3严格模式（报严重、高、中、低、提示）
       */
     EngineType?: number;
+    /**
+      * 是否开启恶意进程查杀[0:未开启,1:开启]
+      */
+    EnableMemShellScan?: number;
 }
 /**
  * DescribeMalwareTimingScanSetting返回参数结构体
@@ -9495,6 +9499,10 @@ export interface DescribeMalwareTimingScanSettingResponse {
       * 启发引擎 0 关闭 1开启
       */
     EnableInspiredEngine: number;
+    /**
+      * 是否开启恶意进程查杀[0:未开启,1:开启]
+      */
+    EnableMemShellScan: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -10131,6 +10139,11 @@ export interface DescribeMalwareRiskWarningResponse {
       * 是否弹出提示 true 弹出, false不弹
       */
     IsPop: boolean;
+    /**
+      * 异常进程列表信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProcessList: Array<MalwareRisk>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -11806,6 +11819,10 @@ export interface ModifyMalwareTimingScanSettingsRequest {
       * 启发引擎开关 0 关闭 1开启
       */
     EnableInspiredEngine?: number;
+    /**
+      * 是否开启恶意进程查杀[0:未开启,1:开启]
+      */
+    EnableMemShellScan?: number;
 }
 /**
  * 资产管理环境变量列表

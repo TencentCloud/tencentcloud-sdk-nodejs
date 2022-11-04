@@ -573,6 +573,12 @@ export interface ScriptInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   LoadWeight?: number
+
+  /**
+      * 文件 ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FileId?: string
 }
 
 /**
@@ -4097,6 +4103,12 @@ export interface File {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   SubAccountUin: string
+
+  /**
+      * 用户账号的 App ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AppId: number
 }
 
 /**

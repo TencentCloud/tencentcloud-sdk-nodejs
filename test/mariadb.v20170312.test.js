@@ -218,9 +218,9 @@ it("mariadb.v20170312.ModifyDBInstanceName", async function () {
     }
 })
 
-it("mariadb.v20170312.RestartDBInstances", async function () {
+it("mariadb.v20170312.IsolateDedicatedDBInstance", async function () {
     try {
-       const data = await client.RestartDBInstances({})
+       const data = await client.IsolateDedicatedDBInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -271,6 +271,16 @@ it("mariadb.v20170312.DescribeDBParameters", async function () {
 it("mariadb.v20170312.ModifyDBInstancesProject", async function () {
     try {
        const data = await client.ModifyDBInstancesProject({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mariadb.v20170312.RestartDBInstances", async function () {
+    try {
+       const data = await client.RestartDBInstances({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
