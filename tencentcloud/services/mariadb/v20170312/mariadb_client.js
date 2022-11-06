@@ -121,10 +121,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyDBParameters", req, cb);
     }
     /**
-     * 本接口(ModifyLogFileRetentionPeriod)用于修改数据库备份日志保存天数。
+     * 本接口（KillSession）用于杀死指定会话。
      */
-    async ModifyLogFileRetentionPeriod(req, cb) {
-        return this.request("ModifyLogFileRetentionPeriod", req, cb);
+    async KillSession(req, cb) {
+        return this.request("KillSession", req, cb);
     }
     /**
      * 本接口(DescribeDBSlowLogs)用于查询慢查询日志列表。
@@ -199,10 +199,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyInstanceVip", req, cb);
     }
     /**
-     * 本接口（KillSession）用于杀死指定会话。
+     * 本接口(IsolateDBInstance)用于隔离云数据库实例（包年包月），隔离后不能通过IP和端口访问数据库。隔离的实例可在回收站中进行开机。若为欠费隔离，请尽快进行充值。
      */
-    async KillSession(req, cb) {
-        return this.request("KillSession", req, cb);
+    async IsolateDBInstance(req, cb) {
+        return this.request("IsolateDBInstance", req, cb);
     }
     /**
      * 本接口(DescribeDBLogFiles)用于获取数据库的各种日志列表，包括冷备、binlog、errlog和slowlog。
@@ -426,6 +426,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DisassociateSecurityGroups(req, cb) {
         return this.request("DisassociateSecurityGroups", req, cb);
+    }
+    /**
+     * 本接口(ModifyLogFileRetentionPeriod)用于修改数据库备份日志保存天数。
+     */
+    async ModifyLogFileRetentionPeriod(req, cb) {
+        return this.request("ModifyLogFileRetentionPeriod", req, cb);
     }
 }
 exports.Client = Client;

@@ -1352,14 +1352,19 @@ export interface ChangeReplicaToMasterRequest {
     GroupId?: number;
 }
 /**
- * Proxy节点信息
+ * Proxy节点信息。
  */
 export interface ProxyNodes {
     /**
-      * 节点ID
+      * 节点 ID。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     NodeId: string;
+    /**
+      * 可用区 ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ZoneId: number;
 }
 /**
  * ModifyInstance返回参数结构体

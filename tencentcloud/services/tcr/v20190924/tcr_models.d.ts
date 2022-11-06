@@ -3125,6 +3125,10 @@ false: 使用vpc域名
       * 解析地域，需要保证和vpc处于同一地域，如果不填则默认为主实例地域
       */
     RegionName?: string;
+    /**
+      * 请求的地域ID，用于实例复制地域
+      */
+    RegionId?: number;
 }
 /**
  * 触发器触发条件

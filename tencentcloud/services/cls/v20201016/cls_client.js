@@ -34,10 +34,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateMachineGroup", req, cb);
     }
     /**
-     * 获取机器组信息列表
+     * 用于删除机器组信息
      */
-    async DescribeMachineGroups(req, cb) {
-        return this.request("DescribeMachineGroups", req, cb);
+    async DeleteMachineGroupInfo(req, cb) {
+        return this.request("DeleteMachineGroupInfo", req, cb);
     }
     /**
      * 本接口用于获取告警任务历史
@@ -201,6 +201,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeAlarms(req, cb) {
         return this.request("DescribeAlarms", req, cb);
+    }
+    /**
+     * 用于添加机器组信息
+     */
+    async AddMachineGroupInfo(req, cb) {
+        return this.request("AddMachineGroupInfo", req, cb);
     }
     /**
      * 该接口用于获取通知渠道组列表
@@ -487,6 +493,12 @@ cls.pb.cc cls.pb.h cls.proto
      */
     async DescribeConfigs(req, cb) {
         return this.request("DescribeConfigs", req, cb);
+    }
+    /**
+     * 获取机器组信息列表
+     */
+    async DescribeMachineGroups(req, cb) {
+        return this.request("DescribeMachineGroups", req, cb);
     }
     /**
      * 本接口用于合并一个读写态的主题分区，合并时指定一个主题分区 ID，日志服务会自动合并范围右相邻的分区。

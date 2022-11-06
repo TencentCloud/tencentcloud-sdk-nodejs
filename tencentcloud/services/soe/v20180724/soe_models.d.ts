@@ -81,11 +81,11 @@ export interface InitOralProcessRequest {
     /**
       * 评价苛刻指数。取值为[1.0 - 4.0]范围内的浮点数，用于平滑不同年龄段的分数。
 1.0：适用于最小年龄段用户，一般对应儿童应用场景；
-4.0：适用于最高年龄段用户，一般对应成人严格打分场景。
+4.0：适用于最高年龄段用户，一般对应成人严格打分场景。苛刻度影响范围参考：[苛刻度影响范围](https://cloud.tencent.com/document/product/884/78824#.E8.8B.9B.E5.88.BB.E5.BA.A6)
       */
     ScoreCoeff: number;
     /**
-      * 业务应用ID，与账号应用APPID无关，是用来方便客户管理服务的参数，新的 SoeAppId 可以在[控制台](https://console.cloud.tencent.com/soe)【应用管理】下新建。如果没有新建SoeAppId，请勿填入该参数，否则会报欠费错误。
+      * 业务应用ID，与账号应用APPID无关，是用来方便客户管理服务的参数，新的 SoeAppId 可以在[控制台](https://console.cloud.tencent.com/soe)【应用管理】下新建。如果没有新建SoeAppId，请勿填入该参数，否则会报欠费错误。使用指南：[业务应用](https://cloud.tencent.com/document/product/884/78824#.E4.B8.9A.E5.8A.A1.E5.BA.94.E7.94.A8)
       */
     SoeAppId?: string;
     /**
@@ -106,9 +106,8 @@ export interface InitOralProcessRequest {
     SentenceInfoEnabled?: number;
     /**
       * 评估语言
-0：英文
+0：英文（默认）
 1：中文
-ServerType不填默认为0
       */
     ServerType?: number;
     /**
@@ -122,7 +121,6 @@ ServerType不填默认为0
       * 输入文本模式
 0: 普通文本
 1：[音素结构](https://cloud.tencent.com/document/product/884/33698)文本
-2：音素注册模式（提工单注册需要使用音素的单词）。
       */
     TextMode?: number;
     /**
@@ -161,7 +159,7 @@ ServerType不填默认为0
  */
 export interface KeywordEvaluateRequest {
     /**
-      * 流式数据包的序号，从1开始，当IsEnd字段为1后后续序号无意义，当IsLongLifeSession不为1且为非流式模式时无意义。
+      * 流式数据包的序号，从1开始，当IsEnd字段为1后后续序号无意义，非流式模式时无意义。
 注意：序号上限为3000，不能超过上限。
       */
     SeqId: number;
@@ -171,11 +169,11 @@ export interface KeywordEvaluateRequest {
     IsEnd: number;
     /**
       * 语音文件类型
-1: raw
+1: raw/pcm
 2: wav
 3: mp3
 4: speex
-语音文件格式目前仅支持 16k 采样率 16bit 编码单声道，如有不一致可能导致评估不准确或失败。
+[音频上传格式](https://cloud.tencent.com/document/product/884/56132)
       */
     VoiceFileType: number;
     /**
@@ -184,7 +182,9 @@ export interface KeywordEvaluateRequest {
       */
     VoiceEncodeType: number;
     /**
-      * 当前数据包数据, 流式模式下数据包大小可以按需设置，在网络良好的情况下，建议设置为1k，且必须保证分片帧完整（16bit的数据必须保证音频长度为偶数），编码格式要求为BASE64。
+      * 当前语音数据, 编码格式要求为BASE64且必须保证分片帧完整（16bit的数据必须保证音频长度为偶数）。格式要求参考[音频上传格式](https://cloud.tencent.com/document/product/884/56132)
+流式模式下需要将语音数据进行分片处理，参考：[分片大小设置](https://cloud.tencent.com/document/product/884/78985#.E5.88.86.E7.89.87.E5.A4.A7.E5.B0.8F.E8.AE.BE.E7.BD.AE.E4.B8.BA.E5.A4.9A.E5.A4.A7.E6.AF.94.E8.BE.83.E5.90.88.E9.80.82.3F)
+如何进行流式分片参考：[流式评测](https://cloud.tencent.com/document/product/884/78824#.E6.B5.81.E5.BC.8F.E8.AF.84.E6.B5.8B)
       */
     UserVoiceData: string;
     /**
@@ -196,7 +196,7 @@ export interface KeywordEvaluateRequest {
       */
     Keywords: Array<Keyword>;
     /**
-      * 业务应用ID，与账号应用APPID无关，是用来方便客户管理服务的参数，新的 SoeAppId 可以在[控制台](https://console.cloud.tencent.com/soe)【应用管理】下新建。如果没有新建SoeAppId，请勿填入该参数，否则会报欠费错误。
+      * 业务应用ID，与账号应用APPID无关，是用来方便客户管理服务的参数，新的 SoeAppId 可以在[控制台](https://console.cloud.tencent.com/soe)【应用管理】下新建。如果没有新建SoeAppId，请勿填入该参数，否则会报欠费错误。使用指南：[业务应用](https://cloud.tencent.com/document/product/884/78824#.E4.B8.9A.E5.8A.A1.E5.BA.94.E7.94.A8)
       */
     SoeAppId?: string;
     /**
@@ -218,12 +218,11 @@ export interface TransmitOralProcessRequest {
       */
     IsEnd: number;
     /**
-      * 语音文件类型
-1: raw
+      * 1: raw/pcm
 2: wav
 3: mp3
 4: speex
-语音文件格式目前仅支持 16k 采样率 16bit 编码单声道，如有不一致可能导致评估不准确或失败。
+[音频上传格式](https://cloud.tencent.com/document/product/884/56132)
       */
     VoiceFileType: number;
     /**
@@ -232,7 +231,9 @@ export interface TransmitOralProcessRequest {
       */
     VoiceEncodeType: number;
     /**
-      * 当前数据包数据, 流式模式下数据包大小可以按需设置，在网络稳定时，分片大小建议设置0.5k，且必须保证分片帧完整（16bit的数据必须保证音频长度为偶数），编码格式要求为BASE64。
+      * 当前语音数据, 编码格式要求为BASE64且必须保证分片帧完整（16bit的数据必须保证音频长度为偶数）。格式要求参考[音频上传格式](https://cloud.tencent.com/document/product/884/56132)
+流式模式下需要将语音数据进行分片处理，参考：[分片大小设置](https://cloud.tencent.com/document/product/884/78985#.E5.88.86.E7.89.87.E5.A4.A7.E5.B0.8F.E8.AE.BE.E7.BD.AE.E4.B8.BA.E5.A4.9A.E5.A4.A7.E6.AF.94.E8.BE.83.E5.90.88.E9.80.82.3F)
+如何进行流式分片参考：[流式评测](https://cloud.tencent.com/document/product/884/78824#.E6.B5.81.E5.BC.8F.E8.AF.84.E6.B5.8B)
       */
     UserVoiceData: string;
     /**
@@ -240,7 +241,7 @@ export interface TransmitOralProcessRequest {
       */
     SessionId: string;
     /**
-      * 业务应用ID，与账号应用APPID无关，是用来方便客户管理服务的参数，新的 SoeAppId 可以在[控制台](https://console.cloud.tencent.com/soe)【应用管理】下新建。如果没有新建SoeAppId，请勿填入该参数，否则会报欠费错误。
+      * 业务应用ID，与账号应用APPID无关，是用来方便客户管理服务的参数，新的 SoeAppId 可以在[控制台](https://console.cloud.tencent.com/soe)【应用管理】下新建。如果没有新建SoeAppId，请勿填入该参数，否则会报欠费错误。使用指南：[业务应用](https://cloud.tencent.com/document/product/884/78824#.E4.B8.9A.E5.8A.A1.E5.BA.94.E7.94.A8)
       */
     SoeAppId?: string;
     /**
@@ -261,11 +262,11 @@ export interface TransmitOralProcessResponse {
       */
     PronAccuracy: number;
     /**
-      * 发音流利度，取值范围[0, 1]，当为词模式时，取值无意义；当为流式模式且请求中IsEnd未置1时，取值无意义
+      * 发音流利度，取值范围[0, 1]，当为词模式时，取值无意义；当为流式模式且请求中IsEnd未置1时，取值无意义。取值无意义时，值为-1
       */
     PronFluency: number;
     /**
-      * 发音完整度，取值范围[0, 1]，当为词模式时，取值无意义；当为流式模式且请求中IsEnd未置1时，取值无意义
+      * 发音完整度，取值范围[0, 1]，当为词模式或自由说模式时，取值无意义；当为流式模式且请求中IsEnd未置1时，取值无意义。取值无意义时，值为-1
       */
     PronCompletion: number;
     /**
@@ -277,7 +278,7 @@ export interface TransmitOralProcessResponse {
       */
     SessionId: string;
     /**
-      * 保存语音音频文件下载地址
+      * 已废弃，不再保存语音音频文件下载地址
       */
     AudioUrl: string;
     /**
@@ -470,11 +471,12 @@ export interface TransmitOralProcessWithInitRequest {
     IsEnd: number;
     /**
       * 语音文件类型
-1: raw
+1: raw/pcm
 2: wav
 3: mp3
 4: speex
 语音文件格式目前仅支持 16k 采样率 16bit 编码单声道，如有不一致可能导致评估不准确或失败。
+[音频上传格式](https://cloud.tencent.com/document/product/884/56132)
       */
     VoiceFileType: number;
     /**
@@ -483,7 +485,9 @@ export interface TransmitOralProcessWithInitRequest {
       */
     VoiceEncodeType: number;
     /**
-      * 当前数据包数据, 流式模式下数据包大小可以按需设置，在网络良好的情况下，建议设置为1k，且必须保证分片帧完整（16bit的数据必须保证音频长度为偶数），编码格式要求为BASE64。
+      * 当前语音数据, 编码格式要求为BASE64且必须保证分片帧完整（16bit的数据必须保证音频长度为偶数）。格式要求参考[音频上传格式](https://cloud.tencent.com/document/product/884/56132)
+流式模式下需要将语音数据进行分片处理，参考：[分片大小设置](https://cloud.tencent.com/document/product/884/78985#.E5.88.86.E7.89.87.E5.A4.A7.E5.B0.8F.E8.AE.BE.E7.BD.AE.E4.B8.BA.E5.A4.9A.E5.A4.A7.E6.AF.94.E8.BE.83.E5.90.88.E9.80.82.3F)
+如何进行流式分片参考：[流式测试](https://cloud.tencent.com/document/product/884/78824#.E6.B5.81.E5.BC.8F.E8.AF.84.E6.B5.8B)
       */
     UserVoiceData: string;
     /**
@@ -522,10 +526,11 @@ export interface TransmitOralProcessWithInitRequest {
       * 评价苛刻指数。取值为[1.0 - 4.0]范围内的浮点数，用于平滑不同年龄段的分数。
 1.0：适用于最小年龄段用户，一般对应儿童应用场景；
 4.0：适用于最高年龄段用户，一般对应成人严格打分场景。
+苛刻度影响范围参考：[苛刻度影响范围](https://cloud.tencent.com/document/product/884/78824#.E8.8B.9B.E5.88.BB.E5.BA.A6)
       */
     ScoreCoeff: number;
     /**
-      * 业务应用ID，与账号应用APPID无关，是用来方便客户管理服务的参数，新的 SoeAppId 可以在[控制台](https://console.cloud.tencent.com/soe)【应用管理】下新建。如果没有新建SoeAppId，请勿填入该参数，否则会报欠费错误。
+      * 业务应用ID，与账号应用APPID无关，是用来方便客户管理服务的参数，新的 SoeAppId 可以在[控制台](https://console.cloud.tencent.com/soe)【应用管理】下新建。如果没有新建SoeAppId，请勿填入该参数，否则会报欠费错误。使用指南：[业务应用](https://cloud.tencent.com/document/product/884/78824#.E4.B8.9A.E5.8A.A1.E5.BA.94.E7.94.A8)
       */
     SoeAppId?: string;
     /**
@@ -535,22 +540,21 @@ export interface TransmitOralProcessWithInitRequest {
     StorageMode?: number;
     /**
       * 输出断句中间结果标识
-0：不输出
+0：不输出（默认）
 1：输出，通过设置该参数
-可以在评估过程中的分片传输请求中，返回已经评估断句的中间结果，中间结果可用于客户端 UI 更新，输出结果为TransmitOralProcess请求返回结果 SentenceInfoSet 字段。
+可以在评估过程中的分片传输请求中，返回已经评估断句的中间结果，中间结果可用于客户端 UI 更新，输出结果为TransmitOralProcessWithInit请求返回结果 SentenceInfoSet 字段。
       */
     SentenceInfoEnabled?: number;
     /**
       * 评估语言
-0：英文
+0：英文（默认）
 1：中文
-ServerType不填默认为0
       */
     ServerType?: number;
     /**
       * 异步模式标识
-0：同步模式
-1：异步模式（一般情况不建议使用异步模式）
+0：同步模式（默认）
+1：异步模式（一般情况不建议使用异步模式，如需使用参考：[异步轮询](https://cloud.tencent.com/document/product/884/78824#.E7.BB.93.E6.9E.9C.E6.9F.A5.E8.AF.A2)）
 可选值参考[服务模式](https://cloud.tencent.com/document/product/884/33697)。
       */
     IsAsync?: number;
@@ -560,9 +564,8 @@ ServerType不填默认为0
     IsQuery?: number;
     /**
       * 输入文本模式
-0: 普通文本
+0: 普通文本（默认）
 1：[音素结构](https://cloud.tencent.com/document/product/884/33698)文本
-2：音素注册模式（提工单注册需要使用音素的单词）。
       */
     TextMode?: number;
     /**
@@ -579,11 +582,11 @@ export interface TransmitOralProcessWithInitResponse {
       */
     PronAccuracy: number;
     /**
-      * 发音流利度，取值范围[0, 1]，当为词模式时，取值无意义；当为流式模式且请求中IsEnd未置1时，取值无意义
+      * 发音流利度，取值范围[0, 1]，当为词模式时，取值无意义；当为流式模式且请求中IsEnd未置1时，取值无意义。取值无意义时，值为-1
       */
     PronFluency: number;
     /**
-      * 发音完整度，取值范围[0, 1]，当为词模式时，取值无意义；当为流式模式且请求中IsEnd未置1时，取值无意义
+      * 发音完整度，取值范围[0, 1]，当为词模式或自由说模式时，取值无意义；当为流式模式且请求中IsEnd未置1时，取值无意义。取值无意义时，值为-1
       */
     PronCompletion: number;
     /**
@@ -595,7 +598,7 @@ export interface TransmitOralProcessWithInitResponse {
       */
     SessionId: string;
     /**
-      * 保存语音音频文件下载地址
+      * 已废弃，不再保存语音音频文件下载地址
       */
     AudioUrl: string;
     /**

@@ -318,45 +318,6 @@ export interface CreateLogsetRequest {
     Tags?: Array<Tag>;
 }
 /**
- * DescribeShippers请求参数结构体
- */
-export interface DescribeShippersRequest {
-    /**
-      * <br><li> shipperName
-
-按照【投递规则名称】进行过滤。
-类型：String
-
-必选：否
-
-<br><li> shipperId
-
-按照【投递规则ID】进行过滤。
-类型：String
-
-必选：否
-
-<br><li> topicId
-
-按照【日志主题】进行过滤。
-
-类型：String
-
-必选：否
-
-每次请求的Filters的上限为10，Filter.Values的上限为5。
-      */
-    Filters?: Array<Filter>;
-    /**
-      * 分页的偏移量，默认值为0
-      */
-    Offset?: number;
-    /**
-      * 分页单页的限制数目，默认值为20，最大值100
-      */
-    Limit?: number;
-}
-/**
  * 日志中的KV对
  */
 export interface LogItem {
@@ -749,6 +710,20 @@ export interface DescribeConfigsResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DeleteMachineGroupInfo请求参数结构体
+ */
+export interface DeleteMachineGroupInfoRequest {
+    /**
+      * 机器组ID
+      */
+    GroupId: string;
+    /**
+      * 机器组类型
+目前type支持 ip 和 label
+      */
+    MachineGroupType: MachineGroupTypeInfo;
 }
 /**
  * CreateLogset返回参数结构体
@@ -1328,77 +1303,43 @@ export interface PartitionInfo {
     LastWriteTime: string;
 }
 /**
- * CreateConfigExtra请求参数结构体
+ * DescribeShippers请求参数结构体
  */
-export interface CreateConfigExtraRequest {
+export interface DescribeShippersRequest {
     /**
-      * 采集配置规程名称，最长63个字符，只能包含小写字符、数字及分隔符（“-”），且必须以小写字符开头，数字或小写字符结尾
+      * <br><li> shipperName
+
+按照【投递规则名称】进行过滤。
+类型：String
+
+必选：否
+
+<br><li> shipperId
+
+按照【投递规则ID】进行过滤。
+类型：String
+
+必选：否
+
+<br><li> topicId
+
+按照【日志主题】进行过滤。
+
+类型：String
+
+必选：否
+
+每次请求的Filters的上限为10，Filter.Values的上限为5。
       */
-    Name: string;
+    Filters?: Array<Filter>;
     /**
-      * 日志主题id
+      * 分页的偏移量，默认值为0
       */
-    TopicId: string;
+    Offset?: number;
     /**
-      * 类型：container_stdout、container_file、host_file
+      * 分页单页的限制数目，默认值为20，最大值100
       */
-    Type: string;
-    /**
-      * 采集的日志类型，json_log代表json格式日志，delimiter_log代表分隔符格式日志，minimalist_log代表极简日志，multiline_log代表多行日志，fullregex_log代表完整正则，默认为minimalist_log
-      */
-    LogType: string;
-    /**
-      * 采集配置标
-      */
-    ConfigFlag: string;
-    /**
-      * 日志集id
-      */
-    LogsetId: string;
-    /**
-      * 日志集name
-      */
-    LogsetName: string;
-    /**
-      * 日志主题名称
-      */
-    TopicName: string;
-    /**
-      * 节点文件配置信息
-      */
-    HostFile?: HostFileInfo;
-    /**
-      * 容器文件路径信息
-      */
-    ContainerFile?: ContainerFileInfo;
-    /**
-      * 容器标准输出信息
-      */
-    ContainerStdout?: ContainerStdoutInfo;
-    /**
-      * 日志格式化方式
-      */
-    LogFormat?: string;
-    /**
-      * 提取规则，如果设置了ExtractRule，则必须设置LogType
-      */
-    ExtractRule?: ExtractRuleInfo;
-    /**
-      * 采集黑名单路径列表
-      */
-    ExcludePaths?: Array<ExcludePathInfo>;
-    /**
-      * 用户自定义采集规则，Json格式序列化的字符串
-      */
-    UserDefineRule?: string;
-    /**
-      * 绑定的机器组id
-      */
-    GroupId?: string;
-    /**
-      * 绑定的机器组id列表
-      */
-    GroupIds?: Array<string>;
+    Limit?: number;
 }
 /**
  * 黑名单path信息
@@ -1680,6 +1621,23 @@ export interface CreateIndexRequest {
       * 元数据相关标志位，默认为0。 0：全文索引包括开启键值索引的元数据字段， 1：全文索引包括所有元数据字段，2：全文索引不包括元数据字段。
       */
     MetadataFlag?: number;
+}
+/**
+ * DescribeLogsets返回参数结构体
+ */
+export interface DescribeLogsetsResponse {
+    /**
+      * 分页的总数目
+      */
+    TotalCount: number;
+    /**
+      * 日志集列表
+      */
+    Logsets: Array<LogsetInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DeleteConsumer返回参数结构体
@@ -2178,6 +2136,24 @@ export interface DescribeAlarmNoticesResponse {
     RequestId?: string;
 }
 /**
+ * DescribeMachineGroups返回参数结构体
+ */
+export interface DescribeMachineGroupsResponse {
+    /**
+      * 机器组信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MachineGroups: Array<MachineGroupInfo>;
+    /**
+      * 分页的总数目
+      */
+    TotalCount: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DeleteConfigExtra请求参数结构体
  */
 export interface DeleteConfigExtraRequest {
@@ -2224,21 +2200,18 @@ export interface ModifyConfigRequest {
     UserDefineRule?: string;
 }
 /**
- * DescribeLogsets返回参数结构体
+ * AddMachineGroupInfo请求参数结构体
  */
-export interface DescribeLogsetsResponse {
+export interface AddMachineGroupInfoRequest {
     /**
-      * 分页的总数目
+      * 机器组ID
       */
-    TotalCount: number;
+    GroupId: string;
     /**
-      * 日志集列表
+      * 机器组类型
+目前type支持 ip 和 label
       */
-    Logsets: Array<LogsetInfo>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    MachineGroupType: MachineGroupTypeInfo;
 }
 /**
  * JSON类型描述
@@ -2510,13 +2483,28 @@ export interface Column {
     Type?: string;
 }
 /**
- * 投递日志的压缩配置
+ * 投递日志的内容格式配置
  */
-export interface CompressInfo {
+export interface ContentInfo {
     /**
-      * 压缩格式，支持gzip、lzop、snappy和none不压缩
+      * 内容格式，支持json、csv
       */
     Format: string;
+    /**
+      * csv格式内容描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Csv?: CsvInfo;
+    /**
+      * json格式内容描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Json?: JsonInfo;
+    /**
+      * parquet格式内容描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Parquet?: ParquetInfo;
 }
 /**
  * 需要开启键值索引的字段的索引描述信息
@@ -2641,6 +2629,27 @@ export interface ExportInfo {
       * 日志导出创建时间
       */
     CreateTime: string;
+}
+/**
+ * DescribeLogContext返回参数结构体
+ */
+export interface DescribeLogContextResponse {
+    /**
+      * 日志上下文信息集合
+      */
+    LogContextInfos: Array<LogContextInfo>;
+    /**
+      * 上文日志是否已经返回
+      */
+    PrevOver: boolean;
+    /**
+      * 下文日志是否已经返回
+      */
+    NextOver: boolean;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 采集规则配置信息
@@ -2809,25 +2818,77 @@ export interface ModifyShipperRequest {
     FilenameMode?: number;
 }
 /**
- * DescribeLogContext返回参数结构体
+ * CreateConfigExtra请求参数结构体
  */
-export interface DescribeLogContextResponse {
+export interface CreateConfigExtraRequest {
     /**
-      * 日志上下文信息集合
+      * 采集配置规程名称，最长63个字符，只能包含小写字符、数字及分隔符（“-”），且必须以小写字符开头，数字或小写字符结尾
       */
-    LogContextInfos: Array<LogContextInfo>;
+    Name: string;
     /**
-      * 上文日志是否已经返回
+      * 日志主题id
       */
-    PrevOver: boolean;
+    TopicId: string;
     /**
-      * 下文日志是否已经返回
+      * 类型：container_stdout、container_file、host_file
       */
-    NextOver: boolean;
+    Type: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 采集的日志类型，json_log代表json格式日志，delimiter_log代表分隔符格式日志，minimalist_log代表极简日志，multiline_log代表多行日志，fullregex_log代表完整正则，默认为minimalist_log
       */
-    RequestId?: string;
+    LogType: string;
+    /**
+      * 采集配置标
+      */
+    ConfigFlag: string;
+    /**
+      * 日志集id
+      */
+    LogsetId: string;
+    /**
+      * 日志集name
+      */
+    LogsetName: string;
+    /**
+      * 日志主题名称
+      */
+    TopicName: string;
+    /**
+      * 节点文件配置信息
+      */
+    HostFile?: HostFileInfo;
+    /**
+      * 容器文件路径信息
+      */
+    ContainerFile?: ContainerFileInfo;
+    /**
+      * 容器标准输出信息
+      */
+    ContainerStdout?: ContainerStdoutInfo;
+    /**
+      * 日志格式化方式
+      */
+    LogFormat?: string;
+    /**
+      * 提取规则，如果设置了ExtractRule，则必须设置LogType
+      */
+    ExtractRule?: ExtractRuleInfo;
+    /**
+      * 采集黑名单路径列表
+      */
+    ExcludePaths?: Array<ExcludePathInfo>;
+    /**
+      * 用户自定义采集规则，Json格式序列化的字符串
+      */
+    UserDefineRule?: string;
+    /**
+      * 绑定的机器组id
+      */
+    GroupId?: string;
+    /**
+      * 绑定的机器组id列表
+      */
+    GroupIds?: Array<string>;
 }
 /**
  * CreateConsumer请求参数结构体
@@ -2947,28 +3008,13 @@ export interface DescribeMachinesResponse {
     RequestId?: string;
 }
 /**
- * 投递日志的内容格式配置
+ * 投递日志的压缩配置
  */
-export interface ContentInfo {
+export interface CompressInfo {
     /**
-      * 内容格式，支持json、csv
+      * 压缩格式，支持gzip、lzop、snappy和none不压缩
       */
     Format: string;
-    /**
-      * csv格式内容描述
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Csv?: CsvInfo;
-    /**
-      * json格式内容描述
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Json?: JsonInfo;
-    /**
-      * parquet格式内容描述
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Parquet?: ParquetInfo;
 }
 /**
  * ApplyConfigToMachineGroup返回参数结构体
@@ -3104,6 +3150,15 @@ export interface KeyValueInfo {
       * 字段的索引描述信息
       */
     Value: ValueInfo;
+}
+/**
+ * AddMachineGroupInfo返回参数结构体
+ */
+export interface AddMachineGroupInfoResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * ModifyMachineGroup请求参数结构体
@@ -3707,18 +3762,9 @@ export interface ModifyLogsetRequest {
     Tags?: Array<Tag>;
 }
 /**
- * DescribeMachineGroups返回参数结构体
+ * DeleteMachineGroupInfo返回参数结构体
  */
-export interface DescribeMachineGroupsResponse {
-    /**
-      * 机器组信息列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    MachineGroups: Array<MachineGroupInfo>;
-    /**
-      * 分页的总数目
-      */
-    TotalCount: number;
+export interface DeleteMachineGroupInfoResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

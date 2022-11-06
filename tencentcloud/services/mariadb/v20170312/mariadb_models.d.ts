@@ -569,6 +569,23 @@ export interface IsolateHourDBInstanceRequest {
     InstanceIds: Array<string>;
 }
 /**
+ * IsolateDBInstance返回参数结构体
+ */
+export interface IsolateDBInstanceResponse {
+    /**
+      * 隔离成功实例ID列表。
+      */
+    SuccessInstanceIds: Array<string>;
+    /**
+      * 隔离失败实例ID列表。
+      */
+    FailedInstanceIds: Array<string>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * ModifyLogFileRetentionPeriod请求参数结构体
  */
 export interface ModifyLogFileRetentionPeriodRequest {
@@ -2570,6 +2587,15 @@ export interface DescribeDcnDetailResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * IsolateDBInstance请求参数结构体
+ */
+export interface IsolateDBInstanceRequest {
+    /**
+      * 实例 ID，格式如：tdsql-dasjkhd，与云数据库控制台页面中显示的实例 ID 相同，可使用 查询实例列表 接口获取，其值为输出参数中字段 InstanceId 的值。
+      */
+    InstanceIds: Array<string>;
 }
 /**
  * 按机型归类的实例可售卖规格信息

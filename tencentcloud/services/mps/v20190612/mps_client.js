@@ -28,17 +28,48 @@ class Client extends abstract_client_1.AbstractClient {
         super("mps.tencentcloudapi.com", "2019-06-12", clientConfig);
     }
     /**
+     * 批量查询媒体输入流的配置信息。
+     */
+    async DescribeStreamLinkFlows(req, cb) {
+        return this.request("DescribeStreamLinkFlows", req, cb);
+    }
+    /**
+     * 停止媒体传输流。
+     */
+    async StopStreamLinkFlow(req, cb) {
+        return this.request("StopStreamLinkFlow", req, cb);
+    }
+    /**
+     * 修改媒体传输流的输出配置。
+     */
+    async ModifyStreamLinkOutputInfo(req, cb) {
+        return this.request("ModifyStreamLinkOutputInfo", req, cb);
+    }
+    /**
      * 创建用户自定义指定时间点截图模板，数量上限：16。
      */
     async CreateSnapshotByTimeOffsetTemplate(req, cb) {
         return this.request("CreateSnapshotByTimeOffsetTemplate", req, cb);
     }
     /**
-     * 从 CMQ 获取到消息后，从消息的 msgBody 字段中解析出 MPS 事件通知的内容。
-该接口不用于发起网络调用，而是用来帮助生成各个语言平台的 SDK，您可以参考 SDK 的中解析函数的实现事件通知的解析。
+     * 实时查询流的当前状态
      */
-    async ParseNotification(req, cb) {
-        return this.request("ParseNotification", req, cb);
+    async DescribeStreamLinkFlowRealtimeStatus(req, cb) {
+        return this.request("DescribeStreamLinkFlowRealtimeStatus", req, cb);
+    }
+    /**
+     * 修改用户自定义内容分析模板。
+
+注意：模板 ID 10000 以下的为系统预置模板，不允许修改。
+     */
+    async ModifyAIAnalysisTemplate(req, cb) {
+        return this.request("ModifyAIAnalysisTemplate", req, cb);
+    }
+    /**
+     * 删除媒体传输流的输出配置。
+     */
+    async DeleteStreamLinkOutput(req, cb) {
+        return this.request("DeleteStreamLinkOutput", req, cb);
     }
     /**
      * 修改用户自定义内容审核模板。
@@ -120,10 +151,34 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteAnimatedGraphicsTemplate", req, cb);
     }
     /**
+     * 查询媒体输入流的配置信息。
+     */
+    async DescribeStreamLinkFlow(req, cb) {
+        return this.request("DescribeStreamLinkFlow", req, cb);
+    }
+    /**
+     * 删除媒体传输的传输流配置。
+     */
+    async DeleteStreamLinkFlow(req, cb) {
+        return this.request("DeleteStreamLinkFlow", req, cb);
+    }
+    /**
      * 根据内容分析模板唯一标识，获取内容分析模板详情列表。返回结果包含符合条件的所有用户自定义内容分析模板及系统预置视频内容分析模板
      */
     async DescribeAIAnalysisTemplates(req, cb) {
         return this.request("DescribeAIAnalysisTemplates", req, cb);
+    }
+    /**
+     * 查询媒体传输流的日志信息。
+     */
+    async DescribeStreamLinkFlowLogs(req, cb) {
+        return this.request("DescribeStreamLinkFlowLogs", req, cb);
+    }
+    /**
+     * 查询媒体传输流的SRT质量数据。
+     */
+    async DescribeStreamLinkFlowSRTStatistics(req, cb) {
+        return this.request("DescribeStreamLinkFlowSRTStatistics", req, cb);
     }
     /**
      * 通过任务 ID 查询任务的执行状态和结果的详细信息（最多可以查询3天之内提交的任务）。
@@ -138,10 +193,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyAIRecognitionTemplate", req, cb);
     }
     /**
-     * 修改转自适应码流模板
+     * 创建媒体传输流的输出信息。
      */
-    async ModifyAdaptiveDynamicStreamingTemplate(req, cb) {
-        return this.request("ModifyAdaptiveDynamicStreamingTemplate", req, cb);
+    async CreateStreamLinkOutputInfo(req, cb) {
+        return this.request("CreateStreamLinkOutputInfo", req, cb);
     }
     /**
      * 修改用户自定义采样截图模板。
@@ -228,6 +283,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeSampleSnapshotTemplates", req, cb);
     }
     /**
+     * 查询媒体传输流的媒体质量数据。
+
+     */
+    async DescribeStreamLinkFlowStatistics(req, cb) {
+        return this.request("DescribeStreamLinkFlowStatistics", req, cb);
+    }
+    /**
      * 创建用户自定义水印模板，数量上限：1000。
      */
     async CreateWatermarkTemplate(req, cb) {
@@ -252,6 +314,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteAIRecognitionTemplate", req, cb);
     }
     /**
+     * 启动媒体传输流。
+     */
+    async StartStreamLinkFlow(req, cb) {
+        return this.request("StartStreamLinkFlow", req, cb);
+    }
+    /**
      * 创建用户自定义转动图模板，数量上限：16。
      */
     async CreateAnimatedGraphicsTemplate(req, cb) {
@@ -264,10 +332,30 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAnimatedGraphicsTemplates", req, cb);
     }
     /**
+     * 修改媒体传输流的输入信息。
+     */
+    async ModifyStreamLinkInput(req, cb) {
+        return this.request("ModifyStreamLinkInput", req, cb);
+    }
+    /**
      * 启用工作流。
      */
     async EnableWorkflow(req, cb) {
         return this.request("EnableWorkflow", req, cb);
+    }
+    /**
+     * 查询媒体传输流的媒体质量数据。
+
+     */
+    async DescribeStreamLinkFlowMediaStatistics(req, cb) {
+        return this.request("DescribeStreamLinkFlowMediaStatistics", req, cb);
+    }
+    /**
+     * 从 CMQ 获取到消息后，从消息的 msgBody 字段中解析出 MPS 事件通知的内容。
+该接口不用于发起网络调用，而是用来帮助生成各个语言平台的 SDK，您可以参考 SDK 的中解析函数的实现事件通知的解析。
+     */
+    async ParseNotification(req, cb) {
+        return this.request("ParseNotification", req, cb);
     }
     /**
      * 智能媒体识别，包含表情和动作识别。仅用于智学，其他调用无效。
@@ -282,12 +370,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ManageTask", req, cb);
     }
     /**
-     * 修改用户自定义内容分析模板。
-
-注意：模板 ID 10000 以下的为系统预置模板，不允许修改。
+     * 查询媒体传输开通状态。
      */
-    async ModifyAIAnalysisTemplate(req, cb) {
-        return this.request("ModifyAIAnalysisTemplate", req, cb);
+    async DescribeStreamLinkActivateState(req, cb) {
+        return this.request("DescribeStreamLinkActivateState", req, cb);
+    }
+    /**
+     * 修改媒体传输的传输流配置信息。
+     */
+    async ModifyStreamLinkFlow(req, cb) {
+        return this.request("ModifyStreamLinkFlow", req, cb);
     }
     /**
      * * 该接口用于查询任务列表；
@@ -296,6 +388,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeTasks(req, cb) {
         return this.request("DescribeTasks", req, cb);
+    }
+    /**
+     * 查询媒体传输所有地区。
+     */
+    async DescribeStreamLinkRegions(req, cb) {
+        return this.request("DescribeStreamLinkRegions", req, cb);
     }
     /**
      * 修改用户自定义指定时间点截图模板。
@@ -349,6 +447,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateWorkflow(req, cb) {
         return this.request("CreateWorkflow", req, cb);
+    }
+    /**
+     * 创建媒体传输的传输流配置。
+     */
+    async CreateStreamLinkFlow(req, cb) {
+        return this.request("CreateStreamLinkFlow", req, cb);
     }
     /**
      * 对直播流媒体发起处理任务，功能包括：
@@ -417,6 +521,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateAIAnalysisTemplate(req, cb) {
         return this.request("CreateAIAnalysisTemplate", req, cb);
+    }
+    /**
+     * 修改转自适应码流模板
+     */
+    async ModifyAdaptiveDynamicStreamingTemplate(req, cb) {
+        return this.request("ModifyAdaptiveDynamicStreamingTemplate", req, cb);
     }
     /**
      * 根据内容识别模板唯一标识，获取内容识别模板详情列表。返回结果包含符合条件的所有用户自定义内容识别模板及系统预置视频内容识别模板

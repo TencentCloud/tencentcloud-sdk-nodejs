@@ -168,9 +168,9 @@ it("mariadb.v20170312.ModifyDBParameters", async function () {
     }
 })
 
-it("mariadb.v20170312.ModifyLogFileRetentionPeriod", async function () {
+it("mariadb.v20170312.KillSession", async function () {
     try {
-       const data = await client.ModifyLogFileRetentionPeriod({})
+       const data = await client.KillSession({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -298,9 +298,9 @@ it("mariadb.v20170312.ModifyInstanceVip", async function () {
     }
 })
 
-it("mariadb.v20170312.KillSession", async function () {
+it("mariadb.v20170312.IsolateDBInstance", async function () {
     try {
-       const data = await client.KillSession({})
+       const data = await client.IsolateDBInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -651,6 +651,16 @@ it("mariadb.v20170312.DescribeLogFileRetentionPeriod", async function () {
 it("mariadb.v20170312.DisassociateSecurityGroups", async function () {
     try {
        const data = await client.DisassociateSecurityGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mariadb.v20170312.ModifyLogFileRetentionPeriod", async function () {
+    try {
+       const data = await client.ModifyLogFileRetentionPeriod({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

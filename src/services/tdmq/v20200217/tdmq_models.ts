@@ -3354,6 +3354,12 @@ FilterType = 2表示用户使用 BindingKey 过滤。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Status: number
+
+  /**
+      * 0表示pulsar，1表示rocketmq
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BrokerType: number
 }
 
 /**

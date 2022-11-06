@@ -94,6 +94,21 @@ export interface ModifyWatermarkTemplateRequest {
 }
 
 /**
+ * 查询输入的RTP配置信息。
+ */
+export interface DescribeInputRTPSettings {
+  /**
+   * 是否FEC。
+   */
+  FEC: string
+
+  /**
+   * 空闲超时时间。
+   */
+  IdleTimeout: number
+}
+
+/**
  * 语音全文识别片段。
  */
 export interface AiRecognitionTaskAsrFullTextSegmentItem {
@@ -119,31 +134,13 @@ export interface AiRecognitionTaskAsrFullTextSegmentItem {
 }
 
 /**
- * 用户自定义文本审核任务控制参数。
+ * DeleteStreamLinkFlow请求参数结构体
  */
-export interface UserDefineOcrTextReviewTemplateInfoForUpdate {
+export interface DeleteStreamLinkFlowRequest {
   /**
-      * 用户自定文本审核任务开关，可选值：
-<li>ON：开启自定义文本审核任务；</li>
-<li>OFF：关闭自定义文本审核任务。</li>
-      */
-  Switch?: string
-
-  /**
-      * 用户自定义文本过滤标签，审核结果包含选择的标签则返回结果，如果过滤标签为空，则审核结果全部返回。如果要使用标签过滤功能，添加自定义文本关键词素材时需要添加对应标签。
-标签个数最多 10 个，每个标签长度最多 16 个字符。
-      */
-  LabelSet?: string
-
-  /**
-   * 判定涉嫌违规的分数阈值，当智能审核达到该分数以上，认为涉嫌违规。取值范围：0~100。
+   * 传输流Id。
    */
-  BlockConfidence?: number
-
-  /**
-   * 判定需人工复核是否违规的分数阈值，当智能审核达到该分数以上，认为需人工复核。取值范围：0~100。
-   */
-  ReviewConfidence?: number
+  FlowId: string
 }
 
 /**
@@ -407,6 +404,71 @@ export interface ProcessLiveStreamResponse {
 }
 
 /**
+ * 创建媒体传输流的输出的SRT配置。
+ */
+export interface CreateOutputSRTSettings {
+  /**
+   * 转推的目标地址，当Mode为CALLER时必填，且只能填1组。
+   */
+  Destinations: Array<CreateOutputSRTSettingsDestinations>
+
+  /**
+   * 转推SRT的流Id，可选大小写字母、数字和特殊字符（.#!:&,=_-），长度为0~512。
+   */
+  StreamId?: string
+
+  /**
+   * 转推SRT的总延迟，默认0，单位ms，范围为[0, 3000]。
+   */
+  Latency?: number
+
+  /**
+   * 转推SRT的接收延迟，默认120，单位ms，范围为[0, 3000]。
+   */
+  RecvLatency?: number
+
+  /**
+   * 转推SRT的对端延迟，默认0，单位ms，范围为[0, 3000]。
+   */
+  PeerLatency?: number
+
+  /**
+   * 转推SRT的对端空闲超时时间，默认5000，单位ms，范围为[1000, 10000]。
+   */
+  PeerIdleTimeout?: number
+
+  /**
+   * 转推SRT的加密密钥，默认为空，表示不加密。只可填ascii码值，长度为[10, 79]。
+   */
+  Passphrase?: string
+
+  /**
+   * 转推SRT的密钥长度，默认为0，可选[0|16|24|32]。
+   */
+  PbKeyLen?: number
+
+  /**
+   * SRT模式，可选[LISTENER|CALLER]，默认为CALLER。
+   */
+  Mode?: string
+}
+
+/**
+ * ModifyStreamLinkOutputInfo返回参数结构体
+ */
+export interface ModifyStreamLinkOutputInfoResponse {
+  /**
+   * 修改后的Output配置。
+   */
+  Info: DescribeOutput
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeAnimatedGraphicsTemplates请求参数结构体
  */
 export interface DescribeAnimatedGraphicsTemplatesRequest {
@@ -632,6 +694,41 @@ export interface ManageTaskResponse {
 }
 
 /**
+ * 传输流的媒体数据。
+ */
+export interface FlowMediaInfo {
+  /**
+   * 时间戳，单位是秒。
+   */
+  Timestamp: number
+
+  /**
+   * 总带宽。
+   */
+  Network: number
+
+  /**
+   * 传输流的视频数据。
+   */
+  Video: Array<FlowMediaVideo>
+
+  /**
+   * 传输流的音频数据。
+   */
+  Audio: Array<FlowMediaAudio>
+
+  /**
+   * 标志同一次推流。
+   */
+  SessionId: string
+
+  /**
+   * 客户端IP。
+   */
+  ClientIp: string
+}
+
+/**
  * DeleteWorkflow请求参数结构体
  */
 export interface DeleteWorkflowRequest {
@@ -642,54 +739,150 @@ export interface DeleteWorkflowRequest {
 }
 
 /**
- * 智能封面结果信息
+ * 查询输入的RTMP配置信息。
  */
-export interface AiAnalysisTaskCoverOutput {
+export interface DescribeRTMPPullSourceAddress {
   /**
-   * 智能封面列表。
-   */
-  CoverSet: Array<MediaAiAnalysisCoverItem>
+      * RTMP源站的TcUrl地址。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TcUrl: string
 
   /**
-   * 智能封面的存储位置。
-   */
-  OutputStorage: TaskOutputStorage
+      * RTMP源站的StreamKey。
+RTMP源站地址拼接规则为：$TcUrl/$StreamKey。
+      */
+  StreamKey: string
 }
 
 /**
- * 智能封面结果类型
+ * 查询输出的RTMP拉流配置信息。
  */
-export interface AiAnalysisTaskCoverResult {
+export interface DescribeOutputRTMPPullSettings {
   /**
-   * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
-   */
-  Status: string
-
-  /**
-   * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
-   */
-  ErrCodeExt: string
-
-  /**
-   * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
-   */
-  ErrCode: number
-
-  /**
-   * 错误信息。
-   */
-  Message: string
-
-  /**
-   * 智能封面任务输入。
-   */
-  Input: AiAnalysisTaskCoverInput
-
-  /**
-      * 智能封面任务输出。
+      * 拉流地址列表。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Output: AiAnalysisTaskCoverOutput
+  ServerUrls: Array<DescribeOutputRTMPPullServerUrl>
+}
+
+/**
+ * 用户自定义文本审核任务控制参数。
+ */
+export interface UserDefineOcrTextReviewTemplateInfoForUpdate {
+  /**
+      * 用户自定文本审核任务开关，可选值：
+<li>ON：开启自定义文本审核任务；</li>
+<li>OFF：关闭自定义文本审核任务。</li>
+      */
+  Switch?: string
+
+  /**
+      * 用户自定义文本过滤标签，审核结果包含选择的标签则返回结果，如果过滤标签为空，则审核结果全部返回。如果要使用标签过滤功能，添加自定义文本关键词素材时需要添加对应标签。
+标签个数最多 10 个，每个标签长度最多 16 个字符。
+      */
+  LabelSet?: string
+
+  /**
+   * 判定涉嫌违规的分数阈值，当智能审核达到该分数以上，认为涉嫌违规。取值范围：0~100。
+   */
+  BlockConfidence?: number
+
+  /**
+   * 判定需人工复核是否违规的分数阈值，当智能审核达到该分数以上，认为需人工复核。取值范围：0~100。
+   */
+  ReviewConfidence?: number
+}
+
+/**
+ * 修改Output配置。
+ */
+export interface ModifyOutputInfo {
+  /**
+   * 需要修改的Output的Id。
+   */
+  OutputId: string
+
+  /**
+   * 输出的名称。
+   */
+  OutputName: string
+
+  /**
+   * 输出的描述。
+   */
+  Description: string
+
+  /**
+   * 输出的转推协议，支持SRT|RTP|RTMP。
+   */
+  Protocol: string
+
+  /**
+   * 转推SRT的配置。
+   */
+  SRTSettings?: CreateOutputSRTSettings
+
+  /**
+   * 转推RTP的配置。
+   */
+  RTPSettings?: CreateOutputInfoRTPSettings
+
+  /**
+   * 转推RTMP的配置。
+   */
+  RTMPSettings?: CreateOutputRTMPSettings
+
+  /**
+      * IP白名单列表，格式为CIDR，如0.0.0.0/0。
+当Protocol为RTMP_PULL有效，为空代表不限制客户端IP。
+      */
+  AllowIpList?: Array<string>
+}
+
+/**
+ * 点播文件指定时间点截图信息
+ */
+export interface MediaSnapshotByTimeOffsetItem {
+  /**
+   * 指定时间点截图规格，参见[指定时间点截图参数模板](https://cloud.tencent.com/document/product/266/33480#.E6.97.B6.E9.97.B4.E7.82.B9.E6.88.AA.E5.9B.BE.E6.A8.A1.E6.9D.BF)。
+   */
+  Definition: number
+
+  /**
+   * 同一规格的截图信息集合，每个元素代表一张截图。
+   */
+  PicInfoSet: Array<MediaSnapshotByTimePicInfoItem>
+
+  /**
+   * 指定时间点截图文件的存储位置。
+   */
+  Storage: TaskOutputStorage
+}
+
+/**
+ * 输出文件名的`{number}`变量的规则。
+ */
+export interface NumberFormat {
+  /**
+   * `{number}`变量的起始值，默认为0。
+   */
+  InitialValue?: number
+
+  /**
+   * `{number}`变量的增长步长，默认为1。
+   */
+  Increment?: number
+
+  /**
+   * `{number}`变量的最小长度，不足时补占位符。默认为1。
+   */
+  MinLength?: number
+
+  /**
+   * `{number}`变量的长度不足时，补充的占位符。默认为"0"。
+   */
+  PlaceHolder?: string
 }
 
 /**
@@ -1178,6 +1371,16 @@ export interface ContentReviewTemplateItem {
 }
 
 /**
+ * ModifyStreamLinkFlow返回参数结构体
+ */
+export interface ModifyStreamLinkFlowResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteAIRecognitionTemplate返回参数结构体
  */
 export interface DeleteAIRecognitionTemplateResponse {
@@ -1259,63 +1462,23 @@ export interface VideoEnhanceConfig {
 }
 
 /**
- * 媒体处理任务中的马赛克参数类型
+ * DeleteContentReviewTemplate请求参数结构体
  */
-export interface MosaicInput {
+export interface DeleteContentReviewTemplateRequest {
   /**
-      * 原点位置，目前仅支持：
-<li>TopLeft：表示坐标原点位于视频图像左上角，马赛克原点为图片或文字的左上角。</li>
-默认值：TopLeft。
-      */
-  CoordinateOrigin?: string
+   * 内容审核模板唯一标识。
+   */
+  Definition: number
+}
 
+/**
+ * StartStreamLinkFlow返回参数结构体
+ */
+export interface StartStreamLinkFlowResponse {
   /**
-      * 马赛克原点距离视频图像坐标原点的水平位置。支持 %、px 两种格式：
-<li>当字符串以 % 结尾，表示马赛克 XPos 为视频宽度指定百分比，如 10% 表示 XPos 为视频宽度的 10%；</li>
-<li>当字符串以 px 结尾，表示马赛克 XPos 为指定像素，如 100px 表示 XPos 为 100 像素。</li>
-默认值：0px。
-      */
-  XPos?: string
-
-  /**
-      * 马赛克原点距离视频图像坐标原点的垂直位置。支持 %、px 两种格式：
-<li>当字符串以 % 结尾，表示马赛克 YPos 为视频高度指定百分比，如 10% 表示 YPos 为视频高度的 10%；</li>
-<li>当字符串以 px 结尾，表示马赛克 YPos 为指定像素，如 100px 表示 YPos 为 100 像素。</li>
-默认值：0px。
-      */
-  YPos?: string
-
-  /**
-      * 马赛克的宽度。支持 %、px 两种格式：
-<li>当字符串以 % 结尾，表示马赛克 Width 为视频宽度的百分比大小，如 10% 表示 Width 为视频宽度的 10%；</li>
-<li>当字符串以 px 结尾，表示马赛克 Width 单位为像素，如 100px 表示 Width 为 100 像素。</li>
-默认值：10%。
-      */
-  Width?: string
-
-  /**
-      * 马赛克的高度。支持 %、px 两种格式：
-<li>当字符串以 % 结尾，表示马赛克 Height 为视频高度的百分比大小，如 10% 表示 Height 为视频高度的 10%；</li>
-<li>当字符串以 px 结尾，表示马赛克 Height 单位为像素，如 100px 表示 Height 为 100 像素。</li>
-默认值：10%。
-      */
-  Height?: string
-
-  /**
-      * 马赛克的起始时间偏移，单位：秒。不填或填0，表示马赛克从画面出现时开始显现。
-<li>不填或填0，表示马赛克从画面开始就出现；</li>
-<li>当数值大于0时（假设为 n），表示马赛克从画面开始的第 n 秒出现；</li>
-<li>当数值小于0时（假设为 -n），表示马赛克从离画面结束 n 秒前开始出现。</li>
-      */
-  StartTimeOffset?: number
-
-  /**
-      * 马赛克的结束时间偏移，单位：秒。
-<li>不填或填0，表示马赛克持续到画面结束；</li>
-<li>当数值大于0时（假设为 n），表示马赛克持续到第 n 秒时消失；</li>
-<li>当数值小于0时（假设为 -n），表示马赛克持续到离画面结束 n 秒前消失。</li>
-      */
-  EndTimeOffset?: number
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1326,6 +1489,21 @@ export interface AiReviewPoliticalTaskInput {
    * 模板 ID。
    */
   Definition: number
+}
+
+/**
+ * 创建媒体传输流的输出的RTP的目标地址。
+ */
+export interface CreateOutputRTPSettingsDestinations {
+  /**
+   * 转推的目标IP。
+   */
+  Ip: string
+
+  /**
+   * 转推的目标端口。
+   */
+  Port: number
 }
 
 /**
@@ -1353,6 +1531,16 @@ export interface MediaAiAnalysisClassificationItem {
    * 智能分类的可信度，取值范围是 0 到 100。
    */
   Confidence: number
+}
+
+/**
+ * ModifyWordSample返回参数结构体
+ */
+export interface ModifyWordSampleResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1444,6 +1632,41 @@ export interface DeletePersonSampleRequest {
 }
 
 /**
+ * DescribeStreamLinkFlows返回参数结构体
+ */
+export interface DescribeStreamLinkFlowsResponse {
+  /**
+   * 流的配置信息列表。
+   */
+  Infos: Array<DescribeFlow>
+
+  /**
+   * 当前页数。
+   */
+  PageNum: number
+
+  /**
+   * 每页大小。
+   */
+  PageSize: number
+
+  /**
+   * 总数量。
+   */
+  TotalNum: number
+
+  /**
+   * 总页数。
+   */
+  TotalPage: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 采样截图信息
  */
 export interface MediaSampleSnapshotItem {
@@ -1480,6 +1703,96 @@ export interface MediaSampleSnapshotItem {
    * 截图如果被打上了水印，被打水印的模板 ID 列表。
    */
   WaterMarkDefinition: Array<number>
+}
+
+/**
+ * 内容审核结果
+ */
+export interface AiContentReviewResult {
+  /**
+      * 任务的类型，可以取的值有：
+<li>Porn：图片鉴黄</li>
+<li>Terrorism：图片敏感</li>
+<li>Political：图片敏感</li>
+<li>Porn.Asr：Asr 文字鉴黄</li>
+<li>Porn.Ocr：Ocr 文字鉴黄</li>
+<li>Political.Asr：Asr 文字敏感</li>
+<li>Political.Ocr：Ocr 文字敏感</li>
+<li>Terrorism.Ocr：Ocr 文字敏感</li>
+<li>Prohibited.Asr：Asr 文字鉴违禁</li>
+<li>Prohibited.Ocr：Ocr 文字鉴违禁</li>
+      */
+  Type: string
+
+  /**
+   * 采样频率，即对视频每秒截取进行审核的帧数。
+   */
+  SampleRate: number
+
+  /**
+   * 审核的视频时长，单位：秒。
+   */
+  Duration: number
+
+  /**
+      * 视频内容审核智能画面鉴黄任务的查询结果，当任务类型为 Porn 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PornTask: AiReviewTaskPornResult
+
+  /**
+      * 视频内容审核智能画面敏感任务的查询结果，当任务类型为 Terrorism 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TerrorismTask: AiReviewTaskTerrorismResult
+
+  /**
+      * 视频内容审核智能画面敏感任务的查询结果，当任务类型为 Political 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PoliticalTask: AiReviewTaskPoliticalResult
+
+  /**
+      * 视频内容审核 Asr 文字鉴黄任务的查询结果，当任务类型为 Porn.Asr 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PornAsrTask: AiReviewTaskPornAsrResult
+
+  /**
+      * 视频内容审核 Ocr 文字鉴黄任务的查询结果，当任务类型为 Porn.Ocr 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PornOcrTask: AiReviewTaskPornOcrResult
+
+  /**
+      * 视频内容审核 Asr 文字敏感任务的查询结果，当任务类型为 Political.Asr 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PoliticalAsrTask: AiReviewTaskPoliticalAsrResult
+
+  /**
+      * 视频内容审核 Ocr 文字敏感任务的查询结果，当任务类型为 Political.Ocr 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PoliticalOcrTask: AiReviewTaskPoliticalOcrResult
+
+  /**
+      * 视频内容审核 Ocr 文字敏感任务的查询结果，当任务类型为 Terrorism.Ocr 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TerrorismOcrTask: AiReviewTaskTerrorismOcrResult
+
+  /**
+      * 视频内容审核 Asr 文字鉴违禁任务的查询结果，当任务类型为 Prohibited.Asr 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProhibitedAsrTask: AiReviewTaskProhibitedAsrResult
+
+  /**
+      * 视频内容审核 Ocr 文字鉴违禁任务的查询结果，当任务类型为 Prohibited.Ocr 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProhibitedOcrTask: AiReviewTaskProhibitedOcrResult
 }
 
 /**
@@ -1773,6 +2086,16 @@ export interface CreateAdaptiveDynamicStreamingTemplateRequest {
 }
 
 /**
+ * 创建的输入RTMP拉流的配置信息。
+ */
+export interface CreateInputRTMPPullSettings {
+  /**
+   * RTMP源站的源站地址，有且只能有一个。
+   */
+  SourceAddresses: Array<RTMPPullSourceAddress>
+}
+
+/**
  * 画面涉敏任务控制参数。
  */
 export interface TerrorismImgReviewTemplateInfoForUpdate {
@@ -1809,13 +2132,77 @@ export interface TerrorismImgReviewTemplateInfoForUpdate {
 }
 
 /**
- * 文本全文识别输出。
+ * ModifyTranscodeTemplate请求参数结构体
  */
-export interface AiRecognitionTaskOcrFullTextResultOutput {
+export interface ModifyTranscodeTemplateRequest {
   /**
-   * 文本全文识别结果集。
+   * 转码模板唯一标识。
    */
-  SegmentSet: Array<AiRecognitionTaskOcrFullTextSegmentItem>
+  Definition: number
+
+  /**
+   * 封装格式，可选值：mp4、flv、hls、mp3、flac、ogg、m4a。其中，mp3、flac、ogg、m4a 为纯音频文件。
+   */
+  Container?: string
+
+  /**
+   * 转码模板名称，长度限制：64 个字符。
+   */
+  Name?: string
+
+  /**
+   * 模板描述信息，长度限制：256 个字符。
+   */
+  Comment?: string
+
+  /**
+      * 是否去除视频数据，可选值：
+<li>0：保留</li>
+<li>1：去除</li>
+      */
+  RemoveVideo?: number
+
+  /**
+      * 是否去除音频数据，可选值：
+<li>0：保留</li>
+<li>1：去除</li>
+      */
+  RemoveAudio?: number
+
+  /**
+   * 视频流配置参数。
+   */
+  VideoTemplate?: VideoTemplateInfoForUpdate
+
+  /**
+   * 音频流配置参数。
+   */
+  AudioTemplate?: AudioTemplateInfoForUpdate
+
+  /**
+   * 极速高清转码参数。
+   */
+  TEHDConfig?: TEHDConfigForUpdate
+
+  /**
+   * 音视频增强参数。
+   */
+  EnhanceConfig?: EnhanceConfig
+}
+
+/**
+ * ModifyStreamLinkFlow请求参数结构体
+ */
+export interface ModifyStreamLinkFlowRequest {
+  /**
+   * 流Id。
+   */
+  FlowId: string
+
+  /**
+   * 需要修改的流名称。
+   */
+  FlowName: string
 }
 
 /**
@@ -1993,6 +2380,48 @@ export interface CreatePersonSampleRequest {
 }
 
 /**
+ * DescribeStreamLinkFlowSRTStatistics请求参数结构体
+ */
+export interface DescribeStreamLinkFlowSRTStatisticsRequest {
+  /**
+   * 传输流ID。
+   */
+  FlowId: string
+
+  /**
+   * 输入或输出类型，可选[input|output]。
+   */
+  Type: string
+
+  /**
+   * 输入或输出Id。
+   */
+  InputOutputId: string
+
+  /**
+   * 主通道或备通道，可选[0|1]。
+   */
+  Pipeline: string
+
+  /**
+      * 统计的开始时间，默认为前一小时，最多支持查询近7天。
+UTC时间，如'2020-01-01T12:00:00Z'。
+      */
+  StartTime: string
+
+  /**
+      * 统计的结束时间，默认为StartTime后一小时，最多支持查询24小时的数据。
+UTC时间，如'2020-01-01T12:00:00Z'。
+      */
+  EndTime: string
+
+  /**
+   * 查询间隔，可选[5s|1min|5min|15min]。
+   */
+  Period: string
+}
+
+/**
  * 智能封面信息
  */
 export interface MediaAiAnalysisCoverItem {
@@ -2062,18 +2491,18 @@ export interface DescribeWordSamplesResponse {
 }
 
 /**
- * AI 样本管理，人脸信息。
+ * 流的统计数据列表。
  */
-export interface AiSampleFaceInfo {
+export interface FlowStatisticsArray {
   /**
-   * 人脸图片 ID。
+   * 时间戳。
    */
-  FaceId: string
+  Timestamp: number
 
   /**
-   * 人脸图片地址。
+   * 每个会话的统计数据。
    */
-  Url: string
+  FlowStatistics: Array<FlowStatistics>
 }
 
 /**
@@ -2087,28 +2516,91 @@ export interface DeleteAIRecognitionTemplateRequest {
 }
 
 /**
- * 输出文件名的`{number}`变量的规则。
+ * 查询输入的SRT配置信息。
  */
-export interface NumberFormat {
+export interface DescribeInputSRTSettings {
   /**
-   * `{number}`变量的起始值，默认为0。
-   */
-  InitialValue?: number
+      * SRT模式。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Mode: string
 
   /**
-   * `{number}`变量的增长步长，默认为1。
+   * 流Id。
    */
-  Increment?: number
+  StreamId: string
 
   /**
-   * `{number}`变量的最小长度，不足时补占位符。默认为1。
+   * 延迟。
    */
-  MinLength?: number
+  Latency: number
 
   /**
-   * `{number}`变量的长度不足时，补充的占位符。默认为"0"。
+   * 接收延迟。
    */
-  PlaceHolder?: string
+  RecvLatency: number
+
+  /**
+   * 对端延迟。
+   */
+  PeerLatency: number
+
+  /**
+   * 对端空闲超时时间。
+   */
+  PeerIdleTimeout: number
+
+  /**
+   * 解密密钥。
+   */
+  Passphrase: string
+
+  /**
+   * 密钥长度。
+   */
+  PbKeyLen: number
+
+  /**
+      * SRT对端地址。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SourceAddresses: Array<SRTSourceAddressResp>
+}
+
+/**
+ * 智能封面结果类型
+ */
+export interface AiAnalysisTaskCoverResult {
+  /**
+   * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
+   */
+  Status: string
+
+  /**
+   * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+   */
+  ErrCodeExt: string
+
+  /**
+   * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
+   */
+  ErrCode: number
+
+  /**
+   * 错误信息。
+   */
+  Message: string
+
+  /**
+   * 智能封面任务输入。
+   */
+  Input: AiAnalysisTaskCoverInput
+
+  /**
+      * 智能封面任务输出。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Output: AiAnalysisTaskCoverOutput
 }
 
 /**
@@ -2122,6 +2614,21 @@ export interface EnableWorkflowRequest {
 }
 
 /**
+ * CreateStreamLinkFlow返回参数结构体
+ */
+export interface CreateStreamLinkFlowResponse {
+  /**
+   * 创建的Flow信息。
+   */
+  Info: DescribeFlow
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 智能分类结果信息
  */
 export interface AiAnalysisTaskClassificationOutput {
@@ -2132,62 +2639,86 @@ export interface AiAnalysisTaskClassificationOutput {
 }
 
 /**
- * ModifyTranscodeTemplate请求参数结构体
+ * 转推的目标地址信息。
  */
-export interface ModifyTranscodeTemplateRequest {
+export interface SRTAddressDestination {
   /**
-   * 转码模板唯一标识。
+   * 目标地址的IP。
    */
-  Definition: number
+  Ip: string
 
   /**
-   * 封装格式，可选值：mp4、flv、hls、mp3、flac、ogg、m4a。其中，mp3、flac、ogg、m4a 为纯音频文件。
+   * 目标地址的端口。
    */
-  Container?: string
+  Port: number
+}
+
+/**
+ * 流状态实时查询接口的流状态信息
+ */
+export interface FlowRealtimeStatusItem {
+  /**
+   * 类型，Input|Output。
+   */
+  Type: string
 
   /**
-   * 转码模板名称，长度限制：64 个字符。
+   * 输入Id，如果Type为Input，此字段不为空。
    */
-  Name?: string
+  InputId: string
 
   /**
-   * 模板描述信息，长度限制：256 个字符。
+   * 输出Id，如果Type为Output，此字段不为空。
    */
-  Comment?: string
+  OutputId: string
 
   /**
-      * 是否去除视频数据，可选值：
-<li>0：保留</li>
-<li>1：去除</li>
+   * 流Id。
+   */
+  FlowId: string
+
+  /**
+   * 协议， SRT | RTMP。
+   */
+  Protocol: string
+
+  /**
+   * 共同状态信息。
+   */
+  CommonStatus: FlowRealtimeStatusCommon
+
+  /**
+      * 如果是SRT协议则有此字段。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-  RemoveVideo?: number
+  SRTStatus: FlowRealtimeStatusSRT
 
   /**
-      * 是否去除音频数据，可选值：
-<li>0：保留</li>
-<li>1：去除</li>
+      * 如果是RTMP协议则有此字段。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-  RemoveAudio?: number
+  RTMPStatus: FlowRealtimeStatusRTMP
 
   /**
-   * 视频流配置参数。
+   * 服务器IP。
    */
-  VideoTemplate?: VideoTemplateInfoForUpdate
+  ConnectServerIP: string
 
   /**
-   * 音频流配置参数。
-   */
-  AudioTemplate?: AudioTemplateInfoForUpdate
+      * 如果是RTP协议则有此字段。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RTPStatus: FlowRealtimeStatusRTP
+}
 
+/**
+ * 文本全文识别输出。
+ */
+export interface AiRecognitionTaskOcrFullTextResultOutput {
   /**
-   * 极速高清转码参数。
+   * 文本全文识别结果集。
    */
-  TEHDConfig?: TEHDConfigForUpdate
-
-  /**
-   * 音视频增强参数。
-   */
-  EnhanceConfig?: EnhanceConfig
+  SegmentSet: Array<AiRecognitionTaskOcrFullTextSegmentItem>
 }
 
 /**
@@ -2239,13 +2770,63 @@ export interface AiRecognitionTaskOcrWordsResultOutput {
 }
 
 /**
- * 智能按帧标签结果信息
+ * AI 样本管理，人脸信息。
  */
-export interface AiAnalysisTaskFrameTagOutput {
+export interface AiSampleFaceInfo {
   /**
-   * 视频按帧标签列表。
+   * 人脸图片 ID。
    */
-  SegmentSet: Array<MediaAiAnalysisFrameTagSegmentItem>
+  FaceId: string
+
+  /**
+   * 人脸图片地址。
+   */
+  Url: string
+}
+
+/**
+ * 创建的输入RTSP拉流的配置信息。
+ */
+export interface CreateInputRTSPPullSettings {
+  /**
+   * RTSP源站的源站地址，有且只能有一个。
+   */
+  SourceAddresses: Array<RTSPPullSourceAddress>
+}
+
+/**
+ * CreateStreamLinkFlow请求参数结构体
+ */
+export interface CreateStreamLinkFlowRequest {
+  /**
+   * 流名称。
+   */
+  FlowName: string
+
+  /**
+   * 最大带宽，单位bps，可选[10000000, 20000000, 50000000]。
+   */
+  MaxBandwidth: number
+
+  /**
+   * 流的输入组。
+   */
+  InputGroup: Array<CreateInput>
+}
+
+/**
+ * 创建媒体传输流的输出SRT的目标地址。
+ */
+export interface CreateOutputSRTSettingsDestinations {
+  /**
+   * 输出的IP。
+   */
+  Ip: string
+
+  /**
+   * 输出的端口。
+   */
+  Port: number
 }
 
 /**
@@ -2528,6 +3109,21 @@ export interface PoliticalOcrReviewTemplateInfoForUpdate {
 }
 
 /**
+ * 创建媒体传输流的输出的RTMP的目标地址。
+ */
+export interface CreateOutputRtmpSettingsDestinations {
+  /**
+   * 转推的URL，格式如：rtmp://domain/live。
+   */
+  Url: string
+
+  /**
+   * 转推的StreamKey，格式如：stream?key=value。
+   */
+  StreamKey: string
+}
+
+/**
  * 语音鉴黄任务控制参数。
  */
 export interface PornAsrReviewTemplateInfoForUpdate {
@@ -2623,6 +3219,16 @@ export interface AiRecognitionTaskAsrFullTextResultInput {
 }
 
 /**
+ * 查询输入的RTMP配置信息。
+ */
+export interface DescribeInputRTMPPullSettings {
+  /**
+   * RTMP源站地址信息。
+   */
+  SourceAddresses: Array<DescribeRTMPPullSourceAddress>
+}
+
+/**
  * 媒体处理任务类型
  */
 export interface MediaProcessTaskInput {
@@ -2655,6 +3261,21 @@ export interface MediaProcessTaskInput {
    * 转自适应码流任务列表。
    */
   AdaptiveDynamicStreamingTaskSet?: Array<AdaptiveDynamicStreamingTaskInput>
+}
+
+/**
+ * 创建的输入RTMP拉流源站配置信息。
+ */
+export interface RTMPPullSourceAddress {
+  /**
+   * RTMP源站的TcUrl地址。
+   */
+  TcUrl: string
+
+  /**
+   * RTMP源站的StreamKey信息。
+   */
+  StreamKey: string
 }
 
 /**
@@ -2745,25 +3366,71 @@ export interface DeleteAdaptiveDynamicStreamingTemplateResponse {
 }
 
 /**
- * 去伪影（毛刺）配置
+ * CreateAnimatedGraphicsTemplate请求参数结构体
  */
-export interface ArtifactRepairConfig {
+export interface CreateAnimatedGraphicsTemplateRequest {
   /**
-      * 能力配置开关，可选值：
-<li>ON：开启；</li>
-<li>OFF：关闭。</li>
-默认值：ON。
-      */
-  Switch?: string
+   * 帧率，取值范围：[1, 30]，单位：Hz。
+   */
+  Fps: number
 
   /**
-      * 类型，可选值：
-<li>weak</li>
-<li>strong</li>
-默认值：weak。
-注意：此字段可能返回 null，表示取不到有效值。
+      * 动图宽度（或长边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
+<li>当 Width、Height 均为 0，则分辨率同源；</li>
+<li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
+<li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
+<li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
+默认值：0。
       */
-  Type?: string
+  Width?: number
+
+  /**
+      * 动图高度（或短边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
+<li>当 Width、Height 均为 0，则分辨率同源；</li>
+<li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
+<li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
+<li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
+默认值：0。
+      */
+  Height?: number
+
+  /**
+      * 分辨率自适应，可选值：
+<li>open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；</li>
+<li>close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。</li>
+默认值：open。
+      */
+  ResolutionAdaptive?: string
+
+  /**
+   * 动图格式，取值为 gif 和 webp。默认为 gif。
+   */
+  Format?: string
+
+  /**
+   * 图片质量，取值范围：[1, 100]，默认值为 75。
+   */
+  Quality?: number
+
+  /**
+   * 转动图模板名称，长度限制：64 个字符。
+   */
+  Name?: string
+
+  /**
+   * 模板描述信息，长度限制：256 个字符。
+   */
+  Comment?: string
+}
+
+/**
+ * ParseNotification请求参数结构体
+ */
+export interface ParseNotificationRequest {
+  /**
+   * 从 CMQ 获取到的事件通知内容。
+   */
+  Content: string
 }
 
 /**
@@ -2809,6 +3476,48 @@ export interface PoliticalAsrReviewTemplateInfoForUpdate {
    * 判定需人工复核是否违规的分数阈值，当智能审核达到该分数以上，认为需人工复核。取值范围：0~100。
    */
   ReviewConfidence?: number
+}
+
+/**
+ * DescribeStreamLinkFlowStatistics请求参数结构体
+ */
+export interface DescribeStreamLinkFlowStatisticsRequest {
+  /**
+   * 传输流ID。
+   */
+  FlowId: string
+
+  /**
+   * 输入或输出类型，可选[input|output]。
+   */
+  Type: string
+
+  /**
+   * 输入或输出Id。
+   */
+  InputOutputId: string
+
+  /**
+   * 主通道或备通道，可选[0|1]。
+   */
+  Pipeline: string
+
+  /**
+   * 查询间隔，可选[5s|1min|5min|15min]。
+   */
+  Period: string
+
+  /**
+      * 统计的开始时间，默认为前一小时，最多支持查询近7天。
+UTC时间，如'2020-01-01T12:00:00Z'。
+      */
+  StartTime: string
+
+  /**
+      * 统计的结束时间，默认为StartTime后一小时，最多支持查询24小时的数据。
+UTC时间，如'2020-01-01T12:00:00Z'。
+      */
+  EndTime: string
 }
 
 /**
@@ -3037,6 +3746,26 @@ export interface EditMediaOutputConfig {
 }
 
 /**
+ * 鉴黄任务控制参数。
+ */
+export interface PornConfigureInfoForUpdate {
+  /**
+   * 画面鉴黄控制参数。
+   */
+  ImgReviewInfo?: PornImgReviewTemplateInfoForUpdate
+
+  /**
+   * 语音鉴黄控制参数。
+   */
+  AsrReviewInfo?: PornAsrReviewTemplateInfoForUpdate
+
+  /**
+   * 文本鉴黄控制参数。
+   */
+  OcrReviewInfo?: PornOcrReviewTemplateInfoForUpdate
+}
+
+/**
  * Asr 文字涉黄信息
  */
 export interface AiReviewPornAsrTaskOutput {
@@ -3115,6 +3844,21 @@ export interface EditMediaRequest {
 }
 
 /**
+ * CreateStreamLinkOutputInfo返回参数结构体
+ */
+export interface CreateStreamLinkOutputInfoResponse {
+  /**
+   * 创建后的Output信息。
+   */
+  Info: DescribeOutput
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 对视频截雪碧图任务结果类型
  */
 export interface MediaProcessTaskImageSpriteResult {
@@ -3148,6 +3892,21 @@ export interface MediaProcessTaskImageSpriteResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Output: MediaImageSpriteItem
+}
+
+/**
+ * 转推的RTP目标地址信息。
+ */
+export interface RTPAddressDestination {
+  /**
+   * 转推的目标地址的IP。
+   */
+  Ip: string
+
+  /**
+   * 转推的目标地址的端口。
+   */
+  Port: number
 }
 
 /**
@@ -3220,13 +3979,13 @@ PicUrlExpireTime 时间点后图片将被删除）。
 }
 
 /**
- * 媒体处理 URL 对象信息。
+ * StopStreamLinkFlow请求参数结构体
  */
-export interface UrlInputInfo {
+export interface StopStreamLinkFlowRequest {
   /**
-   * 视频的 URL。
+   * 流Id。
    */
-  Url: string
+  FlowId: string
 }
 
 /**
@@ -3378,6 +4137,16 @@ export interface DeleteWordSamplesRequest {
    * 关键词，数组长度限制：100 个词。
    */
   Keywords: Array<string>
+}
+
+/**
+ * 查询输入的RTSP配置信息。
+ */
+export interface DescribeInputRTSPPullSettings {
+  /**
+   * RTSP源站地址信息。
+   */
+  SourceAddresses: Array<DescribeRTSPPullSourceAddress>
 }
 
 /**
@@ -3657,6 +4426,52 @@ export interface DescribeWatermarkTemplatesRequest {
 }
 
 /**
+ * 创建输出的配置信息。
+ */
+export interface CreateOutputInfo {
+  /**
+   * 输出的名称。
+   */
+  OutputName: string
+
+  /**
+   * 输出描述。
+   */
+  Description: string
+
+  /**
+   * 输出协议，可选[SRT|RTP|RTMP|RTMP_PULL]。
+   */
+  Protocol: string
+
+  /**
+   * 输出地区。
+   */
+  OutputRegion: string
+
+  /**
+   * 输出的SRT的配置。
+   */
+  SRTSettings?: CreateOutputSRTSettings
+
+  /**
+   * 输出的RTMP的配置。
+   */
+  RTMPSettings?: CreateOutputRTMPSettings
+
+  /**
+   * 输出的RTP的配置。
+   */
+  RTPSettings?: CreateOutputInfoRTPSettings
+
+  /**
+      * IP白名单列表，格式为CIDR，如0.0.0.0/0。
+当Protocol为RTMP_PULL有效，为空代表不限制客户端IP。
+      */
+  AllowIpList?: Array<string>
+}
+
+/**
  * 媒体处理输出对象信息。
  */
 export interface TaskOutputStorage {
@@ -3670,6 +4485,61 @@ export interface TaskOutputStorage {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   CosOutputStorage?: CosOutputStorage
+}
+
+/**
+ * 传输流日志信息。
+ */
+export interface FlowLogInfo {
+  /**
+   * 时间戳，单位为秒。
+   */
+  Timestamp: number
+
+  /**
+   * 输入输出类型（input/output）。
+   */
+  Type: string
+
+  /**
+   * 输入或输出Id。
+   */
+  InputOutputId: string
+
+  /**
+   * 协议。
+   */
+  Protocol: string
+
+  /**
+   * 事件代码。
+   */
+  EventCode: string
+
+  /**
+   * 事件信息。
+   */
+  EventMessage: string
+
+  /**
+   * 对端IP。
+   */
+  RemoteIp: string
+
+  /**
+   * 对端端口。
+   */
+  RemotePort: string
+
+  /**
+   * 主备通道，0为主通道，1为备通道。
+   */
+  Pipeline: string
+
+  /**
+   * 输入或输出的名称。
+   */
+  InputOutputName: string
 }
 
 /**
@@ -3716,6 +4586,39 @@ export interface ColorEnhanceConfig {
 }
 
 /**
+ * 查询输出的RTP配置信息。
+ */
+export interface DescribeOutputRTPSettings {
+  /**
+      * 转推RTP的目标地址信息列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Destinations: Array<RTPAddressDestination>
+
+  /**
+      * 是否FEC。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FEC: string
+
+  /**
+      * 空闲超时时间。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IdleTimeout: number
+}
+
+/**
+ * DeleteStreamLinkOutput返回参数结构体
+ */
+export interface DeleteStreamLinkOutputResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 内容审核 Ocr 文字鉴黄任务输入参数类型
  */
 export interface AiReviewPornOcrTaskInput {
@@ -3726,23 +4629,13 @@ export interface AiReviewPornOcrTaskInput {
 }
 
 /**
- * 点播文件指定时间点截图信息
+ * 智能按帧标签结果信息
  */
-export interface MediaSnapshotByTimeOffsetItem {
+export interface AiAnalysisTaskFrameTagOutput {
   /**
-   * 指定时间点截图规格，参见[指定时间点截图参数模板](https://cloud.tencent.com/document/product/266/33480#.E6.97.B6.E9.97.B4.E7.82.B9.E6.88.AA.E5.9B.BE.E6.A8.A1.E6.9D.BF)。
+   * 视频按帧标签列表。
    */
-  Definition: number
-
-  /**
-   * 同一规格的截图信息集合，每个元素代表一张截图。
-   */
-  PicInfoSet: Array<MediaSnapshotByTimePicInfoItem>
-
-  /**
-   * 指定时间点截图文件的存储位置。
-   */
-  Storage: TaskOutputStorage
+  SegmentSet: Array<MediaAiAnalysisFrameTagSegmentItem>
 }
 
 /**
@@ -3953,6 +4846,21 @@ export interface AiAnalysisTaskTagResult {
 }
 
 /**
+ * RTMP转推的目标地址信息。
+ */
+export interface RTMPAddressDestination {
+  /**
+   * 转推RTMP的目标Url，格式如'rtmp://domain/live'。
+   */
+  Url: string
+
+  /**
+   * 转推RTMP的目标StreamKey，格式如'steamid?key=value'。
+   */
+  StreamKey: string
+}
+
+/**
  * 智能标签结果信息
  */
 export interface AiAnalysisTaskTagOutput {
@@ -3960,6 +4868,21 @@ export interface AiAnalysisTaskTagOutput {
    * 视频智能标签列表。
    */
   TagSet: Array<MediaAiAnalysisTagItem>
+}
+
+/**
+ * SRT输入源地址。
+ */
+export interface SRTSourceAddressReq {
+  /**
+   * 对端IP。
+   */
+  Ip: string
+
+  /**
+   * 对端端口。
+   */
+  Port: number
 }
 
 /**
@@ -4031,6 +4954,28 @@ export interface ProcessMediaRequest {
 注意3：编排的 Trigger 只是用来自动化触发场景，在手动发起的请求中已经配置的 Trigger 无意义。
       */
   ScheduleId?: number
+}
+
+/**
+ * 查询输入的RTSP配置信息。
+ */
+export interface DescribeRTSPPullSourceAddress {
+  /**
+      * RTSP源站的Url地址。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Url: string
+}
+
+/**
+ * 查询输出的RTSP拉流配置信息。
+ */
+export interface DescribeOutputRTSPPullSettings {
+  /**
+      * RTSP拉流地址列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ServerUrls: Array<DescribeOutputRTSPPullServerUrl>
 }
 
 /**
@@ -4139,6 +5084,21 @@ export interface ImageQualityEnhanceConfig {
 }
 
 /**
+ * DescribeStreamLinkRegions返回参数结构体
+ */
+export interface DescribeStreamLinkRegionsResponse {
+  /**
+   * 媒体传输地区信息。
+   */
+  Info: StreamLinkRegionInfo
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * AI 样本管理，关键词输出信息。
  */
 export interface AiSampleWord {
@@ -4166,6 +5126,21 @@ export interface AiSampleWord {
    * 最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
    */
   UpdateTime: string
+}
+
+/**
+ * DescribeStreamLinkFlowStatistics返回参数结构体
+ */
+export interface DescribeStreamLinkFlowStatisticsResponse {
+  /**
+   * 传输流的媒体数据列表。
+   */
+  Infos: Array<FlowStatisticsArray>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4415,6 +5390,21 @@ export interface AsrWordsConfigureInfo {
 }
 
 /**
+ * ModifyStreamLinkOutputInfo请求参数结构体
+ */
+export interface ModifyStreamLinkOutputInfoRequest {
+  /**
+   * 流Id。
+   */
+  FlowId: string
+
+  /**
+   * 需要修改的Output配置。
+   */
+  Output: ModifyOutputInfo
+}
+
+/**
  * 直播 AI Asr 单词识别结果
  */
 export interface LiveStreamAsrWordsRecognitionResult {
@@ -4435,6 +5425,27 @@ export interface LiveStreamAsrWordsRecognitionResult {
 
   /**
    * 识别片段置信度。取值：0~100。
+   */
+  Confidence: number
+}
+
+/**
+ * 智能按帧标签结果信息
+ */
+export interface MediaAiAnalysisFrameTagItem {
+  /**
+   * 按帧标签名称。
+   */
+  Tag: string
+
+  /**
+      * 按帧标签名称的分类列表，CategorySet.N 表示第 N+1级分类。
+比如 Tag 为“塔楼”时，CategorySet 包含两个元素：CategorySet.0 为“场景”，CategorySet.1为 “建筑”，表示按帧标签为“塔楼”，且第1级分类是“场景”，第2级分类是“建筑”。
+      */
+  CategorySet: Array<string>
+
+  /**
+   * 按帧标签的可信度，取值范围是 0 到 100。
    */
   Confidence: number
 }
@@ -4497,6 +5508,116 @@ export interface AiSamplePerson {
    * 最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
    */
   UpdateTime: string
+}
+
+/**
+ * 流的统计数据。
+ */
+export interface FlowStatistics {
+  /**
+   * 会话Id。
+   */
+  SessionId: string
+
+  /**
+   * 对端IP。
+   */
+  ClientIp: string
+
+  /**
+   * 总带宽。
+   */
+  Network: number
+
+  /**
+   * 视频数据。
+   */
+  Video: Array<FlowVideo>
+
+  /**
+   * 音频数据。
+   */
+  Audio: Array<FlowAudio>
+}
+
+/**
+ * 创建的输入SRT的配置信息。
+ */
+export interface CreateInputSRTSettings {
+  /**
+   * SRT模式，可选[LISTENER|CALLER]，默认为LISTENER。
+   */
+  Mode?: string
+
+  /**
+   * 流Id，可选大小写字母、数字和特殊字符（.#!:&,=_-），长度为0~512。
+   */
+  StreamId?: string
+
+  /**
+   * 延迟，默认0，单位ms，范围为[0, 3000]。
+   */
+  Latency?: number
+
+  /**
+   * 接收延迟，默认120，单位ms，范围为[0, 3000]。
+   */
+  RecvLatency?: number
+
+  /**
+   * 对端延迟，默认0，单位ms，范围为[0, 3000]。
+   */
+  PeerLatency?: number
+
+  /**
+   * 对端超时时间，默认5000，单位ms，范围为[1000, 10000]。
+   */
+  PeerIdleTimeout?: number
+
+  /**
+   * 解密密钥，默认为空，表示不加密。只可填ascii码值，长度为[10, 79]。
+   */
+  Passphrase?: string
+
+  /**
+   * 密钥长度，默认为0，可选[0|16|24|32]。
+   */
+  PbKeyLen?: number
+
+  /**
+   * SRT对端地址，当Mode为CALLER时必填，且只能填1组。
+   */
+  SourceAddresses?: Array<SRTSourceAddressReq>
+}
+
+/**
+ * 实时流状态查询的通用状态信息。
+ */
+export interface FlowRealtimeStatusCommon {
+  /**
+   * 当前连接状态，Connected|Waiting|Idle。
+   */
+  State: string
+
+  /**
+   * 连接模式，Listener|Caller。
+   */
+  Mode: string
+
+  /**
+   * 已连接时长，单位为ms。
+   */
+  ConnectedTime: number
+
+  /**
+   * 实时码率，单位为bps。
+   */
+  Bitrate: number
+
+  /**
+   * 重试次数。
+   */
+  Reconnections: number
 }
 
 /**
@@ -4568,21 +5689,18 @@ export interface DescribeContentReviewTemplatesResponse {
 }
 
 /**
- * 极速高清参数配置。
+ * DescribeStreamLinkActivateState返回参数结构体
  */
-export interface TEHDConfig {
+export interface DescribeStreamLinkActivateStateResponse {
   /**
-      * 极速高清类型，可选值：
-<li>TEHD-100：极速高清-100。</li>
-不填代表不启用极速高清。
-      */
-  Type: string
+   * 用户已激活为0，否则为非0。
+   */
+  Status: number
 
   /**
-      * 视频码率上限，当 Type 指定了极速高清类型时有效。
-不填或填0表示不设视频码率上限。
-      */
-  MaxVideoBitrate?: number
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4663,6 +5781,31 @@ export interface AnimatedGraphicsTemplate {
    * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
    */
   UpdateTime: string
+}
+
+/**
+ * DescribeStreamLinkFlow请求参数结构体
+ */
+export interface DescribeStreamLinkFlowRequest {
+  /**
+   * 流Id。
+   */
+  FlowId: string
+}
+
+/**
+ * 创建媒体传输流的输出的RTMP配置。
+ */
+export interface CreateOutputRTMPSettings {
+  /**
+   * 转推的目标地址，可填1~2个。
+   */
+  Destinations: Array<CreateOutputRtmpSettingsDestinations>
+
+  /**
+   * RTMP的Chunk大小，范围为[4096, 40960]。
+   */
+  ChunkSize?: number
 }
 
 /**
@@ -4923,13 +6066,38 @@ export interface TerrorismConfigureInfoForUpdate {
 }
 
 /**
- * ParseNotification请求参数结构体
+ * SRT输出的监听地址。
  */
-export interface ParseNotificationRequest {
+export interface OutputSRTSourceAddressResp {
   /**
-   * 从 CMQ 获取到的事件通知内容。
+   * 监听IP。
    */
-  Content: string
+  Ip: string
+
+  /**
+   * 监听端口。
+   */
+  Port: number
+}
+
+/**
+ * 媒体传输的地区信息。
+ */
+export interface StreamLinkRegionInfo {
+  /**
+   * 媒体直传输的地区信息列表。
+   */
+  Regions: Array<RegionInfo>
+}
+
+/**
+ * 流状态实时查询接口的RTP流状态信息
+ */
+export interface FlowRealtimeStatusRTP {
+  /**
+   * 传输的包个数
+   */
+  Packets: number
 }
 
 /**
@@ -4964,14 +6132,79 @@ export interface AnimatedGraphicTaskInput {
 }
 
 /**
- * DeleteContentReviewTemplate请求参数结构体
+ * 输出的出口的地址。
  */
-export interface DeleteContentReviewTemplateRequest {
+export interface OutputAddress {
   /**
-   * 内容审核模板唯一标识。
+   * 出口IP。
    */
-  Definition: number
+  Ip: string
 }
+
+/**
+ * 媒体处理任务中的马赛克参数类型
+ */
+export interface MosaicInput {
+  /**
+      * 原点位置，目前仅支持：
+<li>TopLeft：表示坐标原点位于视频图像左上角，马赛克原点为图片或文字的左上角。</li>
+默认值：TopLeft。
+      */
+  CoordinateOrigin?: string
+
+  /**
+      * 马赛克原点距离视频图像坐标原点的水平位置。支持 %、px 两种格式：
+<li>当字符串以 % 结尾，表示马赛克 XPos 为视频宽度指定百分比，如 10% 表示 XPos 为视频宽度的 10%；</li>
+<li>当字符串以 px 结尾，表示马赛克 XPos 为指定像素，如 100px 表示 XPos 为 100 像素。</li>
+默认值：0px。
+      */
+  XPos?: string
+
+  /**
+      * 马赛克原点距离视频图像坐标原点的垂直位置。支持 %、px 两种格式：
+<li>当字符串以 % 结尾，表示马赛克 YPos 为视频高度指定百分比，如 10% 表示 YPos 为视频高度的 10%；</li>
+<li>当字符串以 px 结尾，表示马赛克 YPos 为指定像素，如 100px 表示 YPos 为 100 像素。</li>
+默认值：0px。
+      */
+  YPos?: string
+
+  /**
+      * 马赛克的宽度。支持 %、px 两种格式：
+<li>当字符串以 % 结尾，表示马赛克 Width 为视频宽度的百分比大小，如 10% 表示 Width 为视频宽度的 10%；</li>
+<li>当字符串以 px 结尾，表示马赛克 Width 单位为像素，如 100px 表示 Width 为 100 像素。</li>
+默认值：10%。
+      */
+  Width?: string
+
+  /**
+      * 马赛克的高度。支持 %、px 两种格式：
+<li>当字符串以 % 结尾，表示马赛克 Height 为视频高度的百分比大小，如 10% 表示 Height 为视频高度的 10%；</li>
+<li>当字符串以 px 结尾，表示马赛克 Height 单位为像素，如 100px 表示 Height 为 100 像素。</li>
+默认值：10%。
+      */
+  Height?: string
+
+  /**
+      * 马赛克的起始时间偏移，单位：秒。不填或填0，表示马赛克从画面出现时开始显现。
+<li>不填或填0，表示马赛克从画面开始就出现；</li>
+<li>当数值大于0时（假设为 n），表示马赛克从画面开始的第 n 秒出现；</li>
+<li>当数值小于0时（假设为 -n），表示马赛克从离画面结束 n 秒前开始出现。</li>
+      */
+  StartTimeOffset?: number
+
+  /**
+      * 马赛克的结束时间偏移，单位：秒。
+<li>不填或填0，表示马赛克持续到画面结束；</li>
+<li>当数值大于0时（假设为 n），表示马赛克持续到第 n 秒时消失；</li>
+<li>当数值小于0时（假设为 -n），表示马赛克持续到离画面结束 n 秒前消失。</li>
+      */
+  EndTimeOffset?: number
+}
+
+/**
+ * DescribeStreamLinkActivateState请求参数结构体
+ */
+export type DescribeStreamLinkActivateStateRequest = null
 
 /**
  * AI 智能分析模板详情
@@ -5127,6 +6360,21 @@ export interface AiSampleTagOperation {
 }
 
 /**
+ * SRT输入源地址。
+ */
+export interface SRTSourceAddressResp {
+  /**
+   * 对端IP。
+   */
+  Ip: string
+
+  /**
+   * 对端端口。
+   */
+  Port: number
+}
+
+/**
  * CreateAIRecognitionTemplate返回参数结构体
  */
 export interface CreateAIRecognitionTemplateResponse {
@@ -5139,6 +6387,82 @@ export interface CreateAIRecognitionTemplateResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 查询输入配置信息。
+ */
+export interface DescribeInput {
+  /**
+   * 输入Id。
+   */
+  InputId: string
+
+  /**
+   * 输入名称。
+   */
+  InputName: string
+
+  /**
+      * 输入描述。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Description: string
+
+  /**
+   * 输入协议。
+   */
+  Protocol: string
+
+  /**
+   * 输入地址列表。
+   */
+  InputAddressList: Array<InputAddress>
+
+  /**
+   * 输入IP白名单列表。
+   */
+  AllowIpList: Array<string>
+
+  /**
+      * 输入的SRT配置信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SRTSettings: DescribeInputSRTSettings
+
+  /**
+      * 输入的RTP配置信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RTPSettings: DescribeInputRTPSettings
+
+  /**
+   * 输入的地区。
+   */
+  InputRegion: string
+
+  /**
+   * 输入的RTMP配置信息。
+   */
+  RTMPSettings: DescribeInputRTMPSettings
+
+  /**
+      * 输入的主备开关。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FailOver: string
+
+  /**
+      * 输入的RTMP_PULL配置信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RTMPPullSettings: DescribeInputRTMPPullSettings
+
+  /**
+      * 输入的RTSP_PULL配置信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RTSPPullSettings: DescribeInputRTSPPullSettings
 }
 
 /**
@@ -5206,6 +6530,21 @@ export interface ProhibitedConfigureInfo {
 }
 
 /**
+ * DescribeStreamLinkFlowSRTStatistics返回参数结构体
+ */
+export interface DescribeStreamLinkFlowSRTStatisticsResponse {
+  /**
+   * 传输流的SRT质量数据列表。
+   */
+  Infos: Array<FlowSRTInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * Ocr 文字涉敏信息
  */
 export interface AiReviewTerrorismOcrTaskOutput {
@@ -5268,6 +6607,39 @@ export interface AiAnalysisResult {
 }
 
 /**
+ * 图片水印模板输入参数
+ */
+export interface ImageWatermarkInputForUpdate {
+  /**
+   * 水印图片 [Base64](https://tools.ietf.org/html/rfc4648) 编码后的字符串。支持 jpeg、png 图片格式。
+   */
+  ImageContent?: string
+
+  /**
+      * 水印的宽度。支持 %、px 两种格式：
+<li>当字符串以 % 结尾，表示水印 Width 为视频宽度的百分比大小，如 10% 表示 Width 为视频宽度的 10%；</li>
+<li>当字符串以 px 结尾，表示水印 Width 单位为像素，如 100px 表示 Width 为 100 像素。取值范围为[8, 4096]。</li>
+      */
+  Width?: string
+
+  /**
+      * 水印的高度。支持 %、px 两种格式：
+<li>当字符串以 % 结尾，表示水印 Height 为视频高度的百分比大小，如 10% 表示 Height 为视频高度的 10%；</li>
+<li>当字符串以 px 结尾，表示水印 Height 单位为像素，如 100px 表示 Height 为 100 像素。取值范围为0或[8, 4096]。</li>
+默认值：0px，表示 Height 按照原始水印图片的宽高比缩放。
+      */
+  Height?: string
+
+  /**
+      * 水印重复类型。使用场景：水印为动态图像。取值范围：
+<li>once：动态水印播放完后，不再出现；</li>
+<li>repeat_last_frame：水印播放完后，停留在最后一帧；</li>
+<li>repeat：水印循环播放，直到视频结束。</li>
+      */
+  RepeatType?: string
+}
+
+/**
  * DescribeAIAnalysisTemplates请求参数结构体
  */
 export interface DescribeAIAnalysisTemplatesRequest {
@@ -5292,6 +6664,26 @@ export interface DescribeAIAnalysisTemplatesRequest {
    * Custom：用户自定义模板。
    */
   Type?: string
+}
+
+/**
+ * 流的视频数据。
+ */
+export interface FlowVideo {
+  /**
+   * 帧率。
+   */
+  Fps: number
+
+  /**
+   * 码率，单位是bps。
+   */
+  Rate: number
+
+  /**
+   * 音频Pid。
+   */
+  Pid: number
 }
 
 /**
@@ -5423,6 +6815,85 @@ export interface AiReviewTaskTerrorismResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Output: AiReviewTerrorismTaskOutput
+}
+
+/**
+ * 查询输出的配置信息。
+ */
+export interface DescribeOutput {
+  /**
+   * 输出Id。
+   */
+  OutputId: string
+
+  /**
+   * 输出名称。
+   */
+  OutputName: string
+
+  /**
+   * 输出类型。
+   */
+  OutputType: string
+
+  /**
+      * 输出描述。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Description: string
+
+  /**
+   * 输出协议。
+   */
+  Protocol: string
+
+  /**
+   * 输出的出口地址信息列表。
+   */
+  OutputAddressList: Array<OutputAddress>
+
+  /**
+      * 输出的地区。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OutputRegion: string
+
+  /**
+      * 输出的SRT配置信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SRTSettings: DescribeOutputSRTSettings
+
+  /**
+      * 输出的RTP配置信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RTPSettings: DescribeOutputRTPSettings
+
+  /**
+      * 输出的RTMP配置信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RTMPSettings: DescribeOutputRTMPSettings
+
+  /**
+      * 输出的RTMP拉流配置信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RTMPPullSettings: DescribeOutputRTMPPullSettings
+
+  /**
+      * CIDR白名单列表。
+当Protocol为RTMP_PULL有效，为空代表不限制客户端IP。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AllowIpList: Array<string>
+
+  /**
+      * 输出的RTSP拉流配置信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RTSPPullSettings: DescribeOutputRTSPPullSettings
 }
 
 /**
@@ -5580,6 +7051,16 @@ export interface DeletePersonSampleResponse {
 }
 
 /**
+ * StartStreamLinkFlow请求参数结构体
+ */
+export interface StartStreamLinkFlowRequest {
+  /**
+   * 流Id。
+   */
+  FlowId: string
+}
+
+/**
  * CreateSnapshotByTimeOffsetTemplate返回参数结构体
  */
 export interface CreateSnapshotByTimeOffsetTemplateResponse {
@@ -5643,36 +7124,28 @@ export interface ModifyContentReviewTemplateRequest {
 }
 
 /**
- * 图片水印模板输入参数
+ * StopStreamLinkFlow返回参数结构体
  */
-export interface ImageWatermarkInputForUpdate {
+export interface StopStreamLinkFlowResponse {
   /**
-   * 水印图片 [Base64](https://tools.ietf.org/html/rfc4648) 编码后的字符串。支持 jpeg、png 图片格式。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  ImageContent?: string
+  RequestId?: string
+}
+
+/**
+ * 智能封面结果信息
+ */
+export interface AiAnalysisTaskCoverOutput {
+  /**
+   * 智能封面列表。
+   */
+  CoverSet: Array<MediaAiAnalysisCoverItem>
 
   /**
-      * 水印的宽度。支持 %、px 两种格式：
-<li>当字符串以 % 结尾，表示水印 Width 为视频宽度的百分比大小，如 10% 表示 Width 为视频宽度的 10%；</li>
-<li>当字符串以 px 结尾，表示水印 Width 单位为像素，如 100px 表示 Width 为 100 像素。取值范围为[8, 4096]。</li>
-      */
-  Width?: string
-
-  /**
-      * 水印的高度。支持 %、px 两种格式：
-<li>当字符串以 % 结尾，表示水印 Height 为视频高度的百分比大小，如 10% 表示 Height 为视频高度的 10%；</li>
-<li>当字符串以 px 结尾，表示水印 Height 单位为像素，如 100px 表示 Height 为 100 像素。取值范围为0或[8, 4096]。</li>
-默认值：0px，表示 Height 按照原始水印图片的宽高比缩放。
-      */
-  Height?: string
-
-  /**
-      * 水印重复类型。使用场景：水印为动态图像。取值范围：
-<li>once：动态水印播放完后，不再出现；</li>
-<li>repeat_last_frame：水印播放完后，停留在最后一帧；</li>
-<li>repeat：水印循环播放，直到视频结束。</li>
-      */
-  RepeatType?: string
+   * 智能封面的存储位置。
+   */
+  OutputStorage: TaskOutputStorage
 }
 
 /**
@@ -5683,6 +7156,21 @@ export interface AiContentReviewTaskInput {
    * 视频内容审核模板 ID。
    */
   Definition: number
+}
+
+/**
+ * 输入地址信息。
+ */
+export interface InputAddress {
+  /**
+   * 输入地址的IP。
+   */
+  Ip: string
+
+  /**
+   * 输入地址的端口。
+   */
+  Port: number
 }
 
 /**
@@ -5836,6 +7324,16 @@ export interface AiRecognitionTaskOcrFullTextSegmentTextItem {
    * 识别文本。
    */
   Text: string
+}
+
+/**
+ * DeleteStreamLinkFlow返回参数结构体
+ */
+export interface DeleteStreamLinkFlowResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -6046,6 +7544,21 @@ export interface TranscodeTemplate {
 }
 
 /**
+ * DescribeStreamLinkFlowMediaStatistics返回参数结构体
+ */
+export interface DescribeStreamLinkFlowMediaStatisticsResponse {
+  /**
+   * 传输流的媒体数据列表。
+   */
+  Infos: Array<FlowMediaInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 文本鉴黄任务控制参数
  */
 export interface PornOcrReviewTemplateInfo {
@@ -6065,6 +7578,26 @@ export interface PornOcrReviewTemplateInfo {
    * 判定需人工复核是否违规的分数阈值，当智能审核达到该分数以上，认为需人工复核，不填默认为 75 分。取值范围：0~100。
    */
   ReviewConfidence?: number
+}
+
+/**
+ * 创建媒体传输流的输出的RTP配置。
+ */
+export interface CreateOutputInfoRTPSettings {
+  /**
+   * 转推的目标地址，可填1~2个。
+   */
+  Destinations: Array<CreateOutputRTPSettingsDestinations>
+
+  /**
+   * 只能填none。
+   */
+  FEC: string
+
+  /**
+   * 空闲超时时间，单位ms。
+   */
+  IdleTimeout: number
 }
 
 /**
@@ -6129,23 +7662,35 @@ export interface AiRecognitionTaskAsrWordsSegmentItem {
 export type SubtitleTemplate = null
 
 /**
- * 鉴黄任务控制参数。
+ * 直播处理任务信息
  */
-export interface PornConfigureInfoForUpdate {
+export interface LiveStreamProcessTask {
   /**
-   * 画面鉴黄控制参数。
+   * 媒体处理任务 ID。
    */
-  ImgReviewInfo?: PornImgReviewTemplateInfoForUpdate
+  TaskId: string
 
   /**
-   * 语音鉴黄控制参数。
-   */
-  AsrReviewInfo?: PornAsrReviewTemplateInfoForUpdate
+      * 任务流状态，取值：
+<li>PROCESSING：处理中；</li>
+<li>FINISH：已完成。</li>
+      */
+  Status: string
 
   /**
-   * 文本鉴黄控制参数。
+   * 错误码，0 表示成功，其他值表示失败。
    */
-  OcrReviewInfo?: PornOcrReviewTemplateInfoForUpdate
+  ErrCode: number
+
+  /**
+   * 错误信息。
+   */
+  Message: string
+
+  /**
+   * 直播流 URL。
+   */
+  Url: string
 }
 
 /**
@@ -6261,6 +7806,26 @@ export interface AiReviewTaskPornResult {
 }
 
 /**
+ * DescribeStreamLinkFlowRealtimeStatus请求参数结构体
+ */
+export interface DescribeStreamLinkFlowRealtimeStatusRequest {
+  /**
+   * 流ID。
+   */
+  FlowId: string
+
+  /**
+   * 输入id数组，如果输入输出数组都为空，则代表全量查询。
+   */
+  InputIds?: Array<string>
+
+  /**
+   * 输出id数组，如果输入输出数组都为空，则代表全量查询。
+   */
+  OutputIds?: Array<string>
+}
+
+/**
  * Asr 文字涉违禁信息
  */
 export interface AiReviewProhibitedAsrTaskOutput {
@@ -6325,30 +7890,23 @@ export interface LiveStreamFaceRecognitionResult {
 }
 
 /**
- * DescribeSampleSnapshotTemplates请求参数结构体
+ * 流的音频数据。
  */
-export interface DescribeSampleSnapshotTemplatesRequest {
+export interface FlowAudio {
   /**
-   * 采样截图模板唯一标识过滤条件，数组长度限制：100。
+   * 帧率。
    */
-  Definitions?: Array<number>
+  Fps: number
 
   /**
-   * 分页偏移量，默认值：0。
+   * 码率，单位是bps。
    */
-  Offset?: number
+  Rate: number
 
   /**
-   * 返回记录条数，默认值：10，最大值：100。
+   * 音频Pid。
    */
-  Limit?: number
-
-  /**
-      * 模板类型过滤条件，可选值：
-<li>Preset：系统预置模板；</li>
-<li>Custom：用户自定义模板。</li>
-      */
-  Type?: string
+  Pid: number
 }
 
 /**
@@ -6374,93 +7932,39 @@ export interface DisableWorkflowResponse {
 }
 
 /**
- * 采样截图模板详情
+ * 智能分类任务结果类型
  */
-export interface SampleSnapshotTemplate {
+export interface AiAnalysisTaskClassificationResult {
   /**
-   * 采样截图模板唯一标识。
+   * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
    */
-  Definition: number
+  Status: string
 
   /**
-      * 模板类型，取值范围：
-<li>Preset：系统预置模板；</li>
-<li>Custom：用户自定义模板。</li>
+   * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+   */
+  ErrCodeExt: string
+
+  /**
+   * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
+   */
+  ErrCode: number
+
+  /**
+   * 错误信息。
+   */
+  Message: string
+
+  /**
+   * 智能分类任务输入。
+   */
+  Input: AiAnalysisTaskClassificationInput
+
+  /**
+      * 智能分类任务输出。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-  Type: string
-
-  /**
-   * 采样截图模板名称。
-   */
-  Name: string
-
-  /**
-   * 模板描述信息。
-   */
-  Comment: string
-
-  /**
-      * 截图宽度（或长边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
-<li>当 Width、Height 均为 0，则分辨率同源；</li>
-<li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
-<li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
-<li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
-默认值：0。
-      */
-  Width: number
-
-  /**
-      * 截图高度（或短边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
-<li>当 Width、Height 均为 0，则分辨率同源；</li>
-<li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
-<li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
-<li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
-默认值：0。
-      */
-  Height: number
-
-  /**
-      * 分辨率自适应，可选值：
-<li>open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；</li>
-<li>close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。</li>
-默认值：open。
-      */
-  ResolutionAdaptive: string
-
-  /**
-   * 图片格式。
-   */
-  Format: string
-
-  /**
-   * 采样截图类型。
-   */
-  SampleType: string
-
-  /**
-   * 采样间隔。
-   */
-  SampleInterval: number
-
-  /**
-   * 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
-   */
-  CreateTime: string
-
-  /**
-   * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
-   */
-  UpdateTime: string
-
-  /**
-      * 填充方式，当视频流配置宽高参数与原始视频的宽高比不一致时，对转码的处理方式，即为“填充”。可选填充方式：
-<li> stretch：拉伸，对每一帧进行拉伸，填满整个画面，可能导致转码后的视频被“压扁“或者“拉长“；</li>
-<li>black：留黑，保持视频宽高比不变，边缘剩余部分使用黑色填充。</li>
-<li>white：留白，保持视频宽高比不变，边缘剩余部分使用白色填充。</li>
-<li>gauss：高斯模糊，保持视频宽高比不变，边缘剩余部分使用高斯模糊。</li>
-默认值：black 。
-      */
-  FillType: string
+  Output: AiAnalysisTaskClassificationOutput
 }
 
 /**
@@ -6496,6 +8000,21 @@ export interface PoliticalImgReviewTemplateInfoForUpdate {
    * 判定需人工复核是否违规的分数阈值，当智能审核达到该分数以上，认为需人工复核。取值范围：0~100。
    */
   ReviewConfidence?: number
+}
+
+/**
+ * 流状态实时查询接口的RTMP信息。
+ */
+export interface FlowRealtimeStatusRTMP {
+  /**
+   * 视频帧率。
+   */
+  VideoFPS: number
+
+  /**
+   * 音频帧率。
+   */
+  AudioFPS: number
 }
 
 /**
@@ -6761,6 +8280,21 @@ export interface ResetWorkflowResponse {
 }
 
 /**
+ * DescribeStreamLinkFlows请求参数结构体
+ */
+export interface DescribeStreamLinkFlowsRequest {
+  /**
+   * 当前页数，默认1。
+   */
+  PageNum?: number
+
+  /**
+   * 每页大小，默认10。
+   */
+  PageSize?: number
+}
+
+/**
  * CreateAIAnalysisTemplate返回参数结构体
  */
 export interface CreateAIAnalysisTemplateResponse {
@@ -6880,6 +8414,46 @@ export interface AiReviewPoliticalAsrTaskOutput {
 }
 
 /**
+ * 流状态实时查询接口的SRT信息。
+ */
+export interface FlowRealtimeStatusSRT {
+  /**
+   * 延迟，单位为ms。
+   */
+  Latency: number
+
+  /**
+   * RTT，单位为ms。
+   */
+  RTT: number
+
+  /**
+   * 实时发包数或者收包数。
+   */
+  Packets: number
+
+  /**
+   * 丢包率。
+   */
+  PacketLossRate: number
+
+  /**
+   * 重传率。
+   */
+  RetransmitRate: number
+
+  /**
+   * 实时丢包数。
+   */
+  DroppedPackets: number
+
+  /**
+   * 是否加密，On|Off。
+   */
+  Encryption: string
+}
+
+/**
  * 极速高清参数配置。
  */
 export interface TEHDConfigForUpdate {
@@ -6894,6 +8468,21 @@ export interface TEHDConfigForUpdate {
    * 视频码率上限，不填代表不修改。
    */
   MaxVideoBitrate?: number
+}
+
+/**
+ * DeleteStreamLinkOutput请求参数结构体
+ */
+export interface DeleteStreamLinkOutputRequest {
+  /**
+   * 流Id。
+   */
+  FlowId: string
+
+  /**
+   * 输出Id。
+   */
+  OutputId: string
 }
 
 /**
@@ -6953,18 +8542,25 @@ export interface AsrFullTextConfigureInfo {
 }
 
 /**
- * DescribeMediaMetaData返回参数结构体
+ * 去伪影（毛刺）配置
  */
-export interface DescribeMediaMetaDataResponse {
+export interface ArtifactRepairConfig {
   /**
-   * 媒体元信息。
-   */
-  MetaData?: MediaMetaData
+      * 能力配置开关，可选值：
+<li>ON：开启；</li>
+<li>OFF：关闭。</li>
+默认值：ON。
+      */
+  Switch?: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+      * 类型，可选值：
+<li>weak</li>
+<li>strong</li>
+默认值：weak。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Type?: string
 }
 
 /**
@@ -7015,6 +8611,21 @@ export interface DescribeTaskDetailRequest {
    * 视频处理任务的任务 ID。
    */
   TaskId: string
+}
+
+/**
+ * DescribeStreamLinkFlow返回参数结构体
+ */
+export interface DescribeStreamLinkFlowResponse {
+  /**
+   * 流的配置信息。
+   */
+  Info: DescribeFlow
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -7265,6 +8876,21 @@ export interface ModifyAnimatedGraphicsTemplateRequest {
 }
 
 /**
+ * 查询输出的RTMP拉流URL信息。
+ */
+export interface DescribeOutputRTMPPullServerUrl {
+  /**
+   * RTMP拉流地址的tcUrl。
+   */
+  TcUrl: string
+
+  /**
+   * RTMP拉流地址的流key。
+   */
+  StreamKey: string
+}
+
+/**
  * 文本识别片段。
  */
 export interface AiRecognitionTaskOcrWordsSegmentItem {
@@ -7480,6 +9106,21 @@ export interface AdaptiveDynamicStreamingInfoItem {
 }
 
 /**
+ * CreateStreamLinkOutputInfo请求参数结构体
+ */
+export interface CreateStreamLinkOutputInfoRequest {
+  /**
+   * 传输流Id。
+   */
+  FlowId: string
+
+  /**
+   * 传输流的Output配置。
+   */
+  Output: CreateOutputInfo
+}
+
+/**
  * 文本违禁任务控制参数
  */
 export interface ProhibitedOcrReviewTemplateInfo {
@@ -7529,6 +9170,21 @@ export interface LiveStreamOcrFullTextRecognitionResult {
    * 识别结果的区域坐标。数组包含 4 个元素 [x1,y1,x2,y2]，依次表示区域左上点、右下点的横纵坐标。
    */
   AreaCoordSet: Array<number>
+}
+
+/**
+ * ModifyStreamLinkInput请求参数结构体
+ */
+export interface ModifyStreamLinkInputRequest {
+  /**
+   * 流Id。
+   */
+  FlowId: string
+
+  /**
+   * 需要修改的Input信息。
+   */
+  Input: ModifyInput
 }
 
 /**
@@ -7999,6 +9655,26 @@ export interface AiRecognitionTaskAsrWordsResultItem {
 }
 
 /**
+ * DescribeStreamLinkRegions请求参数结构体
+ */
+export type DescribeStreamLinkRegionsRequest = null
+
+/**
+ * ModifyStreamLinkInput返回参数结构体
+ */
+export interface ModifyStreamLinkInputResponse {
+  /**
+   * 修改后的Input信息。
+   */
+  Info: DescribeInput
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeTaskDetail返回参数结构体
  */
 export interface DescribeTaskDetailResponse {
@@ -8202,6 +9878,23 @@ export interface UserDefineFaceReviewTemplateInfoForUpdate {
 }
 
 /**
+ * 查询输入的RTMP配置信息。
+ */
+export interface DescribeInputRTMPSettings {
+  /**
+      * RTMP的推流路径。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AppName: string
+
+  /**
+      * RTMP的推流StreamKey。
+RTMP的推流地址拼接规则为：rtmp://Ip:1935/AppName/StreamKey
+      */
+  StreamKey: string
+}
+
+/**
  * 细节增强配置
  */
 export interface SharpEnhanceConfig {
@@ -8231,6 +9924,56 @@ export interface OcrFullTextConfigureInfoForUpdate {
 <li>OFF：关闭智能文本全文识别任务。</li>
       */
   Switch?: string
+}
+
+/**
+ * 传输流的SRT质量数据。
+ */
+export interface FlowSRTInfo {
+  /**
+   * 时间戳，单位是秒。
+   */
+  Timestamp: number
+
+  /**
+   * 发送丢包率。
+   */
+  SendPacketLossRate: number
+
+  /**
+   * 发送重传率。
+   */
+  SendRetransmissionRate: number
+
+  /**
+   * 接收丢包率。
+   */
+  RecvPacketLossRate: number
+
+  /**
+   * 接收重传率。
+   */
+  RecvRetransmissionRate: number
+
+  /**
+   * 与对端的RTT时延。
+   */
+  RTT: number
+
+  /**
+   * 标志同一次推流。
+   */
+  SessionId: string
+
+  /**
+   * 发送弃包数。
+   */
+  SendPacketDropNumber: number
+
+  /**
+   * 接收弃包数。
+   */
+  RecvPacketDropNumber: number
 }
 
 /**
@@ -8266,6 +10009,71 @@ export interface DescribeTasksResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 查询输出的SRT配置信息。
+ */
+export interface DescribeOutputSRTSettings {
+  /**
+      * 转推的目标的地址信息列表，SRT模式为CALLER时使用。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Destinations: Array<SRTAddressDestination>
+
+  /**
+      * 流Id。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  StreamId: string
+
+  /**
+      * 延迟。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Latency: number
+
+  /**
+      * 接收延迟。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RecvLatency: number
+
+  /**
+      * 对端延迟。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PeerLatency: number
+
+  /**
+      * 对端空闲超时时间。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PeerIdleTimeout: number
+
+  /**
+      * 加密密钥。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Passphrase: string
+
+  /**
+      * 加密密钥长度。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PbKeyLen: number
+
+  /**
+      * SRT模式。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Mode: string
+
+  /**
+      * 服务器监听地址，SRT模式为LISTENER时使用。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SourceAddresses: Array<OutputSRTSourceAddressResp>
 }
 
 /**
@@ -8473,6 +10281,39 @@ export interface LiveStreamAiReviewResultItem {
    * 声音鉴黄的结果，当 Type 为 PornVoice 时有效。
    */
   VoicePornResultSet: Array<LiveStreamAiReviewVoicePornResult>
+}
+
+/**
+ * 极速高清参数配置。
+ */
+export interface TEHDConfig {
+  /**
+      * 极速高清类型，可选值：
+<li>TEHD-100：极速高清-100。</li>
+不填代表不启用极速高清。
+      */
+  Type: string
+
+  /**
+      * 视频码率上限，当 Type 指定了极速高清类型时有效。
+不填或填0表示不设视频码率上限。
+      */
+  MaxVideoBitrate?: number
+}
+
+/**
+ * 创建输入的RTP配置信息。
+ */
+export interface CreateInputRTPSettings {
+  /**
+   * 默认为“none”，可选值['none']。
+   */
+  FEC?: string
+
+  /**
+   * 空闲超时时间，默认5000，单位ms，范围为[1000, 10000]。
+   */
+  IdleTimeout?: number
 }
 
 /**
@@ -8816,6 +10657,56 @@ export interface CreateAIAnalysisTemplateRequest {
    * 智能按帧标签任务控制参数。
    */
   FrameTagConfigure?: FrameTagConfigureInfo
+}
+
+/**
+ * 创建输入的配置信息。
+ */
+export interface CreateInput {
+  /**
+   * 输入名称，可填大小写、数字和下划线，长度为[1, 32]。
+   */
+  InputName: string
+
+  /**
+   * 输入的协议，可选[SRT|RTP|RTMP|RTMP_PULL]。
+   */
+  Protocol: string
+
+  /**
+   * 输入描述，长度为[0, 255]。
+   */
+  Description?: string
+
+  /**
+   * 输入的IP白名单，格式为CIDR。
+   */
+  AllowIpList?: Array<string>
+
+  /**
+   * 输入的SRT配置信息。
+   */
+  SRTSettings?: CreateInputSRTSettings
+
+  /**
+   * 输入的RTP配置信息。
+   */
+  RTPSettings?: CreateInputRTPSettings
+
+  /**
+   * 输入的主备开关，可选[OPEN|CLOSE]，默认为CLOSE。
+   */
+  FailOver?: string
+
+  /**
+   * 输入的RTMP_PULL配置信息。
+   */
+  RTMPPullSettings?: CreateInputRTMPPullSettings
+
+  /**
+   * 输入的RTSP_PULL配置信息。
+   */
+  RTSPPullSettings?: CreateInputRTSPPullSettings
 }
 
 /**
@@ -9163,35 +11054,39 @@ export interface ModifyAIAnalysisTemplateRequest {
 }
 
 /**
- * 直播处理任务信息
+ * 查询Flow的配置信息。
  */
-export interface LiveStreamProcessTask {
+export interface DescribeFlow {
   /**
-   * 媒体处理任务 ID。
+   * 流Id。
    */
-  TaskId: string
+  FlowId: string
 
   /**
-      * 任务流状态，取值：
-<li>PROCESSING：处理中；</li>
-<li>FINISH：已完成。</li>
+   * 流名称。
+   */
+  FlowName: string
+
+  /**
+   * 流状态，目前有IDLE/RUNNING。
+   */
+  State: string
+
+  /**
+   * 最大带宽值。
+   */
+  MaxBandwidth: number
+
+  /**
+   * 输入组。
+   */
+  InputGroup: Array<DescribeInput>
+
+  /**
+      * 输出组。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-  Status: string
-
-  /**
-   * 错误码，0 表示成功，其他值表示失败。
-   */
-  ErrCode: number
-
-  /**
-   * 错误信息。
-   */
-  Message: string
-
-  /**
-   * 直播流 URL。
-   */
-  Url: string
+  OutputGroup: Array<DescribeOutput>
 }
 
 /**
@@ -9235,9 +11130,14 @@ export interface DescribeSampleSnapshotTemplatesResponse {
 }
 
 /**
- * ModifyWordSample返回参数结构体
+ * DescribeMediaMetaData返回参数结构体
  */
-export interface ModifyWordSampleResponse {
+export interface DescribeMediaMetaDataResponse {
+  /**
+   * 媒体元信息。
+   */
+  MetaData?: MediaMetaData
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -9245,93 +11145,23 @@ export interface ModifyWordSampleResponse {
 }
 
 /**
- * 内容审核结果
+ * DescribeStreamLinkFlowRealtimeStatus返回参数结构体
  */
-export interface AiContentReviewResult {
+export interface DescribeStreamLinkFlowRealtimeStatusResponse {
   /**
-      * 任务的类型，可以取的值有：
-<li>Porn：图片鉴黄</li>
-<li>Terrorism：图片敏感</li>
-<li>Political：图片敏感</li>
-<li>Porn.Asr：Asr 文字鉴黄</li>
-<li>Porn.Ocr：Ocr 文字鉴黄</li>
-<li>Political.Asr：Asr 文字敏感</li>
-<li>Political.Ocr：Ocr 文字敏感</li>
-<li>Terrorism.Ocr：Ocr 文字敏感</li>
-<li>Prohibited.Asr：Asr 文字鉴违禁</li>
-<li>Prohibited.Ocr：Ocr 文字鉴违禁</li>
-      */
-  Type: string
-
-  /**
-   * 采样频率，即对视频每秒截取进行审核的帧数。
+   * 查询时间，单位s。
    */
-  SampleRate: number
+  Timestamp: number
 
   /**
-   * 审核的视频时长，单位：秒。
+   * 实时数据信息列表。
    */
-  Duration: number
+  Datas: Array<FlowRealtimeStatusItem>
 
   /**
-      * 视频内容审核智能画面鉴黄任务的查询结果，当任务类型为 Porn 时有效。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  PornTask: AiReviewTaskPornResult
-
-  /**
-      * 视频内容审核智能画面敏感任务的查询结果，当任务类型为 Terrorism 时有效。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  TerrorismTask: AiReviewTaskTerrorismResult
-
-  /**
-      * 视频内容审核智能画面敏感任务的查询结果，当任务类型为 Political 时有效。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  PoliticalTask: AiReviewTaskPoliticalResult
-
-  /**
-      * 视频内容审核 Asr 文字鉴黄任务的查询结果，当任务类型为 Porn.Asr 时有效。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  PornAsrTask: AiReviewTaskPornAsrResult
-
-  /**
-      * 视频内容审核 Ocr 文字鉴黄任务的查询结果，当任务类型为 Porn.Ocr 时有效。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  PornOcrTask: AiReviewTaskPornOcrResult
-
-  /**
-      * 视频内容审核 Asr 文字敏感任务的查询结果，当任务类型为 Political.Asr 时有效。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  PoliticalAsrTask: AiReviewTaskPoliticalAsrResult
-
-  /**
-      * 视频内容审核 Ocr 文字敏感任务的查询结果，当任务类型为 Political.Ocr 时有效。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  PoliticalOcrTask: AiReviewTaskPoliticalOcrResult
-
-  /**
-      * 视频内容审核 Ocr 文字敏感任务的查询结果，当任务类型为 Terrorism.Ocr 时有效。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  TerrorismOcrTask: AiReviewTaskTerrorismOcrResult
-
-  /**
-      * 视频内容审核 Asr 文字鉴违禁任务的查询结果，当任务类型为 Prohibited.Asr 时有效。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ProhibitedAsrTask: AiReviewTaskProhibitedAsrResult
-
-  /**
-      * 视频内容审核 Ocr 文字鉴违禁任务的查询结果，当任务类型为 Prohibited.Ocr 时有效。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ProhibitedOcrTask: AiReviewTaskProhibitedOcrResult
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -9368,6 +11198,31 @@ export interface TerrorismImgReviewTemplateInfo {
    * 判定需人工复核是否违规的分数阈值，当智能审核达到该分数以上，认为需人工复核，不填默认为 80 分。取值范围：0~100。
    */
   ReviewConfidence?: number
+}
+
+/**
+ * 传输流媒体的音频数据。
+ */
+export interface FlowMediaAudio {
+  /**
+   * 帧率。
+   */
+  Fps: number
+
+  /**
+   * 码率，单位是bps。
+   */
+  Rate: number
+
+  /**
+   * 音频Pid。
+   */
+  Pid: number
+
+  /**
+   * 标志同一次推流。
+   */
+  SessionId: string
 }
 
 /**
@@ -9471,61 +11326,73 @@ export interface DescribeWatermarkTemplatesResponse {
 }
 
 /**
- * CreateAnimatedGraphicsTemplate请求参数结构体
+ * DescribeStreamLinkFlowLogs请求参数结构体
  */
-export interface CreateAnimatedGraphicsTemplateRequest {
+export interface DescribeStreamLinkFlowLogsRequest {
   /**
-   * 帧率，取值范围：[1, 30]，单位：Hz。
+   * 传输流Id。
    */
-  Fps: number
+  FlowId: string
 
   /**
-      * 动图宽度（或长边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
-<li>当 Width、Height 均为 0，则分辨率同源；</li>
-<li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
-<li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
-<li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
-默认值：0。
+      * 统计的开始时间，默认为前一小时，最多支持查询近7天。
+UTC时间，如'2020-01-01T12:00:00Z'。
       */
-  Width?: number
+  StartTime: string
 
   /**
-      * 动图高度（或短边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
-<li>当 Width、Height 均为 0，则分辨率同源；</li>
-<li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
-<li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
-<li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
-默认值：0。
+      * 统计的结束时间，默认为StartTime后一小时，最多支持查询24小时的数据。
+UTC时间，如'2020-01-01T12:00:00Z'。
       */
-  Height?: number
+  EndTime: string
 
   /**
-      * 分辨率自适应，可选值：
-<li>open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；</li>
-<li>close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。</li>
-默认值：open。
+   * 输入或输出类型，可选[input|output]。
+   */
+  Type: Array<string>
+
+  /**
+   * 主通道或备通道，可选[0|1]。
+   */
+  Pipeline: Array<string>
+
+  /**
+   * 每页大小，默认100，范围为[1, 1000]。
+   */
+  PageSize: number
+
+  /**
+   * 按Timestamp升序或降序排序，默认降序，可选[desc|asc]。
+   */
+  SortType?: string
+
+  /**
+   * 页码，默认1，范围为[1, 1000]。
+   */
+  PageNum?: number
+}
+
+/**
+ * 查询输出的RTMP配置信息。
+ */
+export interface DescribeOutputRTMPSettings {
+  /**
+      * 空闲超时时间。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-  ResolutionAdaptive?: string
+  IdleTimeout: number
 
   /**
-   * 动图格式，取值为 gif 和 webp。默认为 gif。
-   */
-  Format?: string
+      * Chunk大小。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ChunkSize: number
 
   /**
-   * 图片质量，取值范围：[1, 100]，默认值为 75。
-   */
-  Quality?: number
-
-  /**
-   * 转动图模板名称，长度限制：64 个字符。
-   */
-  Name?: string
-
-  /**
-   * 模板描述信息，长度限制：256 个字符。
-   */
-  Comment?: string
+      * 转推RTMP的目标地址信息列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Destinations: Array<RTMPAddressDestination>
 }
 
 /**
@@ -9553,6 +11420,41 @@ export interface ExecuteFunctionRequest {
    * 接口参数，具体参数格式调用时与后端协调。
    */
   FunctionArg: string
+}
+
+/**
+ * DescribeStreamLinkFlowLogs返回参数结构体
+ */
+export interface DescribeStreamLinkFlowLogsResponse {
+  /**
+   * 日志信息列表。
+   */
+  Infos: Array<FlowLogInfo>
+
+  /**
+   * 当前页码。
+   */
+  PageNum: number
+
+  /**
+   * 每页大小。
+   */
+  PageSize: number
+
+  /**
+   * 总数量。
+   */
+  TotalNum: number
+
+  /**
+   * 总页数。
+   */
+  TotalPage: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -9689,6 +11591,64 @@ export interface PornConfigureInfo {
    * 文本鉴黄控制参数。
    */
   OcrReviewInfo?: PornOcrReviewTemplateInfo
+}
+
+/**
+ * 修改输入信息的参数。
+ */
+export interface ModifyInput {
+  /**
+   * 输入Id。
+   */
+  InputId: string
+
+  /**
+   * 输入名称。
+   */
+  InputName: string
+
+  /**
+   * 输入描述。
+   */
+  Description: string
+
+  /**
+   * 允许的推流的IP，CIDR格式。
+   */
+  AllowIpList: Array<string>
+
+  /**
+   * SRT的配置信息。
+   */
+  SRTSettings: CreateInputSRTSettings
+
+  /**
+   * RTP的配置信息。
+   */
+  RTPSettings: CreateInputRTPSettings
+
+  /**
+      * 输入的协议，可选[SRT|RTP|RTMP]。
+当输出包含RTP时，输入只能是RTP。
+当输出包含RTMP时，输入可以是SRT/RTMP。
+当输出包含SRT时，输入只能是SRT。
+      */
+  Protocol?: string
+
+  /**
+   * 输入的主备开关，可选[OPEN|CLOSE]。
+   */
+  FailOver?: string
+
+  /**
+   * RTMP_PULL的配置信息。
+   */
+  RTMPPullSettings?: CreateInputRTMPPullSettings
+
+  /**
+   * RTSP_PULL的配置信息。
+   */
+  RTSPPullSettings?: CreateInputRTSPPullSettings
 }
 
 /**
@@ -9969,6 +11929,31 @@ export interface WorkflowTask {
 }
 
 /**
+ * 传输流媒体的视频数据。
+ */
+export interface FlowMediaVideo {
+  /**
+   * 帧率。
+   */
+  Fps: number
+
+  /**
+   * 码率，单位是bps。
+   */
+  Rate: number
+
+  /**
+   * 视频Pid。
+   */
+  Pid: number
+
+  /**
+   * 标志同一次推流。
+   */
+  SessionId: string
+}
+
+/**
  * 内容审核 Asr 文字鉴黄任务结果类型
  */
 export interface AiReviewTaskPornAsrResult {
@@ -10022,6 +12007,16 @@ export interface EditMediaFileInfo {
    * 视频剪辑的结束时间偏移，单位：秒。
    */
   EndTimeOffset?: number
+}
+
+/**
+ * 媒体处理 URL 对象信息。
+ */
+export interface UrlInputInfo {
+  /**
+   * 视频的 URL。
+   */
+  Url: string
 }
 
 /**
@@ -10272,24 +12267,30 @@ export interface DescribeAnimatedGraphicsTemplatesResponse {
 }
 
 /**
- * 智能按帧标签结果信息
+ * DescribeSampleSnapshotTemplates请求参数结构体
  */
-export interface MediaAiAnalysisFrameTagItem {
+export interface DescribeSampleSnapshotTemplatesRequest {
   /**
-   * 按帧标签名称。
+   * 采样截图模板唯一标识过滤条件，数组长度限制：100。
    */
-  Tag: string
+  Definitions?: Array<number>
 
   /**
-      * 按帧标签名称的分类列表，CategorySet.N 表示第 N+1级分类。
-比如 Tag 为“塔楼”时，CategorySet 包含两个元素：CategorySet.0 为“场景”，CategorySet.1为 “建筑”，表示按帧标签为“塔楼”，且第1级分类是“场景”，第2级分类是“建筑”。
+   * 分页偏移量，默认值：0。
+   */
+  Offset?: number
+
+  /**
+   * 返回记录条数，默认值：10，最大值：100。
+   */
+  Limit?: number
+
+  /**
+      * 模板类型过滤条件，可选值：
+<li>Preset：系统预置模板；</li>
+<li>Custom：用户自定义模板。</li>
       */
-  CategorySet: Array<string>
-
-  /**
-   * 按帧标签的可信度，取值范围是 0 到 100。
-   */
-  Confidence: number
+  Type?: string
 }
 
 /**
@@ -10436,39 +12437,103 @@ export interface CreateAnimatedGraphicsTemplateResponse {
 }
 
 /**
- * 智能分类任务结果类型
+ * 采样截图模板详情
  */
-export interface AiAnalysisTaskClassificationResult {
+export interface SampleSnapshotTemplate {
   /**
-   * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
+   * 采样截图模板唯一标识。
    */
-  Status: string
+  Definition: number
 
   /**
-   * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
-   */
-  ErrCodeExt: string
-
-  /**
-   * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
-   */
-  ErrCode: number
-
-  /**
-   * 错误信息。
-   */
-  Message: string
-
-  /**
-   * 智能分类任务输入。
-   */
-  Input: AiAnalysisTaskClassificationInput
-
-  /**
-      * 智能分类任务输出。
-注意：此字段可能返回 null，表示取不到有效值。
+      * 模板类型，取值范围：
+<li>Preset：系统预置模板；</li>
+<li>Custom：用户自定义模板。</li>
       */
-  Output: AiAnalysisTaskClassificationOutput
+  Type: string
+
+  /**
+   * 采样截图模板名称。
+   */
+  Name: string
+
+  /**
+   * 模板描述信息。
+   */
+  Comment: string
+
+  /**
+      * 截图宽度（或长边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
+<li>当 Width、Height 均为 0，则分辨率同源；</li>
+<li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
+<li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
+<li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
+默认值：0。
+      */
+  Width: number
+
+  /**
+      * 截图高度（或短边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
+<li>当 Width、Height 均为 0，则分辨率同源；</li>
+<li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
+<li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
+<li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
+默认值：0。
+      */
+  Height: number
+
+  /**
+      * 分辨率自适应，可选值：
+<li>open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；</li>
+<li>close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。</li>
+默认值：open。
+      */
+  ResolutionAdaptive: string
+
+  /**
+   * 图片格式。
+   */
+  Format: string
+
+  /**
+   * 采样截图类型。
+   */
+  SampleType: string
+
+  /**
+   * 采样间隔。
+   */
+  SampleInterval: number
+
+  /**
+   * 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
+   */
+  CreateTime: string
+
+  /**
+   * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
+   */
+  UpdateTime: string
+
+  /**
+      * 填充方式，当视频流配置宽高参数与原始视频的宽高比不一致时，对转码的处理方式，即为“填充”。可选填充方式：
+<li> stretch：拉伸，对每一帧进行拉伸，填满整个画面，可能导致转码后的视频被“压扁“或者“拉长“；</li>
+<li>black：留黑，保持视频宽高比不变，边缘剩余部分使用黑色填充。</li>
+<li>white：留白，保持视频宽高比不变，边缘剩余部分使用白色填充。</li>
+<li>gauss：高斯模糊，保持视频宽高比不变，边缘剩余部分使用高斯模糊。</li>
+默认值：black 。
+      */
+  FillType: string
+}
+
+/**
+ * 创建的输入RTSP拉流源站配置信息。
+ */
+export interface RTSPPullSourceAddress {
+  /**
+   * RTSP源站的Url地址。
+   */
+  Url: string
 }
 
 /**
@@ -10639,6 +12704,48 @@ export interface AiRecognitionTaskFaceResultItem {
 }
 
 /**
+ * DescribeStreamLinkFlowMediaStatistics请求参数结构体
+ */
+export interface DescribeStreamLinkFlowMediaStatisticsRequest {
+  /**
+   * 传输流ID。
+   */
+  FlowId: string
+
+  /**
+   * 输入或输出类型，可选[input|output]。
+   */
+  Type: string
+
+  /**
+   * 输入或输出Id。
+   */
+  InputOutputId: string
+
+  /**
+   * 主通道或备通道，可选[0|1]。
+   */
+  Pipeline: string
+
+  /**
+   * 查询间隔，可选[5s|1min|5min|15min]。
+   */
+  Period: string
+
+  /**
+      * 统计的开始时间，默认为前一小时，最多支持查询近7天。
+UTC时间，如'2020-01-01T12:00:00Z'。
+      */
+  StartTime: string
+
+  /**
+      * 统计的结束时间，默认为StartTime后一小时，最多支持查询24小时的数据。
+UTC时间，如'2020-01-01T12:00:00Z'。
+      */
+  EndTime: string
+}
+
+/**
  * 智能分类任务输入类型
  */
 export interface AiAnalysisTaskCoverInput {
@@ -10646,6 +12753,16 @@ export interface AiAnalysisTaskCoverInput {
    * 视频智能封面模板 ID。
    */
   Definition: number
+}
+
+/**
+ * 地区信息。
+ */
+export interface RegionInfo {
+  /**
+   * 地区名称。
+   */
+  Name: string
 }
 
 /**
@@ -10707,6 +12824,16 @@ export interface DeleteWatermarkTemplateResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 查询输出的RTSP拉流URL信息。
+ */
+export interface DescribeOutputRTSPPullServerUrl {
+  /**
+   * RTSP拉流地址的Url。
+   */
+  Url: string
 }
 
 /**

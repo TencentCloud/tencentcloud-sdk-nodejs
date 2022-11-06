@@ -21,8 +21,9 @@ import {
   ModifySnapshotByTimeOffsetTemplateResponse,
   ModifySampleSnapshotTemplateResponse,
   ModifyWatermarkTemplateRequest,
+  DescribeInputRTPSettings,
   AiRecognitionTaskAsrFullTextSegmentItem,
-  UserDefineOcrTextReviewTemplateInfoForUpdate,
+  DeleteStreamLinkFlowRequest,
   FrameRateConfig,
   OverrideTranscodeParameter,
   AiAnalysisTaskClassificationInput,
@@ -30,6 +31,8 @@ import {
   WorkflowInfo,
   CreateTranscodeTemplateRequest,
   ProcessLiveStreamResponse,
+  CreateOutputSRTSettings,
+  ModifyStreamLinkOutputInfoResponse,
   DescribeAnimatedGraphicsTemplatesRequest,
   AiReviewTaskProhibitedAsrResult,
   AdaptiveDynamicStreamingTemplate,
@@ -38,9 +41,14 @@ import {
   AiRecognitionTaskAsrFullTextResultOutput,
   AiReviewProhibitedOcrTaskOutput,
   ManageTaskResponse,
+  FlowMediaInfo,
   DeleteWorkflowRequest,
-  AiAnalysisTaskCoverOutput,
-  AiAnalysisTaskCoverResult,
+  DescribeRTMPPullSourceAddress,
+  DescribeOutputRTMPPullSettings,
+  UserDefineOcrTextReviewTemplateInfoForUpdate,
+  ModifyOutputInfo,
+  MediaSnapshotByTimeOffsetItem,
+  NumberFormat,
   ModifySampleSnapshotTemplateRequest,
   AiReviewPoliticalOcrTaskInput,
   EnhanceConfig,
@@ -54,16 +62,22 @@ import {
   MediaSnapshotByTimePicInfoItem,
   UserDefineFaceReviewTemplateInfo,
   ContentReviewTemplateItem,
+  ModifyStreamLinkFlowResponse,
   DeleteAIRecognitionTemplateResponse,
   VideoEnhanceConfig,
-  MosaicInput,
+  DeleteContentReviewTemplateRequest,
+  StartStreamLinkFlowResponse,
   AiReviewPoliticalTaskInput,
+  CreateOutputRTPSettingsDestinations,
   ClassificationConfigureInfo,
   MediaAiAnalysisClassificationItem,
+  ModifyWordSampleResponse,
   AudioTemplateInfoForUpdate,
   SuperResolutionConfig,
   DeletePersonSampleRequest,
+  DescribeStreamLinkFlowsResponse,
   MediaSampleSnapshotItem,
+  AiContentReviewResult,
   ParseLiveStreamProcessNotificationResponse,
   AiRecognitionTaskInput,
   AudioTemplateInfo,
@@ -73,8 +87,10 @@ import {
   AiReviewPornAsrTaskInput,
   AiRecognitionTaskFaceResult,
   CreateAdaptiveDynamicStreamingTemplateRequest,
+  CreateInputRTMPPullSettings,
   TerrorismImgReviewTemplateInfoForUpdate,
-  AiRecognitionTaskOcrFullTextResultOutput,
+  ModifyTranscodeTemplateRequest,
+  ModifyStreamLinkFlowRequest,
   DeleteAIAnalysisTemplateResponse,
   TextWatermarkTemplateInputForUpdate,
   AiReviewTerrorismOcrTaskInput,
@@ -84,20 +100,28 @@ import {
   HdrConfig,
   ScheduleTask,
   CreatePersonSampleRequest,
+  DescribeStreamLinkFlowSRTStatisticsRequest,
   MediaAiAnalysisCoverItem,
   CosInputInfo,
   TagConfigureInfo,
   DescribeWordSamplesResponse,
-  AiSampleFaceInfo,
+  FlowStatisticsArray,
   DeleteAIRecognitionTemplateRequest,
-  NumberFormat,
+  DescribeInputSRTSettings,
+  AiAnalysisTaskCoverResult,
   EnableWorkflowRequest,
+  CreateStreamLinkFlowResponse,
   AiAnalysisTaskClassificationOutput,
-  ModifyTranscodeTemplateRequest,
+  SRTAddressDestination,
+  FlowRealtimeStatusItem,
+  AiRecognitionTaskOcrFullTextResultOutput,
   EditMediaTaskInput,
   UserDefineAsrTextReviewTemplateInfo,
   AiRecognitionTaskOcrWordsResultOutput,
-  AiAnalysisTaskFrameTagOutput,
+  AiSampleFaceInfo,
+  CreateInputRTSPPullSettings,
+  CreateStreamLinkFlowRequest,
+  CreateOutputSRTSettingsDestinations,
   RecognizeMediaForZhiXueRequest,
   MediaProcessTaskAdaptiveDynamicStreamingResult,
   OcrWordsConfigureInfoForUpdate,
@@ -109,20 +133,25 @@ import {
   LiveStreamAiReviewResultInfo,
   EditMediaResponse,
   PoliticalOcrReviewTemplateInfoForUpdate,
+  CreateOutputRtmpSettingsDestinations,
   PornAsrReviewTemplateInfoForUpdate,
   DescribeSnapshotByTimeOffsetTemplatesRequest,
   ScheduleRecognitionTaskResult,
   AiRecognitionTaskAsrFullTextResultInput,
+  DescribeInputRTMPPullSettings,
   MediaProcessTaskInput,
+  RTMPPullSourceAddress,
   CosOutputStorage,
   AiRecognitionTaskFaceSegmentItem,
   ProcessMediaResponse,
   CreateWordSamplesResponse,
   ClassificationConfigureInfoForUpdate,
   DeleteAdaptiveDynamicStreamingTemplateResponse,
-  ArtifactRepairConfig,
+  CreateAnimatedGraphicsTemplateRequest,
+  ParseNotificationRequest,
   CreateWordSamplesRequest,
   PoliticalAsrReviewTemplateInfoForUpdate,
+  DescribeStreamLinkFlowStatisticsRequest,
   AiSampleFaceOperation,
   SvgWatermarkInputForUpdate,
   AiReviewTaskTerrorismOcrResult,
@@ -133,13 +162,16 @@ import {
   DeleteAdaptiveDynamicStreamingTemplateRequest,
   AiRecognitionTaskOcrFullTextSegmentItem,
   EditMediaOutputConfig,
+  PornConfigureInfoForUpdate,
   AiReviewPornAsrTaskOutput,
   DeleteAIAnalysisTemplateRequest,
   EditMediaRequest,
+  CreateStreamLinkOutputInfoResponse,
   MediaProcessTaskImageSpriteResult,
+  RTPAddressDestination,
   DescribeAdaptiveDynamicStreamingTemplatesResponse,
   MediaContentReviewOcrTextSegmentItem,
-  UrlInputInfo,
+  StopStreamLinkFlowRequest,
   DescribeAdaptiveDynamicStreamingTemplatesRequest,
   ImageWatermarkInput,
   AsrFullTextConfigureInfoForUpdate,
@@ -148,6 +180,7 @@ import {
   ProhibitedConfigureInfoForUpdate,
   TagConfigureInfoForUpdate,
   DeleteWordSamplesRequest,
+  DescribeInputRTSPPullSettings,
   RawTranscodeParameter,
   LiveStreamTaskNotifyConfig,
   VideoTemplateInfo,
@@ -156,23 +189,33 @@ import {
   AiReviewTaskPornOcrResult,
   ModifyContentReviewTemplateResponse,
   DescribeWatermarkTemplatesRequest,
+  CreateOutputInfo,
   TaskOutputStorage,
+  FlowLogInfo,
   UserDefineConfigureInfo,
   ColorEnhanceConfig,
+  DescribeOutputRTPSettings,
+  DeleteStreamLinkOutputResponse,
   AiReviewPornOcrTaskInput,
-  MediaSnapshotByTimeOffsetItem,
+  AiAnalysisTaskFrameTagOutput,
   ModifyAdaptiveDynamicStreamingTemplateRequest,
   MediaAnimatedGraphicsItem,
   ModifyWordSampleRequest,
   MediaProcessTaskAnimatedGraphicResult,
   AiAnalysisTaskTagResult,
+  RTMPAddressDestination,
   AiAnalysisTaskTagOutput,
+  SRTSourceAddressReq,
   ProcessMediaRequest,
+  DescribeRTSPPullSourceAddress,
+  DescribeOutputRTSPPullSettings,
   AiRecognitionTaskOcrFullTextResult,
   MediaProcessTaskSnapshotByTimeOffsetResult,
   AiRecognitionTaskTransTextResultInput,
   ImageQualityEnhanceConfig,
+  DescribeStreamLinkRegionsResponse,
   AiSampleWord,
+  DescribeStreamLinkFlowStatisticsResponse,
   AiRecognitionTaskAsrWordsResultOutput,
   LiveStreamOcrWordsRecognitionResult,
   LiveStreamProcessErrorInfo,
@@ -183,15 +226,22 @@ import {
   DeleteContentReviewTemplateResponse,
   ImageWatermarkTemplate,
   AsrWordsConfigureInfo,
+  ModifyStreamLinkOutputInfoRequest,
   LiveStreamAsrWordsRecognitionResult,
+  MediaAiAnalysisFrameTagItem,
   RecognizeMediaForZhiXueResponse,
   AiSamplePerson,
+  FlowStatistics,
+  CreateInputSRTSettings,
+  FlowRealtimeStatusCommon,
   DescribeWorkflowsResponse,
   AsrWordsConfigureInfoForUpdate,
   DeleteImageSpriteTemplateResponse,
   DescribeContentReviewTemplatesResponse,
-  TEHDConfig,
+  DescribeStreamLinkActivateStateResponse,
   AnimatedGraphicsTemplate,
+  DescribeStreamLinkFlowRequest,
+  CreateOutputRTMPSettings,
   WorkflowTrigger,
   LiveStreamAiRecognitionResultInfo,
   LiveStreamAiReviewImagePoliticalResult,
@@ -201,39 +251,53 @@ import {
   CreateWatermarkTemplateRequest,
   ScheduleAnalysisTaskResult,
   TerrorismConfigureInfoForUpdate,
-  ParseNotificationRequest,
+  OutputSRTSourceAddressResp,
+  StreamLinkRegionInfo,
+  FlowRealtimeStatusRTP,
   AnimatedGraphicTaskInput,
-  DeleteContentReviewTemplateRequest,
+  OutputAddress,
+  MosaicInput,
+  DescribeStreamLinkActivateStateRequest,
   AIAnalysisTemplateItem,
   HeadTailParameter,
   RawImageWatermarkInput,
   DescribeImageSpriteTemplatesRequest,
   AiSampleTagOperation,
+  SRTSourceAddressResp,
   CreateAIRecognitionTemplateResponse,
+  DescribeInput,
   DeleteTranscodeTemplateRequest,
   AiReviewTerrorismTaskOutput,
   ProhibitedConfigureInfo,
+  DescribeStreamLinkFlowSRTStatisticsResponse,
   AiReviewTerrorismOcrTaskOutput,
   AiAnalysisResult,
+  ImageWatermarkInputForUpdate,
   DescribeAIAnalysisTemplatesRequest,
+  FlowVideo,
   AiRecognitionTaskOcrWordsResultItem,
   DeleteSampleSnapshotTemplateResponse,
   AiAnalysisTaskTagInput,
   ResetWorkflowRequest,
   AiReviewTaskTerrorismResult,
+  DescribeOutput,
   LiveStreamAiReviewVoicePornResult,
   MediaContentReviewAsrTextSegmentItem,
   MediaContentReviewPoliticalSegmentItem,
   DeletePersonSampleResponse,
+  StartStreamLinkFlowRequest,
   CreateSnapshotByTimeOffsetTemplateResponse,
   ModifyContentReviewTemplateRequest,
-  ImageWatermarkInputForUpdate,
+  StopStreamLinkFlowResponse,
+  AiAnalysisTaskCoverOutput,
   AiContentReviewTaskInput,
+  InputAddress,
   CreateAdaptiveDynamicStreamingTemplateResponse,
   DeleteSampleSnapshotTemplateRequest,
   AiAnalysisTaskInput,
   ImageSpriteTemplate,
   AiRecognitionTaskOcrFullTextSegmentTextItem,
+  DeleteStreamLinkFlowResponse,
   LiveStreamAsrFullTextRecognitionResult,
   AiReviewPornOcrTaskOutput,
   CreateSampleSnapshotTemplateResponse,
@@ -242,22 +306,26 @@ import {
   ActionConfigInfo,
   MediaAiAnalysisTagItem,
   TranscodeTemplate,
+  DescribeStreamLinkFlowMediaStatisticsResponse,
   PornOcrReviewTemplateInfo,
+  CreateOutputInfoRTPSettings,
   AiReviewTaskPoliticalAsrResult,
   AiRecognitionTaskAsrWordsSegmentItem,
   SubtitleTemplate,
-  PornConfigureInfoForUpdate,
+  LiveStreamProcessTask,
   AiReviewProhibitedAsrTaskInput,
   MediaContentReviewSegmentItem,
   TerrorismOcrReviewTemplateInfo,
   AiReviewTaskPornResult,
+  DescribeStreamLinkFlowRealtimeStatusRequest,
   AiReviewProhibitedAsrTaskOutput,
   LiveStreamFaceRecognitionResult,
-  DescribeSampleSnapshotTemplatesRequest,
+  FlowAudio,
   CoverConfigureInfoForUpdate,
   DisableWorkflowResponse,
-  SampleSnapshotTemplate,
+  AiAnalysisTaskClassificationResult,
   PoliticalImgReviewTemplateInfoForUpdate,
+  FlowRealtimeStatusRTMP,
   UserDefineOcrTextReviewTemplateInfo,
   AdaptiveStreamTemplate,
   TranscodeTaskInput,
@@ -265,17 +333,21 @@ import {
   ParseNotificationResponse,
   ActivityResult,
   ResetWorkflowResponse,
+  DescribeStreamLinkFlowsRequest,
   CreateAIAnalysisTemplateResponse,
   MediaProcessTaskSampleSnapshotResult,
   UserDefineConfigureInfoForUpdate,
   CosFileUploadTrigger,
   AiReviewPoliticalAsrTaskOutput,
+  FlowRealtimeStatusSRT,
   TEHDConfigForUpdate,
+  DeleteStreamLinkOutputRequest,
   ModifyPersonSampleRequest,
   AsrFullTextConfigureInfo,
-  DescribeMediaMetaDataResponse,
+  ArtifactRepairConfig,
   CreateAIRecognitionTemplateRequest,
   DescribeTaskDetailRequest,
+  DescribeStreamLinkFlowResponse,
   AiAnalysisTaskFrameTagResult,
   AiReviewPornTaskOutput,
   CreateWorkflowResponse,
@@ -284,6 +356,7 @@ import {
   PoliticalImgReviewTemplateInfo,
   PoliticalConfigureInfo,
   ModifyAnimatedGraphicsTemplateRequest,
+  DescribeOutputRTMPPullServerUrl,
   AiRecognitionTaskOcrWordsSegmentItem,
   MediaProcessTaskResult,
   DeleteWordSamplesResponse,
@@ -292,8 +365,10 @@ import {
   EnableWorkflowResponse,
   AiSampleWordInfo,
   AdaptiveDynamicStreamingInfoItem,
+  CreateStreamLinkOutputInfoRequest,
   ProhibitedOcrReviewTemplateInfo,
   LiveStreamOcrFullTextRecognitionResult,
+  ModifyStreamLinkInputRequest,
   ScheduleReviewTaskResult,
   ModifyTranscodeTemplateResponse,
   MediaMetaData,
@@ -309,21 +384,28 @@ import {
   AiAnalysisTaskFrameTagInput,
   MediaAiAnalysisFrameTagSegmentItem,
   AiRecognitionTaskAsrWordsResultItem,
+  DescribeStreamLinkRegionsRequest,
+  ModifyStreamLinkInputResponse,
   DescribeTaskDetailResponse,
   LiveStreamAiRecognitionResultItem,
   DeleteImageSpriteTemplateRequest,
   AiSampleFailFaceInfo,
   UserDefineFaceReviewTemplateInfoForUpdate,
+  DescribeInputRTMPSettings,
   SharpEnhanceConfig,
   OcrFullTextConfigureInfoForUpdate,
+  FlowSRTInfo,
   AiRecognitionTaskOcrFullTextResultInput,
   DescribeTasksResponse,
+  DescribeOutputSRTSettings,
   AiRecognitionTaskFaceResultInput,
   AiReviewPoliticalTaskOutput,
   LiveStreamAiReviewImagePornResult,
   AiRecognitionTaskTransTextResultOutput,
   ModifySnapshotByTimeOffsetTemplateRequest,
   LiveStreamAiReviewResultItem,
+  TEHDConfig,
+  CreateInputRTPSettings,
   TaskSimpleInfo,
   DescribeSnapshotByTimeOffsetTemplatesResponse,
   MediaVideoStreamItem,
@@ -335,6 +417,7 @@ import {
   CreateTranscodeTemplateResponse,
   AiRecognitionTaskAsrWordsResultInput,
   CreateAIAnalysisTemplateRequest,
+  CreateInput,
   AiReviewTerrorismTaskInput,
   DescribeWorkflowsRequest,
   MediaAudioStreamItem,
@@ -345,24 +428,28 @@ import {
   DeleteWatermarkTemplateRequest,
   DescribeWordSamplesRequest,
   ModifyAIAnalysisTemplateRequest,
-  LiveStreamProcessTask,
+  DescribeFlow,
   CreateWatermarkTemplateResponse,
   DescribeSampleSnapshotTemplatesResponse,
-  ModifyWordSampleResponse,
-  AiContentReviewResult,
+  DescribeMediaMetaDataResponse,
+  DescribeStreamLinkFlowRealtimeStatusResponse,
   TerrorismImgReviewTemplateInfo,
+  FlowMediaAudio,
   DescribeTranscodeTemplatesRequest,
   DisableWorkflowRequest,
   PoliticalConfigureInfoForUpdate,
   DescribeWatermarkTemplatesResponse,
-  CreateAnimatedGraphicsTemplateRequest,
+  DescribeStreamLinkFlowLogsRequest,
+  DescribeOutputRTMPSettings,
   FrameTagConfigureInfo,
   ExecuteFunctionRequest,
+  DescribeStreamLinkFlowLogsResponse,
   ModifyPersonSampleResponse,
   DeleteTranscodeTemplateResponse,
   MediaTranscodeItem,
   DescribePersonSamplesResponse,
   PornConfigureInfo,
+  ModifyInput,
   VideoDenoiseConfig,
   DescribeAIAnalysisTemplatesResponse,
   CreateSnapshotByTimeOffsetTemplateRequest,
@@ -370,8 +457,10 @@ import {
   AiRecognitionTaskAsrWordsResult,
   CreateSampleSnapshotTemplateRequest,
   WorkflowTask,
+  FlowMediaVideo,
   AiReviewTaskPornAsrResult,
   EditMediaFileInfo,
+  UrlInputInfo,
   FaceConfigureInfo,
   AiRecognitionTaskFaceResultOutput,
   PornImgReviewTemplateInfoForUpdate,
@@ -383,20 +472,24 @@ import {
   DeleteAnimatedGraphicsTemplateRequest,
   DeleteSnapshotByTimeOffsetTemplateRequest,
   DescribeAnimatedGraphicsTemplatesResponse,
-  MediaAiAnalysisFrameTagItem,
+  DescribeSampleSnapshotTemplatesRequest,
   ActivityResItem,
   SampleSnapshotTaskInput,
   TerrorismConfigureInfo,
   PoliticalAsrReviewTemplateInfo,
   CreateAnimatedGraphicsTemplateResponse,
-  AiAnalysisTaskClassificationResult,
+  SampleSnapshotTemplate,
+  RTSPPullSourceAddress,
   MediaImageSpriteItem,
   DescribePersonSamplesRequest,
   AiRecognitionTaskFaceResultItem,
+  DescribeStreamLinkFlowMediaStatisticsRequest,
   AiAnalysisTaskCoverInput,
+  RegionInfo,
   AiRecognitionTaskTransTextResult,
   EditMediaTaskOutput,
   DeleteWatermarkTemplateResponse,
+  DescribeOutputRTSPPullServerUrl,
   LowLightEnhanceConfig,
   DescribeMediaMetaDataRequest,
   FrameTagConfigureInfoForUpdate,
@@ -417,6 +510,36 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 批量查询媒体输入流的配置信息。
+   */
+  async DescribeStreamLinkFlows(
+    req: DescribeStreamLinkFlowsRequest,
+    cb?: (error: string, rep: DescribeStreamLinkFlowsResponse) => void
+  ): Promise<DescribeStreamLinkFlowsResponse> {
+    return this.request("DescribeStreamLinkFlows", req, cb)
+  }
+
+  /**
+   * 停止媒体传输流。
+   */
+  async StopStreamLinkFlow(
+    req: StopStreamLinkFlowRequest,
+    cb?: (error: string, rep: StopStreamLinkFlowResponse) => void
+  ): Promise<StopStreamLinkFlowResponse> {
+    return this.request("StopStreamLinkFlow", req, cb)
+  }
+
+  /**
+   * 修改媒体传输流的输出配置。
+   */
+  async ModifyStreamLinkOutputInfo(
+    req: ModifyStreamLinkOutputInfoRequest,
+    cb?: (error: string, rep: ModifyStreamLinkOutputInfoResponse) => void
+  ): Promise<ModifyStreamLinkOutputInfoResponse> {
+    return this.request("ModifyStreamLinkOutputInfo", req, cb)
+  }
+
+  /**
    * 创建用户自定义指定时间点截图模板，数量上限：16。
    */
   async CreateSnapshotByTimeOffsetTemplate(
@@ -427,14 +550,35 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 从 CMQ 获取到消息后，从消息的 msgBody 字段中解析出 MPS 事件通知的内容。
-该接口不用于发起网络调用，而是用来帮助生成各个语言平台的 SDK，您可以参考 SDK 的中解析函数的实现事件通知的解析。
+   * 实时查询流的当前状态
+   */
+  async DescribeStreamLinkFlowRealtimeStatus(
+    req: DescribeStreamLinkFlowRealtimeStatusRequest,
+    cb?: (error: string, rep: DescribeStreamLinkFlowRealtimeStatusResponse) => void
+  ): Promise<DescribeStreamLinkFlowRealtimeStatusResponse> {
+    return this.request("DescribeStreamLinkFlowRealtimeStatus", req, cb)
+  }
+
+  /**
+     * 修改用户自定义内容分析模板。
+
+注意：模板 ID 10000 以下的为系统预置模板，不允许修改。
      */
-  async ParseNotification(
-    req: ParseNotificationRequest,
-    cb?: (error: string, rep: ParseNotificationResponse) => void
-  ): Promise<ParseNotificationResponse> {
-    return this.request("ParseNotification", req, cb)
+  async ModifyAIAnalysisTemplate(
+    req: ModifyAIAnalysisTemplateRequest,
+    cb?: (error: string, rep: ModifyAIAnalysisTemplateResponse) => void
+  ): Promise<ModifyAIAnalysisTemplateResponse> {
+    return this.request("ModifyAIAnalysisTemplate", req, cb)
+  }
+
+  /**
+   * 删除媒体传输流的输出配置。
+   */
+  async DeleteStreamLinkOutput(
+    req: DeleteStreamLinkOutputRequest,
+    cb?: (error: string, rep: DeleteStreamLinkOutputResponse) => void
+  ): Promise<DeleteStreamLinkOutputResponse> {
+    return this.request("DeleteStreamLinkOutput", req, cb)
   }
 
   /**
@@ -565,6 +709,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询媒体输入流的配置信息。
+   */
+  async DescribeStreamLinkFlow(
+    req: DescribeStreamLinkFlowRequest,
+    cb?: (error: string, rep: DescribeStreamLinkFlowResponse) => void
+  ): Promise<DescribeStreamLinkFlowResponse> {
+    return this.request("DescribeStreamLinkFlow", req, cb)
+  }
+
+  /**
+   * 删除媒体传输的传输流配置。
+   */
+  async DeleteStreamLinkFlow(
+    req: DeleteStreamLinkFlowRequest,
+    cb?: (error: string, rep: DeleteStreamLinkFlowResponse) => void
+  ): Promise<DeleteStreamLinkFlowResponse> {
+    return this.request("DeleteStreamLinkFlow", req, cb)
+  }
+
+  /**
    * 根据内容分析模板唯一标识，获取内容分析模板详情列表。返回结果包含符合条件的所有用户自定义内容分析模板及系统预置视频内容分析模板
    */
   async DescribeAIAnalysisTemplates(
@@ -572,6 +736,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAIAnalysisTemplatesResponse) => void
   ): Promise<DescribeAIAnalysisTemplatesResponse> {
     return this.request("DescribeAIAnalysisTemplates", req, cb)
+  }
+
+  /**
+   * 查询媒体传输流的日志信息。
+   */
+  async DescribeStreamLinkFlowLogs(
+    req: DescribeStreamLinkFlowLogsRequest,
+    cb?: (error: string, rep: DescribeStreamLinkFlowLogsResponse) => void
+  ): Promise<DescribeStreamLinkFlowLogsResponse> {
+    return this.request("DescribeStreamLinkFlowLogs", req, cb)
+  }
+
+  /**
+   * 查询媒体传输流的SRT质量数据。
+   */
+  async DescribeStreamLinkFlowSRTStatistics(
+    req: DescribeStreamLinkFlowSRTStatisticsRequest,
+    cb?: (error: string, rep: DescribeStreamLinkFlowSRTStatisticsResponse) => void
+  ): Promise<DescribeStreamLinkFlowSRTStatisticsResponse> {
+    return this.request("DescribeStreamLinkFlowSRTStatistics", req, cb)
   }
 
   /**
@@ -595,13 +779,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改转自适应码流模板
+   * 创建媒体传输流的输出信息。
    */
-  async ModifyAdaptiveDynamicStreamingTemplate(
-    req: ModifyAdaptiveDynamicStreamingTemplateRequest,
-    cb?: (error: string, rep: ModifyAdaptiveDynamicStreamingTemplateResponse) => void
-  ): Promise<ModifyAdaptiveDynamicStreamingTemplateResponse> {
-    return this.request("ModifyAdaptiveDynamicStreamingTemplate", req, cb)
+  async CreateStreamLinkOutputInfo(
+    req: CreateStreamLinkOutputInfoRequest,
+    cb?: (error: string, rep: CreateStreamLinkOutputInfoResponse) => void
+  ): Promise<CreateStreamLinkOutputInfoResponse> {
+    return this.request("CreateStreamLinkOutputInfo", req, cb)
   }
 
   /**
@@ -745,6 +929,17 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 查询媒体传输流的媒体质量数据。
+
+     */
+  async DescribeStreamLinkFlowStatistics(
+    req: DescribeStreamLinkFlowStatisticsRequest,
+    cb?: (error: string, rep: DescribeStreamLinkFlowStatisticsResponse) => void
+  ): Promise<DescribeStreamLinkFlowStatisticsResponse> {
+    return this.request("DescribeStreamLinkFlowStatistics", req, cb)
+  }
+
+  /**
    * 创建用户自定义水印模板，数量上限：1000。
    */
   async CreateWatermarkTemplate(
@@ -785,6 +980,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 启动媒体传输流。
+   */
+  async StartStreamLinkFlow(
+    req: StartStreamLinkFlowRequest,
+    cb?: (error: string, rep: StartStreamLinkFlowResponse) => void
+  ): Promise<StartStreamLinkFlowResponse> {
+    return this.request("StartStreamLinkFlow", req, cb)
+  }
+
+  /**
    * 创建用户自定义转动图模板，数量上限：16。
    */
   async CreateAnimatedGraphicsTemplate(
@@ -805,6 +1010,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改媒体传输流的输入信息。
+   */
+  async ModifyStreamLinkInput(
+    req: ModifyStreamLinkInputRequest,
+    cb?: (error: string, rep: ModifyStreamLinkInputResponse) => void
+  ): Promise<ModifyStreamLinkInputResponse> {
+    return this.request("ModifyStreamLinkInput", req, cb)
+  }
+
+  /**
    * 启用工作流。
    */
   async EnableWorkflow(
@@ -812,6 +1027,28 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: EnableWorkflowResponse) => void
   ): Promise<EnableWorkflowResponse> {
     return this.request("EnableWorkflow", req, cb)
+  }
+
+  /**
+     * 查询媒体传输流的媒体质量数据。
+
+     */
+  async DescribeStreamLinkFlowMediaStatistics(
+    req: DescribeStreamLinkFlowMediaStatisticsRequest,
+    cb?: (error: string, rep: DescribeStreamLinkFlowMediaStatisticsResponse) => void
+  ): Promise<DescribeStreamLinkFlowMediaStatisticsResponse> {
+    return this.request("DescribeStreamLinkFlowMediaStatistics", req, cb)
+  }
+
+  /**
+     * 从 CMQ 获取到消息后，从消息的 msgBody 字段中解析出 MPS 事件通知的内容。
+该接口不用于发起网络调用，而是用来帮助生成各个语言平台的 SDK，您可以参考 SDK 的中解析函数的实现事件通知的解析。
+     */
+  async ParseNotification(
+    req: ParseNotificationRequest,
+    cb?: (error: string, rep: ParseNotificationResponse) => void
+  ): Promise<ParseNotificationResponse> {
+    return this.request("ParseNotification", req, cb)
   }
 
   /**
@@ -835,15 +1072,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 修改用户自定义内容分析模板。
+   * 查询媒体传输开通状态。
+   */
+  async DescribeStreamLinkActivateState(
+    req?: DescribeStreamLinkActivateStateRequest,
+    cb?: (error: string, rep: DescribeStreamLinkActivateStateResponse) => void
+  ): Promise<DescribeStreamLinkActivateStateResponse> {
+    return this.request("DescribeStreamLinkActivateState", req, cb)
+  }
 
-注意：模板 ID 10000 以下的为系统预置模板，不允许修改。
-     */
-  async ModifyAIAnalysisTemplate(
-    req: ModifyAIAnalysisTemplateRequest,
-    cb?: (error: string, rep: ModifyAIAnalysisTemplateResponse) => void
-  ): Promise<ModifyAIAnalysisTemplateResponse> {
-    return this.request("ModifyAIAnalysisTemplate", req, cb)
+  /**
+   * 修改媒体传输的传输流配置信息。
+   */
+  async ModifyStreamLinkFlow(
+    req: ModifyStreamLinkFlowRequest,
+    cb?: (error: string, rep: ModifyStreamLinkFlowResponse) => void
+  ): Promise<ModifyStreamLinkFlowResponse> {
+    return this.request("ModifyStreamLinkFlow", req, cb)
   }
 
   /**
@@ -856,6 +1101,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTasksResponse) => void
   ): Promise<DescribeTasksResponse> {
     return this.request("DescribeTasks", req, cb)
+  }
+
+  /**
+   * 查询媒体传输所有地区。
+   */
+  async DescribeStreamLinkRegions(
+    req?: DescribeStreamLinkRegionsRequest,
+    cb?: (error: string, rep: DescribeStreamLinkRegionsResponse) => void
+  ): Promise<DescribeStreamLinkRegionsResponse> {
+    return this.request("DescribeStreamLinkRegions", req, cb)
   }
 
   /**
@@ -937,6 +1192,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateWorkflowResponse) => void
   ): Promise<CreateWorkflowResponse> {
     return this.request("CreateWorkflow", req, cb)
+  }
+
+  /**
+   * 创建媒体传输的传输流配置。
+   */
+  async CreateStreamLinkFlow(
+    req: CreateStreamLinkFlowRequest,
+    cb?: (error: string, rep: CreateStreamLinkFlowResponse) => void
+  ): Promise<CreateStreamLinkFlowResponse> {
+    return this.request("CreateStreamLinkFlow", req, cb)
   }
 
   /**
@@ -1041,6 +1306,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateAIAnalysisTemplateResponse) => void
   ): Promise<CreateAIAnalysisTemplateResponse> {
     return this.request("CreateAIAnalysisTemplate", req, cb)
+  }
+
+  /**
+   * 修改转自适应码流模板
+   */
+  async ModifyAdaptiveDynamicStreamingTemplate(
+    req: ModifyAdaptiveDynamicStreamingTemplateRequest,
+    cb?: (error: string, rep: ModifyAdaptiveDynamicStreamingTemplateResponse) => void
+  ): Promise<ModifyAdaptiveDynamicStreamingTemplateResponse> {
+    return this.request("ModifyAdaptiveDynamicStreamingTemplate", req, cb)
   }
 
   /**

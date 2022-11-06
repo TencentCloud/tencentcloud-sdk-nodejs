@@ -47,6 +47,7 @@ import {
   InitDBInstancesResponse,
   DescribeDBParametersResponse,
   IsolateHourDBInstanceRequest,
+  IsolateDBInstanceResponse,
   ModifyLogFileRetentionPeriodRequest,
   DescribeLogFileRetentionPeriodRequest,
   DescribeFlowResponse,
@@ -143,6 +144,7 @@ import {
   CloseDBExtranetAccessRequest,
   ResourceTag,
   DescribeDcnDetailResponse,
+  IsolateDBInstanceRequest,
   InstanceSpec,
   DescribeFlowRequest,
   ModifyAccountPrivilegesRequest,
@@ -345,13 +347,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(ModifyLogFileRetentionPeriod)用于修改数据库备份日志保存天数。
+   * 本接口（KillSession）用于杀死指定会话。
    */
-  async ModifyLogFileRetentionPeriod(
-    req: ModifyLogFileRetentionPeriodRequest,
-    cb?: (error: string, rep: ModifyLogFileRetentionPeriodResponse) => void
-  ): Promise<ModifyLogFileRetentionPeriodResponse> {
-    return this.request("ModifyLogFileRetentionPeriod", req, cb)
+  async KillSession(
+    req: KillSessionRequest,
+    cb?: (error: string, rep: KillSessionResponse) => void
+  ): Promise<KillSessionResponse> {
+    return this.request("KillSession", req, cb)
   }
 
   /**
@@ -475,13 +477,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（KillSession）用于杀死指定会话。
+   * 本接口(IsolateDBInstance)用于隔离云数据库实例（包年包月），隔离后不能通过IP和端口访问数据库。隔离的实例可在回收站中进行开机。若为欠费隔离，请尽快进行充值。
    */
-  async KillSession(
-    req: KillSessionRequest,
-    cb?: (error: string, rep: KillSessionResponse) => void
-  ): Promise<KillSessionResponse> {
-    return this.request("KillSession", req, cb)
+  async IsolateDBInstance(
+    req: IsolateDBInstanceRequest,
+    cb?: (error: string, rep: IsolateDBInstanceResponse) => void
+  ): Promise<IsolateDBInstanceResponse> {
+    return this.request("IsolateDBInstance", req, cb)
   }
 
   /**
@@ -845,5 +847,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DisassociateSecurityGroupsResponse) => void
   ): Promise<DisassociateSecurityGroupsResponse> {
     return this.request("DisassociateSecurityGroups", req, cb)
+  }
+
+  /**
+   * 本接口(ModifyLogFileRetentionPeriod)用于修改数据库备份日志保存天数。
+   */
+  async ModifyLogFileRetentionPeriod(
+    req: ModifyLogFileRetentionPeriodRequest,
+    cb?: (error: string, rep: ModifyLogFileRetentionPeriodResponse) => void
+  ): Promise<ModifyLogFileRetentionPeriodResponse> {
+    return this.request("ModifyLogFileRetentionPeriod", req, cb)
   }
 }

@@ -2870,7 +2870,7 @@ export interface DescribeDDoSAttackTopDataResponse {
  */
 export interface SecRuleRelatedInfo {
   /**
-   * 规则ID列表（99999为无效id）。
+   * 规则ID。
    */
   RuleId: number
 
@@ -2910,6 +2910,12 @@ export interface SecRuleRelatedInfo {
    * 规则类型名称。
    */
   RuleTypeName: string
+
+  /**
+      * 攻击内容。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AttackContent: string
 }
 
 /**
@@ -6053,6 +6059,16 @@ export interface SecHitRuleInfo {
    * 子域名。
    */
   Domain: string
+
+  /**
+      * Bot标签，取值有:
+<li>evil_bot：恶意Bot；</li>
+<li>suspect_bot：疑似Bot；</li>
+<li>good_bot：正常Bot；</li>
+<li>normal：正常请求；</li>
+<li>none：未分类。</li>
+      */
+  BotLabel: string
 }
 
 /**

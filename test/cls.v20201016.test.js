@@ -28,9 +28,9 @@ it("cls.v20201016.CreateMachineGroup", async function () {
     }
 })
 
-it("cls.v20201016.DescribeMachineGroups", async function () {
+it("cls.v20201016.DeleteMachineGroupInfo", async function () {
     try {
-       const data = await client.DescribeMachineGroups({})
+       const data = await client.DeleteMachineGroupInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -308,6 +308,16 @@ it("cls.v20201016.DescribeAlarms", async function () {
     }
 })
 
+it("cls.v20201016.AddMachineGroupInfo", async function () {
+    try {
+       const data = await client.AddMachineGroupInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.DescribeAlarmNotices", async function () {
     try {
        const data = await client.DescribeAlarmNotices({})
@@ -521,6 +531,16 @@ it("cls.v20201016.SplitPartition", async function () {
 it("cls.v20201016.DescribeConfigs", async function () {
     try {
        const data = await client.DescribeConfigs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.DescribeMachineGroups", async function () {
+    try {
+       const data = await client.DescribeMachineGroups({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

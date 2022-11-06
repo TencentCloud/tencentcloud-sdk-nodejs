@@ -34,7 +34,6 @@ import {
   DescribeConfigMachineGroupsRequest,
   ModifyConfigExtraResponse,
   CreateLogsetRequest,
-  DescribeShippersRequest,
   LogItem,
   SearchLogResponse,
   DeleteTopicRequest,
@@ -55,6 +54,7 @@ import {
   AlarmTargetInfo,
   DescribeIndexRequest,
   DescribeConfigsResponse,
+  DeleteMachineGroupInfoRequest,
   CreateLogsetResponse,
   DeleteMachineGroupResponse,
   Tag,
@@ -81,7 +81,7 @@ import {
   CreateAlarmRequest,
   DeleteExportResponse,
   PartitionInfo,
-  CreateConfigExtraRequest,
+  DescribeShippersRequest,
   ExcludePathInfo,
   FilterRuleInfo,
   ConfigExtraInfo,
@@ -93,6 +93,7 @@ import {
   CloseKafkaConsumerResponse,
   RuleTagInfo,
   CreateIndexRequest,
+  DescribeLogsetsResponse,
   DeleteConsumerResponse,
   DescribeTopicsRequest,
   GetAlarmLogResponse,
@@ -115,9 +116,10 @@ import {
   CloseKafkaConsumerRequest,
   CreateExportRequest,
   DescribeAlarmNoticesResponse,
+  DescribeMachineGroupsResponse,
   DeleteConfigExtraRequest,
   ModifyConfigRequest,
-  DescribeLogsetsResponse,
+  AddMachineGroupInfoRequest,
   JsonInfo,
   CreateShipperRequest,
   CreateTopicResponse,
@@ -132,23 +134,24 @@ import {
   AlarmAnalysisConfig,
   ModifyIndexRequest,
   Column,
-  CompressInfo,
+  ContentInfo,
   ValueInfo,
   GetAlarmLogRequest,
   DeleteShipperResponse,
   ExportInfo,
+  DescribeLogContextResponse,
   ConfigInfo,
   DeleteExportRequest,
   SplitPartitionResponse,
   LogContextInfo,
   ModifyShipperRequest,
-  DescribeLogContextResponse,
+  CreateConfigExtraRequest,
   CreateConsumerRequest,
   AlarmNotice,
   ModifyConfigResponse,
   ModifyAlarmNoticeResponse,
   DescribeMachinesResponse,
-  ContentInfo,
+  CompressInfo,
   ApplyConfigToMachineGroupResponse,
   DeleteAlarmRequest,
   CreateConfigResponse,
@@ -156,6 +159,7 @@ import {
   DeleteConfigFromMachineGroupRequest,
   ShipperInfo,
   KeyValueInfo,
+  AddMachineGroupInfoResponse,
   ModifyMachineGroupRequest,
   DescribeAlarmNoticesRequest,
   NoticeReceiver,
@@ -179,7 +183,7 @@ import {
   DescribeMachineGroupConfigsRequest,
   ModifyConfigExtraRequest,
   ModifyLogsetRequest,
-  DescribeMachineGroupsResponse,
+  DeleteMachineGroupInfoResponse,
   DescribeLogsetsRequest,
   ParquetInfo,
   DeleteTopicResponse,
@@ -211,13 +215,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取机器组信息列表
+   * 用于删除机器组信息
    */
-  async DescribeMachineGroups(
-    req: DescribeMachineGroupsRequest,
-    cb?: (error: string, rep: DescribeMachineGroupsResponse) => void
-  ): Promise<DescribeMachineGroupsResponse> {
-    return this.request("DescribeMachineGroups", req, cb)
+  async DeleteMachineGroupInfo(
+    req: DeleteMachineGroupInfoRequest,
+    cb?: (error: string, rep: DeleteMachineGroupInfoResponse) => void
+  ): Promise<DeleteMachineGroupInfoResponse> {
+    return this.request("DeleteMachineGroupInfo", req, cb)
   }
 
   /**
@@ -489,6 +493,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAlarmsResponse) => void
   ): Promise<DescribeAlarmsResponse> {
     return this.request("DescribeAlarms", req, cb)
+  }
+
+  /**
+   * 用于添加机器组信息
+   */
+  async AddMachineGroupInfo(
+    req: AddMachineGroupInfoRequest,
+    cb?: (error: string, rep: AddMachineGroupInfoResponse) => void
+  ): Promise<AddMachineGroupInfoResponse> {
+    return this.request("AddMachineGroupInfo", req, cb)
   }
 
   /**
@@ -863,6 +877,16 @@ cls.pb.cc cls.pb.h cls.proto
     cb?: (error: string, rep: DescribeConfigsResponse) => void
   ): Promise<DescribeConfigsResponse> {
     return this.request("DescribeConfigs", req, cb)
+  }
+
+  /**
+   * 获取机器组信息列表
+   */
+  async DescribeMachineGroups(
+    req: DescribeMachineGroupsRequest,
+    cb?: (error: string, rep: DescribeMachineGroupsResponse) => void
+  ): Promise<DescribeMachineGroupsResponse> {
+    return this.request("DescribeMachineGroups", req, cb)
   }
 
   /**
