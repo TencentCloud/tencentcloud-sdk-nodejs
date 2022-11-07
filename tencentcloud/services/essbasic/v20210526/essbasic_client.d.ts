@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ChannelCreateConvertTaskApiResponse, OperateChannelTemplateRequest, ChannelDescribeEmployeesRequest, SyncProxyOrganizationResponse, ChannelCreateFlowGroupByFilesResponse, GetDownloadFlowUrlResponse, DescribeTemplatesResponse, DescribeResourceUrlsByFlowsResponse, ChannelCreateMultiFlowSignQRCodeResponse, OperateChannelTemplateResponse, CreateSignUrlsResponse, CreateSignUrlsRequest, ChannelCreateMultiFlowSignQRCodeRequest, DescribeFlowDetailInfoRequest, ChannelGetTaskResultApiResponse, ChannelGetTaskResultApiRequest, ChannelVerifyPdfResponse, GetDownloadFlowUrlRequest, ChannelBatchCancelFlowsRequest, CreateConsoleLoginUrlRequest, CreateFlowsByTemplatesResponse, ChannelCreateFlowSignReviewRequest, DescribeUsageResponse, SyncProxyOrganizationOperatorsResponse, CreateSealByImageResponse, ChannelVerifyPdfRequest, DescribeResourceUrlsByFlowsRequest, ChannelCancelFlowRequest, DescribeTemplatesRequest, SyncProxyOrganizationOperatorsRequest, CreateConsoleLoginUrlResponse, CreateFlowsByTemplatesRequest, SyncProxyOrganizationRequest, CreateSealByImageRequest, ChannelBatchCancelFlowsResponse, PrepareFlowsRequest, ChannelCreateBatchCancelFlowUrlResponse, ChannelCancelFlowResponse, ChannelCancelMultiFlowSignQRCodeRequest, PrepareFlowsResponse, ChannelDescribeEmployeesResponse, DescribeUsageRequest, ChannelCreateBatchCancelFlowUrlRequest, ChannelCreateFlowByFilesRequest, ChannelCreateFlowByFilesResponse, UploadFilesResponse, ChannelCreateFlowSignReviewResponse, ChannelCreateConvertTaskApiRequest, ChannelCreateFlowGroupByFilesRequest, UploadFilesRequest, ChannelCancelMultiFlowSignQRCodeResponse, DescribeFlowDetailInfoResponse } from "./essbasic_models";
+import { SyncProxyOrganizationResponse, ChannelCreateConvertTaskApiResponse, ChannelBatchCancelFlowsResponse, ChannelCreateFlowSignReviewRequest, DescribeFlowDetailInfoRequest, UploadFilesRequest, DescribeResourceUrlsByFlowsRequest, CreateSealByImageResponse, OperateChannelTemplateResponse, CreateConsoleLoginUrlResponse, SyncProxyOrganizationRequest, CreateSealByImageRequest, PrepareFlowsRequest, ChannelCancelFlowResponse, ChannelCreateConvertTaskApiRequest, ChannelCreateFlowByFilesRequest, ChannelCreateFlowGroupByFilesRequest, PrepareFlowsResponse, GetDownloadFlowUrlResponse, DescribeTemplatesResponse, ChannelVerifyPdfRequest, ChannelVerifyPdfResponse, CreateConsoleLoginUrlRequest, ChannelCancelMultiFlowSignQRCodeRequest, ChannelDescribeOrganizationSealsRequest, DescribeUsageRequest, DescribeFlowDetailInfoResponse, DescribeUsageResponse, ChannelDescribeEmployeesRequest, DescribeResourceUrlsByFlowsResponse, SyncProxyOrganizationOperatorsRequest, CreateSignUrlsRequest, ChannelCreateMultiFlowSignQRCodeRequest, ChannelGetTaskResultApiRequest, CreateFlowsByTemplatesResponse, SyncProxyOrganizationOperatorsResponse, CreateSignUrlsResponse, UploadFilesResponse, ChannelCreateBatchCancelFlowUrlRequest, ChannelCreateFlowByFilesResponse, ChannelCreateFlowSignReviewResponse, ChannelDescribeOrganizationSealsResponse, ChannelCancelMultiFlowSignQRCodeResponse, ChannelCreateFlowGroupByFilesResponse, ChannelCreateMultiFlowSignQRCodeResponse, ChannelGetTaskResultApiResponse, GetDownloadFlowUrlRequest, ChannelBatchCancelFlowsRequest, ChannelCancelFlowRequest, DescribeTemplatesRequest, CreateFlowsByTemplatesRequest, ChannelCreateBatchCancelFlowUrlResponse, OperateChannelTemplateRequest, ChannelDescribeEmployeesResponse } from "./essbasic_models";
 /**
  * essbasic client
  * @class
@@ -107,10 +107,10 @@ export declare class Client extends AbstractClient {
      */
     GetDownloadFlowUrl(req: GetDownloadFlowUrlRequest, cb?: (error: string, rep: GetDownloadFlowUrlResponse) => void): Promise<GetDownloadFlowUrlResponse>;
     /**
-     * 此接口（SyncProxyOrganizationOperators）用于同步渠道子客企业经办人列表，主要是同步经办人的离职状态。子客Web控制台的组织架构管理，是依赖于渠道平台的，无法针对员工做新增/更新/离职等操作。
-若经办人信息有误，或者需要修改，也可以先将之前的经办人做离职操作，然后重新使用控制台链接CreateConsoleLoginUrl让经办人重新实名。
+     * 查询渠道子客企业电子印章，需要操作者具有管理印章权限
+客户指定需要获取的印章数量和偏移量，数量最多100，超过100按100处理；入参InfoType控制印章是否携带授权人信息，为1则携带，为0则返回的授权人信息为空数组。接口调用成功返回印章的信息列表还有企业印章的总数。
      */
-    SyncProxyOrganizationOperators(req: SyncProxyOrganizationOperatorsRequest, cb?: (error: string, rep: SyncProxyOrganizationOperatorsResponse) => void): Promise<SyncProxyOrganizationOperatorsResponse>;
+    ChannelDescribeOrganizationSeals(req: ChannelDescribeOrganizationSealsRequest, cb?: (error: string, rep: ChannelDescribeOrganizationSealsResponse) => void): Promise<ChannelDescribeOrganizationSealsResponse>;
     /**
      * 查询企业员工列表
      */
@@ -145,6 +145,11 @@ HttpProfile httpProfile = new HttpProfile();
 httpProfile.setEndpoint("file.test.ess.tencent.cn");
      */
     UploadFiles(req: UploadFilesRequest, cb?: (error: string, rep: UploadFilesResponse) => void): Promise<UploadFilesResponse>;
+    /**
+     * 此接口（SyncProxyOrganizationOperators）用于同步渠道子客企业经办人列表，主要是同步经办人的离职状态。子客Web控制台的组织架构管理，是依赖于渠道平台的，无法针对员工做新增/更新/离职等操作。
+若经办人信息有误，或者需要修改，也可以先将之前的经办人做离职操作，然后重新使用控制台链接CreateConsoleLoginUrl让经办人重新实名。
+     */
+    SyncProxyOrganizationOperators(req: SyncProxyOrganizationOperatorsRequest, cb?: (error: string, rep: SyncProxyOrganizationOperatorsResponse) => void): Promise<SyncProxyOrganizationOperatorsResponse>;
     /**
      * 此接口（OperateChannelTemplate）用于针对渠道模板库中的模板对子客企业可见性的查询和设置，不会直接分配渠道模板给子客企业。
 1、OperateType=select时：

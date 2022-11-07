@@ -2356,11 +2356,11 @@ export interface ReviewAudioVideoRequest {
  */
 export interface StorageRegionInfo {
     /**
-      * 存储地域
+      * 存储地域。
       */
     Region: string;
     /**
-      * 存储地域描述信息
+      * 存储地域描述信息。
       */
     Description: string;
     /**
@@ -2370,9 +2370,15 @@ export interface StorageRegionInfo {
       */
     Status: string;
     /**
-      * 是否默认的存储地域，true：是；false：否
+      * 是否默认的存储地域，true：是；false：否。
       */
     IsDefault: boolean;
+    /**
+      * 存储区域，取值有：
+<li>Chinese Mainland：中国境内（不包含港澳台）。</li>
+<li>Outside Chinese Mainland：中国境外。</li>
+      */
+    Area: string;
 }
 /**
  * 转场信息

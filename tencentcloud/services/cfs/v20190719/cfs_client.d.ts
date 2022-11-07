@@ -28,7 +28,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeCfsPGroups(req?: DescribeCfsPGroupsRequest, cb?: (error: string, rep: DescribeCfsPGroupsResponse) => void): Promise<DescribeCfsPGroupsResponse>;
     /**
-     * 查询文件系统快照d定期策略列表信息
+     * 查询文件系统快照定期策略列表信息
      */
     DescribeAutoSnapshotPolicies(req: DescribeAutoSnapshotPoliciesRequest, cb?: (error: string, rep: DescribeAutoSnapshotPoliciesResponse) => void): Promise<DescribeAutoSnapshotPoliciesResponse>;
     /**

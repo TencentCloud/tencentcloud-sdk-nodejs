@@ -58,7 +58,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCfsPGroups", req, cb);
     }
     /**
-     * 查询文件系统快照d定期策略列表信息
+     * 查询文件系统快照定期策略列表信息
      */
     async DescribeAutoSnapshotPolicies(req, cb) {
         return this.request("DescribeAutoSnapshotPolicies", req, cb);

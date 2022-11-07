@@ -1,4 +1,577 @@
 /**
+ * SyncProxyOrganization返回参数结构体
+ */
+export interface SyncProxyOrganizationResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ChannelCreateConvertTaskApi返回参数结构体
+ */
+export interface ChannelCreateConvertTaskApiResponse {
+    /**
+      * 任务id
+      */
+    TaskId: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ChannelBatchCancelFlows返回参数结构体
+ */
+export interface ChannelBatchCancelFlowsResponse {
+    /**
+      * 签署流程批量撤销失败原因，错误信息与流程Id一一对应，如果部分流程不可撤销，不会返回错误信息，只会撤销可撤销流程
+      */
+    FailMessages: Array<string>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * 渠道版员工部门信息
+ */
+export interface Department {
+    /**
+      * 部门id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DepartmentId: string;
+    /**
+      * 部门名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DepartmentName: string;
+}
+/**
+ * ChannelCreateFlowSignReview请求参数结构体
+ */
+export interface ChannelCreateFlowSignReviewRequest {
+    /**
+      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
+      */
+    Agent: Agent;
+    /**
+      * 签署流程编号
+      */
+    FlowId: string;
+    /**
+      * 企业内部审核结果
+PASS: 通过
+REJECT: 拒绝
+SIGN_REJECT:拒签(流程结束)
+      */
+    ReviewType: string;
+    /**
+      * 审核原因
+当ReviewType 是REJECT 时此字段必填,字符串长度不超过200
+      */
+    ReviewMessage?: string;
+}
+/**
+ * 授权出错信息
+ */
+export interface AuthFailMessage {
+    /**
+      * 合作企业Id
+      */
+    ProxyOrganizationOpenId: string;
+    /**
+      * 出错信息
+      */
+    Message: string;
+}
+/**
+ * DescribeFlowDetailInfo请求参数结构体
+ */
+export interface DescribeFlowDetailInfoRequest {
+    /**
+      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
+      */
+    Agent: Agent;
+    /**
+      * 合同(流程)编号数组，最多支持100个。
+（备注：该参数和合同组编号必须二选一）
+      */
+    FlowIds?: Array<string>;
+    /**
+      * 操作者的信息
+      */
+    Operator?: UserInfo;
+    /**
+      * 合同组编号（备注：该参数和合同(流程)编号数组必须二选一）
+      */
+    FlowGroupId?: string;
+}
+/**
+ * UploadFiles请求参数结构体
+ */
+export interface UploadFilesRequest {
+    /**
+      * 应用相关信息，若是渠道版调用 appid 和proxyappid 必填
+      */
+    Agent: Agent;
+    /**
+      * 文件对应业务类型
+1. TEMPLATE - 模板； 文件类型：.pdf/.doc/.docx/.html
+2. DOCUMENT - 签署过程及签署后的合同文档/图片控件 文件类型：.pdf/.doc/.docx/.jpg/.png/.xls.xlsx/.html
+      */
+    BusinessType: string;
+    /**
+      * 上传文件内容数组，最多支持20个文件
+      */
+    FileInfos?: Array<UploadFile>;
+    /**
+      * 操作者的信息
+      */
+    Operator?: UserInfo;
+}
+/**
+ * DescribeResourceUrlsByFlows请求参数结构体
+ */
+export interface DescribeResourceUrlsByFlowsRequest {
+    /**
+      * 渠道应用相关信息。
+此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
+      */
+    Agent: Agent;
+    /**
+      * 查询资源所对应的签署流程Id，最多支持50个
+      */
+    FlowIds?: Array<string>;
+    /**
+      * 操作者的信息
+      */
+    Operator?: UserInfo;
+}
+/**
+ * CreateSealByImage返回参数结构体
+ */
+export interface CreateSealByImageResponse {
+    /**
+      * 印章id
+      */
+    SealId: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * OperateChannelTemplate返回参数结构体
+ */
+export interface OperateChannelTemplateResponse {
+    /**
+      * 腾讯电子签颁发给渠道的应用ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AppId: string;
+    /**
+      * 渠道方模板库模板唯一标识
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TemplateId: string;
+    /**
+      * 全部成功-"all-success",部分成功-"part-success", 全部失败-"fail"失败的会在FailMessageList中展示
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OperateResult: string;
+    /**
+      * 模板可见性, 全部可见-"all", 部分可见-"part"
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AuthTag: string;
+    /**
+      * 合作企业方第三方机构唯一标识数据
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProxyOrganizationOpenIds: Array<string>;
+    /**
+      * 操作失败信息数组
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FailMessageList: Array<AuthFailMessage>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * 合同组中每个子合同的发起信息
+ */
+export interface FlowFileInfo {
+    /**
+      * 签署文件资源Id列表，目前仅支持单个文件
+      */
+    FileIds: Array<string>;
+    /**
+      * 签署流程名称，长度不超过200个字符
+      */
+    FlowName: string;
+    /**
+      * 签署流程签约方列表，最多不超过5个参与方
+      */
+    FlowApprovers: Array<FlowApproverInfo>;
+    /**
+      * 签署流程截止时间，十位数时间戳，最大值为33162419560，即3020年
+      */
+    Deadline?: number;
+    /**
+      * 签署流程的描述，长度不超过1000个字符
+      */
+    FlowDescription?: string;
+    /**
+      * 签署流程的类型，长度不超过255个字符
+      */
+    FlowType?: string;
+    /**
+      * 签署流程回调地址，长度不超过255个字符
+      */
+    CallbackUrl?: string;
+    /**
+      * 渠道的业务信息，最大长度1000个字符。发起自动签署时，需设置对应自动签署场景，目前仅支持场景：处方单-E_PRESCRIPTION_AUTO_SIGN
+      */
+    CustomerData?: string;
+    /**
+      * 合同签署顺序类型(无序签,顺序签)，默认为false，即有序签署
+      */
+    Unordered?: boolean;
+    /**
+      * 合同显示的页卡模板，说明：只支持{合同名称}, {发起方企业}, {发起方姓名}, {签署方N企业}, {签署方N姓名}，且N不能超过签署人的数量，N从1开始
+      */
+    CustomShowMap?: string;
+    /**
+      * 本企业(发起方企业)是否需要签署审批
+      */
+    NeedSignReview?: boolean;
+}
+/**
+ * CreateConsoleLoginUrl返回参数结构体
+ */
+export interface CreateConsoleLoginUrlResponse {
+    /**
+      * 子客Web控制台url，此链接5分钟内有效，且只能访问一次。同时需要注意：
+1. 此链接仅单次有效，使用后需要再次创建新的链接（部分聊天软件，如企业微信默认会对链接进行解析，此时需要使用类似“代码片段”的方式或者放到txt文件里发送链接）；
+2. 创建的链接应避免被转义，如：&被转义为\u0026；如使用Postman请求后，请选择响应类型为 JSON，否则链接将被转义
+      */
+    ConsoleUrl: string;
+    /**
+      * 渠道子客企业是否已开通腾讯电子签
+      */
+    IsActivated: boolean;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * SyncProxyOrganization请求参数结构体
+ */
+export interface SyncProxyOrganizationRequest {
+    /**
+      * 应用信息
+此接口Agent.AppId、Agent.ProxyOrganizationOpenId必填
+      */
+    Agent: Agent;
+    /**
+      * 渠道侧合作企业名称，最大长度64个字符
+      */
+    ProxyOrganizationName: string;
+    /**
+      * 营业执照正面照(PNG或JPG) base64格式, 大小不超过5M
+      */
+    BusinessLicense?: string;
+    /**
+      * 渠道侧合作企业统一社会信用代码，最大长度200个字符
+      */
+    UniformSocialCreditCode?: string;
+    /**
+      * 操作者的信息
+      */
+    Operator?: UserInfo;
+}
+/**
+ * CreateSealByImage请求参数结构体
+ */
+export interface CreateSealByImageRequest {
+    /**
+      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
+      */
+    Agent: Agent;
+    /**
+      * 印章名称，最大长度不超过30字符
+      */
+    SealName: string;
+    /**
+      * 印章图片base64
+      */
+    SealImage: string;
+    /**
+      * 操作者的信息
+      */
+    Operator?: UserInfo;
+}
+/**
+ * PrepareFlows请求参数结构体
+ */
+export interface PrepareFlowsRequest {
+    /**
+      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
+      */
+    Agent: Agent;
+    /**
+      * 多个合同（签署流程）信息，最大支持20个签署流程。
+      */
+    FlowInfos: Array<FlowInfo>;
+    /**
+      * 操作完成后的跳转地址，最大长度200
+      */
+    JumpUrl: string;
+    /**
+      * 操作者的信息
+      */
+    Operator?: UserInfo;
+}
+/**
+ * ChannelCancelFlow返回参数结构体
+ */
+export interface ChannelCancelFlowResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * 签署流程下载信息
+ */
+export interface DownloadFlowInfo {
+    /**
+      * 文件夹名称
+      */
+    FileName: string;
+    /**
+      * 签署流程的标识数组
+      */
+    FlowIdList: Array<string>;
+}
+/**
+ * ChannelCreateConvertTaskApi请求参数结构体
+ */
+export interface ChannelCreateConvertTaskApiRequest {
+    /**
+      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
+      */
+    Agent: Agent;
+    /**
+      * 资源类型 取值范围doc,docx,html,excel之一
+      */
+    ResourceType: string;
+    /**
+      * 资源名称，长度限制为256字符
+      */
+    ResourceName: string;
+    /**
+      * 资源Id，通过UploadFiles获取
+      */
+    ResourceId: string;
+    /**
+      * 操作者信息
+      */
+    Operator?: UserInfo;
+    /**
+      * 暂未开放
+      */
+    Organization?: OrganizationInfo;
+}
+/**
+ * ChannelCreateFlowByFiles请求参数结构体
+ */
+export interface ChannelCreateFlowByFilesRequest {
+    /**
+      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
+      */
+    Agent?: Agent;
+    /**
+      * 签署流程名称，长度不超过200个字符
+      */
+    FlowName?: string;
+    /**
+      * 签署流程签约方列表，最多不超过5个参与方
+      */
+    FlowApprovers?: Array<FlowApproverInfo>;
+    /**
+      * 签署文件资源Id列表，目前仅支持单个文件
+      */
+    FileIds?: Array<string>;
+    /**
+      * 签署文件中的发起方的填写控件，需要在发起的时候进行填充
+      */
+    Components?: Array<Component>;
+    /**
+      * 签署流程截止时间，十位数时间戳，最大值为33162419560，即3020年
+      */
+    Deadline?: number;
+    /**
+      * 签署流程回调地址，长度不超过255个字符
+      */
+    CallbackUrl?: string;
+    /**
+      * 合同签署顺序类型(无序签,顺序签)，默认为false，即有序签署。有序签署时以传入FlowApprovers数组的顺序作为签署顺序
+      */
+    Unordered?: boolean;
+    /**
+      * 签署流程的类型，长度不超过255个字符
+      */
+    FlowType?: string;
+    /**
+      * 签署流程的描述，长度不超过1000个字符
+      */
+    FlowDescription?: string;
+    /**
+      * 合同显示的页卡模板，说明：只支持{合同名称}, {发起方企业}, {发起方姓名}, {签署方N企业}, {签署方N姓名}，且N不能超过签署人的数量，N从1开始
+      */
+    CustomShowMap?: string;
+    /**
+      * 渠道的业务信息，最大长度1000个字符。发起自动签署时，需设置对应自动签署场景，目前仅支持场景：处方单-E_PRESCRIPTION_AUTO_SIGN
+      */
+    CustomerData?: string;
+    /**
+      * 发起方企业的签署人进行签署操作是否需要企业内部审批。 若设置为true,审核结果需通过接口 ChannelCreateFlowSignReview 通知电子签，审核通过后，发起方企业签署人方可进行签署操作，否则会阻塞其签署操作。  注：企业可以通过此功能与企业内部的审批流程进行关联，支持手动、静默签署合同。
+      */
+    NeedSignReview?: boolean;
+    /**
+      * 操作者的信息
+      */
+    Operator?: UserInfo;
+    /**
+      * 签署人校验方式
+VerifyCheck: 人脸识别（默认）
+MobileCheck：手机号验证
+参数说明：可选人脸识别或手机号验证两种方式，若选择后者，未实名个人签署方在签署合同时，无需经过实名认证和意愿确认两次人脸识别，该能力仅适用于个人签署方。
+      */
+    ApproverVerifyType?: string;
+}
+/**
+ * 应用相关信息
+ */
+export interface Agent {
+    /**
+      * 腾讯电子签颁发给渠道的应用ID，32位字符串
+      */
+    AppId: string;
+    /**
+      * 渠道/平台合作企业的企业ID，最大64位字符串
+      */
+    ProxyOrganizationOpenId?: string;
+    /**
+      * 渠道/平台合作企业经办人（操作员）
+      */
+    ProxyOperator?: UserInfo;
+    /**
+      * 腾讯电子签颁发给渠道侧合作企业的应用ID
+      */
+    ProxyAppId?: string;
+    /**
+      * 内部参数，腾讯电子签颁发给渠道侧合作企业的企业ID，不需要传
+      */
+    ProxyOrganizationId?: string;
+}
+/**
+ * 签署人的流程信息明细
+ */
+export interface FlowApproverDetail {
+    /**
+      * 模板配置时候的签署人id,与控件绑定
+      */
+    ReceiptId: string;
+    /**
+      * 渠道侧企业的第三方id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProxyOrganizationOpenId: string;
+    /**
+      * 渠道侧企业操作人的第三方id
+      */
+    ProxyOperatorOpenId: string;
+    /**
+      * 渠道侧企业名称
+      */
+    ProxyOrganizationName: string;
+    /**
+      * 签署人手机号
+      */
+    Mobile: string;
+    /**
+      * 签署人签署顺序
+      */
+    SignOrder: number;
+    /**
+      * 签署人姓名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ApproveName: string;
+    /**
+      * 当前签署人的状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ApproveStatus: string;
+    /**
+      * 签署人信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ApproveMessage: string;
+    /**
+      * 签署人签署时间
+      */
+    ApproveTime: number;
+    /**
+      * 参与者类型 (ORGANIZATION企业/PERSON个人)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ApproveType: string;
+}
+/**
+ * ChannelCreateFlowGroupByFiles请求参数结构体
+ */
+export interface ChannelCreateFlowGroupByFilesRequest {
+    /**
+      * 每个子合同的发起所需的信息，数量限制2-100
+      */
+    FlowFileInfos: Array<FlowFileInfo>;
+    /**
+      * 合同组名称，长度不超过200个字符
+      */
+    FlowGroupName: string;
+    /**
+      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
+      */
+    Agent?: Agent;
+    /**
+      * 操作者的信息
+      */
+    Operator?: UserInfo;
+}
+/**
+ * 复杂文档合成任务的任务信息
+ */
+export interface TaskInfo {
+    /**
+      * 合成任务Id，可以通过 ChannelGetTaskResultApi 接口获取任务信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TaskId: string;
+    /**
+      * 任务状态：READY - 任务已完成；NOTREADY - 任务未完成；
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TaskStatus: string;
+}
+/**
  * 资源链接信息
  */
 export interface ResourceUrlInfo {
@@ -17,67 +590,6 @@ export interface ResourceUrlInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Type: string;
-}
-/**
- * 合同文件验签单个结果结构体
- */
-export interface PdfVerifyResult {
-    /**
-      * 验签结果
-      */
-    VerifyResult: number;
-    /**
-      * 签署平台
-      */
-    SignPlatform: string;
-    /**
-      * 签署人名称
-      */
-    SignerName: string;
-    /**
-      * 签署时间
-      */
-    SignTime: number;
-    /**
-      * 签名算法
-      */
-    SignAlgorithm: string;
-    /**
-      * 签名证书序列号
-      */
-    CertSn: string;
-    /**
-      * 证书起始时间
-      */
-    CertNotBefore: number;
-    /**
-      * 证书过期时间
-      */
-    CertNotAfter: number;
-    /**
-      * 签名类型
-      */
-    SignType: number;
-    /**
-      * 签名域横坐标
-      */
-    ComponentPosX: number;
-    /**
-      * 签名域纵坐标
-      */
-    ComponentPosY: number;
-    /**
-      * 签名域宽度
-      */
-    ComponentWidth: number;
-    /**
-      * 签名域高度
-      */
-    ComponentHeight: number;
-    /**
-      * 签名域所在页码
-      */
-    ComponentPage: number;
 }
 /**
  * 创建签署流程签署人入参。
@@ -175,46 +687,17 @@ ENTERPRISESERVER-企业静默签;
     ApproverNeedSignReview?: boolean;
 }
 /**
- * ChannelCreateConvertTaskApi返回参数结构体
+ * PrepareFlows返回参数结构体
  */
-export interface ChannelCreateConvertTaskApiResponse {
+export interface PrepareFlowsResponse {
     /**
-      * 任务id
+      * 待发起文件确认页
       */
-    TaskId: string;
+    ConfirmUrl: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
-}
-/**
- * OperateChannelTemplate请求参数结构体
- */
-export interface OperateChannelTemplateRequest {
-    /**
-      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
-      */
-    Agent: Agent;
-    /**
-      * 操作类型，查询:"SELECT"，删除:"DELETE"，更新:"UPDATE"
-      */
-    OperateType: string;
-    /**
-      * 渠道方模板库模板唯一标识
-      */
-    TemplateId: string;
-    /**
-      * 合作企业方第三方机构唯一标识数据，支持多个， 用","进行分隔
-      */
-    ProxyOrganizationOpenIds?: string;
-    /**
-      * 模板可见性, 全部可见-"all", 部分可见-"part"
-      */
-    AuthTag?: string;
-    /**
-      * 操作者的信息
-      */
-    Operator?: UserInfo;
 }
 /**
  * 此结构体 (TemplateInfo) 用于描述模板的信息。
@@ -262,60 +745,6 @@ export interface TemplateInfo {
     CreatedOn: number;
 }
 /**
- * ChannelDescribeEmployees请求参数结构体
- */
-export interface ChannelDescribeEmployeesRequest {
-    /**
-      * 返回最大数量，最大为20
-      */
-    Limit: number;
-    /**
-      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
-      */
-    Agent?: Agent;
-    /**
-      * 查询过滤实名用户，Key为Status，Values为["IsVerified"]
-根据第三方系统openId过滤查询员工时,Key为StaffOpenId,Values为["OpenId","OpenId",...]
-      */
-    Filters?: Array<Filter>;
-    /**
-      * 偏移量，默认为0，最大为20000
-      */
-    Offset?: number;
-    /**
-      * 操作者的信息
-      */
-    Operator?: UserInfo;
-}
-/**
- * SyncProxyOrganization返回参数结构体
- */
-export interface SyncProxyOrganizationResponse {
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * ChannelCreateFlowGroupByFiles返回参数结构体
- */
-export interface ChannelCreateFlowGroupByFilesResponse {
-    /**
-      * 合同组ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    FlowGroupId: string;
-    /**
-      * 子合同ID列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    FlowIds: Array<string>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
  * GetDownloadFlowUrl返回参数结构体
  */
 export interface GetDownloadFlowUrlResponse {
@@ -354,6 +783,560 @@ export interface DescribeTemplatesResponse {
     RequestId?: string;
 }
 /**
+ * 渠道版员工角色信息
+ */
+export interface StaffRole {
+    /**
+      * 角色id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RoleId: string;
+    /**
+      * 角色名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RoleName: string;
+}
+/**
+ * ChannelVerifyPdf请求参数结构体
+ */
+export interface ChannelVerifyPdfRequest {
+    /**
+      * 合同Id，流程Id
+      */
+    FlowId: string;
+    /**
+      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
+      */
+    Agent?: Agent;
+    /**
+      * 操作者的信息
+      */
+    Operator?: UserInfo;
+}
+/**
+ * ChannelVerifyPdf返回参数结构体
+ */
+export interface ChannelVerifyPdfResponse {
+    /**
+      * 验签结果，1-文件未被篡改，全部签名在腾讯电子签完成； 2-文件未被篡改，部分签名在腾讯电子签完成；3-文件被篡改；4-异常：文件内没有签名域；5-异常：文件签名格式错误
+      */
+    VerifyResult: number;
+    /**
+      * 验签结果详情,内部状态1-验签成功，在电子签签署；2-验签成功，在其他平台签署；3-验签失败；4-pdf文件没有签名域
+；5-文件签名格式错误
+      */
+    PdfVerifyResults: Array<PdfVerifyResult>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * CreateConsoleLoginUrl请求参数结构体
+ */
+export interface CreateConsoleLoginUrlRequest {
+    /**
+      * 应用信息
+此接口Agent.AppId、Agent.ProxyOrganizationOpenId 和 Agent. ProxyOperator.OpenId 必填
+      */
+    Agent: Agent;
+    /**
+      * 渠道子客企业名称，最大长度64个字符
+      */
+    ProxyOrganizationName: string;
+    /**
+      * 渠道子客企业经办人的姓名，最大长度50个字符
+      */
+    ProxyOperatorName?: string;
+    /**
+      * 控制台指定模块，文件/合同管理:"DOCUMENT"，模板管理:"TEMPLATE"，印章管理:"SEAL"，组织架构/人员:"OPERATOR"，空字符串："账号信息"
+      */
+    Module?: string;
+    /**
+      * 控制台指定模块Id
+      */
+    ModuleId?: string;
+    /**
+      * 渠道子客企业统一社会信用代码，最大长度200个字符
+      */
+    UniformSocialCreditCode?: string;
+    /**
+      * 是否展示左侧菜单栏 是：ENABLE（默认） 否：DISABLE
+      */
+    MenuStatus?: string;
+    /**
+      * 操作者的信息
+      */
+    Operator?: UserInfo;
+}
+/**
+ * 机构信息
+ */
+export interface OrganizationInfo {
+    /**
+      * 用户在渠道的机构编号
+      */
+    OrganizationOpenId: string;
+    /**
+      * 用户真实的IP
+      */
+    ClientIp: string;
+    /**
+      * 机构的代理IP
+      */
+    ProxyIp: string;
+    /**
+      * 机构在平台的编号
+      */
+    OrganizationId?: string;
+    /**
+      * 用户渠道
+      */
+    Channel?: string;
+}
+/**
+ * 合同文件验签单个结果结构体
+ */
+export interface PdfVerifyResult {
+    /**
+      * 验签结果
+      */
+    VerifyResult: number;
+    /**
+      * 签署平台
+      */
+    SignPlatform: string;
+    /**
+      * 签署人名称
+      */
+    SignerName: string;
+    /**
+      * 签署时间
+      */
+    SignTime: number;
+    /**
+      * 签名算法
+      */
+    SignAlgorithm: string;
+    /**
+      * 签名证书序列号
+      */
+    CertSn: string;
+    /**
+      * 证书起始时间
+      */
+    CertNotBefore: number;
+    /**
+      * 证书过期时间
+      */
+    CertNotAfter: number;
+    /**
+      * 签名类型
+      */
+    SignType: number;
+    /**
+      * 签名域横坐标
+      */
+    ComponentPosX: number;
+    /**
+      * 签名域纵坐标
+      */
+    ComponentPosY: number;
+    /**
+      * 签名域宽度
+      */
+    ComponentWidth: number;
+    /**
+      * 签名域高度
+      */
+    ComponentHeight: number;
+    /**
+      * 签名域所在页码
+      */
+    ComponentPage: number;
+}
+/**
+ * ChannelCancelMultiFlowSignQRCode请求参数结构体
+ */
+export interface ChannelCancelMultiFlowSignQRCodeRequest {
+    /**
+      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
+      */
+    Agent: Agent;
+    /**
+      * 二维码id
+      */
+    QrCodeId: string;
+    /**
+      * 用户信息
+      */
+    Operator?: UserInfo;
+}
+/**
+ * ChannelDescribeOrganizationSeals请求参数结构体
+ */
+export interface ChannelDescribeOrganizationSealsRequest {
+    /**
+      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
+      */
+    Agent: Agent;
+    /**
+      * 返回最大数量，最大为100
+      */
+    Limit: number;
+    /**
+      * 偏移量，默认为0，最大为20000
+      */
+    Offset?: number;
+    /**
+      * 查询信息类型，为0时不返回授权用户，为1时返回
+      */
+    InfoType?: number;
+    /**
+      * 印章id（没有输入返回所有）
+      */
+    SealId?: string;
+}
+/**
+ * DescribeUsage请求参数结构体
+ */
+export interface DescribeUsageRequest {
+    /**
+      * 应用信息
+      */
+    Agent: Agent;
+    /**
+      * 开始时间，例如：2021-03-21
+      */
+    StartDate: string;
+    /**
+      * 结束时间，例如：2021-06-21；
+开始时间到结束时间的区间长度小于等于90天。
+      */
+    EndDate: string;
+    /**
+      * 是否汇总数据，默认不汇总。
+不汇总：返回在统计区间内渠道下所有企业的每日明细，即每个企业N条数据，N为统计天数；
+汇总：返回在统计区间内渠道下所有企业的汇总后数据，即每个企业一条数据；
+      */
+    NeedAggregate?: boolean;
+    /**
+      * 单次返回的最多条目数量。默认为1000，且不能超过1000。
+      */
+    Limit?: number;
+    /**
+      * 偏移量，默认是0。
+      */
+    Offset?: number;
+    /**
+      * 操作者的信息
+      */
+    Operator?: UserInfo;
+}
+/**
+ * 此结构 (FormField) 用于描述内容控件填充结构。
+
+ */
+export interface FormField {
+    /**
+      * 控件填充vaule，ComponentType和传入值类型对应关系：
+TEXT - 文本内容
+MULTI_LINE_TEXT - 文本内容
+CHECK_BOX - true/false
+FILL_IMAGE、ATTACHMENT - 附件的FileId，需要通过UploadFiles接口上传获取
+SELECTOR - 选项值
+DYNAMIC_TABLE - 传入json格式的表格内容，具体见数据结构FlowInfo：https://cloud.tencent.com/document/api/1420/61525#FlowInfo
+      */
+    ComponentValue: string;
+    /**
+      * 表单域或控件的ID，跟ComponentName二选一，不能全为空；
+CreateFlowsByTemplates 接口不使用此字段。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ComponentId?: string;
+    /**
+      * 控件的名字，跟ComponentId二选一，不能全为空
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ComponentName?: string;
+}
+/**
+ * 此结构体 (FlowInfo) 用于描述签署流程信息。
+
+【动态表格传参说明】
+当模板的 ComponentType='DYNAMIC_TABLE'时（渠道版），FormField.ComponentValue需要传递json格式的字符串参数，用于确定表头&填充动态表格（支持内容的单元格合并）
+输入示例
+
+```
+{
+    "headers":[
+        {
+            "content":"head1"
+        },
+        {
+            "content":"head2"
+        },
+        {
+            "content":"head3"
+        }
+    ],
+    "rowCount":3,
+    "body":{
+        "cells":[
+            {
+                "rowStart":1,
+                "rowEnd":1,
+                "columnStart":1,
+                "columnEnd":1,
+                "content":"123"
+            },
+            {
+                "rowStart":2,
+                "rowEnd":3,
+                "columnStart":1,
+                "columnEnd":2,
+                "content":"456"
+            },
+            {
+                "rowStart":3,
+                "rowEnd":3,
+                "columnStart":3,
+                "columnEnd":3,
+                "content":"789"
+            }
+        ]
+    }
+}
+
+```
+
+表格参数说明
+
+| 名称                | 类型    | 描述                                              |
+| ------------------- | ------- | ------------------------------------------------- |
+| headers             | Array   | 表头：不超过10列，不支持单元格合并，字数不超过100 |
+| rowCount            | Integer | 表格内容最大行数                                  |
+| cells.N.rowStart    | Integer | 单元格坐标：行起始index                           |
+| cells.N.rowEnd      | Integer | 单元格坐标：行结束index                           |
+| cells.N.columnStart | Integer | 单元格坐标：列起始index                           |
+| cells.N.columnEnd   | Integer | 单元格坐标：列结束index                           |
+| cells.N.content     | String  | 单元格内容，字数不超过100                         |
+
+ */
+export interface FlowInfo {
+    /**
+      * 合同名字，最大长度200个字符
+      */
+    FlowName: string;
+    /**
+      * 签署截止时间戳，超过有效签署时间则该签署流程失败，默认一年
+      */
+    Deadline: number;
+    /**
+      * 模板ID
+      */
+    TemplateId?: string;
+    /**
+      * 多个签署人信息，最大支持50个签署方
+      */
+    FlowApprovers?: Array<FlowApproverInfo>;
+    /**
+      * 表单K-V对列表
+      */
+    FormFields?: Array<FormField>;
+    /**
+      * 回调地址，最大长度1000个字符
+      */
+    CallbackUrl?: string;
+    /**
+      * 合同类型，如：1. “劳务”；2. “销售”；3. “租赁”；4. “其他”，最大长度200个字符
+      */
+    FlowType?: string;
+    /**
+      * 合同描述，最大长度1000个字符
+      */
+    FlowDescription?: string;
+    /**
+      * 渠道的业务信息，最大长度1000个字符。发起自动签署时，需设置对应自动签署场景，目前仅支持场景：处方单-E_PRESCRIPTION_AUTO_SIGN
+      */
+    CustomerData?: string;
+    /**
+      * 合同显示的页卡模板，说明：只支持{合同名称}, {发起方企业}, {发起方姓名}, {签署方N企业}, {签署方N姓名}，且N不能超过签署人的数量，N从1开始
+      */
+    CustomShowMap?: string;
+    /**
+      * 被抄送人的信息列表，抄送功能暂不开放
+      */
+    CcInfos?: Array<CcInfo>;
+    /**
+      * 发起方企业的签署人进行签署操作是否需要企业内部审批。
+若设置为true,审核结果需通过接口 ChannelCreateFlowSignReview 通知电子签，审核通过后，发起方企业签署人方可进行签署操作，否则会阻塞其签署操作。
+
+注：企业可以通过此功能与企业内部的审批流程进行关联，支持手动、静默签署合同。
+      */
+    NeedSignReview?: boolean;
+}
+/**
+ * 接口调用者信息
+ */
+export interface UserInfo {
+    /**
+      * 用户在渠道的编号，最大64位字符串
+      */
+    OpenId?: string;
+    /**
+      * 用户的来源渠道
+      */
+    Channel?: string;
+    /**
+      * 自定义用户编号
+      */
+    CustomUserId?: string;
+    /**
+      * 用户真实IP
+      */
+    ClientIp?: string;
+    /**
+      * 用户代理IP
+      */
+    ProxyIp?: string;
+}
+/**
+ * DescribeFlowDetailInfo返回参数结构体
+ */
+export interface DescribeFlowDetailInfoResponse {
+    /**
+      * 渠道侧应用号Id
+      */
+    ApplicationId: string;
+    /**
+      * 渠道侧企业第三方Id
+      */
+    ProxyOrganizationOpenId: string;
+    /**
+      * 合同(签署流程)的具体详细描述信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FlowInfo: Array<FlowDetailInfo>;
+    /**
+      * 合同组编号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FlowGroupId: string;
+    /**
+      * 合同组名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FlowGroupName: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeUsage返回参数结构体
+ */
+export interface DescribeUsageResponse {
+    /**
+      * 用量明细条数
+      */
+    Total: number;
+    /**
+      * 用量明细
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Details: Array<UsageDetail>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * 企业员工信息
+ */
+export interface Staff {
+    /**
+      * 员工在电子签平台的id
+      */
+    UserId: string;
+    /**
+      * 显示的员工名
+      */
+    DisplayName: string;
+    /**
+      * 员工手机号
+      */
+    Mobile: string;
+    /**
+      * 员工邮箱
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Email: string;
+    /**
+      * 员工在第三方平台id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OpenId: string;
+    /**
+      * 员工角色
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Roles: Array<StaffRole>;
+    /**
+      * 员工部门
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Department: Department;
+    /**
+      * 员工是否实名
+      */
+    Verified: boolean;
+    /**
+      * 员工创建时间戳
+      */
+    CreatedOn: number;
+    /**
+      * 员工实名时间戳
+      */
+    VerifiedOn: number;
+}
+/**
+ * ChannelDescribeEmployees请求参数结构体
+ */
+export interface ChannelDescribeEmployeesRequest {
+    /**
+      * 返回最大数量，最大为20
+      */
+    Limit: number;
+    /**
+      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
+      */
+    Agent?: Agent;
+    /**
+      * 查询过滤实名用户，Key为Status，Values为["IsVerified"]
+根据第三方系统openId过滤查询员工时,Key为StaffOpenId,Values为["OpenId","OpenId",...]
+      */
+    Filters?: Array<Filter>;
+    /**
+      * 偏移量，默认为0，最大为20000
+      */
+    Offset?: number;
+    /**
+      * 操作者的信息
+      */
+    Operator?: UserInfo;
+}
+/**
+ * 授权用户
+ */
+export interface AuthorizedUser {
+    /**
+      * 用户openid
+      */
+    OpenId: string;
+}
+/**
  * DescribeResourceUrlsByFlows返回参数结构体
  */
 export interface DescribeResourceUrlsByFlowsResponse {
@@ -372,157 +1355,25 @@ export interface DescribeResourceUrlsByFlowsResponse {
     RequestId?: string;
 }
 /**
- * ChannelCreateMultiFlowSignQRCode返回参数结构体
+ * SyncProxyOrganizationOperators请求参数结构体
  */
-export interface ChannelCreateMultiFlowSignQRCodeResponse {
+export interface SyncProxyOrganizationOperatorsRequest {
     /**
-      * 签署二维码对象
+      * 渠道应用相关信息。 此接口Agent.AppId 和 Agent.ProxyOrganizationOpenId必填。
       */
-    QrCode: SignQrCode;
+    Agent: Agent;
     /**
-      * 签署链接对象
+      * 操作类型，新增:"CREATE"，修改:"UPDATE"，离职:"RESIGN"
       */
-    SignUrls: SignUrl;
+    OperatorType: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 经办人信息列表，最大长度200
       */
-    RequestId?: string;
-}
-/**
- * 签署人个性化能力信息
- */
-export interface ApproverOption {
+    ProxyOrganizationOperators: Array<ProxyOrganizationOperator>;
     /**
-      * 是否隐藏一键签署 false-不隐藏,默认 true-隐藏
+      * 操作者的信息
       */
-    HideOneKeySign?: boolean;
-}
-/**
- * 签署参与者信息
- */
-export interface Recipient {
-    /**
-      * 签署人唯一标识
-      */
-    RecipientId?: string;
-    /**
-      * 签署方类型：ENTERPRISE-企业INDIVIDUAL-自然人
-      */
-    RecipientType?: string;
-    /**
-      * 描述
-      */
-    Description?: string;
-    /**
-      * 签署方备注信息
-      */
-    RoleName?: string;
-    /**
-      * 是否需要校验
-      */
-    RequireValidation?: boolean;
-    /**
-      * 是否必须填写
-      */
-    RequireSign?: boolean;
-    /**
-      * 签署类型
-      */
-    SignType?: number;
-    /**
-      * 签署顺序：数字越小优先级越高
-      */
-    RoutingOrder?: number;
-    /**
-      * 是否是发起方
-      */
-    IsPromoter?: boolean;
-}
-/**
- * 渠道版员工部门信息
- */
-export interface Department {
-    /**
-      * 部门id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    DepartmentId: string;
-    /**
-      * 部门名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    DepartmentName: string;
-}
-/**
- * OperateChannelTemplate返回参数结构体
- */
-export interface OperateChannelTemplateResponse {
-    /**
-      * 腾讯电子签颁发给渠道的应用ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    AppId: string;
-    /**
-      * 渠道方模板库模板唯一标识
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    TemplateId: string;
-    /**
-      * 全部成功-"all-success",部分成功-"part-success", 全部失败-"fail"失败的会在FailMessageList中展示
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    OperateResult: string;
-    /**
-      * 模板可见性, 全部可见-"all", 部分可见-"part"
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    AuthTag: string;
-    /**
-      * 合作企业方第三方机构唯一标识数据
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ProxyOrganizationOpenIds: Array<string>;
-    /**
-      * 操作失败信息数组
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    FailMessageList: Array<AuthFailMessage>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * 渠道版员工角色信息
- */
-export interface StaffRole {
-    /**
-      * 角色id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    RoleId: string;
-    /**
-      * 角色名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    RoleName: string;
-}
-/**
- * CreateSignUrls返回参数结构体
- */
-export interface CreateSignUrlsResponse {
-    /**
-      * 签署参与者签署H5链接信息数组
-      */
-    SignUrlInfos: Array<SignUrlInfo>;
-    /**
-      * 生成失败时的错误信息，成功返回”“，顺序和出参SignUrlInfos保持一致
-      */
-    ErrorMessages: Array<string>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    Operator?: UserInfo;
 }
 /**
  * CreateSignUrls请求参数结构体
@@ -636,143 +1487,21 @@ export interface ChannelCreateMultiFlowSignQRCodeRequest {
     ApproverRestrictions?: ApproverRestriction;
 }
 /**
- * 授权出错信息
+ * 一码多扫签署二维码对象
  */
-export interface AuthFailMessage {
+export interface SignQrCode {
     /**
-      * 合作企业Id
+      * 二维码id
       */
-    ProxyOrganizationOpenId: string;
+    QrCodeId: string;
     /**
-      * 出错信息
+      * 二维码url
       */
-    Message: string;
-}
-/**
- * DescribeFlowDetailInfo请求参数结构体
- */
-export interface DescribeFlowDetailInfoRequest {
+    QrCodeUrl: string;
     /**
-      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
+      * 二维码过期时间
       */
-    Agent: Agent;
-    /**
-      * 合同(流程)编号数组，最多支持100个。
-（备注：该参数和合同组编号必须二选一）
-      */
-    FlowIds?: Array<string>;
-    /**
-      * 操作者的信息
-      */
-    Operator?: UserInfo;
-    /**
-      * 合同组编号（备注：该参数和合同(流程)编号数组必须二选一）
-      */
-    FlowGroupId?: string;
-}
-/**
- * ChannelGetTaskResultApi返回参数结构体
- */
-export interface ChannelGetTaskResultApiResponse {
-    /**
-      * 任务Id
-      */
-    TaskId: string;
-    /**
-      * 任务状态，需要关注的状态
-0  :NeedTranform   - 任务已提交
-4  :Processing     - 文档转换中
-8  :TaskEnd        - 任务处理完成
--2 :DownloadFailed - 下载失败
--6 :ProcessFailed  - 转换失败
--13:ProcessTimeout - 转换文件超时
-      */
-    TaskStatus: number;
-    /**
-      * 状态描述，需要关注的状态
-NeedTranform   - 任务已提交
-Processing     - 文档转换中
-TaskEnd        - 任务处理完成
-DownloadFailed - 下载失败
-ProcessFailed  - 转换失败
-ProcessTimeout - 转换文件超时
-      */
-    TaskMessage: string;
-    /**
-      * 资源Id，也是FileId，用于文件发起使用
-      */
-    ResourceId: string;
-    /**
-      * 预览文件Url，有效期30分钟
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    PreviewUrl: string;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * 此结构体 (UploadFile) 用于描述多文件上传的文件信息。
- */
-export interface UploadFile {
-    /**
-      * Base64编码后的文件内容
-      */
-    FileBody: string;
-    /**
-      * 文件名
-      */
-    FileName?: string;
-}
-/**
- * 合同组中每个子合同的发起信息
- */
-export interface FlowFileInfo {
-    /**
-      * 签署文件资源Id列表，目前仅支持单个文件
-      */
-    FileIds: Array<string>;
-    /**
-      * 签署流程名称，长度不超过200个字符
-      */
-    FlowName: string;
-    /**
-      * 签署流程签约方列表，最多不超过5个参与方
-      */
-    FlowApprovers: Array<FlowApproverInfo>;
-    /**
-      * 签署流程截止时间，十位数时间戳，最大值为33162419560，即3020年
-      */
-    Deadline?: number;
-    /**
-      * 签署流程的描述，长度不超过1000个字符
-      */
-    FlowDescription?: string;
-    /**
-      * 签署流程的类型，长度不超过255个字符
-      */
-    FlowType?: string;
-    /**
-      * 签署流程回调地址，长度不超过255个字符
-      */
-    CallbackUrl?: string;
-    /**
-      * 渠道的业务信息，最大长度1000个字符。发起自动签署时，需设置对应自动签署场景，目前仅支持场景：处方单-E_PRESCRIPTION_AUTO_SIGN
-      */
-    CustomerData?: string;
-    /**
-      * 合同签署顺序类型(无序签,顺序签)，默认为false，即有序签署
-      */
-    Unordered?: boolean;
-    /**
-      * 合同显示的页卡模板，说明：只支持{合同名称}, {发起方企业}, {发起方姓名}, {签署方N企业}, {签署方N姓名}，且N不能超过签署人的数量，N从1开始
-      */
-    CustomShowMap?: string;
-    /**
-      * 本企业(发起方企业)是否需要签署审批
-      */
-    NeedSignReview?: boolean;
+    ExpiredTime: number;
 }
 /**
  * ChannelGetTaskResultApi请求参数结构体
@@ -794,24 +1523,6 @@ export interface ChannelGetTaskResultApiRequest {
       * 暂未开放
       */
     Organization?: OrganizationInfo;
-}
-/**
- * ChannelVerifyPdf返回参数结构体
- */
-export interface ChannelVerifyPdfResponse {
-    /**
-      * 验签结果，1-文件未被篡改，全部签名在腾讯电子签完成； 2-文件未被篡改，部分签名在腾讯电子签完成；3-文件被篡改；4-异常：文件内没有签名域；5-异常：文件签名格式错误
-      */
-    VerifyResult: number;
-    /**
-      * 验签结果详情,内部状态1-验签成功，在电子签签署；2-验签成功，在其他平台签署；3-验签失败；4-pdf文件没有签名域
-；5-文件签名格式错误
-      */
-    PdfVerifyResults: Array<PdfVerifyResult>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
 }
 /**
  * 签署链接内容
@@ -884,6 +1595,421 @@ PERSON 自然人
 注意：此字段可能返回 null，表示取不到有效值。
       */
     FlowGroupId: string;
+}
+/**
+ * CreateFlowsByTemplates返回参数结构体
+ */
+export interface CreateFlowsByTemplatesResponse {
+    /**
+      * 多个合同ID
+      */
+    FlowIds: Array<string>;
+    /**
+      * 渠道的业务信息，限制1024字符
+      */
+    CustomerData: Array<string>;
+    /**
+      * 创建消息，对应多个合同ID，
+成功为“”,创建失败则对应失败消息
+      */
+    ErrorMessages: Array<string>;
+    /**
+      * 预览模式下返回的预览文件url数组
+      */
+    PreviewUrls: Array<string>;
+    /**
+      * 复杂文档合成任务（如，包含动态表格的预览任务）的任务信息数组；
+如果文档需要异步合成，此字段会返回该异步任务的任务信息，后续可以通过ChannelGetTaskResultApi接口查询任务详情；
+      */
+    TaskInfos: Array<TaskInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * 签署参与者信息
+ */
+export interface Recipient {
+    /**
+      * 签署人唯一标识
+      */
+    RecipientId?: string;
+    /**
+      * 签署方类型：ENTERPRISE-企业INDIVIDUAL-自然人
+      */
+    RecipientType?: string;
+    /**
+      * 描述
+      */
+    Description?: string;
+    /**
+      * 签署方备注信息
+      */
+    RoleName?: string;
+    /**
+      * 是否需要校验
+      */
+    RequireValidation?: boolean;
+    /**
+      * 是否必须填写
+      */
+    RequireSign?: boolean;
+    /**
+      * 签署类型
+      */
+    SignType?: number;
+    /**
+      * 签署顺序：数字越小优先级越高
+      */
+    RoutingOrder?: number;
+    /**
+      * 是否是发起方
+      */
+    IsPromoter?: boolean;
+}
+/**
+ * SyncProxyOrganizationOperators返回参数结构体
+ */
+export interface SyncProxyOrganizationOperatorsResponse {
+    /**
+      * Status 同步状态,全部同步失败接口会直接报错
+1-成功
+2-部分成功
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Status: number;
+    /**
+      * 同步失败经办人及其失败原因
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FailedList: Array<SyncFailReason>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * 此结构体(FlowDetailInfo)描述的是合同(流程)的详细信息
+ */
+export interface FlowDetailInfo {
+    /**
+      * 合同(流程)的Id
+      */
+    FlowId: string;
+    /**
+      * 合同(流程)的名字
+      */
+    FlowName: string;
+    /**
+      * 合同(流程)的类型
+      */
+    FlowType: string;
+    /**
+      * 合同(流程)的状态
+      */
+    FlowStatus: string;
+    /**
+      * 合同(流程)的信息
+      */
+    FlowMessage: string;
+    /**
+      * 合同(流程)的创建时间戳
+      */
+    CreateOn: number;
+    /**
+      * 合同(流程)的签署截止时间戳
+      */
+    DeadLine: number;
+    /**
+      * 用户自定义数据
+      */
+    CustomData: string;
+    /**
+      * 合同(流程)的签署人数组
+      */
+    FlowApproverInfos: Array<FlowApproverDetail>;
+}
+/**
+ * 流程对应资源链接信息
+ */
+export interface FlowResourceUrlInfo {
+    /**
+      * 流程对应Id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FlowId: string;
+    /**
+      * 流程对应资源链接信息数组
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ResourceUrlInfos: Array<ResourceUrlInfo>;
+}
+/**
+ * 此结构体 (UploadFile) 用于描述多文件上传的文件信息。
+ */
+export interface UploadFile {
+    /**
+      * Base64编码后的文件内容
+      */
+    FileBody: string;
+    /**
+      * 文件名
+      */
+    FileName?: string;
+}
+/**
+ * 此结构体 (Filter) 用于描述查询过滤条件。
+ */
+export interface Filter {
+    /**
+      * 查询过滤条件的Key
+      */
+    Key: string;
+    /**
+      * 查询过滤条件的Value列表
+      */
+    Values: Array<string>;
+}
+/**
+ * CreateSignUrls返回参数结构体
+ */
+export interface CreateSignUrlsResponse {
+    /**
+      * 签署参与者签署H5链接信息数组
+      */
+    SignUrlInfos: Array<SignUrlInfo>;
+    /**
+      * 生成失败时的错误信息，成功返回”“，顺序和出参SignUrlInfos保持一致
+      */
+    ErrorMessages: Array<string>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * UploadFiles返回参数结构体
+ */
+export interface UploadFilesResponse {
+    /**
+      * 文件id数组，有效期一个小时；有效期内此文件id可以反复使用
+      */
+    FileIds: Array<string>;
+    /**
+      * 上传成功文件数量
+      */
+    TotalCount: number;
+    /**
+      * 文件Url
+      */
+    FileUrls: Array<string>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ChannelCreateBatchCancelFlowUrl请求参数结构体
+ */
+export interface ChannelCreateBatchCancelFlowUrlRequest {
+    /**
+      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
+      */
+    Agent: Agent;
+    /**
+      * 签署流程Id数组
+      */
+    FlowIds: Array<string>;
+    /**
+      * 操作人信息
+      */
+    Operator?: UserInfo;
+}
+/**
+ * 指定签署人限制项
+ */
+export interface ApproverRestriction {
+    /**
+      * 指定签署人名字
+      */
+    Name?: string;
+    /**
+      * 指定签署人手机号
+      */
+    Mobile?: string;
+    /**
+      * 指定签署人证件类型
+      */
+    IdCardType?: string;
+    /**
+      * 指定签署人证件号码
+      */
+    IdCardNumber?: string;
+}
+/**
+ * 合作企业经办人列表信息
+ */
+export interface ProxyOrganizationOperator {
+    /**
+      * 经办人ID（渠道颁发），最大长度64个字符
+      */
+    Id: string;
+    /**
+      * 经办人姓名，最大长度50个字符
+      */
+    Name?: string;
+    /**
+      * 经办人身份证件类型
+1.ID_CARD 居民身份证
+2.HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证
+3.HONGKONG_AND_MACAO 港澳居民来往内地通行证
+      */
+    IdCardType?: string;
+    /**
+      * 经办人证件号
+      */
+    IdCardNumber?: string;
+    /**
+      * 经办人手机号，大陆手机号输入11位，暂不支持海外手机号。
+      */
+    Mobile?: string;
+}
+/**
+ * ChannelCreateFlowByFiles返回参数结构体
+ */
+export interface ChannelCreateFlowByFilesResponse {
+    /**
+      * 合同签署流程ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FlowId: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ChannelCreateFlowSignReview返回参数结构体
+ */
+export interface ChannelCreateFlowSignReviewResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ChannelDescribeOrganizationSeals返回参数结构体
+ */
+export interface ChannelDescribeOrganizationSealsResponse {
+    /**
+      * 在设置了SealId时返回0或1，没有设置时返回公司的总印章数量，可能比返回的印章数组数量多
+      */
+    TotalCount: number;
+    /**
+      * 查询到的印章结果数组
+      */
+    Seals: Array<OccupiedSeal>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ChannelCancelMultiFlowSignQRCode返回参数结构体
+ */
+export interface ChannelCancelMultiFlowSignQRCodeResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ChannelCreateFlowGroupByFiles返回参数结构体
+ */
+export interface ChannelCreateFlowGroupByFilesResponse {
+    /**
+      * 合同组ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FlowGroupId: string;
+    /**
+      * 子合同ID列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FlowIds: Array<string>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ChannelCreateMultiFlowSignQRCode返回参数结构体
+ */
+export interface ChannelCreateMultiFlowSignQRCodeResponse {
+    /**
+      * 签署二维码对象
+      */
+    QrCode: SignQrCode;
+    /**
+      * 签署链接对象
+      */
+    SignUrls: SignUrl;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * 签署人个性化能力信息
+ */
+export interface ApproverOption {
+    /**
+      * 是否隐藏一键签署 false-不隐藏,默认 true-隐藏
+      */
+    HideOneKeySign?: boolean;
+}
+/**
+ * ChannelGetTaskResultApi返回参数结构体
+ */
+export interface ChannelGetTaskResultApiResponse {
+    /**
+      * 任务Id
+      */
+    TaskId: string;
+    /**
+      * 任务状态，需要关注的状态
+0  :NeedTranform   - 任务已提交
+4  :Processing     - 文档转换中
+8  :TaskEnd        - 任务处理完成
+-2 :DownloadFailed - 下载失败
+-6 :ProcessFailed  - 转换失败
+-13:ProcessTimeout - 转换文件超时
+      */
+    TaskStatus: number;
+    /**
+      * 状态描述，需要关注的状态
+NeedTranform   - 任务已提交
+Processing     - 文档转换中
+TaskEnd        - 任务处理完成
+DownloadFailed - 下载失败
+ProcessFailed  - 转换失败
+ProcessTimeout - 转换文件超时
+      */
+    TaskMessage: string;
+    /**
+      * 资源Id，也是FileId，用于文件发起使用
+      */
+    ResourceId: string;
+    /**
+      * 预览文件Url，有效期30分钟
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PreviewUrl: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 此结构体 (Component) 用于描述控件属性。
@@ -1070,309 +2196,21 @@ export interface ChannelBatchCancelFlowsRequest {
     Operator?: UserInfo;
 }
 /**
- * 此结构体(FlowDetailInfo)描述的是合同(流程)的详细信息
+ * 一码多扫签署二维码签署信息
  */
-export interface FlowDetailInfo {
+export interface SignUrl {
     /**
-      * 合同(流程)的Id
+      * 小程序签署链接
       */
-    FlowId: string;
+    AppSignUrl: string;
     /**
-      * 合同(流程)的名字
+      * 签署链接有效时间
       */
-    FlowName: string;
+    EffectiveTime: string;
     /**
-      * 合同(流程)的类型
+      * 移动端签署链接
       */
-    FlowType: string;
-    /**
-      * 合同(流程)的状态
-      */
-    FlowStatus: string;
-    /**
-      * 合同(流程)的信息
-      */
-    FlowMessage: string;
-    /**
-      * 合同(流程)的创建时间戳
-      */
-    CreateOn: number;
-    /**
-      * 合同(流程)的签署截止时间戳
-      */
-    DeadLine: number;
-    /**
-      * 用户自定义数据
-      */
-    CustomData: string;
-    /**
-      * 合同(流程)的签署人数组
-      */
-    FlowApproverInfos: Array<FlowApproverDetail>;
-}
-/**
- * 同步经办人失败原因
- */
-export interface SyncFailReason {
-    /**
-      * 经办人Id
-      */
-    Id: string;
-    /**
-      * 失败原因
-例如：Id不符合规范、证件号码不合法等
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Message: string;
-}
-/**
- * CreateConsoleLoginUrl请求参数结构体
- */
-export interface CreateConsoleLoginUrlRequest {
-    /**
-      * 应用信息
-此接口Agent.AppId、Agent.ProxyOrganizationOpenId 和 Agent. ProxyOperator.OpenId 必填
-      */
-    Agent: Agent;
-    /**
-      * 渠道子客企业名称，最大长度64个字符
-      */
-    ProxyOrganizationName: string;
-    /**
-      * 渠道子客企业经办人的姓名，最大长度50个字符
-      */
-    ProxyOperatorName?: string;
-    /**
-      * 控制台指定模块，文件/合同管理:"DOCUMENT"，模板管理:"TEMPLATE"，印章管理:"SEAL"，组织架构/人员:"OPERATOR"，空字符串："账号信息"
-      */
-    Module?: string;
-    /**
-      * 控制台指定模块Id
-      */
-    ModuleId?: string;
-    /**
-      * 渠道子客企业统一社会信用代码，最大长度200个字符
-      */
-    UniformSocialCreditCode?: string;
-    /**
-      * 是否展示左侧菜单栏 是：ENABLE（默认） 否：DISABLE
-      */
-    MenuStatus?: string;
-    /**
-      * 操作者的信息
-      */
-    Operator?: UserInfo;
-}
-/**
- * 机构信息
- */
-export interface OrganizationInfo {
-    /**
-      * 用户在渠道的机构编号
-      */
-    OrganizationOpenId: string;
-    /**
-      * 用户真实的IP
-      */
-    ClientIp: string;
-    /**
-      * 机构的代理IP
-      */
-    ProxyIp: string;
-    /**
-      * 机构在平台的编号
-      */
-    OrganizationId?: string;
-    /**
-      * 用户渠道
-      */
-    Channel?: string;
-}
-/**
- * CreateFlowsByTemplates返回参数结构体
- */
-export interface CreateFlowsByTemplatesResponse {
-    /**
-      * 多个合同ID
-      */
-    FlowIds: Array<string>;
-    /**
-      * 渠道的业务信息，限制1024字符
-      */
-    CustomerData: Array<string>;
-    /**
-      * 创建消息，对应多个合同ID，
-成功为“”,创建失败则对应失败消息
-      */
-    ErrorMessages: Array<string>;
-    /**
-      * 预览模式下返回的预览文件url数组
-      */
-    PreviewUrls: Array<string>;
-    /**
-      * 复杂文档合成任务（如，包含动态表格的预览任务）的任务信息数组；
-如果文档需要异步合成，此字段会返回该异步任务的任务信息，后续可以通过ChannelGetTaskResultApi接口查询任务详情；
-      */
-    TaskInfos: Array<TaskInfo>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * ChannelCreateFlowSignReview请求参数结构体
- */
-export interface ChannelCreateFlowSignReviewRequest {
-    /**
-      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
-      */
-    Agent: Agent;
-    /**
-      * 签署流程编号
-      */
-    FlowId: string;
-    /**
-      * 企业内部审核结果
-PASS: 通过
-REJECT: 拒绝
-SIGN_REJECT:拒签(流程结束)
-      */
-    ReviewType: string;
-    /**
-      * 审核原因
-当ReviewType 是REJECT 时此字段必填,字符串长度不超过200
-      */
-    ReviewMessage?: string;
-}
-/**
- * DescribeUsage返回参数结构体
- */
-export interface DescribeUsageResponse {
-    /**
-      * 用量明细条数
-      */
-    Total: number;
-    /**
-      * 用量明细
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Details: Array<UsageDetail>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * 合作企业经办人列表信息
- */
-export interface ProxyOrganizationOperator {
-    /**
-      * 经办人ID（渠道颁发），最大长度64个字符
-      */
-    Id: string;
-    /**
-      * 经办人姓名，最大长度50个字符
-      */
-    Name?: string;
-    /**
-      * 经办人身份证件类型
-1.ID_CARD 居民身份证
-2.HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证
-3.HONGKONG_AND_MACAO 港澳居民来往内地通行证
-      */
-    IdCardType?: string;
-    /**
-      * 经办人证件号
-      */
-    IdCardNumber?: string;
-    /**
-      * 经办人手机号，大陆手机号输入11位，暂不支持海外手机号。
-      */
-    Mobile?: string;
-}
-/**
- * SyncProxyOrganizationOperators返回参数结构体
- */
-export interface SyncProxyOrganizationOperatorsResponse {
-    /**
-      * Status 同步状态,全部同步失败接口会直接报错
-1-成功
-2-部分成功
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Status: number;
-    /**
-      * 同步失败经办人及其失败原因
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    FailedList: Array<SyncFailReason>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * CreateSealByImage返回参数结构体
- */
-export interface CreateSealByImageResponse {
-    /**
-      * 印章id
-      */
-    SealId: string;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * ChannelVerifyPdf请求参数结构体
- */
-export interface ChannelVerifyPdfRequest {
-    /**
-      * 合同Id，流程Id
-      */
-    FlowId: string;
-    /**
-      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
-      */
-    Agent?: Agent;
-    /**
-      * 操作者的信息
-      */
-    Operator?: UserInfo;
-}
-/**
- * DescribeResourceUrlsByFlows请求参数结构体
- */
-export interface DescribeResourceUrlsByFlowsRequest {
-    /**
-      * 渠道应用相关信息。
-此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
-      */
-    Agent: Agent;
-    /**
-      * 查询资源所对应的签署流程Id，最多支持50个
-      */
-    FlowIds?: Array<string>;
-    /**
-      * 操作者的信息
-      */
-    Operator?: UserInfo;
-}
-/**
- * 流程对应资源链接信息
- */
-export interface FlowResourceUrlInfo {
-    /**
-      * 流程对应Id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    FlowId: string;
-    /**
-      * 流程对应资源链接信息数组
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ResourceUrlInfos: Array<ResourceUrlInfo>;
+    HttpSignUrl: string;
 }
 /**
  * ChannelCancelFlow请求参数结构体
@@ -1441,44 +2279,54 @@ export interface DescribeTemplatesRequest {
     Operator?: UserInfo;
 }
 /**
- * SyncProxyOrganizationOperators请求参数结构体
+ * 持有的电子印章信息
  */
-export interface SyncProxyOrganizationOperatorsRequest {
+export interface OccupiedSeal {
     /**
-      * 渠道应用相关信息。 此接口Agent.AppId 和 Agent.ProxyOrganizationOpenId必填。
+      * 电子印章编号
       */
-    Agent: Agent;
+    SealId: string;
     /**
-      * 操作类型，新增:"CREATE"，修改:"UPDATE"，离职:"RESIGN"
+      * 电子印章名称
       */
-    OperatorType: string;
+    SealName: string;
     /**
-      * 经办人信息列表，最大长度200
+      * 电子印章授权时间戳
       */
-    ProxyOrganizationOperators: Array<ProxyOrganizationOperator>;
+    CreateOn: number;
     /**
-      * 操作者的信息
+      * 电子印章授权人
       */
-    Operator?: UserInfo;
-}
-/**
- * CreateConsoleLoginUrl返回参数结构体
- */
-export interface CreateConsoleLoginUrlResponse {
+    Creator: string;
     /**
-      * 子客Web控制台url，此链接5分钟内有效，且只能访问一次。同时需要注意：
-1. 此链接仅单次有效，使用后需要再次创建新的链接（部分聊天软件，如企业微信默认会对链接进行解析，此时需要使用类似“代码片段”的方式或者放到txt文件里发送链接）；
-2. 创建的链接应避免被转义，如：&被转义为\u0026；如使用Postman请求后，请选择响应类型为 JSON，否则链接将被转义
+      * 电子印章策略Id
       */
-    ConsoleUrl: string;
+    SealPolicyId: string;
     /**
-      * 渠道子客企业是否已开通腾讯电子签
+      * 印章状态，有以下六种：CHECKING（审核中）SUCCESS（已启用）FAIL（审核拒绝）CHECKING-SADM（待超管审核）DISABLE（已停用）STOPPED（已终止）
       */
-    IsActivated: boolean;
+    SealStatus: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 审核失败原因
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    RequestId?: string;
+    FailReason: string;
+    /**
+      * 印章图片url，5分钟内有效
+      */
+    Url: string;
+    /**
+      * 印章类型
+      */
+    SealType: string;
+    /**
+      * 用印申请是否为永久授权
+      */
+    IsAllTime: boolean;
+    /**
+      * 授权人列表
+      */
+    AuthorizedUsers: Array<AuthorizedUser>;
 }
 /**
  * CreateFlowsByTemplates请求参数结构体
@@ -1498,134 +2346,6 @@ export interface CreateFlowsByTemplatesRequest {
 同时，如果预览的文件中指定了动态表格控件，需要进行异步合成；此时此接口返回的是合成前的文档预览链接，而合成完成后的文档预览链接会通过：回调通知的方式、或使用返回的TaskInfo中的TaskId通过ChannelGetTaskResultApi接口查询；
       */
     NeedPreview?: boolean;
-    /**
-      * 操作者的信息
-      */
-    Operator?: UserInfo;
-}
-/**
- * 此结构体 (Filter) 用于描述查询过滤条件。
- */
-export interface Filter {
-    /**
-      * 查询过滤条件的Key
-      */
-    Key: string;
-    /**
-      * 查询过滤条件的Value列表
-      */
-    Values: Array<string>;
-}
-/**
- * SyncProxyOrganization请求参数结构体
- */
-export interface SyncProxyOrganizationRequest {
-    /**
-      * 应用信息
-此接口Agent.AppId、Agent.ProxyOrganizationOpenId必填
-      */
-    Agent: Agent;
-    /**
-      * 渠道侧合作企业名称，最大长度64个字符
-      */
-    ProxyOrganizationName: string;
-    /**
-      * 营业执照正面照(PNG或JPG) base64格式, 大小不超过5M
-      */
-    BusinessLicense?: string;
-    /**
-      * 渠道侧合作企业统一社会信用代码，最大长度200个字符
-      */
-    UniformSocialCreditCode?: string;
-    /**
-      * 操作者的信息
-      */
-    Operator?: UserInfo;
-}
-/**
- * CreateSealByImage请求参数结构体
- */
-export interface CreateSealByImageRequest {
-    /**
-      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
-      */
-    Agent: Agent;
-    /**
-      * 印章名称，最大长度不超过30字符
-      */
-    SealName: string;
-    /**
-      * 印章图片base64
-      */
-    SealImage: string;
-    /**
-      * 操作者的信息
-      */
-    Operator?: UserInfo;
-}
-/**
- * 一码多扫签署二维码对象
- */
-export interface SignQrCode {
-    /**
-      * 二维码id
-      */
-    QrCodeId: string;
-    /**
-      * 二维码url
-      */
-    QrCodeUrl: string;
-    /**
-      * 二维码过期时间
-      */
-    ExpiredTime: number;
-}
-/**
- * 一码多扫签署二维码签署信息
- */
-export interface SignUrl {
-    /**
-      * 小程序签署链接
-      */
-    AppSignUrl: string;
-    /**
-      * 签署链接有效时间
-      */
-    EffectiveTime: string;
-    /**
-      * 移动端签署链接
-      */
-    HttpSignUrl: string;
-}
-/**
- * ChannelBatchCancelFlows返回参数结构体
- */
-export interface ChannelBatchCancelFlowsResponse {
-    /**
-      * 签署流程批量撤销失败原因，错误信息与流程Id一一对应，如果部分流程不可撤销，不会返回错误信息，只会撤销可撤销流程
-      */
-    FailMessages: Array<string>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * PrepareFlows请求参数结构体
- */
-export interface PrepareFlowsRequest {
-    /**
-      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
-      */
-    Agent: Agent;
-    /**
-      * 多个合同（签署流程）信息，最大支持20个签署流程。
-      */
-    FlowInfos: Array<FlowInfo>;
-    /**
-      * 操作完成后的跳转地址，最大长度200
-      */
-    JumpUrl: string;
     /**
       * 操作者的信息
       */
@@ -1681,56 +2401,48 @@ export interface ChannelCreateBatchCancelFlowUrlResponse {
     RequestId?: string;
 }
 /**
- * ChannelCancelFlow返回参数结构体
+ * OperateChannelTemplate请求参数结构体
  */
-export interface ChannelCancelFlowResponse {
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * 签署流程下载信息
- */
-export interface DownloadFlowInfo {
-    /**
-      * 文件夹名称
-      */
-    FileName: string;
-    /**
-      * 签署流程的标识数组
-      */
-    FlowIdList: Array<string>;
-}
-/**
- * ChannelCancelMultiFlowSignQRCode请求参数结构体
- */
-export interface ChannelCancelMultiFlowSignQRCodeRequest {
+export interface OperateChannelTemplateRequest {
     /**
       * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
       */
     Agent: Agent;
     /**
-      * 二维码id
+      * 操作类型，查询:"SELECT"，删除:"DELETE"，更新:"UPDATE"
       */
-    QrCodeId: string;
+    OperateType: string;
     /**
-      * 用户信息
+      * 渠道方模板库模板唯一标识
+      */
+    TemplateId: string;
+    /**
+      * 合作企业方第三方机构唯一标识数据，支持多个， 用","进行分隔
+      */
+    ProxyOrganizationOpenIds?: string;
+    /**
+      * 模板可见性, 全部可见-"all", 部分可见-"part"
+      */
+    AuthTag?: string;
+    /**
+      * 操作者的信息
       */
     Operator?: UserInfo;
 }
 /**
- * PrepareFlows返回参数结构体
+ * 同步经办人失败原因
  */
-export interface PrepareFlowsResponse {
+export interface SyncFailReason {
     /**
-      * 待发起文件确认页
+      * 经办人Id
       */
-    ConfirmUrl: string;
+    Id: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 失败原因
+例如：Id不符合规范、证件号码不合法等
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    RequestId?: string;
+    Message: string;
 }
 /**
  * ChannelDescribeEmployees返回参数结构体
@@ -1760,576 +2472,6 @@ export interface ChannelDescribeEmployeesResponse {
     RequestId?: string;
 }
 /**
- * 复杂文档合成任务的任务信息
- */
-export interface TaskInfo {
-    /**
-      * 合成任务Id，可以通过 ChannelGetTaskResultApi 接口获取任务信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    TaskId: string;
-    /**
-      * 任务状态：READY - 任务已完成；NOTREADY - 任务未完成；
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    TaskStatus: string;
-}
-/**
- * DescribeUsage请求参数结构体
- */
-export interface DescribeUsageRequest {
-    /**
-      * 应用信息
-      */
-    Agent: Agent;
-    /**
-      * 开始时间，例如：2021-03-21
-      */
-    StartDate: string;
-    /**
-      * 结束时间，例如：2021-06-21；
-开始时间到结束时间的区间长度小于等于90天。
-      */
-    EndDate: string;
-    /**
-      * 是否汇总数据，默认不汇总。
-不汇总：返回在统计区间内渠道下所有企业的每日明细，即每个企业N条数据，N为统计天数；
-汇总：返回在统计区间内渠道下所有企业的汇总后数据，即每个企业一条数据；
-      */
-    NeedAggregate?: boolean;
-    /**
-      * 单次返回的最多条目数量。默认为1000，且不能超过1000。
-      */
-    Limit?: number;
-    /**
-      * 偏移量，默认是0。
-      */
-    Offset?: number;
-    /**
-      * 操作者的信息
-      */
-    Operator?: UserInfo;
-}
-/**
- * ChannelCreateBatchCancelFlowUrl请求参数结构体
- */
-export interface ChannelCreateBatchCancelFlowUrlRequest {
-    /**
-      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
-      */
-    Agent: Agent;
-    /**
-      * 签署流程Id数组
-      */
-    FlowIds: Array<string>;
-    /**
-      * 操作人信息
-      */
-    Operator?: UserInfo;
-}
-/**
- * 指定签署人限制项
- */
-export interface ApproverRestriction {
-    /**
-      * 指定签署人名字
-      */
-    Name?: string;
-    /**
-      * 指定签署人手机号
-      */
-    Mobile?: string;
-    /**
-      * 指定签署人证件类型
-      */
-    IdCardType?: string;
-    /**
-      * 指定签署人证件号码
-      */
-    IdCardNumber?: string;
-}
-/**
- * ChannelCreateFlowByFiles请求参数结构体
- */
-export interface ChannelCreateFlowByFilesRequest {
-    /**
-      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
-      */
-    Agent?: Agent;
-    /**
-      * 签署流程名称，长度不超过200个字符
-      */
-    FlowName?: string;
-    /**
-      * 签署流程签约方列表，最多不超过5个参与方
-      */
-    FlowApprovers?: Array<FlowApproverInfo>;
-    /**
-      * 签署文件资源Id列表，目前仅支持单个文件
-      */
-    FileIds?: Array<string>;
-    /**
-      * 签署文件中的发起方的填写控件，需要在发起的时候进行填充
-      */
-    Components?: Array<Component>;
-    /**
-      * 签署流程截止时间，十位数时间戳，最大值为33162419560，即3020年
-      */
-    Deadline?: number;
-    /**
-      * 签署流程回调地址，长度不超过255个字符
-      */
-    CallbackUrl?: string;
-    /**
-      * 合同签署顺序类型(无序签,顺序签)，默认为false，即有序签署。有序签署时以传入FlowApprovers数组的顺序作为签署顺序
-      */
-    Unordered?: boolean;
-    /**
-      * 签署流程的类型，长度不超过255个字符
-      */
-    FlowType?: string;
-    /**
-      * 签署流程的描述，长度不超过1000个字符
-      */
-    FlowDescription?: string;
-    /**
-      * 合同显示的页卡模板，说明：只支持{合同名称}, {发起方企业}, {发起方姓名}, {签署方N企业}, {签署方N姓名}，且N不能超过签署人的数量，N从1开始
-      */
-    CustomShowMap?: string;
-    /**
-      * 渠道的业务信息，最大长度1000个字符。发起自动签署时，需设置对应自动签署场景，目前仅支持场景：处方单-E_PRESCRIPTION_AUTO_SIGN
-      */
-    CustomerData?: string;
-    /**
-      * 发起方企业的签署人进行签署操作是否需要企业内部审批。 若设置为true,审核结果需通过接口 ChannelCreateFlowSignReview 通知电子签，审核通过后，发起方企业签署人方可进行签署操作，否则会阻塞其签署操作。  注：企业可以通过此功能与企业内部的审批流程进行关联，支持手动、静默签署合同。
-      */
-    NeedSignReview?: boolean;
-    /**
-      * 操作者的信息
-      */
-    Operator?: UserInfo;
-    /**
-      * 签署人校验方式
-VerifyCheck: 人脸识别（默认）
-MobileCheck：手机号验证
-参数说明：可选人脸识别或手机号验证两种方式，若选择后者，未实名个人签署方在签署合同时，无需经过实名认证和意愿确认两次人脸识别，该能力仅适用于个人签署方。
-      */
-    ApproverVerifyType?: string;
-}
-/**
- * ChannelCreateFlowByFiles返回参数结构体
- */
-export interface ChannelCreateFlowByFilesResponse {
-    /**
-      * 合同签署流程ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    FlowId: string;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * UploadFiles返回参数结构体
- */
-export interface UploadFilesResponse {
-    /**
-      * 文件id数组，有效期一个小时；有效期内此文件id可以反复使用
-      */
-    FileIds: Array<string>;
-    /**
-      * 上传成功文件数量
-      */
-    TotalCount: number;
-    /**
-      * 文件Url
-      */
-    FileUrls: Array<string>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * ChannelCreateFlowSignReview返回参数结构体
- */
-export interface ChannelCreateFlowSignReviewResponse {
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * 应用相关信息
- */
-export interface Agent {
-    /**
-      * 腾讯电子签颁发给渠道的应用ID，32位字符串
-      */
-    AppId: string;
-    /**
-      * 渠道/平台合作企业的企业ID，最大64位字符串
-      */
-    ProxyOrganizationOpenId?: string;
-    /**
-      * 渠道/平台合作企业经办人（操作员）
-      */
-    ProxyOperator?: UserInfo;
-    /**
-      * 腾讯电子签颁发给渠道侧合作企业的应用ID
-      */
-    ProxyAppId?: string;
-    /**
-      * 内部参数，腾讯电子签颁发给渠道侧合作企业的企业ID，不需要传
-      */
-    ProxyOrganizationId?: string;
-}
-/**
- * 此结构 (FormField) 用于描述内容控件填充结构。
-
- */
-export interface FormField {
-    /**
-      * 控件填充vaule，ComponentType和传入值类型对应关系：
-TEXT - 文本内容
-MULTI_LINE_TEXT - 文本内容
-CHECK_BOX - true/false
-FILL_IMAGE、ATTACHMENT - 附件的FileId，需要通过UploadFiles接口上传获取
-SELECTOR - 选项值
-DYNAMIC_TABLE - 传入json格式的表格内容，具体见数据结构FlowInfo：https://cloud.tencent.com/document/api/1420/61525#FlowInfo
-      */
-    ComponentValue: string;
-    /**
-      * 表单域或控件的ID，跟ComponentName二选一，不能全为空；
-CreateFlowsByTemplates 接口不使用此字段。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ComponentId?: string;
-    /**
-      * 控件的名字，跟ComponentId二选一，不能全为空
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ComponentName?: string;
-}
-/**
- * 接口调用者信息
- */
-export interface UserInfo {
-    /**
-      * 用户在渠道的编号，最大64位字符串
-      */
-    OpenId?: string;
-    /**
-      * 用户的来源渠道
-      */
-    Channel?: string;
-    /**
-      * 自定义用户编号
-      */
-    CustomUserId?: string;
-    /**
-      * 用户真实IP
-      */
-    ClientIp?: string;
-    /**
-      * 用户代理IP
-      */
-    ProxyIp?: string;
-}
-/**
- * ChannelCreateConvertTaskApi请求参数结构体
- */
-export interface ChannelCreateConvertTaskApiRequest {
-    /**
-      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
-      */
-    Agent: Agent;
-    /**
-      * 资源类型 取值范围doc,docx,html,excel之一
-      */
-    ResourceType: string;
-    /**
-      * 资源名称，长度限制为256字符
-      */
-    ResourceName: string;
-    /**
-      * 资源Id，通过UploadFiles获取
-      */
-    ResourceId: string;
-    /**
-      * 操作者信息
-      */
-    Operator?: UserInfo;
-    /**
-      * 暂未开放
-      */
-    Organization?: OrganizationInfo;
-}
-/**
- * 签署人的流程信息明细
- */
-export interface FlowApproverDetail {
-    /**
-      * 模板配置时候的签署人id,与控件绑定
-      */
-    ReceiptId: string;
-    /**
-      * 渠道侧企业的第三方id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ProxyOrganizationOpenId: string;
-    /**
-      * 渠道侧企业操作人的第三方id
-      */
-    ProxyOperatorOpenId: string;
-    /**
-      * 渠道侧企业名称
-      */
-    ProxyOrganizationName: string;
-    /**
-      * 签署人手机号
-      */
-    Mobile: string;
-    /**
-      * 签署人签署顺序
-      */
-    SignOrder: number;
-    /**
-      * 签署人姓名
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ApproveName: string;
-    /**
-      * 当前签署人的状态
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ApproveStatus: string;
-    /**
-      * 签署人信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ApproveMessage: string;
-    /**
-      * 签署人签署时间
-      */
-    ApproveTime: number;
-    /**
-      * 参与者类型 (ORGANIZATION企业/PERSON个人)
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ApproveType: string;
-}
-/**
- * 此结构体 (FlowInfo) 用于描述签署流程信息。
-
-【动态表格传参说明】
-当模板的 ComponentType='DYNAMIC_TABLE'时（渠道版），FormField.ComponentValue需要传递json格式的字符串参数，用于确定表头&填充动态表格（支持内容的单元格合并）
-输入示例
-
-```
-{
-    "headers":[
-        {
-            "content":"head1"
-        },
-        {
-            "content":"head2"
-        },
-        {
-            "content":"head3"
-        }
-    ],
-    "rowCount":3,
-    "body":{
-        "cells":[
-            {
-                "rowStart":1,
-                "rowEnd":1,
-                "columnStart":1,
-                "columnEnd":1,
-                "content":"123"
-            },
-            {
-                "rowStart":2,
-                "rowEnd":3,
-                "columnStart":1,
-                "columnEnd":2,
-                "content":"456"
-            },
-            {
-                "rowStart":3,
-                "rowEnd":3,
-                "columnStart":3,
-                "columnEnd":3,
-                "content":"789"
-            }
-        ]
-    }
-}
-
-```
-
-表格参数说明
-
-| 名称                | 类型    | 描述                                              |
-| ------------------- | ------- | ------------------------------------------------- |
-| headers             | Array   | 表头：不超过10列，不支持单元格合并，字数不超过100 |
-| rowCount            | Integer | 表格内容最大行数                                  |
-| cells.N.rowStart    | Integer | 单元格坐标：行起始index                           |
-| cells.N.rowEnd      | Integer | 单元格坐标：行结束index                           |
-| cells.N.columnStart | Integer | 单元格坐标：列起始index                           |
-| cells.N.columnEnd   | Integer | 单元格坐标：列结束index                           |
-| cells.N.content     | String  | 单元格内容，字数不超过100                         |
-
- */
-export interface FlowInfo {
-    /**
-      * 合同名字，最大长度200个字符
-      */
-    FlowName: string;
-    /**
-      * 签署截止时间戳，超过有效签署时间则该签署流程失败，默认一年
-      */
-    Deadline: number;
-    /**
-      * 模板ID
-      */
-    TemplateId?: string;
-    /**
-      * 多个签署人信息，最大支持50个签署方
-      */
-    FlowApprovers?: Array<FlowApproverInfo>;
-    /**
-      * 表单K-V对列表
-      */
-    FormFields?: Array<FormField>;
-    /**
-      * 回调地址，最大长度1000个字符
-      */
-    CallbackUrl?: string;
-    /**
-      * 合同类型，如：1. “劳务”；2. “销售”；3. “租赁”；4. “其他”，最大长度200个字符
-      */
-    FlowType?: string;
-    /**
-      * 合同描述，最大长度1000个字符
-      */
-    FlowDescription?: string;
-    /**
-      * 渠道的业务信息，最大长度1000个字符。发起自动签署时，需设置对应自动签署场景，目前仅支持场景：处方单-E_PRESCRIPTION_AUTO_SIGN
-      */
-    CustomerData?: string;
-    /**
-      * 合同显示的页卡模板，说明：只支持{合同名称}, {发起方企业}, {发起方姓名}, {签署方N企业}, {签署方N姓名}，且N不能超过签署人的数量，N从1开始
-      */
-    CustomShowMap?: string;
-    /**
-      * 被抄送人的信息列表，抄送功能暂不开放
-      */
-    CcInfos?: Array<CcInfo>;
-    /**
-      * 发起方企业的签署人进行签署操作是否需要企业内部审批。
-若设置为true,审核结果需通过接口 ChannelCreateFlowSignReview 通知电子签，审核通过后，发起方企业签署人方可进行签署操作，否则会阻塞其签署操作。
-
-注：企业可以通过此功能与企业内部的审批流程进行关联，支持手动、静默签署合同。
-      */
-    NeedSignReview?: boolean;
-}
-/**
- * ChannelCreateFlowGroupByFiles请求参数结构体
- */
-export interface ChannelCreateFlowGroupByFilesRequest {
-    /**
-      * 每个子合同的发起所需的信息，数量限制2-100
-      */
-    FlowFileInfos: Array<FlowFileInfo>;
-    /**
-      * 合同组名称，长度不超过200个字符
-      */
-    FlowGroupName: string;
-    /**
-      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
-      */
-    Agent?: Agent;
-    /**
-      * 操作者的信息
-      */
-    Operator?: UserInfo;
-}
-/**
- * UploadFiles请求参数结构体
- */
-export interface UploadFilesRequest {
-    /**
-      * 应用相关信息，若是渠道版调用 appid 和proxyappid 必填
-      */
-    Agent: Agent;
-    /**
-      * 文件对应业务类型
-1. TEMPLATE - 模板； 文件类型：.pdf/.doc/.docx/.html
-2. DOCUMENT - 签署过程及签署后的合同文档/图片控件 文件类型：.pdf/.doc/.docx/.jpg/.png/.xls.xlsx/.html
-      */
-    BusinessType: string;
-    /**
-      * 上传文件内容数组，最多支持20个文件
-      */
-    FileInfos?: Array<UploadFile>;
-    /**
-      * 操作者的信息
-      */
-    Operator?: UserInfo;
-}
-/**
- * 企业员工信息
- */
-export interface Staff {
-    /**
-      * 员工在电子签平台的id
-      */
-    UserId: string;
-    /**
-      * 显示的员工名
-      */
-    DisplayName: string;
-    /**
-      * 员工手机号
-      */
-    Mobile: string;
-    /**
-      * 员工邮箱
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Email: string;
-    /**
-      * 员工在第三方平台id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    OpenId: string;
-    /**
-      * 员工角色
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Roles: Array<StaffRole>;
-    /**
-      * 员工部门
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Department: Department;
-    /**
-      * 员工是否实名
-      */
-    Verified: boolean;
-    /**
-      * 员工创建时间戳
-      */
-    CreatedOn: number;
-    /**
-      * 员工实名时间戳
-      */
-    VerifiedOn: number;
-}
-/**
  * 抄送信息
  */
 export interface CcInfo {
@@ -2337,45 +2479,4 @@ export interface CcInfo {
       * 被抄送人手机号，大陆11位手机号
       */
     Mobile?: string;
-}
-/**
- * ChannelCancelMultiFlowSignQRCode返回参数结构体
- */
-export interface ChannelCancelMultiFlowSignQRCodeResponse {
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * DescribeFlowDetailInfo返回参数结构体
- */
-export interface DescribeFlowDetailInfoResponse {
-    /**
-      * 渠道侧应用号Id
-      */
-    ApplicationId: string;
-    /**
-      * 渠道侧企业第三方Id
-      */
-    ProxyOrganizationOpenId: string;
-    /**
-      * 合同(签署流程)的具体详细描述信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    FlowInfo: Array<FlowDetailInfo>;
-    /**
-      * 合同组编号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    FlowGroupId: string;
-    /**
-      * 合同组名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    FlowGroupName: string;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
 }

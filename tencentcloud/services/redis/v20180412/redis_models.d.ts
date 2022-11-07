@@ -520,7 +520,7 @@ export interface KillMasterGroupResponse {
  */
 export interface RenewInstanceResponse {
     /**
-      * 交易ID
+      * 交易ID。
       */
     DealId: string;
     /**
@@ -909,13 +909,17 @@ export interface DescribeParamTemplatesRequest {
  */
 export interface RenewInstanceRequest {
     /**
-      * 购买时长，单位：月
+      * 购买时长，单位：月。
       */
     Period: number;
     /**
-      * 实例ID
+      * 实例 ID。
       */
     InstanceId: string;
+    /**
+      * 标识是否修改计费模式。<ul><li>当前实例计费模式为按量计费方式，预转换为包年包月而续费，请指定该参数为 <b>prepaid</b>。</li><li>当前实例计费模式为包年包月方式，可不设置该参数。</li></ul>
+      */
+    ModifyPayMode?: string;
 }
 /**
  * UpgradeVersionToMultiAvailabilityZones返回参数结构体

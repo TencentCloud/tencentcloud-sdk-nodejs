@@ -228,6 +228,16 @@ it("ess.v20201111.DescribeThirdPartyAuthCode", async function () {
     }
 })
 
+it("ess.v20201111.DescribeOrganizationSeals", async function () {
+    try {
+       const data = await client.DescribeOrganizationSeals({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ess.v20201111.DeleteIntegrationEmployees", async function () {
     try {
        const data = await client.DeleteIntegrationEmployees({})

@@ -18,90 +18,94 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  ResourceUrlInfo,
-  PdfVerifyResult,
-  FlowApproverInfo,
-  ChannelCreateConvertTaskApiResponse,
-  OperateChannelTemplateRequest,
-  TemplateInfo,
-  ChannelDescribeEmployeesRequest,
   SyncProxyOrganizationResponse,
-  ChannelCreateFlowGroupByFilesResponse,
-  GetDownloadFlowUrlResponse,
-  DescribeTemplatesResponse,
-  DescribeResourceUrlsByFlowsResponse,
-  ChannelCreateMultiFlowSignQRCodeResponse,
-  ApproverOption,
-  Recipient,
+  ChannelCreateConvertTaskApiResponse,
+  ChannelBatchCancelFlowsResponse,
   Department,
-  OperateChannelTemplateResponse,
-  StaffRole,
-  CreateSignUrlsResponse,
-  CreateSignUrlsRequest,
-  ChannelCreateMultiFlowSignQRCodeRequest,
+  ChannelCreateFlowSignReviewRequest,
   AuthFailMessage,
   DescribeFlowDetailInfoRequest,
-  ChannelGetTaskResultApiResponse,
-  UploadFile,
+  UploadFilesRequest,
+  DescribeResourceUrlsByFlowsRequest,
+  CreateSealByImageResponse,
+  OperateChannelTemplateResponse,
   FlowFileInfo,
-  ChannelGetTaskResultApiRequest,
+  CreateConsoleLoginUrlResponse,
+  SyncProxyOrganizationRequest,
+  CreateSealByImageRequest,
+  PrepareFlowsRequest,
+  ChannelCancelFlowResponse,
+  DownloadFlowInfo,
+  ChannelCreateConvertTaskApiRequest,
+  ChannelCreateFlowByFilesRequest,
+  Agent,
+  FlowApproverDetail,
+  ChannelCreateFlowGroupByFilesRequest,
+  TaskInfo,
+  ResourceUrlInfo,
+  FlowApproverInfo,
+  PrepareFlowsResponse,
+  TemplateInfo,
+  GetDownloadFlowUrlResponse,
+  DescribeTemplatesResponse,
+  StaffRole,
+  ChannelVerifyPdfRequest,
   ChannelVerifyPdfResponse,
+  CreateConsoleLoginUrlRequest,
+  OrganizationInfo,
+  PdfVerifyResult,
+  ChannelCancelMultiFlowSignQRCodeRequest,
+  ChannelDescribeOrganizationSealsRequest,
+  DescribeUsageRequest,
+  FormField,
+  FlowInfo,
+  UserInfo,
+  DescribeFlowDetailInfoResponse,
+  DescribeUsageResponse,
+  Staff,
+  ChannelDescribeEmployeesRequest,
+  AuthorizedUser,
+  DescribeResourceUrlsByFlowsResponse,
+  SyncProxyOrganizationOperatorsRequest,
+  CreateSignUrlsRequest,
+  ChannelCreateMultiFlowSignQRCodeRequest,
+  SignQrCode,
+  ChannelGetTaskResultApiRequest,
   SignUrlInfo,
+  CreateFlowsByTemplatesResponse,
+  Recipient,
+  SyncProxyOrganizationOperatorsResponse,
+  FlowDetailInfo,
+  FlowResourceUrlInfo,
+  UploadFile,
+  Filter,
+  CreateSignUrlsResponse,
+  UploadFilesResponse,
+  ChannelCreateBatchCancelFlowUrlRequest,
+  ApproverRestriction,
+  ProxyOrganizationOperator,
+  ChannelCreateFlowByFilesResponse,
+  ChannelCreateFlowSignReviewResponse,
+  ChannelDescribeOrganizationSealsResponse,
+  ChannelCancelMultiFlowSignQRCodeResponse,
+  ChannelCreateFlowGroupByFilesResponse,
+  ChannelCreateMultiFlowSignQRCodeResponse,
+  ApproverOption,
+  ChannelGetTaskResultApiResponse,
   Component,
   GetDownloadFlowUrlRequest,
   ChannelBatchCancelFlowsRequest,
-  FlowDetailInfo,
-  SyncFailReason,
-  CreateConsoleLoginUrlRequest,
-  OrganizationInfo,
-  CreateFlowsByTemplatesResponse,
-  ChannelCreateFlowSignReviewRequest,
-  DescribeUsageResponse,
-  ProxyOrganizationOperator,
-  SyncProxyOrganizationOperatorsResponse,
-  CreateSealByImageResponse,
-  ChannelVerifyPdfRequest,
-  DescribeResourceUrlsByFlowsRequest,
-  FlowResourceUrlInfo,
+  SignUrl,
   ChannelCancelFlowRequest,
   DescribeTemplatesRequest,
-  SyncProxyOrganizationOperatorsRequest,
-  CreateConsoleLoginUrlResponse,
+  OccupiedSeal,
   CreateFlowsByTemplatesRequest,
-  Filter,
-  SyncProxyOrganizationRequest,
-  CreateSealByImageRequest,
-  SignQrCode,
-  SignUrl,
-  ChannelBatchCancelFlowsResponse,
-  PrepareFlowsRequest,
   UsageDetail,
   ChannelCreateBatchCancelFlowUrlResponse,
-  ChannelCancelFlowResponse,
-  DownloadFlowInfo,
-  ChannelCancelMultiFlowSignQRCodeRequest,
-  PrepareFlowsResponse,
+  OperateChannelTemplateRequest,
+  SyncFailReason,
   ChannelDescribeEmployeesResponse,
-  TaskInfo,
-  DescribeUsageRequest,
-  ChannelCreateBatchCancelFlowUrlRequest,
-  ApproverRestriction,
-  ChannelCreateFlowByFilesRequest,
-  ChannelCreateFlowByFilesResponse,
-  UploadFilesResponse,
-  ChannelCreateFlowSignReviewResponse,
-  Agent,
-  FormField,
-  UserInfo,
-  ChannelCreateConvertTaskApiRequest,
-  FlowApproverDetail,
-  FlowInfo,
-  ChannelCreateFlowGroupByFilesRequest,
-  UploadFilesRequest,
-  Staff,
   CcInfo,
-  ChannelCancelMultiFlowSignQRCodeResponse,
-  DescribeFlowDetailInfoResponse,
 } from "./essbasic_models"
 
 /**
@@ -309,14 +313,14 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 此接口（SyncProxyOrganizationOperators）用于同步渠道子客企业经办人列表，主要是同步经办人的离职状态。子客Web控制台的组织架构管理，是依赖于渠道平台的，无法针对员工做新增/更新/离职等操作。
-若经办人信息有误，或者需要修改，也可以先将之前的经办人做离职操作，然后重新使用控制台链接CreateConsoleLoginUrl让经办人重新实名。
+     * 查询渠道子客企业电子印章，需要操作者具有管理印章权限
+客户指定需要获取的印章数量和偏移量，数量最多100，超过100按100处理；入参InfoType控制印章是否携带授权人信息，为1则携带，为0则返回的授权人信息为空数组。接口调用成功返回印章的信息列表还有企业印章的总数。
      */
-  async SyncProxyOrganizationOperators(
-    req: SyncProxyOrganizationOperatorsRequest,
-    cb?: (error: string, rep: SyncProxyOrganizationOperatorsResponse) => void
-  ): Promise<SyncProxyOrganizationOperatorsResponse> {
-    return this.request("SyncProxyOrganizationOperators", req, cb)
+  async ChannelDescribeOrganizationSeals(
+    req: ChannelDescribeOrganizationSealsRequest,
+    cb?: (error: string, rep: ChannelDescribeOrganizationSealsResponse) => void
+  ): Promise<ChannelDescribeOrganizationSealsResponse> {
+    return this.request("ChannelDescribeOrganizationSeals", req, cb)
   }
 
   /**
@@ -387,6 +391,17 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
     cb?: (error: string, rep: UploadFilesResponse) => void
   ): Promise<UploadFilesResponse> {
     return this.request("UploadFiles", req, cb)
+  }
+
+  /**
+     * 此接口（SyncProxyOrganizationOperators）用于同步渠道子客企业经办人列表，主要是同步经办人的离职状态。子客Web控制台的组织架构管理，是依赖于渠道平台的，无法针对员工做新增/更新/离职等操作。
+若经办人信息有误，或者需要修改，也可以先将之前的经办人做离职操作，然后重新使用控制台链接CreateConsoleLoginUrl让经办人重新实名。
+     */
+  async SyncProxyOrganizationOperators(
+    req: SyncProxyOrganizationOperatorsRequest,
+    cb?: (error: string, rep: SyncProxyOrganizationOperatorsResponse) => void
+  ): Promise<SyncProxyOrganizationOperatorsResponse> {
+    return this.request("SyncProxyOrganizationOperators", req, cb)
   }
 
   /**

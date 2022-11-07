@@ -159,11 +159,11 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetDownloadFlowUrl", req, cb);
     }
     /**
-     * 此接口（SyncProxyOrganizationOperators）用于同步渠道子客企业经办人列表，主要是同步经办人的离职状态。子客Web控制台的组织架构管理，是依赖于渠道平台的，无法针对员工做新增/更新/离职等操作。
-若经办人信息有误，或者需要修改，也可以先将之前的经办人做离职操作，然后重新使用控制台链接CreateConsoleLoginUrl让经办人重新实名。
+     * 查询渠道子客企业电子印章，需要操作者具有管理印章权限
+客户指定需要获取的印章数量和偏移量，数量最多100，超过100按100处理；入参InfoType控制印章是否携带授权人信息，为1则携带，为0则返回的授权人信息为空数组。接口调用成功返回印章的信息列表还有企业印章的总数。
      */
-    async SyncProxyOrganizationOperators(req, cb) {
-        return this.request("SyncProxyOrganizationOperators", req, cb);
+    async ChannelDescribeOrganizationSeals(req, cb) {
+        return this.request("ChannelDescribeOrganizationSeals", req, cb);
     }
     /**
      * 查询企业员工列表
@@ -210,6 +210,13 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
      */
     async UploadFiles(req, cb) {
         return this.request("UploadFiles", req, cb);
+    }
+    /**
+     * 此接口（SyncProxyOrganizationOperators）用于同步渠道子客企业经办人列表，主要是同步经办人的离职状态。子客Web控制台的组织架构管理，是依赖于渠道平台的，无法针对员工做新增/更新/离职等操作。
+若经办人信息有误，或者需要修改，也可以先将之前的经办人做离职操作，然后重新使用控制台链接CreateConsoleLoginUrl让经办人重新实名。
+     */
+    async SyncProxyOrganizationOperators(req, cb) {
+        return this.request("SyncProxyOrganizationOperators", req, cb);
     }
     /**
      * 此接口（OperateChannelTemplate）用于针对渠道模板库中的模板对子客企业可见性的查询和设置，不会直接分配渠道模板给子客企业。

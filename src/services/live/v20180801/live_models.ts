@@ -804,6 +804,12 @@ export interface PushQualityData {
    * 流量，单位MB。
    */
   Flux: number
+
+  /**
+      * 推流服务端 IP。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ServerIp: string
 }
 
 /**
@@ -7709,7 +7715,8 @@ export interface PullStreamTaskInfo {
   /**
       * 拉流源的类型：
 PullLivePushLive -直播，
-PullVodPushLive -点播。
+PullVodPushLive -点播，
+PullPicPushLive -图片。
       */
   SourceType: string
 
@@ -7881,6 +7888,14 @@ PullVodPushLive -点播。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   WatermarkList: Array<PullPushWatermarkInfo>
+
+  /**
+      * 点播源是否启用本地推流模式，默认0，不启用。
+0 - 不启用。
+1 - 启用。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VodLocalMode: number
 }
 
 /**

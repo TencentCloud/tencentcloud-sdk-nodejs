@@ -2979,6 +2979,12 @@ export interface TemService {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Tags: Array<Tag>
+
+  /**
+      * 是否有资源权限
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  HasAuthority: boolean
 }
 
 /**
@@ -3216,6 +3222,12 @@ export interface TemNamespaceInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Tags: Array<Tag>
+
+  /**
+      * 资源是否有权限
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  HasAuthority: boolean
 }
 
 /**

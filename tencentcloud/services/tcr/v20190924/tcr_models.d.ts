@@ -4235,6 +4235,10 @@ export interface DescribeImagesRequest {
       * 指定镜像 Digest 进行查找
       */
     Digest?: string;
+    /**
+      * 指定是否为精准匹配，true为精准匹配，不填为模糊匹配
+      */
+    ExactMatch?: boolean;
 }
 /**
  * DescribeGCJobs请求参数结构体

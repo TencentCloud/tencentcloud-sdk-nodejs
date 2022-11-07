@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CancelMultiFlowSignQRCodeRequest, CreateFlowEvidenceReportResponse, CreateFlowRequest, DescribeFileUrlsResponse, CreateDocumentResponse, DescribeIntegrationEmployeesRequest, StartFlowRequest, CancelFlowResponse, CreateDocumentRequest, CreateSchemeUrlRequest, DescribeThirdPartyAuthCodeRequest, DeleteIntegrationEmployeesResponse, DeleteIntegrationEmployeesRequest, DescribeIntegrationEmployeesResponse, CreateFlowApproversResponse, DescribeFlowInfoRequest, CancelFlowRequest, DescribeFlowBriefsResponse, CreateMultiFlowSignQRCodeResponse, UploadFilesResponse, CreateIntegrationEmployeesResponse, DescribeThirdPartyAuthCodeResponse, CreateFlowByFilesResponse, DescribeFlowBriefsRequest, VerifyPdfRequest, VerifyPdfResponse, CreateIntegrationEmployeesRequest, CreateFlowSignReviewResponse, DescribeFlowTemplatesResponse, CreateFlowEvidenceReportRequest, CreateBatchCancelFlowUrlResponse, UploadFilesRequest, DescribeFileUrlsRequest, StartFlowResponse, GetTaskResultApiRequest, CreateBatchCancelFlowUrlRequest, CreateMultiFlowSignQRCodeRequest, CreateConvertTaskApiResponse, CreateFlowSignReviewRequest, CreateConvertTaskApiRequest, DescribeFlowInfoResponse, CreateSchemeUrlResponse, CreateFlowByFilesRequest, CancelMultiFlowSignQRCodeResponse, CreateFlowResponse, DescribeFlowTemplatesRequest, GetTaskResultApiResponse, CreateFlowApproversRequest } from "./ess_models";
+import { CancelFlowResponse, CreateSchemeUrlRequest, CreateFlowApproversResponse, UploadFilesRequest, CreateMultiFlowSignQRCodeResponse, DescribeThirdPartyAuthCodeResponse, CreateIntegrationEmployeesRequest, CreateFlowEvidenceReportRequest, StartFlowResponse, CreateConvertTaskApiRequest, DescribeFlowTemplatesRequest, CreateDocumentResponse, DescribeIntegrationEmployeesRequest, CreateFlowRequest, DescribeThirdPartyAuthCodeRequest, DescribeFlowInfoRequest, CreateBatchCancelFlowUrlResponse, DescribeIntegrationEmployeesResponse, CreateConvertTaskApiResponse, CreateFlowSignReviewRequest, CreateFlowByFilesRequest, DescribeFileUrlsRequest, CreateFlowApproversRequest, CreateFlowEvidenceReportResponse, DescribeFileUrlsResponse, CreateDocumentRequest, DescribeOrganizationSealsResponse, DeleteIntegrationEmployeesRequest, GetTaskResultApiRequest, CreateIntegrationEmployeesResponse, CreateFlowByFilesResponse, UploadFilesResponse, VerifyPdfRequest, CreateFlowSignReviewResponse, CreateSchemeUrlResponse, GetTaskResultApiResponse, CancelMultiFlowSignQRCodeRequest, StartFlowRequest, DeleteIntegrationEmployeesResponse, DescribeOrganizationSealsRequest, CancelFlowRequest, DescribeFlowBriefsRequest, VerifyPdfResponse, DescribeFlowBriefsResponse, DescribeFlowTemplatesResponse, CreateBatchCancelFlowUrlRequest, CreateMultiFlowSignQRCodeRequest, DescribeFlowInfoResponse, CreateFlowResponse, CancelMultiFlowSignQRCodeResponse } from "./ess_models";
 /**
  * ess client
  * @class
@@ -120,6 +120,11 @@ export declare class Client extends AbstractClient {
      * 通过AuthCode查询用户是否实名
      */
     DescribeThirdPartyAuthCode(req: DescribeThirdPartyAuthCodeRequest, cb?: (error: string, rep: DescribeThirdPartyAuthCodeResponse) => void): Promise<DescribeThirdPartyAuthCodeResponse>;
+    /**
+     * 查询企业印章的列表，需要操作者具有查询印章权限
+客户指定需要获取的印章数量和偏移量，数量最多100，超过100按100处理；入参InfoType控制印章是否携带授权人信息，为1则携带，为0则返回的授权人信息为空数组。接口调用成功返回印章的信息列表还有企业印章的总数。
+     */
+    DescribeOrganizationSeals(req: DescribeOrganizationSealsRequest, cb?: (error: string, rep: DescribeOrganizationSealsResponse) => void): Promise<DescribeOrganizationSealsResponse>;
     /**
      * 移除员工
      */

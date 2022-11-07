@@ -34,6 +34,7 @@ import {
   ModifyInstanceVipResponse,
   AssociateSecurityGroupsRequest,
   DescribeUpgradePriceRequest,
+  TerminateDedicatedDBInstanceResponse,
   FlushBinlogResponse,
   DescribeDBSecurityGroupsResponse,
   CancelDcnJobResponse,
@@ -106,6 +107,7 @@ import {
   DescribeDatabaseTableRequest,
   OpenDBExtranetAccessResponse,
   KillSessionRequest,
+  TerminateDedicatedDBInstanceRequest,
   DescribeDatabaseObjectsResponse,
   ModifyDBInstanceNameRequest,
   DeleteAccountRequest,
@@ -807,6 +809,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CancelDcnJobResponse) => void
   ): Promise<CancelDcnJobResponse> {
     return this.request("CancelDcnJob", req, cb)
+  }
+
+  /**
+   * 本接口（IsolateDedicatedDBInstance）用于销毁已隔离的独享云数据库实例。
+   */
+  async TerminateDedicatedDBInstance(
+    req: TerminateDedicatedDBInstanceRequest,
+    cb?: (error: string, rep: TerminateDedicatedDBInstanceResponse) => void
+  ): Promise<TerminateDedicatedDBInstanceResponse> {
+    return this.request("TerminateDedicatedDBInstance", req, cb)
   }
 
   /**

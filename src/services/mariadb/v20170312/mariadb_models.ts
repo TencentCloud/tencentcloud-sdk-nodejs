@@ -408,6 +408,21 @@ export interface DescribeUpgradePriceRequest {
 }
 
 /**
+ * TerminateDedicatedDBInstance返回参数结构体
+ */
+export interface TerminateDedicatedDBInstanceResponse {
+  /**
+   * 异步流程Id
+   */
+  FlowId: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * FlushBinlog返回参数结构体
  */
 export interface FlushBinlogResponse {
@@ -2129,6 +2144,16 @@ export interface KillSessionRequest {
    * 会话ID列表
    */
   SessionId: Array<number>
+}
+
+/**
+ * TerminateDedicatedDBInstance请求参数结构体
+ */
+export interface TerminateDedicatedDBInstanceRequest {
+  /**
+   * 实例 Id，形如：tdsql-ow728lmc。
+   */
+  InstanceId: string
 }
 
 /**

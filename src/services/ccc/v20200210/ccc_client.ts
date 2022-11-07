@@ -86,6 +86,7 @@ import {
   BindStaffSkillGroupListRequest,
   DescribePSTNActiveSessionListRequest,
   DescribeCallInMetricsResponse,
+  IMSatisfaction,
   DescribeTelCdrResponse,
   DescribeStaffStatusMetricsRequest,
   ResetExtensionPasswordRequest,

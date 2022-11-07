@@ -178,9 +178,9 @@ it("essbasic.v20210526.GetDownloadFlowUrl", async function () {
     }
 })
 
-it("essbasic.v20210526.SyncProxyOrganizationOperators", async function () {
+it("essbasic.v20210526.ChannelDescribeOrganizationSeals", async function () {
     try {
-       const data = await client.SyncProxyOrganizationOperators({})
+       const data = await client.ChannelDescribeOrganizationSeals({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -241,6 +241,16 @@ it("essbasic.v20210526.DescribeTemplates", async function () {
 it("essbasic.v20210526.UploadFiles", async function () {
     try {
        const data = await client.UploadFiles({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("essbasic.v20210526.SyncProxyOrganizationOperators", async function () {
+    try {
+       const data = await client.SyncProxyOrganizationOperators({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -140,7 +140,7 @@ export declare class Client extends AbstractClient {
      */
     InquiryPriceUpgradeInstance(req: InquiryPriceUpgradeInstanceRequest, cb?: (error: string, rep: InquiryPriceUpgradeInstanceResponse) => void): Promise<InquiryPriceUpgradeInstanceResponse>;
     /**
-     * 续费实例
+     * 本接口（RenewInstance）可用于为实例续费。
      */
     RenewInstance(req: RenewInstanceRequest, cb?: (error: string, rep: RenewInstanceResponse) => void): Promise<RenewInstanceResponse>;
     /**

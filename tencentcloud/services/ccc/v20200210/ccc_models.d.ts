@@ -1760,6 +1760,21 @@ export interface DescribeCallInMetricsResponse {
     RequestId?: string;
 }
 /**
+ * IM满意度
+ */
+export interface IMSatisfaction {
+    /**
+      * 满意度值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Id: number;
+    /**
+      * 满意度标签
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Label: string;
+}
+/**
  * DescribeTelCdr返回参数结构体
  */
 export interface DescribeTelCdrResponse {
@@ -1943,6 +1958,11 @@ export interface IMCdrInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     SkillGroupName: string;
+    /**
+      * 满意度
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Satisfaction: IMSatisfaction;
 }
 /**
  * DescribeAutoCalloutTasks请求参数结构体
