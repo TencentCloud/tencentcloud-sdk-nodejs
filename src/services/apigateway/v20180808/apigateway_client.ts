@@ -22,6 +22,7 @@ import {
   UpdateApiKeyRequest,
   Service,
   DeleteAPIDocRequest,
+  AttachedPluginInfo,
   ApiUsagePlanSet,
   DescribeAPIDocDetailRequest,
   ModifyAPIDocResponse,
@@ -58,6 +59,7 @@ import {
   DescribeApiAppRequest,
   DescribePluginResponse,
   DescribeUpstreamBindApisRequest,
+  DescribePluginsByApiResponse,
   DescribeExclusiveInstancesResponse,
   K8sService,
   DeleteUsagePlanRequest,
@@ -164,6 +166,7 @@ import {
   DescribeServiceEnvironmentReleaseHistoryResponse,
   Environment,
   DescribeAPIDocsRequest,
+  DescribePluginsByApiRequest,
   UsagePlanStatusInfo,
   ServiceReleaseHistoryInfo,
   CreatePluginResponse,
@@ -206,7 +209,7 @@ import {
   ModifyIPStrategyRequest,
   ModifyPluginResponse,
   UnBindSecretIdsRequest,
-  DescribeApiRequest,
+  ApiEnvironmentStrategy,
   VpcConfig,
   CreateUpstreamResponse,
   ResetAPIDocPasswordRequest,
@@ -240,9 +243,9 @@ import {
   ErrorCodes,
   DescribeServiceEnvironmentListRequest,
   ServiceEnvironmentStrategyStatus,
-  ReqParameter,
-  DescribeApiEnvironmentStrategyResponse,
   MicroService,
+  DescribeApiEnvironmentStrategyResponse,
+  DescribeApiRequest,
   ApiEnvironmentStrategyStataus,
   PluginSummary,
   ApiAppInfo,
@@ -252,6 +255,7 @@ import {
   BindApiInfo,
   ApiAppApiInfo,
   DescribeUsagePlanResponse,
+  ReqParameter,
   UnBindEnvironmentRequest,
   AttachPluginResponse,
   BindEnvironmentRequest,
@@ -286,7 +290,7 @@ import {
   CreateApiAppResponse,
   DescribeApiUsagePlanRequest,
   UnBindSubDomainRequest,
-  ApiEnvironmentStrategy,
+  AttachedPluginSummary,
   DescribeIPStrategysStatusResponse,
   UpdateApiAppKeyResponse,
   DescribeExclusiveInstancesStatusRequest,
@@ -413,6 +417,16 @@ API 网关使用的最大单元为服务，每个服务中可创建多个 API �
     cb?: (error: string, rep: DeleteApiAppResponse) => void
   ): Promise<DeleteApiAppResponse> {
     return this.request("DeleteApiApp", req, cb)
+  }
+
+  /**
+   * 展示API上已绑定的插件列表。
+   */
+  async DescribePluginsByApi(
+    req: DescribePluginsByApiRequest,
+    cb?: (error: string, rep: DescribePluginsByApiResponse) => void
+  ): Promise<DescribePluginsByApiResponse> {
+    return this.request("DescribePluginsByApi", req, cb)
   }
 
   /**

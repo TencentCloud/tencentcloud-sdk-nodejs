@@ -6406,11 +6406,11 @@ export interface CreateClusterNodePoolRequest {
       */
     ClusterId: string;
     /**
-      * AutoScalingGroupPara AS组参数
+      * AutoScalingGroupPara AS组参数，参考 https://cloud.tencent.com/document/product/377/20440
       */
     AutoScalingGroupPara: string;
     /**
-      * LaunchConfigurePara 运行参数
+      * LaunchConfigurePara 运行参数，参考 https://cloud.tencent.com/document/product/377/20447
       */
     LaunchConfigurePara: string;
     /**

@@ -293,6 +293,7 @@ import {
   DescribeWebProtectionAttackEventsRequest,
   Hsts,
   CreateRuleRequest,
+  TemplateConfig,
   DescribeRateLimitIntelligenceRuleResponse,
   RateLimitTemplateDetail,
   CreateApplicationProxyRuleResponse,
@@ -1055,7 +1056,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改Web&Bot安全配置
+   * 修改Web&Bot安全配置。
    */
   async ModifySecurityPolicy(
     req: ModifySecurityPolicyRequest,
@@ -1355,7 +1356,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询安全防护配置详情
+   * 查询安全防护配置详情。请求参数中ZoneId+Entity或TemplateId至少填一项。
    */
   async DescribeSecurityPolicy(
     req: DescribeSecurityPolicyRequest,

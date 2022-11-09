@@ -247,6 +247,11 @@ pcre(正则表达式)
    * 特征过滤配置添加成功后自动生成的规则ID，当添加新特征过滤配置时，此字段不用填写；
    */
   Id?: string
+
+  /**
+   * 大于报文长度，取值1+
+   */
+  PktLenGT?: number
 }
 
 /**
@@ -2655,6 +2660,16 @@ export interface ProtocolBlockConfig {
    * 异常空连接防护，取值[0(防护关)，1(防护开)]
    */
   CheckExceptNullConnect: number
+
+  /**
+   * ping of death防护，取值[0(防护关)，1(防护开)]
+   */
+  PingOfDeath?: number
+
+  /**
+   * tear drop防护，取值[0(防护关)，1(防护开)]
+   */
+  TearDrop?: number
 }
 
 /**
@@ -3688,6 +3703,30 @@ off(关闭)
    * 域名与协议纬度的防护阈值
    */
   ListenerCcThresholdList: Array<ListenerCcThreholdConfig>
+
+  /**
+      * SYN FLOOD流量阈值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SynFloodThreshold: number
+
+  /**
+      * SYN FLOOD包量阈值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SynFloodPktThreshold: number
+
+  /**
+      * UDP FLOOD流量阈值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UdpFloodThreshold: number
+
+  /**
+      * UDP FLOOD包量阈值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UdpFloodPktThreshold: number
 }
 
 /**
@@ -3769,6 +3808,31 @@ export interface ModifyDDoSThresholdRequest {
    * 大禹子产品代号（bgpip表示高防IP；bgp表示独享包；bgp-multip表示共享包；net表示高防IP专业版）
    */
   Business: string
+
+  /**
+   * 配置其他阈值标志位，1表示配置其他阈值
+   */
+  OtherThresholdFlag?: number
+
+  /**
+   * SYN FLOOD流量阈值
+   */
+  SynFloodThreshold?: number
+
+  /**
+   * SYN FLOOD包量阈值
+   */
+  SynFloodPktThreshold?: number
+
+  /**
+   * UDP FLOOD流量阈值
+   */
+  UdpFloodThreshold?: number
+
+  /**
+   * UDP FLOOD包量阈值
+   */
+  UdpFloodPktThreshold?: number
 }
 
 /**

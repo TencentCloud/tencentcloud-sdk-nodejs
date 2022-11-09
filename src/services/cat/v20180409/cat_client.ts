@@ -28,10 +28,12 @@ import {
   DescribeProbeMetricDataResponse,
   DescribeDetailedSingleProbeDataRequest,
   DescribeProbeTasksResponse,
+  UpdateProbeTaskAttributesResponse,
   DeleteProbeTaskRequest,
   DescribeDetailedSingleProbeDataResponse,
   SuspendProbeTaskRequest,
   DescribeProbeMetricDataRequest,
+  UpdateProbeTaskAttributesRequest,
   DescribeProbeNodesResponse,
   UpdateProbeTaskConfigurationListRequest,
   CreateProbeTasksRequest,
@@ -90,13 +92,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 批量更新拨测任务配置
+   * 更新探测任务属性
    */
-  async UpdateProbeTaskConfigurationList(
-    req: UpdateProbeTaskConfigurationListRequest,
-    cb?: (error: string, rep: UpdateProbeTaskConfigurationListResponse) => void
-  ): Promise<UpdateProbeTaskConfigurationListResponse> {
-    return this.request("UpdateProbeTaskConfigurationList", req, cb)
+  async UpdateProbeTaskAttributes(
+    req: UpdateProbeTaskAttributesRequest,
+    cb?: (error: string, rep: UpdateProbeTaskAttributesResponse) => void
+  ): Promise<UpdateProbeTaskAttributesResponse> {
+    return this.request("UpdateProbeTaskAttributes", req, cb)
   }
 
   /**
@@ -117,6 +119,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeProbeNodesResponse) => void
   ): Promise<DescribeProbeNodesResponse> {
     return this.request("DescribeProbeNodes", req, cb)
+  }
+
+  /**
+   * 批量更新拨测任务配置
+   */
+  async UpdateProbeTaskConfigurationList(
+    req: UpdateProbeTaskConfigurationListRequest,
+    cb?: (error: string, rep: UpdateProbeTaskConfigurationListResponse) => void
+  ): Promise<UpdateProbeTaskConfigurationListResponse> {
+    return this.request("UpdateProbeTaskConfigurationList", req, cb)
   }
 
   /**

@@ -175,6 +175,46 @@ export interface DeleteAPIDocRequest {
 }
 
 /**
+ * 已绑定的插件信息。
+ */
+export interface AttachedPluginInfo {
+  /**
+   * 插件ID。
+   */
+  PluginId: string
+
+  /**
+   * 环境信息。
+   */
+  Environment: string
+
+  /**
+   * 绑定时间。
+   */
+  AttachedTime: string
+
+  /**
+   * 插件名称。
+   */
+  PluginName: string
+
+  /**
+   * 插件类型。
+   */
+  PluginType: string
+
+  /**
+   * 插件描述。
+   */
+  Description: string
+
+  /**
+   * 插件定义语句。
+   */
+  PluginData: string
+}
+
+/**
  * api绑定使用计划列表
  */
 export interface ApiUsagePlanSet {
@@ -1264,6 +1304,21 @@ export interface DescribeUpstreamBindApisRequest {
    * ServiceId和ApiId过滤查询
    */
   Filters?: Array<Filter>
+}
+
+/**
+ * DescribePluginsByApi返回参数结构体
+ */
+export interface DescribePluginsByApiResponse {
+  /**
+   * 插件可绑定的API列表信息。
+   */
+  Result: AttachedPluginSummary
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4447,6 +4502,36 @@ export interface DescribeAPIDocsRequest {
 }
 
 /**
+ * DescribePluginsByApi请求参数结构体
+ */
+export interface DescribePluginsByApiRequest {
+  /**
+   * 要查询的API ID。
+   */
+  ApiId: string
+
+  /**
+   * 要查询的服务ID。
+   */
+  ServiceId: string
+
+  /**
+   * 环境信息。
+   */
+  EnvironmentName?: string
+
+  /**
+   * 返回数量，默认为 20，最大值为 100。
+   */
+  Limit?: number
+
+  /**
+   * 偏移量，默认为 0。
+   */
+  Offset?: number
+}
+
+/**
  * 用于使用计划列表展示
  */
 export interface UsagePlanStatusInfo {
@@ -5452,18 +5537,33 @@ export interface UnBindSecretIdsRequest {
 }
 
 /**
- * DescribeApi请求参数结构体
+ * api环境绑定策略
  */
-export interface DescribeApiRequest {
+export interface ApiEnvironmentStrategy {
   /**
-   * API 所在的服务唯一 ID。
-   */
-  ServiceId: string
-
-  /**
-   * API 接口唯一 ID。
+   * API唯一ID。
    */
   ApiId: string
+
+  /**
+   * 用户自定义API名称。
+   */
+  ApiName: string
+
+  /**
+   * API的路径。如/path。
+   */
+  Path: string
+
+  /**
+   * API的方法。如GET。
+   */
+  Method: string
+
+  /**
+   * 环境的限流信息。
+   */
+  EnvironmentStrategySet: Array<EnvironmentStrategy>
 }
 
 /**
@@ -6159,38 +6259,23 @@ export interface ServiceEnvironmentStrategyStatus {
 }
 
 /**
- * 请求参数
+ * API绑定的微服务信息。
  */
-export interface ReqParameter {
+export interface MicroService {
   /**
-   * API 的前端参数名称。
+   * 微服务集群ID。
    */
-  Name: string
+  ClusterId?: string
 
   /**
-   * API 的前端参数位置，如 header。目前支持 header、query、path。
+   * 微服务命名空间ID。
    */
-  Position: string
+  NamespaceId?: string
 
   /**
-   * API 的前端参数类型，如 String、int。
+   * 微服务名称。
    */
-  Type: string
-
-  /**
-   * API 的前端参数默认值。
-   */
-  DefaultValue: string
-
-  /**
-   * API 的前端参数是否必填，True：表示必填，False：表示可选。
-   */
-  Required: boolean
-
-  /**
-   * API 的前端参数备注。
-   */
-  Desc: string
+  MicroServiceName?: string
 }
 
 /**
@@ -6210,23 +6295,18 @@ export interface DescribeApiEnvironmentStrategyResponse {
 }
 
 /**
- * API绑定的微服务信息。
+ * DescribeApi请求参数结构体
  */
-export interface MicroService {
+export interface DescribeApiRequest {
   /**
-   * 微服务集群ID。
+   * API 所在的服务唯一 ID。
    */
-  ClusterId?: string
+  ServiceId: string
 
   /**
-   * 微服务命名空间ID。
+   * API 接口唯一 ID。
    */
-  NamespaceId?: string
-
-  /**
-   * 微服务名称。
-   */
-  MicroServiceName?: string
+  ApiId: string
 }
 
 /**
@@ -6476,6 +6556,41 @@ export interface DescribeUsagePlanResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 请求参数
+ */
+export interface ReqParameter {
+  /**
+   * API 的前端参数名称。
+   */
+  Name: string
+
+  /**
+   * API 的前端参数位置，如 header。目前支持 header、query、path。
+   */
+  Position: string
+
+  /**
+   * API 的前端参数类型，如 String、int。
+   */
+  Type: string
+
+  /**
+   * API 的前端参数默认值。
+   */
+  DefaultValue: string
+
+  /**
+   * API 的前端参数是否必填，True：表示必填，False：表示可选。
+   */
+  Required: boolean
+
+  /**
+   * API 的前端参数备注。
+   */
+  Desc: string
 }
 
 /**
@@ -7416,33 +7531,18 @@ export interface UnBindSubDomainRequest {
 }
 
 /**
- * api环境绑定策略
+ * 已绑定的插件信息。
  */
-export interface ApiEnvironmentStrategy {
+export interface AttachedPluginSummary {
   /**
-   * API唯一ID。
+   * 已绑定的插件总数。
    */
-  ApiId: string
+  TotalCount: number
 
   /**
-   * 用户自定义API名称。
+   * 已绑定的插件信息。
    */
-  ApiName: string
-
-  /**
-   * API的路径。如/path。
-   */
-  Path: string
-
-  /**
-   * API的方法。如GET。
-   */
-  Method: string
-
-  /**
-   * 环境的限流信息。
-   */
-  EnvironmentStrategySet: Array<EnvironmentStrategy>
+  PluginSummary: Array<AttachedPluginInfo>
 }
 
 /**

@@ -118,6 +118,16 @@ it("apigateway.v20180808.DeleteApiApp", async function () {
     }
 })
 
+it("apigateway.v20180808.DescribePluginsByApi", async function () {
+    try {
+       const data = await client.DescribePluginsByApi({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("apigateway.v20180808.DescribeServicesStatus", async function () {
     try {
        const data = await client.DescribeServicesStatus({})

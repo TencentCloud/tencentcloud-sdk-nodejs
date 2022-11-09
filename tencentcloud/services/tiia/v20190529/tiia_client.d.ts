@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DetectProductBetaResponse, DetectDisgustRequest, SearchImageResponse, RecognizeCarProRequest, CreateImageRequest, DetectLabelBetaRequest, DeleteImagesResponse, CropImageRequest, DetectProductRequest, DetectLabelResponse, DescribeGroupsRequest, DetectMisbehaviorResponse, AssessQualityResponse, DetectDisgustResponse, SearchImageRequest, RecognizeCarResponse, DetectLabelRequest, DetectLabelProResponse, EnhanceImageResponse, AssessQualityRequest, DeleteImagesRequest, CreateGroupRequest, DescribeImagesRequest, DetectProductBetaRequest, RecognizeCarRequest, EnhanceImageRequest, CropImageResponse, DetectEnvelopeRequest, DetectProductResponse, CreateImageResponse, DetectLabelProRequest, DetectLabelBetaResponse, DetectEnvelopeResponse, RecognizeCarProResponse, DescribeGroupsResponse, DescribeImagesResponse, DetectMisbehaviorRequest, CreateGroupResponse } from "./tiia_models";
+import { DetectProductBetaResponse, DetectDisgustRequest, SearchImageResponse, DetectPetRequest, RecognizeCarProResponse, CreateImageRequest, DetectLabelBetaRequest, DeleteImagesResponse, CropImageRequest, DetectProductRequest, DetectLabelResponse, DescribeGroupsRequest, DetectMisbehaviorResponse, AssessQualityResponse, DetectDisgustResponse, SearchImageRequest, RecognizeCarResponse, DetectLabelRequest, DetectLabelProResponse, EnhanceImageResponse, AssessQualityRequest, DeleteImagesRequest, CreateGroupRequest, DescribeImagesRequest, DetectProductBetaRequest, RecognizeCarRequest, EnhanceImageRequest, CropImageResponse, DetectEnvelopeRequest, DetectPetResponse, DetectProductResponse, CreateImageResponse, DetectLabelProRequest, DetectLabelBetaResponse, DetectEnvelopeResponse, RecognizeCarProRequest, DescribeGroupsResponse, DescribeImagesResponse, DetectMisbehaviorRequest, CreateGroupResponse } from "./tiia_models";
 /**
  * tiia client
  * @class
@@ -11,6 +11,14 @@ export declare class Client extends AbstractClient {
      * 创建图片，并添加对应图片的自定义信息。模型将在创建图片时自动提取图像特征并存储到指定的图片库中。
      */
     CreateImage(req: CreateImageRequest, cb?: (error: string, rep: CreateImageResponse) => void): Promise<CreateImageResponse>;
+    /**
+     * 商品识别-微信识物版，基于人工智能技术、海量训练图片、亿级商品库，可以实现全覆盖、细粒度、高准确率的商品识别和商品推荐功能。
+本服务可以识别出图片中的主体位置、主体商品类型，覆盖亿级SKU，输出具体商品的价格、型号等详细信息。
+客户无需自建商品库，即可快速实现商品识别、拍照搜商品等功能。
+>?
+- 公共参数中的签名方式必须指定为V3版本，即配置SignatureMethod参数为TC3-HMAC-SHA256。
+     */
+    DetectProductBeta(req: DetectProductBetaRequest, cb?: (error: string, rep: DetectProductBetaResponse) => void): Promise<DetectProductBetaResponse>;
     /**
      * 通用图像标签可识别数千种常见物体或场景，覆盖日常物品、场景、动物、植物、食物、饮品、交通工具等多个大类，返回主体的标签名称和所属细分类目等。
 
@@ -148,11 +156,9 @@ export declare class Client extends AbstractClient {
      */
     DetectEnvelope(req: DetectEnvelopeRequest, cb?: (error: string, rep: DetectEnvelopeResponse) => void): Promise<DetectEnvelopeResponse>;
     /**
-     * 商品识别-微信识物版，基于人工智能技术、海量训练图片、亿级商品库，可以实现全覆盖、细粒度、高准确率的商品识别和商品推荐功能。
-本服务可以识别出图片中的主体位置、主体商品类型，覆盖亿级SKU，输出具体商品的价格、型号等详细信息。
-客户无需自建商品库，即可快速实现商品识别、拍照搜商品等功能。
->?
+     * 传入一张图片，识别出图片中是否存在宠物
+>
 - 公共参数中的签名方式必须指定为V3版本，即配置SignatureMethod参数为TC3-HMAC-SHA256。
      */
-    DetectProductBeta(req: DetectProductBetaRequest, cb?: (error: string, rep: DetectProductBetaResponse) => void): Promise<DetectProductBetaResponse>;
+    DetectPet(req: DetectPetRequest, cb?: (error: string, rep: DetectPetResponse) => void): Promise<DetectPetResponse>;
 }

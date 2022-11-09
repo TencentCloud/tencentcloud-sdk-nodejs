@@ -46,10 +46,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeProbeTasks", req, cb);
     }
     /**
-     * 批量更新拨测任务配置
+     * 更新探测任务属性
      */
-    async UpdateProbeTaskConfigurationList(req, cb) {
-        return this.request("UpdateProbeTaskConfigurationList", req, cb);
+    async UpdateProbeTaskAttributes(req, cb) {
+        return this.request("UpdateProbeTaskAttributes", req, cb);
     }
     /**
      * 获取拨测节点
@@ -62,6 +62,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeProbeNodes(req, cb) {
         return this.request("DescribeProbeNodes", req, cb);
+    }
+    /**
+     * 批量更新拨测任务配置
+     */
+    async UpdateProbeTaskConfigurationList(req, cb) {
+        return this.request("UpdateProbeTaskConfigurationList", req, cb);
     }
     /**
      * 批量创建拨测任务

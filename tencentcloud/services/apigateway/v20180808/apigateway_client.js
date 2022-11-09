@@ -90,6 +90,12 @@ API 网关使用的最大单元为服务，每个服务中可创建多个 API �
         return this.request("DeleteApiApp", req, cb);
     }
     /**
+     * 展示API上已绑定的插件列表。
+     */
+    async DescribePluginsByApi(req, cb) {
+        return this.request("DescribePluginsByApi", req, cb);
+    }
+    /**
      * 本接口（DescribeServicesStatus）用于搜索查询某一个服务或多个服务的列表，并返回服务相关的域名、时间等信息。
      */
     async DescribeServicesStatus(req, cb) {

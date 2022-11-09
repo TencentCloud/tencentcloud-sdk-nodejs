@@ -1334,7 +1334,7 @@ export interface CreateBindInstanceResponse {
     /**
       * 任务状态: 1-已完成,2-处理中,3-处理出错,4-处理超时
       */
-    Progress?: number;
+    Progress: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

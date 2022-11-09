@@ -394,7 +394,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteDnsRecords", req, cb);
     }
     /**
-     * 修改Web&Bot安全配置
+     * 修改Web&Bot安全配置。
      */
     async ModifySecurityPolicy(req, cb) {
         return this.request("ModifySecurityPolicy", req, cb);
@@ -574,7 +574,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyDefaultCertificate", req, cb);
     }
     /**
-     * 查询安全防护配置详情
+     * 查询安全防护配置详情。请求参数中ZoneId+Entity或TemplateId至少填一项。
      */
     async DescribeSecurityPolicy(req, cb) {
         return this.request("DescribeSecurityPolicy", req, cb);

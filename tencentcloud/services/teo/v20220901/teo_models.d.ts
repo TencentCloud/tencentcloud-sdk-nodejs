@@ -1938,6 +1938,11 @@ export interface SecurityConfig {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     DropPageConfig?: DropPageConfig;
+    /**
+      * 模板配置。此处仅出参数使用。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TemplateConfig?: TemplateConfig;
 }
 /**
  * 离线日志详细信息
@@ -1989,7 +1994,7 @@ export interface FailReason {
       */
     Reason: string;
     /**
-      * 处理失败的资源列表，该列表元素来源于输入参数中的Targets，因此格式和入参中的Targets保持一致。
+      * 处理失败的资源列表。
       */
     Targets: Array<string>;
 }
@@ -2771,13 +2776,13 @@ export interface DescribeBotClientIpListResponse {
  */
 export interface ModifySecurityWafGroupPolicyRequest {
     /**
-      * 站点Id。
+      * 站点Id。当使用ZoneId和Entity时可不填写TemplateId，否则必须填写TemplateId。
       */
-    ZoneId: string;
+    ZoneId?: string;
     /**
-      * 子域名。
+      * 子域名。当使用ZoneId和Entity时可不填写TemplateId，否则必须填写TemplateId。
       */
-    Entity: string;
+    Entity?: string;
     /**
       * 总开关，取值有：
 <li>on：开启；</li>
@@ -2811,6 +2816,10 @@ export interface ModifySecurityWafGroupPolicyRequest {
       * 托管规则等级组。不填默认为上次的配置。
       */
     WafGroups?: Array<WafGroup>;
+    /**
+      * 模板Id。当使用模板Id时可不填ZoneId和Entity，否则必须填写ZoneId和Entity。
+      */
+    TemplateId?: string;
 }
 /**
  * DescribeZoneSetting请求参数结构体
@@ -2830,13 +2839,17 @@ export interface ModifySecurityPolicyRequest {
       */
     ZoneId: string;
     /**
-      * 子域名/应用名。
-      */
-    Entity: string;
-    /**
       * 安全配置。
       */
     SecurityConfig: SecurityConfig;
+    /**
+      * 子域名/应用名。当使用Entity时可不填写TemplateId，否则必须填写TemplateId。
+      */
+    Entity?: string;
+    /**
+      * 模板策略id。当使用模板Id时可不填Entity，否则必须填写Entity。
+      */
+    TemplateId?: string;
 }
 /**
  * ModifyDnssec请求参数结构体
@@ -4411,11 +4424,15 @@ export interface DescribeSecurityPolicyRequest {
     /**
       * 站点Id。
       */
-    ZoneId: string;
+    ZoneId?: string;
     /**
-      * 子域名/应用名。
+      * 子域名/应用名。当使用Entity时可不填写TemplateId，否则必须填写TemplateId。
       */
-    Entity: string;
+    Entity?: string;
+    /**
+      * 模板策略id。当使用模板Id时可不填Entity，否则必须填写Entity。
+      */
+    TemplateId?: string;
 }
 /**
  * 统计曲线数据项
@@ -4467,8 +4484,7 @@ export interface RateLimitUserRule {
     /**
       * 规则状态，取值有：
 <li>on：生效；</li>
-<li>off：不生效。</li>
-<li>hour：小时。</li>默认on生效。
+<li>off：不生效。</li>默认on生效。
       */
     RuleStatus: string;
     /**
@@ -4486,7 +4502,6 @@ export interface RateLimitUserRule {
     RuleID?: number;
     /**
       * 过滤词，取值有：
-<li>host：域名；</li>
 <li>sip：客户端ip。</li>
 注意：此字段可能返回 null，表示取不到有效值。
       */
@@ -4496,6 +4511,13 @@ export interface RateLimitUserRule {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     UpdateTime?: string;
+    /**
+      * 统计范围，字段为null时，代表source_to_eo。取值有：
+<li>source_to_eo：（响应）源站到EdgeOne。</li>
+<li>client_to_eo：（请求）客户端到EdgeOne；</li>
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FreqScope?: Array<string>;
 }
 /**
  * ModifyDnsRecord返回参数结构体
@@ -4769,7 +4791,7 @@ export interface DDoSAllowBlock {
  */
 export interface DescribePurgeTasksRequest {
     /**
-      * 站点 ID。
+      * 字段已废弃，请使用Filters中的zone-id。
       */
     ZoneId?: string;
     /**
@@ -4789,8 +4811,7 @@ export interface DescribePurgeTasksRequest {
       */
     Limit?: number;
     /**
-      * 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：
-<li>job-id<br>   按照【<strong>任务ID</strong>】进行过滤。job-id形如：1379afjk91u32h，暂不支持多值。<br>   类型：String<br>   必选：否<br>   模糊查询：不支持。</li><li>target<br>   按照【<strong>目标资源信息</strong>】进行过滤。target形如：http://www.qq.com/1.txt，暂不支持多值。<br>   类型：String<br>   必选：否<br>   模糊查询：不支持。</li><li>domains<br>   按照【<strong>域名</strong>】进行过滤。domains形如：www.qq.com。<br>   类型：String<br>   必选：否<br>   模糊查询：不支持。</li><li>statuses<br>   按照【<strong>任务状态</strong>】进行过滤。<br>   必选：否<br>   模糊查询：不支持。<br>   可选项：<br>   processing：处理中<br>   success：成功<br>   failed：失败<br>   timeout：超时</li><li>type<br>   按照【<strong>清除缓存类型</strong>】进行过滤，暂不支持多值。<br>   类型：String<br>   必选：否<br>   模糊查询：不支持。<br>   可选项：<br>   purge_url：URL<br>   purge_prefix：前缀<br>   purge_all：全部缓存内容<br>   purge_host：Hostname</li>
+      * 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：<li>zone-id<br>   按照【<strong>站点 ID</strong>】进行过滤。zone-id形如：zone-xxx，暂不支持多值<br>   类型：String<br>   必选：否<br>   模糊查询：不支持</li><li>job-id<br>   按照【<strong>任务ID</strong>】进行过滤。job-id形如：1379afjk91u32h，暂不支持多值。<br>   类型：String<br>   必选：否<br>   模糊查询：不支持</li><li>target<br>   按照【<strong>目标资源信息</strong>】进行过滤，target形如：http://www.qq.com/1.txt或者tag1，暂不支持多值<br>   类型：String<br>   必选：否<br>   模糊查询：不支持</li><li>domains<br>   按照【<strong>域名</strong>】进行过滤，domains形如：www.qq.com<br>   类型：String<br>   必选：否<br>   模糊查询：不支持。</li><li>statuses<br>   按照【<strong>任务状态</strong>】进行过滤<br>   必选：否<br>   模糊查询：不支持。<br>   可选项：<br>   processing：处理中<br>   success：成功<br>   failed：失败<br>   timeout：超时</li><li>type<br>   按照【<strong>清除缓存类型</strong>】进行过滤，暂不支持多值。<br>   类型：String<br>   必选：否<br>   模糊查询：不支持<br>   可选项：<br>   purge_url：URL<br>   purge_prefix：前缀<br>   purge_all：全部缓存内容<br>   purge_host：Hostname<br>   purge_cache_tag：CacheTag</li>
       */
     Filters?: Array<AdvancedFilter>;
 }
@@ -5444,13 +5465,17 @@ export interface ModifyAliasDomainRequest {
  */
 export interface DescribeSecurityPortraitRulesRequest {
     /**
-      * 站点Id。
+      * 站点Id。当使用ZoneId和Entity时可不填写TemplateId，否则必须填写TemplateId。
       */
-    ZoneId: string;
+    ZoneId?: string;
     /**
-      * 子域名/应用名。
+      * 子域名/应用名。当使用ZoneId和Entity时可不填写TemplateId，否则必须填写TemplateId。
       */
-    Entity: string;
+    Entity?: string;
+    /**
+      * 模板Id。当使用模板Id时可不填ZoneId和Entity，否则必须填写ZoneId和Entity。
+      */
+    TemplateId?: string;
 }
 /**
  * ReclaimZone返回参数结构体
@@ -6290,13 +6315,13 @@ export interface GeoIp {
  */
 export interface DescribeSecurityGroupManagedRulesRequest {
     /**
-      * 站点Id。
+      * 站点Id。当使用ZoneId和Entity时可不填写TemplateId，否则必须填写TemplateId。
       */
-    ZoneId: string;
+    ZoneId?: string;
     /**
-      * 子域名/应用名。
+      * 子域名/应用名。当使用ZoneId和Entity时可不填写TemplateId，否则必须填写TemplateId。
       */
-    Entity: string;
+    Entity?: string;
     /**
       * 分页查询偏移量。默认值：0。
       */
@@ -6305,6 +6330,10 @@ export interface DescribeSecurityGroupManagedRulesRequest {
       * 分页查询限制数目。默认值：20，最大值：1000。
       */
     Limit?: number;
+    /**
+      * 模板Id。当使用模板Id时可不填ZoneId和Entity，否则必须填写ZoneId和Entity。
+      */
+    TemplateId?: string;
 }
 /**
  * ModifyApplicationProxyStatus请求参数结构体
@@ -6695,6 +6724,19 @@ export interface CreateRuleRequest {
       * 规则标签。
       */
     Tags?: Array<string>;
+}
+/**
+ * 安全模板配置
+ */
+export interface TemplateConfig {
+    /**
+      * 模板ID。
+      */
+    TemplateId: string;
+    /**
+      * 模板名称。
+      */
+    TemplateName: string;
 }
 /**
  * DescribeRateLimitIntelligenceRule返回参数结构体
@@ -8617,6 +8659,13 @@ export interface IpTableRule {
       * 更新时间。仅出参使用。
       */
     UpdateTime?: string;
+    /**
+      * 规则启用状态，当返回为null时，为启用。取值有：
+<li> on：启用；</li>
+<li> off：未启用。</li>
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Status?: string;
 }
 /**
  * DescribeDDoSAttackTopData请求参数结构体
@@ -9848,11 +9897,12 @@ export interface Quota {
       */
     DailyAvailable: number;
     /**
-      * 配额类型，取值有：
-<li> purge_prefix：前缀；</li>
-<li> purge_url：URL；</li>
-<li> purge_host：Hostname；</li>
-<li> purge_all：全部缓存内容。</li>
+      * 刷新预热缓存类型，取值有：
+<li> purge_prefix：按前缀刷新；</li>
+<li> purge_url：按URL刷新；</li>
+<li> purge_host：按Hostname刷新；</li>
+<li> purge_all：刷新全部缓存内容；</li>
+<li> purge_cache_tag：按CacheTag刷新；</li><li> prefetch_url：按URL预热。</li>
       */
     Type: string;
 }
@@ -9914,11 +9964,12 @@ export interface CreatePurgeTaskRequest {
 <li>purge_url：URL；</li>
 <li>purge_prefix：前缀；</li>
 <li>purge_host：Hostname；</li>
-<li>purge_all：全部缓存。</li>
+<li>purge_all：全部缓存；</li>
+<li>purge_cache_tag：cache-tag刷新。</li>
       */
     Type: string;
     /**
-      * 要刷新的资源列表，每个元素格式依据Type而定：
+      * 要清除缓存的资源列表，每个元素格式依据Type而定：
 1) Type = purge_host 时：
 形如：www.example.com 或 foo.bar.example.com。
 2) Type = purge_prefix 时：
@@ -9927,6 +9978,8 @@ export interface CreatePurgeTaskRequest {
 形如：https://www.example.com/example.jpg。
 4）Type = purge_all 时：
 Targets可为空，不需要填写。
+5）Type = purge_cache_tag 时：
+形如：tag1。
       */
     Targets?: Array<string>;
     /**
@@ -10143,14 +10196,6 @@ export interface VanityNameServersIps {
  */
 export interface DescribeBotManagedRulesRequest {
     /**
-      * 站点Id。
-      */
-    ZoneId: string;
-    /**
-      * 子域名。
-      */
-    Entity: string;
-    /**
       * 分页查询偏移量。默认值：0。
       */
     Offset: number;
@@ -10159,10 +10204,22 @@ export interface DescribeBotManagedRulesRequest {
       */
     Limit: number;
     /**
+      * 站点Id。当使用ZoneId和Entity时可不填写TemplateId，否则必须填写TemplateId。
+      */
+    ZoneId?: string;
+    /**
+      * 子域名/应用名。当使用ZoneId和Entity时可不填写TemplateId，否则必须填写TemplateId。
+      */
+    Entity?: string;
+    /**
       * 规则类型，取值有：
 <li> idcid；</li>
 <li>sipbot；</li>
 <li>uabot。</li>传空或不传，即全部类型。
       */
     RuleType?: string;
+    /**
+      * 模板Id。当使用模板Id时可不填ZoneId和Entity，否则必须填写ZoneId和Entity。
+      */
+    TemplateId?: string;
 }

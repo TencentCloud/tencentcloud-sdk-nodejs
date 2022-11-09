@@ -252,7 +252,7 @@ export declare class Client extends AbstractClient {
      */
     DeleteDnsRecords(req: DeleteDnsRecordsRequest, cb?: (error: string, rep: DeleteDnsRecordsResponse) => void): Promise<DeleteDnsRecordsResponse>;
     /**
-     * 修改Web&Bot安全配置
+     * 修改Web&Bot安全配置。
      */
     ModifySecurityPolicy(req: ModifySecurityPolicyRequest, cb?: (error: string, rep: ModifySecurityPolicyResponse) => void): Promise<ModifySecurityPolicyResponse>;
     /**
@@ -372,7 +372,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyDefaultCertificate(req: ModifyDefaultCertificateRequest, cb?: (error: string, rep: ModifyDefaultCertificateResponse) => void): Promise<ModifyDefaultCertificateResponse>;
     /**
-     * 查询安全防护配置详情
+     * 查询安全防护配置详情。请求参数中ZoneId+Entity或TemplateId至少填一项。
      */
     DescribeSecurityPolicy(req: DescribeSecurityPolicyRequest, cb?: (error: string, rep: DescribeSecurityPolicyResponse) => void): Promise<DescribeSecurityPolicyResponse>;
     /**

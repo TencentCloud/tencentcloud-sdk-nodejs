@@ -1589,6 +1589,11 @@ export interface AudioTemplateInfoForUpdate {
 当媒体的封装格式是音频格式时（flac，ogg，mp3，m4a）时，声道数不允许设为立体声。
       */
   AudioChannel?: number
+
+  /**
+   * 指定输出要保留的音频轨道。默认是全部保留源的。
+   */
+  StreamSelects?: Array<number>
 }
 
 /**
@@ -7659,7 +7664,45 @@ export interface AiRecognitionTaskAsrWordsSegmentItem {
 /**
  * 字幕流配置参数。
  */
-export type SubtitleTemplate = null
+export interface SubtitleTemplate {
+  /**
+   * 要压制到视频中的字幕文件地址。
+   */
+  Path?: string
+
+  /**
+   * 指定要压制到视频中的字幕轨道，如果有指定Path，则Path 优先级更高。Path 和 StreamIndex 至少指定一个。
+   */
+  StreamIndex?: number
+
+  /**
+      * 字体类型，
+<li>hei.ttf：黑体</li>
+<li>song.ttf：宋体</li>
+<li>simkai.ttf：楷体</li>
+<li>arial.ttf：仅支持英文</li>
+默认hei.ttf
+      */
+  FontType?: string
+
+  /**
+   * 字体大小，格式：Npx，N 为数值，不指定则以字幕文件中为准。
+   */
+  FontSize?: string
+
+  /**
+   * 字体颜色，格式：0xRRGGBB，默认值：0xFFFFFF（白色）
+   */
+  FontColor?: string
+
+  /**
+      * 文字透明度，取值范围：(0, 1]
+<li>0：完全透明</li>
+<li>1：完全不透明</li>
+默认值：1。
+      */
+  FontAlpha?: number
+}
 
 /**
  * 直播处理任务信息
