@@ -216,6 +216,15 @@ export interface DescribeLogsRequest {
     Filters?: Array<Filter>;
 }
 /**
+ * StopModelAccelerateTask请求参数结构体
+ */
+export interface StopModelAccelerateTaskRequest {
+    /**
+      * 模型加速任务ID
+      */
+    ModelAccTaskId: string;
+}
+/**
  * DeleteTrainingModelVersion返回参数结构体
  */
 export interface DeleteTrainingModelVersionResponse {
@@ -424,6 +433,87 @@ export interface ModifyServiceGroupWeightsResponse {
     RequestId?: string;
 }
 /**
+ * RestartModelAccelerateTask请求参数结构体
+ */
+export interface RestartModelAccelerateTaskRequest {
+    /**
+      * 模型加速任务ID
+      */
+    ModelAccTaskId: string;
+    /**
+      * 模型加速任务名称
+      */
+    ModelAccTaskName?: string;
+    /**
+      * 模型来源（JOB/COS）
+      */
+    ModelSource?: string;
+    /**
+      * 算法框架（废弃）
+      */
+    AlgorithmFramework?: string;
+    /**
+      * 模型ID
+      */
+    ModelId?: string;
+    /**
+      * 模型名称
+      */
+    ModelName?: string;
+    /**
+      * 模型版本
+      */
+    ModelVersion?: string;
+    /**
+      * 模型输入cos路径
+      */
+    ModelInputPath?: CosPathInfo;
+    /**
+      * 优化级别（NO_LOSS/FP16），默认FP16
+      */
+    OptimizationLevel?: string;
+    /**
+      * input节点个数（废弃）
+      */
+    ModelInputNum?: number;
+    /**
+      * input节点信息（废弃）
+      */
+    ModelInputInfos?: Array<ModelInputInfo>;
+    /**
+      * 模型输出cos路径
+      */
+    ModelOutputPath?: CosPathInfo;
+    /**
+      * 模型格式（TORCH_SCRIPT/DETECTRON2/SAVED_MODEL/FROZEN_GRAPH/MMDETECTION/ONNX/HUGGING_FACE）
+      */
+    ModelFormat?: string;
+    /**
+      * 模型Tensor信息
+      */
+    TensorInfos?: Array<string>;
+    /**
+      * GPU类型（T4/V100），默认T4
+      */
+    GPUType?: string;
+    /**
+      * 模型专业参数
+      */
+    HyperParameter?: HyperParameter;
+    /**
+      * 加速引擎版本
+      */
+    AccEngineVersion?: string;
+    /**
+      * 标签
+      */
+    Tags?: Array<Tag>;
+    /**
+      * SavedModel保存时配置的签名
+      */
+    ModelSignature?: string;
+}
+/**
  * DescribeBillingResourceGroups请求参数结构体
  */
 export interface DescribeBillingResourceGroupsRequest {
@@ -474,6 +564,15 @@ export interface DescribeTrainingFrameworksResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DescribeModelServiceGroup请求参数结构体
+ */
+export interface DescribeModelServiceGroupRequest {
+    /**
+      * 无
+      */
+    ServiceGroupId: string;
 }
 /**
  * 训练指标
@@ -683,6 +782,46 @@ export interface Service {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ScheduledAction: ScheduledAction;
+}
+/**
+ * 模型专业参数
+ */
+export interface HyperParameter {
+    /**
+      * 最大nnz数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MaxNNZ?: string;
+    /**
+      * slot数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SlotNum?: string;
+    /**
+      * gpu cache 使用率
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CpuCachePercentage?: string;
+    /**
+      * cpu cache 使用率
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    GpuCachePercentage?: string;
+    /**
+      * 是否开启分布式模式(true/false)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EnableDistributed?: string;
+    /**
+      * TORCH_SCRIPT、MMDETECTION、DETECTRON2、HUGGINGFACE格式在进行优化时切分子图的最小算子数目，一般无需进行改动，默认为3
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MinBlockSizePt?: string;
+    /**
+      * FROZEN_GRAPH、SAVED_MODEL格式在进行优化时切分子图的最小算子数目，一般无需进行改动，默认为10
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MinBlockSizeTf?: string;
 }
 /**
  * ModifyServiceGroupWeights请求参数结构体
@@ -1289,13 +1428,27 @@ export interface FrameworkVersion {
     Environment?: string;
 }
 /**
- * DescribeModelServiceCallInfo请求参数结构体
+ * DescribeModelAccEngineVersions返回参数结构体
  */
-export interface DescribeModelServiceCallInfoRequest {
+export interface DescribeModelAccEngineVersionsResponse {
     /**
-      * 服务组id
+      * 模型加速版本列表
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    ServiceGroupId: string;
+    ModelAccEngineVersions: Array<ModelAccEngineVersion>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DeleteModelAccelerateTask返回参数结构体
+ */
+export interface DeleteModelAccelerateTaskResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 数据点
@@ -1547,17 +1700,49 @@ export interface DescribeBatchTaskInstancesResponse {
     RequestId?: string;
 }
 /**
- * DescribeBillingSpecs返回参数结构体
+ * DescribeModelServices请求参数结构体
  */
-export interface DescribeBillingSpecsResponse {
+export interface DescribeModelServicesRequest {
     /**
-      * 计费项列表
+      * 偏移量，默认为0
       */
-    Specs: Array<Spec>;
+    Offset?: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 返回数量，默认为20，最大值为20
       */
-    RequestId?: string;
+    Limit?: number;
+    /**
+      * 输出列表的排列顺序。取值范围：ASC：升序排列 DESC：降序排列
+      */
+    Order?: string;
+    /**
+      * 排序的依据字段， 取值范围 "CreateTime" "UpdateTime"
+      */
+    OrderField?: string;
+    /**
+      * 分页参数，支持的分页过滤Name包括：
+["ClusterId", "ServiceId", "ServiceGroupName", "ServiceGroupId","Status","CreatedBy","ModelId"]
+      */
+    Filters?: Array<Filter>;
+    /**
+      * 标签过滤参数
+      */
+    TagFilters?: Array<TagFilter>;
+}
+/**
+ * 模型加速引擎版本
+ */
+export interface ModelAccEngineVersion {
+    /**
+      * 模型格式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ModelFormat: string;
+    /**
+      * 引擎版本信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EngineVersions: Array<EngineVersion>;
 }
 /**
  * 资源配置
@@ -1674,6 +1859,15 @@ export interface Option {
       * 指标值
       */
     Value: number;
+}
+/**
+ * DescribeModelServiceCallInfo请求参数结构体
+ */
+export interface DescribeModelServiceCallInfoRequest {
+    /**
+      * 服务组id
+      */
+    ServiceGroupId: string;
 }
 /**
  * 资源组
@@ -2090,6 +2284,35 @@ export interface DatasetInfo {
     DatasetScope: string;
 }
 /**
+ * DescribeModelAccelerateTask返回参数结构体
+ */
+export interface DescribeModelAccelerateTaskResponse {
+    /**
+      * 模型加速任务详情
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ModelAccelerateTask: ModelAccelerateTask;
+    /**
+      * 模型加速时长，单位s
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ModelAccRuntimeInSecond: number;
+    /**
+      * 模型加速任务开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ModelAccStartTime: string;
+    /**
+      * 模型加速任务结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ModelAccEndTime: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 图像检测参数信息
  */
 export interface DetectionLabelInfo {
@@ -2410,13 +2633,13 @@ export interface DeleteModelServiceRequest {
     ServiceId: string;
 }
 /**
- * DescribeModelServiceGroup请求参数结构体
+ * DeleteModelAccelerateTask请求参数结构体
  */
-export interface DescribeModelServiceGroupRequest {
+export interface DeleteModelAccelerateTaskRequest {
     /**
-      * 无
+      * 模型加速任务ID
       */
-    ServiceGroupId: string;
+    ModelAccTaskId: string;
 }
 /**
  * CreateTrainingTask请求参数结构体
@@ -2575,6 +2798,48 @@ export interface DescribeDatasetsResponse {
     RequestId?: string;
 }
 /**
+ * RestartModelAccelerateTask返回参数结构体
+ */
+export interface RestartModelAccelerateTaskResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * CreateBatchModelAccTasks请求参数结构体
+ */
+export interface CreateBatchModelAccTasksRequest {
+    /**
+      * 模型加速任务名称
+      */
+    ModelAccTaskName: string;
+    /**
+      * 批量模型加速任务
+      */
+    BatchModelAccTasks: Array<BatchModelAccTask>;
+    /**
+      * 模型加速保存路径
+      */
+    ModelOutputPath: CosPathInfo;
+    /**
+      * 标签
+      */
+    Tags?: Array<Tag>;
+    /**
+      * 优化级别(NO_LOSS/FP16)，默认FP16
+      */
+    OptimizationLevel?: string;
+    /**
+      * GPU卡类型(T4/V100)，默认T4
+      */
+    GPUType?: string;
+    /**
+      * 专业参数设置
+      */
+    HyperParameter?: HyperParameter;
+}
+/**
  * DescribeBillingSpecsPrice请求参数结构体
  */
 export interface DescribeBillingSpecsPriceRequest {
@@ -2582,6 +2847,19 @@ export interface DescribeBillingSpecsPriceRequest {
       * 询价参数，支持批量询价
       */
     SpecsParam: Array<SpecUnit>;
+}
+/**
+ * 服务的权重
+ */
+export interface WeightEntry {
+    /**
+      * 服务id
+      */
+    ServiceId: string;
+    /**
+      * 流量权重值，同 ServiceGroup 下 总和应为 100
+      */
+    Weight: number;
 }
 /**
  * 资源组节点信息
@@ -2650,34 +2928,17 @@ DISABLE_NOTIFY_AND_MANUAL_RENEW：手动续费(取消自动续费)且到期不�
     SpecAlias: string;
 }
 /**
- * DescribeModelServices请求参数结构体
+ * DescribeBillingSpecs返回参数结构体
  */
-export interface DescribeModelServicesRequest {
+export interface DescribeBillingSpecsResponse {
     /**
-      * 偏移量，默认为0
+      * 计费项列表
       */
-    Offset?: number;
+    Specs: Array<Spec>;
     /**
-      * 返回数量，默认为20，最大值为20
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Limit?: number;
-    /**
-      * 输出列表的排列顺序。取值范围：ASC：升序排列 DESC：降序排列
-      */
-    Order?: string;
-    /**
-      * 排序的依据字段， 取值范围 "CreateTime" "UpdateTime"
-      */
-    OrderField?: string;
-    /**
-      * 分页参数，支持的分页过滤Name包括：
-["ClusterId", "ServiceId", "ServiceGroupName", "ServiceGroupId","Status","CreatedBy","ModelId"]
-      */
-    Filters?: Array<Filter>;
-    /**
-      * 标签过滤参数
-      */
-    TagFilters?: Array<TagFilter>;
+    RequestId?: string;
 }
 /**
  * DeleteTrainingTask返回参数结构体
@@ -3080,6 +3341,47 @@ export interface DescribeModelServiceHistoryResponse {
     RequestId?: string;
 }
 /**
+ * 批量模型加速任务
+ */
+export interface BatchModelAccTask {
+    /**
+      * 模型ID
+      */
+    ModelId: string;
+    /**
+      * 模型版本
+      */
+    ModelVersion: string;
+    /**
+      * 模型来源(JOB/COS)
+      */
+    ModelSource: string;
+    /**
+      * 模型格式(TORCH_SCRIPT/DETECTRON2/SAVED_MODEL/FROZEN_GRAPH/MMDETECTION/ONNX/HUGGING_FACE)
+      */
+    ModelFormat: string;
+    /**
+      * 模型Tensor信息
+      */
+    TensorInfos: Array<string>;
+    /**
+      * 加速引擎版本
+      */
+    AccEngineVersion: string;
+    /**
+      * 模型输入cos路径
+      */
+    ModelInputPath: CosPathInfo;
+    /**
+      * 模型名称
+      */
+    ModelName?: string;
+    /**
+      * SavedModel保存时配置的签名
+      */
+    ModelSignature?: string;
+}
+/**
  * 过滤器
  */
 export interface Filter {
@@ -3108,6 +3410,21 @@ export interface DeleteBatchTaskResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 引擎版本
+ */
+export interface EngineVersion {
+    /**
+      * 引擎版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Version: string;
+    /**
+      * 运行镜像
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Image: string;
 }
 /**
  * DescribeBatchTasks请求参数结构体
@@ -3461,6 +3778,25 @@ export interface LogIdentity {
     Timestamp: string;
 }
 /**
+ * StopModelAccelerateTask返回参数结构体
+ */
+export interface StopModelAccelerateTaskResponse {
+    /**
+      * 模型加速任务ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ModelAccTaskId: string;
+    /**
+      * 异步任务ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AsyncTaskId: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeAPIConfigs返回参数结构体
  */
 export interface DescribeAPIConfigsResponse {
@@ -3497,6 +3833,15 @@ export interface DescribeDatasetDetailStructuredRequest {
     Limit?: number;
 }
 /**
+ * DescribeModelAccelerateTask请求参数结构体
+ */
+export interface DescribeModelAccelerateTaskRequest {
+    /**
+      * 模型加速任务ID
+      */
+    ModelAccTaskId: string;
+}
+/**
  * 图片分割参数信息
  */
 export interface SegmentationInfo {
@@ -3520,6 +3865,25 @@ export interface SegmentationInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Color: string;
+}
+/**
+ * DescribeModelAccelerateTasks返回参数结构体
+ */
+export interface DescribeModelAccelerateTasksResponse {
+    /**
+      * 模型加速任务列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ModelAccelerateTasks: Array<ModelAccelerateTask>;
+    /**
+      * 任务总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TotalCount: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DeleteDataset返回参数结构体
@@ -3553,6 +3917,20 @@ export interface HorizontalPodAutoscaler {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     HpaMetrics: Array<Option>;
+}
+/**
+ * CreateBatchModelAccTasks返回参数结构体
+ */
+export interface CreateBatchModelAccTasksResponse {
+    /**
+      * 模型优化任务ID列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ModelAccTaskIds: Array<string>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 自定义训练指标数据点
@@ -3846,6 +4224,19 @@ export interface DescribeLogsResponse {
     RequestId?: string;
 }
 /**
+ * CreateOptimizedModel请求参数结构体
+ */
+export interface CreateOptimizedModelRequest {
+    /**
+      * 模型加速任务ID
+      */
+    ModelAccTaskId: string;
+    /**
+      * 标签
+      */
+    Tags?: Array<Tag>;
+}
+/**
  * DeleteModelServiceGroup请求参数结构体
  */
 export interface DeleteModelServiceGroupRequest {
@@ -4128,6 +4519,23 @@ export interface DescribeTrainingModelVersionsResponse {
     RequestId?: string;
 }
 /**
+ * 模型输入信息
+ */
+export interface ModelInputInfo {
+    /**
+      * input数据类型
+FIXED：固定
+RANGE：浮动
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ModelInputType: string;
+    /**
+      * input数据尺寸
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ModelInputDimension: Array<string>;
+}
+/**
  * DeleteDataset请求参数结构体
  */
 export interface DeleteDatasetRequest {
@@ -4198,17 +4606,34 @@ export interface DescribeTrainingModelVersionRequest {
     TrainingModelVersionId: string;
 }
 /**
- * 服务的权重
+ * DescribeModelAccelerateTasks请求参数结构体
  */
-export interface WeightEntry {
+export interface DescribeModelAccelerateTasksRequest {
     /**
-      * 服务id
+      * 过滤器
+ModelAccTaskName 任务名称
       */
-    ServiceId: string;
+    Filters?: Array<Filter>;
     /**
-      * 流量权重值，同 ServiceGroup 下 总和应为 100
+      * 排序字段，默认CreateTime
       */
-    Weight: number;
+    OrderField?: string;
+    /**
+      * 排序方式：ASC/DESC，默认DESC
+      */
+    Order?: string;
+    /**
+      * 偏移量
+      */
+    Offset?: number;
+    /**
+      * 返回记录条数，默认20
+      */
+    Limit?: number;
+    /**
+      * 标签过滤
+      */
+    TagFilters?: Array<TagFilter>;
 }
 /**
  * PushTrainingMetrics返回参数结构体
@@ -4223,6 +4648,25 @@ export interface PushTrainingMetricsResponse {
  * StopTrainingTask返回参数结构体
  */
 export interface StopTrainingTaskResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * CreateOptimizedModel返回参数结构体
+ */
+export interface CreateOptimizedModelResponse {
+    /**
+      * 模型ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ModelId: string;
+    /**
+      * 模型版本ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ModelVersionId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4276,6 +4720,146 @@ export interface DescribeTrainingTaskPodsResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 模型加速任务
+ */
+export interface ModelAccelerateTask {
+    /**
+      * 模型加速任务ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ModelAccTaskId: string;
+    /**
+      * 模型加速任务名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ModelAccTaskName: string;
+    /**
+      * 模型ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ModelId: string;
+    /**
+      * 模型名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ModelName: string;
+    /**
+      * 模型版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ModelVersion: string;
+    /**
+      * 模型来源
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ModelSource: string;
+    /**
+      * 优化级别
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OptimizationLevel: string;
+    /**
+      * 任务状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TaskStatus: string;
+    /**
+      * input节点个数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ModelInputNum: number;
+    /**
+      * input节点信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ModelInputInfos: Array<ModelInputInfo>;
+    /**
+      * GPU型号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    GPUType: string;
+    /**
+      * 计费模式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ChargeType: string;
+    /**
+      * 加速比
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Speedup: string;
+    /**
+      * 模型输入cos路径
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ModelInputPath: CosPathInfo;
+    /**
+      * 模型输出cos路径
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ModelOutputPath: CosPathInfo;
+    /**
+      * 错误信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ErrorMsg: string;
+    /**
+      * 算法框架
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AlgorithmFramework: string;
+    /**
+      * 排队个数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    WaitNumber: number;
+    /**
+      * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreateTime: string;
+    /**
+      * 任务进度
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TaskProgress: number;
+    /**
+      * 模型格式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ModelFormat: string;
+    /**
+      * 模型Tensor信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TensorInfos: Array<string>;
+    /**
+      * 模型专业参数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    HyperParameter: HyperParameter;
+    /**
+      * 加速引擎版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AccEngineVersion: string;
+    /**
+      * 标签
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Tags: Array<Tag>;
+    /**
+      * 优化模型是否已保存到模型仓库
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IsSaved: boolean;
+    /**
+      * SAVED_MODEL保存时配置的签名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ModelSignature: string;
 }
 /**
  * 环境变量
@@ -4474,6 +5058,10 @@ export interface DeleteTrainingModelVersionRequest {
       */
     EnableDeleteCos?: boolean;
 }
+/**
+ * DescribeModelAccEngineVersions请求参数结构体
+ */
+export declare type DescribeModelAccEngineVersionsRequest = null;
 /**
  * DescribeBillingSpecsPrice返回参数结构体
  */

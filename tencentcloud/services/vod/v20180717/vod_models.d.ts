@@ -9026,7 +9026,7 @@ export interface PullUploadRequest {
       */
     MediaName?: string;
     /**
-      * 要拉取的视频封面 URL。仅支持 gif、jpeg、png 三种图片格式。
+      * 要拉取的视频封面 URL。支持的文件格式：gif、jpeg（jpg）、png。
       */
     CoverUrl?: string;
     /**

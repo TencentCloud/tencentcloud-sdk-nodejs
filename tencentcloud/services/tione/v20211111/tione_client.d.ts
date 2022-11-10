@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CreateModelServiceRequest, DescribeLogsRequest, DeleteTrainingModelVersionResponse, StartTrainingTaskRequest, DescribeDatasetDetailStructuredResponse, ModifyServiceGroupWeightsResponse, DescribeBillingResourceGroupsRequest, DescribeTrainingFrameworksResponse, DescribeTrainingModelVersionsRequest, CreateDatasetResponse, ModifyServiceGroupWeightsRequest, DescribeTrainingTasksRequest, DescribeBatchTaskRequest, DescribeDatasetDetailUnstructuredRequest, StopBatchTaskResponse, DescribeBillingResourceGroupsResponse, DescribeTrainingMetricsRequest, DescribeTrainingTaskPodsRequest, CreateBatchTaskRequest, DescribeLatestTrainingMetricsResponse, DescribeDatasetDetailUnstructuredResponse, StopBatchTaskRequest, DescribeModelServiceCallInfoRequest, CreateTrainingModelRequest, DescribeAPIConfigsRequest, DescribeBillingSpecsRequest, DeleteBatchTaskRequest, DescribeTrainingModelsResponse, DescribeBatchTaskInstancesResponse, DescribeBillingSpecsResponse, DescribeBatchTaskInstancesRequest, DescribeModelServiceHistoryRequest, DescribeDatasetsRequest, DeleteTrainingModelResponse, DescribeInferTemplatesResponse, DescribeModelServiceGroupsResponse, DescribeInferTemplatesRequest, DeleteModelServiceGroupResponse, DescribeTrainingFrameworksRequest, DescribeBatchTasksResponse, DescribeModelServiceHotUpdatedResponse, DescribeModelServiceGroupsRequest, DescribeModelServiceRequest, CreateTrainingTaskResponse, DeleteModelServiceRequest, DescribeModelServiceGroupRequest, CreateTrainingTaskRequest, DescribeModelServiceResponse, DescribeDatasetsResponse, DescribeBillingSpecsPriceRequest, DescribeModelServicesRequest, DeleteTrainingTaskResponse, CreateBatchTaskResponse, DescribeTrainingModelsRequest, DescribeLatestTrainingMetricsRequest, DescribeModelServiceCallInfoResponse, DeleteTrainingTaskRequest, DescribeModelServiceHistoryResponse, DeleteBatchTaskResponse, DescribeBatchTasksRequest, CreateDatasetRequest, CreateModelServiceResponse, DescribeModelServiceGroupResponse, CreateTrainingModelResponse, DescribeAPIConfigsResponse, DescribeDatasetDetailStructuredRequest, DeleteDatasetResponse, DescribeTrainingTasksResponse, DescribeLogsResponse, DeleteModelServiceGroupRequest, PushTrainingMetricsRequest, DescribeTrainingTaskRequest, DescribeTrainingModelVersionsResponse, DeleteDatasetRequest, DescribeTrainingModelVersionRequest, PushTrainingMetricsResponse, StopTrainingTaskResponse, DescribeTrainingMetricsResponse, DescribeTrainingTaskPodsResponse, DeleteTrainingModelRequest, DescribeModelServiceHotUpdatedRequest, DescribeTrainingTaskResponse, DescribeBatchTaskResponse, DeleteModelServiceResponse, DeleteTrainingModelVersionRequest, DescribeBillingSpecsPriceResponse, DescribeTrainingModelVersionResponse, DescribeModelServicesResponse, StopTrainingTaskRequest, StartTrainingTaskResponse } from "./tione_models";
+import { CreateModelServiceRequest, DescribeLogsRequest, StopModelAccelerateTaskRequest, DeleteTrainingModelVersionResponse, StartTrainingTaskRequest, DescribeDatasetDetailStructuredResponse, ModifyServiceGroupWeightsResponse, RestartModelAccelerateTaskRequest, DescribeBillingResourceGroupsRequest, DescribeTrainingFrameworksResponse, DescribeModelServiceGroupRequest, DescribeTrainingModelVersionsRequest, CreateDatasetResponse, ModifyServiceGroupWeightsRequest, DescribeTrainingTasksRequest, DescribeBatchTaskRequest, DescribeDatasetDetailUnstructuredRequest, StopBatchTaskResponse, DescribeBillingResourceGroupsResponse, DescribeTrainingMetricsRequest, DescribeTrainingTaskPodsRequest, CreateBatchTaskRequest, DescribeLatestTrainingMetricsResponse, DescribeDatasetDetailUnstructuredResponse, StopBatchTaskRequest, DescribeModelAccEngineVersionsResponse, DeleteModelAccelerateTaskResponse, CreateTrainingModelRequest, DescribeAPIConfigsRequest, DescribeBillingSpecsRequest, DeleteBatchTaskRequest, DescribeTrainingModelsResponse, DescribeBatchTaskInstancesResponse, DescribeModelServicesRequest, DescribeModelServiceCallInfoRequest, DescribeBatchTaskInstancesRequest, DescribeModelServiceHistoryRequest, DescribeDatasetsRequest, DeleteTrainingModelResponse, DescribeInferTemplatesResponse, DescribeModelServiceGroupsResponse, DescribeInferTemplatesRequest, DeleteModelServiceGroupResponse, DescribeTrainingFrameworksRequest, DescribeBatchTasksResponse, DescribeModelServiceHotUpdatedResponse, DescribeModelAccelerateTaskResponse, DescribeModelServiceGroupsRequest, DescribeModelServiceRequest, CreateTrainingTaskResponse, DeleteModelServiceRequest, DeleteModelAccelerateTaskRequest, CreateTrainingTaskRequest, DescribeModelServiceResponse, DescribeDatasetsResponse, RestartModelAccelerateTaskResponse, CreateBatchModelAccTasksRequest, DescribeBillingSpecsPriceRequest, DescribeBillingSpecsResponse, DeleteTrainingTaskResponse, CreateBatchTaskResponse, DescribeTrainingModelsRequest, DescribeLatestTrainingMetricsRequest, DescribeModelServiceCallInfoResponse, DeleteTrainingTaskRequest, DescribeModelServiceHistoryResponse, DeleteBatchTaskResponse, DescribeBatchTasksRequest, CreateDatasetRequest, CreateModelServiceResponse, DescribeModelServiceGroupResponse, CreateTrainingModelResponse, StopModelAccelerateTaskResponse, DescribeAPIConfigsResponse, DescribeDatasetDetailStructuredRequest, DescribeModelAccelerateTaskRequest, DescribeModelAccelerateTasksResponse, DeleteDatasetResponse, CreateBatchModelAccTasksResponse, DescribeTrainingTasksResponse, DescribeLogsResponse, CreateOptimizedModelRequest, DeleteModelServiceGroupRequest, PushTrainingMetricsRequest, DescribeTrainingTaskRequest, DescribeTrainingModelVersionsResponse, DeleteDatasetRequest, DescribeTrainingModelVersionRequest, DescribeModelAccelerateTasksRequest, PushTrainingMetricsResponse, StopTrainingTaskResponse, CreateOptimizedModelResponse, DescribeTrainingMetricsResponse, DescribeTrainingTaskPodsResponse, DeleteTrainingModelRequest, DescribeModelServiceHotUpdatedRequest, DescribeTrainingTaskResponse, DescribeBatchTaskResponse, DeleteModelServiceResponse, DeleteTrainingModelVersionRequest, DescribeModelAccEngineVersionsRequest, DescribeBillingSpecsPriceResponse, DescribeTrainingModelVersionResponse, DescribeModelServicesResponse, StopTrainingTaskRequest, StartTrainingTaskResponse } from "./tione_models";
 /**
  * tione client
  * @class
@@ -32,9 +32,17 @@ export declare class Client extends AbstractClient {
      */
     DescribeModelServiceCallInfo(req: DescribeModelServiceCallInfoRequest, cb?: (error: string, rep: DescribeModelServiceCallInfoResponse) => void): Promise<DescribeModelServiceCallInfoResponse>;
     /**
+     * 保存优化模型
+     */
+    CreateOptimizedModel(req: CreateOptimizedModelRequest, cb?: (error: string, rep: CreateOptimizedModelResponse) => void): Promise<CreateOptimizedModelResponse>;
+    /**
      * 训练任务列表
      */
     DescribeTrainingTasks(req: DescribeTrainingTasksRequest, cb?: (error: string, rep: DescribeTrainingTasksResponse) => void): Promise<DescribeTrainingTasksResponse>;
+    /**
+     * 查询单个服务组
+     */
+    DescribeModelServiceGroup(req: DescribeModelServiceGroupRequest, cb?: (error: string, rep: DescribeModelServiceGroupResponse) => void): Promise<DescribeModelServiceGroupResponse>;
     /**
      * 查询单个服务
      */
@@ -72,6 +80,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeModelServiceHotUpdated(req: DescribeModelServiceHotUpdatedRequest, cb?: (error: string, rep: DescribeModelServiceHotUpdatedResponse) => void): Promise<DescribeModelServiceHotUpdatedResponse>;
     /**
+     * 查询模型优化任务详情
+     */
+    DescribeModelAccelerateTask(req: DescribeModelAccelerateTaskRequest, cb?: (error: string, rep: DescribeModelAccelerateTaskResponse) => void): Promise<DescribeModelAccelerateTaskResponse>;
+    /**
      * 查询训练自定义指标
      */
     DescribeTrainingMetrics(req: DescribeTrainingMetricsRequest, cb?: (error: string, rep: DescribeTrainingMetricsResponse) => void): Promise<DescribeTrainingMetricsResponse>;
@@ -92,6 +104,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeBatchTaskInstances(req: DescribeBatchTaskInstancesRequest, cb?: (error: string, rep: DescribeBatchTaskInstancesResponse) => void): Promise<DescribeBatchTaskInstancesResponse>;
     /**
+     * 查询模型加速引擎版本列表
+     */
+    DescribeModelAccEngineVersions(req?: DescribeModelAccEngineVersionsRequest, cb?: (error: string, rep: DescribeModelAccEngineVersionsResponse) => void): Promise<DescribeModelAccEngineVersionsResponse>;
+    /**
      * 停止模型训练任务
      */
     StopTrainingTask(req: StopTrainingTaskRequest, cb?: (error: string, rep: StopTrainingTaskResponse) => void): Promise<StopTrainingTaskResponse>;
@@ -100,9 +116,9 @@ export declare class Client extends AbstractClient {
      */
     StartTrainingTask(req: StartTrainingTaskRequest, cb?: (error: string, rep: StartTrainingTaskResponse) => void): Promise<StartTrainingTaskResponse>;
     /**
-     * 查询单个服务组
+     * 删除模型加速任务
      */
-    DescribeModelServiceGroup(req: DescribeModelServiceGroupRequest, cb?: (error: string, rep: DescribeModelServiceGroupResponse) => void): Promise<DescribeModelServiceGroupResponse>;
+    DeleteModelAccelerateTask(req: DeleteModelAccelerateTaskRequest, cb?: (error: string, rep: DeleteModelAccelerateTaskResponse) => void): Promise<DeleteModelAccelerateTaskResponse>;
     /**
      * 列举API
      */
@@ -124,13 +140,17 @@ export declare class Client extends AbstractClient {
      */
     DescribeTrainingModelVersions(req: DescribeTrainingModelVersionsRequest, cb?: (error: string, rep: DescribeTrainingModelVersionsResponse) => void): Promise<DescribeTrainingModelVersionsResponse>;
     /**
+     * 查询模型加速任务列表
+     */
+    DescribeModelAccelerateTasks(req: DescribeModelAccelerateTasksRequest, cb?: (error: string, rep: DescribeModelAccelerateTasksResponse) => void): Promise<DescribeModelAccelerateTasksResponse>;
+    /**
      * 用于创建、发布一个新的模型服务
      */
     CreateModelService(req: CreateModelServiceRequest, cb?: (error: string, rep: CreateModelServiceResponse) => void): Promise<CreateModelServiceResponse>;
     /**
-     * 查询结构化数据集详情
+     * 查询数据集列表
      */
-    DescribeDatasetDetailStructured(req: DescribeDatasetDetailStructuredRequest, cb?: (error: string, rep: DescribeDatasetDetailStructuredResponse) => void): Promise<DescribeDatasetDetailStructuredResponse>;
+    DescribeDatasets(req: DescribeDatasetsRequest, cb?: (error: string, rep: DescribeDatasetsResponse) => void): Promise<DescribeDatasetsResponse>;
     /**
      * 获取训练、推理、Notebook服务的日志
      */
@@ -140,9 +160,13 @@ export declare class Client extends AbstractClient {
      */
     DeleteModelService(req: DeleteModelServiceRequest, cb?: (error: string, rep: DeleteModelServiceResponse) => void): Promise<DeleteModelServiceResponse>;
     /**
-     * 查询数据集列表
+     * 查询结构化数据集详情
      */
-    DescribeDatasets(req: DescribeDatasetsRequest, cb?: (error: string, rep: DescribeDatasetsResponse) => void): Promise<DescribeDatasetsResponse>;
+    DescribeDatasetDetailStructured(req: DescribeDatasetDetailStructuredRequest, cb?: (error: string, rep: DescribeDatasetDetailStructuredResponse) => void): Promise<DescribeDatasetDetailStructuredResponse>;
+    /**
+     * 重启模型加速任务
+     */
+    RestartModelAccelerateTask(req: RestartModelAccelerateTaskRequest, cb?: (error: string, rep: RestartModelAccelerateTaskResponse) => void): Promise<RestartModelAccelerateTaskResponse>;
     /**
      * 查询多个服务
      */
@@ -159,6 +183,10 @@ export declare class Client extends AbstractClient {
      * 删除训练任务
      */
     DeleteTrainingTask(req: DeleteTrainingTaskRequest, cb?: (error: string, rep: DeleteTrainingTaskResponse) => void): Promise<DeleteTrainingTaskResponse>;
+    /**
+     * 批量创建模型加速任务
+     */
+    CreateBatchModelAccTasks(req: CreateBatchModelAccTasksRequest, cb?: (error: string, rep: CreateBatchModelAccTasksResponse) => void): Promise<CreateBatchModelAccTasksResponse>;
     /**
      * 查询跑批任务
      */
@@ -187,4 +215,8 @@ export declare class Client extends AbstractClient {
      * 列举在线推理服务组
      */
     DescribeModelServiceGroups(req: DescribeModelServiceGroupsRequest, cb?: (error: string, rep: DescribeModelServiceGroupsResponse) => void): Promise<DescribeModelServiceGroupsResponse>;
+    /**
+     * 停止模型加速任务
+     */
+    StopModelAccelerateTask(req: StopModelAccelerateTaskRequest, cb?: (error: string, rep: StopModelAccelerateTaskResponse) => void): Promise<StopModelAccelerateTaskResponse>;
 }

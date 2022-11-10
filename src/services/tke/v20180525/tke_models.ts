@@ -9396,7 +9396,7 @@ export interface DeleteClusterEndpointVipResponse {
  */
 export interface ClusterBasicSettings {
   /**
-   * 集群操作系统，支持设置公共镜像(字段传相应镜像ID)和自定义镜像(字段传相应镜像Name)，详情参考：https://cloud.tencent.com/document/product/457/68289
+   * 集群操作系统，支持设置公共镜像(字段传相应镜像Name)和自定义镜像(字段传相应镜像ID)，详情参考：https://cloud.tencent.com/document/product/457/68289
    */
   ClusterOs?: string
 
