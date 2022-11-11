@@ -28,16 +28,6 @@ it("faceid.v20180301.GetLiveCode", async function () {
     }
 })
 
-it("faceid.v20180301.VideoLivenessCompare", async function () {
-    try {
-       const data = await client.VideoLivenessCompare({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("faceid.v20180301.GetActionSequence", async function () {
     try {
        const data = await client.GetActionSequence({})
@@ -71,16 +61,6 @@ it("faceid.v20180301.CheckIdCardInformation", async function () {
 it("faceid.v20180301.CheckEidTokenStatus", async function () {
     try {
        const data = await client.CheckEidTokenStatus({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("faceid.v20180301.CreateUploadUrl", async function () {
-    try {
-       const data = await client.CreateUploadUrl({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -138,16 +118,6 @@ it("faceid.v20180301.CheckPhoneAndName", async function () {
     }
 })
 
-it("faceid.v20180301.ApplyLivenessToken", async function () {
-    try {
-       const data = await client.ApplyLivenessToken({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("faceid.v20180301.BankCardVerification", async function () {
     try {
        const data = await client.BankCardVerification({})
@@ -158,39 +128,9 @@ it("faceid.v20180301.BankCardVerification", async function () {
     }
 })
 
-it("faceid.v20180301.ApplySdkVerificationToken", async function () {
-    try {
-       const data = await client.ApplySdkVerificationToken({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("faceid.v20180301.LivenessCompare", async function () {
     try {
        const data = await client.LivenessCompare({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("faceid.v20180301.GenerateReflectSequence", async function () {
-    try {
-       const data = await client.GenerateReflectSequence({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("faceid.v20180301.GetSdkVerificationResult", async function () {
-    try {
-       const data = await client.GetSdkVerificationResult({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -248,9 +188,9 @@ it("faceid.v20180301.GetEidToken", async function () {
     }
 })
 
-it("faceid.v20180301.GetWebVerificationResult", async function () {
+it("faceid.v20180301.PhoneVerification", async function () {
     try {
-       const data = await client.GetWebVerificationResult({})
+       const data = await client.PhoneVerification({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -281,16 +221,6 @@ it("faceid.v20180301.PhoneVerificationCMCC", async function () {
 it("faceid.v20180301.MinorsVerification", async function () {
     try {
        const data = await client.MinorsVerification({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("faceid.v20180301.DetectReflectLivenessAndCompare", async function () {
-    try {
-       const data = await client.DetectReflectLivenessAndCompare({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -398,16 +328,6 @@ it("faceid.v20180301.CheckBankCardInformation", async function () {
     }
 })
 
-it("faceid.v20180301.ApplyWebVerificationToken", async function () {
-    try {
-       const data = await client.ApplyWebVerificationToken({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("faceid.v20180301.GetDetectInfo", async function () {
     try {
        const data = await client.GetDetectInfo({})
@@ -428,16 +348,6 @@ it("faceid.v20180301.BankCard2EVerification", async function () {
     }
 })
 
-it("faceid.v20180301.PhoneVerification", async function () {
-    try {
-       const data = await client.PhoneVerification({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("faceid.v20180301.PhoneVerificationCTCC", async function () {
     try {
        const data = await client.PhoneVerificationCTCC({})
@@ -451,16 +361,6 @@ it("faceid.v20180301.PhoneVerificationCTCC", async function () {
 it("faceid.v20180301.GetRealNameAuthResult", async function () {
     try {
        const data = await client.GetRealNameAuthResult({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("faceid.v20180301.GetLivenessResult", async function () {
-    try {
-       const data = await client.GetLivenessResult({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

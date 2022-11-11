@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DeleteCfsFileSystemResponse, DescribeCfsFileSystemsRequest, DeleteMountTargetRequest, CreateCfsRuleRequest, DescribeAvailableZoneInfoResponse, UpdateCfsFileSystemNameRequest, DeleteCfsSnapshotResponse, DescribeCfsPGroupsResponse, DescribeCfsFileSystemClientsResponse, DescribeSnapshotOperationLogsResponse, UpdateCfsRuleRequest, DeleteAutoSnapshotPolicyResponse, CreateCfsSnapshotRequest, DescribeSnapshotOperationLogsRequest, DeleteCfsRuleResponse, DescribeCfsSnapshotOverviewResponse, DeleteCfsRuleRequest, DeleteMountTargetResponse, UpdateCfsPGroupRequest, UpdateCfsRuleResponse, DescribeCfsFileSystemsResponse, DescribeAutoSnapshotPoliciesResponse, CreateCfsFileSystemResponse, DescribeMountTargetsResponse, BindAutoSnapshotPolicyRequest, DescribeCfsFileSystemClientsRequest, DeleteCfsSnapshotRequest, DescribeCfsPGroupsRequest, CreateCfsPGroupRequest, DeleteCfsPGroupResponse, DescribeCfsSnapshotsResponse, DescribeAutoSnapshotPoliciesRequest, DeleteCfsFileSystemRequest, UpdateCfsSnapshotAttributeRequest, CreateCfsFileSystemRequest, DescribeMountTargetsRequest, CreateCfsPGroupResponse, UpdateCfsFileSystemPGroupRequest, UpdateCfsFileSystemNameResponse, DescribeCfsServiceStatusRequest, UpdateCfsSnapshotAttributeResponse, UnbindAutoSnapshotPolicyRequest, SignUpCfsServiceResponse, DescribeCfsServiceStatusResponse, CreateCfsRuleResponse, CreateAutoSnapshotPolicyResponse, UpdateCfsFileSystemPGroupResponse, DescribeCfsRulesRequest, BindAutoSnapshotPolicyResponse, DescribeCfsSnapshotsRequest, UpdateCfsFileSystemSizeLimitResponse, DeleteCfsPGroupRequest, UpdateAutoSnapshotPolicyRequest, DescribeCfsSnapshotOverviewRequest, UnbindAutoSnapshotPolicyResponse, UpdateCfsFileSystemSizeLimitRequest, DescribeAvailableZoneInfoRequest, UpdateCfsPGroupResponse, DescribeCfsRulesResponse, SignUpCfsServiceRequest, DeleteAutoSnapshotPolicyRequest, CreateAutoSnapshotPolicyRequest, UpdateAutoSnapshotPolicyResponse, CreateCfsSnapshotResponse } from "./cfs_models";
+import { DescribeCfsPGroupsResponse, DescribeMountTargetsResponse, DescribeSnapshotOperationLogsRequest, DescribeCfsFileSystemsResponse, CreateCfsFileSystemResponse, BindAutoSnapshotPolicyRequest, CreateCfsPGroupRequest, DescribeAutoSnapshotPoliciesRequest, DescribeAvailableZoneInfoRequest, DescribeMountTargetsRequest, BindAutoSnapshotPolicyResponse, SignUpCfsServiceRequest, SignUpCfsServiceResponse, DescribeCfsRulesRequest, DeleteCfsPGroupRequest, UpdateCfsPGroupResponse, DeleteAutoSnapshotPolicyRequest, DeleteCfsFileSystemResponse, UpdateCfsRuleRequest, DeleteUserQuotaRequest, DescribeAvailableZoneInfoResponse, DeleteCfsSnapshotResponse, DescribeCfsFileSystemClientsResponse, DeleteMountTargetResponse, CreateCfsSnapshotRequest, DeleteCfsRuleRequest, DescribeCfsRulesResponse, DescribeSnapshotOperationLogsResponse, UpdateCfsFileSystemPGroupResponse, DeleteCfsFileSystemRequest, CreateCfsPGroupResponse, DescribeCfsServiceStatusRequest, DeleteUserQuotaResponse, SetUserQuotaRequest, CreateAutoSnapshotPolicyResponse, UpdateCfsSnapshotAttributeRequest, DeleteMountTargetRequest, CreateCfsRuleRequest, UpdateCfsFileSystemNameRequest, DescribeUserQuotaRequest, UpdateCfsFileSystemNameResponse, DescribeCfsSnapshotOverviewResponse, DeleteCfsSnapshotRequest, DescribeCfsFileSystemClientsRequest, DescribeCfsFileSystemsRequest, CreateCfsFileSystemRequest, UnbindAutoSnapshotPolicyRequest, UnbindAutoSnapshotPolicyResponse, DescribeCfsServiceStatusResponse, DescribeCfsSnapshotsRequest, UpdateCfsFileSystemSizeLimitResponse, UpdateAutoSnapshotPolicyRequest, UpdateCfsFileSystemSizeLimitRequest, UpdateCfsRuleResponse, UpdateCfsPGroupRequest, UpdateAutoSnapshotPolicyResponse, CreateCfsSnapshotResponse, UpdateCfsFileSystemPGroupRequest, DeleteAutoSnapshotPolicyResponse, DeleteCfsRuleResponse, UpdateCfsSnapshotAttributeResponse, SetUserQuotaResponse, DescribeCfsPGroupsRequest, DeleteCfsPGroupResponse, DescribeUserQuotaResponse, CreateCfsRuleResponse, DescribeCfsSnapshotsResponse, DescribeAutoSnapshotPoliciesResponse, DescribeCfsSnapshotOverviewRequest, CreateAutoSnapshotPolicyRequest } from "./cfs_models";
 /**
  * cfs client
  * @class
@@ -28,13 +28,17 @@ export declare class Client extends AbstractClient {
      */
     DescribeCfsPGroups(req?: DescribeCfsPGroupsRequest, cb?: (error: string, rep: DescribeCfsPGroupsResponse) => void): Promise<DescribeCfsPGroupsResponse>;
     /**
+     * 设置文件系统配额，提供UID/GID的配额设置的接口
+     */
+    SetUserQuota(req: SetUserQuotaRequest, cb?: (error: string, rep: SetUserQuotaResponse) => void): Promise<SetUserQuotaResponse>;
+    /**
      * 查询文件系统快照定期策略列表信息
      */
     DescribeAutoSnapshotPolicies(req: DescribeAutoSnapshotPoliciesRequest, cb?: (error: string, rep: DescribeAutoSnapshotPoliciesResponse) => void): Promise<DescribeAutoSnapshotPoliciesResponse>;
     /**
-     * 文件系统绑定快照策略，可以同时绑定多个fs，一个fs 只能跟一个策略绑定
+     * 本接口（DescribeMountTargets）用于查询文件系统挂载点信息
      */
-    BindAutoSnapshotPolicy(req: BindAutoSnapshotPolicyRequest, cb?: (error: string, rep: BindAutoSnapshotPolicyResponse) => void): Promise<BindAutoSnapshotPolicyResponse>;
+    DescribeMountTargets(req: DescribeMountTargetsRequest, cb?: (error: string, rep: DescribeMountTargetsResponse) => void): Promise<DescribeMountTargetsResponse>;
     /**
      * 本接口（DeleteCfsPGroup）用于删除权限组。
      */
@@ -60,6 +64,10 @@ export declare class Client extends AbstractClient {
      */
     UpdateCfsFileSystemSizeLimit(req: UpdateCfsFileSystemSizeLimitRequest, cb?: (error: string, rep: UpdateCfsFileSystemSizeLimitResponse) => void): Promise<UpdateCfsFileSystemSizeLimitResponse>;
     /**
+     * 创建定期快照策略
+     */
+    CreateAutoSnapshotPolicy(req: CreateAutoSnapshotPolicyRequest, cb?: (error: string, rep: CreateAutoSnapshotPolicyResponse) => void): Promise<CreateAutoSnapshotPolicyResponse>;
+    /**
      * 用于删除文件系统
      */
     DeleteCfsFileSystem(req: DeleteCfsFileSystemRequest, cb?: (error: string, rep: DeleteCfsFileSystemResponse) => void): Promise<DeleteCfsFileSystemResponse>;
@@ -76,6 +84,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeCfsSnapshotOverview(req?: DescribeCfsSnapshotOverviewRequest, cb?: (error: string, rep: DescribeCfsSnapshotOverviewResponse) => void): Promise<DescribeCfsSnapshotOverviewResponse>;
     /**
+     * 查询文件系统配额
+     */
+    DescribeUserQuota(req: DescribeUserQuotaRequest, cb?: (error: string, rep: DescribeUserQuotaResponse) => void): Promise<DescribeUserQuotaResponse>;
+    /**
      * 更新定期自动快照策略
      */
     UpdateAutoSnapshotPolicy(req: UpdateAutoSnapshotPolicyRequest, cb?: (error: string, rep: UpdateAutoSnapshotPolicyResponse) => void): Promise<UpdateAutoSnapshotPolicyResponse>;
@@ -88,9 +100,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeCfsSnapshots(req: DescribeCfsSnapshotsRequest, cb?: (error: string, rep: DescribeCfsSnapshotsResponse) => void): Promise<DescribeCfsSnapshotsResponse>;
     /**
-     * 本接口（DescribeMountTargets）用于查询文件系统挂载点信息
+     * 文件系统绑定快照策略，可以同时绑定多个fs，一个fs 只能跟一个策略绑定
      */
-    DescribeMountTargets(req: DescribeMountTargetsRequest, cb?: (error: string, rep: DescribeMountTargetsResponse) => void): Promise<DescribeMountTargetsResponse>;
+    BindAutoSnapshotPolicy(req: BindAutoSnapshotPolicyRequest, cb?: (error: string, rep: BindAutoSnapshotPolicyResponse) => void): Promise<BindAutoSnapshotPolicyResponse>;
     /**
      * 本接口（DeleteCfsRule）用于删除权限组规则。
      */
@@ -100,9 +112,9 @@ export declare class Client extends AbstractClient {
      */
     DeleteMountTarget(req: DeleteMountTargetRequest, cb?: (error: string, rep: DeleteMountTargetResponse) => void): Promise<DeleteMountTargetResponse>;
     /**
-     * 创建定期快照策略
+     * 指定条件删除文件系统配额
      */
-    CreateAutoSnapshotPolicy(req: CreateAutoSnapshotPolicyRequest, cb?: (error: string, rep: CreateAutoSnapshotPolicyResponse) => void): Promise<CreateAutoSnapshotPolicyResponse>;
+    DeleteUserQuota(req: DeleteUserQuotaRequest, cb?: (error: string, rep: DeleteUserQuotaResponse) => void): Promise<DeleteUserQuotaResponse>;
     /**
      * 本接口（CreateCfsPGroup）用于创建权限组
      */

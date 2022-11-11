@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { GetLivenessResultResponse, CheckIdNameDateResponse, IdCardVerificationRequest, GetDetectInfoEnhancedResponse, MobileStatusRequest, ParseNfcDataResponse, LivenessRecognitionRequest, CheckEidTokenStatusResponse, DetectAuthRequest, CheckEidTokenStatusRequest, GetActionSequenceResponse, LivenessCompareResponse, BankCard2EVerificationResponse, MobileStatusResponse, LivenessResponse, EncryptedPhoneVerificationRequest, EncryptedPhoneVerificationResponse, LivenessRequest, GetSdkVerificationResultResponse, DetectReflectLivenessAndCompareRequest, VideoLivenessCompareRequest, CheckBankCardInformationResponse, GetWebVerificationResultRequest, GetEidTokenRequest, ApplySdkVerificationTokenRequest, CheckIdNameDateRequest, GetFaceIdTokenResponse, ApplyLivenessTokenResponse, ApplySdkVerificationTokenResponse, MinorsVerificationRequest, GetFaceIdResultResponse, LivenessCompareRequest, GetRealNameAuthResultResponse, CheckBankCardInformationRequest, BankCardVerificationRequest, GetWeChatBillDetailsResponse, CheckIdCardInformationResponse, GetEidResultRequest, DetectAuthResponse, PhoneVerificationResponse, IdCardOCRVerificationRequest, BankCard4EVerificationResponse, GenerateReflectSequenceRequest, GetRealNameAuthTokenRequest, MobileNetworkTimeVerificationRequest, PhoneVerificationCMCCResponse, MobileNetworkTimeVerificationResponse, ApplyWebVerificationTokenRequest, PhoneVerificationCUCCResponse, CheckIdCardInformationRequest, GetRealNameAuthTokenResponse, MinorsVerificationResponse, GetWeChatBillDetailsRequest, BankCardVerificationResponse, PhoneVerificationCUCCRequest, PhoneVerificationCMCCRequest, GenerateReflectSequenceResponse, ImageRecognitionResponse, GetDetectInfoResponse, IdCardVerificationResponse, GetLivenessResultRequest, GetDetectInfoEnhancedRequest, LivenessRecognitionResponse, CreateUploadUrlResponse, GetLiveCodeRequest, GetEidResultResponse, ApplyWebVerificationTokenResponse, PhoneVerificationRequest, GetRealNameAuthResultRequest, GetFaceIdResultRequest, CheckPhoneAndNameResponse, GetFaceIdTokenRequest, DetectReflectLivenessAndCompareResponse, VideoLivenessCompareResponse, BankCard2EVerificationRequest, IdCardOCRVerificationResponse, PhoneVerificationCTCCResponse, ParseNfcDataRequest, PhoneVerificationCTCCRequest, ImageRecognitionRequest, BankCard4EVerificationRequest, CreateUploadUrlRequest, GetWebVerificationResultResponse, GetSdkVerificationResultRequest, ApplyLivenessTokenRequest, GetActionSequenceRequest, GetLiveCodeResponse, GetDetectInfoRequest, CheckPhoneAndNameRequest, GetEidTokenResponse } from "./faceid_models";
+import { GetDetectInfoEnhancedRequest, GetFaceIdTokenRequest, LivenessRequest, CheckBankCardInformationRequest, MobileNetworkTimeVerificationResponse, GetLiveCodeRequest, CheckIdNameDateResponse, IdCardVerificationRequest, BankCardVerificationRequest, CheckBankCardInformationResponse, CheckIdCardInformationResponse, GetDetectInfoEnhancedResponse, PhoneVerificationRequest, PhoneVerificationCMCCRequest, GetEidResultRequest, DetectAuthResponse, PhoneVerificationResponse, GetEidTokenRequest, GetWeChatBillDetailsResponse, CheckPhoneAndNameResponse, BankCard4EVerificationResponse, MobileStatusRequest, IdCardOCRVerificationRequest, GetRealNameAuthTokenRequest, ParseNfcDataResponse, CheckIdNameDateRequest, BankCard2EVerificationRequest, LivenessRecognitionRequest, GetFaceIdTokenResponse, GetRealNameAuthTokenResponse, PhoneVerificationCMCCResponse, CheckEidTokenStatusResponse, PhoneVerificationCTCCResponse, MobileStatusResponse, PhoneVerificationCTCCRequest, IdCardOCRVerificationResponse, ParseNfcDataRequest, LivenessResponse, CheckIdCardInformationRequest, DetectAuthRequest, MinorsVerificationResponse, GetWeChatBillDetailsRequest, CheckEidTokenStatusRequest, GetEidResultResponse, GetRealNameAuthResultRequest, ImageRecognitionRequest, PhoneVerificationCUCCRequest, BankCard4EVerificationRequest, MobileNetworkTimeVerificationRequest, GetFaceIdResultRequest, PhoneVerificationCUCCResponse, GetActionSequenceResponse, LivenessRecognitionResponse, BankCardVerificationResponse, MinorsVerificationRequest, ImageRecognitionResponse, GetActionSequenceRequest, GetDetectInfoResponse, LivenessCompareResponse, GetLiveCodeResponse, GetDetectInfoRequest, BankCard2EVerificationResponse, IdCardVerificationResponse, CheckPhoneAndNameRequest, GetEidTokenResponse, LivenessCompareRequest, GetFaceIdResultResponse, EncryptedPhoneVerificationRequest, GetRealNameAuthResultResponse, EncryptedPhoneVerificationResponse } from "./faceid_models";
 /**
  * faceid client
  * @class
@@ -11,10 +11,6 @@ export declare class Client extends AbstractClient {
      * 使用数字活体检测模式前，需调用本接口获取数字验证码。
      */
     GetLiveCode(req?: GetLiveCodeRequest, cb?: (error: string, rep: GetLiveCodeResponse) => void): Promise<GetLiveCodeResponse>;
-    /**
-     * 传入视频和照片地址，先判断视频中是否为真人，判断为真人后，再判断该视频中的人与上传照片是否属于同一个人。
-     */
-    VideoLivenessCompare(req: VideoLivenessCompareRequest, cb?: (error: string, rep: VideoLivenessCompareResponse) => void): Promise<VideoLivenessCompareResponse>;
     /**
      * 使用动作活体检测模式前，需调用本接口获取动作顺序。
      */
@@ -31,11 +27,6 @@ export declare class Client extends AbstractClient {
      * 用于轮询E证通H5场景EidToken验证状态。
      */
     CheckEidTokenStatus(req: CheckEidTokenStatusRequest, cb?: (error: string, rep: CheckEidTokenStatusResponse) => void): Promise<CheckEidTokenStatusResponse>;
-    /**
-     * 生成一个临时的UploadUrl用于上传资源文件，客户需要使用HTTP PUT方法上传，上传完成后将ResourceUrl传给TargetAction对应接口完成资源传递（具体字段由使用场景确定）。
-数据存储于Region参数对应地域的腾讯云COS Bucket，存储有效期2小时。
-     */
-    CreateUploadUrl(req: CreateUploadUrlRequest, cb?: (error: string, rep: CreateUploadUrlResponse) => void): Promise<CreateUploadUrlResponse>;
     /**
      * 本接口用于输入银行卡号、姓名、开户证件号、开户手机号，校验信息的真实性和一致性。
      */
@@ -58,30 +49,13 @@ export declare class Client extends AbstractClient {
      */
     CheckPhoneAndName(req: CheckPhoneAndNameRequest, cb?: (error: string, rep: CheckPhoneAndNameResponse) => void): Promise<CheckPhoneAndNameResponse>;
     /**
-     * 每次调用活体服务前，需要先调用本接口获取Token，需要保存此Token用来发起核验流程，并且在核验完成后获取结果信息。
-     */
-    ApplyLivenessToken(req: ApplyLivenessTokenRequest, cb?: (error: string, rep: ApplyLivenessTokenResponse) => void): Promise<ApplyLivenessTokenResponse>;
-    /**
      * 本接口用于银行卡号、姓名、开户证件号信息的真实性和一致性。
      */
     BankCardVerification(req: BankCardVerificationRequest, cb?: (error: string, rep: BankCardVerificationResponse) => void): Promise<BankCardVerificationResponse>;
     /**
-     * 每次调用Web核验服务前，需要先调用本接口获取Token，需要保存此Token用来发起核验流程，并且在核验完成后获取结果信息。
-     */
-    ApplySdkVerificationToken(req: ApplySdkVerificationTokenRequest, cb?: (error: string, rep: ApplySdkVerificationTokenResponse) => void): Promise<ApplySdkVerificationTokenResponse>;
-    /**
      * 传入视频和照片，先判断视频中是否为真人，判断为真人后，再判断该视频中的人与上传照片是否属于同一个人。
      */
     LivenessCompare(req: LivenessCompareRequest, cb?: (error: string, rep: LivenessCompareResponse) => void): Promise<LivenessCompareResponse>;
-    /**
-     * 根据活体比对（光线）SDK采集的机器信息生成适合的光线序列，将光线序列传入SDK后开启核身。
-SDK生成的数据内容必须存储在腾讯云COS，COS Bucket所在的Region需要和本接口请求的Region保持一致，推荐使用生成上传链接接口来完成资源传递。
-     */
-    GenerateReflectSequence(req: GenerateReflectSequenceRequest, cb?: (error: string, rep: GenerateReflectSequenceResponse) => void): Promise<GenerateReflectSequenceResponse>;
-    /**
-     * 完成Sdk核验流程后，用核验令牌（Token）调用本接口查询对应核验结果信息。Token申请后三天内有效，可多次调用。
-     */
-    GetSdkVerificationResult(req: GetSdkVerificationResultRequest, cb?: (error: string, rep: GetSdkVerificationResultResponse) => void): Promise<GetSdkVerificationResultResponse>;
     /**
      * 该接口仅限微信公众号中使用，传入姓名和身份证号获取回调URL，在微信公众号中打开验证姓名和身份证号与微信实名的信息是否一致。
 
@@ -104,9 +78,9 @@ SDK生成的数据内容必须存储在腾讯云COS，COS Bucket所在的Region�
      */
     GetEidToken(req: GetEidTokenRequest, cb?: (error: string, rep: GetEidTokenResponse) => void): Promise<GetEidTokenResponse>;
     /**
-     * 完成Web核验流程后，用核验令牌（BizToken）调用本接口查询对应核验结果信息。BizToken申请后三天内（3\*24\*3,600秒）有效，可多次调用。
+     * 本接口用于校验手机号、姓名和身份证号的真实性和一致性。支持的手机号段详情请查阅<a href="https://cloud.tencent.com/document/product/1007/46063">运营商类</a>文档。
      */
-    GetWebVerificationResult(req: GetWebVerificationResultRequest, cb?: (error: string, rep: GetWebVerificationResultResponse) => void): Promise<GetWebVerificationResultResponse>;
+    PhoneVerification(req: PhoneVerificationRequest, cb?: (error: string, rep: PhoneVerificationResponse) => void): Promise<PhoneVerificationResponse>;
     /**
      * 本接口用于验证手机号的状态，您可以输入手机号进行查询。
      */
@@ -119,11 +93,6 @@ SDK生成的数据内容必须存储在腾讯云COS，COS Bucket所在的Region�
      * 通过传入手机号或姓名和身份证号，结合权威数据源和腾讯健康守护可信模型，判断该信息是否真实且年满18周岁。腾讯健康守护可信模型覆盖了上十亿手机库源，覆盖率高、准确率高，如果不在库中的手机号，还可以通过姓名+身份证进行兜底验证。
      */
     MinorsVerification(req: MinorsVerificationRequest, cb?: (error: string, rep: MinorsVerificationResponse) => void): Promise<MinorsVerificationResponse>;
-    /**
-     * 使用活体比对（光线）SDK生成的数据包检测活体，并和传入的图片进行比对。
-图片和SDK生成的数据内容必须存储在腾讯云COS，COS Bucket所在的Region需要和本接口请求的Region保持一致，推荐使用生成上传链接接口来完成资源传递。
-     */
-    DetectReflectLivenessAndCompare(req: DetectReflectLivenessAndCompareRequest, cb?: (error: string, rep: DetectReflectLivenessAndCompareResponse) => void): Promise<DetectReflectLivenessAndCompareResponse>;
     /**
      * 本接口用于校验姓名、身份证号、身份证有效期的真实性和一致性。
      */
@@ -165,10 +134,6 @@ SDK生成的数据内容必须存储在腾讯云COS，COS Bucket所在的Region�
      */
     CheckBankCardInformation(req: CheckBankCardInformationRequest, cb?: (error: string, rep: CheckBankCardInformationResponse) => void): Promise<CheckBankCardInformationResponse>;
     /**
-     * 每次调用Web核验服务前，需要先调用本接口获取BizToken，需要保存此BizToken用来发起核验流程，并且在核验完成后获取结果信息。
-     */
-    ApplyWebVerificationToken(req: ApplyWebVerificationTokenRequest, cb?: (error: string, rep: ApplyWebVerificationTokenResponse) => void): Promise<ApplyWebVerificationTokenResponse>;
-    /**
      * 完成验证后，用BizToken调用本接口获取结果信息，BizToken生成后三天内（3\*24\*3,600秒）可多次拉取。
      */
     GetDetectInfo(req: GetDetectInfoRequest, cb?: (error: string, rep: GetDetectInfoResponse) => void): Promise<GetDetectInfoResponse>;
@@ -177,10 +142,6 @@ SDK生成的数据内容必须存储在腾讯云COS，COS Bucket所在的Region�
      */
     BankCard2EVerification(req: BankCard2EVerificationRequest, cb?: (error: string, rep: BankCard2EVerificationResponse) => void): Promise<BankCard2EVerificationResponse>;
     /**
-     * 本接口用于校验手机号、姓名和身份证号的真实性和一致性。支持的手机号段详情请查阅<a href="https://cloud.tencent.com/document/product/1007/46063">运营商类</a>文档。
-     */
-    PhoneVerification(req: PhoneVerificationRequest, cb?: (error: string, rep: PhoneVerificationResponse) => void): Promise<PhoneVerificationResponse>;
-    /**
      * 本接口用于校验中国电信手机号、姓名和身份证号的真实性和一致性。中国电信支持的手机号段详情请查阅<a href="https://cloud.tencent.com/document/product/1007/46063">运营商类</a>文档。
      */
     PhoneVerificationCTCC(req: PhoneVerificationCTCCRequest, cb?: (error: string, rep: PhoneVerificationCTCCResponse) => void): Promise<PhoneVerificationCTCCResponse>;
@@ -188,8 +149,4 @@ SDK生成的数据内容必须存储在腾讯云COS，COS Bucket所在的Region�
      * 获取微信实名认证结果
      */
     GetRealNameAuthResult(req: GetRealNameAuthResultRequest, cb?: (error: string, rep: GetRealNameAuthResultResponse) => void): Promise<GetRealNameAuthResultResponse>;
-    /**
-     * 完成活体检测流程后，用核验令牌（SdkToken）调用本接口查询对应核验结果信息。Token申请后2小时内有效，可多次调用。
-     */
-    GetLivenessResult(req: GetLivenessResultRequest, cb?: (error: string, rep: GetLivenessResultResponse) => void): Promise<GetLivenessResultResponse>;
 }

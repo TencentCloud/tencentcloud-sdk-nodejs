@@ -68,6 +68,16 @@ it("cfs.v20190719.DescribeCfsPGroups", async function () {
     }
 })
 
+it("cfs.v20190719.SetUserQuota", async function () {
+    try {
+       const data = await client.SetUserQuota({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfs.v20190719.DescribeAutoSnapshotPolicies", async function () {
     try {
        const data = await client.DescribeAutoSnapshotPolicies({})
@@ -78,9 +88,9 @@ it("cfs.v20190719.DescribeAutoSnapshotPolicies", async function () {
     }
 })
 
-it("cfs.v20190719.BindAutoSnapshotPolicy", async function () {
+it("cfs.v20190719.DescribeMountTargets", async function () {
     try {
-       const data = await client.BindAutoSnapshotPolicy({})
+       const data = await client.DescribeMountTargets({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -148,6 +158,16 @@ it("cfs.v20190719.UpdateCfsFileSystemSizeLimit", async function () {
     }
 })
 
+it("cfs.v20190719.CreateAutoSnapshotPolicy", async function () {
+    try {
+       const data = await client.CreateAutoSnapshotPolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfs.v20190719.DeleteCfsFileSystem", async function () {
     try {
        const data = await client.DeleteCfsFileSystem({})
@@ -188,6 +208,16 @@ it("cfs.v20190719.DescribeCfsSnapshotOverview", async function () {
     }
 })
 
+it("cfs.v20190719.DescribeUserQuota", async function () {
+    try {
+       const data = await client.DescribeUserQuota({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfs.v20190719.UpdateAutoSnapshotPolicy", async function () {
     try {
        const data = await client.UpdateAutoSnapshotPolicy({})
@@ -218,9 +248,9 @@ it("cfs.v20190719.DescribeCfsSnapshots", async function () {
     }
 })
 
-it("cfs.v20190719.DescribeMountTargets", async function () {
+it("cfs.v20190719.BindAutoSnapshotPolicy", async function () {
     try {
-       const data = await client.DescribeMountTargets({})
+       const data = await client.BindAutoSnapshotPolicy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -248,9 +278,9 @@ it("cfs.v20190719.DeleteMountTarget", async function () {
     }
 })
 
-it("cfs.v20190719.CreateAutoSnapshotPolicy", async function () {
+it("cfs.v20190719.DeleteUserQuota", async function () {
     try {
-       const data = await client.CreateAutoSnapshotPolicy({})
+       const data = await client.DeleteUserQuota({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

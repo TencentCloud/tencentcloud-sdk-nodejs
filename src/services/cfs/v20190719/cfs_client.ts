@@ -18,87 +18,94 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  DeleteCfsFileSystemResponse,
-  SnapshotInfo,
-  DescribeCfsFileSystemsRequest,
-  DeleteMountTargetRequest,
-  CreateCfsRuleRequest,
-  FileSystemInfo,
-  PGroup,
-  DescribeAvailableZoneInfoResponse,
   SnapshotStatistics,
-  UpdateCfsFileSystemNameRequest,
-  DeleteCfsSnapshotResponse,
   DescribeCfsPGroupsResponse,
-  DescribeCfsFileSystemClientsResponse,
-  SnapshotOperateLog,
-  DescribeSnapshotOperationLogsResponse,
-  UpdateCfsRuleRequest,
-  DeleteAutoSnapshotPolicyResponse,
-  CreateCfsSnapshotRequest,
+  DescribeMountTargetsResponse,
   DescribeSnapshotOperationLogsRequest,
-  DeleteCfsRuleResponse,
-  DescribeCfsSnapshotOverviewResponse,
-  DeleteCfsRuleRequest,
-  DeleteMountTargetResponse,
-  UpdateCfsPGroupRequest,
-  MountInfo,
-  UpdateCfsRuleResponse,
   FileSystemClient,
   DescribeCfsFileSystemsResponse,
-  DescribeAutoSnapshotPoliciesResponse,
   CreateCfsFileSystemResponse,
-  DescribeMountTargetsResponse,
+  FileSystemInfo,
   BindAutoSnapshotPolicyRequest,
-  DescribeCfsFileSystemClientsRequest,
-  DeleteCfsSnapshotRequest,
-  DescribeCfsPGroupsRequest,
-  AvailableZone,
   CreateCfsPGroupRequest,
-  DeleteCfsPGroupResponse,
-  DescribeCfsSnapshotsResponse,
   DescribeAutoSnapshotPoliciesRequest,
-  DeleteCfsFileSystemRequest,
-  AvailableRegion,
-  UpdateCfsSnapshotAttributeRequest,
-  CreateCfsFileSystemRequest,
+  DescribeAvailableZoneInfoRequest,
   DescribeMountTargetsRequest,
-  CreateCfsPGroupResponse,
-  UpdateCfsFileSystemPGroupRequest,
-  PGroupRuleInfo,
-  UpdateCfsFileSystemNameResponse,
-  DescribeCfsServiceStatusRequest,
-  UpdateCfsSnapshotAttributeResponse,
-  FileSystemByPolicy,
-  PGroupInfo,
-  Filter,
-  UnbindAutoSnapshotPolicyRequest,
+  BindAutoSnapshotPolicyResponse,
+  SignUpCfsServiceRequest,
   SignUpCfsServiceResponse,
   AutoSnapshotPolicyInfo,
-  DescribeCfsServiceStatusResponse,
-  CreateCfsRuleResponse,
-  CreateAutoSnapshotPolicyResponse,
-  UpdateCfsFileSystemPGroupResponse,
-  TagInfo,
-  AvailableProtoStatus,
   DescribeCfsRulesRequest,
-  BindAutoSnapshotPolicyResponse,
+  DeleteCfsPGroupRequest,
+  UpdateCfsPGroupResponse,
+  DeleteAutoSnapshotPolicyRequest,
+  DeleteCfsFileSystemResponse,
+  UpdateCfsRuleRequest,
+  DeleteUserQuotaRequest,
+  DescribeAvailableZoneInfoResponse,
+  DeleteCfsSnapshotResponse,
+  DescribeCfsFileSystemClientsResponse,
+  DeleteMountTargetResponse,
+  CreateCfsSnapshotRequest,
+  DeleteCfsRuleRequest,
+  DescribeCfsRulesResponse,
+  DescribeSnapshotOperationLogsResponse,
+  UpdateCfsFileSystemPGroupResponse,
+  DeleteCfsFileSystemRequest,
+  CreateCfsPGroupResponse,
+  DescribeCfsServiceStatusRequest,
+  DeleteUserQuotaResponse,
+  PGroup,
+  SetUserQuotaRequest,
+  CreateAutoSnapshotPolicyResponse,
+  AvailableType,
+  UpdateCfsSnapshotAttributeRequest,
+  UserQuota,
+  DeleteMountTargetRequest,
+  CreateCfsRuleRequest,
+  UpdateCfsFileSystemNameRequest,
+  SnapshotOperateLog,
+  DescribeUserQuotaRequest,
+  UpdateCfsFileSystemNameResponse,
+  DescribeCfsSnapshotOverviewResponse,
+  DeleteCfsSnapshotRequest,
+  DescribeCfsFileSystemClientsRequest,
+  AvailableProtoStatus,
+  DescribeCfsFileSystemsRequest,
+  AvailableRegion,
+  CreateCfsFileSystemRequest,
+  AvailableZone,
+  Filter,
+  UnbindAutoSnapshotPolicyRequest,
+  UnbindAutoSnapshotPolicyResponse,
+  DescribeCfsServiceStatusResponse,
+  PGroupRuleInfo,
   DescribeCfsSnapshotsRequest,
   UpdateCfsFileSystemSizeLimitResponse,
-  DeleteCfsPGroupRequest,
   UpdateAutoSnapshotPolicyRequest,
-  DescribeCfsSnapshotOverviewRequest,
-  AvailableType,
-  UnbindAutoSnapshotPolicyResponse,
   UpdateCfsFileSystemSizeLimitRequest,
-  DescribeAvailableZoneInfoRequest,
-  UpdateCfsPGroupResponse,
-  DescribeCfsRulesResponse,
-  SignUpCfsServiceRequest,
-  DeleteAutoSnapshotPolicyRequest,
-  CreateAutoSnapshotPolicyRequest,
+  UpdateCfsRuleResponse,
+  UpdateCfsPGroupRequest,
   UpdateAutoSnapshotPolicyResponse,
+  FileSystemByPolicy,
+  SnapshotInfo,
+  MountInfo,
   CreateCfsSnapshotResponse,
+  UpdateCfsFileSystemPGroupRequest,
+  DeleteAutoSnapshotPolicyResponse,
+  DeleteCfsRuleResponse,
+  UpdateCfsSnapshotAttributeResponse,
+  SetUserQuotaResponse,
+  TagInfo,
+  DescribeCfsPGroupsRequest,
+  DeleteCfsPGroupResponse,
+  DescribeUserQuotaResponse,
+  PGroupInfo,
+  CreateCfsRuleResponse,
+  DescribeCfsSnapshotsResponse,
+  DescribeAutoSnapshotPoliciesResponse,
+  DescribeCfsSnapshotOverviewRequest,
+  CreateAutoSnapshotPolicyRequest,
 } from "./cfs_models"
 
 /**
@@ -161,6 +168,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 设置文件系统配额，提供UID/GID的配额设置的接口
+   */
+  async SetUserQuota(
+    req: SetUserQuotaRequest,
+    cb?: (error: string, rep: SetUserQuotaResponse) => void
+  ): Promise<SetUserQuotaResponse> {
+    return this.request("SetUserQuota", req, cb)
+  }
+
+  /**
    * 查询文件系统快照定期策略列表信息
    */
   async DescribeAutoSnapshotPolicies(
@@ -171,13 +188,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 文件系统绑定快照策略，可以同时绑定多个fs，一个fs 只能跟一个策略绑定
+   * 本接口（DescribeMountTargets）用于查询文件系统挂载点信息
    */
-  async BindAutoSnapshotPolicy(
-    req: BindAutoSnapshotPolicyRequest,
-    cb?: (error: string, rep: BindAutoSnapshotPolicyResponse) => void
-  ): Promise<BindAutoSnapshotPolicyResponse> {
-    return this.request("BindAutoSnapshotPolicy", req, cb)
+  async DescribeMountTargets(
+    req: DescribeMountTargetsRequest,
+    cb?: (error: string, rep: DescribeMountTargetsResponse) => void
+  ): Promise<DescribeMountTargetsResponse> {
+    return this.request("DescribeMountTargets", req, cb)
   }
 
   /**
@@ -241,6 +258,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建定期快照策略
+   */
+  async CreateAutoSnapshotPolicy(
+    req: CreateAutoSnapshotPolicyRequest,
+    cb?: (error: string, rep: CreateAutoSnapshotPolicyResponse) => void
+  ): Promise<CreateAutoSnapshotPolicyResponse> {
+    return this.request("CreateAutoSnapshotPolicy", req, cb)
+  }
+
+  /**
    * 用于删除文件系统
    */
   async DeleteCfsFileSystem(
@@ -281,6 +308,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询文件系统配额
+   */
+  async DescribeUserQuota(
+    req: DescribeUserQuotaRequest,
+    cb?: (error: string, rep: DescribeUserQuotaResponse) => void
+  ): Promise<DescribeUserQuotaResponse> {
+    return this.request("DescribeUserQuota", req, cb)
+  }
+
+  /**
    * 更新定期自动快照策略
    */
   async UpdateAutoSnapshotPolicy(
@@ -311,13 +348,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeMountTargets）用于查询文件系统挂载点信息
+   * 文件系统绑定快照策略，可以同时绑定多个fs，一个fs 只能跟一个策略绑定
    */
-  async DescribeMountTargets(
-    req: DescribeMountTargetsRequest,
-    cb?: (error: string, rep: DescribeMountTargetsResponse) => void
-  ): Promise<DescribeMountTargetsResponse> {
-    return this.request("DescribeMountTargets", req, cb)
+  async BindAutoSnapshotPolicy(
+    req: BindAutoSnapshotPolicyRequest,
+    cb?: (error: string, rep: BindAutoSnapshotPolicyResponse) => void
+  ): Promise<BindAutoSnapshotPolicyResponse> {
+    return this.request("BindAutoSnapshotPolicy", req, cb)
   }
 
   /**
@@ -341,13 +378,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建定期快照策略
+   * 指定条件删除文件系统配额
    */
-  async CreateAutoSnapshotPolicy(
-    req: CreateAutoSnapshotPolicyRequest,
-    cb?: (error: string, rep: CreateAutoSnapshotPolicyResponse) => void
-  ): Promise<CreateAutoSnapshotPolicyResponse> {
-    return this.request("CreateAutoSnapshotPolicy", req, cb)
+  async DeleteUserQuota(
+    req: DeleteUserQuotaRequest,
+    cb?: (error: string, rep: DeleteUserQuotaResponse) => void
+  ): Promise<DeleteUserQuotaResponse> {
+    return this.request("DeleteUserQuota", req, cb)
   }
 
   /**

@@ -58,16 +58,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCfsPGroups", req, cb);
     }
     /**
+     * 设置文件系统配额，提供UID/GID的配额设置的接口
+     */
+    async SetUserQuota(req, cb) {
+        return this.request("SetUserQuota", req, cb);
+    }
+    /**
      * 查询文件系统快照定期策略列表信息
      */
     async DescribeAutoSnapshotPolicies(req, cb) {
         return this.request("DescribeAutoSnapshotPolicies", req, cb);
     }
     /**
-     * 文件系统绑定快照策略，可以同时绑定多个fs，一个fs 只能跟一个策略绑定
+     * 本接口（DescribeMountTargets）用于查询文件系统挂载点信息
      */
-    async BindAutoSnapshotPolicy(req, cb) {
-        return this.request("BindAutoSnapshotPolicy", req, cb);
+    async DescribeMountTargets(req, cb) {
+        return this.request("DescribeMountTargets", req, cb);
     }
     /**
      * 本接口（DeleteCfsPGroup）用于删除权限组。
@@ -106,6 +112,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdateCfsFileSystemSizeLimit", req, cb);
     }
     /**
+     * 创建定期快照策略
+     */
+    async CreateAutoSnapshotPolicy(req, cb) {
+        return this.request("CreateAutoSnapshotPolicy", req, cb);
+    }
+    /**
      * 用于删除文件系统
      */
     async DeleteCfsFileSystem(req, cb) {
@@ -130,6 +142,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCfsSnapshotOverview", req, cb);
     }
     /**
+     * 查询文件系统配额
+     */
+    async DescribeUserQuota(req, cb) {
+        return this.request("DescribeUserQuota", req, cb);
+    }
+    /**
      * 更新定期自动快照策略
      */
     async UpdateAutoSnapshotPolicy(req, cb) {
@@ -148,10 +166,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCfsSnapshots", req, cb);
     }
     /**
-     * 本接口（DescribeMountTargets）用于查询文件系统挂载点信息
+     * 文件系统绑定快照策略，可以同时绑定多个fs，一个fs 只能跟一个策略绑定
      */
-    async DescribeMountTargets(req, cb) {
-        return this.request("DescribeMountTargets", req, cb);
+    async BindAutoSnapshotPolicy(req, cb) {
+        return this.request("BindAutoSnapshotPolicy", req, cb);
     }
     /**
      * 本接口（DeleteCfsRule）用于删除权限组规则。
@@ -166,10 +184,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteMountTarget", req, cb);
     }
     /**
-     * 创建定期快照策略
+     * 指定条件删除文件系统配额
      */
-    async CreateAutoSnapshotPolicy(req, cb) {
-        return this.request("CreateAutoSnapshotPolicy", req, cb);
+    async DeleteUserQuota(req, cb) {
+        return this.request("DeleteUserQuota", req, cb);
     }
     /**
      * 本接口（CreateCfsPGroup）用于创建权限组
