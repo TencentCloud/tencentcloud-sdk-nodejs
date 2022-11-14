@@ -41,5 +41,11 @@ class Client extends abstract_client_1.AbstractClient {
     async GetAntiFraudVip(req, cb) {
         return this.request("GetAntiFraudVip", req, cb);
     }
+    /**
+     * 天御信鸽取数平台接口
+     */
+    async TransportGeneralInterface(req, cb) {
+        return this.request("TransportGeneralInterface", req, cb);
+    }
 }
 exports.Client = Client;

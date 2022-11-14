@@ -31,6 +31,49 @@ export interface OtherModelScores {
 }
 
 /**
+ * 天御信鸽取数平台接口入参
+ */
+export interface TransportGeneralInterfaceInput {
+  /**
+   * 公证处请求接口名
+   */
+  InterfaceName?: string
+
+  /**
+   * 公证处业务详情二层入参
+   */
+  NotarizationInput?: string
+
+  /**
+   * 业务二层详情入参的哈希签名
+   */
+  NotarizationSign?: string
+}
+
+/**
+ * 天御信鸽取数平台接口出参
+ */
+export interface TransportGeneralInterfaceOutput {
+  /**
+      * 错误码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Code: string
+
+  /**
+      * 回包信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Message: string
+
+  /**
+      * 公证处业务回包
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NotarizationData: string
+}
+
+/**
  * QueryAntiFraudVip返回参数结构体
  */
 export interface QueryAntiFraudVipResponse {
@@ -78,6 +121,16 @@ export interface RiskDetail {
 }
 
 /**
+ * TransportGeneralInterface请求参数结构体
+ */
+export interface TransportGeneralInterfaceRequest {
+  /**
+   * 业务入参
+   */
+  BusinessSecurityData?: TransportGeneralInterfaceInput
+}
+
+/**
  * 扩展字段，对风险类型的说明
  */
 export interface SimpleKindRiskDetail {
@@ -102,6 +155,22 @@ export interface GetAntiFraudVipResponse {
    * 反欺诈评分接口结果
    */
   Data: AntiFraudVipRecord
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * TransportGeneralInterface返回参数结构体
+ */
+export interface TransportGeneralInterfaceResponse {
+  /**
+      * 业务出参
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Data: TransportGeneralInterfaceOutput
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

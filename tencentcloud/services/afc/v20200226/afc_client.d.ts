@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { QueryAntiFraudVipResponse, GetAntiFraudVipResponse, QueryAntiFraudVipRequest, GetAntiFraudVipRequest } from "./afc_models";
+import { QueryAntiFraudVipResponse, TransportGeneralInterfaceRequest, GetAntiFraudVipResponse, TransportGeneralInterfaceResponse, QueryAntiFraudVipRequest, GetAntiFraudVipRequest } from "./afc_models";
 /**
  * afc client
  * @class
@@ -17,4 +17,8 @@ export declare class Client extends AbstractClient {
      * 反欺诈VIP评分接口
      */
     GetAntiFraudVip(req: GetAntiFraudVipRequest, cb?: (error: string, rep: GetAntiFraudVipResponse) => void): Promise<GetAntiFraudVipResponse>;
+    /**
+     * 天御信鸽取数平台接口
+     */
+    TransportGeneralInterface(req: TransportGeneralInterfaceRequest, cb?: (error: string, rep: TransportGeneralInterfaceResponse) => void): Promise<TransportGeneralInterfaceResponse>;
 }

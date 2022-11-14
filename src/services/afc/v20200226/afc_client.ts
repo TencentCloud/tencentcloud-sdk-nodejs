@@ -19,10 +19,14 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   OtherModelScores,
+  TransportGeneralInterfaceInput,
+  TransportGeneralInterfaceOutput,
   QueryAntiFraudVipResponse,
   RiskDetail,
+  TransportGeneralInterfaceRequest,
   SimpleKindRiskDetail,
   GetAntiFraudVipResponse,
+  TransportGeneralInterfaceResponse,
   AntiFraudVipCryptoFilter,
   AntiFraudVipFilter,
   QueryAntiFraudVipRequest,
@@ -59,5 +63,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetAntiFraudVipResponse) => void
   ): Promise<GetAntiFraudVipResponse> {
     return this.request("GetAntiFraudVip", req, cb)
+  }
+
+  /**
+   * 天御信鸽取数平台接口
+   */
+  async TransportGeneralInterface(
+    req: TransportGeneralInterfaceRequest,
+    cb?: (error: string, rep: TransportGeneralInterfaceResponse) => void
+  ): Promise<TransportGeneralInterfaceResponse> {
+    return this.request("TransportGeneralInterface", req, cb)
   }
 }
