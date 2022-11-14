@@ -255,15 +255,22 @@ export interface FlowFileInfo {
  */
 export interface CreateConsoleLoginUrlResponse {
     /**
-      * 子客Web控制台url，此链接5分钟内有效，且只能访问一次。同时需要注意：
-1. 此链接仅单次有效，使用后需要再次创建新的链接（部分聊天软件，如企业微信默认会对链接进行解析，此时需要使用类似“代码片段”的方式或者放到txt文件里发送链接）；
-2. 创建的链接应避免被转义，如：&被转义为\u0026；如使用Postman请求后，请选择响应类型为 JSON，否则链接将被转义
+      * 子客Web控制台url注意事项：
+1. 所有类型的链接在企业未认证/员工未认证完成时，只要在有效期内（一年）都可以访问
+2. 若企业认证完成且员工认证完成后，重新获取pc端的链接5分钟之内有效，且只能访问一次
+3. 若企业认证完成且员工认证完成后，重新获取H5/APP的链接只要在有效期内（一年）都可以访问
+4. 此链接仅单次有效，使用后需要再次创建新的链接（部分聊天软件，如企业微信默认会对链接进行解析，此时需要使用类似“代码片段”的方式或者放到txt文件里发送链接）
+5. 创建的链接应避免被转义，如：&被转义为\u0026；如使用Postman请求后，请选择响应类型为 JSON，否则链接将被转义
       */
     ConsoleUrl: string;
     /**
       * 渠道子客企业是否已开通腾讯电子签
       */
     IsActivated: boolean;
+    /**
+      * 当前经办人是否已认证（false:未认证 true:已认证）
+      */
+    ProxyOperatorIsVerified: boolean;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -290,6 +297,10 @@ export interface SyncProxyOrganizationRequest {
       * 渠道侧合作企业统一社会信用代码，最大长度200个字符
       */
     UniformSocialCreditCode?: string;
+    /**
+      * 渠道侧合作企业法人/负责人姓名
+      */
+    ProxyLegalName?: string;
     /**
       * 操作者的信息
       */
@@ -610,14 +621,14 @@ export interface FlowApproverInfo {
       */
     Name?: string;
     /**
-      * 经办人身份证件类型
+      * 签署人身份证件类型
 1.ID_CARD 居民身份证
 2.HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证
 3.HONGKONG_AND_MACAO 港澳居民来往内地通行证
       */
     IdCardType?: string;
     /**
-      * 经办人证件号
+      * 签署人证件号
       */
     IdCardNumber?: string;
     /**
@@ -743,6 +754,11 @@ export interface TemplateInfo {
       * 模板创建的时间戳（精确到秒）
       */
     CreatedOn: number;
+    /**
+      * 模板的预览链接
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PreviewUrl: string;
 }
 /**
  * GetDownloadFlowUrl返回参数结构体
@@ -865,6 +881,14 @@ export interface CreateConsoleLoginUrlRequest {
       * 是否展示左侧菜单栏 是：ENABLE（默认） 否：DISABLE
       */
     MenuStatus?: string;
+    /**
+      * 链接跳转类型："PC"-PC控制台，“CHANNEL”-H5跳转到电子签小程序；“APP”-第三方APP或小程序跳转电子签小程序，默认为PC控制台
+      */
+    Endpoint?: string;
+    /**
+      * 触发自动跳转事件，仅对App类型有效，"VERIFIED":企业认证完成/员工认证完成后跳回原App/小程序
+      */
+    AutoJumpBackEvent?: string;
     /**
       * 操作者的信息
       */
@@ -1316,6 +1340,7 @@ export interface ChannelDescribeEmployeesRequest {
     /**
       * 查询过滤实名用户，Key为Status，Values为["IsVerified"]
 根据第三方系统openId过滤查询员工时,Key为StaffOpenId,Values为["OpenId","OpenId",...]
+查询离职员工时，Key为Status，Values为["QuiteJob"]
       */
     Filters?: Array<Filter>;
     /**
@@ -2277,6 +2302,10 @@ export interface DescribeTemplatesRequest {
       * 操作者的信息
       */
     Operator?: UserInfo;
+    /**
+      * 是否获取模板预览链接
+      */
+    WithPreviewUrl?: boolean;
 }
 /**
  * 持有的电子印章信息
@@ -2341,11 +2370,15 @@ export interface CreateFlowsByTemplatesRequest {
       */
     FlowInfos: Array<FlowInfo>;
     /**
-      * 是否为预览模式；默认为false，即非预览模式，此时发起合同并返回FlowIds；若为预览模式，不会发起合同，会返回PreviewUrls（此Url返回的是PDF文件流 ）；
+      * 是否为预览模式；默认为false，即非预览模式，此时发起合同并返回FlowIds；若为预览模式，不会发起合同，会返回PreviewUrls；
 预览链接有效期300秒；
 同时，如果预览的文件中指定了动态表格控件，需要进行异步合成；此时此接口返回的是合成前的文档预览链接，而合成完成后的文档预览链接会通过：回调通知的方式、或使用返回的TaskInfo中的TaskId通过ChannelGetTaskResultApi接口查询；
       */
     NeedPreview?: boolean;
+    /**
+      * 预览链接类型 默认:0-文件流, 1- H5链接 注意:此参数在NeedPreview 为true 时有效,
+      */
+    PreviewType?: number;
     /**
       * 操作者的信息
       */

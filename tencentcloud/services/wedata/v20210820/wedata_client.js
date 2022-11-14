@@ -47,6 +47,25 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteIntegrationTask", req, cb);
     }
     /**
+     * 检查规则名称是否重复
+     */
+    async CheckDuplicateRuleName(req, cb) {
+        return this.request("CheckDuplicateRuleName", req, cb);
+    }
+    /**
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+运行任务
+     */
+    async RunTask(req, cb) {
+        return this.request("RunTask", req, cb);
+    }
+    /**
+     * 创建规则模版
+     */
+    async CreateRuleTemplate(req, cb) {
+        return this.request("CreateRuleTemplate", req, cb);
+    }
+    /**
      * 实时任务运行指标概览
      */
     async DescribeRealTimeTaskMetricOverview(req, cb) {
@@ -59,14 +78,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetOfflineInstanceList", req, cb);
     }
     /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-任务批量补录，调度状态任务才可以补录；
-
-
-
+     * 数据质量的概览页面数据监测情况接口
      */
-    async MakeUpTasksNew(req, cb) {
-        return this.request("MakeUpTasksNew", req, cb);
+    async DescribeDataCheckStat(req, cb) {
+        return this.request("DescribeDataCheckStat", req, cb);
+    }
+    /**
+     * 分页查询规则执行结果列表
+     */
+    async DescribeRuleExecResultsByPage(req, cb) {
+        return this.request("DescribeRuleExecResultsByPage", req, cb);
     }
     /**
      * 获取采集器所在集群的VPC列表
@@ -86,6 +107,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async BatchKillIntegrationTaskInstances(req, cb) {
         return this.request("BatchKillIntegrationTaskInstances", req, cb);
+    }
+    /**
+     * 更新规则组执行策略
+     */
+    async ModifyExecStrategy(req, cb) {
+        return this.request("ModifyExecStrategy", req, cb);
     }
     /**
      * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
@@ -218,6 +245,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeOfflineTaskToken", req, cb);
     }
     /**
+     * 删除规则模版
+     */
+    async DeleteRuleTemplate(req, cb) {
+        return this.request("DeleteRuleTemplate", req, cb);
+    }
+    /**
      * 抢占锁定集成任务
      */
     async RobAndLockIntegrationTask(req, cb) {
@@ -234,6 +267,18 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeAlarmEvents(req, cb) {
         return this.request("DescribeAlarmEvents", req, cb);
+    }
+    /**
+     * 质量报告-质量评分
+     */
+    async DescribeQualityScore(req, cb) {
+        return this.request("DescribeQualityScore", req, cb);
+    }
+    /**
+     * 数据质量概览页面触发维度分布统计接口
+     */
+    async DescribeRuleDimStat(req, cb) {
+        return this.request("DescribeRuleDimStat", req, cb);
     }
     /**
      * 生成建hive表的sql
@@ -255,6 +300,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SaveCustomFunction", req, cb);
     }
     /**
+     * 数据质量概览页面表排行接口
+     */
+    async DescribeTopTableStat(req, cb) {
+        return this.request("DescribeTopTableStat", req, cb);
+    }
+    /**
      * 查询全量函数
      */
     async DescribeOrganizationalFunctions(req, cb) {
@@ -265,6 +316,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteInLongAgent(req, cb) {
         return this.request("DeleteInLongAgent", req, cb);
+    }
+    /**
+     * Runner 规则检测结果上报
+     */
+    async CommitRuleGroupExecResult(req, cb) {
+        return this.request("CommitRuleGroupExecResult", req, cb);
     }
     /**
      * 查询Inlong manager日志
@@ -279,6 +336,18 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DryRunDIOfflineTask", req, cb);
     }
     /**
+     * 质量报告-查询质量评分
+     */
+    async DescribeDimensionScore(req, cb) {
+        return this.request("DescribeDimensionScore", req, cb);
+    }
+    /**
+     * 查询表绑定执行规则组信息
+     */
+    async DescribeRuleGroupTable(req, cb) {
+        return this.request("DescribeRuleGroupTable", req, cb);
+    }
+    /**
      * 获取TKE集群列表
      */
     async DescribeInLongTkeClusterList(req, cb) {
@@ -289,6 +358,18 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateIntegrationTask(req, cb) {
         return this.request("CreateIntegrationTask", req, cb);
+    }
+    /**
+     * 提交数据导出任务
+     */
+    async CommitExportTask(req, cb) {
+        return this.request("CommitExportTask", req, cb);
+    }
+    /**
+     * 过滤条件【必要字段】{ruleId}
+     */
+    async DescribeRuleHistoryByPage(req, cb) {
+        return this.request("DescribeRuleHistoryByPage", req, cb);
     }
     /**
      * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
@@ -303,6 +384,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyTaskInfo(req, cb) {
         return this.request("ModifyTaskInfo", req, cb);
+    }
+    /**
+     * 获取表列表
+     */
+    async DescribeRuleTablesByPage(req, cb) {
+        return this.request("DescribeRuleTablesByPage", req, cb);
     }
     /**
      * 更新集成任务
@@ -323,10 +410,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("BatchStartIntegrationTasks", req, cb);
     }
     /**
+     * 分页查询质量监控组
+     */
+    async DescribeMonitorsByPage(req, cb) {
+        return this.request("DescribeMonitorsByPage", req, cb);
+    }
+    /**
      * 重命名任务（任务编辑）
      */
     async ModifyTaskName(req, cb) {
         return this.request("ModifyTaskName", req, cb);
+    }
+    /**
+     * 查询规则执行结果详情
+     */
+    async DescribeRuleExecDetail(req, cb) {
+        return this.request("DescribeRuleExecDetail", req, cb);
     }
     /**
      * 离线任务重名校验
@@ -393,6 +492,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTableSchemaInfo", req, cb);
     }
     /**
+     * 更新质量规则接口
+     */
+    async ModifyRule(req, cb) {
+        return this.request("ModifyRule", req, cb);
+    }
+    /**
      * 查询函数类型
      */
     async DescribeFunctionTypes(req, cb) {
@@ -403,6 +508,13 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeTaskReportDetailList(req, cb) {
         return this.request("DescribeTaskReportDetailList", req, cb);
+    }
+    /**
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+提交工作流
+     */
+    async SubmitWorkflow(req, cb) {
+        return this.request("SubmitWorkflow", req, cb);
     }
     /**
      * 删除集成节点
@@ -454,16 +566,35 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+修改任务脚本
+     */
+    async ModifyTaskScript(req, cb) {
+        return this.request("ModifyTaskScript", req, cb);
+    }
+    /**
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
 实例批量置成功
      */
     async ForceSucInstances(req, cb) {
         return this.request("ForceSucInstances", req, cb);
     }
     /**
+     * 查询规则组详情接口
+     */
+    async DescribeRuleGroup(req, cb) {
+        return this.request("DescribeRuleGroup", req, cb);
+    }
+    /**
      * 获取数据库信息
      */
     async DescribeDatabaseInfoList(req, cb) {
         return this.request("DescribeDatabaseInfoList", req, cb);
+    }
+    /**
+     * 查询规则模版操作记录
+     */
+    async DescribeTemplateHistory(req, cb) {
+        return this.request("DescribeTemplateHistory", req, cb);
     }
     /**
      * 提交集成任务
@@ -478,10 +609,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteOfflineTask", req, cb);
     }
     /**
+     * 查询质量规则数据源
+     */
+    async DescribeRuleDataSources(req, cb) {
+        return this.request("DescribeRuleDataSources", req, cb);
+    }
+    /**
      * 创建hive表，返回表名称
      */
     async CreateHiveTableByDDL(req, cb) {
         return this.request("CreateHiveTableByDDL", req, cb);
+    }
+    /**
+     * 规则组执行结果分页查询接口不带鉴权
+     */
+    async DescribeRuleGroupExecResultsByPageWithoutAuth(req, cb) {
+        return this.request("DescribeRuleGroupExecResultsByPageWithoutAuth", req, cb);
     }
     /**
      * 获取资源管理目录树
@@ -509,11 +652,37 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeStreamTaskLogList", req, cb);
     }
     /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-修改数据源
+     * 创建质量规则接口
      */
-    async ModifyDataSource(req, cb) {
-        return this.request("ModifyDataSource", req, cb);
+    async CreateRule(req, cb) {
+        return this.request("CreateRule", req, cb);
+    }
+    /**
+     * 编辑规则模版
+     */
+    async ModifyRuleTemplate(req, cb) {
+        return this.request("ModifyRuleTemplate", req, cb);
+    }
+    /**
+     * 查询表得分趋势
+     */
+    async DescribeTableScoreTrend(req, cb) {
+        return this.request("DescribeTableScoreTrend", req, cb);
+    }
+    /**
+     * 质量报告-查询表质量详情
+     */
+    async DescribeTableQualityDetails(req, cb) {
+        return this.request("DescribeTableQualityDetails", req, cb);
+    }
+    /**
+     * 【过滤条件】
+{表名称TableName,支持模糊匹配}       {表负责人TableOwnerName,支持模糊匹配}      {监控方式MonitorTypes，1.未配置 2.关联生产调度 3.离线周期检测,支持多选}  {订阅人ReceiverUin}
+【必要字段】
+{数据来源DatasourceId}
+     */
+    async DescribeRuleGroupsByPage(req, cb) {
+        return this.request("DescribeRuleGroupsByPage", req, cb);
     }
     /**
      * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
@@ -537,6 +706,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RerunInstances", req, cb);
     }
     /**
+     * 删除质量规则接口
+     */
+    async DeleteRule(req, cb) {
+        return this.request("DeleteRule", req, cb);
+    }
+    /**
      * 判断告警规则重名
      */
     async CheckAlarmRegularNameExist(req, cb) {
@@ -555,6 +730,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDataTypes", req, cb);
     }
     /**
+     * 分页查询质量规则
+     */
+    async DescribeRulesByPage(req, cb) {
+        return this.request("DescribeRulesByPage", req, cb);
+    }
+    /**
      * 获取离线任务实例列表(新)
      */
     async GetOfflineDIInstanceList(req, cb) {
@@ -567,6 +748,30 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("BatchMakeUpIntegrationTasks", req, cb);
     }
     /**
+     * 规则执行日志查询
+     */
+    async DescribeRuleExecLog(req, cb) {
+        return this.request("DescribeRuleExecLog", req, cb);
+    }
+    /**
+     * 查询数据来源列表
+     */
+    async DescribeDataBases(req, cb) {
+        return this.request("DescribeDataBases", req, cb);
+    }
+    /**
+     * 查询规则详情
+     */
+    async DescribeRule(req, cb) {
+        return this.request("DescribeRule", req, cb);
+    }
+    /**
+     * 过滤条件】 {模版名称Name,支持模糊匹配} {模版类型type，1.系统模版 2.自定义模版} {质量检测维度QualityDims, 1.准确性 2.唯一性 3.完整性 4.一致性 5.及时性 6.有效性} 【排序字段】 { 引用数排序类型CitationOrderType，根据引用数量排序 ASC DESC}
+     */
+    async DescribeRuleTemplatesByPage(req, cb) {
+        return this.request("DescribeRuleTemplatesByPage", req, cb);
+    }
+    /**
      * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
 更新工作流
      */
@@ -574,11 +779,23 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyWorkflowInfo", req, cb);
     }
     /**
+     * 数据质量概览页面规则运行情况接口
+     */
+    async DescribeRuleExecStat(req, cb) {
+        return this.request("DescribeRuleExecStat", req, cb);
+    }
+    /**
      * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
 添加父任务依赖
      */
     async ModifyTaskLinks(req, cb) {
         return this.request("ModifyTaskLinks", req, cb);
+    }
+    /**
+     * 规则组执行结果分页查询接口
+     */
+    async DescribeRuleGroupExecResultsByPage(req, cb) {
+        return this.request("DescribeRuleGroupExecResultsByPage", req, cb);
     }
     /**
      * 更新集成节点
@@ -626,6 +843,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("BatchRerunIntegrationTaskInstances", req, cb);
     }
     /**
+     * 查询规则组执行策略
+     */
+    async DescribeExecStrategy(req, cb) {
+        return this.request("DescribeExecStrategy", req, cb);
+    }
+    /**
      * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
 创建工作流
      */
@@ -633,11 +856,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateWorkflow", req, cb);
     }
     /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-运行任务
+     * 暂停集成任务
      */
-    async RunTask(req, cb) {
-        return this.request("RunTask", req, cb);
+    async SuspendIntegrationTask(req, cb) {
+        return this.request("SuspendIntegrationTask", req, cb);
+    }
+    /**
+     * 查询规则执行导出结果
+     */
+    async DescribeRuleExecExportResult(req, cb) {
+        return this.request("DescribeRuleExecExportResult", req, cb);
+    }
+    /**
+     * 查询质量规则列表
+     */
+    async DescribeRules(req, cb) {
+        return this.request("DescribeRules", req, cb);
     }
     /**
      * 启动集成任务
@@ -652,11 +886,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("LockIntegrationTask", req, cb);
     }
     /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-提交工作流
+     * 按起止日期统计离线任务的所有实例的运行指标总和
      */
-    async SubmitWorkflow(req, cb) {
-        return this.request("SubmitWorkflow", req, cb);
+    async DescribeTaskReport(req, cb) {
+        return this.request("DescribeTaskReport", req, cb);
     }
     /**
      * 批量删除集成任务
@@ -671,17 +904,28 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeIntegrationTasks", req, cb);
     }
     /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-修改任务脚本
+     * 更新监控状态
      */
-    async ModifyTaskScript(req, cb) {
-        return this.request("ModifyTaskScript", req, cb);
+    async ModifyMonitorStatus(req, cb) {
+        return this.request("ModifyMonitorStatus", req, cb);
+    }
+    /**
+     * 数据质量概览页面趋势变化接口
+     */
+    async DescribeTrendStat(req, cb) {
+        return this.request("DescribeTrendStat", req, cb);
     }
     /**
      * 获取数据表信息
      */
     async DescribeTableInfoList(req, cb) {
         return this.request("DescribeTableInfoList", req, cb);
+    }
+    /**
+     * 查询规则组订阅信息
+     */
+    async DescribeRuleGroupSubscription(req, cb) {
+        return this.request("DescribeRuleGroupSubscription", req, cb);
     }
     /**
      * 查询任务实例列表
@@ -694,6 +938,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteTaskAlarmRegular(req, cb) {
         return this.request("DeleteTaskAlarmRegular", req, cb);
+    }
+    /**
+     * 规则执行结果列表查询
+     */
+    async DescribeRuleExecResults(req, cb) {
+        return this.request("DescribeRuleExecResults", req, cb);
     }
     /**
      * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
@@ -709,10 +959,17 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteResource", req, cb);
     }
     /**
-     * 按起止日期统计离线任务的所有实例的运行指标总和
+     * 质量报告-质量分周期趋势
      */
-    async DescribeTaskReport(req, cb) {
-        return this.request("DescribeTaskReport", req, cb);
+    async DescribeQualityScoreTrend(req, cb) {
+        return this.request("DescribeQualityScoreTrend", req, cb);
+    }
+    /**
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+修改数据源
+     */
+    async ModifyDataSource(req, cb) {
+        return this.request("ModifyDataSource", req, cb);
     }
     /**
      * 查询任务告警规则列表
@@ -776,6 +1033,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("BatchSuspendIntegrationTasks", req, cb);
     }
     /**
+     * 提交规则组运行任务接口
+     */
+    async CommitRuleGroupTask(req, cb) {
+        return this.request("CommitRuleGroupTask", req, cb);
+    }
+    /**
      * 日志获取详情页面
      */
     async DescribeInstanceLastLog(req, cb) {
@@ -802,6 +1065,18 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SubmitCustomFunction", req, cb);
     }
     /**
+     * 质量报告-修改维度权限
+     */
+    async ModifyDimensionWeight(req, cb) {
+        return this.request("ModifyDimensionWeight", req, cb);
+    }
+    /**
+     * 检查规则模板名称是否重复
+     */
+    async CheckDuplicateTemplateName(req, cb) {
+        return this.request("CheckDuplicateTemplateName", req, cb);
+    }
+    /**
      * 批量继续执行集成实时任务
      */
     async BatchResumeIntegrationTasks(req, cb) {
@@ -814,11 +1089,23 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RestartInLongAgent", req, cb);
     }
     /**
+     * 查询模板详情
+     */
+    async DescribeRuleTemplate(req, cb) {
+        return this.request("DescribeRuleTemplate", req, cb);
+    }
+    /**
      * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
 提交任务
      */
     async SubmitTask(req, cb) {
         return this.request("SubmitTask", req, cb);
+    }
+    /**
+     * 数据质量，查询调度任务的实例列表
+     */
+    async DescribeInstances(req, cb) {
+        return this.request("DescribeInstances", req, cb);
     }
     /**
      * 获取数据源信息-数据源分页列表
@@ -839,16 +1126,34 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInLongAgentTaskList", req, cb);
     }
     /**
+     * 查询规则执行历史， 最近30条
+     */
+    async DescribeRuleExecHistory(req, cb) {
+        return this.request("DescribeRuleExecHistory", req, cb);
+    }
+    /**
+     * 查询规则模版列表
+     */
+    async DescribeRuleTemplates(req, cb) {
+        return this.request("DescribeRuleTemplates", req, cb);
+    }
+    /**
      * 离线任务实例统计明细
      */
     async DescribeTaskInstanceReportDetail(req, cb) {
         return this.request("DescribeTaskInstanceReportDetail", req, cb);
     }
     /**
-     * 暂停集成任务
+     * 查询规则组数据对象列表
      */
-    async SuspendIntegrationTask(req, cb) {
-        return this.request("SuspendIntegrationTask", req, cb);
+    async DescribeDataObjects(req, cb) {
+        return this.request("DescribeDataObjects", req, cb);
+    }
+    /**
+     * 更新规则组订阅信息
+     */
+    async ModifyRuleGroupSubscription(req, cb) {
+        return this.request("ModifyRuleGroupSubscription", req, cb);
     }
     /**
      * 获取项目信息
@@ -898,6 +1203,28 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeIntegrationStatistics(req, cb) {
         return this.request("DescribeIntegrationStatistics", req, cb);
+    }
+    /**
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+任务批量补录，调度状态任务才可以补录；
+
+
+
+     */
+    async MakeUpTasksNew(req, cb) {
+        return this.request("MakeUpTasksNew", req, cb);
+    }
+    /**
+     * 查询规则模版维度分布情况
+     */
+    async DescribeTemplateDimCount(req, cb) {
+        return this.request("DescribeTemplateDimCount", req, cb);
+    }
+    /**
+     * 数据质量获取生产调度任务列表
+     */
+    async DescribeProdTasks(req, cb) {
+        return this.request("DescribeProdTasks", req, cb);
     }
     /**
      * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>

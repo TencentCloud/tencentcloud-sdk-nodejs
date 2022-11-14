@@ -3433,11 +3433,6 @@ export interface ExportImagesRequest {
  */
 export interface ActionTimer {
   /**
-   * 扩展数据
-   */
-  Externals: Externals
-
-  /**
    * 定时器名称，目前仅支持销毁一个值：TerminateInstances。
    */
   TimerAction?: string
@@ -3446,6 +3441,11 @@ export interface ActionTimer {
    * 执行时间，格式形如：2018-5-29 11:26:40,执行时间必须大于当前时间5分钟。
    */
   ActionTime?: string
+
+  /**
+   * 扩展数据
+   */
+  Externals?: Externals
 }
 
 /**

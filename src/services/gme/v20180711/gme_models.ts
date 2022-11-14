@@ -1532,7 +1532,7 @@ export interface ScanVoiceRequest {
   Callback?: string
 
   /**
-   * 语言，目前jp代表日语
+   * 语种，不传默认中文
    */
   Lang?: string
 }

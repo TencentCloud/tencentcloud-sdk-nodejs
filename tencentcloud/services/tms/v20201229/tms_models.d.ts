@@ -79,6 +79,31 @@ export interface DetailResults {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     SubLabel: string;
+    /**
+      * 该字段用于返回当前一级标签（Label）下的关键词、子标签及分数。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Tags: Array<Tag>;
+}
+/**
+ * 该字段用于返回审核结果明细字段的标签及分数
+ */
+export interface Tag {
+    /**
+      * 该字段用于返回命中的关键词
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Keyword: string;
+    /**
+      * 该字段用于返回子标签
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SubLabel: string;
+    /**
+      * 该字段用于返回子标签对应的分数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Score: number;
 }
 /**
  * 用于表示业务用户的账号相关信息

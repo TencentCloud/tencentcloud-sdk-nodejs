@@ -18,77 +18,118 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  CreateRuleTemplateResponse,
   AlarmInfo,
   TaskLogResponse,
+  RuleHistory,
   DescribeIntegrationStatisticsResponse,
   UnlockIntegrationTaskResponse,
   DescribeStreamTaskLogListRequest,
   DescribeIntegrationNodeResponse,
   MakeUpTasksNewResponse,
   LogContentInfo,
+  DescribeRuleDimStatResponse,
   DescribeInstanceLogsRequest,
   DescribeTaskAlarmRegulationsResponse,
+  CheckIntegrationTaskNameExistsResponse,
   CreateDataSourceRequest,
   IntegrationNodeSchemaMapping,
+  DescribeTrendStatResponse,
   DescribeRealTimeTaskSpeedRequest,
+  DescribeRuleDimStatRequest,
   FreezeTasksRequest,
+  DescribeDataObjectsResponse,
+  DescribeRuleTemplatesResponse,
   MakeUpWorkflowNewResponse,
   CreateIntegrationNodeResponse,
   TaskInnerInfo,
+  SourceObject,
+  DescribeRulesResponse,
   RecordsSpeed,
   CreateWorkflowRequest,
   SubmitTaskRequest,
+  RuleExecResultDetail,
   DataSourceInfoPage,
+  DescribeRuleGroupExecResultsByPageRequest,
   Label,
   TaskExtInfo,
   BatchResumeIntegrationTasksResponse,
+  DescribeRuleExecResultsByPageResponse,
+  RuleGroupExecResult,
   AlarmEventInfo,
   BytesSpeed,
   CheckTaskNameExistRequest,
+  ThresholdValue,
   DescribeFunctionKindsRequest,
   DescribeFunctionKindsResponse,
+  DescribeTemplateDimCountRequest,
   ModifyIntegrationTaskResponse,
   DescribeDataSourceListRequest,
   DescribeIntegrationStatisticsRecordsTrendRequest,
   DescribeInLongTkeClusterListResponse,
   KillInstancesRequest,
+  DescribeDataCheckStatRequest,
   RegisterEventListenerResponse,
   RestartInLongAgentResponse,
   Workflow,
+  DescribeRuleExecResultsRequest,
   DescribeStandardRuleDetailInfoListResponse,
+  RunTaskResponse,
+  BatchStopTasksNewRequest,
   TriggerEventRequest,
-  BatchOperateResult,
+  ResourcePathTree,
   DescribeClusterNamespaceListResponse,
   CreateInLongAgentResponse,
+  TaskLinkInfo,
   DescribeInstanceLogRequest,
   DescribeKafkaTopicInfoRequest,
-  RestartInLongAgentRequest,
+  DescribeRuleGroupSubscriptionResponse,
   DescribeIntegrationStatisticsTaskStatusTrendResponse,
+  DescribeDataBasesResponse,
   SaveCustomFunctionRequest,
+  InLongTkeDetail,
+  RuleGroupExecStrategy,
   ModifyWorkflowScheduleRequest,
+  DescribeRuleDataSourcesResponse,
   RegisterEventRequest,
+  RuleTemplate,
+  DescribeRuleGroupsByPageRequest,
+  DescribeDataBasesRequest,
   BatchDeleteIntegrationTasksResponse,
   SearchConditionInstanceNew,
   BatchRerunIntegrationTaskInstancesRequest,
+  RuleTemplateHistoryPage,
+  DescribeDataObjectsRequest,
   SearchCondition,
+  Rule,
+  ModifyRuleGroupSubscriptionRequest,
   DescribeDataSourceListResponse,
   ModifyIntegrationTaskRequest,
+  ExportTaskInfo,
   BatchSuspendIntegrationTasksRequest,
   TaskCanvasInfo,
   DescribeFolderListData,
   TaskInstanceDetail,
+  UserFileDTO,
   DeleteCustomFunctionResponse,
-  DescribeTaskScriptResponse,
-  DescribeTaskInstanceResponse,
   InstanceNodeInfo,
+  DimensionScoreInfo,
+  DescribeTaskScriptResponse,
+  RuleExecDateStat,
+  DescribeTaskInstanceResponse,
+  DescribeProdTasksRequest,
+  CheckDuplicateTemplateNameRequest,
   BatchUpdateIntegrationTasksRequest,
   ResumeIntegrationTaskResponse,
   ModifyTaskNameResponse,
   DescribeTaskReportDetailListResponse,
   BatchResult,
+  DescribeRuleExecHistoryRequest,
   DescribeIntegrationStatisticsInstanceTrendResponse,
-  BatchReturn,
+  DescribeInstanceLogListRequest,
+  RunnerRuleExecResult,
   IntegrationNodeInfo,
+  DescribeRuleGroupResponse,
   DeleteDataSourcesResponse,
   DescribeTaskInstanceReportDetailRequest,
   ModifyTaskLinksRequest,
@@ -96,24 +137,29 @@ import {
   DeleteDataSourcesRequest,
   ModifyTaskAlarmRegularRequest,
   DescribeOrganizationalFunctionsRequest,
+  DescribeRuleTemplateResponse,
   DescribeKafkaTopicInfoResponse,
   RerunInstancesRequest,
+  DescribeTemplateHistoryRequest,
   CommitIntegrationTaskRequest,
   DescribeTableInfoListRequest,
-  InLongAgentDetail,
+  DescribeQualityScoreRequest,
   CommitIntegrationTaskResponse,
   IntegrationTaskInfo,
   SubmitTaskResponse,
   ModifyFolderRequest,
   DescribeAlarmEventsResponse,
   DescribeInstanceLogListResponse,
+  RuleGroup,
+  RuleConfig,
   RunTaskRequest,
   DescribeDependTasksNewRequest,
   CreateOfflineTaskResponse,
   CreateTaskAlarmRegularRequest,
-  OperateResult,
-  DescribeInstanceLogListRequest,
+  ModifyRuleRequest,
+  BatchReturn,
   DescribeInLongAgentListRequest,
+  DescribeRuleExecLogResponse,
   ParamInfo,
   DescribeInstanceLogsResponse,
   BatchDeleteIntegrationTasksRequest,
@@ -121,42 +167,57 @@ import {
   DescribeIntegrationStatisticsTaskStatusRequest,
   BatchDeleteTasksNewResponse,
   IntegrationNodeMapping,
+  ModifyRuleGroupSubscriptionResponse,
   SuspendIntegrationTaskRequest,
   CreateHiveTableByDDLResponse,
+  DescribeExecStrategyResponse,
   ModifyTaskScriptResponse,
   DeleteResourceResponse,
+  ModifyRuleResponse,
   Namespace,
+  RuleDimStat,
   DescribeTaskInstancesResponse,
   DescribeInstanceListRequest,
   DeleteCustomFunctionRequest,
   TaskInfoDataPage,
   TaskLockStatus,
+  BatchCreateIntegrationTaskAlarmsRequest,
   DescribeTaskInstancesData,
   DryRunDIOfflineTaskRequest,
   CreateOfflineTaskRequest,
   DescribeIntegrationStatisticsRecordsTrendResponse,
   DescribeFolderWorkflowListData,
+  TableConfig,
+  TableScoreStatisticsInfo,
   BatchForceSuccessIntegrationTaskInstancesResponse,
   TaskAlarmInfo,
   DescribeClusterNamespaceListRequest,
   AlarmReceiverInfo,
   GeneralTaskParam,
   CreateInLongAgentRequest,
-  UserFileDTO,
+  ModifyRuleTemplateRequest,
+  DescribeRuleExecStatResponse,
+  DimensionScore,
   CanvasInfo,
+  DescribeTableQualityDetailsRequest,
   IntegrationNodeDetail,
   ForceSucInstancesRequest,
+  DescribeRuleExecExportResultRequest,
   GenHiveTableDDLSqlRequest,
-  BatchCreateIntegrationTaskAlarmsRequest,
+  DescribeRuleExecResultsByPageRequest,
+  QualityScore,
   LockIntegrationTaskResponse,
   DescribeFunctionTypesResponse,
   DeleteWorkflowNewRequest,
   BatchUpdateIntegrationTasksResponse,
+  CheckDuplicateRuleNameRequest,
   MakeUpWorkflowNewRequest,
   DescribeInstanceLastLogRequest,
+  TableQualityDetailPage,
   DescribeTaskInstancesRequest,
   TaskInstanceInfo,
   CreateTaskAlarmRegularResponse,
+  DeleteRuleTemplateRequest,
   TableInfo,
   DescribeProjectRequest,
   CreateIntegrationTaskResponse,
@@ -169,105 +230,160 @@ import {
   BatchResumeIntegrationTasksRequest,
   DescribeFolderListRequest,
   DeleteTaskAlarmRegularResponse,
-  InstanceReportReadNode,
+  DescribeRuleGroupSubscriptionRequest,
+  DescribeInLongAgentListResponse,
   Folder,
   CreateTaskResponse,
+  TableQualityDetail,
   BatchStopIntegrationTasksResponse,
+  InLongAgentDetail,
   ModifyDataSourceRequest,
   DeleteIntegrationNodeResponse,
+  CommitRuleGroupExecResultRequest,
   DescribeDataSourceInfoListRequest,
   UpdateInLongAgentRequest,
+  DescribeRuleGroupExecResultsByPageWithoutAuthResponse,
   DescribeIntegrationNodeRequest,
   SetTaskAlarmNewResponse,
   DescribeDatasourceResponse,
+  RuleExecConfig,
   SuspendIntegrationTaskResponse,
   RecordField,
-  DeleteInLongAgentRequest,
-  DescribeIntegrationStatisticsAgentStatusResponse,
+  DescribeQualityScoreResponse,
+  DescribeRulesByPageResponse,
+  DescribeRuleTablesByPageRequest,
+  TopTableStatItem,
+  DeleteRuleResponse,
   DescribeDataSourceInfoListResponse,
   DescribeRelatedInstancesResponse,
-  CreateOrUpdateResourceRequest,
+  CheckIntegrationTaskNameExistsRequest,
   CheckIntegrationNodeNameExistsRequest,
   MakeUpTasksNewRequest,
+  DescribeDimensionScoreResponse,
+  SubmitWorkflowResponse,
   DescribeOrganizationalFunctionsResponse,
   DescribeDataTypesResponse,
   SubmitCustomFunctionRequest,
   DescribeDataTypesRequest,
-  CheckIntegrationTaskNameExistsResponse,
+  CheckDuplicateRuleNameResponse,
+  DeleteRuleRequest,
+  RealTimeTaskInstanceNodeInfo,
   GetOfflineInstanceListRequest,
   DescribeStreamTaskLogListResponse,
   DeleteWorkflowNewResponse,
+  DescribeRuleGroupExecResultsByPageResponse,
+  DescribeRuleGroupExecResultsByPageWithoutAuthRequest,
+  OfflineInstance,
+  DescribeInstancesResponse,
+  RulePage,
   DeleteIntegrationNodeRequest,
   ModifyIntegrationNodeResponse,
   DescribeIntegrationStatisticsTaskStatusTrendRequest,
+  DescribeRuleHistoryByPageResponse,
   UnlockIntegrationTaskRequest,
   ModifyTaskAlarmRegularResponse,
+  CreateRuleResponse,
   ModifyTaskLinksResponse,
   BatchMakeUpIntegrationTasksRequest,
   DeleteOfflineTaskRequest,
+  WeightInfo,
   DescribeInLongAgentVpcListRequest,
+  RuleExecExportResult,
   DescribeDatabaseInfoListResponse,
-  GetIntegrationNodeColumnSchemaResponse,
   CommonContent,
+  DescribeTableScoreTrendResponse,
   ModifyIntegrationNodeRequest,
-  SubmitWorkflowResponse,
+  ModifyMonitorStatusResponse,
+  DescribeRuleTemplatesByPageResponse,
   InstanceLog,
+  DescribeTemplateDimCountResponse,
   DescribeFunctionTypesRequest,
+  RestartInLongAgentRequest,
   BatchDeleteTasksNewRequest,
+  DimensionCount,
   DescribeInstanceLogResponse,
   DeleteInLongAgentResponse,
+  ModifyMonitorStatusRequest,
   DeleteFolderRequest,
   DescribeIntegrationTaskRequest,
+  DescribeRulesByPageRequest,
+  DescribeTopTableStatResponse,
+  ProdSchedulerTask,
   FreezeTasksByMultiWorkflowResponse,
   SaveCustomFunctionResponse,
+  OperateResult,
   CreateTaskRequest,
+  ModifyDimensionWeightRequest,
   SimpleTaskInfo,
   CreateFolderResponse,
   DescribeRealTimeTaskInstanceNodeInfoRequest,
   DescribeTaskInstanceReportDetailResponse,
   CreateHiveTableResponse,
+  RuleTemplatePage,
   ModifyDataSourceResponse,
+  DescribeMonitorsByPageRequest,
   SubmitWorkflowRequest,
   RerunInstancesResponse,
   DescribeTaskLockStatusResponse,
   StartIntegrationTaskResponse,
   BatchKillIntegrationTaskInstancesRequest,
+  InstanceReportWriteNode,
   DependencyConfig,
   RobAndLockIntegrationTaskRequest,
+  RuleGroupMonitorPage,
+  CommitExportTaskResponse,
   ModifyTaskInfoResponse,
-  SearchConditionNew,
-  ResumeIntegrationTaskRequest,
+  DataCheckStat,
+  CreateRuleRequest,
+  CommitRuleGroupTaskRequest,
+  DescribeTemplateHistoryResponse,
+  DescribeRuleExecResultsResponse,
+  QualityScoreTrend,
+  InstanceInfo,
   TaskInfoData,
   TriggerEventResponse,
+  DescribeInstancesRequest,
+  DescribeRuleDataSourcesRequest,
+  RuleExecLog,
   DescribeResourceManagePathTreesRequest,
   DescribeTasksByPageResponse,
   FunctionResource,
+  DescribeTableQualityDetailsResponse,
   DescribeStandardRuleDetailInfoListRequest,
   DescribeDataSourceWithoutInfoResponse,
+  RuleGroupSchedulerInfo,
   DatasourceBaseInfo,
+  DescribeRuleTemplatesRequest,
   RegisterEventResponse,
+  SubscribeReceiver,
+  DescribeQualityScoreTrendRequest,
   RobLockState,
   DescribeAlarmEventsRequest,
-  BatchStopTasksNewRequest,
+  CompareResult,
   InstanceReportSummary,
   CheckAlarmRegularNameExistResponse,
   SubmitCustomFunctionResponse,
+  DescribeRuleTablesByPageResponse,
   SpeedValue,
   FunctionVersion,
-  DescribeInLongAgentListResponse,
+  InstanceReportReadNode,
   DescribeTaskAlarmRegulationsRequest,
   FreezeTasksResponse,
   CreateCustomFunctionResponse,
   ModifyTaskInfoRequest,
   DataSourceInfo,
+  CompareRuleItem,
   DescribeTaskDetailRequest,
   DescribeOfflineTaskTokenRequest,
   CreateWorkflowResponse,
+  DescribeRuleExecDetailRequest,
   DeleteResourceRequest,
+  RuleGroupSubscribe,
   RegisterEventListenerRequest,
   CheckIntegrationNodeNameExistsResponse,
   RobAndLockIntegrationTaskResponse,
   DeleteTaskAlarmRegularRequest,
+  CompareRule,
   DescribeIntegrationStatisticsAgentStatusRequest,
   DeleteOfflineTaskResponse,
   TaskScriptContent,
@@ -276,34 +392,47 @@ import {
   ForceSucInstancesResponse,
   DescribeTaskLockStatusRequest,
   DescribeTaskReportResponse,
+  DescribeRuleGroupTableRequest,
   CheckAlarmRegularNameExistRequest,
   GetOfflineDIInstanceListResponse,
   SearchConditionInstance,
+  RuleExecResult,
   GetOfflineInstanceListResponse,
   CreateIntegrationTaskRequest,
-  RealTimeTaskInstanceNodeInfo,
+  FieldConfig,
   DescribeRealTimeTaskMetricOverviewRequest,
+  ModifyDimensionWeightResponse,
   DeleteFolderResponse,
   DescribeResourceManagePathTreesResponse,
+  RuleGroupMonitor,
   StartIntegrationTaskRequest,
   DescribeTaskDetailResponse,
+  RuleGroupTableInnerInfo,
   DeleteIntegrationTaskRequest,
+  CompareResultItem,
   CreateOrUpdateResourceResponse,
   ModifyTaskScriptRequest,
   CreateIntegrationNodeRequest,
   DescribeTableSchemaInfoRequest,
-  InstanceReportWriteNode,
+  DescribeTableScoreTrendRequest,
+  RuleExecResultPage,
+  ModifyExecStrategyRequest,
   BatchForceSuccessIntegrationTaskInstancesRequest,
   DescribeRealTimeTaskInstanceNodeInfoResponse,
+  RuleHistoryPage,
+  DescribeProdTasksResponse,
   DescribeTaskReportRequest,
+  CommitRuleGroupTaskResponse,
   DescribeRealTimeTaskMetricOverviewResponse,
   DescribeOfflineTaskTokenResponse,
   DescribeTableInfoListResponse,
   GetOfflineDIInstanceListRequest,
+  ModifyExecStrategyResponse,
   BatchStartIntegrationTasksRequest,
   CreateCustomFunctionRequest,
   IntegrationNodeSchema,
   DescribeDatasourceRequest,
+  RuleExecStat,
   KillInstancesResponse,
   SetTaskAlarmNewRequest,
   FunctionTypeOrKind,
@@ -316,65 +445,101 @@ import {
   DescribeFolderWorkflowListResponse,
   CreateFolderRequest,
   DescribeIntegrationVersionNodesInfoResponse,
+  DescribeRulesRequest,
+  DescribeRuleResponse,
   DescribeTaskScriptRequest,
+  DescribeRuleHistoryByPageRequest,
   SchemaDetail,
-  OfflineInstance,
+  DescribeRuleRequest,
   DescribeAlarmReceiverResponse,
   BatchModifyOwnersNewResponse,
-  ResourcePathTree,
-  TaskLinkInfo,
-  InLongTkeDetail,
+  DeleteInLongAgentRequest,
+  RuleDimCnt,
+  BatchOperateResult,
+  RuleGroupTable,
+  DescribeDimensionScoreRequest,
   InLongAgentTask,
   BatchStartIntegrationTasksResponse,
   DescribeIntegrationVersionNodesInfoRequest,
   DescribeRealTimeTaskSpeedResponse,
+  DescribeIntegrationStatisticsAgentStatusResponse,
   DescribeFolderWorkflowListRequest,
+  RuleFieldConfig,
   CheckTaskNameExistResponse,
   DescribeInLongAgentTaskListResponse,
   LockIntegrationTaskRequest,
   TaskReportDetail,
   BatchStopIntegrationTasksRequest,
+  DescribeRuleTemplatesByPageRequest,
+  DescribeMonitorsByPageResponse,
   DescribeInstanceLastLogResponse,
+  DescribeExecStrategyRequest,
   CreateHiveTableRequest,
   BatchKillIntegrationTaskInstancesResponse,
-  CheckIntegrationTaskNameExistsRequest,
+  ModifyRuleTemplateResponse,
+  CreateOrUpdateResourceRequest,
+  DescribeRuleGroupTableResponse,
   DescribeDataSourceWithoutInfoRequest,
+  DailyScoreInfo,
+  RuleTemplateHistory,
   DescribeInLongAgentVpcListResponse,
+  DeleteRuleTemplateResponse,
+  DescribeRuleTemplateRequest,
   FreezeTasksByMultiWorkflowRequest,
   CommonId,
+  CreateRuleTemplateRequest,
+  SearchConditionNew,
   BatchStopTasksNewResponse,
+  TopTableStat,
+  DescribeRuleExecDetailResponse,
   Filter,
   DeleteIntegrationTaskResponse,
-  InstanceInfo,
+  ResumeIntegrationTaskRequest,
+  DescribeRuleGroupsByPageResponse,
   DescribeFolderListResponse,
   DescribeIntegrationStatisticsTaskStatusResponse,
   DescribeDatabaseInfoListRequest,
   DescribeInLongTkeClusterListRequest,
+  DescribeRuleExecHistoryResponse,
   DescribeIntegrationTaskResponse,
+  DescribeQualityScoreTrendResponse,
   ModifyFolderResponse,
   CreateHiveTableByDDLRequest,
-  RunTaskResponse,
+  DatabaseInfo,
+  GetIntegrationNodeColumnSchemaResponse,
   StopIntegrationTaskResponse,
   DescribeDependTasksNewResponse,
+  CheckDuplicateTemplateNameResponse,
   DescribeRelatedInstancesRequest,
+  DescribeDataCheckStatResponse,
   DescribeIntegrationStatisticsInstanceTrendRequest,
   BatchModifyOwnersNewRequest,
   DryRunDIOfflineTaskResponse,
   GenHiveTableDDLSqlResponse,
+  DescribeRuleExecStatRequest,
   OfflineTaskAddParam,
+  DescribeRuleExecExportResultResponse,
   LogContent,
+  DescribeTopTableStatRequest,
   BatchCreateIntegrationTaskAlarmsResponse,
   DescribeIntegrationStatisticsRequest,
+  DescribeRuleGroupRequest,
   DescribeInLongAgentTaskListRequest,
   ModifyTaskNameRequest,
+  DescribeTrendStatRequest,
+  RuleGroupExecResultPage,
   ModifyWorkflowInfoResponse,
   OrganizationalFunction,
   OrderField,
   BatchSuspendIntegrationTasksResponse,
+  DescribeRuleExecLogRequest,
   BatchRerunIntegrationTaskInstancesResponse,
+  RuleGroupPage,
+  CommitRuleGroupExecResultResponse,
   DescribeIntegrationTasksRequest,
   DescribeTasksByPageRequest,
   BatchMakeUpIntegrationTasksResponse,
+  CommitExportTaskRequest,
   DescribeTaskInstanceRequest,
 } from "./wedata_models"
 
@@ -419,6 +584,37 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 检查规则名称是否重复
+   */
+  async CheckDuplicateRuleName(
+    req: CheckDuplicateRuleNameRequest,
+    cb?: (error: string, rep: CheckDuplicateRuleNameResponse) => void
+  ): Promise<CheckDuplicateRuleNameResponse> {
+    return this.request("CheckDuplicateRuleName", req, cb)
+  }
+
+  /**
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+运行任务
+     */
+  async RunTask(
+    req: RunTaskRequest,
+    cb?: (error: string, rep: RunTaskResponse) => void
+  ): Promise<RunTaskResponse> {
+    return this.request("RunTask", req, cb)
+  }
+
+  /**
+   * 创建规则模版
+   */
+  async CreateRuleTemplate(
+    req: CreateRuleTemplateRequest,
+    cb?: (error: string, rep: CreateRuleTemplateResponse) => void
+  ): Promise<CreateRuleTemplateResponse> {
+    return this.request("CreateRuleTemplate", req, cb)
+  }
+
+  /**
    * 实时任务运行指标概览
    */
   async DescribeRealTimeTaskMetricOverview(
@@ -439,17 +635,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-任务批量补录，调度状态任务才可以补录；
+   * 数据质量的概览页面数据监测情况接口
+   */
+  async DescribeDataCheckStat(
+    req: DescribeDataCheckStatRequest,
+    cb?: (error: string, rep: DescribeDataCheckStatResponse) => void
+  ): Promise<DescribeDataCheckStatResponse> {
+    return this.request("DescribeDataCheckStat", req, cb)
+  }
 
-
-
-     */
-  async MakeUpTasksNew(
-    req: MakeUpTasksNewRequest,
-    cb?: (error: string, rep: MakeUpTasksNewResponse) => void
-  ): Promise<MakeUpTasksNewResponse> {
-    return this.request("MakeUpTasksNew", req, cb)
+  /**
+   * 分页查询规则执行结果列表
+   */
+  async DescribeRuleExecResultsByPage(
+    req: DescribeRuleExecResultsByPageRequest,
+    cb?: (error: string, rep: DescribeRuleExecResultsByPageResponse) => void
+  ): Promise<DescribeRuleExecResultsByPageResponse> {
+    return this.request("DescribeRuleExecResultsByPage", req, cb)
   }
 
   /**
@@ -481,6 +683,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: BatchKillIntegrationTaskInstancesResponse) => void
   ): Promise<BatchKillIntegrationTaskInstancesResponse> {
     return this.request("BatchKillIntegrationTaskInstances", req, cb)
+  }
+
+  /**
+   * 更新规则组执行策略
+   */
+  async ModifyExecStrategy(
+    req: ModifyExecStrategyRequest,
+    cb?: (error: string, rep: ModifyExecStrategyResponse) => void
+  ): Promise<ModifyExecStrategyResponse> {
+    return this.request("ModifyExecStrategy", req, cb)
   }
 
   /**
@@ -694,6 +906,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除规则模版
+   */
+  async DeleteRuleTemplate(
+    req: DeleteRuleTemplateRequest,
+    cb?: (error: string, rep: DeleteRuleTemplateResponse) => void
+  ): Promise<DeleteRuleTemplateResponse> {
+    return this.request("DeleteRuleTemplate", req, cb)
+  }
+
+  /**
    * 抢占锁定集成任务
    */
   async RobAndLockIntegrationTask(
@@ -721,6 +943,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAlarmEventsResponse) => void
   ): Promise<DescribeAlarmEventsResponse> {
     return this.request("DescribeAlarmEvents", req, cb)
+  }
+
+  /**
+   * 质量报告-质量评分
+   */
+  async DescribeQualityScore(
+    req: DescribeQualityScoreRequest,
+    cb?: (error: string, rep: DescribeQualityScoreResponse) => void
+  ): Promise<DescribeQualityScoreResponse> {
+    return this.request("DescribeQualityScore", req, cb)
+  }
+
+  /**
+   * 数据质量概览页面触发维度分布统计接口
+   */
+  async DescribeRuleDimStat(
+    req: DescribeRuleDimStatRequest,
+    cb?: (error: string, rep: DescribeRuleDimStatResponse) => void
+  ): Promise<DescribeRuleDimStatResponse> {
+    return this.request("DescribeRuleDimStat", req, cb)
   }
 
   /**
@@ -755,6 +997,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 数据质量概览页面表排行接口
+   */
+  async DescribeTopTableStat(
+    req: DescribeTopTableStatRequest,
+    cb?: (error: string, rep: DescribeTopTableStatResponse) => void
+  ): Promise<DescribeTopTableStatResponse> {
+    return this.request("DescribeTopTableStat", req, cb)
+  }
+
+  /**
    * 查询全量函数
    */
   async DescribeOrganizationalFunctions(
@@ -772,6 +1024,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteInLongAgentResponse) => void
   ): Promise<DeleteInLongAgentResponse> {
     return this.request("DeleteInLongAgent", req, cb)
+  }
+
+  /**
+   * Runner 规则检测结果上报
+   */
+  async CommitRuleGroupExecResult(
+    req: CommitRuleGroupExecResultRequest,
+    cb?: (error: string, rep: CommitRuleGroupExecResultResponse) => void
+  ): Promise<CommitRuleGroupExecResultResponse> {
+    return this.request("CommitRuleGroupExecResult", req, cb)
   }
 
   /**
@@ -795,6 +1057,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 质量报告-查询质量评分
+   */
+  async DescribeDimensionScore(
+    req: DescribeDimensionScoreRequest,
+    cb?: (error: string, rep: DescribeDimensionScoreResponse) => void
+  ): Promise<DescribeDimensionScoreResponse> {
+    return this.request("DescribeDimensionScore", req, cb)
+  }
+
+  /**
+   * 查询表绑定执行规则组信息
+   */
+  async DescribeRuleGroupTable(
+    req: DescribeRuleGroupTableRequest,
+    cb?: (error: string, rep: DescribeRuleGroupTableResponse) => void
+  ): Promise<DescribeRuleGroupTableResponse> {
+    return this.request("DescribeRuleGroupTable", req, cb)
+  }
+
+  /**
    * 获取TKE集群列表
    */
   async DescribeInLongTkeClusterList(
@@ -812,6 +1094,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateIntegrationTaskResponse) => void
   ): Promise<CreateIntegrationTaskResponse> {
     return this.request("CreateIntegrationTask", req, cb)
+  }
+
+  /**
+   * 提交数据导出任务
+   */
+  async CommitExportTask(
+    req: CommitExportTaskRequest,
+    cb?: (error: string, rep: CommitExportTaskResponse) => void
+  ): Promise<CommitExportTaskResponse> {
+    return this.request("CommitExportTask", req, cb)
+  }
+
+  /**
+   * 过滤条件【必要字段】{ruleId}
+   */
+  async DescribeRuleHistoryByPage(
+    req: DescribeRuleHistoryByPageRequest,
+    cb?: (error: string, rep: DescribeRuleHistoryByPageResponse) => void
+  ): Promise<DescribeRuleHistoryByPageResponse> {
+    return this.request("DescribeRuleHistoryByPage", req, cb)
   }
 
   /**
@@ -834,6 +1136,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyTaskInfoResponse) => void
   ): Promise<ModifyTaskInfoResponse> {
     return this.request("ModifyTaskInfo", req, cb)
+  }
+
+  /**
+   * 获取表列表
+   */
+  async DescribeRuleTablesByPage(
+    req: DescribeRuleTablesByPageRequest,
+    cb?: (error: string, rep: DescribeRuleTablesByPageResponse) => void
+  ): Promise<DescribeRuleTablesByPageResponse> {
+    return this.request("DescribeRuleTablesByPage", req, cb)
   }
 
   /**
@@ -867,6 +1179,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 分页查询质量监控组
+   */
+  async DescribeMonitorsByPage(
+    req: DescribeMonitorsByPageRequest,
+    cb?: (error: string, rep: DescribeMonitorsByPageResponse) => void
+  ): Promise<DescribeMonitorsByPageResponse> {
+    return this.request("DescribeMonitorsByPage", req, cb)
+  }
+
+  /**
    * 重命名任务（任务编辑）
    */
   async ModifyTaskName(
@@ -874,6 +1196,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyTaskNameResponse) => void
   ): Promise<ModifyTaskNameResponse> {
     return this.request("ModifyTaskName", req, cb)
+  }
+
+  /**
+   * 查询规则执行结果详情
+   */
+  async DescribeRuleExecDetail(
+    req: DescribeRuleExecDetailRequest,
+    cb?: (error: string, rep: DescribeRuleExecDetailResponse) => void
+  ): Promise<DescribeRuleExecDetailResponse> {
+    return this.request("DescribeRuleExecDetail", req, cb)
   }
 
   /**
@@ -981,6 +1313,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 更新质量规则接口
+   */
+  async ModifyRule(
+    req: ModifyRuleRequest,
+    cb?: (error: string, rep: ModifyRuleResponse) => void
+  ): Promise<ModifyRuleResponse> {
+    return this.request("ModifyRule", req, cb)
+  }
+
+  /**
    * 查询函数类型
    */
   async DescribeFunctionTypes(
@@ -998,6 +1340,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTaskReportDetailListResponse) => void
   ): Promise<DescribeTaskReportDetailListResponse> {
     return this.request("DescribeTaskReportDetailList", req, cb)
+  }
+
+  /**
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+提交工作流
+     */
+  async SubmitWorkflow(
+    req: SubmitWorkflowRequest,
+    cb?: (error: string, rep: SubmitWorkflowResponse) => void
+  ): Promise<SubmitWorkflowResponse> {
+    return this.request("SubmitWorkflow", req, cb)
   }
 
   /**
@@ -1082,6 +1435,17 @@ export class Client extends AbstractClient {
 
   /**
      * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+修改任务脚本
+     */
+  async ModifyTaskScript(
+    req: ModifyTaskScriptRequest,
+    cb?: (error: string, rep: ModifyTaskScriptResponse) => void
+  ): Promise<ModifyTaskScriptResponse> {
+    return this.request("ModifyTaskScript", req, cb)
+  }
+
+  /**
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
 实例批量置成功
      */
   async ForceSucInstances(
@@ -1092,6 +1456,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询规则组详情接口
+   */
+  async DescribeRuleGroup(
+    req: DescribeRuleGroupRequest,
+    cb?: (error: string, rep: DescribeRuleGroupResponse) => void
+  ): Promise<DescribeRuleGroupResponse> {
+    return this.request("DescribeRuleGroup", req, cb)
+  }
+
+  /**
    * 获取数据库信息
    */
   async DescribeDatabaseInfoList(
@@ -1099,6 +1473,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDatabaseInfoListResponse) => void
   ): Promise<DescribeDatabaseInfoListResponse> {
     return this.request("DescribeDatabaseInfoList", req, cb)
+  }
+
+  /**
+   * 查询规则模版操作记录
+   */
+  async DescribeTemplateHistory(
+    req: DescribeTemplateHistoryRequest,
+    cb?: (error: string, rep: DescribeTemplateHistoryResponse) => void
+  ): Promise<DescribeTemplateHistoryResponse> {
+    return this.request("DescribeTemplateHistory", req, cb)
   }
 
   /**
@@ -1122,6 +1506,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询质量规则数据源
+   */
+  async DescribeRuleDataSources(
+    req: DescribeRuleDataSourcesRequest,
+    cb?: (error: string, rep: DescribeRuleDataSourcesResponse) => void
+  ): Promise<DescribeRuleDataSourcesResponse> {
+    return this.request("DescribeRuleDataSources", req, cb)
+  }
+
+  /**
    * 创建hive表，返回表名称
    */
   async CreateHiveTableByDDL(
@@ -1129,6 +1523,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateHiveTableByDDLResponse) => void
   ): Promise<CreateHiveTableByDDLResponse> {
     return this.request("CreateHiveTableByDDL", req, cb)
+  }
+
+  /**
+   * 规则组执行结果分页查询接口不带鉴权
+   */
+  async DescribeRuleGroupExecResultsByPageWithoutAuth(
+    req: DescribeRuleGroupExecResultsByPageWithoutAuthRequest,
+    cb?: (error: string, rep: DescribeRuleGroupExecResultsByPageWithoutAuthResponse) => void
+  ): Promise<DescribeRuleGroupExecResultsByPageWithoutAuthResponse> {
+    return this.request("DescribeRuleGroupExecResultsByPageWithoutAuth", req, cb)
   }
 
   /**
@@ -1173,14 +1577,56 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-修改数据源
+   * 创建质量规则接口
+   */
+  async CreateRule(
+    req: CreateRuleRequest,
+    cb?: (error: string, rep: CreateRuleResponse) => void
+  ): Promise<CreateRuleResponse> {
+    return this.request("CreateRule", req, cb)
+  }
+
+  /**
+   * 编辑规则模版
+   */
+  async ModifyRuleTemplate(
+    req: ModifyRuleTemplateRequest,
+    cb?: (error: string, rep: ModifyRuleTemplateResponse) => void
+  ): Promise<ModifyRuleTemplateResponse> {
+    return this.request("ModifyRuleTemplate", req, cb)
+  }
+
+  /**
+   * 查询表得分趋势
+   */
+  async DescribeTableScoreTrend(
+    req: DescribeTableScoreTrendRequest,
+    cb?: (error: string, rep: DescribeTableScoreTrendResponse) => void
+  ): Promise<DescribeTableScoreTrendResponse> {
+    return this.request("DescribeTableScoreTrend", req, cb)
+  }
+
+  /**
+   * 质量报告-查询表质量详情
+   */
+  async DescribeTableQualityDetails(
+    req: DescribeTableQualityDetailsRequest,
+    cb?: (error: string, rep: DescribeTableQualityDetailsResponse) => void
+  ): Promise<DescribeTableQualityDetailsResponse> {
+    return this.request("DescribeTableQualityDetails", req, cb)
+  }
+
+  /**
+     * 【过滤条件】
+{表名称TableName,支持模糊匹配}       {表负责人TableOwnerName,支持模糊匹配}      {监控方式MonitorTypes，1.未配置 2.关联生产调度 3.离线周期检测,支持多选}  {订阅人ReceiverUin}
+【必要字段】
+{数据来源DatasourceId}
      */
-  async ModifyDataSource(
-    req: ModifyDataSourceRequest,
-    cb?: (error: string, rep: ModifyDataSourceResponse) => void
-  ): Promise<ModifyDataSourceResponse> {
-    return this.request("ModifyDataSource", req, cb)
+  async DescribeRuleGroupsByPage(
+    req: DescribeRuleGroupsByPageRequest,
+    cb?: (error: string, rep: DescribeRuleGroupsByPageResponse) => void
+  ): Promise<DescribeRuleGroupsByPageResponse> {
+    return this.request("DescribeRuleGroupsByPage", req, cb)
   }
 
   /**
@@ -1217,6 +1663,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除质量规则接口
+   */
+  async DeleteRule(
+    req: DeleteRuleRequest,
+    cb?: (error: string, rep: DeleteRuleResponse) => void
+  ): Promise<DeleteRuleResponse> {
+    return this.request("DeleteRule", req, cb)
+  }
+
+  /**
    * 判断告警规则重名
    */
   async CheckAlarmRegularNameExist(
@@ -1247,6 +1703,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 分页查询质量规则
+   */
+  async DescribeRulesByPage(
+    req: DescribeRulesByPageRequest,
+    cb?: (error: string, rep: DescribeRulesByPageResponse) => void
+  ): Promise<DescribeRulesByPageResponse> {
+    return this.request("DescribeRulesByPage", req, cb)
+  }
+
+  /**
    * 获取离线任务实例列表(新)
    */
   async GetOfflineDIInstanceList(
@@ -1267,6 +1733,46 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 规则执行日志查询
+   */
+  async DescribeRuleExecLog(
+    req: DescribeRuleExecLogRequest,
+    cb?: (error: string, rep: DescribeRuleExecLogResponse) => void
+  ): Promise<DescribeRuleExecLogResponse> {
+    return this.request("DescribeRuleExecLog", req, cb)
+  }
+
+  /**
+   * 查询数据来源列表
+   */
+  async DescribeDataBases(
+    req: DescribeDataBasesRequest,
+    cb?: (error: string, rep: DescribeDataBasesResponse) => void
+  ): Promise<DescribeDataBasesResponse> {
+    return this.request("DescribeDataBases", req, cb)
+  }
+
+  /**
+   * 查询规则详情
+   */
+  async DescribeRule(
+    req: DescribeRuleRequest,
+    cb?: (error: string, rep: DescribeRuleResponse) => void
+  ): Promise<DescribeRuleResponse> {
+    return this.request("DescribeRule", req, cb)
+  }
+
+  /**
+   * 过滤条件】 {模版名称Name,支持模糊匹配} {模版类型type，1.系统模版 2.自定义模版} {质量检测维度QualityDims, 1.准确性 2.唯一性 3.完整性 4.一致性 5.及时性 6.有效性} 【排序字段】 { 引用数排序类型CitationOrderType，根据引用数量排序 ASC DESC}
+   */
+  async DescribeRuleTemplatesByPage(
+    req: DescribeRuleTemplatesByPageRequest,
+    cb?: (error: string, rep: DescribeRuleTemplatesByPageResponse) => void
+  ): Promise<DescribeRuleTemplatesByPageResponse> {
+    return this.request("DescribeRuleTemplatesByPage", req, cb)
+  }
+
+  /**
      * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
 更新工作流
      */
@@ -1278,6 +1784,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 数据质量概览页面规则运行情况接口
+   */
+  async DescribeRuleExecStat(
+    req: DescribeRuleExecStatRequest,
+    cb?: (error: string, rep: DescribeRuleExecStatResponse) => void
+  ): Promise<DescribeRuleExecStatResponse> {
+    return this.request("DescribeRuleExecStat", req, cb)
+  }
+
+  /**
      * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
 添加父任务依赖
      */
@@ -1286,6 +1802,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyTaskLinksResponse) => void
   ): Promise<ModifyTaskLinksResponse> {
     return this.request("ModifyTaskLinks", req, cb)
+  }
+
+  /**
+   * 规则组执行结果分页查询接口
+   */
+  async DescribeRuleGroupExecResultsByPage(
+    req: DescribeRuleGroupExecResultsByPageRequest,
+    cb?: (error: string, rep: DescribeRuleGroupExecResultsByPageResponse) => void
+  ): Promise<DescribeRuleGroupExecResultsByPageResponse> {
+    return this.request("DescribeRuleGroupExecResultsByPage", req, cb)
   }
 
   /**
@@ -1362,6 +1888,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询规则组执行策略
+   */
+  async DescribeExecStrategy(
+    req: DescribeExecStrategyRequest,
+    cb?: (error: string, rep: DescribeExecStrategyResponse) => void
+  ): Promise<DescribeExecStrategyResponse> {
+    return this.request("DescribeExecStrategy", req, cb)
+  }
+
+  /**
      * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
 创建工作流
      */
@@ -1373,14 +1909,33 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-运行任务
-     */
-  async RunTask(
-    req: RunTaskRequest,
-    cb?: (error: string, rep: RunTaskResponse) => void
-  ): Promise<RunTaskResponse> {
-    return this.request("RunTask", req, cb)
+   * 暂停集成任务
+   */
+  async SuspendIntegrationTask(
+    req: SuspendIntegrationTaskRequest,
+    cb?: (error: string, rep: SuspendIntegrationTaskResponse) => void
+  ): Promise<SuspendIntegrationTaskResponse> {
+    return this.request("SuspendIntegrationTask", req, cb)
+  }
+
+  /**
+   * 查询规则执行导出结果
+   */
+  async DescribeRuleExecExportResult(
+    req: DescribeRuleExecExportResultRequest,
+    cb?: (error: string, rep: DescribeRuleExecExportResultResponse) => void
+  ): Promise<DescribeRuleExecExportResultResponse> {
+    return this.request("DescribeRuleExecExportResult", req, cb)
+  }
+
+  /**
+   * 查询质量规则列表
+   */
+  async DescribeRules(
+    req: DescribeRulesRequest,
+    cb?: (error: string, rep: DescribeRulesResponse) => void
+  ): Promise<DescribeRulesResponse> {
+    return this.request("DescribeRules", req, cb)
   }
 
   /**
@@ -1404,14 +1959,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-提交工作流
-     */
-  async SubmitWorkflow(
-    req: SubmitWorkflowRequest,
-    cb?: (error: string, rep: SubmitWorkflowResponse) => void
-  ): Promise<SubmitWorkflowResponse> {
-    return this.request("SubmitWorkflow", req, cb)
+   * 按起止日期统计离线任务的所有实例的运行指标总和
+   */
+  async DescribeTaskReport(
+    req: DescribeTaskReportRequest,
+    cb?: (error: string, rep: DescribeTaskReportResponse) => void
+  ): Promise<DescribeTaskReportResponse> {
+    return this.request("DescribeTaskReport", req, cb)
   }
 
   /**
@@ -1435,14 +1989,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-修改任务脚本
-     */
-  async ModifyTaskScript(
-    req: ModifyTaskScriptRequest,
-    cb?: (error: string, rep: ModifyTaskScriptResponse) => void
-  ): Promise<ModifyTaskScriptResponse> {
-    return this.request("ModifyTaskScript", req, cb)
+   * 更新监控状态
+   */
+  async ModifyMonitorStatus(
+    req: ModifyMonitorStatusRequest,
+    cb?: (error: string, rep: ModifyMonitorStatusResponse) => void
+  ): Promise<ModifyMonitorStatusResponse> {
+    return this.request("ModifyMonitorStatus", req, cb)
+  }
+
+  /**
+   * 数据质量概览页面趋势变化接口
+   */
+  async DescribeTrendStat(
+    req: DescribeTrendStatRequest,
+    cb?: (error: string, rep: DescribeTrendStatResponse) => void
+  ): Promise<DescribeTrendStatResponse> {
+    return this.request("DescribeTrendStat", req, cb)
   }
 
   /**
@@ -1453,6 +2016,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTableInfoListResponse) => void
   ): Promise<DescribeTableInfoListResponse> {
     return this.request("DescribeTableInfoList", req, cb)
+  }
+
+  /**
+   * 查询规则组订阅信息
+   */
+  async DescribeRuleGroupSubscription(
+    req: DescribeRuleGroupSubscriptionRequest,
+    cb?: (error: string, rep: DescribeRuleGroupSubscriptionResponse) => void
+  ): Promise<DescribeRuleGroupSubscriptionResponse> {
+    return this.request("DescribeRuleGroupSubscription", req, cb)
   }
 
   /**
@@ -1473,6 +2046,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteTaskAlarmRegularResponse) => void
   ): Promise<DeleteTaskAlarmRegularResponse> {
     return this.request("DeleteTaskAlarmRegular", req, cb)
+  }
+
+  /**
+   * 规则执行结果列表查询
+   */
+  async DescribeRuleExecResults(
+    req: DescribeRuleExecResultsRequest,
+    cb?: (error: string, rep: DescribeRuleExecResultsResponse) => void
+  ): Promise<DescribeRuleExecResultsResponse> {
+    return this.request("DescribeRuleExecResults", req, cb)
   }
 
   /**
@@ -1497,13 +2080,24 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 按起止日期统计离线任务的所有实例的运行指标总和
+   * 质量报告-质量分周期趋势
    */
-  async DescribeTaskReport(
-    req: DescribeTaskReportRequest,
-    cb?: (error: string, rep: DescribeTaskReportResponse) => void
-  ): Promise<DescribeTaskReportResponse> {
-    return this.request("DescribeTaskReport", req, cb)
+  async DescribeQualityScoreTrend(
+    req: DescribeQualityScoreTrendRequest,
+    cb?: (error: string, rep: DescribeQualityScoreTrendResponse) => void
+  ): Promise<DescribeQualityScoreTrendResponse> {
+    return this.request("DescribeQualityScoreTrend", req, cb)
+  }
+
+  /**
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+修改数据源
+     */
+  async ModifyDataSource(
+    req: ModifyDataSourceRequest,
+    cb?: (error: string, rep: ModifyDataSourceResponse) => void
+  ): Promise<ModifyDataSourceResponse> {
+    return this.request("ModifyDataSource", req, cb)
   }
 
   /**
@@ -1608,6 +2202,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 提交规则组运行任务接口
+   */
+  async CommitRuleGroupTask(
+    req: CommitRuleGroupTaskRequest,
+    cb?: (error: string, rep: CommitRuleGroupTaskResponse) => void
+  ): Promise<CommitRuleGroupTaskResponse> {
+    return this.request("CommitRuleGroupTask", req, cb)
+  }
+
+  /**
    * 日志获取详情页面
    */
   async DescribeInstanceLastLog(
@@ -1650,6 +2254,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 质量报告-修改维度权限
+   */
+  async ModifyDimensionWeight(
+    req: ModifyDimensionWeightRequest,
+    cb?: (error: string, rep: ModifyDimensionWeightResponse) => void
+  ): Promise<ModifyDimensionWeightResponse> {
+    return this.request("ModifyDimensionWeight", req, cb)
+  }
+
+  /**
+   * 检查规则模板名称是否重复
+   */
+  async CheckDuplicateTemplateName(
+    req: CheckDuplicateTemplateNameRequest,
+    cb?: (error: string, rep: CheckDuplicateTemplateNameResponse) => void
+  ): Promise<CheckDuplicateTemplateNameResponse> {
+    return this.request("CheckDuplicateTemplateName", req, cb)
+  }
+
+  /**
    * 批量继续执行集成实时任务
    */
   async BatchResumeIntegrationTasks(
@@ -1670,6 +2294,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询模板详情
+   */
+  async DescribeRuleTemplate(
+    req: DescribeRuleTemplateRequest,
+    cb?: (error: string, rep: DescribeRuleTemplateResponse) => void
+  ): Promise<DescribeRuleTemplateResponse> {
+    return this.request("DescribeRuleTemplate", req, cb)
+  }
+
+  /**
      * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
 提交任务
      */
@@ -1678,6 +2312,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SubmitTaskResponse) => void
   ): Promise<SubmitTaskResponse> {
     return this.request("SubmitTask", req, cb)
+  }
+
+  /**
+   * 数据质量，查询调度任务的实例列表
+   */
+  async DescribeInstances(
+    req: DescribeInstancesRequest,
+    cb?: (error: string, rep: DescribeInstancesResponse) => void
+  ): Promise<DescribeInstancesResponse> {
+    return this.request("DescribeInstances", req, cb)
   }
 
   /**
@@ -1711,6 +2355,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询规则执行历史， 最近30条
+   */
+  async DescribeRuleExecHistory(
+    req: DescribeRuleExecHistoryRequest,
+    cb?: (error: string, rep: DescribeRuleExecHistoryResponse) => void
+  ): Promise<DescribeRuleExecHistoryResponse> {
+    return this.request("DescribeRuleExecHistory", req, cb)
+  }
+
+  /**
+   * 查询规则模版列表
+   */
+  async DescribeRuleTemplates(
+    req: DescribeRuleTemplatesRequest,
+    cb?: (error: string, rep: DescribeRuleTemplatesResponse) => void
+  ): Promise<DescribeRuleTemplatesResponse> {
+    return this.request("DescribeRuleTemplates", req, cb)
+  }
+
+  /**
    * 离线任务实例统计明细
    */
   async DescribeTaskInstanceReportDetail(
@@ -1721,13 +2385,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 暂停集成任务
+   * 查询规则组数据对象列表
    */
-  async SuspendIntegrationTask(
-    req: SuspendIntegrationTaskRequest,
-    cb?: (error: string, rep: SuspendIntegrationTaskResponse) => void
-  ): Promise<SuspendIntegrationTaskResponse> {
-    return this.request("SuspendIntegrationTask", req, cb)
+  async DescribeDataObjects(
+    req: DescribeDataObjectsRequest,
+    cb?: (error: string, rep: DescribeDataObjectsResponse) => void
+  ): Promise<DescribeDataObjectsResponse> {
+    return this.request("DescribeDataObjects", req, cb)
+  }
+
+  /**
+   * 更新规则组订阅信息
+   */
+  async ModifyRuleGroupSubscription(
+    req: ModifyRuleGroupSubscriptionRequest,
+    cb?: (error: string, rep: ModifyRuleGroupSubscriptionResponse) => void
+  ): Promise<ModifyRuleGroupSubscriptionResponse> {
+    return this.request("ModifyRuleGroupSubscription", req, cb)
   }
 
   /**
@@ -1809,6 +2483,40 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeIntegrationStatisticsResponse) => void
   ): Promise<DescribeIntegrationStatisticsResponse> {
     return this.request("DescribeIntegrationStatistics", req, cb)
+  }
+
+  /**
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+任务批量补录，调度状态任务才可以补录；
+
+
+
+     */
+  async MakeUpTasksNew(
+    req: MakeUpTasksNewRequest,
+    cb?: (error: string, rep: MakeUpTasksNewResponse) => void
+  ): Promise<MakeUpTasksNewResponse> {
+    return this.request("MakeUpTasksNew", req, cb)
+  }
+
+  /**
+   * 查询规则模版维度分布情况
+   */
+  async DescribeTemplateDimCount(
+    req: DescribeTemplateDimCountRequest,
+    cb?: (error: string, rep: DescribeTemplateDimCountResponse) => void
+  ): Promise<DescribeTemplateDimCountResponse> {
+    return this.request("DescribeTemplateDimCount", req, cb)
+  }
+
+  /**
+   * 数据质量获取生产调度任务列表
+   */
+  async DescribeProdTasks(
+    req: DescribeProdTasksRequest,
+    cb?: (error: string, rep: DescribeProdTasksResponse) => void
+  ): Promise<DescribeProdTasksResponse> {
+    return this.request("DescribeProdTasks", req, cb)
   }
 
   /**

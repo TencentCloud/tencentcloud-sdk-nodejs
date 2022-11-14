@@ -1858,6 +1858,11 @@ export interface StructuralItem {
 坐标。
       */
   ItemCoord: ItemCoord
+
+  /**
+   * 字段所在行号，下标从0开始，非行字段或未能识别行号的该值返回-1。
+   */
+  Row: number
 }
 
 /**

@@ -1051,6 +1051,14 @@ export interface CreateImageSpriteTemplateRequest {
 默认值：open。
       */
     ResolutionAdaptive?: string;
+    /**
+      * 图片格式，取值：
+<li> jpg：jpg 格式；</li>
+<li> png：png 格式；</li>
+<li> webp：webp 格式。</li>
+默认值：jpg。
+      */
+    Format?: string;
 }
 /**
  * 指定时间点截图信息
@@ -8645,6 +8653,10 @@ export interface ImageSpriteTemplate {
       * 模板描述信息。
       */
     Comment: string;
+    /**
+      * 图片格式。
+      */
+    Format: string;
 }
 /**
  * 文本全文识别片段。
@@ -12770,6 +12782,13 @@ export interface ModifyImageSpriteTemplateRequest {
       * 模板描述信息，长度限制：256 个字符。
       */
     Comment?: string;
+    /**
+      * 图片格式，取值：
+<li> jpg：jpg 格式；</li>
+<li> png：png 格式；</li>
+<li> webp：webp 格式。</li>
+      */
+    Format?: string;
 }
 /**
  * 音视频审核 Ocr 文字鉴违禁任务输入参数类型

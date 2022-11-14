@@ -36,6 +36,7 @@ import {
   DescribeBindClustersResponse,
   BindCluster,
   ModifyClusterResponse,
+  VpcConfig,
   RocketMQClusterRecentStats,
   RocketMQVipInstance,
   RabbitMQVipInstance,

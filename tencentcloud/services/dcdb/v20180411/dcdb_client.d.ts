@@ -231,7 +231,7 @@ export declare class Client extends AbstractClient {
      */
     CancelDcnJob(req: CancelDcnJobRequest, cb?: (error: string, rep: CancelDcnJobResponse) => void): Promise<CancelDcnJobResponse>;
     /**
-     * 本接口（IsolateDedicatedDBInstance）用于销毁已隔离的独享分布式数据库实例。
+     * 本接口（TerminateDedicatedDBInstance）用于销毁已隔离的独享分布式数据库实例。
      */
     TerminateDedicatedDBInstance(req: TerminateDedicatedDBInstanceRequest, cb?: (error: string, rep: TerminateDedicatedDBInstanceResponse) => void): Promise<TerminateDedicatedDBInstanceResponse>;
     /**

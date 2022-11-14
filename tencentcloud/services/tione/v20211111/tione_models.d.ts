@@ -570,7 +570,7 @@ export interface DescribeTrainingFrameworksResponse {
  */
 export interface DescribeModelServiceGroupRequest {
     /**
-      * 无
+      * 服务组ID
       */
     ServiceGroupId: string;
 }

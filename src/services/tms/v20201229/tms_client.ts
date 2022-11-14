@@ -21,6 +21,7 @@ import {
   RiskDetails,
   TextModerationRequest,
   DetailResults,
+  Tag,
   User,
   Device,
   TextModerationResponse,

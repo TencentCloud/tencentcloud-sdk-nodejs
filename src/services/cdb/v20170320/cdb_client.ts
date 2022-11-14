@@ -1328,7 +1328,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(InitDBInstances)用于初始化云数据库实例，包括初始化密码、默认字符集、实例端口号等
+   * 本接口(InitDBInstances)用于初始化云数据库实例，包括初始化密码、默认字符集、实例端口号等。该接口已经废弃，在发货接口CreateDBInstance、CreateDBInstanceHour可以直接使用参数Password设置密码，使用参数ParamList设置字符集，使用参数Port设置端口号。
    */
   async InitDBInstances(
     req: InitDBInstancesRequest,

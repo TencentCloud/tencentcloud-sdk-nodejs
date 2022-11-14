@@ -925,9 +925,9 @@ export interface CreateFlowByFilesRequest {
       */
     NeedPreview?: boolean;
     /**
-      * 签署流程描述,最大长度1000个字符
+      * 预览链接类型 默认:0-文件流, 1- H5链接 注意:此参数在NeedPreview 为true 时有效,
       */
-    FlowDescription?: string;
+    PreviewType?: number;
     /**
       * 签署流程的签署截止时间。
 值为unix时间戳,精确到秒,不传默认为当前时间一年后
@@ -966,6 +966,10 @@ MobileCheck：手机号验证
 参数说明：可选人脸识别或手机号验证两种方式，若选择后者，未实名个人签署方在签署合同时，无需经过实名认证和意愿确认两次人脸识别，该能力仅适用于个人签署方。
       */
     ApproverVerifyType?: string;
+    /**
+      * 签署流程描述,最大长度1000个字符
+      */
+    FlowDescription?: string;
 }
 /**
  * DescribeFileUrls请求参数结构体
@@ -1205,13 +1209,17 @@ export interface CreateDocumentRequest {
       */
     NeedPreview?: boolean;
     /**
-      * 客户端Token，保持接口幂等性,最大长度64个字符
+      * 预览链接类型 默认:0-文件流, 1- H5链接 注意:此参数在NeedPreview 为true 时有效,
       */
-    ClientToken?: string;
+    PreviewType?: number;
     /**
       * 应用相关信息
       */
     Agent?: Agent;
+    /**
+      * 客户端Token，保持接口幂等性,最大长度64个字符
+      */
+    ClientToken?: string;
 }
 /**
  * DescribeOrganizationSeals返回参数结构体

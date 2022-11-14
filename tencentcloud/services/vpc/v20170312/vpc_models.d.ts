@@ -2899,6 +2899,15 @@ export interface NetworkInterface {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ResourceId?: string;
+    /**
+      * 服务质量级别：
+<li>`DEFAULT`：默认</li>
+<li>`PT`：云金</li>
+<li>`AU`：云银</li>
+<li>`AG`：云铜</li>
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    QosLevel?: string;
 }
 /**
  * TransformAddress请求参数结构体

@@ -1789,17 +1789,17 @@ export interface DescribePictureRequest {
  */
 export interface TRTCDataResp {
     /**
-      * StatementID值
+      * StatementID值，监控仪表盘下固定为0。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     StatementID: number;
     /**
-      * Series数据
+      * 查询结果数据，以Columns-Values形式返回。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Series: Array<SeriesInfo>;
     /**
-      * Total值
+      * Total值，监控仪表盘功能下固定为1。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Total: number;

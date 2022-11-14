@@ -390,6 +390,19 @@ export interface ModifyClusterResponse {
     RequestId?: string;
 }
 /**
+ * VPC配置信息
+ */
+export interface VpcConfig {
+    /**
+      * vpc的id
+      */
+    VpcId: string;
+    /**
+      * 子网id
+      */
+    SubnetId: string;
+}
+/**
  * RocketMQ近期使用量
  */
 export interface RocketMQClusterRecentStats {
@@ -576,7 +589,7 @@ export interface DescribeAllTenantsResponse {
  */
 export interface DescribeRabbitMQNodeListRequest {
     /**
-      * 不适用，默认参数
+      * rabbitmq集群ID
       */
     InstanceId: string;
     /**
@@ -3206,6 +3219,16 @@ export interface RocketMQClusterInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     SupportNamespaceEndpoint: boolean;
+    /**
+      * VPC信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Vpcs: Array<VpcConfig>;
+    /**
+      * 是否为专享实例
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IsVip: boolean;
 }
 /**
  * DescribeRocketMQTopics返回参数结构体

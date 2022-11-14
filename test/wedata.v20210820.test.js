@@ -48,6 +48,36 @@ it("wedata.v20210820.DeleteIntegrationTask", async function () {
     }
 })
 
+it("wedata.v20210820.CheckDuplicateRuleName", async function () {
+    try {
+       const data = await client.CheckDuplicateRuleName({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20210820.RunTask", async function () {
+    try {
+       const data = await client.RunTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20210820.CreateRuleTemplate", async function () {
+    try {
+       const data = await client.CreateRuleTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20210820.DescribeRealTimeTaskMetricOverview", async function () {
     try {
        const data = await client.DescribeRealTimeTaskMetricOverview({})
@@ -68,9 +98,19 @@ it("wedata.v20210820.GetOfflineInstanceList", async function () {
     }
 })
 
-it("wedata.v20210820.MakeUpTasksNew", async function () {
+it("wedata.v20210820.DescribeDataCheckStat", async function () {
     try {
-       const data = await client.MakeUpTasksNew({})
+       const data = await client.DescribeDataCheckStat({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20210820.DescribeRuleExecResultsByPage", async function () {
+    try {
+       const data = await client.DescribeRuleExecResultsByPage({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -101,6 +141,16 @@ it("wedata.v20210820.KillInstances", async function () {
 it("wedata.v20210820.BatchKillIntegrationTaskInstances", async function () {
     try {
        const data = await client.BatchKillIntegrationTaskInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20210820.ModifyExecStrategy", async function () {
+    try {
+       const data = await client.ModifyExecStrategy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -308,6 +358,16 @@ it("wedata.v20210820.DescribeOfflineTaskToken", async function () {
     }
 })
 
+it("wedata.v20210820.DeleteRuleTemplate", async function () {
+    try {
+       const data = await client.DeleteRuleTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20210820.RobAndLockIntegrationTask", async function () {
     try {
        const data = await client.RobAndLockIntegrationTask({})
@@ -331,6 +391,26 @@ it("wedata.v20210820.CheckIntegrationNodeNameExists", async function () {
 it("wedata.v20210820.DescribeAlarmEvents", async function () {
     try {
        const data = await client.DescribeAlarmEvents({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20210820.DescribeQualityScore", async function () {
+    try {
+       const data = await client.DescribeQualityScore({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20210820.DescribeRuleDimStat", async function () {
+    try {
+       const data = await client.DescribeRuleDimStat({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -368,6 +448,16 @@ it("wedata.v20210820.SaveCustomFunction", async function () {
     }
 })
 
+it("wedata.v20210820.DescribeTopTableStat", async function () {
+    try {
+       const data = await client.DescribeTopTableStat({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20210820.DescribeOrganizationalFunctions", async function () {
     try {
        const data = await client.DescribeOrganizationalFunctions({})
@@ -381,6 +471,16 @@ it("wedata.v20210820.DescribeOrganizationalFunctions", async function () {
 it("wedata.v20210820.DeleteInLongAgent", async function () {
     try {
        const data = await client.DeleteInLongAgent({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20210820.CommitRuleGroupExecResult", async function () {
+    try {
+       const data = await client.CommitRuleGroupExecResult({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -408,6 +508,26 @@ it("wedata.v20210820.DryRunDIOfflineTask", async function () {
     }
 })
 
+it("wedata.v20210820.DescribeDimensionScore", async function () {
+    try {
+       const data = await client.DescribeDimensionScore({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20210820.DescribeRuleGroupTable", async function () {
+    try {
+       const data = await client.DescribeRuleGroupTable({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20210820.DescribeInLongTkeClusterList", async function () {
     try {
        const data = await client.DescribeInLongTkeClusterList({})
@@ -428,6 +548,26 @@ it("wedata.v20210820.CreateIntegrationTask", async function () {
     }
 })
 
+it("wedata.v20210820.CommitExportTask", async function () {
+    try {
+       const data = await client.CommitExportTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20210820.DescribeRuleHistoryByPage", async function () {
+    try {
+       const data = await client.DescribeRuleHistoryByPage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20210820.DescribeDataSourceList", async function () {
     try {
        const data = await client.DescribeDataSourceList({})
@@ -441,6 +581,16 @@ it("wedata.v20210820.DescribeDataSourceList", async function () {
 it("wedata.v20210820.ModifyTaskInfo", async function () {
     try {
        const data = await client.ModifyTaskInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20210820.DescribeRuleTablesByPage", async function () {
+    try {
+       const data = await client.DescribeRuleTablesByPage({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -478,9 +628,29 @@ it("wedata.v20210820.BatchStartIntegrationTasks", async function () {
     }
 })
 
+it("wedata.v20210820.DescribeMonitorsByPage", async function () {
+    try {
+       const data = await client.DescribeMonitorsByPage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20210820.ModifyTaskName", async function () {
     try {
        const data = await client.ModifyTaskName({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20210820.DescribeRuleExecDetail", async function () {
+    try {
+       const data = await client.DescribeRuleExecDetail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -588,6 +758,16 @@ it("wedata.v20210820.DescribeTableSchemaInfo", async function () {
     }
 })
 
+it("wedata.v20210820.ModifyRule", async function () {
+    try {
+       const data = await client.ModifyRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20210820.DescribeFunctionTypes", async function () {
     try {
        const data = await client.DescribeFunctionTypes({})
@@ -601,6 +781,16 @@ it("wedata.v20210820.DescribeFunctionTypes", async function () {
 it("wedata.v20210820.DescribeTaskReportDetailList", async function () {
     try {
        const data = await client.DescribeTaskReportDetailList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20210820.SubmitWorkflow", async function () {
+    try {
+       const data = await client.SubmitWorkflow({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -688,6 +878,16 @@ it("wedata.v20210820.BatchUpdateIntegrationTasks", async function () {
     }
 })
 
+it("wedata.v20210820.ModifyTaskScript", async function () {
+    try {
+       const data = await client.ModifyTaskScript({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20210820.ForceSucInstances", async function () {
     try {
        const data = await client.ForceSucInstances({})
@@ -698,9 +898,29 @@ it("wedata.v20210820.ForceSucInstances", async function () {
     }
 })
 
+it("wedata.v20210820.DescribeRuleGroup", async function () {
+    try {
+       const data = await client.DescribeRuleGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20210820.DescribeDatabaseInfoList", async function () {
     try {
        const data = await client.DescribeDatabaseInfoList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20210820.DescribeTemplateHistory", async function () {
+    try {
+       const data = await client.DescribeTemplateHistory({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -728,9 +948,29 @@ it("wedata.v20210820.DeleteOfflineTask", async function () {
     }
 })
 
+it("wedata.v20210820.DescribeRuleDataSources", async function () {
+    try {
+       const data = await client.DescribeRuleDataSources({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20210820.CreateHiveTableByDDL", async function () {
     try {
        const data = await client.CreateHiveTableByDDL({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20210820.DescribeRuleGroupExecResultsByPageWithoutAuth", async function () {
+    try {
+       const data = await client.DescribeRuleGroupExecResultsByPageWithoutAuth({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -778,9 +1018,49 @@ it("wedata.v20210820.DescribeStreamTaskLogList", async function () {
     }
 })
 
-it("wedata.v20210820.ModifyDataSource", async function () {
+it("wedata.v20210820.CreateRule", async function () {
     try {
-       const data = await client.ModifyDataSource({})
+       const data = await client.CreateRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20210820.ModifyRuleTemplate", async function () {
+    try {
+       const data = await client.ModifyRuleTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20210820.DescribeTableScoreTrend", async function () {
+    try {
+       const data = await client.DescribeTableScoreTrend({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20210820.DescribeTableQualityDetails", async function () {
+    try {
+       const data = await client.DescribeTableQualityDetails({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20210820.DescribeRuleGroupsByPage", async function () {
+    try {
+       const data = await client.DescribeRuleGroupsByPage({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -818,6 +1098,16 @@ it("wedata.v20210820.RerunInstances", async function () {
     }
 })
 
+it("wedata.v20210820.DeleteRule", async function () {
+    try {
+       const data = await client.DeleteRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20210820.CheckAlarmRegularNameExist", async function () {
     try {
        const data = await client.CheckAlarmRegularNameExist({})
@@ -848,6 +1138,16 @@ it("wedata.v20210820.DescribeDataTypes", async function () {
     }
 })
 
+it("wedata.v20210820.DescribeRulesByPage", async function () {
+    try {
+       const data = await client.DescribeRulesByPage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20210820.GetOfflineDIInstanceList", async function () {
     try {
        const data = await client.GetOfflineDIInstanceList({})
@@ -868,6 +1168,46 @@ it("wedata.v20210820.BatchMakeUpIntegrationTasks", async function () {
     }
 })
 
+it("wedata.v20210820.DescribeRuleExecLog", async function () {
+    try {
+       const data = await client.DescribeRuleExecLog({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20210820.DescribeDataBases", async function () {
+    try {
+       const data = await client.DescribeDataBases({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20210820.DescribeRule", async function () {
+    try {
+       const data = await client.DescribeRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20210820.DescribeRuleTemplatesByPage", async function () {
+    try {
+       const data = await client.DescribeRuleTemplatesByPage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20210820.ModifyWorkflowInfo", async function () {
     try {
        const data = await client.ModifyWorkflowInfo({})
@@ -878,9 +1218,29 @@ it("wedata.v20210820.ModifyWorkflowInfo", async function () {
     }
 })
 
+it("wedata.v20210820.DescribeRuleExecStat", async function () {
+    try {
+       const data = await client.DescribeRuleExecStat({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20210820.ModifyTaskLinks", async function () {
     try {
        const data = await client.ModifyTaskLinks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20210820.DescribeRuleGroupExecResultsByPage", async function () {
+    try {
+       const data = await client.DescribeRuleGroupExecResultsByPage({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -958,6 +1318,16 @@ it("wedata.v20210820.BatchRerunIntegrationTaskInstances", async function () {
     }
 })
 
+it("wedata.v20210820.DescribeExecStrategy", async function () {
+    try {
+       const data = await client.DescribeExecStrategy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20210820.CreateWorkflow", async function () {
     try {
        const data = await client.CreateWorkflow({})
@@ -968,9 +1338,29 @@ it("wedata.v20210820.CreateWorkflow", async function () {
     }
 })
 
-it("wedata.v20210820.RunTask", async function () {
+it("wedata.v20210820.SuspendIntegrationTask", async function () {
     try {
-       const data = await client.RunTask({})
+       const data = await client.SuspendIntegrationTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20210820.DescribeRuleExecExportResult", async function () {
+    try {
+       const data = await client.DescribeRuleExecExportResult({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20210820.DescribeRules", async function () {
+    try {
+       const data = await client.DescribeRules({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -998,9 +1388,9 @@ it("wedata.v20210820.LockIntegrationTask", async function () {
     }
 })
 
-it("wedata.v20210820.SubmitWorkflow", async function () {
+it("wedata.v20210820.DescribeTaskReport", async function () {
     try {
-       const data = await client.SubmitWorkflow({})
+       const data = await client.DescribeTaskReport({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1028,9 +1418,19 @@ it("wedata.v20210820.DescribeIntegrationTasks", async function () {
     }
 })
 
-it("wedata.v20210820.ModifyTaskScript", async function () {
+it("wedata.v20210820.ModifyMonitorStatus", async function () {
     try {
-       const data = await client.ModifyTaskScript({})
+       const data = await client.ModifyMonitorStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20210820.DescribeTrendStat", async function () {
+    try {
+       const data = await client.DescribeTrendStat({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1041,6 +1441,16 @@ it("wedata.v20210820.ModifyTaskScript", async function () {
 it("wedata.v20210820.DescribeTableInfoList", async function () {
     try {
        const data = await client.DescribeTableInfoList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20210820.DescribeRuleGroupSubscription", async function () {
+    try {
+       const data = await client.DescribeRuleGroupSubscription({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1068,6 +1478,16 @@ it("wedata.v20210820.DeleteTaskAlarmRegular", async function () {
     }
 })
 
+it("wedata.v20210820.DescribeRuleExecResults", async function () {
+    try {
+       const data = await client.DescribeRuleExecResults({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20210820.TriggerEvent", async function () {
     try {
        const data = await client.TriggerEvent({})
@@ -1088,9 +1508,19 @@ it("wedata.v20210820.DeleteResource", async function () {
     }
 })
 
-it("wedata.v20210820.DescribeTaskReport", async function () {
+it("wedata.v20210820.DescribeQualityScoreTrend", async function () {
     try {
-       const data = await client.DescribeTaskReport({})
+       const data = await client.DescribeQualityScoreTrend({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20210820.ModifyDataSource", async function () {
+    try {
+       const data = await client.ModifyDataSource({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1198,6 +1628,16 @@ it("wedata.v20210820.BatchSuspendIntegrationTasks", async function () {
     }
 })
 
+it("wedata.v20210820.CommitRuleGroupTask", async function () {
+    try {
+       const data = await client.CommitRuleGroupTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20210820.DescribeInstanceLastLog", async function () {
     try {
        const data = await client.DescribeInstanceLastLog({})
@@ -1238,6 +1678,26 @@ it("wedata.v20210820.SubmitCustomFunction", async function () {
     }
 })
 
+it("wedata.v20210820.ModifyDimensionWeight", async function () {
+    try {
+       const data = await client.ModifyDimensionWeight({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20210820.CheckDuplicateTemplateName", async function () {
+    try {
+       const data = await client.CheckDuplicateTemplateName({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20210820.BatchResumeIntegrationTasks", async function () {
     try {
        const data = await client.BatchResumeIntegrationTasks({})
@@ -1258,9 +1718,29 @@ it("wedata.v20210820.RestartInLongAgent", async function () {
     }
 })
 
+it("wedata.v20210820.DescribeRuleTemplate", async function () {
+    try {
+       const data = await client.DescribeRuleTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20210820.SubmitTask", async function () {
     try {
        const data = await client.SubmitTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20210820.DescribeInstances", async function () {
+    try {
+       const data = await client.DescribeInstances({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1298,6 +1778,26 @@ it("wedata.v20210820.DescribeInLongAgentTaskList", async function () {
     }
 })
 
+it("wedata.v20210820.DescribeRuleExecHistory", async function () {
+    try {
+       const data = await client.DescribeRuleExecHistory({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20210820.DescribeRuleTemplates", async function () {
+    try {
+       const data = await client.DescribeRuleTemplates({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20210820.DescribeTaskInstanceReportDetail", async function () {
     try {
        const data = await client.DescribeTaskInstanceReportDetail({})
@@ -1308,9 +1808,19 @@ it("wedata.v20210820.DescribeTaskInstanceReportDetail", async function () {
     }
 })
 
-it("wedata.v20210820.SuspendIntegrationTask", async function () {
+it("wedata.v20210820.DescribeDataObjects", async function () {
     try {
-       const data = await client.SuspendIntegrationTask({})
+       const data = await client.DescribeDataObjects({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20210820.ModifyRuleGroupSubscription", async function () {
+    try {
+       const data = await client.ModifyRuleGroupSubscription({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1391,6 +1901,36 @@ it("wedata.v20210820.DescribeRealTimeTaskInstanceNodeInfo", async function () {
 it("wedata.v20210820.DescribeIntegrationStatistics", async function () {
     try {
        const data = await client.DescribeIntegrationStatistics({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20210820.MakeUpTasksNew", async function () {
+    try {
+       const data = await client.MakeUpTasksNew({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20210820.DescribeTemplateDimCount", async function () {
+    try {
+       const data = await client.DescribeTemplateDimCount({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20210820.DescribeProdTasks", async function () {
+    try {
+       const data = await client.DescribeProdTasks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
