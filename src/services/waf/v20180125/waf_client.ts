@@ -29,8 +29,9 @@ import {
   AccessLogItems,
   DescribeWafAutoDenyRulesResponse,
   DescribeIpAccessControlResponse,
+  LoadBalancerPackageNew,
   DescribeInstancesResponse,
-  ModifyWafAutoDenyRulesRequest,
+  ModifyDomainWhiteRuleRequest,
   AccessRuleTagInfo,
   DescribeAccessIndexRequest,
   DomainInfo,
@@ -53,6 +54,7 @@ import {
   DescribeAutoDenyIPResponse,
   SearchAccessLogResponse,
   IpAccessControlItem,
+  DomainsPartInfo,
   DescribeAutoDenyIPRequest,
   DescribeIpAccessControlRequest,
   AddSpartaProtectionRequest,
@@ -66,6 +68,7 @@ import {
   DomainPackageNew,
   RuleList,
   PostAttackDownloadTaskResponse,
+  DescribeDomainDetailsSaasRequest,
   ModifyCustomRuleStatusResponse,
   AddSpartaProtectionResponse,
   IpAccessControlData,
@@ -84,12 +87,14 @@ import {
   DeleteIpAccessControlResponse,
   AccessLogInfo,
   InstanceInfo,
+  PortInfo,
+  DescribeDomainDetailsSaasResponse,
   AccessKeyValueInfo,
   AddCustomRuleRequest,
   FraudPkg,
   ModifyDomainWhiteRuleResponse,
   ExportAccessInfo,
-  ModifyDomainWhiteRuleRequest,
+  ModifyWafAutoDenyRulesRequest,
   DescribeAccessFastAnalysisResponse,
   DescribeDomainsResponse,
   AutoDenyDetail,
@@ -201,6 +206,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateAccessExportResponse) => void
   ): Promise<CreateAccessExportResponse> {
     return this.request("CreateAccessExport", req, cb)
+  }
+
+  /**
+   * 查询单个saas域名详情
+   */
+  async DescribeDomainDetailsSaas(
+    req: DescribeDomainDetailsSaasRequest,
+    cb?: (error: string, rep: DescribeDomainDetailsSaasResponse) => void
+  ): Promise<DescribeDomainDetailsSaasResponse> {
+    return this.request("DescribeDomainDetailsSaas", req, cb)
   }
 
   /**

@@ -40,7 +40,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeCaptchaMiniDataSum(req: DescribeCaptchaMiniDataSumRequest, cb?: (error: string, rep: DescribeCaptchaMiniDataSumResponse) => void): Promise<DescribeCaptchaMiniDataSumResponse>;
     /**
-     * 查询单个验证的统计数据，包括：票据校验量、票据校验通过量、票据校验拦截量。
+     * 查询单个CaptchaAppID票据校验数据，包括：票据校验量、票据校验通过量、票据校验拦截量。
      */
     GetTicketStatistics(req: GetTicketStatisticsRequest, cb?: (error: string, rep: GetTicketStatisticsResponse) => void): Promise<GetTicketStatisticsResponse>;
     /**
@@ -52,7 +52,7 @@ export declare class Client extends AbstractClient {
      */
     UpdateCaptchaAppIdInfo(req: UpdateCaptchaAppIdInfoRequest, cb?: (error: string, rep: UpdateCaptchaAppIdInfoResponse) => void): Promise<UpdateCaptchaAppIdInfoResponse>;
     /**
-     * 查询所有验证的统计数据，包括：总票据校验量、总票据校验通过量、总票据校验拦截量。
+     * 查询全部票据校验的统计数据，包括：总票据校验量、总票据校验通过量、总票据校验拦截量。
      */
     GetTotalTicketStatistics(req: GetTotalTicketStatisticsRequest, cb?: (error: string, rep: GetTotalTicketStatisticsResponse) => void): Promise<GetTotalTicketStatisticsResponse>;
     /**

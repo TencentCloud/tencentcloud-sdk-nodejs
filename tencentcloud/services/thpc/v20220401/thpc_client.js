@@ -69,5 +69,11 @@ class Client extends abstract_client_1.AbstractClient {
     async DeleteCluster(req, cb) {
         return this.request("DeleteCluster", req, cb);
     }
+    /**
+     * 本接口（DescribeClusterActivities）用于查询集群活动历史记录列表。
+     */
+    async DescribeClusterActivities(req, cb) {
+        return this.request("DescribeClusterActivities", req, cb);
+    }
 }
 exports.Client = Client;

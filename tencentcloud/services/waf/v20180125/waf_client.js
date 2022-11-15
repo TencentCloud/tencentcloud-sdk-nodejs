@@ -72,6 +72,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateAccessExport", req, cb);
     }
     /**
+     * 查询单个saas域名详情
+     */
+    async DescribeDomainDetailsSaas(req, cb) {
+        return this.request("DescribeDomainDetailsSaas", req, cb);
+    }
+    /**
      * 查询用户所有实例的详细信息
      */
     async DescribeInstances(req, cb) {

@@ -563,14 +563,14 @@ export interface DeleteQueueRequest {
  */
 export interface Filter {
   /**
-   * 过滤参数的名字
-   */
-  Name?: string
-
-  /**
    * 数值
    */
   Values?: Array<string>
+
+  /**
+   * 过滤参数的名字
+   */
+  Name?: string
 }
 
 /**

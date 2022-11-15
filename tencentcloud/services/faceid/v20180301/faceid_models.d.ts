@@ -60,7 +60,7 @@ export interface GetFaceIdTokenRequest {
       */
     IdCard?: string;
     /**
-      * CompareLib为商业库库时必传。
+      * CompareLib为商业库时必传。
       */
     Name?: string;
     /**
@@ -81,6 +81,10 @@ export interface GetFaceIdTokenRequest {
 【注意】选择该参数为true后将不返回base64数据，请根据接入情况谨慎修改。
       */
     UseCos?: boolean;
+    /**
+      * 敏感数据加密信息。对传入信息（姓名、身份证号）有加密需求的用户可使用此参数，详情请点击左侧链接。
+      */
+    Encryption?: Encryption;
 }
 /**
  * Liveness请求参数结构体
@@ -2522,6 +2526,11 @@ export interface EncryptedPhoneVerificationResponse {
       * 业务结果描述。
       */
     Description: string;
+    /**
+      * 运营商名称。
+取值范围为["移动","联通","电信",""]
+      */
+    ISP: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

@@ -2338,6 +2338,11 @@ export interface DescribeDataBasesRequest {
    * 数据源id
    */
   DatasourceId?: string
+
+  /**
+   * 数据源类型
+   */
+  DsTypes?: Array<number>
 }
 
 /**
@@ -9605,6 +9610,11 @@ export interface DescribeRuleDataSourcesRequest {
    * 数据来源Id
    */
   DatasourceId?: string
+
+  /**
+   * 数据源类型
+   */
+  DsTypes?: Array<number>
 }
 
 /**
@@ -9891,6 +9901,11 @@ export interface DescribeRuleTemplatesRequest {
    * 项目Id
    */
   ProjectId?: string
+
+  /**
+   * 源端对应的引擎类型
+   */
+  SourceEngineTypes?: Array<number>
 }
 
 /**
@@ -13734,6 +13749,18 @@ export interface DatabaseInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   DatasourceType?: number
+
+  /**
+      * 数据库原始名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OriginDatabaseName?: string
+
+  /**
+      * schema名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OriginSchemaName?: string
 }
 
 /**

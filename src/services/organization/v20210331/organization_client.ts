@@ -18,19 +18,45 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  DescribeOrganizationAuthNodeResponse,
   OrgPermission,
-  MemberIdentity,
-  DescribeOrganizationResponse,
   BindOrganizationMemberAuthAccountRequest,
   CreateOrganizationMemberRequest,
-  DescribeOrganizationMembersResponse,
-  DescribeOrganizationMembersRequest,
   OrgMember,
-  CreateOrganizationMemberPolicyResponse,
+  DescribeOrganizationMemberAuthIdentitiesRequest,
   CreateOrganizationMemberPolicyRequest,
   DescribeOrganizationRequest,
+  DescribeOrganizationNodesRequest,
   BindOrganizationMemberAuthAccountResponse,
   CreateOrganizationMemberResponse,
+  MoveOrganizationNodeMembersRequest,
+  ListOrganizationIdentityRequest,
+  AuthNode,
+  MoveOrganizationNodeMembersResponse,
+  DeleteOrganizationMembersRequest,
+  DeleteOrganizationNodesRequest,
+  AddOrganizationNodeResponse,
+  IdentityPolicy,
+  ListOrganizationIdentityResponse,
+  DescribeOrganizationNodesResponse,
+  DescribeOrganizationMembersResponse,
+  CreateOrganizationMemberPolicyResponse,
+  DescribeOrganizationResponse,
+  DescribeOrganizationMemberPoliciesRequest,
+  AddOrganizationNodeRequest,
+  DescribeOrganizationMemberAuthIdentitiesResponse,
+  OrgMemberPolicy,
+  DescribeOrganizationAuthNodeRequest,
+  UpdateOrganizationNodeResponse,
+  DeleteOrganizationNodesResponse,
+  MemberIdentity,
+  OrgMemberAuthIdentity,
+  DescribeOrganizationMemberPoliciesResponse,
+  OrgIdentity,
+  DescribeOrganizationMembersRequest,
+  UpdateOrganizationNodeRequest,
+  OrgNode,
+  DeleteOrganizationMembersResponse,
 } from "./organization_models"
 
 /**
@@ -53,6 +79,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 移动成员到指定企业组织节点
+   */
+  async MoveOrganizationNodeMembers(
+    req: MoveOrganizationNodeMembersRequest,
+    cb?: (error: string, rep: MoveOrganizationNodeMembersResponse) => void
+  ): Promise<MoveOrganizationNodeMembersResponse> {
+    return this.request("MoveOrganizationNodeMembers", req, cb)
+  }
+
+  /**
+   * 更新企业组织节点
+   */
+  async UpdateOrganizationNode(
+    req: UpdateOrganizationNodeRequest,
+    cb?: (error: string, rep: UpdateOrganizationNodeResponse) => void
+  ): Promise<UpdateOrganizationNodeResponse> {
+    return this.request("UpdateOrganizationNode", req, cb)
+  }
+
+  /**
    * 创建组织成员
    */
   async CreateOrganizationMember(
@@ -63,13 +109,43 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 绑定组织成员和子账号的授权关系
+   * 绑定组织成员和组织管理员子账号的授权关系
    */
   async BindOrganizationMemberAuthAccount(
     req: BindOrganizationMemberAuthAccountRequest,
     cb?: (error: string, rep: BindOrganizationMemberAuthAccountResponse) => void
   ): Promise<BindOrganizationMemberAuthAccountResponse> {
     return this.request("BindOrganizationMemberAuthAccount", req, cb)
+  }
+
+  /**
+   * 获取可创建组织成员的认证主体关系列表
+   */
+  async DescribeOrganizationAuthNode(
+    req: DescribeOrganizationAuthNodeRequest,
+    cb?: (error: string, rep: DescribeOrganizationAuthNodeResponse) => void
+  ): Promise<DescribeOrganizationAuthNodeResponse> {
+    return this.request("DescribeOrganizationAuthNode", req, cb)
+  }
+
+  /**
+   * 获取组织成员访问身份列表
+   */
+  async ListOrganizationIdentity(
+    req: ListOrganizationIdentityRequest,
+    cb?: (error: string, rep: ListOrganizationIdentityResponse) => void
+  ): Promise<ListOrganizationIdentityResponse> {
+    return this.request("ListOrganizationIdentity", req, cb)
+  }
+
+  /**
+   * 批量删除企业组织节点
+   */
+  async DeleteOrganizationNodes(
+    req: DeleteOrganizationNodesRequest,
+    cb?: (error: string, rep: DeleteOrganizationNodesResponse) => void
+  ): Promise<DeleteOrganizationNodesResponse> {
+    return this.request("DeleteOrganizationNodes", req, cb)
   }
 
   /**
@@ -83,12 +159,62 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建组织成员的授权策略
+   * 获取组织节点列表
+   */
+  async DescribeOrganizationNodes(
+    req: DescribeOrganizationNodesRequest,
+    cb?: (error: string, rep: DescribeOrganizationNodesResponse) => void
+  ): Promise<DescribeOrganizationNodesResponse> {
+    return this.request("DescribeOrganizationNodes", req, cb)
+  }
+
+  /**
+   * 添加企业组织节点
+   */
+  async AddOrganizationNode(
+    req: AddOrganizationNodeRequest,
+    cb?: (error: string, rep: AddOrganizationNodeResponse) => void
+  ): Promise<AddOrganizationNodeResponse> {
+    return this.request("AddOrganizationNode", req, cb)
+  }
+
+  /**
+   * 获取组织成员的授权策略列表
+   */
+  async DescribeOrganizationMemberPolicies(
+    req: DescribeOrganizationMemberPoliciesRequest,
+    cb?: (error: string, rep: DescribeOrganizationMemberPoliciesResponse) => void
+  ): Promise<DescribeOrganizationMemberPoliciesResponse> {
+    return this.request("DescribeOrganizationMemberPolicies", req, cb)
+  }
+
+  /**
+   * 创建组织成员访问授权策略
    */
   async CreateOrganizationMemberPolicy(
     req: CreateOrganizationMemberPolicyRequest,
     cb?: (error: string, rep: CreateOrganizationMemberPolicyResponse) => void
   ): Promise<CreateOrganizationMemberPolicyResponse> {
     return this.request("CreateOrganizationMemberPolicy", req, cb)
+  }
+
+  /**
+   * 获取组织成员可被管理的身份列表
+   */
+  async DescribeOrganizationMemberAuthIdentities(
+    req: DescribeOrganizationMemberAuthIdentitiesRequest,
+    cb?: (error: string, rep: DescribeOrganizationMemberAuthIdentitiesResponse) => void
+  ): Promise<DescribeOrganizationMemberAuthIdentitiesResponse> {
+    return this.request("DescribeOrganizationMemberAuthIdentities", req, cb)
+  }
+
+  /**
+   * 批量删除企业组织成员
+   */
+  async DeleteOrganizationMembers(
+    req: DeleteOrganizationMembersRequest,
+    cb?: (error: string, rep: DeleteOrganizationMembersResponse) => void
+  ): Promise<DeleteOrganizationMembersResponse> {
+    return this.request("DeleteOrganizationMembers", req, cb)
   }
 }

@@ -25,14 +25,16 @@ import {
   DeleteNodesResponse,
   DeleteClusterResponse,
   ExpansionNodeConfig,
+  NodeActivity,
   QueueConfig,
+  ClusterActivity,
   LoginNodeOverview,
   CFSOption,
-  LoginNode,
+  CreateClusterResponse,
   SetAutoScalingConfigurationResponse,
   CreateClusterRequest,
   Tag,
-  CreateClusterResponse,
+  LoginNode,
   BindAutoScalingGroupResponse,
   ManagerNodeOverview,
   ManagerNode,
@@ -40,17 +42,19 @@ import {
   ComputeNodeOverview,
   SystemDisk,
   Placement,
-  DataDisk,
+  DescribeClusterActivitiesRequest,
   AddNodesRequest,
   BindAutoScalingGroupRequest,
   VirtualPrivateCloud,
+  InstanceChargePrepaid,
   StorageOption,
   InternetAccessible,
   ComputeNode,
   DeleteNodesRequest,
   DescribeClustersResponse,
   GooseFSOption,
-  InstanceChargePrepaid,
+  DescribeClusterActivitiesResponse,
+  DataDisk,
   AddNodesResponse,
 } from "./thpc_models"
 
@@ -131,5 +135,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteClusterResponse) => void
   ): Promise<DeleteClusterResponse> {
     return this.request("DeleteCluster", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeClusterActivities）用于查询集群活动历史记录列表。
+   */
+  async DescribeClusterActivities(
+    req: DescribeClusterActivitiesRequest,
+    cb?: (error: string, rep: DescribeClusterActivitiesResponse) => void
+  ): Promise<DescribeClusterActivitiesResponse> {
+    return this.request("DescribeClusterActivities", req, cb)
   }
 }

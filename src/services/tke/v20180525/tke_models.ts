@@ -3676,6 +3676,11 @@ export interface DisableClusterAuditRequest {
    * 集群ID
    */
   ClusterId: string
+
+  /**
+   * 取值为true代表关闭集群审计时删除默认创建的日志集和主题，false代表不删除
+   */
+  DeleteLogSetAndTopic?: boolean
 }
 
 /**
@@ -8058,6 +8063,11 @@ export interface DisableEventPersistenceRequest {
    * 集群ID
    */
   ClusterId: string
+
+  /**
+   * 取值为true代表关闭集群审计时删除默认创建的日志集和主题，false代表不删除
+   */
+  DeleteLogSetAndTopic?: boolean
 }
 
 /**

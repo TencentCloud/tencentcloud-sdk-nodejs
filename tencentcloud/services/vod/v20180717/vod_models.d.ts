@@ -3190,7 +3190,7 @@ export interface ModifyMediaInfoRequest {
       */
     ClearKeyFrameDescs?: number;
     /**
-      * 新增的一组标签，单个媒体文件最多 16 个标签，单个标签最多 16 个字符。同一个请求里，AddTags 参数必须与 DeleteTags 都不同。
+      * 新增的一组标签，单个媒体文件最多 16 个标签，单个标签最多 32 个字符。同一个请求里，AddTags 参数必须与 DeleteTags 都不同。
       */
     AddTags?: Array<string>;
     /**

@@ -76,7 +76,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCaptchaMiniDataSum", req, cb);
     }
     /**
-     * 查询单个验证的统计数据，包括：票据校验量、票据校验通过量、票据校验拦截量。
+     * 查询单个CaptchaAppID票据校验数据，包括：票据校验量、票据校验通过量、票据校验拦截量。
      */
     async GetTicketStatistics(req, cb) {
         return this.request("GetTicketStatistics", req, cb);
@@ -94,7 +94,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdateCaptchaAppIdInfo", req, cb);
     }
     /**
-     * 查询所有验证的统计数据，包括：总票据校验量、总票据校验通过量、总票据校验拦截量。
+     * 查询全部票据校验的统计数据，包括：总票据校验量、总票据校验通过量、总票据校验拦截量。
      */
     async GetTotalTicketStatistics(req, cb) {
         return this.request("GetTotalTicketStatistics", req, cb);

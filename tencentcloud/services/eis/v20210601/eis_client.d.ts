@@ -26,5 +26,5 @@ export declare class Client extends AbstractClient {
     /**
      * 返回用户的运行时列表，运行时管理主页使用，包含沙箱、共享运行时及独立运行时环境，不包含已经删除的运行时
      */
-    ListRuntimesMC(req?: ListRuntimesMCRequest, cb?: (error: string, rep: ListRuntimesMCResponse) => void): Promise<ListRuntimesMCResponse>;
+    ListRuntimesMC(req: ListRuntimesMCRequest, cb?: (error: string, rep: ListRuntimesMCResponse) => void): Promise<ListRuntimesMCResponse>;
 }

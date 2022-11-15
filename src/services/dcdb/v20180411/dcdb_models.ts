@@ -243,12 +243,16 @@ export interface ActiveHourDCDBInstanceResponse {
  */
 export interface DescribeDCDBPriceResponse {
   /**
-   * 原价，单位：分
+   * 原价
+   * 单位：默认为分，若请求参数带有AmountUnit，参考AmountUnit描述
+   * 币种：国内站为人民币，国际站为美元
    */
   OriginalPrice: number
 
   /**
-   * 实际价格，单位：分。受折扣等影响，可能和原价不同。
+   * 实际价格，受折扣等影响，可能和原价不同
+   * 单位：默认为分，若请求参数带有AmountUnit，参考AmountUnit描述
+   * 币种：国内站人民币，国际站美元
    */
   Price: number
 
@@ -435,12 +439,16 @@ export interface DescribeProjectSecurityGroupsRequest {
  */
 export interface DescribeDCDBUpgradePriceResponse {
   /**
-   * 原价，单位：分
+   * 原价
+   * 单位：默认为分，若请求参数带有AmountUnit，参考AmountUnit描述
+   * 币种：国内站为人民币，国际站为美元
    */
   OriginalPrice: number
 
   /**
-   * 实际价格，单位：分。受折扣等影响，可能和原价不同。
+   * 实际价格，受折扣等影响，可能和原价不同
+   * 单位：默认为分，若请求参数带有AmountUnit，参考AmountUnit描述
+   * 币种：国内站人民币，国际站美元
    */
   Price: number
 
@@ -1004,6 +1012,13 @@ export interface DescribeDCDBRenewalPriceRequest {
    * 续费时长，单位：月。不传则默认为1个月。
    */
   Period?: number
+
+  /**
+   * 价格金额单位，不传默认单位为分，取值：
+   * pent：分
+   * microPent：微分
+   */
+  AmountUnit?: string
 }
 
 /**
@@ -1092,6 +1107,13 @@ export interface DescribeDCDBPriceRequest {
    * 付费类型。postpaid：按量付费   prepaid：预付费
    */
   Paymode?: string
+
+  /**
+   * 价格金额单位，不传默认单位为分，取值：
+   * pent：分
+   * microPent：微分
+   */
+  AmountUnit?: string
 }
 
 /**
@@ -1248,6 +1270,11 @@ export interface ExpandShardConfig {
    * 分片存储大小，单位 GB
    */
   ShardStorage: number
+
+  /**
+   * 分片节点数
+   */
+  ShardNodeCount?: number
 }
 
 /**
@@ -2315,12 +2342,16 @@ export interface AssociateSecurityGroupsResponse {
  */
 export interface DescribeDCDBRenewalPriceResponse {
   /**
-   * 原价，单位：分
+   * 原价
+   * 单位：默认为分，若请求参数带有AmountUnit，参考AmountUnit描述
+   * 币种：国内站为人民币，国际站为美元
    */
   OriginalPrice: number
 
   /**
-   * 实际价格，单位：分。受折扣等影响，可能和原价不同。
+   * 实际价格，受折扣等影响，可能和原价不同
+   * 单位：默认为分，若请求参数带有AmountUnit，参考AmountUnit描述
+   * 币种：国内站人民币，国际站美元
    */
   Price: number
 
@@ -3208,6 +3239,13 @@ export interface DescribeDCDBUpgradePriceRequest {
    * 切分分片配置，当UpgradeType为SPLIT时生效。
    */
   SplitShardConfig?: SplitShardConfig
+
+  /**
+   * 价格金额单位，不传默认单位为分，取值：
+   * pent：分
+   * microPent：微分
+   */
+  AmountUnit?: string
 }
 
 /**

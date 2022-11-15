@@ -88,4 +88,14 @@ it("thpc.v20220401.DeleteCluster", async function () {
     }
 })
 
+it("thpc.v20220401.DescribeClusterActivities", async function () {
+    try {
+       const data = await client.DescribeClusterActivities({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 })

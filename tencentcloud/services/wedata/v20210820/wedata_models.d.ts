@@ -1960,6 +1960,10 @@ export interface DescribeDataBasesRequest {
       * 数据源id
       */
     DatasourceId?: string;
+    /**
+      * 数据源类型
+      */
+    DsTypes?: Array<number>;
 }
 /**
  * BatchDeleteIntegrationTasks返回参数结构体
@@ -8106,6 +8110,10 @@ export interface DescribeRuleDataSourcesRequest {
       * 数据来源Id
       */
     DatasourceId?: string;
+    /**
+      * 数据源类型
+      */
+    DsTypes?: Array<number>;
 }
 /**
  * 规则执行日志
@@ -8350,6 +8358,10 @@ export interface DescribeRuleTemplatesRequest {
       * 项目Id
       */
     ProjectId?: string;
+    /**
+      * 源端对应的引擎类型
+      */
+    SourceEngineTypes?: Array<number>;
 }
 /**
  * RegisterEvent返回参数结构体
@@ -11610,6 +11622,16 @@ export interface DatabaseInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     DatasourceType?: number;
+    /**
+      * 数据库原始名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OriginDatabaseName?: string;
+    /**
+      * schema名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OriginSchemaName?: string;
 }
 /**
  * GetIntegrationNodeColumnSchema返回参数结构体

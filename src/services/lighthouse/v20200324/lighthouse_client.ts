@@ -43,6 +43,7 @@ import {
   SystemDisk,
   ResetInstanceBlueprint,
   DescribeBundlesResponse,
+  InstancePriceDetail,
   InquirePriceRenewInstancesRequest,
   DiscountDetail,
   DescribeDiskConfigsRequest,

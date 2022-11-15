@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeClustersRequest, SetAutoScalingConfigurationRequest, DeleteNodesResponse, DeleteClusterResponse, SetAutoScalingConfigurationResponse, CreateClusterRequest, CreateClusterResponse, BindAutoScalingGroupResponse, DeleteClusterRequest, AddNodesRequest, BindAutoScalingGroupRequest, DeleteNodesRequest, DescribeClustersResponse, AddNodesResponse } from "./thpc_models";
+import { DescribeClustersRequest, SetAutoScalingConfigurationRequest, DeleteNodesResponse, DeleteClusterResponse, CreateClusterResponse, SetAutoScalingConfigurationResponse, CreateClusterRequest, BindAutoScalingGroupResponse, DeleteClusterRequest, DescribeClusterActivitiesRequest, AddNodesRequest, BindAutoScalingGroupRequest, DeleteNodesRequest, DescribeClustersResponse, DescribeClusterActivitiesResponse, AddNodesResponse } from "./thpc_models";
 /**
  * thpc client
  * @class
@@ -35,4 +35,8 @@ export declare class Client extends AbstractClient {
      * 本接口（DeleteCluster）用于删除一个指定的集群。
      */
     DeleteCluster(req: DeleteClusterRequest, cb?: (error: string, rep: DeleteClusterResponse) => void): Promise<DeleteClusterResponse>;
+    /**
+     * 本接口（DescribeClusterActivities）用于查询集群活动历史记录列表。
+     */
+    DescribeClusterActivities(req: DescribeClusterActivitiesRequest, cb?: (error: string, rep: DescribeClusterActivitiesResponse) => void): Promise<DescribeClusterActivitiesResponse>;
 }

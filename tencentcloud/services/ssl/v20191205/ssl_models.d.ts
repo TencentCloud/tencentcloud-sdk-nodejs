@@ -1996,6 +1996,10 @@ export interface DescribeCertificatesRequest {
       * 是否筛选国密证书。1:筛选  0:不筛选
       */
     IsSM?: number;
+    /**
+      * 筛选证书是否即将过期，传1是筛选，0不筛选
+      */
+    FilterExpiring?: number;
 }
 /**
  * DescribePackages返回参数结构体

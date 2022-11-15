@@ -3511,6 +3511,10 @@ export interface ReloadBalanceProxyNodeRequest {
       * 代理组ID
       */
     ProxyGroupId: string;
+    /**
+      * 代理组地址ID
+      */
+    ProxyAddressId?: string;
 }
 /**
  * DescribeAccounts返回参数结构体
@@ -6906,7 +6910,7 @@ export interface CloseCDBProxyRequest {
     /**
       * 代理组ID
       */
-    ProxyGroupId: string;
+    ProxyGroupId?: string;
     /**
       * 是否只关闭读写分离，取值："true" | "false"，默认为"false"
       */

@@ -22,6 +22,7 @@ import {
   RuntimeMC,
   GetRuntimeResourceMonitorMetricMCResponse,
   ListRuntimeDeployedInstancesMCRequest,
+  RuntimeExtensionMC,
   ListDeployableRuntimesMCResponse,
   GetRuntimeMCResponse,
   ListDeployableRuntimesMCRequest,
@@ -87,7 +88,7 @@ export class Client extends AbstractClient {
    * 返回用户的运行时列表，运行时管理主页使用，包含沙箱、共享运行时及独立运行时环境，不包含已经删除的运行时
    */
   async ListRuntimesMC(
-    req?: ListRuntimesMCRequest,
+    req: ListRuntimesMCRequest,
     cb?: (error: string, rep: ListRuntimesMCResponse) => void
   ): Promise<ListRuntimesMCResponse> {
     return this.request("ListRuntimesMC", req, cb)

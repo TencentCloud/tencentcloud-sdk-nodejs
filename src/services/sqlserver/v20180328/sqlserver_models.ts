@@ -248,6 +248,31 @@ export interface ModifyBackupStrategyRequest {
    * 数据(日志)备份保留时间，取值[3-1830]天，默认7天
    */
   BackupSaveDays?: number
+
+  /**
+   * 定期备份状态 enable-开启，disable-关闭，默认关闭
+   */
+  RegularBackupEnable?: string
+
+  /**
+   * 定期备份保留天数 [90 - 3650]天，默认365天
+   */
+  RegularBackupSaveDays?: number
+
+  /**
+   * 定期备份策略 years-每年，quarters-每季度，months-每月，默认months
+   */
+  RegularBackupStrategy?: string
+
+  /**
+   * 定期备份保留个数，默认1个
+   */
+  RegularBackupCounts?: number
+
+  /**
+   * 定期备份开始日期，格式-YYYY-MM-DD 默认当前日期
+   */
+  RegularBackupStartTime?: string
 }
 
 /**
@@ -1005,7 +1030,7 @@ export interface DescribeBackupsRequest {
   Strategy?: number
 
   /**
-   * 按照备份方式筛选，0-后台自动定时备份，1-用户手动临时备份，不填则不筛选此项
+   * 按照备份方式筛选，0-后台自动定时备份，1-用户手动临时备份，2-定期备份，不填则不筛选此项
    */
   BackupWay?: number
 
@@ -4628,7 +4653,7 @@ export interface Backup {
   Strategy: number
 
   /**
-   * 备份方式，0-定时备份；1-手动临时备份
+   * 备份方式，0-定时备份；1-手动临时备份；2-定期备份
    */
   BackupWay: number
 

@@ -200,6 +200,11 @@ export interface DescribeIpAccessControlResponse {
 }
 
 /**
+ * 负载均衡算法
+ */
+export type LoadBalancerPackageNew = null
+
+/**
  * DescribeInstances返回参数结构体
  */
 export interface DescribeInstancesResponse {
@@ -220,33 +225,38 @@ export interface DescribeInstancesResponse {
 }
 
 /**
- * ModifyWafAutoDenyRules请求参数结构体
+ * ModifyDomainWhiteRule请求参数结构体
  */
-export interface ModifyWafAutoDenyRulesRequest {
+export interface ModifyDomainWhiteRuleRequest {
   /**
-   * 域名
+   * 需要更改的规则的域名
    */
   Domain: string
 
   /**
-   * 攻击次数阈值
+   * 白名单id
    */
-  AttackThreshold: number
+  Id: number
 
   /**
-   * 攻击时间阈值
+   * 规则的id列表
    */
-  TimeThreshold: number
+  Rules: Array<number>
 
   /**
-   * 自动封禁时间
+   * 规则匹配路径
    */
-  DenyTimeThreshold: number
+  Url: string
 
   /**
-   * 自动封禁状态
+   * 规则匹配方法
    */
-  DefenseStatus: number
+  Function: string
+
+  /**
+   * 规则的开关状态
+   */
+  Status: number
 }
 
 /**
@@ -274,7 +284,127 @@ export type DescribeAccessIndexRequest = null
 /**
  * 域名的详细信息
  */
-export type DomainInfo = null
+export interface DomainInfo {
+  /**
+   * 域名
+   */
+  Domain: string
+
+  /**
+   * 域名ID
+   */
+  DomainId: string
+
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+
+  /**
+   * cname地址
+   */
+  Cname: string
+
+  /**
+   * 实例类型
+   */
+  Edition: string
+
+  /**
+   * 地域
+   */
+  Region: string
+
+  /**
+   * 实例名
+   */
+  InstanceName: string
+
+  /**
+   * 日志包
+   */
+  ClsStatus: number
+
+  /**
+   * clb模式
+   */
+  FlowMode: number
+
+  /**
+   * waf开关
+   */
+  Status: number
+
+  /**
+   * 防御模式
+   */
+  Mode: number
+
+  /**
+   * AI防御模式
+   */
+  Engine: number
+
+  /**
+   * CC列表
+   */
+  CCList: Array<string>
+
+  /**
+   * 回源ip
+   */
+  RsList: Array<string>
+
+  /**
+   * 服务端口配置
+   */
+  Ports: Array<PortInfo>
+
+  /**
+   * 负载均衡器
+   */
+  LoadBalancerSet: Array<LoadBalancerPackageNew>
+
+  /**
+   * 用户id
+   */
+  AppId: number
+
+  /**
+   * clb状态
+   */
+  State: number
+
+  /**
+   * 创建时间
+   */
+  CreateTime?: string
+
+  /**
+   * 0关闭 1开启
+   */
+  Ipv6Status?: number
+
+  /**
+   * 0关闭 1开启
+   */
+  BotStatus?: number
+
+  /**
+   * 版本信息
+   */
+  Level?: number
+
+  /**
+   * 是否开启投递CLS功能
+   */
+  PostCLSStatus?: number
+
+  /**
+   * 是否开启投递CKafka功能
+   */
+  PostCKafkaStatus?: number
+}
 
 /**
  * 日志KeyValue对
@@ -621,6 +751,130 @@ export interface IpAccessControlItem {
    * 有效截止时间戳
    */
   ValidTs: number
+}
+
+/**
+ * saas域名详情
+ */
+export interface DomainsPartInfo {
+  /**
+   * 是否开启httpRewrite
+   */
+  HttpsRewrite: number
+
+  /**
+   * https回源端口
+   */
+  HttpsUpstreamPort: string
+
+  /**
+   * 是否是cdn
+   */
+  IsCdn: number
+
+  /**
+   * 是否开启gray
+   */
+  IsGray: number
+
+  /**
+   * 是否是http2
+   */
+  IsHttp2: number
+
+  /**
+   * 是否开启websocket
+   */
+  IsWebsocket: number
+
+  /**
+   * 负载均衡
+   */
+  LoadBalance: number
+
+  /**
+   * 防御模式
+   */
+  Mode: number
+
+  /**
+   * 私钥
+   */
+  PrivateKey: string
+
+  /**
+   * ssl id
+   */
+  SSLId: string
+
+  /**
+   * 回源域名
+   */
+  UpstreamDomain: string
+
+  /**
+   * 回源类型
+   */
+  UpstreamType: number
+
+  /**
+   * 回源ip
+   */
+  SrcList: Array<string>
+
+  /**
+   * 服务端口配置
+   */
+  Ports: Array<PortInfo>
+
+  /**
+   * 证书类型
+   */
+  CertType: number
+
+  /**
+   * 回源方式
+   */
+  UpstreamScheme: string
+
+  /**
+   * 日志包
+   */
+  Cls: number
+
+  /**
+   * 一级cname
+   */
+  Cname: string
+
+  /**
+   * 是否长连接
+   */
+  IsKeepAlive: number
+
+  /**
+      * 是否开启主动健康检测，1表示开启，0表示不开启
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ActiveCheck: number
+
+  /**
+      * TLS版本信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TLSVersion: number
+
+  /**
+      * 加密套件信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Ciphers: Array<number>
+
+  /**
+      * 模版
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CipherTemplate: number
 }
 
 /**
@@ -1130,6 +1384,26 @@ export interface PostAttackDownloadTaskResponse {
 }
 
 /**
+ * DescribeDomainDetailsSaas请求参数结构体
+ */
+export interface DescribeDomainDetailsSaasRequest {
+  /**
+   * 域名
+   */
+  Domain: string
+
+  /**
+   * 域名id
+   */
+  DomainId: string
+
+  /**
+   * 实例id
+   */
+  InstanceId: string
+}
+
+/**
  * ModifyCustomRuleStatus返回参数结构体
  */
 export interface ModifyCustomRuleStatusResponse {
@@ -1633,6 +1907,26 @@ export interface InstanceInfo {
 }
 
 /**
+ * 防护域名端口配置信息
+ */
+export type PortInfo = null
+
+/**
+ * DescribeDomainDetailsSaas返回参数结构体
+ */
+export interface DescribeDomainDetailsSaasResponse {
+  /**
+   * 域名详情
+   */
+  DomainsPartInfo: DomainsPartInfo
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 用于 DescribeAccessIndex 的出参
  */
 export interface AccessKeyValueInfo {
@@ -1828,38 +2122,33 @@ export interface ExportAccessInfo {
 }
 
 /**
- * ModifyDomainWhiteRule请求参数结构体
+ * ModifyWafAutoDenyRules请求参数结构体
  */
-export interface ModifyDomainWhiteRuleRequest {
+export interface ModifyWafAutoDenyRulesRequest {
   /**
-   * 需要更改的规则的域名
+   * 域名
    */
   Domain: string
 
   /**
-   * 白名单id
+   * 攻击次数阈值
    */
-  Id: number
+  AttackThreshold: number
 
   /**
-   * 规则的id列表
+   * 攻击时间阈值
    */
-  Rules: Array<number>
+  TimeThreshold: number
 
   /**
-   * 规则匹配路径
+   * 自动封禁时间
    */
-  Url: string
+  DenyTimeThreshold: number
 
   /**
-   * 规则匹配方法
+   * 自动封禁状态
    */
-  Function: string
-
-  /**
-   * 规则的开关状态
-   */
-  Status: number
+  DefenseStatus: number
 }
 
 /**
@@ -2491,12 +2780,12 @@ export interface AccessRuleKeyValueInfo {
  */
 export interface DescribeDomainsRequest {
   /**
-   * 偏移
+   * 数据偏移量，从1开始。
    */
   Offset: number
 
   /**
-   * 容量
+   * 返回域名的数量
    */
   Limit: number
 

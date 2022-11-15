@@ -34,16 +34,46 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeOrganizationMembers", req, cb);
     }
     /**
+     * 移动成员到指定企业组织节点
+     */
+    async MoveOrganizationNodeMembers(req, cb) {
+        return this.request("MoveOrganizationNodeMembers", req, cb);
+    }
+    /**
+     * 更新企业组织节点
+     */
+    async UpdateOrganizationNode(req, cb) {
+        return this.request("UpdateOrganizationNode", req, cb);
+    }
+    /**
      * 创建组织成员
      */
     async CreateOrganizationMember(req, cb) {
         return this.request("CreateOrganizationMember", req, cb);
     }
     /**
-     * 绑定组织成员和子账号的授权关系
+     * 绑定组织成员和组织管理员子账号的授权关系
      */
     async BindOrganizationMemberAuthAccount(req, cb) {
         return this.request("BindOrganizationMemberAuthAccount", req, cb);
+    }
+    /**
+     * 获取可创建组织成员的认证主体关系列表
+     */
+    async DescribeOrganizationAuthNode(req, cb) {
+        return this.request("DescribeOrganizationAuthNode", req, cb);
+    }
+    /**
+     * 获取组织成员访问身份列表
+     */
+    async ListOrganizationIdentity(req, cb) {
+        return this.request("ListOrganizationIdentity", req, cb);
+    }
+    /**
+     * 批量删除企业组织节点
+     */
+    async DeleteOrganizationNodes(req, cb) {
+        return this.request("DeleteOrganizationNodes", req, cb);
     }
     /**
      * 获取企业组织信息
@@ -52,10 +82,40 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeOrganization", req, cb);
     }
     /**
-     * 创建组织成员的授权策略
+     * 获取组织节点列表
+     */
+    async DescribeOrganizationNodes(req, cb) {
+        return this.request("DescribeOrganizationNodes", req, cb);
+    }
+    /**
+     * 添加企业组织节点
+     */
+    async AddOrganizationNode(req, cb) {
+        return this.request("AddOrganizationNode", req, cb);
+    }
+    /**
+     * 获取组织成员的授权策略列表
+     */
+    async DescribeOrganizationMemberPolicies(req, cb) {
+        return this.request("DescribeOrganizationMemberPolicies", req, cb);
+    }
+    /**
+     * 创建组织成员访问授权策略
      */
     async CreateOrganizationMemberPolicy(req, cb) {
         return this.request("CreateOrganizationMemberPolicy", req, cb);
+    }
+    /**
+     * 获取组织成员可被管理的身份列表
+     */
+    async DescribeOrganizationMemberAuthIdentities(req, cb) {
+        return this.request("DescribeOrganizationMemberAuthIdentities", req, cb);
+    }
+    /**
+     * 批量删除企业组织成员
+     */
+    async DeleteOrganizationMembers(req, cb) {
+        return this.request("DeleteOrganizationMembers", req, cb);
     }
 }
 exports.Client = Client;

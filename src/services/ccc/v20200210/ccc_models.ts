@@ -2200,6 +2200,11 @@ export interface CreateStaffRequest {
    * 客服信息，个数不超过 10
    */
   Staffs: Array<SeatUserInfo>
+
+  /**
+   * 是否发送密码邮件，默认true
+   */
+  SendPassword?: boolean
 }
 
 /**

@@ -1073,10 +1073,14 @@ export interface PlanInfo {
 <li> sta_with_bot ：全球内容分发网络（不包括中国大陆）标准版套餐附带bot管理；</li>
 <li> sta_cm ：中国大陆内容分发网络标准版套餐； </li>
 <li> sta_cm_with_bot ：中国大陆内容分发网络标准版套餐附带bot管理；</li>
+<li> sta_global ：全球内容分发网络（包括中国大陆）标准版套餐； </li>
+<li> sta_global_with_bot ：全球内容分发网络（包括中国大陆）标准版套餐附带bot管理；</li>
 <li> ent ：全球内容分发网络（不包括中国大陆）企业版套餐； </li>
 <li> ent_with_bot ： 全球内容分发网络（不包括中国大陆）企业版套餐附带bot管理；</li>
 <li> ent_cm ：中国大陆内容分发网络企业版套餐； </li>
-<li> ent_cm_with_bot ：中国大陆内容分发网络企业版套餐附带bot管理。</li>
+<li> ent_cm_with_bot ：中国大陆内容分发网络企业版套餐附带bot管理；</li>
+<li> ent_global ：全球内容分发网络（包括中国大陆）企业版套餐； </li>
+<li> ent_global_with_bot ：全球内容分发网络（包括中国大陆）企业版套餐附带bot管理。</li>
       */
   PlanType: string
 
@@ -1098,7 +1102,8 @@ export interface PlanInfo {
   /**
       * 套餐加速区域类型，取值有：
 <li> mainland ：中国大陆； </li>
-<li> overseas ：全球（不包括中国大陆）。</li>
+<li> overseas ：全球（不包括中国大陆）；</li>
+<li> global ：全球（包括中国大陆）。 </li>
       */
   Area: string
 }
@@ -5301,10 +5306,14 @@ export interface CreatePlanForZoneRequest {
 <li> sta_with_bot: 全球内容分发网络（不包括中国大陆）标准版套餐附带bot管理；</li>
 <li> sta_cm: 中国大陆内容分发网络标准版套餐； </li>
 <li> sta_cm_with_bot: 中国大陆内容分发网络标准版套餐附带bot管理；</li>
+<li> sta_global ：全球内容分发网络（包括中国大陆）标准版套餐； </li>
+<li> sta_global_with_bot ：全球内容分发网络（包括中国大陆）标准版套餐附带bot管理；</li>
 <li> ent: 全球内容分发网络（不包括中国大陆）企业版套餐； </li>
 <li> ent_with_bot: 全球内容分发网络（不包括中国大陆）企业版套餐附带bot管理；</li>
 <li> ent_cm: 中国大陆内容分发网络企业版套餐； </li>
-<li> ent_cm_with_bot: 中国大陆内容分发网络企业版套餐附带bot管理。</li>当前账户可购买套餐类型请以<a href="https://tcloud4api.woa.com/document/product/1657/80124?!preview&!document=1">DescribeAvailablePlans</a>返回为准。
+<li> ent_cm_with_bot: 中国大陆内容分发网络企业版套餐附带bot管理。</li>
+<li> ent_global ：全球内容分发网络（包括中国大陆）企业版套餐； </li>
+<li> ent_global_with_bot ：全球内容分发网络（包括中国大陆）企业版套餐附带bot管理。</li>当前账户可购买套餐类型请以<a href="https://tcloud4api.woa.com/document/product/1657/80124?!preview&!document=1">DescribeAvailablePlans</a>返回为准。
       */
   PlanType: string
 }

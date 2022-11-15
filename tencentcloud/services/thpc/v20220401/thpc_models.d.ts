@@ -155,6 +155,30 @@ export interface ExpansionNodeConfig {
     VirtualPrivateCloud?: VirtualPrivateCloud;
 }
 /**
+ * 节点活动信息。
+ */
+export interface NodeActivity {
+    /**
+      * 节点活动所在的实例ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NodeInstanceId: string;
+    /**
+      * 节点活动状态。取值范围：<br><li>RUNNING：运行中<br><li>SUCCESSFUL：活动成功<br><li>FAILED：活动失败
+      */
+    NodeActivityStatus: string;
+    /**
+      * 节点活动状态码。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NodeActivityStatusCode: string;
+    /**
+      * 节点活动状态原因。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NodeActivityStatusReason: string;
+}
+/**
  * 扩容队列配置。
  */
 export interface QueueConfig {
@@ -200,6 +224,59 @@ export interface QueueConfig {
     ExpansionNodeConfigs?: Array<ExpansionNodeConfig>;
 }
 /**
+ * 符合条件的集群活动信息。
+ */
+export interface ClusterActivity {
+    /**
+      * 集群ID。
+      */
+    ClusterId: string;
+    /**
+      * 集群活动ID。
+      */
+    ActivityId: string;
+    /**
+      * 集群活动类型。
+      */
+    ActivityType: string;
+    /**
+      * 集群活动状态。取值范围：<br><li>PENDING：等待运行<br><li>RUNNING：运行中<br><li>SUCCESSFUL：活动成功<br><li>PARTIALLY_SUCCESSFUL：活动部分成功<br><li>FAILED：活动失败
+      */
+    ActivityStatus: string;
+    /**
+      * 集群活动状态码。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ActivityStatusCode: string;
+    /**
+      * 集群活动结果详情。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ResultDetail: string;
+    /**
+      * 集群活动起因。
+      */
+    Cause: string;
+    /**
+      * 集群活动描述。
+      */
+    Description: string;
+    /**
+      * 集群活动相关节点活动集合。
+      */
+    RelatedNodeActivitySet: Array<NodeActivity>;
+    /**
+      * 集群活动开始时间。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    StartTime: string;
+    /**
+      * 集群活动结束时间。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EndTime: string;
+}
+/**
  * 登录节点概览。
  */
 export interface LoginNodeOverview {
@@ -233,40 +310,18 @@ export interface CFSOption {
     StorageType?: string;
 }
 /**
- * 登录节点信息。
+ * CreateCluster返回参数结构体
  */
-export interface LoginNode {
+export interface CreateClusterResponse {
     /**
-      * 节点[计费类型](https://cloud.tencent.com/document/product/213/2180)。<br><li>PREPAID：预付费，即包年包月<br><li>POSTPAID_BY_HOUR：按小时后付费<br>默认值：POSTPAID_BY_HOUR。
+      * 集群ID。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    InstanceChargeType?: string;
+    ClusterId: string;
     /**
-      * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月节点的购买时长、是否设置自动续费等属性。若指定节点的付费模式为预付费则该参数必传。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    InstanceChargePrepaid?: InstanceChargePrepaid;
-    /**
-      * 节点机型。不同实例机型指定了不同的资源规格。
-<br><li>具体取值可通过调用接口[DescribeInstanceTypeConfigs](https://cloud.tencent.com/document/api/213/15749)来获得最新的规格表或参见[实例规格](https://cloud.tencent.com/document/product/213/11518)描述。
-      */
-    InstanceType?: string;
-    /**
-      * 节点系统盘配置信息。若不指定该参数，则按照系统默认值进行分配。
-      */
-    SystemDisk?: Array<SystemDisk>;
-    /**
-      * 节点数据盘配置信息。若不指定该参数，则默认不购买数据盘。支持购买的时候指定21块数据盘，其中最多包含1块LOCAL_BASIC数据盘或者LOCAL_SSD数据盘，最多包含20块CLOUD_BASIC数据盘、CLOUD_PREMIUM数据盘或者CLOUD_SSD数据盘。
-      */
-    DataDisks?: Array<DataDisk>;
-    /**
-      * 公网带宽相关信息设置。若不指定该参数，则默认公网带宽为0Mbps。
-      */
-    InternetAccessible?: Array<InternetAccessible>;
-    /**
-      * 节点显示名称。<br><li>
-不指定节点显示名称则默认显示‘未命名’。
-最多支持60个字符。
-      */
-    InstanceName?: string;
+    RequestId?: string;
 }
 /**
  * SetAutoScalingConfiguration返回参数结构体
@@ -377,18 +432,40 @@ export interface Tag {
     Value: string;
 }
 /**
- * CreateCluster返回参数结构体
+ * 登录节点信息。
  */
-export interface CreateClusterResponse {
+export interface LoginNode {
     /**
-      * 集群ID。
-注意：此字段可能返回 null，表示取不到有效值。
+      * 节点[计费类型](https://cloud.tencent.com/document/product/213/2180)。<br><li>PREPAID：预付费，即包年包月<br><li>POSTPAID_BY_HOUR：按小时后付费<br>默认值：POSTPAID_BY_HOUR。
       */
-    ClusterId: string;
+    InstanceChargeType?: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月节点的购买时长、是否设置自动续费等属性。若指定节点的付费模式为预付费则该参数必传。
       */
-    RequestId?: string;
+    InstanceChargePrepaid?: InstanceChargePrepaid;
+    /**
+      * 节点机型。不同实例机型指定了不同的资源规格。
+<br><li>具体取值可通过调用接口[DescribeInstanceTypeConfigs](https://cloud.tencent.com/document/api/213/15749)来获得最新的规格表或参见[实例规格](https://cloud.tencent.com/document/product/213/11518)描述。
+      */
+    InstanceType?: string;
+    /**
+      * 节点系统盘配置信息。若不指定该参数，则按照系统默认值进行分配。
+      */
+    SystemDisk?: Array<SystemDisk>;
+    /**
+      * 节点数据盘配置信息。若不指定该参数，则默认不购买数据盘。支持购买的时候指定21块数据盘，其中最多包含1块LOCAL_BASIC数据盘或者LOCAL_SSD数据盘，最多包含20块CLOUD_BASIC数据盘、CLOUD_PREMIUM数据盘或者CLOUD_SSD数据盘。
+      */
+    DataDisks?: Array<DataDisk>;
+    /**
+      * 公网带宽相关信息设置。若不指定该参数，则默认公网带宽为0Mbps。
+      */
+    InternetAccessible?: Array<InternetAccessible>;
+    /**
+      * 节点显示名称。<br><li>
+不指定节点显示名称则默认显示‘未命名’。
+最多支持60个字符。
+      */
+    InstanceName?: string;
 }
 /**
  * BindAutoScalingGroup返回参数结构体
@@ -496,17 +573,21 @@ export interface Placement {
     Zone: string;
 }
 /**
- * 描述了数据盘的信息
+ * DescribeClusterActivities请求参数结构体
  */
-export interface DataDisk {
+export interface DescribeClusterActivitiesRequest {
     /**
-      * 数据盘大小，单位：GB。最小调整步长为10G，不同数据盘类型取值范围不同，具体限制详见：[存储概述](https://cloud.tencent.com/document/product/213/4952)。默认值为0，表示不购买数据盘。更多限制详见产品文档。
+      * 集群ID。通过该参数指定需要查询活动历史记录的集群。
       */
-    DiskSize: number;
+    ClusterId: string;
     /**
-      * 数据盘类型。数据盘类型限制详见[存储概述](https://cloud.tencent.com/document/product/213/4952)。取值范围：<br><li>LOCAL_BASIC：本地硬盘<br><li>LOCAL_SSD：本地SSD硬盘<br><li>LOCAL_NVME：本地NVME硬盘，与InstanceType强相关，不支持指定<br><li>LOCAL_PRO：本地HDD硬盘，与InstanceType强相关，不支持指定<br><li>CLOUD_BASIC：普通云硬盘<br><li>CLOUD_PREMIUM：高性能云硬盘<br><li>CLOUD_SSD：SSD云硬盘<br><li>CLOUD_HSSD：增强型SSD云硬盘<br><li>CLOUD_TSSD：极速型SSD云硬盘<br><br>默认取值：LOCAL_BASIC。
+      * 偏移量，默认为0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
       */
-    DiskType?: string;
+    Offset?: number;
+    /**
+      * 返回数量，默认为20，最大值为100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
+      */
+    Limit?: number;
 }
 /**
  * AddNodes请求参数结构体
@@ -650,6 +731,24 @@ export interface VirtualPrivateCloud {
     SubnetId: string;
 }
 /**
+ * 描述了实例的计费模式
+ */
+export interface InstanceChargePrepaid {
+    /**
+      * 购买实例的时长，单位：月。取值范围：1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60。
+      */
+    Period: number;
+    /**
+      * 自动续费标识。取值范围：
+NOTIFY_AND_AUTO_RENEW：通知过期且自动续费
+NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费
+DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费
+
+默认取值：NOTIFY_AND_MANUAL_RENEW。若该参数指定为NOTIFY_AND_AUTO_RENEW，在账户余额充足的情况下，实例到期后将按月自动续费。
+      */
+    RenewFlag?: string;
+}
+/**
  * 描述集群文件系统选项
  */
 export interface StorageOption {
@@ -764,22 +863,34 @@ export interface GooseFSOption {
     Masters: Array<string>;
 }
 /**
- * 描述了实例的计费模式
+ * DescribeClusterActivities返回参数结构体
  */
-export interface InstanceChargePrepaid {
+export interface DescribeClusterActivitiesResponse {
     /**
-      * 购买实例的时长，单位：月。取值范围：1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60。
+      * 集群活动历史记录列表。
       */
-    Period: number;
+    ClusterActivitySet: Array<ClusterActivity>;
     /**
-      * 自动续费标识。取值范围：
-NOTIFY_AND_AUTO_RENEW：通知过期且自动续费
-NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费
-DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费
-
-默认取值：NOTIFY_AND_MANUAL_RENEW。若该参数指定为NOTIFY_AND_AUTO_RENEW，在账户余额充足的情况下，实例到期后将按月自动续费。
+      * 集群活动历史记录数量。
       */
-    RenewFlag?: string;
+    TotalCount: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * 描述了数据盘的信息
+ */
+export interface DataDisk {
+    /**
+      * 数据盘大小，单位：GB。最小调整步长为10G，不同数据盘类型取值范围不同，具体限制详见：[存储概述](https://cloud.tencent.com/document/product/213/4952)。默认值为0，表示不购买数据盘。更多限制详见产品文档。
+      */
+    DiskSize: number;
+    /**
+      * 数据盘类型。数据盘类型限制详见[存储概述](https://cloud.tencent.com/document/product/213/4952)。取值范围：<br><li>LOCAL_BASIC：本地硬盘<br><li>LOCAL_SSD：本地SSD硬盘<br><li>LOCAL_NVME：本地NVME硬盘，与InstanceType强相关，不支持指定<br><li>LOCAL_PRO：本地HDD硬盘，与InstanceType强相关，不支持指定<br><li>CLOUD_BASIC：普通云硬盘<br><li>CLOUD_PREMIUM：高性能云硬盘<br><li>CLOUD_SSD：SSD云硬盘<br><li>CLOUD_HSSD：增强型SSD云硬盘<br><li>CLOUD_TSSD：极速型SSD云硬盘<br><br>默认取值：LOCAL_BASIC。
+      */
+    DiskType?: string;
 }
 /**
  * AddNodes返回参数结构体

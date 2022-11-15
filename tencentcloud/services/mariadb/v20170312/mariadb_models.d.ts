@@ -216,11 +216,15 @@ export interface DescribeAccountsRequest {
  */
 export interface DescribeRenewalPriceResponse {
     /**
-      * 原价，单位：分
+      * 原价
+* 单位：默认为分，若请求参数带有AmountUnit，参考AmountUnit描述
+* 币种：国内站为人民币，国际站为美元
       */
     OriginalPrice: number;
     /**
-      * 实际价格，单位：分。受折扣等影响，可能和原价不同。
+      * 实际价格，受折扣等影响，可能和原价不同
+* 单位：默认为分，若请求参数带有AmountUnit，参考AmountUnit描述
+* 币种：国内站人民币，国际站美元
       */
     Price: number;
     /**
@@ -328,6 +332,12 @@ export interface DescribeUpgradePriceRequest {
       * 新节点数，传0表示节点数不变
       */
     NodeCount?: number;
+    /**
+      * 价格金额单位，不传默认单位为分，取值：
+* pent：分
+* microPent：微分
+      */
+    AmountUnit?: string;
 }
 /**
  * TerminateDedicatedDBInstance返回参数结构体
@@ -1288,6 +1298,12 @@ export interface DescribePriceRequest {
       * 付费类型。postpaid：按量付费   prepaid：预付费
       */
     Paymode?: string;
+    /**
+      * 价格金额单位，不传默认单位为分，取值：
+* pent：分
+* microPent：微分
+      */
+    AmountUnit?: string;
 }
 /**
  * CreateDBInstance返回参数结构体
@@ -1984,11 +2000,15 @@ export interface ModifySyncTaskAttributeRequest {
  */
 export interface DescribeUpgradePriceResponse {
     /**
-      * 原价，单位：分
+      * 原价
+* 单位：默认为分，若请求参数带有AmountUnit，参考AmountUnit描述
+* 币种：国内站为人民币，国际站为美元
       */
     OriginalPrice: number;
     /**
-      * 实际价格，单位：分。受折扣等影响，可能和原价不同。
+      * 实际价格，受折扣等影响，可能和原价不同
+* 单位：默认为分，若请求参数带有AmountUnit，参考AmountUnit描述
+* 币种：国内站人民币，国际站美元
       */
     Price: number;
     /**
@@ -2243,11 +2263,15 @@ export interface DBInstance {
  */
 export interface DescribePriceResponse {
     /**
-      * 原价，单位：分
+      * 原价
+* 单位：默认为分，若请求参数带有AmountUnit，参考AmountUnit描述
+* 币种：国内站为人民币，国际站为美元
       */
     OriginalPrice: number;
     /**
-      * 实际价格，单位：分。受折扣等影响，可能和原价不同。
+      * 实际价格，受折扣等影响，可能和原价不同
+* 单位：默认为分，若请求参数带有AmountUnit，参考AmountUnit描述
+* 币种：国内站人民币，国际站美元
       */
     Price: number;
     /**
@@ -2916,6 +2940,12 @@ export interface DescribeRenewalPriceRequest {
       * 续费时长，单位：月。不传则默认为1个月。
       */
     Period?: number;
+    /**
+      * 价格金额单位，不传默认单位为分，取值：
+* pent：分
+* microPent：微分
+      */
+    AmountUnit?: string;
 }
 /**
  * 拉取的日志信息
