@@ -106,7 +106,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeFlowInfo", req, cb);
     }
     /**
-     * 创建出证报告，返回报告 URL。此接口暂未开放，有问题请联系运营人员。
+     * 创建出证报告，返回报告 ID。
      */
     async CreateFlowEvidenceReport(req, cb) {
         return this.request("CreateFlowEvidenceReport", req, cb);

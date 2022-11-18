@@ -1814,24 +1814,58 @@ export interface SecurityEntity {
 }
 
 /**
- * CreatePrefetchTask返回参数结构体
+ * ModifyDnsRecord请求参数结构体
  */
-export interface CreatePrefetchTaskResponse {
+export interface ModifyDnsRecordRequest {
   /**
-   * 任务 ID。
+   * 记录ID。
    */
-  JobId: string
+  DnsRecordId: string
 
   /**
-      * 失败的任务列表。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 站点ID。
+   */
+  ZoneId: string
+
+  /**
+      * DNS记录类型，取值有：
+<li>A：将域名指向一个外网 IPv4 地址，如 8.8.8.8；</li>
+<li>AAAA：将域名指向一个外网 IPv6 地址；</li>
+<li>MX：用于邮箱服务器，相关记录值/优先级参数由邮件注册商提供。存在多条 MX 记录时，优先级越低越优先；</li>
+<li>CNAME：将域名指向另一个域名，再由该域名解析出最终 IP 地址；</li>
+<li>TXT：对域名进行标识和说明，常用于域名验证和 SPF 记录（反垃圾邮件）；</li>
+<li>NS：如果需要将子域名交给其他 DNS 服务商解析，则需要添加 NS 记录。根域名无法添加 NS 记录；</li>
+<li>CAA：指定可为本站点颁发证书的 CA；</li>
+<li>SRV：标识某台服务器使用了某个服务，常见于微软系统的目录管理。</li>不填写保持原有配置。
       */
-  FailedList: Array<FailReason>
+  DnsRecordType?: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 记录名称，由主机记录+站点名称组成，不填写保持原有配置。
    */
-  RequestId?: string
+  DnsRecordName?: string
+
+  /**
+   * 记录内容，不填写保持原有配置。
+   */
+  Content?: string
+
+  /**
+   * 缓存时间，数值越小，修改记录各地生效时间越快，默认为300，单位：秒，不填写保持原有配置。
+   */
+  TTL?: number
+
+  /**
+   * 该参数在修改MX记录时生效，值越小优先级越高，用户可指定值范围为1~50，不指定默认为0，不填写保持原有配置。
+   */
+  Priority?: number
+
+  /**
+      * 代理模式，取值有：
+<li>dns_only：仅DNS解析；</li>
+<li>proxied：代理加速。</li>不填写保持原有配置。
+      */
+  Mode?: string
 }
 
 /**
@@ -4209,6 +4243,20 @@ export interface Zone {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   VanityNameServersIps: Array<VanityNameServersIps>
+
+  /**
+      * 展示状态，取值有：
+<li> active：已启用；</li>
+<li> inactive：未生效；</li>
+<li> paused：已停用。</li>
+      */
+  ActiveStatus: string
+
+  /**
+      * 站点别名。数字、英文、-和_组合，限制20个字符。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AliasZoneName: string
 }
 
 /**
@@ -4457,6 +4505,24 @@ export interface DescribeZonesRequest {
 <li>zone-name<br>   按照【<strong>站点名称</strong>】进行过滤。<br>   类型：String<br>   必选：否</li><li>zone-id<br>   按照【<strong>站点ID</strong>】进行过滤。站点ID形如：zone-xxx。<br>   类型：String<br>   必选：否</li><li>status<br>   按照【<strong>站点状态</strong>】进行过滤。<br>   类型：String<br>   必选：否</li><li>tag-key<br>   按照【<strong>标签键</strong>】进行过滤。<br>   类型：String<br>   必选：否</li><li>tag-value<br>   按照【<strong>标签值</strong>】进行过滤。<br>   类型：String<br>   必选：否</li>模糊查询时仅支持过滤字段名为zone-name。
       */
   Filters?: Array<AdvancedFilter>
+
+  /**
+      * 排序字段，取值有：
+<li> type：接入类型；</li>
+<li> area：加速区域；</li>
+<li> create-time：创建时间；</li>
+<li> zone-name：站点名称；</li>
+<li> use-time：最近使用时间；</li>
+<li> active-status：生效状态。</li>不填写使用默认值create-time。
+      */
+  Order?: string
+
+  /**
+      * 排序方向，取值有：
+<li> asc：从小到大排序；</li>
+<li> desc：从大到小排序。</li>不填写使用默认值desc。
+      */
+  Direction?: string
 }
 
 /**
@@ -4642,58 +4708,24 @@ export interface DescribeDnsRecordsRequest {
 }
 
 /**
- * ModifyDnsRecord请求参数结构体
+ * CreatePrefetchTask返回参数结构体
  */
-export interface ModifyDnsRecordRequest {
+export interface CreatePrefetchTaskResponse {
   /**
-   * 记录ID。
+   * 任务 ID。
    */
-  DnsRecordId: string
+  JobId: string
 
   /**
-   * 站点ID。
-   */
-  ZoneId: string
-
-  /**
-      * DNS记录类型，取值有：
-<li>A：将域名指向一个外网 IPv4 地址，如 8.8.8.8；</li>
-<li>AAAA：将域名指向一个外网 IPv6 地址；</li>
-<li>MX：用于邮箱服务器，相关记录值/优先级参数由邮件注册商提供。存在多条 MX 记录时，优先级越低越优先；</li>
-<li>CNAME：将域名指向另一个域名，再由该域名解析出最终 IP 地址；</li>
-<li>TXT：对域名进行标识和说明，常用于域名验证和 SPF 记录（反垃圾邮件）；</li>
-<li>NS：如果需要将子域名交给其他 DNS 服务商解析，则需要添加 NS 记录。根域名无法添加 NS 记录；</li>
-<li>CAA：指定可为本站点颁发证书的 CA；</li>
-<li>SRV：标识某台服务器使用了某个服务，常见于微软系统的目录管理。</li>不填写保持原有配置。
+      * 失败的任务列表。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-  DnsRecordType?: string
+  FailedList: Array<FailReason>
 
   /**
-   * 记录名称，由主机记录+站点名称组成，不填写保持原有配置。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  DnsRecordName?: string
-
-  /**
-   * 记录内容，不填写保持原有配置。
-   */
-  Content?: string
-
-  /**
-   * 缓存时间，数值越小，修改记录各地生效时间越快，默认为300，单位：秒，不填写保持原有配置。
-   */
-  TTL?: number
-
-  /**
-   * 该参数在修改MX记录时生效，值越小优先级越高，用户可指定值范围为1~50，不指定默认为0，不填写保持原有配置。
-   */
-  Priority?: number
-
-  /**
-      * 代理模式，取值有：
-<li>dns_only：仅DNS解析；</li>
-<li>proxied：代理加速。</li>不填写保持原有配置。
-      */
-  Mode?: string
+  RequestId?: string
 }
 
 /**
@@ -6515,6 +6547,16 @@ export interface CreateRuleResponse {
 }
 
 /**
+ * BindZoneToPlan返回参数结构体
+ */
+export interface BindZoneToPlanResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateDnsRecord请求参数结构体
  */
 export interface CreateDnsRecordRequest {
@@ -7446,6 +7488,11 @@ export interface CreateZoneRequest {
 <li> false：不允许重复接入。</li>不填写使用默认值false。
       */
   AllowDuplicates?: boolean
+
+  /**
+   * 站点别名。数字、英文、-和_组合，限制20个字符。
+   */
+  AliasZoneName?: string
 }
 
 /**
@@ -9832,6 +9879,11 @@ export interface ModifyZoneRequest {
    * 自定义站点信息，以替代系统默认分配的名称服务器。不填写保持原有配置。
    */
   VanityNameServers?: VanityNameServers
+
+  /**
+   * 站点别名。数字、英文、-和_组合，限制20个字符。
+   */
+  AliasZoneName?: string
 }
 
 /**
@@ -10881,6 +10933,21 @@ export interface SpeedTestingStatistics {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   LoadTime: number
+}
+
+/**
+ * BindZoneToPlan请求参数结构体
+ */
+export interface BindZoneToPlanRequest {
+  /**
+   * 未绑定套餐的站点ID。
+   */
+  ZoneId: string
+
+  /**
+   * 待绑定的目标套餐ID。
+   */
+  PlanId: string
 }
 
 /**

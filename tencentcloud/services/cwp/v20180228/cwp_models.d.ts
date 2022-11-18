@@ -3560,6 +3560,23 @@ export interface DescribeAssetSystemPackageListResponse {
     RequestId?: string;
 }
 /**
+ * DescribeClientException返回参数结构体
+ */
+export interface DescribeClientExceptionResponse {
+    /**
+      * 事件总数量
+      */
+    TotalCount: number;
+    /**
+      * 事件详情
+      */
+    Records: Array<RecordInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeAssetMachineList返回参数结构体
  */
 export interface DescribeAssetMachineListResponse {
@@ -4125,6 +4142,35 @@ export interface DescribeAssetWebLocationListResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 客户端异常信息结构
+ */
+export interface RecordInfo {
+    /**
+      * 主机ip
+      */
+    HostIP: string;
+    /**
+      * 主机实例id
+      */
+    InstanceID: string;
+    /**
+      * 客户端离线时间
+      */
+    OfflineTime: string;
+    /**
+      * 客户端卸载时间
+      */
+    UninstallTime: string;
+    /**
+      * 客户端卸载调用链
+      */
+    UninstallCmd: string;
+    /**
+      * 客户端uuid
+      */
+    Uuid: string;
 }
 /**
  * DescribeAssetHostTotalCount返回参数结构体
@@ -12197,6 +12243,31 @@ export interface DescribeBaselineItemListResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DescribeClientException请求参数结构体
+ */
+export interface DescribeClientExceptionRequest {
+    /**
+      * 客户端异常类型 1:客户端离线，2:客户端卸载
+      */
+    ExceptionType: number;
+    /**
+      * 分页的偏移量
+      */
+    Offset: number;
+    /**
+      * 分页单页限制数目，不为0，最大值100
+      */
+    Limit: number;
+    /**
+      * 起始时间 `2006-01-02 15:04:05` 格式
+      */
+    StartTime?: string;
+    /**
+      * 结束时间 `2006-01-02 15:04:05` 格式
+      */
+    EndTime?: string;
 }
 /**
  * DescribeBanRegions请求参数结构体

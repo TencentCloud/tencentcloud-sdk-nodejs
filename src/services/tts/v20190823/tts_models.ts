@@ -273,4 +273,9 @@ export interface TextToVoiceRequest {
    * 是否开启时间戳功能，默认为false。
    */
   EnableSubtitle?: boolean
+
+  /**
+   * 断句敏感度，默认值为:0，取值范围:[0,1,2]，值越大则敏感度越低，更易断句，此参数建议不要随意调整，可能会影响合成效果。
+   */
+  SegmentRate?: number
 }

@@ -280,6 +280,10 @@ export interface DescribeQosResponse {
     RequestId?: string;
 }
 /**
+ * CreateEncryptedKey请求参数结构体
+ */
+export declare type CreateEncryptedKeyRequest = null;
+/**
  * DeleteDevice请求参数结构体
  */
 export interface DeleteDeviceRequest {
@@ -287,6 +291,19 @@ export interface DeleteDeviceRequest {
       * 删除设备的唯一ID
       */
     DeviceId: string;
+}
+/**
+ * CreateEncryptedKey返回参数结构体
+ */
+export interface CreateEncryptedKeyResponse {
+    /**
+      * 预置密钥
+      */
+    EncryptedKey: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * UpdateDevice返回参数结构体
@@ -413,6 +430,19 @@ export interface UpdateDeviceRequest {
     UpdateNetInfo?: Array<UpdateNetInfo>;
 }
 /**
+ * GetPublicKey返回参数结构体
+ */
+export interface GetPublicKeyResponse {
+    /**
+      * 非对称公钥
+      */
+    PublicKey: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 设备的基本信息
  */
 export interface DeviceBaseInfo {
@@ -493,13 +523,18 @@ export interface Context {
  */
 export interface AddDeviceResponse {
     /**
-      * 后台生成的base64字符串密钥
+      * 经过加密算法加密后的base64格式密钥
       */
     DataKey: string;
     /**
       * 设备ID
       */
     DeviceId: string;
+    /**
+      * 签名字符串
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Signature: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -659,4 +694,12 @@ export interface AddDeviceRequest {
       * 新建设备的base64密钥字符串，非必选，如果不填写则由系统自动生成
       */
     DataKey?: string;
+    /**
+      * 是否设置预置密钥
+      */
+    Encrypted?: boolean;
 }
+/**
+ * GetPublicKey请求参数结构体
+ */
+export declare type GetPublicKeyRequest = null;

@@ -1267,10 +1267,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeWebPageServiceInfo", req, cb);
     }
     /**
-     * 对订单属性编辑
+     * 获取客户端异常事件
      */
-    async ModifyOrderAttribute(req, cb) {
-        return this.request("ModifyOrderAttribute", req, cb);
+    async DescribeClientException(req, cb) {
+        return this.request("DescribeClientException", req, cb);
     }
     /**
      * 获取所有主机标签
@@ -1391,6 +1391,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeLicenseList(req, cb) {
         return this.request("DescribeLicenseList", req, cb);
+    }
+    /**
+     * 对订单属性编辑
+     */
+    async ModifyOrderAttribute(req, cb) {
+        return this.request("ModifyOrderAttribute", req, cb);
     }
     /**
      * 获取木马文件下载地址

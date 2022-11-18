@@ -1301,6 +1301,16 @@ export interface UserDefineFaceReviewTemplateInfo {
 }
 
 /**
+ * 创建的输入HLS拉流的配置信息。
+ */
+export interface CreateInputHLSPullSettings {
+  /**
+   * HLS源站的源站地址，有且只能有一个。
+   */
+  SourceAddresses: Array<HLSPullSourceAddress>
+}
+
+/**
  * 内容审核模板详情
  */
 export interface ContentReviewTemplateItem {
@@ -2382,6 +2392,16 @@ export interface CreatePersonSampleRequest {
 <li>单个标签长度限制：128 个字符。</li>
       */
   Tags?: Array<string>
+}
+
+/**
+ * 查询输出的HLS拉流URL信息。
+ */
+export interface DescribeOutputHLSPullServerUrl {
+  /**
+   * HLS拉流地址的Url。
+   */
+  Url: string
 }
 
 /**
@@ -5056,6 +5076,17 @@ export interface MediaProcessTaskSnapshotByTimeOffsetResult {
 }
 
 /**
+ * 查询输出的HLS拉流配置信息。
+ */
+export interface DescribeOutputHLSPullSettings {
+  /**
+      * HLS拉流地址列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ServerUrls: Array<DescribeOutputHLSPullServerUrl>
+}
+
+/**
  * 翻译的输入。
  */
 export interface AiRecognitionTaskTransTextResultInput {
@@ -5830,6 +5861,16 @@ export interface WorkflowTrigger {
 }
 
 /**
+ * 创建的输入HLS拉流源站配置信息。
+ */
+export interface HLSPullSourceAddress {
+  /**
+   * HLS源站的Url地址。
+   */
+  Url: string
+}
+
+/**
  * 直播流 AI 识别结果
  */
 export interface LiveStreamAiRecognitionResultInfo {
@@ -6468,6 +6509,12 @@ export interface DescribeInput {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   RTSPPullSettings: DescribeInputRTSPPullSettings
+
+  /**
+      * 输入的HLS_PULL配置信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  HLSPullSettings: DescribeInputHLSPullSettings
 }
 
 /**
@@ -6899,6 +6946,12 @@ export interface DescribeOutput {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   RTSPPullSettings: DescribeOutputRTSPPullSettings
+
+  /**
+      * 输出的HLS拉流配置信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  HLSPullSettings: DescribeOutputHLSPullSettings
 }
 
 /**
@@ -8310,6 +8363,16 @@ export interface ActivityResult {
    * 原子任务输出。
    */
   ActivityResItem: ActivityResItem
+}
+
+/**
+ * 查询输入的HLS配置信息。
+ */
+export interface DescribeInputHLSPullSettings {
+  /**
+   * HLS源站地址信息。
+   */
+  SourceAddresses: Array<DescribeHLSPullSourceAddress>
 }
 
 /**
@@ -10750,6 +10813,11 @@ export interface CreateInput {
    * 输入的RTSP_PULL配置信息。
    */
   RTSPPullSettings?: CreateInputRTSPPullSettings
+
+  /**
+   * 输入的HLS_PULL配置信息。
+   */
+  HLSPullSettings?: CreateInputHLSPullSettings
 }
 
 /**
@@ -11692,6 +11760,11 @@ export interface ModifyInput {
    * RTSP_PULL的配置信息。
    */
   RTSPPullSettings?: CreateInputRTSPPullSettings
+
+  /**
+   * HLS_PULL的配置信息。
+   */
+  HLSPullSettings?: CreateInputHLSPullSettings
 }
 
 /**
@@ -12576,6 +12649,17 @@ export interface RTSPPullSourceAddress {
   /**
    * RTSP源站的Url地址。
    */
+  Url: string
+}
+
+/**
+ * 查询输入的HLS配置信息。
+ */
+export interface DescribeHLSPullSourceAddress {
+  /**
+      * HLS源站的Url地址。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
   Url: string
 }
 

@@ -78,6 +78,26 @@ it("mna.v20210119.GetDevices", async function () {
     }
 })
 
+it("mna.v20210119.GetPublicKey", async function () {
+    try {
+       const data = await client.GetPublicKey({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mna.v20210119.CreateEncryptedKey", async function () {
+    try {
+       const data = await client.CreateEncryptedKey({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mna.v20210119.DeleteDevice", async function () {
     try {
        const data = await client.DeleteDevice({})

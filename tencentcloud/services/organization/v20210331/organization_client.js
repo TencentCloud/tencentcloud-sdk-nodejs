@@ -58,16 +58,23 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("BindOrganizationMemberAuthAccount", req, cb);
     }
     /**
+     * 获取组织成员被绑定授权关系的子账号列表
+     */
+    async DescribeOrganizationMemberAuthAccounts(req, cb) {
+        return this.request("DescribeOrganizationMemberAuthAccounts", req, cb);
+    }
+    /**
      * 获取可创建组织成员的认证主体关系列表
      */
     async DescribeOrganizationAuthNode(req, cb) {
         return this.request("DescribeOrganizationAuthNode", req, cb);
     }
     /**
-     * 获取组织成员访问身份列表
+     * 取消组织成员和组织管理员子账号的授权关系
+
      */
-    async ListOrganizationIdentity(req, cb) {
-        return this.request("ListOrganizationIdentity", req, cb);
+    async CancelOrganizationMemberAuthAccount(req, cb) {
+        return this.request("CancelOrganizationMemberAuthAccount", req, cb);
     }
     /**
      * 批量删除企业组织节点
@@ -116,6 +123,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteOrganizationMembers(req, cb) {
         return this.request("DeleteOrganizationMembers", req, cb);
+    }
+    /**
+     * 获取组织成员访问身份列表
+     */
+    async ListOrganizationIdentity(req, cb) {
+        return this.request("ListOrganizationIdentity", req, cb);
     }
 }
 exports.Client = Client;

@@ -429,6 +429,26 @@ export interface DescribeBundlesResponse {
     RequestId?: string;
 }
 /**
+ * ModifyInstancesBundle请求参数结构体
+ */
+export interface ModifyInstancesBundleRequest {
+    /**
+      * 实例ID列表。一个或多个待操作的实例ID。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。每次请求批量实例的上限为30。
+      */
+    InstanceIds: Array<string>;
+    /**
+      * 待变更的套餐Id。可通过[DescribeBundles](https://cloud.tencent.com/document/api/1207/47575)接口返回值中的BundleId获取。
+      */
+    BundleId: string;
+    /**
+      * 是否自动抵扣代金券。取值范围：
+true：表示自动抵扣代金券
+false：表示不自动抵扣代金券
+默认取值：false。
+      */
+    AutoVoucher?: boolean;
+}
+/**
  * 实例价格详细信息
  */
 export interface InstancePriceDetail {
@@ -2922,6 +2942,15 @@ export interface BlueprintPrice {
       * 镜像折扣后总价。单位元。
       */
     DiscountPrice: number;
+}
+/**
+ * ModifyInstancesBundle返回参数结构体
+ */
+export interface ModifyInstancesBundleResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 描述通用资源配额信息。

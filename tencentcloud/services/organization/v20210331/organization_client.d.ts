@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeOrganizationAuthNodeResponse, BindOrganizationMemberAuthAccountRequest, CreateOrganizationMemberRequest, DescribeOrganizationMemberAuthIdentitiesRequest, CreateOrganizationMemberPolicyRequest, DescribeOrganizationRequest, DescribeOrganizationNodesRequest, BindOrganizationMemberAuthAccountResponse, CreateOrganizationMemberResponse, MoveOrganizationNodeMembersRequest, ListOrganizationIdentityRequest, MoveOrganizationNodeMembersResponse, DeleteOrganizationMembersRequest, DeleteOrganizationNodesRequest, AddOrganizationNodeResponse, ListOrganizationIdentityResponse, DescribeOrganizationNodesResponse, DescribeOrganizationMembersResponse, CreateOrganizationMemberPolicyResponse, DescribeOrganizationResponse, DescribeOrganizationMemberPoliciesRequest, AddOrganizationNodeRequest, DescribeOrganizationMemberAuthIdentitiesResponse, DescribeOrganizationAuthNodeRequest, UpdateOrganizationNodeResponse, DeleteOrganizationNodesResponse, DescribeOrganizationMemberPoliciesResponse, DescribeOrganizationMembersRequest, UpdateOrganizationNodeRequest, DeleteOrganizationMembersResponse } from "./organization_models";
+import { DescribeOrganizationAuthNodeResponse, BindOrganizationMemberAuthAccountRequest, DeleteOrganizationMembersResponse, DescribeOrganizationMemberAuthIdentitiesRequest, CreateOrganizationMemberPolicyRequest, DescribeOrganizationRequest, DescribeOrganizationNodesRequest, BindOrganizationMemberAuthAccountResponse, CreateOrganizationMemberResponse, MoveOrganizationNodeMembersRequest, ListOrganizationIdentityRequest, MoveOrganizationNodeMembersResponse, DeleteOrganizationMembersRequest, DescribeOrganizationMemberPoliciesResponse, DeleteOrganizationNodesRequest, AddOrganizationNodeResponse, ListOrganizationIdentityResponse, DescribeOrganizationNodesResponse, DescribeOrganizationMembersResponse, CreateOrganizationMemberPolicyResponse, CancelOrganizationMemberAuthAccountResponse, DescribeOrganizationResponse, DescribeOrganizationMemberPoliciesRequest, AddOrganizationNodeRequest, DescribeOrganizationMemberAuthIdentitiesResponse, DescribeOrganizationAuthNodeRequest, UpdateOrganizationNodeResponse, DescribeOrganizationMemberAuthAccountsRequest, CancelOrganizationMemberAuthAccountRequest, DeleteOrganizationNodesResponse, DescribeOrganizationMemberAuthAccountsResponse, CreateOrganizationMemberRequest, DescribeOrganizationMembersRequest, UpdateOrganizationNodeRequest } from "./organization_models";
 /**
  * organization client
  * @class
@@ -28,13 +28,18 @@ export declare class Client extends AbstractClient {
      */
     BindOrganizationMemberAuthAccount(req: BindOrganizationMemberAuthAccountRequest, cb?: (error: string, rep: BindOrganizationMemberAuthAccountResponse) => void): Promise<BindOrganizationMemberAuthAccountResponse>;
     /**
+     * 获取组织成员被绑定授权关系的子账号列表
+     */
+    DescribeOrganizationMemberAuthAccounts(req: DescribeOrganizationMemberAuthAccountsRequest, cb?: (error: string, rep: DescribeOrganizationMemberAuthAccountsResponse) => void): Promise<DescribeOrganizationMemberAuthAccountsResponse>;
+    /**
      * 获取可创建组织成员的认证主体关系列表
      */
     DescribeOrganizationAuthNode(req: DescribeOrganizationAuthNodeRequest, cb?: (error: string, rep: DescribeOrganizationAuthNodeResponse) => void): Promise<DescribeOrganizationAuthNodeResponse>;
     /**
-     * 获取组织成员访问身份列表
+     * 取消组织成员和组织管理员子账号的授权关系
+
      */
-    ListOrganizationIdentity(req: ListOrganizationIdentityRequest, cb?: (error: string, rep: ListOrganizationIdentityResponse) => void): Promise<ListOrganizationIdentityResponse>;
+    CancelOrganizationMemberAuthAccount(req: CancelOrganizationMemberAuthAccountRequest, cb?: (error: string, rep: CancelOrganizationMemberAuthAccountResponse) => void): Promise<CancelOrganizationMemberAuthAccountResponse>;
     /**
      * 批量删除企业组织节点
      */
@@ -67,4 +72,8 @@ export declare class Client extends AbstractClient {
      * 批量删除企业组织成员
      */
     DeleteOrganizationMembers(req: DeleteOrganizationMembersRequest, cb?: (error: string, rep: DeleteOrganizationMembersResponse) => void): Promise<DeleteOrganizationMembersResponse>;
+    /**
+     * 获取组织成员访问身份列表
+     */
+    ListOrganizationIdentity(req: ListOrganizationIdentityRequest, cb?: (error: string, rep: ListOrganizationIdentityResponse) => void): Promise<ListOrganizationIdentityResponse>;
 }

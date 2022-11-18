@@ -59,6 +59,7 @@ import {
   InferTemplate,
   StopBatchTaskRequest,
   FrameworkVersion,
+  ModifyModelServicePartialConfigResponse,
   DescribeModelAccEngineVersionsResponse,
   DeleteModelAccelerateTaskResponse,
   DataPoint,
@@ -154,6 +155,7 @@ import {
   DescribeDatasetDetailStructuredRequest,
   DescribeModelAccelerateTaskRequest,
   SegmentationInfo,
+  ModifyModelServicePartialConfigRequest,
   DescribeModelAccelerateTasksResponse,
   DeleteDatasetResponse,
   HorizontalPodAutoscaler,
@@ -273,6 +275,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeModelServiceCallInfoResponse) => void
   ): Promise<DescribeModelServiceCallInfoResponse> {
     return this.request("DescribeModelServiceCallInfo", req, cb)
+  }
+
+  /**
+   * 增量更新在线推理服务的部分配置，不更新的配置项不需要传入
+   */
+  async ModifyModelServicePartialConfig(
+    req: ModifyModelServicePartialConfigRequest,
+    cb?: (error: string, rep: ModifyModelServicePartialConfigResponse) => void
+  ): Promise<ModifyModelServicePartialConfigResponse> {
+    return this.request("ModifyModelServicePartialConfig", req, cb)
   }
 
   /**

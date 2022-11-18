@@ -99,6 +99,11 @@ SIGN_REJECT:拒签(流程结束)
 当ReviewType 是REJECT 时此字段必填,字符串长度不超过200
       */
   ReviewMessage?: string
+
+  /**
+   * 签署节点审核时需要指定
+   */
+  RecipientId?: string
 }
 
 /**
@@ -913,7 +918,7 @@ export interface TemplateInfo {
   CreatedOn: number
 
   /**
-      * 模板的预览链接
+      * 模板的H5预览链接,可以通过浏览器打开此链接预览模板，或者嵌入到iframe中预览模板。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   PreviewUrl: string
@@ -2457,7 +2462,8 @@ FILL_IMAGE - 图片控件；
 DYNAMIC_TABLE - 动态表格控件；
 ATTACHMENT - 附件控件；
 SELECTOR - 选择器控件；
-DATE - 日期控件；默认是格式化为xxxx年xx月xx日
+DATE - 日期控件；默认是格式化为xxxx年xx月xx日；
+DISTRICT - 省市区行政区划控件；
 
 如果是SignComponent控件类型，则可选的字段为
 SIGN_SEAL - 签署印章控件；
@@ -2527,12 +2533,27 @@ KEYWORD - 关键字
 
   /**
       * 参数控件样式，json格式表述
+
 不同类型的控件会有部分非通用参数
+
 TEXT/MULTI_LINE_TEXT控件可以指定
 1 Font：目前只支持黑体、宋体
 2 FontSize： 范围12-72
 3 FontAlign： Left/Right/Center，左对齐/居中/右对齐
 例如：{"FontSize":12}
+
+ComponentType为FILL_IMAGE时，支持以下参数：
+NotMakeImageCenter：bool。是否设置图片居中。false：居中（默认）。 true: 不居中
+FillMethod: int. 填充方式。0-铺满（默认）；1-等比例缩放
+
+ComponentType为SIGN_SIGNATURE类型可以控制签署方式
+{“ComponentTypeLimit”: [“xxx”]}
+xxx可以为：
+HANDWRITE – 手写签名
+BORDERLESS_ESIGN – 自动生成无边框腾讯体
+OCR_ESIGN -- AI智能识别手写签名
+ESIGN -- 个人印章类型
+如：{“ComponentTypeLimit”: [“BORDERLESS_ESIGN”]}
       */
   ComponentExtra?: string
 
@@ -2576,6 +2597,21 @@ SIGN_PAGING_SEAL - 可以指定印章ID
    * 指定关键字时纵坐标偏移量，单位pt
    */
   OffsetY?: number
+
+  /**
+   * 指定关键字页码
+   */
+  KeywordPage?: number
+
+  /**
+   * 关键字位置模式
+   */
+  RelativeLocation?: string
+
+  /**
+   * 关键字索引
+   */
+  KeywordIndexes?: Array<number>
 }
 
 /**

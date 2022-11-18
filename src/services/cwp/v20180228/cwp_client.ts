@@ -173,6 +173,7 @@ import {
   ModifyOrderAttributeRequest,
   JavaMemShellInfo,
   DescribeAssetSystemPackageListResponse,
+  DescribeClientExceptionResponse,
   DescribeAssetMachineListResponse,
   DescribeWebPageGeneralizeRequest,
   DescribeBaselineDetailRequest,
@@ -208,6 +209,7 @@ import {
   DescribeBashEventsRequest,
   DeleteMachineRequest,
   DescribeAssetWebLocationListResponse,
+  RecordInfo,
   DescribeAssetHostTotalCountResponse,
   DescribeAssetJarListRequest,
   PrivilegeEscalationProcess,
@@ -522,6 +524,7 @@ import {
   DescribeScanTaskDetailsRequest,
   DescribeProtectDirRelatedServerRequest,
   DescribeBaselineItemListResponse,
+  DescribeClientExceptionRequest,
   DescribeBanRegionsRequest,
   SecurityEventInfo,
   DescribeBaselineAnalysisDataResponse,
@@ -2673,13 +2676,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 对订单属性编辑
+   * 获取客户端异常事件
    */
-  async ModifyOrderAttribute(
-    req: ModifyOrderAttributeRequest,
-    cb?: (error: string, rep: ModifyOrderAttributeResponse) => void
-  ): Promise<ModifyOrderAttributeResponse> {
-    return this.request("ModifyOrderAttribute", req, cb)
+  async DescribeClientException(
+    req: DescribeClientExceptionRequest,
+    cb?: (error: string, rep: DescribeClientExceptionResponse) => void
+  ): Promise<DescribeClientExceptionResponse> {
+    return this.request("DescribeClientException", req, cb)
   }
 
   /**
@@ -2880,6 +2883,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeLicenseListResponse) => void
   ): Promise<DescribeLicenseListResponse> {
     return this.request("DescribeLicenseList", req, cb)
+  }
+
+  /**
+   * 对订单属性编辑
+   */
+  async ModifyOrderAttribute(
+    req: ModifyOrderAttributeRequest,
+    cb?: (error: string, rep: ModifyOrderAttributeResponse) => void
+  ): Promise<ModifyOrderAttributeResponse> {
+    return this.request("ModifyOrderAttribute", req, cb)
   }
 
   /**

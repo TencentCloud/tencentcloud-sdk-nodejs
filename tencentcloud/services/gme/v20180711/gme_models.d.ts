@@ -219,9 +219,21 @@ export interface CustomizationConfigs {
       */
     ModelId: string;
     /**
-      * 模型状态，-1下线状态，1上线状态, 0训练中, -2训练失败
+      * 模型状态，-1下线状态，1上线状态, 0训练中, -2训练失败, 3上线中, 4下线中
       */
     ModelState: number;
+    /**
+      * 模型名称
+      */
+    ModelName?: string;
+    /**
+      * 文本文件的下载地址，服务会从该地址下载文件，目前仅支持腾讯云cos
+      */
+    TextUrl?: string;
+    /**
+      * 更新时间，11位时间戳
+      */
+    UpdateTime?: number;
 }
 /**
  * 语音消息用量统计信息
@@ -284,6 +296,10 @@ export interface CreateCustomizationRequest {
       * 文本文件的下载地址，服务会从该地址下载文件，目前仅支持腾讯云cos
       */
     TextUrl: string;
+    /**
+      * 模型名称，名称长度不超过36，默认为BizId。
+      */
+    ModelName?: string;
 }
 /**
  * DescribeRoomInfo请求参数结构体
@@ -740,7 +756,7 @@ export interface ModifyCustomizationRequest {
       */
     BizId: number;
     /**
-      * 文本文件
+      * 文本文件的下载地址，服务会从该地址下载文件，目前仅支持腾讯云cos
       */
     TextUrl: string;
     /**

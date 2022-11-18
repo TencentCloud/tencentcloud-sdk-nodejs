@@ -1269,6 +1269,16 @@ JobSelectClusterException:19,JobCreateTaskException:20,JobSyncTaskException:21
 注意：此字段可能返回 null，表示取不到有效值。
       */
     NotificationHooks?: Array<NotificationHook>;
+    /**
+      * 每秒接收字节数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NetworkReceiveRate?: number;
+    /**
+      * 每秒发送字节数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NetworkSendRate?: number;
 }
 /**
  * DescribeAvailableMetrics请求参数结构体

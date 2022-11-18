@@ -6039,7 +6039,7 @@ export interface CdbSellConfig {
       */
     Status: number;
     /**
-      * 实例类型，可能的取值范围有：UNIVERSAL (通用型), EXCLUSIVE (独享型), BASIC (基础型)
+      * 实例类型，可能的取值范围有：UNIVERSAL (通用型), EXCLUSIVE (独享型), BASIC (基础型), BASIC_V2 (基础型v2)
 注意：此字段可能返回 null，表示取不到有效值。
       */
     DeviceType: string;

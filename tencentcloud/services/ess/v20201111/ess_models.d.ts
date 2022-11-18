@@ -1145,9 +1145,21 @@ export interface Staff {
  */
 export interface CreateFlowEvidenceReportResponse {
     /**
-      * 出证报告 URL（有效期5分钟）
+      * 出证报告 ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ReportId: string;
+    /**
+      * 废除，字段无效
+注意：此字段可能返回 null，表示取不到有效值。
       */
     ReportUrl: string;
+    /**
+      * 执行中：EvidenceStatusExecuting
+成功：EvidenceStatusSuccess
+失败：EvidenceStatusFailed
+      */
+    Status: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1824,7 +1836,8 @@ FILL_IMAGE - 图片控件；
 DYNAMIC_TABLE - 动态表格控件；
 ATTACHMENT - 附件控件；
 SELECTOR - 选择器控件；
-DATE - 日期控件；默认是格式化为xxxx年xx月xx日
+DATE - 日期控件；默认是格式化为xxxx年xx月xx日；
+DISTRICT - 省市区行政区划控件；
 
 如果是SignComponent控件类型，则可选的字段为
 SIGN_SEAL - 签署印章控件；
@@ -1875,6 +1888,12 @@ SIGN_PAGING_SEAL - 骑缝章；若文件发起，需要对应填充ComponentPosY
     ComponentRequired?: boolean;
     /**
       * 扩展参数：
+为JSON格式。
+
+ComponentType为FILL_IMAGE时，支持以下参数：
+NotMakeImageCenter：bool。是否设置图片居中。false：居中（默认）。 true: 不居中
+FillMethod: int. 填充方式。0-铺满（默认）；1-等比例缩放
+
 ComponentType为SIGN_SIGNATURE类型可以控制签署方式
 {“ComponentTypeLimit”: [“xxx”]}
 xxx可以为：
@@ -1924,6 +1943,22 @@ KEYWORD 关键字，使用ComponentId指定关键字
       * 指定关键字时纵坐标偏移量，单位pt
       */
     OffsetY?: number;
+    /**
+      * 指定关键字排序规则
+      */
+    KeywordOrder?: string;
+    /**
+      * 指定关键字页码
+      */
+    KeywordPage?: number;
+    /**
+      * 关键字位置模式
+      */
+    RelativeLocation?: string;
+    /**
+      * 关键字索引
+      */
+    KeywordIndexes?: Array<number>;
 }
 /**
  * DescribeFlowBriefs请求参数结构体

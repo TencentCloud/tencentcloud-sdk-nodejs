@@ -190,7 +190,7 @@ export interface CreateSessionRequest {
   Fps?: number
 
   /**
-   * 【已废弃】只在TrylockWorker时生效
+   * 【必选】用户IP，用户客户端的公网IP，用于就近调度，不填将严重影响用户体验
    */
   UserIp?: string
 
@@ -307,7 +307,7 @@ export interface TrylockWorkerRequest {
   SetNo?: number
 
   /**
-   * 【必选】用户IP，用于就近调度，不填将严重影响用户体验
+   * 【必选】用户IP，用户客户端的公网IP，用于就近调度，不填将严重影响用户体验
    */
   UserIp?: string
 

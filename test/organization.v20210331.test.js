@@ -68,6 +68,16 @@ it("organization.v20210331.BindOrganizationMemberAuthAccount", async function ()
     }
 })
 
+it("organization.v20210331.DescribeOrganizationMemberAuthAccounts", async function () {
+    try {
+       const data = await client.DescribeOrganizationMemberAuthAccounts({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("organization.v20210331.DescribeOrganizationAuthNode", async function () {
     try {
        const data = await client.DescribeOrganizationAuthNode({})
@@ -78,9 +88,9 @@ it("organization.v20210331.DescribeOrganizationAuthNode", async function () {
     }
 })
 
-it("organization.v20210331.ListOrganizationIdentity", async function () {
+it("organization.v20210331.CancelOrganizationMemberAuthAccount", async function () {
     try {
-       const data = await client.ListOrganizationIdentity({})
+       const data = await client.CancelOrganizationMemberAuthAccount({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -161,6 +171,16 @@ it("organization.v20210331.DescribeOrganizationMemberAuthIdentities", async func
 it("organization.v20210331.DeleteOrganizationMembers", async function () {
     try {
        const data = await client.DeleteOrganizationMembers({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("organization.v20210331.ListOrganizationIdentity", async function () {
+    try {
+       const data = await client.ListOrganizationIdentity({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

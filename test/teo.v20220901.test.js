@@ -658,6 +658,16 @@ it("teo.v20220901.ModifyRulePriority", async function () {
     }
 })
 
+it("teo.v20220901.BindZoneToPlan", async function () {
+    try {
+       const data = await client.BindZoneToPlan({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("teo.v20220901.DescribeDDoSAttackEvent", async function () {
     try {
        const data = await client.DescribeDDoSAttackEvent({})

@@ -1736,7 +1736,7 @@ export interface DescribeLiveStreamRequest {
   LiveChannelId: string
 
   /**
-   * 过期时间
+   * 过期时间 秒级unix时间戳
    */
   ExpireTime: number
 }

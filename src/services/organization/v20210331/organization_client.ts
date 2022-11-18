@@ -21,7 +21,7 @@ import {
   DescribeOrganizationAuthNodeResponse,
   OrgPermission,
   BindOrganizationMemberAuthAccountRequest,
-  CreateOrganizationMemberRequest,
+  DeleteOrganizationMembersResponse,
   OrgMember,
   DescribeOrganizationMemberAuthIdentitiesRequest,
   CreateOrganizationMemberPolicyRequest,
@@ -34,6 +34,7 @@ import {
   AuthNode,
   MoveOrganizationNodeMembersResponse,
   DeleteOrganizationMembersRequest,
+  DescribeOrganizationMemberPoliciesResponse,
   DeleteOrganizationNodesRequest,
   AddOrganizationNodeResponse,
   IdentityPolicy,
@@ -41,6 +42,7 @@ import {
   DescribeOrganizationNodesResponse,
   DescribeOrganizationMembersResponse,
   CreateOrganizationMemberPolicyResponse,
+  CancelOrganizationMemberAuthAccountResponse,
   DescribeOrganizationResponse,
   DescribeOrganizationMemberPoliciesRequest,
   AddOrganizationNodeRequest,
@@ -48,15 +50,18 @@ import {
   OrgMemberPolicy,
   DescribeOrganizationAuthNodeRequest,
   UpdateOrganizationNodeResponse,
+  DescribeOrganizationMemberAuthAccountsRequest,
+  CancelOrganizationMemberAuthAccountRequest,
   DeleteOrganizationNodesResponse,
-  MemberIdentity,
+  DescribeOrganizationMemberAuthAccountsResponse,
+  OrgMemberAuthAccount,
   OrgMemberAuthIdentity,
-  DescribeOrganizationMemberPoliciesResponse,
+  CreateOrganizationMemberRequest,
   OrgIdentity,
   DescribeOrganizationMembersRequest,
+  MemberIdentity,
   UpdateOrganizationNodeRequest,
   OrgNode,
-  DeleteOrganizationMembersResponse,
 } from "./organization_models"
 
 /**
@@ -119,6 +124,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取组织成员被绑定授权关系的子账号列表
+   */
+  async DescribeOrganizationMemberAuthAccounts(
+    req: DescribeOrganizationMemberAuthAccountsRequest,
+    cb?: (error: string, rep: DescribeOrganizationMemberAuthAccountsResponse) => void
+  ): Promise<DescribeOrganizationMemberAuthAccountsResponse> {
+    return this.request("DescribeOrganizationMemberAuthAccounts", req, cb)
+  }
+
+  /**
    * 获取可创建组织成员的认证主体关系列表
    */
   async DescribeOrganizationAuthNode(
@@ -129,13 +144,14 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取组织成员访问身份列表
-   */
-  async ListOrganizationIdentity(
-    req: ListOrganizationIdentityRequest,
-    cb?: (error: string, rep: ListOrganizationIdentityResponse) => void
-  ): Promise<ListOrganizationIdentityResponse> {
-    return this.request("ListOrganizationIdentity", req, cb)
+     * 取消组织成员和组织管理员子账号的授权关系
+
+     */
+  async CancelOrganizationMemberAuthAccount(
+    req: CancelOrganizationMemberAuthAccountRequest,
+    cb?: (error: string, rep: CancelOrganizationMemberAuthAccountResponse) => void
+  ): Promise<CancelOrganizationMemberAuthAccountResponse> {
+    return this.request("CancelOrganizationMemberAuthAccount", req, cb)
   }
 
   /**
@@ -216,5 +232,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteOrganizationMembersResponse) => void
   ): Promise<DeleteOrganizationMembersResponse> {
     return this.request("DeleteOrganizationMembers", req, cb)
+  }
+
+  /**
+   * 获取组织成员访问身份列表
+   */
+  async ListOrganizationIdentity(
+    req: ListOrganizationIdentityRequest,
+    cb?: (error: string, rep: ListOrganizationIdentityResponse) => void
+  ): Promise<ListOrganizationIdentityResponse> {
+    return this.request("ListOrganizationIdentity", req, cb)
   }
 }

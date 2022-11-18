@@ -1094,6 +1094,11 @@ export interface UpdateFunctionConfigurationRequest {
    * HTTP函数配置ProtocolType访问协议，当前协议可配置的参数
    */
   ProtocolParams?: ProtocolParams
+
+  /**
+   * 单实例多并发配置。只支持Web函数。
+   */
+  InstanceConcurrencyConfig?: InstanceConcurrencyConfig
 }
 
 /**
@@ -1929,6 +1934,11 @@ export interface CreateFunctionRequest {
    * HTTP函数配置ProtocolType访问协议，当前协议可配置的参数
    */
   ProtocolParams?: ProtocolParams
+
+  /**
+   * 单实例多并发配置。只支持Web函数。
+   */
+  InstanceConcurrencyConfig?: InstanceConcurrencyConfig
 }
 
 /**
@@ -3061,6 +3071,23 @@ export interface CfsInsInfo {
 }
 
 /**
+ * 多并发执行配置描述
+ */
+export interface InstanceConcurrencyConfig {
+  /**
+      * 是否开启智能动态并发。'FALSE'时是静态并发。''时取消多并发配置。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DynamicEnabled?: string
+
+  /**
+      * 单实例并发数最大值。取值范围 [1,100]
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MaxConcurrency?: number
+}
+
+/**
  * 预置定时任务动作
  */
 export interface TriggerAction {
@@ -3670,6 +3697,12 @@ export interface ImageConfig {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Args?: string
+
+  /**
+      * 镜像加速开关，默认False
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ContainerImageAccelerate?: boolean
 }
 
 /**

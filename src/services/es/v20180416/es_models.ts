@@ -227,6 +227,24 @@ export interface LogstashInstanceInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   OperationDuration: OperationDuration
+
+  /**
+      * CPU数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CpuNum: number
+
+  /**
+      * 实例标签信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TagList: Array<TagInfo>
+
+  /**
+      * 内存大小
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MemSize: number
 }
 
 /**
@@ -2740,6 +2758,16 @@ export interface RestartNodesRequest {
    * 是否强制重启
    */
   ForceRestart?: boolean
+
+  /**
+   * 可选重启模式"in-place","blue-green"，分别表示重启，蓝绿重启；默认值为"in-place"
+   */
+  RestartMode?: string
+
+  /**
+   * 节点状态，在蓝绿模式中使用；离线节点蓝绿有风险
+   */
+  IsOffline?: boolean
 }
 
 /**
@@ -2795,6 +2823,11 @@ export interface DescribeLogstashInstancesRequest {
    * VpcId 筛选项
    */
   VpcIds?: Array<string>
+
+  /**
+   * 标签信息列表
+   */
+  TagList?: Array<TagInfo>
 }
 
 /**

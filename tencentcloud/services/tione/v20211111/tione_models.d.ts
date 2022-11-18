@@ -1428,6 +1428,19 @@ export interface FrameworkVersion {
     Environment?: string;
 }
 /**
+ * ModifyModelServicePartialConfig返回参数结构体
+ */
+export interface ModifyModelServicePartialConfigResponse {
+    /**
+      * 被修改后的服务配置
+      */
+    Service: Service;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeModelAccEngineVersions返回参数结构体
  */
 export interface DescribeModelAccEngineVersionsResponse {
@@ -3865,6 +3878,23 @@ export interface SegmentationInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Color: string;
+}
+/**
+ * ModifyModelServicePartialConfig请求参数结构体
+ */
+export interface ModifyModelServicePartialConfigRequest {
+    /**
+      * 在线推理服务Id，需已存在
+      */
+    ServiceId: string;
+    /**
+      * 更新后服务不重启，定时停止的配置
+      */
+    ScheduledAction?: ScheduledAction;
+    /**
+      * 更新后服务不重启，服务对应限流限频配置
+      */
+    ServiceLimit?: ServiceLimit;
 }
 /**
  * DescribeModelAccelerateTasks返回参数结构体

@@ -30,12 +30,15 @@ import {
   UpdateNetInfo,
   CreateQosResponse,
   DescribeQosResponse,
+  CreateEncryptedKeyRequest,
   DeleteDeviceRequest,
+  CreateEncryptedKeyResponse,
   UpdateDeviceResponse,
   DeviceDetails,
   CreateQosRequest,
   GetStatisticDataRequest,
   UpdateDeviceRequest,
+  GetPublicKeyResponse,
   DeviceBaseInfo,
   ExpectedThreshold,
   DeleteQosResponse,
@@ -50,6 +53,7 @@ import {
   DeviceInfo,
   GetDevicesRequest,
   AddDeviceRequest,
+  GetPublicKeyRequest,
 } from "./mna_models"
 
 /**
@@ -119,6 +123,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetDevicesResponse) => void
   ): Promise<GetDevicesResponse> {
     return this.request("GetDevices", req, cb)
+  }
+
+  /**
+   * 获取公钥用于验签
+   */
+  async GetPublicKey(
+    req?: GetPublicKeyRequest,
+    cb?: (error: string, rep: GetPublicKeyResponse) => void
+  ): Promise<GetPublicKeyResponse> {
+    return this.request("GetPublicKey", req, cb)
+  }
+
+  /**
+   * 通过此接口设置和更新预置密钥
+   */
+  async CreateEncryptedKey(
+    req?: CreateEncryptedKeyRequest,
+    cb?: (error: string, rep: CreateEncryptedKeyResponse) => void
+  ): Promise<CreateEncryptedKeyResponse> {
+    return this.request("CreateEncryptedKey", req, cb)
   }
 
   /**

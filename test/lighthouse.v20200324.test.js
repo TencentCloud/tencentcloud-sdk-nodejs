@@ -698,4 +698,14 @@ it("lighthouse.v20200324.DetachDisks", async function () {
     }
 })
 
+it("lighthouse.v20200324.ModifyInstancesBundle", async function () {
+    try {
+       const data = await client.ModifyInstancesBundle({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 })

@@ -1417,13 +1417,13 @@ export interface Endpoint {
   AccountRole?: string
 
   /**
-      * 临时秘钥Id，如果为跨账号实例此项必填
+      * 临时密钥Id，如果为跨账号实例此项必填
 注意：此字段可能返回 null，表示取不到有效值。
       */
   TmpSecretId?: string
 
   /**
-      * 临时秘钥Key，如果为跨账号实例此项必填
+      * 临时密钥Key，如果为跨账号实例此项必填
 注意：此字段可能返回 null，表示取不到有效值。
       */
   TmpSecretKey?: string
@@ -1569,13 +1569,13 @@ export interface DBInfo {
   AccountMode?: string
 
   /**
-      * 临时秘钥Id
+      * 临时密钥Id
 注意：此字段可能返回 null，表示取不到有效值。
       */
   TmpSecretId?: string
 
   /**
-      * 临时秘钥Key
+      * 临时密钥Key
 注意：此字段可能返回 null，表示取不到有效值。
       */
   TmpSecretKey?: string
@@ -1717,17 +1717,17 @@ export interface DescribeMigrateDBInstancesRequest {
   AccountMode?: string
 
   /**
-   * 临时秘钥Id，若为跨账号资源此项必填
+   * 临时密钥Id，若为跨账号资源此项必填
    */
   TmpSecretId?: string
 
   /**
-   * 临时秘钥Key，若为跨账号资源此项必填
+   * 临时密钥Key，若为跨账号资源此项必填
    */
   TmpSecretKey?: string
 
   /**
-   * 临时秘钥Token，若为跨账号资源此项必填
+   * 临时密钥Token，若为跨账号资源此项必填
    */
   TmpToken?: string
 }

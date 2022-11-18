@@ -60,7 +60,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeAgentPayDeals(req: DescribeAgentPayDealsRequest, cb?: (error: string, rep: DescribeAgentPayDealsResponse) => void): Promise<DescribeAgentPayDealsResponse>;
     /**
-     * 可以查询代理商代付的所有订单
+     * 可以查询代理商代付的预付费订单
      */
     DescribeAgentPayDealsV2(req: DescribeAgentPayDealsV2Request, cb?: (error: string, rep: DescribeAgentPayDealsV2Response) => void): Promise<DescribeAgentPayDealsV2Response>;
     /**
@@ -68,7 +68,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeAgentAuditedClients(req: DescribeAgentAuditedClientsRequest, cb?: (error: string, rep: DescribeAgentAuditedClientsResponse) => void): Promise<DescribeAgentAuditedClientsResponse>;
     /**
-     * 查询代理商名下指定代客的自付订单
+     * 查询代理商名下指定代客的自付订单（预付费）
      */
     DescribeAgentSelfPayDealsV2(req: DescribeAgentSelfPayDealsV2Request, cb?: (error: string, rep: DescribeAgentSelfPayDealsV2Response) => void): Promise<DescribeAgentSelfPayDealsV2Response>;
     /**
@@ -76,7 +76,7 @@ export declare class Client extends AbstractClient {
      */
     AuditApplyClient(req: AuditApplyClientRequest, cb?: (error: string, rep: AuditApplyClientResponse) => void): Promise<AuditApplyClientResponse>;
     /**
-     * 供代理商拉取缓存的全量客户订单
+     * 供代理商拉取缓存的全量预付费客户订单
      */
     DescribeAgentDealsByCache(req: DescribeAgentDealsByCacheRequest, cb?: (error: string, rep: DescribeAgentDealsByCacheResponse) => void): Promise<DescribeAgentDealsByCacheResponse>;
     /**

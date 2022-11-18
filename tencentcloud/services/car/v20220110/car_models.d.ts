@@ -38,7 +38,7 @@ export interface ApplyConcurrentRequest {
       */
     UserId: string;
     /**
-      * 用户IP
+      * 用户IP，用户客户端的公网IP，用于就近调度
       */
     UserIp: string;
     /**
@@ -68,7 +68,7 @@ export interface CreateSessionRequest {
       */
     UserId: string;
     /**
-      * 用户IP
+      * 用户IP，用户客户端的公网IP，用于就近调度
       */
     UserIp: string;
     /**

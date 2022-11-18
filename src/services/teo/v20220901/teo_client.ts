@@ -79,7 +79,7 @@ import {
   DescribeDnssecResponse,
   ModifyZoneCnameSpeedUpRequest,
   SecurityEntity,
-  CreatePrefetchTaskResponse,
+  ModifyDnsRecordRequest,
   DescribeDDoSPolicyResponse,
   CreateApplicationProxyRuleRequest,
   DescribeDDoSBlockListRequest,
@@ -172,7 +172,7 @@ import {
   DeleteLogTopicTaskRequest,
   VanityNameServers,
   DescribeDnsRecordsRequest,
-  ModifyDnsRecordRequest,
+  CreatePrefetchTaskResponse,
   DescribeDefaultCertificatesRequest,
   ModifyApplicationProxyRuleResponse,
   DescribeWebProtectionHitRuleDetailRequest,
@@ -244,6 +244,7 @@ import {
   DescribeBotTopDataRequest,
   DeleteZoneResponse,
   CreateRuleResponse,
+  BindZoneToPlanResponse,
   CreateDnsRecordRequest,
   WafRule,
   ModifyApplicationProxyRequest,
@@ -386,6 +387,7 @@ import {
   DnsRecord,
   ModifyRulePriorityRequest,
   SpeedTestingStatistics,
+  BindZoneToPlanRequest,
   SecurityType,
   ModifyRuleResponse,
   CheckCertificateResponse,
@@ -1083,6 +1085,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyRulePriorityResponse) => void
   ): Promise<ModifyRulePriorityResponse> {
     return this.request("ModifyRulePriority", req, cb)
+  }
+
+  /**
+   * 将未绑定套餐的站点绑定到已有套餐
+   */
+  async BindZoneToPlan(
+    req: BindZoneToPlanRequest,
+    cb?: (error: string, rep: BindZoneToPlanResponse) => void
+  ): Promise<BindZoneToPlanResponse> {
+    return this.request("BindZoneToPlan", req, cb)
   }
 
   /**

@@ -64,6 +64,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeModelServiceCallInfo", req, cb);
     }
     /**
+     * 增量更新在线推理服务的部分配置，不更新的配置项不需要传入
+     */
+    async ModifyModelServicePartialConfig(req, cb) {
+        return this.request("ModifyModelServicePartialConfig", req, cb);
+    }
+    /**
      * 保存优化模型
      */
     async CreateOptimizedModel(req, cb) {

@@ -6481,17 +6481,6 @@ export interface UpdateExporterIntegrationRequest {
       */
     InstanceId: string;
     /**
-      * Kubernetes 集群类型，取值如下：
-<li> 1= 容器集群(TKE) </li>
-<li> 2=弹性集群<EKS> </li>
-<li> 3= Prometheus管理的弹性集群<MEKS> </li>
-      */
-    KubeType: number;
-    /**
-      * 集群 ID
-      */
-    ClusterId: string;
-    /**
       * 类型
       */
     Kind: string;
@@ -6499,6 +6488,17 @@ export interface UpdateExporterIntegrationRequest {
       * 配置内容
       */
     Content: string;
+    /**
+      * Kubernetes 集群类型，取值如下：
+<li> 1= 容器集群(TKE) </li>
+<li> 2=弹性集群<EKS> </li>
+<li> 3= Prometheus管理的弹性集群<MEKS> </li>
+      */
+    KubeType?: number;
+    /**
+      * 集群 ID
+      */
+    ClusterId?: string;
 }
 /**
  * DescribeAccidentEventList请求参数结构体

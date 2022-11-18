@@ -64,6 +64,18 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetDevices", req, cb);
     }
     /**
+     * 获取公钥用于验签
+     */
+    async GetPublicKey(req, cb) {
+        return this.request("GetPublicKey", req, cb);
+    }
+    /**
+     * 通过此接口设置和更新预置密钥
+     */
+    async CreateEncryptedKey(req, cb) {
+        return this.request("CreateEncryptedKey", req, cb);
+    }
+    /**
      * 删除设备信息
      */
     async DeleteDevice(req, cb) {

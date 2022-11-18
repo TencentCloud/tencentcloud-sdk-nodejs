@@ -2078,9 +2078,9 @@ it("cwp.v20180228.DescribeWebPageServiceInfo", async function () {
     }
 })
 
-it("cwp.v20180228.ModifyOrderAttribute", async function () {
+it("cwp.v20180228.DescribeClientException", async function () {
     try {
-       const data = await client.ModifyOrderAttribute({})
+       const data = await client.DescribeClientException({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2281,6 +2281,16 @@ it("cwp.v20180228.DescribeWebPageEventList", async function () {
 it("cwp.v20180228.DescribeLicenseList", async function () {
     try {
        const data = await client.DescribeLicenseList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cwp.v20180228.ModifyOrderAttribute", async function () {
+    try {
+       const data = await client.ModifyOrderAttribute({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

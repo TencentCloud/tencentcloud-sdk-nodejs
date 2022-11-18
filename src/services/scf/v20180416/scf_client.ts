@@ -124,6 +124,7 @@ import {
   RetryConfig,
   GetFunctionAddressResponse,
   CfsInsInfo,
+  InstanceConcurrencyConfig,
   TriggerAction,
   LimitsInfo,
   ListLayersResponse,

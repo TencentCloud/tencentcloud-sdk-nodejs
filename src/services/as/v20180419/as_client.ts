@@ -102,6 +102,7 @@ import {
   EnhancedService,
   RunAutomationServiceEnabled,
   DeleteLaunchConfigurationResponse,
+  IPv6InternetAccessible,
   DescribeScheduledActionsRequest,
   RunSecurityServiceEnabled,
   DeleteScheduledActionRequest,

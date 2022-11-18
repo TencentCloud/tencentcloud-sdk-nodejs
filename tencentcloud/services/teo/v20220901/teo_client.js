@@ -412,6 +412,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyRulePriority", req, cb);
     }
     /**
+     * 将未绑定套餐的站点绑定到已有套餐
+     */
+    async BindZoneToPlan(req, cb) {
+        return this.request("BindZoneToPlan", req, cb);
+    }
+    /**
      * 本接口（DescribeDDoSAttackEvent）用于查询DDoS攻击事件列表。
      */
     async DescribeDDoSAttackEvent(req, cb) {
