@@ -179,6 +179,27 @@ export interface CreateCallOutSessionResponse {
     RequestId?: string;
 }
 /**
+ * DescribeCarrierPrivilegeNumberApplicants请求参数结构体
+ */
+export interface DescribeCarrierPrivilegeNumberApplicantsRequest {
+    /**
+      * 实例Id
+      */
+    SdkAppId: number;
+    /**
+      * 默认0，从0开始
+      */
+    PageNumber?: number;
+    /**
+      * 默认10，最大100
+      */
+    PageSize?: number;
+    /**
+      * 筛选条件,Name支持ApplicantId,PhoneNumber(按号码模糊查找)
+      */
+    Filters?: Array<Filter>;
+}
+/**
  * DisableCCCPhoneNumber请求参数结构体
  */
 export interface DisableCCCPhoneNumberRequest {
@@ -590,49 +611,25 @@ export interface DescribeStaffInfoListResponse {
     RequestId?: string;
 }
 /**
- * CreateAutoCalloutTask请求参数结构体
+ * CreateCarrierPrivilegeNumberApplicant请求参数结构体
  */
-export interface CreateAutoCalloutTaskRequest {
+export interface CreateCarrierPrivilegeNumberApplicantRequest {
     /**
-      * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
+      * SdkAppId
       */
     SdkAppId: number;
     /**
-      * 任务起始时间戳，Unix 秒级时间戳
-      */
-    NotBefore: number;
-    /**
-      * 被叫号码列表
-      */
-    Callees: Array<string>;
-    /**
-      * 主叫号码列表
+      * 主叫号码，必须为实例中存在的号码，格式为0086xxxx（暂时只支持国内号码）
       */
     Callers: Array<string>;
     /**
-      * 呼叫使用的Ivr
+      * 被叫号码，必须为实例中坐席绑定的手机号码，格式为0086xxxx（暂时只支持国内号码）
       */
-    IvrId: number;
+    Callees: Array<string>;
     /**
-      * 任务名
-      */
-    Name?: string;
-    /**
-      * 任务描述
+      * 描述
       */
     Description?: string;
-    /**
-      * 任务停止时间戳，Unix 秒级时间戳
-      */
-    NotAfter?: number;
-    /**
-      * 最大尝试次数
-      */
-    Tries?: number;
-    /**
-      * 自定义变量（仅高级版支持）
-      */
-    Variables?: Array<Variable>;
 }
 /**
  * 呼入技能组相关指标
@@ -834,6 +831,19 @@ export interface DescribeSkillGroupInfoListRequest {
     SkillGroupName?: string;
 }
 /**
+ * CreateCarrierPrivilegeNumberApplicant返回参数结构体
+ */
+export interface CreateCarrierPrivilegeNumberApplicantResponse {
+    /**
+      * 申请单Id
+      */
+    ApplicantId?: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 外呼任务被叫信息
  */
 export interface AutoCalloutTaskCalleeInfo {
@@ -849,6 +859,44 @@ export interface AutoCalloutTaskCalleeInfo {
       * 会话ID列表
       */
     Sessions: Array<string>;
+}
+/**
+ * 运营商白名单号码申请单
+ */
+export interface CarrierPrivilegeNumberApplicant {
+    /**
+      * 实例Id
+      */
+    SdkAppId?: number;
+    /**
+      * 申请单Id
+      */
+    ApplicantId?: number;
+    /**
+      * 主叫号码列表
+      */
+    Callers?: Array<string>;
+    /**
+      * 被叫号码列表
+      */
+    Callees?: Array<string>;
+    /**
+      * 描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Description?: string;
+    /**
+      * 审批状态:1 待审核、2 通过、3 拒绝
+      */
+    State?: number;
+    /**
+      * 创建时间，unix时间戳(秒)
+      */
+    CreateTime?: number;
+    /**
+      * 更新时间，unix时间戳(秒)
+      */
+    UpdateTime?: number;
 }
 /**
  * 批量添加客服时，返回出错客服的像个信息
@@ -1588,6 +1636,66 @@ export interface CreateExtensionRequest {
     ExtensionName: string;
 }
 /**
+ * CreateAutoCalloutTask请求参数结构体
+ */
+export interface CreateAutoCalloutTaskRequest {
+    /**
+      * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
+      */
+    SdkAppId: number;
+    /**
+      * 任务起始时间戳，Unix 秒级时间戳
+      */
+    NotBefore: number;
+    /**
+      * 被叫号码列表
+      */
+    Callees: Array<string>;
+    /**
+      * 主叫号码列表
+      */
+    Callers: Array<string>;
+    /**
+      * 呼叫使用的Ivr
+      */
+    IvrId: number;
+    /**
+      * 任务名
+      */
+    Name?: string;
+    /**
+      * 任务描述
+      */
+    Description?: string;
+    /**
+      * 任务停止时间戳，Unix 秒级时间戳
+      */
+    NotAfter?: number;
+    /**
+      * 最大尝试次数
+      */
+    Tries?: number;
+    /**
+      * 自定义变量（仅高级版支持）
+      */
+    Variables?: Array<Variable>;
+}
+/**
+ * 筛选条件
+ */
+export interface Filter {
+    /**
+      * 筛选字段名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Name: string;
+    /**
+      * 筛选条件值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Values: Array<string>;
+}
+/**
  * UnbindStaffSkillGroupList请求参数结构体
  */
 export interface UnbindStaffSkillGroupListRequest {
@@ -1614,13 +1722,25 @@ export interface StopAutoCalloutTaskResponse {
     RequestId?: string;
 }
 /**
- * BindStaffSkillGroupList返回参数结构体
+ * 技能组信息
  */
-export interface BindStaffSkillGroupListResponse {
+export interface SkillGroupItem {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 技能组ID
       */
-    RequestId?: string;
+    SkillGroupId: number;
+    /**
+      * 技能组名称
+      */
+    SkillGroupName: string;
+    /**
+      * 优先级
+      */
+    Priority: number;
+    /**
+      * 类型：IM、TEL、ALL（全媒体）
+      */
+    Type: string;
 }
 /**
  * 聊天消息
@@ -1690,6 +1810,27 @@ export interface DescribeCCCBuyInfoListResponse {
     RequestId?: string;
 }
 /**
+ * 生效运营商白名单号码
+ */
+export interface ActiveCarrierPrivilegeNumber {
+    /**
+      * 实例Id
+      */
+    SdkAppId?: number;
+    /**
+      * 主叫号码
+      */
+    Caller?: string;
+    /**
+      * 被叫号码
+      */
+    Callee?: string;
+    /**
+      * 生效unix时间戳(秒)
+      */
+    CreateTime?: number;
+}
+/**
  * DeleteExtension返回参数结构体
  */
 export interface DeleteExtensionResponse {
@@ -1754,6 +1895,27 @@ export interface DescribeCallInMetricsResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     SkillGroupMetrics: Array<CallInSkillGroupMetrics>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeActiveCarrierPrivilegeNumber返回参数结构体
+ */
+export interface DescribeActiveCarrierPrivilegeNumberResponse {
+    /**
+      * 总数量
+      */
+    TotalCount?: number;
+    /**
+      * 生效列表
+      */
+    ActiveCarrierPrivilegeNumbers?: Array<ActiveCarrierPrivilegeNumber>;
+    /**
+      * 待审核单号
+      */
+    PendingApplicantIds?: Array<number>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2054,6 +2216,23 @@ export interface DescribeStaffStatusMetricsResponse {
     RequestId?: string;
 }
 /**
+ * DescribeCarrierPrivilegeNumberApplicants返回参数结构体
+ */
+export interface DescribeCarrierPrivilegeNumberApplicantsResponse {
+    /**
+      * 筛选出的总申请单数量
+      */
+    TotalCount?: number;
+    /**
+      * 申请单列表
+      */
+    Applicants?: Array<CarrierPrivilegeNumberApplicant>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * CreateCallOutSession请求参数结构体
  */
 export interface CreateCallOutSessionRequest {
@@ -2083,25 +2262,13 @@ export interface CreateCallOutSessionRequest {
     Uui?: string;
 }
 /**
- * 技能组信息
+ * BindStaffSkillGroupList返回参数结构体
  */
-export interface SkillGroupItem {
+export interface BindStaffSkillGroupListResponse {
     /**
-      * 技能组ID
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    SkillGroupId: number;
-    /**
-      * 技能组名称
-      */
-    SkillGroupName: string;
-    /**
-      * 优先级
-      */
-    Priority: number;
-    /**
-      * 类型：IM、TEL、ALL（全媒体）
-      */
-    Type: string;
+    RequestId?: string;
 }
 /**
  * DescribeExtensions请求参数结构体
@@ -2169,6 +2336,27 @@ export interface CreateSDKLoginTokenRequest {
       * 坐席账号。
       */
     SeatUserId: string;
+}
+/**
+ * DescribeActiveCarrierPrivilegeNumber请求参数结构体
+ */
+export interface DescribeActiveCarrierPrivilegeNumberRequest {
+    /**
+      * 实例Id
+      */
+    SdkAppId: number;
+    /**
+      * 默认0
+      */
+    PageNumber?: number;
+    /**
+      * 默认10，最大100
+      */
+    PageSize?: number;
+    /**
+      * 筛选条件 Name支持PhoneNumber(按号码模糊查找)
+      */
+    Filters?: Array<Filter>;
 }
 /**
  * 坐席购买信息

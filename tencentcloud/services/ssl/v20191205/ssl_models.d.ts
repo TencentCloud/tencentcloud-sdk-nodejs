@@ -1087,10 +1087,15 @@ export interface DeployedResources {
       */
     Type: string;
     /**
-      * 关联资源ID或关联域名
+      * 不建议使用。字段返回和Resources相同。本字段后续只返回null
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ResourceIds: Array<string>;
+    /**
+      * 关联资源ID或关联域名。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Resources: Array<string>;
 }
 /**
  * DescribeCertificateDetail返回参数结构体

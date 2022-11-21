@@ -78,9 +78,9 @@ it("ccc.v20200210.BindStaffSkillGroupList", async function () {
     }
 })
 
-it("ccc.v20200210.DescribeChatMessages", async function () {
+it("ccc.v20200210.CreateCarrierPrivilegeNumberApplicant", async function () {
     try {
-       const data = await client.DescribeChatMessages({})
+       const data = await client.CreateCarrierPrivilegeNumberApplicant({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -158,9 +158,9 @@ it("ccc.v20200210.DescribeExtension", async function () {
     }
 })
 
-it("ccc.v20200210.DescribeTelSession", async function () {
+it("ccc.v20200210.DescribeCarrierPrivilegeNumberApplicants", async function () {
     try {
-       const data = await client.DescribeTelSession({})
+       const data = await client.DescribeCarrierPrivilegeNumberApplicants({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -171,6 +171,16 @@ it("ccc.v20200210.DescribeTelSession", async function () {
 it("ccc.v20200210.CreateCallOutSession", async function () {
     try {
        const data = await client.CreateCallOutSession({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ccc.v20200210.DescribeTelSession", async function () {
+    try {
+       const data = await client.DescribeTelSession({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -211,6 +221,16 @@ it("ccc.v20200210.DescribeSkillGroupInfoList", async function () {
 it("ccc.v20200210.StopAutoCalloutTask", async function () {
     try {
        const data = await client.StopAutoCalloutTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ccc.v20200210.DescribeChatMessages", async function () {
+    try {
+       const data = await client.DescribeChatMessages({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -331,6 +351,16 @@ it("ccc.v20200210.DescribeCallInMetrics", async function () {
 it("ccc.v20200210.CreateSDKLoginToken", async function () {
     try {
        const data = await client.CreateSDKLoginToken({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ccc.v20200210.DescribeActiveCarrierPrivilegeNumber", async function () {
+    try {
+       const data = await client.DescribeActiveCarrierPrivilegeNumber({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

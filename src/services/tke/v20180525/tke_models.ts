@@ -10539,6 +10539,21 @@ export interface ModifyClusterNodePoolRequest {
   OsCustomizeType?: string
 
   /**
+   * GPU驱动版本，CUDA版本，cuDNN版本以及是否启用MIG特性
+   */
+  GPUArgs?: GPUArgs
+
+  /**
+   * base64编码后的自定义脚本
+   */
+  UserScript?: string
+
+  /**
+   * 更新label和taint时忽略存量节点
+   */
+  IgnoreExistedNode?: boolean
+
+  /**
    * 节点自定义参数
    */
   ExtraArgs?: InstanceExtraArgs
@@ -10557,6 +10572,11 @@ export interface ModifyClusterNodePoolRequest {
    * 删除保护开关
    */
   DeletionProtection?: boolean
+
+  /**
+   * dockerd --graph 指定值, 默认为 /var/lib/docker
+   */
+  DockerGraphPath?: string
 }
 
 /**

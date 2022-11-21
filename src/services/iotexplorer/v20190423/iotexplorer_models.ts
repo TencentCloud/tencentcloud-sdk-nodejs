@@ -38,6 +38,36 @@ export interface UpdateDevicesEnableStateResponse {
 }
 
 /**
+ * DescribeDeviceLocationSolve请求参数结构体
+ */
+export interface DescribeDeviceLocationSolveRequest {
+  /**
+   * 产品ID
+   */
+  ProductId: string
+
+  /**
+   * 设备名称
+   */
+  DeviceName: string
+
+  /**
+   * 定位解析类型，wifi或GNSSNavigation
+   */
+  LocationType: string
+
+  /**
+   * LoRaEdge卫星导航电文
+   */
+  GNSSNavigation?: string
+
+  /**
+   * wifi信息
+   */
+  WiFiInfo?: Array<WifiInfo>
+}
+
+/**
  * DeleteProject请求参数结构体
  */
 export interface DeleteProjectRequest {
@@ -1213,6 +1243,21 @@ export interface DeviceData {
 }
 
 /**
+ * wifi定位信息
+ */
+export interface WifiInfo {
+  /**
+   * mac地址
+   */
+  MAC: string
+
+  /**
+   * 信号强度
+   */
+  RSSI: number
+}
+
+/**
  * GetTopicRuleList请求参数结构体
  */
 export interface GetTopicRuleListRequest {
@@ -1412,13 +1457,33 @@ export interface ListTopicPolicyRequest {
 }
 
 /**
- * DescribeLoRaFrequency请求参数结构体
+ * 获取返回列表的详情。
  */
-export interface DescribeLoRaFrequencyRequest {
+export interface BatchProductionInfo {
   /**
-   * 频点唯一ID
+   * 量产ID
    */
-  FreqId?: string
+  BatchProductionId: string
+
+  /**
+   * 产品ID
+   */
+  ProductId: string
+
+  /**
+   * 烧录方式
+   */
+  BurnMethod: number
+
+  /**
+   * 创建时间
+   */
+  CreateTime: number
+
+  /**
+   * 产品名称
+   */
+  ProductName: string
 }
 
 /**
@@ -2218,23 +2283,34 @@ export interface TopicRuleInfo {
 }
 
 /**
- * GetCOSURL请求参数结构体
+ * DescribeDeviceLocationSolve返回参数结构体
  */
-export interface GetCOSURLRequest {
+export interface DescribeDeviceLocationSolveResponse {
   /**
-   * 产品ID
+   * 经度
    */
-  ProductID: string
+  Longitude: number
 
   /**
-   * 固件版本
+   * 维度
    */
-  FirmwareVersion: string
+  Latitude: number
 
   /**
-   * 文件大小
+   * 类型
    */
-  FileSize?: number
+  LocationType: string
+
+  /**
+      * 误差精度预估，单位为米
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Accuracy: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4211,33 +4287,33 @@ export interface ModifyProjectResponse {
 }
 
 /**
- * 获取返回列表的详情。
+ * GetCOSURL请求参数结构体
  */
-export interface BatchProductionInfo {
-  /**
-   * 量产ID
-   */
-  BatchProductionId: string
-
+export interface GetCOSURLRequest {
   /**
    * 产品ID
    */
-  ProductId: string
+  ProductID: string
 
   /**
-   * 烧录方式
+   * 固件版本
    */
-  BurnMethod: number
+  FirmwareVersion: string
 
   /**
-   * 创建时间
+   * 文件大小
    */
-  CreateTime: number
+  FileSize?: number
+}
 
+/**
+ * DescribeLoRaFrequency请求参数结构体
+ */
+export interface DescribeLoRaFrequencyRequest {
   /**
-   * 产品名称
+   * 频点唯一ID
    */
-  ProductName: string
+  FreqId?: string
 }
 
 /**

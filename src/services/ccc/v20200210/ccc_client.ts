@@ -29,6 +29,7 @@ import {
   CreateUserSigResponse,
   DescribeIMCdrsResponse,
   CreateCallOutSessionResponse,
+  DescribeCarrierPrivilegeNumberApplicantsRequest,
   DisableCCCPhoneNumberRequest,
   ServeParticipant,
   DescribeExtensionsResponse,
@@ -44,7 +45,7 @@ import {
   DescribeSkillGroupInfoListResponse,
   UnbindStaffSkillGroupListResponse,
   DescribeStaffInfoListResponse,
-  CreateAutoCalloutTaskRequest,
+  CreateCarrierPrivilegeNumberApplicantRequest,
   CallInSkillGroupMetrics,
   CreateExtensionResponse,
   CreateUserSigRequest,
@@ -54,7 +55,9 @@ import {
   DescribeTelSessionRequest,
   DescribeIMCdrsRequest,
   DescribeSkillGroupInfoListRequest,
+  CreateCarrierPrivilegeNumberApplicantResponse,
   AutoCalloutTaskCalleeInfo,
+  CarrierPrivilegeNumberApplicant,
   ErrStaffItem,
   PSTNSession,
   DescribeStaffInfoListRequest,
@@ -76,16 +79,20 @@ import {
   Variable,
   CallInNumberMetrics,
   CreateExtensionRequest,
+  CreateAutoCalloutTaskRequest,
+  Filter,
   UnbindStaffSkillGroupListRequest,
   StopAutoCalloutTaskResponse,
-  BindStaffSkillGroupListResponse,
+  SkillGroupItem,
   MessageBody,
   PhoneNumBuyInfo,
   DescribeCCCBuyInfoListResponse,
+  ActiveCarrierPrivilegeNumber,
   DeleteExtensionResponse,
   BindStaffSkillGroupListRequest,
   DescribePSTNActiveSessionListRequest,
   DescribeCallInMetricsResponse,
+  DescribeActiveCarrierPrivilegeNumberResponse,
   IMSatisfaction,
   DescribeTelCdrResponse,
   DescribeStaffStatusMetricsRequest,
@@ -101,11 +108,13 @@ import {
   DescribeTelSessionResponse,
   ModifyStaffResponse,
   DescribeStaffStatusMetricsResponse,
+  DescribeCarrierPrivilegeNumberApplicantsResponse,
   CreateCallOutSessionRequest,
-  SkillGroupItem,
+  BindStaffSkillGroupListResponse,
   DescribeExtensionsRequest,
   DescribeProtectedTelCdrRequest,
   CreateSDKLoginTokenRequest,
+  DescribeActiveCarrierPrivilegeNumberRequest,
   StaffBuyInfo,
   DescribeCallInMetricsRequest,
   DescribeExtensionResponse,
@@ -181,13 +190,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 包括具体聊天内容
+   * 用于无限频率地呼叫坐席手机
    */
-  async DescribeChatMessages(
-    req: DescribeChatMessagesRequest,
-    cb?: (error: string, rep: DescribeChatMessagesResponse) => void
-  ): Promise<DescribeChatMessagesResponse> {
-    return this.request("DescribeChatMessages", req, cb)
+  async CreateCarrierPrivilegeNumberApplicant(
+    req: CreateCarrierPrivilegeNumberApplicantRequest,
+    cb?: (error: string, rep: CreateCarrierPrivilegeNumberApplicantResponse) => void
+  ): Promise<CreateCarrierPrivilegeNumberApplicantResponse> {
+    return this.request("CreateCarrierPrivilegeNumberApplicant", req, cb)
   }
 
   /**
@@ -261,13 +270,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取 PSTN 会话信息
+   * 查询单状态
    */
-  async DescribeTelSession(
-    req: DescribeTelSessionRequest,
-    cb?: (error: string, rep: DescribeTelSessionResponse) => void
-  ): Promise<DescribeTelSessionResponse> {
-    return this.request("DescribeTelSession", req, cb)
+  async DescribeCarrierPrivilegeNumberApplicants(
+    req: DescribeCarrierPrivilegeNumberApplicantsRequest,
+    cb?: (error: string, rep: DescribeCarrierPrivilegeNumberApplicantsResponse) => void
+  ): Promise<DescribeCarrierPrivilegeNumberApplicantsResponse> {
+    return this.request("DescribeCarrierPrivilegeNumberApplicants", req, cb)
   }
 
   /**
@@ -278,6 +287,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateCallOutSessionResponse) => void
   ): Promise<CreateCallOutSessionResponse> {
     return this.request("CreateCallOutSession", req, cb)
+  }
+
+  /**
+   * 获取 PSTN 会话信息
+   */
+  async DescribeTelSession(
+    req: DescribeTelSessionRequest,
+    cb?: (error: string, rep: DescribeTelSessionResponse) => void
+  ): Promise<DescribeTelSessionResponse> {
+    return this.request("DescribeTelSession", req, cb)
   }
 
   /**
@@ -318,6 +337,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: StopAutoCalloutTaskResponse) => void
   ): Promise<StopAutoCalloutTaskResponse> {
     return this.request("StopAutoCalloutTask", req, cb)
+  }
+
+  /**
+   * 包括具体聊天内容
+   */
+  async DescribeChatMessages(
+    req: DescribeChatMessagesRequest,
+    cb?: (error: string, rep: DescribeChatMessagesResponse) => void
+  ): Promise<DescribeChatMessagesResponse> {
+    return this.request("DescribeChatMessages", req, cb)
   }
 
   /**
@@ -438,5 +467,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateSDKLoginTokenResponse) => void
   ): Promise<CreateSDKLoginTokenResponse> {
     return this.request("CreateSDKLoginToken", req, cb)
+  }
+
+  /**
+   * 查询生效运营商白名单规则
+   */
+  async DescribeActiveCarrierPrivilegeNumber(
+    req: DescribeActiveCarrierPrivilegeNumberRequest,
+    cb?: (error: string, rep: DescribeActiveCarrierPrivilegeNumberResponse) => void
+  ): Promise<DescribeActiveCarrierPrivilegeNumberResponse> {
+    return this.request("DescribeActiveCarrierPrivilegeNumber", req, cb)
   }
 }

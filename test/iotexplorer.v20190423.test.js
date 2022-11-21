@@ -88,6 +88,16 @@ it("iotexplorer.v20190423.DirectBindDeviceInFamily", async function () {
     }
 })
 
+it("iotexplorer.v20190423.DescribeDeviceLocationSolve", async function () {
+    try {
+       const data = await client.DescribeDeviceLocationSolve({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.DescribeDeviceBindGateway", async function () {
     try {
        const data = await client.DescribeDeviceBindGateway({})

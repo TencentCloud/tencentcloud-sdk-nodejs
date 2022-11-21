@@ -70,6 +70,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DirectBindDeviceInFamily", req, cb);
     }
     /**
+     * 获取实时位置解析
+     */
+    async DescribeDeviceLocationSolve(req, cb) {
+        return this.request("DescribeDeviceLocationSolve", req, cb);
+    }
+    /**
      * 查询设备绑定的网关设备
      */
     async DescribeDeviceBindGateway(req, cb) {

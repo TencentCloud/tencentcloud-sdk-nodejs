@@ -128,6 +128,16 @@ it("essbasic.v20210526.CreateConsoleLoginUrl", async function () {
     }
 })
 
+it("essbasic.v20210526.ChannelCreateBoundFlows", async function () {
+    try {
+       const data = await client.ChannelCreateBoundFlows({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("essbasic.v20210526.ChannelCreateBatchCancelFlowUrl", async function () {
     try {
        const data = await client.ChannelCreateBatchCancelFlowUrl({})

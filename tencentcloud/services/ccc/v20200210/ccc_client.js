@@ -64,10 +64,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("BindStaffSkillGroupList", req, cb);
     }
     /**
-     * 包括具体聊天内容
+     * 用于无限频率地呼叫坐席手机
      */
-    async DescribeChatMessages(req, cb) {
-        return this.request("DescribeChatMessages", req, cb);
+    async CreateCarrierPrivilegeNumberApplicant(req, cb) {
+        return this.request("CreateCarrierPrivilegeNumberApplicant", req, cb);
     }
     /**
      * 包括全媒体和文本两种类型
@@ -112,16 +112,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeExtension", req, cb);
     }
     /**
-     * 获取 PSTN 会话信息
+     * 查询单状态
      */
-    async DescribeTelSession(req, cb) {
-        return this.request("DescribeTelSession", req, cb);
+    async DescribeCarrierPrivilegeNumberApplicants(req, cb) {
+        return this.request("DescribeCarrierPrivilegeNumberApplicants", req, cb);
     }
     /**
      * 创建外呼会话，当前仅支持双呼，即先使用平台号码呼出到坐席手机上，坐席接听后，然后再外呼用户，而且由于运营商频率限制，坐席手机号必须先加白名单，避免频控导致外呼失败。
      */
     async CreateCallOutSession(req, cb) {
         return this.request("CreateCallOutSession", req, cb);
+    }
+    /**
+     * 获取 PSTN 会话信息
+     */
+    async DescribeTelSession(req, cb) {
+        return this.request("DescribeTelSession", req, cb);
     }
     /**
      * 查询自动外呼任务详情
@@ -146,6 +152,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async StopAutoCalloutTask(req, cb) {
         return this.request("StopAutoCalloutTask", req, cb);
+    }
+    /**
+     * 包括具体聊天内容
+     */
+    async DescribeChatMessages(req, cb) {
+        return this.request("DescribeChatMessages", req, cb);
     }
     /**
      * 获取用户购买信息列表
@@ -218,6 +230,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateSDKLoginToken(req, cb) {
         return this.request("CreateSDKLoginToken", req, cb);
+    }
+    /**
+     * 查询生效运营商白名单规则
+     */
+    async DescribeActiveCarrierPrivilegeNumber(req, cb) {
+        return this.request("DescribeActiveCarrierPrivilegeNumber", req, cb);
     }
 }
 exports.Client = Client;

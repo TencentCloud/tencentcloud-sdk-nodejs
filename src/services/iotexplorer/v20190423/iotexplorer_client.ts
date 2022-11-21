@@ -19,6 +19,7 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   UpdateDevicesEnableStateResponse,
+  DescribeDeviceLocationSolveRequest,
   DeleteProjectRequest,
   DevicesItem,
   DeleteFenceBindRequest,
@@ -73,6 +74,7 @@ import {
   UnbindProductsRequest,
   SearchStudioProductResponse,
   DeviceData,
+  WifiInfo,
   GetTopicRuleListRequest,
   FenceBindDeviceItem,
   DeviceDataHistoryItem,
@@ -81,7 +83,7 @@ import {
   ProjectEntryEx,
   DescribeBatchProductionResponse,
   ListTopicPolicyRequest,
-  DescribeLoRaFrequencyRequest,
+  BatchProductionInfo,
   DeleteDeviceRequest,
   DeleteLoRaFrequencyRequest,
   ControlDeviceDataRequest,
@@ -116,7 +118,7 @@ import {
   FirmwareInfo,
   DisableTopicRuleResponse,
   TopicRuleInfo,
-  GetCOSURLRequest,
+  DescribeDeviceLocationSolveResponse,
   DescribeStudioProductResponse,
   CreateFenceBindRequest,
   DescribeDeviceResponse,
@@ -201,7 +203,8 @@ import {
   AppDeviceInfo,
   BindProductsResponse,
   ModifyProjectResponse,
-  BatchProductionInfo,
+  GetCOSURLRequest,
+  DescribeLoRaFrequencyRequest,
   DescribeGatewayBindDevicesRequest,
   DescribeGatewaySubProductsRequest,
   DeleteStudioProductRequest,
@@ -310,6 +313,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DirectBindDeviceInFamilyResponse) => void
   ): Promise<DirectBindDeviceInFamilyResponse> {
     return this.request("DirectBindDeviceInFamily", req, cb)
+  }
+
+  /**
+   * 获取实时位置解析
+   */
+  async DescribeDeviceLocationSolve(
+    req: DescribeDeviceLocationSolveRequest,
+    cb?: (error: string, rep: DescribeDeviceLocationSolveResponse) => void
+  ): Promise<DescribeDeviceLocationSolveResponse> {
+    return this.request("DescribeDeviceLocationSolve", req, cb)
   }
 
   /**

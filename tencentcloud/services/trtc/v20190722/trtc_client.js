@@ -56,7 +56,7 @@ videoFreezeRate：视频卡顿率。
 networkDelay ：网络延迟率。
 注意：
 1.调用接口需开通监控仪表盘【基础版】和【进阶版】，监控仪表盘【免费版】不支持调用，监控仪表盘版本功能和计费说明：https://cloud.tencent.com/document/product/647/81331。
-2、查询时间范围根据监控仪表盘功能版本而定，【基础版】可查近30天，【进阶版】可查近60天。
+2.查询时间范围根据监控仪表盘功能版本而定，【基础版】可查近30天，【进阶版】可查近60天。
      */
     async DescribeTRTCMarketQualityMetricData(req, cb) {
         return this.request("DescribeTRTCMarketQualityMetricData", req, cb);
@@ -84,7 +84,7 @@ peakCurrentChannels：峰值同时在线频道数。
 peakCurrentUsers：峰值同时在线人数。
 注意：
 1.调用接口需开通监控仪表盘【基础版】和【进阶版】，监控仪表盘【免费版】不支持调用，监控仪表盘版本功能和计费说明：https://cloud.tencent.com/document/product/647/81331。
-2、查询时间范围根据监控仪表盘功能版本而定，【基础版】可查近30天，【进阶版】可查近60天。
+2.查询时间范围根据监控仪表盘功能版本而定，【基础版】可查近30天，【进阶版】可查近60天。
      */
     async DescribeTRTCMarketScaleMetricData(req, cb) {
         return this.request("DescribeTRTCMarketScaleMetricData", req, cb);
@@ -127,7 +127,7 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
 -音频卡顿率
 注意：
 1.调用接口需开通监控仪表盘【基础版】和【进阶版】，监控仪表盘【免费版】不支持调用，监控仪表盘版本功能和计费说明：https://cloud.tencent.com/document/product/647/81331。
-2、查询时间范围根据监控仪表盘功能版本而定，基础版可查近3小时，进阶版可查近12小时。
+2.查询时间范围根据监控仪表盘功能版本而定，基础版可查近3小时，进阶版可查近12小时。
      */
     async DescribeTRTCRealTimeQualityMetricData(req, cb) {
         return this.request("DescribeTRTCRealTimeQualityMetricData", req, cb);
@@ -337,7 +337,7 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
 -roomCount（在线房间数）
 注意：
 1.调用接口需开通监控仪表盘【基础版】和【进阶版】，监控仪表盘【免费版】不支持调用，监控仪表盘版本功能和计费说明：https://cloud.tencent.com/document/product/647/81331。
-2、查询时间范围根据监控仪表盘功能版本而定，基础版可查近3小时，进阶版可查近12小时。
+2.查询时间范围根据监控仪表盘功能版本而定，基础版可查近3小时，进阶版可查近12小时。
      */
     async DescribeTRTCRealTimeScaleMetricData(req, cb) {
         return this.request("DescribeTRTCRealTimeScaleMetricData", req, cb);

@@ -1104,7 +1104,12 @@ export interface DeleteCfsSnapshotRequest {
   /**
    * 文件系统快照id
    */
-  SnapshotId: string
+  SnapshotId?: string
+
+  /**
+   * 需要删除的文件文件系统快照ID 列表，快照ID，跟ID列表至少填一项
+   */
+  SnapshotIds?: Array<string>
 }
 
 /**

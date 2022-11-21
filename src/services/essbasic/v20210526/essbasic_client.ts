@@ -63,6 +63,7 @@ import {
   DescribeFlowDetailInfoResponse,
   DescribeUsageResponse,
   Staff,
+  ChannelCreateBoundFlowsRequest,
   ChannelDescribeEmployeesRequest,
   AuthorizedUser,
   DescribeResourceUrlsByFlowsResponse,
@@ -105,6 +106,7 @@ import {
   OperateChannelTemplateRequest,
   SyncFailReason,
   ChannelDescribeEmployeesResponse,
+  ChannelCreateBoundFlowsResponse,
   CcInfo,
 } from "./essbasic_models"
 
@@ -255,6 +257,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateConsoleLoginUrlResponse) => void
   ): Promise<CreateConsoleLoginUrlResponse> {
     return this.request("CreateConsoleLoginUrl", req, cb)
+  }
+
+  /**
+   * 此接口（CreateConsoleLoginUrl）用于渠道子客领取合同，经办人需要有相应的角色，领取后的合同不能重复领取
+   */
+  async ChannelCreateBoundFlows(
+    req: ChannelCreateBoundFlowsRequest,
+    cb?: (error: string, rep: ChannelCreateBoundFlowsResponse) => void
+  ): Promise<ChannelCreateBoundFlowsResponse> {
+    return this.request("ChannelCreateBoundFlows", req, cb)
   }
 
   /**
