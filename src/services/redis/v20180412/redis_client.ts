@@ -1040,7 +1040,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 升级实例
+   * 变更实例配置
    */
   async UpgradeInstance(
     req: UpgradeInstanceRequest,

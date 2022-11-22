@@ -573,6 +573,11 @@ MobileCheck：手机号验证
 参数说明：可选人脸识别或手机号验证两种方式，若选择后者，未实名个人签署方在签署合同时，无需经过实名认证和意愿确认两次人脸识别，该能力仅适用于个人签署方。
       */
   ApproverVerifyType?: string
+
+  /**
+   * 标识是否允许发起后添加控件。0为不允许1为允许。如果为1，创建的时候不能有签署控件，只能创建后添加。注意发起后添加控件功能不支持添加骑缝章和签批控件
+   */
+  SignBeanTag?: number
 }
 
 /**
@@ -784,8 +789,9 @@ export interface FlowApproverInfo {
   NotChannelOrganization?: boolean
 
   /**
-   * 用户侧第三方id，最大长度64个字符
-   */
+      * 用户侧第三方id，最大长度64个字符
+当签署方为同一渠道下的员工时，该字段若不指定，则发起【待领取】的流程
+      */
   OpenId?: string
 
   /**
@@ -922,6 +928,12 @@ export interface TemplateInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   PreviewUrl: string
+
+  /**
+      * 渠道模板ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ChannelTemplateId: string
 }
 
 /**
@@ -1421,6 +1433,7 @@ CreateFlowsByTemplates 接口不使用此字段。
 | cells.N.content     | String  | 单元格内容，字数不超过100                         |
 
 表格参数headers说明
+
 | 名称                | 类型    | 描述                                              |
 | ------------------- | ------- | ------------------------------------------------- |
 | widthPercent   | Integer | 表头单元格列占总表头的比例，例如1：30表示 此列占表头的30%，不填写时列宽度平均拆分；例如2：总2列，某一列填写40，剩余列可以为空，按照60计算。；例如3：总3列，某一列填写30，剩余2列可以为空，分别为(100-30)/2=35                    |
@@ -2671,6 +2684,12 @@ SIGN_PAGING_SEAL - 可以指定印章ID
    * 指定关键字时纵坐标偏移量，单位pt
    */
   OffsetY?: number
+
+  /**
+      * 渠道控件ID。
+如果不为空，属于渠道预设控件；
+      */
+  ChannelComponentId?: string
 
   /**
    * 指定关键字页码

@@ -19,25 +19,35 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   CreateRecordRequest,
+  DescribeSnapshotRollbackResultResponse,
+  DownloadSnapshotRequest,
   DescribeBatchTaskDetail,
   ModifyVasAutoRenewStatusResponse,
+  RollbackSnapshotRequest,
   DeleteDomainAliasResponse,
   ModifySubdomainStatusRequest,
   CreateRecordBatchResponse,
+  DescribeSnapshotListResponse,
   CreateDomainBatchRecord,
   DomainAnalyticsInfo,
   DescribeBatchTaskRequest,
   DomainAnalyticsDetail,
+  CreateSnapshotResponse,
   PayOrderWithBalanceResponse,
   DescribeDomainResponse,
+  DescribeSnapshotListRequest,
   DescribeRecordLineListResponse,
+  SnapshotPageInfo,
   DomainInfo,
   CreateDomainBatchRequest,
-  DescribeDomainGroupListRequest,
+  DescribeDomainShareInfoRequest,
   DomainListItem,
   DescribeRecordTypeResponse,
   ModifyDomainRemarkResponse,
+  DeleteSnapshotRequest,
   DescribeDomainAliasListResponse,
+  RollbackRecordSnapshotRequest,
+  DescribeSnapshotConfigResponse,
   RecordCountInfo,
   DeleteShareDomainResponse,
   ModifyRecordRequest,
@@ -47,6 +57,8 @@ import {
   ModifyDomainOwnerRequest,
   ModifyPackageAutoRenewRequest,
   DomainShareInfo,
+  DescribeSnapshotConfigRequest,
+  LineInfo,
   DescribeRecordLineListRequest,
   DescribeRecordListResponse,
   CreateRecordBatchRequest,
@@ -68,24 +80,31 @@ import {
   CreateRecordResponse,
   DescribeRecordResponse,
   RecordInfo,
+  DescribeSnapshotRollbackTaskRequest,
+  CheckRecordSnapshotRollbackResponse,
   CreateRecordBatchDetail,
   DescribeSubdomainAnalyticsResponse,
   ModifyRecordResponse,
+  SnapshotRecord,
   ModifyDomainUnlockResponse,
   DescribeDomainLogListRequest,
   DescribeDomainListResponse,
   ModifyRecordBatchRequest,
+  SnapshotConfig,
   DeleteRecordResponse,
   CreateRecordBatchRecord,
   CreateDomainResponse,
   DomainCountInfo,
   UserInfo,
   ModifyRecordBatchResponse,
-  DescribeDomainLogListResponse,
+  CheckSnapshotRollbackRequest,
+  CheckSnapshotRollbackResponse,
   DescribeRecordTypeRequest,
+  DescribeSnapshotRollbackTaskResponse,
   RecordListItem,
   CreateDomainBatchResponse,
   DescribeDomainGroupListResponse,
+  LockInfo,
   ModifyDomainOwnerResponse,
   SubdomainAnalyticsInfo,
   ModifyRecordBatchDetail,
@@ -98,20 +117,27 @@ import {
   CreateDomainAliasResponse,
   DescribeRecordListRequest,
   PayOrderWithBalanceRequest,
+  ModifySnapshotConfigResponse,
+  DeleteSnapshotResponse,
   DescribeDomainPurviewResponse,
   Deals,
   ModifySubdomainStatusResponse,
   DescribeDomainAnalyticsResponse,
   ModifyRecordStatusResponse,
+  RollbackSnapshotResponse,
   CreateDomainGroupRequest,
-  LineInfo,
+  CreateSnapshotRequest,
   DeleteDomainResponse,
+  DescribeRecordSnapshotRollbackResultResponse,
+  ModifySnapshotConfigRequest,
   DescribeDomainAliasListRequest,
   CreateDomainAliasRequest,
   DeleteShareDomainRequest,
+  SnapshotInfo,
   ModifyDynamicDNSRequest,
   PurviewInfo,
   ModifyRecordRemarkRequest,
+  RollbackRecordSnapshotResponse,
   DescribeUserDetailRequest,
   ModifyRecordRemarkResponse,
   DescribeDomainListRequest,
@@ -119,14 +145,18 @@ import {
   DescribeDomainPurviewRequest,
   CreateDomainBatchDetail,
   ModifyDomainUnlockRequest,
+  DescribeRecordSnapshotRollbackResultRequest,
   ModifyDomainLockResponse,
   CreateDealResponse,
   ModifyVasAutoRenewStatusRequest,
-  LockInfo,
-  DescribeDomainShareInfoRequest,
+  DownloadSnapshotResponse,
+  DescribeDomainGroupListRequest,
   DescribeBatchTaskResponse,
+  CheckRecordSnapshotRollbackRequest,
   DescribeDomainAnalyticsRequest,
   ModifyDynamicDNSResponse,
+  DescribeSnapshotRollbackResultRequest,
+  DescribeDomainLogListResponse,
 } from "./dnspod_models"
 
 /**
@@ -149,13 +179,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取域名分组列表
+   * 获取域名共享信息
    */
-  async DescribeDomainGroupList(
-    req?: DescribeDomainGroupListRequest,
-    cb?: (error: string, rep: DescribeDomainGroupListResponse) => void
-  ): Promise<DescribeDomainGroupListResponse> {
-    return this.request("DescribeDomainGroupList", req, cb)
+  async DescribeDomainShareInfo(
+    req: DescribeDomainShareInfoRequest,
+    cb?: (error: string, rep: DescribeDomainShareInfoResponse) => void
+  ): Promise<DescribeDomainShareInfoResponse> {
+    return this.request("DescribeDomainShareInfo", req, cb)
+  }
+
+  /**
+   * 查询最近一次回滚
+   */
+  async DescribeSnapshotRollbackTask(
+    req: DescribeSnapshotRollbackTaskRequest,
+    cb?: (error: string, rep: DescribeSnapshotRollbackTaskResponse) => void
+  ): Promise<DescribeSnapshotRollbackTaskResponse> {
+    return this.request("DescribeSnapshotRollbackTask", req, cb)
   }
 
   /**
@@ -199,33 +239,43 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 统计子域名的解析量，帮助您了解流量情况、时间段分布。支持查看近 3 个月内的统计情况。仅付费套餐域名可用。
+   * 查询快照列表
    */
-  async DescribeSubdomainAnalytics(
-    req: DescribeSubdomainAnalyticsRequest,
-    cb?: (error: string, rep: DescribeSubdomainAnalyticsResponse) => void
-  ): Promise<DescribeSubdomainAnalyticsResponse> {
-    return this.request("DescribeSubdomainAnalytics", req, cb)
+  async DescribeSnapshotList(
+    req: DescribeSnapshotListRequest,
+    cb?: (error: string, rep: DescribeSnapshotListResponse) => void
+  ): Promise<DescribeSnapshotListResponse> {
+    return this.request("DescribeSnapshotList", req, cb)
   }
 
   /**
-   * 修改解析记录的状态
+   * 下载快照
    */
-  async ModifyRecordStatus(
-    req: ModifyRecordStatusRequest,
-    cb?: (error: string, rep: ModifyRecordStatusResponse) => void
-  ): Promise<ModifyRecordStatusResponse> {
-    return this.request("ModifyRecordStatus", req, cb)
+  async DownloadSnapshot(
+    req: DownloadSnapshotRequest,
+    cb?: (error: string, rep: DownloadSnapshotResponse) => void
+  ): Promise<DownloadSnapshotResponse> {
+    return this.request("DownloadSnapshot", req, cb)
   }
 
   /**
-   * 增值服务自动续费设置
+   * 快照回滚前检查
    */
-  async ModifyVasAutoRenewStatus(
-    req: ModifyVasAutoRenewStatusRequest,
-    cb?: (error: string, rep: ModifyVasAutoRenewStatusResponse) => void
-  ): Promise<ModifyVasAutoRenewStatusResponse> {
-    return this.request("ModifyVasAutoRenewStatus", req, cb)
+  async CheckSnapshotRollback(
+    req: CheckSnapshotRollbackRequest,
+    cb?: (error: string, rep: CheckSnapshotRollbackResponse) => void
+  ): Promise<CheckSnapshotRollbackResponse> {
+    return this.request("CheckSnapshotRollback", req, cb)
+  }
+
+  /**
+   * 修改记录
+   */
+  async ModifyRecord(
+    req: ModifyRecordRequest,
+    cb?: (error: string, rep: ModifyRecordResponse) => void
+  ): Promise<ModifyRecordResponse> {
+    return this.request("ModifyRecord", req, cb)
   }
 
   /**
@@ -236,6 +286,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyDomainStatusResponse) => void
   ): Promise<ModifyDomainStatusResponse> {
     return this.request("ModifyDomainStatus", req, cb)
+  }
+
+  /**
+   * 查询快照回滚结果
+   */
+  async DescribeSnapshotRollbackResult(
+    req: DescribeSnapshotRollbackResultRequest,
+    cb?: (error: string, rep: DescribeSnapshotRollbackResultResponse) => void
+  ): Promise<DescribeSnapshotRollbackResultResponse> {
+    return this.request("DescribeSnapshotRollbackResult", req, cb)
+  }
+
+  /**
+   * 删除快照
+   */
+  async DeleteSnapshot(
+    req: DeleteSnapshotRequest,
+    cb?: (error: string, rep: DeleteSnapshotResponse) => void
+  ): Promise<DeleteSnapshotResponse> {
+    return this.request("DeleteSnapshot", req, cb)
   }
 
   /**
@@ -259,13 +329,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取域名共享信息
+   * 获取域名分组列表
    */
-  async DescribeDomainShareInfo(
-    req: DescribeDomainShareInfoRequest,
-    cb?: (error: string, rep: DescribeDomainShareInfoResponse) => void
-  ): Promise<DescribeDomainShareInfoResponse> {
-    return this.request("DescribeDomainShareInfo", req, cb)
+  async DescribeDomainGroupList(
+    req?: DescribeDomainGroupListRequest,
+    cb?: (error: string, rep: DescribeDomainGroupListResponse) => void
+  ): Promise<DescribeDomainGroupListResponse> {
+    return this.request("DescribeDomainGroupList", req, cb)
   }
 
   /**
@@ -279,6 +349,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询解析快照配置
+   */
+  async DescribeSnapshotConfig(
+    req: DescribeSnapshotConfigRequest,
+    cb?: (error: string, rep: DescribeSnapshotConfigResponse) => void
+  ): Promise<DescribeSnapshotConfigResponse> {
+    return this.request("DescribeSnapshotConfig", req, cb)
+  }
+
+  /**
    * 删除域名共享
    */
   async DeleteShareDomain(
@@ -286,6 +366,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteShareDomainResponse) => void
   ): Promise<DeleteShareDomainResponse> {
     return this.request("DeleteShareDomain", req, cb)
+  }
+
+  /**
+   * 增值服务自动续费设置
+   */
+  async ModifyVasAutoRenewStatus(
+    req: ModifyVasAutoRenewStatusRequest,
+    cb?: (error: string, rep: ModifyVasAutoRenewStatusResponse) => void
+  ): Promise<ModifyVasAutoRenewStatusResponse> {
+    return this.request("ModifyVasAutoRenewStatus", req, cb)
+  }
+
+  /**
+   * 修改解析记录的状态
+   */
+  async ModifyRecordStatus(
+    req: ModifyRecordStatusRequest,
+    cb?: (error: string, rep: ModifyRecordStatusResponse) => void
+  ): Promise<ModifyRecordStatusResponse> {
+    return this.request("ModifyRecordStatus", req, cb)
   }
 
   /**
@@ -327,6 +427,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeUserDetailResponse) => void
   ): Promise<DescribeUserDetailResponse> {
     return this.request("DescribeUserDetail", req, cb)
+  }
+
+  /**
+   * 回滚快照
+   */
+  async RollbackSnapshot(
+    req: RollbackSnapshotRequest,
+    cb?: (error: string, rep: RollbackSnapshotResponse) => void
+  ): Promise<RollbackSnapshotResponse> {
+    return this.request("RollbackSnapshot", req, cb)
   }
 
   /**
@@ -441,6 +551,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改快照配置
+   */
+  async ModifySnapshotConfig(
+    req: ModifySnapshotConfigRequest,
+    cb?: (error: string, rep: ModifySnapshotConfigResponse) => void
+  ): Promise<ModifySnapshotConfigResponse> {
+    return this.request("ModifySnapshotConfig", req, cb)
+  }
+
+  /**
    * 删除域名别名
    */
   async DeleteDomainAlias(
@@ -461,6 +581,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 回滚前检查单条记录
+   */
+  async CheckRecordSnapshotRollback(
+    req: CheckRecordSnapshotRollbackRequest,
+    cb?: (error: string, rep: CheckRecordSnapshotRollbackResponse) => void
+  ): Promise<CheckRecordSnapshotRollbackResponse> {
+    return this.request("CheckRecordSnapshotRollback", req, cb)
+  }
+
+  /**
      * 添加域名
 
      */
@@ -472,6 +602,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 重新回滚指定解析记录快照
+   */
+  async RollbackRecordSnapshot(
+    req: RollbackRecordSnapshotRequest,
+    cb?: (error: string, rep: RollbackRecordSnapshotResponse) => void
+  ): Promise<RollbackRecordSnapshotResponse> {
+    return this.request("RollbackRecordSnapshot", req, cb)
+  }
+
+  /**
    * DNSPod商品余额支付
    */
   async PayOrderWithBalance(
@@ -479,6 +619,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: PayOrderWithBalanceResponse) => void
   ): Promise<PayOrderWithBalanceResponse> {
     return this.request("PayOrderWithBalance", req, cb)
+  }
+
+  /**
+   * 统计子域名的解析量，帮助您了解流量情况、时间段分布。支持查看近 3 个月内的统计情况。仅付费套餐域名可用。
+   */
+  async DescribeSubdomainAnalytics(
+    req: DescribeSubdomainAnalyticsRequest,
+    cb?: (error: string, rep: DescribeSubdomainAnalyticsResponse) => void
+  ): Promise<DescribeSubdomainAnalyticsResponse> {
+    return this.request("DescribeSubdomainAnalytics", req, cb)
+  }
+
+  /**
+   * 批量修改记录
+   */
+  async ModifyRecordBatch(
+    req: ModifyRecordBatchRequest,
+    cb?: (error: string, rep: ModifyRecordBatchResponse) => void
+  ): Promise<ModifyRecordBatchResponse> {
+    return this.request("ModifyRecordBatch", req, cb)
   }
 
   /**
@@ -523,22 +683,22 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 批量修改记录
+   * 创建快照
    */
-  async ModifyRecordBatch(
-    req: ModifyRecordBatchRequest,
-    cb?: (error: string, rep: ModifyRecordBatchResponse) => void
-  ): Promise<ModifyRecordBatchResponse> {
-    return this.request("ModifyRecordBatch", req, cb)
+  async CreateSnapshot(
+    req: CreateSnapshotRequest,
+    cb?: (error: string, rep: CreateSnapshotResponse) => void
+  ): Promise<CreateSnapshotResponse> {
+    return this.request("CreateSnapshot", req, cb)
   }
 
   /**
-   * 修改记录
+   * 查询解析记录重新回滚的结果
    */
-  async ModifyRecord(
-    req: ModifyRecordRequest,
-    cb?: (error: string, rep: ModifyRecordResponse) => void
-  ): Promise<ModifyRecordResponse> {
-    return this.request("ModifyRecord", req, cb)
+  async DescribeRecordSnapshotRollbackResult(
+    req: DescribeRecordSnapshotRollbackResultRequest,
+    cb?: (error: string, rep: DescribeRecordSnapshotRollbackResultResponse) => void
+  ): Promise<DescribeRecordSnapshotRollbackResultResponse> {
+    return this.request("DescribeRecordSnapshotRollbackResult", req, cb)
   }
 }

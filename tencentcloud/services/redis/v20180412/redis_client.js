@@ -502,7 +502,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ChangeMasterInstance", req, cb);
     }
     /**
-     * 升级实例
+     * 变更实例配置
      */
     async UpgradeInstance(req, cb) {
         return this.request("UpgradeInstance", req, cb);

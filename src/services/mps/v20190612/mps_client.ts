@@ -495,6 +495,7 @@ import {
   AiRecognitionTaskTransTextResult,
   EditMediaTaskOutput,
   DeleteWatermarkTemplateResponse,
+  ResilientStreamConf,
   DescribeOutputRTSPPullServerUrl,
   LowLightEnhanceConfig,
   DescribeMediaMetaDataRequest,

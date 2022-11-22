@@ -28,10 +28,19 @@ class Client extends abstract_client_1.AbstractClient {
         super("tiia.tencentcloudapi.com", "2019-05-29", clientConfig);
     }
     /**
-     * 创建图片，并添加对应图片的自定义信息。模型将在创建图片时自动提取图像特征并存储到指定的图片库中。
+     * 文件封识别可检测图片中是否包含符合文件封（即文件、单据、资料等的袋状包装）特征的物品，覆盖顺丰快递文件封、文件袋、档案袋等多种文件封类型，可应用于物流行业对文件快递的包装审核等场景。
+
+>?
+- 公共参数中的签名方式必须指定为V3版本，即配置SignatureMethod参数为TC3-HMAC-SHA256。
      */
-    async CreateImage(req, cb) {
-        return this.request("CreateImage", req, cb);
+    async DetectEnvelope(req, cb) {
+        return this.request("DetectEnvelope", req, cb);
+    }
+    /**
+     * 获取指定图片库中的图片列表。
+     */
+    async DescribeImages(req, cb) {
+        return this.request("DescribeImages", req, cb);
     }
     /**
      * 商品识别-微信识物版，基于人工智能技术、海量训练图片、亿级商品库，可以实现全覆盖、细粒度、高准确率的商品识别和商品推荐功能。
@@ -44,23 +53,26 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DetectProductBeta", req, cb);
     }
     /**
-     * 通用图像标签可识别数千种常见物体或场景，覆盖日常物品、场景、动物、植物、食物、饮品、交通工具等多个大类，返回主体的标签名称和所属细分类目等。
+     * 本接口用于创建一个空的图片库，图片库主要用于存储在创建图片时提取的图片特征数据，如果图片库已存在则返回错误。不同的图片库类型对应不同的图像搜索服务类型，根据输入参数GroupType区分。
 
->
-- 可前往 [图像标签](https://cloud.tencent.com/document/product/1588) 产品文档中查看更多产品信息。
-- 公共参数中的签名方式必须指定为V3版本，即配置SignatureMethod参数为TC3-HMAC-SHA256。
+| 服务类型 | GroupType入参 |功能描述 |
+|  :----------  | :----- |:-----------------  |
+| 相同图像搜索<div style="width: 70pt"> | 4 |在自建图片库中搜索相同原图或高相似图，并给出相似度打分，可支持裁剪、翻转、调色、加水印等二次编辑后的图片搜索。适用于图片版权保护、原图查询等场景。|
+| 商品图像搜索<div style="width: 70pt"> | 5 |在自建图库中搜索同款商品，并给出相似度打分。对于服饰类商品可支持识别服饰类别、属性等信息。适用于商品分类、检索、推荐等电商场景。|
+| 相似图像搜索<div style="width: 70pt"> | 6 |在自建图库中搜索相似的图案、logo、纹理等图像元素或主体，并给出相似度打分。|
+
      */
-    async DetectLabelPro(req, cb) {
-        return this.request("DetectLabelPro", req, cb);
+    async CreateGroup(req, cb) {
+        return this.request("CreateGroup", req, cb);
     }
     /**
-     * 车辆识别可对图片中车辆的车型进行识别，输出车辆的品牌（如路虎）、车系（如神行者2）、类型（如中型SUV）、颜色和车辆在图中的坐标等信息，覆盖轿车、SUV、大型客车等市面常见车，支持三千多种车辆型号。如果图片中存在多辆车，会分别输出每辆车的车型和坐标。
+     * 车辆识别（增强版）在车辆识别的基础上**增加了车牌识别的功能，并升级了车型识别的效果**。可对图片中车辆的车型和车牌进行同时识别，输出车辆的车牌信息，以及车辆品牌（如路虎）、车系（如神行者2）、类型（如中型SUV）、颜色和车辆在图中的坐标等信息，覆盖轿车、SUV、大型客车等市面常见车，支持三千多种车辆型号。如果图片中存在多辆车，会分别输出每辆车的车型、车牌和坐标。
 
 >?
 - 公共参数中的签名方式必须指定为V3版本，即配置SignatureMethod参数为TC3-HMAC-SHA256。
      */
-    async RecognizeCar(req, cb) {
-        return this.request("RecognizeCar", req, cb);
+    async RecognizeCarPro(req, cb) {
+        return this.request("RecognizeCarPro", req, cb);
     }
     /**
      * 图像标签利用深度学习技术，可以对图片进行智能分类、物体识别等。
@@ -92,6 +104,67 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DetectLabel", req, cb);
     }
     /**
+     * 可对图片中厨师穿戴进行识别，支持厨师服识别，厨师帽识别，赤膊识别和口罩识别,可应用于明厨亮灶场景。
+"被优选过滤"标签值在人体优选开关开启时才会返回。
+厨师服：厨师服定义为白色上衣
+厨师服识别(酒店版)：厨师服定义为红色，白色，黑色上衣
+
+|序号 | 标签名称 | 标签值 |
+| :-----|  :----------   |:-----------------  |
+| 1 | 厨师服识别<div style="width: 70pt"> |无厨师服、有厨师服、被优选过滤|
+| 2 | 厨师服识别（酒店版）<div style="width: 70pt"> |无厨师服、有厨师服、被优选过滤|
+| 3 | 厨师帽识别<div style="width: 70pt"> |无厨师帽、有厨师帽、被优选过滤	|
+| 4 | 赤膊识别<div style="width: 70pt"> |非赤膊、赤膊、被优选过滤|
+| 5 | 口罩识别<div style="width: 70pt"> |无口罩、有口罩、口罩不确定、被优选过滤	|
+     */
+    async DetectChefDress(req, cb) {
+        return this.request("DetectChefDress", req, cb);
+    }
+    /**
+     * 删除图片。
+     */
+    async DeleteImages(req, cb) {
+        return this.request("DeleteImages", req, cb);
+    }
+    /**
+     * 根据输入的裁剪比例，智能判断一张图片的最佳裁剪区域，确保原图的主体区域不受影响，以适应不同平台、设备的展示要求，避免简单拉伸带来的变形。
+
+>
+- 可前往 [图像处理](https://cloud.tencent.com/document/product/1590) 产品文档中查看更多产品信息。
+- 公共参数中的签名方式必须指定为V3版本，即配置SignatureMethod参数为TC3-HMAC-SHA256。
+     */
+    async CropImage(req, cb) {
+        return this.request("CropImage", req, cb);
+    }
+    /**
+     * 传入一张图片，输出清晰度提升后的图片。
+
+可以消除图片有损压缩导致的噪声，和使用滤镜、拍摄失焦导致的模糊。让图片的边缘和细节更加清晰自然。
+
+>
+- 可前往 [图像处理](https://cloud.tencent.com/document/product/1590) 产品文档中查看更多产品信息。
+- 公共参数中的签名方式必须指定为V3版本，即配置SignatureMethod参数为TC3-HMAC-SHA256。
+     */
+    async EnhanceImage(req, cb) {
+        return this.request("EnhanceImage", req, cb);
+    }
+    /**
+     * 创建图片，并添加对应图片的自定义信息。模型将在创建图片时自动提取图像特征并存储到指定的图片库中。
+     */
+    async CreateImage(req, cb) {
+        return this.request("CreateImage", req, cb);
+    }
+    /**
+     * 通用图像标签可识别数千种常见物体或场景，覆盖日常物品、场景、动物、植物、食物、饮品、交通工具等多个大类，返回主体的标签名称和所属细分类目等。
+
+>
+- 可前往 [图像标签](https://cloud.tencent.com/document/product/1588) 产品文档中查看更多产品信息。
+- 公共参数中的签名方式必须指定为V3版本，即配置SignatureMethod参数为TC3-HMAC-SHA256。
+     */
+    async DetectLabelPro(req, cb) {
+        return this.request("DetectLabelPro", req, cb);
+    }
+    /**
      * 评估输入图片在视觉上的质量，从多个方面评估，并同时给出综合的、客观的清晰度评分，和主观的美观度评分。
 
 >
@@ -118,10 +191,48 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeGroups", req, cb);
     }
     /**
-     * 删除图片。
+     * 可以识别输入的图片中是否包含不良行为，例如打架斗殴、赌博、抽烟等，可以应用于广告图、直播截图、短视频截图等审核，减少不良行为对平台内容质量的影响，维护健康向上的互联网环境。
+>
+- 公共参数中的签名方式必须指定为V3版本，即配置SignatureMethod参数为TC3-HMAC-SHA256。
      */
-    async DeleteImages(req, cb) {
-        return this.request("DeleteImages", req, cb);
+    async DetectMisbehavior(req, cb) {
+        return this.request("DetectMisbehavior", req, cb);
+    }
+    /**
+     * 本接口支持识别图片中包含的商品，能够输出商品的品类名称、类别，还可以输出商品在图片中的位置。支持一张图片多个商品的识别。
+>?
+- 公共参数中的签名方式必须指定为V3版本，即配置SignatureMethod参数为TC3-HMAC-SHA256。
+     */
+    async DetectProduct(req, cb) {
+        return this.request("DetectProduct", req, cb);
+    }
+    /**
+     * 识别常安全属性识别可对图片中人体安全防护属性进行识别，支持识别安全帽，反光衣，护目镜，工服，手套，工地安全带，口罩，抽烟，玩手机等多种属性。
+"被优选过滤"标签值在人体优选开关开启时才会返回。
+
+|序号 | 标签名称 | 标签值 |
+| :-----|  :----------   |:-----------------  |
+| 1 | 安全帽识别<div style="width: 70pt"> |无安全帽、有安全帽、被优选过滤|
+| 2 | 玩手机识别<div style="width: 70pt"> |没有电话、打电话、玩手机、被优选过滤|
+| 3 | 抽烟识别<div style="width: 70pt"> |没有抽烟、抽烟、被优选过滤	|
+| 4 | 口罩识别<div style="width: 70pt"> |无口罩、有口罩、口罩不确定、被优选过滤|
+| 5 | 工地安全带识别<div style="width: 70pt"> |无工地安全带、工地安全带、被优选过滤	|
+| 6 | 手套识别<div style="width: 70pt"> |无手套、有手套、手套不确定、被优选过滤	|
+| 7 | 工服识别<div style="width: 70pt"> |无工服、有工服、被优选过滤|
+| 8 | 护目镜识别<div style="width: 70pt"> |无护目镜、有护目镜、被优选过滤|
+| 9 | 反光衣识别<div style="width: 70pt"> |无反光衣、有反光衣、被优选过滤|
+     */
+    async DetectSecurity(req, cb) {
+        return this.request("DetectSecurity", req, cb);
+    }
+    /**
+     * 车辆识别可对图片中车辆的车型进行识别，输出车辆的品牌（如路虎）、车系（如神行者2）、类型（如中型SUV）、颜色和车辆在图中的坐标等信息，覆盖轿车、SUV、大型客车等市面常见车，支持三千多种车辆型号。如果图片中存在多辆车，会分别输出每辆车的车型和坐标。
+
+>?
+- 公共参数中的签名方式必须指定为V3版本，即配置SignatureMethod参数为TC3-HMAC-SHA256。
+     */
+    async RecognizeCar(req, cb) {
+        return this.request("RecognizeCar", req, cb);
     }
     /**
      * 图像标签测试接口
@@ -133,85 +244,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DetectLabelBeta", req, cb);
     }
     /**
-     * 根据输入的裁剪比例，智能判断一张图片的最佳裁剪区域，确保原图的主体区域不受影响，以适应不同平台、设备的展示要求，避免简单拉伸带来的变形。
-
->
-- 可前往 [图像处理](https://cloud.tencent.com/document/product/1590) 产品文档中查看更多产品信息。
-- 公共参数中的签名方式必须指定为V3版本，即配置SignatureMethod参数为TC3-HMAC-SHA256。
-     */
-    async CropImage(req, cb) {
-        return this.request("CropImage", req, cb);
-    }
-    /**
      * 本接口用于对一张图片，在指定图片库中检索出与之相似的图片列表。
      */
     async SearchImage(req, cb) {
         return this.request("SearchImage", req, cb);
-    }
-    /**
-     * 获取指定图片库中的图片列表。
-     */
-    async DescribeImages(req, cb) {
-        return this.request("DescribeImages", req, cb);
-    }
-    /**
-     * 可以识别输入的图片中是否包含不良行为，例如打架斗殴、赌博、抽烟等，可以应用于广告图、直播截图、短视频截图等审核，减少不良行为对平台内容质量的影响，维护健康向上的互联网环境。
->
-- 公共参数中的签名方式必须指定为V3版本，即配置SignatureMethod参数为TC3-HMAC-SHA256。
-     */
-    async DetectMisbehavior(req, cb) {
-        return this.request("DetectMisbehavior", req, cb);
-    }
-    /**
-     * 本接口用于创建一个空的图片库，图片库主要用于存储在创建图片时提取的图片特征数据，如果图片库已存在则返回错误。不同的图片库类型对应不同的图像搜索服务类型，根据输入参数GroupType区分。
-
-| 服务类型 | GroupType入参 |功能描述 |
-|  :----------  | :----- |:-----------------  |
-| 相同图像搜索<div style="width: 70pt"> | 4 |在自建图片库中搜索相同原图或高相似图，并给出相似度打分，可支持裁剪、翻转、调色、加水印等二次编辑后的图片搜索。适用于图片版权保护、原图查询等场景。|
-| 商品图像搜索<div style="width: 70pt"> | 5 |在自建图库中搜索同款商品，并给出相似度打分。对于服饰类商品可支持识别服饰类别、属性等信息。适用于商品分类、检索、推荐等电商场景。|
-| 相似图像搜索<div style="width: 70pt"> | 6 |在自建图库中搜索相似的图案、logo、纹理等图像元素或主体，并给出相似度打分。|
-
-     */
-    async CreateGroup(req, cb) {
-        return this.request("CreateGroup", req, cb);
-    }
-    /**
-     * 本接口支持识别图片中包含的商品，能够输出商品的品类名称、类别，还可以输出商品在图片中的位置。支持一张图片多个商品的识别。
->?
-- 公共参数中的签名方式必须指定为V3版本，即配置SignatureMethod参数为TC3-HMAC-SHA256。
-     */
-    async DetectProduct(req, cb) {
-        return this.request("DetectProduct", req, cb);
-    }
-    /**
-     * 车辆识别（增强版）在车辆识别的基础上**增加了车牌识别的功能，并升级了车型识别的效果**。可对图片中车辆的车型和车牌进行同时识别，输出车辆的车牌信息，以及车辆品牌（如路虎）、车系（如神行者2）、类型（如中型SUV）、颜色和车辆在图中的坐标等信息，覆盖轿车、SUV、大型客车等市面常见车，支持三千多种车辆型号。如果图片中存在多辆车，会分别输出每辆车的车型、车牌和坐标。
-
->?
-- 公共参数中的签名方式必须指定为V3版本，即配置SignatureMethod参数为TC3-HMAC-SHA256。
-     */
-    async RecognizeCarPro(req, cb) {
-        return this.request("RecognizeCarPro", req, cb);
-    }
-    /**
-     * 传入一张图片，输出清晰度提升后的图片。
-
-可以消除图片有损压缩导致的噪声，和使用滤镜、拍摄失焦导致的模糊。让图片的边缘和细节更加清晰自然。
-
->
-- 可前往 [图像处理](https://cloud.tencent.com/document/product/1590) 产品文档中查看更多产品信息。
-- 公共参数中的签名方式必须指定为V3版本，即配置SignatureMethod参数为TC3-HMAC-SHA256。
-     */
-    async EnhanceImage(req, cb) {
-        return this.request("EnhanceImage", req, cb);
-    }
-    /**
-     * 文件封识别可检测图片中是否包含符合文件封（即文件、单据、资料等的袋状包装）特征的物品，覆盖顺丰快递文件封、文件袋、档案袋等多种文件封类型，可应用于物流行业对文件快递的包装审核等场景。
-
->?
-- 公共参数中的签名方式必须指定为V3版本，即配置SignatureMethod参数为TC3-HMAC-SHA256。
-     */
-    async DetectEnvelope(req, cb) {
-        return this.request("DetectEnvelope", req, cb);
     }
     /**
      * 传入一张图片，识别出图片中是否存在宠物

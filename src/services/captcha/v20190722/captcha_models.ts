@@ -372,7 +372,7 @@ export interface CaptchaOperDataRes {
  */
 export interface GetTicketStatisticsRequest {
   /**
-   * 验证码appid
+   * 验证码AppId
    */
   CaptchaAppId: string
 

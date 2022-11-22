@@ -45,26 +45,19 @@ export interface DetectProductBetaResponse {
 }
 
 /**
- * DetectDisgust请求参数结构体
+ * DetectChefDress返回参数结构体
  */
-export interface DetectDisgustRequest {
+export interface DetectChefDressResponse {
   /**
-      * 图片URL地址。 
-图片限制： 
-• 图片格式：PNG、JPG、JPEG。 
-• 图片大小：所下载图片经Base64编码后不超过4M。图片下载时间不超过3秒。 
-建议：
-• 图片像素：大于50*50像素，否则影响识别效果； 
-• 长宽比：长边：短边<5； 
-接口响应时间会受到图片下载时间的影响，建议使用更可靠的存储服务，推荐将图片存储在腾讯云COS。
+      * 识别到的人体属性信息。单个人体属性信息包括人体检测置信度，属性信息，人体检测框。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-  ImageUrl?: string
+  Bodies: Array<AttributesForBody>
 
   /**
-   * 图片经过base64编码的内容。最大不超过4M。与ImageUrl同时存在时优先使用ImageUrl字段。
-   **注意：图片需要base64编码，并且要去掉编码头部。**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  ImageBase64?: string
+  RequestId?: string
 }
 
 /**
@@ -94,6 +87,29 @@ export interface SearchImageResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DetectDisgust请求参数结构体
+ */
+export interface DetectDisgustRequest {
+  /**
+      * 图片URL地址。 
+图片限制： 
+• 图片格式：PNG、JPG、JPEG。 
+• 图片大小：所下载图片经Base64编码后不超过4M。图片下载时间不超过3秒。 
+建议：
+• 图片像素：大于50*50像素，否则影响识别效果； 
+• 长宽比：长边：短边<5； 
+接口响应时间会受到图片下载时间的影响，建议使用更可靠的存储服务，推荐将图片存储在腾讯云COS。
+      */
+  ImageUrl?: string
+
+  /**
+   * 图片经过base64编码的内容。最大不超过4M。与ImageUrl同时存在时优先使用ImageUrl字段。
+   **注意：图片需要base64编码，并且要去掉编码头部。**
+   */
+  ImageBase64?: string
 }
 
 /**
@@ -238,40 +254,26 @@ ImageUrl和ImageBase64必须提供一个，如果都提供，只使用ImageUrl�
 }
 
 /**
- * DetectLabelBeta请求参数结构体
+ * 属性列表。
  */
-export interface DetectLabelBetaRequest {
+export interface BodyAttributes {
   /**
-      * 图片URL地址。 
-图片限制： 
-• 图片格式：PNG、JPG、JPEG。 
-• 图片大小：所下载图片经Base64编码后不超过4M。图片下载时间不超过3秒。 
-建议：
-• 图片像素：大于50*50像素，否则影响识别效果； 
-• 长宽比：长边：短边<5； 
-接口响应时间会受到图片下载时间的影响，建议使用更可靠的存储服务，推荐将图片存储在腾讯云COS。
+      * 属性值。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-  ImageUrl?: string
+  Label: string
 
   /**
-   * 图片经过base64编码的内容。最大不超过4M。与ImageUrl同时存在时优先使用ImageUrl字段。
-   **注意：图片需要base64编码，并且要去掉编码头部。**
-   */
-  ImageBase64?: string
-
-  /**
-      * 本次调用支持的识别场景，可选值如下：
-WEB，针对网络图片优化;
-CAMERA，针对手机摄像头拍摄图片优化;
-ALBUM，针对手机相册、网盘产品优化;
-NEWS，针对新闻、资讯、广电等行业优化；
-NONECAM，非实拍图；
-LOCATION，主体位置识别；
-如果不传此参数，则默认为WEB。
-
-支持多场景（Scenes）一起检测。例如，使用 Scenes=["WEB", "CAMERA"]，即对一张图片使用两个模型同时检测，输出两套识别结果。
+      * 置信度，取值0-1之间。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-  Scenes?: Array<string>
+  Confidence: number
+
+  /**
+      * 属性名称。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Name: string
 }
 
 /**
@@ -342,6 +344,43 @@ export interface DetectProductRequest {
    **注意：图片需要base64编码，并且要去掉编码头部。**
    */
   ImageBase64?: string
+}
+
+/**
+ * DetectLabelBeta请求参数结构体
+ */
+export interface DetectLabelBetaRequest {
+  /**
+      * 图片URL地址。 
+图片限制： 
+• 图片格式：PNG、JPG、JPEG。 
+• 图片大小：所下载图片经Base64编码后不超过4M。图片下载时间不超过3秒。 
+建议：
+• 图片像素：大于50*50像素，否则影响识别效果； 
+• 长宽比：长边：短边<5； 
+接口响应时间会受到图片下载时间的影响，建议使用更可靠的存储服务，推荐将图片存储在腾讯云COS。
+      */
+  ImageUrl?: string
+
+  /**
+   * 图片经过base64编码的内容。最大不超过4M。与ImageUrl同时存在时优先使用ImageUrl字段。
+   **注意：图片需要base64编码，并且要去掉编码头部。**
+   */
+  ImageBase64?: string
+
+  /**
+      * 本次调用支持的识别场景，可选值如下：
+WEB，针对网络图片优化;
+CAMERA，针对手机摄像头拍摄图片优化;
+ALBUM，针对手机相册、网盘产品优化;
+NEWS，针对新闻、资讯、广电等行业优化；
+NONECAM，非实拍图；
+LOCATION，主体位置识别；
+如果不传此参数，则默认为WEB。
+
+支持多场景（Scenes）一起检测。例如，使用 Scenes=["WEB", "CAMERA"]，即对一张图片使用两个模型同时检测，输出两套识别结果。
+      */
+  Scenes?: Array<string>
 }
 
 /**
@@ -508,34 +547,41 @@ export interface DetectDisgustResponse {
 }
 
 /**
- * 图像的主体信息。
+ * DetectChefDress请求参数结构体
  */
-export interface ObjectInfo {
+export interface DetectChefDressRequest {
   /**
-   * 图像主体区域。
-   */
-  Box: Box
-
-  /**
-   * 主体类别ID。
-   */
-  CategoryId: number
-
-  /**
-   * 整张图颜色信息。
-   */
-  Colors: Array<ColorInfo>
-
-  /**
-   * 属性信息。
-   */
-  Attributes: Array<Attribute>
-
-  /**
-      * 图像的所有主体区域，置信度，以及主体区域类别ID。
-注意：此字段可能返回 null，表示取不到有效值。
+      * 图片的 Url 。
+ImageUrl和ImageBase64必须提供一个，同时存在时优先使用ImageUrl字段。
+图片限制：
+• 图片格式：支持PNG、JPG、JPEG、不支持 GIF 图片。
+• 图片大小：对应图片 base64 编码后大小不可超过5M。图片分辨率不超过 3840 x 2160pixel。
+建议：
+• 接口响应时间会受到图片下载时间的影响，建议使用更可靠的存储服务，推荐将图片存储在腾讯云COS。
       */
-  AllBox: Array<Box>
+  ImageUrl?: string
+
+  /**
+      * 图片经过base64编码的内容。与ImageUrl同时存在时优先使用ImageUrl字段。
+注意：图片需要base64编码，并且要去掉编码头部。
+支持的图片格式：PNG、JPG、JPEG、暂不支持GIF格式。
+支持的图片大小：所下载图片经Base64编码后不超过5M。
+      */
+  ImageBase64?: string
+
+  /**
+      * 人体检测模型开关，“true”为开启，“false”为关闭
+默认为开启，开启后可先对图片中的人体进行检测之后再进行属性识别
+      */
+  EnableDetect?: boolean
+
+  /**
+      * 人体优选开关，“true”为开启，“false”为关闭
+开启后自动对检测质量低的人体进行优选过滤，有助于提高属性识别的准确率。
+默认为开启，仅在人体检测开关开启时可配置，人体检测模型关闭时人体优选也关闭
+人体优选开启时，检测到的人体分辨率不超过1920*1080 pixel
+      */
+  EnablePreferred?: boolean
 }
 
 /**
@@ -629,23 +675,26 @@ ImageUrl和ImageBase64必须提供一个，如果都提供，只使用ImageUrl�
 }
 
 /**
- * RecognizeCar返回参数结构体
+ * 属性检测到的人体
  */
-export interface RecognizeCarResponse {
+export interface AttributesForBody {
   /**
-   * 汽车的四个矩形顶点坐标，如果图片中存在多辆车，则输出最大车辆的坐标。
-   */
-  CarCoords: Array<Coord>
+      * 人体框。当不开启人体检测时，内部参数默认为0。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Rect: ImageRect
 
   /**
-   * 车辆属性识别的结果数组，如果识别到多辆车，则会输出每辆车的top1结果。
-   */
-  CarTags: Array<CarTagItem>
+      * 人体检测置信度。取值0-1之间，当不开启人体检测开关时默认为0。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DetectConfidence: number
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+      * 属性信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Attributes: Array<BodyAttributes>
 }
 
 /**
@@ -685,6 +734,26 @@ export interface DetectLabelRequest {
 支持多场景（Scenes）一起检测。例如，使用 Scenes=["WEB", "CAMERA"]，即对一张图片使用两个模型同时检测，输出两套识别结果。
       */
   Scenes?: Array<string>
+}
+
+/**
+ * RecognizeCar返回参数结构体
+ */
+export interface RecognizeCarResponse {
+  /**
+   * 汽车的四个矩形顶点坐标，如果图片中存在多辆车，则输出最大车辆的坐标。
+   */
+  CarCoords: Array<Coord>
+
+  /**
+   * 车辆属性识别的结果数组，如果识别到多辆车，则会输出每辆车的top1结果。
+   */
+  CarTags: Array<CarTagItem>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -944,6 +1013,22 @@ export interface Box {
 }
 
 /**
+ * DetectSecurity返回参数结构体
+ */
+export interface DetectSecurityResponse {
+  /**
+      * 识别到的人体属性信息。单个人体属性信息包括人体检测置信度，属性信息，人体检测框。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Bodies: Array<AttributesForBody>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * RecognizeCar请求参数结构体
  */
 export interface RecognizeCarRequest {
@@ -1098,6 +1183,37 @@ export interface CropImageResponse {
 }
 
 /**
+ * 图像的主体信息。
+ */
+export interface ObjectInfo {
+  /**
+   * 图像主体区域。
+   */
+  Box: Box
+
+  /**
+   * 主体类别ID。
+   */
+  CategoryId: number
+
+  /**
+   * 整张图颜色信息。
+   */
+  Colors: Array<ColorInfo>
+
+  /**
+   * 属性信息。
+   */
+  Attributes: Array<Attribute>
+
+  /**
+      * 图像的所有主体区域，置信度，以及主体区域类别ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AllBox: Array<Box>
+}
+
+/**
  * 检测到的单个商品结构体
  */
 export interface Product {
@@ -1150,6 +1266,45 @@ export interface Coord {
    * 纵坐标y
    */
   Y: number
+}
+
+/**
+ * DetectSecurity请求参数结构体
+ */
+export interface DetectSecurityRequest {
+  /**
+      * 图片的 Url 。
+ImageUrl和ImageBase64必须提供一个，同时存在时优先使用ImageUrl字段。
+图片限制：
+• 图片格式：支持PNG、JPG、JPEG、不支持 GIF 图片。
+• 图片大小：对应图片 base64 编码后大小不可超过5M。图片分辨率不超过3840 x 2160 pixel。
+建议：
+• 接口响应时间会受到图片下载时间的影响，建议使用更可靠的存储服务，推荐将图片存储在腾讯云COS。
+      */
+  ImageUrl?: string
+
+  /**
+      * 图片经过base64编码的内容。
+最大不超过4M。与ImageUrl同时存在时优先使用ImageUrl字段。
+注意：图片需要base64编码，并且要去掉编码头部。
+支持的图片格式：PNG、JPG、JPEG、暂不支持GIF格式。
+支持的图片大小：所下载图片经Base64编码后不超过5M。
+      */
+  ImageBase64?: string
+
+  /**
+      * 人体检测模型开关，“true”为开启，“false”为关闭
+开启后可先对图片中的人体进行检测之后再进行属性识别，默认为开启
+      */
+  EnableDetect?: boolean
+
+  /**
+      * 人体优选开关，“true”为开启，“false”为关闭
+开启后自动对检测质量低的人体进行优选过滤，有助于提高属性识别的准确率。
+默认为开启，仅在人体检测开关开启时可配置，人体检测模型关闭时人体优选也关闭
+如开启人体优选，检测到的人体分辨率需不大于1920*1080 pixel
+      */
+  EnablePreferred?: boolean
 }
 
 /**

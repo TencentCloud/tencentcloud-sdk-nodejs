@@ -1337,6 +1337,11 @@ export interface CreateCustomPackRequest {
    * 码段配置，和CustomId二选一必填
    */
   CodeParts?: Array<CodePart>
+
+  /**
+   * 批次ID，如果传了生码后会同时绑定批次，并激活码
+   */
+  BatchId?: string
 }
 
 /**
@@ -1382,6 +1387,11 @@ export interface CreateCodePackRequest {
    * 码包规格
    */
   PackSpec?: Array<PackSpec>
+
+  /**
+   * 批次ID，如果传了生码后会同时绑定批次，并激活码
+   */
+  BatchId?: string
 }
 
 /**
@@ -1715,6 +1725,11 @@ export interface ModifyCustomRuleStatusRequest {
    * 码规则状态 0:未生效 1:已生效 -1:已失效
    */
   Status: number
+
+  /**
+   * 企业ID
+   */
+  CorpId?: number
 }
 
 /**

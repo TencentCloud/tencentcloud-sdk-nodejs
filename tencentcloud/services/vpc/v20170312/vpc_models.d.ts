@@ -10457,6 +10457,10 @@ export interface ModifyNetworkInterfaceQosRequest {
       * 服务质量，可选值：PT、AU、AG、DEFAULT，分别代表白金、金、银、默认四个等级。
       */
     QosLevel: string;
+    /**
+      * DirectSend端口范围最大值。
+      */
+    DirectSendMaxPort?: number;
 }
 /**
  * ModifyLocalGateway请求参数结构体

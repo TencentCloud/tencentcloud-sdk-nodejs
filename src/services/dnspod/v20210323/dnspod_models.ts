@@ -76,6 +76,96 @@ export interface CreateRecordRequest {
 }
 
 /**
+ * DescribeSnapshotRollbackResult返回参数结构体
+ */
+export interface DescribeSnapshotRollbackResultResponse {
+  /**
+   * 快照所属域名
+   */
+  Domain: string
+
+  /**
+   * 回滚剩余时间（分钟）
+   */
+  LeftMinutes: number
+
+  /**
+   * 回滚进度百分比
+   */
+  Progress: number
+
+  /**
+   * 快照 ID
+   */
+  SnapshotId: string
+
+  /**
+   * 回滚状态
+   */
+  Status: string
+
+  /**
+   * 快照回滚任务 ID
+   */
+  TaskId: number
+
+  /**
+      * 成功数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Success: number
+
+  /**
+      * 失败数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Failed: number
+
+  /**
+      * 总数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Total: number
+
+  /**
+      * 失败详细信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FailedRecordList: Array<SnapshotRecord>
+
+  /**
+      * 快照的下载地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CosUrl: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DownloadSnapshot请求参数结构体
+ */
+export interface DownloadSnapshotRequest {
+  /**
+   * 域名
+   */
+  Domain: string
+
+  /**
+   * 快照记录 ID
+   */
+  SnapshotId: string
+
+  /**
+   * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+   */
+  DomainId?: number
+}
+
+/**
  * 查看任务详情返回结构
  */
 export interface DescribeBatchTaskDetail {
@@ -138,6 +228,26 @@ export interface ModifyVasAutoRenewStatusResponse {
 }
 
 /**
+ * RollbackSnapshot请求参数结构体
+ */
+export interface RollbackSnapshotRequest {
+  /**
+   * 域名
+   */
+  Domain: string
+
+  /**
+   * 快照记录 ID
+   */
+  SnapshotId: string
+
+  /**
+   * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+   */
+  DomainId?: number
+}
+
+/**
  * DeleteDomainAlias返回参数结构体
  */
 export interface DeleteDomainAliasResponse {
@@ -190,6 +300,26 @@ export interface CreateRecordBatchResponse {
    * 批量任务的ID
    */
   JobId: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeSnapshotList返回参数结构体
+ */
+export interface DescribeSnapshotListResponse {
+  /**
+   * 分页信息
+   */
+  Info: SnapshotPageInfo
+
+  /**
+   * 快照列表
+   */
+  SnapshotList: Array<SnapshotInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -317,6 +447,16 @@ export interface DomainAnalyticsDetail {
 }
 
 /**
+ * CreateSnapshot返回参数结构体
+ */
+export interface CreateSnapshotResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * PayOrderWithBalance返回参数结构体
  */
 export interface PayOrderWithBalanceResponse {
@@ -357,6 +497,21 @@ export interface DescribeDomainResponse {
 }
 
 /**
+ * DescribeSnapshotList请求参数结构体
+ */
+export interface DescribeSnapshotListRequest {
+  /**
+   * 域名
+   */
+  Domain: string
+
+  /**
+   * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+   */
+  DomainId?: number
+}
+
+/**
  * DescribeRecordLineList返回参数结构体
  */
 export interface DescribeRecordLineListResponse {
@@ -374,6 +529,16 @@ export interface DescribeRecordLineListResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 快照列表分页信息
+ */
+export interface SnapshotPageInfo {
+  /**
+   * 快照总数
+   */
+  Total: number
 }
 
 /**
@@ -515,9 +680,19 @@ export interface CreateDomainBatchRequest {
 }
 
 /**
- * DescribeDomainGroupList请求参数结构体
+ * DescribeDomainShareInfo请求参数结构体
  */
-export type DescribeDomainGroupListRequest = null
+export interface DescribeDomainShareInfoRequest {
+  /**
+   * 域名
+   */
+  Domain: string
+
+  /**
+   * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+   */
+  DomainId?: number
+}
 
 /**
  * 域名列表元素
@@ -660,6 +835,26 @@ export interface ModifyDomainRemarkResponse {
 }
 
 /**
+ * DeleteSnapshot请求参数结构体
+ */
+export interface DeleteSnapshotRequest {
+  /**
+   * 域名
+   */
+  Domain: string
+
+  /**
+   * 快照记录 ID
+   */
+  SnapshotId: string
+
+  /**
+   * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+   */
+  DomainId?: number
+}
+
+/**
  * DescribeDomainAliasList返回参数结构体
  */
 export interface DescribeDomainAliasListResponse {
@@ -667,6 +862,51 @@ export interface DescribeDomainAliasListResponse {
    * 域名别名列表
    */
   DomainAliasList: Array<DomainAliasInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * RollbackRecordSnapshot请求参数结构体
+ */
+export interface RollbackRecordSnapshotRequest {
+  /**
+   * 域名
+   */
+  Domain: string
+
+  /**
+   * 快照 ID
+   */
+  SnapshotId: string
+
+  /**
+   * 解析记录信息
+   */
+  RecordList: Array<SnapshotRecord>
+
+  /**
+   * 之前的快照回滚任务 ID
+   */
+  TaskId: number
+
+  /**
+   * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+   */
+  DomainId?: number
+}
+
+/**
+ * DescribeSnapshotConfig返回参数结构体
+ */
+export interface DescribeSnapshotConfigResponse {
+  /**
+   * 解析快照配置
+   */
+  SnapshotConfig: SnapshotConfig
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -938,6 +1178,36 @@ export interface DomainShareInfo {
    * 共享状态“enabled”：共享成功。“pending”：共享到的账号不存在, 等待注册
    */
   Status: string
+}
+
+/**
+ * DescribeSnapshotConfig请求参数结构体
+ */
+export interface DescribeSnapshotConfigRequest {
+  /**
+   * 域名
+   */
+  Domain: string
+
+  /**
+   * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+   */
+  DomainId?: number
+}
+
+/**
+ * 解析线路信息
+ */
+export interface LineInfo {
+  /**
+   * 线路名称
+   */
+  Name: string
+
+  /**
+   * 线路ID
+   */
+  LineId: string
 }
 
 /**
@@ -1479,6 +1749,37 @@ export interface RecordInfo {
 }
 
 /**
+ * DescribeSnapshotRollbackTask请求参数结构体
+ */
+export interface DescribeSnapshotRollbackTaskRequest {
+  /**
+   * 域名
+   */
+  Domain: string
+
+  /**
+   * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+   */
+  DomainId?: number
+}
+
+/**
+ * CheckRecordSnapshotRollback返回参数结构体
+ */
+export interface CheckRecordSnapshotRollbackResponse {
+  /**
+      * 错误原因
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Reason: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 批量添加记录返回结构
  */
 export interface CreateRecordBatchDetail {
@@ -1571,6 +1872,47 @@ export interface ModifyRecordResponse {
 }
 
 /**
+ * 快照解析记录
+ */
+export interface SnapshotRecord {
+  /**
+   * 子域名
+   */
+  SubDomain: string
+
+  /**
+   * 记录类型
+   */
+  RecordType: string
+
+  /**
+   * 解析线路
+   */
+  RecordLine: string
+
+  /**
+   * 解析值
+   */
+  Value: string
+
+  /**
+   * TTL(秒)
+   */
+  TTL: string
+
+  /**
+   * 解析记录 ID
+   */
+  RecordId?: string
+
+  /**
+      * MX优先级
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MX?: string
+}
+
+/**
  * ModifyDomainUnlock返回参数结构体
  */
 export interface ModifyDomainUnlockResponse {
@@ -1653,6 +1995,46 @@ export interface ModifyRecordBatchRequest {
    * MX记录优先级，仅当修改为 MX 记录时为必填参数。
    */
   MX?: string
+}
+
+/**
+ * 域名解析快照配置
+ */
+export interface SnapshotConfig {
+  /**
+   * 配置类型：空字符串-不备份，half_hour-每半小时，hourly-每小时，daily-每天，monthly-每月
+   */
+  Config: string
+
+  /**
+   * 添加时间
+   */
+  CreatedOn: string
+
+  /**
+   * 所属域名 ID
+   */
+  DomainId: string
+
+  /**
+   * 配置 ID
+   */
+  Id: string
+
+  /**
+   * 快照数量
+   */
+  SnapshotCount: number
+
+  /**
+   * 状态：enable-启用，disable-禁用
+   */
+  Status: string
+
+  /**
+   * 更新时间
+   */
+  UpdatedOn: string
 }
 
 /**
@@ -1895,24 +2277,66 @@ export interface ModifyRecordBatchResponse {
 }
 
 /**
- * DescribeDomainLogList返回参数结构体
+ * CheckSnapshotRollback请求参数结构体
  */
-export interface DescribeDomainLogListResponse {
+export interface CheckSnapshotRollbackRequest {
   /**
-      * 域名信息
+   * 域名
+   */
+  Domain: string
+
+  /**
+   * 快照记录 ID
+   */
+  SnapshotId: string
+
+  /**
+   * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+   */
+  DomainId?: number
+}
+
+/**
+ * CheckSnapshotRollback返回参数结构体
+ */
+export interface CheckSnapshotRollbackResponse {
+  /**
+   * 快照记录 ID
+   */
+  SnapshotId: string
+
+  /**
+   * 回滚时长（分钟）
+   */
+  CostMinutes: number
+
+  /**
+   * 快照所属域名
+   */
+  Domain: string
+
+  /**
+   * 解析记录总数
+   */
+  Total: number
+
+  /**
+      * 值为 1，表示超时
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  LogList: Array<string>
+  Timeout: number
 
   /**
-   * 分页大小
-   */
-  PageSize: number
+      * 检查失败数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Failed: number
 
   /**
-   * 日志总条数
-   */
-  TotalCount: number
+      * 失败记录信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FailedRecordList: Array<SnapshotRecord>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1930,6 +2354,46 @@ export interface DescribeRecordTypeRequest {
 + 新套餐：DP_FREE、DP_PLUS、DP_EXTRA、DP_EXPERT、DP_ULTRA 分别对应新免费、个人专业版、企业创业版、企业标准版、企业旗舰版。
       */
   DomainGrade: string
+}
+
+/**
+ * DescribeSnapshotRollbackTask返回参数结构体
+ */
+export interface DescribeSnapshotRollbackTaskResponse {
+  /**
+   * 快照所属域名
+   */
+  Domain: string
+
+  /**
+   * 快照 ID
+   */
+  SnapshotId: string
+
+  /**
+   * 回滚状态
+   */
+  Status: string
+
+  /**
+   * 快照回滚任务 ID
+   */
+  TaskId: number
+
+  /**
+   * 总数量
+   */
+  RecordCount: number
+
+  /**
+   * 开始回滚时间
+   */
+  CreatedOn: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2037,6 +2501,26 @@ export interface DescribeDomainGroupListResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 域名锁定信息
+ */
+export interface LockInfo {
+  /**
+   * 域名 ID
+   */
+  DomainId: number
+
+  /**
+   * 域名解锁码
+   */
+  LockCode: string
+
+  /**
+   * 域名自动解锁日期
+   */
+  LockEnd: string
 }
 
 /**
@@ -2332,6 +2816,26 @@ export interface PayOrderWithBalanceRequest {
 }
 
 /**
+ * ModifySnapshotConfig返回参数结构体
+ */
+export interface ModifySnapshotConfigResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteSnapshot返回参数结构体
+ */
+export interface DeleteSnapshotResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeDomainPurview返回参数结构体
  */
 export interface DescribeDomainPurviewResponse {
@@ -2412,6 +2916,21 @@ export interface ModifyRecordStatusResponse {
 }
 
 /**
+ * RollbackSnapshot返回参数结构体
+ */
+export interface RollbackSnapshotResponse {
+  /**
+   * 回滚任务 ID，用来查询回滚状态
+   */
+  TaskId: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateDomainGroup请求参数结构体
  */
 export interface CreateDomainGroupRequest {
@@ -2422,18 +2941,18 @@ export interface CreateDomainGroupRequest {
 }
 
 /**
- * 解析线路信息
+ * CreateSnapshot请求参数结构体
  */
-export interface LineInfo {
+export interface CreateSnapshotRequest {
   /**
-   * 线路名称
+   * 域名
    */
-  Name: string
+  Domain: string
 
   /**
-   * 线路ID
+   * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
    */
-  LineId: string
+  DomainId?: number
 }
 
 /**
@@ -2444,6 +2963,94 @@ export interface DeleteDomainResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeRecordSnapshotRollbackResult返回参数结构体
+ */
+export interface DescribeRecordSnapshotRollbackResultResponse {
+  /**
+   * 回滚任务 ID
+   */
+  JobId: number
+
+  /**
+   * 回滚状态
+   */
+  Status: string
+
+  /**
+      * 失败的记录信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FailedRecordList: Array<SnapshotRecord>
+
+  /**
+      * 所属域名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Domain: string
+
+  /**
+      * 回滚进度
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Progress: number
+
+  /**
+      * 回滚剩余时间（单位：分钟）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LeftMinutes: number
+
+  /**
+      * 总记录数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Total: number
+
+  /**
+      * 失败记录数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Failed: number
+
+  /**
+      * 成功记录数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Success: number
+
+  /**
+      * 快照下载地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CosUrl: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifySnapshotConfig请求参数结构体
+ */
+export interface ModifySnapshotConfigRequest {
+  /**
+   * 域名
+   */
+  Domain: string
+
+  /**
+   * 备件间隔：空字符串-不备份，half_hour-每半小时，hourly-每小时，daily-每天，monthly-每月
+   */
+  Period: string
+
+  /**
+   * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+   */
+  DomainId?: number
 }
 
 /**
@@ -2499,6 +3106,41 @@ export interface DeleteShareDomainRequest {
    * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
    */
   DomainId?: number
+}
+
+/**
+ * 快照信息
+ */
+export interface SnapshotInfo {
+  /**
+   * 快照的对象存储地址
+   */
+  CosUrl: string
+
+  /**
+   * 添加时间
+   */
+  CreatedOn: string
+
+  /**
+   * 所属域名
+   */
+  Domain: string
+
+  /**
+   * 快照记录 ID
+   */
+  Id: string
+
+  /**
+   * 域名解析记录数
+   */
+  RecordCount: string
+
+  /**
+   * 状态：normal-正常，create-备份中
+   */
+  Status: string
 }
 
 /**
@@ -2584,6 +3226,21 @@ export interface ModifyRecordRemarkRequest {
    * 解析记录备注，删除备注请提交空内容。
    */
   Remark?: string
+}
+
+/**
+ * RollbackRecordSnapshot返回参数结构体
+ */
+export interface RollbackRecordSnapshotResponse {
+  /**
+   * 回滚任务 ID
+   */
+  JobId: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2738,6 +3395,26 @@ export interface ModifyDomainUnlockRequest {
 }
 
 /**
+ * DescribeRecordSnapshotRollbackResult请求参数结构体
+ */
+export interface DescribeRecordSnapshotRollbackResultRequest {
+  /**
+   * 域名
+   */
+  Domain: string
+
+  /**
+   * 回滚任务 ID
+   */
+  JobId: number
+
+  /**
+   * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+   */
+  DomainId?: number
+}
+
+/**
  * ModifyDomainLock返回参数结构体
  */
 export interface ModifyDomainLockResponse {
@@ -2788,39 +3465,24 @@ export interface ModifyVasAutoRenewStatusRequest {
 }
 
 /**
- * 域名锁定信息
+ * DownloadSnapshot返回参数结构体
  */
-export interface LockInfo {
+export interface DownloadSnapshotResponse {
   /**
-   * 域名 ID
+   * 快照下载链接
    */
-  DomainId: number
+  CosUrl: string
 
   /**
-   * 域名解锁码
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  LockCode: string
-
-  /**
-   * 域名自动解锁日期
-   */
-  LockEnd: string
+  RequestId?: string
 }
 
 /**
- * DescribeDomainShareInfo请求参数结构体
+ * DescribeDomainGroupList请求参数结构体
  */
-export interface DescribeDomainShareInfoRequest {
-  /**
-   * 域名
-   */
-  Domain: string
-
-  /**
-   * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
-   */
-  DomainId?: number
-}
+export type DescribeDomainGroupListRequest = null
 
 /**
  * DescribeBatchTask返回参数结构体
@@ -2863,6 +3525,31 @@ export interface DescribeBatchTaskResponse {
 }
 
 /**
+ * CheckRecordSnapshotRollback请求参数结构体
+ */
+export interface CheckRecordSnapshotRollbackRequest {
+  /**
+   * 域名
+   */
+  Domain: string
+
+  /**
+   * 快照 ID
+   */
+  SnapshotId: string
+
+  /**
+   * 解析记录信息
+   */
+  Record: SnapshotRecord
+
+  /**
+   * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+   */
+  DomainId?: number
+}
+
+/**
  * DescribeDomainAnalytics请求参数结构体
  */
 export interface DescribeDomainAnalyticsRequest {
@@ -2900,6 +3587,52 @@ export interface ModifyDynamicDNSResponse {
    * 记录ID
    */
   RecordId: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeSnapshotRollbackResult请求参数结构体
+ */
+export interface DescribeSnapshotRollbackResultRequest {
+  /**
+   * 域名
+   */
+  Domain: string
+
+  /**
+   * 快照回滚任务 ID
+   */
+  TaskId: number
+
+  /**
+   * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+   */
+  DomainId?: number
+}
+
+/**
+ * DescribeDomainLogList返回参数结构体
+ */
+export interface DescribeDomainLogListResponse {
+  /**
+      * 域名信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LogList: Array<string>
+
+  /**
+   * 分页大小
+   */
+  PageSize: number
+
+  /**
+   * 日志总条数
+   */
+  TotalCount: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

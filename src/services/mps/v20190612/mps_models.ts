@@ -6515,6 +6515,12 @@ export interface DescribeInput {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   HLSPullSettings: DescribeInputHLSPullSettings
+
+  /**
+      * 延播平滑吐流配置信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ResilientStream: ResilientStreamConf
 }
 
 /**
@@ -10818,6 +10824,11 @@ export interface CreateInput {
    * 输入的HLS_PULL配置信息。
    */
   HLSPullSettings?: CreateInputHLSPullSettings
+
+  /**
+   * 延播平滑吐流配置信息。
+   */
+  ResilientStream?: ResilientStreamConf
 }
 
 /**
@@ -11765,6 +11776,11 @@ export interface ModifyInput {
    * HLS_PULL的配置信息。
    */
   HLSPullSettings?: CreateInputHLSPullSettings
+
+  /**
+   * 延播平滑吐流配置信息。
+   */
+  ResilientStream?: ResilientStreamConf
 }
 
 /**
@@ -12951,6 +12967,23 @@ export interface DeleteWatermarkTemplateResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 延播平滑吐流配置。
+ */
+export interface ResilientStreamConf {
+  /**
+      * 是否开启延播平滑吐流，true开启，false不开启，默认不开启。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Enable?: boolean
+
+  /**
+      * 延播时间，单位秒，目前支持的范围为10~300秒。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BufferTime?: number
 }
 
 /**

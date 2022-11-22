@@ -188,6 +188,16 @@ export interface SubnetInfos {
    * 安全组id
    */
   SecurityGroups?: Array<string>
+
+  /**
+   * 系统
+   */
+  Os?: string
+
+  /**
+   * 硬件架构
+   */
+  Arch?: string
 }
 
 /**
