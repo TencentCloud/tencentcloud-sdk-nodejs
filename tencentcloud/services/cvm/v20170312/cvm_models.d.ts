@@ -64,6 +64,31 @@ export interface RenewInstancesRequest {
     RenewPortableDataDisk?: boolean;
 }
 /**
+ * DescribeHpcClusters请求参数结构体
+ */
+export interface DescribeHpcClustersRequest {
+    /**
+      * 高性能计算集群ID数组。
+      */
+    HpcClusterIds?: Array<string>;
+    /**
+      * 高性能计算集群名称。
+      */
+    Name?: string;
+    /**
+      * 可用区。
+      */
+    Zone?: string;
+    /**
+      * 偏移量, 默认值0。
+      */
+    Offset?: number;
+    /**
+      * 本次请求量, 默认值20。
+      */
+    Limit?: number;
+}
+/**
  * DescribeImageQuota返回参数结构体
  */
 export interface DescribeImageQuotaResponse {
@@ -878,9 +903,9 @@ export interface ZoneInfo {
     ZoneState: string;
 }
 /**
- * ModifyLaunchTemplateDefaultVersion返回参数结构体
+ * ModifyHpcClusterAttribute返回参数结构体
  */
-export interface ModifyLaunchTemplateDefaultVersionResponse {
+export interface ModifyHpcClusterAttributeResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1036,13 +1061,37 @@ export interface ModifyInstancesVpcAttributeResponse {
     RequestId?: string;
 }
 /**
- * CreateKeyPair返回参数结构体
+ * DescribeLaunchTemplates返回参数结构体
  */
-export interface CreateKeyPairResponse {
+export interface DescribeLaunchTemplatesResponse {
     /**
-      * 密钥对信息。
+      * 符合条件的实例模板数量。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    KeyPair?: KeyPair;
+    TotalCount: number;
+    /**
+      * 实例详细信息列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LaunchTemplateSet: Array<LaunchTemplateInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DeleteHpcClusters返回参数结构体
+ */
+export interface DeleteHpcClustersResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ModifyLaunchTemplateDefaultVersion返回参数结构体
+ */
+export interface ModifyLaunchTemplateDefaultVersionResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1237,9 +1286,17 @@ export interface DisasterRecoverGroupQuota {
     CvmInRackGroupQuota: number;
 }
 /**
- * ModifyInstancesAttribute返回参数结构体
+ * DescribeHpcClusters返回参数结构体
  */
-export interface ModifyInstancesAttributeResponse {
+export interface DescribeHpcClustersResponse {
+    /**
+      * 高性能计算集群信息。
+      */
+    HpcClusterSet?: Array<HpcClusterInfo>;
+    /**
+      * 高性能计算集群总数。
+      */
+    TotalCount?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1461,6 +1518,20 @@ export interface RunSecurityServiceEnabled {
       * 是否开启[云安全](/document/product/296)服务。取值范围：<br><li>TRUE：表示开启云安全服务<br><li>FALSE：表示不开启云安全服务<br><br>默认取值：TRUE。
       */
     Enabled?: boolean;
+}
+/**
+ * CreateHpcCluster返回参数结构体
+ */
+export interface CreateHpcClusterResponse {
+    /**
+      * 高性能计算集群信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    HpcClusterSet?: Array<HpcClusterInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 描述了实例的抽象位置，包括其所在的可用区，所属的项目，宿主机（仅专用宿主机产品可用），母机ip等
@@ -1927,17 +1998,13 @@ export interface CreateDisasterRecoverGroupRequest {
     ClientToken?: string;
 }
 /**
- * DescribeReservedInstancesConfigInfos返回参数结构体
+ * DescribeChcDeniedActions请求参数结构体
  */
-export interface DescribeReservedInstancesConfigInfosResponse {
+export interface DescribeChcDeniedActionsRequest {
     /**
-      * 预留实例静态配置信息列表。
+      * CHC物理服务器实例id
       */
-    ReservedInstanceConfigInfos?: Array<ReservedInstanceConfigInfoItem>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    ChcIds: Array<string>;
 }
 /**
  * DescribeReservedInstances返回参数结构体
@@ -2022,6 +2089,29 @@ export interface PrePaidQuota {
       * 可用区
       */
     Zone: string;
+}
+/**
+ * StopInstances请求参数结构体
+ */
+export interface StopInstancesRequest {
+    /**
+      * 一个或多个待操作的实例ID。可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728)接口返回值中的`InstanceId`获取。每次请求批量实例的上限为100。
+      */
+    InstanceIds: Array<string>;
+    /**
+      * 本参数已弃用，推荐使用StopType，不可以与参数StopType同时使用。表示是否在正常关闭失败后选择强制关闭实例。取值范围：<br><li>TRUE：表示在正常关闭失败后进行强制关闭<br><li>FALSE：表示在正常关闭失败后不进行强制关闭<br><br>默认取值：FALSE。
+      */
+    ForceStop?: boolean;
+    /**
+      * 实例的关闭模式。取值范围：<br><li>SOFT_FIRST：表示在正常关闭失败后进行强制关闭<br><li>HARD：直接强制关闭<br><li>SOFT：仅软关机<br>默认取值：SOFT。
+      */
+    StopType?: string;
+    /**
+      * 按量计费实例关机收费模式。
+取值范围：<br><li>KEEP_CHARGING：关机继续收费<br><li>STOP_CHARGING：关机停止收费<br>默认取值：KEEP_CHARGING。
+该参数只针对部分按量计费云硬盘实例生效，详情参考[按量计费实例关机不收费说明](https://cloud.tencent.com/document/product/213/19918)
+      */
+    StoppedMode?: string;
 }
 /**
  * 描述了数据盘的信息
@@ -2746,19 +2836,13 @@ export interface EnhancedService {
     AutomationService?: RunAutomationServiceEnabled;
 }
 /**
- * DescribeLaunchTemplates返回参数结构体
+ * CreateKeyPair返回参数结构体
  */
-export interface DescribeLaunchTemplatesResponse {
+export interface CreateKeyPairResponse {
     /**
-      * 符合条件的实例模板数量。
-注意：此字段可能返回 null，表示取不到有效值。
+      * 密钥对信息。
       */
-    TotalCount: number;
-    /**
-      * 实例详细信息列表。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    LaunchTemplateSet: Array<LaunchTemplateInfo>;
+    KeyPair?: KeyPair;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3553,44 +3637,21 @@ export interface Filter {
     Values: Array<string>;
 }
 /**
- * 实例启动模板简要信息。
+ * CreateHpcCluster请求参数结构体
  */
-export interface LaunchTemplateInfo {
+export interface CreateHpcClusterRequest {
     /**
-      * 实例启动模版本号。
-注意：此字段可能返回 null，表示取不到有效值。
+      * 可用区。
       */
-    LatestVersionNumber: number;
+    Zone: string;
     /**
-      * 实例启动模板ID。
-注意：此字段可能返回 null，表示取不到有效值。
+      * 高性能计算集群名称。
       */
-    LaunchTemplateId: string;
+    Name: string;
     /**
-      * 实例启动模板名。
-注意：此字段可能返回 null，表示取不到有效值。
+      * 高性能计算集群备注。
       */
-    LaunchTemplateName: string;
-    /**
-      * 实例启动模板默认版本号。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    DefaultVersionNumber: number;
-    /**
-      * 实例启动模板包含的版本总数量。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    LaunchTemplateVersionCount: number;
-    /**
-      * 创建该模板的用户UIN。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    CreatedBy: string;
-    /**
-      * 创建该模板的时间。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    CreationTime: string;
+    Remark?: string;
 }
 /**
  * InquiryPriceResetInstancesInternetMaxBandwidth请求参数结构体
@@ -3621,6 +3682,23 @@ export interface ModifyHostsAttributeResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * ModifyHpcClusterAttribute请求参数结构体
+ */
+export interface ModifyHpcClusterAttributeRequest {
+    /**
+      * 高性能计算集群ID。
+      */
+    HpcClusterId: string;
+    /**
+      * 高性能计算集群新名称。
+      */
+    Name?: string;
+    /**
+      * 高性能计算集群新备注。
+      */
+    Remark?: string;
 }
 /**
  * ModifyChcAttribute返回参数结构体
@@ -4290,6 +4368,19 @@ export interface ReservedInstances {
     ReservedInstanceName: string;
 }
 /**
+ * PurchaseReservedInstancesOffering返回参数结构体
+ */
+export interface PurchaseReservedInstancesOfferingResponse {
+    /**
+      * 已购买预留实例计费ID
+      */
+    ReservedInstanceId?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DeleteImages返回参数结构体
  */
 export interface DeleteImagesResponse {
@@ -4434,6 +4525,15 @@ export interface InquiryPriceResetInstancesTypeResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DeleteHpcClusters请求参数结构体
+ */
+export interface DeleteHpcClustersRequest {
+    /**
+      * 高性能计算集群ID列表。
+      */
+    HpcClusterIds: Array<string>;
 }
 /**
  * 描述可购买预留实例计费信息
@@ -4629,13 +4729,17 @@ export interface RegionInfo {
     RegionState: string;
 }
 /**
- * DescribeChcDeniedActions请求参数结构体
+ * DescribeReservedInstancesConfigInfos返回参数结构体
  */
-export interface DescribeChcDeniedActionsRequest {
+export interface DescribeReservedInstancesConfigInfosResponse {
     /**
-      * CHC物理服务器实例id
+      * 预留实例静态配置信息列表。
       */
-    ChcIds: Array<string>;
+    ReservedInstanceConfigInfos?: Array<ReservedInstanceConfigInfoItem>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * InquiryPriceResetInstancesType请求参数结构体
@@ -4664,27 +4768,13 @@ export interface ModifyLaunchTemplateDefaultVersionRequest {
     DefaultVersion: number;
 }
 /**
- * StopInstances请求参数结构体
+ * ModifyInstancesAttribute返回参数结构体
  */
-export interface StopInstancesRequest {
+export interface ModifyInstancesAttributeResponse {
     /**
-      * 一个或多个待操作的实例ID。可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728)接口返回值中的`InstanceId`获取。每次请求批量实例的上限为100。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    InstanceIds: Array<string>;
-    /**
-      * 本参数已弃用，推荐使用StopType，不可以与参数StopType同时使用。表示是否在正常关闭失败后选择强制关闭实例。取值范围：<br><li>TRUE：表示在正常关闭失败后进行强制关闭<br><li>FALSE：表示在正常关闭失败后不进行强制关闭<br><br>默认取值：FALSE。
-      */
-    ForceStop?: boolean;
-    /**
-      * 实例的关闭模式。取值范围：<br><li>SOFT_FIRST：表示在正常关闭失败后进行强制关闭<br><li>HARD：直接强制关闭<br><li>SOFT：仅软关机<br>默认取值：SOFT。
-      */
-    StopType?: string;
-    /**
-      * 按量计费实例关机收费模式。
-取值范围：<br><li>KEEP_CHARGING：关机继续收费<br><li>STOP_CHARGING：关机停止收费<br>默认取值：KEEP_CHARGING。
-该参数只针对部分按量计费云硬盘实例生效，详情参考[按量计费实例关机不收费说明](https://cloud.tencent.com/document/product/213/19918)
-      */
-    StoppedMode?: string;
+    RequestId?: string;
 }
 /**
  * CHC物理服务器实例禁止操作的返回结构体
@@ -5105,6 +5195,46 @@ export interface ResizeInstanceDisksRequest {
     ResizeOnline?: boolean;
 }
 /**
+ * 实例启动模板简要信息。
+ */
+export interface LaunchTemplateInfo {
+    /**
+      * 实例启动模版本号。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LatestVersionNumber: number;
+    /**
+      * 实例启动模板ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LaunchTemplateId: string;
+    /**
+      * 实例启动模板名。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LaunchTemplateName: string;
+    /**
+      * 实例启动模板默认版本号。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DefaultVersionNumber: number;
+    /**
+      * 实例启动模板包含的版本总数量。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LaunchTemplateVersionCount: number;
+    /**
+      * 创建该模板的用户UIN。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreatedBy: string;
+    /**
+      * 创建该模板的时间。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreationTime: string;
+}
+/**
  * DescribeInstanceFamilyConfigs请求参数结构体
  */
 export declare type DescribeInstanceFamilyConfigsRequest = null;
@@ -5118,17 +5248,45 @@ export interface DescribeInstanceInternetBandwidthConfigsRequest {
     InstanceId: string;
 }
 /**
- * PurchaseReservedInstancesOffering返回参数结构体
+ * 高性能计算集群
  */
-export interface PurchaseReservedInstancesOfferingResponse {
+export interface HpcClusterInfo {
     /**
-      * 已购买预留实例计费ID
+      * 高性能计算集群ID
       */
-    ReservedInstanceId?: string;
+    HpcClusterId: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 高性能计算集群名
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    RequestId?: string;
+    Name: string;
+    /**
+      * 高性能计算集群备注
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Remark: string;
+    /**
+      * 集群下设备容量
+      */
+    CvmQuotaTotal: number;
+    /**
+      * 集群所在可用区
+      */
+    Zone: string;
+    /**
+      * 集群当前已有设备量
+      */
+    CurrentNum: number;
+    /**
+      * 集群创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreateTime: string;
+    /**
+      * 集群内实例ID列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InstanceIds: Array<string>;
 }
 /**
  * HDD的本地存储信息

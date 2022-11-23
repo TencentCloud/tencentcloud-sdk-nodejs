@@ -258,6 +258,26 @@ export interface DeleteDomainAliasResponse {
 }
 
 /**
+ * 解析记录分组信息
+ */
+export interface RecordGroupInfo {
+  /**
+   * 分组 ID
+   */
+  GroupId: number
+
+  /**
+   * 分组名称
+   */
+  GroupName: string
+
+  /**
+   * 分组类型：system-系统；user-用户
+   */
+  GroupType: string
+}
+
+/**
  * ModifySubdomainStatus请求参数结构体
  */
 export interface ModifySubdomainStatusRequest {
@@ -416,6 +436,31 @@ export interface DomainAnalyticsInfo {
 }
 
 /**
+ * ModifyRecordGroup请求参数结构体
+ */
+export interface ModifyRecordGroupRequest {
+  /**
+   * 域名
+   */
+  Domain: string
+
+  /**
+   * 分组名称
+   */
+  GroupName: string
+
+  /**
+   * 要修改的分组 ID
+   */
+  GroupId: number
+
+  /**
+   * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+   */
+  DomainId?: number
+}
+
+/**
  * DescribeBatchTask请求参数结构体
  */
 export interface DescribeBatchTaskRequest {
@@ -454,6 +499,26 @@ export interface CreateSnapshotResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DeleteRecordGroup请求参数结构体
+ */
+export interface DeleteRecordGroupRequest {
+  /**
+   * 域名
+   */
+  Domain: string
+
+  /**
+   * 分组 ID
+   */
+  GroupId: number
+
+  /**
+   * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+   */
+  DomainId?: number
 }
 
 /**
@@ -680,6 +745,21 @@ export interface CreateDomainBatchRequest {
 }
 
 /**
+ * ModifyRecordGroup返回参数结构体
+ */
+export interface ModifyRecordGroupResponse {
+  /**
+   * 修改的分组 ID
+   */
+  GroupId: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeDomainShareInfo请求参数结构体
  */
 export interface DescribeDomainShareInfoRequest {
@@ -892,6 +972,31 @@ export interface RollbackRecordSnapshotRequest {
    * 之前的快照回滚任务 ID
    */
   TaskId: number
+
+  /**
+   * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+   */
+  DomainId?: number
+}
+
+/**
+ * ModifyRecordToGroup请求参数结构体
+ */
+export interface ModifyRecordToGroupRequest {
+  /**
+   * 域名
+   */
+  Domain: string
+
+  /**
+   * 分组 ID
+   */
+  GroupId: number
+
+  /**
+   * 记录 ID，多个 ID 用竖线“|”分割
+   */
+  RecordId: string
 
   /**
    * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
@@ -1653,14 +1758,9 @@ export interface CreateRecordResponse {
 }
 
 /**
- * DescribeRecord返回参数结构体
+ * DeleteRecordGroup返回参数结构体
  */
-export interface DescribeRecordResponse {
-  /**
-   * 记录信息
-   */
-  RecordInfo: RecordInfo
-
+export interface DeleteRecordGroupResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1865,6 +1965,16 @@ export interface ModifyRecordResponse {
    */
   RecordId: number
 
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyRecordToGroup返回参数结构体
+ */
+export interface ModifyRecordToGroupResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2826,6 +2936,21 @@ export interface ModifySnapshotConfigResponse {
 }
 
 /**
+ * DescribeRecord返回参数结构体
+ */
+export interface DescribeRecordResponse {
+  /**
+   * 记录信息
+   */
+  RecordInfo: RecordInfo
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteSnapshot返回参数结构体
  */
 export interface DeleteSnapshotResponse {
@@ -2916,6 +3041,26 @@ export interface ModifyRecordStatusResponse {
 }
 
 /**
+ * CreateRecordGroup请求参数结构体
+ */
+export interface CreateRecordGroupRequest {
+  /**
+   * 域名
+   */
+  Domain: string
+
+  /**
+   * 分组名称
+   */
+  GroupName: string
+
+  /**
+   * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+   */
+  DomainId?: number
+}
+
+/**
  * RollbackSnapshot返回参数结构体
  */
 export interface RollbackSnapshotResponse {
@@ -2923,6 +3068,21 @@ export interface RollbackSnapshotResponse {
    * 回滚任务 ID，用来查询回滚状态
    */
   TaskId: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeRecordGroupList返回参数结构体
+ */
+export interface DescribeRecordGroupListResponse {
+  /**
+   * 分组列表
+   */
+  GroupList: Array<RecordGroupInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3186,6 +3346,31 @@ export interface ModifyDynamicDNSRequest {
    * TTL值，如果不传，默认为域名的TTL值。
    */
   Ttl?: number
+}
+
+/**
+ * DescribeRecordGroupList请求参数结构体
+ */
+export interface DescribeRecordGroupListRequest {
+  /**
+   * 域名
+   */
+  Domain: string
+
+  /**
+   * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+   */
+  DomainId?: number
+
+  /**
+   * 分页开始位置
+   */
+  Offset?: number
+
+  /**
+   * 分页每页数
+   */
+  Limit?: number
 }
 
 /**
@@ -3472,6 +3657,21 @@ export interface DownloadSnapshotResponse {
    * 快照下载链接
    */
   CosUrl: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateRecordGroup返回参数结构体
+ */
+export interface CreateRecordGroupResponse {
+  /**
+   * 新增的分组 ID
+   */
+  GroupId: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

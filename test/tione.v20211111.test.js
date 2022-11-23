@@ -438,6 +438,16 @@ it("tione.v20211111.DescribeModelServices", async function () {
     }
 })
 
+it("tione.v20211111.ModifyModelService", async function () {
+    try {
+       const data = await client.ModifyModelService({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tione.v20211111.DescribeTrainingTask", async function () {
     try {
        const data = await client.DescribeTrainingTask({})

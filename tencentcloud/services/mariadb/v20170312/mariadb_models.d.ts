@@ -889,6 +889,20 @@ export interface DcnDetailItem {
       * 1： 主实例（独享型）, 2: 主实例, 3： 灾备实例, 4： 灾备实例（独享型）
       */
     InstanceType: number;
+    /**
+      * DCN复制的配置信息；对于主实例，此字段为null
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ReplicaConfig: DCNReplicaConfig;
+    /**
+      * DCN复制的状态；对于主实例，此字段为null
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ReplicaStatus: DCNReplicaStatus;
+    /**
+      * 是否开启了 kms
+      */
+    EncryptStatus: number;
 }
 /**
  * ResetAccountPassword请求参数结构体
@@ -921,13 +935,18 @@ export interface CopyAccountPrivilegesResponse {
     RequestId?: string;
 }
 /**
- * ModifyRealServerAccessStrategy返回参数结构体
+ * DCN的状态信息
  */
-export interface ModifyRealServerAccessStrategyResponse {
+export interface DCNReplicaStatus {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * DCN 的运行状态，START为正常运行，STOP为暂停，
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    RequestId?: string;
+    Status: string;
+    /**
+      * 当前延迟情况，取备实例的 master 节点的 delay 值
+      */
+    Delay: number;
 }
 /**
  * CloneAccount请求参数结构体
@@ -1411,7 +1430,7 @@ export interface Deal {
       */
     FlowId: number;
     /**
-      * 只有创建实例的订单会填充该字段，表示该订单创建的实例的 ID。
+      * 只有创建实例且已完成发货的订单会填充该字段，表示该订单创建的实例的 ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
     InstanceIds: Array<string>;
@@ -2666,6 +2685,31 @@ export interface DescribeFlowRequest {
     FlowId: number;
 }
 /**
+ * dcn 配置情况
+ */
+export interface DCNReplicaConfig {
+    /**
+      * DCN 运行状态，START为正常运行，STOP为暂停
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RoReplicationMode: string;
+    /**
+      * 延迟复制的类型，DEFAULT为正常，DUE_TIME为指定时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DelayReplicationType: string;
+    /**
+      * 延迟复制的指定时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DueTime: string;
+    /**
+      * 延迟复制时的延迟秒数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ReplicationDelay: number;
+}
+/**
  * ModifyAccountPrivileges请求参数结构体
  */
 export interface ModifyAccountPrivilegesRequest {
@@ -2967,6 +3011,15 @@ export interface LogFileInfo {
       * 文件名
       */
     FileName: string;
+}
+/**
+ * ModifyRealServerAccessStrategy返回参数结构体
+ */
+export interface ModifyRealServerAccessStrategyResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * RestartDBInstances请求参数结构体

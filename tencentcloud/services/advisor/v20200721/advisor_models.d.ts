@@ -21,7 +21,7 @@ export interface DescribeTaskStrategyRisksRequest {
       */
     StrategyId: number;
     /**
-      * 限制数量,默认100
+      * 返回数量,默认值为100,最大值为200
       */
     Limit?: number;
     /**

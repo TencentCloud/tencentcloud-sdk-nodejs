@@ -228,6 +228,16 @@ it("cvm.v20170312.ModifyChcAttribute", async function () {
     }
 })
 
+it("cvm.v20170312.CreateHpcCluster", async function () {
+    try {
+       const data = await client.CreateHpcCluster({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cvm.v20170312.DisassociateSecurityGroups", async function () {
     try {
        const data = await client.DisassociateSecurityGroups({})
@@ -308,6 +318,16 @@ it("cvm.v20170312.ModifyDisasterRecoverGroupAttribute", async function () {
     }
 })
 
+it("cvm.v20170312.DescribeHpcClusters", async function () {
+    try {
+       const data = await client.DescribeHpcClusters({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cvm.v20170312.DescribeInstancesOperationLimit", async function () {
     try {
        const data = await client.DescribeInstancesOperationLimit({})
@@ -318,9 +338,9 @@ it("cvm.v20170312.DescribeInstancesOperationLimit", async function () {
     }
 })
 
-it("cvm.v20170312.DescribeRegions", async function () {
+it("cvm.v20170312.ModifyHostsAttribute", async function () {
     try {
-       const data = await client.DescribeRegions({})
+       const data = await client.ModifyHostsAttribute({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -328,9 +348,9 @@ it("cvm.v20170312.DescribeRegions", async function () {
     }
 })
 
-it("cvm.v20170312.StopInstances", async function () {
+it("cvm.v20170312.DescribeRegions", async function () {
     try {
-       const data = await client.StopInstances({})
+       const data = await client.DescribeRegions({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -618,9 +638,9 @@ it("cvm.v20170312.RebootInstances", async function () {
     }
 })
 
-it("cvm.v20170312.ModifyKeyPairAttribute", async function () {
+it("cvm.v20170312.DeleteHpcClusters", async function () {
     try {
-       const data = await client.ModifyKeyPairAttribute({})
+       const data = await client.DeleteHpcClusters({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -628,9 +648,29 @@ it("cvm.v20170312.ModifyKeyPairAttribute", async function () {
     }
 })
 
-it("cvm.v20170312.ModifyHostsAttribute", async function () {
+it("cvm.v20170312.StopInstances", async function () {
     try {
-       const data = await client.ModifyHostsAttribute({})
+       const data = await client.StopInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cvm.v20170312.ModifyHpcClusterAttribute", async function () {
+    try {
+       const data = await client.ModifyHpcClusterAttribute({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cvm.v20170312.ModifyKeyPairAttribute", async function () {
+    try {
+       const data = await client.ModifyKeyPairAttribute({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -3153,6 +3153,36 @@ off(关闭)
 注意：此字段可能返回 null，表示取不到有效值。
       */
     UdpFloodPktThreshold: number;
+    /**
+      * ACK FLOOD流量阈值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AckFloodThreshold: number;
+    /**
+      * ACK FLOOD包量阈值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AckFloodPktThreshold: number;
+    /**
+      * SYNACK FLOOD流量阈值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SynAckFloodThreshold: number;
+    /**
+      * SYNACK FLOOD包量阈值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SynAckFloodPktThreshold: number;
+    /**
+      * RST FLOOD流量阈值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RstFloodThreshold: number;
+    /**
+      * RST FLOOD包量阈值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RstFloodPktThreshold: number;
 }
 /**
  * DescribeListProtectThresholdConfig返回参数结构体
@@ -3243,6 +3273,30 @@ export interface ModifyDDoSThresholdRequest {
       * UDP FLOOD包量阈值
       */
     UdpFloodPktThreshold?: number;
+    /**
+      * ACK FLOOD流量阈值
+      */
+    AckFloodThreshold?: number;
+    /**
+      * ACK FLOOD包量阈值
+      */
+    AckFloodPktThreshold?: number;
+    /**
+      * SYNACK FLOOD流量阈值
+      */
+    SynAckFloodThreshold?: number;
+    /**
+      * SYNACK FLOOD包量阈值
+      */
+    SynAckFloodPktThreshold?: number;
+    /**
+      * RST FLOOD流量阈值
+      */
+    RstFloodThreshold?: number;
+    /**
+      * RST FLOOD包量阈值
+      */
+    RstFloodPktThreshold?: number;
 }
 /**
  * ModifyDDoSLevel请求参数结构体

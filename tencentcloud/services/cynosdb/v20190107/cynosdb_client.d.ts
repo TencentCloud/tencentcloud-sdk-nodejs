@@ -42,7 +42,7 @@ export declare class Client extends AbstractClient {
     /**
      * 查询用户指定产品下的所有参数模板信息
      */
-    DescribeParamTemplates(req?: DescribeParamTemplatesRequest, cb?: (error: string, rep: DescribeParamTemplatesResponse) => void): Promise<DescribeParamTemplatesResponse>;
+    DescribeParamTemplates(req: DescribeParamTemplatesRequest, cb?: (error: string, rep: DescribeParamTemplatesResponse) => void): Promise<DescribeParamTemplatesResponse>;
     /**
      * 为集群删除手动备份，无法删除自动备份
      */

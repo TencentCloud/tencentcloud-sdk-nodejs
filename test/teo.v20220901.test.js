@@ -1258,16 +1258,6 @@ it("teo.v20220901.DescribeAliasDomains", async function () {
     }
 })
 
-it("teo.v20220901.DescribeBillingData", async function () {
-    try {
-       const data = await client.DescribeBillingData({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("teo.v20220901.ModifyDnssec", async function () {
     try {
        const data = await client.ModifyDnssec({})

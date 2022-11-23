@@ -114,6 +114,7 @@ import {
   RollbackTimeRange,
   OfflineInstanceRequest,
   NetAddr,
+  TemplateParamInfo,
   AssociateSecurityGroupsResponse,
   DescribeResourcesByDealNameRequest,
   CreateBackupResponse,
@@ -278,7 +279,7 @@ export class Client extends AbstractClient {
    * 查询用户指定产品下的所有参数模板信息
    */
   async DescribeParamTemplates(
-    req?: DescribeParamTemplatesRequest,
+    req: DescribeParamTemplatesRequest,
     cb?: (error: string, rep: DescribeParamTemplatesResponse) => void
   ): Promise<DescribeParamTemplatesResponse> {
     return this.request("DescribeParamTemplates", req, cb)

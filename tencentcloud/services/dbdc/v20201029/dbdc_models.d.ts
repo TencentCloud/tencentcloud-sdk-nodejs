@@ -399,6 +399,10 @@ export interface HostDetail {
       * 计费ID
       */
     Pid: number;
+    /**
+      * 独享集群实例Id
+      */
+    InstanceId: string;
 }
 /**
  * 集群设备组信息。

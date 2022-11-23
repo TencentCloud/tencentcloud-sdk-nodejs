@@ -405,52 +405,24 @@ export interface DDoSAttackEventDetailData {
 }
 
 /**
- * DescribeBillingData请求参数结构体
+ * DescribeBotData返回参数结构体
  */
-export interface DescribeBillingDataRequest {
+export interface DescribeBotDataResponse {
   /**
-   * 起始时间。
+      * Bot攻击的数据列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Data: Array<SecEntry>
+
+  /**
+   * 查询结果的总条数。
    */
-  StartTime: string
+  TotalCount: number
 
   /**
-   * 结束时间。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  EndTime: string
-
-  /**
-      * 时间粒度, 支持指定以下几种粒度：
-<ul>
-<li>min：1分钟粒度；</li>
-<li>5min：5分钟粒度；</li>
-<li>hour：1小时粒度；</li>
-<li>day：天粒度；</li>
-</ul>
-      */
-  Interval: string
-
-  /**
-      * 指标名,支持:
-<ul>
-<li>acc_flux: 内容加速流量用量；</li>
-<li>quic_request: QUIC 请求数用量；</li>
-<li>sec_flux: 安全流量用量；</li>
-<li>sec_request_clean: 安全干净流量请求数；</li>
-</ul>
-      */
-  MetricName: string
-
-  /**
-      * 筛选条件. 支持:
-<ul>
-<li>zone: 站点级数据；</li>
-<li>plan: 套餐级数据；</li>
-<li>service: l4 / l7分别筛选四七层数据；</li>
-<li>tagKey: 标签Key；</li>
-<li>tagValue: 标签Value。</li>
-</ul>
-      */
-  Filters: Array<BillingDataFilter>
+  RequestId?: string
 }
 
 /**
@@ -2039,25 +2011,6 @@ export interface DescribeDDoSMajorAttackEventRequest {
 <li>mainland：中国大陆地区数据。</li>不填将根据用户所在地智能选择地区。
       */
   Area?: string
-}
-
-/**
- * Dns数据曲线过滤参数
- */
-export interface BillingDataFilter {
-  /**
-      * 参数名称，取值范围：
-zone：站点名
-host：域名
-proxy: 四层实例
-plan: 套餐
-      */
-  Type: string
-
-  /**
-   * 参数值
-   */
-  Value: string
 }
 
 /**
@@ -7516,27 +7469,6 @@ export interface AscriptionInfo {
 }
 
 /**
- * DescribeBotData返回参数结构体
- */
-export interface DescribeBotDataResponse {
-  /**
-      * Bot攻击的数据列表。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Data: Array<SecEntry>
-
-  /**
-   * 查询结果的总条数。
-   */
-  TotalCount: number
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DescribeLogSets返回参数结构体
  */
 export interface DescribeLogSetsResponse {
@@ -11266,28 +11198,6 @@ export interface PostMaxSize {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   MaxSize?: number
-}
-
-/**
- * DescribeBillingData返回参数结构体
- */
-export interface DescribeBillingDataResponse {
-  /**
-      * 统计曲线数据
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Data: Array<DnsData>
-
-  /**
-      * 时间粒度
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Interval: string
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**

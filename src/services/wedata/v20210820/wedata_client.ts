@@ -120,6 +120,7 @@ import {
   DescribeProdTasksRequest,
   CheckDuplicateTemplateNameRequest,
   BatchUpdateIntegrationTasksRequest,
+  CreateResourcePathRequest,
   ResumeIntegrationTaskResponse,
   ModifyTaskNameResponse,
   DescribeTaskReportDetailListResponse,
@@ -281,6 +282,7 @@ import {
   DescribeIntegrationStatisticsTaskStatusTrendRequest,
   DescribeRuleHistoryByPageResponse,
   UnlockIntegrationTaskRequest,
+  ModifyDimensionWeightResponse,
   ModifyTaskAlarmRegularResponse,
   CreateRuleResponse,
   ModifyTaskLinksResponse,
@@ -309,6 +311,7 @@ import {
   DescribeRulesByPageRequest,
   DescribeTopTableStatResponse,
   ProdSchedulerTask,
+  SourceFieldInfo,
   FreezeTasksByMultiWorkflowResponse,
   SaveCustomFunctionResponse,
   OperateResult,
@@ -401,7 +404,7 @@ import {
   CreateIntegrationTaskRequest,
   FieldConfig,
   DescribeRealTimeTaskMetricOverviewRequest,
-  ModifyDimensionWeightResponse,
+  CreateResourcePathResponse,
   DeleteFolderResponse,
   DescribeResourceManagePathTreesResponse,
   RuleGroupMonitor,
@@ -953,6 +956,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeQualityScoreResponse) => void
   ): Promise<DescribeQualityScoreResponse> {
     return this.request("DescribeQualityScore", req, cb)
+  }
+
+  /**
+   * 文件路径的根目录为 /datastudio/resource，如果要在根目录下创建 aaa 文件夹，FilePath的值应该为 /datastudio/resource，如果根目录下已经创建了 aaa 文件夹，要在 aaa 下创建  bbb 文件夹，FilePath的值应该为 /datastudio/resource/aaa
+   */
+  async CreateResourcePath(
+    req: CreateResourcePathRequest,
+    cb?: (error: string, rep: CreateResourcePathResponse) => void
+  ): Promise<CreateResourcePathResponse> {
+    return this.request("CreateResourcePath", req, cb)
   }
 
   /**
@@ -2141,14 +2154,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-拉取文件夹下的工作流
-     */
-  async DescribeFolderWorkflowList(
-    req: DescribeFolderWorkflowListRequest,
-    cb?: (error: string, rep: DescribeFolderWorkflowListResponse) => void
-  ): Promise<DescribeFolderWorkflowListResponse> {
-    return this.request("DescribeFolderWorkflowList", req, cb)
+   * 查询规则组数据对象列表
+   */
+  async DescribeDataObjects(
+    req: DescribeDataObjectsRequest,
+    cb?: (error: string, rep: DescribeDataObjectsResponse) => void
+  ): Promise<DescribeDataObjectsResponse> {
+    return this.request("DescribeDataObjects", req, cb)
   }
 
   /**
@@ -2385,13 +2397,14 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询规则组数据对象列表
-   */
-  async DescribeDataObjects(
-    req: DescribeDataObjectsRequest,
-    cb?: (error: string, rep: DescribeDataObjectsResponse) => void
-  ): Promise<DescribeDataObjectsResponse> {
-    return this.request("DescribeDataObjects", req, cb)
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+拉取文件夹下的工作流
+     */
+  async DescribeFolderWorkflowList(
+    req: DescribeFolderWorkflowListRequest,
+    cb?: (error: string, rep: DescribeFolderWorkflowListResponse) => void
+  ): Promise<DescribeFolderWorkflowListResponse> {
+    return this.request("DescribeFolderWorkflowList", req, cb)
   }
 
   /**

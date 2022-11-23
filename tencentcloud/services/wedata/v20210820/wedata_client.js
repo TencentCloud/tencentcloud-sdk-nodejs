@@ -275,6 +275,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeQualityScore", req, cb);
     }
     /**
+     * 文件路径的根目录为 /datastudio/resource，如果要在根目录下创建 aaa 文件夹，FilePath的值应该为 /datastudio/resource，如果根目录下已经创建了 aaa 文件夹，要在 aaa 下创建  bbb 文件夹，FilePath的值应该为 /datastudio/resource/aaa
+     */
+    async CreateResourcePath(req, cb) {
+        return this.request("CreateResourcePath", req, cb);
+    }
+    /**
      * 数据质量概览页面触发维度分布统计接口
      */
     async DescribeRuleDimStat(req, cb) {
@@ -996,11 +1002,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteCustomFunction", req, cb);
     }
     /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-拉取文件夹下的工作流
+     * 查询规则组数据对象列表
      */
-    async DescribeFolderWorkflowList(req, cb) {
-        return this.request("DescribeFolderWorkflowList", req, cb);
+    async DescribeDataObjects(req, cb) {
+        return this.request("DescribeDataObjects", req, cb);
     }
     /**
      * 查询集成任务
@@ -1144,10 +1149,11 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTaskInstanceReportDetail", req, cb);
     }
     /**
-     * 查询规则组数据对象列表
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+拉取文件夹下的工作流
      */
-    async DescribeDataObjects(req, cb) {
-        return this.request("DescribeDataObjects", req, cb);
+    async DescribeFolderWorkflowList(req, cb) {
+        return this.request("DescribeFolderWorkflowList", req, cb);
     }
     /**
      * 更新规则组订阅信息

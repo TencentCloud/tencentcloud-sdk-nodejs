@@ -280,6 +280,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeModelServices", req, cb);
     }
     /**
+     * 用于更新模型服务
+     */
+    async ModifyModelService(req, cb) {
+        return this.request("ModifyModelService", req, cb);
+    }
+    /**
      * 训练任务详情
      */
     async DescribeTrainingTask(req, cb) {

@@ -58,6 +58,7 @@ import {
   APIConfigDetail,
   InferTemplate,
   StopBatchTaskRequest,
+  ModifyModelServiceRequest,
   FrameworkVersion,
   ModifyModelServicePartialConfigResponse,
   DescribeModelAccEngineVersionsResponse,
@@ -136,6 +137,7 @@ import {
   DescribeModelServiceHistoryResponse,
   BatchModelAccTask,
   Filter,
+  ModifyModelServiceResponse,
   DeleteBatchTaskResponse,
   EngineVersion,
   DescribeBatchTasksRequest,
@@ -635,6 +637,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeModelServicesResponse) => void
   ): Promise<DescribeModelServicesResponse> {
     return this.request("DescribeModelServices", req, cb)
+  }
+
+  /**
+   * 用于更新模型服务
+   */
+  async ModifyModelService(
+    req: ModifyModelServiceRequest,
+    cb?: (error: string, rep: ModifyModelServiceResponse) => void
+  ): Promise<ModifyModelServiceResponse> {
+    return this.request("ModifyModelService", req, cb)
   }
 
   /**

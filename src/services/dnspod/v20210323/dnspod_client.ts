@@ -25,14 +25,17 @@ import {
   ModifyVasAutoRenewStatusResponse,
   RollbackSnapshotRequest,
   DeleteDomainAliasResponse,
+  RecordGroupInfo,
   ModifySubdomainStatusRequest,
   CreateRecordBatchResponse,
   DescribeSnapshotListResponse,
   CreateDomainBatchRecord,
   DomainAnalyticsInfo,
+  ModifyRecordGroupRequest,
   DescribeBatchTaskRequest,
   DomainAnalyticsDetail,
   CreateSnapshotResponse,
+  DeleteRecordGroupRequest,
   PayOrderWithBalanceResponse,
   DescribeDomainResponse,
   DescribeSnapshotListRequest,
@@ -40,6 +43,7 @@ import {
   SnapshotPageInfo,
   DomainInfo,
   CreateDomainBatchRequest,
+  ModifyRecordGroupResponse,
   DescribeDomainShareInfoRequest,
   DomainListItem,
   DescribeRecordTypeResponse,
@@ -47,6 +51,7 @@ import {
   DeleteSnapshotRequest,
   DescribeDomainAliasListResponse,
   RollbackRecordSnapshotRequest,
+  ModifyRecordToGroupRequest,
   DescribeSnapshotConfigResponse,
   RecordCountInfo,
   DeleteShareDomainResponse,
@@ -78,13 +83,14 @@ import {
   GroupInfo,
   ModifyRecordStatusRequest,
   CreateRecordResponse,
-  DescribeRecordResponse,
+  DeleteRecordGroupResponse,
   RecordInfo,
   DescribeSnapshotRollbackTaskRequest,
   CheckRecordSnapshotRollbackResponse,
   CreateRecordBatchDetail,
   DescribeSubdomainAnalyticsResponse,
   ModifyRecordResponse,
+  ModifyRecordToGroupResponse,
   SnapshotRecord,
   ModifyDomainUnlockResponse,
   DescribeDomainLogListRequest,
@@ -118,13 +124,16 @@ import {
   DescribeRecordListRequest,
   PayOrderWithBalanceRequest,
   ModifySnapshotConfigResponse,
+  DescribeRecordResponse,
   DeleteSnapshotResponse,
   DescribeDomainPurviewResponse,
   Deals,
   ModifySubdomainStatusResponse,
   DescribeDomainAnalyticsResponse,
   ModifyRecordStatusResponse,
+  CreateRecordGroupRequest,
   RollbackSnapshotResponse,
+  DescribeRecordGroupListResponse,
   CreateDomainGroupRequest,
   CreateSnapshotRequest,
   DeleteDomainResponse,
@@ -135,6 +144,7 @@ import {
   DeleteShareDomainRequest,
   SnapshotInfo,
   ModifyDynamicDNSRequest,
+  DescribeRecordGroupListRequest,
   PurviewInfo,
   ModifyRecordRemarkRequest,
   RollbackRecordSnapshotResponse,
@@ -150,6 +160,7 @@ import {
   CreateDealResponse,
   ModifyVasAutoRenewStatusRequest,
   DownloadSnapshotResponse,
+  CreateRecordGroupResponse,
   DescribeDomainGroupListRequest,
   DescribeBatchTaskResponse,
   CheckRecordSnapshotRollbackRequest,
@@ -229,6 +240,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除记录分组
+   */
+  async DeleteRecordGroup(
+    req: DeleteRecordGroupRequest,
+    cb?: (error: string, rep: DeleteRecordGroupResponse) => void
+  ): Promise<DeleteRecordGroupResponse> {
+    return this.request("DeleteRecordGroup", req, cb)
+  }
+
+  /**
+   * 修改域名状态
+   */
+  async ModifyDomainStatus(
+    req: ModifyDomainStatusRequest,
+    cb?: (error: string, rep: ModifyDomainStatusResponse) => void
+  ): Promise<ModifyDomainStatusResponse> {
+    return this.request("ModifyDomainStatus", req, cb)
+  }
+
+  /**
    * 获取域名别名列表
    */
   async DescribeDomainAliasList(
@@ -279,13 +310,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改域名状态
+   * 查询解析记录分组列表
    */
-  async ModifyDomainStatus(
-    req: ModifyDomainStatusRequest,
-    cb?: (error: string, rep: ModifyDomainStatusResponse) => void
-  ): Promise<ModifyDomainStatusResponse> {
-    return this.request("ModifyDomainStatus", req, cb)
+  async DescribeRecordGroupList(
+    req: DescribeRecordGroupListRequest,
+    cb?: (error: string, rep: DescribeRecordGroupListResponse) => void
+  ): Promise<DescribeRecordGroupListResponse> {
+    return this.request("DescribeRecordGroupList", req, cb)
   }
 
   /**
@@ -369,13 +400,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 增值服务自动续费设置
+   * 获取域名信息
    */
-  async ModifyVasAutoRenewStatus(
-    req: ModifyVasAutoRenewStatusRequest,
-    cb?: (error: string, rep: ModifyVasAutoRenewStatusResponse) => void
-  ): Promise<ModifyVasAutoRenewStatusResponse> {
-    return this.request("ModifyVasAutoRenewStatus", req, cb)
+  async DescribeDomain(
+    req: DescribeDomainRequest,
+    cb?: (error: string, rep: DescribeDomainResponse) => void
+  ): Promise<DescribeDomainResponse> {
+    return this.request("DescribeDomain", req, cb)
+  }
+
+  /**
+   * 修改记录分组
+   */
+  async ModifyRecordGroup(
+    req: ModifyRecordGroupRequest,
+    cb?: (error: string, rep: ModifyRecordGroupResponse) => void
+  ): Promise<ModifyRecordGroupResponse> {
+    return this.request("ModifyRecordGroup", req, cb)
   }
 
   /**
@@ -389,13 +430,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取域名信息
+   * 添加记录分组
    */
-  async DescribeDomain(
-    req: DescribeDomainRequest,
-    cb?: (error: string, rep: DescribeDomainResponse) => void
-  ): Promise<DescribeDomainResponse> {
-    return this.request("DescribeDomain", req, cb)
+  async CreateRecordGroup(
+    req: CreateRecordGroupRequest,
+    cb?: (error: string, rep: CreateRecordGroupResponse) => void
+  ): Promise<CreateRecordGroupResponse> {
+    return this.request("CreateRecordGroup", req, cb)
   }
 
   /**
@@ -619,6 +660,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: PayOrderWithBalanceResponse) => void
   ): Promise<PayOrderWithBalanceResponse> {
     return this.request("PayOrderWithBalance", req, cb)
+  }
+
+  /**
+   * 将记录添加到分组
+   */
+  async ModifyRecordToGroup(
+    req: ModifyRecordToGroupRequest,
+    cb?: (error: string, rep: ModifyRecordToGroupResponse) => void
+  ): Promise<ModifyRecordToGroupResponse> {
+    return this.request("ModifyRecordToGroup", req, cb)
+  }
+
+  /**
+   * 增值服务自动续费设置
+   */
+  async ModifyVasAutoRenewStatus(
+    req: ModifyVasAutoRenewStatusRequest,
+    cb?: (error: string, rep: ModifyVasAutoRenewStatusResponse) => void
+  ): Promise<ModifyVasAutoRenewStatusResponse> {
+    return this.request("ModifyVasAutoRenewStatus", req, cb)
   }
 
   /**

@@ -217,17 +217,17 @@ export interface DescribeLibrarySecretResponse {
  */
 export interface SendSmsCodeRequest {
     /**
-      * 验证码目的，当前仅支持换绑超级管理员账号，固定填写 BindSuperAdmin。
+      * 验证码目的，当前支持换绑超级管理员账号， BindSuperAdmin；体验版企业升级，ChannelUpdateVerify等
       */
     Purpose: string;
-    /**
-      * 官方云盘实例 ID
-      */
-    InstanceId: string;
     /**
       * 将作为超级管理员账号的手机号码
       */
     PhoneNumber: string;
+    /**
+      * 官方云盘实例 ID
+      */
+    InstanceId?: string;
     /**
       * 将作为超级管理员账号的手机号码的国家代码。默认为 +86。
       */
@@ -444,13 +444,9 @@ export interface DescribeOfficialInstancesResponse {
  */
 export interface VerifySmsCodeRequest {
     /**
-      * 验证码目的，当前仅支持换绑超级管理员账号，固定填写 BindSuperAdmin。
+      * 验证码目的，当前支持换绑超级管理员账号，BindSuperAdmin；体验版企业升级验证ChannelUpdateVerify，等
       */
     Purpose: string;
-    /**
-      * 官方云盘实例 ID
-      */
-    InstanceId: string;
     /**
       * 将作为超级管理员账号的手机号码
       */
@@ -459,6 +455,10 @@ export interface VerifySmsCodeRequest {
       * 短信验证码
       */
     Code: string;
+    /**
+      * 官方云盘实例 ID
+      */
+    InstanceId?: string;
     /**
       * 将作为超级管理员账号的手机号码的国家代码。默认为 +86。
       */

@@ -192,6 +192,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyChcAttribute", req, cb);
     }
     /**
+     * 创建高性能计算集群
+     */
+    async CreateHpcCluster(req, cb) {
+        return this.request("CreateHpcCluster", req, cb);
+    }
+    /**
      * 本接口 (DisassociateSecurityGroups) 用于解绑实例的指定安全组。
 * 实例操作结果可以通过调用 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728#.E7.A4.BA.E4.BE.8B3-.E6.9F.A5.E8.AF.A2.E5.AE.9E.E4.BE.8B.E7.9A.84.E6.9C.80.E6.96.B0.E6.93.8D.E4.BD.9C.E6.83.85.E5.86.B5) 接口查询，如果实例的最新操作状态(LatestOperationState)为“SUCCESS”，则代表操作成功。
      */
@@ -255,6 +261,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyDisasterRecoverGroupAttribute", req, cb);
     }
     /**
+     * 查询高性能集群信息
+     */
+    async DescribeHpcClusters(req, cb) {
+        return this.request("DescribeHpcClusters", req, cb);
+    }
+    /**
      * 本接口（DescribeInstancesOperationLimit）用于查询实例操作限制。
 
 * 目前支持调整配置操作限制次数查询。
@@ -263,22 +275,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstancesOperationLimit", req, cb);
     }
     /**
+     * 本接口（ModifyHostsAttribute）用于修改CDH实例的属性，如实例名称和续费标记等。参数HostName和RenewFlag必须设置其中一个，但不能同时设置。
+     */
+    async ModifyHostsAttribute(req, cb) {
+        return this.request("ModifyHostsAttribute", req, cb);
+    }
+    /**
      * 本接口(DescribeRegions)用于查询地域信息。因平台策略原因，该接口暂时停止更新，为确保您正常调用，可切换至新链接：https://cloud.tencent.com/document/product/1596/77929。
      */
     async DescribeRegions(req, cb) {
         return this.request("DescribeRegions", req, cb);
-    }
-    /**
-     * 本接口 (StopInstances) 用于关闭一个或多个实例。
-
-* 只有状态为`RUNNING`的实例才可以进行此操作。
-* 接口调用成功时，实例会进入`STOPPING`状态；关闭实例成功时，实例会进入`STOPPED`状态。
-* 支持强制关闭。强制关机的效果等同于关闭物理计算机的电源开关。强制关机可能会导致数据丢失或文件系统损坏，请仅在服务器不能正常关机时使用。
-* 支持批量操作。每次请求批量实例的上限为100。
-* 本接口为异步接口，关闭实例请求发送成功后会返回一个RequestId，此时操作并未立即完成。实例操作结果可以通过调用 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728#.E7.A4.BA.E4.BE.8B3-.E6.9F.A5.E8.AF.A2.E5.AE.9E.E4.BE.8B.E7.9A.84.E6.9C.80.E6.96.B0.E6.93.8D.E4.BD.9C.E6.83.85.E5.86.B5) 接口查询，如果实例的最新操作状态(LatestOperationState)为“SUCCESS”，则代表关闭实例操作成功。
-     */
-    async StopInstances(req, cb) {
-        return this.request("StopInstances", req, cb);
     }
     /**
      * 查看可以导入的镜像操作系统信息。
@@ -535,6 +541,30 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
         return this.request("RebootInstances", req, cb);
     }
     /**
+     * 当高性能计算集群为空, 即集群内没有任何设备时候, 可以删除改集群。
+     */
+    async DeleteHpcClusters(req, cb) {
+        return this.request("DeleteHpcClusters", req, cb);
+    }
+    /**
+     * 本接口 (StopInstances) 用于关闭一个或多个实例。
+
+* 只有状态为`RUNNING`的实例才可以进行此操作。
+* 接口调用成功时，实例会进入`STOPPING`状态；关闭实例成功时，实例会进入`STOPPED`状态。
+* 支持强制关闭。强制关机的效果等同于关闭物理计算机的电源开关。强制关机可能会导致数据丢失或文件系统损坏，请仅在服务器不能正常关机时使用。
+* 支持批量操作。每次请求批量实例的上限为100。
+* 本接口为异步接口，关闭实例请求发送成功后会返回一个RequestId，此时操作并未立即完成。实例操作结果可以通过调用 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728#.E7.A4.BA.E4.BE.8B3-.E6.9F.A5.E8.AF.A2.E5.AE.9E.E4.BE.8B.E7.9A.84.E6.9C.80.E6.96.B0.E6.93.8D.E4.BD.9C.E6.83.85.E5.86.B5) 接口查询，如果实例的最新操作状态(LatestOperationState)为“SUCCESS”，则代表关闭实例操作成功。
+     */
+    async StopInstances(req, cb) {
+        return this.request("StopInstances", req, cb);
+    }
+    /**
+     * 修改高性能计算集群属性。
+     */
+    async ModifyHpcClusterAttribute(req, cb) {
+        return this.request("ModifyHpcClusterAttribute", req, cb);
+    }
+    /**
      * 本接口 (ModifyKeyPairAttribute) 用于修改密钥对属性。
 
 * 修改密钥对ID所指定的密钥对的名称和描述信息。
@@ -543,12 +573,6 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
      */
     async ModifyKeyPairAttribute(req, cb) {
         return this.request("ModifyKeyPairAttribute", req, cb);
-    }
-    /**
-     * 本接口（ModifyHostsAttribute）用于修改CDH实例的属性，如实例名称和续费标记等。参数HostName和RenewFlag必须设置其中一个，但不能同时设置。
-     */
-    async ModifyHostsAttribute(req, cb) {
-        return this.request("ModifyHostsAttribute", req, cb);
     }
     /**
      * 本接口(DescribeImages) 用于查看镜像列表。

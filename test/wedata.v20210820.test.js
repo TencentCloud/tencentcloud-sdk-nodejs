@@ -408,6 +408,16 @@ it("wedata.v20210820.DescribeQualityScore", async function () {
     }
 })
 
+it("wedata.v20210820.CreateResourcePath", async function () {
+    try {
+       const data = await client.CreateResourcePath({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20210820.DescribeRuleDimStat", async function () {
     try {
        const data = await client.DescribeRuleDimStat({})
@@ -1568,9 +1578,9 @@ it("wedata.v20210820.DeleteCustomFunction", async function () {
     }
 })
 
-it("wedata.v20210820.DescribeFolderWorkflowList", async function () {
+it("wedata.v20210820.DescribeDataObjects", async function () {
     try {
-       const data = await client.DescribeFolderWorkflowList({})
+       const data = await client.DescribeDataObjects({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1808,9 +1818,9 @@ it("wedata.v20210820.DescribeTaskInstanceReportDetail", async function () {
     }
 })
 
-it("wedata.v20210820.DescribeDataObjects", async function () {
+it("wedata.v20210820.DescribeFolderWorkflowList", async function () {
     try {
-       const data = await client.DescribeDataObjects({})
+       const data = await client.DescribeFolderWorkflowList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

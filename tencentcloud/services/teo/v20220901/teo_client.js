@@ -772,12 +772,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAliasDomains", req, cb);
     }
     /**
-     * 获取计费数据。
-     */
-    async DescribeBillingData(req, cb) {
-        return this.request("DescribeBillingData", req, cb);
-    }
-    /**
      * 设置站点DNSSEC状态
      */
     async ModifyDnssec(req, cb) {

@@ -1700,6 +1700,134 @@ export interface StopBatchTaskRequest {
 }
 
 /**
+ * ModifyModelService请求参数结构体
+ */
+export interface ModifyModelServiceRequest {
+  /**
+   * 服务id
+   */
+  ServiceId: string
+
+  /**
+   * 模型信息，需要挂载模型时填写
+   */
+  ModelInfo?: ModelInfo
+
+  /**
+   * 镜像信息，配置服务运行所需的镜像地址等信息
+   */
+  ImageInfo?: ImageInfo
+
+  /**
+   * 环境变量，可选参数，用于配置容器中的环境变量
+   */
+  Env?: Array<EnvVar>
+
+  /**
+   * 资源描述，指定预付费模式下的cpu,mem,gpu等信息，后付费无需填写
+   */
+  Resources?: ResourceInfo
+
+  /**
+      * 使用DescribeBillingSpecs接口返回的规格列表中的值，或者参考实例列表:
+TI.S.MEDIUM.POST	2C4G
+TI.S.LARGE.POST	4C8G
+TI.S.2XLARGE16.POST	8C16G
+TI.S.2XLARGE32.POST	8C32G
+TI.S.4XLARGE32.POST	16C32G
+TI.S.4XLARGE64.POST	16C64G
+TI.S.6XLARGE48.POST	24C48G
+TI.S.6XLARGE96.POST	24C96G
+TI.S.8XLARGE64.POST	32C64G
+TI.S.8XLARGE128.POST 32C128G
+TI.GN7.LARGE20.POST	4C20G T4*1/4
+TI.GN7.2XLARGE40.POST	10C40G T4*1/2
+TI.GN7.2XLARGE32.POST	8C32G T4*1
+TI.GN7.5XLARGE80.POST	20C80G T4*1
+TI.GN7.8XLARGE128.POST	32C128G T4*1
+TI.GN7.10XLARGE160.POST	40C160G T4*2
+TI.GN7.20XLARGE320.POST	80C320G T4*4
+      */
+  InstanceType?: string
+
+  /**
+   * 扩缩容类型 支持：自动 - "AUTO", 手动 - "MANUAL"
+   */
+  ScaleMode?: string
+
+  /**
+      * 实例数量, 不同计费模式和调节模式下对应关系如下
+PREPAID 和 POSTPAID_BY_HOUR:
+手动调节模式下对应 实例数量
+自动调节模式下对应 基于时间的默认策略的实例数量
+HYBRID_PAID:
+后付费实例手动调节模式下对应 实例数量
+后付费实例自动调节模式下对应 时间策略的默认策略的实例数量
+      */
+  Replicas?: number
+
+  /**
+   * 自动伸缩信息
+   */
+  HorizontalPodAutoscaler?: HorizontalPodAutoscaler
+
+  /**
+   * 是否开启日志投递，开启后需填写配置投递到指定cls
+   */
+  LogEnable?: boolean
+
+  /**
+   * 日志配置，需要投递服务日志到指定cls时填写
+   */
+  LogConfig?: LogConfig
+
+  /**
+   * 特殊更新行为： "STOP": 停止, "RESUME": 重启, "SCALE": 扩缩容, 存在这些特殊更新行为时，会忽略其他更新字段
+   */
+  ServiceAction?: string
+
+  /**
+   * 服务的描述
+   */
+  ServiceDescription?: string
+
+  /**
+   * 自动伸缩策略
+   */
+  ScaleStrategy?: string
+
+  /**
+   * 自动伸缩策略配置 HPA : 通过HPA进行弹性伸缩 CRON 通过定时任务进行伸缩
+   */
+  CronScaleJobs?: Array<CronScaleJob>
+
+  /**
+   * 计费模式[HYBRID_PAID]时生效, 用于标识混合计费模式下的预付费实例数, 若不填则默认为1
+   */
+  HybridBillingPrepaidReplicas?: number
+
+  /**
+   * 是否开启模型的热更新。默认不开启
+   */
+  ModelHotUpdateEnable?: boolean
+
+  /**
+   * 定时停止配置
+   */
+  ScheduledAction?: ScheduledAction
+
+  /**
+   * 服务限速限流相关配置
+   */
+  ServiceLimit?: ServiceLimit
+
+  /**
+   * 挂载配置，目前只支持CFS
+   */
+  VolumeMount?: VolumeMount
+}
+
+/**
  * 框架版本以及对应的训练模式
  */
 export interface FrameworkVersion {
@@ -3233,7 +3361,7 @@ export interface CreateTrainingTaskRequest {
   StartCmdInfo?: StartCmdInfo
 
   /**
-   * 数据配置
+   * 数据配置，依赖DataSource字段
    */
   DataConfigs?: Array<DataConfig>
 
@@ -4054,6 +4182,22 @@ export interface Filter {
 }
 
 /**
+ * ModifyModelService返回参数结构体
+ */
+export interface ModifyModelServiceResponse {
+  /**
+      * 生成的模型服务
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Service: Service
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteBatchTask返回参数结构体
  */
 export interface DeleteBatchTaskResponse {
@@ -4767,7 +4911,7 @@ export interface TrainingTaskDetail {
   Region: string
 
   /**
-      * 训练框架名称，eg：SPARK、TENSORFLOW、PYTORCH、LIGHT
+      * 训练框架名称，eg：SPARK、PYSARK、TENSORFLOW、PYTORCH
 注意：此字段可能返回 null，表示取不到有效值。
       */
   FrameworkName: string
@@ -4950,7 +5094,7 @@ export interface TrainingTaskDetail {
   Message: string
 
   /**
-   * 任务状态
+   * 任务状态，eg：STARTING启动中、RUNNING运行中、STOPPING停止中、STOPPED已停止、FAILED异常、SUCCEED已完成
    */
   Status: string
 }
@@ -5300,7 +5444,7 @@ export interface TrainingTaskSetItem {
   TrainingMode: string
 
   /**
-   * 任务状态
+   * 任务状态，eg：STARTING启动中、RUNNING运行中、STOPPING停止中、STOPPED已停止、FAILED异常、SUCCEED已完成
    */
   Status: string
 

@@ -2943,7 +2943,7 @@ export interface CreateRuleRequest {
       */
     RealServerType: string;
     /**
-      * 监听器源站访问策略，其中：rr表示轮询；wrr表示加权轮询；lc表示最小连接数；lrtt表示最小时延。
+      * 监听器源站访问策略，其中：rr表示轮询；wrr表示加权轮询；lc表示最小连接数。
       */
     Scheduler: string;
     /**
@@ -2964,7 +2964,7 @@ export interface CreateRuleRequest {
       */
     ForwardHost?: string;
     /**
-      * 服务器名称指示（ServerNameIndication，简称SNI）开关。ON表示开启，OFF表示关闭。
+      * 服务器名称指示（ServerNameIndication，简称SNI）开关。ON表示开启，OFF表示关闭。创建HTTP监听器转发规则时，SNI功能默认关闭。
       */
     ServerNameIndicationSwitch?: string;
     /**

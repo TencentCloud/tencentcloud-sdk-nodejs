@@ -487,7 +487,52 @@ export interface AuditLogFilter {
 /**
  * DescribeParamTemplates请求参数结构体
  */
-export declare type DescribeParamTemplatesRequest = null;
+export interface DescribeParamTemplatesRequest {
+    /**
+      * 数据库引擎版本号
+      */
+    EngineVersions?: Array<string>;
+    /**
+      * 模版名称
+      */
+    TemplateNames?: Array<string>;
+    /**
+      * 模版ID
+      */
+    TemplateIds?: Array<number>;
+    /**
+      * 数据库类型，可选值：NORMAL，SERVERLESS
+      */
+    DbModes?: Array<string>;
+    /**
+      * 查询偏移量
+      */
+    Offset?: number;
+    /**
+      * 查询限制条数
+      */
+    Limit?: number;
+    /**
+      * 查询的模板对应的产品类型
+      */
+    Products?: Array<string>;
+    /**
+      * 模版类型
+      */
+    TemplateTypes?: Array<string>;
+    /**
+      * 版本类型
+      */
+    EngineTypes?: Array<string>;
+    /**
+      * 返回结果的排序字段
+      */
+    OrderBy?: string;
+    /**
+      * 排序方式（asc、desc）
+      */
+    OrderDirection?: string;
+}
 /**
  * DescribeAuditLogs返回参数结构体
  */
@@ -1068,7 +1113,7 @@ export interface RollBackClusterRequest {
       */
     ExpectTime?: string;
     /**
-      * 期望阈值
+      * 期望阈值（已废弃）
       */
     ExpectTimeThresh?: number;
     /**
@@ -1076,7 +1121,7 @@ export interface RollBackClusterRequest {
       */
     RollbackDatabases?: Array<RollbackDatabase>;
     /**
-      * 回档数据库表
+      * 回档数据库表列表
       */
     RollbackTables?: Array<RollbackTable>;
 }
@@ -1999,6 +2044,15 @@ export interface ParamTemplateListInfo {
       * 引擎版本
       */
     EngineVersion: string;
+    /**
+      * 数据库类型，可选值：NORMAL，SERVERLESS
+      */
+    DbMode: string;
+    /**
+      * 参数模板详情
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ParamInfoSet: Array<TemplateParamInfo>;
 }
 /**
  * 参数信息
@@ -2188,6 +2242,50 @@ export interface NetAddr {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Description: string;
+}
+/**
+ * 参数模板详情
+ */
+export interface TemplateParamInfo {
+    /**
+      * 当前值
+      */
+    CurrentValue: string;
+    /**
+      * 默认值
+      */
+    Default: string;
+    /**
+      * 参数类型为enum时可选的值类型集合
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EnumValue: Array<string>;
+    /**
+      * 参数类型为float/integer时的最大值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Max: string;
+    /**
+      * 参数类型为float/integer时的最小值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Min: string;
+    /**
+      * 参数名称
+      */
+    ParamName: string;
+    /**
+      * 是否需要重启
+      */
+    NeedReboot: number;
+    /**
+      * 参数描述
+      */
+    Description: string;
+    /**
+      * 参数类型，integer/float/string/enum
+      */
+    ParamType: string;
 }
 /**
  * AssociateSecurityGroups返回参数结构体

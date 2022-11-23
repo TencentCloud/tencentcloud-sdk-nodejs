@@ -31,7 +31,7 @@ import {
   DescribeRulesResponse,
   TimingDataRecord,
   DDoSAttackEventDetailData,
-  DescribeBillingDataRequest,
+  DescribeBotDataResponse,
   Tag,
   RateLimitConfig,
   RuleExtraParameter,
@@ -84,7 +84,6 @@ import {
   CreateApplicationProxyRuleRequest,
   DescribeDDoSBlockListRequest,
   DescribeDDoSMajorAttackEventRequest,
-  BillingDataFilter,
   DescribeSecurityPolicyListRequest,
   DescribeTimingL7CacheDataResponse,
   DescribeZonesResponse,
@@ -278,7 +277,6 @@ import {
   ModifyApplicationProxyStatusRequest,
   CreateZoneRequest,
   AscriptionInfo,
-  DescribeBotDataResponse,
   DescribeLogSetsResponse,
   DescribeClientRuleListResponse,
   Waf,
@@ -404,7 +402,6 @@ import {
   IntelligenceRuleItem,
   DescribeLogTopicTaskDetailResponse,
   PostMaxSize,
-  DescribeBillingDataResponse,
   Filter,
   CreateZoneResponse,
   DescribeSpeedTestingQuotaRequest,
@@ -1685,16 +1682,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAliasDomainsResponse) => void
   ): Promise<DescribeAliasDomainsResponse> {
     return this.request("DescribeAliasDomains", req, cb)
-  }
-
-  /**
-   * 获取计费数据。
-   */
-  async DescribeBillingData(
-    req: DescribeBillingDataRequest,
-    cb?: (error: string, rep: DescribeBillingDataResponse) => void
-  ): Promise<DescribeBillingDataResponse> {
-    return this.request("DescribeBillingData", req, cb)
   }
 
   /**

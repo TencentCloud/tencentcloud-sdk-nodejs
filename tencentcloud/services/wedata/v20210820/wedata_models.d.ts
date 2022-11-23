@@ -2908,6 +2908,23 @@ export interface BatchUpdateIntegrationTasksRequest {
     ProjectId: string;
 }
 /**
+ * CreateResourcePath请求参数结构体
+ */
+export interface CreateResourcePathRequest {
+    /**
+      * 文件夹名称，如 aaa
+      */
+    Name: string;
+    /**
+      * 文件夹所属父目录，请注意，根目录为 /datastudio/resource
+      */
+    FilePath: string;
+    /**
+      * 项目ID
+      */
+    ProjectId: string;
+}
+/**
  * ResumeIntegrationTask返回参数结构体
  */
 export interface ResumeIntegrationTaskResponse {
@@ -4984,6 +5001,10 @@ export interface GenHiveTableDDLSqlRequest {
       * schema名称
       */
     SchemaName?: string;
+    /**
+      * 上游节点的字段信息
+      */
+    SourceFieldInfoList?: Array<SourceFieldInfo>;
 }
 /**
  * DescribeRuleExecResultsByPage请求参数结构体
@@ -6715,6 +6736,19 @@ export interface UnlockIntegrationTaskRequest {
     ProjectId: string;
 }
 /**
+ * ModifyDimensionWeight返回参数结构体
+ */
+export interface ModifyDimensionWeightResponse {
+    /**
+      * 更新权重是否成功
+      */
+    Data: boolean;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * ModifyTaskAlarmRegular返回参数结构体
  */
 export interface ModifyTaskAlarmRegularResponse {
@@ -7158,6 +7192,23 @@ export interface ProdSchedulerTask {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     TaskName?: string;
+}
+/**
+ * 上游节点字段信息
+ */
+export interface SourceFieldInfo {
+    /**
+      * 字段名称
+      */
+    FieldName?: string;
+    /**
+      * 字段类型
+      */
+    FieldType?: string;
+    /**
+      * 字段别名
+      */
+    Alias?: string;
 }
 /**
  * FreezeTasksByMultiWorkflow返回参数结构体
@@ -9556,11 +9607,12 @@ export interface DescribeRealTimeTaskMetricOverviewRequest {
     ProjectId: string;
 }
 /**
- * ModifyDimensionWeight返回参数结构体
+ * CreateResourcePath返回参数结构体
  */
-export interface ModifyDimensionWeightResponse {
+export interface CreateResourcePathResponse {
     /**
-      * 更新权重是否成功
+      * 新建成功
+注意：此字段可能返回 null，表示取不到有效值。
       */
     Data: boolean;
     /**
@@ -10235,6 +10287,11 @@ export interface IntegrationNodeSchema {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Properties?: Array<RecordField>;
+    /**
+      * schema别名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Alias?: string;
 }
 /**
  * DescribeDatasource请求参数结构体
