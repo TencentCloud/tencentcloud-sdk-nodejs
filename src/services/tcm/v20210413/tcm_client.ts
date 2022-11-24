@@ -25,12 +25,13 @@ import {
   UnlinkPrometheusResponse,
   LoadBalancerStatus,
   ModifyTracingConfigResponse,
-  DescribeMeshResponse,
   PodsMetricSource,
+  DescribeMeshResponse,
+  ModifyAccessLogConfigRequest,
   AutoInjectionNamespaceState,
   UnlinkClusterResponse,
   LinkClusterListResponse,
-  ModifyMeshResponse,
+  ModifyAccessLogConfigResponse,
   IngressGatewayStatus,
   ResourceMetricSource,
   CreateMeshResponse,
@@ -40,8 +41,10 @@ import {
   MetricSpec,
   WorkloadConfig,
   EgressGateway,
+  DescribeMeshRequest,
   IstioConfig,
   Mesh,
+  DescribeAccessLogConfigResponse,
   LinkPrometheusRequest,
   GrafanaInfo,
   DeleteMeshResponse,
@@ -52,7 +55,7 @@ import {
   LinkPrometheusResponse,
   Resource,
   DeployConfig,
-  DescribeMeshRequest,
+  DescribeAccessLogConfigRequest,
   ActiveOperation,
   CreateMeshRequest,
   PrometheusStatus,
@@ -62,6 +65,7 @@ import {
   ExtensiveCluster,
   SmartDNSConfig,
   DescribeMeshListRequest,
+  ModifyMeshResponse,
   UnlinkClusterRequest,
   CLS,
   TracingConfig,
@@ -103,6 +107,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取AccessLog配置
+   */
+  async DescribeAccessLogConfig(
+    req: DescribeAccessLogConfigRequest,
+    cb?: (error: string, rep: DescribeAccessLogConfigResponse) => void
+  ): Promise<DescribeAccessLogConfigResponse> {
+    return this.request("DescribeAccessLogConfig", req, cb)
+  }
+
+  /**
    * 关联集群
    */
   async LinkClusterList(
@@ -133,6 +147,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改网格
+   */
+  async ModifyMesh(
+    req: ModifyMeshRequest,
+    cb?: (error: string, rep: ModifyMeshResponse) => void
+  ): Promise<ModifyMeshResponse> {
+    return this.request("ModifyMesh", req, cb)
+  }
+
+  /**
    * 解关联集群
    */
   async UnlinkCluster(
@@ -153,13 +177,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改网格
+   * 修改访问日志配置
    */
-  async ModifyMesh(
-    req: ModifyMeshRequest,
-    cb?: (error: string, rep: ModifyMeshResponse) => void
-  ): Promise<ModifyMeshResponse> {
-    return this.request("ModifyMesh", req, cb)
+  async ModifyAccessLogConfig(
+    req: ModifyAccessLogConfigRequest,
+    cb?: (error: string, rep: ModifyAccessLogConfigResponse) => void
+  ): Promise<ModifyAccessLogConfigResponse> {
+    return this.request("ModifyAccessLogConfig", req, cb)
   }
 
   /**

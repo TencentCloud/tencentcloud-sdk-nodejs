@@ -136,6 +136,20 @@ export interface GetBlockTransactionListForUserResponse {
     RequestId?: string;
 }
 /**
+ * ApplyChainMakerBatchUserCert返回参数结构体
+ */
+export interface ApplyChainMakerBatchUserCertResponse {
+    /**
+      * 成功生成的用户证书的base64编码字符串列表，与SignUserCsrList一一对应
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SignUserCrtList: Array<string>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * ApplyUserCert请求参数结构体
  */
 export interface ApplyUserCertRequest {
@@ -192,6 +206,27 @@ export interface SrvInvokeRequest {
       * 用户自定义json字符串
       */
     Param: string;
+}
+/**
+ * SrvInvoke返回参数结构体
+ */
+export interface SrvInvokeResponse {
+    /**
+      * 返回码
+      */
+    RetCode?: number;
+    /**
+      * 返回消息
+      */
+    RetMsg?: string;
+    /**
+      * 返回数据
+      */
+    Data?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * GetChaincodeInitializeResultForUser请求参数结构体
@@ -472,6 +507,19 @@ export interface GetBcosBlockListResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 用于申请用户签名证书的结构体
+ */
+export interface SignCertCsr {
+    /**
+      * 用户签名证书的标识，会存在于用户申请的证书中
+      */
+    CertMark: string;
+    /**
+      * 用户申请签名证书所需要的证书请求文件的base64编码
+      */
+    SignCsrContent: string;
 }
 /**
  * DownloadUserCert返回参数结构体
@@ -843,17 +891,21 @@ export interface QueryChainMakerDemoBlockTransactionRequest {
     BlockHeight: number;
 }
 /**
- * GetBcosTransByHash返回参数结构体
+ * 网络详情信息
  */
-export interface GetBcosTransByHashResponse {
+export interface ClusterDetailForUser {
     /**
-      * 交易信息json字符串
+      * 网络ID
       */
-    TransactionJson: string;
+    ClusterId: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 组织列表
       */
-    RequestId?: string;
+    GroupList: Array<GroupDetailForUser>;
+    /**
+      * 网络名称
+      */
+    ClusterName: string;
 }
 /**
  * GetPeerLogForUser请求参数结构体
@@ -1018,43 +1070,6 @@ export interface GetClusterSummaryResponse {
     RequestId?: string;
 }
 /**
- * Bcos区块对象
- */
-export interface BcosBlockObj {
-    /**
-      * 区块哈希
-      */
-    BlockHash: string;
-    /**
-      * 区块高度
-      */
-    BlockNumber: number;
-    /**
-      * 区块时间戳
-      */
-    BlockTimestamp: string;
-    /**
-      * 打包节点ID
-      */
-    Sealer: string;
-    /**
-      * 打包节点索引
-      */
-    SealerIndex: number;
-    /**
-      * 记录保存时间
-      */
-    CreateTime: string;
-    /**
-      * 交易数量
-      */
-    TransCount: number;
-    /**
-      * 记录修改时间
-      */
-    ModifyTime: string;
-}
-/**
  * PeerSet
  */
 export interface PeerSet {
@@ -1157,42 +1172,30 @@ export interface CreateChaincodeAndInstallForUserRequest {
     Chaincode: string;
 }
 /**
- * SrvInvoke返回参数结构体
+ * 背书组织及其节点列表
  */
-export interface SrvInvokeResponse {
+export interface EndorserGroup {
     /**
-      * 返回码
+      * 背书组织名称
       */
-    RetCode?: number;
+    EndorserGroupName: string;
     /**
-      * 返回消息
+      * 背书节点列表
       */
-    RetMsg?: string;
+    EndorserPeerList: Array<string>;
+}
+/**
+ * GetBcosTransByHash返回参数结构体
+ */
+export interface GetBcosTransByHashResponse {
     /**
-      * 返回数据
+      * 交易信息json字符串
       */
-    Data?: string;
+    TransactionJson: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
-}
-/**
- * 网络详情信息
- */
-export interface ClusterDetailForUser {
-    /**
-      * 网络ID
-      */
-    ClusterId: string;
-    /**
-      * 组织列表
-      */
-    GroupList: Array<GroupDetailForUser>;
-    /**
-      * 网络名称
-      */
-    ClusterName: string;
 }
 /**
  * GetPeerLogForUser返回参数结构体
@@ -1249,6 +1252,19 @@ export interface QueryChainMakerDemoTransactionResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * ApplyChainMakerBatchUserCert请求参数结构体
+ */
+export interface ApplyChainMakerBatchUserCertRequest {
+    /**
+      * 网络ID，可在区块链网络详情或列表中获取
+      */
+    ClusterId: string;
+    /**
+      * 证书标识和证书请求文件，可参考TBaaS证书生成相关文档生成证书请求文件
+      */
+    SignUserCsrList: Array<SignCertCsr>;
 }
 /**
  * GetChaincodeLogForUser返回参数结构体
@@ -1758,21 +1774,41 @@ export interface QueryChainMakerTransactionRequest {
     TxID: string;
 }
 /**
- * GetBcosBlockByNumber请求参数结构体
+ * Bcos区块对象
  */
-export interface GetBcosBlockByNumberRequest {
+export interface BcosBlockObj {
     /**
-      * 网络ID，可在区块链网络详情或列表中获取
+      * 区块哈希
       */
-    ClusterId: string;
+    BlockHash: string;
     /**
-      * 群组编号，可在群组列表中获取
-      */
-    GroupId: number;
-    /**
-      * 区块高度，可以从InvokeBcosTrans接口的返回值中解析获取
+      * 区块高度
       */
     BlockNumber: number;
+    /**
+      * 区块时间戳
+      */
+    BlockTimestamp: string;
+    /**
+      * 打包节点ID
+      */
+    Sealer: string;
+    /**
+      * 打包节点索引
+      */
+    SealerIndex: number;
+    /**
+      * 记录保存时间
+      */
+    CreateTime: string;
+    /**
+      * 交易数量
+      */
+    TransCount: number;
+    /**
+      * 记录修改时间
+      */
+    ModifyTime: string;
 }
 /**
  * 通道详情信息
@@ -1894,17 +1930,21 @@ export interface QueryResponse {
     RequestId?: string;
 }
 /**
- * 背书组织及其节点列表
+ * GetBcosBlockByNumber请求参数结构体
  */
-export interface EndorserGroup {
+export interface GetBcosBlockByNumberRequest {
     /**
-      * 背书组织名称
+      * 网络ID，可在区块链网络详情或列表中获取
       */
-    EndorserGroupName: string;
+    ClusterId: string;
     /**
-      * 背书节点列表
+      * 群组编号，可在群组列表中获取
       */
-    EndorserPeerList: Array<string>;
+    GroupId: number;
+    /**
+      * 区块高度，可以从InvokeBcosTrans接口的返回值中解析获取
+      */
+    BlockNumber: number;
 }
 /**
  * 交易列表项信息

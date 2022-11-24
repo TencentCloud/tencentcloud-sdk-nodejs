@@ -279,7 +279,7 @@ export interface StopMigrateJobResponse {
 }
 
 /**
- * 表图对象集合，当 TableMode 为 partial 时，此项需要填写
+ * 表对象集合，当 TableMode 为 partial 时，此项需要填写
  */
 export interface TableItem {
   /**
@@ -1197,7 +1197,7 @@ export interface CompareTaskInfo {
  */
 export interface CreateMigrationServiceResponse {
   /**
-      * 下单成功随机生成的迁移服务id列表，形如：dts-c1f6rs21
+      * 下单成功随机生成的迁移任务id列表，形如：dts-c1f6rs21
 注意：此字段可能返回 null，表示取不到有效值。
       */
   JobIds: Array<string>

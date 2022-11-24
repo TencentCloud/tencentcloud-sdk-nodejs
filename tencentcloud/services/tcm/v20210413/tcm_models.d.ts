@@ -129,6 +129,19 @@ export interface ModifyTracingConfigResponse {
     RequestId?: string;
 }
 /**
+ * PodsMetricSource 定义了如何根据特定指标进行扩缩容
+ */
+export interface PodsMetricSource {
+    /**
+      * 指标名
+      */
+    MetricName: string;
+    /**
+      * 目标值
+      */
+    TargetAverageValue: string;
+}
+/**
  * DescribeMesh返回参数结构体
  */
 export interface DescribeMeshResponse {
@@ -142,17 +155,49 @@ export interface DescribeMeshResponse {
     RequestId?: string;
 }
 /**
- * PodsMetricSource 定义了如何根据特定指标进行扩缩容
+ * ModifyAccessLogConfig请求参数结构体
  */
-export interface PodsMetricSource {
+export interface ModifyAccessLogConfigRequest {
     /**
-      * 指标名
+      * mesh ID
       */
-    MetricName: string;
+    MeshId: string;
     /**
-      * 目标值
+      * 选中的范围
       */
-    TargetAverageValue: string;
+    SelectedRange?: SelectedRange;
+    /**
+      * 采用的模板，可选值：istio（默认）、trace、custom
+      */
+    Template?: string;
+    /**
+      * 是否启用
+      */
+    Enable?: boolean;
+    /**
+      * 腾讯云日志服务相关参数
+      */
+    CLS?: CLS;
+    /**
+      * 编码格式，可选值：TEXT、JSON
+      */
+    Encoding?: string;
+    /**
+      * 日志格式
+      */
+    Format?: string;
+    /**
+      * 是否启用标准输出
+      */
+    EnableStdout?: boolean;
+    /**
+      * 是否启动GRPC第三方服务器
+      */
+    EnableServer?: boolean;
+    /**
+      * GRPC第三方服务器地址
+      */
+    Address?: string;
 }
 /**
  * 描述某一网格在特定命名空间下的自动注入状态
@@ -187,9 +232,9 @@ export interface LinkClusterListResponse {
     RequestId?: string;
 }
 /**
- * ModifyMesh返回参数结构体
+ * ModifyAccessLogConfig返回参数结构体
  */
-export interface ModifyMeshResponse {
+export interface ModifyAccessLogConfigResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -366,6 +411,15 @@ export interface EgressGateway {
     Status?: EgressGatewayStatus;
 }
 /**
+ * DescribeMesh请求参数结构体
+ */
+export interface DescribeMeshRequest {
+    /**
+      * 需要查询的网格 Id
+      */
+    MeshId: string;
+}
+/**
  * Istio配置
  */
 export interface IstioConfig {
@@ -465,6 +519,37 @@ export interface Mesh {
       * 标签列表
       */
     TagList: Array<Tag>;
+}
+/**
+ * DescribeAccessLogConfig返回参数结构体
+ */
+export interface DescribeAccessLogConfigResponse {
+    /**
+      * 访问日志输出路径。默认 /dev/stdout
+      */
+    File: string;
+    /**
+      * 访问日志的格式。
+      */
+    Format: string;
+    /**
+      * 访问日志输出编码。默认 “TEXT”。除此之外还有“JSON”
+      */
+    Encoding: string;
+    /**
+      * 选中的范围
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SelectedRange: SelectedRange;
+    /**
+      * 采用的模板，可取值为"istio, trace，默认为istio
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Template: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * LinkPrometheus请求参数结构体
@@ -642,11 +727,11 @@ export interface DeployConfig {
     Nodes?: Array<string>;
 }
 /**
- * DescribeMesh请求参数结构体
+ * DescribeAccessLogConfig请求参数结构体
  */
-export interface DescribeMeshRequest {
+export interface DescribeAccessLogConfigRequest {
     /**
-      * 需要查询的网格 Id
+      * mesh名字
       */
     MeshId: string;
 }
@@ -825,6 +910,15 @@ export interface DescribeMeshListRequest {
       * 分页偏移
       */
     Offset?: number;
+}
+/**
+ * ModifyMesh返回参数结构体
+ */
+export interface ModifyMeshResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * UnlinkCluster请求参数结构体

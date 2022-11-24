@@ -38,9 +38,9 @@ it("cloudaudit.v20190319.StartLogging", async function () {
     }
 })
 
-it("cloudaudit.v20190319.ListCosEnableRegion", async function () {
+it("cloudaudit.v20190319.DescribeAuditTrack", async function () {
     try {
-       const data = await client.ListCosEnableRegion({})
+       const data = await client.DescribeAuditTrack({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -101,6 +101,16 @@ it("cloudaudit.v20190319.DescribeEvents", async function () {
 it("cloudaudit.v20190319.StopLogging", async function () {
     try {
        const data = await client.StopLogging({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cloudaudit.v20190319.ListCosEnableRegion", async function () {
+    try {
+       const data = await client.ListCosEnableRegion({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

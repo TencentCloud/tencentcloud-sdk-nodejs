@@ -188,6 +188,16 @@ it("gme.v20180711.DescribeScanResultList", async function () {
     }
 })
 
+it("gme.v20180711.DescribeApplicationList", async function () {
+    try {
+       const data = await client.DescribeApplicationList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("gme.v20180711.ModifyCustomizationState", async function () {
     try {
        const data = await client.ModifyCustomizationState({})

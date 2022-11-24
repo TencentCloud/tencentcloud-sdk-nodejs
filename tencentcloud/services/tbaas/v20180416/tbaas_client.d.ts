@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { GetBcosTransListRequest, QueryChainMakerDemoBlockTransactionResponse, QueryChainMakerContractRequest, DeployDynamicBcosContractResponse, GetClusterListForUserResponse, GetBlockTransactionListForUserResponse, ApplyUserCertRequest, SrvInvokeRequest, GetChaincodeInitializeResultForUserRequest, InitializeChaincodeForUserRequest, GetTransactionDetailForUserResponse, InvokeChainMakerDemoContractRequest, ApplyUserCertResponse, GetChaincodeCompileLogForUserRequest, GetInvokeTxRequest, GetBcosBlockListResponse, DownloadUserCertResponse, QueryChainMakerBlockTransactionRequest, GetChaincodeLogForUserRequest, GetLatesdTransactionListRequest, InvokeResponse, GetTransactionDetailForUserRequest, GetBlockListResponse, GetBlockTransactionListForUserRequest, QueryChainMakerBlockTransactionResponse, GetBcosBlockListRequest, GetClusterSummaryRequest, InvokeBcosTransRequest, InvokeChainMakerContractResponse, QueryChainMakerDemoBlockTransactionRequest, GetBcosTransByHashResponse, GetPeerLogForUserRequest, GetLatesdTransactionListResponse, QueryChainMakerTransactionResponse, DownloadUserCertRequest, GetClusterSummaryResponse, CreateChaincodeAndInstallForUserRequest, SrvInvokeResponse, GetPeerLogForUserResponse, QueryChainMakerDemoContractRequest, QueryChainMakerDemoTransactionResponse, GetChaincodeLogForUserResponse, QueryChainMakerDemoTransactionRequest, InvokeBcosTransResponse, InitializeChaincodeForUserResponse, GetBcosBlockByNumberResponse, GetClusterListForUserRequest, QueryChainMakerDemoContractResponse, GetBlockListRequest, GetChaincodeInitializeResultForUserResponse, InvokeRequest, GetInvokeTxResponse, GetChannelListForUserResponse, QueryChainMakerContractResponse, GetBcosTransByHashRequest, GetChaincodeCompileLogForUserResponse, DeployDynamicBcosContractRequest, InvokeChainMakerContractRequest, GetBcosTransListResponse, QueryChainMakerTransactionRequest, GetBcosBlockByNumberRequest, QueryRequest, CreateChaincodeAndInstallForUserResponse, GetChannelListForUserRequest, InvokeChainMakerDemoContractResponse, QueryResponse } from "./tbaas_models";
+import { GetBcosTransListRequest, QueryChainMakerDemoBlockTransactionResponse, QueryChainMakerContractRequest, DeployDynamicBcosContractResponse, GetClusterListForUserResponse, GetBlockTransactionListForUserResponse, ApplyChainMakerBatchUserCertResponse, ApplyUserCertRequest, SrvInvokeRequest, SrvInvokeResponse, GetChaincodeInitializeResultForUserRequest, InitializeChaincodeForUserRequest, GetTransactionDetailForUserResponse, InvokeChainMakerDemoContractRequest, ApplyUserCertResponse, GetChaincodeCompileLogForUserRequest, GetInvokeTxRequest, GetBcosBlockListResponse, DownloadUserCertResponse, QueryChainMakerBlockTransactionRequest, GetChaincodeLogForUserRequest, GetLatesdTransactionListRequest, InvokeResponse, GetTransactionDetailForUserRequest, GetBlockListResponse, GetBlockTransactionListForUserRequest, QueryChainMakerBlockTransactionResponse, GetBcosBlockListRequest, GetClusterSummaryRequest, InvokeBcosTransRequest, InvokeChainMakerContractResponse, QueryChainMakerDemoBlockTransactionRequest, GetPeerLogForUserRequest, GetLatesdTransactionListResponse, QueryChainMakerTransactionResponse, DownloadUserCertRequest, GetClusterSummaryResponse, CreateChaincodeAndInstallForUserRequest, GetBcosTransByHashResponse, GetPeerLogForUserResponse, QueryChainMakerDemoContractRequest, QueryChainMakerDemoTransactionResponse, ApplyChainMakerBatchUserCertRequest, GetChaincodeLogForUserResponse, QueryChainMakerDemoTransactionRequest, InvokeBcosTransResponse, InitializeChaincodeForUserResponse, GetBcosBlockByNumberResponse, GetClusterListForUserRequest, QueryChainMakerDemoContractResponse, GetBlockListRequest, GetChaincodeInitializeResultForUserResponse, InvokeRequest, GetInvokeTxResponse, GetChannelListForUserResponse, QueryChainMakerContractResponse, GetBcosTransByHashRequest, GetChaincodeCompileLogForUserResponse, DeployDynamicBcosContractRequest, InvokeChainMakerContractRequest, GetBcosTransListResponse, QueryChainMakerTransactionRequest, QueryRequest, CreateChaincodeAndInstallForUserResponse, GetChannelListForUserRequest, InvokeChainMakerDemoContractResponse, QueryResponse, GetBcosBlockByNumberRequest } from "./tbaas_models";
 /**
  * tbaas client
  * @class
@@ -20,9 +20,9 @@ export declare class Client extends AbstractClient {
      */
     GetBcosBlockByNumber(req: GetBcosBlockByNumberRequest, cb?: (error: string, rep: GetBcosBlockByNumberResponse) => void): Promise<GetBcosBlockByNumberResponse>;
     /**
-     * 调用长安链合约查询
+     * 批量申请长安链用户签名证书
      */
-    QueryChainMakerContract(req: QueryChainMakerContractRequest, cb?: (error: string, rep: QueryChainMakerContractResponse) => void): Promise<QueryChainMakerContractResponse>;
+    ApplyChainMakerBatchUserCert(req: ApplyChainMakerBatchUserCertRequest, cb?: (error: string, rep: ApplyChainMakerBatchUserCertResponse) => void): Promise<ApplyChainMakerBatchUserCertResponse>;
     /**
      * 获取合约容器日志
      */
@@ -39,6 +39,10 @@ export declare class Client extends AbstractClient {
      * Bcos分页查询当前群组下的区块列表
      */
     GetBcosBlockList(req: GetBcosBlockListRequest, cb?: (error: string, rep: GetBcosBlockListResponse) => void): Promise<GetBcosBlockListResponse>;
+    /**
+     * 调用长安链合约查询
+     */
+    QueryChainMakerContract(req: QueryChainMakerContractRequest, cb?: (error: string, rep: QueryChainMakerContractResponse) => void): Promise<QueryChainMakerContractResponse>;
     /**
      * 查询长安链体验网络指定高度区块的交易
      */

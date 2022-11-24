@@ -40,10 +40,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("StartLogging", req, cb);
     }
     /**
-     * 查询云审计支持的cos可用区
+     * 查询云审计跟踪集详情
      */
-    async ListCosEnableRegion(req, cb) {
-        return this.request("ListCosEnableRegion", req, cb);
+    async DescribeAuditTrack(req, cb) {
+        return this.request("DescribeAuditTrack", req, cb);
     }
     /**
      * 查询AttributeKey的有效取值范围
@@ -80,6 +80,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async StopLogging(req, cb) {
         return this.request("StopLogging", req, cb);
+    }
+    /**
+     * 查询云审计支持的cos可用区
+     */
+    async ListCosEnableRegion(req, cb) {
+        return this.request("ListCosEnableRegion", req, cb);
     }
     /**
      * 查询云审计跟踪集列表

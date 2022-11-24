@@ -34,6 +34,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteMesh", req, cb);
     }
     /**
+     * 获取AccessLog配置
+     */
+    async DescribeAccessLogConfig(req, cb) {
+        return this.request("DescribeAccessLogConfig", req, cb);
+    }
+    /**
      * 关联集群
      */
     async LinkClusterList(req, cb) {
@@ -52,6 +58,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeMeshList", req, cb);
     }
     /**
+     * 修改网格
+     */
+    async ModifyMesh(req, cb) {
+        return this.request("ModifyMesh", req, cb);
+    }
+    /**
      * 解关联集群
      */
     async UnlinkCluster(req, cb) {
@@ -64,10 +76,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyTracingConfig", req, cb);
     }
     /**
-     * 修改网格
+     * 修改访问日志配置
      */
-    async ModifyMesh(req, cb) {
-        return this.request("ModifyMesh", req, cb);
+    async ModifyAccessLogConfig(req, cb) {
+        return this.request("ModifyAccessLogConfig", req, cb);
     }
     /**
      * 创建网格

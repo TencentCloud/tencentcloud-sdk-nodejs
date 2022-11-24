@@ -25,8 +25,10 @@ import {
   DeployDynamicBcosContractResponse,
   GetClusterListForUserResponse,
   GetBlockTransactionListForUserResponse,
+  ApplyChainMakerBatchUserCertResponse,
   ApplyUserCertRequest,
   SrvInvokeRequest,
+  SrvInvokeResponse,
   GetChaincodeInitializeResultForUserRequest,
   InitializeChaincodeForUserRequest,
   GetTransactionDetailForUserResponse,
@@ -35,6 +37,7 @@ import {
   GetChaincodeCompileLogForUserRequest,
   GetInvokeTxRequest,
   GetBcosBlockListResponse,
+  SignCertCsr,
   DownloadUserCertResponse,
   QueryChainMakerBlockTransactionRequest,
   GetChaincodeLogForUserRequest,
@@ -49,21 +52,21 @@ import {
   InvokeBcosTransRequest,
   InvokeChainMakerContractResponse,
   QueryChainMakerDemoBlockTransactionRequest,
-  GetBcosTransByHashResponse,
+  ClusterDetailForUser,
   GetPeerLogForUserRequest,
   GetLatesdTransactionListResponse,
   QueryChainMakerTransactionResponse,
   DownloadUserCertRequest,
   GetClusterSummaryResponse,
-  BcosBlockObj,
   PeerSet,
   ChainMakerTransactionResult,
   CreateChaincodeAndInstallForUserRequest,
-  SrvInvokeResponse,
-  ClusterDetailForUser,
+  EndorserGroup,
+  GetBcosTransByHashResponse,
   GetPeerLogForUserResponse,
   QueryChainMakerDemoContractRequest,
   QueryChainMakerDemoTransactionResponse,
+  ApplyChainMakerBatchUserCertRequest,
   GetChaincodeLogForUserResponse,
   QueryChainMakerDemoTransactionRequest,
   LogDetailForUser,
@@ -88,14 +91,14 @@ import {
   InvokeChainMakerContractRequest,
   GetBcosTransListResponse,
   QueryChainMakerTransactionRequest,
-  GetBcosBlockByNumberRequest,
+  BcosBlockObj,
   ChannelDetailForUser,
   QueryRequest,
   CreateChaincodeAndInstallForUserResponse,
   GetChannelListForUserRequest,
   InvokeChainMakerDemoContractResponse,
   QueryResponse,
-  EndorserGroup,
+  GetBcosBlockByNumberRequest,
   TransactionItem,
 } from "./tbaas_models"
 
@@ -139,13 +142,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 调用长安链合约查询
+   * 批量申请长安链用户签名证书
    */
-  async QueryChainMakerContract(
-    req: QueryChainMakerContractRequest,
-    cb?: (error: string, rep: QueryChainMakerContractResponse) => void
-  ): Promise<QueryChainMakerContractResponse> {
-    return this.request("QueryChainMakerContract", req, cb)
+  async ApplyChainMakerBatchUserCert(
+    req: ApplyChainMakerBatchUserCertRequest,
+    cb?: (error: string, rep: ApplyChainMakerBatchUserCertResponse) => void
+  ): Promise<ApplyChainMakerBatchUserCertResponse> {
+    return this.request("ApplyChainMakerBatchUserCert", req, cb)
   }
 
   /**
@@ -186,6 +189,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetBcosBlockListResponse) => void
   ): Promise<GetBcosBlockListResponse> {
     return this.request("GetBcosBlockList", req, cb)
+  }
+
+  /**
+   * 调用长安链合约查询
+   */
+  async QueryChainMakerContract(
+    req: QueryChainMakerContractRequest,
+    cb?: (error: string, rep: QueryChainMakerContractResponse) => void
+  ): Promise<QueryChainMakerContractResponse> {
+    return this.request("QueryChainMakerContract", req, cb)
   }
 
   /**

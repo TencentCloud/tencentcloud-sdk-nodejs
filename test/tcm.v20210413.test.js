@@ -28,6 +28,16 @@ it("tcm.v20210413.DeleteMesh", async function () {
     }
 })
 
+it("tcm.v20210413.DescribeAccessLogConfig", async function () {
+    try {
+       const data = await client.DescribeAccessLogConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcm.v20210413.LinkClusterList", async function () {
     try {
        const data = await client.LinkClusterList({})
@@ -58,6 +68,16 @@ it("tcm.v20210413.DescribeMeshList", async function () {
     }
 })
 
+it("tcm.v20210413.ModifyMesh", async function () {
+    try {
+       const data = await client.ModifyMesh({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcm.v20210413.UnlinkCluster", async function () {
     try {
        const data = await client.UnlinkCluster({})
@@ -78,9 +98,9 @@ it("tcm.v20210413.ModifyTracingConfig", async function () {
     }
 })
 
-it("tcm.v20210413.ModifyMesh", async function () {
+it("tcm.v20210413.ModifyAccessLogConfig", async function () {
     try {
-       const data = await client.ModifyMesh({})
+       const data = await client.ModifyAccessLogConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -89,6 +89,7 @@ import {
   DescribeUsersForUserManagerResponse,
   InquiryPriceRenewInstanceRequest,
   CdbInfo,
+  PriceDetail,
   InquirePriceRenewEmrResponse,
   MultiDiskMC,
   AddUsersForUserManagerRequest,
@@ -213,7 +214,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 实例扩容
+   * 扩容节点
    */
   async ScaleOutInstance(
     req: ScaleOutInstanceRequest,
@@ -324,7 +325,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改yarn资源调度的资源配置
+   * 修改YARN资源调度的资源配置
    */
   async ModifyResourceScheduleConfig(
     req: ModifyResourceScheduleConfigRequest,
@@ -344,7 +345,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询硬件节点信息
+   * 查询集群节点信息
    */
   async DescribeClusterNodes(
     req: DescribeClusterNodesRequest,

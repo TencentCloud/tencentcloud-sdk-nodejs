@@ -41,7 +41,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeCvmQuota(req: DescribeCvmQuotaRequest, cb?: (error: string, rep: DescribeCvmQuotaResponse) => void): Promise<DescribeCvmQuotaResponse>;
     /**
-     * 实例扩容
+     * 扩容节点
      */
     ScaleOutInstance(req: ScaleOutInstanceRequest, cb?: (error: string, rep: ScaleOutInstanceResponse) => void): Promise<ScaleOutInstanceResponse>;
     /**
@@ -86,7 +86,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeResourceSchedule(req: DescribeResourceScheduleRequest, cb?: (error: string, rep: DescribeResourceScheduleResponse) => void): Promise<DescribeResourceScheduleResponse>;
     /**
-     * 修改yarn资源调度的资源配置
+     * 修改YARN资源调度的资源配置
      */
     ModifyResourceScheduleConfig(req: ModifyResourceScheduleConfigRequest, cb?: (error: string, rep: ModifyResourceScheduleConfigResponse) => void): Promise<ModifyResourceScheduleConfigResponse>;
     /**
@@ -94,7 +94,7 @@ export declare class Client extends AbstractClient {
      */
     TerminateTasks(req: TerminateTasksRequest, cb?: (error: string, rep: TerminateTasksResponse) => void): Promise<TerminateTasksResponse>;
     /**
-     * 查询硬件节点信息
+     * 查询集群节点信息
      */
     DescribeClusterNodes(req: DescribeClusterNodesRequest, cb?: (error: string, rep: DescribeClusterNodesResponse) => void): Promise<DescribeClusterNodesResponse>;
     /**

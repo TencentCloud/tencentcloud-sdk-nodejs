@@ -46,10 +46,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetBcosBlockByNumber", req, cb);
     }
     /**
-     * 调用长安链合约查询
+     * 批量申请长安链用户签名证书
      */
-    async QueryChainMakerContract(req, cb) {
-        return this.request("QueryChainMakerContract", req, cb);
+    async ApplyChainMakerBatchUserCert(req, cb) {
+        return this.request("ApplyChainMakerBatchUserCert", req, cb);
     }
     /**
      * 获取合约容器日志
@@ -74,6 +74,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async GetBcosBlockList(req, cb) {
         return this.request("GetBcosBlockList", req, cb);
+    }
+    /**
+     * 调用长安链合约查询
+     */
+    async QueryChainMakerContract(req, cb) {
+        return this.request("QueryChainMakerContract", req, cb);
     }
     /**
      * 查询长安链体验网络指定高度区块的交易

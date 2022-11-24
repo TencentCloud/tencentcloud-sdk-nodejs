@@ -1066,6 +1066,12 @@ export interface ModifyResourceScheduleConfigResponse {
   ErrorMsg: string
 
   /**
+      * 返回数据
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Data: string
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -1516,14 +1522,14 @@ export interface DescribeResourceScheduleRequest {
  */
 export interface Placement {
   /**
-   * 实例所属项目ID。该参数可以通过调用 DescribeProject 的返回值中的 projectId 字段来获取。填0为默认项目。
-   */
-  ProjectId: number
-
-  /**
-   * 实例所属的可用区，例如ap-guangzhou-1。该参数也可以通过调用 DescribeZones 的返回值中的Zone字段来获取。
+   * 实例所属的可用区，例如ap-guangzhou-1。该参数也可以通过调用[DescribeZones](https://cloud.tencent.com/document/product/213/15707) 的返回值中的Zone字段来获取。
    */
   Zone: string
+
+  /**
+   * 实例所属项目ID。该参数可以通过调用[DescribeProject](https://cloud.tencent.com/document/api/651/78725) 的返回值中的 projectId 字段来获取。不填为默认项目。
+   */
+  ProjectId?: number
 }
 
 /**
@@ -1853,6 +1859,12 @@ export interface InquiryPriceUpdateInstanceResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   TimeSpan: number
+
+  /**
+      * 价格详情
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PriceDetail: Array<PriceDetail>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2663,6 +2675,11 @@ export interface InquiryPriceUpdateInstanceRequest {
 <li>CNY：表示人民币。</li>
       */
   Currency?: string
+
+  /**
+   * 批量变配资源ID列表
+   */
+  ResourceIdList?: Array<string>
 }
 
 /**
@@ -2973,6 +2990,31 @@ export interface CdbInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   RegionId: number
+}
+
+/**
+ * 价格详情
+ */
+export interface PriceDetail {
+  /**
+   * 节点ID
+   */
+  ResourceId: string
+
+  /**
+   * 价格计算公式
+   */
+  Formula: string
+
+  /**
+   * 原价
+   */
+  OriginalCost: number
+
+  /**
+   * 折扣价
+   */
+  DiscountCost: number
 }
 
 /**
@@ -4176,6 +4218,18 @@ export interface NodeHardwareInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ServiceClient: string
+
+  /**
+      * 该实例是否开启实例保护，true为开启 false为关闭
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DisableApiTermination: boolean
+
+  /**
+      * 0表示老计费，1表示新计费
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TradeVersion: number
 }
 
 /**

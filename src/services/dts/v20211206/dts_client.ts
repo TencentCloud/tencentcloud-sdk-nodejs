@@ -170,7 +170,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 购买迁移服务。购买成功后会返回随机生成的迁移服务id列表，也可以通过查询迁移服务任务列表接口`DescribeMigrationJobs`看到购买成功的实例Id。注意，一旦购买成功后源及目标数据库类型，源及目标实例地域不可修改。
+   * 购买迁移任务。购买成功后会返回随机生成的迁移任务id列表，也可以通过查询迁移任务任务列表接口`DescribeMigrationJobs`看到购买成功的实例Id。注意，一旦购买成功后源及目标数据库类型，源及目标实例地域不可修改。
    */
   async CreateMigrationService(
     req: CreateMigrationServiceRequest,
@@ -300,7 +300,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口（StopMigrateJob）用于停止数据迁移任务。
+     * 本接口（StopMigrateJob）用于终止数据迁移任务。
 调用此接口后可通过查询迁移服务列表接口`DescribeMigrationJobs`来查询当前任务状态。
      */
   async StopMigrateJob(
@@ -344,7 +344,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询校验同步任务结果
+   * 查询同步校验任务结果
    */
   async DescribeCheckSyncJobResult(
     req: DescribeCheckSyncJobResultRequest,
@@ -414,7 +414,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询某个数据迁移任务详情
+   * 查询某个迁移任务详情
    */
   async DescribeMigrationDetail(
     req: DescribeMigrationDetailRequest,
@@ -466,7 +466,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   *  隔离退还数据迁移服务。调用此接口后可通过查询迁移服务列表接口`DescribeMigrationJobs`来查询当前任务状态。对于计费任务，在任务隔离后可进行解除隔离(RecoverMigrationJob)操作或直接进行下线销毁(DestroyMigrateJob)操作。对于不计费任务，调用此接口会直接删除任务，无法进行恢复操作。
+   *  隔离退还数据迁移服务。调用此接口后可通过查询迁移服务列表接口`DescribeMigrationJobs`来查询当前任务状态。对于计费任务，在任务隔离后可进行解除隔离(RecoverMigrationJob)操作或直接进行下线销毁(DestroyMigrateJob)操作。对于不计费任务，调用此接口会直接销毁任务，无法进行恢复操作。
    */
   async IsolateMigrateJob(
     req: IsolateMigrateJobRequest,

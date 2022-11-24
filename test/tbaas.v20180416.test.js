@@ -48,9 +48,9 @@ it("tbaas.v20180416.GetBcosBlockByNumber", async function () {
     }
 })
 
-it("tbaas.v20180416.QueryChainMakerContract", async function () {
+it("tbaas.v20180416.ApplyChainMakerBatchUserCert", async function () {
     try {
-       const data = await client.QueryChainMakerContract({})
+       const data = await client.ApplyChainMakerBatchUserCert({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -91,6 +91,16 @@ it("tbaas.v20180416.GetClusterListForUser", async function () {
 it("tbaas.v20180416.GetBcosBlockList", async function () {
     try {
        const data = await client.GetBcosBlockList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tbaas.v20180416.QueryChainMakerContract", async function () {
+    try {
+       const data = await client.QueryChainMakerContract({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

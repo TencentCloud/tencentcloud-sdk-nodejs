@@ -18,14 +18,15 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  CreateCustomizationResponse,
+  ApplicationList,
   ScanVoiceResponse,
   AppStatisticsItem,
   ModifyAppStatusRequest,
-  InOutTimeInfo,
+  CreateCustomizationResponse,
   DescribeScanResultListResponse,
   DescribeApplicationDataRequest,
   UserMicStatus,
+  DescribeApplicationListResponse,
   CreateScanUserResponse,
   DescribeRealtimeScanConfigResponse,
   ModifyUserMicStatusRequest,
@@ -68,6 +69,7 @@ import {
   DescribeAgeDetectTaskRequest,
   DeleteCustomizationResponse,
   ModifyUserMicStatusResponse,
+  DescribeApplicationListRequest,
   GetCustomizationListRequest,
   DescribeUserInAndOutTimeResponse,
   UpdateScanUsersRequest,
@@ -75,6 +77,7 @@ import {
   AgeDetectTaskResult,
   DescribeScanResult,
   AgeDetectTask,
+  Filter,
   ScanDetail,
   CreateAgeDetectTaskResponse,
   CreateAppRequest,
@@ -83,11 +86,14 @@ import {
   ScanVoiceResult,
   CreateAppResponse,
   OverseaTextStatisticsItem,
+  StatusInfo,
   DeleteCustomizationRequest,
   ScanPiece,
   ModifyAppStatusResponse,
+  InOutTimeInfo,
   VoiceFilterConf,
   RealtimeTextStatisticsItem,
+  ServiceStatus,
   StatisticsItem,
   ScanVoiceRequest,
   DescribeUserInAndOutTimeRequest,
@@ -416,6 +422,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeScanResultListResponse) => void
   ): Promise<DescribeScanResultListResponse> {
     return this.request("DescribeScanResultList", req, cb)
+  }
+
+  /**
+   * 本接口(DescribeApplicationList)用于查询自己账号下的应用列表
+   */
+  async DescribeApplicationList(
+    req: DescribeApplicationListRequest,
+    cb?: (error: string, rep: DescribeApplicationListResponse) => void
+  ): Promise<DescribeApplicationListResponse> {
+    return this.request("DescribeApplicationList", req, cb)
   }
 
   /**

@@ -7,7 +7,7 @@ export interface CreateTawInstanceRequest {
       */
     AreaId: number;
     /**
-      * 计费类型, (1=后付费，2=预付费)
+      * 计费类型, (1=后付费)
       */
     ChargeType: number;
     /**
@@ -217,11 +217,11 @@ export interface DescribeTawInstancesRequest {
       */
     AreaIds?: Array<number>;
     /**
-      * 实例状态(1=创建中，2=运行中，3=异常，4=重启中，5=停止中，6=已停止，7=销毁中，8=已销毁)
+      * 实例状态(1=创建中，2=运行中，3=异常，4=重启中，5=停止中，6=已停止，7=销毁中，8=已销毁), 该参数已废弃，请在Filters内注明
       */
     InstanceStatuses?: Array<number>;
     /**
-      * 实例Id
+      * 实例Id, 该参数已废弃，请在Filters内注明
       */
     InstanceIds?: Array<string>;
     /**

@@ -77,7 +77,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCvmQuota", req, cb);
     }
     /**
-     * 实例扩容
+     * 扩容节点
      */
     async ScaleOutInstance(req, cb) {
         return this.request("ScaleOutInstance", req, cb);
@@ -144,7 +144,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeResourceSchedule", req, cb);
     }
     /**
-     * 修改yarn资源调度的资源配置
+     * 修改YARN资源调度的资源配置
      */
     async ModifyResourceScheduleConfig(req, cb) {
         return this.request("ModifyResourceScheduleConfig", req, cb);
@@ -156,7 +156,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("TerminateTasks", req, cb);
     }
     /**
-     * 查询硬件节点信息
+     * 查询集群节点信息
      */
     async DescribeClusterNodes(req, cb) {
         return this.request("DescribeClusterNodes", req, cb);

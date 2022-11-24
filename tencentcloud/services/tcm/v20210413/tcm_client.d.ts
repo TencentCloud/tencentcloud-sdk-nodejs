@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { UnlinkPrometheusResponse, ModifyTracingConfigResponse, DescribeMeshResponse, UnlinkClusterResponse, LinkClusterListResponse, ModifyMeshResponse, CreateMeshResponse, LinkClusterListRequest, UnlinkPrometheusRequest, LinkPrometheusRequest, DeleteMeshResponse, DeleteMeshRequest, LinkPrometheusResponse, DescribeMeshRequest, CreateMeshRequest, DescribeMeshListRequest, UnlinkClusterRequest, ModifyTracingConfigRequest, ModifyMeshRequest, DescribeMeshListResponse } from "./tcm_models";
+import { UnlinkPrometheusResponse, ModifyTracingConfigResponse, DescribeMeshResponse, ModifyAccessLogConfigRequest, UnlinkClusterResponse, LinkClusterListResponse, ModifyAccessLogConfigResponse, CreateMeshResponse, LinkClusterListRequest, UnlinkPrometheusRequest, DescribeMeshRequest, DescribeAccessLogConfigResponse, LinkPrometheusRequest, DeleteMeshResponse, DeleteMeshRequest, LinkPrometheusResponse, DescribeAccessLogConfigRequest, CreateMeshRequest, DescribeMeshListRequest, ModifyMeshResponse, UnlinkClusterRequest, ModifyTracingConfigRequest, ModifyMeshRequest, DescribeMeshListResponse } from "./tcm_models";
 /**
  * tcm client
  * @class
@@ -11,6 +11,10 @@ export declare class Client extends AbstractClient {
      * 删除网格
      */
     DeleteMesh(req: DeleteMeshRequest, cb?: (error: string, rep: DeleteMeshResponse) => void): Promise<DeleteMeshResponse>;
+    /**
+     * 获取AccessLog配置
+     */
+    DescribeAccessLogConfig(req: DescribeAccessLogConfigRequest, cb?: (error: string, rep: DescribeAccessLogConfigResponse) => void): Promise<DescribeAccessLogConfigResponse>;
     /**
      * 关联集群
      */
@@ -24,6 +28,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeMeshList(req: DescribeMeshListRequest, cb?: (error: string, rep: DescribeMeshListResponse) => void): Promise<DescribeMeshListResponse>;
     /**
+     * 修改网格
+     */
+    ModifyMesh(req: ModifyMeshRequest, cb?: (error: string, rep: ModifyMeshResponse) => void): Promise<ModifyMeshResponse>;
+    /**
      * 解关联集群
      */
     UnlinkCluster(req: UnlinkClusterRequest, cb?: (error: string, rep: UnlinkClusterResponse) => void): Promise<UnlinkClusterResponse>;
@@ -32,9 +40,9 @@ export declare class Client extends AbstractClient {
      */
     ModifyTracingConfig(req: ModifyTracingConfigRequest, cb?: (error: string, rep: ModifyTracingConfigResponse) => void): Promise<ModifyTracingConfigResponse>;
     /**
-     * 修改网格
+     * 修改访问日志配置
      */
-    ModifyMesh(req: ModifyMeshRequest, cb?: (error: string, rep: ModifyMeshResponse) => void): Promise<ModifyMeshResponse>;
+    ModifyAccessLogConfig(req: ModifyAccessLogConfigRequest, cb?: (error: string, rep: ModifyAccessLogConfigResponse) => void): Promise<ModifyAccessLogConfigResponse>;
     /**
      * 创建网格
      */

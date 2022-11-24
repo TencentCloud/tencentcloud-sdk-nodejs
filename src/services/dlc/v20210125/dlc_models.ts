@@ -1461,6 +1461,12 @@ export interface TableBaseInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   UserSubUin?: string
+
+  /**
+      * 数据治理配置项
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  GovernPolicy?: DataGovernPolicy
 }
 
 /**
@@ -3299,6 +3305,11 @@ export interface CancelTaskResponse {
 }
 
 /**
+ * 数据治理规则
+ */
+export type DataGovernPolicy = null
+
+/**
  * UnlockMetaData返回参数结构体
  */
 export interface UnlockMetaDataResponse {
@@ -4840,6 +4851,18 @@ export interface DatabaseResponseInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   UserSubUin: string
+
+  /**
+      * 数据治理配置项
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  GovernPolicy: DataGovernPolicy
+
+  /**
+      * 数据库ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DatabaseId: string
 }
 
 /**

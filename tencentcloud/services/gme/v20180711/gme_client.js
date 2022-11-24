@@ -276,6 +276,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeScanResultList", req, cb);
     }
     /**
+     * 本接口(DescribeApplicationList)用于查询自己账号下的应用列表
+     */
+    async DescribeApplicationList(req, cb) {
+        return this.request("DescribeApplicationList", req, cb);
+    }
+    /**
      * 通过该接口，用户可以修改语音消息转文本自学习模型状态，上下线自学习模型
      */
     async ModifyCustomizationState(req, cb) {

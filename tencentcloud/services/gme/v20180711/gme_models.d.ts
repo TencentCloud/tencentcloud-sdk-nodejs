@@ -1,15 +1,35 @@
 /**
- * CreateCustomization返回参数结构体
+ * 获取应用列表返回
  */
-export interface CreateCustomizationResponse {
+export interface ApplicationList {
     /**
-      * 模型ID
+      * 服务开关状态
       */
-    ModelId: string;
+    ServiceConf: ServiceStatus;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 应用ID(AppID)
       */
-    RequestId?: string;
+    BizId: number;
+    /**
+      * 应用名称
+      */
+    AppName: string;
+    /**
+      * 项目ID，默认为0
+      */
+    ProjectId: number;
+    /**
+      * 应用状态，返回0表示正常，1表示关闭，2表示欠费停服，3表示欠费回收
+      */
+    AppStatus: number;
+    /**
+      * 创建时间，Unix时间戳格式
+      */
+    CreateTime: number;
+    /**
+      * 应用类型，无需关注此数值
+      */
+    AppType: number;
 }
 /**
  * ScanVoice返回参数结构体
@@ -83,17 +103,17 @@ export interface ModifyAppStatusRequest {
     Status: string;
 }
 /**
- * 用户进出房间信息
+ * CreateCustomization返回参数结构体
  */
-export interface InOutTimeInfo {
+export interface CreateCustomizationResponse {
     /**
-      * 进入房间时间
+      * 模型ID
       */
-    StartTime: number;
+    ModelId: string;
     /**
-      * 退出房间时间
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    EndTime: number;
+    RequestId?: string;
 }
 /**
  * DescribeScanResultList返回参数结构体
@@ -138,6 +158,23 @@ export interface UserMicStatus {
       * 是否开麦 。1闭麦  2开麦
       */
     EnableMic: number;
+}
+/**
+ * DescribeApplicationList返回参数结构体
+ */
+export interface DescribeApplicationListResponse {
+    /**
+      * 获取应用列表返回
+      */
+    ApplicationList: Array<ApplicationList>;
+    /**
+      * 应用总数
+      */
+    Total: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * CreateScanUser返回参数结构体
@@ -886,6 +923,35 @@ export interface ModifyUserMicStatusResponse {
     RequestId?: string;
 }
 /**
+ * DescribeApplicationList请求参数结构体
+ */
+export interface DescribeApplicationListRequest {
+    /**
+      * 项目ID，0表示默认项目，-1表示所有项目，如果需要查找具体项目下的应用列表，请填入具体项目ID，项目ID在项目管理中查看 https://console.cloud.tencent.com/project
+      */
+    ProjectId: number;
+    /**
+      * 页码ID，0表示第一页，以此后推。默认填0
+      */
+    PageNo: number;
+    /**
+      * 每页展示应用数量。默认填200
+      */
+    PageSize: number;
+    /**
+      * 所查找应用名称的关键字，支持模糊匹配查找。空串表示查询所有应用
+      */
+    SearchText: string;
+    /**
+      * 标签列表
+      */
+    TagSet?: Array<Tag>;
+    /**
+      * 查找过滤关键字列表
+      */
+    Filters?: Array<Filter>;
+}
+/**
  * GetCustomizationList请求参数结构体
  */
 export interface GetCustomizationListRequest {
@@ -1038,6 +1104,19 @@ export interface AgeDetectTask {
     Url: string;
 }
 /**
+ * 查找过滤
+ */
+export interface Filter {
+    /**
+      * 要过滤的字段名, 比如"AppName"
+      */
+    Name?: string;
+    /**
+      * 多个关键字
+      */
+    Values?: Array<string>;
+}
+/**
  * 语音检测详情
  */
 export interface ScanDetail {
@@ -1171,6 +1250,15 @@ export interface OverseaTextStatisticsItem {
     Data: number;
 }
 /**
+ * 服务开关状态
+ */
+export interface StatusInfo {
+    /**
+      * 服务开关状态， 0-正常，1-关闭
+      */
+    Status: number;
+}
+/**
  * DeleteCustomization请求参数结构体
  */
 export interface DeleteCustomizationRequest {
@@ -1250,6 +1338,19 @@ export interface ModifyAppStatusResponse {
     RequestId?: string;
 }
 /**
+ * 用户进出房间信息
+ */
+export interface InOutTimeInfo {
+    /**
+      * 进入房间时间
+      */
+    StartTime: number;
+    /**
+      * 退出房间时间
+      */
+    EndTime: number;
+}
+/**
  * 语音过滤服务配置数据
  */
 export interface VoiceFilterConf {
@@ -1267,6 +1368,36 @@ export interface RealtimeTextStatisticsItem {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Data: number;
+}
+/**
+ * 服务开关状态
+ */
+export interface ServiceStatus {
+    /**
+      * 实时语音服务开关状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RealTimeSpeech: StatusInfo;
+    /**
+      * 语音消息服务开关状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VoiceMessage: StatusInfo;
+    /**
+      * 语音内容安全服务开关状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Porn: StatusInfo;
+    /**
+      * 语音录制服务开关状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Live: StatusInfo;
+    /**
+      * 语音转文本服务开关状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RealTimeAsr: StatusInfo;
 }
 /**
  * 用量数据单元

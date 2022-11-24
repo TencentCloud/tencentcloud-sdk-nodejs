@@ -9035,6 +9035,18 @@ export interface HostInfo {
    * 地域ID
    */
   RegionID: number
+
+  /**
+      * 所属项目
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Project: ProjectInfo
+
+  /**
+      * 标签
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Tags: Array<TagInfo>
 }
 
 /**
@@ -9605,6 +9617,21 @@ export interface VulAffectedImageInfo {
 }
 
 /**
+ * 主机标签信息
+ */
+export interface TagInfo {
+  /**
+   * 标签键
+   */
+  TagKey: string
+
+  /**
+   * 标签值
+   */
+  TagValue: string
+}
+
+/**
  * DeleteCompliancePolicyAssetSetFromWhitelist返回参数结构体
  */
 export interface DeleteCompliancePolicyAssetSetFromWhitelistResponse {
@@ -9757,6 +9784,16 @@ export interface DescribeAssetHostDetailResponse {
    * 地域ID
    */
   RegionID: number
+
+  /**
+   * 所属项目
+   */
+  Project: ProjectInfo
+
+  /**
+   * 标签
+   */
+  Tags: Array<TagInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -15531,6 +15568,21 @@ export interface CreateImageExportJobResponse {
 }
 
 /**
+ * 主机所属项目
+ */
+export interface ProjectInfo {
+  /**
+   * 项目名称
+   */
+  ProjectName: string
+
+  /**
+   * 项目ID
+   */
+  ProjectID: number
+}
+
+/**
  * DescribeAffectedNodeList请求参数结构体
  */
 export interface DescribeAffectedNodeListRequest {
@@ -15683,13 +15735,18 @@ export interface DescribeSecLogDeliveryKafkaSettingResponse {
  */
 export interface CreateHostExportJobRequest {
   /**
-   * 导出字段
-   */
-  ExportField: Array<string>
-
-  /**
-   * 需要返回的数量，默认为10，最大值为10000
-   */
+      * 过滤条件。
+<li>Status - String - 是否必填：否 - agent状态筛选，"ALL":"全部"(或不传该字段),"UNINSTALL"："未安装","OFFLINE"："离线", "ONLINE"："防护中"</li>
+<li>HostName - String - 是否必填：否 - 主机名筛选</li>
+<li>Group- String - 是否必填：否 - 主机群组搜索</li>
+<li>HostIP- string - 是否必填：否 - 主机ip搜索</li>
+<li>HostID- string - 是否必填：否 - 主机id搜索</li>
+<li>DockerVersion- string - 是否必填：否 - docker版本搜索</li>
+<li>MachineType- string - 是否必填：否 - 主机来源MachineType搜索，"ALL":"全部"(或不传该字段),主机来源：["CVM", "ECM", "LH", "BM"]  中的之一为腾讯云服务器；["Other"]之一非腾讯云服务器；</li>
+<li>DockerStatus- string - 是否必填：否 - docker安装状态，"ALL":"全部"(或不传该字段),"INSTALL":"已安装","UNINSTALL":"未安装"</li>
+<li>ProjectID- string - 是否必填：否 - 所属项目id搜索</li>
+<li>Tag:xxx(tag:key)- string- 是否必填：否 - 标签键值搜索 示例Filters":[{"Name":"tag:tke-kind","Values":["service"]}]</li>
+      */
   Filters?: Array<AssetFilters>
 
   /**
@@ -15698,7 +15755,7 @@ export interface CreateHostExportJobRequest {
   Limit?: number
 
   /**
-   * 过滤参数,"Filters":[{"Name":"Status","Values":["2"]}]
+   * 需要返回的数量，默认为10，最大值为10000
    */
   Offset?: number
 
@@ -15711,6 +15768,11 @@ export interface CreateHostExportJobRequest {
    * 升序降序,asc desc
    */
   Order?: string
+
+  /**
+   * 导出字段
+   */
+  ExportField?: Array<string>
 }
 
 /**
@@ -20132,6 +20194,8 @@ export interface DescribeAssetHostListRequest {
 <li>DockerVersion- string - 是否必填：否 - docker版本搜索</li>
 <li>MachineType- string - 是否必填：否 - 主机来源MachineType搜索，"ALL":"全部"(或不传该字段),主机来源：["CVM", "ECM", "LH", "BM"]  中的之一为腾讯云服务器；["Other"]之一非腾讯云服务器；</li>
 <li>DockerStatus- string - 是否必填：否 - docker安装状态，"ALL":"全部"(或不传该字段),"INSTALL":"已安装","UNINSTALL":"未安装"</li>
+<li>ProjectID- string - 是否必填：否 - 所属项目id搜索</li>
+<li>Tag:xxx(tag:key)- string- 是否必填：否 - 标签键值搜索 示例Filters":[{"Name":"tag:tke-kind","Values":["service"]}]</li>
       */
   Filters?: Array<AssetFilters>
 

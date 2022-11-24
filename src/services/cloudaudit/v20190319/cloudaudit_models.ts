@@ -66,13 +66,58 @@ export interface GetAttributeKeyRequest {
 }
 
 /**
+ * 跟踪集存储信息
+ */
+export interface Storage {
+  /**
+   * 存储类型（目前支持 cos、cls）
+   */
+  StorageType: string
+
+  /**
+   * 存储所在地域
+   */
+  StorageRegion: string
+
+  /**
+   * 存储名称(cos：存储名称为用户自定义的存储桶名称，不包含"-APPID"，仅支持小写字母、数字以及中划线"-"的组合，不能超过50字符，且不支持中划线"-"开头或结尾； cls：存储名称为日志主题id，字符长度为1-50个字符)
+   */
+  StorageName: string
+
+  /**
+   * 存储目录前缀，cos日志文件前缀仅支持字母和数字的组合，3-40个字符
+   */
+  StoragePrefix: string
+}
+
+/**
  * DescribeAuditTracks返回参数结构体
  */
 export interface DescribeAuditTracksResponse {
   /**
+   * 跟踪集列表
+   */
+  Tracks: Array<Tracks>
+
+  /**
+   * 总数目
+   */
+  TotalCount: number
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * StartLogging请求参数结构体
+ */
+export interface StartLoggingRequest {
+  /**
+   * 跟踪集名称
+   */
+  AuditName: string
 }
 
 /**
@@ -188,13 +233,13 @@ export interface LookUpEventsRequest {
 }
 
 /**
- * StartLogging请求参数结构体
+ * DescribeAuditTrack请求参数结构体
  */
-export interface StartLoggingRequest {
+export interface DescribeAuditTrackRequest {
   /**
-   * 跟踪集名称
+   * 跟踪集 ID
    */
-  AuditName: string
+  TrackId: number
 }
 
 /**
@@ -270,7 +315,62 @@ export interface UpdateAuditRequest {
 /**
  * DescribeAuditTracks请求参数结构体
  */
-export type DescribeAuditTracksRequest = null
+export interface DescribeAuditTracksRequest {
+  /**
+   * 页码
+   */
+  PageNumber: number
+
+  /**
+   * 每页数目
+   */
+  PageSize: number
+}
+
+/**
+ * 跟踪集列表
+ */
+export interface Tracks {
+  /**
+   * 跟踪集名称
+   */
+  Name: string
+
+  /**
+   * 跟踪事件类型（读：Read；写：Write；全部：*）
+   */
+  ActionType: string
+
+  /**
+   * 跟踪事件所属产品（如：cos，全部：*）
+   */
+  ResourceType: string
+
+  /**
+   * 跟踪集状态（未开启：0；开启：1）
+   */
+  Status: number
+
+  /**
+   * 跟踪事件接口名列表（全部：[*]）
+   */
+  EventNames: Array<string>
+
+  /**
+   * 数据投递存储（目前支持 cos、cls）
+   */
+  Storage: Storage
+
+  /**
+   * 跟踪集创建时间
+   */
+  CreateTime: string
+
+  /**
+   * 跟踪集 ID
+   */
+  TrackId: number
+}
 
 /**
  * CreateAudit返回参数结构体
@@ -290,7 +390,12 @@ export interface CreateAuditResponse {
 /**
  * DeleteAuditTrack请求参数结构体
  */
-export type DeleteAuditTrackRequest = null
+export interface DeleteAuditTrackRequest {
+  /**
+   * 跟踪集 ID
+   */
+  TrackId: number
+}
 
 /**
  * StartLogging返回参数结构体
@@ -372,6 +477,11 @@ export interface ListKeyAliasByRegionResponse {
  */
 export interface CreateAuditTrackResponse {
   /**
+   * 跟踪集 ID
+   */
+  TrackId: number
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -401,7 +511,47 @@ export type ListAuditsRequest = null
 /**
  * ModifyAuditTrack请求参数结构体
  */
-export type ModifyAuditTrackRequest = null
+export interface ModifyAuditTrackRequest {
+  /**
+   * 跟踪集 ID
+   */
+  TrackId: number
+
+  /**
+   * 跟踪集名称，仅支持大小写字母、数字、-以及_的组合，3-48个字符
+   */
+  Name?: string
+
+  /**
+   * 跟踪事件类型（读：Read；写：Write；全部：*）
+   */
+  ActionType?: string
+
+  /**
+   * 跟踪事件所属产品（支持全部产品或单个产品，如：cos，全部：*）
+   */
+  ResourceType?: string
+
+  /**
+   * 跟踪集状态（未开启：0；开启：1）
+   */
+  Status?: number
+
+  /**
+   * 跟踪事件接口名列表（ResourceType为 * 时，EventNames必须为全部：["*"]；指定ResourceType时，支持全部接口：["*"]；支持部分接口：["cos", "cls"]，接口列表上限10个）
+   */
+  EventNames?: Array<string>
+
+  /**
+   * 数据投递存储（目前支持 cos、cls）
+   */
+  Storage?: Storage
+
+  /**
+   * 是否开启将集团成员操作日志投递到集团管理账号或者可信服务管理账号(0：未开启，1：开启，只能集团管理账号或者可信服务管理账号开启此项功能)
+   */
+  TrackForAllMembers?: number
+}
 
 /**
  * StopLogging返回参数结构体
@@ -421,7 +571,42 @@ export interface StopLoggingResponse {
 /**
  * CreateAuditTrack请求参数结构体
  */
-export type CreateAuditTrackRequest = null
+export interface CreateAuditTrackRequest {
+  /**
+   * 跟踪集名称，仅支持大小写字母、数字、-以及_的组合，3-48个字符
+   */
+  Name: string
+
+  /**
+   * 跟踪事件类型（读：Read；写：Write；全部：*）
+   */
+  ActionType: string
+
+  /**
+   * 跟踪事件所属产品（支持全部产品或单个产品，如：cos，全部：*）
+   */
+  ResourceType: string
+
+  /**
+   * 跟踪集状态（未开启：0；开启：1）
+   */
+  Status: number
+
+  /**
+   * 跟踪事件接口名列表（ResourceType为 * 时，EventNames必须为全部：["*"]；指定ResourceType时，支持全部接口：["*"]；支持部分接口：["cos", "cls"]，接口列表上限10个）
+   */
+  EventNames: Array<string>
+
+  /**
+   * 数据投递存储（目前支持 cos、cls）
+   */
+  Storage: Storage
+
+  /**
+   * 是否开启将集团成员操作日志投递到集团管理账号或者可信服务管理账号(0：未开启，1：开启，只能集团管理账号或者可信服务管理账号开启此项功能)
+   */
+  TrackForAllMembers?: number
+}
 
 /**
  * 检索条件
@@ -722,6 +907,57 @@ export interface CosRegionInfo {
    * 地域描述
    */
   CosRegionName?: string
+}
+
+/**
+ * DescribeAuditTrack返回参数结构体
+ */
+export interface DescribeAuditTrackResponse {
+  /**
+   * 跟踪集名称
+   */
+  Name: string
+
+  /**
+   * 跟踪事件类型（读：Read；写：Write；全部：*）
+   */
+  ActionType: string
+
+  /**
+   * 跟踪事件所属产品（如：cos，全部：*）
+   */
+  ResourceType: string
+
+  /**
+   * 跟踪集状态（未开启：0；开启：1）
+   */
+  Status: number
+
+  /**
+   * 跟踪事件接口名列表（全部：[*]）
+   */
+  EventNames: Array<string>
+
+  /**
+   * 数据投递存储（目前支持 cos、cls）
+   */
+  Storage: Storage
+
+  /**
+   * 跟踪集创建时间
+   */
+  CreateTime: string
+
+  /**
+      * 是否开启将集团成员操作日志投递到集团管理账号或者可信服务管理账号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TrackForAllMembers: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

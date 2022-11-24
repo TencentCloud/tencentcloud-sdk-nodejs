@@ -126,6 +126,7 @@ import {
   CreateUserRequest,
   ModifyWorkGroupRequest,
   CancelTaskResponse,
+  DataGovernPolicy,
   UnlockMetaDataResponse,
   DeleteWorkGroupResponse,
   DropDMSTableResponse,

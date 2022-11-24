@@ -741,6 +741,11 @@ export interface DBInstanceNetInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     SubnetId: string;
+    /**
+      * 连接数据库的协议类型，当前支持：postgresql、mssql（MSSQL兼容语法）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProtocolType: string;
 }
 /**
  * ModifyDBInstanceDeployment请求参数结构体
