@@ -35,6 +35,7 @@ import {
   DescribeBatchTaskRequest,
   DomainAnalyticsDetail,
   CreateSnapshotResponse,
+  KeyValue,
   DeleteRecordGroupRequest,
   PayOrderWithBalanceResponse,
   DescribeDomainResponse,
@@ -125,6 +126,7 @@ import {
   PayOrderWithBalanceRequest,
   ModifySnapshotConfigResponse,
   DescribeRecordResponse,
+  ModifyRecordFieldsRequest,
   DeleteSnapshotResponse,
   DescribeDomainPurviewResponse,
   Deals,
@@ -145,6 +147,7 @@ import {
   SnapshotInfo,
   ModifyDynamicDNSRequest,
   DescribeRecordGroupListRequest,
+  ModifyRecordFieldsResponse,
   PurviewInfo,
   ModifyRecordRemarkRequest,
   RollbackRecordSnapshotResponse,
@@ -180,7 +183,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取某个域名下的解析记录
+   * 获取某个域名下的解析记录列表
    */
   async DescribeRecordList(
     req: DescribeRecordListRequest,
@@ -277,6 +280,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSnapshotListResponse) => void
   ): Promise<DescribeSnapshotListResponse> {
     return this.request("DescribeSnapshotList", req, cb)
+  }
+
+  /**
+   * 修改记录可选字段
+   */
+  async ModifyRecordFields(
+    req: ModifyRecordFieldsRequest,
+    cb?: (error: string, rep: ModifyRecordFieldsResponse) => void
+  ): Promise<ModifyRecordFieldsResponse> {
+    return this.request("ModifyRecordFields", req, cb)
   }
 
   /**

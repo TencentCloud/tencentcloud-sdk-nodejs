@@ -28,7 +28,7 @@ class Client extends abstract_client_1.AbstractClient {
         super("dnspod.tencentcloudapi.com", "2021-03-23", clientConfig);
     }
     /**
-     * 获取某个域名下的解析记录
+     * 获取某个域名下的解析记录列表
      */
     async DescribeRecordList(req, cb) {
         return this.request("DescribeRecordList", req, cb);
@@ -86,6 +86,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeSnapshotList(req, cb) {
         return this.request("DescribeSnapshotList", req, cb);
+    }
+    /**
+     * 修改记录可选字段
+     */
+    async ModifyRecordFields(req, cb) {
+        return this.request("ModifyRecordFields", req, cb);
     }
     /**
      * 下载快照

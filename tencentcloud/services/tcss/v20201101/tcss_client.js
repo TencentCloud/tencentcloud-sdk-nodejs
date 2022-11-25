@@ -34,10 +34,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeImageAuthorizedInfo", req, cb);
     }
     /**
-     * 查询支持防御的漏洞列表
+     * 创建k8s api异常事件导出任务
      */
-    async DescribeSupportDefenceVul(req, cb) {
-        return this.request("DescribeSupportDefenceVul", req, cb);
+    async CreateK8sApiAbnormalEventExportJob(req, cb) {
+        return this.request("CreateK8sApiAbnormalEventExportJob", req, cb);
     }
     /**
      * 更新安全日志-日志投递cls配置
@@ -106,10 +106,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAccessControlDetail", req, cb);
     }
     /**
-     * 修改运行时访问控制策略的状态，启用或者禁用
+     * 查询木马自动隔离样本详情
      */
-    async ModifyAccessControlRuleStatus(req, cb) {
-        return this.request("ModifyAccessControlRuleStatus", req, cb);
+    async DescribeVirusAutoIsolateSampleDetail(req, cb) {
+        return this.request("DescribeVirusAutoIsolateSampleDetail", req, cb);
     }
     /**
      * 查询运行时异常进程策略列表信息导出
@@ -124,10 +124,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeNetworkFirewallPolicyStatus", req, cb);
     }
     /**
-     * 容器网络更新Yaml网络策略并发布任务
+     * 查询k8sapi异常事件统计
      */
-    async UpdateAndPublishNetworkFirewallPolicyYamlDetail(req, cb) {
-        return this.request("UpdateAndPublishNetworkFirewallPolicyYamlDetail", req, cb);
+    async DescribeK8sApiAbnormalSummary(req, cb) {
+        return this.request("DescribeK8sApiAbnormalSummary", req, cb);
     }
     /**
      * 创建漏洞防御导出任务
@@ -244,10 +244,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAgentDaemonSetCmd", req, cb);
     }
     /**
-     * 运行时文件扫描超时设置
+     * 创建k8sApi异常规则导出任务
      */
-    async ModifyVirusScanTimeoutSetting(req, cb) {
-        return this.request("ModifyVirusScanTimeoutSetting", req, cb);
+    async CreateK8sApiAbnormalRuleExportJob(req, cb) {
+        return this.request("CreateK8sApiAbnormalRuleExportJob", req, cb);
     }
     /**
      * 容器网络集群网络策略创建自动发现任务
@@ -365,10 +365,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateAssetImageRegistryScanTaskOneKey", req, cb);
     }
     /**
-     * 容器安全停止镜像扫描
+     * 修改运行时访问控制策略的状态，启用或者禁用
      */
-    async ModifyAssetImageScanStop(req, cb) {
-        return this.request("ModifyAssetImageScanStop", req, cb);
+    async ModifyAccessControlRuleStatus(req, cb) {
+        return this.request("ModifyAccessControlRuleStatus", req, cb);
     }
     /**
      * 容器网络集群查看Yaml网络策略详情
@@ -429,6 +429,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeRiskSyscallNames(req, cb) {
         return this.request("DescribeRiskSyscallNames", req, cb);
+    }
+    /**
+     * 修改k8sapi异常规则信息
+     */
+    async ModifyK8sApiAbnormalRuleInfo(req, cb) {
+        return this.request("ModifyK8sApiAbnormalRuleInfo", req, cb);
     }
     /**
      * 查询合规检测的定时任务列表
@@ -521,6 +527,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeValueAddedSrvInfo", req, cb);
     }
     /**
+     * 运行时更新木马文件事件状态
+     */
+    async ModifyVirusFileStatus(req, cb) {
+        return this.request("ModifyVirusFileStatus", req, cb);
+    }
+    /**
      * 添加编辑运行时反弹shell白名单
      */
     async AddEditReverseShellWhiteList(req, cb) {
@@ -569,10 +581,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeSecLogDeliveryClsOptions", req, cb);
     }
     /**
-     * 重置安全日志主题设置
+     * 查询当天未授权核数趋势
      */
-    async ResetSecLogTopicConfig(req, cb) {
-        return this.request("ResetSecLogTopicConfig", req, cb);
+    async DescribeUnauthorizedCoresTendency(req, cb) {
+        return this.request("DescribeUnauthorizedCoresTendency", req, cb);
     }
     /**
      * 查询检查结果总览，返回受影响的节点数量，返回7天的数据，总共7个
@@ -762,10 +774,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeVulDefencePlugin", req, cb);
     }
     /**
-     * 运行时更新木马文件事件状态
+     * 查询k8s api异常事件列表
      */
-    async ModifyVirusFileStatus(req, cb) {
-        return this.request("ModifyVirusFileStatus", req, cb);
+    async DescribeK8sApiAbnormalEventList(req, cb) {
+        return this.request("DescribeK8sApiAbnormalEventList", req, cb);
     }
     /**
      * 查询上次任务的资产通过率汇总信息
@@ -852,16 +864,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeVirusList", req, cb);
     }
     /**
+     * 容器安全停止镜像扫描
+     */
+    async ModifyAssetImageScanStop(req, cb) {
+        return this.request("ModifyAssetImageScanStop", req, cb);
+    }
+    /**
      * 重新检测选定的资产
      */
     async ScanComplianceAssets(req, cb) {
         return this.request("ScanComplianceAssets", req, cb);
     }
     /**
-     * 运行时停止木马查杀任务
+     * 修改k8sapi异常事件状态
      */
-    async StopVirusScanTask(req, cb) {
-        return this.request("StopVirusScanTask", req, cb);
+    async ModifyK8sApiAbnormalEventStatus(req, cb) {
+        return this.request("ModifyK8sApiAbnormalEventStatus", req, cb);
     }
     /**
      * 新增漏洞扫描忽略漏洞
@@ -924,10 +942,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeComplianceScanFailedAssetList", req, cb);
     }
     /**
-     * 容器安全搜索查询端口占用列表
+     * 查询k8s api 异常规则中范围列表
      */
-    async DescribeAssetPortList(req, cb) {
-        return this.request("DescribeAssetPortList", req, cb);
+    async DescribeK8sApiAbnormalRuleScopeList(req, cb) {
+        return this.request("DescribeK8sApiAbnormalRuleScopeList", req, cb);
+    }
+    /**
+     * 查询集群列表
+     */
+    async DescribeAssetClusterList(req, cb) {
+        return this.request("DescribeAssetClusterList", req, cb);
+    }
+    /**
+     * 查询支持防御的漏洞列表
+     */
+    async DescribeSupportDefenceVul(req, cb) {
+        return this.request("DescribeSupportDefenceVul", req, cb);
     }
     /**
      * 删除运行时高危系统调用事件
@@ -989,6 +1019,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeAssetImageRegistryRiskListExport(req, cb) {
         return this.request("DescribeAssetImageRegistryRiskListExport", req, cb);
+    }
+    /**
+     * 运行时文件扫描超时设置
+     */
+    async ModifyVirusScanTimeoutSetting(req, cb) {
+        return this.request("ModifyVirusScanTimeoutSetting", req, cb);
     }
     /**
      * 运行时文件查杀一键扫描
@@ -1061,6 +1097,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeAccessControlRuleDetail(req, cb) {
         return this.request("DescribeAccessControlRuleDetail", req, cb);
+    }
+    /**
+     * 容器网络更新Yaml网络策略并发布任务
+     */
+    async UpdateAndPublishNetworkFirewallPolicyYamlDetail(req, cb) {
+        return this.request("UpdateAndPublishNetworkFirewallPolicyYamlDetail", req, cb);
     }
     /**
      * 批量授权镜像扫描V2.0
@@ -1159,10 +1201,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AddAssetImageRegistryRegistryDetail", req, cb);
     }
     /**
-     * 查询当天未授权核数趋势
+     * 容器安全搜索查询端口占用列表
      */
-    async DescribeUnauthorizedCoresTendency(req, cb) {
-        return this.request("DescribeUnauthorizedCoresTendency", req, cb);
+    async DescribeAssetPortList(req, cb) {
+        return this.request("DescribeAssetPortList", req, cb);
     }
     /**
      * 新增或编辑本地镜像自动授权规则
@@ -1255,10 +1297,28 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeVulScanLocalImageList", req, cb);
     }
     /**
+     * 运行时停止木马查杀任务
+     */
+    async StopVirusScanTask(req, cb) {
+        return this.request("StopVirusScanTask", req, cb);
+    }
+    /**
      * 添加编辑运行时异常进程策略
      */
     async AddEditAbnormalProcessRule(req, cb) {
         return this.request("AddEditAbnormalProcessRule", req, cb);
+    }
+    /**
+     * 修改漏洞防御事件状态
+     */
+    async ModifyVulDefenceEventStatus(req, cb) {
+        return this.request("ModifyVulDefenceEventStatus", req, cb);
+    }
+    /**
+     * 重置安全日志主题设置
+     */
+    async ResetSecLogTopicConfig(req, cb) {
+        return this.request("ResetSecLogTopicConfig", req, cb);
     }
     /**
      * 运行时文件查杀重新检测
@@ -1303,10 +1363,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAssetImageList", req, cb);
     }
     /**
-     * 查询木马自动隔离样本详情
+     * 删除k8sapi异常事件规则
      */
-    async DescribeVirusAutoIsolateSampleDetail(req, cb) {
-        return this.request("DescribeVirusAutoIsolateSampleDetail", req, cb);
+    async DeleteK8sApiAbnormalRule(req, cb) {
+        return this.request("DeleteK8sApiAbnormalRule", req, cb);
     }
     /**
      * 查询运行时反弹shell事件列表信息
@@ -1387,6 +1447,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeNetworkFirewallPodLabelsList", req, cb);
     }
     /**
+     * 查询k8sapi异常事件趋势
+     */
+    async DescribeK8sApiAbnormalTendency(req, cb) {
+        return this.request("DescribeK8sApiAbnormalTendency", req, cb);
+    }
+    /**
      * 查询运行时异常进程事件列表信息
      */
     async DescribeAbnormalProcessEvents(req, cb) {
@@ -1423,10 +1489,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeESHits", req, cb);
     }
     /**
+     * 查询漏洞防御设置信息
+     */
+    async DescribeVulDefenceSetting(req, cb) {
+        return this.request("DescribeVulDefenceSetting", req, cb);
+    }
+    /**
      * 查询资产同步最近时间
      */
     async DescribeAssetSyncLastTime(req, cb) {
         return this.request("DescribeAssetSyncLastTime", req, cb);
+    }
+    /**
+     * 查询k8sapi异常请求规则详情
+     */
+    async DescribeK8sApiAbnormalRuleInfo(req, cb) {
+        return this.request("DescribeK8sApiAbnormalRuleInfo", req, cb);
     }
     /**
      * 从白名单中删除将指定的检测项。
@@ -1753,6 +1831,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAssetImageVirusList", req, cb);
     }
     /**
+     * 创建k8sapi异常事件规则
+     */
+    async CreateK8sApiAbnormalRuleInfo(req, cb) {
+        return this.request("CreateK8sApiAbnormalRuleInfo", req, cb);
+    }
+    /**
      * 查询账户容器、镜像等统计信息
      */
     async DescribeAssetSummary(req, cb) {
@@ -1795,10 +1879,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AddNetworkFirewallPolicyDetail", req, cb);
     }
     /**
-     * 修改漏洞防御事件状态
+     * 查询k8s api 异常事件详情
      */
-    async ModifyVulDefenceEventStatus(req, cb) {
-        return this.request("ModifyVulDefenceEventStatus", req, cb);
+    async DescribeK8sApiAbnormalEventInfo(req, cb) {
+        return this.request("DescribeK8sApiAbnormalEventInfo", req, cb);
     }
     /**
      * 查询待处理异常进程事件趋势
@@ -1879,6 +1963,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeVirusScanTaskStatus", req, cb);
     }
     /**
+     * 修改k8sapi异常事件规则状态
+     */
+    async ModifyK8sApiAbnormalRuleStatus(req, cb) {
+        return this.request("ModifyK8sApiAbnormalRuleStatus", req, cb);
+    }
+    /**
      * 查询容器运行时安全事件趋势
      */
     async DescribeSecEventsTendency(req, cb) {
@@ -1903,10 +1993,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteCompliancePolicyAssetSetFromWhitelist", req, cb);
     }
     /**
-     * 查询漏洞防御设置信息
+     * 查询k8sapi异常请求规则列表
      */
-    async DescribeVulDefenceSetting(req, cb) {
-        return this.request("DescribeVulDefenceSetting", req, cb);
+    async DescribeK8sApiAbnormalRuleList(req, cb) {
+        return this.request("DescribeK8sApiAbnormalRuleList", req, cb);
     }
 }
 exports.Client = Client;

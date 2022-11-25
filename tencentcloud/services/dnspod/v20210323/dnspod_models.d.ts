@@ -235,7 +235,7 @@ export interface ModifySubdomainStatusRequest {
       */
     Status: string;
     /**
-      * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+      * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
       */
     DomainId?: number;
     /**
@@ -377,7 +377,7 @@ export interface ModifyRecordGroupRequest {
  */
 export interface DescribeBatchTaskRequest {
     /**
-      * 任务ID
+      * 任务ID。操作批量接口时会返回JobId
       */
     JobId: number;
 }
@@ -407,6 +407,20 @@ export interface CreateSnapshotResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 键值对
+ */
+export interface KeyValue {
+    /**
+      * 键
+      */
+    Key: string;
+    /**
+      * 值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Value?: string;
 }
 /**
  * DeleteRecordGroup请求参数结构体
@@ -633,7 +647,7 @@ export interface DescribeDomainShareInfoRequest {
       */
     Domain: string;
     /**
-      * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+      * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
       */
     DomainId?: number;
 }
@@ -888,11 +902,11 @@ export interface ModifyRecordRequest {
       */
     Value: string;
     /**
-      * 记录 ID 。
+      * 记录 ID 。可以通过接口DescribeRecordList查到所有的解析记录列表以及对应的RecordId
       */
     RecordId: number;
     /**
-      * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+      * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
       */
     DomainId?: number;
     /**
@@ -1014,7 +1028,7 @@ export interface DeleteDomainRequest {
       */
     Domain: string;
     /**
-      * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+      * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
       */
     DomainId?: number;
 }
@@ -1031,7 +1045,7 @@ export interface ModifyDomainOwnerRequest {
       */
     Account: string;
     /**
-      * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+      * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
       */
     DomainId?: number;
 }
@@ -1040,7 +1054,7 @@ export interface ModifyDomainOwnerRequest {
  */
 export interface ModifyPackageAutoRenewRequest {
     /**
-      * 资源ID
+      * 资源ID。可以在控制台查看所有的资源
       */
     ResourceId: string;
     /**
@@ -1106,7 +1120,7 @@ export interface DescribeRecordLineListRequest {
       */
     DomainGrade: string;
     /**
-      * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+      * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
       */
     DomainId?: number;
 }
@@ -1145,7 +1159,7 @@ export interface CreateRecordBatchRequest {
  */
 export interface DeleteDomainAliasRequest {
     /**
-      * 域名别名ID
+      * 域名别名ID。可以通过接口DescribeDomainAliasList查到所有的域名别名列表以及对应的ID
       */
     DomainAliasId: number;
     /**
@@ -1153,7 +1167,7 @@ export interface DeleteDomainAliasRequest {
       */
     Domain: string;
     /**
-      * 域名ID，参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain
+      * 域名ID，参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
       */
     DomainId?: number;
 }
@@ -1234,7 +1248,7 @@ export interface ModifyDomainLockRequest {
       */
     LockDays: number;
     /**
-      * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+      * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
       */
     DomainId?: number;
 }
@@ -1251,7 +1265,7 @@ export interface ModifyDomainStatusRequest {
       */
     Status: string;
     /**
-      * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+      * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
       */
     DomainId?: number;
 }
@@ -1336,7 +1350,7 @@ export interface DescribeRecordRequest {
       */
     RecordId: number;
     /**
-      * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。DomainId是域名的资源ID，可以通过接口DescribeDomainList查到所有的Domain以及DomainId
+      * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
       */
     DomainId?: number;
 }
@@ -1378,7 +1392,7 @@ export interface DescribeSubdomainAnalyticsRequest {
       */
     DnsFormat?: string;
     /**
-      * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+      * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
       */
     DomainId?: number;
 }
@@ -1391,11 +1405,11 @@ export interface DeleteRecordRequest {
       */
     Domain: string;
     /**
-      * 记录 ID 。
+      * 记录 ID 。可以通过接口DescribeRecordList查到所有的解析记录列表以及对应的RecordId
       */
     RecordId: number;
     /**
-      * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+      * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
       */
     DomainId?: number;
 }
@@ -1408,7 +1422,7 @@ export interface DescribeDomainRequest {
       */
     Domain: string;
     /**
-      * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+      * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
       */
     DomainId?: number;
 }
@@ -1442,7 +1456,7 @@ export interface ModifyRecordStatusRequest {
       */
     Domain: string;
     /**
-      * 记录 ID 。
+      * 记录 ID 。可以通过接口DescribeRecordList查到所有的解析记录列表以及对应的RecordId
       */
     RecordId: number;
     /**
@@ -1450,7 +1464,7 @@ export interface ModifyRecordStatusRequest {
       */
     Status: string;
     /**
-      * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+      * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
       */
     DomainId?: number;
 }
@@ -1709,7 +1723,7 @@ export interface DescribeDomainLogListRequest {
       */
     Domain: string;
     /**
-      * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+      * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
       */
     DomainId?: number;
     /**
@@ -1743,7 +1757,7 @@ export interface DescribeDomainListResponse {
  */
 export interface ModifyRecordBatchRequest {
     /**
-      * 记录ID数组
+      * 记录ID数组。可以通过接口DescribeRecordList查到所有的解析记录列表以及对应的RecordId
       */
     RecordIdList: Array<number>;
     /**
@@ -2306,7 +2320,7 @@ export interface CreateDomainRequest {
       */
     Domain: string;
     /**
-      * 域名分组ID
+      * 域名分组ID。可以通过接口DescribeDomainGroupList查看当前域名分组信息
       */
     GroupId?: number;
     /**
@@ -2362,7 +2376,7 @@ export interface ModifyDomainRemarkRequest {
       */
     Domain: string;
     /**
-      * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+      * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
       */
     DomainId?: number;
     /**
@@ -2392,7 +2406,7 @@ export interface DescribeRecordListRequest {
       */
     Domain: string;
     /**
-      * 要获取的解析记录所属的域名Id，如果传了DomainId，系统将会忽略Domain参数
+      * 要获取的解析记录所属的域名Id，如果传了DomainId，系统将会忽略Domain参数。 可以通过接口DescribeDomainList查到所有的Domain以及DomainId
       */
     DomainId?: number;
     /**
@@ -2404,15 +2418,15 @@ export interface DescribeRecordListRequest {
       */
     RecordType?: string;
     /**
-      * 获取某条线路名称的解析记录
+      * 获取某条线路名称的解析记录。可以通过接口DescribeRecordLineList查看当前域名允许的线路信息
       */
     RecordLine?: string;
     /**
-      * 获取某个线路Id对应的解析记录，如果传RecordLineId，系统会忽略RecordLine参数
+      * 获取某个线路Id对应的解析记录，如果传RecordLineId，系统会忽略RecordLine参数。可以通过接口DescribeRecordLineList查看当前域名允许的线路信息
       */
     RecordLineId?: string;
     /**
-      * 获取某个分组下的解析记录时，传这个分组Id
+      * 获取某个分组下的解析记录时，传这个分组Id。
       */
     GroupId?: number;
     /**
@@ -2445,7 +2459,7 @@ export interface PayOrderWithBalanceRequest {
       */
     BigDealIdList: Array<string>;
     /**
-      * 代金券ID数组
+      * 代金券ID数组。可以从控制台查到拥有的代金券
       */
     VoucherIdList?: Array<string>;
 }
@@ -2470,6 +2484,27 @@ export interface DescribeRecordResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * ModifyRecordFields请求参数结构体
+ */
+export interface ModifyRecordFieldsRequest {
+    /**
+      * 域名
+      */
+    Domain: string;
+    /**
+      * 记录 ID 。
+      */
+    RecordId: number;
+    /**
+      * 要修改的记录属性和值，支持：sub_domain，record_line，record_line_id，record_type，value，ttl，status，mx，weight
+      */
+    FieldList: Array<KeyValue>;
+    /**
+      * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+      */
+    DomainId?: number;
 }
 /**
  * DeleteSnapshot返回参数结构体
@@ -2706,7 +2741,7 @@ export interface DescribeDomainAliasListRequest {
       */
     Domain: string;
     /**
-      * 域名ID,域名ID，参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain
+      * 域名ID,域名ID，参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
       */
     DomainId?: number;
 }
@@ -2723,7 +2758,7 @@ export interface CreateDomainAliasRequest {
       */
     Domain: string;
     /**
-      * 域名ID，参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain
+      * 域名ID，参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
       */
     DomainId?: number;
 }
@@ -2740,7 +2775,7 @@ export interface DeleteShareDomainRequest {
       */
     Account: string;
     /**
-      * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+      * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
       */
     DomainId?: number;
 }
@@ -2782,7 +2817,7 @@ export interface ModifyDynamicDNSRequest {
       */
     Domain: string;
     /**
-      * 记录ID。
+      * 记录ID。 可以通过接口DescribeRecordList查到所有的解析记录列表以及对应的RecordId
       */
     RecordId: number;
     /**
@@ -2794,7 +2829,7 @@ export interface ModifyDynamicDNSRequest {
       */
     Value: string;
     /**
-      * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+      * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
       */
     DomainId?: number;
     /**
@@ -2832,6 +2867,19 @@ export interface DescribeRecordGroupListRequest {
     Limit?: number;
 }
 /**
+ * ModifyRecordFields返回参数结构体
+ */
+export interface ModifyRecordFieldsResponse {
+    /**
+      * 记录ID
+      */
+    RecordId: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 域名权限项
  */
 export interface PurviewInfo {
@@ -2853,11 +2901,11 @@ export interface ModifyRecordRemarkRequest {
       */
     Domain: string;
     /**
-      * 记录 ID 。
+      * 记录 ID 。可以通过接口DescribeRecordList查到所有的解析记录列表以及对应的RecordId
       */
     RecordId: number;
     /**
-      * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+      * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
       */
     DomainId?: number;
     /**
@@ -2946,7 +2994,7 @@ export interface DescribeDomainPurviewRequest {
       */
     Domain: string;
     /**
-      * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+      * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
       */
     DomainId?: number;
 }
@@ -3002,7 +3050,7 @@ export interface ModifyDomainUnlockRequest {
       */
     LockCode: string;
     /**
-      * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+      * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
       */
     DomainId?: number;
 }
@@ -3058,7 +3106,7 @@ export interface CreateDealResponse {
  */
 export interface ModifyVasAutoRenewStatusRequest {
     /**
-      * 资源ID
+      * 资源ID。可以从控制台查看所有的资源
       */
     ResourceId: string;
     /**
@@ -3171,7 +3219,7 @@ export interface DescribeDomainAnalyticsRequest {
       */
     DnsFormat?: string;
     /**
-      * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+      * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
       */
     DomainId?: number;
 }

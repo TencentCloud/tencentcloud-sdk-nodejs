@@ -95,7 +95,7 @@ export interface CreateDBInstanceRequest {
   SubnetId?: string
 
   /**
-   * 实例密码，不设置该参数则默认密码规则为 实例ID+"@"+主账户uin。举例实例id为cmgo-higv73ed，uin为100000001，则默认密码为"cmgo-higv73ed@100000001"。密码必须是8-16位字符，且至少包含字母、数字和字符 !@#%^*() 中的两种
+   * 实例密码，不设置该参数则默认密码规则为 实例ID+"@"+主账户uin。举例实例id为cmgo-higv73ed，uin为100000001，则默认密码为"cmgo-higv73ed@100000001"。 自定义密码格式为8-32个字符长度，至少包含字母、数字和字符（!@#%^*()_）中的两种
    */
   Password?: string
 
@@ -158,6 +158,21 @@ export interface CreateDBInstanceRequest {
    * mongos 数量，购买MongoDB 4.2 WiredTiger存储引擎版本的分片集群时必须填写，具体支持的售卖版本请参照查询云数据库的售卖规格（DescribeSpecInfo）返回结果。注：为了保障高可用，最低需要购买3个mongos，上限为32个
    */
   MongosNodeNum?: number
+
+  /**
+   * 只读节点数量，最大不超过7个
+   */
+  ReadonlyNodeNum?: number
+
+  /**
+   * 只读节点部署可用区
+   */
+  ReadonlyNodeAvailabilityZoneList?: Array<string>
+
+  /**
+   * Hidden节点所在的可用区，跨可用区实例必传
+   */
+  HiddenZone?: string
 }
 
 /**
@@ -2342,7 +2357,7 @@ export interface DescribeSpecInfoResponse {
   /**
    * 实例售卖规格信息列表
    */
-  SpecInfoList?: Array<SpecificationInfo>
+  SpecInfoList: Array<SpecificationInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

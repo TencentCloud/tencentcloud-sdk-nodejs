@@ -323,6 +323,125 @@ export interface CreateVulDefenceHostExportJobResponse {
 }
 
 /**
+ * 容器安全镜像漏洞信息
+ */
+export interface ImageVul {
+  /**
+      * 漏洞id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CVEID: string
+
+  /**
+      * 观点验证程序id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  POCID: string
+
+  /**
+      * 漏洞名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Name: string
+
+  /**
+      * 涉及组件信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Components: Array<ComponentsInfo>
+
+  /**
+      * 分类
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Category: string
+
+  /**
+      * 分类2
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CategoryType: string
+
+  /**
+      * 风险等级
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Level: string
+
+  /**
+      * 描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Des: string
+
+  /**
+      * 解决方案
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OfficialSolution: string
+
+  /**
+      * 引用
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Reference: string
+
+  /**
+      * 防御方案
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DefenseSolution: string
+
+  /**
+      * 提交时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SubmitTime: string
+
+  /**
+      * Cvss分数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CvssScore: string
+
+  /**
+      * Cvss信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CvssVector: string
+
+  /**
+      * 是否建议修复
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsSuggest: string
+
+  /**
+      * 修复版本号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FixedVersions: string
+
+  /**
+      * 漏洞标签:"CanBeFixed","DynamicLevelPoc","DynamicLevelExp"
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Tag: Array<string>
+
+  /**
+      * 组件名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Component: string
+
+  /**
+      * 组件版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Version: string
+}
+
+/**
  * CreateVulImageExportJob返回参数结构体
  */
 export interface CreateVulImageExportJobResponse {
@@ -730,6 +849,16 @@ export interface VulIgnoreLocalImage {
    * 漏洞PocID
    */
   PocID: string
+}
+
+/**
+ * ModifyK8sApiAbnormalRuleInfo返回参数结构体
+ */
+export interface ModifyK8sApiAbnormalRuleInfoResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1439,6 +1568,16 @@ export interface DescribeClusterDetailRequest {
 }
 
 /**
+ * ModifyK8sApiAbnormalRuleInfo请求参数结构体
+ */
+export interface ModifyK8sApiAbnormalRuleInfoRequest {
+  /**
+   * 规则详情
+   */
+  RuleInfo: K8sApiAbnormalRuleInfo
+}
+
+/**
  * UpdateAndPublishNetworkFirewallPolicyDetail返回参数结构体
  */
 export interface UpdateAndPublishNetworkFirewallPolicyDetailResponse {
@@ -1513,57 +1652,18 @@ export interface DescribeRiskSyscallWhiteListDetailRequest {
 }
 
 /**
- * DescribeNetworkFirewallPolicyYamlDetail返回参数结构体
+ * DescribeK8sApiAbnormalRuleScopeList返回参数结构体
  */
-export interface DescribeNetworkFirewallPolicyYamlDetailResponse {
+export interface DescribeK8sApiAbnormalRuleScopeListResponse {
   /**
-   * 集群Id
+   * 总数
    */
-  ClusterId: string
+  TotalCount: number
 
   /**
-   * 策略名
+   * 列表
    */
-  PolicyName: string
-
-  /**
-      * base64编码的yaml字符串
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Yaml: string
-
-  /**
-      * 策略描述
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Description: string
-
-  /**
-   * 策略创建时间
-   */
-  PolicyCreateTime: string
-
-  /**
-   * 策略源类型，分为System和Manual，分别代表手动和系统添加
-   */
-  PolicySourceType: string
-
-  /**
-      * 网络策略对应的网络插件
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  NetworkPolicyPlugin: string
-
-  /**
-   * 网络策略状态
-   */
-  PublishStatus: string
-
-  /**
-      * 网络发布结果
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  PublishResult: string
+  List: Array<K8sApiAbnormalRuleScopeInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2098,6 +2198,41 @@ export interface DescribeRiskSyscallEventsResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 集群列表Item
+ */
+export interface AssetClusterListItem {
+  /**
+   * 集群ID
+   */
+  ClusterID: string
+
+  /**
+   * 集群名称
+   */
+  ClusterName: string
+
+  /**
+      * 集群状态
+CSR_RUNNING: 运行中
+CSR_EXCEPTION:异常
+CSR_DEL:已经删除
+      */
+  Status: string
+
+  /**
+   * 绑定规则名称
+   */
+  BindRuleName: string
+
+  /**
+      * 集群类型:
+CT_TKE: TKE集群
+CT_USER_CREATE: 用户自建集群
+      */
+  ClusterType: string
 }
 
 /**
@@ -2758,6 +2893,26 @@ export interface AbnormalProcessEventTendencyInfo {
 }
 
 /**
+ * DescribeAssetClusterList返回参数结构体
+ */
+export interface DescribeAssetClusterListResponse {
+  /**
+   * 集群列表
+   */
+  List: Array<AssetClusterListItem>
+
+  /**
+   * 总数量
+   */
+  TotalCount: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 容器逃逸扫描策略开关信息
  */
 export interface EscapeRule {
@@ -2835,9 +2990,15 @@ ASSET_K8S, K8S资产
 }
 
 /**
- * RemoveAssetImageRegistryRegistryDetail返回参数结构体
+ * DescribeAssetImageRegistryRiskListExport返回参数结构体
  */
-export interface RemoveAssetImageRegistryRegistryDetailResponse {
+export interface DescribeAssetImageRegistryRiskListExportResponse {
+  /**
+      * excel文件下载地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DownloadUrl: string
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3046,6 +3207,56 @@ export interface ProcessInfo {
    * 外网ip
    */
   PublicIp: string
+}
+
+/**
+ * 基本镜像信息
+ */
+export interface ImageInfo {
+  /**
+   * 实例名称
+   */
+  InstanceName: string
+
+  /**
+   * 命名空间
+   */
+  Namespace: string
+
+  /**
+   * 镜像名称
+   */
+  ImageName: string
+
+  /**
+   * 镜像tag
+   */
+  ImageTag: string
+
+  /**
+   * 强制扫描
+   */
+  Force: string
+
+  /**
+   * 镜像id
+   */
+  ImageDigest?: string
+
+  /**
+   * 仓库类型
+   */
+  RegistryType?: string
+
+  /**
+   * 镜像仓库地址
+   */
+  ImageRepoAddress?: string
+
+  /**
+   * 实例id
+   */
+  InstanceId?: string
 }
 
 /**
@@ -3383,6 +3594,134 @@ export interface CreateWebVulExportJobRequest {
 }
 
 /**
+ * CreateK8sApiAbnormalEventExportJob请求参数结构体
+ */
+export interface CreateK8sApiAbnormalEventExportJobRequest {
+  /**
+      * 过滤条件。
+<li>TimeRange - string -是否必填: 否 - 时间范围筛选 ["2022-03-31 16:55:00", "2022-03-31 17:00:00"]</li>
+<li>MatchRules - string  - 是否必填: 否 -命中规则筛选</li>
+<li>RiskLevel - string  - 是否必填: 否 -威胁等级筛选</li>
+<li>Status - string  - 是否必填: 否 -事件状态筛选</li>
+<li>MatchRuleType - string  - 是否必填: 否 -命中规则类型筛选</li>
+<li>ClusterRunningStatus - string  - 是否必填: 否 -集群运行状态</li>
+<li>ClusterName - string  - 是否必填: 否 -集群名称</li>
+<li>ClusterID - string  - 是否必填: 否 -集群ID</li>
+      */
+  Filters?: Array<RunTimeFilters>
+
+  /**
+   * 排序方式
+   */
+  Order?: string
+
+  /**
+   * 排序字段
+   */
+  By?: string
+
+  /**
+   * 导出字段
+   */
+  ExportField?: Array<string>
+}
+
+/**
+ * DescribeK8sApiAbnormalTendency返回参数结构体
+ */
+export interface DescribeK8sApiAbnormalTendencyResponse {
+  /**
+   * 趋势列表
+   */
+  List: Array<K8sApiAbnormalTendencyItem>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * k8sapi异常事件列表Item
+ */
+export interface K8sApiAbnormalEventListItem {
+  /**
+   * 事件ID
+   */
+  ID: number
+
+  /**
+   * 命中规则类型
+   */
+  MatchRuleType: string
+
+  /**
+   * 威胁等级
+   */
+  RiskLevel: string
+
+  /**
+   * 集群ID
+   */
+  ClusterID: string
+
+  /**
+   * 集群名称
+   */
+  ClusterName: string
+
+  /**
+   * 集群运行状态
+   */
+  ClusterRunningStatus: string
+
+  /**
+   * 初次生成时间
+   */
+  FirstCreateTime: string
+
+  /**
+   * 最近一次生成时间
+   */
+  LastCreateTime: string
+
+  /**
+   * 告警数量
+   */
+  AlarmCount: number
+
+  /**
+   * 状态
+   */
+  Status: string
+
+  /**
+   * 规则类型
+   */
+  RuleType: string
+
+  /**
+   * 描述信息
+   */
+  Desc: string
+
+  /**
+   * 解决方案
+   */
+  Suggestion: string
+
+  /**
+   * 规则名称
+   */
+  RuleName: string
+
+  /**
+   * 命中规则
+   */
+  MatchRule: K8sApiAbnormalRuleScopeInfo
+}
+
+/**
  * 安全日志接入详情
  */
 export interface SecLogJoinInfo {
@@ -3486,6 +3825,48 @@ export interface AddEditRiskSyscallWhiteListRequest {
    * 增加或编辑白名单信。新增白名单时WhiteListInfo.id为空，编辑白名单WhiteListInfo.id不能为空.
    */
   WhiteListInfo?: RiskSyscallWhiteListInfo
+}
+
+/**
+ * k8a api 异常请求规则详情
+ */
+export interface K8sApiAbnormalRuleInfo {
+  /**
+   * 规则名称
+   */
+  RuleName: string
+
+  /**
+   * 状态
+   */
+  Status: boolean
+
+  /**
+   * 规则信息列表
+   */
+  RuleInfoList: Array<K8sApiAbnormalRuleScopeInfo>
+
+  /**
+   * 生效集群IDSet
+   */
+  EffectClusterIDSet: Array<string>
+
+  /**
+      * 规则类型
+RT_SYSTEM 系统规则
+RT_USER 用户自定义
+      */
+  RuleType: string
+
+  /**
+   * 是否所有集群生效
+   */
+  EffectAllCluster: boolean
+
+  /**
+   * 规则ID
+   */
+  RuleID?: string
 }
 
 /**
@@ -3817,6 +4198,41 @@ export interface DescribeAssetImageVirusListResponse {
  * DeleteComplianceAssetPolicySetFromWhitelist返回参数结构体
  */
 export interface DeleteComplianceAssetPolicySetFromWhitelistResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeK8sApiAbnormalSummary返回参数结构体
+ */
+export interface DescribeK8sApiAbnormalSummaryResponse {
+  /**
+   * 待处理事件个数
+   */
+  UnhandleEventCount: number
+
+  /**
+   * 待处理高危事件个数
+   */
+  UnhandleHighLevelEventCount: number
+
+  /**
+   * 待处理中危事件个数
+   */
+  UnhandleMediumLevelEventCount: number
+
+  /**
+   * 待处理低危事件个数
+   */
+  UnhandleLowLevelEventCount: number
+
+  /**
+   * 待处理提示级别事件个数
+   */
+  UnhandleNoticeLevelEventCount: number
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5090,6 +5506,163 @@ export interface DescribeAbnormalProcessRuleDetailRequest {
 export type DescribeLogStorageStatisticRequest = null
 
 /**
+ * 运行时木马列表信息
+ */
+export interface VirusInfo {
+  /**
+   * 文件名称
+   */
+  FileName: string
+
+  /**
+   * 文件路径
+   */
+  FilePath: string
+
+  /**
+   * 病毒名称
+   */
+  VirusName: string
+
+  /**
+   * 创建时间
+   */
+  CreateTime: string
+
+  /**
+   * 更新时间
+   */
+  ModifyTime: string
+
+  /**
+   * 容器名称
+   */
+  ContainerName: string
+
+  /**
+   * 容器id
+   */
+  ContainerId: string
+
+  /**
+      * 容器状态
+正在运行: RUNNING
+暂停: PAUSED
+停止: STOPPED
+已经创建: CREATED
+已经销毁: DESTROYED
+正在重启中: RESTARTING
+迁移中: REMOVING
+      */
+  ContainerStatus: string
+
+  /**
+   * 镜像名称
+   */
+  ImageName: string
+
+  /**
+   * 镜像id
+   */
+  ImageId: string
+
+  /**
+      * DEAL_NONE:文件待处理
+DEAL_IGNORE:已经忽略
+DEAL_ADD_WHITELIST:加白
+DEAL_DEL:文件已经删除
+DEAL_ISOLATE:已经隔离
+DEAL_ISOLATING:隔离中
+DEAL_ISOLATE_FAILED:隔离失败
+DEAL_RECOVERING:恢复中
+DEAL_RECOVER_FAILED: 恢复失败
+      */
+  Status: string
+
+  /**
+   * 事件id
+   */
+  Id: string
+
+  /**
+   * 事件描述
+   */
+  HarmDescribe: string
+
+  /**
+   * 建议方案
+   */
+  SuggestScheme: string
+
+  /**
+      * 失败子状态:
+FILE_NOT_FOUND:文件不存在
+FILE_ABNORMAL:文件异常
+FILE_ABNORMAL_DEAL_RECOVER:恢复文件时，文件异常
+BACKUP_FILE_NOT_FOUND:备份文件不存在
+CONTAINER_NOT_FOUND_DEAL_ISOLATE:隔离时，容器不存在
+CONTAINER_NOT_FOUND_DEAL_RECOVER:恢复时，容器不存在
+TIMEOUT: 超时
+TOO_MANY: 任务过多
+OFFLINE: 离线
+INTERNAL: 服务内部错误
+VALIDATION: 参数非法
+      */
+  SubStatus: string
+
+  /**
+      * 网络状态
+未隔离  	NORMAL
+已隔离		ISOLATED
+隔离中		ISOLATING
+隔离失败	ISOLATE_FAILED
+解除隔离中  RESTORING
+解除隔离失败 RESTORE_FAILED
+      */
+  ContainerNetStatus: string
+
+  /**
+      * 容器子状态
+"AGENT_OFFLINE"       //Agent离线
+	"NODE_DESTROYED"      //节点已销毁
+	"CONTAINER_EXITED"    //容器已退出
+	"CONTAINER_DESTROYED" //容器已销毁
+	"SHARED_HOST"         // 容器与主机共享网络
+	"RESOURCE_LIMIT"      //隔离操作资源超限
+	"UNKNOW"              // 原因未知
+      */
+  ContainerNetSubStatus: string
+
+  /**
+   * 容器隔离操作来源
+   */
+  ContainerIsolateOperationSrc: string
+
+  /**
+      * md5值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MD5: string
+
+  /**
+      * 风险等级 RISK_CRITICAL, RISK_HIGH, RISK_MEDIUM, RISK_LOW, RISK_NOTICE。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RiskLevel: string
+
+  /**
+      * 检测平台
+1: 云查杀引擎
+2: tav
+3: binaryAi
+4: 异常行为
+5: 威胁情报
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CheckPlatform: Array<string>
+}
+
+/**
  * DescribeVulIgnoreRegistryImageList请求参数结构体
  */
 export interface DescribeVulIgnoreRegistryImageListRequest {
@@ -5898,6 +6471,21 @@ export interface ImagesVul {
 }
 
 /**
+ * DescribePromotionActivity返回参数结构体
+ */
+export interface DescribePromotionActivityResponse {
+  /**
+   * 促销活动内容
+   */
+  List: Array<PromotionActivityContent>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyVirusMonitorSetting请求参数结构体
  */
 export interface ModifyVirusMonitorSettingRequest {
@@ -6015,6 +6603,11 @@ export interface DescribeVulContainerListResponse {
 }
 
 /**
+ * DescribeRiskSyscallNames请求参数结构体
+ */
+export type DescribeRiskSyscallNamesRequest = null
+
+/**
  * ModifyVulDefenceEventStatus返回参数结构体
  */
 export interface ModifyVulDefenceEventStatusResponse {
@@ -6037,6 +6630,21 @@ export interface DescribeEscapeEventInfoResponse {
    * 事件总数量
    */
   TotalCount: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeK8sApiAbnormalRuleInfo返回参数结构体
+ */
+export interface DescribeK8sApiAbnormalRuleInfoResponse {
+  /**
+   * 规则详情
+   */
+  Info: K8sApiAbnormalRuleInfo
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -7068,53 +7676,43 @@ Name 可取值：ClusterName,ClusterId,ClusterType,Region,ClusterCheckMode,Clust
 }
 
 /**
- * 基本镜像信息
+ * DescribeK8sApiAbnormalEventList请求参数结构体
  */
-export interface ImageInfo {
+export interface DescribeK8sApiAbnormalEventListRequest {
   /**
-   * 实例名称
-   */
-  InstanceName: string
+      * 过滤条件。
+<li>TimeRange - string -是否必填: 否 - 时间范围筛选 ["2022-03-31 16:55:00", "2022-03-31 17:00:00"]</li>
+<li>MatchRules - string  - 是否必填: 否 -命中规则筛选</li>
+<li>RiskLevel - string  - 是否必填: 否 -威胁等级筛选</li>
+<li>Status - string  - 是否必填: 否 -事件状态筛选</li>
+<li>MatchRuleType - string  - 是否必填: 否 -命中规则类型筛选</li>
+<li>ClusterRunningStatus - string  - 是否必填: 否 -集群运行状态</li>
+<li>ClusterName - string  - 是否必填: 否 -集群名称</li>
+<li>ClusterID - string  - 是否必填: 否 -集群ID</li>
+      */
+  Filters?: Array<RunTimeFilters>
 
   /**
-   * 命名空间
+   * 需要返回的数量，默认为10，最大值为100
    */
-  Namespace: string
+  Limit?: number
 
   /**
-   * 镜像名称
+   * 偏移量，默认为0。
    */
-  ImageName: string
+  Offset?: number
 
   /**
-   * 镜像tag
+   * 排序方式
    */
-  ImageTag: string
+  Order?: string
 
   /**
-   * 强制扫描
-   */
-  Force: string
-
-  /**
-   * 镜像id
-   */
-  ImageDigest?: string
-
-  /**
-   * 仓库类型
-   */
-  RegistryType?: string
-
-  /**
-   * 镜像仓库地址
-   */
-  ImageRepoAddress?: string
-
-  /**
-   * 实例id
-   */
-  InstanceId?: string
+      * 排序字段
+LatestFoundTime: 最近生成时间
+AlarmCount: 告警数量
+      */
+  By?: string
 }
 
 /**
@@ -7532,6 +8130,16 @@ export interface NetworkClusterInfoItem {
  * AddEscapeWhiteList返回参数结构体
  */
 export interface AddEscapeWhiteListResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifySecLogCleanSettingInfo返回参数结构体
+ */
+export interface ModifySecLogCleanSettingInfoResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8579,6 +9187,51 @@ export interface DescribeABTestConfigRequest {
 }
 
 /**
+ * k8s api 异常事件规则配置范围
+ */
+export interface K8sApiAbnormalRuleScopeInfo {
+  /**
+      * 范围
+系统事件:
+ANONYMOUS_ACCESS: 匿名访问
+ABNORMAL_UA_REQ: 异常UA请求
+ANONYMOUS_ABNORMAL_PERMISSION: 匿名用户权限异动
+GET_CREDENTIALS: 凭据信息获取
+MOUNT_SENSITIVE_PATH: 敏感路径挂载
+COMMAND_RUN: 命令执行
+PRIVILEGE_CONTAINER: 特权容器
+EXCEPTION_CRONTAB_TASK: 异常定时任务
+STATICS_POD: 静态pod创建
+ABNORMAL_CREATE_POD: 异常pod创建
+USER_DEFINED: 用户自定义
+      */
+  Scope: string
+
+  /**
+   * 动作(RULE_MODE_ALERT: 告警 RULE_MODE_RELEASE:放行)
+   */
+  Action: string
+
+  /**
+      * 威胁等级 HIGH:高级 MIDDLE: 中级 LOW:低级 NOTICE:提示
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RiskLevel?: string
+
+  /**
+      * 开关状态(true:开 false:关) 适用于系统规则
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Status?: boolean
+
+  /**
+      * 是否被删除 适用于自定义规则入参
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsDelete?: boolean
+}
+
+/**
  * StopVulScanTask请求参数结构体
  */
 export interface StopVulScanTaskRequest {
@@ -9110,6 +9763,26 @@ export interface ModifyAssetImageScanStopRequest {
 export type CreateRefreshTaskRequest = null
 
 /**
+ * DescribeK8sApiAbnormalEventList返回参数结构体
+ */
+export interface DescribeK8sApiAbnormalEventListResponse {
+  /**
+   * 事件列表
+   */
+  List: Array<K8sApiAbnormalEventListItem>
+
+  /**
+   * 总数量
+   */
+  TotalCount: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeNewestVul请求参数结构体
  */
 export type DescribeNewestVulRequest = null
@@ -9290,6 +9963,21 @@ export interface DescribeAccessControlRuleDetailRequest {
 }
 
 /**
+ * ModifyVirusScanTimeoutSetting请求参数结构体
+ */
+export interface ModifyVirusScanTimeoutSettingRequest {
+  /**
+   * 超时时长单位小时(5~24h)
+   */
+  Timeout: number
+
+  /**
+   * 设置类型0一键检测，1定时检测
+   */
+  ScanType: number
+}
+
+/**
  * CreateProcessEventsExportJob返回参数结构体
  */
 export interface CreateProcessEventsExportJobResponse {
@@ -9364,6 +10052,16 @@ export interface DescribeRiskSyscallDetailResponse {
       */
   AncestorProcessInfo: ProcessBaseInfo
 
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteK8sApiAbnormalRule返回参数结构体
+ */
+export interface DeleteK8sApiAbnormalRuleResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -9632,6 +10330,26 @@ export interface TagInfo {
 }
 
 /**
+ * DescribeK8sApiAbnormalRuleList返回参数结构体
+ */
+export interface DescribeK8sApiAbnormalRuleListResponse {
+  /**
+   * 规则列表
+   */
+  List: Array<K8sApiAbnormalRuleListItem>
+
+  /**
+   * 总数量
+   */
+  TotalCount: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteCompliancePolicyAssetSetFromWhitelist返回参数结构体
  */
 export interface DeleteCompliancePolicyAssetSetFromWhitelistResponse {
@@ -9857,9 +10575,14 @@ export interface DescribeAffectedNodeListResponse {
 }
 
 /**
- * DescribeClusterSummary请求参数结构体
+ * DeleteK8sApiAbnormalRule请求参数结构体
  */
-export type DescribeClusterSummaryRequest = null
+export interface DeleteK8sApiAbnormalRuleRequest {
+  /**
+   * 规则ID集合
+   */
+  RuleIDSet: Array<string>
+}
 
 /**
  * ModifyVirusFileStatus返回参数结构体
@@ -10227,6 +10950,16 @@ export interface SecLogDeliveryClsSettingInfo {
 }
 
 /**
+ * DescribeVirusScanTaskStatus请求参数结构体
+ */
+export interface DescribeVirusScanTaskStatusRequest {
+  /**
+   * 任务id
+   */
+  TaskID?: string
+}
+
+/**
  * CreateAssetImageScanSetting返回参数结构体
  */
 export interface CreateAssetImageScanSettingResponse {
@@ -10277,49 +11010,14 @@ export interface DescribeVirusEventTendencyRequest {
 }
 
 /**
- * DescribeContainerSecEventSummary返回参数结构体
+ * DescribeAssetImageRegistryVulListExport返回参数结构体
  */
-export interface DescribeContainerSecEventSummaryResponse {
+export interface DescribeAssetImageRegistryVulListExportResponse {
   /**
-   * 未处理逃逸事件
-   */
-  UnhandledEscapeCnt: number
-
-  /**
-   * 未处理反弹shell事件
-   */
-  UnhandledReverseShellCnt: number
-
-  /**
-   * 未处理高危系统调用
-   */
-  UnhandledRiskSyscallCnt: number
-
-  /**
-   * 未处理异常进程
-   */
-  UnhandledAbnormalProcessCnt: number
-
-  /**
-   * 未处理文件篡改
-   */
-  UnhandledFileCnt: number
-
-  /**
-   * 未处理木马事件
-   */
-  UnhandledVirusEventCnt: number
-
-  /**
-   * 未处理恶意外连事件
-   */
-  UnhandledMaliciousConnectionEventCnt: number
-
-  /**
-      * 未处理k8sApi事件
+      * excel文件下载地址
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  UnhandledK8sApiEventCnt: number
+  DownloadUrl: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -10728,123 +11426,9 @@ export interface DescribeAssetImageVulListResponse {
 }
 
 /**
- * 容器安全镜像漏洞信息
+ * DescribeK8sApiAbnormalSummary请求参数结构体
  */
-export interface ImageVul {
-  /**
-      * 漏洞id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  CVEID: string
-
-  /**
-      * 观点验证程序id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  POCID: string
-
-  /**
-      * 漏洞名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Name: string
-
-  /**
-      * 涉及组件信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Components: Array<ComponentsInfo>
-
-  /**
-      * 分类
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Category: string
-
-  /**
-      * 分类2
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  CategoryType: string
-
-  /**
-      * 风险等级
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Level: string
-
-  /**
-      * 描述
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Des: string
-
-  /**
-      * 解决方案
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  OfficialSolution: string
-
-  /**
-      * 引用
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Reference: string
-
-  /**
-      * 防御方案
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DefenseSolution: string
-
-  /**
-      * 提交时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  SubmitTime: string
-
-  /**
-      * Cvss分数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  CvssScore: string
-
-  /**
-      * Cvss信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  CvssVector: string
-
-  /**
-      * 是否建议修复
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  IsSuggest: string
-
-  /**
-      * 修复版本号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  FixedVersions: string
-
-  /**
-      * 漏洞标签:"CanBeFixed","DynamicLevelPoc","DynamicLevelExp"
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Tag: Array<string>
-
-  /**
-      * 组件名
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Component: string
-
-  /**
-      * 组件版本
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Version: string
-}
+export type DescribeK8sApiAbnormalSummaryRequest = null
 
 /**
  * DescribeAbnormalProcessLevelSummary请求参数结构体
@@ -10875,18 +11459,98 @@ export interface AssetFilters {
 }
 
 /**
- * ModifyVirusScanTimeoutSetting请求参数结构体
+ * ModifyK8sApiAbnormalRuleStatus请求参数结构体
  */
-export interface ModifyVirusScanTimeoutSettingRequest {
+export interface ModifyK8sApiAbnormalRuleStatusRequest {
   /**
-   * 超时时长单位小时(5~24h)
+   * 规则ID
    */
-  Timeout: number
+  RuleID: string
 
   /**
-   * 设置类型0一键检测，1定时检测
+   * 状态(ture:开 false:关)
    */
-  ScanType: number
+  Status: boolean
+}
+
+/**
+ * DescribeNetworkFirewallPolicyDetail返回参数结构体
+ */
+export interface DescribeNetworkFirewallPolicyDetailResponse {
+  /**
+   * 集群Id
+   */
+  ClusterId: string
+
+  /**
+   * 策略名
+   */
+  PolicyName: string
+
+  /**
+      * 命名空间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Namespace: string
+
+  /**
+   * 入站类型
+   */
+  FromPolicyRule: number
+
+  /**
+   * 出站类型
+   */
+  ToPolicyRule: number
+
+  /**
+      * 自定义规则
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CustomPolicy: Array<NetworkCustomPolicy>
+
+  /**
+   * pod选择器
+   */
+  PodSelector: string
+
+  /**
+      * 策略描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Description: string
+
+  /**
+   * 策略创建时间
+   */
+  PolicyCreateTime: string
+
+  /**
+   * 策略源类型，分为System和Manual，分别代表手动和系统添加
+   */
+  PolicySourceType: string
+
+  /**
+      * 网络策略对应的网络插件
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NetworkPolicyPlugin: string
+
+  /**
+   * 网络策略状态
+   */
+  PublishStatus: string
+
+  /**
+      * 网络发布结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PublishResult: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -10906,60 +11570,18 @@ export interface DescribePostPayDetailResponse {
 }
 
 /**
- * UpdateNetworkFirewallPolicyDetail请求参数结构体
+ * DescribeK8sApiAbnormalEventInfo返回参数结构体
  */
-export interface UpdateNetworkFirewallPolicyDetailRequest {
+export interface DescribeK8sApiAbnormalEventInfoResponse {
   /**
-   * 集群Id
+   * 事件详情
    */
-  ClusterId: string
+  Info: K8sApiAbnormalEventInfo
 
   /**
-   * 策略Id
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Id: number
-
-  /**
-      * 入站规则
-
-全部允许：1
-
-全部拒绝 ：2
-
-自定义：3
-      */
-  FromPolicyRule: number
-
-  /**
-      * 出站规则
-
-全部允许：1
-
-全部拒绝 ：2
-
-自定义：3
-      */
-  ToPolicyRule: number
-
-  /**
-   * pod选择器
-   */
-  PodSelector: string
-
-  /**
-   * 命名空间
-   */
-  Namespace?: string
-
-  /**
-   * 策略描述
-   */
-  Description?: string
-
-  /**
-   * 自定义规则
-   */
-  CustomPolicy?: Array<NetworkCustomPolicy>
+  RequestId?: string
 }
 
 /**
@@ -11193,14 +11815,13 @@ export interface DescribeAssetImageRegistryListExportRequest {
 }
 
 /**
- * DescribeAssetImageRegistryRiskListExport返回参数结构体
+ * CreateK8sApiAbnormalRuleInfo返回参数结构体
  */
-export interface DescribeAssetImageRegistryRiskListExportResponse {
+export interface CreateK8sApiAbnormalRuleInfoResponse {
   /**
-      * excel文件下载地址
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DownloadUrl: string
+   * 规则ID
+   */
+  RuleID: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -11245,6 +11866,71 @@ export interface ModifyEscapeRuleRequest {
    * 需要修改的数组
    */
   RuleSet: Array<EscapeRuleEnabled>
+}
+
+/**
+ * k8sapi异常请求趋势Item
+ */
+export interface K8sApiAbnormalTendencyItem {
+  /**
+   * 日期
+   */
+  Date: string
+
+  /**
+   * 异常UA请求事件数
+   */
+  ExceptionUARequestCount: number
+
+  /**
+   * 匿名用户权限事件数
+   */
+  AnonymousUserRightCount: number
+
+  /**
+   * 凭据信息获取事件数
+   */
+  CredentialInformationObtainCount: number
+
+  /**
+   * 敏感数据挂载事件数
+   */
+  SensitiveDataMountCount: number
+
+  /**
+   * 命令执行事件数
+   */
+  CmdExecCount: number
+
+  /**
+   * 异常定时任务事件数
+   */
+  AbnormalScheduledTaskCount: number
+
+  /**
+   * 静态Pod创建数
+   */
+  StaticsPodCreateCount: number
+
+  /**
+   * 可疑容器创建数
+   */
+  DoubtfulContainerCreateCount: number
+
+  /**
+   * 自定义规则事件数
+   */
+  UserDefinedRuleCount: number
+
+  /**
+   * 匿名访问事件数
+   */
+  AnonymousAccessCount: number
+
+  /**
+   * 特权容器事件数
+   */
+  PrivilegeContainerCount: number
 }
 
 /**
@@ -11509,13 +12195,57 @@ export interface DescribeNetworkFirewallPolicyDiscoverRequest {
 }
 
 /**
- * DescribePromotionActivity返回参数结构体
+ * DescribeNetworkFirewallPolicyYamlDetail返回参数结构体
  */
-export interface DescribePromotionActivityResponse {
+export interface DescribeNetworkFirewallPolicyYamlDetailResponse {
   /**
-   * 促销活动内容
+   * 集群Id
    */
-  List: Array<PromotionActivityContent>
+  ClusterId: string
+
+  /**
+   * 策略名
+   */
+  PolicyName: string
+
+  /**
+      * base64编码的yaml字符串
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Yaml: string
+
+  /**
+      * 策略描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Description: string
+
+  /**
+   * 策略创建时间
+   */
+  PolicyCreateTime: string
+
+  /**
+   * 策略源类型，分为System和Manual，分别代表手动和系统添加
+   */
+  PolicySourceType: string
+
+  /**
+      * 网络策略对应的网络插件
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NetworkPolicyPlugin: string
+
+  /**
+   * 网络策略状态
+   */
+  PublishStatus: string
+
+  /**
+      * 网络发布结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PublishResult: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -12019,6 +12749,39 @@ export interface CreateAssetImageRegistryScanTaskRequest {
 }
 
 /**
+ * DescribeAssetClusterList请求参数结构体
+ */
+export interface DescribeAssetClusterListRequest {
+  /**
+      * 过滤条件。
+<li>ClusterID - string  - 是否必填: 否 -集群ID</li>
+<li>ClusterName - string  - 是否必填: 否 -集群名称</li>
+<li>Status - string  - 是否必填: 否 -集群状态</li>
+      */
+  Filters?: Array<RunTimeFilters>
+
+  /**
+   * 需要返回的数量，默认为10，最大值为100
+   */
+  Limit?: number
+
+  /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
+
+  /**
+   * 排序方式
+   */
+  Order?: string
+
+  /**
+   * 排序字段。
+   */
+  By?: string
+}
+
+/**
  * DescribeAssetImageListExport返回参数结构体
  */
 export interface DescribeAssetImageListExportResponse {
@@ -12511,6 +13274,11 @@ export interface DescribeAssetImageVirusListExportResponse {
    */
   RequestId?: string
 }
+
+/**
+ * DescribeVirusScanSetting请求参数结构体
+ */
+export type DescribeVirusScanSettingRequest = null
 
 /**
  * 运行时安全事件趋势信息
@@ -13107,9 +13875,19 @@ export interface DescribeVirusManualScanEstimateTimeoutRequest {
 }
 
 /**
- * DescribeAssetSummary请求参数结构体
+ * CreateK8sApiAbnormalEventExportJob返回参数结构体
  */
-export type DescribeAssetSummaryRequest = null
+export interface CreateK8sApiAbnormalEventExportJobResponse {
+  /**
+   * 导出任务ID，前端拿着任务ID查询任务进度
+   */
+  JobId: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
 
 /**
  * DescribeUserCluster返回参数结构体
@@ -13234,6 +14012,48 @@ export interface CreateEmergencyVulExportJobRequest {
    * 排序字段
    */
   By?: string
+}
+
+/**
+ * k8s api 异常请求规则列表Item
+ */
+export interface K8sApiAbnormalRuleListItem {
+  /**
+   * 规则ID
+   */
+  RuleID: string
+
+  /**
+   * 规则名称
+   */
+  RuleName: string
+
+  /**
+      * 规则类型
+RT_SYSTEM 系统规则
+RT_USER 用户自定义
+      */
+  RuleType: string
+
+  /**
+   * 受影响集群总数
+   */
+  EffectClusterCount: number
+
+  /**
+   * 更新时间
+   */
+  UpdateTime: string
+
+  /**
+   * 编辑账号
+   */
+  OprUin: string
+
+  /**
+   * 状态
+   */
+  Status: boolean
 }
 
 /**
@@ -13492,6 +14312,46 @@ export interface DescribeAbnormalProcessEventsExportRequest {
    * 排序字段
    */
   By?: string
+}
+
+/**
+ * DescribeVulSummary返回参数结构体
+ */
+export interface DescribeVulSummaryResponse {
+  /**
+   * 漏洞总数量
+   */
+  VulTotalCount: number
+
+  /**
+   * 严重及高危漏洞数量
+   */
+  SeriousVulCount: number
+
+  /**
+   * 重点关注漏洞数量
+   */
+  SuggestVulCount: number
+
+  /**
+   * 有Poc或者Exp的漏洞数量
+   */
+  PocExpLevelVulCount: number
+
+  /**
+   * 有远程Exp的漏洞数量
+   */
+  RemoteExpLevelVulCount: number
+
+  /**
+   * 受严重或高危漏洞影响的最新版本镜像数
+   */
+  SeriousVulNewestImageCount: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -13895,9 +14755,14 @@ export interface UpdateNetworkFirewallPolicyYamlDetailRequest {
 }
 
 /**
- * DescribeRiskSyscallNames请求参数结构体
+ * DescribeK8sApiAbnormalRuleInfo请求参数结构体
  */
-export type DescribeRiskSyscallNamesRequest = null
+export interface DescribeK8sApiAbnormalRuleInfoRequest {
+  /**
+   * 规则ID
+   */
+  RuleID: string
+}
 
 /**
  * 运行时安全事件基本信息
@@ -14740,6 +15605,21 @@ export interface AddEditImageAutoAuthorizedRuleRequest {
 }
 
 /**
+ * SwitchImageAutoAuthorizedRule请求参数结构体
+ */
+export interface SwitchImageAutoAuthorizedRuleRequest {
+  /**
+   * 规则是否生效，0:不生效，1:已生效
+   */
+  IsEnabled: number
+
+  /**
+   * 规则id
+   */
+  RuleId: number
+}
+
+/**
  * DescribeVirusSampleDownloadUrl返回参数结构体
  */
 export interface DescribeVirusSampleDownloadUrlResponse {
@@ -15474,13 +16354,23 @@ export interface DescribeReverseShellEventsExportRequest {
 }
 
 /**
- * ModifySecLogCleanSettingInfo返回参数结构体
+ * ModifyK8sApiAbnormalEventStatus请求参数结构体
  */
-export interface ModifySecLogCleanSettingInfoResponse {
+export interface ModifyK8sApiAbnormalEventStatusRequest {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 事件ID集合
    */
-  RequestId?: string
+  EventIDSet: Array<number>
+
+  /**
+   * 状态
+   */
+  Status: string
+
+  /**
+   * 备注
+   */
+  Remark?: string
 }
 
 /**
@@ -15504,6 +16394,40 @@ k8sApi: k8s_api
    * 待解绑主机quuid列表
    */
   UnBindList?: Array<string>
+}
+
+/**
+ * DescribeK8sApiAbnormalRuleList请求参数结构体
+ */
+export interface DescribeK8sApiAbnormalRuleListRequest {
+  /**
+      * 过滤条件。
+<li>RuleType - string  - 是否必填: 否 -规则类型</li>
+<li>Status - string  - 是否必填: 否 -状态</li>
+      */
+  Filters?: Array<RunTimeFilters>
+
+  /**
+   * 需要返回的数量，默认为10，最大值为100
+   */
+  Limit?: number
+
+  /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
+
+  /**
+   * 排序方式
+   */
+  Order?: string
+
+  /**
+      * 排序字段。
+<li>UpdateTime - string  - 是否必填: 否 -最后更新时间</li>
+<li>EffectClusterCount - string  - 是否必填: 否 -影响集群数</li>
+      */
+  By?: string
 }
 
 /**
@@ -16704,9 +17628,9 @@ export interface CreateNetworkFirewallPublishResponse {
 }
 
 /**
- * DescribeVirusScanSetting请求参数结构体
+ * DescribeAssetSummary请求参数结构体
  */
-export type DescribeVirusScanSettingRequest = null
+export type DescribeAssetSummaryRequest = null
 
 /**
  * CreateClusterCheckTask请求参数结构体
@@ -17434,6 +18358,11 @@ export interface DescribeReverseShellDetailResponse {
 }
 
 /**
+ * DescribeClusterSummary请求参数结构体
+ */
+export type DescribeClusterSummaryRequest = null
+
+/**
  * AddIgnoreVul请求参数结构体
  */
 export interface AddIgnoreVulRequest {
@@ -17826,18 +18755,13 @@ export interface DeleteRiskSyscallWhiteListsRequest {
 }
 
 /**
- * SwitchImageAutoAuthorizedRule请求参数结构体
+ * ModifyK8sApiAbnormalRuleStatus返回参数结构体
  */
-export interface SwitchImageAutoAuthorizedRuleRequest {
+export interface ModifyK8sApiAbnormalRuleStatusResponse {
   /**
-   * 规则是否生效，0:不生效，1:已生效
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  IsEnabled: number
-
-  /**
-   * 规则id
-   */
-  RuleId: number
+  RequestId?: string
 }
 
 /**
@@ -18170,6 +19094,111 @@ export interface StopVirusScanTaskResponse {
 }
 
 /**
+ * k8sApi异常事件详情
+ */
+export interface K8sApiAbnormalEventInfo {
+  /**
+   * 命中规则名称
+   */
+  MatchRuleName: string
+
+  /**
+   * 命中规则类型
+   */
+  MatchRuleType: string
+
+  /**
+   * 告警等级
+   */
+  RiskLevel: string
+
+  /**
+   * 集群ID
+   */
+  ClusterID: string
+
+  /**
+   * 集群名称
+   */
+  ClusterName: string
+
+  /**
+   * 集群运行状态
+   */
+  ClusterRunningStatus: string
+
+  /**
+   * 初次生成时间
+   */
+  FirstCreateTime: string
+
+  /**
+   * 最近一次生成时间
+   */
+  LastCreateTime: string
+
+  /**
+   * 告警数量
+   */
+  AlarmCount: number
+
+  /**
+      * 状态
+"EVENT_UNDEAL":未处理
+"EVENT_DEALED": 已处理
+"EVENT_IGNORE": 忽略
+"EVENT_DEL": 删除
+"EVENT_ADD_WHITE": 加白
+      */
+  Status: string
+
+  /**
+   * 集群masterIP
+   */
+  ClusterMasterIP: string
+
+  /**
+   * k8s版本
+   */
+  K8sVersion: string
+
+  /**
+   * 运行时组件
+   */
+  RunningComponent: Array<string>
+
+  /**
+   * 描述
+   */
+  Desc: string
+
+  /**
+   * 建议
+   */
+  Suggestion: string
+
+  /**
+   * 请求信息
+   */
+  Info: string
+
+  /**
+   * 规则ID
+   */
+  MatchRuleID: string
+
+  /**
+   * 高亮字段数组
+   */
+  HighLightFields: Array<string>
+
+  /**
+   * 命中规则
+   */
+  MatchRule: K8sApiAbnormalRuleScopeInfo
+}
+
+/**
  * DescribeVulDefenceEventTendency返回参数结构体
  */
 export interface DescribeVulDefenceEventTendencyResponse {
@@ -18182,6 +19211,41 @@ export interface DescribeVulDefenceEventTendencyResponse {
    * 漏洞攻击事件趋势
    */
   AttackList: Array<VulDefenceEventTendency>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateK8sApiAbnormalRuleInfo请求参数结构体
+ */
+export interface CreateK8sApiAbnormalRuleInfoRequest {
+  /**
+   * 规则详情
+   */
+  RuleInfo: K8sApiAbnormalRuleInfo
+
+  /**
+   * 拷贝规则ID(适用于复制规则场景)
+   */
+  CopySrcRuleID?: string
+
+  /**
+   * 事件ID(适用于事件加白场景)
+   */
+  EventID?: number
+}
+
+/**
+ * CreateK8sApiAbnormalRuleExportJob返回参数结构体
+ */
+export interface CreateK8sApiAbnormalRuleExportJobResponse {
+  /**
+   * 导出任务ID，前端拿着任务ID查询任务进度
+   */
+  JobId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -18978,6 +20042,109 @@ export interface DescribeVirusAutoIsolateSettingResponse {
 }
 
 /**
+ * 漏洞列表信息
+ */
+export interface VulInfo {
+  /**
+   * 漏洞名称
+   */
+  Name: string
+
+  /**
+      * 漏洞标签
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Tags: Array<string>
+
+  /**
+      * CVSS V3分数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CVSSV3Score: number
+
+  /**
+      * 风险等级
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Level: string
+
+  /**
+   * CVE编号
+   */
+  CVEID: string
+
+  /**
+      * 漏洞子类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Category: string
+
+  /**
+      * 首次发现时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FoundTime: string
+
+  /**
+      * 最近发现时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LatestFoundTime: string
+
+  /**
+   * 漏洞ID
+   */
+  ID: number
+
+  /**
+   * 影响本地镜像数
+   */
+  LocalImageCount: number
+
+  /**
+      * 影响容器数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ContainerCount: number
+
+  /**
+      * 影响仓库镜像数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RegistryImageCount: number
+
+  /**
+      * 漏洞PocID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PocID: string
+
+  /**
+      * 防御状态，NO_DEFENDED:未防御，DEFENDED:已防御
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DefenceStatus: string
+
+  /**
+      * 漏洞防御主机范围: MANUAL:自选主机节点，ALL:全部
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DefenceScope: string
+
+  /**
+      * 漏洞防御主机数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DefenceHostCount: number
+
+  /**
+      * 已防御攻击次数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DefendedCount: number
+}
+
+/**
  * DescribeAssetImageRegistryRegistryList返回参数结构体
  */
 export interface DescribeAssetImageRegistryRegistryListResponse {
@@ -19109,83 +20276,30 @@ export interface ImageProgress {
 }
 
 /**
- * DescribeNetworkFirewallPolicyDetail返回参数结构体
+ * CreateK8sApiAbnormalRuleExportJob请求参数结构体
  */
-export interface DescribeNetworkFirewallPolicyDetailResponse {
+export interface CreateK8sApiAbnormalRuleExportJobRequest {
   /**
-   * 集群Id
-   */
-  ClusterId: string
-
-  /**
-   * 策略名
-   */
-  PolicyName: string
-
-  /**
-      * 命名空间
-注意：此字段可能返回 null，表示取不到有效值。
+      * 过滤条件。
+<li>RuleType - string  - 是否必填: 否 -规则类型</li>
+<li>Status - string  - 是否必填: 否 -状态</li>
       */
-  Namespace: string
+  Filters?: Array<RunTimeFilters>
 
   /**
-   * 入站类型
+   * 排序方式
    */
-  FromPolicyRule: number
+  Order?: string
 
   /**
-   * 出站类型
+   * 排序字段
    */
-  ToPolicyRule: number
+  By?: Array<string>
 
   /**
-      * 自定义规则
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  CustomPolicy: Array<NetworkCustomPolicy>
-
-  /**
-   * pod选择器
+   * 导出字段
    */
-  PodSelector: string
-
-  /**
-      * 策略描述
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Description: string
-
-  /**
-   * 策略创建时间
-   */
-  PolicyCreateTime: string
-
-  /**
-   * 策略源类型，分为System和Manual，分别代表手动和系统添加
-   */
-  PolicySourceType: string
-
-  /**
-      * 网络策略对应的网络插件
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  NetworkPolicyPlugin: string
-
-  /**
-   * 网络策略状态
-   */
-  PublishStatus: string
-
-  /**
-      * 网络发布结果
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  PublishResult: string
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  ExportField?: Array<string>
 }
 
 /**
@@ -19874,6 +20988,16 @@ export interface DeleteEscapeWhiteListResponse {
 }
 
 /**
+ * RemoveAssetImageRegistryRegistryDetail返回参数结构体
+ */
+export interface RemoveAssetImageRegistryRegistryDetailResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ScanComplianceScanFailedAssets返回参数结构体
  */
 export interface ScanComplianceScanFailedAssetsResponse {
@@ -19944,13 +21068,13 @@ export interface DeleteNetworkFirewallPolicyDetailResponse {
 }
 
 /**
- * DescribeVirusScanTaskStatus请求参数结构体
+ * DescribeK8sApiAbnormalTendency请求参数结构体
  */
-export interface DescribeVirusScanTaskStatusRequest {
+export interface DescribeK8sApiAbnormalTendencyRequest {
   /**
-   * 任务id
+   * 趋势周期(默认为7天)
    */
-  TaskID?: string
+  TendencyPeriod: number
 }
 
 /**
@@ -20120,14 +21244,49 @@ export interface SearchTemplate {
 }
 
 /**
- * DescribeAssetImageRegistryVulListExport返回参数结构体
+ * DescribeContainerSecEventSummary返回参数结构体
  */
-export interface DescribeAssetImageRegistryVulListExportResponse {
+export interface DescribeContainerSecEventSummaryResponse {
   /**
-      * excel文件下载地址
+   * 未处理逃逸事件
+   */
+  UnhandledEscapeCnt: number
+
+  /**
+   * 未处理反弹shell事件
+   */
+  UnhandledReverseShellCnt: number
+
+  /**
+   * 未处理高危系统调用
+   */
+  UnhandledRiskSyscallCnt: number
+
+  /**
+   * 未处理异常进程
+   */
+  UnhandledAbnormalProcessCnt: number
+
+  /**
+   * 未处理文件篡改
+   */
+  UnhandledFileCnt: number
+
+  /**
+   * 未处理木马事件
+   */
+  UnhandledVirusEventCnt: number
+
+  /**
+   * 未处理恶意外连事件
+   */
+  UnhandledMaliciousConnectionEventCnt: number
+
+  /**
+      * 未处理k8sApi事件
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  DownloadUrl: string
+  UnhandledK8sApiEventCnt: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -20650,6 +21809,33 @@ export interface UpdateAssetImageRegistryRegistryDetailRequest {
 }
 
 /**
+ * DescribeK8sApiAbnormalRuleScopeList请求参数结构体
+ */
+export interface DescribeK8sApiAbnormalRuleScopeListRequest {
+  /**
+   * 规则ID
+   */
+  RuleID: string
+
+  /**
+   * 偏移量
+   */
+  Offset?: number
+
+  /**
+   * 需要返回的数量，默认为10，最大值为100
+   */
+  Limit?: number
+
+  /**
+      * 过滤条件。
+<li>Action - string -是否必填: 否 - 执行动作</li>
+<li>RiskLevel - string  - 是否必填: 否 -威胁等级筛选</li>
+      */
+  Filters?: Array<RunTimeFilters>
+}
+
+/**
  * 容器安全服务信息列表
  */
 export interface ServiceInfo {
@@ -21097,141 +22283,28 @@ export interface DescribePostPayDetailRequest {
 }
 
 /**
- * 漏洞列表信息
+ * ModifyK8sApiAbnormalEventStatus返回参数结构体
  */
-export interface VulInfo {
+export interface ModifyK8sApiAbnormalEventStatusResponse {
   /**
-   * 漏洞名称
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Name: string
-
-  /**
-      * 漏洞标签
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Tags: Array<string>
-
-  /**
-      * CVSS V3分数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  CVSSV3Score: number
-
-  /**
-      * 风险等级
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Level: string
-
-  /**
-   * CVE编号
-   */
-  CVEID: string
-
-  /**
-      * 漏洞子类型
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Category: string
-
-  /**
-      * 首次发现时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  FoundTime: string
-
-  /**
-      * 最近发现时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  LatestFoundTime: string
-
-  /**
-   * 漏洞ID
-   */
-  ID: number
-
-  /**
-   * 影响本地镜像数
-   */
-  LocalImageCount: number
-
-  /**
-      * 影响容器数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ContainerCount: number
-
-  /**
-      * 影响仓库镜像数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  RegistryImageCount: number
-
-  /**
-      * 漏洞PocID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  PocID: string
-
-  /**
-      * 防御状态，NO_DEFENDED:未防御，DEFENDED:已防御
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DefenceStatus: string
-
-  /**
-      * 漏洞防御主机范围: MANUAL:自选主机节点，ALL:全部
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DefenceScope: string
-
-  /**
-      * 漏洞防御主机数量
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DefenceHostCount: number
-
-  /**
-      * 已防御攻击次数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DefendedCount: number
+  RequestId?: string
 }
 
 /**
- * DescribeVulSummary返回参数结构体
+ * DescribeSecLogDeliveryKafkaOptions返回参数结构体
  */
-export interface DescribeVulSummaryResponse {
+export interface DescribeSecLogDeliveryKafkaOptionsResponse {
   /**
-   * 漏洞总数量
+   * 实例列表
    */
-  VulTotalCount: number
+  InstanceList: Array<CKafkaInstanceInfo>
 
   /**
-   * 严重及高危漏洞数量
+   * 地域列表
    */
-  SeriousVulCount: number
-
-  /**
-   * 重点关注漏洞数量
-   */
-  SuggestVulCount: number
-
-  /**
-   * 有Poc或者Exp的漏洞数量
-   */
-  PocExpLevelVulCount: number
-
-  /**
-   * 有远程Exp的漏洞数量
-   */
-  RemoteExpLevelVulCount: number
-
-  /**
-   * 受严重或高危漏洞影响的最新版本镜像数
-   */
-  SeriousVulNewestImageCount: number
+  RegionList: Array<RegionInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -21295,160 +22368,60 @@ export interface ReverseShellWhiteListInfo {
 }
 
 /**
- * 运行时木马列表信息
+ * UpdateNetworkFirewallPolicyDetail请求参数结构体
  */
-export interface VirusInfo {
+export interface UpdateNetworkFirewallPolicyDetailRequest {
   /**
-   * 文件名称
+   * 集群Id
    */
-  FileName: string
+  ClusterId: string
 
   /**
-   * 文件路径
+   * 策略Id
    */
-  FilePath: string
+  Id: number
 
   /**
-   * 病毒名称
-   */
-  VirusName: string
+      * 入站规则
 
-  /**
-   * 创建时间
-   */
-  CreateTime: string
+全部允许：1
 
-  /**
-   * 更新时间
-   */
-  ModifyTime: string
+全部拒绝 ：2
 
-  /**
-   * 容器名称
-   */
-  ContainerName: string
-
-  /**
-   * 容器id
-   */
-  ContainerId: string
-
-  /**
-      * 容器状态
-正在运行: RUNNING
-暂停: PAUSED
-停止: STOPPED
-已经创建: CREATED
-已经销毁: DESTROYED
-正在重启中: RESTARTING
-迁移中: REMOVING
+自定义：3
       */
-  ContainerStatus: string
+  FromPolicyRule: number
 
   /**
-   * 镜像名称
+      * 出站规则
+
+全部允许：1
+
+全部拒绝 ：2
+
+自定义：3
+      */
+  ToPolicyRule: number
+
+  /**
+   * pod选择器
    */
-  ImageName: string
+  PodSelector: string
 
   /**
-   * 镜像id
+   * 命名空间
    */
-  ImageId: string
+  Namespace?: string
 
   /**
-      * DEAL_NONE:文件待处理
-DEAL_IGNORE:已经忽略
-DEAL_ADD_WHITELIST:加白
-DEAL_DEL:文件已经删除
-DEAL_ISOLATE:已经隔离
-DEAL_ISOLATING:隔离中
-DEAL_ISOLATE_FAILED:隔离失败
-DEAL_RECOVERING:恢复中
-DEAL_RECOVER_FAILED: 恢复失败
-      */
-  Status: string
-
-  /**
-   * 事件id
+   * 策略描述
    */
-  Id: string
+  Description?: string
 
   /**
-   * 事件描述
+   * 自定义规则
    */
-  HarmDescribe: string
-
-  /**
-   * 建议方案
-   */
-  SuggestScheme: string
-
-  /**
-      * 失败子状态:
-FILE_NOT_FOUND:文件不存在
-FILE_ABNORMAL:文件异常
-FILE_ABNORMAL_DEAL_RECOVER:恢复文件时，文件异常
-BACKUP_FILE_NOT_FOUND:备份文件不存在
-CONTAINER_NOT_FOUND_DEAL_ISOLATE:隔离时，容器不存在
-CONTAINER_NOT_FOUND_DEAL_RECOVER:恢复时，容器不存在
-TIMEOUT: 超时
-TOO_MANY: 任务过多
-OFFLINE: 离线
-INTERNAL: 服务内部错误
-VALIDATION: 参数非法
-      */
-  SubStatus: string
-
-  /**
-      * 网络状态
-未隔离  	NORMAL
-已隔离		ISOLATED
-隔离中		ISOLATING
-隔离失败	ISOLATE_FAILED
-解除隔离中  RESTORING
-解除隔离失败 RESTORE_FAILED
-      */
-  ContainerNetStatus: string
-
-  /**
-      * 容器子状态
-"AGENT_OFFLINE"       //Agent离线
-	"NODE_DESTROYED"      //节点已销毁
-	"CONTAINER_EXITED"    //容器已退出
-	"CONTAINER_DESTROYED" //容器已销毁
-	"SHARED_HOST"         // 容器与主机共享网络
-	"RESOURCE_LIMIT"      //隔离操作资源超限
-	"UNKNOW"              // 原因未知
-      */
-  ContainerNetSubStatus: string
-
-  /**
-   * 容器隔离操作来源
-   */
-  ContainerIsolateOperationSrc: string
-
-  /**
-      * md5值
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  MD5: string
-
-  /**
-      * 风险等级 RISK_CRITICAL, RISK_HIGH, RISK_MEDIUM, RISK_LOW, RISK_NOTICE。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  RiskLevel: string
-
-  /**
-      * 检测平台
-1: 云查杀引擎
-2: tav
-3: binaryAi
-4: 异常行为
-5: 威胁情报
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  CheckPlatform: Array<string>
+  CustomPolicy?: Array<NetworkCustomPolicy>
 }
 
 /**
@@ -21473,23 +22446,13 @@ export interface EscapeRuleEnabled {
 }
 
 /**
- * DescribeSecLogDeliveryKafkaOptions返回参数结构体
+ * DescribeK8sApiAbnormalEventInfo请求参数结构体
  */
-export interface DescribeSecLogDeliveryKafkaOptionsResponse {
+export interface DescribeK8sApiAbnormalEventInfoRequest {
   /**
-   * 实例列表
+   * 事件ID
    */
-  InstanceList: Array<CKafkaInstanceInfo>
-
-  /**
-   * 地域列表
-   */
-  RegionList: Array<RegionInfo>
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  ID: number
 }
 
 /**

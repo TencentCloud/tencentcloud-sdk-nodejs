@@ -662,11 +662,11 @@ export interface RedisNodeInfo {
  */
 export interface DescribeBackupUrlRequest {
     /**
-      * 实例ID
+      * 实例 ID。
       */
     InstanceId: string;
     /**
-      * 备份ID，通过DescribeInstanceBackups接口可查
+      * 备份 ID，可通过DescribeInstanceBackups接口返回的参数 BackupSet 获取。
       */
     BackupId: string;
 }
@@ -1620,7 +1620,7 @@ export interface DescribeBackupUrlResponse {
       */
     Filenames: Array<string>;
     /**
-      * 备份文件信息列表
+      * 备份文件信息列表。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     BackupInfos: Array<BackupDownloadInfo>;

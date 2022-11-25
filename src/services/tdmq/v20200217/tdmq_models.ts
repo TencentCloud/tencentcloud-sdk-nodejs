@@ -3837,6 +3837,12 @@ export interface RocketMQClusterInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   IsVip: boolean
+
+  /**
+      * Rocketmq集群标识
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RocketMQFlag: boolean
 }
 
 /**

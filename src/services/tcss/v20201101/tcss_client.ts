@@ -34,6 +34,7 @@ import {
   CreateNetworkFirewallUndoPublishRequest,
   CreateRefreshTaskResponse,
   CreateVulDefenceHostExportJobResponse,
+  ImageVul,
   CreateVulImageExportJobResponse,
   AbnormalProcessEventDescription,
   CompliancePeriodTaskRule,
@@ -49,6 +50,7 @@ import {
   DeleteCompliancePolicyItemFromWhitelistRequest,
   DescribeAssetImageDetailRequest,
   VulIgnoreLocalImage,
+  ModifyK8sApiAbnormalRuleInfoResponse,
   ModifyAssetImageScanStopResponse,
   AddAssetImageRegistryRegistryDetailRequest,
   AddIgnoreVulResponse,
@@ -76,11 +78,12 @@ import {
   DescribeVirusDetailRequest,
   DeleteEscapeWhiteListRequest,
   DescribeClusterDetailRequest,
+  ModifyK8sApiAbnormalRuleInfoRequest,
   UpdateAndPublishNetworkFirewallPolicyDetailResponse,
   DescribeAssetImageListRequest,
   DescribeSecLogDeliveryClsOptionsRequest,
   DescribeRiskSyscallWhiteListDetailRequest,
-  DescribeNetworkFirewallPolicyYamlDetailResponse,
+  DescribeK8sApiAbnormalRuleScopeListResponse,
   ModifyAbnormalProcessRuleStatusRequest,
   DescribeVulTendencyResponse,
   ProcessDetailInfo,
@@ -104,6 +107,7 @@ import {
   ComplianceAssetDetailInfo,
   UnauthorizedCoresTendency,
   DescribeRiskSyscallEventsResponse,
+  AssetClusterListItem,
   NetworkPolicyInfoItem,
   DescribeAssetImageRiskListResponse,
   CreateEmergencyVulExportJobResponse,
@@ -126,9 +130,10 @@ import {
   AddCompliancePolicyItemToWhitelistRequest,
   ComplianceAssetSummary,
   AbnormalProcessEventTendencyInfo,
+  DescribeAssetClusterListResponse,
   EscapeRule,
   CompliancePeriodTask,
-  RemoveAssetImageRegistryRegistryDetailResponse,
+  DescribeAssetImageRegistryRiskListExportResponse,
   SecLogAlertMsgInfo,
   AutoAuthorizedImageInfo,
   UpdateAssetImageRegistryRegistryDetailResponse,
@@ -136,6 +141,7 @@ import {
   DeleteAbnormalProcessRulesResponse,
   RuleBaseInfo,
   ProcessInfo,
+  ImageInfo,
   DescribeReverseShellDetailRequest,
   ModifyReverseShellStatusRequest,
   DescribePublicKeyResponse,
@@ -146,11 +152,15 @@ import {
   EmergencyVulInfo,
   ExportVirusListRequest,
   CreateWebVulExportJobRequest,
+  CreateK8sApiAbnormalEventExportJobRequest,
+  DescribeK8sApiAbnormalTendencyResponse,
+  K8sApiAbnormalEventListItem,
   SecLogJoinInfo,
   PromotionActivityContent,
   DescribeAffectedClusterCountRequest,
   DescribeAssetImageRegistryVulListExportRequest,
   AddEditRiskSyscallWhiteListRequest,
+  K8sApiAbnormalRuleInfo,
   ReverseShellEventInfo,
   DescribeSecLogJoinObjectListResponse,
   CreateSystemVulExportJobRequest,
@@ -162,6 +172,7 @@ import {
   DescribeVirusAutoIsolateSampleDetailRequest,
   DescribeAssetImageVirusListResponse,
   DeleteComplianceAssetPolicySetFromWhitelistResponse,
+  DescribeK8sApiAbnormalSummaryResponse,
   DescribeSecLogJoinTypeListResponse,
   DescribeAssetSyncLastTimeResponse,
   CreateAssetImageScanSettingRequest,
@@ -206,6 +217,7 @@ import {
   DescribeSecLogKafkaUINResponse,
   DescribeAbnormalProcessRuleDetailRequest,
   DescribeLogStorageStatisticRequest,
+  VirusInfo,
   DescribeVulIgnoreRegistryImageListRequest,
   AddEditImageAutoAuthorizedRuleResponse,
   ClusterCheckTaskItem,
@@ -240,6 +252,7 @@ import {
   DescribeComplianceAssetListRequest,
   ModifyVirusScanSettingResponse,
   ImagesVul,
+  DescribePromotionActivityResponse,
   ModifyVirusMonitorSettingRequest,
   ModifyEscapeWhiteListRequest,
   AddAndPublishNetworkFirewallPolicyDetailResponse,
@@ -247,8 +260,10 @@ import {
   DescribeReverseShellWhiteListDetailRequest,
   AddCompliancePolicyAssetSetToWhitelistResponse,
   DescribeVulContainerListResponse,
+  DescribeRiskSyscallNamesRequest,
   ModifyVulDefenceEventStatusResponse,
   DescribeEscapeEventInfoResponse,
+  DescribeK8sApiAbnormalRuleInfoResponse,
   DescribeESHitsResponse,
   DescribeImageRegistryTimingScanTaskResponse,
   ClusterInfoItem,
@@ -283,7 +298,7 @@ import {
   SwitchImageAutoAuthorizedRuleResponse,
   DescribeExportJobResultRequest,
   DescribeNetworkFirewallNamespaceLabelListRequest,
-  ImageInfo,
+  DescribeK8sApiAbnormalEventListRequest,
   DescribeAffectedWorkloadListResponse,
   CreateComplianceTaskResponse,
   DescribeAssetImageRegistryListRequest,
@@ -301,6 +316,7 @@ import {
   ModifyImageAuthorizedResponse,
   NetworkClusterInfoItem,
   AddEscapeWhiteListResponse,
+  ModifySecLogCleanSettingInfoResponse,
   DescribeWebVulListRequest,
   ModifyVirusScanSettingRequest,
   DescribeVulDefenceEventRequest,
@@ -337,6 +353,7 @@ import {
   AccessControlRuleInfo,
   DescribeAssetHostListResponse,
   DescribeABTestConfigRequest,
+  K8sApiAbnormalRuleScopeInfo,
   StopVulScanTaskRequest,
   DescribeNetworkFirewallNamespaceListResponse,
   ImageRepoInfo,
@@ -352,6 +369,7 @@ import {
   ModifyAccessControlRuleStatusResponse,
   ModifyAssetImageScanStopRequest,
   CreateRefreshTaskRequest,
+  DescribeK8sApiAbnormalEventListResponse,
   DescribeNewestVulRequest,
   DescribeAbnormalProcessLevelSummaryResponse,
   AddEscapeWhiteListRequest,
@@ -361,9 +379,11 @@ import {
   ModifySecLogCleanSettingInfoRequest,
   DescribeAccessControlEventsRequest,
   DescribeAccessControlRuleDetailRequest,
+  ModifyVirusScanTimeoutSettingRequest,
   CreateProcessEventsExportJobResponse,
   ImageRiskInfo,
   DescribeRiskSyscallDetailResponse,
+  DeleteK8sApiAbnormalRuleResponse,
   ComplianceHostDetailInfo,
   VulAffectedImageComponentInfo,
   DescribePromotionActivityRequest,
@@ -378,12 +398,13 @@ import {
   DescribeImageRegistryNamespaceListResponse,
   VulAffectedImageInfo,
   TagInfo,
+  DescribeK8sApiAbnormalRuleListResponse,
   DeleteCompliancePolicyAssetSetFromWhitelistResponse,
   DescribeVirusTaskListResponse,
   DescribeAssetHostDetailResponse,
   CKafkaInstanceInfo,
   DescribeAffectedNodeListResponse,
-  DescribeClusterSummaryRequest,
+  DeleteK8sApiAbnormalRuleRequest,
   ModifyVirusFileStatusResponse,
   DescribeAbnormalProcessRulesExportResponse,
   SyncAssetImageRegistryAssetResponse,
@@ -400,11 +421,12 @@ import {
   DescribeEscapeEventTendencyRequest,
   DescribeInspectionReportResponse,
   SecLogDeliveryClsSettingInfo,
+  DescribeVirusScanTaskStatusRequest,
   CreateAssetImageScanSettingResponse,
   DescribeVulDefenceEventDetailRequest,
   DescribeVirusAutoIsolateSampleListResponse,
   DescribeVirusEventTendencyRequest,
-  DescribeContainerSecEventSummaryResponse,
+  DescribeAssetImageRegistryVulListExportResponse,
   StopVirusScanTaskRequest,
   DescribeAssetContainerDetailRequest,
   ModifyAccessControlStatusRequest,
@@ -415,12 +437,13 @@ import {
   DescribeEscapeEventTendencyResponse,
   ClusterCheckItem,
   DescribeAssetImageVulListResponse,
-  ImageVul,
+  DescribeK8sApiAbnormalSummaryRequest,
   DescribeAbnormalProcessLevelSummaryRequest,
   AssetFilters,
-  ModifyVirusScanTimeoutSettingRequest,
+  ModifyK8sApiAbnormalRuleStatusRequest,
+  DescribeNetworkFirewallPolicyDetailResponse,
   DescribePostPayDetailResponse,
-  UpdateNetworkFirewallPolicyDetailRequest,
+  DescribeK8sApiAbnormalEventInfoResponse,
   DescribeNetworkFirewallPodLabelsListResponse,
   VulAffectedComponentInfo,
   DescribeAssetImageScanStatusRequest,
@@ -431,9 +454,10 @@ import {
   ModifyVirusFileStatusRequest,
   CreateVulContainerExportJobResponse,
   DescribeAssetImageRegistryListExportRequest,
-  DescribeAssetImageRegistryRiskListExportResponse,
+  CreateK8sApiAbnormalRuleInfoResponse,
   ProcessBaseInfo,
   ModifyEscapeRuleRequest,
+  K8sApiAbnormalTendencyItem,
   DescribeAbnormalProcessRulesResponse,
   ModifyVulDefenceSettingResponse,
   SupportDefenceVul,
@@ -446,7 +470,7 @@ import {
   CreateNetworkFirewallPublishRequest,
   CreateHostExportJobResponse,
   DescribeNetworkFirewallPolicyDiscoverRequest,
-  DescribePromotionActivityResponse,
+  DescribeNetworkFirewallPolicyYamlDetailResponse,
   CreateOrModifyPostPayCoresRequest,
   ModifyImageAuthorizedRequest,
   DescribeAssetImageScanTaskRequest,
@@ -463,6 +487,7 @@ import {
   CreateAssetImageVirusExportJobRequest,
   DescribeAssetImageRegistryDetailRequest,
   CreateAssetImageRegistryScanTaskRequest,
+  DescribeAssetClusterListRequest,
   DescribeAssetImageListExportResponse,
   WarningRule,
   VulAffectedContainerInfo,
@@ -476,6 +501,7 @@ import {
   DescribeAgentInstallCommandRequest,
   ResetSecLogTopicConfigRequest,
   DescribeAssetImageVirusListExportResponse,
+  DescribeVirusScanSettingRequest,
   SecTendencyEventInfo,
   VirusAutoIsolateSampleInfo,
   DescribeExportJobDownloadURLRequest,
@@ -505,12 +531,13 @@ import {
   DescribeAssetImageRegistryVulListRequest,
   DescribeImageSimpleListResponse,
   DescribeVirusManualScanEstimateTimeoutRequest,
-  DescribeAssetSummaryRequest,
+  CreateK8sApiAbnormalEventExportJobResponse,
   DescribeUserClusterResponse,
   DescribeAssetImageRegistryRegistryListRequest,
   DescribeVulDefenceHostResponse,
   CreateImageExportJobRequest,
   CreateEmergencyVulExportJobRequest,
+  K8sApiAbnormalRuleListItem,
   DescribeVirusScanTaskStatusResponse,
   DescribeEscapeEventsExportResponse,
   ComplianceImageDetailInfo,
@@ -520,6 +547,7 @@ import {
   ClusterRiskItem,
   DescribeVirusListResponse,
   DescribeAbnormalProcessEventsExportRequest,
+  DescribeVulSummaryResponse,
   DescribeAssetComponentListRequest,
   DescribeEmergencyVulListRequest,
   DeleteReverseShellEventsResponse,
@@ -528,7 +556,7 @@ import {
   ModifyAssetImageRegistryScanStopOneKeyResponse,
   VulDefenceEventDetail,
   UpdateNetworkFirewallPolicyYamlDetailRequest,
-  DescribeRiskSyscallNamesRequest,
+  DescribeK8sApiAbnormalRuleInfoRequest,
   RunTimeEventBaseInfo,
   DescribeSystemVulListResponse,
   ModifyIgnoreVul,
@@ -551,6 +579,7 @@ import {
   DescribeVulDefenceEventResponse,
   DescribeVirusEventTendencyResponse,
   AddEditImageAutoAuthorizedRuleRequest,
+  SwitchImageAutoAuthorizedRuleRequest,
   DescribeVirusSampleDownloadUrlResponse,
   DescribeValueAddedSrvInfoResponse,
   RunTimeRiskInfo,
@@ -578,8 +607,9 @@ import {
   ImageVirus,
   ModifySecLogDeliveryKafkaSettingRequest,
   DescribeReverseShellEventsExportRequest,
-  ModifySecLogCleanSettingInfoResponse,
+  ModifyK8sApiAbnormalEventStatusRequest,
   ModifySecLogJoinObjectsRequest,
+  DescribeK8sApiAbnormalRuleListRequest,
   DescribeAccessControlDetailResponse,
   CreateImageExportJobResponse,
   ProjectInfo,
@@ -627,7 +657,7 @@ import {
   ComponentInfo,
   ConfirmNetworkFirewallPolicyResponse,
   CreateNetworkFirewallPublishResponse,
-  DescribeVirusScanSettingRequest,
+  DescribeAssetSummaryRequest,
   CreateClusterCheckTaskRequest,
   RaspInfo,
   DescribeNetworkFirewallClusterListRequest,
@@ -659,6 +689,7 @@ import {
   DescribeAssetImageVirusListRequest,
   DescribeAssetImageScanSettingResponse,
   DescribeReverseShellDetailResponse,
+  DescribeClusterSummaryRequest,
   AddIgnoreVulRequest,
   CreateEscapeWhiteListExportJobResponse,
   DescribeAccessControlRulesExportResponse,
@@ -675,7 +706,7 @@ import {
   CreateCheckComponentRequest,
   DescribeAgentInstallCommandResponse,
   DeleteRiskSyscallWhiteListsRequest,
-  SwitchImageAutoAuthorizedRuleRequest,
+  ModifyK8sApiAbnormalRuleStatusResponse,
   DescribeImageAuthorizedInfoRequest,
   DescribeExportJobDownloadURLResponse,
   DescribeAssetImageRegistryRiskInfoListResponse,
@@ -685,7 +716,10 @@ import {
   ComplianceAssetPolicySetItem,
   DescribeAccessControlRulesRequest,
   StopVirusScanTaskResponse,
+  K8sApiAbnormalEventInfo,
   DescribeVulDefenceEventTendencyResponse,
+  CreateK8sApiAbnormalRuleInfoRequest,
+  CreateK8sApiAbnormalRuleExportJobResponse,
   RenewImageAuthorizeStateResponse,
   ImageAutoAuthorizedTask,
   AddEditWarningRulesRequest,
@@ -717,11 +751,12 @@ import {
   AddEditWarningRulesResponse,
   DescribeVulDefenceSettingRequest,
   DescribeVirusAutoIsolateSettingResponse,
+  VulInfo,
   DescribeAssetImageRegistryRegistryListResponse,
   DescribeAssetImageRegistryAssetStatusRequest,
   DescribeVulScanLocalImageListRequest,
   ImageProgress,
-  DescribeNetworkFirewallPolicyDetailResponse,
+  CreateK8sApiAbnormalRuleExportJobRequest,
   CreateVirusScanAgainResponse,
   CreateDefenceVulExportJobRequest,
   ModifySecLogDeliveryClsSettingRequest,
@@ -744,17 +779,18 @@ import {
   DescribeSecLogDeliveryClsSettingResponse,
   DescribeComplianceAssetDetailInfoResponse,
   DeleteEscapeWhiteListResponse,
+  RemoveAssetImageRegistryRegistryDetailResponse,
   ScanComplianceScanFailedAssetsResponse,
   ModifyAssetImageRegistryScanStopRequest,
   DeleteNetworkFirewallPolicyDetailResponse,
-  DescribeVirusScanTaskStatusRequest,
+  DescribeK8sApiAbnormalTendencyRequest,
   RiskSyscallWhiteListInfo,
   DescribeNewestVulResponse,
   DescribeCompliancePolicyItemAffectedAssetListResponse,
   DescribeComplianceAssetPolicyItemListRequest,
   DescribeABTestConfigResponse,
   SearchTemplate,
-  DescribeAssetImageRegistryVulListExportResponse,
+  DescribeContainerSecEventSummaryResponse,
   ProcessDetailBaseInfo,
   DescribeAssetHostListRequest,
   CreateVulDefenceHostExportJobRequest,
@@ -767,6 +803,7 @@ import {
   DescribeAssetImageRegistryRegistryDetailRequest,
   NetworkAuditRecord,
   UpdateAssetImageRegistryRegistryDetailRequest,
+  DescribeK8sApiAbnormalRuleScopeListRequest,
   ServiceInfo,
   AddEditReverseShellWhiteListRequest,
   VulIgnoreRegistryImage,
@@ -779,14 +816,14 @@ import {
   FileAttributeInfo,
   DescribeVulTendencyRequest,
   DescribePostPayDetailRequest,
-  VulInfo,
-  DescribeVulSummaryResponse,
+  ModifyK8sApiAbnormalEventStatusResponse,
+  DescribeSecLogDeliveryKafkaOptionsResponse,
   DescribeAssetHostDetailRequest,
   DescribeRefreshTaskResponse,
   ReverseShellWhiteListInfo,
-  VirusInfo,
+  UpdateNetworkFirewallPolicyDetailRequest,
   EscapeRuleEnabled,
-  DescribeSecLogDeliveryKafkaOptionsResponse,
+  DescribeK8sApiAbnormalEventInfoRequest,
   DescribeSearchTemplatesRequest,
 } from "./tcss_models"
 
@@ -810,13 +847,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询支持防御的漏洞列表
+   * 创建k8s api异常事件导出任务
    */
-  async DescribeSupportDefenceVul(
-    req: DescribeSupportDefenceVulRequest,
-    cb?: (error: string, rep: DescribeSupportDefenceVulResponse) => void
-  ): Promise<DescribeSupportDefenceVulResponse> {
-    return this.request("DescribeSupportDefenceVul", req, cb)
+  async CreateK8sApiAbnormalEventExportJob(
+    req: CreateK8sApiAbnormalEventExportJobRequest,
+    cb?: (error: string, rep: CreateK8sApiAbnormalEventExportJobResponse) => void
+  ): Promise<CreateK8sApiAbnormalEventExportJobResponse> {
+    return this.request("CreateK8sApiAbnormalEventExportJob", req, cb)
   }
 
   /**
@@ -930,13 +967,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改运行时访问控制策略的状态，启用或者禁用
+   * 查询木马自动隔离样本详情
    */
-  async ModifyAccessControlRuleStatus(
-    req: ModifyAccessControlRuleStatusRequest,
-    cb?: (error: string, rep: ModifyAccessControlRuleStatusResponse) => void
-  ): Promise<ModifyAccessControlRuleStatusResponse> {
-    return this.request("ModifyAccessControlRuleStatus", req, cb)
+  async DescribeVirusAutoIsolateSampleDetail(
+    req: DescribeVirusAutoIsolateSampleDetailRequest,
+    cb?: (error: string, rep: DescribeVirusAutoIsolateSampleDetailResponse) => void
+  ): Promise<DescribeVirusAutoIsolateSampleDetailResponse> {
+    return this.request("DescribeVirusAutoIsolateSampleDetail", req, cb)
   }
 
   /**
@@ -960,13 +997,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 容器网络更新Yaml网络策略并发布任务
+   * 查询k8sapi异常事件统计
    */
-  async UpdateAndPublishNetworkFirewallPolicyYamlDetail(
-    req: UpdateAndPublishNetworkFirewallPolicyYamlDetailRequest,
-    cb?: (error: string, rep: UpdateAndPublishNetworkFirewallPolicyYamlDetailResponse) => void
-  ): Promise<UpdateAndPublishNetworkFirewallPolicyYamlDetailResponse> {
-    return this.request("UpdateAndPublishNetworkFirewallPolicyYamlDetail", req, cb)
+  async DescribeK8sApiAbnormalSummary(
+    req?: DescribeK8sApiAbnormalSummaryRequest,
+    cb?: (error: string, rep: DescribeK8sApiAbnormalSummaryResponse) => void
+  ): Promise<DescribeK8sApiAbnormalSummaryResponse> {
+    return this.request("DescribeK8sApiAbnormalSummary", req, cb)
   }
 
   /**
@@ -1160,13 +1197,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 运行时文件扫描超时设置
+   * 创建k8sApi异常规则导出任务
    */
-  async ModifyVirusScanTimeoutSetting(
-    req: ModifyVirusScanTimeoutSettingRequest,
-    cb?: (error: string, rep: ModifyVirusScanTimeoutSettingResponse) => void
-  ): Promise<ModifyVirusScanTimeoutSettingResponse> {
-    return this.request("ModifyVirusScanTimeoutSetting", req, cb)
+  async CreateK8sApiAbnormalRuleExportJob(
+    req: CreateK8sApiAbnormalRuleExportJobRequest,
+    cb?: (error: string, rep: CreateK8sApiAbnormalRuleExportJobResponse) => void
+  ): Promise<CreateK8sApiAbnormalRuleExportJobResponse> {
+    return this.request("CreateK8sApiAbnormalRuleExportJob", req, cb)
   }
 
   /**
@@ -1361,13 +1398,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 容器安全停止镜像扫描
+   * 修改运行时访问控制策略的状态，启用或者禁用
    */
-  async ModifyAssetImageScanStop(
-    req: ModifyAssetImageScanStopRequest,
-    cb?: (error: string, rep: ModifyAssetImageScanStopResponse) => void
-  ): Promise<ModifyAssetImageScanStopResponse> {
-    return this.request("ModifyAssetImageScanStop", req, cb)
+  async ModifyAccessControlRuleStatus(
+    req: ModifyAccessControlRuleStatusRequest,
+    cb?: (error: string, rep: ModifyAccessControlRuleStatusResponse) => void
+  ): Promise<ModifyAccessControlRuleStatusResponse> {
+    return this.request("ModifyAccessControlRuleStatus", req, cb)
   }
 
   /**
@@ -1468,6 +1505,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeRiskSyscallNamesResponse) => void
   ): Promise<DescribeRiskSyscallNamesResponse> {
     return this.request("DescribeRiskSyscallNames", req, cb)
+  }
+
+  /**
+   * 修改k8sapi异常规则信息
+   */
+  async ModifyK8sApiAbnormalRuleInfo(
+    req: ModifyK8sApiAbnormalRuleInfoRequest,
+    cb?: (error: string, rep: ModifyK8sApiAbnormalRuleInfoResponse) => void
+  ): Promise<ModifyK8sApiAbnormalRuleInfoResponse> {
+    return this.request("ModifyK8sApiAbnormalRuleInfo", req, cb)
   }
 
   /**
@@ -1621,6 +1668,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 运行时更新木马文件事件状态
+   */
+  async ModifyVirusFileStatus(
+    req: ModifyVirusFileStatusRequest,
+    cb?: (error: string, rep: ModifyVirusFileStatusResponse) => void
+  ): Promise<ModifyVirusFileStatusResponse> {
+    return this.request("ModifyVirusFileStatus", req, cb)
+  }
+
+  /**
    * 添加编辑运行时反弹shell白名单
    */
   async AddEditReverseShellWhiteList(
@@ -1701,13 +1758,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 重置安全日志主题设置
+   * 查询当天未授权核数趋势
    */
-  async ResetSecLogTopicConfig(
-    req: ResetSecLogTopicConfigRequest,
-    cb?: (error: string, rep: ResetSecLogTopicConfigResponse) => void
-  ): Promise<ResetSecLogTopicConfigResponse> {
-    return this.request("ResetSecLogTopicConfig", req, cb)
+  async DescribeUnauthorizedCoresTendency(
+    req?: DescribeUnauthorizedCoresTendencyRequest,
+    cb?: (error: string, rep: DescribeUnauthorizedCoresTendencyResponse) => void
+  ): Promise<DescribeUnauthorizedCoresTendencyResponse> {
+    return this.request("DescribeUnauthorizedCoresTendency", req, cb)
   }
 
   /**
@@ -2022,13 +2079,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 运行时更新木马文件事件状态
+   * 查询k8s api异常事件列表
    */
-  async ModifyVirusFileStatus(
-    req: ModifyVirusFileStatusRequest,
-    cb?: (error: string, rep: ModifyVirusFileStatusResponse) => void
-  ): Promise<ModifyVirusFileStatusResponse> {
-    return this.request("ModifyVirusFileStatus", req, cb)
+  async DescribeK8sApiAbnormalEventList(
+    req: DescribeK8sApiAbnormalEventListRequest,
+    cb?: (error: string, rep: DescribeK8sApiAbnormalEventListResponse) => void
+  ): Promise<DescribeK8sApiAbnormalEventListResponse> {
+    return this.request("DescribeK8sApiAbnormalEventList", req, cb)
   }
 
   /**
@@ -2172,6 +2229,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 容器安全停止镜像扫描
+   */
+  async ModifyAssetImageScanStop(
+    req: ModifyAssetImageScanStopRequest,
+    cb?: (error: string, rep: ModifyAssetImageScanStopResponse) => void
+  ): Promise<ModifyAssetImageScanStopResponse> {
+    return this.request("ModifyAssetImageScanStop", req, cb)
+  }
+
+  /**
    * 重新检测选定的资产
    */
   async ScanComplianceAssets(
@@ -2182,13 +2249,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 运行时停止木马查杀任务
+   * 修改k8sapi异常事件状态
    */
-  async StopVirusScanTask(
-    req: StopVirusScanTaskRequest,
-    cb?: (error: string, rep: StopVirusScanTaskResponse) => void
-  ): Promise<StopVirusScanTaskResponse> {
-    return this.request("StopVirusScanTask", req, cb)
+  async ModifyK8sApiAbnormalEventStatus(
+    req: ModifyK8sApiAbnormalEventStatusRequest,
+    cb?: (error: string, rep: ModifyK8sApiAbnormalEventStatusResponse) => void
+  ): Promise<ModifyK8sApiAbnormalEventStatusResponse> {
+    return this.request("ModifyK8sApiAbnormalEventStatus", req, cb)
   }
 
   /**
@@ -2292,13 +2359,33 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 容器安全搜索查询端口占用列表
+   * 查询k8s api 异常规则中范围列表
    */
-  async DescribeAssetPortList(
-    req: DescribeAssetPortListRequest,
-    cb?: (error: string, rep: DescribeAssetPortListResponse) => void
-  ): Promise<DescribeAssetPortListResponse> {
-    return this.request("DescribeAssetPortList", req, cb)
+  async DescribeK8sApiAbnormalRuleScopeList(
+    req: DescribeK8sApiAbnormalRuleScopeListRequest,
+    cb?: (error: string, rep: DescribeK8sApiAbnormalRuleScopeListResponse) => void
+  ): Promise<DescribeK8sApiAbnormalRuleScopeListResponse> {
+    return this.request("DescribeK8sApiAbnormalRuleScopeList", req, cb)
+  }
+
+  /**
+   * 查询集群列表
+   */
+  async DescribeAssetClusterList(
+    req: DescribeAssetClusterListRequest,
+    cb?: (error: string, rep: DescribeAssetClusterListResponse) => void
+  ): Promise<DescribeAssetClusterListResponse> {
+    return this.request("DescribeAssetClusterList", req, cb)
+  }
+
+  /**
+   * 查询支持防御的漏洞列表
+   */
+  async DescribeSupportDefenceVul(
+    req: DescribeSupportDefenceVulRequest,
+    cb?: (error: string, rep: DescribeSupportDefenceVulResponse) => void
+  ): Promise<DescribeSupportDefenceVulResponse> {
+    return this.request("DescribeSupportDefenceVul", req, cb)
   }
 
   /**
@@ -2400,6 +2487,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAssetImageRegistryRiskListExportResponse) => void
   ): Promise<DescribeAssetImageRegistryRiskListExportResponse> {
     return this.request("DescribeAssetImageRegistryRiskListExport", req, cb)
+  }
+
+  /**
+   * 运行时文件扫描超时设置
+   */
+  async ModifyVirusScanTimeoutSetting(
+    req: ModifyVirusScanTimeoutSettingRequest,
+    cb?: (error: string, rep: ModifyVirusScanTimeoutSettingResponse) => void
+  ): Promise<ModifyVirusScanTimeoutSettingResponse> {
+    return this.request("ModifyVirusScanTimeoutSetting", req, cb)
   }
 
   /**
@@ -2520,6 +2617,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAccessControlRuleDetailResponse) => void
   ): Promise<DescribeAccessControlRuleDetailResponse> {
     return this.request("DescribeAccessControlRuleDetail", req, cb)
+  }
+
+  /**
+   * 容器网络更新Yaml网络策略并发布任务
+   */
+  async UpdateAndPublishNetworkFirewallPolicyYamlDetail(
+    req: UpdateAndPublishNetworkFirewallPolicyYamlDetailRequest,
+    cb?: (error: string, rep: UpdateAndPublishNetworkFirewallPolicyYamlDetailResponse) => void
+  ): Promise<UpdateAndPublishNetworkFirewallPolicyYamlDetailResponse> {
+    return this.request("UpdateAndPublishNetworkFirewallPolicyYamlDetail", req, cb)
   }
 
   /**
@@ -2683,13 +2790,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询当天未授权核数趋势
+   * 容器安全搜索查询端口占用列表
    */
-  async DescribeUnauthorizedCoresTendency(
-    req?: DescribeUnauthorizedCoresTendencyRequest,
-    cb?: (error: string, rep: DescribeUnauthorizedCoresTendencyResponse) => void
-  ): Promise<DescribeUnauthorizedCoresTendencyResponse> {
-    return this.request("DescribeUnauthorizedCoresTendency", req, cb)
+  async DescribeAssetPortList(
+    req: DescribeAssetPortListRequest,
+    cb?: (error: string, rep: DescribeAssetPortListResponse) => void
+  ): Promise<DescribeAssetPortListResponse> {
+    return this.request("DescribeAssetPortList", req, cb)
   }
 
   /**
@@ -2843,6 +2950,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 运行时停止木马查杀任务
+   */
+  async StopVirusScanTask(
+    req: StopVirusScanTaskRequest,
+    cb?: (error: string, rep: StopVirusScanTaskResponse) => void
+  ): Promise<StopVirusScanTaskResponse> {
+    return this.request("StopVirusScanTask", req, cb)
+  }
+
+  /**
    * 添加编辑运行时异常进程策略
    */
   async AddEditAbnormalProcessRule(
@@ -2850,6 +2967,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AddEditAbnormalProcessRuleResponse) => void
   ): Promise<AddEditAbnormalProcessRuleResponse> {
     return this.request("AddEditAbnormalProcessRule", req, cb)
+  }
+
+  /**
+   * 修改漏洞防御事件状态
+   */
+  async ModifyVulDefenceEventStatus(
+    req: ModifyVulDefenceEventStatusRequest,
+    cb?: (error: string, rep: ModifyVulDefenceEventStatusResponse) => void
+  ): Promise<ModifyVulDefenceEventStatusResponse> {
+    return this.request("ModifyVulDefenceEventStatus", req, cb)
+  }
+
+  /**
+   * 重置安全日志主题设置
+   */
+  async ResetSecLogTopicConfig(
+    req: ResetSecLogTopicConfigRequest,
+    cb?: (error: string, rep: ResetSecLogTopicConfigResponse) => void
+  ): Promise<ResetSecLogTopicConfigResponse> {
+    return this.request("ResetSecLogTopicConfig", req, cb)
   }
 
   /**
@@ -2923,13 +3060,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询木马自动隔离样本详情
+   * 删除k8sapi异常事件规则
    */
-  async DescribeVirusAutoIsolateSampleDetail(
-    req: DescribeVirusAutoIsolateSampleDetailRequest,
-    cb?: (error: string, rep: DescribeVirusAutoIsolateSampleDetailResponse) => void
-  ): Promise<DescribeVirusAutoIsolateSampleDetailResponse> {
-    return this.request("DescribeVirusAutoIsolateSampleDetail", req, cb)
+  async DeleteK8sApiAbnormalRule(
+    req: DeleteK8sApiAbnormalRuleRequest,
+    cb?: (error: string, rep: DeleteK8sApiAbnormalRuleResponse) => void
+  ): Promise<DeleteK8sApiAbnormalRuleResponse> {
+    return this.request("DeleteK8sApiAbnormalRule", req, cb)
   }
 
   /**
@@ -3063,6 +3200,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询k8sapi异常事件趋势
+   */
+  async DescribeK8sApiAbnormalTendency(
+    req: DescribeK8sApiAbnormalTendencyRequest,
+    cb?: (error: string, rep: DescribeK8sApiAbnormalTendencyResponse) => void
+  ): Promise<DescribeK8sApiAbnormalTendencyResponse> {
+    return this.request("DescribeK8sApiAbnormalTendency", req, cb)
+  }
+
+  /**
    * 查询运行时异常进程事件列表信息
    */
   async DescribeAbnormalProcessEvents(
@@ -3123,6 +3270,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询漏洞防御设置信息
+   */
+  async DescribeVulDefenceSetting(
+    req?: DescribeVulDefenceSettingRequest,
+    cb?: (error: string, rep: DescribeVulDefenceSettingResponse) => void
+  ): Promise<DescribeVulDefenceSettingResponse> {
+    return this.request("DescribeVulDefenceSetting", req, cb)
+  }
+
+  /**
    * 查询资产同步最近时间
    */
   async DescribeAssetSyncLastTime(
@@ -3130,6 +3287,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAssetSyncLastTimeResponse) => void
   ): Promise<DescribeAssetSyncLastTimeResponse> {
     return this.request("DescribeAssetSyncLastTime", req, cb)
+  }
+
+  /**
+   * 查询k8sapi异常请求规则详情
+   */
+  async DescribeK8sApiAbnormalRuleInfo(
+    req: DescribeK8sApiAbnormalRuleInfoRequest,
+    cb?: (error: string, rep: DescribeK8sApiAbnormalRuleInfoResponse) => void
+  ): Promise<DescribeK8sApiAbnormalRuleInfoResponse> {
+    return this.request("DescribeK8sApiAbnormalRuleInfo", req, cb)
   }
 
   /**
@@ -3673,6 +3840,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建k8sapi异常事件规则
+   */
+  async CreateK8sApiAbnormalRuleInfo(
+    req: CreateK8sApiAbnormalRuleInfoRequest,
+    cb?: (error: string, rep: CreateK8sApiAbnormalRuleInfoResponse) => void
+  ): Promise<CreateK8sApiAbnormalRuleInfoResponse> {
+    return this.request("CreateK8sApiAbnormalRuleInfo", req, cb)
+  }
+
+  /**
    * 查询账户容器、镜像等统计信息
    */
   async DescribeAssetSummary(
@@ -3743,13 +3920,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改漏洞防御事件状态
+   * 查询k8s api 异常事件详情
    */
-  async ModifyVulDefenceEventStatus(
-    req: ModifyVulDefenceEventStatusRequest,
-    cb?: (error: string, rep: ModifyVulDefenceEventStatusResponse) => void
-  ): Promise<ModifyVulDefenceEventStatusResponse> {
-    return this.request("ModifyVulDefenceEventStatus", req, cb)
+  async DescribeK8sApiAbnormalEventInfo(
+    req: DescribeK8sApiAbnormalEventInfoRequest,
+    cb?: (error: string, rep: DescribeK8sApiAbnormalEventInfoResponse) => void
+  ): Promise<DescribeK8sApiAbnormalEventInfoResponse> {
+    return this.request("DescribeK8sApiAbnormalEventInfo", req, cb)
   }
 
   /**
@@ -3883,6 +4060,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改k8sapi异常事件规则状态
+   */
+  async ModifyK8sApiAbnormalRuleStatus(
+    req: ModifyK8sApiAbnormalRuleStatusRequest,
+    cb?: (error: string, rep: ModifyK8sApiAbnormalRuleStatusResponse) => void
+  ): Promise<ModifyK8sApiAbnormalRuleStatusResponse> {
+    return this.request("ModifyK8sApiAbnormalRuleStatus", req, cb)
+  }
+
+  /**
    * 查询容器运行时安全事件趋势
    */
   async DescribeSecEventsTendency(
@@ -3923,12 +4110,12 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询漏洞防御设置信息
+   * 查询k8sapi异常请求规则列表
    */
-  async DescribeVulDefenceSetting(
-    req?: DescribeVulDefenceSettingRequest,
-    cb?: (error: string, rep: DescribeVulDefenceSettingResponse) => void
-  ): Promise<DescribeVulDefenceSettingResponse> {
-    return this.request("DescribeVulDefenceSetting", req, cb)
+  async DescribeK8sApiAbnormalRuleList(
+    req: DescribeK8sApiAbnormalRuleListRequest,
+    cb?: (error: string, rep: DescribeK8sApiAbnormalRuleListResponse) => void
+  ): Promise<DescribeK8sApiAbnormalRuleListResponse> {
+    return this.request("DescribeK8sApiAbnormalRuleList", req, cb)
   }
 }

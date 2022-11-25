@@ -232,7 +232,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RenewInstance", req, cb);
     }
     /**
-     * 查询备份Rdb下载地址(接口灰度中，需要加白名单使用)
+     * 查询备份Rdb下载地址
      */
     async DescribeBackupUrl(req, cb) {
         return this.request("DescribeBackupUrl", req, cb);

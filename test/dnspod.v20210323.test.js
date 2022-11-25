@@ -118,6 +118,16 @@ it("dnspod.v20210323.DescribeSnapshotList", async function () {
     }
 })
 
+it("dnspod.v20210323.ModifyRecordFields", async function () {
+    try {
+       const data = await client.ModifyRecordFields({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dnspod.v20210323.DownloadSnapshot", async function () {
     try {
        const data = await client.DownloadSnapshot({})

@@ -7473,6 +7473,20 @@ wechat:微信支付
 注意：此字段可能返回 null，表示取不到有效值。
       */
   PaymentMethod: string
+
+  /**
+      * 平台应收金额
+单位：分，需要注意的是，TotalAmt=TotalPlatformIncome+TotalMchIncome
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TotalPlatformIncome: number
+
+  /**
+      * 商户应收金额
+单位：分，需要注意的是，TotalAmt=TotalPlatformIncome+TotalMchIncome
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TotalMchIncome: number
 }
 
 /**
