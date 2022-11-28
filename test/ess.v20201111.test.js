@@ -98,6 +98,16 @@ it("ess.v20201111.CreateFlowSignReview", async function () {
     }
 })
 
+it("ess.v20201111.CreatePrepareFlow", async function () {
+    try {
+       const data = await client.CreatePrepareFlow({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ess.v20201111.CreateDocument", async function () {
     try {
        const data = await client.CreateDocument({})
@@ -131,6 +141,16 @@ it("ess.v20201111.CreateFlowEvidenceReport", async function () {
 it("ess.v20201111.CreateFlow", async function () {
     try {
        const data = await client.CreateFlow({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ess.v20201111.DescribeFlowEvidenceReport", async function () {
+    try {
+       const data = await client.DescribeFlowEvidenceReport({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

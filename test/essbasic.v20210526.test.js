@@ -158,9 +158,9 @@ it("essbasic.v20210526.ChannelGetTaskResultApi", async function () {
     }
 })
 
-it("essbasic.v20210526.SyncProxyOrganization", async function () {
+it("essbasic.v20210526.CreateChannelFlowEvidenceReport", async function () {
     try {
-       const data = await client.SyncProxyOrganization({})
+       const data = await client.CreateChannelFlowEvidenceReport({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -258,9 +258,29 @@ it("essbasic.v20210526.UploadFiles", async function () {
     }
 })
 
+it("essbasic.v20210526.SyncProxyOrganization", async function () {
+    try {
+       const data = await client.SyncProxyOrganization({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("essbasic.v20210526.SyncProxyOrganizationOperators", async function () {
     try {
        const data = await client.SyncProxyOrganizationOperators({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("essbasic.v20210526.DescribeChannelFlowEvidenceReport", async function () {
+    try {
+       const data = await client.DescribeChannelFlowEvidenceReport({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -41,7 +41,7 @@ import {
   Agent,
   FlowApproverDetail,
   ChannelCreateFlowGroupByFilesRequest,
-  TaskInfo,
+  DescribeFlowDetailInfoResponse,
   ResourceUrlInfo,
   FlowApproverInfo,
   PrepareFlowsResponse,
@@ -50,17 +50,18 @@ import {
   DescribeTemplatesResponse,
   StaffRole,
   ChannelVerifyPdfRequest,
+  CreateChannelFlowEvidenceReportRequest,
   ChannelVerifyPdfResponse,
   CreateConsoleLoginUrlRequest,
   OrganizationInfo,
   PdfVerifyResult,
   ChannelCancelMultiFlowSignQRCodeRequest,
   ChannelDescribeOrganizationSealsRequest,
-  DescribeUsageRequest,
+  ProxyOrganizationOperator,
   FormField,
   FlowInfo,
   UserInfo,
-  DescribeFlowDetailInfoResponse,
+  TaskInfo,
   DescribeUsageResponse,
   Staff,
   ChannelCreateBoundFlowsRequest,
@@ -80,11 +81,12 @@ import {
   FlowResourceUrlInfo,
   UploadFile,
   Filter,
+  DescribeUsageRequest,
   CreateSignUrlsResponse,
   UploadFilesResponse,
   ChannelCreateBatchCancelFlowUrlRequest,
   ApproverRestriction,
-  ProxyOrganizationOperator,
+  DescribeChannelFlowEvidenceReportRequest,
   ChannelCreateFlowByFilesResponse,
   ChannelCreateFlowSignReviewResponse,
   ChannelDescribeOrganizationSealsResponse,
@@ -92,6 +94,7 @@ import {
   ChannelCreateFlowGroupByFilesResponse,
   ChannelCreateMultiFlowSignQRCodeResponse,
   ApproverOption,
+  ChannelCreateBoundFlowsResponse,
   ChannelGetTaskResultApiResponse,
   Component,
   GetDownloadFlowUrlRequest,
@@ -104,9 +107,10 @@ import {
   UsageDetail,
   ChannelCreateBatchCancelFlowUrlResponse,
   OperateChannelTemplateRequest,
+  CreateChannelFlowEvidenceReportResponse,
   SyncFailReason,
   ChannelDescribeEmployeesResponse,
-  ChannelCreateBoundFlowsResponse,
+  DescribeChannelFlowEvidenceReportResponse,
   CcInfo,
 } from "./essbasic_models"
 
@@ -294,13 +298,14 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 此接口（SyncProxyOrganization）用于同步渠道子客企业信息，主要是子客企业的营业执照，便于子客企业开通过程中不用手动上传。若有需要调用此接口，需要在创建控制链接CreateConsoleLoginUrl之后即刻进行调用。
-   */
-  async SyncProxyOrganization(
-    req: SyncProxyOrganizationRequest,
-    cb?: (error: string, rep: SyncProxyOrganizationResponse) => void
-  ): Promise<SyncProxyOrganizationResponse> {
-    return this.request("SyncProxyOrganization", req, cb)
+     * 创建出证报告，返回报告 ID
+
+     */
+  async CreateChannelFlowEvidenceReport(
+    req: CreateChannelFlowEvidenceReportRequest,
+    cb?: (error: string, rep: CreateChannelFlowEvidenceReportResponse) => void
+  ): Promise<CreateChannelFlowEvidenceReportResponse> {
+    return this.request("CreateChannelFlowEvidenceReport", req, cb)
   }
 
   /**
@@ -407,6 +412,16 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
   }
 
   /**
+   * 此接口（SyncProxyOrganization）用于同步渠道子客企业信息，主要是子客企业的营业执照，便于子客企业开通过程中不用手动上传。若有需要调用此接口，需要在创建控制链接CreateConsoleLoginUrl之后即刻进行调用。
+   */
+  async SyncProxyOrganization(
+    req: SyncProxyOrganizationRequest,
+    cb?: (error: string, rep: SyncProxyOrganizationResponse) => void
+  ): Promise<SyncProxyOrganizationResponse> {
+    return this.request("SyncProxyOrganization", req, cb)
+  }
+
+  /**
      * 此接口（SyncProxyOrganizationOperators）用于同步渠道子客企业经办人列表，主要是同步经办人的离职状态。子客Web控制台的组织架构管理，是依赖于渠道平台的，无法针对员工做新增/更新/离职等操作。
 若经办人信息有误，或者需要修改，也可以先将之前的经办人做离职操作，然后重新使用控制台链接CreateConsoleLoginUrl让经办人重新实名。
      */
@@ -415,6 +430,17 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
     cb?: (error: string, rep: SyncProxyOrganizationOperatorsResponse) => void
   ): Promise<SyncProxyOrganizationOperatorsResponse> {
     return this.request("SyncProxyOrganizationOperators", req, cb)
+  }
+
+  /**
+     * 查询出证报告，返回报告 URL。
+
+     */
+  async DescribeChannelFlowEvidenceReport(
+    req: DescribeChannelFlowEvidenceReportRequest,
+    cb?: (error: string, rep: DescribeChannelFlowEvidenceReportResponse) => void
+  ): Promise<DescribeChannelFlowEvidenceReportResponse> {
+    return this.request("DescribeChannelFlowEvidenceReport", req, cb)
   }
 
   /**

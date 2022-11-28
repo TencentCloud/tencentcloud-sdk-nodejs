@@ -463,6 +463,10 @@ export interface AiReviewTaskProhibitedAsrResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Output: AiReviewProhibitedAsrTaskOutput;
+    /**
+      * 音视频审核 Asr 文字鉴违禁任务进度，取值范围 [0-100] 。
+      */
+    Progress: number;
 }
 /**
  * 转自适应码流模板详情
@@ -573,6 +577,10 @@ export interface AiReviewTaskProhibitedOcrResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Output: AiReviewProhibitedOcrTaskOutput;
+    /**
+      * 音视频审核 Ocr 文字鉴违禁任务进度，取值范围 [0-100] 。
+      */
+    Progress: number;
 }
 /**
  * 语音全文识别结果。
@@ -1789,6 +1797,10 @@ export interface AiRecognitionTaskFaceResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Output: AiRecognitionTaskFaceResultOutput;
+    /**
+      * 人脸识别任务进度，取值范围 [0-100] 。
+      */
+    Progress: number;
 }
 /**
  * 视频片头片尾识别的输入。
@@ -1901,6 +1913,10 @@ export interface MediaProcessTaskSampleSnapshotResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Output: MediaSampleSnapshotItem;
+    /**
+      * 对视频做采样截图任务进度，取值范围 [0-100] 。
+      */
+    Progress: number;
 }
 /**
  * DescribeDailyMediaPlayStat请求参数结构体
@@ -2039,6 +2055,10 @@ export interface AiAnalysisTaskHighlightResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Output: AiAnalysisTaskHighlightOutput;
+    /**
+      * 智能精彩片段任务进度，取值范围 [0-100] 。
+      */
+    Progress: number;
 }
 /**
  * DeleteAIAnalysisTemplate返回参数结构体
@@ -2582,6 +2602,10 @@ export interface AiAnalysisTaskCoverResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Output: AiAnalysisTaskCoverOutput;
+    /**
+      * 智能封面任务进度，取值范围 [0-100] 。
+      */
+    Progress: number;
 }
 /**
  * DescribeEventConfig请求参数结构体
@@ -3745,6 +3769,10 @@ export interface MediaProcessTaskAnimatedGraphicResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Output: MediaAnimatedGraphicsItem;
+    /**
+      * 转动图任务进度，取值范围 [0-100] 。
+      */
+    Progress: number;
 }
 /**
  * ProcessMedia返回参数结构体
@@ -3928,6 +3956,10 @@ export interface AiReviewTaskTerrorismOcrResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Output: AiReviewTerrorismOcrTaskOutput;
+    /**
+      * 音视频审核 Ocr 文字涉及令人不安全的信息的任务进度，取值范围 [0-100] 。
+      */
+    Progress: number;
 }
 /**
  * 文本关键识别结果。
@@ -3958,6 +3990,10 @@ export interface AiRecognitionTaskOcrWordsResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Output: AiRecognitionTaskOcrWordsResultOutput;
+    /**
+      * 文本关键词识别任务进度，取值范围 [0-100] 。
+      */
+    Progress: number;
 }
 /**
  * 语音鉴别涉及令人反感的信息的任务控制参数
@@ -4008,6 +4044,10 @@ export interface AiRecognitionTaskSegmentResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Output: AiRecognitionTaskSegmentResultOutput;
+    /**
+      * 视频拆条任务进度，取值范围 [0-100] 。
+      */
+    Progress: number;
 }
 /**
  * 字幕信息。
@@ -4466,6 +4506,10 @@ export interface MediaProcessTaskImageSpriteResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Output: MediaImageSpriteItem;
+    /**
+      * 对视频截雪碧图任务进度，取值范围 [0-100] 。
+      */
+    Progress: number;
 }
 /**
  * 降码率任务信息
@@ -5220,6 +5264,10 @@ export interface AiReviewTaskPornOcrResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Output: AiReviewPornOcrTaskOutput;
+    /**
+      * Ocr 文字音视频审核涉及令人反感的信息的任务进度，取值范围 [0-100] 。
+      */
+    Progress: number;
 }
 /**
  * ModifyContentReviewTemplate返回参数结构体
@@ -5659,6 +5707,10 @@ export interface AiAnalysisTaskTagResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Output: AiAnalysisTaskTagOutput;
+    /**
+      * 智能标签任务进度，取值范围 [0-100] 。
+      */
+    Progress: number;
 }
 /**
  * SearchMedia返回参数结构体
@@ -5983,6 +6035,10 @@ export interface AiRecognitionTaskOcrFullTextResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Output: AiRecognitionTaskOcrFullTextResultOutput;
+    /**
+      * 文本全文识别任务进度，取值范围 [0-100] 。
+      */
+    Progress: number;
 }
 /**
  * 媒体轨道的片段信息
@@ -6062,6 +6118,10 @@ export interface MediaProcessTaskSnapshotByTimeOffsetResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Output: MediaSnapshotByTimeOffsetItem;
+    /**
+      * 对视频按指定时间点截图任务进度，取值范围 [0-100] 。
+      */
+    Progress: number;
 }
 /**
  * ManageTask请求参数结构体
@@ -6976,6 +7036,10 @@ export interface MediaProcessTaskCoverBySnapshotResult {
       * 对视频截图做封面任务的输出。
       */
     Output: CoverBySnapshotTaskOutput;
+    /**
+      * 对视频截图做封面任务进度，取值范围 [0-100] 。
+      */
+    Progress: number;
 }
 /**
  * CreateWatermarkTemplate请求参数结构体
@@ -7286,6 +7350,10 @@ export interface SplitMediaTask {
       * 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
       */
     SessionId: string;
+    /**
+      * 视频拆条任务进度，取值范围 [0-100] 。
+      */
+    Progress: number;
 }
 /**
  * 制作媒体文件任务的输入。
@@ -8269,6 +8337,10 @@ export interface AiReviewTaskTerrorismResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Output: AiReviewTerrorismTaskOutput;
+    /**
+      * 音视频审核涉及令人不安全的信息的任务进度，取值范围 [0-100] 。
+      */
+    Progress: number;
 }
 /**
  * ProcessMediaByUrl返回参数结构体
@@ -9261,6 +9333,10 @@ export interface AiReviewTaskPoliticalAsrResult {
       * 音视频审核 Asr 文字涉及令人不适宜信息的任务输出。
       */
     Output: AiReviewPoliticalAsrTaskOutput;
+    /**
+      * 音视频审核 Asr 文字涉及令人不适宜信息的任务进度，取值范围 [0-100] 。
+      */
+    Progress: number;
 }
 /**
  * TRTC伴生录制信息。
@@ -9415,6 +9491,10 @@ export interface AiReviewTaskPornResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Output: AiReviewPornTaskOutput;
+    /**
+      * 音视频审核涉及令人反感的信息的任务进度，取值范围 [0-100] 。
+      */
+    Progress: number;
 }
 /**
  * 智能物体识别输出。
@@ -9580,6 +9660,10 @@ export interface AiAnalysisTaskClassificationResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Output: AiAnalysisTaskClassificationOutput;
+    /**
+      * 智能分类任务进度，取值范围 [0-100] 。
+      */
+    Progress: number;
 }
 /**
  * 画面鉴别涉及令人不适宜的信息的任务控制参数。
@@ -10149,8 +10233,8 @@ export interface EventContent {
 <li>ComposeMediaComplete：制作媒体文件完成；</li>
 <li>WechatMiniProgramPublishComplete：微信小程序发布完成。</li>
 <li>FastClipMediaComplete：快速剪辑完成；</li>
-<li>ReviewAudioVideoComplete：音视频审核完成。</li>
-<li>ExtractTraceWatermarkComplete：提取溯源水印完成。</li>
+<li>ReviewAudioVideoComplete：音视频审核完成；</li>
+<li>ExtractTraceWatermarkComplete：提取溯源水印完成；</li>
 <b>兼容 2017 版的事件类型：</b>
 <li>TranscodeComplete：视频转码完成；</li>
 <li>ConcatComplete：视频拼接完成；</li>
@@ -10250,7 +10334,7 @@ export interface EventContent {
       */
     ReviewAudioVideoCompleteEvent: ReviewAudioVideoTask;
     /**
-      * 降码率完成事件，当事件类型为 ReduceMediaBitrateComplete 时有效。
+      * 该字段已无效。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ReduceMediaBitrateCompleteEvent: ReduceMediaBitrateTask;
@@ -10295,6 +10379,10 @@ export interface AiRecognitionTaskObjectResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Output: AiRecognitionTaskObjectResultOutput;
+    /**
+      * 物体识别任务进度，取值范围 [0-100] 。
+      */
+    Progress: number;
 }
 /**
  * 用户自定义音视频审核任务控制参数。
@@ -10723,6 +10811,10 @@ export interface AiAnalysisTaskFrameTagResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Output: AiAnalysisTaskFrameTagOutput;
+    /**
+      * 智能按帧标签任务进度，取值范围 [0-100] 。
+      */
+    Progress: number;
 }
 /**
  * 鉴别涉及令人反感的信息的结果信息
@@ -11547,7 +11639,6 @@ export interface DescribeTaskDetailResponse {
 <li>FastClipMedia：快速剪辑任务；</li>
 <li>RemoveWatermarkTask：智能去除水印任务；</li>
 <li> ReviewAudioVideo：音视频审核任务。</li>
-<li> ReduceMediaBitrate：降码率任务。</li>
       */
     TaskType: string;
     /**
@@ -11645,7 +11736,7 @@ export interface DescribeTaskDetailResponse {
       */
     ReviewAudioVideoTask: ReviewAudioVideoTask;
     /**
-      * 降码率任务信息，仅当 TaskType 为 ReduceMediaBitrate，该字段有值。
+      * 该字段已无效。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ReduceMediaBitrateTask: ReduceMediaBitrateTask;
@@ -12025,6 +12116,10 @@ export interface AiReviewTaskPoliticalResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Output: AiReviewPoliticalTaskOutput;
+    /**
+      * 音视频审核涉及令人不适宜信息的任务进度，取值范围 [0-100] 。
+      */
+    Progress: number;
 }
 /**
  * ReviewImage返回参数结构体
@@ -12191,6 +12286,16 @@ export interface ProcedureTask {
       * 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
       */
     SessionId: string;
+    /**
+      * 操作者。取值范围：
+<li>System: 表示系统触发。</li>
+      */
+    Operator: string;
+    /**
+      * 操作类型。取值范围：
+<li>TSC: 表示使用极速高清进行智能降码。</li>
+      */
+    OperationType: string;
 }
 /**
  * ExtractTraceWatermark请求参数结构体
@@ -13855,6 +13960,10 @@ export interface AiRecognitionTaskAsrWordsResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Output: AiRecognitionTaskAsrWordsResultOutput;
+    /**
+      * 语音关键词识别任务进度，取值范围 [0-100] 。
+      */
+    Progress: number;
 }
 /**
  * CreateSubAppId请求参数结构体
@@ -14208,6 +14317,10 @@ export interface AiReviewTaskPornAsrResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Output: AiReviewPornAsrTaskOutput;
+    /**
+      * 音视频审核 Asr 文字涉及令人反感的信息的任务进度，取值范围 [0-100] 。
+      */
+    Progress: number;
 }
 /**
  * ModifyClass返回参数结构体
@@ -14863,6 +14976,10 @@ export interface AiRecognitionTaskHeadTailResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Output: AiRecognitionTaskHeadTailResultOutput;
+    /**
+      * 视频片头片尾识别任务进度，取值范围 [0-100] 。
+      */
+    Progress: number;
 }
 /**
  * DescribePersonSamples请求参数结构体
@@ -15232,6 +15349,10 @@ export interface PullUploadTask {
       * 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
       */
     SessionId: string;
+    /**
+      * 转拉任务进度，取值范围 [0-100] 。
+      */
+    Progress: number;
 }
 /**
  * 违禁任务控制参数

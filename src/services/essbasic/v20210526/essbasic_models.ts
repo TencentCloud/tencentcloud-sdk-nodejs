@@ -467,7 +467,7 @@ export interface ChannelCreateConvertTaskApiRequest {
   Agent: Agent
 
   /**
-   * 资源类型 取值范围doc,docx,html,excel之一
+   * 资源类型 取值范围doc,docx,html,xls,xlsx之一
    */
   ResourceType: string
 
@@ -701,20 +701,41 @@ export interface ChannelCreateFlowGroupByFilesRequest {
 }
 
 /**
- * 复杂文档合成任务的任务信息
+ * DescribeFlowDetailInfo返回参数结构体
  */
-export interface TaskInfo {
+export interface DescribeFlowDetailInfoResponse {
   /**
-      * 合成任务Id，可以通过 ChannelGetTaskResultApi 接口获取任务信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  TaskId: string
+   * 渠道侧应用号Id
+   */
+  ApplicationId: string
 
   /**
-      * 任务状态：READY - 任务已完成；NOTREADY - 任务未完成；
+   * 渠道侧企业第三方Id
+   */
+  ProxyOrganizationOpenId: string
+
+  /**
+      * 合同(签署流程)的具体详细描述信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  TaskStatus: string
+  FlowInfo: Array<FlowDetailInfo>
+
+  /**
+      * 合同组编号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FlowGroupId: string
+
+  /**
+      * 合同组名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FlowGroupName: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1019,6 +1040,26 @@ export interface ChannelVerifyPdfRequest {
 }
 
 /**
+ * CreateChannelFlowEvidenceReport请求参数结构体
+ */
+export interface CreateChannelFlowEvidenceReportRequest {
+  /**
+   * 签署流程编号
+   */
+  FlowId: string
+
+  /**
+   * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填
+   */
+  Agent: Agent
+
+  /**
+   * 操作者的信息
+   */
+  Operator?: UserInfo
+}
+
+/**
  * ChannelVerifyPdf返回参数结构体
  */
 export interface ChannelVerifyPdfResponse {
@@ -1256,46 +1297,36 @@ export interface ChannelDescribeOrganizationSealsRequest {
 }
 
 /**
- * DescribeUsage请求参数结构体
+ * 合作企业经办人列表信息
  */
-export interface DescribeUsageRequest {
+export interface ProxyOrganizationOperator {
   /**
-   * 应用信息
+   * 经办人ID（渠道颁发），最大长度64个字符
    */
-  Agent: Agent
+  Id: string
 
   /**
-   * 开始时间，例如：2021-03-21
+   * 经办人姓名，最大长度50个字符
    */
-  StartDate: string
+  Name?: string
 
   /**
-      * 结束时间，例如：2021-06-21；
-开始时间到结束时间的区间长度小于等于90天。
+      * 经办人身份证件类型
+1.ID_CARD 居民身份证
+2.HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证
+3.HONGKONG_AND_MACAO 港澳居民来往内地通行证
       */
-  EndDate: string
+  IdCardType?: string
 
   /**
-      * 是否汇总数据，默认不汇总。
-不汇总：返回在统计区间内渠道下所有企业的每日明细，即每个企业N条数据，N为统计天数；
-汇总：返回在统计区间内渠道下所有企业的汇总后数据，即每个企业一条数据；
-      */
-  NeedAggregate?: boolean
-
-  /**
-   * 单次返回的最多条目数量。默认为1000，且不能超过1000。
+   * 经办人证件号
    */
-  Limit?: number
+  IdCardNumber?: string
 
   /**
-   * 偏移量，默认是0。
+   * 经办人手机号，大陆手机号输入11位，暂不支持海外手机号。
    */
-  Offset?: number
-
-  /**
-   * 操作者的信息
-   */
-  Operator?: UserInfo
+  Mobile?: string
 }
 
 /**
@@ -1541,41 +1572,20 @@ export interface UserInfo {
 }
 
 /**
- * DescribeFlowDetailInfo返回参数结构体
+ * 复杂文档合成任务的任务信息
  */
-export interface DescribeFlowDetailInfoResponse {
+export interface TaskInfo {
   /**
-   * 渠道侧应用号Id
-   */
-  ApplicationId: string
-
-  /**
-   * 渠道侧企业第三方Id
-   */
-  ProxyOrganizationOpenId: string
-
-  /**
-      * 合同(签署流程)的具体详细描述信息
+      * 合成任务Id，可以通过 ChannelGetTaskResultApi 接口获取任务信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  FlowInfo: Array<FlowDetailInfo>
+  TaskId: string
 
   /**
-      * 合同组编号
+      * 任务状态：READY - 任务已完成；NOTREADY - 任务未完成；
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  FlowGroupId: string
-
-  /**
-      * 合同组名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  FlowGroupName: string
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  TaskStatus: string
 }
 
 /**
@@ -2240,6 +2250,49 @@ export interface Filter {
 }
 
 /**
+ * DescribeUsage请求参数结构体
+ */
+export interface DescribeUsageRequest {
+  /**
+   * 应用信息
+   */
+  Agent: Agent
+
+  /**
+   * 开始时间，例如：2021-03-21
+   */
+  StartDate: string
+
+  /**
+      * 结束时间，例如：2021-06-21；
+开始时间到结束时间的区间长度小于等于90天。
+      */
+  EndDate: string
+
+  /**
+      * 是否汇总数据，默认不汇总。
+不汇总：返回在统计区间内渠道下所有企业的每日明细，即每个企业N条数据，N为统计天数；
+汇总：返回在统计区间内渠道下所有企业的汇总后数据，即每个企业一条数据；
+      */
+  NeedAggregate?: boolean
+
+  /**
+   * 单次返回的最多条目数量。默认为1000，且不能超过1000。
+   */
+  Limit?: number
+
+  /**
+   * 偏移量，默认是0。
+   */
+  Offset?: number
+
+  /**
+   * 操作者的信息
+   */
+  Operator?: UserInfo
+}
+
+/**
  * CreateSignUrls返回参数结构体
  */
 export interface CreateSignUrlsResponse {
@@ -2330,36 +2383,23 @@ export interface ApproverRestriction {
 }
 
 /**
- * 合作企业经办人列表信息
+ * DescribeChannelFlowEvidenceReport请求参数结构体
  */
-export interface ProxyOrganizationOperator {
+export interface DescribeChannelFlowEvidenceReportRequest {
   /**
-   * 经办人ID（渠道颁发），最大长度64个字符
+   * 出证报告编号
    */
-  Id: string
+  ReportId: string
 
   /**
-   * 经办人姓名，最大长度50个字符
+   * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填
    */
-  Name?: string
+  Agent: Agent
 
   /**
-      * 经办人身份证件类型
-1.ID_CARD 居民身份证
-2.HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证
-3.HONGKONG_AND_MACAO 港澳居民来往内地通行证
-      */
-  IdCardType?: string
-
-  /**
-   * 经办人证件号
+   * 操作者的信息
    */
-  IdCardNumber?: string
-
-  /**
-   * 经办人手机号，大陆手机号输入11位，暂不支持海外手机号。
-   */
-  Mobile?: string
+  Operator?: UserInfo
 }
 
 /**
@@ -2468,6 +2508,16 @@ export interface ApproverOption {
    * 是否隐藏一键签署 false-不隐藏,默认 true-隐藏
    */
   HideOneKeySign?: boolean
+}
+
+/**
+ * ChannelCreateBoundFlows返回参数结构体
+ */
+export interface ChannelCreateBoundFlowsResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3063,6 +3113,35 @@ export interface OperateChannelTemplateRequest {
 }
 
 /**
+ * CreateChannelFlowEvidenceReport返回参数结构体
+ */
+export interface CreateChannelFlowEvidenceReportResponse {
+  /**
+      * 废除，字段无效
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ReportUrl: string
+
+  /**
+      * 出证报告 ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ReportId: string
+
+  /**
+      * 执行中：EvidenceStatusExecuting
+成功：EvidenceStatusSuccess
+失败：EvidenceStatusFailed
+      */
+  Status: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 同步经办人失败原因
  */
 export interface SyncFailReason {
@@ -3112,9 +3191,22 @@ export interface ChannelDescribeEmployeesResponse {
 }
 
 /**
- * ChannelCreateBoundFlows返回参数结构体
+ * DescribeChannelFlowEvidenceReport返回参数结构体
  */
-export interface ChannelCreateBoundFlowsResponse {
+export interface DescribeChannelFlowEvidenceReportResponse {
+  /**
+      * 出证报告 URL
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ReportUrl: string
+
+  /**
+      * 执行中：EvidenceStatusExecuting
+成功：EvidenceStatusSuccess
+失败：EvidenceStatusFailed
+      */
+  Status: string
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

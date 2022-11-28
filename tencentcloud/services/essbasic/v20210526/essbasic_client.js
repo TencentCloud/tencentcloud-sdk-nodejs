@@ -146,10 +146,11 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ChannelGetTaskResultApi", req, cb);
     }
     /**
-     * 此接口（SyncProxyOrganization）用于同步渠道子客企业信息，主要是子客企业的营业执照，便于子客企业开通过程中不用手动上传。若有需要调用此接口，需要在创建控制链接CreateConsoleLoginUrl之后即刻进行调用。
+     * 创建出证报告，返回报告 ID
+
      */
-    async SyncProxyOrganization(req, cb) {
-        return this.request("SyncProxyOrganization", req, cb);
+    async CreateChannelFlowEvidenceReport(req, cb) {
+        return this.request("CreateChannelFlowEvidenceReport", req, cb);
     }
     /**
      * 合同文件验签
@@ -219,11 +220,24 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
         return this.request("UploadFiles", req, cb);
     }
     /**
+     * 此接口（SyncProxyOrganization）用于同步渠道子客企业信息，主要是子客企业的营业执照，便于子客企业开通过程中不用手动上传。若有需要调用此接口，需要在创建控制链接CreateConsoleLoginUrl之后即刻进行调用。
+     */
+    async SyncProxyOrganization(req, cb) {
+        return this.request("SyncProxyOrganization", req, cb);
+    }
+    /**
      * 此接口（SyncProxyOrganizationOperators）用于同步渠道子客企业经办人列表，主要是同步经办人的离职状态。子客Web控制台的组织架构管理，是依赖于渠道平台的，无法针对员工做新增/更新/离职等操作。
 若经办人信息有误，或者需要修改，也可以先将之前的经办人做离职操作，然后重新使用控制台链接CreateConsoleLoginUrl让经办人重新实名。
      */
     async SyncProxyOrganizationOperators(req, cb) {
         return this.request("SyncProxyOrganizationOperators", req, cb);
+    }
+    /**
+     * 查询出证报告，返回报告 URL。
+
+     */
+    async DescribeChannelFlowEvidenceReport(req, cb) {
+        return this.request("DescribeChannelFlowEvidenceReport", req, cb);
     }
     /**
      * 此接口（OperateChannelTemplate）用于针对渠道模板库中的模板对子客企业可见性的查询和设置，不会直接分配渠道模板给子客企业。

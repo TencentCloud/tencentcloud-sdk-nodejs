@@ -144,7 +144,7 @@ export declare class Client extends AbstractClient {
      */
     RenewInstance(req: RenewInstanceRequest, cb?: (error: string, rep: RenewInstanceResponse) => void): Promise<RenewInstanceResponse>;
     /**
-     * 查询备份Rdb下载地址
+     * 本接口（DescribeBackupUrl）用于查询备份 Rdb 文件的下载地址。
      */
     DescribeBackupUrl(req: DescribeBackupUrlRequest, cb?: (error: string, rep: DescribeBackupUrlResponse) => void): Promise<DescribeBackupUrlResponse>;
     /**

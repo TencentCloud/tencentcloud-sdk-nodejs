@@ -19,6 +19,7 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   CancelFlowResponse,
+  DescribeFlowEvidenceReportRequest,
   Department,
   CreateSchemeUrlRequest,
   CreateFlowApproversResponse,
@@ -34,6 +35,7 @@ import {
   Agent,
   FlowApproverDetail,
   DescribeFlowTemplatesRequest,
+  DescribeFlowEvidenceReportResponse,
   TemplateInfo,
   CreateDocumentResponse,
   DescribeIntegrationEmployeesRequest,
@@ -81,9 +83,11 @@ import {
   FileInfo,
   CreateSchemeUrlResponse,
   ApproverRestriction,
+  CreatePrepareFlowResponse,
   GetTaskResultApiResponse,
   CancelMultiFlowSignQRCodeRequest,
   StartFlowRequest,
+  CreatePrepareFlowRequest,
   ApproverOption,
   DeleteIntegrationEmployeesResponse,
   DescribeOrganizationSealsRequest,
@@ -208,6 +212,18 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateFlowSignReviewResponse) => void
   ): Promise<CreateFlowSignReviewResponse> {
     return this.request("CreateFlowSignReview", req, cb)
+  }
+
+  /**
+     * 创建快速发起流程
+适用场景：用户通过API 合同文件及签署信息，并可通过我们返回的URL在页面完成签署控件等信息的编辑与确认，快速发起合同.
+注：该接口文件的resourceId 是通过上传文件之后获取的。
+     */
+  async CreatePrepareFlow(
+    req: CreatePrepareFlowRequest,
+    cb?: (error: string, rep: CreatePrepareFlowResponse) => void
+  ): Promise<CreatePrepareFlowResponse> {
+    return this.request("CreatePrepareFlow", req, cb)
   }
 
   /**
@@ -365,6 +381,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateFlowResponse) => void
   ): Promise<CreateFlowResponse> {
     return this.request("CreateFlow", req, cb)
+  }
+
+  /**
+   * 查询出证报告，返回报告 URL。
+   */
+  async DescribeFlowEvidenceReport(
+    req: DescribeFlowEvidenceReportRequest,
+    cb?: (error: string, rep: DescribeFlowEvidenceReportResponse) => void
+  ): Promise<DescribeFlowEvidenceReportResponse> {
+    return this.request("DescribeFlowEvidenceReport", req, cb)
   }
 
   /**

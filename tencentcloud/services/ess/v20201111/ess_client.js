@@ -91,6 +91,14 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateFlowSignReview", req, cb);
     }
     /**
+     * 创建快速发起流程
+适用场景：用户通过API 合同文件及签署信息，并可通过我们返回的URL在页面完成签署控件等信息的编辑与确认，快速发起合同.
+注：该接口文件的resourceId 是通过上传文件之后获取的。
+     */
+    async CreatePrepareFlow(req, cb) {
+        return this.request("CreatePrepareFlow", req, cb);
+    }
+    /**
      * 创建签署流程电子文档
 适用场景：见创建签署流程接口。
 注：该接口需要给对应的流程指定一个模板id，并且填充该模板中需要补充的信息。是“发起流程”接口的前置接口。
@@ -230,6 +238,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateFlow(req, cb) {
         return this.request("CreateFlow", req, cb);
+    }
+    /**
+     * 查询出证报告，返回报告 URL。
+     */
+    async DescribeFlowEvidenceReport(req, cb) {
+        return this.request("DescribeFlowEvidenceReport", req, cb);
     }
     /**
      * 此接口（CreateFlowByFiles）用来通过上传后的pdf资源编号来创建待签署的合同流程。

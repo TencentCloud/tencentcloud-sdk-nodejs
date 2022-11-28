@@ -549,6 +549,11 @@ export interface AiReviewTaskProhibitedAsrResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Output: AiReviewProhibitedAsrTaskOutput
+
+  /**
+   * 音视频审核 Asr 文字鉴违禁任务进度，取值范围 [0-100] 。
+   */
+  Progress: number
 }
 
 /**
@@ -679,6 +684,11 @@ export interface AiReviewTaskProhibitedOcrResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Output: AiReviewProhibitedOcrTaskOutput
+
+  /**
+   * 音视频审核 Ocr 文字鉴违禁任务进度，取值范围 [0-100] 。
+   */
+  Progress: number
 }
 
 /**
@@ -2098,6 +2108,11 @@ export interface AiRecognitionTaskFaceResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Output: AiRecognitionTaskFaceResultOutput
+
+  /**
+   * 人脸识别任务进度，取值范围 [0-100] 。
+   */
+  Progress: number
 }
 
 /**
@@ -2228,6 +2243,11 @@ export interface MediaProcessTaskSampleSnapshotResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Output: MediaSampleSnapshotItem
+
+  /**
+   * 对视频做采样截图任务进度，取值范围 [0-100] 。
+   */
+  Progress: number
 }
 
 /**
@@ -2391,6 +2411,11 @@ export interface AiAnalysisTaskHighlightResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Output: AiAnalysisTaskHighlightOutput
+
+  /**
+   * 智能精彩片段任务进度，取值范围 [0-100] 。
+   */
+  Progress: number
 }
 
 /**
@@ -3025,6 +3050,11 @@ export interface AiAnalysisTaskCoverResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Output: AiAnalysisTaskCoverOutput
+
+  /**
+   * 智能封面任务进度，取值范围 [0-100] 。
+   */
+  Progress: number
 }
 
 /**
@@ -4371,6 +4401,11 @@ export interface MediaProcessTaskAnimatedGraphicResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Output: MediaAnimatedGraphicsItem
+
+  /**
+   * 转动图任务进度，取值范围 [0-100] 。
+   */
+  Progress: number
 }
 
 /**
@@ -4578,6 +4613,11 @@ export interface AiReviewTaskTerrorismOcrResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Output: AiReviewTerrorismOcrTaskOutput
+
+  /**
+   * 音视频审核 Ocr 文字涉及令人不安全的信息的任务进度，取值范围 [0-100] 。
+   */
+  Progress: number
 }
 
 /**
@@ -4614,6 +4654,11 @@ export interface AiRecognitionTaskOcrWordsResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Output: AiRecognitionTaskOcrWordsResultOutput
+
+  /**
+   * 文本关键词识别任务进度，取值范围 [0-100] 。
+   */
+  Progress: number
 }
 
 /**
@@ -4673,6 +4718,11 @@ export interface AiRecognitionTaskSegmentResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Output: AiRecognitionTaskSegmentResultOutput
+
+  /**
+   * 视频拆条任务进度，取值范围 [0-100] 。
+   */
+  Progress: number
 }
 
 /**
@@ -5214,6 +5264,11 @@ export interface MediaProcessTaskImageSpriteResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Output: MediaImageSpriteItem
+
+  /**
+   * 对视频截雪碧图任务进度，取值范围 [0-100] 。
+   */
+  Progress: number
 }
 
 /**
@@ -6088,6 +6143,11 @@ export interface AiReviewTaskPornOcrResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Output: AiReviewPornOcrTaskOutput
+
+  /**
+   * Ocr 文字音视频审核涉及令人反感的信息的任务进度，取值范围 [0-100] 。
+   */
+  Progress: number
 }
 
 /**
@@ -6602,6 +6662,11 @@ export interface AiAnalysisTaskTagResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Output: AiAnalysisTaskTagOutput
+
+  /**
+   * 智能标签任务进度，取值范围 [0-100] 。
+   */
+  Progress: number
 }
 
 /**
@@ -6981,6 +7046,11 @@ export interface AiRecognitionTaskOcrFullTextResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Output: AiRecognitionTaskOcrFullTextResultOutput
+
+  /**
+   * 文本全文识别任务进度，取值范围 [0-100] 。
+   */
+  Progress: number
 }
 
 /**
@@ -7073,6 +7143,11 @@ export interface MediaProcessTaskSnapshotByTimeOffsetResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Output: MediaSnapshotByTimeOffsetItem
+
+  /**
+   * 对视频按指定时间点截图任务进度，取值范围 [0-100] 。
+   */
+  Progress: number
 }
 
 /**
@@ -8139,6 +8214,11 @@ export interface MediaProcessTaskCoverBySnapshotResult {
    * 对视频截图做封面任务的输出。
    */
   Output: CoverBySnapshotTaskOutput
+
+  /**
+   * 对视频截图做封面任务进度，取值范围 [0-100] 。
+   */
+  Progress: number
 }
 
 /**
@@ -8502,6 +8582,11 @@ export interface SplitMediaTask {
    * 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
    */
   SessionId: string
+
+  /**
+   * 视频拆条任务进度，取值范围 [0-100] 。
+   */
+  Progress: number
 }
 
 /**
@@ -9650,6 +9735,11 @@ export interface AiReviewTaskTerrorismResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Output: AiReviewTerrorismTaskOutput
+
+  /**
+   * 音视频审核涉及令人不安全的信息的任务进度，取值范围 [0-100] 。
+   */
+  Progress: number
 }
 
 /**
@@ -10816,6 +10906,11 @@ export interface AiReviewTaskPoliticalAsrResult {
    * 音视频审核 Asr 文字涉及令人不适宜信息的任务输出。
    */
   Output: AiReviewPoliticalAsrTaskOutput
+
+  /**
+   * 音视频审核 Asr 文字涉及令人不适宜信息的任务进度，取值范围 [0-100] 。
+   */
+  Progress: number
 }
 
 /**
@@ -10998,6 +11093,11 @@ export interface AiReviewTaskPornResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Output: AiReviewPornTaskOutput
+
+  /**
+   * 音视频审核涉及令人反感的信息的任务进度，取值范围 [0-100] 。
+   */
+  Progress: number
 }
 
 /**
@@ -11191,6 +11291,11 @@ export interface AiAnalysisTaskClassificationResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Output: AiAnalysisTaskClassificationOutput
+
+  /**
+   * 智能分类任务进度，取值范围 [0-100] 。
+   */
+  Progress: number
 }
 
 /**
@@ -11844,8 +11949,8 @@ export interface EventContent {
 <li>ComposeMediaComplete：制作媒体文件完成；</li>
 <li>WechatMiniProgramPublishComplete：微信小程序发布完成。</li>
 <li>FastClipMediaComplete：快速剪辑完成；</li>
-<li>ReviewAudioVideoComplete：音视频审核完成。</li>
-<li>ExtractTraceWatermarkComplete：提取溯源水印完成。</li>
+<li>ReviewAudioVideoComplete：音视频审核完成；</li>
+<li>ExtractTraceWatermarkComplete：提取溯源水印完成；</li>
 <b>兼容 2017 版的事件类型：</b>
 <li>TranscodeComplete：视频转码完成；</li>
 <li>ConcatComplete：视频拼接完成；</li>
@@ -11964,7 +12069,7 @@ export interface EventContent {
   ReviewAudioVideoCompleteEvent: ReviewAudioVideoTask
 
   /**
-      * 降码率完成事件，当事件类型为 ReduceMediaBitrateComplete 时有效。
+      * 该字段已无效。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ReduceMediaBitrateCompleteEvent: ReduceMediaBitrateTask
@@ -12016,6 +12121,11 @@ export interface AiRecognitionTaskObjectResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Output: AiRecognitionTaskObjectResultOutput
+
+  /**
+   * 物体识别任务进度，取值范围 [0-100] 。
+   */
+  Progress: number
 }
 
 /**
@@ -12514,6 +12624,11 @@ export interface AiAnalysisTaskFrameTagResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Output: AiAnalysisTaskFrameTagOutput
+
+  /**
+   * 智能按帧标签任务进度，取值范围 [0-100] 。
+   */
+  Progress: number
 }
 
 /**
@@ -13473,7 +13588,6 @@ export interface DescribeTaskDetailResponse {
 <li>FastClipMedia：快速剪辑任务；</li>
 <li>RemoveWatermarkTask：智能去除水印任务；</li>
 <li> ReviewAudioVideo：音视频审核任务。</li>
-<li> ReduceMediaBitrate：降码率任务。</li>
       */
   TaskType: string
 
@@ -13591,7 +13705,7 @@ export interface DescribeTaskDetailResponse {
   ReviewAudioVideoTask: ReviewAudioVideoTask
 
   /**
-      * 降码率任务信息，仅当 TaskType 为 ReduceMediaBitrate，该字段有值。
+      * 该字段已无效。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ReduceMediaBitrateTask: ReduceMediaBitrateTask
@@ -14032,6 +14146,11 @@ export interface AiReviewTaskPoliticalResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Output: AiReviewPoliticalTaskOutput
+
+  /**
+   * 音视频审核涉及令人不适宜信息的任务进度，取值范围 [0-100] 。
+   */
+  Progress: number
 }
 
 /**
@@ -14227,6 +14346,18 @@ export interface ProcedureTask {
    * 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
    */
   SessionId: string
+
+  /**
+      * 操作者。取值范围：
+<li>System: 表示系统触发。</li>
+      */
+  Operator: string
+
+  /**
+      * 操作类型。取值范围：
+<li>TSC: 表示使用极速高清进行智能降码。</li>
+      */
+  OperationType: string
 }
 
 /**
@@ -16175,6 +16306,11 @@ export interface AiRecognitionTaskAsrWordsResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Output: AiRecognitionTaskAsrWordsResultOutput
+
+  /**
+   * 语音关键词识别任务进度，取值范围 [0-100] 。
+   */
+  Progress: number
 }
 
 /**
@@ -16586,6 +16722,11 @@ export interface AiReviewTaskPornAsrResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Output: AiReviewPornAsrTaskOutput
+
+  /**
+   * 音视频审核 Asr 文字涉及令人反感的信息的任务进度，取值范围 [0-100] 。
+   */
+  Progress: number
 }
 
 /**
@@ -17350,6 +17491,11 @@ export interface AiRecognitionTaskHeadTailResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Output: AiRecognitionTaskHeadTailResultOutput
+
+  /**
+   * 视频片头片尾识别任务进度，取值范围 [0-100] 。
+   */
+  Progress: number
 }
 
 /**
@@ -17781,6 +17927,11 @@ export interface PullUploadTask {
    * 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
    */
   SessionId: string
+
+  /**
+   * 转拉任务进度，取值范围 [0-100] 。
+   */
+  Progress: number
 }
 
 /**

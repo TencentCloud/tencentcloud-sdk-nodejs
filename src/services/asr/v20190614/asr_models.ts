@@ -239,6 +239,8 @@ export interface SentenceRecognitionRequest {
 • 16k_ca：16k 粤语；
 • 16k_ja：16k 日语；
 • 16k_zh_medical：16k 医疗；
+• 16k_zh-PY 中英粤;
+• 16k_zh_dialect：多方言，支持23种方言（上海话、四川话、武汉话、贵阳话、昆明话、西安话、郑州话、太原话、兰州话、银川话、西宁话、南京话、合肥话、南昌话、长沙话、苏州话、杭州话、济南话、天津话、石家庄话、黑龙江话、吉林话、辽宁话）；
       */
   EngSerViceType: string
 
@@ -306,6 +308,11 @@ export interface SentenceRecognitionRequest {
    * 自学习模型 id。如设置了该参数，将生效对应的自学习模型。
    */
   CustomizationId?: string
+
+  /**
+   * 热词增强功能。1:开启后（仅支持8k_zh,16k_zh），将开启同音替换功能，同音字、词在热词中配置。举例：热词配置“蜜制”并开启增强功能后，与“蜜制”同拼音（mizhi）的“秘制”、“蜜汁”的识别结果会被强制替换成“蜜制”。因此建议客户根据自己的实际情况开启该功能。
+   */
+  ReinforceHotword?: number
 }
 
 /**
@@ -467,6 +474,8 @@ export interface CreateRecTaskRequest {
 • 16k_en_edu 英文教育；
 • 16k_zh_medical  医疗；
 • 16k_th 泰语；
+• 16k_zh-PY 中英粤;
+• 16k_zh_dialect：多方言，支持23种方言（上海话、四川话、武汉话、贵阳话、昆明话、西安话、郑州话、太原话、兰州话、银川话、西宁话、南京话、合肥话、南昌话、长沙话、苏州话、杭州话、济南话、天津话、石家庄话、黑龙江话、吉林话、辽宁话）；
       */
   EngineModelType: string
 
@@ -551,6 +560,16 @@ export interface CreateRecTaskRequest {
    * 是否过滤语气词（目前支持中文普通话引擎）。0：不过滤语气词；1：部分过滤；2：严格过滤 。默认值为 0。
    */
   FilterModal?: number
+
+  /**
+   * 情绪能量值，取值为音量分贝值/10。取值范围：[1,10]。值越高情绪越强烈。0:不开启，1:开启
+   */
+  EmotionalEnergy?: number
+
+  /**
+   * 热词增强功能。1:开启后（仅支持8k_zh,16k_zh），将开启同音替换功能，同音字、词在热词中配置。举例：热词配置“蜜制”并开启增强功能后，与“蜜制”同拼音（mizhi）的“秘制”、“蜜汁”的识别结果会被强制替换成“蜜制”。因此建议客户根据自己的实际情况开启该功能。
+   */
+  ReinforceHotword?: number
 }
 
 /**
@@ -957,6 +976,18 @@ export interface SentenceDetail {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   SpeakerId: number
+
+  /**
+      * 情绪能量值，取值为音量分贝值/10。取值范围：[1,10]。值越高情绪越强烈。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EmotionalEnergy: number
+
+  /**
+      * 本句与上一句之间的静音时长
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SilenceTime: number
 }
 
 /**

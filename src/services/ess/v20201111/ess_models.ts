@@ -26,6 +26,21 @@ export interface CancelFlowResponse {
 }
 
 /**
+ * DescribeFlowEvidenceReport请求参数结构体
+ */
+export interface DescribeFlowEvidenceReportRequest {
+  /**
+   * 调用方用户信息，userId 必填
+   */
+  Operator: UserInfo
+
+  /**
+   * 出证报告编号
+   */
+  ReportId: string
+}
+
+/**
  * 集成版员工部门信息
  */
 export interface Department {
@@ -347,7 +362,7 @@ HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证(格式同居民身份证)
  */
 export interface CreateConvertTaskApiRequest {
   /**
-   * 资源类型 取值范围doc,docx,html,excel之一
+   * 资源类型 取值范围doc,docx,html,xls,xlsx之一
    */
   ResourceType: string
 
@@ -507,6 +522,29 @@ export interface DescribeFlowTemplatesRequest {
    * 应用相关信息
    */
   Agent?: Agent
+}
+
+/**
+ * DescribeFlowEvidenceReport返回参数结构体
+ */
+export interface DescribeFlowEvidenceReportResponse {
+  /**
+      * 报告 URL
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ReportUrl: string
+
+  /**
+      * 执行中：EvidenceStatusExecuting
+成功：EvidenceStatusSuccess
+失败：EvidenceStatusFailed
+      */
+  Status: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1925,6 +1963,21 @@ export interface ApproverRestriction {
 }
 
 /**
+ * CreatePrepareFlow返回参数结构体
+ */
+export interface CreatePrepareFlowResponse {
+  /**
+   * 快速发起预览链接
+   */
+  Url: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * GetTaskResultApi返回参数结构体
  */
 export interface GetTaskResultApiResponse {
@@ -2009,6 +2062,52 @@ export interface StartFlowRequest {
    * 应用相关信息
    */
   Agent?: Agent
+}
+
+/**
+ * CreatePrepareFlow请求参数结构体
+ */
+export interface CreatePrepareFlowRequest {
+  /**
+   * 调用方用户信息，userId 必填
+   */
+  Operator: UserInfo
+
+  /**
+   * 资源Id,通过上传uploadfile接口获得
+   */
+  ResourceId: string
+
+  /**
+   * 合同名称
+   */
+  FlowName: string
+
+  /**
+   * 是否顺序签署(true:无序签,false:顺序签)
+   */
+  Unordered?: boolean
+
+  /**
+      * 签署流程的签署截止时间。
+值为unix时间戳,精确到秒,不传默认为当前时间一年后
+      */
+  Deadline?: number
+
+  /**
+   * 用户自定义合同类型
+   */
+  UserFlowTypeId?: string
+
+  /**
+   * 签署流程参与者信息，最大限制50方
+   */
+  Approvers?: Array<FlowCreateApprover>
+
+  /**
+   * 打开智能添加填写区(默认开启，打开:"OPEN" 关闭："CLOSE")
+   */
+  IntelligentStatus?: string
 }
 
 /**

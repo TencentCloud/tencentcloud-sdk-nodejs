@@ -927,7 +927,7 @@ export interface ModifyAssetScanRequest {
  */
 export interface ModifyBlockIgnoreListRequest {
   /**
-   * 1拦截列表 2 忽略列表
+   * 1封禁列表 2 放通列表
    */
   RuleType: number
 
@@ -947,7 +947,7 @@ export interface ModifyBlockIgnoreListRequest {
   StartTime?: string
 
   /**
-   * 时间格式：yyyy-MM-dd HH:mm:ss，IocAction 为edit或add时必填
+   * 时间格式：yyyy-MM-dd HH:mm:ss，IocAction 为edit或add时必填，必须大于当前时间且大于StartTime
    */
   EndTime?: string
 }

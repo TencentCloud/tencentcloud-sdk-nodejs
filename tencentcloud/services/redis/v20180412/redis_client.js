@@ -232,7 +232,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RenewInstance", req, cb);
     }
     /**
-     * 查询备份Rdb下载地址
+     * 本接口（DescribeBackupUrl）用于查询备份 Rdb 文件的下载地址。
      */
     async DescribeBackupUrl(req, cb) {
         return this.request("DescribeBackupUrl", req, cb);
