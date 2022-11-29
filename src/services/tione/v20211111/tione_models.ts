@@ -1580,6 +1580,11 @@ Stopping 停止中
    * 工作负载的状况信息
    */
   StatefulSetCondition?: Array<StatefulSetCondition>
+
+  /**
+   * 工作负载历史的状况信息
+   */
+  Conditions?: Array<StatefulSetCondition>
 }
 
 /**

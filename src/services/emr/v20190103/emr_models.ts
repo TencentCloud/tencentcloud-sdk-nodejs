@@ -1995,12 +1995,12 @@ export interface ModifyResourceSchedulerRequest {
  */
 export interface LoginSettings {
   /**
-   * Password
+   * 实例登录密码，8-16个字符，包含大写字母、小写字母、数字和特殊字符四种，特殊符号仅支持!@%^*，密码第一位不能为特殊字符
    */
   Password?: string
 
   /**
-   * Public Key
+   * 密钥ID。关联密钥后，就可以通过对应的私钥来访问实例；PublicKeyId可通过接口[DescribeKeyPairs](https://cloud.tencent.com/document/api/213/15699)获取
    */
   PublicKeyId?: string
 }
@@ -2338,26 +2338,18 @@ export interface SyncPodStateRequest {
 export interface CreateInstanceRequest {
   /**
       * 产品ID，不同产品ID表示不同的EMR产品版本。取值范围：
-<li>1：表示EMR-V1.3.1。</li>
-<li>2：表示EMR-V2.0.1。</li>
-<li>4：表示EMR-V2.1.0。</li>
-<li>7：表示EMR-V3.0.0。</li>
-<li>9：表示EMR-V2.2.0。</li>
-<li>11：表示CLICKHOUSE-V1.0.0。</li>
-<li>13：表示DRUID-V1.0.0。</li>
-<li>15：表示EMR-V2.2.1。</li>
 <li>16：表示EMR-V2.3.0。</li>
-<li>17：表示CLICKHOUSE-V1.1.0。</li>
-<li>19：表示EMR-V2.4.0。</li>
 <li>20：表示EMR-V2.5.0。</li>
-<li>22：表示CLICKHOUSE-V1.2.0。</li>
-<li>24：表示EMR-TianQiong-V1.0.0。</li>
 <li>25：表示EMR-V3.1.0。</li>
-<li>26：表示DORIS-V1.0.0。</li>
 <li>27：表示KAFKA-V1.0.0。</li>
-<li>28：表示EMR-V3.2.0。</li>
-<li>29：表示EMR-V2.5.1。</li>
 <li>30：表示EMR-V2.6.0。</li>
+<li>33 :   表示EMR-V3.2.1。</li>
+<li>34 :   表示EMR-V3.3.0。</li>
+<li>36 :   表示STARROCKS-V1.0.0。</li>
+<li>37 :   表示EMR-V3.4.0。</li>
+<li>38 :   表示EMR-V2.7.0。</li>
+<li>39 :   表示STARROCKS-V1.1.0。</li>
+<li>41 :   表示DRUID-V1.1.0。</li>
       */
   ProductId: number
 
@@ -4313,7 +4305,9 @@ export interface InstanceChargePrepaid {
   Period: number
 
   /**
-   * 是否自动续费，默认为否。
-   */
+      * 是否自动续费，默认为否。
+<li>true：是</li>
+<li>false：否</li>
+      */
   RenewFlag: boolean
 }

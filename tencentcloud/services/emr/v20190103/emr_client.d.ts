@@ -45,7 +45,7 @@ export declare class Client extends AbstractClient {
      */
     ScaleOutInstance(req: ScaleOutInstanceRequest, cb?: (error: string, rep: ScaleOutInstanceResponse) => void): Promise<ScaleOutInstanceResponse>;
     /**
-     * 查询EMR实例
+     * 查询集群实例信息
      */
     DescribeInstances(req: DescribeInstancesRequest, cb?: (error: string, rep: DescribeInstancesResponse) => void): Promise<DescribeInstancesResponse>;
     /**
@@ -62,7 +62,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeEmrApplicationStatics(req: DescribeEmrApplicationStaticsRequest, cb?: (error: string, rep: DescribeEmrApplicationStaticsResponse) => void): Promise<DescribeEmrApplicationStaticsResponse>;
     /**
-     * 预付费集群隔离后续费资源查询
+     * 查询待续费节点信息
      */
     DescribeInstanceRenewNodes(req: DescribeInstanceRenewNodesRequest, cb?: (error: string, rep: DescribeInstanceRenewNodesResponse) => void): Promise<DescribeInstanceRenewNodesResponse>;
     /**
@@ -82,7 +82,7 @@ export declare class Client extends AbstractClient {
      */
     InquiryPriceCreateInstance(req: InquiryPriceCreateInstanceRequest, cb?: (error: string, rep: InquiryPriceCreateInstanceResponse) => void): Promise<InquiryPriceCreateInstanceResponse>;
     /**
-     * 获取yarn资源调度页面的数据
+     * 查询YARN资源调度数据信息
      */
     DescribeResourceSchedule(req: DescribeResourceScheduleRequest, cb?: (error: string, rep: DescribeResourceScheduleResponse) => void): Promise<DescribeResourceScheduleResponse>;
     /**
@@ -98,11 +98,11 @@ export declare class Client extends AbstractClient {
      */
     DescribeClusterNodes(req: DescribeClusterNodesRequest, cb?: (error: string, rep: DescribeClusterNodesResponse) => void): Promise<DescribeClusterNodesResponse>;
     /**
-     * EMR集群实例列表查询
+     * 查询集群列表
      */
     DescribeInstancesList(req: DescribeInstancesListRequest, cb?: (error: string, rep: DescribeInstancesListResponse) => void): Promise<DescribeInstancesListResponse>;
     /**
-     * 刷新动态资源池
+     * 刷新YARN的动态资源池
      */
     ModifyResourcePools(req: ModifyResourcePoolsRequest, cb?: (error: string, rep: ModifyResourcePoolsResponse) => void): Promise<ModifyResourcePoolsResponse>;
 }

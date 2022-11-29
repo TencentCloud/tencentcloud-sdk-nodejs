@@ -174,6 +174,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ChannelDescribeOrganizationSeals", req, cb);
     }
     /**
+     * 渠道版发起解除协议，主要应用场景为：基于一份已经签署的合同，进行解除操作。
+合同发起人必须在电子签已经进行实名。
+     */
+    async ChannelCreateReleaseFlow(req, cb) {
+        return this.request("ChannelCreateReleaseFlow", req, cb);
+    }
+    /**
      * 查询企业员工列表
      */
     async ChannelDescribeEmployees(req, cb) {

@@ -1147,6 +1147,26 @@ export interface ParamModifyResult {
 }
 
 /**
+ * 数据库表权限
+ */
+export interface TablePrivilege {
+  /**
+   * 数据库名
+   */
+  Database: string
+
+  /**
+   * 数据库表名
+   */
+  Table: string
+
+  /**
+   * 权限信息
+   */
+  Privileges: Array<string>
+}
+
+/**
  * DescribeProjectSecurityGroups返回参数结构体
  */
 export interface DescribeProjectSecurityGroupsResponse {
@@ -2272,6 +2292,31 @@ export interface SecurityGroupBound {
 }
 
 /**
+ * 列权限信息
+ */
+export interface ColumnPrivilege {
+  /**
+   * 数据库名
+   */
+  Database: string
+
+  /**
+   * 数据库表名
+   */
+  Table: string
+
+  /**
+   * 数据库列名
+   */
+  Column: string
+
+  /**
+   * 权限信息
+   */
+  Privileges: Array<string>
+}
+
+/**
  * 升级实例 -- 切分分片类型
  */
 export interface SplitShardConfig {
@@ -2581,6 +2626,21 @@ export interface OpenDBExtranetAccessRequest {
    * 是否IPv6，默认0
    */
   Ipv6Flag?: number
+}
+
+/**
+ * 数据库权限
+ */
+export interface DatabasePrivilege {
+  /**
+   * 权限信息
+   */
+  Privileges: Array<string>
+
+  /**
+   * 数据库名
+   */
+  Database: string
 }
 
 /**
@@ -2901,6 +2961,26 @@ export interface DescribeDatabasesResponse {
 }
 
 /**
+ * 视图权限信息
+ */
+export interface ViewPrivileges {
+  /**
+   * 数据库名
+   */
+  Database: string
+
+  /**
+   * 数据库视图名
+   */
+  View: string
+
+  /**
+   * 权限信息
+   */
+  Privileges: Array<string>
+}
+
+/**
  * DescribeOrders请求参数结构体
  */
 export interface DescribeOrdersRequest {
@@ -3081,6 +3161,21 @@ export interface DescribeDCDBInstancesResponse {
 }
 
 /**
+ * ModifyAccountPrivileges返回参数结构体
+ */
+export interface ModifyAccountPrivilegesResponse {
+  /**
+   * 异步任务的请求 ID，可使用此 ID [查询异步任务的执行结果](https://cloud.tencent.com/document/product/237/16177)。
+   */
+  FlowId: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeFlow请求参数结构体
  */
 export interface DescribeFlowRequest {
@@ -3088,6 +3183,66 @@ export interface DescribeFlowRequest {
    * 异步请求接口返回的任务流程号。
    */
   FlowId: number
+}
+
+/**
+ * ModifyAccountPrivileges请求参数结构体
+ */
+export interface ModifyAccountPrivilegesRequest {
+  /**
+   * 实例 ID，格式如：tdsql-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
+   */
+  InstanceId: string
+
+  /**
+   * 数据库的账号，包括用户名和域名。
+   */
+  Accounts: Array<Account>
+
+  /**
+      * 全局权限。其中，GlobalPrivileges 中权限的可选值为："SELECT","INSERT","UPDATE","DELETE","CREATE", "PROCESS", "DROP","REFERENCES","INDEX","ALTER","SHOW DATABASES","CREATE TEMPORARY TABLES","LOCK TABLES","EXECUTE","CREATE VIEW","SHOW VIEW","CREATE ROUTINE","ALTER ROUTINE","EVENT","TRIGGER"。
+注意，不传该参数表示保留现有权限，如需清除，该字段传空数组。
+      */
+  GlobalPrivileges?: Array<string>
+
+  /**
+      * 数据库的权限。Privileges 权限的可选值为："SELECT","INSERT","UPDATE","DELETE","CREATE", "DROP","REFERENCES","INDEX","ALTER","CREATE TEMPORARY TABLES","LOCK TABLES","EXECUTE","CREATE VIEW","SHOW VIEW","CREATE ROUTINE","ALTER ROUTINE","EVENT","TRIGGER"。
+注意，不传该参数表示保留现有权限，如需清除，请在复杂类型Privileges字段传空数组。
+      */
+  DatabasePrivileges?: Array<DatabasePrivilege>
+
+  /**
+      * 数据库中表的权限。Privileges 权限的可选值为："SELECT","INSERT","UPDATE","DELETE","CREATE", "DROP","REFERENCES","INDEX","ALTER","CREATE VIEW","SHOW VIEW", "TRIGGER"。
+注意，不传该参数表示保留现有权限，如需清除，请在复杂类型Privileges字段传空数组。
+      */
+  TablePrivileges?: Array<TablePrivilege>
+
+  /**
+      * 数据库表中列的权限。Privileges 权限的可选值为："SELECT","INSERT","UPDATE","REFERENCES"。
+注意，不传该参数表示保留现有权限，如需清除，请在复杂类型Privileges字段传空数组。
+      */
+  ColumnPrivileges?: Array<ColumnPrivilege>
+
+  /**
+      * 数据库视图的权限。Privileges 权限的可选值为："SELECT","INSERT","UPDATE","DELETE","CREATE", "DROP","REFERENCES","INDEX","ALTER","CREATE VIEW","SHOW VIEW", "TRIGGER"。
+注意，不传该参数表示保留现有权限，如需清除，请在复杂类型Privileges字段传空数组。
+      */
+  ViewPrivileges?: Array<ViewPrivileges>
+}
+
+/**
+ * 数据库账号信息
+ */
+export interface Account {
+  /**
+   * 账户的名称
+   */
+  User: string
+
+  /**
+   * 账户的域名
+   */
+  Host: string
 }
 
 /**

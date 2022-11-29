@@ -198,6 +198,16 @@ it("essbasic.v20210526.ChannelDescribeOrganizationSeals", async function () {
     }
 })
 
+it("essbasic.v20210526.ChannelCreateReleaseFlow", async function () {
+    try {
+       const data = await client.ChannelCreateReleaseFlow({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("essbasic.v20210526.ChannelDescribeEmployees", async function () {
     try {
        const data = await client.ChannelDescribeEmployees({})

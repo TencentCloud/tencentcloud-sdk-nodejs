@@ -83,7 +83,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ScaleOutInstance", req, cb);
     }
     /**
-     * 查询EMR实例
+     * 查询集群实例信息
      */
     async DescribeInstances(req, cb) {
         return this.request("DescribeInstances", req, cb);
@@ -108,7 +108,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeEmrApplicationStatics", req, cb);
     }
     /**
-     * 预付费集群隔离后续费资源查询
+     * 查询待续费节点信息
      */
     async DescribeInstanceRenewNodes(req, cb) {
         return this.request("DescribeInstanceRenewNodes", req, cb);
@@ -138,7 +138,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("InquiryPriceCreateInstance", req, cb);
     }
     /**
-     * 获取yarn资源调度页面的数据
+     * 查询YARN资源调度数据信息
      */
     async DescribeResourceSchedule(req, cb) {
         return this.request("DescribeResourceSchedule", req, cb);
@@ -162,13 +162,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeClusterNodes", req, cb);
     }
     /**
-     * EMR集群实例列表查询
+     * 查询集群列表
      */
     async DescribeInstancesList(req, cb) {
         return this.request("DescribeInstancesList", req, cb);
     }
     /**
-     * 刷新动态资源池
+     * 刷新YARN的动态资源池
      */
     async ModifyResourcePools(req, cb) {
         return this.request("ModifyResourcePools", req, cb);

@@ -153,6 +153,16 @@ LIP为数字模式，ACTION为动作模式，SILENT为静默模式，三种模�
 }
 
 /**
+ * RuleId相关配置
+ */
+export interface RuleIdConfig {
+  /**
+   * 意愿核身过程中识别用户的回答意图，开启后除了IntentionQuestions的Answers列表中的标准回答会通过，近似意图的回答也会通过，默认不开启。
+   */
+  IntentionRecognition?: boolean
+}
+
+/**
  * 敏感数据加密
  */
 export interface Encryption {
@@ -1818,6 +1828,11 @@ Base64编码后的图片数据大小不超过3M，仅支持jpg、png格式。请
    * 意愿核身（问答模式）使用的文案，包括：系统语音播报的文本、需要核验的标准文本。当前仅支持一个播报文本+回答文本。
    */
   IntentionQuestions?: Array<IntentionQuestion>
+
+  /**
+   * RuleId相关配置
+   */
+  Config?: RuleIdConfig
 }
 
 /**

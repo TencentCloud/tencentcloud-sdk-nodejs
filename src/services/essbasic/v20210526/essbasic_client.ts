@@ -40,6 +40,7 @@ import {
   ChannelCreateFlowByFilesRequest,
   Agent,
   FlowApproverDetail,
+  RelieveInfo,
   ChannelCreateFlowGroupByFilesRequest,
   DescribeFlowDetailInfoResponse,
   ResourceUrlInfo,
@@ -81,6 +82,7 @@ import {
   FlowResourceUrlInfo,
   UploadFile,
   Filter,
+  ReleasedApprover,
   DescribeUsageRequest,
   CreateSignUrlsResponse,
   UploadFilesResponse,
@@ -91,6 +93,7 @@ import {
   ChannelCreateFlowSignReviewResponse,
   ChannelDescribeOrganizationSealsResponse,
   ChannelCancelMultiFlowSignQRCodeResponse,
+  ChannelCreateReleaseFlowRequest,
   ChannelCreateFlowGroupByFilesResponse,
   ChannelCreateMultiFlowSignQRCodeResponse,
   ApproverOption,
@@ -110,6 +113,7 @@ import {
   CreateChannelFlowEvidenceReportResponse,
   SyncFailReason,
   ChannelDescribeEmployeesResponse,
+  ChannelCreateReleaseFlowResponse,
   DescribeChannelFlowEvidenceReportResponse,
   CcInfo,
 } from "./essbasic_models"
@@ -339,6 +343,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ChannelDescribeOrganizationSealsResponse) => void
   ): Promise<ChannelDescribeOrganizationSealsResponse> {
     return this.request("ChannelDescribeOrganizationSeals", req, cb)
+  }
+
+  /**
+     * 渠道版发起解除协议，主要应用场景为：基于一份已经签署的合同，进行解除操作。
+合同发起人必须在电子签已经进行实名。
+     */
+  async ChannelCreateReleaseFlow(
+    req: ChannelCreateReleaseFlowRequest,
+    cb?: (error: string, rep: ChannelCreateReleaseFlowResponse) => void
+  ): Promise<ChannelCreateReleaseFlowResponse> {
+    return this.request("ChannelCreateReleaseFlow", req, cb)
   }
 
   /**

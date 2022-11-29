@@ -171,7 +171,7 @@ export interface DescribeTaskStatusResponse {
  */
 export interface SentenceRecognitionRequest {
     /**
-      * 腾讯云项目 ID，废弃参数，默认填写0即可。
+      * 腾讯云项目 ID，废弃参数，填写0即可。
       */
     ProjectId: number;
     /**
@@ -202,7 +202,7 @@ export interface SentenceRecognitionRequest {
       */
     VoiceFormat: string;
     /**
-      * 用户端对此任务的唯一标识。废弃参数，忽略即可。
+      * 废弃参数，填写任意字符串即可。
       */
     UsrAudioKey: string;
     /**

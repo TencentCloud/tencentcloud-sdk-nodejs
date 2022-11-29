@@ -1329,6 +1329,10 @@ export interface DescribeInstancesOperationLimitResponse {
  */
 export interface SyncImagesResponse {
     /**
+      * 目的地域的镜像ID信息。
+      */
+    ImageSet?: Array<SyncImage>;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
@@ -1621,6 +1625,10 @@ export interface SyncImagesRequest {
       * 目标镜像名称。
       */
     ImageName?: string;
+    /**
+      * 是否需要返回目的地域的镜像ID。
+      */
+    ImageSetRequired?: boolean;
 }
 /**
  * DisassociateInstancesKeyPairs请求参数结构体
@@ -4928,6 +4936,19 @@ export interface ImportKeyPairRequest {
       * 标签描述列表。通过指定该参数可以同时绑定标签到密钥对。
       */
     TagSpecification?: Array<TagSpecification>;
+}
+/**
+ * 同步镜像信息
+ */
+export interface SyncImage {
+    /**
+      * 镜像ID
+      */
+    ImageId: string;
+    /**
+      * 地域
+      */
+    Region: string;
 }
 /**
  * 描述密钥对信息

@@ -241,6 +241,7 @@ import {
   DisassociateSecurityGroupsRequest,
   ModifyHostsAttributeRequest,
   ImportKeyPairRequest,
+  SyncImage,
   KeyPair,
   DescribeInstancesModificationResponse,
   RenewInstancesResponse,

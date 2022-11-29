@@ -71,6 +71,7 @@ import {
   DescribeDCDBPriceRequest,
   SwitchDBInstanceHAResponse,
   ParamModifyResult,
+  TablePrivilege,
   DescribeProjectSecurityGroupsResponse,
   DatabaseFunction,
   DescribeSqlLogsRequest,
@@ -107,6 +108,7 @@ import {
   DescribeDcnDetailResponse,
   TableColumn,
   SecurityGroupBound,
+  ColumnPrivilege,
   SplitShardConfig,
   RenewDCDBInstanceResponse,
   DescribeShardSpecResponse,
@@ -122,6 +124,7 @@ import {
   ShardInfo,
   ModifyInstanceVipRequest,
   OpenDBExtranetAccessRequest,
+  DatabasePrivilege,
   DescribeDCDBSaleInfoResponse,
   ModifyDBInstancesProjectRequest,
   DcnDetailItem,
@@ -131,6 +134,7 @@ import {
   KillSessionResponse,
   SlowLogData,
   DescribeDatabasesResponse,
+  ViewPrivileges,
   DescribeOrdersRequest,
   DescribeDBLogFilesResponse,
   CloseDBExtranetAccessRequest,
@@ -139,7 +143,10 @@ import {
   DescribeSqlLogsResponse,
   DeleteAccountRequest,
   DescribeDCDBInstancesResponse,
+  ModifyAccountPrivilegesResponse,
   DescribeFlowRequest,
+  ModifyAccountPrivilegesRequest,
+  Account,
   CreateDCDBInstanceRequest,
   DescribeDCDBUpgradePriceRequest,
   UserTaskInfo,
@@ -542,6 +549,21 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: OpenDBExtranetAccessResponse) => void
   ): Promise<OpenDBExtranetAccessResponse> {
     return this.request("OpenDBExtranetAccess", req, cb)
+  }
+
+  /**
+     * 本接口(ModifyAccountPrivileges)用于修改云数据库的账户的权限信息。
+
+**注意**
+- 系统保留库："mysql"，只开放["SELECT"]权限
+- 只读账号授予读写权限会报错
+- 不传该参数表示保留现有权限，如需清除，请在复杂类型Privileges字段传空数组
+     */
+  async ModifyAccountPrivileges(
+    req: ModifyAccountPrivilegesRequest,
+    cb?: (error: string, rep: ModifyAccountPrivilegesResponse) => void
+  ): Promise<ModifyAccountPrivilegesResponse> {
+    return this.request("ModifyAccountPrivileges", req, cb)
   }
 
   /**

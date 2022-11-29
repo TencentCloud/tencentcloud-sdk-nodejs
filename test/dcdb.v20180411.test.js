@@ -368,6 +368,16 @@ it("dcdb.v20180411.OpenDBExtranetAccess", async function () {
     }
 })
 
+it("dcdb.v20180411.ModifyAccountPrivileges", async function () {
+    try {
+       const data = await client.ModifyAccountPrivileges({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dcdb.v20180411.DestroyDCDBInstance", async function () {
     try {
        const data = await client.DestroyDCDBInstance({})

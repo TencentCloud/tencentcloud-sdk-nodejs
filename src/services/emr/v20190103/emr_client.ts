@@ -224,7 +224,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询EMR实例
+   * 查询集群实例信息
    */
   async DescribeInstances(
     req: DescribeInstancesRequest,
@@ -265,7 +265,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 预付费集群隔离后续费资源查询
+   * 查询待续费节点信息
    */
   async DescribeInstanceRenewNodes(
     req: DescribeInstanceRenewNodesRequest,
@@ -315,7 +315,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取yarn资源调度页面的数据
+   * 查询YARN资源调度数据信息
    */
   async DescribeResourceSchedule(
     req: DescribeResourceScheduleRequest,
@@ -355,7 +355,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * EMR集群实例列表查询
+   * 查询集群列表
    */
   async DescribeInstancesList(
     req: DescribeInstancesListRequest,
@@ -365,7 +365,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 刷新动态资源池
+   * 刷新YARN的动态资源池
    */
   async ModifyResourcePools(
     req: ModifyResourcePoolsRequest,

@@ -598,16 +598,6 @@ it("cdb.v20170320.DescribeInstanceParams", async function () {
     }
 })
 
-it("cdb.v20170320.ModifyCDBProxy", async function () {
-    try {
-       const data = await client.ModifyCDBProxy({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("cdb.v20170320.DescribeProxyCustomConf", async function () {
     try {
        const data = await client.DescribeProxyCustomConf({})

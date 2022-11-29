@@ -2164,7 +2164,7 @@ export interface DDoSAttackBandwidthData {
 }
 
 /**
- * 跨国回源优化配置，默认为关闭状态（功能灰度中，尚未全量）
+ * 跨国回源优化配置，默认为关闭状态 (已下线)
  */
 export interface OriginPullOptimization {
   /**
@@ -4120,6 +4120,11 @@ global: 全球节点
    * 是否查询节点 IPV6 信息。
    */
   ShowIpv6?: boolean
+
+  /**
+   * 是否对IPV6进行缩写。
+   */
+  AbbreviationIpv6?: boolean
 }
 
 /**
@@ -8520,7 +8525,7 @@ export interface UpdateDomainConfigRequest {
   Cache?: Cache
 
   /**
-   * 跨国链路优化配置
+   * 跨国链路优化配置（已下线）
    */
   OriginPullOptimization?: OriginPullOptimization
 
@@ -11004,7 +11009,7 @@ export interface OriginPullTimeout {
   ConnectTimeout: number
 
   /**
-      * 回源接收超时时间，单位为秒，要求10 ~ 60之间
+      * 回源接收超时时间，单位为秒，要求10 ~ 300之间
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ReceiveTimeout: number

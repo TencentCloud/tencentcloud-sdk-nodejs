@@ -3363,64 +3363,17 @@ export interface UpgradeDBInstanceEngineVersionRequest {
     MaxDelayTime?: number;
 }
 /**
- * 结构化的慢日志详情
+ * 数据库名以及字符集
  */
-export interface SlowLogItem {
+export interface DatabasesWithCharacterLists {
     /**
-      * Sql的执行时间。
-注意：此字段可能返回 null，表示取不到有效值。
+      * 数据库名
       */
-    Timestamp: number;
+    DatabaseName: string;
     /**
-      * Sql的执行时长（秒）。
-注意：此字段可能返回 null，表示取不到有效值。
+      * 字符集类型
       */
-    QueryTime: number;
-    /**
-      * Sql语句。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    SqlText: string;
-    /**
-      * 客户端地址。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    UserHost: string;
-    /**
-      * 用户名。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    UserName: string;
-    /**
-      * 数据库名。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Database: string;
-    /**
-      * 锁时长（秒）。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    LockTime: number;
-    /**
-      * 扫描行数。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    RowsExamined: number;
-    /**
-      * 结果集行数。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    RowsSent: number;
-    /**
-      * Sql模板。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    SqlTemplate: string;
-    /**
-      * Sql语句的md5。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Md5: string;
+    CharacterSet: string;
 }
 /**
  * 标签信息
@@ -3447,15 +3400,6 @@ export interface DescribeDBInstancesResponse {
       * 实例详细信息列表。
       */
     Items: Array<InstanceInfo>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * ModifyCDBProxy返回参数结构体
- */
-export interface ModifyCDBProxyResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4591,17 +4535,64 @@ export interface DescribeBackupDownloadRestrictionResponse {
     RequestId?: string;
 }
 /**
- * 数据库名以及字符集
+ * 结构化的慢日志详情
  */
-export interface DatabasesWithCharacterLists {
+export interface SlowLogItem {
     /**
-      * 数据库名
+      * Sql的执行时间。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    DatabaseName: string;
+    Timestamp: number;
     /**
-      * 字符集类型
+      * Sql的执行时长（秒）。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    CharacterSet: string;
+    QueryTime: number;
+    /**
+      * Sql语句。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SqlText: string;
+    /**
+      * 客户端地址。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UserHost: string;
+    /**
+      * 用户名。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UserName: string;
+    /**
+      * 数据库名。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Database: string;
+    /**
+      * 锁时长（秒）。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LockTime: number;
+    /**
+      * 扫描行数。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RowsExamined: number;
+    /**
+      * 结果集行数。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RowsSent: number;
+    /**
+      * Sql模板。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SqlTemplate: string;
+    /**
+      * Sql语句的md5。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Md5: string;
 }
 /**
  * 克隆任务记录。
@@ -4789,10 +4780,6 @@ export interface CloseWanServiceResponse {
       */
     RequestId?: string;
 }
-/**
- * 实例权重
- */
-export declare type RoWeight = null;
 /**
  * RenewDBInstance请求参数结构体
  */
@@ -6137,43 +6124,6 @@ export interface DescribeDBInstanceGTIDRequest {
       * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同，可使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。
       */
     InstanceId: string;
-}
-/**
- * ModifyCDBProxy请求参数结构体
- */
-export interface ModifyCDBProxyRequest {
-    /**
-      * 数据库代理组唯一ID
-      */
-    ProxyGroupId: string;
-    /**
-      * 是否开始延迟剔除，默认false，取值："true" | "false"
-      */
-    IsKickout?: boolean;
-    /**
-      * 最少保留数，最小为0，最大为实例数量
-      */
-    MinCount?: number;
-    /**
-      * 延迟剔除的阈值；如果IsKickOut="true", 该字段必填
-      */
-    MaxDelay?: number;
-    /**
-      * 读写权重分配模式；系统自动分配："system"， 自定义："custom"
-      */
-    WeightMode?: string;
-    /**
-      * 实例只读权重
-      */
-    RoWeightValues?: RoWeight;
-    /**
-      * 是否开启故障转移，代理出现故障后，连接地址将路由到主实例，默认false，取值："true" | "false"
-      */
-    FailOver?: boolean;
-    /**
-      * 是否自动添加只读实例，默认false，取值："true" | "false"
-      */
-    AutoAddRo?: boolean;
 }
 /**
  * ModifyAuditConfig请求参数结构体

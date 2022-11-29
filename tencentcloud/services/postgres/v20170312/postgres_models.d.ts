@@ -1371,6 +1371,46 @@ export interface SpecInfo {
     SupportKMSRegions: Array<string>;
 }
 /**
+ * 描述各版本下的参数信息
+ */
+export interface ParamVersionRelation {
+    /**
+      * 参数名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Name: string;
+    /**
+      * 参数信息所属内核版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DBKernelVersion: string;
+    /**
+      * 参数在该版本该规格下的默认值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Value: string;
+    /**
+      * 参数值单位。参数没有单位时，该字段返回空
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Unit: string;
+    /**
+      * 数值类型（integer、real）参数，取值上界
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Max: number;
+    /**
+      * 数值类型（integer、real）参数，取值下界
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Min: number;
+    /**
+      * 枚举类型参数，取值范围
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EnumValue: Array<string>;
+}
+/**
  * DescribeReadOnlyGroups返回参数结构体
  */
 export interface DescribeReadOnlyGroupsResponse {
@@ -1546,6 +1586,46 @@ export interface ReadOnlyGroup {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     NetworkAccessList: Array<NetworkAccess>;
+}
+/**
+ * 描述各规格下的参数信息
+ */
+export interface ParamSpecRelation {
+    /**
+      * 参数名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Name: string;
+    /**
+      * 参数信息所属规格
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Memory: string;
+    /**
+      * 参数在该规格下的默认值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Value: string;
+    /**
+      * 参数值单位。参数没有单位时，该字段返回空
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Unit: string;
+    /**
+      * 数值类型（integer、real）参数，取值上界
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Max: number;
+    /**
+      * 数值类型（integer、real）参数，取值下界
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Min: number;
+    /**
+      * 枚举类型参数，取值范围
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EnumValue: Array<string>;
 }
 /**
  * 订单详情
@@ -2122,7 +2202,7 @@ export interface ParamInfo {
       */
     ParamValueType: string;
     /**
-      * 参数值 单位。参数没有单位是，该字段返回空
+      * 参数值 单位。参数没有单位时，该字段返回空
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Unit: string;
@@ -2137,15 +2217,15 @@ export interface ParamInfo {
       */
     CurrentValue: string;
     /**
-      * 枚举类型参数，取值范围
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    EnumValue: Array<string>;
-    /**
       * 数值类型（integer、real）参数，取值下界
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Max: number;
+    /**
+      * 枚举类型参数，取值范围
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EnumValue: Array<string>;
     /**
       * 数值类型（integer、real）参数，取值上界
 注意：此字段可能返回 null，表示取不到有效值。
@@ -2191,6 +2271,21 @@ export interface ParamInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     LastModifyTime: string;
+    /**
+      * 参数存在主备制约，0：无主备制约关系，1:备机参数值需比主机大，2:主机参数值需比备机大
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    StandbyRelated: number;
+    /**
+      * 参数版本关联信息，存储具体内核版本下的具体参数信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VersionRelationSet: Array<ParamVersionRelation>;
+    /**
+      * 参数规格关联信息，存储具体规格下具体的参数信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SpecRelationSet: Array<ParamSpecRelation>;
 }
 /**
  * 慢SQL 统计分析接口返回详情
@@ -2315,11 +2410,11 @@ export interface EncryptionKey {
  */
 export interface InquiryPriceRenewDBInstanceResponse {
     /**
-      * 总费用，打折前的。比如24650表示246.5元
+      * 刊例价，单位为分。如24650表示246.5元
       */
     OriginalPrice: number;
     /**
-      * 实际需要付款金额。比如24650表示246.5元
+      * 折后实际付款金额，单位为分。如24650表示246.5元
       */
     Price: number;
     /**

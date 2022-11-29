@@ -182,10 +182,9 @@ import {
   ModifyInstancePasswordComplexityResponse,
   DeviceMemInfo,
   UpgradeDBInstanceEngineVersionRequest,
-  SlowLogItem,
+  DatabasesWithCharacterLists,
   TagInfo,
   DescribeDBInstancesResponse,
-  ModifyCDBProxyResponse,
   DescribeBackupDownloadRestrictionRequest,
   CreateDeployGroupRequest,
   DeleteAccountsRequest,
@@ -230,14 +229,13 @@ import {
   SwitchForUpgradeRequest,
   CreateDBInstanceHourResponse,
   DescribeBackupDownloadRestrictionResponse,
-  DatabasesWithCharacterLists,
+  SlowLogItem,
   CloneItem,
   ModifyDBInstanceSecurityGroupsResponse,
   CreateAccountsRequest,
   DescribeDeployGroupListRequest,
   BackupInfo,
   CloseWanServiceResponse,
-  RoWeight,
   RenewDBInstanceRequest,
   SlowLogInfo,
   ModifyLocalBinlogConfigResponse,
@@ -298,7 +296,6 @@ import {
   ModifyInstancePasswordComplexityRequest,
   OpenWanServiceResponse,
   DescribeDBInstanceGTIDRequest,
-  ModifyCDBProxyRequest,
   ModifyAuditConfigRequest,
   DeviceDiskInfo,
   RoWeightValue,
@@ -995,16 +992,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeInstanceParamsResponse) => void
   ): Promise<DescribeInstanceParamsResponse> {
     return this.request("DescribeInstanceParams", req, cb)
-  }
-
-  /**
-   * 配置数据库代理读写分离
-   */
-  async ModifyCDBProxy(
-    req: ModifyCDBProxyRequest,
-    cb?: (error: string, rep: ModifyCDBProxyResponse) => void
-  ): Promise<ModifyCDBProxyResponse> {
-    return this.request("ModifyCDBProxy", req, cb)
   }
 
   /**

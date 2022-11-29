@@ -224,8 +224,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用户使用该接口可以创建自学习模型，以供识别调用
-   */
+     * 用户使用该接口可以创建自学习模型，以供识别调用。
+
+注意：调用该接口后，模型会自动训练。新建模型成功后，调用ModifyCustomizationState接口修改为上线状态，即可在识别请求中使用对应模型ID。
+     */
   async CreateCustomization(
     req: CreateCustomizationRequest,
     cb?: (error: string, rep: CreateCustomizationResponse) => void

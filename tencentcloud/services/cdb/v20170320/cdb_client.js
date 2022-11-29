@@ -404,12 +404,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstanceParams", req, cb);
     }
     /**
-     * 配置数据库代理读写分离
-     */
-    async ModifyCDBProxy(req, cb) {
-        return this.request("ModifyCDBProxy", req, cb);
-    }
-    /**
      * 查询代理规格配置
      */
     async DescribeProxyCustomConf(req, cb) {

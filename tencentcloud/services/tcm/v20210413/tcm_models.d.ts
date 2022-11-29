@@ -543,9 +543,29 @@ export interface DescribeAccessLogConfigResponse {
     SelectedRange: SelectedRange;
     /**
       * 采用的模板，可取值为"istio, trace，默认为istio
-注意：此字段可能返回 null，表示取不到有效值。
       */
     Template: string;
+    /**
+      * 腾讯云日志服务相关参数
+      */
+    CLS: CLS;
+    /**
+      * GRPC第三方服务器地址
+      */
+    Address: string;
+    /**
+      * 是否启用GRPC第三方服务器
+      */
+    EnableServer: boolean;
+    /**
+      * 是否启用标准输出
+      */
+    EnableStdout: boolean;
+    /**
+      * 是否启用访问日志采集
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Enable: boolean;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

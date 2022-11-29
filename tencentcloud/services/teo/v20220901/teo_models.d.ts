@@ -3135,11 +3135,11 @@ export interface ReclaimAliasDomainRequest {
  */
 export interface CreateSecurityDropPageRequest {
     /**
-      * 站点Id。
+      * 站点Id。当使用ZoneId和Entity时可不填写TemplateId，否则必须填写TemplateId。
       */
     ZoneId: string;
     /**
-      * 站点子域名。
+      * 子域名/应用名。当使用ZoneId和Entity时可不填写TemplateId，否则必须填写TemplateId。
       */
     Entity: string;
     /**
@@ -3162,6 +3162,10 @@ export interface CreateSecurityDropPageRequest {
 <li> rate：自定义规则模块。</li>
       */
     Module: string;
+    /**
+      * 模板Id。当使用模板Id时可不填ZoneId和Entity，否则必须填写ZoneId和Entity。
+      */
+    TemplateId?: string;
 }
 /**
  * 例外规则，用于配置需要跳过特定场景的规则
