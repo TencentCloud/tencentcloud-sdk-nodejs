@@ -19,20 +19,24 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   DescribeInstanceShardsRequest,
-  ModifyUserNewPrivilegeRequest,
+  ModifyClusterConfigsRequest,
   CreateBackUpScheduleRequest,
   DescribeInstanceShardsResponse,
   OpenBackUpRequest,
   ModifyClusterConfigsResponse,
+  DiskSpec,
   BackupTableContent,
   OpenBackUpResponse,
+  ModifyUserNewPrivilegeRequest,
+  DescribeSpecRequest,
   ConfigSubmitContext,
   ActionAlterCkUserResponse,
   DescribeCkSqlApisRequest,
   ActionAlterCkUserRequest,
   CkUserAlterInfo,
   CreateBackUpScheduleResponse,
-  ModifyClusterConfigsRequest,
+  ResourceSpec,
+  DescribeSpecResponse,
   DescribeCkSqlApisResponse,
   ModifyUserNewPrivilegeResponse,
 } from "./cdwch_models"
@@ -94,6 +98,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyClusterConfigsResponse) => void
   ): Promise<ModifyClusterConfigsResponse> {
     return this.request("ModifyClusterConfigs", req, cb)
+  }
+
+  /**
+   * 购买页拉取集群的数据节点和zookeeper节点的规格列表
+   */
+  async DescribeSpec(
+    req: DescribeSpecRequest,
+    cb?: (error: string, rep: DescribeSpecResponse) => void
+  ): Promise<DescribeSpecResponse> {
+    return this.request("DescribeSpec", req, cb)
   }
 
   /**

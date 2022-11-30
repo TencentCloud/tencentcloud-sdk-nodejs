@@ -59,10 +59,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteBlueprints", req, cb);
     }
     /**
-     * 本接口(DescribeInstancesDiskNum)用于查询实例挂载云硬盘数量。
+     * 本接口(DescribeAllScenes)用于查询全地域使用场景列表。
      */
-    async DescribeInstancesDiskNum(req, cb) {
-        return this.request("DescribeInstancesDiskNum", req, cb);
+    async DescribeAllScenes(req, cb) {
+        return this.request("DescribeAllScenes", req, cb);
     }
     /**
      * 本接口(IsolateInstances)用于退还一个或多个轻量应用服务器实例。
@@ -138,6 +138,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeBundles(req, cb) {
         return this.request("DescribeBundles", req, cb);
+    }
+    /**
+     * 本接口(DescribeInstancesDiskNum)用于查询实例挂载云硬盘数量。
+     */
+    async DescribeInstancesDiskNum(req, cb) {
+        return this.request("DescribeInstancesDiskNum", req, cb);
     }
     /**
      * 本接口（DeleteKeyPairs）用于删除密钥对。
@@ -489,10 +495,10 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
         return this.request("DescribeResetInstanceBlueprints", req, cb);
     }
     /**
-     * 本接口（DescribeSnapshotsDeniedActions）用于查询一个或多个快照的操作限制列表信息。
+     * 本接口(DescribeScenes)用于查看使用场景列表。
      */
-    async DescribeSnapshotsDeniedActions(req, cb) {
-        return this.request("DescribeSnapshotsDeniedActions", req, cb);
+    async DescribeScenes(req, cb) {
+        return this.request("DescribeScenes", req, cb);
     }
     /**
      * 本接口（InquirePriceCreateDisks）用于新购云硬盘询价。
@@ -546,6 +552,12 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
      */
     async CreateBlueprint(req, cb) {
         return this.request("CreateBlueprint", req, cb);
+    }
+    /**
+     * 本接口（DescribeSnapshotsDeniedActions）用于查询一个或多个快照的操作限制列表信息。
+     */
+    async DescribeSnapshotsDeniedActions(req, cb) {
+        return this.request("DescribeSnapshotsDeniedActions", req, cb);
     }
     /**
      * 本接口（DetachDisks）用于卸载一个或多个云硬盘。

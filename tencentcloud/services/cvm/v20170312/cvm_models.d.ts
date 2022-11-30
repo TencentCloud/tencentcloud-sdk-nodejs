@@ -137,11 +137,11 @@ export interface ResetInstancesTypeResponse {
  */
 export interface HostResource {
     /**
-      * 专用宿主机实例总cpu核数
+      * 专用宿主机实例总CPU核数
       */
     CpuTotal?: number;
     /**
-      * 专用宿主机实例可用cpu核数
+      * 专用宿主机实例可用CPU核数
       */
     CpuAvailable?: number;
     /**
@@ -1538,7 +1538,7 @@ export interface CreateHpcClusterResponse {
     RequestId?: string;
 }
 /**
- * 描述了实例的抽象位置，包括其所在的可用区，所属的项目，宿主机（仅专用宿主机产品可用），母机ip等
+ * 描述了实例的抽象位置，包括其所在的可用区，所属的项目，宿主机（仅专用宿主机产品可用），母机IP等
  */
 export interface Placement {
     /**
@@ -1554,7 +1554,7 @@ export interface Placement {
       */
     HostIds?: Array<string>;
     /**
-      * 指定母机ip生产子机
+      * 指定母机IP生产子机
       */
     HostIps?: Array<string>;
     /**
@@ -2333,7 +2333,7 @@ export interface LaunchTemplateVersionData {
       */
     UserData?: string;
     /**
-      * 置放群组id，仅支持指定一个。
+      * 置放群组ID，仅支持指定一个。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     DisasterRecoverGroupIds?: Array<string>;
@@ -2386,7 +2386,7 @@ export interface HostItem {
       */
     Placement?: Placement;
     /**
-      * 专用宿主机实例id
+      * 专用宿主机实例ID
       */
     HostId?: string;
     /**
@@ -2422,7 +2422,7 @@ export interface HostItem {
       */
     HostState?: string;
     /**
-      * 专用宿主机实例ip
+      * 专用宿主机实例IP
       */
     HostIp?: string;
     /**
@@ -2522,7 +2522,7 @@ export interface CreateImageRequest {
       */
     Sysprep?: string;
     /**
-      * 基于实例创建整机镜像时，指定包含在镜像里的数据盘Id
+      * 基于实例创建整机镜像时，指定包含在镜像里的数据盘ID
       */
     DataDiskIds?: Array<string>;
     /**
@@ -4045,16 +4045,16 @@ export interface InquiryPriceTerminateInstancesRequest {
     InstanceIds: Array<string>;
 }
 /**
- * 支持的操作系统类型，根据windows和Linux分类。
+ * 支持的操作系统类型，根据Windows和Linux分类。
  */
 export interface ImageOsList {
     /**
-      * 支持的windows操作系统。
+      * 支持的Windows操作系统。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Windows: Array<string>;
     /**
-      * 支持的linux操作系统
+      * 支持的Linux操作系统
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Linux: Array<string>;
@@ -4449,8 +4449,8 @@ export interface ReservedInstancePriceItem {
       */
     Duration: number;
     /**
-      * 预留实例计费的平台描述（即操作系统）。形如：linux。
-返回项： linux 。
+      * 预留实例计费的平台描述（即操作系统）。形如：Linux。
+返回项： Linux 。
       */
     ProductDescription: string;
 }

@@ -238,69 +238,69 @@ export interface DescribeRoomResponse {
     /**
       * 房间名称。
       */
-    Name: string;
+    Name?: string;
     /**
       * 预定的房间开始时间，unix时间戳。
       */
-    StartTime: number;
+    StartTime?: number;
     /**
       * 预定的房间结束时间，unix时间戳。
       */
-    EndTime: number;
+    EndTime?: number;
     /**
       * 老师ID。
       */
-    TeacherId: string;
+    TeacherId?: string;
     /**
       * 低代码互动课堂的SdkAppId。
       */
-    SdkAppId: number;
+    SdkAppId?: number;
     /**
       * 分辨率。可以有如下取值：
 1 标清
 2 高清
 3 全高清
       */
-    Resolution: number;
+    Resolution?: number;
     /**
-      * 最大连麦人数（不包括老师）。取值范围[0, 17)
+      * 最大连麦人数（不包括老师）。取值范围[0, 16]
       */
-    MaxMicNumber: number;
+    MaxMicNumber?: number;
     /**
       * 进入房间时是否自动连麦。可以有以下取值：
 0 不自动连麦（默认值）
 1 自动连麦
       */
-    AutoMic: number;
+    AutoMic?: number;
     /**
       * 高音质模式。可以有以下取值：
 0 不开启高音质（默认值）
 1 开启高音质
       */
-    AudioQuality: number;
+    AudioQuality?: number;
     /**
       * 房间子类型，可以有以下取值：
 videodoc 文档+视频
 video 纯视频
 coteaching 双师
       */
-    SubType: string;
+    SubType?: string;
     /**
       * 禁止录制。可以有以下取值：
 0 不禁止录制（默认值）
 1 禁止录制
       */
-    DisableRecord: number;
+    DisableRecord?: number;
     /**
       * 助教Id列表。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Assistants: Array<string>;
+    Assistants?: Array<string>;
     /**
       * 录制地址。仅在房间结束后存在。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    RecordUrl: string;
+    RecordUrl?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

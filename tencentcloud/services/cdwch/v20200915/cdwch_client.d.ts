@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeInstanceShardsRequest, ModifyUserNewPrivilegeRequest, CreateBackUpScheduleRequest, DescribeInstanceShardsResponse, OpenBackUpRequest, ModifyClusterConfigsResponse, OpenBackUpResponse, ActionAlterCkUserResponse, DescribeCkSqlApisRequest, ActionAlterCkUserRequest, CreateBackUpScheduleResponse, ModifyClusterConfigsRequest, DescribeCkSqlApisResponse, ModifyUserNewPrivilegeResponse } from "./cdwch_models";
+import { DescribeInstanceShardsRequest, ModifyClusterConfigsRequest, CreateBackUpScheduleRequest, DescribeInstanceShardsResponse, OpenBackUpRequest, ModifyClusterConfigsResponse, OpenBackUpResponse, ModifyUserNewPrivilegeRequest, DescribeSpecRequest, ActionAlterCkUserResponse, DescribeCkSqlApisRequest, ActionAlterCkUserRequest, CreateBackUpScheduleResponse, DescribeSpecResponse, DescribeCkSqlApisResponse, ModifyUserNewPrivilegeResponse } from "./cdwch_models";
 /**
  * cdwch client
  * @class
@@ -27,6 +27,10 @@ export declare class Client extends AbstractClient {
      * 在集群配置页面修改集群配置文件接口，xml模式
      */
     ModifyClusterConfigs(req: ModifyClusterConfigsRequest, cb?: (error: string, rep: ModifyClusterConfigsResponse) => void): Promise<ModifyClusterConfigsResponse>;
+    /**
+     * 购买页拉取集群的数据节点和zookeeper节点的规格列表
+     */
+    DescribeSpec(req: DescribeSpecRequest, cb?: (error: string, rep: DescribeSpecResponse) => void): Promise<DescribeSpecResponse>;
     /**
      * 针对ck账号的权限做管控（新版）
      */

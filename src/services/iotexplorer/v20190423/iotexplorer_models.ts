@@ -2292,7 +2292,7 @@ export interface DescribeDeviceLocationSolveResponse {
   Longitude: number
 
   /**
-   * 维度
+   * 纬度
    */
   Latitude: number
 

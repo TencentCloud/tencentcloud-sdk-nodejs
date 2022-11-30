@@ -301,6 +301,23 @@ export interface CreateInstanceSnapshotResponse {
     RequestId?: string;
 }
 /**
+ * DescribeScenes返回参数结构体
+ */
+export interface DescribeScenesResponse {
+    /**
+      * 使用场景列表。
+      */
+    SceneSet: Array<Scene>;
+    /**
+      * 使用场景总数量。
+      */
+    TotalCount: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * InquirePriceRenewInstances返回参数结构体
  */
 export interface InquirePriceRenewInstancesResponse {
@@ -346,24 +363,21 @@ export interface ModifyInstancesAttributeRequest {
     InstanceName?: string;
 }
 /**
- * DescribeGeneralResourceQuotas请求参数结构体
+ * DescribeInstances返回参数结构体
  */
-export interface DescribeGeneralResourceQuotasRequest {
+export interface DescribeInstancesResponse {
     /**
-      * 资源名列表，可取值:
-- GENERAL_BUNDLE_INSTANCE 通用型套餐实例
-- STORAGE_BUNDLE_INSTANCE 存储型套餐实例
-- ENTERPRISE_BUNDLE_INSTANCE 企业型套餐实例
-- EXCLUSIVE_BUNDLE_INSTANCE 专属型套餐实例
-- BEFAST_BUNDLE_INSTANCE 蜂驰型套餐实例
-- USER_KEY_PAIR 密钥对
-- SNAPSHOT 快照
-- BLUEPRINT 自定义镜像
-- FREE_BLUEPRINT 免费自定义镜像
-- DATA_DISK 数据盘
-- FIREWALL_RULE 防火墙规则
+      * 符合条件的实例数量。
       */
-    ResourceNames: Array<string>;
+    TotalCount: number;
+    /**
+      * 实例详细信息列表。
+      */
+    InstanceSet: Array<Instance>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DeleteKeyPairs请求参数结构体
@@ -1256,6 +1270,15 @@ export interface ModifySnapshotAttributeRequest {
     SnapshotName?: string;
 }
 /**
+ * DeleteSnapshots返回参数结构体
+ */
+export interface DeleteSnapshotsResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeDisks返回参数结构体
  */
 export interface DescribeDisksResponse {
@@ -1290,13 +1313,21 @@ export interface DescribeBundleDiscountResponse {
     RequestId?: string;
 }
 /**
- * DeleteSnapshots返回参数结构体
+ * DescribeAllScenes请求参数结构体
  */
-export interface DeleteSnapshotsResponse {
+export interface DescribeAllScenesRequest {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 使用场景ID列表。
       */
-    RequestId?: string;
+    SceneIds?: Array<string>;
+    /**
+      * 偏移量，默认为 0。
+      */
+    Offset?: number;
+    /**
+      * 返回数量，默认为 20，最大值为 100。
+      */
+    Limit?: number;
 }
 /**
  * ModifyDisksRenewFlag请求参数结构体
@@ -1353,6 +1384,23 @@ export interface DataDiskPrice {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     InstanceId: string;
+}
+/**
+ * 使用场景详细信息
+ */
+export interface SceneInfo {
+    /**
+      * 使用场景Id。
+      */
+    SceneId: string;
+    /**
+      * 使用场景展示名称。
+      */
+    DisplayName: string;
+    /**
+      * 使用场景描述信息。
+      */
+    Description: string;
 }
 /**
  * ImportKeyPair请求参数结构体
@@ -1439,21 +1487,21 @@ export interface ModifyBlueprintAttributeResponse {
     RequestId?: string;
 }
 /**
- * DescribeFirewallRulesTemplate返回参数结构体
+ * DescribeScenes请求参数结构体
  */
-export interface DescribeFirewallRulesTemplateResponse {
+export interface DescribeScenesRequest {
     /**
-      * 符合条件的防火墙规则数量。
+      * 使用场景ID列表。
       */
-    TotalCount: number;
+    SceneIds?: Array<string>;
     /**
-      * 防火墙规则详细信息列表。
+      * 偏移量，默认为 0。
       */
-    FirewallRuleSet: Array<FirewallRuleInfo>;
+    Offset?: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 返回数量，默认为 20，最大值为 100。
       */
-    RequestId?: string;
+    Limit?: number;
 }
 /**
  * DescribeRegions请求参数结构体
@@ -1963,6 +2011,23 @@ export interface DeniedAction {
       * 限制操作消息。
       */
     Message: string;
+}
+/**
+ * DescribeAllScenes返回参数结构体
+ */
+export interface DescribeAllScenesResponse {
+    /**
+      * 使用场景详细信息列表。
+      */
+    SceneInfoSet: Array<SceneInfo>;
+    /**
+      * 使用场景详细信息总数量。
+      */
+    TotalCount: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * ModifyInstancesLoginKeyPairAttribute返回参数结构体
@@ -2580,21 +2645,24 @@ disk-state
     Order?: string;
 }
 /**
- * DescribeInstances返回参数结构体
+ * DescribeGeneralResourceQuotas请求参数结构体
  */
-export interface DescribeInstancesResponse {
+export interface DescribeGeneralResourceQuotasRequest {
     /**
-      * 符合条件的实例数量。
+      * 资源名列表，可取值:
+- GENERAL_BUNDLE_INSTANCE 通用型套餐实例
+- STORAGE_BUNDLE_INSTANCE 存储型套餐实例
+- ENTERPRISE_BUNDLE_INSTANCE 企业型套餐实例
+- EXCLUSIVE_BUNDLE_INSTANCE 专属型套餐实例
+- BEFAST_BUNDLE_INSTANCE 蜂驰型套餐实例
+- USER_KEY_PAIR 密钥对
+- SNAPSHOT 快照
+- BLUEPRINT 自定义镜像
+- FREE_BLUEPRINT 免费自定义镜像
+- DATA_DISK 数据盘
+- FIREWALL_RULE 防火墙规则
       */
-    TotalCount: number;
-    /**
-      * 实例详细信息列表。
-      */
-    InstanceSet: Array<Instance>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    ResourceNames: Array<string>;
 }
 /**
  * DescribeZones返回参数结构体
@@ -3109,6 +3177,23 @@ export interface StopInstancesRequest {
     InstanceIds: Array<string>;
 }
 /**
+ * DescribeFirewallRulesTemplate返回参数结构体
+ */
+export interface DescribeFirewallRulesTemplateResponse {
+    /**
+      * 符合条件的防火墙规则数量。
+      */
+    TotalCount: number;
+    /**
+      * 防火墙规则详细信息列表。
+      */
+    FirewallRuleSet: Array<FirewallRuleInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeModifyInstanceBundles请求参数结构体
  */
 export interface DescribeModifyInstanceBundlesRequest {
@@ -3213,6 +3298,23 @@ export interface InquirePriceCreateInstancesRequest {
       * 应用镜像 ID，使用收费应用镜像时必填。可通过[DescribeBlueprints](https://cloud.tencent.com/document/product/1207/47689)接口返回值中的BlueprintId获取。
       */
     BlueprintId?: string;
+}
+/**
+ * 使用场景信息
+ */
+export interface Scene {
+    /**
+      * 使用场景Id
+      */
+    SceneId: string;
+    /**
+      * 使用场景展示名称
+      */
+    DisplayName: string;
+    /**
+      * 使用场景描述
+      */
+    Description: string;
 }
 /**
  * 云联网关联的实例列表。

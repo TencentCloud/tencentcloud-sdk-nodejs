@@ -2766,7 +2766,7 @@ export interface StepDetailInfo {
  */
 export interface CreateSyncJobRequest {
     /**
-      * 支付类型，PrePay：包年包月  PostPay：按时按量
+      * 付款类型, 如：PrePay(表示包年包月)、PostPay(表示按时按量)
       */
     PayMode: string;
     /**
@@ -2790,23 +2790,23 @@ export interface CreateSyncJobRequest {
       */
     Specification?: string;
     /**
-      * 无
+      * 标签信息
       */
     Tags?: Array<TagItem>;
     /**
-      * 同步任务数量
+      * 一次购买的同步任务数量，取值范围为[1, 10]，默认为1
       */
     Count?: number;
     /**
-      * 自动续费标识
+      * 自动续费标识，当PayMode值为PrePay则此项配置有意义，取值为：1（表示自动续费）、0（不自动续费，默认为此值）
       */
     AutoRenew?: number;
     /**
-      * 同步链路规格
+      * 同步链路规格，如micro,small,medium,large，默认为medium
       */
     InstanceClass?: string;
     /**
-      * 同步链路名称
+      * 同步任务名称
       */
     JobName?: string;
     /**

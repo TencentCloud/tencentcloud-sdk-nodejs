@@ -58,6 +58,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyClusterConfigs", req, cb);
     }
     /**
+     * 购买页拉取集群的数据节点和zookeeper节点的规格列表
+     */
+    async DescribeSpec(req, cb) {
+        return this.request("DescribeSpec", req, cb);
+    }
+    /**
      * 针对ck账号的权限做管控（新版）
      */
     async ModifyUserNewPrivilege(req, cb) {

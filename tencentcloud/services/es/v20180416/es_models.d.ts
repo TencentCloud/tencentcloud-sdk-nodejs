@@ -2839,7 +2839,9 @@ export interface UpdateInstanceRequest {
       */
     NodeInfoList?: Array<NodeInfo>;
     /**
-      * 公网访问状态
+      * ES集群公网访问状态
+OPEN 开启
+CLOSE 关闭
       */
     PublicAccess?: string;
     /**
@@ -2848,10 +2850,14 @@ export interface UpdateInstanceRequest {
     EsPublicAcl?: EsPublicAcl;
     /**
       * Kibana公网访问状态
+OPEN 开启
+CLOSE 关闭
       */
     KibanaPublicAccess?: string;
     /**
       * Kibana内网访问状态
+OPEN 开启
+CLOSE 关闭
       */
     KibanaPrivateAccess?: string;
     /**
@@ -2892,10 +2898,14 @@ export interface UpdateInstanceRequest {
     EnableCerebro?: boolean;
     /**
       * Cerebro公网访问状态
+OPEN 开启
+CLOSE 关闭
       */
     CerebroPublicAccess?: string;
     /**
       * Cerebro内网访问状态
+OPEN 开启
+CLOSE 关闭
       */
     CerebroPrivateAccess?: string;
     /**
@@ -2907,7 +2917,9 @@ export interface UpdateInstanceRequest {
       */
     OperationDuration?: OperationDurationUpdated;
     /**
-      * 是否开启Altering 外网告警输出
+      * 是否开启Alerting 外网告警输出：
+OPEN 开启
+CLOSE 关闭
       */
     KibanaAlteringPublicAccess?: string;
 }

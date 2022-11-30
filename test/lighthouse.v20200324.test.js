@@ -48,9 +48,9 @@ it("lighthouse.v20200324.DeleteBlueprints", async function () {
     }
 })
 
-it("lighthouse.v20200324.DescribeInstancesDiskNum", async function () {
+it("lighthouse.v20200324.DescribeAllScenes", async function () {
     try {
-       const data = await client.DescribeInstancesDiskNum({})
+       const data = await client.DescribeAllScenes({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -141,6 +141,16 @@ it("lighthouse.v20200324.CreateKeyPair", async function () {
 it("lighthouse.v20200324.DescribeBundles", async function () {
     try {
        const data = await client.DescribeBundles({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lighthouse.v20200324.DescribeInstancesDiskNum", async function () {
+    try {
+       const data = await client.DescribeInstancesDiskNum({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -598,9 +608,9 @@ it("lighthouse.v20200324.DescribeResetInstanceBlueprints", async function () {
     }
 })
 
-it("lighthouse.v20200324.DescribeSnapshotsDeniedActions", async function () {
+it("lighthouse.v20200324.DescribeScenes", async function () {
     try {
-       const data = await client.DescribeSnapshotsDeniedActions({})
+       const data = await client.DescribeScenes({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -681,6 +691,16 @@ it("lighthouse.v20200324.CreateInstances", async function () {
 it("lighthouse.v20200324.CreateBlueprint", async function () {
     try {
        const data = await client.CreateBlueprint({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lighthouse.v20200324.DescribeSnapshotsDeniedActions", async function () {
+    try {
+       const data = await client.DescribeSnapshotsDeniedActions({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

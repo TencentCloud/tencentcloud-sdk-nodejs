@@ -1968,7 +1968,7 @@ export interface ModifyComputeEnvResponse {
     RequestId?: string;
 }
 /**
- * 描述了实例的抽象位置，包括其所在的可用区，所属的项目，宿主机（仅专用宿主机产品可用），母机ip等
+ * 描述了实例的抽象位置，包括其所在的可用区，所属的项目，宿主机（仅专用宿主机产品可用），母机IP等
  */
 export interface Placement {
     /**
@@ -1984,7 +1984,7 @@ export interface Placement {
       */
     HostIds?: Array<string>;
     /**
-      * 指定母机ip生产子机
+      * 指定母机IP生产子机
       */
     HostIps?: Array<string>;
     /**

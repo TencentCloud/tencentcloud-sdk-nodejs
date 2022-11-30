@@ -26,9 +26,24 @@ export interface DescribeInstanceShardsRequest {
 }
 
 /**
- * ModifyUserNewPrivilege请求参数结构体
+ * ModifyClusterConfigs请求参数结构体
  */
-export type ModifyUserNewPrivilegeRequest = null
+export interface ModifyClusterConfigsRequest {
+  /**
+   * 集群ID，例如cdwch-xxxx
+   */
+  InstanceId: string
+
+  /**
+   * 配置文件修改信息
+   */
+  ModifyConfContext: Array<ConfigSubmitContext>
+
+  /**
+   * 修改原因
+   */
+  Remark?: string
+}
 
 /**
  * CreateBackUpSchedule请求参数结构体
@@ -112,6 +127,36 @@ export interface ModifyClusterConfigsResponse {
 }
 
 /**
+ * 磁盘规格描述
+ */
+export interface DiskSpec {
+  /**
+   * 磁盘类型，例如“CLOUD_SSD", "LOCAL_SSD"等
+   */
+  DiskType: string
+
+  /**
+   * 磁盘类型说明，例如"云SSD", "本地SSD"等
+   */
+  DiskDesc: string
+
+  /**
+   * 磁盘最小规格大小，单位G
+   */
+  MinDiskSize: number
+
+  /**
+   * 磁盘最大规格大小，单位G
+   */
+  MaxDiskSize: number
+
+  /**
+   * 磁盘数目
+   */
+  DiskCount: number
+}
+
+/**
  * 备份表信息
  */
 export interface BackupTableContent {
@@ -149,6 +194,31 @@ export interface OpenBackUpResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyUserNewPrivilege请求参数结构体
+ */
+export type ModifyUserNewPrivilegeRequest = null
+
+/**
+ * DescribeSpec请求参数结构体
+ */
+export interface DescribeSpecRequest {
+  /**
+   * 地域信息，例如"ap-guangzhou-1"
+   */
+  Zone: string
+
+  /**
+   * 计费类型，PREPAID 包年包月，POSTPAID_BY_HOUR 按量计费
+   */
+  PayMode?: string
+
+  /**
+   * 是否弹性ck
+   */
+  IsElastic?: boolean
 }
 
 /**
@@ -268,23 +338,93 @@ export interface CreateBackUpScheduleResponse {
 }
 
 /**
- * ModifyClusterConfigs请求参数结构体
+ * 资源规格描述信息
  */
-export interface ModifyClusterConfigsRequest {
+export interface ResourceSpec {
   /**
-   * 集群ID，例如cdwch-xxxx
+   * 规格名称，例如“SCH1"
    */
-  InstanceId: string
+  Name: string
 
   /**
-   * 配置文件修改信息
+   * cpu核数
    */
-  ModifyConfContext: Array<ConfigSubmitContext>
+  Cpu: number
 
   /**
-   * 修改原因
+   * 内存大小，单位G
    */
-  Remark?: string
+  Mem: number
+
+  /**
+   * 分类标记，STANDARD/BIGDATA/HIGHIO分别表示标准型/大数据型/高IO
+   */
+  Type: string
+
+  /**
+   * 系统盘描述信息
+   */
+  SystemDisk: DiskSpec
+
+  /**
+   * 数据盘描述信息
+   */
+  DataDisk: DiskSpec
+
+  /**
+   * 最大节点数目限制
+   */
+  MaxNodeSize: number
+
+  /**
+      * 是否可用，false代表售罄
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Available: boolean
+
+  /**
+      * 规格描述信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ComputeSpecDesc: string
+
+  /**
+      * 规格名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DisplayName: string
+
+  /**
+      * 库存数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceQuota: number
+}
+
+/**
+ * DescribeSpec返回参数结构体
+ */
+export interface DescribeSpecResponse {
+  /**
+   * zookeeper节点规格描述
+   */
+  CommonSpec: Array<ResourceSpec>
+
+  /**
+   * 数据节点规格描述
+   */
+  DataSpec: Array<ResourceSpec>
+
+  /**
+      * 云盘列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AttachCBSSpec: Array<DiskSpec>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

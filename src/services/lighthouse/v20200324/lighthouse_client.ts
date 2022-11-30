@@ -35,10 +35,11 @@ import {
   ModifyBundle,
   DetachCcnResponse,
   CreateInstanceSnapshotResponse,
+  DescribeScenesResponse,
   InquirePriceRenewInstancesResponse,
   DeleteFirewallRulesResponse,
   ModifyInstancesAttributeRequest,
-  DescribeGeneralResourceQuotasRequest,
+  DescribeInstancesResponse,
   DeleteKeyPairsRequest,
   SystemDisk,
   ResetInstanceBlueprint,
@@ -89,12 +90,14 @@ import {
   DeleteSnapshotsRequest,
   ModifyDisksRenewFlagResponse,
   ModifySnapshotAttributeRequest,
+  DeleteSnapshotsResponse,
   DescribeDisksResponse,
   DescribeBundleDiscountResponse,
-  DeleteSnapshotsResponse,
+  DescribeAllScenesRequest,
   ModifyDisksRenewFlagRequest,
   DisassociateInstancesKeyPairsRequest,
   DataDiskPrice,
+  SceneInfo,
   ImportKeyPairRequest,
   DeleteBlueprintsResponse,
   ModifyInstancesLoginKeyPairAttributeRequest,
@@ -102,7 +105,7 @@ import {
   StopInstancesResponse,
   CreateInstancesResponse,
   ModifyBlueprintAttributeResponse,
-  DescribeFirewallRulesTemplateResponse,
+  DescribeScenesRequest,
   DescribeRegionsRequest,
   DescribeInstancesDiskNumResponse,
   InquirePriceCreateBlueprintResponse,
@@ -124,6 +127,7 @@ import {
   DescribeBundlesRequest,
   Blueprint,
   DeniedAction,
+  DescribeAllScenesResponse,
   ModifyInstancesLoginKeyPairAttributeResponse,
   InquirePriceRenewDisksResponse,
   Bundle,
@@ -153,7 +157,7 @@ import {
   FirewallRuleInfo,
   CreateFirewallRulesResponse,
   DescribeDisksRequest,
-  DescribeInstancesResponse,
+  DescribeGeneralResourceQuotasRequest,
   DescribeZonesResponse,
   CreateBlueprintResponse,
   PolicyDetail,
@@ -189,12 +193,14 @@ import {
   DescribeGeneralResourceQuotasResponse,
   ModifyInstancesRenewFlagRequest,
   StopInstancesRequest,
+  DescribeFirewallRulesTemplateResponse,
   DescribeModifyInstanceBundlesRequest,
   RenewInstancesResponse,
   ResetInstanceResponse,
   DescribeFirewallRulesRequest,
   DiskDeniedActions,
   InquirePriceCreateInstancesRequest,
+  Scene,
   CcnAttachedInstance,
   DescribeModifyInstanceBundlesResponse,
   AttachDetail,
@@ -260,13 +266,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(DescribeInstancesDiskNum)用于查询实例挂载云硬盘数量。
+   * 本接口(DescribeAllScenes)用于查询全地域使用场景列表。
    */
-  async DescribeInstancesDiskNum(
-    req: DescribeInstancesDiskNumRequest,
-    cb?: (error: string, rep: DescribeInstancesDiskNumResponse) => void
-  ): Promise<DescribeInstancesDiskNumResponse> {
-    return this.request("DescribeInstancesDiskNum", req, cb)
+  async DescribeAllScenes(
+    req: DescribeAllScenesRequest,
+    cb?: (error: string, rep: DescribeAllScenesResponse) => void
+  ): Promise<DescribeAllScenesResponse> {
+    return this.request("DescribeAllScenes", req, cb)
   }
 
   /**
@@ -378,6 +384,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeBundlesResponse) => void
   ): Promise<DescribeBundlesResponse> {
     return this.request("DescribeBundles", req, cb)
+  }
+
+  /**
+   * 本接口(DescribeInstancesDiskNum)用于查询实例挂载云硬盘数量。
+   */
+  async DescribeInstancesDiskNum(
+    req: DescribeInstancesDiskNumRequest,
+    cb?: (error: string, rep: DescribeInstancesDiskNumResponse) => void
+  ): Promise<DescribeInstancesDiskNumResponse> {
+    return this.request("DescribeInstancesDiskNum", req, cb)
   }
 
   /**
@@ -910,13 +926,13 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
   }
 
   /**
-   * 本接口（DescribeSnapshotsDeniedActions）用于查询一个或多个快照的操作限制列表信息。
+   * 本接口(DescribeScenes)用于查看使用场景列表。
    */
-  async DescribeSnapshotsDeniedActions(
-    req: DescribeSnapshotsDeniedActionsRequest,
-    cb?: (error: string, rep: DescribeSnapshotsDeniedActionsResponse) => void
-  ): Promise<DescribeSnapshotsDeniedActionsResponse> {
-    return this.request("DescribeSnapshotsDeniedActions", req, cb)
+  async DescribeScenes(
+    req: DescribeScenesRequest,
+    cb?: (error: string, rep: DescribeScenesResponse) => void
+  ): Promise<DescribeScenesResponse> {
+    return this.request("DescribeScenes", req, cb)
   }
 
   /**
@@ -1002,6 +1018,16 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
     cb?: (error: string, rep: CreateBlueprintResponse) => void
   ): Promise<CreateBlueprintResponse> {
     return this.request("CreateBlueprint", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeSnapshotsDeniedActions）用于查询一个或多个快照的操作限制列表信息。
+   */
+  async DescribeSnapshotsDeniedActions(
+    req: DescribeSnapshotsDeniedActionsRequest,
+    cb?: (error: string, rep: DescribeSnapshotsDeniedActionsResponse) => void
+  ): Promise<DescribeSnapshotsDeniedActionsResponse> {
+    return this.request("DescribeSnapshotsDeniedActions", req, cb)
   }
 
   /**

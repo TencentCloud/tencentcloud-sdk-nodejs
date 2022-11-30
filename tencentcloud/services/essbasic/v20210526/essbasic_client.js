@@ -124,7 +124,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateConsoleLoginUrl", req, cb);
     }
     /**
-     * 此接口（CreateConsoleLoginUrl）用于渠道子客领取合同，经办人需要有相应的角色，领取后的合同不能重复领取
+     * 此接口（ChannelCreateBoundFlows）用于渠道子客领取合同，经办人需要有相应的角色，领取后的合同不能重复领取。
      */
     async ChannelCreateBoundFlows(req, cb) {
         return this.request("ChannelCreateBoundFlows", req, cb);

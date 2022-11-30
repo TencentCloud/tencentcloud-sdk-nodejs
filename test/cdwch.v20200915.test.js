@@ -68,6 +68,16 @@ it("cdwch.v20200915.ModifyClusterConfigs", async function () {
     }
 })
 
+it("cdwch.v20200915.DescribeSpec", async function () {
+    try {
+       const data = await client.DescribeSpec({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdwch.v20200915.ModifyUserNewPrivilege", async function () {
     try {
        const data = await client.ModifyUserNewPrivilege({})
