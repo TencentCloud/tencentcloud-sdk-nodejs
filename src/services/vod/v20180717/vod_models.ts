@@ -189,6 +189,11 @@ export interface ReviewAudioVideoTaskInput {
    * 媒体文件 ID。
    */
   FileId: string
+
+  /**
+   * 音视频审核模板 ID。
+   */
+  Definition: number
 }
 
 /**
@@ -2771,6 +2776,12 @@ export interface ReviewAudioVideoRequest {
   SubAppId?: number
 
   /**
+      * 音视频审核模板 ID，默认值为 10。取值范围：
+<li>10：预置模板，支持检测的违规标签包括色情（Porn）、暴恐（Terror）和不适宜的信息（Polity）。</li>
+      */
+  Definition?: number
+
+  /**
    * 任务流的优先级，数值越大优先级越高，取值范围是 -10 到 10，不填代表 0。
    */
   TasksPriority?: number
@@ -3883,37 +3894,19 @@ export interface ReviewAudioVideoSegmentItem {
   /**
       * 嫌疑片段最可能的违规的标签，取值范围：
 <li>Porn：色情；</li>
-<li>Terrorism：暴恐；</li>
-<li>Political：令人不适宜的信息。</li>
+<li>Terror：暴恐；</li>
+<li>Polity：不适宜的信息；</li>
+<li>Ad：广告；</li>
+<li>Illegal：违法；</li>
+<li>Religion：宗教；</li>
+<li>Abuse：谩骂；</li>
+<li>Moan：娇喘。</li>
       */
   Label: string
 
   /**
-      * 当 Form 为 Image 或 Voice 时有效，表示当前标签（Label）下的二级标签。
-当 Form 为 Image 且 Label 为 Porn 时，取值范围：
-<li>porn：色情；</li>
-<li>vulgar：低俗。</li>
-
-当 Form 为 Image 且 Label 为 Terrorism 时，取值范围：
-<li>guns：武器枪支；</li>
-<li>bloody：血腥画面；</li>
-<li>banners：暴恐旗帜；</li>
-<li> scenario：暴恐画面；</li>
-<li>explosion：爆炸火灾。</li>
-
-当 Form 为 Image 且 Label 为 Political 时，取值范围：
-<li>violation_photo：违规图标；</li>
-<li>nation_politician：国家领导人；</li>
-<li>province_politician：省部级领导人；</li>
-<li>county_politician：市/县级领导人；</li>
-<li>sensitive_politician：敏感相关人物；</li>
-<li>foreign_politician：国外政治人物；</li>
-<li>sensitive_entertainment：敏感娱乐明星；</li>
-<li>sensitive_military：敏感军事人物。</li>
-
-当 Form 为 Voice 且 Label 为 Porn 时，取值范围：
-<li>moan：娇喘。</li>
-      */
+   * 违规子标签。
+   */
   SubLabel: string
 
   /**
@@ -6705,8 +6698,13 @@ export interface ReviewAudioVideoTaskOutput {
   /**
       * 当 Suggestion 为 review 或 block 时有效，表示音视频最可能的违规的标签，取值范围：
 <li>Porn：色情；</li>
-<li>Terrorism：暴恐；</li>
-<li>Political：令人不适宜的信息。</li>
+<li>Terror：暴恐；</li>
+<li>Polity：不适宜的信息；</li>
+<li>Ad：广告；</li>
+<li>Illegal：违法；</li>
+<li>Religion：宗教；</li>
+<li>Abuse：谩骂；</li>
+<li>Moan：娇喘。</li>
       */
   Label: string
 
