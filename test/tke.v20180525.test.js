@@ -1438,6 +1438,16 @@ it("tke.v20180525.DeleteClusterEndpoint", async function () {
     }
 })
 
+it("tke.v20180525.CreateClusterRelease", async function () {
+    try {
+       const data = await client.CreateClusterRelease({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tke.v20180525.GetClusterLevelPrice", async function () {
     try {
        const data = await client.GetClusterLevelPrice({})

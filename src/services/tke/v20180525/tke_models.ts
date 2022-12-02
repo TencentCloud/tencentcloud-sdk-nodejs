@@ -1241,13 +1241,36 @@ export interface DeleteEdgeClusterInstancesRequest {
 }
 
 /**
- * InstallEdgeLogAgent请求参数结构体
+ * DescribeImageCaches请求参数结构体
  */
-export interface InstallEdgeLogAgentRequest {
+export interface DescribeImageCachesRequest {
   /**
-   * 集群ID
+   * 镜像缓存Id数组
    */
-  ClusterId: string
+  ImageCacheIds?: Array<string>
+
+  /**
+   * 镜像缓存名称数组
+   */
+  ImageCacheNames?: Array<string>
+
+  /**
+   * 限定此次返回资源的数量。如果不设定，默认返回20，最大不能超过50
+   */
+  Limit?: number
+
+  /**
+   * 偏移量,默认0
+   */
+  Offset?: number
+
+  /**
+      * 过滤条件，可选条件：
+(1)实例名称
+KeyName: image-cache-name
+类型：String
+      */
+  Filters?: Array<Filter>
 }
 
 /**
@@ -2643,6 +2666,16 @@ export interface ResourceDeleteOption {
 }
 
 /**
+ * InstallEdgeLogAgent请求参数结构体
+ */
+export interface InstallEdgeLogAgentRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+}
+
+/**
  * CheckEdgeClusterCIDR请求参数结构体
  */
 export interface CheckEdgeClusterCIDRRequest {
@@ -2917,39 +2950,6 @@ export interface ScaleOutClusterMasterResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * DescribeImageCaches请求参数结构体
- */
-export interface DescribeImageCachesRequest {
-  /**
-   * 镜像缓存Id数组
-   */
-  ImageCacheIds?: Array<string>
-
-  /**
-   * 镜像缓存名称数组
-   */
-  ImageCacheNames?: Array<string>
-
-  /**
-   * 限定此次返回资源的数量。如果不设定，默认返回20，最大不能超过50
-   */
-  Limit?: number
-
-  /**
-   * 偏移量,默认0
-   */
-  Offset?: number
-
-  /**
-      * 过滤条件，可选条件：
-(1)实例名称
-KeyName: image-cache-name
-类型：String
-      */
-  Filters?: Array<Filter>
 }
 
 /**
@@ -5696,6 +5696,21 @@ export interface DeleteImageCachesRequest {
 }
 
 /**
+ * 应用市场自定义参数
+ */
+export interface ReleaseValues {
+  /**
+   * 自定义参数原始值
+   */
+  RawOriginal: string
+
+  /**
+   * 自定义参数值类型
+   */
+  ValuesType: string
+}
+
+/**
  * CreateClusterNodePool返回参数结构体
  */
 export interface CreateClusterNodePoolResponse {
@@ -7351,6 +7366,66 @@ export interface DescribeClusterAuthenticationOptionsResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreateClusterRelease请求参数结构体
+ */
+export interface CreateClusterReleaseRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+
+  /**
+   * 应用名称
+   */
+  Name: string
+
+  /**
+   * 应用命名空间
+   */
+  Namespace: string
+
+  /**
+   * 制品名称或从第三方repo 安装chart时，制品压缩包下载地址, 不支持重定向类型chart 地址，结尾为*.tgz
+   */
+  Chart: string
+
+  /**
+   * 自定义参数
+   */
+  Values?: ReleaseValues
+
+  /**
+   * 制品来源，范围：tke-market/tcr/other
+   */
+  ChartFrom?: string
+
+  /**
+   * 制品版本
+   */
+  ChartVersion?: string
+
+  /**
+   * 制品仓库URL地址
+   */
+  ChartRepoURL?: string
+
+  /**
+   * 制品访问用户名
+   */
+  Username?: string
+
+  /**
+   * 制品访问密码
+   */
+  Password?: string
+
+  /**
+   * 制品命名空间
+   */
+  ChartNamespace?: string
 }
 
 /**
@@ -10348,6 +10423,22 @@ export interface DeletePrometheusAlertRuleRequest {
 }
 
 /**
+ * CreateClusterRelease返回参数结构体
+ */
+export interface CreateClusterReleaseResponse {
+  /**
+      * 应用详情
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Release: PendingRelease
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 边缘容器集群master自定义参数
  */
 export interface EdgeClusterExtraArgs {
@@ -11369,4 +11460,51 @@ export interface RunPrometheusInstanceRequest {
    * 子网ID，默认使用实例所用子网初始化，也可通过该参数传递新的子网ID初始化
    */
   SubnetId?: string
+}
+
+/**
+ * 应用市场安装的Pending应用
+ */
+export interface PendingRelease {
+  /**
+      * 应用状态详情
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Condition: string
+
+  /**
+      * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CreatedTime: string
+
+  /**
+      * 应用ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ID: string
+
+  /**
+      * 应用名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Name: string
+
+  /**
+      * 应用命名空间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Namespace: string
+
+  /**
+      * 应用状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Status: string
+
+  /**
+      * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UpdatedTime: string
 }

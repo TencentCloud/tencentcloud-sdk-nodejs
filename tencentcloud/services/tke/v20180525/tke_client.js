@@ -880,6 +880,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteClusterEndpoint", req, cb);
     }
     /**
+     * 在应用市场中集群创建应用
+     */
+    async CreateClusterRelease(req, cb) {
+        return this.request("CreateClusterRelease", req, cb);
+    }
+    /**
      * 获取集群规模价格
      */
     async GetClusterLevelPrice(req, cb) {

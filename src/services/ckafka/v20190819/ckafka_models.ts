@@ -136,6 +136,21 @@ export interface DeleteAclRequest {
 }
 
 /**
+ * CreateInstancePost返回参数结构体
+ */
+export interface CreateInstancePostResponse {
+  /**
+   * 返回结果
+   */
+  Result?: JgwOperateResponse
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * dip失败消息写入cls的配置
  */
 export interface DropCls {
@@ -252,6 +267,28 @@ export interface GroupInfoMember {
    * 存储着分配给该消费者的 partition 信息
    */
   Assignment: Assignment
+}
+
+/**
+ * 数据处理ROW输出格式配置
+ */
+export interface RowParam {
+  /**
+   * 行内容，KEY_VALUE，VALUE
+   */
+  RowContent: string
+
+  /**
+      * key和value间的分隔符
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  KeyValueDelimiter?: string
+
+  /**
+      * 元素建的分隔符
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EntryDelimiter?: string
 }
 
 /**
@@ -439,6 +476,29 @@ export interface CreateConnectResourceResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * Topic消息保留时间配置返回信息
+ */
+export interface TopicRetentionTimeConfigRsp {
+  /**
+      * 期望值，即用户配置的Topic消息保留时间(单位分钟)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Expect: number
+
+  /**
+      * 当前值，即当前生效值(可能存在动态调整，单位分钟)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Current: number
+
+  /**
+      * 最近变更时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ModTimeStamp: number
 }
 
 /**
@@ -1117,6 +1177,23 @@ export interface MySQLConnectParam {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   SelfBuilt?: boolean
+}
+
+/**
+ * InquireCkafkaPrice接口询价返回值
+ */
+export interface InquireCkafkaPriceResp {
+  /**
+      * 实例价格
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstancePrice: InquiryPrice
+
+  /**
+      * 公网带宽价格
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PublicNetworkBandwidthPrice: InquiryPrice
 }
 
 /**
@@ -3033,6 +3110,136 @@ export interface MongoDBConnectParam {
 }
 
 /**
+ * MySQL类型入参
+ */
+export interface MySQLParam {
+  /**
+   * MySQL的数据库名称，"*"为全数据库
+   */
+  Database: string
+
+  /**
+   * MySQL的数据表名称，"*"为所监听的所有数据库中的非系统表，可以","间隔，监听多个数据表，但数据表需要以"数据库名.数据表名"的格式进行填写，需要填入正则表达式时，格式为"数据库名\\.数据表名"
+   */
+  Table: string
+
+  /**
+   * 该MySQL在连接管理内的Id
+   */
+  Resource: string
+
+  /**
+   * 复制存量信息(schema_only不复制, initial全量)，默认位initial
+   */
+  SnapshotMode?: string
+
+  /**
+   * 存放MySQL的Ddl信息的Topic，为空则默认不存放
+   */
+  DdlTopic?: string
+
+  /**
+   * "TABLE" 表示读取项为 table，"QUERY" 表示读取项为 query
+   */
+  DataSourceMonitorMode?: string
+
+  /**
+   * 当 "DataMonitorMode"="TABLE" 时，传入需要读取的 Table；当 "DataMonitorMode"="QUERY" 时，传入需要读取的查询 sql 语句
+   */
+  DataSourceMonitorResource?: string
+
+  /**
+   * "TIMESTAMP" 表示增量列为时间戳类型，"INCREMENT" 表示增量列为自增 id 类型
+   */
+  DataSourceIncrementMode?: string
+
+  /**
+   * 传入需要监听的列名称
+   */
+  DataSourceIncrementColumn?: string
+
+  /**
+   * "HEAD" 表示复制存量 + 增量数据，"TAIL" 表示只复制增量数据
+   */
+  DataSourceStartFrom?: string
+
+  /**
+   * "INSERT" 表示使用 Insert 模式插入，"UPSERT" 表示使用 Upsert 模式插入
+   */
+  DataTargetInsertMode?: string
+
+  /**
+   * 当 "DataInsertMode"="UPSERT" 时，传入当前 upsert 时依赖的主键
+   */
+  DataTargetPrimaryKeyField?: string
+
+  /**
+   * 表与消息间的映射关系
+   */
+  DataTargetRecordMapping?: Array<RecordMapping>
+
+  /**
+   * 事件路由到特定主题的正则表达式，默认为(.*)
+   */
+  TopicRegex?: string
+
+  /**
+   * TopicRegex的引用组，指定$1、$2等
+   */
+  TopicReplacement?: string
+
+  /**
+   * 格式：库1.表1:字段1,字段2;库2.表2:字段2，表之间;（分号）隔开，字段之间,（逗号）隔开。不指定的表默认取表的主键
+   */
+  KeyColumns?: string
+
+  /**
+   * Mysql 是否抛弃解析失败的消息，默认为true
+   */
+  DropInvalidMessage?: boolean
+
+  /**
+   * 当设置成员参数DropInvalidMessageToCls设置为true时,DropInvalidMessage参数失效
+   */
+  DropCls?: DropCls
+
+  /**
+   * 输出格式，DEFAULT、CANAL_1、CANAL_2
+   */
+  OutputFormat?: string
+
+  /**
+   * 当Table输入的是前缀时，该项值为true，否则为false
+   */
+  IsTablePrefix?: boolean
+
+  /**
+   * 如果该值为all，则DDL数据以及DML数据也会写入到选中的topic；若该值为dml，则只有DML数据写入到选中的topic
+   */
+  IncludeContentChanges?: string
+
+  /**
+   * 如果该值为true，且MySQL中"binlog_rows_query_log_events"配置项的值为"ON"，则流入到topic的数据包含原SQL语句；若该值为false，流入到topic的数据不包含原SQL语句
+   */
+  IncludeQuery?: boolean
+
+  /**
+   * 如果该值为 true，则消息中会携带消息结构体对应的schema，如果该值为false则不会携带
+   */
+  RecordWithSchema?: boolean
+
+  /**
+   * 存放信令表的数据库名称
+   */
+  SignalDatabase?: string
+
+  /**
+   * 输入的table是否为正则表达式，如果该选项以及IsTablePrefix同时为true，该选项的判断优先级高于IsTablePrefix
+   */
+  IsTableRegular?: boolean
+}
+
+/**
  * 集群信息实体
  */
 export interface ClusterInfo {
@@ -3856,6 +4063,21 @@ export interface DescribeInstanceAttributesRequest {
    * 实例id
    */
   InstanceId: string
+}
+
+/**
+ * 公网带宽参数
+ */
+export interface InquiryPublicNetworkParam {
+  /**
+   * 公网计费模式: BANDWIDTH_PREPAID(包年包月), BANDWIDTH_POSTPAID_BY_HOUR(带宽按小时计费)
+   */
+  PublicNetworkChargeType?: string
+
+  /**
+   * 公网带宽, 单位MB
+   */
+  PublicNetworkMonthly?: number
 }
 
 /**
@@ -5143,68 +5365,38 @@ export interface FetchMessageListByOffsetResponse {
 }
 
 /**
- * MongoDB类型入参
+ * 详细类别的价格
  */
-export interface MongoDBParam {
+export interface InquiryDetailPrice {
   /**
-   * MongoDB的数据库名称
-   */
-  Database: string
+      * 额外内网带宽价格
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BandwidthPrice: InquiryBasePrice
 
   /**
-   * MongoDB的集群
-   */
-  Collection: string
+      * 硬盘价格
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DiskPrice: InquiryBasePrice
 
   /**
-   * 是否复制存量数据，默认传参true
-   */
-  CopyExisting: boolean
+      * 额外分区价格
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PartitionPrice: InquiryBasePrice
 
   /**
-   * 实例资源
-   */
-  Resource: string
+      * 额外Topic价格
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TopicPrice: InquiryBasePrice
 
   /**
-   * MongoDB的连接ip
-   */
-  Ip?: string
-
-  /**
-   * MongoDB的连接port
-   */
-  Port?: number
-
-  /**
-   * MongoDB数据库用户名
-   */
-  UserName?: string
-
-  /**
-   * MongoDB数据库密码
-   */
-  Password?: string
-
-  /**
-   * 监听事件类型，为空时表示全选。取值包括insert,update,replace,delete,invalidate,drop,dropdatabase,rename，多个类型间使用,逗号分隔
-   */
-  ListeningEvent?: string
-
-  /**
-   * 主从优先级，默认主节点
-   */
-  ReadPreference?: string
-
-  /**
-   * 聚合管道
-   */
-  Pipeline?: string
-
-  /**
-   * 是否为自建集群
-   */
-  SelfBuilt?: boolean
+      * 实例套餐价格
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceTypePrice: InquiryBasePrice
 }
 
 /**
@@ -5511,6 +5703,46 @@ export interface InstanceAttributesResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   DynamicDiskConfig: DynamicDiskConfig
+}
+
+/**
+ * CreateInstancePost请求参数结构体
+ */
+export interface CreateInstancePostRequest {
+  /**
+   * 实例名称，是一个不超过 64 个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)
+   */
+  InstanceName: string
+
+  /**
+   * 实例带宽
+   */
+  BandWidth: number
+
+  /**
+   * vpcId，不填默认基础网络
+   */
+  VpcId?: string
+
+  /**
+   * 子网id，vpc网络需要传该参数，基础网络可以不传
+   */
+  SubnetId?: string
+
+  /**
+   * 可选。实例日志的最长保留时间，单位分钟，默认为10080（7天），最大30天，不填默认0，代表不开启日志保留时间回收策略
+   */
+  MsgRetentionTime?: number
+
+  /**
+   * 可用区
+   */
+  ZoneId?: number
+
+  /**
+   * 创建实例时可以选择集群Id, 该入参表示集群Id
+   */
+  ClusterId?: number
 }
 
 /**
@@ -5969,6 +6201,21 @@ export interface CreateConsumerRequest {
 }
 
 /**
+ * InquireCkafkaPrice返回参数结构体
+ */
+export interface InquireCkafkaPriceResponse {
+  /**
+   * 出参
+   */
+  Result: InquireCkafkaPriceResp
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeRoute请求参数结构体
  */
 export interface DescribeRouteRequest {
@@ -5979,25 +6226,73 @@ export interface DescribeRouteRequest {
 }
 
 /**
- * 数据处理ROW输出格式配置
+ * InquireCkafkaPrice请求参数结构体
  */
-export interface RowParam {
+export interface InquireCkafkaPriceRequest {
   /**
-   * 行内容，KEY_VALUE，VALUE
+   * 国内站标准版填写standards2, 专业版填写profession
    */
-  RowContent: string
+  InstanceType: string
 
   /**
-      * key和value间的分隔符
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  KeyValueDelimiter?: string
+   * 购买/续费付费类型(购买时不填的话, 默认获取购买包年包月一个月的费用)
+   */
+  InstanceChargeParam?: InstanceChargeParam
 
   /**
-      * 元素建的分隔符
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  EntryDelimiter?: string
+   * 购买/续费时购买的实例数量(不填时, 默认为1个)
+   */
+  InstanceNum?: number
+
+  /**
+   * 实例内网带宽大小, 单位MB/s (购买时必填)
+   */
+  Bandwidth?: number
+
+  /**
+   * 实例的硬盘购买类型以及大小 (购买时必填)
+   */
+  InquiryDiskParam?: InquiryDiskParam
+
+  /**
+   * 实例消息保留时间大小, 单位小时 (购买时必填)
+   */
+  MessageRetention?: number
+
+  /**
+   * 购买实例topic数, 单位个 (购买时必填)
+   */
+  Topic?: number
+
+  /**
+   * 购买实例分区数, 单位个 (购买时必填)
+   */
+  Partition?: number
+
+  /**
+   * 购买地域, 可通过查看DescribeCkafkaZone这个接口获取ZoneId
+   */
+  ZoneIds?: Array<number>
+
+  /**
+   * 标记操作, 新购填写purchase, 续费填写renew, (不填时, 默认为purchase)
+   */
+  CategoryAction?: string
+
+  /**
+   * 国内站购买的版本, sv_ckafka_instance_s2_1(入门型), sv_ckafka_instance_s2_2(标准版), sv_ckafka_instance_s2_3(进阶型), 如果instanceType为standards2, 但该参数为空, 则默认值为sv_ckafka_instance_s2_1
+   */
+  BillType?: string
+
+  /**
+   * 公网带宽计费模式, 目前只有专业版支持公网带宽 (购买公网带宽时必填)
+   */
+  PublicNetworkParam?: InquiryPublicNetworkParam
+
+  /**
+   * 续费时的实例id, 续费时填写
+   */
+  InstanceId?: string
 }
 
 /**
@@ -6159,6 +6454,77 @@ export interface DescribeDatahubGroupOffsetsRequest {
    * 本次返回结果的最大个数，默认为50，最大值为50
    */
   Limit?: number
+}
+
+/**
+ * 询价返回参数
+ */
+export interface InquiryBasePrice {
+  /**
+      * 单位原价
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UnitPrice: number
+
+  /**
+      * 折扣单位价格
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UnitPriceDiscount: number
+
+  /**
+      * 合计原价
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OriginalPrice: number
+
+  /**
+      * 折扣合计价格
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DiscountPrice: number
+
+  /**
+      * 折扣(单位是%)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Discount: number
+
+  /**
+      * 商品数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  GoodsNum: number
+
+  /**
+      * 付费货币
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Currency: string
+
+  /**
+      * 硬盘专用返回参数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DiskType: string
+
+  /**
+      * 购买时长
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TimeSpan: number
+
+  /**
+      * 购买时长单位("m"按月, "h"按小时)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TimeUnit: string
+
+  /**
+      * 购买数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Value: number
 }
 
 /**
@@ -6742,6 +7108,21 @@ export interface ModifyConnectResourceResponse {
 }
 
 /**
+ * 实例购买付费参数
+ */
+export interface InstanceChargeParam {
+  /**
+   * 实例付费类型: PREPAID(包年包月), POSTPAID_BY_HOUR(按量付费)
+   */
+  InstanceChargeType?: string
+
+  /**
+   * 购买时长: 包年包月时需要填写, 按量计费无需填写
+   */
+  InstanceChargePeriod?: number
+}
+
+/**
  * CreateDatahubTask请求参数结构体
  */
 export interface CreateDatahubTaskRequest {
@@ -6797,73 +7178,80 @@ export interface CreateDatahubTaskRequest {
 }
 
 /**
- * PostgreSQL类型入参
+ * 询价返回参数
  */
-export interface PostgreSQLParam {
+export interface InquiryPrice {
   /**
-   * PostgreSQL的数据库名称
-   */
-  Database: string
+      * 单位原价
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UnitPrice: number
 
   /**
-   * PostgreSQL的数据表名称，"*"为所监听的所有数据库中的非系统表，可以","间隔，监听多个数据表，但数据表需要以"Schema名.数据表名"的格式进行填写，需要填入正则表达式时，格式为"Schema名\\.数据表名"
-   */
-  Table: string
+      * 折扣单位价格
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UnitPriceDiscount: number
 
   /**
-   * 该PostgreSQL在连接管理内的Id
-   */
-  Resource: string
+      * 合计原价
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OriginalPrice: number
 
   /**
-   * 插件名(decoderbufs/pgoutput)，默认为decoderbufs
-   */
-  PluginName: string
+      * 折扣合计价格
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DiscountPrice: number
 
   /**
-   * 复制存量信息(never增量, initial全量)，默认为initial
-   */
-  SnapshotMode?: string
+      * 折扣(单位是%)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Discount: number
 
   /**
-   * 上游数据格式(JSON/Debezium), 当数据库同步模式为默认字段匹配时,必填
-   */
-  DataFormat?: string
+      * 商品数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  GoodsNum: number
 
   /**
-   * "INSERT" 表示使用 Insert 模式插入，"UPSERT" 表示使用 Upsert 模式插入
-   */
-  DataTargetInsertMode?: string
+      * 付费货币
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Currency: string
 
   /**
-   * 当 "DataInsertMode"="UPSERT" 时，传入当前 upsert 时依赖的主键
-   */
-  DataTargetPrimaryKeyField?: string
+      * 硬盘专用返回参数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DiskType: string
 
   /**
-   * 表与消息间的映射关系
-   */
-  DataTargetRecordMapping?: Array<RecordMapping>
+      * 购买时长
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TimeSpan: number
 
   /**
-   * 是否抛弃解析失败的消息，默认为true
-   */
-  DropInvalidMessage?: boolean
+      * 购买时长单位("m"按月, "h"按小时)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TimeUnit: string
 
   /**
-   * 输入的table是否为正则表达式
-   */
-  IsTableRegular?: boolean
+      * 购买数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Value: number
 
   /**
-   * 格式：库1.表1:字段1,字段2;库2.表2:字段2，表之间;（分号）隔开，字段之间,（逗号）隔开。不指定的表默认取表的主键
-   */
-  KeyColumns?: string
-
-  /**
-   * 如果该值为 true，则消息中会携带消息结构体对应的schema，如果该值为false则不会携带
-   */
-  RecordWithSchema?: boolean
+      * 详细类别的价格
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DetailPrices: InquiryDetailPrice
 }
 
 /**
@@ -7127,6 +7515,76 @@ export interface CreateTopicIpWhiteListRequest {
 }
 
 /**
+ * PostgreSQL类型入参
+ */
+export interface PostgreSQLParam {
+  /**
+   * PostgreSQL的数据库名称
+   */
+  Database: string
+
+  /**
+   * PostgreSQL的数据表名称，"*"为所监听的所有数据库中的非系统表，可以","间隔，监听多个数据表，但数据表需要以"Schema名.数据表名"的格式进行填写，需要填入正则表达式时，格式为"Schema名\\.数据表名"
+   */
+  Table: string
+
+  /**
+   * 该PostgreSQL在连接管理内的Id
+   */
+  Resource: string
+
+  /**
+   * 插件名(decoderbufs/pgoutput)，默认为decoderbufs
+   */
+  PluginName: string
+
+  /**
+   * 复制存量信息(never增量, initial全量)，默认为initial
+   */
+  SnapshotMode?: string
+
+  /**
+   * 上游数据格式(JSON/Debezium), 当数据库同步模式为默认字段匹配时,必填
+   */
+  DataFormat?: string
+
+  /**
+   * "INSERT" 表示使用 Insert 模式插入，"UPSERT" 表示使用 Upsert 模式插入
+   */
+  DataTargetInsertMode?: string
+
+  /**
+   * 当 "DataInsertMode"="UPSERT" 时，传入当前 upsert 时依赖的主键
+   */
+  DataTargetPrimaryKeyField?: string
+
+  /**
+   * 表与消息间的映射关系
+   */
+  DataTargetRecordMapping?: Array<RecordMapping>
+
+  /**
+   * 是否抛弃解析失败的消息，默认为true
+   */
+  DropInvalidMessage?: boolean
+
+  /**
+   * 输入的table是否为正则表达式
+   */
+  IsTableRegular?: boolean
+
+  /**
+   * 格式：库1.表1:字段1,字段2;库2.表2:字段2，表之间;（分号）隔开，字段之间,（逗号）隔开。不指定的表默认取表的主键
+   */
+  KeyColumns?: string
+
+  /**
+   * 如果该值为 true，则消息中会携带消息结构体对应的schema，如果该值为false则不会携带
+   */
+  RecordWithSchema?: boolean
+}
+
+/**
  * MariaDB连接源参数
  */
 export interface MariaDBConnectParam {
@@ -7236,26 +7694,68 @@ export interface Acl {
 }
 
 /**
- * Topic消息保留时间配置返回信息
+ * MongoDB类型入参
  */
-export interface TopicRetentionTimeConfigRsp {
+export interface MongoDBParam {
   /**
-      * 期望值，即用户配置的Topic消息保留时间(单位分钟)
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Expect: number
+   * MongoDB的数据库名称
+   */
+  Database: string
 
   /**
-      * 当前值，即当前生效值(可能存在动态调整，单位分钟)
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Current: number
+   * MongoDB的集群
+   */
+  Collection: string
 
   /**
-      * 最近变更时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ModTimeStamp: number
+   * 是否复制存量数据，默认传参true
+   */
+  CopyExisting: boolean
+
+  /**
+   * 实例资源
+   */
+  Resource: string
+
+  /**
+   * MongoDB的连接ip
+   */
+  Ip?: string
+
+  /**
+   * MongoDB的连接port
+   */
+  Port?: number
+
+  /**
+   * MongoDB数据库用户名
+   */
+  UserName?: string
+
+  /**
+   * MongoDB数据库密码
+   */
+  Password?: string
+
+  /**
+   * 监听事件类型，为空时表示全选。取值包括insert,update,replace,delete,invalidate,drop,dropdatabase,rename，多个类型间使用,逗号分隔
+   */
+  ListeningEvent?: string
+
+  /**
+   * 主从优先级，默认主节点
+   */
+  ReadPreference?: string
+
+  /**
+   * 聚合管道
+   */
+  Pipeline?: string
+
+  /**
+   * 是否为自建集群
+   */
+  SelfBuilt?: boolean
 }
 
 /**
@@ -7657,133 +8157,18 @@ export interface DescribeUserRequest {
 }
 
 /**
- * MySQL类型入参
+ * 购买硬盘参数
  */
-export interface MySQLParam {
+export interface InquiryDiskParam {
   /**
-   * MySQL的数据库名称，"*"为全数据库
+   * 购买硬盘类型: SSD(SSD), CLOUD_SSD(SSD云硬盘), CLOUD_PREMIUM(高性能云硬盘), CLOUD_BASIC(云盘)
    */
-  Database: string
+  DiskType?: string
 
   /**
-   * MySQL的数据表名称，"*"为所监听的所有数据库中的非系统表，可以","间隔，监听多个数据表，但数据表需要以"数据库名.数据表名"的格式进行填写，需要填入正则表达式时，格式为"数据库名\\.数据表名"
+   * 购买硬盘大小: 单位GB
    */
-  Table: string
-
-  /**
-   * 该MySQL在连接管理内的Id
-   */
-  Resource: string
-
-  /**
-   * 复制存量信息(schema_only不复制, initial全量)，默认位initial
-   */
-  SnapshotMode?: string
-
-  /**
-   * 存放MySQL的Ddl信息的Topic，为空则默认不存放
-   */
-  DdlTopic?: string
-
-  /**
-   * "TABLE" 表示读取项为 table，"QUERY" 表示读取项为 query
-   */
-  DataSourceMonitorMode?: string
-
-  /**
-   * 当 "DataMonitorMode"="TABLE" 时，传入需要读取的 Table；当 "DataMonitorMode"="QUERY" 时，传入需要读取的查询 sql 语句
-   */
-  DataSourceMonitorResource?: string
-
-  /**
-   * "TIMESTAMP" 表示增量列为时间戳类型，"INCREMENT" 表示增量列为自增 id 类型
-   */
-  DataSourceIncrementMode?: string
-
-  /**
-   * 传入需要监听的列名称
-   */
-  DataSourceIncrementColumn?: string
-
-  /**
-   * "HEAD" 表示复制存量 + 增量数据，"TAIL" 表示只复制增量数据
-   */
-  DataSourceStartFrom?: string
-
-  /**
-   * "INSERT" 表示使用 Insert 模式插入，"UPSERT" 表示使用 Upsert 模式插入
-   */
-  DataTargetInsertMode?: string
-
-  /**
-   * 当 "DataInsertMode"="UPSERT" 时，传入当前 upsert 时依赖的主键
-   */
-  DataTargetPrimaryKeyField?: string
-
-  /**
-   * 表与消息间的映射关系
-   */
-  DataTargetRecordMapping?: Array<RecordMapping>
-
-  /**
-   * 事件路由到特定主题的正则表达式，默认为(.*)
-   */
-  TopicRegex?: string
-
-  /**
-   * TopicRegex的引用组，指定$1、$2等
-   */
-  TopicReplacement?: string
-
-  /**
-   * 格式：库1.表1:字段1,字段2;库2.表2:字段2，表之间;（分号）隔开，字段之间,（逗号）隔开。不指定的表默认取表的主键
-   */
-  KeyColumns?: string
-
-  /**
-   * Mysql 是否抛弃解析失败的消息，默认为true
-   */
-  DropInvalidMessage?: boolean
-
-  /**
-   * 当设置成员参数DropInvalidMessageToCls设置为true时,DropInvalidMessage参数失效
-   */
-  DropCls?: DropCls
-
-  /**
-   * 输出格式，DEFAULT、CANAL_1、CANAL_2
-   */
-  OutputFormat?: string
-
-  /**
-   * 当Table输入的是前缀时，该项值为true，否则为false
-   */
-  IsTablePrefix?: boolean
-
-  /**
-   * 如果该值为all，则DDL数据以及DML数据也会写入到选中的topic；若该值为dml，则只有DML数据写入到选中的topic
-   */
-  IncludeContentChanges?: string
-
-  /**
-   * 如果该值为true，且MySQL中"binlog_rows_query_log_events"配置项的值为"ON"，则流入到topic的数据包含原SQL语句；若该值为false，流入到topic的数据不包含原SQL语句
-   */
-  IncludeQuery?: boolean
-
-  /**
-   * 如果该值为 true，则消息中会携带消息结构体对应的schema，如果该值为false则不会携带
-   */
-  RecordWithSchema?: boolean
-
-  /**
-   * 存放信令表的数据库名称
-   */
-  SignalDatabase?: string
-
-  /**
-   * 输入的table是否为正则表达式，如果该选项以及IsTablePrefix同时为true，该选项的判断优先级高于IsTablePrefix
-   */
-  IsTableRegular?: boolean
+  DiskSize?: number
 }
 
 /**

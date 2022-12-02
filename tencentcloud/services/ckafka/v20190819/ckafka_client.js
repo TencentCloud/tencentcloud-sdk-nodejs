@@ -58,6 +58,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeConnectResource", req, cb);
     }
     /**
+     * 创建按量计费实例
+     */
+    async CreateInstancePost(req, cb) {
+        return this.request("CreateInstancePost", req, cb);
+    }
+    /**
      * 查询订阅某主题消息分组信息
      */
     async DescribeTopicSubscribeGroup(req, cb) {
@@ -106,10 +112,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateTopicIpWhiteList", req, cb);
     }
     /**
-     * 删除Datahub任务
+     * 删除Datahub连接源
      */
-    async DeleteDatahubTask(req, cb) {
-        return this.request("DeleteDatahubTask", req, cb);
+    async DeleteConnectResource(req, cb) {
+        return this.request("DeleteConnectResource", req, cb);
     }
     /**
      * 枚举消费分组(精简版)
@@ -142,10 +148,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateRoute", req, cb);
     }
     /**
-     * 删除Datahub连接源
+     * 删除Datahub任务
      */
-    async DeleteConnectResource(req, cb) {
-        return this.request("DeleteConnectResource", req, cb);
+    async DeleteDatahubTask(req, cb) {
+        return this.request("DeleteDatahubTask", req, cb);
     }
     /**
      * 删除消费组
@@ -418,6 +424,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyPassword(req, cb) {
         return this.request("ModifyPassword", req, cb);
+    }
+    /**
+     * Ckafka实例购买/续费询价
+     */
+    async InquireCkafkaPrice(req, cb) {
+        return this.request("InquireCkafkaPrice", req, cb);
     }
 }
 exports.Client = Client;

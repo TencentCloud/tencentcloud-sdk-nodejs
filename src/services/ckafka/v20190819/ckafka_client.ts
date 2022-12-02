@@ -20,9 +20,11 @@ import { ClientConfig } from "../../../common/interface"
 import {
   TopicDetail,
   DeleteAclRequest,
+  CreateInstancePostResponse,
   DropCls,
   PostgreSQLModifyConnectParam,
   GroupInfoMember,
+  RowParam,
   EsConnectParam,
   BatchCreateAclRequest,
   DescribeDatahubTaskResponse,
@@ -30,6 +32,7 @@ import {
   PartitionOffset,
   SQLServerConnectParam,
   CreateConnectResourceResponse,
+  TopicRetentionTimeConfigRsp,
   BatchModifyTopicResultDTO,
   SubscribedInfo,
   DescribeTopicAttributesRequest,
@@ -49,6 +52,7 @@ import {
   CancelAuthorizationTokenRequest,
   CancelAuthorizationTokenResponse,
   MySQLConnectParam,
+  InquireCkafkaPriceResp,
   CreateRouteRequest,
   SQLServerModifyConnectParam,
   DeleteTopicRequest,
@@ -112,6 +116,7 @@ import {
   DescribeDatahubTaskRes,
   CreatePartitionResponse,
   MongoDBConnectParam,
+  MySQLParam,
   ClusterInfo,
   DeleteGroupRequest,
   DescribeConsumerGroupRequest,
@@ -140,6 +145,7 @@ import {
   DeleteInstancePreResponse,
   TableMapping,
   DescribeInstanceAttributesRequest,
+  InquiryPublicNetworkParam,
   TopicInSyncReplicaInfo,
   DeleteConnectResourceResponse,
   DescribeRegionRequest,
@@ -190,13 +196,14 @@ import {
   DeleteDatahubTopicResponse,
   DescribeConsumerGroupResponse,
   FetchMessageListByOffsetResponse,
-  MongoDBParam,
+  InquiryDetailPrice,
   DeleteDatahubTaskRequest,
   DescribeGroupOffsetsRequest,
   DeleteRouteTriggerTimeRequest,
   DeleteDatahubTaskResponse,
   DescribeInstancesRequest,
   InstanceAttributesResponse,
+  CreateInstancePostRequest,
   DescribeConnectResourceResponse,
   DescribeGroupRequest,
   Filter,
@@ -218,14 +225,16 @@ import {
   SubstrParam,
   FetchMessageByOffsetResponse,
   CreateConsumerRequest,
+  InquireCkafkaPriceResponse,
   DescribeRouteRequest,
-  RowParam,
+  InquireCkafkaPriceRequest,
   DateParam,
   ValueParam,
   DescribeDatahubTasksResponse,
   TopicInSyncReplicaResult,
   SendMessageResponse,
   DescribeDatahubGroupOffsetsRequest,
+  InquiryBasePrice,
   DescribeCkafkaZoneResponse,
   BatchModifyGroupOffsetsRequest,
   TopicAttributesResponse,
@@ -246,8 +255,9 @@ import {
   DescribeRouteResponse,
   EsModifyConnectParam,
   ModifyConnectResourceResponse,
+  InstanceChargeParam,
   CreateDatahubTaskRequest,
-  PostgreSQLParam,
+  InquiryPrice,
   TopicResult,
   DescribeTopicDetailRequest,
   DescribeGroupOffsetsResponse,
@@ -259,10 +269,11 @@ import {
   BatchModifyTopicAttributesRequest,
   DeleteGroupResponse,
   CreateTopicIpWhiteListRequest,
+  PostgreSQLParam,
   MariaDBConnectParam,
   AclRuleInfo,
   Acl,
-  TopicRetentionTimeConfigRsp,
+  MongoDBParam,
   TopicParam,
   ModifyTopicAttributesRequest,
   SecondaryAnalyseParam,
@@ -273,7 +284,7 @@ import {
   CreateDatahubTaskResponse,
   ClickHouseConnectParam,
   DescribeUserRequest,
-  MySQLParam,
+  InquiryDiskParam,
   DescribeTopicSyncReplicaRequest,
   ModifyDatahubTaskRequest,
   InstanceDetail,
@@ -343,6 +354,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeConnectResourceResponse) => void
   ): Promise<DescribeConnectResourceResponse> {
     return this.request("DescribeConnectResource", req, cb)
+  }
+
+  /**
+   * 创建按量计费实例
+   */
+  async CreateInstancePost(
+    req: CreateInstancePostRequest,
+    cb?: (error: string, rep: CreateInstancePostResponse) => void
+  ): Promise<CreateInstancePostResponse> {
+    return this.request("CreateInstancePost", req, cb)
   }
 
   /**
@@ -426,13 +447,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除Datahub任务
+   * 删除Datahub连接源
    */
-  async DeleteDatahubTask(
-    req: DeleteDatahubTaskRequest,
-    cb?: (error: string, rep: DeleteDatahubTaskResponse) => void
-  ): Promise<DeleteDatahubTaskResponse> {
-    return this.request("DeleteDatahubTask", req, cb)
+  async DeleteConnectResource(
+    req: DeleteConnectResourceRequest,
+    cb?: (error: string, rep: DeleteConnectResourceResponse) => void
+  ): Promise<DeleteConnectResourceResponse> {
+    return this.request("DeleteConnectResource", req, cb)
   }
 
   /**
@@ -486,13 +507,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除Datahub连接源
+   * 删除Datahub任务
    */
-  async DeleteConnectResource(
-    req: DeleteConnectResourceRequest,
-    cb?: (error: string, rep: DeleteConnectResourceResponse) => void
-  ): Promise<DeleteConnectResourceResponse> {
-    return this.request("DeleteConnectResource", req, cb)
+  async DeleteDatahubTask(
+    req: DeleteDatahubTaskRequest,
+    cb?: (error: string, rep: DeleteDatahubTaskResponse) => void
+  ): Promise<DeleteDatahubTaskResponse> {
+    return this.request("DeleteDatahubTask", req, cb)
   }
 
   /**
@@ -945,5 +966,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyPasswordResponse) => void
   ): Promise<ModifyPasswordResponse> {
     return this.request("ModifyPassword", req, cb)
+  }
+
+  /**
+   * Ckafka实例购买/续费询价
+   */
+  async InquireCkafkaPrice(
+    req: InquireCkafkaPriceRequest,
+    cb?: (error: string, rep: InquireCkafkaPriceResponse) => void
+  ): Promise<InquireCkafkaPriceResponse> {
+    return this.request("InquireCkafkaPrice", req, cb)
   }
 }

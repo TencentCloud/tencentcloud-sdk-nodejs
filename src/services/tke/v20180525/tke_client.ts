@@ -75,7 +75,7 @@ import {
   CheckInstancesUpgradeAbleRequest,
   ModifyPrometheusTemplateRequest,
   DeleteEdgeClusterInstancesRequest,
-  InstallEdgeLogAgentRequest,
+  DescribeImageCachesRequest,
   DescribePrometheusAlertRuleRequest,
   DescribeEdgeAvailableExtraArgsRequest,
   ExistedInstance,
@@ -136,6 +136,7 @@ import {
   CreateTKEEdgeClusterResponse,
   DescribeEdgeClusterExtraArgsResponse,
   ResourceDeleteOption,
+  InstallEdgeLogAgentRequest,
   CheckEdgeClusterCIDRRequest,
   CreateImageCacheRequest,
   UpdateClusterVersionRequest,
@@ -145,7 +146,6 @@ import {
   DescribeClusterNodePoolDetailResponse,
   DescribeEKSContainerInstanceEventRequest,
   ScaleOutClusterMasterResponse,
-  DescribeImageCachesRequest,
   Toleration,
   CreateEKSContainerInstancesResponse,
   DeleteEdgeCVMInstancesResponse,
@@ -251,6 +251,7 @@ import {
   InstanceUpgradePreCheckResultItem,
   DeleteClusterNodePoolResponse,
   DeleteImageCachesRequest,
+  ReleaseValues,
   CreateClusterNodePoolResponse,
   Filter,
   UpdateTKEEdgeClusterResponse,
@@ -327,6 +328,7 @@ import {
   DeleteTKEEdgeClusterRequest,
   CreatePrometheusGlobalNotificationResponse,
   DescribeClusterAuthenticationOptionsResponse,
+  CreateClusterReleaseRequest,
   DescribePrometheusAgentsRequest,
   AddClusterCIDRResponse,
   DescribePrometheusInstanceInitStatusRequest,
@@ -458,6 +460,7 @@ import {
   DescribeECMInstancesResponse,
   DescribePrometheusInstanceRequest,
   DeletePrometheusAlertRuleRequest,
+  CreateClusterReleaseResponse,
   EdgeClusterExtraArgs,
   DescribePrometheusTargetsResponse,
   DescribeEnableVpcCniProgressResponse,
@@ -496,6 +499,7 @@ import {
   PrometheusInstanceOverview,
   ScaleInMaster,
   RunPrometheusInstanceRequest,
+  PendingRelease,
 } from "./tke_models"
 
 /**
@@ -1925,6 +1929,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteClusterEndpointResponse) => void
   ): Promise<DeleteClusterEndpointResponse> {
     return this.request("DeleteClusterEndpoint", req, cb)
+  }
+
+  /**
+   * 在应用市场中集群创建应用
+   */
+  async CreateClusterRelease(
+    req: CreateClusterReleaseRequest,
+    cb?: (error: string, rep: CreateClusterReleaseResponse) => void
+  ): Promise<CreateClusterReleaseResponse> {
+    return this.request("CreateClusterRelease", req, cb)
   }
 
   /**

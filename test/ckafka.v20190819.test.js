@@ -68,6 +68,16 @@ it("ckafka.v20190819.DescribeConnectResource", async function () {
     }
 })
 
+it("ckafka.v20190819.CreateInstancePost", async function () {
+    try {
+       const data = await client.CreateInstancePost({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ckafka.v20190819.DescribeTopicSubscribeGroup", async function () {
     try {
        const data = await client.DescribeTopicSubscribeGroup({})
@@ -148,9 +158,9 @@ it("ckafka.v20190819.CreateTopicIpWhiteList", async function () {
     }
 })
 
-it("ckafka.v20190819.DeleteDatahubTask", async function () {
+it("ckafka.v20190819.DeleteConnectResource", async function () {
     try {
-       const data = await client.DeleteDatahubTask({})
+       const data = await client.DeleteConnectResource({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -208,9 +218,9 @@ it("ckafka.v20190819.CreateRoute", async function () {
     }
 })
 
-it("ckafka.v20190819.DeleteConnectResource", async function () {
+it("ckafka.v20190819.DeleteDatahubTask", async function () {
     try {
-       const data = await client.DeleteConnectResource({})
+       const data = await client.DeleteDatahubTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -661,6 +671,16 @@ it("ckafka.v20190819.DeleteTopic", async function () {
 it("ckafka.v20190819.ModifyPassword", async function () {
     try {
        const data = await client.ModifyPassword({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ckafka.v20190819.InquireCkafkaPrice", async function () {
+    try {
+       const data = await client.InquireCkafkaPrice({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
