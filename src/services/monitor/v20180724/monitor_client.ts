@@ -76,6 +76,7 @@ import {
   UpdateServiceDiscoveryResponse,
   ModifyAlarmPolicyTasksResponse,
   DescribeBaseMetricsResponse,
+  PrometheusZoneItem,
   DimensionNew,
   CreatePrometheusMultiTenantInstancePostPayModeRequest,
   MetricDataPoint,
@@ -158,6 +159,7 @@ import {
   DestroyPrometheusInstanceRequest,
   PrometheusInstanceGrantInfo,
   UnbindPrometheusManagedGrafanaRequest,
+  DescribePrometheusZonesRequest,
   TemplateGroup,
   DescribeBindingPolicyObjectListInstance,
   ModifyPolicyGroupCondition,
@@ -205,12 +207,13 @@ import {
   DescribeAlarmHistoriesRequest,
   MetricObjectMeaning,
   DeletePolicyGroupRequest,
-  EnableSSOCamCheckRequest,
+  DescribePrometheusZonesResponse,
   ModifyPolicyGroupResponse,
   DeleteGrafanaIntegrationResponse,
   DescribeInstalledPluginsRequest,
   DescribeAlarmMetricsResponse,
   Condition,
+  EnableSSOCamCheckRequest,
   DeleteGrafanaInstanceResponse,
   DescribeGrafanaWhiteListRequest,
   PutMonitorDataRequest,
@@ -455,6 +458,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpdateSSOAccountResponse) => void
   ): Promise<UpdateSSOAccountResponse> {
     return this.request("UpdateSSOAccount", req, cb)
+  }
+
+  /**
+   * 列出 Prometheus 服务可用区
+   */
+  async DescribePrometheusZones(
+    req: DescribePrometheusZonesRequest,
+    cb?: (error: string, rep: DescribePrometheusZonesResponse) => void
+  ): Promise<DescribePrometheusZonesResponse> {
+    return this.request("DescribePrometheusZones", req, cb)
   }
 
   /**

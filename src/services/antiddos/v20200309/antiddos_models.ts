@@ -1230,12 +1230,12 @@ export interface DescribeOverviewAttackTrendRequest {
   Period: number
 
   /**
-   * 起始时间
+   * 统计开始时间
    */
   StartTime: string
 
   /**
-   * 结束时间
+   * 统计结束时间
    */
   EndTime: string
 }
@@ -2082,7 +2082,7 @@ export interface ModifyDDoSBlackWhiteIpListRequest {
   InstanceId: string
 
   /**
-   * 当前黑名单类型，取值black时黑名单；取值white时白名单
+   * 当前配置的黑白名单类型，取值black时表示黑名单；取值white时表示白名单
    */
   OldIpType: string
 
@@ -2167,12 +2167,12 @@ export interface DescribeOverviewAttackTrendResponse {
   Type: string
 
   /**
-   * 起始时间
+   * 统计起始时间
    */
   StartTime: string
 
   /**
-   * 结束时间
+   * 统计结束时间
    */
   EndTime: string
 
@@ -2442,7 +2442,7 @@ export interface CreateCcGeoIPBlockConfigRequest {
   Protocol: string
 
   /**
-   * CC区域封禁配置，填写参数时配置ID请为空
+   * CC区域封禁配置
    */
   CcGeoIPBlockConfig: CcGeoIPBlockConfig
 }
@@ -2602,7 +2602,7 @@ export interface L4RuleSource {
  */
 export interface DescribePendingRiskInfoResponse {
   /**
-   * 是否为付费用户
+   * 是否为付费用户，true：付费用户， false：普通用户
    */
   IsPaidUsr: boolean
 

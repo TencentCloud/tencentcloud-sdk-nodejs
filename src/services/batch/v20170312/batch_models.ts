@@ -2337,6 +2337,12 @@ export interface Docker {
    * 拉取Docker镜像失败时延迟时间。单位：秒。
    */
   DelayOnRetry?: number
+
+  /**
+      * Docker命令运行参数。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DockerRunOption?: string
 }
 
 /**

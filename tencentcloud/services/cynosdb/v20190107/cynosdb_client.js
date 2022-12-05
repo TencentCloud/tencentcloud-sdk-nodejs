@@ -100,10 +100,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("OfflineCluster", req, cb);
     }
     /**
-     * SetRenewFlag设置实例的自动续费功能
+     * 本接口(SearchClusterDatabases)搜索集群database列表
      */
-    async SetRenewFlag(req, cb) {
-        return this.request("SetRenewFlag", req, cb);
+    async SearchClusterDatabases(req, cb) {
+        return this.request("SearchClusterDatabases", req, cb);
     }
     /**
      * 此接口（ModifyBackupName）用于修改备份文件备注名。
@@ -116,6 +116,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteAuditLogFile(req, cb) {
         return this.request("DeleteAuditLogFile", req, cb);
+    }
+    /**
+     * 本接口(ResetAccountPassword)用于重置实例的数据库账号密码。
+     */
+    async ResetAccountPassword(req, cb) {
+        return this.request("ResetAccountPassword", req, cb);
     }
     /**
      * 本接口(DescribeInstanceDetail)用于查询实例详情。
@@ -206,6 +212,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeMaintainPeriod(req, cb) {
         return this.request("DescribeMaintainPeriod", req, cb);
+    }
+    /**
+     * 本接口(SwitchProxyVpc)更换数据库代理vpc
+     */
+    async SwitchProxyVpc(req, cb) {
+        return this.request("SwitchProxyVpc", req, cb);
     }
     /**
      * 查询集群列表
@@ -374,6 +386,18 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ExportInstanceSlowQueries(req, cb) {
         return this.request("ExportInstanceSlowQueries", req, cb);
+    }
+    /**
+     * SetRenewFlag设置实例的自动续费功能
+     */
+    async SetRenewFlag(req, cb) {
+        return this.request("SetRenewFlag", req, cb);
+    }
+    /**
+     * 本接口(SearchClusterTables)搜索集群数据表列表
+     */
+    async SearchClusterTables(req, cb) {
+        return this.request("SearchClusterTables", req, cb);
     }
     /**
      * 切换到从可用区

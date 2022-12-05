@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { RemoveClusterSlaveZoneRequest, ModifyClusterNameRequest, DescribeRollbackTimeRangeRequest, InquirePriceRenewRequest, DescribeAuditLogsRequest, DescribeBackupConfigRequest, DescribeAccountsRequest, ModifyMaintainPeriodConfigRequest, DescribeRollbackTimeRangeResponse, ModifyBackupNameResponse, ModifyClusterStorageRequest, DescribeAuditLogFilesResponse, SwitchClusterZoneResponse, AssociateSecurityGroupsRequest, DescribeBinlogDownloadUrlRequest, CreateAccountsResponse, ModifyInstanceNameRequest, DescribeDBSecurityGroupsResponse, DescribeMaintainPeriodRequest, DescribeBinlogsResponse, DescribeInstancesResponse, AddClusterSlaveZoneResponse, ModifyClusterNameResponse, DescribeClusterParamsResponse, IsolateInstanceResponse, DescribeParamTemplatesRequest, DescribeAuditLogsResponse, PauseServerlessRequest, RevokeAccountPrivilegesResponse, CreateClustersResponse, SetRenewFlagRequest, ActivateInstanceRequest, AddClusterSlaveZoneRequest, DescribeAccountAllGrantPrivilegesResponse, DescribeClustersRequest, ModifyClusterStorageResponse, DescribeInstanceDetailResponse, ModifyDBInstanceSecurityGroupsResponse, DeleteAuditLogFileResponse, DescribeClusterParamLogsResponse, DescribeClusterInstanceGrpsRequest, DescribeResourcesByDealNameResponse, ResumeServerlessResponse, CreateAccountsRequest, ExportInstanceSlowQueriesResponse, SwitchClusterZoneRequest, DescribeDBSecurityGroupsRequest, RollBackClusterRequest, UpgradeInstanceRequest, DescribeClusterDetailRequest, DeleteBackupResponse, DescribeProjectSecurityGroupsResponse, RemoveClusterSlaveZoneResponse, CreateAuditLogFileResponse, PauseServerlessResponse, OfflineClusterRequest, DescribeBinlogDownloadUrlResponse, DescribeBackupListRequest, ModifyClusterSlaveZoneResponse, GrantAccountPrivilegesRequest, CreateClustersRequest, DescribeClustersResponse, DescribeBackupConfigResponse, ModifyDBInstanceSecurityGroupsRequest, DescribeParamTemplatesResponse, AddInstancesResponse, DescribeProjectSecurityGroupsRequest, ModifyClusterParamResponse, DescribeBackupDownloadUrlRequest, OfflineInstanceRequest, AssociateSecurityGroupsResponse, DescribeResourcesByDealNameRequest, CreateBackupResponse, DescribeRollbackTimeValidityResponse, DescribeInstanceSlowQueriesResponse, DescribeInstancesRequest, DescribeBackupDownloadUrlResponse, ResumeServerlessRequest, InquirePriceCreateRequest, ModifyBackupConfigResponse, DescribeInstanceSpecsRequest, ExportInstanceSlowQueriesRequest, UpgradeInstanceResponse, ModifyAccountParamsRequest, IsolateClusterResponse, OfflineClusterResponse, RevokeAccountPrivilegesRequest, InquirePriceCreateResponse, IsolateInstanceRequest, SetRenewFlagResponse, CreateBackupRequest, DescribeClusterParamLogsRequest, DescribeMaintainPeriodResponse, DescribeBackupListResponse, RollBackClusterResponse, DescribeBinlogSaveDaysRequest, ModifyBackupConfigRequest, ActivateInstanceResponse, DescribeRollbackTimeValidityRequest, CreateAuditLogFileRequest, DeleteAuditLogFileRequest, AddInstancesRequest, ModifyClusterSlaveZoneRequest, GrantAccountPrivilegesResponse, DescribeInstanceSlowQueriesRequest, DescribeInstanceDetailRequest, ModifyMaintainPeriodConfigResponse, DisassociateSecurityGroupsRequest, ModifyBackupNameRequest, ModifyInstanceNameResponse, DescribeBinlogSaveDaysResponse, ModifyClusterParamRequest, DescribeAccountsResponse, ModifyAccountParamsResponse, DeleteBackupRequest, DescribeClusterParamsRequest, DescribeInstanceSpecsResponse, DescribeAccountAllGrantPrivilegesRequest, OfflineInstanceResponse, IsolateClusterRequest, DescribeAuditLogFilesRequest, DescribeClusterDetailResponse, DescribeClusterInstanceGrpsResponse, DescribeBinlogsRequest, DisassociateSecurityGroupsResponse, InquirePriceRenewResponse } from "./cynosdb_models";
+import { RemoveClusterSlaveZoneRequest, ModifyClusterNameRequest, DescribeRollbackTimeRangeRequest, InquirePriceRenewRequest, DescribeAuditLogsRequest, DescribeBackupConfigRequest, DescribeAccountsRequest, ModifyMaintainPeriodConfigRequest, DescribeRollbackTimeRangeResponse, ModifyBackupNameResponse, ModifyClusterStorageRequest, DescribeAuditLogFilesResponse, SwitchClusterZoneResponse, AssociateSecurityGroupsRequest, DescribeBinlogDownloadUrlRequest, CreateAccountsResponse, ModifyInstanceNameRequest, DescribeDBSecurityGroupsResponse, DescribeMaintainPeriodRequest, DescribeBinlogsResponse, DescribeInstancesResponse, AddClusterSlaveZoneResponse, ModifyClusterNameResponse, DescribeClusterParamsResponse, IsolateInstanceResponse, DescribeParamTemplatesRequest, DescribeAuditLogsResponse, SearchClusterTablesRequest, PauseServerlessRequest, RevokeAccountPrivilegesResponse, CreateClustersResponse, SetRenewFlagRequest, ActivateInstanceRequest, AddClusterSlaveZoneRequest, DescribeAccountAllGrantPrivilegesResponse, DescribeClustersRequest, ModifyClusterStorageResponse, DescribeInstanceDetailResponse, ModifyDBInstanceSecurityGroupsResponse, DeleteAuditLogFileResponse, DescribeClusterParamLogsResponse, DescribeClusterInstanceGrpsRequest, DescribeResourcesByDealNameResponse, ResumeServerlessResponse, CreateAccountsRequest, ExportInstanceSlowQueriesResponse, SwitchClusterZoneRequest, DescribeDBSecurityGroupsRequest, RollBackClusterRequest, UpgradeInstanceRequest, DescribeClusterDetailRequest, DeleteBackupResponse, DescribeProjectSecurityGroupsResponse, RemoveClusterSlaveZoneResponse, CreateAuditLogFileResponse, PauseServerlessResponse, OfflineClusterRequest, ResetAccountPasswordResponse, DescribeBinlogDownloadUrlResponse, DescribeBackupListRequest, SearchClusterDatabasesRequest, ModifyClusterSlaveZoneResponse, GrantAccountPrivilegesRequest, CreateClustersRequest, DescribeClustersResponse, DescribeBackupConfigResponse, ModifyDBInstanceSecurityGroupsRequest, DescribeParamTemplatesResponse, AddInstancesResponse, DescribeProjectSecurityGroupsRequest, ModifyClusterParamResponse, DescribeBackupDownloadUrlRequest, OfflineInstanceRequest, AssociateSecurityGroupsResponse, DescribeResourcesByDealNameRequest, CreateBackupResponse, DescribeRollbackTimeValidityResponse, DescribeInstanceSlowQueriesResponse, DescribeInstancesRequest, DescribeBackupDownloadUrlResponse, ResumeServerlessRequest, InquirePriceCreateRequest, ModifyBackupConfigResponse, DescribeInstanceSpecsRequest, ExportInstanceSlowQueriesRequest, UpgradeInstanceResponse, ModifyAccountParamsRequest, IsolateClusterResponse, SearchClusterDatabasesResponse, OfflineClusterResponse, SwitchProxyVpcResponse, RevokeAccountPrivilegesRequest, InquirePriceCreateResponse, IsolateInstanceRequest, SetRenewFlagResponse, CreateBackupRequest, DescribeClusterParamLogsRequest, SearchClusterTablesResponse, DescribeMaintainPeriodResponse, SwitchProxyVpcRequest, DescribeBackupListResponse, RollBackClusterResponse, DescribeBinlogSaveDaysRequest, ModifyBackupConfigRequest, ActivateInstanceResponse, DescribeRollbackTimeValidityRequest, CreateAuditLogFileRequest, DeleteAuditLogFileRequest, AddInstancesRequest, ModifyClusterSlaveZoneRequest, GrantAccountPrivilegesResponse, DescribeInstanceSlowQueriesRequest, ResetAccountPasswordRequest, DescribeInstanceDetailRequest, ModifyMaintainPeriodConfigResponse, DisassociateSecurityGroupsRequest, ModifyBackupNameRequest, ModifyInstanceNameResponse, DescribeBinlogSaveDaysResponse, ModifyClusterParamRequest, DescribeAccountsResponse, ModifyAccountParamsResponse, DeleteBackupRequest, DescribeClusterParamsRequest, DescribeInstanceSpecsResponse, DescribeAccountAllGrantPrivilegesRequest, OfflineInstanceResponse, IsolateClusterRequest, DescribeAuditLogFilesRequest, DescribeClusterDetailResponse, DescribeClusterInstanceGrpsResponse, DescribeBinlogsRequest, DisassociateSecurityGroupsResponse, InquirePriceRenewResponse } from "./cynosdb_models";
 /**
  * cynosdb client
  * @class
@@ -56,9 +56,9 @@ export declare class Client extends AbstractClient {
      */
     OfflineCluster(req: OfflineClusterRequest, cb?: (error: string, rep: OfflineClusterResponse) => void): Promise<OfflineClusterResponse>;
     /**
-     * SetRenewFlag设置实例的自动续费功能
+     * 本接口(SearchClusterDatabases)搜索集群database列表
      */
-    SetRenewFlag(req: SetRenewFlagRequest, cb?: (error: string, rep: SetRenewFlagResponse) => void): Promise<SetRenewFlagResponse>;
+    SearchClusterDatabases(req: SearchClusterDatabasesRequest, cb?: (error: string, rep: SearchClusterDatabasesResponse) => void): Promise<SearchClusterDatabasesResponse>;
     /**
      * 此接口（ModifyBackupName）用于修改备份文件备注名。
      */
@@ -67,6 +67,10 @@ export declare class Client extends AbstractClient {
      * 本接口(DeleteAuditLogFile)用于删除云数据库实例的审计日志文件。
      */
     DeleteAuditLogFile(req: DeleteAuditLogFileRequest, cb?: (error: string, rep: DeleteAuditLogFileResponse) => void): Promise<DeleteAuditLogFileResponse>;
+    /**
+     * 本接口(ResetAccountPassword)用于重置实例的数据库账号密码。
+     */
+    ResetAccountPassword(req: ResetAccountPasswordRequest, cb?: (error: string, rep: ResetAccountPasswordResponse) => void): Promise<ResetAccountPasswordResponse>;
     /**
      * 本接口(DescribeInstanceDetail)用于查询实例详情。
      */
@@ -127,6 +131,10 @@ export declare class Client extends AbstractClient {
      * 查询实例维护时间窗
      */
     DescribeMaintainPeriod(req: DescribeMaintainPeriodRequest, cb?: (error: string, rep: DescribeMaintainPeriodResponse) => void): Promise<DescribeMaintainPeriodResponse>;
+    /**
+     * 本接口(SwitchProxyVpc)更换数据库代理vpc
+     */
+    SwitchProxyVpc(req: SwitchProxyVpcRequest, cb?: (error: string, rep: SwitchProxyVpcResponse) => void): Promise<SwitchProxyVpcResponse>;
     /**
      * 查询集群列表
      */
@@ -239,6 +247,14 @@ export declare class Client extends AbstractClient {
      * 此接口（ExportInstanceSlowQueries）用于导出实例慢日志。
      */
     ExportInstanceSlowQueries(req: ExportInstanceSlowQueriesRequest, cb?: (error: string, rep: ExportInstanceSlowQueriesResponse) => void): Promise<ExportInstanceSlowQueriesResponse>;
+    /**
+     * SetRenewFlag设置实例的自动续费功能
+     */
+    SetRenewFlag(req: SetRenewFlagRequest, cb?: (error: string, rep: SetRenewFlagResponse) => void): Promise<SetRenewFlagResponse>;
+    /**
+     * 本接口(SearchClusterTables)搜索集群数据表列表
+     */
+    SearchClusterTables(req: SearchClusterTablesRequest, cb?: (error: string, rep: SearchClusterTablesResponse) => void): Promise<SearchClusterTablesResponse>;
     /**
      * 切换到从可用区
      */

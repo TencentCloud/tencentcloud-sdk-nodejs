@@ -668,6 +668,34 @@ export interface DescribeAuditLogsResponse {
 }
 
 /**
+ * SearchClusterTables请求参数结构体
+ */
+export interface SearchClusterTablesRequest {
+  /**
+   * 集群id
+   */
+  ClusterId: string
+
+  /**
+   * 数据库名
+   */
+  Database?: string
+
+  /**
+   * 数据表名
+   */
+  Table?: string
+
+  /**
+      * 数据表类型：
+view：只返回 view，
+base_table： 只返回基本表，
+all：返回 view 和表
+      */
+  TableType?: string
+}
+
+/**
  * PauseServerless请求参数结构体
  */
 export interface PauseServerlessRequest {
@@ -1508,6 +1536,16 @@ export interface OfflineClusterRequest {
 }
 
 /**
+ * ResetAccountPassword返回参数结构体
+ */
+export interface ResetAccountPasswordResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 新创建的账号
  */
 export interface NewAccount {
@@ -1699,6 +1737,28 @@ export interface DescribeBackupListRequest {
    * 备份备注名，模糊查询
    */
   BackupNames?: Array<string>
+}
+
+/**
+ * SearchClusterDatabases请求参数结构体
+ */
+export interface SearchClusterDatabasesRequest {
+  /**
+   * 集群id
+   */
+  ClusterId: string
+
+  /**
+   * 数据库名
+   */
+  Database?: string
+
+  /**
+      * 是否精确搜索。
+0: 模糊搜索 1:精确搜索 
+默认为0
+      */
+  MatchType?: number
 }
 
 /**
@@ -3312,11 +3372,42 @@ export interface IsolateClusterResponse {
 }
 
 /**
+ * SearchClusterDatabases返回参数结构体
+ */
+export interface SearchClusterDatabasesResponse {
+  /**
+      * 数据库列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Databases: Array<string>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * OfflineCluster返回参数结构体
  */
 export interface OfflineClusterResponse {
   /**
    * 任务流ID
+   */
+  FlowId: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * SwitchProxyVpc返回参数结构体
+ */
+export interface SwitchProxyVpcResponse {
+  /**
+   * 异步任务id。
    */
   FlowId: number
 
@@ -3538,6 +3629,22 @@ export interface DescribeClusterParamLogsRequest {
 }
 
 /**
+ * SearchClusterTables返回参数结构体
+ */
+export interface SearchClusterTablesResponse {
+  /**
+      * 数据表列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Tables: Array<DatabaseTables>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 安全组规则
  */
 export interface PolicyRule {
@@ -3605,6 +3712,36 @@ export interface DescribeMaintainPeriodResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * SwitchProxyVpc请求参数结构体
+ */
+export interface SwitchProxyVpcRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+
+  /**
+   * 字符串vpc id
+   */
+  UniqVpcId: string
+
+  /**
+   * 字符串子网id
+   */
+  UniqSubnetId: string
+
+  /**
+   * 旧地址回收时间
+   */
+  OldIpReserveHours: number
+
+  /**
+   * 数据库代理组Id
+   */
+  ProxyGroupId?: string
 }
 
 /**
@@ -4270,6 +4407,31 @@ pause
 pausing
       */
   ServerlessStatus: string
+}
+
+/**
+ * ResetAccountPassword请求参数结构体
+ */
+export interface ResetAccountPasswordRequest {
+  /**
+   * 数据库账号名
+   */
+  AccountName: string
+
+  /**
+   * 数据库账号新密码
+   */
+  AccountPassword: string
+
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+
+  /**
+   * 主机，不填默认为"%"
+   */
+  Host?: string
 }
 
 /**

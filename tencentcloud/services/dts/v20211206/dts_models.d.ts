@@ -81,6 +81,11 @@ export interface StepTip {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     HelpDoc?: string;
+    /**
+      * 当前步骤跳过信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SkipInfo?: string;
 }
 /**
  * DestroyMigrateJob请求参数结构体
@@ -1220,6 +1225,11 @@ export interface Endpoint {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     TmpToken?: string;
+    /**
+      * 外部角色id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RoleExternalId?: string;
 }
 /**
  * 数据不一致的表详情
@@ -1655,7 +1665,7 @@ export interface ModifyMigrationJobRequest {
  */
 export interface DescribeSyncJobsRequest {
     /**
-      * 同步任务id
+      * 同步任务id，如sync-werwfs23
       */
     JobId?: string;
     /**
@@ -2558,7 +2568,7 @@ export interface IsolateMigrateJobResponse {
  */
 export interface SyncJobInfo {
     /**
-      * 同步任务id
+      * 同步任务id，如：sync-btso140
 注意：此字段可能返回 null，表示取不到有效值。
       */
     JobId: string;
@@ -2568,17 +2578,17 @@ export interface SyncJobInfo {
       */
     JobName: string;
     /**
-      * 付款方式
+      * 付款方式，PostPay(按量付费)、PrePay(包年包月)
 注意：此字段可能返回 null，表示取不到有效值。
       */
     PayMode: string;
     /**
-      * 运行模式
+      * 运行模式，Immediate(表示立即运行，默认为此项值)、Timed(表示定时运行)
 注意：此字段可能返回 null，表示取不到有效值。
       */
     RunMode: string;
     /**
-      * 期待运行时间
+      * 期待运行时间，格式为 yyyy-mm-dd hh:mm:ss
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ExpectRunTime: string;
@@ -2608,22 +2618,22 @@ export interface SyncJobInfo {
       */
     Specification: string;
     /**
-      * 过期时间
+      * 过期时间，格式为 yyyy-mm-dd hh:mm:ss
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ExpireTime: string;
     /**
-      * 源端地域
+      * 源端地域，如：ap-guangzhou等
 注意：此字段可能返回 null，表示取不到有效值。
       */
     SrcRegion: string;
     /**
-      * 源端数据库类型
+      * 源端数据库类型，mysql,cynosdbmysql,tdapg,tdpg,tdsqlmysql等
 注意：此字段可能返回 null，表示取不到有效值。
       */
     SrcDatabaseType: string;
     /**
-      * 源端接入类型
+      * 源端接入类型，cdb(云数据库)、cvm(云主机自建)、vpc(私有网络)、extranet(外网)、vpncloud(vpn接入)、dcg(专线接入)、ccn(云联网)、intranet(自研上云)
 注意：此字段可能返回 null，表示取不到有效值。
       */
     SrcAccessType: string;
@@ -2633,17 +2643,17 @@ export interface SyncJobInfo {
       */
     SrcInfo: Endpoint;
     /**
-      * 目标端地域
+      * 目标端地域，如：ap-guangzhou等
 注意：此字段可能返回 null，表示取不到有效值。
       */
     DstRegion: string;
     /**
-      * 目标端数据库类型
+      * 目标端数据库类型，mysql,cynosdbmysql,tdapg,tdpg,tdsqlmysql等
 注意：此字段可能返回 null，表示取不到有效值。
       */
     DstDatabaseType: string;
     /**
-      * 目标端接入类型
+      * 目标端接入类型，cdb(云数据库)、cvm(云主机自建)、vpc(私有网络)、extranet(外网)、vpncloud(vpn接入)、dcg(专线接入)、ccn(云联网)、intranet(自研上云)
 注意：此字段可能返回 null，表示取不到有效值。
       */
     DstAccessType: string;
@@ -2653,27 +2663,27 @@ export interface SyncJobInfo {
       */
     DstInfo: Endpoint;
     /**
-      * 创建时间
+      * 创建时间，格式为 yyyy-mm-dd hh:mm:ss
 注意：此字段可能返回 null，表示取不到有效值。
       */
     CreateTime: string;
     /**
-      * 开始时间
+      * 开始时间，格式为 yyyy-mm-dd hh:mm:ss
 注意：此字段可能返回 null，表示取不到有效值。
       */
     StartTime: string;
     /**
-      * 结束时间
+      * 结束时间，格式为 yyyy-mm-dd hh:mm:ss
 注意：此字段可能返回 null，表示取不到有效值。
       */
     EndTime: string;
     /**
-      * 任务状态
+      * 任务状态，UnInitialized(未初始化)、Initialized(已初始化)、Checking(校验中)、CheckPass(校验通过)、CheckNotPass(校验不通过)、ReadyRunning(准备运行)、Running(运行中)、Pausing(暂停中)、Paused(已暂停)、Stopping(停止中)、Stopped(已停止)、ResumableErr(任务错误)、Resuming(恢复中)、Failed(失败)、Released(已释放)、Resetting(重置中)、Unknown(未知)
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Status: string;
     /**
-      * 标签相关
+      * 标签相关信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Tags: Array<TagItem>;
@@ -2682,6 +2692,26 @@ export interface SyncJobInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Detail: SyncDetailInfo;
+    /**
+      * 用于计费的状态，可能取值有：Normal(正常状态)、Resizing(变配中)、Renewing(续费中)、Isolating(隔离中)、Isolated(已隔离)、Offlining(下线中)、Offlined(已下线)、NotBilled(未计费)、Recovering(解隔离)、PostPay2Prepaying(按量计费转包年包月中)、PrePay2Postpaying(包年包月转按量计费中)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TradeStatus: string;
+    /**
+      * 同步链路规格，如micro,small,medium,large
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InstanceClass: string;
+    /**
+      * 自动续费标识，当PayMode值为PrePay则此项配置有意义，取值为：1（表示自动续费）、0（不自动续费）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AutoRenew: number;
+    /**
+      * 下线时间，格式为 yyyy-mm-dd hh:mm:ss
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OfflineTime: string;
 }
 /**
  * 角色对象，postgresql独有参数

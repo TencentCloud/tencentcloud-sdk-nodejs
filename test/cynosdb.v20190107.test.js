@@ -138,9 +138,9 @@ it("cynosdb.v20190107.OfflineCluster", async function () {
     }
 })
 
-it("cynosdb.v20190107.SetRenewFlag", async function () {
+it("cynosdb.v20190107.SearchClusterDatabases", async function () {
     try {
-       const data = await client.SetRenewFlag({})
+       const data = await client.SearchClusterDatabases({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -161,6 +161,16 @@ it("cynosdb.v20190107.ModifyBackupName", async function () {
 it("cynosdb.v20190107.DeleteAuditLogFile", async function () {
     try {
        const data = await client.DeleteAuditLogFile({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.ResetAccountPassword", async function () {
+    try {
+       const data = await client.ResetAccountPassword({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -311,6 +321,16 @@ it("cynosdb.v20190107.ModifyInstanceName", async function () {
 it("cynosdb.v20190107.DescribeMaintainPeriod", async function () {
     try {
        const data = await client.DescribeMaintainPeriod({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.SwitchProxyVpc", async function () {
+    try {
+       const data = await client.SwitchProxyVpc({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -591,6 +611,26 @@ it("cynosdb.v20190107.DescribeAuditLogFiles", async function () {
 it("cynosdb.v20190107.ExportInstanceSlowQueries", async function () {
     try {
        const data = await client.ExportInstanceSlowQueries({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.SetRenewFlag", async function () {
+    try {
+       const data = await client.SetRenewFlag({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.SearchClusterTables", async function () {
+    try {
+       const data = await client.SearchClusterTables({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

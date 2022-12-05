@@ -126,6 +126,7 @@ import {
   DescribeCcnAttachedInstancesResponse,
   DescribeBundlesRequest,
   Blueprint,
+  TotalPrice,
   DeniedAction,
   DescribeAllScenesResponse,
   ModifyInstancesLoginKeyPairAttributeResponse,

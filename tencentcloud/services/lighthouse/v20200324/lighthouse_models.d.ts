@@ -324,17 +324,21 @@ export interface InquirePriceRenewInstancesResponse {
     /**
       * 询价信息。默认为列表中第一个实例的价格信息。
       */
-    Price: Price;
+    Price?: Price;
     /**
       * 数据盘价格信息列表。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    DataDiskPriceSet: Array<DataDiskPrice>;
+    DataDiskPriceSet?: Array<DataDiskPrice>;
     /**
       * 待续费实例价格列表。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    InstancePriceDetailSet: Array<InstancePriceDetail>;
+    InstancePriceDetailSet?: Array<InstancePriceDetail>;
+    /**
+      * 总计价格。
+      */
+    TotalPrice?: TotalPrice;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1129,7 +1133,7 @@ export interface DescribeBlueprintsRequest {
 类型：String
 必选：否
 
-每次请求的 Filters 的上限为 10，Filter.Values 的上限为 5。参数不支持同时指定 BlueprintIds 和 Filters 。
+每次请求的 Filters 的上限为 10，Filter.Values 的上限为 100。参数不支持同时指定 BlueprintIds 和 Filters 。
       */
     Filters?: Array<Filter>;
 }
@@ -1582,11 +1586,11 @@ export interface DescribeBlueprintsResponse {
     /**
       * 符合条件的镜像数量。
       */
-    TotalCount: number;
+    TotalCount?: number;
     /**
       * 镜像详细信息列表。
       */
-    BlueprintSet: Array<Blueprint>;
+    BlueprintSet?: Array<Blueprint>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1994,6 +1998,21 @@ export interface Blueprint {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     SceneIdSet: Array<string>;
+}
+/**
+ * 总计价格信息
+ */
+export interface TotalPrice {
+    /**
+      * 原始总计价格。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OriginalPrice?: number;
+    /**
+      * 折扣总计价格。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DiscountPrice?: number;
 }
 /**
  * 限制操作。

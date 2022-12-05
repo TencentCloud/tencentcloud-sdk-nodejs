@@ -1041,7 +1041,7 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
   }
 
   /**
-   * 当高性能计算集群为空, 即集群内没有任何设备时候, 可以删除改集群。
+   * 当高性能计算集群为空, 即集群内没有任何设备时候, 可以删除该集群。
    */
   async DeleteHpcClusters(
     req: DeleteHpcClustersRequest,

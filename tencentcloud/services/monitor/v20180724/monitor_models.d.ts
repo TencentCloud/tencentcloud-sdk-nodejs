@@ -1241,6 +1241,31 @@ export interface DescribeBaseMetricsResponse {
     RequestId?: string;
 }
 /**
+ * PrometheusZoneItem 响应结构体内的地域信息
+ */
+export interface PrometheusZoneItem {
+    /**
+      * 可用区
+      */
+    Zone: string;
+    /**
+      * 可用区 ID
+      */
+    ZoneId: number;
+    /**
+      * 可用区状态( 0: 不可用；1: 可用)
+      */
+    ZoneState: number;
+    /**
+      * 地域 ID
+      */
+    RegionId: number;
+    /**
+      * 可用区名（目前为中文）
+      */
+    ZoneName: string;
+}
+/**
  * 策略类型的维度信息
  */
 export interface DimensionNew {
@@ -3070,6 +3095,15 @@ export interface UnbindPrometheusManagedGrafanaRequest {
     GrafanaId: string;
 }
 /**
+ * DescribePrometheusZones请求参数结构体
+ */
+export interface DescribePrometheusZonesRequest {
+    /**
+      * 地域 ID
+      */
+    RegionId: number;
+}
+/**
  * 模板列表
  */
 export interface TemplateGroup {
@@ -4206,17 +4240,18 @@ export interface DeletePolicyGroupRequest {
     GroupId: Array<number>;
 }
 /**
- * EnableSSOCamCheck请求参数结构体
+ * DescribePrometheusZones返回参数结构体
  */
-export interface EnableSSOCamCheckRequest {
+export interface DescribePrometheusZonesResponse {
     /**
-      * 实例ID
+      * 区域列表
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    InstanceId: string;
+    ZoneSet: Array<PrometheusZoneItem>;
     /**
-      * 是否开启cam鉴权
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    EnableSSOCamCheck: boolean;
+    RequestId?: string;
 }
 /**
  * ModifyPolicyGroup返回参数结构体
@@ -4326,6 +4361,19 @@ export interface Condition {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ProductId: string;
+}
+/**
+ * EnableSSOCamCheck请求参数结构体
+ */
+export interface EnableSSOCamCheckRequest {
+    /**
+      * 实例ID
+      */
+    InstanceId: string;
+    /**
+      * 是否开启cam鉴权
+      */
+    EnableSSOCamCheck: boolean;
 }
 /**
  * DeleteGrafanaInstance返回参数结构体

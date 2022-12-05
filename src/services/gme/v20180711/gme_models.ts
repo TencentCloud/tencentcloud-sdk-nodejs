@@ -194,12 +194,12 @@ export interface DescribeApplicationDataRequest {
  */
 export interface UserMicStatus {
   /**
-   * 用户ID
+   * 客户端用于标识用户的Openid。
    */
   Uid: number
 
   /**
-   * 是否开麦 。1闭麦  2开麦
+   * 开麦状态。1表示关闭麦克风，2表示打开麦克风。
    */
   EnableMic: number
 }
@@ -289,17 +289,17 @@ export interface DescribeRealtimeScanConfigResponse {
  */
 export interface ModifyUserMicStatusRequest {
   /**
-   * 应用ID
+   * 来自 [腾讯云控制台](https://console.cloud.tencent.com/gamegme) 的 GME 服务提供的 AppID，获取请参考 [语音服务开通指引](https://cloud.tencent.com/document/product/607/10782#.E9.87.8D.E7.82.B9.E5.8F.82.E6.95.B0)。
    */
   BizId: number
 
   /**
-   * 房间ID
+   * 实时语音房间号。
    */
   RoomId: string
 
   /**
-   * 用户麦克风状态，数组长度不超过20
+   * 需要操作的房间内用户以及该用户的目标麦克风状态。
    */
   Users: Array<UserMicStatus>
 }
@@ -1085,12 +1085,12 @@ export interface DeleteCustomizationResponse {
  */
 export interface ModifyUserMicStatusResponse {
   /**
-   * 返回结果：0为成功，非0为失败
+   * 返回结果：0为成功，非0为失败。
    */
   Result: number
 
   /**
-   * 错误信息
+   * 错误信息。
    */
   ErrMsg: string
 

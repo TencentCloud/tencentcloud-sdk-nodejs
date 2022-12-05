@@ -876,6 +876,10 @@ export interface UploadFirmwareRequest {
       * 固件描述
       */
     FirmwareDescription?: string;
+    /**
+      * 固件升级模块；可选值 mcu|moudule
+      */
+    FwType?: string;
 }
 /**
  * DescribeCloudStoragePackageConsumeStats返回参数结构体
@@ -1629,6 +1633,11 @@ export interface DescribeFirmwareResponse {
       */
     ProductName: string;
     /**
+      * 固件升级模块
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FwType: string;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
@@ -2123,6 +2132,11 @@ export interface FirmwareInfo {
       * 产品ID
       */
     ProductId: string;
+    /**
+      * 固件升级模块
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FwType: string;
 }
 /**
  * CreateProduct请求参数结构体
@@ -3486,6 +3500,10 @@ export interface BatchUpdateFirmwareRequest {
       * 需要升级的设备名称列表
       */
     DeviceNames?: Array<string>;
+    /**
+      * 固件升级任务默认超时时间。 最小取值60秒，最大为3600秒
+      */
+    TimeoutInterval?: number;
 }
 /**
  * ModifyProductDynamicRegister请求参数结构体

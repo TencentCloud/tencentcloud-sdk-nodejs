@@ -92,6 +92,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdateSSOAccount", req, cb);
     }
     /**
+     * 列出 Prometheus 服务可用区
+     */
+    async DescribePrometheusZones(req, cb) {
+        return this.request("DescribePrometheusZones", req, cb);
+    }
+    /**
      * 列出 Grafana 环境变量
      */
     async DescribeGrafanaEnvironments(req, cb) {

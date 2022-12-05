@@ -118,6 +118,16 @@ it("monitor.v20180724.UpdateSSOAccount", async function () {
     }
 })
 
+it("monitor.v20180724.DescribePrometheusZones", async function () {
+    try {
+       const data = await client.DescribePrometheusZones({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("monitor.v20180724.DescribeGrafanaEnvironments", async function () {
     try {
        const data = await client.DescribeGrafanaEnvironments({})

@@ -758,13 +758,15 @@ export interface GetFunctionRequest {
   FunctionName: string
 
   /**
-   * 函数的版本号
-   */
+      * 函数的版本号
+默认值: $LATEST
+      */
   Qualifier?: string
 
   /**
-   * 函数所属命名空间
-   */
+      * 函数所属命名空间
+默认值: default
+      */
   Namespace?: string
 
   /**
@@ -1026,8 +1028,9 @@ export interface UpdateFunctionConfigurationRequest {
   Environment?: Environment
 
   /**
-   * 函数所属命名空间
-   */
+      * 函数所属命名空间
+默认值: default
+      */
   Namespace?: string
 
   /**

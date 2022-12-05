@@ -48,6 +48,7 @@ import {
   AuditLogFilter,
   DescribeParamTemplatesRequest,
   DescribeAuditLogsResponse,
+  SearchClusterTablesRequest,
   PauseServerlessRequest,
   ObjectTask,
   RevokeAccountPrivilegesResponse,
@@ -86,11 +87,13 @@ import {
   CreateAuditLogFileResponse,
   PauseServerlessResponse,
   OfflineClusterRequest,
+  ResetAccountPasswordResponse,
   NewAccount,
   BackupFileInfo,
   TablePrivileges,
   DescribeBinlogDownloadUrlResponse,
   DescribeBackupListRequest,
+  SearchClusterDatabasesRequest,
   CynosdbInstance,
   DbTable,
   ModifyClusterSlaveZoneResponse,
@@ -132,7 +135,9 @@ import {
   ModifyAccountParamsRequest,
   CynosdbCluster,
   IsolateClusterResponse,
+  SearchClusterDatabasesResponse,
   OfflineClusterResponse,
+  SwitchProxyVpcResponse,
   RevokeAccountPrivilegesRequest,
   InstanceSpec,
   InquirePriceCreateResponse,
@@ -141,8 +146,10 @@ import {
   Account,
   CreateBackupRequest,
   DescribeClusterParamLogsRequest,
+  SearchClusterTablesResponse,
   PolicyRule,
   DescribeMaintainPeriodResponse,
+  SwitchProxyVpcRequest,
   DescribeBackupListResponse,
   RollBackClusterResponse,
   DescribeBinlogSaveDaysRequest,
@@ -158,6 +165,7 @@ import {
   DescribeInstanceSlowQueriesRequest,
   CynosdbInstanceDetail,
   CynosdbClusterDetail,
+  ResetAccountPasswordRequest,
   DescribeInstanceDetailRequest,
   ModifyMaintainPeriodConfigResponse,
   DisassociateSecurityGroupsRequest,
@@ -316,13 +324,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * SetRenewFlag设置实例的自动续费功能
+   * 本接口(SearchClusterDatabases)搜索集群database列表
    */
-  async SetRenewFlag(
-    req: SetRenewFlagRequest,
-    cb?: (error: string, rep: SetRenewFlagResponse) => void
-  ): Promise<SetRenewFlagResponse> {
-    return this.request("SetRenewFlag", req, cb)
+  async SearchClusterDatabases(
+    req: SearchClusterDatabasesRequest,
+    cb?: (error: string, rep: SearchClusterDatabasesResponse) => void
+  ): Promise<SearchClusterDatabasesResponse> {
+    return this.request("SearchClusterDatabases", req, cb)
   }
 
   /**
@@ -343,6 +351,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteAuditLogFileResponse) => void
   ): Promise<DeleteAuditLogFileResponse> {
     return this.request("DeleteAuditLogFile", req, cb)
+  }
+
+  /**
+   * 本接口(ResetAccountPassword)用于重置实例的数据库账号密码。
+   */
+  async ResetAccountPassword(
+    req: ResetAccountPasswordRequest,
+    cb?: (error: string, rep: ResetAccountPasswordResponse) => void
+  ): Promise<ResetAccountPasswordResponse> {
+    return this.request("ResetAccountPassword", req, cb)
   }
 
   /**
@@ -493,6 +511,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeMaintainPeriodResponse) => void
   ): Promise<DescribeMaintainPeriodResponse> {
     return this.request("DescribeMaintainPeriod", req, cb)
+  }
+
+  /**
+   * 本接口(SwitchProxyVpc)更换数据库代理vpc
+   */
+  async SwitchProxyVpc(
+    req: SwitchProxyVpcRequest,
+    cb?: (error: string, rep: SwitchProxyVpcResponse) => void
+  ): Promise<SwitchProxyVpcResponse> {
+    return this.request("SwitchProxyVpc", req, cb)
   }
 
   /**
@@ -773,6 +801,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ExportInstanceSlowQueriesResponse) => void
   ): Promise<ExportInstanceSlowQueriesResponse> {
     return this.request("ExportInstanceSlowQueries", req, cb)
+  }
+
+  /**
+   * SetRenewFlag设置实例的自动续费功能
+   */
+  async SetRenewFlag(
+    req: SetRenewFlagRequest,
+    cb?: (error: string, rep: SetRenewFlagResponse) => void
+  ): Promise<SetRenewFlagResponse> {
+    return this.request("SetRenewFlag", req, cb)
+  }
+
+  /**
+   * 本接口(SearchClusterTables)搜索集群数据表列表
+   */
+  async SearchClusterTables(
+    req: SearchClusterTablesRequest,
+    cb?: (error: string, rep: SearchClusterTablesResponse) => void
+  ): Promise<SearchClusterTablesResponse> {
+    return this.request("SearchClusterTables", req, cb)
   }
 
   /**

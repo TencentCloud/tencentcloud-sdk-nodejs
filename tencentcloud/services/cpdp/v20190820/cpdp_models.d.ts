@@ -2936,6 +2936,26 @@ FAILED:已失败
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ChannelOrderId: string;
+    /**
+      * 增值税
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Vat: string;
+    /**
+      * 个人所得税
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IndividualIncomeTax: string;
+    /**
+      * 附加税总税额
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AdditionalTaxSum: string;
+    /**
+      * 附加税税项。格式为JSON格式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AdditionalTaxItem: string;
 }
 /**
  * DistributeAddReceiver请求参数结构体
@@ -3252,6 +3272,26 @@ export interface ApplyFlexPaymentResult {
       * 税金
       */
     Tax: string;
+    /**
+      * 增值税
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Vat: string;
+    /**
+      * 个人所得税
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IndividualIncomeTax: string;
+    /**
+      * 附加税总税额
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AdditionalTaxSum: string;
+    /**
+      * 附加税税项。格式为JSON格式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AdditionalTaxItem: string;
 }
 /**
  * 会员资金交易明细信息
@@ -4996,6 +5036,10 @@ __test__:测试环境
 缺省默认为生产环境
       */
     Environment?: string;
+    /**
+      * 快照日期。格式yyyy-MM-dd
+      */
+    SnapshotDate?: string;
 }
 /**
  * ContractOrder请求参数结构体
@@ -18377,6 +18421,9 @@ export interface WithdrawCashMembershipResponse {
 export interface CreateSinglePaymentRequest {
     /**
       * 转账类型
+1 微信企业付款
+2 支付宝转账
+3 平安银企直连代发转账
       */
     TransferType: number;
     /**
@@ -21980,7 +22027,7 @@ __OPENBANK_PAYMENT__: openbank付款
       */
     BankAbbreviation: string;
     /**
-      * 页码。Index和Count必须大于等于1。
+      * 页码。Index和Count必须大于等于1。Count建议不超过100。
       */
     PageNumber: Paging;
     /**
