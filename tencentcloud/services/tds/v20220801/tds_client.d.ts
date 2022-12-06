@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeFraudBaseRequest, DescribeFraudPremiumResponse, DescribeTrustedIDResponse, DescribeFraudBaseResponse, DescribeTrustedIDRequest, DescribeFraudPremiumRequest } from "./tds_models";
+import { DescribeTrustedIDResponse, DescribeFraudUltimateRequest, DescribeFraudPremiumResponse, DescribeFraudBaseRequest, DescribeFraudBaseResponse, DescribeTrustedIDRequest, DescribeFraudPremiumRequest, DescribeFraudUltimateResponse } from "./tds_models";
 /**
  * tds client
  * @class
@@ -19,4 +19,8 @@ export declare class Client extends AbstractClient {
      * 查询设备标识及风险
      */
     DescribeFraudPremium(req: DescribeFraudPremiumRequest, cb?: (error: string, rep: DescribeFraudPremiumResponse) => void): Promise<DescribeFraudPremiumResponse>;
+    /**
+     * 查询设备标识及风险（旗舰版）
+     */
+    DescribeFraudUltimate(req: DescribeFraudUltimateRequest, cb?: (error: string, rep: DescribeFraudUltimateResponse) => void): Promise<DescribeFraudUltimateResponse>;
 }

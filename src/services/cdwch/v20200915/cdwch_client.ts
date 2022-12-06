@@ -61,7 +61,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 针对驱动sql命令查询ck集群接口
+   * 查询集群用户、集群表，数据库等相关信息
    */
   async DescribeCkSqlApis(
     req: DescribeCkSqlApisRequest,

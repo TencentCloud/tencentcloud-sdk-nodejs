@@ -851,11 +851,11 @@ export interface FlowApproverInfo {
   OrganizationOpenId?: string
 
   /**
-      * 签署人类型，PERSON-个人；
-PERSON_AUTO_SIGN-个人自动签；
-ORGANIZATION-企业；
-ENTERPRISESERVER-企业静默签;
-注：ENTERPRISESERVER 类型仅用于使用文件创建签署流程（ChannelCreateFlowByFiles）接口；
+      * 签署人类型
+PERSON-个人/自然人；
+PERSON_AUTO_SIGN-个人自动签（定制化场景下使用）；
+ORGANIZATION-企业（企业签署方或模版发起时的企业静默签）；
+ENTERPRISESERVER-企业静默签（文件发起时的企业静默签字）。
       */
   ApproverType?: string
 
@@ -2351,7 +2351,7 @@ ORGANIZATION-企业
  */
 export interface DescribeUsageRequest {
   /**
-   * 应用信息
+   * 应用信息，此接口Agent.AppId必填
    */
   Agent: Agent
 
@@ -2750,6 +2750,7 @@ SIGN_DATE - 签署日期控件；
 SIGN_SIGNATURE - 用户签名控件；
 SIGN_PERSONAL_SEAL - 个人签署印章控件（使用文件发起暂不支持此类型）；
 SIGN_PAGING_SEAL - 骑缝章；若文件发起，需要对应填充ComponentPosY、ComponentWidth、ComponentHeight
+SIGN_OPINION - 签署意见控件，用户需要根据配置的签署意见内容，完成对意见内容的确认
 
 表单域的控件不能作为印章和签名控件
       */

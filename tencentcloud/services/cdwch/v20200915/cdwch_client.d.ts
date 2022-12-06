@@ -12,7 +12,7 @@ export declare class Client extends AbstractClient {
      */
     CreateBackUpSchedule(req: CreateBackUpScheduleRequest, cb?: (error: string, rep: CreateBackUpScheduleResponse) => void): Promise<CreateBackUpScheduleResponse>;
     /**
-     * 针对驱动sql命令查询ck集群接口
+     * 查询集群用户、集群表，数据库等相关信息
      */
     DescribeCkSqlApis(req: DescribeCkSqlApisRequest, cb?: (error: string, rep: DescribeCkSqlApisResponse) => void): Promise<DescribeCkSqlApisResponse>;
     /**

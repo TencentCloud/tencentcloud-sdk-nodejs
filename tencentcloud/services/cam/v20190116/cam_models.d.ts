@@ -830,7 +830,7 @@ export interface ListPoliciesResponse {
     /**
       * 策略总数
       */
-    TotalNum?: number;
+    TotalNum: number;
     /**
       * 策略数组，数组每个成员包括 policyId、policyName、addTime、type、description、 createMode 字段。其中：
 policyId：策略 id
@@ -843,12 +843,12 @@ Attachments: 关联的用户数
 ServiceType: 策略关联的产品
 IsAttached: 当需要查询标记实体是否已经关联策略时不为null。0表示未关联策略，1表示已关联策略
       */
-    List?: Array<StrategyInfo>;
+    List: Array<StrategyInfo>;
     /**
       * 保留字段
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ServiceTypeList?: Array<string>;
+    ServiceTypeList: Array<string>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

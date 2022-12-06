@@ -589,35 +589,9 @@ export interface PauseServerlessRequest {
     ForcePause?: number;
 }
 /**
- * 任务信息
+ * 参数是否可修改的详细信息
  */
-export interface ObjectTask {
-    /**
-      * 任务自增ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    TaskId?: number;
-    /**
-      * 任务类型
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    TaskType?: string;
-    /**
-      * 任务状态
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    TaskStatus?: string;
-    /**
-      * 任务ID（集群ID|实例组ID|实例ID）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ObjectId?: string;
-    /**
-      * 任务类型
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ObjectType?: string;
-}
+export declare type ModifiableInfo = null;
 /**
  * RevokeAccountPrivileges返回参数结构体
  */
@@ -1655,6 +1629,30 @@ pause
       * 存储付费类型
       */
     StoragePayMode: number;
+    /**
+      * 物理区
+      */
+    PhysicalZone: string;
+    /**
+      * 商业类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BusinessType: string;
+    /**
+      * 任务
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Tasks: Array<ObjectTask>;
+    /**
+      * 是否冻结
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IsFreeze: string;
+    /**
+      * 资源标签
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ResourceTags: Array<Tag>;
 }
 /**
  * 数据库表
@@ -2155,6 +2153,26 @@ export interface ParamInfo {
       * 参数描述
       */
     Description: string;
+    /**
+      * 是否为全局参数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IsGlobal: number;
+    /**
+      * 参数是否可修改
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ModifiableInfo: ModifiableInfo;
+    /**
+      * 是否为函数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IsFunc: boolean;
+    /**
+      * 函数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Func: string;
 }
 /**
  * DescribeProjectSecurityGroups请求参数结构体
@@ -2838,6 +2856,36 @@ export interface SearchClusterDatabasesResponse {
     RequestId?: string;
 }
 /**
+ * 任务信息
+ */
+export interface ObjectTask {
+    /**
+      * 任务自增ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TaskId?: number;
+    /**
+      * 任务类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TaskType?: string;
+    /**
+      * 任务状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TaskStatus?: string;
+    /**
+      * 任务ID（集群ID|实例组ID|实例ID）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ObjectId?: string;
+    /**
+      * 任务类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ObjectType?: string;
+}
+/**
  * OfflineCluster返回参数结构体
  */
 export interface OfflineClusterResponse {
@@ -2997,6 +3045,10 @@ export interface Account {
       * 主机
       */
     Host: string;
+    /**
+      * 用户最大连接数
+      */
+    MaxUserConnections: number;
 }
 /**
  * CreateBackup请求参数结构体
@@ -3133,7 +3185,7 @@ export interface SwitchProxyVpcRequest {
       */
     OldIpReserveHours: number;
     /**
-      * 数据库代理组Id
+      * 数据库代理组Id（该参数为必填项，可以通过DescribeProxies接口获得）
       */
     ProxyGroupId?: string;
 }

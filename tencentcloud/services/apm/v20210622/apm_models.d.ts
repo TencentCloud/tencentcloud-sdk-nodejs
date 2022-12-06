@@ -322,6 +322,11 @@ export interface ApmField {
       * 请求数
       */
     Key: string;
+    /**
+      * 同环比上周期具体数值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LastPeriodValue: Array<APMKV>;
 }
 /**
  * 指标曲线数据
@@ -426,6 +431,21 @@ export interface Filter {
       * 过滤值，in过滤方式用逗号分割多个值
       */
     Value: string;
+}
+/**
+ * APM浮点数类型键值对
+ */
+export interface APMKV {
+    /**
+      * Key值定义
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Key: string;
+    /**
+      * Value值定义
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Value: number;
 }
 /**
  * DescribeApmAgent请求参数结构体

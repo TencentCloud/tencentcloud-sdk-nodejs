@@ -306,7 +306,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口用于修改特殊采集配置任务
+   * 本接口用于修改特殊采集配置任务，特殊采集配置应用于自建K8S环境的采集Agent
    */
   async ModifyConfigExtra(
     req: ModifyConfigExtraRequest,
@@ -356,7 +356,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口用于获取特殊采集配置
+   * 本接口用于获取特殊采集配置，特殊采集配置应用于自建K8S环境的采集Agent
    */
   async DescribeConfigExtras(
     req: DescribeConfigExtrasRequest,
@@ -476,7 +476,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口用于删除特殊采集规则配置
+   * 本接口用于删除特殊采集规则配置，特殊采集配置应用于自建K8S环境的采集Agent
    */
   async DeleteConfigExtra(
     req: DeleteConfigExtraRequest,
@@ -900,7 +900,7 @@ cls.pb.cc cls.pb.h cls.proto
   }
 
   /**
-   * 本接口用于创建特殊采集配置任务
+   * 本接口用于创建特殊采集配置任务，特殊采集配置应用于自建K8S环境的采集Agent
    */
   async CreateConfigExtra(
     req: CreateConfigExtraRequest,

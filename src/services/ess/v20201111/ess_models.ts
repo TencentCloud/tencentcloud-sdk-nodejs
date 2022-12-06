@@ -2301,24 +2301,29 @@ DISTRICT - 省市区行政区划控件；
 如果是SignComponent控件类型，则可选的字段为
 SIGN_SEAL - 签署印章控件；
 SIGN_DATE - 签署日期控件；
-DATE， 日期控件，默认是格式化为xxxx年xx月xx日
 SIGN_SIGNATURE - 用户签名控件；
 SIGN_PERSONAL_SEAL - 个人签署印章控件（使用文件发起暂不支持此类型）；
 SIGN_PAGING_SEAL - 骑缝章；若文件发起，需要对应填充ComponentPosY、ComponentWidth、ComponentHeight
+SIGN_OPINION - 签署意见控件，用户需要根据配置的签署意见内容，完成对意见内容的确认
 
 表单域的控件不能作为印章和签名控件
       */
   ComponentType: string
 
   /**
-   * 参数控件宽度，单位pt
+   * 控件所属文件的序号（模板中的resourceId排列序号，取值为：0-N）
    */
-  ComponentWidth: number
+  FileIndex: number
 
   /**
    * 参数控件高度，单位pt
    */
   ComponentHeight: number
+
+  /**
+   * 参数控件宽度，单位pt
+   */
+  ComponentWidth: number
 
   /**
    * 参数控件所在页码，取值为：1-N
@@ -2336,11 +2341,6 @@ SIGN_PAGING_SEAL - 骑缝章；若文件发起，需要对应填充ComponentPosY
   ComponentPosY: number
 
   /**
-   * 控件所属文件的序号（模板中的resourceId排列序号，取值为：0-N）
-   */
-  FileIndex: number
-
-  /**
    * GenerateMode==KEYWORD 指定关键字
    */
   ComponentId?: string
@@ -2354,6 +2354,11 @@ SIGN_PAGING_SEAL - 骑缝章；若文件发起，需要对应填充ComponentPosY
    * 是否必选，默认为false
    */
   ComponentRequired?: boolean
+
+  /**
+   * 控件关联的签署人ID
+   */
+  ComponentRecipientId?: string
 
   /**
       * 扩展参数：
@@ -2375,9 +2380,9 @@ ESIGN -- 个人印章类型
   ComponentExtra?: string
 
   /**
-   * 控件关联的签署人ID
+   * 是否是表单域类型，默认不存在
    */
-  ComponentRecipientId?: string
+  IsFormType?: boolean
 
   /**
       * 控件填充vaule，ComponentType和传入值类型对应关系：
@@ -2394,11 +2399,6 @@ SIGN_PAGING_SEAL - 可以指定印章ID，于控制台查询获取
   ComponentValue?: string
 
   /**
-   * 是否是表单域类型，默认不存在
-   */
-  IsFormType?: boolean
-
-  /**
       * NORMAL 正常模式，使用坐标制定签署控件位置
 FIELD 表单域，需使用ComponentName指定表单域名称
 KEYWORD 关键字，使用ComponentId指定关键字
@@ -2406,9 +2406,14 @@ KEYWORD 关键字，使用ComponentId指定关键字
   GenerateMode?: string
 
   /**
-   * 日期控件类型字号
+   * 日期签署控件的字号，默认为 12
    */
   ComponentDateFontSize?: number
+
+  /**
+   * 渠道版控件 id 标识
+   */
+  ChannelComponentId?: string
 
   /**
    * 指定关键字时横坐标偏移量，单位pt
@@ -2419,6 +2424,11 @@ KEYWORD 关键字，使用ComponentId指定关键字
    * 指定关键字时纵坐标偏移量，单位pt
    */
   OffsetY?: number
+
+  /**
+   * //渠道子客控件来源。0-渠道指定；1-用户自定义
+   */
+  ChannelComponentSource?: number
 
   /**
       * 指定关键字排序规则，Positive-正序，Reverse-倒序。传入Positive时会根据关键字在PDF文件内的顺序进行排列。在指定KeywordIndexes时，0代表在PDF内查找内容时，查找到的第一个关键字。

@@ -49,7 +49,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyIndex(req: ModifyIndexRequest, cb?: (error: string, rep: ModifyIndexResponse) => void): Promise<ModifyIndexResponse>;
     /**
-     * 本接口用于修改特殊采集配置任务
+     * 本接口用于修改特殊采集配置任务，特殊采集配置应用于自建K8S环境的采集Agent
      */
     ModifyConfigExtra(req: ModifyConfigExtraRequest, cb?: (error: string, rep: ModifyConfigExtraResponse) => void): Promise<ModifyConfigExtraResponse>;
     /**
@@ -69,7 +69,7 @@ export declare class Client extends AbstractClient {
      */
     DeleteConfig(req: DeleteConfigRequest, cb?: (error: string, rep: DeleteConfigResponse) => void): Promise<DeleteConfigResponse>;
     /**
-     * 本接口用于获取特殊采集配置
+     * 本接口用于获取特殊采集配置，特殊采集配置应用于自建K8S环境的采集Agent
      */
     DescribeConfigExtras(req: DescribeConfigExtrasRequest, cb?: (error: string, rep: DescribeConfigExtrasResponse) => void): Promise<DescribeConfigExtrasResponse>;
     /**
@@ -117,7 +117,7 @@ export declare class Client extends AbstractClient {
      */
     DeleteConfigFromMachineGroup(req: DeleteConfigFromMachineGroupRequest, cb?: (error: string, rep: DeleteConfigFromMachineGroupResponse) => void): Promise<DeleteConfigFromMachineGroupResponse>;
     /**
-     * 本接口用于删除特殊采集规则配置
+     * 本接口用于删除特殊采集规则配置，特殊采集配置应用于自建K8S环境的采集Agent
      */
     DeleteConfigExtra(req: DeleteConfigExtraRequest, cb?: (error: string, rep: DeleteConfigExtraResponse) => void): Promise<DeleteConfigExtraResponse>;
     /**
@@ -379,7 +379,7 @@ cls.pb.cc cls.pb.h cls.proto
      */
     MergePartition(req: MergePartitionRequest, cb?: (error: string, rep: MergePartitionResponse) => void): Promise<MergePartitionResponse>;
     /**
-     * 本接口用于创建特殊采集配置任务
+     * 本接口用于创建特殊采集配置任务，特殊采集配置应用于自建K8S环境的采集Agent
      */
     CreateConfigExtra(req: CreateConfigExtraRequest, cb?: (error: string, rep: CreateConfigExtraResponse) => void): Promise<CreateConfigExtraResponse>;
     /**

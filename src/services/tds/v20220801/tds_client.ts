@@ -18,13 +18,15 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  DescribeFraudBaseRequest,
-  RiskInfo,
-  DescribeFraudPremiumResponse,
   DescribeTrustedIDResponse,
+  DescribeFraudUltimateRequest,
+  DescribeFraudPremiumResponse,
+  DescribeFraudBaseRequest,
   DescribeFraudBaseResponse,
   DescribeTrustedIDRequest,
   DescribeFraudPremiumRequest,
+  DescribeFraudUltimateResponse,
+  RiskInfo,
 } from "./tds_models"
 
 /**
@@ -64,5 +66,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeFraudPremiumResponse) => void
   ): Promise<DescribeFraudPremiumResponse> {
     return this.request("DescribeFraudPremium", req, cb)
+  }
+
+  /**
+   * 查询设备标识及风险（旗舰版）
+   */
+  async DescribeFraudUltimate(
+    req: DescribeFraudUltimateRequest,
+    cb?: (error: string, rep: DescribeFraudUltimateResponse) => void
+  ): Promise<DescribeFraudUltimateResponse> {
+    return this.request("DescribeFraudUltimate", req, cb)
   }
 }

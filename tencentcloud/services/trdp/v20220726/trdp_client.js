@@ -20,36 +20,18 @@ exports.Client = void 0;
  */
 const abstract_client_1 = require("../../../common/abstract_client");
 /**
- * tds client
+ * trdp client
  * @class
  */
 class Client extends abstract_client_1.AbstractClient {
     constructor(clientConfig) {
-        super("tds.tencentcloudapi.com", "2022-08-01", clientConfig);
+        super("trdp.tencentcloudapi.com", "2022-07-26", clientConfig);
     }
     /**
-     * 查询设备风险
+     * 用户风险质量接口
      */
-    async DescribeFraudBase(req, cb) {
-        return this.request("DescribeFraudBase", req, cb);
-    }
-    /**
-     * 查询设备标识
-     */
-    async DescribeTrustedID(req, cb) {
-        return this.request("DescribeTrustedID", req, cb);
-    }
-    /**
-     * 查询设备标识及风险
-     */
-    async DescribeFraudPremium(req, cb) {
-        return this.request("DescribeFraudPremium", req, cb);
-    }
-    /**
-     * 查询设备标识及风险（旗舰版）
-     */
-    async DescribeFraudUltimate(req, cb) {
-        return this.request("DescribeFraudUltimate", req, cb);
+    async EvaluateUserRisk(req, cb) {
+        return this.request("EvaluateUserRisk", req, cb);
     }
 }
 exports.Client = Client;

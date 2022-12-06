@@ -272,17 +272,28 @@ export interface DescribeCkSqlApisRequest {
   InstanceId: string
 
   /**
-   * api接口名称
-   */
+      * api接口名称,GetClusters:获取集群cluster列表
+GetSystemUsers:获取系统用户列表
+CheckNodeCluster: 检查节点是否隶属一个cluster
+GetClusterDatabases: 获取一个cluster下的数据库列表
+GetClusterTables: 获取一个cluster下的数据库表列表
+GetPrivilegeUsers: 获取授权的用户列表
+GET_USER_CLUSTER_PRIVILEGES:获取用户cluster下的权限   
+GetUserClusterNewPrivileges:获取用户cluster下的权限 (新版）
+RevokeClusterUser:解绑cluster用户
+DeleteSystemUser:删除系统用户 —— 必须所有cluster先解绑
+GetUserOptionMessages:获取用户配置备注信息
+GET_USER_CONFIGS:获取用户配置列表  QUOTA、PROFILE、POLICY
+      */
   ApiType: string
 
   /**
-   * 集群名称
+   * 集群名称，GET_SYSTEM_USERS，GET_PRIVILEGE_USERS，GET_CLUSTER_DATABASES，GET_CLUSTER_TABLES 必填
    */
   Cluster?: string
 
   /**
-   * 用户名称
+   * 用户名称，api与user相关的必填
    */
   UserName?: string
 }
@@ -297,8 +308,9 @@ export interface ActionAlterCkUserRequest {
   UserInfo: CkUserAlterInfo
 
   /**
-   * api接口类型
-   */
+      * api接口类型，
+AddSystemUser新增用户，UpdateSystemUser，修改用户
+      */
   ApiType: string
 }
 

@@ -156,6 +156,43 @@ export interface MixLayout {
 }
 
 /**
+ * 混流转推的视频相关参数。
+ */
+export interface McuVideoParams {
+  /**
+   * 输出流视频编码参数。
+   */
+  VideoEncode?: VideoEncode
+
+  /**
+   * 混流布局参数。
+   */
+  LayoutParams?: McuLayoutParams
+
+  /**
+      * 整个画布背景颜色，常用的颜色有：
+红色：0xcc0033。
+黄色：0xcc9900。
+绿色：0xcccc33。
+蓝色：0x99CCFF。
+黑色：0x000000。
+白色：0xFFFFFF。
+灰色：0x999999。
+      */
+  BackGroundColor?: string
+
+  /**
+   * 整个画布的背景图url，优先级高于BackGroundColor。
+   */
+  BackgroundImageUrl?: string
+
+  /**
+   * 混流布局的水印参数。
+   */
+  WaterMarkList?: Array<McuWaterMarkParams>
+}
+
+/**
  * RemoveUserByStrRoomId返回参数结构体
  */
 export interface RemoveUserByStrRoomIdResponse {
@@ -166,38 +203,19 @@ export interface RemoveUserByStrRoomIdResponse {
 }
 
 /**
- * StartMCUMixTranscode请求参数结构体
+ * 音量布局SEI参数，可以自定义AppData和PayloadType类型。
+该参数内容可以为空，表示携带默认的音量布局SEI。
  */
-export interface StartMCUMixTranscodeRequest {
+export interface McuLayoutVolume {
   /**
-   * TRTC的SDKAppId。
+   * AppData的内容，会被写入自定义SEI中的app_data字段，长度需小于4096。
    */
-  SdkAppId: number
+  AppData?: string
 
   /**
-   * 房间号。
+   * SEI消息的payload_type，默认值100，取值范围100-254（244除外，244为我们内部自定义的时间戳SEI）
    */
-  RoomId: number
-
-  /**
-   * 混流输出控制参数。
-   */
-  OutputParams: OutputParams
-
-  /**
-   * 混流输出编码参数。
-   */
-  EncodeParams: EncodeParams
-
-  /**
-   * 混流输出布局参数。
-   */
-  LayoutParams: LayoutParams
-
-  /**
-   * 第三方CDN转推参数。
-   */
-  PublishCdnParams?: PublishCdnParams
+  PayloadType?: number
 }
 
 /**
@@ -238,38 +256,34 @@ export interface DescribeUserEventRequest {
 }
 
 /**
- * StartMCUMixTranscodeByStrRoomId请求参数结构体
+ * StopPublishCdnStream返回参数结构体
  */
-export interface StartMCUMixTranscodeByStrRoomIdRequest {
+export interface StopPublishCdnStreamResponse {
   /**
-   * TRTC的SDKAppId。
+   * 转推任务唯一的String Id
    */
-  SdkAppId: number
+  TaskId: string
 
   /**
-   * 字符串房间号。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  StrRoomId: string
+  RequestId?: string
+}
+
+/**
+ * 造成异常体验可能的异常事件类型
+ */
+export interface AbnormalEvent {
+  /**
+   * 异常事件ID，具体值查看附录：异常体验ID映射表：https://cloud.tencent.com/document/product/647/44916
+   */
+  AbnormalEventId: number
 
   /**
-   * 混流输出控制参数。
-   */
-  OutputParams: OutputParams
-
-  /**
-   * 混流输出编码参数。
-   */
-  EncodeParams: EncodeParams
-
-  /**
-   * 混流输出布局参数。
-   */
-  LayoutParams: LayoutParams
-
-  /**
-   * 第三方CDN转推参数。
-   */
-  PublishCdnParams?: PublishCdnParams
+      * 远端用户ID,""：表示异常事件不是由远端用户产生
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PeerId: string
 }
 
 /**
@@ -338,6 +352,36 @@ export interface DescribeUserEventResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 视频编码参数。
+ */
+export interface VideoEncode {
+  /**
+   * 输出流宽，音视频输出时必填。取值范围[0,1920]，单位为像素值。
+   */
+  Width: number
+
+  /**
+   * 输出流高，音视频输出时必填。取值范围[0,1080]，单位为像素值。
+   */
+  Height: number
+
+  /**
+   * 输出流帧率，音视频输出时必填。取值范围[1,60]，表示混流的输出帧率可选范围为1到60fps。
+   */
+  Fps: number
+
+  /**
+   * 输出流码率，音视频输出时必填。取值范围[1,10000]，单位为kbps。
+   */
+  BitRate: number
+
+  /**
+   * 输出流gop，音视频输出时必填。取值范围[1,5]，单位为秒。
+   */
+  Gop: number
 }
 
 /**
@@ -450,18 +494,38 @@ DataType 为null，UserIds长度不超过100，PageSize最大不超过100。
 }
 
 /**
- * 录制的音视频转码参数。
+ * ModifyPicture请求参数结构体
  */
-export interface MixTranscodeParams {
+export interface ModifyPictureRequest {
   /**
-   * 录制视频转码参数，注意如果设置了这个参数，那么里面的字段都是必填的，没有默认值，如果不填这个参数，那么取值为默认值。
+   * 图片id
    */
-  VideoParams?: VideoParams
+  PictureId: number
 
   /**
-   * 录制音频转码参数，注意如果设置了这个参数，那么里面的字段都是必填的，没有默认值，如果不填这个参数，那么取值为默认值。
+   * 应用id
    */
-  AudioParams?: AudioParams
+  SdkAppId: number
+
+  /**
+   * 图片长度
+   */
+  Height?: number
+
+  /**
+   * 图片宽度
+   */
+  Width?: number
+
+  /**
+   * 显示位置x轴方向
+   */
+  XPosition?: number
+
+  /**
+   * 显示位置y轴方向
+   */
+  YPosition?: number
 }
 
 /**
@@ -802,6 +866,26 @@ export interface CloudVod {
 }
 
 /**
+ * SdkAppId级别实时音视频的用量数据
+ */
+export interface SdkAppIdNewTrtcTimeUsage {
+  /**
+   * SdkAppId的值。
+   */
+  SdkAppId: string
+
+  /**
+   * 统计的时间点数据。
+   */
+  TrtcTimeUsages: Array<TrtcTimeNewUsage>
+
+  /**
+   * 统计的麦下用量的时间点数据。
+   */
+  AudienceTrtcTimeUsages: Array<TrtcTimeNewUsage>
+}
+
+/**
  * MCU混流输出流编码参数
  */
 export interface EncodeParams {
@@ -901,6 +985,31 @@ export interface DescribeCallDetailInfoResponse {
 }
 
 /**
+ * 混流自定义裁剪参数
+ */
+export interface McuCustomCrop {
+  /**
+   * 自定义裁剪起始位置的X偏移，单位为像素值，大于等于0。
+   */
+  LocationX: number
+
+  /**
+   * 自定义裁剪起始位置的Y偏移，单位为像素值，大于等于0。
+   */
+  LocationY: number
+
+  /**
+   * 自定义裁剪画面的宽度，单位为像素值，大于0，且LocationX+Width不超过10000
+   */
+  Width: number
+
+  /**
+   * 自定义裁剪画面的高度，单位为像素值，大于0，且LocationY+Height不超过10000
+   */
+  Height: number
+}
+
+/**
  * 实时音视频用量的某一时间段的统计信息.
  */
 export interface TrtcTimeNewUsage {
@@ -977,38 +1086,18 @@ export interface DescribeMixTranscodingUsageRequest {
 }
 
 /**
- * ModifyPicture请求参数结构体
+ * 录制的音视频转码参数。
  */
-export interface ModifyPictureRequest {
+export interface MixTranscodeParams {
   /**
-   * 图片id
+   * 录制视频转码参数，注意如果设置了这个参数，那么里面的字段都是必填的，没有默认值，如果不填这个参数，那么取值为默认值。
    */
-  PictureId: number
+  VideoParams?: VideoParams
 
   /**
-   * 应用id
+   * 录制音频转码参数，注意如果设置了这个参数，那么里面的字段都是必填的，没有默认值，如果不填这个参数，那么取值为默认值。
    */
-  SdkAppId: number
-
-  /**
-   * 图片长度
-   */
-  Height?: number
-
-  /**
-   * 图片宽度
-   */
-  Width?: number
-
-  /**
-   * 显示位置x轴方向
-   */
-  XPosition?: number
-
-  /**
-   * 显示位置y轴方向
-   */
-  YPosition?: number
+  AudioParams?: AudioParams
 }
 
 /**
@@ -1102,6 +1191,31 @@ export interface WaterMarkImage {
 }
 
 /**
+ * 混流用户参数
+ */
+export interface McuUserInfoParams {
+  /**
+   * 用户参数。
+   */
+  UserInfo: MixUserInfo
+}
+
+/**
+ * 用户媒体流参数。
+ */
+export interface UserMediaStream {
+  /**
+   * TRTC用户参数。
+   */
+  UserInfo?: MixUserInfo
+
+  /**
+   * 主辅路流类型，0为摄像头，1为屏幕分享，不填默认为0。
+   */
+  StreamType?: number
+}
+
+/**
  * sdk或webrtc的事件列表。
  */
 export interface EventList {
@@ -1155,6 +1269,31 @@ export interface DescribeRoomInfoResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 混流布局参数。
+ */
+export interface McuLayoutParams {
+  /**
+   * 布局模式：动态布局（1：悬浮布局（默认），2：屏幕分享布局，3：九宫格布局），静态布局（4：自定义布局）。
+   */
+  MixLayoutMode?: number
+
+  /**
+   * 纯音频上行是否占布局位置，只在动态布局中有效。0表示纯音频不占布局位置，1表示纯音频占布局位置，不填默认为0。
+   */
+  PureAudioHoldPlaceMode?: number
+
+  /**
+   * 自定义模板中有效，指定用户视频在混合画面中的位置。
+   */
+  MixLayoutList?: Array<McuLayout>
+
+  /**
+   * 指定动态布局中悬浮布局和屏幕分享布局的大画面信息，只在悬浮布局和屏幕分享布局有效。
+   */
+  MaxVideoUser?: MaxVideoUser
 }
 
 /**
@@ -1219,6 +1358,68 @@ export interface SdkAppIdTrtcMcuTranscodeTimeUsage {
 }
 
 /**
+ * 混流布局参数。
+ */
+export interface McuLayout {
+  /**
+   * 用户媒体流参数。不填时腾讯云后台按照上行主播的进房顺序自动填充。
+   */
+  UserMediaStream?: UserMediaStream
+
+  /**
+   * 子画面在输出时的宽度，单位为像素值，不填默认为0。
+   */
+  ImageWidth?: number
+
+  /**
+   * 子画面在输出时的高度，单位为像素值，不填默认为0。
+   */
+  ImageHeight?: number
+
+  /**
+   * 子画面在输出时的X偏移，单位为像素值，LocationX与ImageWidth之和不能超过混流输出的总宽度，不填默认为0。
+   */
+  LocationX?: number
+
+  /**
+   * 子画面在输出时的Y偏移，单位为像素值，LocationY与ImageHeight之和不能超过混流输出的总高度，不填默认为0。
+   */
+  LocationY?: number
+
+  /**
+   * 子画面在输出时的层级，不填默认为0。
+   */
+  ZOrder?: number
+
+  /**
+   * 子画面在输出时的显示模式：0为裁剪，1为缩放，2为缩放并显示黑底。不填默认为0。
+   */
+  RenderMode?: number
+
+  /**
+      * 子画面的背景颜色，常用的颜色有：
+红色：0xcc0033。
+黄色：0xcc9900。
+绿色：0xcccc33。
+蓝色：0x99CCFF。
+黑色：0x000000。
+白色：0xFFFFFF。
+灰色：0x999999。
+      */
+  BackGroundColor?: string
+
+  /**
+   * 子画面的背景图url，填写该参数，当用户关闭摄像头或未进入TRTC房间时，会在布局位置填充为指定图片。若指定图片与布局位置尺寸比例不一致，则会对图片进行拉伸处理，优先级高于BackGroundColor。
+   */
+  BackgroundImageUrl?: string
+
+  /**
+   * 客户自定义裁剪，针对原始输入流裁剪
+   */
+  CustomCrop?: McuCustomCrop
+}
+
+/**
  * DescribeUserInfo返回参数结构体
  */
 export interface DescribeUserInfoResponse {
@@ -1248,6 +1449,91 @@ export interface DescribeTRTCRealTimeScaleMetricDataResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Data: TRTCDataResp
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * StartMCUMixTranscode请求参数结构体
+ */
+export interface StartMCUMixTranscodeRequest {
+  /**
+   * TRTC的SDKAppId。
+   */
+  SdkAppId: number
+
+  /**
+   * 房间号。
+   */
+  RoomId: number
+
+  /**
+   * 混流输出控制参数。
+   */
+  OutputParams: OutputParams
+
+  /**
+   * 混流输出编码参数。
+   */
+  EncodeParams: EncodeParams
+
+  /**
+   * 混流输出布局参数。
+   */
+  LayoutParams: LayoutParams
+
+  /**
+   * 第三方CDN转推参数。
+   */
+  PublishCdnParams?: PublishCdnParams
+}
+
+/**
+ * 图片水印参数。
+ */
+export interface McuWaterMarkImage {
+  /**
+   * 水印图片URL地址，支持png、jpg、jpeg格式。图片大小限制不超过5MB。
+   */
+  WaterMarkUrl: string
+
+  /**
+   * 水印在输出时的宽。单位为像素值。
+   */
+  WaterMarkWidth: number
+
+  /**
+   * 水印在输出时的高。单位为像素值。
+   */
+  WaterMarkHeight: number
+
+  /**
+   * 水印在输出时的X偏移。单位为像素值。
+   */
+  LocationX: number
+
+  /**
+   * 水印在输出时的Y偏移。单位为像素值。
+   */
+  LocationY: number
+
+  /**
+   * 水印在输出时的层级，不填默认为0。
+   */
+  ZOrder?: number
+}
+
+/**
+ * StartPublishCdnStream返回参数结构体
+ */
+export interface StartPublishCdnStreamResponse {
+  /**
+   * 用于唯一标识转推任务，由腾讯云服务端生成，后续更新和停止请求都需要携带TaskiD参数。
+   */
+  TaskId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1335,6 +1621,21 @@ export interface DescribeRecordingUsageResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * StopMCUMixTranscode请求参数结构体
+ */
+export interface StopMCUMixTranscodeRequest {
+  /**
+   * TRTC的SDKAppId。
+   */
+  SdkAppId: number
+
+  /**
+   * 房间号。
+   */
+  RoomId: number
 }
 
 /**
@@ -1541,6 +1842,31 @@ export interface DescribeMixTranscodingUsageResponse {
 }
 
 /**
+ * 回推房间参数。
+ */
+export interface McuFeedBackRoomParams {
+  /**
+   * 回推房间的RoomId。
+   */
+  RoomId: string
+
+  /**
+   * 房间类型，必须和回推房间所对应的RoomId类型相同，0为整形房间号，1为字符串房间号。
+   */
+  RoomIdType: number
+
+  /**
+   * 回推房间使用的UserId(https://cloud.tencent.com/document/product/647/46351#userid)，注意这个userId不能与其他TRTC或者转推服务等已经使用的UserId重复，建议可以把房间ID作为userId的标识的一部分。
+   */
+  UserId: string
+
+  /**
+   * 回推房间UserId对应的用户签名，相当于登录密码，具体计算方法请参考TRTC计算[UserSig](https://cloud.tencent.com/document/product/647/45910#UserSig)的方案。
+   */
+  UserSig: string
+}
+
+/**
  * SdkAppId级别录制时长数据。
  */
 export interface SdkAppIdRecordUsage {
@@ -1556,23 +1882,28 @@ export interface SdkAppIdRecordUsage {
 }
 
 /**
- * SdkAppId级别实时音视频的用量数据
+ * 音频编码参数。
  */
-export interface SdkAppIdNewTrtcTimeUsage {
+export interface AudioEncode {
   /**
-   * SdkAppId的值。
+   * 输出流音频采样率。取值为[48000, 44100, 32000, 24000, 16000, 8000]，单位是Hz。
    */
-  SdkAppId: string
+  SampleRate: number
 
   /**
-   * 统计的时间点数据。
+   * 输出流音频声道数，取值范围[1,2]，1表示混流输出音频为单声道，2表示混流输出音频为双声道。
    */
-  TrtcTimeUsages: Array<TrtcTimeNewUsage>
+  Channel: number
 
   /**
-   * 统计的麦下用量的时间点数据。
+   * 输出流音频码率。取值范围[8,500]，单位为kbps。
    */
-  AudienceTrtcTimeUsages: Array<TrtcTimeNewUsage>
+  BitRate: number
+
+  /**
+   * 输出流音频编码类型，取值范围[0, 1, 2]，0为LC-AAC，1为HE-AAC，2为HE-AACv2。默认值为0。当音频编码设置为HE-AACv2时，只支持输出流音频声道数为双声道。HE-AAC和HE-AACv2支持的输出流音频采样率范围为[48000, 44100, 32000, 24000, 16000]。
+   */
+  Codec?: number
 }
 
 /**
@@ -1698,18 +2029,23 @@ export interface TencentVod {
 }
 
 /**
- * StopMCUMixTranscode请求参数结构体
+ * 自定义透传SEI
  */
-export interface StopMCUMixTranscodeRequest {
+export interface McuPassThrough {
   /**
-   * TRTC的SDKAppId。
+   * 透传SEI的payload内容。
    */
-  SdkAppId: number
+  PayloadContent: string
 
   /**
-   * 房间号。
+   * SEI消息的payload_type，取值范围5、100-254（244除外，244为我们内部自定义的时间戳SEI）。
    */
-  RoomId: number
+  PayloadType: number
+
+  /**
+   * PayloadType为5，PayloadUuid必须填写。PayloadType不是5时，不需要填写，填写会被后台忽略。该值必须是32长度的十六进制。
+   */
+  PayloadUuid?: string
 }
 
 /**
@@ -1958,6 +2294,21 @@ export interface QualityData {
 }
 
 /**
+ * StopPublishCdnStream请求参数结构体
+ */
+export interface StopPublishCdnStreamRequest {
+  /**
+   * TRTC的[SdkAppId](https://cloud.tencent.com/document/product/647/46351#sdkappid)，和转推的房间所对应的SdkAppId相同。
+   */
+  SdkAppId: number
+
+  /**
+   * 唯一标识转推任务。
+   */
+  TaskId: string
+}
+
+/**
  * DeletePicture返回参数结构体
  */
 export interface DeletePictureResponse {
@@ -2020,6 +2371,66 @@ export interface VideoParams {
    * 视频关键帧时间间隔，单位秒，默认值10秒。
    */
   Gop: number
+}
+
+/**
+ * StartPublishCdnStream请求参数结构体
+ */
+export interface StartPublishCdnStreamRequest {
+  /**
+   * TRTC的[SdkAppId](https://cloud.tencent.com/document/product/647/46351#sdkappid)，和转推的房间所对应的SdkAppId相同。
+   */
+  SdkAppId: number
+
+  /**
+   * 主房间信息RoomId，转推的TRTC房间所对应的RoomId。
+   */
+  RoomId: string
+
+  /**
+   * 主房间信息RoomType，必须和转推的房间所对应的RoomId类型相同，0为整形房间号，1为字符串房间号。
+   */
+  RoomIdType: number
+
+  /**
+   * 转推服务加入TRTC房间的机器人参数。
+   */
+  AgentParams: AgentParams
+
+  /**
+   * 是否转码，0表示无需转码，1表示需要转码。
+   */
+  WithTranscoding: number
+
+  /**
+   * 转推流的音频编码参数。
+   */
+  AudioParams?: McuAudioParams
+
+  /**
+   * 转推流的视频编码参数，不填表示纯音频转推。
+   */
+  VideoParams?: McuVideoParams
+
+  /**
+   * 需要单流旁路转推的用户上行参数，单流旁路转推时，WithTranscoding需要设置为0。
+   */
+  SingleSubscribeParams?: SingleSubscribeParams
+
+  /**
+   * 转推的CDN参数。
+   */
+  PublishCdnParams?: Array<McuPublishCdnParam>
+
+  /**
+   * 混流SEI参数
+   */
+  SeiParams?: McuSeiParams
+
+  /**
+   * 回推房间信息
+   */
+  FeedBackRoomParams?: Array<McuFeedBackRoomParams>
 }
 
 /**
@@ -2325,19 +2736,38 @@ export interface ModifyCloudRecordingResponse {
 }
 
 /**
- * 造成异常体验可能的异常事件类型
+ * StartMCUMixTranscodeByStrRoomId请求参数结构体
  */
-export interface AbnormalEvent {
+export interface StartMCUMixTranscodeByStrRoomIdRequest {
   /**
-   * 异常事件ID，具体值查看附录：异常体验ID映射表：https://cloud.tencent.com/document/product/647/44916
+   * TRTC的SDKAppId。
    */
-  AbnormalEventId: number
+  SdkAppId: number
 
   /**
-      * 远端用户ID,""：表示异常事件不是由远端用户产生
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  PeerId: string
+   * 字符串房间号。
+   */
+  StrRoomId: string
+
+  /**
+   * 混流输出控制参数。
+   */
+  OutputParams: OutputParams
+
+  /**
+   * 混流输出编码参数。
+   */
+  EncodeParams: EncodeParams
+
+  /**
+   * 混流输出布局参数。
+   */
+  LayoutParams: LayoutParams
+
+  /**
+   * 第三方CDN转推参数。
+   */
+  PublishCdnParams?: PublishCdnParams
 }
 
 /**
@@ -2370,6 +2800,26 @@ Exited：表示当前录制任务正在退出的过程中。
 }
 
 /**
+ * TRTC用户参数。
+ */
+export interface MixUserInfo {
+  /**
+   * 用户ID。
+   */
+  UserId: string
+
+  /**
+   * 动态布局时房间信息必须和主房间信息保持一致，自定义布局时房间信息必须和MixLayoutList中对应用户的房间信息保持一致，不填时默认与主房间信息一致。
+   */
+  RoomId?: string
+
+  /**
+   * 房间号类型，0为整形房间号，1为字符串房间号。
+   */
+  RoomIdType?: number
+}
+
+/**
  * DismissRoom返回参数结构体
  */
 export interface DismissRoomResponse {
@@ -2377,6 +2827,91 @@ export interface DismissRoomResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * UpdatePublishCdnStream请求参数结构体
+ */
+export interface UpdatePublishCdnStreamRequest {
+  /**
+   * TRTC的[SdkAppId](https://cloud.tencent.com/document/product/647/46351#sdkappid)，和转推的房间所对应的SdkAppId相同。
+   */
+  SdkAppId: number
+
+  /**
+   * 唯一标识转推任务。
+   */
+  TaskId: string
+
+  /**
+   * 客户保证同一个任务，每次更新请求中的SequenceNumber递增，防止请求乱序。
+   */
+  SequenceNumber: number
+
+  /**
+   * 是否转码，0表示无需转码，1表示需要转码。
+   */
+  WithTranscoding: number
+
+  /**
+   * 更新相关参数，只支持更新参与混音的主播列表参数。不填表示不更新此参数。
+   */
+  AudioParams?: McuAudioParams
+
+  /**
+   * 更新视频相关参数，转码时支持更新除编码类型之外的编码参数，视频布局参数，背景图片和背景颜色参数，水印参数。不填表示不更新此参数。
+   */
+  VideoParams?: McuVideoParams
+
+  /**
+   * 更新单流转推的用户上行参数，仅在非转码时有效。不填表示不更新此参数。
+   */
+  SingleSubscribeParams?: SingleSubscribeParams
+
+  /**
+   * 更新转推的CDN参数。不填表示不更新此参数。
+   */
+  PublishCdnParams?: Array<McuPublishCdnParam>
+
+  /**
+   * 混流SEI参数
+   */
+  SeiParams?: McuSeiParams
+
+  /**
+   * 回推房间信息
+   */
+  FeedBackRoomParams?: Array<McuFeedBackRoomParams>
+}
+
+/**
+ * 指定动态布局中悬浮布局和屏幕分享布局的大画面信息，只在悬浮布局和屏幕分享布局有效。
+ */
+export interface MaxVideoUser {
+  /**
+   * 用户媒体流参数。
+   */
+  UserMediaStream: UserMediaStream
+}
+
+/**
+ * 转推服务加入TRTC房间的机器人参数。
+ */
+export interface AgentParams {
+  /**
+   * 转推服务在TRTC房间使用的[UserId](https://cloud.tencent.com/document/product/647/46351#userid)，注意这个userId不能与其他TRTC或者转推服务等已经使用的UserId重复，建议可以把房间ID作为userId的标识的一部分。
+   */
+  UserId: string
+
+  /**
+   * 转推服务加入TRTC房间的用户签名，当前 UserId 对应的验证签名，相当于登录密码，具体计算方法请参考TRTC计算[UserSig](https://cloud.tencent.com/document/product/647/45910#UserSig)的方案。
+   */
+  UserSig?: string
+
+  /**
+   * 所有参与混流转推的主播持续离开TRTC房间超过MaxIdleTime的时长，自动停止转推，单位：秒。默认值为 30 秒，该值需大于等于 5秒，且小于等于 86400秒(24小时)。
+   */
+  MaxIdleTime?: number
 }
 
 /**
@@ -2392,6 +2927,21 @@ export interface DeletePictureRequest {
    * 应用id
    */
   SdkAppId: number
+}
+
+/**
+ * 混流SEI参数
+ */
+export interface McuSeiParams {
+  /**
+   * 音量布局SEI
+   */
+  LayoutVolume?: McuLayoutVolume
+
+  /**
+   * 透传SEI
+   */
+  PassThrough?: McuPassThrough
 }
 
 /**
@@ -2412,6 +2962,21 @@ export interface DescribeExternalTrtcMeasureRequest {
    * 对应的应用。如果没有这个参数，表示获取用户名下全部实时音视频应用的汇总。
    */
   SdkAppId?: number
+}
+
+/**
+ * UpdatePublishCdnStream返回参数结构体
+ */
+export interface UpdatePublishCdnStreamResponse {
+  /**
+   * 转推任务唯一的String Id
+   */
+  TaskId: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2491,6 +3056,28 @@ export interface DescribeTRTCMarketScaleMetricDataResponse {
 }
 
 /**
+ * 混流转推的音频相关参数。
+ */
+export interface McuAudioParams {
+  /**
+   * 音频编码参数。
+   */
+  AudioEncode?: AudioEncode
+
+  /**
+      * 音频用户白名单，start时，为空或不填表示混所有主播音频，填具体值表示混指定主播音频；update时，不填表示不更新，为空表示更新为混所有主播音频，填具体值表示更新为混指定主播音频。
+使用黑白名单时，黑白名单必须同时填写。都不填写时表示不更新。同一个用户同时在黑白名单时，以黑名单为主。
+      */
+  SubscribeAudioList?: Array<McuUserInfoParams>
+
+  /**
+      * 音频用户黑名单，为空或不填表示无黑名单，填具体值表示不混指定主播音频。update时，不填表示不更新，为空表示更新为清空黑名单，填具体值表示更新为不混指定主播音频。
+使用黑白名单时，黑白名单必须同时填写。都不填写时表示不更新。同一个用户同时在黑白名单时，以黑名单为主。
+      */
+  UnSubscribeAudioList?: Array<McuUserInfoParams>
+}
+
+/**
  * 自定义模板中有效，指定用户视频在混合画面中的位置。
  */
 export interface PresetLayoutConfig {
@@ -2546,6 +3133,21 @@ export interface PresetLayoutConfig {
 }
 
 /**
+ * 转推参数。
+ */
+export interface McuPublishCdnParam {
+  /**
+   * CDN转推URL。
+   */
+  PublishCdnUrl: string
+
+  /**
+   * 是否是腾讯云CDN，0为转推非腾讯云CDN，1为转推腾讯CDN，不携带该参数默认为1。注意：为避免误产生转推费用，该参数建议明确填写。转推非腾讯云CDN时会产生转推费用，详情参见接口文档说明。
+   */
+  IsTencentCdn?: number
+}
+
+/**
  * 录制音频转码参数。
  */
 export interface AudioParams {
@@ -2588,6 +3190,16 @@ export interface SeriesInfo {
 }
 
 /**
+ * 单流旁路转推的用户上行信息。
+ */
+export interface SingleSubscribeParams {
+  /**
+   * 用户媒体流参数。
+   */
+  UserMediaStream: UserMediaStream
+}
+
+/**
  * 第三方CDN转推参数
  */
 export interface PublishCdnParams {
@@ -2600,6 +3212,21 @@ export interface PublishCdnParams {
    * 第三方CDN转推的目的地址，同时只支持转推一个第三方CDN地址。
    */
   PublishCdnUrls: Array<string>
+}
+
+/**
+ * 水印参数。
+ */
+export interface McuWaterMarkParams {
+  /**
+   * 水印类型，0为图片（默认）。
+   */
+  WaterMarkType?: number
+
+  /**
+   * 图片水印参数。WaterMarkType为0指定。
+   */
+  WaterMarkImage?: McuWaterMarkImage
 }
 
 /**

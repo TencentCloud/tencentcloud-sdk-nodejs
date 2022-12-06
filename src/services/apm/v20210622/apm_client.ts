@@ -34,6 +34,7 @@ import {
   DescribeMetricRecordsResponse,
   ApmTag,
   Filter,
+  APMKV,
   DescribeApmAgentRequest,
   DescribeMetricRecordsRequest,
   DescribeGeneralMetricDataRequest,

@@ -40,7 +40,7 @@ export declare class Client extends AbstractClient {
      */
     StartSyncJob(req: StartSyncJobRequest, cb?: (error: string, rep: StartSyncJobResponse) => void): Promise<StartSyncJobResponse>;
     /**
-     * 终止同步任务
+     * 结束同步任务，操作后可通过查询同步任务信息接口DescribeSyncJobs，获取操作后的状态。
      */
     StopSyncJob(req: StopSyncJobRequest, cb?: (error: string, rep: StopSyncJobResponse) => void): Promise<StopSyncJobResponse>;
     /**

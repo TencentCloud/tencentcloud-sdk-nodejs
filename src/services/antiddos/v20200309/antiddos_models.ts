@@ -1230,12 +1230,12 @@ export interface DescribeOverviewAttackTrendRequest {
   Period: number
 
   /**
-   * 统计开始时间
+   * 防护概览攻击趋势开始时间
    */
   StartTime: string
 
   /**
-   * 统计结束时间
+   * 防护概览攻击趋势结束时间
    */
   EndTime: string
 }
@@ -2167,12 +2167,12 @@ export interface DescribeOverviewAttackTrendResponse {
   Type: string
 
   /**
-   * 统计起始时间
+   * 防护概览攻击趋势起始时间
    */
   StartTime: string
 
   /**
-   * 统计结束时间
+   * 防护概览攻击趋势结束时间
    */
   EndTime: string
 

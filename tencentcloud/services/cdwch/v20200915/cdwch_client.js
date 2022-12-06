@@ -34,7 +34,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateBackUpSchedule", req, cb);
     }
     /**
-     * 针对驱动sql命令查询ck集群接口
+     * 查询集群用户、集群表，数据库等相关信息
      */
     async DescribeCkSqlApis(req, cb) {
         return this.request("DescribeCkSqlApis", req, cb);

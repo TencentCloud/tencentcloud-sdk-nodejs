@@ -89,7 +89,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyIndex", req, cb);
     }
     /**
-     * 本接口用于修改特殊采集配置任务
+     * 本接口用于修改特殊采集配置任务，特殊采集配置应用于自建K8S环境的采集Agent
      */
     async ModifyConfigExtra(req, cb) {
         return this.request("ModifyConfigExtra", req, cb);
@@ -119,7 +119,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteConfig", req, cb);
     }
     /**
-     * 本接口用于获取特殊采集配置
+     * 本接口用于获取特殊采集配置，特殊采集配置应用于自建K8S环境的采集Agent
      */
     async DescribeConfigExtras(req, cb) {
         return this.request("DescribeConfigExtras", req, cb);
@@ -191,7 +191,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteConfigFromMachineGroup", req, cb);
     }
     /**
-     * 本接口用于删除特殊采集规则配置
+     * 本接口用于删除特殊采集规则配置，特殊采集配置应用于自建K8S环境的采集Agent
      */
     async DeleteConfigExtra(req, cb) {
         return this.request("DeleteConfigExtra", req, cb);
@@ -507,7 +507,7 @@ cls.pb.cc cls.pb.h cls.proto
         return this.request("MergePartition", req, cb);
     }
     /**
-     * 本接口用于创建特殊采集配置任务
+     * 本接口用于创建特殊采集配置任务，特殊采集配置应用于自建K8S环境的采集Agent
      */
     async CreateConfigExtra(req, cb) {
         return this.request("CreateConfigExtra", req, cb);
