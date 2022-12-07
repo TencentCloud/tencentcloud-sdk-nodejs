@@ -55,7 +55,7 @@ export interface CreateBackUpScheduleRequest {
   ScheduleId?: number
 
   /**
-   * 选择的星期 逗号分隔
+   * 选择的星期 逗号分隔，例如 2 代表周二
    */
   WeekDays?: string
 

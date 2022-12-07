@@ -1824,7 +1824,7 @@ export interface DescribeRuleGroupSubscriptionResponse {
       * 规则组订阅信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Data: RuleGroupSubscribe
+  Data?: RuleGroupSubscribe
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2686,6 +2686,11 @@ export interface ModifyRuleGroupSubscriptionRequest {
    * 数据表Id
    */
   TableId?: string
+
+  /**
+   * 群机器人webhook信息
+   */
+  WebHooks?: Array<SubscribeWebHook>
 }
 
 /**
@@ -4901,7 +4906,7 @@ export interface ModifyRuleGroupSubscriptionResponse {
       * 规则组ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Data: number
+  Data?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -10854,6 +10859,12 @@ export interface RuleGroupSubscribe {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   SubscribeType?: Array<number>
+
+  /**
+      * 群机器人配置的webhook信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  WebHooks?: Array<SubscribeWebHook>
 }
 
 /**
@@ -10975,6 +10986,23 @@ export interface DescribeIntegrationStatisticsAgentStatusRequest {
    * 资源组id
    */
   ExecutorGroupId?: string
+}
+
+/**
+ * 群机器人订阅配置
+ */
+export interface SubscribeWebHook {
+  /**
+      * 群机器人类型，当前支持飞书
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  HookType?: string
+
+  /**
+      * 群机器人webhook地址，配置方式参考https://cloud.tencent.com/document/product/1254/70736
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  HookAddress?: string
 }
 
 /**

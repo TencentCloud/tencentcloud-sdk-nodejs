@@ -404,29 +404,45 @@ export interface DescribeFlowTemplatesRequest {
       */
     Operator: UserInfo;
     /**
-      * 搜索条件，具体参考Filter结构体。本接口取值：template-id：按照【 **模板唯一标识** 】进行过滤
+      * 企业组织相关信息
       */
-    Filters?: Array<Filter>;
+    Organization?: OrganizationInfo;
     /**
-      * 查询个数，默认20，最大200
+      * 应用相关信息
       */
-    Limit?: number;
+    Agent?: Agent;
     /**
       * 查询偏移位置，默认0
       */
     Offset?: number;
     /**
-      * 查询内容：0-模板列表及详情（默认），1-仅模板列表
+      * 查询个数，默认20，最大200
       */
-    ContentType?: number;
+    Limit?: number;
+    /**
+      * 搜索条件，具体参考Filter结构体。本接口取值：template-id：按照【 **模板唯一标识** 】进行过滤
+      */
+    Filters?: Array<Filter>;
+    /**
+      * 这个参数跟下面的IsChannel参数配合使用。
+IsChannel=false时，ApplicationId参数不起任何作用。
+IsChannel=true时，ApplicationId为空，查询所有渠道模板列表；ApplicationId不为空，查询指定渠道下的模板列表
+ApplicationId为空，查询渠道模板列表
+      */
+    ApplicationId?: string;
+    /**
+      * 默认为false，查询SaaS模板库列表；
+为true，查询渠道模板库管理列表
+      */
+    IsChannel?: boolean;
     /**
       * 暂未开放
       */
     GenerateSource?: number;
     /**
-      * 应用相关信息
+      * 查询内容：0-模板列表及详情（默认），1-仅模板列表
       */
-    Agent?: Agent;
+    ContentType?: number;
 }
 /**
  * DescribeFlowEvidenceReport返回参数结构体
@@ -508,6 +524,15 @@ export interface TemplateInfo {
       * 发起人角色信息
       */
     Promoter?: Recipient;
+    /**
+      * 模板创建组织id
+      */
+    OrganizationId?: string;
+    /**
+      * 模板预览链接
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PreviewUrl?: string;
 }
 /**
  * CreateDocument返回参数结构体

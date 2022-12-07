@@ -64,6 +64,7 @@ import {
   InquiryPriceUpdateInstanceResponse,
   NewResourceSpec,
   PersistentVolumeContext,
+  DeleteUserManagerUserListRequest,
   DescribeResourceScheduleResponse,
   ModifyResourceSchedulerRequest,
   LoginSettings,
@@ -83,6 +84,7 @@ import {
   InquiryPriceUpdateInstanceRequest,
   DescribeInstancesListRequest,
   OutterResource,
+  DeleteUserManagerUserListResponse,
   ModifyResourcePoolsResponse,
   TerminateTasksResponse,
   DescribeInstancesResponse,
@@ -241,6 +243,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RunJobFlowResponse) => void
   ): Promise<RunJobFlowResponse> {
     return this.request("RunJobFlow", req, cb)
+  }
+
+  /**
+     * 删除用户列表（用户管理）
+
+     */
+  async DeleteUserManagerUserList(
+    req: DeleteUserManagerUserListRequest,
+    cb?: (error: string, rep: DeleteUserManagerUserListResponse) => void
+  ): Promise<DeleteUserManagerUserListResponse> {
+    return this.request("DeleteUserManagerUserList", req, cb)
   }
 
   /**

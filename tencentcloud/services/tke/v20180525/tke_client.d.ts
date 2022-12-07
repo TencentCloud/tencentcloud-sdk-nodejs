@@ -576,7 +576,7 @@ export declare class Client extends AbstractClient {
      */
     DeleteClusterEndpoint(req: DeleteClusterEndpointRequest, cb?: (error: string, rep: DeleteClusterEndpointResponse) => void): Promise<DeleteClusterEndpointResponse>;
     /**
-     * 在应用市场中集群创建应用
+     * 在应用市场中给集群创建应用
      */
     CreateClusterRelease(req: CreateClusterReleaseRequest, cb?: (error: string, rep: CreateClusterReleaseResponse) => void): Promise<CreateClusterReleaseResponse>;
     /**

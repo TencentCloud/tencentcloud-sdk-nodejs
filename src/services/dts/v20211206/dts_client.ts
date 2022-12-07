@@ -210,7 +210,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除一致性校验任务
+   * 删除一致性校验任务。当一致性校验任务状态为success、failed、canceled 时可以执行此操作。
    */
   async DeleteCompareTask(
     req: DeleteCompareTaskRequest,

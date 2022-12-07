@@ -64,7 +64,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateSyncJob", req, cb);
     }
     /**
-     * 删除一致性校验任务
+     * 删除一致性校验任务。当一致性校验任务状态为success、failed、canceled 时可以执行此操作。
      */
     async DeleteCompareTask(req, cb) {
         return this.request("DeleteCompareTask", req, cb);

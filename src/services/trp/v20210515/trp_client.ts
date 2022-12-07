@@ -42,6 +42,7 @@ import {
   ModifyTraceDataResponse,
   DeleteProductRequest,
   CreateTraceChainResponse,
+  CorpQuota,
   CreateCustomRuleRequest,
   DescribeCodePackStatusRequest,
   ModifyTraceDataRequest,
@@ -49,17 +50,19 @@ import {
   ModifyTraceDataRanksResponse,
   CreateTraceCodesRequest,
   DescribeCodeBatchByIdResponse,
+  DescribeCorpQuotasResponse,
   DescribeCodePackStatusResponse,
   Job,
   TraceData,
   PackSpec,
   ModifyCustomRuleResponse,
   ModifyMerchantResponse,
-  DeleteProductResponse,
   DescribeCodesByPackResponse,
+  CreateProductResponse,
   CreateTraceDataRequest,
   Ext,
-  CreateProductResponse,
+  DescribeCorpQuotasRequest,
+  CreateProductRequest,
   CreateCustomPackRequest,
   CreateCodePackRequest,
   CreateCodeBatchRequest,
@@ -67,12 +70,13 @@ import {
   DescribeCustomRuleByIdRequest,
   ChainData,
   PhaseData,
+  ModifyTraceDataRanksRequest,
   ModifyCustomRuleStatusResponse,
   CreateCustomPackResponse,
   ModifyMerchantRequest,
   DescribeTmpTokenResponse,
   DescribeCodePackUrlRequest,
-  ModifyTraceDataRanksRequest,
+  DeleteProductResponse,
   DeleteTraceDataResponse,
   ModifyCustomRuleStatusRequest,
   CreateCodePackResponse,
@@ -87,10 +91,10 @@ import {
   DescribeJobFileUrlRequest,
   CreateTraceCodesAsyncResponse,
   DescribeCustomRulesRequest,
-  CreateProductRequest,
   ModifyCodeBatchRequest,
   DescribeProductByIdRequest,
   DescribeTraceCodesResponse,
+  UsageQuota,
   CreateCorporationOrderRequest,
   CreateTraceCodesResponse,
   DeleteTraceDataRequest,
@@ -98,6 +102,7 @@ import {
   Product,
   DescribeTmpTokenRequest,
   TraceCode,
+  Quota,
   CreateMerchantResponse,
   DescribeMerchantsResponse,
   DescribeTraceDataListRequest,
@@ -232,6 +237,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeProductsResponse) => void
   ): Promise<DescribeProductsResponse> {
     return this.request("DescribeProducts", req, cb)
+  }
+
+  /**
+   * 查询渠道商下属企业额度使用情况
+   */
+  async DescribeCorpQuotas(
+    req: DescribeCorpQuotasRequest,
+    cb?: (error: string, rep: DescribeCorpQuotasResponse) => void
+  ): Promise<DescribeCorpQuotasResponse> {
+    return this.request("DescribeCorpQuotas", req, cb)
   }
 
   /**

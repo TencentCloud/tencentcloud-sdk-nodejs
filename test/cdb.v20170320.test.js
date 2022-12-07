@@ -38,9 +38,9 @@ it("cdb.v20170320.CreateRoInstanceIp", async function () {
     }
 })
 
-it("cdb.v20170320.DescribeTimeWindow", async function () {
+it("cdb.v20170320.CreateAuditPolicy", async function () {
     try {
-       const data = await client.DescribeTimeWindow({})
+       const data = await client.CreateAuditPolicy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -98,9 +98,9 @@ it("cdb.v20170320.ModifyInstanceTag", async function () {
     }
 })
 
-it("cdb.v20170320.CreateAuditPolicy", async function () {
+it("cdb.v20170320.DescribeTimeWindow", async function () {
     try {
-       const data = await client.CreateAuditPolicy({})
+       const data = await client.DescribeTimeWindow({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1091,16 +1091,6 @@ it("cdb.v20170320.DeleteAuditLogFile", async function () {
 it("cdb.v20170320.ModifyBackupConfig", async function () {
     try {
        const data = await client.ModifyBackupConfig({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cdb.v20170320.ApplyCDBProxy", async function () {
-    try {
-       const data = await client.ApplyCDBProxy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

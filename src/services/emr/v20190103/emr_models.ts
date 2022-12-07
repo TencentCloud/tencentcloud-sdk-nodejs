@@ -1941,6 +1941,21 @@ export interface PersistentVolumeContext {
 }
 
 /**
+ * DeleteUserManagerUserList请求参数结构体
+ */
+export interface DeleteUserManagerUserListRequest {
+  /**
+   * 集群实例ID
+   */
+  InstanceId: string
+
+  /**
+   * 集群用户名列表
+   */
+  UserNameList: Array<string>
+}
+
+/**
  * DescribeResourceSchedule返回参数结构体
  */
 export interface DescribeResourceScheduleResponse {
@@ -2766,6 +2781,16 @@ export interface OutterResource {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   InstanceType: string
+}
+
+/**
+ * DeleteUserManagerUserList返回参数结构体
+ */
+export interface DeleteUserManagerUserListResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

@@ -1058,35 +1058,40 @@ export interface SkillGroupInfoItem {
     /**
       * 技能组ID
       */
-    SkillGroupId: number;
+    SkillGroupId?: number;
     /**
       * 技能组名称
       */
-    SkillGroupName: string;
+    SkillGroupName?: string;
     /**
-      * 类型：IM、TEL、ALL（全媒体）
+      * （废弃）类型：IM、TEL、ALL（全媒体）
       */
-    Type: string;
+    Type?: string;
     /**
       * 会话分配策略
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    RoutePolicy: string;
+    RoutePolicy?: string;
     /**
       * 会话分配是否优先上次服务坐席
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    UsingLastSeat: number;
+    UsingLastSeat?: number;
     /**
       * 单客服最大并发数（电话类型默认1）
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    MaxConcurrency: number;
+    MaxConcurrency?: number;
     /**
       * 最后修改时间
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    LastModifyTimestamp: number;
+    LastModifyTimestamp?: number;
+    /**
+      * 技能组类型0-电话，1-在线，3-音频，4-视频
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SkillGroupType?: number;
 }
 /**
  * ResetExtensionPassword返回参数结构体

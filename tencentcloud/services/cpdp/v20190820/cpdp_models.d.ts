@@ -2650,7 +2650,7 @@ __ALIPAY__: 支付宝
       */
     NotifyUrl?: string;
     /**
-      * 备注信息。
+      * 备注信息。限制200个字符。
       */
     Remark?: string;
     /**
@@ -7314,8 +7314,6 @@ export interface CreateOpenBankMerchantRequest {
     /**
       * 渠道名称。
 __TENPAY__: 商企付
-__WECHAT__: 微信支付
-__ALIPAY__: 支付宝
       */
     ChannelName: string;
     /**

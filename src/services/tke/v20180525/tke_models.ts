@@ -7398,7 +7398,7 @@ export interface CreateClusterReleaseRequest {
   Values?: ReleaseValues
 
   /**
-   * 制品来源，范围：tke-market/tcr/other
+   * 制品来源，范围：tke 应用市场/第三方chart
    */
   ChartFrom?: string
 
@@ -7426,6 +7426,11 @@ export interface CreateClusterReleaseRequest {
    * 制品命名空间
    */
   ChartNamespace?: string
+
+  /**
+   * 集群类型，支持传 tke, eks, tkeedge, exernal(注册集群）
+   */
+  ClusterType?: string
 }
 
 /**

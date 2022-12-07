@@ -45,6 +45,7 @@ import {
   StartBackupMigrationResponse,
   ModifyReadOnlyGroupDetailsResponse,
   ModifyBackupStrategyResponse,
+  SlaveZones,
   ModifyIncrementalMigrationRequest,
   DescribeDBSecurityGroupsResponse,
   MigrateDetail,

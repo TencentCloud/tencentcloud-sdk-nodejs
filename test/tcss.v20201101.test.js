@@ -88,9 +88,9 @@ it("tcss.v20201101.ModifyVulDefenceSetting", async function () {
     }
 })
 
-it("tcss.v20201101.DescribeVulTopRanking", async function () {
+it("tcss.v20201101.CreateAbnormalProcessRulesExportJob", async function () {
     try {
-       const data = await client.DescribeVulTopRanking({})
+       const data = await client.CreateAbnormalProcessRulesExportJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2828,6 +2828,16 @@ it("tcss.v20201101.DescribeAssetImageVulList", async function () {
     }
 })
 
+it("tcss.v20201101.DescribeVulTopRanking", async function () {
+    try {
+       const data = await client.DescribeVulTopRanking({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcss.v20201101.DescribeWarningRules", async function () {
     try {
        const data = await client.DescribeWarningRules({})
@@ -3271,6 +3281,16 @@ it("tcss.v20201101.DescribeAssetImageDetail", async function () {
 it("tcss.v20201101.ModifySecLogDeliveryKafkaSetting", async function () {
     try {
        const data = await client.ModifySecLogDeliveryKafkaSetting({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcss.v20201101.CreateAccessControlsRuleExportJob", async function () {
+    try {
+       const data = await client.CreateAccessControlsRuleExportJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

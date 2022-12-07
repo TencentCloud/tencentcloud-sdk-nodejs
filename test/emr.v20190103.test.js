@@ -128,6 +128,16 @@ it("emr.v20190103.RunJobFlow", async function () {
     }
 })
 
+it("emr.v20190103.DeleteUserManagerUserList", async function () {
+    try {
+       const data = await client.DeleteUserManagerUserList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("emr.v20190103.AddUsersForUserManager", async function () {
     try {
        const data = await client.AddUsersForUserManager({})

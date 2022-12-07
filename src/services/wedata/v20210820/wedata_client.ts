@@ -388,6 +388,7 @@ import {
   DeleteTaskAlarmRegularRequest,
   CompareRule,
   DescribeIntegrationStatisticsAgentStatusRequest,
+  SubscribeWebHook,
   DeleteOfflineTaskResponse,
   TaskScriptContent,
   IntegrationStatisticsTrendResult,

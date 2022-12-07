@@ -1932,7 +1932,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 在应用市场中集群创建应用
+   * 在应用市场中给集群创建应用
    */
   async CreateClusterRelease(
     req: CreateClusterReleaseRequest,

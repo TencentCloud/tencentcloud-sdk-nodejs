@@ -298,21 +298,39 @@ TRTC鉴权信息参数，用于TRTC进房推流鉴权。
     TRTCAuthParam?: AuthParam;
 }
 /**
- * 拼接视频中被忽略的时间段
+ * DescribeTIWRoomDailyUsage请求参数结构体
  */
-export interface OmittedDuration {
+export interface DescribeTIWRoomDailyUsageRequest {
     /**
-      * 录制暂停时间戳对应的视频播放时间(单位: 毫秒)
+      * 互动白板应用SdkAppId
       */
-    VideoTime: number;
+    SdkAppId: number;
     /**
-      * 录制暂停时间戳(单位: 毫秒)
+      * 需要查询的子产品用量，支持传入以下值
+- sp_tiw_board: 互动白板时长，单位为分钟
+- sp_tiw_ric: 实时录制时长，单位分钟
       */
-    PauseTime: number;
+    SubProduct: string;
     /**
-      * 录制恢复时间戳(单位: 毫秒)
+      * 开始时间，格式YYYY-MM-DD，查询结果里包括该天数据
       */
-    ResumeTime: number;
+    StartTime: string;
+    /**
+      * 结束时间，格式YYYY-MM-DD，查询结果里包括该天数据，单次查询统计区间最多不能超过31天。
+      */
+    EndTime: string;
+    /**
+      * 需要查询的房间ID列表，不填默认查询全部房间
+      */
+    RoomIDs?: Array<number>;
+    /**
+      * 查询偏移量，默认为0
+      */
+    Offset?: number;
+    /**
+      * 每次查询返回条目限制，默认为20
+      */
+    Limit?: number;
 }
 /**
  * DescribeWhiteboardPush请求参数结构体
@@ -339,6 +357,23 @@ export interface DescribeQualityMetricsResponse {
       * 时间序列
       */
     Content: Array<TimeValue>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeTIWRoomDailyUsage返回参数结构体
+ */
+export interface DescribeTIWRoomDailyUsageResponse {
+    /**
+      * 指定区间指定产品的房间用量列表
+      */
+    Usages: Array<RoomUsageDataItem>;
+    /**
+      * 用量列表总数
+      */
+    Total: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -494,6 +529,23 @@ export interface DescribeVideoGenerationTaskCallbackResponse {
     RequestId?: string;
 }
 /**
+ * 拼接视频中被忽略的时间段
+ */
+export interface OmittedDuration {
+    /**
+      * 录制暂停时间戳对应的视频播放时间(单位: 毫秒)
+      */
+    VideoTime: number;
+    /**
+      * 录制暂停时间戳(单位: 毫秒)
+      */
+    PauseTime: number;
+    /**
+      * 录制恢复时间戳(单位: 毫秒)
+      */
+    ResumeTime: number;
+}
+/**
  * DescribeSnapshotTask返回参数结构体
  */
 export interface DescribeSnapshotTaskResponse {
@@ -593,23 +645,6 @@ export interface SnapshotCOS {
       * CDN加速域名
       */
     Domain?: string;
-}
-/**
- * DescribeOnlineRecordCallback返回参数结构体
- */
-export interface DescribeOnlineRecordCallbackResponse {
-    /**
-      * 实时录制事件回调地址，如果未设置回调地址，该字段为空字符串
-      */
-    Callback: string;
-    /**
-      * 实时录制回调鉴权密钥
-      */
-    CallbackKey: string;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
 }
 /**
  * StopWhiteboardPush请求参数结构体
@@ -1303,6 +1338,23 @@ export interface DescribeTranscodeResponse {
     RequestId?: string;
 }
 /**
+ * DescribeTranscodeCallback返回参数结构体
+ */
+export interface DescribeTranscodeCallbackResponse {
+    /**
+      * 文档转码回调地址
+      */
+    Callback: string;
+    /**
+      * 文档转码回调鉴权密钥
+      */
+    CallbackKey: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 流布局参数
  */
 export interface StreamLayout {
@@ -1444,15 +1496,15 @@ export interface DescribeTranscodeRequest {
     TaskId: string;
 }
 /**
- * DescribeTranscodeCallback返回参数结构体
+ * DescribeOnlineRecordCallback返回参数结构体
  */
-export interface DescribeTranscodeCallbackResponse {
+export interface DescribeOnlineRecordCallbackResponse {
     /**
-      * 文档转码回调地址
+      * 实时录制事件回调地址，如果未设置回调地址，该字段为空字符串
       */
     Callback: string;
     /**
-      * 文档转码回调鉴权密钥
+      * 实时录制回调鉴权密钥
       */
     CallbackKey: string;
     /**
@@ -1473,6 +1525,34 @@ export interface SetTranscodeCallbackRequest {
 回调数据格式请参考文档：https://cloud.tencent.com/document/product/1137/40260
       */
     Callback: string;
+}
+/**
+ * 互动白板房间用量信息
+ */
+export interface RoomUsageDataItem {
+    /**
+      * 日期，格式为YYYY-MM-DD
+      */
+    Time: string;
+    /**
+      * 白板应用SDKAppID
+      */
+    SdkAppId: number;
+    /**
+      * 互动白板子产品，请求参数传入的一致
+- sp_tiw_board: 互动白板时长
+- sp_tiw_ric: 实时录制时长
+      */
+    SubProduct: string;
+    /**
+      * 用量值
+- 白板时长、实时录制时长单位为分钟
+      */
+    Value: number;
+    /**
+      * 互动白板房间号
+      */
+    RoomID: number;
 }
 /**
  * SetWhiteboardPushCallback请求参数结构体

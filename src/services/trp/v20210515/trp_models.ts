@@ -766,6 +766,31 @@ export interface CreateTraceChainResponse {
 }
 
 /**
+ * 渠道商的子企业额度使用情况
+ */
+export interface CorpQuota {
+  /**
+   * 企业ID
+   */
+  CorpId: number
+
+  /**
+   * 企业名称
+   */
+  CorpName: string
+
+  /**
+   * 额度
+   */
+  Quota: Quota
+
+  /**
+   * 额度使用量
+   */
+  UsageQuota: UsageQuota
+}
+
+/**
  * CreateCustomRule请求参数结构体
  */
 export interface CreateCustomRuleRequest {
@@ -992,6 +1017,28 @@ export interface DescribeCodeBatchByIdResponse {
 }
 
 /**
+ * DescribeCorpQuotas返回参数结构体
+ */
+export interface DescribeCorpQuotasResponse {
+  /**
+      * 子企业额度使用情况
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CorpQuotas: Array<CorpQuota>
+
+  /**
+      * 记录总数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Total: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeCodePackStatus返回参数结构体
  */
 export interface DescribeCodePackStatusResponse {
@@ -1182,22 +1229,6 @@ export interface ModifyMerchantResponse {
 }
 
 /**
- * DeleteProduct返回参数结构体
- */
-export interface DeleteProductResponse {
-  /**
-      * 商品ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ProductId: string
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DescribeCodesByPack返回参数结构体
  */
 export interface DescribeCodesByPackResponse {
@@ -1206,6 +1237,22 @@ export interface DescribeCodesByPackResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Codes: Array<CodeItem>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateProduct返回参数结构体
+ */
+export interface CreateProductResponse {
+  /**
+      * 商品ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProductId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1279,19 +1326,73 @@ export interface CreateTraceDataRequest {
 export type Ext = null
 
 /**
- * CreateProduct返回参数结构体
+ * DescribeCorpQuotas请求参数结构体
  */
-export interface CreateProductResponse {
+export interface DescribeCorpQuotasRequest {
   /**
-      * 商品ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ProductId: string
+   * 渠道商ID，不要传
+   */
+  AgentId?: number
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 页数
    */
-  RequestId?: string
+  PageNumber?: number
+
+  /**
+   * 每页数量
+   */
+  PageSize?: number
+
+  /**
+   * 搜索企业ID
+   */
+  Keyword?: string
+}
+
+/**
+ * CreateProduct请求参数结构体
+ */
+export interface CreateProductRequest {
+  /**
+   * 商品名称
+   */
+  Name: string
+
+  /**
+   * 商户ID
+   */
+  MerchantId: string
+
+  /**
+   * 备注
+   */
+  Remark?: string
+
+  /**
+   * 商户名称
+   */
+  MerchantName?: string
+
+  /**
+   * 商品规格
+   */
+  Specification?: string
+
+  /**
+   * 商品图片
+   */
+  Logo?: Array<string>
+
+  /**
+   * 企业ID
+   */
+  CorpId?: number
+
+  /**
+   * 预留字段
+   */
+  Ext?: Ext
 }
 
 /**
@@ -1575,6 +1676,31 @@ export interface PhaseData {
 }
 
 /**
+ * ModifyTraceDataRanks请求参数结构体
+ */
+export interface ModifyTraceDataRanksRequest {
+  /**
+   * 企业ID
+   */
+  CorpId?: number
+
+  /**
+   * 批次ID
+   */
+  BatchId?: string
+
+  /**
+   * 生产任务ID
+   */
+  TaskId?: string
+
+  /**
+   * 溯源ID
+   */
+  TraceIds?: Array<string>
+}
+
+/**
  * ModifyCustomRuleStatus返回参数结构体
  */
 export interface ModifyCustomRuleStatusResponse {
@@ -1672,28 +1798,19 @@ export interface DescribeCodePackUrlRequest {
 }
 
 /**
- * ModifyTraceDataRanks请求参数结构体
+ * DeleteProduct返回参数结构体
  */
-export interface ModifyTraceDataRanksRequest {
+export interface DeleteProductResponse {
   /**
-   * 企业ID
-   */
-  CorpId?: number
+      * 商品ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProductId: string
 
   /**
-   * 批次ID
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  BatchId?: string
-
-  /**
-   * 生产任务ID
-   */
-  TaskId?: string
-
-  /**
-   * 溯源ID
-   */
-  TraceIds?: Array<string>
+  RequestId?: string
 }
 
 /**
@@ -1946,51 +2063,6 @@ export interface DescribeCustomRulesRequest {
 }
 
 /**
- * CreateProduct请求参数结构体
- */
-export interface CreateProductRequest {
-  /**
-   * 商品名称
-   */
-  Name: string
-
-  /**
-   * 商户ID
-   */
-  MerchantId: string
-
-  /**
-   * 备注
-   */
-  Remark?: string
-
-  /**
-   * 商户名称
-   */
-  MerchantName?: string
-
-  /**
-   * 商品规格
-   */
-  Specification?: string
-
-  /**
-   * 商品图片
-   */
-  Logo?: Array<string>
-
-  /**
-   * 企业ID
-   */
-  CorpId?: number
-
-  /**
-   * 预留字段
-   */
-  Ext?: Ext
-}
-
-/**
  * ModifyCodeBatch请求参数结构体
  */
 export interface ModifyCodeBatchRequest {
@@ -2065,6 +2137,59 @@ export interface DescribeTraceCodesResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 付费信息使用量
+ */
+export interface UsageQuota {
+  /**
+      * 企业ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CorpId: number
+
+  /**
+      * 商户配额
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FactoryCnt: number
+
+  /**
+      * 商品数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ItemCnt: number
+
+  /**
+      * 溯源码量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TrackCnt: number
+
+  /**
+      * 营销码额度
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SaleCnt: number
+
+  /**
+      * 区块链上链次数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ChainCnt: number
+
+  /**
+      * 营销风控次数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RiskCnt: number
+
+  /**
+      * 时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UpdateTime: string
 }
 
 /**
@@ -2346,6 +2471,89 @@ export interface TraceCode {
    * 产品名称
    */
   ProductName: string
+}
+
+/**
+ * 企业配额信息
+ */
+export interface Quota {
+  /**
+      * 服务开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  StartTime: string
+
+  /**
+      * 服务结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EndTime: string
+
+  /**
+      * 配额ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  QuotaId?: number
+
+  /**
+      * 企业ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CorpId?: number
+
+  /**
+      * 开通服务
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Services?: Array<string>
+
+  /**
+      * 工厂配额
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FactoryQuota?: number
+
+  /**
+      * 产品配额
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ItemQuota?: number
+
+  /**
+      * 溯源码配额
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TrackQuota?: number
+
+  /**
+      * 销售码配额
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SaleQuota?: number
+
+  /**
+      * 上链配额
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ChainQuota?: number
+
+  /**
+      * 风控配额
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RiskQuota?: number
+
+  /**
+      * 溯源类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TrackType?: number
+
+  /**
+      * 开通版本 basic standard enterprise
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Version?: string
 }
 
 /**

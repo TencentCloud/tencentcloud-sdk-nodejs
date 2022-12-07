@@ -25,7 +25,6 @@ import {
   RWInfo,
   InstanceRollbackRangeTime,
   DescribeTablesResponse,
-  ApplyCDBProxyResponse,
   ModifyBackupDownloadRestrictionResponse,
   ModifyTimeWindowResponse,
   ParamRecord,
@@ -106,7 +105,6 @@ import {
   CreateAuditRuleResponse,
   DescribeDBInstanceInfoResponse,
   AssociateSecurityGroupsRequest,
-  ApplyCDBProxyRequest,
   ModifyAuditRuleRequest,
   DescribeBinlogsResponse,
   DescribeRoMinScaleRequest,
@@ -407,13 +405,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(DescribeTimeWindow)用于查询云数据库实例的维护时间窗口。
+   * 本接口(CreateAuditPolicy)用于创建云数据库实例的审计策略，即将审计规则绑定到具体的云数据库实例上。
    */
-  async DescribeTimeWindow(
-    req: DescribeTimeWindowRequest,
-    cb?: (error: string, rep: DescribeTimeWindowResponse) => void
-  ): Promise<DescribeTimeWindowResponse> {
-    return this.request("DescribeTimeWindow", req, cb)
+  async CreateAuditPolicy(
+    req: CreateAuditPolicyRequest,
+    cb?: (error: string, rep: CreateAuditPolicyResponse) => void
+  ): Promise<CreateAuditPolicyResponse> {
+    return this.request("CreateAuditPolicy", req, cb)
   }
 
   /**
@@ -471,13 +469,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(CreateAuditPolicy)用于创建云数据库实例的审计策略，即将审计规则绑定到具体的云数据库实例上。
+   * 本接口(DescribeTimeWindow)用于查询云数据库实例的维护时间窗口。
    */
-  async CreateAuditPolicy(
-    req: CreateAuditPolicyRequest,
-    cb?: (error: string, rep: CreateAuditPolicyResponse) => void
-  ): Promise<CreateAuditPolicyResponse> {
-    return this.request("CreateAuditPolicy", req, cb)
+  async DescribeTimeWindow(
+    req: DescribeTimeWindowRequest,
+    cb?: (error: string, rep: DescribeTimeWindowResponse) => void
+  ): Promise<DescribeTimeWindowResponse> {
+    return this.request("DescribeTimeWindow", req, cb)
   }
 
   /**
@@ -1498,16 +1496,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyBackupConfigResponse) => void
   ): Promise<ModifyBackupConfigResponse> {
     return this.request("ModifyBackupConfig", req, cb)
-  }
-
-  /**
-   * 针对主实例申请创建数据库代理。
-   */
-  async ApplyCDBProxy(
-    req: ApplyCDBProxyRequest,
-    cb?: (error: string, rep: ApplyCDBProxyResponse) => void
-  ): Promise<ApplyCDBProxyResponse> {
-    return this.request("ApplyCDBProxy", req, cb)
   }
 
   /**

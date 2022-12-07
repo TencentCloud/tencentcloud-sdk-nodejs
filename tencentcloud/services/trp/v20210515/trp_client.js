@@ -94,6 +94,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeProducts", req, cb);
     }
     /**
+     * 查询渠道商下属企业额度使用情况
+     */
+    async DescribeCorpQuotas(req, cb) {
+        return this.request("DescribeCorpQuotas", req, cb);
+    }
+    /**
      * 修改自定义码规则
      */
     async ModifyCustomRule(req, cb) {

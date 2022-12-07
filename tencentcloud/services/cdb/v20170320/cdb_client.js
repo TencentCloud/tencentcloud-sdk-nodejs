@@ -40,10 +40,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateRoInstanceIp", req, cb);
     }
     /**
-     * 本接口(DescribeTimeWindow)用于查询云数据库实例的维护时间窗口。
+     * 本接口(CreateAuditPolicy)用于创建云数据库实例的审计策略，即将审计规则绑定到具体的云数据库实例上。
      */
-    async DescribeTimeWindow(req, cb) {
-        return this.request("DescribeTimeWindow", req, cb);
+    async CreateAuditPolicy(req, cb) {
+        return this.request("CreateAuditPolicy", req, cb);
     }
     /**
      * 本接口(DescribeDataBackupOverview)用于查询用户在当前地域总的数据备份概览。
@@ -80,10 +80,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyInstanceTag", req, cb);
     }
     /**
-     * 本接口(CreateAuditPolicy)用于创建云数据库实例的审计策略，即将审计规则绑定到具体的云数据库实例上。
+     * 本接口(DescribeTimeWindow)用于查询云数据库实例的维护时间窗口。
      */
-    async CreateAuditPolicy(req, cb) {
-        return this.request("CreateAuditPolicy", req, cb);
+    async DescribeTimeWindow(req, cb) {
+        return this.request("DescribeTimeWindow", req, cb);
     }
     /**
      * 本接口(DescribeBackupOverview)用于查询用户的备份概览。返回用户当前备份总个数、备份总的占用容量、赠送的免费容量、计费容量（容量单位为字节）。
@@ -708,12 +708,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyBackupConfig(req, cb) {
         return this.request("ModifyBackupConfig", req, cb);
-    }
-    /**
-     * 针对主实例申请创建数据库代理。
-     */
-    async ApplyCDBProxy(req, cb) {
-        return this.request("ApplyCDBProxy", req, cb);
     }
     /**
      * 本接口(DescribeAuditRules)用于查询用户在当前地域的审计规则。

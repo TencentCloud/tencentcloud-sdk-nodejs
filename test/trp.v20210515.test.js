@@ -128,6 +128,16 @@ it("trp.v20210515.DescribeProducts", async function () {
     }
 })
 
+it("trp.v20210515.DescribeCorpQuotas", async function () {
+    try {
+       const data = await client.DescribeCorpQuotas({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("trp.v20210515.ModifyCustomRule", async function () {
     try {
        const data = await client.ModifyCustomRule({})

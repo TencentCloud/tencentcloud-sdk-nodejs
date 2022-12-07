@@ -138,6 +138,16 @@ it("tiw.v20190919.StartWhiteboardPush", async function () {
     }
 })
 
+it("tiw.v20190919.DescribeTIWRoomDailyUsage", async function () {
+    try {
+       const data = await client.DescribeTIWRoomDailyUsage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tiw.v20190919.CreateTranscode", async function () {
     try {
        const data = await client.CreateTranscode({})

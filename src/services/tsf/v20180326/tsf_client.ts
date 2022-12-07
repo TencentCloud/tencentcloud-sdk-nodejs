@@ -381,6 +381,7 @@ import {
   DescribePluginInstancesRequest,
   ApiRequestDescr,
   ApiVersionArray,
+  GatewayConfig,
   DeliveryConfigBindGroups,
   DescribeInovcationIndicatorsResponse,
   MultiValueDataPoints,

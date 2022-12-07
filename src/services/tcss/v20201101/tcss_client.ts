@@ -39,6 +39,7 @@ import {
   AbnormalProcessEventDescription,
   CompliancePeriodTaskRule,
   DescribeVirusScanTimeoutSettingResponse,
+  DescribeVulImageListResponse,
   CreateVulExportJobRequest,
   DescribeNetworkFirewallNamespaceLabelListResponse,
   ClusterCreateComponentItem,
@@ -54,13 +55,14 @@ import {
   ModifyAssetImageScanStopResponse,
   AddAssetImageRegistryRegistryDetailRequest,
   AddIgnoreVulResponse,
+  VulDefenceEventTendency,
   DescribeNetworkFirewallClusterRefreshStatusRequest,
   DescribeAssetImageRegistryVirusListExportResponse,
   DescribeSecEventsTendencyResponse,
   DescribeAccessControlEventsExportResponse,
   DescribeImageRiskSummaryResponse,
   DescribeNetworkFirewallPolicyDetailRequest,
-  DescribeComplianceTaskAssetSummaryRequest,
+  CreateAccessControlsRuleExportJobResponse,
   ModifyAssetImageRegistryScanStopResponse,
   DescribeAssetImageRegistryRiskListExportRequest,
   SetCheckModeResponse,
@@ -327,6 +329,7 @@ import {
   AddEditAbnormalProcessRuleResponse,
   ScanComplianceScanFailedAssetsRequest,
   ModifySecLogDeliveryClsSettingResponse,
+  DescribeComplianceTaskAssetSummaryRequest,
   CreateCheckComponentResponse,
   DescribeImageRegistryTimingScanTaskRequest,
   DescribeRiskSyscallWhiteListDetailResponse,
@@ -463,7 +466,7 @@ import {
   SupportDefenceVul,
   DescribeCheckItemListRequest,
   DescribeImageComponentListResponse,
-  DescribeVulImageListResponse,
+  CreateAbnormalProcessRulesExportJobResponse,
   DescribeSecLogDeliveryKafkaOptionsRequest,
   DescribeVirusScanSettingResponse,
   DescribeAccessControlRuleDetailResponse,
@@ -503,6 +506,7 @@ import {
   DescribeAssetImageVirusListExportResponse,
   DescribeVirusScanSettingRequest,
   SecTendencyEventInfo,
+  CreateAccessControlsRuleExportJobRequest,
   VirusAutoIsolateSampleInfo,
   DescribeExportJobDownloadURLRequest,
   DescribeImageAutoAuthorizedRuleRequest,
@@ -530,7 +534,7 @@ import {
   DescribeEscapeEventTypeSummaryResponse,
   DescribeAssetImageRegistryVulListRequest,
   DescribeImageSimpleListResponse,
-  DescribeVirusManualScanEstimateTimeoutRequest,
+  CreateAbnormalProcessRulesExportJobRequest,
   CreateK8sApiAbnormalEventExportJobResponse,
   DescribeUserClusterResponse,
   DescribeAssetImageRegistryRegistryListRequest,
@@ -653,7 +657,7 @@ import {
   ModifyAssetRequest,
   RegionInfo,
   DescribeEscapeWhiteListRequest,
-  VulDefenceEventTendency,
+  DescribeVirusManualScanEstimateTimeoutRequest,
   ComponentInfo,
   ConfirmNetworkFirewallPolicyResponse,
   CreateNetworkFirewallPublishResponse,
@@ -907,13 +911,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询漏洞Top排名列表
+   * 创建异常进程规则导出任务
    */
-  async DescribeVulTopRanking(
-    req: DescribeVulTopRankingRequest,
-    cb?: (error: string, rep: DescribeVulTopRankingResponse) => void
-  ): Promise<DescribeVulTopRankingResponse> {
-    return this.request("DescribeVulTopRanking", req, cb)
+  async CreateAbnormalProcessRulesExportJob(
+    req: CreateAbnormalProcessRulesExportJobRequest,
+    cb?: (error: string, rep: CreateAbnormalProcessRulesExportJobResponse) => void
+  ): Promise<CreateAbnormalProcessRulesExportJobResponse> {
+    return this.request("CreateAbnormalProcessRulesExportJob", req, cb)
   }
 
   /**
@@ -3650,6 +3654,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询漏洞Top排名列表
+   */
+  async DescribeVulTopRanking(
+    req: DescribeVulTopRankingRequest,
+    cb?: (error: string, rep: DescribeVulTopRankingResponse) => void
+  ): Promise<DescribeVulTopRankingResponse> {
+    return this.request("DescribeVulTopRanking", req, cb)
+  }
+
+  /**
    * 获取告警策略列表
    */
   async DescribeWarningRules(
@@ -4097,6 +4111,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifySecLogDeliveryKafkaSettingResponse) => void
   ): Promise<ModifySecLogDeliveryKafkaSettingResponse> {
     return this.request("ModifySecLogDeliveryKafkaSetting", req, cb)
+  }
+
+  /**
+   * 创建文件篡改规则导出任务
+   */
+  async CreateAccessControlsRuleExportJob(
+    req: CreateAccessControlsRuleExportJobRequest,
+    cb?: (error: string, rep: CreateAccessControlsRuleExportJobResponse) => void
+  ): Promise<CreateAccessControlsRuleExportJobResponse> {
+    return this.request("CreateAccessControlsRuleExportJob", req, cb)
   }
 
   /**

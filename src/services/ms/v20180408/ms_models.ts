@@ -277,12 +277,12 @@ export interface DescribeScanResultsResponse {
   /**
    * 批量扫描的app结果集
    */
-  ScanSet?: Array<ScanSetInfo>
+  ScanSet: Array<ScanSetInfo>
 
   /**
    * 批量扫描结果的个数
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -632,27 +632,27 @@ export interface CreateScanInstancesResponse {
   /**
    * 任务唯一标识
    */
-  ItemId?: string
+  ItemId: string
 
   /**
    * 任务状态: 1-已完成,2-处理中,3-处理出错,4-处理超时
    */
-  Progress?: number
+  Progress: number
 
   /**
    * 提交成功的app的md5集合
    */
-  AppMd5s?: Array<string>
+  AppMd5s: Array<string>
 
   /**
    * 剩余可用次数
    */
-  LimitCount?: number
+  LimitCount: number
 
   /**
    * 到期时间
    */
-  LimitTime?: number
+  LimitTime: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -667,12 +667,12 @@ export interface DescribeScanInstancesResponse {
   /**
    * 符合要求的app数量
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 一个关于app详细信息的结构体，主要包括app的基本信息和扫描状态信息。
    */
-  ScanSet?: Array<AppScanSet>
+  ScanSet: Array<AppScanSet>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1269,7 +1269,7 @@ export interface DeleteScanInstancesResponse {
   /**
    * 任务状态: 1-已完成,2-处理中,3-处理出错,4-处理超时
    */
-  Progress?: number
+  Progress: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

@@ -367,22 +367,6 @@ export interface DescribeTablesResponse {
 }
 
 /**
- * ApplyCDBProxy返回参数结构体
- */
-export interface ApplyCDBProxyResponse {
-  /**
-      * 异步处理ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  AsyncRequestId: string
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * ModifyBackupDownloadRestriction返回参数结构体
  */
 export interface ModifyBackupDownloadRestrictionResponse {
@@ -2321,51 +2305,6 @@ export interface AssociateSecurityGroupsRequest {
    * 当传入只读实例ID时，默认操作的是对应只读组的安全组。如果需要操作只读实例ID的安全组， 需要将该入参置为True
    */
   ForReadonlyInstance?: boolean
-}
-
-/**
- * ApplyCDBProxy请求参数结构体
- */
-export interface ApplyCDBProxyRequest {
-  /**
-   * 主实例唯一标识ID
-   */
-  InstanceId: string
-
-  /**
-   * 私有网络ID
-   */
-  UniqVpcId: string
-
-  /**
-   * 私有网络子网ID
-   */
-  UniqSubnetId: string
-
-  /**
-   * 代理组节点个数
-   */
-  ProxyCount: number
-
-  /**
-   * cpu核数
-   */
-  Cpu: number
-
-  /**
-   * 内存
-   */
-  Mem: number
-
-  /**
-   * 安全组
-   */
-  SecurityGroup?: Array<string>
-
-  /**
-   * 描述说明，最大支持256位。
-   */
-  Desc?: string
 }
 
 /**

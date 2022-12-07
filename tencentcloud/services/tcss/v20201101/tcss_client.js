@@ -70,10 +70,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyVulDefenceSetting", req, cb);
     }
     /**
-     * 查询漏洞Top排名列表
+     * 创建异常进程规则导出任务
      */
-    async DescribeVulTopRanking(req, cb) {
-        return this.request("DescribeVulTopRanking", req, cb);
+    async CreateAbnormalProcessRulesExportJob(req, cb) {
+        return this.request("CreateAbnormalProcessRulesExportJob", req, cb);
     }
     /**
      * 容器安全搜索查询主机列表
@@ -1717,6 +1717,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAssetImageVulList", req, cb);
     }
     /**
+     * 查询漏洞Top排名列表
+     */
+    async DescribeVulTopRanking(req, cb) {
+        return this.request("DescribeVulTopRanking", req, cb);
+    }
+    /**
      * 获取告警策略列表
      */
     async DescribeWarningRules(req, cb) {
@@ -1985,6 +1991,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifySecLogDeliveryKafkaSetting(req, cb) {
         return this.request("ModifySecLogDeliveryKafkaSetting", req, cb);
+    }
+    /**
+     * 创建文件篡改规则导出任务
+     */
+    async CreateAccessControlsRuleExportJob(req, cb) {
+        return this.request("CreateAccessControlsRuleExportJob", req, cb);
     }
     /**
      * 新增安全合规忽略(检测项+资产)列表，不显示指定的检查项包含的资产内容

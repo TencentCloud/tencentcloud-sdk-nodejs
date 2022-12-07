@@ -542,6 +542,26 @@ export interface DescribeVirusScanTimeoutSettingResponse {
 }
 
 /**
+ * DescribeVulImageList返回参数结构体
+ */
+export interface DescribeVulImageListResponse {
+  /**
+   * 受影响的镜像列表
+   */
+  List: Array<VulAffectedImageInfo>
+
+  /**
+   * 镜像总数
+   */
+  TotalCount: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateVulExportJob请求参数结构体
  */
 export interface CreateVulExportJobRequest {
@@ -942,6 +962,21 @@ export interface AddIgnoreVulResponse {
 }
 
 /**
+ * 漏洞防御攻击事件趋势
+ */
+export interface VulDefenceEventTendency {
+  /**
+   * 日期
+   */
+  Date: string
+
+  /**
+   * 事件数量
+   */
+  EventCount: number
+}
+
+/**
  * DescribeNetworkFirewallClusterRefreshStatus请求参数结构体
  */
 export interface DescribeNetworkFirewallClusterRefreshStatusRequest {
@@ -1040,17 +1075,18 @@ export interface DescribeNetworkFirewallPolicyDetailRequest {
 }
 
 /**
- * DescribeComplianceTaskAssetSummary请求参数结构体
+ * CreateAccessControlsRuleExportJob返回参数结构体
  */
-export interface DescribeComplianceTaskAssetSummaryRequest {
+export interface CreateAccessControlsRuleExportJobResponse {
   /**
-      * 资产类型列表。
-ASSET_CONTAINER, 容器
-ASSET_IMAGE, 镜像
-ASSET_HOST, 主机
-ASSET_K8S, K8S资产
-      */
-  AssetTypeSet: Array<string>
+   * 导出任务ID，前端拿着任务ID查询任务进度
+   */
+  JobId: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -8474,6 +8510,20 @@ export interface ModifySecLogDeliveryClsSettingResponse {
 }
 
 /**
+ * DescribeComplianceTaskAssetSummary请求参数结构体
+ */
+export interface DescribeComplianceTaskAssetSummaryRequest {
+  /**
+      * 资产类型列表。
+ASSET_CONTAINER, 容器
+ASSET_IMAGE, 镜像
+ASSET_HOST, 主机
+ASSET_K8S, K8S资产
+      */
+  AssetTypeSet: Array<string>
+}
+
+/**
  * CreateCheckComponent返回参数结构体
  */
 export interface CreateCheckComponentResponse {
@@ -12044,18 +12094,13 @@ export interface DescribeImageComponentListResponse {
 }
 
 /**
- * DescribeVulImageList返回参数结构体
+ * CreateAbnormalProcessRulesExportJob返回参数结构体
  */
-export interface DescribeVulImageListResponse {
+export interface CreateAbnormalProcessRulesExportJobResponse {
   /**
-   * 受影响的镜像列表
+   * 导出任务ID，前端拿着任务ID查询任务进度
    */
-  List: Array<VulAffectedImageInfo>
-
-  /**
-   * 镜像总数
-   */
-  TotalCount: number
+  JobId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -13303,6 +13348,33 @@ ET_MALICIOUS_CONNECTION 恶意外连事件
 }
 
 /**
+ * CreateAccessControlsRuleExportJob请求参数结构体
+ */
+export interface CreateAccessControlsRuleExportJobRequest {
+  /**
+      * 过滤条件。
+<li>RuleType - string  - 是否必填: 否 -规则类型</li>
+<li>Status - string  - 是否必填: 否 -状态</li>
+      */
+  Filters?: Array<RunTimeFilters>
+
+  /**
+   * 排序方式
+   */
+  Order?: string
+
+  /**
+   * 排序字段
+   */
+  By?: Array<string>
+
+  /**
+   * 导出字段
+   */
+  ExportField?: Array<string>
+}
+
+/**
  * 木马自动隔离样本信息
  */
 export interface VirusAutoIsolateSampleInfo {
@@ -13855,23 +13927,30 @@ export interface DescribeImageSimpleListResponse {
 }
 
 /**
- * DescribeVirusManualScanEstimateTimeout请求参数结构体
+ * CreateAbnormalProcessRulesExportJob请求参数结构体
  */
-export interface DescribeVirusManualScanEstimateTimeoutRequest {
+export interface CreateAbnormalProcessRulesExportJobRequest {
   /**
-   * 扫描范围0容器1主机节点
-   */
-  ScanRangeType: number
+      * 过滤条件。
+<li>RuleType - string  - 是否必填: 否 -规则类型</li>
+<li>Status - string  - 是否必填: 否 -状态</li>
+      */
+  Filters?: Array<RunTimeFilters>
 
   /**
-   * true 全选，false 自选
+   * 排序方式
    */
-  ScanRangeAll: boolean
+  Order?: string
 
   /**
-   * 自选扫描范围的容器id或者主机id 根据ScanRangeType决定
+   * 排序字段
    */
-  ScanIds?: Array<string>
+  By?: string
+
+  /**
+   * 导出字段
+   */
+  ExportField?: Array<string>
 }
 
 /**
@@ -17558,18 +17637,23 @@ export interface DescribeEscapeWhiteListRequest {
 }
 
 /**
- * 漏洞防御攻击事件趋势
+ * DescribeVirusManualScanEstimateTimeout请求参数结构体
  */
-export interface VulDefenceEventTendency {
+export interface DescribeVirusManualScanEstimateTimeoutRequest {
   /**
-   * 日期
+   * 扫描范围0容器1主机节点
    */
-  Date: string
+  ScanRangeType: number
 
   /**
-   * 事件数量
+   * true 全选，false 自选
    */
-  EventCount: number
+  ScanRangeAll: boolean
+
+  /**
+   * 自选扫描范围的容器id或者主机id 根据ScanRangeType决定
+   */
+  ScanIds?: Array<string>
 }
 
 /**

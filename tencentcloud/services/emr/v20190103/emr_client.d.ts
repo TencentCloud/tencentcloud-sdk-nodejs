@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ScaleOutInstanceResponse, SyncPodStateResponse, CreateInstanceResponse, TerminateTasksRequest, DescribeEmrApplicationStaticsRequest, ScaleOutInstanceRequest, ModifyResourceScheduleConfigResponse, DescribeInstancesListResponse, DescribeInstanceRenewNodesRequest, InquiryPriceRenewInstanceResponse, DescribeJobFlowRequest, InquiryPriceCreateInstanceResponse, TerminateInstanceRequest, DescribeResourceScheduleRequest, DescribeUsersForUserManagerRequest, RunJobFlowResponse, TerminateInstanceResponse, InquiryPriceUpdateInstanceResponse, DescribeResourceScheduleResponse, ModifyResourceSchedulerRequest, RunJobFlowRequest, DescribeCvmQuotaResponse, DescribeCvmQuotaRequest, DescribeClusterNodesRequest, SyncPodStateRequest, CreateInstanceRequest, DescribeInstancesRequest, InquiryPriceUpdateInstanceRequest, DescribeInstancesListRequest, ModifyResourcePoolsResponse, TerminateTasksResponse, DescribeInstancesResponse, DescribeUsersForUserManagerResponse, InquiryPriceRenewInstanceRequest, InquirePriceRenewEmrResponse, AddUsersForUserManagerRequest, InquiryPriceCreateInstanceRequest, DescribeClusterNodesResponse, ModifyResourceScheduleConfigRequest, InquiryPriceScaleOutInstanceRequest, DescribeEmrApplicationStaticsResponse, InquirePriceRenewEmrRequest, DescribeInstanceRenewNodesResponse, InquiryPriceScaleOutInstanceResponse, ModifyResourceSchedulerResponse, AddUsersForUserManagerResponse, ModifyResourcePoolsRequest, DescribeJobFlowResponse } from "./emr_models";
+import { ScaleOutInstanceResponse, SyncPodStateResponse, CreateInstanceResponse, TerminateTasksRequest, DescribeEmrApplicationStaticsRequest, ScaleOutInstanceRequest, ModifyResourceScheduleConfigResponse, DescribeInstancesListResponse, DescribeInstanceRenewNodesRequest, InquiryPriceRenewInstanceResponse, DescribeJobFlowRequest, InquiryPriceCreateInstanceResponse, TerminateInstanceRequest, DescribeResourceScheduleRequest, DescribeUsersForUserManagerRequest, RunJobFlowResponse, TerminateInstanceResponse, InquiryPriceUpdateInstanceResponse, DeleteUserManagerUserListRequest, DescribeResourceScheduleResponse, ModifyResourceSchedulerRequest, RunJobFlowRequest, DescribeCvmQuotaResponse, DescribeCvmQuotaRequest, DescribeClusterNodesRequest, SyncPodStateRequest, CreateInstanceRequest, DescribeInstancesRequest, InquiryPriceUpdateInstanceRequest, DescribeInstancesListRequest, DeleteUserManagerUserListResponse, ModifyResourcePoolsResponse, TerminateTasksResponse, DescribeInstancesResponse, DescribeUsersForUserManagerResponse, InquiryPriceRenewInstanceRequest, InquirePriceRenewEmrResponse, AddUsersForUserManagerRequest, InquiryPriceCreateInstanceRequest, DescribeClusterNodesResponse, ModifyResourceScheduleConfigRequest, InquiryPriceScaleOutInstanceRequest, DescribeEmrApplicationStaticsResponse, InquirePriceRenewEmrRequest, DescribeInstanceRenewNodesResponse, InquiryPriceScaleOutInstanceResponse, ModifyResourceSchedulerResponse, AddUsersForUserManagerResponse, ModifyResourcePoolsRequest, DescribeJobFlowResponse } from "./emr_models";
 /**
  * emr client
  * @class
@@ -52,6 +52,11 @@ export declare class Client extends AbstractClient {
      * 创建流程作业
      */
     RunJobFlow(req: RunJobFlowRequest, cb?: (error: string, rep: RunJobFlowResponse) => void): Promise<RunJobFlowResponse>;
+    /**
+     * 删除用户列表（用户管理）
+
+     */
+    DeleteUserManagerUserList(req: DeleteUserManagerUserListRequest, cb?: (error: string, rep: DeleteUserManagerUserListResponse) => void): Promise<DeleteUserManagerUserListResponse>;
     /**
      * 该接口支持安装了OpenLdap组件的集群。
 新增用户列表（用户管理）。

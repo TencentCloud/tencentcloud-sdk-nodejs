@@ -32,7 +32,7 @@ export declare class Client extends AbstractClient {
      */
     CreateSyncJob(req: CreateSyncJobRequest, cb?: (error: string, rep: CreateSyncJobResponse) => void): Promise<CreateSyncJobResponse>;
     /**
-     * 删除一致性校验任务
+     * 删除一致性校验任务。当一致性校验任务状态为success、failed、canceled 时可以执行此操作。
      */
     DeleteCompareTask(req: DeleteCompareTaskRequest, cb?: (error: string, rep: DeleteCompareTaskResponse) => void): Promise<DeleteCompareTaskResponse>;
     /**

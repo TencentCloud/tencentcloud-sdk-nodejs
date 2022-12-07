@@ -338,6 +338,21 @@ export interface DescribeAccountsRequest {
    * 分页返回，页编号，默认值为第0页
    */
   Offset?: number
+
+  /**
+   * 账号名称
+   */
+  Name?: string
+
+  /**
+   * createTime,updateTime,passTime" note:"排序字段，默认按照账号创建时间倒序
+   */
+  OrderBy?: string
+
+  /**
+   * 排序规则（desc-降序，asc-升序），默认desc
+   */
+  OrderByType?: string
 }
 
 /**
@@ -658,6 +673,21 @@ export interface ModifyBackupStrategyResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 备可用区信息
+ */
+export interface SlaveZones {
+  /**
+   * 备可用区地域码
+   */
+  SlaveZone: string
+
+  /**
+   * 备可用区
+   */
+  SlaveZoneName: string
 }
 
 /**
@@ -3056,6 +3086,16 @@ export interface DescribeDBsRequest {
    * 分页返回，页编号，默认值为第0页
    */
   Offset?: number
+
+  /**
+   * 数据库名称
+   */
+  Name?: string
+
+  /**
+   * 排序规则（desc-降序，asc-升序），默认desc
+   */
+  OrderByType?: string
 }
 
 /**
@@ -5128,6 +5168,17 @@ export interface DBInstance {
    * 系统时区，默认：China Standard Time
    */
   TimeZone: string
+
+  /**
+   * 是否跨AZ
+   */
+  IsDrZone: boolean
+
+  /**
+      * 备可用区信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SlaveZones: SlaveZones
 }
 
 /**

@@ -2225,6 +2225,7 @@ export interface DeleteImageTag {
 export interface DescribeContainerGroupDeployInfoResponse {
     /**
       * 获取部署组
+注意：此字段可能返回 null，表示取不到有效值。
       */
     Result: ContainerGroupDeploy;
     /**
@@ -4828,6 +4829,16 @@ export interface ContainerGroupDeploy {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     RepoType: string;
+    /**
+      * 预热配置设置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    WarmupSetting: WarmupSetting;
+    /**
+      * Envoy网关服务配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    GatewayConfig: GatewayConfig;
 }
 /**
  * Tsf命名空间分页对象
@@ -6171,8 +6182,9 @@ export interface DescribeContainerGroupsResponse {
 export interface UpdateApiGroupResponse {
     /**
       * 返回结果，true: 成功, false: 失败
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result?: boolean;
+    Result: boolean;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -6752,6 +6764,22 @@ export interface UpdateApiGroupRequest {
       * 分组上下文
       */
     GroupContext?: string;
+    /**
+      * 命名空间参数key值
+      */
+    NamespaceNameKey?: string;
+    /**
+      * 微服务名参数key值
+      */
+    ServiceNameKey?: string;
+    /**
+      * 命名空间参数位置，path，header或query，默认是path
+      */
+    NamespaceNameKeyPosition?: string;
+    /**
+      * 微服务名参数位置，path，header或query，默认是path
+      */
+    ServiceNameKeyPosition?: string;
 }
 /**
  * TsfApiListResponse
@@ -6960,187 +6988,192 @@ export interface VmGroup {
       * 部署组ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    GroupId: string;
+    GroupId?: string;
     /**
       * 部署组名称
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    GroupName: string;
+    GroupName?: string;
     /**
       * 部署组状态
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    GroupStatus: string;
+    GroupStatus?: string;
     /**
       * 程序包ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    PackageId: string;
+    PackageId?: string;
     /**
       * 程序包名称
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    PackageName: string;
+    PackageName?: string;
     /**
       * 程序包版本号
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    PackageVersion: string;
+    PackageVersion?: string;
     /**
       * 集群ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ClusterId: string;
+    ClusterId?: string;
     /**
       * 集群名称
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ClusterName: string;
+    ClusterName?: string;
     /**
       * 命名空间ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    NamespaceId: string;
+    NamespaceId?: string;
     /**
       * 命名空间名称
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    NamespaceName: string;
+    NamespaceName?: string;
     /**
       * 应用ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ApplicationId: string;
+    ApplicationId?: string;
     /**
       * 应用名称
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ApplicationName: string;
+    ApplicationName?: string;
     /**
       * 部署组机器数目
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    InstanceCount: number;
+    InstanceCount?: number;
     /**
       * 部署组运行中机器数目
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    RunInstanceCount: number;
+    RunInstanceCount?: number;
     /**
       * 部署组启动参数信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    StartupParameters: string;
+    StartupParameters?: string;
     /**
       * 部署组创建时间
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    CreateTime: string;
+    CreateTime?: string;
     /**
       * 部署组更新时间
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    UpdateTime: string;
+    UpdateTime?: string;
     /**
       * 部署组停止机器数目
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    OffInstanceCount: number;
+    OffInstanceCount?: number;
     /**
       * 部署组描述信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    GroupDesc: string;
+    GroupDesc?: string;
     /**
       * 微服务类型
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    MicroserviceType: string;
+    MicroserviceType?: string;
     /**
       * 应用类型
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ApplicationType: string;
+    ApplicationType?: string;
     /**
       * 部署组资源类型
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    GroupResourceType: string;
+    GroupResourceType?: string;
     /**
       * 部署组更新时间戳
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    UpdatedTime: number;
+    UpdatedTime?: number;
     /**
       * 部署应用描述信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    DeployDesc: string;
+    DeployDesc?: string;
     /**
       * 滚动发布的更新方式
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    UpdateType: number;
+    UpdateType?: number;
     /**
       * 发布是否启用beta批次
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    DeployBetaEnable: boolean;
+    DeployBetaEnable?: boolean;
     /**
       * 滚动发布的批次比例列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    DeployBatch: Array<number>;
+    DeployBatch?: Array<number>;
     /**
       * 滚动发布的批次执行方式
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    DeployExeMode: string;
+    DeployExeMode?: string;
     /**
       * 滚动发布的每个批次的等待时间
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    DeployWaitTime: number;
+    DeployWaitTime?: number;
     /**
       * 是否开启了健康检查
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    EnableHealthCheck: boolean;
+    EnableHealthCheck?: boolean;
     /**
       * 健康检查配置
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    HealthCheckSettings: HealthCheckSettings;
+    HealthCheckSettings?: HealthCheckSettings;
     /**
       * 程序包类型
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    PackageType: string;
+    PackageType?: string;
     /**
       * 启动脚本 base64编码
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    StartScript: string;
+    StartScript?: string;
     /**
       * 停止脚本 base64编码
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    StopScript: string;
+    StopScript?: string;
     /**
       * 部署组备注
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Alias: string;
+    Alias?: string;
     /**
       * javaagent信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    AgentProfileList: Array<AgentProfile>;
+    AgentProfileList?: Array<AgentProfile>;
     /**
       * 预热属性配置
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    WarmupSetting: WarmupSetting;
+    WarmupSetting?: WarmupSetting;
+    /**
+      * Envoy网关配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    GatewayConfig?: GatewayConfig;
 }
 /**
  * DescribeApiUseDetail返回参数结构体
@@ -8485,6 +8518,10 @@ export interface ApiVersionArray {
       */
     PkgVersion: string;
 }
+/**
+ * TSF Envoy网关服务配置
+ */
+export declare type GatewayConfig = null;
 /**
  * 描述配置项绑定的部署组
  */
@@ -10198,8 +10235,9 @@ export interface DescribeEnabledUnitRuleRequest {
 export interface DescribeApiGroupResponse {
     /**
       * API分组信息
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result?: ApiGroupInfo;
+    Result: ApiGroupInfo;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -11991,6 +12029,26 @@ export interface ApiGroupInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     GatewayInstanceId: string;
+    /**
+      * 命名空间参数key值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NamespaceNameKey: string;
+    /**
+      * 微服务名参数key值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ServiceNameKey: string;
+    /**
+      * 命名空间参数位置，path，header或query，默认是path
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NamespaceNameKeyPosition: string;
+    /**
+      * 微服务名参数位置，path，header或query，默认是path
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ServiceNameKeyPosition: string;
 }
 /**
  * 微服务网关单元化命名空间
@@ -12053,6 +12111,22 @@ export interface CreateApiGroupRequest {
       * 网关实体ID
       */
     GatewayInstanceId?: string;
+    /**
+      * 命名空间参数key值
+      */
+    NamespaceNameKey?: string;
+    /**
+      * 微服务名参数key值
+      */
+    ServiceNameKey?: string;
+    /**
+      * 命名空间参数位置，path，header或query，默认是path
+      */
+    NamespaceNameKeyPosition?: string;
+    /**
+      * 微服务名参数位置，path，header或query，默认是path
+      */
+    ServiceNameKeyPosition?: string;
 }
 /**
  * DescribeDownloadInfo返回参数结构体

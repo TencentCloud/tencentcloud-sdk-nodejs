@@ -584,6 +584,16 @@ export interface AuditLogFilter {
    * SQL 语句。支持传递多个sql语句。
    */
   Sqls?: Array<string>
+
+  /**
+   * 返回行数。
+   */
+  SentRows?: number
+
+  /**
+   * 线程ID。
+   */
+  ThreadId?: Array<string>
 }
 
 /**
@@ -1383,6 +1393,11 @@ export interface UpgradeInstanceRequest {
    * 交易模式 0-下单并支付 1-下单
    */
   DealMode?: number
+
+  /**
+   * NormalUpgrade：普通变配，FastUpgrade：极速变配，若变配过程判断会造成闪断，变配流程会终止。
+   */
+  UpgradeMode?: string
 }
 
 /**
@@ -4109,6 +4124,16 @@ export interface ClusterParamModifyLog {
    * 更新时间
    */
   UpdateTime: string
+
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+
+  /**
+   * 实例ID
+   */
+  InstanceId: string
 }
 
 /**

@@ -95,6 +95,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RunJobFlow", req, cb);
     }
     /**
+     * 删除用户列表（用户管理）
+
+     */
+    async DeleteUserManagerUserList(req, cb) {
+        return this.request("DeleteUserManagerUserList", req, cb);
+    }
+    /**
      * 该接口支持安装了OpenLdap组件的集群。
 新增用户列表（用户管理）。
      */

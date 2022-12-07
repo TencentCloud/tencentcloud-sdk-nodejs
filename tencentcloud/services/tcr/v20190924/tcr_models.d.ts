@@ -4081,7 +4081,7 @@ export interface TagInfo {
       */
     TagName: string;
     /**
-      * 镜像Id
+      * 制品的 ID
       */
     TagId: string;
     /**
@@ -4093,36 +4093,36 @@ export interface TagInfo {
       */
     Size: string;
     /**
-      * 镜像的创建时间
+      * 制品的创建时间
       */
     CreationTime: string;
     /**
-      * 镜像创建至今时间长度
+      * 制品创建至今时间长度
 注意：此字段可能返回 null，表示取不到有效值。
       */
     DurationDays: string;
     /**
-      * 镜像的作者
+      * 标注的制品作者
       */
     Author: string;
     /**
-      * 次镜像建议运行的系统架构
+      * 标注的制品平台
       */
     Architecture: string;
     /**
-      * 创建此镜像的docker版本
+      * 创建制品的 Docker 版本
       */
     DockerVersion: string;
     /**
-      * 此镜像建议运行系统
+      * 标注的制品操作系统
       */
     OS: string;
     /**
-      * SizeByte
+      * 制品大小
       */
     SizeByte: number;
     /**
-      * Id
+      * 序号
       */
     Id: number;
     /**
@@ -4130,9 +4130,13 @@ export interface TagInfo {
       */
     UpdateTime: string;
     /**
-      * 镜像更新时间
+      * 制品更新时间
       */
     PushTime: string;
+    /**
+      * 制品类型
+      */
+    Kind: string;
 }
 /**
  * CreateRepository请求参数结构体
