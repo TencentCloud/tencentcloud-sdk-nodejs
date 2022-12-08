@@ -398,6 +398,16 @@ it("tke.v20180525.UpdateClusterVersion", async function () {
     }
 })
 
+it("tke.v20180525.DescribeClusterPendingReleases", async function () {
+    try {
+       const data = await client.DescribeClusterPendingReleases({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tke.v20180525.CreatePrometheusRecordRuleYaml", async function () {
     try {
        const data = await client.CreatePrometheusRecordRuleYaml({})
@@ -521,6 +531,16 @@ it("tke.v20180525.DeleteClusterAsGroups", async function () {
 it("tke.v20180525.DeleteClusterRoute", async function () {
     try {
        const data = await client.DeleteClusterRoute({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20180525.UninstallClusterRelease", async function () {
+    try {
+       const data = await client.UninstallClusterRelease({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -988,6 +1008,16 @@ it("tke.v20180525.DescribeExternalClusterSpec", async function () {
     }
 })
 
+it("tke.v20180525.DescribeClusterReleaseHistory", async function () {
+    try {
+       const data = await client.DescribeClusterReleaseHistory({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tke.v20180525.ModifyClusterNodePool", async function () {
     try {
        const data = await client.ModifyClusterNodePool({})
@@ -1031,6 +1061,16 @@ it("tke.v20180525.DeletePrometheusAlertRule", async function () {
 it("tke.v20180525.DescribePrometheusGlobalNotification", async function () {
     try {
        const data = await client.DescribePrometheusGlobalNotification({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20180525.ScaleInClusterMaster", async function () {
+    try {
+       const data = await client.ScaleInClusterMaster({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1278,6 +1318,16 @@ it("tke.v20180525.DescribeEKSClusterCredential", async function () {
     }
 })
 
+it("tke.v20180525.DescribeClusterReleaseDetails", async function () {
+    try {
+       const data = await client.DescribeClusterReleaseDetails({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tke.v20180525.DisableClusterAudit", async function () {
     try {
        const data = await client.DisableClusterAudit({})
@@ -1508,6 +1558,16 @@ it("tke.v20180525.DescribePrometheusConfig", async function () {
     }
 })
 
+it("tke.v20180525.CancelClusterRelease", async function () {
+    try {
+       const data = await client.CancelClusterRelease({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tke.v20180525.DescribeEdgeClusterInstances", async function () {
     try {
        const data = await client.DescribeEdgeClusterInstances({})
@@ -1528,9 +1588,9 @@ it("tke.v20180525.DescribeClusterAsGroupOption", async function () {
     }
 })
 
-it("tke.v20180525.ScaleInClusterMaster", async function () {
+it("tke.v20180525.RollbackClusterRelease", async function () {
     try {
-       const data = await client.ScaleInClusterMaster({})
+       const data = await client.RollbackClusterRelease({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1611,6 +1671,26 @@ it("tke.v20180525.ForwardTKEEdgeApplicationRequestV3", async function () {
 it("tke.v20180525.DescribeImageCaches", async function () {
     try {
        const data = await client.DescribeImageCaches({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20180525.DescribeClusterReleases", async function () {
+    try {
+       const data = await client.DescribeClusterReleases({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20180525.UpgradeClusterRelease", async function () {
+    try {
+       const data = await client.UpgradeClusterRelease({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

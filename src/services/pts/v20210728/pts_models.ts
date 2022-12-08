@@ -1311,7 +1311,7 @@ export interface Job {
   Load?: Load
 
   /**
-      * deprecated
+      * 此字段不再使用
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Configs?: Array<string>
@@ -1323,7 +1323,7 @@ export interface Job {
   Datasets?: Array<TestData>
 
   /**
-      * deprecated
+      * 此字段不再使用
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Extensions?: Array<string>
@@ -1373,7 +1373,7 @@ JobSelectClusterException:19,JobCreateTaskException:20,JobSyncTaskException:21
   JobOwner?: string
 
   /**
-      * deprecated
+      * 此字段不再使用
 注意：此字段可能返回 null，表示取不到有效值。
       */
   LoadSources?: LoadSource
@@ -1427,7 +1427,7 @@ JobSelectClusterException:19,JobCreateTaskException:20,JobSyncTaskException:21
   ResponseTimeP90?: number
 
   /**
-      * deprecated
+      * 此字段不再使用
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Scripts?: Array<string>
@@ -1533,6 +1533,12 @@ JobSelectClusterException:19,JobCreateTaskException:20,JobSyncTaskException:21
 注意：此字段可能返回 null，表示取不到有效值。
       */
   NetworkSendRate?: number
+
+  /**
+      * 任务状态描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Message?: string
 }
 
 /**
@@ -4099,7 +4105,7 @@ export interface File {
   ProjectId: string
 
   /**
-      * 用户账号的 App ID
+      * 此字段不再使用
 注意：此字段可能返回 null，表示取不到有效值。
       */
   AppID: number

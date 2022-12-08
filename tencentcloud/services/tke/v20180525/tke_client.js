@@ -256,6 +256,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdateClusterVersion", req, cb);
     }
     /**
+     * 在应用市场中查询正在安装中的应用列表
+     */
+    async DescribeClusterPendingReleases(req, cb) {
+        return this.request("DescribeClusterPendingReleases", req, cb);
+    }
+    /**
      * 以Yaml的方式创建聚合规则
      */
     async CreatePrometheusRecordRuleYaml(req, cb) {
@@ -332,6 +338,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteClusterRoute(req, cb) {
         return this.request("DeleteClusterRoute", req, cb);
+    }
+    /**
+     * 在应用市场中集群删除某个应用
+     */
+    async UninstallClusterRelease(req, cb) {
+        return this.request("UninstallClusterRelease", req, cb);
     }
     /**
      * 针对VPC-CNI模式的集群，增加集群容器网络可使用的子网
@@ -610,6 +622,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeExternalClusterSpec", req, cb);
     }
     /**
+     * 查询集群在应用市场中某个已安装应用的版本历史
+     */
+    async DescribeClusterReleaseHistory(req, cb) {
+        return this.request("DescribeClusterReleaseHistory", req, cb);
+    }
+    /**
      * 编辑节点池
      */
     async ModifyClusterNodePool(req, cb) {
@@ -638,6 +656,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribePrometheusGlobalNotification(req, cb) {
         return this.request("DescribePrometheusGlobalNotification", req, cb);
+    }
+    /**
+     * 缩容独立集群master节点
+     */
+    async ScaleInClusterMaster(req, cb) {
+        return this.request("ScaleInClusterMaster", req, cb);
     }
     /**
      * 查询集群变配记录
@@ -784,6 +808,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeEKSClusterCredential", req, cb);
     }
     /**
+     * 查询通过应用市场安装的某个应用详情
+     */
+    async DescribeClusterReleaseDetails(req, cb) {
+        return this.request("DescribeClusterReleaseDetails", req, cb);
+    }
+    /**
      * 关闭集群审计
      */
     async DisableClusterAudit(req, cb) {
@@ -922,6 +952,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribePrometheusConfig", req, cb);
     }
     /**
+     * 在应用市场中取消安装失败的应用
+     */
+    async CancelClusterRelease(req, cb) {
+        return this.request("CancelClusterRelease", req, cb);
+    }
+    /**
      * 查询边缘计算集群的节点信息
      */
     async DescribeEdgeClusterInstances(req, cb) {
@@ -934,10 +970,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeClusterAsGroupOption", req, cb);
     }
     /**
-     * 缩容独立集群master节点
+     * 在应用市场中集群回滚应用至某个历史版本
      */
-    async ScaleInClusterMaster(req, cb) {
-        return this.request("ScaleInClusterMaster", req, cb);
+    async RollbackClusterRelease(req, cb) {
+        return this.request("RollbackClusterRelease", req, cb);
     }
     /**
      * 查询弹性集群列表
@@ -986,6 +1022,18 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeImageCaches(req, cb) {
         return this.request("DescribeImageCaches", req, cb);
+    }
+    /**
+     * 查询集群在应用市场中已安装应用列表
+     */
+    async DescribeClusterReleases(req, cb) {
+        return this.request("DescribeClusterReleases", req, cb);
+    }
+    /**
+     * 升级集群中已安装的应用
+     */
+    async UpgradeClusterRelease(req, cb) {
+        return this.request("UpgradeClusterRelease", req, cb);
     }
     /**
      * 查询容器实例支持的地域

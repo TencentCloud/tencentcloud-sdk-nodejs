@@ -1594,37 +1594,37 @@ export interface TelCdrInfo {
   /**
    * 主叫号码
    */
-  Caller: string
+  Caller?: string
 
   /**
    * 被叫号码
    */
-  Callee: string
+  Callee?: string
 
   /**
    * 呼叫发起时间戳，Unix 时间戳
    */
-  Time: number
+  Time?: number
 
   /**
    * 呼入呼出方向 0 呼入 1 呼出
    */
-  Direction: number
+  Direction?: number
 
   /**
    * 通话时长
    */
-  Duration: number
+  Duration?: number
 
   /**
    * 录音信息
    */
-  RecordURL: string
+  RecordURL?: string
 
   /**
    * 坐席信息
    */
-  SeatUser: SeatUserInfo
+  SeatUser?: SeatUserInfo
 
   /**
       * 结束状态
@@ -1651,65 +1651,65 @@ export interface TelCdrInfo {
 209	主叫取消
 210	不在服务区
       */
-  EndStatus: number
+  EndStatus?: number
 
   /**
    * 技能组名称
    */
-  SkillGroup: string
+  SkillGroup?: string
 
   /**
    * 主叫归属地
    */
-  CallerLocation: string
+  CallerLocation?: string
 
   /**
       * IVR 阶段耗时
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  IVRDuration: number
+  IVRDuration?: number
 
   /**
       * 振铃时间戳，UNIX 秒级时间戳
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  RingTimestamp: number
+  RingTimestamp?: number
 
   /**
       * 接听时间戳，UNIX 秒级时间戳
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  AcceptTimestamp: number
+  AcceptTimestamp?: number
 
   /**
       * 结束时间戳，UNIX 秒级时间戳
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  EndedTimestamp: number
+  EndedTimestamp?: number
 
   /**
       * IVR 按键信息 ，e.g. ["1","2","3"]
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  IVRKeyPressed: Array<string>
+  IVRKeyPressed?: Array<string>
 
   /**
       * 挂机方 seat 坐席 user 用户
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  HungUpSide: string
+  HungUpSide?: string
 
   /**
       * 服务参与者列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ServeParticipants: Array<ServeParticipant>
+  ServeParticipants?: Array<ServeParticipant>
 
   /**
       * 技能组ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  SkillGroupId: number
+  SkillGroupId?: number
 
   /**
       * error                   错误
@@ -1736,73 +1736,79 @@ callerCancel        主叫取消
 notInService       不在服务区
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  EndStatusString: string
+  EndStatusString?: string
 
   /**
       * 会话开始时间戳，UNIX 秒级时间戳
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  StartTimestamp: number
+  StartTimestamp?: number
 
   /**
       * 进入排队时间，Unix 秒级时间戳
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  QueuedTimestamp: number
+  QueuedTimestamp?: number
 
   /**
       * 后置IVR按键信息（e.g. [{"Key":"1","Label":"非常满意"}]）
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  PostIVRKeyPressed: Array<IVRKeyPressedElement>
+  PostIVRKeyPressed?: Array<IVRKeyPressedElement>
 
   /**
       * 排队技能组Id
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  QueuedSkillGroupId: number
+  QueuedSkillGroupId?: number
 
   /**
       * 会话 ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  SessionId: string
+  SessionId?: string
 
   /**
       * 主叫号码保护ID，开启号码保护映射功能时有效，且Caller字段置空
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ProtectedCaller: string
+  ProtectedCaller?: string
 
   /**
       * 被叫号码保护ID，开启号码保护映射功能时有效，且Callee字段置空
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ProtectedCallee: string
+  ProtectedCallee?: string
 
   /**
       * 客户自定义数据（User-to-User Interface）
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Uui: string
+  Uui?: string
 
   /**
       * IVR按键信息（e.g. [{"Key":"1","Label":"非常满意"}]）
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  IVRKeyPressedEx: Array<IVRKeyPressedElement>
+  IVRKeyPressedEx?: Array<IVRKeyPressedElement>
 
   /**
       * 获取录音ASR文本信息地址
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  AsrUrl: string
+  AsrUrl?: string
 
   /**
       * 录音转存第三方COS地址
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  CustomRecordURL: string
+  CustomRecordURL?: string
+
+  /**
+      * 备注
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Remark?: string
 }
 
 /**

@@ -3696,6 +3696,21 @@ export interface DescribeClusterParamLogsRequest {
   ClusterId: string
 
   /**
+   * 实例ID列表，用来记录具体操作哪些实例
+   */
+  InstanceIds?: Array<string>
+
+  /**
+   * 排序字段，定义在回返结果的基于哪个字段进行排序
+   */
+  OrderBy?: string
+
+  /**
+   * 定义具体的排序规则，限定为desc,asc,DESC,ASC其中之一
+   */
+  OrderByType?: string
+
+  /**
    * 返回数量，默认为 20，取值范围为(0,100]
    */
   Limit?: number

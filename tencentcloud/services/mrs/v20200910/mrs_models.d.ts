@@ -495,6 +495,10 @@ export interface ImageToObjectRequest {
 注意：当 IsUsedClassify 为True 时，表示使用收费的报告分类服务，将会产生额外的费用，具体收费标准参见 [购买指南的产品价格](https://cloud.tencent.com/document/product/1314/54264)。
       */
     IsUsedClassify: boolean;
+    /**
+      * 用户类型，新客户传1，老客户可不传
+      */
+    UserType?: number;
 }
 /**
  * TextToObject请求参数结构体
@@ -513,6 +517,10 @@ export interface TextToObjectRequest {
 注意：当 IsUsedClassify 为True 时，表示使用收费的报告分类服务，将会产生额外的费用，具体收费标准参见 [购买指南的产品价格](https://cloud.tencent.com/document/product/1314/54264)。
       */
     IsUsedClassify: boolean;
+    /**
+      * 用户类型，新客户传1，老客户可不传
+      */
+    UserType?: number;
 }
 /**
  * 纵横比
@@ -1089,37 +1097,37 @@ export interface MedDoc {
       * 建议
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Advice: Advice;
+    Advice?: Advice;
     /**
       * 诊断结果
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Diagnosis: Array<DiagCertItem>;
+    Diagnosis?: Array<DiagCertItem>;
     /**
       * 疾病史
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    DiseaseMedicalHistory: DiseaseMedicalHistory;
+    DiseaseMedicalHistory?: DiseaseMedicalHistory;
     /**
       * 个人史
       */
-    PersonalMedicalHistory: PersonalMedicalHistory;
+    PersonalMedicalHistory?: PersonalMedicalHistory;
     /**
       * 婚孕史
       */
-    ObstericalMedicalHistory: ObstericalMedicalHistory;
+    ObstericalMedicalHistory?: ObstericalMedicalHistory;
     /**
       * 家族史
       */
-    FamilyMedicalHistory: FamilyMedicalHistory;
+    FamilyMedicalHistory?: FamilyMedicalHistory;
     /**
       * 月经史
       */
-    MenstrualMedicalHistory: MenstrualMedicalHistory;
+    MenstrualMedicalHistory?: MenstrualMedicalHistory;
     /**
       * 诊疗记录
       */
-    TreatmentRecord: TreatmentRecord;
+    TreatmentRecord?: TreatmentRecord;
 }
 /**
  * 内窥部位
@@ -2201,6 +2209,10 @@ export interface ImageToClassRequest {
       * 不填，默认为0
       */
     Type: number;
+    /**
+      * 用户类型，新客户传1，老客户可不传
+      */
+    UserType?: number;
 }
 /**
  * 大小
@@ -2280,6 +2292,10 @@ export interface TextToClassRequest {
       * 报告文本
       */
     Text: string;
+    /**
+      * 用户类型，新客户传1，老客户可不传
+      */
+    UserType?: number;
 }
 /**
  * 手术记录

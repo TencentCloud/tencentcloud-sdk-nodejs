@@ -32,6 +32,23 @@ export interface EksCiVolume {
     NfsVolumes?: Array<NfsVolume>;
 }
 /**
+ * GetTkeAppChartList请求参数结构体
+ */
+export interface GetTkeAppChartListRequest {
+    /**
+      * app类型，取值log,scheduler,network,storage,monitor,dns,image,other,invisible
+      */
+    Kind?: string;
+    /**
+      * app支持的操作系统，取值arm32、arm64、amd64
+      */
+    Arch?: string;
+    /**
+      * 集群类型，取值tke、eks
+      */
+    ClusterType?: string;
+}
+/**
  * DescribeEdgeCVMInstances请求参数结构体
  */
 export interface DescribeEdgeCVMInstancesRequest {
@@ -248,6 +265,59 @@ export interface DescribeEdgeClusterInstancesResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * UpgradeClusterRelease请求参数结构体
+ */
+export interface UpgradeClusterReleaseRequest {
+    /**
+      * 集群ID
+      */
+    ClusterId: string;
+    /**
+      * 自定义的应用名称
+      */
+    Name: string;
+    /**
+      * 应用命名空间
+      */
+    Namespace: string;
+    /**
+      * 制品名称或从第三方repo 安装chart时，制品压缩包下载地址, 不支持重定向类型chart 地址，结尾为*.tgz
+      */
+    Chart: string;
+    /**
+      * 自定义参数，覆盖chart 中values.yaml 中的参数
+      */
+    Values?: ReleaseValues;
+    /**
+      * 制品来源，范围：tke-market/tcr/other
+      */
+    ChartFrom?: string;
+    /**
+      * 制品版本( 从第三安装时，不传这个参数）
+      */
+    ChartVersion?: string;
+    /**
+      * 制品仓库URL地址
+      */
+    ChartRepoURL?: string;
+    /**
+      * 制品访问用户名
+      */
+    Username?: string;
+    /**
+      * 制品访问密码
+      */
+    Password?: string;
+    /**
+      * 制品命名空间
+      */
+    ChartNamespace?: string;
+    /**
+      * 集群类型，支持传 tke, eks, tkeedge, exernal(注册集群）
+      */
+    ClusterType?: string;
 }
 /**
  * DescribeEdgeClusterUpgradeInfo请求参数结构体
@@ -548,6 +618,26 @@ export interface UpdateImageCacheRequest {
       * 镜像缓存名称
       */
     ImageCacheName?: string;
+    /**
+      * 镜像仓库凭证数组
+      */
+    ImageRegistryCredentials?: Array<ImageRegistryCredential>;
+    /**
+      * 用于制作镜像缓存的容器镜像列表
+      */
+    Images?: Array<string>;
+    /**
+      * 镜像缓存的大小。默认为20 GiB。取值范围参考[云硬盘类型](https://cloud.tencent.com/document/product/362/2353)中的高性能云盘类型的大小限制。
+      */
+    ImageCacheSize?: number;
+    /**
+      * 镜像缓存保留时间天数，过期将会自动清理，默认为0，永不过期。
+      */
+    RetentionDays?: number;
+    /**
+      * 安全组Id
+      */
+    SecurityGroupIds?: Array<string>;
 }
 /**
  * 手动加入的节点
@@ -855,6 +945,20 @@ export interface DisableVpcCniNetworkTypeRequest {
     ClusterId: string;
 }
 /**
+ * DescribeClusterReleaseDetails返回参数结构体
+ */
+export interface DescribeClusterReleaseDetailsResponse {
+    /**
+      * 应用详情
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Release: ReleaseDetails;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * SyncPrometheusTemp返回参数结构体
  */
 export interface SyncPrometheusTempResponse {
@@ -888,6 +992,23 @@ export interface CreatePrometheusDashboardResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * CancelClusterRelease请求参数结构体
+ */
+export interface CancelClusterReleaseRequest {
+    /**
+      * 应用ID
+      */
+    ID: string;
+    /**
+      * 集群ID
+      */
+    ClusterId?: string;
+    /**
+      * 集群类型
+      */
+    ClusterType?: string;
 }
 /**
  * DescribeTKEEdgeClusterStatus返回参数结构体
@@ -1618,6 +1739,27 @@ export interface DeletePrometheusAlertRuleResponse {
     RequestId?: string;
 }
 /**
+ * DescribeClusterPendingReleases请求参数结构体
+ */
+export interface DescribeClusterPendingReleasesRequest {
+    /**
+      * 集群ID
+      */
+    ClusterId: string;
+    /**
+      * 返回数量限制，默认20，最大100
+      */
+    Limit?: number;
+    /**
+      * 偏移量，默认0
+      */
+    Offset?: number;
+    /**
+      * 集群类型
+      */
+    ClusterType?: string;
+}
+/**
  * DeletePrometheusConfig返回参数结构体
  */
 export interface DeletePrometheusConfigResponse {
@@ -2133,6 +2275,25 @@ export interface DescribeClustersResponse {
       * 集群信息列表
       */
     Clusters: Array<Cluster>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeClusterReleaseHistory返回参数结构体
+ */
+export interface DescribeClusterReleaseHistoryResponse {
+    /**
+      * 已安装应用版本历史
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ReleaseHistorySet: Array<ReleaseHistory>;
+    /**
+      * 总数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Total: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3308,28 +3469,29 @@ export interface ModifyPrometheusAgentExternalLabelsResponse {
     RequestId?: string;
 }
 /**
- * 路由表冲突对象
+ * RollbackClusterRelease请求参数结构体
  */
-export interface RouteTableConflict {
+export interface RollbackClusterReleaseRequest {
     /**
-      * 路由表类型。
+      * 集群ID
       */
-    RouteTableType: string;
+    ClusterId: string;
     /**
-      * 路由表CIDR。
-注意：此字段可能返回 null，表示取不到有效值。
+      * 应用名称
       */
-    RouteTableCidrBlock: string;
+    Name: string;
     /**
-      * 路由表名称。
-注意：此字段可能返回 null，表示取不到有效值。
+      * 应用命名空间
       */
-    RouteTableName: string;
+    Namespace: string;
     /**
-      * 路由表ID。
-注意：此字段可能返回 null，表示取不到有效值。
+      * 回滚版本号
       */
-    RouteTableId: string;
+    Revision: number;
+    /**
+      * 集群类型
+      */
+    ClusterType?: string;
 }
 /**
  * DeleteClusterInstances请求参数结构体
@@ -3588,6 +3750,27 @@ export interface CreateEdgeCVMInstancesRequest {
       * 是否开启弹性网卡功能
       */
     EnableEni?: boolean;
+}
+/**
+ * DescribeClusterReleaseHistory请求参数结构体
+ */
+export interface DescribeClusterReleaseHistoryRequest {
+    /**
+      * 集群ID
+      */
+    ClusterId: string;
+    /**
+      * 应用名称
+      */
+    Name: string;
+    /**
+      * 应用所在命名空间
+      */
+    Namespace: string;
+    /**
+      * 集群类型
+      */
+    ClusterType?: string;
 }
 /**
  * 加入存量节点时的节点池选项
@@ -3912,6 +4095,20 @@ export interface DescribeAvailableClusterVersionRequest {
       * 集群 Id 列表
       */
     ClusterIds?: Array<string>;
+}
+/**
+ * UpgradeClusterRelease返回参数结构体
+ */
+export interface UpgradeClusterReleaseResponse {
+    /**
+      * 应用详情
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Release: PendingRelease;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribePrometheusAlertPolicy请求参数结构体
@@ -4357,13 +4554,14 @@ export interface CreateClusterEndpointRequest {
     ExtensiveParameters?: string;
 }
 /**
- * DeletePrometheusClusterAgent返回参数结构体
+ * 探针在容器内执行检测命令参数类型
  */
-export interface DeletePrometheusClusterAgentResponse {
+export interface Exec {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 容器内检测的命令
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    RequestId?: string;
+    Commands?: Array<string>;
 }
 /**
  * DescribePrometheusInstance返回参数结构体
@@ -5135,6 +5333,20 @@ export interface PrometheusTemplateModify {
     AlertDetailRules?: Array<PrometheusAlertRuleDetail>;
 }
 /**
+ * RollbackClusterRelease返回参数结构体
+ */
+export interface RollbackClusterReleaseResponse {
+    /**
+      * 应用详情
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Release: PendingRelease;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 集群版本信息
  */
 export interface ClusterVersion {
@@ -5271,6 +5483,35 @@ export interface DNSConfigOption {
     Value: string;
 }
 /**
+ * DescribeClusterReleases返回参数结构体
+ */
+export interface DescribeClusterReleasesResponse {
+    /**
+      * 数量限制
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Limit: number;
+    /**
+      * 偏移量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Offset: number;
+    /**
+      * 已安装应用列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ReleaseSet: Array<Release>;
+    /**
+      * 已安装应用总数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Total: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * AddNodeToNodePool请求参数结构体
  */
 export interface AddNodeToNodePoolRequest {
@@ -5312,6 +5553,27 @@ export interface ModifyPrometheusGlobalNotificationResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * UninstallClusterRelease请求参数结构体
+ */
+export interface UninstallClusterReleaseRequest {
+    /**
+      * 集群ID
+      */
+    ClusterId: string;
+    /**
+      * 应用名称
+      */
+    Name: string;
+    /**
+      * 应用命名空间
+      */
+    Namespace: string;
+    /**
+      * 集群类型
+      */
+    ClusterType?: string;
 }
 /**
  * ForwardTKEEdgeApplicationRequestV3返回参数结构体
@@ -5777,14 +6039,25 @@ export interface DescribeClusterLevelAttributeRequest {
     ClusterID?: string;
 }
 /**
- * 探针在容器内执行检测命令参数类型
+ * DescribeClusterReleaseDetails请求参数结构体
  */
-export interface Exec {
+export interface DescribeClusterReleaseDetailsRequest {
     /**
-      * 容器内检测的命令
-注意：此字段可能返回 null，表示取不到有效值。
+      * 集群ID
       */
-    Commands?: Array<string>;
+    ClusterId: string;
+    /**
+      * 应用名称
+      */
+    Name: string;
+    /**
+      * 应用所在命名空间
+      */
+    Namespace: string;
+    /**
+      * 集群类型
+      */
+    ClusterType?: string;
 }
 /**
  * CreateECMInstances请求参数结构体
@@ -5840,6 +6113,35 @@ export interface CreateECMInstancesRequest {
     SecurityGroupIds?: Array<string>;
 }
 /**
+ * DescribeClusterReleases请求参数结构体
+ */
+export interface DescribeClusterReleasesRequest {
+    /**
+      * 集群id
+      */
+    ClusterId: string;
+    /**
+      * 每页数量限制
+      */
+    Limit?: number;
+    /**
+      * 页偏移量
+      */
+    Offset?: number;
+    /**
+      * helm Release 安装的namespace
+      */
+    Namespace?: string;
+    /**
+      * helm Release 的名字
+      */
+    ReleaseName?: string;
+    /**
+      * helm Chart 的名字
+      */
+    ChartName?: string;
+}
+/**
  * 接入k8s 的认证信息
  */
 export interface ClusterCredential {
@@ -5870,6 +6172,35 @@ ID: 通过实例ID来过滤
 Name: 通过实例名称来过滤
       */
     Filters?: Array<Filter>;
+}
+/**
+ * DescribeClusterPendingReleases返回参数结构体
+ */
+export interface DescribeClusterPendingReleasesResponse {
+    /**
+      * 正在安装中应用列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ReleaseSet: Array<PendingRelease>;
+    /**
+      * 每页返回数量限制
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Limit: number;
+    /**
+      * 页偏移量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Offset: number;
+    /**
+      * 总数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Total: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 描述了k8s节点数据盘相关配置与信息。
@@ -6275,6 +6606,15 @@ export interface DescribeClusterAuthenticationOptionsResponse {
     RequestId?: string;
 }
 /**
+ * DeletePrometheusClusterAgent返回参数结构体
+ */
+export interface DeletePrometheusClusterAgentResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * CreateClusterRelease请求参数结构体
  */
 export interface CreateClusterReleaseRequest {
@@ -6352,6 +6692,84 @@ export interface AddClusterCIDRResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 应用市场的安装应用详情
+ */
+export interface ReleaseDetails {
+    /**
+      * 应用名称
+      */
+    Name: string;
+    /**
+      * 应用所在命名空间
+      */
+    Namespace: string;
+    /**
+      * 应用当前版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Version: number;
+    /**
+      * 应用状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Status: string;
+    /**
+      * 应用描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Description: string;
+    /**
+      * 应用提示
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Notes: string;
+    /**
+      * 用户自定义参数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Config: string;
+    /**
+      * 应用资源详情
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Manifest: string;
+    /**
+      * 应用制品版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ChartVersion: string;
+    /**
+      * 应用制品名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ChartName: string;
+    /**
+      * 应用制品描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ChartDescription: string;
+    /**
+      * 应用制品app版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AppVersion: string;
+    /**
+      * 应用首次部署时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FirstDeployedTime: string;
+    /**
+      * 应用最近部署时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LastDeployedTime: string;
+    /**
+      * 应用参数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ComputedValues: string;
 }
 /**
  * DescribePrometheusInstanceInitStatus请求参数结构体
@@ -6446,21 +6864,21 @@ export interface CreatePrometheusAlertPolicyRequest {
     AlertRule: PrometheusAlertPolicyItem;
 }
 /**
- * GetTkeAppChartList请求参数结构体
+ * DescribeImageCaches返回参数结构体
  */
-export interface GetTkeAppChartListRequest {
+export interface DescribeImageCachesResponse {
     /**
-      * app类型，取值log,scheduler,network,storage,monitor,dns,image,other,invisible
+      * 镜像缓存总数
       */
-    Kind?: string;
+    TotalCount: number;
     /**
-      * app支持的操作系统，取值arm32、arm64、amd64
+      * 镜像缓存信息列表
       */
-    Arch?: string;
+    ImageCaches: Array<ImageCache>;
     /**
-      * 集群类型，取值tke、eks
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    ClusterType?: string;
+    RequestId?: string;
 }
 /**
  * 资源使用明细
@@ -6678,23 +7096,6 @@ export interface DisableClusterDeletionProtectionRequest {
     ClusterId: string;
 }
 /**
- * DescribeImageCaches返回参数结构体
- */
-export interface DescribeImageCachesResponse {
-    /**
-      * 镜像缓存总数
-      */
-    TotalCount: number;
-    /**
-      * 镜像缓存信息列表
-      */
-    ImageCaches: Array<ImageCache>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
  * prometheus一个job的targets
  */
 export interface PrometheusJobTargets {
@@ -6902,6 +7303,20 @@ export interface ECMRunSecurityServiceEnabled {
  * SyncPrometheusTemplate返回参数结构体
  */
 export interface SyncPrometheusTemplateResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * UninstallClusterRelease返回参数结构体
+ */
+export interface UninstallClusterReleaseResponse {
+    /**
+      * 应用详情
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Release: PendingRelease;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -7158,6 +7573,20 @@ export interface InstanceAdvancedSettings {
     Taints: Array<Taint>;
 }
 /**
+ * CancelClusterRelease返回参数结构体
+ */
+export interface CancelClusterReleaseResponse {
+    /**
+      * 应用信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Release: PendingRelease;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * UpdateEdgeClusterVersion返回参数结构体
  */
 export interface UpdateEdgeClusterVersionResponse {
@@ -7326,6 +7755,49 @@ export interface PrometheusAlertRuleDetail {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Interval?: string;
+}
+/**
+ * 应用市场中部署的应用版本历史
+ */
+export interface ReleaseHistory {
+    /**
+      * 应用名称
+      */
+    Name: string;
+    /**
+      * 应用命名空间
+      */
+    Namespace: string;
+    /**
+      * 应用版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Revision: number;
+    /**
+      * 应用状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Status: string;
+    /**
+      * 应用制品名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Chart: string;
+    /**
+      * 应用制品版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AppVersion: string;
+    /**
+      * 应用更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UpdatedTime: string;
+    /**
+      * 应用描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Description: string;
 }
 /**
  * DescribeClusterInstances返回参数结构体
@@ -7730,6 +8202,54 @@ export interface CreateClusterRouteResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 应用市场部署的应用结构
+ */
+export interface Release {
+    /**
+      * 应用名称
+      */
+    Name: string;
+    /**
+      * 应用命名空间
+      */
+    Namespace: string;
+    /**
+      * 应用当前版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Revision: string;
+    /**
+      * 应用状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Status: string;
+    /**
+      * 制品名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ChartName: string;
+    /**
+      * 制品版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ChartVersion: string;
+    /**
+      * 制品应用版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AppVersion: string;
+    /**
+      * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UpdatedTime: string;
+    /**
+      * 应用描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Description: string;
 }
 /**
  * CreateClusterNodePoolFromExistingAsg返回参数结构体
@@ -9682,6 +10202,30 @@ export interface GPUArgs {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     CustomDriver?: CustomDriver;
+}
+/**
+ * 路由表冲突对象
+ */
+export interface RouteTableConflict {
+    /**
+      * 路由表类型。
+      */
+    RouteTableType: string;
+    /**
+      * 路由表CIDR。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RouteTableCidrBlock: string;
+    /**
+      * 路由表名称。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RouteTableName: string;
+    /**
+      * 路由表ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RouteTableId: string;
 }
 /**
  * 托管prometheus实例概览

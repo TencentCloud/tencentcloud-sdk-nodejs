@@ -958,6 +958,24 @@ Waiting 就绪中
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ScheduledAction: ScheduledAction
+
+  /**
+      * 服务创建失败的原因，创建成功后该字段为默认值 CREATE_SUCCEED
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CreateFailedReason: string
+
+  /**
+      * 预付费服务对应的资源组名字
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ResourceGroupName: string
+
+  /**
+      * 服务的标签
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Tags: Array<Tag>
 }
 
 /**
