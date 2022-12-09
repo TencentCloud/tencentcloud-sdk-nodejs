@@ -1,6 +1,6 @@
-import { ClientProfile, Credential, ClientConfig } from "./interface";
+import { ClientProfile, Credential, ClientConfig, HttpProfile } from "./interface";
 export declare type ResponseCallback<TReuslt = any> = (error: string, rep: TReuslt) => void;
-export interface RequestOptions extends Partial<Pick<ClientProfile["httpProfile"], "headers">> {
+export interface RequestOptions extends Partial<Pick<HttpProfile, "headers">> {
     multipart?: boolean;
     /**
      * 中止请求信号

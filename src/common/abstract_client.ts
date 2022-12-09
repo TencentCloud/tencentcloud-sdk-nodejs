@@ -1,5 +1,11 @@
 import { sdkVersion } from "./sdk_version"
-import { ClientProfile, Credential, ClientConfig, SUPPORT_LANGUAGE_LIST, HttpProfile } from "./interface"
+import {
+  ClientProfile,
+  Credential,
+  ClientConfig,
+  SUPPORT_LANGUAGE_LIST,
+  HttpProfile,
+} from "./interface"
 import Sign from "./sign"
 import { HttpConnection } from "./http/http_connection"
 import TencentCloudSDKHttpException from "./exception/tencent_cloud_sdk_exception"

@@ -52,6 +52,14 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ExtractTraceWatermark", req, cb);
     }
     /**
+     * 用于异步获取文件属性。
+- 当前仅支持获取源文件的 Md5。
+- 对输入文件为 HLS 或 DASH 的情况，仅获取索引文件的属性。
+     */
+    async DescribeFileAttributes(req, cb) {
+        return this.request("DescribeFileAttributes", req, cb);
+    }
+    /**
      * 对视频进行编辑（剪辑、拼接等），生成一个新的点播视频。编辑的功能包括：
 
 1. 对点播中的一个文件进行剪辑，生成一个新的视频；

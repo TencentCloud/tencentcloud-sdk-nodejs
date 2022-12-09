@@ -32,57 +32,58 @@ export interface ClientProfile {
     signMethod?: "TC3-HMAC-SHA256" | "HmacSHA256" | "HmacSHA1";
     /**
      * http相关选项实例
-     * @type {httpProfile}
+     * @type {HttpProfile}
      * 非必选
      */
-    httpProfile?: {
-        /**
-         * 请求方法
-         * @type {"POST" | "GET"}
-         * 非必选
-         */
-        reqMethod?: "POST" | "GET";
-        /**
-         * 接入点域名，形如（cvm.ap-shanghai.tencentcloud.com）
-         * @type {string}
-         * 非必选
-         */
-        endpoint?: string;
-        /**
-         * 协议，目前支持（https://）
-         * @type {string}
-         * 非必选
-         */
-        protocol?: string;
-        /**
-         *  请求超时时间，默认60s
-         * @type {number}
-         * 非必选
-         */
-        reqTimeout?: number;
-        /**
-         * 自定义请求头，例如 { "X-TC-TraceId": "ffe0c072-8a5d-4e17-8887-a8a60252abca" }
-         * @type {Record<string, string>}
-         * 非必选
-         */
-        headers?: Record<string, string>;
-        /**
-         * 高级请求代理，例如 new HttpsProxyAgent("http://127.0.0.1:8899")
-         *
-         * 优先级高于 proxy 配置
-         */
-        agent?: Agent;
-        /**
-         * http请求代理，例如 "http://127.0.0.1:8899"
-         */
-        proxy?: string;
-    };
+    httpProfile?: HttpProfile;
     /**
      * api请求时附带的 language 字段
      * @type {"zh-CN" | "en-US"}
      * 非必选
      */
     language?: "zh-CN" | "en-US";
+}
+export interface HttpProfile {
+    /**
+     * 请求方法
+     * @type {"POST" | "GET"}
+     * 非必选
+     */
+    reqMethod?: "POST" | "GET";
+    /**
+     * 接入点域名，形如（cvm.ap-shanghai.tencentcloud.com）
+     * @type {string}
+     * 非必选
+     */
+    endpoint?: string;
+    /**
+     * 协议，目前支持（https://）
+     * @type {string}
+     * 非必选
+     */
+    protocol?: string;
+    /**
+     *  请求超时时间，默认60s
+     * @type {number}
+     * 非必选
+     */
+    reqTimeout?: number;
+    /**
+     * 自定义请求头，例如 { "X-TC-TraceId": "ffe0c072-8a5d-4e17-8887-a8a60252abca" }
+     * @type {Record<string, string>}
+     * 非必选
+     */
+    headers?: Record<string, string>;
+    /**
+     * 高级请求代理，例如 new HttpsProxyAgent("http://127.0.0.1:8899")
+     *
+     * 优先级高于 proxy 配置
+     */
+    agent?: Agent;
+    /**
+     * http请求代理，例如 "http://127.0.0.1:8899"
+     */
+    proxy?: string;
 }
 /**
  * ClientProfile.language 属性支持的取值列表

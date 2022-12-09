@@ -5195,6 +5195,21 @@ export interface EditMediaRequest {
 }
 
 /**
+ * DescribeFileAttributes返回参数结构体
+ */
+export interface DescribeFileAttributesResponse {
+  /**
+   * 任务 ID 。
+   */
+  TaskId: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * License 请求次数统计数据。
  */
 export interface LicenseUsageDataItem {
@@ -17799,6 +17814,41 @@ export interface StorageStatData {
    * 当前深度归档存储量，单位是字节。
    */
   DeepArchiveStorage: number
+}
+
+/**
+ * DescribeFileAttributes请求参数结构体
+ */
+export interface DescribeFileAttributesRequest {
+  /**
+   * 媒体文件 ID
+   */
+  FileId: string
+
+  /**
+   * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+   */
+  SubAppId?: number
+
+  /**
+   * 用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
+   */
+  SessionId?: string
+
+  /**
+   * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。
+   */
+  SessionContext?: string
+
+  /**
+   * 任务优先级，数值越大优先级越高，取值范围是-10到 10，不填代表0。
+   */
+  TasksPriority?: number
+
+  /**
+   * 保留字段，特殊用途时使用。
+   */
+  ExtInfo?: string
 }
 
 /**

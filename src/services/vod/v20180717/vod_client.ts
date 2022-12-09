@@ -201,6 +201,7 @@ import {
   SimpleHlsClipResponse,
   DeleteAIAnalysisTemplateRequest,
   EditMediaRequest,
+  DescribeFileAttributesResponse,
   LicenseUsageDataItem,
   ConcatFileInfo2017,
   ContentReviewResult,
@@ -631,6 +632,7 @@ import {
   DescribeStorageDetailsRequest,
   MediaTrack,
   StorageStatData,
+  DescribeFileAttributesRequest,
   MediaOutputInfo,
   EditMediaTaskOutput,
   HighlightSegmentItem,
@@ -694,6 +696,18 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ExtractTraceWatermarkResponse) => void
   ): Promise<ExtractTraceWatermarkResponse> {
     return this.request("ExtractTraceWatermark", req, cb)
+  }
+
+  /**
+     * 用于异步获取文件属性。
+- 当前仅支持获取源文件的 Md5。
+- 对输入文件为 HLS 或 DASH 的情况，仅获取索引文件的属性。
+     */
+  async DescribeFileAttributes(
+    req: DescribeFileAttributesRequest,
+    cb?: (error: string, rep: DescribeFileAttributesResponse) => void
+  ): Promise<DescribeFileAttributesResponse> {
+    return this.request("DescribeFileAttributes", req, cb)
   }
 
   /**
