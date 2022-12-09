@@ -1,12 +1,12 @@
 import { sdkVersion } from "./sdk_version"
-import { ClientProfile, Credential, ClientConfig, SUPPORT_LANGUAGE_LIST } from "./interface"
+import { ClientProfile, Credential, ClientConfig, SUPPORT_LANGUAGE_LIST, HttpProfile } from "./interface"
 import Sign from "./sign"
 import { HttpConnection } from "./http/http_connection"
 import TencentCloudSDKHttpException from "./exception/tencent_cloud_sdk_exception"
 import { Response } from "node-fetch"
 
 export type ResponseCallback<TReuslt = any> = (error: string, rep: TReuslt) => void
-export interface RequestOptions extends Partial<Pick<ClientProfile["httpProfile"], "headers">> {
+export interface RequestOptions extends Partial<Pick<HttpProfile, "headers">> {
   multipart?: boolean
   /**
    * 中止请求信号
@@ -118,7 +118,7 @@ export class AbstractClient {
       cb && cb(null, result)
       return result
     } catch (e) {
-      cb && cb(e, null)
+      cb && cb(e as any, null)
       throw e
     }
   }
@@ -149,7 +149,7 @@ export class AbstractClient {
         signal: options.signal,
       })
     } catch (error) {
-      throw new TencentCloudSDKHttpException(error.message)
+      throw new TencentCloudSDKHttpException((error as any).message)
     }
     return this.parseResponse(res)
   }
@@ -185,7 +185,7 @@ export class AbstractClient {
         signal: options.signal,
       })
     } catch (e) {
-      throw new TencentCloudSDKHttpException(e.message)
+      throw new TencentCloudSDKHttpException((e as any).message)
     }
     return this.parseResponse(res)
   }
