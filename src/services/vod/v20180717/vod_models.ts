@@ -154,31 +154,62 @@ export interface AiRecognitionTaskAsrFullTextSegmentItem {
 }
 
 /**
- * 用户自定义文本音视频审核任务控制参数。
+ * 获取文件属性任务信息
  */
-export interface UserDefineOcrTextReviewTemplateInfoForUpdate {
+export interface DescribeFileAttributesTask {
   /**
-      * 用户自定文本音视频审核任务开关，可选值：
-<li>ON：开启自定义文本音视频审核任务；</li>
-<li>OFF：关闭自定义文本音视频审核任务。</li>
-      */
-  Switch?: string
-
-  /**
-      * 用户自定义文本过滤标签，音视频审核结果包含选择的标签则返回结果，如果过滤标签为空，则音视频审核结果全部返回。如果要使用标签过滤功能，添加自定义文本关键词素材时需要添加对应标签。
-标签个数最多 10 个，每个标签长度最多 16 个字符。
-      */
-  LabelSet?: Array<string>
-
-  /**
-   * 判定涉嫌违规的分数阈值，当审核达到该分数以上，认为涉嫌违规。取值范围：0~100。
+   * 任务 ID。
    */
-  BlockConfidence?: number
+  TaskId: string
 
   /**
-   * 判定需人工复核是否违规的分数阈值，当审核达到该分数以上，认为需人工复核。取值范围：0~100。
+   * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
    */
-  ReviewConfidence?: number
+  Status: string
+
+  /**
+      * 错误码，0 表示成功，其他值表示失败：
+<li>40000：输入参数不合法，请检查输入参数；</li>
+<li>60000：源文件错误（如视频数据损坏），请确认源文件是否正常；</li>
+<li>70000：内部服务错误，建议重试。</li>
+      */
+  ErrCode: number
+
+  /**
+   * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/266/50368#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+   */
+  ErrCodeExt: string
+
+  /**
+   * 错误信息。
+   */
+  Message: string
+
+  /**
+   * 任务进度，取值范围 [0-100] 。
+   */
+  Progress: number
+
+  /**
+   * 媒体文件 ID。
+   */
+  FileId: string
+
+  /**
+      * 获取媒体文件属性任务的输出。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Output: DescribeFileAttributesTaskOutput
+
+  /**
+   * 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
+   */
+  SessionId: string
+
+  /**
+   * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。
+   */
+  SessionContext: string
 }
 
 /**
@@ -871,6 +902,34 @@ export interface AiAnalysisTaskCoverOutput {
    * 智能封面列表文件 URL 失效时间，使用  [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
    */
   CoverSetFileUrlExpireTime: string
+}
+
+/**
+ * 用户自定义文本音视频审核任务控制参数。
+ */
+export interface UserDefineOcrTextReviewTemplateInfoForUpdate {
+  /**
+      * 用户自定文本音视频审核任务开关，可选值：
+<li>ON：开启自定义文本音视频审核任务；</li>
+<li>OFF：关闭自定义文本音视频审核任务。</li>
+      */
+  Switch?: string
+
+  /**
+      * 用户自定义文本过滤标签，音视频审核结果包含选择的标签则返回结果，如果过滤标签为空，则音视频审核结果全部返回。如果要使用标签过滤功能，添加自定义文本关键词素材时需要添加对应标签。
+标签个数最多 10 个，每个标签长度最多 16 个字符。
+      */
+  LabelSet?: Array<string>
+
+  /**
+   * 判定涉嫌违规的分数阈值，当审核达到该分数以上，认为涉嫌违规。取值范围：0~100。
+   */
+  BlockConfidence?: number
+
+  /**
+   * 判定需人工复核是否违规的分数阈值，当审核达到该分数以上，认为需人工复核。取值范围：0~100。
+   */
+  ReviewConfidence?: number
 }
 
 /**
@@ -3932,6 +3991,17 @@ export interface ReviewAudioVideoSegmentItem {
    * 当 Form 为 OCR 或 ASR 时有效，表示嫌疑片段命中的违规关键词列表。
    */
   KeywordSet: Array<string>
+
+  /**
+      * 嫌疑图片 URL （图片不会永久存储，到达
+ PicUrlExpireTime 时间点后图片将被删除）。
+      */
+  Url: string
+
+  /**
+   * 嫌疑图片 URL 失效时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   */
+  PicUrlExpireTime: string
 }
 
 /**
@@ -10912,6 +10982,16 @@ export interface AiReviewTaskPoliticalAsrResult {
 }
 
 /**
+ * 获取文件属性任务输出
+ */
+export interface DescribeFileAttributesTaskOutput {
+  /**
+   * 媒体文件的 Md5 值。
+   */
+  Md5: string
+}
+
+/**
  * TRTC伴生录制信息。
  */
 export interface TrtcRecordInfo {
@@ -11741,11 +11821,11 @@ export interface DescribeCDNStatDetailsRequest {
 }
 
 /**
- * 文本全文识别输入。
+ * 片尾任务输入类型。
  */
-export interface AiRecognitionTaskOcrFullTextResultInput {
+export interface HeadTailTaskInput {
   /**
-   * 文本全文识别模板 ID。
+   * 片头片尾模板号。
    */
   Definition: number
 }
@@ -11949,6 +12029,7 @@ export interface EventContent {
 <li>FastClipMediaComplete：快速剪辑完成；</li>
 <li>ReviewAudioVideoComplete：音视频审核完成；</li>
 <li>ExtractTraceWatermarkComplete：提取溯源水印完成；</li>
+<li>DescribeFileAttributesComplete：获取文件属性完成；</li>
 <b>兼容 2017 版的事件类型：</b>
 <li>TranscodeComplete：视频转码完成；</li>
 <li>ConcatComplete：视频拼接完成；</li>
@@ -12071,6 +12152,12 @@ export interface EventContent {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ReduceMediaBitrateCompleteEvent: ReduceMediaBitrateTask
+
+  /**
+      * 获取文件属性完成事件，当事件类型为 DescribeFileAttributesComplete 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DescribeFileAttributesCompleteEvent: DescribeFileAttributesTask
 }
 
 /**
@@ -13183,6 +13270,12 @@ export interface MediaMetaData {
    * 音频时长，单位：秒。
    */
   AudioDuration: number
+
+  /**
+      * 媒体文件的 Md5 值。
+<li><font color=red>注意</font>：如需要获取媒体文件的 Md5，调用 DescribeFileAttributes 接口，待任务执行完成后获取。</li>
+      */
+  Md5: string
 }
 
 /**
@@ -13585,6 +13678,7 @@ export interface DescribeTaskDetailResponse {
 <li>PullUpload：拉取上传媒体文件任务；</li>
 <li>FastClipMedia：快速剪辑任务；</li>
 <li>RemoveWatermarkTask：智能去除水印任务；</li>
+<li>DescribeFileAttributesTask：获取文件属性任务；</li>
 <li> ReviewAudioVideo：音视频审核任务。</li>
       */
   TaskType: string
@@ -13707,6 +13801,12 @@ export interface DescribeTaskDetailResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ReduceMediaBitrateTask: ReduceMediaBitrateTask
+
+  /**
+      * 获取文件属性任务信息，仅当 TaskType 为 DescribeFileAttributes，该字段有值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DescribeFileAttributesTask: DescribeFileAttributesTask
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -13902,11 +14002,11 @@ export interface ReduceMediaBitrateMediaProcessTaskResult {
 }
 
 /**
- * 片尾任务输入类型。
+ * 文本全文识别输入。
  */
-export interface HeadTailTaskInput {
+export interface AiRecognitionTaskOcrFullTextResultInput {
   /**
-   * 片头片尾模板号。
+   * 文本全文识别模板 ID。
    */
   Definition: number
 }

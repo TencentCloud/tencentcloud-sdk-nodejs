@@ -63,6 +63,16 @@ export interface CreateTawInstanceRequest {
    * 实例购买渠道("cdn" 等)
    */
   BuyingChannel?: string
+
+  /**
+   * 预付费资源包类型(仅预付费需要)
+   */
+  ResourcePackageType?: number
+
+  /**
+   * 预付费资源包数量(仅预付费需要)
+   */
+  ResourcePackageNum?: number
 }
 
 /**
@@ -218,6 +228,12 @@ export interface CreateTawInstanceResponse {
    * 实例Id
    */
   InstanceId: string
+
+  /**
+      * 预付费订单 id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DealName: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

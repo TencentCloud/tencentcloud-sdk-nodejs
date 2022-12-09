@@ -2914,6 +2914,32 @@ export interface SecRuleRelatedInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   AttackContent: string
+
+  /**
+      * 规则类型，取值有：
+<li>waf: 托管规则；</li>
+<li>acl：自定义规则；</li>
+<li>rate：速率限制规则；</li>
+<li>bot：bot防护规则。</li>
+      */
+  RuleType: string
+
+  /**
+   * 规则是否开启。
+   */
+  RuleEnabled: boolean
+
+  /**
+      * 规则是否存在，取值有：
+<li>true: 规则不存在；</li>
+<li>false: 规则存在。</li>
+      */
+  RuleDeleted: boolean
+
+  /**
+   * 规则是否启用监控告警。
+   */
+  AlarmEnabled: boolean
 }
 
 /**
@@ -3426,12 +3452,6 @@ export interface BotLog {
   RequestUri: string
 
   /**
-      * 攻击类型。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  AttackType: string
-
-  /**
    * 请求方法。
    */
   RequestMethod: string
@@ -3442,10 +3462,19 @@ export interface BotLog {
   AttackContent: string
 
   /**
-      * 攻击等级。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  RiskLevel: string
+   * IP所在国家iso-3166中alpha-2编码，编码信息请参考[ISO-3166](https://git.woa.com/edgeone/iso-3166/blob/master/all/all.json)。
+   */
+  SipCountryCode: string
+
+  /**
+   * user agent。
+   */
+  Ua: string
+
+  /**
+   * 攻击事件ID。
+   */
+  EventId: string
 
   /**
       * 规则ID。
@@ -3454,14 +3483,10 @@ export interface BotLog {
   RuleId: number
 
   /**
-   * IP所在国家iso-3166中alpha-2编码，编码信息请参考[ISO-3166](https://git.woa.com/edgeone/iso-3166/blob/master/all/all.json)。
-   */
-  SipCountryCode: string
-
-  /**
-   * 请求（事件）ID。
-   */
-  EventId: string
+      * 攻击类型。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AttackType: string
 
   /**
       * 处置方式。
@@ -3476,9 +3501,10 @@ export interface BotLog {
   HttpLog: string
 
   /**
-   * user agent。
-   */
-  Ua: string
+      * 攻击等级。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RiskLevel: string
 
   /**
       * 检出方法。
@@ -3509,6 +3535,12 @@ export interface BotLog {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Label: string
+
+  /**
+      * 日志所属的区域。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Area: string
 }
 
 /**
@@ -3893,6 +3925,7 @@ export interface AclCondition {
 <li>accept：请求内容类型；</li>
 <li>method：请求方式；</li>
 <li>header：请求头部；</li>
+<li>app_proto：应用层协议；</li>
 <li>sip_proto：网络层协议。</li>
       */
   MatchFrom: string
@@ -4798,11 +4831,6 @@ export interface DDoS {
  */
 export interface DescribeSecurityRuleIdRequest {
   /**
-   * 规则Id数组。
-   */
-  RuleIdList: Array<number>
-
-  /**
       * 规则类型，取值有：
 <li>waf：web托管规则；</li>
 <li>acl：自定义规则；</li>
@@ -4815,6 +4843,16 @@ export interface DescribeSecurityRuleIdRequest {
    * 子域名/应用名。
    */
   Entity?: string
+
+  /**
+   * 规则Id数组。 当为空时查询 子域名或者应用名下所有规则
+   */
+  RuleIdList?: Array<number>
+
+  /**
+   * 子域名数组。
+   */
+  Domains?: Array<string>
 }
 
 /**
@@ -5656,6 +5694,64 @@ export interface CacheConfig {
 }
 
 /**
+ * 托管规则详情
+ */
+export interface SecurityRule {
+  /**
+   * 规则id。
+   */
+  RuleId: number
+
+  /**
+   * 规则描述。
+   */
+  Description: string
+
+  /**
+   * 规则类型名。
+   */
+  RuleTypeName: string
+
+  /**
+      * 等级描述。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RuleLevelDesc: string
+
+  /**
+      * 规则类型id。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RuleTypeId: number
+
+  /**
+      * 规则类型描述。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RuleTypeDesc?: string
+
+  /**
+      * 规则标签。部分类型的规则不存在该参数。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RuleTags: Array<string>
+
+  /**
+      * 状态，取值有：
+<li>on：开启；</li>
+<li>off：关闭。</li>为空时对应接口Status无意义，例如仅查询规则详情时。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Status: string
+
+  /**
+      * 子域名/应用名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Entity: string
+}
+
+/**
  * ModifyDDoSPolicy返回参数结构体
  */
 export interface ModifyDDoSPolicyResponse {
@@ -6050,6 +6146,11 @@ export interface CreateSpeedTestingResponse {
  */
 export interface SecHitRuleInfo {
   /**
+   * 站点ID。
+   */
+  ZoneId: string
+
+  /**
    * 规则ID。
    */
   RuleId: number
@@ -6058,18 +6159,6 @@ export interface SecHitRuleInfo {
    * 规则类型名称。
    */
   RuleTypeName: string
-
-  /**
-      * 执行动作（处置方式），取值有：
-<li>trans ：通过 ；</li>
-<li>alg ：算法挑战 ；</li>
-<li>drop ：丢弃 ；</li>
-<li>ban ：封禁源ip ；</li>
-<li>redirect ：重定向 ；</li>
-<li>page ：返回指定页面 ；</li>
-<li>monitor ：观察 。</li>
-      */
-  Action: string
 
   /**
    * 命中时间，采用unix秒级时间戳。
@@ -6092,6 +6181,18 @@ export interface SecHitRuleInfo {
   Domain: string
 
   /**
+      * 执行动作（处置方式），取值有：
+<li>trans ：通过 ；</li>
+<li>alg ：算法挑战 ；</li>
+<li>drop ：丢弃 ；</li>
+<li>ban ：封禁源ip ；</li>
+<li>redirect ：重定向 ；</li>
+<li>page ：返回指定页面 ；</li>
+<li>monitor ：观察 。</li>
+      */
+  Action: string
+
+  /**
       * Bot标签，取值有:
 <li>evil_bot：恶意Bot；</li>
 <li>suspect_bot：疑似Bot；</li>
@@ -6100,6 +6201,23 @@ export interface SecHitRuleInfo {
 <li>none：未分类。</li>
       */
   BotLabel: string
+
+  /**
+   * 规则是否启用。
+   */
+  RuleEnabled: boolean
+
+  /**
+   * 规则是否启用监控告警。
+   */
+  AlarmEnabled: boolean
+
+  /**
+      * 规则是否存在，取值有：
+<li>true: 规则不存在；</li>
+<li>false: 规则存在。</li>
+      */
+  RuleDeleted: boolean
 }
 
 /**
@@ -9198,6 +9316,12 @@ export interface WebLogs {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ReqMethod: string
+
+  /**
+      * 日志所属区域。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Area: string
 }
 
 /**
@@ -10084,9 +10208,17 @@ export interface IpTableRule {
   MatchFrom: string
 
   /**
-   * 匹配内容。
-   */
-  MatchContent: string
+      * 规则的匹配方式，默认为空代表等于。
+取值有：
+<li> is_emty：配置为空；</li>
+<li> not_exists：配置为不存在；</li>
+<li> include：包含；</li>
+<li> not_include：不包含；</li>
+<li> equal：等于；</li>
+<li> not_equal：不等于。</li>
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Operator?: string
 
   /**
    * 规则id。仅出参使用。
@@ -10105,6 +10237,17 @@ export interface IpTableRule {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Status?: string
+
+  /**
+      * 规则名。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RuleName?: string
+
+  /**
+   * 匹配内容。当 Operator为is_emty 或not_exists时，此值允许为空。
+   */
+  MatchContent?: string
 }
 
 /**
@@ -11644,9 +11787,16 @@ export interface DeleteDnsRecordsResponse {
  */
 export interface DescribeSecurityRuleIdResponse {
   /**
-   * 规则列表。
-   */
+      * 托管规则类型的规则列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
   WafGroupRules: Array<WafGroupRule>
+
+  /**
+      * 自定义规则、速率限制、Bot规则的规则列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SecurityRules: Array<SecurityRule>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -11732,6 +11882,11 @@ export interface RateLimitIntelligence {
 <li>alg：挑战。</li>
       */
   Action: string
+
+  /**
+   * 规则id，仅出参使用。
+   */
+  RuleId?: number
 }
 
 /**

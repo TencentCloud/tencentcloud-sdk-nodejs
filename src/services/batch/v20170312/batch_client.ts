@@ -129,6 +129,7 @@ import {
   AttachInstancesRequest,
   DescribeComputeEnvsRequest,
   DescribeCvmZoneInstanceConfigInfosResponse,
+  OutputMappingOption,
   DescribeJobsResponse,
   Activity,
   RunMonitorServiceEnabled,

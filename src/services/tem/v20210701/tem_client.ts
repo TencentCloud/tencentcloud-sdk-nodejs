@@ -155,6 +155,7 @@ import {
   DescribeLogConfigResponse,
   ServicePortMappingItem,
   RevertDeployApplicationRequest,
+  SortType,
   CreateApplicationResponse,
   HorizontalAutoscaler,
   ModifyApplicationServiceResponse,

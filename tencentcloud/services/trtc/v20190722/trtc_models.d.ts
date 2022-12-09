@@ -1711,7 +1711,7 @@ export interface TencentVod {
       */
     SourceContext?: string;
     /**
-      * 上传到vod平台的录制文件格式类型，0：mp4(默认), 1: hls。
+      * 上传到vod平台的录制文件格式类型，0：mp4(默认), 1: hls, 2:aac(StreamType=1纯音频录制时有效)。
       */
     MediaType?: number;
     /**

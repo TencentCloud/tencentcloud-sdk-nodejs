@@ -6446,7 +6446,7 @@ export interface DeleteDeployGroupsResponse {
  */
 export interface CdbSellType {
     /**
-      * 售卖实例名称
+      * 售卖实例名称。Z3是高可用类型对应规格中的DeviceType包含UNIVERSAL,EXCLUSIVE；CVM是基础版类型对应规格中的DeviceType是BASIC；TKE是基础型v2类型对应规格中的DeviceType是BASIC_V2。
       */
     TypeName: string;
     /**

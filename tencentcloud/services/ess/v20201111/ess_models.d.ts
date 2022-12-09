@@ -1201,6 +1201,11 @@ export interface Staff {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     VerifiedOn?: number;
+    /**
+      * 员工是否离职：0-未离职，1-离职
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    QuiteJob?: number;
 }
 /**
  * CreateFlowEvidenceReport返回参数结构体

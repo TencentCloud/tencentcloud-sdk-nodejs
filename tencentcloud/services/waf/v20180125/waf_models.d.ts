@@ -723,6 +723,16 @@ export interface DomainsPartInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     CipherTemplate: number;
+    /**
+      * 300s
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProxyReadTimeout: number;
+    /**
+      * 300s
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProxySendTimeout: number;
 }
 /**
  * DescribeAutoDenyIP请求参数结构体
@@ -946,6 +956,14 @@ export interface AddSpartaProtectionRequest {
       * 0:不支持选择：默认模版  1:通用型模版 2:安全型模版 3:自定义模版
       */
     CipherTemplate?: number;
+    /**
+      * 300s
+      */
+    ProxyReadTimeout?: number;
+    /**
+      * 300s
+      */
+    ProxySendTimeout?: number;
 }
 /**
  * PostAttackDownloadTask请求参数结构体
@@ -1583,6 +1601,16 @@ export interface InstanceInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ElasticBilling?: number;
+    /**
+      * 攻击日志投递开关
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AttackLogPost?: number;
+    /**
+      * 带宽峰值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MaxBandwidth?: number;
 }
 /**
  * 防护域名端口配置信息

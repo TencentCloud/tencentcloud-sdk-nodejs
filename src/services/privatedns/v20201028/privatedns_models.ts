@@ -1049,6 +1049,30 @@ export interface PrivateZone {
    * CNAME加速状态：开通：ENABLED, 关闭，DISABLED
    */
   CnameSpeedupStatus: string
+
+  /**
+      * 转发规则名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ForwardRuleName: string
+
+  /**
+      * 转发规则类型：云上到云下，DOWN；云下到云上，UP，目前只支持DOWN
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ForwardRuleType: string
+
+  /**
+      * 转发的地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ForwardAddress: string
+
+  /**
+      * 终端节点名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EndPointName: string
 }
 
 /**

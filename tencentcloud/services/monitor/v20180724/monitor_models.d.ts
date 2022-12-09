@@ -1994,15 +1994,15 @@ export interface GrafanaAccountInfo {
  */
 export interface UpdateGrafanaNotificationChannelRequest {
     /**
-      * 通道 ID
+      * 通道 ID，例如：nchannel-abcd1234
       */
     ChannelId: string;
     /**
-      * 实例 ID
+      * Grafana 实例 ID，例如：grafana-12345678
       */
     InstanceId: string;
     /**
-      * 渠道名
+      * 告警通道名称，例如：test
       */
     ChannelName: string;
     /**
@@ -2474,11 +2474,11 @@ export interface ModifyAlarmReceiversResponse {
  */
 export interface EnableGrafanaSSORequest {
     /**
-      * 是否开启 SSO
+      * 是否开启 SSO，true为开启，false 为不开启
       */
     EnableSSO: boolean;
     /**
-      * 实例 ID
+      * Grafana 实例 ID，例如：grafana-abcdefgh
       */
     InstanceId: string;
 }
@@ -2712,11 +2712,11 @@ export interface DescribeSSOAccountResponse {
  */
 export interface UpdatePrometheusAgentStatusRequest {
     /**
-      * 实例 ID
+      * Prometheus 实例 ID，例如：prom-abcd1234
       */
     InstanceId: string;
     /**
-      * Agent ID 列表
+      * Agent ID 列表，例如：agent-abcd1234，可在控制台 Agent 管理中获取
       */
     AgentIds: Array<string>;
     /**
@@ -3469,19 +3469,19 @@ export interface UserNotice {
  */
 export interface UpdatePrometheusScrapeJobRequest {
     /**
-      * 实例 ID
+      * Prometheus 实例 ID，例如：prom-abcd1234
       */
     InstanceId: string;
     /**
-      * Agent ID
+      * Agent ID，例如：agent-abcd1234，可在控制台 Agent 管理中获取
       */
     AgentId: string;
     /**
-      * 抓取任务 ID
+      * 抓取任务 ID，例如：job-abcd1234，可在控制台 Agent 管理-抓取任务配置中获取
       */
     JobId: string;
     /**
-      * 抓取任务配置
+      * 抓取任务配置，格式：job_name:xx
       */
     Config: string;
 }
@@ -3514,11 +3514,11 @@ export interface AlarmPolicyFilter {
  */
 export interface UpgradeGrafanaInstanceRequest {
     /**
-      * 实例 ID
+      * Grafana 实例 ID，例如：grafana-12345678
       */
     InstanceId: string;
     /**
-      * 版本别名
+      * 版本别名，例如：v7.4.2
       */
     Alias: string;
 }
@@ -4280,11 +4280,11 @@ export interface DeleteGrafanaIntegrationResponse {
  */
 export interface DescribeInstalledPluginsRequest {
     /**
-      * 实例 ID
+      * Grafana 实例 ID，例如：grafana-kleu3gt0
       */
     InstanceId: string;
     /**
-      * 按插件 ID 过滤
+      * 按插件 ID 过滤，例如：grafana-piechart-panel，可通过接口 DescribeInstalledPlugins 查看已安装的插件 ID
       */
     PluginId?: string;
 }
@@ -4367,11 +4367,11 @@ export interface Condition {
  */
 export interface EnableSSOCamCheckRequest {
     /**
-      * 实例ID
+      * Grafana 实例 ID，例如：grafana-abcdefgh
       */
     InstanceId: string;
     /**
-      * 是否开启cam鉴权
+      * 是否开启 cam 鉴权，true为开启，false 为不开启
       */
     EnableSSOCamCheck: boolean;
 }
@@ -4389,7 +4389,7 @@ export interface DeleteGrafanaInstanceResponse {
  */
 export interface DescribeGrafanaWhiteListRequest {
     /**
-      * 实例 ID
+      * Grafana 实例 ID，例如：grafana-abcdefgh
       */
     InstanceId: string;
 }
@@ -5194,11 +5194,11 @@ export interface DescribePrometheusScrapeJobsResponse {
  */
 export interface EnableGrafanaInternetRequest {
     /**
-      * 实例 ID
+      * Grafana 实例 ID，例如：grafana-kleu3gt0
       */
     InstanceID: string;
     /**
-      * 开启或关闭
+      * 开启或关闭公网访问，true为开启，false 为不开启
       */
     EnableInternet: boolean;
 }
@@ -5220,11 +5220,11 @@ export interface DescribePluginOverviewsResponse {
  */
 export interface UpdateSSOAccountRequest {
     /**
-      * 示例ID
+      * Grafana 实例 ID，例如：grafana-abcdefgh
       */
     InstanceId: string;
     /**
-      * 用户账号ID
+      * 用户账号 ID ，例如：10000000
       */
     UserId: string;
     /**
@@ -5640,7 +5640,7 @@ export interface UpdateDNSConfigRequest {
  */
 export interface CreateAlertRuleRequest {
     /**
-      * Prometheus 实例 ID
+      * Prometheus 实例 ID，例如：prom-abcd1234
       */
     InstanceId: string;
     /**
@@ -5648,7 +5648,7 @@ export interface CreateAlertRuleRequest {
       */
     RuleName: string;
     /**
-      * 规则表达式
+      * 规则表达式，可参考<a href="https://cloud.tencent.com/document/product/1416/56008">告警规则说明</a>
       */
     Expr: string;
     /**
@@ -6102,15 +6102,15 @@ export interface DescribeStatisticDataResponse {
  */
 export interface CreatePrometheusScrapeJobRequest {
     /**
-      * 实例 ID
+      * Prometheus 实例 ID，例如：prom-abcd1234
       */
     InstanceId: string;
     /**
-      * Agent ID
+      * Agent ID，例如：agent-abcd1234，可在控制台 Agent 管理中获取
       */
     AgentId: string;
     /**
-      * 任务内容
+      * 抓取任务配置，格式：job_name:xx
       */
     Config?: string;
 }
@@ -6396,7 +6396,7 @@ export interface DescribeAlarmNoticesRequest {
  */
 export interface DescribeGrafanaConfigRequest {
     /**
-      * 实例 ID
+      * Grafana 实例 ID，例如：grafana-12345678
       */
     InstanceId: string;
 }
@@ -6713,11 +6713,11 @@ export interface DescribeProductEventListEventsGroupInfo {
  */
 export interface UninstallGrafanaPluginsRequest {
     /**
-      * 插件 ID 数组
+      * 插件 ID 数组，例如"PluginIds": [ "grafana-clock-panel" ]，可通过 DescribePluginOverviews 获取 PluginId
       */
     PluginIds: Array<string>;
     /**
-      * 实例 ID
+      * Grafana 实例 ID，例如：grafana-abcdefg
       */
     InstanceId: string;
 }
@@ -6757,11 +6757,11 @@ export interface DeleteAlertRulesRequest {
  */
 export interface DescribeSSOAccountRequest {
     /**
-      * 实例ID
+      * Grafana 实例 ID，例如：grafana-abcdefgh
       */
     InstanceId: string;
     /**
-      * 按账号 UIN 进行过滤
+      * 填写对应的账号 ID，将会按账号 ID 进行过滤，例如：10000
       */
     UserId?: string;
 }
@@ -7363,11 +7363,11 @@ export interface DescribePolicyConditionListCondition {
  */
 export interface UpdateGrafanaWhiteListRequest {
     /**
-      * 实例名
+      * Grafana 实例 ID，例如：grafana-abcdefgh
       */
     InstanceId: string;
     /**
-      * 白名单数组
+      * 白名单数组，输入公网域名 IP ，例如：127.0.0.1，可通过接口 DescribeGrafanaWhiteList 查看
       */
     Whitelist: Array<string>;
 }
@@ -7563,7 +7563,7 @@ export interface PrometheusInstancesItem {
  */
 export interface DeleteServiceDiscoveryRequest {
     /**
-      * Prometheus 实例 ID
+      * Prometheus 实例 ID，例如：prom-sdfk2342a
       */
     InstanceId: string;
     /**

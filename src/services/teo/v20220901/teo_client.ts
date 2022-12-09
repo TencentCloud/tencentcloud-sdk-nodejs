@@ -212,6 +212,7 @@ import {
   DescribePurgeTasksRequest,
   IdentifyZoneRequest,
   CacheConfig,
+  SecurityRule,
   ModifyDDoSPolicyResponse,
   DDoSFeaturesFilter,
   IntelligenceRule,

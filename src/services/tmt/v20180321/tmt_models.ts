@@ -129,42 +129,42 @@ export interface SpeechTranslateResponse {
   /**
    * 请求的SessionUuid直接返回
    */
-  SessionUuid?: string
+  SessionUuid: string
 
   /**
    * 语音识别状态 1-进行中 0-完成
    */
-  RecognizeStatus?: number
+  RecognizeStatus: number
 
   /**
    * 识别出的原文
    */
-  SourceText?: string
+  SourceText: string
 
   /**
    * 翻译出的译文
    */
-  TargetText?: string
+  TargetText: string
 
   /**
    * 第几个语音分片
    */
-  Seq?: number
+  Seq: number
 
   /**
    * 原语言
    */
-  Source?: string
+  Source: string
 
   /**
    * 目标语言
    */
-  Target?: string
+  Target: string
 
   /**
    * 当请求的Mode参数填写bvad是，启动VadSeq。此时Seq会被设置为后台vad（静音检测）后的新序号，而VadSeq代表客户端原始Seq值
    */
-  VadSeq?: number
+  VadSeq: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -310,7 +310,7 @@ hi：印地语
   ProjectId: number
 
   /**
-   * 待翻译的文本列表，批量接口可以以数组方式在一次请求中填写多个待翻译文本。文本统一使用utf-8格式编码，非utf-8格式编码字符会翻译失败，请传入有效文本，html标记等非常规翻译文本可能会翻译失败。单次请求的文本长度总和需要低于2000。
+   * 待翻译的文本列表，批量接口可以以数组方式在一次请求中填写多个待翻译文本。文本统一使用utf-8格式编码，非utf-8格式编码字符会翻译失败，请传入有效文本，html标记等非常规翻译文本可能会翻译失败。单次请求的文本长度总和需要低于2000字符。
    */
   SourceTextList: Array<string>
 }
@@ -508,7 +508,7 @@ lo（老挝语）：zh（简体中文）、zh-HK（繁体中文）、 zh-TW（�
  */
 export interface TextTranslateRequest {
   /**
-   * 待翻译的文本，文本统一使用utf-8格式编码，非utf-8格式编码字符会翻译失败，请传入有效文本，html标记等非常规翻译文本可能会翻译失败。单次请求的文本长度需要低于2000。
+   * 待翻译的文本，文本统一使用utf-8格式编码，非utf-8格式编码字符会翻译失败，请传入有效文本，html标记等非常规翻译文本可能会翻译失败。单次请求的文本长度需要低于2000字符。
    */
   SourceText: string
 

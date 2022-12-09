@@ -1330,6 +1330,16 @@ export interface SealInfo {
    * 印章其它文本内容
    */
   OtherTexts: Array<string>
+
+  /**
+      * 印章类型，表示为:
+圆形印章：0
+椭圆形印章：1
+方形印章：2
+菱形印章：3
+三角形印章：4
+      */
+  SealShape: string
 }
 
 /**

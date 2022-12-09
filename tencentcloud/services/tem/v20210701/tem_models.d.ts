@@ -625,6 +625,10 @@ export interface DescribeEnvironmentsRequest {
       * 查询过滤器
       */
     Filters?: Array<QueryFilter>;
+    /**
+      * 排序字段
+      */
+    SortInfo?: SortType;
 }
 /**
  * LogConfig 列表结果
@@ -827,6 +831,14 @@ export interface CreateEnvironmentRequest {
       * 标签
       */
     Tags?: Array<Tag>;
+    /**
+      * 环境类型：test、pre、prod
+      */
+    EnvType?: string;
+    /**
+      * 创建环境的region
+      */
+    CreateRegion?: string;
 }
 /**
  * node信息
@@ -2709,6 +2721,16 @@ export interface TemNamespaceInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     HasAuthority: boolean;
+    /**
+      * 环境类型: test、pre、prod
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EnvType: string;
+    /**
+      * 地域码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RegionId: string;
 }
 /**
  * CreateApplicationAutoscaler请求参数结构体
@@ -3338,6 +3360,10 @@ export interface DescribeApplicationsRequest {
       * 查询过滤器
       */
     Filters?: Array<QueryFilter>;
+    /**
+      * 排序字段
+      */
+    SortInfo?: SortType;
 }
 /**
  * DescribeApplicationInfo请求参数结构体
@@ -3577,6 +3603,10 @@ export interface ModifyEnvironmentRequest {
       * 来源渠道
       */
     SourceChannel?: number;
+    /**
+      * 环境类型：test、pre、prod
+      */
+    EnvType?: string;
 }
 /**
  * GenerateApplicationPackageDownloadUrl返回参数结构体
@@ -3734,6 +3764,11 @@ export interface NamespaceInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Tags: Array<Tag>;
+    /**
+      * 环境类型：test、pre、prod
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EnvType: string;
 }
 /**
  * DescribeLogConfig返回参数结构体
@@ -3780,6 +3815,19 @@ export interface RevertDeployApplicationRequest {
       * 需要回滚的服务所在环境id
       */
     EnvironmentId?: string;
+}
+/**
+ * 查询过滤器
+ */
+export interface SortType {
+    /**
+      * 排序字段名称
+      */
+    Key?: string;
+    /**
+      * 0：升序，1：倒序
+      */
+    Type?: number;
 }
 /**
  * CreateApplication返回参数结构体

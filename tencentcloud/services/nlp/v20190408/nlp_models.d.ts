@@ -110,11 +110,11 @@ export interface ChatBotResponse {
     /**
       * 闲聊回复
       */
-    Reply?: string;
+    Reply: string;
     /**
       * 对于当前输出回复的自信度
       */
-    Confidence?: number;
+    Confidence: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -522,7 +522,7 @@ export interface AutoSummarizationResponse {
     /**
       * 文本摘要结果
       */
-    Summary?: string;
+    Summary: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -617,23 +617,23 @@ export interface SentimentAnalysisResponse {
     /**
       * 正面情感概率
       */
-    Positive?: number;
+    Positive: number;
     /**
       * 中性情感概率，当输入参数Mode取值为3class时有效，否则值为空
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Neutral?: number;
+    Neutral: number;
     /**
       * 负面情感概率
       */
-    Negative?: number;
+    Negative: number;
     /**
       * 情感分类结果：
 1、positive，表示正面情感
 2、negative，表示负面情感
 3、neutral，表示中性、无情感
       */
-    Sentiment?: string;
+    Sentiment: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -683,11 +683,11 @@ export interface TextCorrectionResponse {
       * 纠错详情
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    CCITokens?: Array<CCIToken>;
+    CCITokens: Array<CCIToken>;
     /**
       * 纠错后的文本
       */
-    ResultText?: string;
+    ResultText: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

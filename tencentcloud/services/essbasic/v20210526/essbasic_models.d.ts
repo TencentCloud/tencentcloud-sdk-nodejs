@@ -25,7 +25,7 @@ export interface ChannelCreateConvertTaskApiResponse {
  */
 export interface ChannelBatchCancelFlowsResponse {
     /**
-      * 签署流程批量撤销失败原因，错误信息与流程Id一一对应，如果部分流程不可撤销，不会返回错误信息，只会撤销可撤销流程
+      * 签署流程批量撤销失败原因，错误信息与流程Id一一对应，成功为“”,失败则对应失败消息
       */
     FailMessages: Array<string>;
     /**
@@ -1434,6 +1434,10 @@ export interface Staff {
       * 员工实名时间戳
       */
     VerifiedOn: number;
+    /**
+      * 员工是否离职：0-未离职，1-离职
+      */
+    QuiteJob: number;
 }
 /**
  * ChannelCreateBoundFlows请求参数结构体

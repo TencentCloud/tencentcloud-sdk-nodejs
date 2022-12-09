@@ -1132,6 +1132,11 @@ export interface ZoneInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     LocalZone: boolean;
+    /**
+      * 可用区是否是EdgeZone可用区，如：false
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EdgeZone: boolean;
 }
 /**
  * RegisterTargetsWithClassicalLB返回参数结构体
@@ -1624,6 +1629,11 @@ export interface Listener {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     AttrFlags: Array<string>;
+    /**
+      * 绑定的目标组列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TargetGroupList: Array<BasicTargetGroupInfo>;
 }
 /**
  * 负载均衡流量数据。
@@ -2723,6 +2733,11 @@ export interface RuleOutput {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Domains: Array<string>;
+    /**
+      * 绑定的目标组列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TargetGroupList: Array<BasicTargetGroupInfo>;
 }
 /**
  * CreateTopic返回参数结构体
@@ -3567,6 +3582,21 @@ Public：公网属性， Private：内网属性。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Domains: string;
+    /**
+      * 多可用区负载均衡实例所选备区
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SlaveZone: Array<string>;
+    /**
+      * 内网负载均衡实例所在可用区，由白名单CLB_Internal_Zone控制
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Zones: Array<string>;
+    /**
+      * 是否开启SNI特性（本参数仅对于HTTPS监听器有意义）。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SniSwitch: number;
 }
 /**
  * 反查结果数据类型。
@@ -4480,7 +4510,7 @@ export interface CertificateOutput {
       */
     SSLMode: string;
     /**
-      * 服务端证书的 ID。
+      * 服务端证书的ID。
       */
     CertId: string;
     /**
@@ -4488,6 +4518,11 @@ export interface CertificateOutput {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     CertCaId: string;
+    /**
+      * 多本服务器证书场景扩展的服务器证书ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ExtCertIds: Array<string>;
 }
 /**
  * DeleteTargetGroups请求参数结构体
