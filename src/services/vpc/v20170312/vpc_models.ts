@@ -3020,6 +3020,16 @@ export interface DescribeNatGatewayDestinationIpPortTranslationNatRulesRequest {
 }
 
 /**
+ * ReturnNormalAddresses请求参数结构体
+ */
+export interface ReturnNormalAddressesRequest {
+  /**
+   * 1
+   */
+  AddressIps?: Array<string>
+}
+
+/**
  * ModifyNetworkAclAttribute返回参数结构体
  */
 export interface ModifyNetworkAclAttributeResponse {
@@ -7456,6 +7466,16 @@ export interface HaVipDisassociateAddressIpRequest {
    * `HAVIP`唯一`ID`，形如：`havip-9o233uri`。必须是已绑定`EIP`的`HAVIP`。
    */
   HaVipId: string
+}
+
+/**
+ * ReturnNormalAddresses返回参数结构体
+ */
+export interface ReturnNormalAddressesResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -13401,7 +13421,7 @@ export interface AssociateAddressRequest {
   AddressId: string
 
   /**
-   * 要绑定的实例 ID。实例 ID 形如：`ins-11112222`。可通过登录[控制台](https://console.cloud.tencent.com/cvm)查询，也可通过 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) 接口返回值中的`InstanceId`获取。
+   * 要绑定的实例 ID。实例 ID 形如：`ins-11112222`、`lb-11112222`。可通过登录[控制台](https://console.cloud.tencent.com/cvm)查询，也可通过 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) 接口返回值中的`InstanceId`获取。
    */
   InstanceId?: string
 

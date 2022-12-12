@@ -540,6 +540,8 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 本接口支持各类印章识别，包括发票章，财务章等，适用于公文，票据等场景。
+
+默认接口请求频率限制：5次/秒。
      */
     async SealOCR(req, cb) {
         return this.request("SealOCR", req, cb);

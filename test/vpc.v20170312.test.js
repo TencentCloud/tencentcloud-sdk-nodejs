@@ -1678,6 +1678,16 @@ it("vpc.v20170312.CreateServiceTemplate", async function () {
     }
 })
 
+it("vpc.v20170312.WithdrawNotifyRoutes", async function () {
+    try {
+       const data = await client.WithdrawNotifyRoutes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.DeleteRoutes", async function () {
     try {
        const data = await client.DeleteRoutes({})
@@ -1938,9 +1948,9 @@ it("vpc.v20170312.DisassociateAddress", async function () {
     }
 })
 
-it("vpc.v20170312.WithdrawNotifyRoutes", async function () {
+it("vpc.v20170312.ReturnNormalAddresses", async function () {
     try {
-       const data = await client.WithdrawNotifyRoutes({})
+       const data = await client.ReturnNormalAddresses({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

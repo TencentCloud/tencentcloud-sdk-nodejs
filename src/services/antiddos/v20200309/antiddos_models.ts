@@ -700,6 +700,16 @@ export interface DescribeListBGPInstancesRequest {
    * 标签搜索
    */
   FilterTag?: TagFilter
+
+  /**
+   * 试用资源搜索，1: 应急防护资源；2：PLG试用资源
+   */
+  FilterTrialFlag?: number
+
+  /**
+   * 重保护航搜索
+   */
+  FilterConvoy?: number
 }
 
 /**
@@ -1301,7 +1311,7 @@ export interface DescribeListBGPIPInstancesRequest {
   FilterDamDDoSStatus?: number
 
   /**
-   * 获取特定状态的资源，运行中填idle，攻击中填attacking，封堵中填blocking
+   * 获取特定状态的资源，运行中填idle，攻击中填attacking，封堵中填blocking，试用资源填trial
    */
   FilterStatus?: string
 
@@ -1324,6 +1334,11 @@ export interface DescribeListBGPIPInstancesRequest {
    * 按照套餐类型进行过滤
    */
   FilterPackType?: Array<string>
+
+  /**
+   * 重保护航搜索
+   */
+  FilterConvoy?: number
 }
 
 /**
@@ -2830,6 +2845,12 @@ export interface BGPIPInstance {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   InstanceVersion: number
+
+  /**
+      * 重保实例
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ConvoyId: string
 }
 
 /**

@@ -128,6 +128,16 @@ export interface DestroyMigrateJobRequest {
 }
 
 /**
+ * SkipCheckItem返回参数结构体
+ */
+export interface SkipCheckItemResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ResizeSyncJob返回参数结构体
  */
 export interface ResizeSyncJobResponse {
@@ -1074,6 +1084,31 @@ export interface ProcessProgress {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Steps: Array<StepDetailInfo>
+}
+
+/**
+ * SkipSyncCheckItem请求参数结构体
+ */
+export interface SkipSyncCheckItemRequest {
+  /**
+   * 任务id，如：sync-4ddgid2
+   */
+  JobId: string
+
+  /**
+   * 需要跳过校验项的步骤id，需要通过`DescribeCheckSyncJobResult`接口返回StepInfos[i].StepId字段获取，例如：["OptimizeCheck"]
+   */
+  StepIds: Array<string>
+}
+
+/**
+ * SkipSyncCheckItem返回参数结构体
+ */
+export interface SkipSyncCheckItemResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2286,6 +2321,21 @@ export interface StopCompareResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * SkipCheckItem请求参数结构体
+ */
+export interface SkipCheckItemRequest {
+  /**
+   * 数据迁移任务ID
+   */
+  JobId: string
+
+  /**
+   * 需要跳过校验项的步骤id，需要通过DescribeMigrationCheckJob接口返回StepInfo[i].StepId字段获取，例如：["OptimizeCheck"]
+   */
+  StepIds: Array<string>
 }
 
 /**

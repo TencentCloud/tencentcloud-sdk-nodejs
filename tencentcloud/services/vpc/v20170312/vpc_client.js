@@ -691,6 +691,7 @@ class Client extends abstract_client_1.AbstractClient {
 * 将 EIP 绑定到实例（CVM）上，其本质是将 EIP 绑定到实例上主网卡的主内网 IP 上。
 * 将 EIP 绑定到主网卡的主内网IP上，绑定过程会把其上绑定的普通公网 IP 自动解绑并释放。
 * 将 EIP 绑定到指定网卡的内网 IP上（非主网卡的主内网IP），则必须先解绑该 EIP，才能再绑定新的。
+* 将EIP绑定到绑定内网型CLB实例的功能处于内测阶段，如需使用，请提交内测申请。
 * 将 EIP 绑定到NAT网关，请使用接口[AssociateNatGatewayAddress](https://cloud.tencent.com/document/product/215/36722)
 * EIP 如果欠费或被封堵，则不能被绑定。
 * 只有状态为 UNBIND 的 EIP 才能够被绑定。
@@ -1170,6 +1171,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateServiceTemplate", req, cb);
     }
     /**
+     * 路由表列表页操作增加“从云联网撤销”，用于撤销已发布到云联网的路由。
+     */
+    async WithdrawNotifyRoutes(req, cb) {
+        return this.request("WithdrawNotifyRoutes", req, cb);
+    }
+    /**
      * 本接口(DeleteRoutes)用于对某个路由表批量删除路由策略（Route）。
      */
     async DeleteRoutes(req, cb) {
@@ -1339,10 +1346,11 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DisassociateAddress", req, cb);
     }
     /**
-     * 路由表列表页操作增加“从云联网撤销”，用于撤销已发布到云联网的路由。
+     * 本接口（ReturnNormalAddresses）用于解绑并释放普通公网IP。
+为完善公网IP的访问管理功能，此接口于2022年12月15日升级优化鉴权功能，升级后子用户调用此接口需向主账号申请CAM策略授权，否则可能调用失败。您可以提前为子账号配置操作授权，详情见 授权指南(https://cloud.tencent.com/document/product/598/34545)。
      */
-    async WithdrawNotifyRoutes(req, cb) {
-        return this.request("WithdrawNotifyRoutes", req, cb);
+    async ReturnNormalAddresses(req, cb) {
+        return this.request("ReturnNormalAddresses", req, cb);
     }
     /**
      * 查询专线绑定NAT的路由

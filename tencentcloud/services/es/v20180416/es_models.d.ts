@@ -457,6 +457,11 @@ export interface IndexMetaField {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     AppId: number;
+    /**
+      * 索引文档数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IndexDocs: number;
 }
 /**
  * DiagnoseInstance请求参数结构体

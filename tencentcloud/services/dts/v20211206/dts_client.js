@@ -137,6 +137,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeMigrateDBInstances", req, cb);
     }
     /**
+     * 本接口用于校验检查项不通过后，可进行跳过此校验项操作，后端将不再校验该项。任何校验步骤都是不应该跳过的，通过校验是能正确执行的前置条件。支持跳过的产品及链路的校验项可 [参考文档](https://cloud.tencent.com/document/product/571/61639)。
+     */
+    async SkipCheckItem(req, cb) {
+        return this.request("SkipCheckItem", req, cb);
+    }
+    /**
      * 校验迁移任务，
 在开始迁移前, 必须调用本接口创建校验迁移任务, 且校验成功后才能开始迁移. 校验的结果可以通过DescribeMigrationCheckJob查看，
 校验成功后,迁移任务若有修改, 则必须重新校验并通过后, 才能开始迁移
@@ -156,6 +162,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeCompareTasks(req, cb) {
         return this.request("DescribeCompareTasks", req, cb);
+    }
+    /**
+     * 本接口用于校验检查项不通过后，可进行跳过此校验项操作，后端将不再校验该项。任何校验步骤都是不应该跳过的，通过校验是能正确执行的前置条件。支持跳过的产品及链路的校验项可 [参考文档](https://cloud.tencent.com/document/product/571/61639)。
+     */
+    async SkipSyncCheckItem(req, cb) {
+        return this.request("SkipSyncCheckItem", req, cb);
     }
     /**
      * 查询数据迁移任务列表

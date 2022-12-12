@@ -2992,15 +2992,17 @@ export interface DistributeAddReceiverRequest {
  */
 export interface QueryFinancialDataUrlRequest {
     /**
-      * 数据查询范围:结束时间
+      * 数据查询范围:结束时间 yyyy-MM-dd HH:mm:ss
       */
     EndTime: string;
     /**
-      * 数据查询范围:开始时间
+      * 数据查询范围:开始时间 yyyy-MM-dd HH:mm:ss
       */
     StartTime: string;
     /**
-      * 数据类型：ADDED_INVOICE_REPORT  增值税开票数据，NATURAL_FINANCE_REPORT 自然人金融数据
+      * 数据类型：ADDED_INVOICE_REPORT  增值税开票数据，NATURAL_FINANCE_REPORT 自然人金融数据,
+NATURAL_FINANCE_REPORT_BY_TIME 按次报税数据导出,
+NATURAL_FINANCE_REPORT_STAT_BY_DAY 按日累计报税数据导出
       */
     DataType: string;
 }

@@ -108,8 +108,12 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取指定图片库中的图片列表。
-   */
+     * 获取指定图片库中的图片列表。
+
+>   
+- 可前往 [图像搜索](https://cloud.tencent.com/document/product/1589) 产品文档中查看更多产品信息。
+
+     */
   async DescribeImages(
     req: DescribeImagesRequest,
     cb?: (error: string, rep: DescribeImagesResponse) => void
@@ -134,11 +138,32 @@ export class Client extends AbstractClient {
   /**
      * 本接口用于创建一个空的图片库，图片库主要用于存储在创建图片时提取的图片特征数据，如果图片库已存在则返回错误。不同的图片库类型对应不同的图像搜索服务类型，根据输入参数GroupType区分。
 
-| 服务类型 | GroupType入参 |功能描述 |
-|  :----------  | :----- |:-----------------  |
-| 相同图像搜索<div style="width: 70pt"> | 4 |在自建图片库中搜索相同原图或高相似图，并给出相似度打分，可支持裁剪、翻转、调色、加水印等二次编辑后的图片搜索。适用于图片版权保护、原图查询等场景。|
-| 商品图像搜索<div style="width: 70pt"> | 5 |在自建图库中搜索同款商品，并给出相似度打分。对于服饰类商品可支持识别服饰类别、属性等信息。适用于商品分类、检索、推荐等电商场景。|
-| 相似图像搜索<div style="width: 70pt"> | 6 |在自建图库中搜索相似的图案、logo、纹理等图像元素或主体，并给出相似度打分。|
+<table>
+    <th>服务类型</th><th>GroupType</th><th>功能描述</th>
+    <tr>
+        <td>通用图像搜索</td>
+        <td>4</td>
+        <td>通用图像搜索1.0版。<br>在自建图片库中搜索相同原图或相似图片集，并给出相似度打分，可支持裁剪、翻转、调色、加水印等二次编辑后的图片搜索。适用于图片版权保护、原图查询等场景。</td>
+    </tr>
+    <tr>
+        <td rowspan="2">商品图像搜索</td>
+        <td>7</td><td>商品图像搜索2.0升级版。<br>
+        在自建图库中搜索同款或相似商品，并给出相似度打分。对于服饰类商品可支持识别服饰类别、属性等信息。适用于商品分类、检索、推荐等电商场景。</td>
+    </tr>
+     <tr>
+        <td>5</td>
+        <td>商品图像搜索1.0版。<br>
+        功能和2.0升级版类似。</td>
+    </tr>
+    <tr>
+    <td>图案花纹搜索</td><td>6</td><td>图案花纹搜索1.0版。<br>
+    在自建图库中搜索相似的图案、logo、纹理等图像元素或主体，并给出相似度打分。</td>
+    </tr>
+</table> 
+
+>   
+- 可前往 [图像搜索](https://cloud.tencent.com/document/product/1589) 产品文档中查看更多产品信息。
+
 
      */
   async CreateGroup(
@@ -216,8 +241,12 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除图片。
-   */
+     * 删除图片。
+
+>   
+- 可前往 [图像搜索](https://cloud.tencent.com/document/product/1589) 产品文档中查看更多产品信息。
+
+     */
   async DeleteImages(
     req: DeleteImagesRequest,
     cb?: (error: string, rep: DeleteImagesResponse) => void
@@ -256,8 +285,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建图片，并添加对应图片的自定义信息。模型将在创建图片时自动提取图像特征并存储到指定的图片库中。
-   */
+     * 创建图片，并添加对应图片的自定义信息。模型将在创建图片时自动提取图像特征并存储到指定的图片库中，每创建一张图片会对应提取和存储一条图片特征数据。
+
+>   
+- 可前往 [图像搜索](https://cloud.tencent.com/document/product/1589) 产品文档中查看更多产品信息。
+
+
+     */
   async CreateImage(
     req: CreateImageRequest,
     cb?: (error: string, rep: CreateImageResponse) => void
@@ -308,8 +342,12 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询所有的图库信息。
-   */
+     * 查询所有的图库信息。
+
+>   
+- 可前往 [图像搜索](https://cloud.tencent.com/document/product/1589) 产品文档中查看更多产品信息。
+
+     */
   async DescribeGroups(
     req: DescribeGroupsRequest,
     cb?: (error: string, rep: DescribeGroupsResponse) => void
@@ -391,8 +429,12 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口用于对一张图片，在指定图片库中检索出与之相似的图片列表。
-   */
+     * 本接口用于对一张图片，在指定图片库中检索出与之相似的图片列表。
+
+>   
+- 可前往 [图像搜索](https://cloud.tencent.com/document/product/1589) 产品文档中查看更多产品信息。
+
+     */
   async SearchImage(
     req: SearchImageRequest,
     cb?: (error: string, rep: SearchImageResponse) => void
