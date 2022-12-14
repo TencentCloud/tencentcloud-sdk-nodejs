@@ -2287,6 +2287,12 @@ export interface CallBackTemplateInfo {
    * 回调的鉴权 key。
    */
   CallbackKey: string
+
+  /**
+      * 推流异常回调 URL。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PushExceptionNotifyUrl: string
 }
 
 /**
@@ -3318,6 +3324,11 @@ export interface CreateLiveCallbackTemplateRequest {
    * 参数已弃用。
    */
   StreamMixNotifyUrl?: string
+
+  /**
+   * 推流异常回调 URL。
+   */
+  PushExceptionNotifyUrl?: string
 }
 
 /**
@@ -4444,6 +4455,11 @@ export interface ModifyLiveCallbackTemplateRequest {
 [事件消息通知](/document/product/267/32744)。
       */
   CallbackKey?: string
+
+  /**
+   * 推流异常回调 URL。
+   */
+  PushExceptionNotifyUrl?: string
 }
 
 /**

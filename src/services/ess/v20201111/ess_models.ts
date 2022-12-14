@@ -650,6 +650,18 @@ export interface TemplateInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   PreviewUrl?: string
+
+  /**
+      * 模板版本。默认为空时，全数字字符，初始版本为yyyyMMdd001。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TemplateVersion?: string
+
+  /**
+      * 模板是否已发布。true-已发布；false-未发布
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Published?: boolean
 }
 
 /**

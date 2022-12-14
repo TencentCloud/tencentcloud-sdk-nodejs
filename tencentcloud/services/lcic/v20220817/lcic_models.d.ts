@@ -467,7 +467,7 @@ export interface ModifyAppRequest {
       */
     SdkAppId: number;
     /**
-      * 回调地址。
+      * 回调地址。端口目前仅支持80、443
       */
     Callback?: string;
 }

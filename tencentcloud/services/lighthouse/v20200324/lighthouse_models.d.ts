@@ -474,12 +474,17 @@ export interface InstancePriceDetail {
       * 实例ID。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    InstanceId: string;
+    InstanceId?: string;
     /**
       * 询价信息。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    InstancePrice: InstancePrice;
+    InstancePrice?: InstancePrice;
+    /**
+      * 折扣梯度详情，每个梯度包含的信息有：时长，折扣数，总价，折扣价，折扣详情（用户折扣、官网折扣、最终折扣）。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DiscountDetail?: Array<DiscountDetail>;
 }
 /**
  * InquirePriceRenewInstances请求参数结构体
@@ -3124,19 +3129,24 @@ export interface InstancePrice {
     /**
       * 套餐单价原价。
       */
-    OriginalBundlePrice: number;
+    OriginalBundlePrice?: number;
     /**
       * 原价。
       */
-    OriginalPrice: number;
+    OriginalPrice?: number;
     /**
       * 折扣。
       */
-    Discount: number;
+    Discount?: number;
     /**
       * 折后价。
       */
-    DiscountPrice: number;
+    DiscountPrice?: number;
+    /**
+      * 价格货币单位。取值范围CNY:人民币。USD:美元。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Currency?: string;
 }
 /**
  * 标签

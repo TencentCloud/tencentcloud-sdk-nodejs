@@ -1043,6 +1043,16 @@ export interface ZoneResource {
    * 可用区是否是LocalZone可用区，如：false
    */
   LocalZone: boolean
+
+  /**
+   * 可用区资源的类型，SHARED表示共享资源，EXCLUSIVE表示独占资源。
+   */
+  ZoneResourceType: string
+
+  /**
+   * 可用区是否是EdgeZone可用区，如：false
+   */
+  EdgeZone: boolean
 }
 
 /**
@@ -2989,6 +2999,21 @@ export interface CertificateInput {
 }
 
 /**
+ * 资源可用性
+ */
+export interface ResourceAvailability {
+  /**
+   * 运营商内具体资源信息，如"CMCC", "CUCC", "CTCC", "BGP"。
+   */
+  Type: string
+
+  /**
+   * 资源可用性，"Available"：可用，"Unavailable"：不可用
+   */
+  Availability: string
+}
+
+/**
  * DescribeCustomizedConfigAssociateList返回参数结构体
  */
 export interface DescribeCustomizedConfigAssociateListResponse {
@@ -3716,6 +3741,12 @@ export interface ClusterResource {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Isp: string
+
+  /**
+      * 集群所在的可用区
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClustersZone: ClustersZone
 }
 
 /**
@@ -3981,6 +4012,12 @@ export interface Cluster {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ClustersVersion: string
+
+  /**
+      * 集群容灾类型，如SINGLE-ZONE，DISASTER-RECOVERY，MUTUAL-DISASTER-RECOVERY
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DisasterRecoveryType: string
 }
 
 /**
@@ -4945,6 +4982,12 @@ export interface Resource {
    * 运营商信息，如"CMCC", "CUCC", "CTCC", "BGP", "INTERNAL"。
    */
   Isp: string
+
+  /**
+      * 可用资源。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AvailabilitySet: Array<ResourceAvailability>
 }
 
 /**

@@ -777,26 +777,26 @@ export interface RestoreInstanceResponse {
 }
 
 /**
- * 描述Redis实例的主节点或者副本节点信息
+ * 描述 Redis 实例的主节点或者副本节点信息。
  */
 export interface RedisNodeInfo {
   /**
-   * 节点类型，0 为主节点，1 为副本节点
+   * 节点类型。<ul><li>0：为主节点。</li><li>1：为副本节点。</li></ul>
    */
   NodeType: number
 
   /**
-   * 主节点或者副本节点的ID，创建时不需要传递此参数。
+   * 主节点或者副本节点的 ID。<ul><li>该参数用于创建 Redis 实例接口[CreateInstances](https://cloud.tencent.com/document/product/239/20026) 并不需要设置，而用于变更实例配置的接口 [UpgradeInstance](https://cloud.tencent.com/document/product/239/20013) 则需要设置。</li><li>该参数可使用接口 [DescribeInstances](https://cloud.tencent.com/document/product/239/20018) 获取Integer类型的节点 ID。</li></ul>
    */
   NodeId?: number
 
   /**
-   * 主节点或者副本节点的可用区ID
+   * 主节点或者副本节点的可用区 ID。
    */
   ZoneId?: number
 
   /**
-   * 主节点或者副本节点的可用区名称
+   * 主节点或者副本节点的可用区名称。
    */
   ZoneName?: string
 }
@@ -4059,7 +4059,7 @@ export interface InstanceSet {
   Size: number
 
   /**
-   * 该字段已废弃。
+   * 该字段已废弃。可使用云监控 API 接口 [GetMonitorData](https://cloud.tencent.com/document/product/248/31014) 获取实例已使用的内容容量。
    */
   SizeUsed: number
 

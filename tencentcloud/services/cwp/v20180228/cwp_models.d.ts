@@ -1782,6 +1782,14 @@ export interface ModifyAutoOpenProVersionConfigRequest {
 <li>OPEN：打开</li>
       */
     Status: string;
+    /**
+      * 自动加购/扩容授权开关,默认 1, 0关闭, 1开启
+      */
+    AutoRepurchaseSwitch?: number;
+    /**
+      * 自动加购的订单是否自动续费,默认0 ,0关闭, 1开启
+      */
+    AutoRepurchaseRenewSwitch?: number;
 }
 /**
  * DeletePrivilegeEvents请求参数结构体
@@ -6255,9 +6263,13 @@ export interface CreateLicenseOrderRequest {
       */
     AutoRenewFlag?: boolean;
     /**
-      * 自动防护授权配置值, 不空则表示开启
+      * 该字段作废
       */
     AutoProtectOpenConfig?: string;
+    /**
+      * 变配参数
+      */
+    ModifyConfig?: OrderModifyObject;
 }
 /**
  * DescribeBaselineScanSchedule请求参数结构体
@@ -9596,6 +9608,23 @@ export interface DescribeHostLoginListRequest {
     By?: string;
 }
 /**
+ * 订单变配参数对象
+ */
+export interface OrderModifyObject {
+    /**
+      * 资源ID
+      */
+    ResourceId?: string;
+    /**
+      * 新产品标识,这里支持PRO_VERSION 专业版,FLAGSHIP 旗舰版
+      */
+    NewSubProductCode?: string;
+    /**
+      * 扩容/缩容数,变配子产品忽略该参数
+      */
+    InquireNum?: number;
+}
+/**
  * 安全趋势统计数据。
  */
 export interface SecurityTrend {
@@ -11406,6 +11435,14 @@ export interface DescribeLicenseGeneralResponse {
       * 可用惠普版授权数
       */
     AvailableLHLicenseCnt: number;
+    /**
+      * 自动加购开关, true 开启, false 关闭
+      */
+    AutoRepurchaseSwitch: boolean;
+    /**
+      * 自动加购订单是否自动续费 ,true 开启, false 关闭
+      */
+    AutoRepurchaseRenewSwitch: boolean;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

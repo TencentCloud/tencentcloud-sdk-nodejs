@@ -38,9 +38,9 @@ it("emr.v20190103.InquiryPriceUpdateInstance", async function () {
     }
 })
 
-it("emr.v20190103.DescribeUsersForUserManager", async function () {
+it("emr.v20190103.CreateCluster", async function () {
     try {
-       const data = await client.DescribeUsersForUserManager({})
+       const data = await client.CreateCluster({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -121,6 +121,16 @@ it("emr.v20190103.DescribeInstances", async function () {
 it("emr.v20190103.RunJobFlow", async function () {
     try {
        const data = await client.RunJobFlow({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("emr.v20190103.DescribeUsersForUserManager", async function () {
+    try {
+       const data = await client.DescribeUsersForUserManager({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -261,6 +271,16 @@ it("emr.v20190103.DescribeInstancesList", async function () {
 it("emr.v20190103.ModifyResourcePools", async function () {
     try {
        const data = await client.ModifyResourcePools({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("emr.v20190103.ScaleOutCluster", async function () {
+    try {
+       const data = await client.ScaleOutCluster({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

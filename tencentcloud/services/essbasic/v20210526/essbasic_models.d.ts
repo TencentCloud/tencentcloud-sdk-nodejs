@@ -707,7 +707,7 @@ export interface FlowApproverInfo {
       * 签署人类型
 PERSON-个人/自然人；
 PERSON_AUTO_SIGN-个人自动签（定制化场景下使用）；
-ORGANIZATION-企业（企业签署方或模版发起时的企业静默签）；
+ORGANIZATION-企业（企业签署方或模板发起时的企业静默签）；
 ENTERPRISESERVER-企业静默签（文件发起时的企业静默签字）。
       */
     ApproverType?: string;
@@ -811,14 +811,29 @@ export interface TemplateInfo {
       */
     PreviewUrl: string;
     /**
-      * 渠道模板ID
-      */
-    ChannelTemplateId: string;
-    /**
       * 渠道版-模板PDF文件链接
 注意：此字段可能返回 null，表示取不到有效值。
       */
     PdfUrl: string;
+    /**
+      * 关联的渠道模板ID
+      */
+    ChannelTemplateId: string;
+    /**
+      * 关联的渠道模板名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ChannelTemplateName: string;
+    /**
+      * 0-需要渠道子客手动领取渠道的模板(默认); 1-渠道自动设置子客模板
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ChannelAutoSave: number;
+    /**
+      * 模板版本，全数字字符。默认为空，初始版本为yyyyMMdd001。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TemplateVersion: string;
 }
 /**
  * GetDownloadFlowUrl返回参数结构体
@@ -943,7 +958,7 @@ export interface CreateConsoleLoginUrlRequest {
       */
     ProxyOperatorName?: string;
     /**
-      * 控制台指定模块，文件/合同管理:"DOCUMENT"，模板管理:"TEMPLATE"，印章管理:"SEAL"，组织架构/人员:"OPERATOR"，空字符串："账号信息"
+      * PC控制台指定模块，文件/合同管理:"DOCUMENT"，模板管理:"TEMPLATE"，印章管理:"SEAL"，组织架构/人员:"OPERATOR"，空字符串："账号信息"。 EndPoint为"CHANNEL"/"APP"只支持"SEAL"-印章管理
       */
     Module?: string;
     /**
@@ -1108,7 +1123,7 @@ export interface ChannelDescribeOrganizationSealsRequest {
  */
 export interface ProxyOrganizationOperator {
     /**
-      * 对应Agent-ProxyOperator-OpenId。渠道平台自定义，对渠道子客企业员的唯一标识。一个OpenId在一个子客企业内唯一对应一个真实员工，不可在其他子客企业内重复使用。（比如，可以使用经办人企业名+员工身份证的hash值，需要渠道平台保存），最大64位字符串
+      * 对应Agent-ProxyOperator-OpenId。渠道平台自定义，对渠道子客企业员的唯一标识。一个OpenId在一个子客企业内唯一对应一个真实员工，不可在其他子客企业内重复使用。（例如，可以使用经办人企业名+员工身份证的hash值，需要渠道平台保存），最大64位字符串
       */
     Id: string;
     /**

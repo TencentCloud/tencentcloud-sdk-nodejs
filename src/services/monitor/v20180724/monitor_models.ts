@@ -159,7 +159,7 @@ export interface InstallPluginsRequest {
   Plugins: Array<GrafanaPlugin>
 
   /**
-   * 实例 ID
+   * Grafana 实例 ID，例如：grafana-abcdefgh
    */
   InstanceId: string
 }
@@ -852,12 +852,12 @@ export interface DescribePolicyGroupInfoCallback {
  */
 export interface ModifyGrafanaInstanceRequest {
   /**
-   * 实例 ID
+   * Grafana 实例 ID，例如：grafana-abcdefgh
    */
   InstanceId: string
 
   /**
-   * 实例名称
+   * Grafana 实例名称，例如：test
    */
   InstanceName: string
 }
@@ -2161,7 +2161,7 @@ export interface DescribeConditionsTemplateListResponse {
  */
 export interface ResumeGrafanaInstanceRequest {
   /**
-   * 实例 ID
+   * Grafana 实例 ID，例如：grafana-12345678
    */
   InstanceId: string
 }
@@ -2282,12 +2282,12 @@ export interface DimensionsDesc {
  */
 export interface DeleteGrafanaIntegrationRequest {
   /**
-   * 实例 ID
+   * Grafana 实例 ID，例如：grafana-12345678
    */
   InstanceId: string
 
   /**
-   * 集成 ID
+   * 集成 ID，可在实例详情-云产品集成-集成列表查看。例如：integration-abcd1234
    */
   IntegrationId: string
 }
@@ -2599,7 +2599,7 @@ export interface DescribeBasicAlarmListResponse {
  */
 export interface DescribeGrafanaEnvironmentsRequest {
   /**
-   * 实例 ID
+   * Grafana 实例 ID，例如：Grafana 实例 ID，例如：grafana-abcdefghGrafana 实例 ID，例如：grafana-abcdefgh
    */
   InstanceId: string
 }
@@ -3149,7 +3149,7 @@ export interface DeleteAlarmNoticesResponse {
  */
 export interface DescribeGrafanaNotificationChannelsRequest {
   /**
-   * 实例 ID
+   * Grafana 实例 ID，例如：grafana-12345678
    */
   InstanceId: string
 
@@ -3164,17 +3164,17 @@ export interface DescribeGrafanaNotificationChannelsRequest {
   Limit: number
 
   /**
-   * 渠道名
+   * 告警通道名称，例如：test
    */
   ChannelName?: string
 
   /**
-   * 渠道 ID
+   * 告警通道 ID，例如：nchannel-abcd1234
    */
   ChannelIDs?: Array<string>
 
   /**
-   * 状态
+   * 告警通道状态
    */
   ChannelState?: number
 }
@@ -3439,12 +3439,12 @@ re=正则匹配
  */
 export interface DeleteGrafanaNotificationChannelRequest {
   /**
-   * 通道 ID 数组
+   * 通道 ID 数组。例如：nchannel-abcd1234
    */
   ChannelIDs: Array<string>
 
   /**
-   * 实例名
+   * Grafana 实例 ID，例如：grafana-abcdefgh
    */
   InstanceId: string
 }
@@ -3454,17 +3454,17 @@ export interface DeleteGrafanaNotificationChannelRequest {
  */
 export interface CreateGrafanaIntegrationRequest {
   /**
-   * 实例 ID
+   * Grafana 实例 ID，例如：grafana-abcdefgh
    */
   InstanceId: string
 
   /**
-   * 类型
+   * 集成类型，可在实例详情-云产品集成-集成列表查看。例如：tencent-cloud-prometheus
    */
   Kind: string
 
   /**
-   * 配置
+   * 集成配置
    */
   Content: string
 }
@@ -3845,12 +3845,12 @@ export interface ModifyPolicyGroupEventCondition {
  */
 export interface CreateGrafanaNotificationChannelRequest {
   /**
-   * 实例 ID
+   * Grafana 实例 ID，例如：grafana-abcdefgh
    */
   InstanceId: string
 
   /**
-   * 渠道名
+   * 告警通道名称，例如：test
    */
   ChannelName: string
 
@@ -3995,12 +3995,12 @@ export interface DescribeBaseMetricsRequest {
  */
 export interface CreateSSOAccountRequest {
   /**
-   * 实例ID
+   * Grafana 实例 ID，例如：grafana-abcdefgh
    */
   InstanceId: string
 
   /**
-   * 用户账号ID
+   * 用户账号 ID ，例如：10000000
    */
   UserId: string
 
@@ -4251,12 +4251,12 @@ export interface ModifyAlarmPolicyConditionRequest {
  */
 export interface DeleteSSOAccountRequest {
   /**
-   * 实例ID
+   * Grafana 实例 ID，例如：grafana-abcdefgh
    */
   InstanceId: string
 
   /**
-   * 用户账号ID
+   * 用户账号 ID ，例如：10000000
    */
   UserId: string
 }
@@ -6589,17 +6589,17 @@ export interface DeletePrometheusScrapeJobsRequest {
  */
 export interface UpdateGrafanaIntegrationRequest {
   /**
-   * 集成 ID
+   * 集成 ID，可在实例详情-云产品集成-集成列表查看。例如：integration-abcd1234
    */
   IntegrationId: string
 
   /**
-   * 实例 ID
+   * Grafana 实例 ID，例如：grafana-12345678
    */
   InstanceId: string
 
   /**
-   * 集成类型
+   * 集成类型，可在实例详情-云产品集成-集成列表查看。例如：tencent-cloud-prometheus
    */
   Kind: string
 
@@ -6654,7 +6654,7 @@ export interface CleanGrafanaInstanceResponse {
  */
 export interface UpdateDNSConfigRequest {
   /**
-   * 实例 ID
+   * Grafana 实例 ID，例如：grafana-12345678
    */
   InstanceId: string
 
@@ -6753,7 +6753,7 @@ export interface UpdateGrafanaConfigRequest {
  */
 export interface UpdateGrafanaEnvironmentsRequest {
   /**
-   * 实例 ID
+   * Grafana 实例 ID，例如：grafana-12345678
    */
   InstanceId: string
 
@@ -7305,7 +7305,7 @@ export interface CreateExporterIntegrationResponse {
  */
 export interface DescribeGrafanaChannelsRequest {
   /**
-   * 实例 ID
+   * Grafana 实例 ID，例如：grafana-12345678
    */
   InstanceId: string
 
@@ -7320,17 +7320,17 @@ export interface DescribeGrafanaChannelsRequest {
   Limit: number
 
   /**
-   * 渠道名
+   * 告警通道名称，例如：test
    */
   ChannelName?: string
 
   /**
-   * 渠道 ID
+   * 告警通道 ID，例如：nchannel-abcd1234
    */
   ChannelIds?: Array<string>
 
   /**
-   * 状态
+   * 告警通道状态
    */
   ChannelState?: number
 }
@@ -7711,12 +7711,12 @@ export interface DescribeGrafanaInstancesRequest {
   Limit: number
 
   /**
-   * 实例 ID 数组
+   * Grafana 实例 ID 数组
    */
   InstanceIds?: Array<string>
 
   /**
-   * 实例名，支持前缀模糊搜索
+   * Grafana 实例名，支持前缀模糊搜索
    */
   InstanceName?: string
 
@@ -7974,7 +7974,7 @@ export interface UninstallGrafanaPluginsRequest {
  */
 export interface CleanGrafanaInstanceRequest {
   /**
-   * 实例 ID
+   * Grafana 实例 ID，例如：grafana-abcdefgh
    */
   InstanceId: string
 }
@@ -8657,7 +8657,7 @@ export interface DescribePolicyConditionListEventMetric {
  */
 export interface DescribeDNSConfigRequest {
   /**
-   * 实例 ID
+   * Grafana 实例 ID，例如：grafana-abcdefgh
    */
   InstanceId: string
 }

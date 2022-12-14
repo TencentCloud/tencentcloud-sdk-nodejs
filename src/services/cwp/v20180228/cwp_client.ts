@@ -430,6 +430,7 @@ import {
   CreateScanMalwareSettingRequest,
   DescribeMalwareTimingScanSettingResponse,
   DescribeHostLoginListRequest,
+  OrderModifyObject,
   SecurityTrend,
   DescribeAssetWebServiceProcessListRequest,
   LicenseDetail,

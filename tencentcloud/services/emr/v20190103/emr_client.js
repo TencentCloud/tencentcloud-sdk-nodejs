@@ -40,11 +40,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("InquiryPriceUpdateInstance", req, cb);
     }
     /**
-     * 该接口支持安装了OpenLdap组件的集群。
-批量导出用户。对于kerberos集群，如果需要kertab文件下载地址，可以将NeedKeytabInfo设置为true；注意SupportDownLoadKeyTab为true，但是DownLoadKeyTabUrl为空字符串，表示keytab文件在后台没有准备好（正在生成）。
+     * 创建EMR集群实例
      */
-    async DescribeUsersForUserManager(req, cb) {
-        return this.request("DescribeUsersForUserManager", req, cb);
+    async CreateCluster(req, cb) {
+        return this.request("CreateCluster", req, cb);
     }
     /**
      * 续费询价。
@@ -93,6 +92,13 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async RunJobFlow(req, cb) {
         return this.request("RunJobFlow", req, cb);
+    }
+    /**
+     * 该接口支持安装了OpenLdap组件的集群。
+批量导出用户。对于kerberos集群，如果需要kertab文件下载地址，可以将NeedKeytabInfo设置为true；注意SupportDownLoadKeyTab为true，但是DownLoadKeyTabUrl为空字符串，表示keytab文件在后台没有准备好（正在生成）。
+     */
+    async DescribeUsersForUserManager(req, cb) {
+        return this.request("DescribeUsersForUserManager", req, cb);
     }
     /**
      * 删除用户列表（用户管理）
@@ -179,6 +185,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyResourcePools(req, cb) {
         return this.request("ModifyResourcePools", req, cb);
+    }
+    /**
+     * 扩容集群节点
+     */
+    async ScaleOutCluster(req, cb) {
+        return this.request("ScaleOutCluster", req, cb);
     }
 }
 exports.Client = Client;

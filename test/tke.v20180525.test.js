@@ -1518,16 +1518,6 @@ it("tke.v20180525.ModifyPrometheusTemplate", async function () {
     }
 })
 
-it("tke.v20180525.CreateClusterNodePoolFromExistingAsg", async function () {
-    try {
-       const data = await client.CreateClusterNodePoolFromExistingAsg({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("tke.v20180525.DescribeClusterKubeconfig", async function () {
     try {
        const data = await client.DescribeClusterKubeconfig({})

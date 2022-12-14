@@ -19,6 +19,7 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   ClusterSetting,
+  PodSpecInfo,
   PodSaleSpec,
   ScaleOutInstanceResponse,
   PodVolume,
@@ -26,6 +27,8 @@ import {
   CreateInstanceResponse,
   TerminateTasksRequest,
   HostVolumeContext,
+  ScaleOutClusterRequest,
+  DiskSpecInfo,
   Step,
   DescribeEmrApplicationStaticsRequest,
   UserManagerFilter,
@@ -34,16 +37,19 @@ import {
   COSSettings,
   ClusterInstancesInfo,
   ScaleOutInstanceRequest,
-  QuotaEntity,
+  PodNewSpec,
+  NodeResourceSpec,
+  ModifyResourceScheduleConfigResponse,
   TopologyInfo,
   Tag,
   EmrListInstance,
-  ModifyResourceScheduleConfigResponse,
+  AddUsersForUserManagerResponse,
   EmrProductConfigOutter,
   VPCSettings,
   DescribeInstancesListResponse,
   DescribeInstanceRenewNodesRequest,
   JobResult,
+  DependService,
   PodSpec,
   InquiryPriceRenewInstanceResponse,
   DescribeJobFlowRequest,
@@ -53,17 +59,21 @@ import {
   Configuration,
   DescribeResourceScheduleRequest,
   Placement,
+  QuotaEntity,
   PodParameter,
+  AllNodeResourceSpec,
   DescribeUsersForUserManagerRequest,
   RenewInstancesInfo,
   RunJobFlowResponse,
   MultiDisk,
+  PodNewParameter,
   SearchItem,
   MultiZoneSetting,
   TerminateInstanceResponse,
   InquiryPriceUpdateInstanceResponse,
   NewResourceSpec,
   PersistentVolumeContext,
+  ScaleOutNodeConfig,
   DeleteUserManagerUserListRequest,
   DescribeResourceScheduleResponse,
   ModifyResourceSchedulerRequest,
@@ -71,8 +81,10 @@ import {
   RunJobFlowRequest,
   PriceResource,
   CustomServiceDefine,
+  CreateClusterResponse,
   SubnetInfo,
   DescribeCvmQuotaResponse,
+  CreateClusterRequest,
   BootstrapAction,
   DescribeCvmQuotaRequest,
   DescribeClusterNodesRequest,
@@ -80,6 +92,7 @@ import {
   CreateInstanceRequest,
   Execution,
   UpdateInstanceSettings,
+  ScriptBootstrapActionConfig,
   DescribeInstancesRequest,
   InquiryPriceUpdateInstanceRequest,
   DescribeInstancesListRequest,
@@ -95,6 +108,7 @@ import {
   InquirePriceRenewEmrResponse,
   MultiDiskMC,
   AddUsersForUserManagerRequest,
+  ZoneResourceConfiguration,
   CustomMetaInfo,
   ApplicationStatics,
   InquiryPriceCreateInstanceRequest,
@@ -112,13 +126,16 @@ import {
   DescribeEmrApplicationStaticsResponse,
   InquirePriceRenewEmrRequest,
   DescribeInstanceRenewNodesResponse,
+  CustomMetaDBInfo,
   UserManagerUserBriefInfo,
   DiskGroup,
   InquiryPriceScaleOutInstanceResponse,
   ModifyResourceSchedulerResponse,
+  VirtualPrivateCloud,
+  SceneSoftwareConfig,
   ShortNodeInfo,
-  AddUsersForUserManagerResponse,
   NodeHardwareInfo,
+  ScaleOutClusterResponse,
   JobFlowResource,
   ModifyResourcePoolsRequest,
   DescribeJobFlowResponse,
@@ -155,14 +172,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 该接口支持安装了OpenLdap组件的集群。
-批量导出用户。对于kerberos集群，如果需要kertab文件下载地址，可以将NeedKeytabInfo设置为true；注意SupportDownLoadKeyTab为true，但是DownLoadKeyTabUrl为空字符串，表示keytab文件在后台没有准备好（正在生成）。
-     */
-  async DescribeUsersForUserManager(
-    req: DescribeUsersForUserManagerRequest,
-    cb?: (error: string, rep: DescribeUsersForUserManagerResponse) => void
-  ): Promise<DescribeUsersForUserManagerResponse> {
-    return this.request("DescribeUsersForUserManager", req, cb)
+   * 创建EMR集群实例
+   */
+  async CreateCluster(
+    req: CreateClusterRequest,
+    cb?: (error: string, rep: CreateClusterResponse) => void
+  ): Promise<CreateClusterResponse> {
+    return this.request("CreateCluster", req, cb)
   }
 
   /**
@@ -243,6 +259,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RunJobFlowResponse) => void
   ): Promise<RunJobFlowResponse> {
     return this.request("RunJobFlow", req, cb)
+  }
+
+  /**
+     * 该接口支持安装了OpenLdap组件的集群。
+批量导出用户。对于kerberos集群，如果需要kertab文件下载地址，可以将NeedKeytabInfo设置为true；注意SupportDownLoadKeyTab为true，但是DownLoadKeyTabUrl为空字符串，表示keytab文件在后台没有准备好（正在生成）。
+     */
+  async DescribeUsersForUserManager(
+    req: DescribeUsersForUserManagerRequest,
+    cb?: (error: string, rep: DescribeUsersForUserManagerResponse) => void
+  ): Promise<DescribeUsersForUserManagerResponse> {
+    return this.request("DescribeUsersForUserManager", req, cb)
   }
 
   /**
@@ -385,5 +412,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyResourcePoolsResponse) => void
   ): Promise<ModifyResourcePoolsResponse> {
     return this.request("ModifyResourcePools", req, cb)
+  }
+
+  /**
+   * 扩容集群节点
+   */
+  async ScaleOutCluster(
+    req: ScaleOutClusterRequest,
+    cb?: (error: string, rep: ScaleOutClusterResponse) => void
+  ): Promise<ScaleOutClusterResponse> {
+    return this.request("ScaleOutCluster", req, cb)
   }
 }

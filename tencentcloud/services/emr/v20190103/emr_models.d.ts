@@ -62,6 +62,19 @@ POSTPAID_BY_HOUR 按量计费，默认方式。
     RemoteTcpDefaultPort?: boolean;
 }
 /**
+ * Pod相关信息
+ */
+export interface PodSpecInfo {
+    /**
+      * 使用Pod资源扩容时，指定的Pod规格以及来源等信息
+      */
+    PodSpec?: PodNewSpec;
+    /**
+      * POD自定义权限和自定义参数
+      */
+    PodParameter?: PodNewParameter;
+}
+/**
  * Pod资源售卖规格
  */
 export interface PodSaleSpec {
@@ -180,6 +193,128 @@ export interface HostVolumeContext {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     VolumePath: string;
+}
+/**
+ * ScaleOutCluster请求参数结构体
+ */
+export interface ScaleOutClusterRequest {
+    /**
+      * 节点计费模式。取值范围：
+<li>PREPAID：预付费，即包年包月。</li>
+<li>POSTPAID_BY_HOUR：按小时后付费。</li>
+<li>SPOTPAID：竞价付费（仅支持TASK节点）。</li>
+      */
+    InstanceChargeType: string;
+    /**
+      * 集群实例ID。
+      */
+    InstanceId: string;
+    /**
+      * 扩容节点类型以及数量
+      */
+    ScaleOutNodeConfig: ScaleOutNodeConfig;
+    /**
+      * 唯一随机标识，时效5分钟，需要调用者指定 防止客户端重新创建资源，例如 a9a90aa6-751a-41b6-aad6-fae36063280
+      */
+    ClientToken?: string;
+    /**
+      * 即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。若指定实例的付费模式为预付费则该参数必传。
+      */
+    InstanceChargePrepaid?: InstanceChargePrepaid;
+    /**
+      * [引导操作](https://cloud.tencent.com/document/product/589/35656)脚本设置。
+      */
+    ScriptBootstrapActionConfig?: Array<ScriptBootstrapActionConfig>;
+    /**
+      * 扩容部署服务，新增节点将默认继承当前节点类型中所部署服务，部署服务含默认可选服务，该参数仅支持可选服务填写，如：存量task节点已部署HDFS、YARN、impala；使用api扩容task节不部署impala时，此参数仅填写HDFS、YARN
+      */
+    SoftDeployInfo?: Array<number>;
+    /**
+      * 部署进程，默认部署扩容服务的全部进程，支持修改部署进程，如：当前task节点部署服务为：HDFS、YARN、impala，默认部署服务为：DataNode,NodeManager,ImpalaServer，若用户需修改部署进程信息，此参数信息可填写：	DataNode,NodeManager,ImpalaServerCoordinator或DataNode,NodeManager,ImpalaServerExecutor
+      */
+    ServiceNodeInfo?: Array<number>;
+    /**
+      * 分散置放群组ID列表，当前只支持指定一个。
+该参数可以通过调用 [DescribeDisasterRecoverGroups](https://cloud.tencent.com/document/product/213/17810)的返回值中的DisasterRecoverGroupId字段来获取。
+      */
+    DisasterRecoverGroupIds?: Array<string>;
+    /**
+      * 扩容节点绑定标签列表。
+      */
+    Tags?: Array<Tag>;
+    /**
+      * 扩容所选资源类型，可选范围为"host","pod"，host为普通的CVM资源，Pod为TKE集群或EKS集群提供的资源
+      */
+    HardwareSourceType?: string;
+    /**
+      * Pod相关资源信息
+      */
+    PodSpecInfo?: PodSpecInfo;
+    /**
+      * 使用clickhouse集群扩容时，选择的机器分组名称
+      */
+    ClickHouseClusterName?: string;
+    /**
+      * 使用clickhouse集群扩容时，选择的机器分组类型。new为新增，old为选择旧分组
+      */
+    ClickHouseClusterType?: string;
+    /**
+      * 扩容指定 Yarn Node Label
+      */
+    YarnNodeLabel?: string;
+    /**
+      * 扩容后是否启动服务，默认取值否
+<li>true：是</li>
+<li>false：否</li>
+      */
+    EnableStartServiceFlag?: boolean;
+    /**
+      * 规格设置
+      */
+    ResourceSpec?: NodeResourceSpec;
+    /**
+      * 实例所属的可用区，例如ap-guangzhou-1。该参数也可以通过调用[DescribeZones](https://cloud.tencent.com/document/product/213/15707) 的返回值中的Zone字段来获取。
+      */
+    Zone?: string;
+    /**
+      * 子网，默认是集群创建时的子网
+      */
+    SubnetId?: string;
+}
+/**
+ * 节点磁盘信息
+ */
+export interface DiskSpecInfo {
+    /**
+      * 磁盘数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Count: number;
+    /**
+      * 系统盘类型 取值范围：
+<li>CLOUD_SSD：表示云SSD。</li>
+<li>CLOUD_PREMIUM：表示高效云盘。</li>
+<li>CLOUD_BASIC：表示云硬盘。</li>
+<li>LOCAL_BASIC：表示本地盘。</li>
+<li>LOCAL_SSD：表示本地SSD。</li>
+
+数据盘类型 取值范围：
+<li>CLOUD_SSD：表示云SSD。</li>
+<li>CLOUD_PREMIUM：表示高效云盘。</li>
+<li>CLOUD_BASIC：表示云硬盘。</li>
+<li>LOCAL_BASIC：表示本地盘。</li>
+<li>LOCAL_SSD：表示本地SSD。</li>
+<li>CLOUD_HSSD：表示增强型SSD云硬盘。</li>
+<li>CLOUD_THROUGHPUT：表示吞吐型云硬盘。</li>
+<li>CLOUD_TSSD：表示极速型SSD云硬盘。</li>
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DiskType: string;
+    /**
+      * 数据容量，单位为GB
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DiskSize: number;
 }
 /**
  * 执行步骤
@@ -674,29 +809,116 @@ export interface ScaleOutInstanceRequest {
     AutoRenew?: number;
 }
 /**
- * 获取CVM配额
+ * 扩容容器资源时的资源描述
  */
-export interface QuotaEntity {
+export interface PodNewSpec {
     /**
-      * 已使用配额
+      * 外部资源提供者的标识符，例如"cls-a1cd23fa"。
+      */
+    ResourceProviderIdentifier: string;
+    /**
+      * 外部资源提供者类型，例如"tke",当前仅支持"tke"。
+      */
+    ResourceProviderType: string;
+    /**
+      * 资源的用途，即节点类型，当前仅支持"TASK"。
+      */
+    NodeFlag: string;
+    /**
+      * CPU核数。
+      */
+    Cpu: number;
+    /**
+      * 内存大小，单位为GB。
+      */
+    Memory: number;
+    /**
+      * Eks集群-CPU类型，当前支持"intel"和"amd"
+      */
+    CpuType?: string;
+    /**
+      * Pod节点数据目录挂载信息。
+      */
+    PodVolumes?: Array<PodVolume>;
+    /**
+      * 是否浮动规格，默认否
+<li>true：代表是</li>
+<li>false：代表否</li>
+      */
+    EnableDynamicSpecFlag?: boolean;
+    /**
+      * 浮动规格
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    UsedQuota: number;
+    DynamicPodSpec?: DynamicPodSpec;
     /**
-      * 剩余配额
+      * 代表vpc网络唯一id
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    RemainingQuota: number;
+    VpcId?: string;
     /**
-      * 总配额
+      * 代表vpc子网唯一id
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    TotalQuota: number;
+    SubnetId?: string;
     /**
-      * 可用区
+      * pod name
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Zone: string;
+    PodName?: string;
+}
+/**
+ * 资源详情
+ */
+export interface NodeResourceSpec {
+    /**
+      * 规格类型，如S2.MEDIUM8
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InstanceType: string;
+    /**
+      * 系统盘，系统盘个数不超过1块
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SystemDisk: Array<DiskSpecInfo>;
+    /**
+      * 需要绑定的标签列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Tags?: Array<Tag>;
+    /**
+      * 云数据盘，云数据盘总个数不超过15块
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DataDisk?: Array<DiskSpecInfo>;
+    /**
+      * 本地数据盘
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LocalDataDisk?: Array<DiskSpecInfo>;
+}
+/**
+ * ModifyResourceScheduleConfig返回参数结构体
+ */
+export interface ModifyResourceScheduleConfigResponse {
+    /**
+      * true为草稿，表示还没有刷新资源池
+      */
+    IsDraft: boolean;
+    /**
+      * 校验错误信息，如果不为空，则说明校验失败，配置没有成功
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ErrorMsg: string;
+    /**
+      * 返回数据
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Data: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 集群节点拓扑信息
@@ -872,23 +1094,19 @@ export interface EmrListInstance {
     IsHandsCluster: boolean;
 }
 /**
- * ModifyResourceScheduleConfig返回参数结构体
+ * AddUsersForUserManager返回参数结构体
  */
-export interface ModifyResourceScheduleConfigResponse {
+export interface AddUsersForUserManagerResponse {
     /**
-      * true为草稿，表示还没有刷新资源池
-      */
-    IsDraft: boolean;
-    /**
-      * 校验错误信息，如果不为空，则说明校验失败，配置没有成功
+      * 添加成功的用户列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ErrorMsg: string;
+    SuccessUserList: Array<string>;
     /**
-      * 返回数据
+      * 添加失败的用户列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Data: string;
+    FailedUserList: Array<string>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1064,6 +1282,19 @@ export interface JobResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ApplicationId?: string;
+}
+/**
+ * 共用组件信息
+ */
+export interface DependService {
+    /**
+      * 共用组件名
+      */
+    ServiceName: string;
+    /**
+      * 共用组件集群
+      */
+    InstanceId: string;
 }
 /**
  * 扩容容器资源时的资源描述
@@ -1282,6 +1513,31 @@ export interface Placement {
     ProjectId?: number;
 }
 /**
+ * 获取CVM配额
+ */
+export interface QuotaEntity {
+    /**
+      * 已使用配额
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UsedQuota: number;
+    /**
+      * 剩余配额
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RemainingQuota: number;
+    /**
+      * 总配额
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TotalQuota: number;
+    /**
+      * 可用区
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Zone: string;
+}
+/**
  * POD自定义权限和自定义参数
  */
 export interface PodParameter {
@@ -1407,6 +1663,51 @@ export interface PodParameter {
     Parameter: string;
 }
 /**
+ * 资源描述
+ */
+export interface AllNodeResourceSpec {
+    /**
+      * 描述Master节点资源
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MasterResourceSpec?: NodeResourceSpec;
+    /**
+      * 描述Core节点资源
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CoreResourceSpec?: NodeResourceSpec;
+    /**
+      * 描述Taskr节点资源
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TaskResourceSpec?: NodeResourceSpec;
+    /**
+      * 描述Common节点资源
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CommonResourceSpec?: NodeResourceSpec;
+    /**
+      * Master节点数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MasterCount?: number;
+    /**
+      * Corer节点数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CoreCount?: number;
+    /**
+      * Task节点数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TaskCount?: number;
+    /**
+      * Common节点数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CommonCount?: number;
+}
+/**
  * DescribeUsersForUserManager请求参数结构体
  */
 export interface DescribeUsersForUserManagerRequest {
@@ -1505,6 +1806,131 @@ export interface MultiDisk {
       * 该类型云盘个数
       */
     Count?: number;
+}
+/**
+ * POD自定义权限和自定义参数
+ */
+export interface PodNewParameter {
+    /**
+      * TKE或EKS集群ID
+      */
+    InstanceId: string;
+    /**
+      * 自定义权限
+如：
+{
+  "apiVersion": "v1",
+  "clusters": [
+    {
+      "cluster": {
+        "certificate-authority-data": "xxxxxx==",
+        "server": "https://xxxxx.com"
+      },
+      "name": "cls-xxxxx"
+    }
+  ],
+  "contexts": [
+    {
+      "context": {
+        "cluster": "cls-xxxxx",
+        "user": "100014xxxxx"
+      },
+      "name": "cls-a44yhcxxxxxxxxxx"
+    }
+  ],
+  "current-context": "cls-a4xxxx-context-default",
+  "kind": "Config",
+  "preferences": {},
+  "users": [
+    {
+      "name": "100014xxxxx",
+      "user": {
+        "client-certificate-data": "xxxxxx",
+        "client-key-data": "xxxxxx"
+      }
+    }
+  ]
+}
+      */
+    Config: string;
+    /**
+      * 自定义参数
+如：
+{
+    "apiVersion": "apps/v1",
+    "kind": "Deployment",
+    "metadata": {
+      "name": "test-deployment",
+      "labels": {
+        "app": "test"
+      }
+    },
+    "spec": {
+      "replicas": 3,
+      "selector": {
+        "matchLabels": {
+          "app": "test-app"
+        }
+      },
+      "template": {
+        "metadata": {
+          "annotations": {
+            "your-organization.com/department-v1": "test-example-v1",
+            "your-organization.com/department-v2": "test-example-v2"
+          },
+          "labels": {
+            "app": "test-app",
+            "environment": "production"
+          }
+        },
+        "spec": {
+          "nodeSelector": {
+            "your-organization/node-test": "test-node"
+          },
+          "containers": [
+            {
+              "name": "nginx",
+              "image": "nginx:1.14.2",
+              "ports": [
+                {
+                  "containerPort": 80
+                }
+              ]
+            }
+          ],
+          "affinity": {
+            "nodeAffinity": {
+              "requiredDuringSchedulingIgnoredDuringExecution": {
+                "nodeSelectorTerms": [
+                  {
+                    "matchExpressions": [
+                      {
+                        "key": "disk-type",
+                        "operator": "In",
+                        "values": [
+                          "ssd",
+                          "sas"
+                        ]
+                      },
+                      {
+                        "key": "cpu-num",
+                        "operator": "Gt",
+                        "values": [
+                          "6"
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+      */
+    Parameter: string;
 }
 /**
  * 搜索字段
@@ -1642,6 +2068,23 @@ export interface PersistentVolumeContext {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     DiskNum?: number;
+}
+/**
+ * 扩容节点类型以及数量
+ */
+export interface ScaleOutNodeConfig {
+    /**
+      * 扩容节点类型取值范围：
+  <li>MASTER</li>
+  <li>TASK</li>
+  <li>CORE</li>
+  <li>ROUTER</li>
+      */
+    NodeFlag: string;
+    /**
+      * 扩容节点数量
+      */
+    NodeCount: number;
 }
 /**
  * DeleteUserManagerUserList请求参数结构体
@@ -1862,6 +2305,20 @@ export interface CustomServiceDefine {
     Value?: string;
 }
 /**
+ * CreateCluster返回参数结构体
+ */
+export interface CreateClusterResponse {
+    /**
+      * 实例ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InstanceId: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 子网信息
  */
 export interface SubnetInfo {
@@ -1899,6 +2356,110 @@ export interface DescribeCvmQuotaResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * CreateCluster请求参数结构体
+ */
+export interface CreateClusterRequest {
+    /**
+      * EMR产品版本名称如EMR-V2.3.0 表示2.3.0版本的EMR， 当前支持产品版本名称查询：[产品版本名称](https://cloud.tencent.com/document/product/589/66338)
+      */
+    ProductVersion: string;
+    /**
+      * 是否开启节点高可用。取值范围：
+<li>true：表示开启节点高可用。</li>
+<li>false：表示不开启节点高可用。</li>
+      */
+    EnableSupportHAFlag: boolean;
+    /**
+      * 实例名称。
+<li>长度限制为6-36个字符。</li>
+<li>只允许包含中文、字母、数字、-、_。</li>
+      */
+    InstanceName: string;
+    /**
+      * 实例计费模式。取值范围：
+<li>PREPAID：预付费，即包年包月。</li>
+<li>POSTPAID_BY_HOUR：按小时后付费。</li>
+      */
+    InstanceChargeType: string;
+    /**
+      * 实例登录设置。通过该参数可以设置所购买节点的登录方式密码或者密钥。
+<li>设置密钥时，密码仅用于组件原生WebUI快捷入口登录。</li>
+<li>未设置密钥时，密码用于登录所购节点以及组件原生WebUI快捷入口登录。</li>
+      */
+    LoginSettings: LoginSettings;
+    /**
+      * 集群应用场景以及支持部署组件配置
+      */
+    SceneSoftwareConfig: SceneSoftwareConfig;
+    /**
+      * 即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。若指定实例的付费模式为预付费则该参数必传。
+      */
+    InstanceChargePrepaid?: InstanceChargePrepaid;
+    /**
+      * 实例所属安全组的ID，形如sg-xxxxxxxx。该参数可以通过调用 [DescribeSecurityGroups](https://cloud.tencent.com/document/api/215/15808) 的返回值中的SecurityGroupId字段来获取。
+      */
+    SecurityGroupIds?: Array<string>;
+    /**
+      * [引导操作](https://cloud.tencent.com/document/product/589/35656)脚本设置。
+      */
+    ScriptBootstrapActionConfig?: Array<ScriptBootstrapActionConfig>;
+    /**
+      * 唯一随机标识，时效性为5分钟，需要调用者指定 防止客户端重复创建资源，例如 a9a90aa6-751a-41b6-aad6-fae360632808
+      */
+    ClientToken?: string;
+    /**
+      * 是否开启集群Master节点公网。取值范围：
+<li>NEED_MASTER_WAN：表示开启集群Master节点公网。</li>
+<li>NOT_NEED_MASTER_WAN：表示不开启。</li>默认开启集群Master节点公网。
+      */
+    NeedMasterWan?: string;
+    /**
+      * 是否开启外网远程登录。（在SecurityGroupId不为空时，该参数无效）不填默认为不开启 取值范围：
+<li>true：表示开启</li>
+<li>false：表示不开启</li>
+      */
+    EnableRemoteLoginFlag?: boolean;
+    /**
+      * 是否开启Kerberos认证。默认不开启 取值范围：
+<li>true：表示开启</li>
+<li>false：表示不开启</li>
+      */
+    EnableKerberosFlag?: boolean;
+    /**
+      * [自定义软件配置](https://cloud.tencent.com/document/product/589/35655?from_cn_redirect=1)
+      */
+    CustomConf?: string;
+    /**
+      * 标签描述列表。通过指定该参数可以同时绑定标签到相应的实例。
+      */
+    Tags?: Array<Tag>;
+    /**
+      * 分散置放群组ID列表，当前只支持指定一个。
+该参数可以通过调用 [DescribeDisasterRecoverGroups](https://cloud.tencent.com/document/product/213/17810)的返回值中的DisasterRecoverGroupId字段来获取。
+      */
+    DisasterRecoverGroupIds?: Array<string>;
+    /**
+      * 是否开启集群维度CBS加密。默认不加密 取值范围：
+<li>true：表示加密</li>
+<li>false：表示不加密</li>
+      */
+    EnableCbsEncryptFlag?: boolean;
+    /**
+      * MetaDB信息，当MetaType选择EMR_NEW_META时，MetaDataJdbcUrl MetaDataUser MetaDataPass UnifyMetaInstanceId不用填
+当MetaType选择EMR_EXIT_META时，填写UnifyMetaInstanceId
+当MetaType选择USER_CUSTOM_META时，填写MetaDataJdbcUrl MetaDataUser MetaDataPass
+      */
+    MetaDBInfo?: CustomMetaDBInfo;
+    /**
+      * 共享组件信息
+      */
+    DependService?: Array<DependService>;
+    /**
+      * 节点资源的规格，有几个可用区，就填几个，按顺序第一个为主可用区，第二个为备可用区，第三个为仲裁可用区。如果没有开启跨AZ，则长度为1即可。
+      */
+    ZoneResourceConfiguration?: Array<ZoneResourceConfiguration>;
 }
 /**
  * 引导脚本
@@ -2195,6 +2756,30 @@ export interface UpdateInstanceSettings {
       * 变配机器规格
       */
     InstanceType?: string;
+}
+/**
+ * 添加引导操作
+ */
+export interface ScriptBootstrapActionConfig {
+    /**
+      * 脚本的cos地址，参照格式：https://beijing-111111.cos.ap-beijing.myqcloud.com/data/test.sh查询cos存储桶列表：[存储桶列表](https://console.cloud.tencent.com/cos/bucket)
+      */
+    CosFileURI: string;
+    /**
+      * 引导脚步执行时机范围
+<li>resourceAfter：节点初始化后</li>
+<li>clusterAfter：集群启动后</li>
+<li>clusterBefore：集群启动前</li>
+      */
+    ExecutionMoment: string;
+    /**
+      * 执行脚本参数，参数格式请遵循标准Shell规范
+      */
+    Args?: Array<string>;
+    /**
+      * 脚本文件名
+      */
+    CosFileName?: string;
 }
 /**
  * DescribeInstances请求参数结构体
@@ -2633,6 +3218,34 @@ export interface AddUsersForUserManagerRequest {
       * 用户信息列表
       */
     UserManagerUserList: Array<UserInfoForUserManager>;
+}
+/**
+ * 可用区配置信息
+ */
+export interface ZoneResourceConfiguration {
+    /**
+      * 私有网络相关信息配置。通过该参数可以指定私有网络的ID，子网ID等信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VirtualPrivateCloud?: VirtualPrivateCloud;
+    /**
+      * 实例所在的位置。通过该参数可以指定实例所属可用区，所属项目等属性。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Placement?: Placement;
+    /**
+      * 所有节点资源的规格
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AllNodeResourceSpec?: AllNodeResourceSpec;
+    /**
+      * 如果是单可用区，ZoneTag可以不用填， 如果是双AZ部署，第一个可用区ZoneTag选择master，第二个可用区ZoneTag选择standby，如果是三AZ部署，第一个可用区ZoneTag选择master，第二个可用区ZoneTag选择standby，第三个可用区ZoneTag选择third-party，取值范围：
+  <li>master</li>
+  <li>standby</li>
+  <li>third-party</li>
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ZoneTag?: string;
 }
 /**
  * 用户自建Hive-MetaDB信息
@@ -3224,6 +3837,34 @@ export interface DescribeInstanceRenewNodesResponse {
     RequestId?: string;
 }
 /**
+ * 用户Hive-MetaDB信息
+ */
+export interface CustomMetaDBInfo {
+    /**
+      * 自定义MetaDB的JDBC连接，示例: jdbc:mysql://10.10.10.10:3306/dbname
+      */
+    MetaDataJdbcUrl?: string;
+    /**
+      * 自定义MetaDB用户名
+      */
+    MetaDataUser?: string;
+    /**
+      * 自定义MetaDB密码
+      */
+    MetaDataPass?: string;
+    /**
+      * hive共享元数据库类型。取值范围：
+<li>EMR_NEW_META：表示集群默认创建</li>
+<li>EMR_EXIT_META：表示集群使用指定EMR-MetaDB。</li>
+<li>USER_CUSTOM_META：表示集群使用自定义MetaDB。</li>
+      */
+    MetaType?: string;
+    /**
+      * EMR-MetaDB实例
+      */
+    UnifyMetaInstanceId?: string;
+}
+/**
  * 用户管理中用户的简要信息
  */
 export interface UserManagerUserBriefInfo {
@@ -3308,6 +3949,38 @@ export interface ModifyResourceSchedulerResponse {
     RequestId?: string;
 }
 /**
+ * VPC 参数
+ */
+export interface VirtualPrivateCloud {
+    /**
+      * VPC ID
+      */
+    VpcId: string;
+    /**
+      * Subnet ID
+      */
+    SubnetId: string;
+}
+/**
+ * 集群应用场景以及支持部署组件信息
+ */
+export interface SceneSoftwareConfig {
+    /**
+      * 部署的组件列表。不同的EMR产品版本ProductVersion 对应不同可选组件列表，不同产品版本可选组件列表查询：[组件版本](https://cloud.tencent.com/document/product/589/20279) ；
+填写实例值：hive、flink。
+      */
+    Software: Array<string>;
+    /**
+      * 默认Hadoop-Default,[场景查询](https://cloud.tencent.com/document/product/589/14624)场景化取值范围：
+Hadoop-Kudu
+Hadoop-Zookeeper
+Hadoop-Presto
+Hadoop-Hbase
+Hadoop-Default
+      */
+    SceneName?: string;
+}
+/**
  * 节点信息
  */
 export interface ShortNodeInfo {
@@ -3321,25 +3994,6 @@ export interface ShortNodeInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     NodeSize?: number;
-}
-/**
- * AddUsersForUserManager返回参数结构体
- */
-export interface AddUsersForUserManagerResponse {
-    /**
-      * 添加成功的用户列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    SuccessUserList: Array<string>;
-    /**
-      * 添加失败的用户列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    FailedUserList: Array<string>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
 }
 /**
  * 节点硬件信息
@@ -3596,6 +4250,29 @@ export interface NodeHardwareInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     TradeVersion: number;
+}
+/**
+ * ScaleOutCluster返回参数结构体
+ */
+export interface ScaleOutClusterResponse {
+    /**
+      * 实例ID。
+      */
+    InstanceId: string;
+    /**
+      * 客户端Token。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ClientToken: string;
+    /**
+      * 扩容流程ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FlowId: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 机器资源描述。

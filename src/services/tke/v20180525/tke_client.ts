@@ -21,7 +21,6 @@ import {
   DescribeClusterEndpointVipStatusRequest,
   DescribeClusterSecurityRequest,
   EksCiVolume,
-  GetTkeAppChartListRequest,
   DescribeEdgeCVMInstancesRequest,
   InstallLogAgentRequest,
   DescribeClusterEndpointVipStatusResponse,
@@ -78,7 +77,6 @@ import {
   DescribeEKSClusterCredentialResponse,
   CheckInstancesUpgradeAbleRequest,
   ModifyPrometheusTemplateRequest,
-  DeleteEdgeClusterInstancesRequest,
   DescribeImageCachesRequest,
   DescribePrometheusAlertRuleRequest,
   DescribeEdgeAvailableExtraArgsRequest,
@@ -159,7 +157,7 @@ import {
   DescribeClusterCommonNamesRequest,
   NfsVolume,
   PrometheusNotification,
-  EdgeClusterPublicLB,
+  ClusterCondition,
   NodePool,
   DescribeEKSClustersResponse,
   VolumeMount,
@@ -329,7 +327,7 @@ import {
   CreatePrometheusAlertRuleResponse,
   ECMEnhancedService,
   ModifyClusterAuthenticationOptionsResponse,
-  ClusterCondition,
+  EdgeClusterPublicLB,
   EnableEventPersistenceResponse,
   EnhancedService,
   DescribeClusterNodePoolsResponse,
@@ -351,7 +349,7 @@ import {
   PrometheusGrafanaInfo,
   ImageInstance,
   CreatePrometheusAlertPolicyRequest,
-  DescribeImageCachesResponse,
+  GetTkeAppChartListRequest,
   ResourceUsageDetail,
   CreateClusterNodePoolRequest,
   CheckEdgeClusterCIDRResponse,
@@ -362,6 +360,7 @@ import {
   CreatePrometheusDashboardRequest,
   DeleteClusterRouteTableResponse,
   DisableClusterDeletionProtectionRequest,
+  DescribeImageCachesResponse,
   PrometheusJobTargets,
   ModifyClusterAsGroupOptionAttributeResponse,
   UninstallLogAgentResponse,
@@ -417,13 +416,12 @@ import {
   DescribeRegionsResponse,
   CreateClusterRouteResponse,
   Release,
-  CreateClusterNodePoolFromExistingAsgResponse,
   DescribeEKSContainerInstanceRegionsRequest,
   DescribeECMInstancesRequest,
   DescribeVpcCniPodLimitsResponse,
   DescribeVersionsResponse,
   ScaleInClusterMasterRequest,
-  CreateClusterNodePoolFromExistingAsgRequest,
+  DeleteEdgeClusterInstancesRequest,
   PrometheusAlertRule,
   ClusterNetworkSettings,
   DescribeImagesResponse,
@@ -2028,16 +2026,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyPrometheusTemplateResponse) => void
   ): Promise<ModifyPrometheusTemplateResponse> {
     return this.request("ModifyPrometheusTemplate", req, cb)
-  }
-
-  /**
-   * 从伸缩组创建节点池
-   */
-  async CreateClusterNodePoolFromExistingAsg(
-    req: CreateClusterNodePoolFromExistingAsgRequest,
-    cb?: (error: string, rep: CreateClusterNodePoolFromExistingAsgResponse) => void
-  ): Promise<CreateClusterNodePoolFromExistingAsgResponse> {
-    return this.request("CreateClusterNodePoolFromExistingAsg", req, cb)
   }
 
   /**

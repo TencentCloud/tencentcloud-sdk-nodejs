@@ -384,7 +384,7 @@ export interface ResourceInfo {
   ResourceName: string
 
   /**
-      * 资源状态
+      * 资源状态，1-正常，2-隔离，3-销毁
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Status: number
@@ -414,7 +414,7 @@ export interface ResourceInfo {
   Model: string
 
   /**
-      * 资源类型
+      * 云加密机类型id
 注意：此字段可能返回 null，表示取不到有效值。
       */
   VsmType: number

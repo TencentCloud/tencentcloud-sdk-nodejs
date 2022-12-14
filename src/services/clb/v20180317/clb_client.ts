@@ -128,6 +128,7 @@ import {
   ClassicalListener,
   DeleteLoadBalancerRequest,
   CertificateInput,
+  ResourceAvailability,
   DescribeCustomizedConfigAssociateListResponse,
   SetCustomizedConfigForLoadBalancerRequest,
   CreateListenerResponse,

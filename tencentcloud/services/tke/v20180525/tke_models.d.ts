@@ -32,23 +32,6 @@ export interface EksCiVolume {
     NfsVolumes?: Array<NfsVolume>;
 }
 /**
- * GetTkeAppChartList请求参数结构体
- */
-export interface GetTkeAppChartListRequest {
-    /**
-      * app类型，取值log,scheduler,network,storage,monitor,dns,image,other,invisible
-      */
-    Kind?: string;
-    /**
-      * app支持的操作系统，取值arm32、arm64、amd64
-      */
-    Arch?: string;
-    /**
-      * 集群类型，取值tke、eks
-      */
-    ClusterType?: string;
-}
-/**
  * DescribeEdgeCVMInstances请求参数结构体
  */
 export interface DescribeEdgeCVMInstancesRequest {
@@ -1158,19 +1141,6 @@ export interface ModifyPrometheusTemplateRequest {
       * 修改内容
       */
     Template: PrometheusTemplateModify;
-}
-/**
- * DeleteEdgeClusterInstances请求参数结构体
- */
-export interface DeleteEdgeClusterInstancesRequest {
-    /**
-      * 集群ID
-      */
-    ClusterId: string;
-    /**
-      * 待删除实例ID数组
-      */
-    InstanceIds: Array<string>;
 }
 /**
  * DescribeImageCaches请求参数结构体
@@ -2504,6 +2474,19 @@ export interface CreateImageCacheRequest {
       * 镜像缓存保留时间天数，过期将会自动清理，默认为0，永不过期。
       */
     RetentionDays?: number;
+    /**
+      * 指定拉取镜像仓库的镜像时不校验证书。如["harbor.example.com"]。
+      */
+    RegistrySkipVerifyList?: Array<string>;
+    /**
+      * 指定拉取镜像仓库的镜像时使用 HTTP 协议。如["harbor.example.com"]。
+      */
+    RegistryHttpEndPointList?: Array<string>;
+    /**
+      * 自定义制作镜像缓存过程中容器实例的宿主机上的 DNS。如：
+"nameserver 4.4.4.4\nnameserver 8.8.8.8"
+      */
+    ResolveConfig?: string;
 }
 /**
  * UpdateClusterVersion请求参数结构体
@@ -2836,19 +2819,37 @@ webhook
     WebHook?: string;
 }
 /**
- * 边缘计算集群公网访问负载均衡信息
+ * 集群创建过程
  */
-export interface EdgeClusterPublicLB {
+export interface ClusterCondition {
     /**
-      * 是否开启公网访问LB
+      * 集群创建过程类型
+      */
+    Type: string;
+    /**
+      * 集群创建过程状态
+      */
+    Status: string;
+    /**
+      * 最后一次探测到该状态的时间
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Enabled: boolean;
+    LastProbeTime: string;
     /**
-      * 允许访问的公网cidr
+      * 最后一次转换到该过程的时间
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    AllowFromCidrs?: Array<string>;
+    LastTransitionTime: string;
+    /**
+      * 转换到该过程的简明原因
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Reason: string;
+    /**
+      * 转换到该过程的更多信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Message: string;
 }
 /**
  * 节点池描述
@@ -6361,37 +6362,19 @@ export interface ModifyClusterAuthenticationOptionsResponse {
     RequestId?: string;
 }
 /**
- * 集群创建过程
+ * 边缘计算集群公网访问负载均衡信息
  */
-export interface ClusterCondition {
+export interface EdgeClusterPublicLB {
     /**
-      * 集群创建过程类型
-      */
-    Type: string;
-    /**
-      * 集群创建过程状态
-      */
-    Status: string;
-    /**
-      * 最后一次探测到该状态的时间
+      * 是否开启公网访问LB
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    LastProbeTime: string;
+    Enabled: boolean;
     /**
-      * 最后一次转换到该过程的时间
+      * 允许访问的公网cidr
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    LastTransitionTime: string;
-    /**
-      * 转换到该过程的简明原因
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Reason: string;
-    /**
-      * 转换到该过程的更多信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Message: string;
+    AllowFromCidrs?: Array<string>;
 }
 /**
  * EnableEventPersistence返回参数结构体
@@ -6864,21 +6847,21 @@ export interface CreatePrometheusAlertPolicyRequest {
     AlertRule: PrometheusAlertPolicyItem;
 }
 /**
- * DescribeImageCaches返回参数结构体
+ * GetTkeAppChartList请求参数结构体
  */
-export interface DescribeImageCachesResponse {
+export interface GetTkeAppChartListRequest {
     /**
-      * 镜像缓存总数
+      * app类型，取值log,scheduler,network,storage,monitor,dns,image,other,invisible
       */
-    TotalCount: number;
+    Kind?: string;
     /**
-      * 镜像缓存信息列表
+      * app支持的操作系统，取值arm32、arm64、amd64
       */
-    ImageCaches: Array<ImageCache>;
+    Arch?: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 集群类型，取值tke、eks
       */
-    RequestId?: string;
+    ClusterType?: string;
 }
 /**
  * 资源使用明细
@@ -7094,6 +7077,23 @@ export interface DisableClusterDeletionProtectionRequest {
       * 集群ID
       */
     ClusterId: string;
+}
+/**
+ * DescribeImageCaches返回参数结构体
+ */
+export interface DescribeImageCachesResponse {
+    /**
+      * 镜像缓存总数
+      */
+    TotalCount: number;
+    /**
+      * 镜像缓存信息列表
+      */
+    ImageCaches: Array<ImageCache>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * prometheus一个job的targets
@@ -8252,19 +8252,6 @@ export interface Release {
     Description: string;
 }
 /**
- * CreateClusterNodePoolFromExistingAsg返回参数结构体
- */
-export interface CreateClusterNodePoolFromExistingAsgResponse {
-    /**
-      * 节点池ID
-      */
-    NodePoolId?: string;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
  * DescribeEKSContainerInstanceRegions请求参数结构体
  */
 export declare type DescribeEKSContainerInstanceRegionsRequest = null;
@@ -8334,17 +8321,17 @@ export interface ScaleInClusterMasterRequest {
     ScaleInMasters: Array<ScaleInMaster>;
 }
 /**
- * CreateClusterNodePoolFromExistingAsg请求参数结构体
+ * DeleteEdgeClusterInstances请求参数结构体
  */
-export interface CreateClusterNodePoolFromExistingAsgRequest {
+export interface DeleteEdgeClusterInstancesRequest {
     /**
       * 集群ID
       */
     ClusterId: string;
     /**
-      * 伸缩组ID
+      * 待删除实例ID数组
       */
-    AutoscalingGroupId: string;
+    InstanceIds: Array<string>;
 }
 /**
  * Prometheus告警规则

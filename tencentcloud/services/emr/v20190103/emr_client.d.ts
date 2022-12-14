@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ScaleOutInstanceResponse, SyncPodStateResponse, CreateInstanceResponse, TerminateTasksRequest, DescribeEmrApplicationStaticsRequest, ScaleOutInstanceRequest, ModifyResourceScheduleConfigResponse, DescribeInstancesListResponse, DescribeInstanceRenewNodesRequest, InquiryPriceRenewInstanceResponse, DescribeJobFlowRequest, InquiryPriceCreateInstanceResponse, TerminateInstanceRequest, DescribeResourceScheduleRequest, DescribeUsersForUserManagerRequest, RunJobFlowResponse, TerminateInstanceResponse, InquiryPriceUpdateInstanceResponse, DeleteUserManagerUserListRequest, DescribeResourceScheduleResponse, ModifyResourceSchedulerRequest, RunJobFlowRequest, DescribeCvmQuotaResponse, DescribeCvmQuotaRequest, DescribeClusterNodesRequest, SyncPodStateRequest, CreateInstanceRequest, DescribeInstancesRequest, InquiryPriceUpdateInstanceRequest, DescribeInstancesListRequest, DeleteUserManagerUserListResponse, ModifyResourcePoolsResponse, TerminateTasksResponse, DescribeInstancesResponse, DescribeUsersForUserManagerResponse, InquiryPriceRenewInstanceRequest, InquirePriceRenewEmrResponse, AddUsersForUserManagerRequest, InquiryPriceCreateInstanceRequest, DescribeClusterNodesResponse, ModifyResourceScheduleConfigRequest, InquiryPriceScaleOutInstanceRequest, DescribeEmrApplicationStaticsResponse, InquirePriceRenewEmrRequest, DescribeInstanceRenewNodesResponse, InquiryPriceScaleOutInstanceResponse, ModifyResourceSchedulerResponse, AddUsersForUserManagerResponse, ModifyResourcePoolsRequest, DescribeJobFlowResponse } from "./emr_models";
+import { ScaleOutInstanceResponse, SyncPodStateResponse, CreateInstanceResponse, TerminateTasksRequest, ScaleOutClusterRequest, DescribeEmrApplicationStaticsRequest, ScaleOutInstanceRequest, ModifyResourceScheduleConfigResponse, AddUsersForUserManagerResponse, DescribeInstancesListResponse, DescribeInstanceRenewNodesRequest, InquiryPriceRenewInstanceResponse, DescribeJobFlowRequest, InquiryPriceCreateInstanceResponse, TerminateInstanceRequest, DescribeResourceScheduleRequest, DescribeUsersForUserManagerRequest, RunJobFlowResponse, TerminateInstanceResponse, InquiryPriceUpdateInstanceResponse, DeleteUserManagerUserListRequest, DescribeResourceScheduleResponse, ModifyResourceSchedulerRequest, RunJobFlowRequest, CreateClusterResponse, DescribeCvmQuotaResponse, CreateClusterRequest, DescribeCvmQuotaRequest, DescribeClusterNodesRequest, SyncPodStateRequest, CreateInstanceRequest, DescribeInstancesRequest, InquiryPriceUpdateInstanceRequest, DescribeInstancesListRequest, DeleteUserManagerUserListResponse, ModifyResourcePoolsResponse, TerminateTasksResponse, DescribeInstancesResponse, DescribeUsersForUserManagerResponse, InquiryPriceRenewInstanceRequest, InquirePriceRenewEmrResponse, AddUsersForUserManagerRequest, InquiryPriceCreateInstanceRequest, DescribeClusterNodesResponse, ModifyResourceScheduleConfigRequest, InquiryPriceScaleOutInstanceRequest, DescribeEmrApplicationStaticsResponse, InquirePriceRenewEmrRequest, DescribeInstanceRenewNodesResponse, InquiryPriceScaleOutInstanceResponse, ModifyResourceSchedulerResponse, ScaleOutClusterResponse, ModifyResourcePoolsRequest, DescribeJobFlowResponse } from "./emr_models";
 /**
  * emr client
  * @class
@@ -16,10 +16,9 @@ export declare class Client extends AbstractClient {
      */
     InquiryPriceUpdateInstance(req: InquiryPriceUpdateInstanceRequest, cb?: (error: string, rep: InquiryPriceUpdateInstanceResponse) => void): Promise<InquiryPriceUpdateInstanceResponse>;
     /**
-     * 该接口支持安装了OpenLdap组件的集群。
-批量导出用户。对于kerberos集群，如果需要kertab文件下载地址，可以将NeedKeytabInfo设置为true；注意SupportDownLoadKeyTab为true，但是DownLoadKeyTabUrl为空字符串，表示keytab文件在后台没有准备好（正在生成）。
+     * 创建EMR集群实例
      */
-    DescribeUsersForUserManager(req: DescribeUsersForUserManagerRequest, cb?: (error: string, rep: DescribeUsersForUserManagerResponse) => void): Promise<DescribeUsersForUserManagerResponse>;
+    CreateCluster(req: CreateClusterRequest, cb?: (error: string, rep: CreateClusterResponse) => void): Promise<CreateClusterResponse>;
     /**
      * 续费询价。
      */
@@ -52,6 +51,11 @@ export declare class Client extends AbstractClient {
      * 创建流程作业
      */
     RunJobFlow(req: RunJobFlowRequest, cb?: (error: string, rep: RunJobFlowResponse) => void): Promise<RunJobFlowResponse>;
+    /**
+     * 该接口支持安装了OpenLdap组件的集群。
+批量导出用户。对于kerberos集群，如果需要kertab文件下载地址，可以将NeedKeytabInfo设置为true；注意SupportDownLoadKeyTab为true，但是DownLoadKeyTabUrl为空字符串，表示keytab文件在后台没有准备好（正在生成）。
+     */
+    DescribeUsersForUserManager(req: DescribeUsersForUserManagerRequest, cb?: (error: string, rep: DescribeUsersForUserManagerResponse) => void): Promise<DescribeUsersForUserManagerResponse>;
     /**
      * 删除用户列表（用户管理）
 
@@ -110,4 +114,8 @@ export declare class Client extends AbstractClient {
      * 刷新YARN的动态资源池
      */
     ModifyResourcePools(req: ModifyResourcePoolsRequest, cb?: (error: string, rep: ModifyResourcePoolsResponse) => void): Promise<ModifyResourcePoolsResponse>;
+    /**
+     * 扩容集群节点
+     */
+    ScaleOutCluster(req: ScaleOutClusterRequest, cb?: (error: string, rep: ScaleOutClusterResponse) => void): Promise<ScaleOutClusterResponse>;
 }

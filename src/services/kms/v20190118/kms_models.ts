@@ -68,6 +68,11 @@ export interface EnableKeyRotationRequest {
    * CMK唯一标识符
    */
   KeyId: string
+
+  /**
+   * 密钥轮转周期，单位天，允许范围 7 ~ 365，默认值 365。
+   */
+  RotateDays?: number
 }
 
 /**
