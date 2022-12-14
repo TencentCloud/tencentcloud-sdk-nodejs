@@ -105,6 +105,7 @@ import {
   DistributeAccreditTlinxRequest,
   QueryOpenBankBillData,
   QueryContractRelateShopRequest,
+  PlatformAccountBalanceResult,
   CreateOpenBankRechargeOrderRequest,
   CloudExternalAttachmentData,
   QueryExceedingInfoResponse,
@@ -130,7 +131,7 @@ import {
   QueryFlexSettlementOrderListRequest,
   RefundCloudOrderRequest,
   CreateOpenBankAggregatedSubMerchantRegistrationResponse,
-  RegisterBillResponse,
+  QueryFlexPlatformAccountBalanceResponse,
   ApplyReWithdrawalRequest,
   DownloadFileResult,
   RechargeByThirdPayResponse,
@@ -335,6 +336,7 @@ import {
   QueryOpenBankVerificationOrderResponse,
   ApplyApplicationMaterialResponse,
   DistributeQueryResult,
+  QueryFlexPlatformAccountBalanceRequest,
   OrderSummaries,
   ExecuteMemberTransactionRequest,
   CreateExternalAnchorData,
@@ -593,6 +595,7 @@ import {
   QueryAgentTaxPaymentBatchResponse,
   DeleteAgentTaxPaymentInfosResponse,
   QueryMerchantClassificationResponse,
+  RegisterBillSupportWithdrawResponse,
   SceneInfo,
   QueryContractResponse,
   CreateRedInvoiceResponse,
@@ -616,7 +619,7 @@ import {
   QueryAgentTaxPaymentBatchRequest,
   CloudChannelExternalUserInfo,
   ApplyReconciliationFileRequest,
-  RegisterBillSupportWithdrawResponse,
+  RegisterBillResponse,
   PayeeInfoResult,
   ApplyOutwardOrderRequest,
   AssignmentData,
@@ -1661,6 +1664,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: QueryFlexPaymentOrderStatusResponse) => void
   ): Promise<QueryFlexPaymentOrderStatusResponse> {
     return this.request("QueryFlexPaymentOrderStatus", req, cb)
+  }
+
+  /**
+   * 灵云V2-平台账户余额查询
+   */
+  async QueryFlexPlatformAccountBalance(
+    req: QueryFlexPlatformAccountBalanceRequest,
+    cb?: (error: string, rep: QueryFlexPlatformAccountBalanceResponse) => void
+  ): Promise<QueryFlexPlatformAccountBalanceResponse> {
+    return this.request("QueryFlexPlatformAccountBalance", req, cb)
   }
 
   /**

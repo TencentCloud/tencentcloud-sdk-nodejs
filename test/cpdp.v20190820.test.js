@@ -988,6 +988,16 @@ it("cpdp.v20190820.QueryFlexPaymentOrderStatus", async function () {
     }
 })
 
+it("cpdp.v20190820.QueryFlexPlatformAccountBalance", async function () {
+    try {
+       const data = await client.QueryFlexPlatformAccountBalance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cpdp.v20190820.QueryFlexAmountBeforeTax", async function () {
     try {
        const data = await client.QueryFlexAmountBeforeTax({})

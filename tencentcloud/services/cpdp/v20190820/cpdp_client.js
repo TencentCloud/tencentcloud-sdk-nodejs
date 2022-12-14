@@ -611,6 +611,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("QueryFlexPaymentOrderStatus", req, cb);
     }
     /**
+     * 灵云V2-平台账户余额查询
+     */
+    async QueryFlexPlatformAccountBalance(req, cb) {
+        return this.request("QueryFlexPlatformAccountBalance", req, cb);
+    }
+    /**
      * 灵云V2-查询税前金额
      */
     async QueryFlexAmountBeforeTax(req, cb) {

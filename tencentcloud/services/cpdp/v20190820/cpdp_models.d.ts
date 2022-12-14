@@ -2600,6 +2600,43 @@ export interface QueryContractRelateShopRequest {
     Profile?: string;
 }
 /**
+ * 平台账户余额信息
+ */
+export interface PlatformAccountBalanceResult {
+    /**
+      * 收入类型
+LABOR:劳务所得
+OCCASION:偶然所得
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IncomeType: string;
+    /**
+      * 总余额
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Balance: string;
+    /**
+      * 系统冻结余额
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SystemFreezeBalance: string;
+    /**
+      * 人工冻结余额
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ManualFreezeBalance: string;
+    /**
+      * 可提现余额
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PayableBalance: string;
+    /**
+      * 提现中余额
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InPayBalance: string;
+}
+/**
  * CreateOpenBankRechargeOrder请求参数结构体
  */
 export interface CreateOpenBankRechargeOrderRequest {
@@ -3554,21 +3591,22 @@ __其他__: 见附录-错误码表
     RequestId?: string;
 }
 /**
- * RegisterBill返回参数结构体
+ * QueryFlexPlatformAccountBalance返回参数结构体
  */
-export interface RegisterBillResponse {
+export interface QueryFlexPlatformAccountBalanceResponse {
     /**
-      * 银行流水号
+      * 错误码。SUCCESS为成功，其他为失败
       */
-    FrontSeqNo?: string;
+    ErrCode: string;
     /**
-      * 保留字段
+      * 错误消息
       */
-    ReservedMessage?: string;
+    ErrMessage: string;
     /**
-      * 请求类型
+      * 返回结果
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    RequestType?: string;
+    Result: PlatformAccountBalanceResult;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -11162,6 +11200,29 @@ export interface DistributeQueryResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Orders?: Array<MultiApplyOrder>;
+}
+/**
+ * QueryFlexPlatformAccountBalance请求参数结构体
+ */
+export interface QueryFlexPlatformAccountBalanceRequest {
+    /**
+      * 收入类型
+LABOR:劳务所得
+OCCASION:偶然所得
+      */
+    IncomeType: string;
+    /**
+      * 环境类型
+__release__:生产环境
+__sandbox__:沙箱环境
+__test__:测试环境
+缺省默认为生产环境
+      */
+    Environment?: string;
+    /**
+      * 快照日期。格式yyyy-MM-dd
+      */
+    SnapshotDate?: string;
 }
 /**
  * 订单汇总列表
@@ -19990,6 +20051,38 @@ export interface QueryMerchantClassificationResponse {
     RequestId?: string;
 }
 /**
+ * RegisterBillSupportWithdraw返回参数结构体
+ */
+export interface RegisterBillSupportWithdrawResponse {
+    /**
+      * String(20)，返回码
+      */
+    TxnReturnCode?: string;
+    /**
+      * String(100)，返回信息
+      */
+    TxnReturnMsg?: string;
+    /**
+      * STRING(52)，见证系统流水号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FrontSeqNo?: string;
+    /**
+      * String(22)，交易流水号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CnsmrSeqNo?: string;
+    /**
+      * STRING(1027)，保留域
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ReservedMsg?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 场景信息
  */
 export interface SceneInfo {
@@ -20689,32 +20782,21 @@ _缺省: release_
     MidasEnvironment?: string;
 }
 /**
- * RegisterBillSupportWithdraw返回参数结构体
+ * RegisterBill返回参数结构体
  */
-export interface RegisterBillSupportWithdrawResponse {
+export interface RegisterBillResponse {
     /**
-      * String(20)，返回码
-      */
-    TxnReturnCode?: string;
-    /**
-      * String(100)，返回信息
-      */
-    TxnReturnMsg?: string;
-    /**
-      * STRING(52)，见证系统流水号
-注意：此字段可能返回 null，表示取不到有效值。
+      * 银行流水号
       */
     FrontSeqNo?: string;
     /**
-      * String(22)，交易流水号
-注意：此字段可能返回 null，表示取不到有效值。
+      * 保留字段
       */
-    CnsmrSeqNo?: string;
+    ReservedMessage?: string;
     /**
-      * STRING(1027)，保留域
-注意：此字段可能返回 null，表示取不到有效值。
+      * 请求类型
       */
-    ReservedMsg?: string;
+    RequestType?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
