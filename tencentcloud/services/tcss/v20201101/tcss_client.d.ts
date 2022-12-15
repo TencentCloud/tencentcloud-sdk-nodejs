@@ -618,7 +618,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeComplianceScanFailedAssetList(req: DescribeComplianceScanFailedAssetListRequest, cb?: (error: string, rep: DescribeComplianceScanFailedAssetListResponse) => void): Promise<DescribeComplianceScanFailedAssetListResponse>;
     /**
-     * 查询k8s api 异常规则中范围列表
+     * 查询k8sapi 异常规则中范围列表
      */
     DescribeK8sApiAbnormalRuleScopeList(req: DescribeK8sApiAbnormalRuleScopeListRequest, cb?: (error: string, rep: DescribeK8sApiAbnormalRuleScopeListResponse) => void): Promise<DescribeK8sApiAbnormalRuleScopeListResponse>;
     /**

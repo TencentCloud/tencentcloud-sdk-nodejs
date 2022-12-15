@@ -191,7 +191,7 @@ export declare class Client extends AbstractClient {
      */
     DetectProduct(req: DetectProductRequest, cb?: (error: string, rep: DetectProductResponse) => void): Promise<DetectProductResponse>;
     /**
-     * 识别常安全属性识别可对图片中人体安全防护属性进行识别，支持识别安全帽，反光衣，护目镜，工服，手套，工地安全带，口罩，抽烟，玩手机等多种属性。
+     * 安全属性识别可对图片中人体安全防护属性进行识别，支持识别安全帽，反光衣，护目镜，工服，手套，工地安全带，口罩，抽烟，玩手机等多种属性。
 "被优选过滤"标签值在人体优选开关开启时才会返回。
 
 |序号 | 标签名称 | 标签值 |

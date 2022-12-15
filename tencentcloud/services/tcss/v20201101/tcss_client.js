@@ -942,7 +942,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeComplianceScanFailedAssetList", req, cb);
     }
     /**
-     * 查询k8s api 异常规则中范围列表
+     * 查询k8sapi 异常规则中范围列表
      */
     async DescribeK8sApiAbnormalRuleScopeList(req, cb) {
         return this.request("DescribeK8sApiAbnormalRuleScopeList", req, cb);

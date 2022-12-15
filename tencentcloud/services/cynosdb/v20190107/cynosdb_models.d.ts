@@ -114,8 +114,21 @@ export interface DescribeAccountsRequest {
     /**
       * 数据库类型，取值范围:
 <li> MYSQL </li>
+该参数已废用
       */
     DbType?: string;
+    /**
+      * 需要过滤的账户列表
+      */
+    Hosts?: Array<string>;
+    /**
+      * 限制量
+      */
+    Limit?: number;
+    /**
+      * 偏移量
+      */
+    Offset?: number;
 }
 /**
  * ModifyMaintainPeriodConfig请求参数结构体
@@ -144,10 +157,12 @@ export interface ModifyMaintainPeriodConfigRequest {
 export interface DescribeRollbackTimeRangeResponse {
     /**
       * 有效回归时间范围开始时间点（已废弃）
+注意：此字段可能返回 null，表示取不到有效值。
       */
     TimeRangeStart: string;
     /**
       * 有效回归时间范围结束时间点（已废弃）
+注意：此字段可能返回 null，表示取不到有效值。
       */
     TimeRangeEnd: string;
     /**
@@ -410,6 +425,7 @@ export interface DescribeClusterParamsResponse {
     TotalCount: number;
     /**
       * 实例参数列表
+注意：此字段可能返回 null，表示取不到有效值。
       */
     Items: Array<ParamInfo>;
     /**
@@ -1225,6 +1241,10 @@ export interface DescribeProjectSecurityGroupsResponse {
       */
     Groups: Array<SecurityGroup>;
     /**
+      * 总数量
+      */
+    Total: number;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
@@ -1446,6 +1466,10 @@ export interface DescribeBackupListRequest {
       * 备份备注名，模糊查询
       */
     BackupNames?: Array<string>;
+    /**
+      * 快照备份Id列表
+      */
+    SnapshotIdList?: Array<number>;
 }
 /**
  * SearchClusterDatabases请求参数结构体
@@ -1908,7 +1932,7 @@ cpu最大值，可选范围参考DescribeServerlessInstanceSpecs接口返回
       */
     AlarmPolicyIds?: Array<string>;
     /**
-      * 参数数组
+      * 参数数组，暂时支持character_set_server （utf8｜latin1｜gbk｜utf8mb4） ，lower_case_table_names，1-大小写不敏感，0-大小写敏感
       */
     ClusterParams?: Array<ParamItem>;
     /**
@@ -2193,7 +2217,19 @@ export interface DescribeProjectSecurityGroupsRequest {
     /**
       * 项目ID
       */
-    ProjectId: number;
+    ProjectId?: number;
+    /**
+      * 限制量
+      */
+    Limit?: number;
+    /**
+      * 偏移量
+      */
+    Offset?: number;
+    /**
+      * 搜索关键字
+      */
+    SearchKey?: string;
 }
 /**
  * ModifyClusterParam返回参数结构体
@@ -3888,8 +3924,13 @@ export interface ModifyClusterParamRequest {
 export interface DescribeAccountsResponse {
     /**
       * 数据库账号列表
+注意：此字段可能返回 null，表示取不到有效值。
       */
     AccountSet: Array<Account>;
+    /**
+      * 账号总数量
+      */
+    TotalCount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3958,6 +3999,10 @@ export interface DescribeClusterParamsRequest {
       * 集群ID
       */
     ClusterId: string;
+    /**
+      * 参数名字
+      */
+    ParamName?: string;
 }
 /**
  * 审计日志详细信息

@@ -28,7 +28,7 @@ class Client extends abstract_client_1.AbstractClient {
         super("captcha.tencentcloudapi.com", "2019-07-22", clientConfig);
     }
     /**
-     * 核查验证码小程序插件票据接入风控结果(Beta)
+     * 核查验证码小程序插件票据接入风控结果(已停用)
      */
     async DescribeCaptchaMiniRiskResult(req, cb) {
         return this.request("DescribeCaptchaMiniRiskResult", req, cb);

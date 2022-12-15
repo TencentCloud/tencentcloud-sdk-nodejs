@@ -1535,9 +1535,9 @@ export interface DescribeTendisSlowLogResponse {
  */
 export interface DescribeProductInfoResponse {
     /**
-      * 地域售卖信息
+      * 地域售卖信息。
       */
-    RegionSet?: Array<RegionConf>;
+    RegionSet: Array<RegionConf>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3021,11 +3021,11 @@ export interface Groups {
  */
 export interface DescribeInstancesRequest {
     /**
-      * 实例数量，参数默认值20，最大值为1000。
+      * 每页输出实例的数量，参数默认值20，最大值为1000。
       */
     Limit?: number;
     /**
-      * 偏移量，取Limit整数倍。
+      * 分页偏移量，取Limit整数倍。
       */
     Offset?: number;
     /**
@@ -3357,7 +3357,7 @@ export interface ModfiyInstancePasswordResponse {
     RequestId?: string;
 }
 /**
- * 实例详细信息列表
+ * 实例详细信息列表。
  */
 export interface InstanceSet {
     /**
@@ -3365,31 +3365,31 @@ export interface InstanceSet {
       */
     InstanceName: string;
     /**
-      * 实例Id。
+      * 实例 ID。
       */
     InstanceId: string;
     /**
-      * 用户的Appid。
+      * 用户的 AppID。
       */
     Appid: number;
     /**
-      * 项目Id。
+      * 项目 ID。
       */
     ProjectId: number;
     /**
-      * 地域id 。1--广州 4--上海 5-- 中国香港 6--多伦多 7--上海金融 8--北京 9-- 新加坡 11--深圳金融 15--美西（硅谷）16--成都 17--德国 18--韩国 19--重庆 21--印度 22--美东（弗吉尼亚）23--泰国 24--俄罗斯 25--日本
+      * 地域 ID。<ul><li>1：广州。</li><li>4：上海。</li><li>5：中国香港。</li><li>6：多伦多。</li> <li>7：上海金融。</li> <li>8：北京。</li> <li>9：新加坡。</li> <li>11：深圳金融。</li> <li>15：美西（硅谷）。</li><li>16：成都。</li><li>17：法兰克福。</li><li>18：首尔。</li><li>19：重庆。</li><li>21：孟买。</li><li>22：美东（弗吉尼亚）。</li><li>23：曼谷。</li><li>24：莫斯科。</li><li>25：东京。</li></ul>
       */
     RegionId: number;
     /**
-      * 区域id。
+      * 区域 ID。
       */
     ZoneId: number;
     /**
-      * vpc网络id，例如75101。
+      * vpc网络 ID，例如75101。
       */
     VpcId: number;
     /**
-      * vpc网络下子网id 如：46315。
+      * vpc网络下子网ID，如：46315。
       */
     SubnetId: number;
     /**
@@ -3397,7 +3397,7 @@ export interface InstanceSet {
       */
     Status: number;
     /**
-      * 实例vip。
+      * 实例 VIP。
       */
     WanIp: string;
     /**
@@ -3481,7 +3481,7 @@ export interface InstanceSet {
       */
     RedisReplicasNum: number;
     /**
-      * 计费Id。
+      * 计费 ID。
       */
     PriceId: number;
     /**
@@ -4575,35 +4575,35 @@ export interface DescribeProjectSecurityGroupResponse {
  */
 export interface Instances {
     /**
-      * 用户AppID
+      * 用户AppID。
       */
     AppId: number;
     /**
-      * 实例ID
+      * 实例 ID。
       */
     InstanceId: string;
     /**
-      * 实例名称
+      * 实例名称。
       */
     InstanceName: string;
     /**
-      * 地域ID 1--广州 4--上海 5-- 香港 6--多伦多 7--上海金融 8--北京 9-- 新加坡 11--深圳金融 15--美西（硅谷）
+      * 地域ID。<ul><li>1：广州。</li><li>4：上海。</li><li> 5：香港。</li> <li> 6：多伦多。</li> <li> 7：上海金融。</li> <li> 8：北京。</li> <li> 9：新加坡。</li> <li> 11：深圳金融。</li> <li> 15：美西（硅谷）。</li> </ul>
       */
     RegionId: number;
     /**
-      * 区域ID
+      * 区域 ID。
       */
     ZoneId: number;
     /**
-      * 副本数量
+      * 副本数量。
       */
     RedisReplicasNum: number;
     /**
-      * 分片数量
+      * 分片数量。
       */
     RedisShardNum: number;
     /**
-      * 分片大小
+      * 分片内存大小。
       */
     RedisShardSize: number;
     /**
@@ -4612,48 +4612,48 @@ export interface Instances {
       */
     DiskSize: number;
     /**
-      * 引擎：社区版Redis、腾讯云CKV
+      * 引擎：社区版Redis、腾讯云CKV。
       */
     Engine: string;
     /**
-      * 实例角色，rw可读写，r只读
+      * 实例读写权限。<ul><li>rw：可读写。</li><li>r：只读。</li></ul>
       */
     Role: string;
     /**
-      * 实例VIP
+      * 实例 VIP 地址。
       */
     Vip: string;
     /**
-      * 内部参数，用户可忽略
+      * 内部参数，用户可忽略。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Vip6: string;
     /**
-      * vpc网络ID 如：75101
+      * VPC 网络ID，如：75101。
       */
     VpcID: number;
     /**
-      * 实例端口
+      * 实例端口。
       */
     VPort: number;
     /**
-      * 实例状态：0-待初始化，1-流程中，2-运行中，-2-已隔离，-3-待删除
+      * 实例状态。<ul><li>0：待初始化。</li><li>1：流程中。</li><li>2：运行中。</li><li>-2：已隔离。</li><li>-3：待删除。</li></ul>
       */
     Status: number;
     /**
-      * 仓库ID
+      * 仓库ID。
       */
     GrocerySysId: number;
     /**
-      * 实例类型：1 – Redis2.8内存版（集群架构），2 – Redis2.8内存版（标准架构），3 – CKV 3.2内存版(标准架构)，4 – CKV 3.2内存版(集群架构)，5 – Redis2.8内存版（单机），6 – Redis4.0内存版（标准架构），7 – Redis4.0内存版（集群架构），8 – Redis5.0内存版（标准架构），9 – Redis5.0内存版（集群架构）
+      * 实例类型。<ul><li>1：Redis 2.8 内存版（集群架构）。</li><li>2：Redis 2.8 内存版（标准架构）。</li><li>3：CKV 3.2 内存版（标准架构）。</li><li>4：CKV 3.2 内存版（集群架构）。</li><li>5：Redis 2.8 单机版。</li><li>6：Redis 4.0 内存版（标准架构）。</li><li>7：Redis 4.0 内存版（集群架构）。</li><li>8：Redis 5.0 内存版（标准架构）。</li><li>9：Redis 5.0 内存版（集群架构）。</li></ul>
       */
     ProductType: number;
     /**
-      * 创建时间
+      * 实例加入复制组的时间。
       */
     CreateTime: string;
     /**
-      * 更新实例
+      * 复制组中实例更新的时间。
       */
     UpdateTime: string;
 }

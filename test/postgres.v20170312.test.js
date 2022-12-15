@@ -78,6 +78,16 @@ it("postgres.v20170312.DeleteReadOnlyGroupNetworkAccess", async function () {
     }
 })
 
+it("postgres.v20170312.DescribeDefaultParameters", async function () {
+    try {
+       const data = await client.DescribeDefaultParameters({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("postgres.v20170312.UpgradeDBInstance", async function () {
     try {
        const data = await client.UpgradeDBInstance({})
@@ -101,6 +111,16 @@ it("postgres.v20170312.ModifyDBInstanceParameters", async function () {
 it("postgres.v20170312.DestroyDBInstance", async function () {
     try {
        const data = await client.DestroyDBInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("postgres.v20170312.SetAutoRenewFlag", async function () {
+    try {
+       const data = await client.SetAutoRenewFlag({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -158,9 +178,9 @@ it("postgres.v20170312.DescribeDBErrlogs", async function () {
     }
 })
 
-it("postgres.v20170312.DescribeSlowQueryAnalysis", async function () {
+it("postgres.v20170312.DescribeReadOnlyGroups", async function () {
     try {
-       const data = await client.DescribeSlowQueryAnalysis({})
+       const data = await client.DescribeReadOnlyGroups({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -188,6 +208,16 @@ it("postgres.v20170312.InquiryPriceCreateDBInstances", async function () {
     }
 })
 
+it("postgres.v20170312.DescribeDBInstanceSecurityGroups", async function () {
+    try {
+       const data = await client.DescribeDBInstanceSecurityGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("postgres.v20170312.OpenDBExtranetAccess", async function () {
     try {
        const data = await client.OpenDBExtranetAccess({})
@@ -198,9 +228,29 @@ it("postgres.v20170312.OpenDBExtranetAccess", async function () {
     }
 })
 
+it("postgres.v20170312.DescribeParameterTemplateAttributes", async function () {
+    try {
+       const data = await client.DescribeParameterTemplateAttributes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("postgres.v20170312.DeleteDBInstanceNetworkAccess", async function () {
     try {
        const data = await client.DeleteDBInstanceNetworkAccess({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("postgres.v20170312.RestartDBInstance", async function () {
+    try {
+       const data = await client.RestartDBInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -258,9 +308,9 @@ it("postgres.v20170312.DescribeDBXlogs", async function () {
     }
 })
 
-it("postgres.v20170312.SetAutoRenewFlag", async function () {
+it("postgres.v20170312.OpenServerlessDBExtranetAccess", async function () {
     try {
-       const data = await client.SetAutoRenewFlag({})
+       const data = await client.OpenServerlessDBExtranetAccess({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -318,6 +368,16 @@ it("postgres.v20170312.CreateDBInstances", async function () {
     }
 })
 
+it("postgres.v20170312.RebalanceReadOnlyGroup", async function () {
+    try {
+       const data = await client.RebalanceReadOnlyGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("postgres.v20170312.CreateServerlessDBInstance", async function () {
     try {
        const data = await client.CreateServerlessDBInstance({})
@@ -348,9 +408,9 @@ it("postgres.v20170312.DescribeZones", async function () {
     }
 })
 
-it("postgres.v20170312.RestartDBInstance", async function () {
+it("postgres.v20170312.DeleteParameterTemplate", async function () {
     try {
-       const data = await client.RestartDBInstance({})
+       const data = await client.DeleteParameterTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -528,9 +588,9 @@ it("postgres.v20170312.DescribeServerlessDBInstances", async function () {
     }
 })
 
-it("postgres.v20170312.RebalanceReadOnlyGroup", async function () {
+it("postgres.v20170312.ModifyParameterTemplate", async function () {
     try {
-       const data = await client.RebalanceReadOnlyGroup({})
+       const data = await client.ModifyParameterTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -541,6 +601,26 @@ it("postgres.v20170312.RebalanceReadOnlyGroup", async function () {
 it("postgres.v20170312.DescribeCloneDBInstanceSpec", async function () {
     try {
        const data = await client.DescribeCloneDBInstanceSpec({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("postgres.v20170312.CreateParameterTemplate", async function () {
+    try {
+       const data = await client.CreateParameterTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("postgres.v20170312.DescribeSlowQueryAnalysis", async function () {
+    try {
+       const data = await client.DescribeSlowQueryAnalysis({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -568,9 +648,9 @@ it("postgres.v20170312.CreateReadOnlyDBInstance", async function () {
     }
 })
 
-it("postgres.v20170312.DescribeReadOnlyGroups", async function () {
+it("postgres.v20170312.DescribeParameterTemplates", async function () {
     try {
-       const data = await client.DescribeReadOnlyGroups({})
+       const data = await client.DescribeParameterTemplates({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -638,9 +718,9 @@ it("postgres.v20170312.DescribeDBSlowlogs", async function () {
     }
 })
 
-it("postgres.v20170312.OpenServerlessDBExtranetAccess", async function () {
+it("postgres.v20170312.ModifyDBInstanceSecurityGroups", async function () {
     try {
-       const data = await client.OpenServerlessDBExtranetAccess({})
+       const data = await client.ModifyDBInstanceSecurityGroups({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

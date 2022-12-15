@@ -629,6 +629,10 @@ export interface DescribeEnvironmentsRequest {
       * 排序字段
       */
     SortInfo?: SortType;
+    /**
+      * 环境id
+      */
+    EnvironmentId?: string;
 }
 /**
  * LogConfig 列表结果

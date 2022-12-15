@@ -2363,7 +2363,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询k8s api 异常规则中范围列表
+   * 查询k8sapi 异常规则中范围列表
    */
   async DescribeK8sApiAbnormalRuleScopeList(
     req: DescribeK8sApiAbnormalRuleScopeListRequest,

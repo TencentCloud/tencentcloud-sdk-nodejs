@@ -9762,7 +9762,7 @@ export interface ModifyK8sApiAbnormalRuleStatusRequest {
       */
     RuleID: string;
     /**
-      * 状态(ture:开 false:关)
+      * 状态(true:开 false:关)
       */
     Status: boolean;
 }

@@ -487,6 +487,36 @@ export interface SpecItemInfo {
 }
 
 /**
+ * 参数模板的基本信息
+ */
+export interface ParameterTemplate {
+  /**
+   * 参数模板ID
+   */
+  TemplateId: string
+
+  /**
+   * 参数模板名称
+   */
+  TemplateName: string
+
+  /**
+   * 参数模板适用的数据库版本
+   */
+  DBMajorVersion: string
+
+  /**
+   * 参数模板适用的数据库引擎
+   */
+  DBEngine: string
+
+  /**
+   * 参数模板描述
+   */
+  TemplateDescription: string
+}
+
+/**
  * CreateDBInstanceNetworkAccess返回参数结构体
  */
 export interface CreateDBInstanceNetworkAccessResponse {
@@ -796,6 +826,21 @@ export interface DescribeProductConfigRequest {
 }
 
 /**
+ * RemoveDBInstanceFromReadOnlyGroup请求参数结构体
+ */
+export interface RemoveDBInstanceFromReadOnlyGroupRequest {
+  /**
+   * 实例ID
+   */
+  DBInstanceId: string
+
+  /**
+   * 只读组ID
+   */
+  ReadOnlyGroupId: string
+}
+
+/**
  * InitDBInstances返回参数结构体
  */
 export interface InitDBInstancesResponse {
@@ -808,6 +853,21 @@ export interface InitDBInstancesResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeDefaultParameters请求参数结构体
+ */
+export interface DescribeDefaultParametersRequest {
+  /**
+   * 数据库版本，大版本号，例如11，12，13
+   */
+  DBMajorVersion: string
+
+  /**
+   * 数据库引擎，例如：postgresql,mssql_compatible
+   */
+  DBEngine: string
 }
 
 /**
@@ -1337,6 +1397,36 @@ export interface OpenServerlessDBExtranetAccessResponse {
 }
 
 /**
+ * ModifyParameterTemplate请求参数结构体
+ */
+export interface ModifyParameterTemplateRequest {
+  /**
+   * 参数模板ID，用于唯一确认参数模板，不可修改
+   */
+  TemplateId: string
+
+  /**
+   * 参数模板名称，长度为1～60个字符，仅支持数字,英文大小写字母、中文以及特殊字符_-./()（）[]+=：:@  注：若该字段为空    ，则保持原参数模板名称
+   */
+  TemplateName?: string
+
+  /**
+   * 参数模板描述，长度为0～60个字符，仅支持数字,英文大小写字母、中文以及特殊字符_-./()（）[]+=：:@  注：若不传入该参数，则保持原参数模板描述
+   */
+  TemplateDescription?: string
+
+  /**
+   * 需要修改或添加的参数集合，注：同一参数不能同时出现在修改添加集合和删除集合中
+   */
+  ModifyParamEntrySet?: Array<ParamEntry>
+
+  /**
+   * 需要从模板中删除的参数集合，注：同一参数不能同时出现在修改添加集合和删除集合中
+   */
+  DeleteParamSet?: Array<string>
+}
+
+/**
  * InquiryPriceCreateDBInstances返回参数结构体
  */
 export interface InquiryPriceCreateDBInstancesResponse {
@@ -1402,28 +1492,24 @@ export interface ModifySwitchTimePeriodResponse {
 }
 
 /**
- * DisIsolateDBInstances请求参数结构体
+ * DescribeDefaultParameters返回参数结构体
  */
-export interface DisIsolateDBInstancesRequest {
+export interface DescribeDefaultParametersResponse {
   /**
-   * 资源ID列表。注意：当前已不支持同时解隔离多个实例，这里只能传入单个实例ID。
+   * 参数个数
    */
-  DBInstanceIdSet: Array<string>
+  TotalCount: number
 
   /**
-   * 包年包月实例解隔离时购买时常 以月为单位
-   */
-  Period?: number
+      * 参数信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ParamInfoSet: Array<ParamInfo>
 
   /**
-   * 是否使用代金券：true-使用,false-不使用，默认不使用
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  AutoVoucher?: boolean
-
-  /**
-   * 代金券id列表
-   */
-  VoucherIds?: Array<string>
+  RequestId?: string
 }
 
 /**
@@ -1509,6 +1595,108 @@ db-tag-key：按照标签键过滤，类型为string
    * 排序方式，包括升序：asc、降序：desc。
    */
   OrderByType?: string
+}
+
+/**
+ * 只读组信息
+ */
+export interface ReadOnlyGroup {
+  /**
+      * 只读组标识
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ReadOnlyGroupId: string
+
+  /**
+      * 只读组名字
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ReadOnlyGroupName: string
+
+  /**
+      * 项目id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProjectId: number
+
+  /**
+      * 主实例id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MasterDBInstanceId: string
+
+  /**
+      * 最小保留实例数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MinDelayEliminateReserve: number
+
+  /**
+   * 延迟空间大小阈值
+   */
+  MaxReplayLatency: number
+
+  /**
+   * 延迟大小开关
+   */
+  ReplayLatencyEliminate: number
+
+  /**
+   * 延迟时间大小阈值
+   */
+  MaxReplayLag: number
+
+  /**
+   * 延迟时间开关
+   */
+  ReplayLagEliminate: number
+
+  /**
+   * 虚拟网络id
+   */
+  VpcId: string
+
+  /**
+      * 子网id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SubnetId: string
+
+  /**
+   * 地域id
+   */
+  Region: string
+
+  /**
+   * 地区id
+   */
+  Zone: string
+
+  /**
+   * 状态
+   */
+  Status: string
+
+  /**
+   * 实例详细信息
+   */
+  ReadOnlyDBInstanceList: Array<DBInstance>
+
+  /**
+   * 自动负载均衡开关
+   */
+  Rebalance: number
+
+  /**
+   * 网络信息
+   */
+  DBInstanceNetInfo: Array<DBInstanceNetInfo>
+
+  /**
+      * 只读组网络信息列表（此字段已废弃）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NetworkAccessList: Array<NetworkAccess>
 }
 
 /**
@@ -1793,6 +1981,21 @@ export interface ResetAccountPasswordResponse {
 }
 
 /**
+ * RemoveDBInstanceFromReadOnlyGroup返回参数结构体
+ */
+export interface RemoveDBInstanceFromReadOnlyGroupResponse {
+  /**
+   * 流程ID
+   */
+  FlowId: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyDBInstancesProject返回参数结构体
  */
 export interface ModifyDBInstancesProjectResponse {
@@ -1808,105 +2011,23 @@ export interface ModifyDBInstancesProjectResponse {
 }
 
 /**
- * 只读组信息
+ * DescribeParameterTemplates返回参数结构体
  */
-export interface ReadOnlyGroup {
+export interface DescribeParameterTemplatesResponse {
   /**
-      * 只读组标识
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ReadOnlyGroupId: string
-
-  /**
-      * 只读组名字
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ReadOnlyGroupName: string
-
-  /**
-      * 项目id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ProjectId: number
-
-  /**
-      * 主实例id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  MasterDBInstanceId: string
-
-  /**
-      * 最小保留实例数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  MinDelayEliminateReserve: number
-
-  /**
-   * 延迟空间大小阈值
+   * 符合查询条件的参数模板总数
    */
-  MaxReplayLatency: number
+  TotalCount: number
 
   /**
-   * 延迟大小开关
+   * 参数模板列表
    */
-  ReplayLatencyEliminate: number
+  ParameterTemplateSet: Array<ParameterTemplate>
 
   /**
-   * 延迟时间大小阈值
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  MaxReplayLag: number
-
-  /**
-   * 延迟时间开关
-   */
-  ReplayLagEliminate: number
-
-  /**
-   * 虚拟网络id
-   */
-  VpcId: string
-
-  /**
-      * 子网id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  SubnetId: string
-
-  /**
-   * 地域id
-   */
-  Region: string
-
-  /**
-   * 地区id
-   */
-  Zone: string
-
-  /**
-   * 状态
-   */
-  Status: string
-
-  /**
-   * 实例详细信息
-   */
-  ReadOnlyDBInstanceList: Array<DBInstance>
-
-  /**
-   * 自动负载均衡开关
-   */
-  Rebalance: number
-
-  /**
-   * 网络信息
-   */
-  DBInstanceNetInfo: Array<DBInstanceNetInfo>
-
-  /**
-      * 只读组网络信息列表（此字段已废弃）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  NetworkAccessList: Array<NetworkAccess>
+  RequestId?: string
 }
 
 /**
@@ -2048,13 +2169,69 @@ export interface DescribeDBErrlogsRequest {
 }
 
 /**
- * DestroyDBInstance请求参数结构体
+ * 数据库备份信息
  */
-export interface DestroyDBInstanceRequest {
+export interface DBBackup {
   /**
-   * 待下线实例ID
+   * 备份文件唯一标识
    */
-  DBInstanceId: string
+  Id: number
+
+  /**
+   * 文件生成的开始时间
+   */
+  StartTime: string
+
+  /**
+   * 文件生成的结束时间
+   */
+  EndTime: string
+
+  /**
+   * 文件大小(K)
+   */
+  Size: number
+
+  /**
+   * 策略（0-实例备份；1-多库备份）
+   */
+  Strategy: number
+
+  /**
+   * 类型（0-定时）
+   */
+  Way: number
+
+  /**
+   * 备份方式（1-完整）
+   */
+  Type: number
+
+  /**
+   * 状态（1-创建中；2-成功；3-失败）
+   */
+  Status: number
+
+  /**
+   * DB列表
+   */
+  DbList: Array<string>
+
+  /**
+   * 内网下载地址
+   */
+  InternalAddr: string
+
+  /**
+   * 外网下载地址
+   */
+  ExternalAddr: string
+
+  /**
+      * 备份集ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SetId: string
 }
 
 /**
@@ -2088,6 +2265,16 @@ export interface ModifyDBInstanceDeploymentResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DeleteParameterTemplate请求参数结构体
+ */
+export interface DeleteParameterTemplateRequest {
+  /**
+   * 参数模板ID，用于唯一确认待操作的参数模板
+   */
+  TemplateId: string
 }
 
 /**
@@ -2569,6 +2756,26 @@ export interface DescribeParamsEventResponse {
 }
 
 /**
+ * ModifyDBInstanceSecurityGroups请求参数结构体
+ */
+export interface ModifyDBInstanceSecurityGroupsRequest {
+  /**
+   * 实例或只读组要绑定的安全组列表
+   */
+  SecurityGroupIdSet: Array<string>
+
+  /**
+   * 实例ID，DBInstanceId和ReadOnlyGroupId至少传一个；如果都传，忽略ReadOnlyGroupId
+   */
+  DBInstanceId?: string
+
+  /**
+   * 只读组ID，DBInstanceId和ReadOnlyGroupId至少传一个；如果要修改只读组关联的安全组，只传ReadOnlyGroupId
+   */
+  ReadOnlyGroupId?: string
+}
+
+/**
  * CloseServerlessDBExtranetAccess返回参数结构体
  */
 export interface CloseServerlessDBExtranetAccessResponse {
@@ -2609,6 +2816,36 @@ export interface RestartDBInstanceRequest {
    * 实例ID，形如postgres-6r233v55
    */
   DBInstanceId: string
+}
+
+/**
+ * DescribeDBInstanceSecurityGroups返回参数结构体
+ */
+export interface DescribeDBInstanceSecurityGroupsResponse {
+  /**
+   * 安全组信息数组
+   */
+  SecurityGroupSet: Array<SecurityGroup>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateParameterTemplate返回参数结构体
+ */
+export interface CreateParameterTemplateResponse {
+  /**
+   * 参数模板ID，用于唯一确认参数模板
+   */
+  TemplateId: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2758,6 +2995,46 @@ export interface Detail {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   AnalysisItems: Array<AnalysisItems>
+}
+
+/**
+ * 安全组信息
+ */
+export interface SecurityGroup {
+  /**
+   * 项目Id
+   */
+  ProjectId: number
+
+  /**
+   * 创建时间
+   */
+  CreateTime: string
+
+  /**
+   * 入站规则
+   */
+  Inbound: Array<PolicyRule>
+
+  /**
+   * 出站规则
+   */
+  Outbound: Array<PolicyRule>
+
+  /**
+   * 安全组ID
+   */
+  SecurityGroupId: string
+
+  /**
+   * 安全组名称
+   */
+  SecurityGroupName: string
+
+  /**
+   * 安全组备注
+   */
+  SecurityGroupDescription: string
 }
 
 /**
@@ -3000,6 +3277,36 @@ export interface IsolateDBInstancesRequest {
    * 实例ID集合。注意：当前已不支持同时隔离多个实例，这里只能传入单个实例ID。
    */
   DBInstanceIdSet: Array<string>
+}
+
+/**
+ * DescribeParameterTemplates请求参数结构体
+ */
+export interface DescribeParameterTemplatesRequest {
+  /**
+   * 过滤条件，目前支持的过滤条件有：TemplateName, TemplateId，DBMajorVersion，DBEngine
+   */
+  Filters?: Array<Filter>
+
+  /**
+   * 每页显示数量，[0，100]，默认 20
+   */
+  Limit?: number
+
+  /**
+   * 数据偏移量
+   */
+  Offset?: number
+
+  /**
+   * 排序指标，枚举值，支持：CreateTime，TemplateName，DBMajorVersion
+   */
+  OrderBy?: string
+
+  /**
+   * 排序方式，枚举值，支持：asc（升序） ，desc（降序）
+   */
+  OrderByType?: string
 }
 
 /**
@@ -3267,14 +3574,9 @@ export interface DBInstance {
 }
 
 /**
- * DescribeProductConfig返回参数结构体
+ * DeleteParameterTemplate返回参数结构体
  */
-export interface DescribeProductConfigResponse {
-  /**
-   * 售卖规格列表。
-   */
-  SpecInfoList: Array<SpecInfo>
-
+export interface DeleteParameterTemplateResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3399,18 +3701,13 @@ export interface SlowlogDetail {
 }
 
 /**
- * RemoveDBInstanceFromReadOnlyGroup请求参数结构体
+ * ModifyDBInstanceSecurityGroups返回参数结构体
  */
-export interface RemoveDBInstanceFromReadOnlyGroupRequest {
+export interface ModifyDBInstanceSecurityGroupsResponse {
   /**
-   * 实例ID
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  DBInstanceId: string
-
-  /**
-   * 只读组ID
-   */
-  ReadOnlyGroupId: string
+  RequestId?: string
 }
 
 /**
@@ -3631,6 +3928,21 @@ export interface DescribeDatabasesResponse {
 }
 
 /**
+ * DescribeProductConfig返回参数结构体
+ */
+export interface DescribeProductConfigResponse {
+  /**
+   * 售卖规格列表。
+   */
+  SpecInfoList: Array<SpecInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeOrders请求参数结构体
  */
 export interface DescribeOrdersRequest {
@@ -3638,26 +3950,6 @@ export interface DescribeOrdersRequest {
    * 订单名集合
    */
   DealNames: Array<string>
-}
-
-/**
- * ModifyAccountRemark请求参数结构体
- */
-export interface ModifyAccountRemarkRequest {
-  /**
-   * 实例ID，形如postgres-4wdeb0zv
-   */
-  DBInstanceId: string
-
-  /**
-   * 实例用户名
-   */
-  UserName: string
-
-  /**
-   * 用户UserName对应的新备注
-   */
-  Remark: string
 }
 
 /**
@@ -3673,6 +3965,16 @@ export interface CloseDBExtranetAccessRequest {
    * 是否关闭Ipv6外网，1：是，0：否
    */
   IsIpv6?: number
+}
+
+/**
+ * ModifyParameterTemplate返回参数结构体
+ */
+export interface ModifyParameterTemplateResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3693,6 +3995,16 @@ export interface ModifyBackupPlanResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DestroyDBInstance请求参数结构体
+ */
+export interface DestroyDBInstanceRequest {
+  /**
+   * 待下线实例ID
+   */
+  DBInstanceId: string
 }
 
 /**
@@ -3853,69 +4165,33 @@ export interface AccountInfo {
 }
 
 /**
- * 数据库备份信息
+ * ModifyAccountRemark请求参数结构体
  */
-export interface DBBackup {
+export interface ModifyAccountRemarkRequest {
   /**
-   * 备份文件唯一标识
+   * 实例ID，形如postgres-4wdeb0zv
    */
-  Id: number
+  DBInstanceId: string
 
   /**
-   * 文件生成的开始时间
+   * 实例用户名
    */
-  StartTime: string
+  UserName: string
 
   /**
-   * 文件生成的结束时间
+   * 用户UserName对应的新备注
    */
-  EndTime: string
+  Remark: string
+}
 
+/**
+ * DescribeParameterTemplateAttributes请求参数结构体
+ */
+export interface DescribeParameterTemplateAttributesRequest {
   /**
-   * 文件大小(K)
+   * 参数模板ID
    */
-  Size: number
-
-  /**
-   * 策略（0-实例备份；1-多库备份）
-   */
-  Strategy: number
-
-  /**
-   * 类型（0-定时）
-   */
-  Way: number
-
-  /**
-   * 备份方式（1-完整）
-   */
-  Type: number
-
-  /**
-   * 状态（1-创建中；2-成功；3-失败）
-   */
-  Status: number
-
-  /**
-   * DB列表
-   */
-  DbList: Array<string>
-
-  /**
-   * 内网下载地址
-   */
-  InternalAddr: string
-
-  /**
-   * 外网下载地址
-   */
-  ExternalAddr: string
-
-  /**
-      * 备份集ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  SetId: string
+  TemplateId: string
 }
 
 /**
@@ -4006,6 +4282,31 @@ export interface InquiryPriceUpgradeDBInstanceResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreateParameterTemplate请求参数结构体
+ */
+export interface CreateParameterTemplateRequest {
+  /**
+   * 模板名称，长度为1～60个字符，仅支持数字,英文大小写字母、中文以及特殊字符_-./()（）[]+=：:@
+   */
+  TemplateName: string
+
+  /**
+   * 数据库大版本号，例如：11，12，13
+   */
+  DBMajorVersion: string
+
+  /**
+   * 数据库引擎，例如：postgresql，mssql_compatible
+   */
+  DBEngine: string
+
+  /**
+   * 参数模板描述，长度为0～60个字符，仅支持数字,英文大小写字母、中文以及特殊字符_-./()（）[]+=：:@
+   */
+  TemplateDescription?: string
 }
 
 /**
@@ -4120,6 +4421,31 @@ export interface RegionInfo {
 }
 
 /**
+ * DisIsolateDBInstances请求参数结构体
+ */
+export interface DisIsolateDBInstancesRequest {
+  /**
+   * 资源ID列表。注意：当前已不支持同时解隔离多个实例，这里只能传入单个实例ID。
+   */
+  DBInstanceIdSet: Array<string>
+
+  /**
+   * 包年包月实例解隔离时购买时常 以月为单位
+   */
+  Period?: number
+
+  /**
+   * 是否使用代金券：true-使用,false-不使用，默认不使用
+   */
+  AutoVoucher?: boolean
+
+  /**
+   * 代金券id列表
+   */
+  VoucherIds?: Array<string>
+}
+
+/**
  * RestartDBInstance返回参数结构体
  */
 export interface RestartDBInstanceResponse {
@@ -4155,18 +4481,18 @@ export interface DescribeDBInstancesResponse {
 }
 
 /**
- * RemoveDBInstanceFromReadOnlyGroup返回参数结构体
+ * DescribeDBInstanceSecurityGroups请求参数结构体
  */
-export interface RemoveDBInstanceFromReadOnlyGroupResponse {
+export interface DescribeDBInstanceSecurityGroupsRequest {
   /**
-   * 流程ID
+   * 实例ID，DBInstanceId和ReadOnlyGroupId至少传一个；如果都传，忽略ReadOnlyGroupId
    */
-  FlowId: number
+  DBInstanceId?: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 只读组ID，DBInstanceId和ReadOnlyGroupId至少传一个；如果要查询只读组关联的安全组，只传ReadOnlyGroupId
    */
-  RequestId?: string
+  ReadOnlyGroupId?: string
 }
 
 /**
@@ -4320,6 +4646,58 @@ export interface DescribeAccountsResponse {
 }
 
 /**
+ * DescribeParameterTemplateAttributes返回参数结构体
+ */
+export interface DescribeParameterTemplateAttributesResponse {
+  /**
+      * 参数模板ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TemplateId: string
+
+  /**
+      * 参数模板包含的参数个数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TotalCount: number
+
+  /**
+      * 参数模板包含的参数信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ParamInfoSet: Array<ParamInfo>
+
+  /**
+      * 参数模板名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TemplateName: string
+
+  /**
+      * 参数模板适用的数据库版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DBMajorVersion: string
+
+  /**
+      * 参数模板适用的数据库引擎
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DBEngine: string
+
+  /**
+      * 参数模板描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TemplateDescription: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * UpgradeDBInstance返回参数结构体
  */
 export interface UpgradeDBInstanceResponse {
@@ -4422,6 +4800,36 @@ export interface DescribeDBInstanceAttributeResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 安全组规则信息
+ */
+export interface PolicyRule {
+  /**
+   * 策略，ACCEPT 或者 DROP
+   */
+  Action: string
+
+  /**
+   * 来源或目的 IP 或 IP 段，例如172.16.0.0/12
+   */
+  CidrIp: string
+
+  /**
+   * 端口
+   */
+  PortRange: string
+
+  /**
+   * 网络协议，支持 UDP、TCP 等
+   */
+  IpProtocol: string
+
+  /**
+   * 规则描述
+   */
+  Description: string
 }
 
 /**

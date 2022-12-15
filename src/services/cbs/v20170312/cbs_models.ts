@@ -16,32 +16,9 @@
  */
 
 /**
- * 快照操作日志。
+ * 快照操作日志，已废弃。
  */
 export interface SnapshotOperationLog {
-  /**
-      * 操作者的UIN。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Operator: string
-
-  /**
-      * 操作类型。取值范围：
-SNAP_OPERATION_DELETE：删除快照
-SNAP_OPERATION_ROLLBACK：回滚快照
-SNAP_OPERATION_MODIFY：修改快照属性
-SNAP_OPERATION_CREATE：创建快照
-SNAP_OPERATION_COPY：跨地域复制快照
-ASP_OPERATION_CREATE_SNAP：由定期快照策略创建快照
-ASP_OPERATION_DELETE_SNAP：由定期快照策略删除快照
-      */
-  Operation: string
-
-  /**
-   * 操作的快照ID。
-   */
-  SnapshotId: string
-
   /**
       * 操作的状态。取值范围：
 SUCCESS :表示操作成功 
@@ -54,6 +31,29 @@ PROCESSING :表示操作中。
    * 开始时间。
    */
   StartTime: string
+
+  /**
+      * 操作者的UIN。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Operator: string
+
+  /**
+   * 操作的快照ID。
+   */
+  SnapshotId: string
+
+  /**
+      * 操作类型。取值范围：
+SNAP_OPERATION_DELETE：删除快照
+SNAP_OPERATION_ROLLBACK：回滚快照
+SNAP_OPERATION_MODIFY：修改快照属性
+SNAP_OPERATION_CREATE：创建快照
+SNAP_OPERATION_COPY：跨地域复制快照
+ASP_OPERATION_CREATE_SNAP：由定期快照策略创建快照
+ASP_OPERATION_DELETE_SNAP：由定期快照策略删除快照
+      */
+  Operation: string
 
   /**
    * 结束时间。
@@ -207,14 +207,14 @@ export interface DescribeSnapshotOperationLogsRequest {
   Filters: Array<Filter>
 
   /**
-   * 要查询的操作日志的起始时间，例如：“2019-11-22 00:00:00"
-   */
-  BeginTime?: string
-
-  /**
    * 要查询的操作日志的截止时间，例如：“2019-11-22 23:59:59"
    */
   EndTime?: string
+
+  /**
+   * 要查询的操作日志的起始时间，例如：“2019-11-22 00:00:00"
+   */
+  BeginTime?: string
 }
 
 /**
@@ -1109,7 +1109,7 @@ export interface DescribeSnapshotOperationLogsResponse {
   /**
    * 快照操作日志列表。
    */
-  SnapshotOperationLogSet?: Array<SnapshotOperationLog>
+  SnapshotOperationLogSet: Array<SnapshotOperationLog>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

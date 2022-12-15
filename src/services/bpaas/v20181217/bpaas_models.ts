@@ -52,7 +52,7 @@ export interface StatusNode {
   ScfName: string
 
   /**
-      * 状态（0：待审批，1：审批通过，2：拒绝，3：scf执行失败，4：scf执行成功）
+      * 状态（0：待审批，1：审批通过，2：拒绝，3：scf执行失败，4：scf执行成功）18: 外部审批中
 注意：此字段可能返回 null，表示取不到有效值。
       */
   SubStatus: number
@@ -110,6 +110,30 @@ export interface StatusNode {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   CallMethod: number
+
+  /**
+      * CKafka - 接入资源ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DataHubId: string
+
+  /**
+      * CKafka - 任务名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TaskName: string
+
+  /**
+      * CKafka - 地域
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CKafkaRegion: string
+
+  /**
+      * 外部审批Url
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ExternalUrl: string
 }
 
 /**

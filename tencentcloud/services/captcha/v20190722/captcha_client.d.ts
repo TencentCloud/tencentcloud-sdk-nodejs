@@ -8,7 +8,7 @@ import { DescribeCaptchaOperDataResponse, DescribeCaptchaMiniOperDataResponse, G
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
     /**
-     * 核查验证码小程序插件票据接入风控结果(Beta)
+     * 核查验证码小程序插件票据接入风控结果(已停用)
      */
     DescribeCaptchaMiniRiskResult(req: DescribeCaptchaMiniRiskResultRequest, cb?: (error: string, rep: DescribeCaptchaMiniRiskResultResponse) => void): Promise<DescribeCaptchaMiniRiskResultResponse>;
     /**

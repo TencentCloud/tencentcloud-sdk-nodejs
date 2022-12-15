@@ -340,7 +340,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口查询指定可用区和实例类型下 Redis 的售卖规格， 如果用户不在购买白名单中，将不能查询该可用区或该类型的售卖规格详情。申请购买某地域白名单可以提交工单
+   * 本接口（DescribeProductInfo）用于查询全地域 Redis 的售卖规格。
    */
   async DescribeProductInfo(
     req?: DescribeProductInfoRequest,

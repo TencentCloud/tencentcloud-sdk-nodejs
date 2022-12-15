@@ -713,6 +713,11 @@ export interface DedicatedClusterOrder {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     TimeSpan: number;
+    /**
+      * 订单类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OrderType: string;
 }
 /**
  * ModifyDedicatedClusterInfo请求参数结构体

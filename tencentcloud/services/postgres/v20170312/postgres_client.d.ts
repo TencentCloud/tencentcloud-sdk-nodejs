@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CreateDBInstancesRequest, SetAutoRenewFlagRequest, DescribeDatabasesRequest, DescribeDBXlogsRequest, CreateReadOnlyGroupNetworkAccessRequest, DescribeAccountsRequest, DeleteReadOnlyGroupResponse, CreateInstancesRequest, CreateDBInstanceNetworkAccessResponse, DescribeAvailableRecoveryTimeResponse, ModifyDBInstanceReadOnlyGroupResponse, CloneDBInstanceRequest, DescribeCloneDBInstanceSpecRequest, OpenServerlessDBExtranetAccessRequest, RenewInstanceResponse, DeleteServerlessDBInstanceResponse, ModifyReadOnlyGroupConfigRequest, AddDBInstanceToReadOnlyGroupRequest, DescribeProductConfigRequest, InitDBInstancesResponse, RenewInstanceRequest, RebalanceReadOnlyGroupRequest, DescribeRegionsResponse, ModifyDBInstanceDeploymentRequest, DeleteReadOnlyGroupNetworkAccessRequest, InquiryPriceCreateDBInstancesRequest, DescribeDBInstanceAttributeRequest, CloseServerlessDBExtranetAccessRequest, CloneDBInstanceResponse, ModifyDBInstanceReadOnlyGroupRequest, AddDBInstanceToReadOnlyGroupResponse, CreateReadOnlyDBInstanceResponse, DescribeAvailableRecoveryTimeRequest, DescribeDBInstanceParametersRequest, DescribeOrdersResponse, OpenServerlessDBExtranetAccessResponse, InquiryPriceCreateDBInstancesResponse, CreateDBInstanceNetworkAccessRequest, ModifySwitchTimePeriodResponse, DisIsolateDBInstancesRequest, DescribeBackupPlansResponse, DescribeDBInstancesRequest, ModifyDBInstanceSpecRequest, ModifyAccountRemarkResponse, UpgradeDBInstanceRequest, DescribeZonesRequest, DescribeReadOnlyGroupsResponse, SetAutoRenewFlagResponse, ResetAccountPasswordResponse, ModifyDBInstancesProjectResponse, DeleteReadOnlyGroupNetworkAccessResponse, DescribeDBErrlogsRequest, DestroyDBInstanceRequest, ModifyDBInstanceDeploymentResponse, DescribeParamsEventRequest, CreateInstancesResponse, DescribeServerlessDBInstancesRequest, DescribeDBBackupsResponse, DescribeRegionsRequest, DescribeSlowQueryListResponse, CreateReadOnlyGroupRequest, CreateReadOnlyGroupNetworkAccessResponse, DescribeParamsEventResponse, CloseServerlessDBExtranetAccessResponse, RestartDBInstanceRequest, IsolateDBInstancesResponse, OpenDBExtranetAccessResponse, InquiryPriceUpgradeDBInstanceRequest, RebalanceReadOnlyGroupResponse, ModifyDBInstanceNameRequest, InquiryPriceRenewDBInstanceResponse, DescribeSlowQueryAnalysisRequest, DescribeServerlessDBInstancesResponse, IsolateDBInstancesRequest, InitDBInstancesRequest, DeleteDBInstanceNetworkAccessRequest, DescribeProductConfigResponse, DeleteReadOnlyGroupRequest, DescribeDBBackupsRequest, DisIsolateDBInstancesResponse, ModifyDBInstanceParametersResponse, OpenDBExtranetAccessRequest, RemoveDBInstanceFromReadOnlyGroupRequest, ModifyDBInstanceNameResponse, CloseDBExtranetAccessResponse, CreateReadOnlyDBInstanceRequest, DescribeCloneDBInstanceSpecResponse, DescribeZonesResponse, CreateServerlessDBInstanceResponse, DescribeDatabasesResponse, DescribeOrdersRequest, ModifyAccountRemarkRequest, CloseDBExtranetAccessRequest, DescribeEncryptionKeysRequest, ModifyBackupPlanResponse, CreateServerlessDBInstanceRequest, InquiryPriceRenewDBInstanceRequest, CreateReadOnlyGroupResponse, DeleteDBInstanceNetworkAccessResponse, DeleteServerlessDBInstanceRequest, ModifyReadOnlyGroupConfigResponse, DescribeDBErrlogsResponse, ModifyBackupPlanRequest, InquiryPriceUpgradeDBInstanceResponse, ModifySwitchTimePeriodRequest, DescribeSlowQueryListRequest, DescribeDBInstanceParametersResponse, RestartDBInstanceResponse, DescribeDBInstancesResponse, RemoveDBInstanceFromReadOnlyGroupResponse, DescribeBackupPlansRequest, ResetAccountPasswordRequest, DescribeSlowQueryAnalysisResponse, ModifyDBInstanceParametersRequest, DescribeReadOnlyGroupsRequest, DescribeAccountsResponse, UpgradeDBInstanceResponse, ModifyDBInstancesProjectRequest, DescribeDBSlowlogsRequest, DestroyDBInstanceResponse, DescribeDBInstanceAttributeResponse, ModifyDBInstanceSpecResponse, DescribeDBXlogsResponse, DescribeEncryptionKeysResponse, DescribeDBSlowlogsResponse, CreateDBInstancesResponse } from "./postgres_models";
+import { CreateDBInstancesRequest, SetAutoRenewFlagRequest, DescribeDatabasesRequest, DescribeDBXlogsRequest, CreateReadOnlyGroupNetworkAccessRequest, DescribeAccountsRequest, DeleteReadOnlyGroupResponse, CreateInstancesRequest, CreateDBInstanceNetworkAccessResponse, DescribeAvailableRecoveryTimeResponse, ModifyDBInstanceReadOnlyGroupResponse, CloneDBInstanceRequest, DescribeCloneDBInstanceSpecRequest, OpenServerlessDBExtranetAccessRequest, RenewInstanceResponse, DeleteServerlessDBInstanceResponse, ModifyReadOnlyGroupConfigRequest, AddDBInstanceToReadOnlyGroupRequest, DescribeProductConfigRequest, RemoveDBInstanceFromReadOnlyGroupRequest, InitDBInstancesResponse, DescribeDefaultParametersRequest, RenewInstanceRequest, RebalanceReadOnlyGroupRequest, DescribeRegionsResponse, ModifyDBInstanceDeploymentRequest, DeleteReadOnlyGroupNetworkAccessRequest, InquiryPriceCreateDBInstancesRequest, DescribeDBInstanceAttributeRequest, CloseServerlessDBExtranetAccessRequest, CloneDBInstanceResponse, ModifyDBInstanceReadOnlyGroupRequest, AddDBInstanceToReadOnlyGroupResponse, CreateReadOnlyDBInstanceResponse, DescribeAvailableRecoveryTimeRequest, DescribeDBInstanceParametersRequest, DescribeOrdersResponse, OpenServerlessDBExtranetAccessResponse, ModifyParameterTemplateRequest, InquiryPriceCreateDBInstancesResponse, CreateDBInstanceNetworkAccessRequest, ModifySwitchTimePeriodResponse, DescribeDefaultParametersResponse, DescribeBackupPlansResponse, DescribeDBInstancesRequest, ModifyDBInstanceSpecRequest, ModifyAccountRemarkResponse, UpgradeDBInstanceRequest, DescribeZonesRequest, DescribeReadOnlyGroupsResponse, SetAutoRenewFlagResponse, ResetAccountPasswordResponse, RemoveDBInstanceFromReadOnlyGroupResponse, ModifyDBInstancesProjectResponse, DescribeParameterTemplatesResponse, DeleteReadOnlyGroupNetworkAccessResponse, DescribeDBErrlogsRequest, ModifyDBInstanceDeploymentResponse, DeleteParameterTemplateRequest, DescribeParamsEventRequest, CreateInstancesResponse, DescribeServerlessDBInstancesRequest, DescribeDBBackupsResponse, DescribeRegionsRequest, DescribeSlowQueryListResponse, CreateReadOnlyGroupRequest, CreateReadOnlyGroupNetworkAccessResponse, DescribeParamsEventResponse, ModifyDBInstanceSecurityGroupsRequest, CloseServerlessDBExtranetAccessResponse, RestartDBInstanceRequest, DescribeDBInstanceSecurityGroupsResponse, CreateParameterTemplateResponse, IsolateDBInstancesResponse, OpenDBExtranetAccessResponse, InquiryPriceUpgradeDBInstanceRequest, RebalanceReadOnlyGroupResponse, ModifyDBInstanceNameRequest, InquiryPriceRenewDBInstanceResponse, DescribeSlowQueryAnalysisRequest, DescribeServerlessDBInstancesResponse, IsolateDBInstancesRequest, DescribeParameterTemplatesRequest, InitDBInstancesRequest, DeleteDBInstanceNetworkAccessRequest, DeleteParameterTemplateResponse, DeleteReadOnlyGroupRequest, DescribeDBBackupsRequest, DisIsolateDBInstancesResponse, ModifyDBInstanceParametersResponse, OpenDBExtranetAccessRequest, ModifyDBInstanceSecurityGroupsResponse, ModifyDBInstanceNameResponse, CloseDBExtranetAccessResponse, CreateReadOnlyDBInstanceRequest, DescribeCloneDBInstanceSpecResponse, DescribeZonesResponse, CreateServerlessDBInstanceResponse, DescribeDatabasesResponse, DescribeProductConfigResponse, DescribeOrdersRequest, CloseDBExtranetAccessRequest, ModifyParameterTemplateResponse, DescribeEncryptionKeysRequest, ModifyBackupPlanResponse, DestroyDBInstanceRequest, CreateServerlessDBInstanceRequest, InquiryPriceRenewDBInstanceRequest, CreateReadOnlyGroupResponse, DeleteDBInstanceNetworkAccessResponse, DeleteServerlessDBInstanceRequest, ModifyReadOnlyGroupConfigResponse, ModifyAccountRemarkRequest, DescribeParameterTemplateAttributesRequest, DescribeDBErrlogsResponse, ModifyBackupPlanRequest, InquiryPriceUpgradeDBInstanceResponse, CreateParameterTemplateRequest, ModifySwitchTimePeriodRequest, DescribeSlowQueryListRequest, DescribeDBInstanceParametersResponse, DisIsolateDBInstancesRequest, RestartDBInstanceResponse, DescribeDBInstancesResponse, DescribeDBInstanceSecurityGroupsRequest, DescribeBackupPlansRequest, ResetAccountPasswordRequest, DescribeSlowQueryAnalysisResponse, ModifyDBInstanceParametersRequest, DescribeReadOnlyGroupsRequest, DescribeAccountsResponse, DescribeParameterTemplateAttributesResponse, UpgradeDBInstanceResponse, ModifyDBInstancesProjectRequest, DescribeDBSlowlogsRequest, DestroyDBInstanceResponse, DescribeDBInstanceAttributeResponse, ModifyDBInstanceSpecResponse, DescribeDBXlogsResponse, DescribeEncryptionKeysResponse, DescribeDBSlowlogsResponse, CreateDBInstancesResponse } from "./postgres_models";
 /**
  * postgres client
  * @class
@@ -32,6 +32,10 @@ export declare class Client extends AbstractClient {
      */
     DeleteReadOnlyGroupNetworkAccess(req: DeleteReadOnlyGroupNetworkAccessRequest, cb?: (error: string, rep: DeleteReadOnlyGroupNetworkAccessResponse) => void): Promise<DeleteReadOnlyGroupNetworkAccessResponse>;
     /**
+     * 本接口（DescribeDefaultParameters）主要用于查询某个数据库版本和引擎支持的所有参数。
+     */
+    DescribeDefaultParameters(req: DescribeDefaultParametersRequest, cb?: (error: string, rep: DescribeDefaultParametersResponse) => void): Promise<DescribeDefaultParametersResponse>;
+    /**
      * 本接口（UpgradeDBInstance）用于升级实例配置。
      */
     UpgradeDBInstance(req: UpgradeDBInstanceRequest, cb?: (error: string, rep: UpgradeDBInstanceResponse) => void): Promise<UpgradeDBInstanceResponse>;
@@ -43,6 +47,10 @@ export declare class Client extends AbstractClient {
      * 本接口 (DestroyDBInstance) 用于彻底销毁指定DBInstanceId对应的实例，销毁后实例数据将彻底删除，无法找回，只能销毁隔离中的实例。
      */
     DestroyDBInstance(req: DestroyDBInstanceRequest, cb?: (error: string, rep: DestroyDBInstanceResponse) => void): Promise<DestroyDBInstanceResponse>;
+    /**
+     * 本接口（SetAutoRenewFlag）用于设置自动续费。
+     */
+    SetAutoRenewFlag(req: SetAutoRenewFlagRequest, cb?: (error: string, rep: SetAutoRenewFlagResponse) => void): Promise<SetAutoRenewFlagResponse>;
     /**
      * 本接口 (DescribeBackupPlans) 用于实例所有的备份计划查询
      */
@@ -64,9 +72,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeDBErrlogs(req: DescribeDBErrlogsRequest, cb?: (error: string, rep: DescribeDBErrlogsResponse) => void): Promise<DescribeDBErrlogsResponse>;
     /**
-     * 此接口（DescribeSlowQueryAnalysis）用于统计指定时间范围内的所有慢查询，根据SQL语句抽象参数后，进行聚合分析，并返回同类SQL列表。
+     * 本接口(DescribeReadOnlyGroups)用于查询用户输入指定实例的只读组
      */
-    DescribeSlowQueryAnalysis(req: DescribeSlowQueryAnalysisRequest, cb?: (error: string, rep: DescribeSlowQueryAnalysisResponse) => void): Promise<DescribeSlowQueryAnalysisResponse>;
+    DescribeReadOnlyGroups(req: DescribeReadOnlyGroupsRequest, cb?: (error: string, rep: DescribeReadOnlyGroupsResponse) => void): Promise<DescribeReadOnlyGroupsResponse>;
     /**
      * 当升级完成后，对处于等待切换状态下的实例，强制实例立即切换。
      */
@@ -76,13 +84,25 @@ export declare class Client extends AbstractClient {
      */
     InquiryPriceCreateDBInstances(req: InquiryPriceCreateDBInstancesRequest, cb?: (error: string, rep: InquiryPriceCreateDBInstancesResponse) => void): Promise<InquiryPriceCreateDBInstancesResponse>;
     /**
+     * 本接口（DescribeDBInstanceSecurityGroups）用于查询实例安全组信息。
+     */
+    DescribeDBInstanceSecurityGroups(req: DescribeDBInstanceSecurityGroupsRequest, cb?: (error: string, rep: DescribeDBInstanceSecurityGroupsResponse) => void): Promise<DescribeDBInstanceSecurityGroupsResponse>;
+    /**
      * 本接口（OpenDBExtranetAccess）用于开通外网。
      */
     OpenDBExtranetAccess(req: OpenDBExtranetAccessRequest, cb?: (error: string, rep: OpenDBExtranetAccessResponse) => void): Promise<OpenDBExtranetAccessResponse>;
     /**
+     * 本接口（DescribeParameterTemplateAttributes）用于查询某个参数模板的具体内容，包括基本信息和参数信息。
+     */
+    DescribeParameterTemplateAttributes(req: DescribeParameterTemplateAttributesRequest, cb?: (error: string, rep: DescribeParameterTemplateAttributesResponse) => void): Promise<DescribeParameterTemplateAttributesResponse>;
+    /**
      * 可对实例进行网络的删除操作。
      */
     DeleteDBInstanceNetworkAccess(req: DeleteDBInstanceNetworkAccessRequest, cb?: (error: string, rep: DeleteDBInstanceNetworkAccessResponse) => void): Promise<DeleteDBInstanceNetworkAccessResponse>;
+    /**
+     * 本接口（RestartDBInstance）用于重启实例。
+     */
+    RestartDBInstance(req: RestartDBInstanceRequest, cb?: (error: string, rep: RestartDBInstanceResponse) => void): Promise<RestartDBInstanceResponse>;
     /**
      * 本接口 (ModifyBackupPlan) 用于实例备份计划的修改，默认是在每天的凌晨开始全量备份，备份保留时长是7天。可以根据此接口指定时间进行实例的备份。
      */
@@ -104,9 +124,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeDBXlogs(req: DescribeDBXlogsRequest, cb?: (error: string, rep: DescribeDBXlogsResponse) => void): Promise<DescribeDBXlogsResponse>;
     /**
-     * 本接口（SetAutoRenewFlag）用于设置自动续费。
+     * 开通serverlessDB实例外网
      */
-    SetAutoRenewFlag(req: SetAutoRenewFlagRequest, cb?: (error: string, rep: SetAutoRenewFlagResponse) => void): Promise<SetAutoRenewFlagResponse>;
+    OpenServerlessDBExtranetAccess(req: OpenServerlessDBExtranetAccessRequest, cb?: (error: string, rep: OpenServerlessDBExtranetAccessResponse) => void): Promise<OpenServerlessDBExtranetAccessResponse>;
     /**
      * 本接口 (DescribeDBInstanceAttribute) 用于查询某个实例的详情信息。
      */
@@ -128,6 +148,10 @@ export declare class Client extends AbstractClient {
      */
     CreateDBInstances(req: CreateDBInstancesRequest, cb?: (error: string, rep: CreateDBInstancesResponse) => void): Promise<CreateDBInstancesResponse>;
     /**
+     * 本接口(RebalanceReadOnlyGroup)用于重新均衡 RO 组内实例的负载。注意，RO 组内 RO 实例会有一次数据库连接瞬断，请确保应用程序能重连数据库，谨慎操作。
+     */
+    RebalanceReadOnlyGroup(req: RebalanceReadOnlyGroupRequest, cb?: (error: string, rep: RebalanceReadOnlyGroupResponse) => void): Promise<RebalanceReadOnlyGroupResponse>;
+    /**
      * 本接口 (CreateServerlessDBInstance) 用于创建一个ServerlessDB实例，创建成功返回实例ID。
      */
     CreateServerlessDBInstance(req: CreateServerlessDBInstanceRequest, cb?: (error: string, rep: CreateServerlessDBInstanceResponse) => void): Promise<CreateServerlessDBInstanceResponse>;
@@ -140,9 +164,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeZones(req?: DescribeZonesRequest, cb?: (error: string, rep: DescribeZonesResponse) => void): Promise<DescribeZonesResponse>;
     /**
-     * 本接口（RestartDBInstance）用于重启实例。
+     * 本接口（DeleteParameterTemplate）主要用于删除某个参数模板。
      */
-    RestartDBInstance(req: RestartDBInstanceRequest, cb?: (error: string, rep: RestartDBInstanceResponse) => void): Promise<RestartDBInstanceResponse>;
+    DeleteParameterTemplate(req: DeleteParameterTemplateRequest, cb?: (error: string, rep: DeleteParameterTemplateResponse) => void): Promise<DeleteParameterTemplateResponse>;
     /**
      * 本接口（IsolateDBInstances）用于隔离实例
      */
@@ -212,13 +236,21 @@ export declare class Client extends AbstractClient {
      */
     DescribeServerlessDBInstances(req: DescribeServerlessDBInstancesRequest, cb?: (error: string, rep: DescribeServerlessDBInstancesResponse) => void): Promise<DescribeServerlessDBInstancesResponse>;
     /**
-     * 本接口(RebalanceReadOnlyGroup)用于重新均衡 RO 组内实例的负载。注意，RO 组内 RO 实例会有一次数据库连接瞬断，请确保应用程序能重连数据库，谨慎操作。
+     * 本接口（ModifyParameterTemplate）主要用于修改参数模板名称，描述，修改，添加和删除参数模板参数。
      */
-    RebalanceReadOnlyGroup(req: RebalanceReadOnlyGroupRequest, cb?: (error: string, rep: RebalanceReadOnlyGroupResponse) => void): Promise<RebalanceReadOnlyGroupResponse>;
+    ModifyParameterTemplate(req: ModifyParameterTemplateRequest, cb?: (error: string, rep: ModifyParameterTemplateResponse) => void): Promise<ModifyParameterTemplateResponse>;
     /**
      * 本接口（DescribeCloneDBInstanceSpec）用于查询克隆实例可选择的最小规格，包括SpecCode和磁盘。
      */
     DescribeCloneDBInstanceSpec(req: DescribeCloneDBInstanceSpecRequest, cb?: (error: string, rep: DescribeCloneDBInstanceSpecResponse) => void): Promise<DescribeCloneDBInstanceSpecResponse>;
+    /**
+     * 本接口 (CreateParameterTemplate) 用于创建参数模板。
+     */
+    CreateParameterTemplate(req: CreateParameterTemplateRequest, cb?: (error: string, rep: CreateParameterTemplateResponse) => void): Promise<CreateParameterTemplateResponse>;
+    /**
+     * 此接口（DescribeSlowQueryAnalysis）用于统计指定时间范围内的所有慢查询，根据SQL语句抽象参数后，进行聚合分析，并返回同类SQL列表。
+     */
+    DescribeSlowQueryAnalysis(req: DescribeSlowQueryAnalysisRequest, cb?: (error: string, rep: DescribeSlowQueryAnalysisResponse) => void): Promise<DescribeSlowQueryAnalysisResponse>;
     /**
      * 接口（DescribeDatabases）用来拉取数据库列表
      */
@@ -228,9 +260,9 @@ export declare class Client extends AbstractClient {
      */
     CreateReadOnlyDBInstance(req: CreateReadOnlyDBInstanceRequest, cb?: (error: string, rep: CreateReadOnlyDBInstanceResponse) => void): Promise<CreateReadOnlyDBInstanceResponse>;
     /**
-     * 本接口(DescribeReadOnlyGroups)用于查询用户输入指定实例的只读组
+     * 本接口 (DescribeParameterTemplates) 用于查询参数模板列表。
      */
-    DescribeReadOnlyGroups(req: DescribeReadOnlyGroupsRequest, cb?: (error: string, rep: DescribeReadOnlyGroupsResponse) => void): Promise<DescribeReadOnlyGroupsResponse>;
+    DescribeParameterTemplates(req: DescribeParameterTemplatesRequest, cb?: (error: string, rep: DescribeParameterTemplatesResponse) => void): Promise<DescribeParameterTemplatesResponse>;
     /**
      * 本接口(ModifyReadOnlyGroupConfig)用于更新只读组配置信息
      */
@@ -256,7 +288,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeDBSlowlogs(req: DescribeDBSlowlogsRequest, cb?: (error: string, rep: DescribeDBSlowlogsResponse) => void): Promise<DescribeDBSlowlogsResponse>;
     /**
-     * 开通serverlessDB实例外网
+     * 本接口（ModifyDBInstanceSecurityGroups）用于修改实例安全组。
      */
-    OpenServerlessDBExtranetAccess(req: OpenServerlessDBExtranetAccessRequest, cb?: (error: string, rep: OpenServerlessDBExtranetAccessResponse) => void): Promise<OpenServerlessDBExtranetAccessResponse>;
+    ModifyDBInstanceSecurityGroups(req: ModifyDBInstanceSecurityGroupsRequest, cb?: (error: string, rep: ModifyDBInstanceSecurityGroupsResponse) => void): Promise<ModifyDBInstanceSecurityGroupsResponse>;
 }
