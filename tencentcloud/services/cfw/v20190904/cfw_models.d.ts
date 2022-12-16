@@ -2450,7 +2450,7 @@ export interface DeleteAcRuleRequest {
  */
 export interface DeleteAllAccessControlRuleResponse {
     /**
-      * 状态值 0: 修改成功, !0: 修改失败
+      * 状态值 0: 修改成功, 非0: 修改失败
       */
     Status: number;
     /**

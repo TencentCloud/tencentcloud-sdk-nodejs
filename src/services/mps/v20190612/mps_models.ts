@@ -988,7 +988,7 @@ export interface EnhanceConfig {
  */
 export interface MediaInputInfo {
   /**
-   * 输入来源对象的类型，支持 COS 和 URL 两种。
+   * 输入来源对象的类型，支持 COS、URL 两种。
    */
   Type: string
 
@@ -4240,8 +4240,10 @@ export interface LiveStreamTaskNotifyConfig {
   TopicName?: string
 
   /**
-   * 通知类型，默认CMQ，指定URL时HTTP回调推送到 NotifyUrl 指定的地址。
-   */
+      * 通知类型，默认CMQ，指定URL时HTTP回调推送到 NotifyUrl 指定的地址。
+
+<font color="red"> 注：不填或为空时默认 CMQ，如需采用其他类型需填写对应类型值。 </font>
+      */
   NotifyType?: string
 
   /**
@@ -4979,6 +4981,13 @@ export interface ProcessMediaRequest {
 注意3：编排的 Trigger 只是用来自动化触发场景，在手动发起的请求中已经配置的 Trigger 无意义。
       */
   ScheduleId?: number
+
+  /**
+      * 任务类型，默认Online
+<li> Online：实时任务</li>
+<li> Offline：闲时任务，不保证实效性，默认3天内处理完</li>
+      */
+  TaskType?: string
 }
 
 /**
@@ -9627,12 +9636,12 @@ export interface TaskNotifyConfig {
   /**
    * CMQ或TDMQ-CMQ 的模型，有 Queue 和 Topic 两种。
    */
-  CmqModel: string
+  CmqModel?: string
 
   /**
    * CMQ或TDMQ-CMQ 的园区，如 sh，bj 等。
    */
-  CmqRegion: string
+  CmqRegion?: string
 
   /**
    * 当模型为 Topic 时有效，表示接收事件通知的 CMQ 或 TDMQ-CMQ 的主题名。
@@ -9655,7 +9664,7 @@ export interface TaskNotifyConfig {
 <li>TDMQ-CMQ：消息队列</li>
 <li>URL：指定URL时HTTP回调推送到 NotifyUrl 指定的地址，回调协议http+json，包体内容同解析事件通知接口的输出参数 </li>
 <li>SCF：不推荐使用，需要在控制台额外配置SCF</li>
-目前 默认CMQ。
+<font color="red"> 注：不填或为空时默认 CMQ，如需采用其他类型需填写对应类型值。 </font>
       */
   NotifyType?: string
 

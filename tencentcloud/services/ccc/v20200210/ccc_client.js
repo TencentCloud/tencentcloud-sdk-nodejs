@@ -46,6 +46,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeStaffInfoList", req, cb);
     }
     /**
+     * 挂断电话
+     */
+    async HangUpCall(req, cb) {
+        return this.request("HangUpCall", req, cb);
+    }
+    /**
      * 获取当前正在通话的会话列表
      */
     async DescribePSTNActiveSessionList(req, cb) {

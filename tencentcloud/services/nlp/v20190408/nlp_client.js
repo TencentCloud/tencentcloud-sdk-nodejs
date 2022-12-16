@@ -84,6 +84,12 @@ https://ai.tencent.com/ailab/nlp/zh/embedding.html
         return this.request("CreateDict", req, cb);
     }
     /**
+     * 根据用户输入的命题关键词自动生成一首七言律诗或五言律诗。（如需开通请联系商务）
+     */
+    async GeneratePoetry(req, cb) {
+        return this.request("GeneratePoetry", req, cb);
+    }
+    /**
      * 文本分类接口能够对用户输入的文本进行自动分类，将其映射到具体的类目上，用户只需要提供待分类的文本，而无需关注具体实现。
 
 该功能基于千亿级大规模互联网语料和LSTM、BERT等深度神经网络模型进行训练，并持续迭代更新，以保证效果不断提升。
@@ -122,6 +128,12 @@ https://ai.tencent.com/ailab/nlp/zh/embedding.html
      */
     async TextCorrection(req, cb) {
         return this.request("TextCorrection", req, cb);
+    }
+    /**
+     * 根据用户输入的命题关键词自动生成一副春联，包括上联、下联和横批。（如需开通请联系商务）
+     */
+    async GenerateCouplet(req, cb) {
+        return this.request("GenerateCouplet", req, cb);
     }
     /**
      * 向指定的词库中添加词条。

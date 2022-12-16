@@ -46,6 +46,21 @@ export interface StopAutoCalloutTaskRequest {
 }
 
 /**
+ * HangUpCall请求参数结构体
+ */
+export interface HangUpCallRequest {
+  /**
+   * TCCC 实例应用 ID
+   */
+  SdkAppId: number
+
+  /**
+   * 会话ID
+   */
+  SessionId: string
+}
+
+/**
  * CreateSDKLoginToken返回参数结构体
  */
 export interface CreateSDKLoginTokenResponse {
@@ -2064,6 +2079,41 @@ export interface UnbindStaffSkillGroupListRequest {
 }
 
 /**
+ * CreateCallOutSession请求参数结构体
+ */
+export interface CreateCallOutSessionRequest {
+  /**
+   * 应用 ID
+   */
+  SdkAppId: number
+
+  /**
+   * 客服用户 ID，一般为客服邮箱
+   */
+  UserId: string
+
+  /**
+   * 被叫号码，须带 0086 前缀
+   */
+  Callee: string
+
+  /**
+   * 主叫号码，须带 0086 前缀
+   */
+  Caller?: string
+
+  /**
+   * 是否强制使用手机外呼，当前只支持 true，若为 true 请确保已配置白名单
+   */
+  IsForceUseMobile?: boolean
+
+  /**
+   * 自定义数据，长度限制 1024 字节
+   */
+  Uui?: string
+}
+
+/**
  * StopAutoCalloutTask返回参数结构体
  */
 export interface StopAutoCalloutTaskResponse {
@@ -2676,38 +2726,13 @@ export interface DescribeCarrierPrivilegeNumberApplicantsResponse {
 }
 
 /**
- * CreateCallOutSession请求参数结构体
+ * HangUpCall返回参数结构体
  */
-export interface CreateCallOutSessionRequest {
+export interface HangUpCallResponse {
   /**
-   * 应用 ID
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  SdkAppId: number
-
-  /**
-   * 客服用户 ID，一般为客服邮箱
-   */
-  UserId: string
-
-  /**
-   * 被叫号码，须带 0086 前缀
-   */
-  Callee: string
-
-  /**
-   * 主叫号码，须带 0086 前缀
-   */
-  Caller?: string
-
-  /**
-   * 是否强制使用手机外呼，当前只支持 true，若为 true 请确保已配置白名单
-   */
-  IsForceUseMobile?: boolean
-
-  /**
-   * 自定义数据，长度限制 1024 字节
-   */
-  Uui?: string
+  RequestId?: string
 }
 
 /**

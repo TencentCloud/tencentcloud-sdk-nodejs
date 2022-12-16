@@ -20,6 +20,7 @@ import { ClientConfig } from "../../../common/interface"
 import {
   LexicalAnalysisResponse,
   SentenceEmbeddingRequest,
+  TextClassificationRequest,
   WordSimilarityRequest,
   SearchWordItemsResponse,
   DpToken,
@@ -47,7 +48,7 @@ import {
   UpdateDictRequest,
   DeleteDictResponse,
   DescribeWordItemsRequest,
-  TextClassificationRequest,
+  GenerateCoupletResponse,
   CreateDictResponse,
   TextSimilarityRequest,
   AutoSummarizationResponse,
@@ -56,7 +57,7 @@ import {
   SimilarWordsRequest,
   DescribeDictRequest,
   PosToken,
-  SentimentAnalysisResponse,
+  GeneratePoetryResponse,
   DeleteWordItemsRequest,
   DescribeDictResponse,
   TextCorrectionProRequest,
@@ -65,12 +66,15 @@ import {
   DescribeDictsResponse,
   DependencyParsingRequest,
   DeleteDictRequest,
-  NerToken,
-  SimilarWordsResponse,
-  DependencyParsingResponse,
   Similarity,
+  NerToken,
+  SentimentAnalysisResponse,
+  DependencyParsingResponse,
+  SimilarWordsResponse,
+  GenerateCoupletRequest,
   CCIToken,
   LexicalAnalysisRequest,
+  GeneratePoetryRequest,
   CreateWordItemsResponse,
   SentimentAnalysisRequest,
   SearchWordItemsRequest,
@@ -176,6 +180,16 @@ https://ai.tencent.com/ailab/nlp/zh/embedding.html
   }
 
   /**
+   * 根据用户输入的命题关键词自动生成一首七言律诗或五言律诗。（如需开通请联系商务）
+   */
+  async GeneratePoetry(
+    req: GeneratePoetryRequest,
+    cb?: (error: string, rep: GeneratePoetryResponse) => void
+  ): Promise<GeneratePoetryResponse> {
+    return this.request("GeneratePoetry", req, cb)
+  }
+
+  /**
      * 文本分类接口能够对用户输入的文本进行自动分类，将其映射到具体的类目上，用户只需要提供待分类的文本，而无需关注具体实现。
 
 该功能基于千亿级大规模互联网语料和LSTM、BERT等深度神经网络模型进行训练，并持续迭代更新，以保证效果不断提升。
@@ -233,6 +247,16 @@ https://ai.tencent.com/ailab/nlp/zh/embedding.html
     cb?: (error: string, rep: TextCorrectionResponse) => void
   ): Promise<TextCorrectionResponse> {
     return this.request("TextCorrection", req, cb)
+  }
+
+  /**
+   * 根据用户输入的命题关键词自动生成一副春联，包括上联、下联和横批。（如需开通请联系商务）
+   */
+  async GenerateCouplet(
+    req: GenerateCoupletRequest,
+    cb?: (error: string, rep: GenerateCoupletResponse) => void
+  ): Promise<GenerateCoupletResponse> {
+    return this.request("GenerateCouplet", req, cb)
   }
 
   /**

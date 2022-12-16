@@ -164,6 +164,16 @@ export interface ListEmailAddressResponse {
 export type ListEmailAddressRequest = null
 
 /**
+ * UpdateEmailSmtpPassWord返回参数结构体
+ */
+export interface UpdateEmailSmtpPassWordResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ListReceivers请求参数结构体
  */
 export interface ListReceiversRequest {
@@ -688,6 +698,21 @@ export interface CreateEmailIdentityRequest {
    * 您的发信域名，建议使用三级以上域名。例如：mail.qcloud.com。
    */
   EmailIdentity: string
+}
+
+/**
+ * UpdateEmailSmtpPassWord请求参数结构体
+ */
+export interface UpdateEmailSmtpPassWordRequest {
+  /**
+   * smtp密码，长度限制64
+   */
+  Password: string
+
+  /**
+   * 发信邮箱,长度限制128
+   */
+  EmailAddress: string
 }
 
 /**

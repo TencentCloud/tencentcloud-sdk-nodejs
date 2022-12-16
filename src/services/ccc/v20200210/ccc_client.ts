@@ -20,6 +20,7 @@ import { ClientConfig } from "../../../common/interface"
 import {
   DescribeExtensionRequest,
   StopAutoCalloutTaskRequest,
+  HangUpCallRequest,
   CreateSDKLoginTokenResponse,
   ModifyStaffRequest,
   DeleteStaffResponse,
@@ -82,6 +83,7 @@ import {
   CreateAutoCalloutTaskRequest,
   Filter,
   UnbindStaffSkillGroupListRequest,
+  CreateCallOutSessionRequest,
   StopAutoCalloutTaskResponse,
   SkillGroupItem,
   MessageBody,
@@ -109,7 +111,7 @@ import {
   ModifyStaffResponse,
   DescribeStaffStatusMetricsResponse,
   DescribeCarrierPrivilegeNumberApplicantsResponse,
-  CreateCallOutSessionRequest,
+  HangUpCallResponse,
   BindStaffSkillGroupListResponse,
   DescribeExtensionsRequest,
   DescribeProtectedTelCdrRequest,
@@ -157,6 +159,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeStaffInfoListResponse) => void
   ): Promise<DescribeStaffInfoListResponse> {
     return this.request("DescribeStaffInfoList", req, cb)
+  }
+
+  /**
+   * 挂断电话
+   */
+  async HangUpCall(
+    req: HangUpCallRequest,
+    cb?: (error: string, rep: HangUpCallResponse) => void
+  ): Promise<HangUpCallResponse> {
+    return this.request("HangUpCall", req, cb)
   }
 
   /**

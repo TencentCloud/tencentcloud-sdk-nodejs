@@ -4995,6 +4995,11 @@ export interface SwitchWaterPrintConfigRequest {
    * 水印开启/关闭状态，1表示开启；0表示关闭
    */
   OpenStatus: number
+
+  /**
+   * 是否开启代理，1开启则忽略IP+端口校验；0关闭则需要IP+端口校验
+   */
+  CloudSdkProxy?: number
 }
 
 /**
@@ -5136,6 +5141,12 @@ shortfpcheckall（精简模式）
 ]
       */
   Verify?: string
+
+  /**
+      * 是否开启代理，1开启则忽略IP+端口校验；0关闭则需要IP+端口校验
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CloudSdkProxy?: number
 }
 
 /**
@@ -5554,6 +5565,17 @@ export interface BGPInstance {
    * 攻击封堵套餐标记
    */
   VitalityVersion: number
+
+  /**
+      * 网络线路
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Line: number
+
+  /**
+   * 弹性业务带宽开关
+   */
+  ElasticServiceBandwidth: number
 }
 
 /**
@@ -5636,7 +5658,7 @@ export interface DescribeBizTrendRequest {
   Business: string
 
   /**
-   * 统计周期，可取值300，1800，3600，21600，86400，单位秒
+   * 统计周期，可取值60，300，1800，3600，21600，86400，单位秒
    */
   Period: number
 

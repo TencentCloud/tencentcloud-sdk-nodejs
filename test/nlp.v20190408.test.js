@@ -98,6 +98,16 @@ it("nlp.v20190408.CreateDict", async function () {
     }
 })
 
+it("nlp.v20190408.GeneratePoetry", async function () {
+    try {
+       const data = await client.GeneratePoetry({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("nlp.v20190408.TextClassification", async function () {
     try {
        const data = await client.TextClassification({})
@@ -141,6 +151,16 @@ it("nlp.v20190408.DescribeWordItems", async function () {
 it("nlp.v20190408.TextCorrection", async function () {
     try {
        const data = await client.TextCorrection({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("nlp.v20190408.GenerateCouplet", async function () {
+    try {
+       const data = await client.GenerateCouplet({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

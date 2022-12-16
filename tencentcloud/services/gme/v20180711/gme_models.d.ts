@@ -244,7 +244,7 @@ export interface ModifyUserMicStatusRequest {
     Users: Array<UserMicStatus>;
 }
 /**
- * 语音消息转文本自学习模型配置
+ * 语音消息转文本热句模型配置
  */
 export interface CustomizationConfigs {
     /**
@@ -391,7 +391,7 @@ export interface ModifyCustomizationResponse {
       */
     ErrorCode: number;
     /**
-      * 自学习模型ID
+      * 模型ID
       */
     ModelId: string;
     /**
@@ -430,7 +430,7 @@ export interface DescribeScanResultListRequest {
  */
 export interface ModifyCustomizationStateResponse {
     /**
-      * 自学习模型ID
+      * 模型ID
       */
     ModelId: string;
     /**
@@ -529,7 +529,7 @@ export interface CreateScanUserRequest {
  */
 export interface ModifyCustomizationStateRequest {
     /**
-      * 自学习模型ID
+      * 模型ID
       */
     ModelId: string;
     /**
@@ -603,7 +603,7 @@ Age ：子任务完成后的结果，0:成年人，1:未成年人，100:未知�
  */
 export interface GetCustomizationListResponse {
     /**
-      * 语音消息转文本自学习模型配置
+      * 语音消息转文本热句模型配置
 注意：此字段可能返回 null，表示取不到有效值。
       */
     CustomizationConfigs: Array<CustomizationConfigs>;
@@ -797,7 +797,7 @@ export interface ModifyCustomizationRequest {
       */
     TextUrl: string;
     /**
-      * 要修改的模型ID
+      * 修改的模型ID
       */
     ModelId: string;
 }
@@ -1263,7 +1263,7 @@ export interface StatusInfo {
  */
 export interface DeleteCustomizationRequest {
     /**
-      * 要删除的模型ID
+      * 删除的模型ID
       */
     ModelId: string;
     /**

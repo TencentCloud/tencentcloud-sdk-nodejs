@@ -48,6 +48,16 @@ it("ccc.v20200210.DescribeStaffInfoList", async function () {
     }
 })
 
+it("ccc.v20200210.HangUpCall", async function () {
+    try {
+       const data = await client.HangUpCall({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ccc.v20200210.DescribePSTNActiveSessionList", async function () {
     try {
        const data = await client.DescribePSTNActiveSessionList({})

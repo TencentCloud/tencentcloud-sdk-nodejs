@@ -120,6 +120,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("BatchSendEmail", req, cb);
     }
     /**
+     * 设置邮箱的smtp密码。若要通过smtp发送邮件，必须为邮箱设置smtp密码。初始时，邮箱没有设置smtp密码，不能使用smtp的方式发送邮件。设置smtp密码后，可以修改密码。
+     */
+    async UpdateEmailSmtpPassWord(req, cb) {
+        return this.request("UpdateEmailSmtpPassWord", req, cb);
+    }
+    /**
      * 删除发信模板
      */
     async DeleteEmailTemplate(req, cb) {

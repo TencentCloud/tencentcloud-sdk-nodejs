@@ -171,6 +171,11 @@ HYBRID_PAID:
    * 服务限速限流相关配置
    */
   ServiceLimit?: ServiceLimit
+
+  /**
+   * 回调地址，用于回调创建服务状态信息
+   */
+  CallbackUrl?: string
 }
 
 /**

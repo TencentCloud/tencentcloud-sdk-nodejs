@@ -30,6 +30,21 @@ export interface SentenceEmbeddingRequest {
     Text: string;
 }
 /**
+ * TextClassification请求参数结构体
+ */
+export interface TextClassificationRequest {
+    /**
+      * 待分类的文本（仅支持UTF-8格式，不超过10000字）
+      */
+    Text: string;
+    /**
+      * 领域分类体系（默认取1值）：
+1、通用领域，二分类
+2、新闻领域，五分类。类别数据不一定全部返回，详情见类目映射表（注意：目前五分类已下线不可用）
+      */
+    Flag?: number;
+}
+/**
  * WordSimilarity请求参数结构体
  */
 export interface WordSimilarityRequest {
@@ -474,19 +489,25 @@ export interface DescribeWordItemsRequest {
     Text?: string;
 }
 /**
- * TextClassification请求参数结构体
+ * GenerateCouplet返回参数结构体
  */
-export interface TextClassificationRequest {
+export interface GenerateCoupletResponse {
     /**
-      * 待分类的文本（仅支持UTF-8格式，不超过10000字）
+      * 横批。
       */
-    Text: string;
+    TopScroll: string;
     /**
-      * 领域分类体系（默认取1值）：
-1、通用领域，二分类
-2、新闻领域，五分类。类别数据不一定全部返回，详情见类目映射表（注意：目前五分类已下线不可用）
+      * 上联与下联。
       */
-    Flag?: number;
+    Content: Array<string>;
+    /**
+      * 当对联随机生成时，展示随机生成原因。
+      */
+    RandomCause: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * CreateDict返回参数结构体
@@ -611,29 +632,17 @@ export interface PosToken {
     Pos: string;
 }
 /**
- * SentimentAnalysis返回参数结构体
+ * GeneratePoetry返回参数结构体
  */
-export interface SentimentAnalysisResponse {
+export interface GeneratePoetryResponse {
     /**
-      * 正面情感概率
+      * 诗题，即输入的生成诗词的关键词。
       */
-    Positive: number;
+    Title: string;
     /**
-      * 中性情感概率，当输入参数Mode取值为3class时有效，否则值为空
-注意：此字段可能返回 null，表示取不到有效值。
+      * 诗的内容。
       */
-    Neutral: number;
-    /**
-      * 负面情感概率
-      */
-    Negative: number;
-    /**
-      * 情感分类结果：
-1、positive，表示正面情感
-2、negative，表示负面情感
-3、neutral，表示中性、无情感
-      */
-    Sentiment: string;
+    Content: Array<string>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -743,6 +752,19 @@ export interface DeleteDictRequest {
     DictId: string;
 }
 /**
+ * 文本相似度
+ */
+export interface Similarity {
+    /**
+      * 目标文本句子
+      */
+    Text: string;
+    /**
+      * 相似度分数
+      */
+    Score: number;
+}
+/**
  * 命名实体识别结果
  */
 export interface NerToken {
@@ -764,13 +786,29 @@ export interface NerToken {
     Type: string;
 }
 /**
- * SimilarWords返回参数结构体
+ * SentimentAnalysis返回参数结构体
  */
-export interface SimilarWordsResponse {
+export interface SentimentAnalysisResponse {
     /**
-      * 相似词数组
+      * 正面情感概率
       */
-    SimilarWords?: Array<string>;
+    Positive: number;
+    /**
+      * 中性情感概率，当输入参数Mode取值为3class时有效，否则值为空
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Neutral: number;
+    /**
+      * 负面情感概率
+      */
+    Negative: number;
+    /**
+      * 情感分类结果：
+1、positive，表示正面情感
+2、negative，表示负面情感
+3、neutral，表示中性、无情感
+      */
+    Sentiment: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -805,17 +843,30 @@ export interface DependencyParsingResponse {
     RequestId?: string;
 }
 /**
- * 文本相似度
+ * SimilarWords返回参数结构体
  */
-export interface Similarity {
+export interface SimilarWordsResponse {
     /**
-      * 目标文本句子
+      * 相似词数组
+      */
+    SimilarWords?: Array<string>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * GenerateCouplet请求参数结构体
+ */
+export interface GenerateCoupletRequest {
+    /**
+      * 生成对联的关键词。长度需>=2，当长度>2时，自动截取前两个字作为关键字。内容需为常用汉字（不含有数字、英文、韩语、日语、符号等等其他）。
       */
     Text: string;
     /**
-      * 相似度分数
+      * 返回的文本结果为繁体还是简体。0：简体；1：繁体。默认为0。
       */
-    Score: number;
+    TargetType?: number;
 }
 /**
  * 文本纠错结果
@@ -852,6 +903,23 @@ export interface LexicalAnalysisRequest {
 2、高性能（单粒度分词能力）；
       */
     Flag?: number;
+}
+/**
+ * GeneratePoetry请求参数结构体
+ */
+export interface GeneratePoetryRequest {
+    /**
+      * 生成诗词的关键词。
+      */
+    Text: string;
+    /**
+      * 生成诗词的类型。0：藏头或藏身；1：藏头；2：藏身。默认为0。
+      */
+    PoetryType?: number;
+    /**
+      * 诗的体裁。0：五言律诗或七言律诗；5：五言律诗；7：七言律诗。默认为0。
+      */
+    Genre?: number;
 }
 /**
  * CreateWordItems返回参数结构体

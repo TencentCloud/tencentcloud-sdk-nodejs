@@ -168,6 +168,16 @@ it("ses.v20201002.BatchSendEmail", async function () {
     }
 })
 
+it("ses.v20201002.UpdateEmailSmtpPassWord", async function () {
+    try {
+       const data = await client.UpdateEmailSmtpPassWord({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ses.v20201002.DeleteEmailTemplate", async function () {
     try {
        const data = await client.DeleteEmailTemplate({})

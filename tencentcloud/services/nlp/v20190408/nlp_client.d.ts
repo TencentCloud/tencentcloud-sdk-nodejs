@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { LexicalAnalysisResponse, SentenceEmbeddingRequest, WordSimilarityRequest, SearchWordItemsResponse, TextSimilarityResponse, WordEmbeddingRequest, ChatBotResponse, AutoSummarizationRequest, ChatBotRequest, TextClassificationResponse, KeywordsExtractionRequest, TextCorrectionRequest, TextCorrectionProResponse, TextSimilarityProRequest, UpdateDictResponse, DescribeDictsRequest, WordSimilarityResponse, CreateWordItemsRequest, DeleteWordItemsResponse, SentenceEmbeddingResponse, UpdateDictRequest, DeleteDictResponse, DescribeWordItemsRequest, TextClassificationRequest, CreateDictResponse, TextSimilarityRequest, AutoSummarizationResponse, WordEmbeddingResponse, DescribeWordItemsResponse, SimilarWordsRequest, DescribeDictRequest, SentimentAnalysisResponse, DeleteWordItemsRequest, DescribeDictResponse, TextCorrectionProRequest, TextCorrectionResponse, TextSimilarityProResponse, DescribeDictsResponse, DependencyParsingRequest, DeleteDictRequest, SimilarWordsResponse, DependencyParsingResponse, LexicalAnalysisRequest, CreateWordItemsResponse, SentimentAnalysisRequest, SearchWordItemsRequest, KeywordsExtractionResponse, CreateDictRequest } from "./nlp_models";
+import { LexicalAnalysisResponse, SentenceEmbeddingRequest, TextClassificationRequest, WordSimilarityRequest, SearchWordItemsResponse, TextSimilarityResponse, WordEmbeddingRequest, ChatBotResponse, AutoSummarizationRequest, ChatBotRequest, TextClassificationResponse, KeywordsExtractionRequest, TextCorrectionRequest, TextCorrectionProResponse, TextSimilarityProRequest, UpdateDictResponse, DescribeDictsRequest, WordSimilarityResponse, CreateWordItemsRequest, DeleteWordItemsResponse, SentenceEmbeddingResponse, UpdateDictRequest, DeleteDictResponse, DescribeWordItemsRequest, GenerateCoupletResponse, CreateDictResponse, TextSimilarityRequest, AutoSummarizationResponse, WordEmbeddingResponse, DescribeWordItemsResponse, SimilarWordsRequest, DescribeDictRequest, GeneratePoetryResponse, DeleteWordItemsRequest, DescribeDictResponse, TextCorrectionProRequest, TextCorrectionResponse, TextSimilarityProResponse, DescribeDictsResponse, DependencyParsingRequest, DeleteDictRequest, SentimentAnalysisResponse, DependencyParsingResponse, SimilarWordsResponse, GenerateCoupletRequest, LexicalAnalysisRequest, GeneratePoetryRequest, CreateWordItemsResponse, SentimentAnalysisRequest, SearchWordItemsRequest, KeywordsExtractionResponse, CreateDictRequest } from "./nlp_models";
 /**
  * nlp client
  * @class
@@ -48,6 +48,10 @@ https://ai.tencent.com/ailab/nlp/zh/embedding.html
      */
     CreateDict(req: CreateDictRequest, cb?: (error: string, rep: CreateDictResponse) => void): Promise<CreateDictResponse>;
     /**
+     * 根据用户输入的命题关键词自动生成一首七言律诗或五言律诗。（如需开通请联系商务）
+     */
+    GeneratePoetry(req: GeneratePoetryRequest, cb?: (error: string, rep: GeneratePoetryResponse) => void): Promise<GeneratePoetryResponse>;
+    /**
      * 文本分类接口能够对用户输入的文本进行自动分类，将其映射到具体的类目上，用户只需要提供待分类的文本，而无需关注具体实现。
 
 该功能基于千亿级大规模互联网语料和LSTM、BERT等深度神经网络模型进行训练，并持续迭代更新，以保证效果不断提升。
@@ -77,6 +81,10 @@ https://ai.tencent.com/ailab/nlp/zh/embedding.html
 此功能是基于千亿级大规模互联网语料和LSTM、BERT等深度神经网络模型进行训练，并持续迭代更新，以保证效果不断提升，是搜索引擎、语音识别、内容审核等功能更好运行的基础之一。
      */
     TextCorrection(req: TextCorrectionRequest, cb?: (error: string, rep: TextCorrectionResponse) => void): Promise<TextCorrectionResponse>;
+    /**
+     * 根据用户输入的命题关键词自动生成一副春联，包括上联、下联和横批。（如需开通请联系商务）
+     */
+    GenerateCouplet(req: GenerateCoupletRequest, cb?: (error: string, rep: GenerateCoupletResponse) => void): Promise<GenerateCoupletResponse>;
     /**
      * 向指定的词库中添加词条。
      */
