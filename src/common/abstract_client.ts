@@ -5,6 +5,7 @@ import {
   ClientConfig,
   SUPPORT_LANGUAGE_LIST,
   HttpProfile,
+  DynamicCredential,
 } from "./interface"
 import Sign from "./sign"
 import { HttpConnection } from "./http/http_connection"
@@ -41,7 +42,7 @@ type ResponseData = any
 export class AbstractClient {
   sdkVersion: string
   path: string
-  credential: Credential
+  credential: Credential | DynamicCredential
   region: string
   apiVersion: string
   endpoint: string
@@ -64,14 +65,11 @@ export class AbstractClient {
     /**
      * 认证信息实例
      */
-    this.credential = Object.assign(
-      {
-        secretId: null,
-        secretKey: null,
-        token: null,
-      },
-      credential
-    )
+    this.credential = credential || {
+      secretId: null,
+      secretKey: null,
+      token: null
+    }
 
     /**
      * 产品地域
@@ -104,6 +102,13 @@ export class AbstractClient {
         `Language invalid, choices: ${SUPPORT_LANGUAGE_LIST.join("|")}`
       )
     }
+  }
+
+  async getCredential(): Promise<Credential> {
+    if ('getCredential' in this.credential) {
+      return await this.credential.getCredential()
+    }
+    return this.credential
   }
 
   /**
@@ -141,7 +146,7 @@ export class AbstractClient {
       return this.doRequestWithSign3(action, req, options)
     }
     let params = this.mergeData(req)
-    params = this.formatRequestData(action, params)
+    params = await this.formatRequestData(action, params)
     let res
     try {
       res = await HttpConnection.doRequest({
@@ -170,11 +175,12 @@ export class AbstractClient {
   ): Promise<ResponseData> {
     let res
     try {
+      const credential = await this.getCredential()
       res = await HttpConnection.doRequestWithSign3({
         method: this.profile.httpProfile.reqMethod,
         url: this.profile.httpProfile.protocol + this.endpoint + this.path,
-        secretId: this.credential.secretId,
-        secretKey: this.credential.secretKey,
+        secretId: credential.secretId,
+        secretKey: credential.secretKey,
         region: this.region,
         data: params || "",
         service: this.endpoint.split(".")[0],
@@ -182,7 +188,7 @@ export class AbstractClient {
         version: this.apiVersion,
         multipart: options && options.multipart,
         timeout: this.profile.httpProfile.reqTimeout * 1000,
-        token: this.credential.token,
+        token: credential.token,
         requestClient: this.sdkVersion,
         language: this.profile.language,
         headers: Object.assign({}, this.profile.httpProfile.headers, options.headers),
@@ -237,23 +243,25 @@ export class AbstractClient {
   /**
    * @inner
    */
-  private formatRequestData(action: string, params: RequestData): RequestData {
+  private async formatRequestData(action: string, params: RequestData): Promise<RequestData> {
     params.Action = action
     params.RequestClient = this.sdkVersion
     params.Nonce = Math.round(Math.random() * 65535)
     params.Timestamp = Math.round(Date.now() / 1000)
     params.Version = this.apiVersion
 
-    if (this.credential.secretId) {
-      params.SecretId = this.credential.secretId
+    const credential = await this.getCredential()
+
+    if (credential.secretId) {
+      params.SecretId = credential.secretId
     }
 
     if (this.region) {
       params.Region = this.region
     }
 
-    if (this.credential.token) {
-      params.Token = this.credential.token
+    if (credential.token) {
+      params.Token = credential.token
     }
 
     if (this.profile.language) {
@@ -265,7 +273,7 @@ export class AbstractClient {
     }
     const signStr = this.formatSignString(params)
 
-    params.Signature = Sign.sign(this.credential.secretKey, signStr, this.profile.signMethod)
+    params.Signature = Sign.sign(credential.secretKey, signStr, this.profile.signMethod)
     return params
   }
 
