@@ -73,37 +73,9 @@ client.DescribeZones().then(
 ```js
 import * as tencentcloud from "tencentcloud-sdk-nodejs"
 
-// 导入对应产品模块的client models。
 const CvmClient = tencentcloud.cvm.v20170312.Client
 
-// 实例化要请求产品(以cvm为例)的client对象
-const client = new CvmClient({
-  // 腾讯云认证信息
-  credential: {
-    secretId: "secretId",
-    secretKey: "secretKey",
-  },
-  // 产品地域
-  region: "ap-shanghai",
-  // 可选配置实例
-  profile: {
-    signMethod: "TC3-HMAC-SHA256", // 签名方法
-    httpProfile: {
-      reqMethod: "POST", // 请求方法
-      reqTimeout: 30, // 请求超时时间，默认60s
-      // proxy: "http://127.0.0.1:8899" // http请求代理
-    },
-  },
-})
-async function main(){
-  try{
-    // async/await 方式调用
-    const data = await client.DescribeZones()
-    console.log(data)
-  }catch(err){
-    console.error("error", err)
-  }
-}
+// ...
 ```
 
 实例化`Client` 的入参支持 `clientConfig` 数据结构和说明 详见 [ClientConfig](https://github.com/TencentCloud/tencentcloud-sdk-nodejs/blob/master/src/common/interface.ts)
@@ -117,6 +89,22 @@ async function main(){
 ## 代理
 
 如果是有代理的环境下，需要配置代理，请在创建Client时传入 [profile.httpProfile.proxy](https://github.com/TencentCloud/tencentcloud-sdk-nodejs/blob/master/src/common/interface.ts#L78) 参数，或设置系统环境变量 `http_proxy` ，否则可能无法正常调用，抛出连接超时的异常。
+
+# 凭证管理
+
+除显式传入凭证外，从 `v4.0.506` 起支持 [腾讯云实例角色](https://cloud.tencent.com/document/product/213/47668)
+
+在您为实例绑定角色后，您可以在实例中访问相关元数据接口获取临时凭证。用法可参考 [示例代码](./examples/cvm_role.js)
+```javascript
+// ...
+const CvmRoleCredential = tencentcloud.CvmRoleCredential
+
+new XxxClient({
+  // ...
+  credential: new CvmRoleCredential(),
+  // ...
+})
+```
 
 # 旧版 SDK
 
