@@ -92,6 +92,7 @@ import {
   CompleteCertificateResponse,
   SubmitCertificateInformationResponse,
   RevokeCertificateRequest,
+  PreAuditInfo,
   SubmittedData,
 } from "./ssl_models"
 

@@ -593,6 +593,30 @@ export interface Certificates {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   EncryptAlgorithm: string
+
+  /**
+      * 上传CA证书的加密算法
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CAEncryptAlgorithms: Array<string>
+
+  /**
+      * 上传CA证书的过期时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CAEndTimes: Array<string>
+
+  /**
+      * 上传CA证书的通用名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CACommonNames: Array<string>
+
+  /**
+      * 证书预审核信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PreAuditInfo: PreAuditInfo
 }
 
 /**
@@ -2515,6 +2539,29 @@ export interface RevokeCertificateRequest {
    * 吊销证书原因。
    */
   Reason?: string
+}
+
+/**
+ * 预审核信息列表
+ */
+export interface PreAuditInfo {
+  /**
+      * 证书总年限
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TotalPeriod: number
+
+  /**
+      * 证书当前年限
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NowPeriod: number
+
+  /**
+      * 证书预审核管理人ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ManagerId: string
 }
 
 /**

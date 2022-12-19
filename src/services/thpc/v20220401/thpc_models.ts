@@ -362,12 +362,12 @@ export interface LoginNodeOverview {
  */
 export interface CFSOption {
   /**
-   * 文件系统本地挂载路径
+   * 文件系统本地挂载路径。
    */
   LocalPath: string
 
   /**
-   * 文件系统远程挂载ip及路径
+   * 文件系统远程挂载ip及路径。
    */
   RemotePath: string
 
@@ -1021,17 +1021,17 @@ export interface DescribeClustersResponse {
  */
 export interface GooseFSOption {
   /**
-   * 文件系统本地挂载路径
+   * 文件系统本地挂载路径。
    */
   LocalPath: string
 
   /**
-   * 文件系统远程挂载路径
+   * 文件系统远程挂载路径。
    */
   RemotePath: string
 
   /**
-   * 文件系统master的ip和端口
+   * 文件系统master的ip和端口。
    */
   Masters: Array<string>
 }

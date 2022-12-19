@@ -23,11 +23,11 @@ class AbstractClient {
         /**
          * 认证信息实例
          */
-        this.credential = Object.assign({
+        this.credential = credential || {
             secretId: null,
             secretKey: null,
-            token: null,
-        }, credential);
+            token: null
+        };
         /**
          * 产品地域
          */
@@ -52,6 +52,12 @@ class AbstractClient {
         if (this.profile.language && !interface_1.SUPPORT_LANGUAGE_LIST.includes(this.profile.language)) {
             throw new tencent_cloud_sdk_exception_1.default(`Language invalid, choices: ${interface_1.SUPPORT_LANGUAGE_LIST.join("|")}`);
         }
+    }
+    async getCredential() {
+        if ('getCredential' in this.credential) {
+            return await this.credential.getCredential();
+        }
+        return this.credential;
     }
     /**
      * @inner
@@ -79,7 +85,7 @@ class AbstractClient {
             return this.doRequestWithSign3(action, req, options);
         }
         let params = this.mergeData(req);
-        params = this.formatRequestData(action, params);
+        params = await this.formatRequestData(action, params);
         let res;
         try {
             res = await http_connection_1.HttpConnection.doRequest({
@@ -104,11 +110,12 @@ class AbstractClient {
     async doRequestWithSign3(action, params, options = {}) {
         let res;
         try {
+            const credential = await this.getCredential();
             res = await http_connection_1.HttpConnection.doRequestWithSign3({
                 method: this.profile.httpProfile.reqMethod,
                 url: this.profile.httpProfile.protocol + this.endpoint + this.path,
-                secretId: this.credential.secretId,
-                secretKey: this.credential.secretKey,
+                secretId: credential.secretId,
+                secretKey: credential.secretKey,
                 region: this.region,
                 data: params || "",
                 service: this.endpoint.split(".")[0],
@@ -116,7 +123,7 @@ class AbstractClient {
                 version: this.apiVersion,
                 multipart: options && options.multipart,
                 timeout: this.profile.httpProfile.reqTimeout * 1000,
-                token: this.credential.token,
+                token: credential.token,
                 requestClient: this.sdkVersion,
                 language: this.profile.language,
                 headers: Object.assign({}, this.profile.httpProfile.headers, options.headers),
@@ -169,20 +176,21 @@ class AbstractClient {
     /**
      * @inner
      */
-    formatRequestData(action, params) {
+    async formatRequestData(action, params) {
         params.Action = action;
         params.RequestClient = this.sdkVersion;
         params.Nonce = Math.round(Math.random() * 65535);
         params.Timestamp = Math.round(Date.now() / 1000);
         params.Version = this.apiVersion;
-        if (this.credential.secretId) {
-            params.SecretId = this.credential.secretId;
+        const credential = await this.getCredential();
+        if (credential.secretId) {
+            params.SecretId = credential.secretId;
         }
         if (this.region) {
             params.Region = this.region;
         }
-        if (this.credential.token) {
-            params.Token = this.credential.token;
+        if (credential.token) {
+            params.Token = credential.token;
         }
         if (this.profile.language) {
             params.Language = this.profile.language;
@@ -191,7 +199,7 @@ class AbstractClient {
             params.SignatureMethod = this.profile.signMethod;
         }
         const signStr = this.formatSignString(params);
-        params.Signature = sign_1.default.sign(this.credential.secretKey, signStr, this.profile.signMethod);
+        params.Signature = sign_1.default.sign(credential.secretKey, signStr, this.profile.signMethod);
         return params;
     }
     /**

@@ -1,4 +1,4 @@
-import { ClientProfile, Credential, ClientConfig, HttpProfile } from "./interface";
+import { ClientProfile, Credential, ClientConfig, HttpProfile, DynamicCredential } from "./interface";
 export declare type ResponseCallback<TReuslt = any> = (error: string, rep: TReuslt) => void;
 export interface RequestOptions extends Partial<Pick<HttpProfile, "headers">> {
     multipart?: boolean;
@@ -14,7 +14,7 @@ declare type ResponseData = any;
 export declare class AbstractClient {
     sdkVersion: string;
     path: string;
-    credential: Credential;
+    credential: Credential | DynamicCredential;
     region: string;
     apiVersion: string;
     endpoint: string;
@@ -28,6 +28,7 @@ export declare class AbstractClient {
      * @param {ClientProfile} profile 可选配置实例
      */
     constructor(endpoint: string, version: string, { credential, region, profile }: ClientConfig);
+    getCredential(): Promise<Credential>;
     /**
      * @inner
      */

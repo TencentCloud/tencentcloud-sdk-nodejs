@@ -8,7 +8,7 @@ export interface ClientConfig {
      * @param {Credential} credential 认证信息
      * 必选
      */
-    credential: Credential;
+    credential: Credential | DynamicCredential;
     /**
      * @param {string} region 产品地域
      * 对于要求区分地域的产品，此参数必选（如 cvm）；对于不区分地域的产品（如 sms），无需传入。
@@ -108,4 +108,10 @@ export interface Credential {
      * 非必选，和 secretId 二选一
      */
     token?: string;
+}
+/**
+ * 动态认证信息
+ */
+export interface DynamicCredential {
+    getCredential(): Promise<Credential>;
 }

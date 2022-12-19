@@ -173,7 +173,7 @@ HYBRID_PAID:
   ServiceLimit?: ServiceLimit
 
   /**
-   * 回调地址，用于回调创建服务状态信息
+   * 回调地址，用于回调创建服务状态信息，回调格式&内容详情见：[TI-ONE 接口回调说明](https://cloud.tencent.com/document/product/851/84292)
    */
   CallbackUrl?: string
 }
@@ -1390,6 +1390,11 @@ export interface CreateBatchTaskRequest {
    * 备注
    */
   Remark?: string
+
+  /**
+   * 任务执行结果回调URL，仅支持http和https。回调格式&内容详见: [TI-ONE 接口回调说明](https://cloud.tencent.com/document/product/851/84292)
+   */
+  CallbackUrl?: string
 }
 
 /**
@@ -3286,7 +3291,7 @@ export interface CreateTrainingTaskResponse {
   /**
    * 训练任务ID
    */
-  Id: string
+  Id?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3422,6 +3427,11 @@ export interface CreateTrainingTaskRequest {
    * 数据来源，eg：DATASET、COS、CFS、HDFS
    */
   DataSource?: string
+
+  /**
+   * 回调地址，用于创建/启动/停止训练任务的异步回调。回调格式&内容详见：[[TI-ONE接口回调说明]](https://cloud.tencent.com/document/product/851/84292)
+   */
+  CallbackUrl?: string
 }
 
 /**
@@ -4375,7 +4385,7 @@ export interface CreateModelServiceResponse {
       * 生成的模型服务
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Service: Service
+  Service?: Service
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -5124,6 +5134,12 @@ export interface TrainingTaskDetail {
    * 任务状态，eg：STARTING启动中、RUNNING运行中、STOPPING停止中、STOPPED已停止、FAILED异常、SUCCEED已完成
    */
   Status: string
+
+  /**
+      * 回调地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CallbackUrl: string
 }
 
 /**
@@ -5542,6 +5558,12 @@ export interface TrainingTaskSetItem {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Tags: Array<Tag>
+
+  /**
+      * 回调地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CallbackUrl: string
 }
 
 /**

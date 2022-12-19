@@ -1630,14 +1630,10 @@ export interface ModifyBandwidthPackageAttributeRequest {
   BandwidthPackageName: string
 
   /**
-   * 带宽包计费模式
-   */
+      * 带宽包计费模式，示例 ：
+'TOP5_POSTPAID_BY_MONTH'（后付费-TOP5计费）
+      */
   ChargeType?: string
-
-  /**
-   * 退款时迁移为后付费带宽包。默认值：否
-   */
-  MigrateOnRefund?: boolean
 }
 
 /**
@@ -7974,9 +7970,14 @@ export interface CreateVpcEndPointServiceRequest {
   ServiceInstanceId: string
 
   /**
-   * 是否是PassService类型。
+   * ~~是否是PassService类型。该字段已废弃，请不要使用该字段。~~
    */
   IsPassService?: boolean
+
+  /**
+   * 挂载的PAAS服务类型，CLB,CDB,CRS，不填默认挂载为CLB。
+   */
+  ServiceType?: string
 }
 
 /**
@@ -8871,6 +8872,11 @@ AnycastEIP是否用于绑定负载均衡。
    * EIP名称，用于申请EIP时用户自定义该EIP的个性化名称，默认值：未命名
    */
   AddressName?: string
+
+  /**
+   * 网络出口，默认是：center_egress1
+   */
+  Egress?: string
 }
 
 /**

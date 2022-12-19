@@ -777,6 +777,16 @@ export interface UserQuota {
       * 文件系统ID
       */
     FileSystemId: string;
+    /**
+      * 容量使用，单位GiB
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CapacityUsed?: number;
+    /**
+      * 文件使用个数，单位个
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FileUsed?: number;
 }
 /**
  * DeleteMountTarget请求参数结构体

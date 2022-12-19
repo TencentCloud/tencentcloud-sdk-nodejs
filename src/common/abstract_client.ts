@@ -68,7 +68,7 @@ export class AbstractClient {
     this.credential = credential || {
       secretId: null,
       secretKey: null,
-      token: null
+      token: null,
     }
 
     /**
@@ -105,7 +105,7 @@ export class AbstractClient {
   }
 
   async getCredential(): Promise<Credential> {
-    if ('getCredential' in this.credential) {
+    if ("getCredential" in this.credential) {
       return await this.credential.getCredential()
     }
     return this.credential
