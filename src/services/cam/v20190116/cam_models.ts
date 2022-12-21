@@ -917,12 +917,12 @@ export interface ListGroupsForUserResponse {
   /**
    * 子用户加入的用户组总数
    */
-  TotalNum?: number
+  TotalNum: number
 
   /**
    * 用户组信息
    */
-  GroupInfo?: Array<GroupInfo>
+  GroupInfo: Array<GroupInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4028,7 +4028,7 @@ export interface CreateGroupResponse {
   /**
    * 用户组 ID
    */
-  GroupId?: number
+  GroupId: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

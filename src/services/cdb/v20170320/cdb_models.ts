@@ -531,6 +531,16 @@ export interface DescribeDataBackupOverviewResponse {
   DataBackupArchiveCount: number
 
   /**
+   * 当前地域标准存储备份总容量。
+   */
+  DataBackupStandbyVolume: number
+
+  /**
+   * 当前地域标准存储备份总个数。
+   */
+  DataBackupStandbyCount: number
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -1710,6 +1720,16 @@ export interface DescribeBinlogBackupOverviewResponse {
   BinlogArchiveCount: number
 
   /**
+   * 标准存储日志备份容量（单位为字节）。
+   */
+  BinlogStandbyVolume: number
+
+  /**
+   * 标准存储日志备份个数。
+   */
+  BinlogStandbyCount: number
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -2238,6 +2258,16 @@ export interface CreateAuditRuleResponse {
    */
   RuleId: string
 
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyRemoteBackupConfig返回参数结构体
+ */
+export interface ModifyRemoteBackupConfigResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3324,6 +3354,26 @@ export interface DescribeBackupConfigResponse {
   BinlogArchiveDays: number
 
   /**
+   * 是否开启数据备份标准存储策略，off-关闭，on-打开，默认为off
+   */
+  EnableBackupStandby: string
+
+  /**
+   * 数据备份标准存储起始天数，数据备份达到标准存储起始天数时进行转换，最小为30天，不得大于数据备份保留天数。如果开启备份归档，不得大于等于备份归档天数
+   */
+  BackupStandbyDays: number
+
+  /**
+   * 是否开启日志备份标准存储策略，off-关闭，on-打开，默认为off
+   */
+  EnableBinlogStandby: string
+
+  /**
+   * 日志备份标准存储起始天数，日志备份达到标准存储起始天数时进行转换，最小为30天，不得大于日志备份保留天数。如果开启备份归档，不得大于等于备份归档天数
+   */
+  BinlogStandbyDays: number
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -3524,6 +3574,12 @@ export interface DescribeBackupOverviewResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   BackupArchiveVolume: number
+
+  /**
+      * 标准存储备份容量，包含数据备份以及日志备份。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BackupStandbyVolume: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3942,6 +3998,16 @@ export interface DatabasesWithCharacterLists {
 }
 
 /**
+ * DescribeRemoteBackupConfig请求参数结构体
+ */
+export interface DescribeRemoteBackupConfigRequest {
+  /**
+   * 实例 ID，格式如：cdb-c1nl9rpv。与云数据库控制台页面中显示的实例 ID 相同。
+   */
+  InstanceId: string
+}
+
+/**
  * 标签信息
  */
 export interface TagInfo {
@@ -4189,6 +4255,26 @@ export interface ModifyBackupConfigRequest {
    * 是否开启日志备份归档策略，off-关闭，on-打开，默认为off
    */
   EnableBinlogArchive?: string
+
+  /**
+   * 是否开启数据备份标准存储策略，off-关闭，on-打开，默认为off
+   */
+  EnableBackupStandby?: string
+
+  /**
+   * 数据备份标准存储起始天数，数据备份达到标准存储起始天数时进行转换，最小为30天，不得大于数据备份保留天数。如果开启备份归档，不得大于等于备份归档天数
+   */
+  BackupStandbyDays?: number
+
+  /**
+   * 是否开启日志备份标准存储策略，off-关闭，on-打开，默认为off
+   */
+  EnableBinlogStandby?: string
+
+  /**
+   * 日志备份标准存储起始天数，日志备份达到标准存储起始天数时进行转换，最小为30天，不得大于日志备份保留天数。如果开启备份归档，不得大于等于备份归档天数
+   */
+  BinlogStandbyDays?: number
 }
 
 /**
@@ -6797,6 +6883,41 @@ export interface AccountInfo {
 }
 
 /**
+ * DescribeRemoteBackupConfig返回参数结构体
+ */
+export interface DescribeRemoteBackupConfigResponse {
+  /**
+   * 异地备份保留天时间，单位为天
+   */
+  ExpireDays: number
+
+  /**
+   * 异地数据备份开关，off - 关闭异地备份，on-开启异地备份
+   */
+  RemoteBackupSave: string
+
+  /**
+   * 异地日志备份开关，off - 关闭异地备份，on-开启异地备份，只有在参数RemoteBackupSave为on时，RemoteBinlogSave参数才可设置为on
+   */
+  RemoteBinlogSave: string
+
+  /**
+   * 用户已设置异地备份地域列表
+   */
+  RemoteRegion: Array<string>
+
+  /**
+   * 用户可设置异地备份地域列表
+   */
+  RegionList: Array<string>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyCDBProxyDesc返回参数结构体
  */
 export interface ModifyCDBProxyDescResponse {
@@ -9147,6 +9268,36 @@ export interface RestartDBInstancesRequest {
    * 实例 ID 数组，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
    */
   InstanceIds: Array<string>
+}
+
+/**
+ * ModifyRemoteBackupConfig请求参数结构体
+ */
+export interface ModifyRemoteBackupConfigRequest {
+  /**
+   * 实例 ID，格式如：cdb-c1nl9rpv。与云数据库控制台页面中显示的实例 ID 相同。
+   */
+  InstanceId: string
+
+  /**
+   * 异地数据备份开关，off - 关闭异地备份，on-开启异地备份
+   */
+  RemoteBackupSave: string
+
+  /**
+   * 异地日志备份开关，off - 关闭异地备份，on-开启异地备份，只有在参数RemoteBackupSave为on时，RemoteBinlogSave参数才可设置为on
+   */
+  RemoteBinlogSave: string
+
+  /**
+   * 用户设置异地备份地域列表
+   */
+  RemoteRegion: Array<string>
+
+  /**
+   * 异地备份保留天时间，单位为天
+   */
+  ExpireDays: number
 }
 
 /**

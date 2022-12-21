@@ -20,7 +20,6 @@ import { ClientConfig } from "../../../common/interface"
 import {
   Compression,
   DescribeOriginGroupResponse,
-  ModifyLoadBalancingStatusResponse,
   DescribeBotDataRequest,
   SpeedTestingInfo,
   DescribeSingleL7AnalysisDataRequest,
@@ -158,7 +157,6 @@ import {
   DescribeDnsDataResponse,
   Zone,
   DescribeDDoSAttackSourceEventRequest,
-  ModifyLoadBalancingStatusRequest,
   DDoSAttackEvent,
   DropPageDetail,
   SwitchLogTopicTaskResponse,
@@ -663,16 +661,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteApplicationProxyRuleResponse) => void
   ): Promise<DeleteApplicationProxyRuleResponse> {
     return this.request("DeleteApplicationProxyRule", req, cb)
-  }
-
-  /**
-   * 修改负载均衡状态
-   */
-  async ModifyLoadBalancingStatus(
-    req: ModifyLoadBalancingStatusRequest,
-    cb?: (error: string, rep: ModifyLoadBalancingStatusResponse) => void
-  ): Promise<ModifyLoadBalancingStatusResponse> {
-    return this.request("ModifyLoadBalancingStatus", req, cb)
   }
 
   /**

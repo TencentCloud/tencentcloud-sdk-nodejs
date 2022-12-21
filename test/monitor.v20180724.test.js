@@ -58,6 +58,16 @@ it("monitor.v20180724.UpdateAlertRule", async function () {
     }
 })
 
+it("monitor.v20180724.DescribePrometheusInstanceUsage", async function () {
+    try {
+       const data = await client.DescribePrometheusInstanceUsage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("monitor.v20180724.ModifyAlarmReceivers", async function () {
     try {
        const data = await client.ModifyAlarmReceivers({})

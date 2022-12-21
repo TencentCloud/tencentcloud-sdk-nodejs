@@ -28,7 +28,7 @@ class Client extends abstract_client_1.AbstractClient {
         super("cam.tencentcloudapi.com", "2019-01-16", clientConfig);
     }
     /**
-     * 添加子用户
+     * 创建子用户
      */
     async AddUser(req, cb) {
         return this.request("AddUser", req, cb);

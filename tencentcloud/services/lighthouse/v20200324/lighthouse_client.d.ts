@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeInstancesTrafficPackagesRequest, AssociateInstancesKeyPairsResponse, RenewInstancesRequest, DescribeDisksDeniedActionsRequest, DescribeInstancesTrafficPackagesResponse, DescribeInstancesDeniedActionsRequest, DeleteKeyPairsResponse, AttachCcnRequest, CreateInstancesRequest, DescribeZonesRequest, DescribeBlueprintInstancesResponse, InquirePriceCreateDisksRequest, DetachCcnResponse, CreateInstanceSnapshotResponse, DescribeScenesResponse, InquirePriceRenewInstancesResponse, DeleteFirewallRulesResponse, ModifyInstancesAttributeRequest, DescribeInstancesResponse, DeleteKeyPairsRequest, DescribeBundlesResponse, ModifyInstancesBundleRequest, InquirePriceRenewInstancesRequest, DescribeDiskConfigsRequest, DescribeRegionsResponse, AssociateInstancesKeyPairsRequest, AttachCcnResponse, RebootInstancesRequest, ResetAttachCcnRequest, AttachDisksRequest, ImportKeyPairResponse, DescribeSnapshotsRequest, TerminateDisksResponse, DescribeFirewallRulesTemplateRequest, DescribeKeyPairsResponse, ModifyBlueprintAttributeRequest, InquirePriceRenewDisksRequest, DescribeBlueprintInstancesRequest, ApplyInstanceSnapshotResponse, DetachDisksRequest, ModifyFirewallRulesRequest, CreateBlueprintRequest, DeleteFirewallRulesRequest, DescribeInstanceVncUrlRequest, ModifyFirewallRuleDescriptionRequest, StartInstancesResponse, TerminateInstancesResponse, DescribeInstancesDiskNumRequest, DescribeBlueprintsRequest, DescribeInstancesDeniedActionsResponse, ModifyDisksAttributeRequest, DescribeSnapshotsDeniedActionsResponse, StartInstancesRequest, DeleteSnapshotsRequest, ModifyDisksRenewFlagResponse, ModifySnapshotAttributeRequest, DeleteSnapshotsResponse, DescribeDisksResponse, DescribeBundleDiscountResponse, DescribeAllScenesRequest, ModifyDisksRenewFlagRequest, DisassociateInstancesKeyPairsRequest, ImportKeyPairRequest, DeleteBlueprintsResponse, ModifyInstancesLoginKeyPairAttributeRequest, IsolateInstancesRequest, StopInstancesResponse, CreateInstancesResponse, ModifyBlueprintAttributeResponse, DescribeScenesRequest, DescribeRegionsRequest, DescribeInstancesDiskNumResponse, InquirePriceCreateBlueprintResponse, DescribeInstancesReturnableRequest, DescribeBlueprintsResponse, DescribeKeyPairsRequest, DescribeCcnAttachedInstancesRequest, ResetInstancesPasswordResponse, IsolateInstancesResponse, CreateKeyPairResponse, DescribeInstanceVncUrlResponse, ModifyFirewallRulesResponse, DescribeCcnAttachedInstancesResponse, DescribeBundlesRequest, DescribeAllScenesResponse, ModifyInstancesLoginKeyPairAttributeResponse, InquirePriceRenewDisksResponse, InquirePriceCreateInstancesResponse, DescribeSnapshotsDeniedActionsRequest, DescribeDiskDiscountResponse, ResetInstancesPasswordRequest, CreateKeyPairRequest, DescribeInstancesRequest, DetachCcnRequest, DescribeSnapshotsResponse, ModifyFirewallRuleDescriptionResponse, DescribeDiskDiscountRequest, InquirePriceCreateBlueprintRequest, AttachDisksResponse, CreateFirewallRulesRequest, DescribeFirewallRulesResponse, DescribeInstancesReturnableResponse, DeleteBlueprintsRequest, CreateFirewallRulesResponse, DescribeDisksRequest, DescribeGeneralResourceQuotasRequest, DescribeZonesResponse, CreateBlueprintResponse, DetachDisksResponse, DescribeResetInstanceBlueprintsRequest, ResetAttachCcnResponse, ModifyInstancesRenewFlagResponse, ApplyInstanceSnapshotRequest, DisassociateInstancesKeyPairsResponse, TerminateInstancesRequest, TerminateDisksRequest, ResetInstanceRequest, DescribeDiskConfigsResponse, RebootInstancesResponse, DescribeDisksDeniedActionsResponse, DescribeInstanceLoginKeyPairAttributeRequest, DescribeBundleDiscountRequest, DescribeDisksReturnableResponse, ModifyInstancesBundleResponse, DescribeResetInstanceBlueprintsResponse, DescribeDisksReturnableRequest, ModifySnapshotAttributeResponse, DescribeGeneralResourceQuotasResponse, ModifyInstancesRenewFlagRequest, StopInstancesRequest, DescribeFirewallRulesTemplateResponse, DescribeModifyInstanceBundlesRequest, RenewInstancesResponse, ResetInstanceResponse, DescribeFirewallRulesRequest, InquirePriceCreateInstancesRequest, DescribeModifyInstanceBundlesResponse, ModifyDisksAttributeResponse, CreateInstanceSnapshotRequest, InquirePriceCreateDisksResponse, ModifyInstancesAttributeResponse, DescribeInstanceLoginKeyPairAttributeResponse } from "./lighthouse_models";
+import { DescribeInstancesTrafficPackagesRequest, AssociateInstancesKeyPairsResponse, RenewInstancesRequest, DescribeDisksDeniedActionsRequest, DescribeDiskBackupsRequest, DescribeInstancesDeniedActionsRequest, DeleteKeyPairsResponse, AttachCcnRequest, CreateInstancesRequest, DescribeZonesRequest, DescribeBlueprintInstancesResponse, InquirePriceCreateDisksRequest, DetachCcnResponse, DescribeScenesResponse, InquirePriceRenewInstancesResponse, DeleteFirewallRulesResponse, ModifyInstancesAttributeRequest, DescribeGeneralResourceQuotasRequest, DeleteKeyPairsRequest, DescribeBundlesResponse, ModifyInstancesBundleRequest, DeleteDiskBackupsRequest, InquirePriceRenewInstancesRequest, DescribeDiskConfigsRequest, DescribeRegionsResponse, DescribeDiskBackupsResponse, AssociateInstancesKeyPairsRequest, ModifyDiskBackupsAttributeRequest, AttachCcnResponse, RebootInstancesRequest, ResetAttachCcnRequest, AttachDisksRequest, ImportKeyPairResponse, DescribeSnapshotsRequest, TerminateDisksResponse, DescribeInstancesTrafficPackagesResponse, DescribeDiskBackupsDeniedActionsRequest, DescribeFirewallRulesTemplateRequest, DescribeKeyPairsResponse, ModifyBlueprintAttributeRequest, InquirePriceRenewDisksRequest, DescribeBlueprintInstancesRequest, ApplyInstanceSnapshotResponse, DetachDisksRequest, ModifyFirewallRulesRequest, CreateBlueprintRequest, DeleteFirewallRulesRequest, DescribeInstanceVncUrlRequest, ModifyFirewallRuleDescriptionRequest, TerminateInstancesResponse, DescribeInstancesDiskNumRequest, ApplyDiskBackupResponse, DescribeBlueprintsRequest, DescribeInstancesDeniedActionsResponse, ModifyDisksAttributeRequest, DescribeSnapshotsDeniedActionsResponse, DescribeScenesRequest, StartInstancesRequest, DeleteDiskBackupsResponse, DeleteSnapshotsRequest, ModifyDisksRenewFlagResponse, ModifySnapshotAttributeRequest, DeleteSnapshotsResponse, DescribeDisksResponse, DescribeBundleDiscountResponse, DescribeAllScenesRequest, ModifyDisksRenewFlagRequest, DisassociateInstancesKeyPairsRequest, ImportKeyPairRequest, DeleteBlueprintsResponse, ModifyInstancesLoginKeyPairAttributeRequest, IsolateInstancesRequest, StopInstancesResponse, CreateInstancesResponse, ModifyBlueprintAttributeResponse, DescribeModifyInstanceBundlesRequest, DescribeRegionsRequest, DescribeInstancesDiskNumResponse, InquirePriceCreateBlueprintResponse, DescribeInstancesReturnableRequest, DescribeBlueprintsResponse, DescribeKeyPairsRequest, DescribeCcnAttachedInstancesRequest, ApplyDiskBackupRequest, ResetInstancesPasswordResponse, StartInstancesResponse, IsolateInstancesResponse, CreateKeyPairResponse, DescribeInstanceVncUrlResponse, ModifyFirewallRulesResponse, DescribeCcnAttachedInstancesResponse, DescribeBundlesRequest, InquirePriceCreateInstancesResponse, DescribeAllScenesResponse, ModifyInstancesLoginKeyPairAttributeResponse, InquirePriceRenewDisksResponse, CreateDiskBackupResponse, DescribeSnapshotsDeniedActionsRequest, DescribeDiskDiscountResponse, ResetInstancesPasswordRequest, CreateKeyPairRequest, DescribeInstancesRequest, DetachCcnRequest, DescribeSnapshotsResponse, ModifyFirewallRuleDescriptionResponse, DescribeDiskDiscountRequest, InquirePriceCreateBlueprintRequest, AttachDisksResponse, CreateDiskBackupRequest, CreateFirewallRulesRequest, DescribeFirewallRulesResponse, DescribeInstancesReturnableResponse, DeleteBlueprintsRequest, CreateFirewallRulesResponse, DescribeDisksRequest, DescribeInstancesResponse, DescribeZonesResponse, CreateBlueprintResponse, DetachDisksResponse, DescribeResetInstanceBlueprintsRequest, ResetAttachCcnResponse, ModifyInstancesRenewFlagResponse, ApplyInstanceSnapshotRequest, DisassociateInstancesKeyPairsResponse, TerminateInstancesRequest, TerminateDisksRequest, ResetInstanceRequest, DescribeDiskConfigsResponse, RebootInstancesResponse, DescribeDiskBackupsDeniedActionsResponse, DescribeInstanceLoginKeyPairAttributeRequest, DescribeBundleDiscountRequest, DescribeDisksReturnableResponse, ModifyDiskBackupsAttributeResponse, CreateInstanceSnapshotResponse, ModifyInstancesBundleResponse, DescribeResetInstanceBlueprintsResponse, DescribeDisksReturnableRequest, ModifySnapshotAttributeResponse, DescribeGeneralResourceQuotasResponse, ModifyInstancesRenewFlagRequest, StopInstancesRequest, DescribeFirewallRulesTemplateResponse, RenewInstancesResponse, DescribeDisksDeniedActionsResponse, ResetInstanceResponse, DescribeFirewallRulesRequest, InquirePriceCreateInstancesRequest, DescribeModifyInstanceBundlesResponse, ModifyDisksAttributeResponse, CreateInstanceSnapshotRequest, InquirePriceCreateDisksResponse, ModifyInstancesAttributeResponse, DescribeInstanceLoginKeyPairAttributeResponse } from "./lighthouse_models";
 /**
  * lighthouse client
  * @class
@@ -29,9 +29,28 @@ export declare class Client extends AbstractClient {
      */
     ModifyFirewallRuleDescription(req: ModifyFirewallRuleDescriptionRequest, cb?: (error: string, rep: ModifyFirewallRuleDescriptionResponse) => void): Promise<ModifyFirewallRuleDescriptionResponse>;
     /**
+     * 本接口 (TerminateInstances) 用于销毁实例。
+
+* 处于 SHUTDOWN 状态的实例，可通过本接口销毁，且不可恢复。
+* 支持批量操作，每次请求批量实例的上限为100。
+* 本接口为异步接口，请求发送成功后会返回一个 RequestId，此时操作并未立即完成。实例操作结果可以通过调用 DescribeInstances 接口查询，如果实例的最新操作状态 (LatestOperationState) 为“SUCCESS”，则代表操作成功。
+     */
+    TerminateInstances(req: TerminateInstancesRequest, cb?: (error: string, rep: TerminateInstancesResponse) => void): Promise<TerminateInstancesResponse>;
+    /**
      * 本接口 (DeleteBlueprints) 用于删除镜像。
      */
     DeleteBlueprints(req: DeleteBlueprintsRequest, cb?: (error: string, rep: DeleteBlueprintsResponse) => void): Promise<DeleteBlueprintsResponse>;
+    /**
+     * 本接口（ApplyDiskBackup）用于回滚指定云硬盘的备份点。
+* 仅支持回滚到原云硬盘。
+* 用于回滚的云硬盘备份点必须处于 NORMAL 状态。
+  云硬盘备份点状态可以通过 DescribeDiskBackups 接口查询。
+* 回滚云硬盘备份点时，云硬盘的状态必须为 UNATTACHED或ATTACHED。
+  云硬盘状态可通过 [DescribeDisks](https://cloud.tencent.com/document/api/1207/66093) 接口查询。
+* 如果云硬盘处于 ATTACHED状态，相关RUNNING 状态的实例会强制关机，然后回滚云硬盘备份点。
+
+     */
+    ApplyDiskBackup(req: ApplyDiskBackupRequest, cb?: (error: string, rep: ApplyDiskBackupResponse) => void): Promise<ApplyDiskBackupResponse>;
     /**
      * 本接口(DescribeAllScenes)用于查询全地域使用场景列表。
      */
@@ -123,6 +142,11 @@ export declare class Client extends AbstractClient {
      */
     ImportKeyPair(req: ImportKeyPairRequest, cb?: (error: string, rep: ImportKeyPairResponse) => void): Promise<ImportKeyPairResponse>;
     /**
+     * 本接口（DeleteDiskBackups）用于删除云硬盘备份点。
+云硬盘备份点必须处于 NORMAL 状态，云硬盘备份点状态可以通过 DescribeDiskBackups接口查询，见输出参数中 DiskBackupState 字段解释。
+     */
+    DeleteDiskBackups(req: DeleteDiskBackupsRequest, cb?: (error: string, rep: DeleteDiskBackupsResponse) => void): Promise<DeleteDiskBackupsResponse>;
+    /**
      * 本接口（DescribeInstancesTrafficPackages）用于查询一个或多个实例的流量包详情。
      */
     DescribeInstancesTrafficPackages(req: DescribeInstancesTrafficPackagesRequest, cb?: (error: string, rep: DescribeInstancesTrafficPackagesResponse) => void): Promise<DescribeInstancesTrafficPackagesResponse>;
@@ -157,6 +181,10 @@ export declare class Client extends AbstractClient {
 * FirewallRuleDescription 字段长度不得超过 64。
      */
     DeleteFirewallRules(req: DeleteFirewallRulesRequest, cb?: (error: string, rep: DeleteFirewallRulesResponse) => void): Promise<DeleteFirewallRulesResponse>;
+    /**
+     * 本接口（DescribeDiskBackups）用于查询云硬盘备份点的详细信息。
+     */
+    DescribeDiskBackups(req: DescribeDiskBackupsRequest, cb?: (error: string, rep: DescribeDiskBackupsResponse) => void): Promise<DescribeDiskBackupsResponse>;
     /**
      * 本接口（DisassociateInstancesKeyPairs）用于解除实例与指定密钥对的绑定关系。
 
@@ -216,6 +244,10 @@ export declare class Client extends AbstractClient {
      * 本接口（DescribeInstancesDeniedActions）用于查询一个或多个实例的操作限制列表信息。
      */
     DescribeInstancesDeniedActions(req: DescribeInstancesDeniedActionsRequest, cb?: (error: string, rep: DescribeInstancesDeniedActionsResponse) => void): Promise<DescribeInstancesDeniedActionsResponse>;
+    /**
+     * 本接口 (ModifyDiskBackupsAttribute) 用于修改云硬盘备份点属性。
+     */
+    ModifyDiskBackupsAttribute(req: ModifyDiskBackupsAttributeRequest, cb?: (error: string, rep: ModifyDiskBackupsAttributeResponse) => void): Promise<ModifyDiskBackupsAttributeResponse>;
     /**
      * 本接口（InquirePriceRenewInstances）用于续费实例询价。
      */
@@ -304,13 +336,9 @@ export declare class Client extends AbstractClient {
      */
     ModifyFirewallRules(req: ModifyFirewallRulesRequest, cb?: (error: string, rep: ModifyFirewallRulesResponse) => void): Promise<ModifyFirewallRulesResponse>;
     /**
-     * 本接口 (TerminateInstances) 用于销毁实例。
-
-* 处于 SHUTDOWN 状态的实例，可通过本接口销毁，且不可恢复。
-* 支持批量操作，每次请求批量实例的上限为100。
-* 本接口为异步接口，请求发送成功后会返回一个 RequestId，此时操作并未立即完成。实例操作结果可以通过调用 DescribeInstances 接口查询，如果实例的最新操作状态 (LatestOperationState) 为“SUCCESS”，则代表操作成功。
+     * 本接口（DescribeDiskBackupsDeniedActions）用于查询一个或多个云硬盘备份点的操作限制列表信息。
      */
-    TerminateInstances(req: TerminateInstancesRequest, cb?: (error: string, rep: TerminateInstancesResponse) => void): Promise<TerminateInstancesResponse>;
+    DescribeDiskBackupsDeniedActions(req: DescribeDiskBackupsDeniedActionsRequest, cb?: (error: string, rep: DescribeDiskBackupsDeniedActionsResponse) => void): Promise<DescribeDiskBackupsDeniedActionsResponse>;
     /**
      * 本接口(RenewInstances)用于续费一个或多个轻量应用服务器实例。
 * 只有状态为 RUNNING，STOPPED 或 SHUTDOWN 的实例才可以进行此操作。
@@ -356,6 +384,10 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
      * 本接口（DescribeResetInstanceBlueprints）查询重置实例的镜像信息。
      */
     DescribeResetInstanceBlueprints(req: DescribeResetInstanceBlueprintsRequest, cb?: (error: string, rep: DescribeResetInstanceBlueprintsResponse) => void): Promise<DescribeResetInstanceBlueprintsResponse>;
+    /**
+     * 本接口 ( CreateDiskBackup  ) 用于创建指定云硬盘（当前只支持数据盘）的备份点。
+     */
+    CreateDiskBackup(req: CreateDiskBackupRequest, cb?: (error: string, rep: CreateDiskBackupResponse) => void): Promise<CreateDiskBackupResponse>;
     /**
      * 本接口(DescribeScenes)用于查看使用场景列表。
      */

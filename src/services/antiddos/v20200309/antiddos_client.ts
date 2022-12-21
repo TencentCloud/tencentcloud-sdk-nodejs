@@ -85,6 +85,7 @@ import {
   DisassociateDDoSEipAddressResponse,
   DescribeBgpBizTrendRequest,
   DeleteCCThresholdPolicyResponse,
+  DescribeBizHttpStatusRequest,
   SourceServer,
   CCLevelPolicy,
   DescribeOverviewIndexResponse,
@@ -107,6 +108,7 @@ import {
   DescribeOverviewDDoSEventListResponse,
   CreateCcGeoIPBlockConfigResponse,
   DescribeOverviewAttackTrendResponse,
+  HttpStatusMap,
   Layer7Rule,
   ModifyPortAclConfigResponse,
   DescribeBasicDeviceStatusRequest,
@@ -159,6 +161,7 @@ import {
   DeleteDDoSBlackWhiteIpListRequest,
   PackInfo,
   CreateDDoSConnectLimitResponse,
+  WaterPrintRelation,
   IPLineInfo,
   DescribeCcBlackWhiteIpListRequest,
   DescribeListListenerResponse,
@@ -200,7 +203,7 @@ import {
   ModifyDomainUsrNameRequest,
   CreateDDoSConnectLimitRequest,
   CreateWaterPrintKeyRequest,
-  WaterPrintRelation,
+  DescribeBizHttpStatusResponse,
   InsL7Rules,
   DescribeCCReqLimitPolicyListResponse,
   DescribeListDDoSAIResponse,
@@ -730,6 +733,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateDDoSSpeedLimitConfigResponse) => void
   ): Promise<CreateDDoSSpeedLimitConfigResponse> {
     return this.request("CreateDDoSSpeedLimitConfig", req, cb)
+  }
+
+  /**
+   * 获取业务流量状态码统计列表
+   */
+  async DescribeBizHttpStatus(
+    req: DescribeBizHttpStatusRequest,
+    cb?: (error: string, rep: DescribeBizHttpStatusResponse) => void
+  ): Promise<DescribeBizHttpStatusResponse> {
+    return this.request("DescribeBizHttpStatus", req, cb)
   }
 
   /**

@@ -358,6 +358,16 @@ it("vod.v20180717.DescribeMediaPlayStatDetails", async function () {
     }
 })
 
+it("vod.v20180717.ModifyReviewTemplate", async function () {
+    try {
+       const data = await client.ModifyReviewTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vod.v20180717.DescribeLicenseUsageData", async function () {
     try {
        const data = await client.DescribeLicenseUsageData({})
@@ -398,9 +408,9 @@ it("vod.v20180717.ExecuteFunction", async function () {
     }
 })
 
-it("vod.v20180717.DeleteVodDomain", async function () {
+it("vod.v20180717.DeleteReviewTemplate", async function () {
     try {
-       const data = await client.DeleteVodDomain({})
+       const data = await client.DeleteReviewTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -808,6 +818,16 @@ it("vod.v20180717.DeleteImageProcessingTemplate", async function () {
     }
 })
 
+it("vod.v20180717.ProcessMedia", async function () {
+    try {
+       const data = await client.ProcessMedia({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vod.v20180717.CreateHeadTailTemplate", async function () {
     try {
        const data = await client.CreateHeadTailTemplate({})
@@ -1078,6 +1098,16 @@ it("vod.v20180717.SetDrmKeyProviderInfo", async function () {
     }
 })
 
+it("vod.v20180717.CreateReviewTemplate", async function () {
+    try {
+       const data = await client.CreateReviewTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vod.v20180717.DescribeAIRecognitionTemplates", async function () {
     try {
        const data = await client.DescribeAIRecognitionTemplates({})
@@ -1111,6 +1141,16 @@ it("vod.v20180717.DescribeSubAppIds", async function () {
 it("vod.v20180717.DescribeHeadTailTemplates", async function () {
     try {
        const data = await client.DescribeHeadTailTemplates({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vod.v20180717.DescribeReviewTemplates", async function () {
+    try {
+       const data = await client.DescribeReviewTemplates({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1318,9 +1358,9 @@ it("vod.v20180717.ModifyContentReviewTemplate", async function () {
     }
 })
 
-it("vod.v20180717.ProcessMedia", async function () {
+it("vod.v20180717.DeleteVodDomain", async function () {
     try {
-       const data = await client.ProcessMedia({})
+       const data = await client.DeleteVodDomain({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

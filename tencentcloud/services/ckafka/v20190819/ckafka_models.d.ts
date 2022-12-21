@@ -734,6 +734,10 @@ export interface EsParam {
       * 转储到ES的消息为Database的binlog时，如果需要同步数据库操作，即增删改的操作到ES时填写数据库表主键
       */
     DatabasePrimaryKey?: string;
+    /**
+      * 死信队列
+      */
+    DropDlq?: FailureParam;
 }
 /**
  * 查询连接源具体数据的返参
@@ -1221,6 +1225,11 @@ export interface DatahubResource {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     CtsdbParam?: CtsdbParam;
+    /**
+      * Scf配置，Type为SCF时必填
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ScfParam?: ScfParam;
 }
 /**
  * BatchModifyTopicAttributes返回参数结构体
@@ -1521,6 +1530,11 @@ export interface TransformsParam {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     KeepMetadata?: boolean;
+    /**
+      * 数组解析
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BatchAnalyse?: BatchAnalyseParam;
 }
 /**
  * ClickHouse修改连接源参数
@@ -2720,6 +2734,16 @@ export interface MySQLParam {
       * 输入的table是否为正则表达式，如果该选项以及IsTablePrefix同时为true，该选项的判断优先级高于IsTablePrefix
       */
     IsTableRegular?: boolean;
+}
+/**
+ * 批量解析
+ */
+export interface BatchAnalyseParam {
+    /**
+      * ONE_BY_ONE单条输出，MERGE合并输出
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Format: string;
 }
 /**
  * 集群信息实体
@@ -5666,6 +5690,11 @@ export interface KafkaParam {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     CompressionType?: string;
+    /**
+      * 源topic消息1条扩增成msgMultiple条写入目标topic(该参数目前只有ckafka流入ckafka适用)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MsgMultiple?: number;
 }
 /**
  * 数据处理——Value处理参数——正则替换参数
@@ -6574,6 +6603,11 @@ export interface TopicParam {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     UseAutoCreateTopic?: boolean;
+    /**
+      * 源topic消息1条扩增成msgMultiple条写入目标topic(该参数目前只有ckafka流入ckafka适用)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MsgMultiple?: number;
 }
 /**
  * ModifyTopicAttributes请求参数结构体
@@ -6793,6 +6827,34 @@ export interface DeleteTopicResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * Scf类型入参
+ */
+export interface ScfParam {
+    /**
+      * SCF云函数函数名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FunctionName: string;
+    /**
+      * SCF云函数命名空间, 默认为default
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Namespace?: string;
+    /**
+      * SCF云函数版本及别名, 默认为$DEFAULT
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Qualifier?: string;
+    /**
+      * 每批最大发送消息数, 默认为1000
+      */
+    BatchSize?: number;
+    /**
+      * SCF调用失败后重试次数, 默认为5
+      */
+    MaxRetries?: number;
 }
 /**
  * CreateDatahubTask返回参数结构体

@@ -61,6 +61,7 @@ import {
   CreateExporterIntegrationRequest,
   DescribeAlarmEventsResponse,
   DescribeProductEventListDimensions,
+  UpdateExporterIntegrationResponse,
   DescribePolicyGroupInfoResponse,
   Operator,
   ModifyAlarmPolicyNoticeRequest,
@@ -179,7 +180,7 @@ import {
   UpgradeGrafanaInstanceRequest,
   DescribeAlarmNoticeCallbacksRequest,
   DescribeAlarmNoticeCallbacksResponse,
-  UpdateExporterIntegrationResponse,
+  DescribePrometheusInstanceUsageRequest,
   ModifyAlarmPolicyConditionRequest,
   DeleteSSOAccountRequest,
   PrometheusScrapeJob,
@@ -192,6 +193,7 @@ import {
   CreateGrafanaInstanceRequest,
   UpdateAlertRuleStateResponse,
   BindingPolicyObjectDimension,
+  DescribePrometheusInstanceUsageResponse,
   UnbindPrometheusManagedGrafanaResponse,
   DescribeBasicAlarmListAlarms,
   DescribeGrafanaChannelsResponse,
@@ -307,6 +309,7 @@ import {
   DescribeSSOAccountRequest,
   Tag,
   DescribeAlarmNoticeRequest,
+  PrometheusInstanceTenantUsage,
   UninstallGrafanaDashboardRequest,
   GrafanaNotificationChannel,
   CreatePrometheusAgentRequest,
@@ -398,6 +401,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpdateAlertRuleResponse) => void
   ): Promise<UpdateAlertRuleResponse> {
     return this.request("UpdateAlertRule", req, cb)
+  }
+
+  /**
+   *  查询Prometheus按量实例用量
+   */
+  async DescribePrometheusInstanceUsage(
+    req: DescribePrometheusInstanceUsageRequest,
+    cb?: (error: string, rep: DescribePrometheusInstanceUsageResponse) => void
+  ): Promise<DescribePrometheusInstanceUsageResponse> {
+    return this.request("DescribePrometheusInstanceUsage", req, cb)
   }
 
   /**

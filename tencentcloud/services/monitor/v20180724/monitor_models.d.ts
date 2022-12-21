@@ -887,6 +887,15 @@ export interface DescribeProductEventListDimensions {
     Value: string;
 }
 /**
+ * UpdateExporterIntegration返回参数结构体
+ */
+export interface UpdateExporterIntegrationResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribePolicyGroupInfo返回参数结构体
  */
 export interface DescribePolicyGroupInfoResponse {
@@ -3546,13 +3555,21 @@ export interface DescribeAlarmNoticeCallbacksResponse {
     RequestId?: string;
 }
 /**
- * UpdateExporterIntegration返回参数结构体
+ * DescribePrometheusInstanceUsage请求参数结构体
  */
-export interface UpdateExporterIntegrationResponse {
+export interface DescribePrometheusInstanceUsageRequest {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 按照一个或者多个实例ID查询。实例ID形如：prom-xxxxxxxx。请求的实例的上限为100。
       */
-    RequestId?: string;
+    InstanceIds: Array<string>;
+    /**
+      * 开始时间
+      */
+    StartCalcDate: string;
+    /**
+      * 结束时间
+      */
+    EndCalcDate: string;
 }
 /**
  * ModifyAlarmPolicyCondition请求参数结构体
@@ -3770,6 +3787,20 @@ export interface BindingPolicyObjectDimension {
       * 事件维度信息
       */
     EventDimensions?: string;
+}
+/**
+ * DescribePrometheusInstanceUsage返回参数结构体
+ */
+export interface DescribePrometheusInstanceUsageResponse {
+    /**
+      * 用量列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UsageSet: Array<PrometheusInstanceTenantUsage>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * UnbindPrometheusManagedGrafana返回参数结构体
@@ -6790,6 +6821,36 @@ export interface DescribeAlarmNoticeRequest {
       * 告警通知模板 id
       */
     NoticeId: string;
+}
+/**
+ * Prometheus用量信息
+ */
+export interface PrometheusInstanceTenantUsage {
+    /**
+      * 实例ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InstanceId: string;
+    /**
+      * 计费周期
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CalcDate: string;
+    /**
+      * 总用量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Total: number;
+    /**
+      * 基础指标用量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Basic: number;
+    /**
+      * 付费指标用量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Fee: number;
 }
 /**
  * UninstallGrafanaDashboard请求参数结构体

@@ -120,6 +120,15 @@ export interface DeleteNodesResponse {
     RequestId?: string;
 }
 /**
+ * AddClusterStorageOption返回参数结构体
+ */
+export interface AddClusterStorageOptionResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DeleteCluster返回参数结构体
  */
 export interface DeleteClusterResponse {
@@ -419,6 +428,15 @@ false（默认）：发送正常请求，通过检查后直接创建实例
     AutoScalingType?: string;
 }
 /**
+ * DescribeClusterStorageOption返回参数结构体
+ */
+export interface DescribeClusterStorageOptionResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 标签键值对。
  */
 export interface Tag {
@@ -673,6 +691,32 @@ false（默认）：发送正常请求，通过检查后直接创建实例
     DryRun?: boolean;
 }
 /**
+ * DeleteClusterStorageOption请求参数结构体
+ */
+export interface DeleteClusterStorageOptionRequest {
+    /**
+      * 集群ID。
+      */
+    ClusterId: string;
+    /**
+      * 本地挂载路径。
+      */
+    LocalPath: string;
+}
+/**
+ * AddClusterStorageOption请求参数结构体
+ */
+export interface AddClusterStorageOptionRequest {
+    /**
+      * 集群ID。
+      */
+    ClusterId: string;
+    /**
+      * 集群存储选项。
+      */
+    StorageOption: StorageOption;
+}
+/**
  * BindAutoScalingGroup请求参数结构体
  */
 export interface BindAutoScalingGroupRequest {
@@ -747,6 +791,15 @@ DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费
 默认取值：NOTIFY_AND_MANUAL_RENEW。若该参数指定为NOTIFY_AND_AUTO_RENEW，在账户余额充足的情况下，实例到期后将按月自动续费。
       */
     RenewFlag?: string;
+}
+/**
+ * DescribeClusterStorageOption请求参数结构体
+ */
+export interface DescribeClusterStorageOptionRequest {
+    /**
+      * 集群ID。
+      */
+    ClusterId: string;
 }
 /**
  * 描述集群文件系统选项
@@ -840,6 +893,15 @@ export interface DescribeClustersResponse {
       * 集群数量。
       */
     TotalCount: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DeleteClusterStorageOption返回参数结构体
+ */
+export interface DeleteClusterStorageOptionResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

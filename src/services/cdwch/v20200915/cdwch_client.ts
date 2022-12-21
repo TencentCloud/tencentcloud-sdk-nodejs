@@ -19,24 +19,33 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   DescribeInstanceShardsRequest,
-  ModifyClusterConfigsRequest,
-  CreateBackUpScheduleRequest,
-  DescribeInstanceShardsResponse,
+  OpenBackUpResponse,
+  Charge,
+  ActionAlterCkUserRequest,
+  DescribeSpecRequest,
+  CkUserAlterInfo,
+  DescribeSpecResponse,
+  ResourceSpec,
+  ModifyUserNewPrivilegeRequest,
+  DescribeInstanceResponse,
   OpenBackUpRequest,
+  BackupTableContent,
+  CreateInstanceNewResponse,
+  ConfigSubmitContext,
+  CreateInstanceNewRequest,
+  InstanceInfo,
   ModifyClusterConfigsResponse,
   DiskSpec,
-  BackupTableContent,
-  OpenBackUpResponse,
-  ModifyUserNewPrivilegeRequest,
-  DescribeSpecRequest,
-  ConfigSubmitContext,
-  ActionAlterCkUserResponse,
   DescribeCkSqlApisRequest,
-  ActionAlterCkUserRequest,
-  CkUserAlterInfo,
   CreateBackUpScheduleResponse,
-  ResourceSpec,
-  DescribeSpecResponse,
+  ModifyClusterConfigsRequest,
+  NodesSummary,
+  DescribeInstanceShardsResponse,
+  CreateBackUpScheduleRequest,
+  NodeSpec,
+  DescribeInstanceRequest,
+  ActionAlterCkUserResponse,
+  Tag,
   DescribeCkSqlApisResponse,
   ModifyUserNewPrivilegeResponse,
 } from "./cdwch_models"
@@ -91,6 +100,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 购买页拉取集群的数据节点和zookeeper节点的规格列表
+   */
+  async DescribeSpec(
+    req: DescribeSpecRequest,
+    cb?: (error: string, rep: DescribeSpecResponse) => void
+  ): Promise<DescribeSpecResponse> {
+    return this.request("DescribeSpec", req, cb)
+  }
+
+  /**
    * 在集群配置页面修改集群配置文件接口，xml模式
    */
   async ModifyClusterConfigs(
@@ -101,13 +120,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 购买页拉取集群的数据节点和zookeeper节点的规格列表
+   * 根据实例ID查询某个实例的具体信息
    */
-  async DescribeSpec(
-    req: DescribeSpecRequest,
-    cb?: (error: string, rep: DescribeSpecResponse) => void
-  ): Promise<DescribeSpecResponse> {
-    return this.request("DescribeSpec", req, cb)
+  async DescribeInstance(
+    req: DescribeInstanceRequest,
+    cb?: (error: string, rep: DescribeInstanceResponse) => void
+  ): Promise<DescribeInstanceResponse> {
+    return this.request("DescribeInstance", req, cb)
+  }
+
+  /**
+   * 创建集群
+   */
+  async CreateInstanceNew(
+    req: CreateInstanceNewRequest,
+    cb?: (error: string, rep: CreateInstanceNewResponse) => void
+  ): Promise<CreateInstanceNewResponse> {
+    return this.request("CreateInstanceNew", req, cb)
   }
 
   /**

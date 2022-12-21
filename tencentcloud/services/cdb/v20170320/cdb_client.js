@@ -716,6 +716,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAuditRules", req, cb);
     }
     /**
+     * 本接口(DescribeRemoteBackupConfig)用于查询数据库异地备份配置信息。
+     */
+    async DescribeRemoteBackupConfig(req, cb) {
+        return this.request("DescribeRemoteBackupConfig", req, cb);
+    }
+    /**
      * 本接口(DescribeBackupDatabases)用于查询备份文件包含的库 (已废弃)。
 旧版本支持全量备份后，用户如果分库表下载逻辑备份文件，需要用到此接口。
 新版本支持(CreateBackup)创建逻辑备份的时候，直接发起指定库表备份，用户直接下载该备份文件即可。
@@ -858,6 +864,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateDeployGroup(req, cb) {
         return this.request("CreateDeployGroup", req, cb);
+    }
+    /**
+     * 本接口(ModifyRemoteBackupConfig)用于查询数据库异地备份配置信息。
+     */
+    async ModifyRemoteBackupConfig(req, cb) {
+        return this.request("ModifyRemoteBackupConfig", req, cb);
     }
     /**
      * 本接口(DeleteTimeWindow)用于删除云数据库实例的维护时间窗口。删除实例维护时间窗口之后，默认的维护时间窗为 03:00-04:00，即当选择在维护时间窗口内切换访问新实例时，默认会在 03:00-04:00 点进行切换访问新实例。

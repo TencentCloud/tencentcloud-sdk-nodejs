@@ -238,16 +238,6 @@ it("teo.v20220901.DeleteApplicationProxyRule", async function () {
     }
 })
 
-it("teo.v20220901.ModifyLoadBalancingStatus", async function () {
-    try {
-       const data = await client.ModifyLoadBalancingStatus({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("teo.v20220901.DescribeWebProtectionData", async function () {
     try {
        const data = await client.DescribeWebProtectionData({})

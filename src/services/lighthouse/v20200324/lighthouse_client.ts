@@ -22,7 +22,7 @@ import {
   AssociateInstancesKeyPairsResponse,
   RenewInstancesRequest,
   DescribeDisksDeniedActionsRequest,
-  DescribeInstancesTrafficPackagesResponse,
+  DescribeDiskBackupsRequest,
   DescribeInstancesDeniedActionsRequest,
   DeleteKeyPairsResponse,
   AttachCcnRequest,
@@ -34,23 +34,25 @@ import {
   InquirePriceCreateDisksRequest,
   ModifyBundle,
   DetachCcnResponse,
-  CreateInstanceSnapshotResponse,
+  BlueprintPrice,
   DescribeScenesResponse,
   InquirePriceRenewInstancesResponse,
   DeleteFirewallRulesResponse,
   ModifyInstancesAttributeRequest,
-  DescribeInstancesResponse,
+  DescribeGeneralResourceQuotasRequest,
   DeleteKeyPairsRequest,
   SystemDisk,
   ResetInstanceBlueprint,
   DescribeBundlesResponse,
   ModifyInstancesBundleRequest,
-  InstancePriceDetail,
+  DeleteDiskBackupsRequest,
   InquirePriceRenewInstancesRequest,
   DiscountDetail,
   DescribeDiskConfigsRequest,
   DescribeRegionsResponse,
+  DescribeDiskBackupsResponse,
   AssociateInstancesKeyPairsRequest,
+  ModifyDiskBackupsAttributeRequest,
   AttachCcnResponse,
   RebootInstancesRequest,
   ResetAttachCcnRequest,
@@ -58,6 +60,9 @@ import {
   ImportKeyPairResponse,
   DescribeSnapshotsRequest,
   TerminateDisksResponse,
+  DiskBackup,
+  DescribeInstancesTrafficPackagesResponse,
+  DescribeDiskBackupsDeniedActionsRequest,
   KeyPair,
   DescribeFirewallRulesTemplateRequest,
   DescribeKeyPairsResponse,
@@ -74,19 +79,21 @@ import {
   DescribeInstanceVncUrlRequest,
   ModifyFirewallRuleDescriptionRequest,
   InstanceTrafficPackage,
-  StartInstancesResponse,
+  SnapshotDeniedActions,
   TerminateInstancesResponse,
   TrafficPackage,
   DescribeInstancesDiskNumRequest,
   DetailPrice,
+  ApplyDiskBackupResponse,
   DescribeBlueprintsRequest,
   InstanceReturnable,
   DescribeInstancesDeniedActionsResponse,
   ModifyDisksAttributeRequest,
   DockerContainerPublishPort,
   DescribeSnapshotsDeniedActionsResponse,
+  DescribeScenesRequest,
   StartInstancesRequest,
-  SnapshotDeniedActions,
+  DeleteDiskBackupsResponse,
   DeleteSnapshotsRequest,
   ModifyDisksRenewFlagResponse,
   ModifySnapshotAttributeRequest,
@@ -105,7 +112,7 @@ import {
   StopInstancesResponse,
   CreateInstancesResponse,
   ModifyBlueprintAttributeResponse,
-  DescribeScenesRequest,
+  DescribeModifyInstanceBundlesRequest,
   DescribeRegionsRequest,
   DescribeInstancesDiskNumResponse,
   InquirePriceCreateBlueprintResponse,
@@ -114,7 +121,9 @@ import {
   DescribeBlueprintsResponse,
   DescribeKeyPairsRequest,
   DescribeCcnAttachedInstancesRequest,
+  ApplyDiskBackupRequest,
   ResetInstancesPasswordResponse,
+  StartInstancesResponse,
   LoginSettings,
   Instance,
   DockerContainerVolume,
@@ -126,6 +135,7 @@ import {
   DescribeCcnAttachedInstancesResponse,
   DescribeBundlesRequest,
   Blueprint,
+  InquirePriceCreateInstancesResponse,
   TotalPrice,
   DeniedAction,
   DescribeAllScenesResponse,
@@ -133,7 +143,7 @@ import {
   InquirePriceRenewDisksResponse,
   Bundle,
   DiskConfig,
-  InquirePriceCreateInstancesResponse,
+  CreateDiskBackupResponse,
   DescribeSnapshotsDeniedActionsRequest,
   DescribeDiskDiscountResponse,
   ResetInstancesPasswordRequest,
@@ -148,6 +158,8 @@ import {
   DescribeDiskDiscountRequest,
   InquirePriceCreateBlueprintRequest,
   AttachDisksResponse,
+  DiskBackupDeniedActions,
+  CreateDiskBackupRequest,
   CreateFirewallRulesRequest,
   Software,
   DescribeFirewallRulesResponse,
@@ -158,7 +170,7 @@ import {
   FirewallRuleInfo,
   CreateFirewallRulesResponse,
   DescribeDisksRequest,
-  DescribeGeneralResourceQuotasRequest,
+  DescribeInstancesResponse,
   DescribeZonesResponse,
   CreateBlueprintResponse,
   PolicyDetail,
@@ -176,13 +188,15 @@ import {
   ResetInstanceRequest,
   DescribeDiskConfigsResponse,
   InternetAccessible,
+  InstancePriceDetail,
   RebootInstancesResponse,
-  DescribeDisksDeniedActionsResponse,
+  DescribeDiskBackupsDeniedActionsResponse,
   DescribeInstanceLoginKeyPairAttributeRequest,
   DescribeBundleDiscountRequest,
   Price,
   DescribeDisksReturnableResponse,
-  BlueprintPrice,
+  ModifyDiskBackupsAttributeResponse,
+  CreateInstanceSnapshotResponse,
   ModifyInstancesBundleResponse,
   GeneralResourceQuota,
   DescribeResetInstanceBlueprintsResponse,
@@ -195,8 +209,8 @@ import {
   ModifyInstancesRenewFlagRequest,
   StopInstancesRequest,
   DescribeFirewallRulesTemplateResponse,
-  DescribeModifyInstanceBundlesRequest,
   RenewInstancesResponse,
+  DescribeDisksDeniedActionsResponse,
   ResetInstanceResponse,
   DescribeFirewallRulesRequest,
   DiskDeniedActions,
@@ -257,6 +271,20 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 本接口 (TerminateInstances) 用于销毁实例。
+
+* 处于 SHUTDOWN 状态的实例，可通过本接口销毁，且不可恢复。
+* 支持批量操作，每次请求批量实例的上限为100。
+* 本接口为异步接口，请求发送成功后会返回一个 RequestId，此时操作并未立即完成。实例操作结果可以通过调用 DescribeInstances 接口查询，如果实例的最新操作状态 (LatestOperationState) 为“SUCCESS”，则代表操作成功。
+     */
+  async TerminateInstances(
+    req: TerminateInstancesRequest,
+    cb?: (error: string, rep: TerminateInstancesResponse) => void
+  ): Promise<TerminateInstancesResponse> {
+    return this.request("TerminateInstances", req, cb)
+  }
+
+  /**
    * 本接口 (DeleteBlueprints) 用于删除镜像。
    */
   async DeleteBlueprints(
@@ -264,6 +292,23 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteBlueprintsResponse) => void
   ): Promise<DeleteBlueprintsResponse> {
     return this.request("DeleteBlueprints", req, cb)
+  }
+
+  /**
+     * 本接口（ApplyDiskBackup）用于回滚指定云硬盘的备份点。
+* 仅支持回滚到原云硬盘。
+* 用于回滚的云硬盘备份点必须处于 NORMAL 状态。
+  云硬盘备份点状态可以通过 DescribeDiskBackups 接口查询。
+* 回滚云硬盘备份点时，云硬盘的状态必须为 UNATTACHED或ATTACHED。
+  云硬盘状态可通过 [DescribeDisks](https://cloud.tencent.com/document/api/1207/66093) 接口查询。
+* 如果云硬盘处于 ATTACHED状态，相关RUNNING 状态的实例会强制关机，然后回滚云硬盘备份点。
+
+     */
+  async ApplyDiskBackup(
+    req: ApplyDiskBackupRequest,
+    cb?: (error: string, rep: ApplyDiskBackupResponse) => void
+  ): Promise<ApplyDiskBackupResponse> {
+    return this.request("ApplyDiskBackup", req, cb)
   }
 
   /**
@@ -453,6 +498,17 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 本接口（DeleteDiskBackups）用于删除云硬盘备份点。
+云硬盘备份点必须处于 NORMAL 状态，云硬盘备份点状态可以通过 DescribeDiskBackups接口查询，见输出参数中 DiskBackupState 字段解释。
+     */
+  async DeleteDiskBackups(
+    req: DeleteDiskBackupsRequest,
+    cb?: (error: string, rep: DeleteDiskBackupsResponse) => void
+  ): Promise<DeleteDiskBackupsResponse> {
+    return this.request("DeleteDiskBackups", req, cb)
+  }
+
+  /**
    * 本接口（DescribeInstancesTrafficPackages）用于查询一个或多个实例的流量包详情。
    */
   async DescribeInstancesTrafficPackages(
@@ -515,6 +571,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteFirewallRulesResponse) => void
   ): Promise<DeleteFirewallRulesResponse> {
     return this.request("DeleteFirewallRules", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeDiskBackups）用于查询云硬盘备份点的详细信息。
+   */
+  async DescribeDiskBackups(
+    req: DescribeDiskBackupsRequest,
+    cb?: (error: string, rep: DescribeDiskBackupsResponse) => void
+  ): Promise<DescribeDiskBackupsResponse> {
+    return this.request("DescribeDiskBackups", req, cb)
   }
 
   /**
@@ -646,6 +712,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeInstancesDeniedActionsResponse) => void
   ): Promise<DescribeInstancesDeniedActionsResponse> {
     return this.request("DescribeInstancesDeniedActions", req, cb)
+  }
+
+  /**
+   * 本接口 (ModifyDiskBackupsAttribute) 用于修改云硬盘备份点属性。
+   */
+  async ModifyDiskBackupsAttribute(
+    req: ModifyDiskBackupsAttributeRequest,
+    cb?: (error: string, rep: ModifyDiskBackupsAttributeResponse) => void
+  ): Promise<ModifyDiskBackupsAttributeResponse> {
+    return this.request("ModifyDiskBackupsAttribute", req, cb)
   }
 
   /**
@@ -832,17 +908,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口 (TerminateInstances) 用于销毁实例。
-
-* 处于 SHUTDOWN 状态的实例，可通过本接口销毁，且不可恢复。
-* 支持批量操作，每次请求批量实例的上限为100。
-* 本接口为异步接口，请求发送成功后会返回一个 RequestId，此时操作并未立即完成。实例操作结果可以通过调用 DescribeInstances 接口查询，如果实例的最新操作状态 (LatestOperationState) 为“SUCCESS”，则代表操作成功。
-     */
-  async TerminateInstances(
-    req: TerminateInstancesRequest,
-    cb?: (error: string, rep: TerminateInstancesResponse) => void
-  ): Promise<TerminateInstancesResponse> {
-    return this.request("TerminateInstances", req, cb)
+   * 本接口（DescribeDiskBackupsDeniedActions）用于查询一个或多个云硬盘备份点的操作限制列表信息。
+   */
+  async DescribeDiskBackupsDeniedActions(
+    req: DescribeDiskBackupsDeniedActionsRequest,
+    cb?: (error: string, rep: DescribeDiskBackupsDeniedActionsResponse) => void
+  ): Promise<DescribeDiskBackupsDeniedActionsResponse> {
+    return this.request("DescribeDiskBackupsDeniedActions", req, cb)
   }
 
   /**
@@ -924,6 +996,16 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
     cb?: (error: string, rep: DescribeResetInstanceBlueprintsResponse) => void
   ): Promise<DescribeResetInstanceBlueprintsResponse> {
     return this.request("DescribeResetInstanceBlueprints", req, cb)
+  }
+
+  /**
+   * 本接口 ( CreateDiskBackup  ) 用于创建指定云硬盘（当前只支持数据盘）的备份点。
+   */
+  async CreateDiskBackup(
+    req: CreateDiskBackupRequest,
+    cb?: (error: string, rep: CreateDiskBackupResponse) => void
+  ): Promise<CreateDiskBackupResponse> {
+    return this.request("CreateDiskBackup", req, cb)
   }
 
   /**

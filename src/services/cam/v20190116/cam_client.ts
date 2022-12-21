@@ -230,7 +230,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 添加子用户
+   * 创建子用户
    */
   async AddUser(
     req: AddUserRequest,

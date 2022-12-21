@@ -52,16 +52,28 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("OpenBackUp", req, cb);
     }
     /**
+     * 购买页拉取集群的数据节点和zookeeper节点的规格列表
+     */
+    async DescribeSpec(req, cb) {
+        return this.request("DescribeSpec", req, cb);
+    }
+    /**
      * 在集群配置页面修改集群配置文件接口，xml模式
      */
     async ModifyClusterConfigs(req, cb) {
         return this.request("ModifyClusterConfigs", req, cb);
     }
     /**
-     * 购买页拉取集群的数据节点和zookeeper节点的规格列表
+     * 根据实例ID查询某个实例的具体信息
      */
-    async DescribeSpec(req, cb) {
-        return this.request("DescribeSpec", req, cb);
+    async DescribeInstance(req, cb) {
+        return this.request("DescribeInstance", req, cb);
+    }
+    /**
+     * 创建集群
+     */
+    async CreateInstanceNew(req, cb) {
+        return this.request("CreateInstanceNew", req, cb);
     }
     /**
      * 针对ck账号的权限做管控（新版）

@@ -160,12 +160,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteApplicationProxyRule", req, cb);
     }
     /**
-     * 修改负载均衡状态
-     */
-    async ModifyLoadBalancingStatus(req, cb) {
-        return this.request("ModifyLoadBalancingStatus", req, cb);
-    }
-    /**
      * 本接口（DescribeWebProtectionData）用于查询CC防护时序数据。
      */
     async DescribeWebProtectionData(req, cb) {

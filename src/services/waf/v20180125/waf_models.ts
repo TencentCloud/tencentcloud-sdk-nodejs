@@ -202,7 +202,73 @@ export interface DescribeIpAccessControlResponse {
 /**
  * 负载均衡算法
  */
-export type LoadBalancerPackageNew = null
+export interface LoadBalancerPackageNew {
+  /**
+      * 监听id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ListenerId: string
+
+  /**
+      * 监听名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ListenerName: string
+
+  /**
+      * 负载均衡id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LoadBalancerId: string
+
+  /**
+      * 负载均衡名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LoadBalancerName: string
+
+  /**
+      * 协议
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Protocol: string
+
+  /**
+      * 地区
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Region: string
+
+  /**
+      * 接入IP
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Vip: string
+
+  /**
+      * 接入端口
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Vport: number
+
+  /**
+      * 地域
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Zone: string
+
+  /**
+      * VPCID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NumericalVpcId: number
+
+  /**
+      * CLB类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LoadBalancerType: string
+}
 
 /**
  * DescribeInstances返回参数结构体

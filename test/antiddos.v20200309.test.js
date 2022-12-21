@@ -468,6 +468,16 @@ it("antiddos.v20200309.CreateDDoSSpeedLimitConfig", async function () {
     }
 })
 
+it("antiddos.v20200309.DescribeBizHttpStatus", async function () {
+    try {
+       const data = await client.DescribeBizHttpStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("antiddos.v20200309.DescribeListBGPInstances", async function () {
     try {
        const data = await client.DescribeListBGPInstances({})

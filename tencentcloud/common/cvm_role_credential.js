@@ -8,7 +8,7 @@ class CvmRoleCredential {
     async getRoleName() {
         const response = await fetch_1.default(ROLE_URL, {});
         if (!response.ok) {
-            throw new Error('Get cvm role name failed, Please confirm whether the role is bound');
+            throw new Error("Get cvm role name failed, Please confirm whether the role is bound");
         }
         return await response.text();
     }
@@ -18,7 +18,7 @@ class CvmRoleCredential {
             throw new Error(`Get credential from metadata server by role name ${roleName} failed, http code: ${response.status}`);
         }
         const json = await response.json();
-        if (json.Code !== 'Success') {
+        if (json.Code !== "Success") {
             throw new Error(`Get credential from metadata server by role name ${roleName} failed, Code: ${json.Code}`);
         }
         return json;
@@ -40,7 +40,7 @@ class CvmRoleCredential {
         return {
             secretId: credential.TmpSecretId,
             secretKey: credential.TmpSecretKey,
-            token: credential.Token
+            token: credential.Token,
         };
     }
 }

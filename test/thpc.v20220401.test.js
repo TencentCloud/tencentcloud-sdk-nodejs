@@ -18,6 +18,16 @@ const client = new tencentcloud.thpc.v20220401.Client({
 })
 describe("thpc.v20220401.test.js", function () {
 
+it("thpc.v20220401.DescribeClusterStorageOption", async function () {
+    try {
+       const data = await client.DescribeClusterStorageOption({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("thpc.v20220401.DeleteNodes", async function () {
     try {
        const data = await client.DeleteNodes({})
@@ -41,6 +51,16 @@ it("thpc.v20220401.BindAutoScalingGroup", async function () {
 it("thpc.v20220401.CreateCluster", async function () {
     try {
        const data = await client.CreateCluster({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("thpc.v20220401.DeleteClusterStorageOption", async function () {
+    try {
+       const data = await client.DeleteClusterStorageOption({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -78,9 +98,9 @@ it("thpc.v20220401.DescribeClusters", async function () {
     }
 })
 
-it("thpc.v20220401.DeleteCluster", async function () {
+it("thpc.v20220401.AddClusterStorageOption", async function () {
     try {
-       const data = await client.DeleteCluster({})
+       const data = await client.AddClusterStorageOption({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -91,6 +111,16 @@ it("thpc.v20220401.DeleteCluster", async function () {
 it("thpc.v20220401.DescribeClusterActivities", async function () {
     try {
        const data = await client.DescribeClusterActivities({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("thpc.v20220401.DeleteCluster", async function () {
+    try {
+       const data = await client.DeleteCluster({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

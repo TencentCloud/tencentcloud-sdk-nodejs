@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeInstanceShardsRequest, ModifyClusterConfigsRequest, CreateBackUpScheduleRequest, DescribeInstanceShardsResponse, OpenBackUpRequest, ModifyClusterConfigsResponse, OpenBackUpResponse, ModifyUserNewPrivilegeRequest, DescribeSpecRequest, ActionAlterCkUserResponse, DescribeCkSqlApisRequest, ActionAlterCkUserRequest, CreateBackUpScheduleResponse, DescribeSpecResponse, DescribeCkSqlApisResponse, ModifyUserNewPrivilegeResponse } from "./cdwch_models";
+import { DescribeInstanceShardsRequest, OpenBackUpResponse, ActionAlterCkUserRequest, DescribeSpecRequest, DescribeSpecResponse, ModifyUserNewPrivilegeRequest, DescribeInstanceResponse, OpenBackUpRequest, CreateInstanceNewResponse, CreateInstanceNewRequest, ModifyClusterConfigsResponse, DescribeCkSqlApisRequest, CreateBackUpScheduleResponse, ModifyClusterConfigsRequest, DescribeInstanceShardsResponse, CreateBackUpScheduleRequest, DescribeInstanceRequest, ActionAlterCkUserResponse, DescribeCkSqlApisResponse, ModifyUserNewPrivilegeResponse } from "./cdwch_models";
 /**
  * cdwch client
  * @class
@@ -24,13 +24,21 @@ export declare class Client extends AbstractClient {
      */
     OpenBackUp(req: OpenBackUpRequest, cb?: (error: string, rep: OpenBackUpResponse) => void): Promise<OpenBackUpResponse>;
     /**
+     * 购买页拉取集群的数据节点和zookeeper节点的规格列表
+     */
+    DescribeSpec(req: DescribeSpecRequest, cb?: (error: string, rep: DescribeSpecResponse) => void): Promise<DescribeSpecResponse>;
+    /**
      * 在集群配置页面修改集群配置文件接口，xml模式
      */
     ModifyClusterConfigs(req: ModifyClusterConfigsRequest, cb?: (error: string, rep: ModifyClusterConfigsResponse) => void): Promise<ModifyClusterConfigsResponse>;
     /**
-     * 购买页拉取集群的数据节点和zookeeper节点的规格列表
+     * 根据实例ID查询某个实例的具体信息
      */
-    DescribeSpec(req: DescribeSpecRequest, cb?: (error: string, rep: DescribeSpecResponse) => void): Promise<DescribeSpecResponse>;
+    DescribeInstance(req: DescribeInstanceRequest, cb?: (error: string, rep: DescribeInstanceResponse) => void): Promise<DescribeInstanceResponse>;
+    /**
+     * 创建集群
+     */
+    CreateInstanceNew(req: CreateInstanceNewRequest, cb?: (error: string, rep: CreateInstanceNewResponse) => void): Promise<CreateInstanceNewResponse>;
     /**
      * 针对ck账号的权限做管控（新版）
      */

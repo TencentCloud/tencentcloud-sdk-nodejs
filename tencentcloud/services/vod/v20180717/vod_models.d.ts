@@ -2930,6 +2930,25 @@ export interface OcrWordsConfigureInfoForUpdate {
     LabelSet?: Array<string>;
 }
 /**
+ * 文件审核信息。
+ */
+export interface FileReviewInfo {
+    /**
+      * 媒体审核信息\*。
+
+\* 只展示通过 [音视频审核(ReviewAudioVideo)](https://cloud.tencent.com/document/api/266/80283) 或 [图片审核(ReviewImage)](https://cloud.tencent.com/document/api/266/73217) 发起的审核结果信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MediaReviewInfo?: ReviewInfo;
+    /**
+      * 媒体封面审核信息\*。
+
+\* 只展示通过 [音视频审核(ReviewAudioVideo)](https://cloud.tencent.com/document/api/266/80283) 或 [图片审核(ReviewImage)](https://cloud.tencent.com/document/api/266/73217) 发起的审核结果信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CoverReviewInfo?: ReviewInfo;
+}
+/**
  * 水印模板详情
  */
 export interface WatermarkTemplate {
@@ -4628,17 +4647,46 @@ export interface ReduceMediaBitrateTask {
     SessionId: string;
 }
 /**
+ * CreateReviewTemplate请求参数结构体
+ */
+export interface CreateReviewTemplateRequest {
+    /**
+      * 需要返回的违规标签列表，可选值为：
+<li>Porn：色情；</li>
+<li>Terror：暴恐；</li>
+<li>Polity：不适宜的信息；</li>
+<li>Illegal：违法；</li>
+<li>Religion：宗教；</li>
+<li>Abuse：谩骂；</li>
+<li>Ad：广告；</li>
+<li>Moan：娇喘。</li>
+      */
+    Labels: Array<string>;
+    /**
+      * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+      */
+    SubAppId?: string;
+    /**
+      * 审核模板名称，长度限制：64 个字符。
+      */
+    Name?: string;
+    /**
+      * 审核模板描述信息，长度限制：256 个字符。
+      */
+    Comment?: string;
+}
+/**
  * DescribeMediaInfos返回参数结构体
  */
 export interface DescribeMediaInfosResponse {
     /**
       * 媒体文件信息列表。
       */
-    MediaInfoSet?: Array<MediaInfo>;
+    MediaInfoSet: Array<MediaInfo>;
     /**
       * 不存在的文件 ID 列表。
       */
-    NotExistFileIdSet?: Array<string>;
+    NotExistFileIdSet: Array<string>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4648,6 +4696,23 @@ export interface DescribeMediaInfosResponse {
  * DeleteProcedureTemplate返回参数结构体
  */
 export interface DeleteProcedureTemplateResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeReviewTemplates返回参数结构体
+ */
+export interface DescribeReviewTemplatesResponse {
+    /**
+      * 符合过滤条件的记录总数。
+      */
+    TotalCount: number;
+    /**
+      * 审核模板详情列表。
+      */
+    ReviewTemplateSet: Array<ReviewTemplate>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -5548,6 +5613,15 @@ export interface AiAnalysisTaskFrameTagOutput {
     SegmentSetFileUrlExpireTime: string;
 }
 /**
+ * DeleteReviewTemplate返回参数结构体
+ */
+export interface DeleteReviewTemplateResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * ModifyAdaptiveDynamicStreamingTemplate请求参数结构体
  */
 export interface ModifyAdaptiveDynamicStreamingTemplateRequest {
@@ -6074,6 +6148,41 @@ export interface ModifyMediaInfoResponse {
     RequestId?: string;
 }
 /**
+ * ModifyReviewTemplate请求参数结构体
+ */
+export interface ModifyReviewTemplateRequest {
+    /**
+      * 审核模板唯一标识。
+      */
+    Definition: number;
+    /**
+      * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+      */
+    SubAppId?: number;
+    /**
+      * 审核模板名称，长度限制：64 个字符。
+      */
+    Name?: string;
+    /**
+      * 审核模板描述信息，长度限制：256 个字符。
+      */
+    Comment?: string;
+    /**
+      * 需要返回的违规标签列表，可选值为：
+<li>Porn：色情；</li>
+<li>Terror：暴恐；</li>
+<li>Polity：不适宜的信息；</li>
+<li>Illegal：违法；</li>
+<li>Religion：宗教；</li>
+<li>Abuse：谩骂；</li>
+<li>Ad：广告；</li>
+<li>Moan：娇喘。</li>
+
+注意：不填表示不更新。
+      */
+    Labels?: Array<string>;
+}
+/**
  * 文本全文识别结果。
  */
 export interface AiRecognitionTaskOcrFullTextResult {
@@ -6504,6 +6613,33 @@ export interface DeleteMediaRequest {
       * 指定本次需要删除的部分。默认值为 "[]", 表示删除媒体及其对应的全部视频处理文件。
       */
     DeleteParts?: Array<MediaDeleteItem>;
+}
+/**
+ * DescribeReviewTemplates请求参数结构体
+ */
+export interface DescribeReviewTemplatesRequest {
+    /**
+      * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+      */
+    SubAppId?: number;
+    /**
+      * 审核模版唯一标识过滤条件，数组长度限制：100。
+      */
+    Definitions?: Array<number>;
+    /**
+      * 模板类型过滤条件，可选值：
+<li>Preset：系统预置模板；</li>
+<li>Custom：用户自定义模板。</li>
+      */
+    Type?: string;
+    /**
+      * 分页偏移量，默认值：0。
+      */
+    Offset?: number;
+    /**
+      * 返回记录条数，默认值：10，最大值：100。
+      */
+    Limit?: number;
 }
 /**
  * CreateSuperPlayerConfig请求参数结构体
@@ -7863,6 +7999,15 @@ export interface AiReviewTerrorismTaskOutput {
     SegmentSetFileUrlExpireTime: string;
 }
 /**
+ * ModifyReviewTemplate返回参数结构体
+ */
+export interface ModifyReviewTemplateResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeImageProcessingTemplates请求参数结构体
  */
 export interface DescribeImageProcessingTemplatesRequest {
@@ -8662,6 +8807,19 @@ export interface ModifyContentReviewTemplateRequest {
 <li>OFF：否。</li>
       */
     ReviewWallSwitch?: string;
+}
+/**
+ * DeleteReviewTemplate请求参数结构体
+ */
+export interface DeleteReviewTemplateRequest {
+    /**
+      * 审核模板唯一标识。
+      */
+    Definition: number;
+    /**
+      * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+      */
+    SubAppId?: number;
 }
 /**
  * AttachMediaSubtitles返回参数结构体
@@ -10631,6 +10789,10 @@ export interface DescribeMediaInfosRequest {
       */
     FileIds: Array<string>;
     /**
+      * <b>点播[子应用](/document/product/266/14574) ID 。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+      */
+    SubAppId?: number;
+    /**
       * 指定所有媒体文件需要返回的信息，可同时指定多个信息，N 从 0 开始递增。如果未填写该字段，默认返回所有信息。选项有：
 <li>basicInfo（视频基础信息）。</li>
 <li>metaData（视频元信息）。</li>
@@ -10642,12 +10804,10 @@ export interface DescribeMediaInfosRequest {
 <li>keyFrameDescInfo（打点信息）。</li>
 <li>adaptiveDynamicStreamingInfo（转自适应码流信息）。</li>
 <li>miniProgramReviewInfo（小程序审核信息）。</li>
+<li>subtitleInfo（字幕信息）。</li>
+<li>reviewInfo（审核信息）。</li>
       */
     Filters?: Array<string>;
-    /**
-      * 点播[子应用](/document/product/266/14574) ID 。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
-      */
-    SubAppId?: number;
 }
 /**
  * ModifyPersonSample请求参数结构体
@@ -10693,6 +10853,10 @@ export interface DescribeDrmDataKeyRequest {
       * 加密后的数据密钥列表，最大支持10个。
       */
     EdkList: Array<string>;
+    /**
+      * <b>点播[子应用](/document/product/266/14574) ID 。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+      */
+    SubAppId?: number;
 }
 /**
  * 语音全文识别任务控制参数
@@ -11415,61 +11579,66 @@ export interface MediaInfo {
       * 基础信息。包括视频名称、分类、播放地址、封面图片等。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    BasicInfo: MediaBasicInfo;
+    BasicInfo?: MediaBasicInfo;
     /**
       * 元信息。包括大小、时长、视频流信息、音频流信息等。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    MetaData: MediaMetaData;
+    MetaData?: MediaMetaData;
     /**
       * 转码结果信息。包括该视频转码生成的各种码率的视频的地址、规格、码率、分辨率等。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    TranscodeInfo: MediaTranscodeInfo;
+    TranscodeInfo?: MediaTranscodeInfo;
     /**
       * 转动图结果信息。对视频转动图（如 gif）后，动图相关信息。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    AnimatedGraphicsInfo: MediaAnimatedGraphicsInfo;
+    AnimatedGraphicsInfo?: MediaAnimatedGraphicsInfo;
     /**
       * 采样截图信息。对视频采样截图后，相关截图信息。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    SampleSnapshotInfo: MediaSampleSnapshotInfo;
+    SampleSnapshotInfo?: MediaSampleSnapshotInfo;
     /**
       * 雪碧图信息。对视频截取雪碧图之后，雪碧的相关信息。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ImageSpriteInfo: MediaImageSpriteInfo;
+    ImageSpriteInfo?: MediaImageSpriteInfo;
     /**
       * 指定时间点截图信息。对视频依照指定时间点截图后，各个截图的信息。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    SnapshotByTimeOffsetInfo: MediaSnapshotByTimeOffsetInfo;
+    SnapshotByTimeOffsetInfo?: MediaSnapshotByTimeOffsetInfo;
     /**
       * 视频打点信息。对视频设置的各个打点信息。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    KeyFrameDescInfo: MediaKeyFrameDescInfo;
+    KeyFrameDescInfo?: MediaKeyFrameDescInfo;
     /**
       * 转自适应码流信息。包括规格、加密类型、打包格式等相关信息。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    AdaptiveDynamicStreamingInfo: MediaAdaptiveDynamicStreamingInfo;
+    AdaptiveDynamicStreamingInfo?: MediaAdaptiveDynamicStreamingInfo;
     /**
       * 小程序审核信息。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    MiniProgramReviewInfo: MediaMiniProgramReviewInfo;
+    MiniProgramReviewInfo?: MediaMiniProgramReviewInfo;
     /**
       * 字幕信息。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    SubtitleInfo: MediaSubtitleInfo;
+    SubtitleInfo?: MediaSubtitleInfo;
     /**
       * 媒体文件唯一标识 ID。
       */
-    FileId: string;
+    FileId?: string;
+    /**
+      * 审核信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ReviewInfo?: FileReviewInfo;
 }
 /**
  * 视频流配置参数
@@ -13368,6 +13537,41 @@ export interface DescribeTranscodeTemplatesRequest {
     Limit?: number;
 }
 /**
+ * 审核模版详情
+ */
+export interface ReviewTemplate {
+    /**
+      * 审核模版唯一标签。
+      */
+    Definition: number;
+    /**
+      * 模板名称。
+      */
+    Name: string;
+    /**
+      * 模板描述信息。
+      */
+    Comment: string;
+    /**
+      * 模板类型，可选值：
+<li>Preset：系统预置模板；</li>
+<li>Custom：用户自定义模板。</li>
+      */
+    Type: string;
+    /**
+      * 需要返回的违规标签列表。
+      */
+    Labels: Array<string>;
+    /**
+      * 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+      */
+    CreateTime: string;
+    /**
+      * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+      */
+    UpdateTime: string;
+}
+/**
  * 用户自定义语音审核任务控制参数
  */
 export interface UserDefineAsrTextReviewTemplateInfoForUpdate {
@@ -14745,6 +14949,44 @@ export interface SnapshotByTimeOffsetTask2017 {
     SnapshotInfoSet: Array<SnapshotByTimeOffset2017>;
 }
 /**
+ * 审核信息。
+ */
+export interface ReviewInfo {
+    /**
+      * 审核模板 ID。
+      */
+    Definition?: number;
+    /**
+      * 审核的结果建议，取值范围：
+<li>pass：建议通过；</li>
+<li>review：建议复审；</li>
+<li>block：建议封禁。</li>
+      */
+    Suggestion?: string;
+    /**
+      * 审核类型，当 Suggestion 为 review 或 block 时有效，格式为：Form.Label。
+Form 表示违禁的形式，取值范围：
+<li>Image：画面上的人物或图标；</li>
+<li>OCR：画面上的文字；</li>
+<li>ASR：语音中的文字；</li>
+<li>Voice：声音。</li>
+Label 表示违禁的标签，取值范围：
+<li>Porn：色情；</li>
+<li>Terror：暴恐；</li>
+<li>Polity：不适宜的信息；</li>
+<li>Ad：广告；</li>
+<li>Illegal：违法；</li>
+<li>Religion：宗教；</li>
+<li>Abuse：谩骂；</li>
+<li>Moan：娇喘。</li>
+      */
+    TypeSet?: Array<string>;
+    /**
+      * 审核时间，使用  [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+      */
+    ReviewTime?: string;
+}
+/**
  * 分类信息描述
  */
 export interface MediaClassInfo {
@@ -15344,6 +15586,19 @@ export interface HighlightSegmentItem {
       * 片段结束时间偏移。
       */
     EndTimeOffset: number;
+}
+/**
+ * CreateReviewTemplate返回参数结构体
+ */
+export interface CreateReviewTemplateResponse {
+    /**
+      * 审核模板唯一标识。
+      */
+    Definition: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DeleteWatermarkTemplate返回参数结构体

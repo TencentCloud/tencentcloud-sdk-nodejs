@@ -299,6 +299,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateDDoSSpeedLimitConfig", req, cb);
     }
     /**
+     * 获取业务流量状态码统计列表
+     */
+    async DescribeBizHttpStatus(req, cb) {
+        return this.request("DescribeBizHttpStatus", req, cb);
+    }
+    /**
      * 获取高防包资产实例列表
 
      */

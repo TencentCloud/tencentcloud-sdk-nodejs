@@ -28,6 +28,12 @@ class Client extends abstract_client_1.AbstractClient {
         super("thpc.tencentcloudapi.com", "2022-04-01", clientConfig);
     }
     /**
+     * 本接口 (DescribeClusterStorageOption) 用于查询集群存储选项信息。
+     */
+    async DescribeClusterStorageOption(req, cb) {
+        return this.request("DescribeClusterStorageOption", req, cb);
+    }
+    /**
      * 本接口(DeleteNodes)用于删除指定集群中一个或者多个计算节点或者登录节点。
      */
     async DeleteNodes(req, cb) {
@@ -44,6 +50,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateCluster(req, cb) {
         return this.request("CreateCluster", req, cb);
+    }
+    /**
+     * 本接口 (DeleteClusterStorageOption) 用于删除集群存储选项信息。
+     */
+    async DeleteClusterStorageOption(req, cb) {
+        return this.request("DeleteClusterStorageOption", req, cb);
     }
     /**
      * 本接口(SetAutoScalingConfiguration)用于为集群设置集群弹性伸缩配置信息。
@@ -64,16 +76,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeClusters", req, cb);
     }
     /**
-     * 本接口（DeleteCluster）用于删除一个指定的集群。
+     * 本接口（AddClusterStorageOption）用于添加集群存储选项信息。
      */
-    async DeleteCluster(req, cb) {
-        return this.request("DeleteCluster", req, cb);
+    async AddClusterStorageOption(req, cb) {
+        return this.request("AddClusterStorageOption", req, cb);
     }
     /**
      * 本接口（DescribeClusterActivities）用于查询集群活动历史记录列表。
      */
     async DescribeClusterActivities(req, cb) {
         return this.request("DescribeClusterActivities", req, cb);
+    }
+    /**
+     * 本接口（DeleteCluster）用于删除一个指定的集群。
+     */
+    async DeleteCluster(req, cb) {
+        return this.request("DeleteCluster", req, cb);
     }
 }
 exports.Client = Client;

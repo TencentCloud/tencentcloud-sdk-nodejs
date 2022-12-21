@@ -87,23 +87,43 @@ export interface DescribeDisksDeniedActionsRequest {
 }
 
 /**
- * DescribeInstancesTrafficPackages返回参数结构体
+ * DescribeDiskBackups请求参数结构体
  */
-export interface DescribeInstancesTrafficPackagesResponse {
+export interface DescribeDiskBackupsRequest {
   /**
-   * 符合条件的实例流量包详情数量。
+   * 要查询云硬盘备份点的ID列表。参数不支持同时指定 DiskBackupIds 和 Filters。
    */
-  TotalCount: number
+  DiskBackupIds?: Array<string>
 
   /**
-   * 实例流量包详情列表。
-   */
-  InstanceTrafficPackageSet: Array<InstanceTrafficPackage>
+      * 过滤器列表。
+<li>disk-backup-id</li>按照【云硬盘备份点 ID】进行过滤。
+类型：String
+必选：否
+<li>disk-id</li>按照【云硬盘 ID】进行过滤。
+类型：String
+必选：否
+<li>disk-backup-state</li>按照【云硬盘备份点状态】进行过滤。
+类型：String
+必选：否
+取值：参考数据结构DiskBackup下的DiskBackupState取值。
+<li>disk-usage</li>按照【云硬盘类型】进行过滤。
+类型：String
+必选：否
+取值：SYSTEM_DISK或DATA_DISK
+每次请求的 Filters 的上限为 10，Filter.Values 的上限为5。参数不支持同时指定DiskBackupIds 和 Filters。
+      */
+  Filters?: Array<Filter>
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 偏移量，默认为 0。
    */
-  RequestId?: string
+  Offset?: number
+
+  /**
+   * 返回数量，默认为 20，最大值为 100。
+   */
+  Limit?: number
 }
 
 /**
@@ -352,18 +372,28 @@ export interface DetachCcnResponse {
 }
 
 /**
- * CreateInstanceSnapshot返回参数结构体
+ * BlueprintPrice	自定义镜像的价格参数。
  */
-export interface CreateInstanceSnapshotResponse {
+export interface BlueprintPrice {
   /**
-   * 快照 ID。
+   * 镜像单价，原价。单位元。
    */
-  SnapshotId: string
+  OriginalBlueprintPrice: number
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 镜像总价，原价。单位元。
    */
-  RequestId?: string
+  OriginalPrice: number
+
+  /**
+   * 折扣。
+   */
+  Discount: number
+
+  /**
+   * 镜像折扣后总价。单位元。
+   */
+  DiscountPrice: number
 }
 
 /**
@@ -444,23 +474,24 @@ export interface ModifyInstancesAttributeRequest {
 }
 
 /**
- * DescribeInstances返回参数结构体
+ * DescribeGeneralResourceQuotas请求参数结构体
  */
-export interface DescribeInstancesResponse {
+export interface DescribeGeneralResourceQuotasRequest {
   /**
-   * 符合条件的实例数量。
-   */
-  TotalCount: number
-
-  /**
-   * 实例详细信息列表。
-   */
-  InstanceSet: Array<Instance>
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+      * 资源名列表，可取值:
+- GENERAL_BUNDLE_INSTANCE 通用型套餐实例
+- STORAGE_BUNDLE_INSTANCE 存储型套餐实例 
+- ENTERPRISE_BUNDLE_INSTANCE 企业型套餐实例 
+- EXCLUSIVE_BUNDLE_INSTANCE 专属型套餐实例
+- BEFAST_BUNDLE_INSTANCE 蜂驰型套餐实例
+- USER_KEY_PAIR 密钥对
+- SNAPSHOT 快照
+- BLUEPRINT 自定义镜像
+- FREE_BLUEPRINT 免费自定义镜像
+- DATA_DISK 数据盘
+- FIREWALL_RULE 防火墙规则
+      */
+  ResourceNames: Array<string>
 }
 
 /**
@@ -560,26 +591,13 @@ false：表示不自动抵扣代金券
 }
 
 /**
- * 实例价格详细信息
+ * DeleteDiskBackups请求参数结构体
  */
-export interface InstancePriceDetail {
+export interface DeleteDiskBackupsRequest {
   /**
-      * 实例ID。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  InstanceId?: string
-
-  /**
-      * 询价信息。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  InstancePrice?: InstancePrice
-
-  /**
-      * 折扣梯度详情，每个梯度包含的信息有：时长，折扣数，总价，折扣价，折扣详情（用户折扣、官网折扣、最终折扣）。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DiscountDetail?: Array<DiscountDetail>
+   * 云硬盘备份点ID列表，可通过 DescribeDiskBackups接口查询。
+   */
+  DiskBackupIds: Array<string>
 }
 
 /**
@@ -676,6 +694,26 @@ export interface DescribeRegionsResponse {
 }
 
 /**
+ * DescribeDiskBackups返回参数结构体
+ */
+export interface DescribeDiskBackupsResponse {
+  /**
+   * 云硬盘备份点的数量。
+   */
+  TotalCount: number
+
+  /**
+   * 云硬盘备份点信息列表。
+   */
+  DiskBackupSet: Array<DiskBackup>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * AssociateInstancesKeyPairs请求参数结构体
  */
 export interface AssociateInstancesKeyPairsRequest {
@@ -688,6 +726,21 @@ export interface AssociateInstancesKeyPairsRequest {
    * 实例 ID 列表。每次请求批量实例的上限为 100。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。
    */
   InstanceIds: Array<string>
+}
+
+/**
+ * ModifyDiskBackupsAttribute请求参数结构体
+ */
+export interface ModifyDiskBackupsAttributeRequest {
+  /**
+   * 云硬盘备份点ID列表。
+   */
+  DiskBackupIds: Array<string>
+
+  /**
+   * 云硬盘备份点名称，最大长度90。
+   */
+  DiskBackupName?: string
 }
 
 /**
@@ -802,6 +855,104 @@ export interface TerminateDisksResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 描述了云硬盘备份点相关信息。
+ */
+export interface DiskBackup {
+  /**
+   * 云硬盘备份点ID。
+   */
+  DiskBackupId: string
+
+  /**
+   * 创建此云硬盘备份点的云硬盘类型。取值：<li>DATA_DISK：数据盘</li>
+   */
+  DiskUsage: string
+
+  /**
+   * 创建此云硬盘备份点的云硬盘 ID。
+   */
+  DiskId: string
+
+  /**
+   * 创建此云硬盘备份点的云硬盘大小，单位 GB。
+   */
+  DiskSize: number
+
+  /**
+   * 云硬盘备份点名称，用户自定义的云硬盘备份点别名。
+   */
+  DiskBackupName: string
+
+  /**
+      * 云硬盘备份点的状态。取值范围：
+<li>NORMAL：正常。 </li>
+<li>CREATING：创建中。</li>
+<li>ROLLBACKING：回滚中。</li>
+<li>DELETING：删除中。</li>
+      */
+  DiskBackupState: string
+
+  /**
+   * 创建或回滚云硬盘备份点进度百分比，成功后此字段取值为 100。
+   */
+  Percent: number
+
+  /**
+      * 上一次操作
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LatestOperation: string
+
+  /**
+      * 上一次操作状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LatestOperationState: string
+
+  /**
+      * 上一次请求ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LatestOperationRequestId: string
+
+  /**
+      * 创建时间。按照 ISO8601 标准表示，并且使用 UTC 时间。 
+格式为： YYYY-MM-DDThh:mm:ssZ。
+      */
+  CreatedTime: string
+}
+
+/**
+ * DescribeInstancesTrafficPackages返回参数结构体
+ */
+export interface DescribeInstancesTrafficPackagesResponse {
+  /**
+   * 符合条件的实例流量包详情数量。
+   */
+  TotalCount: number
+
+  /**
+   * 实例流量包详情列表。
+   */
+  InstanceTrafficPackageSet: Array<InstanceTrafficPackage>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeDiskBackupsDeniedActions请求参数结构体
+ */
+export interface DescribeDiskBackupsDeniedActionsRequest {
+  /**
+   * 云硬盘备份点 ID 列表, 可通过 DescribeDiskBackups 接口查询。
+   */
+  DiskBackupIds: Array<string>
 }
 
 /**
@@ -1178,13 +1329,18 @@ export interface InstanceTrafficPackage {
 }
 
 /**
- * StartInstances返回参数结构体
+ * 快照操作限制列表。
  */
-export interface StartInstancesResponse {
+export interface SnapshotDeniedActions {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 快照 ID。
    */
-  RequestId?: string
+  SnapshotId: string
+
+  /**
+   * 操作限制列表。
+   */
+  DeniedActions: Array<DeniedAction>
 }
 
 /**
@@ -1295,6 +1451,16 @@ export interface DetailPrice {
    * 云硬盘在计费项维度折后总价。
    */
   DiscountPrice: number
+}
+
+/**
+ * ApplyDiskBackup返回参数结构体
+ */
+export interface ApplyDiskBackupResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1442,6 +1608,26 @@ export interface DescribeSnapshotsDeniedActionsResponse {
 }
 
 /**
+ * DescribeScenes请求参数结构体
+ */
+export interface DescribeScenesRequest {
+  /**
+   * 使用场景ID列表。
+   */
+  SceneIds?: Array<string>
+
+  /**
+   * 偏移量，默认为 0。
+   */
+  Offset?: number
+
+  /**
+   * 返回数量，默认为 20，最大值为 100。
+   */
+  Limit?: number
+}
+
+/**
  * StartInstances请求参数结构体
  */
 export interface StartInstancesRequest {
@@ -1452,18 +1638,13 @@ export interface StartInstancesRequest {
 }
 
 /**
- * 快照操作限制列表。
+ * DeleteDiskBackups返回参数结构体
  */
-export interface SnapshotDeniedActions {
+export interface DeleteDiskBackupsResponse {
   /**
-   * 快照 ID。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  SnapshotId: string
-
-  /**
-   * 操作限制列表。
-   */
-  DeniedActions: Array<DeniedAction>
+  RequestId?: string
 }
 
 /**
@@ -1753,21 +1934,42 @@ export interface ModifyBlueprintAttributeResponse {
 }
 
 /**
- * DescribeScenes请求参数结构体
+ * DescribeModifyInstanceBundles请求参数结构体
  */
-export interface DescribeScenesRequest {
+export interface DescribeModifyInstanceBundlesRequest {
   /**
-   * 使用场景ID列表。
+   * 实例 ID。
    */
-  SceneIds?: Array<string>
+  InstanceId: string
 
   /**
-   * 偏移量，默认为 0。
+      * 过滤器列表。
+<li>bundle-id</li>按照【套餐 ID】进行过滤。
+类型：String
+必选：否
+<li>support-platform-type</li>按照【系统类型】进行过滤。
+取值： LINUX_UNIX（Linux/Unix系统）；WINDOWS（Windows 系统）
+类型：String
+必选：否
+<li>bundle-type</li>按照 【套餐类型进行过滤】。
+取值：GENERAL_BUNDLE (通用型套餐); STORAGE_BUNDLE(存储型套餐);ENTERPRISE_BUNDLE( 企业型套餐);EXCLUSIVE_BUNDLE(专属型套餐);BEFAST_BUNDLE(蜂驰型套餐);
+类型：String
+必选：否
+<li>bundle-state</li>按照【套餐状态】进行过滤。
+取值: ‘ONLINE’(在线); ‘OFFLINE’(下线);
+类型：String
+必选：否
+每次请求的 Filters 的上限为 10，Filter.Values 的上限为 5。
+      */
+  Filters?: Array<Filter>
+
+  /**
+   * 偏移量，默认为 0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/product/1207/47578)中的相关小节。
    */
   Offset?: number
 
   /**
-   * 返回数量，默认为 20，最大值为 100。
+   * 返回数量，默认为 20，最大值为 100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/product/1207/47578)中的相关小节。
    */
   Limit?: number
 }
@@ -1915,9 +2117,34 @@ export interface DescribeKeyPairsRequest {
 export type DescribeCcnAttachedInstancesRequest = null
 
 /**
+ * ApplyDiskBackup请求参数结构体
+ */
+export interface ApplyDiskBackupRequest {
+  /**
+   * 云硬盘ID，可通过[DescribeDisks](https://cloud.tencent.com/document/api/1207/66093)接口查询。
+   */
+  DiskId: string
+
+  /**
+   * 云硬盘备份点ID，可通过 DescribeDiskBackups 接口查询。
+   */
+  DiskBackupId: string
+}
+
+/**
  * ResetInstancesPassword返回参数结构体
  */
 export interface ResetInstancesPasswordResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * StartInstances返回参数结构体
+ */
+export interface StartInstancesResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2354,6 +2581,21 @@ export interface Blueprint {
 }
 
 /**
+ * InquirePriceCreateInstances返回参数结构体
+ */
+export interface InquirePriceCreateInstancesResponse {
+  /**
+   * 询价信息。
+   */
+  Price: Price
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 总计价格信息
  */
 export interface TotalPrice {
@@ -2554,13 +2796,13 @@ export interface DiskConfig {
 }
 
 /**
- * InquirePriceCreateInstances返回参数结构体
+ * CreateDiskBackup返回参数结构体
  */
-export interface InquirePriceCreateInstancesResponse {
+export interface CreateDiskBackupResponse {
   /**
-   * 询价信息。
+   * 备份点ID。
    */
-  Price: Price
+  DiskBackupId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2868,6 +3110,36 @@ export interface AttachDisksResponse {
 }
 
 /**
+ * 云硬盘备份点操作限制列表。
+ */
+export interface DiskBackupDeniedActions {
+  /**
+   * 云硬盘备份点ID。
+   */
+  DiskBackupId: string
+
+  /**
+   * 操作限制列表。
+   */
+  DeniedActions: Array<DeniedAction>
+}
+
+/**
+ * CreateDiskBackup请求参数结构体
+ */
+export interface CreateDiskBackupRequest {
+  /**
+   * 云硬盘 ID。当前只支持数据盘创建备份点。
+   */
+  DiskId: string
+
+  /**
+   * 云硬盘备份点名称，最大长度90。
+   */
+  DiskBackupName?: string
+}
+
+/**
  * CreateFirewallRules请求参数结构体
  */
 export interface CreateFirewallRulesRequest {
@@ -3125,24 +3397,23 @@ disk-state
 }
 
 /**
- * DescribeGeneralResourceQuotas请求参数结构体
+ * DescribeInstances返回参数结构体
  */
-export interface DescribeGeneralResourceQuotasRequest {
+export interface DescribeInstancesResponse {
   /**
-      * 资源名列表，可取值:
-- GENERAL_BUNDLE_INSTANCE 通用型套餐实例
-- STORAGE_BUNDLE_INSTANCE 存储型套餐实例 
-- ENTERPRISE_BUNDLE_INSTANCE 企业型套餐实例 
-- EXCLUSIVE_BUNDLE_INSTANCE 专属型套餐实例
-- BEFAST_BUNDLE_INSTANCE 蜂驰型套餐实例
-- USER_KEY_PAIR 密钥对
-- SNAPSHOT 快照
-- BLUEPRINT 自定义镜像
-- FREE_BLUEPRINT 免费自定义镜像
-- DATA_DISK 数据盘
-- FIREWALL_RULE 防火墙规则
-      */
-  ResourceNames: Array<string>
+   * 符合条件的实例数量。
+   */
+  TotalCount: number
+
+  /**
+   * 实例详细信息列表。
+   */
+  InstanceSet: Array<Instance>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3453,6 +3724,29 @@ export interface InternetAccessible {
 }
 
 /**
+ * 实例价格详细信息
+ */
+export interface InstancePriceDetail {
+  /**
+      * 实例ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceId?: string
+
+  /**
+      * 询价信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstancePrice?: InstancePrice
+
+  /**
+      * 折扣梯度详情，每个梯度包含的信息有：时长，折扣数，总价，折扣价，折扣详情（用户折扣、官网折扣、最终折扣）。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DiscountDetail?: Array<DiscountDetail>
+}
+
+/**
  * RebootInstances返回参数结构体
  */
 export interface RebootInstancesResponse {
@@ -3463,13 +3757,13 @@ export interface RebootInstancesResponse {
 }
 
 /**
- * DescribeDisksDeniedActions返回参数结构体
+ * DescribeDiskBackupsDeniedActions返回参数结构体
  */
-export interface DescribeDisksDeniedActionsResponse {
+export interface DescribeDiskBackupsDeniedActionsResponse {
   /**
-   * 云硬盘操作限制列表详细信息。
+   * 云硬盘备份点操作限制列表详细信息。
    */
-  DiskDeniedActionSet: Array<DiskDeniedActions>
+  DiskBackupDeniedActionSet: Array<DiskBackupDeniedActions>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3528,28 +3822,28 @@ export interface DescribeDisksReturnableResponse {
 }
 
 /**
- * BlueprintPrice	自定义镜像的价格参数。
+ * ModifyDiskBackupsAttribute返回参数结构体
  */
-export interface BlueprintPrice {
+export interface ModifyDiskBackupsAttributeResponse {
   /**
-   * 镜像单价，原价。单位元。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  OriginalBlueprintPrice: number
+  RequestId?: string
+}
+
+/**
+ * CreateInstanceSnapshot返回参数结构体
+ */
+export interface CreateInstanceSnapshotResponse {
+  /**
+   * 快照 ID。
+   */
+  SnapshotId: string
 
   /**
-   * 镜像总价，原价。单位元。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  OriginalPrice: number
-
-  /**
-   * 折扣。
-   */
-  Discount: number
-
-  /**
-   * 镜像折扣后总价。单位元。
-   */
-  DiscountPrice: number
+  RequestId?: string
 }
 
 /**
@@ -3761,50 +4055,24 @@ export interface DescribeFirewallRulesTemplateResponse {
 }
 
 /**
- * DescribeModifyInstanceBundles请求参数结构体
- */
-export interface DescribeModifyInstanceBundlesRequest {
-  /**
-   * 实例 ID。
-   */
-  InstanceId: string
-
-  /**
-      * 过滤器列表。
-<li>bundle-id</li>按照【套餐 ID】进行过滤。
-类型：String
-必选：否
-<li>support-platform-type</li>按照【系统类型】进行过滤。
-取值： LINUX_UNIX（Linux/Unix系统）；WINDOWS（Windows 系统）
-类型：String
-必选：否
-<li>bundle-type</li>按照 【套餐类型进行过滤】。
-取值：GENERAL_BUNDLE (通用型套餐); STORAGE_BUNDLE(存储型套餐);ENTERPRISE_BUNDLE( 企业型套餐);EXCLUSIVE_BUNDLE(专属型套餐);BEFAST_BUNDLE(蜂驰型套餐);
-类型：String
-必选：否
-<li>bundle-state</li>按照【套餐状态】进行过滤。
-取值: ‘ONLINE’(在线); ‘OFFLINE’(下线);
-类型：String
-必选：否
-每次请求的 Filters 的上限为 10，Filter.Values 的上限为 5。
-      */
-  Filters?: Array<Filter>
-
-  /**
-   * 偏移量，默认为 0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/product/1207/47578)中的相关小节。
-   */
-  Offset?: number
-
-  /**
-   * 返回数量，默认为 20，最大值为 100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/product/1207/47578)中的相关小节。
-   */
-  Limit?: number
-}
-
-/**
  * RenewInstances返回参数结构体
  */
 export interface RenewInstancesResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeDisksDeniedActions返回参数结构体
+ */
+export interface DescribeDisksDeniedActionsResponse {
+  /**
+   * 云硬盘操作限制列表详细信息。
+   */
+  DiskDeniedActionSet: Array<DiskDeniedActions>
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

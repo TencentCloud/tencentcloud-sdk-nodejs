@@ -23,6 +23,7 @@ import {
   SetAutoScalingConfigurationRequest,
   LoginSettings,
   DeleteNodesResponse,
+  AddClusterStorageOptionResponse,
   DeleteClusterResponse,
   ExpansionNodeConfig,
   NodeActivity,
@@ -33,6 +34,7 @@ import {
   CreateClusterResponse,
   SetAutoScalingConfigurationResponse,
   CreateClusterRequest,
+  DescribeClusterStorageOptionResponse,
   Tag,
   LoginNode,
   BindAutoScalingGroupResponse,
@@ -44,14 +46,18 @@ import {
   Placement,
   DescribeClusterActivitiesRequest,
   AddNodesRequest,
+  DeleteClusterStorageOptionRequest,
+  AddClusterStorageOptionRequest,
   BindAutoScalingGroupRequest,
   VirtualPrivateCloud,
   InstanceChargePrepaid,
+  DescribeClusterStorageOptionRequest,
   StorageOption,
   InternetAccessible,
   ComputeNode,
   DeleteNodesRequest,
   DescribeClustersResponse,
+  DeleteClusterStorageOptionResponse,
   GooseFSOption,
   DescribeClusterActivitiesResponse,
   DataDisk,
@@ -65,6 +71,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("thpc.tencentcloudapi.com", "2022-04-01", clientConfig)
+  }
+
+  /**
+   * 本接口 (DescribeClusterStorageOption) 用于查询集群存储选项信息。
+   */
+  async DescribeClusterStorageOption(
+    req: DescribeClusterStorageOptionRequest,
+    cb?: (error: string, rep: DescribeClusterStorageOptionResponse) => void
+  ): Promise<DescribeClusterStorageOptionResponse> {
+    return this.request("DescribeClusterStorageOption", req, cb)
   }
 
   /**
@@ -98,6 +114,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口 (DeleteClusterStorageOption) 用于删除集群存储选项信息。
+   */
+  async DeleteClusterStorageOption(
+    req: DeleteClusterStorageOptionRequest,
+    cb?: (error: string, rep: DeleteClusterStorageOptionResponse) => void
+  ): Promise<DeleteClusterStorageOptionResponse> {
+    return this.request("DeleteClusterStorageOption", req, cb)
+  }
+
+  /**
    * 本接口(SetAutoScalingConfiguration)用于为集群设置集群弹性伸缩配置信息。
    */
   async SetAutoScalingConfiguration(
@@ -128,13 +154,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DeleteCluster）用于删除一个指定的集群。
+   * 本接口（AddClusterStorageOption）用于添加集群存储选项信息。
    */
-  async DeleteCluster(
-    req: DeleteClusterRequest,
-    cb?: (error: string, rep: DeleteClusterResponse) => void
-  ): Promise<DeleteClusterResponse> {
-    return this.request("DeleteCluster", req, cb)
+  async AddClusterStorageOption(
+    req: AddClusterStorageOptionRequest,
+    cb?: (error: string, rep: AddClusterStorageOptionResponse) => void
+  ): Promise<AddClusterStorageOptionResponse> {
+    return this.request("AddClusterStorageOption", req, cb)
   }
 
   /**
@@ -145,5 +171,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeClusterActivitiesResponse) => void
   ): Promise<DescribeClusterActivitiesResponse> {
     return this.request("DescribeClusterActivities", req, cb)
+  }
+
+  /**
+   * 本接口（DeleteCluster）用于删除一个指定的集群。
+   */
+  async DeleteCluster(
+    req: DeleteClusterRequest,
+    cb?: (error: string, rep: DeleteClusterResponse) => void
+  ): Promise<DeleteClusterResponse> {
+    return this.request("DeleteCluster", req, cb)
   }
 }

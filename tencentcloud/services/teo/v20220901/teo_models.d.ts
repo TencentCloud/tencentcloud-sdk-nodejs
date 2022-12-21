@@ -34,15 +34,6 @@ export interface DescribeOriginGroupResponse {
     RequestId?: string;
 }
 /**
- * ModifyLoadBalancingStatus返回参数结构体
- */
-export interface ModifyLoadBalancingStatusResponse {
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
  * DescribeBotData请求参数结构体
  */
 export interface DescribeBotDataRequest {
@@ -3674,25 +3665,6 @@ export interface DescribeDDoSAttackSourceEventRequest {
 <li>mainland：中国大陆地区数据。</li>不填将根据用户所在地智能选择地区。
       */
     Area?: string;
-}
-/**
- * ModifyLoadBalancingStatus请求参数结构体
- */
-export interface ModifyLoadBalancingStatusRequest {
-    /**
-      * 站点ID。
-      */
-    ZoneId: string;
-    /**
-      * 负载均衡ID。
-      */
-    LoadBalancingId: string;
-    /**
-      * 负载均衡状态，取值有：
-<li>online：启用；</li>
-<li>offline：停用。</li>
-      */
-    Status: string;
 }
 /**
  * DDoS攻击事件对象

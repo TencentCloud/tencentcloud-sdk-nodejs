@@ -38,9 +38,29 @@ it("lighthouse.v20200324.ModifyFirewallRuleDescription", async function () {
     }
 })
 
+it("lighthouse.v20200324.TerminateInstances", async function () {
+    try {
+       const data = await client.TerminateInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lighthouse.v20200324.DeleteBlueprints", async function () {
     try {
        const data = await client.DeleteBlueprints({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lighthouse.v20200324.ApplyDiskBackup", async function () {
+    try {
+       const data = await client.ApplyDiskBackup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -208,6 +228,16 @@ it("lighthouse.v20200324.ImportKeyPair", async function () {
     }
 })
 
+it("lighthouse.v20200324.DeleteDiskBackups", async function () {
+    try {
+       const data = await client.DeleteDiskBackups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lighthouse.v20200324.DescribeInstancesTrafficPackages", async function () {
     try {
        const data = await client.DescribeInstancesTrafficPackages({})
@@ -251,6 +281,16 @@ it("lighthouse.v20200324.AssociateInstancesKeyPairs", async function () {
 it("lighthouse.v20200324.DeleteFirewallRules", async function () {
     try {
        const data = await client.DeleteFirewallRules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lighthouse.v20200324.DescribeDiskBackups", async function () {
+    try {
+       const data = await client.DescribeDiskBackups({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -371,6 +411,16 @@ it("lighthouse.v20200324.ModifyBlueprintAttribute", async function () {
 it("lighthouse.v20200324.DescribeInstancesDeniedActions", async function () {
     try {
        const data = await client.DescribeInstancesDeniedActions({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lighthouse.v20200324.ModifyDiskBackupsAttribute", async function () {
+    try {
+       const data = await client.ModifyDiskBackupsAttribute({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -538,9 +588,9 @@ it("lighthouse.v20200324.ModifyFirewallRules", async function () {
     }
 })
 
-it("lighthouse.v20200324.TerminateInstances", async function () {
+it("lighthouse.v20200324.DescribeDiskBackupsDeniedActions", async function () {
     try {
-       const data = await client.TerminateInstances({})
+       const data = await client.DescribeDiskBackupsDeniedActions({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -601,6 +651,16 @@ it("lighthouse.v20200324.DescribeKeyPairs", async function () {
 it("lighthouse.v20200324.DescribeResetInstanceBlueprints", async function () {
     try {
        const data = await client.DescribeResetInstanceBlueprints({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lighthouse.v20200324.CreateDiskBackup", async function () {
+    try {
+       const data = await client.CreateDiskBackup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

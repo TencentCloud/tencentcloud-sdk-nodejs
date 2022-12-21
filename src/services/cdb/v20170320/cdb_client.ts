@@ -103,6 +103,7 @@ import {
   DescribeBinlogsRequest,
   RollbackDBName,
   CreateAuditRuleResponse,
+  ModifyRemoteBackupConfigResponse,
   DescribeDBInstanceInfoResponse,
   AssociateSecurityGroupsRequest,
   ModifyAuditRuleRequest,
@@ -181,6 +182,7 @@ import {
   DeviceMemInfo,
   UpgradeDBInstanceEngineVersionRequest,
   DatabasesWithCharacterLists,
+  DescribeRemoteBackupConfigRequest,
   TagInfo,
   DescribeDBInstancesResponse,
   DescribeBackupDownloadRestrictionRequest,
@@ -273,6 +275,7 @@ import {
   ModifyAccountPrivilegesRequest,
   CreateBackupRequest,
   AccountInfo,
+  DescribeRemoteBackupConfigResponse,
   ModifyCDBProxyDescResponse,
   ModifyDBInstanceVipVportRequest,
   DescribeDBImportRecordsRequest,
@@ -369,6 +372,7 @@ import {
   DeleteTimeWindowRequest,
   SwitchCDBProxyResponse,
   RestartDBInstancesRequest,
+  ModifyRemoteBackupConfigRequest,
   DeleteBackupRequest,
   ModifyNameOrDescByDpIdRequest,
   UpgradeDBInstanceResponse,
@@ -1509,6 +1513,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口(DescribeRemoteBackupConfig)用于查询数据库异地备份配置信息。
+   */
+  async DescribeRemoteBackupConfig(
+    req: DescribeRemoteBackupConfigRequest,
+    cb?: (error: string, rep: DescribeRemoteBackupConfigResponse) => void
+  ): Promise<DescribeRemoteBackupConfigResponse> {
+    return this.request("DescribeRemoteBackupConfig", req, cb)
+  }
+
+  /**
      * 本接口(DescribeBackupDatabases)用于查询备份文件包含的库 (已废弃)。
 旧版本支持全量备份后，用户如果分库表下载逻辑备份文件，需要用到此接口。
 新版本支持(CreateBackup)创建逻辑备份的时候，直接发起指定库表备份，用户直接下载该备份文件即可。
@@ -1742,6 +1756,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateDeployGroupResponse) => void
   ): Promise<CreateDeployGroupResponse> {
     return this.request("CreateDeployGroup", req, cb)
+  }
+
+  /**
+   * 本接口(ModifyRemoteBackupConfig)用于查询数据库异地备份配置信息。
+   */
+  async ModifyRemoteBackupConfig(
+    req: ModifyRemoteBackupConfigRequest,
+    cb?: (error: string, rep: ModifyRemoteBackupConfigResponse) => void
+  ): Promise<ModifyRemoteBackupConfigResponse> {
+    return this.request("ModifyRemoteBackupConfig", req, cb)
   }
 
   /**

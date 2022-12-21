@@ -26,7 +26,7 @@ class AbstractClient {
         this.credential = credential || {
             secretId: null,
             secretKey: null,
-            token: null
+            token: null,
         };
         /**
          * 产品地域
@@ -54,7 +54,7 @@ class AbstractClient {
         }
     }
     async getCredential() {
-        if ('getCredential' in this.credential) {
+        if ("getCredential" in this.credential) {
             return await this.credential.getCredential();
         }
         return this.credential;

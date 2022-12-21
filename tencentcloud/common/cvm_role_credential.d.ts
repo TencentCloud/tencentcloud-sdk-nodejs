@@ -1,11 +1,11 @@
 import { Credential, DynamicCredential } from "./interface";
 interface CvmRoleCredentialResult {
-    "TmpSecretId": string;
-    "TmpSecretKey": string;
-    "ExpiredTime": 1671330188;
-    "Expiration": string;
-    "Token": string;
-    "Code": string;
+    TmpSecretId: string;
+    TmpSecretKey: string;
+    ExpiredTime: 1671330188;
+    Expiration: string;
+    Token: string;
+    Code: string;
 }
 export default class CvmRoleCredential implements DynamicCredential {
     protected roleNameTask: Promise<string>;

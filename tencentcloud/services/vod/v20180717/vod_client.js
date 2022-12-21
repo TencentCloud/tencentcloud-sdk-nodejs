@@ -282,6 +282,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeMediaPlayStatDetails", req, cb);
     }
     /**
+     * 修改用户自定义审核模板。
+     */
+    async ModifyReviewTemplate(req, cb) {
+        return this.request("ModifyReviewTemplate", req, cb);
+    }
+    /**
      * 该接口返回查询时间范围内每天 License 请求次数信息。
    1. 可以查询最近365天内的 License 请求次数统计数据。
    2. 查询时间跨度不超过90天。
@@ -311,11 +317,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ExecuteFunction", req, cb);
     }
     /**
-     * 该接口用于删除点播加速域名。
-1、域名删除前需要先关闭所有区域的加速。
+     * 删除用户自定义审核模板。
      */
-    async DeleteVodDomain(req, cb) {
-        return this.request("DeleteVodDomain", req, cb);
+    async DeleteReviewTemplate(req, cb) {
+        return this.request("DeleteReviewTemplate", req, cb);
     }
     /**
      * 该接口返回查询时间范围内每天使用的视频处理用量信息。
@@ -657,6 +662,24 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteImageProcessingTemplate", req, cb);
     }
     /**
+     * 对点播中的音视频媒体发起处理任务，功能包括：
+1. 视频转码（带水印）；
+2. 视频转动图；
+3. 对视频按指定时间点截图；
+4. 对视频采样截图；
+5. 对视频截图雪碧图；
+6. 对视频截取一张图做封面；
+7. 对视频转自适应码流（并加密）；
+8. 内容审核（令人反感的信息、不安全的信息、不适宜的信息）；
+9. 内容分析（标签、分类、封面、按帧标签）；
+10. 内容识别（视频片头片尾、人脸、文本全文、文本关键词、语音全文、语音关键词、物体）。
+
+如使用事件通知，事件通知的类型为 [任务流状态变更](https://cloud.tencent.com/document/product/266/9636)。
+     */
+    async ProcessMedia(req, cb) {
+        return this.request("ProcessMedia", req, cb);
+    }
+    /**
      * 创建片头片尾模板。
      */
     async CreateHeadTailTemplate(req, cb) {
@@ -792,8 +815,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAdaptiveDynamicStreamingTemplates", req, cb);
     }
     /**
-     * 本 API 是 [旧版本加密](https://cloud.tencent.com/document/product/266/9638) 中[DescribeDrmDataKey 的 API 2017 接口](https://cloud.tencent.com/document/product/266/9643)的升级版本。
-如果您是新接入点播加密的用户，不要使用该 API。请参考[视频加密综述](https://cloud.tencent.com/document/product/266/45552)使用。
+     * 本 API 是 [旧版本加密](https://cloud.tencent.com/document/product/266/9638) 中 [DescribeDrmDataKey 的 API 2017 接口](https://cloud.tencent.com/document/product/266/9643) 的升级版本。
+
+如果您是新接入点播加密的用户，不要使用该 API，请参考 [视频加密综述](https://cloud.tencent.com/document/product/266/45552) 使用推荐的加密方式。
      */
     async DescribeDrmDataKey(req, cb) {
         return this.request("DescribeDrmDataKey", req, cb);
@@ -835,6 +859,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SetDrmKeyProviderInfo", req, cb);
     }
     /**
+     * 创建用户自定义审核模板，数量上限：50。
+     */
+    async CreateReviewTemplate(req, cb) {
+        return this.request("CreateReviewTemplate", req, cb);
+    }
+    /**
      * 根据音视频内容识别模板唯一标识，获取音视频内容识别模板详情列表。返回结果包含符合条件的所有用户自定义音视频内容识别模板及[系统预置音视频内容识别模板](https://cloud.tencent.com/document/product/266/33476#.E9.A2.84.E7.BD.AE.E8.A7.86.E9.A2.91.E5.86.85.E5.AE.B9.E8.AF.86.E5.88.AB.E6.A8.A1.E6.9D.BF)。
      */
     async DescribeAIRecognitionTemplates(req, cb) {
@@ -857,6 +887,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeHeadTailTemplates(req, cb) {
         return this.request("DescribeHeadTailTemplates", req, cb);
+    }
+    /**
+     * 获取审核模板列表
+     */
+    async DescribeReviewTemplates(req, cb) {
+        return this.request("DescribeReviewTemplates", req, cb);
     }
     /**
      * 该接口用于确认媒体文件（和封面文件）上传到腾讯云点播的结果，并存储媒体信息，返回文件的播放地址和文件 ID。
@@ -1025,6 +1061,7 @@ class Client extends abstract_client_1.AbstractClient {
     7. 指定时间点截图信息（snapshotByTimeOffsetInfo）：对视频依照指定时间点截图后，的截图信息。
     8. 视频打点信息（keyFrameDescInfo）：对视频设置的打点信息。
     9. 转自适应码流信息（adaptiveDynamicStreamingInfo）：包括规格、加密类型、打包格式等相关信息。
+    10. 审核信息（reviewInfo）：包括媒体审核及媒体封面审核信息。
 2. 可以指定回包只返回部分信息。
      */
     async DescribeMediaInfos(req, cb) {
@@ -1055,22 +1092,11 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyContentReviewTemplate", req, cb);
     }
     /**
-     * 对点播中的音视频媒体发起处理任务，功能包括：
-1. 视频转码（带水印）；
-2. 视频转动图；
-3. 对视频按指定时间点截图；
-4. 对视频采样截图；
-5. 对视频截图雪碧图；
-6. 对视频截取一张图做封面；
-7. 对视频转自适应码流（并加密）；
-8. 内容审核（令人反感的信息、不安全的信息、不适宜的信息）；
-9. 内容分析（标签、分类、封面、按帧标签）；
-10. 内容识别（视频片头片尾、人脸、文本全文、文本关键词、语音全文、语音关键词、物体）。
-
-如使用事件通知，事件通知的类型为 [任务流状态变更](https://cloud.tencent.com/document/product/266/9636)。
+     * 该接口用于删除点播加速域名。
+1、域名删除前需要先关闭所有区域的加速。
      */
-    async ProcessMedia(req, cb) {
-        return this.request("ProcessMedia", req, cb);
+    async DeleteVodDomain(req, cb) {
+        return this.request("DeleteVodDomain", req, cb);
     }
     /**
      * 该 API 已经<font color='red'>不再维护</font>，新版播放器签名不再使用播放器配置模板，详细请参考 [播放器签名](https://cloud.tencent.com/document/product/266/45554)。

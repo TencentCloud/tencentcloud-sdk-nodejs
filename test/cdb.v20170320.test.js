@@ -1108,6 +1108,16 @@ it("cdb.v20170320.DescribeAuditRules", async function () {
     }
 })
 
+it("cdb.v20170320.DescribeRemoteBackupConfig", async function () {
+    try {
+       const data = await client.DescribeRemoteBackupConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdb.v20170320.DescribeBackupDatabases", async function () {
     try {
        const data = await client.DescribeBackupDatabases({})
@@ -1331,6 +1341,16 @@ it("cdb.v20170320.UpgradeDBInstance", async function () {
 it("cdb.v20170320.CreateDeployGroup", async function () {
     try {
        const data = await client.CreateDeployGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdb.v20170320.ModifyRemoteBackupConfig", async function () {
+    try {
+       const data = await client.ModifyRemoteBackupConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

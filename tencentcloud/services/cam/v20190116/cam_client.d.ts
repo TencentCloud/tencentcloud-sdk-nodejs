@@ -8,7 +8,7 @@ import { ListAttachedRolePoliciesResponse, UpdateUserOIDCConfigResponse, ListAcc
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
     /**
-     * 添加子用户
+     * 创建子用户
      */
     AddUser(req: AddUserRequest, cb?: (error: string, rep: AddUserResponse) => void): Promise<AddUserResponse>;
     /**
