@@ -75,11 +75,11 @@ export interface DescribeInstancesCountResponse {
     /**
       * 客户的实例总数
       */
-    Total: number;
+    Total?: number;
     /**
       * 客户的实例运行数
       */
-    Running: number;
+    Running?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -210,6 +210,12 @@ export interface DescribeInstancesCountRequest {
       * 游戏区域
       */
     GameRegion?: string;
+    /**
+      * 游戏类型。
+MOBILE：手游
+PC：默认值，端游
+      */
+    GameType?: string;
 }
 /**
  * SaveGameArchive请求参数结构体

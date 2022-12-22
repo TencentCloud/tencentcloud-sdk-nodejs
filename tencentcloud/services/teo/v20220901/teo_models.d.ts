@@ -7464,6 +7464,11 @@ export interface FollowOrigin {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     DefaultCache?: string;
+    /**
+      * 源站未返回 Cache-Control 头时, 使用/不使用默认缓存策略
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DefaultCacheStrategy?: string;
 }
 /**
  * DescribeSpeedTestingDetails请求参数结构体

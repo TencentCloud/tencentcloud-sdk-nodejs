@@ -27,6 +27,7 @@ import {
   DescribeTawInstancesRequest,
   DeleteOfflineLogConfigResponse,
   DescribeDataPvUrlInfoResponse,
+  StopProjectResponse,
   DescribeDataFetchUrlResponse,
   DescribeErrorRequest,
   StopInstanceRequest,
@@ -57,6 +58,7 @@ import {
   DescribeUvListRequest,
   DescribeTawAreasResponse,
   DescribeDataRequest,
+  StopProjectRequest,
   CreateOfflineLogConfigResponse,
   ModifyProjectLimitRequest,
   DeleteInstanceResponse,
@@ -456,6 +458,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeProjectsResponse) => void
   ): Promise<DescribeProjectsResponse> {
     return this.request("DescribeProjects", req, cb)
+  }
+
+  /**
+   * 停止项目使用与上报数据
+   */
+  async StopProject(
+    req: StopProjectRequest,
+    cb?: (error: string, rep: StopProjectResponse) => void
+  ): Promise<StopProjectResponse> {
+    return this.request("StopProject", req, cb)
   }
 
   /**

@@ -4487,6 +4487,54 @@ export interface LicenseUsageDataItem {
     Count: number;
 }
 /**
+ * 图片审核片段。
+ */
+export interface ReviewImageSegmentItem {
+    /**
+      * 嫌疑片段涉及令人反感的信息的分数。
+      */
+    Confidence?: number;
+    /**
+      * 嫌疑片段鉴别涉及违规信息的结果建议，取值范围：
+<li>review：疑似违规，建议复审；</li>
+<li>block：确认违规，建议封禁。</li>
+      */
+    Suggestion?: string;
+    /**
+      * 嫌疑片段最可能的违规的标签，取值范围：
+<li>Porn：色情；</li>
+<li>Terror：暴恐；</li>
+<li>Polity：不适宜的信息；</li>
+<li>Ad：广告；</li>
+<li>Illegal：违法；</li>
+<li>Religion：宗教；</li>
+<li>Abuse：谩骂。</li>
+      */
+    Label?: string;
+    /**
+      * 违规子标签。
+      */
+    SubLabel?: string;
+    /**
+      * 嫌疑片段违禁的形式，取值范围：
+<li>Image：画面上的人物或图标；</li>
+<li>OCR：画面上的文字。</li>
+      */
+    Form?: string;
+    /**
+      * 嫌疑人物、图标或文字出现的区域坐标 (像素级)，[x1, y1, x2, y2]，即左上角坐标、右下角坐标。
+      */
+    AreaCoordSet?: Array<number>;
+    /**
+      * 当 Form 为 OCR 时有效，表示识别出来的 OCR 文本内容。
+      */
+    Text?: string;
+    /**
+      * 当 Form 为 OCR 时有效，表示嫌疑片段命中的违规关键词列表。
+      */
+    KeywordSet?: Array<string>;
+}
+/**
  * 视频拼接源文件信息（2017 版）
  */
 export interface ConcatFileInfo2017 {
@@ -8301,6 +8349,48 @@ export interface ParseStreamingManifestRequest {
 <li>mpd</li>
       */
     ManifestType?: string;
+}
+/**
+ * 图片审核结果。
+ */
+export interface ReviewImageResult {
+    /**
+      * 图片审核的结果建议，取值范围：
+<li>pass：建议通过；</li>
+<li>review：建议复审；</li>
+<li>block：建议封禁。</li>
+      */
+    Suggestion?: string;
+    /**
+      * 当 Suggestion 为 review 或 block 时有效，表示最可能的违规的标签，取值范围：
+<li>Porn：色情；</li>
+<li>Terror：暴恐；</li>
+<li>Polity：不适宜的信息；</li>
+<li>Ad：广告；</li>
+<li>Illegal：违法；</li>
+<li>Religion：宗教；</li>
+<li>Abuse：谩骂。</li>
+      */
+    Label?: string;
+    /**
+      * 当 Suggestion 为 review 或 block 时有效，表示最可能的违禁的形式，取值范围：
+<li>Image：画面上的人物或图标；</li>
+<li>OCR：画面上的文字。</li>
+      */
+    Form?: string;
+    /**
+      * 有违规信息的嫌疑的视频片段列表。
+<font color=red>注意</font> ：该列表最多仅展示前 10个 元素。如希望获得完整结果，请从 SegmentSetFileUrl 对应的文件中获取。
+      */
+    SegmentSet?: Array<ReviewImageSegmentItem>;
+    /**
+      * 涉及违规信息的嫌疑的视频片段列表文件 URL。文件的内容为 JSON，数据结构与 SegmentSet 字段一致。 （文件不会永久存储，到达SegmentSetFileUrlExpireTime 时间点后文件将被删除）。
+      */
+    SegmentSetFileUrl?: string;
+    /**
+      * 涉及违规信息的嫌疑的视频片段列表文件 URL 失效时间，使用  [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+      */
+    SegmentSetFileUrlExpireTime?: string;
 }
 /**
  * DeleteSampleSnapshotTemplate返回参数结构体
@@ -12389,8 +12479,14 @@ export interface AiReviewTaskPoliticalResult {
 export interface ReviewImageResponse {
     /**
       * 图片审核任务结果。
+<font color=red>注意：该字段已废弃，建议使用 ReviewResult。</font>
       */
-    ReviewResultSet: Array<ContentReviewResult>;
+    ReviewResultSet?: Array<ContentReviewResult>;
+    /**
+      * 图片审核任务结果。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MediaReviewResult?: ReviewImageResult;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -15133,7 +15229,8 @@ export interface ReviewImageRequest {
       */
     FileId: string;
     /**
-      * 图片审核模板 ID，当前固定填 10。
+      * 图片审核模板 ID，取值范围：
+<li>10：预置模板，支持检测的违规标签包括色情（Porn）、暴恐（Terror）和不适宜的信息（Polity）。</li>
       */
     Definition: number;
     /**

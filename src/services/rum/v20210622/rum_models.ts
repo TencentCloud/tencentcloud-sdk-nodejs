@@ -347,6 +347,16 @@ export interface DescribeDataPvUrlInfoResponse {
 }
 
 /**
+ * StopProject返回参数结构体
+ */
+export interface StopProjectResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeDataFetchUrl返回参数结构体
  */
 export interface DescribeDataFetchUrlResponse {
@@ -1140,6 +1150,16 @@ export interface DescribeDataRequest {
    * 项目ID
    */
   ID: number
+}
+
+/**
+ * StopProject请求参数结构体
+ */
+export interface StopProjectRequest {
+  /**
+   * 项目 id
+   */
+  ProjectId: number
 }
 
 /**

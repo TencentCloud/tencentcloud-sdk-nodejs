@@ -204,6 +204,7 @@ import {
   EditMediaRequest,
   DescribeFileAttributesResponse,
   LicenseUsageDataItem,
+  ReviewImageSegmentItem,
   ConcatFileInfo2017,
   ContentReviewResult,
   MediaProcessTaskImageSpriteResult,
@@ -363,6 +364,7 @@ import {
   ResolutionNameInfo,
   AiRecognitionTaskOcrWordsResultItem,
   ParseStreamingManifestRequest,
+  ReviewImageResult,
   DeleteSampleSnapshotTemplateResponse,
   AiAnalysisTaskTagInput,
   HeadTailTemplate,
@@ -2146,7 +2148,6 @@ export class Client extends AbstractClient {
 ><li>图片文件大小支持：文件 < 5M；</li>
 ><li>图片文件分辨率支持：建议分辨率大于256x256，否则可能会影响审核效果；</li>
 ><li>图片文件支持格式：PNG、JPG、JPEG、BMP、GIF、WEBP格式。</li>
-
      */
   async ReviewImage(
     req: ReviewImageRequest,

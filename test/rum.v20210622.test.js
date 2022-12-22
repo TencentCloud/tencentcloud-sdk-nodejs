@@ -318,6 +318,16 @@ it("rum.v20210622.DescribeProjects", async function () {
     }
 })
 
+it("rum.v20210622.StopProject", async function () {
+    try {
+       const data = await client.StopProject({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("rum.v20210622.CreateStarProject", async function () {
     try {
        const data = await client.CreateStarProject({})

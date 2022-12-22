@@ -217,6 +217,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeProjects", req, cb);
     }
     /**
+     * 停止项目使用与上报数据
+     */
+    async StopProject(req, cb) {
+        return this.request("StopProject", req, cb);
+    }
+    /**
      * 个人用户添加星标项目
      */
     async CreateStarProject(req, cb) {
