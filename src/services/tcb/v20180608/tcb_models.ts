@@ -1641,6 +1641,18 @@ export interface DescribeCloudBaseRunServerVersionResponse {
   PolicyDetail: Array<HpaPolicy>
 
   /**
+      * Tke集群信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TkeClusterInfo: TkeClusterInfo
+
+  /**
+      * 版本工作负载类型；deployment/deamonset
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TkeWorkloadType: string
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -2066,6 +2078,16 @@ export interface DescribeActivityRecordResponse {
    */
   ActivityRecords: Array<ActivityRecordItem>
 
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeCloudBaseRunVersionRsByCondition返回参数结构体
+ */
+export interface DescribeCloudBaseRunVersionRsByConditionResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3084,6 +3106,29 @@ export interface CreateHostingDomainResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * tke集群信息
+ */
+export interface TkeClusterInfo {
+  /**
+      * 集群ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClusterId?: string
+
+  /**
+      * 集群的vpcId
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VpcId?: string
+
+  /**
+      * 版本内网CLB所在子网Id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VersionClbSubnetId?: string
 }
 
 /**
@@ -4562,14 +4607,9 @@ export interface DescribeWxCloudBaseRunEnvsRequest {
 }
 
 /**
- * DescribeCloudBaseRunVersionRsByCondition返回参数结构体
+ * 主机路径挂载参数
  */
-export interface DescribeCloudBaseRunVersionRsByConditionResponse {
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
+export type CloudBaseRunServiceVolumeHostPath = null
 
 /**
  * DescribeCurveData请求参数结构体
@@ -5836,6 +5876,12 @@ export interface CloudRunServiceVolume {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   EmptyDir?: CloudBaseRunEmptyDirVolumeSource
+
+  /**
+      * 主机路径挂载信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  HostPath?: CloudBaseRunServiceVolumeHostPath
 }
 
 /**

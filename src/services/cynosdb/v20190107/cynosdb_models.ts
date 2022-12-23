@@ -258,6 +258,46 @@ export interface ModifyClusterStorageRequest {
 }
 
 /**
+ * RollBackCluster请求参数结构体
+ */
+export interface RollBackClusterRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+
+  /**
+   * 回档策略 timeRollback-按时间点回档 snapRollback-按备份文件回档
+   */
+  RollbackStrategy: string
+
+  /**
+   * 回档ID
+   */
+  RollbackId: number
+
+  /**
+   * 期望回档时间
+   */
+  ExpectTime?: string
+
+  /**
+   * 期望阈值（已废弃）
+   */
+  ExpectTimeThresh?: number
+
+  /**
+   * 回档数据库列表
+   */
+  RollbackDatabases?: Array<RollbackDatabase>
+
+  /**
+   * 回档数据库表列表
+   */
+  RollbackTables?: Array<RollbackTable>
+}
+
+/**
  * DescribeAuditLogFiles返回参数结构体
  */
 export interface DescribeAuditLogFilesResponse {
@@ -1330,43 +1370,28 @@ export interface DescribeDBSecurityGroupsRequest {
 }
 
 /**
- * RollBackCluster请求参数结构体
+ * 实例初始化配置信息
  */
-export interface RollBackClusterRequest {
+export interface InstanceInitInfo {
   /**
-   * 集群ID
+   * 实例cpu
    */
-  ClusterId: string
+  Cpu: number
 
   /**
-   * 回档策略 timeRollback-按时间点回档 snapRollback-按备份文件回档
+   * 实例内存
    */
-  RollbackStrategy: string
+  Memory: number
 
   /**
-   * 回档ID
+   * 实例类型 rw/ro
    */
-  RollbackId: number
+  InstanceType: string
 
   /**
-   * 期望回档时间
+   * 实例个数,范围[1,15]
    */
-  ExpectTime?: string
-
-  /**
-   * 期望阈值（已废弃）
-   */
-  ExpectTimeThresh?: number
-
-  /**
-   * 回档数据库列表
-   */
-  RollbackDatabases?: Array<RollbackDatabase>
-
-  /**
-   * 回档数据库表列表
-   */
-  RollbackTables?: Array<RollbackTable>
+  InstanceCount: number
 }
 
 /**
@@ -2331,6 +2356,11 @@ cpu最大值，可选范围参考DescribeServerlessInstanceSpecs接口返回
    * 多可用区地址
    */
   SlaveZone?: string
+
+  /**
+   * 实例初始化配置信息，主要用于购买集群时选不同规格实例
+   */
+  InstanceInitInfos?: Array<InstanceInitInfo>
 }
 
 /**

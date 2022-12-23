@@ -137,6 +137,7 @@ import {
   View,
   TagItem,
   RecoverMigrateJobRequest,
+  OnlineDDL,
   DatabaseTableObject,
   Table,
   CompareDetailInfo,

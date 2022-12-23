@@ -34,6 +34,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTawAreas", req, cb);
     }
     /**
+     * 获取项目下的日志列表，分钟级
+     */
+    async DescribeRumStatsLogList(req, cb) {
+        return this.request("DescribeRumStatsLogList", req, cb);
+    }
+    /**
      * 创建对应项目的文件记录
      */
     async CreateReleaseFile(req, cb) {
@@ -98,6 +104,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeError(req, cb) {
         return this.request("DescribeError", req, cb);
+    }
+    /**
+     * 获取项目下的日志列表（实例创建的项目下的日志列表）
+     */
+    async DescribeRumLogList(req, cb) {
+        return this.request("DescribeRumLogList", req, cb);
     }
     /**
      * 获取项目下的日志列表（实例创建的项目下的日志列表）

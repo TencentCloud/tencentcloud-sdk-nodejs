@@ -28,6 +28,16 @@ it("rum.v20210622.DescribeTawAreas", async function () {
     }
 })
 
+it("rum.v20210622.DescribeRumStatsLogList", async function () {
+    try {
+       const data = await client.DescribeRumStatsLogList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("rum.v20210622.CreateReleaseFile", async function () {
     try {
        const data = await client.CreateReleaseFile({})
@@ -131,6 +141,16 @@ it("rum.v20210622.DescribeDataPerformanceProject", async function () {
 it("rum.v20210622.DescribeError", async function () {
     try {
        const data = await client.DescribeError({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("rum.v20210622.DescribeRumLogList", async function () {
+    try {
+       const data = await client.DescribeRumLogList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

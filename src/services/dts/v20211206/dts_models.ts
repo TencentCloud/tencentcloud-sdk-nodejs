@@ -1350,6 +1350,12 @@ export interface Endpoint {
   Region?: string
 
   /**
+      * tdsql mysql版的节点类型，枚举值为proxy、set
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Role?: string
+
+  /**
       * 数据库内核类型，tdsql中用于区分不同内核：percona,mariadb,mysql
 注意：此字段可能返回 null，表示取不到有效值。
       */
@@ -1440,22 +1446,28 @@ export interface Endpoint {
   EngineVersion?: string
 
   /**
-      * 资源所属账号 为空或self(表示本账号内资源)、other(表示跨账号资源)
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  AccountMode?: string
-
-  /**
       * 实例所属账号，如果为跨账号实例此项必填
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Account?: string
 
   /**
+      * 资源所属账号 为空或self(表示本账号内资源)、other(表示跨账号资源)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AccountMode?: string
+
+  /**
       * 跨账号同步时的角色，只允许[a-zA-Z0-9\-\_]+，如果为跨账号实例此项必填
 注意：此字段可能返回 null，表示取不到有效值。
       */
   AccountRole?: string
+
+  /**
+      * 外部角色id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RoleExternalId?: string
 
   /**
       * 临时密钥Id，如果为跨账号实例此项必填
@@ -1476,10 +1488,10 @@ export interface Endpoint {
   TmpToken?: string
 
   /**
-      * 外部角色id
+      * 是否走加密传输、UnEncrypted表示不走加密传输，Encrypted表示走加密传输，默认UnEncrypted
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  RoleExternalId?: string
+  EncryptConn?: string
 }
 
 /**
@@ -1649,19 +1661,9 @@ export interface ConfigureSyncJobRequest {
   SrcAccessType: string
 
   /**
-   * 源端信息
-   */
-  SrcInfo: Endpoint
-
-  /**
    * 目标端接入类型，cdb(云数据库)、cvm(云主机自建)、vpc(私有网络)、extranet(外网)、vpncloud(vpn接入)、dcg(专线接入)、ccn(云联网)、intranet(自研上云)、noProxy,注意具体可选值依赖当前链路
    */
   DstAccessType: string
-
-  /**
-   * 目标端信息
-   */
-  DstInfo: Endpoint
 
   /**
    * 同步任务选项
@@ -1679,6 +1681,11 @@ export interface ConfigureSyncJobRequest {
   JobName?: string
 
   /**
+   * 枚举值是 liteMode 和 fullMode ，分别对应精简模式或正常模式
+   */
+  JobMode?: string
+
+  /**
    * 运行模式，取值如：Immediate(表示立即运行，默认为此项值)、Timed(表示定时运行)
    */
   RunMode?: string
@@ -1687,6 +1694,21 @@ export interface ConfigureSyncJobRequest {
    * 期待启动时间，当RunMode取值为Timed时，此值必填，形如："2006-01-02 15:04:05"
    */
   ExpectRunTime?: string
+
+  /**
+   * 源端信息，单节点数据库使用
+   */
+  SrcInfo?: Endpoint
+
+  /**
+   * 目标端信息，单节点数据库使用
+   */
+  DstInfo?: Endpoint
+
+  /**
+   * 自动重试的时间段、可设置5至720分钟、0表示不重试
+   */
+  AutoRetryTimeRangeMinutes?: number
 }
 
 /**
@@ -1946,6 +1968,30 @@ export interface Database {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Procedures?: Array<string>
+
+  /**
+      * 触发器迁移模式，all(为当前对象下的所有对象)，partial(部分对象)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TriggerMode?: string
+
+  /**
+      * 当TriggerMode为partial，指定要迁移的触发器名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Triggers?: Array<string>
+
+  /**
+      * 事件迁移模式，all(为当前对象下的所有对象)，partial(部分对象)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EventMode?: string
+
+  /**
+      * 当EventMode为partial，指定要迁移的事件名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Events?: Array<string>
 }
 
 /**
@@ -1991,6 +2037,11 @@ export interface ModifyMigrationJobRequest {
    * 标签信息
    */
   Tags?: Array<TagItem>
+
+  /**
+   * 自动重试的时间段、可设置5至720分钟、0表示不重试
+   */
+  AutoRetryTimeRangeMinutes?: number
 }
 
 /**
@@ -2828,6 +2879,12 @@ export interface JobItem {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Tags: Array<TagItem>
+
+  /**
+      * 自动重试时间段信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AutoRetryTimeRangeMinutes: number
 }
 
 /**
@@ -2861,6 +2918,12 @@ export interface Objects {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   AdvancedObjects?: Array<string>
+
+  /**
+      * OnlineDDL类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OnlineDDL?: OnlineDDL
 }
 
 /**
@@ -3157,7 +3220,7 @@ export interface SyncJobInfo {
   SrcAccessType: string
 
   /**
-      * 源端信息
+      * 源端信息，单节点数据库使用
 注意：此字段可能返回 null，表示取不到有效值。
       */
   SrcInfo: Endpoint
@@ -3181,7 +3244,7 @@ export interface SyncJobInfo {
   DstAccessType: string
 
   /**
-      * 目标端信息
+      * 目标端信息，单节点数据库使用
 注意：此字段可能返回 null，表示取不到有效值。
       */
   DstInfo: Endpoint
@@ -3245,6 +3308,12 @@ export interface SyncJobInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   OfflineTime: string
+
+  /**
+      * 自动重试时间段设置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AutoRetryTimeRangeMinutes: number
 }
 
 /**
@@ -3518,6 +3587,11 @@ export interface RecoverMigrateJobRequest {
    */
   JobId: string
 }
+
+/**
+ * OnlineDDL类型
+ */
+export type OnlineDDL = null
 
 /**
  * 迁移对象选项，需要告知迁移服务迁移哪些库表对象

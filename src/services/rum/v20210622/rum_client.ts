@@ -26,6 +26,7 @@ import {
   DescribeProjectLimitsResponse,
   DescribeTawInstancesRequest,
   DeleteOfflineLogConfigResponse,
+  DescribeRumLogListResponse,
   DescribeDataPvUrlInfoResponse,
   StopProjectResponse,
   DescribeDataFetchUrlResponse,
@@ -77,9 +78,11 @@ import {
   ReleaseFile,
   ModifyProjectLimitResponse,
   DescribeDataStaticProjectRequest,
+  DescribeRumStatsLogListRequest,
   ProjectLimit,
   DeleteLogExportRequest,
   DescribeWhitelistsResponse,
+  DescribeRumStatsLogListResponse,
   CreateWhitelistRequest,
   DescribeDataPvUrlStatisticsResponse,
   DescribeDataLogUrlInfoRequest,
@@ -129,6 +132,7 @@ import {
   DescribeDataReportCountResponse,
   DescribeDataPerformanceProjectRequest,
   ModifyProjectRequest,
+  DescribeRumLogListRequest,
   DescribeDataStaticResourceRequest,
   DescribeTawInstancesResponse,
   DescribePvListRequest,
@@ -159,6 +163,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTawAreasResponse) => void
   ): Promise<DescribeTawAreasResponse> {
     return this.request("DescribeTawAreas", req, cb)
+  }
+
+  /**
+   * 获取项目下的日志列表，分钟级
+   */
+  async DescribeRumStatsLogList(
+    req: DescribeRumStatsLogListRequest,
+    cb?: (error: string, rep: DescribeRumStatsLogListResponse) => void
+  ): Promise<DescribeRumStatsLogListResponse> {
+    return this.request("DescribeRumStatsLogList", req, cb)
   }
 
   /**
@@ -269,6 +283,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeErrorResponse) => void
   ): Promise<DescribeErrorResponse> {
     return this.request("DescribeError", req, cb)
+  }
+
+  /**
+   * 获取项目下的日志列表（实例创建的项目下的日志列表）
+   */
+  async DescribeRumLogList(
+    req: DescribeRumLogListRequest,
+    cb?: (error: string, rep: DescribeRumLogListResponse) => void
+  ): Promise<DescribeRumLogListResponse> {
+    return this.request("DescribeRumLogList", req, cb)
   }
 
   /**

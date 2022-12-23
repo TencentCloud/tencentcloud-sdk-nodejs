@@ -1124,6 +1124,11 @@ export interface SecretIdLastUsed {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     LastUsedDate: string;
+    /**
+      * 最后密钥访问日期
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LastSecretUsedDate: number;
 }
 /**
  * UpdateAccessKey返回参数结构体

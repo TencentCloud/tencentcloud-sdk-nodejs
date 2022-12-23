@@ -260,6 +260,19 @@ export interface DeleteOfflineLogConfigResponse {
     RequestId?: string;
 }
 /**
+ * DescribeRumLogList返回参数结构体
+ */
+export interface DescribeRumLogListResponse {
+    /**
+      * 返回字符串
+      */
+    Result: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeDataPvUrlInfo返回参数结构体
  */
 export interface DescribeDataPvUrlInfoResponse {
@@ -1538,6 +1551,31 @@ export interface DescribeDataStaticProjectRequest {
     Env?: string;
 }
 /**
+ * DescribeRumStatsLogList请求参数结构体
+ */
+export interface DescribeRumStatsLogListRequest {
+    /**
+      * 开始时间（必填）
+      */
+    StartTime: string;
+    /**
+      * 单次查询返回的原始日志条数，最大值为100（必填）
+      */
+    Limit: number;
+    /**
+      * 查询语句，参考控制台请求参数，语句长度最大为4096（必填）
+      */
+    Query: string;
+    /**
+      * 结束时间（必填）
+      */
+    EndTime: string;
+    /**
+      * 项目ID（必填）
+      */
+    ID: number;
+}
+/**
  * 项目接口限制类型
  */
 export interface ProjectLimit {
@@ -1583,6 +1621,19 @@ export interface DescribeWhitelistsResponse {
       * 白名单列表
       */
     WhitelistSet: Array<Whitelist>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeRumStatsLogList返回参数结构体
+ */
+export interface DescribeRumStatsLogListResponse {
+    /**
+      * 返回字符串
+      */
+    Result: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2898,6 +2949,39 @@ export interface ModifyProjectRequest {
       * 项目描述(可选，最长为 1000)
       */
     Desc?: string;
+}
+/**
+ * DescribeRumLogList请求参数结构体
+ */
+export interface DescribeRumLogListRequest {
+    /**
+      * 排序方式  desc  asc（必填）
+      */
+    OrderBy: string;
+    /**
+      * 开始时间（必填）
+      */
+    StartTime: string;
+    /**
+      * 单次查询返回的原始日志条数，最大值为100（必填）
+      */
+    Limit: number;
+    /**
+      * 页数，第几页
+      */
+    Page: number;
+    /**
+      * 查询语句，参考控制台请求参数，语句长度最大为4096（必填）
+      */
+    Query: string;
+    /**
+      * 结束时间（必填）
+      */
+    EndTime: string;
+    /**
+      * 项目ID（必填）
+      */
+    ID: number;
 }
 /**
  * DescribeDataStaticResource请求参数结构体

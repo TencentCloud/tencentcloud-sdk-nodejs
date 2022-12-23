@@ -135,7 +135,7 @@ export interface TaskMonitor {
     Unit: string;
 }
 /**
- * 从经验模版创建演练时需要配置的任务参数
+ * 从经验模板创建演练时需要配置的任务参数
  */
 export interface TaskConfig {
     /**

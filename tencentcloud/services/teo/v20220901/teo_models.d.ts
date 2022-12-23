@@ -5316,6 +5316,19 @@ export interface DescribeOriginGroupRequest {
     Filters?: Array<AdvancedFilter>;
 }
 /**
+ * DescribeSpeedTestingDetails返回参数结构体
+ */
+export interface DescribeSpeedTestingDetailsResponse {
+    /**
+      * 分地域拨测统计数据。
+      */
+    SpeedTestingDetailData: SpeedTestingDetailData;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeLogTopicTasks返回参数结构体
  */
 export interface DescribeLogTopicTasksResponse {
@@ -5949,17 +5962,15 @@ export interface SubRuleItem {
     Tags?: Array<string>;
 }
 /**
- * DescribeSpeedTestingDetails返回参数结构体
+ * Grpc配置项
  */
-export interface DescribeSpeedTestingDetailsResponse {
+export interface Grpc {
     /**
-      * 分地域拨测统计数据。
+      * 是否开启Grpc配置，取值有：
+<li>on：开启；</li>
+<li>off：关闭。</li>
       */
-    SpeedTestingDetailData: SpeedTestingDetailData;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    Switch: string;
 }
 /**
  * 托管规则组详情
@@ -7334,6 +7345,11 @@ export interface ZoneSetting {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ClientIpCountry: ClientIpCountry;
+    /**
+      * Grpc协议支持配置。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Grpc: Grpc;
 }
 /**
  * 规则引擎条件且关系条件列表
@@ -8424,6 +8440,11 @@ export interface ModifyZoneSettingRequest {
 不填写表示保持原有配置。
       */
     ClientIpCountry?: ClientIpCountry;
+    /**
+      * Grpc协议支持配置。
+不填写表示保持原有配置。
+      */
+    Grpc?: Grpc;
 }
 /**
  * DDoS端口过滤
