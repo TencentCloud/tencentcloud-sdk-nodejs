@@ -65,10 +65,17 @@ export class AbstractClient {
     /**
      * 认证信息实例
      */
-    this.credential = credential || {
-      secretId: null,
-      secretKey: null,
-      token: null,
+    if (credential && ('getCredential' in credential)) {
+      this.credential = credential
+    } else {
+      this.credential = Object.assign(
+        {
+          secretId: null,
+          secretKey: null,
+          token: null,
+        },
+        credential
+      )
     }
 
     /**
