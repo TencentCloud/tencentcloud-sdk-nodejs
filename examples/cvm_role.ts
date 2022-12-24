@@ -1,7 +1,8 @@
-const tencentcloud = require("../../tencentcloud-sdk-nodejs")
-// const tencentcloud = require("tencentcloud-sdk-nodejs")
-const CvmRoleCredential = require("../../tencentcloud-sdk-nodejs/tencentcloud/common/cvm_role_credential").default
-// const CvmRoleCredential = require("tencentcloud-sdk-nodejs/tencentcloud/common/cvm_role_credential").default
+import * as tencentcloud from "../../tencentcloud-sdk-nodejs"
+// import * as tencentcloud from "tencentcloud-sdk-nodejs"
+import CvmRoleCredential from "../../tencentcloud-sdk-nodejs/tencentcloud/common/cvm_role_credential"
+// import CvmRoleCredential from "tencentcloud-sdk-nodejs/tencentcloud/common/cvm_role_credential"
+
 
 async function main() {
     // 导入对应产品模块的client models。

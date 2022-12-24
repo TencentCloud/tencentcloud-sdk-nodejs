@@ -94,10 +94,10 @@ const CvmClient = tencentcloud.cvm.v20170312.Client
 
 除显式传入凭证外，从 `v4.0.506` 起支持 [腾讯云实例角色](https://cloud.tencent.com/document/product/213/47668)
 
-在您为实例绑定角色后，您可以在实例中访问相关元数据接口获取临时凭证。用法可参考 [示例代码](./examples/cvm_role.js)
+在您为实例绑定角色后，您可以在实例中访问相关元数据接口获取临时凭证。用法可参考 [js示例代码](./examples/cvm_role.js) 或 [ts示例代码](./examples/cvm_role.ts)
 ```javascript
 // ...
-const CvmRoleCredential = tencentcloud.CvmRoleCredential
+const CvmRoleCredential = require("tencentcloud-sdk-nodejs/tencentcloud/common/cvm_role_credential").default
 
 new XxxClient({
   // ...
