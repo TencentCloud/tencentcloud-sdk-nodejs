@@ -123,10 +123,10 @@ export class HttpConnection {
       signal,
     }
 
-    if (token === null) {
+    if (token === null || token === undefined) {
       delete config.headers["X-TC-Token"]
     }
-    if (region === null) {
+    if (region === null || region === undefined) {
       delete config.headers["X-TC-Region"]
     }
 

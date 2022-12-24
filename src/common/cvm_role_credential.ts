@@ -14,8 +14,8 @@ interface CvmRoleCredentialResult {
   Code: string
 }
 export default class CvmRoleCredential implements DynamicCredential {
-  protected roleNameTask: Promise<string>
-  protected credentialTask: Promise<CvmRoleCredentialResult>
+  protected roleNameTask: Promise<string> | null
+  protected credentialTask: Promise<CvmRoleCredentialResult> | null
   protected async getRoleName() {
     const response = await fetch(ROLE_URL, {})
     if (!response.ok) {
