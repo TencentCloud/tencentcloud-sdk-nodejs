@@ -44,6 +44,7 @@ import {
   DeleteTaskResponse,
   DescribeTaskRequest,
   Task,
+  TaskReportInfo,
   CreateTaskFromTemplateRequest,
   DescribeTaskListRequest,
   TaskListItem,

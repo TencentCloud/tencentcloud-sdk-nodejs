@@ -96,7 +96,7 @@ import {
   SecurityConfig,
   L4OfflineLog,
   ModifyZoneCnameSpeedUpResponse,
-  FailReason,
+  MaxAge,
   DescribeRulesSettingRequest,
   LogSetInfo,
   OptimizeAction,
@@ -116,13 +116,13 @@ import {
   OfflineCache,
   DescribeDDoSAttackTopDataResponse,
   SecRuleRelatedInfo,
+  DescribeDistributionL4AccessDataRequest,
   DescribeSpeedTestingQuotaResponse,
   DeleteRulesRequest,
   ExceptUserRuleCondition,
   ModifyDefaultCertificateRequest,
-  MaxAge,
-  DeleteApplicationProxyResponse,
   SecEntryValue,
+  DeleteApplicationProxyResponse,
   ModifyAlarmDefaultThresholdResponse,
   CreateCredentialRequest,
   ModifyRuleRequest,
@@ -234,6 +234,7 @@ import {
   SwitchLogTopicTaskRequest,
   DeleteApplicationProxyRequest,
   ModifyZoneStatusRequest,
+  FailReason,
   ModifyOriginGroupResponse,
   ExceptUserRuleScope,
   ModifyAliasDomainRequest,
@@ -270,6 +271,7 @@ import {
   RuleChoicePropertiesItem,
   ModifyAlarmConfigResponse,
   ModifyAliasDomainStatusResponse,
+  DescribeTimingL4AccessDataRequest,
   DescribeTimingL7AnalysisDataRequest,
   NoCache,
   GeoIp,
@@ -344,6 +346,7 @@ import {
   SingleDataRecord,
   SecClientIp,
   DescribeTopL7CacheDataRequest,
+  DescribeDistributionL4AccessDataResponse,
   Https,
   DescribeBotManagedRulesResponse,
   AdvancedFilter,
@@ -409,6 +412,7 @@ import {
   ModifyOriginGroupRequest,
   DescribeAddableEntityListRequest,
   DescribeSingleL7AnalysisDataResponse,
+  DescribeTimingL4AccessDataResponse,
   DescribeDefaultCertificatesResponse,
   CreateOriginGroupResponse,
   DescribeSecurityPolicyResponse,
@@ -552,6 +556,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyDDoSPolicyHostResponse) => void
   ): Promise<ModifyDDoSPolicyHostResponse> {
     return this.request("ModifyDDoSPolicyHost", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeTimingL4AccessData）用于查询四层连接数的时序数据列表。
+   */
+  async DescribeTimingL4AccessData(
+    req: DescribeTimingL4AccessDataRequest,
+    cb?: (error: string, rep: DescribeTimingL4AccessDataResponse) => void
+  ): Promise<DescribeTimingL4AccessDataResponse> {
+    return this.request("DescribeTimingL4AccessData", req, cb)
   }
 
   /**
@@ -1232,6 +1246,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifySecurityWafGroupPolicyResponse) => void
   ): Promise<ModifySecurityWafGroupPolicyResponse> {
     return this.request("ModifySecurityWafGroupPolicy", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeDistributionL4AccessData）用于查询四层连接时长的时序数据。
+   */
+  async DescribeDistributionL4AccessData(
+    req: DescribeDistributionL4AccessDataRequest,
+    cb?: (error: string, rep: DescribeDistributionL4AccessDataResponse) => void
+  ): Promise<DescribeDistributionL4AccessDataResponse> {
+    return this.request("DescribeDistributionL4AccessData", req, cb)
   }
 
   /**

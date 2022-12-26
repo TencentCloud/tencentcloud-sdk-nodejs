@@ -432,6 +432,12 @@ export interface DescribeTaskResponse {
   Task: Task
 
   /**
+      * 任务对应的演练报告信息，null表示未导出报告
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ReportInfo: TaskReportInfo
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -915,6 +921,43 @@ export interface Task {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Tags?: Array<TagWithDescribe>
+}
+
+/**
+ * 演练报告状态信息
+ */
+export interface TaskReportInfo {
+  /**
+   * 0--未开始，1--正在导出，2--导出成功，3--导出失败
+   */
+  Stage: number
+
+  /**
+   * 创建时间
+   */
+  CreateTime: string
+
+  /**
+   * 有效期截止时间
+   */
+  ExpirationTime: string
+
+  /**
+   * 是否有效
+   */
+  Expired: boolean
+
+  /**
+      * 演练报告cos文件地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CosUrl: string
+
+  /**
+      * 演练报告导出日志
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Log: string
 }
 
 /**

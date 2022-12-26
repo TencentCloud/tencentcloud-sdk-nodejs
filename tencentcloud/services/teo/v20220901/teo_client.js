@@ -94,6 +94,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyDDoSPolicyHost", req, cb);
     }
     /**
+     * 本接口（DescribeTimingL4AccessData）用于查询四层连接数的时序数据列表。
+     */
+    async DescribeTimingL4AccessData(req, cb) {
+        return this.request("DescribeTimingL4AccessData", req, cb);
+    }
+    /**
      * 用于验证站点所有权。
      */
     async IdentifyZone(req, cb) {
@@ -500,6 +506,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifySecurityWafGroupPolicy(req, cb) {
         return this.request("ModifySecurityWafGroupPolicy", req, cb);
+    }
+    /**
+     * 本接口（DescribeDistributionL4AccessData）用于查询四层连接时长的时序数据。
+     */
+    async DescribeDistributionL4AccessData(req, cb) {
+        return this.request("DescribeDistributionL4AccessData", req, cb);
     }
     /**
      * 创建自定义规则的自定义页

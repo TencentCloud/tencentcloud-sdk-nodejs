@@ -299,7 +299,7 @@ export interface StopMigrateJobResponse {
  */
 export interface TableItem {
   /**
-      * 迁移的表名
+      * 迁移的表名，大小写敏感
 注意：此字段可能返回 null，表示取不到有效值。
       */
   TableName?: string
@@ -2937,7 +2937,7 @@ export interface RecoverMigrateJobResponse {
 }
 
 /**
- * 迁移对象信息
+ * 迁移对象信息，在配置库表视图等对象信息时大小写敏感
  */
 export interface DBItem {
   /**

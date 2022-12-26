@@ -128,6 +128,16 @@ it("teo.v20220901.ModifyDDoSPolicyHost", async function () {
     }
 })
 
+it("teo.v20220901.DescribeTimingL4AccessData", async function () {
+    try {
+       const data = await client.DescribeTimingL4AccessData({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("teo.v20220901.IdentifyZone", async function () {
     try {
        const data = await client.IdentifyZone({})
@@ -801,6 +811,16 @@ it("teo.v20220901.ModifyLoadBalancing", async function () {
 it("teo.v20220901.ModifySecurityWafGroupPolicy", async function () {
     try {
        const data = await client.ModifySecurityWafGroupPolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("teo.v20220901.DescribeDistributionL4AccessData", async function () {
+    try {
+       const data = await client.DescribeDistributionL4AccessData({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

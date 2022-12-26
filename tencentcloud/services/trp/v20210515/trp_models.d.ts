@@ -2102,12 +2102,12 @@ export interface Quota {
       */
     Services?: Array<string>;
     /**
-      * 工厂配额
+      * 商户配额
 注意：此字段可能返回 null，表示取不到有效值。
       */
     FactoryQuota?: number;
     /**
-      * 产品配额
+      * 商品配额
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ItemQuota?: number;
@@ -2137,7 +2137,7 @@ export interface Quota {
       */
     TrackType?: number;
     /**
-      * 开通版本 basic standard enterprise
+      * 开通版本 lite:轻量版, basic:基础版, standard:标准版
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Version?: string;
