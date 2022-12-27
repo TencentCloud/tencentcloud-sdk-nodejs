@@ -103,34 +103,23 @@ export interface MusicAlbumCoverInfo {
 }
 
 /**
- * CreateKTVRobot请求参数结构体
+ * AME 曲库歌曲基础信息。
  */
-export interface CreateKTVRobotRequest {
+export interface AMEMusicBaseInfo {
   /**
-   * 应用名称。
+   * 歌曲 Id。
    */
-  AppName: string
+  MusicId: string
 
   /**
-   * 用户标识。
+   * 歌曲名称。
    */
-  UserId: string
+  Name: string
 
   /**
-      * RTC厂商类型，取值有：
-<li>TRTC</li>
-      */
-  RTCSystem: string
-
-  /**
-   * 进房参数。
+   * 歌手列表。
    */
-  JoinRoomInput: JoinRoomInput
-
-  /**
-   * 创建机器人时初始化参数。
-   */
-  SyncRobotCommands?: Array<SyncRobotCommand>
+  SingerSet: Array<string>
 }
 
 /**
@@ -203,6 +192,52 @@ export interface DescribeKTVPlaylistDetailRequest {
 <li>Sing：可唱。</li>
       */
   RightFilters?: Array<string>
+}
+
+/**
+ * 歌曲详细信息。
+ */
+export interface KTVMusicDetailInfo {
+  /**
+   * 歌曲基础信息。
+   */
+  KTVMusicBaseInfo: KTVMusicBaseInfo
+
+  /**
+   * 播放凭证。
+   */
+  PlayToken: string
+
+  /**
+   * 歌词下载链接。
+   */
+  LyricsUrl: string
+
+  /**
+   * 音高数据下载链接。
+   */
+  MidiUrl: string
+
+  /**
+   * 副歌片段信息。
+   */
+  ChorusClipSet: Array<ChorusClip>
+
+  /**
+   * 前奏间隔。
+   */
+  PreludeInterval: number
+
+  /**
+   * 歌曲流派列表。
+   */
+  GenreSet: Array<string>
+
+  /**
+      * 节拍信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BPMInfo: KTVBPMInfo
 }
 
 /**
@@ -376,6 +411,12 @@ export interface KTVMatchMusic {
    * 命中规则。
    */
   MatchRule: KTVMatchRule
+
+  /**
+      * AME 歌曲基础信息，仅在使用音速达歌曲 Id 匹配 AME 曲库时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AMEMusicBaseInfo: AMEMusicBaseInfo
 }
 
 /**
@@ -464,49 +505,34 @@ export interface BatchDescribeKTVMusicDetailsRequest {
 }
 
 /**
- * 歌曲详细信息。
+ * CreateKTVRobot请求参数结构体
  */
-export interface KTVMusicDetailInfo {
+export interface CreateKTVRobotRequest {
   /**
-   * 歌曲基础信息。
+   * 应用名称。
    */
-  KTVMusicBaseInfo: KTVMusicBaseInfo
+  AppName: string
 
   /**
-   * 播放凭证。
+   * 用户标识。
    */
-  PlayToken: string
+  UserId: string
 
   /**
-   * 歌词下载链接。
-   */
-  LyricsUrl: string
-
-  /**
-   * 音高数据下载链接。
-   */
-  MidiUrl: string
-
-  /**
-   * 副歌片段信息。
-   */
-  ChorusClipSet: Array<ChorusClip>
-
-  /**
-   * 前奏间隔。
-   */
-  PreludeInterval: number
-
-  /**
-   * 歌曲流派列表。
-   */
-  GenreSet: Array<string>
-
-  /**
-      * 节拍信息。
-注意：此字段可能返回 null，表示取不到有效值。
+      * RTC厂商类型，取值有：
+<li>TRTC</li>
       */
-  BPMInfo: KTVBPMInfo
+  RTCSystem: string
+
+  /**
+   * 进房参数。
+   */
+  JoinRoomInput: JoinRoomInput
+
+  /**
+   * 创建机器人时初始化参数。
+   */
+  SyncRobotCommands?: Array<SyncRobotCommand>
 }
 
 /**
@@ -832,6 +858,11 @@ export interface KTVMatchRule {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   MusicInfo?: KTVMatchRuleMusicInfo
+
+  /**
+   * 音速达歌曲 Id，用于匹配 AME 曲库歌曲。
+   */
+  MusicIdToMatchAME?: string
 }
 
 /**

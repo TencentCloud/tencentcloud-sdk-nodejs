@@ -23,7 +23,7 @@ class AbstractClient {
         /**
          * 认证信息实例
          */
-        if (credential && ('getCredential' in credential)) {
+        if (credential && "getCredential" in credential) {
             this.credential = credential;
         }
         else {

@@ -28,12 +28,6 @@ class Client extends abstract_client_1.AbstractClient {
         super("teo.tencentcloudapi.com", "2022-09-01", clientConfig);
     }
     /**
-     * 创建 DNS 记录
-     */
-    async CreateDnsRecord(req, cb) {
-        return this.request("CreateDnsRecord", req, cb);
-    }
-    /**
      * 创建清除缓存任务
      */
     async CreatePurgeTask(req, cb) {
@@ -80,12 +74,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyZone(req, cb) {
         return this.request("ModifyZone", req, cb);
-    }
-    /**
-     * 创建负载均衡
-     */
-    async CreateLoadBalancing(req, cb) {
-        return this.request("CreateLoadBalancing", req, cb);
     }
     /**
      * 域名DDoS高可用开关
@@ -328,18 +316,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTimingL7CacheData", req, cb);
     }
     /**
-     * 获取负载均衡列表
-     */
-    async DescribeLoadBalancing(req, cb) {
-        return this.request("DescribeLoadBalancing", req, cb);
-    }
-    /**
-     * 删除负载均衡
-     */
-    async DeleteLoadBalancing(req, cb) {
-        return this.request("DeleteLoadBalancing", req, cb);
-    }
-    /**
      * 本接口（DescribeBotData）查询Bot攻击时序数据。
      */
     async DescribeBotData(req, cb) {
@@ -386,12 +362,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeTopL7AnalysisData(req, cb) {
         return this.request("DescribeTopL7AnalysisData", req, cb);
-    }
-    /**
-     * 批量删除 DNS 记录
-     */
-    async DeleteDnsRecords(req, cb) {
-        return this.request("DeleteDnsRecords", req, cb);
     }
     /**
      * 修改Web&Bot安全配置。
@@ -494,12 +464,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeZoneDDoSPolicy(req, cb) {
         return this.request("DescribeZoneDDoSPolicy", req, cb);
-    }
-    /**
-     * 修改负载均衡
-     */
-    async ModifyLoadBalancing(req, cb) {
-        return this.request("ModifyLoadBalancing", req, cb);
     }
     /**
      * 修改安全配置托管规则
@@ -676,12 +640,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyZoneCnameSpeedUp", req, cb);
     }
     /**
-     * 修改 DNS 记录
-     */
-    async ModifyDnsRecord(req, cb) {
-        return this.request("ModifyDnsRecord", req, cb);
-    }
-    /**
      * 用于查询域名配置信息
      */
     async DescribeHostsSetting(req, cb) {
@@ -740,12 +698,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeRateLimitIntelligenceRule(req, cb) {
         return this.request("DescribeRateLimitIntelligenceRule", req, cb);
-    }
-    /**
-     * 查询 DNS 记录列表，支持搜索、分页、排序、过滤。
-     */
-    async DescribeDnsRecords(req, cb) {
-        return this.request("DescribeDnsRecords", req, cb);
     }
     /**
      * 本接口（DescribeBotLog）用于查询Bot攻击日志。

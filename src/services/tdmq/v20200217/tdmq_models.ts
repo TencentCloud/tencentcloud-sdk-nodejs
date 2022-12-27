@@ -250,6 +250,16 @@ export interface CreateRocketMQGroupRequest {
    * 说明信息，最长128个字符
    */
   Remark?: string
+
+  /**
+   * Group类型（TCP/HTTP）
+   */
+  GroupType?: string
+
+  /**
+   * Group最大重试次数
+   */
+  RetryMaxTimes?: number
 }
 
 /**
@@ -953,70 +963,82 @@ export interface RocketMQGroup {
   /**
    * 消费组名称
    */
-  Name: string
+  Name?: string
 
   /**
    * 在线消费者数量
    */
-  ConsumerNum: number
+  ConsumerNum?: number
 
   /**
    * 消费TPS
    */
-  TPS: number
+  TPS?: number
 
   /**
    * 总堆积数量
    */
-  TotalAccumulative: number
+  TotalAccumulative?: number
 
   /**
    * 0表示集群消费模式，1表示广播消费模式，-1表示未知
    */
-  ConsumptionMode: number
+  ConsumptionMode?: number
 
   /**
    * 是否允许消费
    */
-  ReadEnabled: boolean
+  ReadEnabled?: boolean
 
   /**
       * 重试队列分区数
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  RetryPartitionNum: number
+  RetryPartitionNum?: number
 
   /**
    * 创建时间，以毫秒为单位
    */
-  CreateTime: number
+  CreateTime?: number
 
   /**
    * 修改时间，以毫秒为单位
    */
-  UpdateTime: number
+  UpdateTime?: number
 
   /**
    * 客户端协议
    */
-  ClientProtocol: string
+  ClientProtocol?: string
 
   /**
       * 说明信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Remark: string
+  Remark?: string
 
   /**
       * 消费者类型，枚举值ACTIVELY, PASSIVELY
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ConsumerType: string
+  ConsumerType?: string
 
   /**
    * 是否开启广播消费
    */
-  BroadcastEnabled: boolean
+  BroadcastEnabled?: boolean
+
+  /**
+      * Group类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  GroupType?: string
+
+  /**
+      * 重试次数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RetryMaxTimes?: number
 }
 
 /**
@@ -3216,6 +3238,11 @@ export interface ModifyRocketMQGroupRequest {
    * 是否开启广播消费
    */
   BroadcastEnable?: boolean
+
+  /**
+   * 最大重试次数
+   */
+  RetryMaxTimes?: number
 }
 
 /**
@@ -3787,62 +3814,86 @@ export interface RocketMQClusterInfo {
   /**
    * 集群ID
    */
-  ClusterId: string
+  ClusterId?: string
 
   /**
    * 集群名称
    */
-  ClusterName: string
+  ClusterName?: string
 
   /**
    * 地域信息
    */
-  Region: string
+  Region?: string
 
   /**
    * 创建时间，毫秒为单位
    */
-  CreateTime: number
+  CreateTime?: number
 
   /**
       * 集群说明信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Remark: string
+  Remark?: string
 
   /**
    * 公网接入地址
    */
-  PublicEndPoint: string
+  PublicEndPoint?: string
 
   /**
    * VPC接入地址
    */
-  VpcEndPoint: string
+  VpcEndPoint?: string
 
   /**
       * 是否支持命名空间接入点
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  SupportNamespaceEndpoint: boolean
+  SupportNamespaceEndpoint?: boolean
 
   /**
       * VPC信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Vpcs: Array<VpcConfig>
+  Vpcs?: Array<VpcConfig>
 
   /**
       * 是否为专享实例
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  IsVip: boolean
+  IsVip?: boolean
 
   /**
       * Rocketmq集群标识
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  RocketMQFlag: boolean
+  RocketMQFlag?: boolean
+
+  /**
+      * 计费状态，1表示正常，2表示已停服，3表示已销毁
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Status?: number
+
+  /**
+      * 欠费停服时间，毫秒为单位
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsolateTime?: number
+
+  /**
+      * HTTP协议公网接入地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  HttpPublicEndpoint?: string
+
+  /**
+      * HTTP协议VPC接入地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  HttpVpcEndpoint?: string
 }
 
 /**
@@ -4026,12 +4077,12 @@ export interface DescribeRocketMQGroupsResponse {
   /**
    * 总数量
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 订阅组列表
    */
-  Groups: Array<RocketMQGroup>
+  Groups?: Array<RocketMQGroup>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -5955,6 +6006,11 @@ export interface DescribeRocketMQGroupsRequest {
    * 订阅组名称，指定此参数后将只返回该订阅组信息
    */
   FilterOneGroup?: string
+
+  /**
+   * group类型
+   */
+  Types?: Array<string>
 }
 
 /**

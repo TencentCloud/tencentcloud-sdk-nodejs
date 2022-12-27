@@ -178,6 +178,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAllUserContact", req, cb);
     }
     /**
+     * 查询redis实例top key前缀列表。
+     */
+    async DescribeRedisTopKeyPrefixList(req, cb) {
+        return this.request("DescribeRedisTopKeyPrefixList", req, cb);
+    }
+    /**
      * 获取实例异常诊断事件的详情信息。
      */
     async DescribeDBDiagEvent(req, cb) {
@@ -190,10 +196,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDBDiagHistory", req, cb);
     }
     /**
-     * 查询redis实例top key前缀列表。
+     * 获取当前实例会话统计详情信息。【注意】该接口仅限部分环境调用。
      */
-    async DescribeRedisTopKeyPrefixList(req, cb) {
-        return this.request("DescribeRedisTopKeyPrefixList", req, cb);
+    async DescribeProxyProcessStatistics(req, cb) {
+        return this.request("DescribeProxyProcessStatistics", req, cb);
     }
     /**
      * 创建健康报告，并可以选择是否发送邮件。

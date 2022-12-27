@@ -1016,6 +1016,11 @@ export interface CreateDBDiagReportTaskResponse {
 }
 
 /**
+ * 实时会话统计详情。
+ */
+export type ProcessStatistic = null
+
+/**
  * CreateMailProfile返回参数结构体
  */
 export interface CreateMailProfileResponse {
@@ -1263,6 +1268,21 @@ export interface CreateKillTaskRequest {
    * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL，默认为"mysql"。
    */
   Product?: string
+}
+
+/**
+ * DescribeProxyProcessStatistics返回参数结构体
+ */
+export interface DescribeProxyProcessStatisticsResponse {
+  /**
+   * 实时会话统计详情。
+   */
+  ProcessStatistics: ProcessStatistic
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2742,6 +2762,46 @@ export interface DescribeSlowLogTimeSeriesStatsResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeProxyProcessStatistics请求参数结构体
+ */
+export interface DescribeProxyProcessStatisticsRequest {
+  /**
+   * 实例 ID 。
+   */
+  InstanceId: string
+
+  /**
+   * 当前实例下的 ProxyID。
+   */
+  InstanceProxyId: string
+
+  /**
+   * 返回数量。
+   */
+  Limit: number
+
+  /**
+   * 服务产品类型，支持值包括： "redis" - 云数据库 Redis。
+   */
+  Product: string
+
+  /**
+   * 偏移量，默认0。
+   */
+  Offset?: number
+
+  /**
+   * 按照某字断排序。支持值包括："AllConn"，"ActiveConn"，"Ip"。
+   */
+  SortBy?: string
+
+  /**
+   * 排序方向。支持值包括："DESC"，"ASC"。
+   */
+  OrderDirection?: string
 }
 
 /**

@@ -52,6 +52,7 @@ import {
   ModifyDiagDBInstanceConfRequest,
   DescribeSecurityAuditLogDownloadUrlsRequest,
   CreateDBDiagReportTaskResponse,
+  ProcessStatistic,
   CreateMailProfileResponse,
   DescribeSlowLogTimeSeriesStatsRequest,
   CancelKillTaskRequest,
@@ -62,6 +63,7 @@ import {
   DescribeDBDiagEventsRequest,
   CreateDBDiagReportUrlResponse,
   CreateKillTaskRequest,
+  DescribeProxyProcessStatisticsResponse,
   SlowLogHost,
   CreateMailProfileRequest,
   MonitorFloatMetricSeriesData,
@@ -116,6 +118,7 @@ import {
   DescribeTopSpaceSchemasResponse,
   CreateProxySessionKillTaskResponse,
   DescribeSlowLogTimeSeriesStatsResponse,
+  DescribeProxyProcessStatisticsRequest,
   MonitorFloatMetric,
   DescribeRedisTopKeyPrefixListResponse,
   DescribeAllUserGroupResponse,
@@ -401,6 +404,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询redis实例top key前缀列表。
+   */
+  async DescribeRedisTopKeyPrefixList(
+    req: DescribeRedisTopKeyPrefixListRequest,
+    cb?: (error: string, rep: DescribeRedisTopKeyPrefixListResponse) => void
+  ): Promise<DescribeRedisTopKeyPrefixListResponse> {
+    return this.request("DescribeRedisTopKeyPrefixList", req, cb)
+  }
+
+  /**
    * 获取实例异常诊断事件的详情信息。
    */
   async DescribeDBDiagEvent(
@@ -421,13 +434,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询redis实例top key前缀列表。
+   * 获取当前实例会话统计详情信息。【注意】该接口仅限部分环境调用。
    */
-  async DescribeRedisTopKeyPrefixList(
-    req: DescribeRedisTopKeyPrefixListRequest,
-    cb?: (error: string, rep: DescribeRedisTopKeyPrefixListResponse) => void
-  ): Promise<DescribeRedisTopKeyPrefixListResponse> {
-    return this.request("DescribeRedisTopKeyPrefixList", req, cb)
+  async DescribeProxyProcessStatistics(
+    req: DescribeProxyProcessStatisticsRequest,
+    cb?: (error: string, rep: DescribeProxyProcessStatisticsResponse) => void
+  ): Promise<DescribeProxyProcessStatisticsResponse> {
+    return this.request("DescribeProxyProcessStatistics", req, cb)
   }
 
   /**

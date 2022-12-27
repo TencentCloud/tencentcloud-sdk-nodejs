@@ -5096,7 +5096,7 @@ export interface ModifyInstanceAttributesRequest {
   RebalanceTime?: number
 
   /**
-   * 时间戳
+   * 公网带宽
    */
   PublicNetwork?: number
 

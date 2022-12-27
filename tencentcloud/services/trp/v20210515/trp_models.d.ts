@@ -278,7 +278,7 @@ export interface CodePack {
       */
     Amount: number;
     /**
-      * 码长度
+      * 防伪码长度
 注意：此字段可能返回 null，表示取不到有效值。
       */
     CodeLength: number;
@@ -1201,6 +1201,10 @@ export interface CreateCustomPackRequest {
       * 批次ID，如果传了生码后会同时绑定批次，并激活码
       */
     BatchId?: string;
+    /**
+      * 是否有流水码 0:无 1:有
+      */
+    SerialType?: number;
 }
 /**
  * CreateCodePack请求参数结构体
@@ -1242,6 +1246,10 @@ export interface CreateCodePackRequest {
       * 批次ID，如果传了生码后会同时绑定批次，并激活码
       */
     BatchId?: string;
+    /**
+      * 是否有流水码 0:无 1:有
+      */
+    SerialType?: number;
 }
 /**
  * CreateCodeBatch请求参数结构体
@@ -1264,7 +1272,7 @@ export interface CreateCodeBatchRequest {
       */
     BatchType?: number;
     /**
-      * 批次ID，系统自动生成
+      * 批次ID，留空时系统自动生成
       */
     BatchId?: string;
     /**
@@ -1279,6 +1287,10 @@ export interface CreateCodeBatchRequest {
       * 克隆批次ID，同时会复制溯源信息
       */
     CloneId?: string;
+    /**
+      * 批次编号，业务字段不判断唯一性
+      */
+    BatchCode?: string;
 }
 /**
  * 溯源数据项
@@ -1761,6 +1773,10 @@ export interface ModifyCodeBatchRequest {
       * 备注
       */
     Remark?: string;
+    /**
+      * 批次编码，业务字段不判断唯一性
+      */
+    BatchCode?: string;
 }
 /**
  * DescribeProductById请求参数结构体
@@ -2295,6 +2311,10 @@ export interface DescribeCodePacksRequest {
       * 企业ID
       */
     CorpId?: number;
+    /**
+      * 是否有流水码 0:无 1:有
+      */
+    SerialType?: number;
 }
 /**
  * DescribeJobFileUrl返回参数结构体

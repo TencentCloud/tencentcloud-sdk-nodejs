@@ -2751,7 +2751,7 @@ export interface ModifyModuleNetworkRequest {
     DefaultBandwidthIn?: number;
 }
 /**
- * IP地址模版
+ * IP地址模板
  */
 export interface AddressTemplateSpecification {
     /**
@@ -6146,7 +6146,7 @@ export interface ModifySecurityGroupPoliciesResponse {
     RequestId?: string;
 }
 /**
- * 协议端口模版
+ * 协议端口模板
  */
 export interface ServiceTemplateSpecification {
     /**

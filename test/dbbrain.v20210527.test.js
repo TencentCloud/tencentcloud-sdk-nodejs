@@ -268,6 +268,16 @@ it("dbbrain.v20210527.DescribeAllUserContact", async function () {
     }
 })
 
+it("dbbrain.v20210527.DescribeRedisTopKeyPrefixList", async function () {
+    try {
+       const data = await client.DescribeRedisTopKeyPrefixList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dbbrain.v20210527.DescribeDBDiagEvent", async function () {
     try {
        const data = await client.DescribeDBDiagEvent({})
@@ -288,9 +298,9 @@ it("dbbrain.v20210527.DescribeDBDiagHistory", async function () {
     }
 })
 
-it("dbbrain.v20210527.DescribeRedisTopKeyPrefixList", async function () {
+it("dbbrain.v20210527.DescribeProxyProcessStatistics", async function () {
     try {
-       const data = await client.DescribeRedisTopKeyPrefixList({})
+       const data = await client.DescribeProxyProcessStatistics({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

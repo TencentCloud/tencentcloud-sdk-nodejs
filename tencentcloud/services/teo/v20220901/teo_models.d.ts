@@ -1085,26 +1085,6 @@ export interface DescribeTimingL7AnalysisDataResponse {
     RequestId?: string;
 }
 /**
- * 回源配置的条件参数
- */
-export interface OriginGroupCondition {
-    /**
-      * 匹配类型，取值有：
-<li>url：当前站点下匹配URL路径的请求，例如：/example 或 /example/foo.jpg。支持*表示通配符，支持?表示匹配一个字符。
-</li>
-      */
-    Target: string;
-    /**
-      * 运算符，取值有：
-<li>equal：等于。</li>
-      */
-    Operator: string;
-    /**
-      * 对应匹配类型的取值。
-      */
-    Values: Array<string>;
-}
-/**
  * bot 用户画像规则
  */
 export interface BotPortraitRule {
@@ -1516,51 +1496,103 @@ export interface SecurityEntity {
     EntityType: string;
 }
 /**
- * ModifyDnsRecord请求参数结构体
+ * ModifyZoneSetting请求参数结构体
  */
-export interface ModifyDnsRecordRequest {
+export interface ModifyZoneSettingRequest {
     /**
-      * 记录ID。
-      */
-    DnsRecordId: string;
-    /**
-      * 站点ID。
+      * 待变更的站点ID。
       */
     ZoneId: string;
     /**
-      * DNS记录类型，取值有：
-<li>A：将域名指向一个外网 IPv4 地址，如 8.8.8.8；</li>
-<li>AAAA：将域名指向一个外网 IPv6 地址；</li>
-<li>MX：用于邮箱服务器，相关记录值/优先级参数由邮件注册商提供。存在多条 MX 记录时，优先级越低越优先；</li>
-<li>CNAME：将域名指向另一个域名，再由该域名解析出最终 IP 地址；</li>
-<li>TXT：对域名进行标识和说明，常用于域名验证和 SPF 记录（反垃圾邮件）；</li>
-<li>NS：如果需要将子域名交给其他 DNS 服务商解析，则需要添加 NS 记录。根域名无法添加 NS 记录；</li>
-<li>CAA：指定可为本站点颁发证书的 CA；</li>
-<li>SRV：标识某台服务器使用了某个服务，常见于微软系统的目录管理。</li>不填写保持原有配置。
+      * 缓存过期时间配置。
+不填写表示保持原有配置。
       */
-    DnsRecordType?: string;
+    CacheConfig?: CacheConfig;
     /**
-      * 记录名称，由主机记录+站点名称组成，不填写保持原有配置。
+      * 节点缓存键配置。
+不填写表示保持原有配置。
       */
-    DnsRecordName?: string;
+    CacheKey?: CacheKey;
     /**
-      * 记录内容，不填写保持原有配置。
+      * 浏览器缓存配置。
+不填写表示保持原有配置。
       */
-    Content?: string;
+    MaxAge?: MaxAge;
     /**
-      * 缓存时间，数值越小，修改记录各地生效时间越快，默认为300，单位：秒，不填写保持原有配置。
+      * 离线缓存配置。
+不填写表示保持原有配置。
       */
-    TTL?: number;
+    OfflineCache?: OfflineCache;
     /**
-      * 该参数在修改MX记录时生效，值越小优先级越高，用户可指定值范围为1~50，不指定默认为0，不填写保持原有配置。
+      * Quic访问配置。
+不填写表示保持原有配置。
       */
-    Priority?: number;
+    Quic?: Quic;
     /**
-      * 代理模式，取值有：
-<li>dns_only：仅DNS解析；</li>
-<li>proxied：代理加速。</li>不填写保持原有配置。
+      * Post请求传输配置。
+不填写表示保持原有配置。
       */
-    Mode?: string;
+    PostMaxSize?: PostMaxSize;
+    /**
+      * 智能压缩配置。
+不填写表示保持原有配置。
+      */
+    Compression?: Compression;
+    /**
+      * Http2回源配置。
+不填写表示保持原有配置。
+      */
+    UpstreamHttp2?: UpstreamHttp2;
+    /**
+      * 访问协议强制Https跳转配置。
+不填写表示保持原有配置。
+      */
+    ForceRedirect?: ForceRedirect;
+    /**
+      * Https加速配置。
+不填写表示保持原有配置。
+      */
+    Https?: Https;
+    /**
+      * 源站配置。
+不填写表示保持原有配置。
+      */
+    Origin?: Origin;
+    /**
+      * 智能加速配置。
+不填写表示保持原有配置。
+      */
+    SmartRouting?: SmartRouting;
+    /**
+      * WebSocket配置。
+不填写表示保持原有配置。
+      */
+    WebSocket?: WebSocket;
+    /**
+      * 客户端IP回源请求头配置。
+不填写表示保持原有配置。
+      */
+    ClientIpHeader?: ClientIpHeader;
+    /**
+      * 缓存预刷新配置。
+不填写表示保持原有配置。
+      */
+    CachePrefresh?: CachePrefresh;
+    /**
+      * Ipv6访问配置。
+不填写表示保持原有配置。
+      */
+    Ipv6?: Ipv6;
+    /**
+      * 回源时是否携带客户端IP所属地域信息的配置。
+不填写表示保持原有配置。
+      */
+    ClientIpCountry?: ClientIpCountry;
+    /**
+      * Grpc协议支持配置。
+不填写表示保持原有配置。
+      */
+    Grpc?: Grpc;
 }
 /**
  * DescribeDDoSPolicy返回参数结构体
@@ -1973,20 +2005,17 @@ export interface ModifyZoneCnameSpeedUpResponse {
     RequestId?: string;
 }
 /**
- * 浏览器缓存规则配置，用于设置 MaxAge 默认值，默认为关闭状态
+ * 失败原因
  */
-export interface MaxAge {
+export interface FailReason {
     /**
-      * 是否遵循源站，取值有：
-<li>on：遵循源站，忽略MaxAge 时间设置；</li>
-<li>off：不遵循源站，使用MaxAge 时间设置。</li>
+      * 失败原因。
       */
-    FollowOrigin?: string;
+    Reason: string;
     /**
-      * MaxAge 时间设置，单位秒，最大365天。
-注意：时间为0，即不缓存。
+      * 处理失败的资源列表。
       */
-    MaxAgeTime?: number;
+    Targets: Array<string>;
 }
 /**
  * DescribeRulesSetting请求参数结构体
@@ -2144,49 +2173,6 @@ export interface TopDataRecord {
       * top数据排行。
       */
     DetailData: Array<TopDetailData>;
-}
-/**
- * ModifyLoadBalancing请求参数结构体
- */
-export interface ModifyLoadBalancingRequest {
-    /**
-      * 站点ID。
-      */
-    ZoneId: string;
-    /**
-      * 负载均衡ID。
-      */
-    LoadBalancingId: string;
-    /**
-      * 代理模式，取值有：
-<li>dns_only：仅DNS；</li>
-<li>proxied：开启代理。</li>
-      */
-    Type: string;
-    /**
-      * 主源站源站组ID。
-      */
-    OriginGroupId: string;
-    /**
-      * 备用源站源站组ID，当Type=proxied时可以填写，为空表示不使用备用源站。
-      */
-    BackupOriginGroupId: string;
-    /**
-      * 当Type=dns_only时，指解析记录在DNS服务器缓存的生存时间。
-取值范围60-86400，单位：秒，不填写使用默认值：600。
-      */
-    TTL?: number;
-    /**
-      * 回源类型，取值有：
-<li>normal：主备回源；</li>
-<li>advanced：高级回源配置（仅当Type=proxied时可以使用）。</li>不填写表示使用主备回源。
-      */
-    OriginType?: string;
-    /**
-      * 高级回源配置，当OriginType=advanced时有效。
-不填写表示不使用高级回源配置。
-      */
-    AdvancedOriginGroups?: Array<AdvancedOriginGroup>;
 }
 /**
  * DescribeWebManagedRulesLog请求参数结构体
@@ -2354,6 +2340,20 @@ export interface WafGroupInfo {
 <li> off：关闭。</li>
       */
     Switch: string;
+}
+/**
+ * DescribeLogTopicTaskDetail返回参数结构体
+ */
+export interface DescribeLogTopicTaskDetailResponse {
+    /**
+      * 推送任务详情。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LogTopicDetailInfo: LogTopicDetailInfo;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * https 服务端证书配置
@@ -2650,6 +2650,31 @@ export interface ModifyDefaultCertificateRequest {
     Status?: string;
 }
 /**
+ * 浏览器缓存规则配置，用于设置 MaxAge 默认值，默认为关闭状态
+ */
+export interface MaxAge {
+    /**
+      * 是否遵循源站，取值有：
+<li>on：遵循源站，忽略MaxAge 时间设置；</li>
+<li>off：不遵循源站，使用MaxAge 时间设置。</li>
+      */
+    FollowOrigin?: string;
+    /**
+      * MaxAge 时间设置，单位秒，最大365天。
+注意：时间为0，即不缓存。
+      */
+    MaxAgeTime?: number;
+}
+/**
+ * DeleteApplicationProxy返回参数结构体
+ */
+export interface DeleteApplicationProxyResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 安全数据维度值信息
  */
 export interface SecEntryValue {
@@ -2673,15 +2698,6 @@ export interface SecEntryValue {
       * 数据总和。
       */
     Sum: number;
-}
-/**
- * DeleteApplicationProxy返回参数结构体
- */
-export interface DeleteApplicationProxyResponse {
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
 }
 /**
  * ModifyAlarmDefaultThreshold返回参数结构体
@@ -3779,19 +3795,6 @@ export interface SwitchLogTopicTaskResponse {
     RequestId?: string;
 }
 /**
- * CreateDnsRecord返回参数结构体
- */
-export interface CreateDnsRecordResponse {
-    /**
-      * DNS解析记录ID。
-      */
-    DnsRecordId: string;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
  * https 服务端证书配置
  */
 export interface ServerCertInfo {
@@ -3921,36 +3924,6 @@ export interface OriginRecord {
     PrivateParameters?: Array<PrivateParameter>;
 }
 /**
- * 高级回源配置
- */
-export interface AdvancedOriginGroup {
-    /**
-      * 高级回源配置的匹配条件。其中相同的Target只能出现一次。
-      */
-    OriginGroupConditions: Array<OriginGroupCondition>;
-    /**
-      * 主源站组ID。
-      */
-    OriginGroupId: string;
-    /**
-      * 备用源站组ID。
-      */
-    BackupOriginGroupId?: string;
-}
-/**
- * CreateLoadBalancing返回参数结构体
- */
-export interface CreateLoadBalancingResponse {
-    /**
-      * 负载均衡ID。
-      */
-    LoadBalancingId: string;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
  * DeleteLogTopicTask请求参数结构体
  */
 export interface DeleteLogTopicTaskRequest {
@@ -3977,54 +3950,6 @@ export interface VanityNameServers {
       * 自定义 ns 列表。
       */
     Servers?: Array<string>;
-}
-/**
- * DescribeDnsRecords请求参数结构体
- */
-export interface DescribeDnsRecordsRequest {
-    /**
-      * DNS记录所属站点ID。不填写该参数默认返回所有站点下的记录。
-      */
-    ZoneId?: string;
-    /**
-      * 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：
-<li>record-id<br>   按照【<strong>DNS记录id</strong>】进行过滤。DNS记录ID形如：record-1a8df68z。<br>   类型：String<br>   必选：否
-<li>record-name<br>   按照【<strong>DNS记录名称</strong>】进行过滤。<br>   类型：String<br>   必选：否
-<li>record-type<br>   按照【<strong>DNS记录类型</strong>】进行过滤。<br>   类型：String<br>   必选：否<br>   可选项：<br>   A：将域名指向一个外网 IPv4 地址，如 8.8.8.8<br>   AAAA：将域名指向一个外网 IPv6 地址<br>   CNAME：将域名指向另一个域名，再由该域名解析出最终 IP 地址<br>   TXT：对域名进行标识和说明，常用于域名验证和 SPF 记录（反垃圾邮件）<br>   NS：如果需要将子域名交给其他 DNS 服务商解析，则需要添加 NS 记录。根域名无法添加 NS 记录<br>   CAA：指定可为本站点颁发证书的 CA<br>   SRV：标识某台服务器使用了某个服务，常见于微软系统的目录管理<br>   MX：指定收件人邮件服务器。
-<li>mode<br>   按照【<strong>代理模式</strong>】进行过滤。<br>   类型：String<br>   必选：否<br>   可选项：<br>   dns_only：仅DNS解析<br>   proxied：代理加速
-<li>ttl<br>   按照【<strong>解析生效时间</strong>】进行过滤。<br>   类型：string<br>   必选：否
-      */
-    Filters?: Array<AdvancedFilter>;
-    /**
-      * 列表排序方式，取值有：
-<li>asc：升序排列；</li>
-<li>desc：降序排列。</li>默认值为asc。
-      */
-    Direction?: string;
-    /**
-      * 匹配方式，取值有：
-<li>all：返回匹配所有查询条件的记录；</li>
-<li>any：返回匹配任意一个查询条件的记录。</li>默认值为all。
-      */
-    Match?: string;
-    /**
-      * 分页查询限制数目，默认值：20，上限：1000。
-      */
-    Limit?: number;
-    /**
-      * 分页查询偏移量，默认为 0。
-      */
-    Offset?: number;
-    /**
-      * 排序依据，取值有：
-<li>content：DNS记录内容；</li>
-<li>created_on：DNS记录创建时间；</li>
-<li>mode：代理模式；</li>
-<li>record-name：DNS记录名称；</li>
-<li>ttl：解析记录生效时间；</li>
-<li>record-type：DNS记录类型。</li>默认根据record-type, recrod-name属性组合排序。
-      */
-    Order?: string;
 }
 /**
  * CreatePrefetchTask返回参数结构体
@@ -4218,15 +4143,6 @@ export interface DownloadL7LogsRequest {
       * 分页的偏移量，默认值为0。
       */
     Offset?: number;
-}
-/**
- * DeleteLoadBalancing返回参数结构体
- */
-export interface DeleteLoadBalancingResponse {
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
 }
 /**
  * 规则引擎规则详情
@@ -4558,15 +4474,6 @@ export interface RateLimitUserRule {
     FreqScope?: Array<string>;
 }
 /**
- * ModifyDnsRecord返回参数结构体
- */
-export interface ModifyDnsRecordResponse {
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
  * CreatePlanForZone请求参数结构体
  */
 export interface CreatePlanForZoneRequest {
@@ -4590,19 +4497,6 @@ export interface CreatePlanForZoneRequest {
 <li> ent_global_with_bot ：全球内容分发网络（包括中国大陆）企业版套餐附带bot管理。</li>当前账户可购买套餐类型请以<a href="https://tcloud4api.woa.com/document/product/1657/80124?!preview&!document=1">DescribeAvailablePlans</a>返回为准。
       */
     PlanType: string;
-}
-/**
- * DeleteLoadBalancing请求参数结构体
- */
-export interface DeleteLoadBalancingRequest {
-    /**
-      * 站点ID。
-      */
-    ZoneId: string;
-    /**
-      * 负载均衡ID。
-      */
-    LoadBalancingId: string;
 }
 /**
  * 缓存键配置。
@@ -5056,23 +4950,6 @@ export interface DDoSFeaturesFilter {
     MatchLogic?: string;
 }
 /**
- * 智能分析规则
- */
-export interface IntelligenceRule {
-    /**
-      * 开关，取值有：
-<li>on：开启；</li>
-<li>off：关闭。</li>
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Switch?: string;
-    /**
-      * 规则详情。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    IntelligenceRuleItems?: Array<IntelligenceRuleItem>;
-}
-/**
  * DDoS黑白名单规则详情
  */
 export interface DDoSAllowBlockRule {
@@ -5352,17 +5229,15 @@ export interface DescribeOriginGroupRequest {
     Filters?: Array<AdvancedFilter>;
 }
 /**
- * DescribeSpeedTestingDetails返回参数结构体
+ * Grpc配置项
  */
-export interface DescribeSpeedTestingDetailsResponse {
+export interface Grpc {
     /**
-      * 分地域拨测统计数据。
+      * 是否开启Grpc配置，取值有：
+<li>on：开启；</li>
+<li>off：关闭。</li>
       */
-    SpeedTestingDetailData: SpeedTestingDetailData;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    Switch: string;
 }
 /**
  * DescribeLogTopicTasks返回参数结构体
@@ -5517,19 +5392,6 @@ export interface ModifyZoneStatusRequest {
     Paused: boolean;
 }
 /**
- * 失败原因
- */
-export interface FailReason {
-    /**
-      * 失败原因。
-      */
-    Reason: string;
-    /**
-      * 处理失败的资源列表。
-      */
-    Targets: Array<string>;
-}
-/**
  * ModifyOriginGroup返回参数结构体
  */
 export interface ModifyOriginGroupResponse {
@@ -5613,15 +5475,6 @@ export interface DescribeSecurityPortraitRulesRequest {
     TemplateId?: string;
 }
 /**
- * ReclaimZone返回参数结构体
- */
-export interface ReclaimZoneResponse {
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
  * DescribeSecurityPolicyRegions返回参数结构体
  */
 export interface DescribeSecurityPolicyRegionsResponse {
@@ -5699,13 +5552,9 @@ export interface DeleteZoneResponse {
     RequestId?: string;
 }
 /**
- * CreateRule返回参数结构体
+ * ReclaimZone返回参数结构体
  */
-export interface CreateRuleResponse {
-    /**
-      * 规则 ID。
-      */
-    RuleId: string;
+export interface ReclaimZoneResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -5719,49 +5568,6 @@ export interface BindZoneToPlanResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
-}
-/**
- * CreateDnsRecord请求参数结构体
- */
-export interface CreateDnsRecordRequest {
-    /**
-      * DNS记录所属站点ID。
-      */
-    ZoneId: string;
-    /**
-      * DNS记录类型，取值有：
-<li>A：将域名指向一个外网 IPv4 地址，如 8.8.8.8；</li>
-<li>AAAA：将域名指向一个外网 IPv6 地址；</li>
-<li>MX：用于邮箱服务器，相关记录值/优先级参数由邮件注册商提供。存在多条 MX 记录时，优先级越低越优先；</li>
-<li>CNAME：将域名指向另一个域名，再由该域名解析出最终 IP 地址；</li>
-<li>TXT：对域名进行标识和说明，常用于域名验证和 SPF 记录（反垃圾邮件）；</li>
-<li>NS：如果需要将子域名交给其他 DNS 服务商解析，则需要添加 NS 记录。根域名无法添加 NS 记录；</li>
-<li>CAA：指定可为本站点颁发证书的 CA；</li>
-<li>SRV：标识某台服务器使用了某个服务，常见于微软系统的目录管理。</li>
-      */
-    Type: string;
-    /**
-      * DNS记录名。
-      */
-    Name: string;
-    /**
-      * DNS记录内容。
-      */
-    Content: string;
-    /**
-      * 代理模式，取值有：
-<li>dns_only：仅DNS解析；</li>
-<li>proxied：代理加速。</li>
-      */
-    Mode: string;
-    /**
-      * 缓存时间，数值越小，修改记录各地生效时间越快，默认为300，单位：秒。
-      */
-    TTL?: number;
-    /**
-      * 该参数在创建MX记录时生效，值越小优先级越高，用户可指定值范围1~50，不指定默认为0。
-      */
-    Priority?: number;
 }
 /**
  * Waf规则
@@ -6011,15 +5817,17 @@ export interface SubRuleItem {
     Tags?: Array<string>;
 }
 /**
- * Grpc配置项
+ * DescribeSpeedTestingDetails返回参数结构体
  */
-export interface Grpc {
+export interface DescribeSpeedTestingDetailsResponse {
     /**
-      * 是否开启Grpc配置，取值有：
-<li>on：开启；</li>
-<li>off：关闭。</li>
+      * 分地域拨测统计数据。
       */
-    Switch: string;
+    SpeedTestingDetailData: SpeedTestingDetailData;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 托管规则组详情
@@ -6074,66 +5882,6 @@ export interface ClientIpCountry {
 为空则使用默认值：EO-Client-IPCountry。
       */
     HeaderName?: string;
-}
-/**
- * 负载均衡信息
- */
-export interface LoadBalancing {
-    /**
-      * 负载均衡ID。
-      */
-    LoadBalancingId: string;
-    /**
-      * 站点ID。
-      */
-    ZoneId: string;
-    /**
-      * 子域名，填写@表示根域。
-      */
-    Host: string;
-    /**
-      * 代理模式，取值有：
-<li>dns_only：仅DNS；</li>
-<li>proxied：开启代理。</li>
-      */
-    Type: string;
-    /**
-      * 当Type=dns_only表示DNS记录的缓存时间。
-      */
-    TTL: number;
-    /**
-      * 状态，取值有：
-<li>online：部署成功；</li>
-<li>process：部署中。</li>
-      */
-    Status: string;
-    /**
-      * 调度域名。
-      */
-    Cname: string;
-    /**
-      * 主源源站组ID。
-      */
-    OriginGroupId: string;
-    /**
-      * 备用源站源站组ID。为空表示不适用备用源站。
-      */
-    BackupOriginGroupId: string;
-    /**
-      * 更新时间。
-      */
-    UpdateTime: string;
-    /**
-      * 回源类型，取值有：
-<li>normal：主备回源；</li>
-<li>advanced：高级回源配置。</li>
-      */
-    OriginType: string;
-    /**
-      * 高级回源配置，当OriginType=advanced时有效。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    AdvancedOriginGroups: Array<AdvancedOriginGroup>;
 }
 /**
  * DeleteApplicationProxyRule请求参数结构体
@@ -6249,48 +5997,6 @@ export interface SpeedTestingStatus {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     TimedOut: boolean;
-}
-/**
- * CreateLoadBalancing请求参数结构体
- */
-export interface CreateLoadBalancingRequest {
-    /**
-      * 站点ID。
-      */
-    ZoneId: string;
-    /**
-      * 负载均衡域名。
-      */
-    Host: string;
-    /**
-      * 代理模式，取值有：
-<li>dns_only：仅DNS；</li>
-<li>proxied：开启代理。</li>
-      */
-    Type: string;
-    /**
-      * 主源站源站组ID。
-      */
-    OriginGroupId: string;
-    /**
-      * 备用源站源站组ID，当Type=proxied时可以填写，为空表示不使用备用源站。
-      */
-    BackupOriginGroupId: string;
-    /**
-      * 当Type=dns_only时，指解析记录在DNS服务器缓存的生存时间。
-取值范围60-86400，单位：秒，不填写使用默认值：600。
-      */
-    TTL?: number;
-    /**
-      * 回源类型，取值有：
-<li>normal：主备回源；</li>
-<li>advanced：高级回源配置（仅当Type=proxied时可以使用）。</li>为空表示使用主备回源。
-      */
-    OriginType?: string;
-    /**
-      * 高级回源配置，当OriginType=advanced时有效。
-      */
-    AdvancedOriginGroups?: Array<AdvancedOriginGroup>;
 }
 /**
  * DescribeDnssec请求参数结构体
@@ -6692,23 +6398,6 @@ export interface DescribeRateLimitIntelligenceRuleRequest {
     Entity: string;
 }
 /**
- * DescribeDnsRecords返回参数结构体
- */
-export interface DescribeDnsRecordsResponse {
-    /**
-      * DNS记录总数。
-      */
-    TotalCount: number;
-    /**
-      * DNS 记录列表。
-      */
-    DnsRecords: Array<DnsRecord>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
  * DescribeDDoSAttackData请求参数结构体
  */
 export interface DescribeDDoSAttackDataRequest {
@@ -6898,19 +6587,6 @@ export interface CreateRuleRequest {
       * 规则标签。
       */
     Tags?: Array<string>;
-}
-/**
- * 安全模板配置
- */
-export interface TemplateConfig {
-    /**
-      * 模板ID。
-      */
-    TemplateId: string;
-    /**
-      * 模板名称。
-      */
-    TemplateName: string;
 }
 /**
  * DescribeRateLimitIntelligenceRule返回参数结构体
@@ -7698,19 +7374,6 @@ export interface ModifyAliasDomainResponse {
     RequestId?: string;
 }
 /**
- * DeleteDnsRecords请求参数结构体
- */
-export interface DeleteDnsRecordsRequest {
-    /**
-      * 待删除记录所属站点 ID。
-      */
-    ZoneId: string;
-    /**
-      * 待删除记录 ID。
-      */
-    DnsRecordIds: Array<string>;
-}
-/**
  * DescribeBotLog请求参数结构体
  */
 export interface DescribeBotLogRequest {
@@ -8463,103 +8126,17 @@ export interface DescribeDDoSAttackDataResponse {
     RequestId?: string;
 }
 /**
- * ModifyZoneSetting请求参数结构体
+ * 安全模板配置
  */
-export interface ModifyZoneSettingRequest {
+export interface TemplateConfig {
     /**
-      * 待变更的站点ID。
+      * 模板ID。
       */
-    ZoneId: string;
+    TemplateId: string;
     /**
-      * 缓存过期时间配置。
-不填写表示保持原有配置。
+      * 模板名称。
       */
-    CacheConfig?: CacheConfig;
-    /**
-      * 节点缓存键配置。
-不填写表示保持原有配置。
-      */
-    CacheKey?: CacheKey;
-    /**
-      * 浏览器缓存配置。
-不填写表示保持原有配置。
-      */
-    MaxAge?: MaxAge;
-    /**
-      * 离线缓存配置。
-不填写表示保持原有配置。
-      */
-    OfflineCache?: OfflineCache;
-    /**
-      * Quic访问配置。
-不填写表示保持原有配置。
-      */
-    Quic?: Quic;
-    /**
-      * Post请求传输配置。
-不填写表示保持原有配置。
-      */
-    PostMaxSize?: PostMaxSize;
-    /**
-      * 智能压缩配置。
-不填写表示保持原有配置。
-      */
-    Compression?: Compression;
-    /**
-      * Http2回源配置。
-不填写表示保持原有配置。
-      */
-    UpstreamHttp2?: UpstreamHttp2;
-    /**
-      * 访问协议强制Https跳转配置。
-不填写表示保持原有配置。
-      */
-    ForceRedirect?: ForceRedirect;
-    /**
-      * Https加速配置。
-不填写表示保持原有配置。
-      */
-    Https?: Https;
-    /**
-      * 源站配置。
-不填写表示保持原有配置。
-      */
-    Origin?: Origin;
-    /**
-      * 智能加速配置。
-不填写表示保持原有配置。
-      */
-    SmartRouting?: SmartRouting;
-    /**
-      * WebSocket配置。
-不填写表示保持原有配置。
-      */
-    WebSocket?: WebSocket;
-    /**
-      * 客户端IP回源请求头配置。
-不填写表示保持原有配置。
-      */
-    ClientIpHeader?: ClientIpHeader;
-    /**
-      * 缓存预刷新配置。
-不填写表示保持原有配置。
-      */
-    CachePrefresh?: CachePrefresh;
-    /**
-      * Ipv6访问配置。
-不填写表示保持原有配置。
-      */
-    Ipv6?: Ipv6;
-    /**
-      * 回源时是否携带客户端IP所属地域信息的配置。
-不填写表示保持原有配置。
-      */
-    ClientIpCountry?: ClientIpCountry;
-    /**
-      * Grpc协议支持配置。
-不填写表示保持原有配置。
-      */
-    Grpc?: Grpc;
+    TemplateName: string;
 }
 /**
  * DDoS端口过滤
@@ -8653,6 +8230,19 @@ export interface ModifyZoneRequest {
  * DescribeAvailablePlans请求参数结构体
  */
 export declare type DescribeAvailablePlansRequest = null;
+/**
+ * CreateRule返回参数结构体
+ */
+export interface CreateRuleResponse {
+    /**
+      * 规则 ID。
+      */
+    RuleId: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
 /**
  * ModifyZone返回参数结构体
  */
@@ -9421,87 +9011,6 @@ export interface DescribePrefetchTasksRequest {
     Filters?: Array<AdvancedFilter>;
 }
 /**
- * DNS 记录
- */
-export interface DnsRecord {
-    /**
-      * 记录 ID。
-      */
-    DnsRecordId: string;
-    /**
-      * DNS记录类型，取值有：
-<li>A：将域名指向一个外网 IPv4 地址，如 8.8.8.8；</li>
-<li>AAAA：将域名指向一个外网 IPv6 地址；</li>
-<li>MX：用于邮箱服务器，相关记录值/优先级参数由邮件注册商提供。存在多条 MX 记录时，优先级越低越优先；</li>
-<li>CNAME：将域名指向另一个域名，再由该域名解析出最终 IP 地址；</li>
-<li>TXT：对域名进行标识和说明，常用于域名验证和 SPF 记录（反垃圾邮件）；</li>
-<li>NS：如果需要将子域名交给其他 DNS 服务商解析，则需要添加 NS 记录。根域名无法添加 NS 记录；</li>
-<li>CAA：指定可为本站点颁发证书的 CA；</li>
-<li>SRV：标识某台服务器使用了某个服务，常见于微软系统的目录管理。</li>
-      */
-    DnsRecordType: string;
-    /**
-      * 记录名称。
-      */
-    DnsRecordName: string;
-    /**
-      * 记录值。
-      */
-    Content: string;
-    /**
-      * 代理模式，取值有：
-<li>dns_only：仅DNS解析；</li>
-<li>proxied：代理加速。</li>
-      */
-    Mode: string;
-    /**
-      * 缓存时间，数值越小，修改记录各地生效时间越快，单位：秒。
-      */
-    TTL: number;
-    /**
-      * MX记录优先级，数值越小越优先。
-      */
-    Priority: number;
-    /**
-      * 创建时间。
-      */
-    CreatedOn: string;
-    /**
-      * 修改时间。
-      */
-    ModifiedOn: string;
-    /**
-      * 域名锁定状态。
-      */
-    Locked: boolean;
-    /**
-      * 站点 ID。
-      */
-    ZoneId: string;
-    /**
-      * 站点名称。
-      */
-    ZoneName: string;
-    /**
-      * 记录解析状态，取值有：
-<li>active：生效；</li>
-<li>pending：不生效。</li>
-      */
-    Status: string;
-    /**
-      * CNAME 地址。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Cname: string;
-    /**
-      * 域名服务类型，取值有：
-<li>lb：负载均衡；</li>
-<li>security：安全；</li>
-<li>l4：四层代理。</li>
-      */
-    DomainStatus: Array<string>;
-}
-/**
  * ModifyRulePriority请求参数结构体
  */
 export interface ModifyRulePriorityRequest {
@@ -9767,15 +9276,6 @@ export interface DeleteLogTopicTaskResponse {
     RequestId?: string;
 }
 /**
- * ModifyLoadBalancing返回参数结构体
- */
-export interface ModifyLoadBalancingResponse {
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
  * TopN的Entry数据
  */
 export interface TopEntry {
@@ -9824,18 +9324,21 @@ export interface IntelligenceRuleItem {
     Action: string;
 }
 /**
- * DescribeLogTopicTaskDetail返回参数结构体
+ * 智能分析规则
  */
-export interface DescribeLogTopicTaskDetailResponse {
+export interface IntelligenceRule {
     /**
-      * 推送任务详情。
+      * 开关，取值有：
+<li>on：开启；</li>
+<li>off：关闭。</li>
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    LogTopicDetailInfo: LogTopicDetailInfo;
+    Switch?: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 规则详情。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    RequestId?: string;
+    IntelligenceRuleItems?: Array<IntelligenceRuleItem>;
 }
 /**
  * POST请求上传文件流式传输最大限制
@@ -10091,26 +9594,6 @@ export interface AiRule {
     Mode: string;
 }
 /**
- * DescribeLoadBalancing请求参数结构体
- */
-export interface DescribeLoadBalancingRequest {
-    /**
-      * 分页查询偏移量，默认为0。
-      */
-    Offset: number;
-    /**
-      * 分页查询限制数目，默认为10，取值：1-1000。
-      */
-    Limit: number;
-    /**
-      * 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：
-<li>zone-id<br>   按照【<strong>站点ID</strong>】进行过滤。站点ID形如：zone-1a8df68z<br>   类型：String<br>   必选：否<br>   模糊查询：不支持
-</li><li>load-balancing-id<br>   按照【<strong>负载均衡ID</strong>】进行过滤。负载均衡ID形如：lb-d21bfaf7-8d72-11ec-841d-00ff977fb3c8<br>   类型：String<br>   必选：否<br>   模糊查询：不支持
-</li><li>host<br>   按照【<strong>负载均衡host</strong>】进行过滤。host形如：lb.tencent.com<br>   类型：String<br>   必选：否<br>   模糊查询：支持，模糊查询时仅支持一个host</li>
-      */
-    Filters?: Array<AdvancedFilter>;
-}
-/**
  * DescribeWebProtectionData返回参数结构体
  */
 export interface DescribeWebProtectionDataResponse {
@@ -10237,15 +9720,6 @@ Targets可为空，不需要填写。
     EncodeUrl?: boolean;
 }
 /**
- * DeleteDnsRecords返回参数结构体
- */
-export interface DeleteDnsRecordsResponse {
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
  * DescribeSecurityRuleId返回参数结构体
  */
 export interface DescribeSecurityRuleIdResponse {
@@ -10294,23 +9768,6 @@ export interface DescribeBotLogResponse {
       * 查询结果的总条数。
       */
     TotalCount: number;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * DescribeLoadBalancing返回参数结构体
- */
-export interface DescribeLoadBalancingResponse {
-    /**
-      * 记录总数。
-      */
-    TotalCount: number;
-    /**
-      * 负载均衡信息。
-      */
-    Data: Array<LoadBalancing>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
