@@ -38,9 +38,9 @@ it("trp.v20210515.DescribeCustomRules", async function () {
     }
 })
 
-it("trp.v20210515.ModifyTraceDataRanks", async function () {
+it("trp.v20210515.ModifyTraceCodeUnlink", async function () {
     try {
-       const data = await client.ModifyTraceDataRanks({})
+       const data = await client.ModifyTraceCodeUnlink({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -81,6 +81,16 @@ it("trp.v20210515.DescribeCodeBatchById", async function () {
 it("trp.v20210515.DescribeTraceCodes", async function () {
     try {
        const data = await client.DescribeTraceCodes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("trp.v20210515.ModifyTraceDataRanks", async function () {
+    try {
+       const data = await client.ModifyTraceDataRanks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

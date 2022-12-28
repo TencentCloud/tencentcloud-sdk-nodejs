@@ -2120,13 +2120,13 @@ export interface ApproverRestriction {
  */
 export interface DescribeChannelFlowEvidenceReportRequest {
     /**
-      * 出证报告编号
-      */
-    ReportId: string;
-    /**
       * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填
       */
     Agent: Agent;
+    /**
+      * 出证报告编号
+      */
+    ReportId: string;
     /**
       * 操作者的信息
       */
@@ -2855,12 +2855,7 @@ export interface OperateChannelTemplateRequest {
  */
 export interface CreateChannelFlowEvidenceReportResponse {
     /**
-      * 废除，字段无效
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ReportUrl: string;
-    /**
-      * 出证报告 ID
+      * 出证报告 ID，用于查询出证报告接口DescribeChannelFlowEvidenceReport时用到
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ReportId: string;
@@ -2870,6 +2865,11 @@ export interface CreateChannelFlowEvidenceReportResponse {
 失败：EvidenceStatusFailed
       */
     Status: string;
+    /**
+      * 废除，字段无效
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ReportUrl: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

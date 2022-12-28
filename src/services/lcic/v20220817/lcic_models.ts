@@ -48,7 +48,7 @@ export interface CreateRoomRequest {
   Resolution: number
 
   /**
-   * 最大连麦人数（不包括老师）。取值范围[0, 17)
+   * 最大连麦人数（不包括老师）。取值范围[0, 16]
    */
   MaxMicNumber: number
 
@@ -61,7 +61,7 @@ coteaching 双师
   SubType: string
 
   /**
-   * 老师ID。
+   * 老师ID。通过[注册用户]接口获取的UserId。
    */
   TeacherId?: string
 
@@ -87,7 +87,7 @@ coteaching 双师
   DisableRecord?: number
 
   /**
-   * 助教Id列表。
+   * 助教Id列表。通过[注册用户]接口获取的UserId。
    */
   Assistants?: Array<string>
 
@@ -659,7 +659,7 @@ export interface CreateRoomResponse {
   /**
    * 房间ID。
    */
-  RoomId: number
+  RoomId?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

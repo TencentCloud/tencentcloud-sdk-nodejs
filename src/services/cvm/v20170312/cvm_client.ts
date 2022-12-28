@@ -26,7 +26,7 @@ import {
   DescribeImageQuotaResponse,
   ModifyInstancesProjectRequest,
   ConfigureChcDeployVpcResponse,
-  ResetInstancesTypeResponse,
+  InquiryPriceRenewHostsRequest,
   HostResource,
   DeleteDisasterRecoverGroupsRequest,
   DeleteKeyPairsResponse,
@@ -57,6 +57,8 @@ import {
   PurchaseReservedInstancesOfferingRequest,
   RebootInstancesRequest,
   InstanceTypeConfigStatus,
+  HostPriceInfo,
+  ResetInstancesTypeResponse,
   AssociateInstancesKeyPairsRequest,
   DeleteLaunchTemplateResponse,
   DescribeChcDeniedActionsResponse,
@@ -76,7 +78,7 @@ import {
   DeleteHpcClustersResponse,
   ModifyLaunchTemplateDefaultVersionResponse,
   DescribeInstancesOperationLimitRequest,
-  ModifyInstancesChargeTypeRequest,
+  ModifyImageAttributeRequest,
   DescribeInstanceVncUrlRequest,
   StopInstancesResponse,
   ModifyImageSharePermissionRequest,
@@ -185,6 +187,7 @@ import {
   StartInstancesResponse,
   ModifyInstancesVpcAttributeRequest,
   ChargePrepaid,
+  ModifyInstancesChargeTypeRequest,
   DescribeInternetChargeTypeConfigsResponse,
   AccountQuotaOverview,
   RunAutomationServiceEnabled,
@@ -235,7 +238,7 @@ import {
   ModifyInstancesAttributeResponse,
   ChcHostDeniedActions,
   DescribeImagesRequest,
-  ModifyImageAttributeRequest,
+  InquiryPriceRenewHostsResponse,
   ResizeInstanceDisksResponse,
   InquirePricePurchaseReservedInstancesOfferingResponse,
   DisassociateSecurityGroupsRequest,
@@ -685,6 +688,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 当高性能计算集群为空, 即集群内没有任何设备时候, 可以删除该集群。
+   */
+  async DeleteHpcClusters(
+    req: DeleteHpcClustersRequest,
+    cb?: (error: string, rep: DeleteHpcClustersResponse) => void
+  ): Promise<DeleteHpcClustersResponse> {
+    return this.request("DeleteHpcClusters", req, cb)
+  }
+
+  /**
      * 本接口 (InquiryPriceRenewInstances) 用于续费包年包月实例询价。
 
 * 只支持查询包年包月实例的续费价格。
@@ -1041,13 +1054,14 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
   }
 
   /**
-   * 当高性能计算集群为空, 即集群内没有任何设备时候, 可以删除该集群。
+   * 本接口 (InquiryPriceRenewHosts) 用于续费包年包月`CDH`实例询价。
+   * 只支持查询包年包月`CDH`实例的续费价格。
    */
-  async DeleteHpcClusters(
-    req: DeleteHpcClustersRequest,
-    cb?: (error: string, rep: DeleteHpcClustersResponse) => void
-  ): Promise<DeleteHpcClustersResponse> {
-    return this.request("DeleteHpcClusters", req, cb)
+  async InquiryPriceRenewHosts(
+    req: InquiryPriceRenewHostsRequest,
+    cb?: (error: string, rep: InquiryPriceRenewHostsResponse) => void
+  ): Promise<InquiryPriceRenewHostsResponse> {
+    return this.request("InquiryPriceRenewHosts", req, cb)
   }
 
   /**

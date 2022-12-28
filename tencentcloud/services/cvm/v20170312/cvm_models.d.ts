@@ -124,13 +124,21 @@ export interface ConfigureChcDeployVpcResponse {
     RequestId?: string;
 }
 /**
- * ResetInstancesType返回参数结构体
+ * InquiryPriceRenewHosts请求参数结构体
  */
-export interface ResetInstancesTypeResponse {
+export interface InquiryPriceRenewHostsRequest {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 一个或多个待操作的`CDH`实例`ID`。可通过[`DescribeHosts`](https://cloud.tencent.com/document/api/213/16474)接口返回值中的`HostId`获取。每次请求批量实例的上限为100。
       */
-    RequestId?: string;
+    HostIds: Array<string>;
+    /**
+      * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的续费时长、是否设置自动续费等属性。
+      */
+    HostChargePrepaid: ChargePrepaid;
+    /**
+      * 试运行，测试使用，不执行具体逻辑。取值范围：<br><li>TRUE：跳过执行逻辑<br><li>FALSE：执行逻辑<br><br>默认取值：FALSE。
+      */
+    DryRun?: boolean;
 }
 /**
  * 专用宿主机实例的资源信息
@@ -768,6 +776,24 @@ export interface InstanceTypeConfigStatus {
     InstanceTypeConfig: InstanceTypeConfig;
 }
 /**
+ * cdh相关价格信息
+ */
+export interface HostPriceInfo {
+    /**
+      * 描述了cdh实例相关的价格信息
+      */
+    HostPrice: ItemPrice;
+}
+/**
+ * ResetInstancesType返回参数结构体
+ */
+export interface ResetInstancesTypeResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * AssociateInstancesKeyPairs请求参数结构体
  */
 export interface AssociateInstancesKeyPairsRequest {
@@ -1112,25 +1138,21 @@ export interface DescribeInstancesOperationLimitRequest {
     Operation: string;
 }
 /**
- * ModifyInstancesChargeType请求参数结构体
+ * ModifyImageAttribute请求参数结构体
  */
-export interface ModifyInstancesChargeTypeRequest {
+export interface ModifyImageAttributeRequest {
     /**
-      * 一个或多个待操作的实例ID。可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728)接口返回值中的`InstanceId`获取。每次请求批量实例的上限为30。
+      * 镜像ID，形如`img-gvbnzy6f`。镜像ID可以通过如下方式获取：<br><li>通过[DescribeImages](https://cloud.tencent.com/document/api/213/15715)接口返回的`ImageId`获取。<br><li>通过[镜像控制台](https://console.cloud.tencent.com/cvm/image)获取。
       */
-    InstanceIds: Array<string>;
+    ImageId: string;
     /**
-      * 实例[计费类型](https://cloud.tencent.com/document/product/213/2180)。<br><li>PREPAID：预付费，即包年包月。<br><li>POSTPAID_BY_HOUR：后付费，即按量付费。
+      * 设置新的镜像名称；必须满足下列限制：<br> <li> 不得超过20个字符。<br> <li> 镜像名称不能与已有镜像重复。
       */
-    InstanceChargeType: string;
+    ImageName?: string;
     /**
-      * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。<dx-alert infotype="explain" title="">若指定实例的付费模式为预付费则该参数必传。</dx-alert>
+      * 设置新的镜像描述；必须满足下列限制：<br> <li> 不得超过60个字符。
       */
-    InstanceChargePrepaid?: InstanceChargePrepaid;
-    /**
-      * 是否同时切换弹性数据云盘计费模式。取值范围：<br><li>TRUE：表示切换弹性数据云盘计费模式<br><li>FALSE：表示不切换弹性数据云盘计费模式<br><br>默认取值：FALSE。
-      */
-    ModifyPortableDataDisk?: boolean;
+    ImageDescription?: string;
 }
 /**
  * DescribeInstanceVncUrl请求参数结构体
@@ -3742,6 +3764,27 @@ export interface ChargePrepaid {
     RenewFlag?: string;
 }
 /**
+ * ModifyInstancesChargeType请求参数结构体
+ */
+export interface ModifyInstancesChargeTypeRequest {
+    /**
+      * 一个或多个待操作的实例ID。可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728)接口返回值中的`InstanceId`获取。每次请求批量实例的上限为30。
+      */
+    InstanceIds: Array<string>;
+    /**
+      * 实例[计费类型](https://cloud.tencent.com/document/product/213/2180)。<br><li>PREPAID：预付费，即包年包月。<br><li>POSTPAID_BY_HOUR：后付费，即按量付费。
+      */
+    InstanceChargeType: string;
+    /**
+      * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。<dx-alert infotype="explain" title="">若指定实例的付费模式为预付费则该参数必传。</dx-alert>
+      */
+    InstanceChargePrepaid?: InstanceChargePrepaid;
+    /**
+      * 是否同时切换弹性数据云盘计费模式。取值范围：<br><li>TRUE：表示切换弹性数据云盘计费模式<br><li>FALSE：表示不切换弹性数据云盘计费模式<br><br>默认取值：FALSE。
+      */
+    ModifyPortableDataDisk?: boolean;
+}
+/**
  * DescribeInternetChargeTypeConfigs返回参数结构体
  */
 export interface DescribeInternetChargeTypeConfigsResponse {
@@ -4831,21 +4874,17 @@ export interface DescribeImagesRequest {
     InstanceType?: string;
 }
 /**
- * ModifyImageAttribute请求参数结构体
+ * InquiryPriceRenewHosts返回参数结构体
  */
-export interface ModifyImageAttributeRequest {
+export interface InquiryPriceRenewHostsResponse {
     /**
-      * 镜像ID，形如`img-gvbnzy6f`。镜像ID可以通过如下方式获取：<br><li>通过[DescribeImages](https://cloud.tencent.com/document/api/213/15715)接口返回的`ImageId`获取。<br><li>通过[镜像控制台](https://console.cloud.tencent.com/cvm/image)获取。
+      * CDH实例续费价格信息
       */
-    ImageId: string;
+    Price?: HostPriceInfo;
     /**
-      * 设置新的镜像名称；必须满足下列限制：<br> <li> 不得超过20个字符。<br> <li> 镜像名称不能与已有镜像重复。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    ImageName?: string;
-    /**
-      * 设置新的镜像描述；必须满足下列限制：<br> <li> 不得超过60个字符。
-      */
-    ImageDescription?: string;
+    RequestId?: string;
 }
 /**
  * ResizeInstanceDisks返回参数结构体

@@ -130,6 +130,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("QueryBankTransactionDetails", req, cb);
     }
     /**
+     * 灵云V2-查询服务商账户余额
+     */
+    async QueryFlexServiceProviderAccountBalance(req, cb) {
+        return this.request("QueryFlexServiceProviderAccountBalance", req, cb);
+    }
+    /**
      * 云企付-子商户进件
      */
     async CreateOpenBankExternalSubMerchantRegistration(req, cb) {
@@ -1085,6 +1091,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("QueryMerchantInfoForManagement", req, cb);
     }
     /**
+     * 灵云V2-修改收款用户资金账号信息
+     */
+    async ModifyFlexFundingAccount(req, cb) {
+        return this.request("ModifyFlexFundingAccount", req, cb);
+    }
+    /**
      * 撤销会员在途充值(经第三方支付渠道)
      */
     async RevokeMemberRechargeThirdPay(req, cb) {
@@ -1231,6 +1243,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async QueryOpenBankExternalSubMerchantRegistration(req, cb) {
         return this.request("QueryOpenBankExternalSubMerchantRegistration", req, cb);
+    }
+    /**
+     * 灵云V2-绑定收款用户资金账号信息
+     */
+    async AddFlexFundingAccount(req, cb) {
+        return this.request("AddFlexFundingAccount", req, cb);
     }
     /**
      * 应用需要先调用本接口生成支付订单号，并将应答的PayInfo透传给聚鑫SDK，拉起客户端（包括微信公众号/微信小程序/客户端App）支付。

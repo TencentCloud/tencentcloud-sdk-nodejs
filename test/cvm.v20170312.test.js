@@ -368,6 +368,16 @@ it("cvm.v20170312.DescribeImportImageOs", async function () {
     }
 })
 
+it("cvm.v20170312.DeleteHpcClusters", async function () {
+    try {
+       const data = await client.DeleteHpcClusters({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cvm.v20170312.InquiryPriceRenewInstances", async function () {
     try {
        const data = await client.InquiryPriceRenewInstances({})
@@ -638,9 +648,9 @@ it("cvm.v20170312.RebootInstances", async function () {
     }
 })
 
-it("cvm.v20170312.DeleteHpcClusters", async function () {
+it("cvm.v20170312.InquiryPriceRenewHosts", async function () {
     try {
-       const data = await client.DeleteHpcClusters({})
+       const data = await client.InquiryPriceRenewHosts({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

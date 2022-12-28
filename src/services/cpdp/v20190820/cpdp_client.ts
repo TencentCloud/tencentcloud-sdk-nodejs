@@ -116,7 +116,7 @@ import {
   DistributeAddReceiverRequest,
   QueryFinancialDataUrlRequest,
   QueryExchangerateData,
-  WithdrawBill,
+  ServiceProviderAccountBalanceResult,
   QueryOpenBankDailyReceiptDownloadUrlResponse,
   QueryPayerInfoResponse,
   QueryMerchantBalanceResponse,
@@ -177,6 +177,7 @@ import {
   ContractOrderRequest,
   QueryContractPayFeeResponse,
   BindOpenBankProfitSharePayeeResponse,
+  QueryFlexServiceProviderAccountBalanceRequest,
   BindRelateAcctSmallAmountResponse,
   PayeeAccountBalanceResult,
   OpenBankStoreInfo,
@@ -186,10 +187,11 @@ import {
   QueryTransferDetailResponse,
   OldSubRefund,
   QueryTransferBatchResponse,
-  QueryDeclareData,
+  ModifyFlexFundingAccountResponse,
   QueryContractPayFeeRequest,
   QueryOrderResponse,
   CreateOpenBankExternalSubMerchantRegistrationResponse,
+  PayeeFundingAccountResult,
   QueryFlexSettlementOrderListResponse,
   QueryFlexPayeeInfoResponse,
   RefundOrderResult,
@@ -295,7 +297,7 @@ import {
   SettleInfo,
   CloudSubOrder,
   AnchorExtendInfo,
-  QueryOpenBankExternalSubMerchantRegistrationResponse,
+  QueryDeclareData,
   VerifyOpenBankAccountResponse,
   GetBillDownloadUrlRequest,
   CreatePayMerchantResponse,
@@ -371,7 +373,9 @@ import {
   ApplyTradeRequest,
   QueryOpenBankProfitSharePayeeResponse,
   QueryExchangeRateResponse,
+  AddFlexFundingAccountRequest,
   OldAttachmentInfo,
+  ModifyFlexFundingAccountRequest,
   QuerySmallAmountTransferRequest,
   SupportBankInfo,
   ModifyMntMbrBindRelateAcctBankCodeRequest,
@@ -497,6 +501,7 @@ import {
   OpenBankOrderRedirectInfo,
   QueryFlexAmountBeforeTaxRequest,
   MigrateOrderRefundRequest,
+  AddFlexFundingAccountResponse,
   QueryOpenBankBankAccountBalanceResult,
   QuerySinglePaymentResultData,
   UploadOrgFileResponse,
@@ -558,12 +563,14 @@ import {
   WithdrawCashMembershipResponse,
   CreateSinglePaymentRequest,
   QueryFlexPayeeAccountInfoResponse,
+  WithdrawBill,
   MemberTransactionItem,
   DistributeReceiverResult,
   DistributeApplyRequest,
   ViewShopRequest,
   OpenBankQueryRefundOrderResult,
   ApplyOutwardOrderResponse,
+  QueryFlexServiceProviderAccountBalanceResponse,
   DistributeAccreditQueryResult,
   AddFlexPhoneNoRequest,
   Acct,
@@ -621,6 +628,7 @@ import {
   ApplyReconciliationFileRequest,
   RegisterBillResponse,
   PayeeInfoResult,
+  QueryOpenBankExternalSubMerchantRegistrationResponse,
   ApplyOutwardOrderRequest,
   AssignmentData,
   DistributeAccreditTlinxResponse,
@@ -863,6 +871,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: QueryBankTransactionDetailsResponse) => void
   ): Promise<QueryBankTransactionDetailsResponse> {
     return this.request("QueryBankTransactionDetails", req, cb)
+  }
+
+  /**
+   * 灵云V2-查询服务商账户余额
+   */
+  async QueryFlexServiceProviderAccountBalance(
+    req: QueryFlexServiceProviderAccountBalanceRequest,
+    cb?: (error: string, rep: QueryFlexServiceProviderAccountBalanceResponse) => void
+  ): Promise<QueryFlexServiceProviderAccountBalanceResponse> {
+    return this.request("QueryFlexServiceProviderAccountBalance", req, cb)
   }
 
   /**
@@ -2453,6 +2471,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 灵云V2-修改收款用户资金账号信息
+   */
+  async ModifyFlexFundingAccount(
+    req: ModifyFlexFundingAccountRequest,
+    cb?: (error: string, rep: ModifyFlexFundingAccountResponse) => void
+  ): Promise<ModifyFlexFundingAccountResponse> {
+    return this.request("ModifyFlexFundingAccount", req, cb)
+  }
+
+  /**
    * 撤销会员在途充值(经第三方支付渠道)
    */
   async RevokeMemberRechargeThirdPay(
@@ -2694,6 +2722,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: QueryOpenBankExternalSubMerchantRegistrationResponse) => void
   ): Promise<QueryOpenBankExternalSubMerchantRegistrationResponse> {
     return this.request("QueryOpenBankExternalSubMerchantRegistration", req, cb)
+  }
+
+  /**
+   * 灵云V2-绑定收款用户资金账号信息
+   */
+  async AddFlexFundingAccount(
+    req: AddFlexFundingAccountRequest,
+    cb?: (error: string, rep: AddFlexFundingAccountResponse) => void
+  ): Promise<AddFlexFundingAccountResponse> {
+    return this.request("AddFlexFundingAccount", req, cb)
   }
 
   /**

@@ -40,10 +40,11 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCustomRules", req, cb);
     }
     /**
-     * 修改溯源信息的排序
+     * 解绑溯源码和批次的关系，让溯源码重置为未关联的状态，以便关联其他批次
+注意：溯源码必须属于指定的批次才会解绑
      */
-    async ModifyTraceDataRanks(req, cb) {
-        return this.request("ModifyTraceDataRanks", req, cb);
+    async ModifyTraceCodeUnlink(req, cb) {
+        return this.request("ModifyTraceCodeUnlink", req, cb);
     }
     /**
      * 查自定义码规则
@@ -68,6 +69,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeTraceCodes(req, cb) {
         return this.request("DescribeTraceCodes", req, cb);
+    }
+    /**
+     * 修改溯源信息的排序
+     */
+    async ModifyTraceDataRanks(req, cb) {
+        return this.request("ModifyTraceDataRanks", req, cb);
     }
     /**
      * 查询码包的二维码列表，上限 3 万

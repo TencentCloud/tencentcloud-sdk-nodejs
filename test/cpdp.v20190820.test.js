@@ -188,6 +188,16 @@ it("cpdp.v20190820.QueryBankTransactionDetails", async function () {
     }
 })
 
+it("cpdp.v20190820.QueryFlexServiceProviderAccountBalance", async function () {
+    try {
+       const data = await client.QueryFlexServiceProviderAccountBalance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cpdp.v20190820.CreateOpenBankExternalSubMerchantRegistration", async function () {
     try {
        const data = await client.CreateOpenBankExternalSubMerchantRegistration({})
@@ -1768,6 +1778,16 @@ it("cpdp.v20190820.QueryMerchantInfoForManagement", async function () {
     }
 })
 
+it("cpdp.v20190820.ModifyFlexFundingAccount", async function () {
+    try {
+       const data = await client.ModifyFlexFundingAccount({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cpdp.v20190820.RevokeMemberRechargeThirdPay", async function () {
     try {
        const data = await client.RevokeMemberRechargeThirdPay({})
@@ -2001,6 +2021,16 @@ it("cpdp.v20190820.ApplyOutwardOrder", async function () {
 it("cpdp.v20190820.QueryOpenBankExternalSubMerchantRegistration", async function () {
     try {
        const data = await client.QueryOpenBankExternalSubMerchantRegistration({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cpdp.v20190820.AddFlexFundingAccount", async function () {
+    try {
+       const data = await client.AddFlexFundingAccount({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

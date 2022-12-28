@@ -249,8 +249,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建出证报告，返回报告 ID。
-   */
+     * 创建出证报告，返回报告 ID。需要配合出证套餐才能调用。
+出证需要一定时间，建议调用创建出证24小时之后再通过DescribeFlowEvidenceReport进行查询。
+     */
   async CreateFlowEvidenceReport(
     req: CreateFlowEvidenceReportRequest,
     cb?: (error: string, rep: CreateFlowEvidenceReportResponse) => void

@@ -617,6 +617,12 @@ export interface Certificates {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   PreAuditInfo: PreAuditInfo
+
+  /**
+      * 是否自动续费
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AutoRenewFlag: number
 }
 
 /**

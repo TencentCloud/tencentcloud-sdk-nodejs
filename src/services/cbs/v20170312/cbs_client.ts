@@ -24,6 +24,7 @@ import {
   DescribeDiskBackupsRequest,
   AutoSnapshotPolicy,
   DescribeSnapshotOperationLogsRequest,
+  ModifySnapshotsSharePermissionRequest,
   CopySnapshotCrossRegionsResponse,
   ModifyAutoSnapshotPolicyAttributeResponse,
   ModifyDiskBackupQuotaRequest,
@@ -86,6 +87,7 @@ import {
   ModifySnapshotAttributeRequest,
   UnbindAutoSnapshotPolicyRequest,
   DiskConfig,
+  CreateDiskBackupResponse,
   InquirePriceModifyDiskBackupQuotaResponse,
   DeleteAutoSnapshotPoliciesRequest,
   DiskChargePrepaid,
@@ -95,7 +97,7 @@ import {
   Snapshot,
   CreateDisksResponse,
   AttachDisksResponse,
-  ModifySnapshotsSharePermissionRequest,
+  CreateDiskBackupRequest,
   DiskOperationLog,
   BindAutoSnapshotPolicyResponse,
   DescribeDiskOperationLogsRequest,
@@ -536,6 +538,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UnbindAutoSnapshotPolicyResponse) => void
   ): Promise<UnbindAutoSnapshotPolicyResponse> {
     return this.request("UnbindAutoSnapshotPolicy", req, cb)
+  }
+
+  /**
+   * 为云硬盘创建一个备份点。
+   */
+  async CreateDiskBackup(
+    req: CreateDiskBackupRequest,
+    cb?: (error: string, rep: CreateDiskBackupResponse) => void
+  ): Promise<CreateDiskBackupResponse> {
+    return this.request("CreateDiskBackup", req, cb)
   }
 
   /**

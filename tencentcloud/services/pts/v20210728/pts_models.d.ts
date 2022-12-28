@@ -382,6 +382,14 @@ export interface DescribeScenarioWithJobsRequest {
       * 是否需要返回测试数据文件信息
       */
     IgnoreDataset?: boolean;
+    /**
+      * 场景类型，如pts-http, pts-js, pts-trpc, pts-jmeter
+      */
+    ScenarioType?: string;
+    /**
+      * 创建人员
+      */
+    Owner?: string;
 }
 /**
  * CreateCronJob返回参数结构体
@@ -660,6 +668,10 @@ export interface UpdateScenarioRequest {
       * WebHook请求配置
       */
     NotificationHooks?: Array<Notification>;
+    /**
+      * 创建人名
+      */
+    Owner?: string;
 }
 /**
  * DescribeRegions返回参数结构体
@@ -2821,6 +2833,10 @@ export interface CreateScenarioRequest {
       * 域名解析配置
       */
     DomainNameConfig?: DomainNameConfig;
+    /**
+      * 创建人名
+      */
+    Owner?: string;
 }
 /**
  * DescribeMetricLabelWithValues请求参数结构体
@@ -2850,7 +2866,7 @@ export interface Scenario {
     /**
       * 场景名
       */
-    Name: string;
+    Name?: string;
     /**
       * 场景描述
 注意：此字段可能返回 null，表示取不到有效值。
@@ -2918,52 +2934,57 @@ export interface Scenario {
       * App ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    AppId: number;
+    AppId?: number;
     /**
       * 用户ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Uin: string;
+    Uin?: string;
     /**
       * 子用户ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    SubAccountUin: string;
+    SubAccountUin?: string;
     /**
       * 测试脚本信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    TestScripts: Array<ScriptInfo>;
+    TestScripts?: Array<ScriptInfo>;
     /**
       * 协议文件信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Protocols: Array<ProtocolInfo>;
+    Protocols?: Array<ProtocolInfo>;
     /**
       * 请求文件信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    RequestFiles: Array<FileInfo>;
+    RequestFiles?: Array<FileInfo>;
     /**
       * SLA 策略
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    SLAPolicy: SLAPolicy;
+    SLAPolicy?: SLAPolicy;
     /**
       * 扩展包信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Plugins: Array<FileInfo>;
+    Plugins?: Array<FileInfo>;
     /**
       * 域名解析配置
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    DomainNameConfig: DomainNameConfig;
+    DomainNameConfig?: DomainNameConfig;
     /**
       * 通知事件回调
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    NotificationHooks: Array<NotificationHook>;
+    NotificationHooks?: Array<NotificationHook>;
+    /**
+      * 创建人员
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Owner?: string;
 }
 /**
  * DescribeProjects返回参数结构体
@@ -3349,11 +3370,11 @@ export interface DescribeScenarioWithJobsResponse {
       * 场景配置以及附带的job内容
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ScenarioWithJobsSet: Array<ScenarioWithJobs>;
+    ScenarioWithJobsSet?: Array<ScenarioWithJobs>;
     /**
       * 场景总数
       */
-    Total: number;
+    Total?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

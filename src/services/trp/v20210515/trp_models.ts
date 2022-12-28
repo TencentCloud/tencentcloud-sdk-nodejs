@@ -1975,6 +1975,26 @@ export interface CreateCustomRuleResponse {
 }
 
 /**
+ * ModifyTraceCodeUnlink请求参数结构体
+ */
+export interface ModifyTraceCodeUnlinkRequest {
+  /**
+   * 批次ID
+   */
+  BatchId: string
+
+  /**
+   * 溯源码列表
+   */
+  Codes: Array<string>
+
+  /**
+   * 企业ID
+   */
+  CorpId?: number
+}
+
+/**
  * DescribeCodePacks返回参数结构体
  */
 export interface DescribeCodePacksResponse {
@@ -2097,7 +2117,7 @@ export interface ModifyCodeBatchRequest {
   Status?: number
 
   /**
-   * 模版ID，或者活动ID
+   * 模板ID，或者活动ID
    */
   MpTpl?: string
 
@@ -2300,6 +2320,31 @@ export interface DeleteTraceDataRequest {
    * 企业ID
    */
   CorpId?: number
+}
+
+/**
+ * ModifyTraceCodeUnlink返回参数结构体
+ */
+export interface ModifyTraceCodeUnlinkResponse {
+  /**
+   * 成功解绑溯源码的数量
+   */
+  UnlinkCnt: number
+
+  /**
+   * 当前批次的码数量
+   */
+  CodeCnt: number
+
+  /**
+   * 批次ID
+   */
+  BatchId: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2852,7 +2897,7 @@ export interface ModifyCodeBatchResponse {
   /**
    * 批次ID
    */
-  BatchId: string
+  BatchId?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

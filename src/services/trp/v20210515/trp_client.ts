@@ -86,6 +86,7 @@ import {
   DescribeCustomRuleByIdResponse,
   DescribeCodeBatchsResponse,
   CreateCustomRuleResponse,
+  ModifyTraceCodeUnlinkRequest,
   DescribeCodePacksResponse,
   DescribeCodesByPackRequest,
   DescribeJobFileUrlRequest,
@@ -98,6 +99,7 @@ import {
   CreateCorporationOrderRequest,
   CreateTraceCodesResponse,
   DeleteTraceDataRequest,
+  ModifyTraceCodeUnlinkResponse,
   Merchant,
   Product,
   DescribeTmpTokenRequest,
@@ -150,13 +152,14 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改溯源信息的排序
-   */
-  async ModifyTraceDataRanks(
-    req: ModifyTraceDataRanksRequest,
-    cb?: (error: string, rep: ModifyTraceDataRanksResponse) => void
-  ): Promise<ModifyTraceDataRanksResponse> {
-    return this.request("ModifyTraceDataRanks", req, cb)
+     * 解绑溯源码和批次的关系，让溯源码重置为未关联的状态，以便关联其他批次
+注意：溯源码必须属于指定的批次才会解绑
+     */
+  async ModifyTraceCodeUnlink(
+    req: ModifyTraceCodeUnlinkRequest,
+    cb?: (error: string, rep: ModifyTraceCodeUnlinkResponse) => void
+  ): Promise<ModifyTraceCodeUnlinkResponse> {
+    return this.request("ModifyTraceCodeUnlink", req, cb)
   }
 
   /**
@@ -197,6 +200,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTraceCodesResponse) => void
   ): Promise<DescribeTraceCodesResponse> {
     return this.request("DescribeTraceCodes", req, cb)
+  }
+
+  /**
+   * 修改溯源信息的排序
+   */
+  async ModifyTraceDataRanks(
+    req: ModifyTraceDataRanksRequest,
+    cb?: (error: string, rep: ModifyTraceDataRanksResponse) => void
+  ): Promise<ModifyTraceDataRanksResponse> {
+    return this.request("ModifyTraceDataRanks", req, cb)
   }
 
   /**

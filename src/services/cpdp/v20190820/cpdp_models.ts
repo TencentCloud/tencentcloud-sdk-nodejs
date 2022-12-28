@@ -3659,48 +3659,13 @@ export interface QueryExchangerateData {
 }
 
 /**
- * 聚鑫提现订单内容
+ * 服务商账户余额返回信息
  */
-export interface WithdrawBill {
+export interface ServiceProviderAccountBalanceResult {
   /**
-   * 业务提现订单号
+   * 服务商账户余额
    */
-  WithdrawOrderId: string
-
-  /**
-   * 提现日期
-   */
-  Date: string
-
-  /**
-   * 提现金额，单位： 分
-   */
-  PayAmt: string
-
-  /**
-   * 聚鑫分配转入账户appid
-   */
-  InSubAppId: string
-
-  /**
-   * 聚鑫分配转出账户appid
-   */
-  OutSubAppId: string
-
-  /**
-   * ISO货币代码
-   */
-  CurrencyType: string
-
-  /**
-   * 透传字段
-   */
-  MetaData?: string
-
-  /**
-   * 扩展字段
-   */
-  ExtendFieldData?: string
+  Balance: string
 }
 
 /**
@@ -6278,6 +6243,25 @@ export interface BindOpenBankProfitSharePayeeResponse {
 }
 
 /**
+ * QueryFlexServiceProviderAccountBalance请求参数结构体
+ */
+export interface QueryFlexServiceProviderAccountBalanceRequest {
+  /**
+   * 服务商ID
+   */
+  ServiceProviderId: string
+
+  /**
+      * 环境类型
+__release__:生产环境
+__sandbox__:沙箱环境
+__test__:测试环境
+缺省默认为生产环境
+      */
+  Environment?: string
+}
+
+/**
  * BindRelateAcctSmallAmount返回参数结构体
  */
 export interface BindRelateAcctSmallAmountResponse {
@@ -6808,67 +6792,29 @@ OVERDUE_CLOSE：系统超时关闭。
 }
 
 /**
- * 成功申报材料查询数据
+ * ModifyFlexFundingAccount返回参数结构体
  */
-export interface QueryDeclareData {
+export interface ModifyFlexFundingAccountResponse {
   /**
-   * 商户号
+   * 错误码。SUCCESS为成功，其他为失败
    */
-  MerchantId: string
+  ErrCode: string
 
   /**
-   * 对接方汇出指令编号
+   * 错误消息
    */
-  TransactionId: string
+  ErrMessage: string
 
   /**
-   * 申报流水号
-   */
-  DeclareId: string
-
-  /**
-      * 原申报流水号
+      * 无
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  OriginalDeclareId: string
+  Result: string
 
   /**
-   * 付款人ID
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  PayerId: string
-
-  /**
-   * 源币种
-   */
-  SourceCurrency: string
-
-  /**
-      * 源金额
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  SourceAmount: string
-
-  /**
-   * 目的币种
-   */
-  TargetCurrency: string
-
-  /**
-      * 目的金额
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  TargetAmount: string
-
-  /**
-   * 交易编码
-   */
-  TradeCode: string
-
-  /**
-      * 状态
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Status: string
+  RequestId?: string
 }
 
 /**
@@ -6942,6 +6888,16 @@ __其他__: 见附录-错误码表
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 收款用户资金账户信息
+ */
+export interface PayeeFundingAccountResult {
+  /**
+   * 资金账户ID
+   */
+  FundingAccountBindSerialNo: string
 }
 
 /**
@@ -11571,31 +11527,67 @@ __channel_account__:渠道账号(_敏感信息_ 使用 __AES128-CBC-PKCS#7__ 加
 }
 
 /**
- * QueryOpenBankExternalSubMerchantRegistration返回参数结构体
+ * 成功申报材料查询数据
  */
-export interface QueryOpenBankExternalSubMerchantRegistrationResponse {
+export interface QueryDeclareData {
   /**
-      * 错误码。
-__SUCCESS__: 成功
-__其他__: 见附录-错误码表
-      */
-  ErrCode: string
-
-  /**
-   * 错误消息。
+   * 商户号
    */
-  ErrMessage: string
+  MerchantId: string
 
   /**
-      * 返回结果。
+   * 对接方汇出指令编号
+   */
+  TransactionId: string
+
+  /**
+   * 申报流水号
+   */
+  DeclareId: string
+
+  /**
+      * 原申报流水号
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Result: QueryOpenBankExternalSubMerchantRegistrationResult
+  OriginalDeclareId: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 付款人ID
    */
-  RequestId?: string
+  PayerId: string
+
+  /**
+   * 源币种
+   */
+  SourceCurrency: string
+
+  /**
+      * 源金额
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SourceAmount: string
+
+  /**
+   * 目的币种
+   */
+  TargetCurrency: string
+
+  /**
+      * 目的金额
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TargetAmount: string
+
+  /**
+   * 交易编码
+   */
+  TradeCode: string
+
+  /**
+      * 状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Status: string
 }
 
 /**
@@ -15192,6 +15184,51 @@ export interface QueryExchangeRateResponse {
 }
 
 /**
+ * AddFlexFundingAccount请求参数结构体
+ */
+export interface AddFlexFundingAccountRequest {
+  /**
+      * 资金账户类型
+PINGAN_BANK:平安银行
+      */
+  FundingAccountType: string
+
+  /**
+   * 收款资金账户姓名
+   */
+  FundingAccountName: string
+
+  /**
+   * 收款资金账户号
+   */
+  FundingAccountNo: string
+
+  /**
+   * 收款资金账户手机号
+   */
+  PhoneNo: string
+
+  /**
+   * 收款用户ID
+   */
+  PayeeId: string
+
+  /**
+      * 环境类型
+__release__:生产环境
+__sandbox__:沙箱环境
+__test__:测试环境
+缺省默认为生产环境
+      */
+  Environment?: string
+
+  /**
+   * 开户支行名
+   */
+  BankBranchName?: string
+}
+
+/**
  * 附加项信息
  */
 export interface OldAttachmentInfo {
@@ -15218,6 +15255,56 @@ export interface OldAttachmentInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   AttachmentCode: string
+}
+
+/**
+ * ModifyFlexFundingAccount请求参数结构体
+ */
+export interface ModifyFlexFundingAccountRequest {
+  /**
+   * 收款用户ID
+   */
+  PayeeId: string
+
+  /**
+   * 收款用户资金账户ID
+   */
+  FundingAccountBindSerialNo: string
+
+  /**
+      * 资金账户类型
+PINGAN_BANK:平安银行
+      */
+  FundingAccountType: string
+
+  /**
+   * 收款资金账户手机号
+   */
+  PhoneNo: string
+
+  /**
+   * 收款资金账户姓名
+   */
+  FundingAccountName: string
+
+  /**
+   * 收款资金账户号
+   */
+  FundingAccountNo: string
+
+  /**
+      * 环境类型
+__release__:生产环境
+__sandbox__:沙箱环境
+__test__:测试环境
+缺省默认为生产环境
+      */
+  Environment?: string
+
+  /**
+   * 开户支行名
+   */
+  BankBranchName?: string
 }
 
 /**
@@ -20029,6 +20116,32 @@ export interface MigrateOrderRefundRequest {
 }
 
 /**
+ * AddFlexFundingAccount返回参数结构体
+ */
+export interface AddFlexFundingAccountResponse {
+  /**
+   * 错误码。SUCCESS为成功，其他为失败
+   */
+  ErrCode: string
+
+  /**
+   * 错误消息
+   */
+  ErrMessage: string
+
+  /**
+      * 无
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result: PayeeFundingAccountResult
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 云企付-查询账户余额
  */
 export interface QueryOpenBankBankAccountBalanceResult {
@@ -22046,6 +22159,51 @@ export interface QueryFlexPayeeAccountInfoResponse {
 }
 
 /**
+ * 聚鑫提现订单内容
+ */
+export interface WithdrawBill {
+  /**
+   * 业务提现订单号
+   */
+  WithdrawOrderId: string
+
+  /**
+   * 提现日期
+   */
+  Date: string
+
+  /**
+   * 提现金额，单位： 分
+   */
+  PayAmt: string
+
+  /**
+   * 聚鑫分配转入账户appid
+   */
+  InSubAppId: string
+
+  /**
+   * 聚鑫分配转出账户appid
+   */
+  OutSubAppId: string
+
+  /**
+   * ISO货币代码
+   */
+  CurrencyType: string
+
+  /**
+   * 透传字段
+   */
+  MetaData?: string
+
+  /**
+   * 扩展字段
+   */
+  ExtendFieldData?: string
+}
+
+/**
  * 会员间交易明细信息
  */
 export interface MemberTransactionItem {
@@ -22293,6 +22451,32 @@ export interface ApplyOutwardOrderResponse {
    * 汇出指令申请
    */
   Result: ApplyOutwardOrderResult
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * QueryFlexServiceProviderAccountBalance返回参数结构体
+ */
+export interface QueryFlexServiceProviderAccountBalanceResponse {
+  /**
+   * 错误码。SUCCESS为成功，其他为失败
+   */
+  ErrCode: string
+
+  /**
+   * 错误消息
+   */
+  ErrMessage: string
+
+  /**
+      * 返回结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result: ServiceProviderAccountBalanceResult
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -24748,6 +24932,34 @@ export interface PayeeInfoResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Remark: string
+}
+
+/**
+ * QueryOpenBankExternalSubMerchantRegistration返回参数结构体
+ */
+export interface QueryOpenBankExternalSubMerchantRegistrationResponse {
+  /**
+      * 错误码。
+__SUCCESS__: 成功
+__其他__: 见附录-错误码表
+      */
+  ErrCode: string
+
+  /**
+   * 错误消息。
+   */
+  ErrMessage: string
+
+  /**
+      * 返回结果。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result: QueryOpenBankExternalSubMerchantRegistrationResult
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

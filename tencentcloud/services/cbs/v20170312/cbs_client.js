@@ -300,6 +300,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UnbindAutoSnapshotPolicy", req, cb);
     }
     /**
+     * 为云硬盘创建一个备份点。
+     */
+    async CreateDiskBackup(req, cb) {
+        return this.request("CreateDiskBackup", req, cb);
+    }
+    /**
      * 本接口（DescribeDiskStoragePool）查询用户的云硬盘独享集群列表。
 
 * 可以根据独享集群ID(CdcId)、可用区(zone)等信息来查询和过滤云硬盘独享集群详细信息，不同的过滤条件之间为与(AND)的关系，过滤信息详细请见过滤器`Filter`。

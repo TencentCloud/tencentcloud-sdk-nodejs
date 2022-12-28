@@ -293,6 +293,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeImportImageOs", req, cb);
     }
     /**
+     * 当高性能计算集群为空, 即集群内没有任何设备时候, 可以删除该集群。
+     */
+    async DeleteHpcClusters(req, cb) {
+        return this.request("DeleteHpcClusters", req, cb);
+    }
+    /**
      * 本接口 (InquiryPriceRenewInstances) 用于续费包年包月实例询价。
 
 * 只支持查询包年包月实例的续费价格。
@@ -541,10 +547,11 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
         return this.request("RebootInstances", req, cb);
     }
     /**
-     * 当高性能计算集群为空, 即集群内没有任何设备时候, 可以删除该集群。
+     * 本接口 (InquiryPriceRenewHosts) 用于续费包年包月`CDH`实例询价。
+* 只支持查询包年包月`CDH`实例的续费价格。
      */
-    async DeleteHpcClusters(req, cb) {
-        return this.request("DeleteHpcClusters", req, cb);
+    async InquiryPriceRenewHosts(req, cb) {
+        return this.request("InquiryPriceRenewHosts", req, cb);
     }
     /**
      * 本接口 (StopInstances) 用于关闭一个或多个实例。
