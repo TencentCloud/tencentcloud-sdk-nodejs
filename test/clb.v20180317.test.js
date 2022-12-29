@@ -78,6 +78,16 @@ it("clb.v20180317.DescribeCustomizedConfigAssociateList", async function () {
     }
 })
 
+it("clb.v20180317.ModifyTargetWeight", async function () {
+    try {
+       const data = await client.ModifyTargetWeight({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("clb.v20180317.CreateTopic", async function () {
     try {
        const data = await client.CreateTopic({})
@@ -448,6 +458,16 @@ it("clb.v20180317.BatchRegisterTargets", async function () {
     }
 })
 
+it("clb.v20180317.RegisterFunctionTargets", async function () {
+    try {
+       const data = await client.RegisterFunctionTargets({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("clb.v20180317.ModifyRule", async function () {
     try {
        const data = await client.ModifyRule({})
@@ -478,9 +498,9 @@ it("clb.v20180317.DescribeCustomizedConfigList", async function () {
     }
 })
 
-it("clb.v20180317.ModifyTargetWeight", async function () {
+it("clb.v20180317.ModifyTargetGroupAttribute", async function () {
     try {
-       const data = await client.ModifyTargetWeight({})
+       const data = await client.ModifyTargetGroupAttribute({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -618,9 +638,9 @@ it("clb.v20180317.DescribeTargetGroups", async function () {
     }
 })
 
-it("clb.v20180317.ModifyTargetGroupAttribute", async function () {
+it("clb.v20180317.DeregisterFunctionTargets", async function () {
     try {
-       const data = await client.ModifyTargetGroupAttribute({})
+       const data = await client.DeregisterFunctionTargets({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

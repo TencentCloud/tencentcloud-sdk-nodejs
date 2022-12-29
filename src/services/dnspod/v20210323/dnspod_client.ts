@@ -453,9 +453,8 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 更新动态 DNS 记录
-
-     */
+   * 更新动态 DNS 记录
+   */
   async ModifyDynamicDNS(
     req: ModifyDynamicDNSRequest,
     cb?: (error: string, rep: ModifyDynamicDNSResponse) => void
@@ -534,7 +533,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   *  DNS 解析套餐自动续费设置
+   * DNS 解析套餐自动续费设置
    */
   async ModifyPackageAutoRenew(
     req: ModifyPackageAutoRenewRequest,
@@ -564,9 +563,8 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 添加记录
-
-     */
+   * 添加记录
+   */
   async CreateRecord(
     req: CreateRecordRequest,
     cb?: (error: string, rep: CreateRecordResponse) => void
@@ -645,9 +643,8 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 添加域名
-
-     */
+   * 添加域名
+   */
   async CreateDomain(
     req: CreateDomainRequest,
     cb?: (error: string, rep: CreateDomainResponse) => void
@@ -726,9 +723,8 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 删除域名
-
-     */
+   * 删除域名
+   */
   async DeleteDomain(
     req: DeleteDomainRequest,
     cb?: (error: string, rep: DeleteDomainResponse) => void

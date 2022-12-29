@@ -92,12 +92,12 @@ export interface AudioResultDetailSpeakerResult {
       */
     Score: number;
     /**
-      * 该字段用于返回对应说话人的片段在音频文件内的开始时间，单位为毫秒。
+      * 该字段用于返回对应说话人的片段在音频文件内的开始时间，单位为秒。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     StartTime: number;
     /**
-      * 该字段用于返回对应说话人的片段在音频文件内的结束时间，单位为毫秒。
+      * 该字段用于返回对应说话人的片段在音频文件内的结束时间，单位为秒。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     EndTime: number;
@@ -431,6 +431,11 @@ Block 建议屏蔽；
       */
     RecognitionResults: Array<RecognitionResult>;
     /**
+      * 识别音频时长，单位为毫秒；
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Duration: string;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
@@ -540,12 +545,12 @@ export interface AudioResultDetailLanguageResult {
       */
     Score: number;
     /**
-      * 该参数用于返回对应语种标签的片段在音频文件内的开始时间，单位为毫秒。
+      * 该参数用于返回对应语种标签的片段在音频文件内的开始时间，单位为秒。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     StartTime: number;
     /**
-      * 该参数用于返回对应语种标签的片段在音频文件内的结束时间，单位为毫秒。
+      * 该参数用于返回对应语种标签的片段在音频文件内的结束时间，单位为秒。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     EndTime: number;
@@ -590,11 +595,11 @@ export interface MoanResult {
       */
     Suggestion: string;
     /**
-      * 违规事件开始时间，单位为毫秒（ms）；
+      * 违规事件开始时间，单位为秒（s）；
       */
     StartTime: number;
     /**
-      * 违规事件结束时间，单位为毫秒（ms）；
+      * 违规事件结束时间，单位为秒（s）；
       */
     EndTime: number;
     /**
@@ -738,11 +743,11 @@ export interface AudioResultDetailMoanResult {
       */
     Score: number;
     /**
-      * 该字段用于返回对应呻吟标签的片段在音频文件内的开始时间，单位为毫秒。
+      * 该字段用于返回对应呻吟标签的片段在音频文件内的开始时间，单位为秒。
       */
     StartTime: number;
     /**
-      * 该字段用于返回对应呻吟标签的片段在音频文件内的结束时间，单位为毫秒。
+      * 该字段用于返回对应呻吟标签的片段在音频文件内的结束时间，单位为秒。
       */
     EndTime: number;
     /**

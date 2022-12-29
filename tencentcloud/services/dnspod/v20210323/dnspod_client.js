@@ -191,7 +191,6 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 更新动态 DNS 记录
-
      */
     async ModifyDynamicDNS(req, cb) {
         return this.request("ModifyDynamicDNS", req, cb);
@@ -239,7 +238,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDomainAnalytics", req, cb);
     }
     /**
-     *  DNS 解析套餐自动续费设置
+     * DNS 解析套餐自动续费设置
      */
     async ModifyPackageAutoRenew(req, cb) {
         return this.request("ModifyPackageAutoRenew", req, cb);
@@ -258,7 +257,6 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 添加记录
-
      */
     async CreateRecord(req, cb) {
         return this.request("CreateRecord", req, cb);
@@ -307,7 +305,6 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 添加域名
-
      */
     async CreateDomain(req, cb) {
         return this.request("CreateDomain", req, cb);
@@ -356,7 +353,6 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 删除域名
-
      */
     async DeleteDomain(req, cb) {
         return this.request("DeleteDomain", req, cb);

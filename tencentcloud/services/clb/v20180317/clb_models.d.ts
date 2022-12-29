@@ -790,6 +790,10 @@ export interface RsWeightRule {
     Weight?: number;
 }
 /**
+ * RegisterFunctionTargets请求参数结构体
+ */
+export declare type RegisterFunctionTargetsRequest = null;
+/**
  * DeregisterTargetsFromClassicalLB请求参数结构体
  */
 export interface DeregisterTargetsFromClassicalLBRequest {
@@ -1249,6 +1253,15 @@ export interface DescribeClassicalLBTargetsRequest {
     LoadBalancerId: string;
 }
 /**
+ * DeregisterFunctionTargets返回参数结构体
+ */
+export interface DeregisterFunctionTargetsResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeCustomizedConfigList请求参数结构体
  */
 export interface DescribeCustomizedConfigListRequest {
@@ -1320,6 +1333,28 @@ export interface DescribeCrossTargetsResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * SCF云函数（Serverless Cloud Function）相关信息。
+ */
+export interface FunctionInfo {
+    /**
+      * 函数命名空间
+      */
+    FunctionNamespace: string;
+    /**
+      * 函数名称
+      */
+    FunctionName: string;
+    /**
+      * 函数的版本名称或别名
+      */
+    FunctionQualifier: string;
+    /**
+      * 标识 FunctionQualifier 参数的类型，可取值： VERSION（版本）、ALIAS（别名）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FunctionQualifierType?: string;
 }
 /**
  * DescribeLoadBalancerListByCertId返回参数结构体
@@ -2136,6 +2171,35 @@ export interface TargetGroupBackend {
     ZoneId: number;
 }
 /**
+ * DeregisterFunctionTargets请求参数结构体
+ */
+export interface DeregisterFunctionTargetsRequest {
+    /**
+      * 负载均衡实例 ID。
+      */
+    LoadBalancerId: string;
+    /**
+      * 负载均衡监听器 ID。
+      */
+    ListenerId: string;
+    /**
+      * 待解绑的云函数列表。
+      */
+    FunctionTargets: Array<FunctionTarget>;
+    /**
+      * 目标转发规则的 ID，当将云函数从七层转发规则上解绑时，必须输入此参数或 Domain+Url 参数。
+      */
+    LocationId?: string;
+    /**
+      * 目标转发规则的域名，若已经输入 LocationId 参数，则本参数不生效。
+      */
+    Domain?: string;
+    /**
+      * 目标转发规则的 URL，若已经输入 LocationId 参数，则本参数不生效。
+      */
+    Url?: string;
+}
+/**
  * DescribeClassicalLBByInstanceId请求参数结构体
  */
 export interface DescribeClassicalLBByInstanceIdRequest {
@@ -2143,6 +2207,20 @@ export interface DescribeClassicalLBByInstanceIdRequest {
       * 后端实例ID列表。
       */
     InstanceIds: Array<string>;
+}
+/**
+ * SCF云函数（Serverless Cloud Function）作为后端服务
+ */
+export interface FunctionTarget {
+    /**
+      * 云函数相关信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Function: FunctionInfo;
+    /**
+      * 权重
+      */
+    Weight?: number;
 }
 /**
  * DescribeResources返回参数结构体
@@ -2759,6 +2837,15 @@ export interface RuleOutput {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     TargetGroupList: Array<BasicTargetGroupInfo>;
+}
+/**
+ * RegisterFunctionTargets返回参数结构体
+ */
+export interface RegisterFunctionTargetsResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * CreateTopic返回参数结构体

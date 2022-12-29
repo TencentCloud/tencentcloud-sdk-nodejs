@@ -11616,71 +11616,77 @@ export interface CCN {
   /**
    * 云联网唯一ID
    */
-  CcnId: string
+  CcnId?: string
 
   /**
    * 云联网名称
    */
-  CcnName: string
+  CcnName?: string
 
   /**
    * 云联网描述信息
    */
-  CcnDescription: string
+  CcnDescription?: string
 
   /**
    * 关联实例数量
    */
-  InstanceCount: number
+  InstanceCount?: number
 
   /**
    * 创建时间
    */
-  CreateTime: string
+  CreateTime?: string
 
   /**
    * 实例状态， 'ISOLATED': 隔离中（欠费停服），'AVAILABLE'：运行中。
    */
-  State: string
+  State?: string
 
   /**
    * 实例服务质量，’PT’：白金，'AU'：金，'AG'：银。
    */
-  QosLevel: string
+  QosLevel?: string
 
   /**
       * 付费类型，PREPAID为预付费，POSTPAID为后付费。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  InstanceChargeType: string
+  InstanceChargeType?: string
 
   /**
       * 限速类型，INTER_REGION_LIMIT为地域间限速；OUTER_REGION_LIMIT为地域出口限速。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  BandwidthLimitType: string
+  BandwidthLimitType?: string
 
   /**
    * 标签键值对。
    */
-  TagSet: Array<Tag>
+  TagSet?: Array<Tag>
 
   /**
    * 是否支持云联网路由优先级的功能。False：不支持，True：支持。
    */
-  RoutePriorityFlag: boolean
+  RoutePriorityFlag?: boolean
 
   /**
       * 实例关联的路由表个数。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  RouteTableCount: number
+  RouteTableCount?: number
 
   /**
       * 是否开启云联网多路由表特性。False：未开启，True：开启。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  RouteTableFlag: boolean
+  RouteTableFlag?: boolean
+
+  /**
+      * 是否开启云联网路由传播策略。`False` 未开启，`True` 开启。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RouteBroadcastPolicyFlag?: boolean
 }
 
 /**

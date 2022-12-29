@@ -48,6 +48,7 @@ import {
   ClassicalTarget,
   ListenerItem,
   RsWeightRule,
+  RegisterFunctionTargetsRequest,
   DeregisterTargetsFromClassicalLBRequest,
   SetSecurityGroupForLoadbalancersResponse,
   BasicTargetGroupInfo,
@@ -74,9 +75,11 @@ import {
   BlockedIP,
   ModifyRuleResponse,
   DescribeClassicalLBTargetsRequest,
+  DeregisterFunctionTargetsResponse,
   DescribeCustomizedConfigListRequest,
   AutoRewriteRequest,
   DescribeCrossTargetsResponse,
+  FunctionInfo,
   DescribeLoadBalancerListByCertIdResponse,
   ModifyTargetGroupInstancesWeightResponse,
   DescribeTargetGroupsRequest,
@@ -111,7 +114,9 @@ import {
   MigrateClassicalLoadBalancersRequest,
   DescribeLoadBalancersDetailRequest,
   TargetGroupBackend,
+  DeregisterFunctionTargetsRequest,
   DescribeClassicalLBByInstanceIdRequest,
+  FunctionTarget,
   DescribeResourcesResponse,
   ModifyTargetGroupInstancesWeightRequest,
   ManualRewriteResponse,
@@ -138,6 +143,7 @@ import {
   ClassicalLoadBalancerInfo,
   DescribeListenersResponse,
   RuleOutput,
+  RegisterFunctionTargetsResponse,
   CreateTopicResponse,
   CreateRuleRequest,
   ModifyTargetGroupInstancesPortResponse,
@@ -304,6 +310,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCustomizedConfigAssociateListResponse) => void
   ): Promise<DescribeCustomizedConfigAssociateListResponse> {
     return this.request("DescribeCustomizedConfigAssociateList", req, cb)
+  }
+
+  /**
+     * ModifyTargetWeight 接口用于修改负载均衡绑定的后端服务的转发权重。
+本接口为异步接口，本接口返回成功后需以返回的RequestID为入参，调用DescribeTaskStatus接口查询本次任务是否成功。
+     */
+  async ModifyTargetWeight(
+    req: ModifyTargetWeightRequest,
+    cb?: (error: string, rep: ModifyTargetWeightResponse) => void
+  ): Promise<ModifyTargetWeightResponse> {
+    return this.request("ModifyTargetWeight", req, cb)
   }
 
   /**
@@ -699,6 +716,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * RegisterFunctionTargets 接口用来将一个云函数绑定到负载均衡的7层转发规则，在此之前您需要先行创建相关的7层监听器（HTTP、HTTPS）和转发规则。
+本接口为异步接口，本接口返回成功后需以返回的RequestID为入参，调用DescribeTaskStatus接口查询本次任务是否成功。<br/>
+限制说明：
+- 仅广州、深圳金融、上海、上海金融、北京、成都、中国香港、新加坡、孟买、东京、硅谷地域支持绑定 SCF。
+- 仅标准账户类型支持绑定 SCF，传统账户类型不支持。建议升级为标准账户类型，详情可参见 [账户类型升级说明](https://cloud.tencent.com/document/product/1199/49090)。 
+- 传统型负载均衡不支持绑定 SCF。
+- 基础网络类型不支持绑定 SCF。
+- CLB 默认支持绑定同地域下的所有 SCF，可支持跨 VPC 绑定 SCF，不支持跨地域绑定。
+- 目前仅 IPv4、IPv6 NAT64 版本的负载均衡支持绑定 SCF，IPv6 版本的暂不支持。
+- 仅七层（HTTP、HTTPS）监听器支持绑定 SCF，四层（TCP、UDP、TCP SSL）监听器和七层 QUIC 监听器不支持。
+- CLB 绑定 SCF 仅支持绑定“Event 函数”类型的云函数。
+     */
+  async RegisterFunctionTargets(
+    req?: RegisterFunctionTargetsRequest,
+    cb?: (error: string, rep: RegisterFunctionTargetsResponse) => void
+  ): Promise<RegisterFunctionTargetsResponse> {
+    return this.request("RegisterFunctionTargets", req, cb)
+  }
+
+  /**
      * ModifyRule 接口用来修改负载均衡七层监听器下的转发规则的各项属性，包括转发路径、健康检查属性、转发策略等。
 本接口为异步接口，本接口返回成功后需以返回的RequestID为入参，调用DescribeTaskStatus接口查询本次任务是否成功。
      */
@@ -730,14 +767,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * ModifyTargetWeight 接口用于修改负载均衡绑定的后端服务的转发权重。
-本接口为异步接口，本接口返回成功后需以返回的RequestID为入参，调用DescribeTaskStatus接口查询本次任务是否成功。
-     */
-  async ModifyTargetWeight(
-    req: ModifyTargetWeightRequest,
-    cb?: (error: string, rep: ModifyTargetWeightResponse) => void
-  ): Promise<ModifyTargetWeightResponse> {
-    return this.request("ModifyTargetWeight", req, cb)
+   * 修改目标组的名称或者默认端口属性
+   */
+  async ModifyTargetGroupAttribute(
+    req: ModifyTargetGroupAttributeRequest,
+    cb?: (error: string, rep: ModifyTargetGroupAttributeResponse) => void
+  ): Promise<ModifyTargetGroupAttributeResponse> {
+    return this.request("ModifyTargetGroupAttribute", req, cb)
   }
 
   /**
@@ -873,13 +909,24 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改目标组的名称或者默认端口属性
-   */
-  async ModifyTargetGroupAttribute(
-    req: ModifyTargetGroupAttributeRequest,
-    cb?: (error: string, rep: ModifyTargetGroupAttributeResponse) => void
-  ): Promise<ModifyTargetGroupAttributeResponse> {
-    return this.request("ModifyTargetGroupAttribute", req, cb)
+     * DeregisterFunctionTargets 接口用来将一个云函数从负载均衡的转发规则上解绑，对于七层监听器，还需通过 LocationId 或 Domain+Url 指定转发规则。
+本接口为异步接口，本接口返回成功后需以返回的 RequestID 为入参，调用 [DescribeTaskStatus](https://cloud.tencent.com/document/product/214/30683) 接口查询本次任务是否成功。
+<br/>限制说明：
+
+- 仅广州、深圳金融、上海、上海金融、北京、成都、中国香港、新加坡、孟买、东京、硅谷地域支持绑定 SCF。
+- 仅标准账户类型支持绑定 SCF，传统账户类型不支持。建议升级为标准账户类型，详情可参见 [账户类型升级说明](https://cloud.tencent.com/document/product/1199/49090)。
+- 传统型负载均衡不支持绑定 SCF。
+- 基础网络类型不支持绑定 SCF。
+- CLB 默认支持绑定同地域下的所有 SCF，可支持跨 VPC 绑定 SCF，不支持跨地域绑定。
+- 目前仅 IPv4、IPv6 NAT64 版本的负载均衡支持绑定 SCF，IPv6 版本的暂不支持。
+- 仅七层（HTTP、HTTPS）监听器支持绑定 SCF，四层（TCP、UDP、TCP SSL）监听器和七层 QUIC 监听器不支持。
+- CLB 绑定 SCF 仅支持绑定“Event 函数”类型的云函数。
+     */
+  async DeregisterFunctionTargets(
+    req: DeregisterFunctionTargetsRequest,
+    cb?: (error: string, rep: DeregisterFunctionTargetsResponse) => void
+  ): Promise<DeregisterFunctionTargetsResponse> {
+    return this.request("DeregisterFunctionTargets", req, cb)
   }
 
   /**

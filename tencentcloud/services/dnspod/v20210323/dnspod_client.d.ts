@@ -117,7 +117,6 @@ export declare class Client extends AbstractClient {
     CreateRecordGroup(req: CreateRecordGroupRequest, cb?: (error: string, rep: CreateRecordGroupResponse) => void): Promise<CreateRecordGroupResponse>;
     /**
      * 更新动态 DNS 记录
-
      */
     ModifyDynamicDNS(req: ModifyDynamicDNSRequest, cb?: (error: string, rep: ModifyDynamicDNSResponse) => void): Promise<ModifyDynamicDNSResponse>;
     /**
@@ -149,7 +148,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeDomainAnalytics(req: DescribeDomainAnalyticsRequest, cb?: (error: string, rep: DescribeDomainAnalyticsResponse) => void): Promise<DescribeDomainAnalyticsResponse>;
     /**
-     *  DNS 解析套餐自动续费设置
+     * DNS 解析套餐自动续费设置
      */
     ModifyPackageAutoRenew(req: ModifyPackageAutoRenewRequest, cb?: (error: string, rep: ModifyPackageAutoRenewResponse) => void): Promise<ModifyPackageAutoRenewResponse>;
     /**
@@ -162,7 +161,6 @@ export declare class Client extends AbstractClient {
     CreateDomainAlias(req: CreateDomainAliasRequest, cb?: (error: string, rep: CreateDomainAliasResponse) => void): Promise<CreateDomainAliasResponse>;
     /**
      * 添加记录
-
      */
     CreateRecord(req: CreateRecordRequest, cb?: (error: string, rep: CreateRecordResponse) => void): Promise<CreateRecordResponse>;
     /**
@@ -195,7 +193,6 @@ export declare class Client extends AbstractClient {
     CheckRecordSnapshotRollback(req: CheckRecordSnapshotRollbackRequest, cb?: (error: string, rep: CheckRecordSnapshotRollbackResponse) => void): Promise<CheckRecordSnapshotRollbackResponse>;
     /**
      * 添加域名
-
      */
     CreateDomain(req: CreateDomainRequest, cb?: (error: string, rep: CreateDomainResponse) => void): Promise<CreateDomainResponse>;
     /**
@@ -228,7 +225,6 @@ export declare class Client extends AbstractClient {
     DescribeDomainList(req: DescribeDomainListRequest, cb?: (error: string, rep: DescribeDomainListResponse) => void): Promise<DescribeDomainListResponse>;
     /**
      * 删除域名
-
      */
     DeleteDomain(req: DeleteDomainRequest, cb?: (error: string, rep: DeleteDomainResponse) => void): Promise<DeleteDomainResponse>;
     /**

@@ -425,6 +425,10 @@ export interface ClusterInstanceDetail {
       * 硬盘
       */
     InstanceStorage: number;
+    /**
+      * 实例角色
+      */
+    InstanceRole: string;
 }
 /**
  * AddClusterSlaveZone返回参数结构体
@@ -1139,13 +1143,27 @@ export interface SwitchClusterZoneRequest {
     IsInMaintainPeriod?: string;
 }
 /**
- * DescribeDBSecurityGroups请求参数结构体
+ * 集群支持的功能
  */
-export interface DescribeDBSecurityGroupsRequest {
+export interface Ability {
     /**
-      * 实例组ID
+      * 是否支持从可用区
       */
-    InstanceId: string;
+    IsSupportSlaveZone: string;
+    /**
+      * 不支持从可用区的原因
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NonsupportSlaveZoneReason: string;
+    /**
+      * 是否支持RO实例
+      */
+    IsSupportRo: string;
+    /**
+      * 不支持RO实例的原因
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NonsupportRoReason: string;
 }
 /**
  * 实例初始化配置信息
@@ -1328,15 +1346,15 @@ export interface ResetAccountPasswordResponse {
     RequestId?: string;
 }
 /**
- * 新创建的账号
+ * x08新创建的账号
  */
 export interface NewAccount {
     /**
-      * 账户名
+      * 账户名，包含字母数字_,以字母开头，字母或数字结尾，长度1-16
       */
     AccountName: string;
     /**
-      * 密码
+      * 密码，密码长度范围为8到64个字符
       */
     AccountPassword: string;
     /**
@@ -1347,6 +1365,10 @@ export interface NewAccount {
       * 描述
       */
     Description?: string;
+    /**
+      * 用户最大连接数，不能大于10240
+      */
+    MaxUserConnections?: number;
 }
 /**
  * 备份文件信息
@@ -2385,6 +2407,16 @@ export interface NetAddr {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Description: string;
+    /**
+      * 外网IP
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    WanIP: string;
+    /**
+      * 外网状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    WanStatus: string;
 }
 /**
  * 参数模板详情
@@ -2790,110 +2822,176 @@ deleted:已删除
     InstanceNum: number;
     /**
       * 用户uin
+注意：此字段可能返回 null，表示取不到有效值。
       */
     Uin: string;
     /**
       * 引擎类型
+注意：此字段可能返回 null，表示取不到有效值。
       */
     DbType: string;
     /**
       * 用户appid
+注意：此字段可能返回 null，表示取不到有效值。
       */
     AppId: number;
     /**
       * 集群状态描述
+注意：此字段可能返回 null，表示取不到有效值。
       */
     StatusDesc: string;
     /**
       * 集群创建时间
+注意：此字段可能返回 null，表示取不到有效值。
       */
     CreateTime: string;
     /**
       * 付费模式。0-按量计费，1-包年包月
+注意：此字段可能返回 null，表示取不到有效值。
       */
     PayMode: number;
     /**
       * 截止时间
+注意：此字段可能返回 null，表示取不到有效值。
       */
     PeriodEndTime: string;
     /**
       * 集群读写vip
+注意：此字段可能返回 null，表示取不到有效值。
       */
     Vip: string;
     /**
       * 集群读写vport
+注意：此字段可能返回 null，表示取不到有效值。
       */
     Vport: number;
     /**
       * 项目id
+注意：此字段可能返回 null，表示取不到有效值。
       */
     ProjectID: number;
     /**
       * 私有网络ID
+注意：此字段可能返回 null，表示取不到有效值。
       */
     VpcId?: string;
     /**
       * 子网ID
+注意：此字段可能返回 null，表示取不到有效值。
       */
     SubnetId?: string;
     /**
       * cynos内核版本
+注意：此字段可能返回 null，表示取不到有效值。
       */
     CynosVersion?: string;
     /**
       * 存储容量
+注意：此字段可能返回 null，表示取不到有效值。
       */
     StorageLimit?: number;
     /**
       * 续费标志
+注意：此字段可能返回 null，表示取不到有效值。
       */
     RenewFlag?: number;
     /**
       * 正在处理的任务
+注意：此字段可能返回 null，表示取不到有效值。
       */
     ProcessingTask?: string;
     /**
       * 集群的任务数组
+注意：此字段可能返回 null，表示取不到有效值。
       */
     Tasks?: Array<ObjectTask>;
     /**
       * 集群绑定的tag数组
+注意：此字段可能返回 null，表示取不到有效值。
       */
     ResourceTags?: Array<Tag>;
     /**
       * Db类型(NORMAL, SERVERLESS)
+注意：此字段可能返回 null，表示取不到有效值。
       */
     DbMode?: string;
     /**
       * 当Db类型为SERVERLESS时，serverless集群状态，可选值:
 resume
 pause
+注意：此字段可能返回 null，表示取不到有效值。
       */
     ServerlessStatus?: string;
     /**
       * 集群预付费存储值大小
+注意：此字段可能返回 null，表示取不到有效值。
       */
     Storage?: number;
     /**
       * 集群存储为预付费时的存储ID，用于预付费存储变配
+注意：此字段可能返回 null，表示取不到有效值。
       */
     StorageId?: string;
     /**
       * 集群存储付费模式。0-按量计费，1-包年包月
+注意：此字段可能返回 null，表示取不到有效值。
       */
     StoragePayMode?: number;
     /**
       * 集群计算规格对应的最小存储值
+注意：此字段可能返回 null，表示取不到有效值。
       */
     MinStorageSize?: number;
     /**
       * 集群计算规格对应的最大存储值
+注意：此字段可能返回 null，表示取不到有效值。
       */
     MaxStorageSize?: number;
     /**
       * 集群网络信息
+注意：此字段可能返回 null，表示取不到有效值。
       */
     NetAddrs?: Array<NetAddr>;
+    /**
+      * 物理可用区
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PhysicalZone?: string;
+    /**
+      * 主可用区
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MasterZone?: string;
+    /**
+      * 是否有从可用区
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    HasSlaveZone?: string;
+    /**
+      * 从可用区
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SlaveZones?: Array<string>;
+    /**
+      * 商业类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BusinessType?: string;
+    /**
+      * 是否冻结
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IsFreeze?: string;
+    /**
+      * 订单来源
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OrderSource?: string;
+    /**
+      * 能力
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Ability?: Ability;
 }
 /**
  * IsolateCluster返回参数结构体
@@ -3830,6 +3928,116 @@ pause
 pausing
       */
     ServerlessStatus: string;
+    /**
+      * binlog开关，可选值：ON, OFF
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LogBin: string;
+    /**
+      * pitr类型，可选值：normal, redo_pitr
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PitrType: string;
+    /**
+      * 物理可用区
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PhysicalZone: string;
+    /**
+      * 存储Id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    StorageId: string;
+    /**
+      * 存储大小，单位为G
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Storage: number;
+    /**
+      * 最大存储规格，单位为G
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MaxStorageSize: number;
+    /**
+      * 最小存储规格，单位为G
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MinStorageSize: number;
+    /**
+      * 存储付费类型，1为包年包月，0为按量计费
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    StoragePayMode: number;
+    /**
+      * 数据库类型，normal，serverless
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DbMode: string;
+    /**
+      * 存储空间上限
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    StorageLimit: number;
+    /**
+      * 集群支持的功能
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Ability: Ability;
+    /**
+      * cynos版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CynosVersion: string;
+    /**
+      * 商业类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BusinessType: string;
+    /**
+      * 是否有从可用区
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    HasSlaveZone: string;
+    /**
+      * 是否冻结
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IsFreeze: string;
+    /**
+      * 任务列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Tasks: Array<ObjectTask>;
+    /**
+      * 主可用区
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MasterZone: string;
+    /**
+      * 从可用区列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SlaveZones: Array<string>;
+    /**
+      * Proxy状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProxyStatus: string;
+    /**
+      * 是否跳过交易
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IsSkipTrade: string;
+    /**
+      * 是否打开密码复杂度
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IsOpenPasswordComplexity: string;
+    /**
+      * 网络类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NetworkStatus: string;
 }
 /**
  * ResetAccountPassword请求参数结构体
@@ -4102,6 +4310,15 @@ export interface DescribeInstanceSpecsResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DescribeDBSecurityGroups请求参数结构体
+ */
+export interface DescribeDBSecurityGroupsRequest {
+    /**
+      * 实例组ID
+      */
+    InstanceId: string;
 }
 /**
  * DescribeAccountAllGrantPrivileges请求参数结构体

@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DeleteRewriteRequest, DescribeTargetGroupListResponse, DescribeQuotaRequest, DescribeTargetGroupListRequest, BatchDeregisterTargetsResponse, SetLoadBalancerSecurityGroupsResponse, BatchModifyTargetWeightResponse, SetSecurityGroupForLoadbalancersRequest, CreateLoadBalancerRequest, DescribeLoadBalancerOverviewResponse, DeleteRuleRequest, CloneLoadBalancerRequest, DisassociateTargetGroupsResponse, SetLoadBalancerClsLogResponse, DescribeLoadBalancerTrafficResponse, ModifyRuleRequest, DescribeCustomizedConfigListResponse, DescribeBlockIPListResponse, DescribeRewriteRequest, ModifyLoadBalancerAttributesResponse, DescribeTargetGroupInstancesRequest, DescribeIdleLoadBalancersResponse, AssociateTargetGroupsRequest, DescribeLoadBalancersRequest, DeregisterTargetsFromClassicalLBRequest, SetSecurityGroupForLoadbalancersResponse, ModifyTargetWeightResponse, DescribeTaskStatusRequest, DescribeClassicalLBByInstanceIdResponse, CreateRuleResponse, DescribeExclusiveClustersResponse, ModifyDomainRequest, RegisterTargetGroupInstancesResponse, DescribeTargetsRequest, RegisterTargetsWithClassicalLBResponse, DescribeTargetGroupsResponse, ModifyLoadBalancerSlaResponse, DeleteLoadBalancerListenersRequest, ModifyRuleResponse, DescribeClassicalLBTargetsRequest, DescribeCustomizedConfigListRequest, AutoRewriteRequest, DescribeCrossTargetsResponse, DescribeLoadBalancerListByCertIdResponse, ModifyTargetGroupInstancesWeightResponse, DescribeTargetGroupsRequest, DescribeTaskStatusResponse, BatchRegisterTargetsResponse, ModifyLoadBalancerAttributesRequest, DescribeLBListenersRequest, DescribeLoadBalancerTrafficRequest, DescribeBlockIPListRequest, DescribeClassicalLBHealthStatusResponse, DescribeClsLogSetRequest, RegisterTargetsWithClassicalLBRequest, ModifyDomainAttributesResponse, ReplaceCertForLoadBalancersResponse, DescribeTargetsResponse, ModifyListenerRequest, DeregisterTargetGroupInstancesResponse, RegisterTargetsRequest, AssociateTargetGroupsResponse, CreateTopicRequest, DeleteListenerRequest, DescribeCustomizedConfigAssociateListRequest, ModifyTargetPortResponse, MigrateClassicalLoadBalancersRequest, DescribeLoadBalancersDetailRequest, DescribeClassicalLBByInstanceIdRequest, DescribeResourcesResponse, ModifyTargetGroupInstancesWeightRequest, ManualRewriteResponse, ModifyBlockIPListRequest, DescribeClusterResourcesResponse, ModifyBlockIPListResponse, DescribeClusterResourcesRequest, ModifyDomainAttributesRequest, DescribeClassicalLBHealthStatusRequest, DescribeListenersRequest, CreateClsLogSetResponse, DescribeCrossTargetsRequest, DeleteLoadBalancerRequest, DescribeCustomizedConfigAssociateListResponse, SetCustomizedConfigForLoadBalancerRequest, CreateListenerResponse, CreateTargetGroupResponse, MigrateClassicalLoadBalancersResponse, CreateLoadBalancerSnatIpsResponse, DescribeListenersResponse, CreateTopicResponse, CreateRuleRequest, ModifyTargetGroupInstancesPortResponse, BatchDeregisterTargetsRequest, DeregisterTargetGroupInstancesRequest, ManualRewriteRequest, ModifyListenerResponse, DescribeTargetHealthResponse, CreateTargetGroupRequest, CreateListenerRequest, CreateClsLogSetRequest, DisassociateTargetGroupsRequest, ModifyDomainResponse, RegisterTargetsResponse, DeregisterTargetsFromClassicalLBResponse, SetCustomizedConfigForLoadBalancerResponse, DeleteLoadBalancerResponse, AutoRewriteResponse, DeregisterTargetsResponse, DescribeLoadBalancerOverviewRequest, ModifyTargetWeightRequest, DescribeLoadBalancersDetailResponse, BatchModifyTargetWeightRequest, DeleteRewriteResponse, DescribeLoadBalancerListByCertIdRequest, DescribeTargetHealthRequest, ReplaceCertForLoadBalancersRequest, DeleteRuleResponse, CloneLoadBalancerResponse, DescribeClsLogSetResponse, ModifyTargetGroupAttributeRequest, DeregisterTargetsRequest, ModifyLoadBalancerMixIpTargetResponse, CreateLoadBalancerSnatIpsRequest, DescribeTargetGroupInstancesResponse, DescribeQuotaResponse, DeleteTargetGroupsResponse, ModifyTargetGroupInstancesPortRequest, BatchRegisterTargetsRequest, ModifyLoadBalancerMixIpTargetRequest, DescribeBlockIPTaskResponse, DescribeResourcesRequest, DescribeClassicalLBListenersResponse, DescribeExclusiveClustersRequest, ModifyLoadBalancerSlaRequest, DescribeBlockIPTaskRequest, CreateLoadBalancerResponse, DescribeRewriteResponse, SetLoadBalancerClsLogRequest, ModifyTargetGroupAttributeResponse, DeleteLoadBalancerListenersResponse, DescribeIdleLoadBalancersRequest, DeleteLoadBalancerSnatIpsRequest, SetLoadBalancerSecurityGroupsRequest, DescribeClassicalLBTargetsResponse, ModifyTargetPortRequest, DescribeLoadBalancersResponse, DescribeLBListenersResponse, DeleteListenerResponse, DeleteLoadBalancerSnatIpsResponse, DeleteTargetGroupsRequest, DescribeClassicalLBListenersRequest, RegisterTargetGroupInstancesRequest } from "./clb_models";
+import { DeleteRewriteRequest, DescribeTargetGroupListResponse, DescribeQuotaRequest, DescribeTargetGroupListRequest, BatchDeregisterTargetsResponse, SetLoadBalancerSecurityGroupsResponse, BatchModifyTargetWeightResponse, SetSecurityGroupForLoadbalancersRequest, CreateLoadBalancerRequest, DescribeLoadBalancerOverviewResponse, DeleteRuleRequest, CloneLoadBalancerRequest, DisassociateTargetGroupsResponse, SetLoadBalancerClsLogResponse, DescribeLoadBalancerTrafficResponse, ModifyRuleRequest, DescribeCustomizedConfigListResponse, DescribeBlockIPListResponse, DescribeRewriteRequest, ModifyLoadBalancerAttributesResponse, DescribeTargetGroupInstancesRequest, DescribeIdleLoadBalancersResponse, AssociateTargetGroupsRequest, DescribeLoadBalancersRequest, RegisterFunctionTargetsRequest, DeregisterTargetsFromClassicalLBRequest, SetSecurityGroupForLoadbalancersResponse, ModifyTargetWeightResponse, DescribeTaskStatusRequest, DescribeClassicalLBByInstanceIdResponse, CreateRuleResponse, DescribeExclusiveClustersResponse, ModifyDomainRequest, RegisterTargetGroupInstancesResponse, DescribeTargetsRequest, RegisterTargetsWithClassicalLBResponse, DescribeTargetGroupsResponse, ModifyLoadBalancerSlaResponse, DeleteLoadBalancerListenersRequest, ModifyRuleResponse, DescribeClassicalLBTargetsRequest, DeregisterFunctionTargetsResponse, DescribeCustomizedConfigListRequest, AutoRewriteRequest, DescribeCrossTargetsResponse, DescribeLoadBalancerListByCertIdResponse, ModifyTargetGroupInstancesWeightResponse, DescribeTargetGroupsRequest, DescribeTaskStatusResponse, BatchRegisterTargetsResponse, ModifyLoadBalancerAttributesRequest, DescribeLBListenersRequest, DescribeLoadBalancerTrafficRequest, DescribeBlockIPListRequest, DescribeClassicalLBHealthStatusResponse, DescribeClsLogSetRequest, RegisterTargetsWithClassicalLBRequest, ModifyDomainAttributesResponse, ReplaceCertForLoadBalancersResponse, DescribeTargetsResponse, ModifyListenerRequest, DeregisterTargetGroupInstancesResponse, RegisterTargetsRequest, AssociateTargetGroupsResponse, CreateTopicRequest, DeleteListenerRequest, DescribeCustomizedConfigAssociateListRequest, ModifyTargetPortResponse, MigrateClassicalLoadBalancersRequest, DescribeLoadBalancersDetailRequest, DeregisterFunctionTargetsRequest, DescribeClassicalLBByInstanceIdRequest, DescribeResourcesResponse, ModifyTargetGroupInstancesWeightRequest, ManualRewriteResponse, ModifyBlockIPListRequest, DescribeClusterResourcesResponse, ModifyBlockIPListResponse, DescribeClusterResourcesRequest, ModifyDomainAttributesRequest, DescribeClassicalLBHealthStatusRequest, DescribeListenersRequest, CreateClsLogSetResponse, DescribeCrossTargetsRequest, DeleteLoadBalancerRequest, DescribeCustomizedConfigAssociateListResponse, SetCustomizedConfigForLoadBalancerRequest, CreateListenerResponse, CreateTargetGroupResponse, MigrateClassicalLoadBalancersResponse, CreateLoadBalancerSnatIpsResponse, DescribeListenersResponse, RegisterFunctionTargetsResponse, CreateTopicResponse, CreateRuleRequest, ModifyTargetGroupInstancesPortResponse, BatchDeregisterTargetsRequest, DeregisterTargetGroupInstancesRequest, ManualRewriteRequest, ModifyListenerResponse, DescribeTargetHealthResponse, CreateTargetGroupRequest, CreateListenerRequest, CreateClsLogSetRequest, DisassociateTargetGroupsRequest, ModifyDomainResponse, RegisterTargetsResponse, DeregisterTargetsFromClassicalLBResponse, SetCustomizedConfigForLoadBalancerResponse, DeleteLoadBalancerResponse, AutoRewriteResponse, DeregisterTargetsResponse, DescribeLoadBalancerOverviewRequest, ModifyTargetWeightRequest, DescribeLoadBalancersDetailResponse, BatchModifyTargetWeightRequest, DeleteRewriteResponse, DescribeLoadBalancerListByCertIdRequest, DescribeTargetHealthRequest, ReplaceCertForLoadBalancersRequest, DeleteRuleResponse, CloneLoadBalancerResponse, DescribeClsLogSetResponse, ModifyTargetGroupAttributeRequest, DeregisterTargetsRequest, ModifyLoadBalancerMixIpTargetResponse, CreateLoadBalancerSnatIpsRequest, DescribeTargetGroupInstancesResponse, DescribeQuotaResponse, DeleteTargetGroupsResponse, ModifyTargetGroupInstancesPortRequest, BatchRegisterTargetsRequest, ModifyLoadBalancerMixIpTargetRequest, DescribeBlockIPTaskResponse, DescribeResourcesRequest, DescribeClassicalLBListenersResponse, DescribeExclusiveClustersRequest, ModifyLoadBalancerSlaRequest, DescribeBlockIPTaskRequest, CreateLoadBalancerResponse, DescribeRewriteResponse, SetLoadBalancerClsLogRequest, ModifyTargetGroupAttributeResponse, DeleteLoadBalancerListenersResponse, DescribeIdleLoadBalancersRequest, DeleteLoadBalancerSnatIpsRequest, SetLoadBalancerSecurityGroupsRequest, DescribeClassicalLBTargetsResponse, ModifyTargetPortRequest, DescribeLoadBalancersResponse, DescribeLBListenersResponse, DeleteListenerResponse, DeleteLoadBalancerSnatIpsResponse, DeleteTargetGroupsRequest, DescribeClassicalLBListenersRequest, RegisterTargetGroupInstancesRequest } from "./clb_models";
 /**
  * clb client
  * @class
@@ -33,6 +33,11 @@ export declare class Client extends AbstractClient {
      * 拉取配置绑定的 server 或 location，如果 domain 存在，结果将根据 domain 过滤。或拉取配置绑定的 loadbalancer。
      */
     DescribeCustomizedConfigAssociateList(req: DescribeCustomizedConfigAssociateListRequest, cb?: (error: string, rep: DescribeCustomizedConfigAssociateListResponse) => void): Promise<DescribeCustomizedConfigAssociateListResponse>;
+    /**
+     * ModifyTargetWeight 接口用于修改负载均衡绑定的后端服务的转发权重。
+本接口为异步接口，本接口返回成功后需以返回的RequestID为入参，调用DescribeTaskStatus接口查询本次任务是否成功。
+     */
+    ModifyTargetWeight(req: ModifyTargetWeightRequest, cb?: (error: string, rep: ModifyTargetWeightResponse) => void): Promise<ModifyTargetWeightResponse>;
     /**
      * 创建主题，默认开启全文索引和键值索引。如果不存在CLB专有日志集，则创建失败。
      */
@@ -204,6 +209,20 @@ export declare class Client extends AbstractClient {
      */
     BatchRegisterTargets(req: BatchRegisterTargetsRequest, cb?: (error: string, rep: BatchRegisterTargetsResponse) => void): Promise<BatchRegisterTargetsResponse>;
     /**
+     * RegisterFunctionTargets 接口用来将一个云函数绑定到负载均衡的7层转发规则，在此之前您需要先行创建相关的7层监听器（HTTP、HTTPS）和转发规则。
+本接口为异步接口，本接口返回成功后需以返回的RequestID为入参，调用DescribeTaskStatus接口查询本次任务是否成功。<br/>
+限制说明：
+- 仅广州、深圳金融、上海、上海金融、北京、成都、中国香港、新加坡、孟买、东京、硅谷地域支持绑定 SCF。
+- 仅标准账户类型支持绑定 SCF，传统账户类型不支持。建议升级为标准账户类型，详情可参见 [账户类型升级说明](https://cloud.tencent.com/document/product/1199/49090)。
+- 传统型负载均衡不支持绑定 SCF。
+- 基础网络类型不支持绑定 SCF。
+- CLB 默认支持绑定同地域下的所有 SCF，可支持跨 VPC 绑定 SCF，不支持跨地域绑定。
+- 目前仅 IPv4、IPv6 NAT64 版本的负载均衡支持绑定 SCF，IPv6 版本的暂不支持。
+- 仅七层（HTTP、HTTPS）监听器支持绑定 SCF，四层（TCP、UDP、TCP SSL）监听器和七层 QUIC 监听器不支持。
+- CLB 绑定 SCF 仅支持绑定“Event 函数”类型的云函数。
+     */
+    RegisterFunctionTargets(req?: RegisterFunctionTargetsRequest, cb?: (error: string, rep: RegisterFunctionTargetsResponse) => void): Promise<RegisterFunctionTargetsResponse>;
+    /**
      * ModifyRule 接口用来修改负载均衡七层监听器下的转发规则的各项属性，包括转发路径、健康检查属性、转发策略等。
 本接口为异步接口，本接口返回成功后需以返回的RequestID为入参，调用DescribeTaskStatus接口查询本次任务是否成功。
      */
@@ -217,10 +236,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeCustomizedConfigList(req: DescribeCustomizedConfigListRequest, cb?: (error: string, rep: DescribeCustomizedConfigListResponse) => void): Promise<DescribeCustomizedConfigListResponse>;
     /**
-     * ModifyTargetWeight 接口用于修改负载均衡绑定的后端服务的转发权重。
-本接口为异步接口，本接口返回成功后需以返回的RequestID为入参，调用DescribeTaskStatus接口查询本次任务是否成功。
+     * 修改目标组的名称或者默认端口属性
      */
-    ModifyTargetWeight(req: ModifyTargetWeightRequest, cb?: (error: string, rep: ModifyTargetWeightResponse) => void): Promise<ModifyTargetWeightResponse>;
+    ModifyTargetGroupAttribute(req: ModifyTargetGroupAttributeRequest, cb?: (error: string, rep: ModifyTargetGroupAttributeResponse) => void): Promise<ModifyTargetGroupAttributeResponse>;
     /**
      * 本接口用于查询异步任务的执行状态，对于非查询类的接口（创建/删除负载均衡实例、监听器、规则以及绑定或解绑后端服务等），在接口调用成功后，都需要使用本接口查询任务最终是否执行成功。
      */
@@ -276,9 +294,20 @@ export declare class Client extends AbstractClient {
      */
     DescribeTargetGroups(req: DescribeTargetGroupsRequest, cb?: (error: string, rep: DescribeTargetGroupsResponse) => void): Promise<DescribeTargetGroupsResponse>;
     /**
-     * 修改目标组的名称或者默认端口属性
+     * DeregisterFunctionTargets 接口用来将一个云函数从负载均衡的转发规则上解绑，对于七层监听器，还需通过 LocationId 或 Domain+Url 指定转发规则。
+本接口为异步接口，本接口返回成功后需以返回的 RequestID 为入参，调用 [DescribeTaskStatus](https://cloud.tencent.com/document/product/214/30683) 接口查询本次任务是否成功。
+<br/>限制说明：
+
+- 仅广州、深圳金融、上海、上海金融、北京、成都、中国香港、新加坡、孟买、东京、硅谷地域支持绑定 SCF。
+- 仅标准账户类型支持绑定 SCF，传统账户类型不支持。建议升级为标准账户类型，详情可参见 [账户类型升级说明](https://cloud.tencent.com/document/product/1199/49090)。
+- 传统型负载均衡不支持绑定 SCF。
+- 基础网络类型不支持绑定 SCF。
+- CLB 默认支持绑定同地域下的所有 SCF，可支持跨 VPC 绑定 SCF，不支持跨地域绑定。
+- 目前仅 IPv4、IPv6 NAT64 版本的负载均衡支持绑定 SCF，IPv6 版本的暂不支持。
+- 仅七层（HTTP、HTTPS）监听器支持绑定 SCF，四层（TCP、UDP、TCP SSL）监听器和七层 QUIC 监听器不支持。
+- CLB 绑定 SCF 仅支持绑定“Event 函数”类型的云函数。
      */
-    ModifyTargetGroupAttribute(req: ModifyTargetGroupAttributeRequest, cb?: (error: string, rep: ModifyTargetGroupAttributeResponse) => void): Promise<ModifyTargetGroupAttributeResponse>;
+    DeregisterFunctionTargets(req: DeregisterFunctionTargetsRequest, cb?: (error: string, rep: DeregisterFunctionTargetsResponse) => void): Promise<DeregisterFunctionTargetsResponse>;
     /**
      * DescribeClassicalLBHealthStatus用于获取传统型负载均衡后端的健康状态
      */
