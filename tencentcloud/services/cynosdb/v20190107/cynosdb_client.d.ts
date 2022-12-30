@@ -168,7 +168,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyClusterName(req: ModifyClusterNameRequest, cb?: (error: string, rep: ModifyClusterNameResponse) => void): Promise<ModifyClusterNameResponse>;
     /**
-     * 显示集群详情
+     * 该接口（DescribeClusterDetail）显示集群详情
      */
     DescribeClusterDetail(req: DescribeClusterDetailRequest, cb?: (error: string, rep: DescribeClusterDetailResponse) => void): Promise<DescribeClusterDetailResponse>;
     /**

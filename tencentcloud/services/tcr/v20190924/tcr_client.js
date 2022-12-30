@@ -514,12 +514,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeNamespaces", req, cb);
     }
     /**
-     * 创建实例公网访问白名单策略
-     */
-    async CreateSecurityPolicies(req, cb) {
-        return this.request("CreateSecurityPolicies", req, cb);
-    }
-    /**
      * 为一个镜像版本创建签名
      */
     async CreateSignature(req, cb) {

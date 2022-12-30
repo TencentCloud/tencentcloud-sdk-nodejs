@@ -74,7 +74,6 @@ import {
   DescribeWebhookTriggerLogResponse,
   DownloadHelmChartResponse,
   ManageReplicationRequest,
-  CreateSecurityPoliciesRequest,
   DeleteWebhookTriggerResponse,
   DeleteImageLifecycleGlobalPersonalResponse,
   ModifySecurityPolicyRequest,
@@ -151,7 +150,7 @@ import {
   RegistryStatus,
   SecurityPolicy,
   DescribeNamespacePersonalRequest,
-  DeleteRepositoryPersonalResponse,
+  CreateWebhookTriggerResponse,
   CreateInstanceTokenResponse,
   DescribeApplicationTriggerLogPersonalResp,
   DeleteImagePersonalRequest,
@@ -186,7 +185,6 @@ import {
   DescribeInstanceTokenRequest,
   BatchDeleteRepositoryPersonalResponse,
   CreateNamespaceRequest,
-  CreateSecurityPoliciesResponse,
   BatchDeleteRepositoryPersonalRequest,
   GCJobInfo,
   Registry,
@@ -278,7 +276,7 @@ import {
   DescribeTagRetentionExecutionResponse,
   CreateNamespacePersonalRequest,
   DeleteImmutableTagRulesRequest,
-  CreateWebhookTriggerResponse,
+  DeleteRepositoryPersonalResponse,
   CreateSignaturePolicyRequest,
   DeleteTagRetentionRuleRequest,
   ReplicationFilter,
@@ -1113,16 +1111,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeNamespacesResponse) => void
   ): Promise<DescribeNamespacesResponse> {
     return this.request("DescribeNamespaces", req, cb)
-  }
-
-  /**
-   * 创建实例公网访问白名单策略
-   */
-  async CreateSecurityPolicies(
-    req: CreateSecurityPoliciesRequest,
-    cb?: (error: string, rep: CreateSecurityPoliciesResponse) => void
-  ): Promise<CreateSecurityPoliciesResponse> {
-    return this.request("CreateSecurityPolicies", req, cb)
   }
 
   /**

@@ -3946,7 +3946,7 @@ export interface DescribeInLongAgentListRequest {
       */
     AgentName?: string;
     /**
-      * 集群类型，1：TKE Agent，2：BOSS SDK，默认：1
+      * 集群类型，1：TKE Agent，2：BOSS SDK，默认：1，3：CVM，4：自建服务器 【传多个用逗号分割】
       */
     AgentType?: number;
     /**
@@ -3969,6 +3969,10 @@ export interface DescribeInLongAgentListRequest {
       * 名称搜索是否开启模糊匹配，1：开启，0：不开启（精确匹配）
       */
     Like?: number;
+    /**
+      * agent类型【多个用逗号分隔】
+      */
+    AgentTypes?: string;
 }
 /**
  * DescribeRuleExecLog返回参数结构体
@@ -5863,6 +5867,21 @@ export interface InLongAgentDetail {
       * 关联任务数
       */
     TaskCount: number;
+    /**
+      * 采集器组ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AgentGroupId: string;
+    /**
+      * agent状态统计
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CvmAgentStatusList: Array<CvmAgentStatus>;
+    /**
+      * agent数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AgentTotal: number;
 }
 /**
  * ModifyDataSource请求参数结构体
@@ -6155,6 +6174,21 @@ export interface DescribeRulesByPageResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 采集器状态统计
+ */
+export interface CvmAgentStatus {
+    /**
+      * agent状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Status: string;
+    /**
+      * 对应状态的agent总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Count: number;
 }
 /**
  * DescribeRuleTablesByPage请求参数结构体

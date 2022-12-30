@@ -268,7 +268,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyClusterName", req, cb);
     }
     /**
-     * 显示集群详情
+     * 该接口（DescribeClusterDetail）显示集群详情
      */
     async DescribeClusterDetail(req, cb) {
         return this.request("DescribeClusterDetail", req, cb);

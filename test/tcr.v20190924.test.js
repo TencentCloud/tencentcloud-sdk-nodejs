@@ -828,16 +828,6 @@ it("tcr.v20190924.DescribeNamespaces", async function () {
     }
 })
 
-it("tcr.v20190924.CreateSecurityPolicies", async function () {
-    try {
-       const data = await client.CreateSecurityPolicies({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("tcr.v20190924.CreateSignature", async function () {
     try {
        const data = await client.CreateSignature({})

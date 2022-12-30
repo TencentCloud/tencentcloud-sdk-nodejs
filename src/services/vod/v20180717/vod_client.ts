@@ -80,6 +80,7 @@ import {
   DescribeDailyMediaPlayStatResponse,
   ModifySubAppIdInfoRequest,
   DeletePersonSampleRequest,
+  ProcedureReviewAudioVideoTaskInput,
   AiRecognitionTaskAsrWordsSegmentItem,
   AiRecognitionTaskInput,
   AudioTemplateInfo,

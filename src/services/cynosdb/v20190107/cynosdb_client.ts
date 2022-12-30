@@ -32,6 +32,7 @@ import {
   RollBackClusterRequest,
   DescribeAuditLogFilesResponse,
   SwitchClusterZoneResponse,
+  ModifyParamItem,
   AssociateSecurityGroupsRequest,
   DescribeBinlogDownloadUrlRequest,
   CreateAccountsResponse,
@@ -607,7 +608,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 显示集群详情
+   * 该接口（DescribeClusterDetail）显示集群详情
    */
   async DescribeClusterDetail(
     req: DescribeClusterDetailRequest,

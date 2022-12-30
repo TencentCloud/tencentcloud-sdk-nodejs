@@ -325,6 +325,20 @@ export interface DDoSAttackEventDetailData {
     PolicyId: number;
 }
 /**
+ * DescribeOriginProtection返回参数结构体
+ */
+export interface DescribeOriginProtectionResponse {
+    /**
+      * 源站防护信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OriginProtectionInfo: Array<OriginProtectionInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeBotData返回参数结构体
  */
 export interface DescribeBotDataResponse {
@@ -2700,6 +2714,27 @@ export interface SecEntryValue {
     Sum: number;
 }
 /**
+ * 最新IP白名单列表相比于当前IP白名单列表的区别
+ */
+export interface DiffIPWhitelist {
+    /**
+      * 最新IP白名单列表。
+      */
+    LatestIPWhitelist: IPWhitelist;
+    /**
+      * 最新IP白名单列表相比于当前IP白名单列表，新增部分。
+      */
+    AddedIPWhitelist: IPWhitelist;
+    /**
+      * 最新IP白名单列表相比于当前IP白名单列表，删减部分。
+      */
+    RemovedIPWhitelist: IPWhitelist;
+    /**
+      * 最新IP白名单列表相比于当前IP白名单列表，不变部分。
+      */
+    NoChangeIPWhitelist: IPWhitelist;
+}
+/**
  * ModifyAlarmDefaultThreshold返回参数结构体
  */
 export interface ModifyAlarmDefaultThresholdResponse {
@@ -4617,6 +4652,15 @@ export interface SpeedTestingMetricData {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     OriginLoadTime: number;
+}
+/**
+ * UpdateOriginProtectionIPWhitelist返回参数结构体
+ */
+export interface UpdateOriginProtectionIPWhitelistResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeIdentifications请求参数结构体
@@ -7565,6 +7609,29 @@ export interface Resource {
     Area: string;
 }
 /**
+ * DescribeOriginProtection请求参数结构体
+ */
+export interface DescribeOriginProtectionRequest {
+    /**
+      * 查询的站点集合，不填默认查询所有站点。
+      */
+    ZoneIds?: Array<string>;
+    /**
+      * 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：
+<li>need-update<br>   按照【<strong>站点是否需要更新源站防护IP白名单</strong>】进行过滤。<br>   类型：String<br>   必选：否<br>   可选项：<br>   true：需要更新<br>   false：无需更新<br></li>
+<li>plan-support<br>   按照【<strong>站点套餐是否支持源站防护</strong>】进行过滤。<br>   类型：String<br>   必选：否<br>   可选项：<br>   true：支持<br>   false：不支持<br></li>
+      */
+    Filters?: Filter;
+    /**
+      * 分页查询偏移量，默认为0。
+      */
+    Offset?: number;
+    /**
+      * 分页查询限制数目。默认值：20，最大值：1000。
+      */
+    Limit?: number;
+}
+/**
  * DescribeHostsSetting请求参数结构体
  */
 export interface DescribeHostsSettingRequest {
@@ -8333,6 +8400,52 @@ export interface DDoSAclRule {
     Action: string;
 }
 /**
+ * 源站防护信息
+ */
+export interface OriginProtectionInfo {
+    /**
+      * 站点ID。
+      */
+    ZoneId: string;
+    /**
+      * 域名列表。
+      */
+    Hosts: Array<string>;
+    /**
+      * 代理ID列表。
+      */
+    ProxyIds: Array<string>;
+    /**
+      * 当前版本的IP白名单。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CurrentIPWhitelist: IPWhitelist;
+    /**
+      * 该站点是否需要更新源站白名单，取值有：
+<li>true ：需要更新IP白名单 ；</li>
+<li>false ：无需更新IP白名单。</li>
+      */
+    NeedUpdate: boolean;
+    /**
+      * 源站防护状态，取值有：
+<li>online ：源站防护启用中 ；</li>
+<li>offline ：源站防护已停用 ；</li>
+<li>nonactivate ：源站防护未激活，仅在从未使用过源站防护功能的站点调用中返回。</li>
+      */
+    Status: string;
+    /**
+      * 站点套餐是否支持源站防护，取值有：
+<li>true ：支持 ；</li>
+<li>false ：不支持。</li>
+      */
+    PlanSupport: boolean;
+    /**
+      * 最新IP白名单与当前IP白名单的对比。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DiffIPWhitelist: DiffIPWhitelist;
+}
+/**
  * DescribeBotTopData返回参数结构体
  */
 export interface DescribeBotTopDataResponse {
@@ -9098,6 +9211,19 @@ export interface SecurityType {
     Switch: string;
 }
 /**
+ * 源站防护IP白名单
+ */
+export interface IPWhitelist {
+    /**
+      * IPv4列表。
+      */
+    IPv4: Array<string>;
+    /**
+      * IPv6列表。
+      */
+    IPv6: Array<string>;
+}
+/**
  * ModifyRule返回参数结构体
  */
 export interface ModifyRuleResponse {
@@ -9265,6 +9391,15 @@ export interface ModifyAlarmConfigRequest {
       * 是否使用默认值，只有在不传Threshold或者Threshold=0时该参数有效。
       */
     IsDefault?: boolean;
+}
+/**
+ * UpdateOriginProtectionIPWhitelist请求参数结构体
+ */
+export interface UpdateOriginProtectionIPWhitelistRequest {
+    /**
+      * 站点ID。
+      */
+    ZoneId: string;
 }
 /**
  * DeleteLogTopicTask返回参数结构体

@@ -236,6 +236,10 @@ export interface RollBackClusterRequest {
       * 回档数据库表列表
       */
     RollbackTables?: Array<RollbackTable>;
+    /**
+      * 按时间点回档模式，full: 普通; db: 快速; table: 极速  （默认是普通）
+      */
+    RollbackMode?: string;
 }
 /**
  * DescribeAuditLogFiles返回参数结构体
@@ -266,6 +270,24 @@ export interface SwitchClusterZoneResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 修改的实例参数信息
+ */
+export interface ModifyParamItem {
+    /**
+      * 参数名
+      */
+    ParamName: string;
+    /**
+      * 参数当前值
+      */
+    CurrentValue: string;
+    /**
+      * 参数旧值（只在出参时有用）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OldValue?: string;
 }
 /**
  * AssociateSecurityGroups请求参数结构体
@@ -3572,6 +3594,14 @@ export interface AddInstancesRequest {
       * 交易模式 0-下单并支付 1-下单
       */
     DealMode?: number;
+    /**
+      * 参数模版ID
+      */
+    ParamTemplateId?: number;
+    /**
+      * 参数列表，ParamTemplateId 传入时InstanceParams才有效
+      */
+    InstanceParams?: Array<ModifyParamItem>;
 }
 /**
  * ModifyClusterSlaveZone请求参数结构体
@@ -4187,9 +4217,13 @@ export interface DeleteBackupRequest {
       */
     ClusterId: string;
     /**
-      * 备份文件ID
+      * 备份文件ID，旧版本使用的字段，不推荐使用
       */
-    SnapshotIdList: Array<number>;
+    SnapshotIdList?: Array<number>;
+    /**
+      * 备份文件ID，推荐使用
+      */
+    BackupIds?: Array<number>;
 }
 /**
  * 计费询价结果

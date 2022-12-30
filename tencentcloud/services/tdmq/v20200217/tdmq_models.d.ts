@@ -1807,6 +1807,14 @@ export interface RocketMQTopic {
       */
     Name: string;
     /**
+      * 主题的类别，为枚举类型，Normal，GlobalOrder，PartitionedOrder，Transaction，Retry及DeadLetter
+      */
+    Type: string;
+    /**
+      * 订阅组数量
+      */
+    GroupNum: number;
+    /**
       * 说明
 注意：此字段可能返回 null，表示取不到有效值。
       */

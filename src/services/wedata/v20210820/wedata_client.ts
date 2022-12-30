@@ -252,6 +252,7 @@ import {
   RecordField,
   DescribeQualityScoreResponse,
   DescribeRulesByPageResponse,
+  CvmAgentStatus,
   DescribeRuleTablesByPageRequest,
   TopTableStatItem,
   DeleteRuleResponse,

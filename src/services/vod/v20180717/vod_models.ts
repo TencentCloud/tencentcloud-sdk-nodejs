@@ -1622,6 +1622,11 @@ export interface ResetProcedureTemplateRequest {
   Name: string
 
   /**
+   * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+   */
+  SubAppId?: number
+
+  /**
    * 模板描述信息，长度限制：256 个字符。
    */
   Comment?: string
@@ -1632,8 +1637,9 @@ export interface ResetProcedureTemplateRequest {
   MediaProcessTask?: MediaProcessTaskInput
 
   /**
-   * AI 智能内容审核类型任务参数。
-   */
+      * AI 智能内容审核类型任务参数 \*。
+<font color=red>\*：该参数用于发起旧版审核，不建议使用。推荐使用 ReviewAudioVideoTask 参数发起审核。</font> 
+      */
   AiContentReviewTask?: AiContentReviewTaskInput
 
   /**
@@ -1647,9 +1653,9 @@ export interface ResetProcedureTemplateRequest {
   AiRecognitionTask?: AiRecognitionTaskInput
 
   /**
-   * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+   * 音视频审核类型任务参数。
    */
-  SubAppId?: number
+  ReviewAudioVideoTask?: ProcedureReviewAudioVideoTaskInput
 }
 
 /**
@@ -1885,6 +1891,23 @@ export interface DeletePersonSampleRequest {
    * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
    */
   SubAppId?: number
+}
+
+/**
+ * 任务流模板音视频审核输入参数类型。
+ */
+export interface ProcedureReviewAudioVideoTaskInput {
+  /**
+   * 审核模板。
+   */
+  Definition: number
+
+  /**
+      * 审核的内容，可选值：
+<li>Media：原始音视频。</li>
+不填或填空数组时，默认为审核 Media。
+      */
+  ReviewContents?: Array<string>
 }
 
 /**
@@ -2671,8 +2694,9 @@ export interface CreateProcedureTemplateRequest {
   MediaProcessTask?: MediaProcessTaskInput
 
   /**
-   * AI 内容审核类型任务参数。
-   */
+      * AI 内容审核类型任务参数 \*。
+<font color=red>\*：该参数用于发起旧版审核，不建议使用。推荐使用 ReviewAudioVideoTask 参数发起审核。</font> 
+      */
   AiContentReviewTask?: AiContentReviewTaskInput
 
   /**
@@ -2684,6 +2708,11 @@ export interface CreateProcedureTemplateRequest {
    * AI 内容识别类型任务参数。
    */
   AiRecognitionTask?: AiRecognitionTaskInput
+
+  /**
+   * 音视频审核类型任务参数。
+   */
+  ReviewAudioVideoTask?: ProcedureReviewAudioVideoTaskInput
 }
 
 /**
@@ -5936,6 +5965,11 @@ export interface ModifyAnimatedGraphicsTemplateRequest {
  */
 export interface DescribeProcedureTemplatesRequest {
   /**
+   * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+   */
+  SubAppId?: number
+
+  /**
    * 任务流模板名字过滤条件，数组长度限制：100。
    */
   Names?: Array<string>
@@ -5956,11 +5990,6 @@ export interface DescribeProcedureTemplatesRequest {
    * 返回记录条数，默认值：10，最大值：100。
    */
   Limit?: number
-
-  /**
-   * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
-   */
-  SubAppId?: number
 }
 
 /**
@@ -9999,59 +10028,66 @@ export interface ProcedureTemplate {
   /**
    * 任务流名字。
    */
-  Name: string
+  Name?: string
 
   /**
       * 任务流模板类型，取值范围：
 <li>Preset：系统预置任务流模板；</li>
 <li>Custom：用户自定义任务流模板。</li>
       */
-  Type: string
+  Type?: string
 
   /**
    * 模板描述信息，长度限制：256 个字符。
    */
-  Comment: string
+  Comment?: string
 
   /**
       * 视频处理类型任务参数。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  MediaProcessTask: MediaProcessTaskInput
+  MediaProcessTask?: MediaProcessTaskInput
 
   /**
-      * AI 智能审核类型任务参数。
+      * AI 智能审核类型任务参数 \*。
+<font color=red>\*：该参数用于发起旧版审核，不建议使用。推荐使用 ReviewAudioVideoTask 参数发起审核。</font> 
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  AiContentReviewTask: AiContentReviewTaskInput
+  AiContentReviewTask?: AiContentReviewTaskInput
 
   /**
       * AI 智能内容分析类型任务参数。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  AiAnalysisTask: AiAnalysisTaskInput
+  AiAnalysisTask?: AiAnalysisTaskInput
 
   /**
       * AI 内容识别类型任务参数。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  AiRecognitionTask: AiRecognitionTaskInput
+  AiRecognitionTask?: AiRecognitionTaskInput
 
   /**
       * 微信小程序发布任务参数。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  MiniProgramPublishTask: WechatMiniProgramPublishTaskInput
+  MiniProgramPublishTask?: WechatMiniProgramPublishTaskInput
+
+  /**
+      * 音视频审核类型任务参数。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ReviewAudioVideoTask?: ProcedureReviewAudioVideoTaskInput
 
   /**
    * 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
    */
-  CreateTime: string
+  CreateTime?: string
 
   /**
    * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
    */
-  UpdateTime: string
+  UpdateTime?: string
 }
 
 /**

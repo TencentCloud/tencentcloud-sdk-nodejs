@@ -292,6 +292,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteOriginGroup", req, cb);
     }
     /**
+     * 更新源站防护IP白名单
+     */
+    async UpdateOriginProtectionIPWhitelist(req, cb) {
+        return this.request("UpdateOriginProtectionIPWhitelist", req, cb);
+    }
+    /**
      * 本接口（DownloadL4Logs）用于下载四层离线日志。
      */
     async DownloadL4Logs(req, cb) {
@@ -644,6 +650,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeHostsSetting(req, cb) {
         return this.request("DescribeHostsSetting", req, cb);
+    }
+    /**
+     * 查询源站防护信息
+     */
+    async DescribeOriginProtection(req, cb) {
+        return this.request("DescribeOriginProtection", req, cb);
     }
     /**
      * 本接口（DescribeLogSets）用于获取日志集列表。

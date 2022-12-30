@@ -458,6 +458,16 @@ it("teo.v20220901.DeleteOriginGroup", async function () {
     }
 })
 
+it("teo.v20220901.UpdateOriginProtectionIPWhitelist", async function () {
+    try {
+       const data = await client.UpdateOriginProtectionIPWhitelist({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("teo.v20220901.DownloadL4Logs", async function () {
     try {
        const data = await client.DownloadL4Logs({})
@@ -1041,6 +1051,16 @@ it("teo.v20220901.ModifyZoneCnameSpeedUp", async function () {
 it("teo.v20220901.DescribeHostsSetting", async function () {
     try {
        const data = await client.DescribeHostsSetting({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("teo.v20220901.DescribeOriginProtection", async function () {
+    try {
+       const data = await client.DescribeOriginProtection({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

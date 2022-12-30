@@ -1029,23 +1029,6 @@ export interface ManageReplicationRequest {
     PeerReplicationOption?: PeerReplicationOption;
 }
 /**
- * CreateSecurityPolicies请求参数结构体
- */
-export interface CreateSecurityPoliciesRequest {
-    /**
-      * 实例Id
-      */
-    RegistryId: string;
-    /**
-      * 192.168.0.0/24
-      */
-    CidrBlock: string;
-    /**
-      * 描述
-      */
-    Description?: string;
-}
-/**
  * DeleteWebhookTrigger返回参数结构体
  */
 export interface DeleteWebhookTriggerResponse {
@@ -2286,9 +2269,13 @@ export interface DescribeNamespacePersonalRequest {
     Offset: number;
 }
 /**
- * DeleteRepositoryPersonal返回参数结构体
+ * CreateWebhookTrigger返回参数结构体
  */
-export interface DeleteRepositoryPersonalResponse {
+export interface CreateWebhookTriggerResponse {
+    /**
+      * 新建的触发器
+      */
+    Trigger?: WebhookTrigger;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2883,19 +2870,6 @@ export interface CreateNamespaceRequest {
       * 云标签描述
       */
     TagSpecification?: TagSpecification;
-}
-/**
- * CreateSecurityPolicies返回参数结构体
- */
-export interface CreateSecurityPoliciesResponse {
-    /**
-      * 实例Id
-      */
-    RegistryId?: string;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
 }
 /**
  * BatchDeleteRepositoryPersonal请求参数结构体
@@ -4441,13 +4415,9 @@ export interface DeleteImmutableTagRulesRequest {
     RuleId: number;
 }
 /**
- * CreateWebhookTrigger返回参数结构体
+ * DeleteRepositoryPersonal返回参数结构体
  */
-export interface CreateWebhookTriggerResponse {
-    /**
-      * 新建的触发器
-      */
-    Trigger?: WebhookTrigger;
+export interface DeleteRepositoryPersonalResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

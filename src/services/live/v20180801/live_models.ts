@@ -877,62 +877,64 @@ export interface DomainCertInfo {
   /**
    * 证书Id。
    */
-  CertId: number
+  CertId?: number
 
   /**
    * 证书名称。
    */
-  CertName: string
+  CertName?: string
 
   /**
    * 描述信息。
    */
-  Description: string
+  Description?: string
 
   /**
-   * 创建时间，UTC格式。
-   */
-  CreateTime: string
+      * 创建时间，UTC格式。
+注：此字段为北京时间（UTC+8时区）。
+      */
+  CreateTime?: string
 
   /**
    * 证书内容。
    */
-  HttpsCrt: string
+  HttpsCrt?: string
 
   /**
       * 证书类型。
 0：用户添加证书，
 1：腾讯云托管证书。
       */
-  CertType: number
+  CertType?: number
 
   /**
-   * 证书过期时间，UTC格式。
-   */
-  CertExpireTime: string
+      * 证书过期时间，UTC格式。
+注：此字段为北京时间（UTC+8时区）。
+      */
+  CertExpireTime?: string
 
   /**
    * 使用此证书的域名名称。
    */
-  DomainName: string
+  DomainName?: string
 
   /**
    * 证书状态。
    */
-  Status: number
+  Status?: number
 
   /**
       * 证书本身标识的域名列表。
 比如: ["*.x.com"]
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  CertDomains: Array<string>
+  CertDomains?: Array<string>
 
   /**
       * 腾讯云ssl的证书Id
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  CloudCertId: string
+  CloudCertId?: string
 }
 
 /**
@@ -1183,38 +1185,39 @@ export interface DomainInfo {
   /**
    * 直播域名。
    */
-  Name: string
+  Name?: string
 
   /**
       * 域名类型:
 0: 推流。
 1: 播放。
       */
-  Type: number
+  Type?: number
 
   /**
       * 域名状态:
 0: 停用。
 1: 启用。
       */
-  Status: number
+  Status?: number
 
   /**
-   * 添加时间。
-   */
-  CreateTime: string
+      * 添加时间。
+注：此字段为北京时间（UTC+8时区）。
+      */
+  CreateTime?: string
 
   /**
       * 是否有 CName 到固定规则域名:
 0: 否。
 1: 是。
       */
-  BCName: number
+  BCName?: number
 
   /**
    * cname 对应的域名。
    */
-  TargetDomain: string
+  TargetDomain?: string
 
   /**
       * 播放区域，只在 Type=1 时该参数有意义。
@@ -1222,36 +1225,37 @@ export interface DomainInfo {
 2: 全球。
 3: 海外。
       */
-  PlayType: number
+  PlayType?: number
 
   /**
       * 是否慢直播:
 0: 普通直播。
 1: 慢直播。
       */
-  IsDelayLive: number
+  IsDelayLive?: number
 
   /**
    * 当前客户使用的 cname 信息。
    */
-  CurrentCName: string
+  CurrentCName?: string
 
   /**
    * 失效参数，可忽略。
    */
-  RentTag: number
+  RentTag?: number
 
   /**
-   * 失效参数，可忽略。
-   */
-  RentExpireTime: string
+      * 失效参数，可忽略。
+注：此字段为北京时间（UTC+8时区）。
+      */
+  RentExpireTime?: string
 
   /**
       * 0: 标准直播。
 1: 小程序直播。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  IsMiniProgramLive: number
+  IsMiniProgramLive?: number
 }
 
 /**
@@ -2042,22 +2046,23 @@ export interface LogInfo {
   /**
    * 日志名称。
    */
-  LogName: string
+  LogName?: string
 
   /**
    * 日志 URL。
    */
-  LogUrl: string
+  LogUrl?: string
 
   /**
-   * 日志生成时间。
-   */
-  LogTime: string
+      * 日志生成时间。
+注：此字段为北京时间（UTC+8时区）。
+      */
+  LogTime?: string
 
   /**
    * 文件大小。
    */
-  FileSize: number
+  FileSize?: number
 }
 
 /**
@@ -2597,34 +2602,36 @@ export interface CreateLiveRecordResponse {
  */
 export interface RuleInfo {
   /**
-   * 规则创建时间。
-   */
-  CreateTime: string
+      * 规则创建时间。
+注：此字段为北京时间（UTC+8时区）。
+      */
+  CreateTime?: string
 
   /**
-   * 规则更新时间。
-   */
-  UpdateTime: string
+      * 规则更新时间。
+注：此字段为北京时间（UTC+8时区）。
+      */
+  UpdateTime?: string
 
   /**
    * 模板 ID。
    */
-  TemplateId: number
+  TemplateId?: number
 
   /**
    * 推流域名。
    */
-  DomainName: string
+  DomainName?: string
 
   /**
    * 推流路径。
    */
-  AppName: string
+  AppName?: string
 
   /**
    * 流名称。
    */
-  StreamName: string
+  StreamName?: string
 }
 
 /**
@@ -2713,14 +2720,14 @@ export interface LivePackageInfo {
   /**
    * 包 ID。
    */
-  Id: string
+  Id?: string
 
   /**
       * 总量。
 注意：当为流量包时单位为字节。
 当为转码包时单位为分钟。
       */
-  Total: number
+  Total?: number
 
   /**
       * 使用量。
@@ -2728,7 +2735,7 @@ export interface LivePackageInfo {
 当为转码包时单位为分钟。
 当为连麦包时单位为小时。
       */
-  Used: number
+  Used?: number
 
   /**
       * 剩余量。
@@ -2736,17 +2743,19 @@ export interface LivePackageInfo {
 当为转码包时单位为分钟。
 当为连麦包时单位为小时。
       */
-  Left: number
+  Left?: number
 
   /**
-   * 购买时间。
-   */
-  BuyTime: string
+      * 购买时间。
+注：此字段为北京时间（UTC+8时区）。
+      */
+  BuyTime?: string
 
   /**
-   * 过期时间。
-   */
-  ExpireTime: string
+      * 过期时间。
+注：此字段为北京时间（UTC+8时区）。
+      */
+  ExpireTime?: string
 
   /**
       * 包类型，可选值:
@@ -2755,7 +2764,7 @@ export interface LivePackageInfo {
 2: 极速高清包。
 3: 连麦包。
       */
-  Type: number
+  Type?: number
 
   /**
       * 包状态，可选值:
@@ -2766,7 +2775,7 @@ export interface LivePackageInfo {
 4: 已耗尽。
 5: 已退款
       */
-  Status: number
+  Status?: number
 }
 
 /**
@@ -3073,47 +3082,48 @@ export interface WatermarkInfo {
   /**
    * 水印 ID。
    */
-  WatermarkId: number
+  WatermarkId?: number
 
   /**
    * 水印图片 URL。
    */
-  PictureUrl: string
+  PictureUrl?: string
 
   /**
    * 显示位置，X 轴偏移。
    */
-  XPosition: number
+  XPosition?: number
 
   /**
    * 显示位置，Y 轴偏移。
    */
-  YPosition: number
+  YPosition?: number
 
   /**
    * 水印名称。
    */
-  WatermarkName: string
+  WatermarkName?: string
 
   /**
    * 当前状态。0：未使用，1:使用中。
    */
-  Status: number
+  Status?: number
 
   /**
-   * 添加时间。
-   */
-  CreateTime: string
+      * 添加时间。
+注：此字段为北京时间（UTC+8时区）。
+      */
+  CreateTime?: string
 
   /**
    * 水印宽。
    */
-  Width: number
+  Width?: number
 
   /**
    * 水印高。
    */
-  Height: number
+  Height?: number
 }
 
 /**
@@ -5797,44 +5807,46 @@ export interface CertInfo {
   /**
    * 证书 ID。
    */
-  CertId: number
+  CertId?: number
 
   /**
    * 证书名称。
    */
-  CertName: string
+  CertName?: string
 
   /**
    * 描述信息。
    */
-  Description: string
+  Description?: string
 
   /**
-   * 创建时间，UTC 格式。
-   */
-  CreateTime: string
+      * 创建时间，UTC 格式。
+注：此字段为北京时间（UTC+8时区）。
+      */
+  CreateTime?: string
 
   /**
    * 证书内容。
    */
-  HttpsCrt: string
+  HttpsCrt?: string
 
   /**
       * 证书类型。
 0：用户添加证书，
 1：腾讯云托管证书。
       */
-  CertType: number
+  CertType?: number
 
   /**
-   * 证书过期时间，UTC 格式。
-   */
-  CertExpireTime: string
+      * 证书过期时间，UTC 格式。
+注：此字段为北京时间（UTC+8时区）。
+      */
+  CertExpireTime?: string
 
   /**
    * 使用此证书的域名列表。
    */
-  DomainList: Array<string>
+  DomainList?: Array<string>
 }
 
 /**
@@ -7040,29 +7052,31 @@ export interface DescribeAreaBillBandwidthAndFluxListRequest {
  */
 export interface CallBackRuleInfo {
   /**
-   * 规则创建时间。
-   */
-  CreateTime: string
+      * 规则创建时间。
+注：此字段为北京时间（UTC+8时区）。
+      */
+  CreateTime?: string
 
   /**
-   * 规则更新时间。
-   */
-  UpdateTime: string
+      * 规则更新时间。
+注：此字段为北京时间（UTC+8时区）。
+      */
+  UpdateTime?: string
 
   /**
    * 模板 ID。
    */
-  TemplateId: number
+  TemplateId?: number
 
   /**
    * 推流域名。
    */
-  DomainName: string
+  DomainName?: string
 
   /**
    * 推流路径。
    */
-  AppName: string
+  AppName?: string
 }
 
 /**
@@ -7365,47 +7379,49 @@ export interface LiveDomainCertBindings {
   /**
    * 域名。
    */
-  DomainName: string
+  DomainName?: string
 
   /**
    * 证书备注。与CertName同义。
    */
-  CertificateAlias: string
+  CertificateAlias?: string
 
   /**
       * 证书类型。
 0：自有证书
 1：腾讯云ssl托管证书
       */
-  CertType: number
+  CertType?: number
 
   /**
       * https状态。
 1：已开启。
 0：已关闭。
       */
-  Status: number
+  Status?: number
 
   /**
-   * 证书过期时间。
-   */
-  CertExpireTime: string
+      * 证书过期时间。
+注：此字段为北京时间（UTC+8时区）。
+      */
+  CertExpireTime?: string
 
   /**
    * 证书Id。
    */
-  CertId: number
+  CertId?: number
 
   /**
    * 腾讯云ssl的证书Id。
    */
-  CloudCertId: string
+  CloudCertId?: string
 
   /**
       * 规则最后更新时间。
+注：此字段为北京时间（UTC+8时区）。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  UpdateTime: string
+  UpdateTime?: string
 }
 
 /**
@@ -8253,29 +8269,31 @@ export interface ForbidStreamInfo {
   /**
    * 流名称。
    */
-  StreamName: string
+  StreamName?: string
 
   /**
-   * 创建时间。
-   */
-  CreateTime: string
+      * 创建时间。
+注：此字段为北京时间（UTC+8时区）。
+      */
+  CreateTime?: string
 
   /**
-   * 禁推过期时间。
-   */
-  ExpireTime: string
+      * 禁推过期时间。
+注：此字段为北京时间（UTC+8时区）。
+      */
+  ExpireTime?: string
 
   /**
       * 推流路径。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  AppName: string
+  AppName?: string
 
   /**
       * 推流域名。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  DomainName: string
+  DomainName?: string
 }
 
 /**

@@ -30,6 +30,7 @@ import {
   DescribeRulesResponse,
   TimingDataRecord,
   DDoSAttackEventDetailData,
+  DescribeOriginProtectionResponse,
   DescribeBotDataResponse,
   Tag,
   RateLimitConfig,
@@ -123,6 +124,7 @@ import {
   MaxAge,
   DeleteApplicationProxyResponse,
   SecEntryValue,
+  DiffIPWhitelist,
   ModifyAlarmDefaultThresholdResponse,
   CreateCredentialRequest,
   ModifyRuleRequest,
@@ -192,6 +194,7 @@ import {
   DeleteOriginGroupResponse,
   CreateSecurityDropPageResponse,
   SpeedTestingMetricData,
+  UpdateOriginProtectionIPWhitelistResponse,
   DescribeIdentificationsRequest,
   ModifyHostsCertificateResponse,
   CreateLogSetRequest,
@@ -313,6 +316,7 @@ import {
   DescribeTopL7AnalysisDataResponse,
   ClientIpHeader,
   Resource,
+  DescribeOriginProtectionRequest,
   DescribeHostsSettingRequest,
   DescribeBotHitRuleDetailResponse,
   DescribeDDoSAttackEventDetailRequest,
@@ -346,6 +350,7 @@ import {
   ModifyZoneResponse,
   WafGroupRule,
   DDoSAclRule,
+  OriginProtectionInfo,
   DescribeBotTopDataResponse,
   DescribeBotClientIpListRequest,
   AliasDomain,
@@ -374,6 +379,7 @@ import {
   SpeedTestingStatistics,
   BindZoneToPlanRequest,
   SecurityType,
+  IPWhitelist,
   ModifyRuleResponse,
   CheckCertificateResponse,
   DescribeWebProtectionDataRequest,
@@ -382,6 +388,7 @@ import {
   ModifyApplicationProxyStatusResponse,
   Identification,
   ModifyAlarmConfigRequest,
+  UpdateOriginProtectionIPWhitelistRequest,
   DeleteLogTopicTaskResponse,
   TopEntry,
   DescribeRulesSettingResponse,
@@ -866,6 +873,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteOriginGroupResponse) => void
   ): Promise<DeleteOriginGroupResponse> {
     return this.request("DeleteOriginGroup", req, cb)
+  }
+
+  /**
+   * 更新源站防护IP白名单
+   */
+  async UpdateOriginProtectionIPWhitelist(
+    req: UpdateOriginProtectionIPWhitelistRequest,
+    cb?: (error: string, rep: UpdateOriginProtectionIPWhitelistResponse) => void
+  ): Promise<UpdateOriginProtectionIPWhitelistResponse> {
+    return this.request("UpdateOriginProtectionIPWhitelist", req, cb)
   }
 
   /**
@@ -1456,6 +1473,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeHostsSettingResponse) => void
   ): Promise<DescribeHostsSettingResponse> {
     return this.request("DescribeHostsSetting", req, cb)
+  }
+
+  /**
+   * 查询源站防护信息
+   */
+  async DescribeOriginProtection(
+    req: DescribeOriginProtectionRequest,
+    cb?: (error: string, rep: DescribeOriginProtectionResponse) => void
+  ): Promise<DescribeOriginProtectionResponse> {
+    return this.request("DescribeOriginProtection", req, cb)
   }
 
   /**
