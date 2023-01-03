@@ -562,6 +562,14 @@ export interface BindingPolicyObjectRequest {
       * 需要绑定的对象维度信息
       */
     Dimensions?: Array<BindingPolicyObjectDimension>;
+    /**
+      * 事件配置的告警
+      */
+    EbSubject?: string;
+    /**
+      * 是否配置了事件告警
+      */
+    EbEventFlag?: number;
 }
 /**
  * CreateServiceDiscovery返回参数结构体
@@ -822,6 +830,10 @@ export interface CreateAlarmPolicyRequest {
       * 迁移策略专用字段，0-走鉴权逻辑，1-跳过鉴权逻辑
       */
     MigrateFlag?: number;
+    /**
+      * 事件配置的告警
+      */
+    EbSubject?: string;
 }
 /**
  * EnableGrafanaSSO返回参数结构体
@@ -2121,6 +2133,10 @@ export interface ModifyAlarmNoticeRequest {
       * 告警通知推送到CLS服务 最多1个
       */
     CLSNotices?: Array<CLSNotice>;
+    /**
+      * 告警通知模板绑定的告警策略ID列表
+      */
+    PolicyIds?: Array<string>;
 }
 /**
  * CreateServiceDiscovery请求参数结构体
@@ -3607,6 +3623,35 @@ export interface ModifyAlarmPolicyConditionRequest {
       * 日志告警创建请求参数信息
       */
     LogAlarmReqInfo?: LogAlarmReq;
+    /**
+      * 模版id，专供prom使用
+      */
+    NoticeIds?: Array<string>;
+    /**
+      * 启停状态，0=停用，1=启用
+      */
+    Enable?: number;
+    /**
+      * 专供prom策略名称
+      */
+    PolicyName?: string;
+    /**
+      * 事件配置的告警
+      */
+    EbSubject?: string;
+}
+/**
+ * 通知模版与策略绑定关系
+ */
+export interface NoticeBindPolicys {
+    /**
+      * 告警通知模板 ID
+      */
+    NoticeId?: string;
+    /**
+      * 告警通知模板绑定的告警策略ID列表
+      */
+    PolicyIds?: Array<string>;
 }
 /**
  * DeleteSSOAccount请求参数结构体
@@ -4858,6 +4903,10 @@ export interface DeleteAlarmNoticesRequest {
       * 告警通知模板id列表
       */
     NoticeIds: Array<string>;
+    /**
+      * 通知模版与策略绑定关系
+      */
+    NoticeBindPolicys?: Array<NoticeBindPolicys>;
 }
 /**
  * DescribeExporterIntegrations返回参数结构体
@@ -5643,6 +5692,14 @@ export interface UnBindingPolicyObjectRequest {
       * 告警策略ID，使用此字段时 GroupId 会被忽略
       */
     PolicyId?: string;
+    /**
+      * 事件配置的告警
+      */
+    EbSubject?: string;
+    /**
+      * 是否配置了事件告警
+      */
+    EbEventFlag?: number;
 }
 /**
  * CleanGrafanaInstance返回参数结构体
@@ -7196,6 +7253,14 @@ export interface UnBindingAllPolicyObjectRequest {
       * 告警策略ID，使用此字段时 GroupId 会被忽略
       */
     PolicyId?: string;
+    /**
+      * 事件配置的告警
+      */
+    EbSubject?: string;
+    /**
+      * 是否配置了事件告警
+      */
+    EbEventFlag?: number;
 }
 /**
  * 告警通知中的推送CLS操作

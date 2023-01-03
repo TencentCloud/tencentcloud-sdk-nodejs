@@ -500,8 +500,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 验证购买
-   */
+     * 该接口已废弃
+
+验证购买
+     */
   async VerifyPurchase(
     req?: VerifyPurchaseRequest,
     cb?: (error: string, rep: VerifyPurchaseResponse) => void
@@ -540,8 +542,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本机构DID详情
-   */
+     * 该接口已废弃
+
+本机构DID详情
+     */
   async GetAgencyTDid(
     req: GetAgencyTDidRequest,
     cb?: (error: string, rep: GetAgencyTDidResponse) => void

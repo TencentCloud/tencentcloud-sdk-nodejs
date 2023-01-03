@@ -150,7 +150,9 @@ export declare class Client extends AbstractClient {
      */
     GetDidDocument(req: GetDidDocumentRequest, cb?: (error: string, rep: GetDidDocumentResponse) => void): Promise<GetDidDocumentResponse>;
     /**
-     * 验证购买
+     * 该接口已废弃
+
+验证购买
      */
     VerifyPurchase(req?: VerifyPurchaseRequest, cb?: (error: string, rep: VerifyPurchaseResponse) => void): Promise<VerifyPurchaseResponse>;
     /**
@@ -166,7 +168,9 @@ export declare class Client extends AbstractClient {
      */
     CreateTDidByPublicKey(req: CreateTDidByPublicKeyRequest, cb?: (error: string, rep: CreateTDidByPublicKeyResponse) => void): Promise<CreateTDidByPublicKeyResponse>;
     /**
-     * 本机构DID详情
+     * 该接口已废弃
+
+本机构DID详情
      */
     GetAgencyTDid(req: GetAgencyTDidRequest, cb?: (error: string, rep: GetAgencyTDidResponse) => void): Promise<GetAgencyTDidResponse>;
     /**

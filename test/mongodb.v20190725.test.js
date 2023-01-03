@@ -148,9 +148,9 @@ it("mongodb.v20190725.DescribeAsyncRequestInfo", async function () {
     }
 })
 
-it("mongodb.v20190725.ModifyDBInstanceNetworkAddress", async function () {
+it("mongodb.v20190725.CreateAccountUser", async function () {
     try {
-       const data = await client.ModifyDBInstanceNetworkAddress({})
+       const data = await client.CreateAccountUser({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -221,6 +221,16 @@ it("mongodb.v20190725.DescribeSlowLogPatterns", async function () {
 it("mongodb.v20190725.DescribeSlowLogs", async function () {
     try {
        const data = await client.DescribeSlowLogs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mongodb.v20190725.ModifyDBInstanceNetworkAddress", async function () {
+    try {
+       const data = await client.ModifyDBInstanceNetworkAddress({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

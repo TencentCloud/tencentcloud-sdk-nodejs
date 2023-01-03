@@ -45,6 +45,7 @@ import {
   Operation,
   SpecItem,
   ModifyDBInstanceNetworkAddressResponse,
+  CreateAccountUserResponse,
   DescribeSlowLogPatternsResponse,
   BackupDownloadTaskStatus,
   DescribeSlowLogsResponse,
@@ -59,6 +60,7 @@ import {
   ModifyNetworkAddress,
   DescribeAsyncRequestInfoResponse,
   CreateDBInstanceResponse,
+  CreateAccountUserRequest,
   InstanceTextParam,
   ModifyDBInstanceSecurityGroupRequest,
   DescribeAccountUsersResponse,
@@ -256,13 +258,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(ModifyDBInstanceNetworkAddress)用于修改云数据库实例的网络信息，可进行基础网络转VPC网络和VPC网络之间的变换。
+   * 创建实例账号。
    */
-  async ModifyDBInstanceNetworkAddress(
-    req: ModifyDBInstanceNetworkAddressRequest,
-    cb?: (error: string, rep: ModifyDBInstanceNetworkAddressResponse) => void
-  ): Promise<ModifyDBInstanceNetworkAddressResponse> {
-    return this.request("ModifyDBInstanceNetworkAddress", req, cb)
+  async CreateAccountUser(
+    req: CreateAccountUserRequest,
+    cb?: (error: string, rep: CreateAccountUserResponse) => void
+  ): Promise<CreateAccountUserResponse> {
+    return this.request("CreateAccountUser", req, cb)
   }
 
   /**
@@ -333,6 +335,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSlowLogsResponse) => void
   ): Promise<DescribeSlowLogsResponse> {
     return this.request("DescribeSlowLogs", req, cb)
+  }
+
+  /**
+   * 本接口(ModifyDBInstanceNetworkAddress)用于修改云数据库实例的网络信息，可进行基础网络转VPC网络和VPC网络之间的变换。
+   */
+  async ModifyDBInstanceNetworkAddress(
+    req: ModifyDBInstanceNetworkAddressRequest,
+    cb?: (error: string, rep: ModifyDBInstanceNetworkAddressResponse) => void
+  ): Promise<ModifyDBInstanceNetworkAddressResponse> {
+    return this.request("ModifyDBInstanceNetworkAddress", req, cb)
   }
 
   /**

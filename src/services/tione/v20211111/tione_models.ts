@@ -583,7 +583,7 @@ export interface RestartModelAccelerateTaskRequest {
   ModelInputPath?: CosPathInfo
 
   /**
-   * 优化级别（NO_LOSS/FP16），默认FP16
+   * 优化级别（NO_LOSS/FP16/INT8），默认FP16
    */
   OptimizationLevel?: string
 
@@ -613,7 +613,7 @@ export interface RestartModelAccelerateTaskRequest {
   TensorInfos?: Array<string>
 
   /**
-   * GPU类型（T4/V100），默认T4
+   * GPU类型（T4/V100/A10），默认T4
    */
   GPUType?: string
 
@@ -2084,6 +2084,11 @@ EXIST：导入现有版本
    * 模型清理周期(默认值为1分钟，上限为1440，下限为1分钟，步长为1)
    */
   ModelCleanPeriod?: number
+
+  /**
+   * 是否QAT模型
+   */
+  IsQAT?: boolean
 }
 
 /**
@@ -3547,12 +3552,12 @@ export interface CreateBatchModelAccTasksRequest {
   Tags?: Array<Tag>
 
   /**
-   * 优化级别(NO_LOSS/FP16)，默认FP16
+   * 优化级别(NO_LOSS/FP16/INT8)，默认FP16
    */
   OptimizationLevel?: string
 
   /**
-   * GPU卡类型(T4/V100)，默认T4
+   * GPU卡类型(T4/V100/A10)，默认T4
    */
   GPUType?: string
 
@@ -5982,6 +5987,12 @@ export interface ModelAccelerateTask {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ModelSignature: string
+
+  /**
+      * 是否是QAT模型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  QATModel: boolean
 }
 
 /**

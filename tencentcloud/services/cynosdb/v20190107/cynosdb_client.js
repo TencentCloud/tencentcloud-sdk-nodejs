@@ -28,10 +28,16 @@ class Client extends abstract_client_1.AbstractClient {
         super("cynosdb.tencentcloudapi.com", "2019-01-07", clientConfig);
     }
     /**
-     * 恢复serverless集群
+     * 本接口(ModifyAuditService)用于修改云数据库审计日志保存时长、审计规则等服务配置。
      */
-    async ResumeServerless(req, cb) {
-        return this.request("ResumeServerless", req, cb);
+    async ModifyAuditService(req, cb) {
+        return this.request("ModifyAuditService", req, cb);
+    }
+    /**
+     * 下线实例
+     */
+    async OfflineInstance(req, cb) {
+        return this.request("OfflineInstance", req, cb);
     }
     /**
      * 查询备份文件列表
@@ -88,7 +94,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteBackup", req, cb);
     }
     /**
-     * 本接口（DescribeClusterInstanceGrps）用于查询实例组
+     * 本接口（DescribeClusterInstanceGrps）用于查询实例组信息。
      */
     async DescribeClusterInstanceGrps(req, cb) {
         return this.request("DescribeClusterInstanceGrps", req, cb);
@@ -100,10 +106,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("OfflineCluster", req, cb);
     }
     /**
-     * 本接口(SearchClusterDatabases)搜索集群database列表
+     * TDSQL-C for MySQL实例开通审计服务
      */
-    async SearchClusterDatabases(req, cb) {
-        return this.request("SearchClusterDatabases", req, cb);
+    async OpenAuditService(req, cb) {
+        return this.request("OpenAuditService", req, cb);
+    }
+    /**
+     * 创建审计规则模版
+     */
+    async CreateAuditRuleTemplate(req, cb) {
+        return this.request("CreateAuditRuleTemplate", req, cb);
     }
     /**
      * 此接口（ModifyBackupName）用于修改备份文件备注名。
@@ -130,6 +142,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstanceDetail", req, cb);
     }
     /**
+     * 查询审计规则模版信息
+     */
+    async DescribeAuditRuleTemplates(req, cb) {
+        return this.request("DescribeAuditRuleTemplates", req, cb);
+    }
+    /**
      * 查询指定集群有效回滚时间范围
      */
     async DescribeRollbackTimeRange(req, cb) {
@@ -148,10 +166,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstances", req, cb);
     }
     /**
-     * 批量授权账号权限
+     * 删除审计规则模版
      */
-    async GrantAccountPrivileges(req, cb) {
-        return this.request("GrantAccountPrivileges", req, cb);
+    async DeleteAuditRuleTemplates(req, cb) {
+        return this.request("DeleteAuditRuleTemplates", req, cb);
     }
     /**
      * 本接口（DescribeClusterParamLogs）查询参数修改日志
@@ -196,10 +214,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateBackup", req, cb);
     }
     /**
-     * 下线实例
+     * TDSQL-C for MySQL实例关闭审计服务
      */
-    async OfflineInstance(req, cb) {
-        return this.request("OfflineInstance", req, cb);
+    async CloseAuditService(req, cb) {
+        return this.request("CloseAuditService", req, cb);
     }
     /**
      * 本接口(ModifyInstanceName)用于修改实例名称。
@@ -212,6 +230,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeMaintainPeriod(req, cb) {
         return this.request("DescribeMaintainPeriod", req, cb);
+    }
+    /**
+     * 恢复serverless集群
+     */
+    async ResumeServerless(req, cb) {
+        return this.request("ResumeServerless", req, cb);
     }
     /**
      * 本接口(SwitchProxyVpc)更换数据库代理vpc
@@ -274,10 +298,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeClusterDetail", req, cb);
     }
     /**
-     * 本接口(ModifyDBInstanceSecurityGroups)用于修改实例绑定的安全组。
+     * 获取实例的审计规则
      */
-    async ModifyDBInstanceSecurityGroups(req, cb) {
-        return this.request("ModifyDBInstanceSecurityGroups", req, cb);
+    async DescribeAuditRuleWithInstanceIds(req, cb) {
+        return this.request("DescribeAuditRuleWithInstanceIds", req, cb);
     }
     /**
      * 本接口(IsolateInstance)用于隔离实例。
@@ -320,6 +344,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeResourcesByDealName(req, cb) {
         return this.request("DescribeResourcesByDealName", req, cb);
+    }
+    /**
+     * 批量授权账号权限
+     */
+    async GrantAccountPrivileges(req, cb) {
+        return this.request("GrantAccountPrivileges", req, cb);
     }
     /**
      * 暂停serverless集群
@@ -394,6 +424,18 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SetRenewFlag", req, cb);
     }
     /**
+     * 本接口(SearchClusterDatabases)搜索集群database列表
+     */
+    async SearchClusterDatabases(req, cb) {
+        return this.request("SearchClusterDatabases", req, cb);
+    }
+    /**
+     * 修改审计规则模版
+     */
+    async ModifyAuditRuleTemplates(req, cb) {
+        return this.request("ModifyAuditRuleTemplates", req, cb);
+    }
+    /**
      * 本接口(SearchClusterTables)搜索集群数据表列表
      */
     async SearchClusterTables(req, cb) {
@@ -422,6 +464,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeRollbackTimeValidity(req, cb) {
         return this.request("DescribeRollbackTimeValidity", req, cb);
+    }
+    /**
+     * 本接口(ModifyDBInstanceSecurityGroups)用于修改实例绑定的安全组。
+     */
+    async ModifyDBInstanceSecurityGroups(req, cb) {
+        return this.request("ModifyDBInstanceSecurityGroups", req, cb);
     }
     /**
      * 本接口（AddInstances）用于集群添加实例

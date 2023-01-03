@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeSpecInfoRequest, CreateDBInstanceRequest, DescribeCurrentOpResponse, DescribeAccountUsersRequest, CreateBackupDBInstanceResponse, KillOpsRequest, InquirePriceRenewDBInstancesRequest, DescribeSlowLogsRequest, FlushInstanceRouterConfigResponse, DescribeSecurityGroupRequest, AssignProjectResponse, DescribeDBInstanceDealResponse, OfflineIsolatedDBInstanceResponse, IsolateDBInstanceResponse, DescribeBackupDownloadTaskResponse, FlushInstanceRouterConfigRequest, SetAccountUserPrivilegeResponse, ModifyDBInstanceNetworkAddressRequest, CreateDBInstanceHourResponse, DescribeDBInstanceNodePropertyRequest, ModifyDBInstanceNetworkAddressResponse, DescribeSlowLogPatternsResponse, DescribeSlowLogsResponse, InquirePriceModifyDBInstanceSpecRequest, DescribeDBInstancesRequest, ModifyDBInstanceSpecRequest, ResetDBInstancePasswordRequest, DescribeAsyncRequestInfoResponse, CreateDBInstanceResponse, ModifyDBInstanceSecurityGroupRequest, DescribeAccountUsersResponse, DescribeBackupDownloadTaskRequest, DescribeClientConnectionsResponse, TerminateDBInstancesRequest, DescribeDBBackupsResponse, ModifyDBInstanceSecurityGroupResponse, DescribeInstanceParamsRequest, InquirePriceCreateDBInstancesResponse, DescribeSecurityGroupResponse, ResetDBInstancePasswordResponse, DescribeDBInstanceDealRequest, DescribeAsyncRequestInfoRequest, CreateBackupDownloadTaskRequest, InquirePriceModifyDBInstanceSpecResponse, DescribeDBInstanceNodePropertyResponse, DescribeCurrentOpRequest, DescribeDBBackupsRequest, DescribeClientConnectionsRequest, TerminateDBInstancesResponse, RenameInstanceRequest, RenewDBInstancesResponse, RenameInstanceResponse, CreateBackupDBInstanceRequest, SetAccountUserPrivilegeRequest, KillOpsResponse, IsolateDBInstanceRequest, CreateDBInstanceHourRequest, AssignProjectRequest, CreateBackupDownloadTaskResponse, DescribeSlowLogPatternsRequest, DescribeSpecInfoResponse, InquirePriceRenewDBInstancesResponse, DescribeDBInstancesResponse, OfflineIsolatedDBInstanceRequest, InquirePriceCreateDBInstancesRequest, DescribeInstanceParamsResponse, ModifyDBInstanceSpecResponse, RenewDBInstancesRequest } from "./mongodb_models";
+import { DescribeSpecInfoRequest, CreateDBInstanceRequest, DescribeCurrentOpResponse, DescribeAccountUsersRequest, CreateBackupDBInstanceResponse, KillOpsRequest, InquirePriceRenewDBInstancesRequest, DescribeSlowLogsRequest, FlushInstanceRouterConfigResponse, DescribeSecurityGroupRequest, AssignProjectResponse, DescribeDBInstanceDealResponse, OfflineIsolatedDBInstanceResponse, IsolateDBInstanceResponse, DescribeBackupDownloadTaskResponse, FlushInstanceRouterConfigRequest, SetAccountUserPrivilegeResponse, ModifyDBInstanceNetworkAddressRequest, CreateDBInstanceHourResponse, DescribeDBInstanceNodePropertyRequest, ModifyDBInstanceNetworkAddressResponse, CreateAccountUserResponse, DescribeSlowLogPatternsResponse, DescribeSlowLogsResponse, InquirePriceModifyDBInstanceSpecRequest, DescribeDBInstancesRequest, ModifyDBInstanceSpecRequest, ResetDBInstancePasswordRequest, DescribeAsyncRequestInfoResponse, CreateDBInstanceResponse, CreateAccountUserRequest, ModifyDBInstanceSecurityGroupRequest, DescribeAccountUsersResponse, DescribeBackupDownloadTaskRequest, DescribeClientConnectionsResponse, TerminateDBInstancesRequest, DescribeDBBackupsResponse, ModifyDBInstanceSecurityGroupResponse, DescribeInstanceParamsRequest, InquirePriceCreateDBInstancesResponse, DescribeSecurityGroupResponse, ResetDBInstancePasswordResponse, DescribeDBInstanceDealRequest, DescribeAsyncRequestInfoRequest, CreateBackupDownloadTaskRequest, InquirePriceModifyDBInstanceSpecResponse, DescribeDBInstanceNodePropertyResponse, DescribeCurrentOpRequest, DescribeDBBackupsRequest, DescribeClientConnectionsRequest, TerminateDBInstancesResponse, RenameInstanceRequest, RenewDBInstancesResponse, RenameInstanceResponse, CreateBackupDBInstanceRequest, SetAccountUserPrivilegeRequest, KillOpsResponse, IsolateDBInstanceRequest, CreateDBInstanceHourRequest, AssignProjectRequest, CreateBackupDownloadTaskResponse, DescribeSlowLogPatternsRequest, DescribeSpecInfoResponse, InquirePriceRenewDBInstancesResponse, DescribeDBInstancesResponse, OfflineIsolatedDBInstanceRequest, InquirePriceCreateDBInstancesRequest, DescribeInstanceParamsResponse, ModifyDBInstanceSpecResponse, RenewDBInstancesRequest } from "./mongodb_models";
 /**
  * mongodb client
  * @class
@@ -60,9 +60,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeAsyncRequestInfo(req: DescribeAsyncRequestInfoRequest, cb?: (error: string, rep: DescribeAsyncRequestInfoResponse) => void): Promise<DescribeAsyncRequestInfoResponse>;
     /**
-     * 本接口(ModifyDBInstanceNetworkAddress)用于修改云数据库实例的网络信息，可进行基础网络转VPC网络和VPC网络之间的变换。
+     * 创建实例账号。
      */
-    ModifyDBInstanceNetworkAddress(req: ModifyDBInstanceNetworkAddressRequest, cb?: (error: string, rep: ModifyDBInstanceNetworkAddressResponse) => void): Promise<ModifyDBInstanceNetworkAddressResponse>;
+    CreateAccountUser(req: CreateAccountUserRequest, cb?: (error: string, rep: CreateAccountUserResponse) => void): Promise<CreateAccountUserResponse>;
     /**
      * 本接口(CreateDBInstanceHour)用于创建按量计费的MongoDB云数据库实例。
      */
@@ -91,6 +91,10 @@ export declare class Client extends AbstractClient {
      * 本接口（DescribeSlowLogs）用于获取云数据库慢日志信息。接口只支持查询最近7天内慢日志。
      */
     DescribeSlowLogs(req: DescribeSlowLogsRequest, cb?: (error: string, rep: DescribeSlowLogsResponse) => void): Promise<DescribeSlowLogsResponse>;
+    /**
+     * 本接口(ModifyDBInstanceNetworkAddress)用于修改云数据库实例的网络信息，可进行基础网络转VPC网络和VPC网络之间的变换。
+     */
+    ModifyDBInstanceNetworkAddress(req: ModifyDBInstanceNetworkAddressRequest, cb?: (error: string, rep: ModifyDBInstanceNetworkAddressResponse) => void): Promise<ModifyDBInstanceNetworkAddressResponse>;
     /**
      * 本接口(CreateDBInstance)用于创建包年包月的MongoDB云数据库实例。接口支持的售卖规格，可从查询云数据库的售卖规格（DescribeSpecInfo）获取。
      */

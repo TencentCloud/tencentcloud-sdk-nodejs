@@ -18,9 +18,19 @@ const client = new tencentcloud.cynosdb.v20190107.Client({
 })
 describe("cynosdb.v20190107.test.js", function () {
 
-it("cynosdb.v20190107.ResumeServerless", async function () {
+it("cynosdb.v20190107.ModifyAuditService", async function () {
     try {
-       const data = await client.ResumeServerless({})
+       const data = await client.ModifyAuditService({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.OfflineInstance", async function () {
+    try {
+       const data = await client.OfflineInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -138,9 +148,19 @@ it("cynosdb.v20190107.OfflineCluster", async function () {
     }
 })
 
-it("cynosdb.v20190107.SearchClusterDatabases", async function () {
+it("cynosdb.v20190107.OpenAuditService", async function () {
     try {
-       const data = await client.SearchClusterDatabases({})
+       const data = await client.OpenAuditService({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.CreateAuditRuleTemplate", async function () {
+    try {
+       const data = await client.CreateAuditRuleTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -188,6 +208,16 @@ it("cynosdb.v20190107.DescribeInstanceDetail", async function () {
     }
 })
 
+it("cynosdb.v20190107.DescribeAuditRuleTemplates", async function () {
+    try {
+       const data = await client.DescribeAuditRuleTemplates({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cynosdb.v20190107.DescribeRollbackTimeRange", async function () {
     try {
        const data = await client.DescribeRollbackTimeRange({})
@@ -218,9 +248,9 @@ it("cynosdb.v20190107.DescribeInstances", async function () {
     }
 })
 
-it("cynosdb.v20190107.GrantAccountPrivileges", async function () {
+it("cynosdb.v20190107.DeleteAuditRuleTemplates", async function () {
     try {
-       const data = await client.GrantAccountPrivileges({})
+       const data = await client.DeleteAuditRuleTemplates({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -298,9 +328,9 @@ it("cynosdb.v20190107.CreateBackup", async function () {
     }
 })
 
-it("cynosdb.v20190107.OfflineInstance", async function () {
+it("cynosdb.v20190107.CloseAuditService", async function () {
     try {
-       const data = await client.OfflineInstance({})
+       const data = await client.CloseAuditService({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -321,6 +351,16 @@ it("cynosdb.v20190107.ModifyInstanceName", async function () {
 it("cynosdb.v20190107.DescribeMaintainPeriod", async function () {
     try {
        const data = await client.DescribeMaintainPeriod({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.ResumeServerless", async function () {
+    try {
+       const data = await client.ResumeServerless({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -428,9 +468,9 @@ it("cynosdb.v20190107.DescribeClusterDetail", async function () {
     }
 })
 
-it("cynosdb.v20190107.ModifyDBInstanceSecurityGroups", async function () {
+it("cynosdb.v20190107.DescribeAuditRuleWithInstanceIds", async function () {
     try {
-       const data = await client.ModifyDBInstanceSecurityGroups({})
+       const data = await client.DescribeAuditRuleWithInstanceIds({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -501,6 +541,16 @@ it("cynosdb.v20190107.DescribeAccounts", async function () {
 it("cynosdb.v20190107.DescribeResourcesByDealName", async function () {
     try {
        const data = await client.DescribeResourcesByDealName({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.GrantAccountPrivileges", async function () {
+    try {
+       const data = await client.GrantAccountPrivileges({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -628,6 +678,26 @@ it("cynosdb.v20190107.SetRenewFlag", async function () {
     }
 })
 
+it("cynosdb.v20190107.SearchClusterDatabases", async function () {
+    try {
+       const data = await client.SearchClusterDatabases({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.ModifyAuditRuleTemplates", async function () {
+    try {
+       const data = await client.ModifyAuditRuleTemplates({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cynosdb.v20190107.SearchClusterTables", async function () {
     try {
        const data = await client.SearchClusterTables({})
@@ -671,6 +741,16 @@ it("cynosdb.v20190107.DescribeInstanceSlowQueries", async function () {
 it("cynosdb.v20190107.DescribeRollbackTimeValidity", async function () {
     try {
        const data = await client.DescribeRollbackTimeValidity({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.ModifyDBInstanceSecurityGroups", async function () {
+    try {
+       const data = await client.ModifyDBInstanceSecurityGroups({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

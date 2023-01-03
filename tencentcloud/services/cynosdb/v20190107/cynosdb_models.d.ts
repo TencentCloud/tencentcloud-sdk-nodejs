@@ -51,6 +51,25 @@ export interface InquirePriceRenewRequest {
     TimeUnit: string;
 }
 /**
+ * 实例的审计规则详情，DescribeAuditRuleWithInstanceIds接口的出参。
+ */
+export interface InstanceAuditRule {
+    /**
+      * 实例ID。
+      */
+    InstanceId: string;
+    /**
+      * 是否是规则审计。true-规则审计，false-全审计。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AuditRule: boolean;
+    /**
+      * 审计规则详情。仅当AuditRule=true时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AuditRuleFilters: Array<AuditRuleFilters>;
+}
+/**
  * DescribeAuditLogs请求参数结构体
  */
 export interface DescribeAuditLogsRequest {
@@ -98,6 +117,27 @@ export interface DescribeBackupConfigRequest {
       * 集群ID
       */
     ClusterId: string;
+}
+/**
+ * ModifyAuditRuleTemplates请求参数结构体
+ */
+export interface ModifyAuditRuleTemplatesRequest {
+    /**
+      * 审计规则模版ID。
+      */
+    RuleTemplateIds: Array<string>;
+    /**
+      * 修改后的审计规则。
+      */
+    RuleFilters?: Array<RuleFilters>;
+    /**
+      * 修改后的规则模版名称。
+      */
+    RuleTemplateName?: string;
+    /**
+      * 修改后的规则模版描述。
+      */
+    Description?: string;
 }
 /**
  * DescribeAccounts请求参数结构体
@@ -173,6 +213,23 @@ export interface DescribeRollbackTimeRangeResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 计费资源信息
+ */
+export interface BillingResourceInfo {
+    /**
+      * 集群ID
+      */
+    ClusterId: string;
+    /**
+      * 实例ID列表
+      */
+    InstanceIds: Array<string>;
+    /**
+      * 订单ID
+      */
+    DealName: string;
 }
 /**
  * ModifyBackupName返回参数结构体
@@ -466,6 +523,26 @@ export interface AddClusterSlaveZoneResponse {
     RequestId?: string;
 }
 /**
+ * 数据库地址
+ */
+export interface OldAddrInfo {
+    /**
+      * IP
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Vip?: string;
+    /**
+      * 端口
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Vport?: number;
+    /**
+      * 期望执行回收时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ReturnTime?: string;
+}
+/**
  * ModifyClusterName返回参数结构体
  */
 export interface ModifyClusterNameResponse {
@@ -736,65 +813,92 @@ export interface SetRenewFlagRequest {
  */
 export interface CynosdbInstanceGrp {
     /**
-      * appId
+      * 用户appId
       */
-    AppId: number;
+    AppId?: number;
     /**
       * 集群ID
       */
-    ClusterId: string;
+    ClusterId?: string;
     /**
       * 创建时间
       */
-    CreatedTime: string;
+    CreatedTime?: string;
     /**
       * 删除时间
       */
-    DeletedTime: string;
+    DeletedTime?: string;
     /**
       * 实例组ID
       */
-    InstanceGrpId: string;
+    InstanceGrpId?: string;
     /**
       * 状态
       */
-    Status: string;
+    Status?: string;
     /**
       * 实例组类型。ha-ha组；ro-只读组
       */
-    Type: string;
+    Type?: string;
     /**
       * 更新时间
       */
-    UpdatedTime: string;
+    UpdatedTime?: string;
     /**
       * 内网IP
       */
-    Vip: string;
+    Vip?: string;
     /**
       * 内网端口
       */
-    Vport: number;
+    Vport?: number;
     /**
       * 外网域名
       */
-    WanDomain: string;
+    WanDomain?: string;
     /**
       * 外网ip
       */
-    WanIP: string;
+    WanIP?: string;
     /**
       * 外网端口
       */
-    WanPort: number;
+    WanPort?: number;
     /**
       * 外网状态
       */
-    WanStatus: string;
+    WanStatus?: string;
     /**
       * 实例组包含实例信息
       */
-    InstanceSet: Array<CynosdbInstance>;
+    InstanceSet?: Array<CynosdbInstance>;
+    /**
+      * VPC的ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UniqVpcId?: string;
+    /**
+      * 子网ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UniqSubnetId?: string;
+    /**
+      * 正在回收IP信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OldAddrInfo?: OldAddrInfo;
+    /**
+      * 正在进行的任务
+      */
+    ProcessingTasks?: Array<string>;
+    /**
+      * 任务列表
+      */
+    Tasks?: Array<ObjectTask>;
+    /**
+      * biz_net_service表id
+      */
+    NetServiceId: number;
 }
 /**
  * 实例慢查询信息
@@ -1096,48 +1200,27 @@ export interface CreateAccountsRequest {
     Accounts: Array<NewAccount>;
 }
 /**
- * 审计日志文件
+ * DeleteAuditRuleTemplates请求参数结构体
  */
-export interface AuditLogFile {
+export interface DeleteAuditRuleTemplatesRequest {
     /**
-      * 审计日志文件名称
+      * 审计规则模版ID。
       */
-    FileName: string;
-    /**
-      * 审计日志文件创建时间。格式为 : "2019-03-20 17:09:13"。
-      */
-    CreateTime: string;
-    /**
-      * 文件状态值。可能返回的值为：
-"creating" - 生成中;
-"failed" - 创建失败;
-"success" - 已生成;
-      */
-    Status: string;
-    /**
-      * 文件大小，单位为 KB。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    FileSize: number;
-    /**
-      * 审计日志下载地址。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    DownloadUrl: string;
-    /**
-      * 错误信息。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ErrMsg: string;
+    RuleTemplateIds: Array<string>;
 }
 /**
- * ExportInstanceSlowQueries返回参数结构体
+ * DescribeAuditRuleTemplates返回参数结构体
  */
-export interface ExportInstanceSlowQueriesResponse {
+export interface DescribeAuditRuleTemplatesResponse {
     /**
-      * 慢查询导出内容
+      * 符合查询条件的实例总数。
       */
-    FileContent: string;
+    TotalCount: number;
+    /**
+      * 规则模版详细信息列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Items: Array<AuditRuleTemplateInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1261,6 +1344,23 @@ export interface RollbackTable {
       * 数据库表
       */
     Tables: Array<RollbackTableInfo>;
+}
+/**
+ * IsolateInstance请求参数结构体
+ */
+export interface IsolateInstanceRequest {
+    /**
+      * 集群ID
+      */
+    ClusterId: string;
+    /**
+      * 实例ID数组
+      */
+    InstanceIdList: Array<string>;
+    /**
+      * 该参数已废弃
+      */
+    DbType?: string;
 }
 /**
  * DescribeClusterDetail请求参数结构体
@@ -1473,6 +1573,47 @@ export interface DescribeBinlogDownloadUrlResponse {
       * 下载地址
       */
     DownloadUrl: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeAuditRuleWithInstanceIds返回参数结构体
+ */
+export interface DescribeAuditRuleWithInstanceIdsResponse {
+    /**
+      * 无
+      */
+    TotalCount: number;
+    /**
+      * 实例审计规则信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Items: Array<InstanceAuditRule>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * UpgradeInstance返回参数结构体
+ */
+export interface UpgradeInstanceResponse {
+    /**
+      * 冻结流水ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TranId: string;
+    /**
+      * 大订单号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BigDealIds: Array<string>;
+    /**
+      * 订单号
+      */
+    DealNames: Array<string>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1756,6 +1897,15 @@ pause
     ResourceTags: Array<Tag>;
 }
 /**
+ * DescribeAuditRuleWithInstanceIds请求参数结构体
+ */
+export interface DescribeAuditRuleWithInstanceIdsRequest {
+    /**
+      * 实例ID。目前仅支持单个实例的查询。
+      */
+    InstanceIds: Array<string>;
+}
+/**
  * 数据库表
  */
 export interface DbTable {
@@ -1826,6 +1976,35 @@ export interface BinlogItem {
       * Binlog文件ID
       */
     BinlogId: number;
+}
+/**
+ * ModifyAuditService请求参数结构体
+ */
+export interface ModifyAuditServiceRequest {
+    /**
+      * 实例ID。
+      */
+    InstanceId: string;
+    /**
+      * 日志保留时长。
+      */
+    LogExpireDay?: number;
+    /**
+      * 高频日志保留时长。
+      */
+    HighLogExpireDay?: number;
+    /**
+      * 修改实例审计规则为全审计。
+      */
+    AuditAll?: boolean;
+    /**
+      * 规则审计。
+      */
+    AuditRuleFilters?: Array<AuditRuleFilters>;
+    /**
+      * 规则模版ID。
+      */
+    RuleTemplateIds?: Array<string>;
 }
 /**
  * CreateClusters请求参数结构体
@@ -2138,6 +2317,15 @@ export interface DescribeParamTemplatesResponse {
     RequestId?: string;
 }
 /**
+ * CloseAuditService请求参数结构体
+ */
+export interface CloseAuditServiceRequest {
+    /**
+      * 实例ID。
+      */
+    InstanceId: string;
+}
+/**
  * AddInstances返回参数结构体
  */
 export interface AddInstancesResponse {
@@ -2386,6 +2574,31 @@ export interface OfflineInstanceRequest {
     InstanceIdList: Array<string>;
 }
 /**
+ * OpenAuditService请求参数结构体
+ */
+export interface OpenAuditServiceRequest {
+    /**
+      * 实例ID。
+      */
+    InstanceId: string;
+    /**
+      * 日志保留时长。
+      */
+    LogExpireDay: number;
+    /**
+      * 高频日志保留时长。
+      */
+    HighLogExpireDay?: number;
+    /**
+      * 审计规则。同RuleTemplateIds都不填是全审计。
+      */
+    AuditRuleFilters?: Array<AuditRuleFilters>;
+    /**
+      * 规则模版ID。同AuditRuleFilters都不填是全审计。
+      */
+    RuleTemplateIds?: Array<string>;
+}
+/**
  * 网络信息
  */
 export interface NetAddr {
@@ -2507,6 +2720,15 @@ export interface DescribeResourcesByDealNameRequest {
     DealNames?: Array<string>;
 }
 /**
+ * CloseAuditService返回参数结构体
+ */
+export interface CloseAuditServiceResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * CreateBackup返回参数结构体
  */
 export interface CreateBackupResponse {
@@ -2543,6 +2765,32 @@ export interface DescribeRollbackTimeValidityResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 审计规则模版的详情
+ */
+export interface AuditRuleTemplateInfo {
+    /**
+      * 规则模版ID。
+      */
+    RuleTemplateId: string;
+    /**
+      * 规则模版名称。
+      */
+    RuleTemplateName: string;
+    /**
+      * 规则模版的过滤条件
+      */
+    RuleFilters: Array<RuleFilters>;
+    /**
+      * 规则模版描述。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Description: string;
+    /**
+      * 规则模版创建时间。
+      */
+    CreateAt: string;
 }
 /**
  * DescribeInstanceSlowQueries返回参数结构体
@@ -2677,21 +2925,21 @@ export interface InquirePriceCreateRequest {
     TimeUnit?: string;
 }
 /**
- * 计费资源信息
+ * CreateAuditRuleTemplate请求参数结构体
  */
-export interface BillingResourceInfo {
+export interface CreateAuditRuleTemplateRequest {
     /**
-      * 集群ID
+      * 审计规则。
       */
-    ClusterId: string;
+    RuleFilters: Array<RuleFilters>;
     /**
-      * 实例ID列表
+      * 规则模版名称。
       */
-    InstanceIds: Array<string>;
+    RuleTemplateName: string;
     /**
-      * 订单ID
+      * 规则模版描述。
       */
-    DealName: string;
+    Description?: string;
 }
 /**
  * ModifyBackupConfig返回参数结构体
@@ -2758,27 +3006,21 @@ export interface ExportInstanceSlowQueriesRequest {
     FileType?: string;
 }
 /**
- * UpgradeInstance返回参数结构体
+ * 修改参数时，传入参数描述
  */
-export interface UpgradeInstanceResponse {
+export interface ParamItem {
     /**
-      * 冻结流水ID
-注意：此字段可能返回 null，表示取不到有效值。
+      * 参数名称
       */
-    TranId: string;
+    ParamName: string;
     /**
-      * 大订单号
-注意：此字段可能返回 null，表示取不到有效值。
+      * 当前值
       */
-    BigDealIds: Array<string>;
+    CurrentValue: string;
     /**
-      * 订单号
+      * 原有值
       */
-    DealNames: Array<string>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    OldValue: string;
 }
 /**
  * ModifyAccountParams请求参数结构体
@@ -3016,6 +3258,20 @@ pause
     Ability?: Ability;
 }
 /**
+ * CreateAuditRuleTemplate返回参数结构体
+ */
+export interface CreateAuditRuleTemplateResponse {
+    /**
+      * 生成的规则模版ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RuleTemplateId: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * IsolateCluster返回参数结构体
  */
 export interface IsolateClusterResponse {
@@ -3079,6 +3335,15 @@ export interface ObjectTask {
     ObjectType?: string;
 }
 /**
+ * OpenAuditService返回参数结构体
+ */
+export interface OpenAuditServiceResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * OfflineCluster返回参数结构体
  */
 export interface OfflineClusterResponse {
@@ -3126,6 +3391,27 @@ export interface RevokeAccountPrivilegesRequest {
     DbTables: Array<DbTable>;
 }
 /**
+ * DescribeAuditRuleTemplates请求参数结构体
+ */
+export interface DescribeAuditRuleTemplatesRequest {
+    /**
+      * 规则模版ID。
+      */
+    RuleTemplateIds?: Array<string>;
+    /**
+      * 规则模版名称
+      */
+    RuleTemplateNames?: Array<string>;
+    /**
+      * 单次请求返回的数量。默认值20。
+      */
+    Limit?: number;
+    /**
+      * 偏移量，默认值为 0。
+      */
+    Offset?: number;
+}
+/**
  * 实例可售卖规格详细信息，创建实例时Cpu/Memory确定实例规格，存储可选大小为[MinStorageSize,MaxStorageSize]
  */
 export interface InstanceSpec {
@@ -3166,6 +3452,11 @@ export interface InstanceSpec {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ZoneStockInfos: Array<ZoneStockInfo>;
+    /**
+      * 库存数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    StockCount: number;
 }
 /**
  * InquirePriceCreate返回参数结构体
@@ -3185,21 +3476,39 @@ export interface InquirePriceCreateResponse {
     RequestId?: string;
 }
 /**
- * IsolateInstance请求参数结构体
+ * 审计日志文件
  */
-export interface IsolateInstanceRequest {
+export interface AuditLogFile {
     /**
-      * 集群ID
+      * 审计日志文件名称
       */
-    ClusterId: string;
+    FileName: string;
     /**
-      * 实例ID数组
+      * 审计日志文件创建时间。格式为 : "2019-03-20 17:09:13"。
       */
-    InstanceIdList: Array<string>;
+    CreateTime: string;
     /**
-      * 该参数已废弃
+      * 文件状态值。可能返回的值为：
+"creating" - 生成中;
+"failed" - 创建失败;
+"success" - 已生成;
       */
-    DbType?: string;
+    Status: string;
+    /**
+      * 文件大小，单位为 KB。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FileSize: number;
+    /**
+      * 审计日志下载地址。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DownloadUrl: string;
+    /**
+      * 错误信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ErrMsg: string;
 }
 /**
  * SetRenewFlag返回参数结构体
@@ -3855,6 +4164,36 @@ pause
     ServerlessStatus: string;
 }
 /**
+ * 审计规则的规则过滤条件
+ */
+export interface RuleFilters {
+    /**
+      * 审计规则过滤条件的参数名称。可选值：host – 客户端 IP；user – 数据库账户；dbName – 数据库名称；sqlType-SQL类型；sql-sql语句。
+      */
+    Type: string;
+    /**
+      * 审计规则过滤条件的匹配类型。可选值：INC – 包含；EXC – 不包含；EQS – 等于；NEQ – 不等于。
+      */
+    Compare: string;
+    /**
+      * 审计规则过滤条件的匹配值。
+      */
+    Value: Array<string>;
+}
+/**
+ * ExportInstanceSlowQueries返回参数结构体
+ */
+export interface ExportInstanceSlowQueriesResponse {
+    /**
+      * 慢查询导出内容
+      */
+    FileContent: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 集群详情详细信息
  */
 export interface CynosdbClusterDetail {
@@ -4152,6 +4491,15 @@ export interface ModifyInstanceNameResponse {
     RequestId?: string;
 }
 /**
+ * 规则审计的过滤条件
+ */
+export interface AuditRuleFilters {
+    /**
+      * 单条审计规则。
+      */
+    RuleFilters: Array<RuleFilters>;
+}
+/**
  * DescribeBinlogSaveDays返回参数结构体
  */
 export interface DescribeBinlogSaveDaysResponse {
@@ -4381,21 +4729,13 @@ export interface OfflineInstanceResponse {
     RequestId?: string;
 }
 /**
- * 修改参数时，传入参数描述
+ * ModifyAuditService返回参数结构体
  */
-export interface ParamItem {
+export interface ModifyAuditServiceResponse {
     /**
-      * 参数名称
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    ParamName: string;
-    /**
-      * 当前值
-      */
-    CurrentValue: string;
-    /**
-      * 原有值
-      */
-    OldValue: string;
+    RequestId?: string;
 }
 /**
  * IsolateCluster请求参数结构体
@@ -4409,6 +4749,15 @@ export interface IsolateClusterRequest {
       * 该参数已废用
       */
     DbType?: string;
+}
+/**
+ * DeleteAuditRuleTemplates返回参数结构体
+ */
+export interface DeleteAuditRuleTemplatesResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeAuditLogFiles请求参数结构体
@@ -4520,6 +4869,10 @@ export interface ZoneStockInfo {
       * 是否有库存
       */
     HasStock: boolean;
+    /**
+      * 库存数量
+      */
+    StockCount: number;
 }
 /**
  * InquirePriceRenew返回参数结构体
@@ -4545,6 +4898,15 @@ export interface InquirePriceRenewResponse {
       * 续费存储节点的总价格
       */
     StorageRealTotalPrice: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ModifyAuditRuleTemplates返回参数结构体
+ */
+export interface ModifyAuditRuleTemplatesResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

@@ -240,7 +240,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetDidDocument", req, cb);
     }
     /**
-     * 验证购买
+     * 该接口已废弃
+
+验证购买
      */
     async VerifyPurchase(req, cb) {
         return this.request("VerifyPurchase", req, cb);
@@ -264,7 +266,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateTDidByPublicKey", req, cb);
     }
     /**
-     * 本机构DID详情
+     * 该接口已废弃
+
+本机构DID详情
      */
     async GetAgencyTDid(req, cb) {
         return this.request("GetAgencyTDid", req, cb);

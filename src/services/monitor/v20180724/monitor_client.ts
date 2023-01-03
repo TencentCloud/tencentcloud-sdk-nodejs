@@ -182,6 +182,7 @@ import {
   DescribeAlarmNoticeCallbacksResponse,
   DescribePrometheusInstanceUsageRequest,
   ModifyAlarmPolicyConditionRequest,
+  NoticeBindPolicys,
   DeleteSSOAccountRequest,
   PrometheusScrapeJob,
   CreateGrafanaIntegrationResponse,
