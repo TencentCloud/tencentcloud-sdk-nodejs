@@ -920,7 +920,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询复制组
+   * 本接口（DescribeReplicationGroup）查询复制组。
    */
   async DescribeReplicationGroup(
     req: DescribeReplicationGroupRequest,

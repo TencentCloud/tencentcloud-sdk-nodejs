@@ -178,6 +178,16 @@ it("dts.v20211206.StopMigrateJob", async function () {
     }
 })
 
+it("dts.v20211206.PauseSyncJob", async function () {
+    try {
+       const data = await client.PauseSyncJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dts.v20211206.DestroySyncJob", async function () {
     try {
        const data = await client.DestroySyncJob({})

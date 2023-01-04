@@ -4338,8 +4338,7 @@ blacklist：黑名单
       */
     FilterRules?: Array<IpFilterPathRule>;
     /**
-      * IP 黑白名单验证失败时返回的 HTTP Code
-合法值: 400~499
+      * IP 黑白名单验证失败时返回的 code（即将下线）
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ReturnCode?: number;
@@ -6014,6 +6013,11 @@ off：不支持
 注意：此字段可能返回 null，表示取不到有效值。
       */
     QnPrivateAccess: QnPrivateAccess;
+    /**
+      * https 请求计费开关
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    HttpsBilling: HttpsBilling;
 }
 /**
  * GetDisableRecords返回参数结构体
@@ -8168,6 +8172,15 @@ export interface DescribeDomainsConfigResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 支持 https 请求开关，若关闭，下发配置拦截https请求
+ */
+export interface HttpsBilling {
+    /**
+      * https请求计费开关
+      */
+    Switch: string;
 }
 /**
  * DescribeCdnIp请求参数结构体

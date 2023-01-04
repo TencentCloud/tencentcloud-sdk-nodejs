@@ -125,6 +125,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("StopMigrateJob", req, cb);
     }
     /**
+     * 暂停处于同步中的数据同步任务。
+     */
+    async PauseSyncJob(req, cb) {
+        return this.request("PauseSyncJob", req, cb);
+    }
+    /**
      * 下线同步任务，任务在已隔离状态下可以通过此操作进行任务下线，即彻底删除任务。下线操作后可通过查询同步任务信息接口DescribeSyncJobs获取任务列表查看状态，此操作成功后无法看到此任务表示下线成功。
      */
     async DestroySyncJob(req, cb) {

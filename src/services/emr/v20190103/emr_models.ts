@@ -974,6 +974,22 @@ export interface ScaleOutInstanceRequest {
 }
 
 /**
+ * 用于创建集群价格清单 不同可用区下价格详情
+ */
+export interface ZoneDetailPriceResult {
+  /**
+      * 可用区Id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ZoneId: string
+
+  /**
+   * 不同节点的价格详情
+   */
+  NodeDetailPrice: Array<NodeDetailPriceResult>
+}
+
+/**
  * 扩容容器资源时的资源描述
  */
 export interface PodNewSpec {
@@ -1133,6 +1149,22 @@ export interface TopologyInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   NodeInfoList?: Array<ShortNodeInfo>
+}
+
+/**
+ * 用于创建集群价格清单 节点价格详情
+ */
+export interface NodeDetailPriceResult {
+  /**
+      * 节点类型 master core task common router mysql
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NodeType: string
+
+  /**
+   * 节点组成部分价格详情
+   */
+  PartDetailPrice: Array<PartDetailPriceItem>
 }
 
 /**
@@ -1311,6 +1343,12 @@ export interface EmrListInstance {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   IsHandsCluster: boolean
+
+  /**
+      * 体外客户端组件信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OutSideSoftInfo: Array<SoftDependInfo>
 }
 
 /**
@@ -1536,6 +1574,47 @@ export interface JobResult {
 }
 
 /**
+ * 用于创建集群价格清单-节点组成部分价格
+ */
+export interface PartDetailPriceItem {
+  /**
+      * 类型包括：节点->node、系统盘->rootDisk、云数据盘->dataDisk、metaDB
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceType: string
+
+  /**
+      * 单价（原价）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Price: number
+
+  /**
+      * 单价（折扣价）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RealCost: number
+
+  /**
+      * 总价（折扣价）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RealTotalCost: number
+
+  /**
+      * 折扣
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Policy: number
+
+  /**
+      * 数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  GoodsNum: number
+}
+
+/**
  * 共用组件信息
  */
 export interface DependService {
@@ -1698,6 +1777,12 @@ export interface InquiryPriceCreateInstanceResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   TimeSpan: number
+
+  /**
+      * 价格清单
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PriceList: Array<ZoneDetailPriceResult>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4246,6 +4331,21 @@ export interface ClusterExternalServiceInfo {
 }
 
 /**
+ * 体外客户端组件依赖信息
+ */
+export interface SoftDependInfo {
+  /**
+   * 组件名称
+   */
+  SoftName: string
+
+  /**
+   * 是否必选
+   */
+  Required: boolean
+}
+
+/**
  * InquiryPriceScaleOutInstance请求参数结构体
  */
 export interface InquiryPriceScaleOutInstanceRequest {
@@ -4624,6 +4724,12 @@ export interface InquiryPriceScaleOutInstanceResponse {
   PriceSpec: PriceResource
 
   /**
+      * 对应入参MultipleResources中多个规格的询价结果，其它出参返回的是第一个规格的询价结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MultipleEmrPrice: Array<EmrPrice>
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -4693,6 +4799,41 @@ export interface ShortNodeInfo {
 }
 
 /**
+ * Emr询价描述
+ */
+export interface EmrPrice {
+  /**
+      * 刊例价格
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OriginalCost: string
+
+  /**
+      * 折扣价格
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DiscountCost: string
+
+  /**
+      * 单位
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Unit: string
+
+  /**
+      * 询价配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PriceSpec: PriceResource
+
+  /**
+      * 是否支持竞价实例
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SupportSpotPaid: boolean
+}
+
+/**
  * 节点硬件信息
  */
 export interface NodeHardwareInfo {
@@ -4700,302 +4841,302 @@ export interface NodeHardwareInfo {
       * 用户APPID
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  AppId: number
+  AppId?: number
 
   /**
       * 序列号
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  SerialNo: string
+  SerialNo?: string
 
   /**
       * 机器实例ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  OrderNo: string
+  OrderNo?: string
 
   /**
       * master节点绑定外网IP
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  WanIp: string
+  WanIp?: string
 
   /**
       * 节点类型。0:common节点；1:master节点
 ；2:core节点；3:task节点
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Flag: number
+  Flag?: number
 
   /**
       * 节点规格
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Spec: string
+  Spec?: string
 
   /**
       * 节点核数
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  CpuNum: number
+  CpuNum?: number
 
   /**
       * 节点内存
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  MemSize: number
+  MemSize?: number
 
   /**
       * 节点内存描述
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  MemDesc: string
+  MemDesc?: string
 
   /**
       * 节点所在region
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  RegionId: number
+  RegionId?: number
 
   /**
       * 节点所在Zone
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ZoneId: number
+  ZoneId?: number
 
   /**
       * 申请时间
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ApplyTime: string
+  ApplyTime?: string
 
   /**
       * 释放时间
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  FreeTime: string
+  FreeTime?: string
 
   /**
       * 硬盘大小
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  DiskSize: string
+  DiskSize?: string
 
   /**
       * 节点描述
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  NameTag: string
+  NameTag?: string
 
   /**
       * 节点部署服务
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Services: string
+  Services?: string
 
   /**
       * 磁盘类型
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  StorageType: number
+  StorageType?: number
 
   /**
       * 系统盘大小
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  RootSize: number
+  RootSize?: number
 
   /**
       * 付费类型
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ChargeType: number
+  ChargeType?: number
 
   /**
       * 数据库IP
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  CdbIp: string
+  CdbIp?: string
 
   /**
       * 数据库端口
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  CdbPort: number
+  CdbPort?: number
 
   /**
       * 硬盘容量
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  HwDiskSize: number
+  HwDiskSize?: number
 
   /**
       * 硬盘容量描述
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  HwDiskSizeDesc: string
+  HwDiskSizeDesc?: string
 
   /**
       * 内存容量
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  HwMemSize: number
+  HwMemSize?: number
 
   /**
       * 内存容量描述
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  HwMemSizeDesc: string
+  HwMemSizeDesc?: string
 
   /**
       * 过期时间
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ExpireTime: string
+  ExpireTime?: string
 
   /**
       * 节点资源ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  EmrResourceId: string
+  EmrResourceId?: string
 
   /**
       * 续费标志
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  IsAutoRenew: number
+  IsAutoRenew?: number
 
   /**
       * 设备标识
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  DeviceClass: string
+  DeviceClass?: string
 
   /**
       * 支持变配
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Mutable: number
+  Mutable?: number
 
   /**
       * 多云盘
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  MCMultiDisk: Array<MultiDiskMC>
+  MCMultiDisk?: Array<MultiDiskMC>
 
   /**
       * 数据库信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  CdbNodeInfo: CdbInfo
+  CdbNodeInfo?: CdbInfo
 
   /**
       * 内网IP
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Ip: string
+  Ip?: string
 
   /**
       * 此节点是否可销毁，1可销毁，0不可销毁
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Destroyable: number
+  Destroyable?: number
 
   /**
       * 节点绑定的标签
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Tags: Array<Tag>
+  Tags?: Array<Tag>
 
   /**
       * 是否是自动扩缩容节点，0为普通节点，1为自动扩缩容节点。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  AutoFlag: number
+  AutoFlag?: number
 
   /**
       * 资源类型, host/pod
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  HardwareResourceType: string
+  HardwareResourceType?: string
 
   /**
       * 是否浮动规格，1是，0否
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  IsDynamicSpec: number
+  IsDynamicSpec?: number
 
   /**
       * 浮动规格值json字符串
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  DynamicPodSpec: string
+  DynamicPodSpec?: string
 
   /**
       * 是否支持变更计费类型 1是，0否
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  SupportModifyPayMode: number
+  SupportModifyPayMode?: number
 
   /**
       * 系统盘类型
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  RootStorageType: number
+  RootStorageType?: number
 
   /**
       * 可用区信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Zone: string
+  Zone?: string
 
   /**
       * 子网
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  SubnetInfo: SubnetInfo
+  SubnetInfo?: SubnetInfo
 
   /**
       * 客户端
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Clients: string
+  Clients?: string
 
   /**
       * 系统当前时间
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  CurrentTime: string
+  CurrentTime?: string
 
   /**
       * 是否用于联邦 ,1是，0否
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  IsFederation: number
+  IsFederation?: number
 
   /**
       * 设备名称
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  DeviceName: string
+  DeviceName?: string
 
   /**
       * 服务
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ServiceClient: string
+  ServiceClient?: string
 
   /**
       * 该实例是否开启实例保护，true为开启 false为关闭
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  DisableApiTermination: boolean
+  DisableApiTermination?: boolean
 
   /**
       * 0表示老计费，1表示新计费
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  TradeVersion: number
+  TradeVersion?: number
 }
 
 /**

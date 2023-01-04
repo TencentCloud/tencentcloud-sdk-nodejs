@@ -2447,7 +2447,14 @@ export interface ReviewAudioVideoRequest {
       */
     SubAppId?: number;
     /**
-      * 音视频审核模板 ID，默认值为 10。取值范围：
+      * 审核的内容，可选值有：
+<li>Media：原始音视频；</li>
+<li>Cover：封面。</li>
+不填或填空数组时，默认为审核 Media。
+      */
+    ReviewContents?: Array<string>;
+    /**
+      * 审核模板 ID，默认值为 10。取值范围：
 <li>10：预置模板，支持检测的违规标签包括色情（Porn）、暴恐（Terror）和不适宜的信息（Polity）。</li>
       */
     Definition?: number;
@@ -5997,6 +6004,11 @@ export interface ReviewAudioVideoTaskOutput {
       * 涉及违规信息的嫌疑的视频片段列表文件 URL 失效时间，使用  [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
       */
     SegmentSetFileUrlExpireTime: string;
+    /**
+      * 封面审核结果。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CoverReviewResult: ReviewImageResult;
 }
 /**
  * 智能去除水印任务的输出。
@@ -12525,7 +12537,7 @@ export interface AiReviewTaskPoliticalResult {
 export interface ReviewImageResponse {
     /**
       * 图片审核任务结果。
-<font color=red>注意：该字段已废弃，建议使用 ReviewResult。</font>
+<font color=red>注意：该字段已废弃，建议使用 MediaReviewResult。</font>
       */
     ReviewResultSet?: Array<ContentReviewResult>;
     /**

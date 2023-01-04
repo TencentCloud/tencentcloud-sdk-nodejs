@@ -866,7 +866,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateDeployGroup", req, cb);
     }
     /**
-     * 本接口(ModifyRemoteBackupConfig)用于查询数据库异地备份配置信息。
+     * 本接口(ModifyRemoteBackupConfig)用于修改数据库异地备份配置信息。
      */
     async ModifyRemoteBackupConfig(req, cb) {
         return this.request("ModifyRemoteBackupConfig", req, cb);

@@ -580,7 +580,7 @@ export declare class Client extends AbstractClient {
      */
     CreateDeployGroup(req: CreateDeployGroupRequest, cb?: (error: string, rep: CreateDeployGroupResponse) => void): Promise<CreateDeployGroupResponse>;
     /**
-     * 本接口(ModifyRemoteBackupConfig)用于查询数据库异地备份配置信息。
+     * 本接口(ModifyRemoteBackupConfig)用于修改数据库异地备份配置信息。
      */
     ModifyRemoteBackupConfig(req: ModifyRemoteBackupConfigRequest, cb?: (error: string, rep: ModifyRemoteBackupConfigResponse) => void): Promise<ModifyRemoteBackupConfigResponse>;
     /**

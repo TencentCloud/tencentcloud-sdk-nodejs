@@ -84,6 +84,27 @@ export interface CfwNatDnatRule {
     Description: string;
 }
 /**
+ * DeleteAcRule请求参数结构体
+ */
+export interface DeleteAcRuleRequest {
+    /**
+      * 删除规则对应的id值, 对应获取规则列表接口的Id 值
+      */
+    Id: number;
+    /**
+      * 方向，0：出站，1：入站
+      */
+    Direction: number;
+    /**
+      * EdgeId值两个vpc间的边id
+      */
+    EdgeId?: string;
+    /**
+      * NAT地域， 如ap-shanghai/ap-guangzhou/ap-chongqing等
+      */
+    Area?: string;
+}
+/**
  * StaticInfo 告警柱形图统计信息
  
  */
@@ -267,25 +288,17 @@ true为启用，false为不启用
     Enable?: string;
 }
 /**
- * DescribeTLogInfo请求参数结构体
+ * ip防护状态
  */
-export interface DescribeTLogInfoRequest {
+export interface IPDefendStatus {
     /**
-      * 开始时间
+      * ip地址
       */
-    StartTime: string;
+    IP: string;
     /**
-      * 结束时间
+      * 防护状态   1:防护打开; -1:地址错误; 其他:未防护
       */
-    EndTime: string;
-    /**
-      * 类型 1 告警 2阻断
-      */
-    QueryType: string;
-    /**
-      * 查询条件
-      */
-    SearchValue?: string;
+    Status: number;
 }
 /**
  * 安全组规则
@@ -894,6 +907,10 @@ export interface CreateNatFwInstanceRequest {
       * 异地灾备 1：使用异地灾备；0：不使用异地灾备；为空则默认不使用异地灾备
       */
     CrossAZone?: number;
+    /**
+      * 指定防火墙使用网段信息
+      */
+    FwCidrInfo?: FwCidrInfo;
 }
 /**
  * ModifySecurityGroupItemRuleStatus返回参数结构体
@@ -1258,17 +1275,25 @@ export interface DescribeSourceAssetResponse {
     RequestId?: string;
 }
 /**
- * ip防护状态
+ * DescribeTLogInfo请求参数结构体
  */
-export interface IPDefendStatus {
+export interface DescribeTLogInfoRequest {
     /**
-      * ip地址
+      * 开始时间
       */
-    IP: string;
+    StartTime: string;
     /**
-      * 防护状态   1:防护打开; -1:地址错误; 其他:未防护
+      * 结束时间
       */
-    Status: number;
+    EndTime: string;
+    /**
+      * 类型 1 告警 2阻断
+      */
+    QueryType: string;
+    /**
+      * 查询条件
+      */
+    SearchValue?: string;
 }
 /**
  * DescribeSecurityGroupList返回参数结构体
@@ -2425,25 +2450,21 @@ export interface DescribeAssociatedInstanceListRequest {
     Type?: string;
 }
 /**
- * DeleteAcRule请求参数结构体
+ * 防火墙网段信息
  */
-export interface DeleteAcRuleRequest {
+export interface FwCidrInfo {
     /**
-      * 删除规则对应的id值, 对应获取规则列表接口的Id 值
+      * 防火墙使用的网段类型，值VpcSelf/Assis/Custom分别代表自有网段优先/扩展网段优先/自定义
       */
-    Id: number;
+    FwCidrType: string;
     /**
-      * 方向，0：出站，1：入站
+      * 为每个vpc指定防火墙的网段
       */
-    Direction: number;
+    FwCidrLst?: Array<FwVpcCidr>;
     /**
-      * EdgeId值两个vpc间的边id
+      * 其他防火墙占用网段，一般是防火墙需要独占vpc时指定的网段
       */
-    EdgeId?: string;
-    /**
-      * NAT地域， 如ap-shanghai/ap-guangzhou/ap-chongqing等
-      */
-    Area?: string;
+    ComFwCidr?: string;
 }
 /**
  * DeleteAllAccessControlRule返回参数结构体
@@ -2690,6 +2711,10 @@ export interface ModifyNatFwReSelectRequest {
       * 新增模式重新接入的vpc列表，其中NatGwList和NatgwList只能传递一个。
       */
     VpcList?: Array<string>;
+    /**
+      * 指定防火墙使用网段信息
+      */
+    FwCidrInfo?: FwCidrInfo;
 }
 /**
  * SetNatFwDnatRule请求参数结构体
@@ -3128,6 +3153,10 @@ export interface CreateNatFwInstanceWithDomainRequest {
       * 如果要创建域名则必填
       */
     Domain?: string;
+    /**
+      * 指定防火墙使用网段信息
+      */
+    FwCidrInfo?: FwCidrInfo;
 }
 /**
  * DescribeSwitchLists返回参数结构体
@@ -3228,6 +3257,19 @@ export interface ModifySecurityGroupItemRuleStatusRequest {
       * 更改的企业安全组规则的执行顺序
       */
     RuleSequence: number;
+}
+/**
+ * vpc的防火墙网段
+ */
+export interface FwVpcCidr {
+    /**
+      * vpc的id
+      */
+    VpcId: string;
+    /**
+      * 防火墙网段，最少/24的网段
+      */
+    FwCidr: string;
 }
 /**
  * ModifyRunSyncAsset请求参数结构体

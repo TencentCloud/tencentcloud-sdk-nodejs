@@ -7827,7 +7827,7 @@ export interface ModifyRemoteBackupConfigRequest {
       */
     RemoteRegion: Array<string>;
     /**
-      * 异地备份保留天时间，单位为天
+      * 异地备份保留时间，单位为天
       */
     ExpireDays: number;
 }

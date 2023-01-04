@@ -49,6 +49,7 @@ import {
   ConflictHandleOption,
   ResumeSyncJobResponse,
   ModifyCompareTaskNameResponse,
+  PauseSyncJobRequest,
   CreateMigrateCheckJobResponse,
   CreateMigrationServiceRequest,
   DetailCheckItem,
@@ -103,6 +104,7 @@ import {
   CompareViewItem,
   StepInfo,
   ResumeMigrateJobRequest,
+  PauseSyncJobResponse,
   TradeInfo,
   StartCompareResponse,
   CreateCompareTaskResponse,
@@ -313,6 +315,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: StopMigrateJobResponse) => void
   ): Promise<StopMigrateJobResponse> {
     return this.request("StopMigrateJob", req, cb)
+  }
+
+  /**
+   * 暂停处于同步中的数据同步任务。
+   */
+  async PauseSyncJob(
+    req: PauseSyncJobRequest,
+    cb?: (error: string, rep: PauseSyncJobResponse) => void
+  ): Promise<PauseSyncJobResponse> {
+    return this.request("PauseSyncJob", req, cb)
   }
 
   /**

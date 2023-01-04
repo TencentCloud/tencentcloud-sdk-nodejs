@@ -495,99 +495,105 @@ export interface AssetMachineBaseInfo {
   /**
    * 服务器Quuid
    */
-  Quuid: string
+  Quuid?: string
 
   /**
    * 服务器uuid
    */
-  Uuid: string
+  Uuid?: string
 
   /**
    * 服务器内网IP
    */
-  MachineIp: string
+  MachineIp?: string
 
   /**
    * 服务器名称
    */
-  MachineName: string
+  MachineName?: string
 
   /**
    * 操作系统名称
    */
-  OsInfo: string
+  OsInfo?: string
 
   /**
    * CPU信息
    */
-  Cpu: string
+  Cpu?: string
 
   /**
    * 内存容量：单位G
    */
-  MemSize: number
+  MemSize?: number
 
   /**
    * 内存使用率百分比
    */
-  MemLoad: string
+  MemLoad?: string
 
   /**
    * 硬盘容量：单位G
    */
-  DiskSize: number
+  DiskSize?: number
 
   /**
    * 硬盘使用率百分比
    */
-  DiskLoad: string
+  DiskLoad?: string
 
   /**
    * 分区数
    */
-  PartitionCount: number
+  PartitionCount?: number
 
   /**
    * 主机外网IP
    */
-  MachineWanIp: string
+  MachineWanIp?: string
 
   /**
    * 业务组ID
    */
-  ProjectId: number
+  ProjectId?: number
 
   /**
    * Cpu数量
    */
-  CpuSize: number
+  CpuSize?: number
 
   /**
    * Cpu使用率百分比
    */
-  CpuLoad: string
+  CpuLoad?: string
 
   /**
       * 标签
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Tag: Array<MachineTag>
+  Tag?: Array<MachineTag>
 
   /**
       * 数据更新时间
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  UpdateTime: string
+  UpdateTime?: string
 
   /**
    * 是否新增[0:否|1:是]
    */
-  IsNew: number
+  IsNew?: number
 
   /**
    * 首次采集时间
    */
-  FirstTime: string
+  FirstTime?: string
+
+  /**
+      * 附加信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MachineExtraInfo?: MachineExtraInfo
 }
 
 /**
@@ -864,96 +870,102 @@ export interface MalWareList {
   /**
    * 服务器ip
    */
-  HostIp: string
+  HostIp?: string
 
   /**
    * 唯一UUID
    */
-  Uuid: string
+  Uuid?: string
 
   /**
    * 路径
    */
-  FilePath: string
+  FilePath?: string
 
   /**
    * 描述
    */
-  VirusName: string
+  VirusName?: string
 
   /**
    * 状态；4-:待处理，5-已信任，6-已隔离，8-文件已删除, 14:已处理
    */
-  Status: number
+  Status?: number
 
   /**
       * 唯一ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Id: number
+  Id?: number
 
   /**
    * 主机别名
    */
-  Alias: string
+  Alias?: string
 
   /**
       * 特性标签，已废弃字段，不会再返回标签，详情中才会返回标签信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Tags: Array<string>
+  Tags?: Array<string>
 
   /**
       * 首次运行时间
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  FileCreateTime: string
+  FileCreateTime?: string
 
   /**
       * 最近运行时间
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  FileModifierTime: string
+  FileModifierTime?: string
 
   /**
    * 创建时间
    */
-  CreateTime: string
+  CreateTime?: string
 
   /**
    * 最近扫描时间
    */
-  LatestScanTime: string
+  LatestScanTime?: string
 
   /**
    * 风险等级 0未知、1低、2中、3高、4严重
    */
-  Level: number
+  Level?: number
 
   /**
    * '木马检测平台用,分割 1云查杀引擎、2TAV、3binaryAi、4异常行为、5威胁情报
    */
-  CheckPlatform: string
+  CheckPlatform?: string
 
   /**
    * 木马进程是否存在 0:不存在，1:存在
    */
-  ProcessExists: number
+  ProcessExists?: number
 
   /**
    * 木马文件是否存在 0:不存在，1:存在
    */
-  FileExists: number
+  FileExists?: number
 
   /**
    * cvm quuid
    */
-  Quuid: string
+  Quuid?: string
 
   /**
    * 木马样本md5
    */
-  MD5: string
+  MD5?: string
+
+  /**
+      * 附加信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MachineExtraInfo?: MachineExtraInfo
 }
 
 /**
@@ -1213,72 +1225,78 @@ export interface DefendAttackLog {
   /**
    * 日志ID
    */
-  Id: number
+  Id?: number
 
   /**
    * 客户端ID
    */
-  Uuid: string
+  Uuid?: string
 
   /**
    * 来源IP
    */
-  SrcIp: string
+  SrcIp?: string
 
   /**
    * 来源端口
    */
-  SrcPort: number
+  SrcPort?: number
 
   /**
    * 攻击方式
    */
-  HttpMethod: string
+  HttpMethod?: string
 
   /**
    * 攻击描述
    */
-  HttpCgi: string
+  HttpCgi?: string
 
   /**
    * 攻击参数
    */
-  HttpParam: string
+  HttpParam?: string
 
   /**
    * 威胁类型
    */
-  VulType: string
+  VulType?: string
 
   /**
    * 攻击时间
    */
-  CreatedAt: string
+  CreatedAt?: string
 
   /**
    * 目标服务器IP
    */
-  MachineIp: string
+  MachineIp?: string
 
   /**
    * 目标服务器名称
    */
-  MachineName: string
+  MachineName?: string
 
   /**
    * 目标IP
    */
-  DstIp: string
+  DstIp?: string
 
   /**
    * 目标端口
    */
-  DstPort: number
+  DstPort?: number
 
   /**
    * 攻击内容
    */
-  HttpContent: string
+  HttpContent?: string
+
+  /**
+      * 主机额外信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MachineExtraInfo?: MachineExtraInfo
 }
 
 /**
@@ -2696,96 +2714,96 @@ export interface HostLoginList {
   /**
    * 记录Id
    */
-  Id: number
+  Id?: number
 
   /**
       * Uuid串
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Uuid: string
+  Uuid?: string
 
   /**
       * 主机ip
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  MachineIp: string
+  MachineIp?: string
 
   /**
       * 主机名
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  MachineName: string
+  MachineName?: string
 
   /**
       * 用户名
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  UserName: string
+  UserName?: string
 
   /**
       * 来源ip
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  SrcIp: string
+  SrcIp?: string
 
   /**
    * 1:正常登录；2异地登录； 5已加白； 14：已处理；15：已忽略。
    */
-  Status: number
+  Status?: number
 
   /**
       * 国家id
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Country: number
+  Country?: number
 
   /**
       * 城市id
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  City: number
+  City?: number
 
   /**
       * 省份id
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Province: number
+  Province?: number
 
   /**
       * 登录时间
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  LoginTime: string
+  LoginTime?: string
 
   /**
       * 修改时间
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ModifyTime: string
+  ModifyTime?: string
 
   /**
       * 是否命中异地登录异常  1表示命中此类异常, 0表示未命中
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  IsRiskArea: number
+  IsRiskArea?: number
 
   /**
       * 是否命中异常用户异常 1表示命中此类异常, 0表示未命中
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  IsRiskUser: number
+  IsRiskUser?: number
 
   /**
       * 是否命中异常时间异常 1表示命中此类异常, 0表示未命中
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  IsRiskTime: number
+  IsRiskTime?: number
 
   /**
       * 是否命中异常IP异常 1表示命中此类异常, 0表示未命中
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  IsRiskSrcIp: number
+  IsRiskSrcIp?: number
 
   /**
       * 危险等级：
@@ -2793,19 +2811,19 @@ export interface HostLoginList {
 1 可疑
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  RiskLevel: number
+  RiskLevel?: number
 
   /**
       * 位置名称
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Location: string
+  Location?: string
 
   /**
       * 主机quuid
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Quuid: string
+  Quuid?: string
 
   /**
       * 高危信息说明：
@@ -2813,7 +2831,13 @@ ABROAD - 海外IP；
 XTI - 威胁情报
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Desc: string
+  Desc?: string
+
+  /**
+      * 附加信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MachineExtraInfo?: MachineExtraInfo
 }
 
 /**
@@ -3611,102 +3635,108 @@ export interface ReverseShell {
   /**
    * ID 主键
    */
-  Id: number
+  Id?: number
 
   /**
    * 云镜UUID
    */
-  Uuid: string
+  Uuid?: string
 
   /**
    * 主机ID
    */
-  Quuid: string
+  Quuid?: string
 
   /**
    * 主机内网IP
    */
-  Hostip: string
+  Hostip?: string
 
   /**
    * 目标IP
    */
-  DstIp: string
+  DstIp?: string
 
   /**
    * 目标端口
    */
-  DstPort: number
+  DstPort?: number
 
   /**
    * 进程名
    */
-  ProcessName: string
+  ProcessName?: string
 
   /**
    * 进程路径
    */
-  FullPath: string
+  FullPath?: string
 
   /**
    * 命令详情
    */
-  CmdLine: string
+  CmdLine?: string
 
   /**
    * 执行用户
    */
-  UserName: string
+  UserName?: string
 
   /**
    * 执行用户组
    */
-  UserGroup: string
+  UserGroup?: string
 
   /**
    * 父进程名
    */
-  ParentProcName: string
+  ParentProcName?: string
 
   /**
    * 父进程用户
    */
-  ParentProcUser: string
+  ParentProcUser?: string
 
   /**
    * 父进程用户组
    */
-  ParentProcGroup: string
+  ParentProcGroup?: string
 
   /**
    * 父进程路径
    */
-  ParentProcPath: string
+  ParentProcPath?: string
 
   /**
    * 处理状态：0-待处理 2-白名单 3-已处理 4-已忽略
    */
-  Status: number
+  Status?: number
 
   /**
    * 产生时间
    */
-  CreateTime: string
+  CreateTime?: string
 
   /**
    * 主机名
    */
-  MachineName: string
+  MachineName?: string
 
   /**
    * 进程树
    */
-  ProcTree: string
+  ProcTree?: string
 
   /**
    * 检测方法
    */
-  DetectBy: number
+  DetectBy?: number
+
+  /**
+      *  主机额外信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MachineExtraInfo?: MachineExtraInfo
 }
 
 /**
@@ -4012,43 +4042,43 @@ export interface AssetAppBaseInfo {
   /**
    * 主机内网IP
    */
-  MachineIp: string
+  MachineIp?: string
 
   /**
    * 主机名称
    */
-  MachineName: string
+  MachineName?: string
 
   /**
    * 主机外网IP
    */
-  MachineWanIp: string
+  MachineWanIp?: string
 
   /**
    * 主机Uuid
    */
-  Uuid: string
+  Uuid?: string
 
   /**
    * 主机Quuid
    */
-  Quuid: string
+  Quuid?: string
 
   /**
    * 主机业务组ID
    */
-  ProjectId: number
+  ProjectId?: number
 
   /**
       * 主机标签
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Tag: Array<MachineTag>
+  Tag?: Array<MachineTag>
 
   /**
    * 应用名称
    */
-  Name: string
+  Name?: string
 
   /**
       * 应用类型	
@@ -4061,54 +4091,60 @@ export interface AssetAppBaseInfo {
 7 : WEB服务
 99: 其他
       */
-  Type: number
+  Type?: number
 
   /**
    * 二进制路径
    */
-  BinPath: string
+  BinPath?: string
 
   /**
    * 操作系统信息
    */
-  OsInfo: string
+  OsInfo?: string
 
   /**
    * 关联进程数
    */
-  ProcessCount: number
+  ProcessCount?: number
 
   /**
    * 应用描述
    */
-  Desc: string
+  Desc?: string
 
   /**
    * 版本号
    */
-  Version: string
+  Version?: string
 
   /**
    * 配置文件路径
    */
-  ConfigPath: string
+  ConfigPath?: string
 
   /**
    * 首次采集时间
    */
-  FirstTime: string
+  FirstTime?: string
 
   /**
       * 数据更新时间
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  UpdateTime: string
+  UpdateTime?: string
 
   /**
       * 是否新增[0:否|1:是]
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  IsNew: number
+  IsNew?: number
+
+  /**
+      * 附加信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MachineExtraInfo?: MachineExtraInfo
 }
 
 /**
@@ -4164,49 +4200,55 @@ export interface JavaMemShellInfo {
   /**
    * 事件ID
    */
-  Id: number
+  Id?: number
 
   /**
       * 服务器名称
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Alias: string
+  Alias?: string
 
   /**
       * 服务器IP
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  HostIp: string
+  HostIp?: string
 
   /**
    * 内存马类型  0:Filter型 1:Listener型 2:Servlet型 3:Interceptors型 4:Agent型 5:其他
    */
-  Type: number
+  Type?: number
 
   /**
    * 说明
    */
-  Description: string
+  Description?: string
 
   /**
    * 首次发现时间
    */
-  CreateTime: string
+  CreateTime?: string
 
   /**
    * 最近检测时间
    */
-  RecentFoundTime: string
+  RecentFoundTime?: string
 
   /**
    * 处理状态  0 -- 待处理 1 -- 已加白 2 -- 已删除 3 - 已忽略  4 - 已手动处理
    */
-  Status: number
+  Status?: number
 
   /**
    * 服务器quuid
    */
-  Quuid: string
+  Quuid?: string
+
+  /**
+      * 主机额外信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MachineExtraInfo?: MachineExtraInfo
 }
 
 /**
@@ -4530,67 +4572,73 @@ export interface ProtectDirRelatedServer {
   /**
    * 唯一ID
    */
-  Id: string
+  Id?: string
 
   /**
    * 服务器名称
    */
-  HostName: string
+  HostName?: string
 
   /**
    * 服务器IP
    */
-  HostIp: string
+  HostIp?: string
 
   /**
    * 服务器系统
    */
-  MachineOs: string
+  MachineOs?: string
 
   /**
    * 关联目录数
    */
-  RelateDirNum: number
+  RelateDirNum?: number
 
   /**
    * 防护状态
    */
-  ProtectStatus: number
+  ProtectStatus?: number
 
   /**
    * 防护开关
    */
-  ProtectSwitch: number
+  ProtectSwitch?: number
 
   /**
    * 自动恢复开关
    */
-  AutoRestoreSwitchStatus: number
+  AutoRestoreSwitchStatus?: number
 
   /**
    * 服务器唯一ID
    */
-  Quuid: string
+  Quuid?: string
 
   /**
    * 是否已经授权
    */
-  Authorization: boolean
+  Authorization?: boolean
 
   /**
    * 异常状态
    */
-  Exception: number
+  Exception?: number
 
   /**
    * 过渡进度
    */
-  Progress: number
+  Progress?: number
 
   /**
    * 异常信息
    */
-  ExceptionMessage: string
+  ExceptionMessage?: string
+
+  /**
+      * 主机额外信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MachineExtraInfo?: MachineExtraInfo
 }
 
 /**
@@ -5035,92 +5083,98 @@ export interface PrivilegeEscalationProcess {
   /**
    * 数据ID
    */
-  Id: number
+  Id?: number
 
   /**
    * 云镜ID
    */
-  Uuid: string
+  Uuid?: string
 
   /**
    * 主机ID
    */
-  Quuid: string
+  Quuid?: string
 
   /**
    * 主机内网IP
    */
-  Hostip: string
+  Hostip?: string
 
   /**
    * 进程名
    */
-  ProcessName: string
+  ProcessName?: string
 
   /**
    * 进程路径
    */
-  FullPath: string
+  FullPath?: string
 
   /**
    * 执行命令
    */
-  CmdLine: string
+  CmdLine?: string
 
   /**
    * 用户名
    */
-  UserName: string
+  UserName?: string
 
   /**
    * 用户组
    */
-  UserGroup: string
+  UserGroup?: string
 
   /**
    * 进程文件权限
    */
-  ProcFilePrivilege: string
+  ProcFilePrivilege?: string
 
   /**
    * 父进程名
    */
-  ParentProcName: string
+  ParentProcName?: string
 
   /**
    * 父进程用户名
    */
-  ParentProcUser: string
+  ParentProcUser?: string
 
   /**
    * 父进程用户组
    */
-  ParentProcGroup: string
+  ParentProcGroup?: string
 
   /**
    * 父进程路径
    */
-  ParentProcPath: string
+  ParentProcPath?: string
 
   /**
    * 进程树
    */
-  ProcTree: string
+  ProcTree?: string
 
   /**
    * 处理状态：0-待处理 2-白名单 3-已处理 4-已忽略
    */
-  Status: number
+  Status?: number
 
   /**
    * 发生时间
    */
-  CreateTime: string
+  CreateTime?: string
 
   /**
    * 机器名
    */
-  MachineName: string
+  MachineName?: string
+
+  /**
+      * 附加信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MachineExtraInfo?: MachineExtraInfo
 }
 
 /**
@@ -5231,180 +5285,186 @@ export interface AssetMachineDetail {
   /**
    * 服务器Quuid
    */
-  Quuid: string
+  Quuid?: string
 
   /**
    * 服务器uuid
    */
-  Uuid: string
+  Uuid?: string
 
   /**
    * 服务器内网IP
    */
-  MachineIp: string
+  MachineIp?: string
 
   /**
    * 服务器名称
    */
-  MachineName: string
+  MachineName?: string
 
   /**
    * 操作系统名称
    */
-  OsInfo: string
+  OsInfo?: string
 
   /**
    * CPU信息
    */
-  Cpu: string
+  Cpu?: string
 
   /**
    * 内存容量：单位G
    */
-  MemSize: number
+  MemSize?: number
 
   /**
    * 内存使用率百分比
    */
-  MemLoad: string
+  MemLoad?: string
 
   /**
    * 硬盘容量：单位G
    */
-  DiskSize: number
+  DiskSize?: number
 
   /**
    * 硬盘使用率百分比
    */
-  DiskLoad: string
+  DiskLoad?: string
 
   /**
    * 分区数
    */
-  PartitionCount: number
+  PartitionCount?: number
 
   /**
    * 主机外网IP
    */
-  MachineWanIp: string
+  MachineWanIp?: string
 
   /**
    * Cpu数量
    */
-  CpuSize: number
+  CpuSize?: number
 
   /**
    * Cpu使用率百分比
    */
-  CpuLoad: string
+  CpuLoad?: string
 
   /**
-   * 防护级别：0基础版，1专业版
+   * 防护级别：0基础版，1专业版，2旗舰版，3普惠版
    */
-  ProtectLevel: number
+  ProtectLevel?: number
 
   /**
    * 风险状态：UNKNOW-未知，RISK-风险，SAFT-安全
    */
-  RiskStatus: string
+  RiskStatus?: string
 
   /**
    * 已防护天数
    */
-  ProtectDays: number
+  ProtectDays?: number
 
   /**
    * 专业版开通时间
    */
-  BuyTime: string
+  BuyTime?: string
 
   /**
    * 专业版到期时间
    */
-  EndTime: string
+  EndTime?: string
 
   /**
    * 内核版本
    */
-  CoreVersion: string
+  CoreVersion?: string
 
   /**
    * linux/windows
    */
-  OsType: string
+  OsType?: string
 
   /**
    * agent版本
    */
-  AgentVersion: string
+  AgentVersion?: string
 
   /**
    * 安装时间
    */
-  InstallTime: string
+  InstallTime?: string
 
   /**
    * 系统启动时间
    */
-  BootTime: string
+  BootTime?: string
 
   /**
    * 最后上线时间
    */
-  LastLiveTime: string
+  LastLiveTime?: string
 
   /**
    * 生产商
    */
-  Producer: string
+  Producer?: string
 
   /**
    * 序列号
    */
-  SerialNumber: string
+  SerialNumber?: string
 
   /**
    * 网卡
    */
-  NetCards: Array<AssetNetworkCardInfo>
+  NetCards?: Array<AssetNetworkCardInfo>
 
   /**
    * 分区
    */
-  Disks: Array<AssetDiskPartitionInfo>
+  Disks?: Array<AssetDiskPartitionInfo>
 
   /**
    * 0在线，1已离线
    */
-  Status: number
+  Status?: number
 
   /**
    * 业务组ID
    */
-  ProjectId: number
+  ProjectId?: number
 
   /**
    * 设备型号
    */
-  DeviceVersion: string
+  DeviceVersion?: string
 
   /**
       * 离线时间
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  OfflineTime: string
+  OfflineTime?: string
 
   /**
       * 主机ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  InstanceId: string
+  InstanceId?: string
 
   /**
       * 数据更新时间
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  UpdateTime: string
+  UpdateTime?: string
+
+  /**
+      * 主机二外信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MachineExtraInfo?: MachineExtraInfo
 }
 
 /**
@@ -5414,134 +5474,140 @@ export interface AssetDatabaseBaseInfo {
   /**
    * 主机内网IP
    */
-  MachineIp: string
+  MachineIp?: string
 
   /**
    * 主机外网IP
    */
-  MachineWanIp: string
+  MachineWanIp?: string
 
   /**
    * 主机Quuid
    */
-  Quuid: string
+  Quuid?: string
 
   /**
    * 主机Uuid
    */
-  Uuid: string
+  Uuid?: string
 
   /**
    * 操作系统信息
    */
-  OsInfo: string
+  OsInfo?: string
 
   /**
    * 主机业务组ID
    */
-  ProjectId: number
+  ProjectId?: number
 
   /**
       * 主机标签
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Tag: Array<MachineTag>
+  Tag?: Array<MachineTag>
 
   /**
    * 数据库名
    */
-  Name: string
+  Name?: string
 
   /**
    * 版本
    */
-  Version: string
+  Version?: string
 
   /**
    * 监听端口
    */
-  Port: string
+  Port?: string
 
   /**
    * 协议
    */
-  Proto: string
+  Proto?: string
 
   /**
    * 运行用户
    */
-  User: string
+  User?: string
 
   /**
    * 绑定IP
    */
-  Ip: string
+  Ip?: string
 
   /**
    * 配置文件路径
    */
-  ConfigPath: string
+  ConfigPath?: string
 
   /**
    * 日志文件路径
    */
-  LogPath: string
+  LogPath?: string
 
   /**
    * 数据路径
    */
-  DataPath: string
+  DataPath?: string
 
   /**
    * 运行权限
    */
-  Permission: string
+  Permission?: string
 
   /**
    * 错误日志路径
    */
-  ErrorLogPath: string
+  ErrorLogPath?: string
 
   /**
    * 插件路径
    */
-  PlugInPath: string
+  PlugInPath?: string
 
   /**
    * 二进制路径
    */
-  BinPath: string
+  BinPath?: string
 
   /**
    * 启动参数
    */
-  Param: string
+  Param?: string
 
   /**
    * 数据库ID
    */
-  Id: string
+  Id?: string
 
   /**
       * 数据更新时间
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  UpdateTime: string
+  UpdateTime?: string
 
   /**
    * 首次采集时间
    */
-  FirstTime: string
+  FirstTime?: string
 
   /**
    * 是否新增[0:否|1:是]
    */
-  IsNew: number
+  IsNew?: number
 
   /**
    * 主机名称
    */
-  MachineName: string
+  MachineName?: string
+
+  /**
+      *  附加信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MachineExtraInfo?: MachineExtraInfo
 }
 
 /**
@@ -5945,143 +6011,150 @@ export interface AssetUserBaseInfo {
   /**
    * 主机内网IP
    */
-  MachineIp: string
+  MachineIp?: string
 
   /**
    * 主机外网IP
    */
-  MachineWanIp: string
+  MachineWanIp?: string
 
   /**
    * 主机名称
    */
-  MachineName: string
+  MachineName?: string
 
   /**
    * 操作系统信息
    */
-  OsInfo: string
+  OsInfo?: string
 
   /**
    * 主机Uuid
    */
-  Uuid: string
+  Uuid?: string
 
   /**
    * 主机Quuid
    */
-  Quuid: string
+  Quuid?: string
 
   /**
    * 账号UID
    */
-  Uid: string
+  Uid?: string
 
   /**
    * 账号GID
    */
-  Gid: string
+  Gid?: string
 
   /**
    * 账号状态：0-禁用；1-启用
    */
-  Status: number
+  Status?: number
 
   /**
    * 是否有root权限：0-否；1是，999为空: 仅linux
    */
-  IsRoot: number
+  IsRoot?: number
 
   /**
    * 登录方式：0-不可登录；1-只允许key登录；2只允许密码登录；3-允许key和密码，999为空，仅linux
    */
-  LoginType: number
+  LoginType?: number
 
   /**
    * 上次登录时间
    */
-  LastLoginTime: string
+  LastLoginTime?: string
 
   /**
    * 账号名称
    */
-  Name: string
+  Name?: string
 
   /**
    * 主机业务组ID
    */
-  ProjectId: number
+  ProjectId?: number
 
   /**
    * 账号类型：0访客用户，1标准用户，2管理员用户 ,999为空,仅windows
    */
-  UserType: number
+  UserType?: number
 
   /**
    * 是否域账号：0否， 1是，2否, 999为空  仅windows
    */
-  IsDomain: number
+  IsDomain?: number
 
   /**
    * 是否有sudo权限，1是，0否, 999为空, 仅linux
    */
-  IsSudo: number
+  IsSudo?: number
 
   /**
    * 是否允许ssh登录，1是，0否, 999为空, 仅linux
    */
-  IsSshLogin: number
+  IsSshLogin?: number
 
   /**
    * Home目录
    */
-  HomePath: string
+  HomePath?: string
 
   /**
    * Shell路径  仅linux
    */
-  Shell: string
+  Shell?: string
 
   /**
    * 是否shell登录性，0不是；1是 仅linux
    */
-  ShellLoginStatus: number
+  ShellLoginStatus?: number
 
   /**
    * 密码修改时间
    */
-  PasswordChangeTime: string
+  PasswordChangeTime?: string
 
   /**
    * 密码过期时间  仅linux
    */
-  PasswordDueTime: string
+  PasswordDueTime?: string
 
   /**
    * 密码锁定时间：单位天, -1为永不锁定 999为空，仅linux
    */
-  PasswordLockDays: number
+  PasswordLockDays?: number
 
   /**
    * 密码状态：1正常 2即将过期 3已过期 4已锁定 999为空 仅linux
    */
-  PasswordStatus: number
+  PasswordStatus?: number
 
   /**
       * 更新时间
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  UpdateTime: string
+  UpdateTime?: string
 
   /**
    * 首次采集时间
    */
-  FirstTime: string
+  FirstTime?: string
 
   /**
    * 是否新增[0:否|1:是]
    */
-  IsNew: number
+  IsNew?: number
+
+  /**
+      * 
+ 附加信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MachineExtraInfo?: MachineExtraInfo
 }
 
 /**
@@ -6132,61 +6205,73 @@ export interface EffectiveMachineInfo {
       * 机器名称
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  MachineName: string
+  MachineName?: string
 
   /**
       * 机器公网ip
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  MachinePublicIp: string
+  MachinePublicIp?: string
 
   /**
       * 机器内网ip
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  MachinePrivateIp: string
+  MachinePrivateIp?: string
 
   /**
       * 机器标签
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  MachineTag: Array<MachineTag>
+  MachineTag?: Array<MachineTag>
 
   /**
       * 机器Quuid
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Quuid: string
+  Quuid?: string
 
   /**
       * 云镜Uuid
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Uuid: string
+  Uuid?: string
 
   /**
       * 内核版本号
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  KernelVersion: string
+  KernelVersion?: string
 
   /**
       * 在线状态 OFFLINE，ONLINE
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  MachineStatus: string
+  MachineStatus?: string
 
   /**
       * 授权订单对象
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  LicenseOrder: LicenseOrder
+  LicenseOrder?: LicenseOrder
 
   /**
       * 漏洞数量
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  VulNum: number
+  VulNum?: number
+
+  /**
+      * 云标签信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CloudTags?: Array<Tags>
+
+  /**
+      * 机器instance ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceID?: string
 }
 
 /**
@@ -6412,97 +6497,109 @@ export interface VulEffectHostList {
       * 事件id
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  EventId: number
+  EventId?: number
 
   /**
       * 状态：0: 待处理 1:忽略  3:已修复  5:检测中 6:修复中 7: 回滚中 8:修复失败
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Status: number
+  Status?: number
 
   /**
       * 最后检测时间
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  LastTime: string
+  LastTime?: string
 
   /**
       * 危害等级：1-低危；2-中危；3-高危；4-严重
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Level: number
+  Level?: number
 
   /**
       * 主机Quuid
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Quuid: string
+  Quuid?: string
 
   /**
       * 主机Uuid
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Uuid: string
+  Uuid?: string
 
   /**
       * 主机HostIp
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  HostIp: string
+  HostIp?: string
 
   /**
       * 主机别名
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  AliasName: string
+  AliasName?: string
 
   /**
       * 主机标签
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Tags: Array<string>
+  Tags?: Array<string>
 
   /**
       * 说明
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Description: string
+  Description?: string
 
   /**
       * 版本信息：0-基础版 1-专业版 2-旗舰版 3-普惠版
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  HostVersion: number
+  HostVersion?: number
 
   /**
       * 是否能自动修复 0 :漏洞不可自动修复，  1：可自动修复， 2：客户端已离线， 3：主机不是旗舰版只能手动修复， 4：机型不允许 ，5：修复中 ，6：已修复， 7：检测中  9:修复失败，10:已忽略 11:漏洞只支持linux不支持Windows 12：漏洞只支持Windows不支持linux，13:修复失败但此时主机已离线，14:修复失败但此时主机不是旗舰版， 15:已手动修复
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  IsSupportAutoFix: number
+  IsSupportAutoFix?: number
 
   /**
       * 失败原因
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  FixStatusMsg: string
+  FixStatusMsg?: string
 
   /**
       * 首次发现时间
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  FirstDiscoveryTime: string
+  FirstDiscoveryTime?: string
 
   /**
       * 实例状态："PENDING"-创建中 "LAUNCH_FAILED"-创建失败 "RUNNING"-运行中 "STOPPED"-关机 "STARTING"-表示开机中 "STOPPING"-表示关机中 "REBOOTING"-重启中 "SHUTDOWN"-表示停止待销毁 "TERMINATING"-表示销毁中 "
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  InstanceState: string
+  InstanceState?: string
 
   /**
       * 外网ip
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  PublicIpAddresses: string
+  PublicIpAddresses?: string
+
+  /**
+      * 云标签信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CloudTags?: Array<Tags>
+
+  /**
+      * 主机额外信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MachineExtraInfo?: MachineExtraInfo
 }
 
 /**
@@ -6681,12 +6778,12 @@ export interface Machine {
   /**
    * 主机名称。
    */
-  MachineName: string
+  MachineName?: string
 
   /**
    * 主机系统。
    */
-  MachineOs: string
+  MachineOs?: string
 
   /**
       * 主机状态。
@@ -6695,66 +6792,66 @@ export interface Machine {
 <li>SHUTDOWN: 已关机</li>
 <li>UNINSTALLED: 未防护</li>
       */
-  MachineStatus: string
+  MachineStatus?: string
 
   /**
    * 云镜客户端唯一Uuid，若客户端长时间不在线将返回空字符。
    */
-  Uuid: string
+  Uuid?: string
 
   /**
    * CVM或BM机器唯一Uuid。
    */
-  Quuid: string
+  Quuid?: string
 
   /**
    * 漏洞数。
    */
-  VulNum: number
+  VulNum?: number
 
   /**
    * 主机IP。
    */
-  MachineIp: string
+  MachineIp?: string
 
   /**
       * 是否是专业版。
 <li>true： 是</li>
 <li>false：否</li>
       */
-  IsProVersion: boolean
+  IsProVersion?: boolean
 
   /**
    * 主机外网IP。
    */
-  MachineWanIp: string
+  MachineWanIp?: string
 
   /**
       * 主机状态。
 <li>POSTPAY: 表示后付费，即按量计费  </li>
 <li>PREPAY: 表示预付费，即包年包月</li>
       */
-  PayMode: string
+  PayMode?: string
 
   /**
    * 木马数。
    */
-  MalwareNum: number
+  MalwareNum?: number
 
   /**
    * 标签信息
    */
-  Tag: Array<MachineTag>
+  Tag?: Array<MachineTag>
 
   /**
    * 基线风险数。
    */
-  BaselineNum: number
+  BaselineNum?: number
 
   /**
    * 网络风险数。
    */
-  CyberAttackNum: number
+  CyberAttackNum?: number
 
   /**
       * 风险状态。
@@ -6762,70 +6859,87 @@ export interface Machine {
 <li>RISK：风险</li>
 <li>UNKNOWN：未知</li>
       */
-  SecurityStatus: string
+  SecurityStatus?: string
 
   /**
    * 入侵事件数
    */
-  InvasionNum: number
+  InvasionNum?: number
 
   /**
    * 地域信息
    */
-  RegionInfo: RegionInfo
+  RegionInfo?: RegionInfo
 
   /**
    * 实例状态 TERMINATED_PRO_VERSION 已销毁
    */
-  InstanceState: string
+  InstanceState?: string
 
   /**
    * 防篡改 授权状态 1 授权 0 未授权
    */
-  LicenseStatus: number
+  LicenseStatus?: number
 
   /**
    * 项目ID
    */
-  ProjectId: number
+  ProjectId?: number
 
   /**
    * 是否有资产扫描接口，0无，1有
    */
-  HasAssetScan: number
+  HasAssetScan?: number
 
   /**
    * 机器所属专区类型 CVM 云服务器, BM 黑石, ECM 边缘计算, LH 轻量应用服务器 ,Other 混合云专区
    */
-  MachineType: string
+  MachineType?: string
 
   /**
    * 内核版本
    */
-  KernelVersion: string
+  KernelVersion?: string
 
   /**
    * 防护版本：BASIC_VERSION 基础版， PRO_VERSION 专业版，Flagship 旗舰版，GENERAL_DISCOUNT 普惠版
    */
-  ProtectType: string
+  ProtectType?: string
 
   /**
       * 云标签信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  CloudTags: Array<Tags>
+  CloudTags?: Array<Tags>
 
   /**
       * 是否15天内新增的主机 0：非15天内新增的主机，1：15天内增加的主机
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  IsAddedOnTheFifteen: number
+  IsAddedOnTheFifteen?: number
 
   /**
       * 主机ip列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  IpList: string
+  IpList?: string
+
+  /**
+      * 所属网络
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VpcId?: string
+
+  /**
+      * 附加信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MachineExtraInfo?: MachineExtraInfo
+
+  /**
+   * 实例ID
+   */
+  InstanceId?: string
 }
 
 /**
@@ -7025,47 +7139,53 @@ export interface ProtectEventLists {
   /**
    * 服务器名称
    */
-  HostName: string
+  HostName?: string
 
   /**
    * 服务器ip
    */
-  HostIp: string
+  HostIp?: string
 
   /**
    * 事件地址
    */
-  EventDir: string
+  EventDir?: string
 
   /**
    * 事件类型 0-内容被修改恢复；1-权限被修改恢复；2-归属被修改恢复；3-被删除恢复；4-新增删除
    */
-  EventType: number
+  EventType?: number
 
   /**
    * 事件状态 1 已恢复 0 未恢复
    */
-  EventStatus: number
+  EventStatus?: number
 
   /**
    * 发现时间
    */
-  CreateTime: string
+  CreateTime?: string
 
   /**
    * 恢复时间
    */
-  RestoreTime: string
+  RestoreTime?: string
 
   /**
    * 唯一ID
    */
-  Id: number
+  Id?: number
 
   /**
    * 文件类型 0-常规文件；1-目录；2-软链
    */
-  FileType: number
+  FileType?: number
+
+  /**
+      * 主机额外信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MachineExtraInfo?: MachineExtraInfo
 }
 
 /**
@@ -7251,79 +7371,85 @@ export interface AssetWebFrameBaseInfo {
   /**
    * 主机内网IP
    */
-  MachineIp: string
+  MachineIp?: string
 
   /**
    * 主机外网IP
    */
-  MachineWanIp: string
+  MachineWanIp?: string
 
   /**
    * 主机Quuid
    */
-  Quuid: string
+  Quuid?: string
 
   /**
    * 主机Uuid
    */
-  Uuid: string
+  Uuid?: string
 
   /**
    * 操作系统信息
    */
-  OsInfo: string
+  OsInfo?: string
 
   /**
    * 主机业务组ID
    */
-  ProjectId: number
+  ProjectId?: number
 
   /**
       * 主机标签
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Tag: Array<MachineTag>
+  Tag?: Array<MachineTag>
 
   /**
    * 数据库名
    */
-  Name: string
+  Name?: string
 
   /**
    * 版本
    */
-  Version: string
+  Version?: string
 
   /**
    * 语言
    */
-  Lang: string
+  Lang?: string
 
   /**
    * 服务类型
    */
-  ServiceType: string
+  ServiceType?: string
 
   /**
    * 主机名称
    */
-  MachineName: string
+  MachineName?: string
 
   /**
       * 数据更新时间
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  UpdateTime: string
+  UpdateTime?: string
 
   /**
    * 首次采集时间
    */
-  FirstTime: string
+  FirstTime?: string
 
   /**
    * 是否新增[0:否|1:是]
    */
-  IsNew: number
+  IsNew?: number
+
+  /**
+      *  附加信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MachineExtraInfo?: MachineExtraInfo
 }
 
 /**
@@ -8102,6 +8228,47 @@ export interface ExportPrivilegeEventsRequest {
 }
 
 /**
+ * 服务器基础信息
+ */
+export interface MachineExtraInfo {
+  /**
+      * 公网IP
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  WanIP?: string
+
+  /**
+      * 内网IP
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PrivateIP?: string
+
+  /**
+      * 网络类型，1:vpc网络 2:基础网络 3:非腾讯云网络
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NetworkType?: number
+
+  /**
+      * 网络名，vpc网络情况下会返回vpc_id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NetworkName?: string
+
+  /**
+      * 实例ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceID?: string
+
+  /**
+      * 主机名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  HostName?: string
+}
+
+/**
  * DescribeMalwareFile返回参数结构体
  */
 export interface DescribeMalwareFileResponse {
@@ -8201,67 +8368,73 @@ export interface ScanTaskDetails {
   /**
    * 服务器IP
    */
-  HostIp: string
+  HostIp?: string
 
   /**
    * 服务器名称
    */
-  HostName: string
+  HostName?: string
 
   /**
    * 操作系统
    */
-  OsName: string
+  OsName?: string
 
   /**
    * 风险数量
    */
-  RiskNum: number
+  RiskNum?: number
 
   /**
    * 扫描开始时间
    */
-  ScanBeginTime: string
+  ScanBeginTime?: string
 
   /**
    * 扫描结束时间
    */
-  ScanEndTime: string
+  ScanEndTime?: string
 
   /**
    * 唯一Uuid
    */
-  Uuid: string
+  Uuid?: string
 
   /**
    * 唯一Quuid
    */
-  Quuid: string
+  Quuid?: string
 
   /**
    * 状态码
    */
-  Status: string
+  Status?: string
 
   /**
    * 描述
    */
-  Description: string
+  Description?: string
 
   /**
    * id唯一
    */
-  Id: number
+  Id?: number
 
   /**
    * 失败详情
    */
-  FailType: number
+  FailType?: number
 
   /**
    * 外网ip
    */
-  MachineWanIp: string
+  MachineWanIp?: string
+
+  /**
+      * 附加信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MachineExtraInfo?: MachineExtraInfo
 }
 
 /**
@@ -8823,58 +8996,64 @@ export interface BaselineHostDetect {
   /**
    * 主机Id
    */
-  HostId: string
+  HostId?: string
 
   /**
    * 内网Ip
    */
-  HostIp: string
+  HostIp?: string
 
   /**
    * 主机名称
    */
-  HostName: string
+  HostName?: string
 
   /**
    * 外网Ip
    */
-  WanIp: string
+  WanIp?: string
 
   /**
    * 0:未通过 1:忽略 3:通过 5:检测中
    */
-  DetectStatus: number
+  DetectStatus?: number
 
   /**
    * 检测通过数
    */
-  PassedItemCount: number
+  PassedItemCount?: number
 
   /**
    * 关联检测项数
    */
-  ItemCount: number
+  ItemCount?: number
 
   /**
    * 检测未通过数
    */
-  NotPassedItemCount: number
+  NotPassedItemCount?: number
 
   /**
    * 首次检测时间
    */
-  FirstTime: string
+  FirstTime?: string
 
   /**
    * 最后检测时间
    */
-  LastTime: string
+  LastTime?: string
 
   /**
       * 主机安全UUID
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Uuid: string
+  Uuid?: string
+
+  /**
+      * 主机额外信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MachineExtraInfo?: MachineExtraInfo
 }
 
 /**
@@ -9593,109 +9772,115 @@ export interface AssetWebLocationBaseInfo {
   /**
    * 主机Uuid
    */
-  Uuid: string
+  Uuid?: string
 
   /**
    * 主机Quuid
    */
-  Quuid: string
+  Quuid?: string
 
   /**
    * 内网IP
    */
-  MachineIp: string
+  MachineIp?: string
 
   /**
    * 外网IP
    */
-  MachineWanIp: string
+  MachineWanIp?: string
 
   /**
    * 主机名称
    */
-  MachineName: string
+  MachineName?: string
 
   /**
    * 操作系统
    */
-  OsInfo: string
+  OsInfo?: string
 
   /**
    * 域名
    */
-  Name: string
+  Name?: string
 
   /**
    * 站点端口
    */
-  Port: string
+  Port?: string
 
   /**
    * 站点协议
    */
-  Proto: string
+  Proto?: string
 
   /**
    * 服务类型
    */
-  ServiceType: string
+  ServiceType?: string
 
   /**
    * 站点路经数
    */
-  PathCount: number
+  PathCount?: number
 
   /**
    * 运行用户
    */
-  User: string
+  User?: string
 
   /**
    * 主目录
    */
-  MainPath: string
+  MainPath?: string
 
   /**
    * 主目录所有者
    */
-  MainPathOwner: string
+  MainPathOwner?: string
 
   /**
    * 拥有者权限
    */
-  Permission: string
+  Permission?: string
 
   /**
    * 主机业务组ID
    */
-  ProjectId: number
+  ProjectId?: number
 
   /**
    * 主机标签
    */
-  Tag: Array<MachineTag>
+  Tag?: Array<MachineTag>
 
   /**
    * Web站点Id
    */
-  Id: string
+  Id?: string
 
   /**
       * 数据更新时间
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  UpdateTime: string
+  UpdateTime?: string
 
   /**
    * 首次采集时间
    */
-  FirstTime: string
+  FirstTime?: string
 
   /**
       * 是否新增[0:否|1:是]
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  IsNew: number
+  IsNew?: number
+
+  /**
+      *  附加信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MachineExtraInfo?: MachineExtraInfo
 }
 
 /**
@@ -10009,47 +10194,53 @@ export interface LicenseBindDetail {
   /**
    * 机器别名
    */
-  MachineName: string
+  MachineName?: string
 
   /**
    * 机器公网IP
    */
-  MachineWanIp: string
+  MachineWanIp?: string
 
   /**
    * 机器内网IP
    */
-  MachineIp: string
+  MachineIp?: string
 
   /**
    * 云服务器UUID
    */
-  Quuid: string
+  Quuid?: string
 
   /**
    * 云镜客户端UUID
    */
-  Uuid: string
+  Uuid?: string
 
   /**
    * 标签信息
    */
-  Tags: Array<string>
+  Tags?: Array<string>
 
   /**
    * 云镜客户端状态,OFFLINE 离线,ONLINE 在线,UNINSTALL 未安装
    */
-  AgentStatus: string
+  AgentStatus?: string
 
   /**
    * 是否允许解绑,false 不允许解绑
    */
-  IsUnBind: boolean
+  IsUnBind?: boolean
 
   /**
    * 是否允许换绑,false 不允许换绑
    */
-  IsSwitchBind: boolean
+  IsSwitchBind?: boolean
+
+  /**
+      * 主机额外信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MachineExtraInfo?: MachineExtraInfo
 }
 
 /**
@@ -10059,104 +10250,110 @@ export interface AssetWebServiceBaseInfo {
   /**
    * 主机内网IP
    */
-  MachineIp: string
+  MachineIp?: string
 
   /**
    * 主机外网IP
    */
-  MachineWanIp: string
+  MachineWanIp?: string
 
   /**
    * 主机Quuid
    */
-  Quuid: string
+  Quuid?: string
 
   /**
    * 主机Uuid
    */
-  Uuid: string
+  Uuid?: string
 
   /**
    * 操作系统信息
    */
-  OsInfo: string
+  OsInfo?: string
 
   /**
    * 主机业务组ID
    */
-  ProjectId: number
+  ProjectId?: number
 
   /**
       * 主机标签
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Tag: Array<MachineTag>
+  Tag?: Array<MachineTag>
 
   /**
    * 数据库名
    */
-  Name: string
+  Name?: string
 
   /**
    * 版本
    */
-  Version: string
+  Version?: string
 
   /**
    * 二进制路径
    */
-  BinPath: string
+  BinPath?: string
 
   /**
    * 启动用户
    */
-  User: string
+  User?: string
 
   /**
    * 安装路径
    */
-  InstallPath: string
+  InstallPath?: string
 
   /**
    * 配置路径
    */
-  ConfigPath: string
+  ConfigPath?: string
 
   /**
    * 关联进程数
    */
-  ProcessCount: number
+  ProcessCount?: number
 
   /**
    * Web服务ID
    */
-  Id: string
+  Id?: string
 
   /**
    * 主机名称
    */
-  MachineName: string
+  MachineName?: string
 
   /**
    * 描述
    */
-  Desc: string
+  Desc?: string
 
   /**
       * 数据更新时间
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  UpdateTime: string
+  UpdateTime?: string
 
   /**
    * 首次采集时间
    */
-  FirstTime: string
+  FirstTime?: string
 
   /**
    * 是否新增[0:否|1:是]
    */
-  IsNew: number
+  IsNew?: number
+
+  /**
+      *  附加信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MachineExtraInfo?: MachineExtraInfo
 }
 
 /**
@@ -10296,7 +10493,7 @@ export interface AssetInitServiceBaseInfo {
   /**
    * 名称
    */
-  Name: string
+  Name?: string
 
   /**
       * 类型：
@@ -10315,67 +10512,74 @@ export interface AssetInitServiceBaseInfo {
 13:驱动服务
 14:登录
       */
-  Type: number
+  Type?: number
 
   /**
    * 默认启用状态：0未启用，1启用
    */
-  Status: number
+  Status?: number
 
   /**
    * 启动用户
    */
-  User: string
+  User?: string
 
   /**
    * 路径
    */
-  Path: string
+  Path?: string
 
   /**
    * 服务器IP
    */
-  MachineIp: string
+  MachineIp?: string
 
   /**
    * 服务器名称
    */
-  MachineName: string
+  MachineName?: string
 
   /**
    * 操作系统
    */
-  OsInfo: string
+  OsInfo?: string
 
   /**
    * 主机Quuid
    */
-  Quuid: string
+  Quuid?: string
 
   /**
    * 主机uuid
    */
-  Uuid: string
+  Uuid?: string
 
   /**
    * 数据更新时间
    */
-  UpdateTime: string
+  UpdateTime?: string
 
   /**
    * 首次采集时间
    */
-  FirstTime: string
+  FirstTime?: string
 
   /**
    * 是否新增[0:否|1:是]
    */
-  IsNew: number
+  IsNew?: number
 
   /**
    * 服务器外网IP
    */
-  MachineWanIp: string
+  MachineWanIp?: string
+
+  /**
+      *  附加信息
+
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MachineExtraInfo?: MachineExtraInfo
 }
 
 /**
@@ -11067,73 +11271,79 @@ export interface AssetPlanTask {
   /**
    * 默认启用状态：1启用，2未启用
    */
-  Status: number
+  Status?: number
 
   /**
    * 执行周期
    */
-  Cycle: string
+  Cycle?: string
 
   /**
    * 执行命令或脚本
    */
-  Command: string
+  Command?: string
 
   /**
    * 启动用户
    */
-  User: string
+  User?: string
 
   /**
    * 配置文件路径
    */
-  ConfigPath: string
+  ConfigPath?: string
 
   /**
    * 服务器IP
    */
-  MachineIp: string
+  MachineIp?: string
 
   /**
    * 服务器名称
    */
-  MachineName: string
+  MachineName?: string
 
   /**
    * 操作系统
    */
-  OsInfo: string
+  OsInfo?: string
 
   /**
    * 主机Quuid
    */
-  Quuid: string
+  Quuid?: string
 
   /**
    * 主机uuid
    */
-  Uuid: string
+  Uuid?: string
 
   /**
       * 数据更新时间
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  UpdateTime: string
+  UpdateTime?: string
 
   /**
    * 首次采集时间
    */
-  FirstTime: string
+  FirstTime?: string
 
   /**
    * 是否新增[0:否|1:是]
    */
-  IsNew: number
+  IsNew?: number
 
   /**
    * 服务器外网IP
    */
-  MachineWanIp: string
+  MachineWanIp?: string
+
+  /**
+      *  附加信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MachineExtraInfo?: MachineExtraInfo
 }
 
 /**
@@ -11823,98 +12033,104 @@ export interface BaselineItem {
   /**
    * 项Id
    */
-  ItemId: number
+  ItemId?: number
 
   /**
    * 项名称
    */
-  ItemName: string
+  ItemName?: string
 
   /**
    * 检测项分类
    */
-  CategoryId: number
+  CategoryId?: number
 
   /**
    * 项描述
    */
-  ItemDesc: string
+  ItemDesc?: string
 
   /**
    * 修复方法
    */
-  FixMethod: string
+  FixMethod?: string
 
   /**
    * 所属规则
    */
-  RuleName: string
+  RuleName?: string
 
   /**
       * 检测结果描述
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  DetectResultDesc: string
+  DetectResultDesc?: string
 
   /**
       * 危险等级
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Level: number
+  Level?: number
 
   /**
       * 检测状态：0 未通过，1：忽略，3：通过，5：检测中
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  DetectStatus: number
+  DetectStatus?: number
 
   /**
       * 主机ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  HostId: string
+  HostId?: string
 
   /**
       * 主机名
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  HostName: string
+  HostName?: string
 
   /**
       * 主机IP
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  HostIp: string
+  HostIp?: string
 
   /**
       * 外网IP
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  WanIp: string
+  WanIp?: string
 
   /**
       * 第一次出现时间
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  FirstTime: string
+  FirstTime?: string
 
   /**
       * 最近出现时间
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  LastTime: string
+  LastTime?: string
 
   /**
       * 是否可以修复
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  CanBeFixed: number
+  CanBeFixed?: number
 
   /**
       * 主机安全uuid
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Uuid: string
+  Uuid?: string
+
+  /**
+      * 主机额外信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MachineExtraInfo?: MachineExtraInfo
 }
 
 /**
@@ -12601,88 +12817,94 @@ export interface AssetCoreModuleBaseInfo {
   /**
    * 名称
    */
-  Name: string
+  Name?: string
 
   /**
    * 描述
    */
-  Desc: string
+  Desc?: string
 
   /**
    * 路径
    */
-  Path: string
+  Path?: string
 
   /**
    * 版本
    */
-  Version: string
+  Version?: string
 
   /**
    * 服务器IP
    */
-  MachineIp: string
+  MachineIp?: string
 
   /**
    * 服务器名称
    */
-  MachineName: string
+  MachineName?: string
 
   /**
    * 操作系统
    */
-  OsInfo: string
+  OsInfo?: string
 
   /**
    * 模块大小
    */
-  Size: number
+  Size?: number
 
   /**
    * 依赖进程数
    */
-  ProcessCount: number
+  ProcessCount?: number
 
   /**
    * 依赖模块数
    */
-  ModuleCount: number
+  ModuleCount?: number
 
   /**
    * 模块ID
    */
-  Id: string
+  Id?: string
 
   /**
    * 主机Quuid
    */
-  Quuid: string
+  Quuid?: string
 
   /**
    * 主机uuid
    */
-  Uuid: string
+  Uuid?: string
 
   /**
       * 数据更新时间
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  UpdateTime: string
+  UpdateTime?: string
 
   /**
    * 首次采集时间
    */
-  FirstTime: string
+  FirstTime?: string
 
   /**
    * 是否新增[0:否|1:是]
    */
-  IsNew: number
+  IsNew?: number
 
   /**
    * 服务器外网IP
    */
-  MachineWanIp: string
+  MachineWanIp?: string
+
+  /**
+      *  附加信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MachineExtraInfo?: MachineExtraInfo
 }
 
 /**
@@ -13716,144 +13938,152 @@ export interface AssetProcessBaseInfo {
   /**
    * 主机内网IP
    */
-  MachineIp: string
+  MachineIp?: string
 
   /**
    * 主机外网IP
    */
-  MachineWanIp: string
+  MachineWanIp?: string
 
   /**
    * 主机Quuid
    */
-  Quuid: string
+  Quuid?: string
 
   /**
    * 主机Uuid
    */
-  Uuid: string
+  Uuid?: string
 
   /**
    * 操作系统信息
    */
-  OsInfo: string
+  OsInfo?: string
 
   /**
    * 主机业务组ID
    */
-  ProjectId: number
+  ProjectId?: number
 
   /**
       * 主机标签
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Tag: Array<MachineTag>
+  Tag?: Array<MachineTag>
 
   /**
    * 进程名称
    */
-  Name: string
+  Name?: string
 
   /**
    * 进程说明
    */
-  Desc: string
+  Desc?: string
 
   /**
    * 进程路径
    */
-  Path: string
+  Path?: string
 
   /**
    * 进程ID
    */
-  Pid: string
+  Pid?: string
 
   /**
    * 运行用户
    */
-  User: string
+  User?: string
 
   /**
    * 启动时间
    */
-  StartTime: string
+  StartTime?: string
 
   /**
    * 启动参数
    */
-  Param: string
+  Param?: string
 
   /**
    * 进程TTY
    */
-  Tty: string
+  Tty?: string
 
   /**
    * 进程版本
    */
-  Version: string
+  Version?: string
 
   /**
    * 进程用户组
    */
-  GroupName: string
+  GroupName?: string
 
   /**
    * 进程MD5
    */
-  Md5: string
+  Md5?: string
 
   /**
    * 父进程ID
    */
-  Ppid: string
+  Ppid?: string
 
   /**
    * 父进程名称
    */
-  ParentProcessName: string
+  ParentProcessName?: string
 
   /**
    * 进程状态
    */
-  Status: string
+  Status?: string
 
   /**
    * 数字签名:0无，1有， 999 空，仅windows
    */
-  HasSign: number
+  HasSign?: number
 
   /**
    * 是否通过安装包安装：:0否，1是， 999 空，仅linux
    */
-  InstallByPackage: number
+  InstallByPackage?: number
 
   /**
    * 软件包名
    */
-  PackageName: string
+  PackageName?: string
 
   /**
    * 主机名称
    */
-  MachineName: string
+  MachineName?: string
 
   /**
       * 数据更新时间
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  UpdateTime: string
+  UpdateTime?: string
 
   /**
    * 首次采集时间
    */
-  FirstTime: string
+  FirstTime?: string
 
   /**
    * 是否新增[0:否|1:是]
    */
-  IsNew: number
+  IsNew?: number
+
+  /**
+      * 
+ 附加信息
+
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MachineExtraInfo?: MachineExtraInfo
 }
 
 /**
@@ -14151,70 +14381,77 @@ export interface AssetEnvBaseInfo {
   /**
    * 名称
    */
-  Name: string
+  Name?: string
 
   /**
       * 类型：
 0:用户变量
 1:系统变量
       */
-  Type: number
+  Type?: number
 
   /**
    * 启动用户
    */
-  User: string
+  User?: string
 
   /**
    * 环境变量值
    */
-  Value: string
+  Value?: string
 
   /**
    * 服务器IP
    */
-  MachineIp: string
+  MachineIp?: string
 
   /**
    * 服务器名称
    */
-  MachineName: string
+  MachineName?: string
 
   /**
    * 操作系统
    */
-  OsInfo: string
+  OsInfo?: string
 
   /**
    * 主机Quuid
    */
-  Quuid: string
+  Quuid?: string
 
   /**
    * 主机uuid
    */
-  Uuid: string
+  Uuid?: string
 
   /**
       * 数据更新时间
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  UpdateTime: string
+  UpdateTime?: string
 
   /**
    * 首次采集时间
    */
-  FirstTime: string
+  FirstTime?: string
 
   /**
    * 是否新增[0:否|1:是]
    */
-  IsNew: number
+  IsNew?: number
 
   /**
    * 服务器外网IP
    */
-  MachineWanIp: string
+  MachineWanIp?: string
+
+  /**
+      *  附加信息
+
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MachineExtraInfo?: MachineExtraInfo
 }
 
 /**
@@ -14244,158 +14481,164 @@ export interface MalwareInfo {
   /**
    * 病毒名称
    */
-  VirusName: string
+  VirusName?: string
 
   /**
    * 文件大小
    */
-  FileSize: number
+  FileSize?: number
 
   /**
    * 文件MD5
    */
-  MD5: string
+  MD5?: string
 
   /**
    * 文件地址
    */
-  FilePath: string
+  FilePath?: string
 
   /**
    * 首次运行时间
    */
-  FileCreateTime: string
+  FileCreateTime?: string
 
   /**
    * 最近一次运行时间
    */
-  FileModifierTime: string
+  FileModifierTime?: string
 
   /**
    * 危害描述
    */
-  HarmDescribe: string
+  HarmDescribe?: string
 
   /**
    * 建议方案
    */
-  SuggestScheme: string
+  SuggestScheme?: string
 
   /**
    * 服务器名称
    */
-  ServersName: string
+  ServersName?: string
 
   /**
    * 服务器IP
    */
-  HostIp: string
+  HostIp?: string
 
   /**
    * 进程名称
    */
-  ProcessName: string
+  ProcessName?: string
 
   /**
    * 进程ID
    */
-  ProcessID: string
+  ProcessID?: string
 
   /**
    * 标签特性
    */
-  Tags: Array<string>
+  Tags?: Array<string>
 
   /**
       * 影响广度 // 暂时不提供
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Breadth: string
+  Breadth?: string
 
   /**
       * 查询热度 // 暂时不提供
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Heat: string
+  Heat?: string
 
   /**
    * 唯一ID
    */
-  Id: number
+  Id?: number
 
   /**
    * 文件名称
    */
-  FileName: string
+  FileName?: string
 
   /**
    * 首次发现时间
    */
-  CreateTime: string
+  CreateTime?: string
 
   /**
    * 最近扫描时间
    */
-  LatestScanTime: string
+  LatestScanTime?: string
 
   /**
    * 参考链接
    */
-  Reference: string
+  Reference?: string
 
   /**
       * 外网ip
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  MachineWanIp: string
+  MachineWanIp?: string
 
   /**
       * 进程树 json  pid:进程id，exe:文件路径 ，account:进程所属用组和用户 ,cmdline:执行命令，ssh_service: SSH服务ip, ssh_soure:登录源
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  PsTree: string
+  PsTree?: string
 
   /**
       * 主机在线状态 OFFLINE  ONLINE
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  MachineStatus: string
+  MachineStatus?: string
 
   /**
       * 状态；4-:待处理，5-已信任，6-已隔离
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Status: number
+  Status?: number
 
   /**
       * 风险等级 0提示、1低、2中、3高、4严重
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Level: number
+  Level?: number
 
   /**
       * 木马检测平台用,分割 1云查杀引擎、2TAV、3binaryAi、4异常行为、5威胁情报
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  CheckPlatform: string
+  CheckPlatform?: string
 
   /**
       * 主机uuid
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Uuid: string
+  Uuid?: string
 
   /**
       * 最近修改时间
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ModifyTime: string
+  ModifyTime?: string
 
   /**
       * 最近访问时间
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  StrFileAccessTime: string
+  StrFileAccessTime?: string
+
+  /**
+      * 附加信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MachineExtraInfo?: MachineExtraInfo
 }
 
 /**
@@ -14823,104 +15066,110 @@ export interface AssetWebAppBaseInfo {
   /**
    * 主机内网IP
    */
-  MachineIp: string
+  MachineIp?: string
 
   /**
    * 主机外网IP
    */
-  MachineWanIp: string
+  MachineWanIp?: string
 
   /**
    * 主机Quuid
    */
-  Quuid: string
+  Quuid?: string
 
   /**
    * 主机Uuid
    */
-  Uuid: string
+  Uuid?: string
 
   /**
    * 操作系统信息
    */
-  OsInfo: string
+  OsInfo?: string
 
   /**
    * 主机业务组ID
    */
-  ProjectId: number
+  ProjectId?: number
 
   /**
       * 主机标签
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Tag: Array<MachineTag>
+  Tag?: Array<MachineTag>
 
   /**
    * 应用名
    */
-  Name: string
+  Name?: string
 
   /**
    * 版本
    */
-  Version: string
+  Version?: string
 
   /**
    * 根路径
    */
-  RootPath: string
+  RootPath?: string
 
   /**
    * 服务类型
    */
-  ServiceType: string
+  ServiceType?: string
 
   /**
    * 站点域名
    */
-  Domain: string
+  Domain?: string
 
   /**
    * 虚拟路径
    */
-  VirtualPath: string
+  VirtualPath?: string
 
   /**
    * 插件数
    */
-  PluginCount: number
+  PluginCount?: number
 
   /**
    * 应用ID
    */
-  Id: string
+  Id?: string
 
   /**
    * 应用描述
    */
-  Desc: string
+  Desc?: string
 
   /**
    * 主机名称
    */
-  MachineName: string
+  MachineName?: string
 
   /**
       * 数据更新时间
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  UpdateTime: string
+  UpdateTime?: string
 
   /**
    * 首次采集时间
    */
-  FirstTime: string
+  FirstTime?: string
 
   /**
    * 是否新增[0:否|1:是]
    */
-  IsNew: number
+  IsNew?: number
+
+  /**
+      *  附加信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MachineExtraInfo?: MachineExtraInfo
 }
 
 /**
@@ -14955,83 +15204,90 @@ export interface AssetJarBaseInfo {
   /**
    * 名称
    */
-  Name: string
+  Name?: string
 
   /**
    * 类型：1应用程序，2系统类库，3Web服务自带库，8:其他，
    */
-  Type: number
+  Type?: number
 
   /**
    * 是否可执行：0未知，1是，2否
    */
-  Status: number
+  Status?: number
 
   /**
    * 版本
    */
-  Version: string
+  Version?: string
 
   /**
    * 路径
    */
-  Path: string
+  Path?: string
 
   /**
    * 服务器IP
    */
-  MachineIp: string
+  MachineIp?: string
 
   /**
    * 服务器名称
    */
-  MachineName: string
+  MachineName?: string
 
   /**
    * 操作系统
    */
-  OsInfo: string
+  OsInfo?: string
 
   /**
    * Jar包ID
    */
-  Id: string
+  Id?: string
 
   /**
    * Jar包Md5
    */
-  Md5: string
+  Md5?: string
 
   /**
    * 主机Quuid
    */
-  Quuid: string
+  Quuid?: string
 
   /**
    * 主机uuid
    */
-  Uuid: string
+  Uuid?: string
 
   /**
       * 数据更新时间
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  UpdateTime: string
+  UpdateTime?: string
 
   /**
    * 首次采集时间
    */
-  FirstTime: string
+  FirstTime?: string
 
   /**
    * 是否新增[0:否|1:是]
    */
-  IsNew: number
+  IsNew?: number
 
   /**
    * 服务器外网IP
    */
-  MachineWanIp: string
+  MachineWanIp?: string
+
+  /**
+      *  附加信息
+
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MachineExtraInfo?: MachineExtraInfo
 }
 
 /**
@@ -16226,127 +16482,133 @@ export interface BruteAttackInfo {
   /**
    * 唯一Id
    */
-  Id: number
+  Id?: number
 
   /**
       * 云镜客户端唯一标识UUID
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Uuid: string
+  Uuid?: string
 
   /**
       * 主机ip
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  MachineIp: string
+  MachineIp?: string
 
   /**
       * 主机名
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  MachineName: string
+  MachineName?: string
 
   /**
       * 用户名
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  UserName: string
+  UserName?: string
 
   /**
       * 来源ip
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  SrcIp: string
+  SrcIp?: string
 
   /**
       * SUCCESS：破解成功；FAILED：破解失败
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Status: string
+  Status?: string
 
   /**
       * 国家id
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Country: number
+  Country?: number
 
   /**
       * 城市id
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  City: number
+  City?: number
 
   /**
       * 省份id
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Province: number
+  Province?: number
 
   /**
       * 创建时间
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  CreateTime: string
+  CreateTime?: string
 
   /**
       * 阻断状态：1-阻断成功；非1-阻断失败
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  BanStatus: number
+  BanStatus?: number
 
   /**
       * 事件类型：200-暴力破解事件，300-暴力破解成功事件（页面展示），400-暴力破解不存在的帐号事件
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  EventType: number
+  EventType?: number
 
   /**
       * 发生次数
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Count: number
+  Count?: number
 
   /**
       * 机器UUID
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Quuid: string
+  Quuid?: string
 
   /**
       * 是否为专业版（true/false）
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  IsProVersion: boolean
+  IsProVersion?: boolean
 
   /**
       * 被攻击的服务的用户名
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Protocol: string
+  Protocol?: string
 
   /**
       * 端口
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Port: number
+  Port?: number
 
   /**
       * 最近攻击时间
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ModifyTime: string
+  ModifyTime?: string
 
   /**
       * 实例ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  InstanceId: string
+  InstanceId?: string
 
   /**
       * 0：待处理，1：忽略，5：已处理，6：加入白名单
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  DataStatus: number
+  DataStatus?: number
+
+  /**
+      * 附加信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MachineExtraInfo?: MachineExtraInfo
 }
 
 /**
@@ -16527,134 +16789,140 @@ export interface AssetPortBaseInfo {
   /**
    * 主机内网IP
    */
-  MachineIp: string
+  MachineIp?: string
 
   /**
    * 主机外网IP
    */
-  MachineWanIp: string
+  MachineWanIp?: string
 
   /**
    * 主机Quuid
    */
-  Quuid: string
+  Quuid?: string
 
   /**
    * 主机Uuid
    */
-  Uuid: string
+  Uuid?: string
 
   /**
    * 操作系统信息
    */
-  OsInfo: string
+  OsInfo?: string
 
   /**
    * 主机业务组ID
    */
-  ProjectId: number
+  ProjectId?: number
 
   /**
       * 主机标签
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Tag: Array<MachineTag>
+  Tag?: Array<MachineTag>
 
   /**
    * 进程名称
    */
-  ProcessName: string
+  ProcessName?: string
 
   /**
    * 进程版本
    */
-  ProcessVersion: string
+  ProcessVersion?: string
 
   /**
    * 进程路径
    */
-  ProcessPath: string
+  ProcessPath?: string
 
   /**
    * 进程ID
    */
-  Pid: string
+  Pid?: string
 
   /**
    * 运行用户
    */
-  User: string
+  User?: string
 
   /**
    * 启动时间
    */
-  StartTime: string
+  StartTime?: string
 
   /**
    * 启动参数
    */
-  Param: string
+  Param?: string
 
   /**
    * 进程TTY
    */
-  Teletype: string
+  Teletype?: string
 
   /**
    * 端口
    */
-  Port: string
+  Port?: string
 
   /**
    * 所属用户组
    */
-  GroupName: string
+  GroupName?: string
 
   /**
    * 进程MD5
    */
-  Md5: string
+  Md5?: string
 
   /**
    * 父进程ID
    */
-  Ppid: string
+  Ppid?: string
 
   /**
    * 父进程名称
    */
-  ParentProcessName: string
+  ParentProcessName?: string
 
   /**
    * 端口协议
    */
-  Proto: string
+  Proto?: string
 
   /**
    * 绑定IP
    */
-  BindIp: string
+  BindIp?: string
 
   /**
    * 主机名称
    */
-  MachineName: string
+  MachineName?: string
 
   /**
       * 数据更新时间
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  UpdateTime: string
+  UpdateTime?: string
 
   /**
    * 首次采集时间
    */
-  FirstTime: string
+  FirstTime?: string
 
   /**
    * 是否新增[0:否|1:是]
    */
-  IsNew: number
+  IsNew?: number
+
+  /**
+      *  附加信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MachineExtraInfo?: MachineExtraInfo
 }
 
 /**

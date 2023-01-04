@@ -313,6 +313,7 @@ import {
   DescribeAssetUserInfoRequest,
   DescribeProtectDirListRequest,
   ExportPrivilegeEventsRequest,
+  MachineExtraInfo,
   DescribeMalwareFileResponse,
   StopBaselineDetectRequest,
   TaskStatus,

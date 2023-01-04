@@ -430,6 +430,15 @@ export interface ModifyCompareTaskNameResponse {
     RequestId?: string;
 }
 /**
+ * PauseSyncJob请求参数结构体
+ */
+export interface PauseSyncJobRequest {
+    /**
+      * 同步任务id
+      */
+    JobId: string;
+}
+/**
  * CreateMigrateCheckJob返回参数结构体
  */
 export interface CreateMigrateCheckJobResponse {
@@ -1922,6 +1931,15 @@ export interface ResumeMigrateJobRequest {
       * 恢复任务的模式，目前的取值有：clearData 清空目标实例数据，overwrite 以覆盖写的方式执行任务，normal 跟正常流程一样，不做额外动作
       */
     ResumeOption: string;
+}
+/**
+ * PauseSyncJob返回参数结构体
+ */
+export interface PauseSyncJobResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 计费状态信息

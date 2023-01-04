@@ -115,15 +115,15 @@ export interface ModifyAutoBackupConfigResponse {
       */
     AutoBackupType: number;
     /**
-      * 日期Monday，Tuesday，Wednesday，Thursday，Friday，Saturday，Sunday。
+      * 自动备份周期。取值为：Monday，Tuesday，Wednesday，Thursday，Friday，Saturday，Sunday。
       */
     WeekDays: Array<string>;
     /**
-      * 时间段 00:00-01:00, 01:00-02:00...... 23:00-00:00
+      * 自动备份时间段。格式如：00:00-01:00, 01:00-02:00...... 23:00-00:00。
       */
     TimePeriod: string;
     /**
-      * 全量备份文件保存天数,单位：天
+      * 全量备份文件保存天数,单位：天。
       */
     BackupStorageDays: number;
     /**
@@ -956,19 +956,19 @@ export interface DescribeInstanceParamRecordsResponse {
  */
 export interface ModifyAutoBackupConfigRequest {
     /**
-      * 实例ID
+      * 实例ID。
       */
     InstanceId: string;
     /**
-      * 日期 Monday，Tuesday，Wednesday，Thursday，Friday，Saturday，Sunday，该参数暂不支持修改。
+      * 设置自动备份周期。可设置为Monday，Tuesday，Wednesday，Thursday，Friday，Saturday，Sunday。该参数暂不支持修改。
       */
     WeekDays: Array<string>;
     /**
-      * 时间段 00:00-01:00, 01:00-02:00...... 23:00-00:00
+      * 备份时间段。可设置为每个整点。格式如：00:00-01:00, 01:00-02:00...... 23:00-00:00。
       */
     TimePeriod: string;
     /**
-      * 自动备份类型： 1 “定时回档”
+      * 自动备份类型： 1 “定时回档”。
       */
     AutoBackupType?: number;
 }
@@ -2180,19 +2180,19 @@ export interface ApplyParamsTemplateResponse {
  */
 export interface DescribeReplicationGroupRequest {
     /**
-      * 实例列表的大小，参数默认值20
+      * 每页输出实例列表的大小，参数默认值20。
       */
     Limit: number;
     /**
-      * 偏移量，取Limit整数倍
+      * 分页偏移量，取Limit整数倍。计算公式：offset=limit*(页码-1)。
       */
     Offset: number;
     /**
-      * 复制组ID
+      * 复制组ID。
       */
     GroupId?: string;
     /**
-      * 实例ID和实例名称，支持模糊查询
+      * 设置模糊查询的关键字，可以设置为实例ID或实例名称进行模糊查询。
       */
     SearchKey?: string;
 }
@@ -3310,11 +3310,11 @@ export interface ManualBackupInstanceRequest {
  */
 export interface DescribeReplicationGroupResponse {
     /**
-      * 复制组数
+      * 复制组数量。
       */
     TotalCount: number;
     /**
-      * 复制组信息
+      * 复制组信息。
       */
     Groups: Array<Groups>;
     /**

@@ -276,7 +276,7 @@ export declare class Client extends AbstractClient {
      */
     SwitchInstanceVip(req: SwitchInstanceVipRequest, cb?: (error: string, rep: SwitchInstanceVipResponse) => void): Promise<SwitchInstanceVipResponse>;
     /**
-     * 查询复制组
+     * 本接口（DescribeReplicationGroup）查询复制组。
      */
     DescribeReplicationGroup(req: DescribeReplicationGroupRequest, cb?: (error: string, rep: DescribeReplicationGroupResponse) => void): Promise<DescribeReplicationGroupResponse>;
     /**

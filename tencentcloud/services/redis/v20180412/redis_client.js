@@ -430,7 +430,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SwitchInstanceVip", req, cb);
     }
     /**
-     * 查询复制组
+     * 本接口（DescribeReplicationGroup）查询复制组。
      */
     async DescribeReplicationGroup(req, cb) {
         return this.request("DescribeReplicationGroup", req, cb);

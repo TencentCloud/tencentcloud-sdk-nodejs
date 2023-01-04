@@ -300,6 +300,7 @@ import {
   DescribeDistrictIspDataResponse,
   RuleEngine,
   DescribeDomainsConfigResponse,
+  HttpsBilling,
   DescribeCdnIpRequest,
   DescribeIpVisitResponse,
   UserAgentFilterRule,

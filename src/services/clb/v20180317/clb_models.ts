@@ -1999,6 +1999,18 @@ export interface Listener {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   TargetGroupList: Array<BasicTargetGroupInfo>
+
+  /**
+      * 监听器最大连接数，-1表示监听器维度不限速。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MaxConn: number
+
+  /**
+      * 监听器最大新增连接数，-1表示监听器维度不限速。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MaxCps: number
 }
 
 /**
@@ -2187,6 +2199,16 @@ export interface ModifyListenerRequest {
    * 证书信息，支持同时传入不同算法类型的多本服务端证书；此参数仅适用于未开启SNI特性的HTTPS监听器。此参数和Certificate不能同时传入。
    */
   MultiCertInfo?: MultiCertInfo
+
+  /**
+   * 监听器最大连接数，只有TCP/UDP/TCP_SSL/QUIC监听器支持，不传或者传-1表示监听器维度不限速。
+   */
+  MaxConn?: number
+
+  /**
+   * 监听器最大连接数，只有TCP/UDP/TCP_SSL/QUIC监听器支持，不传或者传-1表示监听器维度不限速。
+   */
+  MaxCps?: number
 }
 
 /**
@@ -3566,12 +3588,12 @@ export interface CertInfo {
   CertName?: string
 
   /**
-   * 上传证书的公钥，如果没有 CertId，则此项必传。
+   * 上传证书的公钥；如果没有 CertId，则此项必传。
    */
   CertContent?: string
 
   /**
-   * 上传服务端证书的私钥，如果没有 CertId，则此项必传。
+   * 上传服务端证书的私钥；如果没有 CertId，则此项必传。
    */
   CertKey?: string
 }
@@ -3760,6 +3782,16 @@ export interface CreateListenerRequest {
    * 证书信息，支持同时传入不同算法类型的多本服务端证书；此参数仅适用于未开启SNI特性的HTTPS监听器。此参数和Certificate不能同时传入。
    */
   MultiCertInfo?: MultiCertInfo
+
+  /**
+   * 监听器最大连接数，只有TCP/UDP/TCP_SSL/QUIC监听器支持，不传或者传-1表示监听器维度不限速。
+   */
+  MaxConn?: number
+
+  /**
+   * 监听器最大新增连接数，只有TCP/UDP/TCP_SSL/QUIC监听器支持，不传或者传-1表示监听器维度不限速。
+   */
+  MaxCps?: number
 }
 
 /**
