@@ -278,6 +278,16 @@ it("vpc.v20170312.DescribeNetworkInterfaceLimit", async function () {
     }
 })
 
+it("vpc.v20170312.EnableSnapshotPolicies", async function () {
+    try {
+       const data = await client.EnableSnapshotPolicies({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.DescribeNetDetects", async function () {
     try {
        const data = await client.DescribeNetDetects({})
@@ -318,9 +328,9 @@ it("vpc.v20170312.DescribeGatewayFlowMonitorDetail", async function () {
     }
 })
 
-it("vpc.v20170312.EnableGatewayFlowMonitor", async function () {
+it("vpc.v20170312.AttachSnapshotInstances", async function () {
     try {
-       const data = await client.EnableGatewayFlowMonitor({})
+       const data = await client.AttachSnapshotInstances({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -351,6 +361,16 @@ it("vpc.v20170312.AssociateDirectConnectGatewayNatGateway", async function () {
 it("vpc.v20170312.DeleteVpnConnection", async function () {
     try {
        const data = await client.DeleteVpnConnection({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vpc.v20170312.DeleteSnapshotPolicies", async function () {
+    try {
+       const data = await client.DeleteSnapshotPolicies({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -548,6 +568,16 @@ it("vpc.v20170312.DescribeVpcEndPointService", async function () {
     }
 })
 
+it("vpc.v20170312.ModifyVpcEndPointServiceWhiteList", async function () {
+    try {
+       const data = await client.ModifyVpcEndPointServiceWhiteList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.DescribeCrossBorderFlowMonitor", async function () {
     try {
        const data = await client.DescribeCrossBorderFlowMonitor({})
@@ -578,9 +608,9 @@ it("vpc.v20170312.CreateAndAttachNetworkInterface", async function () {
     }
 })
 
-it("vpc.v20170312.ModifyVpcEndPointServiceWhiteList", async function () {
+it("vpc.v20170312.ModifySnapshotPolicies", async function () {
     try {
-       const data = await client.ModifyVpcEndPointServiceWhiteList({})
+       const data = await client.ModifySnapshotPolicies({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -858,6 +888,16 @@ it("vpc.v20170312.ResetAttachCcnInstances", async function () {
     }
 })
 
+it("vpc.v20170312.ModifyHaVipAttribute", async function () {
+    try {
+       const data = await client.ModifyHaVipAttribute({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.DeleteSecurityGroupPolicies", async function () {
     try {
        const data = await client.DeleteSecurityGroupPolicies({})
@@ -988,6 +1028,16 @@ it("vpc.v20170312.SetVpnGatewaysRenewFlag", async function () {
     }
 })
 
+it("vpc.v20170312.DisableSnapshotPolicies", async function () {
+    try {
+       const data = await client.DisableSnapshotPolicies({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.DescribeDhcpIps", async function () {
     try {
        const data = await client.DescribeDhcpIps({})
@@ -1101,6 +1151,16 @@ it("vpc.v20170312.DeleteNetworkAclQuintupleEntries", async function () {
 it("vpc.v20170312.DeleteDirectConnectGateway", async function () {
     try {
        const data = await client.DeleteDirectConnectGateway({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vpc.v20170312.DescribeSnapshotAttachedInstances", async function () {
+    try {
+       const data = await client.DescribeSnapshotAttachedInstances({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1341,6 +1401,16 @@ it("vpc.v20170312.DescribeVpnConnections", async function () {
 it("vpc.v20170312.RenewAddresses", async function () {
     try {
        const data = await client.RenewAddresses({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vpc.v20170312.EnableGatewayFlowMonitor", async function () {
+    try {
+       const data = await client.EnableGatewayFlowMonitor({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1678,6 +1748,16 @@ it("vpc.v20170312.CreateServiceTemplate", async function () {
     }
 })
 
+it("vpc.v20170312.ReturnNormalAddresses", async function () {
+    try {
+       const data = await client.ReturnNormalAddresses({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.WithdrawNotifyRoutes", async function () {
     try {
        const data = await client.WithdrawNotifyRoutes({})
@@ -1721,6 +1801,16 @@ it("vpc.v20170312.ModifyNetworkInterfaceAttribute", async function () {
 it("vpc.v20170312.DisableFlowLogs", async function () {
     try {
        const data = await client.DisableFlowLogs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vpc.v20170312.DescribeSgSnapshotFileContent", async function () {
+    try {
+       const data = await client.DescribeSgSnapshotFileContent({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1948,9 +2038,9 @@ it("vpc.v20170312.DisassociateAddress", async function () {
     }
 })
 
-it("vpc.v20170312.ReturnNormalAddresses", async function () {
+it("vpc.v20170312.ReleaseAddresses", async function () {
     try {
-       const data = await client.ReturnNormalAddresses({})
+       const data = await client.ReleaseAddresses({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2031,6 +2121,16 @@ it("vpc.v20170312.EnableFlowLogs", async function () {
 it("vpc.v20170312.DescribeIpGeolocationInfos", async function () {
     try {
        const data = await client.DescribeIpGeolocationInfos({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vpc.v20170312.DetachSnapshotInstances", async function () {
+    try {
+       const data = await client.DetachSnapshotInstances({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2151,6 +2251,16 @@ it("vpc.v20170312.CheckDefaultSubnet", async function () {
 it("vpc.v20170312.DescribeHaVips", async function () {
     try {
        const data = await client.DescribeHaVips({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vpc.v20170312.UnassignIpv6SubnetCidrBlock", async function () {
+    try {
+       const data = await client.UnassignIpv6SubnetCidrBlock({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2598,9 +2708,9 @@ it("vpc.v20170312.CreateNetDetect", async function () {
     }
 })
 
-it("vpc.v20170312.ModifyHaVipAttribute", async function () {
+it("vpc.v20170312.CreateSnapshotPolicies", async function () {
     try {
-       const data = await client.ModifyHaVipAttribute({})
+       const data = await client.CreateSnapshotPolicies({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2608,9 +2718,9 @@ it("vpc.v20170312.ModifyHaVipAttribute", async function () {
     }
 })
 
-it("vpc.v20170312.ReleaseAddresses", async function () {
+it("vpc.v20170312.DescribeSnapshotFiles", async function () {
     try {
-       const data = await client.ReleaseAddresses({})
+       const data = await client.DescribeSnapshotFiles({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2688,6 +2798,16 @@ it("vpc.v20170312.ModifyCcnAttribute", async function () {
     }
 })
 
+it("vpc.v20170312.ResumeSnapshotInstance", async function () {
+    try {
+       const data = await client.ResumeSnapshotInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.DescribeSecurityGroupReferences", async function () {
     try {
        const data = await client.DescribeSecurityGroupReferences({})
@@ -2708,9 +2828,9 @@ it("vpc.v20170312.DescribeSecurityGroupAssociationStatistics", async function ()
     }
 })
 
-it("vpc.v20170312.UnassignIpv6SubnetCidrBlock", async function () {
+it("vpc.v20170312.DescribeSnapshotPolicies", async function () {
     try {
-       const data = await client.UnassignIpv6SubnetCidrBlock({})
+       const data = await client.DescribeSnapshotPolicies({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2808,9 +2928,9 @@ it("vpc.v20170312.DetachClassicLinkVpc", async function () {
     }
 })
 
-it("vpc.v20170312.CreateSecurityGroupWithPolicies", async function () {
+it("vpc.v20170312.CreateVpnGatewayRoutes", async function () {
     try {
-       const data = await client.CreateSecurityGroupWithPolicies({})
+       const data = await client.CreateVpnGatewayRoutes({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2868,9 +2988,9 @@ it("vpc.v20170312.DescribeVpcEndPoint", async function () {
     }
 })
 
-it("vpc.v20170312.CreateVpnGatewayRoutes", async function () {
+it("vpc.v20170312.CreateSecurityGroupWithPolicies", async function () {
     try {
-       const data = await client.CreateVpnGatewayRoutes({})
+       const data = await client.CreateSecurityGroupWithPolicies({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

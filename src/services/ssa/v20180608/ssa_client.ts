@@ -26,7 +26,7 @@ import {
   DescribeComplianceAssetListResponse,
   DataCheck,
   DescribeSocCheckResultListResponse,
-  SocProductionItem,
+  DescribeVulDetailResponse,
   MappingResult,
   DescribeCheckConfigAssetListRequest,
   Asset,
@@ -46,6 +46,7 @@ import {
   SocComplianceInfoResp,
   DescribeAssetListRequest,
   DescribeComplianceDetailResponse,
+  SocProductionItem,
   DescribeAssetsMappingListResponse,
   DescribeSocAlertListResponse,
   SocComplianceItem,
@@ -75,6 +76,7 @@ import {
   DescribeCheckConfigDetailRequest,
   VulList,
   DescribeLeakDetectionListResponse,
+  DescribeAssetDetailListResponse,
   DataEvent,
   DescribeSocCheckItemListRequest,
   CheckConfigDetail,
@@ -93,7 +95,7 @@ import {
   DescribeComplianceAssetListRequest,
   QueryFilter,
   DescribeAssetDetailResponse,
-  DescribeVulDetailResponse,
+  DescribeAssetDetailListRequest,
   DescribeSocCspmComplianceRequest,
   AlertDetail,
   DescribeComplianceDetailRequest,
@@ -109,13 +111,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 合规管理总览页检查项列表
+   * 资产条件查询
    */
-  async DescribeComplianceList(
-    req: DescribeComplianceListRequest,
-    cb?: (error: string, rep: DescribeComplianceListResponse) => void
-  ): Promise<DescribeComplianceListResponse> {
-    return this.request("DescribeComplianceList", req, cb)
+  async DescribeAssetDetailList(
+    req: DescribeAssetDetailListRequest,
+    cb?: (error: string, rep: DescribeAssetDetailListResponse) => void
+  ): Promise<DescribeAssetDetailListResponse> {
+    return this.request("DescribeAssetDetailList", req, cb)
   }
 
   /**
@@ -129,13 +131,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 资产安全资产列表
+   * 获取泄露列表
    */
-  async DescribeAssetList(
-    req: DescribeAssetListRequest,
-    cb?: (error: string, rep: DescribeAssetListResponse) => void
-  ): Promise<DescribeAssetListResponse> {
-    return this.request("DescribeAssetList", req, cb)
+  async DescribeLeakDetectionList(
+    req: DescribeLeakDetectionListRequest,
+    cb?: (error: string, rep: DescribeLeakDetectionListResponse) => void
+  ): Promise<DescribeLeakDetectionListResponse> {
+    return this.request("DescribeLeakDetectionList", req, cb)
+  }
+
+  /**
+   * 获取测绘列表
+   */
+  async DescribeMappingResults(
+    req: DescribeMappingResultsRequest,
+    cb?: (error: string, rep: DescribeMappingResultsResponse) => void
+  ): Promise<DescribeMappingResultsResponse> {
+    return this.request("DescribeMappingResults", req, cb)
   }
 
   /**
@@ -169,6 +181,56 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 云安全配置检查项列表
+   */
+  async DescribeSocCheckItemList(
+    req: DescribeSocCheckItemListRequest,
+    cb?: (error: string, rep: DescribeSocCheckItemListResponse) => void
+  ): Promise<DescribeSocCheckItemListResponse> {
+    return this.request("DescribeSocCheckItemList", req, cb)
+  }
+
+  /**
+   * 资产安全页资产详情
+   */
+  async DescribeAssetDetail(
+    req: DescribeAssetDetailRequest,
+    cb?: (error: string, rep: DescribeAssetDetailResponse) => void
+  ): Promise<DescribeAssetDetailResponse> {
+    return this.request("DescribeAssetDetail", req, cb)
+  }
+
+  /**
+   * 获取安全事件列表
+   */
+  async DescribeSafetyEventList(
+    req: DescribeSafetyEventListRequest,
+    cb?: (error: string, rep: DescribeSafetyEventListResponse) => void
+  ): Promise<DescribeSafetyEventListResponse> {
+    return this.request("DescribeSafetyEventList", req, cb)
+  }
+
+  /**
+   * 合规管理总览页检查项列表
+   */
+  async DescribeComplianceList(
+    req: DescribeComplianceListRequest,
+    cb?: (error: string, rep: DescribeComplianceListResponse) => void
+  ): Promise<DescribeComplianceListResponse> {
+    return this.request("DescribeComplianceList", req, cb)
+  }
+
+  /**
+   * 资产安全资产列表
+   */
+  async DescribeAssetList(
+    req: DescribeAssetListRequest,
+    cb?: (error: string, rep: DescribeAssetListResponse) => void
+  ): Promise<DescribeAssetListResponse> {
+    return this.request("DescribeAssetList", req, cb)
+  }
+
+  /**
    * 云安全配置管理资产组列表
    */
   async DescribeCheckConfigAssetList(
@@ -176,16 +238,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCheckConfigAssetListResponse) => void
   ): Promise<DescribeCheckConfigAssetListResponse> {
     return this.request("DescribeCheckConfigAssetList", req, cb)
-  }
-
-  /**
-   * 获取泄露列表
-   */
-  async DescribeLeakDetectionList(
-    req: DescribeLeakDetectionListRequest,
-    cb?: (error: string, rep: DescribeLeakDetectionListResponse) => void
-  ): Promise<DescribeLeakDetectionListResponse> {
-    return this.request("DescribeLeakDetectionList", req, cb)
   }
 
   /**
@@ -199,36 +251,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 合规详情项
-   */
-  async DescribeSocCspmCompliance(
-    req?: DescribeSocCspmComplianceRequest,
-    cb?: (error: string, rep: DescribeSocCspmComplianceResponse) => void
-  ): Promise<DescribeSocCspmComplianceResponse> {
-    return this.request("DescribeSocCspmCompliance", req, cb)
-  }
-
-  /**
-   * 获取测绘列表
-   */
-  async DescribeMappingResults(
-    req: DescribeMappingResultsRequest,
-    cb?: (error: string, rep: DescribeMappingResultsResponse) => void
-  ): Promise<DescribeMappingResultsResponse> {
-    return this.request("DescribeMappingResults", req, cb)
-  }
-
-  /**
-   * 云安全配置检查项列表
-   */
-  async DescribeSocCheckItemList(
-    req: DescribeSocCheckItemListRequest,
-    cb?: (error: string, rep: DescribeSocCheckItemListResponse) => void
-  ): Promise<DescribeSocCheckItemListResponse> {
-    return this.request("DescribeSocCheckItemList", req, cb)
-  }
-
-  /**
    * 漏洞管理页，获取漏洞列表
    */
   async DescribeVulList(
@@ -239,13 +261,43 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 资产安全页资产详情
+   * 云安全配置检查项结果列表
    */
-  async DescribeAssetDetail(
-    req: DescribeAssetDetailRequest,
-    cb?: (error: string, rep: DescribeAssetDetailResponse) => void
-  ): Promise<DescribeAssetDetailResponse> {
-    return this.request("DescribeAssetDetail", req, cb)
+  async DescribeSocCheckResultList(
+    req: DescribeSocCheckResultListRequest,
+    cb?: (error: string, rep: DescribeSocCheckResultListResponse) => void
+  ): Promise<DescribeSocCheckResultListResponse> {
+    return this.request("DescribeSocCheckResultList", req, cb)
+  }
+
+  /**
+   * 返回告警详情
+   */
+  async DescribeSocAlertDetails(
+    req: DescribeSocAlertDetailsRequest,
+    cb?: (error: string, rep: DescribeSocAlertDetailsResponse) => void
+  ): Promise<DescribeSocAlertDetailsResponse> {
+    return this.request("DescribeSocAlertDetails", req, cb)
+  }
+
+  /**
+   * 合规详情项
+   */
+  async DescribeSocCspmCompliance(
+    req?: DescribeSocCspmComplianceRequest,
+    cb?: (error: string, rep: DescribeSocCspmComplianceResponse) => void
+  ): Promise<DescribeSocCspmComplianceResponse> {
+    return this.request("DescribeSocCspmCompliance", req, cb)
+  }
+
+  /**
+   * 拉取告警列表
+   */
+  async DescribeSocAlertList(
+    req: DescribeSocAlertListRequest,
+    cb?: (error: string, rep: DescribeSocAlertListResponse) => void
+  ): Promise<DescribeSocAlertListResponse> {
+    return this.request("DescribeSocAlertList", req, cb)
   }
 
   /**
@@ -269,36 +321,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取安全事件列表
-   */
-  async DescribeSafetyEventList(
-    req: DescribeSafetyEventListRequest,
-    cb?: (error: string, rep: DescribeSafetyEventListResponse) => void
-  ): Promise<DescribeSafetyEventListResponse> {
-    return this.request("DescribeSafetyEventList", req, cb)
-  }
-
-  /**
-   * 返回告警详情
-   */
-  async DescribeSocAlertDetails(
-    req: DescribeSocAlertDetailsRequest,
-    cb?: (error: string, rep: DescribeSocAlertDetailsResponse) => void
-  ): Promise<DescribeSocAlertDetailsResponse> {
-    return this.request("DescribeSocAlertDetails", req, cb)
-  }
-
-  /**
-   * 拉取告警列表
-   */
-  async DescribeSocAlertList(
-    req: DescribeSocAlertListRequest,
-    cb?: (error: string, rep: DescribeSocAlertListResponse) => void
-  ): Promise<DescribeSocAlertListResponse> {
-    return this.request("DescribeSocAlertList", req, cb)
-  }
-
-  /**
    * 漏洞列表页，获取漏洞详情信息
    */
   async DescribeVulDetail(
@@ -306,15 +328,5 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeVulDetailResponse) => void
   ): Promise<DescribeVulDetailResponse> {
     return this.request("DescribeVulDetail", req, cb)
-  }
-
-  /**
-   * 云安全配置检查项结果列表
-   */
-  async DescribeSocCheckResultList(
-    req: DescribeSocCheckResultListRequest,
-    cb?: (error: string, rep: DescribeSocCheckResultListResponse) => void
-  ): Promise<DescribeSocCheckResultListResponse> {
-    return this.request("DescribeSocCheckResultList", req, cb)
   }
 }

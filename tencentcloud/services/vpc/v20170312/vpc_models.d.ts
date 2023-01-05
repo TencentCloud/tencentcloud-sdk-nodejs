@@ -603,6 +603,19 @@ export interface CreateDefaultSecurityGroupRequest {
     ProjectId?: string;
 }
 /**
+ * CreateSnapshotPolicies返回参数结构体
+ */
+export interface CreateSnapshotPoliciesResponse {
+    /**
+      * 快照策略。
+      */
+    SnapshotPolicies: Array<SnapshotPolicy>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeServiceTemplateGroups返回参数结构体
  */
 export interface DescribeServiceTemplateGroupsResponse {
@@ -643,23 +656,6 @@ export interface DescribeVpcEndPointRequest {
       * 终端节点ID列表。
       */
     EndPointId?: Array<string>;
-}
-/**
- * AssignPrivateIpAddresses请求参数结构体
- */
-export interface AssignPrivateIpAddressesRequest {
-    /**
-      * 弹性网卡实例ID，例如：eni-m6dyj72l。
-      */
-    NetworkInterfaceId: string;
-    /**
-      * 指定的内网IP信息，单次最多指定10个。与SecondaryPrivateIpAddressCount至少提供一个。
-      */
-    PrivateIpAddresses?: Array<PrivateIpAddressSpecification>;
-    /**
-      * 新申请的内网IP地址个数，与PrivateIpAddresses至少提供一个。内网IP地址个数总和不能超过配额数，详见<a href="/document/product/576/18527">弹性网卡使用限制</a>。
-      */
-    SecondaryPrivateIpAddressCount?: number;
 }
 /**
  * DetachClassicLinkVpc请求参数结构体
@@ -1652,6 +1648,15 @@ export interface DeleteVpcEndPointServiceWhiteListRequest {
     EndPointServiceId: string;
 }
 /**
+ * DetachSnapshotInstances返回参数结构体
+ */
+export interface DetachSnapshotInstancesResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DetachNetworkInterface返回参数结构体
  */
 export interface DetachNetworkInterfaceResponse {
@@ -1735,6 +1740,15 @@ export interface DescribeCcnAttachedInstancesRequest {
       * 排序方法。升序：`ASC`，倒序：`DESC`。
       */
     OrderDirection?: string;
+}
+/**
+ * AttachSnapshotInstances返回参数结构体
+ */
+export interface AttachSnapshotInstancesResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeNatGatewaySourceIpTranslationNatRules请求参数结构体
@@ -1849,17 +1863,17 @@ export interface DisableVpnGatewaySslClientCertRequest {
     SslVpnClientId: string;
 }
 /**
- * DescribeVpcPrivateIpAddresses返回参数结构体
+ * AttachSnapshotInstances请求参数结构体
  */
-export interface DescribeVpcPrivateIpAddressesResponse {
+export interface AttachSnapshotInstancesRequest {
     /**
-      * 内网`IP`地址信息列表。
+      * 快照策略Id。
       */
-    VpcPrivateIpAddressSet: Array<VpcPrivateIpAddress>;
+    SnapshotPolicyId: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 关联实例信息。
       */
-    RequestId?: string;
+    Instances: Array<SnapshotInstance>;
 }
 /**
  * ModifyIp6Translator返回参数结构体
@@ -2083,6 +2097,35 @@ export interface NetDetectState {
       * 网络探测目的IP验证结果对象数组。
       */
     NetDetectIpStateSet: Array<NetDetectIpState>;
+}
+/**
+ * DescribeSnapshotFiles请求参数结构体
+ */
+export interface DescribeSnapshotFilesRequest {
+    /**
+      * 业务类型，目前支持安全组：securitygroup。
+      */
+    BusinessType: string;
+    /**
+      * 实例Id。
+      */
+    InstanceId: string;
+    /**
+      * 开始日期，格式%Y-%m-%d %H:%M:%S。
+      */
+    StartDate: string;
+    /**
+      * 结束日期，格式%Y-%m-%d %H:%M:%S。
+      */
+    EndDate: string;
+    /**
+      * 偏移量，默认为0。
+      */
+    Offset?: number;
+    /**
+      * 返回数量，默认为20，最大为200。
+      */
+    Limit?: number;
 }
 /**
  * HaVipDisassociateAddressIp返回参数结构体
@@ -2565,7 +2608,7 @@ export interface DescribeNatGatewayDestinationIpPortTranslationNatRulesRequest {
  */
 export interface ReturnNormalAddressesRequest {
     /**
-      * 1
+      * EIP 的 IP 地址,示例：101.35.139.183
       */
     AddressIps?: Array<string>;
 }
@@ -2749,6 +2792,15 @@ export interface CreateSecurityGroupWithPoliciesResponse {
  * DeleteAddressTemplate返回参数结构体
  */
 export interface DeleteAddressTemplateResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ResumeSnapshotInstance返回参数结构体
+ */
+export interface ResumeSnapshotInstanceResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3141,6 +3193,43 @@ CCN：云联网网关；
     NetDetectDescription?: string;
 }
 /**
+ * DescribeSgSnapshotFileContent返回参数结构体
+ */
+export interface DescribeSgSnapshotFileContentResponse {
+    /**
+      * 实例Id，即安全组Id。
+      */
+    InstanceId: string;
+    /**
+      * 快照策略Id。
+      */
+    SnapshotPolicyId: string;
+    /**
+      * 快照文件Id。
+      */
+    SnapshotFileId: string;
+    /**
+      * 备份时间。
+      */
+    BackupTime: string;
+    /**
+      * 操作者。
+      */
+    Operator: string;
+    /**
+      * 原始数据。
+      */
+    OriginalData: Array<SecurityGroupPolicy>;
+    /**
+      * 备份数据。
+      */
+    BackupData: Array<SecurityGroupPolicy>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeNetDetectStates返回参数结构体
  */
 export interface DescribeNetDetectStatesResponse {
@@ -3307,6 +3396,19 @@ export interface DescribeAssistantCidrResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 时间备份策略详情
+ */
+export interface BackupPolicy {
+    /**
+      * 备份周期时间，取值为monday, tuesday, wednesday, thursday, friday, saturday, sunday。
+      */
+    BackupDay: string;
+    /**
+      * 备份时间点，格式：HH:mm:ss。
+      */
+    BackupTime: string;
 }
 /**
  * 用于描述实例的统计信息
@@ -3746,6 +3848,15 @@ export interface DeleteSubnetResponse {
     RequestId?: string;
 }
 /**
+ * EnableSnapshotPolicies返回参数结构体
+ */
+export interface EnableSnapshotPoliciesResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 私有网络(VPC)对象。
  */
 export interface Vpc {
@@ -4075,6 +4186,29 @@ export interface SecurityGroupPolicy {
       * 安全组最近修改时间。
       */
     ModifyTime?: string;
+}
+/**
+ * DescribeSnapshotPolicies请求参数结构体
+ */
+export interface DescribeSnapshotPoliciesRequest {
+    /**
+      * 快照策略Id。
+      */
+    SnapshotPolicyIds?: Array<string>;
+    /**
+      * 过滤条件，参数不支持同时指定SnapshotPolicyIds和Filters。
+<li>snapshot-policy-id - String -（过滤条件）快照策略ID。</li>
+<li>snapshot-policy-name - String -（过滤条件）快照策略名称。</li>
+      */
+    Filters?: Array<Filter>;
+    /**
+      * 偏移量，默认为0。
+      */
+    Offset?: number;
+    /**
+      * 返回数量，默认为20，最大为200。
+      */
+    Limit?: number;
 }
 /**
  * NotifyRoutes请求参数结构体
@@ -4970,6 +5104,15 @@ export interface VpnGatewayRouteModify {
     Status: string;
 }
 /**
+ * DisableSnapshotPolicies请求参数结构体
+ */
+export interface DisableSnapshotPoliciesRequest {
+    /**
+      * 快照策略Id。
+      */
+    SnapshotPolicyIds: Array<string>;
+}
+/**
  * 模板对象成员信息
  */
 export interface MemberInfo {
@@ -4981,6 +5124,23 @@ export interface MemberInfo {
       * 模板对象成员描述信息
       */
     Description?: string;
+}
+/**
+ * ResumeSnapshotInstance请求参数结构体
+ */
+export interface ResumeSnapshotInstanceRequest {
+    /**
+      * 快照策略Id。
+      */
+    SnapshotPolicyId: string;
+    /**
+      * 快照文件Id。
+      */
+    SnapshotFileId: string;
+    /**
+      * 实例Id。
+      */
+    InstanceId: string;
 }
 /**
  * ReplaceSecurityGroupPolicy请求参数结构体
@@ -5182,79 +5342,21 @@ export interface ResourceDashboard {
     RouteTable: number;
 }
 /**
- * 子网对象
+ * DescribeSnapshotFiles返回参数结构体
  */
-export interface Subnet {
+export interface DescribeSnapshotFilesResponse {
     /**
-      * `VPC`实例`ID`。
+      * 快照文件集合。
       */
-    VpcId: string;
+    SnapshotFileSet: Array<SnapshotFileInfo>;
     /**
-      * 子网实例`ID`，例如：subnet-bthucmmy。
+      * 符合条件的对象数。
       */
-    SubnetId: string;
+    TotalCount: number;
     /**
-      * 子网名称。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    SubnetName: string;
-    /**
-      * 子网的 `IPv4` `CIDR`。
-      */
-    CidrBlock: string;
-    /**
-      * 是否默认子网。
-      */
-    IsDefault: boolean;
-    /**
-      * 是否开启广播。
-      */
-    EnableBroadcast: boolean;
-    /**
-      * 可用区。
-      */
-    Zone: string;
-    /**
-      * 路由表实例ID，例如：rtb-l2h8d7c2。
-      */
-    RouteTableId: string;
-    /**
-      * 创建时间。
-      */
-    CreatedTime?: string;
-    /**
-      * 可用`IPv4`数。
-      */
-    AvailableIpAddressCount: number;
-    /**
-      * 子网的 `IPv6` `CIDR`。
-      */
-    Ipv6CidrBlock: string;
-    /**
-      * 关联`ACL`ID
-      */
-    NetworkAclId: string;
-    /**
-      * 是否为 `SNAT` 地址池子网。
-      */
-    IsRemoteVpcSnat: boolean;
-    /**
-      * 子网`IPv4`总数。
-      */
-    TotalIpAddressCount: number;
-    /**
-      * 标签键值对。
-      */
-    TagSet: Array<Tag>;
-    /**
-      * CDC实例ID。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    CdcId: string;
-    /**
-      * 是否是CDC所属子网。0:否 1:是
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    IsCdcSubnet: number;
+    RequestId?: string;
 }
 /**
  * DescribeCcnAttachedInstances返回参数结构体
@@ -5594,6 +5696,15 @@ export interface DescribeVpcEndPointServiceRequest {
       * 终端节点服务ID。
       */
     EndPointServiceIds?: Array<string>;
+}
+/**
+ * DisableSnapshotPolicies返回参数结构体
+ */
+export interface DisableSnapshotPoliciesResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * ModifyServiceTemplateAttribute请求参数结构体
@@ -5956,6 +6067,23 @@ export interface DescribeNetworkAclQuintupleEntriesRequest {
 <li>network-acl-direction - String - 方向，形如：'INGRESS'或'EGRESS'。</li>
       */
     Filters?: Array<Filter>;
+}
+/**
+ * DescribeSnapshotPolicies返回参数结构体
+ */
+export interface DescribeSnapshotPoliciesResponse {
+    /**
+      * 快照策略。
+      */
+    SnapshotPolicySet: Array<SnapshotPolicy>;
+    /**
+      * 符合条件的对象数。
+      */
+    TotalCount: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DisableGatewayFlowMonitor请求参数结构体
@@ -7235,6 +7363,15 @@ export interface SetCcnRegionBandwidthLimitsResponse {
     RequestId?: string;
 }
 /**
+ * ModifySnapshotPolicies返回参数结构体
+ */
+export interface ModifySnapshotPoliciesResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeAccountAttributes请求参数结构体
  */
 export declare type DescribeAccountAttributesRequest = null;
@@ -7817,6 +7954,81 @@ export interface DescribeVpnGatewaySslServersResponse {
     RequestId?: string;
 }
 /**
+ * 子网对象
+ */
+export interface Subnet {
+    /**
+      * `VPC`实例`ID`。
+      */
+    VpcId: string;
+    /**
+      * 子网实例`ID`，例如：subnet-bthucmmy。
+      */
+    SubnetId: string;
+    /**
+      * 子网名称。
+      */
+    SubnetName: string;
+    /**
+      * 子网的 `IPv4` `CIDR`。
+      */
+    CidrBlock: string;
+    /**
+      * 是否默认子网。
+      */
+    IsDefault: boolean;
+    /**
+      * 是否开启广播。
+      */
+    EnableBroadcast: boolean;
+    /**
+      * 可用区。
+      */
+    Zone: string;
+    /**
+      * 路由表实例ID，例如：rtb-l2h8d7c2。
+      */
+    RouteTableId: string;
+    /**
+      * 创建时间。
+      */
+    CreatedTime?: string;
+    /**
+      * 可用`IPv4`数。
+      */
+    AvailableIpAddressCount: number;
+    /**
+      * 子网的 `IPv6` `CIDR`。
+      */
+    Ipv6CidrBlock: string;
+    /**
+      * 关联`ACL`ID
+      */
+    NetworkAclId: string;
+    /**
+      * 是否为 `SNAT` 地址池子网。
+      */
+    IsRemoteVpcSnat: boolean;
+    /**
+      * 子网`IPv4`总数。
+      */
+    TotalIpAddressCount: number;
+    /**
+      * 标签键值对。
+      */
+    TagSet: Array<Tag>;
+    /**
+      * CDC实例ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CdcId: string;
+    /**
+      * 是否是CDC所属子网。0:否 1:是
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IsCdcSubnet: number;
+}
+/**
  * DeleteNatGatewayDestinationIpPortTranslationNatRule返回参数结构体
  */
 export interface DeleteNatGatewayDestinationIpPortTranslationNatRuleResponse {
@@ -8061,6 +8273,15 @@ export interface ModifyTemplateMemberRequest {
     TemplateMember: Array<MemberInfo>;
 }
 /**
+ * EnableSnapshotPolicies请求参数结构体
+ */
+export interface EnableSnapshotPoliciesRequest {
+    /**
+      * 快照策略Id。
+      */
+    SnapshotPolicyIds: Array<string>;
+}
+/**
  * DescribeAddresses返回参数结构体
  */
 export interface DescribeAddressesResponse {
@@ -8099,6 +8320,37 @@ export interface GatewayQos {
     CreateTime: string;
 }
 /**
+ * GetCcnRegionBandwidthLimits请求参数结构体
+ */
+export interface GetCcnRegionBandwidthLimitsRequest {
+    /**
+      * CCN实例ID。形如：ccn-f49l6u0z。
+      */
+    CcnId: string;
+    /**
+      * 过滤条件。
+<li>sregion - String - （过滤条件）源地域，形如：ap-guangzhou。</li>
+<li>dregion - String - （过滤条件）目的地域，形如：ap-shanghai-bm</li>
+      */
+    Filters?: Array<Filter>;
+    /**
+      * 排序条件，目前支持带宽（BandwidthLimit）和过期时间（ExpireTime）
+      */
+    SortedBy?: string;
+    /**
+      * 偏移量
+      */
+    Offset?: number;
+    /**
+      * 返回数量
+      */
+    Limit?: number;
+    /**
+      * 排序方式，'ASC':升序,'DESC':降序。
+      */
+    OrderBy?: string;
+}
+/**
  * ModifyIpv6AddressesAttribute请求参数结构体
  */
 export interface ModifyIpv6AddressesAttributeRequest {
@@ -8115,6 +8367,19 @@ export interface ModifyIpv6AddressesAttributeRequest {
  * DescribeCustomerGatewayVendors请求参数结构体
  */
 export declare type DescribeCustomerGatewayVendorsRequest = null;
+/**
+ * DetachSnapshotInstances请求参数结构体
+ */
+export interface DetachSnapshotInstancesRequest {
+    /**
+      * 快照策略Id。
+      */
+    SnapshotPolicyId: string;
+    /**
+      * 实例信息。
+      */
+    Instances: Array<SnapshotInstance>;
+}
 /**
  * DeleteLocalGateway请求参数结构体
  */
@@ -8496,21 +8761,13 @@ export interface DescribeTrafficPackagesResponse {
     RequestId?: string;
 }
 /**
- * DescribeServiceTemplates返回参数结构体
+ * CreateSnapshotPolicies请求参数结构体
  */
-export interface DescribeServiceTemplatesResponse {
+export interface CreateSnapshotPoliciesRequest {
     /**
-      * 符合条件的实例数量。
+      * 快照策略详情。
       */
-    TotalCount: number;
-    /**
-      * 协议端口模板对象。
-      */
-    ServiceTemplateSet: Array<ServiceTemplate>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    SnapshotPolicies: Array<SnapshotPolicy>;
 }
 /**
  * DescribeRouteTables请求参数结构体
@@ -8599,6 +8856,19 @@ export interface CheckDefaultSubnetResponse {
       * 检查结果。true为可以创建默认子网，false为不可以创建默认子网。
       */
     Result?: boolean;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeVpcPrivateIpAddresses返回参数结构体
+ */
+export interface DescribeVpcPrivateIpAddressesResponse {
+    /**
+      * 内网`IP`地址信息列表。
+      */
+    VpcPrivateIpAddressSet: Array<VpcPrivateIpAddress>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -8831,6 +9101,15 @@ export interface DisableRoutesResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * ModifySnapshotPolicies请求参数结构体
+ */
+export interface ModifySnapshotPoliciesRequest {
+    /**
+      * 快照策略修改信息。
+      */
+    SnapshotPoliciesInfo: Array<BatchModifySnapshotPolicy>;
 }
 /**
  * ModifyAddressAttribute请求参数结构体
@@ -9258,6 +9537,54 @@ export interface DescribeHaVipsRequest {
       * 返回数量
       */
     Limit?: number;
+}
+/**
+ * 快照策略
+ */
+export interface SnapshotPolicy {
+    /**
+      * 快照策略名称。
+      */
+    SnapshotPolicyName: string;
+    /**
+      * 备份策略类型，operate-操作备份，time-定时备份。
+      */
+    BackupType: string;
+    /**
+      * 保留时间，支持1～365天。
+      */
+    KeepTime: number;
+    /**
+      * 是否创建新的cos桶，默认为False。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreateNewCos: boolean;
+    /**
+      * cos桶所在地域。
+      */
+    CosRegion: string;
+    /**
+      * cos桶。
+      */
+    CosBucket: string;
+    /**
+      * 快照策略Id。
+      */
+    SnapshotPolicyId?: string;
+    /**
+      * 时间备份策略。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BackupPolicies?: Array<BackupPolicy>;
+    /**
+      * 启用状态，True-启用，False-停用，默认为True。
+      */
+    Enable?: boolean;
+    /**
+      * 创建时间。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreateTime?: string;
 }
 /**
  * UnassignPrivateIpAddresses返回参数结构体
@@ -10070,6 +10397,15 @@ export interface CheckAssistantCidrRequest {
     OldCidrBlocks?: Array<string>;
 }
 /**
+ * RemoveBandwidthPackageResources返回参数结构体
+ */
+export interface RemoveBandwidthPackageResourcesResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * NAT网关的端口转发规则
  */
 export interface DestinationIpPortTranslationNatRule {
@@ -10097,6 +10433,15 @@ export interface DestinationIpPortTranslationNatRule {
       * NAT网关转发规则描述。
       */
     Description: string;
+}
+/**
+ * DeleteSnapshotPolicies请求参数结构体
+ */
+export interface DeleteSnapshotPoliciesRequest {
+    /**
+      * 快照策略Id。
+      */
+    SnapshotPolicyIds: Array<string>;
 }
 /**
  * CreateDefaultVpc请求参数结构体
@@ -10153,6 +10498,23 @@ export interface CheckAssistantCidrResponse {
       * 冲突资源信息数组。
       */
     ConflictSourceSet: Array<ConflictSource>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeVpcTaskResult返回参数结构体
+ */
+export interface DescribeVpcTaskResultResponse {
+    /**
+      * 异步任务执行结果。结果：SUCCESS、FAILED、RUNNING。3者其中之一。其中SUCCESS表示任务执行成功，FAILED表示任务执行失败，RUNNING表示任务执行中。
+      */
+    Status: string;
+    /**
+      * 异步任务执行输出。
+      */
+    Output: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -10271,17 +10633,9 @@ export interface DisassociateVpcEndPointSecurityGroupsResponse {
     RequestId?: string;
 }
 /**
- * DescribeVpcTaskResult返回参数结构体
+ * DeleteSnapshotPolicies返回参数结构体
  */
-export interface DescribeVpcTaskResultResponse {
-    /**
-      * 异步任务执行结果。结果：SUCCESS、FAILED、RUNNING。3者其中之一。其中SUCCESS表示任务执行成功，FAILED表示任务执行失败，RUNNING表示任务执行中。
-      */
-    Status: string;
-    /**
-      * 异步任务执行输出。
-      */
-    Output: string;
+export interface DeleteSnapshotPoliciesResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -10594,24 +10948,38 @@ export interface MigratePrivateIpAddressRequest {
     PrivateIpAddress: string;
 }
 /**
- * DescribeServiceTemplates请求参数结构体
+ * AssignPrivateIpAddresses请求参数结构体
  */
-export interface DescribeServiceTemplatesRequest {
+export interface AssignPrivateIpAddressesRequest {
     /**
-      * 过滤条件。
-<li>service-template-name - 协议端口模板名称。</li>
-<li>service-template-id - 协议端口模板实例ID，例如：ppm-e6dy460g。</li>
-<li>service-port- 协议端口。</li>
+      * 弹性网卡实例ID，例如：eni-m6dyj72l。
       */
-    Filters?: Array<Filter>;
+    NetworkInterfaceId: string;
     /**
-      * 偏移量，默认为0。
+      * 指定的内网IP信息，单次最多指定10个。与SecondaryPrivateIpAddressCount至少提供一个。
       */
-    Offset?: string;
+    PrivateIpAddresses?: Array<PrivateIpAddressSpecification>;
     /**
-      * 返回数量，默认为20，最大值为100。
+      * 新申请的内网IP地址个数，与PrivateIpAddresses至少提供一个。内网IP地址个数总和不能超过配额数，详见<a href="/document/product/576/18527">弹性网卡使用限制</a>。
       */
-    Limit?: string;
+    SecondaryPrivateIpAddressCount?: number;
+}
+/**
+ * DescribeSnapshotAttachedInstances返回参数结构体
+ */
+export interface DescribeSnapshotAttachedInstancesResponse {
+    /**
+      * 实例列表
+      */
+    InstanceSet: Array<SnapshotInstance>;
+    /**
+      * 符合条件的对象数。
+      */
+    TotalCount: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * RefreshDirectConnectGatewayRouteToNatGateway返回参数结构体
@@ -10634,6 +11002,31 @@ export interface DeleteRouteTableRequest {
       * 路由表实例ID，例如：rtb-azd4dt1c。
       */
     RouteTableId: string;
+}
+/**
+ * 快照策略关联实例信息
+ */
+export interface SnapshotInstance {
+    /**
+      * 实例Id。
+      */
+    InstanceId: string;
+    /**
+      * 实例类型，目前支持安全组：securitygroup。
+      */
+    InstanceType: string;
+    /**
+      * 实例所在地域。
+      */
+    InstanceRegion: string;
+    /**
+      * 快照策略Id。
+      */
+    SnapshotPolicyId?: string;
+    /**
+      * 实例名称。
+      */
+    InstanceName?: string;
 }
 /**
  * CreateVpnGateway请求参数结构体
@@ -10708,6 +11101,40 @@ export interface DeleteVpcEndPointServiceWhiteListResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DescribeServiceTemplates返回参数结构体
+ */
+export interface DescribeServiceTemplatesResponse {
+    /**
+      * 符合条件的实例数量。
+      */
+    TotalCount: number;
+    /**
+      * 协议端口模板对象。
+      */
+    ServiceTemplateSet: Array<ServiceTemplate>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeSgSnapshotFileContent请求参数结构体
+ */
+export interface DescribeSgSnapshotFileContentRequest {
+    /**
+      * 快照策略Id。
+      */
+    SnapshotPolicyId: string;
+    /**
+      * 快照文件Id。
+      */
+    SnapshotFileId: string;
+    /**
+      * 安全组Id。
+      */
+    SecurityGroupId: string;
 }
 /**
  * CreateBandwidthPackage返回参数结构体
@@ -10915,13 +11342,25 @@ export interface LockCcnsResponse {
     RequestId?: string;
 }
 /**
- * RemoveBandwidthPackageResources返回参数结构体
+ * 批量修改快照策略信息
  */
-export interface RemoveBandwidthPackageResourcesResponse {
+export interface BatchModifySnapshotPolicy {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 快照策略Id。
       */
-    RequestId?: string;
+    SnapshotPolicyId: string;
+    /**
+      * 快照策略名称。
+      */
+    SnapshotPolicyName?: string;
+    /**
+      * 备份策略。
+      */
+    BackupPolicies?: Array<BackupPolicy>;
+    /**
+      * 快照保留时间，支持1～365天。
+      */
+    KeepTime?: number;
 }
 /**
  * AssignIpv6Addresses返回参数结构体
@@ -11072,6 +11511,26 @@ export interface ModifyNatGatewayDestinationIpPortTranslationNatRuleRequest {
       * 目的NAT网关的端口转换规则。
       */
     DestinationNatRule: DestinationIpPortTranslationNatRule;
+}
+/**
+ * DescribeServiceTemplates请求参数结构体
+ */
+export interface DescribeServiceTemplatesRequest {
+    /**
+      * 过滤条件。
+<li>service-template-name - 协议端口模板名称。</li>
+<li>service-template-id - 协议端口模板实例ID，例如：ppm-e6dy460g。</li>
+<li>service-port- 协议端口。</li>
+      */
+    Filters?: Array<Filter>;
+    /**
+      * 偏移量，默认为0。
+      */
+    Offset?: string;
+    /**
+      * 返回数量，默认为20，最大值为100。
+      */
+    Limit?: string;
 }
 /**
  * 协议端口模板
@@ -11542,6 +12001,31 @@ export interface NetworkInterfaceAttachment {
     AttachTime: string;
 }
 /**
+ * 快照文件信息
+ */
+export interface SnapshotFileInfo {
+    /**
+      * 快照策略Id。
+      */
+    SnapshotPolicyId: string;
+    /**
+      * 实例Id。
+      */
+    InstanceId: string;
+    /**
+      * 快照文件Id。
+      */
+    SnapshotFileId: string;
+    /**
+      * 备份时间。
+      */
+    BackupTime: string;
+    /**
+      * 操作者Uin。
+      */
+    Operator: string;
+}
+/**
  * ModifyNetworkInterfaceAttribute请求参数结构体
  */
 export interface ModifyNetworkInterfaceAttributeRequest {
@@ -11793,35 +12277,28 @@ export interface CreateRouteTableResponse {
  */
 export declare type DescribeCrossBorderCcnRegionBandwidthLimitsRequest = null;
 /**
- * GetCcnRegionBandwidthLimits请求参数结构体
+ * DescribeSnapshotAttachedInstances请求参数结构体
  */
-export interface GetCcnRegionBandwidthLimitsRequest {
+export interface DescribeSnapshotAttachedInstancesRequest {
     /**
-      * CCN实例ID。形如：ccn-f49l6u0z。
+      * 快照策略Id。
       */
-    CcnId: string;
+    SnapshotPolicyId: string;
     /**
       * 过滤条件。
-<li>sregion - String - （过滤条件）源地域，形如：ap-guangzhou。</li>
-<li>dregion - String - （过滤条件）目的地域，形如：ap-shanghai-bm</li>
+支持的过滤条件如下：
+<li>instance-id：实例ID。</li>
+<li>instance-region：实例所在地域。</li>
       */
     Filters?: Array<Filter>;
     /**
-      * 排序条件，目前支持带宽（BandwidthLimit）和过期时间（ExpireTime）
-      */
-    SortedBy?: string;
-    /**
-      * 偏移量
+      * 偏移量，默认为0。
       */
     Offset?: number;
     /**
-      * 返回数量
+      * 返回数量，默认为20，最大为200。
       */
     Limit?: number;
-    /**
-      * 排序方式，'ASC':升序,'DESC':降序。
-      */
-    OrderBy?: string;
 }
 /**
  * DescribeDirectConnectGatewayCcnRoutes返回参数结构体

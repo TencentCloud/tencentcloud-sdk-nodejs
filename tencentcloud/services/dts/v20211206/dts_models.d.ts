@@ -188,6 +188,24 @@ export interface IsolateSyncJobRequest {
     JobId: string;
 }
 /**
+ * PauseMigrateJob请求参数结构体
+ */
+export interface PauseMigrateJobRequest {
+    /**
+      * 数据迁移任务ID
+      */
+    JobId: string;
+}
+/**
+ * ContinueMigrateJob请求参数结构体
+ */
+export interface ContinueMigrateJobRequest {
+    /**
+      * 数据迁移任务ID
+      */
+    JobId: string;
+}
+/**
  * DescribeCheckSyncJobResult请求参数结构体
  */
 export interface DescribeCheckSyncJobResultRequest {
@@ -448,6 +466,15 @@ export interface CreateMigrateCheckJobResponse {
     RequestId?: string;
 }
 /**
+ * ContinueMigrateJob返回参数结构体
+ */
+export interface ContinueMigrateJobResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * CreateMigrationService请求参数结构体
  */
 export interface CreateMigrationServiceRequest {
@@ -545,21 +572,34 @@ export interface DescribeCompareTasksRequest {
       * 分页偏移量
       */
     Offset?: number;
+    /**
+      * 校验任务 ID
+      */
+    CompareTaskId?: string;
+    /**
+      * 任务状态过滤，可能的值：created - 创建完成；readyRun - 等待运行；running - 运行中；success - 成功；stopping - 结束中；failed - 失败；canceled - 已终止
+      */
+    Status?: Array<string>;
 }
 /**
  * 一致性对比对象配置
  */
 export interface CompareObject {
     /**
-      * 迁移对象模式 all(所有迁移对象)，partial(部分对象迁移)
+      * 对象模式 整实例-all,部分对象-partial
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ObjectMode: string;
     /**
-      * 迁移对象库表配置
+      * 对象列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ObjectItems?: Array<CompareObjectItem>;
+    /**
+      * 高级对象类型，如account(账号),index(索引),shardkey(片建，后面可能会调整),schema(库表结构)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AdvancedObjects?: Array<string>;
 }
 /**
  * 任务错误信息
@@ -659,6 +699,15 @@ export interface DBEndpointInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ExtraAttr?: Array<KeyValuePairOption>;
+}
+/**
+ * ContinueSyncJob返回参数结构体
+ */
+export interface ContinueSyncJobResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 数据同步中的选项
@@ -1061,6 +1110,15 @@ export interface CompareTaskInfo {
     Status: string;
 }
 /**
+ * ContinueSyncJob请求参数结构体
+ */
+export interface ContinueSyncJobRequest {
+    /**
+      * 同步任务id
+      */
+    JobId: string;
+}
+/**
  * CreateMigrationService返回参数结构体
  */
 export interface CreateMigrationServiceResponse {
@@ -1112,44 +1170,109 @@ export interface DescribeMigrationCheckJobResponse {
     RequestId?: string;
 }
 /**
- * 一致性校验库表对象
+ * 数据库信息
  */
-export interface CompareObjectItem {
+export interface DBInfo {
     /**
-      * 迁移的库
+      * 表示节点角色，针对分布式数据库，如mongodb中的mongos节点
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    DbName: string;
+    Role?: string;
     /**
-      * 数据库选择模式: all 为当前对象下的所有对象,partial 为部分对象
+      * 内核版本，针对mariadb的不同内核版本等
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    DbMode: string;
+    DbKernel?: string;
     /**
-      * 迁移的 schema
+      * 实例的IP地址，对于公网、专线、VPN、云联网、自研上云、VPC等接入方式此项必填
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    SchemaName?: string;
+    Host?: string;
     /**
-      * 表选择模式: all 为当前对象下的所有表对象,partial 为部分表对象
+      * 实例的端口，对于公网、云主机自建、专线、VPN、云联网、自研上云、VPC等接入方式此项必填
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    TableMode?: string;
+    Port?: number;
     /**
-      * 用于一致性校验的表配置，当 TableMode 为 partial 时，需要填写
+      * 实例的用户名
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Tables?: Array<CompareTableItem>;
+    User?: string;
     /**
-      * 视图选择模式: all 为当前对象下的所有视图对象,partial 为部分视图对象
+      * 实例的密码
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ViewMode?: string;
+    Password?: string;
     /**
-      * 用于一致性校验的视图配置，当 ViewMode 为 partial 时， 需要填写
+      * CVM实例短ID，格式如：ins-olgl39y8；与云服务器控制台页面显示的实例ID相同；如果接入类型为云主机自建的方式，此项必填
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Views?: Array<CompareViewItem>;
+    CvmInstanceId?: string;
+    /**
+      * VPN网关ID，格式如：vpngw-9ghexg7q；如果接入类型为vpncloud的方式，此项必填
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UniqVpnGwId?: string;
+    /**
+      * 专线网关ID，格式如：dcg-0rxtqqxb；如果接入类型为专线接入的方式，此项必填
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UniqDcgId?: string;
+    /**
+      * 数据库实例ID，格式如：cdb-powiqx8q；如果接入类型为云数据库的方式，此项必填
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InstanceId?: string;
+    /**
+      * 云联网ID，如：ccn-afp6kltc 注意：此字段可能返回 null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CcnGwId?: string;
+    /**
+      * 私有网络ID，格式如：vpc-92jblxto；如果接入类型为vpc、vpncloud、ccn、dcg的方式，此项必填
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VpcId?: string;
+    /**
+      * 私有网络下的子网ID，格式如：subnet-3paxmkdz；如果接入类型为vpc、vpncloud、ccn、dcg的方式，此项必填
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SubnetId?: string;
+    /**
+      * 数据库版本，当实例为RDS实例时才有效，格式如：5.6或者5.7，默认为5.6
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EngineVersion?: string;
+    /**
+      * 实例所属账号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Account?: string;
+    /**
+      * 跨账号迁移时的角色,只允许[a-zA-Z0-9\-\_]+
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AccountRole?: string;
+    /**
+      * 资源所属账号 为空或self(表示本账号内资源)、other(表示其他账户资源)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AccountMode?: string;
+    /**
+      * 临时密钥Id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TmpSecretId?: string;
+    /**
+      * 临时密钥Key
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TmpSecretKey?: string;
+    /**
+      * 临时Token
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TmpToken?: string;
 }
 /**
  * 数据同步中的描述源端和目的端的信息
@@ -1306,109 +1429,44 @@ export interface CreateCheckSyncJobResponse {
     RequestId?: string;
 }
 /**
- * 数据库信息
+ * 一致性校验库表对象
  */
-export interface DBInfo {
+export interface CompareObjectItem {
     /**
-      * 表示节点角色，针对分布式数据库，如mongodb中的mongos节点
+      * 数据库名
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Role?: string;
+    DbName: string;
     /**
-      * 内核版本，针对mariadb的不同内核版本等
+      * 数据库选择模式: all 为当前对象下的所有对象,partial 为部分对象
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    DbKernel?: string;
+    DbMode: string;
     /**
-      * 实例的IP地址，对于公网、专线、VPN、云联网、自研上云、VPC等接入方式此项必填
+      * schema名称
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Host?: string;
+    SchemaName?: string;
     /**
-      * 实例的端口，对于公网、云主机自建、专线、VPN、云联网、自研上云、VPC等接入方式此项必填
+      * 表选择模式: all 为当前对象下的所有表对象,partial 为部分表对象
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Port?: number;
+    TableMode?: string;
     /**
-      * 实例的用户名
+      * 用于一致性校验的表配置，当 TableMode 为 partial 时，需要填写
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    User?: string;
+    Tables?: Array<CompareTableItem>;
     /**
-      * 实例的密码
+      * 视图选择模式: all 为当前对象下的所有视图对象,partial 为部分视图对象
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Password?: string;
+    ViewMode?: string;
     /**
-      * CVM实例短ID，格式如：ins-olgl39y8；与云服务器控制台页面显示的实例ID相同；如果接入类型为云主机自建的方式，此项必填
+      * 用于一致性校验的视图配置，当 ViewMode 为 partial 时， 需要填写
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    CvmInstanceId?: string;
-    /**
-      * VPN网关ID，格式如：vpngw-9ghexg7q；如果接入类型为vpncloud的方式，此项必填
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    UniqVpnGwId?: string;
-    /**
-      * 专线网关ID，格式如：dcg-0rxtqqxb；如果接入类型为专线接入的方式，此项必填
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    UniqDcgId?: string;
-    /**
-      * 数据库实例ID，格式如：cdb-powiqx8q；如果接入类型为云数据库的方式，此项必填
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    InstanceId?: string;
-    /**
-      * 云联网ID，如：ccn-afp6kltc 注意：此字段可能返回 null，表示取不到有效值。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    CcnGwId?: string;
-    /**
-      * 私有网络ID，格式如：vpc-92jblxto；如果接入类型为vpc、vpncloud、ccn、dcg的方式，此项必填
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    VpcId?: string;
-    /**
-      * 私有网络下的子网ID，格式如：subnet-3paxmkdz；如果接入类型为vpc、vpncloud、ccn、dcg的方式，此项必填
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    SubnetId?: string;
-    /**
-      * 数据库版本，当实例为RDS实例时才有效，格式如：5.6或者5.7，默认为5.6
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    EngineVersion?: string;
-    /**
-      * 实例所属账号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Account?: string;
-    /**
-      * 跨账号迁移时的角色,只允许[a-zA-Z0-9\-\_]+
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    AccountRole?: string;
-    /**
-      * 资源所属账号 为空或self(表示本账号内资源)、other(表示其他账户资源)
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    AccountMode?: string;
-    /**
-      * 临时密钥Id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    TmpSecretId?: string;
-    /**
-      * 临时密钥Key
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    TmpSecretKey?: string;
-    /**
-      * 临时Token
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    TmpToken?: string;
+    Views?: Array<CompareViewItem>;
 }
 /**
  * ConfigureSyncJob请求参数结构体
@@ -1582,7 +1640,7 @@ export interface ProcessStepTip {
  */
 export interface ModifyCompareTaskRequest {
     /**
-      * 迁移任务 Id
+      * 任务 Id
       */
     JobId: string;
     /**
@@ -1594,13 +1652,17 @@ export interface ModifyCompareTaskRequest {
       */
     TaskName?: string;
     /**
-      * 数据对比对象模式，sameAsMigrate(全部迁移对象， **默认为此项配置**)，custom(自定义模式)
+      * 数据对比对象模式，sameAsMigrate(全部迁移对象， 默认为此项配置)、custom(自定义)，注意自定义对比对象必须是迁移对象的子集
       */
     ObjectMode?: string;
     /**
       * 对比对象，若CompareObjectMode取值为custom，则此项必填
       */
     Objects?: CompareObject;
+    /**
+      * 一致性校验选项
+      */
+    Options?: CompareOptions;
 }
 /**
  * RecoverSyncJob请求参数结构体
@@ -2051,6 +2113,16 @@ export interface SkipCheckItemRequest {
  */
 export interface CompareAbstractInfo {
     /**
+      * 校验配置参数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Options: CompareOptions;
+    /**
+      * 一致性校验对比对象
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Objects: CompareObject;
+    /**
       * 对比结论: same,different
 注意：此字段可能返回 null，表示取不到有效值。
       */
@@ -2081,10 +2153,35 @@ export interface CompareAbstractInfo {
       */
     SkippedTables: number;
     /**
+      * 预估表总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NearlyTableCount: number;
+    /**
       * 不一致的数据行数量
 注意：此字段可能返回 null，表示取不到有效值。
       */
     DifferentRows: number;
+    /**
+      * 源库行数，当对比类型为**行数对比**时此项有意义
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SrcSampleRows: number;
+    /**
+      * 目标库行数，当对比类型为**行数对比**时此项有意义
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DstSampleRows: number;
+    /**
+      * 开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    StartedAt: string;
+    /**
+      * 结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FinishedAt: string;
 }
 /**
  * 检查步骤
@@ -2131,7 +2228,7 @@ export interface CheckStep {
  */
 export interface CompareTaskItem {
     /**
-      * 迁移任务id
+      * 任务id
 注意：此字段可能返回 null，表示取不到有效值。
       */
     JobId: string;
@@ -2185,6 +2282,21 @@ export interface CompareTaskItem {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     FinishedAt: string;
+    /**
+      * 对比类型，dataCheck(完整数据对比)、sampleDataCheck(抽样数据对比)、rowsCount(行数对比)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Method: string;
+    /**
+      * 对比配置信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Options: CompareOptions;
+    /**
+      * 一致性校验提示信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Message: string;
 }
 /**
  * ModifyMigrateJobSpec返回参数结构体
@@ -2213,7 +2325,7 @@ export interface CreateSyncJobResponse {
  */
 export interface CreateCompareTaskRequest {
     /**
-      * 迁移任务 Id
+      * 任务 Id
       */
     JobId: string;
     /**
@@ -2228,6 +2340,10 @@ export interface CreateCompareTaskRequest {
       * 一致性对比对象配置
       */
     Objects?: CompareObject;
+    /**
+      * 一致性校验选项
+      */
+    Options?: CompareOptions;
 }
 /**
  * StartCompare请求参数结构体
@@ -2833,6 +2949,26 @@ export interface SyncJobInfo {
     AutoRetryTimeRangeMinutes: number;
 }
 /**
+ * 一致性校验选项
+ */
+export interface CompareOptions {
+    /**
+      * 对比类型：dataCheck(完整数据对比)、sampleDataCheck(抽样数据对比)、rowsCount(行数对比)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Method?: string;
+    /**
+      * 抽样比例;范围0,100
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SampleRate?: number;
+    /**
+      * 线程数，取值1-5，默认为1
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ThreadCount?: number;
+}
+/**
  * 角色对象，postgresql独有参数
  */
 export interface RoleItem {
@@ -3085,6 +3221,15 @@ export interface DatabaseTableObject {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     AdvancedObjects?: Array<string>;
+}
+/**
+ * PauseMigrateJob返回参数结构体
+ */
+export interface PauseMigrateJobResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 数据同步库表信息描述

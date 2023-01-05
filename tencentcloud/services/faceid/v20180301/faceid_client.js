@@ -101,13 +101,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("LivenessCompare", req, cb);
     }
     /**
-     * 该接口仅限微信公众号中使用，传入姓名和身份证号获取回调URL，在微信公众号中打开验证姓名和身份证号与微信实名的信息是否一致。
-
-     */
-    async GetRealNameAuthToken(req, cb) {
-        return this.request("GetRealNameAuthToken", req, cb);
-    }
-    /**
      * 本接口用于校验姓名和身份证号的真实性和一致性，您可以通过输入姓名和身份证号或传入身份证人像面照片提供所需验证信息。
      */
     async IdCardOCRVerification(req, cb) {

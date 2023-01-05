@@ -192,26 +192,145 @@ export interface DescribeSocCheckResultListResponse {
 }
 
 /**
- * soc产品购买信息
+ * DescribeVulDetail返回参数结构体
  */
-export interface SocProductionItem {
+export interface DescribeVulDetailResponse {
   /**
-      * 名字
+      * 漏洞类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VulType: number
+
+  /**
+      * 漏洞子类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SubVulType: string
+
+  /**
+      * cvss分数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CvssScore: string
+
+  /**
+      * cvss值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Cvss: string
+
+  /**
+      * cve编号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Cve: string
+
+  /**
+      * cnvd编号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Cnvd: string
+
+  /**
+      * cnnvd编号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Cnnvd: string
+
+  /**
+      * 描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Desc: string
+
+  /**
+      * 参考
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Reference: string
+
+  /**
+      * 修复意见
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Repair: string
+
+  /**
+      * 披露时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ReleaseTime: string
+
+  /**
+      * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UpdateTime: string
+
+  /**
+      * 漏洞名称
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Name: string
 
   /**
-      * 标识
+      * 等级
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Index: number
+  Level: number
 
   /**
       * 状态
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Status: number
+
+  /**
+      * 受影响资产唯一标识
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ImpactAsset: string
+
+  /**
+      * 受影响资产名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ImpactAssetName: string
+
+  /**
+      * 受影响资产是否已删除
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsAssetDeleted: boolean
+
+  /**
+      * 漏洞来源
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Source: string
+
+  /**
+      * 漏洞URL
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VulUrl: string
+
+  /**
+      * 资产归属
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SsaAssetCategory: number
+
+  /**
+      * 资产文件路径
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VulPath: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1117,6 +1236,29 @@ export interface DescribeComplianceDetailResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * soc产品购买信息
+ */
+export interface SocProductionItem {
+  /**
+      * 名字
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Name: string
+
+  /**
+      * 标识
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Index: number
+
+  /**
+      * 状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Status: number
 }
 
 /**
@@ -2058,6 +2200,28 @@ export interface DescribeLeakDetectionListResponse {
    * 数据列表
    */
   List?: Array<string>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeAssetDetailList返回参数结构体
+ */
+export interface DescribeAssetDetailListResponse {
+  /**
+      * 业务数据
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Data: Array<AssetDetail>
+
+  /**
+      * 总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Total: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3119,145 +3283,39 @@ export interface DescribeAssetDetailResponse {
 }
 
 /**
- * DescribeVulDetail返回参数结构体
+ * DescribeAssetDetailList请求参数结构体
  */
-export interface DescribeVulDetailResponse {
+export interface DescribeAssetDetailListRequest {
   /**
-      * 漏洞类型
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  VulType: number
-
-  /**
-      * 漏洞子类型
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  SubVulType: string
-
-  /**
-      * cvss分数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  CvssScore: string
-
-  /**
-      * cvss值
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Cvss: string
-
-  /**
-      * cve编号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Cve: string
-
-  /**
-      * cnvd编号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Cnvd: string
-
-  /**
-      * cnnvd编号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Cnnvd: string
-
-  /**
-      * 描述
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Desc: string
-
-  /**
-      * 参考
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Reference: string
-
-  /**
-      * 修复意见
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Repair: string
-
-  /**
-      * 披露时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ReleaseTime: string
-
-  /**
-      * 更新时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  UpdateTime: string
-
-  /**
-      * 漏洞名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Name: string
-
-  /**
-      * 等级
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Level: number
-
-  /**
-      * 状态
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Status: number
-
-  /**
-      * 受影响资产唯一标识
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ImpactAsset: string
-
-  /**
-      * 受影响资产名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ImpactAssetName: string
-
-  /**
-      * 受影响资产是否已删除
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  IsAssetDeleted: boolean
-
-  /**
-      * 漏洞来源
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Source: string
-
-  /**
-      * 漏洞URL
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  VulUrl: string
-
-  /**
-      * 资产归属
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  SsaAssetCategory: number
-
-  /**
-      * 资产文件路径
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  VulPath: string
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 查询条件，可支持的查询字段：AssetUniqid,AssetName,AssetIpAll,AssetVpcid,Tag
    */
-  RequestId?: string
+  Filter?: Array<AssetQueryFilter>
+
+  /**
+      * 排序条件，可支持的排序字段：
+AssetCspmRiskNum,AssetVulNum,AssetEventNum,SsaAssetDiscoverTime
+      */
+  Sorter?: Array<QuerySort>
+
+  /**
+   * 风险标签
+   */
+  RiskTags?: Array<string>
+
+  /**
+   * 标签
+   */
+  Tags?: Array<string>
+
+  /**
+   * 页
+   */
+  PageIndex?: number
+
+  /**
+   * 页大小
+   */
+  PageSize?: number
 }
 
 /**

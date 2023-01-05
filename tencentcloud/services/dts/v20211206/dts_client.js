@@ -46,10 +46,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateMigrationService", req, cb);
     }
     /**
-     * 修改一致性校验任务，在任务创建后启动之前，可修改一致性校验参数
+     * 隔离同步任务，隔离后可通过查询同步任务信息接口DescribeSyncJobs获取隔离后状态。在任务隔离后可进行解除隔离(RecoverSyncJob)操作或直接进行下线操作。对于不计费任务，调用此接口后会直接删除任务，无法进行恢复操作。
      */
-    async ModifyCompareTask(req, cb) {
-        return this.request("ModifyCompareTask", req, cb);
+    async IsolateSyncJob(req, cb) {
+        return this.request("IsolateSyncJob", req, cb);
     }
     /**
      * 终止一致性校验任务
@@ -94,6 +94,24 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCompareReport", req, cb);
     }
     /**
+     * 恢复一个暂停中的迁移任务。
+     */
+    async ContinueMigrateJob(req, cb) {
+        return this.request("ContinueMigrateJob", req, cb);
+    }
+    /**
+     * 暂停一个迁移任务。
+     */
+    async PauseMigrateJob(req, cb) {
+        return this.request("PauseMigrateJob", req, cb);
+    }
+    /**
+     * 本接口用于校验检查项不通过后，可进行跳过此校验项操作，后端将不再校验该项。任何校验步骤都是不应该跳过的，通过校验是能正确执行的前置条件。支持跳过的产品及链路的校验项可 [参考文档](https://cloud.tencent.com/document/product/571/61639)。
+     */
+    async SkipSyncCheckItem(req, cb) {
+        return this.request("SkipSyncCheckItem", req, cb);
+    }
+    /**
      * 配置一个同步任务
      */
     async ConfigureSyncJob(req, cb) {
@@ -129,6 +147,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async PauseSyncJob(req, cb) {
         return this.request("PauseSyncJob", req, cb);
+    }
+    /**
+     * 恢复处于暂停中中的数据同步任务。
+     */
+    async ContinueSyncJob(req, cb) {
+        return this.request("ContinueSyncJob", req, cb);
     }
     /**
      * 下线同步任务，任务在已隔离状态下可以通过此操作进行任务下线，即彻底删除任务。下线操作后可通过查询同步任务信息接口DescribeSyncJobs获取任务列表查看状态，此操作成功后无法看到此任务表示下线成功。
@@ -170,10 +194,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCompareTasks", req, cb);
     }
     /**
-     * 本接口用于校验检查项不通过后，可进行跳过此校验项操作，后端将不再校验该项。任何校验步骤都是不应该跳过的，通过校验是能正确执行的前置条件。支持跳过的产品及链路的校验项可 [参考文档](https://cloud.tencent.com/document/product/571/61639)。
+     * 修改一致性校验任务，在任务创建后启动之前，可修改一致性校验参数
      */
-    async SkipSyncCheckItem(req, cb) {
-        return this.request("SkipSyncCheckItem", req, cb);
+    async ModifyCompareTask(req, cb) {
+        return this.request("ModifyCompareTask", req, cb);
     }
     /**
      * 查询数据迁移任务列表
@@ -250,6 +274,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyCompareTaskName", req, cb);
     }
     /**
+     * 修改迁移任务名
+     */
+    async ModifyMigrateName(req, cb) {
+        return this.request("ModifyMigrateName", req, cb);
+    }
+    /**
      * 本接口（CompleteMigrateJob）用于完成数据迁移任务。
 选择采用增量迁移方式的任务, 需要在迁移进度进入准备完成阶段后, 调用本接口, 停止迁移增量数据。
 通过DescribeMigrationJobs接口查询到任务的状态为准备完成（Status="readyComplete"）时，此时可以调用本接口完成迁移任务。
@@ -257,18 +287,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CompleteMigrateJob(req, cb) {
         return this.request("CompleteMigrateJob", req, cb);
-    }
-    /**
-     * 修改迁移任务名
-     */
-    async ModifyMigrateName(req, cb) {
-        return this.request("ModifyMigrateName", req, cb);
-    }
-    /**
-     * 隔离同步任务，隔离后可通过查询同步任务信息接口DescribeSyncJobs获取隔离后状态。在任务隔离后可进行解除隔离(RecoverSyncJob)操作或直接进行下线操作。对于不计费任务，调用此接口后会直接删除任务，无法进行恢复操作。
-     */
-    async IsolateSyncJob(req, cb) {
-        return this.request("IsolateSyncJob", req, cb);
     }
 }
 exports.Client = Client;

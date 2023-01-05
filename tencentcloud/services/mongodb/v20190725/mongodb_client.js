@@ -70,7 +70,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeSecurityGroup", req, cb);
     }
     /**
-     * 账户权限设置。
+     * 本接口(SetAccountUserPrivilege)用于设置mongodb实例的账号权限。
      */
     async SetAccountUserPrivilege(req, cb) {
         return this.request("SetAccountUserPrivilege", req, cb);
@@ -106,7 +106,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAsyncRequestInfo", req, cb);
     }
     /**
-     * 创建实例账号。
+     * 本接口(CreateAccountUser)用于创建mongodb实例账号。
      */
     async CreateAccountUser(req, cb) {
         return this.request("CreateAccountUser", req, cb);
@@ -203,7 +203,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AssignProject", req, cb);
     }
     /**
-     * 本接口(DescribeAccountUsers)用于获取当前实例的全部账号列表。
+     * 本接口(DescribeAccountUsers)用于获取当前实例的全部账号。
      */
     async DescribeAccountUsers(req, cb) {
         return this.request("DescribeAccountUsers", req, cb);

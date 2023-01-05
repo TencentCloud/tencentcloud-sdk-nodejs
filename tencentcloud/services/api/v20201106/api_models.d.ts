@@ -101,6 +101,36 @@ export interface ZoneInfo {
       * 可用区状态，包含AVAILABLE和UNAVAILABLE。AVAILABLE代表可用，UNAVAILABLE代表不可用。
       */
     ZoneState: string;
+    /**
+      * 父级zone
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ParentZone: string;
+    /**
+      * 父级可用区ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ParentZoneId: string;
+    /**
+      * 父级可用区描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ParentZoneName: string;
+    /**
+      * zone类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ZoneType: string;
+    /**
+      * 控制台类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MachineRoomTypeMC: string;
+    /**
+      * 和ZoneId一样，适用于控制台调用
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ZoneIdMC: string;
 }
 /**
  * DescribeZones请求参数结构体
@@ -135,15 +165,35 @@ export interface RegionInfo {
     /**
       * 地域名称，例如，ap-guangzhou
       */
-    Region: string;
+    Region?: string;
     /**
       * 地域描述，例如，华南地区(广州)
       */
-    RegionName: string;
+    RegionName?: string;
     /**
       * 地域是否可用状态
       */
-    RegionState: string;
+    RegionState?: string;
+    /**
+      * 控制台类型，api调用时默认null
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RegionTypeMC?: number;
+    /**
+      * 不同语言的地区
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LocationMC?: string;
+    /**
+      * 控制台展示的地域描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RegionNameMC?: string;
+    /**
+      * 控制台展示的RegionId
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RegionIdMC?: string;
 }
 /**
  * DescribeRegions返回参数结构体

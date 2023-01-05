@@ -48,14 +48,13 @@ import {
   BankCard4EVerificationResponse,
   MobileStatusRequest,
   IdCardOCRVerificationRequest,
-  GetRealNameAuthTokenRequest,
+  LivenessRecognitionResponse,
   ParseNfcDataResponse,
   CheckIdNameDateRequest,
   BankCard2EVerificationRequest,
   LivenessRecognitionRequest,
   EidInfo,
   GetFaceIdTokenResponse,
-  GetRealNameAuthTokenResponse,
   PhoneVerificationCMCCResponse,
   CheckEidTokenStatusResponse,
   PhoneVerificationCTCCResponse,
@@ -80,7 +79,6 @@ import {
   GetFaceIdResultRequest,
   PhoneVerificationCUCCResponse,
   GetActionSequenceResponse,
-  LivenessRecognitionResponse,
   BankCardVerificationResponse,
   MinorsVerificationRequest,
   ImageRecognitionResponse,
@@ -232,17 +230,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: LivenessCompareResponse) => void
   ): Promise<LivenessCompareResponse> {
     return this.request("LivenessCompare", req, cb)
-  }
-
-  /**
-     * 该接口仅限微信公众号中使用，传入姓名和身份证号获取回调URL，在微信公众号中打开验证姓名和身份证号与微信实名的信息是否一致。
-
-     */
-  async GetRealNameAuthToken(
-    req: GetRealNameAuthTokenRequest,
-    cb?: (error: string, rep: GetRealNameAuthTokenResponse) => void
-  ): Promise<GetRealNameAuthTokenResponse> {
-    return this.request("GetRealNameAuthToken", req, cb)
   }
 
   /**

@@ -1,7 +1,7 @@
 
 const expect = require("chai").expect
 const tencentcloud = require("../../tencentcloud-sdk-nodejs")
-const client = new tencentcloud.ssa.v20180608.Client({
+const client = new tencentcloud.hasim.v20210716.Client({
   credential: {
     secretId: process.env.secretId,
     secretKey: process.env.secretKey,
@@ -16,11 +16,11 @@ const client = new tencentcloud.ssa.v20180608.Client({
     },
   },
 })
-describe("ssa.v20180608.test.js", function () {
+describe("hasim.v20210716.test.js", function () {
 
-it("ssa.v20180608.DescribeAssetDetailList", async function () {
+it("hasim.v20210716.DeleteTactic", async function () {
     try {
-       const data = await client.DescribeAssetDetailList({})
+       const data = await client.DeleteTactic({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -28,9 +28,9 @@ it("ssa.v20180608.DescribeAssetDetailList", async function () {
     }
 })
 
-it("ssa.v20180608.DescribeConfigList", async function () {
+it("hasim.v20210716.DescribeOrders", async function () {
     try {
-       const data = await client.DescribeConfigList({})
+       const data = await client.DescribeOrders({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -38,9 +38,9 @@ it("ssa.v20180608.DescribeConfigList", async function () {
     }
 })
 
-it("ssa.v20180608.DescribeLeakDetectionList", async function () {
+it("hasim.v20210716.DescribeTactics", async function () {
     try {
-       const data = await client.DescribeLeakDetectionList({})
+       const data = await client.DescribeTactics({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -48,9 +48,9 @@ it("ssa.v20180608.DescribeLeakDetectionList", async function () {
     }
 })
 
-it("ssa.v20180608.DescribeMappingResults", async function () {
+it("hasim.v20210716.CreateRule", async function () {
     try {
-       const data = await client.DescribeMappingResults({})
+       const data = await client.CreateRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -58,9 +58,9 @@ it("ssa.v20180608.DescribeMappingResults", async function () {
     }
 })
 
-it("ssa.v20180608.DescribeEventDetail", async function () {
+it("hasim.v20210716.DeleteTag", async function () {
     try {
-       const data = await client.DescribeEventDetail({})
+       const data = await client.DeleteTag({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -68,9 +68,9 @@ it("ssa.v20180608.DescribeEventDetail", async function () {
     }
 })
 
-it("ssa.v20180608.SaDivulgeDataQueryPub", async function () {
+it("hasim.v20210716.DescribeLinks", async function () {
     try {
-       const data = await client.SaDivulgeDataQueryPub({})
+       const data = await client.DescribeLinks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -78,9 +78,9 @@ it("ssa.v20180608.SaDivulgeDataQueryPub", async function () {
     }
 })
 
-it("ssa.v20180608.DescribeComplianceAssetList", async function () {
+it("hasim.v20210716.DeleteRule", async function () {
     try {
-       const data = await client.DescribeComplianceAssetList({})
+       const data = await client.DeleteRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -88,9 +88,9 @@ it("ssa.v20180608.DescribeComplianceAssetList", async function () {
     }
 })
 
-it("ssa.v20180608.DescribeSocCheckItemList", async function () {
+it("hasim.v20210716.ModifyRuleStatus", async function () {
     try {
-       const data = await client.DescribeSocCheckItemList({})
+       const data = await client.ModifyRuleStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -98,9 +98,9 @@ it("ssa.v20180608.DescribeSocCheckItemList", async function () {
     }
 })
 
-it("ssa.v20180608.DescribeAssetDetail", async function () {
+it("hasim.v20210716.ModifyLinkAdvancedLog", async function () {
     try {
-       const data = await client.DescribeAssetDetail({})
+       const data = await client.ModifyLinkAdvancedLog({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -108,9 +108,9 @@ it("ssa.v20180608.DescribeAssetDetail", async function () {
     }
 })
 
-it("ssa.v20180608.DescribeSafetyEventList", async function () {
+it("hasim.v20210716.CreateTag", async function () {
     try {
-       const data = await client.DescribeSafetyEventList({})
+       const data = await client.CreateTag({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -118,9 +118,9 @@ it("ssa.v20180608.DescribeSafetyEventList", async function () {
     }
 })
 
-it("ssa.v20180608.DescribeComplianceList", async function () {
+it("hasim.v20210716.ModifyLinkTele", async function () {
     try {
-       const data = await client.DescribeComplianceList({})
+       const data = await client.ModifyLinkTele({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -128,9 +128,9 @@ it("ssa.v20180608.DescribeComplianceList", async function () {
     }
 })
 
-it("ssa.v20180608.DescribeAssetList", async function () {
+it("hasim.v20210716.DescribeRule", async function () {
     try {
-       const data = await client.DescribeAssetList({})
+       const data = await client.DescribeRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -138,9 +138,9 @@ it("ssa.v20180608.DescribeAssetList", async function () {
     }
 })
 
-it("ssa.v20180608.DescribeCheckConfigAssetList", async function () {
+it("hasim.v20210716.DescribeTags", async function () {
     try {
-       const data = await client.DescribeCheckConfigAssetList({})
+       const data = await client.DescribeTags({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -148,9 +148,9 @@ it("ssa.v20180608.DescribeCheckConfigAssetList", async function () {
     }
 })
 
-it("ssa.v20180608.DescribeAssetsMappingList", async function () {
+it("hasim.v20210716.ModifyRule", async function () {
     try {
-       const data = await client.DescribeAssetsMappingList({})
+       const data = await client.ModifyRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -158,9 +158,9 @@ it("ssa.v20180608.DescribeAssetsMappingList", async function () {
     }
 })
 
-it("ssa.v20180608.DescribeVulList", async function () {
+it("hasim.v20210716.DescribeLink", async function () {
     try {
-       const data = await client.DescribeVulList({})
+       const data = await client.DescribeLink({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -168,9 +168,9 @@ it("ssa.v20180608.DescribeVulList", async function () {
     }
 })
 
-it("ssa.v20180608.DescribeSocCheckResultList", async function () {
+it("hasim.v20210716.CreateTactic", async function () {
     try {
-       const data = await client.DescribeSocCheckResultList({})
+       const data = await client.CreateTactic({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -178,9 +178,9 @@ it("ssa.v20180608.DescribeSocCheckResultList", async function () {
     }
 })
 
-it("ssa.v20180608.DescribeSocAlertDetails", async function () {
+it("hasim.v20210716.RenewLinkInfo", async function () {
     try {
-       const data = await client.DescribeSocAlertDetails({})
+       const data = await client.RenewLinkInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -188,9 +188,9 @@ it("ssa.v20180608.DescribeSocAlertDetails", async function () {
     }
 })
 
-it("ssa.v20180608.DescribeSocCspmCompliance", async function () {
+it("hasim.v20210716.ModifyTactic", async function () {
     try {
-       const data = await client.DescribeSocCspmCompliance({})
+       const data = await client.ModifyTactic({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -198,9 +198,9 @@ it("ssa.v20180608.DescribeSocCspmCompliance", async function () {
     }
 })
 
-it("ssa.v20180608.DescribeSocAlertList", async function () {
+it("hasim.v20210716.DescribeTactic", async function () {
     try {
-       const data = await client.DescribeSocAlertList({})
+       const data = await client.DescribeTactic({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -208,9 +208,9 @@ it("ssa.v20180608.DescribeSocAlertList", async function () {
     }
 })
 
-it("ssa.v20180608.DescribeCheckConfigDetail", async function () {
+it("hasim.v20210716.DescribeRules", async function () {
     try {
-       const data = await client.DescribeCheckConfigDetail({})
+       const data = await client.DescribeRules({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -218,9 +218,9 @@ it("ssa.v20180608.DescribeCheckConfigDetail", async function () {
     }
 })
 
-it("ssa.v20180608.DescribeComplianceDetail", async function () {
+it("hasim.v20210716.ModifyLinkTactic", async function () {
     try {
-       const data = await client.DescribeComplianceDetail({})
+       const data = await client.ModifyLinkTactic({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -228,9 +228,9 @@ it("ssa.v20180608.DescribeComplianceDetail", async function () {
     }
 })
 
-it("ssa.v20180608.DescribeVulDetail", async function () {
+it("hasim.v20210716.ModifyTag", async function () {
     try {
-       const data = await client.DescribeVulDetail({})
+       const data = await client.ModifyTag({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

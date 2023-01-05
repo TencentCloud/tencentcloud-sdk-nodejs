@@ -3898,6 +3898,11 @@ global：全球加速
    * 七牛云对象存储回源鉴权
    */
   QnPrivateAccess?: QnPrivateAccess
+
+  /**
+   * HTTPS服务
+   */
+  HttpsBilling?: HttpsBilling
 }
 
 /**
@@ -6999,7 +7004,7 @@ off：不支持
   QnPrivateAccess: QnPrivateAccess
 
   /**
-      * https 请求计费开关
+      * HTTPS服务
 注意：此字段可能返回 null，表示取不到有效值。
       */
   HttpsBilling: HttpsBilling
@@ -8681,6 +8686,11 @@ global：全球加速
    * 七牛云对象存储回源鉴权
    */
   QnPrivateAccess?: QnPrivateAccess
+
+  /**
+   * HTTPS服务
+   */
+  HttpsBilling?: HttpsBilling
 }
 
 /**
@@ -9493,7 +9503,7 @@ export interface DescribeDomainsConfigResponse {
  */
 export interface HttpsBilling {
   /**
-   * https请求计费开关
+   * HTTPS服务
    */
   Switch: string
 }

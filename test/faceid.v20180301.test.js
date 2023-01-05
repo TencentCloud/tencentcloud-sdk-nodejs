@@ -138,16 +138,6 @@ it("faceid.v20180301.LivenessCompare", async function () {
     }
 })
 
-it("faceid.v20180301.GetRealNameAuthToken", async function () {
-    try {
-       const data = await client.GetRealNameAuthToken({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("faceid.v20180301.IdCardOCRVerification", async function () {
     try {
        const data = await client.IdCardOCRVerification({})

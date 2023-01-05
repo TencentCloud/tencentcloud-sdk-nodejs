@@ -198,7 +198,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 账户权限设置。
+   * 本接口(SetAccountUserPrivilege)用于设置mongodb实例的账号权限。
    */
   async SetAccountUserPrivilege(
     req: SetAccountUserPrivilegeRequest,
@@ -258,7 +258,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建实例账号。
+   * 本接口(CreateAccountUser)用于创建mongodb实例账号。
    */
   async CreateAccountUser(
     req: CreateAccountUserRequest,
@@ -419,7 +419,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(DescribeAccountUsers)用于获取当前实例的全部账号列表。
+   * 本接口(DescribeAccountUsers)用于获取当前实例的全部账号。
    */
   async DescribeAccountUsers(
     req: DescribeAccountUsersRequest,

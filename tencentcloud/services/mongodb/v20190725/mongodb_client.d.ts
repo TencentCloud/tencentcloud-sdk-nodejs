@@ -36,7 +36,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeSecurityGroup(req: DescribeSecurityGroupRequest, cb?: (error: string, rep: DescribeSecurityGroupResponse) => void): Promise<DescribeSecurityGroupResponse>;
     /**
-     * 账户权限设置。
+     * 本接口(SetAccountUserPrivilege)用于设置mongodb实例的账号权限。
      */
     SetAccountUserPrivilege(req: SetAccountUserPrivilegeRequest, cb?: (error: string, rep: SetAccountUserPrivilegeResponse) => void): Promise<SetAccountUserPrivilegeResponse>;
     /**
@@ -60,7 +60,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeAsyncRequestInfo(req: DescribeAsyncRequestInfoRequest, cb?: (error: string, rep: DescribeAsyncRequestInfoResponse) => void): Promise<DescribeAsyncRequestInfoResponse>;
     /**
-     * 创建实例账号。
+     * 本接口(CreateAccountUser)用于创建mongodb实例账号。
      */
     CreateAccountUser(req: CreateAccountUserRequest, cb?: (error: string, rep: CreateAccountUserResponse) => void): Promise<CreateAccountUserResponse>;
     /**
@@ -125,7 +125,7 @@ export declare class Client extends AbstractClient {
      */
     AssignProject(req: AssignProjectRequest, cb?: (error: string, rep: AssignProjectResponse) => void): Promise<AssignProjectResponse>;
     /**
-     * 本接口(DescribeAccountUsers)用于获取当前实例的全部账号列表。
+     * 本接口(DescribeAccountUsers)用于获取当前实例的全部账号。
      */
     DescribeAccountUsers(req: DescribeAccountUsersRequest, cb?: (error: string, rep: DescribeAccountUsersResponse) => void): Promise<DescribeAccountUsersResponse>;
     /**

@@ -48,9 +48,9 @@ it("dts.v20211206.CreateMigrationService", async function () {
     }
 })
 
-it("dts.v20211206.ModifyCompareTask", async function () {
+it("dts.v20211206.IsolateSyncJob", async function () {
     try {
-       const data = await client.ModifyCompareTask({})
+       const data = await client.IsolateSyncJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -128,6 +128,36 @@ it("dts.v20211206.DescribeCompareReport", async function () {
     }
 })
 
+it("dts.v20211206.ContinueMigrateJob", async function () {
+    try {
+       const data = await client.ContinueMigrateJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dts.v20211206.PauseMigrateJob", async function () {
+    try {
+       const data = await client.PauseMigrateJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dts.v20211206.SkipSyncCheckItem", async function () {
+    try {
+       const data = await client.SkipSyncCheckItem({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dts.v20211206.ConfigureSyncJob", async function () {
     try {
        const data = await client.ConfigureSyncJob({})
@@ -181,6 +211,16 @@ it("dts.v20211206.StopMigrateJob", async function () {
 it("dts.v20211206.PauseSyncJob", async function () {
     try {
        const data = await client.PauseSyncJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dts.v20211206.ContinueSyncJob", async function () {
+    try {
+       const data = await client.ContinueSyncJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -248,9 +288,9 @@ it("dts.v20211206.DescribeCompareTasks", async function () {
     }
 })
 
-it("dts.v20211206.SkipSyncCheckItem", async function () {
+it("dts.v20211206.ModifyCompareTask", async function () {
     try {
-       const data = await client.SkipSyncCheckItem({})
+       const data = await client.ModifyCompareTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -378,16 +418,6 @@ it("dts.v20211206.ModifyCompareTaskName", async function () {
     }
 })
 
-it("dts.v20211206.CompleteMigrateJob", async function () {
-    try {
-       const data = await client.CompleteMigrateJob({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("dts.v20211206.ModifyMigrateName", async function () {
     try {
        const data = await client.ModifyMigrateName({})
@@ -398,9 +428,9 @@ it("dts.v20211206.ModifyMigrateName", async function () {
     }
 })
 
-it("dts.v20211206.IsolateSyncJob", async function () {
+it("dts.v20211206.CompleteMigrateJob", async function () {
     try {
-       const data = await client.IsolateSyncJob({})
+       const data = await client.CompleteMigrateJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

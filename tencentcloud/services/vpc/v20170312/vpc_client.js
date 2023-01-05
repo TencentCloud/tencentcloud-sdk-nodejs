@@ -194,6 +194,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeNetworkInterfaceLimit", req, cb);
     }
     /**
+     * 本接口（EnableSnapshotPolicies）用于启用快照策略。
+     */
+    async EnableSnapshotPolicies(req, cb) {
+        return this.request("EnableSnapshotPolicies", req, cb);
+    }
+    /**
      * 本接口（DescribeNetDetects）用于查询网络探测列表。
      */
     async DescribeNetDetects(req, cb) {
@@ -221,10 +227,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeGatewayFlowMonitorDetail", req, cb);
     }
     /**
-     * 本接口（EnableGatewayFlowMonitor）用于开启网关流量监控。
+     * 本接口（AttachSnapshotInstances）用于快照策略关联实例。
      */
-    async EnableGatewayFlowMonitor(req, cb) {
-        return this.request("EnableGatewayFlowMonitor", req, cb);
+    async AttachSnapshotInstances(req, cb) {
+        return this.request("AttachSnapshotInstances", req, cb);
     }
     /**
      * 本接口（UnassignIpv6Addresses）用于释放弹性网卡`IPv6`地址。<br />
@@ -244,6 +250,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteVpnConnection(req, cb) {
         return this.request("DeleteVpnConnection", req, cb);
+    }
+    /**
+     * 本接口（DeleteSnapshotPolicies）用于删除快照策略。
+     */
+    async DeleteSnapshotPolicies(req, cb) {
+        return this.request("DeleteSnapshotPolicies", req, cb);
     }
     /**
      * 是否接受终端节点连接请求。
@@ -369,6 +381,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeVpcEndPointService", req, cb);
     }
     /**
+     * 修改终端节点服务白名单属性。
+     */
+    async ModifyVpcEndPointServiceWhiteList(req, cb) {
+        return this.request("ModifyVpcEndPointServiceWhiteList", req, cb);
+    }
+    /**
      * 查询跨境带宽监控数据，该接口特提供给联通使用
      */
     async DescribeCrossBorderFlowMonitor(req, cb) {
@@ -395,10 +413,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateAndAttachNetworkInterface", req, cb);
     }
     /**
-     * 修改终端节点服务白名单属性。
+     * 本接口（ModifySnapshotPolicies）用于修改快照策略。
      */
-    async ModifyVpcEndPointServiceWhiteList(req, cb) {
-        return this.request("ModifyVpcEndPointServiceWhiteList", req, cb);
+    async ModifySnapshotPolicies(req, cb) {
+        return this.request("ModifySnapshotPolicies", req, cb);
     }
     /**
      * 本接口（DescribeNatGateways）用于查询 NAT 网关。
@@ -583,6 +601,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ResetAttachCcnInstances", req, cb);
     }
     /**
+     * 本接口（ModifyHaVipAttribute）用于修改高可用虚拟IP（HAVIP）属性
+     */
+    async ModifyHaVipAttribute(req, cb) {
+        return this.request("ModifyHaVipAttribute", req, cb);
+    }
+    /**
      * 本接口（DeleteSecurityGroupPolicies）用于用于删除安全组规则（SecurityGroupPolicy）。
 * SecurityGroupPolicySet.Version 用于指定要操作的安全组的版本。传入 Version 版本号若不等于当前安全组的最新版本，将返回失败；若不传 Version 则直接删除指定PolicyIndex的规则。
      */
@@ -672,6 +696,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async SetVpnGatewaysRenewFlag(req, cb) {
         return this.request("SetVpnGatewaysRenewFlag", req, cb);
+    }
+    /**
+     * 本接口（DisableSnapshotPolicies）用于停用快照策略。
+     */
+    async DisableSnapshotPolicies(req, cb) {
+        return this.request("DisableSnapshotPolicies", req, cb);
     }
     /**
      * 本接口（DescribeDhcpIps）用于查询DhcpIp列表
@@ -764,6 +794,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteDirectConnectGateway(req, cb) {
         return this.request("DeleteDirectConnectGateway", req, cb);
+    }
+    /**
+     * 本接口（DescribeSnapshotAttachedInstances）用于查询快照策略关联实例列表。
+     */
+    async DescribeSnapshotAttachedInstances(req, cb) {
+        return this.request("DescribeSnapshotAttachedInstances", req, cb);
     }
     /**
      * 本接口（DescribeDirectConnectGatewayCcnRoutes）用于查询专线网关的云联网路由（IDC网段）
@@ -941,6 +977,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async RenewAddresses(req, cb) {
         return this.request("RenewAddresses", req, cb);
+    }
+    /**
+     * 本接口（EnableGatewayFlowMonitor）用于开启网关流量监控。
+     */
+    async EnableGatewayFlowMonitor(req, cb) {
+        return this.request("EnableGatewayFlowMonitor", req, cb);
     }
     /**
      * 本接口（DescribeFlowLog）用于查询流日志实例信息
@@ -1171,6 +1213,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateServiceTemplate", req, cb);
     }
     /**
+     * 本接口（ReturnNormalAddresses）用于解绑并释放普通公网IP。
+为完善公网IP的访问管理功能，此接口于2022年12月15日升级优化鉴权功能，升级后子用户调用此接口需向主账号申请CAM策略授权，否则可能调用失败。您可以提前为子账号配置操作授权，详情见[授权指南](https://cloud.tencent.com/document/product/598/34545)。
+     */
+    async ReturnNormalAddresses(req, cb) {
+        return this.request("ReturnNormalAddresses", req, cb);
+    }
+    /**
      * 路由表列表页操作增加“从云联网撤销”，用于撤销已发布到云联网的路由。
      */
     async WithdrawNotifyRoutes(req, cb) {
@@ -1200,6 +1249,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DisableFlowLogs(req, cb) {
         return this.request("DisableFlowLogs", req, cb);
+    }
+    /**
+     * 本接口（DescribeSgSnapshotFileContent）用于查询安全组快照文件内容。
+     */
+    async DescribeSgSnapshotFileContent(req, cb) {
+        return this.request("DescribeSgSnapshotFileContent", req, cb);
     }
     /**
      * 本接口（DescribeNetworkInterfaces）用于查询弹性网卡列表。
@@ -1346,11 +1401,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DisassociateAddress", req, cb);
     }
     /**
-     * 本接口（ReturnNormalAddresses）用于解绑并释放普通公网IP。
-为完善公网IP的访问管理功能，此接口于2022年12月15日升级优化鉴权功能，升级后子用户调用此接口需向主账号申请CAM策略授权，否则可能调用失败。您可以提前为子账号配置操作授权，详情见[授权指南](https://cloud.tencent.com/document/product/598/34545)。
+     * 本接口 (ReleaseAddresses) 用于释放一个或多个[弹性公网IP](https://cloud.tencent.com/document/product/213/1941)（简称 EIP）。
+* 该操作不可逆，释放后 EIP 关联的 IP 地址将不再属于您的名下。
+* 只有状态为 UNBIND 的 EIP 才能进行释放操作。
      */
-    async ReturnNormalAddresses(req, cb) {
-        return this.request("ReturnNormalAddresses", req, cb);
+    async ReleaseAddresses(req, cb) {
+        return this.request("ReleaseAddresses", req, cb);
     }
     /**
      * 查询专线绑定NAT的路由
@@ -1405,6 +1461,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeIpGeolocationInfos(req, cb) {
         return this.request("DescribeIpGeolocationInfos", req, cb);
+    }
+    /**
+     * 本接口（DetachSnapshotInstances）用于快照策略解关联实例。
+     */
+    async DetachSnapshotInstances(req, cb) {
+        return this.request("DetachSnapshotInstances", req, cb);
     }
     /**
      * 本接口（DescribeServiceTemplates）用于查询协议端口模板
@@ -1515,6 +1577,13 @@ LimitTypes取值范围：
      */
     async DescribeHaVips(req, cb) {
         return this.request("DescribeHaVips", req, cb);
+    }
+    /**
+     * 本接口（UnassignIpv6SubnetCidrBlock）用于释放IPv6子网段。<br />
+子网段如果还有IP占用且未回收，则子网段无法释放。
+     */
+    async UnassignIpv6SubnetCidrBlock(req, cb) {
+        return this.request("UnassignIpv6SubnetCidrBlock", req, cb);
     }
     /**
      * 该接口用于创建用于CDC的本地网关。
@@ -1805,18 +1874,16 @@ LimitTypes取值范围：
         return this.request("CreateNetDetect", req, cb);
     }
     /**
-     * 本接口（ModifyHaVipAttribute）用于修改高可用虚拟IP（HAVIP）属性
+     * 本接口（CreateSnapshotPolicies）用于创建快照策略。
      */
-    async ModifyHaVipAttribute(req, cb) {
-        return this.request("ModifyHaVipAttribute", req, cb);
+    async CreateSnapshotPolicies(req, cb) {
+        return this.request("CreateSnapshotPolicies", req, cb);
     }
     /**
-     * 本接口 (ReleaseAddresses) 用于释放一个或多个[弹性公网IP](https://cloud.tencent.com/document/product/213/1941)（简称 EIP）。
-* 该操作不可逆，释放后 EIP 关联的 IP 地址将不再属于您的名下。
-* 只有状态为 UNBIND 的 EIP 才能进行释放操作。
+     * 本接口（DescribeSnapshotFiles）用于查询快照文件。
      */
-    async ReleaseAddresses(req, cb) {
-        return this.request("ReleaseAddresses", req, cb);
+    async DescribeSnapshotFiles(req, cb) {
+        return this.request("DescribeSnapshotFiles", req, cb);
     }
     /**
      * 本接口（ModifyVpcEndPointServiceAttribute）用于修改终端节点服务属性。
@@ -1863,6 +1930,12 @@ LimitTypes取值范围：
         return this.request("ModifyCcnAttribute", req, cb);
     }
     /**
+     * 本接口（ResumeSnapshotInstance）用于根据备份内容恢复安全组策略。
+     */
+    async ResumeSnapshotInstance(req, cb) {
+        return this.request("ResumeSnapshotInstance", req, cb);
+    }
+    /**
      * 本接口（DescribeSecurityGroupReferences）用于查询安全组被引用信息。
      */
     async DescribeSecurityGroupReferences(req, cb) {
@@ -1875,11 +1948,10 @@ LimitTypes取值范围：
         return this.request("DescribeSecurityGroupAssociationStatistics", req, cb);
     }
     /**
-     * 本接口（UnassignIpv6SubnetCidrBlock）用于释放IPv6子网段。<br />
-子网段如果还有IP占用且未回收，则子网段无法释放。
+     * 本接口（DescribeSnapshotPolicies）用于查询快照策略。
      */
-    async UnassignIpv6SubnetCidrBlock(req, cb) {
-        return this.request("UnassignIpv6SubnetCidrBlock", req, cb);
+    async DescribeSnapshotPolicies(req, cb) {
+        return this.request("DescribeSnapshotPolicies", req, cb);
     }
     /**
      * 将专线网关与NAT网关解绑，解绑之后，专线网关将不能通过NAT网关访问公网
@@ -1940,23 +2012,10 @@ LimitTypes取值范围：
         return this.request("DetachClassicLinkVpc", req, cb);
     }
     /**
-     * 本接口（CreateSecurityGroupWithPolicies）用于创建新的安全组（SecurityGroup），并且可以同时添加安全组规则（SecurityGroupPolicy）。
-* 每个账户下每个地域的每个项目的<a href="https://cloud.tencent.com/document/product/213/12453">安全组数量限制</a>。
-* 新建的安全组的入站和出站规则默认都是全部拒绝，在创建后通常您需要再调用CreateSecurityGroupPolicies将安全组的规则设置为需要的规则。
-
-安全组规则说明：
-* Version安全组规则版本号，用户每次更新安全规则版本会自动加1，防止您更新的路由规则已过期，不填不考虑冲突。
-* Protocol字段支持输入TCP, UDP, ICMP, ICMPV6, GRE, ALL。
-* CidrBlock字段允许输入符合cidr格式标准的任意字符串。(展开)在基础网络中，如果CidrBlock包含您的账户内的云服务器之外的设备在腾讯云的内网IP，并不代表此规则允许您访问这些设备，租户之间网络隔离规则优先于安全组中的内网规则。
-* Ipv6CidrBlock字段允许输入符合IPv6 cidr格式标准的任意字符串。(展开)在基础网络中，如果Ipv6CidrBlock包含您的账户内的云服务器之外的设备在腾讯云的内网IPv6，并不代表此规则允许您访问这些设备，租户之间网络隔离规则优先于安全组中的内网规则。
-* SecurityGroupId字段允许输入与待修改的安全组位于相同项目中的安全组ID，包括这个安全组ID本身，代表安全组下所有云服务器的内网IP。使用这个字段时，这条规则用来匹配网络报文的过程中会随着被使用的这个ID所关联的云服务器变化而变化，不需要重新修改。
-* Port字段允许输入一个单独端口号，或者用减号分隔的两个端口号代表端口范围，例如80或8000-8010。只有当Protocol字段是TCP或UDP时，Port字段才被接受，即Protocol字段不是TCP或UDP时，Protocol和Port排他关系，不允许同时输入，否则会接口报错。
-* Action字段只允许输入ACCEPT或DROP。
-* CidrBlock, Ipv6CidrBlock, SecurityGroupId, AddressTemplate四者是排他关系，不允许同时输入，Protocol + Port和ServiceTemplate二者是排他关系，不允许同时输入。
-* 一次请求中只能创建单个方向的规则, 如果需要指定索引（PolicyIndex）参数, 多条规则的索引必须一致。
+     * 创建路由型VPN网关的目的路由
      */
-    async CreateSecurityGroupWithPolicies(req, cb) {
-        return this.request("CreateSecurityGroupWithPolicies", req, cb);
+    async CreateVpnGatewayRoutes(req, cb) {
+        return this.request("CreateVpnGatewayRoutes", req, cb);
     }
     /**
      * 本接口（CreateSecurityGroupPolicies）用于创建安全组规则（SecurityGroupPolicy）。
@@ -2003,10 +2062,23 @@ LimitTypes取值范围：
         return this.request("DescribeVpcEndPoint", req, cb);
     }
     /**
-     * 创建路由型VPN网关的目的路由
+     * 本接口（CreateSecurityGroupWithPolicies）用于创建新的安全组（SecurityGroup），并且可以同时添加安全组规则（SecurityGroupPolicy）。
+* 每个账户下每个地域的每个项目的<a href="https://cloud.tencent.com/document/product/213/12453">安全组数量限制</a>。
+* 新建的安全组的入站和出站规则默认都是全部拒绝，在创建后通常您需要再调用CreateSecurityGroupPolicies将安全组的规则设置为需要的规则。
+
+安全组规则说明：
+* Version安全组规则版本号，用户每次更新安全规则版本会自动加1，防止您更新的路由规则已过期，不填不考虑冲突。
+* Protocol字段支持输入TCP, UDP, ICMP, ICMPV6, GRE, ALL。
+* CidrBlock字段允许输入符合cidr格式标准的任意字符串。(展开)在基础网络中，如果CidrBlock包含您的账户内的云服务器之外的设备在腾讯云的内网IP，并不代表此规则允许您访问这些设备，租户之间网络隔离规则优先于安全组中的内网规则。
+* Ipv6CidrBlock字段允许输入符合IPv6 cidr格式标准的任意字符串。(展开)在基础网络中，如果Ipv6CidrBlock包含您的账户内的云服务器之外的设备在腾讯云的内网IPv6，并不代表此规则允许您访问这些设备，租户之间网络隔离规则优先于安全组中的内网规则。
+* SecurityGroupId字段允许输入与待修改的安全组位于相同项目中的安全组ID，包括这个安全组ID本身，代表安全组下所有云服务器的内网IP。使用这个字段时，这条规则用来匹配网络报文的过程中会随着被使用的这个ID所关联的云服务器变化而变化，不需要重新修改。
+* Port字段允许输入一个单独端口号，或者用减号分隔的两个端口号代表端口范围，例如80或8000-8010。只有当Protocol字段是TCP或UDP时，Port字段才被接受，即Protocol字段不是TCP或UDP时，Protocol和Port排他关系，不允许同时输入，否则会接口报错。
+* Action字段只允许输入ACCEPT或DROP。
+* CidrBlock, Ipv6CidrBlock, SecurityGroupId, AddressTemplate四者是排他关系，不允许同时输入，Protocol + Port和ServiceTemplate二者是排他关系，不允许同时输入。
+* 一次请求中只能创建单个方向的规则, 如果需要指定索引（PolicyIndex）参数, 多条规则的索引必须一致。
      */
-    async CreateVpnGatewayRoutes(req, cb) {
-        return this.request("CreateVpnGatewayRoutes", req, cb);
+    async CreateSecurityGroupWithPolicies(req, cb) {
+        return this.request("CreateSecurityGroupWithPolicies", req, cb);
     }
     /**
      * 创建终端服务白名单。

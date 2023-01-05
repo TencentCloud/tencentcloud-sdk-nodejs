@@ -30,6 +30,8 @@ import {
   ResumeMigrateJobResponse,
   DifferenceItem,
   IsolateSyncJobRequest,
+  PauseMigrateJobRequest,
+  ContinueMigrateJobRequest,
   DescribeCheckSyncJobResultRequest,
   DestroySyncJobResponse,
   DescribeCompareReportResponse,
@@ -51,6 +53,7 @@ import {
   ModifyCompareTaskNameResponse,
   PauseSyncJobRequest,
   CreateMigrateCheckJobResponse,
+  ContinueMigrateJobResponse,
   CreateMigrationServiceRequest,
   DetailCheckItem,
   DescribeCompareTasksRequest,
@@ -60,6 +63,7 @@ import {
   MigrateAction,
   DeleteCompareTaskResponse,
   DBEndpointInfo,
+  ContinueSyncJobResponse,
   Options,
   CompleteMigrateJobRequest,
   DescribeCompareTasksResponse,
@@ -79,14 +83,15 @@ import {
   CreateMigrateCheckJobRequest,
   DescribeMigrationJobsRequest,
   CompareTaskInfo,
+  ContinueSyncJobRequest,
   CreateMigrationServiceResponse,
   StartSyncJobRequest,
   DescribeMigrationCheckJobResponse,
-  CompareObjectItem,
+  DBInfo,
   Endpoint,
   DifferenceDetail,
   CreateCheckSyncJobResponse,
-  DBInfo,
+  CompareObjectItem,
   ConfigureSyncJobRequest,
   MigrateDBItem,
   DescribeMigrateDBInstancesRequest,
@@ -130,6 +135,7 @@ import {
   StopMigrateJobRequest,
   IsolateMigrateJobResponse,
   SyncJobInfo,
+  CompareOptions,
   RoleItem,
   TagFilter,
   StepDetailInfo,
@@ -141,6 +147,7 @@ import {
   RecoverMigrateJobRequest,
   OnlineDDL,
   DatabaseTableObject,
+  PauseMigrateJobResponse,
   Table,
   CompareDetailInfo,
   StartMigrateJobResponse,
@@ -187,13 +194,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改一致性校验任务，在任务创建后启动之前，可修改一致性校验参数
+   * 隔离同步任务，隔离后可通过查询同步任务信息接口DescribeSyncJobs获取隔离后状态。在任务隔离后可进行解除隔离(RecoverSyncJob)操作或直接进行下线操作。对于不计费任务，调用此接口后会直接删除任务，无法进行恢复操作。
    */
-  async ModifyCompareTask(
-    req: ModifyCompareTaskRequest,
-    cb?: (error: string, rep: ModifyCompareTaskResponse) => void
-  ): Promise<ModifyCompareTaskResponse> {
-    return this.request("ModifyCompareTask", req, cb)
+  async IsolateSyncJob(
+    req: IsolateSyncJobRequest,
+    cb?: (error: string, rep: IsolateSyncJobResponse) => void
+  ): Promise<IsolateSyncJobResponse> {
+    return this.request("IsolateSyncJob", req, cb)
   }
 
   /**
@@ -267,6 +274,36 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 恢复一个暂停中的迁移任务。
+   */
+  async ContinueMigrateJob(
+    req: ContinueMigrateJobRequest,
+    cb?: (error: string, rep: ContinueMigrateJobResponse) => void
+  ): Promise<ContinueMigrateJobResponse> {
+    return this.request("ContinueMigrateJob", req, cb)
+  }
+
+  /**
+   * 暂停一个迁移任务。
+   */
+  async PauseMigrateJob(
+    req: PauseMigrateJobRequest,
+    cb?: (error: string, rep: PauseMigrateJobResponse) => void
+  ): Promise<PauseMigrateJobResponse> {
+    return this.request("PauseMigrateJob", req, cb)
+  }
+
+  /**
+   * 本接口用于校验检查项不通过后，可进行跳过此校验项操作，后端将不再校验该项。任何校验步骤都是不应该跳过的，通过校验是能正确执行的前置条件。支持跳过的产品及链路的校验项可 [参考文档](https://cloud.tencent.com/document/product/571/61639)。
+   */
+  async SkipSyncCheckItem(
+    req: SkipSyncCheckItemRequest,
+    cb?: (error: string, rep: SkipSyncCheckItemResponse) => void
+  ): Promise<SkipSyncCheckItemResponse> {
+    return this.request("SkipSyncCheckItem", req, cb)
+  }
+
+  /**
    * 配置一个同步任务
    */
   async ConfigureSyncJob(
@@ -325,6 +362,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: PauseSyncJobResponse) => void
   ): Promise<PauseSyncJobResponse> {
     return this.request("PauseSyncJob", req, cb)
+  }
+
+  /**
+   * 恢复处于暂停中中的数据同步任务。
+   */
+  async ContinueSyncJob(
+    req: ContinueSyncJobRequest,
+    cb?: (error: string, rep: ContinueSyncJobResponse) => void
+  ): Promise<ContinueSyncJobResponse> {
+    return this.request("ContinueSyncJob", req, cb)
   }
 
   /**
@@ -391,13 +438,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口用于校验检查项不通过后，可进行跳过此校验项操作，后端将不再校验该项。任何校验步骤都是不应该跳过的，通过校验是能正确执行的前置条件。支持跳过的产品及链路的校验项可 [参考文档](https://cloud.tencent.com/document/product/571/61639)。
+   * 修改一致性校验任务，在任务创建后启动之前，可修改一致性校验参数
    */
-  async SkipSyncCheckItem(
-    req: SkipSyncCheckItemRequest,
-    cb?: (error: string, rep: SkipSyncCheckItemResponse) => void
-  ): Promise<SkipSyncCheckItemResponse> {
-    return this.request("SkipSyncCheckItem", req, cb)
+  async ModifyCompareTask(
+    req: ModifyCompareTaskRequest,
+    cb?: (error: string, rep: ModifyCompareTaskResponse) => void
+  ): Promise<ModifyCompareTaskResponse> {
+    return this.request("ModifyCompareTask", req, cb)
   }
 
   /**
@@ -523,19 +570,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口（CompleteMigrateJob）用于完成数据迁移任务。
-选择采用增量迁移方式的任务, 需要在迁移进度进入准备完成阶段后, 调用本接口, 停止迁移增量数据。
-通过DescribeMigrationJobs接口查询到任务的状态为准备完成（Status="readyComplete"）时，此时可以调用本接口完成迁移任务。
-
-     */
-  async CompleteMigrateJob(
-    req: CompleteMigrateJobRequest,
-    cb?: (error: string, rep: CompleteMigrateJobResponse) => void
-  ): Promise<CompleteMigrateJobResponse> {
-    return this.request("CompleteMigrateJob", req, cb)
-  }
-
-  /**
    * 修改迁移任务名
    */
   async ModifyMigrateName(
@@ -546,12 +580,15 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 隔离同步任务，隔离后可通过查询同步任务信息接口DescribeSyncJobs获取隔离后状态。在任务隔离后可进行解除隔离(RecoverSyncJob)操作或直接进行下线操作。对于不计费任务，调用此接口后会直接删除任务，无法进行恢复操作。
-   */
-  async IsolateSyncJob(
-    req: IsolateSyncJobRequest,
-    cb?: (error: string, rep: IsolateSyncJobResponse) => void
-  ): Promise<IsolateSyncJobResponse> {
-    return this.request("IsolateSyncJob", req, cb)
+     * 本接口（CompleteMigrateJob）用于完成数据迁移任务。
+选择采用增量迁移方式的任务, 需要在迁移进度进入准备完成阶段后, 调用本接口, 停止迁移增量数据。
+通过DescribeMigrationJobs接口查询到任务的状态为准备完成（Status="readyComplete"）时，此时可以调用本接口完成迁移任务。
+
+     */
+  async CompleteMigrateJob(
+    req: CompleteMigrateJobRequest,
+    cb?: (error: string, rep: CompleteMigrateJobResponse) => void
+  ): Promise<CompleteMigrateJobResponse> {
+    return this.request("CompleteMigrateJob", req, cb)
   }
 }

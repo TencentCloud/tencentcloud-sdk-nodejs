@@ -58,6 +58,16 @@ it("rum.v20210622.DescribeScores", async function () {
     }
 })
 
+it("rum.v20210622.DescribeRumLogList", async function () {
+    try {
+       const data = await client.DescribeRumLogList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("rum.v20210622.DescribeTawInstances", async function () {
     try {
        const data = await client.DescribeTawInstances({})
@@ -148,9 +158,9 @@ it("rum.v20210622.DescribeError", async function () {
     }
 })
 
-it("rum.v20210622.DescribeRumLogList", async function () {
+it("rum.v20210622.DescribeRumGroupLog", async function () {
     try {
-       const data = await client.DescribeRumLogList({})
+       const data = await client.DescribeRumGroupLog({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

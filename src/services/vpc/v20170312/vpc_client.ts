@@ -52,9 +52,9 @@ import {
   DescribeIpGeolocationInfosRequest,
   AddTemplateMemberResponse,
   CreateDefaultSecurityGroupRequest,
+  CreateSnapshotPoliciesResponse,
   DescribeServiceTemplateGroupsResponse,
   DescribeVpcEndPointRequest,
-  AssignPrivateIpAddressesRequest,
   DetachClassicLinkVpcRequest,
   DescribeBandwidthPackageBillUsageResponse,
   DeleteBandwidthPackageResponse,
@@ -102,18 +102,20 @@ import {
   ModifyCustomerGatewayAttributeRequest,
   DescribeRouteTablesResponse,
   DeleteVpcEndPointServiceWhiteListRequest,
+  DetachSnapshotInstancesResponse,
   DetachNetworkInterfaceResponse,
   DeleteVpcEndPointServiceRequest,
   DeleteCcnResponse,
   ServiceTemplate,
   DescribeCcnAttachedInstancesRequest,
+  AttachSnapshotInstancesResponse,
   DescribeNatGatewaySourceIpTranslationNatRulesRequest,
   DescribeNatGatewaysRequest,
   ModifyFlowLogAttributeResponse,
   DescribeBandwidthPackagesResponse,
   DescribeDirectConnectGatewaysRequest,
   DisableVpnGatewaySslClientCertRequest,
-  DescribeVpcPrivateIpAddressesResponse,
+  AttachSnapshotInstancesRequest,
   ModifyIp6TranslatorResponse,
   CreateVpcEndPointServiceWhiteListResponse,
   DescribeIpGeolocationDatabaseUrlResponse,
@@ -128,6 +130,7 @@ import {
   IpGeolocationInfo,
   DeleteFlowLogRequest,
   NetDetectState,
+  DescribeSnapshotFilesRequest,
   HaVipDisassociateAddressIpResponse,
   DisassociateVpcEndPointSecurityGroupsRequest,
   DescribeTaskResultRequest,
@@ -173,6 +176,7 @@ import {
   Ip6RuleInfo,
   CreateSecurityGroupWithPoliciesResponse,
   DeleteAddressTemplateResponse,
+  ResumeSnapshotInstanceResponse,
   ModifySubnetAttributeResponse,
   ResetNatGatewayConnectionRequest,
   ModifyCcnAttachedInstancesAttributeRequest,
@@ -190,6 +194,7 @@ import {
   ModifySecurityGroupAttributeRequest,
   DescribeVpnGatewaySslServersRequest,
   ModifyNetDetectRequest,
+  DescribeSgSnapshotFileContentResponse,
   DescribeNetDetectStatesResponse,
   DeleteVpnGatewaySslServerRequest,
   AllocateIp6AddressesBandwidthResponse,
@@ -200,6 +205,7 @@ import {
   DescribeBandwidthPackagesRequest,
   DeleteDirectConnectGatewayCcnRoutesResponse,
   DescribeAssistantCidrResponse,
+  BackupPolicy,
   InstanceStatistic,
   CreateVpnConnectionRequest,
   CcnRoute,
@@ -215,6 +221,7 @@ import {
   DescribeCustomerGatewayVendorsResponse,
   RouteConflict,
   DeleteSubnetResponse,
+  EnableSnapshotPoliciesResponse,
   Vpc,
   CreateVpnGatewayResponse,
   DescribeNatGatewayDestinationIpPortTranslationNatRulesResponse,
@@ -231,6 +238,7 @@ import {
   AdjustPublicAddressResponse,
   RenewVpnGatewayRequest,
   SecurityGroupPolicy,
+  DescribeSnapshotPoliciesRequest,
   NotifyRoutesRequest,
   DeleteVpcRequest,
   ModifyServiceTemplateAttributeResponse,
@@ -278,11 +286,13 @@ import {
   CreateServiceTemplateGroupResponse,
   NetDetect,
   VpnGatewayRouteModify,
+  DisableSnapshotPoliciesRequest,
   MemberInfo,
+  ResumeSnapshotInstanceRequest,
   ReplaceSecurityGroupPolicyRequest,
   ModifyVpcEndPointServiceAttributeResponse,
   ResourceDashboard,
-  Subnet,
+  DescribeSnapshotFilesResponse,
   DescribeCcnAttachedInstancesResponse,
   HaVipAssociateAddressIpResponse,
   DeleteCustomerGatewayResponse,
@@ -302,6 +312,7 @@ import {
   ModifyIp6AddressesBandwidthResponse,
   CreateSubnetsRequest,
   DescribeVpcEndPointServiceRequest,
+  DisableSnapshotPoliciesResponse,
   ModifyServiceTemplateAttributeRequest,
   AssociateAddressResponse,
   AccessPolicy,
@@ -322,6 +333,7 @@ import {
   DescribeIpGeolocationDatabaseUrlRequest,
   DescribeVpcEndPointResponse,
   DescribeNetworkAclQuintupleEntriesRequest,
+  DescribeSnapshotPoliciesResponse,
   DisableGatewayFlowMonitorRequest,
   EnableRoutesResponse,
   DeleteVpnConnectionRequest,
@@ -383,6 +395,7 @@ import {
   LocalGateway,
   RejectAttachCcnInstancesResponse,
   SetCcnRegionBandwidthLimitsResponse,
+  ModifySnapshotPoliciesResponse,
   DescribeAccountAttributesRequest,
   RenewAddressesResponse,
   DescribeCcnRoutesRequest,
@@ -409,6 +422,7 @@ import {
   CreateVpnGatewaySslClientRequest,
   UnlockCcnsRequest,
   DescribeVpnGatewaySslServersResponse,
+  Subnet,
   DeleteNatGatewayDestinationIpPortTranslationNatRuleResponse,
   DeleteVpnGatewayRequest,
   ReplaceRouteTableAssociationResponse,
@@ -426,10 +440,13 @@ import {
   DeleteAssistantCidrResponse,
   DescribeCcnRegionBandwidthLimitsResponse,
   ModifyTemplateMemberRequest,
+  EnableSnapshotPoliciesRequest,
   DescribeAddressesResponse,
   GatewayQos,
+  GetCcnRegionBandwidthLimitsRequest,
   ModifyIpv6AddressesAttributeRequest,
   DescribeCustomerGatewayVendorsRequest,
+  DetachSnapshotInstancesRequest,
   DeleteLocalGatewayRequest,
   ResetVpnGatewayInternetMaxBandwidthResponse,
   LockCcnBandwidthsRequest,
@@ -456,13 +473,14 @@ import {
   AttachNetworkInterfaceResponse,
   DisassociateNatGatewayAddressRequest,
   DescribeTrafficPackagesResponse,
-  DescribeServiceTemplatesResponse,
+  CreateSnapshotPoliciesRequest,
   DescribeRouteTablesRequest,
   ResetAttachCcnInstancesRequest,
   CreateHaVipResponse,
   DescribeSecurityGroupReferencesRequest,
   DescribeTemplateLimitsResponse,
   CheckDefaultSubnetResponse,
+  DescribeVpcPrivateIpAddressesResponse,
   DisableRoutesRequest,
   DisassociateDirectConnectGatewayNatGatewayRequest,
   EnableRoutesRequest,
@@ -477,6 +495,7 @@ import {
   RenewAddressesRequest,
   ProductQuota,
   DisableRoutesResponse,
+  ModifySnapshotPoliciesRequest,
   ModifyAddressAttributeRequest,
   DhcpIp,
   DeleteAssistantCidrRequest,
@@ -504,6 +523,7 @@ import {
   SetVpnGatewaysRenewFlagResponse,
   DeleteVpnGatewayResponse,
   DescribeHaVipsRequest,
+  SnapshotPolicy,
   UnassignPrivateIpAddressesResponse,
   Address,
   VpnGateway,
@@ -541,11 +561,14 @@ import {
   DeleteIp6TranslatorsRequest,
   Ip6Translator,
   CheckAssistantCidrRequest,
+  RemoveBandwidthPackageResourcesResponse,
   DestinationIpPortTranslationNatRule,
+  DeleteSnapshotPoliciesRequest,
   CreateDefaultVpcRequest,
   DescribeSubnetsResponse,
   DescribeCustomerGatewaysResponse,
   CheckAssistantCidrResponse,
+  DescribeVpcTaskResultResponse,
   InquiryPriceRenewVpnGatewayRequest,
   EnableCcnRoutesResponse,
   ModifyVpnGatewayCcnRoutesResponse,
@@ -556,7 +579,7 @@ import {
   DescribeAddressTemplateGroupsRequest,
   CheckNetDetectStateResponse,
   DisassociateVpcEndPointSecurityGroupsResponse,
-  DescribeVpcTaskResultResponse,
+  DeleteSnapshotPoliciesResponse,
   AssociateNatGatewayAddressResponse,
   RemoveBandwidthPackageResourcesRequest,
   VpngwCcnRoutes,
@@ -573,12 +596,16 @@ import {
   CreateLocalGatewayResponse,
   ServicesInfo,
   MigratePrivateIpAddressRequest,
-  DescribeServiceTemplatesRequest,
+  AssignPrivateIpAddressesRequest,
+  DescribeSnapshotAttachedInstancesResponse,
   RefreshDirectConnectGatewayRouteToNatGatewayResponse,
   DeleteRouteTableRequest,
+  SnapshotInstance,
   CreateVpnGatewayRequest,
   DescribeVpcInstancesRequest,
   DeleteVpcEndPointServiceWhiteListResponse,
+  DescribeServiceTemplatesResponse,
+  DescribeSgSnapshotFileContentRequest,
   CreateBandwidthPackageResponse,
   ResetVpnConnectionRequest,
   ReleaseAddressesResponse,
@@ -595,7 +622,7 @@ import {
   CreateNetworkInterfaceResponse,
   DescribeAddressQuotaRequest,
   LockCcnsResponse,
-  RemoveBandwidthPackageResourcesResponse,
+  BatchModifySnapshotPolicy,
   AssignIpv6AddressesResponse,
   CreateRoutesResponse,
   DescribeSecurityGroupsResponse,
@@ -606,6 +633,7 @@ import {
   ReplaceDirectConnectGatewayCcnRoutesResponse,
   ModifySecurityGroupPoliciesResponse,
   ModifyNatGatewayDestinationIpPortTranslationNatRuleRequest,
+  DescribeServiceTemplatesRequest,
   ServiceTemplateSpecification,
   DetachNetworkInterfaceRequest,
   Ip6Rule,
@@ -633,6 +661,7 @@ import {
   ClassicLinkInstance,
   DeleteLocalGatewayResponse,
   NetworkInterfaceAttachment,
+  SnapshotFileInfo,
   ModifyNetworkInterfaceAttributeRequest,
   RemoveIp6RulesResponse,
   ModifyHaVipAttributeRequest,
@@ -653,7 +682,7 @@ import {
   DescribeDhcpIpsResponse,
   CreateRouteTableResponse,
   DescribeCrossBorderCcnRegionBandwidthLimitsRequest,
-  GetCcnRegionBandwidthLimitsRequest,
+  DescribeSnapshotAttachedInstancesRequest,
   DescribeDirectConnectGatewayCcnRoutesResponse,
   ModifyPrivateIpAddressesAttributeRequest,
   ResetNatGatewayConnectionResponse,
@@ -989,6 +1018,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（EnableSnapshotPolicies）用于启用快照策略。
+   */
+  async EnableSnapshotPolicies(
+    req: EnableSnapshotPoliciesRequest,
+    cb?: (error: string, rep: EnableSnapshotPoliciesResponse) => void
+  ): Promise<EnableSnapshotPoliciesResponse> {
+    return this.request("EnableSnapshotPolicies", req, cb)
+  }
+
+  /**
    * 本接口（DescribeNetDetects）用于查询网络探测列表。
    */
   async DescribeNetDetects(
@@ -1032,13 +1071,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（EnableGatewayFlowMonitor）用于开启网关流量监控。
+   * 本接口（AttachSnapshotInstances）用于快照策略关联实例。
    */
-  async EnableGatewayFlowMonitor(
-    req: EnableGatewayFlowMonitorRequest,
-    cb?: (error: string, rep: EnableGatewayFlowMonitorResponse) => void
-  ): Promise<EnableGatewayFlowMonitorResponse> {
-    return this.request("EnableGatewayFlowMonitor", req, cb)
+  async AttachSnapshotInstances(
+    req: AttachSnapshotInstancesRequest,
+    cb?: (error: string, rep: AttachSnapshotInstancesResponse) => void
+  ): Promise<AttachSnapshotInstancesResponse> {
+    return this.request("AttachSnapshotInstances", req, cb)
   }
 
   /**
@@ -1070,6 +1109,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteVpnConnectionResponse) => void
   ): Promise<DeleteVpnConnectionResponse> {
     return this.request("DeleteVpnConnection", req, cb)
+  }
+
+  /**
+   * 本接口（DeleteSnapshotPolicies）用于删除快照策略。
+   */
+  async DeleteSnapshotPolicies(
+    req: DeleteSnapshotPoliciesRequest,
+    cb?: (error: string, rep: DeleteSnapshotPoliciesResponse) => void
+  ): Promise<DeleteSnapshotPoliciesResponse> {
+    return this.request("DeleteSnapshotPolicies", req, cb)
   }
 
   /**
@@ -1272,6 +1321,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改终端节点服务白名单属性。
+   */
+  async ModifyVpcEndPointServiceWhiteList(
+    req: ModifyVpcEndPointServiceWhiteListRequest,
+    cb?: (error: string, rep: ModifyVpcEndPointServiceWhiteListResponse) => void
+  ): Promise<ModifyVpcEndPointServiceWhiteListResponse> {
+    return this.request("ModifyVpcEndPointServiceWhiteList", req, cb)
+  }
+
+  /**
    * 查询跨境带宽监控数据，该接口特提供给联通使用
    */
   async DescribeCrossBorderFlowMonitor(
@@ -1310,13 +1369,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改终端节点服务白名单属性。
+   * 本接口（ModifySnapshotPolicies）用于修改快照策略。
    */
-  async ModifyVpcEndPointServiceWhiteList(
-    req: ModifyVpcEndPointServiceWhiteListRequest,
-    cb?: (error: string, rep: ModifyVpcEndPointServiceWhiteListResponse) => void
-  ): Promise<ModifyVpcEndPointServiceWhiteListResponse> {
-    return this.request("ModifyVpcEndPointServiceWhiteList", req, cb)
+  async ModifySnapshotPolicies(
+    req: ModifySnapshotPoliciesRequest,
+    cb?: (error: string, rep: ModifySnapshotPoliciesResponse) => void
+  ): Promise<ModifySnapshotPoliciesResponse> {
+    return this.request("ModifySnapshotPolicies", req, cb)
   }
 
   /**
@@ -1610,6 +1669,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（ModifyHaVipAttribute）用于修改高可用虚拟IP（HAVIP）属性
+   */
+  async ModifyHaVipAttribute(
+    req: ModifyHaVipAttributeRequest,
+    cb?: (error: string, rep: ModifyHaVipAttributeResponse) => void
+  ): Promise<ModifyHaVipAttributeResponse> {
+    return this.request("ModifyHaVipAttribute", req, cb)
+  }
+
+  /**
    * 本接口（DeleteSecurityGroupPolicies）用于用于删除安全组规则（SecurityGroupPolicy）。
    * SecurityGroupPolicySet.Version 用于指定要操作的安全组的版本。传入 Version 版本号若不等于当前安全组的最新版本，将返回失败；若不传 Version 则直接删除指定PolicyIndex的规则。
    */
@@ -1753,6 +1822,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（DisableSnapshotPolicies）用于停用快照策略。
+   */
+  async DisableSnapshotPolicies(
+    req: DisableSnapshotPoliciesRequest,
+    cb?: (error: string, rep: DisableSnapshotPoliciesResponse) => void
+  ): Promise<DisableSnapshotPoliciesResponse> {
+    return this.request("DisableSnapshotPolicies", req, cb)
+  }
+
+  /**
    * 本接口（DescribeDhcpIps）用于查询DhcpIp列表
    */
   async DescribeDhcpIps(
@@ -1890,6 +1969,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteDirectConnectGatewayResponse) => void
   ): Promise<DeleteDirectConnectGatewayResponse> {
     return this.request("DeleteDirectConnectGateway", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeSnapshotAttachedInstances）用于查询快照策略关联实例列表。
+   */
+  async DescribeSnapshotAttachedInstances(
+    req: DescribeSnapshotAttachedInstancesRequest,
+    cb?: (error: string, rep: DescribeSnapshotAttachedInstancesResponse) => void
+  ): Promise<DescribeSnapshotAttachedInstancesResponse> {
+    return this.request("DescribeSnapshotAttachedInstances", req, cb)
   }
 
   /**
@@ -2163,6 +2252,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RenewAddressesResponse) => void
   ): Promise<RenewAddressesResponse> {
     return this.request("RenewAddresses", req, cb)
+  }
+
+  /**
+   * 本接口（EnableGatewayFlowMonitor）用于开启网关流量监控。
+   */
+  async EnableGatewayFlowMonitor(
+    req: EnableGatewayFlowMonitorRequest,
+    cb?: (error: string, rep: EnableGatewayFlowMonitorResponse) => void
+  ): Promise<EnableGatewayFlowMonitorResponse> {
+    return this.request("EnableGatewayFlowMonitor", req, cb)
   }
 
   /**
@@ -2526,6 +2625,17 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 本接口（ReturnNormalAddresses）用于解绑并释放普通公网IP。
+为完善公网IP的访问管理功能，此接口于2022年12月15日升级优化鉴权功能，升级后子用户调用此接口需向主账号申请CAM策略授权，否则可能调用失败。您可以提前为子账号配置操作授权，详情见[授权指南](https://cloud.tencent.com/document/product/598/34545)。
+     */
+  async ReturnNormalAddresses(
+    req: ReturnNormalAddressesRequest,
+    cb?: (error: string, rep: ReturnNormalAddressesResponse) => void
+  ): Promise<ReturnNormalAddressesResponse> {
+    return this.request("ReturnNormalAddresses", req, cb)
+  }
+
+  /**
    * 路由表列表页操作增加“从云联网撤销”，用于撤销已发布到云联网的路由。
    */
   async WithdrawNotifyRoutes(
@@ -2574,6 +2684,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DisableFlowLogsResponse) => void
   ): Promise<DisableFlowLogsResponse> {
     return this.request("DisableFlowLogs", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeSgSnapshotFileContent）用于查询安全组快照文件内容。
+   */
+  async DescribeSgSnapshotFileContent(
+    req: DescribeSgSnapshotFileContentRequest,
+    cb?: (error: string, rep: DescribeSgSnapshotFileContentResponse) => void
+  ): Promise<DescribeSgSnapshotFileContentResponse> {
+    return this.request("DescribeSgSnapshotFileContent", req, cb)
   }
 
   /**
@@ -2809,14 +2929,15 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口（ReturnNormalAddresses）用于解绑并释放普通公网IP。
-为完善公网IP的访问管理功能，此接口于2022年12月15日升级优化鉴权功能，升级后子用户调用此接口需向主账号申请CAM策略授权，否则可能调用失败。您可以提前为子账号配置操作授权，详情见[授权指南](https://cloud.tencent.com/document/product/598/34545)。
-     */
-  async ReturnNormalAddresses(
-    req: ReturnNormalAddressesRequest,
-    cb?: (error: string, rep: ReturnNormalAddressesResponse) => void
-  ): Promise<ReturnNormalAddressesResponse> {
-    return this.request("ReturnNormalAddresses", req, cb)
+   * 本接口 (ReleaseAddresses) 用于释放一个或多个[弹性公网IP](https://cloud.tencent.com/document/product/213/1941)（简称 EIP）。
+   * 该操作不可逆，释放后 EIP 关联的 IP 地址将不再属于您的名下。
+   * 只有状态为 UNBIND 的 EIP 才能进行释放操作。
+   */
+  async ReleaseAddresses(
+    req: ReleaseAddressesRequest,
+    cb?: (error: string, rep: ReleaseAddressesResponse) => void
+  ): Promise<ReleaseAddressesResponse> {
+    return this.request("ReleaseAddresses", req, cb)
   }
 
   /**
@@ -2903,6 +3024,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeIpGeolocationInfosResponse) => void
   ): Promise<DescribeIpGeolocationInfosResponse> {
     return this.request("DescribeIpGeolocationInfos", req, cb)
+  }
+
+  /**
+   * 本接口（DetachSnapshotInstances）用于快照策略解关联实例。
+   */
+  async DetachSnapshotInstances(
+    req: DetachSnapshotInstancesRequest,
+    cb?: (error: string, rep: DetachSnapshotInstancesResponse) => void
+  ): Promise<DetachSnapshotInstancesResponse> {
+    return this.request("DetachSnapshotInstances", req, cb)
   }
 
   /**
@@ -3061,6 +3192,17 @@ LimitTypes取值范围：
     cb?: (error: string, rep: DescribeHaVipsResponse) => void
   ): Promise<DescribeHaVipsResponse> {
     return this.request("DescribeHaVips", req, cb)
+  }
+
+  /**
+     * 本接口（UnassignIpv6SubnetCidrBlock）用于释放IPv6子网段。<br />
+子网段如果还有IP占用且未回收，则子网段无法释放。
+     */
+  async UnassignIpv6SubnetCidrBlock(
+    req: UnassignIpv6SubnetCidrBlockRequest,
+    cb?: (error: string, rep: UnassignIpv6SubnetCidrBlockResponse) => void
+  ): Promise<UnassignIpv6SubnetCidrBlockResponse> {
+    return this.request("UnassignIpv6SubnetCidrBlock", req, cb)
   }
 
   /**
@@ -3528,25 +3670,23 @@ LimitTypes取值范围：
   }
 
   /**
-   * 本接口（ModifyHaVipAttribute）用于修改高可用虚拟IP（HAVIP）属性
+   * 本接口（CreateSnapshotPolicies）用于创建快照策略。
    */
-  async ModifyHaVipAttribute(
-    req: ModifyHaVipAttributeRequest,
-    cb?: (error: string, rep: ModifyHaVipAttributeResponse) => void
-  ): Promise<ModifyHaVipAttributeResponse> {
-    return this.request("ModifyHaVipAttribute", req, cb)
+  async CreateSnapshotPolicies(
+    req: CreateSnapshotPoliciesRequest,
+    cb?: (error: string, rep: CreateSnapshotPoliciesResponse) => void
+  ): Promise<CreateSnapshotPoliciesResponse> {
+    return this.request("CreateSnapshotPolicies", req, cb)
   }
 
   /**
-   * 本接口 (ReleaseAddresses) 用于释放一个或多个[弹性公网IP](https://cloud.tencent.com/document/product/213/1941)（简称 EIP）。
-   * 该操作不可逆，释放后 EIP 关联的 IP 地址将不再属于您的名下。
-   * 只有状态为 UNBIND 的 EIP 才能进行释放操作。
+   * 本接口（DescribeSnapshotFiles）用于查询快照文件。
    */
-  async ReleaseAddresses(
-    req: ReleaseAddressesRequest,
-    cb?: (error: string, rep: ReleaseAddressesResponse) => void
-  ): Promise<ReleaseAddressesResponse> {
-    return this.request("ReleaseAddresses", req, cb)
+  async DescribeSnapshotFiles(
+    req: DescribeSnapshotFilesRequest,
+    cb?: (error: string, rep: DescribeSnapshotFilesResponse) => void
+  ): Promise<DescribeSnapshotFilesResponse> {
+    return this.request("DescribeSnapshotFiles", req, cb)
   }
 
   /**
@@ -3622,6 +3762,16 @@ LimitTypes取值范围：
   }
 
   /**
+   * 本接口（ResumeSnapshotInstance）用于根据备份内容恢复安全组策略。
+   */
+  async ResumeSnapshotInstance(
+    req: ResumeSnapshotInstanceRequest,
+    cb?: (error: string, rep: ResumeSnapshotInstanceResponse) => void
+  ): Promise<ResumeSnapshotInstanceResponse> {
+    return this.request("ResumeSnapshotInstance", req, cb)
+  }
+
+  /**
    * 本接口（DescribeSecurityGroupReferences）用于查询安全组被引用信息。
    */
   async DescribeSecurityGroupReferences(
@@ -3642,14 +3792,13 @@ LimitTypes取值范围：
   }
 
   /**
-     * 本接口（UnassignIpv6SubnetCidrBlock）用于释放IPv6子网段。<br />
-子网段如果还有IP占用且未回收，则子网段无法释放。
-     */
-  async UnassignIpv6SubnetCidrBlock(
-    req: UnassignIpv6SubnetCidrBlockRequest,
-    cb?: (error: string, rep: UnassignIpv6SubnetCidrBlockResponse) => void
-  ): Promise<UnassignIpv6SubnetCidrBlockResponse> {
-    return this.request("UnassignIpv6SubnetCidrBlock", req, cb)
+   * 本接口（DescribeSnapshotPolicies）用于查询快照策略。
+   */
+  async DescribeSnapshotPolicies(
+    req: DescribeSnapshotPoliciesRequest,
+    cb?: (error: string, rep: DescribeSnapshotPoliciesResponse) => void
+  ): Promise<DescribeSnapshotPoliciesResponse> {
+    return this.request("DescribeSnapshotPolicies", req, cb)
   }
 
   /**
@@ -3747,26 +3896,13 @@ LimitTypes取值范围：
   }
 
   /**
-     * 本接口（CreateSecurityGroupWithPolicies）用于创建新的安全组（SecurityGroup），并且可以同时添加安全组规则（SecurityGroupPolicy）。
-* 每个账户下每个地域的每个项目的<a href="https://cloud.tencent.com/document/product/213/12453">安全组数量限制</a>。
-* 新建的安全组的入站和出站规则默认都是全部拒绝，在创建后通常您需要再调用CreateSecurityGroupPolicies将安全组的规则设置为需要的规则。
-
-安全组规则说明：
-* Version安全组规则版本号，用户每次更新安全规则版本会自动加1，防止您更新的路由规则已过期，不填不考虑冲突。
-* Protocol字段支持输入TCP, UDP, ICMP, ICMPV6, GRE, ALL。
-* CidrBlock字段允许输入符合cidr格式标准的任意字符串。(展开)在基础网络中，如果CidrBlock包含您的账户内的云服务器之外的设备在腾讯云的内网IP，并不代表此规则允许您访问这些设备，租户之间网络隔离规则优先于安全组中的内网规则。
-* Ipv6CidrBlock字段允许输入符合IPv6 cidr格式标准的任意字符串。(展开)在基础网络中，如果Ipv6CidrBlock包含您的账户内的云服务器之外的设备在腾讯云的内网IPv6，并不代表此规则允许您访问这些设备，租户之间网络隔离规则优先于安全组中的内网规则。
-* SecurityGroupId字段允许输入与待修改的安全组位于相同项目中的安全组ID，包括这个安全组ID本身，代表安全组下所有云服务器的内网IP。使用这个字段时，这条规则用来匹配网络报文的过程中会随着被使用的这个ID所关联的云服务器变化而变化，不需要重新修改。
-* Port字段允许输入一个单独端口号，或者用减号分隔的两个端口号代表端口范围，例如80或8000-8010。只有当Protocol字段是TCP或UDP时，Port字段才被接受，即Protocol字段不是TCP或UDP时，Protocol和Port排他关系，不允许同时输入，否则会接口报错。
-* Action字段只允许输入ACCEPT或DROP。
-* CidrBlock, Ipv6CidrBlock, SecurityGroupId, AddressTemplate四者是排他关系，不允许同时输入，Protocol + Port和ServiceTemplate二者是排他关系，不允许同时输入。
-* 一次请求中只能创建单个方向的规则, 如果需要指定索引（PolicyIndex）参数, 多条规则的索引必须一致。
-     */
-  async CreateSecurityGroupWithPolicies(
-    req: CreateSecurityGroupWithPoliciesRequest,
-    cb?: (error: string, rep: CreateSecurityGroupWithPoliciesResponse) => void
-  ): Promise<CreateSecurityGroupWithPoliciesResponse> {
-    return this.request("CreateSecurityGroupWithPolicies", req, cb)
+   * 创建路由型VPN网关的目的路由
+   */
+  async CreateVpnGatewayRoutes(
+    req: CreateVpnGatewayRoutesRequest,
+    cb?: (error: string, rep: CreateVpnGatewayRoutesResponse) => void
+  ): Promise<CreateVpnGatewayRoutesResponse> {
+    return this.request("CreateVpnGatewayRoutes", req, cb)
   }
 
   /**
@@ -3834,13 +3970,26 @@ LimitTypes取值范围：
   }
 
   /**
-   * 创建路由型VPN网关的目的路由
-   */
-  async CreateVpnGatewayRoutes(
-    req: CreateVpnGatewayRoutesRequest,
-    cb?: (error: string, rep: CreateVpnGatewayRoutesResponse) => void
-  ): Promise<CreateVpnGatewayRoutesResponse> {
-    return this.request("CreateVpnGatewayRoutes", req, cb)
+     * 本接口（CreateSecurityGroupWithPolicies）用于创建新的安全组（SecurityGroup），并且可以同时添加安全组规则（SecurityGroupPolicy）。
+* 每个账户下每个地域的每个项目的<a href="https://cloud.tencent.com/document/product/213/12453">安全组数量限制</a>。
+* 新建的安全组的入站和出站规则默认都是全部拒绝，在创建后通常您需要再调用CreateSecurityGroupPolicies将安全组的规则设置为需要的规则。
+
+安全组规则说明：
+* Version安全组规则版本号，用户每次更新安全规则版本会自动加1，防止您更新的路由规则已过期，不填不考虑冲突。
+* Protocol字段支持输入TCP, UDP, ICMP, ICMPV6, GRE, ALL。
+* CidrBlock字段允许输入符合cidr格式标准的任意字符串。(展开)在基础网络中，如果CidrBlock包含您的账户内的云服务器之外的设备在腾讯云的内网IP，并不代表此规则允许您访问这些设备，租户之间网络隔离规则优先于安全组中的内网规则。
+* Ipv6CidrBlock字段允许输入符合IPv6 cidr格式标准的任意字符串。(展开)在基础网络中，如果Ipv6CidrBlock包含您的账户内的云服务器之外的设备在腾讯云的内网IPv6，并不代表此规则允许您访问这些设备，租户之间网络隔离规则优先于安全组中的内网规则。
+* SecurityGroupId字段允许输入与待修改的安全组位于相同项目中的安全组ID，包括这个安全组ID本身，代表安全组下所有云服务器的内网IP。使用这个字段时，这条规则用来匹配网络报文的过程中会随着被使用的这个ID所关联的云服务器变化而变化，不需要重新修改。
+* Port字段允许输入一个单独端口号，或者用减号分隔的两个端口号代表端口范围，例如80或8000-8010。只有当Protocol字段是TCP或UDP时，Port字段才被接受，即Protocol字段不是TCP或UDP时，Protocol和Port排他关系，不允许同时输入，否则会接口报错。
+* Action字段只允许输入ACCEPT或DROP。
+* CidrBlock, Ipv6CidrBlock, SecurityGroupId, AddressTemplate四者是排他关系，不允许同时输入，Protocol + Port和ServiceTemplate二者是排他关系，不允许同时输入。
+* 一次请求中只能创建单个方向的规则, 如果需要指定索引（PolicyIndex）参数, 多条规则的索引必须一致。
+     */
+  async CreateSecurityGroupWithPolicies(
+    req: CreateSecurityGroupWithPoliciesRequest,
+    cb?: (error: string, rep: CreateSecurityGroupWithPoliciesResponse) => void
+  ): Promise<CreateSecurityGroupWithPoliciesResponse> {
+    return this.request("CreateSecurityGroupWithPolicies", req, cb)
   }
 
   /**

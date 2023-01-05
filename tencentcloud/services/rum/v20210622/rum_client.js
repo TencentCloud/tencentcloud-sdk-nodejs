@@ -52,6 +52,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeScores", req, cb);
     }
     /**
+     * 获取项目下的日志列表（实例创建的项目下的日志列表）
+     */
+    async DescribeRumLogList(req, cb) {
+        return this.request("DescribeRumLogList", req, cb);
+    }
+    /**
      * 查询实例信息
      */
     async DescribeTawInstances(req, cb) {
@@ -106,10 +112,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeError", req, cb);
     }
     /**
-     * 获取项目下的日志列表（实例创建的项目下的日志列表）
+     * 获取项目下的日志聚合信息
      */
-    async DescribeRumLogList(req, cb) {
-        return this.request("DescribeRumLogList", req, cb);
+    async DescribeRumGroupLog(req, cb) {
+        return this.request("DescribeRumGroupLog", req, cb);
     }
     /**
      * 获取项目下的日志列表（实例创建的项目下的日志列表）

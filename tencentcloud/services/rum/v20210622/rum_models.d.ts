@@ -1614,13 +1614,13 @@ export interface DeleteLogExportRequest {
     ExportID: string;
 }
 /**
- * DescribeWhitelists返回参数结构体
+ * DescribeRumGroupLog返回参数结构体
  */
-export interface DescribeWhitelistsResponse {
+export interface DescribeRumGroupLogResponse {
     /**
-      * 白名单列表
+      * 返回字符串
       */
-    WhitelistSet: Array<Whitelist>;
+    Result: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2748,6 +2748,43 @@ export interface DescribeOfflineLogConfigsRequest {
     ProjectKey: string;
 }
 /**
+ * DescribeRumGroupLog请求参数结构体
+ */
+export interface DescribeRumGroupLogRequest {
+    /**
+      * 排序方式  desc  asc（必填）
+      */
+    OrderBy: string;
+    /**
+      * 开始时间（必填）
+      */
+    StartTime: string;
+    /**
+      * 单次查询返回的原始日志条数，最大值为100（必填）
+      */
+    Limit: number;
+    /**
+      * 页数，第几页
+      */
+    Page: number;
+    /**
+      * 查询语句，参考控制台请求参数，语句长度最大为4096（必填）
+      */
+    Query: string;
+    /**
+      * 结束时间（必填）
+      */
+    EndTime: string;
+    /**
+      * 项目ID（必填）
+      */
+    ID: number;
+    /**
+      * 聚合字段
+      */
+    GroupField: string;
+}
+/**
  * DeleteOfflineLogConfig请求参数结构体
  */
 export interface DeleteOfflineLogConfigRequest {
@@ -2759,6 +2796,19 @@ export interface DeleteOfflineLogConfigRequest {
       * 用户唯一标示(uin or aid)
       */
     UniqueID: string;
+}
+/**
+ * DescribeWhitelists返回参数结构体
+ */
+export interface DescribeWhitelistsResponse {
+    /**
+      * 白名单列表
+      */
+    WhitelistSet: Array<Whitelist>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeProjects返回参数结构体

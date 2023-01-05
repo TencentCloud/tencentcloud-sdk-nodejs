@@ -799,21 +799,35 @@ export interface IdCardOCRVerificationRequest {
     Encryption?: Encryption;
 }
 /**
- * GetRealNameAuthToken请求参数结构体
+ * LivenessRecognition返回参数结构体
  */
-export interface GetRealNameAuthTokenRequest {
+export interface LivenessRecognitionResponse {
     /**
-      * 姓名
+      * 验证通过后的视频最佳截图照片，照片为BASE64编码后的值，jpg格式。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Name: string;
+    BestFrameBase64: string;
     /**
-      * 身份证号
+      * 相似度，取值范围 [0.00, 100.00]。推荐相似度大于等于70时可判断为同一人，可根据具体场景自行调整阈值（阈值70的误通过率为千分之一，阈值80的误通过率是万分之一）
       */
-    IDCard: string;
+    Sim: number;
     /**
-      * 回调地址。实名认证完成后，将会重定向到这个地址通知认证发起方。仅支持http或https协议。
+      * 业务错误码，成功情况返回Success, 错误情况请参考下方错误码 列表中FailedOperation部分
       */
-    CallbackURL: string;
+    Result: string;
+    /**
+      * 业务结果描述。
+      */
+    Description: string;
+    /**
+      * 最佳截图列表，仅在配置了返回多张最佳截图时返回。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BestFrameList: Array<string>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * ParseNfcData返回参数结构体
@@ -1045,23 +1059,6 @@ export interface GetFaceIdTokenResponse {
       * 有效期 10分钟。只能完成1次核身。
       */
     FaceIdToken: string;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * GetRealNameAuthToken返回参数结构体
- */
-export interface GetRealNameAuthTokenResponse {
-    /**
-      * 查询实名认证结果的唯一凭证
-      */
-    AuthToken?: string;
-    /**
-      * 实名认证授权地址，认证发起方需要重定向到这个地址获取认证用户的授权，仅能在微信环境下打开。
-      */
-    RedirectURL?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1814,37 +1811,6 @@ export interface GetActionSequenceResponse {
       * 动作顺序(2,1 or 1,2) 。1代表张嘴，2代表闭眼。
       */
     ActionSequence?: string;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * LivenessRecognition返回参数结构体
- */
-export interface LivenessRecognitionResponse {
-    /**
-      * 验证通过后的视频最佳截图照片，照片为BASE64编码后的值，jpg格式。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    BestFrameBase64: string;
-    /**
-      * 相似度，取值范围 [0.00, 100.00]。推荐相似度大于等于70时可判断为同一人，可根据具体场景自行调整阈值（阈值70的误通过率为千分之一，阈值80的误通过率是万分之一）
-      */
-    Sim: number;
-    /**
-      * 业务错误码，成功情况返回Success, 错误情况请参考下方错误码 列表中FailedOperation部分
-      */
-    Result: string;
-    /**
-      * 业务结果描述。
-      */
-    Description: string;
-    /**
-      * 最佳截图列表，仅在配置了返回多张最佳截图时返回。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    BestFrameList: Array<string>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

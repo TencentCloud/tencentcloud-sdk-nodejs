@@ -81,7 +81,7 @@ import {
   DescribeRumStatsLogListRequest,
   ProjectLimit,
   DeleteLogExportRequest,
-  DescribeWhitelistsResponse,
+  DescribeRumGroupLogResponse,
   DescribeRumStatsLogListResponse,
   CreateWhitelistRequest,
   DescribeDataPvUrlStatisticsResponse,
@@ -125,7 +125,9 @@ import {
   DescribeProjectsRequest,
   DescribeDataEventUrlRequest,
   DescribeOfflineLogConfigsRequest,
+  DescribeRumGroupLogRequest,
   DeleteOfflineLogConfigRequest,
+  DescribeWhitelistsResponse,
   DescribeProjectsResponse,
   ModifyProjectResponse,
   DescribeLogExportsRequest,
@@ -193,6 +195,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeScoresResponse) => void
   ): Promise<DescribeScoresResponse> {
     return this.request("DescribeScores", req, cb)
+  }
+
+  /**
+   * 获取项目下的日志列表（实例创建的项目下的日志列表）
+   */
+  async DescribeRumLogList(
+    req: DescribeRumLogListRequest,
+    cb?: (error: string, rep: DescribeRumLogListResponse) => void
+  ): Promise<DescribeRumLogListResponse> {
+    return this.request("DescribeRumLogList", req, cb)
   }
 
   /**
@@ -286,13 +298,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取项目下的日志列表（实例创建的项目下的日志列表）
+   * 获取项目下的日志聚合信息
    */
-  async DescribeRumLogList(
-    req: DescribeRumLogListRequest,
-    cb?: (error: string, rep: DescribeRumLogListResponse) => void
-  ): Promise<DescribeRumLogListResponse> {
-    return this.request("DescribeRumLogList", req, cb)
+  async DescribeRumGroupLog(
+    req: DescribeRumGroupLogRequest,
+    cb?: (error: string, rep: DescribeRumGroupLogResponse) => void
+  ): Promise<DescribeRumGroupLogResponse> {
+    return this.request("DescribeRumGroupLog", req, cb)
   }
 
   /**
