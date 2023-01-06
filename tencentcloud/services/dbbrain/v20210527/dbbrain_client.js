@@ -196,7 +196,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDBDiagHistory", req, cb);
     }
     /**
-     * 获取当前实例会话统计详情信息。【注意】该接口仅限部分环境调用。
+     * 获取当前实例下的单个proxy的会话统计详情信息， 返回数据为单个 proxy 的会话统计信息。【注意】该接口仅限部分环境调用。
      */
     async DescribeProxyProcessStatistics(req, cb) {
         return this.request("DescribeProxyProcessStatistics", req, cb);

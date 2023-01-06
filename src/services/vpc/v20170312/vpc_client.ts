@@ -191,6 +191,7 @@ import {
   DescribeVpnGatewaySslClientsRequest,
   VpcEndPointServiceUser,
   DescribeIp6TranslatorQuotaRequest,
+  CreateTrafficPackagesResponse,
   ModifySecurityGroupAttributeRequest,
   DescribeVpnGatewaySslServersRequest,
   ModifyNetDetectRequest,
@@ -514,6 +515,7 @@ import {
   DeleteNetDetectRequest,
   IPSECOptionsSpecification,
   UnassignIpv6AddressesRequest,
+  CreateTrafficPackagesRequest,
   CreateAndAttachNetworkInterfaceResponse,
   ModifyCcnAttributeRequest,
   DeleteSecurityGroupPoliciesResponse,
@@ -3646,6 +3648,16 @@ LimitTypes取值范围：
     cb?: (error: string, rep: LockCcnsResponse) => void
   ): Promise<LockCcnsResponse> {
     return this.request("LockCcns", req, cb)
+  }
+
+  /**
+   * 本接口 (CreateTrafficPackages) 用于创建共享流量包。
+   */
+  async CreateTrafficPackages(
+    req: CreateTrafficPackagesRequest,
+    cb?: (error: string, rep: CreateTrafficPackagesResponse) => void
+  ): Promise<CreateTrafficPackagesResponse> {
+    return this.request("CreateTrafficPackages", req, cb)
   }
 
   /**

@@ -598,6 +598,16 @@ it("ckafka.v20190819.AuthorizeToken", async function () {
     }
 })
 
+it("ckafka.v20190819.DescribeTopicProduceConnection", async function () {
+    try {
+       const data = await client.DescribeTopicProduceConnection({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ckafka.v20190819.DescribeTopic", async function () {
     try {
        const data = await client.DescribeTopic({})

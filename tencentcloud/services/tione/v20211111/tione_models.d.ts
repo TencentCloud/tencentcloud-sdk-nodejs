@@ -1993,6 +1993,14 @@ export interface Spec {
       * 计费项显示名称
       */
     SpecAlias: string;
+    /**
+      * 是否售罄
+      */
+    Available: boolean;
+    /**
+      * 当前资源售罄时，可用的区域有哪些
+      */
+    AvailableRegion: Array<string>;
 }
 /**
  * 文本标签
@@ -3100,7 +3108,7 @@ export interface DescribeBillingSpecsResponse {
     /**
       * 计费项列表
       */
-    Specs: Array<Spec>;
+    Specs?: Array<Spec>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

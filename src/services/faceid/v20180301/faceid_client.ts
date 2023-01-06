@@ -71,7 +71,6 @@ import {
   GetWeChatBillDetailsRequest,
   CheckEidTokenStatusRequest,
   GetEidResultResponse,
-  GetRealNameAuthResultRequest,
   ImageRecognitionRequest,
   PhoneVerificationCUCCRequest,
   BankCard4EVerificationRequest,
@@ -97,7 +96,6 @@ import {
   DetectDetail,
   GetFaceIdResultResponse,
   EncryptedPhoneVerificationRequest,
-  GetRealNameAuthResultResponse,
   IntentionQuestion,
   EncryptedPhoneVerificationResponse,
 } from "./faceid_models"
@@ -440,15 +438,5 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: PhoneVerificationCTCCResponse) => void
   ): Promise<PhoneVerificationCTCCResponse> {
     return this.request("PhoneVerificationCTCC", req, cb)
-  }
-
-  /**
-   * 获取微信实名认证结果
-   */
-  async GetRealNameAuthResult(
-    req: GetRealNameAuthResultRequest,
-    cb?: (error: string, rep: GetRealNameAuthResultResponse) => void
-  ): Promise<GetRealNameAuthResultResponse> {
-    return this.request("GetRealNameAuthResult", req, cb)
   }
 }

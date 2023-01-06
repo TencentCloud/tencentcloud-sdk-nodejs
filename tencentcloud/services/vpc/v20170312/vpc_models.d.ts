@@ -1372,6 +1372,14 @@ export interface ModifyBandwidthPackageAttributeRequest {
  */
 export interface TransformAddressResponse {
     /**
+      * 异步任务TaskId。可以使用[DescribeTaskResult](https://cloud.tencent.com/document/api/215/36271)接口查询任务状态。
+      */
+    TaskId: number;
+    /**
+      * 转为弹性公网IP后的唯一ID
+      */
+    AddressId: string;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
@@ -3105,6 +3113,19 @@ export interface DescribeIp6TranslatorQuotaRequest {
     Ip6TranslatorIds?: Array<string>;
 }
 /**
+ * CreateTrafficPackages返回参数结构体
+ */
+export interface CreateTrafficPackagesResponse {
+    /**
+      * 创建的流量包ID列表。
+      */
+    TrafficPackageSet: Array<string>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * ModifySecurityGroupAttribute请求参数结构体
  */
 export interface ModifySecurityGroupAttributeRequest {
@@ -3362,11 +3383,11 @@ export interface DescribeBandwidthPackagesRequest {
       */
     Filters?: Array<Filter>;
     /**
-      * 查询带宽包偏移量
+      * 查询带宽包偏移量，默认为0。关于Offset的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小结。
       */
     Offset?: number;
     /**
-      * 查询带宽包数量限制
+      * 查询带宽包返回数量，默认为20，最大值为100。关于Limit的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小结。
       */
     Limit?: number;
 }
@@ -9420,6 +9441,33 @@ export interface UnassignIpv6AddressesRequest {
     Ipv6Addresses: Array<Ipv6Address>;
 }
 /**
+ * CreateTrafficPackages请求参数结构体
+ */
+export interface CreateTrafficPackagesRequest {
+    /**
+      * 流量包规格。可选值:
+<li>10: 10GB流量，有效期一个月</li>
+<li>50: 50GB流量，有效期一个月</li>
+<li>512: 512GB流量，有效期一个月</li>
+<li>1024: 1TB流量，有效期一个月</li>
+<li>5120: 5TB流量，有效期一个月</li>
+<li>51200: 50TB流量，有效期一个月</li>
+<li>60: 60GB流量，有效期半年</li>
+<li>300: 300GB流量，有效期半年</li>
+<li>600: 600GB流量，有效期半年</li>
+<li>3072: 3TB流量，有效期半年</li>
+<li>6144: 6TB流量，有效期半年</li>
+<li>30720: 30TB流量，有效期半年</li>
+<li>61440: 60TB流量，有效期半年</li>
+<li>307200: 300TB流量，有效期半年</li>
+      */
+    TrafficAmount: number;
+    /**
+      * 流量包数量，可选范围 1~20。
+      */
+    TrafficPackageCount?: number;
+}
+/**
  * CreateAndAttachNetworkInterface返回参数结构体
  */
 export interface CreateAndAttachNetworkInterfaceResponse {
@@ -9852,7 +9900,7 @@ export interface BandwidthPackage {
       */
     BandwidthPackageId: string;
     /**
-      * 带宽包类型，包括'BGP','SINGLEISP','ANYCAST'
+      * 带宽包类型，包括'BGP','SINGLEISP','ANYCAST','SINGLEISP_CMCC','SINGLEISP_CTCC','SINGLEISP_CUCC'
       */
     NetworkType: string;
     /**

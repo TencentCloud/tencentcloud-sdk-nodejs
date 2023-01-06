@@ -2688,6 +2688,16 @@ it("vpc.v20170312.LockCcns", async function () {
     }
 })
 
+it("vpc.v20170312.CreateTrafficPackages", async function () {
+    try {
+       const data = await client.CreateTrafficPackages({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.CreateRoutes", async function () {
     try {
        const data = await client.CreateRoutes({})

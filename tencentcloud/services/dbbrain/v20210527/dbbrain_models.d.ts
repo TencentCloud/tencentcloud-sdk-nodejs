@@ -1054,7 +1054,7 @@ export interface DescribeProxyProcessStatisticsResponse {
     /**
       * 实时会话统计详情。
       */
-    ProcessStatistics: ProcessStatistic;
+    ProcessStatistics?: ProcessStatistic;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2308,7 +2308,7 @@ export interface DescribeProxyProcessStatisticsRequest {
       */
     InstanceId: string;
     /**
-      * 当前实例下的 ProxyID。
+      * 该实例下需要查询的某一个 ProxyID 。
       */
     InstanceProxyId: string;
     /**

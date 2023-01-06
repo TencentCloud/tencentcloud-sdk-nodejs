@@ -95,17 +95,17 @@ export interface AssumeRoleWithWebIdentityRequest {
  */
 export interface AssumeRoleWithWebIdentityResponse {
   /**
-   * 临时秘钥过期时间(时间戳)
+   * 临时密钥过期时间(时间戳)
    */
   ExpiredTime: number
 
   /**
-   * 临时秘钥过期时间
+   * 临时密钥过期时间
    */
   Expiration: string
 
   /**
-   * 临时秘钥
+   * 临时密钥
    */
   Credentials: Credentials
 

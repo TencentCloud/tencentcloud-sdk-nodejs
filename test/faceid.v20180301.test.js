@@ -348,14 +348,4 @@ it("faceid.v20180301.PhoneVerificationCTCC", async function () {
     }
 })
 
-it("faceid.v20180301.GetRealNameAuthResult", async function () {
-    try {
-       const data = await client.GetRealNameAuthResult({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 })

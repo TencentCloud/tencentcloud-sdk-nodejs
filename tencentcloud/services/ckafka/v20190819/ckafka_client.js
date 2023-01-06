@@ -377,6 +377,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AuthorizeToken", req, cb);
     }
     /**
+     * 查询topic 生产端连接信息
+     */
+    async DescribeTopicProduceConnection(req, cb) {
+        return this.request("DescribeTopicProduceConnection", req, cb);
+    }
+    /**
      * 接口请求域名：https://ckafka.tencentcloudapi.com
 本接口（DescribeTopic）用于在用户获取消息队列 CKafka 实例的主题列表
      */

@@ -168,11 +168,11 @@ export interface DescribeIMCdrsResponse {
     /**
       * 总记录数
       */
-    TotalCount: number;
+    TotalCount?: number;
     /**
       * 服务记录列表
       */
-    IMCdrs: Array<IMCdrInfo>;
+    IMCdrs?: Array<IMCdrInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -786,11 +786,11 @@ export interface DescribeTelSessionRequest {
  */
 export interface DescribeIMCdrsRequest {
     /**
-      * 起始时间
+      * 起始时间（必填），Unix 秒级时间戳
       */
     StartTimestamp: number;
     /**
-      * 结束时间
+      * 结束时间（必填），Unix 秒级时间戳
       */
     EndTimestamp: number;
     /**
@@ -802,11 +802,11 @@ export interface DescribeIMCdrsRequest {
       */
     SdkAppId?: number;
     /**
-      * 返回记录条数 最大为100默认20
+      * 返回记录条数，最大为100默认20
       */
     Limit?: number;
     /**
-      * 返回记录偏移 默认为0
+      * 返回记录偏移，默认为 0
       */
     Offset?: number;
     /**
@@ -2068,12 +2068,12 @@ export interface DescribeChatMessagesResponse {
     /**
       * 总记录数
       */
-    TotalCount: number;
+    TotalCount?: number;
     /**
       * 消息列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Messages: Array<MessageBody>;
+    Messages?: Array<MessageBody>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2212,15 +2212,15 @@ export interface DescribeChatMessagesRequest {
       */
     SdkAppId?: number;
     /**
-      * 服务记录ID
+      * 服务记录ID（废弃）
       */
     CdrId?: string;
     /**
-      * 返回记录条数 最大为100默认20
+      * 返回记录条数，最大为100 默认20
       */
     Limit?: number;
     /**
-      * 返回记录偏移 默认为0
+      * 返回记录偏移，默认为 0
       */
     Offset?: number;
     /**
@@ -2228,7 +2228,7 @@ export interface DescribeChatMessagesRequest {
       */
     Order?: number;
     /**
-      * 服务记录SessionID
+      * 服务记录 SessionID（必填）
       */
     SessionId?: string;
 }

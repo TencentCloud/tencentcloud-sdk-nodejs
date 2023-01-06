@@ -2951,6 +2951,18 @@ export interface BGPIPInstance {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ConvoyId: string
+
+  /**
+      * 带宽后付费
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ElasticBandwidth: number
+
+  /**
+      * 是否为EO代播的ip: 1是，0不是
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EOFlag: number
 }
 
 /**
@@ -5027,6 +5039,12 @@ export interface NewL7RuleEntry {
    * 规则配置失败时的详细错误原因(仅当Status=2时有效)，1001证书不存在，1002证书获取失败，1003证书上传失败，1004证书已过期
    */
   ErrCode?: number
+
+  /**
+      * 版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Version?: number
 }
 
 /**

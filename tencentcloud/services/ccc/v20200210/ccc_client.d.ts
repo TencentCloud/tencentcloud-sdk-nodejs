@@ -40,7 +40,7 @@ export declare class Client extends AbstractClient {
      */
     CreateCarrierPrivilegeNumberApplicant(req: CreateCarrierPrivilegeNumberApplicantRequest, cb?: (error: string, rep: CreateCarrierPrivilegeNumberApplicantResponse) => void): Promise<CreateCarrierPrivilegeNumberApplicantResponse>;
     /**
-     * 包括全媒体和文本两种类型
+     * 获取包括全媒体和文本会话两种类型的服务记录。
      */
     DescribeIMCdrs(req: DescribeIMCdrsRequest, cb?: (error: string, rep: DescribeIMCdrsResponse) => void): Promise<DescribeIMCdrsResponse>;
     /**
@@ -96,7 +96,9 @@ export declare class Client extends AbstractClient {
      */
     StopAutoCalloutTask(req: StopAutoCalloutTaskRequest, cb?: (error: string, rep: StopAutoCalloutTaskResponse) => void): Promise<StopAutoCalloutTaskResponse>;
     /**
-     * 包括具体聊天内容
+     * 获取指定服务记录文本聊天内容，需要先使用查询在线客服记录（DescribeIMCdrs） API 获取服务记录 SessionId。
+
+文本聊天记录只保存了 1 年内的，1 年之前会自动清理。
      */
     DescribeChatMessages(req: DescribeChatMessagesRequest, cb?: (error: string, rep: DescribeChatMessagesResponse) => void): Promise<DescribeChatMessagesResponse>;
     /**

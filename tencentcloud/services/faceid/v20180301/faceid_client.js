@@ -226,11 +226,5 @@ class Client extends abstract_client_1.AbstractClient {
     async PhoneVerificationCTCC(req, cb) {
         return this.request("PhoneVerificationCTCC", req, cb);
     }
-    /**
-     * 获取微信实名认证结果
-     */
-    async GetRealNameAuthResult(req, cb) {
-        return this.request("GetRealNameAuthResult", req, cb);
-    }
 }
 exports.Client = Client;

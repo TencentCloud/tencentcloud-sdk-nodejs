@@ -3389,6 +3389,21 @@ export interface DescribeConnectResourceRequest {
 }
 
 /**
+ * DescribeTopicProduceConnection请求参数结构体
+ */
+export interface DescribeTopicProduceConnectionRequest {
+  /**
+   * 实例id
+   */
+  InstanceId: string
+
+  /**
+   * topic名称
+   */
+  TopicName: string
+}
+
+/**
  * CreateAcl请求参数结构体
  */
 export interface CreateAclRequest {
@@ -3757,6 +3772,29 @@ export interface ModifyGroupOffsetsResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * topic链接信息
+ */
+export interface DescribeConnectInfoResultDTO {
+  /**
+      * ip地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IpAddr: string
+
+  /**
+      * 连结时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Time: string
+
+  /**
+      * 是否支持的版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsUnSupportVersion: boolean
 }
 
 /**
@@ -5165,6 +5203,21 @@ export interface VipEntity {
    * 虚拟端口
    */
   Vport: string
+}
+
+/**
+ * DescribeTopicProduceConnection返回参数结构体
+ */
+export interface DescribeTopicProduceConnectionResponse {
+  /**
+   * 链接信息返回结果集
+   */
+  Result: Array<DescribeConnectInfoResultDTO>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

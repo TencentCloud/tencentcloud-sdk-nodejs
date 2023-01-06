@@ -123,6 +123,7 @@ import {
   DescribeConsumerGroupRequest,
   DeleteUserResponse,
   DescribeConnectResourceRequest,
+  DescribeTopicProduceConnectionRequest,
   CreateAclRequest,
   DescribeTopicSyncReplicaResponse,
   CreateConnectResourceRequest,
@@ -135,6 +136,7 @@ import {
   CreateTopicIpWhiteListResponse,
   GroupOffsetTopic,
   ModifyGroupOffsetsResponse,
+  DescribeConnectInfoResultDTO,
   Partition,
   CreateAclResponse,
   FailureParam,
@@ -189,6 +191,7 @@ import {
   DescribeRegionResponse,
   CreateTopicResponse,
   VipEntity,
+  DescribeTopicProduceConnectionResponse,
   FetchLatestDatahubMessageListRequest,
   ConsumerGroupTopic,
   DatahubTaskInfo,
@@ -887,6 +890,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AuthorizeTokenResponse) => void
   ): Promise<AuthorizeTokenResponse> {
     return this.request("AuthorizeToken", req, cb)
+  }
+
+  /**
+   * 查询topic 生产端连接信息
+   */
+  async DescribeTopicProduceConnection(
+    req: DescribeTopicProduceConnectionRequest,
+    cb?: (error: string, rep: DescribeTopicProduceConnectionResponse) => void
+  ): Promise<DescribeTopicProduceConnectionResponse> {
+    return this.request("DescribeTopicProduceConnection", req, cb)
   }
 
   /**

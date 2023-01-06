@@ -1861,6 +1861,12 @@ LimitTypes取值范围：
         return this.request("LockCcns", req, cb);
     }
     /**
+     * 本接口 (CreateTrafficPackages) 用于创建共享流量包。
+     */
+    async CreateTrafficPackages(req, cb) {
+        return this.request("CreateTrafficPackages", req, cb);
+    }
+    /**
      * 本接口(CreateRoutes)用于创建路由策略。
 * 向指定路由表批量新增路由策略。
      */
