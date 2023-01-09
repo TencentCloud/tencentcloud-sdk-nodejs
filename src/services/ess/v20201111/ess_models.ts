@@ -377,7 +377,7 @@ export interface CreateConvertTaskApiRequest {
   ResourceId: string
 
   /**
-   * 操作者信息
+   * 调用方用户信息，userId 必填
    */
   Operator?: UserInfo
 
@@ -2730,6 +2730,11 @@ export interface VerifyPdfResponse {
 ；5-文件签名格式错误
       */
   PdfVerifyResults: Array<PdfVerifyResult>
+
+  /**
+   * 验签序列号
+   */
+  VerifySerialNo: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

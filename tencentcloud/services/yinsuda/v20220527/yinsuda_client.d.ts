@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeKTVSuggestionsResponse, DestroyKTVRobotResponse, SyncKTVRobotCommandRequest, DescribeKTVPlaylistDetailRequest, CreateKTVRobotResponse, DescribeKTVSuggestionsRequest, DescribeKTVMatchMusicsRequest, DescribeKTVPlaylistsResponse, DescribeKTVPlaylistsRequest, DescribeKTVPlaylistDetailResponse, DescribeKTVRobotsResponse, BatchDescribeKTVMusicDetailsRequest, CreateKTVRobotRequest, DescribeKTVMusicsByTagResponse, SearchKTVMusicsResponse, DescribeKTVMatchMusicsResponse, DescribeKTVTagsResponse, SyncKTVRobotCommandResponse, BatchDescribeKTVMusicDetailsResponse, DescribeKTVMusicsByTagRequest, SearchKTVMusicsRequest, DestroyKTVRobotRequest, DescribeKTVRobotsRequest, DescribeKTVTagsRequest } from "./yinsuda_models";
+import { ApplyChorusResponse, DescribeKTVSuggestionsResponse, DestroyKTVRobotResponse, CreateKTVRobotRequest, SyncKTVRobotCommandRequest, DescribeKTVPlaylistDetailRequest, CreateKTVRobotResponse, DescribeKTVSuggestionsRequest, DescribeKTVMatchMusicsRequest, DescribeKTVPlaylistsResponse, DescribeKTVPlaylistsRequest, DescribeKTVPlaylistDetailResponse, SyncKTVRobotCommandResponse, DescribeKTVRobotsResponse, BatchDescribeKTVMusicDetailsRequest, DescribeKTVMusicsByTagResponse, SearchKTVMusicsResponse, DescribeKTVMatchMusicsResponse, DescribeKTVTagsResponse, ApplyChorusRequest, BatchDescribeKTVMusicDetailsResponse, DescribeKTVMusicsByTagRequest, SearchKTVMusicsRequest, DestroyKTVRobotRequest, DescribeKTVRobotsRequest, DescribeKTVTagsRequest } from "./yinsuda_models";
 /**
  * yinsuda client
  * @class
@@ -39,6 +39,10 @@ export declare class Client extends AbstractClient {
      * 获取歌单列表。
      */
     DescribeKTVPlaylists(req: DescribeKTVPlaylistsRequest, cb?: (error: string, rep: DescribeKTVPlaylistsResponse) => void): Promise<DescribeKTVPlaylistsResponse>;
+    /**
+     * 申请合唱相关信息，用于标记用户的演唱是在合唱场景下。
+     */
+    ApplyChorus(req: ApplyChorusRequest, cb?: (error: string, rep: ApplyChorusResponse) => void): Promise<ApplyChorusResponse>;
     /**
      * 获取机器人列表，支持 Id、状态等过滤条件。
      */

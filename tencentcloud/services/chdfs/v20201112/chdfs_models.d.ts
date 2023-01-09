@@ -87,6 +87,16 @@ export interface DescribeFileSystemResponse {
       */
     DegradeCapacityUsed: number;
     /**
+      * 已使用COS深度归档存储容量（byte）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DeepArchiveCapacityUsed: number;
+    /**
+      * 已使用COS智能分层存储容量（byte）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IntelligentCapacityUsed: number;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
@@ -482,6 +492,11 @@ export interface CreateLifeCycleRulesRequest {
  */
 export interface CreateAccessRulesResponse {
     /**
+      * 权限规则列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AccessRules: Array<AccessRule>;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
@@ -644,7 +659,7 @@ export interface Transition {
       */
     Days: number;
     /**
-      * 转换类型（1：归档；2：删除；3：低频）
+      * 转换类型（1：归档；2：删除；3：低频；4：深度归档；5：智能分层）
       */
     Type: number;
 }

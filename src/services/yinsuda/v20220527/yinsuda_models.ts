@@ -16,6 +16,21 @@
  */
 
 /**
+ * ApplyChorus返回参数结构体
+ */
+export interface ApplyChorusResponse {
+  /**
+   * 合唱 Token。
+   */
+  ChorusToken: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 节拍信息。
  */
 export interface KTVBPMInfo {
@@ -103,23 +118,34 @@ export interface MusicAlbumCoverInfo {
 }
 
 /**
- * AME 曲库歌曲基础信息。
+ * CreateKTVRobot请求参数结构体
  */
-export interface AMEMusicBaseInfo {
+export interface CreateKTVRobotRequest {
   /**
-   * 歌曲 Id。
+   * 应用名称。
    */
-  MusicId: string
+  AppName: string
 
   /**
-   * 歌曲名称。
+   * 用户标识。
    */
-  Name: string
+  UserId: string
 
   /**
-   * 歌手列表。
+      * RTC厂商类型，取值有：
+<li>TRTC</li>
+      */
+  RTCSystem: string
+
+  /**
+   * 进房参数。
    */
-  SingerSet: Array<string>
+  JoinRoomInput: JoinRoomInput
+
+  /**
+   * 创建机器人时初始化参数。
+   */
+  SyncRobotCommands?: Array<SyncRobotCommand>
 }
 
 /**
@@ -369,6 +395,16 @@ export interface DescribeKTVPlaylistDetailResponse {
 }
 
 /**
+ * SyncKTVRobotCommand返回参数结构体
+ */
+export interface SyncKTVRobotCommandResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 设置销毁模式
  */
 export interface SetDestroyModeCommandInput {
@@ -505,34 +541,23 @@ export interface BatchDescribeKTVMusicDetailsRequest {
 }
 
 /**
- * CreateKTVRobot请求参数结构体
+ * AME 曲库歌曲基础信息。
  */
-export interface CreateKTVRobotRequest {
+export interface AMEMusicBaseInfo {
   /**
-   * 应用名称。
+   * 歌曲 Id。
    */
-  AppName: string
+  MusicId: string
 
   /**
-   * 用户标识。
+   * 歌曲名称。
    */
-  UserId: string
+  Name: string
 
   /**
-      * RTC厂商类型，取值有：
-<li>TRTC</li>
-      */
-  RTCSystem: string
-
-  /**
-   * 进房参数。
+   * 歌手列表。
    */
-  JoinRoomInput: JoinRoomInput
-
-  /**
-   * 创建机器人时初始化参数。
-   */
-  SyncRobotCommands?: Array<SyncRobotCommand>
+  SingerSet: Array<string>
 }
 
 /**
@@ -815,13 +840,38 @@ export interface SetPlaylistCommandInput {
 }
 
 /**
- * SyncKTVRobotCommand返回参数结构体
+ * ApplyChorus请求参数结构体
  */
-export interface SyncKTVRobotCommandResponse {
+export interface ApplyChorusRequest {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 应用名称。
    */
-  RequestId?: string
+  AppName: string
+
+  /**
+   * 用户标识。
+   */
+  UserId: string
+
+  /**
+   * 房间号。
+   */
+  RoomId: string
+
+  /**
+   * 歌曲 Id。
+   */
+  MusicId: string
+
+  /**
+   * 最大合唱人数，默认值为 8，最大值为 20。
+   */
+  MaxChorusNum?: number
+
+  /**
+   * 合唱用户标识列表。
+   */
+  ChorusUserIds?: Array<string>
 }
 
 /**

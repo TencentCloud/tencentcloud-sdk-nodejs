@@ -636,7 +636,7 @@ export interface CreateTaskFromTemplateResponse {
     /**
       * 创建成功的演练ID
       */
-    TaskId: number;
+    TaskId?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -795,7 +795,7 @@ export interface TaskReportInfo {
  */
 export interface CreateTaskFromTemplateRequest {
     /**
-      * 从经验库中查询到的经验模版ID
+      * 从经验库中查询到的经验模板ID
       */
     TemplateId: number;
     /**

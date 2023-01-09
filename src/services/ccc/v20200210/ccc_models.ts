@@ -1824,6 +1824,12 @@ notInService       不在服务区
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Remark?: string
+
+  /**
+      * 排队技能组名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  QueuedSkillGroupName?: string
 }
 
 /**

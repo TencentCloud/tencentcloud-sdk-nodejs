@@ -76,6 +76,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeKTVPlaylists", req, cb);
     }
     /**
+     * 申请合唱相关信息，用于标记用户的演唱是在合唱场景下。
+     */
+    async ApplyChorus(req, cb) {
+        return this.request("ApplyChorus", req, cb);
+    }
+    /**
      * 获取机器人列表，支持 Id、状态等过滤条件。
      */
     async DescribeKTVRobots(req, cb) {

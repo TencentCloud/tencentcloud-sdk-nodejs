@@ -482,7 +482,7 @@ export interface ChannelCreateConvertTaskApiRequest {
   ResourceId: string
 
   /**
-   * 操作者信息
+   * 调用方用户信息，userId 必填
    */
   Operator?: UserInfo
 

@@ -21,6 +21,7 @@ import {
   DescribeClusterEndpointVipStatusRequest,
   DescribeClusterSecurityRequest,
   EksCiVolume,
+  GetTkeAppChartListRequest,
   DescribeEdgeCVMInstancesRequest,
   InstallLogAgentRequest,
   DescribeClusterEndpointVipStatusResponse,
@@ -32,7 +33,7 @@ import {
   DescribeEKSClustersRequest,
   DescribePrometheusInstancesOverviewRequest,
   ServiceAccountAuthenticationOptions,
-  DescribeEdgeClusterInstancesResponse,
+  CreateClusterNodePoolRequest,
   UpgradeClusterReleaseRequest,
   DescribeEdgeClusterUpgradeInfoRequest,
   RunInstancesForNode,
@@ -77,6 +78,7 @@ import {
   DescribeEKSClusterCredentialResponse,
   CheckInstancesUpgradeAbleRequest,
   ModifyPrometheusTemplateRequest,
+  DeleteClusterVirtualNodePoolRequest,
   DescribeImageCachesRequest,
   DescribePrometheusAlertRuleRequest,
   DescribeEdgeAvailableExtraArgsRequest,
@@ -109,8 +111,10 @@ import {
   ControllerStatus,
   DeletePrometheusTempSyncResponse,
   DescribePrometheusRecordRulesRequest,
+  VirtualNodePool,
   DescribeTKEEdgeClusterStatusRequest,
   AcquireClusterAdminRoleResponse,
+  DescribeEdgeClusterInstancesResponse,
   UpdateEdgeClusterVersionRequest,
   GetTkeAppChartListResponse,
   DescribePrometheusTemplateSyncRequest,
@@ -127,9 +131,10 @@ import {
   DescribeRegionsRequest,
   DeleteClusterRouteRequest,
   DeleteClusterEndpointRequest,
+  DeleteClusterVirtualNodeRequest,
   DescribeClusterNodePoolDetailRequest,
   DescribePrometheusTempSyncRequest,
-  DescribeClustersResponse,
+  DescribePrometheusGlobalConfigResponse,
   DescribeClusterReleaseHistoryResponse,
   DescribeImagesRequest,
   UninstallEdgeLogAgentResponse,
@@ -180,6 +185,7 @@ import {
   DescribePrometheusGlobalNotificationResponse,
   HttpGet,
   ResourceUsage,
+  CreateClusterVirtualNodeRequest,
   DescribeTKEEdgeClustersRequest,
   DescribePrometheusAlertHistoryRequest,
   SetNodePoolNodeProtectionResponse,
@@ -200,7 +206,8 @@ import {
   DescribeClusterReleaseHistoryRequest,
   NodePoolOption,
   DescribeEdgeClusterExtraArgsRequest,
-  DescribePrometheusGlobalConfigResponse,
+  DescribeClustersResponse,
+  DeleteClusterVirtualNodeResponse,
   PrometheusAgentInfo,
   CreateEdgeCVMInstancesResponse,
   DescribeEdgeLogSwitchesResponse,
@@ -240,9 +247,10 @@ import {
   UpdateTKEEdgeClusterRequest,
   DescribeTKEEdgeExternalKubeconfigResponse,
   CreateClusterInstancesResponse,
+  ModifyClusterVirtualNodePoolResponse,
   InstanceUpgradeClusterStatus,
   DescribeClusterRoutesRequest,
-  ForwardTKEEdgeApplicationRequestV3Request,
+  DeleteECMInstancesRequest,
   ClusterLevelAttribute,
   RemoveNodeFromNodePoolResponse,
   SetNodePoolNodeProtectionRequest,
@@ -275,6 +283,7 @@ import {
   RollbackClusterReleaseResponse,
   ClusterVersion,
   InstanceUpgradeProgressItem,
+  DescribeClusterVirtualNodePoolsRequest,
   GetMostSuitableImageCacheRequest,
   SecurityContext,
   DNSConfig,
@@ -282,12 +291,15 @@ import {
   DescribeTKEEdgeExternalKubeconfigRequest,
   CreatePrometheusAlertPolicyResponse,
   DNSConfigOption,
+  DescribeClusterVirtualNodeRequest,
   DescribeClusterReleasesResponse,
   AddNodeToNodePoolRequest,
   DescribeExternalClusterSpecRequest,
   ModifyPrometheusGlobalNotificationResponse,
   UninstallClusterReleaseRequest,
+  VirtualNode,
   ForwardTKEEdgeApplicationRequestV3Response,
+  CreateClusterVirtualNodePoolRequest,
   ModifyPrometheusConfigRequest,
   AutoScalingGroupRange,
   DescribePrometheusGlobalNotificationRequest,
@@ -304,13 +316,15 @@ import {
   EksCi,
   UpdateImageCacheResponse,
   CreatePrometheusConfigRequest,
+  CreateClusterVirtualNodeResponse,
   ImageCacheEvent,
   CreatePrometheusClusterAgentRequest,
-  DeleteEKSContainerInstancesResponse,
+  DescribeClusterNodePoolsResponse,
   DescribePrometheusInstancesOverviewResponse,
   DescribeEKSClusterCredentialRequest,
   EnableClusterDeletionProtectionRequest,
   RestartEKSContainerInstancesRequest,
+  DrainClusterVirtualNodeRequest,
   DescribeClusterLevelAttributeRequest,
   DescribeClusterReleaseDetailsRequest,
   CreateECMInstancesRequest,
@@ -330,7 +344,7 @@ import {
   EdgeClusterPublicLB,
   EnableEventPersistenceResponse,
   EnhancedService,
-  DescribeClusterNodePoolsResponse,
+  DeleteEKSContainerInstancesResponse,
   UninstallLogAgentRequest,
   TcpSocket,
   TagSpecification,
@@ -349,9 +363,9 @@ import {
   PrometheusGrafanaInfo,
   ImageInstance,
   CreatePrometheusAlertPolicyRequest,
-  GetTkeAppChartListRequest,
+  DescribeImageCachesResponse,
   ResourceUsageDetail,
-  CreateClusterNodePoolRequest,
+  DescribeClusterVirtualNodePoolsResponse,
   CheckEdgeClusterCIDRResponse,
   DescribePrometheusClusterAgentsRequest,
   EdgeArgsFlag,
@@ -360,7 +374,6 @@ import {
   CreatePrometheusDashboardRequest,
   DeleteClusterRouteTableResponse,
   DisableClusterDeletionProtectionRequest,
-  DescribeImageCachesResponse,
   PrometheusJobTargets,
   ModifyClusterAsGroupOptionAttributeResponse,
   UninstallLogAgentResponse,
@@ -378,7 +391,7 @@ import {
   SyncPrometheusTemplateResponse,
   UninstallClusterReleaseResponse,
   ClusterAsGroupAttribute,
-  DeleteECMInstancesRequest,
+  ForwardTKEEdgeApplicationRequestV3Request,
   DisableEventPersistenceRequest,
   RunMonitorServiceEnabled,
   CreateEKSContainerInstancesRequest,
@@ -399,6 +412,7 @@ import {
   CreatePrometheusAlertRuleRequest,
   UpdateEKSClusterRequest,
   CreateTKEEdgeClusterRequest,
+  CreateClusterVirtualNodePoolResponse,
   CreateEKSClusterResponse,
   CreateImageCacheResponse,
   CreateEdgeLogConfigResponse,
@@ -413,20 +427,23 @@ import {
   CreateEKSClusterRequest,
   CommonName,
   EnableEventPersistenceRequest,
+  ModifyClusterVirtualNodePoolRequest,
   DescribeRegionsResponse,
   CreateClusterRouteResponse,
   Release,
   DescribeEKSContainerInstanceRegionsRequest,
   DescribeECMInstancesRequest,
+  DrainClusterVirtualNodeResponse,
   DescribeVpcCniPodLimitsResponse,
   DescribeVersionsResponse,
   ScaleInClusterMasterRequest,
   DeleteEdgeClusterInstancesRequest,
   PrometheusAlertRule,
+  VirtualNodeSpec,
   ClusterNetworkSettings,
   DescribeImagesResponse,
   ClusterExtraArgs,
-  EdgeClusterAdvancedSettings,
+  DeleteClusterVirtualNodePoolResponse,
   CreateClusterEndpointVipResponse,
   TaskStepInfo,
   ECMZoneInstanceCountISP,
@@ -458,6 +475,7 @@ import {
   ModifyClusterNodePoolResponse,
   PrometheusAlertPolicyItem,
   ModifyPrometheusAgentExternalLabelsRequest,
+  EdgeClusterAdvancedSettings,
   PrometheusTarget,
   LoginSettings,
   DescribePrometheusTempResponse,
@@ -514,6 +532,7 @@ import {
   GPUArgs,
   RouteTableConflict,
   PrometheusInstanceOverview,
+  DescribeClusterVirtualNodeResponse,
   ScaleInMaster,
   RunPrometheusInstanceRequest,
   PendingRelease,
@@ -549,13 +568,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更新镜像缓存接口
+   * 查看虚拟节点列表
    */
-  async UpdateImageCache(
-    req: UpdateImageCacheRequest,
-    cb?: (error: string, rep: UpdateImageCacheResponse) => void
-  ): Promise<UpdateImageCacheResponse> {
-    return this.request("UpdateImageCache", req, cb)
+  async DescribeClusterVirtualNode(
+    req: DescribeClusterVirtualNodeRequest,
+    cb?: (error: string, rep: DescribeClusterVirtualNodeResponse) => void
+  ): Promise<DescribeClusterVirtualNodeResponse> {
+    return this.request("DescribeClusterVirtualNode", req, cb)
   }
 
   /**
@@ -576,6 +595,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: InstallEdgeLogAgentResponse) => void
   ): Promise<InstallEdgeLogAgentResponse> {
     return this.request("InstallEdgeLogAgent", req, cb)
+  }
+
+  /**
+   * 创建虚拟节点池
+   */
+  async CreateClusterVirtualNodePool(
+    req: CreateClusterVirtualNodePoolRequest,
+    cb?: (error: string, rep: CreateClusterVirtualNodePoolResponse) => void
+  ): Promise<CreateClusterVirtualNodePoolResponse> {
+    return this.request("CreateClusterVirtualNodePool", req, cb)
   }
 
   /**
@@ -679,16 +708,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取2.0实例初始化任务状态
-   */
-  async DescribePrometheusInstanceInitStatus(
-    req: DescribePrometheusInstanceInitStatusRequest,
-    cb?: (error: string, rep: DescribePrometheusInstanceInitStatusResponse) => void
-  ): Promise<DescribePrometheusInstanceInitStatusResponse> {
-    return this.request("DescribePrometheusInstanceInitStatus", req, cb)
-  }
-
-  /**
    * 开启事件持久化功能
    */
   async EnableEventPersistence(
@@ -756,6 +775,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetMostSuitableImageCacheResponse) => void
   ): Promise<GetMostSuitableImageCacheResponse> {
     return this.request("GetMostSuitableImageCache", req, cb)
+  }
+
+  /**
+   * 删除虚拟节点
+   */
+  async DeleteClusterVirtualNode(
+    req: DeleteClusterVirtualNodeRequest,
+    cb?: (error: string, rep: DeleteClusterVirtualNodeResponse) => void
+  ): Promise<DeleteClusterVirtualNodeResponse> {
+    return this.request("DeleteClusterVirtualNode", req, cb)
   }
 
   /**
@@ -889,13 +918,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 集群关联的伸缩组列表
+   * 修改虚拟节点池
    */
-  async DescribeClusterAsGroups(
-    req: DescribeClusterAsGroupsRequest,
-    cb?: (error: string, rep: DescribeClusterAsGroupsResponse) => void
-  ): Promise<DescribeClusterAsGroupsResponse> {
-    return this.request("DescribeClusterAsGroups", req, cb)
+  async ModifyClusterVirtualNodePool(
+    req: ModifyClusterVirtualNodePoolRequest,
+    cb?: (error: string, rep: ModifyClusterVirtualNodePoolResponse) => void
+  ): Promise<ModifyClusterVirtualNodePoolResponse> {
+    return this.request("ModifyClusterVirtualNodePool", req, cb)
+  }
+
+  /**
+   * 查询节点池列表
+   */
+  async DescribeClusterNodePools(
+    req: DescribeClusterNodePoolsRequest,
+    cb?: (error: string, rep: DescribeClusterNodePoolsResponse) => void
+  ): Promise<DescribeClusterNodePoolsResponse> {
+    return this.request("DescribeClusterNodePools", req, cb)
   }
 
   /**
@@ -1089,13 +1128,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询节点池列表
+   * 获取2.0实例初始化任务状态
    */
-  async DescribeClusterNodePools(
-    req: DescribeClusterNodePoolsRequest,
-    cb?: (error: string, rep: DescribeClusterNodePoolsResponse) => void
-  ): Promise<DescribeClusterNodePoolsResponse> {
-    return this.request("DescribeClusterNodePools", req, cb)
+  async DescribePrometheusInstanceInitStatus(
+    req: DescribePrometheusInstanceInitStatusRequest,
+    cb?: (error: string, rep: DescribePrometheusInstanceInitStatusResponse) => void
+  ): Promise<DescribePrometheusInstanceInitStatusResponse> {
+    return this.request("DescribePrometheusInstanceInitStatus", req, cb)
   }
 
   /**
@@ -1166,6 +1205,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeClusterEndpointStatusResponse) => void
   ): Promise<DescribeClusterEndpointStatusResponse> {
     return this.request("DescribeClusterEndpointStatus", req, cb)
+  }
+
+  /**
+   * 更新镜像缓存接口
+   */
+  async UpdateImageCache(
+    req: UpdateImageCacheRequest,
+    cb?: (error: string, rep: UpdateImageCacheResponse) => void
+  ): Promise<UpdateImageCacheResponse> {
+    return this.request("UpdateImageCache", req, cb)
   }
 
   /**
@@ -1299,6 +1348,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除虚拟节点池
+   */
+  async DeleteClusterVirtualNodePool(
+    req: DeleteClusterVirtualNodePoolRequest,
+    cb?: (error: string, rep: DeleteClusterVirtualNodePoolResponse) => void
+  ): Promise<DeleteClusterVirtualNodePoolResponse> {
+    return this.request("DeleteClusterVirtualNodePool", req, cb)
+  }
+
+  /**
    * 更新容器实例
    */
   async UpdateEKSContainerInstance(
@@ -1326,6 +1385,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribePrometheusAlertRuleResponse) => void
   ): Promise<DescribePrometheusAlertRuleResponse> {
     return this.request("DescribePrometheusAlertRule", req, cb)
+  }
+
+  /**
+   * 驱逐虚拟节点
+   */
+  async DrainClusterVirtualNode(
+    req: DrainClusterVirtualNodeRequest,
+    cb?: (error: string, rep: DrainClusterVirtualNodeResponse) => void
+  ): Promise<DrainClusterVirtualNodeResponse> {
+    return this.request("DrainClusterVirtualNode", req, cb)
   }
 
   /**
@@ -2009,6 +2078,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查看虚拟节点池列表
+   */
+  async DescribeClusterVirtualNodePools(
+    req: DescribeClusterVirtualNodePoolsRequest,
+    cb?: (error: string, rep: DescribeClusterVirtualNodePoolsResponse) => void
+  ): Promise<DescribeClusterVirtualNodePoolsResponse> {
+    return this.request("DescribeClusterVirtualNodePools", req, cb)
+  }
+
+  /**
    * 获取集群规模价格
    */
   async GetClusterLevelPrice(
@@ -2046,6 +2125,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeEdgeClusterUpgradeInfoResponse) => void
   ): Promise<DescribeEdgeClusterUpgradeInfoResponse> {
     return this.request("DescribeEdgeClusterUpgradeInfo", req, cb)
+  }
+
+  /**
+   * 在应用市场中集群回滚应用至某个历史版本
+   */
+  async RollbackClusterRelease(
+    req: RollbackClusterReleaseRequest,
+    cb?: (error: string, rep: RollbackClusterReleaseResponse) => void
+  ): Promise<RollbackClusterReleaseResponse> {
+    return this.request("RollbackClusterRelease", req, cb)
   }
 
   /**
@@ -2089,16 +2178,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 在应用市场中集群回滚应用至某个历史版本
-   */
-  async RollbackClusterRelease(
-    req: RollbackClusterReleaseRequest,
-    cb?: (error: string, rep: RollbackClusterReleaseResponse) => void
-  ): Promise<RollbackClusterReleaseResponse> {
-    return this.request("RollbackClusterRelease", req, cb)
-  }
-
-  /**
    * 查询弹性集群列表
    */
   async DescribeEKSClusters(
@@ -2106,6 +2185,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeEKSClustersResponse) => void
   ): Promise<DescribeEKSClustersResponse> {
     return this.request("DescribeEKSClusters", req, cb)
+  }
+
+  /**
+   * 集群关联的伸缩组列表
+   */
+  async DescribeClusterAsGroups(
+    req: DescribeClusterAsGroupsRequest,
+    cb?: (error: string, rep: DescribeClusterAsGroupsResponse) => void
+  ): Promise<DescribeClusterAsGroupsResponse> {
+    return this.request("DescribeClusterAsGroups", req, cb)
   }
 
   /**
@@ -2306,6 +2395,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetTkeAppChartListResponse) => void
   ): Promise<GetTkeAppChartListResponse> {
     return this.request("GetTkeAppChartList", req, cb)
+  }
+
+  /**
+   * 创建虚拟节点
+   */
+  async CreateClusterVirtualNode(
+    req: CreateClusterVirtualNodeRequest,
+    cb?: (error: string, rep: CreateClusterVirtualNodeResponse) => void
+  ): Promise<CreateClusterVirtualNodeResponse> {
+    return this.request("CreateClusterVirtualNode", req, cb)
   }
 
   /**

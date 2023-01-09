@@ -733,6 +733,26 @@ export interface DescribeMySqlProcessListResponse {
 }
 
 /**
+ * 实时会话访问来源详情。
+ */
+export interface SessionItem {
+  /**
+   * 访问来源。
+   */
+  Ip: string
+
+  /**
+   * 当前访问来源活跃连接数
+   */
+  ActiveConn: string
+
+  /**
+   * 当前访问来源总连接数
+   */
+  AllConn: number
+}
+
+/**
  * 实例健康详情。
  */
 export interface HealthStatus {
@@ -1018,7 +1038,22 @@ export interface CreateDBDiagReportTaskResponse {
 /**
  * 实时会话统计详情。
  */
-export type ProcessStatistic = null
+export interface ProcessStatistic {
+  /**
+   * 会话详情数组。
+   */
+  Items: Array<SessionItem>
+
+  /**
+   * 总连接数。
+   */
+  AllConnSum: number
+
+  /**
+   * 总活跃连接数。
+   */
+  ActiveConnSum: number
+}
 
 /**
  * CreateMailProfile返回参数结构体

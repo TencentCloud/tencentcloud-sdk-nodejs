@@ -40,10 +40,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateECMInstances", req, cb);
     }
     /**
-     * 更新镜像缓存接口
+     * 查看虚拟节点列表
      */
-    async UpdateImageCache(req, cb) {
-        return this.request("UpdateImageCache", req, cb);
+    async DescribeClusterVirtualNode(req, cb) {
+        return this.request("DescribeClusterVirtualNode", req, cb);
     }
     /**
      * 创建集群
@@ -56,6 +56,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async InstallEdgeLogAgent(req, cb) {
         return this.request("InstallEdgeLogAgent", req, cb);
+    }
+    /**
+     * 创建虚拟节点池
+     */
+    async CreateClusterVirtualNodePool(req, cb) {
+        return this.request("CreateClusterVirtualNodePool", req, cb);
     }
     /**
      * 修改集群弹性伸缩属性
@@ -118,12 +124,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeClusterCommonNames", req, cb);
     }
     /**
-     * 获取2.0实例初始化任务状态
-     */
-    async DescribePrometheusInstanceInitStatus(req, cb) {
-        return this.request("DescribePrometheusInstanceInitStatus", req, cb);
-    }
-    /**
      * 开启事件持久化功能
      */
     async EnableEventPersistence(req, cb) {
@@ -164,6 +164,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async GetMostSuitableImageCache(req, cb) {
         return this.request("GetMostSuitableImageCache", req, cb);
+    }
+    /**
+     * 删除虚拟节点
+     */
+    async DeleteClusterVirtualNode(req, cb) {
+        return this.request("DeleteClusterVirtualNode", req, cb);
     }
     /**
      * 获取边缘脚本链接，此接口用于添加第三方节点，通过下载脚本从而将节点添加到边缘集群。
@@ -244,10 +250,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeEdgeClusterExtraArgs", req, cb);
     }
     /**
-     * 集群关联的伸缩组列表
+     * 修改虚拟节点池
      */
-    async DescribeClusterAsGroups(req, cb) {
-        return this.request("DescribeClusterAsGroups", req, cb);
+    async ModifyClusterVirtualNodePool(req, cb) {
+        return this.request("ModifyClusterVirtualNodePool", req, cb);
+    }
+    /**
+     * 查询节点池列表
+     */
+    async DescribeClusterNodePools(req, cb) {
+        return this.request("DescribeClusterNodePools", req, cb);
     }
     /**
      * 升级集群 Master 组件到指定版本
@@ -364,10 +376,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeExistedInstances", req, cb);
     }
     /**
-     * 查询节点池列表
+     * 获取2.0实例初始化任务状态
      */
-    async DescribeClusterNodePools(req, cb) {
-        return this.request("DescribeClusterNodePools", req, cb);
+    async DescribePrometheusInstanceInitStatus(req, cb) {
+        return this.request("DescribePrometheusInstanceInitStatus", req, cb);
     }
     /**
      * 获取边缘计算集群的认证信息
@@ -410,6 +422,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeClusterEndpointStatus(req, cb) {
         return this.request("DescribeClusterEndpointStatus", req, cb);
+    }
+    /**
+     * 更新镜像缓存接口
+     */
+    async UpdateImageCache(req, cb) {
+        return this.request("UpdateImageCache", req, cb);
     }
     /**
      * 获取容器服务支持的所有地域
@@ -490,6 +508,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateImageCache", req, cb);
     }
     /**
+     * 删除虚拟节点池
+     */
+    async DeleteClusterVirtualNodePool(req, cb) {
+        return this.request("DeleteClusterVirtualNodePool", req, cb);
+    }
+    /**
      * 更新容器实例
      */
     async UpdateEKSContainerInstance(req, cb) {
@@ -506,6 +530,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribePrometheusAlertRule(req, cb) {
         return this.request("DescribePrometheusAlertRule", req, cb);
+    }
+    /**
+     * 驱逐虚拟节点
+     */
+    async DrainClusterVirtualNode(req, cb) {
+        return this.request("DrainClusterVirtualNode", req, cb);
     }
     /**
      * 重启弹性容器实例，支持批量操作
@@ -916,6 +946,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateClusterRelease", req, cb);
     }
     /**
+     * 查看虚拟节点池列表
+     */
+    async DescribeClusterVirtualNodePools(req, cb) {
+        return this.request("DescribeClusterVirtualNodePools", req, cb);
+    }
+    /**
      * 获取集群规模价格
      */
     async GetClusterLevelPrice(req, cb) {
@@ -938,6 +974,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeEdgeClusterUpgradeInfo(req, cb) {
         return this.request("DescribeEdgeClusterUpgradeInfo", req, cb);
+    }
+    /**
+     * 在应用市场中集群回滚应用至某个历史版本
+     */
+    async RollbackClusterRelease(req, cb) {
+        return this.request("RollbackClusterRelease", req, cb);
     }
     /**
      * 拉取Prometheus配置
@@ -964,16 +1006,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeClusterAsGroupOption", req, cb);
     }
     /**
-     * 在应用市场中集群回滚应用至某个历史版本
-     */
-    async RollbackClusterRelease(req, cb) {
-        return this.request("RollbackClusterRelease", req, cb);
-    }
-    /**
      * 查询弹性集群列表
      */
     async DescribeEKSClusters(req, cb) {
         return this.request("DescribeEKSClusters", req, cb);
+    }
+    /**
+     * 集群关联的伸缩组列表
+     */
+    async DescribeClusterAsGroups(req, cb) {
+        return this.request("DescribeClusterAsGroups", req, cb);
     }
     /**
      * 创建节点池
@@ -1094,6 +1136,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async GetTkeAppChartList(req, cb) {
         return this.request("GetTkeAppChartList", req, cb);
+    }
+    /**
+     * 创建虚拟节点
+     */
+    async CreateClusterVirtualNode(req, cb) {
+        return this.request("CreateClusterVirtualNode", req, cb);
     }
     /**
      * 检查边缘计算集群的CIDR是否冲突

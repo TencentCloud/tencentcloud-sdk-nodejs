@@ -365,7 +365,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 恢复处于暂停中中的数据同步任务。
+   * 恢复处于暂停中的数据同步任务。
    */
   async ContinueSyncJob(
     req: ContinueSyncJobRequest,

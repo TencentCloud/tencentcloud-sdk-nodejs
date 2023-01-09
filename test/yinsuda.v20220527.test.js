@@ -98,6 +98,16 @@ it("yinsuda.v20220527.DescribeKTVPlaylists", async function () {
     }
 })
 
+it("yinsuda.v20220527.ApplyChorus", async function () {
+    try {
+       const data = await client.ApplyChorus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("yinsuda.v20220527.DescribeKTVRobots", async function () {
     try {
        const data = await client.DescribeKTVRobots({})

@@ -89,7 +89,7 @@ export declare class Client extends AbstractClient {
      */
     PauseSyncJob(req: PauseSyncJobRequest, cb?: (error: string, rep: PauseSyncJobResponse) => void): Promise<PauseSyncJobResponse>;
     /**
-     * 恢复处于暂停中中的数据同步任务。
+     * 恢复处于暂停中的数据同步任务。
      */
     ContinueSyncJob(req: ContinueSyncJobRequest, cb?: (error: string, rep: ContinueSyncJobResponse) => void): Promise<ContinueSyncJobResponse>;
     /**

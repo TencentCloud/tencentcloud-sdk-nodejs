@@ -49,6 +49,10 @@ export interface ApplyConcurrentRequest {
       * 应用版本ID
       */
     ApplicationVersionId?: string;
+    /**
+      * 应用ID。如果是独享项目，将忽略该参数，使用项目绑定的应用。如果是共享项目，使用该参数来指定应用。
+      */
+    ApplicationId?: string;
 }
 /**
  * DestroySession请求参数结构体

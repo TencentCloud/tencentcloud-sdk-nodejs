@@ -1488,7 +1488,7 @@ export interface DescribeBlueprintsRequest {
 类型：String
 必选：否
 <li>blueprint-type</li>按照【镜像类型】进行过滤。
-取值：APP_OS（应用镜像 ）；PURE_OS（系统镜像）；PRIVATE（自定义镜像）；SHARED（共享镜像）。
+取值：APP_OS（应用镜像 ）；PURE_OS（系统镜像）；DOCKER（Docker容器镜像）；PRIVATE（自定义镜像）；SHARED（共享镜像）。
 类型：String
 必选：否
 <li>platform-type</li>按照【镜像平台类型】进行过滤。
@@ -2066,12 +2066,12 @@ export interface DescribeBlueprintsResponse {
   /**
    * 符合条件的镜像数量。
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 镜像详细信息列表。
    */
-  BlueprintSet: Array<Blueprint>
+  BlueprintSet?: Array<Blueprint>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

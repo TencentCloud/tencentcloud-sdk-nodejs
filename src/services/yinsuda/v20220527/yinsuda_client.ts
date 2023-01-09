@@ -18,13 +18,14 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  ApplyChorusResponse,
   KTVBPMInfo,
   DescribeKTVSuggestionsResponse,
   KTVMatchRuleMusicInfo,
   JoinRoomInput,
   DestroyKTVRobotResponse,
   MusicAlbumCoverInfo,
-  AMEMusicBaseInfo,
+  CreateKTVRobotRequest,
   KTVSuggestionInfo,
   SyncKTVRobotCommandRequest,
   DescribeKTVPlaylistDetailRequest,
@@ -35,6 +36,7 @@ import {
   DescribeKTVPlaylistsResponse,
   DescribeKTVPlaylistsRequest,
   DescribeKTVPlaylistDetailResponse,
+  SyncKTVRobotCommandResponse,
   SetDestroyModeCommandInput,
   SetAudioParamCommandInput,
   KTVMatchMusic,
@@ -42,7 +44,7 @@ import {
   DescribeKTVRobotsResponse,
   KTVTagGroupInfo,
   BatchDescribeKTVMusicDetailsRequest,
-  CreateKTVRobotRequest,
+  AMEMusicBaseInfo,
   DescribeKTVMusicsByTagResponse,
   KTVTagInfo,
   MusicAlbumInfo,
@@ -54,7 +56,7 @@ import {
   DescribeKTVTagsResponse,
   ChorusClip,
   SetPlaylistCommandInput,
-  SyncKTVRobotCommandResponse,
+  ApplyChorusRequest,
   BatchDescribeKTVMusicDetailsResponse,
   KTVMatchRule,
   KTVMusicBaseInfo,
@@ -157,6 +159,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeKTVPlaylistsResponse) => void
   ): Promise<DescribeKTVPlaylistsResponse> {
     return this.request("DescribeKTVPlaylists", req, cb)
+  }
+
+  /**
+   * 申请合唱相关信息，用于标记用户的演唱是在合唱场景下。
+   */
+  async ApplyChorus(
+    req: ApplyChorusRequest,
+    cb?: (error: string, rep: ApplyChorusResponse) => void
+  ): Promise<ApplyChorusResponse> {
+    return this.request("ApplyChorus", req, cb)
   }
 
   /**

@@ -1996,6 +1996,12 @@ export interface LoadBalancer {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   LoadBalancerPassToTarget: boolean
+
+  /**
+      * 负载均衡实例的IPv6地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AddressIPv6: string
 }
 
 /**
@@ -3908,7 +3914,7 @@ export interface CreateLoadBalancerResponse {
       * 由负载均衡实例ID组成的数组
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  LoadBalancerIds?: Array<string>
+  LoadBalancerIds: Array<string>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -6412,6 +6418,16 @@ export interface CreateLoadBalancerRequest {
    * 安全组。
    */
   SecurityGroups?: Array<string>
+
+  /**
+   * 仅适用于公网负载均衡。IP版本，可取值：IPV4、IPv6FullChain，默认值 IPV4。说明：取值为IPv6FullChain，表示为IPv6版本。
+   */
+  AddressIPVersion?: string
+
+  /**
+   * 在购买IPV6负载均衡实例的情况下，必须指定子网 ID, 此参数必填。
+   */
+  SubnetId?: string
 }
 
 /**

@@ -6018,7 +6018,7 @@ off：不支持
       */
     QnPrivateAccess: QnPrivateAccess;
     /**
-      * HTTPS服务
+      * HTTPS服务，缺省时默认开启
 注意：此字段可能返回 null，表示取不到有效值。
       */
     HttpsBilling: HttpsBilling;
@@ -8182,11 +8182,11 @@ export interface DescribeDomainsConfigResponse {
     RequestId?: string;
 }
 /**
- * 支持 https 请求开关，若关闭，下发配置拦截https请求
+ * HTTPS服务，若关闭，下发配置拦截https请求，开启时会产生计费
  */
 export interface HttpsBilling {
     /**
-      * HTTPS服务
+      * HTTPS服务，缺省时默认开启【会产生计费】
       */
     Switch: string;
 }

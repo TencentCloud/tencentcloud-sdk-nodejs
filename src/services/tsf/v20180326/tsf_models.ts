@@ -12771,7 +12771,7 @@ export interface DescribeContainerGroupsRequest {
   SearchWord?: string
 
   /**
-   * 分组所属应用ID
+   * 分组所属应用ID。必填
    */
   ApplicationId?: string
 

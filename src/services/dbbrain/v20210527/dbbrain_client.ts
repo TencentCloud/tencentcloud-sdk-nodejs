@@ -40,6 +40,7 @@ import {
   DiagHistoryEventItem,
   DescribeProxySessionKillTasksRequest,
   DescribeMySqlProcessListResponse,
+  SessionItem,
   HealthStatus,
   DescribeTopSpaceTablesResponse,
   TaskInfo,
