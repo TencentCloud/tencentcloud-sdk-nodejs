@@ -496,6 +496,19 @@ export interface SparkJobInfo {
     DataEngineStatus: number;
 }
 /**
+ * SuspendResumeDataEngine返回参数结构体
+ */
+export interface SuspendResumeDataEngineResponse {
+    /**
+      * 虚拟集群详细信息
+      */
+    DataEngineName: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DeleteSparkApp请求参数结构体
  */
 export interface DeleteSparkAppRequest {
@@ -3392,6 +3405,19 @@ export interface CreateTasksRequest {
       * 计算引擎名称，不填任务提交到默认集群
       */
     DataEngineName?: string;
+}
+/**
+ * SuspendResumeDataEngine请求参数结构体
+ */
+export interface SuspendResumeDataEngineRequest {
+    /**
+      * 虚拟集群名称
+      */
+    DataEngineName: string;
+    /**
+      * 操作类型 suspend/resume
+      */
+    Operate: string;
 }
 /**
  * DescribeTable返回参数结构体

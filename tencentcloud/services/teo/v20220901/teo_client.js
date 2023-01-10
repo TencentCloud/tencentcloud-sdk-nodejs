@@ -352,6 +352,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeSingleL7AnalysisData", req, cb);
     }
     /**
+     * 本接口（DescribeDDoSAttackData）用于查询DDoS攻击时序数据。
+     */
+    async DescribeDDoSAttackData(req, cb) {
+        return this.request("DescribeDDoSAttackData", req, cb);
+    }
+    /**
      * 修改Web&Bot安全配置。
      */
     async ModifySecurityPolicy(req, cb) {

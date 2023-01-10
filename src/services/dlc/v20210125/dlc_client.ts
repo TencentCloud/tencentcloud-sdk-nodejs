@@ -36,6 +36,7 @@ import {
   CreateTasksInOrderResponse,
   DescribeTablesResponse,
   SparkJobInfo,
+  SuspendResumeDataEngineResponse,
   DeleteSparkAppRequest,
   ModifyUserResponse,
   DeleteScriptResponse,
@@ -156,6 +157,7 @@ import {
   DeleteSparkAppResponse,
   AlterDMSPartitionResponse,
   CreateTasksRequest,
+  SuspendResumeDataEngineRequest,
   DescribeTableResponse,
   DescribeSparkAppJobsResponse,
   TableResponseInfo,
@@ -685,6 +687,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteUserResponse) => void
   ): Promise<DeleteUserResponse> {
     return this.request("DeleteUser", req, cb)
+  }
+
+  /**
+   * 本接口用于控制暂停或恢复数据引擎
+   */
+  async SuspendResumeDataEngine(
+    req: SuspendResumeDataEngineRequest,
+    cb?: (error: string, rep: SuspendResumeDataEngineResponse) => void
+  ): Promise<SuspendResumeDataEngineResponse> {
+    return this.request("SuspendResumeDataEngine", req, cb)
   }
 
   /**

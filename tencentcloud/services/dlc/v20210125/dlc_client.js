@@ -322,6 +322,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteUser", req, cb);
     }
     /**
+     * 本接口用于控制暂停或恢复数据引擎
+     */
+    async SuspendResumeDataEngine(req, cb) {
+        return this.request("SuspendResumeDataEngine", req, cb);
+    }
+    /**
      * 本接口（DescribeDatabases）用于查询数据库列表。
      */
     async DescribeDatabases(req, cb) {

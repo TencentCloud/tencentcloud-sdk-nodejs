@@ -207,6 +207,7 @@ import {
   DeleteContainerGroupResponse,
   DeleteServerlessGroupResponse,
   DeleteImageTagsResponse,
+  DeliveryKafkaInfo,
   GroupUnitApiDailyUseStatistics,
   DisableUnitRouteResponse,
   ExecuteTaskRequest,

@@ -558,6 +558,16 @@ it("teo.v20220901.DescribeSingleL7AnalysisData", async function () {
     }
 })
 
+it("teo.v20220901.DescribeDDoSAttackData", async function () {
+    try {
+       const data = await client.DescribeDDoSAttackData({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("teo.v20220901.ModifySecurityPolicy", async function () {
     try {
        const data = await client.ModifySecurityPolicy({})

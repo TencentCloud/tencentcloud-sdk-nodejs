@@ -6083,6 +6083,8 @@ export interface VerifyOfdVatInvoiceOCRResponse {
       * 发票类型
 026:增值税电子普通发票
 028:增值税电子专用发票
+010:电子发票（普通发票）
+020:电子发票（增值税专用发票）
       */
   Type?: string
 

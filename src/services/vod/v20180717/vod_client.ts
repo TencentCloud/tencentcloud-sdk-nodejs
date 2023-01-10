@@ -602,6 +602,7 @@ import {
   CreateSubAppIdRequest,
   DescribeProcedureTemplatesResponse,
   SearchMediaRequest,
+  DynamicRangeInfo,
   CreateSampleSnapshotTemplateRequest,
   MediaContentReviewOcrTextSegmentItem,
   AudioVolumeParam,

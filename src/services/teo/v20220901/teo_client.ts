@@ -45,6 +45,7 @@ import {
   DescribeWebManagedRulesHitRuleDetailRequest,
   AdvancedFilter,
   DeleteApplicationProxyRequest,
+  DescribeDDoSAttackDataResponse,
   ModifySecurityWafGroupPolicyRequest,
   DescribeZoneSettingRequest,
   DescribeClientRuleListResponse,
@@ -177,6 +178,7 @@ import {
   CreateReplayTaskRequest,
   DescribeWebProtectionHitRuleDetailResponse,
   Identification,
+  DescribeDDoSAttackDataRequest,
   CachePrefresh,
   DescribeWebProtectionClientIpListResponse,
   DescribeTimingL7AnalysisDataResponse,
@@ -862,6 +864,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSingleL7AnalysisDataResponse) => void
   ): Promise<DescribeSingleL7AnalysisDataResponse> {
     return this.request("DescribeSingleL7AnalysisData", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeDDoSAttackData）用于查询DDoS攻击时序数据。
+   */
+  async DescribeDDoSAttackData(
+    req: DescribeDDoSAttackDataRequest,
+    cb?: (error: string, rep: DescribeDDoSAttackDataResponse) => void
+  ): Promise<DescribeDDoSAttackDataResponse> {
+    return this.request("DescribeDDoSAttackData", req, cb)
   }
 
   /**

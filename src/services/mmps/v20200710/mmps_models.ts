@@ -934,6 +934,24 @@ export interface AppInfoItem {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   HighRiskCount: number
+
+  /**
+      * 隐私申明文件名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PrivacyTextName?: string
+
+  /**
+      * 软件MD5
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SoftwareMD5?: string
+
+  /**
+      * 隐私文本MD5
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PrivacyTextMD5?: string
 }
 
 /**
@@ -1097,6 +1115,12 @@ export interface AppTaskData {
    * 任务完成时间(更新时间)
    */
   EndTime: string
+
+  /**
+      * 联系人信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ContactName?: string
 }
 
 /**

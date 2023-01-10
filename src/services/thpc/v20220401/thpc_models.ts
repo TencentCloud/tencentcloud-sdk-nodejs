@@ -170,6 +170,21 @@ export interface AddClusterStorageOptionResponse {
 }
 
 /**
+ * 集群存储选项概览信息。
+ */
+export interface StorageOptionOverview {
+  /**
+   * CFS存储选项概览信息列表。
+   */
+  CFSOptions: Array<CFSOptionOverview>
+
+  /**
+   * GooseFS存储选项概览信息列表。
+   */
+  GooseFSOptions: Array<GooseFSOptionOverview>
+}
+
+/**
  * DeleteCluster返回参数结构体
  */
 export interface DeleteClusterResponse {
@@ -531,9 +546,34 @@ false（默认）：发送正常请求，通过检查后直接创建实例
  */
 export interface DescribeClusterStorageOptionResponse {
   /**
+   * 集群存储选项信息概览。
+   */
+  StorageOption?: StorageOptionOverview
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * GooseFS存储选项概览信息。
+ */
+export interface GooseFSOptionOverview {
+  /**
+   * 文件系统本地挂载路径。
+   */
+  LocalPath: string
+
+  /**
+   * 文件系统远程挂载路径。
+   */
+  RemotePath: string
+
+  /**
+   * 文件系统master的ip和端口。
+   */
+  Masters: Array<string>
 }
 
 /**
@@ -832,6 +872,34 @@ true：发送检查请求，不会创建实例。检查项包括是否填写了�
 false（默认）：发送正常请求，通过检查后直接创建实例
       */
   DryRun?: boolean
+}
+
+/**
+ * CFS存储选项概览信息。
+ */
+export interface CFSOptionOverview {
+  /**
+   * 文件系统本地挂载路径。
+   */
+  LocalPath: string
+
+  /**
+   * 文件系统远程挂载ip及路径。
+   */
+  RemotePath: string
+
+  /**
+      * 文件系统协议类型。
+<li>NFS 3.0。
+<li>NFS 4.0。
+<li>TURBO。
+      */
+  Protocol: string
+
+  /**
+   * 文件系统存储类型，默认值SD；其中 SD 为通用标准型标准型存储， HP为通用性能型存储， TB为turbo标准型， TP 为turbo性能型。
+   */
+  StorageType: string
 }
 
 /**

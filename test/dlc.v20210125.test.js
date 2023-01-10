@@ -508,6 +508,16 @@ it("dlc.v20210125.DeleteUser", async function () {
     }
 })
 
+it("dlc.v20210125.SuspendResumeDataEngine", async function () {
+    try {
+       const data = await client.SuspendResumeDataEngine({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.DescribeDatabases", async function () {
     try {
        const data = await client.DescribeDatabases({})

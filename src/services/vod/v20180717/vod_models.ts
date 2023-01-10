@@ -1911,7 +1911,8 @@ export interface ProcedureReviewAudioVideoTaskInput {
 
   /**
       * 审核的内容，可选值：
-<li>Media：原始音视频。</li>
+<li>Media：原始音视频；</li>
+<li>Cover：封面。</li>
 不填或填空数组时，默认为审核 Media。
       */
   ReviewContents?: Array<string>
@@ -15049,6 +15050,12 @@ export interface MediaVideoStreamItem {
    * 编码标签，仅当 Codec 为 hevc 时有效。
    */
   CodecTag?: string
+
+  /**
+      * 画面动态范围信息。
+<li><font color=red>注意</font>：在 2023-01-10T00:00:00Z 后处理的转码文件，此字段有效。</li>
+      */
+  DynamicRangeInfo: DynamicRangeInfo
 }
 
 /**
@@ -17072,6 +17079,25 @@ export interface SearchMediaRequest {
    * 该字段已无效。
    */
   Vid?: string
+}
+
+/**
+ * 画面动态范围信息。
+ */
+export interface DynamicRangeInfo {
+  /**
+      * 画面动态范围信息。可取值：
+<li>SDR：Standard Dynamic Range 标准动态范围；</li>
+<li>HDR：High Dynamic Range 高动态范围。</li>
+      */
+  Type?: string
+
+  /**
+      * 高动态范围类型，当 Type 为 HDR 时有效。目前支持的可取值：
+<li>hdr10：表示 hdr10 标准；</li>
+<li>hlg：表示 hlg 标准。</li>
+      */
+  HDRType?: string
 }
 
 /**

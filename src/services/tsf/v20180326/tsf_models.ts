@@ -5022,6 +5022,37 @@ false：失败。
 }
 
 /**
+ * kafka投递的topic和path的信息
+ */
+export interface DeliveryKafkaInfo {
+  /**
+      * 投递kafka的topic
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Topic?: string
+
+  /**
+      * 采集日志的path
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Path?: Array<string>
+
+  /**
+      * default，默认换行符分行
+time，按时间分行
+custom, 选了custom那么CustomRule就要填入具体的自定义值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LineRule?: string
+
+  /**
+      * 自定义的分行值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CustomRule?: string
+}
+
+/**
  * 单元化API使用详情统计对象列表
  */
 export interface GroupUnitApiDailyUseStatistics {
@@ -6148,6 +6179,42 @@ export interface KafkaDeliveryConfig {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   LineRule: string
+
+  /**
+      * 是否需要认证
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EnableAuth: boolean
+
+  /**
+      * 用户名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Username: string
+
+  /**
+      * 密码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Password: string
+
+  /**
+      * 投递的topic和path
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  KafkaInfos: Array<DeliveryKafkaInfo>
+
+  /**
+      * 是否应用单行规则
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EnableGlobalLineRule: boolean
+
+  /**
+      * 自定义分行规则
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CustomRule: string
 }
 
 /**
@@ -12708,6 +12775,12 @@ export interface ApiDetailInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Description: string
+
+  /**
+      * API路径匹配类型。normal：普通API；wildcard：通配API。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ApiMatchType: string
 }
 
 /**

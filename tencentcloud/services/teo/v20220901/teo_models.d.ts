@@ -633,6 +633,24 @@ export interface DeleteApplicationProxyRequest {
     ProxyId: string;
 }
 /**
+ * DescribeDDoSAttackData返回参数结构体
+ */
+export interface DescribeDDoSAttackDataResponse {
+    /**
+      * 查询结果的总条数。
+      */
+    TotalCount: number;
+    /**
+      * DDoS攻击数据内容列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Data: Array<SecEntry>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * ModifySecurityWafGroupPolicy请求参数结构体
  */
 export interface ModifySecurityWafGroupPolicyRequest {
@@ -3926,6 +3944,50 @@ export interface Identification {
       * 站点归属权校验：文件校验信息。
       */
     FileAscription: FileAscriptionInfo;
+}
+/**
+ * DescribeDDoSAttackData请求参数结构体
+ */
+export interface DescribeDDoSAttackDataRequest {
+    /**
+      * 开始时间。
+      */
+    StartTime: string;
+    /**
+      * 结束时间。
+      */
+    EndTime: string;
+    /**
+      * 统计指标列表，取值有：
+<li>ddos_attackMaxBandwidth：攻击带宽峰值；</li>
+<li>ddos_attackMaxPackageRate：攻击包速率峰值 ；</li>
+<li>ddos_attackBandwidth：攻击带宽曲线；</li>
+<li>ddos_attackPackageRate：攻击包速率曲线。</li>
+      */
+    MetricNames: Array<string>;
+    /**
+      * 站点集合，不填默认选择全部站点。
+      */
+    ZoneIds?: Array<string>;
+    /**
+      * DDoS策略组ID列表，不填默认选择全部策略ID。
+      */
+    PolicyIds?: Array<number>;
+    /**
+      * 查询时间粒度，取值有：
+<li>min：1分钟；</li>
+<li>5min：5分钟；</li>
+<li>hour：1小时；</li>
+<li>day：1天。</li>不填将根据开始时间与结束时间的间隔自动推算粒度，具体为：1小时范围内以min粒度查询，2天范围内以5min粒度查询，7天范围内以hour粒度查询，超过7天以day粒度查询。
+      */
+    Interval?: string;
+    /**
+      * 数据归属地区，取值有：
+<li>overseas：全球（除中国大陆地区）数据；</li>
+<li>mainland：中国大陆地区数据；</li>
+<li>global：全球数据。</li>不填默认取值为global。
+      */
+    Area?: string;
 }
 /**
  * 缓存预刷新
