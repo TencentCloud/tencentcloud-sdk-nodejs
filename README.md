@@ -38,10 +38,11 @@ const CvmClient = tencentcloud.cvm.v20170312.Client
 
 // 实例化要请求产品(以cvm为例)的client对象
 const client = new CvmClient({
-  // 腾讯云认证信息
+  // 为了保护密钥安全，建议将密钥设置在环境变量中或者配置文件中，请参考本文凭证管理章节。
+  // 硬编码密钥到代码中有可能随代码泄露而暴露，有安全隐患，并不推荐。
   credential: {
-    secretId: "secretId",
-    secretKey: "secretKey",
+    secretId: process.env.TENCENTCLOUD_SECRET_ID,
+    secretKey: process.env.TENCENTCLOUD_SECRET_KEY,
   },
   // 产品地域
   region: "ap-shanghai",
