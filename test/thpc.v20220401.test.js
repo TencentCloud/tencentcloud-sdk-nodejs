@@ -88,6 +88,16 @@ it("thpc.v20220401.AddNodes", async function () {
     }
 })
 
+it("thpc.v20220401.DescribeAutoScalingConfiguration", async function () {
+    try {
+       const data = await client.DescribeAutoScalingConfiguration({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("thpc.v20220401.DescribeClusters", async function () {
     try {
        const data = await client.DescribeClusters({})

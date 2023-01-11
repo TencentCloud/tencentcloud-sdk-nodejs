@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeClustersRequest, SetAutoScalingConfigurationRequest, DeleteNodesResponse, AddClusterStorageOptionResponse, DeleteClusterResponse, CreateClusterResponse, SetAutoScalingConfigurationResponse, CreateClusterRequest, DescribeClusterStorageOptionResponse, BindAutoScalingGroupResponse, DeleteClusterRequest, DescribeClusterActivitiesRequest, AddNodesRequest, DeleteClusterStorageOptionRequest, AddClusterStorageOptionRequest, BindAutoScalingGroupRequest, DescribeClusterStorageOptionRequest, DeleteNodesRequest, DescribeClustersResponse, DeleteClusterStorageOptionResponse, DescribeClusterActivitiesResponse, AddNodesResponse } from "./thpc_models";
+import { DescribeAutoScalingConfigurationResponse, DescribeClusterStorageOptionRequest, DescribeClustersRequest, SetAutoScalingConfigurationRequest, DeleteNodesResponse, AddClusterStorageOptionResponse, DeleteClusterResponse, CreateClusterResponse, SetAutoScalingConfigurationResponse, CreateClusterRequest, DescribeClusterStorageOptionResponse, BindAutoScalingGroupResponse, DeleteClusterRequest, DescribeClusterActivitiesRequest, AddNodesRequest, DeleteClusterStorageOptionRequest, AddClusterStorageOptionRequest, BindAutoScalingGroupRequest, DescribeAutoScalingConfigurationRequest, DeleteNodesRequest, DescribeClustersResponse, DeleteClusterStorageOptionResponse, DescribeClusterActivitiesResponse, AddNodesResponse } from "./thpc_models";
 /**
  * thpc client
  * @class
@@ -35,6 +35,10 @@ export declare class Client extends AbstractClient {
      * 本接口(AddNodes)用于添加一个或者多个计算节点或者登录节点到指定集群。
      */
     AddNodes(req: AddNodesRequest, cb?: (error: string, rep: AddNodesResponse) => void): Promise<AddNodesResponse>;
+    /**
+     * 本接口(DescribeAutoScalingConfiguration)用于查询集群弹性伸缩配置信息。本接口仅适用于弹性伸缩类型为THPC_AS的集群。
+     */
+    DescribeAutoScalingConfiguration(req: DescribeAutoScalingConfigurationRequest, cb?: (error: string, rep: DescribeAutoScalingConfigurationResponse) => void): Promise<DescribeAutoScalingConfigurationResponse>;
     /**
      * 本接口（DescribeClusters）用于查询集群列表。
      */

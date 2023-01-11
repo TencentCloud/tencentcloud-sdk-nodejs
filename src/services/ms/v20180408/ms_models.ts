@@ -1422,42 +1422,42 @@ export interface CreateCosSecKeyInstanceResponse {
   /**
    * COS密钥对应的AppId
    */
-  CosAppid?: number
+  CosAppid: number
 
   /**
    * COS密钥对应的存储桶名
    */
-  CosBucket?: string
+  CosBucket: string
 
   /**
    * 存储桶对应的地域
    */
-  CosRegion?: string
+  CosRegion: string
 
   /**
    * 密钥过期时间
    */
-  ExpireTime?: number
+  ExpireTime: number
 
   /**
    * 密钥ID信息
    */
-  CosId?: string
+  CosId: string
 
   /**
    * 密钥KEY信息
    */
-  CosKey?: string
+  CosKey: string
 
   /**
    * 密钥TOCKEN信息
    */
-  CosTocken?: string
+  CosTocken: string
 
   /**
    * 密钥可访问的文件前缀人。例如：CosPrefix=test/123/666，则该密钥只能操作test/123/666为前缀的文件，例如test/123/666/1.txt
    */
-  CosPrefix?: string
+  CosPrefix: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

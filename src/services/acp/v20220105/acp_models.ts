@@ -411,30 +411,23 @@ export interface CreateAppScanTaskRequest {
 }
 
 /**
- * DescribeScanTaskStatus返回参数结构体
+ * DescribeChannelTaskReportUrl返回参数结构体
  */
-export interface DescribeScanTaskStatusResponse {
+export interface DescribeChannelTaskReportUrlResponse {
   /**
    * 返回值, 0:成功, 其他值请查看“返回值”定义
    */
-  Result: number
+  Result?: number
 
   /**
-   * 0:默认值(待检测/待咨询), 1.检测中,  4:任务完成/咨询完成, 5:任务失败, 6:咨询中;
+   * 诊断报告/堆栈信息/报告json结果下载链接
    */
-  Status: number
+  ReportUrl?: string
 
   /**
-      * 诊断失败的错误信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ErrMsg: string
-
-  /**
-      * 任务流详情
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  FlowSteps: Array<TaskFlowStepsInfo>
+   * 诊断报告/堆栈/报告json结果的名称
+   */
+  ReportTitle?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -475,6 +468,38 @@ export interface DescribeFileTicketResponse {
 }
 
 /**
+ * DescribeScanTaskStatus返回参数结构体
+ */
+export interface DescribeScanTaskStatusResponse {
+  /**
+   * 返回值, 0:成功, 其他值请查看“返回值”定义
+   */
+  Result: number
+
+  /**
+   * 0:默认值(待检测/待咨询), 1.检测中,  4:任务完成/咨询完成, 5:任务失败, 6:咨询中;
+   */
+  Status: number
+
+  /**
+      * 诊断失败的错误信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ErrMsg: string
+
+  /**
+      * 任务流详情
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FlowSteps: Array<TaskFlowStepsInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeScanTaskReportUrl请求参数结构体
  */
 export interface DescribeScanTaskReportUrlRequest {
@@ -502,6 +527,41 @@ export interface DescribeScanTaskReportUrlRequest {
    * 报告类型, 0:诊断报告, 1:堆栈报告, 2:视频证据(预留), 3:报告json结果
    */
   ReportType: number
+}
+
+/**
+ * DescribeChannelTaskReportUrl请求参数结构体
+ */
+export interface DescribeChannelTaskReportUrlRequest {
+  /**
+   * 任务来源, 0:小程序诊断, 1:预留字段(暂未使用), 2:app诊断(android), 3:app漏洞扫描;
+   */
+  Source: number
+
+  /**
+   * 应用平台, 0:android, 1: iOS，2:小程序
+   */
+  Platform: number
+
+  /**
+   * 任务id
+   */
+  TaskID: string
+
+  /**
+   * 任务类型, 0:基础版, 1:专家版, 2:本地化
+   */
+  TaskType: number
+
+  /**
+   * 报告类型, 0:诊断报告, 1:堆栈报告, 2:视频证据(预留), 3:报告json结果
+   */
+  ReportType: number
+
+  /**
+   * 子渠道APP MD5值
+   */
+  AppMD5: string
 }
 
 /**

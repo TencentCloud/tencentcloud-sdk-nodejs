@@ -38,6 +38,16 @@ it("acp.v20220105.CreateAppScanTaskRepeat", async function () {
     }
 })
 
+it("acp.v20220105.DescribeChannelTaskReportUrl", async function () {
+    try {
+       const data = await client.DescribeChannelTaskReportUrl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("acp.v20220105.DescribeResourceUsageInfo", async function () {
     try {
        const data = await client.DescribeResourceUsageInfo({})

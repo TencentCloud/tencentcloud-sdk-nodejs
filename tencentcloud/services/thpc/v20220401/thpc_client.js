@@ -70,6 +70,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AddNodes", req, cb);
     }
     /**
+     * 本接口(DescribeAutoScalingConfiguration)用于查询集群弹性伸缩配置信息。本接口仅适用于弹性伸缩类型为THPC_AS的集群。
+     */
+    async DescribeAutoScalingConfiguration(req, cb) {
+        return this.request("DescribeAutoScalingConfiguration", req, cb);
+    }
+    /**
      * 本接口（DescribeClusters）用于查询集群列表。
      */
     async DescribeClusters(req, cb) {

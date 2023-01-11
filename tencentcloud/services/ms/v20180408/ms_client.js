@@ -58,7 +58,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateBindInstance", req, cb);
     }
     /**
-     * 获取云COS文件存储临时密钥，密钥仅限于临时上传文件，有访问限制和时效性。
+     * 获取云COS文件存储临时密钥，密钥仅限于临时上传文件，有访问限制和时效性，请保管好临时密钥。
      */
     async CreateCosSecKeyInstance(req, cb) {
         return this.request("CreateCosSecKeyInstance", req, cb);

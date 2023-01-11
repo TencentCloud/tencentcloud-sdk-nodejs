@@ -16,6 +16,46 @@
  */
 
 /**
+ * DescribeAutoScalingConfiguration返回参数结构体
+ */
+export interface DescribeAutoScalingConfigurationResponse {
+  /**
+   * 集群ID。
+   */
+  ClusterId?: string
+
+  /**
+   * 任务连续等待时间，队列的任务处于连续等待的时间。单位秒。
+   */
+  ExpansionBusyTime?: number
+
+  /**
+   * 节点连续空闲（未运行作业）时间，一个节点连续处于空闲状态时间。
+   */
+  ShrinkIdleTime?: number
+
+  /**
+   * 扩容队列配置概览列表。
+   */
+  QueueConfigs?: Array<QueueConfigOverview>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeClusterStorageOption请求参数结构体
+ */
+export interface DescribeClusterStorageOptionRequest {
+  /**
+   * 集群ID。
+   */
+  ClusterId: string
+}
+
+/**
  * 集群概览信息。
  */
 export interface ClusterOverview {
@@ -577,6 +617,26 @@ export interface GooseFSOptionOverview {
 }
 
 /**
+ * 描述了实例的计费模式
+ */
+export interface InstanceChargePrepaid {
+  /**
+   * 购买实例的时长，单位：月。取值范围：1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60。
+   */
+  Period: number
+
+  /**
+      * 自动续费标识。取值范围：
+NOTIFY_AND_AUTO_RENEW：通知过期且自动续费
+NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费
+DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费
+
+默认取值：NOTIFY_AND_MANUAL_RENEW。若该参数指定为NOTIFY_AND_AUTO_RENEW，在账户余额充足的情况下，实例到期后将按月自动续费。
+      */
+  RenewFlag?: string
+}
+
+/**
  * 标签键值对。
  */
 export interface Tag {
@@ -933,6 +993,41 @@ export interface AddClusterStorageOptionRequest {
 }
 
 /**
+ * 扩容队列配置概览。
+ */
+export interface QueueConfigOverview {
+  /**
+   * 队列名称。
+   */
+  QueueName?: string
+
+  /**
+   * 队列中弹性节点数量最小值。取值范围0～200。
+   */
+  MinSize?: number
+
+  /**
+   * 队列中弹性节点数量最大值。取值范围0～200。
+   */
+  MaxSize?: number
+
+  /**
+   * 是否开启自动扩容。
+   */
+  EnableAutoExpansion?: boolean
+
+  /**
+   * 是否开启自动缩容。
+   */
+  EnableAutoShrink?: boolean
+
+  /**
+   * 扩容节点配置信息。
+   */
+  ExpansionNodeConfigs?: Array<ExpansionNodeConfigOverview>
+}
+
+/**
  * BindAutoScalingGroup请求参数结构体
  */
 export interface BindAutoScalingGroupRequest {
@@ -1002,29 +1097,68 @@ export interface VirtualPrivateCloud {
 }
 
 /**
- * 描述了实例的计费模式
+ * 扩容节点配置信息概览。
  */
-export interface InstanceChargePrepaid {
+export interface ExpansionNodeConfigOverview {
   /**
-   * 购买实例的时长，单位：月。取值范围：1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60。
-   */
-  Period: number
-
-  /**
-      * 自动续费标识。取值范围：
-NOTIFY_AND_AUTO_RENEW：通知过期且自动续费
-NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费
-DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费
-
-默认取值：NOTIFY_AND_MANUAL_RENEW。若该参数指定为NOTIFY_AND_AUTO_RENEW，在账户余额充足的情况下，实例到期后将按月自动续费。
+      * 节点机型。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-  RenewFlag?: string
+  InstanceType?: string
+
+  /**
+      * 扩容实例所在的位置。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Placement?: Placement
+
+  /**
+      * 节点[计费类型](https://cloud.tencent.com/document/product/213/2180)。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceChargeType?: string
+
+  /**
+      * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月节点的购买时长、是否设置自动续费等属性。若指定节点的付费模式为预付费则该参数必传。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceChargePrepaid?: InstanceChargePrepaid
+
+  /**
+      * 私有网络相关信息配置。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VirtualPrivateCloud?: VirtualPrivateCloud
+
+  /**
+      * 指定有效的[镜像](https://cloud.tencent.com/document/product/213/4940)ID，格式形如`img-xxx`。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ImageId?: string
+
+  /**
+      * 公网带宽相关信息设置。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InternetAccessible?: InternetAccessible
+
+  /**
+      * 节点系统盘配置信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SystemDisk?: SystemDisk
+
+  /**
+      * 节点数据盘配置信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DataDisks?: Array<DataDisk>
 }
 
 /**
- * DescribeClusterStorageOption请求参数结构体
+ * DescribeAutoScalingConfiguration请求参数结构体
  */
-export interface DescribeClusterStorageOptionRequest {
+export interface DescribeAutoScalingConfigurationRequest {
   /**
    * 集群ID。
    */

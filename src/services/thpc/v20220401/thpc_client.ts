@@ -18,6 +18,8 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  DescribeAutoScalingConfigurationResponse,
+  DescribeClusterStorageOptionRequest,
   ClusterOverview,
   DescribeClustersRequest,
   SetAutoScalingConfigurationRequest,
@@ -37,6 +39,7 @@ import {
   CreateClusterRequest,
   DescribeClusterStorageOptionResponse,
   GooseFSOptionOverview,
+  InstanceChargePrepaid,
   Tag,
   LoginNode,
   BindAutoScalingGroupResponse,
@@ -51,10 +54,11 @@ import {
   CFSOptionOverview,
   DeleteClusterStorageOptionRequest,
   AddClusterStorageOptionRequest,
+  QueueConfigOverview,
   BindAutoScalingGroupRequest,
   VirtualPrivateCloud,
-  InstanceChargePrepaid,
-  DescribeClusterStorageOptionRequest,
+  ExpansionNodeConfigOverview,
+  DescribeAutoScalingConfigurationRequest,
   StorageOption,
   InternetAccessible,
   ComputeNode,
@@ -144,6 +148,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AddNodesResponse) => void
   ): Promise<AddNodesResponse> {
     return this.request("AddNodes", req, cb)
+  }
+
+  /**
+   * 本接口(DescribeAutoScalingConfiguration)用于查询集群弹性伸缩配置信息。本接口仅适用于弹性伸缩类型为THPC_AS的集群。
+   */
+  async DescribeAutoScalingConfiguration(
+    req: DescribeAutoScalingConfigurationRequest,
+    cb?: (error: string, rep: DescribeAutoScalingConfigurationResponse) => void
+  ): Promise<DescribeAutoScalingConfigurationResponse> {
+    return this.request("DescribeAutoScalingConfiguration", req, cb)
   }
 
   /**

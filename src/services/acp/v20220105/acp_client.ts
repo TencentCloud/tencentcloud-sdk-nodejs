@@ -26,9 +26,11 @@ import {
   ResourceUsageInfoData,
   TaskFlowStepsInfo,
   CreateAppScanTaskRequest,
-  DescribeScanTaskStatusResponse,
+  DescribeChannelTaskReportUrlResponse,
   DescribeFileTicketResponse,
+  DescribeScanTaskStatusResponse,
   DescribeScanTaskReportUrlRequest,
+  DescribeChannelTaskReportUrlRequest,
   AppTaskData,
   DescribeScanTaskStatusRequest,
   DescribeFileTicketRequest,
@@ -65,6 +67,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateAppScanTaskRepeatResponse) => void
   ): Promise<CreateAppScanTaskRepeatResponse> {
     return this.request("CreateAppScanTaskRepeat", req, cb)
+  }
+
+  /**
+   * 获取子渠道的App合规诊断任务报告url
+   */
+  async DescribeChannelTaskReportUrl(
+    req: DescribeChannelTaskReportUrlRequest,
+    cb?: (error: string, rep: DescribeChannelTaskReportUrlResponse) => void
+  ): Promise<DescribeChannelTaskReportUrlResponse> {
+    return this.request("DescribeChannelTaskReportUrl", req, cb)
   }
 
   /**

@@ -12767,9 +12767,10 @@ export interface TaskSimpleInfo {
     /**
       * 任务类型，取值：
 <li>Procedure：视频处理任务；</li>
-<li>EditMedia：视频编辑任务</li>
-<li>ReduceMediaBitrate：降码率任务</li>
-<li>WechatDistribute：微信发布任务。</li>
+<li>EditMedia：视频编辑任务；</li>
+<li>ReduceMediaBitrate：降码率任务；</li>
+<li>WechatDistribute：微信发布任务；</li>
+<li>ReviewAudioVideo：音视频审核任务。</li>
 兼容 2017 版的任务类型：
 <li>Transcode：视频转码任务；</li>
 <li>SnapshotByTimeOffset：视频截图任务；</li>
@@ -14473,13 +14474,13 @@ export interface SearchMediaRequest {
     FileIds?: Array<string>;
     /**
       * 文件名集合，模糊匹配媒体文件的文件名，匹配度越高，排序越优先。
-<li>单个文件名长度限制：40个字符。</li>
+<li>单个文件名长度限制：100个字符。</li>
 <li>数组长度限制：10。</li>
       */
     Names?: Array<string>;
     /**
       * 文件名前缀，前缀匹配媒体文件的文件名。
-<li>单个文件名前缀长度限制：20个字符。</li>
+<li>单个文件名前缀长度限制：100个字符。</li>
 <li>数组长度限制：10。</li>
       */
     NamePrefixes?: Array<string>;
@@ -14496,8 +14497,8 @@ export interface SearchMediaRequest {
     ClassIds?: Array<number>;
     /**
       * 标签集合，匹配集合中任意元素。
-<li>单个标签长度限制：16个字符。</li>
-<li>数组长度限制：10。</li>
+<li>单个标签长度限制：32个字符。</li>
+<li>数组长度限制：16。</li>
       */
     Tags?: Array<string>;
     /**

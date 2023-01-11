@@ -40,6 +40,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateAppScanTaskRepeat", req, cb);
     }
     /**
+     * 获取子渠道的App合规诊断任务报告url
+     */
+    async DescribeChannelTaskReportUrl(req, cb) {
+        return this.request("DescribeChannelTaskReportUrl", req, cb);
+    }
+    /**
      * 查询应用合规平台用户资源的使用情况
      */
     async DescribeResourceUsageInfo(req, cb) {
