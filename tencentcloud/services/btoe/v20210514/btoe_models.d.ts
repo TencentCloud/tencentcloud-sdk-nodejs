@@ -402,11 +402,11 @@ export interface CreateVideoDepositResponse {
       * 业务ID 透传 长度最大不超过64
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    BusinessId: string;
+    BusinessId?: string;
     /**
       * 请求成功，返回存证编码,用于查询存证后续业务数据
       */
-    EvidenceId: string;
+    EvidenceId?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

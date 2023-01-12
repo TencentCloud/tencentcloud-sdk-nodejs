@@ -9283,6 +9283,11 @@ export interface CompareRule {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Items?: Array<CompareRuleItem>;
+    /**
+      * 周期性模板默认周期，单位秒
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CycleStep?: number;
 }
 /**
  * DescribeIntegrationStatisticsAgentStatus请求参数结构体

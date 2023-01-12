@@ -103,6 +103,7 @@ import {
   DeleteSearchTemplateRequest,
   EmergencyVul,
   ExportReverseShellEventsRequest,
+  BashEventNew,
   DeleteLoginWhiteListResponse,
   DescribeAttackLogsResponse,
   DeleteMalwaresResponse,
@@ -331,6 +332,7 @@ import {
   DescribeScanTaskStatusResponse,
   DescribeProtectNetListRequest,
   DescribeWebPageEventListResponse,
+  DescribeBashEventsNewResponse,
   DeleteProtectDirResponse,
   ModifyBanStatusRequest,
   OsName,
@@ -477,7 +479,7 @@ import {
   DescribeAttackVulTypeListResponse,
   DescribePrivilegeRulesResponse,
   DescribeReverseShellEventsResponse,
-  DescribeSecurityEventsCntResponse,
+  DescribeBashEventsNewRequest,
   DescribeWebPageProtectStatResponse,
   DescribeAssetPortInfoListRequest,
   VulLevelCountInfo,
@@ -598,6 +600,7 @@ import {
   DeleteBaselineStrategyRequest,
   DescribeAssetSystemPackageListRequest,
   MachineTag,
+  DescribeSecurityEventsCntResponse,
   Filters,
   DescribeAssetWebServiceInfoListRequest,
   CreateSearchLogRequest,
@@ -1978,6 +1981,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 导出基线影响主机列表
+   */
+  async ExportBaselineEffectHostList(
+    req: ExportBaselineEffectHostListRequest,
+    cb?: (error: string, rep: ExportBaselineEffectHostListResponse) => void
+  ): Promise<ExportBaselineEffectHostListResponse> {
+    return this.request("ExportBaselineEffectHostList", req, cb)
+  }
+
+  /**
    * 查询木马扫描进度
    */
   async DescribeScanMalwareSchedule(
@@ -1998,13 +2011,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 导出基线影响主机列表
+   * 获取高危命令列表(新)
    */
-  async ExportBaselineEffectHostList(
-    req: ExportBaselineEffectHostListRequest,
-    cb?: (error: string, rep: ExportBaselineEffectHostListResponse) => void
-  ): Promise<ExportBaselineEffectHostListResponse> {
-    return this.request("ExportBaselineEffectHostList", req, cb)
+  async DescribeBashEventsNew(
+    req: DescribeBashEventsNewRequest,
+    cb?: (error: string, rep: DescribeBashEventsNewResponse) => void
+  ): Promise<DescribeBashEventsNewResponse> {
+    return this.request("DescribeBashEventsNew", req, cb)
   }
 
   /**

@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeImageStatRequest, ImageModerationResponse, ImageModerationRequest, DescribeImsListResponse, DescribeImageStatResponse, DescribeImsListRequest } from "./ims_models";
+import { ImageModerationRequest, ImageModerationResponse } from "./ims_models";
 /**
  * ims client
  * @class
@@ -27,12 +27,4 @@ export declare class Client extends AbstractClient {
 </div>
      */
     ImageModeration(req: ImageModerationRequest, cb?: (error: string, rep: ImageModerationResponse) => void): Promise<ImageModerationResponse>;
-    /**
-     * 图片机器审核明细
-     */
-    DescribeImsList(req: DescribeImsListRequest, cb?: (error: string, rep: DescribeImsListResponse) => void): Promise<DescribeImsListResponse>;
-    /**
-     * 控制台识别统计
-     */
-    DescribeImageStat(req: DescribeImageStatRequest, cb?: (error: string, rep: DescribeImageStatResponse) => void): Promise<DescribeImageStatResponse>;
 }

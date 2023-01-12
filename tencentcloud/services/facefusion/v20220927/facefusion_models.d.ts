@@ -117,11 +117,11 @@ export interface FuseFaceResponse {
  */
 export interface FuseFaceRequest {
     /**
-      * 活动 ID，请在人脸融合控制台查看。
+      * 活动 ID，请在<a href="https://console.cloud.tencent.com/facefusion" target="_blank">人脸融合控制台</a>查看。
       */
     ProjectId: string;
     /**
-      * 素材 ID，请在人脸融合控制台查看。
+      * 素材 ID，请在<a href="https://console.cloud.tencent.com/facefusion" target="_blank">人脸融合控制台</a>查看。
       */
     ModelId: string;
     /**

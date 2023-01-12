@@ -149,7 +149,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("PauseSyncJob", req, cb);
     }
     /**
-     * 恢复处于暂停中的数据同步任务。
+     * 恢复处于已暂停状态的数据同步任务。
      */
     async ContinueSyncJob(req, cb) {
         return this.request("ContinueSyncJob", req, cb);

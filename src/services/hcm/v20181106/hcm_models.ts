@@ -20,8 +20,12 @@
  */
 export interface Item {
   /**
-   * 识别的算式是否正确，算式运算结果: ‘YES’:正确 ‘NO’: 错误 ‘NA’: 非法参数
-   */
+      * 识别的算式是否正确，算式运算结果:
+‘YES’:正确 
+‘NO’: 错误 
+‘NA’: 非法参数
+‘EMPTY’: 未作答
+      */
   Item: string
 
   /**
@@ -35,8 +39,9 @@ export interface Item {
   ItemCoord: ItemCoord
 
   /**
-   * 错题推荐答案，算式运算结果正确返回为 ""，算式运算结果错误返回推荐答案 (注:暂不支持多个关系运算符(如 1<10<7)、 无关系运算符(如 frac(1,2)+frac(2,3))、单 位换算(如 1 元=100 角)错题的推荐答案 返回)
-   */
+      * 错题推荐答案，算式运算结果正确返回为 ""，算式运算结果错误返回推荐答案 (注:暂不支持多个关系运算符(如 1<10<7)、 无关系运算符(如 frac(1,2)+frac(2,3))、单 位换算(如 1 元=100 角)错题的推荐答案 返回)
+(注:使用@@标记答案填写区域)
+      */
   Answer: string
 
   /**
@@ -135,18 +140,18 @@ export interface EvaluationResponse {
   /**
    * 图片唯一标识，一张图片一个SessionId；
    */
-  SessionId: string
+  SessionId?: string
 
   /**
       * 识别出的算式信息；
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Items: Array<Item>
+  Items?: Array<Item>
 
   /**
    * 任务 id，用于查询接口
    */
-  TaskId: string
+  TaskId?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

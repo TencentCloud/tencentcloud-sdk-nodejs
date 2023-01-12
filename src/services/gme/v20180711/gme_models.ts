@@ -394,6 +394,12 @@ export interface RoomUser {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   StrRoomId: string
+
+  /**
+      * 房间里用户字符串uin列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  StrUins?: Array<string>
 }
 
 /**
@@ -1152,12 +1158,12 @@ export interface DescribeUserInAndOutTimeResponse {
   /**
    * 用户在房间得进出时间列表
    */
-  InOutList: Array<InOutTimeInfo>
+  InOutList?: Array<InOutTimeInfo>
 
   /**
    * 用户在房间中总时长
    */
-  Duration: number
+  Duration?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1590,7 +1596,7 @@ export interface ModifyAppStatusResponse {
 }
 
 /**
- * 用户进出房间信息
+ * 房间内的事件
  */
 export interface InOutTimeInfo {
   /**

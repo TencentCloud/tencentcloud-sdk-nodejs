@@ -62,6 +62,18 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ChannelCancelMultiFlowSignQRCode", req, cb);
     }
     /**
+     * 查询企业扩展服务授权信息，企业经办人需要时企业超管或者法人
+     */
+    async DescribeExtendedServiceAuthInfo(req, cb) {
+        return this.request("DescribeExtendedServiceAuthInfo", req, cb);
+    }
+    /**
+     * 修改（操作）企业扩展服务 ，企业经办人需要时企业超管或者法人
+     */
+    async ModifyExtendedService(req, cb) {
+        return this.request("ModifyExtendedService", req, cb);
+    }
+    /**
      * 渠道创建文件转换任务
      */
     async ChannelCreateConvertTaskApi(req, cb) {

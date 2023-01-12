@@ -44,20 +44,20 @@ export interface QueryChainMakerDemoBlockTransactionResponse {
       * 区块交易
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result: Array<ChainMakerTransactionResult>;
+    Result?: Array<ChainMakerTransactionResult>;
     /**
       * 区块高度
       */
-    BlockHeight: number;
+    BlockHeight?: number;
     /**
       * 交易数量
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    TxCount: number;
+    TxCount?: number;
     /**
       * 区块时间戳，单位是秒
       */
-    BlockTimestamp: number;
+    BlockTimestamp?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -72,7 +72,7 @@ export interface QueryChainMakerContractRequest {
       */
     ClusterId: string;
     /**
-      * 业务链编号，可在业务链列表中获取
+      * 业务链ID，可在网络概览页获取
       */
     ChainId: string;
     /**
@@ -376,7 +376,7 @@ export interface InvokeChainMakerDemoContractRequest {
       */
     ClusterId: string;
     /**
-      * 业务链编号，可在业务链列表中获取
+      * 业务链ID，可在网络概览页获取
       */
     ChainId: string;
     /**
@@ -547,7 +547,7 @@ export interface QueryChainMakerBlockTransactionRequest {
       */
     ClusterId: string;
     /**
-      * 业务链编号，可在业务链列表中获取
+      * 业务链ID，可在网络概览页获取
       */
     ChainId: string;
     /**
@@ -753,20 +753,20 @@ export interface QueryChainMakerBlockTransactionResponse {
       * 区块交易
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result: Array<ChainMakerTransactionResult>;
+    Result?: Array<ChainMakerTransactionResult>;
     /**
       * 区块高度
       */
-    BlockHeight: number;
+    BlockHeight?: number;
     /**
       * 交易数量
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    TxCount: number;
+    TxCount?: number;
     /**
       * 区块时间戳，单位是秒
       */
-    BlockTimestamp: number;
+    BlockTimestamp?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -867,7 +867,7 @@ export interface InvokeChainMakerContractResponse {
       * 交易结果
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result: ChainMakerContractResult;
+    Result?: ChainMakerContractResult;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -882,7 +882,7 @@ export interface QueryChainMakerDemoBlockTransactionRequest {
       */
     ClusterId: string;
     /**
-      * 业务链编号，可在业务链列表中获取
+      * 业务链ID，可在网络概览页获取
       */
     ChainId: string;
     /**
@@ -965,7 +965,7 @@ export interface QueryChainMakerTransactionResponse {
       * 交易结果
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result: ChainMakerTransactionResult;
+    Result?: ChainMakerTransactionResult;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1223,7 +1223,7 @@ export interface QueryChainMakerDemoContractRequest {
       */
     ClusterId: string;
     /**
-      * 业务链编号，可在业务链列表中获取
+      * 业务链ID，可在网络概览页获取
       */
     ChainId: string;
     /**
@@ -1247,7 +1247,7 @@ export interface QueryChainMakerDemoTransactionResponse {
       * 交易结果
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result: ChainMakerTransactionResult;
+    Result?: ChainMakerTransactionResult;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1292,7 +1292,7 @@ export interface QueryChainMakerDemoTransactionRequest {
       */
     ClusterId: string;
     /**
-      * 业务链编号，可在业务链列表中获取
+      * 业务链ID，可在网络概览页获取
       */
     ChainId: string;
     /**
@@ -1453,7 +1453,7 @@ export interface QueryChainMakerDemoContractResponse {
       * 交易结果
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result: ChainMakerContractResult;
+    Result?: ChainMakerContractResult;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1641,7 +1641,7 @@ export interface QueryChainMakerContractResponse {
       * 交易结果
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result: ChainMakerContractResult;
+    Result?: ChainMakerContractResult;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1719,7 +1719,7 @@ export interface InvokeChainMakerContractRequest {
       */
     ClusterId: string;
     /**
-      * 业务链编号，可在业务链列表中获取
+      * 业务链ID，可在网络概览页获取
       */
     ChainId: string;
     /**
@@ -1765,7 +1765,7 @@ export interface QueryChainMakerTransactionRequest {
       */
     ClusterId: string;
     /**
-      * 业务链编号，可在业务链列表中获取
+      * 业务链ID，可在网络概览页获取
       */
     ChainId: string;
     /**
@@ -1910,7 +1910,7 @@ export interface InvokeChainMakerDemoContractResponse {
       * 交易结果
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result: ChainMakerContractResult;
+    Result?: ChainMakerContractResult;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

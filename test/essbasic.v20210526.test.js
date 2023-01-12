@@ -68,6 +68,26 @@ it("essbasic.v20210526.ChannelCancelMultiFlowSignQRCode", async function () {
     }
 })
 
+it("essbasic.v20210526.DescribeExtendedServiceAuthInfo", async function () {
+    try {
+       const data = await client.DescribeExtendedServiceAuthInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("essbasic.v20210526.ModifyExtendedService", async function () {
+    try {
+       const data = await client.ModifyExtendedService({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("essbasic.v20210526.ChannelCreateConvertTaskApi", async function () {
     try {
        const data = await client.ChannelCreateConvertTaskApi({})

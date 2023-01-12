@@ -148,30 +148,30 @@ export interface DescribeFlowDetailInfoRequest {
 }
 
 /**
- * UploadFiles请求参数结构体
+ * ModifyExtendedService请求参数结构体
  */
-export interface UploadFilesRequest {
+export interface ModifyExtendedServiceRequest {
   /**
-   * 应用相关信息，若是渠道版调用 appid 和proxyappid 必填
+   * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填
    */
   Agent: Agent
 
   /**
-      * 文件对应业务类型
-1. TEMPLATE - 模板； 文件类型：.pdf/.doc/.docx/.html
-2. DOCUMENT - 签署过程及签署后的合同文档/图片控件 文件类型：.pdf/.doc/.docx/.jpg/.png/.xls.xlsx/.html
+      *   扩展服务类型
+  AUTO_SIGN             企业静默签（自动签署）
+  OVERSEA_SIGN          企业与港澳台居民*签署合同
+  MOBILE_CHECK_APPROVER 使用手机号验证签署方身份
+  PAGING_SEAL           骑缝章
+  DOWNLOAD_FLOW         授权渠道下载合同 
       */
-  BusinessType: string
+  ServiceType: string
 
   /**
-   * 上传文件内容数组，最多支持20个文件
-   */
-  FileInfos?: Array<UploadFile>
-
-  /**
-   * 操作者的信息
-   */
-  Operator?: UserInfo
+      * 操作类型 
+OPEN:开通 
+CLOSE:关闭
+      */
+  Operate: string
 }
 
 /**
@@ -1328,6 +1328,33 @@ export interface ChannelCancelMultiFlowSignQRCodeRequest {
 }
 
 /**
+ * UploadFiles请求参数结构体
+ */
+export interface UploadFilesRequest {
+  /**
+   * 应用相关信息，若是渠道版调用 appid 和proxyappid 必填
+   */
+  Agent: Agent
+
+  /**
+      * 文件对应业务类型
+1. TEMPLATE - 模板； 文件类型：.pdf/.doc/.docx/.html
+2. DOCUMENT - 签署过程及签署后的合同文档/图片控件 文件类型：.pdf/.doc/.docx/.jpg/.png/.xls.xlsx/.html
+      */
+  BusinessType: string
+
+  /**
+   * 上传文件内容数组，最多支持20个文件
+   */
+  FileInfos?: Array<UploadFile>
+
+  /**
+   * 操作者的信息
+   */
+  Operator?: UserInfo
+}
+
+/**
  * ChannelDescribeOrganizationSeals请求参数结构体
  */
 export interface ChannelDescribeOrganizationSealsRequest {
@@ -1388,6 +1415,16 @@ export interface ProxyOrganizationOperator {
    * 经办人手机号，大陆手机号输入11位，暂不支持海外手机号。
    */
   Mobile?: string
+}
+
+/**
+ * DescribeExtendedServiceAuthInfo请求参数结构体
+ */
+export interface DescribeExtendedServiceAuthInfoRequest {
+  /**
+   * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填
+   */
+  Agent: Agent
 }
 
 /**
@@ -2023,88 +2060,53 @@ export interface ChannelGetTaskResultApiRequest {
 }
 
 /**
- * 签署链接内容
+ * 此结构体(FlowDetailInfo)描述的是合同(流程)的详细信息
  */
-export interface SignUrlInfo {
+export interface FlowDetailInfo {
   /**
-      * 签署链接，过期时间为30天
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  SignUrl: string
-
-  /**
-      * 合同过期时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Deadline: number
-
-  /**
-      * 当流程为顺序签署此参数有效时，数字越小优先级越高，暂不支持并行签署 可选
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  SignOrder: number
-
-  /**
-      * 签署人编号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  SignId: string
-
-  /**
-      * 自定义用户编号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  CustomUserId: string
-
-  /**
-      * 用户姓名
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Name: string
-
-  /**
-      * 用户手机号码
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Mobile: string
-
-  /**
-      * 签署参与者机构名字
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  OrganizationName: string
-
-  /**
-      * 参与者类型:
-ORGANIZATION 企业经办人
-PERSON 自然人
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ApproverType: string
-
-  /**
-      * 经办人身份证号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  IdCardNumber: string
-
-  /**
-      * 签署链接对应流程Id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 合同(流程)的Id
+   */
   FlowId: string
 
   /**
-      * 企业经办人 用户在渠道的编号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  OpenId: string
+   * 合同(流程)的名字
+   */
+  FlowName: string
 
   /**
-      * 合同组签署链接对应的合同组id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  FlowGroupId: string
+   * 合同(流程)的类型
+   */
+  FlowType: string
+
+  /**
+   * 合同(流程)的状态
+   */
+  FlowStatus: string
+
+  /**
+   * 合同(流程)的信息
+   */
+  FlowMessage: string
+
+  /**
+   * 合同(流程)的创建时间戳
+   */
+  CreateOn: number
+
+  /**
+   * 合同(流程)的签署截止时间戳
+   */
+  DeadLine: number
+
+  /**
+   * 用户自定义数据
+   */
+  CustomData: string
+
+  /**
+   * 合同(流程)的签署人数组
+   */
+  FlowApproverInfos: Array<FlowApproverDetail>
 }
 
 /**
@@ -2219,53 +2221,88 @@ export interface SyncProxyOrganizationOperatorsResponse {
 }
 
 /**
- * 此结构体(FlowDetailInfo)描述的是合同(流程)的详细信息
+ * 签署链接内容
  */
-export interface FlowDetailInfo {
+export interface SignUrlInfo {
   /**
-   * 合同(流程)的Id
-   */
+      * 签署链接，过期时间为30天
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SignUrl: string
+
+  /**
+      * 合同过期时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Deadline: number
+
+  /**
+      * 当流程为顺序签署此参数有效时，数字越小优先级越高，暂不支持并行签署 可选
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SignOrder: number
+
+  /**
+      * 签署人编号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SignId: string
+
+  /**
+      * 自定义用户编号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CustomUserId: string
+
+  /**
+      * 用户姓名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Name: string
+
+  /**
+      * 用户手机号码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Mobile: string
+
+  /**
+      * 签署参与者机构名字
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OrganizationName: string
+
+  /**
+      * 参与者类型:
+ORGANIZATION 企业经办人
+PERSON 自然人
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ApproverType: string
+
+  /**
+      * 经办人身份证号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IdCardNumber: string
+
+  /**
+      * 签署链接对应流程Id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
   FlowId: string
 
   /**
-   * 合同(流程)的名字
-   */
-  FlowName: string
+      * 企业经办人 用户在渠道的编号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OpenId: string
 
   /**
-   * 合同(流程)的类型
-   */
-  FlowType: string
-
-  /**
-   * 合同(流程)的状态
-   */
-  FlowStatus: string
-
-  /**
-   * 合同(流程)的信息
-   */
-  FlowMessage: string
-
-  /**
-   * 合同(流程)的创建时间戳
-   */
-  CreateOn: number
-
-  /**
-   * 合同(流程)的签署截止时间戳
-   */
-  DeadLine: number
-
-  /**
-   * 用户自定义数据
-   */
-  CustomData: string
-
-  /**
-   * 合同(流程)的签署人数组
-   */
-  FlowApproverInfos: Array<FlowApproverDetail>
+      * 合同组签署链接对应的合同组id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FlowGroupId: string
 }
 
 /**
@@ -2298,6 +2335,45 @@ export interface UploadFile {
    * 文件名
    */
   FileName?: string
+}
+
+/**
+ * 企业扩展服务授权信息
+ */
+export interface ExtentServiceAuthInfo {
+  /**
+      * 扩展服务类型
+  AUTO_SIGN             企业静默签（自动签署）
+  OVERSEA_SIGN          企业与港澳台居民*签署合同
+  MOBILE_CHECK_APPROVER 使用手机号验证签署方身份
+  PAGING_SEAL           骑缝章
+  DOWNLOAD_FLOW         授权渠道下载合同 
+      */
+  Type?: string
+
+  /**
+   * 扩展服务名称
+   */
+  Name?: string
+
+  /**
+      * 服务状态 
+ENABLE 开启 
+DISABLE 关闭
+      */
+  Status?: string
+
+  /**
+      * 最近操作人openid（经办人openid）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OperatorOpenId?: string
+
+  /**
+      * 最近操作时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OperateOn?: number
 }
 
 /**
@@ -2689,6 +2765,24 @@ export interface ChannelCreateBoundFlowsResponse {
 }
 
 /**
+ * ModifyExtendedService返回参数结构体
+ */
+export interface ModifyExtendedServiceResponse {
+  /**
+      * 操作跳转链接，有效期24小时
+仅当操作类型是 OPEN 且 扩展服务类型是  AUTO_SIGN 或 DOWNLOAD_FLOW 或者 OVERSEA_SIGN 时返回 ，此时需要经办人(操作人)点击链接完成服务开通操作。若开通操作时没有返回跳转链接，表示无需跳转操作，此时会直接开通服务
+
+操作类型是CLOSE时，不会返回此链接，会直接关闭企业该扩展服务
+      */
+  OperateUrl?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ChannelGetTaskResultApi返回参数结构体
  */
 export interface ChannelGetTaskResultApiResponse {
@@ -2729,6 +2823,22 @@ ProcessTimeout - 转换文件超时
 注意：此字段可能返回 null，表示取不到有效值。
       */
   PreviewUrl: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeExtendedServiceAuthInfo返回参数结构体
+ */
+export interface DescribeExtendedServiceAuthInfoResponse {
+  /**
+      * 企业扩展服务授权信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AuthInfo?: Array<ExtentServiceAuthInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

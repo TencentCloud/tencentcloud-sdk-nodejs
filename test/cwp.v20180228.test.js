@@ -1378,6 +1378,16 @@ it("cwp.v20180228.SeparateMalwares", async function () {
     }
 })
 
+it("cwp.v20180228.ExportBaselineEffectHostList", async function () {
+    try {
+       const data = await client.ExportBaselineEffectHostList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cwp.v20180228.DescribeScanMalwareSchedule", async function () {
     try {
        const data = await client.DescribeScanMalwareSchedule({})
@@ -1398,9 +1408,9 @@ it("cwp.v20180228.DescribeBaselineRule", async function () {
     }
 })
 
-it("cwp.v20180228.ExportBaselineEffectHostList", async function () {
+it("cwp.v20180228.DescribeBashEventsNew", async function () {
     try {
-       const data = await client.ExportBaselineEffectHostList({})
+       const data = await client.DescribeBashEventsNew({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -1978,6 +1978,103 @@ export interface ExportReverseShellEventsRequest {
     Filters?: Array<Filters>;
 }
 /**
+ * 高危命令数据(新)
+ */
+export interface BashEventNew {
+    /**
+      * 数据ID
+      */
+    Id?: number;
+    /**
+      * 云镜ID
+      */
+    Uuid?: string;
+    /**
+      * 主机ID
+      */
+    Quuid?: string;
+    /**
+      * 主机内网IP
+      */
+    HostIp?: string;
+    /**
+      * 执行用户名
+      */
+    User?: string;
+    /**
+      * 平台类型
+      */
+    Platform?: number;
+    /**
+      * 执行命令
+      */
+    BashCmd?: string;
+    /**
+      * 规则ID
+      */
+    RuleId?: number;
+    /**
+      * 规则名称
+      */
+    RuleName?: string;
+    /**
+      * 规则等级：1-高 2-中 3-低
+      */
+    RuleLevel?: number;
+    /**
+      * 处理状态： 0 = 待处理 1= 已处理, 2 = 已加白， 3 = 已忽略
+      */
+    Status?: number;
+    /**
+      * 发生时间
+      */
+    CreateTime?: string;
+    /**
+      * 主机名
+      */
+    MachineName?: string;
+    /**
+      * 0: bash日志 1: 实时监控(雷霆版)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DetectBy?: number;
+    /**
+      * 进程id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Pid?: string;
+    /**
+      * 进程名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Exe?: string;
+    /**
+      * 处理时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ModifyTime?: string;
+    /**
+      * 规则类别  0=系统规则，1=用户规则
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RuleCategory?: number;
+    /**
+      * 自动生成的正则表达式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RegexBashCmd?: string;
+    /**
+      * 0:普通 1:专业版 2:旗舰版
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MachineType?: number;
+    /**
+      * 机器额外信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MachineExtraInfo?: MachineExtraInfo;
+}
+/**
  * DeleteLoginWhiteList返回参数结构体
  */
 export interface DeleteLoginWhiteListResponse {
@@ -7384,6 +7481,23 @@ export interface DescribeWebPageEventListResponse {
     RequestId?: string;
 }
 /**
+ * DescribeBashEventsNew返回参数结构体
+ */
+export interface DescribeBashEventsNewResponse {
+    /**
+      * 总条数
+      */
+    TotalCount: number;
+    /**
+      * 高危命令事件列表
+      */
+    List: Array<BashEventNew>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DeleteProtectDir返回参数结构体
  */
 export interface DeleteProtectDirResponse {
@@ -10988,79 +11102,39 @@ export interface DescribeReverseShellEventsResponse {
     RequestId?: string;
 }
 /**
- * DescribeSecurityEventsCnt返回参数结构体
+ * DescribeBashEventsNew请求参数结构体
  */
-export interface DescribeSecurityEventsCntResponse {
+export interface DescribeBashEventsNewRequest {
     /**
-      * 木马文件相关风险事件
+      * 返回数量，默认为10，最大值为100。
       */
-    Malware: SecurityEventInfo;
+    Limit?: number;
     /**
-      * 登录审计相关风险事件
+      * 过滤条件。
+<li>HostName - String - 是否必填：否 - 主机名</li>
+<li>Hostip - String - 是否必填：否 - 主机内网IP</li>
+<li>HostIp - String - 是否必填：否 - 主机内网IP</li>
+<li>RuleCategory - Int - 是否必填：否 - 策略类型,全部或者单选(0:系统 1:用户)</li>
+<li>RuleName - String - 是否必填：否 - 策略名称</li>
+<li>RuleLevel - Int - 是否必填：否 - 威胁等级,可以多选</li>
+<li>Status - Int - 是否必填：否 - 处理状态,可多选(0:待处理 1:已处理 2:已加白  3:已忽略 4:已删除 5:已拦截)</li>
+<li>DetectBy - Int - 是否必填：否 - 数据来源,可多选(0:bash日志 1:实时监控)</li>
+<li>StartTime - String - 是否必填：否 - 开始时间</li>
+<li>EndTime - String - 是否必填：否 - 结束时间</li>
       */
-    HostLogin: SecurityEventInfo;
+    Filters?: Array<Filter>;
     /**
-      * 密码破解相关风险事件
+      * 偏移量，默认为0。
       */
-    BruteAttack: SecurityEventInfo;
+    Offset?: number;
     /**
-      * 恶意请求相关风险事件
+      * 排序方式：根据请求次数排序：asc-升序/desc-降序
       */
-    RiskDns: SecurityEventInfo;
+    Order?: string;
     /**
-      * 高危命令相关风险事件
+      * 排序字段：CreateTime-发生时间。ModifyTime-处理时间
       */
-    Bash: SecurityEventInfo;
-    /**
-      * 本地提权相关风险事件
-      */
-    PrivilegeRules: SecurityEventInfo;
-    /**
-      * 反弹Shell相关风险事件
-      */
-    ReverseShell: SecurityEventInfo;
-    /**
-      * 应用漏洞风险事件
-      */
-    SysVul: SecurityEventInfo;
-    /**
-      * Web应用漏洞相关风险事件
-      */
-    WebVul: SecurityEventInfo;
-    /**
-      * 应急漏洞相关风险事件
-      */
-    EmergencyVul: SecurityEventInfo;
-    /**
-      * 安全基线相关风险事件
-      */
-    BaseLine: SecurityEventInfo;
-    /**
-      * 攻击检测相关风险事件
-      */
-    AttackLogs: SecurityEventInfo;
-    /**
-      * 受影响机器数
-      */
-    EffectMachineCount: number;
-    /**
-      * 所有事件总数
-      */
-    EventsCount: number;
-    /**
-      * window 系统漏洞事件总数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    WindowVul: SecurityEventInfo;
-    /**
-      * linux系统漏洞事件总数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    LinuxVul: SecurityEventInfo;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    By?: string;
 }
 /**
  * DescribeWebPageProtectStat返回参数结构体
@@ -14473,6 +14547,81 @@ export interface MachineTag {
       * 标签ID
       */
     TagId: number;
+}
+/**
+ * DescribeSecurityEventsCnt返回参数结构体
+ */
+export interface DescribeSecurityEventsCntResponse {
+    /**
+      * 木马文件相关风险事件
+      */
+    Malware: SecurityEventInfo;
+    /**
+      * 登录审计相关风险事件
+      */
+    HostLogin: SecurityEventInfo;
+    /**
+      * 密码破解相关风险事件
+      */
+    BruteAttack: SecurityEventInfo;
+    /**
+      * 恶意请求相关风险事件
+      */
+    RiskDns: SecurityEventInfo;
+    /**
+      * 高危命令相关风险事件
+      */
+    Bash: SecurityEventInfo;
+    /**
+      * 本地提权相关风险事件
+      */
+    PrivilegeRules: SecurityEventInfo;
+    /**
+      * 反弹Shell相关风险事件
+      */
+    ReverseShell: SecurityEventInfo;
+    /**
+      * 应用漏洞风险事件
+      */
+    SysVul: SecurityEventInfo;
+    /**
+      * Web应用漏洞相关风险事件
+      */
+    WebVul: SecurityEventInfo;
+    /**
+      * 应急漏洞相关风险事件
+      */
+    EmergencyVul: SecurityEventInfo;
+    /**
+      * 安全基线相关风险事件
+      */
+    BaseLine: SecurityEventInfo;
+    /**
+      * 攻击检测相关风险事件
+      */
+    AttackLogs: SecurityEventInfo;
+    /**
+      * 受影响机器数
+      */
+    EffectMachineCount: number;
+    /**
+      * 所有事件总数
+      */
+    EventsCount: number;
+    /**
+      * window 系统漏洞事件总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    WindowVul: SecurityEventInfo;
+    /**
+      * linux系统漏洞事件总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LinuxVul: SecurityEventInfo;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等

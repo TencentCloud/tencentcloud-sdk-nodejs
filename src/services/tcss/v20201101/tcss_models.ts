@@ -13678,6 +13678,12 @@ RESULT_PASSED: 通过
 注意：此字段可能返回 null，表示取不到有效值。
       */
   VerifyInfo: string
+
+  /**
+      * 主机实例id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceId: string
 }
 
 /**
@@ -19610,6 +19616,12 @@ RESULT_PASSED: 通过。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   CheckResult: string
+
+  /**
+      * 主机节点的实例id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceId: string
 }
 
 /**

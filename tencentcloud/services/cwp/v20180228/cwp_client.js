@@ -847,6 +847,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SeparateMalwares", req, cb);
     }
     /**
+     * 导出基线影响主机列表
+     */
+    async ExportBaselineEffectHostList(req, cb) {
+        return this.request("ExportBaselineEffectHostList", req, cb);
+    }
+    /**
      * 查询木马扫描进度
      */
     async DescribeScanMalwareSchedule(req, cb) {
@@ -859,10 +865,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBaselineRule", req, cb);
     }
     /**
-     * 导出基线影响主机列表
+     * 获取高危命令列表(新)
      */
-    async ExportBaselineEffectHostList(req, cb) {
-        return this.request("ExportBaselineEffectHostList", req, cb);
+    async DescribeBashEventsNew(req, cb) {
+        return this.request("DescribeBashEventsNew", req, cb);
     }
     /**
      * 本接口 (ExportNonlocalLoginPlaces) 用于导出异地登录事件记录CSV文件。

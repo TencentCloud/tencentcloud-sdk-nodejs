@@ -25,7 +25,7 @@ import {
   ChannelCreateFlowSignReviewRequest,
   AuthFailMessage,
   DescribeFlowDetailInfoRequest,
-  UploadFilesRequest,
+  ModifyExtendedServiceRequest,
   DescribeResourceUrlsByFlowsRequest,
   CreateSealByImageResponse,
   OperateChannelTemplateResponse,
@@ -57,8 +57,10 @@ import {
   OrganizationInfo,
   PdfVerifyResult,
   ChannelCancelMultiFlowSignQRCodeRequest,
+  UploadFilesRequest,
   ChannelDescribeOrganizationSealsRequest,
   ProxyOrganizationOperator,
+  DescribeExtendedServiceAuthInfoRequest,
   FormField,
   FlowInfo,
   UserInfo,
@@ -74,13 +76,14 @@ import {
   ChannelCreateMultiFlowSignQRCodeRequest,
   SignQrCode,
   ChannelGetTaskResultApiRequest,
-  SignUrlInfo,
+  FlowDetailInfo,
   CreateFlowsByTemplatesResponse,
   Recipient,
   SyncProxyOrganizationOperatorsResponse,
-  FlowDetailInfo,
+  SignUrlInfo,
   FlowResourceUrlInfo,
   UploadFile,
+  ExtentServiceAuthInfo,
   Filter,
   ReleasedApprover,
   DescribeUsageRequest,
@@ -98,7 +101,9 @@ import {
   ChannelCreateMultiFlowSignQRCodeResponse,
   ApproverOption,
   ChannelCreateBoundFlowsResponse,
+  ModifyExtendedServiceResponse,
   ChannelGetTaskResultApiResponse,
+  DescribeExtendedServiceAuthInfoResponse,
   Component,
   GetDownloadFlowUrlRequest,
   ChannelBatchCancelFlowsRequest,
@@ -179,6 +184,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ChannelCancelMultiFlowSignQRCodeResponse) => void
   ): Promise<ChannelCancelMultiFlowSignQRCodeResponse> {
     return this.request("ChannelCancelMultiFlowSignQRCode", req, cb)
+  }
+
+  /**
+   * 查询企业扩展服务授权信息，企业经办人需要时企业超管或者法人
+   */
+  async DescribeExtendedServiceAuthInfo(
+    req: DescribeExtendedServiceAuthInfoRequest,
+    cb?: (error: string, rep: DescribeExtendedServiceAuthInfoResponse) => void
+  ): Promise<DescribeExtendedServiceAuthInfoResponse> {
+    return this.request("DescribeExtendedServiceAuthInfo", req, cb)
+  }
+
+  /**
+   * 修改（操作）企业扩展服务 ，企业经办人需要时企业超管或者法人
+   */
+  async ModifyExtendedService(
+    req: ModifyExtendedServiceRequest,
+    cb?: (error: string, rep: ModifyExtendedServiceResponse) => void
+  ): Promise<ModifyExtendedServiceResponse> {
+    return this.request("ModifyExtendedService", req, cb)
   }
 
   /**

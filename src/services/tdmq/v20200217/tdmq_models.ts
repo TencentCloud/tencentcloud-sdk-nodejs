@@ -5532,7 +5532,7 @@ export interface CreateRocketMQTopicRequest {
   Namespaces: Array<string>
 
   /**
-   * 主题类型，可选值为Normal, GlobalOrder, PartitionedOrder
+   * 主题类型，可选值为Normal, PartitionedOrder, Transaction, DelayScheduled。
    */
   Type: string
 

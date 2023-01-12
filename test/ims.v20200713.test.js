@@ -28,24 +28,4 @@ it("ims.v20200713.ImageModeration", async function () {
     }
 })
 
-it("ims.v20200713.DescribeImsList", async function () {
-    try {
-       const data = await client.DescribeImsList({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("ims.v20200713.DescribeImageStat", async function () {
-    try {
-       const data = await client.DescribeImageStat({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 })
