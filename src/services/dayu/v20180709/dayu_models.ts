@@ -1337,6 +1337,11 @@ export interface IpBlockData {
    * 解封类型（user：自助解封；auto：自动解封； update：升级解封；bind：绑定高防包解封）
    */
   ActionType: string
+
+  /**
+   * 高防标记，0：非高防，1：高防
+   */
+  ProtectFlag?: number
 }
 
 /**

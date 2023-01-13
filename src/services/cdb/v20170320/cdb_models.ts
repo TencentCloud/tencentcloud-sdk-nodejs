@@ -879,6 +879,16 @@ export interface DescribeDBInstancesRequest {
    * 标签键值
    */
   Tags?: Array<Tag>
+
+  /**
+   * 数据库代理 IP 。
+   */
+  ProxyVips?: Array<string>
+
+  /**
+   * 数据库代理 ID 。
+   */
+  ProxyIds?: Array<string>
 }
 
 /**

@@ -185,11 +185,6 @@ export interface DeleteAlarmNoticeResponse {
  */
 export interface DescribeLogHistogramRequest {
   /**
-   * 要查询的日志主题ID
-   */
-  TopicId: string
-
-  /**
    * 要查询的日志的起始时间，Unix时间戳，单位ms
    */
   From: number
@@ -203,6 +198,11 @@ export interface DescribeLogHistogramRequest {
    * 查询语句
    */
   Query: string
+
+  /**
+   * 要查询的日志主题ID
+   */
+  TopicId?: string
 
   /**
    * 时间间隔: 单位ms  限制性条件：(To-From) / interval <= 200
@@ -1907,12 +1907,17 @@ export interface CreateIndexRequest {
   Status?: boolean
 
   /**
-   * 全文索引系统预置字段标记，默认false。  false:不包含系统预置字段， true:包含系统预置字段
+   * 内置保留字段（`__FILENAME__`，`__HOSTNAME__`及`__SOURCE__`）是否包含至全文索引，默认为false，推荐设置为true
+   * false:不包含
+   * true:包含
    */
   IncludeInternalFields?: boolean
 
   /**
-   * 元数据相关标志位，默认为0。 0：全文索引包括开启键值索引的元数据字段， 1：全文索引包括所有元数据字段，2：全文索引不包括元数据字段。
+   * 元数据字段（前缀为`__TAG__`的字段）是否包含至全文索引，默认为0，推荐设置为1
+   * 0:仅包含开启键值索引的元数据字段
+   * 1:包含所有元数据字段
+   * 2:不包含任何元数据字段
    */
   MetadataFlag?: number
 }
@@ -2897,12 +2902,17 @@ export interface ModifyIndexRequest {
   Rule?: RuleInfo
 
   /**
-   * 全文索引系统预置字段标记，默认false。  false:不包含系统预置字段， true:包含系统预置字段
+   * 内置保留字段（`__FILENAME__`，`__HOSTNAME__`及`__SOURCE__`）是否包含至全文索引，默认为false，推荐设置为true
+   * false:不包含
+   * true:包含
    */
   IncludeInternalFields?: boolean
 
   /**
-   * 元数据相关标志位，默认为0。 0：全文索引包括开启键值索引的元数据字段， 1：全文索引包括所有元数据字段，2：全文索引不包括元数据字段。
+   * 元数据字段（前缀为`__TAG__`的字段）是否包含至全文索引，默认为0，推荐设置为1
+   * 0:仅包含开启键值索引的元数据字段
+   * 1:包含所有元数据字段
+   * 2:不包含任何元数据字段
    */
   MetadataFlag?: number
 }
@@ -4002,11 +4012,6 @@ export interface MonitorTime {
  */
 export interface SearchLogRequest {
   /**
-   * 要检索分析的日志主题ID
-   */
-  TopicId: string
-
-  /**
    * 要检索分析的日志的起始时间，Unix时间戳（毫秒）
    */
   From: number
@@ -4019,8 +4024,14 @@ export interface SearchLogRequest {
   /**
       * 检索分析语句，最大长度为12KB
 语句由 <a href="https://cloud.tencent.com/document/product/614/47044" target="_blank">[检索条件]</a> | <a href="https://cloud.tencent.com/document/product/614/44061" target="_blank">[SQL语句]</a>构成，无需对日志进行统计分析时，可省略其中的管道符<code> | </code>及SQL语句
+使用*或空字符串可查询所有日志
       */
   Query: string
+
+  /**
+   * 要检索分析的日志主题ID
+   */
+  TopicId?: string
 
   /**
       * 表示单次查询返回的原始日志条数，最大值为1000，获取后续日志需使用Context参数
@@ -4293,13 +4304,18 @@ export interface DescribeIndexResponse {
   ModifyTime: string
 
   /**
-      * 全文索引系统预置字段标记，默认false。  false:不包含系统预置字段， true:包含系统预置字段
+      * 内置保留字段（`__FILENAME__`，`__HOSTNAME__`及`__SOURCE__`）是否包含至全文索引
+* false:不包含
+* true:包含
 注意：此字段可能返回 null，表示取不到有效值。
       */
   IncludeInternalFields: boolean
 
   /**
-      * 元数据相关标志位，默认为0。 0：全文索引包括开启键值索引的元数据字段， 1：全文索引包括所有元数据字段，2：全文索引不包括元数据字段。
+      * 元数据字段（前缀为`__TAG__`的字段）是否包含至全文索引
+* 0:仅包含开启键值索引的元数据字段
+* 1:包含所有元数据字段
+* 2:不包含任何元数据字段
 注意：此字段可能返回 null，表示取不到有效值。
       */
   MetadataFlag: number

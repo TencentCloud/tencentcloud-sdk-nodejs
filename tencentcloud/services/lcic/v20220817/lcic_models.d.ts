@@ -233,6 +233,19 @@ export interface LoginUserResponse {
     RequestId?: string;
 }
 /**
+ * DescribeAppDetail请求参数结构体
+ */
+export declare type DescribeAppDetailRequest = null;
+/**
+ * ModifyApp返回参数结构体
+ */
+export interface ModifyAppResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeRoom返回参数结构体
  */
 export interface DescribeRoomResponse {
@@ -403,9 +416,9 @@ export interface RegisterUserResponse {
     RequestId?: string;
 }
 /**
- * ModifyApp返回参数结构体
+ * DescribeAppDetail返回参数结构体
  */
-export interface ModifyAppResponse {
+export interface DescribeAppDetailResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -469,9 +482,13 @@ export interface ModifyAppRequest {
       */
     SdkAppId: number;
     /**
-      * 回调地址。端口目前仅支持80、443
+      * 回调地址。
       */
     Callback?: string;
+    /**
+      * 回调key。
+      */
+    CallbackKey?: string;
 }
 /**
  * CreateSupervisor请求参数结构体

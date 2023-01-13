@@ -29,6 +29,8 @@ import {
   SetAppCustomContentResponse,
   LoginOriginIdResponse,
   LoginUserResponse,
+  DescribeAppDetailRequest,
+  ModifyAppResponse,
   DescribeRoomResponse,
   DeleteRoomResponse,
   AppCustomContent,
@@ -36,7 +38,7 @@ import {
   CreateSupervisorResponse,
   DeleteRoomRequest,
   RegisterUserResponse,
-  ModifyAppResponse,
+  DescribeAppDetailResponse,
   MemberRecord,
   ModifyAppRequest,
   CreateSupervisorRequest,
@@ -57,6 +59,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("lcic.tencentcloudapi.com", "2022-08-17", clientConfig)
+  }
+
+  /**
+   * 获取应用详情
+   */
+  async DescribeAppDetail(
+    req?: DescribeAppDetailRequest,
+    cb?: (error: string, rep: DescribeAppDetailResponse) => void
+  ): Promise<DescribeAppDetailResponse> {
+    return this.request("DescribeAppDetail", req, cb)
   }
 
   /**

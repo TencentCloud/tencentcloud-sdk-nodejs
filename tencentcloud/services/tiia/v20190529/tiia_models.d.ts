@@ -800,6 +800,27 @@ GroupType不支持修改，若不确定适用的服务类型，建议先对不�
     GroupType?: number;
 }
 /**
+ * UpdateImage请求参数结构体
+ */
+export interface UpdateImageRequest {
+    /**
+      * 图库ID。
+      */
+    GroupId: string;
+    /**
+      * 物品ID，最多支持64个字符。
+      */
+    EntityId: string;
+    /**
+      * 图片名称，最多支持64个字符。
+      */
+    PicName?: string;
+    /**
+      * 新的自定义标签，最多不超过10个，格式为JSON。
+      */
+    Tags?: string;
+}
+/**
  * DescribeImages请求参数结构体
  */
 export interface DescribeImagesRequest {
@@ -1604,6 +1625,15 @@ export interface DetectMisbehaviorRequest {
 **注意：图片需要base64编码，并且要去掉编码头部。**
       */
     ImageBase64?: string;
+}
+/**
+ * UpdateImage返回参数结构体
+ */
+export interface UpdateImageResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * CreateGroup返回参数结构体

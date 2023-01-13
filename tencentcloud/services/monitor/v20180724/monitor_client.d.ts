@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { UpdateAlertRuleStateRequest, InstallPluginsRequest, UpdateGrafanaEnvironmentsResponse, ModifyAlarmPolicyInfoRequest, DescribeProductEventListRequest, DescribeServiceDiscoveryResponse, ModifyAlarmNoticeResponse, UpdateServiceDiscoveryRequest, DescribeRecordingRulesResponse, DestroyPrometheusInstanceResponse, DescribeAlertRulesRequest, DescribePrometheusInstancesResponse, DescribePolicyGroupListResponse, BindingPolicyObjectRequest, CreateServiceDiscoveryResponse, UpdateGrafanaWhiteListResponse, DescribeBindingPolicyObjectListResponse, PutMonitorDataResponse, DescribePolicyGroupInfoRequest, EnableSSOCamCheckResponse, BindingPolicyTagResponse, DeleteServiceDiscoveryResponse, CreatePrometheusScrapeJobResponse, ModifyGrafanaInstanceRequest, CreateAlarmPolicyRequest, EnableGrafanaSSOResponse, CreateExporterIntegrationRequest, DescribeAlarmEventsResponse, UpdateExporterIntegrationResponse, DescribePolicyGroupInfoResponse, ModifyAlarmPolicyNoticeRequest, DeleteAlarmPolicyRequest, UpdatePrometheusAgentStatusResponse, DescribeConditionsTemplateListRequest, DescribePrometheusScrapeJobsRequest, CreateAlertRuleResponse, CreatePolicyGroupResponse, UpdateServiceDiscoveryResponse, ModifyAlarmPolicyTasksResponse, DescribeBaseMetricsResponse, CreatePrometheusMultiTenantInstancePostPayModeRequest, DeleteAlertRulesResponse, DeleteGrafanaNotificationChannelResponse, GetMonitorDataRequest, CreateSSOAccountResponse, DescribeAlarmPoliciesResponse, DescribeStatisticDataRequest, SendCustomAlarmMsgRequest, CreateRecordingRuleRequest, ModifyPrometheusInstanceAttributesRequest, DescribeGrafanaEnvironmentsResponse, DescribeServiceDiscoveryRequest, DescribePolicyConditionListRequest, DeletePolicyGroupResponse, DescribeConditionsTemplateListResponse, ResumeGrafanaInstanceRequest, DescribeMonitorTypesRequest, DescribeGrafanaConfigResponse, DeleteGrafanaInstanceRequest, DescribeGrafanaIntegrationsResponse, ModifyAlarmPolicyTasksRequest, DeleteGrafanaIntegrationRequest, ModifyAlarmPolicyStatusRequest, CreatePrometheusMultiTenantInstancePostPayModeResponse, UpdateGrafanaNotificationChannelRequest, UninstallGrafanaPluginsResponse, SetDefaultAlarmPolicyRequest, ModifyAlarmNoticeRequest, CreateServiceDiscoveryRequest, DescribeAlertRulesResponse, DescribeBasicAlarmListResponse, DescribeGrafanaEnvironmentsRequest, DescribeProductListRequest, BindPrometheusManagedGrafanaResponse, DeleteExporterIntegrationRequest, ModifyAlarmReceiversResponse, EnableGrafanaSSORequest, DescribePolicyConditionListResponse, DescribeAllNamespacesResponse, GetPrometheusAgentManagementCommandRequest, ModifyPrometheusInstanceAttributesResponse, DeleteAlarmNoticesResponse, DescribeGrafanaNotificationChannelsRequest, DescribePluginOverviewsRequest, TerminatePrometheusInstancesRequest, DescribeSSOAccountResponse, UpdatePrometheusAgentStatusRequest, InstallPluginsResponse, CreateAlarmPolicyResponse, ModifyAlarmReceiversRequest, DeleteGrafanaNotificationChannelRequest, CreateGrafanaIntegrationRequest, CreatePrometheusAgentResponse, DescribeExporterIntegrationsRequest, ModifyAlarmPolicyConditionResponse, UpgradeGrafanaDashboardRequest, DestroyPrometheusInstanceRequest, UnbindPrometheusManagedGrafanaRequest, DescribePrometheusZonesRequest, UpdateAlertRuleResponse, CreateGrafanaNotificationChannelRequest, ModifyGrafanaInstanceResponse, ModifyPolicyGroupRequest, DescribeAlarmHistoriesResponse, DescribeAlarmMetricsRequest, DescribeBaseMetricsRequest, CreateSSOAccountRequest, UpdatePrometheusScrapeJobRequest, UpdateGrafanaNotificationChannelResponse, UpgradeGrafanaInstanceRequest, DescribeAlarmNoticeCallbacksRequest, DescribeAlarmNoticeCallbacksResponse, DescribePrometheusInstanceUsageRequest, ModifyAlarmPolicyConditionRequest, DeleteSSOAccountRequest, CreateGrafanaIntegrationResponse, BindPrometheusManagedGrafanaRequest, ResumeGrafanaInstanceResponse, DescribeProductEventListResponse, CreateGrafanaInstanceRequest, UpdateAlertRuleStateResponse, DescribePrometheusInstanceUsageResponse, UnbindPrometheusManagedGrafanaResponse, DescribeGrafanaChannelsResponse, DescribeAlarmPolicyResponse, DeleteExporterIntegrationResponse, DescribeMonitorTypesResponse, UpdateRecordingRuleResponse, CreateAlarmNoticeResponse, DescribeAlarmHistoriesRequest, DeletePolicyGroupRequest, DescribePrometheusZonesResponse, ModifyPolicyGroupResponse, DeleteGrafanaIntegrationResponse, DescribeInstalledPluginsRequest, DescribeAlarmMetricsResponse, EnableSSOCamCheckRequest, DeleteGrafanaInstanceResponse, DescribeGrafanaWhiteListRequest, PutMonitorDataRequest, DescribePrometheusAgentsRequest, TerminatePrometheusInstancesResponse, UpdateGrafanaIntegrationResponse, ModifyAlarmPolicyNoticeResponse, BindingPolicyTagRequest, CreateGrafanaInstanceResponse, UpdateAlertRuleRequest, DescribeBindingPolicyObjectListRequest, UnBindingPolicyObjectResponse, SendCustomAlarmMsgResponse, DeleteAlarmNoticesRequest, DescribeExporterIntegrationsResponse, UpgradeGrafanaDashboardResponse, DescribeAllNamespacesRequest, DescribeGrafanaNotificationChannelsResponse, DeleteRecordingRulesRequest, UpdatePrometheusScrapeJobResponse, DescribeAlarmPoliciesRequest, DescribeAccidentEventListResponse, DescribePrometheusScrapeJobsResponse, EnableGrafanaInternetRequest, DescribePluginOverviewsResponse, UpdateSSOAccountRequest, GetPrometheusAgentManagementCommandResponse, ModifyAlarmPolicyInfoResponse, DeleteRecordingRulesResponse, DescribePrometheusAgentsResponse, DescribeAlarmEventsRequest, DeletePrometheusScrapeJobsRequest, UpdateGrafanaIntegrationRequest, UnBindingPolicyObjectRequest, CleanGrafanaInstanceResponse, UpdateDNSConfigRequest, CreateAlertRuleRequest, DescribeDNSConfigResponse, UpdateGrafanaConfigRequest, UpdateGrafanaEnvironmentsRequest, DescribeProductListResponse, DescribeGrafanaIntegrationsRequest, DeleteAlarmPolicyResponse, DeletePrometheusScrapeJobsResponse, DescribeAlarmPolicyRequest, CreatePolicyGroupRequest, DescribeAlarmNoticesResponse, DescribeStatisticDataResponse, CreatePrometheusScrapeJobRequest, CreateExporterIntegrationResponse, DescribeGrafanaChannelsRequest, DescribePolicyGroupListRequest, DescribeBasicAlarmListRequest, DescribeAlarmNoticesRequest, DescribeGrafanaConfigRequest, DescribeGrafanaInstancesRequest, UpdateExporterIntegrationRequest, DescribeAccidentEventListRequest, CreateRecordingRuleResponse, CreateGrafanaNotificationChannelResponse, DescribeAlarmNoticeResponse, UninstallGrafanaPluginsRequest, CleanGrafanaInstanceRequest, UpgradeGrafanaInstanceResponse, DeleteAlertRulesRequest, DescribeSSOAccountRequest, DescribeAlarmNoticeRequest, UninstallGrafanaDashboardRequest, CreatePrometheusAgentRequest, CreateAlarmNoticeRequest, GetMonitorDataResponse, DescribeRecordingRulesRequest, UnBindingAllPolicyObjectRequest, EnableGrafanaInternetResponse, ModifyAlarmPolicyStatusResponse, DescribeGrafanaWhiteListResponse, UpdateSSOAccountResponse, UpdateRecordingRuleRequest, DescribeDNSConfigRequest, UpdateDNSConfigResponse, UpdateGrafanaWhiteListRequest, DeleteServiceDiscoveryRequest, DescribeInstalledPluginsResponse, UpdateGrafanaConfigResponse, DeleteSSOAccountResponse, DescribeGrafanaInstancesResponse, UnBindingAllPolicyObjectResponse, DescribePrometheusInstancesRequest, SetDefaultAlarmPolicyResponse, UninstallGrafanaDashboardResponse, BindingPolicyObjectResponse } from "./monitor_models";
+import { ModifyAlarmPolicyInfoRequest, DescribePolicyGroupListResponse, DescribePrometheusInstancesOverviewRequest, ModifyGrafanaInstanceResponse, ModifyGrafanaInstanceRequest, EnableGrafanaSSOResponse, DescribePolicyGroupInfoResponse, DescribePrometheusScrapeJobsRequest, CreatePolicyGroupResponse, DescribeBaseMetricsResponse, CreatePrometheusMultiTenantInstancePostPayModeRequest, SendCustomAlarmMsgRequest, UnBindingPolicyObjectRequest, DescribePrometheusAgentInstancesRequest, UpdateServiceDiscoveryRequest, DescribeGrafanaIntegrationsResponse, CreatePrometheusMultiTenantInstancePostPayModeResponse, UpdatePrometheusAgentStatusResponse, SyncPrometheusTempResponse, UpdateGrafanaWhiteListResponse, DescribeGrafanaEnvironmentsRequest, DescribeBasicAlarmListResponse, DescribePolicyConditionListResponse, DescribeAllNamespacesResponse, TerminatePrometheusInstancesRequest, InstallPluginsResponse, CreateGrafanaIntegrationRequest, DescribeBindingPolicyObjectListResponse, DescribePrometheusInstanceInitStatusResponse, DescribeProductEventListResponse, DescribeAlarmNoticeCallbacksResponse, DescribePrometheusInstanceUsageRequest, DeletePrometheusScrapeJobsRequest, CreatePrometheusRecordRuleYamlRequest, DescribeAlarmNoticesResponse, CreatePrometheusRecordRuleYamlResponse, ModifyPolicyGroupResponse, UninstallGrafanaPluginsResponse, ModifyPrometheusTempRequest, UpgradeGrafanaInstanceResponse, BindingPolicyTagRequest, DeletePrometheusTempSyncResponse, DescribeDNSConfigRequest, UnBindingPolicyObjectResponse, DescribePrometheusRecordRulesRequest, DescribeExporterIntegrationsResponse, UpdateAlertRuleResponse, EnableGrafanaSSORequest, DescribePrometheusScrapeJobsResponse, EnableGrafanaInternetRequest, DescribePluginOverviewsResponse, DestroyPrometheusInstanceRequest, DeleteSSOAccountRequest, DescribePrometheusAgentInstancesResponse, DescribeProductListResponse, DeletePrometheusTempResponse, DescribeBasicAlarmListRequest, ModifyAlarmPolicyStatusResponse, DescribeGrafanaInstancesRequest, DescribePrometheusTempSyncRequest, DescribeAccidentEventListRequest, CreateRecordingRuleResponse, CreateGrafanaNotificationChannelResponse, DescribeGrafanaNotificationChannelsRequest, CleanGrafanaInstanceRequest, DescribeSSOAccountRequest, UpdateExporterIntegrationResponse, CreateAlarmNoticeRequest, CreateExporterIntegrationResponse, UnBindingAllPolicyObjectRequest, SendCustomAlarmMsgResponse, DescribeGrafanaChannelsRequest, DescribePolicyGroupListRequest, DescribeGrafanaConfigRequest, UpdateRecordingRuleRequest, DescribePrometheusInstancesRequest, InstallPluginsRequest, DescribeAlarmEventsResponse, DescribeServiceDiscoveryResponse, BindingPolicyObjectRequest, CreateServiceDiscoveryResponse, EnableSSOCamCheckResponse, CreatePrometheusScrapeJobResponse, CreateAlarmPolicyRequest, ModifyPrometheusInstanceAttributesResponse, DescribePrometheusAlertPolicyResponse, UpdateGrafanaEnvironmentsRequest, DeleteGrafanaNotificationChannelResponse, DescribeAlarmPoliciesResponse, DescribePrometheusRecordRulesResponse, DescribeMonitorTypesRequest, SetDefaultAlarmPolicyRequest, ModifyAlarmNoticeRequest, DescribeGrafanaWhiteListResponse, DescribeAlertRulesResponse, ResumeGrafanaInstanceRequest, ModifyAlarmReceiversRequest, DescribeExporterIntegrationsRequest, DescribePrometheusInstanceDetailResponse, CreateGrafanaNotificationChannelRequest, UpdatePrometheusScrapeJobRequest, UpdateGrafanaNotificationChannelResponse, CreateGrafanaIntegrationResponse, BindPrometheusManagedGrafanaRequest, CreateGrafanaInstanceRequest, DescribePrometheusInstanceUsageResponse, DeleteExporterIntegrationResponse, UpdateRecordingRuleResponse, CreatePrometheusAgentResponse, DescribePrometheusAlertPolicyRequest, DescribeAlarmMetricsResponse, DescribePrometheusRecordRuleYamlRequest, DescribeGrafanaWhiteListRequest, DescribePrometheusConfigRequest, CreateGrafanaInstanceResponse, UpdateAlertRuleRequest, DeleteAlarmNoticesRequest, DescribeGrafanaNotificationChannelsResponse, ResumeGrafanaInstanceResponse, DescribeAccidentEventListResponse, DescribePrometheusTempSyncResponse, UpdateDNSConfigRequest, DescribeDNSConfigResponse, DeleteRecordingRulesRequest, DeleteAlarmPolicyResponse, UninstallGrafanaPluginsRequest, DeleteSSOAccountResponse, ModifyAlarmPolicyTasksRequest, GetPrometheusAgentManagementCommandRequest, GetPrometheusAgentManagementCommandResponse, DescribeStatisticDataResponse, UpdateDNSConfigResponse, UninstallGrafanaDashboardResponse, UpdateGrafanaNotificationChannelRequest, DestroyPrometheusInstanceResponse, DescribeAlertRulesRequest, DescribePrometheusInstancesResponse, BindingPolicyTagResponse, DeleteServiceDiscoveryResponse, CreateExporterIntegrationRequest, DescribePrometheusInstanceDetailRequest, DescribeConditionsTemplateListRequest, DeletePrometheusRecordRuleYamlResponse, GetMonitorDataRequest, CreateRecordingRuleRequest, DescribeGrafanaEnvironmentsResponse, DescribePolicyConditionListRequest, DeletePolicyGroupResponse, DeleteGrafanaInstanceRequest, DeleteGrafanaIntegrationRequest, CreateServiceDiscoveryRequest, ModifyAlarmReceiversResponse, DescribeSSOAccountResponse, CreateAlarmPolicyResponse, DeleteGrafanaNotificationChannelRequest, ModifyAlarmPolicyConditionResponse, DescribePrometheusInstancesOverviewResponse, UpdateGrafanaIntegrationResponse, DescribeAlarmHistoriesResponse, DescribeAlarmMetricsRequest, CreateSSOAccountRequest, ModifyAlarmPolicyNoticeResponse, UnbindPrometheusManagedGrafanaResponse, DescribeGrafanaChannelsResponse, DescribeAlarmPolicyResponse, DescribeMonitorTypesResponse, UpgradeGrafanaInstanceRequest, CreateAlarmNoticeResponse, DescribeAlarmHistoriesRequest, DescribePrometheusRecordRuleYamlResponse, DeletePolicyGroupRequest, EnableSSOCamCheckRequest, DeleteGrafanaIntegrationResponse, DescribeInstalledPluginsRequest, DescribePrometheusZonesResponse, DescribePrometheusAgentsRequest, DescribePrometheusInstanceInitStatusRequest, DescribeBindingPolicyObjectListRequest, UpgradeGrafanaDashboardResponse, DescribeAllNamespacesRequest, UnbindPrometheusManagedGrafanaRequest, DescribeConditionsTemplateListResponse, CreatePrometheusTempRequest, ModifyAlarmPolicyInfoResponse, DescribeAlarmEventsRequest, ModifyAlarmPolicyConditionRequest, ModifyAlarmNoticeResponse, UpdateGrafanaConfigRequest, DescribeGrafanaIntegrationsRequest, CreatePolicyGroupRequest, CreatePrometheusScrapeJobRequest, CreatePrometheusTempResponse, DescribeAlarmNoticesRequest, RunPrometheusInstanceResponse, UpdateExporterIntegrationRequest, CheckIsPrometheusNewUserRequest, DescribeAlarmNoticeResponse, DeleteAlertRulesRequest, SyncPrometheusTempRequest, GetMonitorDataResponse, DescribeRecordingRulesRequest, UpgradeGrafanaDashboardRequest, DeleteServiceDiscoveryRequest, DescribeInstalledPluginsResponse, UpdateGrafanaConfigResponse, DeleteExporterIntegrationRequest, ModifyPrometheusInstanceAttributesRequest, DescribePrometheusConfigResponse, UpdateGrafanaEnvironmentsResponse, DescribeProductEventListRequest, ModifyPrometheusTempResponse, DescribeRecordingRulesResponse, DeleteRecordingRulesResponse, UpdateGrafanaWhiteListRequest, UpdatePrometheusAgentStatusRequest, DescribeAlarmNoticeCallbacksRequest, CheckIsPrometheusNewUserResponse, ModifyAlarmPolicyTasksResponse, DescribePolicyGroupInfoRequest, UpdateAlertRuleStateResponse, ModifyPrometheusRecordRuleYamlRequest, ModifyAlarmPolicyNoticeRequest, DeleteAlarmPolicyRequest, CreateAlertRuleResponse, PutMonitorDataResponse, DeleteAlertRulesResponse, ModifyAlarmPolicyStatusRequest, DescribeServiceDiscoveryRequest, DescribePrometheusTempResponse, DescribeGrafanaConfigResponse, DescribeAlarmNoticeRequest, DeletePrometheusTempRequest, EnableGrafanaInternetResponse, DescribeProductListRequest, BindPrometheusManagedGrafanaResponse, CreatePrometheusAgentRequest, DeleteAlarmNoticesResponse, DeletePrometheusTempSyncRequest, DescribePluginOverviewsRequest, DescribePrometheusZonesRequest, ModifyPolicyGroupRequest, DescribeBaseMetricsRequest, DescribePrometheusTempRequest, UpdateServiceDiscoveryResponse, UnBindingAllPolicyObjectResponse, DeleteGrafanaInstanceResponse, UpdateSSOAccountRequest, CreateSSOAccountResponse, PutMonitorDataRequest, UpdatePrometheusScrapeJobResponse, DescribeAlarmPoliciesRequest, DescribePrometheusAgentsResponse, CleanGrafanaInstanceResponse, CreateAlertRuleRequest, ModifyPrometheusRecordRuleYamlResponse, DeletePrometheusScrapeJobsResponse, DescribeAlarmPolicyRequest, UninstallGrafanaDashboardRequest, UpdateGrafanaIntegrationRequest, DeletePrometheusRecordRuleYamlRequest, DescribeStatisticDataRequest, TerminatePrometheusInstancesResponse, UpdateSSOAccountResponse, DescribeGrafanaInstancesResponse, RunPrometheusInstanceRequest, UpdateAlertRuleStateRequest, SetDefaultAlarmPolicyResponse, BindingPolicyObjectResponse } from "./monitor_models";
 /**
  * monitor client
  * @class
@@ -52,6 +52,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeProductList(req: DescribeProductListRequest, cb?: (error: string, rep: DescribeProductListResponse) => void): Promise<DescribeProductListResponse>;
     /**
+     * 获取聚合规则列表，包含关联集群内crd资源创建的record rule
+     */
+    DescribePrometheusRecordRules(req: DescribePrometheusRecordRulesRequest, cb?: (error: string, rep: DescribePrometheusRecordRulesResponse) => void): Promise<DescribePrometheusRecordRulesResponse>;
+    /**
      * 更新已授权账号的备注、权限信息，会直接覆盖原有的信息，不传则不会更新。
      */
     UpdateSSOAccount(req: UpdateSSOAccountRequest, cb?: (error: string, rep: UpdateSSOAccountResponse) => void): Promise<UpdateSSOAccountResponse>;
@@ -72,13 +76,17 @@ export declare class Client extends AbstractClient {
      */
     DeleteGrafanaNotificationChannel(req: DeleteGrafanaNotificationChannelRequest, cb?: (error: string, rep: DeleteGrafanaNotificationChannelResponse) => void): Promise<DeleteGrafanaNotificationChannelResponse>;
     /**
+     * 根据维度条件查询监控数据
+     */
+    DescribeStatisticData(req: DescribeStatisticDataRequest, cb?: (error: string, rep: DescribeStatisticDataResponse) => void): Promise<DescribeStatisticDataResponse>;
+    /**
      * 列出 Grafana 的设置，即 grafana.ini 文件内容
      */
     DescribeGrafanaConfig(req: DescribeGrafanaConfigRequest, cb?: (error: string, rep: DescribeGrafanaConfigResponse) => void): Promise<DescribeGrafanaConfigResponse>;
     /**
-     * 批量删除 Prometheus 报警规则
+     * 告警2.0编辑告警策略基本信息，包括策略名、备注
      */
-    DeleteAlertRules(req: DeleteAlertRulesRequest, cb?: (error: string, rep: DeleteAlertRulesResponse) => void): Promise<DeleteAlertRulesResponse>;
+    ModifyAlarmPolicyInfo(req: ModifyAlarmPolicyInfoRequest, cb?: (error: string, rep: ModifyAlarmPolicyInfoResponse) => void): Promise<ModifyAlarmPolicyInfoResponse>;
     /**
      * 启停告警策略
      */
@@ -92,9 +100,9 @@ export declare class Client extends AbstractClient {
      */
     EnableGrafanaSSO(req: EnableGrafanaSSORequest, cb?: (error: string, rep: EnableGrafanaSSOResponse) => void): Promise<EnableGrafanaSSOResponse>;
     /**
-     * 告警2.0编辑告警策略基本信息，包括策略名、备注
+     * 批量删除 Prometheus 报警规则
      */
-    ModifyAlarmPolicyInfo(req: ModifyAlarmPolicyInfoRequest, cb?: (error: string, rep: ModifyAlarmPolicyInfoResponse) => void): Promise<ModifyAlarmPolicyInfoResponse>;
+    DeleteAlertRules(req: DeleteAlertRulesRequest, cb?: (error: string, rep: DeleteAlertRulesResponse) => void): Promise<DeleteAlertRulesResponse>;
     /**
      * 获取基础指标属性
      */
@@ -111,6 +119,10 @@ export declare class Client extends AbstractClient {
      * 云监控告警编辑告警通知模板
      */
     ModifyAlarmNotice(req: ModifyAlarmNoticeRequest, cb?: (error: string, rep: ModifyAlarmNoticeResponse) => void): Promise<ModifyAlarmNoticeResponse>;
+    /**
+     * 获取TMP实例详情
+     */
+    DescribePrometheusInstanceDetail(req: DescribePrometheusInstanceDetailRequest, cb?: (error: string, rep: DescribePrometheusInstanceDetailResponse) => void): Promise<DescribePrometheusInstanceDetailResponse>;
     /**
      * 创建 Prometheus 抓取任务
      */
@@ -133,6 +145,10 @@ export declare class Client extends AbstractClient {
 <a href="https://cloud.tencent.com/document/product/248/48859" target="_blank">Agent 安装</a>。</p>
      */
     DeleteServiceDiscovery(req: DeleteServiceDiscoveryRequest, cb?: (error: string, rep: DeleteServiceDiscoveryResponse) => void): Promise<DeleteServiceDiscoveryResponse>;
+    /**
+     * 策略绑定标签
+     */
+    BindingPolicyTag(req: BindingPolicyTagRequest, cb?: (error: string, rep: BindingPolicyTagResponse) => void): Promise<BindingPolicyTagResponse>;
     /**
      * 创建按量 Prometheus 实例，根据用量收费实例
      */
@@ -157,6 +173,10 @@ export declare class Client extends AbstractClient {
      * 更新 Prometheus 抓取任务
      */
     UpdatePrometheusScrapeJob(req: UpdatePrometheusScrapeJobRequest, cb?: (error: string, rep: UpdatePrometheusScrapeJobResponse) => void): Promise<UpdatePrometheusScrapeJobResponse>;
+    /**
+     * 获取2.0实例初始化任务状态
+     */
+    DescribePrometheusInstanceInitStatus(req: DescribePrometheusInstanceInitStatusRequest, cb?: (error: string, rep: DescribePrometheusInstanceInitStatusResponse) => void): Promise<DescribePrometheusInstanceInitStatusResponse>;
     /**
      * 升级 Grafana 实例
      */
@@ -230,6 +250,10 @@ export declare class Client extends AbstractClient {
      */
     CreateGrafanaIntegration(req: CreateGrafanaIntegrationRequest, cb?: (error: string, rep: CreateGrafanaIntegrationResponse) => void): Promise<CreateGrafanaIntegrationResponse>;
     /**
+     * 拉取模板列表，默认模板将总是在最前面
+     */
+    DescribePrometheusTemp(req: DescribePrometheusTempRequest, cb?: (error: string, rep: DescribePrometheusTempResponse) => void): Promise<DescribePrometheusTempResponse>;
+    /**
      * 设置一个策略为该告警策略类型、该项目的默认告警策略。
 同一项目下相同的告警策略类型，就会被设置为非默认。
      */
@@ -267,6 +291,10 @@ export declare class Client extends AbstractClient {
      */
     ResumeGrafanaInstance(req: ResumeGrafanaInstanceRequest, cb?: (error: string, rep: ResumeGrafanaInstanceResponse) => void): Promise<ResumeGrafanaInstanceResponse>;
     /**
+     * 创建一个云原生Prometheus模板
+     */
+    CreatePrometheusTemp(req: CreatePrometheusTempRequest, cb?: (error: string, rep: CreatePrometheusTempResponse) => void): Promise<CreatePrometheusTempResponse>;
+    /**
      * 列出当前grafana实例的所有授权账号
      */
     DescribeSSOAccount(req: DescribeSSOAccountRequest, cb?: (error: string, rep: DescribeSSOAccountResponse) => void): Promise<DescribeSSOAccountResponse>;
@@ -279,6 +307,10 @@ export declare class Client extends AbstractClient {
      */
     CreatePrometheusAgent(req: CreatePrometheusAgentRequest, cb?: (error: string, rep: CreatePrometheusAgentResponse) => void): Promise<CreatePrometheusAgentResponse>;
     /**
+     * 同步模板到实例或者集群，针对V2版本实例
+     */
+    SyncPrometheusTemp(req: SyncPrometheusTempRequest, cb?: (error: string, rep: SyncPrometheusTempResponse) => void): Promise<SyncPrometheusTempResponse>;
+    /**
      * 创建通知模板
      */
     CreateAlarmNotice(req: CreateAlarmNoticeRequest, cb?: (error: string, rep: CreateAlarmNoticeResponse) => void): Promise<CreateAlarmNoticeResponse>;
@@ -287,9 +319,17 @@ export declare class Client extends AbstractClient {
      */
     UpdateAlertRuleState(req: UpdateAlertRuleStateRequest, cb?: (error: string, rep: UpdateAlertRuleStateResponse) => void): Promise<UpdateAlertRuleStateResponse>;
     /**
+     * 修改模板内容
+     */
+    ModifyPrometheusTemp(req: ModifyPrometheusTempRequest, cb?: (error: string, rep: ModifyPrometheusTempResponse) => void): Promise<ModifyPrometheusTempResponse>;
+    /**
      * 解除实例绑定的 Grafana 可视化实例
      */
     UnbindPrometheusManagedGrafana(req: UnbindPrometheusManagedGrafanaRequest, cb?: (error: string, rep: UnbindPrometheusManagedGrafanaResponse) => void): Promise<UnbindPrometheusManagedGrafanaResponse>;
+    /**
+     * 初始化TMP实例，开启集成中心时调用
+     */
+    RunPrometheusInstance(req: RunPrometheusInstanceRequest, cb?: (error: string, rep: RunPrometheusInstanceResponse) => void): Promise<RunPrometheusInstanceResponse>;
     /**
      * 查询 exporter 集成列表
      */
@@ -311,6 +351,14 @@ export declare class Client extends AbstractClient {
      */
     DescribeDNSConfig(req: DescribeDNSConfigRequest, cb?: (error: string, rep: DescribeDNSConfigResponse) => void): Promise<DescribeDNSConfigResponse>;
     /**
+     * 获取关联目标集群的实例列表
+     */
+    DescribePrometheusAgentInstances(req: DescribePrometheusAgentInstancesRequest, cb?: (error: string, rep: DescribePrometheusAgentInstancesResponse) => void): Promise<DescribePrometheusAgentInstancesResponse>;
+    /**
+     * 删除聚合实例
+     */
+    DeletePrometheusRecordRuleYaml(req: DeletePrometheusRecordRuleYamlRequest, cb?: (error: string, rep: DeletePrometheusRecordRuleYamlResponse) => void): Promise<DeletePrometheusRecordRuleYamlResponse>;
+    /**
      * 本接口 (DescribePrometheusInstances) 用于查询一个或多个实例的详细信息。
 <ul>
 <li>可以根据实例ID、实例名称或者实例状态等信息来查询实例的详细信息</li>
@@ -322,6 +370,10 @@ export declare class Client extends AbstractClient {
      * 列出用户所有的 Grafana 服务
      */
     DescribeGrafanaInstances(req: DescribeGrafanaInstancesRequest, cb?: (error: string, rep: DescribeGrafanaInstancesResponse) => void): Promise<DescribeGrafanaInstancesResponse>;
+    /**
+     * 通过yaml的方式修改Prometheus聚合实例
+     */
+    ModifyPrometheusRecordRuleYaml(req: ModifyPrometheusRecordRuleYamlRequest, cb?: (error: string, rep: ModifyPrometheusRecordRuleYamlResponse) => void): Promise<ModifyPrometheusRecordRuleYamlResponse>;
     /**
      * 更新 Grafana 配置
      */
@@ -338,6 +390,14 @@ export declare class Client extends AbstractClient {
      * 获取平台事件列表
      */
     DescribeAccidentEventList(req: DescribeAccidentEventListRequest, cb?: (error: string, rep: DescribeAccidentEventListResponse) => void): Promise<DescribeAccidentEventListResponse>;
+    /**
+     * 获取模板关联实例信息，针对V2版本实例
+     */
+    DescribePrometheusTempSync(req: DescribePrometheusTempSyncRequest, cb?: (error: string, rep: DescribePrometheusTempSyncResponse) => void): Promise<DescribePrometheusTempSyncResponse>;
+    /**
+     * 判断用户是否为云原生监控新用户，即在任何地域下均未创建过监控实例的用户
+     */
+    CheckIsPrometheusNewUser(req?: CheckIsPrometheusNewUserRequest, cb?: (error: string, rep: CheckIsPrometheusNewUserResponse) => void): Promise<CheckIsPrometheusNewUserResponse>;
     /**
      * 查询告警指标列表
      */
@@ -387,6 +447,10 @@ export declare class Client extends AbstractClient {
      */
     UninstallGrafanaDashboard(req: UninstallGrafanaDashboardRequest, cb?: (error: string, rep: UninstallGrafanaDashboardResponse) => void): Promise<UninstallGrafanaDashboardResponse>;
     /**
+     * 获取2.0实例告警策略列表
+     */
+    DescribePrometheusAlertPolicy(req: DescribePrometheusAlertPolicyRequest, cb?: (error: string, rep: DescribePrometheusAlertPolicyResponse) => void): Promise<DescribePrometheusAlertPolicyResponse>;
+    /**
      * 获取基础策略告警组列表
      */
     DescribePolicyGroupList(req: DescribePolicyGroupListRequest, cb?: (error: string, rep: DescribePolicyGroupListResponse) => void): Promise<DescribePolicyGroupListResponse>;
@@ -433,13 +497,17 @@ export declare class Client extends AbstractClient {
      */
     DescribeGrafanaIntegrations(req: DescribeGrafanaIntegrationsRequest, cb?: (error: string, rep: DescribeGrafanaIntegrationsResponse) => void): Promise<DescribeGrafanaIntegrationsResponse>;
     /**
+     * 拉取Prometheus配置
+     */
+    DescribePrometheusConfig(req: DescribePrometheusConfigRequest, cb?: (error: string, rep: DescribePrometheusConfigResponse) => void): Promise<DescribePrometheusConfigResponse>;
+    /**
      * 获取基础策略组详情
      */
     DescribePolicyGroupInfo(req: DescribePolicyGroupInfoRequest, cb?: (error: string, rep: DescribePolicyGroupInfoResponse) => void): Promise<DescribePolicyGroupInfoResponse>;
     /**
-     * 更新 exporter 集成配置
+     * 拉取Prometheus聚合规则yaml列表
      */
-    UpdateExporterIntegration(req: UpdateExporterIntegrationRequest, cb?: (error: string, rep: UpdateExporterIntegrationResponse) => void): Promise<UpdateExporterIntegrationResponse>;
+    DescribePrometheusRecordRuleYaml(req: DescribePrometheusRecordRuleYamlRequest, cb?: (error: string, rep: DescribePrometheusRecordRuleYamlResponse) => void): Promise<DescribePrometheusRecordRuleYamlResponse>;
     /**
      * 查询所有名字空间
      */
@@ -451,13 +519,13 @@ export declare class Client extends AbstractClient {
      */
     CreateServiceDiscovery(req: CreateServiceDiscoveryRequest, cb?: (error: string, rep: CreateServiceDiscoveryResponse) => void): Promise<CreateServiceDiscoveryResponse>;
     /**
-     * 根据维度条件查询监控数据
+     * 以Yaml的方式创建聚合规则
      */
-    DescribeStatisticData(req: DescribeStatisticDataRequest, cb?: (error: string, rep: DescribeStatisticDataResponse) => void): Promise<DescribeStatisticDataResponse>;
+    CreatePrometheusRecordRuleYaml(req: CreatePrometheusRecordRuleYamlRequest, cb?: (error: string, rep: CreatePrometheusRecordRuleYamlResponse) => void): Promise<CreatePrometheusRecordRuleYamlResponse>;
     /**
-     * 策略绑定标签
+     * 删除一个云原生Prometheus配置模板
      */
-    BindingPolicyTag(req: BindingPolicyTagRequest, cb?: (error: string, rep: BindingPolicyTagResponse) => void): Promise<BindingPolicyTagResponse>;
+    DeletePrometheusTemp(req: DeletePrometheusTempRequest, cb?: (error: string, rep: DeletePrometheusTempResponse) => void): Promise<DeletePrometheusTempResponse>;
     /**
      * 云监控告警获取告警通知模板所有回调URL
      */
@@ -483,6 +551,14 @@ export declare class Client extends AbstractClient {
      */
     TerminatePrometheusInstances(req: TerminatePrometheusInstancesRequest, cb?: (error: string, rep: TerminatePrometheusInstancesResponse) => void): Promise<TerminatePrometheusInstancesResponse>;
     /**
+     * 获取与云监控融合实例列表
+     */
+    DescribePrometheusInstancesOverview(req: DescribePrometheusInstancesOverviewRequest, cb?: (error: string, rep: DescribePrometheusInstancesOverviewResponse) => void): Promise<DescribePrometheusInstancesOverviewResponse>;
+    /**
+     * 解除模板同步，这将会删除目标中该模板所生产的配置，针对V2版本实例
+     */
+    DeletePrometheusTempSync(req: DeletePrometheusTempSyncRequest, cb?: (error: string, rep: DeletePrometheusTempSyncResponse) => void): Promise<DeletePrometheusTempSyncResponse>;
+    /**
      * 列出可安装的所有 Grafana 插件
      */
     DescribePluginOverviews(req?: DescribePluginOverviewsRequest, cb?: (error: string, rep: DescribePluginOverviewsResponse) => void): Promise<DescribePluginOverviewsResponse>;
@@ -490,6 +566,10 @@ export declare class Client extends AbstractClient {
      * 根据条件查询 Prometheus 预聚合规则
      */
     DescribeRecordingRules(req: DescribeRecordingRulesRequest, cb?: (error: string, rep: DescribeRecordingRulesResponse) => void): Promise<DescribeRecordingRulesResponse>;
+    /**
+     * 更新 exporter 集成配置
+     */
+    UpdateExporterIntegration(req: UpdateExporterIntegrationRequest, cb?: (error: string, rep: UpdateExporterIntegrationResponse) => void): Promise<UpdateExporterIntegrationResponse>;
     /**
      * 获取单个告警策略详情
      */

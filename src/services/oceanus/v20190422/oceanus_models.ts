@@ -633,73 +633,85 @@ export interface Savepoint {
       * 主键
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Id: number
+  Id?: number
 
   /**
       * 版本号
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  VersionId: number
+  VersionId?: number
 
   /**
       * 状态 1: Active; 2: Expired; 3: InProgress; 4: Failed; 5: Timeout
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Status: number
+  Status?: number
 
   /**
       * 创建时间
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  CreateTime: number
+  CreateTime?: number
 
   /**
       * 更新时间
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  UpdateTime: number
+  UpdateTime?: number
 
   /**
       * 路径
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Path: string
+  Path?: string
 
   /**
       * 大小
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Size: number
+  Size?: number
 
   /**
       * 快照类型 1: savepoint；2: checkpoint；3: cancelWithSavepoint
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  RecordType: number
+  RecordType?: number
 
   /**
       * 运行作业实例的顺序 ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  JobRuntimeId: number
+  JobRuntimeId?: number
 
   /**
       * 描述
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Description: string
+  Description?: string
 
   /**
       * 固定超时时间
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Timeout: number
+  Timeout?: number
 
   /**
       * 快照 serialId
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  SerialId: string
+  SerialId?: string
+
+  /**
+      * 耗时
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TimeConsuming?: number
+
+  /**
+      * 快照路径状态 1：可用；2：不可用；
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PathStatus?: number
 }
 
 /**

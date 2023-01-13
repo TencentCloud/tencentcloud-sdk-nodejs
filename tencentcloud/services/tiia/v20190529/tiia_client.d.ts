@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DetectProductBetaResponse, DetectChefDressResponse, SearchImageResponse, DetectDisgustRequest, DetectPetRequest, RecognizeCarProResponse, CreateImageRequest, DeleteImagesResponse, CropImageRequest, DetectProductRequest, DetectLabelBetaRequest, DetectLabelResponse, DescribeGroupsRequest, DetectMisbehaviorResponse, AssessQualityResponse, DetectDisgustResponse, DetectChefDressRequest, SearchImageRequest, DetectLabelRequest, RecognizeCarResponse, DetectLabelProResponse, EnhanceImageResponse, AssessQualityRequest, DeleteImagesRequest, CreateGroupRequest, DescribeImagesRequest, DetectProductBetaRequest, DetectSecurityResponse, RecognizeCarRequest, EnhanceImageRequest, CropImageResponse, DetectSecurityRequest, DetectEnvelopeRequest, DetectPetResponse, DetectProductResponse, CreateImageResponse, DetectLabelProRequest, DetectLabelBetaResponse, DetectEnvelopeResponse, RecognizeCarProRequest, DescribeGroupsResponse, DescribeImagesResponse, DetectMisbehaviorRequest, CreateGroupResponse } from "./tiia_models";
+import { DetectProductBetaResponse, DetectChefDressResponse, SearchImageResponse, DetectDisgustRequest, DetectPetRequest, RecognizeCarProResponse, CreateImageRequest, DeleteImagesResponse, CropImageRequest, DetectProductRequest, DetectLabelBetaRequest, DetectLabelResponse, DescribeGroupsRequest, DetectMisbehaviorResponse, AssessQualityResponse, DetectDisgustResponse, DetectChefDressRequest, SearchImageRequest, DetectLabelRequest, RecognizeCarResponse, DetectLabelProResponse, EnhanceImageResponse, AssessQualityRequest, DeleteImagesRequest, CreateGroupRequest, UpdateImageRequest, DescribeImagesRequest, DetectProductBetaRequest, DetectSecurityResponse, RecognizeCarRequest, EnhanceImageRequest, CropImageResponse, DetectSecurityRequest, DetectEnvelopeRequest, DetectPetResponse, DetectProductResponse, CreateImageResponse, DetectLabelProRequest, DetectLabelBetaResponse, DetectEnvelopeResponse, RecognizeCarProRequest, DescribeGroupsResponse, DescribeImagesResponse, DetectMisbehaviorRequest, UpdateImageResponse, CreateGroupResponse } from "./tiia_models";
 /**
  * tiia client
  * @class
@@ -227,8 +227,18 @@ export declare class Client extends AbstractClient {
 >
 - 可前往 [图像搜索](https://cloud.tencent.com/document/product/1589) 产品文档中查看更多产品信息。
 
+
      */
     SearchImage(req: SearchImageRequest, cb?: (error: string, rep: SearchImageResponse) => void): Promise<SearchImageResponse>;
+    /**
+     * 本接口支持根据图库ID、物品ID、图片名称来修改图片信息（暂仅支持修改Tags）
+
+>
+- 可前往 [图像搜索](https://cloud.tencent.com/document/product/1589) 产品文档中查看更多产品信息。
+
+
+     */
+    UpdateImage(req: UpdateImageRequest, cb?: (error: string, rep: UpdateImageResponse) => void): Promise<UpdateImageResponse>;
     /**
      * 传入一张图片，识别出图片中是否存在宠物
 >

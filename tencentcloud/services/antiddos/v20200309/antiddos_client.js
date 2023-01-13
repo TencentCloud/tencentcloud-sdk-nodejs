@@ -306,7 +306,6 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 获取高防包资产实例列表
-
      */
     async DescribeListBGPInstances(req, cb) {
         return this.request("DescribeListBGPInstances", req, cb);

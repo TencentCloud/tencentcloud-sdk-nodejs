@@ -194,7 +194,6 @@ export declare class Client extends AbstractClient {
     DescribeBizHttpStatus(req: DescribeBizHttpStatusRequest, cb?: (error: string, rep: DescribeBizHttpStatusResponse) => void): Promise<DescribeBizHttpStatusResponse>;
     /**
      * 获取高防包资产实例列表
-
      */
     DescribeListBGPInstances(req: DescribeListBGPInstancesRequest, cb?: (error: string, rep: DescribeListBGPInstancesResponse) => void): Promise<DescribeListBGPInstancesResponse>;
     /**

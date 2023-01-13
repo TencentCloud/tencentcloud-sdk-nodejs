@@ -48,6 +48,7 @@ import {
   AssessQualityRequest,
   DeleteImagesRequest,
   CreateGroupRequest,
+  UpdateImageRequest,
   DescribeImagesRequest,
   Rect,
   DetectProductBetaRequest,
@@ -82,6 +83,7 @@ import {
   LemmaInfo,
   DescribeImagesResponse,
   DetectMisbehaviorRequest,
+  UpdateImageResponse,
   CreateGroupResponse,
 } from "./tiia_models"
 
@@ -434,12 +436,28 @@ export class Client extends AbstractClient {
 >   
 - 可前往 [图像搜索](https://cloud.tencent.com/document/product/1589) 产品文档中查看更多产品信息。
 
+
      */
   async SearchImage(
     req: SearchImageRequest,
     cb?: (error: string, rep: SearchImageResponse) => void
   ): Promise<SearchImageResponse> {
     return this.request("SearchImage", req, cb)
+  }
+
+  /**
+     * 本接口支持根据图库ID、物品ID、图片名称来修改图片信息（暂仅支持修改Tags）
+
+>   
+- 可前往 [图像搜索](https://cloud.tencent.com/document/product/1589) 产品文档中查看更多产品信息。
+
+
+     */
+  async UpdateImage(
+    req: UpdateImageRequest,
+    cb?: (error: string, rep: UpdateImageResponse) => void
+  ): Promise<UpdateImageResponse> {
+    return this.request("UpdateImage", req, cb)
   }
 
   /**

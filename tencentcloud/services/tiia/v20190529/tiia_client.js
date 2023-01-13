@@ -287,9 +287,21 @@ class Client extends abstract_client_1.AbstractClient {
 >
 - 可前往 [图像搜索](https://cloud.tencent.com/document/product/1589) 产品文档中查看更多产品信息。
 
+
      */
     async SearchImage(req, cb) {
         return this.request("SearchImage", req, cb);
+    }
+    /**
+     * 本接口支持根据图库ID、物品ID、图片名称来修改图片信息（暂仅支持修改Tags）
+
+>
+- 可前往 [图像搜索](https://cloud.tencent.com/document/product/1589) 产品文档中查看更多产品信息。
+
+
+     */
+    async UpdateImage(req, cb) {
+        return this.request("UpdateImage", req, cb);
     }
     /**
      * 传入一张图片，识别出图片中是否存在宠物

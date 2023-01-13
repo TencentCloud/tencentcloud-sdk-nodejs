@@ -565,7 +565,7 @@ export interface DescribeListBGPInstancesRequest {
       */
     FilterInstanceIdList?: Array<string>;
     /**
-      * 企业版搜索
+      * 企业版搜索,  1：包含重保护航套餐下的企业版列表, 2: 不包含重保护航套餐的企业版列表
       */
     FilterEnterpriseFlag?: number;
     /**
@@ -588,6 +588,10 @@ export interface DescribeListBGPInstancesRequest {
       * 重保护航搜索
       */
     FilterConvoy?: number;
+    /**
+      * 默认false；接口传true，返回数据中不包含高级信息，高级信息包含：InstanceList[0].Usage。
+      */
+    ExcludeAdvancedInfo?: boolean;
 }
 /**
  * 字段值，K-V形式
@@ -982,6 +986,10 @@ export interface L7RuleHealth {
       * 被动探测判定正常状态码，1xx =1, 2xx=2, 3xx=4, 4xx=8,5xx=16，多个状态码值加和
       */
     PassiveStatusCode?: number;
+    /**
+      * 被动探测配置状态，0： 正常，1：配置中，2：配置失败
+      */
+    PassiveStatus?: number;
 }
 /**
  * ModifyPacketFilterConfig返回参数结构体
@@ -4641,11 +4649,11 @@ export interface DescribeListBGPInstancesResponse {
     /**
       * 总数
       */
-    Total: number;
+    Total?: number;
     /**
       * 高防包资产实例列表
       */
-    InstanceList: Array<BGPInstance>;
+    InstanceList?: Array<BGPInstance>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

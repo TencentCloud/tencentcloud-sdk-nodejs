@@ -1,12 +1,16 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CreateRoomRequest, SetAppCustomContentRequest, UnbindDocumentFromRoomResponse, DescribeUserRequest, CreateDocumentResponse, DescribeRoomStatisticsRequest, BindDocumentToRoomRequest, CreateDocumentRequest, SetAppCustomContentResponse, LoginOriginIdResponse, LoginUserResponse, DescribeRoomResponse, DeleteRoomResponse, DescribeRoomStatisticsResponse, CreateSupervisorResponse, DeleteRoomRequest, RegisterUserResponse, ModifyAppResponse, ModifyAppRequest, CreateSupervisorRequest, UnbindDocumentFromRoomRequest, LoginOriginIdRequest, RegisterUserRequest, LoginUserRequest, BindDocumentToRoomResponse, CreateRoomResponse, DescribeUserResponse, DescribeRoomRequest } from "./lcic_models";
+import { CreateRoomRequest, SetAppCustomContentRequest, UnbindDocumentFromRoomResponse, DescribeUserRequest, CreateDocumentResponse, DescribeRoomStatisticsRequest, BindDocumentToRoomRequest, CreateDocumentRequest, SetAppCustomContentResponse, LoginOriginIdResponse, LoginUserResponse, DescribeAppDetailRequest, ModifyAppResponse, DescribeRoomResponse, DeleteRoomResponse, DescribeRoomStatisticsResponse, CreateSupervisorResponse, DeleteRoomRequest, RegisterUserResponse, DescribeAppDetailResponse, ModifyAppRequest, CreateSupervisorRequest, UnbindDocumentFromRoomRequest, LoginOriginIdRequest, RegisterUserRequest, LoginUserRequest, BindDocumentToRoomResponse, CreateRoomResponse, DescribeUserResponse, DescribeRoomRequest } from "./lcic_models";
 /**
  * lcic client
  * @class
  */
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
+    /**
+     * 获取应用详情
+     */
+    DescribeAppDetail(req?: DescribeAppDetailRequest, cb?: (error: string, rep: DescribeAppDetailResponse) => void): Promise<DescribeAppDetailResponse>;
     /**
      * 创建房间内可以使用的文档。
      */

@@ -28,6 +28,12 @@ class Client extends abstract_client_1.AbstractClient {
         super("lcic.tencentcloudapi.com", "2022-08-17", clientConfig);
     }
     /**
+     * 获取应用详情
+     */
+    async DescribeAppDetail(req, cb) {
+        return this.request("DescribeAppDetail", req, cb);
+    }
+    /**
      * 创建房间内可以使用的文档。
      */
     async CreateDocument(req, cb) {

@@ -883,6 +883,10 @@ major 大版本原地升级
       * 最大可容忍的不可用Pod比例
       */
     MaxNotReadyPercent?: number;
+    /**
+      * 是否升级节点运行时，默认false不升级
+      */
+    UpgradeRunTime?: boolean;
 }
 /**
  * 创建集群时，选择安装的扩展组件的信息
@@ -5821,6 +5825,10 @@ export interface CreateClusterVirtualNodePoolRequest {
       */
     SubnetIds?: Array<string>;
     /**
+      * 安全组ID列表
+      */
+    SecurityGroupIds?: Array<string>;
+    /**
       * 虚拟节点label
       */
     Labels?: Array<Label>;
@@ -8191,7 +8199,7 @@ export interface CreateClusterVirtualNodePoolResponse {
     /**
       * 节点池ID
       */
-    NodePoolId: string;
+    NodePoolId?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

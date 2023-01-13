@@ -18,6 +18,16 @@ const client = new tencentcloud.lcic.v20220817.Client({
 })
 describe("lcic.v20220817.test.js", function () {
 
+it("lcic.v20220817.DescribeAppDetail", async function () {
+    try {
+       const data = await client.DescribeAppDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lcic.v20220817.CreateDocument", async function () {
     try {
        const data = await client.CreateDocument({})
