@@ -239,6 +239,12 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
         return this.request("UploadFiles", req, cb);
     }
     /**
+     * 渠道版创建签署链接，需要联系运营人员开白后才可使用
+     */
+    async ChannelCreateFlowSignUrl(req, cb) {
+        return this.request("ChannelCreateFlowSignUrl", req, cb);
+    }
+    /**
      * 此接口（SyncProxyOrganization）用于同步渠道子客企业信息，主要是子客企业的营业执照，便于子客企业开通过程中不用手动上传。若有需要调用此接口，需要在创建控制链接CreateConsoleLoginUrl之后即刻进行调用。
      */
     async SyncProxyOrganization(req, cb) {

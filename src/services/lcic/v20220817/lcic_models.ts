@@ -292,7 +292,17 @@ export interface LoginUserResponse {
 /**
  * DescribeAppDetail请求参数结构体
  */
-export type DescribeAppDetailRequest = null
+export interface DescribeAppDetailRequest {
+  /**
+   * 应用ID
+   */
+  ApplicationId: string
+
+  /**
+   * 开发商ID
+   */
+  DeveloperId: string
+}
 
 /**
  * ModifyApp返回参数结构体
@@ -475,6 +485,11 @@ export interface CreateSupervisorResponse {
 }
 
 /**
+ * 场景配置
+ */
+export type SceneItem = null
+
+/**
  * DeleteRoom请求参数结构体
  */
 export interface DeleteRoomRequest {
@@ -508,6 +523,21 @@ export interface RegisterUserResponse {
  * DescribeAppDetail返回参数结构体
  */
 export interface DescribeAppDetailResponse {
+  /**
+   * SdkAppId
+   */
+  SdkAppId?: string
+
+  /**
+   * 应用配置
+   */
+  AppConfig?: AppConfig
+
+  /**
+   * 场景配置
+   */
+  SceneConfig?: Array<SceneItem>
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -630,29 +660,9 @@ export interface LoginOriginIdRequest {
 }
 
 /**
- * RegisterUser请求参数结构体
+ * 应用配置信息
  */
-export interface RegisterUserRequest {
-  /**
-   * 低代码互动课堂的SdkAppId。
-   */
-  SdkAppId: number
-
-  /**
-   * 用户名称。
-   */
-  Name?: string
-
-  /**
-   * 用户在客户系统的Id，需要在同一应用下唯一。
-   */
-  OriginId?: string
-
-  /**
-   * 用户头像。
-   */
-  Avatar?: string
-}
+export type AppConfig = null
 
 /**
  * LoginUser请求参数结构体
@@ -727,4 +737,29 @@ export interface DescribeRoomRequest {
    * 房间Id。
    */
   RoomId: number
+}
+
+/**
+ * RegisterUser请求参数结构体
+ */
+export interface RegisterUserRequest {
+  /**
+   * 低代码互动课堂的SdkAppId。
+   */
+  SdkAppId: number
+
+  /**
+   * 用户名称。
+   */
+  Name?: string
+
+  /**
+   * 用户在客户系统的Id，需要在同一应用下唯一。
+   */
+  OriginId?: string
+
+  /**
+   * 用户头像。
+   */
+  Avatar?: string
 }

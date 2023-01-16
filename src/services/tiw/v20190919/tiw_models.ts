@@ -214,13 +214,13 @@ export interface StartWhiteboardPushRequest {
   RoomId: number
 
   /**
-      * 用于白板推流服务进入白板房间的用户ID。在没有进行额外指定的情况下，这个用户ID同时会用于IM登录、IM加群、TRTC进房推流等操作。
-用户ID最大长度不能大于60个字节，该ID必须是一个单独的未在SDK中使用的ID，白板推流服务使用这个用户ID进入房间进行白板音视频推流，若该ID和SDK中使用的ID重复，会导致SDK和白板推流服务互踢，影响正常推流。
+      * 用于白板推流服务进入白板房间的用户ID。在没有额外指定`IMAuthParam`和`TRTCAuthParam`的情况下，这个用户ID同时会用于IM登录、IM加群、TRTC进房推流等操作。
+用户ID最大长度不能大于60个字节，该用户ID必须是一个单独的未同时在其他地方使用的用户ID，白板推流服务使用这个用户ID进入房间进行白板音视频推流，若该用户ID和其他地方同时在使用的用户ID重复，会导致白板推流服务与其他使用场景帐号互踢，影响正常推流。
       */
   PushUserId: string
 
   /**
-   * 与PushUserId对应的签名
+   * 与PushUserId对应的IM签名(usersig)。
    */
   PushUserSig: string
 
@@ -337,9 +337,7 @@ SdkAppID = 12345678，RoomID = 12345，PushUserID = push_user_1
   TRTCRoomIdStr?: string
 
   /**
-      * 内测参数，需开通白名单进行体验。
-
-IM鉴权信息参数，用于IM鉴权。
+      * IM鉴权信息参数，用于IM鉴权。
 当白板信令所使用的IM应用与白板应用的SdkAppId不一致时，可以通过此参数提供对应IM应用鉴权信息。
 
 如果提供了此参数，白板推流服务会优先使用此参数指定的SdkAppId作为白板信令的传输通道，否则使用公共参数中的SdkAppId作为白板信令的传输通道。
@@ -347,14 +345,22 @@ IM鉴权信息参数，用于IM鉴权。
   IMAuthParam?: AuthParam
 
   /**
-      * 内测参数，需开通白名单进行体验。
-
-TRTC鉴权信息参数，用于TRTC进房推流鉴权。
+      * TRTC鉴权信息参数，用于TRTC进房推流鉴权。
 当需要推流到的TRTC房间所对应的TRTC应用与白板应用的SdkAppId不一致时，可以通过此参数提供对应的TRTC应用鉴权信息。
 
 如果提供了此参数，白板推流服务会优先使用此参数指定的SdkAppId作为白板推流的目标TRTC应用，否则使用公共参数中的SdkAppId作为白板推流的目标TRTC应用。
       */
   TRTCAuthParam?: AuthParam
+
+  /**
+      * 内测参数，需要提前申请白名单进行体验。
+
+指定白板推流时推流用户进TRTC房间的进房模式。默认为 TRTCAppSceneVideoCall
+
+TRTCAppSceneVideoCall - 视频通话场景，即绝大多数时间都是两人或两人以上视频通话的场景，内部编码器和网络协议优化侧重流畅性，降低通话延迟和卡顿率。
+TRTCAppSceneLIVE - 直播场景，即绝大多数时间都是一人直播，偶尔有多人视频互动的场景，内部编码器和网络协议优化侧重性能和兼容性，性能和清晰度表现更佳。
+      */
+  TRTCEnterRoomMode?: string
 }
 
 /**
@@ -697,13 +703,13 @@ export interface StartWhiteboardPushResponse {
   /**
    * 推流任务Id
    */
-  TaskId: string
+  TaskId?: string
 
   /**
       * 备份任务结果参数
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Backup: string
+  Backup?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1578,6 +1584,18 @@ export interface DescribeTranscodeResponse {
    * 转码压缩文件下载的URL，如果发起文档转码请求参数中`CompressFileType`为空或者不是支持的压缩格式，该参数为空字符串
    */
   CompressFileUrl?: string
+
+  /**
+      * 资源清单文件下载URL(内测体验)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ResourceListUrl?: string
+
+  /**
+      * 文档制作方式(内测体验)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Ext?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

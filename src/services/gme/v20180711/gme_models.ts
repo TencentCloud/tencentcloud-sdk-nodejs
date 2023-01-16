@@ -145,7 +145,7 @@ export interface CreateCustomizationResponse {
   /**
    * 模型ID
    */
-  ModelId: string
+  ModelId?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -211,12 +211,12 @@ export interface DescribeApplicationListResponse {
   /**
    * 获取应用列表返回
    */
-  ApplicationList: Array<ApplicationList>
+  ApplicationList?: Array<ApplicationList>
 
   /**
    * 应用总数
    */
-  Total: number
+  Total?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -231,7 +231,7 @@ export interface CreateScanUserResponse {
   /**
    * 返回结果码
    */
-  ErrorCode: number
+  ErrorCode?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -246,37 +246,37 @@ export interface DescribeRealtimeScanConfigResponse {
   /**
    * 返回结果码，0正常，非0失败
    */
-  ErrorCode: number
+  ErrorCode?: number
 
   /**
    * 应用ID
    */
-  BizId: number
+  BizId?: number
 
   /**
    * 送检类型，0: 全量送审，1: 自定义送审
    */
-  AuditType: number
+  AuditType?: number
 
   /**
    * 用户号正则表达式
    */
-  UserIdRegex: Array<string>
+  UserIdRegex?: Array<string>
 
   /**
    * 房间号正则表达式
    */
-  RoomIdRegex: Array<string>
+  RoomIdRegex?: Array<string>
 
   /**
    * 用户号字符串，逗号分隔，示例："0001,0002,0003"
    */
-  UserIdString: string
+  UserIdString?: string
 
   /**
    * 房间号字符串，逗号分隔，示例："0001,0002,0003"
    */
-  RoomIdString: string
+  RoomIdString?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -480,12 +480,12 @@ export interface ModifyCustomizationResponse {
   /**
    * 返回值。0为成功，非0为失败。
    */
-  ErrorCode: number
+  ErrorCode?: number
 
   /**
    * 模型ID
    */
-  ModelId: string
+  ModelId?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -530,12 +530,12 @@ export interface ModifyCustomizationStateResponse {
   /**
    * 模型ID
    */
-  ModelId: string
+  ModelId?: string
 
   /**
    * 返回值。0为成功，非0为失败。
    */
-  ErrorCode: number
+  ErrorCode?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -709,7 +709,7 @@ export interface DescribeAgeDetectTaskResponse {
   /**
    * 任务ID
    */
-  TaskId: string
+  TaskId?: string
 
   /**
       * 语音检测返回。Results 字段是 JSON 数组，每一个元素包含：
@@ -718,7 +718,7 @@ Url ：该请求中对应的 Url。
 Status ：子任务状态，0:已创建，1:运行中，2:已完成，3:任务异常，4:任务超时。
 Age ：子任务完成后的结果，0:成年人，1:未成年人，100:未知结果。
       */
-  Results: Array<AgeDetectTaskResult>
+  Results?: Array<AgeDetectTaskResult>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -734,7 +734,7 @@ export interface GetCustomizationListResponse {
       * 语音消息转文本热句模型配置
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  CustomizationConfigs: Array<CustomizationConfigs>
+  CustomizationConfigs?: Array<CustomizationConfigs>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -860,7 +860,7 @@ export interface DescribeAppStatisticsResponse {
   /**
    * 应用用量统计数据
    */
-  Data: DescribeAppStatisticsResp
+  Data?: DescribeAppStatisticsResp
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -876,7 +876,7 @@ export interface UpdateScanRoomsResponse {
       * 返回结果码
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ErrorCode: number
+  ErrorCode?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -891,7 +891,7 @@ export interface UpdateScanUsersResponse {
   /**
    * 返回结果码
    */
-  ErrorCode: number
+  ErrorCode?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -936,7 +936,7 @@ export interface DeleteScanUserResponse {
   /**
    * 返回结果码
    */
-  ErrorCode: number
+  ErrorCode?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1066,7 +1066,7 @@ export interface DescribeAgeDetectTaskRequest {
   BizId: number
 
   /**
-   * 创建年龄语音识别任务时返回的taskid
+   * [创建年龄语音识别任务](https://cloud.tencent.com/document/product/607/60620)时返回的taskid
    */
   TaskId: string
 }
@@ -1078,7 +1078,7 @@ export interface DeleteCustomizationResponse {
   /**
    * 返回值。0为成功，非0为失败。
    */
-  ErrorCode: number
+  ErrorCode?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1373,7 +1373,7 @@ export interface CreateAgeDetectTaskResponse {
   /**
    * 本次任务提交后唯一id，用于获取任务运行结果
    */
-  TaskId: string
+  TaskId?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

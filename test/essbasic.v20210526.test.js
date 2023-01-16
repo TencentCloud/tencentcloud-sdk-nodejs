@@ -288,6 +288,16 @@ it("essbasic.v20210526.UploadFiles", async function () {
     }
 })
 
+it("essbasic.v20210526.ChannelCreateFlowSignUrl", async function () {
+    try {
+       const data = await client.ChannelCreateFlowSignUrl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("essbasic.v20210526.SyncProxyOrganization", async function () {
     try {
        const data = await client.SyncProxyOrganization({})

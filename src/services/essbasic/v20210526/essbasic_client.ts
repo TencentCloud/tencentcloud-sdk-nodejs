@@ -20,6 +20,7 @@ import { ClientConfig } from "../../../common/interface"
 import {
   SyncProxyOrganizationResponse,
   ChannelCreateConvertTaskApiResponse,
+  ChannelCreateFlowSignUrlResponse,
   ChannelBatchCancelFlowsResponse,
   Department,
   ChannelCreateFlowSignReviewRequest,
@@ -33,9 +34,10 @@ import {
   CreateConsoleLoginUrlResponse,
   SyncProxyOrganizationRequest,
   CreateSealByImageRequest,
-  PrepareFlowsRequest,
+  ChannelCreateFlowSignUrlRequest,
   ChannelCancelFlowResponse,
   DownloadFlowInfo,
+  FlowApproverUrlInfo,
   ChannelCreateConvertTaskApiRequest,
   ChannelCreateFlowByFilesRequest,
   Agent,
@@ -53,6 +55,7 @@ import {
   ChannelVerifyPdfRequest,
   CreateChannelFlowEvidenceReportRequest,
   ChannelVerifyPdfResponse,
+  DescribeChannelFlowEvidenceReportRequest,
   CreateConsoleLoginUrlRequest,
   OrganizationInfo,
   PdfVerifyResult,
@@ -91,7 +94,7 @@ import {
   UploadFilesResponse,
   ChannelCreateBatchCancelFlowUrlRequest,
   ApproverRestriction,
-  DescribeChannelFlowEvidenceReportRequest,
+  PrepareFlowsRequest,
   ChannelCreateFlowByFilesResponse,
   ChannelCreateFlowSignReviewResponse,
   ChannelDescribeOrganizationSealsResponse,
@@ -449,6 +452,16 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
     cb?: (error: string, rep: UploadFilesResponse) => void
   ): Promise<UploadFilesResponse> {
     return this.request("UploadFiles", req, cb)
+  }
+
+  /**
+   * 渠道版创建签署链接，需要联系运营人员开白后才可使用
+   */
+  async ChannelCreateFlowSignUrl(
+    req: ChannelCreateFlowSignUrlRequest,
+    cb?: (error: string, rep: ChannelCreateFlowSignUrlResponse) => void
+  ): Promise<ChannelCreateFlowSignUrlResponse> {
+    return this.request("ChannelCreateFlowSignUrl", req, cb)
   }
 
   /**

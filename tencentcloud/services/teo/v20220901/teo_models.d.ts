@@ -1397,7 +1397,7 @@ export interface DescribeOriginProtectionResponse {
       * 源站防护信息。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    OriginProtectionInfo: Array<OriginProtectionInfo>;
+    OriginProtectionInfo?: Array<OriginProtectionInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2504,7 +2504,7 @@ export interface DescribeOriginProtectionRequest {
 <li>need-update<br>   按照【<strong>站点是否需要更新源站防护IP白名单</strong>】进行过滤。<br>   类型：String<br>   必选：否<br>   可选项：<br>   true：需要更新<br>   false：无需更新<br></li>
 <li>plan-support<br>   按照【<strong>站点套餐是否支持源站防护</strong>】进行过滤。<br>   类型：String<br>   必选：否<br>   可选项：<br>   true：支持<br>   false：不支持<br></li>
       */
-    Filters?: Filter;
+    Filters?: Array<Filter>;
     /**
       * 分页查询偏移量，默认为0。
       */

@@ -143,73 +143,6 @@ export interface CreateMultiFlowSignQRCodeResponse {
     RequestId?: string;
 }
 /**
- * DescribeThirdPartyAuthCode返回参数结构体
- */
-export interface DescribeThirdPartyAuthCodeResponse {
-    /**
-      * 用户是否实名，VERIFIED 为实名，UNVERIFIED 未实名
-      */
-    VerifyStatus: string;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * CreateIntegrationEmployees请求参数结构体
- */
-export interface CreateIntegrationEmployeesRequest {
-    /**
-      * 操作人信息，userId必填
-      */
-    Operator: UserInfo;
-    /**
-      * 待创建员工的信息，Mobile和DisplayName必填
-      */
-    Employees: Array<Staff>;
-}
-/**
- * CreateFlowEvidenceReport请求参数结构体
- */
-export interface CreateFlowEvidenceReportRequest {
-    /**
-      * 调用方用户信息，userId 必填
-      */
-    Operator: UserInfo;
-    /**
-      * 签署流程编号
-      */
-    FlowId: string;
-}
-/**
- * StartFlow返回参数结构体
- */
-export interface StartFlowResponse {
-    /**
-      * 返回描述，START-发起成功， REVIEW-提交审核成功，EXECUTING-已提交发起任务
-      */
-    Status: string;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * 集成版企业角色信息
- */
-export interface StaffRole {
-    /**
-      * 角色id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    RoleId: string;
-    /**
-      * 角色名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    RoleName: string;
-}
-/**
  * 创建流程的签署方信息
  */
 export interface FlowCreateApprover {
@@ -287,6 +220,98 @@ HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证(格式同居民身份证)
       * 签署人个性化能力值
       */
     ApproverOption?: ApproverOption;
+}
+/**
+ * DescribeThirdPartyAuthCode返回参数结构体
+ */
+export interface DescribeThirdPartyAuthCodeResponse {
+    /**
+      * 用户是否实名，VERIFIED 为实名，UNVERIFIED 未实名
+      */
+    VerifyStatus: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * CreateIntegrationEmployees请求参数结构体
+ */
+export interface CreateIntegrationEmployeesRequest {
+    /**
+      * 操作人信息，userId必填
+      */
+    Operator: UserInfo;
+    /**
+      * 待创建员工的信息，Mobile和DisplayName必填
+      */
+    Employees: Array<Staff>;
+}
+/**
+ * CreateFlowEvidenceReport请求参数结构体
+ */
+export interface CreateFlowEvidenceReportRequest {
+    /**
+      * 调用方用户信息，userId 必填
+      */
+    Operator: UserInfo;
+    /**
+      * 签署流程编号
+      */
+    FlowId: string;
+}
+/**
+ * StartFlow返回参数结构体
+ */
+export interface StartFlowResponse {
+    /**
+      * 返回描述，START-发起成功， REVIEW-提交审核成功，EXECUTING-已提交发起任务
+      */
+    Status: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * 集成版企业角色信息
+ */
+export interface StaffRole {
+    /**
+      * 角色id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RoleId: string;
+    /**
+      * 角色名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RoleName: string;
+}
+/**
+ * 签署链接信息
+ */
+export interface FlowApproverUrlInfo {
+    /**
+      * 签署链接，注意该链接有效期为30分钟，同时需要注意保密，不要外泄给无关用户。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SignUrl?: string;
+    /**
+      * 签署人手机号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ApproverMobile?: string;
+    /**
+      * 签署人姓名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ApproverName?: string;
+    /**
+      * 签署人类型 1-个人
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ApproverType?: number;
 }
 /**
  * CreateConvertTaskApi请求参数结构体
@@ -1049,6 +1074,19 @@ MobileCheck：手机号验证
     SignBeanTag?: number;
 }
 /**
+ * CreateFlowSignUrl返回参数结构体
+ */
+export interface CreateFlowSignUrlResponse {
+    /**
+      * 签署人签署链接信息
+      */
+    FlowApproverUrlInfos: Array<FlowApproverUrlInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeFileUrls请求参数结构体
  */
 export interface DescribeFileUrlsRequest {
@@ -1507,6 +1545,27 @@ export interface RegisterInfo {
     Uscc: string;
 }
 /**
+ * CreateFlowSignUrl请求参数结构体
+ */
+export interface CreateFlowSignUrlRequest {
+    /**
+      * 流程编号
+      */
+    FlowId: string;
+    /**
+      * 流程签署人，其中ApproverName，ApproverMobile和ApproverType必传，其他可不传，ApproverType目前只支持个人类型的签署人。还需注意签署人只能有手写签名和时间类型的签署控件，其他类型的填写控件和签署控件暂时都未支持。
+      */
+    FlowApproverInfos: Array<FlowCreateApprover>;
+    /**
+      * 机构信息，暂未开放
+      */
+    Organization: OrganizationInfo;
+    /**
+      * 用户信息，此结构体UserId必填
+      */
+    Operator?: UserInfo;
+}
+/**
  * CreateIntegrationEmployees返回参数结构体
  */
 export interface CreateIntegrationEmployeesResponse {
@@ -1692,17 +1751,76 @@ export interface VerifyPdfRequest {
     Operator?: UserInfo;
 }
 /**
- * 此结构体 (UploadFile) 用于描述多文件上传的文件信息。
+ * 参与者信息
  */
-export interface UploadFile {
+export interface ApproverInfo {
     /**
-      * Base64编码后的文件内容
+      * 参与者类型：
+0：企业
+1：个人
+3：企业静默签署
+注：类型为3（企业静默签署）时，此接口会默认完成该签署方的签署。静默签署仅进行盖章操作，不能自动签名。
       */
-    FileBody: string;
+    ApproverType: number;
     /**
-      * 文件名，最大长度不超过200字符
+      * 本环节需要操作人的名字
       */
-    FileName?: string;
+    ApproverName: string;
+    /**
+      * 本环节需要操作人的手机号
+      */
+    ApproverMobile: string;
+    /**
+      * 本环节操作人签署控件配置
+      */
+    SignComponents: Array<Component>;
+    /**
+      * 如果是企业,则为企业的名字
+      */
+    OrganizationName?: string;
+    /**
+      * 身份证号
+      */
+    ApproverIdCardNumber?: string;
+    /**
+      * 证件类型
+ID_CARD 身份证
+HONGKONG_AND_MACAO 港澳居民来往内地通行证
+HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证(格式同居民身份证)
+      */
+    ApproverIdCardType?: string;
+    /**
+      * sms--短信，none--不通知
+      */
+    NotifyType?: string;
+    /**
+      * 1--收款人、2--开具人、3--见证人
+      */
+    ApproverRole?: number;
+    /**
+      * 签署意愿确认渠道,WEIXINAPP:人脸识别
+      */
+    VerifyChannel?: Array<string>;
+    /**
+      * 合同的强制预览时间：3~300s，未指定则按合同页数计算
+      */
+    PreReadTime?: number;
+    /**
+      * 签署人userId，传此字段则不用传姓名、手机号
+      */
+    UserId?: string;
+    /**
+      * 签署人用户来源,企微侧用户请传入：WEWORKAPP
+      */
+    ApproverSource?: string;
+    /**
+      * 客户自定义签署人标识，64位长度，保证唯一，非企微场景不使用此字段
+      */
+    CustomApproverTag?: string;
+    /**
+      * 签署人个性化能力值
+      */
+    ApproverOption?: ApproverOption;
 }
 /**
  * CreateFlowSignReview返回参数结构体
@@ -1995,76 +2113,17 @@ export interface CancelFlowRequest {
     Agent?: Agent;
 }
 /**
- * 参与者信息
+ * 此结构体 (UploadFile) 用于描述多文件上传的文件信息。
  */
-export interface ApproverInfo {
+export interface UploadFile {
     /**
-      * 参与者类型：
-0：企业
-1：个人
-3：企业静默签署
-注：类型为3（企业静默签署）时，此接口会默认完成该签署方的签署。静默签署仅进行盖章操作，不能自动签名。
+      * Base64编码后的文件内容
       */
-    ApproverType: number;
+    FileBody: string;
     /**
-      * 本环节需要操作人的名字
+      * 文件名，最大长度不超过200字符
       */
-    ApproverName: string;
-    /**
-      * 本环节需要操作人的手机号
-      */
-    ApproverMobile: string;
-    /**
-      * 本环节操作人签署控件配置
-      */
-    SignComponents: Array<Component>;
-    /**
-      * 如果是企业,则为企业的名字
-      */
-    OrganizationName?: string;
-    /**
-      * 身份证号
-      */
-    ApproverIdCardNumber?: string;
-    /**
-      * 证件类型
-ID_CARD 身份证
-HONGKONG_AND_MACAO 港澳居民来往内地通行证
-HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证(格式同居民身份证)
-      */
-    ApproverIdCardType?: string;
-    /**
-      * sms--短信，none--不通知
-      */
-    NotifyType?: string;
-    /**
-      * 1--收款人、2--开具人、3--见证人
-      */
-    ApproverRole?: number;
-    /**
-      * 签署意愿确认渠道,WEIXINAPP:人脸识别
-      */
-    VerifyChannel?: Array<string>;
-    /**
-      * 合同的强制预览时间：3~300s，未指定则按合同页数计算
-      */
-    PreReadTime?: number;
-    /**
-      * 签署人userId，传此字段则不用传姓名、手机号
-      */
-    UserId?: string;
-    /**
-      * 签署人用户来源,企微侧用户请传入：WEWORKAPP
-      */
-    ApproverSource?: string;
-    /**
-      * 客户自定义签署人标识，64位长度，保证唯一，非企微场景不使用此字段
-      */
-    CustomApproverTag?: string;
-    /**
-      * 签署人个性化能力值
-      */
-    ApproverOption?: ApproverOption;
+    FileName?: string;
 }
 /**
  * 模板控件信息

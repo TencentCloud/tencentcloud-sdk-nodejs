@@ -36,6 +36,7 @@ import {
   AppCustomContent,
   DescribeRoomStatisticsResponse,
   CreateSupervisorResponse,
+  SceneItem,
   DeleteRoomRequest,
   RegisterUserResponse,
   DescribeAppDetailResponse,
@@ -44,12 +45,13 @@ import {
   CreateSupervisorRequest,
   UnbindDocumentFromRoomRequest,
   LoginOriginIdRequest,
-  RegisterUserRequest,
+  AppConfig,
   LoginUserRequest,
   BindDocumentToRoomResponse,
   CreateRoomResponse,
   DescribeUserResponse,
   DescribeRoomRequest,
+  RegisterUserRequest,
 } from "./lcic_models"
 
 /**
@@ -65,7 +67,7 @@ export class Client extends AbstractClient {
    * 获取应用详情
    */
   async DescribeAppDetail(
-    req?: DescribeAppDetailRequest,
+    req: DescribeAppDetailRequest,
     cb?: (error: string, rep: DescribeAppDetailResponse) => void
   ): Promise<DescribeAppDetailResponse> {
     return this.request("DescribeAppDetail", req, cb)

@@ -191,6 +191,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UploadFiles", req, cb);
     }
     /**
+     * 创建签署链接，需要联系运营人员开白后才可使用
+     */
+    async CreateFlowSignUrl(req, cb) {
+        return this.request("CreateFlowSignUrl", req, cb);
+    }
+    /**
      * 通过AuthCode查询用户是否实名
      */
     async DescribeThirdPartyAuthCode(req, cb) {

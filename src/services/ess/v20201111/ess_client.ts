@@ -25,12 +25,13 @@ import {
   CreateFlowApproversResponse,
   UploadFilesRequest,
   CreateMultiFlowSignQRCodeResponse,
+  FlowCreateApprover,
   DescribeThirdPartyAuthCodeResponse,
   CreateIntegrationEmployeesRequest,
   CreateFlowEvidenceReportRequest,
   StartFlowResponse,
   StaffRole,
-  FlowCreateApprover,
+  FlowApproverUrlInfo,
   CreateConvertTaskApiRequest,
   Agent,
   FlowApproverDetail,
@@ -55,6 +56,7 @@ import {
   CreateFlowSignReviewRequest,
   FailedCreateStaffData,
   CreateFlowByFilesRequest,
+  CreateFlowSignUrlResponse,
   DescribeFileUrlsRequest,
   FormField,
   UserInfo,
@@ -69,6 +71,7 @@ import {
   SignQrCode,
   GetTaskResultApiRequest,
   RegisterInfo,
+  CreateFlowSignUrlRequest,
   CreateIntegrationEmployeesResponse,
   FlowDetailInfo,
   CreateFlowByFilesResponse,
@@ -76,7 +79,7 @@ import {
   SuccessCreateStaffData,
   Recipient,
   VerifyPdfRequest,
-  UploadFile,
+  ApproverInfo,
   CreateFlowSignReviewResponse,
   Filter,
   CreateStaffResult,
@@ -92,7 +95,7 @@ import {
   DeleteIntegrationEmployeesResponse,
   DescribeOrganizationSealsRequest,
   CancelFlowRequest,
-  ApproverInfo,
+  UploadFile,
   Component,
   DescribeFlowBriefsRequest,
   SignUrl,
@@ -368,6 +371,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UploadFilesResponse) => void
   ): Promise<UploadFilesResponse> {
     return this.request("UploadFiles", req, cb)
+  }
+
+  /**
+   * 创建签署链接，需要联系运营人员开白后才可使用
+   */
+  async CreateFlowSignUrl(
+    req: CreateFlowSignUrlRequest,
+    cb?: (error: string, rep: CreateFlowSignUrlResponse) => void
+  ): Promise<CreateFlowSignUrlResponse> {
+    return this.request("CreateFlowSignUrl", req, cb)
   }
 
   /**

@@ -238,6 +238,16 @@ it("ess.v20201111.UploadFiles", async function () {
     }
 })
 
+it("ess.v20201111.CreateFlowSignUrl", async function () {
+    try {
+       const data = await client.CreateFlowSignUrl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ess.v20201111.DescribeThirdPartyAuthCode", async function () {
     try {
        const data = await client.DescribeThirdPartyAuthCode({})

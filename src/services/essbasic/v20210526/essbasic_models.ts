@@ -41,6 +41,21 @@ export interface ChannelCreateConvertTaskApiResponse {
 }
 
 /**
+ * ChannelCreateFlowSignUrl返回参数结构体
+ */
+export interface ChannelCreateFlowSignUrlResponse {
+  /**
+   * 签署人签署链接信息
+   */
+  FlowApproverUrlInfos: Array<FlowApproverUrlInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ChannelBatchCancelFlows返回参数结构体
  */
 export interface ChannelBatchCancelFlowsResponse {
@@ -408,28 +423,33 @@ export interface CreateSealByImageRequest {
 }
 
 /**
- * PrepareFlows请求参数结构体
+ * ChannelCreateFlowSignUrl请求参数结构体
  */
-export interface PrepareFlowsRequest {
+export interface ChannelCreateFlowSignUrlRequest {
   /**
-   * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
+   * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填
    */
   Agent: Agent
 
   /**
-   * 多个合同（签署流程）信息，最大支持20个签署流程。
+   * 流程编号
    */
-  FlowInfos: Array<FlowInfo>
+  FlowId: string
 
   /**
-   * 操作完成后的跳转地址，最大长度200
+   * 流程签署人，其中Name和Mobile必传，其他可不传，ApproverType目前只支持PERSON类型的签署人，如果不传默认为该值。还需注意签署人只能有手写签名和时间类型的签署控件，其他类型的填写控件和签署控件暂时都未支持。
    */
-  JumpUrl: string
+  FlowApproverInfos: Array<FlowApproverInfo>
 
   /**
-   * 操作者的信息
+   * 用户信息，暂未开放
    */
   Operator?: UserInfo
+
+  /**
+   * 机构信息，暂未开放
+   */
+  Organization?: OrganizationInfo
 }
 
 /**
@@ -455,6 +475,31 @@ export interface DownloadFlowInfo {
    * 签署流程的标识数组
    */
   FlowIdList: Array<string>
+}
+
+/**
+ * 签署人签署链接信息
+ */
+export interface FlowApproverUrlInfo {
+  /**
+   * 签署链接，注意该链接有效期为30分钟，同时需要注意保密，不要外泄给无关用户。
+   */
+  SignUrl: string
+
+  /**
+   * 签署人手机号
+   */
+  Mobile: string
+
+  /**
+   * 签署人姓名
+   */
+  Name: string
+
+  /**
+   * 签署人类型 PERSON-个人
+   */
+  ApproverType: string
 }
 
 /**
@@ -1139,6 +1184,26 @@ export interface ChannelVerifyPdfResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeChannelFlowEvidenceReport请求参数结构体
+ */
+export interface DescribeChannelFlowEvidenceReportRequest {
+  /**
+   * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填
+   */
+  Agent: Agent
+
+  /**
+   * 出证报告编号
+   */
+  ReportId: string
+
+  /**
+   * 操作者的信息
+   */
+  Operator?: UserInfo
 }
 
 /**
@@ -2587,18 +2652,23 @@ export interface ApproverRestriction {
 }
 
 /**
- * DescribeChannelFlowEvidenceReport请求参数结构体
+ * PrepareFlows请求参数结构体
  */
-export interface DescribeChannelFlowEvidenceReportRequest {
+export interface PrepareFlowsRequest {
   /**
-   * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填
+   * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
    */
   Agent: Agent
 
   /**
-   * 出证报告编号
+   * 多个合同（签署流程）信息，最大支持20个签署流程。
    */
-  ReportId: string
+  FlowInfos: Array<FlowInfo>
+
+  /**
+   * 操作完成后的跳转地址，最大长度200
+   */
+  JumpUrl: string
 
   /**
    * 操作者的信息

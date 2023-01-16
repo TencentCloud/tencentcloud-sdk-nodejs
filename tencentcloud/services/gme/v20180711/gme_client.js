@@ -194,32 +194,32 @@ class Client extends abstract_client_1.AbstractClient {
         "HitFlag": true,
         "MainType": "abuse",
         "RoomId": "123",
-        "OpenId": "xxx",
+        "OpenId": "111",
         "Info":"",
         "Offset": 0,
         "Duration": 3400,
         "PieceStartTime":1574684231,
         "ScanDetail": [{
             "EndTime": 1110,
-            "KeyWord": "xxx",
+            "KeyWord": "违规字",
             "Label": "abuse",
             "Rate": "90.00",
             "StartTime": 1110
         }, {
             "EndTime": 1380,
-            "KeyWord": "xxx",
+            "KeyWord": "违规字",
             "Label": "abuse",
             "Rate": "90.00",
             "StartTime": 930
         }, {
             "EndTime": 1560,
-            "KeyWord": "xxx",
+            "KeyWord": "违规字",
             "Label": "abuse",
             "Rate": "90.00",
             "StartTime": 930
         }, {
             "EndTime": 2820,
-            "KeyWord": "xxx",
+            "KeyWord": "违规字",
             "Label": "abuse",
             "Rate": "90.00",
             "StartTime": 2490
@@ -230,7 +230,7 @@ class Client extends abstract_client_1.AbstractClient {
         "default"
     ],
     "Status": "Success",
-    "TaskId": "xxx",
+    "TaskId": "6330xxxx-9xx7-11ed-98e3-52xxxxe4ac3b",
     "Url": "https://xxx/xxx.m4a"
 }
 </code></pre>
