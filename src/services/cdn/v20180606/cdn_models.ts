@@ -1625,6 +1625,26 @@ DefenceMode 映射如下：
 }
 
 /**
+ * DescribeEdgePackTaskStatus返回参数结构体
+ */
+export interface DescribeEdgePackTaskStatusResponse {
+  /**
+   * 动态打包任务状态列表
+   */
+  EdgePackTaskStatusSet: Array<EdgePackTaskStatus>
+
+  /**
+   * 总数，用于分页查询
+   */
+  TotalCount: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 启发式缓存配置
  */
 export interface HeuristicCache {
@@ -4437,6 +4457,29 @@ off：关闭
 }
 
 /**
+ * 动态打包任务过滤器
+ */
+export interface EdgePackTaskFilter {
+  /**
+      * 过滤字段名
+apk: apk名称
+status: 母包处理进度 done, failed, processing
+      */
+  Name: string
+
+  /**
+   * 过滤字段值
+   */
+  Value: Array<string>
+
+  /**
+      * 是否启用模糊查询，仅支持过滤字段名为 apk。
+模糊查询时，Value长度最大为1。
+      */
+  Fuzzy: boolean
+}
+
+/**
  * 排序类型的数据结构，同时附带上该项的在总值的占比
  */
 export interface TopDetailDataMore {
@@ -7084,6 +7127,45 @@ export interface AddCLSTopicDomainsRequest {
 }
 
 /**
+ * 动态打包任务状态
+ */
+export interface EdgePackTaskStatus {
+  /**
+   * APK 名称
+   */
+  Apk: string
+
+  /**
+   * 输出目录
+   */
+  DstDir: string
+
+  /**
+   * 上传时间
+   */
+  UploadTime: string
+
+  /**
+      * 任务状态
+created: 创建成功
+processing: 处理中
+done: 处理完成
+failed: 处理失败
+      */
+  Status: string
+
+  /**
+   * 上传目录
+   */
+  SrcDir: Array<string>
+
+  /**
+   * 失败任务状态详情
+   */
+  StatusDesc: string
+}
+
+/**
  * 域名国内地区特殊配置。分地区特殊配置。UpdateDomainConfig接口只支持修改部分分地区配置，为了兼容旧版本配置，本类型会列出旧版本所有可能存在差异的配置列表，支持修改的配置列表如下：
 + Authentication
 + BandwidthAlert
@@ -7783,6 +7865,36 @@ head：自定义请求头
 }
 
 /**
+ * DescribeEdgePackTaskStatus请求参数结构体
+ */
+export interface DescribeEdgePackTaskStatusRequest {
+  /**
+   * 开始时间
+   */
+  StartTime: string
+
+  /**
+   * 结束时间
+   */
+  EndTime: string
+
+  /**
+   * 分页查询限制数目，默认为 100，最大可设置为 1000
+   */
+  Limit?: number
+
+  /**
+   * 分页查询偏移量，默认为 0
+   */
+  Offset?: number
+
+  /**
+   * 查询条件过滤器
+   */
+  Filters?: Array<EdgePackTaskFilter>
+}
+
+/**
  * GetDisableRecords请求参数结构体
  */
 export interface GetDisableRecordsRequest {
@@ -8361,33 +8473,22 @@ DefenceMode映射如下：
 }
 
 /**
- * ListTopWafData返回参数结构体
+ * 计费数据明细
  */
-export interface ListTopWafDataResponse {
+export interface ResourceBillingData {
   /**
-   * 攻击类型统计
-   */
-  TopTypeData: Array<ScdnTypeData>
+      * 资源名称，根据查询条件不同分为以下几类：
+某一个具体域名：表示该域名明细数据
+multiDomains：表示多域名汇总明细数据
+某一个项目 ID：指定项目查询时，显示为项目 ID
+all：账号维度数据明细
+      */
+  Resource: string
 
   /**
-   * IP统计
+   * 计费数据详情
    */
-  TopIpData: Array<ScdnTopData>
-
-  /**
-   * URL统计
-   */
-  TopUrlData: Array<ScdnTopUrlData>
-
-  /**
-   * 域名统计
-   */
-  TopDomainData: Array<ScdnTopDomainData>
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  BillingData: Array<CdnData>
 }
 
 /**
@@ -10792,22 +10893,33 @@ export interface StartCdnDomainResponse {
 }
 
 /**
- * 计费数据明细
+ * ListTopWafData返回参数结构体
  */
-export interface ResourceBillingData {
+export interface ListTopWafDataResponse {
   /**
-      * 资源名称，根据查询条件不同分为以下几类：
-某一个具体域名：表示该域名明细数据
-multiDomains：表示多域名汇总明细数据
-某一个项目 ID：指定项目查询时，显示为项目 ID
-all：账号维度数据明细
-      */
-  Resource: string
+   * 攻击类型统计
+   */
+  TopTypeData: Array<ScdnTypeData>
 
   /**
-   * 计费数据详情
+   * IP统计
    */
-  BillingData: Array<CdnData>
+  TopIpData: Array<ScdnTopData>
+
+  /**
+   * URL统计
+   */
+  TopUrlData: Array<ScdnTopUrlData>
+
+  /**
+   * 域名统计
+   */
+  TopDomainData: Array<ScdnTopDomainData>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

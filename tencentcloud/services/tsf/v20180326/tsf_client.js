@@ -100,6 +100,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteLaneRule", req, cb);
     }
     /**
+     * 删除集群
+     */
+    async DeleteCluster(req, cb) {
+        return this.request("DeleteCluster", req, cb);
+    }
+    /**
      * 重新执行工作流批次
      */
     async RedoTaskFlowBatch(req, cb) {
@@ -130,10 +136,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeConfigs", req, cb);
     }
     /**
-     * 停用任务
+     * 创建参数模板
      */
-    async DisableTask(req, cb) {
-        return this.request("DisableTask", req, cb);
+    async CreateConfigTemplate(req, cb) {
+        return this.request("CreateConfigTemplate", req, cb);
     }
     /**
      * 查询服务API列表
@@ -170,6 +176,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeTaskDetail(req, cb) {
         return this.request("DescribeTaskDetail", req, cb);
+    }
+    /**
+     * 修改集群信息
+     */
+    async ModifyCluster(req, cb) {
+        return this.request("ModifyCluster", req, cb);
     }
     /**
      *  容器部署组详情（已废弃，请使用  DescribeContainerGroupDeployInfo）
@@ -218,6 +230,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeApiDetail(req, cb) {
         return this.request("DescribeApiDetail", req, cb);
+    }
+    /**
+     * 撤回已发布的文件配置
+     */
+    async RevokeFileConfig(req, cb) {
+        return this.request("RevokeFileConfig", req, cb);
     }
     /**
      * 创建容器部署组
@@ -335,10 +353,10 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
         return this.request("DescribeGroupUseDetail", req, cb);
     }
     /**
-     * 查询公共配置（单条）
+     * 镜像仓库列表
      */
-    async DescribePublicConfig(req, cb) {
-        return this.request("DescribePublicConfig", req, cb);
+    async DescribeImageRepository(req, cb) {
+        return this.request("DescribeImageRepository", req, cb);
     }
     /**
      * 重关联业务日志配置
@@ -479,6 +497,12 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
         return this.request("DescribeApiGroups", req, cb);
     }
     /**
+     * 获取集群列表
+     */
+    async DescribeClusters(req, cb) {
+        return this.request("DescribeClusters", req, cb);
+    }
+    /**
      * 查询日志配置项列表
      */
     async DescribeBusinessLogConfigs(req, cb) {
@@ -509,10 +533,10 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
         return this.request("DescribeGroups", req, cb);
     }
     /**
-     * 镜像仓库列表
+     * 查询文件配置项发布信息
      */
-    async DescribeImageRepository(req, cb) {
-        return this.request("DescribeImageRepository", req, cb);
+    async DescribeFileConfigReleases(req, cb) {
+        return this.request("DescribeFileConfigReleases", req, cb);
     }
     /**
      * 查询仓库列表
@@ -581,10 +605,10 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
         return this.request("DescribeStatistics", req, cb);
     }
     /**
-     * 启用任务
+     * 删除模板
      */
-    async EnableTask(req, cb) {
-        return this.request("EnableTask", req, cb);
+    async DeleteConfigTemplate(req, cb) {
+        return this.request("DeleteConfigTemplate", req, cb);
     }
     /**
      * 发布文件配置
@@ -616,6 +640,12 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
      */
     async AddInstances(req, cb) {
         return this.request("AddInstances", req, cb);
+    }
+    /**
+     * 修改命名空间
+     */
+    async ModifyNamespace(req, cb) {
+        return this.request("ModifyNamespace", req, cb);
     }
     /**
      * 查询配置汇总列表
@@ -660,10 +690,10 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
         return this.request("DescribePrograms", req, cb);
     }
     /**
-     * 查询简单应用列表
+     * 查询公共配置（单条）
      */
-    async DescribeSimpleApplications(req, cb) {
-        return this.request("DescribeSimpleApplications", req, cb);
+    async DescribePublicConfig(req, cb) {
+        return this.request("DescribePublicConfig", req, cb);
     }
     /**
      * 查询API分组
@@ -672,10 +702,10 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
         return this.request("DescribeApiGroup", req, cb);
     }
     /**
-     * 发布Api分组
+     * 修改应用
      */
-    async ReleaseApiGroup(req, cb) {
-        return this.request("ReleaseApiGroup", req, cb);
+    async ModifyApplication(req, cb) {
+        return this.request("ModifyApplication", req, cb);
     }
     /**
      * 删除路径重写
@@ -727,10 +757,10 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
         return this.request("DescribePublicConfigs", req, cb);
     }
     /**
-     * 查询路径重写
+     * 导入配置
      */
-    async DescribePathRewrite(req, cb) {
-        return this.request("DescribePathRewrite", req, cb);
+    async DescribeConfigTemplate(req, cb) {
+        return this.request("DescribeConfigTemplate", req, cb);
     }
     /**
      * 取消关联投递信息和部署组
@@ -787,6 +817,12 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
         return this.request("DeleteLane", req, cb);
     }
     /**
+     * 更新参数模板
+     */
+    async UpdateConfigTemplate(req, cb) {
+        return this.request("UpdateConfigTemplate", req, cb);
+    }
+    /**
      * 查询配置发布信息
      */
     async DescribeConfigReleases(req, cb) {
@@ -833,6 +869,18 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
      */
     async ModifyLane(req, cb) {
         return this.request("ModifyLane", req, cb);
+    }
+    /**
+     * 启用任务
+     */
+    async EnableTask(req, cb) {
+        return this.request("EnableTask", req, cb);
+    }
+    /**
+     * 新增微服务返回id
+     */
+    async CreateMicroserviceWithDetailResp(req, cb) {
+        return this.request("CreateMicroserviceWithDetailResp", req, cb);
     }
     /**
      * 修改微服务详情
@@ -883,6 +931,12 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
         return this.request("RedoTaskBatch", req, cb);
     }
     /**
+     * 发布Api分组
+     */
+    async ReleaseApiGroup(req, cb) {
+        return this.request("ReleaseApiGroup", req, cb);
+    }
+    /**
      * 关联日志配置项到应用
      */
     async AssociateBusinessLogConfig(req, cb) {
@@ -899,6 +953,18 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
      */
     async DescribeConfigReleaseLogs(req, cb) {
         return this.request("DescribeConfigReleaseLogs", req, cb);
+    }
+    /**
+     * 查询简单应用列表
+     */
+    async DescribeSimpleApplications(req, cb) {
+        return this.request("DescribeSimpleApplications", req, cb);
+    }
+    /**
+     * 查询路径重写
+     */
+    async DescribePathRewrite(req, cb) {
+        return this.request("DescribePathRewrite", req, cb);
     }
     /**
      * 执行一次工作流
@@ -935,6 +1001,12 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
      */
     async DeleteRepository(req, cb) {
         return this.request("DeleteRepository", req, cb);
+    }
+    /**
+     * 停用任务
+     */
+    async DisableTask(req, cb) {
+        return this.request("DisableTask", req, cb);
     }
     /**
      * 启动容器部署组
@@ -1049,6 +1121,12 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
      */
     async ChangeApiUsableStatus(req, cb) {
         return this.request("ChangeApiUsableStatus", req, cb);
+    }
+    /**
+     * 更新部署组信息
+     */
+    async ModifyGroup(req, cb) {
+        return this.request("ModifyGroup", req, cb);
     }
     /**
      * 获取单个投递项配置信息

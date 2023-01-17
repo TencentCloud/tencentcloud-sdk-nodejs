@@ -115,11 +115,11 @@ export interface CreateCRWorkResponse {
     /**
       * 作品ID，一个作品对应唯一的workid
       */
-    WorkId: number;
+    WorkId?: number;
     /**
       * 存证ID，忽略该字段
       */
-    EvidenceId: number;
+    EvidenceId?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -339,6 +339,14 @@ export interface Monitor {
       * 侵权站点数量
       */
     TortSiteNum: number;
+    /**
+      * 监测截止时间
+      */
+    MonitorEndTime?: string;
+    /**
+      * 是否自动续费
+      */
+    AutoRenew?: number;
 }
 /**
  * ModifyCRObtainStatus请求参数结构体
@@ -724,15 +732,15 @@ export interface DescribeCRMonitorsResponse {
     /**
       * 监测结果
       */
-    Monitors: Array<Monitor>;
+    Monitors?: Array<Monitor>;
     /**
       * 记录总条数
       */
-    TotalCount: number;
+    TotalCount?: number;
     /**
       * 导出地址
       */
-    ExportURL: string;
+    ExportURL?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1022,6 +1030,10 @@ export interface CreateCRWorkRequest {
       * 申请人姓名，用于存证和取证
       */
     ApplierName?: string;
+    /**
+      * 是否自动续期
+      */
+    IsAutoRenew?: string;
 }
 /**
  * DescribeBPCompanyInfo请求参数结构体

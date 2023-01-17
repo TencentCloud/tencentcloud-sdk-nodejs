@@ -144,6 +144,21 @@ export interface UpdateApiRateLimitRuleRequest {
     MaxQps?: number;
 }
 /**
+ * DeleteCluster返回参数结构体
+ */
+export interface DeleteClusterResponse {
+    /**
+      * 删除集群操作是否成功。
+true：操作成功。
+false：操作失败。
+      */
+    Result?: boolean;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * cos临时帐号信息
  */
 export interface CosCredentials {
@@ -246,6 +261,205 @@ export interface DescribeUnitApiUseDetailRequest {
     Period?: number;
 }
 /**
+ * 集群详情
+ */
+export interface ClusterV2 {
+    /**
+      * 集群ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ClusterId: string;
+    /**
+      * 集群名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ClusterName: string;
+    /**
+      * 集群描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ClusterDesc: string;
+    /**
+      * 集群类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ClusterType: string;
+    /**
+      * 集群所属私有网络ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VpcId: string;
+    /**
+      * 集群状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ClusterStatus: string;
+    /**
+      * 集群CIDR
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ClusterCIDR: string;
+    /**
+      * 集群总CPU，单位: 核
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ClusterTotalCpu: number;
+    /**
+      * 集群总内存，单位: G
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ClusterTotalMem: number;
+    /**
+      * 集群已使用CPU，单位: 核
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ClusterUsedCpu: number;
+    /**
+      * 集群已使用内存，单位: G
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ClusterUsedMem: number;
+    /**
+      * 集群机器实例数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InstanceCount: number;
+    /**
+      * 集群运行中的机器实例数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RunInstanceCount: number;
+    /**
+      * 集群正常状态的机器实例数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NormalInstanceCount: number;
+    /**
+      * 删除标记：true：可以删除；false：不可删除
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DeleteFlag: boolean;
+    /**
+      * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreateTime: string;
+    /**
+      * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UpdateTime: string;
+    /**
+      * 集群所属TSF地域ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TsfRegionId: string;
+    /**
+      * 集群所属TSF地域名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TsfRegionName: string;
+    /**
+      * 集群所属TSF可用区ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TsfZoneId: string;
+    /**
+      * 集群所属TSF可用区名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TsfZoneName: string;
+    /**
+      * 集群不可删除的原因
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DeleteFlagReason: string;
+    /**
+      * 集群所属私有网络子网ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SubnetId: string;
+    /**
+      * 集群剩余 cpu limit
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ClusterLimitCpu: string;
+    /**
+      * 集群剩余 memory limit
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ClusterLimitMem: string;
+    /**
+      * 运行服务实例数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RunServiceInstanceCount: number;
+    /**
+      * 给前端的按钮控制信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OperationInfo: OperationInfo;
+    /**
+      * 容器集群版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ClusterVersion: string;
+    /**
+      * 部署组总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    GroupCount: number;
+    /**
+      * 运行中部署组数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RunGroupCount: number;
+    /**
+      * 停止中部署组数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    StopGroupCount: number;
+    /**
+      * 异常部署组数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AbnormalGroupCount: number;
+    /**
+      * 集群备注名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ClusterRemarkName: string;
+    /**
+      * api地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    KuberneteApiServer: string;
+    /**
+      * K : kubeconfig, S : service account
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    KuberneteNativeType: string;
+    /**
+      * native secret
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    KuberneteNativeSecret: string;
+}
+/**
+ * ModifyApplication返回参数结构体
+ */
+export interface ModifyApplicationResponse {
+    /**
+      * true/false
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result: boolean;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeApiVersions返回参数结构体
  */
 export interface DescribeApiVersionsResponse {
@@ -324,6 +538,20 @@ export interface DescribeGroupReleaseRequest {
       * 部署组ID
       */
     GroupId: string;
+}
+/**
+ * DescribeConfigTemplate返回参数结构体
+ */
+export interface DescribeConfigTemplateResponse {
+    /**
+      * Result
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result?: ConfigTemplate;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeDeliveryConfig返回参数结构体
@@ -601,6 +829,39 @@ export interface DescribeFileConfigsResponse {
     RequestId?: string;
 }
 /**
+ * DescribeClusters请求参数结构体
+ */
+export interface DescribeClustersRequest {
+    /**
+      * 搜索词
+      */
+    SearchWord?: string;
+    /**
+      * 排序字段
+      */
+    OrderBy?: string;
+    /**
+      * 排序方式
+      */
+    OrderType?: number;
+    /**
+      * 偏移量
+      */
+    Offset?: number;
+    /**
+      * 分页个数
+      */
+    Limit?: number;
+    /**
+      * 集群类型
+      */
+    ClusterType?: string;
+    /**
+      * idList
+      */
+    ClusterIdList?: Array<string>;
+}
+/**
  * DescribeApiVersions请求参数结构体
  */
 export interface DescribeApiVersionsRequest {
@@ -618,19 +879,17 @@ export interface DescribeApiVersionsRequest {
     Method?: string;
 }
 /**
- * TSF配置项发布日志分页对象
+ * DeleteConfigTemplate返回参数结构体
  */
-export interface TsfPageConfigReleaseLog {
+export interface DeleteConfigTemplateResponse {
     /**
-      * 总条数
-注意：此字段可能返回 null，表示取不到有效值。
+      * true：删除成功；false：删除失败
       */
-    TotalCount: number;
+    Result?: boolean;
     /**
-      * 配置项发布日志数组
-注意：此字段可能返回 null，表示取不到有效值。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Content: Array<ConfigReleaseLog>;
+    RequestId?: string;
 }
 /**
  * DescribeGroupBindedGateways返回参数结构体
@@ -677,6 +936,25 @@ export interface DescribeJvmMonitorRequest {
       * 扩展字段
       */
     Tag?: string;
+}
+/**
+ * 任务规则
+ */
+export interface TaskRule {
+    /**
+      * 触发规则类型, Cron/Repeat
+      */
+    RuleType: string;
+    /**
+      * Cron类型规则，cron表达式。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Expression?: string;
+    /**
+      * 时间间隔， 单位毫秒
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RepeatInterval?: number;
 }
 /**
  * UnbindApiGroup请求参数结构体
@@ -1418,6 +1696,15 @@ export interface GatewayPluginBoundParam {
     ScopeValue: string;
 }
 /**
+ * ModifyNamespace返回参数结构体
+ */
+export interface ModifyNamespaceResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * ModifyLaneRule请求参数结构体
  */
 export interface ModifyLaneRuleRequest {
@@ -1860,6 +2147,15 @@ export interface DescribeLanesResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * StartGroup请求参数结构体
+ */
+export interface StartGroupRequest {
+    /**
+      * 部署组ID
+      */
+    GroupId: string;
 }
 /**
  * CreateNamespace请求参数结构体
@@ -2402,57 +2698,18 @@ export interface ImageRepository {
     ApplicationNameReal: string;
 }
 /**
- * DescribeInovcationIndicators请求参数结构体
+ * DescribeOverviewInvocation返回参数结构体
  */
-export interface DescribeInovcationIndicatorsRequest {
+export interface DescribeOverviewInvocationResponse {
     /**
-      * 维度
+      * 监控统计数据列表
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Dimension: string;
+    Result: Array<MetricDataPoint>;
     /**
-      * 开始时间
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    StartTime: string;
-    /**
-      * 结束时间
-      */
-    EndTime: string;
-    /**
-      * 命名空间ID
-      */
-    NamespaceId?: string;
-    /**
-      * 微服务ID
-      */
-    ServiceId?: string;
-    /**
-      * 调用方服务名
-      */
-    CallerServiceName?: string;
-    /**
-      * 被调方服务名
-      */
-    CalleeServiceName?: string;
-    /**
-      * 调用方接口名
-      */
-    CallerInterfaceName?: string;
-    /**
-      * 被调方接口名
-      */
-    CalleeInterfaceName?: string;
-    /**
-      * 应用ID
-      */
-    ApplicationId?: string;
-    /**
-      * 部署组ID
-      */
-    GroupId?: string;
-    /**
-      * 实例ID
-      */
-    InstanceId?: string;
+    RequestId?: string;
 }
 /**
  * CreatePublicConfig返回参数结构体
@@ -2509,6 +2766,15 @@ export interface CreateConfigResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * RevokeFileConfig请求参数结构体
+ */
+export interface RevokeFileConfigRequest {
+    /**
+      * 配置项发布ID
+      */
+    ConfigReleaseId: string;
 }
 /**
  * DescribeCreateGatewayApiStatus请求参数结构体
@@ -3663,6 +3929,19 @@ export interface CreateGroupRequest {
     Alias?: string;
 }
 /**
+ * DeleteCluster请求参数结构体
+ */
+export interface DeleteClusterRequest {
+    /**
+      * 集群ID
+      */
+    ClusterId: string;
+    /**
+      * 是否只解绑，不删除容器集群，默认不传则删除容器集群。
+      */
+    Unbind?: boolean;
+}
+/**
  * StopTaskBatch返回参数结构体
  */
 export interface StopTaskBatchResponse {
@@ -4126,14 +4405,25 @@ export interface Env {
     ValueFrom?: ValueFrom;
 }
 /**
- * k8s env 的 ResourceFieldRef
+ * ModifyCluster请求参数结构体
  */
-export interface ResourceFieldRef {
+export interface ModifyClusterRequest {
     /**
-      * k8s 的 Resource
-注意：此字段可能返回 null，表示取不到有效值。
+      * 集群ID
       */
-    Resource?: string;
+    ClusterId: string;
+    /**
+      * 集群名称
+      */
+    ClusterName?: string;
+    /**
+      * 集群描述信息
+      */
+    ClusterDesc?: string;
+    /**
+      * 备注名
+      */
+    ClusterRemarkName?: string;
 }
 /**
  * tsf-privilege 模块，资源
@@ -4325,6 +4615,20 @@ export interface GroupUnitApiDailyUseStatistics {
       * 分位值对象
       */
     Quantile: QuantileEntity;
+}
+/**
+ * DescribeFileConfigReleases返回参数结构体
+ */
+export interface DescribeFileConfigReleasesResponse {
+    /**
+      * 配置项发布信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result?: TsfPageFileConfigRelease;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DisableUnitRoute返回参数结构体
@@ -4933,18 +5237,57 @@ export interface Metric {
     Function?: string;
 }
 /**
- * DescribeOverviewInvocation返回参数结构体
+ * DescribeInovcationIndicators请求参数结构体
  */
-export interface DescribeOverviewInvocationResponse {
+export interface DescribeInovcationIndicatorsRequest {
     /**
-      * 监控统计数据列表
-注意：此字段可能返回 null，表示取不到有效值。
+      * 维度
       */
-    Result: Array<MetricDataPoint>;
+    Dimension: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 开始时间
       */
-    RequestId?: string;
+    StartTime: string;
+    /**
+      * 结束时间
+      */
+    EndTime: string;
+    /**
+      * 命名空间ID
+      */
+    NamespaceId?: string;
+    /**
+      * 微服务ID
+      */
+    ServiceId?: string;
+    /**
+      * 调用方服务名
+      */
+    CallerServiceName?: string;
+    /**
+      * 被调方服务名
+      */
+    CalleeServiceName?: string;
+    /**
+      * 调用方接口名
+      */
+    CallerInterfaceName?: string;
+    /**
+      * 被调方接口名
+      */
+    CalleeInterfaceName?: string;
+    /**
+      * 应用ID
+      */
+    ApplicationId?: string;
+    /**
+      * 部署组ID
+      */
+    GroupId?: string;
+    /**
+      * 实例ID
+      */
+    InstanceId?: string;
 }
 /**
  * ShrinkInstances请求参数结构体
@@ -5016,6 +5359,20 @@ export interface ExecuteTaskFlowResponse {
       * 工作流批次ID
       */
     Result?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeClusters返回参数结构体
+ */
+export interface DescribeClustersResponse {
+    /**
+      * Cluster分页信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result: TsfPageClusterV2;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -5440,6 +5797,21 @@ export interface AssociateConfigWithGroupRequest {
     SearchWord?: string;
 }
 /**
+ * TSF配置项发布日志分页对象
+ */
+export interface TsfPageConfigReleaseLog {
+    /**
+      * 总条数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TotalCount: number;
+    /**
+      * 配置项发布日志数组
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Content: Array<ConfigReleaseLog>;
+}
+/**
  * DescribeContainerGroupDetail请求参数结构体
  */
 export interface DescribeContainerGroupDetailRequest {
@@ -5572,6 +5944,20 @@ export interface ModifyTaskResponse {
     RequestId?: string;
 }
 /**
+ * RevokeFileConfig返回参数结构体
+ */
+export interface RevokeFileConfigResponse {
+    /**
+      * 撤回结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result?: boolean;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * SearchBusinessLog返回参数结构体
  */
 export interface SearchBusinessLogResponse {
@@ -5652,6 +6038,19 @@ export interface UnitRuleItem {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     UnitRuleTagList?: Array<UnitRuleTag>;
+}
+/**
+ * UpdateConfigTemplate返回参数结构体
+ */
+export interface UpdateConfigTemplateResponse {
+    /**
+      * 结果true：成功；false：失败；
+      */
+    Result?: boolean;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * BindPlugin请求参数结构体
@@ -6714,6 +7113,22 @@ export interface DeployGroupResponse {
     RequestId?: string;
 }
 /**
+ * ModifyGroup返回参数结构体
+ */
+export interface ModifyGroupResponse {
+    /**
+      * 更新部署组详情是否成功。
+true：操作成功。
+false：操作失败。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result: boolean;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * BindApiGroup返回参数结构体
  */
 export interface BindApiGroupResponse {
@@ -7747,6 +8162,121 @@ export interface EnableTaskFlowResponse {
     RequestId?: string;
 }
 /**
+ * API 明细
+ */
+export interface ApiDetailInfo {
+    /**
+      * API ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ApiId: string;
+    /**
+      * 命名空间ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NamespaceId: string;
+    /**
+      * 命名空间名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NamespaceName: string;
+    /**
+      * 服务ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MicroserviceId: string;
+    /**
+      * 服务名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MicroserviceName: string;
+    /**
+      * API 请求路径
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Path: string;
+    /**
+      * Api 映射路径
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PathMapping: string;
+    /**
+      * 请求方法
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Method: string;
+    /**
+      * 所属分组ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    GroupId: string;
+    /**
+      * 是否禁用
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UsableStatus: string;
+    /**
+      * 发布状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ReleaseStatus: string;
+    /**
+      * 开启限流
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RateLimitStatus: string;
+    /**
+      * 是否开启mock
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MockStatus: string;
+    /**
+      * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreatedTime: string;
+    /**
+      * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UpdatedTime: string;
+    /**
+      * 发布时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ReleasedTime: string;
+    /**
+      * 所属分组名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    GroupName: string;
+    /**
+      * API 超时，单位毫秒
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Timeout: number;
+    /**
+      * Api所在服务host
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Host: string;
+    /**
+      * API类型。 ms ： 微服务API； external :外部服务Api
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ApiType: string;
+    /**
+      * Api描述信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Description: string;
+    /**
+      * API路径匹配类型。normal：普通API；wildcard：通配API。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ApiMatchType: string;
+}
+/**
  * DeleteUnitRule返回参数结构体
  */
 export interface DeleteUnitRuleResponse {
@@ -7845,6 +8375,23 @@ export interface TsfPageUnitNamespace {
       * 记录实体列表
       */
     Content: Array<UnitNamespace>;
+}
+/**
+ * CreateMicroserviceWithDetailResp请求参数结构体
+ */
+export interface CreateMicroserviceWithDetailRespRequest {
+    /**
+      * 命名空间ID
+      */
+    NamespaceId: string;
+    /**
+      * 微服务名称
+      */
+    MicroserviceName: string;
+    /**
+      * 微服务描述信息
+      */
+    MicroserviceDesc?: string;
 }
 /**
  * 业务日志配置解析规则
@@ -8498,6 +9045,15 @@ export interface DescribeBusinessLogConfigsRequest {
     ConfigIdList?: Array<string>;
 }
 /**
+ * DeleteConfigTemplate请求参数结构体
+ */
+export interface DeleteConfigTemplateRequest {
+    /**
+      * 无
+      */
+    ConfigTemplateId: string;
+}
+/**
  * DescribePluginInstances请求参数结构体
  */
 export interface DescribePluginInstancesRequest {
@@ -8766,6 +9322,21 @@ export interface CreateConfigRequest {
       * 无
       */
     ProgramIdList?: Array<string>;
+}
+/**
+ * Tsf分页集群对象
+ */
+export interface TsfPageClusterV2 {
+    /**
+      * 集群总数目
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TotalCount: number;
+    /**
+      * 集群列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Content: Array<ClusterV2>;
 }
 /**
  * DescribeUploadInfo请求参数结构体
@@ -9451,6 +10022,21 @@ export interface DescribePublicConfigReleasesRequest {
     ConfigId?: string;
 }
 /**
+ * 文件配置项发布信息列表
+ */
+export interface TsfPageFileConfigRelease {
+    /**
+      * 数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TotalCount: number;
+    /**
+      * 列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Content: Array<FileConfigRelease>;
+}
+/**
  * DescribeLaneRules请求参数结构体
  */
 export interface DescribeLaneRulesRequest {
@@ -9853,13 +10439,41 @@ export interface ReleaseApiGroupRequest {
     GroupId: string;
 }
 /**
- * StartGroup请求参数结构体
+ * DescribeFileConfigReleases请求参数结构体
  */
-export interface StartGroupRequest {
+export interface DescribeFileConfigReleasesRequest {
+    /**
+      * 配置项ID
+      */
+    ConfigId?: string;
+    /**
+      * 配置项名称
+      */
+    ConfigName?: string;
     /**
       * 部署组ID
       */
-    GroupId: string;
+    GroupId?: string;
+    /**
+      * 命名空间ID
+      */
+    NamespaceId?: string;
+    /**
+      * 集群ID
+      */
+    ClusterId?: string;
+    /**
+      * 应用ID
+      */
+    ApplicationId?: string;
+    /**
+      * 偏移量
+      */
+    Offset?: number;
+    /**
+      * 每页条数
+      */
+    Limit?: number;
 }
 /**
  * DescribeClusterInstances返回参数结构体
@@ -9949,23 +10563,19 @@ export interface DescribeGroupAttributeRequest {
     GroupId: string;
 }
 /**
- * 任务规则
+ * ModifyCluster返回参数结构体
  */
-export interface TaskRule {
+export interface ModifyClusterResponse {
     /**
-      * 触发规则类型, Cron/Repeat
+      * 更新集群详情操作是否成功。
+true： 操作成功。
+false：操作失败。
       */
-    RuleType: string;
+    Result?: boolean;
     /**
-      * Cron类型规则，cron表达式。
-注意：此字段可能返回 null，表示取不到有效值。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Expression?: string;
-    /**
-      * 时间间隔， 单位毫秒
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    RepeatInterval?: number;
+    RequestId?: string;
 }
 /**
  * 包信息
@@ -10288,6 +10898,31 @@ export interface DescribeEnabledUnitRuleRequest {
     GatewayInstanceId: string;
 }
 /**
+ * CreateConfigTemplate请求参数结构体
+ */
+export interface CreateConfigTemplateRequest {
+    /**
+      * 配置模板名称
+      */
+    ConfigTemplateName: string;
+    /**
+      * 配置模板对应的微服务框架
+      */
+    ConfigTemplateType: string;
+    /**
+      * 配置模板数据
+      */
+    ConfigTemplateValue: string;
+    /**
+      * 配置模板描述
+      */
+    ConfigTemplateDesc?: string;
+    /**
+      * 无
+      */
+    ProgramIdList?: Array<string>;
+}
+/**
  * DescribeApiGroup返回参数结构体
  */
 export interface DescribeApiGroupResponse {
@@ -10498,6 +11133,31 @@ export interface DescribeUnitRulesRequest {
       * 翻页查询每页记录数
       */
     Limit?: number;
+}
+/**
+ * UpdateConfigTemplate请求参数结构体
+ */
+export interface UpdateConfigTemplateRequest {
+    /**
+      * 配置模板id
+      */
+    ConfigTemplateId: string;
+    /**
+      * 配置模板名称
+      */
+    ConfigTemplateName: string;
+    /**
+      * 配置模板对应的微服务框架
+      */
+    ConfigTemplateType: string;
+    /**
+      * 配置模板数据
+      */
+    ConfigTemplateValue: string;
+    /**
+      * 配置模板描述
+      */
+    ConfigTemplateDesc?: string;
 }
 /**
  * DescribeGatewayAllGroupApis请求参数结构体
@@ -10734,119 +11394,44 @@ export interface StopTaskBatchRequest {
     TaskId?: string;
 }
 /**
- * API 明细
+ * 配置模板对象
  */
-export interface ApiDetailInfo {
+export interface ConfigTemplate {
     /**
-      * API ID
+      * 配置模板Id
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ApiId: string;
+    ConfigTemplateId?: string;
     /**
-      * 命名空间ID
+      * 配置模板名称
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    NamespaceId: string;
+    ConfigTemplateName?: string;
     /**
-      * 命名空间名称
+      * 配置模板描述
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    NamespaceName: string;
+    ConfigTemplateDesc?: string;
     /**
-      * 服务ID
+      * 配置模板对应的微服务框架
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    MicroserviceId: string;
+    ConfigTemplateType?: string;
     /**
-      * 服务名称
+      * 配置模板数据
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    MicroserviceName: string;
-    /**
-      * API 请求路径
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Path: string;
-    /**
-      * Api 映射路径
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    PathMapping: string;
-    /**
-      * 请求方法
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Method: string;
-    /**
-      * 所属分组ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    GroupId: string;
-    /**
-      * 是否禁用
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    UsableStatus: string;
-    /**
-      * 发布状态
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ReleaseStatus: string;
-    /**
-      * 开启限流
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    RateLimitStatus: string;
-    /**
-      * 是否开启mock
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    MockStatus: string;
+    ConfigTemplateValue?: string;
     /**
       * 创建时间
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    CreatedTime: string;
+    CreateTime?: string;
     /**
       * 更新时间
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    UpdatedTime: string;
-    /**
-      * 发布时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ReleasedTime: string;
-    /**
-      * 所属分组名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    GroupName: string;
-    /**
-      * API 超时，单位毫秒
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Timeout: number;
-    /**
-      * Api所在服务host
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Host: string;
-    /**
-      * API类型。 ms ： 微服务API； external :外部服务Api
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ApiType: string;
-    /**
-      * Api描述信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Description: string;
-    /**
-      * API路径匹配类型。normal：普通API；wildcard：通配API。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ApiMatchType: string;
+    UpdateTime?: string;
 }
 /**
  * DescribeUnitApiUseDetail返回参数结构体
@@ -11298,6 +11883,19 @@ export interface DescribeFileConfigsRequest {
     ConfigVersion?: string;
 }
 /**
+ * CreateConfigTemplate返回参数结构体
+ */
+export interface CreateConfigTemplateResponse {
+    /**
+      * true：创建成功；false：创建失败
+      */
+    Result: boolean;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * ExecuteTask返回参数结构体
  */
 export interface ExecuteTaskResponse {
@@ -11430,6 +12028,19 @@ export interface DescribeApiUseDetailRequest {
       * 查询的日期,格式：yyyy-MM-dd HH:mm:ss
       */
     EndTime: string;
+}
+/**
+ * CreateMicroserviceWithDetailResp返回参数结构体
+ */
+export interface CreateMicroserviceWithDetailRespResponse {
+    /**
+      * id
+      */
+    Result: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 业务日志列表
@@ -11887,6 +12498,31 @@ export interface DisableUnitRuleResponse {
     RequestId?: string;
 }
 /**
+ * ModifyApplication请求参数结构体
+ */
+export interface ModifyApplicationRequest {
+    /**
+      * 应用ID
+      */
+    ApplicationId: string;
+    /**
+      * 应用名称
+      */
+    ApplicationName?: string;
+    /**
+      * 应用备注
+      */
+    ApplicationDesc?: string;
+    /**
+      * 应用备注名
+      */
+    ApplicationRemarkName?: string;
+    /**
+      * 服务配置信息列表
+      */
+    ServiceConfigList?: Array<ServiceConfig>;
+}
+/**
  * DescribePathRewrites返回参数结构体
  */
 export interface DescribePathRewritesResponse {
@@ -11962,6 +12598,15 @@ export interface UpdateApiRateLimitRulesResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DeleteRepository请求参数结构体
+ */
+export interface DeleteRepositoryRequest {
+    /**
+      * 仓库ID
+      */
+    RepositoryId: string;
 }
 /**
  * DescribeSimpleGroups请求参数结构体
@@ -12367,6 +13012,16 @@ false：操作失败。
     RequestId?: string;
 }
 /**
+ * k8s env 的 ResourceFieldRef
+ */
+export interface ResourceFieldRef {
+    /**
+      * k8s 的 Resource
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Resource?: string;
+}
+/**
  * DescribeReleasedConfig返回参数结构体
  */
 export interface DescribeReleasedConfigResponse {
@@ -12524,6 +13179,27 @@ export interface LaneRuleTag {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     UpdateTime: number;
+}
+/**
+ * ModifyNamespace请求参数结构体
+ */
+export interface ModifyNamespaceRequest {
+    /**
+      * 命名空间ID
+      */
+    NamespaceId: string;
+    /**
+      * 命名空间名称
+      */
+    NamespaceName?: string;
+    /**
+      * 命名空间备注
+      */
+    NamespaceDesc?: string;
+    /**
+      * 是否开启高可用
+      */
+    IsHaEnable?: string;
 }
 /**
  * 提供给前端控制按钮显示逻辑的字段
@@ -12701,6 +13377,27 @@ export interface DescribeStatisticsRequest {
       * 命名空间id数组
       */
     NamespaceIdList?: Array<string>;
+}
+/**
+ * ModifyGroup请求参数结构体
+ */
+export interface ModifyGroupRequest {
+    /**
+      * 部署组ID
+      */
+    GroupId: string;
+    /**
+      * 部署组名称
+      */
+    GroupName?: string;
+    /**
+      * 部署组描述
+      */
+    GroupDesc?: string;
+    /**
+      * 部署组备注
+      */
+    Alias?: string;
 }
 /**
  * DescribeMicroservice返回参数结构体
@@ -12931,13 +13628,13 @@ export interface CreatePathRewritesResponse {
     RequestId?: string;
 }
 /**
- * DeleteRepository请求参数结构体
+ * DescribeConfigTemplate请求参数结构体
  */
-export interface DeleteRepositoryRequest {
+export interface DescribeConfigTemplateRequest {
     /**
-      * 仓库ID
+      * 无
       */
-    RepositoryId: string;
+    ConfigTemplateId: string;
 }
 /**
  * DraftApiGroup返回参数结构体

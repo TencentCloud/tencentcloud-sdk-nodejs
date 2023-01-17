@@ -61,6 +61,7 @@ import {
   CreateDiagnoseUrlResponse,
   ListScdnDomainsResponse,
   CreateScdnLogTaskRequest,
+  DescribeEdgePackTaskStatusResponse,
   HeuristicCache,
   SummarizedData,
   ManageClsTopicDomainsRequest,
@@ -158,6 +159,7 @@ import {
   RefererRule,
   DescribeScdnIpStrategyRequest,
   IpFreqLimit,
+  EdgePackTaskFilter,
   TopDetailDataMore,
   DescribeIpVisitRequest,
   StatusCodeCacheRule,
@@ -241,6 +243,7 @@ import {
   Ipv6Access,
   BotSortBy,
   AddCLSTopicDomainsRequest,
+  EdgePackTaskStatus,
   MainlandConfig,
   DescribeDDoSDataRequest,
   CreateEdgePackTaskRequest,
@@ -251,6 +254,7 @@ import {
   DescribeMapInfoRequest,
   RuleQueryString,
   AdvancedScdnAclRule,
+  DescribeEdgePackTaskStatusRequest,
   GetDisableRecordsRequest,
   PurgeUrlsCacheResponse,
   DescribeImageConfigRequest,
@@ -269,7 +273,7 @@ import {
   Sort,
   DescribeEventLogDataResponse,
   ScdnLogTaskDetail,
-  ListTopWafDataResponse,
+  ResourceBillingData,
   SearchClsLogRequest,
   UpdateDomainConfigRequest,
   AdvancedScdnAclGroup,
@@ -346,7 +350,7 @@ import {
   CreateEdgePackTaskResponse,
   TimestampData,
   StartCdnDomainResponse,
-  ResourceBillingData,
+  ListTopWafDataResponse,
   ClientInfo,
   ErrorPageRule,
   HwPrivateAccess,
@@ -438,13 +442,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * DescribePurgeTasks 用于查询提交的 URL 刷新、目录刷新记录及执行进度，通过 PurgePathCache 与 PurgeUrlsCache 接口提交的任务均可通过此接口进行查询。
+   * DescribeEdgePackTaskStatus 用于查询动态打包任务状态列表
    */
-  async DescribePurgeTasks(
-    req: DescribePurgeTasksRequest,
-    cb?: (error: string, rep: DescribePurgeTasksResponse) => void
-  ): Promise<DescribePurgeTasksResponse> {
-    return this.request("DescribePurgeTasks", req, cb)
+  async DescribeEdgePackTaskStatus(
+    req: DescribeEdgePackTaskStatusRequest,
+    cb?: (error: string, rep: DescribeEdgePackTaskStatusResponse) => void
+  ): Promise<DescribeEdgePackTaskStatusResponse> {
+    return this.request("DescribeEdgePackTaskStatus", req, cb)
   }
 
   /**
@@ -841,6 +845,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: PurgePathCacheResponse) => void
   ): Promise<PurgePathCacheResponse> {
     return this.request("PurgePathCache", req, cb)
+  }
+
+  /**
+   * DescribePurgeTasks 用于查询提交的 URL 刷新、目录刷新记录及执行进度，通过 PurgePathCache 与 PurgeUrlsCache 接口提交的任务均可通过此接口进行查询。
+   */
+  async DescribePurgeTasks(
+    req: DescribePurgeTasksRequest,
+    cb?: (error: string, rep: DescribePurgeTasksResponse) => void
+  ): Promise<DescribePurgeTasksResponse> {
+    return this.request("DescribePurgeTasks", req, cb)
   }
 
   /**

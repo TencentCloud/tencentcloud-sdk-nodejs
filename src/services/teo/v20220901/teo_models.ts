@@ -1791,7 +1791,7 @@ export interface AclCondition {
 }
 
 /**
- * RateLimit配置
+ * 速率限制规则
  */
 export interface RateLimitConfig {
   /**
@@ -1817,6 +1817,12 @@ export interface RateLimitConfig {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   RateLimitIntelligence?: RateLimitIntelligence
+
+  /**
+      * 速率限制-托管定制规则。如果为null，默认使用历史配置。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RateLimitCustomizes?: Array<RateLimitUserRule>
 }
 
 /**
@@ -2616,6 +2622,12 @@ export interface AclConfig {
    * 用户自定义规则。
    */
   AclUserRules: Array<AclUserRule>
+
+  /**
+      * 托管定制规则
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Customizes?: Array<AclUserRule>
 }
 
 /**
@@ -2762,34 +2774,27 @@ export interface DescribeSpeedTestingDetailsResponse {
 }
 
 /**
- * 时序类型详细数据
+ * 慢速攻击的基础配置。
  */
-export interface TimingTypeValue {
+export interface SlowRateConfig {
   /**
-   * 数据和。
-   */
-  Sum: number
+      * 开关，取值有：
+<li>on：开启；</li>
+<li>off：关闭。</li>
+      */
+  Switch: string
 
   /**
-   * 最大值。
-   */
-  Max: number
-
-  /**
-   * 平均值。
-   */
-  Avg: number
-
-  /**
-   * 指标名。
-   */
-  MetricName: string
-
-  /**
-      * 详细数据。
+      * 统计的间隔，单位是秒，即在首段包传输结束后，将数据传输轴按照本参数切分，每个分片独立计算慢速攻击。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Detail: Array<TimingDataItem>
+  Interval?: number
+
+  /**
+      * 统计时应用的速率阈值，单位是bps，即如果本分片中的传输速率没达到本参数的值，则判定为慢速攻击，应用慢速攻击的处置方式。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Threshold?: number
 }
 
 /**
@@ -2855,6 +2860,37 @@ export interface ServerCertInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   CommonName?: string
+}
+
+/**
+ * 时序类型详细数据
+ */
+export interface TimingTypeValue {
+  /**
+   * 数据和。
+   */
+  Sum: number
+
+  /**
+   * 最大值。
+   */
+  Max: number
+
+  /**
+   * 平均值。
+   */
+  Avg: number
+
+  /**
+   * 指标名。
+   */
+  MetricName: string
+
+  /**
+      * 详细数据。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Detail: Array<TimingDataItem>
 }
 
 /**
@@ -3706,6 +3742,12 @@ export interface SecurityConfig {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   TemplateConfig?: TemplateConfig
+
+  /**
+      * 慢速攻击配置。如果为null，默认使用历史配置。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SlowPostConfig?: SlowPostConfig
 }
 
 /**
@@ -4329,6 +4371,25 @@ export interface CheckCertificateRequest {
    * 私钥内容。
    */
   PrivateKey: string
+}
+
+/**
+ * 慢速攻击的首段包配置。
+ */
+export interface FirstPartConfig {
+  /**
+      * 开关，取值有：
+<li>on：开启；</li>
+<li>off：关闭。</li>
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Switch: string
+
+  /**
+      * 首段包的统计时长，单位是秒，即期望首段包的统计时长是多少，默认5秒。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  StatTime?: number
 }
 
 /**
@@ -5051,6 +5112,44 @@ export interface TopEntry {
    * 查询具体数据。
    */
   Value: Array<TopEntryValue>
+}
+
+/**
+ * 慢速攻击配置。
+ */
+export interface SlowPostConfig {
+  /**
+      * 开关，取值有：
+<li>on：开启；</li>
+<li>off：关闭。</li>
+      */
+  Switch: string
+
+  /**
+      * 首包配置。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FirstPartConfig?: FirstPartConfig
+
+  /**
+      * 基础配置。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SlowRateConfig?: SlowRateConfig
+
+  /**
+      * 慢速攻击的处置动作，取值有：
+<li>monitor：观察；</li>
+<li>drop：拦截。</li>
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Action?: string
+
+  /**
+      * 本规则的Id。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RuleId?: number
 }
 
 /**

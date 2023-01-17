@@ -78,9 +78,9 @@ it("cdn.v20180606.ListTopWafData", async function () {
     }
 })
 
-it("cdn.v20180606.DescribePurgeTasks", async function () {
+it("cdn.v20180606.DescribeEdgePackTaskStatus", async function () {
     try {
-       const data = await client.DescribePurgeTasks({})
+       const data = await client.DescribeEdgePackTaskStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -441,6 +441,16 @@ it("cdn.v20180606.StartScdnDomain", async function () {
 it("cdn.v20180606.PurgePathCache", async function () {
     try {
        const data = await client.PurgePathCache({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdn.v20180606.DescribePurgeTasks", async function () {
+    try {
+       const data = await client.DescribePurgeTasks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

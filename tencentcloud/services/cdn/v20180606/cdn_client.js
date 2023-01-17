@@ -66,10 +66,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ListTopWafData", req, cb);
     }
     /**
-     * DescribePurgeTasks 用于查询提交的 URL 刷新、目录刷新记录及执行进度，通过 PurgePathCache 与 PurgeUrlsCache 接口提交的任务均可通过此接口进行查询。
+     * DescribeEdgePackTaskStatus 用于查询动态打包任务状态列表
      */
-    async DescribePurgeTasks(req, cb) {
-        return this.request("DescribePurgeTasks", req, cb);
+    async DescribeEdgePackTaskStatus(req, cb) {
+        return this.request("DescribeEdgePackTaskStatus", req, cb);
     }
     /**
      * 删除SCDN域名
@@ -322,6 +322,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async PurgePathCache(req, cb) {
         return this.request("PurgePathCache", req, cb);
+    }
+    /**
+     * DescribePurgeTasks 用于查询提交的 URL 刷新、目录刷新记录及执行进度，通过 PurgePathCache 与 PurgeUrlsCache 接口提交的任务均可通过此接口进行查询。
+     */
+    async DescribePurgeTasks(req, cb) {
+        return this.request("DescribePurgeTasks", req, cb);
     }
     /**
      * DescribeUrlViolations 用于查询被 CDN 系统扫描到的域名违规 URL 列表及当前状态。

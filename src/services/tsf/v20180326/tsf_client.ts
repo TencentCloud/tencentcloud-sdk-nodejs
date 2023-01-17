@@ -24,16 +24,20 @@ import {
   TsfPageContainerEvent,
   ApiDetailResponse,
   UpdateApiRateLimitRuleRequest,
+  DeleteClusterResponse,
   CosCredentials,
   DeletePathRewritesResponse,
   PathRewritePage,
   DescribeUnitApiUseDetailRequest,
+  ClusterV2,
+  ModifyApplicationResponse,
   DescribeApiVersionsResponse,
   ReassociateBusinessLogConfigRequest,
   StopContainerGroupResponse,
   DeletePathRewritesRequest,
   DeleteLaneResponse,
   DescribeGroupReleaseRequest,
+  DescribeConfigTemplateResponse,
   DescribeDeliveryConfigResponse,
   SimpleApplication,
   ContinueRunFailedTaskBatchRequest,
@@ -50,10 +54,12 @@ import {
   SearchStdoutLogResponse,
   CreateGatewayApiResponse,
   DescribeFileConfigsResponse,
+  DescribeClustersRequest,
   DescribeApiVersionsRequest,
-  TsfPageConfigReleaseLog,
+  DeleteConfigTemplateResponse,
   DescribeGroupBindedGatewaysResponse,
   DescribeJvmMonitorRequest,
+  TaskRule,
   UnbindApiGroupRequest,
   TaskRecord,
   CreateNamespaceResponse,
@@ -90,6 +96,7 @@ import {
   LaneRule,
   MsInstance,
   GatewayPluginBoundParam,
+  ModifyNamespaceResponse,
   ModifyLaneRuleRequest,
   AddInstancesResponse,
   StartContainerGroupRequest,
@@ -105,6 +112,7 @@ import {
   ShrinkGroupResponse,
   CosUploadInfo,
   DescribeLanesResponse,
+  StartGroupRequest,
   CreateNamespaceRequest,
   DescribeClusterInstancesRequest,
   DescribeGroupBindedGatewaysRequest,
@@ -130,11 +138,12 @@ import {
   DescribePublicConfigRequest,
   AddClusterInstancesResponse,
   ImageRepository,
-  DescribeInovcationIndicatorsRequest,
+  DescribeOverviewInvocationResponse,
   CreatePublicConfigResponse,
   LaneRules,
   TsfPageVmGroup,
   CreateConfigResponse,
+  RevokeFileConfigRequest,
   DescribeCreateGatewayApiStatusRequest,
   RevocationPublicConfigResponse,
   DescribeConfigReleaseLogsRequest,
@@ -183,6 +192,7 @@ import {
   DescribeRepositoriesResponse,
   MonitorOverview,
   CreateGroupRequest,
+  DeleteClusterRequest,
   StopTaskBatchResponse,
   ServiceStatisticsResult,
   CreateContainGroupResponse,
@@ -202,13 +212,14 @@ import {
   DescribeApplicationBusinessLogConfigResponse,
   DescribeGroupResponse,
   Env,
-  ResourceFieldRef,
+  ModifyClusterRequest,
   Resource,
   DeleteContainerGroupResponse,
   DeleteServerlessGroupResponse,
   DeleteImageTagsResponse,
   DeliveryKafkaInfo,
   GroupUnitApiDailyUseStatistics,
+  DescribeFileConfigReleasesResponse,
   DisableUnitRouteResponse,
   ExecuteTaskRequest,
   DescribeGroupBusinessLogConfigsRequest,
@@ -233,10 +244,11 @@ import {
   VolumeInfo,
   UpdateApiTimeoutsRequest,
   Metric,
-  DescribeOverviewInvocationResponse,
+  DescribeInovcationIndicatorsRequest,
   ShrinkInstancesRequest,
   DescribeSimpleNamespacesRequest,
   ExecuteTaskFlowResponse,
+  DescribeClustersResponse,
   SearchBusinessLogRequest,
   ExpandGroupResponse,
   DescribePublicConfigsResponse,
@@ -254,15 +266,18 @@ import {
   AssociateBusinessLogConfigResponse,
   DescribeGatewayApisRequest,
   AssociateConfigWithGroupRequest,
+  TsfPageConfigReleaseLog,
   DescribeContainerGroupDetailRequest,
   JvmMonitorData,
   DescribeGroupsWithPluginRequest,
   ImageRepositoryResult,
   ModifyTaskResponse,
+  RevokeFileConfigResponse,
   SearchBusinessLogResponse,
   DeleteUnitNamespacesRequest,
   DescribeGroupRequest,
   UnitRuleItem,
+  UpdateConfigTemplateResponse,
   BindPluginRequest,
   HealthCheckSetting,
   DeleteLaneRuleRequest,
@@ -303,6 +318,7 @@ import {
   GatewayGroupIds,
   DescribeInvocationMetricDataDimensionRequest,
   DeployGroupResponse,
+  ModifyGroupResponse,
   BindApiGroupResponse,
   MetricDataPointMap,
   DescribeGroupAttributeResponse,
@@ -346,6 +362,7 @@ import {
   CreateAllGatewayApiAsyncRequest,
   PathRewrite,
   EnableTaskFlowResponse,
+  ApiDetailInfo,
   DeleteUnitRuleResponse,
   TsfPageConfigRelease,
   DisableTaskFlowResponse,
@@ -354,6 +371,7 @@ import {
   BindPluginResponse,
   RedoTaskFlowBatchRequest,
   TsfPageUnitNamespace,
+  CreateMicroserviceWithDetailRespRequest,
   BusinessLogConfigSchema,
   MetricDataSingleValue,
   StopTaskExecuteRequest,
@@ -379,6 +397,7 @@ import {
   VmGroupSimple,
   ApiResponseDescr,
   DescribeBusinessLogConfigsRequest,
+  DeleteConfigTemplateRequest,
   DescribePluginInstancesRequest,
   ApiRequestDescr,
   ApiVersionArray,
@@ -389,6 +408,7 @@ import {
   ConfigReleaseLog,
   CreateFileConfigResponse,
   CreateConfigRequest,
+  TsfPageClusterV2,
   DescribeUploadInfoRequest,
   OverviewBasicResourceUsage,
   DescribeUnitRulesResponse,
@@ -417,6 +437,7 @@ import {
   DescribeTaskDetailRequest,
   MultiValue,
   DescribePublicConfigReleasesRequest,
+  TsfPageFileConfigRelease,
   DescribeLaneRulesRequest,
   UnitRuleTag,
   DescribePluginInstancesResponse,
@@ -439,7 +460,7 @@ import {
   DescribePublicConfigReleaseLogsResponse,
   DeleteApiGroupRequest,
   ReleaseApiGroupRequest,
-  StartGroupRequest,
+  DescribeFileConfigReleasesRequest,
   DescribeClusterInstancesResponse,
   DescribeTaskDetailResponse,
   ExpandGroupRequest,
@@ -447,7 +468,7 @@ import {
   ModifyLaneRuleResponse,
   TsfPageSimpleGroup,
   DescribeGroupAttributeRequest,
-  TaskRule,
+  ModifyClusterResponse,
   PkgInfo,
   GroupPod,
   EnableTaskFlowRequest,
@@ -460,6 +481,7 @@ import {
   StdoutLogV2,
   GroupDailyUseStatistics,
   DescribeEnabledUnitRuleRequest,
+  CreateConfigTemplateRequest,
   DescribeApiGroupResponse,
   RedoTaskExecuteResponse,
   CreateLaneRequest,
@@ -472,12 +494,13 @@ import {
   OperateApplicationTcrBindingResponse,
   DisableUnitRouteRequest,
   DescribeUnitRulesRequest,
+  UpdateConfigTemplateRequest,
   DescribeGatewayAllGroupApisRequest,
   DeleteGroupRequest,
   ContainerGroupDetail,
   BindApiGroupRequest,
   StopTaskBatchRequest,
-  ApiDetailInfo,
+  ConfigTemplate,
   DescribeUnitApiUseDetailResponse,
   DescribeInvocationMetricScatterPlotResponse,
   DescribeUsableUnitNamespacesRequest,
@@ -497,11 +520,13 @@ import {
   DescribeInvocationMetricDataCurveResponse,
   DeleteConfigRequest,
   DescribeFileConfigsRequest,
+  CreateConfigTemplateResponse,
   ExecuteTaskResponse,
   CreateApiRateLimitRuleResponse,
   Config,
   ProtocolPort,
   DescribeApiUseDetailRequest,
+  CreateMicroserviceWithDetailRespResponse,
   TsfPageBusinessLogV2,
   FieldRef,
   CreateClusterRequest,
@@ -520,11 +545,13 @@ import {
   Filter,
   DescribeInvocationMetricDataPointResponse,
   DisableUnitRuleResponse,
+  ModifyApplicationRequest,
   DescribePathRewritesResponse,
   AddInstanceResult,
   DescribeFlowLastBatchStateResponse,
   StopTaskExecuteResponse,
   UpdateApiRateLimitRulesResponse,
+  DeleteRepositoryRequest,
   DescribeSimpleGroupsRequest,
   DescribeConfigReleasesResponse,
   ApiGroupInfo,
@@ -539,6 +566,7 @@ import {
   TsfPageApiDetailInfo,
   DescribeBasicResourceUsageRequest,
   DeleteMicroserviceResponse,
+  ResourceFieldRef,
   DescribeReleasedConfigResponse,
   HealthCheckConfig,
   TsfPageSimpleApplication,
@@ -546,12 +574,14 @@ import {
   DescribeApiDetailResponse,
   DescribeGroupsRequest,
   LaneRuleTag,
+  ModifyNamespaceRequest,
   OperationInfoDetail,
   CreatePathRewritesRequest,
   DeleteNamespaceRequest,
   SearchStdoutLogRequest,
   RedoTaskBatchResponse,
   DescribeStatisticsRequest,
+  ModifyGroupRequest,
   DescribeMicroserviceResponse,
   DescribeImageRepositoryResponse,
   TaskId,
@@ -561,7 +591,7 @@ import {
   CreateContainGroupRequest,
   DescribePublicConfigReleasesResponse,
   CreatePathRewritesResponse,
-  DeleteRepositoryRequest,
+  DescribeConfigTemplateRequest,
   DraftApiGroupResponse,
   DescribeConfigSummaryRequest,
   DeleteLaneRequest,
@@ -703,6 +733,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除集群
+   */
+  async DeleteCluster(
+    req: DeleteClusterRequest,
+    cb?: (error: string, rep: DeleteClusterResponse) => void
+  ): Promise<DeleteClusterResponse> {
+    return this.request("DeleteCluster", req, cb)
+  }
+
+  /**
    * 重新执行工作流批次
    */
   async RedoTaskFlowBatch(
@@ -753,13 +793,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 停用任务
+   * 创建参数模板
    */
-  async DisableTask(
-    req: DisableTaskRequest,
-    cb?: (error: string, rep: DisableTaskResponse) => void
-  ): Promise<DisableTaskResponse> {
-    return this.request("DisableTask", req, cb)
+  async CreateConfigTemplate(
+    req: CreateConfigTemplateRequest,
+    cb?: (error: string, rep: CreateConfigTemplateResponse) => void
+  ): Promise<CreateConfigTemplateResponse> {
+    return this.request("CreateConfigTemplate", req, cb)
   }
 
   /**
@@ -820,6 +860,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTaskDetailResponse) => void
   ): Promise<DescribeTaskDetailResponse> {
     return this.request("DescribeTaskDetail", req, cb)
+  }
+
+  /**
+   * 修改集群信息
+   */
+  async ModifyCluster(
+    req: ModifyClusterRequest,
+    cb?: (error: string, rep: ModifyClusterResponse) => void
+  ): Promise<ModifyClusterResponse> {
+    return this.request("ModifyCluster", req, cb)
   }
 
   /**
@@ -900,6 +950,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeApiDetailResponse) => void
   ): Promise<DescribeApiDetailResponse> {
     return this.request("DescribeApiDetail", req, cb)
+  }
+
+  /**
+   * 撤回已发布的文件配置
+   */
+  async RevokeFileConfig(
+    req: RevokeFileConfigRequest,
+    cb?: (error: string, rep: RevokeFileConfigResponse) => void
+  ): Promise<RevokeFileConfigResponse> {
+    return this.request("RevokeFileConfig", req, cb)
   }
 
   /**
@@ -1094,13 +1154,13 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
   }
 
   /**
-   * 查询公共配置（单条）
+   * 镜像仓库列表
    */
-  async DescribePublicConfig(
-    req: DescribePublicConfigRequest,
-    cb?: (error: string, rep: DescribePublicConfigResponse) => void
-  ): Promise<DescribePublicConfigResponse> {
-    return this.request("DescribePublicConfig", req, cb)
+  async DescribeImageRepository(
+    req: DescribeImageRepositoryRequest,
+    cb?: (error: string, rep: DescribeImageRepositoryResponse) => void
+  ): Promise<DescribeImageRepositoryResponse> {
+    return this.request("DescribeImageRepository", req, cb)
   }
 
   /**
@@ -1334,6 +1394,16 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
   }
 
   /**
+   * 获取集群列表
+   */
+  async DescribeClusters(
+    req: DescribeClustersRequest,
+    cb?: (error: string, rep: DescribeClustersResponse) => void
+  ): Promise<DescribeClustersResponse> {
+    return this.request("DescribeClusters", req, cb)
+  }
+
+  /**
    * 查询日志配置项列表
    */
   async DescribeBusinessLogConfigs(
@@ -1384,13 +1454,13 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
   }
 
   /**
-   * 镜像仓库列表
+   * 查询文件配置项发布信息
    */
-  async DescribeImageRepository(
-    req: DescribeImageRepositoryRequest,
-    cb?: (error: string, rep: DescribeImageRepositoryResponse) => void
-  ): Promise<DescribeImageRepositoryResponse> {
-    return this.request("DescribeImageRepository", req, cb)
+  async DescribeFileConfigReleases(
+    req: DescribeFileConfigReleasesRequest,
+    cb?: (error: string, rep: DescribeFileConfigReleasesResponse) => void
+  ): Promise<DescribeFileConfigReleasesResponse> {
+    return this.request("DescribeFileConfigReleases", req, cb)
   }
 
   /**
@@ -1504,13 +1574,13 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
   }
 
   /**
-   * 启用任务
+   * 删除模板
    */
-  async EnableTask(
-    req: EnableTaskRequest,
-    cb?: (error: string, rep: EnableTaskResponse) => void
-  ): Promise<EnableTaskResponse> {
-    return this.request("EnableTask", req, cb)
+  async DeleteConfigTemplate(
+    req: DeleteConfigTemplateRequest,
+    cb?: (error: string, rep: DeleteConfigTemplateResponse) => void
+  ): Promise<DeleteConfigTemplateResponse> {
+    return this.request("DeleteConfigTemplate", req, cb)
   }
 
   /**
@@ -1562,6 +1632,16 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     cb?: (error: string, rep: AddInstancesResponse) => void
   ): Promise<AddInstancesResponse> {
     return this.request("AddInstances", req, cb)
+  }
+
+  /**
+   * 修改命名空间
+   */
+  async ModifyNamespace(
+    req: ModifyNamespaceRequest,
+    cb?: (error: string, rep: ModifyNamespaceResponse) => void
+  ): Promise<ModifyNamespaceResponse> {
+    return this.request("ModifyNamespace", req, cb)
   }
 
   /**
@@ -1635,13 +1715,13 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
   }
 
   /**
-   * 查询简单应用列表
+   * 查询公共配置（单条）
    */
-  async DescribeSimpleApplications(
-    req: DescribeSimpleApplicationsRequest,
-    cb?: (error: string, rep: DescribeSimpleApplicationsResponse) => void
-  ): Promise<DescribeSimpleApplicationsResponse> {
-    return this.request("DescribeSimpleApplications", req, cb)
+  async DescribePublicConfig(
+    req: DescribePublicConfigRequest,
+    cb?: (error: string, rep: DescribePublicConfigResponse) => void
+  ): Promise<DescribePublicConfigResponse> {
+    return this.request("DescribePublicConfig", req, cb)
   }
 
   /**
@@ -1655,13 +1735,13 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
   }
 
   /**
-   * 发布Api分组
+   * 修改应用
    */
-  async ReleaseApiGroup(
-    req: ReleaseApiGroupRequest,
-    cb?: (error: string, rep: ReleaseApiGroupResponse) => void
-  ): Promise<ReleaseApiGroupResponse> {
-    return this.request("ReleaseApiGroup", req, cb)
+  async ModifyApplication(
+    req: ModifyApplicationRequest,
+    cb?: (error: string, rep: ModifyApplicationResponse) => void
+  ): Promise<ModifyApplicationResponse> {
+    return this.request("ModifyApplication", req, cb)
   }
 
   /**
@@ -1746,13 +1826,13 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
   }
 
   /**
-   * 查询路径重写
+   * 导入配置
    */
-  async DescribePathRewrite(
-    req: DescribePathRewriteRequest,
-    cb?: (error: string, rep: DescribePathRewriteResponse) => void
-  ): Promise<DescribePathRewriteResponse> {
-    return this.request("DescribePathRewrite", req, cb)
+  async DescribeConfigTemplate(
+    req: DescribeConfigTemplateRequest,
+    cb?: (error: string, rep: DescribeConfigTemplateResponse) => void
+  ): Promise<DescribeConfigTemplateResponse> {
+    return this.request("DescribeConfigTemplate", req, cb)
   }
 
   /**
@@ -1846,6 +1926,16 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
   }
 
   /**
+   * 更新参数模板
+   */
+  async UpdateConfigTemplate(
+    req: UpdateConfigTemplateRequest,
+    cb?: (error: string, rep: UpdateConfigTemplateResponse) => void
+  ): Promise<UpdateConfigTemplateResponse> {
+    return this.request("UpdateConfigTemplate", req, cb)
+  }
+
+  /**
    * 查询配置发布信息
    */
   async DescribeConfigReleases(
@@ -1923,6 +2013,26 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     cb?: (error: string, rep: ModifyLaneResponse) => void
   ): Promise<ModifyLaneResponse> {
     return this.request("ModifyLane", req, cb)
+  }
+
+  /**
+   * 启用任务
+   */
+  async EnableTask(
+    req: EnableTaskRequest,
+    cb?: (error: string, rep: EnableTaskResponse) => void
+  ): Promise<EnableTaskResponse> {
+    return this.request("EnableTask", req, cb)
+  }
+
+  /**
+   * 新增微服务返回id
+   */
+  async CreateMicroserviceWithDetailResp(
+    req: CreateMicroserviceWithDetailRespRequest,
+    cb?: (error: string, rep: CreateMicroserviceWithDetailRespResponse) => void
+  ): Promise<CreateMicroserviceWithDetailRespResponse> {
+    return this.request("CreateMicroserviceWithDetailResp", req, cb)
   }
 
   /**
@@ -2006,6 +2116,16 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
   }
 
   /**
+   * 发布Api分组
+   */
+  async ReleaseApiGroup(
+    req: ReleaseApiGroupRequest,
+    cb?: (error: string, rep: ReleaseApiGroupResponse) => void
+  ): Promise<ReleaseApiGroupResponse> {
+    return this.request("ReleaseApiGroup", req, cb)
+  }
+
+  /**
    * 关联日志配置项到应用
    */
   async AssociateBusinessLogConfig(
@@ -2033,6 +2153,26 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     cb?: (error: string, rep: DescribeConfigReleaseLogsResponse) => void
   ): Promise<DescribeConfigReleaseLogsResponse> {
     return this.request("DescribeConfigReleaseLogs", req, cb)
+  }
+
+  /**
+   * 查询简单应用列表
+   */
+  async DescribeSimpleApplications(
+    req: DescribeSimpleApplicationsRequest,
+    cb?: (error: string, rep: DescribeSimpleApplicationsResponse) => void
+  ): Promise<DescribeSimpleApplicationsResponse> {
+    return this.request("DescribeSimpleApplications", req, cb)
+  }
+
+  /**
+   * 查询路径重写
+   */
+  async DescribePathRewrite(
+    req: DescribePathRewriteRequest,
+    cb?: (error: string, rep: DescribePathRewriteResponse) => void
+  ): Promise<DescribePathRewriteResponse> {
+    return this.request("DescribePathRewrite", req, cb)
   }
 
   /**
@@ -2093,6 +2233,16 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     cb?: (error: string, rep: DeleteRepositoryResponse) => void
   ): Promise<DeleteRepositoryResponse> {
     return this.request("DeleteRepository", req, cb)
+  }
+
+  /**
+   * 停用任务
+   */
+  async DisableTask(
+    req: DisableTaskRequest,
+    cb?: (error: string, rep: DisableTaskResponse) => void
+  ): Promise<DisableTaskResponse> {
+    return this.request("DisableTask", req, cb)
   }
 
   /**
@@ -2283,6 +2433,16 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     cb?: (error: string, rep: ChangeApiUsableStatusResponse) => void
   ): Promise<ChangeApiUsableStatusResponse> {
     return this.request("ChangeApiUsableStatus", req, cb)
+  }
+
+  /**
+   * 更新部署组信息
+   */
+  async ModifyGroup(
+    req: ModifyGroupRequest,
+    cb?: (error: string, rep: ModifyGroupResponse) => void
+  ): Promise<ModifyGroupResponse> {
+    return this.request("ModifyGroup", req, cb)
   }
 
   /**

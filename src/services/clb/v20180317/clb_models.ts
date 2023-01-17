@@ -4322,7 +4322,7 @@ Public：公网属性， Private：内网属性。
   ExtraInfo: ExtraInfo
 
   /**
-      * 负载均衡维度的个性化配置ID。
+      * 负载均衡维度的个性化配置ID，多个配置用逗号隔开。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ConfigId: string
