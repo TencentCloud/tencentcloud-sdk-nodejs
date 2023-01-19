@@ -308,7 +308,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取项目下的日志列表（实例创建的项目下的日志列表）
+   * (已下线，请用DescribeRumLogList)
    */
   async DescribeLogList(
     req: DescribeLogListRequest,

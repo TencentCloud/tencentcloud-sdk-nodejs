@@ -143,6 +143,7 @@ import {
   VanityNameServers,
   RuleItem,
   ModifySecurityWafGroupPolicyResponse,
+  DescribeTimingL7SourceDataResponse,
   DescribeWebManagedRulesDataRequest,
   RuleChoicePropertiesItem,
   DescribeWebManagedRulesDataResponse,
@@ -238,6 +239,7 @@ import {
   Header,
   RuleAndConditions,
   DescribeSpeedTestingDetailsRequest,
+  DescribeTimingL7SourceDataRequest,
   DropPageConfig,
   SpeedTestingMetricData,
   UpdateOriginProtectionIPWhitelistResponse,
@@ -377,6 +379,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateOriginGroupResponse) => void
   ): Promise<CreateOriginGroupResponse> {
     return this.request("CreateOriginGroup", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeTimingL7SourceData）查询七层回源分析时序数据。
+   */
+  async DescribeTimingL7SourceData(
+    req: DescribeTimingL7SourceDataRequest,
+    cb?: (error: string, rep: DescribeTimingL7SourceDataResponse) => void
+  ): Promise<DescribeTimingL7SourceDataResponse> {
+    return this.request("DescribeTimingL7SourceData", req, cb)
   }
 
   /**

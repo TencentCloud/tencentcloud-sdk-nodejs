@@ -58,6 +58,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateOriginGroup", req, cb);
     }
     /**
+     * 本接口（DescribeTimingL7SourceData）查询七层回源分析时序数据。
+     */
+    async DescribeTimingL7SourceData(req, cb) {
+        return this.request("DescribeTimingL7SourceData", req, cb);
+    }
+    /**
      * 查询清除缓存历史记录
      */
     async DescribePurgeTasks(req, cb) {

@@ -68,7 +68,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeRumGroupLog(req: DescribeRumGroupLogRequest, cb?: (error: string, rep: DescribeRumGroupLogResponse) => void): Promise<DescribeRumGroupLogResponse>;
     /**
-     * 获取项目下的日志列表（实例创建的项目下的日志列表）
+     * (已下线，请用DescribeRumLogList)
      */
     DescribeLogList(req: DescribeLogListRequest, cb?: (error: string, rep: DescribeLogListResponse) => void): Promise<DescribeLogListResponse>;
     /**

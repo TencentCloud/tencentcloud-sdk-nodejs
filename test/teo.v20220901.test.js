@@ -68,6 +68,16 @@ it("teo.v20220901.CreateOriginGroup", async function () {
     }
 })
 
+it("teo.v20220901.DescribeTimingL7SourceData", async function () {
+    try {
+       const data = await client.DescribeTimingL7SourceData({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("teo.v20220901.DescribePurgeTasks", async function () {
     try {
        const data = await client.DescribePurgeTasks({})
