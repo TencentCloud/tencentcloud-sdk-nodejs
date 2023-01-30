@@ -209,6 +209,16 @@ export interface SpecConfig {
 }
 
 /**
+ * UpgradeHourDCDBInstance返回参数结构体
+ */
+export interface UpgradeHourDCDBInstanceResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyRealServerAccessStrategy返回参数结构体
  */
 export interface ModifyRealServerAccessStrategyResponse {
@@ -627,6 +637,59 @@ export interface DescribeFlowResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * UpgradeHourDCDBInstance请求参数结构体
+ */
+export interface UpgradeHourDCDBInstanceRequest {
+  /**
+   * 待升级的实例ID。形如：dcdbt-ow728lmc，可以通过 DescribeDCDBInstances 查询实例详情获得。
+   */
+  InstanceId: string
+
+  /**
+      * 升级类型，取值范围: 
+<li> ADD: 新增分片 </li> 
+ <li> EXPAND: 升级实例中的已有分片 </li> 
+ <li> SPLIT: 将已有分片中的数据切分到新增分片上</li>
+      */
+  UpgradeType: string
+
+  /**
+   * 新增分片配置，当UpgradeType为ADD时生效。
+   */
+  AddShardConfig?: AddShardConfig
+
+  /**
+   * 扩容分片配置，当UpgradeType为EXPAND时生效。
+   */
+  ExpandShardConfig?: ExpandShardConfig
+
+  /**
+   * 切分分片配置，当UpgradeType为SPLIT时生效。
+   */
+  SplitShardConfig?: SplitShardConfig
+
+  /**
+   * 切换开始时间，格式如: "2019-12-12 07:00:00"。开始时间必须在当前时间一个小时以后，3天以内。
+   */
+  SwitchStartTime?: string
+
+  /**
+   * 切换结束时间,  格式如: "2019-12-12 07:15:00"，结束时间必须大于开始时间。
+   */
+  SwitchEndTime?: string
+
+  /**
+   * 是否自动重试。 0：不自动重试  1：自动重试
+   */
+  SwitchAutoRetry?: number
+
+  /**
+   * 变更部署时指定的新可用区列表，第1个为主可用区，其余为从可用区
+   */
+  Zones?: Array<string>
 }
 
 /**

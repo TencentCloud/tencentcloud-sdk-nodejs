@@ -28,6 +28,7 @@ import {
   DescribeDBParametersRequest,
   DescribeAccountsRequest,
   SpecConfig,
+  UpgradeHourDCDBInstanceResponse,
   ModifyRealServerAccessStrategyResponse,
   ActiveHourDCDBInstanceResponse,
   DescribeDCDBPriceResponse,
@@ -48,6 +49,7 @@ import {
   IsolateHourDCDBInstanceRequest,
   ModifyDBInstanceNameResponse,
   DescribeFlowResponse,
+  UpgradeHourDCDBInstanceRequest,
   CloneAccountResponse,
   IsolateDedicatedDBInstanceRequest,
   ModifyAccountDescriptionResponse,
@@ -479,6 +481,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: IsolateHourDCDBInstanceResponse) => void
   ): Promise<IsolateHourDCDBInstanceResponse> {
     return this.request("IsolateHourDCDBInstance", req, cb)
+  }
+
+  /**
+   * 本接口（UpgradeHourDCDBInstance）用于升级后付费分布式数据库实例。
+   */
+  async UpgradeHourDCDBInstance(
+    req: UpgradeHourDCDBInstanceRequest,
+    cb?: (error: string, rep: UpgradeHourDCDBInstanceResponse) => void
+  ): Promise<UpgradeHourDCDBInstanceResponse> {
+    return this.request("UpgradeHourDCDBInstance", req, cb)
   }
 
   /**

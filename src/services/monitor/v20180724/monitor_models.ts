@@ -709,7 +709,7 @@ export interface UpdateGrafanaWhiteListResponse {
  */
 export interface DescribeGrafanaEnvironmentsRequest {
   /**
-   * Grafana 实例 ID，例如：Grafana 实例 ID，例如：grafana-abcdefghGrafana 实例 ID，例如：grafana-abcdefgh
+   * Grafana 实例 ID，例如：grafana-abcdefgh
    */
   InstanceId: string
 }
@@ -5929,7 +5929,7 @@ export interface DescribeGrafanaEnvironmentsResponse {
   /**
    * 环境变量字符串
    */
-  Envs: string
+  Envs?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

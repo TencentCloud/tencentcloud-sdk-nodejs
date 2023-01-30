@@ -205,6 +205,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("IsolateHourDCDBInstance", req, cb);
     }
     /**
+     * 本接口（UpgradeHourDCDBInstance）用于升级后付费分布式数据库实例。
+     */
+    async UpgradeHourDCDBInstance(req, cb) {
+        return this.request("UpgradeHourDCDBInstance", req, cb);
+    }
+    /**
      * 本接口（DescribeDBSyncMode）用于查询云数据库实例的同步模式。
      */
     async DescribeDBSyncMode(req, cb) {

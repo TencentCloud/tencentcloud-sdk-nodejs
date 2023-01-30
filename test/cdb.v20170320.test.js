@@ -48,6 +48,16 @@ it("cdb.v20170320.CreateAuditPolicy", async function () {
     }
 })
 
+it("cdb.v20170320.DescribeDBFeatures", async function () {
+    try {
+       const data = await client.DescribeDBFeatures({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdb.v20170320.DescribeDataBackupOverview", async function () {
     try {
        const data = await client.DescribeDataBackupOverview({})

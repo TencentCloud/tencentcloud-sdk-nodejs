@@ -298,6 +298,16 @@ it("dcdb.v20180411.IsolateHourDCDBInstance", async function () {
     }
 })
 
+it("dcdb.v20180411.UpgradeHourDCDBInstance", async function () {
+    try {
+       const data = await client.UpgradeHourDCDBInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dcdb.v20180411.DescribeDBSyncMode", async function () {
     try {
        const data = await client.DescribeDBSyncMode({})

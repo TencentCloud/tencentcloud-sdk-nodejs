@@ -106,6 +106,7 @@ import {
   ModifyRemoteBackupConfigResponse,
   DescribeDBInstanceInfoResponse,
   AssociateSecurityGroupsRequest,
+  DescribeDBFeaturesResponse,
   ModifyAuditRuleRequest,
   DescribeBinlogsResponse,
   DescribeRoMinScaleRequest,
@@ -332,6 +333,7 @@ import {
   StartReplicationRequest,
   DescribeDBInstanceCharsetResponse,
   UpgradeCDBProxyRequest,
+  DescribeDBFeaturesRequest,
   DescribeBackupSummariesResponse,
   DescribeBinlogBackupOverviewRequest,
   ModifyDBInstanceSecurityGroupsRequest,
@@ -416,6 +418,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateAuditPolicyResponse) => void
   ): Promise<CreateAuditPolicyResponse> {
     return this.request("CreateAuditPolicy", req, cb)
+  }
+
+  /**
+   * 本接口(DescribeDBFeatures)用于查询云数据库版本属性，包括是否支持数据库加密、数据库审计等功能。
+   */
+  async DescribeDBFeatures(
+    req: DescribeDBFeaturesRequest,
+    cb?: (error: string, rep: DescribeDBFeaturesResponse) => void
+  ): Promise<DescribeDBFeaturesResponse> {
+    return this.request("DescribeDBFeatures", req, cb)
   }
 
   /**

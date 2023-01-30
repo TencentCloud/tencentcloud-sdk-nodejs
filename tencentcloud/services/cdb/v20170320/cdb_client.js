@@ -46,6 +46,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateAuditPolicy", req, cb);
     }
     /**
+     * 本接口(DescribeDBFeatures)用于查询云数据库版本属性，包括是否支持数据库加密、数据库审计等功能。
+     */
+    async DescribeDBFeatures(req, cb) {
+        return this.request("DescribeDBFeatures", req, cb);
+    }
+    /**
      * 本接口(DescribeDataBackupOverview)用于查询用户在当前地域总的数据备份概览。
      */
     async DescribeDataBackupOverview(req, cb) {

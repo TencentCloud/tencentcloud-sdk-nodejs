@@ -2348,6 +2348,61 @@ export interface AssociateSecurityGroupsRequest {
 }
 
 /**
+ * DescribeDBFeatures返回参数结构体
+ */
+export interface DescribeDBFeaturesResponse {
+  /**
+   * 是否支持数据库审计功能。
+   */
+  IsSupportAudit?: boolean
+
+  /**
+   * 开启审计是否需要升级内核版本。
+   */
+  AuditNeedUpgrade?: boolean
+
+  /**
+   * 是否支持数据库加密功能。
+   */
+  IsSupportEncryption?: boolean
+
+  /**
+   * 开启加密是否需要升级内核版本。
+   */
+  EncryptionNeedUpgrade?: boolean
+
+  /**
+   * 是否为异地只读实例。
+   */
+  IsRemoteRo?: boolean
+
+  /**
+   * 主实例所在地域。
+   */
+  MasterRegion?: string
+
+  /**
+   * 是否支持小版本升级。
+   */
+  IsSupportUpdateSubVersion?: boolean
+
+  /**
+   * 当前内核版本。
+   */
+  CurrentSubVersion?: string
+
+  /**
+   * 可供升级的内核版本。
+   */
+  TargetSubVersion?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyAuditRule请求参数结构体
  */
 export interface ModifyAuditRuleRequest {
@@ -8394,6 +8449,16 @@ export interface UpgradeCDBProxyRequest {
    * 升级时间 nowTime（升级完成时）timeWindow（实例维护时间）
    */
   UpgradeTime: string
+}
+
+/**
+ * DescribeDBFeatures请求参数结构体
+ */
+export interface DescribeDBFeaturesRequest {
+  /**
+   * 实例 ID，格式如：cdb-c1nl9rpv 或者 cdbro-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
+   */
+  InstanceId: string
 }
 
 /**
