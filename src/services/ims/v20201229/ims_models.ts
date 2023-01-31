@@ -61,6 +61,23 @@ export interface ImageModerationRequest {
 }
 
 /**
+ * 识别类型标签结果信息
+ */
+export interface RecognitionResult {
+  /**
+      * 当前可能的取值：Scene（图片场景模型）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Label?: string
+
+  /**
+      * Label对应模型下的识别标签信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Tags?: Array<RecognitionTag>
+}
+
+/**
  * 用于返回实体检测结果详情
  */
 export interface ObjectResult {
@@ -151,6 +168,29 @@ export interface OcrTextDetail {
    * 该字段用于返回检测结果所对应的恶意二级标签。
    */
   SubLabel: string
+}
+
+/**
+ * 识别类型标签信息
+ */
+export interface RecognitionTag {
+  /**
+      * 标签名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Name?: string
+
+  /**
+      * 置信分：0～100，数值越大表示置信度越高
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Score?: number
+
+  /**
+      * 标签位置信息，若模型无位置信息，则可能为零值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Location?: Location
 }
 
 /**
@@ -450,67 +490,73 @@ export interface ImageModerationResponse {
   /**
    * 该字段用于返回Label标签下的后续操作建议。当您获取到判定结果后，返回值表示系统推荐的后续操作；建议您按照业务所需，对不同违规类型与建议值进行处理。<br>返回值：**Block**：建议屏蔽，**Review** ：建议人工复审，**Pass**：建议通过
    */
-  Suggestion: string
+  Suggestion?: string
 
   /**
    * 该字段用于返回检测结果（LabelResults）中所对应的**优先级最高的恶意标签**，表示模型推荐的审核结果，建议您按照业务所需，对不同违规类型与建议值进行处理。<br>返回值：**Normal**：正常，**Porn**：色情，**Abuse**：谩骂，**Ad**：广告，**Custom**：自定义违规；以及其他令人反感、不安全或不适宜的内容类型。
    */
-  Label: string
+  Label?: string
 
   /**
    * 该字段用于返回检测结果所命中优先级最高的恶意标签下的子标签名称，如：*色情--性行为*；若未命中任何子标签则返回空字符串。
    */
-  SubLabel: string
+  SubLabel?: string
 
   /**
    * 该字段用于返回当前标签（Label）下的置信度，取值范围：0（**置信度最低**）-100（**置信度最高** ），越高代表图片越有可能属于当前返回的标签；如：*色情 99*，则表明该图片非常有可能属于色情内容；*色情 0*，则表明该图片不属于色情内容。
    */
-  Score: number
+  Score?: number
 
   /**
       * 该字段用于返回分类模型命中的恶意标签的详细识别结果，包括涉黄、广告等令人反感、不安全或不适宜的内容类型识别结果。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  LabelResults: Array<LabelResult>
+  LabelResults?: Array<LabelResult>
 
   /**
       * 该字段用于返回物体检测模型的详细检测结果；包括：实体、广告台标、二维码等内容命中的标签名称、标签分数、坐标信息、场景识别结果、建议操作等内容审核信息；详细返回值信息可参阅对应的数据结构（ObjectResults）描述。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ObjectResults: Array<ObjectResult>
+  ObjectResults?: Array<ObjectResult>
 
   /**
       * 该字段用于返回OCR文本识别的详细检测结果；包括：文本坐标信息、文本识别结果、建议操作等内容审核信息；详细返回值信息可参阅对应的数据结构（OcrResults）描述。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  OcrResults: Array<OcrResult>
+  OcrResults?: Array<OcrResult>
 
   /**
       * 该字段用于返回基于图片风险库（风险黑库与正常白库）识别的结果,详细返回值信息可参阅对应的数据结构（LibResults）描述。<br>备注：图片风险库目前**暂不支持自定义库**。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  LibResults: Array<LibResult>
+  LibResults?: Array<LibResult>
 
   /**
    * 该字段用于返回检测对象对应请求参数中的DataId。
    */
-  DataId: string
+  DataId?: string
 
   /**
    * 该字段用于返回检测对象对应请求参数中的BizType。
    */
-  BizType: string
+  BizType?: string
 
   /**
       * 该字段用于返回根据您的需求配置的额外附加信息（Extra），如未配置则默认返回值为空。<br>备注：不同客户或Biztype下返回信息不同，如需配置该字段请提交工单咨询或联系售后专员处理。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Extra: string
+  Extra?: string
 
   /**
    * 该字段用于返回检测对象对应的MD5校验值，以方便校验文件完整性。
    */
-  FileMD5: string
+  FileMD5?: string
+
+  /**
+      * 该字段用于返回仅识别图片元素的模型结果；包括：场景模型命中的标签、置信度和位置信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RecognitionResults?: Array<RecognitionResult>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

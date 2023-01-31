@@ -12,7 +12,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeAccessExports(req: DescribeAccessExportsRequest, cb?: (error: string, rep: DescribeAccessExportsResponse) => void): Promise<DescribeAccessExportsResponse>;
     /**
-     * 开启或禁用自定义策略
+     * 开启或禁用访问控制（自定义策略）
      */
     ModifyCustomRuleStatus(req: ModifyCustomRuleStatusRequest, cb?: (error: string, rep: ModifyCustomRuleStatusResponse) => void): Promise<ModifyCustomRuleStatusResponse>;
     /**
@@ -86,7 +86,7 @@ export declare class Client extends AbstractClient {
      */
     GetAttackDownloadRecords(req?: GetAttackDownloadRecordsRequest, cb?: (error: string, rep: GetAttackDownloadRecordsResponse) => void): Promise<GetAttackDownloadRecordsResponse>;
     /**
-     * 增加自定义策略
+     * 增加访问控制（自定义策略）
      */
     AddCustomRule(req: AddCustomRuleRequest, cb?: (error: string, rep: AddCustomRuleResponse) => void): Promise<AddCustomRuleResponse>;
     /**

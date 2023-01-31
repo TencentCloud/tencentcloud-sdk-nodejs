@@ -1231,21 +1231,17 @@ export interface CreateTmpInstancesRequest {
     RollbackTime: string;
 }
 /**
- * 数据库表权限
+ * RestartDBInstances返回参数结构体
  */
-export interface TablePrivilege {
+export interface RestartDBInstancesResponse {
     /**
-      * 数据库名
+      * 异步任务ID
       */
-    Database: string;
+    FlowId: number;
     /**
-      * 数据库表名
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Table: string;
-    /**
-      * 权限信息
-      */
-    Privileges: Array<string>;
+    RequestId?: string;
 }
 /**
  * DescribeProjectSecurityGroups返回参数结构体
@@ -1366,19 +1362,6 @@ export interface DescribeBackupTimeRequest {
     InstanceIds: Array<string>;
 }
 /**
- * RestartDBInstances返回参数结构体
- */
-export interface RestartDBInstancesResponse {
-    /**
-      * 异步任务ID
-      */
-    FlowId: number;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
  * DescribeSaleInfo返回参数结构体
  */
 export interface DescribeSaleInfoResponse {
@@ -1386,6 +1369,27 @@ export interface DescribeSaleInfoResponse {
       * 可售卖地域信息列表
       */
     RegionList: Array<RegionInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeDBEncryptAttributes返回参数结构体
+ */
+export interface DescribeDBEncryptAttributesResponse {
+    /**
+      * 是否启用加密，1-已开启；0-未开启。
+      */
+    EncryptStatus: number;
+    /**
+      * DEK密钥
+      */
+    CipherText: string;
+    /**
+      * DEK密钥过期日期。
+      */
+    ExpireDate: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1408,6 +1412,15 @@ export interface DatabaseTable {
       * 表名
       */
     Table: string;
+}
+/**
+ * DescribeDBEncryptAttributes请求参数结构体
+ */
+export interface DescribeDBEncryptAttributesRequest {
+    /**
+      * 实例Id，形如：tdsql-ow728lmc。
+      */
+    InstanceId: string;
 }
 /**
  * 订单信息
@@ -3289,6 +3302,23 @@ export interface DescribeDBSlowLogsResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 数据库表权限
+ */
+export interface TablePrivilege {
+    /**
+      * 数据库名
+      */
+    Database: string;
+    /**
+      * 数据库表名
+      */
+    Table: string;
+    /**
+      * 权限信息
+      */
+    Privileges: Array<string>;
 }
 /**
  * UpgradeDBInstance返回参数结构体

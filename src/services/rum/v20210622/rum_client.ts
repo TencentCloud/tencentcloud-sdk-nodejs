@@ -268,7 +268,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 恢复实例
+   * 恢复 RUM 业务系统，恢复后，用户可以正常使用和上报数据
    */
   async ResumeInstance(
     req: ResumeInstanceRequest,
@@ -328,7 +328,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建Rum实例
+   * 创建 RUM 业务系统
    */
   async CreateTawInstance(
     req: CreateTawInstanceRequest,
@@ -437,7 +437,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改实例信息
+   * 修改 RUM 业务系统
    */
   async ModifyInstance(
     req: ModifyInstanceRequest,
@@ -457,7 +457,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取项目上报率列表
+   * 获取应用上报抽样信息
    */
   async DescribeProjectLimits(
     req: DescribeProjectLimitsRequest,
@@ -547,7 +547,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改 rum 项目信息
+   * 修改 RUM 应用信息
    */
   async ModifyProject(
     req: ModifyProjectRequest,
@@ -557,7 +557,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取项目对应sourcemap文件列表
+   * 获取应用对应sourcemap文件列表
    */
   async DescribeReleaseFiles(
     req: DescribeReleaseFilesRequest,
@@ -631,7 +631,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建项目（归属于某个团队）
+   * 创建 RUM 应用（归属于某个团队）
    */
   async CreateProject(
     req: CreateProjectRequest,

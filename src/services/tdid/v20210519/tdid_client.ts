@@ -43,7 +43,6 @@ import {
   Authority,
   CreateLabelResponse,
   GetPublicKeyRequest,
-  VerifyPurchaseRequest,
   Label,
   GetDidServiceListResponse,
   DeployByNameResponse,
@@ -82,7 +81,6 @@ import {
   DeployByNameRequest,
   GetDidServiceListRequest,
   GetAuthorityIssuerRequest,
-  VerifyPurchaseResponse,
   GetDidClusterListResponse,
   RecognizeAuthorityIssuerRequest,
   GetCredentialStatusRequest,
@@ -497,18 +495,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetDidDocumentResponse) => void
   ): Promise<GetDidDocumentResponse> {
     return this.request("GetDidDocument", req, cb)
-  }
-
-  /**
-     * 该接口已废弃
-
-验证购买
-     */
-  async VerifyPurchase(
-    req?: VerifyPurchaseRequest,
-    cb?: (error: string, rep: VerifyPurchaseResponse) => void
-  ): Promise<VerifyPurchaseResponse> {
-    return this.request("VerifyPurchase", req, cb)
   }
 
   /**

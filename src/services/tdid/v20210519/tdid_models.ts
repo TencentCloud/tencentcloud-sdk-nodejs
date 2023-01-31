@@ -528,11 +528,6 @@ export interface GetPublicKeyRequest {
 }
 
 /**
- * VerifyPurchase请求参数结构体
- */
-export type VerifyPurchaseRequest = null
-
-/**
  * 标签
  */
 export interface Label {
@@ -1245,16 +1240,6 @@ export interface GetAuthorityIssuerRequest {
    * tdid
    */
   Did: string
-}
-
-/**
- * VerifyPurchase返回参数结构体
- */
-export interface VerifyPurchaseResponse {
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**

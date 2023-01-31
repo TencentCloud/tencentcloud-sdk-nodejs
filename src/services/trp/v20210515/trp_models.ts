@@ -123,6 +123,216 @@ export interface CodeBatch {
 }
 
 /**
+ * DescribeScanLogs返回参数结构体
+ */
+export interface DescribeScanLogsResponse {
+  /**
+      * 【弃用】
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Products: Array<ScanLog>
+
+  /**
+   * 条数
+   */
+  TotalCount: number
+
+  /**
+   * 扫描记录
+   */
+  ScanLogs: Array<ScanLog>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 企业配额信息
+ */
+export interface Quota {
+  /**
+      * 服务开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  StartTime: string
+
+  /**
+      * 服务结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EndTime: string
+
+  /**
+      * 配额ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  QuotaId?: number
+
+  /**
+      * 企业ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CorpId?: number
+
+  /**
+      * 开通服务
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Services?: Array<string>
+
+  /**
+      * 商户配额
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FactoryQuota?: number
+
+  /**
+      * 商品配额
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ItemQuota?: number
+
+  /**
+      * 溯源码配额
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TrackQuota?: number
+
+  /**
+      * 销售码配额
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SaleQuota?: number
+
+  /**
+      * 上链配额
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ChainQuota?: number
+
+  /**
+      * 风控配额
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RiskQuota?: number
+
+  /**
+      * 溯源类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TrackType?: number
+
+  /**
+      * 开通版本 lite:轻量版, basic:基础版, standard:标准版
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Version?: string
+}
+
+/**
+ * 扫码明细
+ */
+export interface ScanLog {
+  /**
+      * 行ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LogId: number
+
+  /**
+      * 微信openid
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Openid: string
+
+  /**
+      * 微信昵称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Nickname: string
+
+  /**
+      * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CreateTime: string
+
+  /**
+      * 码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Code: string
+
+  /**
+      * 企业ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CorpId: number
+
+  /**
+      * 商户ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MerchantId: string
+
+  /**
+      * 商品ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProductId: string
+
+  /**
+      * ip地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Ip: string
+
+  /**
+      * 国家
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Country: string
+
+  /**
+      * 省份
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Province: string
+
+  /**
+      * 城市
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  City: string
+
+  /**
+      * 县/区
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  District: string
+
+  /**
+      * 微信 unionid
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Unionid?: string
+
+  /**
+      * 首次扫码 0:否, 1:是
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  First?: number
+
+  /**
+      * 批次ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BatchId?: string
+}
+
+/**
  * DescribeProducts请求参数结构体
  */
 export interface DescribeProductsRequest {
@@ -2323,6 +2533,21 @@ export interface DeleteTraceDataRequest {
 }
 
 /**
+ * DescribeScanLogs请求参数结构体
+ */
+export interface DescribeScanLogsRequest {
+  /**
+   * 码
+   */
+  Code: string
+
+  /**
+   * 企业ID
+   */
+  CorpId?: number
+}
+
+/**
  * ModifyTraceCodeUnlink返回参数结构体
  */
 export interface ModifyTraceCodeUnlinkResponse {
@@ -2549,86 +2774,18 @@ export interface TraceCode {
 }
 
 /**
- * 企业配额信息
+ * DescribeScanStats返回参数结构体
  */
-export interface Quota {
+export interface DescribeScanStatsResponse {
   /**
-      * 服务开始时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  StartTime: string
+   * 统计记录
+   */
+  ScanStats?: Array<ScanStat>
 
   /**
-      * 服务结束时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  EndTime: string
-
-  /**
-      * 配额ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  QuotaId?: number
-
-  /**
-      * 企业ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  CorpId?: number
-
-  /**
-      * 开通服务
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Services?: Array<string>
-
-  /**
-      * 商户配额
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  FactoryQuota?: number
-
-  /**
-      * 商品配额
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ItemQuota?: number
-
-  /**
-      * 溯源码配额
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  TrackQuota?: number
-
-  /**
-      * 销售码配额
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  SaleQuota?: number
-
-  /**
-      * 上链配额
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ChainQuota?: number
-
-  /**
-      * 风控配额
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  RiskQuota?: number
-
-  /**
-      * 溯源类型
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  TrackType?: number
-
-  /**
-      * 开通版本 lite:轻量版, basic:基础版, standard:标准版
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Version?: string
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2707,6 +2864,31 @@ export interface DescribeTraceDataListRequest {
    * 数量
    */
   PageSize?: number
+}
+
+/**
+ * DescribeScanStats请求参数结构体
+ */
+export interface DescribeScanStatsRequest {
+  /**
+   * 批次ID
+   */
+  BatchId: string
+
+  /**
+   * 企业ID
+   */
+  CorpId?: number
+
+  /**
+   * 分页数量
+   */
+  PageSize?: number
+
+  /**
+   * 当前分页
+   */
+  PageNumber?: number
 }
 
 /**
@@ -2860,6 +3042,56 @@ export interface DeleteMerchantRequest {
    * 企业ID
    */
   CorpId?: number
+}
+
+/**
+ * 扫码统计
+ */
+export interface ScanStat {
+  /**
+   * 安心码
+   */
+  Code?: string
+
+  /**
+   * 企业ID
+   */
+  CorpId?: number
+
+  /**
+   * 商户ID
+   */
+  MerchantId?: string
+
+  /**
+   * 产品ID
+   */
+  ProductId?: string
+
+  /**
+   * 批次ID
+   */
+  BatchId?: string
+
+  /**
+   * 扫码次数
+   */
+  Pv?: number
+
+  /**
+   * 扫码人数
+   */
+  Uv?: number
+
+  /**
+   * 创建时间
+   */
+  CreateTime?: string
+
+  /**
+   * 更新时间
+   */
+  UpdateTime?: string
 }
 
 /**

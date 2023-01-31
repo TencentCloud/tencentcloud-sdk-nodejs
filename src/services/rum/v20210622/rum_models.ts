@@ -258,7 +258,7 @@ export interface DescribeProjectLimitsResponse {
   /**
    * 上报率数组列表
    */
-  ProjectLimitSet: Array<ProjectLimit>
+  ProjectLimitSet?: Array<ProjectLimit>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1529,12 +1529,12 @@ export interface CreateProjectResponse {
   /**
    * 项目 id
    */
-  ID: number
+  ID?: number
 
   /**
    * 项目唯一key
    */
-  Key: string
+  Key?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1569,7 +1569,7 @@ export interface CreateStarProjectResponse {
   /**
    * 接口返回信息
    */
-  Msg: string
+  Msg?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1584,7 +1584,7 @@ export interface DeleteProjectResponse {
   /**
    * 操作信息
    */
-  Msg: string
+  Msg?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2372,7 +2372,7 @@ export interface DescribeScoresResponse {
   /**
    * 数组
    */
-  ScoreSet?: Array<ScoreInfo>
+  ScoreSet: Array<ScoreInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2637,7 +2637,7 @@ export interface DeleteStarProjectResponse {
       * 返回消息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Msg: string
+  Msg?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3022,7 +3022,7 @@ export interface DescribeReleaseFilesResponse {
   /**
    * 文件信息列表
    */
-  Files: Array<ReleaseFile>
+  Files?: Array<ReleaseFile>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3403,12 +3403,12 @@ export interface DescribeProjectsResponse {
   /**
    * 列表总数
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 项目列表
    */
-  ProjectSet: Array<RumProject>
+  ProjectSet?: Array<RumProject>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3423,12 +3423,12 @@ export interface ModifyProjectResponse {
   /**
    * 操作信息
    */
-  Msg: string
+  Msg?: string
 
   /**
    * 项目id
    */
-  ID: number
+  ID?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3793,12 +3793,12 @@ export interface DescribeTawInstancesResponse {
   /**
    * 实例列表
    */
-  InstanceSet: Array<RumInstanceInfo>
+  InstanceSet?: Array<RumInstanceInfo>
 
   /**
    * 实例总数
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

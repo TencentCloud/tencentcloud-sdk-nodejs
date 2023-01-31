@@ -147,7 +147,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 开启或禁用自定义策略
+   * 开启或禁用访问控制（自定义策略）
    */
   async ModifyCustomRuleStatus(
     req: ModifyCustomRuleStatusRequest,
@@ -329,7 +329,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 增加自定义策略
+   * 增加访问控制（自定义策略）
    */
   async AddCustomRule(
     req: AddCustomRuleRequest,

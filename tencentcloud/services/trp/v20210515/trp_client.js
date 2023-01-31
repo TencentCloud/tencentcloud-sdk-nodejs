@@ -179,6 +179,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteMerchant", req, cb);
     }
     /**
+     * 查询某个批次被扫码的统计列表，没有被扫过的不会返回
+     */
+    async DescribeScanStats(req, cb) {
+        return this.request("DescribeScanStats", req, cb);
+    }
+    /**
      * 查询码包状态
      */
     async DescribeCodePackStatus(req, cb) {
@@ -255,6 +261,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeCodePacks(req, cb) {
         return this.request("DescribeCodePacks", req, cb);
+    }
+    /**
+     * 查询扫码日志明细
+     */
+    async DescribeScanLogs(req, cb) {
+        return this.request("DescribeScanLogs", req, cb);
     }
     /**
      * 修改批次

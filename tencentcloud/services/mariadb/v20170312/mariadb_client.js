@@ -434,6 +434,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DisassociateSecurityGroups", req, cb);
     }
     /**
+     * 本接口(DescribeDBEncryptAttributes)用于查询实例数据加密状态。
+     */
+    async DescribeDBEncryptAttributes(req, cb) {
+        return this.request("DescribeDBEncryptAttributes", req, cb);
+    }
+    /**
      * 本接口(ModifyLogFileRetentionPeriod)用于修改数据库备份日志保存天数。
      */
     async ModifyLogFileRetentionPeriod(req, cb) {

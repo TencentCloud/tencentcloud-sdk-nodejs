@@ -52,7 +52,7 @@ export declare class Client extends AbstractClient {
      */
     DeleteStarProject(req: DeleteStarProjectRequest, cb?: (error: string, rep: DeleteStarProjectResponse) => void): Promise<DeleteStarProjectResponse>;
     /**
-     * 恢复实例
+     * 恢复 RUM 业务系统，恢复后，用户可以正常使用和上报数据
      */
     ResumeInstance(req: ResumeInstanceRequest, cb?: (error: string, rep: ResumeInstanceResponse) => void): Promise<ResumeInstanceResponse>;
     /**
@@ -76,7 +76,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeOfflineLogs(req: DescribeOfflineLogsRequest, cb?: (error: string, rep: DescribeOfflineLogsResponse) => void): Promise<DescribeOfflineLogsResponse>;
     /**
-     * 创建Rum实例
+     * 创建 RUM 业务系统
      */
     CreateTawInstance(req: CreateTawInstanceRequest, cb?: (error: string, rep: CreateTawInstanceResponse) => void): Promise<CreateTawInstanceResponse>;
     /**
@@ -125,7 +125,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeDataSetUrlStatistics(req: DescribeDataSetUrlStatisticsRequest, cb?: (error: string, rep: DescribeDataSetUrlStatisticsResponse) => void): Promise<DescribeDataSetUrlStatisticsResponse>;
     /**
-     * 修改实例信息
+     * 修改 RUM 业务系统
      */
     ModifyInstance(req: ModifyInstanceRequest, cb?: (error: string, rep: ModifyInstanceResponse) => void): Promise<ModifyInstanceResponse>;
     /**
@@ -133,7 +133,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeDataStaticResource(req: DescribeDataStaticResourceRequest, cb?: (error: string, rep: DescribeDataStaticResourceResponse) => void): Promise<DescribeDataStaticResourceResponse>;
     /**
-     * 获取项目上报率列表
+     * 获取应用上报抽样信息
      */
     DescribeProjectLimits(req: DescribeProjectLimitsRequest, cb?: (error: string, rep: DescribeProjectLimitsResponse) => void): Promise<DescribeProjectLimitsResponse>;
     /**
@@ -169,11 +169,11 @@ export declare class Client extends AbstractClient {
      */
     StopInstance(req: StopInstanceRequest, cb?: (error: string, rep: StopInstanceResponse) => void): Promise<StopInstanceResponse>;
     /**
-     * 修改 rum 项目信息
+     * 修改 RUM 应用信息
      */
     ModifyProject(req: ModifyProjectRequest, cb?: (error: string, rep: ModifyProjectResponse) => void): Promise<ModifyProjectResponse>;
     /**
-     * 获取项目对应sourcemap文件列表
+     * 获取应用对应sourcemap文件列表
      */
     DescribeReleaseFiles(req: DescribeReleaseFilesRequest, cb?: (error: string, rep: DescribeReleaseFilesResponse) => void): Promise<DescribeReleaseFilesResponse>;
     /**
@@ -205,7 +205,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeDataLogUrlInfo(req: DescribeDataLogUrlInfoRequest, cb?: (error: string, rep: DescribeDataLogUrlInfoResponse) => void): Promise<DescribeDataLogUrlInfoResponse>;
     /**
-     * 创建项目（归属于某个团队）
+     * 创建 RUM 应用（归属于某个团队）
      */
     CreateProject(req: CreateProjectRequest, cb?: (error: string, rep: CreateProjectResponse) => void): Promise<CreateProjectResponse>;
     /**

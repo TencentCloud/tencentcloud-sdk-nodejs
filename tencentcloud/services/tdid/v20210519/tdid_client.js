@@ -240,14 +240,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetDidDocument", req, cb);
     }
     /**
-     * 该接口已废弃
-
-验证购买
-     */
-    async VerifyPurchase(req, cb) {
-        return this.request("VerifyPurchase", req, cb);
-    }
-    /**
      * 获取DID服务列表
      */
     async GetDidServiceList(req, cb) {

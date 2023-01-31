@@ -79,7 +79,7 @@ import {
   DescribeSaleInfoRequest,
   RenewDBInstanceRequest,
   CreateTmpInstancesRequest,
-  TablePrivilege,
+  RestartDBInstancesResponse,
   DescribeProjectSecurityGroupsResponse,
   DatabaseFunction,
   ResetAccountPasswordResponse,
@@ -87,10 +87,11 @@ import {
   CreateDBInstanceResponse,
   ModifyRealServerAccessStrategyRequest,
   DescribeBackupTimeRequest,
-  RestartDBInstancesResponse,
   DescribeSaleInfoResponse,
+  DescribeDBEncryptAttributesResponse,
   DestroyDBInstanceRequest,
   DatabaseTable,
+  DescribeDBEncryptAttributesRequest,
   Deal,
   GrantAccountPrivilegesRequest,
   CreateDedicatedClusterDBInstanceRequest,
@@ -175,6 +176,7 @@ import {
   DescribeAccountPrivilegesRequest,
   DescribeAccountsResponse,
   DescribeDBSlowLogsResponse,
+  TablePrivilege,
   UpgradeDBInstanceResponse,
   DescribeDBInstanceSpecsRequest,
   ModifyDBInstancesProjectRequest,
@@ -861,6 +863,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DisassociateSecurityGroupsResponse) => void
   ): Promise<DisassociateSecurityGroupsResponse> {
     return this.request("DisassociateSecurityGroups", req, cb)
+  }
+
+  /**
+   * 本接口(DescribeDBEncryptAttributes)用于查询实例数据加密状态。
+   */
+  async DescribeDBEncryptAttributes(
+    req: DescribeDBEncryptAttributesRequest,
+    cb?: (error: string, rep: DescribeDBEncryptAttributesResponse) => void
+  ): Promise<DescribeDBEncryptAttributesResponse> {
+    return this.request("DescribeDBEncryptAttributes", req, cb)
   }
 
   /**

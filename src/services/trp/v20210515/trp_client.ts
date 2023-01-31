@@ -19,6 +19,9 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   CodeBatch,
+  DescribeScanLogsResponse,
+  Quota,
+  ScanLog,
   DescribeProductsRequest,
   CreateCorporationOrderResponse,
   ModifyProductResponse,
@@ -99,15 +102,17 @@ import {
   CreateCorporationOrderRequest,
   CreateTraceCodesResponse,
   DeleteTraceDataRequest,
+  DescribeScanLogsRequest,
   ModifyTraceCodeUnlinkResponse,
   Merchant,
   Product,
   DescribeTmpTokenRequest,
   TraceCode,
-  Quota,
+  DescribeScanStatsResponse,
   CreateMerchantResponse,
   DescribeMerchantsResponse,
   DescribeTraceDataListRequest,
+  DescribeScanStatsRequest,
   DeleteMerchantResponse,
   DeleteCodeBatchResponse,
   CreateTraceChainRequest,
@@ -117,6 +122,7 @@ import {
   DescribeJobFileUrlResponse,
   DescribeTraceCodeByIdRequest,
   DeleteMerchantRequest,
+  ScanStat,
   ModifyTraceCodeResponse,
   DescribeCodePackUrlResponse,
   ModifyCodeBatchResponse,
@@ -383,6 +389,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询某个批次被扫码的统计列表，没有被扫过的不会返回
+   */
+  async DescribeScanStats(
+    req: DescribeScanStatsRequest,
+    cb?: (error: string, rep: DescribeScanStatsResponse) => void
+  ): Promise<DescribeScanStatsResponse> {
+    return this.request("DescribeScanStats", req, cb)
+  }
+
+  /**
    * 查询码包状态
    */
   async DescribeCodePackStatus(
@@ -510,6 +526,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCodePacksResponse) => void
   ): Promise<DescribeCodePacksResponse> {
     return this.request("DescribeCodePacks", req, cb)
+  }
+
+  /**
+   * 查询扫码日志明细
+   */
+  async DescribeScanLogs(
+    req: DescribeScanLogsRequest,
+    cb?: (error: string, rep: DescribeScanLogsResponse) => void
+  ): Promise<DescribeScanLogsResponse> {
+    return this.request("DescribeScanLogs", req, cb)
   }
 
   /**

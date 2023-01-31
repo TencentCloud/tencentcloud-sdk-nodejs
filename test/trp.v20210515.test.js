@@ -268,6 +268,16 @@ it("trp.v20210515.DeleteMerchant", async function () {
     }
 })
 
+it("trp.v20210515.DescribeScanStats", async function () {
+    try {
+       const data = await client.DescribeScanStats({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("trp.v20210515.DescribeCodePackStatus", async function () {
     try {
        const data = await client.DescribeCodePackStatus({})
@@ -391,6 +401,16 @@ it("trp.v20210515.ModifyTraceCode", async function () {
 it("trp.v20210515.DescribeCodePacks", async function () {
     try {
        const data = await client.DescribeCodePacks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("trp.v20210515.DescribeScanLogs", async function () {
+    try {
+       const data = await client.DescribeScanLogs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

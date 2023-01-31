@@ -94,7 +94,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteStarProject", req, cb);
     }
     /**
-     * 恢复实例
+     * 恢复 RUM 业务系统，恢复后，用户可以正常使用和上报数据
      */
     async ResumeInstance(req, cb) {
         return this.request("ResumeInstance", req, cb);
@@ -130,7 +130,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeOfflineLogs", req, cb);
     }
     /**
-     * 创建Rum实例
+     * 创建 RUM 业务系统
      */
     async CreateTawInstance(req, cb) {
         return this.request("CreateTawInstance", req, cb);
@@ -199,7 +199,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDataSetUrlStatistics", req, cb);
     }
     /**
-     * 修改实例信息
+     * 修改 RUM 业务系统
      */
     async ModifyInstance(req, cb) {
         return this.request("ModifyInstance", req, cb);
@@ -211,7 +211,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDataStaticResource", req, cb);
     }
     /**
-     * 获取项目上报率列表
+     * 获取应用上报抽样信息
      */
     async DescribeProjectLimits(req, cb) {
         return this.request("DescribeProjectLimits", req, cb);
@@ -265,13 +265,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("StopInstance", req, cb);
     }
     /**
-     * 修改 rum 项目信息
+     * 修改 RUM 应用信息
      */
     async ModifyProject(req, cb) {
         return this.request("ModifyProject", req, cb);
     }
     /**
-     * 获取项目对应sourcemap文件列表
+     * 获取应用对应sourcemap文件列表
      */
     async DescribeReleaseFiles(req, cb) {
         return this.request("DescribeReleaseFiles", req, cb);
@@ -317,7 +317,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDataLogUrlInfo", req, cb);
     }
     /**
-     * 创建项目（归属于某个团队）
+     * 创建 RUM 应用（归属于某个团队）
      */
     async CreateProject(req, cb) {
         return this.request("CreateProject", req, cb);

@@ -668,6 +668,16 @@ it("mariadb.v20170312.DisassociateSecurityGroups", async function () {
     }
 })
 
+it("mariadb.v20170312.DescribeDBEncryptAttributes", async function () {
+    try {
+       const data = await client.DescribeDBEncryptAttributes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mariadb.v20170312.ModifyLogFileRetentionPeriod", async function () {
     try {
        const data = await client.ModifyLogFileRetentionPeriod({})

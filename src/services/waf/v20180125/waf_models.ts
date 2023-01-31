@@ -527,13 +527,13 @@ export interface AddCustomRuleResponse {
   /**
    * 操作的状态码，如果所有的资源操作成功则返回的是成功的状态码，如果有资源操作失败则需要解析Message的内容来查看哪个资源失败
    */
-  Success: ResponseCode
+  Success?: ResponseCode
 
   /**
       * 添加成功的规则ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  RuleId: number
+  RuleId?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -576,7 +576,7 @@ export interface UpsertIpAccessControlRequest {
   Items: Array<string>
 
   /**
-   * clb-waf或者sparta-waf
+   * WAF实例类型，sparta-waf表示SAAS型WAF，clb-waf表示负载均衡型WAF
    */
   Edition?: string
 
@@ -1504,7 +1504,7 @@ export interface ModifyCustomRuleStatusResponse {
   /**
    * 操作的状态码，如果所有的资源操作成功则返回的是成功的状态码，如果有资源操作失败则需要解析Message的内容来查看哪个资源失败
    */
-  Success: ResponseCode
+  Success?: ResponseCode
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2089,7 +2089,7 @@ export interface AddCustomRuleRequest {
   Redirect?: string
 
   /**
-   * "clb-waf"或者"sparta-waf"
+   * WAF实例类型，sparta-waf表示SAAS型WAF，clb-waf表示负载均衡型WAF
    */
   Edition?: string
 
@@ -2097,6 +2097,11 @@ export interface AddCustomRuleRequest {
    * 放行的详情
    */
   Bypass?: string
+
+  /**
+   * 添加规则的来源，默认为空
+   */
+  EventId?: string
 }
 
 /**
@@ -2274,13 +2279,13 @@ export interface DescribeDomainsResponse {
   /**
    * 总数
    */
-  Total: number
+  Total?: number
 
   /**
       * domain列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Domains: Array<DomainInfo>
+  Domains?: Array<DomainInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2606,13 +2611,13 @@ export interface UpsertIpAccessControlResponse {
       * 添加或修改失败的条目
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  FailedItems: string
+  FailedItems?: string
 
   /**
       * 添加或修改失败的数目
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  FailedCount: number
+  FailedCount?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2741,21 +2746,21 @@ export type DescribeWafThreatenIntelligenceRequest = null
  */
 export interface DescribeAccessIndexResponse {
   /**
-   * 是否生效
+   * 是否生效，true表示生效，false表示未生效
    */
-  Status: boolean
+  Status?: boolean
 
   /**
       * 索引配置信息
 注意：此字段可能返回 null，表示取不到有效值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Rule: AccessRuleInfo
+  Rule?: AccessRuleInfo
 
   /**
    * 索引修改时间，初始值为索引创建时间。
    */
-  ModifyTime: string
+  ModifyTime?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

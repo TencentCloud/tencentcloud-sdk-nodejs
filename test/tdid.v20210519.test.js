@@ -368,16 +368,6 @@ it("tdid.v20210519.GetDidDocument", async function () {
     }
 })
 
-it("tdid.v20210519.VerifyPurchase", async function () {
-    try {
-       const data = await client.VerifyPurchase({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("tdid.v20210519.GetDidServiceList", async function () {
     try {
        const data = await client.GetDidServiceList({})

@@ -34,7 +34,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAccessExports", req, cb);
     }
     /**
-     * 开启或禁用自定义策略
+     * 开启或禁用访问控制（自定义策略）
      */
     async ModifyCustomRuleStatus(req, cb) {
         return this.request("ModifyCustomRuleStatus", req, cb);
@@ -144,7 +144,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetAttackDownloadRecords", req, cb);
     }
     /**
-     * 增加自定义策略
+     * 增加访问控制（自定义策略）
      */
     async AddCustomRule(req, cb) {
         return this.request("AddCustomRule", req, cb);
