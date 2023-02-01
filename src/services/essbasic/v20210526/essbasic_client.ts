@@ -20,7 +20,7 @@ import { ClientConfig } from "../../../common/interface"
 import {
   SyncProxyOrganizationResponse,
   ChannelCreateConvertTaskApiResponse,
-  ChannelCreateFlowSignUrlResponse,
+  ChannelCreateFlowRemindsResponse,
   ChannelBatchCancelFlowsResponse,
   Department,
   ChannelCreateFlowSignReviewRequest,
@@ -28,13 +28,15 @@ import {
   DescribeFlowDetailInfoRequest,
   ModifyExtendedServiceRequest,
   DescribeResourceUrlsByFlowsRequest,
+  RemindFlowRecords,
+  ChannelCreateFlowSignUrlResponse,
   CreateSealByImageResponse,
   OperateChannelTemplateResponse,
   FlowFileInfo,
   CreateConsoleLoginUrlResponse,
   SyncProxyOrganizationRequest,
   CreateSealByImageRequest,
-  ChannelCreateFlowSignUrlRequest,
+  ChannelCreateFlowRemindsRequest,
   ChannelCancelFlowResponse,
   DownloadFlowInfo,
   FlowApproverUrlInfo,
@@ -50,19 +52,19 @@ import {
   PrepareFlowsResponse,
   TemplateInfo,
   GetDownloadFlowUrlResponse,
+  Recipient,
   DescribeTemplatesResponse,
   StaffRole,
   ChannelVerifyPdfRequest,
   CreateChannelFlowEvidenceReportRequest,
   ChannelVerifyPdfResponse,
-  DescribeChannelFlowEvidenceReportRequest,
   CreateConsoleLoginUrlRequest,
   OrganizationInfo,
   PdfVerifyResult,
   ChannelCancelMultiFlowSignQRCodeRequest,
   UploadFilesRequest,
   ChannelDescribeOrganizationSealsRequest,
-  ProxyOrganizationOperator,
+  DescribeUsageRequest,
   DescribeExtendedServiceAuthInfoRequest,
   FormField,
   FlowInfo,
@@ -81,7 +83,7 @@ import {
   ChannelGetTaskResultApiRequest,
   FlowDetailInfo,
   CreateFlowsByTemplatesResponse,
-  Recipient,
+  PrepareFlowsRequest,
   SyncProxyOrganizationOperatorsResponse,
   SignUrlInfo,
   FlowResourceUrlInfo,
@@ -89,12 +91,11 @@ import {
   ExtentServiceAuthInfo,
   Filter,
   ReleasedApprover,
-  DescribeUsageRequest,
   CreateSignUrlsResponse,
   UploadFilesResponse,
   ChannelCreateBatchCancelFlowUrlRequest,
   ApproverRestriction,
-  PrepareFlowsRequest,
+  DescribeChannelFlowEvidenceReportRequest,
   ChannelCreateFlowByFilesResponse,
   ChannelCreateFlowSignReviewResponse,
   ChannelDescribeOrganizationSealsResponse,
@@ -104,6 +105,7 @@ import {
   ChannelCreateMultiFlowSignQRCodeResponse,
   ApproverOption,
   ChannelCreateBoundFlowsResponse,
+  ProxyOrganizationOperator,
   ModifyExtendedServiceResponse,
   ChannelGetTaskResultApiResponse,
   DescribeExtendedServiceAuthInfoResponse,
@@ -123,6 +125,7 @@ import {
   ChannelDescribeEmployeesResponse,
   ChannelCreateReleaseFlowResponse,
   DescribeChannelFlowEvidenceReportResponse,
+  ChannelCreateFlowSignUrlRequest,
   CcInfo,
 } from "./essbasic_models"
 
@@ -190,7 +193,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询企业扩展服务授权信息，企业经办人需要时企业超管或者法人
+   * 查询企业扩展服务授权信息，企业经办人需要是企业超管或者法人
    */
   async DescribeExtendedServiceAuthInfo(
     req: DescribeExtendedServiceAuthInfoRequest,
@@ -200,7 +203,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改（操作）企业扩展服务 ，企业经办人需要时企业超管或者法人
+   * 修改（操作）企业扩展服务 ，企业经办人需要是企业超管或者法人
    */
   async ModifyExtendedService(
     req: ModifyExtendedServiceRequest,
@@ -253,6 +256,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateFlowsByTemplatesResponse) => void
   ): Promise<CreateFlowsByTemplatesResponse> {
     return this.request("CreateFlowsByTemplates", req, cb)
+  }
+
+  /**
+     * 查询渠道子客企业电子印章，需要操作者具有管理印章权限
+客户指定需要获取的印章数量和偏移量，数量最多100，超过100按100处理；入参InfoType控制印章是否携带授权人信息，为1则携带，为0则返回的授权人信息为空数组。接口调用成功返回印章的信息列表还有企业印章的总数。
+     */
+  async ChannelDescribeOrganizationSeals(
+    req: ChannelDescribeOrganizationSealsRequest,
+    cb?: (error: string, rep: ChannelDescribeOrganizationSealsResponse) => void
+  ): Promise<ChannelDescribeOrganizationSealsResponse> {
+    return this.request("ChannelDescribeOrganizationSeals", req, cb)
   }
 
   /**
@@ -363,14 +377,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 查询渠道子客企业电子印章，需要操作者具有管理印章权限
-客户指定需要获取的印章数量和偏移量，数量最多100，超过100按100处理；入参InfoType控制印章是否携带授权人信息，为1则携带，为0则返回的授权人信息为空数组。接口调用成功返回印章的信息列表还有企业印章的总数。
-     */
-  async ChannelDescribeOrganizationSeals(
-    req: ChannelDescribeOrganizationSealsRequest,
-    cb?: (error: string, rep: ChannelDescribeOrganizationSealsResponse) => void
-  ): Promise<ChannelDescribeOrganizationSealsResponse> {
-    return this.request("ChannelDescribeOrganizationSeals", req, cb)
+   * 渠道版创建签署链接，需要联系运营人员开白后才可使用
+   */
+  async ChannelCreateFlowSignUrl(
+    req: ChannelCreateFlowSignUrlRequest,
+    cb?: (error: string, rep: ChannelCreateFlowSignUrlResponse) => void
+  ): Promise<ChannelCreateFlowSignUrlResponse> {
+    return this.request("ChannelCreateFlowSignUrl", req, cb)
   }
 
   /**
@@ -455,13 +468,17 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
   }
 
   /**
-   * 渠道版创建签署链接，需要联系运营人员开白后才可使用
-   */
-  async ChannelCreateFlowSignUrl(
-    req: ChannelCreateFlowSignUrlRequest,
-    cb?: (error: string, rep: ChannelCreateFlowSignUrlResponse) => void
-  ): Promise<ChannelCreateFlowSignUrlResponse> {
-    return this.request("ChannelCreateFlowSignUrl", req, cb)
+     * 指定需要批量撤销的签署流程Id，批量催办合同
+客户指定需要撤销的签署流程Id，最多100个，超过100不处理；接口失败后返回错误信息
+注意:
+能撤回合同的只能是合同的发起人或者签署人
+该接口需要开白后使用
+     */
+  async ChannelCreateFlowReminds(
+    req: ChannelCreateFlowRemindsRequest,
+    cb?: (error: string, rep: ChannelCreateFlowRemindsResponse) => void
+  ): Promise<ChannelCreateFlowRemindsResponse> {
+    return this.request("ChannelCreateFlowReminds", req, cb)
   }
 
   /**

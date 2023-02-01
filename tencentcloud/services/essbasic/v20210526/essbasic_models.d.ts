@@ -21,13 +21,13 @@ export interface ChannelCreateConvertTaskApiResponse {
     RequestId?: string;
 }
 /**
- * ChannelCreateFlowSignUrl返回参数结构体
+ * ChannelCreateFlowReminds返回参数结构体
  */
-export interface ChannelCreateFlowSignUrlResponse {
+export interface ChannelCreateFlowRemindsResponse {
     /**
-      * 签署人签署链接信息
+      * 合同催办详情信息
       */
-    FlowApproverUrlInfos: Array<FlowApproverUrlInfo>;
+    RemindFlowRecords: Array<RemindFlowRecords>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -130,7 +130,9 @@ export interface DescribeFlowDetailInfoRequest {
  */
 export interface ModifyExtendedServiceRequest {
     /**
-      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填
+      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
+
+注: 此接口 参数Agent. ProxyOperator.OpenId 需要传递超管或者法人的OpenId
       */
     Agent: Agent;
     /**
@@ -166,6 +168,36 @@ export interface DescribeResourceUrlsByFlowsRequest {
       * 操作者的信息
       */
     Operator?: UserInfo;
+}
+/**
+ * 催办接口返回详细信息
+ */
+export interface RemindFlowRecords {
+    /**
+      * 是否能够催办
+      */
+    CanRemind: boolean;
+    /**
+      * 合同id
+      */
+    FlowId: string;
+    /**
+      * 催办详情
+      */
+    RemindMessage: string;
+}
+/**
+ * ChannelCreateFlowSignUrl返回参数结构体
+ */
+export interface ChannelCreateFlowSignUrlResponse {
+    /**
+      * 签署人签署链接信息
+      */
+    FlowApproverUrlInfos: Array<FlowApproverUrlInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * CreateSealByImage返回参数结构体
@@ -346,29 +378,17 @@ export interface CreateSealByImageRequest {
     Operator?: UserInfo;
 }
 /**
- * ChannelCreateFlowSignUrl请求参数结构体
+ * ChannelCreateFlowReminds请求参数结构体
  */
-export interface ChannelCreateFlowSignUrlRequest {
+export interface ChannelCreateFlowRemindsRequest {
     /**
-      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填
+      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
       */
     Agent: Agent;
     /**
-      * 流程编号
+      * 签署流程Id数组，最多100个，超过100不处理
       */
-    FlowId: string;
-    /**
-      * 流程签署人，其中Name和Mobile必传，其他可不传，ApproverType目前只支持PERSON类型的签署人，如果不传默认为该值。还需注意签署人只能有手写签名和时间类型的签署控件，其他类型的填写控件和签署控件暂时都未支持。
-      */
-    FlowApproverInfos: Array<FlowApproverInfo>;
-    /**
-      * 用户信息，暂未开放
-      */
-    Operator?: UserInfo;
-    /**
-      * 机构信息，暂未开放
-      */
-    Organization?: OrganizationInfo;
+    FlowIds: Array<string>;
 }
 /**
  * ChannelCancelFlow返回参数结构体
@@ -895,6 +915,47 @@ export interface GetDownloadFlowUrlResponse {
     RequestId?: string;
 }
 /**
+ * 签署参与者信息
+ */
+export interface Recipient {
+    /**
+      * 签署人唯一标识
+      */
+    RecipientId?: string;
+    /**
+      * 签署方类型：ENTERPRISE-企业INDIVIDUAL-自然人
+      */
+    RecipientType?: string;
+    /**
+      * 描述
+      */
+    Description?: string;
+    /**
+      * 签署方备注信息
+      */
+    RoleName?: string;
+    /**
+      * 是否需要校验
+      */
+    RequireValidation?: boolean;
+    /**
+      * 是否必须填写
+      */
+    RequireSign?: boolean;
+    /**
+      * 签署类型
+      */
+    SignType?: number;
+    /**
+      * 签署顺序：数字越小优先级越高
+      */
+    RoutingOrder?: number;
+    /**
+      * 是否是发起方
+      */
+    IsPromoter?: boolean;
+}
+/**
  * DescribeTemplates返回参数结构体
  */
 export interface DescribeTemplatesResponse {
@@ -985,23 +1046,6 @@ export interface ChannelVerifyPdfResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
-}
-/**
- * DescribeChannelFlowEvidenceReport请求参数结构体
- */
-export interface DescribeChannelFlowEvidenceReportRequest {
-    /**
-      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填
-      */
-    Agent: Agent;
-    /**
-      * 出证报告编号
-      */
-    ReportId: string;
-    /**
-      * 操作者的信息
-      */
-    Operator?: UserInfo;
 }
 /**
  * CreateConsoleLoginUrl请求参数结构体
@@ -1205,32 +1249,40 @@ export interface ChannelDescribeOrganizationSealsRequest {
     SealId?: string;
 }
 /**
- * 合作企业经办人列表信息
+ * DescribeUsage请求参数结构体
  */
-export interface ProxyOrganizationOperator {
+export interface DescribeUsageRequest {
     /**
-      * 对应Agent-ProxyOperator-OpenId。渠道平台自定义，对渠道子客企业员的唯一标识。一个OpenId在一个子客企业内唯一对应一个真实员工，不可在其他子客企业内重复使用。（例如，可以使用经办人企业名+员工身份证的hash值，需要渠道平台保存），最大64位字符串
+      * 应用信息，此接口Agent.AppId必填
       */
-    Id: string;
+    Agent: Agent;
     /**
-      * 经办人姓名，最大长度50个字符
+      * 开始时间，例如：2021-03-21
       */
-    Name?: string;
+    StartDate: string;
     /**
-      * 经办人身份证件类型
-1.ID_CARD 居民身份证
-2.HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证
-3.HONGKONG_AND_MACAO 港澳居民来往内地通行证
+      * 结束时间，例如：2021-06-21；
+开始时间到结束时间的区间长度小于等于90天。
       */
-    IdCardType?: string;
+    EndDate: string;
     /**
-      * 经办人证件号
+      * 是否汇总数据，默认不汇总。
+不汇总：返回在统计区间内渠道下所有企业的每日明细，即每个企业N条数据，N为统计天数；
+汇总：返回在统计区间内渠道下所有企业的汇总后数据，即每个企业一条数据；
       */
-    IdCardNumber?: string;
+    NeedAggregate?: boolean;
     /**
-      * 经办人手机号，大陆手机号输入11位，暂不支持海外手机号。
+      * 单次返回的最多条目数量。默认为1000，且不能超过1000。
       */
-    Mobile?: string;
+    Limit?: number;
+    /**
+      * 偏移量，默认是0。
+      */
+    Offset?: number;
+    /**
+      * 操作者的信息
+      */
+    Operator?: UserInfo;
 }
 /**
  * DescribeExtendedServiceAuthInfo请求参数结构体
@@ -1238,6 +1290,9 @@ export interface ProxyOrganizationOperator {
 export interface DescribeExtendedServiceAuthInfoRequest {
     /**
       * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填
+
+注: 此接口 参数Agent. ProxyOperator.OpenId 需要传递超管或者法人的OpenId
+
       */
     Agent: Agent;
 }
@@ -1864,45 +1919,25 @@ export interface CreateFlowsByTemplatesResponse {
     RequestId?: string;
 }
 /**
- * 签署参与者信息
+ * PrepareFlows请求参数结构体
  */
-export interface Recipient {
+export interface PrepareFlowsRequest {
     /**
-      * 签署人唯一标识
+      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
       */
-    RecipientId?: string;
+    Agent: Agent;
     /**
-      * 签署方类型：ENTERPRISE-企业INDIVIDUAL-自然人
+      * 多个合同（签署流程）信息，最大支持20个签署流程。
       */
-    RecipientType?: string;
+    FlowInfos: Array<FlowInfo>;
     /**
-      * 描述
+      * 操作完成后的跳转地址，最大长度200
       */
-    Description?: string;
+    JumpUrl: string;
     /**
-      * 签署方备注信息
+      * 操作者的信息
       */
-    RoleName?: string;
-    /**
-      * 是否需要校验
-      */
-    RequireValidation?: boolean;
-    /**
-      * 是否必须填写
-      */
-    RequireSign?: boolean;
-    /**
-      * 签署类型
-      */
-    SignType?: number;
-    /**
-      * 签署顺序：数字越小优先级越高
-      */
-    RoutingOrder?: number;
-    /**
-      * 是否是发起方
-      */
-    IsPromoter?: boolean;
+    Operator?: UserInfo;
 }
 /**
  * SyncProxyOrganizationOperators返回参数结构体
@@ -2126,42 +2161,6 @@ ORGANIZATION-企业
     OpenId?: string;
 }
 /**
- * DescribeUsage请求参数结构体
- */
-export interface DescribeUsageRequest {
-    /**
-      * 应用信息，此接口Agent.AppId必填
-      */
-    Agent: Agent;
-    /**
-      * 开始时间，例如：2021-03-21
-      */
-    StartDate: string;
-    /**
-      * 结束时间，例如：2021-06-21；
-开始时间到结束时间的区间长度小于等于90天。
-      */
-    EndDate: string;
-    /**
-      * 是否汇总数据，默认不汇总。
-不汇总：返回在统计区间内渠道下所有企业的每日明细，即每个企业N条数据，N为统计天数；
-汇总：返回在统计区间内渠道下所有企业的汇总后数据，即每个企业一条数据；
-      */
-    NeedAggregate?: boolean;
-    /**
-      * 单次返回的最多条目数量。默认为1000，且不能超过1000。
-      */
-    Limit?: number;
-    /**
-      * 偏移量，默认是0。
-      */
-    Offset?: number;
-    /**
-      * 操作者的信息
-      */
-    Operator?: UserInfo;
-}
-/**
  * CreateSignUrls返回参数结构体
  */
 export interface CreateSignUrlsResponse {
@@ -2238,21 +2237,17 @@ export interface ApproverRestriction {
     IdCardNumber?: string;
 }
 /**
- * PrepareFlows请求参数结构体
+ * DescribeChannelFlowEvidenceReport请求参数结构体
  */
-export interface PrepareFlowsRequest {
+export interface DescribeChannelFlowEvidenceReportRequest {
     /**
-      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
+      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填
       */
     Agent: Agent;
     /**
-      * 多个合同（签署流程）信息，最大支持20个签署流程。
+      * 出证报告编号
       */
-    FlowInfos: Array<FlowInfo>;
-    /**
-      * 操作完成后的跳转地址，最大长度200
-      */
-    JumpUrl: string;
+    ReportId: string;
     /**
       * 操作者的信息
       */
@@ -2395,14 +2390,43 @@ export interface ChannelCreateBoundFlowsResponse {
     RequestId?: string;
 }
 /**
+ * 合作企业经办人列表信息
+ */
+export interface ProxyOrganizationOperator {
+    /**
+      * 对应Agent-ProxyOperator-OpenId。渠道平台自定义，对渠道子客企业员的唯一标识。一个OpenId在一个子客企业内唯一对应一个真实员工，不可在其他子客企业内重复使用。（例如，可以使用经办人企业名+员工身份证的hash值，需要渠道平台保存），最大64位字符串
+      */
+    Id: string;
+    /**
+      * 经办人姓名，最大长度50个字符
+      */
+    Name?: string;
+    /**
+      * 经办人身份证件类型
+1.ID_CARD 居民身份证
+2.HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证
+3.HONGKONG_AND_MACAO 港澳居民来往内地通行证
+      */
+    IdCardType?: string;
+    /**
+      * 经办人证件号
+      */
+    IdCardNumber?: string;
+    /**
+      * 经办人手机号，大陆手机号输入11位，暂不支持海外手机号。
+      */
+    Mobile?: string;
+}
+/**
  * ModifyExtendedService返回参数结构体
  */
 export interface ModifyExtendedServiceResponse {
     /**
       * 操作跳转链接，有效期24小时
-仅当操作类型是 OPEN 且 扩展服务类型是  AUTO_SIGN 或 DOWNLOAD_FLOW 或者 OVERSEA_SIGN 时返回 ，此时需要经办人(操作人)点击链接完成服务开通操作。若开通操作时没有返回跳转链接，表示无需跳转操作，此时会直接开通服务
+若操作时没有返回跳转链接，表示无需跳转操作，此时会直接开通/关闭服务。
 
-操作类型是CLOSE时，不会返回此链接，会直接关闭企业该扩展服务
+当操作类型是 OPEN 且 扩展服务类型是  AUTO_SIGN 或 DOWNLOAD_FLOW 或者 OVERSEA_SIGN 时返回操作链接，
+返回的链接需要平台方自行触达超管或法人，超管或法人点击链接完成服务开通操作。
       */
     OperateUrl?: string;
     /**
@@ -3109,6 +3133,31 @@ export interface DescribeChannelFlowEvidenceReportResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * ChannelCreateFlowSignUrl请求参数结构体
+ */
+export interface ChannelCreateFlowSignUrlRequest {
+    /**
+      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填
+      */
+    Agent: Agent;
+    /**
+      * 流程编号
+      */
+    FlowId: string;
+    /**
+      * 流程签署人，其中Name和Mobile必传，其他可不传，ApproverType目前只支持PERSON类型的签署人，如果不传默认为该值。还需注意签署人只能有手写签名和时间类型的签署控件，其他类型的填写控件和签署控件暂时都未支持。
+      */
+    FlowApproverInfos: Array<FlowApproverInfo>;
+    /**
+      * 用户信息，暂未开放
+      */
+    Operator?: UserInfo;
+    /**
+      * 机构信息，暂未开放
+      */
+    Organization?: OrganizationInfo;
 }
 /**
  * 抄送信息

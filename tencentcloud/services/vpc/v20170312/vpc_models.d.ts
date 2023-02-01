@@ -1921,7 +1921,12 @@ export interface DescribeIpGeolocationDatabaseUrlResponse {
 /**
  * UnlockCcnBandwidths请求参数结构体
  */
-export declare type UnlockCcnBandwidthsRequest = null;
+export interface UnlockCcnBandwidthsRequest {
+    /**
+      * 带宽实例对象数组。
+      */
+    Instances: Array<CcnFlowLock>;
+}
 /**
  * DeleteIp6Translators返回参数结构体
  */
@@ -8389,6 +8394,26 @@ export interface ModifyIpv6AddressesAttributeRequest {
  */
 export declare type DescribeCustomerGatewayVendorsRequest = null;
 /**
+ * 云联网限速实例锁对象，该对象特用于运营端使用，用于封禁实例流量。
+ */
+export interface CcnFlowLock {
+    /**
+      * 带宽所属的云联网ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CcnId: string;
+    /**
+      * 实例所属用户主账号ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UserAccountID: string;
+    /**
+      * 带宽实例的唯一ID。作为`UnlockCcnBandwidths`接口和`LockCcnBandwidths`接口的入参时，该字段必传。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RegionFlowControlId?: string;
+}
+/**
  * DetachSnapshotInstances请求参数结构体
  */
 export interface DetachSnapshotInstancesRequest {
@@ -8430,7 +8455,12 @@ export interface ResetVpnGatewayInternetMaxBandwidthResponse {
 /**
  * LockCcnBandwidths请求参数结构体
  */
-export declare type LockCcnBandwidthsRequest = null;
+export interface LockCcnBandwidthsRequest {
+    /**
+      * 带宽实例的唯一ID数组。
+      */
+    Instances: Array<CcnFlowLock>;
+}
 /**
  * 用于描述弹性公网IP的费用对象
  */

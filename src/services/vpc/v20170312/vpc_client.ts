@@ -447,6 +447,7 @@ import {
   GetCcnRegionBandwidthLimitsRequest,
   ModifyIpv6AddressesAttributeRequest,
   DescribeCustomerGatewayVendorsRequest,
+  CcnFlowLock,
   DetachSnapshotInstancesRequest,
   DeleteLocalGatewayRequest,
   ResetVpnGatewayInternetMaxBandwidthResponse,
@@ -1573,7 +1574,7 @@ export class Client extends AbstractClient {
 如有需要, 可以封禁任意限速实例, 可接入到内部运营系统。
      */
   async LockCcnBandwidths(
-    req?: LockCcnBandwidthsRequest,
+    req: LockCcnBandwidthsRequest,
     cb?: (error: string, rep: LockCcnBandwidthsResponse) => void
   ): Promise<LockCcnBandwidthsResponse> {
     return this.request("LockCcnBandwidths", req, cb)
@@ -2785,7 +2786,7 @@ export class Client extends AbstractClient {
 如有需要, 可以封禁任意限速实例, 可接入到内部运营系统。
      */
   async UnlockCcnBandwidths(
-    req?: UnlockCcnBandwidthsRequest,
+    req: UnlockCcnBandwidthsRequest,
     cb?: (error: string, rep: UnlockCcnBandwidthsResponse) => void
   ): Promise<UnlockCcnBandwidthsResponse> {
     return this.request("UnlockCcnBandwidths", req, cb)

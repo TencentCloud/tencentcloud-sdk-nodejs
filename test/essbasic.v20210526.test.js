@@ -128,6 +128,16 @@ it("essbasic.v20210526.CreateFlowsByTemplates", async function () {
     }
 })
 
+it("essbasic.v20210526.ChannelDescribeOrganizationSeals", async function () {
+    try {
+       const data = await client.ChannelDescribeOrganizationSeals({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("essbasic.v20210526.CreateSignUrls", async function () {
     try {
        const data = await client.CreateSignUrls({})
@@ -208,9 +218,9 @@ it("essbasic.v20210526.GetDownloadFlowUrl", async function () {
     }
 })
 
-it("essbasic.v20210526.ChannelDescribeOrganizationSeals", async function () {
+it("essbasic.v20210526.ChannelCreateFlowSignUrl", async function () {
     try {
-       const data = await client.ChannelDescribeOrganizationSeals({})
+       const data = await client.ChannelCreateFlowSignUrl({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -288,9 +298,9 @@ it("essbasic.v20210526.UploadFiles", async function () {
     }
 })
 
-it("essbasic.v20210526.ChannelCreateFlowSignUrl", async function () {
+it("essbasic.v20210526.ChannelCreateFlowReminds", async function () {
     try {
-       const data = await client.ChannelCreateFlowSignUrl({})
+       const data = await client.ChannelCreateFlowReminds({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

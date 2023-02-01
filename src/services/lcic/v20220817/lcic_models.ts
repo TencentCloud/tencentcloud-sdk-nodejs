@@ -294,8 +294,9 @@ export interface LoginUserResponse {
  */
 export interface DescribeAppDetailRequest {
   /**
-   * 应用ID
-   */
+      * 应用ID。低代码互动课堂的SdkAppId。
+
+      */
   ApplicationId: string
 
   /**
@@ -524,7 +525,7 @@ export interface RegisterUserResponse {
  */
 export interface DescribeAppDetailResponse {
   /**
-   * SdkAppId
+   * SDK 对应的AppId
    */
   SdkAppId?: string
 

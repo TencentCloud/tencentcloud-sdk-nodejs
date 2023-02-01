@@ -368,7 +368,7 @@ export declare class Client extends AbstractClient {
 该接口一般用来封禁地域间限速的云联网实例下的限速实例, 目前联通内部运营系统通过云API调用, 如果是出口限速, 一般使用更粗的云联网实例粒度封禁（LockCcns）。
 如有需要, 可以封禁任意限速实例, 可接入到内部运营系统。
      */
-    LockCcnBandwidths(req?: LockCcnBandwidthsRequest, cb?: (error: string, rep: LockCcnBandwidthsResponse) => void): Promise<LockCcnBandwidthsResponse>;
+    LockCcnBandwidths(req: LockCcnBandwidthsRequest, cb?: (error: string, rep: LockCcnBandwidthsResponse) => void): Promise<LockCcnBandwidthsResponse>;
     /**
      * 本接口（ModifyAddressTemplateAttribute）用于修改IP地址模板
      */
@@ -914,7 +914,7 @@ export declare class Client extends AbstractClient {
 该接口一般用来封禁地域间限速的云联网实例下的限速实例, 目前联通内部运营系统通过云API调用, 如果是出口限速, 一般使用更粗的云联网实例粒度封禁（SecurityUnlockCcns）。
 如有需要, 可以封禁任意限速实例, 可接入到内部运营系统。
      */
-    UnlockCcnBandwidths(req?: UnlockCcnBandwidthsRequest, cb?: (error: string, rep: UnlockCcnBandwidthsResponse) => void): Promise<UnlockCcnBandwidthsResponse>;
+    UnlockCcnBandwidths(req: UnlockCcnBandwidthsRequest, cb?: (error: string, rep: UnlockCcnBandwidthsResponse) => void): Promise<UnlockCcnBandwidthsResponse>;
     /**
      * 本接口（CreateSecurityGroup）用于创建新的安全组（SecurityGroup）。
 * 每个账户下每个地域的每个项目的<a href="https://cloud.tencent.com/document/product/213/12453">安全组数量限制</a>。

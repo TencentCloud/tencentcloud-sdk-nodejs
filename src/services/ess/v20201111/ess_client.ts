@@ -24,7 +24,7 @@ import {
   CreateSchemeUrlRequest,
   CreateFlowApproversResponse,
   UploadFilesRequest,
-  CreateMultiFlowSignQRCodeResponse,
+  RemindFlowRecords,
   FlowCreateApprover,
   DescribeThirdPartyAuthCodeResponse,
   CreateIntegrationEmployeesRequest,
@@ -33,6 +33,7 @@ import {
   StaffRole,
   FlowApproverUrlInfo,
   CreateConvertTaskApiRequest,
+  CreateFlowRemindsResponse,
   Agent,
   FlowApproverDetail,
   DescribeFlowTemplatesRequest,
@@ -66,6 +67,7 @@ import {
   DescribeFileUrlsResponse,
   AuthorizedUser,
   CreateDocumentRequest,
+  CreateMultiFlowSignQRCodeResponse,
   DescribeOrganizationSealsResponse,
   DeleteIntegrationEmployeesRequest,
   SignQrCode,
@@ -97,6 +99,7 @@ import {
   CancelFlowRequest,
   UploadFile,
   Component,
+  CreateFlowRemindsRequest,
   DescribeFlowBriefsRequest,
   SignUrl,
   VerifyPdfResponse,
@@ -340,6 +343,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建签署链接，需要联系运营人员开白后才可使用
+   */
+  async CreateFlowSignUrl(
+    req: CreateFlowSignUrlRequest,
+    cb?: (error: string, rep: CreateFlowSignUrlResponse) => void
+  ): Promise<CreateFlowSignUrlResponse> {
+    return this.request("CreateFlowSignUrl", req, cb)
+  }
+
+  /**
    * 创建文件转换任务
    */
   async CreateConvertTaskApi(
@@ -374,13 +387,17 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建签署链接，需要联系运营人员开白后才可使用
-   */
-  async CreateFlowSignUrl(
-    req: CreateFlowSignUrlRequest,
-    cb?: (error: string, rep: CreateFlowSignUrlResponse) => void
-  ): Promise<CreateFlowSignUrlResponse> {
-    return this.request("CreateFlowSignUrl", req, cb)
+     * 指定需要批量撤销的签署流程Id，批量催办合同
+客户指定需要撤销的签署流程Id，最多100个；接口失败后返回错误信息
+注意:
+能撤回合同的只能是合同的发起人或者签署人
+该接口需要开白后使用
+     */
+  async CreateFlowReminds(
+    req: CreateFlowRemindsRequest,
+    cb?: (error: string, rep: CreateFlowRemindsResponse) => void
+  ): Promise<CreateFlowRemindsResponse> {
+    return this.request("CreateFlowReminds", req, cb)
   }
 
   /**

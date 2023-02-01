@@ -1712,6 +1712,10 @@ export interface CreateInstanceRequest {
       * 是否开启essd 增强型云盘
       */
     DiskEnhance?: number;
+    /**
+      * 是否开启智能巡检
+      */
+    EnableDiagnose?: boolean;
 }
 /**
  * CreateLogstashInstance请求参数结构体

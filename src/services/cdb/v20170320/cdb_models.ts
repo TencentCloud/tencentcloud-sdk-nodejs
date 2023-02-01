@@ -4485,7 +4485,7 @@ export interface CreateDBInstanceRequest {
   UniqSubnetId?: string
 
   /**
-   * 项目 ID，不填为默认项目。请使用 [查询项目列表](https://cloud.tencent.com/document/product/378/4400) 接口获取项目 ID。购买只读实例和灾备实例时，项目 ID 默认和主实例保持一致。
+   * 项目 ID，不填为默认项目。购买只读实例和灾备实例时，项目 ID 默认和主实例保持一致。
    */
   ProjectId?: number
 
@@ -7988,7 +7988,7 @@ export interface CreateDBInstanceHourRequest {
   UniqSubnetId?: string
 
   /**
-   * 项目 ID，不填为默认项目。请使用 [查询项目列表](https://cloud.tencent.com/document/product/378/4400) 接口获取项目 ID。
+   * 项目 ID，不填为默认项目。
    */
   ProjectId?: number
 

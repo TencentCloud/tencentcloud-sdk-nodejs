@@ -196,6 +196,8 @@ var gaap_1 = require("./gaap");
 Object.defineProperty(exports, "gaap", { enumerable: true, get: function () { return gaap_1.gaap; } });
 var gme_1 = require("./gme");
 Object.defineProperty(exports, "gme", { enumerable: true, get: function () { return gme_1.gme; } });
+var goosefs_1 = require("./goosefs");
+Object.defineProperty(exports, "goosefs", { enumerable: true, get: function () { return goosefs_1.goosefs; } });
 var gpm_1 = require("./gpm");
 Object.defineProperty(exports, "gpm", { enumerable: true, get: function () { return gpm_1.gpm; } });
 var gs_1 = require("./gs");

@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CancelFlowResponse, DescribeFlowEvidenceReportRequest, CreateSchemeUrlRequest, CreateFlowApproversResponse, UploadFilesRequest, CreateMultiFlowSignQRCodeResponse, DescribeThirdPartyAuthCodeResponse, CreateIntegrationEmployeesRequest, CreateFlowEvidenceReportRequest, StartFlowResponse, CreateConvertTaskApiRequest, DescribeFlowTemplatesRequest, DescribeFlowEvidenceReportResponse, CreateDocumentResponse, DescribeIntegrationEmployeesRequest, CreateFlowRequest, DescribeThirdPartyAuthCodeRequest, DescribeFlowInfoRequest, CreateBatchCancelFlowUrlResponse, DescribeIntegrationEmployeesResponse, CreateConvertTaskApiResponse, CreateFlowSignReviewRequest, CreateFlowByFilesRequest, CreateFlowSignUrlResponse, DescribeFileUrlsRequest, CreateFlowApproversRequest, CreateFlowEvidenceReportResponse, DescribeFileUrlsResponse, CreateDocumentRequest, DescribeOrganizationSealsResponse, DeleteIntegrationEmployeesRequest, GetTaskResultApiRequest, CreateFlowSignUrlRequest, CreateIntegrationEmployeesResponse, CreateFlowByFilesResponse, UploadFilesResponse, VerifyPdfRequest, CreateFlowSignReviewResponse, CreateSchemeUrlResponse, CreatePrepareFlowResponse, GetTaskResultApiResponse, CancelMultiFlowSignQRCodeRequest, StartFlowRequest, CreatePrepareFlowRequest, DeleteIntegrationEmployeesResponse, DescribeOrganizationSealsRequest, CancelFlowRequest, DescribeFlowBriefsRequest, VerifyPdfResponse, DescribeFlowBriefsResponse, DescribeFlowTemplatesResponse, CreateBatchCancelFlowUrlRequest, CreateMultiFlowSignQRCodeRequest, DescribeFlowInfoResponse, CreateFlowResponse, CancelMultiFlowSignQRCodeResponse } from "./ess_models";
+import { CancelFlowResponse, DescribeFlowEvidenceReportRequest, CreateSchemeUrlRequest, CreateFlowApproversResponse, UploadFilesRequest, DescribeThirdPartyAuthCodeResponse, CreateIntegrationEmployeesRequest, CreateFlowEvidenceReportRequest, StartFlowResponse, CreateConvertTaskApiRequest, CreateFlowRemindsResponse, DescribeFlowTemplatesRequest, DescribeFlowEvidenceReportResponse, CreateDocumentResponse, DescribeIntegrationEmployeesRequest, CreateFlowRequest, DescribeThirdPartyAuthCodeRequest, DescribeFlowInfoRequest, CreateBatchCancelFlowUrlResponse, DescribeIntegrationEmployeesResponse, CreateConvertTaskApiResponse, CreateFlowSignReviewRequest, CreateFlowByFilesRequest, CreateFlowSignUrlResponse, DescribeFileUrlsRequest, CreateFlowApproversRequest, CreateFlowEvidenceReportResponse, DescribeFileUrlsResponse, CreateDocumentRequest, CreateMultiFlowSignQRCodeResponse, DescribeOrganizationSealsResponse, DeleteIntegrationEmployeesRequest, GetTaskResultApiRequest, CreateFlowSignUrlRequest, CreateIntegrationEmployeesResponse, CreateFlowByFilesResponse, UploadFilesResponse, VerifyPdfRequest, CreateFlowSignReviewResponse, CreateSchemeUrlResponse, CreatePrepareFlowResponse, GetTaskResultApiResponse, CancelMultiFlowSignQRCodeRequest, StartFlowRequest, CreatePrepareFlowRequest, DeleteIntegrationEmployeesResponse, DescribeOrganizationSealsRequest, CancelFlowRequest, CreateFlowRemindsRequest, DescribeFlowBriefsRequest, VerifyPdfResponse, DescribeFlowBriefsResponse, DescribeFlowTemplatesResponse, CreateBatchCancelFlowUrlRequest, CreateMultiFlowSignQRCodeRequest, DescribeFlowInfoResponse, CreateFlowResponse, CancelMultiFlowSignQRCodeResponse } from "./ess_models";
 /**
  * ess client
  * @class
@@ -111,6 +111,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeIntegrationEmployees(req: DescribeIntegrationEmployeesRequest, cb?: (error: string, rep: DescribeIntegrationEmployeesResponse) => void): Promise<DescribeIntegrationEmployeesResponse>;
     /**
+     * 创建签署链接，需要联系运营人员开白后才可使用
+     */
+    CreateFlowSignUrl(req: CreateFlowSignUrlRequest, cb?: (error: string, rep: CreateFlowSignUrlResponse) => void): Promise<CreateFlowSignUrlResponse>;
+    /**
      * 创建文件转换任务
      */
     CreateConvertTaskApi(req: CreateConvertTaskApiRequest, cb?: (error: string, rep: CreateConvertTaskApiResponse) => void): Promise<CreateConvertTaskApiResponse>;
@@ -127,9 +131,13 @@ export declare class Client extends AbstractClient {
      */
     UploadFiles(req: UploadFilesRequest, cb?: (error: string, rep: UploadFilesResponse) => void): Promise<UploadFilesResponse>;
     /**
-     * 创建签署链接，需要联系运营人员开白后才可使用
+     * 指定需要批量撤销的签署流程Id，批量催办合同
+客户指定需要撤销的签署流程Id，最多100个；接口失败后返回错误信息
+注意:
+能撤回合同的只能是合同的发起人或者签署人
+该接口需要开白后使用
      */
-    CreateFlowSignUrl(req: CreateFlowSignUrlRequest, cb?: (error: string, rep: CreateFlowSignUrlResponse) => void): Promise<CreateFlowSignUrlResponse>;
+    CreateFlowReminds(req: CreateFlowRemindsRequest, cb?: (error: string, rep: CreateFlowRemindsResponse) => void): Promise<CreateFlowRemindsResponse>;
     /**
      * 通过AuthCode查询用户是否实名
      */

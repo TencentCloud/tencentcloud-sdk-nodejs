@@ -165,23 +165,23 @@ true--是，处理置白
 }
 
 /**
- * CreateMultiFlowSignQRCode返回参数结构体
+ * 催办接口返回详细信息
  */
-export interface CreateMultiFlowSignQRCodeResponse {
+export interface RemindFlowRecords {
   /**
-   * 签署二维码对象
+   * 是否能够催办
    */
-  QrCode: SignQrCode
+  CanRemind: boolean
 
   /**
-   * 签署链接对象
+   * 合同id
    */
-  SignUrls: SignUrl
+  FlowId: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 催办详情
    */
-  RequestId?: string
+  RemindMessage: string
 }
 
 /**
@@ -419,6 +419,21 @@ export interface CreateConvertTaskApiRequest {
    * 暂未开放
    */
   Organization?: OrganizationInfo
+}
+
+/**
+ * CreateFlowReminds返回参数结构体
+ */
+export interface CreateFlowRemindsResponse {
+  /**
+   * 签署连接过期时间字符串：年月日-时分秒
+   */
+  RemindFlowRecords: Array<RemindFlowRecords>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1735,6 +1750,26 @@ export interface CreateDocumentRequest {
 }
 
 /**
+ * CreateMultiFlowSignQRCode返回参数结构体
+ */
+export interface CreateMultiFlowSignQRCodeResponse {
+  /**
+   * 签署二维码对象
+   */
+  QrCode: SignQrCode
+
+  /**
+   * 签署链接对象
+   */
+  SignUrls: SignUrl
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeOrganizationSeals返回参数结构体
  */
 export interface DescribeOrganizationSealsResponse {
@@ -2749,6 +2784,21 @@ KEYWORD 关键字，使用ComponentId指定关键字
    * 关键字索引，可选参数，如果一个关键字在PDF文件中存在多个，可以通过关键字索引指定使用第几个关键字作为最后的结果，可指定多个索引。示例：[0,2]，说明使用PDF文件内第1个和第3个关键字位置。
    */
   KeywordIndexes?: Array<number>
+}
+
+/**
+ * CreateFlowReminds请求参数结构体
+ */
+export interface CreateFlowRemindsRequest {
+  /**
+   * 调用方用户信息，userId 必填
+   */
+  Operator: UserInfo
+
+  /**
+   * 需要执行撤回的签署流程id数组，最多100个
+   */
+  FlowIds: Array<string>
 }
 
 /**

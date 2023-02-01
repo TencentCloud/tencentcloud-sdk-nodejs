@@ -1041,37 +1041,37 @@ export interface DescribeIpAccessControlRequest {
   Count: number
 
   /**
-   * 动作
+   * 动作，40表示查询白名单，42表示查询黑名单
    */
   ActionType?: number
 
   /**
-   * 有效时间最小时间戳
+   * 最小有效时间的时间戳
    */
   VtsMin?: number
 
   /**
-   * 有效时间最大时间戳
+   * 最大有效时间的时间戳
    */
   VtsMax?: number
 
   /**
-   * 创建时间最小时间戳
+   * 最小创建时间的时间戳
    */
   CtsMin?: number
 
   /**
-   * 创建时间最大时间戳
+   * 最大创建时间的时间戳
    */
   CtsMax?: number
 
   /**
-   * 偏移
+   * 分页开始条数
    */
   OffSet?: number
 
   /**
-   * 限制
+   * 每页的条数
    */
   Limit?: number
 
@@ -1326,7 +1326,7 @@ export interface DeleteIpAccessControlRequest {
   Items: Array<string>
 
   /**
-   * 删除对应的域名下的所有黑/白IP名额单
+   * 是否删除对应的域名下的所有黑/白IP名单，true表示全部删除，false表示只删除指定ip名单
    */
   DeleteAll?: boolean
 
@@ -1808,13 +1808,13 @@ export interface DeleteIpAccessControlResponse {
       * 删除失败的条目
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  FailedItems: string
+  FailedItems?: string
 
   /**
       * 删除失败的条目数
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  FailedCount: number
+  FailedCount?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

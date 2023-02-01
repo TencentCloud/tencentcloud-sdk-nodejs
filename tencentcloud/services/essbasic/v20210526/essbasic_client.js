@@ -62,13 +62,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ChannelCancelMultiFlowSignQRCode", req, cb);
     }
     /**
-     * 查询企业扩展服务授权信息，企业经办人需要时企业超管或者法人
+     * 查询企业扩展服务授权信息，企业经办人需要是企业超管或者法人
      */
     async DescribeExtendedServiceAuthInfo(req, cb) {
         return this.request("DescribeExtendedServiceAuthInfo", req, cb);
     }
     /**
-     * 修改（操作）企业扩展服务 ，企业经办人需要时企业超管或者法人
+     * 修改（操作）企业扩展服务 ，企业经办人需要是企业超管或者法人
      */
     async ModifyExtendedService(req, cb) {
         return this.request("ModifyExtendedService", req, cb);
@@ -102,6 +102,13 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateFlowsByTemplates(req, cb) {
         return this.request("CreateFlowsByTemplates", req, cb);
+    }
+    /**
+     * 查询渠道子客企业电子印章，需要操作者具有管理印章权限
+客户指定需要获取的印章数量和偏移量，数量最多100，超过100按100处理；入参InfoType控制印章是否携带授权人信息，为1则携带，为0则返回的授权人信息为空数组。接口调用成功返回印章的信息列表还有企业印章的总数。
+     */
+    async ChannelDescribeOrganizationSeals(req, cb) {
+        return this.request("ChannelDescribeOrganizationSeals", req, cb);
     }
     /**
      * 创建跳转小程序查看或签署的链接。
@@ -179,11 +186,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetDownloadFlowUrl", req, cb);
     }
     /**
-     * 查询渠道子客企业电子印章，需要操作者具有管理印章权限
-客户指定需要获取的印章数量和偏移量，数量最多100，超过100按100处理；入参InfoType控制印章是否携带授权人信息，为1则携带，为0则返回的授权人信息为空数组。接口调用成功返回印章的信息列表还有企业印章的总数。
+     * 渠道版创建签署链接，需要联系运营人员开白后才可使用
      */
-    async ChannelDescribeOrganizationSeals(req, cb) {
-        return this.request("ChannelDescribeOrganizationSeals", req, cb);
+    async ChannelCreateFlowSignUrl(req, cb) {
+        return this.request("ChannelCreateFlowSignUrl", req, cb);
     }
     /**
      * 渠道版发起解除协议，主要应用场景为：基于一份已经签署的合同，进行解除操作。
@@ -239,10 +245,14 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
         return this.request("UploadFiles", req, cb);
     }
     /**
-     * 渠道版创建签署链接，需要联系运营人员开白后才可使用
+     * 指定需要批量撤销的签署流程Id，批量催办合同
+客户指定需要撤销的签署流程Id，最多100个，超过100不处理；接口失败后返回错误信息
+注意:
+能撤回合同的只能是合同的发起人或者签署人
+该接口需要开白后使用
      */
-    async ChannelCreateFlowSignUrl(req, cb) {
-        return this.request("ChannelCreateFlowSignUrl", req, cb);
+    async ChannelCreateFlowReminds(req, cb) {
+        return this.request("ChannelCreateFlowReminds", req, cb);
     }
     /**
      * 此接口（SyncProxyOrganization）用于同步渠道子客企业信息，主要是子客企业的营业执照，便于子客企业开通过程中不用手动上传。若有需要调用此接口，需要在创建控制链接CreateConsoleLoginUrl之后即刻进行调用。
