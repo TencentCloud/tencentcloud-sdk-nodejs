@@ -253,14 +253,16 @@ export interface GetModelListResponse {
  */
 export interface BeautifyPicResponse {
   /**
-   * RspImgType 为 base64 时，返回处理后的图片 base64 数据。默认返回base64
-   */
-  ResultImage?: string
+      * RspImgType 为 base64 时，返回处理后的图片 base64 数据。默认返回base64
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ResultImage: string
 
   /**
-   * RspImgType 为 url 时，返回处理后的图片 url 数据。
-   */
-  ResultUrl?: string
+      * RspImgType 为 url 时，返回处理后的图片 url 数据。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ResultUrl: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

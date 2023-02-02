@@ -1248,6 +1248,15 @@ export interface SwitchClusterZoneRequest {
     IsInMaintainPeriod?: string;
 }
 /**
+ * RestartInstance请求参数结构体
+ */
+export interface RestartInstanceRequest {
+    /**
+      * 实例id
+      */
+    InstanceId: string;
+}
+/**
  * 集群支持的功能
  */
 export interface Ability {
@@ -3726,6 +3735,19 @@ export interface DescribeBackupListResponse {
 export interface RollBackClusterResponse {
     /**
       * 任务流ID
+      */
+    FlowId: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * RestartInstance返回参数结构体
+ */
+export interface RestartInstanceResponse {
+    /**
+      * 异步任务id
       */
     FlowId: number;
     /**

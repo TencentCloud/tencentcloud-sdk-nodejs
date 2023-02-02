@@ -40,6 +40,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateDocument", req, cb);
     }
     /**
+     * 修改应用
+     */
+    async ModifyApp(req, cb) {
+        return this.request("ModifyApp", req, cb);
+    }
+    /**
      * 设置应用的自定义内容，包括应用图标，自定义的代码等。如果已存在，则为更新。更新js、css内容后，要生效也需要调用该接口
      */
     async SetAppCustomContent(req, cb) {
@@ -56,6 +62,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteRoom(req, cb) {
         return this.request("DeleteRoom", req, cb);
+    }
+    /**
+     * 修改房间
+     */
+    async ModifyRoom(req, cb) {
+        return this.request("ModifyRoom", req, cb);
     }
     /**
      * 文档从房间解绑
@@ -82,10 +94,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeUser", req, cb);
     }
     /**
-     * 修改应用
+     * 如果批量注册的用户已存在，则会被覆盖。一次最多注册1000个用户。默认请求频率限制：10次/秒
      */
-    async ModifyApp(req, cb) {
-        return this.request("ModifyApp", req, cb);
+    async BatchRegister(req, cb) {
+        return this.request("BatchRegister", req, cb);
     }
     /**
      * 登录

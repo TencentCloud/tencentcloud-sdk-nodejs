@@ -20,17 +20,22 @@ import { ClientConfig } from "../../../common/interface"
 import {
   CreateRoomRequest,
   SetAppCustomContentRequest,
+  ModifyRoomResponse,
   UnbindDocumentFromRoomResponse,
   DescribeUserRequest,
   CreateDocumentResponse,
   DescribeRoomStatisticsRequest,
   BindDocumentToRoomRequest,
   CreateDocumentRequest,
+  ModifyRoomRequest,
+  BatchUserInfo,
   SetAppCustomContentResponse,
   LoginOriginIdResponse,
+  BatchUserRequest,
   LoginUserResponse,
   DescribeAppDetailRequest,
   ModifyAppResponse,
+  BatchRegisterRequest,
   DescribeRoomResponse,
   DeleteRoomResponse,
   AppCustomContent,
@@ -46,6 +51,7 @@ import {
   UnbindDocumentFromRoomRequest,
   LoginOriginIdRequest,
   AppConfig,
+  BatchRegisterResponse,
   LoginUserRequest,
   BindDocumentToRoomResponse,
   CreateRoomResponse,
@@ -84,6 +90,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改应用
+   */
+  async ModifyApp(
+    req: ModifyAppRequest,
+    cb?: (error: string, rep: ModifyAppResponse) => void
+  ): Promise<ModifyAppResponse> {
+    return this.request("ModifyApp", req, cb)
+  }
+
+  /**
    * 设置应用的自定义内容，包括应用图标，自定义的代码等。如果已存在，则为更新。更新js、css内容后，要生效也需要调用该接口
    */
   async SetAppCustomContent(
@@ -111,6 +127,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteRoomResponse) => void
   ): Promise<DeleteRoomResponse> {
     return this.request("DeleteRoom", req, cb)
+  }
+
+  /**
+   * 修改房间
+   */
+  async ModifyRoom(
+    req: ModifyRoomRequest,
+    cb?: (error: string, rep: ModifyRoomResponse) => void
+  ): Promise<ModifyRoomResponse> {
+    return this.request("ModifyRoom", req, cb)
   }
 
   /**
@@ -154,13 +180,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改应用
+   * 如果批量注册的用户已存在，则会被覆盖。一次最多注册1000个用户。默认请求频率限制：10次/秒
    */
-  async ModifyApp(
-    req: ModifyAppRequest,
-    cb?: (error: string, rep: ModifyAppResponse) => void
-  ): Promise<ModifyAppResponse> {
-    return this.request("ModifyApp", req, cb)
+  async BatchRegister(
+    req: BatchRegisterRequest,
+    cb?: (error: string, rep: BatchRegisterResponse) => void
+  ): Promise<BatchRegisterResponse> {
+    return this.request("BatchRegister", req, cb)
   }
 
   /**

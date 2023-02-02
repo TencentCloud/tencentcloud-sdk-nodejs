@@ -238,10 +238,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ResumeServerless", req, cb);
     }
     /**
-     * 本接口(SwitchProxyVpc)更换数据库代理vpc
+     * 重启实例
      */
-    async SwitchProxyVpc(req, cb) {
-        return this.request("SwitchProxyVpc", req, cb);
+    async RestartInstance(req, cb) {
+        return this.request("RestartInstance", req, cb);
     }
     /**
      * 查询集群列表
@@ -290,6 +290,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyClusterName(req, cb) {
         return this.request("ModifyClusterName", req, cb);
+    }
+    /**
+     * 本接口(SwitchProxyVpc)更换数据库代理vpc
+     */
+    async SwitchProxyVpc(req, cb) {
+        return this.request("SwitchProxyVpc", req, cb);
     }
     /**
      * 该接口（DescribeClusterDetail）显示集群详情

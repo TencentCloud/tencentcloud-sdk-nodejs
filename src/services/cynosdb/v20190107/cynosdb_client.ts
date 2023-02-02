@@ -81,6 +81,7 @@ import {
   DeleteAuditRuleTemplatesRequest,
   DescribeAuditRuleTemplatesResponse,
   SwitchClusterZoneRequest,
+  RestartInstanceRequest,
   Ability,
   InstanceInitInfo,
   UpgradeInstanceRequest,
@@ -171,6 +172,7 @@ import {
   SwitchProxyVpcRequest,
   DescribeBackupListResponse,
   RollBackClusterResponse,
+  RestartInstanceResponse,
   DescribeBinlogSaveDaysRequest,
   ModifyBackupConfigRequest,
   ActivateInstanceResponse,
@@ -579,13 +581,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(SwitchProxyVpc)更换数据库代理vpc
+   * 重启实例
    */
-  async SwitchProxyVpc(
-    req: SwitchProxyVpcRequest,
-    cb?: (error: string, rep: SwitchProxyVpcResponse) => void
-  ): Promise<SwitchProxyVpcResponse> {
-    return this.request("SwitchProxyVpc", req, cb)
+  async RestartInstance(
+    req: RestartInstanceRequest,
+    cb?: (error: string, rep: RestartInstanceResponse) => void
+  ): Promise<RestartInstanceResponse> {
+    return this.request("RestartInstance", req, cb)
   }
 
   /**
@@ -666,6 +668,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyClusterNameResponse) => void
   ): Promise<ModifyClusterNameResponse> {
     return this.request("ModifyClusterName", req, cb)
+  }
+
+  /**
+   * 本接口(SwitchProxyVpc)更换数据库代理vpc
+   */
+  async SwitchProxyVpc(
+    req: SwitchProxyVpcRequest,
+    cb?: (error: string, rep: SwitchProxyVpcResponse) => void
+  ): Promise<SwitchProxyVpcResponse> {
+    return this.request("SwitchProxyVpc", req, cb)
   }
 
   /**

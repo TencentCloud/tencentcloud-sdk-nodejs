@@ -368,9 +368,9 @@ it("cynosdb.v20190107.ResumeServerless", async function () {
     }
 })
 
-it("cynosdb.v20190107.SwitchProxyVpc", async function () {
+it("cynosdb.v20190107.RestartInstance", async function () {
     try {
-       const data = await client.SwitchProxyVpc({})
+       const data = await client.RestartInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -451,6 +451,16 @@ it("cynosdb.v20190107.RemoveClusterSlaveZone", async function () {
 it("cynosdb.v20190107.ModifyClusterName", async function () {
     try {
        const data = await client.ModifyClusterName({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.SwitchProxyVpc", async function () {
+    try {
+       const data = await client.SwitchProxyVpc({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

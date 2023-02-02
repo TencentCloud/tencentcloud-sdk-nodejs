@@ -734,7 +734,7 @@ export class Client extends AbstractClient {
 - CLB 绑定 SCF 仅支持绑定“Event 函数”类型的云函数。
      */
   async RegisterFunctionTargets(
-    req?: RegisterFunctionTargetsRequest,
+    req: RegisterFunctionTargetsRequest,
     cb?: (error: string, rep: RegisterFunctionTargetsResponse) => void
   ): Promise<RegisterFunctionTargetsResponse> {
     return this.request("RegisterFunctionTargets", req, cb)

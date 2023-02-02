@@ -960,7 +960,37 @@ export interface RsWeightRule {
 /**
  * RegisterFunctionTargets请求参数结构体
  */
-export type RegisterFunctionTargetsRequest = null
+export interface RegisterFunctionTargetsRequest {
+  /**
+   * 负载均衡实例 ID。
+   */
+  LoadBalancerId: string
+
+  /**
+   * 负载均衡监听器 ID。
+   */
+  ListenerId: string
+
+  /**
+   * 待绑定的云函数列表。
+   */
+  FunctionTargets: Array<FunctionTarget>
+
+  /**
+   * 目标转发规则的 ID，当将云函数绑定到七层转发规则时，必须输入此参数或 Domain+Url 参数。
+   */
+  LocationId?: string
+
+  /**
+   * 目标转发规则的域名，若已经输入 LocationId 参数，则本参数不生效。
+   */
+  Domain?: string
+
+  /**
+   * 目标转发规则的 URL，若已经输入 LocationId 参数，则本参数不生效。
+   */
+  Url?: string
+}
 
 /**
  * DeregisterTargetsFromClassicalLB请求参数结构体

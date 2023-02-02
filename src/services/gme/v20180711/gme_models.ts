@@ -194,14 +194,20 @@ export interface DescribeApplicationDataRequest {
  */
 export interface UserMicStatus {
   /**
-   * 客户端用于标识用户的Openid。
-   */
-  Uid: number
-
-  /**
    * 开麦状态。1表示关闭麦克风，2表示打开麦克风。
    */
   EnableMic: number
+
+  /**
+   * 客户端用于标识用户的Openid。（Uid、StrUid必须填一个，优先处理StrUid。）
+   */
+  Uid?: number
+
+  /**
+      * 客户端用于标识字符串型用户的Openid。（Uid、StrUid必须填一个，优先处理StrUid。）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  StrUid?: string
 }
 
 /**
@@ -359,11 +365,6 @@ export interface DeleteRoomMemberRequest {
   RoomId: string
 
   /**
-   * 要剔除的用户列表
-   */
-  Uids: Array<string>
-
-  /**
    * 剔除类型 1-删除房间 2-剔除用户
    */
   DeleteType: number
@@ -372,6 +373,11 @@ export interface DeleteRoomMemberRequest {
    * 应用id
    */
   BizId: number
+
+  /**
+   * 要剔除的用户列表
+   */
+  Uids?: Array<string>
 }
 
 /**
@@ -921,7 +927,7 @@ export interface DeleteRoomMemberResponse {
   /**
    * 剔除房间或成员的操作结果
    */
-  DeleteResult: DeleteResult
+  DeleteResult?: DeleteResult
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1042,13 +1048,13 @@ export interface DescribeRoomInfoResponse {
       * 操作结果, 0成功, 非0失败
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Result: number
+  Result?: number
 
   /**
       * 房间用户信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  RoomUsers: Array<RoomUser>
+  RoomUsers?: Array<RoomUser>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1093,12 +1099,12 @@ export interface ModifyUserMicStatusResponse {
   /**
    * 返回结果：0为成功，非0为失败。
    */
-  Result: number
+  Result?: number
 
   /**
    * 错误信息。
    */
-  ErrMsg: string
+  ErrMsg?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

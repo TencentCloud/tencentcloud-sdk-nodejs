@@ -2558,6 +2558,12 @@ export interface GroupResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   GroupList: Array<DescribeGroup>
+
+  /**
+      * 消费分组配额
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  GroupCountQuota?: number
 }
 
 /**

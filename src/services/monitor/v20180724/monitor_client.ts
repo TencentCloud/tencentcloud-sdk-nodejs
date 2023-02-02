@@ -29,6 +29,7 @@ import {
   EnableGrafanaSSOResponse,
   DescribePolicyGroupInfoResponse,
   PolicyTag,
+  DeletePrometheusClusterAgentRequest,
   DescribePrometheusScrapeJobsRequest,
   CreatePolicyGroupResponse,
   DescribeBaseMetricsResponse,
@@ -50,7 +51,7 @@ import {
   DescribeGrafanaEnvironmentsRequest,
   PrometheusConfigItem,
   AlarmPolicy,
-  DescribeBasicAlarmListResponse,
+  DeleteExporterIntegrationRequest,
   PrometheusRuleKV,
   DescribePolicyConditionListResponse,
   PrometheusRuleSet,
@@ -71,7 +72,9 @@ import {
   CreatePrometheusRecordRuleYamlRequest,
   Instance,
   DescribeAlarmNoticesResponse,
+  PrometheusClusterAgentPodConfig,
   GrafanaInstanceInfo,
+  DeletePrometheusConfigResponse,
   CreatePrometheusRecordRuleYamlResponse,
   MetricObjectMeaning,
   AlarmEvent,
@@ -99,6 +102,7 @@ import {
   MidQueryCondition,
   DeleteSSOAccountRequest,
   DescribePrometheusAgentInstancesResponse,
+  URLNotice,
   DescribeProductListResponse,
   DeletePrometheusTempResponse,
   CreatePolicyGroupCondition,
@@ -108,7 +112,7 @@ import {
   ModifyAlarmPolicyStatusResponse,
   DescribeGrafanaInstancesRequest,
   DescribePrometheusTempSyncRequest,
-  DescribeAccidentEventListRequest,
+  DescribePrometheusGlobalConfigResponse,
   CreateRecordingRuleResponse,
   CreateGrafanaNotificationChannelResponse,
   DescribeGrafanaNotificationChannelsRequest,
@@ -117,6 +121,7 @@ import {
   UpdateExporterIntegrationResponse,
   CreateAlarmNoticeRequest,
   InstanceGroups,
+  UpdateGrafanaNotificationChannelResponse,
   CreateExporterIntegrationResponse,
   UnBindingAllPolicyObjectRequest,
   SendCustomAlarmMsgResponse,
@@ -127,6 +132,7 @@ import {
   UpdateRecordingRuleRequest,
   DescribePolicyConditionListConfigManualCalcValue,
   DescribePrometheusInstancesRequest,
+  Toleration,
   TagInstance,
   DescribePolicyConditionListConfigManual,
   InstallPluginsRequest,
@@ -137,9 +143,11 @@ import {
   BindingPolicyObjectRequest,
   CreateServiceDiscoveryResponse,
   EnableSSOCamCheckResponse,
+  DescribeAccidentEventListRequest,
   CreatePrometheusScrapeJobResponse,
   CreateAlarmPolicyRequest,
   PrometheusZoneItem,
+  ModifyPrometheusAlertPolicyRequest,
   ModifyPrometheusInstanceAttributesResponse,
   PrometheusTemplateSyncTarget,
   DescribePrometheusAlertPolicyResponse,
@@ -148,30 +156,37 @@ import {
   DeleteGrafanaNotificationChannelResponse,
   DataPoint,
   DescribeAlarmPoliciesResponse,
+  ModifyPrometheusGlobalNotificationRequest,
   DescribePolicyConditionListConfigManualPeriod,
   DescribePrometheusRecordRulesResponse,
+  DescribePrometheusGlobalNotificationResponse,
   DescribeMonitorTypesRequest,
   DimensionsDesc,
+  DeletePrometheusAlertPolicyRequest,
   ServiceDiscoveryItem,
-  SetDefaultAlarmPolicyRequest,
+  ModifyPrometheusAgentExternalLabelsResponse,
   ModifyAlarmNoticeRequest,
   DescribeGrafanaWhiteListResponse,
   DescribeAlertRulesResponse,
   ResumeGrafanaInstanceRequest,
+  DescribeBasicAlarmListResponse,
   ModifyAlarmReceiversRequest,
   DescribeExporterIntegrationsRequest,
   DescribePrometheusInstanceDetailResponse,
   Point,
   ModifyPolicyGroupEventCondition,
   CreateGrafanaNotificationChannelRequest,
-  UserNotice,
+  DescribePrometheusTargetsTMPResponse,
+  DescribePrometheusClusterAgentsResponse,
   UpdatePrometheusScrapeJobRequest,
-  UpdateGrafanaNotificationChannelResponse,
+  PrometheusAgentInfo,
+  CreatePrometheusClusterAgentResponse,
   CreateGrafanaIntegrationResponse,
   BindPrometheusManagedGrafanaRequest,
   PrometheusAlertManagerConfig,
   CreateGrafanaInstanceRequest,
   DescribePrometheusInstanceUsageResponse,
+  DescribePrometheusGlobalNotificationRequest,
   DeleteExporterIntegrationResponse,
   UpdateRecordingRuleResponse,
   CreatePrometheusAgentResponse,
@@ -189,8 +204,9 @@ import {
   ResumeGrafanaInstanceResponse,
   DescribeAccidentEventListResponse,
   DescribePrometheusTempSyncResponse,
+  CreatePrometheusConfigResponse,
   UpdateDNSConfigRequest,
-  DescribeAccidentEventListAlarms,
+  DeletePrometheusClusterAgentResponse,
   DescribeDNSConfigResponse,
   DeleteRecordingRulesRequest,
   MonitorTypeNamespace,
@@ -221,29 +237,37 @@ import {
   BindingPolicyTagResponse,
   DeleteServiceDiscoveryResponse,
   CreateExporterIntegrationRequest,
+  ModifyPrometheusConfigResponse,
   PrometheusAgent,
+  CreatePrometheusAlertPolicyResponse,
   DescribePrometheusInstanceDetailRequest,
+  UserNotice,
   PrometheusInstancesItem,
   DescribeConditionsTemplateListRequest,
   DeletePrometheusRecordRuleYamlResponse,
   MetricDataPoint,
   GetMonitorDataRequest,
   CreateRecordingRuleRequest,
+  ModifyPrometheusConfigRequest,
   DescribeGrafanaEnvironmentsResponse,
   DescribePolicyConditionListRequest,
   DeletePolicyGroupResponse,
   DeleteGrafanaInstanceRequest,
   GrafanaIntegrationConfig,
   DeleteGrafanaIntegrationRequest,
+  ModifyPrometheusAlertPolicyResponse,
+  DescribePrometheusTargetsTMPRequest,
   CreateServiceDiscoveryRequest,
   PeriodsSt,
   ModifyAlarmReceiversResponse,
   GrafanaChannel,
+  CreatePrometheusConfigRequest,
   DescribeSSOAccountResponse,
   CreateAlarmPolicyResponse,
   DeleteGrafanaNotificationChannelRequest,
   AlarmNotice,
   DescribeProductEventListEventsDimensions,
+  CreatePrometheusClusterAgentRequest,
   ModifyAlarmPolicyConditionResponse,
   DescribePrometheusInstancesOverviewResponse,
   MetricSet,
@@ -263,7 +287,8 @@ import {
   PrometheusNotificationItem,
   DescribeMonitorTypesResponse,
   UpgradeGrafanaInstanceRequest,
-  CreateAlarmNoticeResponse,
+  DescribeAccidentEventListAlarms,
+  CreatePrometheusGlobalNotificationResponse,
   DescribeAlarmHistoriesRequest,
   DescribePrometheusRecordRuleYamlResponse,
   DeletePolicyGroupRequest,
@@ -274,12 +299,14 @@ import {
   DescribePrometheusAgentsRequest,
   DescribePolicyGroupInfoCondition,
   DescribePrometheusInstanceInitStatusRequest,
+  CreatePrometheusAlertPolicyRequest,
   DescribeBindingPolicyObjectListRequest,
   DescribeProductEventListEvents,
   DescribePolicyConditionListConfigManualPeriodNum,
   UpgradeGrafanaDashboardResponse,
   DescribeAllNamespacesRequest,
   PolicyGroup,
+  DescribePrometheusClusterAgentsRequest,
   UnbindPrometheusManagedGrafanaRequest,
   DescribePolicyGroupListGroupInstanceGroup,
   DescribeConditionsTemplateListResponse,
@@ -289,15 +316,17 @@ import {
   DescribeAlarmEventsRequest,
   ModifyAlarmPolicyConditionRequest,
   ModifyAlarmNoticeResponse,
+  PrometheusJobTargets,
   UpdateGrafanaConfigRequest,
   DescribeGrafanaIntegrationsRequest,
   AlarmHistory,
-  URLNotice,
+  PrometheusClusterAgentBasic,
   CreatePolicyGroupRequest,
   CreatePrometheusScrapeJobRequest,
   CreatePrometheusTempResponse,
   DescribePolicyConditionListEventMetric,
   NoticeBindPolicys,
+  UnBindingAllPolicyObjectResponse,
   DescribeAlarmNoticesRequest,
   RunPrometheusInstanceResponse,
   UpdateExporterIntegrationRequest,
@@ -312,11 +341,11 @@ import {
   DeleteServiceDiscoveryRequest,
   DescribeInstalledPluginsResponse,
   UpdateGrafanaConfigResponse,
-  DeleteExporterIntegrationRequest,
   ModifyPrometheusInstanceAttributesRequest,
   DescribePrometheusConfigResponse,
   UpdateGrafanaEnvironmentsResponse,
   DescribeProductEventListRequest,
+  CreatePrometheusGlobalNotificationRequest,
   ModifyPrometheusTempResponse,
   DescribeRecordingRulesResponse,
   DeleteRecordingRulesResponse,
@@ -324,17 +353,18 @@ import {
   UpdatePrometheusAgentStatusRequest,
   DescribeAlarmNoticeCallbacksRequest,
   CheckIsPrometheusNewUserResponse,
-  ModifyAlarmPolicyTasksResponse,
+  PutMonitorDataResponse,
   DescribePolicyGroupInfoRequest,
   UpdateAlertRuleStateResponse,
   ModifyPrometheusRecordRuleYamlRequest,
+  DeletePrometheusAlertPolicyResponse,
   DescribeProductEventListDimensions,
   ModifyAlarmPolicyNoticeRequest,
   DeleteAlarmPolicyRequest,
   EventCondition,
   CreateAlertRuleResponse,
   DescribePolicyConditionListConfigManualContinueTime,
-  PutMonitorDataResponse,
+  ModifyAlarmPolicyTasksResponse,
   MonitorTypeInfo,
   DimensionNew,
   DeleteAlertRulesResponse,
@@ -357,20 +387,25 @@ import {
   DeleteAlarmNoticesResponse,
   DeletePrometheusTempSyncRequest,
   DescribePluginOverviewsRequest,
+  DescribePrometheusGlobalConfigRequest,
   PrometheusInstanceTenantUsage,
   DescribePrometheusZonesRequest,
   ModifyPolicyGroupCondition,
   ModifyPolicyGroupRequest,
   DescribeBaseMetricsRequest,
+  DeletePrometheusConfigRequest,
   PrometheusAlertPolicyItem,
+  ModifyPrometheusAgentExternalLabelsRequest,
+  PrometheusScrapeJob,
   AlarmHierarchicalNotice,
   BindingPolicyObjectDimension,
   DescribePrometheusTempRequest,
   UpdateServiceDiscoveryResponse,
   DescribeBasicAlarmListAlarms,
-  UnBindingAllPolicyObjectResponse,
+  CreateAlarmNoticeResponse,
   Condition,
   DeleteGrafanaInstanceResponse,
+  PrometheusAgentOverview,
   Filter,
   DescribeProductEventListEventsGroupInfo,
   UpdateSSOAccountRequest,
@@ -378,10 +413,10 @@ import {
   PutMonitorDataRequest,
   UpdatePrometheusScrapeJobResponse,
   DescribeAlarmPoliciesRequest,
-  PrometheusScrapeJob,
   DescribePolicyConditionListConfigManualStatType,
   IntegrationConfiguration,
   DescribePrometheusAgentsResponse,
+  ModifyPrometheusGlobalNotificationResponse,
   CleanGrafanaInstanceResponse,
   CreateAlertRuleRequest,
   ModifyPrometheusRecordRuleYamlResponse,
@@ -393,6 +428,7 @@ import {
   MetricDatum,
   DescribeStatisticDataRequest,
   GrafanaNotificationChannel,
+  SetDefaultAlarmPolicyRequest,
   CLSNotice,
   LogAlarmReq,
   TerminatePrometheusInstancesResponse,
@@ -436,6 +472,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 解除TMP实例的集群关联
+   */
+  async DeletePrometheusClusterAgent(
+    req: DeletePrometheusClusterAgentRequest,
+    cb?: (error: string, rep: DeletePrometheusClusterAgentResponse) => void
+  ): Promise<DeletePrometheusClusterAgentResponse> {
+    return this.request("DeletePrometheusClusterAgent", req, cb)
+  }
+
+  /**
    * 获取已绑定对象列表
    */
   async DescribeBindingPolicyObjectList(
@@ -455,6 +501,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpdateAlertRuleResponse) => void
   ): Promise<UpdateAlertRuleResponse> {
     return this.request("UpdateAlertRule", req, cb)
+  }
+
+  /**
+   * 修改2.0实例告警策略
+   */
+  async ModifyPrometheusAlertPolicy(
+    req: ModifyPrometheusAlertPolicyRequest,
+    cb?: (error: string, rep: ModifyPrometheusAlertPolicyResponse) => void
+  ): Promise<ModifyPrometheusAlertPolicyResponse> {
+    return this.request("ModifyPrometheusAlertPolicy", req, cb)
   }
 
   /**
@@ -498,13 +554,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取基础告警列表
+   * 创建云监控告警策略
    */
-  async DescribeBasicAlarmList(
-    req: DescribeBasicAlarmListRequest,
-    cb?: (error: string, rep: DescribeBasicAlarmListResponse) => void
-  ): Promise<DescribeBasicAlarmListResponse> {
-    return this.request("DescribeBasicAlarmList", req, cb)
+  async CreateAlarmPolicy(
+    req: CreateAlarmPolicyRequest,
+    cb?: (error: string, rep: CreateAlarmPolicyResponse) => void
+  ): Promise<CreateAlarmPolicyResponse> {
+    return this.request("CreateAlarmPolicy", req, cb)
   }
 
   /**
@@ -538,13 +594,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 列出 Prometheus 服务可用区
+   * 获取TMP实例关联集群列表
    */
-  async DescribePrometheusZones(
-    req: DescribePrometheusZonesRequest,
-    cb?: (error: string, rep: DescribePrometheusZonesResponse) => void
-  ): Promise<DescribePrometheusZonesResponse> {
-    return this.request("DescribePrometheusZones", req, cb)
+  async DescribePrometheusClusterAgents(
+    req: DescribePrometheusClusterAgentsRequest,
+    cb?: (error: string, rep: DescribePrometheusClusterAgentsResponse) => void
+  ): Promise<DescribePrometheusClusterAgentsResponse> {
+    return this.request("DescribePrometheusClusterAgents", req, cb)
+  }
+
+  /**
+   * 判断用户是否为云原生监控新用户，即在任何地域下均未创建过监控实例的用户
+   */
+  async CheckIsPrometheusNewUser(
+    req?: CheckIsPrometheusNewUserRequest,
+    cb?: (error: string, rep: CheckIsPrometheusNewUserResponse) => void
+  ): Promise<CheckIsPrometheusNewUserResponse> {
+    return this.request("CheckIsPrometheusNewUser", req, cb)
   }
 
   /**
@@ -750,6 +816,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 与云监控融合的2.0实例关联集群
+   */
+  async CreatePrometheusClusterAgent(
+    req: CreatePrometheusClusterAgentRequest,
+    cb?: (error: string, rep: CreatePrometheusClusterAgentResponse) => void
+  ): Promise<CreatePrometheusClusterAgentResponse> {
+    return this.request("CreatePrometheusClusterAgent", req, cb)
+  }
+
+  /**
    * 策略绑定标签
    */
   async BindingPolicyTag(
@@ -807,6 +883,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetPrometheusAgentManagementCommandResponse) => void
   ): Promise<GetPrometheusAgentManagementCommandResponse> {
     return this.request("GetPrometheusAgentManagementCommand", req, cb)
+  }
+
+  /**
+   * 更新 exporter 集成配置
+   */
+  async UpdateExporterIntegration(
+    req: UpdateExporterIntegrationRequest,
+    cb?: (error: string, rep: UpdateExporterIntegrationResponse) => void
+  ): Promise<UpdateExporterIntegrationResponse> {
+    return this.request("UpdateExporterIntegration", req, cb)
   }
 
   /**
@@ -974,6 +1060,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建通知模板
+   */
+  async CreateAlarmNotice(
+    req: CreateAlarmNoticeRequest,
+    cb?: (error: string, rep: CreateAlarmNoticeResponse) => void
+  ): Promise<CreateAlarmNoticeResponse> {
+    return this.request("CreateAlarmNotice", req, cb)
+  }
+
+  /**
    * Grafana可视化服务 删除授权用户
    */
   async DeleteSSOAccount(
@@ -1014,6 +1110,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 更新 Grafana 白名单
+   */
+  async UpdateGrafanaWhiteList(
+    req: UpdateGrafanaWhiteListRequest,
+    cb?: (error: string, rep: UpdateGrafanaWhiteListResponse) => void
+  ): Promise<UpdateGrafanaWhiteListResponse> {
+    return this.request("UpdateGrafanaWhiteList", req, cb)
+  }
+
+  /**
      * 设置一个策略为该告警策略类型、该项目的默认告警策略。
 同一项目下相同的告警策略类型，就会被设置为非默认。
      */
@@ -1032,6 +1138,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteGrafanaInstanceResponse) => void
   ): Promise<DeleteGrafanaInstanceResponse> {
     return this.request("DeleteGrafanaInstance", req, cb)
+  }
+
+  /**
+   * 删除Prometheus配置，如果目标不存在，将返回成功
+   */
+  async DeletePrometheusConfig(
+    req: DeletePrometheusConfigRequest,
+    cb?: (error: string, rep: DeletePrometheusConfigResponse) => void
+  ): Promise<DeletePrometheusConfigResponse> {
+    return this.request("DeletePrometheusConfig", req, cb)
   }
 
   /**
@@ -1125,13 +1241,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建云监控告警策略
+   * 获取基础告警列表
    */
-  async CreateAlarmPolicy(
-    req: CreateAlarmPolicyRequest,
-    cb?: (error: string, rep: CreateAlarmPolicyResponse) => void
-  ): Promise<CreateAlarmPolicyResponse> {
-    return this.request("CreateAlarmPolicy", req, cb)
+  async DescribeBasicAlarmList(
+    req: DescribeBasicAlarmListRequest,
+    cb?: (error: string, rep: DescribeBasicAlarmListResponse) => void
+  ): Promise<DescribeBasicAlarmListResponse> {
+    return this.request("DescribeBasicAlarmList", req, cb)
   }
 
   /**
@@ -1155,13 +1271,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建通知模板
+   * 创建全局告警通知渠道
    */
-  async CreateAlarmNotice(
-    req: CreateAlarmNoticeRequest,
-    cb?: (error: string, rep: CreateAlarmNoticeResponse) => void
-  ): Promise<CreateAlarmNoticeResponse> {
-    return this.request("CreateAlarmNotice", req, cb)
+  async CreatePrometheusGlobalNotification(
+    req: CreatePrometheusGlobalNotificationRequest,
+    cb?: (error: string, rep: CreatePrometheusGlobalNotificationResponse) => void
+  ): Promise<CreatePrometheusGlobalNotificationResponse> {
+    return this.request("CreatePrometheusGlobalNotification", req, cb)
   }
 
   /**
@@ -1225,6 +1341,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询全局告警通知渠道
+   */
+  async DescribePrometheusGlobalNotification(
+    req: DescribePrometheusGlobalNotificationRequest,
+    cb?: (error: string, rep: DescribePrometheusGlobalNotificationResponse) => void
+  ): Promise<DescribePrometheusGlobalNotificationResponse> {
+    return this.request("DescribePrometheusGlobalNotification", req, cb)
+  }
+
+  /**
    * 升级 Grafana Dashboard
    */
   async UpgradeGrafanaDashboard(
@@ -1252,6 +1378,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDNSConfigResponse) => void
   ): Promise<DescribeDNSConfigResponse> {
     return this.request("DescribeDNSConfig", req, cb)
+  }
+
+  /**
+   * 修改全局告警通知渠道
+   */
+  async ModifyPrometheusGlobalNotification(
+    req: ModifyPrometheusGlobalNotificationRequest,
+    cb?: (error: string, rep: ModifyPrometheusGlobalNotificationResponse) => void
+  ): Promise<ModifyPrometheusGlobalNotificationResponse> {
+    return this.request("ModifyPrometheusGlobalNotification", req, cb)
   }
 
   /**
@@ -1329,6 +1465,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改被关联集群的external labels
+   */
+  async ModifyPrometheusAgentExternalLabels(
+    req: ModifyPrometheusAgentExternalLabelsRequest,
+    cb?: (error: string, rep: ModifyPrometheusAgentExternalLabelsResponse) => void
+  ): Promise<ModifyPrometheusAgentExternalLabelsResponse> {
+    return this.request("ModifyPrometheusAgentExternalLabels", req, cb)
+  }
+
+  /**
    * 更新策略组
    */
   async ModifyPolicyGroup(
@@ -1359,13 +1505,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 判断用户是否为云原生监控新用户，即在任何地域下均未创建过监控实例的用户
+   * 列出 Prometheus 服务可用区
    */
-  async CheckIsPrometheusNewUser(
-    req?: CheckIsPrometheusNewUserRequest,
-    cb?: (error: string, rep: CheckIsPrometheusNewUserResponse) => void
-  ): Promise<CheckIsPrometheusNewUserResponse> {
-    return this.request("CheckIsPrometheusNewUser", req, cb)
+  async DescribePrometheusZones(
+    req: DescribePrometheusZonesRequest,
+    cb?: (error: string, rep: DescribePrometheusZonesResponse) => void
+  ): Promise<DescribePrometheusZonesResponse> {
+    return this.request("DescribePrometheusZones", req, cb)
   }
 
   /**
@@ -1399,6 +1545,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除2.0实例告警策略
+   */
+  async DeletePrometheusAlertPolicy(
+    req: DeletePrometheusAlertPolicyRequest,
+    cb?: (error: string, rep: DeletePrometheusAlertPolicyResponse) => void
+  ): Promise<DeletePrometheusAlertPolicyResponse> {
+    return this.request("DeletePrometheusAlertPolicy", req, cb)
+  }
+
+  /**
    * 更新 Prometheus CVM Agent 状态
    */
   async UpdatePrometheusAgentStatus(
@@ -1429,13 +1585,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更新 Grafana 白名单
+   * 获得实例级别抓取配置
    */
-  async UpdateGrafanaWhiteList(
-    req: UpdateGrafanaWhiteListRequest,
-    cb?: (error: string, rep: UpdateGrafanaWhiteListResponse) => void
-  ): Promise<UpdateGrafanaWhiteListResponse> {
-    return this.request("UpdateGrafanaWhiteList", req, cb)
+  async DescribePrometheusGlobalConfig(
+    req: DescribePrometheusGlobalConfigRequest,
+    cb?: (error: string, rep: DescribePrometheusGlobalConfigResponse) => void
+  ): Promise<DescribePrometheusGlobalConfigResponse> {
+    return this.request("DescribePrometheusGlobalConfig", req, cb)
   }
 
   /**
@@ -1459,6 +1615,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取targets信息
+   */
+  async DescribePrometheusTargetsTMP(
+    req: DescribePrometheusTargetsTMPRequest,
+    cb?: (error: string, rep: DescribePrometheusTargetsTMPResponse) => void
+  ): Promise<DescribePrometheusTargetsTMPResponse> {
+    return this.request("DescribePrometheusTargetsTMP", req, cb)
+  }
+
+  /**
    * 列出 Grafana 白名单
    */
   async DescribeGrafanaWhiteList(
@@ -1466,6 +1632,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeGrafanaWhiteListResponse) => void
   ): Promise<DescribeGrafanaWhiteListResponse> {
     return this.request("DescribeGrafanaWhiteList", req, cb)
+  }
+
+  /**
+   * 创建告警策略
+   */
+  async CreatePrometheusAlertPolicy(
+    req: CreatePrometheusAlertPolicyRequest,
+    cb?: (error: string, rep: CreatePrometheusAlertPolicyResponse) => void
+  ): Promise<CreatePrometheusAlertPolicyResponse> {
+    return this.request("CreatePrometheusAlertPolicy", req, cb)
   }
 
   /**
@@ -1745,6 +1921,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建prometheus配置
+   */
+  async CreatePrometheusConfig(
+    req: CreatePrometheusConfigRequest,
+    cb?: (error: string, rep: CreatePrometheusConfigResponse) => void
+  ): Promise<CreatePrometheusConfigResponse> {
+    return this.request("CreatePrometheusConfig", req, cb)
+  }
+
+  /**
    * 列出可安装的所有 Grafana 插件
    */
   async DescribePluginOverviews(
@@ -1765,13 +1951,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更新 exporter 集成配置
+   * 修改prometheus配置，如果配置项不存在，则会新增
    */
-  async UpdateExporterIntegration(
-    req: UpdateExporterIntegrationRequest,
-    cb?: (error: string, rep: UpdateExporterIntegrationResponse) => void
-  ): Promise<UpdateExporterIntegrationResponse> {
-    return this.request("UpdateExporterIntegration", req, cb)
+  async ModifyPrometheusConfig(
+    req: ModifyPrometheusConfigRequest,
+    cb?: (error: string, rep: ModifyPrometheusConfigResponse) => void
+  ): Promise<ModifyPrometheusConfigResponse> {
+    return this.request("ModifyPrometheusConfig", req, cb)
   }
 
   /**

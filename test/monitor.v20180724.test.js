@@ -38,6 +38,16 @@ it("monitor.v20180724.CreateAlertRule", async function () {
     }
 })
 
+it("monitor.v20180724.DeletePrometheusClusterAgent", async function () {
+    try {
+       const data = await client.DeletePrometheusClusterAgent({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("monitor.v20180724.DescribeBindingPolicyObjectList", async function () {
     try {
        const data = await client.DescribeBindingPolicyObjectList({})
@@ -51,6 +61,16 @@ it("monitor.v20180724.DescribeBindingPolicyObjectList", async function () {
 it("monitor.v20180724.UpdateAlertRule", async function () {
     try {
        const data = await client.UpdateAlertRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.ModifyPrometheusAlertPolicy", async function () {
+    try {
+       const data = await client.ModifyPrometheusAlertPolicy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -98,9 +118,9 @@ it("monitor.v20180724.CreateGrafanaInstance", async function () {
     }
 })
 
-it("monitor.v20180724.DescribeBasicAlarmList", async function () {
+it("monitor.v20180724.CreateAlarmPolicy", async function () {
     try {
-       const data = await client.DescribeBasicAlarmList({})
+       const data = await client.CreateAlarmPolicy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -138,9 +158,19 @@ it("monitor.v20180724.UpdateSSOAccount", async function () {
     }
 })
 
-it("monitor.v20180724.DescribePrometheusZones", async function () {
+it("monitor.v20180724.DescribePrometheusClusterAgents", async function () {
     try {
-       const data = await client.DescribePrometheusZones({})
+       const data = await client.DescribePrometheusClusterAgents({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.CheckIsPrometheusNewUser", async function () {
+    try {
+       const data = await client.CheckIsPrometheusNewUser({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -348,6 +378,16 @@ it("monitor.v20180724.DeleteServiceDiscovery", async function () {
     }
 })
 
+it("monitor.v20180724.CreatePrometheusClusterAgent", async function () {
+    try {
+       const data = await client.CreatePrometheusClusterAgent({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("monitor.v20180724.BindingPolicyTag", async function () {
     try {
        const data = await client.BindingPolicyTag({})
@@ -401,6 +441,16 @@ it("monitor.v20180724.ModifyAlarmPolicyCondition", async function () {
 it("monitor.v20180724.GetPrometheusAgentManagementCommand", async function () {
     try {
        const data = await client.GetPrometheusAgentManagementCommand({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.UpdateExporterIntegration", async function () {
+    try {
+       const data = await client.UpdateExporterIntegration({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -568,6 +618,16 @@ it("monitor.v20180724.DescribeAlarmHistories", async function () {
     }
 })
 
+it("monitor.v20180724.CreateAlarmNotice", async function () {
+    try {
+       const data = await client.CreateAlarmNotice({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("monitor.v20180724.DeleteSSOAccount", async function () {
     try {
        const data = await client.DeleteSSOAccount({})
@@ -608,6 +668,16 @@ it("monitor.v20180724.DescribePrometheusTemp", async function () {
     }
 })
 
+it("monitor.v20180724.UpdateGrafanaWhiteList", async function () {
+    try {
+       const data = await client.UpdateGrafanaWhiteList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("monitor.v20180724.SetDefaultAlarmPolicy", async function () {
     try {
        const data = await client.SetDefaultAlarmPolicy({})
@@ -621,6 +691,16 @@ it("monitor.v20180724.SetDefaultAlarmPolicy", async function () {
 it("monitor.v20180724.DeleteGrafanaInstance", async function () {
     try {
        const data = await client.DeleteGrafanaInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.DeletePrometheusConfig", async function () {
+    try {
+       const data = await client.DeletePrometheusConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -718,9 +798,9 @@ it("monitor.v20180724.DescribeSSOAccount", async function () {
     }
 })
 
-it("monitor.v20180724.CreateAlarmPolicy", async function () {
+it("monitor.v20180724.DescribeBasicAlarmList", async function () {
     try {
-       const data = await client.CreateAlarmPolicy({})
+       const data = await client.DescribeBasicAlarmList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -748,9 +828,9 @@ it("monitor.v20180724.SyncPrometheusTemp", async function () {
     }
 })
 
-it("monitor.v20180724.CreateAlarmNotice", async function () {
+it("monitor.v20180724.CreatePrometheusGlobalNotification", async function () {
     try {
-       const data = await client.CreateAlarmNotice({})
+       const data = await client.CreatePrometheusGlobalNotification({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -818,6 +898,16 @@ it("monitor.v20180724.DescribeInstalledPlugins", async function () {
     }
 })
 
+it("monitor.v20180724.DescribePrometheusGlobalNotification", async function () {
+    try {
+       const data = await client.DescribePrometheusGlobalNotification({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("monitor.v20180724.UpgradeGrafanaDashboard", async function () {
     try {
        const data = await client.UpgradeGrafanaDashboard({})
@@ -841,6 +931,16 @@ it("monitor.v20180724.DescribeAlarmNotices", async function () {
 it("monitor.v20180724.DescribeDNSConfig", async function () {
     try {
        const data = await client.DescribeDNSConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.ModifyPrometheusGlobalNotification", async function () {
+    try {
+       const data = await client.ModifyPrometheusGlobalNotification({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -918,6 +1018,16 @@ it("monitor.v20180724.DescribeGrafanaNotificationChannels", async function () {
     }
 })
 
+it("monitor.v20180724.ModifyPrometheusAgentExternalLabels", async function () {
+    try {
+       const data = await client.ModifyPrometheusAgentExternalLabels({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("monitor.v20180724.ModifyPolicyGroup", async function () {
     try {
        const data = await client.ModifyPolicyGroup({})
@@ -948,9 +1058,9 @@ it("monitor.v20180724.DescribePrometheusTempSync", async function () {
     }
 })
 
-it("monitor.v20180724.CheckIsPrometheusNewUser", async function () {
+it("monitor.v20180724.DescribePrometheusZones", async function () {
     try {
-       const data = await client.CheckIsPrometheusNewUser({})
+       const data = await client.DescribePrometheusZones({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -988,6 +1098,16 @@ it("monitor.v20180724.DeleteExporterIntegration", async function () {
     }
 })
 
+it("monitor.v20180724.DeletePrometheusAlertPolicy", async function () {
+    try {
+       const data = await client.DeletePrometheusAlertPolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("monitor.v20180724.UpdatePrometheusAgentStatus", async function () {
     try {
        const data = await client.UpdatePrometheusAgentStatus({})
@@ -1018,9 +1138,9 @@ it("monitor.v20180724.DescribeAlertRules", async function () {
     }
 })
 
-it("monitor.v20180724.UpdateGrafanaWhiteList", async function () {
+it("monitor.v20180724.DescribePrometheusGlobalConfig", async function () {
     try {
-       const data = await client.UpdateGrafanaWhiteList({})
+       const data = await client.DescribePrometheusGlobalConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1048,9 +1168,29 @@ it("monitor.v20180724.DescribeAlarmPolicies", async function () {
     }
 })
 
+it("monitor.v20180724.DescribePrometheusTargetsTMP", async function () {
+    try {
+       const data = await client.DescribePrometheusTargetsTMP({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("monitor.v20180724.DescribeGrafanaWhiteList", async function () {
     try {
        const data = await client.DescribeGrafanaWhiteList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.CreatePrometheusAlertPolicy", async function () {
+    try {
+       const data = await client.CreatePrometheusAlertPolicy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1318,6 +1458,16 @@ it("monitor.v20180724.DeletePrometheusTempSync", async function () {
     }
 })
 
+it("monitor.v20180724.CreatePrometheusConfig", async function () {
+    try {
+       const data = await client.CreatePrometheusConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("monitor.v20180724.DescribePluginOverviews", async function () {
     try {
        const data = await client.DescribePluginOverviews({})
@@ -1338,9 +1488,9 @@ it("monitor.v20180724.DescribeRecordingRules", async function () {
     }
 })
 
-it("monitor.v20180724.UpdateExporterIntegration", async function () {
+it("monitor.v20180724.ModifyPrometheusConfig", async function () {
     try {
-       const data = await client.UpdateExporterIntegration({})
+       const data = await client.ModifyPrometheusConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

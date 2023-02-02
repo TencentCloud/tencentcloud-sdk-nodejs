@@ -42,6 +42,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateAlertRule", req, cb);
     }
     /**
+     * 解除TMP实例的集群关联
+     */
+    async DeletePrometheusClusterAgent(req, cb) {
+        return this.request("DeletePrometheusClusterAgent", req, cb);
+    }
+    /**
      * 获取已绑定对象列表
      */
     async DescribeBindingPolicyObjectList(req, cb) {
@@ -54,6 +60,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async UpdateAlertRule(req, cb) {
         return this.request("UpdateAlertRule", req, cb);
+    }
+    /**
+     * 修改2.0实例告警策略
+     */
+    async ModifyPrometheusAlertPolicy(req, cb) {
+        return this.request("ModifyPrometheusAlertPolicy", req, cb);
     }
     /**
      *  查询Prometheus按量实例用量
@@ -80,10 +92,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateGrafanaInstance", req, cb);
     }
     /**
-     * 获取基础告警列表
+     * 创建云监控告警策略
      */
-    async DescribeBasicAlarmList(req, cb) {
-        return this.request("DescribeBasicAlarmList", req, cb);
+    async CreateAlarmPolicy(req, cb) {
+        return this.request("CreateAlarmPolicy", req, cb);
     }
     /**
      * 查询云监控产品列表，支持云服务器CVM、云数据库、云消息队列、负载均衡、容器服务、专线等云产品。
@@ -104,10 +116,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdateSSOAccount", req, cb);
     }
     /**
-     * 列出 Prometheus 服务可用区
+     * 获取TMP实例关联集群列表
      */
-    async DescribePrometheusZones(req, cb) {
-        return this.request("DescribePrometheusZones", req, cb);
+    async DescribePrometheusClusterAgents(req, cb) {
+        return this.request("DescribePrometheusClusterAgents", req, cb);
+    }
+    /**
+     * 判断用户是否为云原生监控新用户，即在任何地域下均未创建过监控实例的用户
+     */
+    async CheckIsPrometheusNewUser(req, cb) {
+        return this.request("CheckIsPrometheusNewUser", req, cb);
     }
     /**
      * 列出 Grafana 环境变量
@@ -232,6 +250,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteServiceDiscovery", req, cb);
     }
     /**
+     * 与云监控融合的2.0实例关联集群
+     */
+    async CreatePrometheusClusterAgent(req, cb) {
+        return this.request("CreatePrometheusClusterAgent", req, cb);
+    }
+    /**
      * 策略绑定标签
      */
     async BindingPolicyTag(req, cb) {
@@ -266,6 +290,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async GetPrometheusAgentManagementCommand(req, cb) {
         return this.request("GetPrometheusAgentManagementCommand", req, cb);
+    }
+    /**
+     * 更新 exporter 集成配置
+     */
+    async UpdateExporterIntegration(req, cb) {
+        return this.request("UpdateExporterIntegration", req, cb);
     }
     /**
      * 更新 Prometheus 抓取任务
@@ -368,6 +398,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAlarmHistories", req, cb);
     }
     /**
+     * 创建通知模板
+     */
+    async CreateAlarmNotice(req, cb) {
+        return this.request("CreateAlarmNotice", req, cb);
+    }
+    /**
      * Grafana可视化服务 删除授权用户
      */
     async DeleteSSOAccount(req, cb) {
@@ -392,6 +428,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribePrometheusTemp", req, cb);
     }
     /**
+     * 更新 Grafana 白名单
+     */
+    async UpdateGrafanaWhiteList(req, cb) {
+        return this.request("UpdateGrafanaWhiteList", req, cb);
+    }
+    /**
      * 设置一个策略为该告警策略类型、该项目的默认告警策略。
 同一项目下相同的告警策略类型，就会被设置为非默认。
      */
@@ -403,6 +445,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteGrafanaInstance(req, cb) {
         return this.request("DeleteGrafanaInstance", req, cb);
+    }
+    /**
+     * 删除Prometheus配置，如果目标不存在，将返回成功
+     */
+    async DeletePrometheusConfig(req, cb) {
+        return this.request("DeletePrometheusConfig", req, cb);
     }
     /**
      * Grafana实例授权其他腾讯云用户
@@ -459,10 +507,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeSSOAccount", req, cb);
     }
     /**
-     * 创建云监控告警策略
+     * 获取基础告警列表
      */
-    async CreateAlarmPolicy(req, cb) {
-        return this.request("CreateAlarmPolicy", req, cb);
+    async DescribeBasicAlarmList(req, cb) {
+        return this.request("DescribeBasicAlarmList", req, cb);
     }
     /**
      * 创建 Prometheus CVM Agent
@@ -477,10 +525,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SyncPrometheusTemp", req, cb);
     }
     /**
-     * 创建通知模板
+     * 创建全局告警通知渠道
      */
-    async CreateAlarmNotice(req, cb) {
-        return this.request("CreateAlarmNotice", req, cb);
+    async CreatePrometheusGlobalNotification(req, cb) {
+        return this.request("CreatePrometheusGlobalNotification", req, cb);
     }
     /**
      * 更新 Prometheus 报警策略状态
@@ -519,6 +567,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstalledPlugins", req, cb);
     }
     /**
+     * 查询全局告警通知渠道
+     */
+    async DescribePrometheusGlobalNotification(req, cb) {
+        return this.request("DescribePrometheusGlobalNotification", req, cb);
+    }
+    /**
      * 升级 Grafana Dashboard
      */
     async UpgradeGrafanaDashboard(req, cb) {
@@ -535,6 +589,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeDNSConfig(req, cb) {
         return this.request("DescribeDNSConfig", req, cb);
+    }
+    /**
+     * 修改全局告警通知渠道
+     */
+    async ModifyPrometheusGlobalNotification(req, cb) {
+        return this.request("ModifyPrometheusGlobalNotification", req, cb);
     }
     /**
      * 获取关联目标集群的实例列表
@@ -583,6 +643,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeGrafanaNotificationChannels", req, cb);
     }
     /**
+     * 修改被关联集群的external labels
+     */
+    async ModifyPrometheusAgentExternalLabels(req, cb) {
+        return this.request("ModifyPrometheusAgentExternalLabels", req, cb);
+    }
+    /**
      * 更新策略组
      */
     async ModifyPolicyGroup(req, cb) {
@@ -601,10 +667,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribePrometheusTempSync", req, cb);
     }
     /**
-     * 判断用户是否为云原生监控新用户，即在任何地域下均未创建过监控实例的用户
+     * 列出 Prometheus 服务可用区
      */
-    async CheckIsPrometheusNewUser(req, cb) {
-        return this.request("CheckIsPrometheusNewUser", req, cb);
+    async DescribePrometheusZones(req, cb) {
+        return this.request("DescribePrometheusZones", req, cb);
     }
     /**
      * 查询告警指标列表
@@ -625,6 +691,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteExporterIntegration", req, cb);
     }
     /**
+     * 删除2.0实例告警策略
+     */
+    async DeletePrometheusAlertPolicy(req, cb) {
+        return this.request("DeletePrometheusAlertPolicy", req, cb);
+    }
+    /**
      * 更新 Prometheus CVM Agent 状态
      */
     async UpdatePrometheusAgentStatus(req, cb) {
@@ -643,10 +715,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAlertRules", req, cb);
     }
     /**
-     * 更新 Grafana 白名单
+     * 获得实例级别抓取配置
      */
-    async UpdateGrafanaWhiteList(req, cb) {
-        return this.request("UpdateGrafanaWhiteList", req, cb);
+    async DescribePrometheusGlobalConfig(req, cb) {
+        return this.request("DescribePrometheusGlobalConfig", req, cb);
     }
     /**
      * 列出 Prometheus CVM Agent
@@ -661,10 +733,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAlarmPolicies", req, cb);
     }
     /**
+     * 获取targets信息
+     */
+    async DescribePrometheusTargetsTMP(req, cb) {
+        return this.request("DescribePrometheusTargetsTMP", req, cb);
+    }
+    /**
      * 列出 Grafana 白名单
      */
     async DescribeGrafanaWhiteList(req, cb) {
         return this.request("DescribeGrafanaWhiteList", req, cb);
+    }
+    /**
+     * 创建告警策略
+     */
+    async CreatePrometheusAlertPolicy(req, cb) {
+        return this.request("CreatePrometheusAlertPolicy", req, cb);
     }
     /**
      * 强制销毁 Grafana 实例
@@ -839,6 +923,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeletePrometheusTempSync", req, cb);
     }
     /**
+     * 创建prometheus配置
+     */
+    async CreatePrometheusConfig(req, cb) {
+        return this.request("CreatePrometheusConfig", req, cb);
+    }
+    /**
      * 列出可安装的所有 Grafana 插件
      */
     async DescribePluginOverviews(req, cb) {
@@ -851,10 +941,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeRecordingRules", req, cb);
     }
     /**
-     * 更新 exporter 集成配置
+     * 修改prometheus配置，如果配置项不存在，则会新增
      */
-    async UpdateExporterIntegration(req, cb) {
-        return this.request("UpdateExporterIntegration", req, cb);
+    async ModifyPrometheusConfig(req, cb) {
+        return this.request("ModifyPrometheusConfig", req, cb);
     }
     /**
      * 获取单个告警策略详情

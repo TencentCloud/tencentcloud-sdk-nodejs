@@ -226,7 +226,7 @@ export declare class Client extends AbstractClient {
 - 仅七层（HTTP、HTTPS）监听器支持绑定 SCF，四层（TCP、UDP、TCP SSL）监听器和七层 QUIC 监听器不支持。
 - CLB 绑定 SCF 仅支持绑定“Event 函数”类型的云函数。
      */
-    RegisterFunctionTargets(req?: RegisterFunctionTargetsRequest, cb?: (error: string, rep: RegisterFunctionTargetsResponse) => void): Promise<RegisterFunctionTargetsResponse>;
+    RegisterFunctionTargets(req: RegisterFunctionTargetsRequest, cb?: (error: string, rep: RegisterFunctionTargetsResponse) => void): Promise<RegisterFunctionTargetsResponse>;
     /**
      * ModifyRule 接口用来修改负载均衡七层监听器下的转发规则的各项属性，包括转发路径、健康检查属性、转发策略等。
 本接口为异步接口，本接口返回成功后需以返回的RequestID为入参，调用DescribeTaskStatus接口查询本次任务是否成功。

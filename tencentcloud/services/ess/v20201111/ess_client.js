@@ -197,10 +197,8 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UploadFiles", req, cb);
     }
     /**
-     * 指定需要批量撤销的签署流程Id，批量催办合同
-客户指定需要撤销的签署流程Id，最多100个；接口失败后返回错误信息
+     * 指定需要批量催办的签署流程Id，批量催办合同，最多100个; 接口失败后返回错误信息
 注意:
-能撤回合同的只能是合同的发起人或者签署人
 该接口需要开白后使用
      */
     async CreateFlowReminds(req, cb) {

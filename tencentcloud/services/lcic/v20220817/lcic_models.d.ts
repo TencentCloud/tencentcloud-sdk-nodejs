@@ -37,7 +37,7 @@ coteaching 双师
       */
     SubType: string;
     /**
-      * 老师ID。通过[注册用户]接口获取的UserId。
+      * 老师ID。通过[注册用户]接口获取的UserId。指定后该用户在房间内拥有老师权限。
       */
     TeacherId?: string;
     /**
@@ -60,7 +60,7 @@ coteaching 双师
       */
     DisableRecord?: number;
     /**
-      * 助教Id列表。通过[注册用户]接口获取的UserId。
+      * 助教Id列表。通过[注册用户]接口获取的UserId。指定后该用户在房间内拥有助教权限。
       */
     Assistants?: Array<string>;
     /**
@@ -80,6 +80,15 @@ export interface SetAppCustomContentRequest {
       * 应用ID。
       */
     SdkAppId: number;
+}
+/**
+ * ModifyRoom返回参数结构体
+ */
+export interface ModifyRoomResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * UnbindDocumentFromRoom返回参数结构体
@@ -190,6 +199,101 @@ export interface CreateDocumentRequest {
     DocumentSize?: number;
 }
 /**
+ * ModifyRoom请求参数结构体
+ */
+export interface ModifyRoomRequest {
+    /**
+      * 房间ID。
+      */
+    RoomId: number;
+    /**
+      * 低代码互动课堂的SdkAppId
+      */
+    SdkAppId: number;
+    /**
+      * 预定的房间开始时间，unix时间戳。直播开始后不允许修改。
+      */
+    StartTime?: number;
+    /**
+      * 预定的房间结束时间，unix时间戳。直播开始后不允许修改。
+      */
+    EndTime?: number;
+    /**
+      * 老师ID。直播开始后不允许修改。
+      */
+    TeacherId?: string;
+    /**
+      * 房间名称。
+      */
+    Name?: string;
+    /**
+      * 分辨率。可以有如下取值：
+1 标清
+2 高清
+3 全高清
+直播开始后不允许修改。
+      */
+    Resolution?: number;
+    /**
+      * 最大连麦人数（不包括老师）。取值范围[0, 17)
+直播开始后不允许修改。
+      */
+    MaxMicNumber?: number;
+    /**
+      * 进入房间时是否自动连麦。可以有以下取值：
+0 不自动连麦（默认值）
+1 自动连麦
+直播开始后不允许修改。
+      */
+    AutoMic?: number;
+    /**
+      * 高音质模式。可以有以下取值：
+0 不开启高音质（默认值）
+1 开启高音质
+直播开始后不允许修改。
+      */
+    AudioQuality?: number;
+    /**
+      * 房间子类型，可以有以下取值：
+videodoc 文档+视频
+video 纯视频
+coteaching 双师
+直播开始后不允许修改。
+      */
+    SubType?: string;
+    /**
+      * 禁止录制。可以有以下取值：
+0 不禁止录制（默认值）
+1 禁止录制
+直播开始后不允许修改。
+      */
+    DisableRecord?: number;
+    /**
+      * 助教Id列表。直播开始后不允许修改。
+      */
+    Assistants?: Array<string>;
+}
+/**
+ * 批量注册用户信息
+ */
+export interface BatchUserInfo {
+    /**
+      * 低代码互动课堂的SdkAppId。
+
+      */
+    SdkAppId?: number;
+    /**
+      * 用户ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UserId?: string;
+    /**
+      * 用户在客户系统的Id。 若用户注册时该字段为空，则默认为 UserId 值一致。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OriginId?: string;
+}
+/**
  * SetAppCustomContent返回参数结构体
  */
 export interface SetAppCustomContentResponse {
@@ -214,6 +318,35 @@ export interface LoginOriginIdResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 用户注册请求信息
+ */
+export interface BatchUserRequest {
+    /**
+      * 低代码互动课堂的SdkAppId。
+
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SdkAppId: number;
+    /**
+      * 用户名称。
+
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Name?: string;
+    /**
+      * 用户在客户系统的Id，需要在同一应用下唯一。
+
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OriginId?: string;
+    /**
+      * 用户头像。
+
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Avatar?: string;
 }
 /**
  * LoginUser返回参数结构体
@@ -256,6 +389,15 @@ export interface ModifyAppResponse {
     RequestId?: string;
 }
 /**
+ * BatchRegister请求参数结构体
+ */
+export interface BatchRegisterRequest {
+    /**
+      * 批量注册用户信息列表
+      */
+    Users: Array<BatchUserRequest>;
+}
+/**
  * DescribeRoom返回参数结构体
  */
 export interface DescribeRoomResponse {
@@ -272,7 +414,7 @@ export interface DescribeRoomResponse {
       */
     EndTime?: number;
     /**
-      * 老师ID。
+      * 老师的UserId。
       */
     TeacherId?: string;
     /**
@@ -317,7 +459,7 @@ coteaching 双师
       */
     DisableRecord?: number;
     /**
-      * 助教Id列表。
+      * 助教UserId列表。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Assistants?: Array<string>;
@@ -550,6 +692,20 @@ export interface LoginOriginIdRequest {
  * 应用配置信息
  */
 export declare type AppConfig = null;
+/**
+ * BatchRegister返回参数结构体
+ */
+export interface BatchRegisterResponse {
+    /**
+      * 注册成功的用户列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Users?: Array<BatchUserInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
 /**
  * LoginUser请求参数结构体
  */

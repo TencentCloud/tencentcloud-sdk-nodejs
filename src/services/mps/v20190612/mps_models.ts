@@ -2836,7 +2836,12 @@ export interface CreateStreamLinkFlowRequest {
   /**
    * 流的输入组。
    */
-  InputGroup: Array<CreateInput>
+  InputGroup?: Array<CreateInput>
+
+  /**
+   * 该Flow关联的媒体传输事件ID，每个flow只能关联一个Event。
+   */
+  EventId?: string
 }
 
 /**
@@ -11225,6 +11230,16 @@ export interface DescribeFlow {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   OutputGroup: Array<DescribeOutput>
+
+  /**
+   * 该Flow关联的媒体传输事件EventId。
+   */
+  EventId: string
+
+  /**
+   * 媒体传输输入流所属的区域，取值和InputRegion相同。
+   */
+  Region: string
 }
 
 /**

@@ -38,6 +38,16 @@ it("lcic.v20220817.CreateDocument", async function () {
     }
 })
 
+it("lcic.v20220817.ModifyApp", async function () {
+    try {
+       const data = await client.ModifyApp({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lcic.v20220817.SetAppCustomContent", async function () {
     try {
        const data = await client.SetAppCustomContent({})
@@ -61,6 +71,16 @@ it("lcic.v20220817.DescribeRoomStatistics", async function () {
 it("lcic.v20220817.DeleteRoom", async function () {
     try {
        const data = await client.DeleteRoom({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lcic.v20220817.ModifyRoom", async function () {
+    try {
+       const data = await client.ModifyRoom({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -108,9 +128,9 @@ it("lcic.v20220817.DescribeUser", async function () {
     }
 })
 
-it("lcic.v20220817.ModifyApp", async function () {
+it("lcic.v20220817.BatchRegister", async function () {
     try {
-       const data = await client.ModifyApp({})
+       const data = await client.BatchRegister({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CreateRoomRequest, SetAppCustomContentRequest, UnbindDocumentFromRoomResponse, DescribeUserRequest, CreateDocumentResponse, DescribeRoomStatisticsRequest, BindDocumentToRoomRequest, CreateDocumentRequest, SetAppCustomContentResponse, LoginOriginIdResponse, LoginUserResponse, DescribeAppDetailRequest, ModifyAppResponse, DescribeRoomResponse, DeleteRoomResponse, DescribeRoomStatisticsResponse, CreateSupervisorResponse, DeleteRoomRequest, RegisterUserResponse, DescribeAppDetailResponse, ModifyAppRequest, CreateSupervisorRequest, UnbindDocumentFromRoomRequest, LoginOriginIdRequest, LoginUserRequest, BindDocumentToRoomResponse, CreateRoomResponse, DescribeUserResponse, DescribeRoomRequest, RegisterUserRequest } from "./lcic_models";
+import { CreateRoomRequest, SetAppCustomContentRequest, ModifyRoomResponse, UnbindDocumentFromRoomResponse, DescribeUserRequest, CreateDocumentResponse, DescribeRoomStatisticsRequest, BindDocumentToRoomRequest, CreateDocumentRequest, ModifyRoomRequest, SetAppCustomContentResponse, LoginOriginIdResponse, LoginUserResponse, DescribeAppDetailRequest, ModifyAppResponse, BatchRegisterRequest, DescribeRoomResponse, DeleteRoomResponse, DescribeRoomStatisticsResponse, CreateSupervisorResponse, DeleteRoomRequest, RegisterUserResponse, DescribeAppDetailResponse, ModifyAppRequest, CreateSupervisorRequest, UnbindDocumentFromRoomRequest, LoginOriginIdRequest, BatchRegisterResponse, LoginUserRequest, BindDocumentToRoomResponse, CreateRoomResponse, DescribeUserResponse, DescribeRoomRequest, RegisterUserRequest } from "./lcic_models";
 /**
  * lcic client
  * @class
@@ -16,6 +16,10 @@ export declare class Client extends AbstractClient {
      */
     CreateDocument(req: CreateDocumentRequest, cb?: (error: string, rep: CreateDocumentResponse) => void): Promise<CreateDocumentResponse>;
     /**
+     * 修改应用
+     */
+    ModifyApp(req: ModifyAppRequest, cb?: (error: string, rep: ModifyAppResponse) => void): Promise<ModifyAppResponse>;
+    /**
      * 设置应用的自定义内容，包括应用图标，自定义的代码等。如果已存在，则为更新。更新js、css内容后，要生效也需要调用该接口
      */
     SetAppCustomContent(req: SetAppCustomContentRequest, cb?: (error: string, rep: SetAppCustomContentResponse) => void): Promise<SetAppCustomContentResponse>;
@@ -27,6 +31,10 @@ export declare class Client extends AbstractClient {
      * 删除房间
      */
     DeleteRoom(req: DeleteRoomRequest, cb?: (error: string, rep: DeleteRoomResponse) => void): Promise<DeleteRoomResponse>;
+    /**
+     * 修改房间
+     */
+    ModifyRoom(req: ModifyRoomRequest, cb?: (error: string, rep: ModifyRoomResponse) => void): Promise<ModifyRoomResponse>;
     /**
      * 文档从房间解绑
      */
@@ -44,9 +52,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeUser(req: DescribeUserRequest, cb?: (error: string, rep: DescribeUserResponse) => void): Promise<DescribeUserResponse>;
     /**
-     * 修改应用
+     * 如果批量注册的用户已存在，则会被覆盖。一次最多注册1000个用户。默认请求频率限制：10次/秒
      */
-    ModifyApp(req: ModifyAppRequest, cb?: (error: string, rep: ModifyAppResponse) => void): Promise<ModifyAppResponse>;
+    BatchRegister(req: BatchRegisterRequest, cb?: (error: string, rep: BatchRegisterResponse) => void): Promise<BatchRegisterResponse>;
     /**
      * 登录
      */

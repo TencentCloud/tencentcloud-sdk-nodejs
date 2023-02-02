@@ -1699,12 +1699,12 @@ export interface DescribeDisksResponse {
   /**
    * 云硬盘信息列表。
    */
-  DiskSet: Array<Disk>
+  DiskSet?: Array<Disk>
 
   /**
    * 符合条件的云硬盘信息数量。
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
