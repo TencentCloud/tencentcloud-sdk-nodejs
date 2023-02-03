@@ -124,7 +124,7 @@ export interface CreateAsyncRecognitionTaskRequest {
   EngineType: string
 
   /**
-   * 语音流地址，支持rtmp、rtsp等流媒体协议，以及各类基于http协议的直播流(不支持hls)
+   * 语音流地址，支持rtmp、rtsp等流媒体协议，以及各类基于http协议的直播流(不支持hls, m3u8)
    */
   Url: string
 
@@ -422,7 +422,7 @@ export interface CreateAsyncRecognitionTaskResponse {
   /**
    * 请求返回结果，包含本次的任务ID(TaskId)
    */
-  Data: Task
+  Data?: Task
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

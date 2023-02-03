@@ -28,6 +28,12 @@ class Client extends abstract_client_1.AbstractClient {
         super("goosefs.tencentcloudapi.com", "2022-05-19", clientConfig);
     }
     /**
+     * 获取数据流通任务实时状态，用作客户端控制
+     */
+    async DescribeDataRepositoryTaskStatus(req, cb) {
+        return this.request("DescribeDataRepositoryTaskStatus", req, cb);
+    }
+    /**
      * 创建数据流通任务,包括从将文件系统的数据上传到存储桶下, 以及从存储桶下载到文件系统里。
      */
     async CreateDataRepositoryTask(req, cb) {

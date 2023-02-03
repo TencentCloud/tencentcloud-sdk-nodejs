@@ -1897,6 +1897,47 @@ export interface DescribeProIspPlaySumInfoListRequest {
 }
 
 /**
+ * DescribeTimeShiftStreamList请求参数结构体
+ */
+export interface DescribeTimeShiftStreamListRequest {
+  /**
+   * 查询范围起始时间，Unix 时间戳。
+   */
+  StartTime: number
+
+  /**
+   * 查询范围结束时间，Unix 时间戳。
+   */
+  EndTime: number
+
+  /**
+   * 流名称。
+   */
+  StreamName?: string
+
+  /**
+   * 推流域名。
+   */
+  Domain?: string
+
+  /**
+   * 推流域名所属域名组。
+   */
+  DomainGroup?: string
+
+  /**
+      * 用户指定要返回的最大结果数，取值范围[0,100]，不指定或者指定为0时，API 
+默认值为100。指定超过100时，API 强制使用100。指定值为负数时，接口返回错误。
+      */
+  PageSize?: number
+
+  /**
+   * 指定拉取的页码，不传时默认为1。
+   */
+  PageNum?: number
+}
+
+/**
  * DescribeDeliverBandwidthList请求参数结构体
  */
 export interface DescribeDeliverBandwidthListRequest {
@@ -3642,6 +3683,50 @@ export interface DropLiveStreamRequest {
 }
 
 /**
+ * UpdateLiveWatermark请求参数结构体
+ */
+export interface UpdateLiveWatermarkRequest {
+  /**
+      * 水印 ID。
+在添加水印接口 [AddLiveWatermark](/document/product/267/30154) 调用返回值中获取水印 ID。
+      */
+  WatermarkId: number
+
+  /**
+      * 水印图片 URL。
+URL中禁止包含的字符：
+ ;(){}$>`#"\'|
+      */
+  PictureUrl: string
+
+  /**
+   * 显示位置，X轴偏移，单位是百分比，默认 0。
+   */
+  XPosition: number
+
+  /**
+   * 显示位置，Y轴偏移，单位是百分比，默认 0。
+   */
+  YPosition: number
+
+  /**
+      * 水印名称。
+最长16字节。
+      */
+  WatermarkName?: string
+
+  /**
+   * 水印宽度，占直播原始画面宽度百分比，建议高宽只设置一项，另外一项会自适应缩放，避免变形。默认原始宽度。
+   */
+  Width?: number
+
+  /**
+   * 水印高度，占直播原始画面宽度百分比，建议高宽只设置一项，另外一项会自适应缩放，避免变形。默认原始高度。
+   */
+  Height?: number
+}
+
+/**
  * 云转推水印信息。
  */
 export interface PullPushWatermarkInfo {
@@ -3769,28 +3854,43 @@ export interface RefererAuthConfig {
 }
 
 /**
- * 获取省份/运营商的播放信息。
+ * DescribeTimeShiftRecordDetail请求参数结构体
  */
-export interface ProIspPlaySumInfo {
+export interface DescribeTimeShiftRecordDetailRequest {
   /**
-   * 省份/运营商/国家或地区。
+   * 推流域名。
    */
-  Name: string
+  Domain: string
 
   /**
-   * 总流量，单位: MB。
+   * 推流路径。
    */
-  TotalFlux: number
+  AppName: string
 
   /**
-   * 总请求数。
+   * 流名称。
    */
-  TotalRequest: number
+  StreamName: string
 
   /**
-   * 平均下载流量，单位: MB/s。
+   * 查询范围起始时间，Unix 时间戳。
    */
-  AvgFluxPerSecond: number
+  StartTime: number
+
+  /**
+   * 查询范围终止时间，Unix 时间戳。
+   */
+  EndTime: number
+
+  /**
+   * 推流域名所属组，没有域名组或者域名组为空字符串可不填。
+   */
+  DomainGroup?: string
+
+  /**
+   * 转码模板ID，转码模板ID为0可不填。
+   */
+  TransCodeId?: number
 }
 
 /**
@@ -4099,6 +4199,59 @@ export interface DescribeLiveTranscodeRulesResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 时移流。
+ */
+export interface TimeShiftStreamInfo {
+  /**
+      * 推流域名所属组。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DomainGroup?: string
+
+  /**
+   * 推流域名。
+   */
+  Domain?: string
+
+  /**
+   * 推流路径。
+   */
+  AppName?: string
+
+  /**
+   * 流名称。
+   */
+  StreamName?: string
+
+  /**
+   * 流起始时间，Unix 时间戳。
+   */
+  StartTime?: number
+
+  /**
+   * 截止查询时流结束时间，Unix 时间戳。
+   */
+  EndTime?: number
+
+  /**
+      * 转码模板ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TransCodeId?: number
+
+  /**
+   * 流类型，取值0为原始流，1为水印流，2为转码流。
+   */
+  StreamType?: number
+
+  /**
+      * 时移数据存储时长，单位秒。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Duration?: number
 }
 
 /**
@@ -4799,6 +4952,27 @@ export interface DeletePullStreamConfigRequest {
 }
 
 /**
+ * DescribeTimeShiftStreamList返回参数结构体
+ */
+export interface DescribeTimeShiftStreamListResponse {
+  /**
+   * 时间段内所有的数据量。
+   */
+  TotalSize?: number
+
+  /**
+      * 流列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  StreamList?: Array<TimeShiftStreamInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyPullStreamConfig请求参数结构体
  */
 export interface ModifyPullStreamConfigRequest {
@@ -5161,6 +5335,26 @@ export interface DeleteLiveWatermarkRuleResponse {
 }
 
 /**
+ * 时移录制段。
+ */
+export interface TimeShiftRecord {
+  /**
+   * 时移录制会话标识。
+   */
+  Sid?: string
+
+  /**
+   * 录制会话开始时间，Unix 时间戳。
+   */
+  StartTime?: number
+
+  /**
+   * 录制会话结束时间，Unix 时间戳。
+   */
+  EndTime?: number
+}
+
+/**
  * DescribeCallbackRecordsList返回参数结构体
  */
 export interface DescribeCallbackRecordsListResponse {
@@ -5516,30 +5710,28 @@ export interface DescribeLiveDomainsRequest {
 }
 
 /**
- * 直播拉流当前正在拉的文件信息。
+ * 获取省份/运营商的播放信息。
  */
-export interface RecentPullInfo {
+export interface ProIspPlaySumInfo {
   /**
-   * 当前正在拉的文件地址。
+   * 省份/运营商/国家或地区。
    */
-  FileUrl: string
+  Name: string
 
   /**
-   * 当前正在拉的文件偏移，单位：秒。
+   * 总流量，单位: MB。
    */
-  OffsetTime: number
+  TotalFlux: number
 
   /**
-      * 最新上报偏移信息时间。UTC格式。
-如：2020-07-23T03:20:39Z。
-注意：与北京时间相差八小时。
-      */
-  ReportTime: string
+   * 总请求数。
+   */
+  TotalRequest: number
 
   /**
-   * 已经轮播的次数。
+   * 平均下载流量，单位: MB/s。
    */
-  LoopedTimes: number
+  AvgFluxPerSecond: number
 }
 
 /**
@@ -5757,47 +5949,30 @@ export interface CancelCommonMixStreamRequest {
 }
 
 /**
- * UpdateLiveWatermark请求参数结构体
+ * 直播拉流当前正在拉的文件信息。
  */
-export interface UpdateLiveWatermarkRequest {
+export interface RecentPullInfo {
   /**
-      * 水印 ID。
-在添加水印接口 [AddLiveWatermark](/document/product/267/30154) 调用返回值中获取水印 ID。
+   * 当前正在拉的文件地址。
+   */
+  FileUrl: string
+
+  /**
+   * 当前正在拉的文件偏移，单位：秒。
+   */
+  OffsetTime: number
+
+  /**
+      * 最新上报偏移信息时间。UTC格式。
+如：2020-07-23T03:20:39Z。
+注意：与北京时间相差八小时。
       */
-  WatermarkId: number
+  ReportTime: string
 
   /**
-      * 水印图片 URL。
-URL中禁止包含的字符：
- ;(){}$>`#"\'|
-      */
-  PictureUrl: string
-
-  /**
-   * 显示位置，X轴偏移，单位是百分比，默认 0。
+   * 已经轮播的次数。
    */
-  XPosition: number
-
-  /**
-   * 显示位置，Y轴偏移，单位是百分比，默认 0。
-   */
-  YPosition: number
-
-  /**
-      * 水印名称。
-最长16字节。
-      */
-  WatermarkName?: string
-
-  /**
-   * 水印宽度，占直播原始画面宽度百分比，建议高宽只设置一项，另外一项会自适应缩放，避免变形。默认原始宽度。
-   */
-  Width?: number
-
-  /**
-   * 水印高度，占直播原始画面宽度百分比，建议高宽只设置一项，另外一项会自适应缩放，避免变形。默认原始高度。
-   */
-  Height?: number
+  LoopedTimes: number
 }
 
 /**
@@ -6996,6 +7171,16 @@ export interface CreateRecordTaskRequest {
  * CreateLiveTranscodeRule返回参数结构体
  */
 export interface CreateLiveTranscodeRuleResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ResumeDelayLiveStream返回参数结构体
+ */
+export interface ResumeDelayLiveStreamResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8297,9 +8482,15 @@ export interface ForbidStreamInfo {
 }
 
 /**
- * ResumeDelayLiveStream返回参数结构体
+ * DescribeTimeShiftRecordDetail返回参数结构体
  */
-export interface ResumeDelayLiveStreamResponse {
+export interface DescribeTimeShiftRecordDetailResponse {
+  /**
+      * 时移录制会话数组。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RecordList?: Array<TimeShiftRecord>
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

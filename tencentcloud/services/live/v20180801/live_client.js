@@ -145,6 +145,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeLiveSnapshotRules", req, cb);
     }
     /**
+     * 查询某个时间范围内所有时移流列表。最大支持查询24小时内的数据。
+     */
+    async DescribeTimeShiftStreamList(req, cb) {
+        return this.request("DescribeTimeShiftStreamList", req, cb);
+    }
+    /**
      * 删除转码模板。
      */
     async DeleteLiveTranscodeTemplate(req, cb) {
@@ -277,6 +283,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeletePullStreamConfig(req, cb) {
         return this.request("DeletePullStreamConfig", req, cb);
+    }
+    /**
+     * 前提调用 DescribeTimeShiftStreamList 获得请求必要参数。查询指定范围内的时移流录制详情，最大支持24小时范围查询。
+     */
+    async DescribeTimeShiftRecordDetail(req, cb) {
+        return this.request("DescribeTimeShiftRecordDetail", req, cb);
     }
     /**
      * 获取单个录制模板。

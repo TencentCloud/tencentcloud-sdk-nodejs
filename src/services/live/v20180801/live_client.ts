@@ -89,6 +89,7 @@ import {
   ModifyLiveSnapshotTemplateResponse,
   DeleteScreenshotTaskRequest,
   DescribeProIspPlaySumInfoListRequest,
+  DescribeTimeShiftStreamListRequest,
   DescribeDeliverBandwidthListRequest,
   DescribeScreenshotTaskResponse,
   AddLiveWatermarkRequest,
@@ -154,11 +155,12 @@ import {
   CreateLiveTranscodeRuleRequest,
   DescribeLiveWatermarkRulesRequest,
   DropLiveStreamRequest,
+  UpdateLiveWatermarkRequest,
   PullPushWatermarkInfo,
   DescribeProvinceIspPlayInfoListResponse,
   CreateCommonMixStreamRequest,
   RefererAuthConfig,
-  ProIspPlaySumInfo,
+  DescribeTimeShiftRecordDetailRequest,
   PushDataInfo,
   AddDelayLiveStreamRequest,
   DescribeGroupProIspPlayInfoListRequest,
@@ -167,6 +169,7 @@ import {
   TranscodeDetailInfo,
   DescribeLiveSnapshotTemplateResponse,
   DescribeLiveTranscodeRulesResponse,
+  TimeShiftStreamInfo,
   DescribeLiveDomainRefererResponse,
   AddLiveDomainRequest,
   StreamName,
@@ -192,6 +195,7 @@ import {
   ResumeLiveStreamResponse,
   DescribeLiveStreamOnlineListResponse,
   DeletePullStreamConfigRequest,
+  DescribeTimeShiftStreamListResponse,
   ModifyPullStreamConfigRequest,
   DescribeStreamPushInfoListResponse,
   DescribeLiveStreamPushInfoListRequest,
@@ -205,6 +209,7 @@ import {
   DescribeTopClientIpSumInfoListRequest,
   CreateLiveCallbackRuleRequest,
   DeleteLiveWatermarkRuleResponse,
+  TimeShiftRecord,
   DescribeCallbackRecordsListResponse,
   PublishTime,
   ModifyLiveTranscodeTemplateResponse,
@@ -214,7 +219,7 @@ import {
   ModifyLiveDomainRefererResponse,
   DeleteLiveWatermarkRequest,
   DescribeLiveDomainsRequest,
-  RecentPullInfo,
+  ProIspPlaySumInfo,
   SnapshotTemplateInfo,
   DeleteLiveSnapshotRuleResponse,
   CreateLiveRecordRequest,
@@ -222,7 +227,7 @@ import {
   BandwidthInfo,
   DescribeLogDownloadListResponse,
   CancelCommonMixStreamRequest,
-  UpdateLiveWatermarkRequest,
+  RecentPullInfo,
   CertInfo,
   DescribeRecordTaskResponse,
   DescribeLiveDelayInfoListResponse,
@@ -271,6 +276,7 @@ import {
   DescribeLiveSnapshotRulesRequest,
   CreateRecordTaskRequest,
   CreateLiveTranscodeRuleResponse,
+  ResumeDelayLiveStreamResponse,
   CreateLiveCallbackRuleResponse,
   DescribeLiveRecordTemplateResponse,
   DescribeAreaBillBandwidthAndFluxListRequest,
@@ -319,7 +325,7 @@ import {
   StopScreenshotTaskResponse,
   CreateRecordTaskResponse,
   ForbidStreamInfo,
-  ResumeDelayLiveStreamResponse,
+  DescribeTimeShiftRecordDetailResponse,
   DescribeLiveDomainCertBindingsRequest,
   DeleteLiveDomainResponse,
   CommonMixCropParams,
@@ -514,6 +520,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeLiveSnapshotRulesResponse) => void
   ): Promise<DescribeLiveSnapshotRulesResponse> {
     return this.request("DescribeLiveSnapshotRules", req, cb)
+  }
+
+  /**
+   * 查询某个时间范围内所有时移流列表。最大支持查询24小时内的数据。
+   */
+  async DescribeTimeShiftStreamList(
+    req: DescribeTimeShiftStreamListRequest,
+    cb?: (error: string, rep: DescribeTimeShiftStreamListResponse) => void
+  ): Promise<DescribeTimeShiftStreamListResponse> {
+    return this.request("DescribeTimeShiftStreamList", req, cb)
   }
 
   /**
@@ -728,6 +744,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeletePullStreamConfigResponse) => void
   ): Promise<DeletePullStreamConfigResponse> {
     return this.request("DeletePullStreamConfig", req, cb)
+  }
+
+  /**
+   * 前提调用 DescribeTimeShiftStreamList 获得请求必要参数。查询指定范围内的时移流录制详情，最大支持24小时范围查询。
+   */
+  async DescribeTimeShiftRecordDetail(
+    req: DescribeTimeShiftRecordDetailRequest,
+    cb?: (error: string, rep: DescribeTimeShiftRecordDetailResponse) => void
+  ): Promise<DescribeTimeShiftRecordDetailResponse> {
+    return this.request("DescribeTimeShiftRecordDetail", req, cb)
   }
 
   /**

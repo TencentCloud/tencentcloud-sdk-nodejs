@@ -205,8 +205,6 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 获取域名的规则白名单
-
-
      */
     async DescribeDomainWhiteRules(req, cb) {
         return this.request("DescribeDomainWhiteRules", req, cb);

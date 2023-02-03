@@ -18,6 +18,16 @@ const client = new tencentcloud.goosefs.v20220519.Client({
 })
 describe("goosefs.v20220519.test.js", function () {
 
+it("goosefs.v20220519.DescribeDataRepositoryTaskStatus", async function () {
+    try {
+       const data = await client.DescribeDataRepositoryTaskStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("goosefs.v20220519.CreateDataRepositoryTask", async function () {
     try {
        const data = await client.CreateDataRepositoryTask({})

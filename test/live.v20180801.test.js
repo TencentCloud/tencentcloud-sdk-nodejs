@@ -168,6 +168,16 @@ it("live.v20180801.DescribeLiveSnapshotRules", async function () {
     }
 })
 
+it("live.v20180801.DescribeTimeShiftStreamList", async function () {
+    try {
+       const data = await client.DescribeTimeShiftStreamList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("live.v20180801.DeleteLiveTranscodeTemplate", async function () {
     try {
        const data = await client.DeleteLiveTranscodeTemplate({})
@@ -361,6 +371,16 @@ it("live.v20180801.DescribeLivePushAuthKey", async function () {
 it("live.v20180801.DeletePullStreamConfig", async function () {
     try {
        const data = await client.DeletePullStreamConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("live.v20180801.DescribeTimeShiftRecordDetail", async function () {
+    try {
+       const data = await client.DescribeTimeShiftRecordDetail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

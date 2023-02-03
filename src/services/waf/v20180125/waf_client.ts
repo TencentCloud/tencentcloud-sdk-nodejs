@@ -429,10 +429,8 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 获取域名的规则白名单
-
-
-     */
+   * 获取域名的规则白名单
+   */
   async DescribeDomainWhiteRules(
     req: DescribeDomainWhiteRulesRequest,
     cb?: (error: string, rep: DescribeDomainWhiteRulesResponse) => void

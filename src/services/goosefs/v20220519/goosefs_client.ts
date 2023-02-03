@@ -17,7 +17,12 @@
  */
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
-import { CreateDataRepositoryTaskRequest, CreateDataRepositoryTaskResponse } from "./goosefs_models"
+import {
+  CreateDataRepositoryTaskRequest,
+  CreateDataRepositoryTaskResponse,
+  DescribeDataRepositoryTaskStatusRequest,
+  DescribeDataRepositoryTaskStatusResponse,
+} from "./goosefs_models"
 
 /**
  * goosefs client
@@ -26,6 +31,16 @@ import { CreateDataRepositoryTaskRequest, CreateDataRepositoryTaskResponse } fro
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("goosefs.tencentcloudapi.com", "2022-05-19", clientConfig)
+  }
+
+  /**
+   * 获取数据流通任务实时状态，用作客户端控制
+   */
+  async DescribeDataRepositoryTaskStatus(
+    req: DescribeDataRepositoryTaskStatusRequest,
+    cb?: (error: string, rep: DescribeDataRepositoryTaskStatusResponse) => void
+  ): Promise<DescribeDataRepositoryTaskStatusResponse> {
+    return this.request("DescribeDataRepositoryTaskStatus", req, cb)
   }
 
   /**
