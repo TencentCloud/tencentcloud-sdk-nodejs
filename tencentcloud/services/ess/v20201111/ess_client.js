@@ -28,6 +28,12 @@ class Client extends abstract_client_1.AbstractClient {
         super("ess.tencentcloudapi.com", "2020-11-11", clientConfig);
     }
     /**
+     * 此API接口用户查询加入集团的成员企业
+     */
+    async DescribeOrganizationGroupOrganizations(req, cb) {
+        return this.request("DescribeOrganizationGroupOrganizations", req, cb);
+    }
+    /**
      * 此接口用于发起流程
 适用场景：见创建签署流程接口。
 注：该接口是“创建电子文档”接口的后置接口，用于激活包含完整合同信息（模板及内容信息）的流程。激活后的流程就是一份待签署的电子合同。
@@ -203,6 +209,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateFlowReminds(req, cb) {
         return this.request("CreateFlowReminds", req, cb);
+    }
+    /**
+     * 通过子企业影子账号查询主企业员工账号
+     */
+    async DescribeIntegrationMainOrganizationUser(req, cb) {
+        return this.request("DescribeIntegrationMainOrganizationUser", req, cb);
     }
     /**
      * 通过AuthCode查询用户是否实名

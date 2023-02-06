@@ -78,6 +78,27 @@ APP：第三方APP或小程序跳转电子签小程序的path。
     Agent?: Agent;
 }
 /**
+ * 二期接口返回的模板中文件的信息结构
+ */
+export interface FileInfo {
+    /**
+      * 文件Id
+      */
+    FileId?: string;
+    /**
+      * 文件名
+      */
+    FileName?: string;
+    /**
+      * 文件大小，单位为Byte
+      */
+    FileSize?: number;
+    /**
+      * 文件上传时间，10位时间戳（精确到秒）
+      */
+    CreatedOn?: number;
+}
+/**
  * CreateFlowApprovers返回参数结构体
  */
 export interface CreateFlowApproversResponse {
@@ -87,60 +108,30 @@ export interface CreateFlowApproversResponse {
     RequestId?: string;
 }
 /**
- * UploadFiles请求参数结构体
+ * DescribeIntegrationMainOrganizationUser请求参数结构体
  */
-export interface UploadFilesRequest {
+export interface DescribeIntegrationMainOrganizationUserRequest {
     /**
-      * 文件对应业务类型
-1. TEMPLATE - 模板； 文件类型：.pdf/.doc/.docx/.html
-2. DOCUMENT - 签署过程及签署后的合同文档/图片控件 文件类型：.pdf/.doc/.docx/.jpg/.png/.xls.xlsx/.html
-3. SEAL - 印章； 文件类型：.jpg/.jpeg/.png
+      * 操作人信息，userId必填
       */
-    BusinessType: string;
-    /**
-      * 调用方信息，其中OperatorId为必填字段，即用户的UserId
-      */
-    Caller?: Caller;
-    /**
-      * 上传文件内容数组，最多支持20个文件
-      */
-    FileInfos?: Array<UploadFile>;
-    /**
-      * 文件类型， 默认通过文件内容解析得到文件类型，客户可以显示的说明上传文件的类型。
-如：PDF 表示上传的文件 xxx.pdf的文件类型是 PDF
-      */
-    FileType?: string;
-    /**
-      * 此参数只对 PDF 文件有效。是否将pdf灰色矩阵置白
-true--是，处理置白
-默认为false--否，不处理
-      */
-    CoverRect?: boolean;
-    /**
-      * 用户自定义ID数组，与上传文件一一对应
-      */
-    CustomIds?: Array<string>;
-    /**
-      * 不再使用，上传文件链接数组，最多支持20个URL
-      */
-    FileUrls?: string;
+    Operator: UserInfo;
 }
 /**
- * 催办接口返回详细信息
+ * CreateMultiFlowSignQRCode返回参数结构体
  */
-export interface RemindFlowRecords {
+export interface CreateMultiFlowSignQRCodeResponse {
     /**
-      * 是否能够催办
+      * 签署二维码对象
       */
-    CanRemind: boolean;
+    QrCode: SignQrCode;
     /**
-      * 合同id
+      * 签署链接对象
       */
-    FlowId: string;
+    SignUrls: SignUrl;
     /**
-      * 催办详情
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    RemindMessage: string;
+    RequestId?: string;
 }
 /**
  * 创建流程的签署方信息
@@ -354,6 +345,39 @@ export interface CreateFlowRemindsResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DescribeOrganizationGroupOrganizations请求参数结构体
+ */
+export interface DescribeOrganizationGroupOrganizationsRequest {
+    /**
+      * 操作人信息，userId必填
+      */
+    Operator: UserInfo;
+    /**
+      * 单次查询成员企业最大返回数量
+      */
+    Limit: number;
+    /**
+      * 页面偏移量
+      */
+    Offset: number;
+    /**
+      * 查询成员企业的企业名，模糊匹配
+      */
+    Name?: string;
+    /**
+      * 成员企业加入集团的当前状态:1-待授权;2-已授权待激活;3-拒绝授权;4-已解除;5-已加入
+      */
+    Status?: number;
+    /**
+      * 是否到处当前成员企业数据
+      */
+    Export?: boolean;
+    /**
+      * 成员企业id
+      */
+    Id?: string;
 }
 /**
  * 应用相关信息
@@ -730,6 +754,10 @@ export interface DescribeFlowInfoRequest {
       * 调用方用户信息
       */
     Operator?: UserInfo;
+    /**
+      * 应用信息
+      */
+    Agent?: Agent;
 }
 /**
  * 机构信息
@@ -1477,21 +1505,21 @@ export interface CreateDocumentRequest {
     ClientToken?: string;
 }
 /**
- * CreateMultiFlowSignQRCode返回参数结构体
+ * 催办接口返回详细信息
  */
-export interface CreateMultiFlowSignQRCodeResponse {
+export interface RemindFlowRecords {
     /**
-      * 签署二维码对象
+      * 是否能够催办
       */
-    QrCode: SignQrCode;
+    CanRemind: boolean;
     /**
-      * 签署链接对象
+      * 合同id
       */
-    SignUrls: SignUrl;
+    FlowId: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 催办详情
       */
-    RequestId?: string;
+    RemindMessage: string;
 }
 /**
  * DescribeOrganizationSeals返回参数结构体
@@ -1573,6 +1601,71 @@ export interface RegisterInfo {
       * 社会统一信用代码
       */
     Uscc: string;
+}
+/**
+ * 成员企业信息
+ */
+export interface GroupOrganization {
+    /**
+      * 成员企业名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Name?: string;
+    /**
+      * 成员企业别名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Alias?: string;
+    /**
+      * 成员企业id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OrganizationId?: string;
+    /**
+      * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UpdateTime?: number;
+    /**
+      * 成员企业状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Status?: number;
+    /**
+      * 是否为集团主企业
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IsMainOrganization?: boolean;
+    /**
+      * 企业社会信用代码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IdCardNumber?: string;
+    /**
+      * 企业超管信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AdminInfo?: Admin;
+    /**
+      * 企业许可证
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    License?: string;
+    /**
+      * 企业许可证过期时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LicenseExpireTime?: number;
+    /**
+      * 成员企业加入集团时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    JoinTime?: number;
+    /**
+      * 是否可以使用审批流引擎
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FlowEngineEnable?: boolean;
 }
 /**
  * CreateFlowSignUrl请求参数结构体
@@ -1890,25 +1983,18 @@ export interface CreateStaffResult {
     FailedEmployeeData: Array<FailedCreateStaffData>;
 }
 /**
- * 二期接口返回的模板中文件的信息结构
+ * DescribeIntegrationMainOrganizationUser返回参数结构体
  */
-export interface FileInfo {
+export interface DescribeIntegrationMainOrganizationUserResponse {
     /**
-      * 文件Id
+      * 主企业员工账号信息
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    FileId?: string;
+    IntegrationMainOrganizationUser?: IntegrationMainOrganizationUser;
     /**
-      * 文件名
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    FileName?: string;
-    /**
-      * 文件大小，单位为Byte
-      */
-    FileSize?: number;
-    /**
-      * 文件上传时间，10位时间戳（精确到秒）
-      */
-    CreatedOn?: number;
+    RequestId?: string;
 }
 /**
  * CreateSchemeUrl返回参数结构体
@@ -2010,6 +2096,26 @@ export interface CancelMultiFlowSignQRCodeRequest {
       * 应用信息
       */
     Agent?: Agent;
+}
+/**
+ * 主企业员工账号信息
+ */
+export interface IntegrationMainOrganizationUser {
+    /**
+      * 主企业id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MainOrganizationId?: string;
+    /**
+      * 主企业员工UserId
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MainUserId?: string;
+    /**
+      * 主企业员工名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UserName?: string;
 }
 /**
  * StartFlow请求参数结构体
@@ -2376,7 +2482,7 @@ export interface CreateFlowRemindsRequest {
       */
     Operator: UserInfo;
     /**
-      * 需要执行撤回的签署流程id数组，最多100个
+      * 需要执行催办的签署流程id数组，最多100个
       */
     FlowIds: Array<string>;
 }
@@ -2465,6 +2571,21 @@ export interface DescribeFlowBriefsResponse {
     RequestId?: string;
 }
 /**
+ * 企业超管信息
+ */
+export interface Admin {
+    /**
+      * 超管名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Name?: string;
+    /**
+      * 超管手机号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Mobile?: string;
+}
+/**
  * 持有的电子印章信息
  */
 export interface OccupiedSeal {
@@ -2531,6 +2652,45 @@ export interface DescribeFlowTemplatesResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * UploadFiles请求参数结构体
+ */
+export interface UploadFilesRequest {
+    /**
+      * 文件对应业务类型
+1. TEMPLATE - 模板； 文件类型：.pdf/.doc/.docx/.html
+2. DOCUMENT - 签署过程及签署后的合同文档/图片控件 文件类型：.pdf/.doc/.docx/.jpg/.png/.xls.xlsx/.html
+3. SEAL - 印章； 文件类型：.jpg/.jpeg/.png
+      */
+    BusinessType: string;
+    /**
+      * 调用方信息，其中OperatorId为必填字段，即用户的UserId
+      */
+    Caller?: Caller;
+    /**
+      * 上传文件内容数组，最多支持20个文件
+      */
+    FileInfos?: Array<UploadFile>;
+    /**
+      * 文件类型， 默认通过文件内容解析得到文件类型，客户可以显示的说明上传文件的类型。
+如：PDF 表示上传的文件 xxx.pdf的文件类型是 PDF
+      */
+    FileType?: string;
+    /**
+      * 此参数只对 PDF 文件有效。是否将pdf灰色矩阵置白
+true--是，处理置白
+默认为false--否，不处理
+      */
+    CoverRect?: boolean;
+    /**
+      * 用户自定义ID数组，与上传文件一一对应
+      */
+    CustomIds?: Array<string>;
+    /**
+      * 不再使用，上传文件链接数组，最多支持20个URL
+      */
+    FileUrls?: string;
 }
 /**
  * CreateBatchCancelFlowUrl请求参数结构体
@@ -2600,7 +2760,7 @@ export interface DescribeFlowInfoResponse {
     /**
       * 签署流程信息
       */
-    FlowDetailInfos: Array<FlowDetailInfo>;
+    FlowDetailInfos?: Array<FlowDetailInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2675,6 +2835,40 @@ export interface FlowBrief {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     FlowMessage: string;
+}
+/**
+ * DescribeOrganizationGroupOrganizations返回参数结构体
+ */
+export interface DescribeOrganizationGroupOrganizationsResponse {
+    /**
+      * 查询到的符合条件的成员企业总数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Total?: number;
+    /**
+      * 已授权待激活的企业数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    JoinedTotal?: number;
+    /**
+      * 已加入的企业数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ActivedTotal?: number;
+    /**
+      * 导出文件的url
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ExportUrl?: string;
+    /**
+      * 成员企业信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    List?: Array<GroupOrganization>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * CancelMultiFlowSignQRCode返回参数结构体

@@ -244,21 +244,17 @@ export interface CreateStoreLocationResponse {
     RequestId?: string;
 }
 /**
- * ReportHeartbeatMetaData请求参数结构体
+ * DescribeNotebookSession返回参数结构体
  */
-export interface ReportHeartbeatMetaDataRequest {
+export interface DescribeNotebookSessionResponse {
     /**
-      * 数据源名称
+      * Session详情信息
       */
-    DatasourceConnectionName?: string;
+    Session?: NotebookSessionInfo;
     /**
-      * 锁ID
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    LockId?: number;
-    /**
-      * 事务ID
-      */
-    TxnId?: number;
+    RequestId?: string;
 }
 /**
  * DescribeDMSDatabase返回参数结构体
@@ -1350,13 +1346,21 @@ export interface DeleteUserResponse {
     RequestId?: string;
 }
 /**
- * CreateStoreLocation请求参数结构体
+ * DescribeDatabases返回参数结构体
  */
-export interface CreateStoreLocationRequest {
+export interface DescribeDatabasesResponse {
     /**
-      * 计算结果存储cos路径，如：cosn://bucketname/
+      * 数据库对象列表。
       */
-    StoreLocation: string;
+    DatabaseList: Array<DatabaseResponseInfo>;
+    /**
+      * 实例总数。
+      */
+    TotalCount: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 元数据加锁内容
@@ -1491,6 +1495,67 @@ export interface CreateDMSTableResponse {
     RequestId?: string;
 }
 /**
+ * CreateNotebookSession请求参数结构体
+ */
+export interface CreateNotebookSessionRequest {
+    /**
+      * Session名称
+      */
+    Name: string;
+    /**
+      * 类型，当前支持：spark、pyspark、sparkr、sql
+      */
+    Kind: string;
+    /**
+      * DLC Spark作业引擎名称
+      */
+    DataEngineName: string;
+    /**
+      * session文件地址，当前支持：cosn://和lakefs://两种路径
+      */
+    ProgramDependentFiles?: Array<string>;
+    /**
+      * 依赖的jar程序地址，当前支持：cosn://和lakefs://两种路径
+      */
+    ProgramDependentJars?: Array<string>;
+    /**
+      * 依赖的python程序地址，当前支持：cosn://和lakefs://两种路径
+      */
+    ProgramDependentPython?: Array<string>;
+    /**
+      * 依赖的pyspark虚拟环境地址，当前支持：cosn://和lakefs://两种路径
+      */
+    ProgramArchives?: Array<string>;
+    /**
+      * 指定的Driver规格，当前支持：small（默认，1cu）、medium（2cu）、large（4cu）、xlarge（8cu）
+      */
+    DriverSize?: string;
+    /**
+      * 指定的Executor规格，当前支持：small（默认，1cu）、medium（2cu）、large（4cu）、xlarge（8cu）
+      */
+    ExecutorSize?: string;
+    /**
+      * 指定的Executor数量，默认为1
+      */
+    ExecutorNumbers?: number;
+    /**
+      * Session相关配置，当前支持：dlc.eni、dlc.role.arn、dlc.sql.set.config以及用户指定的配置，注：roleArn必填；
+      */
+    Arguments?: Array<KVPair>;
+    /**
+      * 代理用户，默认为root
+      */
+    ProxyUser?: string;
+    /**
+      * 指定的Session超时时间，单位秒，默认3600秒
+      */
+    TimeoutInSecond?: number;
+    /**
+      * 指定的Executor数量（最大值），默认为1，当开启动态分配有效，若未开启，则该值等于ExecutorNumbers
+      */
+    ExecutorMaxNumbers?: number;
+}
+/**
  * 数据表分块信息。
  */
 export interface Partition {
@@ -1544,13 +1609,13 @@ export interface CreateTaskRequest {
     DataEngineName?: string;
 }
 /**
- * ModifySparkApp返回参数结构体
+ * DescribeNotebookSession请求参数结构体
  */
-export interface ModifySparkAppResponse {
+export interface DescribeNotebookSessionRequest {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * Session唯一标识
       */
-    RequestId?: string;
+    SessionId: string;
 }
 /**
  * CSV类型数据格式
@@ -1774,6 +1839,23 @@ export interface ReportHeartbeatMetaDataResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * ReportHeartbeatMetaData请求参数结构体
+ */
+export interface ReportHeartbeatMetaDataRequest {
+    /**
+      * 数据源名称
+      */
+    DatasourceConnectionName?: string;
+    /**
+      * 锁ID
+      */
+    LockId?: number;
+    /**
+      * 事务ID
+      */
+    TxnId?: number;
 }
 /**
  * CreateDMSTable请求参数结构体
@@ -2475,6 +2557,105 @@ export interface CreateImportTaskResponse {
     RequestId?: string;
 }
 /**
+ * Notebook Session详细信息。
+ */
+export interface NotebookSessionInfo {
+    /**
+      * Session名称
+      */
+    Name: string;
+    /**
+      * 类型，当前支持：spark、pyspark、sparkr、sql
+      */
+    Kind: string;
+    /**
+      * DLC Spark作业引擎名称
+      */
+    DataEngineName: string;
+    /**
+      * Session相关配置，当前支持：eni、roleArn以及用户指定的配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Arguments: Array<KVPair>;
+    /**
+      * 运行程序地址，当前支持：cosn://和lakefs://两种路径
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProgramDependentFiles: Array<string>;
+    /**
+      * 依赖的jar程序地址，当前支持：cosn://和lakefs://两种路径
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProgramDependentJars: Array<string>;
+    /**
+      * 依赖的python程序地址，当前支持：cosn://和lakefs://两种路径
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProgramDependentPython: Array<string>;
+    /**
+      * 依赖的pyspark虚拟环境地址，当前支持：cosn://和lakefs://两种路径
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProgramArchives: Array<string>;
+    /**
+      * 指定的Driver规格，当前支持：small（默认，1cu）、medium（2cu）、large（4cu）、xlarge（8cu）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DriverSize: string;
+    /**
+      * 指定的Executor规格，当前支持：small（默认，1cu）、medium（2cu）、large（4cu）、xlarge（8cu）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ExecutorSize: string;
+    /**
+      * 指定的Executor数量，默认为1
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ExecutorNumbers: number;
+    /**
+      * 代理用户，默认为root
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProxyUser: string;
+    /**
+      * 指定的Session超时时间，单位秒，默认3600秒
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TimeoutInSecond: number;
+    /**
+      * Spark任务返回的AppId
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SparkAppId: string;
+    /**
+      * Session唯一标识
+      */
+    SessionId: string;
+    /**
+      * Session状态，包含：not_started（未启动）、starting（已启动）、idle（等待输入）、busy(正在运行statement)、shutting_down（停止）、error（异常）、dead（已退出）、killed（被杀死）、success（正常停止）
+      */
+    State: string;
+    /**
+      * Session创建时间
+      */
+    CreateTime: string;
+    /**
+      * 其它信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AppInfo: Array<KVPair>;
+    /**
+      * Spark ui地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SparkUiUrl: string;
+    /**
+      * 指定的Executor数量（最大值），默认为1，当开启动态分配有效，若未开启，则该值等于ExecutorNumbers
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ExecutorMaxNumbers?: number;
+}
+/**
  * SQL语句对象
  */
 export interface Execution {
@@ -2974,21 +3155,22 @@ table-id - String - （过滤条件）table id形如：12342。
     TableFormat?: string;
 }
 /**
- * DescribeDatabases返回参数结构体
+ * ModifySparkApp返回参数结构体
  */
-export interface DescribeDatabasesResponse {
-    /**
-      * 数据库对象列表。
-      */
-    DatabaseList: Array<DatabaseResponseInfo>;
-    /**
-      * 实例总数。
-      */
-    TotalCount: number;
+export interface ModifySparkAppResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * CreateStoreLocation请求参数结构体
+ */
+export interface CreateStoreLocationRequest {
+    /**
+      * 计算结果存储cos路径，如：cosn://bucketname/
+      */
+    StoreLocation: string;
 }
 /**
  * DMSTable信息
@@ -3642,6 +3824,28 @@ export interface CreateTasksResponse {
       * 任务Id集合，按照执行顺序排列
       */
     TaskIdSet: Array<string>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * CreateNotebookSession返回参数结构体
+ */
+export interface CreateNotebookSessionResponse {
+    /**
+      * Session唯一标识
+      */
+    SessionId?: string;
+    /**
+      * Spark任务返回的AppId
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SparkAppId?: string;
+    /**
+      * Session状态，包含：not_started（未启动）、starting（已启动）、idle（等待输入）、busy(正在运行statement)、shutting_down（停止）、error（异常）、dead（已退出）、killed（被杀死）、success（正常停止）
+      */
+    State?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

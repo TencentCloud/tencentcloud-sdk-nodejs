@@ -58,6 +58,16 @@ it("waf.v20180125.DeleteDomainWhiteRules", async function () {
     }
 })
 
+it("waf.v20180125.ModifyAreaBanStatus", async function () {
+    try {
+       const data = await client.ModifyAreaBanStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.DescribeDomains", async function () {
     try {
        const data = await client.DescribeDomains({})
@@ -81,6 +91,16 @@ it("waf.v20180125.DescribeAccessIndex", async function () {
 it("waf.v20180125.CreateAccessExport", async function () {
     try {
        const data = await client.CreateAccessExport({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.SearchAttackLog", async function () {
+    try {
+       const data = await client.SearchAttackLog({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -231,6 +251,16 @@ it("waf.v20180125.DescribeIpAccessControl", async function () {
 it("waf.v20180125.PostAttackDownloadTask", async function () {
     try {
        const data = await client.PostAttackDownloadTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.SwitchDomainRules", async function () {
+    try {
+       const data = await client.SwitchDomainRules({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

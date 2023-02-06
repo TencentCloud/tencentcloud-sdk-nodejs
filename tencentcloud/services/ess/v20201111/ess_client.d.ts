@@ -1,12 +1,16 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CancelFlowResponse, DescribeFlowEvidenceReportRequest, CreateSchemeUrlRequest, CreateFlowApproversResponse, UploadFilesRequest, DescribeThirdPartyAuthCodeResponse, CreateIntegrationEmployeesRequest, CreateFlowEvidenceReportRequest, StartFlowResponse, CreateConvertTaskApiRequest, CreateFlowRemindsResponse, DescribeFlowTemplatesRequest, DescribeFlowEvidenceReportResponse, CreateDocumentResponse, DescribeIntegrationEmployeesRequest, CreateFlowRequest, DescribeThirdPartyAuthCodeRequest, DescribeFlowInfoRequest, CreateBatchCancelFlowUrlResponse, DescribeIntegrationEmployeesResponse, CreateConvertTaskApiResponse, CreateFlowSignReviewRequest, CreateFlowByFilesRequest, CreateFlowSignUrlResponse, DescribeFileUrlsRequest, CreateFlowApproversRequest, CreateFlowEvidenceReportResponse, DescribeFileUrlsResponse, CreateDocumentRequest, CreateMultiFlowSignQRCodeResponse, DescribeOrganizationSealsResponse, DeleteIntegrationEmployeesRequest, GetTaskResultApiRequest, CreateFlowSignUrlRequest, CreateIntegrationEmployeesResponse, CreateFlowByFilesResponse, UploadFilesResponse, VerifyPdfRequest, CreateFlowSignReviewResponse, CreateSchemeUrlResponse, CreatePrepareFlowResponse, GetTaskResultApiResponse, CancelMultiFlowSignQRCodeRequest, StartFlowRequest, CreatePrepareFlowRequest, DeleteIntegrationEmployeesResponse, DescribeOrganizationSealsRequest, CancelFlowRequest, CreateFlowRemindsRequest, DescribeFlowBriefsRequest, VerifyPdfResponse, DescribeFlowBriefsResponse, DescribeFlowTemplatesResponse, CreateBatchCancelFlowUrlRequest, CreateMultiFlowSignQRCodeRequest, DescribeFlowInfoResponse, CreateFlowResponse, CancelMultiFlowSignQRCodeResponse } from "./ess_models";
+import { CancelFlowResponse, DescribeFlowEvidenceReportRequest, CreateSchemeUrlRequest, CreateFlowApproversResponse, DescribeIntegrationMainOrganizationUserRequest, CreateMultiFlowSignQRCodeResponse, DescribeThirdPartyAuthCodeResponse, CreateIntegrationEmployeesRequest, CreateFlowEvidenceReportRequest, StartFlowResponse, CreateConvertTaskApiRequest, CreateFlowRemindsResponse, DescribeOrganizationGroupOrganizationsRequest, DescribeFlowTemplatesRequest, DescribeFlowEvidenceReportResponse, CreateDocumentResponse, DescribeIntegrationEmployeesRequest, CreateFlowRequest, DescribeThirdPartyAuthCodeRequest, DescribeFlowInfoRequest, CreateBatchCancelFlowUrlResponse, DescribeIntegrationEmployeesResponse, CreateConvertTaskApiResponse, CreateFlowSignReviewRequest, CreateFlowByFilesRequest, CreateFlowSignUrlResponse, DescribeFileUrlsRequest, CreateFlowApproversRequest, CreateFlowEvidenceReportResponse, DescribeFileUrlsResponse, CreateDocumentRequest, DescribeOrganizationSealsResponse, DeleteIntegrationEmployeesRequest, GetTaskResultApiRequest, CreateFlowSignUrlRequest, CreateIntegrationEmployeesResponse, CreateFlowByFilesResponse, UploadFilesResponse, VerifyPdfRequest, CreateFlowSignReviewResponse, DescribeIntegrationMainOrganizationUserResponse, CreateSchemeUrlResponse, CreatePrepareFlowResponse, GetTaskResultApiResponse, CancelMultiFlowSignQRCodeRequest, StartFlowRequest, CreatePrepareFlowRequest, DeleteIntegrationEmployeesResponse, DescribeOrganizationSealsRequest, CancelFlowRequest, CreateFlowRemindsRequest, DescribeFlowBriefsRequest, VerifyPdfResponse, DescribeFlowBriefsResponse, DescribeFlowTemplatesResponse, UploadFilesRequest, CreateBatchCancelFlowUrlRequest, CreateMultiFlowSignQRCodeRequest, DescribeFlowInfoResponse, CreateFlowResponse, DescribeOrganizationGroupOrganizationsResponse, CancelMultiFlowSignQRCodeResponse } from "./ess_models";
 /**
  * ess client
  * @class
  */
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
+    /**
+     * 此API接口用户查询加入集团的成员企业
+     */
+    DescribeOrganizationGroupOrganizations(req: DescribeOrganizationGroupOrganizationsRequest, cb?: (error: string, rep: DescribeOrganizationGroupOrganizationsResponse) => void): Promise<DescribeOrganizationGroupOrganizationsResponse>;
     /**
      * 此接口用于发起流程
 适用场景：见创建签署流程接口。
@@ -136,6 +140,10 @@ export declare class Client extends AbstractClient {
 该接口需要开白后使用
      */
     CreateFlowReminds(req: CreateFlowRemindsRequest, cb?: (error: string, rep: CreateFlowRemindsResponse) => void): Promise<CreateFlowRemindsResponse>;
+    /**
+     * 通过子企业影子账号查询主企业员工账号
+     */
+    DescribeIntegrationMainOrganizationUser(req: DescribeIntegrationMainOrganizationUserRequest, cb?: (error: string, rep: DescribeIntegrationMainOrganizationUserResponse) => void): Promise<DescribeIntegrationMainOrganizationUserResponse>;
     /**
      * 通过AuthCode查询用户是否实名
      */

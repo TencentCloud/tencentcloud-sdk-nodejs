@@ -29,7 +29,7 @@ import {
   CreateResultDownloadResponse,
   CreateDMSDatabaseResponse,
   CreateStoreLocationResponse,
-  ReportHeartbeatMetaDataRequest,
+  DescribeNotebookSessionResponse,
   DescribeDMSDatabaseResponse,
   DropDMSDatabaseRequest,
   CreateScriptResponse,
@@ -73,14 +73,15 @@ import {
   AttachWorkGroupPolicyRequest,
   CreateUserResponse,
   DeleteUserResponse,
-  CreateStoreLocationRequest,
+  DescribeDatabasesResponse,
   LockComponentInfo,
   DescribeDMSPartitionsRequest,
   DescribeSparkAppJobsRequest,
   CreateDMSTableResponse,
+  CreateNotebookSessionRequest,
   Partition,
   CreateTaskRequest,
-  ModifySparkAppResponse,
+  DescribeNotebookSessionRequest,
   CSV,
   CreateTableRequest,
   DescribeWorkGroupsResponse,
@@ -94,6 +95,7 @@ import {
   UserInfo,
   CreateExportTaskRequest,
   ReportHeartbeatMetaDataResponse,
+  ReportHeartbeatMetaDataRequest,
   CreateDMSTableRequest,
   DropDMSTableRequest,
   DMSTable,
@@ -113,6 +115,7 @@ import {
   Script,
   AlterDMSTableRequest,
   CreateImportTaskResponse,
+  NotebookSessionInfo,
   Execution,
   CreateTableResponse,
   WorkGroupInfo,
@@ -135,7 +138,8 @@ import {
   CreateWorkGroupResponse,
   TaskResultInfo,
   DescribeTablesRequest,
-  DescribeDatabasesResponse,
+  ModifySparkAppResponse,
+  CreateStoreLocationRequest,
   DMSTableInfo,
   AttachUserPolicyResponse,
   DMSPartition,
@@ -167,6 +171,7 @@ import {
   DescribeWorkGroupsRequest,
   TasksOverview,
   CreateTasksResponse,
+  CreateNotebookSessionResponse,
   CreateSparkAppRequest,
   UnbindWorkGroupsFromUserResponse,
   DropDMSPartitionsResponse,
@@ -260,6 +265,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（DescribeNotebookSession）用于获取notebook livy session详情信息
+   */
+  async DescribeNotebookSession(
+    req: DescribeNotebookSessionRequest,
+    cb?: (error: string, rep: DescribeNotebookSessionResponse) => void
+  ): Promise<DescribeNotebookSessionResponse> {
+    return this.request("DescribeNotebookSession", req, cb)
+  }
+
+  /**
    * DMS元数据删除库
    */
   async DropDMSDatabase(
@@ -340,13 +355,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取用户列表信息
+   * 本接口（CreateNotebookSession）用于创建notebook livy session
    */
-  async DescribeUsers(
-    req: DescribeUsersRequest,
-    cb?: (error: string, rep: DescribeUsersResponse) => void
-  ): Promise<DescribeUsersResponse> {
-    return this.request("DescribeUsers", req, cb)
+  async CreateNotebookSession(
+    req: CreateNotebookSessionRequest,
+    cb?: (error: string, rep: CreateNotebookSessionResponse) => void
+  ): Promise<CreateNotebookSessionResponse> {
+    return this.request("CreateNotebookSession", req, cb)
   }
 
   /**
@@ -487,6 +502,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UnbindWorkGroupsFromUserResponse) => void
   ): Promise<UnbindWorkGroupsFromUserResponse> {
     return this.request("UnbindWorkGroupsFromUser", req, cb)
+  }
+
+  /**
+   * 获取用户列表信息
+   */
+  async DescribeUsers(
+    req: DescribeUsersRequest,
+    cb?: (error: string, rep: DescribeUsersResponse) => void
+  ): Promise<DescribeUsersResponse> {
+    return this.request("DescribeUsers", req, cb)
   }
 
   /**

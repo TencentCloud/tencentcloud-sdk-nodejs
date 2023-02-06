@@ -38,6 +38,7 @@ import {
   AccessLogItem,
   DeleteSessionRequest,
   DescribeWafAutoDenyRulesRequest,
+  SearchAttackLogRequest,
   AddCustomRuleResponse,
   DescribeFlowTrendResponse,
   GetAttackDownloadRecordsRequest,
@@ -52,15 +53,19 @@ import {
   QPSPackageNew,
   FiltersItemNew,
   DescribeAutoDenyIPResponse,
+  SwitchDomainRulesResponse,
   SearchAccessLogResponse,
   IpAccessControlItem,
+  SwitchDomainRulesRequest,
   DomainsPartInfo,
   DescribeAutoDenyIPRequest,
   DescribeIpAccessControlRequest,
+  ModifyAreaBanStatusRequest,
   AddSpartaProtectionRequest,
   PostAttackDownloadTaskRequest,
   DescribeAccessFastAnalysisRequest,
   DeleteIpAccessControlRequest,
+  AttackLogInfo,
   DeleteDomainWhiteRulesResponse,
   ModifyWafAutoDenyStatusResponse,
   DescribeWafAutoDenyStatusResponse,
@@ -81,6 +86,7 @@ import {
   ModifyAccessPeriodRequest,
   BotQPS,
   ModifyWafAutoDenyRulesResponse,
+  SearchAttackLogResponse,
   DescribeInstancesRequest,
   CdcRegion,
   AccessValueInfo,
@@ -92,6 +98,7 @@ import {
   AccessKeyValueInfo,
   AddCustomRuleRequest,
   FraudPkg,
+  ModifyAreaBanStatusResponse,
   ModifyDomainWhiteRuleResponse,
   ExportAccessInfo,
   ModifyWafAutoDenyRulesRequest,
@@ -179,6 +186,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改防护域名的地域封禁状态
+   */
+  async ModifyAreaBanStatus(
+    req: ModifyAreaBanStatusRequest,
+    cb?: (error: string, rep: ModifyAreaBanStatusResponse) => void
+  ): Promise<ModifyAreaBanStatusResponse> {
+    return this.request("ModifyAreaBanStatus", req, cb)
+  }
+
+  /**
    * 查询用户所有域名的详细信息
    */
   async DescribeDomains(
@@ -206,6 +223,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateAccessExportResponse) => void
   ): Promise<CreateAccessExportResponse> {
     return this.request("CreateAccessExport", req, cb)
+  }
+
+  /**
+   * 新版本CLS接口存在参数变化，query改成了query_string支持lucence语法接口搜索查询。
+   */
+  async SearchAttackLog(
+    req: SearchAttackLogRequest,
+    cb?: (error: string, rep: SearchAttackLogResponse) => void
+  ): Promise<SearchAttackLogResponse> {
+    return this.request("SearchAttackLog", req, cb)
   }
 
   /**
@@ -356,6 +383,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: PostAttackDownloadTaskResponse) => void
   ): Promise<PostAttackDownloadTaskResponse> {
     return this.request("PostAttackDownloadTask", req, cb)
+  }
+
+  /**
+   * 切换域名的规则开关
+   */
+  async SwitchDomainRules(
+    req: SwitchDomainRulesRequest,
+    cb?: (error: string, rep: SwitchDomainRulesResponse) => void
+  ): Promise<SwitchDomainRulesResponse> {
+    return this.request("SwitchDomainRules", req, cb)
   }
 
   /**

@@ -64,6 +64,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AlterDMSTable", req, cb);
     }
     /**
+     * 本接口（DescribeNotebookSession）用于获取notebook livy session详情信息
+     */
+    async DescribeNotebookSession(req, cb) {
+        return this.request("DescribeNotebookSession", req, cb);
+    }
+    /**
      * DMS元数据删除库
      */
     async DropDMSDatabase(req, cb) {
@@ -112,10 +118,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteSparkApp", req, cb);
     }
     /**
-     * 获取用户列表信息
+     * 本接口（CreateNotebookSession）用于创建notebook livy session
      */
-    async DescribeUsers(req, cb) {
-        return this.request("DescribeUsers", req, cb);
+    async CreateNotebookSession(req, cb) {
+        return this.request("CreateNotebookSession", req, cb);
     }
     /**
      * 本接口（CreateTasks），用于批量创建任务
@@ -200,6 +206,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async UnbindWorkGroupsFromUser(req, cb) {
         return this.request("UnbindWorkGroupsFromUser", req, cb);
+    }
+    /**
+     * 获取用户列表信息
+     */
+    async DescribeUsers(req, cb) {
+        return this.request("DescribeUsers", req, cb);
     }
     /**
      * 绑定鉴权策略到工作组

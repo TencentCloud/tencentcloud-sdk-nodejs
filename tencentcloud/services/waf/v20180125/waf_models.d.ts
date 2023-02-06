@@ -424,6 +424,39 @@ export interface DescribeWafAutoDenyRulesRequest {
     Domain: string;
 }
 /**
+ * SearchAttackLog请求参数结构体
+ */
+export interface SearchAttackLogRequest {
+    /**
+      * 查询的域名，所有域名使用all
+      */
+    Domain: string;
+    /**
+      * 查询起始时间
+      */
+    StartTime: string;
+    /**
+      * 查询结束时间
+      */
+    EndTime: string;
+    /**
+      * 查询的游标。第一次请求使用空字符串即可，后续请求使用上一次请求返回的最后一条记录的context的值即可。
+      */
+    Context: string;
+    /**
+      * Lucene语法
+      */
+    QueryString: string;
+    /**
+      * 查询的数量，默认10条，最多100条
+      */
+    Count?: number;
+    /**
+      * 默认为desc，可以取值desc和asc
+      */
+    Sort?: string;
+}
+/**
  * AddCustomRule返回参数结构体
  */
 export interface AddCustomRuleResponse {
@@ -616,6 +649,15 @@ export interface DescribeAutoDenyIPResponse {
     RequestId?: string;
 }
 /**
+ * SwitchDomainRules返回参数结构体
+ */
+export interface SwitchDomainRulesResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * SearchAccessLog返回参数结构体
  */
 export interface SearchAccessLogResponse {
@@ -683,6 +725,27 @@ export interface IpAccessControlItem {
       * 有效截止时间戳
       */
     ValidTs: number;
+}
+/**
+ * SwitchDomainRules请求参数结构体
+ */
+export interface SwitchDomainRulesRequest {
+    /**
+      * 域名
+      */
+    Domain: string;
+    /**
+      * 规则列表
+      */
+    Ids: Array<number>;
+    /**
+      * 开关状态
+      */
+    Status: number;
+    /**
+      * 设置为观察模式原因
+      */
+    Reason?: number;
 }
 /**
  * saas域名详情
@@ -902,6 +965,19 @@ export interface DescribeIpAccessControlRequest {
     Ip?: string;
 }
 /**
+ * ModifyAreaBanStatus请求参数结构体
+ */
+export interface ModifyAreaBanStatusRequest {
+    /**
+      * 修要修改的域名
+      */
+    Domain: string;
+    /**
+      * 状态值，0表示关闭，1表示开启
+      */
+    Status: number;
+}
+/**
  * AddSpartaProtection请求参数结构体
  */
 export interface AddSpartaProtectionRequest {
@@ -1100,6 +1176,27 @@ export interface DeleteIpAccessControlRequest {
       * 是否为多域名黑白名单
       */
     SourceType?: string;
+}
+/**
+ * 攻击日志详情
+ */
+export interface AttackLogInfo {
+    /**
+      * 攻击日志的详情内容
+      */
+    Content: string;
+    /**
+      * CLS返回内容
+      */
+    FileName: string;
+    /**
+      * CLS返回内容
+      */
+    Source: string;
+    /**
+      * CLS返回内容
+      */
+    TimeStamp: string;
 }
 /**
  * DeleteDomainWhiteRules返回参数结构体
@@ -1435,6 +1532,35 @@ export interface ModifyWafAutoDenyRulesResponse {
       * 成功的状态码，需要JSON解码后再使用，返回的格式是{"域名":"状态"}，成功的状态码为Success，其它的为失败的状态码（yunapi定义的错误码）
       */
     Success?: ResponseCode;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * SearchAttackLog返回参数结构体
+ */
+export interface SearchAttackLogResponse {
+    /**
+      * 当前返回的攻击日志条数
+      */
+    Count?: number;
+    /**
+      * 翻页游标，如果没有下一页了，这个参数为空""
+      */
+    Context?: string;
+    /**
+      * 攻击日志数组条目内容
+      */
+    Data?: Array<AttackLogInfo>;
+    /**
+      * CLS接口返回内容
+      */
+    ListOver?: boolean;
+    /**
+      * CLS接口返回内容，标志是否启动新版本索引
+      */
+    SqlFlag?: boolean;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1789,6 +1915,15 @@ export interface FraudPkg {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     UsedNum?: number;
+}
+/**
+ * ModifyAreaBanStatus返回参数结构体
+ */
+export interface ModifyAreaBanStatusResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * ModifyDomainWhiteRule返回参数结构体

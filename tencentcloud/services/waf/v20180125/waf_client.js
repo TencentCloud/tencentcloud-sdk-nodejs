@@ -54,6 +54,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteDomainWhiteRules", req, cb);
     }
     /**
+     * 修改防护域名的地域封禁状态
+     */
+    async ModifyAreaBanStatus(req, cb) {
+        return this.request("ModifyAreaBanStatus", req, cb);
+    }
+    /**
      * 查询用户所有域名的详细信息
      */
     async DescribeDomains(req, cb) {
@@ -70,6 +76,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateAccessExport(req, cb) {
         return this.request("CreateAccessExport", req, cb);
+    }
+    /**
+     * 新版本CLS接口存在参数变化，query改成了query_string支持lucence语法接口搜索查询。
+     */
+    async SearchAttackLog(req, cb) {
+        return this.request("SearchAttackLog", req, cb);
     }
     /**
      * 查询单个saas域名详情
@@ -160,6 +172,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async PostAttackDownloadTask(req, cb) {
         return this.request("PostAttackDownloadTask", req, cb);
+    }
+    /**
+     * 切换域名的规则开关
+     */
+    async SwitchDomainRules(req, cb) {
+        return this.request("SwitchDomainRules", req, cb);
     }
     /**
      * 配置WAF威胁情报封禁模块详情

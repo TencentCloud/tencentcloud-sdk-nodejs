@@ -18,6 +18,16 @@ const client = new tencentcloud.ess.v20201111.Client({
 })
 describe("ess.v20201111.test.js", function () {
 
+it("ess.v20201111.DescribeOrganizationGroupOrganizations", async function () {
+    try {
+       const data = await client.DescribeOrganizationGroupOrganizations({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ess.v20201111.StartFlow", async function () {
     try {
        const data = await client.StartFlow({})
@@ -251,6 +261,16 @@ it("ess.v20201111.UploadFiles", async function () {
 it("ess.v20201111.CreateFlowReminds", async function () {
     try {
        const data = await client.CreateFlowReminds({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ess.v20201111.DescribeIntegrationMainOrganizationUser", async function () {
+    try {
+       const data = await client.DescribeIntegrationMainOrganizationUser({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

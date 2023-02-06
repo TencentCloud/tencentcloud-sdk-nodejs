@@ -10759,6 +10759,10 @@ ENABLE：启用该路由
 DISABLE：不启用该路由
       */
     Status?: string;
+    /**
+      * 路由CIDR
+      */
+    DestinationCidrBlock?: string;
 }
 /**
  * ModifyVpnConnectionAttribute请求参数结构体

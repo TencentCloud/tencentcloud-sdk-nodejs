@@ -22,9 +22,10 @@ import {
   DescribeFlowEvidenceReportRequest,
   Department,
   CreateSchemeUrlRequest,
+  FileInfo,
   CreateFlowApproversResponse,
-  UploadFilesRequest,
-  RemindFlowRecords,
+  DescribeIntegrationMainOrganizationUserRequest,
+  CreateMultiFlowSignQRCodeResponse,
   FlowCreateApprover,
   DescribeThirdPartyAuthCodeResponse,
   CreateIntegrationEmployeesRequest,
@@ -34,6 +35,7 @@ import {
   FlowApproverUrlInfo,
   CreateConvertTaskApiRequest,
   CreateFlowRemindsResponse,
+  DescribeOrganizationGroupOrganizationsRequest,
   Agent,
   FlowApproverDetail,
   DescribeFlowTemplatesRequest,
@@ -67,12 +69,13 @@ import {
   DescribeFileUrlsResponse,
   AuthorizedUser,
   CreateDocumentRequest,
-  CreateMultiFlowSignQRCodeResponse,
+  RemindFlowRecords,
   DescribeOrganizationSealsResponse,
   DeleteIntegrationEmployeesRequest,
   SignQrCode,
   GetTaskResultApiRequest,
   RegisterInfo,
+  GroupOrganization,
   CreateFlowSignUrlRequest,
   CreateIntegrationEmployeesResponse,
   FlowDetailInfo,
@@ -85,12 +88,13 @@ import {
   CreateFlowSignReviewResponse,
   Filter,
   CreateStaffResult,
-  FileInfo,
+  DescribeIntegrationMainOrganizationUserResponse,
   CreateSchemeUrlResponse,
   ApproverRestriction,
   CreatePrepareFlowResponse,
   GetTaskResultApiResponse,
   CancelMultiFlowSignQRCodeRequest,
+  IntegrationMainOrganizationUser,
   StartFlowRequest,
   CreatePrepareFlowRequest,
   ApproverOption,
@@ -105,14 +109,17 @@ import {
   VerifyPdfResponse,
   DeleteStaffsResult,
   DescribeFlowBriefsResponse,
+  Admin,
   OccupiedSeal,
   DescribeFlowTemplatesResponse,
+  UploadFilesRequest,
   CreateBatchCancelFlowUrlRequest,
   CreateMultiFlowSignQRCodeRequest,
   DescribeFlowInfoResponse,
   CcInfo,
   CreateFlowResponse,
   FlowBrief,
+  DescribeOrganizationGroupOrganizationsResponse,
   CancelMultiFlowSignQRCodeResponse,
 } from "./ess_models"
 
@@ -123,6 +130,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("ess.tencentcloudapi.com", "2020-11-11", clientConfig)
+  }
+
+  /**
+   * 此API接口用户查询加入集团的成员企业
+   */
+  async DescribeOrganizationGroupOrganizations(
+    req: DescribeOrganizationGroupOrganizationsRequest,
+    cb?: (error: string, rep: DescribeOrganizationGroupOrganizationsResponse) => void
+  ): Promise<DescribeOrganizationGroupOrganizationsResponse> {
+    return this.request("DescribeOrganizationGroupOrganizations", req, cb)
   }
 
   /**
@@ -396,6 +413,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateFlowRemindsResponse) => void
   ): Promise<CreateFlowRemindsResponse> {
     return this.request("CreateFlowReminds", req, cb)
+  }
+
+  /**
+   * 通过子企业影子账号查询主企业员工账号
+   */
+  async DescribeIntegrationMainOrganizationUser(
+    req: DescribeIntegrationMainOrganizationUserRequest,
+    cb?: (error: string, rep: DescribeIntegrationMainOrganizationUserResponse) => void
+  ): Promise<DescribeIntegrationMainOrganizationUserResponse> {
+    return this.request("DescribeIntegrationMainOrganizationUser", req, cb)
   }
 
   /**
