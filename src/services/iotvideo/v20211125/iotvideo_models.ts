@@ -4914,6 +4914,11 @@ export interface TransferCloudStorageRequest {
    * 未开通云存的设备名称
    */
   ToDeviceName: string
+
+  /**
+   * 未开通云存的设备产品ID
+   */
+  ToProductId?: string
 }
 
 /**

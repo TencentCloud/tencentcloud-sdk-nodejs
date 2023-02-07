@@ -34,10 +34,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateImageProcessingTemplate", req, cb);
     }
     /**
-     * 创建用户自定义指定时间点截图模板，数量上限：16。
+     * 该接口用于创建轮播播单，数量上限：100。
+轮播播单的每个文件可以指定源文件，也可以指定某个转码文件。
+指定的文件必须是hls格式，所有的播单文件最好保持相同的码率和分辨率。
      */
-    async CreateSnapshotByTimeOffsetTemplate(req, cb) {
-        return this.request("CreateSnapshotByTimeOffsetTemplate", req, cb);
+    async CreateRoundPlay(req, cb) {
+        return this.request("CreateRoundPlay", req, cb);
     }
     /**
      * 该接口用于设置默认的存储地域。上传文件时如果没有指定地域，将上传到默认地域。
@@ -94,10 +96,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ApplyUpload", req, cb);
     }
     /**
-     * 删除用户自定义转动图模板。
+     * 创建用户自定义指定时间点截图模板，数量上限：16。
      */
-    async DeleteAnimatedGraphicsTemplate(req, cb) {
-        return this.request("DeleteAnimatedGraphicsTemplate", req, cb);
+    async CreateSnapshotByTimeOffsetTemplate(req, cb) {
+        return this.request("CreateSnapshotByTimeOffsetTemplate", req, cb);
     }
     /**
      * 根据音视频内容分析模板唯一标识，获取音视频内容分析模板详情列表。返回结果包含符合条件的所有用户自定义音视频内容分析模板及[系统预置音视频内容分析模板](https://cloud.tencent.com/document/product/266/33476#.E9.A2.84.E7.BD.AE.E8.A7.86.E9.A2.91.E5.86.85.E5.AE.B9.E5.88.86.E6.9E.90.E6.A8.A1.E6.9D.BF)。
@@ -234,12 +236,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTasks", req, cb);
     }
     /**
-     * 该接口用于开通某地域的存储。
-  1. 用户开通点播业务时，系统默认为用户开通了部分地域的存储，用户如果需要开通其它地域的存储，可以通过该接口进行开通。
-  2. 通过 DescribeStorageRegions 接口可以查询到所有存储地域及已经开通的地域。
+     * 该接口用于批量创建关键词样本，样本用于通过OCR、ASR技术，进行不适宜内容识别、内容识别等视频处理。
      */
-    async CreateStorageRegion(req, cb) {
-        return this.request("CreateStorageRegion", req, cb);
+    async CreateWordSamples(req, cb) {
+        return this.request("CreateWordSamples", req, cb);
     }
     /**
      * 重新设置用户自定义任务流模板的内容。
@@ -551,10 +551,19 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeImageReviewUsageData", req, cb);
     }
     /**
-     * 该接口用于根据素材 ID，修改素材样本信息，包括名称、描述的修改，以及五官、标签的添加、删除、重置操作。五官删除操作需保证至少剩余 1 张图片，否则，请使用重置操作。
+     * 该接口用于开通某地域的存储。
+  1. 用户开通点播业务时，系统默认为用户开通了部分地域的存储，用户如果需要开通其它地域的存储，可以通过该接口进行开通。
+  2. 通过 DescribeStorageRegions 接口可以查询到所有存储地域及已经开通的地域。
      */
-    async ModifyPersonSample(req, cb) {
-        return this.request("ModifyPersonSample", req, cb);
+    async CreateStorageRegion(req, cb) {
+        return this.request("CreateStorageRegion", req, cb);
+    }
+    /**
+     * 该接口用于修改轮播播单。
+修改后只有新的播放请求会生效，已经在播放中的用户在七天之内还可以播放修改前的播单。
+     */
+    async ModifyRoundPlay(req, cb) {
+        return this.request("ModifyRoundPlay", req, cb);
     }
     /**
      * 该接口用于查询指定日期范围内每天的播放统计数据。
@@ -563,6 +572,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeDailyMediaPlayStat(req, cb) {
         return this.request("DescribeDailyMediaPlayStat", req, cb);
+    }
+    /**
+     * 删除用户自定义转动图模板。
+     */
+    async DeleteAnimatedGraphicsTemplate(req, cb) {
+        return this.request("DeleteAnimatedGraphicsTemplate", req, cb);
     }
     /**
      * 该 API 已经<font color=red>不再维护</font>，新版审核模板支持音视频审核和图片审核，详细请参考 [删除审核模板](https://cloud.tencent.com/document/api/266/84390)。
@@ -743,6 +758,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateSubAppId", req, cb);
     }
     /**
+     * 该接口用于根据素材 ID，修改素材样本信息，包括名称、描述的修改，以及五官、标签的添加、删除、重置操作。五官删除操作需保证至少剩余 1 张图片，否则，请使用重置操作。
+     */
+    async ModifyPersonSample(req, cb) {
+        return this.request("ModifyPersonSample", req, cb);
+    }
+    /**
      * 查询转动图模板列表，支持根据条件，分页查询。
      */
     async DescribeAnimatedGraphicsTemplates(req, cb) {
@@ -792,10 +813,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateClass", req, cb);
     }
     /**
-     * 该接口用于批量创建关键词样本，样本用于通过OCR、ASR技术，进行不适宜内容识别、内容识别等视频处理。
+     * 该接口用于获取轮播播单列表。
      */
-    async CreateWordSamples(req, cb) {
-        return this.request("CreateWordSamples", req, cb);
+    async DescribeRoundPlays(req, cb) {
+        return this.request("DescribeRoundPlays", req, cb);
     }
     /**
      * 腾讯云点播为客户提供了媒体上传、媒体管理、媒体处理等等服务，在这些服务执行过程或执行结束时，腾讯云点播也提供各种对应的事件通知，方便开发者感知服务处理状态，并做下一步的业务操作。
@@ -877,10 +898,11 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAIRecognitionTemplates", req, cb);
     }
     /**
-     * 创建用户自定义音视频内容识别模板，数量上限：50。
+     * 该 API 已经<font color='red'>不再维护</font>，新版播放器签名不再使用播放器配置模板，详细请参考 [播放器签名](https://cloud.tencent.com/document/product/266/45554)。
+查询播放器配置，支持根据条件，分页查询。
      */
-    async CreateAIRecognitionTemplate(req, cb) {
-        return this.request("CreateAIRecognitionTemplate", req, cb);
+    async DescribeSuperPlayerConfigs(req, cb) {
+        return this.request("DescribeSuperPlayerConfigs", req, cb);
     }
     /**
      * 该接口用于获取当前账号的子应用列表，包含主应用。
@@ -1092,6 +1114,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifySubAppIdStatus", req, cb);
     }
     /**
+     * 该接口用于删除轮播播单。
+     */
+    async DeleteRoundPlay(req, cb) {
+        return this.request("DeleteRoundPlay", req, cb);
+    }
+    /**
      * 该 API 已经<font color=red>不再维护</font>，新版审核模板支持音视频审核和图片审核，详细请参考 [修改审核模板](https://cloud.tencent.com/document/api/266/84388)。
 修改用户自定义音视频内容审核模板。
      */
@@ -1106,11 +1134,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteVodDomain", req, cb);
     }
     /**
-     * 该 API 已经<font color='red'>不再维护</font>，新版播放器签名不再使用播放器配置模板，详细请参考 [播放器签名](https://cloud.tencent.com/document/product/266/45554)。
-查询播放器配置，支持根据条件，分页查询。
+     * 创建用户自定义音视频内容识别模板，数量上限：50。
      */
-    async DescribeSuperPlayerConfigs(req, cb) {
-        return this.request("DescribeSuperPlayerConfigs", req, cb);
+    async CreateAIRecognitionTemplate(req, cb) {
+        return this.request("CreateAIRecognitionTemplate", req, cb);
     }
     /**
      * 该接口用于查询播放统计文件的下载地址。

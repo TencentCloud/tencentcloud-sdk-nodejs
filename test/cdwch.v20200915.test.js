@@ -18,9 +18,29 @@ const client = new tencentcloud.cdwch.v20200915.Client({
 })
 describe("cdwch.v20200915.test.js", function () {
 
+it("cdwch.v20200915.DescribeBackUpSchedule", async function () {
+    try {
+       const data = await client.DescribeBackUpSchedule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdwch.v20200915.CreateBackUpSchedule", async function () {
     try {
        const data = await client.CreateBackUpSchedule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdwch.v20200915.ScaleUpInstance", async function () {
+    try {
+       const data = await client.ScaleUpInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -58,9 +78,29 @@ it("cdwch.v20200915.OpenBackUp", async function () {
     }
 })
 
+it("cdwch.v20200915.DescribeInstanceKeyValConfigs", async function () {
+    try {
+       const data = await client.DescribeInstanceKeyValConfigs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdwch.v20200915.DescribeSpec", async function () {
     try {
        const data = await client.DescribeSpec({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdwch.v20200915.DescribeClusterConfigs", async function () {
+    try {
+       const data = await client.DescribeClusterConfigs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -98,9 +138,39 @@ it("cdwch.v20200915.CreateInstanceNew", async function () {
     }
 })
 
+it("cdwch.v20200915.ModifyInstanceKeyValConfigs", async function () {
+    try {
+       const data = await client.ModifyInstanceKeyValConfigs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdwch.v20200915.ModifyUserNewPrivilege", async function () {
     try {
        const data = await client.ModifyUserNewPrivilege({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdwch.v20200915.ScaleOutInstance", async function () {
+    try {
+       const data = await client.ScaleOutInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdwch.v20200915.ResizeDisk", async function () {
+    try {
+       const data = await client.ResizeDisk({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -477,10 +477,10 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
         return this.request("DescribeLivePullStreamTasks", req, cb);
     }
     /**
-     * 查询某段时间内每个国家地区每个省份每个运营商的平均每秒流量，总流量，总请求数信息。
+     * 查询按省份和运营商分组的下行播放数据。
      */
-    async DescribeProIspPlaySumInfoList(req, cb) {
-        return this.request("DescribeProIspPlaySumInfoList", req, cb);
+    async DescribeGroupProIspPlayInfoList(req, cb) {
+        return this.request("DescribeGroupProIspPlayInfoList", req, cb);
     }
     /**
      * 查询播放数据，支持按流名称查询详细播放数据，也可按播放域名查询详细总数据，数据延迟4分钟左右。
@@ -512,6 +512,12 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
      */
     async StopRecordTask(req, cb) {
         return this.request("StopRecordTask", req, cb);
+    }
+    /**
+     * 修改直播垫片模板。
+     */
+    async ModifyLiveTimeShiftTemplate(req, cb) {
+        return this.request("ModifyLiveTimeShiftTemplate", req, cb);
     }
     /**
      * 获取截图模板列表。
@@ -574,10 +580,22 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
         return this.request("DescribeLiveRecordRules", req, cb);
     }
     /**
+     * 获取直播时移模板。
+     */
+    async DescribeLiveTimeShiftTemplates(req, cb) {
+        return this.request("DescribeLiveTimeShiftTemplates", req, cb);
+    }
+    /**
      * 获取直播延播列表。
      */
     async DescribeLiveDelayInfoList(req, cb) {
         return this.request("DescribeLiveDelayInfoList", req, cb);
+    }
+    /**
+     * 获取直播时移规则列表。
+     */
+    async DescribeLiveTimeShiftRules(req, cb) {
+        return this.request("DescribeLiveTimeShiftRules", req, cb);
     }
     /**
      * 删除录制规则。
@@ -672,6 +690,13 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
         return this.request("DescribeLiveDomainPlayInfoList", req, cb);
     }
     /**
+     * 创建直播时移规则，需要先调用[CreateLiveTimeShiftTemplate](/document/product/267/84589)接口创建录制模板，将返回的模板id绑定到流使用。
+<br>直播时移相关文档：[直播时移](/document/product/267/86134)。
+     */
+    async CreateLiveTimeShiftRule(req, cb) {
+        return this.request("CreateLiveTimeShiftRule", req, cb);
+    }
+    /**
      * 用于查询回调事件。
      */
     async DescribeCallbackRecordsList(req, cb) {
@@ -723,6 +748,12 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
         return this.request("CreateLiveTranscodeRule", req, cb);
     }
     /**
+     * 删除直播时移规则。
+     */
+    async DeleteLiveTimeShiftRule(req, cb) {
+        return this.request("DeleteLiveTimeShiftRule", req, cb);
+    }
+    /**
      * 获取水印规则列表。
      */
     async DescribeLiveWatermarkRules(req, cb) {
@@ -743,10 +774,22 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
         return this.request("CreateLiveSnapshotRule", req, cb);
     }
     /**
-     * 查询按省份和运营商分组的下行播放数据。
+     * 创建直播垫片模板。
      */
-    async DescribeGroupProIspPlayInfoList(req, cb) {
-        return this.request("DescribeGroupProIspPlayInfoList", req, cb);
+    async CreateLiveTimeShiftTemplate(req, cb) {
+        return this.request("CreateLiveTimeShiftTemplate", req, cb);
+    }
+    /**
+     * 删除直播时移模板。
+     */
+    async DeleteLiveTimeShiftTemplate(req, cb) {
+        return this.request("DeleteLiveTimeShiftTemplate", req, cb);
+    }
+    /**
+     * 查询某段时间内每个国家地区每个省份每个运营商的平均每秒流量，总流量，总请求数信息。
+     */
+    async DescribeProIspPlaySumInfoList(req, cb) {
+        return this.request("DescribeProIspPlaySumInfoList", req, cb);
     }
     /**
      * 输入某个时间点（1分钟维度），查询该时间点所有流的下行信息。

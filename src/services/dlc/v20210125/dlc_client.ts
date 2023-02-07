@@ -27,6 +27,7 @@ import {
   ListTaskJobLogDetailResponse,
   Asset,
   CreateResultDownloadResponse,
+  ModifyGovernEventRuleResponse,
   CreateDMSDatabaseResponse,
   CreateStoreLocationResponse,
   DescribeNotebookSessionResponse,
@@ -188,6 +189,7 @@ import {
   CreateDMSDatabaseRequest,
   DetachWorkGroupPolicyRequest,
   DescribeDMSTableRequest,
+  ModifyGovernEventRuleRequest,
   DescribeViewsResponse,
   DescribeScriptsResponse,
   DatabaseResponseInfo,
@@ -802,6 +804,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateResultDownloadResponse) => void
   ): Promise<CreateResultDownloadResponse> {
     return this.request("CreateResultDownload", req, cb)
+  }
+
+  /**
+   * 修改数据治理事件阈值
+   */
+  async ModifyGovernEventRule(
+    req?: ModifyGovernEventRuleRequest,
+    cb?: (error: string, rep: ModifyGovernEventRuleResponse) => void
+  ): Promise<ModifyGovernEventRuleResponse> {
+    return this.request("ModifyGovernEventRule", req, cb)
   }
 
   /**

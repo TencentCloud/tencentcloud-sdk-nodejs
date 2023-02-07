@@ -28,10 +28,22 @@ class Client extends abstract_client_1.AbstractClient {
         super("cdwch.tencentcloudapi.com", "2020-09-15", clientConfig);
     }
     /**
+     * 查询备份策略信息
+     */
+    async DescribeBackUpSchedule(req, cb) {
+        return this.request("DescribeBackUpSchedule", req, cb);
+    }
+    /**
      * 创建或者修改备份策略
      */
     async CreateBackUpSchedule(req, cb) {
         return this.request("CreateBackUpSchedule", req, cb);
+    }
+    /**
+     * 垂直扩缩容节点规格，修改节点cvm的规格cpu，内存。 规格变化阶段，服务不可用。
+     */
+    async ScaleUpInstance(req, cb) {
+        return this.request("ScaleUpInstance", req, cb);
     }
     /**
      * 查询集群用户、集群表，数据库等相关信息
@@ -52,10 +64,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("OpenBackUp", req, cb);
     }
     /**
+     * 在集群详情页面获取所有参数列表
+     */
+    async DescribeInstanceKeyValConfigs(req, cb) {
+        return this.request("DescribeInstanceKeyValConfigs", req, cb);
+    }
+    /**
      * 购买页拉取集群的数据节点和zookeeper节点的规格列表
      */
     async DescribeSpec(req, cb) {
         return this.request("DescribeSpec", req, cb);
+    }
+    /**
+     * 获取集群的最新的几个配置文件（config.xml、metrika.xml、user.xml）的内容，显示给用户
+     */
+    async DescribeClusterConfigs(req, cb) {
+        return this.request("DescribeClusterConfigs", req, cb);
     }
     /**
      * 在集群配置页面修改集群配置文件接口，xml模式
@@ -76,10 +100,28 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateInstanceNew", req, cb);
     }
     /**
+     * KV模式修改配置接口
+     */
+    async ModifyInstanceKeyValConfigs(req, cb) {
+        return this.request("ModifyInstanceKeyValConfigs", req, cb);
+    }
+    /**
      * 针对ck账号的权限做管控（新版）
      */
     async ModifyUserNewPrivilege(req, cb) {
         return this.request("ModifyUserNewPrivilege", req, cb);
+    }
+    /**
+     * 调整clickhouse节点数量
+     */
+    async ScaleOutInstance(req, cb) {
+        return this.request("ScaleOutInstance", req, cb);
+    }
+    /**
+     * 扩容磁盘，包含扩容数据节点，zk节点
+     */
+    async ResizeDisk(req, cb) {
+        return this.request("ResizeDisk", req, cb);
     }
     /**
      * 获取实例shard信息列表

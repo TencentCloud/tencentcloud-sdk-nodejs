@@ -28,9 +28,9 @@ it("vod.v20180717.CreateImageProcessingTemplate", async function () {
     }
 })
 
-it("vod.v20180717.CreateSnapshotByTimeOffsetTemplate", async function () {
+it("vod.v20180717.CreateRoundPlay", async function () {
     try {
-       const data = await client.CreateSnapshotByTimeOffsetTemplate({})
+       const data = await client.CreateRoundPlay({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -98,9 +98,9 @@ it("vod.v20180717.ApplyUpload", async function () {
     }
 })
 
-it("vod.v20180717.DeleteAnimatedGraphicsTemplate", async function () {
+it("vod.v20180717.CreateSnapshotByTimeOffsetTemplate", async function () {
     try {
-       const data = await client.DeleteAnimatedGraphicsTemplate({})
+       const data = await client.CreateSnapshotByTimeOffsetTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -298,9 +298,9 @@ it("vod.v20180717.DescribeTasks", async function () {
     }
 })
 
-it("vod.v20180717.CreateStorageRegion", async function () {
+it("vod.v20180717.CreateWordSamples", async function () {
     try {
-       const data = await client.CreateStorageRegion({})
+       const data = await client.CreateWordSamples({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -658,9 +658,19 @@ it("vod.v20180717.DescribeImageReviewUsageData", async function () {
     }
 })
 
-it("vod.v20180717.ModifyPersonSample", async function () {
+it("vod.v20180717.CreateStorageRegion", async function () {
     try {
-       const data = await client.ModifyPersonSample({})
+       const data = await client.CreateStorageRegion({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vod.v20180717.ModifyRoundPlay", async function () {
+    try {
+       const data = await client.ModifyRoundPlay({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -671,6 +681,16 @@ it("vod.v20180717.ModifyPersonSample", async function () {
 it("vod.v20180717.DescribeDailyMediaPlayStat", async function () {
     try {
        const data = await client.DescribeDailyMediaPlayStat({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vod.v20180717.DeleteAnimatedGraphicsTemplate", async function () {
+    try {
+       const data = await client.DeleteAnimatedGraphicsTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -918,6 +938,16 @@ it("vod.v20180717.CreateSubAppId", async function () {
     }
 })
 
+it("vod.v20180717.ModifyPersonSample", async function () {
+    try {
+       const data = await client.ModifyPersonSample({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vod.v20180717.DescribeAnimatedGraphicsTemplates", async function () {
     try {
        const data = await client.DescribeAnimatedGraphicsTemplates({})
@@ -988,9 +1018,9 @@ it("vod.v20180717.CreateClass", async function () {
     }
 })
 
-it("vod.v20180717.CreateWordSamples", async function () {
+it("vod.v20180717.DescribeRoundPlays", async function () {
     try {
-       const data = await client.CreateWordSamples({})
+       const data = await client.DescribeRoundPlays({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1118,9 +1148,9 @@ it("vod.v20180717.DescribeAIRecognitionTemplates", async function () {
     }
 })
 
-it("vod.v20180717.CreateAIRecognitionTemplate", async function () {
+it("vod.v20180717.DescribeSuperPlayerConfigs", async function () {
     try {
-       const data = await client.CreateAIRecognitionTemplate({})
+       const data = await client.DescribeSuperPlayerConfigs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1348,6 +1378,16 @@ it("vod.v20180717.ModifySubAppIdStatus", async function () {
     }
 })
 
+it("vod.v20180717.DeleteRoundPlay", async function () {
+    try {
+       const data = await client.DeleteRoundPlay({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vod.v20180717.ModifyContentReviewTemplate", async function () {
     try {
        const data = await client.ModifyContentReviewTemplate({})
@@ -1368,9 +1408,9 @@ it("vod.v20180717.DeleteVodDomain", async function () {
     }
 })
 
-it("vod.v20180717.DescribeSuperPlayerConfigs", async function () {
+it("vod.v20180717.CreateAIRecognitionTemplate", async function () {
     try {
-       const data = await client.DescribeSuperPlayerConfigs({})
+       const data = await client.CreateAIRecognitionTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -906,6 +906,21 @@ export interface PauseServerlessRequest {
 export type ModifiableInfo = null
 
 /**
+ * DescribeFlow返回参数结构体
+ */
+export interface DescribeFlowResponse {
+  /**
+   * 任务流状态。0-成功，1-失败，2-处理中
+   */
+  Status: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * RevokeAccountPrivileges返回参数结构体
  */
 export interface RevokeAccountPrivilegesResponse {
@@ -4132,23 +4147,13 @@ export interface InstanceSpec {
 }
 
 /**
- * InquirePriceCreate返回参数结构体
+ * DescribeFlow请求参数结构体
  */
-export interface InquirePriceCreateResponse {
+export interface DescribeFlowRequest {
   /**
-   * 实例价格
+   * 任务流ID
    */
-  InstancePrice: TradePrice
-
-  /**
-   * 存储价格
-   */
-  StoragePrice: TradePrice
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  FlowId: number
 }
 
 /**
@@ -4685,6 +4690,26 @@ export interface AddInstancesRequest {
    * 参数列表，ParamTemplateId 传入时InstanceParams才有效
    */
   InstanceParams?: Array<ModifyParamItem>
+}
+
+/**
+ * InquirePriceCreate返回参数结构体
+ */
+export interface InquirePriceCreateResponse {
+  /**
+   * 实例价格
+   */
+  InstancePrice: TradePrice
+
+  /**
+   * 存储价格
+   */
+  StoragePrice: TradePrice
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

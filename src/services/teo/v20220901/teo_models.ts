@@ -5887,7 +5887,8 @@ export interface Action {
 <li> TlsVersion；</li>
 <li> OcspStapling；</li>
 <li> HTTP/2 访问（Http2）；</li>
-<li> 回源跟随重定向(UpstreamFollowRedirect)。</li>
+<li> 回源跟随重定向(UpstreamFollowRedirect)；</li>
+<li> 修改源站(Origin)。</li>
 注意：此字段可能返回 null，表示取不到有效值。
       */
   NormalAction?: NormalAction
@@ -8028,17 +8029,17 @@ export interface OriginGroup {
   /**
    * 站点ID。
    */
-  ZoneId: string
+  ZoneId?: string
 
   /**
    * 站点名称。
    */
-  ZoneName: string
+  ZoneName?: string
 
   /**
    * 源站组ID。
    */
-  OriginGroupId: string
+  OriginGroupId?: string
 
   /**
       * 源站类型，取值有：
@@ -8046,12 +8047,12 @@ export interface OriginGroup {
 <li>third_party：第三方源站；</li>
 <li>cos：腾讯云COS源站。</li>
       */
-  OriginType: string
+  OriginType?: string
 
   /**
    * 源站组名称。
    */
-  OriginGroupName: string
+  OriginGroupName?: string
 
   /**
       * 源站配置类型，当OriginType=self时，取值有：
@@ -8059,23 +8060,23 @@ export interface OriginGroup {
 <li>weight： 按权重配置。</li>
 <li>proto： 按HTTP协议配置。</li>当OriginType=third_party/cos时放空。
       */
-  ConfigurationType: string
+  ConfigurationType?: string
 
   /**
    * 源站记录信息。
    */
-  OriginRecords: Array<OriginRecord>
+  OriginRecords?: Array<OriginRecord>
 
   /**
    * 源站组更新时间。
    */
-  UpdateTime: string
+  UpdateTime?: string
 
   /**
       * 当OriginType=self时，表示回源Host。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  HostHeader: string
+  HostHeader?: string
 }
 
 /**

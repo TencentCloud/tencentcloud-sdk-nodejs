@@ -658,9 +658,9 @@ it("live.v20180801.DescribeLivePullStreamTasks", async function () {
     }
 })
 
-it("live.v20180801.DescribeProIspPlaySumInfoList", async function () {
+it("live.v20180801.DescribeGroupProIspPlayInfoList", async function () {
     try {
-       const data = await client.DescribeProIspPlaySumInfoList({})
+       const data = await client.DescribeGroupProIspPlayInfoList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -711,6 +711,16 @@ it("live.v20180801.DescribeLiveCallbackTemplates", async function () {
 it("live.v20180801.StopRecordTask", async function () {
     try {
        const data = await client.StopRecordTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("live.v20180801.ModifyLiveTimeShiftTemplate", async function () {
+    try {
+       const data = await client.ModifyLiveTimeShiftTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -818,9 +828,29 @@ it("live.v20180801.DescribeLiveRecordRules", async function () {
     }
 })
 
+it("live.v20180801.DescribeLiveTimeShiftTemplates", async function () {
+    try {
+       const data = await client.DescribeLiveTimeShiftTemplates({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("live.v20180801.DescribeLiveDelayInfoList", async function () {
     try {
        const data = await client.DescribeLiveDelayInfoList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("live.v20180801.DescribeLiveTimeShiftRules", async function () {
+    try {
+       const data = await client.DescribeLiveTimeShiftRules({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -968,6 +998,16 @@ it("live.v20180801.DescribeLiveDomainPlayInfoList", async function () {
     }
 })
 
+it("live.v20180801.CreateLiveTimeShiftRule", async function () {
+    try {
+       const data = await client.CreateLiveTimeShiftRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("live.v20180801.DescribeCallbackRecordsList", async function () {
     try {
        const data = await client.DescribeCallbackRecordsList({})
@@ -1048,6 +1088,16 @@ it("live.v20180801.CreateLiveTranscodeRule", async function () {
     }
 })
 
+it("live.v20180801.DeleteLiveTimeShiftRule", async function () {
+    try {
+       const data = await client.DeleteLiveTimeShiftRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("live.v20180801.DescribeLiveWatermarkRules", async function () {
     try {
        const data = await client.DescribeLiveWatermarkRules({})
@@ -1078,9 +1128,29 @@ it("live.v20180801.CreateLiveSnapshotRule", async function () {
     }
 })
 
-it("live.v20180801.DescribeGroupProIspPlayInfoList", async function () {
+it("live.v20180801.CreateLiveTimeShiftTemplate", async function () {
     try {
-       const data = await client.DescribeGroupProIspPlayInfoList({})
+       const data = await client.CreateLiveTimeShiftTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("live.v20180801.DeleteLiveTimeShiftTemplate", async function () {
+    try {
+       const data = await client.DeleteLiveTimeShiftTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("live.v20180801.DescribeProIspPlaySumInfoList", async function () {
+    try {
+       const data = await client.DescribeProIspPlaySumInfoList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

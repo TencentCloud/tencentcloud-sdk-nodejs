@@ -388,6 +388,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateResultDownload", req, cb);
     }
     /**
+     * 修改数据治理事件阈值
+     */
+    async ModifyGovernEventRule(req, cb) {
+        return this.request("ModifyGovernEventRule", req, cb);
+    }
+    /**
      * 查询spark应用的运行任务实例列表
      */
     async DescribeSparkAppTasks(req, cb) {

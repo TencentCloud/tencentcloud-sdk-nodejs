@@ -54,6 +54,7 @@ import {
   DescribeAclsResponse,
   DescribeUsersResponse,
   Acl,
+  Filter,
   DescribeDevicesRequest,
   DescribeDeviceGroupsRequest,
   ModifyAclRequest,

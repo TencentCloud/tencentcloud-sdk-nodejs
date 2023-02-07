@@ -49,8 +49,9 @@ import {
   UnBindLiveDomainCertResponse,
   ModifyLivePlayAuthKeyRequest,
   DescribeLiveDelayInfoListRequest,
+  HttpCodeValue,
   DomainCertInfo,
-  RecordTemplateInfo,
+  CreateLiveTimeShiftRuleResponse,
   DeleteLiveTranscodeRuleResponse,
   ConcurrentRecordStreamNum,
   DescribeStreamPlayInfoListResponse,
@@ -68,6 +69,7 @@ import {
   DeleteLiveSnapshotRuleRequest,
   DescribePlayErrorCodeDetailInfoListRequest,
   DeleteLivePullStreamTaskRequest,
+  CreateLiveTimeShiftRuleRequest,
   CommonMixOutputParams,
   DescribePushBandwidthAndFluxListResponse,
   DescribeUploadStreamNumsRequest,
@@ -105,12 +107,13 @@ import {
   DescribePullStreamConfigsRequest,
   CallBackTemplateInfo,
   DescribePlayErrorCodeSumInfoListResponse,
-  UnBindLiveDomainCertRequest,
+  DescribeLiveTimeShiftTemplatesRequest,
   DeleteLiveRecordResponse,
   DescribeScreenShotSheetNumListRequest,
   ForbidLiveStreamRequest,
   DescribeLiveDomainsResponse,
   TimeValue,
+  ModifyLiveTimeShiftTemplateRequest,
   ModifyLiveDomainCertBindingsResponse,
   PullStreamConfig,
   CreateLiveRecordResponse,
@@ -121,11 +124,13 @@ import {
   LivePackageInfo,
   CreateLiveTranscodeTemplateResponse,
   BillAreaInfo,
+  TimeShiftTemplate,
   LiveCertDomainInfo,
+  DescribeLiveTimeShiftRulesRequest,
   DescribeVisitTopSumInfoListRequest,
   DayStreamPlayInfo,
   ModifyPullStreamStatusResponse,
-  ModifyLivePlayDomainResponse,
+  DeleteLiveTimeShiftRuleRequest,
   CancelCommonMixStreamResponse,
   DescribeLiveDomainCertBindingsResponse,
   DescribeConcurrentRecordStreamNumResponse,
@@ -155,8 +160,9 @@ import {
   CreateLiveTranscodeRuleRequest,
   DescribeLiveWatermarkRulesRequest,
   DropLiveStreamRequest,
-  UpdateLiveWatermarkRequest,
+  DeleteLiveTimeShiftRuleResponse,
   PullPushWatermarkInfo,
+  UnBindLiveDomainCertRequest,
   DescribeProvinceIspPlayInfoListResponse,
   CreateCommonMixStreamRequest,
   RefererAuthConfig,
@@ -169,14 +175,15 @@ import {
   TranscodeDetailInfo,
   DescribeLiveSnapshotTemplateResponse,
   DescribeLiveTranscodeRulesResponse,
-  TimeShiftStreamInfo,
+  CreateLiveTimeShiftTemplateRequest,
   DescribeLiveDomainRefererResponse,
   AddLiveDomainRequest,
   StreamName,
   DescribeLivePackageInfoRequest,
   CreatePullStreamConfigRequest,
   DescribeLiveCertsRequest,
-  DescribeLivePullStreamTasksRequest,
+  DeleteLiveTimeShiftTemplateRequest,
+  ModifyLivePlayDomainResponse,
   CdnPlayStatData,
   AddLiveDomainResponse,
   DescribeHttpStatusInfoListRequest,
@@ -189,7 +196,7 @@ import {
   AuthenticateDomainOwnerRequest,
   DescribeLiveForbidStreamListResponse,
   DescribeStreamPushInfoListRequest,
-  DescribeLivePullStreamTasksResponse,
+  DeleteLiveTimeShiftTemplateResponse,
   ModifyLivePushAuthKeyResponse,
   DescribeLiveWatermarkResponse,
   ResumeLiveStreamResponse,
@@ -197,6 +204,7 @@ import {
   DeletePullStreamConfigRequest,
   DescribeTimeShiftStreamListResponse,
   ModifyPullStreamConfigRequest,
+  ModifyLiveTimeShiftTemplateResponse,
   DescribeStreamPushInfoListResponse,
   DescribeLiveStreamPushInfoListRequest,
   StopLiveRecordResponse,
@@ -237,6 +245,7 @@ import {
   DescribeLiveTranscodeTemplateResponse,
   CreateLiveSnapshotTemplateResponse,
   DescribeConcurrentRecordStreamNumRequest,
+  RecordTemplateInfo,
   DeleteScreenshotTaskResponse,
   ModifyLiveRecordTemplateResponse,
   CommonMixControlParams,
@@ -246,6 +255,7 @@ import {
   ForbidLiveDomainRequest,
   DescribeLiveRecordRulesRequest,
   DescribePlayErrorCodeDetailInfoListResponse,
+  TimeShiftStreamInfo,
   CreateLiveRecordTemplateResponse,
   GroupProIspDataInfo,
   RecordParam,
@@ -261,8 +271,10 @@ import {
   DescribeStreamPlayInfoListRequest,
   CreateLiveTranscodeTemplateRequest,
   DescribeLiveStreamPublishedListResponse,
+  DescribeLiveTimeShiftRulesResponse,
   DeleteLiveDomainRequest,
   ForbidLiveDomainResponse,
+  DescribeLiveTimeShiftTemplatesResponse,
   AddDelayLiveStreamResponse,
   DescribeLiveTranscodeTemplatesResponse,
   DeleteLiveCallbackRuleRequest,
@@ -275,6 +287,7 @@ import {
   DescribeLiveTranscodeTotalInfoResponse,
   DescribeLiveSnapshotRulesRequest,
   CreateRecordTaskRequest,
+  DescribeLivePullStreamTasksResponse,
   CreateLiveTranscodeRuleResponse,
   ResumeDelayLiveStreamResponse,
   CreateLiveCallbackRuleResponse,
@@ -287,7 +300,7 @@ import {
   DescribeLiveRecordRulesResponse,
   CreateLiveSnapshotTemplateRequest,
   DescribeLiveDomainPlayInfoListResponse,
-  HttpCodeValue,
+  DescribeLivePullStreamTasksRequest,
   DescribeLiveStreamOnlineListRequest,
   DeleteLiveCallbackTemplateRequest,
   DescribeLiveSnapshotTemplateRequest,
@@ -311,6 +324,8 @@ import {
   DescribeLiveDomainResponse,
   DeleteRecordTaskRequest,
   PullStreamTaskInfo,
+  UpdateLiveWatermarkRequest,
+  CreateLiveTimeShiftTemplateResponse,
   DescribeStreamDayPlayInfoListResponse,
   StopLiveRecordRequest,
   DescribeVisitTopSumInfoListResponse,
@@ -1051,13 +1066,13 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
   }
 
   /**
-   * 查询某段时间内每个国家地区每个省份每个运营商的平均每秒流量，总流量，总请求数信息。
+   * 查询按省份和运营商分组的下行播放数据。
    */
-  async DescribeProIspPlaySumInfoList(
-    req: DescribeProIspPlaySumInfoListRequest,
-    cb?: (error: string, rep: DescribeProIspPlaySumInfoListResponse) => void
-  ): Promise<DescribeProIspPlaySumInfoListResponse> {
-    return this.request("DescribeProIspPlaySumInfoList", req, cb)
+  async DescribeGroupProIspPlayInfoList(
+    req: DescribeGroupProIspPlayInfoListRequest,
+    cb?: (error: string, rep: DescribeGroupProIspPlayInfoListResponse) => void
+  ): Promise<DescribeGroupProIspPlayInfoListResponse> {
+    return this.request("DescribeGroupProIspPlayInfoList", req, cb)
   }
 
   /**
@@ -1109,6 +1124,16 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
     cb?: (error: string, rep: StopRecordTaskResponse) => void
   ): Promise<StopRecordTaskResponse> {
     return this.request("StopRecordTask", req, cb)
+  }
+
+  /**
+   * 修改直播垫片模板。
+   */
+  async ModifyLiveTimeShiftTemplate(
+    req: ModifyLiveTimeShiftTemplateRequest,
+    cb?: (error: string, rep: ModifyLiveTimeShiftTemplateResponse) => void
+  ): Promise<ModifyLiveTimeShiftTemplateResponse> {
+    return this.request("ModifyLiveTimeShiftTemplate", req, cb)
   }
 
   /**
@@ -1212,6 +1237,16 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
   }
 
   /**
+   * 获取直播时移模板。
+   */
+  async DescribeLiveTimeShiftTemplates(
+    req?: DescribeLiveTimeShiftTemplatesRequest,
+    cb?: (error: string, rep: DescribeLiveTimeShiftTemplatesResponse) => void
+  ): Promise<DescribeLiveTimeShiftTemplatesResponse> {
+    return this.request("DescribeLiveTimeShiftTemplates", req, cb)
+  }
+
+  /**
    * 获取直播延播列表。
    */
   async DescribeLiveDelayInfoList(
@@ -1219,6 +1254,16 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
     cb?: (error: string, rep: DescribeLiveDelayInfoListResponse) => void
   ): Promise<DescribeLiveDelayInfoListResponse> {
     return this.request("DescribeLiveDelayInfoList", req, cb)
+  }
+
+  /**
+   * 获取直播时移规则列表。
+   */
+  async DescribeLiveTimeShiftRules(
+    req?: DescribeLiveTimeShiftRulesRequest,
+    cb?: (error: string, rep: DescribeLiveTimeShiftRulesResponse) => void
+  ): Promise<DescribeLiveTimeShiftRulesResponse> {
+    return this.request("DescribeLiveTimeShiftRules", req, cb)
   }
 
   /**
@@ -1370,6 +1415,17 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
   }
 
   /**
+     * 创建直播时移规则，需要先调用[CreateLiveTimeShiftTemplate](/document/product/267/84589)接口创建录制模板，将返回的模板id绑定到流使用。
+<br>直播时移相关文档：[直播时移](/document/product/267/86134)。
+     */
+  async CreateLiveTimeShiftRule(
+    req: CreateLiveTimeShiftRuleRequest,
+    cb?: (error: string, rep: CreateLiveTimeShiftRuleResponse) => void
+  ): Promise<CreateLiveTimeShiftRuleResponse> {
+    return this.request("CreateLiveTimeShiftRule", req, cb)
+  }
+
+  /**
    * 用于查询回调事件。
    */
   async DescribeCallbackRecordsList(
@@ -1453,6 +1509,16 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
   }
 
   /**
+   * 删除直播时移规则。
+   */
+  async DeleteLiveTimeShiftRule(
+    req: DeleteLiveTimeShiftRuleRequest,
+    cb?: (error: string, rep: DeleteLiveTimeShiftRuleResponse) => void
+  ): Promise<DeleteLiveTimeShiftRuleResponse> {
+    return this.request("DeleteLiveTimeShiftRule", req, cb)
+  }
+
+  /**
    * 获取水印规则列表。
    */
   async DescribeLiveWatermarkRules(
@@ -1485,13 +1551,33 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
   }
 
   /**
-   * 查询按省份和运营商分组的下行播放数据。
+   * 创建直播垫片模板。
    */
-  async DescribeGroupProIspPlayInfoList(
-    req: DescribeGroupProIspPlayInfoListRequest,
-    cb?: (error: string, rep: DescribeGroupProIspPlayInfoListResponse) => void
-  ): Promise<DescribeGroupProIspPlayInfoListResponse> {
-    return this.request("DescribeGroupProIspPlayInfoList", req, cb)
+  async CreateLiveTimeShiftTemplate(
+    req: CreateLiveTimeShiftTemplateRequest,
+    cb?: (error: string, rep: CreateLiveTimeShiftTemplateResponse) => void
+  ): Promise<CreateLiveTimeShiftTemplateResponse> {
+    return this.request("CreateLiveTimeShiftTemplate", req, cb)
+  }
+
+  /**
+   * 删除直播时移模板。
+   */
+  async DeleteLiveTimeShiftTemplate(
+    req: DeleteLiveTimeShiftTemplateRequest,
+    cb?: (error: string, rep: DeleteLiveTimeShiftTemplateResponse) => void
+  ): Promise<DeleteLiveTimeShiftTemplateResponse> {
+    return this.request("DeleteLiveTimeShiftTemplate", req, cb)
+  }
+
+  /**
+   * 查询某段时间内每个国家地区每个省份每个运营商的平均每秒流量，总流量，总请求数信息。
+   */
+  async DescribeProIspPlaySumInfoList(
+    req: DescribeProIspPlaySumInfoListRequest,
+    cb?: (error: string, rep: DescribeProIspPlaySumInfoListResponse) => void
+  ): Promise<DescribeProIspPlaySumInfoListResponse> {
+    return this.request("DescribeProIspPlaySumInfoList", req, cb)
   }
 
   /**

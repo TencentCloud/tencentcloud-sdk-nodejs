@@ -26,6 +26,69 @@ export interface DescribeInstanceShardsRequest {
 }
 
 /**
+ * ScaleOutInstance返回参数结构体
+ */
+export interface ScaleOutInstanceResponse {
+  /**
+      * 流程ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FlowId?: string
+
+  /**
+      * 实例ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceId?: string
+
+  /**
+      * 错误信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ErrorMsg?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ResizeDisk请求参数结构体
+ */
+export interface ResizeDiskRequest {
+  /**
+   * 实例唯一ID
+   */
+  InstanceId: string
+
+  /**
+   * 节点类型，DATA：clickhouse节点，COMMON：为zookeeper节点
+   */
+  Type: string
+
+  /**
+   * 磁盘扩容后容量，不能小于原有用量。clickhouse最小200，且为100的整数倍。 zk最小100，且为10的整数倍；
+   */
+  DiskSize: number
+}
+
+/**
+ * DescribeInstanceKeyValConfigs请求参数结构体
+ */
+export interface DescribeInstanceKeyValConfigsRequest {
+  /**
+   * 集群实例ID
+   */
+  InstanceId: string
+
+  /**
+   * 搜索的配置项名称
+   */
+  SearchConfigName?: string
+}
+
+/**
  * OpenBackUp返回参数结构体
  */
 export interface OpenBackUpResponse {
@@ -54,6 +117,21 @@ export interface Charge {
    * 预付费需要传递，计费时间长度，多少个月
    */
   TimeSpan?: number
+}
+
+/**
+ * DescribeClusterConfigs返回参数结构体
+ */
+export interface DescribeClusterConfigsResponse {
+  /**
+   * 返回实例的配置文件相关的信息
+   */
+  ClusterConfList: Array<ClusterConfigsInfoFromEMR>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -118,6 +196,16 @@ export interface CkUserAlterInfo {
 }
 
 /**
+ * DescribeBackUpSchedule请求参数结构体
+ */
+export interface DescribeBackUpScheduleRequest {
+  /**
+   * 集群id
+   */
+  InstanceId: string
+}
+
+/**
  * DescribeSpec返回参数结构体
  */
 export interface DescribeSpecResponse {
@@ -136,6 +224,27 @@ export interface DescribeSpecResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   AttachCBSSpec: Array<DiskSpec>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyInstanceKeyValConfigs返回参数结构体
+ */
+export interface ModifyInstanceKeyValConfigsResponse {
+  /**
+      * 错误信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ErrorMsg: string
+
+  /**
+   * ID
+   */
+  FlowId: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -213,18 +322,75 @@ export interface ResourceSpec {
 export type ModifyUserNewPrivilegeRequest = null
 
 /**
- * DescribeInstance返回参数结构体
+ * DescribeCkSqlApis请求参数结构体
  */
-export interface DescribeInstanceResponse {
+export interface DescribeCkSqlApisRequest {
   /**
-   * 实例描述信息
+   * 实例id
    */
-  InstanceInfo: InstanceInfo
+  InstanceId: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * api接口名称,GetClusters:获取集群cluster列表
+GetSystemUsers:获取系统用户列表
+CheckNodeCluster: 检查节点是否隶属一个cluster
+GetClusterDatabases: 获取一个cluster下的数据库列表
+GetClusterTables: 获取一个cluster下的数据库表列表
+GetPrivilegeUsers: 获取授权的用户列表
+GET_USER_CLUSTER_PRIVILEGES:获取用户cluster下的权限   
+GetUserClusterNewPrivileges:获取用户cluster下的权限 (新版）
+RevokeClusterUser:解绑cluster用户
+DeleteSystemUser:删除系统用户 —— 必须所有cluster先解绑
+GetUserOptionMessages:获取用户配置备注信息
+GET_USER_CONFIGS:获取用户配置列表  QUOTA、PROFILE、POLICY
+      */
+  ApiType: string
+
+  /**
+   * 集群名称，GET_SYSTEM_USERS，GET_PRIVILEGE_USERS，GET_CLUSTER_DATABASES，GET_CLUSTER_TABLES 必填
    */
-  RequestId?: string
+  Cluster?: string
+
+  /**
+   * 用户名称，api与user相关的必填
+   */
+  UserName?: string
+}
+
+/**
+ * 用于返回XML格式的配置文件和内容以及其他配置文件有关的信息
+ */
+export interface ClusterConfigsInfoFromEMR {
+  /**
+   * 配置文件名称
+   */
+  FileName: string
+
+  /**
+   * 配置文件对应的相关属性信息
+   */
+  FileConf: string
+
+  /**
+   * 配置文件对应的其他属性信息
+   */
+  KeyConf: string
+
+  /**
+   * 配置文件的内容，base64编码
+   */
+  OriParam: string
+
+  /**
+   * 用于表示当前配置文件是不是有过修改后没有重启，提醒用户需要重启
+   */
+  NeedRestart: number
+
+  /**
+      * 保存配置文件的路径
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FilePath: string
 }
 
 /**
@@ -594,6 +760,59 @@ Modify 集群变更中；
 }
 
 /**
+ * ModifyClusterConfigs请求参数结构体
+ */
+export interface ModifyClusterConfigsRequest {
+  /**
+   * 集群ID，例如cdwch-xxxx
+   */
+  InstanceId: string
+
+  /**
+   * 配置文件修改信息
+   */
+  ModifyConfContext: Array<ConfigSubmitContext>
+
+  /**
+   * 修改原因
+   */
+  Remark?: string
+}
+
+/**
+ * DescribeInstanceKeyValConfigs返回参数结构体
+ */
+export interface DescribeInstanceKeyValConfigsResponse {
+  /**
+   * 参数列表
+   */
+  ConfigItems: Array<InstanceConfigInfo>
+
+  /**
+      * 未配置的参数列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UnConfigItems: Array<InstanceConfigInfo>
+
+  /**
+      * 配置的多层级参数列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MapConfigItems: Array<MapConfigItem>
+
+  /**
+      * 错误信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ErrorMsg: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyClusterConfigs返回参数结构体
  */
 export interface ModifyClusterConfigsResponse {
@@ -644,39 +863,99 @@ export interface DiskSpec {
 }
 
 /**
- * DescribeCkSqlApis请求参数结构体
+ * DescribeClusterConfigs请求参数结构体
  */
-export interface DescribeCkSqlApisRequest {
+export interface DescribeClusterConfigsRequest {
   /**
-   * 实例id
+   * 集群实例ID
+   */
+  InstanceId: string
+}
+
+/**
+ * ModifyInstanceKeyValConfigs请求参数结构体
+ */
+export interface ModifyInstanceKeyValConfigsRequest {
+  /**
+   * 实例ID
    */
   InstanceId: string
 
   /**
-      * api接口名称,GetClusters:获取集群cluster列表
-GetSystemUsers:获取系统用户列表
-CheckNodeCluster: 检查节点是否隶属一个cluster
-GetClusterDatabases: 获取一个cluster下的数据库列表
-GetClusterTables: 获取一个cluster下的数据库表列表
-GetPrivilegeUsers: 获取授权的用户列表
-GET_USER_CLUSTER_PRIVILEGES:获取用户cluster下的权限   
-GetUserClusterNewPrivileges:获取用户cluster下的权限 (新版）
-RevokeClusterUser:解绑cluster用户
-DeleteSystemUser:删除系统用户 —— 必须所有cluster先解绑
-GetUserOptionMessages:获取用户配置备注信息
-GET_USER_CONFIGS:获取用户配置列表  QUOTA、PROFILE、POLICY
+   * 新增配置列表
+   */
+  AddItems?: Array<InstanceConfigItem>
+
+  /**
+   * 更新配置列表
+   */
+  UpdateItems?: Array<InstanceConfigItem>
+
+  /**
+   * 删除配置列表
+   */
+  DeleteItems?: InstanceConfigItem
+
+  /**
+   * 删除配置列表
+   */
+  DelItems?: Array<InstanceConfigItem>
+
+  /**
+   * 备注
+   */
+  Remark?: string
+}
+
+/**
+ * kv配置，多层级item
+ */
+export interface MapConfigItem {
+  /**
+   * key
+   */
+  ConfKey: string
+
+  /**
+   * 列表
+   */
+  Items: Array<InstanceConfigInfo>
+}
+
+/**
+ * ScaleOutInstance请求参数结构体
+ */
+export interface ScaleOutInstanceRequest {
+  /**
+   * 实例唯一ID
+   */
+  InstanceId: string
+
+  /**
+   * 节点类型，DATA：clickhouse节点，COMMON：为zookeeper节点
+   */
+  Type: string
+
+  /**
+   * 调整clickhouse节点数量
+   */
+  NodeCount: number
+
+  /**
+      * v_cluster分组，	
+新增扩容节点将加入到已选择的v_cluster分组中，提交同步VIP生效.
       */
-  ApiType: string
+  ScaleOutCluster?: string
 
   /**
-   * 集群名称，GET_SYSTEM_USERS，GET_PRIVILEGE_USERS，GET_CLUSTER_DATABASES，GET_CLUSTER_TABLES 必填
+   * 子网剩余ip数量，用于判断当前实例子网剩余ip数是否能扩容。需要根据实际填写
    */
-  Cluster?: string
+  UserSubnetIPNum?: number
 
   /**
-   * 用户名称，api与user相关的必填
+   * 节点同步ip
    */
-  UserName?: string
+  ScaleOutNodeIp?: string
 }
 
 /**
@@ -690,23 +969,58 @@ export interface CreateBackUpScheduleResponse {
 }
 
 /**
- * ModifyClusterConfigs请求参数结构体
+ * KV配置
  */
-export interface ModifyClusterConfigsRequest {
+export interface InstanceConfigItem {
   /**
-   * 集群ID，例如cdwch-xxxx
+   * key
+   */
+  ConfKey: string
+
+  /**
+   * value
+   */
+  ConfValue: string
+}
+
+/**
+ * DescribeInstance返回参数结构体
+ */
+export interface DescribeInstanceResponse {
+  /**
+   * 实例描述信息
+   */
+  InstanceInfo: InstanceInfo
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ScaleUpInstance请求参数结构体
+ */
+export interface ScaleUpInstanceRequest {
+  /**
+   * 实例唯一ID
    */
   InstanceId: string
 
   /**
-   * 配置文件修改信息
+   * 节点类型，DATA：clickhouse节点，COMMON：为zookeeper节点
    */
-  ModifyConfContext: Array<ConfigSubmitContext>
+  Type: string
 
   /**
-   * 修改原因
+   * clickhouse节点规格。
    */
-  Remark?: string
+  SpecName: string
+
+  /**
+   * 是否滚动重启，false为不滚动重启，true为滚动重启
+   */
+  ScaleUpEnableRolling: boolean
 }
 
 /**
@@ -763,6 +1077,66 @@ export interface DescribeInstanceShardsResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 集群配置信息
+ */
+export interface InstanceConfigInfo {
+  /**
+   * 配置项名称
+   */
+  ConfKey: string
+
+  /**
+   * 配置项内容
+   */
+  ConfValue: string
+
+  /**
+   * 默认值
+   */
+  DefaultValue?: string
+
+  /**
+   * 是否需要重启
+   */
+  NeedRestart?: boolean
+
+  /**
+   * 是否可编辑
+   */
+  Editable?: boolean
+
+  /**
+   * 配置项解释
+   */
+  ConfDesc?: string
+
+  /**
+   * 文件名称
+   */
+  FileName?: string
+
+  /**
+   * 规则名称类型
+   */
+  ModifyRuleType?: string
+
+  /**
+   * 规则名称内容
+   */
+  ModifyRuleValue?: string
+
+  /**
+   * 修改人的uin
+   */
+  Uin?: string
+
+  /**
+   * 修改时间
+   */
+  ModifyTime?: string
 }
 
 /**
@@ -852,6 +1226,103 @@ export interface Tag {
 }
 
 /**
+ * 策略详情
+ */
+export interface ScheduleStrategy {
+  /**
+      * 备份桶列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CosBucketName: string
+
+  /**
+   * 备份保留天数
+   */
+  RetainDays: number
+
+  /**
+   * 备份的天
+   */
+  WeekDays: string
+
+  /**
+   * 备份小时
+   */
+  ExecuteHour: number
+
+  /**
+   * 策略id
+   */
+  ScheduleId: number
+}
+
+/**
+ * ResizeDisk返回参数结构体
+ */
+export interface ResizeDiskResponse {
+  /**
+      * 流程ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FlowId: string
+
+  /**
+      * 实例ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceId: string
+
+  /**
+      * 错误信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ErrorMsg: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeBackUpSchedule返回参数结构体
+ */
+export interface DescribeBackUpScheduleResponse {
+  /**
+   * 备份是否开启
+   */
+  BackUpOpened: boolean
+
+  /**
+      * 元数据备份策略
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MetaStrategy: ScheduleStrategy
+
+  /**
+      * 表数据备份策略
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DataStrategy: ScheduleStrategy
+
+  /**
+      * 备份表列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BackUpContents: Array<BackupTableContent>
+
+  /**
+   * 备份的状态
+   */
+  BackUpStatus: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeCkSqlApis返回参数结构体
  */
 export interface DescribeCkSqlApisResponse {
@@ -860,6 +1331,34 @@ export interface DescribeCkSqlApisResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ReturnData: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ScaleUpInstance返回参数结构体
+ */
+export interface ScaleUpInstanceResponse {
+  /**
+      * 流程ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FlowId: string
+
+  /**
+      * 实例ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceId: string
+
+  /**
+      * 错误信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ErrorMsg: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

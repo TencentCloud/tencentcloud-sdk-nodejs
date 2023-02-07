@@ -154,6 +154,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeRollbackTimeRange", req, cb);
     }
     /**
+     * 本接口（DescribeFlow）用于查询任务流信息
+     */
+    async DescribeFlow(req, cb) {
+        return this.request("DescribeFlow", req, cb);
+    }
+    /**
      * 修改指定集群的备份配置
      */
     async ModifyBackupConfig(req, cb) {

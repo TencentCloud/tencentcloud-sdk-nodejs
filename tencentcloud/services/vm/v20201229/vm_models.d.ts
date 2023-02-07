@@ -737,6 +737,11 @@ export interface TaskData {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     UpdatedAt: string;
+    /**
+      * 该字段用于返回审核服务的媒体内容信息，主要包括传入文件类型和访问地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InputInfo: InputInfo;
 }
 /**
  * 媒体类型

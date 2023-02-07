@@ -26,6 +26,7 @@ import {
   DescribeFileAttributesTask,
   ReviewAudioVideoTaskInput,
   DescribeAllClassRequest,
+  DescribeRoundPlaysRequest,
   WeChatMiniProgramPublishRequest,
   AiAnalysisTaskClassificationInput,
   SvgWatermarkInput,
@@ -97,6 +98,7 @@ import {
   MediaProcessTaskSampleSnapshotResult,
   DescribeDailyMediaPlayStatRequest,
   TerrorismImgReviewTemplateInfoForUpdate,
+  FaceConfigureInfoForUpdate,
   ModifyTranscodeTemplateRequest,
   AiAnalysisTaskHighlightResult,
   DeleteAIAnalysisTemplateResponse,
@@ -172,7 +174,7 @@ import {
   TaskStatData,
   CreateVodDomainRequest,
   OcrFullTextConfigureInfoForUpdate,
-  ProcessMediaByProcedureRequest,
+  DeleteRoundPlayRequest,
   MediaImageSpriteInfo,
   ProductInstanceRecource,
   MediaProcessTaskAnimatedGraphicResult,
@@ -219,6 +221,7 @@ import {
   ForbidMediaDistributionResponse,
   TimeRange,
   DescribeAdaptiveDynamicStreamingTemplatesRequest,
+  ModifyRoundPlayRequest,
   ImageWatermarkInput,
   ObjectConfigureInfo,
   AsrFullTextConfigureInfoForUpdate,
@@ -243,6 +246,7 @@ import {
   AiReviewTaskPornOcrResult,
   ModifyContentReviewTemplateResponse,
   DescribeWatermarkTemplatesRequest,
+  RoundPlayInfo,
   CoverBySnapshotTaskInput,
   SegmentConfigureInfoForUpdate,
   UserDefineConfigureInfo,
@@ -268,6 +272,7 @@ import {
   ModifyMediaStorageClassRequest,
   AiAnalysisTaskTagOutput,
   AiAnalysisTaskHighlightOutput,
+  CreateRoundPlayResponse,
   MediaSubtitleInput,
   ProcessMediaRequest,
   PornImageResult,
@@ -280,6 +285,7 @@ import {
   RestoreMediaResponse,
   MediaProcessTaskSnapshotByTimeOffsetResult,
   ManageTaskRequest,
+  RoundPlayListItemInfo,
   ModifyEventConfigRequest,
   AiRecognitionTaskAsrWordsResultOutput,
   DescribeHeadTailTemplatesRequest,
@@ -410,6 +416,7 @@ import {
   AiReviewPoliticalAsrTaskInput,
   PullUploadRequest,
   SortBy,
+  ProcessMediaByProcedureRequest,
   ClipTask2017,
   TranscodeTemplate,
   DescribeCDNUsageDataRequest,
@@ -422,6 +429,7 @@ import {
   AiReviewProhibitedAsrTaskInput,
   MediaContentReviewSegmentItem,
   TerrorismOcrReviewTemplateInfo,
+  CreateRoundPlayRequest,
   AiReviewTaskPornResult,
   AiRecognitionTaskObjectResultOutput,
   DescribeMediaPlayStatDetailsRequest,
@@ -443,6 +451,7 @@ import {
   DescribeCDNStatDetailsRequest,
   HeadTailTaskInput,
   DescribeImageReviewUsageDataResponse,
+  DeleteRoundPlayResponse,
   StatDataItem,
   CreateStorageRegionResponse,
   AccelerateAreaInfo,
@@ -454,7 +463,6 @@ import {
   HeadTailConfigureInfo,
   EventContent,
   HighlightsConfigureInfoForUpdate,
-  AiRecognitionTaskObjectResult,
   UserDefineConfigureInfoForUpdate,
   ExtractTraceWatermarkTaskInput,
   AiReviewPoliticalAsrTaskOutput,
@@ -514,6 +522,7 @@ import {
   CreateClassRequest,
   AiSampleFailFaceInfo,
   UserDefineFaceReviewTemplateInfoForUpdate,
+  ModifyRoundPlayResponse,
   CreateProcedureTemplateResponse,
   DomainHTTPSConfig,
   DescribeMediaProcessUsageDataResponse,
@@ -577,6 +586,7 @@ import {
   ImageOperation,
   DescribeWatermarkTemplatesResponse,
   WeChatMiniProgramPublishResponse,
+  DescribeRoundPlaysResponse,
   ImageTransform,
   CreateAnimatedGraphicsTemplateRequest,
   FrameTagConfigureInfo,
@@ -595,7 +605,7 @@ import {
   SplitMediaResponse,
   RestoreMediaRequest,
   PullEventsRequest,
-  FaceConfigureInfoForUpdate,
+  AiRecognitionTaskObjectResult,
   DescribeAIAnalysisTemplatesResponse,
   CreateSnapshotByTimeOffsetTemplateRequest,
   AiRecognitionTaskAsrWordsResult,
@@ -684,13 +694,15 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建用户自定义指定时间点截图模板，数量上限：16。
-   */
-  async CreateSnapshotByTimeOffsetTemplate(
-    req: CreateSnapshotByTimeOffsetTemplateRequest,
-    cb?: (error: string, rep: CreateSnapshotByTimeOffsetTemplateResponse) => void
-  ): Promise<CreateSnapshotByTimeOffsetTemplateResponse> {
-    return this.request("CreateSnapshotByTimeOffsetTemplate", req, cb)
+     * 该接口用于创建轮播播单，数量上限：100。
+轮播播单的每个文件可以指定源文件，也可以指定某个转码文件。
+指定的文件必须是hls格式，所有的播单文件最好保持相同的码率和分辨率。
+     */
+  async CreateRoundPlay(
+    req: CreateRoundPlayRequest,
+    cb?: (error: string, rep: CreateRoundPlayResponse) => void
+  ): Promise<CreateRoundPlayResponse> {
+    return this.request("CreateRoundPlay", req, cb)
   }
 
   /**
@@ -772,13 +784,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除用户自定义转动图模板。
+   * 创建用户自定义指定时间点截图模板，数量上限：16。
    */
-  async DeleteAnimatedGraphicsTemplate(
-    req: DeleteAnimatedGraphicsTemplateRequest,
-    cb?: (error: string, rep: DeleteAnimatedGraphicsTemplateResponse) => void
-  ): Promise<DeleteAnimatedGraphicsTemplateResponse> {
-    return this.request("DeleteAnimatedGraphicsTemplate", req, cb)
+  async CreateSnapshotByTimeOffsetTemplate(
+    req: CreateSnapshotByTimeOffsetTemplateRequest,
+    cb?: (error: string, rep: CreateSnapshotByTimeOffsetTemplateResponse) => void
+  ): Promise<CreateSnapshotByTimeOffsetTemplateResponse> {
+    return this.request("CreateSnapshotByTimeOffsetTemplate", req, cb)
   }
 
   /**
@@ -992,15 +1004,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 该接口用于开通某地域的存储。
-  1. 用户开通点播业务时，系统默认为用户开通了部分地域的存储，用户如果需要开通其它地域的存储，可以通过该接口进行开通。
-  2. 通过 DescribeStorageRegions 接口可以查询到所有存储地域及已经开通的地域。
-     */
-  async CreateStorageRegion(
-    req: CreateStorageRegionRequest,
-    cb?: (error: string, rep: CreateStorageRegionResponse) => void
-  ): Promise<CreateStorageRegionResponse> {
-    return this.request("CreateStorageRegion", req, cb)
+   * 该接口用于批量创建关键词样本，样本用于通过OCR、ASR技术，进行不适宜内容识别、内容识别等视频处理。
+   */
+  async CreateWordSamples(
+    req: CreateWordSamplesRequest,
+    cb?: (error: string, rep: CreateWordSamplesResponse) => void
+  ): Promise<CreateWordSamplesResponse> {
+    return this.request("CreateWordSamples", req, cb)
   }
 
   /**
@@ -1453,13 +1463,26 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 该接口用于根据素材 ID，修改素材样本信息，包括名称、描述的修改，以及五官、标签的添加、删除、重置操作。五官删除操作需保证至少剩余 1 张图片，否则，请使用重置操作。
-   */
-  async ModifyPersonSample(
-    req: ModifyPersonSampleRequest,
-    cb?: (error: string, rep: ModifyPersonSampleResponse) => void
-  ): Promise<ModifyPersonSampleResponse> {
-    return this.request("ModifyPersonSample", req, cb)
+     * 该接口用于开通某地域的存储。
+  1. 用户开通点播业务时，系统默认为用户开通了部分地域的存储，用户如果需要开通其它地域的存储，可以通过该接口进行开通。
+  2. 通过 DescribeStorageRegions 接口可以查询到所有存储地域及已经开通的地域。
+     */
+  async CreateStorageRegion(
+    req: CreateStorageRegionRequest,
+    cb?: (error: string, rep: CreateStorageRegionResponse) => void
+  ): Promise<CreateStorageRegionResponse> {
+    return this.request("CreateStorageRegion", req, cb)
+  }
+
+  /**
+     * 该接口用于修改轮播播单。
+修改后只有新的播放请求会生效，已经在播放中的用户在七天之内还可以播放修改前的播单。
+     */
+  async ModifyRoundPlay(
+    req: ModifyRoundPlayRequest,
+    cb?: (error: string, rep: ModifyRoundPlayResponse) => void
+  ): Promise<ModifyRoundPlayResponse> {
+    return this.request("ModifyRoundPlay", req, cb)
   }
 
   /**
@@ -1472,6 +1495,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDailyMediaPlayStatResponse) => void
   ): Promise<DescribeDailyMediaPlayStatResponse> {
     return this.request("DescribeDailyMediaPlayStat", req, cb)
+  }
+
+  /**
+   * 删除用户自定义转动图模板。
+   */
+  async DeleteAnimatedGraphicsTemplate(
+    req: DeleteAnimatedGraphicsTemplateRequest,
+    cb?: (error: string, rep: DeleteAnimatedGraphicsTemplateResponse) => void
+  ): Promise<DeleteAnimatedGraphicsTemplateResponse> {
+    return this.request("DeleteAnimatedGraphicsTemplate", req, cb)
   }
 
   /**
@@ -1749,6 +1782,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 该接口用于根据素材 ID，修改素材样本信息，包括名称、描述的修改，以及五官、标签的添加、删除、重置操作。五官删除操作需保证至少剩余 1 张图片，否则，请使用重置操作。
+   */
+  async ModifyPersonSample(
+    req: ModifyPersonSampleRequest,
+    cb?: (error: string, rep: ModifyPersonSampleResponse) => void
+  ): Promise<ModifyPersonSampleResponse> {
+    return this.request("ModifyPersonSample", req, cb)
+  }
+
+  /**
    * 查询转动图模板列表，支持根据条件，分页查询。
    */
   async DescribeAnimatedGraphicsTemplates(
@@ -1826,13 +1869,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 该接口用于批量创建关键词样本，样本用于通过OCR、ASR技术，进行不适宜内容识别、内容识别等视频处理。
+   * 该接口用于获取轮播播单列表。
    */
-  async CreateWordSamples(
-    req: CreateWordSamplesRequest,
-    cb?: (error: string, rep: CreateWordSamplesResponse) => void
-  ): Promise<CreateWordSamplesResponse> {
-    return this.request("CreateWordSamples", req, cb)
+  async DescribeRoundPlays(
+    req: DescribeRoundPlaysRequest,
+    cb?: (error: string, rep: DescribeRoundPlaysResponse) => void
+  ): Promise<DescribeRoundPlaysResponse> {
+    return this.request("DescribeRoundPlays", req, cb)
   }
 
   /**
@@ -1963,13 +2006,14 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建用户自定义音视频内容识别模板，数量上限：50。
-   */
-  async CreateAIRecognitionTemplate(
-    req: CreateAIRecognitionTemplateRequest,
-    cb?: (error: string, rep: CreateAIRecognitionTemplateResponse) => void
-  ): Promise<CreateAIRecognitionTemplateResponse> {
-    return this.request("CreateAIRecognitionTemplate", req, cb)
+     * 该 API 已经<font color='red'>不再维护</font>，新版播放器签名不再使用播放器配置模板，详细请参考 [播放器签名](https://cloud.tencent.com/document/product/266/45554)。
+查询播放器配置，支持根据条件，分页查询。
+     */
+  async DescribeSuperPlayerConfigs(
+    req: DescribeSuperPlayerConfigsRequest,
+    cb?: (error: string, rep: DescribeSuperPlayerConfigsResponse) => void
+  ): Promise<DescribeSuperPlayerConfigsResponse> {
+    return this.request("DescribeSuperPlayerConfigs", req, cb)
   }
 
   /**
@@ -2270,6 +2314,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 该接口用于删除轮播播单。
+   */
+  async DeleteRoundPlay(
+    req: DeleteRoundPlayRequest,
+    cb?: (error: string, rep: DeleteRoundPlayResponse) => void
+  ): Promise<DeleteRoundPlayResponse> {
+    return this.request("DeleteRoundPlay", req, cb)
+  }
+
+  /**
      * 该 API 已经<font color=red>不再维护</font>，新版审核模板支持音视频审核和图片审核，详细请参考 [修改审核模板](https://cloud.tencent.com/document/api/266/84388)。
 修改用户自定义音视频内容审核模板。
      */
@@ -2292,14 +2346,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 该 API 已经<font color='red'>不再维护</font>，新版播放器签名不再使用播放器配置模板，详细请参考 [播放器签名](https://cloud.tencent.com/document/product/266/45554)。
-查询播放器配置，支持根据条件，分页查询。
-     */
-  async DescribeSuperPlayerConfigs(
-    req: DescribeSuperPlayerConfigsRequest,
-    cb?: (error: string, rep: DescribeSuperPlayerConfigsResponse) => void
-  ): Promise<DescribeSuperPlayerConfigsResponse> {
-    return this.request("DescribeSuperPlayerConfigs", req, cb)
+   * 创建用户自定义音视频内容识别模板，数量上限：50。
+   */
+  async CreateAIRecognitionTemplate(
+    req: CreateAIRecognitionTemplateRequest,
+    cb?: (error: string, rep: CreateAIRecognitionTemplateResponse) => void
+  ): Promise<CreateAIRecognitionTemplateResponse> {
+    return this.request("CreateAIRecognitionTemplate", req, cb)
   }
 
   /**

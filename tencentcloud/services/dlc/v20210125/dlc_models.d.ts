@@ -226,6 +226,15 @@ export interface CreateResultDownloadResponse {
     RequestId?: string;
 }
 /**
+ * ModifyGovernEventRule返回参数结构体
+ */
+export interface ModifyGovernEventRuleResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * CreateDMSDatabase返回参数结构体
  */
 export interface CreateDMSDatabaseResponse {
@@ -346,7 +355,7 @@ export interface DescribeTablesResponse {
     RequestId?: string;
 }
 /**
- * spark作业详情
+ * spark作业详情。
  */
 export interface SparkJobInfo {
     /**
@@ -476,6 +485,11 @@ export interface SparkJobInfo {
       */
     JobArchives: string;
     /**
+      * Spark Image 版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SparkImage: string;
+    /**
       * pyspark：python依赖, 除py文件外，还支持zip/egg等归档格式，多文件以逗号分隔
 注意：此字段可能返回 null，表示取不到有效值。
       */
@@ -490,6 +504,11 @@ export interface SparkJobInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     DataEngineStatus: number;
+    /**
+      * 指定的Executor数量（最大值），默认为1，当开启动态分配有效，若未开启，则该值等于JobExecutorNums
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    JobExecutorMaxNumbers?: number;
 }
 /**
  * SuspendResumeDataEngine返回参数结构体
@@ -919,6 +938,18 @@ export interface ModifySparkAppRequest {
       * archives：依赖资源
       */
     AppArchives?: string;
+    /**
+      * Spark Image 版本
+      */
+    SparkImage?: string;
+    /**
+      * Spark Image 版本名称
+      */
+    SparkImageVersion?: string;
+    /**
+      * 指定的Executor数量（最大值），默认为1，当开启动态分配有效，若未开启，则该值等于AppExecutorNums
+      */
+    AppExecutorMaxNumbers?: number;
 }
 /**
  * spark流任务统计信息
@@ -1722,11 +1753,11 @@ export interface DescribeSparkAppJobResponse {
       * spark作业详情
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Job: SparkJobInfo;
+    Job?: SparkJobInfo;
     /**
       * 查询的spark作业是否存在
       */
-    IsExists: boolean;
+    IsExists?: boolean;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3531,6 +3562,11 @@ export interface DMSColumnOrder {
  */
 export interface CreateSparkAppResponse {
     /**
+      * App唯一标识
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SparkAppId?: string;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
@@ -3621,11 +3657,11 @@ export interface DescribeSparkAppJobsResponse {
     /**
       * spark作业列表详情
       */
-    SparkAppJobs: Array<SparkJobInfo>;
+    SparkAppJobs?: Array<SparkJobInfo>;
     /**
       * spark作业总数
       */
-    TotalCount: number;
+    TotalCount?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3947,6 +3983,18 @@ export interface CreateSparkAppRequest {
       * archives：依赖资源
       */
     AppArchives?: string;
+    /**
+      * Spark Image 版本
+      */
+    SparkImage?: string;
+    /**
+      * Spark Image 版本名称
+      */
+    SparkImageVersion?: string;
+    /**
+      * 指定的Executor数量（最大值），默认为1，当开启动态分配有效，若未开启，则该值等于AppExecutorNums
+      */
+    AppExecutorMaxNumbers?: number;
 }
 /**
  * UnbindWorkGroupsFromUser返回参数结构体
@@ -4224,6 +4272,10 @@ export interface DescribeDMSTableRequest {
       */
     Type?: string;
 }
+/**
+ * ModifyGovernEventRule请求参数结构体
+ */
+export declare type ModifyGovernEventRuleRequest = null;
 /**
  * DescribeViews返回参数结构体
  */

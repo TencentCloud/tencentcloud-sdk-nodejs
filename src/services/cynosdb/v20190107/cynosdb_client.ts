@@ -57,6 +57,7 @@ import {
   SearchClusterTablesRequest,
   PauseServerlessRequest,
   ModifiableInfo,
+  DescribeFlowResponse,
   RevokeAccountPrivilegesResponse,
   CreateClustersResponse,
   SetRenewFlagRequest,
@@ -160,7 +161,7 @@ import {
   RevokeAccountPrivilegesRequest,
   DescribeAuditRuleTemplatesRequest,
   InstanceSpec,
-  InquirePriceCreateResponse,
+  DescribeFlowRequest,
   AuditLogFile,
   SetRenewFlagResponse,
   Account,
@@ -180,6 +181,7 @@ import {
   CreateAuditLogFileRequest,
   DeleteAuditLogFileRequest,
   AddInstancesRequest,
+  InquirePriceCreateResponse,
   ModifyClusterSlaveZoneRequest,
   GrantAccountPrivilegesResponse,
   ClusterParamModifyLog,
@@ -438,6 +440,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeRollbackTimeRangeResponse) => void
   ): Promise<DescribeRollbackTimeRangeResponse> {
     return this.request("DescribeRollbackTimeRange", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeFlow）用于查询任务流信息
+   */
+  async DescribeFlow(
+    req: DescribeFlowRequest,
+    cb?: (error: string, rep: DescribeFlowResponse) => void
+  ): Promise<DescribeFlowResponse> {
+    return this.request("DescribeFlow", req, cb)
   }
 
   /**

@@ -194,6 +194,27 @@ export interface DescribeAllClassRequest {
     SubAppId?: number;
 }
 /**
+ * DescribeRoundPlays请求参数结构体
+ */
+export interface DescribeRoundPlaysRequest {
+    /**
+      * <b>点播 [子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+      */
+    SubAppId?: number;
+    /**
+      * 轮播播单标识过滤条件，数组长度限制：100。
+      */
+    RoundPlayIds?: Array<string>;
+    /**
+      * 分页偏移量，默认值：0。
+      */
+    Offset?: number;
+    /**
+      * 返回记录条数，默认值：10，最大值：100。
+      */
+    Limit?: number;
+}
+/**
  * WeChatMiniProgramPublish请求参数结构体
  */
 export interface WeChatMiniProgramPublishRequest {
@@ -2052,6 +2073,40 @@ export interface TerrorismImgReviewTemplateInfoForUpdate {
     ReviewConfidence?: number;
 }
 /**
+ * 人脸识别任务控制参数
+ */
+export interface FaceConfigureInfoForUpdate {
+    /**
+      * 人脸识别任务开关，可选值：
+<li>ON：开启智能人脸识别任务；</li>
+<li>OFF：关闭智能人脸识别任务。</li>
+      */
+    Switch?: string;
+    /**
+      * 人脸识别过滤分数，当识别结果达到该分数以上，返回识别结果。取值范围：0-100。
+      */
+    Score?: number;
+    /**
+      * 默认人物过滤标签，指定需要返回的默认人物的标签。如果未填或者为空，则全部默认人物结果都返回。标签可选值：
+<li>entertainment：娱乐明星；</li>
+<li>sport：体育明星；</li>
+<li>politician：相关人物。</li>
+      */
+    DefaultLibraryLabelSet?: Array<string>;
+    /**
+      * 用户自定义人物过滤标签，指定需要返回的用户自定义人物的标签。如果未填或者为空，则全部自定义人物结果都返回。
+标签个数最多 100 个，每个标签长度最多 16 个字符。
+      */
+    UserDefineLibraryLabelSet?: Array<string>;
+    /**
+      * 人物库选择，可选值：
+<li>Default：使用默认人物库；</li>
+<li>UserDefine：使用用户自定义人物库。</li>
+<li>All：同时使用默认人物库和用户自定义人物库。</li>
+      */
+    FaceLibrary?: string;
+}
+/**
  * ModifyTranscodeTemplate请求参数结构体
  */
 export interface ModifyTranscodeTemplateRequest {
@@ -3774,41 +3829,17 @@ export interface OcrFullTextConfigureInfoForUpdate {
     Switch?: string;
 }
 /**
- * ProcessMediaByProcedure请求参数结构体
+ * DeleteRoundPlay请求参数结构体
  */
-export interface ProcessMediaByProcedureRequest {
+export interface DeleteRoundPlayRequest {
     /**
-      * 媒体文件 ID。
+      * 轮播播单唯一标识。
       */
-    FileId: string;
+    RoundPlayId: string;
     /**
-      * [任务流模板](/document/product/266/11700#.E4.BB.BB.E5.8A.A1.E6.B5.81.E6.A8.A1.E6.9D.BF)名字。
-      */
-    ProcedureName: string;
-    /**
-      * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+      * <b>点播 [子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
       */
     SubAppId?: number;
-    /**
-      * 任务流的优先级，数值越大优先级越高，取值范围是-10到10，不填代表0。
-      */
-    TasksPriority?: number;
-    /**
-      * 任务流状态变更通知模式，可取值有 Finish，Change 和 None，不填代表 Finish。
-      */
-    TasksNotifyMode?: string;
-    /**
-      * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。
-      */
-    SessionContext?: string;
-    /**
-      * 用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
-      */
-    SessionId?: string;
-    /**
-      * 保留字段，特殊用途时使用。
-      */
-    ExtInfo?: string;
 }
 /**
  * 点播文件雪碧图信息
@@ -4895,6 +4926,36 @@ export interface DescribeAdaptiveDynamicStreamingTemplatesRequest {
     Type?: string;
 }
 /**
+ * ModifyRoundPlay请求参数结构体
+ */
+export interface ModifyRoundPlayRequest {
+    /**
+      * 轮播播单唯一标识。
+      */
+    RoundPlayId: string;
+    /**
+      * <b>点播 [子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+      */
+    SubAppId?: number;
+    /**
+      * 启播时间，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#52)。
+      */
+    StartTime?: string;
+    /**
+      * 轮播列表。
+<li>数组长度限制：100。</li>
+      */
+    RoundPlaylist?: Array<RoundPlayListItemInfo>;
+    /**
+      * 轮播播单名称，长度限制：64 个字符。
+      */
+    Name?: string;
+    /**
+      * 轮播播单描述信息，长度限制：256 个字符。
+      */
+    Desc?: string;
+}
+/**
  * 图片水印模板输入参数
  */
 export interface ImageWatermarkInput {
@@ -5531,6 +5592,31 @@ export interface DescribeWatermarkTemplatesRequest {
     Limit?: number;
 }
 /**
+ * 轮播任务信息
+ */
+export interface RoundPlayInfo {
+    /**
+      * 轮播播单标识。
+      */
+    RoundPlayId: string;
+    /**
+      * 启播时间，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#52)。
+      */
+    StartTime: string;
+    /**
+      * 轮播列表。
+      */
+    RoundPlaylist: Array<RoundPlayListItemInfo>;
+    /**
+      * 轮播播单名称，长度限制：64 个字符。
+      */
+    Name: string;
+    /**
+      * 轮播播单描述信息，长度限制：256 个字符。
+      */
+    Desc: string;
+}
+/**
  * 对视频截图做封面任务输入参数类型
  */
 export interface CoverBySnapshotTaskInput {
@@ -6093,6 +6179,23 @@ export interface AiAnalysisTaskHighlightOutput {
     HighlightSetFileUrlExpireTime: string;
 }
 /**
+ * CreateRoundPlay返回参数结构体
+ */
+export interface CreateRoundPlayResponse {
+    /**
+      * 轮播播单唯一标识。
+      */
+    RoundPlayId?: string;
+    /**
+      * 轮播播放地址。
+      */
+    Url?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 字幕信息输入参数。
  */
 export interface MediaSubtitleInput {
@@ -6417,6 +6520,26 @@ export interface ManageTaskRequest {
       * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
       */
     SubAppId?: number;
+}
+/**
+ * 加权轮播媒体文件信息
+ */
+export interface RoundPlayListItemInfo {
+    /**
+      * 媒体文件标识。
+      */
+    FileId: string;
+    /**
+      * 播放的音视频类型，可选值：
+<li>Transcode：转码输出；转码输出会有多个模版，必须指定 Definition 字段</li>
+<li>Original：原始音视频。</li>
+Type 对应的格式必须为 HLS 格式。
+      */
+    AudioVideoType: string;
+    /**
+      * 指定播放的转码模版，当 AudioVideoType 为 Transcode 时必须指定。
+      */
+    Definition?: number;
 }
 /**
  * ModifyEventConfig请求参数结构体
@@ -9536,6 +9659,43 @@ export interface SortBy {
     Order: string;
 }
 /**
+ * ProcessMediaByProcedure请求参数结构体
+ */
+export interface ProcessMediaByProcedureRequest {
+    /**
+      * 媒体文件 ID。
+      */
+    FileId: string;
+    /**
+      * [任务流模板](/document/product/266/11700#.E4.BB.BB.E5.8A.A1.E6.B5.81.E6.A8.A1.E6.9D.BF)名字。
+      */
+    ProcedureName: string;
+    /**
+      * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+      */
+    SubAppId?: number;
+    /**
+      * 任务流的优先级，数值越大优先级越高，取值范围是-10到10，不填代表0。
+      */
+    TasksPriority?: number;
+    /**
+      * 任务流状态变更通知模式，可取值有 Finish，Change 和 None，不填代表 Finish。
+      */
+    TasksNotifyMode?: string;
+    /**
+      * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。
+      */
+    SessionContext?: string;
+    /**
+      * 用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
+      */
+    SessionId?: string;
+    /**
+      * 保留字段，特殊用途时使用。
+      */
+    ExtInfo?: string;
+}
+/**
  * 视频剪辑任务信息，该结构仅用于对 2017 版[视频剪辑](https://cloud.tencent.com/document/product/266/10156)接口发起的任务。
  */
 export interface ClipTask2017 {
@@ -9844,6 +10004,32 @@ export interface TerrorismOcrReviewTemplateInfo {
       * 判定需人工复核是否违规的分数阈值，当审核达到该分数以上，认为需人工复核，不填默认为 75 分。取值范围：0~100。
       */
     ReviewConfidence?: number;
+}
+/**
+ * CreateRoundPlay请求参数结构体
+ */
+export interface CreateRoundPlayRequest {
+    /**
+      * 启播时间，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#52)。
+      */
+    StartTime: string;
+    /**
+      * 轮播列表。
+<li>数组长度限制：100。</li>
+      */
+    RoundPlaylist: Array<RoundPlayListItemInfo>;
+    /**
+      * <b>点播 [子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+      */
+    SubAppId?: number;
+    /**
+      * 轮播播单名称，长度限制：64 个字符。
+      */
+    Name?: string;
+    /**
+      * 轮播播单描述信息，长度限制：256 个字符。
+      */
+    Desc?: string;
 }
 /**
  * 音视频审核涉及令人反感的信息的任务结果类型
@@ -10455,6 +10641,15 @@ export interface DescribeImageReviewUsageDataResponse {
     RequestId?: string;
 }
 /**
+ * DeleteRoundPlay返回参数结构体
+ */
+export interface DeleteRoundPlayResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 统计数据
  */
 export interface StatDataItem {
@@ -10738,40 +10933,6 @@ export interface HighlightsConfigureInfoForUpdate {
 <li>OFF：关闭智能精彩片段任务。</li>
       */
     Switch?: string;
-}
-/**
- * 物体识别结果。
- */
-export interface AiRecognitionTaskObjectResult {
-    /**
-      * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
-      */
-    Status: string;
-    /**
-      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/266/50368#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
-      */
-    ErrCodeExt: string;
-    /**
-      * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
-      */
-    ErrCode: number;
-    /**
-      * 错误信息。
-      */
-    Message: string;
-    /**
-      * 物体识别任务输入信息。
-      */
-    Input: AiRecognitionTaskObjectResultInput;
-    /**
-      * 物体识别任务输出信息。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Output: AiRecognitionTaskObjectResultOutput;
-    /**
-      * 物体识别任务进度，取值范围 [0-100] 。
-      */
-    Progress: number;
 }
 /**
  * 用户自定义音视频审核任务控制参数。
@@ -12237,6 +12398,15 @@ export interface UserDefineFaceReviewTemplateInfoForUpdate {
       * 判定需人工复核是否违规的分数阈值，当音视频审核达到该分数以上，认为需人工复核。取值范围：0~100。
       */
     ReviewConfidence?: number;
+}
+/**
+ * ModifyRoundPlay返回参数结构体
+ */
+export interface ModifyRoundPlayResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * CreateProcedureTemplate返回参数结构体
@@ -13812,6 +13982,23 @@ export interface WeChatMiniProgramPublishResponse {
     RequestId?: string;
 }
 /**
+ * DescribeRoundPlays返回参数结构体
+ */
+export interface DescribeRoundPlaysResponse {
+    /**
+      * 符合过滤条件的轮播播单总数。
+      */
+    TotalCount?: number;
+    /**
+      * 轮播播单详情列表。
+      */
+    RoundPlaySet?: Array<RoundPlayInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 图像旋转、翻转等操作
  */
 export interface ImageTransform {
@@ -14289,38 +14476,38 @@ export interface PullEventsRequest {
     SubAppId?: number;
 }
 /**
- * 人脸识别任务控制参数
+ * 物体识别结果。
  */
-export interface FaceConfigureInfoForUpdate {
+export interface AiRecognitionTaskObjectResult {
     /**
-      * 人脸识别任务开关，可选值：
-<li>ON：开启智能人脸识别任务；</li>
-<li>OFF：关闭智能人脸识别任务。</li>
+      * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
       */
-    Switch?: string;
+    Status: string;
     /**
-      * 人脸识别过滤分数，当识别结果达到该分数以上，返回识别结果。取值范围：0-100。
+      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/266/50368#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
       */
-    Score?: number;
+    ErrCodeExt: string;
     /**
-      * 默认人物过滤标签，指定需要返回的默认人物的标签。如果未填或者为空，则全部默认人物结果都返回。标签可选值：
-<li>entertainment：娱乐明星；</li>
-<li>sport：体育明星；</li>
-<li>politician：相关人物。</li>
+      * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
       */
-    DefaultLibraryLabelSet?: Array<string>;
+    ErrCode: number;
     /**
-      * 用户自定义人物过滤标签，指定需要返回的用户自定义人物的标签。如果未填或者为空，则全部自定义人物结果都返回。
-标签个数最多 100 个，每个标签长度最多 16 个字符。
+      * 错误信息。
       */
-    UserDefineLibraryLabelSet?: Array<string>;
+    Message: string;
     /**
-      * 人物库选择，可选值：
-<li>Default：使用默认人物库；</li>
-<li>UserDefine：使用用户自定义人物库。</li>
-<li>All：同时使用默认人物库和用户自定义人物库。</li>
+      * 物体识别任务输入信息。
       */
-    FaceLibrary?: string;
+    Input: AiRecognitionTaskObjectResultInput;
+    /**
+      * 物体识别任务输出信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Output: AiRecognitionTaskObjectResultOutput;
+    /**
+      * 物体识别任务进度，取值范围 [0-100] 。
+      */
+    Progress: number;
 }
 /**
  * DescribeAIAnalysisTemplates返回参数结构体

@@ -32,7 +32,7 @@ export interface CreateResourceRequest {
   /**
    * 资源 Id
    */
-  ResourceId: string
+  ResourceId?: string
 
   /**
    * 来源渠道
@@ -613,7 +613,7 @@ export interface CreateEnvironmentResponse {
       * 成功时为环境ID，失败为null
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Result: string
+  Result?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -972,19 +972,19 @@ export interface CreateEnvironmentRequest {
   EnvironmentName: string
 
   /**
+   * 环境描述
+   */
+  Description?: string
+
+  /**
    * 私有网络名称
    */
-  Vpc: string
+  Vpc?: string
 
   /**
    * 子网列表
    */
-  SubnetIds: Array<string>
-
-  /**
-   * 环境描述
-   */
-  Description?: string
+  SubnetIds?: Array<string>
 
   /**
    * K8s version
@@ -1015,6 +1015,26 @@ export interface CreateEnvironmentRequest {
    * 创建环境的region
    */
   CreateRegion?: string
+
+  /**
+   * 是否创建私有网络
+   */
+  SetupVpc?: boolean
+
+  /**
+   * 是否创建 Prometheus 实例
+   */
+  SetupPrometheus?: boolean
+
+  /**
+   * prometheus 实例 id
+   */
+  PrometheusId?: string
+
+  /**
+   * apm id
+   */
+  ApmId?: string
 }
 
 /**
@@ -2346,7 +2366,7 @@ export interface CreateResourceResponse {
       * 成功与否
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Result: boolean
+  Result?: boolean
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

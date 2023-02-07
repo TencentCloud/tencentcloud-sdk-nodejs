@@ -618,6 +618,16 @@ it("dlc.v20210125.CreateResultDownload", async function () {
     }
 })
 
+it("dlc.v20210125.ModifyGovernEventRule", async function () {
+    try {
+       const data = await client.ModifyGovernEventRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.DescribeSparkAppTasks", async function () {
     try {
        const data = await client.DescribeSparkAppTasks({})

@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeInstanceShardsRequest, OpenBackUpResponse, ActionAlterCkUserRequest, DescribeSpecRequest, DescribeSpecResponse, ModifyUserNewPrivilegeRequest, DescribeInstanceResponse, OpenBackUpRequest, CreateInstanceNewResponse, CreateInstanceNewRequest, ModifyClusterConfigsResponse, DescribeCkSqlApisRequest, CreateBackUpScheduleResponse, ModifyClusterConfigsRequest, DescribeInstanceShardsResponse, CreateBackUpScheduleRequest, DescribeInstanceRequest, ActionAlterCkUserResponse, DescribeCkSqlApisResponse, ModifyUserNewPrivilegeResponse } from "./cdwch_models";
+import { DescribeInstanceShardsRequest, ScaleOutInstanceResponse, ResizeDiskRequest, DescribeInstanceKeyValConfigsRequest, OpenBackUpResponse, DescribeClusterConfigsResponse, ActionAlterCkUserRequest, DescribeSpecRequest, DescribeBackUpScheduleRequest, DescribeSpecResponse, ModifyInstanceKeyValConfigsResponse, ModifyUserNewPrivilegeRequest, DescribeCkSqlApisRequest, OpenBackUpRequest, CreateInstanceNewResponse, CreateInstanceNewRequest, ModifyClusterConfigsRequest, DescribeInstanceKeyValConfigsResponse, ModifyClusterConfigsResponse, DescribeClusterConfigsRequest, ModifyInstanceKeyValConfigsRequest, ScaleOutInstanceRequest, CreateBackUpScheduleResponse, DescribeInstanceResponse, ScaleUpInstanceRequest, DescribeInstanceShardsResponse, CreateBackUpScheduleRequest, DescribeInstanceRequest, ActionAlterCkUserResponse, ResizeDiskResponse, DescribeBackUpScheduleResponse, DescribeCkSqlApisResponse, ScaleUpInstanceResponse, ModifyUserNewPrivilegeResponse } from "./cdwch_models";
 /**
  * cdwch client
  * @class
@@ -8,9 +8,17 @@ import { DescribeInstanceShardsRequest, OpenBackUpResponse, ActionAlterCkUserReq
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
     /**
+     * 查询备份策略信息
+     */
+    DescribeBackUpSchedule(req: DescribeBackUpScheduleRequest, cb?: (error: string, rep: DescribeBackUpScheduleResponse) => void): Promise<DescribeBackUpScheduleResponse>;
+    /**
      * 创建或者修改备份策略
      */
     CreateBackUpSchedule(req: CreateBackUpScheduleRequest, cb?: (error: string, rep: CreateBackUpScheduleResponse) => void): Promise<CreateBackUpScheduleResponse>;
+    /**
+     * 垂直扩缩容节点规格，修改节点cvm的规格cpu，内存。 规格变化阶段，服务不可用。
+     */
+    ScaleUpInstance(req: ScaleUpInstanceRequest, cb?: (error: string, rep: ScaleUpInstanceResponse) => void): Promise<ScaleUpInstanceResponse>;
     /**
      * 查询集群用户、集群表，数据库等相关信息
      */
@@ -24,9 +32,17 @@ export declare class Client extends AbstractClient {
      */
     OpenBackUp(req: OpenBackUpRequest, cb?: (error: string, rep: OpenBackUpResponse) => void): Promise<OpenBackUpResponse>;
     /**
+     * 在集群详情页面获取所有参数列表
+     */
+    DescribeInstanceKeyValConfigs(req: DescribeInstanceKeyValConfigsRequest, cb?: (error: string, rep: DescribeInstanceKeyValConfigsResponse) => void): Promise<DescribeInstanceKeyValConfigsResponse>;
+    /**
      * 购买页拉取集群的数据节点和zookeeper节点的规格列表
      */
     DescribeSpec(req: DescribeSpecRequest, cb?: (error: string, rep: DescribeSpecResponse) => void): Promise<DescribeSpecResponse>;
+    /**
+     * 获取集群的最新的几个配置文件（config.xml、metrika.xml、user.xml）的内容，显示给用户
+     */
+    DescribeClusterConfigs(req: DescribeClusterConfigsRequest, cb?: (error: string, rep: DescribeClusterConfigsResponse) => void): Promise<DescribeClusterConfigsResponse>;
     /**
      * 在集群配置页面修改集群配置文件接口，xml模式
      */
@@ -40,9 +56,21 @@ export declare class Client extends AbstractClient {
      */
     CreateInstanceNew(req: CreateInstanceNewRequest, cb?: (error: string, rep: CreateInstanceNewResponse) => void): Promise<CreateInstanceNewResponse>;
     /**
+     * KV模式修改配置接口
+     */
+    ModifyInstanceKeyValConfigs(req: ModifyInstanceKeyValConfigsRequest, cb?: (error: string, rep: ModifyInstanceKeyValConfigsResponse) => void): Promise<ModifyInstanceKeyValConfigsResponse>;
+    /**
      * 针对ck账号的权限做管控（新版）
      */
     ModifyUserNewPrivilege(req?: ModifyUserNewPrivilegeRequest, cb?: (error: string, rep: ModifyUserNewPrivilegeResponse) => void): Promise<ModifyUserNewPrivilegeResponse>;
+    /**
+     * 调整clickhouse节点数量
+     */
+    ScaleOutInstance(req: ScaleOutInstanceRequest, cb?: (error: string, rep: ScaleOutInstanceResponse) => void): Promise<ScaleOutInstanceResponse>;
+    /**
+     * 扩容磁盘，包含扩容数据节点，zk节点
+     */
+    ResizeDisk(req: ResizeDiskRequest, cb?: (error: string, rep: ResizeDiskResponse) => void): Promise<ResizeDiskResponse>;
     /**
      * 获取实例shard信息列表
      */

@@ -15,6 +15,11 @@ export interface Group {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Department: Department;
+    /**
+      * 个数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Count: number;
 }
 /**
  * CreateDeviceGroup返回参数结构体
@@ -937,6 +942,21 @@ export interface Acl {
     Department: Department;
 }
 /**
+ * 描述键值对过滤器，用于条件过滤查询
+ */
+export interface Filter {
+    /**
+      * 需要过滤的字段。
+      */
+    Name: string;
+    /**
+      * 字段的过滤值。
+若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。
+若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。
+      */
+    Values: Array<string>;
+}
+/**
  * DescribeDevices请求参数结构体
  */
 export interface DescribeDevicesRequest {
@@ -988,6 +1008,11 @@ export interface DescribeDevicesRequest {
       * 过滤条件，可按照标签键、标签进行过滤。如果同时指定标签键和标签过滤条件，它们之间为“AND”的关系
       */
     TagFilters?: Array<TagFilter>;
+    /**
+      * 过滤数组。支持的Name：
+BindingStatus 绑定状态
+      */
+    Filters?: Array<Filter>;
 }
 /**
  * DescribeDeviceGroups请求参数结构体

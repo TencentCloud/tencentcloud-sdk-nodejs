@@ -871,6 +871,26 @@ export interface ModifyLivePlayAuthKeyRequest {
 export type DescribeLiveDelayInfoListRequest = null
 
 /**
+ * HTTP返回码数据信息
+ */
+export interface HttpCodeValue {
+  /**
+   * 时间，格式：yyyy-mm-dd HH:MM:SS。
+   */
+  Time: string
+
+  /**
+   * 次数。
+   */
+  Numbers: number
+
+  /**
+   * 占比。
+   */
+  Percentage: number
+}
+
+/**
  * 域名证书信息
  */
 export interface DomainCertInfo {
@@ -938,71 +958,13 @@ export interface DomainCertInfo {
 }
 
 /**
- * 录制模板信息
+ * CreateLiveTimeShiftRule返回参数结构体
  */
-export interface RecordTemplateInfo {
+export interface CreateLiveTimeShiftRuleResponse {
   /**
-   * 模板 ID。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  TemplateId: number
-
-  /**
-   * 模板名称。
-   */
-  TemplateName: string
-
-  /**
-   * 描述信息。
-   */
-  Description: string
-
-  /**
-   * FLV 录制参数。
-   */
-  FlvParam: RecordParam
-
-  /**
-   * HLS 录制参数。
-   */
-  HlsParam: RecordParam
-
-  /**
-   * MP4 录制参数。
-   */
-  Mp4Param: RecordParam
-
-  /**
-   * AAC 录制参数。
-   */
-  AacParam: RecordParam
-
-  /**
-      * 0：普通直播，
-1：慢直播。
-      */
-  IsDelayLive: number
-
-  /**
-   * HLS 录制定制参数。
-   */
-  HlsSpecialParam: HlsSpecialParam
-
-  /**
-   * MP3 录制参数。
-   */
-  Mp3Param: RecordParam
-
-  /**
-      * 是否去除水印。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  RemoveWatermark: boolean
-
-  /**
-      * FLV 录制定制参数。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  FlvSpecialParam: FlvSpecialParam
+  RequestId?: string
 }
 
 /**
@@ -1345,6 +1307,32 @@ export interface DeleteLivePullStreamTaskRequest {
    * 操作人姓名。
    */
   Operator: string
+}
+
+/**
+ * CreateLiveTimeShiftRule请求参数结构体
+ */
+export interface CreateLiveTimeShiftRuleRequest {
+  /**
+   * 推流域名。
+   */
+  DomainName: string
+
+  /**
+   * 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。
+   */
+  AppName: string
+
+  /**
+      * 流名称。
+注：如果本参数设置为非空字符串，规则将只对此推流起作用。
+      */
+  StreamName: string
+
+  /**
+   * 模板 ID。
+   */
+  TemplateId: number
 }
 
 /**
@@ -2407,23 +2395,9 @@ export interface DescribePlayErrorCodeSumInfoListResponse {
 }
 
 /**
- * UnBindLiveDomainCert请求参数结构体
+ * DescribeLiveTimeShiftTemplates请求参数结构体
  */
-export interface UnBindLiveDomainCertRequest {
-  /**
-   * 播放域名。
-   */
-  DomainName: string
-
-  /**
-      * 枚举值：
-gray: 解绑灰度规则
-formal(默认): 解绑正式规则
-
-不传则为formal
-      */
-  Type?: string
-}
+export type DescribeLiveTimeShiftTemplatesRequest = null
 
 /**
  * DeleteLiveRecord返回参数结构体
@@ -2545,6 +2519,64 @@ export interface TimeValue {
    * 数值。
    */
   Num: number
+}
+
+/**
+ * ModifyLiveTimeShiftTemplate请求参数结构体
+ */
+export interface ModifyLiveTimeShiftTemplateRequest {
+  /**
+   * 时移模板id。
+   */
+  TemplateId: number
+
+  /**
+      * 模板名称。
+仅支持中文、英文、数字、_、-。
+      */
+  TemplateName?: string
+
+  /**
+      * 描述信息。
+长度上限：1024字节。
+仅支持中文、英文、数字、_、-。
+      */
+  Description?: string
+
+  /**
+      * 时移时长。
+单位：s。
+      */
+  Duration?: number
+
+  /**
+      * 分片时长。
+可取3-10。
+单位：s。
+默认值：5。
+      */
+  ItemDuration?: number
+
+  /**
+      * 是否去除水印。
+传true则将录制原始流。
+默认值：false。
+      */
+  RemoveWatermark?: boolean
+
+  /**
+      * 转码流id列表。
+此参数仅在 RemoveWatermark为false时生效。
+      */
+  TranscodeTemplateIds?: Array<number>
+
+  /**
+      * 地域。
+Mainland：中国大陆。
+Overseas：海外及港澳台地区。
+默认值：Mainland。
+      */
+  Area?: string
 }
 
 /**
@@ -2850,6 +2882,61 @@ export interface BillAreaInfo {
 }
 
 /**
+ * 直播时移模板配置
+ */
+export interface TimeShiftTemplate {
+  /**
+   * 模板名称。
+   */
+  TemplateName: string
+
+  /**
+      * 时移时长。
+单位：秒。
+      */
+  Duration: number
+
+  /**
+      * 分片时长。
+可取3-10。
+单位：s。
+默认值：5。
+      */
+  ItemDuration: number
+
+  /**
+   * 模板id。
+   */
+  TemplateId?: number
+
+  /**
+   * 模板描述。
+   */
+  Description?: string
+
+  /**
+      * 地域：
+Mainland：中国大陆；
+Overseas：海外及港澳台地区；
+默认值：Mainland。
+      */
+  Area?: string
+
+  /**
+      * 是否去除水印。
+为true则将录制原始流。
+默认值：false。
+      */
+  RemoveWatermark?: boolean
+
+  /**
+      * 转码流id列表。
+此参数仅在 RemoveWatermark为false时生效。
+      */
+  TranscodeTemplateIds?: Array<number>
+}
+
+/**
  * 用作批量绑定域名和证书。
  */
 export interface LiveCertDomainInfo {
@@ -2866,6 +2953,11 @@ export interface LiveCertDomainInfo {
       */
   Status: number
 }
+
+/**
+ * DescribeLiveTimeShiftRules请求参数结构体
+ */
+export type DescribeLiveTimeShiftRulesRequest = null
 
 /**
  * DescribeVisitTopSumInfoList请求参数结构体
@@ -2952,13 +3044,26 @@ export interface ModifyPullStreamStatusResponse {
 }
 
 /**
- * ModifyLivePlayDomain返回参数结构体
+ * DeleteLiveTimeShiftRule请求参数结构体
  */
-export interface ModifyLivePlayDomainResponse {
+export interface DeleteLiveTimeShiftRuleRequest {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+      * 推流域名。
+域名+AppName+StreamName唯一标识单个时移规则，如需删除需要强匹配，例如AppName为空也需要传空字符串进行强匹配。
+      */
+  DomainName: string
+
+  /**
+      * 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。
+域名+AppName+StreamName唯一标识单个时移规则，如需删除需要强匹配，例如AppName为空也需要传空字符串进行强匹配。
+      */
+  AppName: string
+
+  /**
+      * 流名称。
+域名+AppName+StreamName唯一标识单个时移规则，如需删除需要强匹配，例如AppName为空也需要传空字符串进行强匹配。
+      */
+  StreamName: string
 }
 
 /**
@@ -3683,47 +3788,13 @@ export interface DropLiveStreamRequest {
 }
 
 /**
- * UpdateLiveWatermark请求参数结构体
+ * DeleteLiveTimeShiftRule返回参数结构体
  */
-export interface UpdateLiveWatermarkRequest {
+export interface DeleteLiveTimeShiftRuleResponse {
   /**
-      * 水印 ID。
-在添加水印接口 [AddLiveWatermark](/document/product/267/30154) 调用返回值中获取水印 ID。
-      */
-  WatermarkId: number
-
-  /**
-      * 水印图片 URL。
-URL中禁止包含的字符：
- ;(){}$>`#"\'|
-      */
-  PictureUrl: string
-
-  /**
-   * 显示位置，X轴偏移，单位是百分比，默认 0。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  XPosition: number
-
-  /**
-   * 显示位置，Y轴偏移，单位是百分比，默认 0。
-   */
-  YPosition: number
-
-  /**
-      * 水印名称。
-最长16字节。
-      */
-  WatermarkName?: string
-
-  /**
-   * 水印宽度，占直播原始画面宽度百分比，建议高宽只设置一项，另外一项会自适应缩放，避免变形。默认原始宽度。
-   */
-  Width?: number
-
-  /**
-   * 水印高度，占直播原始画面宽度百分比，建议高宽只设置一项，另外一项会自适应缩放，避免变形。默认原始高度。
-   */
-  Height?: number
+  RequestId?: string
 }
 
 /**
@@ -3765,6 +3836,25 @@ URL中禁止包含的字符：
 3：左下角。
       */
   Location: number
+}
+
+/**
+ * UnBindLiveDomainCert请求参数结构体
+ */
+export interface UnBindLiveDomainCertRequest {
+  /**
+   * 播放域名。
+   */
+  DomainName: string
+
+  /**
+      * 枚举值：
+gray: 解绑灰度规则
+formal(默认): 解绑正式规则
+
+不传则为formal
+      */
+  Type?: string
 }
 
 /**
@@ -4202,56 +4292,56 @@ export interface DescribeLiveTranscodeRulesResponse {
 }
 
 /**
- * 时移流。
+ * CreateLiveTimeShiftTemplate请求参数结构体
  */
-export interface TimeShiftStreamInfo {
+export interface CreateLiveTimeShiftTemplateRequest {
   /**
-      * 推流域名所属组。
-注意：此字段可能返回 null，表示取不到有效值。
+      * 模板名称。
+长度上限：255字节。
+仅支持中文、英文、数字、_、-。
       */
-  DomainGroup?: string
+  TemplateName: string
 
   /**
-   * 推流域名。
-   */
-  Domain?: string
-
-  /**
-   * 推流路径。
-   */
-  AppName?: string
-
-  /**
-   * 流名称。
-   */
-  StreamName?: string
-
-  /**
-   * 流起始时间，Unix 时间戳。
-   */
-  StartTime?: number
-
-  /**
-   * 截止查询时流结束时间，Unix 时间戳。
-   */
-  EndTime?: number
-
-  /**
-      * 转码模板ID。
-注意：此字段可能返回 null，表示取不到有效值。
+      * 时移时长。
+单位：s。
       */
-  TransCodeId?: number
+  Duration: number
 
   /**
-   * 流类型，取值0为原始流，1为水印流，2为转码流。
-   */
-  StreamType?: number
-
-  /**
-      * 时移数据存储时长，单位秒。
-注意：此字段可能返回 null，表示取不到有效值。
+      * 描述信息。
+仅支持中文、英文、数字、_、-。
       */
-  Duration?: number
+  Description?: string
+
+  /**
+      * 地域。
+Mainland：中国大陆。
+Overseas：海外及港澳台地区。
+默认值：Mainland。
+      */
+  Area?: string
+
+  /**
+      * 分片时长。
+可取3-10。
+单位：s。
+默认值：5。
+      */
+  ItemDuration?: number
+
+  /**
+      * 是否去除水印。
+传true则将录制原始流。
+默认值：false。
+      */
+  RemoveWatermark?: boolean
+
+  /**
+      * 转码流id列表。
+此参数仅在 RemoveWatermark为false时生效。
+      */
+  TranscodeTemplateIds?: Array<number>
 }
 
 /**
@@ -4474,26 +4564,23 @@ export interface CreatePullStreamConfigRequest {
 export type DescribeLiveCertsRequest = null
 
 /**
- * DescribeLivePullStreamTasks请求参数结构体
+ * DeleteLiveTimeShiftTemplate请求参数结构体
  */
-export interface DescribeLivePullStreamTasksRequest {
+export interface DeleteLiveTimeShiftTemplateRequest {
   /**
-      * 任务 ID。 
-来源：调用 CreateLivePullStreamTask 接口时返回。
-不填默认查询所有任务，按更新时间倒序排序。
-      */
-  TaskId?: string
-
-  /**
-   * 取得第几页，默认值：1。
+   * 模板 ID。
    */
-  PageNum?: number
+  TemplateId: number
+}
 
+/**
+ * ModifyLivePlayDomain返回参数结构体
+ */
+export interface ModifyLivePlayDomainResponse {
   /**
-      * 分页大小，默认值：10。
-取值范围：1~20 之前的任意整数。
-      */
-  PageSize?: number
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4830,39 +4917,9 @@ export interface DescribeStreamPushInfoListRequest {
 }
 
 /**
- * DescribeLivePullStreamTasks返回参数结构体
+ * DeleteLiveTimeShiftTemplate返回参数结构体
  */
-export interface DescribeLivePullStreamTasksResponse {
-  /**
-   * 直播拉流任务信息列表。
-   */
-  TaskInfos: Array<PullStreamTaskInfo>
-
-  /**
-   * 分页的页码。
-   */
-  PageNum: number
-
-  /**
-   * 每页大小。
-   */
-  PageSize: number
-
-  /**
-   * 符合条件的总个数。
-   */
-  TotalNum: number
-
-  /**
-   * 总页数。
-   */
-  TotalPage: number
-
-  /**
-   * 限制可创建的最大任务数。
-   */
-  LimitTaskNum: number
-
+export interface DeleteLiveTimeShiftTemplateResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5040,6 +5097,16 @@ AreaId为4的时候，IspId只能为其他。如有改动，需同时传入AreaI
 注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
       */
   EndTime?: string
+}
+
+/**
+ * ModifyLiveTimeShiftTemplate返回参数结构体
+ */
+export interface ModifyLiveTimeShiftTemplateResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -6175,6 +6242,74 @@ NormalLive：普通直播。
 }
 
 /**
+ * 录制模板信息
+ */
+export interface RecordTemplateInfo {
+  /**
+   * 模板 ID。
+   */
+  TemplateId: number
+
+  /**
+   * 模板名称。
+   */
+  TemplateName: string
+
+  /**
+   * 描述信息。
+   */
+  Description: string
+
+  /**
+   * FLV 录制参数。
+   */
+  FlvParam: RecordParam
+
+  /**
+   * HLS 录制参数。
+   */
+  HlsParam: RecordParam
+
+  /**
+   * MP4 录制参数。
+   */
+  Mp4Param: RecordParam
+
+  /**
+   * AAC 录制参数。
+   */
+  AacParam: RecordParam
+
+  /**
+      * 0：普通直播，
+1：慢直播。
+      */
+  IsDelayLive: number
+
+  /**
+   * HLS 录制定制参数。
+   */
+  HlsSpecialParam: HlsSpecialParam
+
+  /**
+   * MP3 录制参数。
+   */
+  Mp3Param: RecordParam
+
+  /**
+      * 是否去除水印。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RemoveWatermark: boolean
+
+  /**
+      * FLV 录制定制参数。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FlvSpecialParam: FlvSpecialParam
+}
+
+/**
  * DeleteScreenshotTask返回参数结构体
  */
 export interface DeleteScreenshotTaskResponse {
@@ -6340,6 +6475,59 @@ export interface DescribePlayErrorCodeDetailInfoListResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 时移流。
+ */
+export interface TimeShiftStreamInfo {
+  /**
+      * 推流域名所属组。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DomainGroup?: string
+
+  /**
+   * 推流域名。
+   */
+  Domain?: string
+
+  /**
+   * 推流路径。
+   */
+  AppName?: string
+
+  /**
+   * 流名称。
+   */
+  StreamName?: string
+
+  /**
+   * 流起始时间，Unix 时间戳。
+   */
+  StartTime?: number
+
+  /**
+   * 截止查询时流结束时间，Unix 时间戳。
+   */
+  EndTime?: number
+
+  /**
+      * 转码模板ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TransCodeId?: number
+
+  /**
+   * 流类型，取值0为原始流，1为水印流，2为转码流。
+   */
+  StreamType?: number
+
+  /**
+      * 时移数据存储时长，单位秒。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Duration?: number
 }
 
 /**
@@ -6810,6 +6998,21 @@ export interface DescribeLiveStreamPublishedListResponse {
 }
 
 /**
+ * DescribeLiveTimeShiftRules返回参数结构体
+ */
+export interface DescribeLiveTimeShiftRulesResponse {
+  /**
+   * 规则信息列表。
+   */
+  Rules: Array<RuleInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteLiveDomain请求参数结构体
  */
 export interface DeleteLiveDomainRequest {
@@ -6828,6 +7031,21 @@ export interface DeleteLiveDomainRequest {
  * ForbidLiveDomain返回参数结构体
  */
 export interface ForbidLiveDomainResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeLiveTimeShiftTemplates返回参数结构体
+ */
+export interface DescribeLiveTimeShiftTemplatesResponse {
+  /**
+   * 直播时移模板信息。
+   */
+  Templates: Array<TimeShiftTemplate>
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7168,6 +7386,46 @@ export interface CreateRecordTaskRequest {
 }
 
 /**
+ * DescribeLivePullStreamTasks返回参数结构体
+ */
+export interface DescribeLivePullStreamTasksResponse {
+  /**
+   * 直播拉流任务信息列表。
+   */
+  TaskInfos: Array<PullStreamTaskInfo>
+
+  /**
+   * 分页的页码。
+   */
+  PageNum: number
+
+  /**
+   * 每页大小。
+   */
+  PageSize: number
+
+  /**
+   * 符合条件的总个数。
+   */
+  TotalNum: number
+
+  /**
+   * 总页数。
+   */
+  TotalPage: number
+
+  /**
+   * 限制可创建的最大任务数。
+   */
+  LimitTaskNum: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateLiveTranscodeRule返回参数结构体
  */
 export interface CreateLiveTranscodeRuleResponse {
@@ -7483,23 +7741,26 @@ export interface DescribeLiveDomainPlayInfoListResponse {
 }
 
 /**
- * HTTP返回码数据信息
+ * DescribeLivePullStreamTasks请求参数结构体
  */
-export interface HttpCodeValue {
+export interface DescribeLivePullStreamTasksRequest {
   /**
-   * 时间，格式：yyyy-mm-dd HH:MM:SS。
-   */
-  Time: string
+      * 任务 ID。 
+来源：调用 CreateLivePullStreamTask 接口时返回。
+不填默认查询所有任务，按更新时间倒序排序。
+      */
+  TaskId?: string
 
   /**
-   * 次数。
+   * 取得第几页，默认值：1。
    */
-  Numbers: number
+  PageNum?: number
 
   /**
-   * 占比。
-   */
-  Percentage: number
+      * 分页大小，默认值：10。
+取值范围：1~20 之前的任意整数。
+      */
+  PageSize?: number
 }
 
 /**
@@ -8139,6 +8400,65 @@ PullVodPushLive -点播。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   VodLocalMode: number
+}
+
+/**
+ * UpdateLiveWatermark请求参数结构体
+ */
+export interface UpdateLiveWatermarkRequest {
+  /**
+      * 水印 ID。
+在添加水印接口 [AddLiveWatermark](/document/product/267/30154) 调用返回值中获取水印 ID。
+      */
+  WatermarkId: number
+
+  /**
+      * 水印图片 URL。
+URL中禁止包含的字符：
+ ;(){}$>`#"\'|
+      */
+  PictureUrl: string
+
+  /**
+   * 显示位置，X轴偏移，单位是百分比，默认 0。
+   */
+  XPosition: number
+
+  /**
+   * 显示位置，Y轴偏移，单位是百分比，默认 0。
+   */
+  YPosition: number
+
+  /**
+      * 水印名称。
+最长16字节。
+      */
+  WatermarkName?: string
+
+  /**
+   * 水印宽度，占直播原始画面宽度百分比，建议高宽只设置一项，另外一项会自适应缩放，避免变形。默认原始宽度。
+   */
+  Width?: number
+
+  /**
+   * 水印高度，占直播原始画面宽度百分比，建议高宽只设置一项，另外一项会自适应缩放，避免变形。默认原始高度。
+   */
+  Height?: number
+}
+
+/**
+ * CreateLiveTimeShiftTemplate返回参数结构体
+ */
+export interface CreateLiveTimeShiftTemplateResponse {
+  /**
+   * 模板Id。
+   */
+  TemplateId: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
