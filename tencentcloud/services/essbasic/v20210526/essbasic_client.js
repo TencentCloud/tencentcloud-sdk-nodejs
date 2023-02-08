@@ -28,6 +28,12 @@ class Client extends abstract_client_1.AbstractClient {
         super("essbasic.tencentcloudapi.com", "2021-05-26", clientConfig);
     }
     /**
+     * 删除指定印章下多个授权信息
+     */
+    async ChannelDeleteSealPolicies(req, cb) {
+        return this.request("ChannelDeleteSealPolicies", req, cb);
+    }
+    /**
      * 提交企业签署流程审批结果
 
 在通过接口(CreateFlowsByTemplates 或者ChannelCreateFlowByFiles)创建签署流程时，若指定了参数 NeedSignReview 为true,则可以调用此接口提交企业内部签署审批结果。
@@ -96,12 +102,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ChannelCancelFlow", req, cb);
     }
     /**
-     * 接口（CreateFlowsByTemplates）用于使用多个模板批量创建签署流程。当前可批量发起合同（签署流程）数量最大为20个。
-如若在模板中配置了动态表格, 上传的附件必须为A4大小
-合同发起人必须在电子签已经进行实名。
+     * 将指定印章授权给企业下的某些员工
      */
-    async CreateFlowsByTemplates(req, cb) {
-        return this.request("CreateFlowsByTemplates", req, cb);
+    async ChannelCreateSealPolicy(req, cb) {
+        return this.request("ChannelCreateSealPolicy", req, cb);
     }
     /**
      * 查询渠道子客企业电子印章，需要操作者具有管理印章权限
@@ -220,6 +224,14 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async PrepareFlows(req, cb) {
         return this.request("PrepareFlows", req, cb);
+    }
+    /**
+     * 接口（CreateFlowsByTemplates）用于使用多个模板批量创建签署流程。当前可批量发起合同（签署流程）数量最大为20个。
+如若在模板中配置了动态表格, 上传的附件必须为A4大小
+合同发起人必须在电子签已经进行实名。
+     */
+    async CreateFlowsByTemplates(req, cb) {
+        return this.request("CreateFlowsByTemplates", req, cb);
     }
     /**
      * 根据签署流程信息批量获取资源下载链接，可以下载签署中、签署完的合同，需合作企业先进行授权。

@@ -56,11 +56,24 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeFlowTemplates", req, cb);
     }
     /**
+     * 撤销员工持有的印章权限
+     */
+    async DeleteSealPolicies(req, cb) {
+        return this.request("DeleteSealPolicies", req, cb);
+    }
+    /**
      * 查询文件下载URL
 适用场景：通过传参合同流程编号，下载对应的合同PDF文件流到本地。
      */
     async DescribeFileUrls(req, cb) {
         return this.request("DescribeFileUrls", req, cb);
+    }
+    /**
+     * 创建出证报告，返回报告 ID。需要配合出证套餐才能调用。
+出证需要一定时间，建议调用创建出证24小时之后再通过DescribeFlowEvidenceReport进行查询。
+     */
+    async CreateFlowEvidenceReport(req, cb) {
+        return this.request("CreateFlowEvidenceReport", req, cb);
     }
     /**
      * 验证合同文件
@@ -119,11 +132,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeFlowInfo", req, cb);
     }
     /**
-     * 创建出证报告，返回报告 ID。需要配合出证套餐才能调用。
-出证需要一定时间，建议调用创建出证24小时之后再通过DescribeFlowEvidenceReport进行查询。
+     * 对企业员工进行印章授权
      */
-    async CreateFlowEvidenceReport(req, cb) {
-        return this.request("CreateFlowEvidenceReport", req, cb);
+    async CreateSealPolicy(req, cb) {
+        return this.request("CreateSealPolicy", req, cb);
     }
     /**
      * 创建签署流程

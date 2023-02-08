@@ -18,6 +18,16 @@ const client = new tencentcloud.essbasic.v20210526.Client({
 })
 describe("essbasic.v20210526.test.js", function () {
 
+it("essbasic.v20210526.ChannelDeleteSealPolicies", async function () {
+    try {
+       const data = await client.ChannelDeleteSealPolicies({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("essbasic.v20210526.ChannelCreateFlowSignReview", async function () {
     try {
        const data = await client.ChannelCreateFlowSignReview({})
@@ -118,9 +128,9 @@ it("essbasic.v20210526.ChannelCancelFlow", async function () {
     }
 })
 
-it("essbasic.v20210526.CreateFlowsByTemplates", async function () {
+it("essbasic.v20210526.ChannelCreateSealPolicy", async function () {
     try {
-       const data = await client.CreateFlowsByTemplates({})
+       const data = await client.ChannelCreateSealPolicy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -261,6 +271,16 @@ it("essbasic.v20210526.ChannelBatchCancelFlows", async function () {
 it("essbasic.v20210526.PrepareFlows", async function () {
     try {
        const data = await client.PrepareFlows({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("essbasic.v20210526.CreateFlowsByTemplates", async function () {
+    try {
+       const data = await client.CreateFlowsByTemplates({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -69,6 +69,7 @@ import {
   TableBaseInfo,
   UnlockMetaDataRequest,
   AttachUserPolicyRequest,
+  CreateInternalTableRequest,
   ListTaskJobLogDetailRequest,
   TasksInfo,
   AttachWorkGroupPolicyRequest,
@@ -77,6 +78,7 @@ import {
   DescribeDatabasesResponse,
   LockComponentInfo,
   DescribeDMSPartitionsRequest,
+  TPartition,
   DescribeSparkAppJobsRequest,
   CreateDMSTableResponse,
   CreateNotebookSessionRequest,
@@ -178,6 +180,7 @@ import {
   DropDMSPartitionsResponse,
   AlterDMSDatabaseResponse,
   CreateWorkGroupRequest,
+  CreateInternalTableResponse,
   DescribeSparkAppTasksRequest,
   LockMetaDataResponse,
   CheckLockMetaDataResponse,
@@ -194,6 +197,7 @@ import {
   DescribeScriptsResponse,
   DatabaseResponseInfo,
   DMSColumn,
+  TColumn,
   DescribeResultDownloadRequest,
 } from "./dlc_models"
 
@@ -504,6 +508,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UnbindWorkGroupsFromUserResponse) => void
   ): Promise<UnbindWorkGroupsFromUserResponse> {
     return this.request("UnbindWorkGroupsFromUser", req, cb)
+  }
+
+  /**
+   * 创建托管存储内表
+   */
+  async CreateInternalTable(
+    req: CreateInternalTableRequest,
+    cb?: (error: string, rep: CreateInternalTableResponse) => void
+  ): Promise<CreateInternalTableResponse> {
+    return this.request("CreateInternalTable", req, cb)
   }
 
   /**

@@ -208,6 +208,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UnbindWorkGroupsFromUser", req, cb);
     }
     /**
+     * 创建托管存储内表
+     */
+    async CreateInternalTable(req, cb) {
+        return this.request("CreateInternalTable", req, cb);
+    }
+    /**
      * 获取用户列表信息
      */
     async DescribeUsers(req, cb) {

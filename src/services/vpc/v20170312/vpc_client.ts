@@ -255,6 +255,7 @@ import {
   CreateCustomerGatewayResponse,
   TrafficPackage,
   WithdrawNotifyRoutesRequest,
+  VpcTaskResultDetailInfo,
   DeleteServiceTemplateGroupResponse,
   DisassociateAddressRequest,
   NetworkAclEntrySet,

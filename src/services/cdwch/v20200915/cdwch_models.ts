@@ -74,6 +74,32 @@ export interface ResizeDiskRequest {
 }
 
 /**
+ * DestroyInstance返回参数结构体
+ */
+export interface DestroyInstanceResponse {
+  /**
+      * 作业id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FlowID?: string
+
+  /**
+   * 集群id
+   */
+  InstanceID?: string
+
+  /**
+   * 错误信息
+   */
+  ErrorMsg?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeInstanceKeyValConfigs请求参数结构体
  */
 export interface DescribeInstanceKeyValConfigsRequest {
@@ -253,67 +279,13 @@ export interface ModifyInstanceKeyValConfigsResponse {
 }
 
 /**
- * 资源规格描述信息
+ * DestroyInstance请求参数结构体
  */
-export interface ResourceSpec {
+export interface DestroyInstanceRequest {
   /**
-   * 规格名称，例如“SCH1"
+   * 集群id
    */
-  Name: string
-
-  /**
-   * cpu核数
-   */
-  Cpu: number
-
-  /**
-   * 内存大小，单位G
-   */
-  Mem: number
-
-  /**
-   * 分类标记，STANDARD/BIGDATA/HIGHIO分别表示标准型/大数据型/高IO
-   */
-  Type: string
-
-  /**
-   * 系统盘描述信息
-   */
-  SystemDisk: DiskSpec
-
-  /**
-   * 数据盘描述信息
-   */
-  DataDisk: DiskSpec
-
-  /**
-   * 最大节点数目限制
-   */
-  MaxNodeSize: number
-
-  /**
-      * 是否可用，false代表售罄
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Available: boolean
-
-  /**
-      * 规格描述信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ComputeSpecDesc: string
-
-  /**
-      * 规格名
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DisplayName: string
-
-  /**
-      * 库存数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  InstanceQuota: number
+  InstanceId: string
 }
 
 /**
@@ -813,6 +785,70 @@ export interface DescribeInstanceKeyValConfigsResponse {
 }
 
 /**
+ * 资源规格描述信息
+ */
+export interface ResourceSpec {
+  /**
+   * 规格名称，例如“SCH1"
+   */
+  Name: string
+
+  /**
+   * cpu核数
+   */
+  Cpu: number
+
+  /**
+   * 内存大小，单位G
+   */
+  Mem: number
+
+  /**
+   * 分类标记，STANDARD/BIGDATA/HIGHIO分别表示标准型/大数据型/高IO
+   */
+  Type: string
+
+  /**
+   * 系统盘描述信息
+   */
+  SystemDisk: DiskSpec
+
+  /**
+   * 数据盘描述信息
+   */
+  DataDisk: DiskSpec
+
+  /**
+   * 最大节点数目限制
+   */
+  MaxNodeSize: number
+
+  /**
+      * 是否可用，false代表售罄
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Available: boolean
+
+  /**
+      * 规格描述信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ComputeSpecDesc: string
+
+  /**
+      * 规格名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DisplayName: string
+
+  /**
+      * 库存数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceQuota: number
+}
+
+/**
  * ModifyClusterConfigs返回参数结构体
  */
 export interface ModifyClusterConfigsResponse {
@@ -953,9 +989,14 @@ export interface ScaleOutInstanceRequest {
   UserSubnetIPNum?: number
 
   /**
-   * 节点同步ip
+   * 同步元数据节点IP （uip）
    */
   ScaleOutNodeIp?: string
+
+  /**
+   * 缩容节点shard的节点IP （uip），其中ha集群需要主副节点ip都传入以逗号分隔
+   */
+  ReduceShardInfo?: Array<string>
 }
 
 /**

@@ -5366,6 +5366,23 @@ export interface WithdrawNotifyRoutesRequest {
 }
 
 /**
+ * Vpc任务结果详细信息。
+ */
+export interface VpcTaskResultDetailInfo {
+  /**
+      * 资源ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ResourceId: string
+
+  /**
+      * 状态。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Status: string
+}
+
+/**
  * DeleteServiceTemplateGroup返回参数结构体
  */
 export interface DeleteServiceTemplateGroupResponse {
@@ -12453,6 +12470,12 @@ export interface DescribeVpcTaskResultResponse {
    * 异步任务执行输出。
    */
   Output: string
+
+  /**
+      * 异步任务详细结果。只用于特殊场景，如批量删除弹性网卡时查询成功的网卡列表和失败的列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result: Array<VpcTaskResultDetailInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

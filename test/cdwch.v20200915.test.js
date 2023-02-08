@@ -108,9 +108,9 @@ it("cdwch.v20200915.DescribeClusterConfigs", async function () {
     }
 })
 
-it("cdwch.v20200915.ModifyClusterConfigs", async function () {
+it("cdwch.v20200915.DestroyInstance", async function () {
     try {
-       const data = await client.ModifyClusterConfigs({})
+       const data = await client.DestroyInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -121,6 +121,16 @@ it("cdwch.v20200915.ModifyClusterConfigs", async function () {
 it("cdwch.v20200915.DescribeInstance", async function () {
     try {
        const data = await client.DescribeInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdwch.v20200915.ModifyClusterConfigs", async function () {
+    try {
+       const data = await client.ModifyClusterConfigs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

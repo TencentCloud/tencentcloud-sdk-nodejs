@@ -1547,6 +1547,31 @@ export interface AttachUserPolicyRequest {
 }
 
 /**
+ * CreateInternalTable请求参数结构体
+ */
+export interface CreateInternalTableRequest {
+  /**
+   * 表基本信息
+   */
+  TableBaseInfo: TableBaseInfo
+
+  /**
+   * 表字段信息
+   */
+  Columns: Array<TColumn>
+
+  /**
+   * 表分区信息
+   */
+  Partitions?: Array<TPartition>
+
+  /**
+   * 表属性信息
+   */
+  Properties?: Array<Property>
+}
+
+/**
  * ListTaskJobLogDetail请求参数结构体
  */
 export interface ListTaskJobLogDetailRequest {
@@ -1779,6 +1804,51 @@ export interface DescribeDMSPartitionsRequest {
    * 表达式
    */
   Expression?: string
+}
+
+/**
+ * 表分区字段信息
+ */
+export interface TPartition {
+  /**
+   * 字段名称
+   */
+  Name: string
+
+  /**
+   * 字段类型
+   */
+  Type?: string
+
+  /**
+   * 字段描述
+   */
+  Comment?: string
+
+  /**
+   * 分区类型
+   */
+  PartitionType?: string
+
+  /**
+   * 分区格式
+   */
+  PartitionFormat?: string
+
+  /**
+   * 分区分隔数
+   */
+  PartitionDot?: number
+
+  /**
+   * 分区转换策略
+   */
+  Transform?: string
+
+  /**
+   * 策略参数
+   */
+  TransformArgs?: Array<string>
 }
 
 /**
@@ -4828,6 +4898,21 @@ export interface CreateWorkGroupRequest {
 }
 
 /**
+ * CreateInternalTable返回参数结构体
+ */
+export interface CreateInternalTableResponse {
+  /**
+   * 创建托管存储内表sql语句描述
+   */
+  Execution: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeSparkAppTasks请求参数结构体
  */
 export interface DescribeSparkAppTasksRequest {
@@ -5248,6 +5333,36 @@ export interface DMSColumn {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   IsPartition?: boolean
+}
+
+/**
+ * 表字段描述信息
+ */
+export interface TColumn {
+  /**
+   * 字段名称
+   */
+  Name: string
+
+  /**
+   * 字段类型
+   */
+  Type: string
+
+  /**
+   * 字段描述
+   */
+  Comment?: string
+
+  /**
+   * 字段默认值
+   */
+  Default?: string
+
+  /**
+   * 字段是否是非空
+   */
+  NotNull?: boolean
 }
 
 /**

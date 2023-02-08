@@ -4306,7 +4306,7 @@ export interface InquiryPriceResizeInstanceDisksResponse {
     /**
       * 该参数表示磁盘扩容成对应配置的价格。
       */
-    Price: Price;
+    Price?: Price;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

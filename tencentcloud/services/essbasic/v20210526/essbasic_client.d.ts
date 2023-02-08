@@ -1,12 +1,16 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { SyncProxyOrganizationResponse, ChannelCreateConvertTaskApiResponse, ChannelCreateFlowRemindsResponse, ChannelBatchCancelFlowsResponse, ChannelCreateFlowSignReviewRequest, DescribeFlowDetailInfoRequest, ModifyExtendedServiceRequest, DescribeResourceUrlsByFlowsRequest, ChannelCreateFlowSignUrlResponse, CreateSealByImageResponse, OperateChannelTemplateResponse, CreateConsoleLoginUrlResponse, SyncProxyOrganizationRequest, CreateSealByImageRequest, ChannelCreateFlowRemindsRequest, ChannelCancelFlowResponse, ChannelCreateConvertTaskApiRequest, ChannelCreateFlowByFilesRequest, ChannelCreateFlowGroupByFilesRequest, DescribeFlowDetailInfoResponse, PrepareFlowsResponse, GetDownloadFlowUrlResponse, DescribeTemplatesResponse, ChannelVerifyPdfRequest, CreateChannelFlowEvidenceReportRequest, ChannelVerifyPdfResponse, CreateConsoleLoginUrlRequest, ChannelCancelMultiFlowSignQRCodeRequest, UploadFilesRequest, ChannelDescribeOrganizationSealsRequest, DescribeUsageRequest, DescribeExtendedServiceAuthInfoRequest, DescribeUsageResponse, ChannelCreateBoundFlowsRequest, ChannelDescribeEmployeesRequest, DescribeResourceUrlsByFlowsResponse, SyncProxyOrganizationOperatorsRequest, CreateSignUrlsRequest, ChannelCreateMultiFlowSignQRCodeRequest, ChannelGetTaskResultApiRequest, CreateFlowsByTemplatesResponse, PrepareFlowsRequest, SyncProxyOrganizationOperatorsResponse, CreateSignUrlsResponse, UploadFilesResponse, ChannelCreateBatchCancelFlowUrlRequest, DescribeChannelFlowEvidenceReportRequest, ChannelCreateFlowByFilesResponse, ChannelCreateFlowSignReviewResponse, ChannelDescribeOrganizationSealsResponse, ChannelCancelMultiFlowSignQRCodeResponse, ChannelCreateReleaseFlowRequest, ChannelCreateFlowGroupByFilesResponse, ChannelCreateMultiFlowSignQRCodeResponse, ChannelCreateBoundFlowsResponse, ModifyExtendedServiceResponse, ChannelGetTaskResultApiResponse, DescribeExtendedServiceAuthInfoResponse, GetDownloadFlowUrlRequest, ChannelBatchCancelFlowsRequest, ChannelCancelFlowRequest, DescribeTemplatesRequest, CreateFlowsByTemplatesRequest, ChannelCreateBatchCancelFlowUrlResponse, OperateChannelTemplateRequest, CreateChannelFlowEvidenceReportResponse, ChannelDescribeEmployeesResponse, ChannelCreateReleaseFlowResponse, DescribeChannelFlowEvidenceReportResponse, ChannelCreateFlowSignUrlRequest } from "./essbasic_models";
+import { SyncProxyOrganizationResponse, ChannelCreateConvertTaskApiResponse, ChannelCreateFlowRemindsResponse, ChannelDeleteSealPoliciesRequest, ChannelBatchCancelFlowsResponse, ChannelCreateFlowSignReviewRequest, DescribeFlowDetailInfoRequest, ModifyExtendedServiceRequest, DescribeResourceUrlsByFlowsRequest, ChannelCreateFlowSignUrlResponse, CreateSealByImageResponse, OperateChannelTemplateResponse, CreateConsoleLoginUrlResponse, SyncProxyOrganizationRequest, CreateSealByImageRequest, ChannelCreateFlowRemindsRequest, ChannelCreateSealPolicyResponse, ChannelCancelFlowResponse, ChannelCreateConvertTaskApiRequest, ChannelCreateFlowByFilesRequest, ChannelCreateFlowGroupByFilesRequest, DescribeFlowDetailInfoResponse, PrepareFlowsResponse, GetDownloadFlowUrlResponse, DescribeTemplatesResponse, ChannelVerifyPdfRequest, CreateChannelFlowEvidenceReportRequest, ChannelVerifyPdfResponse, CreateConsoleLoginUrlRequest, ChannelCancelMultiFlowSignQRCodeRequest, UploadFilesRequest, ChannelDescribeOrganizationSealsRequest, DescribeUsageRequest, DescribeExtendedServiceAuthInfoRequest, DescribeUsageResponse, ChannelCreateBoundFlowsRequest, ChannelDescribeEmployeesRequest, DescribeResourceUrlsByFlowsResponse, SyncProxyOrganizationOperatorsRequest, CreateSignUrlsRequest, ChannelCreateMultiFlowSignQRCodeRequest, ChannelGetTaskResultApiRequest, CreateFlowsByTemplatesResponse, DescribeChannelFlowEvidenceReportRequest, SyncProxyOrganizationOperatorsResponse, CreateSignUrlsResponse, UploadFilesResponse, ChannelCreateBatchCancelFlowUrlRequest, PrepareFlowsRequest, ChannelCreateFlowByFilesResponse, ChannelCreateFlowSignReviewResponse, ChannelDescribeOrganizationSealsResponse, ChannelCancelMultiFlowSignQRCodeResponse, ChannelCreateReleaseFlowRequest, ChannelCreateFlowGroupByFilesResponse, ChannelCreateMultiFlowSignQRCodeResponse, ChannelCreateBoundFlowsResponse, ModifyExtendedServiceResponse, ChannelGetTaskResultApiResponse, ChannelDeleteSealPoliciesResponse, GetDownloadFlowUrlRequest, ChannelBatchCancelFlowsRequest, ChannelCancelFlowRequest, DescribeTemplatesRequest, ChannelCreateSealPolicyRequest, CreateFlowsByTemplatesRequest, ChannelCreateBatchCancelFlowUrlResponse, OperateChannelTemplateRequest, CreateChannelFlowEvidenceReportResponse, ChannelDescribeEmployeesResponse, ChannelCreateReleaseFlowResponse, DescribeChannelFlowEvidenceReportResponse, ChannelCreateFlowSignUrlRequest, DescribeExtendedServiceAuthInfoResponse } from "./essbasic_models";
 /**
  * essbasic client
  * @class
  */
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
+    /**
+     * 删除指定印章下多个授权信息
+     */
+    ChannelDeleteSealPolicies(req: ChannelDeleteSealPoliciesRequest, cb?: (error: string, rep: ChannelDeleteSealPoliciesResponse) => void): Promise<ChannelDeleteSealPoliciesResponse>;
     /**
      * 提交企业签署流程审批结果
 
@@ -56,11 +60,9 @@ export declare class Client extends AbstractClient {
      */
     ChannelCancelFlow(req: ChannelCancelFlowRequest, cb?: (error: string, rep: ChannelCancelFlowResponse) => void): Promise<ChannelCancelFlowResponse>;
     /**
-     * 接口（CreateFlowsByTemplates）用于使用多个模板批量创建签署流程。当前可批量发起合同（签署流程）数量最大为20个。
-如若在模板中配置了动态表格, 上传的附件必须为A4大小
-合同发起人必须在电子签已经进行实名。
+     * 将指定印章授权给企业下的某些员工
      */
-    CreateFlowsByTemplates(req: CreateFlowsByTemplatesRequest, cb?: (error: string, rep: CreateFlowsByTemplatesResponse) => void): Promise<CreateFlowsByTemplatesResponse>;
+    ChannelCreateSealPolicy(req: ChannelCreateSealPolicyRequest, cb?: (error: string, rep: ChannelCreateSealPolicyResponse) => void): Promise<ChannelCreateSealPolicyResponse>;
     /**
      * 查询渠道子客企业电子印章，需要操作者具有管理印章权限
 客户指定需要获取的印章数量和偏移量，数量最多100，超过100按100处理；入参InfoType控制印章是否携带授权人信息，为1则携带，为0则返回的授权人信息为空数组。接口调用成功返回印章的信息列表还有企业印章的总数。
@@ -151,6 +153,12 @@ export declare class Client extends AbstractClient {
 目前该接口只支持B2C，不建议使用，将会废弃。
      */
     PrepareFlows(req: PrepareFlowsRequest, cb?: (error: string, rep: PrepareFlowsResponse) => void): Promise<PrepareFlowsResponse>;
+    /**
+     * 接口（CreateFlowsByTemplates）用于使用多个模板批量创建签署流程。当前可批量发起合同（签署流程）数量最大为20个。
+如若在模板中配置了动态表格, 上传的附件必须为A4大小
+合同发起人必须在电子签已经进行实名。
+     */
+    CreateFlowsByTemplates(req: CreateFlowsByTemplatesRequest, cb?: (error: string, rep: CreateFlowsByTemplatesResponse) => void): Promise<CreateFlowsByTemplatesResponse>;
     /**
      * 根据签署流程信息批量获取资源下载链接，可以下载签署中、签署完的合同，需合作企业先进行授权。
 此接口直接返回下载的资源的url，与接口GetDownloadFlowUrl跳转到控制台的下载方式不同。

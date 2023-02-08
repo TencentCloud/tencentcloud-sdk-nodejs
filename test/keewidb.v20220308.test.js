@@ -1,7 +1,7 @@
 
 const expect = require("chai").expect
 const tencentcloud = require("../../tencentcloud-sdk-nodejs")
-const client = new tencentcloud.ess.v20201111.Client({
+const client = new tencentcloud.keewidb.v20220308.Client({
   credential: {
     secretId: process.env.secretId,
     secretKey: process.env.secretKey,
@@ -16,11 +16,11 @@ const client = new tencentcloud.ess.v20201111.Client({
     },
   },
 })
-describe("ess.v20201111.test.js", function () {
+describe("keewidb.v20220308.test.js", function () {
 
-it("ess.v20201111.DescribeOrganizationGroupOrganizations", async function () {
+it("keewidb.v20220308.DescribeInstanceNodeInfo", async function () {
     try {
-       const data = await client.DescribeOrganizationGroupOrganizations({})
+       const data = await client.DescribeInstanceNodeInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -28,9 +28,9 @@ it("ess.v20201111.DescribeOrganizationGroupOrganizations", async function () {
     }
 })
 
-it("ess.v20201111.StartFlow", async function () {
+it("keewidb.v20220308.ModifyMaintenanceWindow", async function () {
     try {
-       const data = await client.StartFlow({})
+       const data = await client.ModifyMaintenanceWindow({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -38,9 +38,9 @@ it("ess.v20201111.StartFlow", async function () {
     }
 })
 
-it("ess.v20201111.CancelFlow", async function () {
+it("keewidb.v20220308.DescribeTaskList", async function () {
     try {
-       const data = await client.CancelFlow({})
+       const data = await client.DescribeTaskList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -48,9 +48,9 @@ it("ess.v20201111.CancelFlow", async function () {
     }
 })
 
-it("ess.v20201111.DescribeFlowTemplates", async function () {
+it("keewidb.v20220308.CleanUpInstance", async function () {
     try {
-       const data = await client.DescribeFlowTemplates({})
+       const data = await client.CleanUpInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -58,9 +58,9 @@ it("ess.v20201111.DescribeFlowTemplates", async function () {
     }
 })
 
-it("ess.v20201111.DeleteSealPolicies", async function () {
+it("keewidb.v20220308.DescribeMaintenanceWindow", async function () {
     try {
-       const data = await client.DeleteSealPolicies({})
+       const data = await client.DescribeMaintenanceWindow({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -68,9 +68,9 @@ it("ess.v20201111.DeleteSealPolicies", async function () {
     }
 })
 
-it("ess.v20201111.DescribeFileUrls", async function () {
+it("keewidb.v20220308.DescribeInstanceBackups", async function () {
     try {
-       const data = await client.DescribeFileUrls({})
+       const data = await client.DescribeInstanceBackups({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -78,9 +78,9 @@ it("ess.v20201111.DescribeFileUrls", async function () {
     }
 })
 
-it("ess.v20201111.CreateFlowEvidenceReport", async function () {
+it("keewidb.v20220308.ModifyNetworkConfig", async function () {
     try {
-       const data = await client.CreateFlowEvidenceReport({})
+       const data = await client.ModifyNetworkConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -88,9 +88,9 @@ it("ess.v20201111.CreateFlowEvidenceReport", async function () {
     }
 })
 
-it("ess.v20201111.VerifyPdf", async function () {
+it("keewidb.v20220308.ModifyAutoBackupConfig", async function () {
     try {
-       const data = await client.VerifyPdf({})
+       const data = await client.ModifyAutoBackupConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -98,9 +98,9 @@ it("ess.v20201111.VerifyPdf", async function () {
     }
 })
 
-it("ess.v20201111.CreateBatchCancelFlowUrl", async function () {
+it("keewidb.v20220308.ResetPassword", async function () {
     try {
-       const data = await client.CreateBatchCancelFlowUrl({})
+       const data = await client.ResetPassword({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -108,9 +108,9 @@ it("ess.v20201111.CreateBatchCancelFlowUrl", async function () {
     }
 })
 
-it("ess.v20201111.CreateFlowApprovers", async function () {
+it("keewidb.v20220308.DescribeInstances", async function () {
     try {
-       const data = await client.CreateFlowApprovers({})
+       const data = await client.DescribeInstances({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -118,9 +118,9 @@ it("ess.v20201111.CreateFlowApprovers", async function () {
     }
 })
 
-it("ess.v20201111.CreateFlowSignReview", async function () {
+it("keewidb.v20220308.DescribeInstanceBinlogs", async function () {
     try {
-       const data = await client.CreateFlowSignReview({})
+       const data = await client.DescribeInstanceBinlogs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -128,9 +128,9 @@ it("ess.v20201111.CreateFlowSignReview", async function () {
     }
 })
 
-it("ess.v20201111.CreatePrepareFlow", async function () {
+it("keewidb.v20220308.DescribeAutoBackupConfig", async function () {
     try {
-       const data = await client.CreatePrepareFlow({})
+       const data = await client.DescribeAutoBackupConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -138,9 +138,9 @@ it("ess.v20201111.CreatePrepareFlow", async function () {
     }
 })
 
-it("ess.v20201111.CreateDocument", async function () {
+it("keewidb.v20220308.ChangeInstanceMaster", async function () {
     try {
-       const data = await client.CreateDocument({})
+       const data = await client.ChangeInstanceMaster({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -148,9 +148,9 @@ it("ess.v20201111.CreateDocument", async function () {
     }
 })
 
-it("ess.v20201111.DescribeFlowInfo", async function () {
+it("keewidb.v20220308.CreateInstances", async function () {
     try {
-       const data = await client.DescribeFlowInfo({})
+       const data = await client.CreateInstances({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -158,9 +158,9 @@ it("ess.v20201111.DescribeFlowInfo", async function () {
     }
 })
 
-it("ess.v20201111.CreateSealPolicy", async function () {
+it("keewidb.v20220308.RenewInstance", async function () {
     try {
-       const data = await client.CreateSealPolicy({})
+       const data = await client.RenewInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -168,9 +168,9 @@ it("ess.v20201111.CreateSealPolicy", async function () {
     }
 })
 
-it("ess.v20201111.CreateFlow", async function () {
+it("keewidb.v20220308.DescribeTaskInfo", async function () {
     try {
-       const data = await client.CreateFlow({})
+       const data = await client.DescribeTaskInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -178,9 +178,9 @@ it("ess.v20201111.CreateFlow", async function () {
     }
 })
 
-it("ess.v20201111.DescribeFlowEvidenceReport", async function () {
+it("keewidb.v20220308.DescribeProxySlowLog", async function () {
     try {
-       const data = await client.DescribeFlowEvidenceReport({})
+       const data = await client.DescribeProxySlowLog({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -188,9 +188,9 @@ it("ess.v20201111.DescribeFlowEvidenceReport", async function () {
     }
 })
 
-it("ess.v20201111.CreateFlowByFiles", async function () {
+it("keewidb.v20220308.DescribeProjectSecurityGroups", async function () {
     try {
-       const data = await client.CreateFlowByFiles({})
+       const data = await client.DescribeProjectSecurityGroups({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -198,9 +198,9 @@ it("ess.v20201111.CreateFlowByFiles", async function () {
     }
 })
 
-it("ess.v20201111.CreateMultiFlowSignQRCode", async function () {
+it("keewidb.v20220308.DescribeTendisSlowLog", async function () {
     try {
-       const data = await client.CreateMultiFlowSignQRCode({})
+       const data = await client.DescribeTendisSlowLog({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -208,9 +208,9 @@ it("ess.v20201111.CreateMultiFlowSignQRCode", async function () {
     }
 })
 
-it("ess.v20201111.GetTaskResultApi", async function () {
+it("keewidb.v20220308.AssociateSecurityGroups", async function () {
     try {
-       const data = await client.GetTaskResultApi({})
+       const data = await client.AssociateSecurityGroups({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -218,9 +218,9 @@ it("ess.v20201111.GetTaskResultApi", async function () {
     }
 })
 
-it("ess.v20201111.CancelMultiFlowSignQRCode", async function () {
+it("keewidb.v20220308.ModifyInstanceParams", async function () {
     try {
-       const data = await client.CancelMultiFlowSignQRCode({})
+       const data = await client.ModifyInstanceParams({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -228,9 +228,9 @@ it("ess.v20201111.CancelMultiFlowSignQRCode", async function () {
     }
 })
 
-it("ess.v20201111.DescribeIntegrationEmployees", async function () {
+it("keewidb.v20220308.ModifyDBInstanceSecurityGroups", async function () {
     try {
-       const data = await client.DescribeIntegrationEmployees({})
+       const data = await client.ModifyDBInstanceSecurityGroups({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -238,9 +238,9 @@ it("ess.v20201111.DescribeIntegrationEmployees", async function () {
     }
 })
 
-it("ess.v20201111.CreateFlowSignUrl", async function () {
+it("keewidb.v20220308.DescribeInstanceParams", async function () {
     try {
-       const data = await client.CreateFlowSignUrl({})
+       const data = await client.DescribeInstanceParams({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -248,9 +248,9 @@ it("ess.v20201111.CreateFlowSignUrl", async function () {
     }
 })
 
-it("ess.v20201111.CreateConvertTaskApi", async function () {
+it("keewidb.v20220308.DescribeInstanceReplicas", async function () {
     try {
-       const data = await client.CreateConvertTaskApi({})
+       const data = await client.DescribeInstanceReplicas({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -258,9 +258,9 @@ it("ess.v20201111.CreateConvertTaskApi", async function () {
     }
 })
 
-it("ess.v20201111.DescribeFlowBriefs", async function () {
+it("keewidb.v20220308.ModifyConnectionConfig", async function () {
     try {
-       const data = await client.DescribeFlowBriefs({})
+       const data = await client.ModifyConnectionConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -268,9 +268,9 @@ it("ess.v20201111.DescribeFlowBriefs", async function () {
     }
 })
 
-it("ess.v20201111.UploadFiles", async function () {
+it("keewidb.v20220308.DescribeProductInfo", async function () {
     try {
-       const data = await client.UploadFiles({})
+       const data = await client.DescribeProductInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -278,9 +278,9 @@ it("ess.v20201111.UploadFiles", async function () {
     }
 })
 
-it("ess.v20201111.CreateFlowReminds", async function () {
+it("keewidb.v20220308.UpgradeInstance", async function () {
     try {
-       const data = await client.CreateFlowReminds({})
+       const data = await client.UpgradeInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -288,9 +288,9 @@ it("ess.v20201111.CreateFlowReminds", async function () {
     }
 })
 
-it("ess.v20201111.DescribeIntegrationMainOrganizationUser", async function () {
+it("keewidb.v20220308.DescribeDBSecurityGroups", async function () {
     try {
-       const data = await client.DescribeIntegrationMainOrganizationUser({})
+       const data = await client.DescribeDBSecurityGroups({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -298,9 +298,9 @@ it("ess.v20201111.DescribeIntegrationMainOrganizationUser", async function () {
     }
 })
 
-it("ess.v20201111.DescribeThirdPartyAuthCode", async function () {
+it("keewidb.v20220308.CreateBackupManually", async function () {
     try {
-       const data = await client.DescribeThirdPartyAuthCode({})
+       const data = await client.CreateBackupManually({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -308,9 +308,9 @@ it("ess.v20201111.DescribeThirdPartyAuthCode", async function () {
     }
 })
 
-it("ess.v20201111.DescribeOrganizationSeals", async function () {
+it("keewidb.v20220308.DestroyPrepaidInstance", async function () {
     try {
-       const data = await client.DescribeOrganizationSeals({})
+       const data = await client.DestroyPrepaidInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -318,9 +318,9 @@ it("ess.v20201111.DescribeOrganizationSeals", async function () {
     }
 })
 
-it("ess.v20201111.DeleteIntegrationEmployees", async function () {
+it("keewidb.v20220308.DescribeInstanceParamRecords", async function () {
     try {
-       const data = await client.DeleteIntegrationEmployees({})
+       const data = await client.DescribeInstanceParamRecords({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -328,9 +328,9 @@ it("ess.v20201111.DeleteIntegrationEmployees", async function () {
     }
 })
 
-it("ess.v20201111.CreateSchemeUrl", async function () {
+it("keewidb.v20220308.ClearInstance", async function () {
     try {
-       const data = await client.CreateSchemeUrl({})
+       const data = await client.ClearInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -338,9 +338,39 @@ it("ess.v20201111.CreateSchemeUrl", async function () {
     }
 })
 
-it("ess.v20201111.CreateIntegrationEmployees", async function () {
+it("keewidb.v20220308.DestroyPostpaidInstance", async function () {
     try {
-       const data = await client.CreateIntegrationEmployees({})
+       const data = await client.DestroyPostpaidInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("keewidb.v20220308.DisassociateSecurityGroups", async function () {
+    try {
+       const data = await client.DisassociateSecurityGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("keewidb.v20220308.ModifyInstance", async function () {
+    try {
+       const data = await client.ModifyInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("keewidb.v20220308.StartUpInstance", async function () {
+    try {
+       const data = await client.StartUpInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

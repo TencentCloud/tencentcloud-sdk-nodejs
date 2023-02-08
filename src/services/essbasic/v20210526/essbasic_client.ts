@@ -21,6 +21,7 @@ import {
   SyncProxyOrganizationResponse,
   ChannelCreateConvertTaskApiResponse,
   ChannelCreateFlowRemindsResponse,
+  ChannelDeleteSealPoliciesRequest,
   ChannelBatchCancelFlowsResponse,
   Department,
   ChannelCreateFlowSignReviewRequest,
@@ -37,6 +38,7 @@ import {
   SyncProxyOrganizationRequest,
   CreateSealByImageRequest,
   ChannelCreateFlowRemindsRequest,
+  ChannelCreateSealPolicyResponse,
   ChannelCancelFlowResponse,
   DownloadFlowInfo,
   FlowApproverUrlInfo,
@@ -83,7 +85,7 @@ import {
   ChannelGetTaskResultApiRequest,
   FlowDetailInfo,
   CreateFlowsByTemplatesResponse,
-  PrepareFlowsRequest,
+  DescribeChannelFlowEvidenceReportRequest,
   SyncProxyOrganizationOperatorsResponse,
   SignUrlInfo,
   FlowResourceUrlInfo,
@@ -95,7 +97,7 @@ import {
   UploadFilesResponse,
   ChannelCreateBatchCancelFlowUrlRequest,
   ApproverRestriction,
-  DescribeChannelFlowEvidenceReportRequest,
+  PrepareFlowsRequest,
   ChannelCreateFlowByFilesResponse,
   ChannelCreateFlowSignReviewResponse,
   ChannelDescribeOrganizationSealsResponse,
@@ -108,13 +110,14 @@ import {
   ProxyOrganizationOperator,
   ModifyExtendedServiceResponse,
   ChannelGetTaskResultApiResponse,
-  DescribeExtendedServiceAuthInfoResponse,
+  ChannelDeleteSealPoliciesResponse,
   Component,
   GetDownloadFlowUrlRequest,
   ChannelBatchCancelFlowsRequest,
   SignUrl,
   ChannelCancelFlowRequest,
   DescribeTemplatesRequest,
+  ChannelCreateSealPolicyRequest,
   OccupiedSeal,
   CreateFlowsByTemplatesRequest,
   UsageDetail,
@@ -126,6 +129,7 @@ import {
   ChannelCreateReleaseFlowResponse,
   DescribeChannelFlowEvidenceReportResponse,
   ChannelCreateFlowSignUrlRequest,
+  DescribeExtendedServiceAuthInfoResponse,
   CcInfo,
 } from "./essbasic_models"
 
@@ -136,6 +140,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("essbasic.tencentcloudapi.com", "2021-05-26", clientConfig)
+  }
+
+  /**
+   * 删除指定印章下多个授权信息
+   */
+  async ChannelDeleteSealPolicies(
+    req: ChannelDeleteSealPoliciesRequest,
+    cb?: (error: string, rep: ChannelDeleteSealPoliciesResponse) => void
+  ): Promise<ChannelDeleteSealPoliciesResponse> {
+    return this.request("ChannelDeleteSealPolicies", req, cb)
   }
 
   /**
@@ -247,15 +261,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 接口（CreateFlowsByTemplates）用于使用多个模板批量创建签署流程。当前可批量发起合同（签署流程）数量最大为20个。
-如若在模板中配置了动态表格, 上传的附件必须为A4大小
-合同发起人必须在电子签已经进行实名。
-     */
-  async CreateFlowsByTemplates(
-    req: CreateFlowsByTemplatesRequest,
-    cb?: (error: string, rep: CreateFlowsByTemplatesResponse) => void
-  ): Promise<CreateFlowsByTemplatesResponse> {
-    return this.request("CreateFlowsByTemplates", req, cb)
+   * 将指定印章授权给企业下的某些员工
+   */
+  async ChannelCreateSealPolicy(
+    req: ChannelCreateSealPolicyRequest,
+    cb?: (error: string, rep: ChannelCreateSealPolicyResponse) => void
+  ): Promise<ChannelCreateSealPolicyResponse> {
+    return this.request("ChannelCreateSealPolicy", req, cb)
   }
 
   /**
@@ -430,6 +442,18 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: PrepareFlowsResponse) => void
   ): Promise<PrepareFlowsResponse> {
     return this.request("PrepareFlows", req, cb)
+  }
+
+  /**
+     * 接口（CreateFlowsByTemplates）用于使用多个模板批量创建签署流程。当前可批量发起合同（签署流程）数量最大为20个。
+如若在模板中配置了动态表格, 上传的附件必须为A4大小
+合同发起人必须在电子签已经进行实名。
+     */
+  async CreateFlowsByTemplates(
+    req: CreateFlowsByTemplatesRequest,
+    cb?: (error: string, rep: CreateFlowsByTemplatesResponse) => void
+  ): Promise<CreateFlowsByTemplatesResponse> {
+    return this.request("CreateFlowsByTemplates", req, cb)
   }
 
   /**

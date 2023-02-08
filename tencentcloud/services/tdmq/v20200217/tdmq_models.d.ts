@@ -556,6 +556,11 @@ export interface RabbitMQVipInstance {
       * 实例配置ID
       */
     SpecName: string;
+    /**
+      * 集群异常。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ExceptionInformation?: string;
 }
 /**
  * DescribeCmqQueues返回参数结构体
@@ -608,6 +613,28 @@ export interface DescribeRabbitMQNodeListRequest {
       * 一页限制
       */
     Limit?: number;
+    /**
+      * 模糊搜索节点名字
+      */
+    NodeName?: string;
+    /**
+      * 过滤参数的名字和数值
+现在只有一个nodeStatus
+running/down
+数组类型，兼容后续添加过滤参数
+
+      */
+    Filters?: Array<Filter>;
+    /**
+      * 按指定元素排序，现在只有2个
+cpuUsage/diskUsage
+      */
+    SortElement?: string;
+    /**
+      * 升序/降序
+ascend/descend
+      */
+    SortOrder?: string;
 }
 /**
  * DescribeNamespaceBundlesOpt返回参数结构体
@@ -2474,12 +2501,12 @@ export interface DescribeRabbitMQNodeListResponse {
     /**
       * 集群列表数量
       */
-    TotalCount: number;
+    TotalCount?: number;
     /**
       * 集群列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    NodeList: Array<RabbitMQPrivateNode>;
+    NodeList?: Array<RabbitMQPrivateNode>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -5488,6 +5515,31 @@ export interface RabbitMQPrivateNode {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     NodeName: string;
+    /**
+      * 节点状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NodeStatus?: string;
+    /**
+      * CPU使用率
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CPUUsage?: string;
+    /**
+      * 内存使用情况，单位MB
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Memory?: number;
+    /**
+      * 磁盘使用率
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DiskUsage?: string;
+    /**
+      * Rabbitmq的Erlang进程数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProcessNumber?: number;
 }
 /**
  * DeleteCmqSubscribe返回参数结构体

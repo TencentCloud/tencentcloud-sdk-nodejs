@@ -706,10 +706,6 @@ export interface AddNodesRequest {
       */
     ClusterId: string;
     /**
-      * 指定有效的[镜像](https://cloud.tencent.com/document/product/213/4940)ID，格式形如`img-xxx`。目前仅支持公有镜。
-      */
-    ImageId: string;
-    /**
       * 私有网络相关信息配置。
       */
     VirtualPrivateCloud: VirtualPrivateCloud;
@@ -717,6 +713,10 @@ export interface AddNodesRequest {
       * 添加节点数量。
       */
     Count: number;
+    /**
+      * 指定有效的[镜像](https://cloud.tencent.com/document/product/213/4940)ID，格式形如`img-xxx`。目前仅支持公有镜像和特定自定义镜像。
+      */
+    ImageId?: string;
     /**
       * 节点[计费类型](https://cloud.tencent.com/document/product/213/2180)。<br><li>PREPAID：预付费，即包年包月<br><li>POSTPAID_BY_HOUR：按小时后付费<br><li>SPOTPAID：竞价付费<br>默认值：POSTPAID_BY_HOUR。
       */
@@ -760,7 +760,9 @@ export interface AddNodesRequest {
       */
     ClientToken?: string;
     /**
-      * 队列名称。
+      * 队列名称。不指定则为默认队列。<br><li>SLURM默认队列为：compute。<br>
+<li>SGE默认队列为：all.q。<br>
+
       */
     QueueName?: string;
     /**

@@ -760,6 +760,15 @@ export interface DescribeFlowInfoRequest {
     Agent?: Agent;
 }
 /**
+ * DeleteSealPolicies返回参数结构体
+ */
+export interface DeleteSealPoliciesResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 机构信息
  */
 export interface OrganizationInfo {
@@ -804,25 +813,74 @@ WEWORKAPP场景下指企业自有应用获取企微明文的userid
     CustomUserId: string;
 }
 /**
- * 此结构体 (Caller) 用于描述调用方属性。
+ * 持有的电子印章信息
  */
-export interface Caller {
+export interface OccupiedSeal {
     /**
-      * 应用号
+      * 电子印章编号
       */
-    ApplicationId?: string;
+    SealId: string;
     /**
-      * 主机构ID
+      * 电子印章名称
       */
-    OrganizationId?: string;
+    SealName: string;
     /**
-      * 经办人的用户ID
+      * 电子印章授权时间戳
       */
-    OperatorId?: string;
+    CreateOn: number;
     /**
-      * 下属机构ID
+      * 电子印章授权人
       */
-    SubOrganizationId?: string;
+    Creator: string;
+    /**
+      * 电子印章策略Id
+      */
+    SealPolicyId: string;
+    /**
+      * 印章状态，有以下六种：CHECKING（审核中）SUCCESS（已启用）FAIL（审核拒绝）CHECKING-SADM（待超管审核）DISABLE（已停用）STOPPED（已终止）
+      */
+    SealStatus: string;
+    /**
+      * 审核失败原因
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FailReason: string;
+    /**
+      * 印章图片url，5分钟内有效
+      */
+    Url: string;
+    /**
+      * 印章类型
+      */
+    SealType: string;
+    /**
+      * 用印申请是否为永久授权
+      */
+    IsAllTime: boolean;
+    /**
+      * 授权人列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AuthorizedUsers: Array<AuthorizedUser>;
+}
+/**
+ * 删除员工失败数据
+ */
+export interface FailedDeleteStaffData {
+    /**
+      * 员工在电子签的userId
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UserId: string;
+    /**
+      * 员工在第三方平台的openId
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OpenId: string;
+    /**
+      * 失败原因
+      */
+    Reason: string;
 }
 /**
  * 合同文件验签单个结果结构体
@@ -882,25 +940,6 @@ export interface PdfVerifyResult {
     ComponentPage: number;
 }
 /**
- * 删除员工失败数据
- */
-export interface FailedDeleteStaffData {
-    /**
-      * 员工在电子签的userId
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    UserId: string;
-    /**
-      * 员工在第三方平台的openId
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    OpenId: string;
-    /**
-      * 失败原因
-      */
-    Reason: string;
-}
-/**
  * CreateBatchCancelFlowUrl返回参数结构体
  */
 export interface CreateBatchCancelFlowUrlResponse {
@@ -916,6 +955,19 @@ export interface CreateBatchCancelFlowUrlResponse {
       * 签署连接过期时间字符串：年月日-时分秒
       */
     UrlExpireOn: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * CreateSealPolicy返回参数结构体
+ */
+export interface CreateSealPolicyResponse {
+    /**
+      * 最终授权成功的。其他的跳过的是已经授权了的
+      */
+    UserIds?: Array<string>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2031,6 +2083,31 @@ export interface ApproverRestriction {
     IdCardNumber?: string;
 }
 /**
+ * DeleteSealPolicies请求参数结构体
+ */
+export interface DeleteSealPoliciesRequest {
+    /**
+      * 操作撤销的用户信息
+      */
+    Operator: UserInfo;
+    /**
+      * 印章授权编码数组。这个参数跟下面的SealId其中一个必填，另外一个可选填
+      */
+    PolicyIds?: Array<string>;
+    /**
+      * 应用相关
+      */
+    Agent?: Agent;
+    /**
+      * 印章ID。这个参数跟上面的PolicyIds其中一个必填，另外一个可选填
+      */
+    SealId?: string;
+    /**
+      * 待授权的员工ID
+      */
+    UserIds?: Array<string>;
+}
+/**
  * CreatePrepareFlow返回参数结构体
  */
 export interface CreatePrepareFlowResponse {
@@ -2190,17 +2267,37 @@ export interface ApproverOption {
     NoTransfer?: boolean;
 }
 /**
- * DeleteIntegrationEmployees返回参数结构体
+ * CreateSealPolicy请求参数结构体
  */
-export interface DeleteIntegrationEmployeesResponse {
+export interface CreateSealPolicyRequest {
     /**
-      * 员工删除数据
+      * 授权发起人在平台信息，具体参考UserInfo结构体
       */
-    DeleteEmployeeResult: DeleteStaffsResult;
+    Operator: UserInfo;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 用户在电子文件签署平台标识信息，具体参考UserInfo结构体。可跟下面的UserIds可叠加起作用
       */
-    RequestId?: string;
+    Users: Array<UserInfo>;
+    /**
+      * 印章ID
+      */
+    SealId: string;
+    /**
+      * 授权有效期。时间戳秒级
+      */
+    Expired: number;
+    /**
+      * 印章授权内容
+      */
+    Policy?: string;
+    /**
+      * 应用相关
+      */
+    Agent?: Agent;
+    /**
+      * 需要授权的用户UserId集合。跟上面的SealId参数配合使用。选填，跟上面的Users同时起作用
+      */
+    UserIds?: Array<string>;
 }
 /**
  * DescribeOrganizationSeals请求参数结构体
@@ -2504,6 +2601,19 @@ export interface DescribeFlowBriefsRequest {
     Agent?: Agent;
 }
 /**
+ * DeleteIntegrationEmployees返回参数结构体
+ */
+export interface DeleteIntegrationEmployeesResponse {
+    /**
+      * 员工删除数据
+      */
+    DeleteEmployeeResult: DeleteStaffsResult;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 一码多扫签署二维码签署信息
  */
 export interface SignUrl {
@@ -2586,55 +2696,25 @@ export interface Admin {
     Mobile?: string;
 }
 /**
- * 持有的电子印章信息
+ * 此结构体 (Caller) 用于描述调用方属性。
  */
-export interface OccupiedSeal {
+export interface Caller {
     /**
-      * 电子印章编号
+      * 应用号
       */
-    SealId: string;
+    ApplicationId?: string;
     /**
-      * 电子印章名称
+      * 主机构ID
       */
-    SealName: string;
+    OrganizationId?: string;
     /**
-      * 电子印章授权时间戳
+      * 经办人的用户ID
       */
-    CreateOn: number;
+    OperatorId?: string;
     /**
-      * 电子印章授权人
+      * 下属机构ID
       */
-    Creator: string;
-    /**
-      * 电子印章策略Id
-      */
-    SealPolicyId: string;
-    /**
-      * 印章状态，有以下六种：CHECKING（审核中）SUCCESS（已启用）FAIL（审核拒绝）CHECKING-SADM（待超管审核）DISABLE（已停用）STOPPED（已终止）
-      */
-    SealStatus: string;
-    /**
-      * 审核失败原因
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    FailReason: string;
-    /**
-      * 印章图片url，5分钟内有效
-      */
-    Url: string;
-    /**
-      * 印章类型
-      */
-    SealType: string;
-    /**
-      * 用印申请是否为永久授权
-      */
-    IsAllTime: boolean;
-    /**
-      * 授权人列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    AuthorizedUsers: Array<AuthorizedUser>;
+    SubOrganizationId?: string;
 }
 /**
  * DescribeFlowTemplates返回参数结构体

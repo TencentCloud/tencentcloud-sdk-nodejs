@@ -721,7 +721,7 @@ export interface DescribeParamTemplateInfoRequest {
  */
 export interface DescribeDBInstancesRequest {
   /**
-   * 项目 ID，可使用 [查询项目列表](https://cloud.tencent.com/document/product/378/4400) 接口查询项目 ID。
+   * 项目 ID。
    */
   ProjectId?: number
 
@@ -736,7 +736,7 @@ export interface DescribeDBInstancesRequest {
   Vips?: Array<string>
 
   /**
-   * 实例状态，可取值：<br>0 - 创建中<br>1 - 运行中<br>4 - 正在进行隔离操作<br>5 - 隔离中（可在回收站恢复开机）
+   * 实例状态，可取值：<br>0 - 创建中<br>1 - 运行中<br>4 - 正在进行隔离操作<br>5 - 已隔离（可在回收站恢复开机）
    */
   Status?: Array<number>
 
@@ -938,7 +938,7 @@ export interface DeleteAccountsResponse {
   /**
    * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。
    */
-  AsyncRequestId?: string
+  AsyncRequestId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1055,7 +1055,7 @@ export interface StopRollbackResponse {
   /**
    * 执行请求的异步任务ID
    */
-  AsyncRequestId?: string
+  AsyncRequestId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1599,7 +1599,7 @@ export interface UpgradeDBInstanceRequest {
   Cpu?: number
 
   /**
-   * 是否极速变配。0-普通升级，1-极速变配。选择极速变配会根据资源状况校验是否可以进行极速变配，满足条件则进行极速变配，不满足条件会返回报错信息。
+   * 是否极速变配。0-普通升级，1-极速变配,，2 极速优先。选择极速变配会根据资源状况校验是否可以进行极速变配，满足条件则进行极速变配，不满足条件会返回报错信息。
    */
   FastUpgrade?: number
 
@@ -2051,7 +2051,7 @@ export interface StartBatchRollbackResponse {
   /**
    * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。
    */
-  AsyncRequestId?: string
+  AsyncRequestId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2354,47 +2354,47 @@ export interface DescribeDBFeaturesResponse {
   /**
    * 是否支持数据库审计功能。
    */
-  IsSupportAudit?: boolean
+  IsSupportAudit: boolean
 
   /**
    * 开启审计是否需要升级内核版本。
    */
-  AuditNeedUpgrade?: boolean
+  AuditNeedUpgrade: boolean
 
   /**
    * 是否支持数据库加密功能。
    */
-  IsSupportEncryption?: boolean
+  IsSupportEncryption: boolean
 
   /**
    * 开启加密是否需要升级内核版本。
    */
-  EncryptionNeedUpgrade?: boolean
+  EncryptionNeedUpgrade: boolean
 
   /**
    * 是否为异地只读实例。
    */
-  IsRemoteRo?: boolean
+  IsRemoteRo: boolean
 
   /**
    * 主实例所在地域。
    */
-  MasterRegion?: string
+  MasterRegion: string
 
   /**
    * 是否支持小版本升级。
    */
-  IsSupportUpdateSubVersion?: boolean
+  IsSupportUpdateSubVersion: boolean
 
   /**
    * 当前内核版本。
    */
-  CurrentSubVersion?: string
+  CurrentSubVersion: string
 
   /**
    * 可供升级的内核版本。
    */
-  TargetSubVersion?: string
+  TargetSubVersion: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2614,7 +2614,7 @@ export interface DescribeDBInstanceGTIDResponse {
   /**
    * GTID 是否开通的标记，可能的取值为：0 - 未开通，1 - 已开通。
    */
-  IsGTIDOpen?: number
+  IsGTIDOpen: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3021,12 +3021,12 @@ export interface DescribeDBSwitchRecordsResponse {
   /**
    * 实例切换记录的总数。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 实例切换记录详情。
    */
-  Items?: Array<DBSwitchInfo>
+  Items: Array<DBSwitchInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3153,13 +3153,13 @@ export interface DescribeAsyncRequestInfoResponse {
       * 任务执行结果。可能的取值：INITIAL - 初始化，RUNNING - 运行中，SUCCESS - 执行成功，FAILED - 执行失败，KILLED - 已终止，REMOVED - 已删除，PAUSED - 终止中。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Status?: string
+  Status: string
 
   /**
       * 任务执行信息描述。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Info?: string
+  Info: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3803,22 +3803,22 @@ export interface DescribeDeviceMonitorInfoResponse {
   /**
    * 实例CPU监控数据
    */
-  Cpu?: DeviceCpuInfo
+  Cpu: DeviceCpuInfo
 
   /**
    * 实例内存监控数据
    */
-  Mem?: DeviceMemInfo
+  Mem: DeviceMemInfo
 
   /**
    * 实例网络监控数据
    */
-  Net?: DeviceNetInfo
+  Net: DeviceNetInfo
 
   /**
    * 实例磁盘监控数据
    */
-  Disk?: DeviceDiskInfo
+  Disk: DeviceDiskInfo
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4422,12 +4422,12 @@ export interface InquiryPriceUpgradeInstancesResponse {
   /**
    * 实例价格，单位：分（人民币）。
    */
-  Price?: number
+  Price: number
 
   /**
    * 实例原价，单位：分（人民币）。
    */
-  OriginalPrice?: number
+  OriginalPrice: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4692,22 +4692,22 @@ export interface DescribeAccountPrivilegesResponse {
   /**
    * 全局权限数组。
    */
-  GlobalPrivileges?: Array<string>
+  GlobalPrivileges: Array<string>
 
   /**
    * 数据库权限数组。
    */
-  DatabasePrivileges?: Array<DatabasePrivilege>
+  DatabasePrivileges: Array<DatabasePrivilege>
 
   /**
    * 数据库中的表权限数组。
    */
-  TablePrivileges?: Array<TablePrivilege>
+  TablePrivileges: Array<TablePrivilege>
 
   /**
    * 数据库表中的列权限数组。
    */
-  ColumnPrivileges?: Array<ColumnPrivilege>
+  ColumnPrivileges: Array<ColumnPrivilege>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -5201,7 +5201,7 @@ export interface OpenDBInstanceGTIDResponse {
   /**
    * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。
    */
-  AsyncRequestId?: string
+  AsyncRequestId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -5231,12 +5231,12 @@ export interface DescribeDBInstanceRebootTimeResponse {
   /**
    * 符合查询条件的实例总数。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 返回的参数信息。
    */
-  Items?: Array<InstanceRebootTime>
+  Items: Array<InstanceRebootTime>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -5773,7 +5773,7 @@ export interface CloseWanServiceResponse {
   /**
    * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。
    */
-  AsyncRequestId?: string
+  AsyncRequestId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -5959,12 +5959,12 @@ export interface DescribeDBImportRecordsResponse {
   /**
    * 符合查询条件的导入任务操作日志总数。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 返回的导入操作记录列表。
    */
-  Items?: Array<ImportRecord>
+  Items: Array<ImportRecord>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -5979,12 +5979,12 @@ export interface DescribeBackupDatabasesResponse {
   /**
    * 返回的数据个数。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 符合查询条件的数据库数组。
    */
-  Items?: Array<DatabaseName>
+  Items: Array<DatabaseName>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -6066,12 +6066,12 @@ export interface DescribeBackupTablesResponse {
   /**
    * 返回的数据个数。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 符合条件的数据表数组。
    */
-  Items?: Array<TableName>
+  Items: Array<TableName>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -6196,7 +6196,7 @@ export interface InstanceInfo {
   Memory: number
 
   /**
-   * 实例状态，可能的返回值：0-创建中；1-运行中；4-隔离中；5-已隔离
+   * 实例状态，可能的返回值：0-创建中；1-运行中；4-正在进行隔离操作；5-已隔离
    */
   Status: number
 
@@ -6448,17 +6448,17 @@ export interface DescribeTagsOfInstanceIdsResponse {
   /**
    * 分页偏移量。
    */
-  Offset?: number
+  Offset: number
 
   /**
    * 分页大小。
    */
-  Limit?: number
+  Limit: number
 
   /**
    * 实例标签信息。
    */
-  Rows?: Array<TagsInfoOfInstance>
+  Rows: Array<TagsInfoOfInstance>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -6585,7 +6585,7 @@ export interface DescribeRoGroupsResponse {
   /**
    * RO组信息数组，一个实例可关联多个RO组。
    */
-  RoGroups?: Array<RoGroup>
+  RoGroups: Array<RoGroup>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -7319,22 +7319,22 @@ export interface DescribeSupportedPrivilegesResponse {
   /**
    * 实例支持的全局权限。
    */
-  GlobalSupportedPrivileges?: Array<string>
+  GlobalSupportedPrivileges: Array<string>
 
   /**
    * 实例支持的数据库权限。
    */
-  DatabaseSupportedPrivileges?: Array<string>
+  DatabaseSupportedPrivileges: Array<string>
 
   /**
    * 实例支持的数据库表权限。
    */
-  TableSupportedPrivileges?: Array<string>
+  TableSupportedPrivileges: Array<string>
 
   /**
    * 实例支持的数据库列权限。
    */
-  ColumnSupportedPrivileges?: Array<string>
+  ColumnSupportedPrivileges: Array<string>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -7394,7 +7394,7 @@ export interface OpenWanServiceResponse {
   /**
    * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。
    */
-  AsyncRequestId?: string
+  AsyncRequestId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -7524,7 +7524,7 @@ export interface RestartDBInstancesResponse {
   /**
    * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。
    */
-  AsyncRequestId?: string
+  AsyncRequestId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -7662,12 +7662,12 @@ export interface DescribeTasksResponse {
   /**
    * 符合查询条件的实例总数。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 返回的实例任务信息。
    */
-  Items?: Array<TaskDetail>
+  Items: Array<TaskDetail>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -7704,7 +7704,7 @@ export interface IsolateDBInstanceResponse {
       * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。(该返回字段目前已废弃，可以通过 DescribeDBInstances 接口查询实例的隔离状态)
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  AsyncRequestId?: string
+  AsyncRequestId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -7719,7 +7719,7 @@ export interface ModifyAccountDescriptionResponse {
   /**
    * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。
    */
-  AsyncRequestId?: string
+  AsyncRequestId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -7939,13 +7939,13 @@ export interface DescribeRollbackTaskDetailResponse {
   /**
    * 符合条件的记录总数。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
       * 回档任务详情。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Items?: Array<RollbackTask>
+  Items: Array<RollbackTask>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -8403,7 +8403,7 @@ export interface DescribeDBInstanceCharsetResponse {
   /**
    * 实例的默认字符集，如 "latin1"，"utf8" 等。
    */
-  Charset?: string
+  Charset: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -9006,7 +9006,7 @@ export interface RenewDBInstanceResponse {
   /**
    * 订单 ID。
    */
-  DealId?: string
+  DealId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -9287,7 +9287,7 @@ export interface ReleaseIsolatedDBInstancesResponse {
   /**
    * 解隔离操作的结果集。
    */
-  Items?: Array<ReleaseResult>
+  Items: Array<ReleaseResult>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

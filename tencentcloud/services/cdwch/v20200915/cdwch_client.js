@@ -82,16 +82,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeClusterConfigs", req, cb);
     }
     /**
-     * 在集群配置页面修改集群配置文件接口，xml模式
+     * 销毁集群 open api
      */
-    async ModifyClusterConfigs(req, cb) {
-        return this.request("ModifyClusterConfigs", req, cb);
+    async DestroyInstance(req, cb) {
+        return this.request("DestroyInstance", req, cb);
     }
     /**
      * 根据实例ID查询某个实例的具体信息
      */
     async DescribeInstance(req, cb) {
         return this.request("DescribeInstance", req, cb);
+    }
+    /**
+     * 在集群配置页面修改集群配置文件接口，xml模式
+     */
+    async ModifyClusterConfigs(req, cb) {
+        return this.request("ModifyClusterConfigs", req, cb);
     }
     /**
      * 创建集群

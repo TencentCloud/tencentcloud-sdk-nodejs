@@ -240,6 +240,8 @@ var irp_1 = require("./irp");
 Object.defineProperty(exports, "irp", { enumerable: true, get: function () { return irp_1.irp; } });
 var ivld_1 = require("./ivld");
 Object.defineProperty(exports, "ivld", { enumerable: true, get: function () { return ivld_1.ivld; } });
+var keewidb_1 = require("./keewidb");
+Object.defineProperty(exports, "keewidb", { enumerable: true, get: function () { return keewidb_1.keewidb; } });
 var kms_1 = require("./kms");
 Object.defineProperty(exports, "kms", { enumerable: true, get: function () { return kms_1.kms; } });
 var lcic_1 = require("./lcic");

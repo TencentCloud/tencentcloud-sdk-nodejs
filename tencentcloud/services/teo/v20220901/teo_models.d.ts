@@ -1250,7 +1250,7 @@ export interface CreateRuleResponse {
     /**
       * 规则 ID。
       */
-    RuleId: string;
+    RuleId?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3672,7 +3672,7 @@ export interface ModifyRuleResponse {
     /**
       * 规则 ID。
       */
-    RuleId: string;
+    RuleId?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -5333,21 +5333,29 @@ export interface WebLogs {
       */
     EventId: string;
     /**
-      * 攻击源（客户端）Ip。
+      * http 日志内容。
       */
-    AttackIp: string;
+    HttpLog: string;
     /**
       * 受攻击子域名。
       */
     Domain: string;
     /**
-      * http 日志内容。
+      * 攻击源（客户端）Ip。
       */
-    HttpLog: string;
+    AttackIp: string;
     /**
       * IP所在国家iso-3166中alpha-2编码，编码信息请参考[ISO-3166](https://git.woa.com/edgeone/iso-3166/blob/master/all/all.json)
       */
     SipCountryCode: string;
+    /**
+      * 真实客户端Ip。
+      */
+    RealClientIp?: string;
+    /**
+      * 真实客户端Ip所在国家iso-3166中alpha-2编码。
+      */
+    RealClientIpCountryCode?: string;
     /**
       * 攻击时间，采用unix秒级时间戳。
       */
@@ -5357,20 +5365,20 @@ export interface WebLogs {
       */
     RequestUri: string;
     /**
-      * 攻击内容。
+      * 请求类型。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    AttackContent: string;
+    ReqMethod: string;
     /**
       * 规则相关信息列表。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     RuleDetailList: Array<SecRuleRelatedInfo>;
     /**
-      * 请求类型。
+      * 攻击内容。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ReqMethod: string;
+    AttackContent: string;
     /**
       * 日志所属区域。
 注意：此字段可能返回 null，表示取不到有效值。
@@ -6816,6 +6824,7 @@ export interface DescribeWebManagedRulesLogRequest {
 <li>ruleId：规则id；</li>
 <li>sipCountryCode：ip所在国家；</li>
 <li>attackIp：攻击ip；</li>
+<li>realClientIp：真实客户端ip；</li>
 <li>oriDomain：被攻击的子域名；</li>
 <li>eventId：事件id；</li>
 <li>ua：用户代理；</li>

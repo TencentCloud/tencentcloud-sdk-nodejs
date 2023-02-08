@@ -2964,6 +2964,11 @@ export interface RuleTargets {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Targets: Array<Backend>;
+    /**
+      * 后端云函数的信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FunctionTargets: Array<FunctionTarget>;
 }
 /**
  * BatchDeregisterTargets请求参数结构体

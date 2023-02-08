@@ -34,6 +34,31 @@ export interface ChannelCreateFlowRemindsResponse {
     RequestId?: string;
 }
 /**
+ * ChannelDeleteSealPolicies请求参数结构体
+ */
+export interface ChannelDeleteSealPoliciesRequest {
+    /**
+      * 渠道信息
+      */
+    Agent: Agent;
+    /**
+      * 指定印章ID
+      */
+    SealId: string;
+    /**
+      * 指定用户ID数组
+      */
+    UserIds: Array<string>;
+    /**
+      * 操作人（用户）信息
+      */
+    Operator?: UserInfo;
+    /**
+      * 组织机构信息
+      */
+    Organization?: OrganizationInfo;
+}
+/**
  * ChannelBatchCancelFlows返回参数结构体
  */
 export interface ChannelBatchCancelFlowsResponse {
@@ -389,6 +414,19 @@ export interface ChannelCreateFlowRemindsRequest {
       * 签署流程Id数组，最多100个，超过100不处理
       */
     FlowIds: Array<string>;
+}
+/**
+ * ChannelCreateSealPolicy返回参数结构体
+ */
+export interface ChannelCreateSealPolicyResponse {
+    /**
+      * 最终授权成功的用户ID数组。其他的跳过的是已经授权了的
+      */
+    UserIds?: Array<string>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * ChannelCancelFlow返回参数结构体
@@ -1919,21 +1957,17 @@ export interface CreateFlowsByTemplatesResponse {
     RequestId?: string;
 }
 /**
- * PrepareFlows请求参数结构体
+ * DescribeChannelFlowEvidenceReport请求参数结构体
  */
-export interface PrepareFlowsRequest {
+export interface DescribeChannelFlowEvidenceReportRequest {
     /**
-      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
+      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填
       */
     Agent: Agent;
     /**
-      * 多个合同（签署流程）信息，最大支持20个签署流程。
+      * 出证报告编号
       */
-    FlowInfos: Array<FlowInfo>;
-    /**
-      * 操作完成后的跳转地址，最大长度200
-      */
-    JumpUrl: string;
+    ReportId: string;
     /**
       * 操作者的信息
       */
@@ -2237,17 +2271,21 @@ export interface ApproverRestriction {
     IdCardNumber?: string;
 }
 /**
- * DescribeChannelFlowEvidenceReport请求参数结构体
+ * PrepareFlows请求参数结构体
  */
-export interface DescribeChannelFlowEvidenceReportRequest {
+export interface PrepareFlowsRequest {
     /**
-      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填
+      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
       */
     Agent: Agent;
     /**
-      * 出证报告编号
+      * 多个合同（签署流程）信息，最大支持20个签署流程。
       */
-    ReportId: string;
+    FlowInfos: Array<FlowInfo>;
+    /**
+      * 操作完成后的跳转地址，最大长度200
+      */
+    JumpUrl: string;
     /**
       * 操作者的信息
       */
@@ -2477,14 +2515,9 @@ ProcessTimeout - 转换文件超时
     RequestId?: string;
 }
 /**
- * DescribeExtendedServiceAuthInfo返回参数结构体
+ * ChannelDeleteSealPolicies返回参数结构体
  */
-export interface DescribeExtendedServiceAuthInfoResponse {
-    /**
-      * 企业扩展服务授权信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    AuthInfo?: Array<ExtentServiceAuthInfo>;
+export interface ChannelDeleteSealPoliciesResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2875,6 +2908,31 @@ export interface DescribeTemplatesRequest {
     ChannelTemplateId?: string;
 }
 /**
+ * ChannelCreateSealPolicy请求参数结构体
+ */
+export interface ChannelCreateSealPolicyRequest {
+    /**
+      * 用户渠道信息
+      */
+    Agent: Agent;
+    /**
+      * 指定印章
+      */
+    SealId: string;
+    /**
+      * 指定待授权的用户ID数组
+      */
+    UserIds: Array<string>;
+    /**
+      * 企业机构信息
+      */
+    Organization?: OrganizationInfo;
+    /**
+      * 操作人（用户）信息
+      */
+    Operator?: UserInfo;
+}
+/**
  * 持有的电子印章信息
  */
 export interface OccupiedSeal {
@@ -3158,6 +3216,20 @@ export interface ChannelCreateFlowSignUrlRequest {
       * 机构信息，暂未开放
       */
     Organization?: OrganizationInfo;
+}
+/**
+ * DescribeExtendedServiceAuthInfo返回参数结构体
+ */
+export interface DescribeExtendedServiceAuthInfoResponse {
+    /**
+      * 企业扩展服务授权信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AuthInfo?: Array<ExtentServiceAuthInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 抄送信息

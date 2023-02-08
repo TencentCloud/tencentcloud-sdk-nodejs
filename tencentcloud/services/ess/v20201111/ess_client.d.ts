@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CancelFlowResponse, DescribeFlowEvidenceReportRequest, CreateSchemeUrlRequest, CreateFlowApproversResponse, DescribeIntegrationMainOrganizationUserRequest, CreateMultiFlowSignQRCodeResponse, DescribeThirdPartyAuthCodeResponse, CreateIntegrationEmployeesRequest, CreateFlowEvidenceReportRequest, StartFlowResponse, CreateConvertTaskApiRequest, CreateFlowRemindsResponse, DescribeOrganizationGroupOrganizationsRequest, DescribeFlowTemplatesRequest, DescribeFlowEvidenceReportResponse, CreateDocumentResponse, DescribeIntegrationEmployeesRequest, CreateFlowRequest, DescribeThirdPartyAuthCodeRequest, DescribeFlowInfoRequest, CreateBatchCancelFlowUrlResponse, DescribeIntegrationEmployeesResponse, CreateConvertTaskApiResponse, CreateFlowSignReviewRequest, CreateFlowByFilesRequest, CreateFlowSignUrlResponse, DescribeFileUrlsRequest, CreateFlowApproversRequest, CreateFlowEvidenceReportResponse, DescribeFileUrlsResponse, CreateDocumentRequest, DescribeOrganizationSealsResponse, DeleteIntegrationEmployeesRequest, GetTaskResultApiRequest, CreateFlowSignUrlRequest, CreateIntegrationEmployeesResponse, CreateFlowByFilesResponse, UploadFilesResponse, VerifyPdfRequest, CreateFlowSignReviewResponse, DescribeIntegrationMainOrganizationUserResponse, CreateSchemeUrlResponse, CreatePrepareFlowResponse, GetTaskResultApiResponse, CancelMultiFlowSignQRCodeRequest, StartFlowRequest, CreatePrepareFlowRequest, DeleteIntegrationEmployeesResponse, DescribeOrganizationSealsRequest, CancelFlowRequest, CreateFlowRemindsRequest, DescribeFlowBriefsRequest, VerifyPdfResponse, DescribeFlowBriefsResponse, DescribeFlowTemplatesResponse, UploadFilesRequest, CreateBatchCancelFlowUrlRequest, CreateMultiFlowSignQRCodeRequest, DescribeFlowInfoResponse, CreateFlowResponse, DescribeOrganizationGroupOrganizationsResponse, CancelMultiFlowSignQRCodeResponse } from "./ess_models";
+import { CancelFlowResponse, DescribeFlowEvidenceReportRequest, CreateSchemeUrlRequest, CreateFlowApproversResponse, DescribeIntegrationMainOrganizationUserRequest, CreateMultiFlowSignQRCodeResponse, DescribeThirdPartyAuthCodeResponse, CreateIntegrationEmployeesRequest, CreateFlowEvidenceReportRequest, StartFlowResponse, CreateConvertTaskApiRequest, CreateFlowRemindsResponse, DescribeOrganizationGroupOrganizationsRequest, DescribeFlowTemplatesRequest, DescribeFlowEvidenceReportResponse, CreateDocumentResponse, DescribeIntegrationEmployeesRequest, CreateFlowRequest, DescribeThirdPartyAuthCodeRequest, DescribeFlowInfoRequest, DeleteSealPoliciesResponse, CreateBatchCancelFlowUrlResponse, CreateSealPolicyResponse, DescribeIntegrationEmployeesResponse, CreateConvertTaskApiResponse, CreateFlowSignReviewRequest, CreateFlowByFilesRequest, CreateFlowSignUrlResponse, DescribeFileUrlsRequest, CreateFlowApproversRequest, CreateFlowEvidenceReportResponse, DescribeFileUrlsResponse, CreateDocumentRequest, DescribeOrganizationSealsResponse, DeleteIntegrationEmployeesRequest, GetTaskResultApiRequest, CreateFlowSignUrlRequest, CreateIntegrationEmployeesResponse, CreateFlowByFilesResponse, UploadFilesResponse, VerifyPdfRequest, CreateFlowSignReviewResponse, DescribeIntegrationMainOrganizationUserResponse, CreateSchemeUrlResponse, DeleteSealPoliciesRequest, CreatePrepareFlowResponse, GetTaskResultApiResponse, CancelMultiFlowSignQRCodeRequest, StartFlowRequest, CreatePrepareFlowRequest, CreateSealPolicyRequest, DescribeOrganizationSealsRequest, CancelFlowRequest, CreateFlowRemindsRequest, DescribeFlowBriefsRequest, DeleteIntegrationEmployeesResponse, VerifyPdfResponse, DescribeFlowBriefsResponse, DescribeFlowTemplatesResponse, UploadFilesRequest, CreateBatchCancelFlowUrlRequest, CreateMultiFlowSignQRCodeRequest, DescribeFlowInfoResponse, CreateFlowResponse, DescribeOrganizationGroupOrganizationsResponse, CancelMultiFlowSignQRCodeResponse } from "./ess_models";
 /**
  * ess client
  * @class
@@ -28,10 +28,19 @@ export declare class Client extends AbstractClient {
      */
     DescribeFlowTemplates(req: DescribeFlowTemplatesRequest, cb?: (error: string, rep: DescribeFlowTemplatesResponse) => void): Promise<DescribeFlowTemplatesResponse>;
     /**
+     * 撤销员工持有的印章权限
+     */
+    DeleteSealPolicies(req: DeleteSealPoliciesRequest, cb?: (error: string, rep: DeleteSealPoliciesResponse) => void): Promise<DeleteSealPoliciesResponse>;
+    /**
      * 查询文件下载URL
 适用场景：通过传参合同流程编号，下载对应的合同PDF文件流到本地。
      */
     DescribeFileUrls(req: DescribeFileUrlsRequest, cb?: (error: string, rep: DescribeFileUrlsResponse) => void): Promise<DescribeFileUrlsResponse>;
+    /**
+     * 创建出证报告，返回报告 ID。需要配合出证套餐才能调用。
+出证需要一定时间，建议调用创建出证24小时之后再通过DescribeFlowEvidenceReport进行查询。
+     */
+    CreateFlowEvidenceReport(req: CreateFlowEvidenceReportRequest, cb?: (error: string, rep: CreateFlowEvidenceReportResponse) => void): Promise<CreateFlowEvidenceReportResponse>;
     /**
      * 验证合同文件
      */
@@ -75,10 +84,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeFlowInfo(req: DescribeFlowInfoRequest, cb?: (error: string, rep: DescribeFlowInfoResponse) => void): Promise<DescribeFlowInfoResponse>;
     /**
-     * 创建出证报告，返回报告 ID。需要配合出证套餐才能调用。
-出证需要一定时间，建议调用创建出证24小时之后再通过DescribeFlowEvidenceReport进行查询。
+     * 对企业员工进行印章授权
      */
-    CreateFlowEvidenceReport(req: CreateFlowEvidenceReportRequest, cb?: (error: string, rep: CreateFlowEvidenceReportResponse) => void): Promise<CreateFlowEvidenceReportResponse>;
+    CreateSealPolicy(req: CreateSealPolicyRequest, cb?: (error: string, rep: CreateSealPolicyResponse) => void): Promise<CreateSealPolicyResponse>;
     /**
      * 创建签署流程
 适用场景：在标准制式的合同场景中，可通过提前预制好模板文件，每次调用模板文件的id，补充合同内容信息及签署信息生成电子合同。

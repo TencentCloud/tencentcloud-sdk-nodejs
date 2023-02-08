@@ -47,12 +47,14 @@ import {
   FileUrl,
   DescribeThirdPartyAuthCodeRequest,
   DescribeFlowInfoRequest,
+  DeleteSealPoliciesResponse,
   OrganizationInfo,
   FillApproverInfo,
-  Caller,
-  PdfVerifyResult,
+  OccupiedSeal,
   FailedDeleteStaffData,
+  PdfVerifyResult,
   CreateBatchCancelFlowUrlResponse,
+  CreateSealPolicyResponse,
   DescribeIntegrationEmployeesResponse,
   SuccessDeleteStaffData,
   CreateConvertTaskApiResponse,
@@ -91,6 +93,7 @@ import {
   DescribeIntegrationMainOrganizationUserResponse,
   CreateSchemeUrlResponse,
   ApproverRestriction,
+  DeleteSealPoliciesRequest,
   CreatePrepareFlowResponse,
   GetTaskResultApiResponse,
   CancelMultiFlowSignQRCodeRequest,
@@ -98,19 +101,20 @@ import {
   StartFlowRequest,
   CreatePrepareFlowRequest,
   ApproverOption,
-  DeleteIntegrationEmployeesResponse,
+  CreateSealPolicyRequest,
   DescribeOrganizationSealsRequest,
   CancelFlowRequest,
   UploadFile,
   Component,
   CreateFlowRemindsRequest,
   DescribeFlowBriefsRequest,
+  DeleteIntegrationEmployeesResponse,
   SignUrl,
   VerifyPdfResponse,
   DeleteStaffsResult,
   DescribeFlowBriefsResponse,
   Admin,
-  OccupiedSeal,
+  Caller,
   DescribeFlowTemplatesResponse,
   UploadFilesRequest,
   CreateBatchCancelFlowUrlRequest,
@@ -177,6 +181,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 撤销员工持有的印章权限
+   */
+  async DeleteSealPolicies(
+    req: DeleteSealPoliciesRequest,
+    cb?: (error: string, rep: DeleteSealPoliciesResponse) => void
+  ): Promise<DeleteSealPoliciesResponse> {
+    return this.request("DeleteSealPolicies", req, cb)
+  }
+
+  /**
      * 查询文件下载URL
 适用场景：通过传参合同流程编号，下载对应的合同PDF文件流到本地。
      */
@@ -185,6 +199,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeFileUrlsResponse) => void
   ): Promise<DescribeFileUrlsResponse> {
     return this.request("DescribeFileUrls", req, cb)
+  }
+
+  /**
+     * 创建出证报告，返回报告 ID。需要配合出证套餐才能调用。
+出证需要一定时间，建议调用创建出证24小时之后再通过DescribeFlowEvidenceReport进行查询。
+     */
+  async CreateFlowEvidenceReport(
+    req: CreateFlowEvidenceReportRequest,
+    cb?: (error: string, rep: CreateFlowEvidenceReportResponse) => void
+  ): Promise<CreateFlowEvidenceReportResponse> {
+    return this.request("CreateFlowEvidenceReport", req, cb)
   }
 
   /**
@@ -272,14 +297,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 创建出证报告，返回报告 ID。需要配合出证套餐才能调用。
-出证需要一定时间，建议调用创建出证24小时之后再通过DescribeFlowEvidenceReport进行查询。
-     */
-  async CreateFlowEvidenceReport(
-    req: CreateFlowEvidenceReportRequest,
-    cb?: (error: string, rep: CreateFlowEvidenceReportResponse) => void
-  ): Promise<CreateFlowEvidenceReportResponse> {
-    return this.request("CreateFlowEvidenceReport", req, cb)
+   * 对企业员工进行印章授权
+   */
+  async CreateSealPolicy(
+    req: CreateSealPolicyRequest,
+    cb?: (error: string, rep: CreateSealPolicyResponse) => void
+  ): Promise<CreateSealPolicyResponse> {
+    return this.request("CreateSealPolicy", req, cb)
   }
 
   /**
